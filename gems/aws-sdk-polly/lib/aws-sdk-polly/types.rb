@@ -11,6 +11,7 @@ module Aws::Polly
     #         the region.</p>
     #   @return [String]
     class DeleteLexiconInput < Struct.new(
+      nil,
       :name,
       keyword_init: true
     )
@@ -18,6 +19,7 @@ module Aws::Polly
     end
 
     class DeleteLexiconOutput < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -48,6 +50,7 @@ module Aws::Polly
     #         to continue the listing.</p>
     #   @return [String]
     class DescribeVoicesInput < Struct.new(
+      nil,
       :engine,
       :language_code,
       :include_additional_language_codes,
@@ -66,6 +69,7 @@ module Aws::Polly
     #         is truncated.</p>
     #   @return [String]
     class DescribeVoicesOutput < Struct.new(
+      nil,
       :voices,
       :next_token,
       keyword_init: true
@@ -79,6 +83,7 @@ module Aws::Polly
     # @!attribute message
     #   @return [String]
     class EngineNotSupportedException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -89,6 +94,7 @@ module Aws::Polly
     #   <p>Name of the lexicon.</p>
     #   @return [String]
     class GetLexiconInput < Struct.new(
+      nil,
       :name,
       keyword_init: true
     )
@@ -105,6 +111,7 @@ module Aws::Polly
     #         size of lexicon in bytes.</p>
     #   @return [Types::LexiconAttributes]
     class GetLexiconOutput < Struct.new(
+      nil,
       :lexicon,
       :lexicon_attributes,
       keyword_init: true
@@ -116,6 +123,7 @@ module Aws::Polly
     #   <p>The Amazon Polly generated identifier for a speech synthesis task.</p>
     #   @return [String]
     class GetSpeechSynthesisTaskInput < Struct.new(
+      nil,
       :task_id,
       keyword_init: true
     )
@@ -128,6 +136,7 @@ module Aws::Polly
     #         on.</p>
     #   @return [Types::SynthesisTask]
     class GetSpeechSynthesisTaskOutput < Struct.new(
+      nil,
       :synthesis_task,
       keyword_init: true
     )
@@ -139,6 +148,7 @@ module Aws::Polly
     # @!attribute message
     #   @return [String]
     class InvalidLexiconException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -150,6 +160,7 @@ module Aws::Polly
     # @!attribute message
     #   @return [String]
     class InvalidNextTokenException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -161,6 +172,7 @@ module Aws::Polly
     # @!attribute message
     #   @return [String]
     class InvalidS3BucketException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -172,6 +184,7 @@ module Aws::Polly
     # @!attribute message
     #   @return [String]
     class InvalidS3KeyException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -182,6 +195,7 @@ module Aws::Polly
     # @!attribute message
     #   @return [String]
     class InvalidSampleRateException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -193,6 +207,7 @@ module Aws::Polly
     # @!attribute message
     #   @return [String]
     class InvalidSnsTopicArnException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -204,6 +219,7 @@ module Aws::Polly
     # @!attribute message
     #   @return [String]
     class InvalidSsmlException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -215,6 +231,7 @@ module Aws::Polly
     # @!attribute message
     #   @return [String]
     class InvalidTaskIdException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -226,6 +243,7 @@ module Aws::Polly
     # @!attribute message
     #   @return [String]
     class LanguageNotSupportedException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -243,6 +261,7 @@ module Aws::Polly
     #   <p>Name of the lexicon.</p>
     #   @return [String]
     class Lexicon < Struct.new(
+      nil,
       :content,
       :name,
       keyword_init: true
@@ -274,6 +293,7 @@ module Aws::Polly
     #   <p>Total size of the lexicon, in characters.</p>
     #   @return [Integer]
     class LexiconAttributes < Struct.new(
+      nil,
       :alphabet,
       :language_code,
       :last_modified,
@@ -299,6 +319,7 @@ module Aws::Polly
     #   <p>Provides lexicon metadata.</p>
     #   @return [Types::LexiconAttributes]
     class LexiconDescription < Struct.new(
+      nil,
       :name,
       :attributes,
       keyword_init: true
@@ -314,6 +335,7 @@ module Aws::Polly
     # @!attribute message
     #   @return [String]
     class LexiconNotFoundException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -325,6 +347,7 @@ module Aws::Polly
     # @!attribute message
     #   @return [String]
     class LexiconSizeExceededException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -337,6 +360,7 @@ module Aws::Polly
     #         continue the list of lexicons.</p>
     #   @return [String]
     class ListLexiconsInput < Struct.new(
+      nil,
       :next_token,
       keyword_init: true
     )
@@ -352,6 +376,7 @@ module Aws::Polly
     #         response is truncated.</p>
     #   @return [String]
     class ListLexiconsOutput < Struct.new(
+      nil,
       :lexicons,
       :next_token,
       keyword_init: true
@@ -372,6 +397,7 @@ module Aws::Polly
     #         operation</p>
     #   @return [String]
     class ListSpeechSynthesisTasksInput < Struct.new(
+      nil,
       :max_results,
       :next_token,
       :status,
@@ -391,6 +417,7 @@ module Aws::Polly
     #         time, task status, and so on.</p>
     #   @return [Array<Types::SynthesisTask>]
     class ListSpeechSynthesisTasksOutput < Struct.new(
+      nil,
       :next_token,
       :synthesis_tasks,
       keyword_init: true
@@ -404,6 +431,7 @@ module Aws::Polly
     # @!attribute message
     #   @return [String]
     class MarksNotSupportedForFormatException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -415,6 +443,7 @@ module Aws::Polly
     # @!attribute message
     #   @return [String]
     class MaxLexemeLengthExceededException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -426,6 +455,7 @@ module Aws::Polly
     # @!attribute message
     #   @return [String]
     class MaxLexiconsNumberExceededException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -441,6 +471,7 @@ module Aws::Polly
     #   <p>Content of the PLS lexicon as string data.</p>
     #   @return [String]
     class PutLexiconInput < Struct.new(
+      nil,
       :name,
       :content,
       keyword_init: true
@@ -449,6 +480,7 @@ module Aws::Polly
     end
 
     class PutLexiconOutput < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -458,6 +490,7 @@ module Aws::Polly
     # @!attribute message
     #   @return [String]
     class ServiceFailureException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -469,6 +502,7 @@ module Aws::Polly
     # @!attribute message
     #   @return [String]
     class SsmlMarksNotSupportedForTextTypeException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -535,6 +569,7 @@ module Aws::Polly
     #   <p>Voice ID to use for the synthesis. </p>
     #   @return [String]
     class StartSpeechSynthesisTaskInput < Struct.new(
+      nil,
       :engine,
       :language_code,
       :lexicon_names,
@@ -557,6 +592,7 @@ module Aws::Polly
     #         newly submitted speech synthesis task.</p>
     #   @return [Types::SynthesisTask]
     class StartSpeechSynthesisTaskOutput < Struct.new(
+      nil,
       :synthesis_task,
       keyword_init: true
     )
@@ -634,6 +670,7 @@ module Aws::Polly
     #         Indian English rather than Hindi.</p>
     #   @return [String]
     class SynthesisTask < Struct.new(
+      nil,
       :engine,
       :task_id,
       :task_status,
@@ -664,6 +701,7 @@ module Aws::Polly
     # @!attribute message
     #   @return [String]
     class SynthesisTaskNotFoundException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -728,6 +766,7 @@ module Aws::Polly
     #         voice IDs by calling the <a href="https://docs.aws.amazon.com/polly/latest/dg/API_DescribeVoices.html">DescribeVoices</a> operation. </p>
     #   @return [String]
     class SynthesizeSpeechInput < Struct.new(
+      nil,
       :engine,
       :language_code,
       :lexicon_names,
@@ -777,6 +816,7 @@ module Aws::Polly
     #   <p>Number of characters synthesized.</p>
     #   @return [Integer]
     class SynthesizeSpeechOutput < Struct.new(
+      nil,
       :audio_stream,
       :content_type,
       :request_characters,
@@ -801,6 +841,7 @@ module Aws::Polly
     # @!attribute message
     #   @return [String]
     class TextLengthExceededException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -812,6 +853,7 @@ module Aws::Polly
     # @!attribute message
     #   @return [String]
     class UnsupportedPlsAlphabetException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -823,6 +865,7 @@ module Aws::Polly
     # @!attribute message
     #   @return [String]
     class UnsupportedPlsLanguageException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -861,6 +904,7 @@ module Aws::Polly
     #         <code>long-form</code> or <code>generative</code>) are supported by a given voice.</p>
     #   @return [Array<String>]
     class Voice < Struct.new(
+      nil,
       :gender,
       :id,
       :language_code,

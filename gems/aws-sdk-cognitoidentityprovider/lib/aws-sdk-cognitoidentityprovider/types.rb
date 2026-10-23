@@ -16,6 +16,7 @@ module Aws::CognitoIdentityProvider
     #               only be reset by administrators.</p>
     #   @return [Array<Types::RecoveryOptionType>]
     class AccountRecoverySettingType < Struct.new(
+      nil,
       :recovery_mechanisms,
       keyword_init: true
     )
@@ -59,6 +60,7 @@ module Aws::CognitoIdentityProvider
     #            </ul>
     #   @return [String]
     class AccountTakeoverActionType < Struct.new(
+      nil,
       :notify,
       :event_action,
       keyword_init: true
@@ -83,6 +85,7 @@ module Aws::CognitoIdentityProvider
     #   <p>The action that you assign to a high-risk assessment by threat protection.</p>
     #   @return [Types::AccountTakeoverActionType]
     class AccountTakeoverActionsType < Struct.new(
+      nil,
       :low_action,
       :medium_action,
       :high_action,
@@ -104,6 +107,7 @@ module Aws::CognitoIdentityProvider
     #               threat protection.</p>
     #   @return [Types::AccountTakeoverActionsType]
     class AccountTakeoverRiskConfigurationType < Struct.new(
+      nil,
       :notify_configuration,
       :actions,
       keyword_init: true
@@ -159,6 +163,7 @@ module Aws::CognitoIdentityProvider
     #            </dl>
     #   @return [Array<Types::SchemaAttributeType>]
     class AddCustomAttributesRequest < Struct.new(
+      nil,
       :user_pool_id,
       :custom_attributes,
       keyword_init: true
@@ -169,6 +174,7 @@ module Aws::CognitoIdentityProvider
     # <p>Represents the response from the server for the request to add custom
     #             attributes.</p>
     class AddCustomAttributesResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -189,6 +195,7 @@ module Aws::CognitoIdentityProvider
     #   <p>The name of the group that you want to add your user to.</p>
     #   @return [String]
     class AdminAddUserToGroupRequest < Struct.new(
+      nil,
       :user_pool_id,
       :username,
       :group_name,
@@ -243,6 +250,7 @@ module Aws::CognitoIdentityProvider
     #            </note>
     #   @return [Hash<String, String>]
     class AdminConfirmSignUpRequest < Struct.new(
+      nil,
       :user_pool_id,
       :username,
       :client_metadata,
@@ -254,6 +262,7 @@ module Aws::CognitoIdentityProvider
     # <p>Represents the response from the server for the request to confirm
     #             registration.</p>
     class AdminConfirmSignUpResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -282,6 +291,7 @@ module Aws::CognitoIdentityProvider
     #            <p>See also <a href="https://docs.aws.amazon.com/cognito/latest/developerguide/cognito-user-pool-settings-message-customizations.html#cognito-user-pool-settings-user-invitation-message-customization">Customizing User Invitation Messages</a>.</p>
     #   @return [Types::MessageTemplateType]
     class AdminCreateUserConfigType < Struct.new(
+      nil,
       :allow_admin_create_user_only,
       :unused_account_validity_days,
       :invite_message_template,
@@ -442,6 +452,7 @@ module Aws::CognitoIdentityProvider
     #            </note>
     #   @return [Hash<String, String>]
     class AdminCreateUserRequest < Struct.new(
+      nil,
       :user_pool_id,
       :username,
       :user_attributes,
@@ -461,6 +472,7 @@ module Aws::CognitoIdentityProvider
     #   <p>The new user's profile details.</p>
     #   @return [Types::UserType]
     class AdminCreateUserResponse < Struct.new(
+      nil,
       :user,
       keyword_init: true
     )
@@ -484,6 +496,7 @@ module Aws::CognitoIdentityProvider
     #               attribute name.</p>
     #   @return [Array<String>]
     class AdminDeleteUserAttributesRequest < Struct.new(
+      nil,
       :user_pool_id,
       :username,
       :user_attribute_names,
@@ -495,6 +508,7 @@ module Aws::CognitoIdentityProvider
     # <p>Represents the response received from the server for a request to delete user
     #             attributes.</p>
     class AdminDeleteUserAttributesResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -512,6 +526,7 @@ module Aws::CognitoIdentityProvider
     #               third-party IdP.</p>
     #   @return [String]
     class AdminDeleteUserRequest < Struct.new(
+      nil,
       :user_pool_id,
       :username,
       keyword_init: true
@@ -527,6 +542,7 @@ module Aws::CognitoIdentityProvider
     #   <p>The user profile that you want to delete a linked identity from.</p>
     #   @return [Types::ProviderUserIdentifierType]
     class AdminDisableProviderForUserRequest < Struct.new(
+      nil,
       :user_pool_id,
       :user,
       keyword_init: true
@@ -535,6 +551,7 @@ module Aws::CognitoIdentityProvider
     end
 
     class AdminDisableProviderForUserResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -552,6 +569,7 @@ module Aws::CognitoIdentityProvider
     #               third-party IdP.</p>
     #   @return [String]
     class AdminDisableUserRequest < Struct.new(
+      nil,
       :user_pool_id,
       :username,
       keyword_init: true
@@ -562,6 +580,7 @@ module Aws::CognitoIdentityProvider
     # <p>Represents the response received from the server to disable the user as an
     #             administrator.</p>
     class AdminDisableUserResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -579,6 +598,7 @@ module Aws::CognitoIdentityProvider
     #               third-party IdP.</p>
     #   @return [String]
     class AdminEnableUserRequest < Struct.new(
+      nil,
       :user_pool_id,
       :username,
       keyword_init: true
@@ -589,6 +609,7 @@ module Aws::CognitoIdentityProvider
     # <p>Represents the response from the server for the request to enable a user as an
     #             administrator.</p>
     class AdminEnableUserResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -609,6 +630,7 @@ module Aws::CognitoIdentityProvider
     #   <p>The key ID of the device that you want to delete.</p>
     #   @return [String]
     class AdminForgetDeviceRequest < Struct.new(
+      nil,
       :user_pool_id,
       :username,
       :device_key,
@@ -632,6 +654,7 @@ module Aws::CognitoIdentityProvider
     #               third-party IdP.</p>
     #   @return [String]
     class AdminGetDeviceRequest < Struct.new(
+      nil,
       :device_key,
       :user_pool_id,
       :username,
@@ -646,6 +669,7 @@ module Aws::CognitoIdentityProvider
     #               created dates, and the device key.</p>
     #   @return [Types::DeviceType]
     class AdminGetDeviceResponse < Struct.new(
+      nil,
       :device,
       keyword_init: true
     )
@@ -664,6 +688,7 @@ module Aws::CognitoIdentityProvider
     #               third-party IdP.</p>
     #   @return [String]
     class AdminGetUserRequest < Struct.new(
+      nil,
       :user_pool_id,
       :username,
       keyword_init: true
@@ -736,6 +761,7 @@ module Aws::CognitoIdentityProvider
     #               <code>SOFTWARE_TOKEN_MFA</code>.</p>
     #   @return [Array<String>]
     class AdminGetUserResponse < Struct.new(
+      nil,
       :username,
       :user_attributes,
       :user_create_date,
@@ -976,6 +1002,7 @@ module Aws::CognitoIdentityProvider
     #               message.</p>
     #   @return [String]
     class AdminInitiateAuthRequest < Struct.new(
+      nil,
       :user_pool_id,
       :client_id,
       :auth_flow,
@@ -1141,6 +1168,7 @@ module Aws::CognitoIdentityProvider
     #               and a traditional password.</p>
     #   @return [Array<String>]
     class AdminInitiateAuthResponse < Struct.new(
+      nil,
       :challenge_name,
       :session,
       :challenge_parameters,
@@ -1208,6 +1236,7 @@ module Aws::CognitoIdentityProvider
     #            </ul>
     #   @return [Types::ProviderUserIdentifierType]
     class AdminLinkProviderForUserRequest < Struct.new(
+      nil,
       :user_pool_id,
       :destination_user,
       :source_user,
@@ -1217,6 +1246,7 @@ module Aws::CognitoIdentityProvider
     end
 
     class AdminLinkProviderForUserResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1244,6 +1274,7 @@ module Aws::CognitoIdentityProvider
     #   through the full list of items.</p>
     #   @return [String]
     class AdminListDevicesRequest < Struct.new(
+      nil,
       :user_pool_id,
       :username,
       :limit,
@@ -1264,6 +1295,7 @@ module Aws::CognitoIdentityProvider
     #   the list. By use of this token, you can paginate through the full list of items.</p>
     #   @return [String]
     class AdminListDevicesResponse < Struct.new(
+      nil,
       :devices,
       :pagination_token,
       keyword_init: true
@@ -1292,6 +1324,7 @@ module Aws::CognitoIdentityProvider
     #   through the full list of items.</p>
     #   @return [String]
     class AdminListGroupsForUserRequest < Struct.new(
+      nil,
       :username,
       :user_pool_id,
       :limit,
@@ -1310,6 +1343,7 @@ module Aws::CognitoIdentityProvider
     #   the list. By use of this token, you can paginate through the full list of items.</p>
     #   @return [String]
     class AdminListGroupsForUserResponse < Struct.new(
+      nil,
       :groups,
       :next_token,
       keyword_init: true
@@ -1340,6 +1374,7 @@ module Aws::CognitoIdentityProvider
     #   through the full list of items.</p>
     #   @return [String]
     class AdminListUserAuthEventsRequest < Struct.new(
+      nil,
       :user_pool_id,
       :username,
       :max_results,
@@ -1360,6 +1395,7 @@ module Aws::CognitoIdentityProvider
     #   the list. By use of this token, you can paginate through the full list of items.</p>
     #   @return [String]
     class AdminListUserAuthEventsResponse < Struct.new(
+      nil,
       :auth_events,
       :next_token,
       keyword_init: true
@@ -1383,6 +1419,7 @@ module Aws::CognitoIdentityProvider
     #                   <code>MyTestGroup</code>.</p>
     #   @return [String]
     class AdminRemoveUserFromGroupRequest < Struct.new(
+      nil,
       :user_pool_id,
       :username,
       :group_name,
@@ -1436,6 +1473,7 @@ module Aws::CognitoIdentityProvider
     #            </note>
     #   @return [Hash<String, String>]
     class AdminResetUserPasswordRequest < Struct.new(
+      nil,
       :user_pool_id,
       :username,
       :client_metadata,
@@ -1447,6 +1485,7 @@ module Aws::CognitoIdentityProvider
     # <p>Represents the response from the server to reset a user password as an
     #             administrator.</p>
     class AdminResetUserPasswordResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1855,6 +1894,7 @@ module Aws::CognitoIdentityProvider
     #            </note>
     #   @return [Hash<String, String>]
     class AdminRespondToAuthChallengeRequest < Struct.new(
+      nil,
       :user_pool_id,
       :client_id,
       :challenge_name,
@@ -2001,6 +2041,7 @@ module Aws::CognitoIdentityProvider
     #               tokens (JWTs) that indicate successful sign-in.</p>
     #   @return [Types::AuthenticationResultType]
     class AdminRespondToAuthChallengeResponse < Struct.new(
+      nil,
       :challenge_name,
       :session,
       :challenge_parameters,
@@ -2037,6 +2078,7 @@ module Aws::CognitoIdentityProvider
     #   <p>The ID of the user pool where you want to set a user's MFA preferences.</p>
     #   @return [String]
     class AdminSetUserMFAPreferenceRequest < Struct.new(
+      nil,
       :sms_mfa_settings,
       :software_token_mfa_settings,
       :email_mfa_settings,
@@ -2048,6 +2090,7 @@ module Aws::CognitoIdentityProvider
     end
 
     class AdminSetUserMFAPreferenceResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -2075,6 +2118,7 @@ module Aws::CognitoIdentityProvider
     #               next sign-in.</p>
     #   @return [Boolean]
     class AdminSetUserPasswordRequest < Struct.new(
+      nil,
       :user_pool_id,
       :username,
       :password,
@@ -2085,6 +2129,7 @@ module Aws::CognitoIdentityProvider
     end
 
     class AdminSetUserPasswordResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -2107,6 +2152,7 @@ module Aws::CognitoIdentityProvider
     #               delivery.</p>
     #   @return [Array<Types::MFAOptionType>]
     class AdminSetUserSettingsRequest < Struct.new(
+      nil,
       :user_pool_id,
       :username,
       :mfa_options,
@@ -2118,6 +2164,7 @@ module Aws::CognitoIdentityProvider
     # <p>Represents the response from the server to set user settings as an
     #             administrator.</p>
     class AdminSetUserSettingsResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -2144,6 +2191,7 @@ module Aws::CognitoIdentityProvider
     #   don't believe that Amazon Cognito evaluated a high-enough risk level.</p>
     #   @return [String]
     class AdminUpdateAuthEventFeedbackRequest < Struct.new(
+      nil,
       :user_pool_id,
       :username,
       :event_id,
@@ -2154,6 +2202,7 @@ module Aws::CognitoIdentityProvider
     end
 
     class AdminUpdateAuthEventFeedbackResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -2179,6 +2228,7 @@ module Aws::CognitoIdentityProvider
     #                   <code>remembered</code>.To disable, set to <code>not_remembered</code>.</p>
     #   @return [String]
     class AdminUpdateDeviceStatusRequest < Struct.new(
+      nil,
       :user_pool_id,
       :username,
       :device_key,
@@ -2190,6 +2240,7 @@ module Aws::CognitoIdentityProvider
 
     # <p>The status response to the request to update the device, as an administrator.</p>
     class AdminUpdateDeviceStatusResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -2257,6 +2308,7 @@ module Aws::CognitoIdentityProvider
     #            </note>
     #   @return [Hash<String, String>]
     class AdminUpdateUserAttributesRequest < Struct.new(
+      nil,
       :user_pool_id,
       :username,
       :user_attributes,
@@ -2269,6 +2321,7 @@ module Aws::CognitoIdentityProvider
     # <p>Represents the response from the server for the request to update user attributes as
     #             an administrator.</p>
     class AdminUpdateUserAttributesResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -2286,6 +2339,7 @@ module Aws::CognitoIdentityProvider
     #               third-party IdP.</p>
     #   @return [String]
     class AdminUserGlobalSignOutRequest < Struct.new(
+      nil,
       :user_pool_id,
       :username,
       keyword_init: true
@@ -2295,6 +2349,7 @@ module Aws::CognitoIdentityProvider
 
     # <p>The global sign-out response, as an administrator.</p>
     class AdminUserGlobalSignOutResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -2308,6 +2363,7 @@ module Aws::CognitoIdentityProvider
     #                   authentication challenge Lambda triggers</a>. </p>
     #   @return [String]
     class AdvancedSecurityAdditionalFlowsType < Struct.new(
+      nil,
       :custom_auth_mode,
       keyword_init: true
     )
@@ -2324,6 +2380,7 @@ module Aws::CognitoIdentityProvider
     #               already linked to another user profile.</p>
     #   @return [String]
     class AliasExistsException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -2359,6 +2416,7 @@ module Aws::CognitoIdentityProvider
     #               events that it publishes to Amazon Pinpoint analytics.</p>
     #   @return [Boolean]
     class AnalyticsConfigurationType < Struct.new(
+      nil,
       :application_id,
       :application_arn,
       :role_arn,
@@ -2384,6 +2442,7 @@ module Aws::CognitoIdentityProvider
     #               notifications.</p>
     #   @return [String]
     class AnalyticsMetadataType < Struct.new(
+      nil,
       :analytics_endpoint_id,
       keyword_init: true
     )
@@ -2411,6 +2470,7 @@ module Aws::CognitoIdentityProvider
     #   <p>The ID of the asset.</p>
     #   @return [String]
     class AssetType < Struct.new(
+      nil,
       :category,
       :color_mode,
       :extension,
@@ -2433,6 +2493,7 @@ module Aws::CognitoIdentityProvider
     #               request.</p>
     #   @return [String]
     class AssociateSoftwareTokenRequest < Struct.new(
+      nil,
       :access_token,
       :session,
       keyword_init: true
@@ -2449,6 +2510,7 @@ module Aws::CognitoIdentityProvider
     #               challenge responses.</p>
     #   @return [String]
     class AssociateSoftwareTokenResponse < Struct.new(
+      nil,
       :secret_code,
       :session,
       keyword_init: true
@@ -2464,6 +2526,7 @@ module Aws::CognitoIdentityProvider
     #   <p>The value of the attribute.</p>
     #   @return [String]
     class AttributeType < Struct.new(
+      nil,
       :name,
       :value,
       keyword_init: true
@@ -2509,6 +2572,7 @@ module Aws::CognitoIdentityProvider
     #               evaluated a session to be invalid, or likely malicious.</p>
     #   @return [Types::EventFeedbackType]
     class AuthEventType < Struct.new(
+      nil,
       :event_id,
       :event_type,
       :creation_date,
@@ -2543,6 +2607,7 @@ module Aws::CognitoIdentityProvider
     #   <p>The new device metadata from an authentication result.</p>
     #   @return [Types::NewDeviceMetadataType]
     class AuthenticationResultType < Struct.new(
+      nil,
       :access_token,
       :expires_in,
       :token_type,
@@ -2764,6 +2829,7 @@ module Aws::CognitoIdentityProvider
     #   <p>The set of key-value pairs that provides a response to the requested challenge.</p>
     #   @return [String]
     class ChallengeResponseType < Struct.new(
+      nil,
       :challenge_name,
       :challenge_response,
       keyword_init: true
@@ -2785,6 +2851,7 @@ module Aws::CognitoIdentityProvider
     #               change.</p>
     #   @return [String]
     class ChangePasswordRequest < Struct.new(
+      nil,
       :previous_password,
       :proposed_password,
       :access_token,
@@ -2795,6 +2862,7 @@ module Aws::CognitoIdentityProvider
 
     # <p>The response from the server to the change password request.</p>
     class ChangePasswordResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -2812,6 +2880,7 @@ module Aws::CognitoIdentityProvider
     #                   logging from certain Amazon Web Services services</a>.</p>
     #   @return [String]
     class CloudWatchLogsConfigurationType < Struct.new(
+      nil,
       :log_group_arn,
       keyword_init: true
     )
@@ -2830,6 +2899,7 @@ module Aws::CognitoIdentityProvider
     #   <p>The name of the attribute that Amazon Cognito verifies with the code.</p>
     #   @return [String]
     class CodeDeliveryDetailsType < Struct.new(
+      nil,
       :destination,
       :delivery_medium,
       :attribute_name,
@@ -2844,6 +2914,7 @@ module Aws::CognitoIdentityProvider
     #   <p>The message sent when a verification code fails to deliver successfully.</p>
     #   @return [String]
     class CodeDeliveryFailureException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -2856,6 +2927,7 @@ module Aws::CognitoIdentityProvider
     #   <p>The message provided when the code mismatch exception is thrown.</p>
     #   @return [String]
     class CodeMismatchException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -2871,6 +2943,7 @@ module Aws::CognitoIdentityProvider
     #               user's passkey provider.</p>
     #   @return [JSON]
     class CompleteWebAuthnRegistrationRequest < Struct.new(
+      nil,
       :access_token,
       :credential,
       keyword_init: true
@@ -2879,6 +2952,7 @@ module Aws::CognitoIdentityProvider
     end
 
     class CompleteWebAuthnRegistrationResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -2890,6 +2964,7 @@ module Aws::CognitoIdentityProvider
     #   <p>The action that Amazon Cognito takes when it detects compromised credentials.</p>
     #   @return [String]
     class CompromisedCredentialsActionsType < Struct.new(
+      nil,
       :event_action,
       keyword_init: true
     )
@@ -2907,6 +2982,7 @@ module Aws::CognitoIdentityProvider
     #               compromised credentials.</p>
     #   @return [Types::CompromisedCredentialsActionsType]
     class CompromisedCredentialsRiskConfigurationType < Struct.new(
+      nil,
       :event_filter,
       :actions,
       keyword_init: true
@@ -2920,6 +2996,7 @@ module Aws::CognitoIdentityProvider
     #   <p>The message provided when the concurrent exception is thrown.</p>
     #   @return [String]
     class ConcurrentModificationException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -2942,6 +3019,7 @@ module Aws::CognitoIdentityProvider
     #   <p>A friendly name for the device, for example <code>MyMobilePhone</code>.</p>
     #   @return [String]
     class ConfirmDeviceRequest < Struct.new(
+      nil,
       :access_token,
       :device_key,
       :device_secret_verifier_config,
@@ -2963,6 +3041,7 @@ module Aws::CognitoIdentityProvider
     #               in the <i>Sign-in</i> menu of your user pool.</p>
     #   @return [Boolean]
     class ConfirmDeviceResponse < Struct.new(
+      nil,
       :user_confirmation_necessary,
       keyword_init: true
     )
@@ -3046,6 +3125,7 @@ module Aws::CognitoIdentityProvider
     #            </note>
     #   @return [Hash<String, String>]
     class ConfirmForgotPasswordRequest < Struct.new(
+      nil,
       :client_id,
       :secret_hash,
       :username,
@@ -3062,6 +3142,7 @@ module Aws::CognitoIdentityProvider
     # <p>The response from the server that results from a user's request to retrieve a
     #             forgotten password.</p>
     class ConfirmForgotPasswordResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -3153,6 +3234,7 @@ module Aws::CognitoIdentityProvider
     #               flow.</p>
     #   @return [String]
     class ConfirmSignUpRequest < Struct.new(
+      nil,
       :client_id,
       :secret_hash,
       :username,
@@ -3174,6 +3256,7 @@ module Aws::CognitoIdentityProvider
     #               successful <code>ConfirmSignUp</code> request.</p>
     #   @return [String]
     class ConfirmSignUpResponse < Struct.new(
+      nil,
       :session,
       keyword_init: true
     )
@@ -3199,6 +3282,7 @@ module Aws::CognitoIdentityProvider
     #               context data collection library. For more information, see <a href="https://docs.aws.amazon.com/cognito/latest/developerguide/cognito-user-pool-settings-adaptive-authentication.html#user-pool-settings-adaptive-authentication-device-fingerprint">Adding user device and session data to API requests</a>.</p>
     #   @return [String]
     class ContextDataType < Struct.new(
+      nil,
       :ip_address,
       :server_name,
       :server_path,
@@ -3244,6 +3328,7 @@ module Aws::CognitoIdentityProvider
     #               value is <code>2^31-1</code>.</p>
     #   @return [Integer]
     class CreateGroupRequest < Struct.new(
+      nil,
       :group_name,
       :user_pool_id,
       :description,
@@ -3258,6 +3343,7 @@ module Aws::CognitoIdentityProvider
     #   <p>The response object for a created group.</p>
     #   @return [Types::GroupType]
     class CreateGroupResponse < Struct.new(
+      nil,
       :group,
       keyword_init: true
     )
@@ -3409,6 +3495,7 @@ module Aws::CognitoIdentityProvider
     #               Identifiers in a domain format also enable the use of <a href="https://docs.aws.amazon.com/cognito/latest/developerguide/cognito-user-pools-managing-saml-idp-naming.html">email-address matching with SAML providers</a>. </p>
     #   @return [Array<String>]
     class CreateIdentityProviderRequest < Struct.new(
+      nil,
       :user_pool_id,
       :provider_name,
       :provider_type,
@@ -3424,6 +3511,7 @@ module Aws::CognitoIdentityProvider
     #   <p>The details of the new user pool IdP.</p>
     #   @return [Types::IdentityProviderType]
     class CreateIdentityProviderResponse < Struct.new(
+      nil,
       :identity_provider,
       keyword_init: true
     )
@@ -3477,6 +3565,7 @@ module Aws::CognitoIdentityProvider
     #               browser-adaptive mode.</p>
     #   @return [Array<Types::AssetType>]
     class CreateManagedLoginBrandingRequest < Struct.new(
+      nil,
       :user_pool_id,
       :client_id,
       :use_cognito_provided_values,
@@ -3491,6 +3580,7 @@ module Aws::CognitoIdentityProvider
     #   <p>The details of the branding style that you created.</p>
     #   @return [Types::ManagedLoginBrandingType]
     class CreateManagedLoginBrandingResponse < Struct.new(
+      nil,
       :managed_login_branding,
       keyword_init: true
     )
@@ -3518,6 +3608,7 @@ module Aws::CognitoIdentityProvider
     #               this request, for example <code>MyResourceServerName/MyScopeName</code>.</p>
     #   @return [Array<Types::ResourceServerScopeType>]
     class CreateResourceServerRequest < Struct.new(
+      nil,
       :user_pool_id,
       :identifier,
       :name,
@@ -3531,6 +3622,7 @@ module Aws::CognitoIdentityProvider
     #   <p>The details of the new resource server.</p>
     #   @return [Types::ResourceServerType]
     class CreateResourceServerResponse < Struct.new(
+      nil,
       :resource_server,
       keyword_init: true
     )
@@ -3564,6 +3656,7 @@ module Aws::CognitoIdentityProvider
     #                   "https://terms.example.com/es"</code>.</p>
     #   @return [Hash<String, String>]
     class CreateTermsRequest < Struct.new(
+      nil,
       :user_pool_id,
       :client_id,
       :terms_name,
@@ -3580,6 +3673,7 @@ module Aws::CognitoIdentityProvider
     #               the terms documents.</p>
     #   @return [Types::TermsType]
     class CreateTermsResponse < Struct.new(
+      nil,
       :terms,
       keyword_init: true
     )
@@ -3598,6 +3692,7 @@ module Aws::CognitoIdentityProvider
     #               Amazon CloudWatch Logs. This parameter is the ARN of that role.</p>
     #   @return [String]
     class CreateUserImportJobRequest < Struct.new(
+      nil,
       :job_name,
       :user_pool_id,
       :cloud_watch_logs_role_arn,
@@ -3613,6 +3708,7 @@ module Aws::CognitoIdentityProvider
     #               pre-signed URL for CSV upload.</p>
     #   @return [Types::UserImportJobType]
     class CreateUserImportJobResponse < Struct.new(
+      nil,
       :user_import_job,
       keyword_init: true
     )
@@ -3926,6 +4022,7 @@ module Aws::CognitoIdentityProvider
     #               tokens.</p>
     #   @return [Types::RefreshTokenRotationType]
     class CreateUserPoolClientRequest < Struct.new(
+      nil,
       :user_pool_id,
       :client_name,
       :generate_secret,
@@ -3959,6 +4056,7 @@ module Aws::CognitoIdentityProvider
     #   <p>The details of the new app client.</p>
     #   @return [Types::UserPoolClientType]
     class CreateUserPoolClientResponse < Struct.new(
+      nil,
       :user_pool_client,
       keyword_init: true
     )
@@ -3992,6 +4090,7 @@ module Aws::CognitoIdentityProvider
     #               integration working, you can explicitly set RP ID to the prefix domain.</p>
     #   @return [Types::CustomDomainConfigType]
     class CreateUserPoolDomainRequest < Struct.new(
+      nil,
       :domain,
       :user_pool_id,
       :managed_login_version,
@@ -4014,6 +4113,7 @@ module Aws::CognitoIdentityProvider
     #               Amazon Cognito prefix domain, this parameter returns null.</p>
     #   @return [String]
     class CreateUserPoolDomainResponse < Struct.new(
+      nil,
       :managed_login_version,
       :cloud_front_domain,
       keyword_init: true
@@ -4173,6 +4273,7 @@ module Aws::CognitoIdentityProvider
     #               customization, and threat protection. Defaults to <code>ESSENTIALS</code>.</p>
     #   @return [String]
     class CreateUserPoolRequest < Struct.new(
+      nil,
       :pool_name,
       :policies,
       :deletion_protection,
@@ -4207,6 +4308,7 @@ module Aws::CognitoIdentityProvider
     #   <p>The details of the created user pool.</p>
     #   @return [Types::UserPoolType]
     class CreateUserPoolResponse < Struct.new(
+      nil,
       :user_pool,
       keyword_init: true
     )
@@ -4219,6 +4321,7 @@ module Aws::CognitoIdentityProvider
     #               this certificate for the subdomain of your custom domain.</p>
     #   @return [String]
     class CustomDomainConfigType < Struct.new(
+      nil,
       :certificate_arn,
       keyword_init: true
     )
@@ -4235,6 +4338,7 @@ module Aws::CognitoIdentityProvider
     #   <p>The Amazon Resource Name (ARN) of the function that you want to assign to your Lambda trigger.</p>
     #   @return [String]
     class CustomEmailLambdaVersionConfigType < Struct.new(
+      nil,
       :lambda_version,
       :lambda_arn,
       keyword_init: true
@@ -4252,6 +4356,7 @@ module Aws::CognitoIdentityProvider
     #   <p>The Amazon Resource Name (ARN) of the function that you want to assign to your Lambda trigger.</p>
     #   @return [String]
     class CustomSMSLambdaVersionConfigType < Struct.new(
+      nil,
       :lambda_version,
       :lambda_arn,
       keyword_init: true
@@ -4266,6 +4371,7 @@ module Aws::CognitoIdentityProvider
     #   <p>The ID of the user pool where you want to delete the group.</p>
     #   @return [String]
     class DeleteGroupRequest < Struct.new(
+      nil,
       :group_name,
       :user_pool_id,
       keyword_init: true
@@ -4280,6 +4386,7 @@ module Aws::CognitoIdentityProvider
     #   <p>The name of the IdP that you want to delete.</p>
     #   @return [String]
     class DeleteIdentityProviderRequest < Struct.new(
+      nil,
       :user_pool_id,
       :provider_name,
       keyword_init: true
@@ -4295,6 +4402,7 @@ module Aws::CognitoIdentityProvider
     #               to delete.</p>
     #   @return [String]
     class DeleteManagedLoginBrandingRequest < Struct.new(
+      nil,
       :managed_login_branding_id,
       :user_pool_id,
       keyword_init: true
@@ -4309,6 +4417,7 @@ module Aws::CognitoIdentityProvider
     #   <p>The identifier of the resource server that you want to delete.</p>
     #   @return [String]
     class DeleteResourceServerRequest < Struct.new(
+      nil,
       :user_pool_id,
       :identifier,
       keyword_init: true
@@ -4324,6 +4433,7 @@ module Aws::CognitoIdentityProvider
     #               delete.</p>
     #   @return [String]
     class DeleteTermsRequest < Struct.new(
+      nil,
       :terms_id,
       :user_pool_id,
       keyword_init: true
@@ -4342,6 +4452,7 @@ module Aws::CognitoIdentityProvider
     #   <code>aws.cognito.signin.user.admin</code>.</p>
     #   @return [String]
     class DeleteUserAttributesRequest < Struct.new(
+      nil,
       :user_attribute_names,
       :access_token,
       keyword_init: true
@@ -4351,6 +4462,7 @@ module Aws::CognitoIdentityProvider
 
     # <p>Represents the response from the server to delete user attributes.</p>
     class DeleteUserAttributesResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -4364,6 +4476,7 @@ module Aws::CognitoIdentityProvider
     #   <p>The ID of the user pool app client that you want to delete.</p>
     #   @return [String]
     class DeleteUserPoolClientRequest < Struct.new(
+      nil,
       :user_pool_id,
       :client_id,
       keyword_init: true
@@ -4380,6 +4493,7 @@ module Aws::CognitoIdentityProvider
     #   <p>The ID of the user pool where you want to delete the domain.</p>
     #   @return [String]
     class DeleteUserPoolDomainRequest < Struct.new(
+      nil,
       :domain,
       :user_pool_id,
       keyword_init: true
@@ -4388,6 +4502,7 @@ module Aws::CognitoIdentityProvider
     end
 
     class DeleteUserPoolDomainResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -4398,6 +4513,7 @@ module Aws::CognitoIdentityProvider
     #   <p>The ID of the user pool that you want to delete.</p>
     #   @return [String]
     class DeleteUserPoolRequest < Struct.new(
+      nil,
       :user_pool_id,
       keyword_init: true
     )
@@ -4410,6 +4526,7 @@ module Aws::CognitoIdentityProvider
     #   <code>aws.cognito.signin.user.admin</code>.</p>
     #   @return [String]
     class DeleteUserRequest < Struct.new(
+      nil,
       :access_token,
       keyword_init: true
     )
@@ -4424,6 +4541,7 @@ module Aws::CognitoIdentityProvider
     #   <p>The unique identifier of the passkey that you want to delete.</p>
     #   @return [String]
     class DeleteWebAuthnCredentialRequest < Struct.new(
+      nil,
       :access_token,
       :credential_id,
       keyword_init: true
@@ -4432,6 +4550,7 @@ module Aws::CognitoIdentityProvider
     end
 
     class DeleteWebAuthnCredentialResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -4444,6 +4563,7 @@ module Aws::CognitoIdentityProvider
     #   <p>The name of the IdP that you want to describe.</p>
     #   @return [String]
     class DescribeIdentityProviderRequest < Struct.new(
+      nil,
       :user_pool_id,
       :provider_name,
       keyword_init: true
@@ -4455,6 +4575,7 @@ module Aws::CognitoIdentityProvider
     #   <p>The details of the requested IdP.</p>
     #   @return [Types::IdentityProviderType]
     class DescribeIdentityProviderResponse < Struct.new(
+      nil,
       :identity_provider,
       keyword_init: true
     )
@@ -4475,6 +4596,7 @@ module Aws::CognitoIdentityProvider
     #               values that you customized in your branding style.</p>
     #   @return [Boolean]
     class DescribeManagedLoginBrandingByClientRequest < Struct.new(
+      nil,
       :user_pool_id,
       :client_id,
       :return_merged_resources,
@@ -4487,6 +4609,7 @@ module Aws::CognitoIdentityProvider
     #   <p>The details of the requested branding style.</p>
     #   @return [Types::ManagedLoginBrandingType]
     class DescribeManagedLoginBrandingByClientResponse < Struct.new(
+      nil,
       :managed_login_branding,
       keyword_init: true
     )
@@ -4507,6 +4630,7 @@ module Aws::CognitoIdentityProvider
     #               values that you customized in your branding style.</p>
     #   @return [Boolean]
     class DescribeManagedLoginBrandingRequest < Struct.new(
+      nil,
       :user_pool_id,
       :managed_login_branding_id,
       :return_merged_resources,
@@ -4519,6 +4643,7 @@ module Aws::CognitoIdentityProvider
     #   <p>The details of the requested branding style.</p>
     #   @return [Types::ManagedLoginBrandingType]
     class DescribeManagedLoginBrandingResponse < Struct.new(
+      nil,
       :managed_login_branding,
       keyword_init: true
     )
@@ -4537,6 +4662,7 @@ module Aws::CognitoIdentityProvider
     #               increase the size of your access tokens.</p>
     #   @return [String]
     class DescribeResourceServerRequest < Struct.new(
+      nil,
       :user_pool_id,
       :identifier,
       keyword_init: true
@@ -4548,6 +4674,7 @@ module Aws::CognitoIdentityProvider
     #   <p>The details of the requested resource server.</p>
     #   @return [Types::ResourceServerType]
     class DescribeResourceServerResponse < Struct.new(
+      nil,
       :resource_server,
       keyword_init: true
     )
@@ -4569,6 +4696,7 @@ module Aws::CognitoIdentityProvider
     #               configuration.</p>
     #   @return [String]
     class DescribeRiskConfigurationRequest < Struct.new(
+      nil,
       :user_pool_id,
       :client_id,
       keyword_init: true
@@ -4580,6 +4708,7 @@ module Aws::CognitoIdentityProvider
     #   <p>The details of the requested risk configuration.</p>
     #   @return [Types::RiskConfigurationType]
     class DescribeRiskConfigurationResponse < Struct.new(
+      nil,
       :risk_configuration,
       keyword_init: true
     )
@@ -4594,6 +4723,7 @@ module Aws::CognitoIdentityProvider
     #               describe.</p>
     #   @return [String]
     class DescribeTermsRequest < Struct.new(
+      nil,
       :terms_id,
       :user_pool_id,
       keyword_init: true
@@ -4606,6 +4736,7 @@ module Aws::CognitoIdentityProvider
     #               changes to the terms documents.</p>
     #   @return [Types::TermsType]
     class DescribeTermsResponse < Struct.new(
+      nil,
       :terms,
       keyword_init: true
     )
@@ -4620,6 +4751,7 @@ module Aws::CognitoIdentityProvider
     #   <p>The Id of the user import job that you want to describe.</p>
     #   @return [String]
     class DescribeUserImportJobRequest < Struct.new(
+      nil,
       :user_pool_id,
       :job_id,
       keyword_init: true
@@ -4634,6 +4766,7 @@ module Aws::CognitoIdentityProvider
     #               pre-signed URL for CSV upload.</p>
     #   @return [Types::UserImportJobType]
     class DescribeUserImportJobResponse < Struct.new(
+      nil,
       :user_import_job,
       keyword_init: true
     )
@@ -4648,6 +4781,7 @@ module Aws::CognitoIdentityProvider
     #   <p>The ID of the app client that you want to describe.</p>
     #   @return [String]
     class DescribeUserPoolClientRequest < Struct.new(
+      nil,
       :user_pool_id,
       :client_id,
       keyword_init: true
@@ -4661,6 +4795,7 @@ module Aws::CognitoIdentityProvider
     #   <p>The details of the request app client.</p>
     #   @return [Types::UserPoolClientType]
     class DescribeUserPoolClientResponse < Struct.new(
+      nil,
       :user_pool_client,
       keyword_init: true
     )
@@ -4673,6 +4808,7 @@ module Aws::CognitoIdentityProvider
     #               the prefix alone, such as <code>auth</code>.</p>
     #   @return [String]
     class DescribeUserPoolDomainRequest < Struct.new(
+      nil,
       :domain,
       keyword_init: true
     )
@@ -4683,6 +4819,7 @@ module Aws::CognitoIdentityProvider
     #   <p>The details of the requested user pool domain.</p>
     #   @return [Types::DomainDescriptionType]
     class DescribeUserPoolDomainResponse < Struct.new(
+      nil,
       :domain_description,
       keyword_init: true
     )
@@ -4694,6 +4831,7 @@ module Aws::CognitoIdentityProvider
     #   <p>The ID of the user pool you want to describe.</p>
     #   @return [String]
     class DescribeUserPoolRequest < Struct.new(
+      nil,
       :user_pool_id,
       keyword_init: true
     )
@@ -4705,6 +4843,7 @@ module Aws::CognitoIdentityProvider
     #   <p>The details of the requested user pool.</p>
     #   @return [Types::UserPoolType]
     class DescribeUserPoolResponse < Struct.new(
+      nil,
       :user_pool,
       keyword_init: true
     )
@@ -4736,6 +4875,7 @@ module Aws::CognitoIdentityProvider
     #               API request.</p>
     #   @return [Boolean]
     class DeviceConfigurationType < Struct.new(
+      nil,
       :challenge_required_on_new_device,
       :device_only_remembered_on_user_prompt,
       keyword_init: true
@@ -4754,6 +4894,7 @@ module Aws::CognitoIdentityProvider
     # @!attribute message
     #   @return [String]
     class DeviceKeyExistsException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -4769,6 +4910,7 @@ module Aws::CognitoIdentityProvider
     #   <p>The salt that you want to use in SRP authentication with the user's device.</p>
     #   @return [String]
     class DeviceSecretVerifierConfigType < Struct.new(
+      nil,
       :password_verifier,
       :salt,
       keyword_init: true
@@ -4797,6 +4939,7 @@ module Aws::CognitoIdentityProvider
     #   <p>The date when the user last signed in with the device.</p>
     #   @return [Time]
     class DeviceType < Struct.new(
+      nil,
       :device_key,
       :device_attributes,
       :device_create_date,
@@ -4843,6 +4986,7 @@ module Aws::CognitoIdentityProvider
     #            <p>Managed login requires that your user pool be configured for any <a href="https://docs.aws.amazon.com/cognito/latest/developerguide/cognito-sign-in-feature-plans.html">feature plan</a> other than <code>Lite</code>.</p>
     #   @return [Integer]
     class DomainDescriptionType < Struct.new(
+      nil,
       :user_pool_id,
       :aws_account_id,
       :domain,
@@ -4862,6 +5006,7 @@ module Aws::CognitoIdentityProvider
     # @!attribute message
     #   @return [String]
     class DuplicateProviderException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -4970,6 +5115,7 @@ module Aws::CognitoIdentityProvider
     #            </dl>
     #   @return [String]
     class EmailConfigurationType < Struct.new(
+      nil,
       :source_arn,
       :reply_to_email_address,
       :email_sending_account,
@@ -4995,6 +5141,7 @@ module Aws::CognitoIdentityProvider
     #               MFA and email OTP sign-in.</p>
     #   @return [String]
     class EmailMfaConfigType < Struct.new(
+      nil,
       :message,
       :subject,
       keyword_init: true
@@ -5015,6 +5162,7 @@ module Aws::CognitoIdentityProvider
     #   <p>Specifies whether email message MFA is the user's preferred method.</p>
     #   @return [Boolean]
     class EmailMfaSettingsType < Struct.new(
+      nil,
       :enabled,
       :preferred_mfa,
       keyword_init: true
@@ -5033,6 +5181,7 @@ module Aws::CognitoIdentityProvider
     # @!attribute message
     #   @return [String]
     class EnableSoftwareTokenMFAException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -5058,6 +5207,7 @@ module Aws::CognitoIdentityProvider
     #   <p>The user's country.</p>
     #   @return [String]
     class EventContextDataType < Struct.new(
+      nil,
       :ip_address,
       :device_name,
       :timezone,
@@ -5085,6 +5235,7 @@ module Aws::CognitoIdentityProvider
     #   <p>The date that you or your user submitted the feedback.</p>
     #   @return [Time]
     class EventFeedbackType < Struct.new(
+      nil,
       :feedback_value,
       :provider,
       :feedback_date,
@@ -5112,6 +5263,7 @@ module Aws::CognitoIdentityProvider
     #               event.</p>
     #   @return [Boolean]
     class EventRiskType < Struct.new(
+      nil,
       :risk_decision,
       :risk_level,
       :compromised_credentials_detected,
@@ -5125,6 +5277,7 @@ module Aws::CognitoIdentityProvider
     #   <p>The message returned when the expired code exception is thrown.</p>
     #   @return [String]
     class ExpiredCodeException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -5136,6 +5289,7 @@ module Aws::CognitoIdentityProvider
     # @!attribute message
     #   @return [String]
     class FeatureUnavailableInTierException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -5149,6 +5303,7 @@ module Aws::CognitoIdentityProvider
     #               export.</p>
     #   @return [String]
     class FirehoseConfigurationType < Struct.new(
+      nil,
       :stream_arn,
       keyword_init: true
     )
@@ -5162,6 +5317,7 @@ module Aws::CognitoIdentityProvider
     #               that's associated with your user pool.</p>
     #   @return [String]
     class ForbiddenException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -5178,6 +5334,7 @@ module Aws::CognitoIdentityProvider
     #               forget.</p>
     #   @return [String]
     class ForgetDeviceRequest < Struct.new(
+      nil,
       :access_token,
       :device_key,
       keyword_init: true
@@ -5249,6 +5406,7 @@ module Aws::CognitoIdentityProvider
     #            </note>
     #   @return [Hash<String, String>]
     class ForgotPasswordRequest < Struct.new(
+      nil,
       :client_id,
       :secret_hash,
       :user_context_data,
@@ -5266,6 +5424,7 @@ module Aws::CognitoIdentityProvider
     #               password-recovery code to.</p>
     #   @return [Types::CodeDeliveryDetailsType]
     class ForgotPasswordResponse < Struct.new(
+      nil,
       :code_delivery_details,
       keyword_init: true
     )
@@ -5278,6 +5437,7 @@ module Aws::CognitoIdentityProvider
     #   <p>The ID of the user pool that you want to import users into.</p>
     #   @return [String]
     class GetCSVHeaderRequest < Struct.new(
+      nil,
       :user_pool_id,
       keyword_init: true
     )
@@ -5295,6 +5455,7 @@ module Aws::CognitoIdentityProvider
     #               want to import.</p>
     #   @return [Array<String>]
     class GetCSVHeaderResponse < Struct.new(
+      nil,
       :user_pool_id,
       :csv_header,
       keyword_init: true
@@ -5311,6 +5472,7 @@ module Aws::CognitoIdentityProvider
     #   <code>aws.cognito.signin.user.admin</code>.</p>
     #   @return [String]
     class GetDeviceRequest < Struct.new(
+      nil,
       :device_key,
       :access_token,
       keyword_init: true
@@ -5324,6 +5486,7 @@ module Aws::CognitoIdentityProvider
     #               created dates, and the device key.</p>
     #   @return [Types::DeviceType]
     class GetDeviceResponse < Struct.new(
+      nil,
       :device,
       keyword_init: true
     )
@@ -5337,6 +5500,7 @@ module Aws::CognitoIdentityProvider
     #   <p>The ID of the user pool that contains the group that you want to query.</p>
     #   @return [String]
     class GetGroupRequest < Struct.new(
+      nil,
       :group_name,
       :user_pool_id,
       keyword_init: true
@@ -5349,6 +5513,7 @@ module Aws::CognitoIdentityProvider
     #               values.</p>
     #   @return [Types::GroupType]
     class GetGroupResponse < Struct.new(
+      nil,
       :group,
       keyword_init: true
     )
@@ -5365,6 +5530,7 @@ module Aws::CognitoIdentityProvider
     #                   <code>example.com</code>.</p>
     #   @return [String]
     class GetIdentityProviderByIdentifierRequest < Struct.new(
+      nil,
       :user_pool_id,
       :idp_identifier,
       keyword_init: true
@@ -5377,6 +5543,7 @@ module Aws::CognitoIdentityProvider
     #               IdP name and type, and trust-relationship details like the issuer URL.</p>
     #   @return [Types::IdentityProviderType]
     class GetIdentityProviderByIdentifierResponse < Struct.new(
+      nil,
       :identity_provider,
       keyword_init: true
     )
@@ -5388,6 +5555,7 @@ module Aws::CognitoIdentityProvider
     #               view.</p>
     #   @return [String]
     class GetLogDeliveryConfigurationRequest < Struct.new(
+      nil,
       :user_pool_id,
       keyword_init: true
     )
@@ -5399,6 +5567,7 @@ module Aws::CognitoIdentityProvider
     #               configured and their destinations.</p>
     #   @return [Types::LogDeliveryConfigurationType]
     class GetLogDeliveryConfigurationResponse < Struct.new(
+      nil,
       :log_delivery_configuration,
       keyword_init: true
     )
@@ -5410,6 +5579,7 @@ module Aws::CognitoIdentityProvider
     #   <p>The ID of the user pool where you want to view the signing certificate.</p>
     #   @return [String]
     class GetSigningCertificateRequest < Struct.new(
+      nil,
       :user_pool_id,
       keyword_init: true
     )
@@ -5422,6 +5592,7 @@ module Aws::CognitoIdentityProvider
     #               pool.</p>
     #   @return [String]
     class GetSigningCertificateResponse < Struct.new(
+      nil,
       :certificate,
       keyword_init: true
     )
@@ -5479,6 +5650,7 @@ module Aws::CognitoIdentityProvider
     #            </note>
     #   @return [Hash<String, String>]
     class GetTokensFromRefreshTokenRequest < Struct.new(
+      nil,
       :refresh_token,
       :client_id,
       :client_secret,
@@ -5494,6 +5666,7 @@ module Aws::CognitoIdentityProvider
     #               information for device authentication.</p>
     #   @return [Types::AuthenticationResultType]
     class GetTokensFromRefreshTokenResponse < Struct.new(
+      nil,
       :authentication_result,
       keyword_init: true
     )
@@ -5507,6 +5680,7 @@ module Aws::CognitoIdentityProvider
     #   <p>The ID of the app client that you want to query for branding settings.</p>
     #   @return [String]
     class GetUICustomizationRequest < Struct.new(
+      nil,
       :user_pool_id,
       :client_id,
       keyword_init: true
@@ -5519,6 +5693,7 @@ module Aws::CognitoIdentityProvider
     #               applied to the user pool or app client.</p>
     #   @return [Types::UICustomizationType]
     class GetUICustomizationResponse < Struct.new(
+      nil,
       :ui_customization,
       keyword_init: true
     )
@@ -5568,6 +5743,7 @@ module Aws::CognitoIdentityProvider
     #            </note>
     #   @return [Hash<String, String>]
     class GetUserAttributeVerificationCodeRequest < Struct.new(
+      nil,
       :access_token,
       :attribute_name,
       :client_metadata,
@@ -5583,6 +5759,7 @@ module Aws::CognitoIdentityProvider
     #               code.</p>
     #   @return [Types::CodeDeliveryDetailsType]
     class GetUserAttributeVerificationCodeResponse < Struct.new(
+      nil,
       :code_delivery_details,
       keyword_init: true
     )
@@ -5594,6 +5771,7 @@ module Aws::CognitoIdentityProvider
     #   <code>aws.cognito.signin.user.admin</code>.</p>
     #   @return [String]
     class GetUserAuthFactorsRequest < Struct.new(
+      nil,
       :access_token,
       keyword_init: true
     )
@@ -5618,6 +5796,7 @@ module Aws::CognitoIdentityProvider
     #               sign-in, for example <code>["PASSWORD", "WEB_AUTHN"]</code>.</p>
     #   @return [Array<String>]
     class GetUserAuthFactorsResponse < Struct.new(
+      nil,
       :username,
       :preferred_mfa_setting,
       :user_mfa_setting_list,
@@ -5631,6 +5810,7 @@ module Aws::CognitoIdentityProvider
     #   <p>The ID of the user pool where you want to query WebAuthn and MFA configuration.</p>
     #   @return [String]
     class GetUserPoolMfaConfigRequest < Struct.new(
+      nil,
       :user_pool_id,
       keyword_init: true
     )
@@ -5669,6 +5849,7 @@ module Aws::CognitoIdentityProvider
     #                   <code>USER_AUTH</code> flow.</p>
     #   @return [Types::WebAuthnConfigurationType]
     class GetUserPoolMfaConfigResponse < Struct.new(
+      nil,
       :sms_mfa_configuration,
       :software_token_mfa_configuration,
       :email_mfa_configuration,
@@ -5685,6 +5866,7 @@ module Aws::CognitoIdentityProvider
     #   <code>aws.cognito.signin.user.admin</code>.</p>
     #   @return [String]
     class GetUserRequest < Struct.new(
+      nil,
       :access_token,
       keyword_init: true
     )
@@ -5718,6 +5900,7 @@ module Aws::CognitoIdentityProvider
     #               <code>SOFTWARE_TOKEN_MFA</code>.</p>
     #   @return [Array<String>]
     class GetUserResponse < Struct.new(
+      nil,
       :username,
       :user_attributes,
       :mfa_options,
@@ -5734,6 +5917,7 @@ module Aws::CognitoIdentityProvider
     #   <code>aws.cognito.signin.user.admin</code>.</p>
     #   @return [String]
     class GlobalSignOutRequest < Struct.new(
+      nil,
       :access_token,
       keyword_init: true
     )
@@ -5742,6 +5926,7 @@ module Aws::CognitoIdentityProvider
 
     # <p>The response to the request to sign out all devices.</p>
     class GlobalSignOutResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -5752,6 +5937,7 @@ module Aws::CognitoIdentityProvider
     # @!attribute message
     #   @return [String]
     class GroupExistsException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -5801,6 +5987,7 @@ module Aws::CognitoIdentityProvider
     #   human-readable format like ISO 8601 or a Java <code>Date</code> object.</p>
     #   @return [Time]
     class GroupType < Struct.new(
+      nil,
       :group_name,
       :user_pool_id,
       :description,
@@ -5821,6 +6008,7 @@ module Aws::CognitoIdentityProvider
     #   <p>The header value.</p>
     #   @return [String]
     class HttpHeader < Struct.new(
+      nil,
       :header_name,
       :header_value,
       keyword_init: true
@@ -5980,6 +6168,7 @@ module Aws::CognitoIdentityProvider
     #   human-readable format like ISO 8601 or a Java <code>Date</code> object.</p>
     #   @return [Time]
     class IdentityProviderType < Struct.new(
+      nil,
       :user_pool_id,
       :provider_name,
       :provider_type,
@@ -6219,6 +6408,7 @@ module Aws::CognitoIdentityProvider
     #               session ID.</p>
     #   @return [String]
     class InitiateAuthRequest < Struct.new(
+      nil,
       :auth_flow,
       :auth_parameters,
       :client_metadata,
@@ -6371,6 +6561,7 @@ module Aws::CognitoIdentityProvider
     #               and a traditional password.</p>
     #   @return [Array<String>]
     class InitiateAuthResponse < Struct.new(
+      nil,
       :challenge_name,
       :session,
       :challenge_parameters,
@@ -6386,6 +6577,7 @@ module Aws::CognitoIdentityProvider
     #   <p>The message returned when Amazon Cognito throws an internal error exception.</p>
     #   @return [String]
     class InternalErrorException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -6399,6 +6591,7 @@ module Aws::CognitoIdentityProvider
     #               isn't set on an email address that Amazon Cognito can access.</p>
     #   @return [String]
     class InvalidEmailRoleAccessPolicyException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -6411,6 +6604,7 @@ module Aws::CognitoIdentityProvider
     #               exception.</p>
     #   @return [String]
     class InvalidLambdaResponseException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -6421,6 +6615,7 @@ module Aws::CognitoIdentityProvider
     # @!attribute message
     #   @return [String]
     class InvalidOAuthFlowException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -6437,6 +6632,7 @@ module Aws::CognitoIdentityProvider
     #   <p>The reason code of the exception.</p>
     #   @return [String]
     class InvalidParameterException < Struct.new(
+      nil,
       :message,
       :reason_code,
       keyword_init: true
@@ -6449,6 +6645,7 @@ module Aws::CognitoIdentityProvider
     #   <p>The message returned when Amazon Cognito throws an invalid user password exception.</p>
     #   @return [String]
     class InvalidPasswordException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -6462,6 +6659,7 @@ module Aws::CognitoIdentityProvider
     #               thrown.</p>
     #   @return [String]
     class InvalidSmsRoleAccessPolicyException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -6477,6 +6675,7 @@ module Aws::CognitoIdentityProvider
     #               valid.</p>
     #   @return [String]
     class InvalidSmsRoleTrustRelationshipException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -6488,6 +6687,7 @@ module Aws::CognitoIdentityProvider
     #   <p>The message returned when the user pool configuration is not valid.</p>
     #   @return [String]
     class InvalidUserPoolConfigurationException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -6566,6 +6766,7 @@ module Aws::CognitoIdentityProvider
     #               custom sender Lambda triggers.</p>
     #   @return [String]
     class LambdaConfigType < Struct.new(
+      nil,
       :pre_sign_up,
       :custom_message,
       :post_confirmation,
@@ -6591,6 +6792,7 @@ module Aws::CognitoIdentityProvider
     #   <p>The message returned when Amazon Cognito throws a limit exceeded exception.</p>
     #   @return [String]
     class LimitExceededException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -6613,6 +6815,7 @@ module Aws::CognitoIdentityProvider
     #   through the full list of items.</p>
     #   @return [String]
     class ListDevicesRequest < Struct.new(
+      nil,
       :access_token,
       :limit,
       :pagination_token,
@@ -6632,6 +6835,7 @@ module Aws::CognitoIdentityProvider
     #   the list. By use of this token, you can paginate through the full list of items.</p>
     #   @return [String]
     class ListDevicesResponse < Struct.new(
+      nil,
       :devices,
       :pagination_token,
       keyword_init: true
@@ -6653,6 +6857,7 @@ module Aws::CognitoIdentityProvider
     #   through the full list of items.</p>
     #   @return [String]
     class ListGroupsRequest < Struct.new(
+      nil,
       :user_pool_id,
       :limit,
       :next_token,
@@ -6671,6 +6876,7 @@ module Aws::CognitoIdentityProvider
     #   the list. By use of this token, you can paginate through the full list of items.</p>
     #   @return [String]
     class ListGroupsResponse < Struct.new(
+      nil,
       :groups,
       :next_token,
       keyword_init: true
@@ -6692,6 +6898,7 @@ module Aws::CognitoIdentityProvider
     #   through the full list of items.</p>
     #   @return [String]
     class ListIdentityProvidersRequest < Struct.new(
+      nil,
       :user_pool_id,
       :max_results,
       :next_token,
@@ -6710,6 +6917,7 @@ module Aws::CognitoIdentityProvider
     #   the list. By use of this token, you can paginate through the full list of items.</p>
     #   @return [String]
     class ListIdentityProvidersResponse < Struct.new(
+      nil,
       :providers,
       :next_token,
       keyword_init: true
@@ -6732,6 +6940,7 @@ module Aws::CognitoIdentityProvider
     #   through the full list of items.</p>
     #   @return [String]
     class ListResourceServersRequest < Struct.new(
+      nil,
       :user_pool_id,
       :max_results,
       :next_token,
@@ -6750,6 +6959,7 @@ module Aws::CognitoIdentityProvider
     #   the list. By use of this token, you can paginate through the full list of items.</p>
     #   @return [String]
     class ListResourceServersResponse < Struct.new(
+      nil,
       :resource_servers,
       :next_token,
       keyword_init: true
@@ -6761,6 +6971,7 @@ module Aws::CognitoIdentityProvider
     #   <p>The Amazon Resource Name (ARN) of the user pool that the tags are assigned to.</p>
     #   @return [String]
     class ListTagsForResourceRequest < Struct.new(
+      nil,
       :resource_arn,
       keyword_init: true
     )
@@ -6771,6 +6982,7 @@ module Aws::CognitoIdentityProvider
     #   <p>The tags that are assigned to the user pool.</p>
     #   @return [Hash<String, String>]
     class ListTagsForResourceResponse < Struct.new(
+      nil,
       :tags,
       keyword_init: true
     )
@@ -6792,6 +7004,7 @@ module Aws::CognitoIdentityProvider
     #   through the full list of items.</p>
     #   @return [String]
     class ListTermsRequest < Struct.new(
+      nil,
       :user_pool_id,
       :max_results,
       :next_token,
@@ -6812,6 +7025,7 @@ module Aws::CognitoIdentityProvider
     #   through the full list of items.</p>
     #   @return [String]
     class ListTermsResponse < Struct.new(
+      nil,
       :terms,
       :next_token,
       keyword_init: true
@@ -6835,6 +7049,7 @@ module Aws::CognitoIdentityProvider
     #   through the full list of items.</p>
     #   @return [String]
     class ListUserImportJobsRequest < Struct.new(
+      nil,
       :user_pool_id,
       :max_results,
       :pagination_token,
@@ -6855,6 +7070,7 @@ module Aws::CognitoIdentityProvider
     #   the list. By use of this token, you can paginate through the full list of items.</p>
     #   @return [String]
     class ListUserImportJobsResponse < Struct.new(
+      nil,
       :user_import_jobs,
       :pagination_token,
       keyword_init: true
@@ -6878,6 +7094,7 @@ module Aws::CognitoIdentityProvider
     #   through the full list of items.</p>
     #   @return [String]
     class ListUserPoolClientsRequest < Struct.new(
+      nil,
       :user_pool_id,
       :max_results,
       :next_token,
@@ -6896,6 +7113,7 @@ module Aws::CognitoIdentityProvider
     #   the list. By use of this token, you can paginate through the full list of items.</p>
     #   @return [String]
     class ListUserPoolClientsResponse < Struct.new(
+      nil,
       :user_pool_clients,
       :next_token,
       keyword_init: true
@@ -6915,6 +7133,7 @@ module Aws::CognitoIdentityProvider
     #   <p>The maximum number of user pools that you want Amazon Cognito to return in the response.</p>
     #   @return [Integer]
     class ListUserPoolsRequest < Struct.new(
+      nil,
       :next_token,
       :max_results,
       keyword_init: true
@@ -6932,6 +7151,7 @@ module Aws::CognitoIdentityProvider
     #   the list. By use of this token, you can paginate through the full list of items.</p>
     #   @return [String]
     class ListUserPoolsResponse < Struct.new(
+      nil,
       :user_pools,
       :next_token,
       keyword_init: true
@@ -6957,6 +7177,7 @@ module Aws::CognitoIdentityProvider
     #   through the full list of items.</p>
     #   @return [String]
     class ListUsersInGroupRequest < Struct.new(
+      nil,
       :user_pool_id,
       :group_name,
       :limit,
@@ -6975,6 +7196,7 @@ module Aws::CognitoIdentityProvider
     #   the list. By use of this token, you can paginate through the full list of items.</p>
     #   @return [String]
     class ListUsersInGroupResponse < Struct.new(
+      nil,
       :users,
       :next_token,
       keyword_init: true
@@ -7101,6 +7323,7 @@ module Aws::CognitoIdentityProvider
     #                   Guide</i>.</p>
     #   @return [String]
     class ListUsersRequest < Struct.new(
+      nil,
       :user_pool_id,
       :attributes_to_get,
       :limit,
@@ -7121,6 +7344,7 @@ module Aws::CognitoIdentityProvider
     #   the list. By use of this token, you can paginate through the full list of items.</p>
     #   @return [String]
     class ListUsersResponse < Struct.new(
+      nil,
       :users,
       :pagination_token,
       keyword_init: true
@@ -7144,6 +7368,7 @@ module Aws::CognitoIdentityProvider
     #               return.</p>
     #   @return [Integer]
     class ListWebAuthnCredentialsRequest < Struct.new(
+      nil,
       :access_token,
       :next_token,
       :max_results,
@@ -7161,6 +7386,7 @@ module Aws::CognitoIdentityProvider
     #   the list. By use of this token, you can paginate through the full list of items.</p>
     #   @return [String]
     class ListWebAuthnCredentialsResponse < Struct.new(
+      nil,
       :credentials,
       :next_token,
       keyword_init: true
@@ -7200,6 +7426,7 @@ module Aws::CognitoIdentityProvider
     #                        Plus tier</a>.</p>
     #   @return [Types::FirehoseConfigurationType]
     class LogConfigurationType < Struct.new(
+      nil,
       :log_level,
       :event_source,
       :cloud_watch_logs_configuration,
@@ -7220,6 +7447,7 @@ module Aws::CognitoIdentityProvider
     #               destinations for message-delivery and user-activity logs.</p>
     #   @return [Array<Types::LogConfigurationType>]
     class LogDeliveryConfigurationType < Struct.new(
+      nil,
       :user_pool_id,
       :log_configurations,
       keyword_init: true
@@ -7234,6 +7462,7 @@ module Aws::CognitoIdentityProvider
     #               exception.</p>
     #   @return [String]
     class MFAMethodNotFoundException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -7253,6 +7482,7 @@ module Aws::CognitoIdentityProvider
     #                   <code>phone_number</code>.</p>
     #   @return [String]
     class MFAOptionType < Struct.new(
+      nil,
       :delivery_medium,
       :attribute_name,
       keyword_init: true
@@ -7265,6 +7495,7 @@ module Aws::CognitoIdentityProvider
     # @!attribute message
     #   @return [String]
     class ManagedLoginBrandingExistsException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -7327,6 +7558,7 @@ module Aws::CognitoIdentityProvider
     #   human-readable format like ISO 8601 or a Java <code>Date</code> object.</p>
     #   @return [Time]
     class ManagedLoginBrandingType < Struct.new(
+      nil,
       :managed_login_branding_id,
       :user_pool_id,
       :use_cognito_provided_values,
@@ -7355,6 +7587,7 @@ module Aws::CognitoIdentityProvider
     #   <p>The subject line for email messages. EmailSubject is allowed only if <a href="https://docs.aws.amazon.com/cognito-user-identity-pools/latest/APIReference/API_EmailConfigurationType.html#CognitoUserPools-Type-EmailConfigurationType-EmailSendingAccount">EmailSendingAccount</a> is DEVELOPER. </p>
     #   @return [String]
     class MessageTemplateType < Struct.new(
+      nil,
       :sms_message,
       :email_message,
       :email_subject,
@@ -7376,6 +7609,7 @@ module Aws::CognitoIdentityProvider
     #                   <code>DEVICE_PASSWORD_VERIFIER</code> for device SRP authentication.</p>
     #   @return [String]
     class NewDeviceMetadataType < Struct.new(
+      nil,
       :device_key,
       :device_group_key,
       keyword_init: true
@@ -7388,6 +7622,7 @@ module Aws::CognitoIdentityProvider
     #   <p>The message returned when the Amazon Cognito service returns a not authorized exception.</p>
     #   @return [String]
     class NotAuthorizedException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -7423,6 +7658,7 @@ module Aws::CognitoIdentityProvider
     #               response to a detected risk.</p>
     #   @return [Types::NotifyEmailType]
     class NotifyConfigurationType < Struct.new(
+      nil,
       :from,
       :reply_to,
       :source_arn,
@@ -7450,6 +7686,7 @@ module Aws::CognitoIdentityProvider
     #               plaintext message, respectively.</p>
     #   @return [String]
     class NotifyEmailType < Struct.new(
+      nil,
       :subject,
       :html_body,
       :text_body,
@@ -7469,6 +7706,7 @@ module Aws::CognitoIdentityProvider
     #               fewer.</p>
     #   @return [String]
     class NumberAttributeConstraintsType < Struct.new(
+      nil,
       :min_value,
       :max_value,
       keyword_init: true
@@ -7481,6 +7719,7 @@ module Aws::CognitoIdentityProvider
     # @!attribute message
     #   @return [String]
     class PasswordHistoryPolicyViolationException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -7526,6 +7765,7 @@ module Aws::CognitoIdentityProvider
     #            </note>
     #   @return [Integer]
     class PasswordPolicyType < Struct.new(
+      nil,
       :minimum_length,
       :require_uppercase,
       :require_lowercase,
@@ -7552,6 +7792,7 @@ module Aws::CognitoIdentityProvider
     #   <p>The message returned when a password reset is required.</p>
     #   @return [String]
     class PasswordResetRequiredException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -7569,6 +7810,7 @@ module Aws::CognitoIdentityProvider
     #               generation triggers, set <code>LambdaArn</code>.</p>
     #   @return [String]
     class PreTokenGenerationVersionConfigType < Struct.new(
+      nil,
       :lambda_version,
       :lambda_arn,
       keyword_init: true
@@ -7581,6 +7823,7 @@ module Aws::CognitoIdentityProvider
     #   <p>The message returned when a precondition is not met.</p>
     #   @return [String]
     class PreconditionNotMetException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -7605,6 +7848,7 @@ module Aws::CognitoIdentityProvider
     #   human-readable format like ISO 8601 or a Java <code>Date</code> object.</p>
     #   @return [Time]
     class ProviderDescription < Struct.new(
+      nil,
       :provider_name,
       :provider_type,
       :last_modified_date,
@@ -7627,6 +7871,7 @@ module Aws::CognitoIdentityProvider
     #               <code>xxxxx_account</code>.</p>
     #   @return [String]
     class ProviderUserIdentifierType < Struct.new(
+      nil,
       :provider_name,
       :provider_attribute_name,
       :provider_attribute_value,
@@ -7651,6 +7896,7 @@ module Aws::CognitoIdentityProvider
     #   <p>The recovery method that this object sets a recovery option for.</p>
     #   @return [String]
     class RecoveryOptionType < Struct.new(
+      nil,
       :priority,
       :name,
       keyword_init: true
@@ -7663,6 +7909,7 @@ module Aws::CognitoIdentityProvider
     # @!attribute message
     #   @return [String]
     class RefreshTokenReuseException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -7684,6 +7931,7 @@ module Aws::CognitoIdentityProvider
     #               and a successful request immediately invalidates the submitted refresh token.</p>
     #   @return [Integer]
     class RefreshTokenRotationType < Struct.new(
+      nil,
       :feature,
       :retry_grace_period_seconds,
       keyword_init: true
@@ -7753,6 +8001,7 @@ module Aws::CognitoIdentityProvider
     #            </note>
     #   @return [Hash<String, String>]
     class ResendConfirmationCodeRequest < Struct.new(
+      nil,
       :client_id,
       :secret_hash,
       :user_context_data,
@@ -7771,6 +8020,7 @@ module Aws::CognitoIdentityProvider
     #               code to.</p>
     #   @return [Types::CodeDeliveryDetailsType]
     class ResendConfirmationCodeResponse < Struct.new(
+      nil,
       :code_delivery_details,
       keyword_init: true
     )
@@ -7784,6 +8034,7 @@ module Aws::CognitoIdentityProvider
     #               exception.</p>
     #   @return [String]
     class ResourceNotFoundException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -7804,6 +8055,7 @@ module Aws::CognitoIdentityProvider
     #   <p>A friendly description of a custom scope.</p>
     #   @return [String]
     class ResourceServerScopeType < Struct.new(
+      nil,
       :scope_name,
       :scope_description,
       keyword_init: true
@@ -7831,6 +8083,7 @@ module Aws::CognitoIdentityProvider
     #   <p>A list of scopes that are defined for the resource server.</p>
     #   @return [Array<Types::ResourceServerScopeType>]
     class ResourceServerType < Struct.new(
+      nil,
       :user_pool_id,
       :identifier,
       :name,
@@ -8220,6 +8473,7 @@ module Aws::CognitoIdentityProvider
     #            </note>
     #   @return [Hash<String, String>]
     class RespondToAuthChallengeRequest < Struct.new(
+      nil,
       :client_id,
       :challenge_name,
       :session,
@@ -8365,6 +8619,7 @@ module Aws::CognitoIdentityProvider
     #               tokens (JWTs) that indicate successful sign-in.</p>
     #   @return [Types::AuthenticationResultType]
     class RespondToAuthChallengeResponse < Struct.new(
+      nil,
       :challenge_name,
       :session,
       :challenge_parameters,
@@ -8384,6 +8639,7 @@ module Aws::CognitoIdentityProvider
     #   <p>The client secret of the requested app client, if the client has a secret.</p>
     #   @return [String]
     class RevokeTokenRequest < Struct.new(
+      nil,
       :token,
       :client_id,
       :client_secret,
@@ -8393,6 +8649,7 @@ module Aws::CognitoIdentityProvider
     end
 
     class RevokeTokenResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -8425,6 +8682,7 @@ module Aws::CognitoIdentityProvider
     #   human-readable format like ISO 8601 or a Java <code>Date</code> object.</p>
     #   @return [Time]
     class RiskConfigurationType < Struct.new(
+      nil,
       :user_pool_id,
       :client_id,
       :compromised_credentials_risk_configuration,
@@ -8447,6 +8705,7 @@ module Aws::CognitoIdentityProvider
     #               this range list. This parameter is displayed and set in CIDR notation.</p>
     #   @return [Array<String>]
     class RiskExceptionConfigurationType < Struct.new(
+      nil,
       :blocked_ip_range_list,
       :skipped_ip_range_list,
       keyword_init: true
@@ -8461,6 +8720,7 @@ module Aws::CognitoIdentityProvider
     #               export.</p>
     #   @return [String]
     class S3ConfigurationType < Struct.new(
+      nil,
       :bucket_arn,
       keyword_init: true
     )
@@ -8482,6 +8742,7 @@ module Aws::CognitoIdentityProvider
     #               succeeds. </p>
     #   @return [Boolean]
     class SMSMfaSettingsType < Struct.new(
+      nil,
       :enabled,
       :preferred_mfa,
       keyword_init: true
@@ -8551,6 +8812,7 @@ module Aws::CognitoIdentityProvider
     #   <p>Specifies the constraints for an attribute of the string type.</p>
     #   @return [Types::StringAttributeConstraintsType]
     class SchemaAttributeType < Struct.new(
+      nil,
       :name,
       :attribute_data_type,
       :developer_only_attribute,
@@ -8574,6 +8836,7 @@ module Aws::CognitoIdentityProvider
     # @!attribute message
     #   @return [String]
     class ScopeDoesNotExistException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -8587,6 +8850,7 @@ module Aws::CognitoIdentityProvider
     #   <p>A collection of the logging configurations for a user pool.</p>
     #   @return [Array<Types::LogConfigurationType>]
     class SetLogDeliveryConfigurationRequest < Struct.new(
+      nil,
       :user_pool_id,
       :log_configurations,
       keyword_init: true
@@ -8598,6 +8862,7 @@ module Aws::CognitoIdentityProvider
     #   <p>The logging configuration that you applied to the requested user pool.</p>
     #   @return [Types::LogDeliveryConfigurationType]
     class SetLogDeliveryConfigurationResponse < Struct.new(
+      nil,
       :log_delivery_configuration,
       keyword_init: true
     )
@@ -8634,6 +8899,7 @@ module Aws::CognitoIdentityProvider
     #               always-block and always-allow lists.</p>
     #   @return [Types::RiskExceptionConfigurationType]
     class SetRiskConfigurationRequest < Struct.new(
+      nil,
       :user_pool_id,
       :client_id,
       :compromised_credentials_risk_configuration,
@@ -8649,6 +8915,7 @@ module Aws::CognitoIdentityProvider
     #               of the most recent change.</p>
     #   @return [Types::RiskConfigurationType]
     class SetRiskConfigurationResponse < Struct.new(
+      nil,
       :risk_configuration,
       keyword_init: true
     )
@@ -8676,6 +8943,7 @@ module Aws::CognitoIdentityProvider
     #               Base64-formatted binary object.</p>
     #   @return [String]
     class SetUICustomizationRequest < Struct.new(
+      nil,
       :user_pool_id,
       :client_id,
       :css,
@@ -8689,6 +8957,7 @@ module Aws::CognitoIdentityProvider
     #   <p>Information about the hosted UI branding that you applied.</p>
     #   @return [Types::UICustomizationType]
     class SetUICustomizationResponse < Struct.new(
+      nil,
       :ui_customization,
       keyword_init: true
     )
@@ -8716,6 +8985,7 @@ module Aws::CognitoIdentityProvider
     #   <code>aws.cognito.signin.user.admin</code>.</p>
     #   @return [String]
     class SetUserMFAPreferenceRequest < Struct.new(
+      nil,
       :sms_mfa_settings,
       :software_token_mfa_settings,
       :email_mfa_settings,
@@ -8726,6 +8996,7 @@ module Aws::CognitoIdentityProvider
     end
 
     class SetUserMFAPreferenceResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -8765,6 +9036,7 @@ module Aws::CognitoIdentityProvider
     #               options in this operation.</p>
     #   @return [Types::WebAuthnConfigurationType]
     class SetUserPoolMfaConfigRequest < Struct.new(
+      nil,
       :user_pool_id,
       :sms_mfa_configuration,
       :software_token_mfa_configuration,
@@ -8808,6 +9080,7 @@ module Aws::CognitoIdentityProvider
     #               configuration and settings for user-verification requirements.</p>
     #   @return [Types::WebAuthnConfigurationType]
     class SetUserPoolMfaConfigResponse < Struct.new(
+      nil,
       :sms_mfa_configuration,
       :software_token_mfa_configuration,
       :email_mfa_configuration,
@@ -8828,6 +9101,7 @@ module Aws::CognitoIdentityProvider
     #               delivery.</p>
     #   @return [Array<Types::MFAOptionType>]
     class SetUserSettingsRequest < Struct.new(
+      nil,
       :access_token,
       :mfa_options,
       keyword_init: true
@@ -8837,6 +9111,7 @@ module Aws::CognitoIdentityProvider
 
     # <p>The response from the server for a set user settings request.</p>
     class SetUserSettingsResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -8851,6 +9126,7 @@ module Aws::CognitoIdentityProvider
     #               one-time password and hardware factors.</p>
     #   @return [Array<String>]
     class SignInPolicyType < Struct.new(
+      nil,
       :allowed_first_auth_factors,
       keyword_init: true
     )
@@ -8938,6 +9214,7 @@ module Aws::CognitoIdentityProvider
     #            </note>
     #   @return [Hash<String, String>]
     class SignUpRequest < Struct.new(
+      nil,
       :client_id,
       :secret_hash,
       :username,
@@ -8973,6 +9250,7 @@ module Aws::CognitoIdentityProvider
     #               sign-up.</p>
     #   @return [String]
     class SignUpResponse < Struct.new(
+      nil,
       :user_confirmed,
       :code_delivery_details,
       :user_sub,
@@ -9018,6 +9296,7 @@ module Aws::CognitoIdentityProvider
     #               configuration in the Asia Pacific (Tokyo) Region. For more information, see <a href="https://docs.aws.amazon.com/cognito/latest/developerguide/user-pool-sms-settings.html">SMS message settings for Amazon Cognito user pools</a>.</p>
     #   @return [String]
     class SmsConfigurationType < Struct.new(
+      nil,
       :sns_caller_arn,
       :external_id,
       :sns_region,
@@ -9042,6 +9321,7 @@ module Aws::CognitoIdentityProvider
     #                   UpdateUserPool</code>, or in <code>SetUserPoolMfaConfig</code>.</p>
     #   @return [Types::SmsConfigurationType]
     class SmsMfaConfigType < Struct.new(
+      nil,
       :sms_authentication_message,
       :sms_configuration,
       keyword_init: true
@@ -9054,6 +9334,7 @@ module Aws::CognitoIdentityProvider
     # @!attribute message
     #   @return [String]
     class SoftwareTokenMFANotFoundException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -9066,6 +9347,7 @@ module Aws::CognitoIdentityProvider
     #   <p>The activation state of TOTP MFA.</p>
     #   @return [Boolean]
     class SoftwareTokenMfaConfigType < Struct.new(
+      nil,
       :enabled,
       keyword_init: true
     )
@@ -9090,6 +9372,7 @@ module Aws::CognitoIdentityProvider
     #   <p>Specifies whether software token MFA is the preferred MFA method.</p>
     #   @return [Boolean]
     class SoftwareTokenMfaSettingsType < Struct.new(
+      nil,
       :enabled,
       :preferred_mfa,
       keyword_init: true
@@ -9111,6 +9394,7 @@ module Aws::CognitoIdentityProvider
     #   <p>The ID of a user import job that you previously created.</p>
     #   @return [String]
     class StartUserImportJobRequest < Struct.new(
+      nil,
       :user_pool_id,
       :job_id,
       keyword_init: true
@@ -9125,6 +9409,7 @@ module Aws::CognitoIdentityProvider
     #               pre-signed URL for CSV upload.</p>
     #   @return [Types::UserImportJobType]
     class StartUserImportJobResponse < Struct.new(
+      nil,
       :user_import_job,
       keyword_init: true
     )
@@ -9136,6 +9421,7 @@ module Aws::CognitoIdentityProvider
     #   <code>aws.cognito.signin.user.admin</code>.</p>
     #   @return [String]
     class StartWebAuthnRegistrationRequest < Struct.new(
+      nil,
       :access_token,
       keyword_init: true
     )
@@ -9147,6 +9433,7 @@ module Aws::CognitoIdentityProvider
     #               passkey provider.</p>
     #   @return [JSON]
     class StartWebAuthnRegistrationResponse < Struct.new(
+      nil,
       :credential_creation_options,
       keyword_init: true
     )
@@ -9161,6 +9448,7 @@ module Aws::CognitoIdentityProvider
     #   <p>The ID of a running user import job.</p>
     #   @return [String]
     class StopUserImportJobRequest < Struct.new(
+      nil,
       :user_pool_id,
       :job_id,
       keyword_init: true
@@ -9175,6 +9463,7 @@ module Aws::CognitoIdentityProvider
     #               pre-signed URL for CSV upload.</p>
     #   @return [Types::UserImportJobType]
     class StopUserImportJobResponse < Struct.new(
+      nil,
       :user_import_job,
       keyword_init: true
     )
@@ -9192,6 +9481,7 @@ module Aws::CognitoIdentityProvider
     #               fewer.</p>
     #   @return [String]
     class StringAttributeConstraintsType < Struct.new(
+      nil,
       :min_length,
       :max_length,
       keyword_init: true
@@ -9206,6 +9496,7 @@ module Aws::CognitoIdentityProvider
     #   <p>An array of tag keys and values that you want to assign to the user pool.</p>
     #   @return [Hash<String, String>]
     class TagResourceRequest < Struct.new(
+      nil,
       :resource_arn,
       :tags,
       keyword_init: true
@@ -9214,6 +9505,7 @@ module Aws::CognitoIdentityProvider
     end
 
     class TagResourceResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -9238,6 +9530,7 @@ module Aws::CognitoIdentityProvider
     #   human-readable format like ISO 8601 or a Java <code>Date</code> object.</p>
     #   @return [Time]
     class TermsDescriptionType < Struct.new(
+      nil,
       :terms_id,
       :terms_name,
       :enforcement,
@@ -9253,6 +9546,7 @@ module Aws::CognitoIdentityProvider
     # @!attribute message
     #   @return [String]
     class TermsExistsException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -9294,6 +9588,7 @@ module Aws::CognitoIdentityProvider
     #   human-readable format like ISO 8601 or a Java <code>Date</code> object.</p>
     #   @return [Time]
     class TermsType < Struct.new(
+      nil,
       :terms_id,
       :user_pool_id,
       :client_id,
@@ -9313,6 +9608,7 @@ module Aws::CognitoIdentityProvider
     # @!attribute message
     #   @return [String]
     class TierChangeNotAllowedException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -9341,6 +9637,7 @@ module Aws::CognitoIdentityProvider
     #               years.</p>
     #   @return [String]
     class TokenValidityUnitsType < Struct.new(
+      nil,
       :access_token,
       :id_token,
       :refresh_token,
@@ -9356,6 +9653,7 @@ module Aws::CognitoIdentityProvider
     #               exception.</p>
     #   @return [String]
     class TooManyFailedAttemptsException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -9369,6 +9667,7 @@ module Aws::CognitoIdentityProvider
     #               exception.</p>
     #   @return [String]
     class TooManyRequestsException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -9403,6 +9702,7 @@ module Aws::CognitoIdentityProvider
     #   human-readable format like ISO 8601 or a Java <code>Date</code> object.</p>
     #   @return [Time]
     class UICustomizationType < Struct.new(
+      nil,
       :user_pool_id,
       :client_id,
       :image_url,
@@ -9420,6 +9720,7 @@ module Aws::CognitoIdentityProvider
     # @!attribute message
     #   @return [String]
     class UnauthorizedException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -9432,6 +9733,7 @@ module Aws::CognitoIdentityProvider
     #   <p>The message returned when Amazon Cognito returns an unexpected Lambda exception.</p>
     #   @return [String]
     class UnexpectedLambdaException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -9442,6 +9744,7 @@ module Aws::CognitoIdentityProvider
     # @!attribute message
     #   @return [String]
     class UnsupportedIdentityProviderException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -9453,6 +9756,7 @@ module Aws::CognitoIdentityProvider
     # @!attribute message
     #   @return [String]
     class UnsupportedOperationException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -9463,6 +9767,7 @@ module Aws::CognitoIdentityProvider
     # @!attribute message
     #   @return [String]
     class UnsupportedTokenTypeException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -9474,6 +9779,7 @@ module Aws::CognitoIdentityProvider
     #   <p>The message returned when the user is in an unsupported state.</p>
     #   @return [String]
     class UnsupportedUserStateException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -9487,6 +9793,7 @@ module Aws::CognitoIdentityProvider
     #   <p>An array of tag keys that you want to remove from the user pool.</p>
     #   @return [Array<String>]
     class UntagResourceRequest < Struct.new(
+      nil,
       :resource_arn,
       :tag_keys,
       keyword_init: true
@@ -9495,6 +9802,7 @@ module Aws::CognitoIdentityProvider
     end
 
     class UntagResourceResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -9525,6 +9833,7 @@ module Aws::CognitoIdentityProvider
     #   don't believe that Amazon Cognito evaluated a high-enough risk level.</p>
     #   @return [String]
     class UpdateAuthEventFeedbackRequest < Struct.new(
+      nil,
       :user_pool_id,
       :username,
       :event_id,
@@ -9536,6 +9845,7 @@ module Aws::CognitoIdentityProvider
     end
 
     class UpdateAuthEventFeedbackResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -9555,6 +9865,7 @@ module Aws::CognitoIdentityProvider
     #                   <code>remembered</code>.To disable, set to <code>not_remembered</code>.</p>
     #   @return [String]
     class UpdateDeviceStatusRequest < Struct.new(
+      nil,
       :access_token,
       :device_key,
       :device_remembered_status,
@@ -9565,6 +9876,7 @@ module Aws::CognitoIdentityProvider
 
     # <p>The response to the request to update the device status.</p>
     class UpdateDeviceStatusResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -9602,6 +9914,7 @@ module Aws::CognitoIdentityProvider
     #               value is <code>2^31-1</code>.</p>
     #   @return [Integer]
     class UpdateGroupRequest < Struct.new(
+      nil,
       :group_name,
       :user_pool_id,
       :description,
@@ -9617,6 +9930,7 @@ module Aws::CognitoIdentityProvider
     #               description.</p>
     #   @return [Types::GroupType]
     class UpdateGroupResponse < Struct.new(
+      nil,
       :group,
       keyword_init: true
     )
@@ -9764,6 +10078,7 @@ module Aws::CognitoIdentityProvider
     #               Identifiers in a domain format also enable the use of <a href="https://docs.aws.amazon.com/cognito/latest/developerguide/cognito-user-pools-managing-saml-idp-naming.html">email-address matching with SAML providers</a>. </p>
     #   @return [Array<String>]
     class UpdateIdentityProviderRequest < Struct.new(
+      nil,
       :user_pool_id,
       :provider_name,
       :provider_details,
@@ -9778,6 +10093,7 @@ module Aws::CognitoIdentityProvider
     #   <p>The identity provider details.</p>
     #   @return [Types::IdentityProviderType]
     class UpdateIdentityProviderResponse < Struct.new(
+      nil,
       :identity_provider,
       keyword_init: true
     )
@@ -9832,6 +10148,7 @@ module Aws::CognitoIdentityProvider
     #               browser-adaptive mode.</p>
     #   @return [Array<Types::AssetType>]
     class UpdateManagedLoginBrandingRequest < Struct.new(
+      nil,
       :user_pool_id,
       :managed_login_branding_id,
       :use_cognito_provided_values,
@@ -9846,6 +10163,7 @@ module Aws::CognitoIdentityProvider
     #   <p>The details of the branding style that you updated.</p>
     #   @return [Types::ManagedLoginBrandingType]
     class UpdateManagedLoginBrandingResponse < Struct.new(
+      nil,
       :managed_login_branding,
       keyword_init: true
     )
@@ -9872,6 +10190,7 @@ module Aws::CognitoIdentityProvider
     #               with your resource server.</p>
     #   @return [Array<Types::ResourceServerScopeType>]
     class UpdateResourceServerRequest < Struct.new(
+      nil,
       :user_pool_id,
       :identifier,
       :name,
@@ -9885,6 +10204,7 @@ module Aws::CognitoIdentityProvider
     #   <p>The updated details of the requested resource server.</p>
     #   @return [Types::ResourceServerType]
     class UpdateResourceServerResponse < Struct.new(
+      nil,
       :resource_server,
       keyword_init: true
     )
@@ -9914,6 +10234,7 @@ module Aws::CognitoIdentityProvider
     #                   "https://terms.example.com/es"</code>.</p>
     #   @return [Hash<String, String>]
     class UpdateTermsRequest < Struct.new(
+      nil,
       :terms_id,
       :user_pool_id,
       :terms_name,
@@ -9929,6 +10250,7 @@ module Aws::CognitoIdentityProvider
     #   <p>A summary of the updates to your terms documents.</p>
     #   @return [Types::TermsType]
     class UpdateTermsResponse < Struct.new(
+      nil,
       :terms,
       keyword_init: true
     )
@@ -9984,6 +10306,7 @@ module Aws::CognitoIdentityProvider
     #            </note>
     #   @return [Hash<String, String>]
     class UpdateUserAttributesRequest < Struct.new(
+      nil,
       :user_attributes,
       :access_token,
       :client_metadata,
@@ -10004,6 +10327,7 @@ module Aws::CognitoIdentityProvider
     #               number</a>.</p>
     #   @return [Array<Types::CodeDeliveryDetailsType>]
     class UpdateUserAttributesResponse < Struct.new(
+      nil,
       :code_delivery_details_list,
       keyword_init: true
     )
@@ -10311,6 +10635,7 @@ module Aws::CognitoIdentityProvider
     #               tokens.</p>
     #   @return [Types::RefreshTokenRotationType]
     class UpdateUserPoolClientRequest < Struct.new(
+      nil,
       :user_pool_id,
       :client_id,
       :client_name,
@@ -10345,6 +10670,7 @@ module Aws::CognitoIdentityProvider
     #   <p>The updated details of your app client.</p>
     #   @return [Types::UserPoolClientType]
     class UpdateUserPoolClientResponse < Struct.new(
+      nil,
       :user_pool_client,
       keyword_init: true
     )
@@ -10376,6 +10702,7 @@ module Aws::CognitoIdentityProvider
     #               integration working, you can explicitly set RP ID to the prefix domain.</p>
     #   @return [Types::CustomDomainConfigType]
     class UpdateUserPoolDomainRequest < Struct.new(
+      nil,
       :domain,
       :user_pool_id,
       :managed_login_version,
@@ -10399,6 +10726,7 @@ module Aws::CognitoIdentityProvider
     #               Amazon Cognito prefix domain, this operation returns a blank response.</p>
     #   @return [String]
     class UpdateUserPoolDomainResponse < Struct.new(
+      nil,
       :managed_login_version,
       :cloud_front_domain,
       keyword_init: true
@@ -10530,6 +10858,7 @@ module Aws::CognitoIdentityProvider
     #               customization, and threat protection. Defaults to <code>ESSENTIALS</code>.</p>
     #   @return [String]
     class UpdateUserPoolRequest < Struct.new(
+      nil,
       :user_pool_id,
       :policies,
       :deletion_protection,
@@ -10559,6 +10888,7 @@ module Aws::CognitoIdentityProvider
     # <p>Represents the response from the server when you make a request to update the user
     #             pool.</p>
     class UpdateUserPoolResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -10581,6 +10911,7 @@ module Aws::CognitoIdentityProvider
     #                   <code>email</code> or <code>phone_number</code> attribute.</p>
     #   @return [Array<String>]
     class UserAttributeUpdateSettingsType < Struct.new(
+      nil,
       :attributes_require_verification_before_update,
       keyword_init: true
     )
@@ -10598,6 +10929,7 @@ module Aws::CognitoIdentityProvider
     #               context data collection library. For more information, see <a href="https://docs.aws.amazon.com/cognito/latest/developerguide/cognito-user-pool-settings-adaptive-authentication.html#user-pool-settings-adaptive-authentication-device-fingerprint">Adding user device and session data to API requests</a>.</p>
     #   @return [String]
     class UserContextDataType < Struct.new(
+      nil,
       :ip_address,
       :encoded_data,
       keyword_init: true
@@ -10611,6 +10943,7 @@ module Aws::CognitoIdentityProvider
     #   <p>The message returned when the user pool has an import job running.</p>
     #   @return [String]
     class UserImportInProgressException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -10702,6 +11035,7 @@ module Aws::CognitoIdentityProvider
     #   <p>The message returned when the user import job is completed.</p>
     #   @return [String]
     class UserImportJobType < Struct.new(
+      nil,
       :job_name,
       :job_id,
       :user_pool_id,
@@ -10734,6 +11068,7 @@ module Aws::CognitoIdentityProvider
     #               the Lambda service.</p>
     #   @return [String]
     class UserLambdaValidationException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -10745,6 +11080,7 @@ module Aws::CognitoIdentityProvider
     #   <p>The message returned when a user isn't confirmed successfully.</p>
     #   @return [String]
     class UserNotConfirmedException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -10756,6 +11092,7 @@ module Aws::CognitoIdentityProvider
     #   <p>The message returned when a user isn't found.</p>
     #   @return [String]
     class UserNotFoundException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -10766,6 +11103,7 @@ module Aws::CognitoIdentityProvider
     # @!attribute message
     #   @return [String]
     class UserPoolAddOnNotEnabledException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -10789,6 +11127,7 @@ module Aws::CognitoIdentityProvider
     #               authentication. </p>
     #   @return [Types::AdvancedSecurityAdditionalFlowsType]
     class UserPoolAddOnsType < Struct.new(
+      nil,
       :advanced_security_mode,
       :advanced_security_additional_flows,
       keyword_init: true
@@ -10807,6 +11146,7 @@ module Aws::CognitoIdentityProvider
     #   <p>The app client name.</p>
     #   @return [String]
     class UserPoolClientDescription < Struct.new(
+      nil,
       :client_id,
       :user_pool_id,
       :client_name,
@@ -11141,6 +11481,7 @@ module Aws::CognitoIdentityProvider
     #               tokens.</p>
     #   @return [Types::RefreshTokenRotationType]
     class UserPoolClientType < Struct.new(
+      nil,
       :user_pool_id,
       :client_name,
       :client_id,
@@ -11204,6 +11545,7 @@ module Aws::CognitoIdentityProvider
     #   human-readable format like ISO 8601 or a Java <code>Date</code> object.</p>
     #   @return [Time]
     class UserPoolDescriptionType < Struct.new(
+      nil,
       :id,
       :name,
       :lambda_config,
@@ -11225,6 +11567,7 @@ module Aws::CognitoIdentityProvider
     #   <p>The policy for allowed types of authentication in a user pool.</p>
     #   @return [Types::SignInPolicyType]
     class UserPoolPolicyType < Struct.new(
+      nil,
       :password_policy,
       :sign_in_policy,
       keyword_init: true
@@ -11236,6 +11579,7 @@ module Aws::CognitoIdentityProvider
     # @!attribute message
     #   @return [String]
     class UserPoolTaggingException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -11443,6 +11787,7 @@ module Aws::CognitoIdentityProvider
     #               customization, and threat protection. Defaults to <code>ESSENTIALS</code>.</p>
     #   @return [String]
     class UserPoolType < Struct.new(
+      nil,
       :id,
       :name,
       :policies,
@@ -11539,6 +11884,7 @@ module Aws::CognitoIdentityProvider
     #   <p>The user's MFA configuration.</p>
     #   @return [Array<Types::MFAOptionType>]
     class UserType < Struct.new(
+      nil,
       :username,
       :attributes,
       :user_create_date,
@@ -11583,6 +11929,7 @@ module Aws::CognitoIdentityProvider
     #            </dl>
     #   @return [Boolean]
     class UsernameConfigurationType < Struct.new(
+      nil,
       :case_sensitive,
       keyword_init: true
     )
@@ -11595,6 +11942,7 @@ module Aws::CognitoIdentityProvider
     #   <p>The message returned when Amazon Cognito throws a user name exists exception.</p>
     #   @return [String]
     class UsernameExistsException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -11635,6 +11983,7 @@ module Aws::CognitoIdentityProvider
     #               template body must contain a code placeholder in the format <code>{####}</code>.</p>
     #   @return [String]
     class VerificationMessageTemplateType < Struct.new(
+      nil,
       :sms_message,
       :email_message,
       :email_subject,
@@ -11660,6 +12009,7 @@ module Aws::CognitoIdentityProvider
     #   <p>A friendly name for the device that's running the TOTP authenticator.</p>
     #   @return [String]
     class VerifySoftwareTokenRequest < Struct.new(
+      nil,
       :access_token,
       :session,
       :user_code,
@@ -11679,6 +12029,7 @@ module Aws::CognitoIdentityProvider
     #               in your challenge response.</p>
     #   @return [String]
     class VerifySoftwareTokenResponse < Struct.new(
+      nil,
       :status,
       :session,
       keyword_init: true
@@ -11699,6 +12050,7 @@ module Aws::CognitoIdentityProvider
     #               example the user's email address.</p>
     #   @return [String]
     class VerifyUserAttributeRequest < Struct.new(
+      nil,
       :access_token,
       :attribute_name,
       :code,
@@ -11710,6 +12062,7 @@ module Aws::CognitoIdentityProvider
     # <p>A container representing the response from the server from the request to verify user
     #             attributes.</p>
     class VerifyUserAttributeResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -11720,6 +12073,7 @@ module Aws::CognitoIdentityProvider
     # @!attribute message
     #   @return [String]
     class WebAuthnChallengeNotFoundException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -11731,6 +12085,7 @@ module Aws::CognitoIdentityProvider
     # @!attribute message
     #   @return [String]
     class WebAuthnClientMismatchException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -11742,6 +12097,7 @@ module Aws::CognitoIdentityProvider
     # @!attribute message
     #   @return [String]
     class WebAuthnConfigurationMissingException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -11790,6 +12146,7 @@ module Aws::CognitoIdentityProvider
     #               require the use of authenticators with user verification but encourages it.</p>
     #   @return [String]
     class WebAuthnConfigurationType < Struct.new(
+      nil,
       :relying_party_id,
       :user_verification,
       keyword_init: true
@@ -11822,6 +12179,7 @@ module Aws::CognitoIdentityProvider
     #   human-readable format like ISO 8601 or a Java <code>Date</code> object.</p>
     #   @return [Time]
     class WebAuthnCredentialDescription < Struct.new(
+      nil,
       :credential_id,
       :friendly_credential_name,
       :relying_party_id,
@@ -11838,6 +12196,7 @@ module Aws::CognitoIdentityProvider
     # @!attribute message
     #   @return [String]
     class WebAuthnCredentialNotSupportedException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -11849,6 +12208,7 @@ module Aws::CognitoIdentityProvider
     # @!attribute message
     #   @return [String]
     class WebAuthnNotEnabledException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -11860,6 +12220,7 @@ module Aws::CognitoIdentityProvider
     # @!attribute message
     #   @return [String]
     class WebAuthnOriginNotAllowedException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -11871,6 +12232,7 @@ module Aws::CognitoIdentityProvider
     # @!attribute message
     #   @return [String]
     class WebAuthnRelyingPartyMismatchException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )

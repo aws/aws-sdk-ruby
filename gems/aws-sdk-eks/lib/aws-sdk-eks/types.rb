@@ -15,6 +15,7 @@ module Aws::EKS
     #   <p>The current authentication mode of the cluster.</p>
     #   @return [String]
     class AccessConfigResponse < Struct.new(
+      nil,
       :bootstrap_cluster_creator_admin_permissions,
       :authentication_mode,
       keyword_init: true
@@ -30,6 +31,7 @@ module Aws::EKS
     #   <p>You do not have sufficient access to perform this action.</p>
     #   @return [String]
     class AccessDeniedException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -83,6 +85,7 @@ module Aws::EKS
     #   <p>The type of the access entry.</p>
     #   @return [String]
     class AccessEntry < Struct.new(
+      nil,
       :cluster_name,
       :principal_arn,
       :kubernetes_groups,
@@ -113,6 +116,7 @@ module Aws::EKS
     #   <p>The ARN of the access policy.</p>
     #   @return [String]
     class AccessPolicy < Struct.new(
+      nil,
       :name,
       :arn,
       keyword_init: true
@@ -130,6 +134,7 @@ module Aws::EKS
     #               if you specified <code>namespace</code> for <code>Type</code>.</p>
     #   @return [Array<String>]
     class AccessScope < Struct.new(
+      nil,
       :type,
       :namespaces,
       keyword_init: true
@@ -194,6 +199,7 @@ module Aws::EKS
     #   <p>The namespace configuration for the addon. This specifies the Kubernetes namespace where the addon is installed.</p>
     #   @return [Types::AddonNamespaceConfigResponse]
     class Addon < Struct.new(
+      nil,
       :addon_name,
       :cluster_name,
       :status,
@@ -224,6 +230,7 @@ module Aws::EKS
     #   <p>The list of compatible Amazon EKS add-on versions for the next Kubernetes version.</p>
     #   @return [Array<String>]
     class AddonCompatibilityDetail < Struct.new(
+      nil,
       :name,
       :compatible_versions,
       keyword_init: true
@@ -236,6 +243,7 @@ module Aws::EKS
     #   <p>An object representing the health issues for an add-on.</p>
     #   @return [Array<Types::AddonIssue>]
     class AddonHealth < Struct.new(
+      nil,
       :issues,
       keyword_init: true
     )
@@ -266,6 +274,7 @@ module Aws::EKS
     #   <p>The default Kubernetes namespace where this addon is typically installed if no custom namespace is specified.</p>
     #   @return [String]
     class AddonInfo < Struct.new(
+      nil,
       :addon_name,
       :type,
       :addon_versions,
@@ -289,6 +298,7 @@ module Aws::EKS
     #   <p>The resource IDs of the issue.</p>
     #   @return [Array<String>]
     class AddonIssue < Struct.new(
+      nil,
       :code,
       :message,
       :resource_ids,
@@ -302,6 +312,7 @@ module Aws::EKS
     #   <p>The name of the Kubernetes namespace to install the addon in. Must be a valid RFC 1123 DNS label.</p>
     #   @return [String]
     class AddonNamespaceConfigRequest < Struct.new(
+      nil,
       :namespace,
       keyword_init: true
     )
@@ -313,6 +324,7 @@ module Aws::EKS
     #   <p>The name of the Kubernetes namespace where the addon is installed.</p>
     #   @return [String]
     class AddonNamespaceConfigResponse < Struct.new(
+      nil,
       :namespace,
       keyword_init: true
     )
@@ -331,6 +343,7 @@ module Aws::EKS
     #   <p>The ARN of an IAM Role.</p>
     #   @return [String]
     class AddonPodIdentityAssociations < Struct.new(
+      nil,
       :service_account,
       :role_arn,
       keyword_init: true
@@ -346,6 +359,7 @@ module Aws::EKS
     #   <p>A suggested IAM Policy for the add-on.</p>
     #   @return [Array<String>]
     class AddonPodIdentityConfiguration < Struct.new(
+      nil,
       :service_account,
       :recommended_managed_policies,
       keyword_init: true
@@ -374,6 +388,7 @@ module Aws::EKS
     #               permissions.</p>
     #   @return [Boolean]
     class AddonVersionInfo < Struct.new(
+      nil,
       :addon_version,
       :architecture,
       :compute_types,
@@ -407,6 +422,7 @@ module Aws::EKS
     #               entire cluster or to specific Kubernetes namespaces.</p>
     #   @return [Types::AccessScope]
     class AssociateAccessPolicyRequest < Struct.new(
+      nil,
       :cluster_name,
       :principal_arn,
       :policy_arn,
@@ -427,6 +443,7 @@ module Aws::EKS
     #               <code>AccessEntry</code>.</p>
     #   @return [Types::AssociatedAccessPolicy]
     class AssociateAccessPolicyResponse < Struct.new(
+      nil,
       :cluster_name,
       :principal_arn,
       :associated_access_policy,
@@ -446,6 +463,7 @@ module Aws::EKS
     #   the idempotency of the request.</p>
     #   @return [String]
     class AssociateEncryptionConfigRequest < Struct.new(
+      nil,
       :cluster_name,
       :encryption_config,
       :client_request_token,
@@ -458,6 +476,7 @@ module Aws::EKS
     #   <p>An object representing an asynchronous update.</p>
     #   @return [Types::Update]
     class AssociateEncryptionConfigResponse < Struct.new(
+      nil,
       :update,
       keyword_init: true
     )
@@ -480,6 +499,7 @@ module Aws::EKS
     #   the idempotency of the request.</p>
     #   @return [String]
     class AssociateIdentityProviderConfigRequest < Struct.new(
+      nil,
       :cluster_name,
       :oidc,
       :tags,
@@ -496,6 +516,7 @@ module Aws::EKS
     #   <p>The tags for the resource.</p>
     #   @return [Hash<String, String>]
     class AssociateIdentityProviderConfigResponse < Struct.new(
+      nil,
       :update,
       :tags,
       keyword_init: true
@@ -518,6 +539,7 @@ module Aws::EKS
     #   <p>The Unix epoch timestamp for the last modification to the object.</p>
     #   @return [Time]
     class AssociatedAccessPolicy < Struct.new(
+      nil,
       :policy_arn,
       :access_scope,
       :associated_at,
@@ -532,6 +554,7 @@ module Aws::EKS
     #   <p>The name of the Auto Scaling group associated with an Amazon EKS managed node group.</p>
     #   @return [String]
     class AutoScalingGroup < Struct.new(
+      nil,
       :name,
       keyword_init: true
     )
@@ -545,6 +568,7 @@ module Aws::EKS
     #               will depend on the API, and will be documented in the error message.</p>
     #   @return [String]
     class BadRequestException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -562,6 +586,7 @@ module Aws::EKS
     #               volumes in your Amazon Web Services account.</p>
     #   @return [Boolean]
     class BlockStorage < Struct.new(
+      nil,
       :enabled,
       keyword_init: true
     )
@@ -576,6 +601,7 @@ module Aws::EKS
     #                   <code>kubeconfig</code> file for your cluster.</p>
     #   @return [String]
     class Certificate < Struct.new(
+      nil,
       :data,
       keyword_init: true
     )
@@ -603,6 +629,7 @@ module Aws::EKS
     #               the action or resource or specifying an identifier that is not valid.</p>
     #   @return [String]
     class ClientException < Struct.new(
+      nil,
       :cluster_name,
       :nodegroup_name,
       :addon_name,
@@ -624,6 +651,7 @@ module Aws::EKS
     #   <p>The timestamp of the last request seen from the Kubernetes client.</p>
     #   @return [Time]
     class ClientStat < Struct.new(
+      nil,
       :user_agent,
       :number_of_requests_last30_days,
       :last_request_time,
@@ -753,6 +781,7 @@ module Aws::EKS
     #               only applies to clusters in an active state.</p>
     #   @return [Boolean]
     class Cluster < Struct.new(
+      nil,
       :name,
       :arn,
       :created_at,
@@ -790,6 +819,7 @@ module Aws::EKS
     #   <p>An object representing the health issues of your Amazon EKS cluster.</p>
     #   @return [Array<Types::ClusterIssue>]
     class ClusterHealth < Struct.new(
+      nil,
       :issues,
       keyword_init: true
     )
@@ -807,6 +837,7 @@ module Aws::EKS
     #   <p>The resource IDs that the issue relates to.</p>
     #   @return [Array<String>]
     class ClusterIssue < Struct.new(
+      nil,
       :code,
       :message,
       :resource_ids,
@@ -851,6 +882,7 @@ module Aws::EKS
     #   <p>The patch version of Kubernetes for this cluster version.</p>
     #   @return [String]
     class ClusterVersionInformation < Struct.new(
+      nil,
       :cluster_version,
       :cluster_type,
       :default_platform_version,
@@ -882,6 +914,7 @@ module Aws::EKS
     #   <p>The supported default version.</p>
     #   @return [Boolean]
     class Compatibility < Struct.new(
+      nil,
       :cluster_version,
       :platform_versions,
       :default_version,
@@ -915,6 +948,7 @@ module Aws::EKS
     #               <i>Amazon EKS User Guide</i>.</p>
     #   @return [String]
     class ComputeConfigRequest < Struct.new(
+      nil,
       :enabled,
       :node_pools,
       :node_role_arn,
@@ -939,6 +973,7 @@ module Aws::EKS
     #               Mode cluster.</p>
     #   @return [String]
     class ComputeConfigResponse < Struct.new(
+      nil,
       :enabled,
       :node_pools,
       :node_role_arn,
@@ -956,6 +991,7 @@ module Aws::EKS
     #   <p>The cloud provider for the target cluster to connect.</p>
     #   @return [String]
     class ConnectorConfigRequest < Struct.new(
+      nil,
       :role_arn,
       :provider,
       keyword_init: true
@@ -982,6 +1018,7 @@ module Aws::EKS
     #               cluster.</p>
     #   @return [String]
     class ConnectorConfigResponse < Struct.new(
+      nil,
       :activation_id,
       :activation_code,
       :activation_expiry,
@@ -1000,6 +1037,7 @@ module Aws::EKS
     #               can't be changed after cluster creation. </p>
     #   @return [String]
     class ControlPlanePlacementRequest < Struct.new(
+      nil,
       :group_name,
       keyword_init: true
     )
@@ -1012,6 +1050,7 @@ module Aws::EKS
     #   <p>The name of the placement group for the Kubernetes control plane instances.</p>
     #   @return [String]
     class ControlPlanePlacementResponse < Struct.new(
+      nil,
       :group_name,
       keyword_init: true
     )
@@ -1031,6 +1070,7 @@ module Aws::EKS
     #               <code>API_AND_CONFIG_MAP</code>.</p>
     #   @return [String]
     class CreateAccessConfigRequest < Struct.new(
+      nil,
       :bootstrap_cluster_creator_admin_permissions,
       :authentication_mode,
       keyword_init: true
@@ -1115,6 +1155,7 @@ module Aws::EKS
     #                   <code>AccessPolicy</code> to the access entry.</p>
     #   @return [String]
     class CreateAccessEntryRequest < Struct.new(
+      nil,
       :cluster_name,
       :principal_arn,
       :kubernetes_groups,
@@ -1135,6 +1176,7 @@ module Aws::EKS
     #                   entries</a> in the <i>Amazon EKS User Guide</i>.</p>
     #   @return [Types::AccessEntry]
     class CreateAccessEntryResponse < Struct.new(
+      nil,
       :access_entry,
       keyword_init: true
     )
@@ -1219,6 +1261,7 @@ module Aws::EKS
     #   <p>The namespace configuration for the addon. If specified, this will override the default namespace for the addon.</p>
     #   @return [Types::AddonNamespaceConfigRequest]
     class CreateAddonRequest < Struct.new(
+      nil,
       :cluster_name,
       :addon_name,
       :addon_version,
@@ -1239,6 +1282,7 @@ module Aws::EKS
     #               <i>Amazon EKS User Guide</i>.</p>
     #   @return [Types::Addon]
     class CreateAddonResponse < Struct.new(
+      nil,
       :addon,
       keyword_init: true
     )
@@ -1360,6 +1404,7 @@ module Aws::EKS
     #               accidental cluster deletion. Default value is <code>false</code>.</p>
     #   @return [Boolean]
     class CreateClusterRequest < Struct.new(
+      nil,
       :name,
       :version,
       :role_arn,
@@ -1387,6 +1432,7 @@ module Aws::EKS
     #   <p>The full description of your new cluster.</p>
     #   @return [Types::Cluster]
     class CreateClusterResponse < Struct.new(
+      nil,
       :cluster,
       keyword_init: true
     )
@@ -1428,6 +1474,7 @@ module Aws::EKS
     #               other resources associated with the subscription.</p>
     #   @return [Hash<String, String>]
     class CreateEksAnywhereSubscriptionRequest < Struct.new(
+      nil,
       :name,
       :term,
       :license_quantity,
@@ -1444,6 +1491,7 @@ module Aws::EKS
     #   <p>The full description of the subscription.</p>
     #   @return [Types::EksAnywhereSubscription]
     class CreateEksAnywhereSubscriptionResponse < Struct.new(
+      nil,
       :subscription,
       keyword_init: true
     )
@@ -1484,6 +1532,7 @@ module Aws::EKS
     #               propagate to any other cluster or Amazon Web Services resources.</p>
     #   @return [Hash<String, String>]
     class CreateFargateProfileRequest < Struct.new(
+      nil,
       :fargate_profile_name,
       :cluster_name,
       :pod_execution_role_arn,
@@ -1500,6 +1549,7 @@ module Aws::EKS
     #   <p>The full description of your new Fargate profile.</p>
     #   @return [Types::FargateProfile]
     class CreateFargateProfileResponse < Struct.new(
+      nil,
       :fargate_profile,
       keyword_init: true
     )
@@ -1626,6 +1676,7 @@ module Aws::EKS
     #               For more information about using launch templates with Amazon EKS, see <a href="https://docs.aws.amazon.com/eks/latest/userguide/launch-templates.html">Customizing managed nodes with launch templates</a> in the <i>Amazon EKS User Guide</i>.</p>
     #   @return [String]
     class CreateNodegroupRequest < Struct.new(
+      nil,
       :cluster_name,
       :nodegroup_name,
       :scaling_config,
@@ -1654,6 +1705,7 @@ module Aws::EKS
     #   <p>The full description of your new node group.</p>
     #   @return [Types::Nodegroup]
     class CreateNodegroupResponse < Struct.new(
+      nil,
       :nodegroup,
       keyword_init: true
     )
@@ -1748,6 +1800,7 @@ module Aws::EKS
     #               like S3 buckets in the target account.</p>
     #   @return [String]
     class CreatePodIdentityAssociationRequest < Struct.new(
+      nil,
       :cluster_name,
       :namespace,
       :service_account,
@@ -1767,6 +1820,7 @@ module Aws::EKS
     #               actions to manage the association.</p>
     #   @return [Types::PodIdentityAssociation]
     class CreatePodIdentityAssociationResponse < Struct.new(
+      nil,
       :association,
       keyword_init: true
     )
@@ -1780,6 +1834,7 @@ module Aws::EKS
     #   <p>The ARN of the IAM principal for the <code>AccessEntry</code>.</p>
     #   @return [String]
     class DeleteAccessEntryRequest < Struct.new(
+      nil,
       :cluster_name,
       :principal_arn,
       keyword_init: true
@@ -1788,6 +1843,7 @@ module Aws::EKS
     end
 
     class DeleteAccessEntryResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1807,6 +1863,7 @@ module Aws::EKS
     #               it isn't removed.</p>
     #   @return [Boolean]
     class DeleteAddonRequest < Struct.new(
+      nil,
       :cluster_name,
       :addon_name,
       :preserve,
@@ -1820,6 +1877,7 @@ module Aws::EKS
     #               <i>Amazon EKS User Guide</i>.</p>
     #   @return [Types::Addon]
     class DeleteAddonResponse < Struct.new(
+      nil,
       :addon,
       keyword_init: true
     )
@@ -1830,6 +1888,7 @@ module Aws::EKS
     #   <p>The name of the cluster to delete.</p>
     #   @return [String]
     class DeleteClusterRequest < Struct.new(
+      nil,
       :name,
       keyword_init: true
     )
@@ -1840,6 +1899,7 @@ module Aws::EKS
     #   <p>The full description of the cluster to delete.</p>
     #   @return [Types::Cluster]
     class DeleteClusterResponse < Struct.new(
+      nil,
       :cluster,
       keyword_init: true
     )
@@ -1850,6 +1910,7 @@ module Aws::EKS
     #   <p>The ID of the subscription.</p>
     #   @return [String]
     class DeleteEksAnywhereSubscriptionRequest < Struct.new(
+      nil,
       :id,
       keyword_init: true
     )
@@ -1860,6 +1921,7 @@ module Aws::EKS
     #   <p>The full description of the subscription to be deleted.</p>
     #   @return [Types::EksAnywhereSubscription]
     class DeleteEksAnywhereSubscriptionResponse < Struct.new(
+      nil,
       :subscription,
       keyword_init: true
     )
@@ -1873,6 +1935,7 @@ module Aws::EKS
     #   <p>The name of the Fargate profile to delete.</p>
     #   @return [String]
     class DeleteFargateProfileRequest < Struct.new(
+      nil,
       :cluster_name,
       :fargate_profile_name,
       keyword_init: true
@@ -1884,6 +1947,7 @@ module Aws::EKS
     #   <p>The deleted Fargate profile.</p>
     #   @return [Types::FargateProfile]
     class DeleteFargateProfileResponse < Struct.new(
+      nil,
       :fargate_profile,
       keyword_init: true
     )
@@ -1897,6 +1961,7 @@ module Aws::EKS
     #   <p>The name of the node group to delete.</p>
     #   @return [String]
     class DeleteNodegroupRequest < Struct.new(
+      nil,
       :cluster_name,
       :nodegroup_name,
       keyword_init: true
@@ -1908,6 +1973,7 @@ module Aws::EKS
     #   <p>The full description of your deleted node group.</p>
     #   @return [Types::Nodegroup]
     class DeleteNodegroupResponse < Struct.new(
+      nil,
       :nodegroup,
       keyword_init: true
     )
@@ -1921,6 +1987,7 @@ module Aws::EKS
     #   <p>The ID of the association to be deleted.</p>
     #   @return [String]
     class DeletePodIdentityAssociationRequest < Struct.new(
+      nil,
       :cluster_name,
       :association_id,
       keyword_init: true
@@ -1932,6 +1999,7 @@ module Aws::EKS
     #   <p>The full description of the EKS Pod Identity association that was deleted.</p>
     #   @return [Types::PodIdentityAssociation]
     class DeletePodIdentityAssociationResponse < Struct.new(
+      nil,
       :association,
       keyword_init: true
     )
@@ -1958,6 +2026,7 @@ module Aws::EKS
     #   <p>Details about Kubernetes clients using the deprecated resources.</p>
     #   @return [Array<Types::ClientStat>]
     class DeprecationDetail < Struct.new(
+      nil,
       :usage,
       :replaced_with,
       :stop_serving_version,
@@ -1972,6 +2041,7 @@ module Aws::EKS
     #   <p>The name of the connected cluster to deregister.</p>
     #   @return [String]
     class DeregisterClusterRequest < Struct.new(
+      nil,
       :name,
       keyword_init: true
     )
@@ -1982,6 +2052,7 @@ module Aws::EKS
     #   <p>An object representing an Amazon EKS cluster.</p>
     #   @return [Types::Cluster]
     class DeregisterClusterResponse < Struct.new(
+      nil,
       :cluster,
       keyword_init: true
     )
@@ -1995,6 +2066,7 @@ module Aws::EKS
     #   <p>The ARN of the IAM principal for the <code>AccessEntry</code>.</p>
     #   @return [String]
     class DescribeAccessEntryRequest < Struct.new(
+      nil,
       :cluster_name,
       :principal_arn,
       keyword_init: true
@@ -2006,6 +2078,7 @@ module Aws::EKS
     #   <p>Information about the access entry.</p>
     #   @return [Types::AccessEntry]
     class DescribeAccessEntryResponse < Struct.new(
+      nil,
       :access_entry,
       keyword_init: true
     )
@@ -2022,6 +2095,7 @@ module Aws::EKS
     #               </a>.</p>
     #   @return [String]
     class DescribeAddonConfigurationRequest < Struct.new(
+      nil,
       :addon_name,
       :addon_version,
       keyword_init: true
@@ -2046,6 +2120,7 @@ module Aws::EKS
     #               Use this information to create an IAM Role for the add-on.</p>
     #   @return [Array<Types::AddonPodIdentityConfiguration>]
     class DescribeAddonConfigurationResponse < Struct.new(
+      nil,
       :addon_name,
       :addon_version,
       :configuration_schema,
@@ -2064,6 +2139,7 @@ module Aws::EKS
     #               </a>.</p>
     #   @return [String]
     class DescribeAddonRequest < Struct.new(
+      nil,
       :cluster_name,
       :addon_name,
       keyword_init: true
@@ -2076,6 +2152,7 @@ module Aws::EKS
     #               <i>Amazon EKS User Guide</i>.</p>
     #   @return [Types::Addon]
     class DescribeAddonResponse < Struct.new(
+      nil,
       :addon,
       keyword_init: true
     )
@@ -2121,6 +2198,7 @@ module Aws::EKS
     #               property.</p>
     #   @return [Array<String>]
     class DescribeAddonVersionsRequest < Struct.new(
+      nil,
       :kubernetes_version,
       :max_results,
       :next_token,
@@ -2149,6 +2227,7 @@ module Aws::EKS
     #            </note>
     #   @return [String]
     class DescribeAddonVersionsResponse < Struct.new(
+      nil,
       :addons,
       :next_token,
       keyword_init: true
@@ -2160,6 +2239,7 @@ module Aws::EKS
     #   <p>The name of your cluster.</p>
     #   @return [String]
     class DescribeClusterRequest < Struct.new(
+      nil,
       :name,
       keyword_init: true
     )
@@ -2170,6 +2250,7 @@ module Aws::EKS
     #   <p>The full description of your specified cluster.</p>
     #   @return [Types::Cluster]
     class DescribeClusterResponse < Struct.new(
+      nil,
       :cluster,
       keyword_init: true
     )
@@ -2208,6 +2289,7 @@ module Aws::EKS
     #   <p>Filter versions by their current status.</p>
     #   @return [String]
     class DescribeClusterVersionsRequest < Struct.new(
+      nil,
       :cluster_type,
       :max_results,
       :next_token,
@@ -2228,6 +2310,7 @@ module Aws::EKS
     #   <p>List of cluster version information objects.</p>
     #   @return [Array<Types::ClusterVersionInformation>]
     class DescribeClusterVersionsResponse < Struct.new(
+      nil,
       :next_token,
       :cluster_versions,
       keyword_init: true
@@ -2239,6 +2322,7 @@ module Aws::EKS
     #   <p>The ID of the subscription.</p>
     #   @return [String]
     class DescribeEksAnywhereSubscriptionRequest < Struct.new(
+      nil,
       :id,
       keyword_init: true
     )
@@ -2249,6 +2333,7 @@ module Aws::EKS
     #   <p>The full description of the subscription.</p>
     #   @return [Types::EksAnywhereSubscription]
     class DescribeEksAnywhereSubscriptionResponse < Struct.new(
+      nil,
       :subscription,
       keyword_init: true
     )
@@ -2262,6 +2347,7 @@ module Aws::EKS
     #   <p>The name of the Fargate profile to describe.</p>
     #   @return [String]
     class DescribeFargateProfileRequest < Struct.new(
+      nil,
       :cluster_name,
       :fargate_profile_name,
       keyword_init: true
@@ -2273,6 +2359,7 @@ module Aws::EKS
     #   <p>The full description of your Fargate profile.</p>
     #   @return [Types::FargateProfile]
     class DescribeFargateProfileResponse < Struct.new(
+      nil,
       :fargate_profile,
       keyword_init: true
     )
@@ -2286,6 +2373,7 @@ module Aws::EKS
     #   <p>An object representing an identity provider configuration.</p>
     #   @return [Types::IdentityProviderConfig]
     class DescribeIdentityProviderConfigRequest < Struct.new(
+      nil,
       :cluster_name,
       :identity_provider_config,
       keyword_init: true
@@ -2298,6 +2386,7 @@ module Aws::EKS
     #               configuration.</p>
     #   @return [Types::IdentityProviderConfigResponse]
     class DescribeIdentityProviderConfigResponse < Struct.new(
+      nil,
       :identity_provider_config,
       keyword_init: true
     )
@@ -2311,6 +2400,7 @@ module Aws::EKS
     #   <p>The identity of the insight to describe.</p>
     #   @return [String]
     class DescribeInsightRequest < Struct.new(
+      nil,
       :cluster_name,
       :id,
       keyword_init: true
@@ -2322,6 +2412,7 @@ module Aws::EKS
     #   <p>The full description of the insight.</p>
     #   @return [Types::Insight]
     class DescribeInsightResponse < Struct.new(
+      nil,
       :insight,
       keyword_init: true
     )
@@ -2332,6 +2423,7 @@ module Aws::EKS
     #   <p>The name of the cluster associated with the insights refresh operation.</p>
     #   @return [String]
     class DescribeInsightsRefreshRequest < Struct.new(
+      nil,
       :cluster_name,
       keyword_init: true
     )
@@ -2351,6 +2443,7 @@ module Aws::EKS
     #   <p>The date and time when the insights refresh operation ended.</p>
     #   @return [Time]
     class DescribeInsightsRefreshResponse < Struct.new(
+      nil,
       :message,
       :status,
       :started_at,
@@ -2367,6 +2460,7 @@ module Aws::EKS
     #   <p>The name of the node group to describe.</p>
     #   @return [String]
     class DescribeNodegroupRequest < Struct.new(
+      nil,
       :cluster_name,
       :nodegroup_name,
       keyword_init: true
@@ -2378,6 +2472,7 @@ module Aws::EKS
     #   <p>The full description of your node group.</p>
     #   @return [Types::Nodegroup]
     class DescribeNodegroupResponse < Struct.new(
+      nil,
       :nodegroup,
       keyword_init: true
     )
@@ -2391,6 +2486,7 @@ module Aws::EKS
     #   <p>The ID of the association that you want the description of.</p>
     #   @return [String]
     class DescribePodIdentityAssociationRequest < Struct.new(
+      nil,
       :cluster_name,
       :association_id,
       keyword_init: true
@@ -2402,6 +2498,7 @@ module Aws::EKS
     #   <p>The full description of the EKS Pod Identity association.</p>
     #   @return [Types::PodIdentityAssociation]
     class DescribePodIdentityAssociationResponse < Struct.new(
+      nil,
       :association,
       keyword_init: true
     )
@@ -2425,6 +2522,7 @@ module Aws::EKS
     #               </a>. This parameter is required if the update is an add-on update.</p>
     #   @return [String]
     class DescribeUpdateRequest < Struct.new(
+      nil,
       :name,
       :update_id,
       :nodegroup_name,
@@ -2438,6 +2536,7 @@ module Aws::EKS
     #   <p>The full description of the specified update.</p>
     #   @return [Types::Update]
     class DescribeUpdateResponse < Struct.new(
+      nil,
       :update,
       keyword_init: true
     )
@@ -2455,6 +2554,7 @@ module Aws::EKS
     #               associated policies ARNs, use <code>ListAssociatedAccessPolicies</code>.</p>
     #   @return [String]
     class DisassociateAccessPolicyRequest < Struct.new(
+      nil,
       :cluster_name,
       :principal_arn,
       :policy_arn,
@@ -2464,6 +2564,7 @@ module Aws::EKS
     end
 
     class DisassociateAccessPolicyResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -2480,6 +2581,7 @@ module Aws::EKS
     #   the idempotency of the request.</p>
     #   @return [String]
     class DisassociateIdentityProviderConfigRequest < Struct.new(
+      nil,
       :cluster_name,
       :identity_provider_config,
       :client_request_token,
@@ -2492,6 +2594,7 @@ module Aws::EKS
     #   <p>An object representing an asynchronous update.</p>
     #   @return [Types::Update]
     class DisassociateIdentityProviderConfigResponse < Struct.new(
+      nil,
       :update,
       keyword_init: true
     )
@@ -2548,6 +2651,7 @@ module Aws::EKS
     #               other resources associated with the subscription.</p>
     #   @return [Hash<String, String>]
     class EksAnywhereSubscription < Struct.new(
+      nil,
       :id,
       :arn,
       :created_at,
@@ -2583,6 +2687,7 @@ module Aws::EKS
     #   <p>The term unit of the subscription. Valid value is <code>MONTHS</code>.</p>
     #   @return [String]
     class EksAnywhereSubscriptionTerm < Struct.new(
+      nil,
       :duration,
       :unit,
       keyword_init: true
@@ -2604,6 +2709,7 @@ module Aws::EKS
     #               balancers in your Amazon Web Services account.</p>
     #   @return [Boolean]
     class ElasticLoadBalancing < Struct.new(
+      nil,
       :enabled,
       keyword_init: true
     )
@@ -2619,6 +2725,7 @@ module Aws::EKS
     #   <p>Key Management Service (KMS) key. Either the ARN or the alias can be used.</p>
     #   @return [Types::Provider]
     class EncryptionConfig < Struct.new(
+      nil,
       :resources,
       :provider,
       keyword_init: true
@@ -2675,6 +2782,7 @@ module Aws::EKS
     #   <p>An optional field that contains the resource IDs associated with the error.</p>
     #   @return [Array<String>]
     class ErrorDetail < Struct.new(
+      nil,
       :error_code,
       :error_message,
       :resource_ids,
@@ -2720,6 +2828,7 @@ module Aws::EKS
     #               profile's health, they are listed here.</p>
     #   @return [Types::FargateProfileHealth]
     class FargateProfile < Struct.new(
+      nil,
       :fargate_profile_name,
       :fargate_profile_arn,
       :cluster_name,
@@ -2741,6 +2850,7 @@ module Aws::EKS
     #   <p>Any issues that are associated with the Fargate profile.</p>
     #   @return [Array<Types::FargateProfileIssue>]
     class FargateProfileHealth < Struct.new(
+      nil,
       :issues,
       keyword_init: true
     )
@@ -2758,6 +2868,7 @@ module Aws::EKS
     #   <p>The Amazon Web Services resources that are affected by this issue.</p>
     #   @return [Array<String>]
     class FargateProfileIssue < Struct.new(
+      nil,
       :code,
       :message,
       :resource_ids,
@@ -2775,6 +2886,7 @@ module Aws::EKS
     #               that are specified in the selector for it to be considered a match.</p>
     #   @return [Hash<String, String>]
     class FargateProfileSelector < Struct.new(
+      nil,
       :namespace,
       :labels,
       keyword_init: true
@@ -2788,6 +2900,7 @@ module Aws::EKS
     #               identity provider information.</p>
     #   @return [Types::OIDC]
     class Identity < Struct.new(
+      nil,
       :oidc,
       keyword_init: true
     )
@@ -2803,6 +2916,7 @@ module Aws::EKS
     #   <p>The name of the identity provider configuration.</p>
     #   @return [String]
     class IdentityProviderConfig < Struct.new(
+      nil,
       :type,
       :name,
       keyword_init: true
@@ -2815,6 +2929,7 @@ module Aws::EKS
     #   <p>An object representing an OpenID Connect (OIDC) identity provider configuration.</p>
     #   @return [Types::OidcIdentityProviderConfig]
     class IdentityProviderConfigResponse < Struct.new(
+      nil,
       :oidc,
       keyword_init: true
     )
@@ -2863,6 +2978,7 @@ module Aws::EKS
     #               returned with certain insights having category <code>UPGRADE_READINESS</code>.</p>
     #   @return [Types::InsightCategorySpecificSummary]
     class Insight < Struct.new(
+      nil,
       :id,
       :name,
       :category,
@@ -2890,6 +3006,7 @@ module Aws::EKS
     #   <p>A list of <code>AddonCompatibilityDetail</code> objects for Amazon EKS add-ons.</p>
     #   @return [Array<Types::AddonCompatibilityDetail>]
     class InsightCategorySpecificSummary < Struct.new(
+      nil,
       :deprecation_details,
       :addon_compatibility_details,
       keyword_init: true
@@ -2908,6 +3025,7 @@ module Aws::EKS
     #   <p>The Amazon Resource Name (ARN) if applicable.</p>
     #   @return [String]
     class InsightResourceDetail < Struct.new(
+      nil,
       :insight_status,
       :kubernetes_resource_uri,
       :arn,
@@ -2924,6 +3042,7 @@ module Aws::EKS
     #   <p>Explanation on the reasoning for the status of the resource. </p>
     #   @return [String]
     class InsightStatus < Struct.new(
+      nil,
       :status,
       :reason,
       keyword_init: true
@@ -2959,6 +3078,7 @@ module Aws::EKS
     #   <p>An object containing more detail on the status of the insight.</p>
     #   @return [Types::InsightStatus]
     class InsightSummary < Struct.new(
+      nil,
       :id,
       :name,
       :category,
@@ -2996,6 +3116,7 @@ module Aws::EKS
     #   <p>The statuses to use to filter the insights. </p>
     #   @return [Array<String>]
     class InsightsFilter < Struct.new(
+      nil,
       :categories,
       :kubernetes_versions,
       :statuses,
@@ -3027,6 +3148,7 @@ module Aws::EKS
     #               request.</p>
     #   @return [String]
     class InvalidParameterException < Struct.new(
+      nil,
       :cluster_name,
       :nodegroup_name,
       :fargate_profile_name,
@@ -3057,6 +3179,7 @@ module Aws::EKS
     #   <p>The Amazon EKS add-on name associated with the exception.</p>
     #   @return [String]
     class InvalidRequestException < Struct.new(
+      nil,
       :cluster_name,
       :nodegroup_name,
       :addon_name,
@@ -3080,6 +3203,7 @@ module Aws::EKS
     # @!attribute message
     #   @return [String]
     class InvalidStateException < Struct.new(
+      nil,
       :cluster_name,
       :message,
       keyword_init: true
@@ -3202,6 +3326,7 @@ module Aws::EKS
     #   <p>The Amazon Web Services resources that are afflicted by this issue.</p>
     #   @return [Array<String>]
     class Issue < Struct.new(
+      nil,
       :code,
       :message,
       :resource_ids,
@@ -3259,6 +3384,7 @@ module Aws::EKS
     #               <i>Amazon EKS User Guide</i>.</p>
     #   @return [Types::ElasticLoadBalancing]
     class KubernetesNetworkConfigRequest < Struct.new(
+      nil,
       :service_ipv4_cidr,
       :ip_family,
       :elastic_load_balancing,
@@ -3298,6 +3424,7 @@ module Aws::EKS
     #               Mode cluster. For example, if the capability is enabled or disabled.</p>
     #   @return [Types::ElasticLoadBalancing]
     class KubernetesNetworkConfigResponse < Struct.new(
+      nil,
       :service_ipv4_cidr,
       :service_ipv6_cidr,
       :ip_family,
@@ -3342,6 +3469,7 @@ module Aws::EKS
     #               request, but not both. After node group creation, you cannot use a different ID.</p>
     #   @return [String]
     class LaunchTemplateSpecification < Struct.new(
+      nil,
       :name,
       :version,
       :id,
@@ -3358,6 +3486,7 @@ module Aws::EKS
     #   <p>An optional license token that can be used for extended support verification.</p>
     #   @return [String]
     class License < Struct.new(
+      nil,
       :id,
       :token,
       keyword_init: true
@@ -3392,6 +3521,7 @@ module Aws::EKS
     #            </note>
     #   @return [String]
     class ListAccessEntriesRequest < Struct.new(
+      nil,
       :cluster_name,
       :associated_policy_arn,
       :max_results,
@@ -3414,6 +3544,7 @@ module Aws::EKS
     #            </note>
     #   @return [String]
     class ListAccessEntriesResponse < Struct.new(
+      nil,
       :access_entries,
       :next_token,
       keyword_init: true
@@ -3440,6 +3571,7 @@ module Aws::EKS
     #            </note>
     #   @return [String]
     class ListAccessPoliciesRequest < Struct.new(
+      nil,
       :max_results,
       :next_token,
       keyword_init: true
@@ -3462,6 +3594,7 @@ module Aws::EKS
     #            </note>
     #   @return [String]
     class ListAccessPoliciesResponse < Struct.new(
+      nil,
       :access_policies,
       :next_token,
       keyword_init: true
@@ -3491,6 +3624,7 @@ module Aws::EKS
     #            </note>
     #   @return [String]
     class ListAddonsRequest < Struct.new(
+      nil,
       :cluster_name,
       :max_results,
       :next_token,
@@ -3514,6 +3648,7 @@ module Aws::EKS
     #            </note>
     #   @return [String]
     class ListAddonsResponse < Struct.new(
+      nil,
       :addons,
       :next_token,
       keyword_init: true
@@ -3546,6 +3681,7 @@ module Aws::EKS
     #            </note>
     #   @return [String]
     class ListAssociatedAccessPoliciesRequest < Struct.new(
+      nil,
       :cluster_name,
       :principal_arn,
       :max_results,
@@ -3574,6 +3710,7 @@ module Aws::EKS
     #   <p>The list of access policies associated with the access entry.</p>
     #   @return [Array<Types::AssociatedAccessPolicy>]
     class ListAssociatedAccessPoliciesResponse < Struct.new(
+      nil,
       :cluster_name,
       :principal_arn,
       :next_token,
@@ -3608,6 +3745,7 @@ module Aws::EKS
     #               occurs.</p>
     #   @return [Array<String>]
     class ListClustersRequest < Struct.new(
+      nil,
       :max_results,
       :next_token,
       :include,
@@ -3629,6 +3767,7 @@ module Aws::EKS
     #            </note>
     #   @return [String]
     class ListClustersResponse < Struct.new(
+      nil,
       :clusters,
       :next_token,
       keyword_init: true
@@ -3655,6 +3794,7 @@ module Aws::EKS
     #   <p>An array of subscription statuses to filter on.</p>
     #   @return [Array<String>]
     class ListEksAnywhereSubscriptionsRequest < Struct.new(
+      nil,
       :max_results,
       :next_token,
       :include_status,
@@ -3674,6 +3814,7 @@ module Aws::EKS
     #               more results to return.</p>
     #   @return [String]
     class ListEksAnywhereSubscriptionsResponse < Struct.new(
+      nil,
       :subscriptions,
       :next_token,
       keyword_init: true
@@ -3703,6 +3844,7 @@ module Aws::EKS
     #            </note>
     #   @return [String]
     class ListFargateProfilesRequest < Struct.new(
+      nil,
       :cluster_name,
       :max_results,
       :next_token,
@@ -3724,6 +3866,7 @@ module Aws::EKS
     #            </note>
     #   @return [String]
     class ListFargateProfilesResponse < Struct.new(
+      nil,
       :fargate_profile_names,
       :next_token,
       keyword_init: true
@@ -3753,6 +3896,7 @@ module Aws::EKS
     #            </note>
     #   @return [String]
     class ListIdentityProviderConfigsRequest < Struct.new(
+      nil,
       :cluster_name,
       :max_results,
       :next_token,
@@ -3777,6 +3921,7 @@ module Aws::EKS
     #            </note>
     #   @return [String]
     class ListIdentityProviderConfigsResponse < Struct.new(
+      nil,
       :identity_provider_configs,
       :next_token,
       keyword_init: true
@@ -3810,6 +3955,7 @@ module Aws::EKS
     #               return.</p>
     #   @return [String]
     class ListInsightsRequest < Struct.new(
+      nil,
       :cluster_name,
       :filter,
       :max_results,
@@ -3830,6 +3976,7 @@ module Aws::EKS
     #               return.</p>
     #   @return [String]
     class ListInsightsResponse < Struct.new(
+      nil,
       :insights,
       :next_token,
       keyword_init: true
@@ -3859,6 +4006,7 @@ module Aws::EKS
     #            </note>
     #   @return [String]
     class ListNodegroupsRequest < Struct.new(
+      nil,
       :cluster_name,
       :max_results,
       :next_token,
@@ -3880,6 +4028,7 @@ module Aws::EKS
     #            </note>
     #   @return [String]
     class ListNodegroupsResponse < Struct.new(
+      nil,
       :nodegroups,
       :next_token,
       keyword_init: true
@@ -3919,6 +4068,7 @@ module Aws::EKS
     #            </note>
     #   @return [String]
     class ListPodIdentityAssociationsRequest < Struct.new(
+      nil,
       :cluster_name,
       :namespace,
       :service_account,
@@ -3966,6 +4116,7 @@ module Aws::EKS
     #            </note>
     #   @return [String]
     class ListPodIdentityAssociationsResponse < Struct.new(
+      nil,
       :associations,
       :next_token,
       keyword_init: true
@@ -3977,6 +4128,7 @@ module Aws::EKS
     #   <p>The Amazon Resource Name (ARN) that identifies the resource to list tags for.</p>
     #   @return [String]
     class ListTagsForResourceRequest < Struct.new(
+      nil,
       :resource_arn,
       keyword_init: true
     )
@@ -3987,6 +4139,7 @@ module Aws::EKS
     #   <p>The tags for the resource.</p>
     #   @return [Hash<String, String>]
     class ListTagsForResourceResponse < Struct.new(
+      nil,
       :tags,
       keyword_init: true
     )
@@ -4021,6 +4174,7 @@ module Aws::EKS
     #               returned.</p>
     #   @return [Integer]
     class ListUpdatesRequest < Struct.new(
+      nil,
       :name,
       :nodegroup_name,
       :addon_name,
@@ -4044,6 +4198,7 @@ module Aws::EKS
     #            </note>
     #   @return [String]
     class ListUpdatesResponse < Struct.new(
+      nil,
       :update_ids,
       :next_token,
       keyword_init: true
@@ -4062,6 +4217,7 @@ module Aws::EKS
     #               individual log type can be enabled or disabled independently.</p>
     #   @return [Boolean]
     class LogSetup < Struct.new(
+      nil,
       :types,
       :enabled,
       keyword_init: true
@@ -4074,6 +4230,7 @@ module Aws::EKS
     #   <p>The cluster control plane logging configuration for your cluster.</p>
     #   @return [Array<Types::LogSetup>]
     class Logging < Struct.new(
+      nil,
       :cluster_logging,
       keyword_init: true
     )
@@ -4088,6 +4245,7 @@ module Aws::EKS
     #   <p>The product URL from the Amazon Web Services Marketplace.</p>
     #   @return [String]
     class MarketplaceInformation < Struct.new(
+      nil,
       :product_id,
       :product_url,
       keyword_init: true
@@ -4128,6 +4286,7 @@ module Aws::EKS
     #               If you use this, you must specify all the values.</p>
     #   @return [Array<Types::NodeRepairConfigOverrides>]
     class NodeRepairConfig < Struct.new(
+      nil,
       :enabled,
       :max_unhealthy_node_threshold_count,
       :max_unhealthy_node_threshold_percentage,
@@ -4160,6 +4319,7 @@ module Aws::EKS
     #               met.</p>
     #   @return [String]
     class NodeRepairConfigOverrides < Struct.new(
+      nil,
       :node_monitoring_condition,
       :node_unhealthy_reason,
       :min_repair_wait_time_mins,
@@ -4270,6 +4430,7 @@ module Aws::EKS
     #               propagate to any other cluster or Amazon Web Services resources.</p>
     #   @return [Hash<String, String>]
     class Nodegroup < Struct.new(
+      nil,
       :nodegroup_name,
       :nodegroup_arn,
       :cluster_name,
@@ -4304,6 +4465,7 @@ module Aws::EKS
     #   <p>Any issues that are associated with the node group. </p>
     #   @return [Array<Types::Issue>]
     class NodegroupHealth < Struct.new(
+      nil,
       :issues,
       keyword_init: true
     )
@@ -4320,6 +4482,7 @@ module Aws::EKS
     #               controls SSH access to the nodes.</p>
     #   @return [String]
     class NodegroupResources < Struct.new(
+      nil,
       :auto_scaling_groups,
       :remote_access_security_group,
       keyword_init: true
@@ -4363,6 +4526,7 @@ module Aws::EKS
     #               node group lower than <code>minSize</code> or higher than <code>maxSize</code>.</p>
     #   @return [Integer]
     class NodegroupScalingConfig < Struct.new(
+      nil,
       :min_size,
       :max_size,
       :desired_size,
@@ -4401,6 +4565,7 @@ module Aws::EKS
     #               with hardware accelerators such as GPUs).</p>
     #   @return [String]
     class NodegroupUpdateConfig < Struct.new(
+      nil,
       :max_unavailable,
       :max_unavailable_percentage,
       :update_strategy,
@@ -4416,6 +4581,7 @@ module Aws::EKS
     #               retry such requests.</p>
     #   @return [String]
     class NotFoundException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -4428,6 +4594,7 @@ module Aws::EKS
     #   <p>The issuer URL for the OIDC identity provider.</p>
     #   @return [String]
     class OIDC < Struct.new(
+      nil,
       :issuer,
       keyword_init: true
     )
@@ -4484,6 +4651,7 @@ module Aws::EKS
     #   <p>The status of the OIDC identity provider.</p>
     #   @return [String]
     class OidcIdentityProviderConfig < Struct.new(
+      nil,
       :identity_provider_config_name,
       :identity_provider_config_arn,
       :cluster_name,
@@ -4551,6 +4719,7 @@ module Aws::EKS
     #               <i>Amazon EKS User Guide</i>.</p>
     #   @return [Hash<String, String>]
     class OidcIdentityProviderConfigRequest < Struct.new(
+      nil,
       :identity_provider_config_name,
       :issuer_url,
       :client_id,
@@ -4587,6 +4756,7 @@ module Aws::EKS
     #               of your local Amazon EKS cluster on an Amazon Web Services Outpost. For more information, see <a href="https://docs.aws.amazon.com/eks/latest/userguide/eks-outposts-capacity-considerations.html">Capacity considerations</a> in the <i>Amazon EKS User Guide</i>.</p>
     #   @return [Types::ControlPlanePlacementRequest]
     class OutpostConfigRequest < Struct.new(
+      nil,
       :outpost_arns,
       :control_plane_instance_type,
       :control_plane_placement,
@@ -4611,6 +4781,7 @@ module Aws::EKS
     #                   considerations</a> in the <i>Amazon EKS User Guide</i>.</p>
     #   @return [Types::ControlPlanePlacementResponse]
     class OutpostConfigResponse < Struct.new(
+      nil,
       :outpost_arns,
       :control_plane_instance_type,
       :control_plane_placement,
@@ -4715,6 +4886,7 @@ module Aws::EKS
     #               <code>sts:AssumeRole</code> access from each role.</p>
     #   @return [String]
     class PodIdentityAssociation < Struct.new(
+      nil,
       :cluster_name,
       :namespace,
       :service_account,
@@ -4777,6 +4949,7 @@ module Aws::EKS
     #   <p>If defined, the association is owned by an Amazon EKS add-on.</p>
     #   @return [String]
     class PodIdentityAssociationSummary < Struct.new(
+      nil,
       :cluster_name,
       :namespace,
       :service_account,
@@ -4798,6 +4971,7 @@ module Aws::EKS
     #                   Developer Guide</i>.</p>
     #   @return [String]
     class Provider < Struct.new(
+      nil,
       :key_arn,
       keyword_init: true
     )
@@ -4821,6 +4995,7 @@ module Aws::EKS
     #               propagate to any other cluster or Amazon Web Services resources.</p>
     #   @return [Hash<String, String>]
     class RegisterClusterRequest < Struct.new(
+      nil,
       :name,
       :connector_config,
       :client_request_token,
@@ -4834,6 +5009,7 @@ module Aws::EKS
     #   <p>An object representing an Amazon EKS cluster.</p>
     #   @return [Types::Cluster]
     class RegisterClusterResponse < Struct.new(
+      nil,
       :cluster,
       keyword_init: true
     )
@@ -4857,6 +5033,7 @@ module Aws::EKS
     #                   Groups for Your VPC</a> in the <i>Amazon Virtual Private Cloud User Guide</i>.</p>
     #   @return [Array<String>]
     class RemoteAccessConfig < Struct.new(
+      nil,
       :ec2_ssh_key,
       :source_security_groups,
       keyword_init: true
@@ -4925,6 +5102,7 @@ module Aws::EKS
     #            </ul>
     #   @return [Array<Types::RemotePodNetwork>]
     class RemoteNetworkConfigRequest < Struct.new(
+      nil,
       :remote_node_networks,
       :remote_pod_networks,
       keyword_init: true
@@ -4942,6 +5120,7 @@ module Aws::EKS
     #               nodes.</p>
     #   @return [Array<Types::RemotePodNetwork>]
     class RemoteNetworkConfigResponse < Struct.new(
+      nil,
       :remote_node_networks,
       :remote_pod_networks,
       keyword_init: true
@@ -5022,6 +5201,7 @@ module Aws::EKS
     #            </ul>
     #   @return [Array<String>]
     class RemoteNodeNetwork < Struct.new(
+      nil,
       :cidrs,
       keyword_init: true
     )
@@ -5067,6 +5247,7 @@ module Aws::EKS
     #            </ul>
     #   @return [Array<String>]
     class RemotePodNetwork < Struct.new(
+      nil,
       :cidrs,
       keyword_init: true
     )
@@ -5087,6 +5268,7 @@ module Aws::EKS
     #   <p>The Amazon EKS message associated with the exception.</p>
     #   @return [String]
     class ResourceInUseException < Struct.new(
+      nil,
       :cluster_name,
       :nodegroup_name,
       :addon_name,
@@ -5110,6 +5292,7 @@ module Aws::EKS
     #   <p>The Amazon EKS message associated with the exception.</p>
     #   @return [String]
     class ResourceLimitExceededException < Struct.new(
+      nil,
       :cluster_name,
       :nodegroup_name,
       :subscription_id,
@@ -5142,6 +5325,7 @@ module Aws::EKS
     #   <p>The Amazon EKS message associated with the exception.</p>
     #   @return [String]
     class ResourceNotFoundException < Struct.new(
+      nil,
       :cluster_name,
       :nodegroup_name,
       :fargate_profile_name,
@@ -5160,6 +5344,7 @@ module Aws::EKS
     #               propagating. Retry later.</p>
     #   @return [String]
     class ResourcePropagationDelayException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -5183,6 +5368,7 @@ module Aws::EKS
     #   <p>These errors are usually caused by a server-side issue.</p>
     #   @return [String]
     class ServerException < Struct.new(
+      nil,
       :cluster_name,
       :nodegroup_name,
       :addon_name,
@@ -5198,6 +5384,7 @@ module Aws::EKS
     #   <p>The request has failed due to a temporary failure of the server.</p>
     #   @return [String]
     class ServiceUnavailableException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -5208,6 +5395,7 @@ module Aws::EKS
     #   <p>The name of the cluster for the refresh insights operation.</p>
     #   @return [String]
     class StartInsightsRefreshRequest < Struct.new(
+      nil,
       :cluster_name,
       keyword_init: true
     )
@@ -5221,6 +5409,7 @@ module Aws::EKS
     #   <p>The current status of the insights refresh operation.</p>
     #   @return [String]
     class StartInsightsRefreshResponse < Struct.new(
+      nil,
       :message,
       :status,
       keyword_init: true
@@ -5235,6 +5424,7 @@ module Aws::EKS
     #   <p>Request to configure EBS Block Storage settings for your EKS Auto Mode cluster.</p>
     #   @return [Types::BlockStorage]
     class StorageConfigRequest < Struct.new(
+      nil,
       :block_storage,
       keyword_init: true
     )
@@ -5248,6 +5438,7 @@ module Aws::EKS
     #               Mode cluster. For example, if the capability is enabled or disabled.</p>
     #   @return [Types::BlockStorage]
     class StorageConfigResponse < Struct.new(
+      nil,
       :block_storage,
       keyword_init: true
     )
@@ -5263,6 +5454,7 @@ module Aws::EKS
     #               propagate to any other cluster or Amazon Web Services resources.</p>
     #   @return [Hash<String, String>]
     class TagResourceRequest < Struct.new(
+      nil,
       :resource_arn,
       :tags,
       keyword_init: true
@@ -5271,6 +5463,7 @@ module Aws::EKS
     end
 
     class TagResourceResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -5289,6 +5482,7 @@ module Aws::EKS
     #   <p>The effect of the taint.</p>
     #   @return [String]
     class Taint < Struct.new(
+      nil,
       :key,
       :value,
       :effect,
@@ -5305,6 +5499,7 @@ module Aws::EKS
     # @!attribute message
     #   @return [String]
     class ThrottlingException < Struct.new(
+      nil,
       :cluster_name,
       :message,
       keyword_init: true
@@ -5331,6 +5526,7 @@ module Aws::EKS
     #               cluster.</p>
     #   @return [Array<String>]
     class UnsupportedAvailabilityZoneException < Struct.new(
+      nil,
       :message,
       :cluster_name,
       :nodegroup_name,
@@ -5347,6 +5543,7 @@ module Aws::EKS
     #   <p>The keys of the tags to remove.</p>
     #   @return [Array<String>]
     class UntagResourceRequest < Struct.new(
+      nil,
       :resource_arn,
       :tag_keys,
       keyword_init: true
@@ -5355,6 +5552,7 @@ module Aws::EKS
     end
 
     class UntagResourceResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -5380,6 +5578,7 @@ module Aws::EKS
     #   <p>Any errors associated with a <code>Failed</code> update.</p>
     #   @return [Array<Types::ErrorDetail>]
     class Update < Struct.new(
+      nil,
       :id,
       :status,
       :type,
@@ -5396,6 +5595,7 @@ module Aws::EKS
     #   <p>The desired authentication mode for the cluster.</p>
     #   @return [String]
     class UpdateAccessConfigRequest < Struct.new(
+      nil,
       :authentication_mode,
       keyword_init: true
     )
@@ -5440,6 +5640,7 @@ module Aws::EKS
     #                   access entries</a> in the <i>Amazon EKS User Guide</i>.</p>
     #   @return [String]
     class UpdateAccessEntryRequest < Struct.new(
+      nil,
       :cluster_name,
       :principal_arn,
       :kubernetes_groups,
@@ -5454,6 +5655,7 @@ module Aws::EKS
     #   <p>The ARN of the IAM principal for the <code>AccessEntry</code>.</p>
     #   @return [Types::AccessEntry]
     class UpdateAccessEntryResponse < Struct.new(
+      nil,
       :access_entry,
       keyword_init: true
     )
@@ -5525,6 +5727,7 @@ module Aws::EKS
     #                   using EKS Pod Identity</a> in the <i>Amazon EKS User Guide</i>.</p>
     #   @return [Array<Types::AddonPodIdentityAssociations>]
     class UpdateAddonRequest < Struct.new(
+      nil,
       :cluster_name,
       :addon_name,
       :addon_version,
@@ -5542,6 +5745,7 @@ module Aws::EKS
     #   <p>An object representing an asynchronous update.</p>
     #   @return [Types::Update]
     class UpdateAddonResponse < Struct.new(
+      nil,
       :update,
       keyword_init: true
     )
@@ -5619,6 +5823,7 @@ module Aws::EKS
     #               normally.</p>
     #   @return [Boolean]
     class UpdateClusterConfigRequest < Struct.new(
+      nil,
       :name,
       :resources_vpc_config,
       :logging,
@@ -5640,6 +5845,7 @@ module Aws::EKS
     #   <p>An object representing an asynchronous update.</p>
     #   @return [Types::Update]
     class UpdateClusterConfigResponse < Struct.new(
+      nil,
       :update,
       keyword_init: true
     )
@@ -5661,6 +5867,7 @@ module Aws::EKS
     #               updating a cluster.</p>
     #   @return [Boolean]
     class UpdateClusterVersionRequest < Struct.new(
+      nil,
       :name,
       :version,
       :client_request_token,
@@ -5674,6 +5881,7 @@ module Aws::EKS
     #   <p>The full description of the specified update</p>
     #   @return [Types::Update]
     class UpdateClusterVersionResponse < Struct.new(
+      nil,
       :update,
       keyword_init: true
     )
@@ -5690,6 +5898,7 @@ module Aws::EKS
     #   <p>Unique, case-sensitive identifier to ensure the idempotency of the request.</p>
     #   @return [String]
     class UpdateEksAnywhereSubscriptionRequest < Struct.new(
+      nil,
       :id,
       :auto_renew,
       :client_request_token,
@@ -5702,6 +5911,7 @@ module Aws::EKS
     #   <p>The full description of the updated subscription.</p>
     #   @return [Types::EksAnywhereSubscription]
     class UpdateEksAnywhereSubscriptionResponse < Struct.new(
+      nil,
       :subscription,
       keyword_init: true
     )
@@ -5717,6 +5927,7 @@ module Aws::EKS
     #   <p>The Kubernetes <code>labels</code> to remove.</p>
     #   @return [Array<String>]
     class UpdateLabelsPayload < Struct.new(
+      nil,
       :add_or_update_labels,
       :remove_labels,
       keyword_init: true
@@ -5753,6 +5964,7 @@ module Aws::EKS
     #   the idempotency of the request.</p>
     #   @return [String]
     class UpdateNodegroupConfigRequest < Struct.new(
+      nil,
       :cluster_name,
       :nodegroup_name,
       :labels,
@@ -5770,6 +5982,7 @@ module Aws::EKS
     #   <p>An object representing an asynchronous update.</p>
     #   @return [Types::Update]
     class UpdateNodegroupConfigResponse < Struct.new(
+      nil,
       :update,
       keyword_init: true
     )
@@ -5817,6 +6030,7 @@ module Aws::EKS
     #   the idempotency of the request.</p>
     #   @return [String]
     class UpdateNodegroupVersionRequest < Struct.new(
+      nil,
       :cluster_name,
       :nodegroup_name,
       :version,
@@ -5833,6 +6047,7 @@ module Aws::EKS
     #   <p>An object representing an asynchronous update.</p>
     #   @return [Types::Update]
     class UpdateNodegroupVersionResponse < Struct.new(
+      nil,
       :update,
       keyword_init: true
     )
@@ -5847,6 +6062,7 @@ module Aws::EKS
     #   <p>The value of the keys submitted as part of an update request.</p>
     #   @return [String]
     class UpdateParam < Struct.new(
+      nil,
       :type,
       :value,
       keyword_init: true
@@ -5896,6 +6112,7 @@ module Aws::EKS
     #               to securely access resources like S3 buckets in the target account.</p>
     #   @return [String]
     class UpdatePodIdentityAssociationRequest < Struct.new(
+      nil,
       :cluster_name,
       :association_id,
       :role_arn,
@@ -5911,6 +6128,7 @@ module Aws::EKS
     #   <p>The full description of the association that was updated.</p>
     #   @return [Types::PodIdentityAssociation]
     class UpdatePodIdentityAssociationResponse < Struct.new(
+      nil,
       :association,
       keyword_init: true
     )
@@ -5927,6 +6145,7 @@ module Aws::EKS
     #   <p>Kubernetes taints to remove.</p>
     #   @return [Array<Types::Taint>]
     class UpdateTaintsPayload < Struct.new(
+      nil,
       :add_or_update_taints,
       :remove_taints,
       keyword_init: true
@@ -5950,6 +6169,7 @@ module Aws::EKS
     #            </p>
     #   @return [String]
     class UpgradePolicyRequest < Struct.new(
+      nil,
       :support_type,
       keyword_init: true
     )
@@ -5970,6 +6190,7 @@ module Aws::EKS
     #            </p>
     #   @return [String]
     class UpgradePolicyResponse < Struct.new(
+      nil,
       :support_type,
       keyword_init: true
     )
@@ -6031,6 +6252,7 @@ module Aws::EKS
     #               October 2024.</p>
     #   @return [Array<String>]
     class VpcConfigRequest < Struct.new(
+      nil,
       :subnet_ids,
       :security_group_ids,
       :endpoint_public_access,
@@ -6087,6 +6309,7 @@ module Aws::EKS
     #               October 2024.</p>
     #   @return [Array<String>]
     class VpcConfigResponse < Struct.new(
+      nil,
       :subnet_ids,
       :security_group_ids,
       :cluster_security_group_id,
@@ -6110,6 +6333,7 @@ module Aws::EKS
     #   <p>If zonal shift is enabled, Amazon Web Services configures zonal autoshift for the cluster.</p>
     #   @return [Boolean]
     class ZonalShiftConfigRequest < Struct.new(
+      nil,
       :enabled,
       keyword_init: true
     )
@@ -6121,6 +6345,7 @@ module Aws::EKS
     #   <p>Whether the zonal shift is enabled.</p>
     #   @return [Boolean]
     class ZonalShiftConfigResponse < Struct.new(
+      nil,
       :enabled,
       keyword_init: true
     )

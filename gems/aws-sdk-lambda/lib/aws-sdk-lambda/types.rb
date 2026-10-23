@@ -23,6 +23,7 @@ module Aws::Lambda
     #   <p>The maximum number of simultaneous function executions, minus the capacity that's reserved for individual functions with <a>PutFunctionConcurrency</a>.</p>
     #   @return [Integer]
     class AccountLimit < Struct.new(
+      nil,
       :total_code_size,
       :code_size_unzipped,
       :code_size_zipped,
@@ -49,6 +50,7 @@ module Aws::Lambda
     #   <p>The number of Lambda functions.</p>
     #   @return [Integer]
     class AccountUsage < Struct.new(
+      nil,
       :total_code_size,
       :function_count,
       keyword_init: true
@@ -84,6 +86,7 @@ module Aws::Lambda
     #   <p>Only update the policy if the revision ID matches the ID specified. Use this option to avoid modifying a policy that has changed since you last read it.</p>
     #   @return [String]
     class AddLayerVersionPermissionRequest < Struct.new(
+      nil,
       :layer_name,
       :version_number,
       :statement_id,
@@ -103,6 +106,7 @@ module Aws::Lambda
     #   <p>A unique identifier for the current revision of the policy.</p>
     #   @return [String]
     class AddLayerVersionPermissionResponse < Struct.new(
+      nil,
       :statement,
       :revision_id,
       keyword_init: true
@@ -144,6 +148,7 @@ module Aws::Lambda
     #   <p>The type of authentication that your function URL uses. Set to <code>AWS_IAM</code> if you want to restrict access to authenticated users only. Set to <code>NONE</code> if you want to bypass IAM authentication to create a public endpoint. For more information, see <a href="https://docs.aws.amazon.com/lambda/latest/dg/urls-auth.html">Security and auth model for Lambda function URLs</a>.</p>
     #   @return [String]
     class AddPermissionRequest < Struct.new(
+      nil,
       :function_name,
       :statement_id,
       :action,
@@ -164,6 +169,7 @@ module Aws::Lambda
     #   <p>The permission statement that's added to the function policy.</p>
     #   @return [String]
     class AddPermissionResponse < Struct.new(
+      nil,
       :statement,
       keyword_init: true
     )
@@ -190,6 +196,7 @@ module Aws::Lambda
     #   <p>A unique identifier that changes when you update the alias.</p>
     #   @return [String]
     class AliasConfiguration < Struct.new(
+      nil,
       :alias_arn,
       :name,
       :function_version,
@@ -206,6 +213,7 @@ module Aws::Lambda
     #   <p>The second version, and the percentage of traffic that's routed to it.</p>
     #   @return [Hash<String, Float>]
     class AliasRoutingConfiguration < Struct.new(
+      nil,
       :additional_version_weights,
       keyword_init: true
     )
@@ -217,6 +225,7 @@ module Aws::Lambda
     #   <p>The Amazon Resource Name (ARN) for each of the signing profiles. A signing profile defines a trusted user who can sign a code package. </p>
     #   @return [Array<String>]
     class AllowedPublishers < Struct.new(
+      nil,
       :signing_profile_version_arns,
       keyword_init: true
     )
@@ -231,6 +240,7 @@ module Aws::Lambda
     #   <p>Specific configuration settings for a Kafka schema registry.</p>
     #   @return [Types::KafkaSchemaRegistryConfig]
     class AmazonManagedKafkaEventSourceConfig < Struct.new(
+      nil,
       :consumer_group_id,
       :schema_registry_config,
       keyword_init: true
@@ -258,6 +268,7 @@ module Aws::Lambda
     #   <p>The date and time that the Code signing configuration was last modified, in ISO-8601 format (YYYY-MM-DDThh:mm:ss.sTZD). </p>
     #   @return [String]
     class CodeSigningConfig < Struct.new(
+      nil,
       :code_signing_config_id,
       :code_signing_config_arn,
       :description,
@@ -275,6 +286,7 @@ module Aws::Lambda
     # @!attribute message
     #   @return [String]
     class CodeSigningConfigNotFoundException < Struct.new(
+      nil,
       :type,
       :message,
       keyword_init: true
@@ -287,6 +299,7 @@ module Aws::Lambda
     #   <p>Code signing configuration policy for deployment validation failure. If you set the policy to <code>Enforce</code>, Lambda blocks the deployment request if signature validation checks fail. If you set the policy to <code>Warn</code>, Lambda allows the deployment and creates a CloudWatch log. </p> <p>Default value: <code>Warn</code> </p>
     #   @return [String]
     class CodeSigningPolicies < Struct.new(
+      nil,
       :untrusted_artifact_on_deployment,
       keyword_init: true
     )
@@ -300,6 +313,7 @@ module Aws::Lambda
     # @!attribute message
     #   @return [String]
     class CodeStorageExceededException < Struct.new(
+      nil,
       :type,
       :message,
       keyword_init: true
@@ -313,6 +327,7 @@ module Aws::Lambda
     # @!attribute message
     #   @return [String]
     class CodeVerificationFailedException < Struct.new(
+      nil,
       :type,
       :message,
       keyword_init: true
@@ -324,6 +339,7 @@ module Aws::Lambda
     #   <p>The number of concurrent executions that are reserved for this function. For more information, see <a href="https://docs.aws.amazon.com/lambda/latest/dg/configuration-concurrency.html">Managing Lambda reserved concurrency</a>.</p>
     #   @return [Integer]
     class Concurrency < Struct.new(
+      nil,
       :reserved_concurrent_executions,
       keyword_init: true
     )
@@ -350,6 +366,7 @@ module Aws::Lambda
     #   <p>The maximum amount of time, in seconds, that web browsers can cache results of a preflight request. By default, this is set to <code>0</code>, which means that the browser doesn't cache results.</p>
     #   @return [Integer]
     class Cors < Struct.new(
+      nil,
       :allow_credentials,
       :allow_headers,
       :allow_methods,
@@ -381,6 +398,7 @@ module Aws::Lambda
     #   <p>A unique identifier that changes when you update the alias.</p>
     #   @return [String]
     class CreateAliasOutput < Struct.new(
+      nil,
       :alias_arn,
       :name,
       :function_version,
@@ -408,6 +426,7 @@ module Aws::Lambda
     #   <p>The <a href="https://docs.aws.amazon.com/lambda/latest/dg/configuration-aliases.html#configuring-alias-routing">routing configuration</a> of the alias.</p>
     #   @return [Types::AliasRoutingConfiguration]
     class CreateAliasRequest < Struct.new(
+      nil,
       :function_name,
       :name,
       :function_version,
@@ -431,6 +450,7 @@ module Aws::Lambda
     #   <p>A list of tags to add to the code signing configuration.</p>
     #   @return [Hash<String, String>]
     class CreateCodeSigningConfigRequest < Struct.new(
+      nil,
       :description,
       :allowed_publishers,
       :code_signing_policies,
@@ -444,6 +464,7 @@ module Aws::Lambda
     #   <p>The code signing configuration.</p>
     #   @return [Types::CodeSigningConfig]
     class CreateCodeSigningConfigResponse < Struct.new(
+      nil,
       :code_signing_config,
       keyword_init: true
     )
@@ -548,6 +569,7 @@ module Aws::Lambda
     #   <p>(Amazon MSK and self-managed Apache Kafka only) The provisioned mode configuration for the event source. For more information, see <a href="https://docs.aws.amazon.com/lambda/latest/dg/invocation-eventsourcemapping.html#invocation-eventsourcemapping-provisioned-mode">provisioned mode</a>.</p>
     #   @return [Types::ProvisionedPollerConfig]
     class CreateEventSourceMappingOutput < Struct.new(
+      nil,
       :uuid,
       :starting_position,
       :starting_position_timestamp,
@@ -667,6 +689,7 @@ module Aws::Lambda
     #   <p>(Amazon MSK and self-managed Apache Kafka only) The provisioned mode configuration for the event source. For more information, see <a href="https://docs.aws.amazon.com/lambda/latest/dg/invocation-eventsourcemapping.html#invocation-eventsourcemapping-provisioned-mode">provisioned mode</a>.</p>
     #   @return [Types::ProvisionedPollerConfig]
     class CreateEventSourceMappingRequest < Struct.new(
+      nil,
       :event_source_arn,
       :function_name,
       :enabled,
@@ -809,6 +832,7 @@ module Aws::Lambda
     #   <p>The function's Amazon CloudWatch Logs configuration settings.</p>
     #   @return [Types::LoggingConfig]
     class CreateFunctionOutput < Struct.new(
+      nil,
       :function_name,
       :function_arn,
       :runtime,
@@ -928,6 +952,7 @@ module Aws::Lambda
     #   <p>The function's Amazon CloudWatch Logs configuration settings.</p>
     #   @return [Types::LoggingConfig]
     class CreateFunctionRequest < Struct.new(
+      nil,
       :function_name,
       :runtime,
       :role,
@@ -973,6 +998,7 @@ module Aws::Lambda
     #   <p>Use one of the following options:</p> <ul> <li> <p> <code>BUFFERED</code> – This is the default option. Lambda invokes your function using the <code>Invoke</code> API operation. Invocation results are available when the payload is complete. The maximum payload size is 6 MB.</p> </li> <li> <p> <code>RESPONSE_STREAM</code> – Your function streams payload results as they become available. Lambda invokes your function using the <code>InvokeWithResponseStream</code> API operation. The maximum response payload size is 200 MB.</p> </li> </ul>
     #   @return [String]
     class CreateFunctionUrlConfigRequest < Struct.new(
+      nil,
       :function_name,
       :qualifier,
       :auth_type,
@@ -1002,6 +1028,7 @@ module Aws::Lambda
     #   <p>Use one of the following options:</p> <ul> <li> <p> <code>BUFFERED</code> – This is the default option. Lambda invokes your function using the <code>Invoke</code> API operation. Invocation results are available when the payload is complete. The maximum payload size is 6 MB.</p> </li> <li> <p> <code>RESPONSE_STREAM</code> – Your function streams payload results as they become available. Lambda invokes your function using the <code>InvokeWithResponseStream</code> API operation. The maximum response payload size is 200 MB.</p> </li> </ul>
     #   @return [String]
     class CreateFunctionUrlConfigResponse < Struct.new(
+      nil,
       :function_url,
       :function_arn,
       :auth_type,
@@ -1018,6 +1045,7 @@ module Aws::Lambda
     #   <p>The Amazon Resource Name (ARN) of an Amazon SQS queue or Amazon SNS topic.</p>
     #   @return [String]
     class DeadLetterConfig < Struct.new(
+      nil,
       :target_arn,
       keyword_init: true
     )
@@ -1031,6 +1059,7 @@ module Aws::Lambda
     #   <p>The name of the alias.</p>
     #   @return [String]
     class DeleteAliasRequest < Struct.new(
+      nil,
       :function_name,
       :name,
       keyword_init: true
@@ -1042,6 +1071,7 @@ module Aws::Lambda
     #   <p>The The Amazon Resource Name (ARN) of the code signing configuration.</p>
     #   @return [String]
     class DeleteCodeSigningConfigRequest < Struct.new(
+      nil,
       :code_signing_config_arn,
       keyword_init: true
     )
@@ -1049,6 +1079,7 @@ module Aws::Lambda
     end
 
     class DeleteCodeSigningConfigResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1152,6 +1183,7 @@ module Aws::Lambda
     #   <p>(Amazon MSK and self-managed Apache Kafka only) The provisioned mode configuration for the event source. For more information, see <a href="https://docs.aws.amazon.com/lambda/latest/dg/invocation-eventsourcemapping.html#invocation-eventsourcemapping-provisioned-mode">provisioned mode</a>.</p>
     #   @return [Types::ProvisionedPollerConfig]
     class DeleteEventSourceMappingOutput < Struct.new(
+      nil,
       :uuid,
       :starting_position,
       :starting_position_timestamp,
@@ -1193,6 +1225,7 @@ module Aws::Lambda
     #   <p>The identifier of the event source mapping.</p>
     #   @return [String]
     class DeleteEventSourceMappingRequest < Struct.new(
+      nil,
       :uuid,
       keyword_init: true
     )
@@ -1203,6 +1236,7 @@ module Aws::Lambda
     #   <p>The name or ARN of the Lambda function.</p> <p class="title"> <b>Name formats</b> </p> <ul> <li> <p> <b>Function name</b> - <code>MyFunction</code>.</p> </li> <li> <p> <b>Function ARN</b> - <code>arn:aws:lambda:us-west-2:123456789012:function:MyFunction</code>.</p> </li> <li> <p> <b>Partial ARN</b> - <code>123456789012:function:MyFunction</code>.</p> </li> </ul> <p>The length constraint applies only to the full ARN. If you specify only the function name, it is limited to 64 characters in length.</p>
     #   @return [String]
     class DeleteFunctionCodeSigningConfigRequest < Struct.new(
+      nil,
       :function_name,
       keyword_init: true
     )
@@ -1213,6 +1247,7 @@ module Aws::Lambda
     #   <p>The name or ARN of the Lambda function.</p> <p class="title"> <b>Name formats</b> </p> <ul> <li> <p> <b>Function name</b> – <code>my-function</code>.</p> </li> <li> <p> <b>Function ARN</b> – <code>arn:aws:lambda:us-west-2:123456789012:function:my-function</code>.</p> </li> <li> <p> <b>Partial ARN</b> – <code>123456789012:function:my-function</code>.</p> </li> </ul> <p>The length constraint applies only to the full ARN. If you specify only the function name, it is limited to 64 characters in length.</p>
     #   @return [String]
     class DeleteFunctionConcurrencyRequest < Struct.new(
+      nil,
       :function_name,
       keyword_init: true
     )
@@ -1226,6 +1261,7 @@ module Aws::Lambda
     #   <p>A version number or alias name.</p>
     #   @return [String]
     class DeleteFunctionEventInvokeConfigRequest < Struct.new(
+      nil,
       :function_name,
       :qualifier,
       keyword_init: true
@@ -1240,6 +1276,7 @@ module Aws::Lambda
     #   <p>Specify a version to delete. You can't delete a version that an alias references.</p>
     #   @return [String]
     class DeleteFunctionRequest < Struct.new(
+      nil,
       :function_name,
       :qualifier,
       keyword_init: true
@@ -1254,6 +1291,7 @@ module Aws::Lambda
     #   <p>The alias name.</p>
     #   @return [String]
     class DeleteFunctionUrlConfigRequest < Struct.new(
+      nil,
       :function_name,
       :qualifier,
       keyword_init: true
@@ -1268,6 +1306,7 @@ module Aws::Lambda
     #   <p>The version number.</p>
     #   @return [Integer]
     class DeleteLayerVersionRequest < Struct.new(
+      nil,
       :layer_name,
       :version_number,
       keyword_init: true
@@ -1282,6 +1321,7 @@ module Aws::Lambda
     #   <p>The version number or alias name.</p>
     #   @return [String]
     class DeleteProvisionedConcurrencyConfigRequest < Struct.new(
+      nil,
       :function_name,
       :qualifier,
       keyword_init: true
@@ -1297,6 +1337,7 @@ module Aws::Lambda
     #   <p>The destination configuration for failed invocations.</p>
     #   @return [Types::OnFailure]
     class DestinationConfig < Struct.new(
+      nil,
       :on_success,
       :on_failure,
       keyword_init: true
@@ -1315,6 +1356,7 @@ module Aws::Lambda
     #   <p> Determines what DocumentDB sends to your event stream during document update operations. If set to UpdateLookup, DocumentDB sends a delta describing the changes, along with a copy of the entire document. Otherwise, DocumentDB sends only a partial document that contains the changes. </p>
     #   @return [String]
     class DocumentDBEventSourceConfig < Struct.new(
+      nil,
       :database_name,
       :collection_name,
       :full_document,
@@ -1329,6 +1371,7 @@ module Aws::Lambda
     # @!attribute message
     #   @return [String]
     class EC2AccessDeniedException < Struct.new(
+      nil,
       :type,
       :message,
       keyword_init: true
@@ -1342,6 +1385,7 @@ module Aws::Lambda
     # @!attribute message
     #   @return [String]
     class EC2ThrottledException < Struct.new(
+      nil,
       :type,
       :message,
       keyword_init: true
@@ -1357,6 +1401,7 @@ module Aws::Lambda
     # @!attribute ec2_error_code
     #   @return [String]
     class EC2UnexpectedException < Struct.new(
+      nil,
       :type,
       :message,
       :ec2_error_code,
@@ -1371,6 +1416,7 @@ module Aws::Lambda
     # @!attribute message
     #   @return [String]
     class EFSIOException < Struct.new(
+      nil,
       :type,
       :message,
       keyword_init: true
@@ -1384,6 +1430,7 @@ module Aws::Lambda
     # @!attribute message
     #   @return [String]
     class EFSMountConnectivityException < Struct.new(
+      nil,
       :type,
       :message,
       keyword_init: true
@@ -1397,6 +1444,7 @@ module Aws::Lambda
     # @!attribute message
     #   @return [String]
     class EFSMountFailureException < Struct.new(
+      nil,
       :type,
       :message,
       keyword_init: true
@@ -1410,6 +1458,7 @@ module Aws::Lambda
     # @!attribute message
     #   @return [String]
     class EFSMountTimeoutException < Struct.new(
+      nil,
       :type,
       :message,
       keyword_init: true
@@ -1423,6 +1472,7 @@ module Aws::Lambda
     # @!attribute message
     #   @return [String]
     class ENILimitReachedException < Struct.new(
+      nil,
       :type,
       :message,
       keyword_init: true
@@ -1435,6 +1485,7 @@ module Aws::Lambda
     #   <p>Environment variable key-value pairs. For more information, see <a href="https://docs.aws.amazon.com/lambda/latest/dg/configuration-envvars.html">Using Lambda environment variables</a>.</p>
     #   @return [Hash<String, String>]
     class Environment < Struct.new(
+      nil,
       :variables,
       keyword_init: true
     )
@@ -1449,6 +1500,7 @@ module Aws::Lambda
     #   <p>The error message.</p>
     #   @return [String]
     class EnvironmentError < Struct.new(
+      nil,
       :error_code,
       :message,
       keyword_init: true
@@ -1464,6 +1516,7 @@ module Aws::Lambda
     #   <p>Error messages for environment variables that couldn't be applied.</p>
     #   @return [Types::EnvironmentError]
     class EnvironmentResponse < Struct.new(
+      nil,
       :variables,
       :error,
       keyword_init: true
@@ -1476,6 +1529,7 @@ module Aws::Lambda
     #   <p>The size of the function's <code>/tmp</code> directory.</p>
     #   @return [Integer]
     class EphemeralStorage < Struct.new(
+      nil,
       :size,
       keyword_init: true
     )
@@ -1580,6 +1634,7 @@ module Aws::Lambda
     #   <p>(Amazon MSK and self-managed Apache Kafka only) The provisioned mode configuration for the event source. For more information, see <a href="https://docs.aws.amazon.com/lambda/latest/dg/invocation-eventsourcemapping.html#invocation-eventsourcemapping-provisioned-mode">provisioned mode</a>.</p>
     #   @return [Types::ProvisionedPollerConfig]
     class EventSourceMappingConfiguration < Struct.new(
+      nil,
       :uuid,
       :starting_position,
       :starting_position_timestamp,
@@ -1622,6 +1677,7 @@ module Aws::Lambda
     #   <p> The metrics you want your event source mapping to produce. Include <code>EventCount</code> to receive event source mapping metrics related to the number of events processed by your event source mapping. For more information about these metrics, see <a href="https://docs.aws.amazon.com/lambda/latest/dg/monitoring-metrics-types.html#event-source-mapping-metrics"> Event source mapping metrics</a>. </p>
     #   @return [Array<String>]
     class EventSourceMappingMetricsConfig < Struct.new(
+      nil,
       :metrics,
       keyword_init: true
     )
@@ -1636,6 +1692,7 @@ module Aws::Lambda
     #   <p>The path where the function can access the file system, starting with <code>/mnt/</code>.</p>
     #   @return [String]
     class FileSystemConfig < Struct.new(
+      nil,
       :arn,
       :local_mount_path,
       keyword_init: true
@@ -1648,6 +1705,7 @@ module Aws::Lambda
     #   <p> A filter pattern. For more information on the syntax of a filter pattern, see <a href="https://docs.aws.amazon.com/lambda/latest/dg/invocation-eventfiltering.html#filtering-syntax"> Filter rule syntax</a>. </p>
     #   @return [String]
     class Filter < Struct.new(
+      nil,
       :pattern,
       keyword_init: true
     )
@@ -1659,6 +1717,7 @@ module Aws::Lambda
     #   <p> A list of filters. </p>
     #   @return [Array<Types::Filter>]
     class FilterCriteria < Struct.new(
+      nil,
       :filters,
       keyword_init: true
     )
@@ -1673,6 +1732,7 @@ module Aws::Lambda
     #   <p>The error message.</p>
     #   @return [String]
     class FilterCriteriaError < Struct.new(
+      nil,
       :error_code,
       :message,
       keyword_init: true
@@ -1700,6 +1760,7 @@ module Aws::Lambda
     #   <p>The ARN of the Key Management Service (KMS) customer managed key that's used to encrypt your function's .zip deployment package. If you don't provide a customer managed key, Lambda uses an <a href="https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#aws-owned-cmk">Amazon Web Services owned key</a>.</p>
     #   @return [String]
     class FunctionCode < Struct.new(
+      nil,
       :zip_file,
       :s3_bucket,
       :s3_key,
@@ -1728,6 +1789,7 @@ module Aws::Lambda
     #   <p>The ARN of the Key Management Service (KMS) customer managed key that's used to encrypt your function's .zip deployment package. If you don't provide a customer managed key, Lambda uses an <a href="https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#aws-owned-cmk">Amazon Web Services owned key</a>.</p>
     #   @return [String]
     class FunctionCodeLocation < Struct.new(
+      nil,
       :repository_type,
       :location,
       :image_uri,
@@ -1848,6 +1910,7 @@ module Aws::Lambda
     #   <p>The function's Amazon CloudWatch Logs configuration settings.</p>
     #   @return [Types::LoggingConfig]
     class FunctionConfiguration < Struct.new(
+      nil,
       :function_name,
       :function_arn,
       :runtime,
@@ -1910,6 +1973,7 @@ module Aws::Lambda
     #   <p>A destination for events after they have been sent to a function for processing.</p> <p class="title"> <b>Destinations</b> </p> <ul> <li> <p> <b>Function</b> - The Amazon Resource Name (ARN) of a Lambda function.</p> </li> <li> <p> <b>Queue</b> - The ARN of a standard SQS queue.</p> </li> <li> <p> <b>Bucket</b> - The ARN of an Amazon S3 bucket.</p> </li> <li> <p> <b>Topic</b> - The ARN of a standard SNS topic.</p> </li> <li> <p> <b>Event Bus</b> - The ARN of an Amazon EventBridge event bus.</p> </li> </ul> <note> <p>S3 buckets are supported only for on-failure destinations. To retain records of successful invocations, use another destination type.</p> </note>
     #   @return [Types::DestinationConfig]
     class FunctionEventInvokeConfig < Struct.new(
+      nil,
       :last_modified,
       :function_arn,
       :maximum_retry_attempts,
@@ -1943,6 +2007,7 @@ module Aws::Lambda
     #   <p>Use one of the following options:</p> <ul> <li> <p> <code>BUFFERED</code> – This is the default option. Lambda invokes your function using the <code>Invoke</code> API operation. Invocation results are available when the payload is complete. The maximum payload size is 6 MB.</p> </li> <li> <p> <code>RESPONSE_STREAM</code> – Your function streams payload results as they become available. Lambda invokes your function using the <code>InvokeWithResponseStream</code> API operation. The maximum response payload size is 200 MB.</p> </li> </ul>
     #   @return [String]
     class FunctionUrlConfig < Struct.new(
+      nil,
       :function_url,
       :function_arn,
       :creation_time,
@@ -1956,6 +2021,7 @@ module Aws::Lambda
     end
 
     class GetAccountSettingsRequest < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1968,6 +2034,7 @@ module Aws::Lambda
     #   <p>The number of functions and amount of storage in use.</p>
     #   @return [Types::AccountUsage]
     class GetAccountSettingsResponse < Struct.new(
+      nil,
       :account_limit,
       :account_usage,
       keyword_init: true
@@ -1995,6 +2062,7 @@ module Aws::Lambda
     #   <p>A unique identifier that changes when you update the alias.</p>
     #   @return [String]
     class GetAliasOutput < Struct.new(
+      nil,
       :alias_arn,
       :name,
       :function_version,
@@ -2013,6 +2081,7 @@ module Aws::Lambda
     #   <p>The name of the alias.</p>
     #   @return [String]
     class GetAliasRequest < Struct.new(
+      nil,
       :function_name,
       :name,
       keyword_init: true
@@ -2024,6 +2093,7 @@ module Aws::Lambda
     #   <p>The The Amazon Resource Name (ARN) of the code signing configuration. </p>
     #   @return [String]
     class GetCodeSigningConfigRequest < Struct.new(
+      nil,
       :code_signing_config_arn,
       keyword_init: true
     )
@@ -2034,6 +2104,7 @@ module Aws::Lambda
     #   <p>The code signing configuration</p>
     #   @return [Types::CodeSigningConfig]
     class GetCodeSigningConfigResponse < Struct.new(
+      nil,
       :code_signing_config,
       keyword_init: true
     )
@@ -2138,6 +2209,7 @@ module Aws::Lambda
     #   <p>(Amazon MSK and self-managed Apache Kafka only) The provisioned mode configuration for the event source. For more information, see <a href="https://docs.aws.amazon.com/lambda/latest/dg/invocation-eventsourcemapping.html#invocation-eventsourcemapping-provisioned-mode">provisioned mode</a>.</p>
     #   @return [Types::ProvisionedPollerConfig]
     class GetEventSourceMappingOutput < Struct.new(
+      nil,
       :uuid,
       :starting_position,
       :starting_position_timestamp,
@@ -2179,6 +2251,7 @@ module Aws::Lambda
     #   <p>The identifier of the event source mapping.</p>
     #   @return [String]
     class GetEventSourceMappingRequest < Struct.new(
+      nil,
       :uuid,
       keyword_init: true
     )
@@ -2189,6 +2262,7 @@ module Aws::Lambda
     #   <p>The name or ARN of the Lambda function.</p> <p class="title"> <b>Name formats</b> </p> <ul> <li> <p> <b>Function name</b> - <code>MyFunction</code>.</p> </li> <li> <p> <b>Function ARN</b> - <code>arn:aws:lambda:us-west-2:123456789012:function:MyFunction</code>.</p> </li> <li> <p> <b>Partial ARN</b> - <code>123456789012:function:MyFunction</code>.</p> </li> </ul> <p>The length constraint applies only to the full ARN. If you specify only the function name, it is limited to 64 characters in length.</p>
     #   @return [String]
     class GetFunctionCodeSigningConfigRequest < Struct.new(
+      nil,
       :function_name,
       keyword_init: true
     )
@@ -2202,6 +2276,7 @@ module Aws::Lambda
     #   <p>The name or ARN of the Lambda function.</p> <p class="title"> <b>Name formats</b> </p> <ul> <li> <p> <b>Function name</b> - <code>MyFunction</code>.</p> </li> <li> <p> <b>Function ARN</b> - <code>arn:aws:lambda:us-west-2:123456789012:function:MyFunction</code>.</p> </li> <li> <p> <b>Partial ARN</b> - <code>123456789012:function:MyFunction</code>.</p> </li> </ul> <p>The length constraint applies only to the full ARN. If you specify only the function name, it is limited to 64 characters in length.</p>
     #   @return [String]
     class GetFunctionCodeSigningConfigResponse < Struct.new(
+      nil,
       :code_signing_config_arn,
       :function_name,
       keyword_init: true
@@ -2213,6 +2288,7 @@ module Aws::Lambda
     #   <p>The name or ARN of the Lambda function.</p> <p class="title"> <b>Name formats</b> </p> <ul> <li> <p> <b>Function name</b> – <code>my-function</code>.</p> </li> <li> <p> <b>Function ARN</b> – <code>arn:aws:lambda:us-west-2:123456789012:function:my-function</code>.</p> </li> <li> <p> <b>Partial ARN</b> – <code>123456789012:function:my-function</code>.</p> </li> </ul> <p>The length constraint applies only to the full ARN. If you specify only the function name, it is limited to 64 characters in length.</p>
     #   @return [String]
     class GetFunctionConcurrencyRequest < Struct.new(
+      nil,
       :function_name,
       keyword_init: true
     )
@@ -2223,6 +2299,7 @@ module Aws::Lambda
     #   <p>The number of simultaneous executions that are reserved for the function.</p>
     #   @return [Integer]
     class GetFunctionConcurrencyResponse < Struct.new(
+      nil,
       :reserved_concurrent_executions,
       keyword_init: true
     )
@@ -2339,6 +2416,7 @@ module Aws::Lambda
     #   <p>The function's Amazon CloudWatch Logs configuration settings.</p>
     #   @return [Types::LoggingConfig]
     class GetFunctionConfigurationOutput < Struct.new(
+      nil,
       :function_name,
       :function_arn,
       :runtime,
@@ -2392,6 +2470,7 @@ module Aws::Lambda
     #   <p>Specify a version or alias to get details about a published version of the function.</p>
     #   @return [String]
     class GetFunctionConfigurationRequest < Struct.new(
+      nil,
       :function_name,
       :qualifier,
       keyword_init: true
@@ -2415,6 +2494,7 @@ module Aws::Lambda
     #   <p>A destination for events after they have been sent to a function for processing.</p> <p class="title"> <b>Destinations</b> </p> <ul> <li> <p> <b>Function</b> - The Amazon Resource Name (ARN) of a Lambda function.</p> </li> <li> <p> <b>Queue</b> - The ARN of a standard SQS queue.</p> </li> <li> <p> <b>Bucket</b> - The ARN of an Amazon S3 bucket.</p> </li> <li> <p> <b>Topic</b> - The ARN of a standard SNS topic.</p> </li> <li> <p> <b>Event Bus</b> - The ARN of an Amazon EventBridge event bus.</p> </li> </ul> <note> <p>S3 buckets are supported only for on-failure destinations. To retain records of successful invocations, use another destination type.</p> </note>
     #   @return [Types::DestinationConfig]
     class GetFunctionEventInvokeConfigOutput < Struct.new(
+      nil,
       :last_modified,
       :function_arn,
       :maximum_retry_attempts,
@@ -2432,6 +2512,7 @@ module Aws::Lambda
     #   <p>A version number or alias name.</p>
     #   @return [String]
     class GetFunctionEventInvokeConfigRequest < Struct.new(
+      nil,
       :function_name,
       :qualifier,
       keyword_init: true
@@ -2443,6 +2524,7 @@ module Aws::Lambda
     #   <p/>
     #   @return [String]
     class GetFunctionRecursionConfigRequest < Struct.new(
+      nil,
       :function_name,
       keyword_init: true
     )
@@ -2453,6 +2535,7 @@ module Aws::Lambda
     #   <p>If your function's recursive loop detection configuration is <code>Allow</code>, Lambda doesn't take any action when it detects your function being invoked as part of a recursive loop.</p> <p>If your function's recursive loop detection configuration is <code>Terminate</code>, Lambda stops your function being invoked and notifies you when it detects your function being invoked as part of a recursive loop.</p> <p>By default, Lambda sets your function's configuration to <code>Terminate</code>. You can update this configuration using the <a>PutFunctionRecursionConfig</a> action.</p>
     #   @return [String]
     class GetFunctionRecursionConfigResponse < Struct.new(
+      nil,
       :recursive_loop,
       keyword_init: true
     )
@@ -2466,6 +2549,7 @@ module Aws::Lambda
     #   <p>Specify a version or alias to get details about a published version of the function.</p>
     #   @return [String]
     class GetFunctionRequest < Struct.new(
+      nil,
       :function_name,
       :qualifier,
       keyword_init: true
@@ -2489,6 +2573,7 @@ module Aws::Lambda
     #   <p>The function's <a href="https://docs.aws.amazon.com/lambda/latest/dg/concurrent-executions.html">reserved concurrency</a>.</p>
     #   @return [Types::Concurrency]
     class GetFunctionResponse < Struct.new(
+      nil,
       :configuration,
       :code,
       :tags,
@@ -2506,6 +2591,7 @@ module Aws::Lambda
     #   <p>The alias name.</p>
     #   @return [String]
     class GetFunctionUrlConfigRequest < Struct.new(
+      nil,
       :function_name,
       :qualifier,
       keyword_init: true
@@ -2535,6 +2621,7 @@ module Aws::Lambda
     #   <p>Use one of the following options:</p> <ul> <li> <p> <code>BUFFERED</code> – This is the default option. Lambda invokes your function using the <code>Invoke</code> API operation. Invocation results are available when the payload is complete. The maximum payload size is 6 MB.</p> </li> <li> <p> <code>RESPONSE_STREAM</code> – Your function streams payload results as they become available. Lambda invokes your function using the <code>InvokeWithResponseStream</code> API operation. The maximum response payload size is 200 MB.</p> </li> </ul>
     #   @return [String]
     class GetFunctionUrlConfigResponse < Struct.new(
+      nil,
       :function_url,
       :function_arn,
       :auth_type,
@@ -2575,6 +2662,7 @@ module Aws::Lambda
     #   <p>A list of compatible <a href="https://docs.aws.amazon.com/lambda/latest/dg/foundation-arch.html">instruction set architectures</a>.</p>
     #   @return [Array<String>]
     class GetLayerVersionByArnOutput < Struct.new(
+      nil,
       :content,
       :layer_arn,
       :layer_version_arn,
@@ -2598,6 +2686,7 @@ module Aws::Lambda
     #   <p>The ARN of the layer version.</p>
     #   @return [String]
     class GetLayerVersionByArnRequest < Struct.new(
+      nil,
       :arn,
       keyword_init: true
     )
@@ -2632,6 +2721,7 @@ module Aws::Lambda
     #   <p>A list of compatible <a href="https://docs.aws.amazon.com/lambda/latest/dg/foundation-arch.html">instruction set architectures</a>.</p>
     #   @return [Array<String>]
     class GetLayerVersionOutput < Struct.new(
+      nil,
       :content,
       :layer_arn,
       :layer_version_arn,
@@ -2658,6 +2748,7 @@ module Aws::Lambda
     #   <p>The version number.</p>
     #   @return [Integer]
     class GetLayerVersionPolicyRequest < Struct.new(
+      nil,
       :layer_name,
       :version_number,
       keyword_init: true
@@ -2672,6 +2763,7 @@ module Aws::Lambda
     #   <p>A unique identifier for the current revision of the policy.</p>
     #   @return [String]
     class GetLayerVersionPolicyResponse < Struct.new(
+      nil,
       :policy,
       :revision_id,
       keyword_init: true
@@ -2686,6 +2778,7 @@ module Aws::Lambda
     #   <p>The version number.</p>
     #   @return [Integer]
     class GetLayerVersionRequest < Struct.new(
+      nil,
       :layer_name,
       :version_number,
       keyword_init: true
@@ -2700,6 +2793,7 @@ module Aws::Lambda
     #   <p>Specify a version or alias to get the policy for that resource.</p>
     #   @return [String]
     class GetPolicyRequest < Struct.new(
+      nil,
       :function_name,
       :qualifier,
       keyword_init: true
@@ -2714,6 +2808,7 @@ module Aws::Lambda
     #   <p>A unique identifier for the current revision of the policy.</p>
     #   @return [String]
     class GetPolicyResponse < Struct.new(
+      nil,
       :policy,
       :revision_id,
       keyword_init: true
@@ -2728,6 +2823,7 @@ module Aws::Lambda
     #   <p>The version number or alias name.</p>
     #   @return [String]
     class GetProvisionedConcurrencyConfigRequest < Struct.new(
+      nil,
       :function_name,
       :qualifier,
       keyword_init: true
@@ -2754,6 +2850,7 @@ module Aws::Lambda
     #   <p>The date and time that a user last updated the configuration, in <a href="https://www.iso.org/iso-8601-date-and-time-format.html">ISO 8601 format</a>.</p>
     #   @return [String]
     class GetProvisionedConcurrencyConfigResponse < Struct.new(
+      nil,
       :requested_provisioned_concurrent_executions,
       :available_provisioned_concurrent_executions,
       :allocated_provisioned_concurrent_executions,
@@ -2772,6 +2869,7 @@ module Aws::Lambda
     #   <p>Specify a version of the function. This can be <code>$LATEST</code> or a published version number. If no value is specified, the configuration for the <code>$LATEST</code> version is returned.</p>
     #   @return [String]
     class GetRuntimeManagementConfigRequest < Struct.new(
+      nil,
       :function_name,
       :qualifier,
       keyword_init: true
@@ -2789,6 +2887,7 @@ module Aws::Lambda
     #   <p>The Amazon Resource Name (ARN) of your function.</p>
     #   @return [String]
     class GetRuntimeManagementConfigResponse < Struct.new(
+      nil,
       :update_runtime_on,
       :runtime_version_arn,
       :function_arn,
@@ -2808,6 +2907,7 @@ module Aws::Lambda
     #   <p>Specifies the working directory.</p>
     #   @return [String]
     class ImageConfig < Struct.new(
+      nil,
       :entry_point,
       :command,
       :working_directory,
@@ -2824,6 +2924,7 @@ module Aws::Lambda
     #   <p>Error message.</p>
     #   @return [String]
     class ImageConfigError < Struct.new(
+      nil,
       :error_code,
       :message,
       keyword_init: true
@@ -2839,6 +2940,7 @@ module Aws::Lambda
     #   <p>Error response to <code>GetFunctionConfiguration</code>.</p>
     #   @return [Types::ImageConfigError]
     class ImageConfigResponse < Struct.new(
+      nil,
       :image_config,
       :error,
       keyword_init: true
@@ -2852,6 +2954,7 @@ module Aws::Lambda
     # @!attribute message
     #   @return [String]
     class InvalidCodeSignatureException < Struct.new(
+      nil,
       :type,
       :message,
       keyword_init: true
@@ -2867,6 +2970,7 @@ module Aws::Lambda
     #   <p>The exception message.</p>
     #   @return [String]
     class InvalidParameterValueException < Struct.new(
+      nil,
       :type,
       :message,
       keyword_init: true
@@ -2882,6 +2986,7 @@ module Aws::Lambda
     #   <p>The exception message.</p>
     #   @return [String]
     class InvalidRequestContentException < Struct.new(
+      nil,
       :type,
       :message,
       keyword_init: true
@@ -2895,6 +3000,7 @@ module Aws::Lambda
     # @!attribute message
     #   @return [String]
     class InvalidRuntimeException < Struct.new(
+      nil,
       :type,
       :message,
       keyword_init: true
@@ -2908,6 +3014,7 @@ module Aws::Lambda
     # @!attribute message
     #   @return [String]
     class InvalidSecurityGroupIDException < Struct.new(
+      nil,
       :type,
       :message,
       keyword_init: true
@@ -2921,6 +3028,7 @@ module Aws::Lambda
     # @!attribute message
     #   @return [String]
     class InvalidSubnetIDException < Struct.new(
+      nil,
       :type,
       :message,
       keyword_init: true
@@ -2934,6 +3042,7 @@ module Aws::Lambda
     # @!attribute message
     #   @return [String]
     class InvalidZipFileException < Struct.new(
+      nil,
       :type,
       :message,
       keyword_init: true
@@ -2960,6 +3069,7 @@ module Aws::Lambda
     #   <p>Specify a version or alias to invoke a published version of the function.</p>
     #   @return [String]
     class InvocationRequest < Struct.new(
+      nil,
       :function_name,
       :invocation_type,
       :log_type,
@@ -2987,6 +3097,7 @@ module Aws::Lambda
     #   <p>The version of the function that executed. When you invoke a function with an alias, this indicates which version the alias resolved to.</p>
     #   @return [String]
     class InvocationResponse < Struct.new(
+      nil,
       :status_code,
       :function_error,
       :log_result,
@@ -3010,6 +3121,7 @@ module Aws::Lambda
     #   <p>The JSON that you want to provide to your Lambda function as input.</p>
     #   @return [String]
     class InvokeAsyncRequest < Struct.new(
+      nil,
       :function_name,
       :invoke_args,
       keyword_init: true
@@ -3023,6 +3135,7 @@ module Aws::Lambda
     #   <p>The status code.</p>
     #   @return [Integer]
     class InvokeAsyncResponse < Struct.new(
+      nil,
       :status,
       keyword_init: true
     )
@@ -3039,6 +3152,7 @@ module Aws::Lambda
     #   <p>Data returned by your Lambda function.</p>
     #   @return [String]
     class InvokeResponseStreamUpdate < Struct.new(
+      nil,
       :payload,
       keyword_init: true
     )
@@ -3056,6 +3170,7 @@ module Aws::Lambda
     #   <p>The last 4 KB of the execution log, which is base64-encoded.</p>
     #   @return [String]
     class InvokeWithResponseStreamCompleteEvent < Struct.new(
+      nil,
       :error_code,
       :error_details,
       :log_result,
@@ -3083,6 +3198,7 @@ module Aws::Lambda
     #   <p>The JSON that you want to provide to your Lambda function as input.</p> <p>You can enter the JSON directly. For example, <code>--payload '{ "key": "value" }'</code>. You can also specify a file path. For example, <code>--payload file://payload.json</code>.</p>
     #   @return [String]
     class InvokeWithResponseStreamRequest < Struct.new(
+      nil,
       :function_name,
       :invocation_type,
       :log_type,
@@ -3107,6 +3223,7 @@ module Aws::Lambda
     #   <p>The type of data the stream is returning.</p>
     #   @return [String]
     class InvokeWithResponseStreamResponse < Struct.new(
+      nil,
       :status_code,
       :executed_version,
       :event_stream,
@@ -3147,6 +3264,7 @@ module Aws::Lambda
     # @!attribute message
     #   @return [String]
     class KMSAccessDeniedException < Struct.new(
+      nil,
       :type,
       :message,
       keyword_init: true
@@ -3160,6 +3278,7 @@ module Aws::Lambda
     # @!attribute message
     #   @return [String]
     class KMSDisabledException < Struct.new(
+      nil,
       :type,
       :message,
       keyword_init: true
@@ -3173,6 +3292,7 @@ module Aws::Lambda
     # @!attribute message
     #   @return [String]
     class KMSInvalidStateException < Struct.new(
+      nil,
       :type,
       :message,
       keyword_init: true
@@ -3186,6 +3306,7 @@ module Aws::Lambda
     # @!attribute message
     #   @return [String]
     class KMSNotFoundException < Struct.new(
+      nil,
       :type,
       :message,
       keyword_init: true
@@ -3201,6 +3322,7 @@ module Aws::Lambda
     #   <p> The URI of the secret (Secrets Manager secret ARN) to authenticate with your schema registry. </p>
     #   @return [String]
     class KafkaSchemaRegistryAccessConfig < Struct.new(
+      nil,
       :type,
       :uri,
       keyword_init: true
@@ -3222,6 +3344,7 @@ module Aws::Lambda
     #   <p>An array of schema validation configuration objects, which tell Lambda the message attributes you want to validate and filter using your schema registry.</p>
     #   @return [Array<Types::KafkaSchemaValidationConfig>]
     class KafkaSchemaRegistryConfig < Struct.new(
+      nil,
       :schema_registry_uri,
       :event_record_format,
       :access_configs,
@@ -3236,6 +3359,7 @@ module Aws::Lambda
     #   <p> The attributes you want your schema registry to validate and filter for. If you selected <code>JSON</code> as the <code>EventRecordFormat</code>, Lambda also deserializes the selected message attributes. </p>
     #   @return [String]
     class KafkaSchemaValidationConfig < Struct.new(
+      nil,
       :attribute,
       keyword_init: true
     )
@@ -3256,6 +3380,7 @@ module Aws::Lambda
     #   <p>The Amazon Resource Name (ARN) of a signing job.</p>
     #   @return [String]
     class Layer < Struct.new(
+      nil,
       :arn,
       :code_size,
       :signing_profile_version_arn,
@@ -3284,6 +3409,7 @@ module Aws::Lambda
     #   <p>The base64-encoded contents of the layer archive. Amazon Web Services SDK and Amazon Web Services CLI clients handle the encoding for you.</p>
     #   @return [String]
     class LayerVersionContentInput < Struct.new(
+      nil,
       :s3_bucket,
       :s3_key,
       :s3_object_version,
@@ -3310,6 +3436,7 @@ module Aws::Lambda
     #   <p>The Amazon Resource Name (ARN) of a signing job.</p>
     #   @return [String]
     class LayerVersionContentOutput < Struct.new(
+      nil,
       :location,
       :code_sha256,
       :code_size,
@@ -3348,6 +3475,7 @@ module Aws::Lambda
     #   <p>A list of compatible <a href="https://docs.aws.amazon.com/lambda/latest/dg/foundation-arch.html">instruction set architectures</a>.</p>
     #   @return [Array<String>]
     class LayerVersionsListItem < Struct.new(
+      nil,
       :layer_version_arn,
       :version,
       :description,
@@ -3376,6 +3504,7 @@ module Aws::Lambda
     #   <p>The newest version of the layer.</p>
     #   @return [Types::LayerVersionsListItem]
     class LayersListItem < Struct.new(
+      nil,
       :layer_name,
       :layer_arn,
       :latest_matching_version,
@@ -3397,6 +3526,7 @@ module Aws::Lambda
     #   <p>Limit the number of aliases returned.</p>
     #   @return [Integer]
     class ListAliasesRequest < Struct.new(
+      nil,
       :function_name,
       :function_version,
       :marker,
@@ -3413,6 +3543,7 @@ module Aws::Lambda
     #   <p>A list of aliases.</p>
     #   @return [Array<Types::AliasConfiguration>]
     class ListAliasesResponse < Struct.new(
+      nil,
       :next_marker,
       :aliases,
       keyword_init: true
@@ -3427,6 +3558,7 @@ module Aws::Lambda
     #   <p>Maximum number of items to return.</p>
     #   @return [Integer]
     class ListCodeSigningConfigsRequest < Struct.new(
+      nil,
       :marker,
       :max_items,
       keyword_init: true
@@ -3441,6 +3573,7 @@ module Aws::Lambda
     #   <p>The code signing configurations</p>
     #   @return [Array<Types::CodeSigningConfig>]
     class ListCodeSigningConfigsResponse < Struct.new(
+      nil,
       :next_marker,
       :code_signing_configs,
       keyword_init: true
@@ -3461,6 +3594,7 @@ module Aws::Lambda
     #   <p>The maximum number of event source mappings to return. Note that ListEventSourceMappings returns a maximum of 100 items in each response, even if you set the number higher.</p>
     #   @return [Integer]
     class ListEventSourceMappingsRequest < Struct.new(
+      nil,
       :event_source_arn,
       :function_name,
       :marker,
@@ -3477,6 +3611,7 @@ module Aws::Lambda
     #   <p>A list of event source mappings.</p>
     #   @return [Array<Types::EventSourceMappingConfiguration>]
     class ListEventSourceMappingsResponse < Struct.new(
+      nil,
       :next_marker,
       :event_source_mappings,
       keyword_init: true
@@ -3494,6 +3629,7 @@ module Aws::Lambda
     #   <p>The maximum number of configurations to return.</p>
     #   @return [Integer]
     class ListFunctionEventInvokeConfigsRequest < Struct.new(
+      nil,
       :function_name,
       :marker,
       :max_items,
@@ -3509,6 +3645,7 @@ module Aws::Lambda
     #   <p>The pagination token that's included if more results are available.</p>
     #   @return [String]
     class ListFunctionEventInvokeConfigsResponse < Struct.new(
+      nil,
       :function_event_invoke_configs,
       :next_marker,
       keyword_init: true
@@ -3526,6 +3663,7 @@ module Aws::Lambda
     #   <p>The maximum number of function URLs to return in the response. Note that <code>ListFunctionUrlConfigs</code> returns a maximum of 50 items in each response, even if you set the number higher.</p>
     #   @return [Integer]
     class ListFunctionUrlConfigsRequest < Struct.new(
+      nil,
       :function_name,
       :marker,
       :max_items,
@@ -3541,6 +3679,7 @@ module Aws::Lambda
     #   <p>The pagination token that's included if more results are available.</p>
     #   @return [String]
     class ListFunctionUrlConfigsResponse < Struct.new(
+      nil,
       :function_url_configs,
       :next_marker,
       keyword_init: true
@@ -3558,6 +3697,7 @@ module Aws::Lambda
     #   <p>Maximum number of items to return.</p>
     #   @return [Integer]
     class ListFunctionsByCodeSigningConfigRequest < Struct.new(
+      nil,
       :code_signing_config_arn,
       :marker,
       :max_items,
@@ -3573,6 +3713,7 @@ module Aws::Lambda
     #   <p>The function ARNs. </p>
     #   @return [Array<String>]
     class ListFunctionsByCodeSigningConfigResponse < Struct.new(
+      nil,
       :next_marker,
       :function_arns,
       keyword_init: true
@@ -3593,6 +3734,7 @@ module Aws::Lambda
     #   <p>The maximum number of functions to return in the response. Note that <code>ListFunctions</code> returns a maximum of 50 items in each response, even if you set the number higher.</p>
     #   @return [Integer]
     class ListFunctionsRequest < Struct.new(
+      nil,
       :master_region,
       :function_version,
       :marker,
@@ -3610,6 +3752,7 @@ module Aws::Lambda
     #   <p>A list of Lambda functions.</p>
     #   @return [Array<Types::FunctionConfiguration>]
     class ListFunctionsResponse < Struct.new(
+      nil,
       :next_marker,
       :functions,
       keyword_init: true
@@ -3633,6 +3776,7 @@ module Aws::Lambda
     #   <p>The compatible <a href="https://docs.aws.amazon.com/lambda/latest/dg/foundation-arch.html">instruction set architecture</a>.</p>
     #   @return [String]
     class ListLayerVersionsRequest < Struct.new(
+      nil,
       :compatible_runtime,
       :layer_name,
       :marker,
@@ -3650,6 +3794,7 @@ module Aws::Lambda
     #   <p>A list of versions.</p>
     #   @return [Array<Types::LayerVersionsListItem>]
     class ListLayerVersionsResponse < Struct.new(
+      nil,
       :next_marker,
       :layer_versions,
       keyword_init: true
@@ -3670,6 +3815,7 @@ module Aws::Lambda
     #   <p>The compatible <a href="https://docs.aws.amazon.com/lambda/latest/dg/foundation-arch.html">instruction set architecture</a>.</p>
     #   @return [String]
     class ListLayersRequest < Struct.new(
+      nil,
       :compatible_runtime,
       :marker,
       :max_items,
@@ -3686,6 +3832,7 @@ module Aws::Lambda
     #   <p>A list of function layers.</p>
     #   @return [Array<Types::LayersListItem>]
     class ListLayersResponse < Struct.new(
+      nil,
       :next_marker,
       :layers,
       keyword_init: true
@@ -3703,6 +3850,7 @@ module Aws::Lambda
     #   <p>Specify a number to limit the number of configurations returned.</p>
     #   @return [Integer]
     class ListProvisionedConcurrencyConfigsRequest < Struct.new(
+      nil,
       :function_name,
       :marker,
       :max_items,
@@ -3718,6 +3866,7 @@ module Aws::Lambda
     #   <p>The pagination token that's included if more results are available.</p>
     #   @return [String]
     class ListProvisionedConcurrencyConfigsResponse < Struct.new(
+      nil,
       :provisioned_concurrency_configs,
       :next_marker,
       keyword_init: true
@@ -3729,6 +3878,7 @@ module Aws::Lambda
     #   <p>The resource's Amazon Resource Name (ARN). Note: Lambda does not support adding tags to function aliases or versions.</p>
     #   @return [String]
     class ListTagsRequest < Struct.new(
+      nil,
       :resource,
       keyword_init: true
     )
@@ -3739,6 +3889,7 @@ module Aws::Lambda
     #   <p>The function's tags.</p>
     #   @return [Hash<String, String>]
     class ListTagsResponse < Struct.new(
+      nil,
       :tags,
       keyword_init: true
     )
@@ -3755,6 +3906,7 @@ module Aws::Lambda
     #   <p>The maximum number of versions to return. Note that <code>ListVersionsByFunction</code> returns a maximum of 50 items in each response, even if you set the number higher.</p>
     #   @return [Integer]
     class ListVersionsByFunctionRequest < Struct.new(
+      nil,
       :function_name,
       :marker,
       :max_items,
@@ -3770,6 +3922,7 @@ module Aws::Lambda
     #   <p>A list of Lambda function versions.</p>
     #   @return [Array<Types::FunctionConfiguration>]
     class ListVersionsByFunctionResponse < Struct.new(
+      nil,
       :next_marker,
       :versions,
       keyword_init: true
@@ -3791,6 +3944,7 @@ module Aws::Lambda
     #   <p>The name of the Amazon CloudWatch log group the function sends logs to. By default, Lambda functions send logs to a default log group named <code>/aws/lambda/&lt;function name&gt;</code>. To use a different log group, enter an existing log group or enter a new log group name.</p>
     #   @return [String]
     class LoggingConfig < Struct.new(
+      nil,
       :log_format,
       :application_log_level,
       :system_log_level,
@@ -3805,6 +3959,7 @@ module Aws::Lambda
     #   <p>The Amazon Resource Name (ARN) of the destination resource.</p> <p>To retain records of unsuccessful <a href="https://docs.aws.amazon.com/lambda/latest/dg/invocation-async.html#invocation-async-destinations">asynchronous invocations</a>, you can configure an Amazon SNS topic, Amazon SQS queue, Amazon S3 bucket, Lambda function, or Amazon EventBridge event bus as the destination.</p> <p>To retain records of failed invocations from <a href="https://docs.aws.amazon.com/lambda/latest/dg/with-kinesis.html">Kinesis</a>, <a href="https://docs.aws.amazon.com/lambda/latest/dg/with-ddb.html">DynamoDB</a>, <a href="https://docs.aws.amazon.com/lambda/latest/dg/with-kafka.html#services-smaa-onfailure-destination">self-managed Kafka</a> or <a href="https://docs.aws.amazon.com/lambda/latest/dg/with-msk.html#services-msk-onfailure-destination">Amazon MSK</a>, you can configure an Amazon SNS topic, Amazon SQS queue, or Amazon S3 bucket as the destination.</p>
     #   @return [String]
     class OnFailure < Struct.new(
+      nil,
       :destination,
       keyword_init: true
     )
@@ -3816,6 +3971,7 @@ module Aws::Lambda
     #   <p>The Amazon Resource Name (ARN) of the destination resource.</p>
     #   @return [String]
     class OnSuccess < Struct.new(
+      nil,
       :destination,
       keyword_init: true
     )
@@ -3828,6 +3984,7 @@ module Aws::Lambda
     # @!attribute message
     #   @return [String]
     class PolicyLengthExceededException < Struct.new(
+      nil,
       :type,
       :message,
       keyword_init: true
@@ -3843,6 +4000,7 @@ module Aws::Lambda
     #   <p>The exception message.</p>
     #   @return [String]
     class PreconditionFailedException < Struct.new(
+      nil,
       :type,
       :message,
       keyword_init: true
@@ -3873,6 +4031,7 @@ module Aws::Lambda
     #   <p>The date and time that a user last updated the configuration, in <a href="https://www.iso.org/iso-8601-date-and-time-format.html">ISO 8601 format</a>.</p>
     #   @return [String]
     class ProvisionedConcurrencyConfigListItem < Struct.new(
+      nil,
       :function_arn,
       :requested_provisioned_concurrent_executions,
       :available_provisioned_concurrent_executions,
@@ -3891,6 +4050,7 @@ module Aws::Lambda
     # @!attribute message
     #   @return [String]
     class ProvisionedConcurrencyConfigNotFoundException < Struct.new(
+      nil,
       :type,
       :message,
       keyword_init: true
@@ -3906,6 +4066,7 @@ module Aws::Lambda
     #   <p>The maximum number of event pollers this event source can scale up to.</p>
     #   @return [Integer]
     class ProvisionedPollerConfig < Struct.new(
+      nil,
       :minimum_pollers,
       :maximum_pollers,
       keyword_init: true
@@ -3932,6 +4093,7 @@ module Aws::Lambda
     #   <p>A list of compatible <a href="https://docs.aws.amazon.com/lambda/latest/dg/foundation-arch.html">instruction set architectures</a>.</p>
     #   @return [Array<String>]
     class PublishLayerVersionRequest < Struct.new(
+      nil,
       :layer_name,
       :description,
       :content,
@@ -3971,6 +4133,7 @@ module Aws::Lambda
     #   <p>A list of compatible <a href="https://docs.aws.amazon.com/lambda/latest/dg/foundation-arch.html">instruction set architectures</a>.</p>
     #   @return [Array<String>]
     class PublishLayerVersionResponse < Struct.new(
+      nil,
       :content,
       :layer_arn,
       :layer_version_arn,
@@ -4100,6 +4263,7 @@ module Aws::Lambda
     #   <p>The function's Amazon CloudWatch Logs configuration settings.</p>
     #   @return [Types::LoggingConfig]
     class PublishVersionOutput < Struct.new(
+      nil,
       :function_name,
       :function_arn,
       :runtime,
@@ -4159,6 +4323,7 @@ module Aws::Lambda
     #   <p>Only update the function if the revision ID matches the ID that's specified. Use this option to avoid publishing a version if the function configuration has changed since you last updated it.</p>
     #   @return [String]
     class PublishVersionRequest < Struct.new(
+      nil,
       :function_name,
       :code_sha256,
       :description,
@@ -4175,6 +4340,7 @@ module Aws::Lambda
     #   <p>The name or ARN of the Lambda function.</p> <p class="title"> <b>Name formats</b> </p> <ul> <li> <p> <b>Function name</b> - <code>MyFunction</code>.</p> </li> <li> <p> <b>Function ARN</b> - <code>arn:aws:lambda:us-west-2:123456789012:function:MyFunction</code>.</p> </li> <li> <p> <b>Partial ARN</b> - <code>123456789012:function:MyFunction</code>.</p> </li> </ul> <p>The length constraint applies only to the full ARN. If you specify only the function name, it is limited to 64 characters in length.</p>
     #   @return [String]
     class PutFunctionCodeSigningConfigRequest < Struct.new(
+      nil,
       :code_signing_config_arn,
       :function_name,
       keyword_init: true
@@ -4189,6 +4355,7 @@ module Aws::Lambda
     #   <p>The name or ARN of the Lambda function.</p> <p class="title"> <b>Name formats</b> </p> <ul> <li> <p> <b>Function name</b> - <code>MyFunction</code>.</p> </li> <li> <p> <b>Function ARN</b> - <code>arn:aws:lambda:us-west-2:123456789012:function:MyFunction</code>.</p> </li> <li> <p> <b>Partial ARN</b> - <code>123456789012:function:MyFunction</code>.</p> </li> </ul> <p>The length constraint applies only to the full ARN. If you specify only the function name, it is limited to 64 characters in length.</p>
     #   @return [String]
     class PutFunctionCodeSigningConfigResponse < Struct.new(
+      nil,
       :code_signing_config_arn,
       :function_name,
       keyword_init: true
@@ -4200,6 +4367,7 @@ module Aws::Lambda
     #   <p>The number of concurrent executions that are reserved for this function. For more information, see <a href="https://docs.aws.amazon.com/lambda/latest/dg/configuration-concurrency.html">Managing Lambda reserved concurrency</a>.</p>
     #   @return [Integer]
     class PutFunctionConcurrencyOutput < Struct.new(
+      nil,
       :reserved_concurrent_executions,
       keyword_init: true
     )
@@ -4213,6 +4381,7 @@ module Aws::Lambda
     #   <p>The number of simultaneous executions to reserve for the function.</p>
     #   @return [Integer]
     class PutFunctionConcurrencyRequest < Struct.new(
+      nil,
       :function_name,
       :reserved_concurrent_executions,
       keyword_init: true
@@ -4236,6 +4405,7 @@ module Aws::Lambda
     #   <p>A destination for events after they have been sent to a function for processing.</p> <p class="title"> <b>Destinations</b> </p> <ul> <li> <p> <b>Function</b> - The Amazon Resource Name (ARN) of a Lambda function.</p> </li> <li> <p> <b>Queue</b> - The ARN of a standard SQS queue.</p> </li> <li> <p> <b>Bucket</b> - The ARN of an Amazon S3 bucket.</p> </li> <li> <p> <b>Topic</b> - The ARN of a standard SNS topic.</p> </li> <li> <p> <b>Event Bus</b> - The ARN of an Amazon EventBridge event bus.</p> </li> </ul> <note> <p>S3 buckets are supported only for on-failure destinations. To retain records of successful invocations, use another destination type.</p> </note>
     #   @return [Types::DestinationConfig]
     class PutFunctionEventInvokeConfigOutput < Struct.new(
+      nil,
       :last_modified,
       :function_arn,
       :maximum_retry_attempts,
@@ -4262,6 +4432,7 @@ module Aws::Lambda
     #   <p>A destination for events after they have been sent to a function for processing.</p> <p class="title"> <b>Destinations</b> </p> <ul> <li> <p> <b>Function</b> - The Amazon Resource Name (ARN) of a Lambda function.</p> </li> <li> <p> <b>Queue</b> - The ARN of a standard SQS queue.</p> </li> <li> <p> <b>Bucket</b> - The ARN of an Amazon S3 bucket.</p> </li> <li> <p> <b>Topic</b> - The ARN of a standard SNS topic.</p> </li> <li> <p> <b>Event Bus</b> - The ARN of an Amazon EventBridge event bus.</p> </li> </ul> <note> <p>S3 buckets are supported only for on-failure destinations. To retain records of successful invocations, use another destination type.</p> </note>
     #   @return [Types::DestinationConfig]
     class PutFunctionEventInvokeConfigRequest < Struct.new(
+      nil,
       :function_name,
       :qualifier,
       :maximum_retry_attempts,
@@ -4279,6 +4450,7 @@ module Aws::Lambda
     #   <p>If you set your function's recursive loop detection configuration to <code>Allow</code>, Lambda doesn't take any action when it detects your function being invoked as part of a recursive loop. We recommend that you only use this setting if your design intentionally uses a Lambda function to write data back to the same Amazon Web Services resource that invokes it.</p> <p>If you set your function's recursive loop detection configuration to <code>Terminate</code>, Lambda stops your function being invoked and notifies you when it detects your function being invoked as part of a recursive loop.</p> <p>By default, Lambda sets your function's configuration to <code>Terminate</code>.</p> <important> <p>If your design intentionally uses a Lambda function to write data back to the same Amazon Web Services resource that invokes the function, then use caution and implement suitable guard rails to prevent unexpected charges being billed to your Amazon Web Services account. To learn more about best practices for using recursive invocation patterns, see <a href="https://serverlessland.com/content/service/lambda/guides/aws-lambda-operator-guide/recursive-runaway">Recursive patterns that cause run-away Lambda functions</a> in Serverless Land.</p> </important>
     #   @return [String]
     class PutFunctionRecursionConfigRequest < Struct.new(
+      nil,
       :function_name,
       :recursive_loop,
       keyword_init: true
@@ -4290,6 +4462,7 @@ module Aws::Lambda
     #   <p>The status of your function's recursive loop detection configuration.</p> <p>When this value is set to <code>Allow</code>and Lambda detects your function being invoked as part of a recursive loop, it doesn't take any action.</p> <p>When this value is set to <code>Terminate</code> and Lambda detects your function being invoked as part of a recursive loop, it stops your function being invoked and notifies you. </p>
     #   @return [String]
     class PutFunctionRecursionConfigResponse < Struct.new(
+      nil,
       :recursive_loop,
       keyword_init: true
     )
@@ -4306,6 +4479,7 @@ module Aws::Lambda
     #   <p>The amount of provisioned concurrency to allocate for the version or alias.</p>
     #   @return [Integer]
     class PutProvisionedConcurrencyConfigRequest < Struct.new(
+      nil,
       :function_name,
       :qualifier,
       :provisioned_concurrent_executions,
@@ -4333,6 +4507,7 @@ module Aws::Lambda
     #   <p>The date and time that a user last updated the configuration, in <a href="https://www.iso.org/iso-8601-date-and-time-format.html">ISO 8601 format</a>.</p>
     #   @return [String]
     class PutProvisionedConcurrencyConfigResponse < Struct.new(
+      nil,
       :requested_provisioned_concurrent_executions,
       :available_provisioned_concurrent_executions,
       :allocated_provisioned_concurrent_executions,
@@ -4357,6 +4532,7 @@ module Aws::Lambda
     #   <p>The ARN of the runtime version you want the function to use.</p> <note> <p>This is only required if you're using the <b>Manual</b> runtime update mode.</p> </note>
     #   @return [String]
     class PutRuntimeManagementConfigRequest < Struct.new(
+      nil,
       :function_name,
       :qualifier,
       :update_runtime_on,
@@ -4376,6 +4552,7 @@ module Aws::Lambda
     #   <p>The ARN of the runtime the function is configured to use. If the runtime update mode is <b>manual</b>, the ARN is returned, otherwise <code>null</code> is returned.</p>
     #   @return [String]
     class PutRuntimeManagementConfigResponse < Struct.new(
+      nil,
       :update_runtime_on,
       :function_arn,
       :runtime_version_arn,
@@ -4392,6 +4569,7 @@ module Aws::Lambda
     #   <p>The exception message.</p>
     #   @return [String]
     class RecursiveInvocationException < Struct.new(
+      nil,
       :type,
       :message,
       keyword_init: true
@@ -4412,6 +4590,7 @@ module Aws::Lambda
     #   <p>Only update the policy if the revision ID matches the ID specified. Use this option to avoid modifying a policy that has changed since you last read it.</p>
     #   @return [String]
     class RemoveLayerVersionPermissionRequest < Struct.new(
+      nil,
       :layer_name,
       :version_number,
       :statement_id,
@@ -4434,6 +4613,7 @@ module Aws::Lambda
     #   <p>Update the policy only if the revision ID matches the ID that's specified. Use this option to avoid modifying a policy that has changed since you last read it.</p>
     #   @return [String]
     class RemovePermissionRequest < Struct.new(
+      nil,
       :function_name,
       :statement_id,
       :qualifier,
@@ -4449,6 +4629,7 @@ module Aws::Lambda
     # @!attribute message
     #   @return [String]
     class RequestTooLargeException < Struct.new(
+      nil,
       :type,
       :message,
       keyword_init: true
@@ -4464,6 +4645,7 @@ module Aws::Lambda
     #   <p>The exception message.</p>
     #   @return [String]
     class ResourceConflictException < Struct.new(
+      nil,
       :type,
       :message,
       keyword_init: true
@@ -4477,6 +4659,7 @@ module Aws::Lambda
     # @!attribute message
     #   @return [String]
     class ResourceInUseException < Struct.new(
+      nil,
       :type,
       :message,
       keyword_init: true
@@ -4490,6 +4673,7 @@ module Aws::Lambda
     # @!attribute message
     #   @return [String]
     class ResourceNotFoundException < Struct.new(
+      nil,
       :type,
       :message,
       keyword_init: true
@@ -4505,6 +4689,7 @@ module Aws::Lambda
     #   <p>The exception message.</p>
     #   @return [String]
     class ResourceNotReadyException < Struct.new(
+      nil,
       :type,
       :message,
       keyword_init: true
@@ -4520,6 +4705,7 @@ module Aws::Lambda
     #   <p>Error response when Lambda is unable to retrieve the runtime version for a function.</p>
     #   @return [Types::RuntimeVersionError]
     class RuntimeVersionConfig < Struct.new(
+      nil,
       :runtime_version_arn,
       :error,
       keyword_init: true
@@ -4535,6 +4721,7 @@ module Aws::Lambda
     #   <p>The error message.</p>
     #   @return [String]
     class RuntimeVersionError < Struct.new(
+      nil,
       :error_code,
       :message,
       keyword_init: true
@@ -4547,6 +4734,7 @@ module Aws::Lambda
     #   <p>Limits the number of concurrent instances that the Amazon SQS event source can invoke.</p>
     #   @return [Integer]
     class ScalingConfig < Struct.new(
+      nil,
       :maximum_concurrency,
       keyword_init: true
     )
@@ -4558,6 +4746,7 @@ module Aws::Lambda
     #   <p>The list of bootstrap servers for your Kafka brokers in the following format: <code>"KAFKA_BOOTSTRAP_SERVERS": ["abc.xyz.com:xxxx","abc2.xyz.com:xxxx"]</code>.</p>
     #   @return [Hash<String, Array<String>>]
     class SelfManagedEventSource < Struct.new(
+      nil,
       :endpoints,
       keyword_init: true
     )
@@ -4572,6 +4761,7 @@ module Aws::Lambda
     #   <p>Specific configuration settings for a Kafka schema registry.</p>
     #   @return [Types::KafkaSchemaRegistryConfig]
     class SelfManagedKafkaEventSourceConfig < Struct.new(
+      nil,
       :consumer_group_id,
       :schema_registry_config,
       keyword_init: true
@@ -4585,6 +4775,7 @@ module Aws::Lambda
     # @!attribute message
     #   @return [String]
     class ServiceException < Struct.new(
+      nil,
       :type,
       :message,
       keyword_init: true
@@ -4597,6 +4788,7 @@ module Aws::Lambda
     #   <p>Set to <code>PublishedVersions</code> to create a snapshot of the initialized execution environment when you publish a function version.</p>
     #   @return [String]
     class SnapStart < Struct.new(
+      nil,
       :apply_on,
       keyword_init: true
     )
@@ -4609,6 +4801,7 @@ module Aws::Lambda
     # @!attribute message
     #   @return [String]
     class SnapStartException < Struct.new(
+      nil,
       :type,
       :message,
       keyword_init: true
@@ -4622,6 +4815,7 @@ module Aws::Lambda
     # @!attribute message
     #   @return [String]
     class SnapStartNotReadyException < Struct.new(
+      nil,
       :type,
       :message,
       keyword_init: true
@@ -4637,6 +4831,7 @@ module Aws::Lambda
     #   <p>When you provide a <a href="https://docs.aws.amazon.com/lambda/latest/dg/configuration-versions.html#versioning-versions-using">qualified Amazon Resource Name (ARN)</a>, this response element indicates whether SnapStart is activated for the specified function version.</p>
     #   @return [String]
     class SnapStartResponse < Struct.new(
+      nil,
       :apply_on,
       :optimization_status,
       keyword_init: true
@@ -4650,6 +4845,7 @@ module Aws::Lambda
     # @!attribute message
     #   @return [String]
     class SnapStartTimeoutException < Struct.new(
+      nil,
       :type,
       :message,
       keyword_init: true
@@ -4665,6 +4861,7 @@ module Aws::Lambda
     #   <p>The value for your chosen configuration in <code>Type</code>. For example: <code>"URI": "arn:aws:secretsmanager:us-east-1:01234567890:secret:MyBrokerSecretName"</code>.</p>
     #   @return [String]
     class SourceAccessConfiguration < Struct.new(
+      nil,
       :type,
       :uri,
       keyword_init: true
@@ -4678,6 +4875,7 @@ module Aws::Lambda
     # @!attribute message
     #   @return [String]
     class SubnetIPAddressLimitReachedException < Struct.new(
+      nil,
       :type,
       :message,
       keyword_init: true
@@ -4692,6 +4890,7 @@ module Aws::Lambda
     #   <p>A list of tags to apply to the resource.</p>
     #   @return [Hash<String, String>]
     class TagResourceRequest < Struct.new(
+      nil,
       :resource,
       :tags,
       keyword_init: true
@@ -4707,6 +4906,7 @@ module Aws::Lambda
     #   <p>The error message.</p>
     #   @return [String]
     class TagsError < Struct.new(
+      nil,
       :error_code,
       :message,
       keyword_init: true
@@ -4725,6 +4925,7 @@ module Aws::Lambda
     # @!attribute reason
     #   @return [String]
     class TooManyRequestsException < Struct.new(
+      nil,
       :retry_after_seconds,
       :type,
       :message,
@@ -4739,6 +4940,7 @@ module Aws::Lambda
     #   <p>The tracing mode.</p>
     #   @return [String]
     class TracingConfig < Struct.new(
+      nil,
       :mode,
       keyword_init: true
     )
@@ -4750,6 +4952,7 @@ module Aws::Lambda
     #   <p>The tracing mode.</p>
     #   @return [String]
     class TracingConfigResponse < Struct.new(
+      nil,
       :mode,
       keyword_init: true
     )
@@ -4762,6 +4965,7 @@ module Aws::Lambda
     # @!attribute message
     #   @return [String]
     class UnsupportedMediaTypeException < Struct.new(
+      nil,
       :type,
       :message,
       keyword_init: true
@@ -4776,6 +4980,7 @@ module Aws::Lambda
     #   <p>A list of tag keys to remove from the resource.</p>
     #   @return [Array<String>]
     class UntagResourceRequest < Struct.new(
+      nil,
       :resource,
       :tag_keys,
       keyword_init: true
@@ -4803,6 +5008,7 @@ module Aws::Lambda
     #   <p>A unique identifier that changes when you update the alias.</p>
     #   @return [String]
     class UpdateAliasOutput < Struct.new(
+      nil,
       :alias_arn,
       :name,
       :function_version,
@@ -4833,6 +5039,7 @@ module Aws::Lambda
     #   <p>Only update the alias if the revision ID matches the ID that's specified. Use this option to avoid modifying an alias that has changed since you last read it.</p>
     #   @return [String]
     class UpdateAliasRequest < Struct.new(
+      nil,
       :function_name,
       :name,
       :function_version,
@@ -4857,6 +5064,7 @@ module Aws::Lambda
     #   <p>The code signing policy.</p>
     #   @return [Types::CodeSigningPolicies]
     class UpdateCodeSigningConfigRequest < Struct.new(
+      nil,
       :code_signing_config_arn,
       :description,
       :allowed_publishers,
@@ -4870,6 +5078,7 @@ module Aws::Lambda
     #   <p>The code signing configuration</p>
     #   @return [Types::CodeSigningConfig]
     class UpdateCodeSigningConfigResponse < Struct.new(
+      nil,
       :code_signing_config,
       keyword_init: true
     )
@@ -4974,6 +5183,7 @@ module Aws::Lambda
     #   <p>(Amazon MSK and self-managed Apache Kafka only) The provisioned mode configuration for the event source. For more information, see <a href="https://docs.aws.amazon.com/lambda/latest/dg/invocation-eventsourcemapping.html#invocation-eventsourcemapping-provisioned-mode">provisioned mode</a>.</p>
     #   @return [Types::ProvisionedPollerConfig]
     class UpdateEventSourceMappingOutput < Struct.new(
+      nil,
       :uuid,
       :starting_position,
       :starting_position_timestamp,
@@ -5075,6 +5285,7 @@ module Aws::Lambda
     #   <p>(Amazon MSK and self-managed Apache Kafka only) The provisioned mode configuration for the event source. For more information, see <a href="https://docs.aws.amazon.com/lambda/latest/dg/invocation-eventsourcemapping.html#invocation-eventsourcemapping-provisioned-mode">provisioned mode</a>.</p>
     #   @return [Types::ProvisionedPollerConfig]
     class UpdateEventSourceMappingRequest < Struct.new(
+      nil,
       :uuid,
       :function_name,
       :enabled,
@@ -5211,6 +5422,7 @@ module Aws::Lambda
     #   <p>The function's Amazon CloudWatch Logs configuration settings.</p>
     #   @return [Types::LoggingConfig]
     class UpdateFunctionCodeOutput < Struct.new(
+      nil,
       :function_name,
       :function_arn,
       :runtime,
@@ -5291,6 +5503,7 @@ module Aws::Lambda
     #   <p>The ARN of the Key Management Service (KMS) customer managed key that's used to encrypt your function's .zip deployment package. If you don't provide a customer managed key, Lambda uses an Amazon Web Services managed key.</p>
     #   @return [String]
     class UpdateFunctionCodeRequest < Struct.new(
+      nil,
       :function_name,
       :zip_file,
       :s3_bucket,
@@ -5417,6 +5630,7 @@ module Aws::Lambda
     #   <p>The function's Amazon CloudWatch Logs configuration settings.</p>
     #   @return [Types::LoggingConfig]
     class UpdateFunctionConfigurationOutput < Struct.new(
+      nil,
       :function_name,
       :function_arn,
       :runtime,
@@ -5521,6 +5735,7 @@ module Aws::Lambda
     #   <p>The function's Amazon CloudWatch Logs configuration settings.</p>
     #   @return [Types::LoggingConfig]
     class UpdateFunctionConfigurationRequest < Struct.new(
+      nil,
       :function_name,
       :role,
       :handler,
@@ -5561,6 +5776,7 @@ module Aws::Lambda
     #   <p>A destination for events after they have been sent to a function for processing.</p> <p class="title"> <b>Destinations</b> </p> <ul> <li> <p> <b>Function</b> - The Amazon Resource Name (ARN) of a Lambda function.</p> </li> <li> <p> <b>Queue</b> - The ARN of a standard SQS queue.</p> </li> <li> <p> <b>Bucket</b> - The ARN of an Amazon S3 bucket.</p> </li> <li> <p> <b>Topic</b> - The ARN of a standard SNS topic.</p> </li> <li> <p> <b>Event Bus</b> - The ARN of an Amazon EventBridge event bus.</p> </li> </ul> <note> <p>S3 buckets are supported only for on-failure destinations. To retain records of successful invocations, use another destination type.</p> </note>
     #   @return [Types::DestinationConfig]
     class UpdateFunctionEventInvokeConfigOutput < Struct.new(
+      nil,
       :last_modified,
       :function_arn,
       :maximum_retry_attempts,
@@ -5587,6 +5803,7 @@ module Aws::Lambda
     #   <p>A destination for events after they have been sent to a function for processing.</p> <p class="title"> <b>Destinations</b> </p> <ul> <li> <p> <b>Function</b> - The Amazon Resource Name (ARN) of a Lambda function.</p> </li> <li> <p> <b>Queue</b> - The ARN of a standard SQS queue.</p> </li> <li> <p> <b>Bucket</b> - The ARN of an Amazon S3 bucket.</p> </li> <li> <p> <b>Topic</b> - The ARN of a standard SNS topic.</p> </li> <li> <p> <b>Event Bus</b> - The ARN of an Amazon EventBridge event bus.</p> </li> </ul> <note> <p>S3 buckets are supported only for on-failure destinations. To retain records of successful invocations, use another destination type.</p> </note>
     #   @return [Types::DestinationConfig]
     class UpdateFunctionEventInvokeConfigRequest < Struct.new(
+      nil,
       :function_name,
       :qualifier,
       :maximum_retry_attempts,
@@ -5613,6 +5830,7 @@ module Aws::Lambda
     #   <p>Use one of the following options:</p> <ul> <li> <p> <code>BUFFERED</code> – This is the default option. Lambda invokes your function using the <code>Invoke</code> API operation. Invocation results are available when the payload is complete. The maximum payload size is 6 MB.</p> </li> <li> <p> <code>RESPONSE_STREAM</code> – Your function streams payload results as they become available. Lambda invokes your function using the <code>InvokeWithResponseStream</code> API operation. The maximum response payload size is 200 MB.</p> </li> </ul>
     #   @return [String]
     class UpdateFunctionUrlConfigRequest < Struct.new(
+      nil,
       :function_name,
       :qualifier,
       :auth_type,
@@ -5645,6 +5863,7 @@ module Aws::Lambda
     #   <p>Use one of the following options:</p> <ul> <li> <p> <code>BUFFERED</code> – This is the default option. Lambda invokes your function using the <code>Invoke</code> API operation. Invocation results are available when the payload is complete. The maximum payload size is 6 MB.</p> </li> <li> <p> <code>RESPONSE_STREAM</code> – Your function streams payload results as they become available. Lambda invokes your function using the <code>InvokeWithResponseStream</code> API operation. The maximum response payload size is 200 MB.</p> </li> </ul>
     #   @return [String]
     class UpdateFunctionUrlConfigResponse < Struct.new(
+      nil,
       :function_url,
       :function_arn,
       :auth_type,
@@ -5668,6 +5887,7 @@ module Aws::Lambda
     #   <p>Allows outbound IPv6 traffic on VPC functions that are connected to dual-stack subnets.</p>
     #   @return [Boolean]
     class VpcConfig < Struct.new(
+      nil,
       :subnet_ids,
       :security_group_ids,
       :ipv6_allowed_for_dual_stack,
@@ -5690,6 +5910,7 @@ module Aws::Lambda
     #   <p>Allows outbound IPv6 traffic on VPC functions that are connected to dual-stack subnets.</p>
     #   @return [Boolean]
     class VpcConfigResponse < Struct.new(
+      nil,
       :subnet_ids,
       :security_group_ids,
       :vpc_id,

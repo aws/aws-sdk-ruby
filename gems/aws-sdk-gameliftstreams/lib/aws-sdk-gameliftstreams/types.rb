@@ -11,6 +11,7 @@ module Aws::GameLiftStreams
     #   <p>Description of the error.</p>
     #   @return [String]
     class AccessDeniedException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -24,6 +25,7 @@ module Aws::GameLiftStreams
     #   <p> A set of one or more locations and the streaming capacity for each location. </p>
     #   @return [Array<Types::LocationConfiguration>]
     class AddStreamGroupLocationsInput < Struct.new(
+      nil,
       :identifier,
       :location_configurations,
       keyword_init: true
@@ -38,6 +40,7 @@ module Aws::GameLiftStreams
     #   <p>This value is set of locations, including their name, current status, and capacities. </p> <p>A location can be in one of the following states:</p> <ul> <li> <p> <code>ACTIVATING</code>: Amazon GameLift Streams is preparing the location. You cannot stream from, scale the capacity of, or remove this location yet.</p> </li> <li> <p> <code>ACTIVE</code>: The location is provisioned with initial capacity. You can now stream from, scale the capacity of, or remove this location.</p> </li> <li> <p> <code>ERROR</code>: Amazon GameLift Streams failed to set up this location. The <code>StatusReason</code> field describes the error. You can remove this location and try to add it again.</p> </li> <li> <p> <code>REMOVING</code>: Amazon GameLift Streams is working to remove this location. This will release all provisioned capacity for this location in this stream group.</p> </li> </ul>
     #   @return [Array<Types::LocationState>]
     class AddStreamGroupLocationsOutput < Struct.new(
+      nil,
       :identifier,
       :locations,
       keyword_init: true
@@ -68,6 +71,7 @@ module Aws::GameLiftStreams
     #   <p> Configuration settings that identify the operating system for an application resource. This can also include a compatibility layer and other drivers. </p> <p>A runtime environment can be one of the following:</p> <ul> <li> <p> For Linux applications </p> <ul> <li> <p> Ubuntu 22.04 LTS (<code>Type=UBUNTU, Version=22_04_LTS</code>) </p> </li> </ul> </li> <li> <p> For Windows applications </p> <ul> <li> <p>Microsoft Windows Server 2022 Base (<code>Type=WINDOWS, Version=2022</code>)</p> </li> <li> <p>Proton 9.0-2 (<code>Type=PROTON, Version=20250516</code>)</p> </li> <li> <p>Proton 8.0-5 (<code>Type=PROTON, Version=20241007</code>)</p> </li> <li> <p>Proton 8.0-2c (<code>Type=PROTON, Version=20230704</code>)</p> </li> </ul> </li> </ul>
     #   @return [Types::RuntimeEnvironment]
     class ApplicationSummary < Struct.new(
+      nil,
       :arn,
       :id,
       :description,
@@ -87,6 +91,7 @@ module Aws::GameLiftStreams
     #   <p>A set of applications to associate with the stream group.</p> <p>This value is a set of either <a href="https://docs.aws.amazon.com/IAM/latest/UserGuide/reference-arns.html">Amazon Resource Names (ARN)</a> or IDs that uniquely identify application resources. Example ARN: <code>arn:aws:gameliftstreams:us-west-2:111122223333:application/a-9ZY8X7Wv6</code>. Example ID: <code>a-9ZY8X7Wv6</code>. </p>
     #   @return [Array<String>]
     class AssociateApplicationsInput < Struct.new(
+      nil,
       :identifier,
       :application_identifiers,
       keyword_init: true
@@ -101,6 +106,7 @@ module Aws::GameLiftStreams
     #   <p>A set of applications that are associated to the stream group.</p> <p>This value is a set of <a href="https://docs.aws.amazon.com/IAM/latest/UserGuide/reference-arns.html">Amazon Resource Names (ARNs)</a> that uniquely identify application resources. Example ARN: <code>arn:aws:gameliftstreams:us-west-2:111122223333:application/a-9ZY8X7Wv6</code>. </p>
     #   @return [Array<String>]
     class AssociateApplicationsOutput < Struct.new(
+      nil,
       :arn,
       :application_arns,
       keyword_init: true
@@ -113,6 +119,7 @@ module Aws::GameLiftStreams
     #   <p>Description of the error.</p>
     #   @return [String]
     class ConflictException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -144,6 +151,7 @@ module Aws::GameLiftStreams
     #   <p> A unique identifier that represents a client request. The request is idempotent, which ensures that an API request completes only once. When users send a request, Amazon GameLift Streams automatically populates this field. </p>
     #   @return [String]
     class CreateApplicationInput < Struct.new(
+      nil,
       :description,
       :runtime_environment,
       :executable_path,
@@ -200,6 +208,7 @@ module Aws::GameLiftStreams
     #   <p>A newly created application is not associated to any stream groups. This value is empty.</p>
     #   @return [Array<String>]
     class CreateApplicationOutput < Struct.new(
+      nil,
       :arn,
       :description,
       :runtime_environment,
@@ -238,6 +247,7 @@ module Aws::GameLiftStreams
     #   <p> A unique identifier that represents a client request. The request is idempotent, which ensures that an API request completes only once. When users send a request, Amazon GameLift Streams automatically populates this field. </p>
     #   @return [String]
     class CreateStreamGroupInput < Struct.new(
+      nil,
       :description,
       :stream_class,
       :default_application_identifier,
@@ -283,6 +293,7 @@ module Aws::GameLiftStreams
     #   <p> A set of applications that this stream group is associated to. You can stream any of these applications by using this stream group. </p> <p>This value is a set of <a href="https://docs.aws.amazon.com/IAM/latest/UserGuide/reference-arns.html">Amazon Resource Names (ARNs)</a> that uniquely identify application resources. Example ARN: <code>arn:aws:gameliftstreams:us-west-2:111122223333:application/a-9ZY8X7Wv6</code>. </p>
     #   @return [Array<String>]
     class CreateStreamGroupOutput < Struct.new(
+      nil,
       :arn,
       :description,
       :default_application,
@@ -312,6 +323,7 @@ module Aws::GameLiftStreams
     #   <p>A WebRTC ICE offer string to use when initializing a WebRTC connection. The offer is a very long JSON string. Provide the string as a text value in quotes. The offer must be newly generated, not the same offer provided to <code>StartStreamSession</code>. </p>
     #   @return [String]
     class CreateStreamSessionConnectionInput < Struct.new(
+      nil,
       :client_token,
       :identifier,
       :stream_session_identifier,
@@ -325,6 +337,7 @@ module Aws::GameLiftStreams
     #   <p>The WebRTC answer string that the stream server generates in response to the <code>SignalRequest</code>. </p>
     #   @return [String]
     class CreateStreamSessionConnectionOutput < Struct.new(
+      nil,
       :signal_response,
       keyword_init: true
     )
@@ -339,6 +352,7 @@ module Aws::GameLiftStreams
     #   <p>An <a href="https://docs.aws.amazon.com/IAM/latest/UserGuide/reference-arns.html">Amazon Resource Name (ARN)</a> that uniquely identifies the application resource. Example ARN: <code>arn:aws:gameliftstreams:us-west-2:111122223333:application/a-9ZY8X7Wv6</code>. </p>
     #   @return [String]
     class DefaultApplication < Struct.new(
+      nil,
       :id,
       :arn,
       keyword_init: true
@@ -350,6 +364,7 @@ module Aws::GameLiftStreams
     #   <p>An <a href="https://docs.aws.amazon.com/IAM/latest/UserGuide/reference-arns.html">Amazon Resource Name (ARN)</a> or ID that uniquely identifies the application resource. Example ARN: <code>arn:aws:gameliftstreams:us-west-2:111122223333:application/a-9ZY8X7Wv6</code>. Example ID: <code>a-9ZY8X7Wv6</code>. </p>
     #   @return [String]
     class DeleteApplicationInput < Struct.new(
+      nil,
       :identifier,
       keyword_init: true
     )
@@ -360,6 +375,7 @@ module Aws::GameLiftStreams
     #   <p>An <a href="https://docs.aws.amazon.com/IAM/latest/UserGuide/reference-arns.html">Amazon Resource Name (ARN)</a> or ID that uniquely identifies the stream group resource. Example ARN: <code>arn:aws:gameliftstreams:us-west-2:111122223333:streamgroup/sg-1AB2C3De4</code>. Example ID: <code>sg-1AB2C3De4</code>. </p>
     #   @return [String]
     class DeleteStreamGroupInput < Struct.new(
+      nil,
       :identifier,
       keyword_init: true
     )
@@ -373,6 +389,7 @@ module Aws::GameLiftStreams
     #   <p>A set of applications that you want to disassociate from the stream group.</p> <p>This value is a set of either <a href="https://docs.aws.amazon.com/IAM/latest/UserGuide/reference-arns.html">Amazon Resource Names (ARN)</a> or IDs that uniquely identify application resources. Example ARN: <code>arn:aws:gameliftstreams:us-west-2:111122223333:application/a-9ZY8X7Wv6</code>. Example ID: <code>a-9ZY8X7Wv6</code>. </p>
     #   @return [Array<String>]
     class DisassociateApplicationsInput < Struct.new(
+      nil,
       :identifier,
       :application_identifiers,
       keyword_init: true
@@ -387,6 +404,7 @@ module Aws::GameLiftStreams
     #   <p>A set of applications that are disassociated from this stream group.</p> <p>This value is a set of <a href="https://docs.aws.amazon.com/IAM/latest/UserGuide/reference-arns.html">Amazon Resource Names (ARNs)</a> that uniquely identify application resources. Example ARN: <code>arn:aws:gameliftstreams:us-west-2:111122223333:application/a-9ZY8X7Wv6</code>. </p>
     #   @return [Array<String>]
     class DisassociateApplicationsOutput < Struct.new(
+      nil,
       :arn,
       :application_arns,
       keyword_init: true
@@ -405,6 +423,7 @@ module Aws::GameLiftStreams
     #   <p> The S3 bucket URI where Amazon GameLift Streams uploaded the set of compressed exported files for a stream session. Amazon GameLift Streams generates a ZIP file name based on the stream session metadata. Alternatively, you can provide a custom file name with a <code>.zip</code> file extension.</p> <p> Example 1: If you provide an S3 URI called <code>s3://amzn-s3-demo-destination-bucket/MyGame_Session1.zip</code>, then Amazon GameLift Streams will save the files at that location. </p> <p> Example 2: If you provide an S3 URI called <code>s3://amzn-s3-demo-destination-bucket/MyGameSessions_ExportedFiles/</code>, then Amazon GameLift Streams will save the files at <code>s3://amzn-s3-demo-destination-bucket/MyGameSessions_ExportedFiles/YYYYMMDD-HHMMSS-appId-sg-Id-sessionId.zip</code> or another similar name. </p>
     #   @return [String]
     class ExportFilesMetadata < Struct.new(
+      nil,
       :status,
       :status_reason,
       :output_uri,
@@ -423,6 +442,7 @@ module Aws::GameLiftStreams
     #   <p> The S3 bucket URI where Amazon GameLift Streams uploads the set of compressed exported files for this stream session. Amazon GameLift Streams generates a ZIP file name based on the stream session metadata. Alternatively, you can provide a custom file name with a <code>.zip</code> file extension.</p> <p> Example 1: If you provide an S3 URI called <code>s3://amzn-s3-demo-destination-bucket/MyGame_Session1.zip</code>, then Amazon GameLift Streams will save the files at that location. </p> <p> Example 2: If you provide an S3 URI called <code>s3://amzn-s3-demo-destination-bucket/MyGameSessions_ExportedFiles/</code>, then Amazon GameLift Streams will save the files at <code>s3://amzn-s3-demo-destination-bucket/MyGameSessions_ExportedFiles/YYYYMMDD-HHMMSS-appId-sg-Id-sessionId.zip</code> or another similar name. </p>
     #   @return [String]
     class ExportStreamSessionFilesInput < Struct.new(
+      nil,
       :identifier,
       :stream_session_identifier,
       :output_uri,
@@ -432,6 +452,7 @@ module Aws::GameLiftStreams
     end
 
     class ExportStreamSessionFilesOutput < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -441,6 +462,7 @@ module Aws::GameLiftStreams
     #   <p>An <a href="https://docs.aws.amazon.com/IAM/latest/UserGuide/reference-arns.html">Amazon Resource Name (ARN)</a> or ID that uniquely identifies the application resource. Example ARN: <code>arn:aws:gameliftstreams:us-west-2:111122223333:application/a-9ZY8X7Wv6</code>. Example ID: <code>a-9ZY8X7Wv6</code>. </p>
     #   @return [String]
     class GetApplicationInput < Struct.new(
+      nil,
       :identifier,
       keyword_init: true
     )
@@ -490,6 +512,7 @@ module Aws::GameLiftStreams
     #   <p> A set of stream groups that this application is associated with. You can use any of these stream groups to stream your application. </p> <p>This value is a set of <a href="https://docs.aws.amazon.com/IAM/latest/UserGuide/reference-arns.html">Amazon Resource Names (ARNs)</a> that uniquely identify stream group resources. Example ARN: <code>arn:aws:gameliftstreams:us-west-2:111122223333:streamgroup/sg-1AB2C3De4</code>. </p>
     #   @return [Array<String>]
     class GetApplicationOutput < Struct.new(
+      nil,
       :arn,
       :description,
       :runtime_environment,
@@ -513,6 +536,7 @@ module Aws::GameLiftStreams
     #   <p>An <a href="https://docs.aws.amazon.com/IAM/latest/UserGuide/reference-arns.html">Amazon Resource Name (ARN)</a> or ID that uniquely identifies the stream group resource. Example ARN: <code>arn:aws:gameliftstreams:us-west-2:111122223333:streamgroup/sg-1AB2C3De4</code>. Example ID: <code>sg-1AB2C3De4</code>. </p>
     #   @return [String]
     class GetStreamGroupInput < Struct.new(
+      nil,
       :identifier,
       keyword_init: true
     )
@@ -553,6 +577,7 @@ module Aws::GameLiftStreams
     #   <p> A set of applications that this stream group is associated to. You can stream any of these applications by using this stream group. </p> <p>This value is a set of <a href="https://docs.aws.amazon.com/IAM/latest/UserGuide/reference-arns.html">Amazon Resource Names (ARNs)</a> that uniquely identify application resources. Example ARN: <code>arn:aws:gameliftstreams:us-west-2:111122223333:application/a-9ZY8X7Wv6</code>. </p>
     #   @return [Array<String>]
     class GetStreamGroupOutput < Struct.new(
+      nil,
       :arn,
       :description,
       :default_application,
@@ -576,6 +601,7 @@ module Aws::GameLiftStreams
     #   <p>An <a href="https://docs.aws.amazon.com/IAM/latest/UserGuide/reference-arns.html">Amazon Resource Name (ARN)</a> or ID that uniquely identifies the stream session resource. Example ARN: <code>arn:aws:gameliftstreams:us-west-2:111122223333:streamsession/sg-1AB2C3De4/ABC123def4567</code>. Example ID: <code>ABC123def4567</code>. </p>
     #   @return [String]
     class GetStreamSessionInput < Struct.new(
+      nil,
       :identifier,
       :stream_session_identifier,
       keyword_init: true
@@ -644,6 +670,7 @@ module Aws::GameLiftStreams
     #   <p>Provides details about the stream session's exported files. </p>
     #   @return [Types::ExportFilesMetadata]
     class GetStreamSessionOutput < Struct.new(
+      nil,
       :arn,
       :description,
       :stream_group_id,
@@ -674,6 +701,7 @@ module Aws::GameLiftStreams
     #   <p>Description of the error.</p>
     #   @return [String]
     class InternalServerException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -687,6 +715,7 @@ module Aws::GameLiftStreams
     #   <p>The number of results to return. Use this parameter with <code>NextToken</code> to return results in sequential pages. Default value is <code>25</code>.</p>
     #   @return [Integer]
     class ListApplicationsInput < Struct.new(
+      nil,
       :next_token,
       :max_results,
       keyword_init: true
@@ -701,6 +730,7 @@ module Aws::GameLiftStreams
     #   <p>A token that marks the start of the next sequential page of results. If an operation doesn't return a token, you've reached the end of the list. </p>
     #   @return [String]
     class ListApplicationsOutput < Struct.new(
+      nil,
       :items,
       :next_token,
       keyword_init: true
@@ -715,6 +745,7 @@ module Aws::GameLiftStreams
     #   <p>The number of results to return. Use this parameter with <code>NextToken</code> to return results in sequential pages. Default value is <code>25</code>.</p>
     #   @return [Integer]
     class ListStreamGroupsInput < Struct.new(
+      nil,
       :next_token,
       :max_results,
       keyword_init: true
@@ -729,6 +760,7 @@ module Aws::GameLiftStreams
     #   <p>A token that marks the start of the next sequential page of results. If an operation doesn't return a token, you've reached the end of the list. </p>
     #   @return [String]
     class ListStreamGroupsOutput < Struct.new(
+      nil,
       :items,
       :next_token,
       keyword_init: true
@@ -749,6 +781,7 @@ module Aws::GameLiftStreams
     #   <p>The number of results to return. Use this parameter with <code>NextToken</code> to return results in sequential pages. Default value is <code>25</code>. </p>
     #   @return [Integer]
     class ListStreamSessionsByAccountInput < Struct.new(
+      nil,
       :status,
       :export_files_status,
       :next_token,
@@ -765,6 +798,7 @@ module Aws::GameLiftStreams
     #   <p>A token that marks the start of the next sequential page of results. If an operation doesn't return a token, you've reached the end of the list. </p>
     #   @return [String]
     class ListStreamSessionsByAccountOutput < Struct.new(
+      nil,
       :items,
       :next_token,
       keyword_init: true
@@ -788,6 +822,7 @@ module Aws::GameLiftStreams
     #   <p>The unique identifier of a Amazon GameLift Streams stream group to retrieve the stream session for. You can use either the stream group ID or the <a href="https://docs.aws.amazon.com/IAM/latest/UserGuide/reference-arns.html">Amazon Resource Name (ARN)</a>.</p>
     #   @return [String]
     class ListStreamSessionsInput < Struct.new(
+      nil,
       :status,
       :export_files_status,
       :next_token,
@@ -805,6 +840,7 @@ module Aws::GameLiftStreams
     #   <p>A token that marks the start of the next sequential page of results. If an operation doesn't return a token, you've reached the end of the list. </p>
     #   @return [String]
     class ListStreamSessionsOutput < Struct.new(
+      nil,
       :items,
       :next_token,
       keyword_init: true
@@ -816,6 +852,7 @@ module Aws::GameLiftStreams
     #   <p>The <a href="https://docs.aws.amazon.com/IAM/latest/UserGuide/reference-arns.html">Amazon Resource Name (ARN)</a> that you want to retrieve tags for. To get an Amazon GameLift Streams resource ARN, call a List or Get operation for the resource.</p>
     #   @return [String]
     class ListTagsForResourceRequest < Struct.new(
+      nil,
       :resource_arn,
       keyword_init: true
     )
@@ -826,6 +863,7 @@ module Aws::GameLiftStreams
     #   <p>A collection of tags that have been assigned to the specified resource.</p>
     #   @return [Hash<String, String>]
     class ListTagsForResourceResponse < Struct.new(
+      nil,
       :tags,
       keyword_init: true
     )
@@ -843,6 +881,7 @@ module Aws::GameLiftStreams
     #   <p>The streaming capacity that Amazon GameLift Streams can allocate in response to stream requests, and then de-allocate when the session has terminated. This offers a cost control measure at the expense of a greater startup time (typically under 5 minutes). Default is 0 when creating a stream group or adding a location.</p>
     #   @return [Integer]
     class LocationConfiguration < Struct.new(
+      nil,
       :location_name,
       :always_on_capacity,
       :on_demand_capacity,
@@ -874,6 +913,7 @@ module Aws::GameLiftStreams
     #   <p>This value is the amount of allocated capacity that is not currently streaming. It represents the stream group's availability to respond to new stream requests, but not including on-demand capacity.</p>
     #   @return [Integer]
     class LocationState < Struct.new(
+      nil,
       :location_name,
       :status,
       :always_on_capacity,
@@ -893,6 +933,7 @@ module Aws::GameLiftStreams
     #   <p> A set of locations to remove this stream group. For example, <code>us-east-1</code>.</p> <p> For a complete list of locations that Amazon GameLift Streams supports, refer to <a href="https://docs.aws.amazon.com/gameliftstreams/latest/developerguide/regions-quotas.html">Regions, quotas, and limitations</a> in the <i>Amazon GameLift Streams Developer Guide</i>. </p>
     #   @return [Array<String>]
     class RemoveStreamGroupLocationsInput < Struct.new(
+      nil,
       :identifier,
       :locations,
       keyword_init: true
@@ -908,6 +949,7 @@ module Aws::GameLiftStreams
     #   <p>The current status of the replication process.</p>
     #   @return [String]
     class ReplicationStatus < Struct.new(
+      nil,
       :location,
       :status,
       keyword_init: true
@@ -920,6 +962,7 @@ module Aws::GameLiftStreams
     #   <p>Description of the error.</p>
     #   @return [String]
     class ResourceNotFoundException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -934,6 +977,7 @@ module Aws::GameLiftStreams
     #   <p>Versioned container environment for the application operating system.</p>
     #   @return [String]
     class RuntimeEnvironment < Struct.new(
+      nil,
       :type,
       :version,
       keyword_init: true
@@ -946,6 +990,7 @@ module Aws::GameLiftStreams
     #   <p>Description of the error.</p>
     #   @return [String]
     class ServiceQuotaExceededException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -989,6 +1034,7 @@ module Aws::GameLiftStreams
     #   <p>A set of options that you can use to control the stream session runtime environment, expressed as a set of key-value pairs. You can use this to configure the application or stream session details. You can also provide custom environment variables that Amazon GameLift Streams passes to your game client.</p> <note> <p>If you want to debug your application with environment variables, we recommend that you do so in a local environment outside of Amazon GameLift Streams. For more information, refer to the Compatibility Guidance in the troubleshooting section of the Developer Guide.</p> </note> <p> <code>AdditionalEnvironmentVariables</code> and <code>AdditionalLaunchArgs</code> have similar purposes. <code>AdditionalEnvironmentVariables</code> passes data using environment variables; while <code>AdditionalLaunchArgs</code> passes data using command-line arguments.</p>
     #   @return [Hash<String, String>]
     class StartStreamSessionInput < Struct.new(
+      nil,
       :client_token,
       :description,
       :identifier,
@@ -1067,6 +1113,7 @@ module Aws::GameLiftStreams
     #   <p>Provides details about the stream session's exported files. </p>
     #   @return [Types::ExportFilesMetadata]
     class StartStreamSessionOutput < Struct.new(
+      nil,
       :arn,
       :description,
       :stream_group_id,
@@ -1118,6 +1165,7 @@ module Aws::GameLiftStreams
     #   <p>A timestamp that indicates when this resource was last updated. Timestamps are expressed using in ISO8601 format, such as: <code>2022-12-27T22:29:40+00:00</code> (UTC).</p>
     #   @return [Time]
     class StreamGroupSummary < Struct.new(
+      nil,
       :arn,
       :id,
       :description,
@@ -1160,6 +1208,7 @@ module Aws::GameLiftStreams
     #   <p>The location where Amazon GameLift Streams hosts and streams your application. For example, <code>us-east-1</code>. For a complete list of locations that Amazon GameLift Streams supports, refer to <a href="https://docs.aws.amazon.com/gameliftstreams/latest/developerguide/regions-quotas.html">Regions, quotas, and limitations</a> in the <i>Amazon GameLift Streams Developer Guide</i>. </p>
     #   @return [String]
     class StreamSessionSummary < Struct.new(
+      nil,
       :arn,
       :user_id,
       :status,
@@ -1181,6 +1230,7 @@ module Aws::GameLiftStreams
     #   <p>A list of tags, in the form of key-value pairs, to assign to the specified Amazon GameLift Streams resource.</p>
     #   @return [Hash<String, String>]
     class TagResourceRequest < Struct.new(
+      nil,
       :resource_arn,
       :tags,
       keyword_init: true
@@ -1189,6 +1239,7 @@ module Aws::GameLiftStreams
     end
 
     class TagResourceResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1201,6 +1252,7 @@ module Aws::GameLiftStreams
     #   <p> <a href="https://docs.aws.amazon.com/IAM/latest/UserGuide/reference-arns.html">Amazon Resource Name (ARN)</a> or ID that uniquely identifies the stream session resource. Example ARN: <code>arn:aws:gameliftstreams:us-west-2:111122223333:streamsession/sg-1AB2C3De4/ABC123def4567</code>. Example ID: <code>ABC123def4567</code>. </p>
     #   @return [String]
     class TerminateStreamSessionInput < Struct.new(
+      nil,
       :identifier,
       :stream_session_identifier,
       keyword_init: true
@@ -1213,6 +1265,7 @@ module Aws::GameLiftStreams
     #   <p>Description of the error.</p>
     #   @return [String]
     class ThrottlingException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -1226,6 +1279,7 @@ module Aws::GameLiftStreams
     #   <p>A list of tag keys to remove from the specified Amazon GameLift Streams resource.</p>
     #   @return [Array<String>]
     class UntagResourceRequest < Struct.new(
+      nil,
       :resource_arn,
       :tag_keys,
       keyword_init: true
@@ -1234,6 +1288,7 @@ module Aws::GameLiftStreams
     end
 
     class UntagResourceResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1252,6 +1307,7 @@ module Aws::GameLiftStreams
     #   <p>An Amazon S3 URI to a bucket where you would like Amazon GameLift Streams to save application logs. Required if you specify one or more <code>ApplicationLogPaths</code>.</p> <note> <p>The log bucket must have permissions that give Amazon GameLift Streams access to write the log files. For more information, see <a href="https://docs.aws.amazon.com/gameliftstreams/latest/developerguide/applications.html#application-bucket-permission-template">Application log bucket permission policy</a> in the <i>Amazon GameLift Streams Developer Guide</i>. </p> </note>
     #   @return [String]
     class UpdateApplicationInput < Struct.new(
+      nil,
       :identifier,
       :description,
       :application_log_paths,
@@ -1304,6 +1360,7 @@ module Aws::GameLiftStreams
     #   <p> A set of stream groups that this application is associated with. You can use any of these stream groups to stream your application. </p> <p>This value is a set of <a href="https://docs.aws.amazon.com/IAM/latest/UserGuide/reference-arns.html">Amazon Resource Names (ARNs)</a> that uniquely identify stream group resources. Example ARN: <code>arn:aws:gameliftstreams:us-west-2:111122223333:streamgroup/sg-1AB2C3De4</code>. </p>
     #   @return [Array<String>]
     class UpdateApplicationOutput < Struct.new(
+      nil,
       :arn,
       :description,
       :runtime_environment,
@@ -1336,6 +1393,7 @@ module Aws::GameLiftStreams
     #   <p>The unique identifier of the Amazon GameLift Streams application that you want to set as the default application in a stream group. The application that you specify must be in <code>READY</code> status. The default application is pre-cached on always-on compute resources, reducing stream startup times. Other applications are automatically cached as needed.</p> <p>Note that this parameter only sets the default application in a stream group. To associate a new application to an existing stream group, you must use <a href="https://docs.aws.amazon.com/gameliftstreams/latest/apireference/API_AssociateApplications.html">AssociateApplications</a>.</p> <p>When you switch default applications in a stream group, it can take up to a few hours for the new default application to be pre-cached.</p> <p>This value is an <a href="https://docs.aws.amazon.com/IAM/latest/UserGuide/reference-arns.html">Amazon Resource Name (ARN)</a> or ID that uniquely identifies the application resource. Example ARN: <code>arn:aws:gameliftstreams:us-west-2:111122223333:application/a-9ZY8X7Wv6</code>. Example ID: <code>a-9ZY8X7Wv6</code>. </p>
     #   @return [String]
     class UpdateStreamGroupInput < Struct.new(
+      nil,
       :identifier,
       :location_configurations,
       :description,
@@ -1379,6 +1437,7 @@ module Aws::GameLiftStreams
     #   <p> A set of applications that this stream group is associated with. You can stream any of these applications with the stream group. </p> <p>This value is a set of <a href="https://docs.aws.amazon.com/IAM/latest/UserGuide/reference-arns.html">Amazon Resource Names (ARNs)</a> that uniquely identify application resources. Example ARN: <code>arn:aws:gameliftstreams:us-west-2:111122223333:application/a-9ZY8X7Wv6</code>. </p>
     #   @return [Array<String>]
     class UpdateStreamGroupOutput < Struct.new(
+      nil,
       :arn,
       :description,
       :default_application,
@@ -1400,6 +1459,7 @@ module Aws::GameLiftStreams
     #   <p>Description of the error.</p>
     #   @return [String]
     class ValidationException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )

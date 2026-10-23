@@ -11,6 +11,7 @@ module Aws::Kafka
     #   <p>The Amazon Resource Name (ARN) of an Amazon MSK cluster.</p>
     #   @return [String]
     class AmazonMskCluster < Struct.new(
+      nil,
       :msk_cluster_arn,
       keyword_init: true
     )
@@ -25,6 +26,7 @@ module Aws::Kafka
     #   <p>The description of the error.</p>
     #   @return [String]
     class BadRequestException < Struct.new(
+      nil,
       :invalid_parameter,
       :message,
       keyword_init: true
@@ -40,6 +42,7 @@ module Aws::Kafka
     #   <p>List of AWS Secrets Manager secret ARNs.</p>
     #   @return [Array<String>]
     class BatchAssociateScramSecretRequest < Struct.new(
+      nil,
       :cluster_arn,
       :secret_arn_list,
       keyword_init: true
@@ -54,6 +57,7 @@ module Aws::Kafka
     #   <p>List of errors when associating secrets to cluster.</p>
     #   @return [Array<Types::UnprocessedScramSecret>]
     class BatchAssociateScramSecretResponse < Struct.new(
+      nil,
       :cluster_arn,
       :unprocessed_scram_secrets,
       keyword_init: true
@@ -69,6 +73,7 @@ module Aws::Kafka
     #   <p>List of AWS Secrets Manager secret ARNs.</p>
     #   @return [Array<String>]
     class BatchDisassociateScramSecretRequest < Struct.new(
+      nil,
       :cluster_arn,
       :secret_arn_list,
       keyword_init: true
@@ -83,6 +88,7 @@ module Aws::Kafka
     #   <p>List of errors when disassociating secrets to cluster.</p>
     #   @return [Array<Types::UnprocessedScramSecret>]
     class BatchDisassociateScramSecretResponse < Struct.new(
+      nil,
       :cluster_arn,
       :unprocessed_scram_secrets,
       keyword_init: true
@@ -98,6 +104,7 @@ module Aws::Kafka
     #   <p>Kafka Broker IDs of brokers being deleted.</p>
     #   @return [Array<Float>]
     class BrokerCountUpdateInfo < Struct.new(
+      nil,
       :created_broker_ids,
       :deleted_broker_ids,
       keyword_init: true
@@ -116,6 +123,7 @@ module Aws::Kafka
     #   <p>Size of the EBS volume to update.</p>
     #   @return [Integer]
     class BrokerEBSVolumeInfo < Struct.new(
+      nil,
       :kafka_broker_node_id,
       :provisioned_throughput,
       :volume_size_gb,
@@ -131,6 +139,7 @@ module Aws::Kafka
     # @!attribute s3
     #   @return [Types::S3]
     class BrokerLogs < Struct.new(
+      nil,
       :cloud_watch_logs,
       :firehose,
       :s3,
@@ -164,6 +173,7 @@ module Aws::Kafka
     #   <p>The list of zoneIds for the cluster in the virtual private cloud (VPC).</p>
     #   @return [Array<String>]
     class BrokerNodeGroupInfo < Struct.new(
+      nil,
       :broker_az_distribution,
       :client_subnets,
       :instance_type,
@@ -196,6 +206,7 @@ module Aws::Kafka
     #   <p>Endpoints for accessing the broker.</p>
     #   @return [Array<String>]
     class BrokerNodeInfo < Struct.new(
+      nil,
       :attached_eni_id,
       :broker_id,
       :client_subnet,
@@ -218,6 +229,7 @@ module Aws::Kafka
     #   <p>The version of Apache Kafka.</p>
     #   @return [String]
     class BrokerSoftwareInfo < Struct.new(
+      nil,
       :configuration_arn,
       :configuration_revision,
       :kafka_version,
@@ -237,6 +249,7 @@ module Aws::Kafka
     #   <p>Contains information about unauthenticated traffic to the cluster.</p>
     #   @return [Types::Unauthenticated]
     class ClientAuthentication < Struct.new(
+      nil,
       :sasl,
       :tls,
       :unauthenticated,
@@ -262,6 +275,7 @@ module Aws::Kafka
     #   <p>The Owner of the Vpc Connection.</p>
     #   @return [String]
     class ClientVpcConnection < Struct.new(
+      nil,
       :authentication,
       :creation_time,
       :state,
@@ -277,6 +291,7 @@ module Aws::Kafka
     # @!attribute log_group
     #   @return [String]
     class CloudWatchLogs < Struct.new(
+      nil,
       :enabled,
       :log_group,
       keyword_init: true
@@ -319,6 +334,7 @@ module Aws::Kafka
     #   <p>Information about the serverless cluster.</p>
     #   @return [Types::Serverless]
     class Cluster < Struct.new(
+      nil,
       :active_operation_arn,
       :cluster_type,
       :cluster_arn,
@@ -395,6 +411,7 @@ module Aws::Kafka
     #   <p>Determines if there is an action required from the customer.</p>
     #   @return [String]
     class ClusterInfo < Struct.new(
+      nil,
       :active_operation_arn,
       :broker_node_group_info,
       :client_authentication,
@@ -458,6 +475,7 @@ module Aws::Kafka
     #   <p>Description of the VPC connection for CreateVpcConnection and DeleteVpcConnection operations.</p>
     #   @return [Types::VpcConnectionInfo]
     class ClusterOperationInfo < Struct.new(
+      nil,
       :client_request_id,
       :cluster_arn,
       :creation_time,
@@ -483,6 +501,7 @@ module Aws::Kafka
     #   <p>The name of the step.</p>
     #   @return [String]
     class ClusterOperationStep < Struct.new(
+      nil,
       :step_info,
       :step_name,
       keyword_init: true
@@ -495,6 +514,7 @@ module Aws::Kafka
     #   <p>The steps current status.</p>
     #   @return [String]
     class ClusterOperationStepInfo < Struct.new(
+      nil,
       :step_status,
       keyword_init: true
     )
@@ -533,6 +553,7 @@ module Aws::Kafka
     #   <p>Properties of a serverless cluster.</p>
     #   @return [Types::ClusterOperationV2Serverless]
     class ClusterOperationV2 < Struct.new(
+      nil,
       :cluster_arn,
       :cluster_type,
       :start_time,
@@ -562,6 +583,7 @@ module Aws::Kafka
     #   <p>Description of the VPC connection for CreateVpcConnection and DeleteVpcConnection operations.</p>
     #   @return [Types::VpcConnectionInfo]
     class ClusterOperationV2Provisioned < Struct.new(
+      nil,
       :operation_steps,
       :source_cluster_info,
       :target_cluster_info,
@@ -576,6 +598,7 @@ module Aws::Kafka
     #   <p>Description of the VPC connection for CreateVpcConnection and DeleteVpcConnection operations.</p>
     #   @return [Types::VpcConnectionInfoServerless]
     class ClusterOperationV2Serverless < Struct.new(
+      nil,
       :vpc_connection_info,
       keyword_init: true
     )
@@ -605,6 +628,7 @@ module Aws::Kafka
     #   <p>Type of the cluster operation.</p>
     #   @return [String]
     class ClusterOperationV2Summary < Struct.new(
+      nil,
       :cluster_arn,
       :cluster_type,
       :start_time,
@@ -625,6 +649,7 @@ module Aws::Kafka
     #   <p>A list of Apache Kafka versions.</p>
     #   @return [Array<String>]
     class CompatibleKafkaVersion < Struct.new(
+      nil,
       :source_version,
       :target_versions,
       keyword_init: true
@@ -655,6 +680,7 @@ module Aws::Kafka
     #   <p>The state of the configuration. The possible states are ACTIVE, DELETING, and DELETE_FAILED. </p>
     #   @return [String]
     class Configuration < Struct.new(
+      nil,
       :arn,
       :creation_time,
       :description,
@@ -675,6 +701,7 @@ module Aws::Kafka
     #   <p>The revision of the configuration to use.</p>
     #   @return [Integer]
     class ConfigurationInfo < Struct.new(
+      nil,
       :arn,
       :revision,
       keyword_init: true
@@ -693,6 +720,7 @@ module Aws::Kafka
     #   <p>The revision number.</p>
     #   @return [Integer]
     class ConfigurationRevision < Struct.new(
+      nil,
       :creation_time,
       :description,
       :revision,
@@ -709,6 +737,7 @@ module Aws::Kafka
     #   <p>The description of the error.</p>
     #   @return [String]
     class ConflictException < Struct.new(
+      nil,
       :invalid_parameter,
       :message,
       keyword_init: true
@@ -724,6 +753,7 @@ module Aws::Kafka
     #   <p>VPC connectivity access control for brokers.</p>
     #   @return [Types::VpcConnectivity]
     class ConnectivityInfo < Struct.new(
+      nil,
       :public_access,
       :vpc_connectivity,
       keyword_init: true
@@ -745,6 +775,7 @@ module Aws::Kafka
     #   <p>Enables synchronization of consumer group offsets to target cluster. The translated offsets will be written to topic __consumer_offsets.</p>
     #   @return [Boolean]
     class ConsumerGroupReplication < Struct.new(
+      nil,
       :consumer_groups_to_exclude,
       :consumer_groups_to_replicate,
       :detect_and_copy_new_consumer_groups,
@@ -768,6 +799,7 @@ module Aws::Kafka
     #   <p>Enables synchronization of consumer group offsets to target cluster. The translated offsets will be written to topic __consumer_offsets.</p>
     #   @return [Boolean]
     class ConsumerGroupReplicationUpdate < Struct.new(
+      nil,
       :consumer_groups_to_exclude,
       :consumer_groups_to_replicate,
       :detect_and_copy_new_consumer_groups,
@@ -782,6 +814,7 @@ module Aws::Kafka
     #   <p>Endpoints for accessing the Controller.</p>
     #   @return [Array<String>]
     class ControllerNodeInfo < Struct.new(
+      nil,
       :endpoints,
       keyword_init: true
     )
@@ -824,6 +857,7 @@ module Aws::Kafka
     #   <p>This controls storage mode for supported storage tiers.</p>
     #   @return [String]
     class CreateClusterRequest < Struct.new(
+      nil,
       :broker_node_group_info,
       :client_authentication,
       :cluster_name,
@@ -851,6 +885,7 @@ module Aws::Kafka
     #   <p>The state of the cluster. The possible states are ACTIVE, CREATING, DELETING, FAILED, HEALING, MAINTENANCE, REBOOTING_BROKER, and UPDATING.</p>
     #   @return [String]
     class CreateClusterResponse < Struct.new(
+      nil,
       :cluster_arn,
       :cluster_name,
       :state,
@@ -872,6 +907,7 @@ module Aws::Kafka
     #   <p>Information about the serverless cluster.</p>
     #   @return [Types::ServerlessRequest]
     class CreateClusterV2Request < Struct.new(
+      nil,
       :cluster_name,
       :tags,
       :provisioned,
@@ -894,6 +930,7 @@ module Aws::Kafka
     #   <p>The type of the cluster. The possible states are PROVISIONED or SERVERLESS.</p>
     #   @return [String]
     class CreateClusterV2Response < Struct.new(
+      nil,
       :cluster_arn,
       :cluster_name,
       :state,
@@ -917,6 +954,7 @@ module Aws::Kafka
     #                  When using the AWS Management Console, the SDK, or the AWS CLI, the contents of <filename>server.properties</filename> can be in plaintext.</p>
     #   @return [String]
     class CreateConfigurationRequest < Struct.new(
+      nil,
       :description,
       :kafka_versions,
       :name,
@@ -942,6 +980,7 @@ module Aws::Kafka
     #   <p>The state of the configuration. The possible states are ACTIVE, DELETING, and DELETE_FAILED. </p>
     #   @return [String]
     class CreateConfigurationResponse < Struct.new(
+      nil,
       :arn,
       :creation_time,
       :latest_revision,
@@ -972,6 +1011,7 @@ module Aws::Kafka
     #   <p>List of tags to attach to created Replicator.</p>
     #   @return [Hash<String, String>]
     class CreateReplicatorRequest < Struct.new(
+      nil,
       :description,
       :kafka_clusters,
       :replication_info_list,
@@ -993,6 +1033,7 @@ module Aws::Kafka
     #   <p>State of the replicator.</p>
     #   @return [String]
     class CreateReplicatorResponse < Struct.new(
+      nil,
       :replicator_arn,
       :replicator_name,
       :replicator_state,
@@ -1020,6 +1061,7 @@ module Aws::Kafka
     #   <p>A map of tags for the VPC connection.</p>
     #   @return [Hash<String, String>]
     class CreateVpcConnectionRequest < Struct.new(
+      nil,
       :target_cluster_arn,
       :authentication,
       :vpc_id,
@@ -1056,6 +1098,7 @@ module Aws::Kafka
     #   <p>A map of tags for the VPC connection.</p>
     #   @return [Hash<String, String>]
     class CreateVpcConnectionResponse < Struct.new(
+      nil,
       :vpc_connection_arn,
       :state,
       :authentication,
@@ -1073,6 +1116,7 @@ module Aws::Kafka
     #   <p>The Amazon Resource Name (ARN) of the cluster.</p>
     #   @return [String]
     class DeleteClusterPolicyRequest < Struct.new(
+      nil,
       :cluster_arn,
       keyword_init: true
     )
@@ -1080,6 +1124,7 @@ module Aws::Kafka
     end
 
     class DeleteClusterPolicyResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1092,6 +1137,7 @@ module Aws::Kafka
     #   <p>The current version of the MSK cluster.</p>
     #   @return [String]
     class DeleteClusterRequest < Struct.new(
+      nil,
       :cluster_arn,
       :current_version,
       keyword_init: true
@@ -1106,6 +1152,7 @@ module Aws::Kafka
     #   <p>The state of the cluster. The possible states are ACTIVE, CREATING, DELETING, FAILED, HEALING, MAINTENANCE, REBOOTING_BROKER, and UPDATING.</p>
     #   @return [String]
     class DeleteClusterResponse < Struct.new(
+      nil,
       :cluster_arn,
       :state,
       keyword_init: true
@@ -1117,6 +1164,7 @@ module Aws::Kafka
     #   <p>The Amazon Resource Name (ARN) that uniquely identifies an MSK configuration.</p>
     #   @return [String]
     class DeleteConfigurationRequest < Struct.new(
+      nil,
       :arn,
       keyword_init: true
     )
@@ -1130,6 +1178,7 @@ module Aws::Kafka
     #   <p>The state of the configuration. The possible states are ACTIVE, DELETING, and DELETE_FAILED. </p>
     #   @return [String]
     class DeleteConfigurationResponse < Struct.new(
+      nil,
       :arn,
       :state,
       keyword_init: true
@@ -1144,6 +1193,7 @@ module Aws::Kafka
     #   <p>The Amazon Resource Name (ARN) of the replicator to be deleted.</p>
     #   @return [String]
     class DeleteReplicatorRequest < Struct.new(
+      nil,
       :current_version,
       :replicator_arn,
       keyword_init: true
@@ -1158,6 +1208,7 @@ module Aws::Kafka
     #   <p>The state of the replicator.</p>
     #   @return [String]
     class DeleteReplicatorResponse < Struct.new(
+      nil,
       :replicator_arn,
       :replicator_state,
       keyword_init: true
@@ -1169,6 +1220,7 @@ module Aws::Kafka
     #   <p>The Amazon Resource Name (ARN) that uniquely identifies an MSK VPC connection.</p>
     #   @return [String]
     class DeleteVpcConnectionRequest < Struct.new(
+      nil,
       :arn,
       keyword_init: true
     )
@@ -1182,6 +1234,7 @@ module Aws::Kafka
     #   <p>The state of the VPC connection.</p>
     #   @return [String]
     class DeleteVpcConnectionResponse < Struct.new(
+      nil,
       :vpc_connection_arn,
       :state,
       keyword_init: true
@@ -1193,6 +1246,7 @@ module Aws::Kafka
     #   <p>The Amazon Resource Name (ARN) that uniquely identifies the MSK cluster operation.</p>
     #   @return [String]
     class DescribeClusterOperationRequest < Struct.new(
+      nil,
       :cluster_operation_arn,
       keyword_init: true
     )
@@ -1203,6 +1257,7 @@ module Aws::Kafka
     #   <p>Cluster operation information</p>
     #   @return [Types::ClusterOperationInfo]
     class DescribeClusterOperationResponse < Struct.new(
+      nil,
       :cluster_operation_info,
       keyword_init: true
     )
@@ -1213,6 +1268,7 @@ module Aws::Kafka
     #   ARN of the cluster operation to describe.
     #   @return [String]
     class DescribeClusterOperationV2Request < Struct.new(
+      nil,
       :cluster_operation_arn,
       keyword_init: true
     )
@@ -1223,6 +1279,7 @@ module Aws::Kafka
     #   <p>Cluster operation information</p>
     #   @return [Types::ClusterOperationV2]
     class DescribeClusterOperationV2Response < Struct.new(
+      nil,
       :cluster_operation_info,
       keyword_init: true
     )
@@ -1233,6 +1290,7 @@ module Aws::Kafka
     #   <p>The Amazon Resource Name (ARN) that uniquely identifies the cluster.</p>
     #   @return [String]
     class DescribeClusterRequest < Struct.new(
+      nil,
       :cluster_arn,
       keyword_init: true
     )
@@ -1243,6 +1301,7 @@ module Aws::Kafka
     #   <p>The cluster information.</p>
     #   @return [Types::ClusterInfo]
     class DescribeClusterResponse < Struct.new(
+      nil,
       :cluster_info,
       keyword_init: true
     )
@@ -1253,6 +1312,7 @@ module Aws::Kafka
     #   <p>The Amazon Resource Name (ARN) that uniquely identifies the cluster.</p>
     #   @return [String]
     class DescribeClusterV2Request < Struct.new(
+      nil,
       :cluster_arn,
       keyword_init: true
     )
@@ -1263,6 +1323,7 @@ module Aws::Kafka
     #   <p>The cluster information.</p>
     #   @return [Types::Cluster]
     class DescribeClusterV2Response < Struct.new(
+      nil,
       :cluster_info,
       keyword_init: true
     )
@@ -1273,6 +1334,7 @@ module Aws::Kafka
     #   <p>The Amazon Resource Name (ARN) that uniquely identifies an MSK configuration and all of its revisions.</p>
     #   @return [String]
     class DescribeConfigurationRequest < Struct.new(
+      nil,
       :arn,
       keyword_init: true
     )
@@ -1301,6 +1363,7 @@ module Aws::Kafka
     #   <p>The state of the configuration. The possible states are ACTIVE, DELETING, and DELETE_FAILED. </p>
     #   @return [String]
     class DescribeConfigurationResponse < Struct.new(
+      nil,
       :arn,
       :creation_time,
       :description,
@@ -1320,6 +1383,7 @@ module Aws::Kafka
     #   <p>A string that uniquely identifies a revision of an MSK configuration.</p>
     #   @return [Integer]
     class DescribeConfigurationRevisionRequest < Struct.new(
+      nil,
       :arn,
       :revision,
       keyword_init: true
@@ -1344,6 +1408,7 @@ module Aws::Kafka
     #                  When using the AWS Management Console, the SDK, or the AWS CLI, the contents of <filename>server.properties</filename> can be in plaintext.</p>
     #   @return [String]
     class DescribeConfigurationRevisionResponse < Struct.new(
+      nil,
       :arn,
       :creation_time,
       :description,
@@ -1358,6 +1423,7 @@ module Aws::Kafka
     #   <p>The Amazon Resource Name (ARN) of the replicator to be described.</p>
     #   @return [String]
     class DescribeReplicatorRequest < Struct.new(
+      nil,
       :replicator_arn,
       keyword_init: true
     )
@@ -1404,6 +1470,7 @@ module Aws::Kafka
     #   <p>List of tags attached to the Replicator.</p>
     #   @return [Hash<String, String>]
     class DescribeReplicatorResponse < Struct.new(
+      nil,
       :creation_time,
       :current_version,
       :is_replicator_reference,
@@ -1426,6 +1493,7 @@ module Aws::Kafka
     #   <p>The Amazon Resource Name (ARN) that uniquely identifies a MSK VPC connection.</p>
     #   @return [String]
     class DescribeVpcConnectionRequest < Struct.new(
+      nil,
       :arn,
       keyword_init: true
     )
@@ -1460,6 +1528,7 @@ module Aws::Kafka
     #   <p>A map of tags for the VPC connection.</p>
     #   @return [Hash<String, String>]
     class DescribeVpcConnectionResponse < Struct.new(
+      nil,
       :vpc_connection_arn,
       :target_cluster_arn,
       :state,
@@ -1482,6 +1551,7 @@ module Aws::Kafka
     #   <p>The size in GiB of the EBS volume for the data drive on each broker node.</p>
     #   @return [Integer]
     class EBSStorageInfo < Struct.new(
+      nil,
       :provisioned_throughput,
       :volume_size,
       keyword_init: true
@@ -1494,6 +1564,7 @@ module Aws::Kafka
     #   <p>The ARN of the AWS KMS key for encrypting data at rest. If you don't specify a KMS key, MSK creates one for you and uses it.</p>
     #   @return [String]
     class EncryptionAtRest < Struct.new(
+      nil,
       :data_volume_kms_key_id,
       keyword_init: true
     )
@@ -1516,6 +1587,7 @@ module Aws::Kafka
     #               <p>The default value is true.</p>
     #   @return [Boolean]
     class EncryptionInTransit < Struct.new(
+      nil,
       :client_broker,
       :in_cluster,
       keyword_init: true
@@ -1531,6 +1603,7 @@ module Aws::Kafka
     #   <p>The details for encryption in transit.</p>
     #   @return [Types::EncryptionInTransit]
     class EncryptionInfo < Struct.new(
+      nil,
       :encryption_at_rest,
       :encryption_in_transit,
       keyword_init: true
@@ -1546,6 +1619,7 @@ module Aws::Kafka
     #   <p>An optional field to provide more details about the error.</p>
     #   @return [String]
     class ErrorInfo < Struct.new(
+      nil,
       :error_code,
       :error_string,
       keyword_init: true
@@ -1558,6 +1632,7 @@ module Aws::Kafka
     # @!attribute enabled
     #   @return [Boolean]
     class Firehose < Struct.new(
+      nil,
       :delivery_stream,
       :enabled,
       keyword_init: true
@@ -1573,6 +1648,7 @@ module Aws::Kafka
     #   <p>The description of the error.</p>
     #   @return [String]
     class ForbiddenException < Struct.new(
+      nil,
       :invalid_parameter,
       :message,
       keyword_init: true
@@ -1584,6 +1660,7 @@ module Aws::Kafka
     #   <p>The Amazon Resource Name (ARN) that uniquely identifies the cluster.</p>
     #   @return [String]
     class GetBootstrapBrokersRequest < Struct.new(
+      nil,
       :cluster_arn,
       keyword_init: true
     )
@@ -1621,6 +1698,7 @@ module Aws::Kafka
     #   <p>A string containing one or more DNS names (or IP) and SASL/IAM port pairs for VPC connectivity.</p>
     #   @return [String]
     class GetBootstrapBrokersResponse < Struct.new(
+      nil,
       :bootstrap_broker_string,
       :bootstrap_broker_string_tls,
       :bootstrap_broker_string_sasl_scram,
@@ -1640,6 +1718,7 @@ module Aws::Kafka
     #   <p>The Amazon Resource Name (ARN) of the cluster.</p>
     #   @return [String]
     class GetClusterPolicyRequest < Struct.new(
+      nil,
       :cluster_arn,
       keyword_init: true
     )
@@ -1653,6 +1732,7 @@ module Aws::Kafka
     #   <p>The cluster policy.</p>
     #   @return [String]
     class GetClusterPolicyResponse < Struct.new(
+      nil,
       :current_version,
       :policy,
       keyword_init: true
@@ -1664,6 +1744,7 @@ module Aws::Kafka
     #   <p>The Amazon Resource Name (ARN) of the cluster check.</p>
     #   @return [String]
     class GetCompatibleKafkaVersionsRequest < Struct.new(
+      nil,
       :cluster_arn,
       keyword_init: true
     )
@@ -1674,6 +1755,7 @@ module Aws::Kafka
     #   <p>A list of CompatibleKafkaVersion objects.</p>
     #   @return [Array<Types::CompatibleKafkaVersion>]
     class GetCompatibleKafkaVersionsResponse < Struct.new(
+      nil,
       :compatible_kafka_versions,
       keyword_init: true
     )
@@ -1685,6 +1767,7 @@ module Aws::Kafka
     #   <p>Indicates whether IAM access control is enabled.</p>
     #   @return [Boolean]
     class Iam < Struct.new(
+      nil,
       :enabled,
       keyword_init: true
     )
@@ -1699,6 +1782,7 @@ module Aws::Kafka
     #   <p>The description of the error.</p>
     #   @return [String]
     class InternalServerErrorException < Struct.new(
+      nil,
       :invalid_parameter,
       :message,
       keyword_init: true
@@ -1711,6 +1795,7 @@ module Aws::Kafka
     #   <p>Indicates whether you want to turn on or turn off the JMX Exporter.</p>
     #   @return [Boolean]
     class JmxExporter < Struct.new(
+      nil,
       :enabled_in_broker,
       keyword_init: true
     )
@@ -1722,6 +1807,7 @@ module Aws::Kafka
     #   <p>Indicates whether you want to turn on or turn off the JMX Exporter.</p>
     #   @return [Boolean]
     class JmxExporterInfo < Struct.new(
+      nil,
       :enabled_in_broker,
       keyword_init: true
     )
@@ -1736,6 +1822,7 @@ module Aws::Kafka
     #   <p>Details of an Amazon VPC which has network connectivity to the Apache Kafka cluster.</p>
     #   @return [Types::KafkaClusterClientVpcConfig]
     class KafkaCluster < Struct.new(
+      nil,
       :amazon_msk_cluster,
       :vpc_config,
       keyword_init: true
@@ -1751,6 +1838,7 @@ module Aws::Kafka
     #   <p>The list of subnets in the client VPC to connect to.</p>
     #   @return [Array<String>]
     class KafkaClusterClientVpcConfig < Struct.new(
+      nil,
       :security_group_ids,
       :subnet_ids,
       keyword_init: true
@@ -1769,6 +1857,7 @@ module Aws::Kafka
     #   <p>Details of an Amazon VPC which has network connectivity to the Apache Kafka cluster.</p>
     #   @return [Types::KafkaClusterClientVpcConfig]
     class KafkaClusterDescription < Struct.new(
+      nil,
       :amazon_msk_cluster,
       :kafka_cluster_alias,
       :vpc_config,
@@ -1785,6 +1874,7 @@ module Aws::Kafka
     #   <p>The alias of the Kafka cluster. Used to prefix names of replicated topics.</p>
     #   @return [String]
     class KafkaClusterSummary < Struct.new(
+      nil,
       :amazon_msk_cluster,
       :kafka_cluster_alias,
       keyword_init: true
@@ -1797,6 +1887,7 @@ module Aws::Kafka
     # @!attribute status
     #   @return [String]
     class KafkaVersion < Struct.new(
+      nil,
       :version,
       :status,
       keyword_init: true
@@ -1815,6 +1906,7 @@ module Aws::Kafka
     #               To get the next batch, provide this token in your next request.</p>
     #   @return [String]
     class ListClientVpcConnectionsRequest < Struct.new(
+      nil,
       :cluster_arn,
       :max_results,
       :next_token,
@@ -1831,6 +1923,7 @@ module Aws::Kafka
     #                  To get another batch of configurations, provide this token in your next request.</p>
     #   @return [String]
     class ListClientVpcConnectionsResponse < Struct.new(
+      nil,
       :client_vpc_connections,
       :next_token,
       keyword_init: true
@@ -1849,6 +1942,7 @@ module Aws::Kafka
     #               To get the next batch, provide this token in your next request.</p>
     #   @return [String]
     class ListClusterOperationsRequest < Struct.new(
+      nil,
       :cluster_arn,
       :max_results,
       :next_token,
@@ -1864,6 +1958,7 @@ module Aws::Kafka
     #   <p>If the response of ListClusterOperations is truncated, it returns a NextToken in the response. This Nexttoken should be sent in the subsequent request to ListClusterOperations.</p>
     #   @return [String]
     class ListClusterOperationsResponse < Struct.new(
+      nil,
       :cluster_operation_info_list,
       :next_token,
       keyword_init: true
@@ -1881,6 +1976,7 @@ module Aws::Kafka
     #   The nextToken of the query.
     #   @return [String]
     class ListClusterOperationsV2Request < Struct.new(
+      nil,
       :cluster_arn,
       :max_results,
       :next_token,
@@ -1896,6 +1992,7 @@ module Aws::Kafka
     #   <p>If the response of ListClusterOperationsV2 is truncated, it returns a NextToken in the response. This NextToken should be sent in the subsequent request to ListClusterOperationsV2.</p>
     #   @return [String]
     class ListClusterOperationsV2Response < Struct.new(
+      nil,
       :cluster_operation_info_list,
       :next_token,
       keyword_init: true
@@ -1914,6 +2011,7 @@ module Aws::Kafka
     #               To get the next batch, provide this token in your next request.</p>
     #   @return [String]
     class ListClustersRequest < Struct.new(
+      nil,
       :cluster_name_filter,
       :max_results,
       :next_token,
@@ -1930,6 +2028,7 @@ module Aws::Kafka
     #                  To get another batch of clusters, provide this token in your next request.</p>
     #   @return [String]
     class ListClustersResponse < Struct.new(
+      nil,
       :cluster_info_list,
       :next_token,
       keyword_init: true
@@ -1951,6 +2050,7 @@ module Aws::Kafka
     #               To get the next batch, provide this token in your next request.</p>
     #   @return [String]
     class ListClustersV2Request < Struct.new(
+      nil,
       :cluster_name_filter,
       :cluster_type_filter,
       :max_results,
@@ -1968,6 +2068,7 @@ module Aws::Kafka
     #                  To get another batch of clusters, provide this token in your next request.</p>
     #   @return [String]
     class ListClustersV2Response < Struct.new(
+      nil,
       :cluster_info_list,
       :next_token,
       keyword_init: true
@@ -1986,6 +2087,7 @@ module Aws::Kafka
     #               To get the next batch, provide this token in your next request.</p>
     #   @return [String]
     class ListConfigurationRevisionsRequest < Struct.new(
+      nil,
       :arn,
       :max_results,
       :next_token,
@@ -2001,6 +2103,7 @@ module Aws::Kafka
     #   <p>List of ConfigurationRevision objects.</p>
     #   @return [Array<Types::ConfigurationRevision>]
     class ListConfigurationRevisionsResponse < Struct.new(
+      nil,
       :next_token,
       :revisions,
       keyword_init: true
@@ -2016,6 +2119,7 @@ module Aws::Kafka
     #               To get the next batch, provide this token in your next request.</p>
     #   @return [String]
     class ListConfigurationsRequest < Struct.new(
+      nil,
       :max_results,
       :next_token,
       keyword_init: true
@@ -2031,6 +2135,7 @@ module Aws::Kafka
     #                  To get another batch of configurations, provide this token in your next request.</p>
     #   @return [String]
     class ListConfigurationsResponse < Struct.new(
+      nil,
       :configurations,
       :next_token,
       keyword_init: true
@@ -2045,6 +2150,7 @@ module Aws::Kafka
     #   <p>The paginated results marker. When the result of the operation is truncated, the call returns NextToken in the response. To get the next batch, provide this token in your next request.</p>
     #   @return [String]
     class ListKafkaVersionsRequest < Struct.new(
+      nil,
       :max_results,
       :next_token,
       keyword_init: true
@@ -2057,6 +2163,7 @@ module Aws::Kafka
     # @!attribute next_token
     #   @return [String]
     class ListKafkaVersionsResponse < Struct.new(
+      nil,
       :kafka_versions,
       :next_token,
       keyword_init: true
@@ -2075,6 +2182,7 @@ module Aws::Kafka
     #               To get the next batch, provide this token in your next request.</p>
     #   @return [String]
     class ListNodesRequest < Struct.new(
+      nil,
       :cluster_arn,
       :max_results,
       :next_token,
@@ -2091,6 +2199,7 @@ module Aws::Kafka
     #   <p>List containing a NodeInfo object.</p>
     #   @return [Array<Types::NodeInfo>]
     class ListNodesResponse < Struct.new(
+      nil,
       :next_token,
       :node_info_list,
       keyword_init: true
@@ -2108,6 +2217,7 @@ module Aws::Kafka
     #   <p>Returns replicators starting with given name.</p>
     #   @return [String]
     class ListReplicatorsRequest < Struct.new(
+      nil,
       :max_results,
       :next_token,
       :replicator_name_filter,
@@ -2123,6 +2233,7 @@ module Aws::Kafka
     #   <p>List containing information of each of the replicators in the account.</p>
     #   @return [Array<Types::ReplicatorSummary>]
     class ListReplicatorsResponse < Struct.new(
+      nil,
       :next_token,
       :replicators,
       keyword_init: true
@@ -2140,6 +2251,7 @@ module Aws::Kafka
     #   <p>The nextToken of the query.</p>
     #   @return [String]
     class ListScramSecretsRequest < Struct.new(
+      nil,
       :cluster_arn,
       :max_results,
       :next_token,
@@ -2155,6 +2267,7 @@ module Aws::Kafka
     #   <p>The list of scram secrets associated with the cluster.</p>
     #   @return [Array<String>]
     class ListScramSecretsResponse < Struct.new(
+      nil,
       :next_token,
       :secret_arn_list,
       keyword_init: true
@@ -2166,6 +2279,7 @@ module Aws::Kafka
     #   <p>The Amazon Resource Name (ARN) that uniquely identifies the resource that's associated with the tags.</p>
     #   @return [String]
     class ListTagsForResourceRequest < Struct.new(
+      nil,
       :resource_arn,
       keyword_init: true
     )
@@ -2176,6 +2290,7 @@ module Aws::Kafka
     #   <p>The key-value pair for the resource tag.</p>
     #   @return [Hash<String, String>]
     class ListTagsForResourceResponse < Struct.new(
+      nil,
       :tags,
       keyword_init: true
     )
@@ -2190,6 +2305,7 @@ module Aws::Kafka
     #               To get the next batch, provide this token in your next request.</p>
     #   @return [String]
     class ListVpcConnectionsRequest < Struct.new(
+      nil,
       :max_results,
       :next_token,
       keyword_init: true
@@ -2205,6 +2321,7 @@ module Aws::Kafka
     #                  To get another batch of configurations, provide this token in your next request.</p>
     #   @return [String]
     class ListVpcConnectionsResponse < Struct.new(
+      nil,
       :vpc_connections,
       :next_token,
       keyword_init: true
@@ -2215,6 +2332,7 @@ module Aws::Kafka
     # @!attribute broker_logs
     #   @return [Types::BrokerLogs]
     class LoggingInfo < Struct.new(
+      nil,
       :broker_logs,
       keyword_init: true
     )
@@ -2262,6 +2380,7 @@ module Aws::Kafka
     #   <p>Describes brokers being changed during a broker count update.</p>
     #   @return [Types::BrokerCountUpdateInfo]
     class MutableClusterInfo < Struct.new(
+      nil,
       :broker_ebs_volume_info,
       :configuration_info,
       :number_of_broker_nodes,
@@ -2285,6 +2404,7 @@ module Aws::Kafka
     #   <p>Indicates whether you want to turn on or turn off the Node Exporter.</p>
     #   @return [Boolean]
     class NodeExporter < Struct.new(
+      nil,
       :enabled_in_broker,
       keyword_init: true
     )
@@ -2296,6 +2416,7 @@ module Aws::Kafka
     #   <p>Indicates whether you want to turn on or turn off the Node Exporter.</p>
     #   @return [Boolean]
     class NodeExporterInfo < Struct.new(
+      nil,
       :enabled_in_broker,
       keyword_init: true
     )
@@ -2325,6 +2446,7 @@ module Aws::Kafka
     #   <p>The ZookeeperNodeInfo.</p>
     #   @return [Types::ZookeeperNodeInfo]
     class NodeInfo < Struct.new(
+      nil,
       :added_to_cluster_time,
       :broker_node_info,
       :controller_node_info,
@@ -2345,6 +2467,7 @@ module Aws::Kafka
     #   <p>The description of the error.</p>
     #   @return [String]
     class NotFoundException < Struct.new(
+      nil,
       :invalid_parameter,
       :message,
       keyword_init: true
@@ -2357,6 +2480,7 @@ module Aws::Kafka
     #   <p>Prometheus settings.</p>
     #   @return [Types::Prometheus]
     class OpenMonitoring < Struct.new(
+      nil,
       :prometheus,
       keyword_init: true
     )
@@ -2368,6 +2492,7 @@ module Aws::Kafka
     #   <p>Prometheus settings.</p>
     #   @return [Types::PrometheusInfo]
     class OpenMonitoringInfo < Struct.new(
+      nil,
       :prometheus,
       keyword_init: true
     )
@@ -2382,6 +2507,7 @@ module Aws::Kafka
     #   <p>Indicates whether you want to turn on or turn off the Node Exporter.</p>
     #   @return [Types::NodeExporter]
     class Prometheus < Struct.new(
+      nil,
       :jmx_exporter,
       :node_exporter,
       keyword_init: true
@@ -2397,6 +2523,7 @@ module Aws::Kafka
     #   <p>Indicates whether you want to turn on or turn off the Node Exporter.</p>
     #   @return [Types::NodeExporterInfo]
     class PrometheusInfo < Struct.new(
+      nil,
       :jmx_exporter,
       :node_exporter,
       keyword_init: true
@@ -2442,6 +2569,7 @@ module Aws::Kafka
     #   <p>Determines if there is an action required from the customer.</p>
     #   @return [String]
     class Provisioned < Struct.new(
+      nil,
       :broker_node_group_info,
       :current_broker_software_info,
       :client_authentication,
@@ -2491,6 +2619,7 @@ module Aws::Kafka
     #   <p>This controls storage mode for supported storage tiers.</p>
     #   @return [String]
     class ProvisionedRequest < Struct.new(
+      nil,
       :broker_node_group_info,
       :client_authentication,
       :configuration_info,
@@ -2514,6 +2643,7 @@ module Aws::Kafka
     #   <p>Throughput value of the EBS volumes for the data drive on each kafka broker node in MiB per second.</p>
     #   @return [Integer]
     class ProvisionedThroughput < Struct.new(
+      nil,
       :enabled,
       :volume_throughput,
       keyword_init: true
@@ -2526,6 +2656,7 @@ module Aws::Kafka
     #   <p>The value DISABLED indicates that public access is turned off. SERVICE_PROVIDED_EIPS indicates that public access is turned on.</p>
     #   @return [String]
     class PublicAccess < Struct.new(
+      nil,
       :type,
       keyword_init: true
     )
@@ -2542,6 +2673,7 @@ module Aws::Kafka
     #   <p>The policy.</p>
     #   @return [String]
     class PutClusterPolicyRequest < Struct.new(
+      nil,
       :cluster_arn,
       :current_version,
       :policy,
@@ -2554,6 +2686,7 @@ module Aws::Kafka
     #   <p>The policy version.</p>
     #   @return [String]
     class PutClusterPolicyResponse < Struct.new(
+      nil,
       :current_version,
       keyword_init: true
     )
@@ -2568,6 +2701,7 @@ module Aws::Kafka
     #   <p>The Amazon Resource Name (ARN) of the cluster to be updated.</p>
     #   @return [String]
     class RebootBrokerRequest < Struct.new(
+      nil,
       :broker_ids,
       :cluster_arn,
       keyword_init: true
@@ -2582,6 +2716,7 @@ module Aws::Kafka
     #   <p>The Amazon Resource Name (ARN) of the cluster operation.</p>
     #   @return [String]
     class RebootBrokerResponse < Struct.new(
+      nil,
       :cluster_arn,
       :cluster_operation_arn,
       keyword_init: true
@@ -2596,6 +2731,7 @@ module Aws::Kafka
     #   <p>The VPC connection ARN.</p>
     #   @return [String]
     class RejectClientVpcConnectionRequest < Struct.new(
+      nil,
       :cluster_arn,
       :vpc_connection_arn,
       keyword_init: true
@@ -2604,6 +2740,7 @@ module Aws::Kafka
     end
 
     class RejectClientVpcConnectionResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -2626,6 +2763,7 @@ module Aws::Kafka
     #   <p>Configuration relating to topic replication.</p>
     #   @return [Types::TopicReplication]
     class ReplicationInfo < Struct.new(
+      nil,
       :consumer_group_replication,
       :source_kafka_cluster_arn,
       :target_compression_type,
@@ -2653,6 +2791,7 @@ module Aws::Kafka
     #   <p>Configuration relating to topic replication.</p>
     #   @return [Types::TopicReplication]
     class ReplicationInfoDescription < Struct.new(
+      nil,
       :consumer_group_replication,
       :source_kafka_cluster_alias,
       :target_compression_type,
@@ -2671,6 +2810,7 @@ module Aws::Kafka
     #   <p>The alias of the target Kafka cluster.</p>
     #   @return [String]
     class ReplicationInfoSummary < Struct.new(
+      nil,
       :source_kafka_cluster_alias,
       :target_kafka_cluster_alias,
       keyword_init: true
@@ -2683,6 +2823,7 @@ module Aws::Kafka
     #   <p>The type of replication starting position.</p>
     #   @return [String]
     class ReplicationStartingPosition < Struct.new(
+      nil,
       :type,
       keyword_init: true
     )
@@ -2697,6 +2838,7 @@ module Aws::Kafka
     #   Message that describes the state of the replicator.
     #   @return [String]
     class ReplicationStateInfo < Struct.new(
+      nil,
       :code,
       :message,
       keyword_init: true
@@ -2709,6 +2851,7 @@ module Aws::Kafka
     #   <p>The type of replicated topic name.</p>
     #   @return [String]
     class ReplicationTopicNameConfiguration < Struct.new(
+      nil,
       :type,
       keyword_init: true
     )
@@ -2744,6 +2887,7 @@ module Aws::Kafka
     #   <p>State of the replicator.</p>
     #   @return [String]
     class ReplicatorSummary < Struct.new(
+      nil,
       :creation_time,
       :current_version,
       :is_replicator_reference,
@@ -2765,6 +2909,7 @@ module Aws::Kafka
     # @!attribute prefix
     #   @return [String]
     class S3 < Struct.new(
+      nil,
       :bucket,
       :enabled,
       :prefix,
@@ -2781,6 +2926,7 @@ module Aws::Kafka
     #   <p>Indicates whether IAM access control is enabled.</p>
     #   @return [Types::Iam]
     class Sasl < Struct.new(
+      nil,
       :scram,
       :iam,
       keyword_init: true
@@ -2793,6 +2939,7 @@ module Aws::Kafka
     #   <p>SASL/SCRAM authentication is enabled or not.</p>
     #   @return [Boolean]
     class Scram < Struct.new(
+      nil,
       :enabled,
       keyword_init: true
     )
@@ -2807,6 +2954,7 @@ module Aws::Kafka
     #   <p>Includes all client authentication information.</p>
     #   @return [Types::ServerlessClientAuthentication]
     class Serverless < Struct.new(
+      nil,
       :vpc_configs,
       :client_authentication,
       keyword_init: true
@@ -2819,6 +2967,7 @@ module Aws::Kafka
     #   <p>Details for ClientAuthentication using SASL.</p>
     #   @return [Types::ServerlessSasl]
     class ServerlessClientAuthentication < Struct.new(
+      nil,
       :sasl,
       keyword_init: true
     )
@@ -2833,6 +2982,7 @@ module Aws::Kafka
     #   <p>Includes all client authentication information.</p>
     #   @return [Types::ServerlessClientAuthentication]
     class ServerlessRequest < Struct.new(
+      nil,
       :vpc_configs,
       :client_authentication,
       keyword_init: true
@@ -2845,6 +2995,7 @@ module Aws::Kafka
     #   <p>Indicates whether IAM access control is enabled.</p>
     #   @return [Types::Iam]
     class ServerlessSasl < Struct.new(
+      nil,
       :iam,
       keyword_init: true
     )
@@ -2859,6 +3010,7 @@ module Aws::Kafka
     #   <p>The description of the error.</p>
     #   @return [String]
     class ServiceUnavailableException < Struct.new(
+      nil,
       :invalid_parameter,
       :message,
       keyword_init: true
@@ -2871,6 +3023,7 @@ module Aws::Kafka
     # @!attribute message
     #   @return [String]
     class StateInfo < Struct.new(
+      nil,
       :code,
       :message,
       keyword_init: true
@@ -2883,6 +3036,7 @@ module Aws::Kafka
     #   <p>EBS volume information.</p>
     #   @return [Types::EBSStorageInfo]
     class StorageInfo < Struct.new(
+      nil,
       :ebs_storage_info,
       keyword_init: true
     )
@@ -2896,6 +3050,7 @@ module Aws::Kafka
     #   <p>The key-value pair for the resource tag.</p>
     #   @return [Hash<String, String>]
     class TagResourceRequest < Struct.new(
+      nil,
       :resource_arn,
       :tags,
       keyword_init: true
@@ -2911,6 +3066,7 @@ module Aws::Kafka
     #   <p>Specifies whether you want to turn on or turn off TLS authentication.</p>
     #   @return [Boolean]
     class Tls < Struct.new(
+      nil,
       :certificate_authority_arn_list,
       :enabled,
       keyword_init: true
@@ -2926,6 +3082,7 @@ module Aws::Kafka
     #   <p>The description of the error.</p>
     #   @return [String]
     class TooManyRequestsException < Struct.new(
+      nil,
       :invalid_parameter,
       :message,
       keyword_init: true
@@ -2956,6 +3113,7 @@ module Aws::Kafka
     #   <p>List of regular expression patterns indicating the topics to copy.</p>
     #   @return [Array<String>]
     class TopicReplication < Struct.new(
+      nil,
       :copy_access_control_lists_for_topics,
       :copy_topic_configurations,
       :detect_and_copy_new_topics,
@@ -2985,6 +3143,7 @@ module Aws::Kafka
     #   <p>List of regular expression patterns indicating the topics to copy.</p>
     #   @return [Array<String>]
     class TopicReplicationUpdate < Struct.new(
+      nil,
       :copy_access_control_lists_for_topics,
       :copy_topic_configurations,
       :detect_and_copy_new_topics,
@@ -2999,6 +3158,7 @@ module Aws::Kafka
     #   <p>Specifies whether you want to turn on or turn off unauthenticated traffic to your cluster.</p>
     #   @return [Boolean]
     class Unauthenticated < Struct.new(
+      nil,
       :enabled,
       keyword_init: true
     )
@@ -3013,6 +3173,7 @@ module Aws::Kafka
     #   <p>The description of the error.</p>
     #   @return [String]
     class UnauthorizedException < Struct.new(
+      nil,
       :invalid_parameter,
       :message,
       keyword_init: true
@@ -3031,6 +3192,7 @@ module Aws::Kafka
     #   <p>AWS Secrets Manager secret ARN.</p>
     #   @return [String]
     class UnprocessedScramSecret < Struct.new(
+      nil,
       :error_code,
       :error_message,
       :secret_arn,
@@ -3065,6 +3227,7 @@ module Aws::Kafka
     #               </ul>
     #   @return [Array<String>]
     class UntagResourceRequest < Struct.new(
+      nil,
       :resource_arn,
       :tag_keys,
       keyword_init: true
@@ -3082,6 +3245,7 @@ module Aws::Kafka
     #   <p>The number of broker nodes that you want the cluster to have after this operation completes successfully.</p>
     #   @return [Integer]
     class UpdateBrokerCountRequest < Struct.new(
+      nil,
       :cluster_arn,
       :current_version,
       :target_number_of_broker_nodes,
@@ -3097,6 +3261,7 @@ module Aws::Kafka
     #   <p>The Amazon Resource Name (ARN) of the cluster operation.</p>
     #   @return [String]
     class UpdateBrokerCountResponse < Struct.new(
+      nil,
       :cluster_arn,
       :cluster_operation_arn,
       keyword_init: true
@@ -3114,6 +3279,7 @@ module Aws::Kafka
     #   <p>Describes the target volume size and the ID of the broker to apply the update to.</p>
     #   @return [Array<Types::BrokerEBSVolumeInfo>]
     class UpdateBrokerStorageRequest < Struct.new(
+      nil,
       :cluster_arn,
       :current_version,
       :target_broker_ebs_volume_info,
@@ -3129,6 +3295,7 @@ module Aws::Kafka
     #   <p>The Amazon Resource Name (ARN) of the cluster operation.</p>
     #   @return [String]
     class UpdateBrokerStorageResponse < Struct.new(
+      nil,
       :cluster_arn,
       :cluster_operation_arn,
       keyword_init: true
@@ -3146,6 +3313,7 @@ module Aws::Kafka
     #   <p>The Amazon MSK broker type that you want all of the brokers in this cluster to be.</p>
     #   @return [String]
     class UpdateBrokerTypeRequest < Struct.new(
+      nil,
       :cluster_arn,
       :current_version,
       :target_instance_type,
@@ -3161,6 +3329,7 @@ module Aws::Kafka
     #   <p>The Amazon Resource Name (ARN) of the cluster operation.</p>
     #   @return [String]
     class UpdateBrokerTypeResponse < Struct.new(
+      nil,
       :cluster_arn,
       :cluster_operation_arn,
       keyword_init: true
@@ -3178,6 +3347,7 @@ module Aws::Kafka
     #   <p>The version of the cluster that needs to be updated.</p>
     #   @return [String]
     class UpdateClusterConfigurationRequest < Struct.new(
+      nil,
       :cluster_arn,
       :configuration_info,
       :current_version,
@@ -3193,6 +3363,7 @@ module Aws::Kafka
     #   <p>The Amazon Resource Name (ARN) of the cluster operation.</p>
     #   @return [String]
     class UpdateClusterConfigurationResponse < Struct.new(
+      nil,
       :cluster_arn,
       :cluster_operation_arn,
       keyword_init: true
@@ -3213,6 +3384,7 @@ module Aws::Kafka
     #   <p>Target Kafka version.</p>
     #   @return [String]
     class UpdateClusterKafkaVersionRequest < Struct.new(
+      nil,
       :cluster_arn,
       :configuration_info,
       :current_version,
@@ -3229,6 +3401,7 @@ module Aws::Kafka
     #   <p>The Amazon Resource Name (ARN) of the cluster operation.</p>
     #   @return [String]
     class UpdateClusterKafkaVersionResponse < Struct.new(
+      nil,
       :cluster_arn,
       :cluster_operation_arn,
       keyword_init: true
@@ -3247,6 +3420,7 @@ module Aws::Kafka
     #                  When using the AWS Management Console, the SDK, or the AWS CLI, the contents of <filename>server.properties</filename> can be in plaintext.</p>
     #   @return [String]
     class UpdateConfigurationRequest < Struct.new(
+      nil,
       :arn,
       :description,
       :server_properties,
@@ -3262,6 +3436,7 @@ module Aws::Kafka
     #   <p>Latest revision of the configuration.</p>
     #   @return [Types::ConfigurationRevision]
     class UpdateConfigurationResponse < Struct.new(
+      nil,
       :arn,
       :latest_revision,
       keyword_init: true
@@ -3280,6 +3455,7 @@ module Aws::Kafka
     #   <p>The version of the MSK cluster to update. Cluster versions aren't simple numbers. You can describe an MSK cluster to find its version. When this update operation is successful, it generates a new cluster version.</p>
     #   @return [String]
     class UpdateConnectivityRequest < Struct.new(
+      nil,
       :cluster_arn,
       :connectivity_info,
       :current_version,
@@ -3295,6 +3471,7 @@ module Aws::Kafka
     #   <p>The Amazon Resource Name (ARN) of the cluster operation.</p>
     #   @return [String]
     class UpdateConnectivityResponse < Struct.new(
+      nil,
       :cluster_arn,
       :cluster_operation_arn,
       keyword_init: true
@@ -3318,6 +3495,7 @@ module Aws::Kafka
     # @!attribute logging_info
     #   @return [Types::LoggingInfo]
     class UpdateMonitoringRequest < Struct.new(
+      nil,
       :cluster_arn,
       :current_version,
       :enhanced_monitoring,
@@ -3335,6 +3513,7 @@ module Aws::Kafka
     #   <p>The Amazon Resource Name (ARN) of the cluster operation.</p>
     #   @return [String]
     class UpdateMonitoringResponse < Struct.new(
+      nil,
       :cluster_arn,
       :cluster_operation_arn,
       keyword_init: true
@@ -3362,6 +3541,7 @@ module Aws::Kafka
     #   <p>Updated topic replication information.</p>
     #   @return [Types::TopicReplicationUpdate]
     class UpdateReplicationInfoRequest < Struct.new(
+      nil,
       :consumer_group_replication,
       :current_version,
       :replicator_arn,
@@ -3380,6 +3560,7 @@ module Aws::Kafka
     #   <p>State of the replicator.</p>
     #   @return [String]
     class UpdateReplicationInfoResponse < Struct.new(
+      nil,
       :replicator_arn,
       :replicator_state,
       keyword_init: true
@@ -3400,6 +3581,7 @@ module Aws::Kafka
     #   <p>Includes all encryption-related information.</p>
     #   @return [Types::EncryptionInfo]
     class UpdateSecurityRequest < Struct.new(
+      nil,
       :client_authentication,
       :cluster_arn,
       :current_version,
@@ -3416,6 +3598,7 @@ module Aws::Kafka
     #   <p>The Amazon Resource Name (ARN) of the cluster operation.</p>
     #   @return [String]
     class UpdateSecurityResponse < Struct.new(
+      nil,
       :cluster_arn,
       :cluster_operation_arn,
       keyword_init: true
@@ -3440,6 +3623,7 @@ module Aws::Kafka
     #   <p>size of the EBS volume to update.</p>
     #   @return [Integer]
     class UpdateStorageRequest < Struct.new(
+      nil,
       :cluster_arn,
       :current_version,
       :provisioned_throughput,
@@ -3457,6 +3641,7 @@ module Aws::Kafka
     #   <p>The Amazon Resource Name (ARN) of the cluster operation.</p>
     #   @return [String]
     class UpdateStorageResponse < Struct.new(
+      nil,
       :cluster_arn,
       :cluster_operation_arn,
       keyword_init: true
@@ -3472,6 +3657,7 @@ module Aws::Kafka
     #   <p>A unique identifier for the requester that calls the API operation.</p>
     #   @return [String]
     class UserIdentity < Struct.new(
+      nil,
       :type,
       :principal_id,
       keyword_init: true
@@ -3487,6 +3673,7 @@ module Aws::Kafka
     #   <p>The IDs of the security groups associated with the cluster.</p>
     #   @return [Array<String>]
     class VpcConfig < Struct.new(
+      nil,
       :subnet_ids,
       :security_group_ids,
       keyword_init: true
@@ -3514,6 +3701,7 @@ module Aws::Kafka
     #   <p>State of the Vpc Connection.</p>
     #   @return [String]
     class VpcConnection < Struct.new(
+      nil,
       :vpc_connection_arn,
       :target_cluster_arn,
       :creation_time,
@@ -3539,6 +3727,7 @@ module Aws::Kafka
     #   <p>The time when Amazon MSK creates the VPC Connnection.</p>
     #   @return [Time]
     class VpcConnectionInfo < Struct.new(
+      nil,
       :vpc_connection_arn,
       :owner,
       :user_identity,
@@ -3562,6 +3751,7 @@ module Aws::Kafka
     #   <p>The Amazon Resource Name (ARN) of the VPC connection.</p>
     #   @return [String]
     class VpcConnectionInfoServerless < Struct.new(
+      nil,
       :creation_time,
       :owner,
       :user_identity,
@@ -3576,6 +3766,7 @@ module Aws::Kafka
     #   <p>Includes all client authentication information for VPC connectivity.</p>
     #   @return [Types::VpcConnectivityClientAuthentication]
     class VpcConnectivity < Struct.new(
+      nil,
       :client_authentication,
       keyword_init: true
     )
@@ -3590,6 +3781,7 @@ module Aws::Kafka
     #   <p>TLS authentication type details for VPC connectivity.</p>
     #   @return [Types::VpcConnectivityTls]
     class VpcConnectivityClientAuthentication < Struct.new(
+      nil,
       :sasl,
       :tls,
       keyword_init: true
@@ -3602,6 +3794,7 @@ module Aws::Kafka
     #   <p>SASL/IAM authentication is on or off for VPC connectivity.</p>
     #   @return [Boolean]
     class VpcConnectivityIam < Struct.new(
+      nil,
       :enabled,
       keyword_init: true
     )
@@ -3616,6 +3809,7 @@ module Aws::Kafka
     #   <p>Details for SASL/IAM client authentication for VPC connectivity.</p>
     #   @return [Types::VpcConnectivityIam]
     class VpcConnectivitySasl < Struct.new(
+      nil,
       :scram,
       :iam,
       keyword_init: true
@@ -3628,6 +3822,7 @@ module Aws::Kafka
     #   <p>SASL/SCRAM authentication is on or off for VPC connectivity.</p>
     #   @return [Boolean]
     class VpcConnectivityScram < Struct.new(
+      nil,
       :enabled,
       keyword_init: true
     )
@@ -3639,6 +3834,7 @@ module Aws::Kafka
     #   <p>TLS authentication is on or off for VPC connectivity.</p>
     #   @return [Boolean]
     class VpcConnectivityTls < Struct.new(
+      nil,
       :enabled,
       keyword_init: true
     )
@@ -3662,6 +3858,7 @@ module Aws::Kafka
     #   <p>The version of Zookeeper.</p>
     #   @return [String]
     class ZookeeperNodeInfo < Struct.new(
+      nil,
       :attached_eni_id,
       :client_vpc_ip_address,
       :endpoints,

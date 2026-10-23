@@ -10,6 +10,7 @@ module Aws::Shield
     # @!attribute message
     #   @return [String]
     class AccessDeniedException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -20,6 +21,7 @@ module Aws::Shield
     # @!attribute message
     #   @return [String]
     class AccessDeniedForDependencyException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -38,6 +40,7 @@ module Aws::Shield
     #      when you enable or update automatic mitigation. Shield Advanced creates the WAF rules in a Shield Advanced-managed rule group, inside the web ACL that you have associated with the resource. </p>
     #   @return [Types::ResponseAction]
     class ApplicationLayerAutomaticResponseConfiguration < Struct.new(
+      nil,
       :status,
       :action,
       keyword_init: true
@@ -49,6 +52,7 @@ module Aws::Shield
     #   <p>The Amazon S3 bucket that contains the logs that you want to share.</p>
     #   @return [String]
     class AssociateDRTLogBucketRequest < Struct.new(
+      nil,
       :log_bucket,
       keyword_init: true
     )
@@ -56,6 +60,7 @@ module Aws::Shield
     end
 
     class AssociateDRTLogBucketResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -66,6 +71,7 @@ module Aws::Shield
     #            <p>Prior to making the <code>AssociateDRTRole</code> request, you must attach the <a href="https://console.aws.amazon.com/iam/home?#/policies/arn:aws:iam::aws:policy/service-role/AWSShieldDRTAccessPolicy">AWSShieldDRTAccessPolicy</a> managed policy to this role.  For more information see <a href=" https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_manage-attach-detach.html">Attaching and Detaching IAM Policies</a>.</p>
     #   @return [String]
     class AssociateDRTRoleRequest < Struct.new(
+      nil,
       :role_arn,
       keyword_init: true
     )
@@ -73,6 +79,7 @@ module Aws::Shield
     end
 
     class AssociateDRTRoleResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -85,6 +92,7 @@ module Aws::Shield
     #   <p>The Amazon Resource Name (ARN) of the health check to associate with the protection.</p>
     #   @return [String]
     class AssociateHealthCheckRequest < Struct.new(
+      nil,
       :protection_id,
       :health_check_arn,
       keyword_init: true
@@ -93,6 +101,7 @@ module Aws::Shield
     end
 
     class AssociateHealthCheckResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -106,6 +115,7 @@ module Aws::Shield
     #            </note>
     #   @return [Array<Types::EmergencyContact>]
     class AssociateProactiveEngagementDetailsRequest < Struct.new(
+      nil,
       :emergency_contact_list,
       keyword_init: true
     )
@@ -113,6 +123,7 @@ module Aws::Shield
     end
 
     class AssociateProactiveEngagementDetailsResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -148,6 +159,7 @@ module Aws::Shield
     #   <p>List of mitigation actions taken for the attack.</p>
     #   @return [Array<Types::Mitigation>]
     class AttackDetail < Struct.new(
+      nil,
       :attack_id,
       :resource_arn,
       :sub_resources,
@@ -186,6 +198,7 @@ module Aws::Shield
     #   <p>The total contributions made to this Shield event by all contributors.</p>
     #   @return [Integer]
     class AttackProperty < Struct.new(
+      nil,
       :attack_layer,
       :attack_property_identifier,
       :top_contributors,
@@ -209,6 +222,7 @@ module Aws::Shield
     #   <p>The number of attacks detected during the time period. This is always present, but might be zero. </p>
     #   @return [Integer]
     class AttackStatisticsDataItem < Struct.new(
+      nil,
       :attack_volume,
       :attack_count,
       keyword_init: true
@@ -238,6 +252,7 @@ module Aws::Shield
     #   <p>The list of attacks for a specified time period.</p>
     #   @return [Array<Types::AttackVectorDescription>]
     class AttackSummary < Struct.new(
+      nil,
       :attack_id,
       :resource_arn,
       :start_time,
@@ -309,6 +324,7 @@ module Aws::Shield
     #            </ul>
     #   @return [String]
     class AttackVectorDescription < Struct.new(
+      nil,
       :vector_type,
       keyword_init: true
     )
@@ -326,6 +342,7 @@ module Aws::Shield
     #   <p>A statistics object that uses requests per second as the unit. This is included for application level attacks, and is only available for accounts that are subscribed to Shield Advanced.</p>
     #   @return [Types::AttackVolumeStatistics]
     class AttackVolume < Struct.new(
+      nil,
       :bits_per_second,
       :packets_per_second,
       :requests_per_second,
@@ -339,6 +356,7 @@ module Aws::Shield
     #   <p>The maximum attack volume observed for the given unit.</p>
     #   @return [Float]
     class AttackVolumeStatistics < Struct.new(
+      nil,
       :max,
       keyword_init: true
     )
@@ -355,6 +373,7 @@ module Aws::Shield
     #          <p>JSON specification: <code>"Block": {}</code>
     #          </p>
     class BlockAction < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -368,6 +387,7 @@ module Aws::Shield
     #   <p>The contribution of this contributor expressed in <a>Protection</a> units. For example <code>10,000</code>.</p>
     #   @return [Integer]
     class Contributor < Struct.new(
+      nil,
       :name,
       :value,
       keyword_init: true
@@ -385,6 +405,7 @@ module Aws::Shield
     #          <p>JSON specification: <code>"Count": {}</code>
     #          </p>
     class CountAction < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -421,6 +442,7 @@ module Aws::Shield
     #   <p>One or more tag key-value pairs for the protection group.</p>
     #   @return [Array<Types::Tag>]
     class CreateProtectionGroupRequest < Struct.new(
+      nil,
       :protection_group_id,
       :aggregation,
       :pattern,
@@ -433,6 +455,7 @@ module Aws::Shield
     end
 
     class CreateProtectionGroupResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -481,6 +504,7 @@ module Aws::Shield
     #   <p>One or more tag key-value pairs for the <a>Protection</a> object that is created.</p>
     #   @return [Array<Types::Tag>]
     class CreateProtectionRequest < Struct.new(
+      nil,
       :name,
       :resource_arn,
       :tags,
@@ -493,6 +517,7 @@ module Aws::Shield
     #   <p>The unique identifier (ID) for the <a>Protection</a> object that is created.</p>
     #   @return [String]
     class CreateProtectionResponse < Struct.new(
+      nil,
       :protection_id,
       keyword_init: true
     )
@@ -500,12 +525,14 @@ module Aws::Shield
     end
 
     class CreateSubscriptionRequest < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
     end
 
     class CreateSubscriptionResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -515,6 +542,7 @@ module Aws::Shield
     #   <p>The name of the protection group. You use this to identify the protection group in lists and to manage the protection group, for example to update, delete, or describe it. </p>
     #   @return [String]
     class DeleteProtectionGroupRequest < Struct.new(
+      nil,
       :protection_group_id,
       keyword_init: true
     )
@@ -522,6 +550,7 @@ module Aws::Shield
     end
 
     class DeleteProtectionGroupResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -532,6 +561,7 @@ module Aws::Shield
     #            deleted.</p>
     #   @return [String]
     class DeleteProtectionRequest < Struct.new(
+      nil,
       :protection_id,
       keyword_init: true
     )
@@ -539,6 +569,7 @@ module Aws::Shield
     end
 
     class DeleteProtectionResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -546,6 +577,7 @@ module Aws::Shield
 
     # @deprecated
     class DeleteSubscriptionRequest < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -553,6 +585,7 @@ module Aws::Shield
 
     # @deprecated
     class DeleteSubscriptionResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -562,6 +595,7 @@ module Aws::Shield
     #   <p>The unique identifier (ID) for the attack.</p>
     #   @return [String]
     class DescribeAttackRequest < Struct.new(
+      nil,
       :attack_id,
       keyword_init: true
     )
@@ -572,6 +606,7 @@ module Aws::Shield
     #   <p>The attack that you requested. </p>
     #   @return [Types::AttackDetail]
     class DescribeAttackResponse < Struct.new(
+      nil,
       :attack,
       keyword_init: true
     )
@@ -579,6 +614,7 @@ module Aws::Shield
     end
 
     class DescribeAttackStatisticsRequest < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -591,6 +627,7 @@ module Aws::Shield
     #   <p>The data that describes the attacks detected during the time period.</p>
     #   @return [Array<Types::AttackStatisticsDataItem>]
     class DescribeAttackStatisticsResponse < Struct.new(
+      nil,
       :time_range,
       :data_items,
       keyword_init: true
@@ -599,6 +636,7 @@ module Aws::Shield
     end
 
     class DescribeDRTAccessRequest < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -611,6 +649,7 @@ module Aws::Shield
     #   <p>The list of Amazon S3 buckets accessed by the SRT.</p>
     #   @return [Array<String>]
     class DescribeDRTAccessResponse < Struct.new(
+      nil,
       :role_arn,
       :log_bucket_list,
       keyword_init: true
@@ -619,6 +658,7 @@ module Aws::Shield
     end
 
     class DescribeEmergencyContactSettingsRequest < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -628,6 +668,7 @@ module Aws::Shield
     #   <p>A list of email addresses and phone numbers that the Shield Response Team (SRT) can use to contact you if you have proactive engagement enabled, for escalations to the SRT and to initiate proactive customer support.</p>
     #   @return [Array<Types::EmergencyContact>]
     class DescribeEmergencyContactSettingsResponse < Struct.new(
+      nil,
       :emergency_contact_list,
       keyword_init: true
     )
@@ -638,6 +679,7 @@ module Aws::Shield
     #   <p>The name of the protection group. You use this to identify the protection group in lists and to manage the protection group, for example to update, delete, or describe it. </p>
     #   @return [String]
     class DescribeProtectionGroupRequest < Struct.new(
+      nil,
       :protection_group_id,
       keyword_init: true
     )
@@ -648,6 +690,7 @@ module Aws::Shield
     #   <p>A grouping of protected resources that you and Shield Advanced can monitor as a collective. This resource grouping improves the accuracy of detection and reduces false positives. </p>
     #   @return [Types::ProtectionGroup]
     class DescribeProtectionGroupResponse < Struct.new(
+      nil,
       :protection_group,
       keyword_init: true
     )
@@ -663,6 +706,7 @@ module Aws::Shield
     #              You must provide either the <code>ResourceArn</code> of the protected resource or the <code>ProtectionID</code> of the protection, but not both.</p>
     #   @return [String]
     class DescribeProtectionRequest < Struct.new(
+      nil,
       :protection_id,
       :resource_arn,
       keyword_init: true
@@ -674,6 +718,7 @@ module Aws::Shield
     #   <p>The <a>Protection</a> that you requested. </p>
     #   @return [Types::Protection]
     class DescribeProtectionResponse < Struct.new(
+      nil,
       :protection,
       keyword_init: true
     )
@@ -681,6 +726,7 @@ module Aws::Shield
     end
 
     class DescribeSubscriptionRequest < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -690,6 +736,7 @@ module Aws::Shield
     #   <p>The Shield Advanced subscription details for an account.</p>
     #   @return [Types::Subscription]
     class DescribeSubscriptionResponse < Struct.new(
+      nil,
       :subscription,
       keyword_init: true
     )
@@ -700,6 +747,7 @@ module Aws::Shield
     #   <p>The ARN (Amazon Resource Name) of the protected resource.</p>
     #   @return [String]
     class DisableApplicationLayerAutomaticResponseRequest < Struct.new(
+      nil,
       :resource_arn,
       keyword_init: true
     )
@@ -707,18 +755,21 @@ module Aws::Shield
     end
 
     class DisableApplicationLayerAutomaticResponseResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
     end
 
     class DisableProactiveEngagementRequest < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
     end
 
     class DisableProactiveEngagementResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -728,6 +779,7 @@ module Aws::Shield
     #   <p>The Amazon S3 bucket that contains the logs that you want to share.</p>
     #   @return [String]
     class DisassociateDRTLogBucketRequest < Struct.new(
+      nil,
       :log_bucket,
       keyword_init: true
     )
@@ -735,18 +787,21 @@ module Aws::Shield
     end
 
     class DisassociateDRTLogBucketResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
     end
 
     class DisassociateDRTRoleRequest < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
     end
 
     class DisassociateDRTRoleResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -759,6 +814,7 @@ module Aws::Shield
     #   <p>The Amazon Resource Name (ARN) of the health check that is associated with the protection.</p>
     #   @return [String]
     class DisassociateHealthCheckRequest < Struct.new(
+      nil,
       :protection_id,
       :health_check_arn,
       keyword_init: true
@@ -767,6 +823,7 @@ module Aws::Shield
     end
 
     class DisassociateHealthCheckResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -783,6 +840,7 @@ module Aws::Shield
     #   <p>Additional notes regarding the contact. </p>
     #   @return [String]
     class EmergencyContact < Struct.new(
+      nil,
       :email_address,
       :phone_number,
       :contact_notes,
@@ -800,6 +858,7 @@ module Aws::Shield
     #      when you enable or update automatic mitigation. Shield Advanced creates the WAF rules in a Shield Advanced-managed rule group, inside the web ACL that you have associated with the resource. </p>
     #   @return [Types::ResponseAction]
     class EnableApplicationLayerAutomaticResponseRequest < Struct.new(
+      nil,
       :resource_arn,
       :action,
       keyword_init: true
@@ -808,24 +867,28 @@ module Aws::Shield
     end
 
     class EnableApplicationLayerAutomaticResponseResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
     end
 
     class EnableProactiveEngagementRequest < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
     end
 
     class EnableProactiveEngagementResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
     end
 
     class GetSubscriptionStateRequest < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -835,6 +898,7 @@ module Aws::Shield
     #   <p>The status of the subscription.</p>
     #   @return [String]
     class GetSubscriptionStateResponse < Struct.new(
+      nil,
       :subscription_state,
       keyword_init: true
     )
@@ -852,6 +916,7 @@ module Aws::Shield
     #   <p>The type of protected resource whose protections you want to retrieve.  </p>
     #   @return [Array<String>]
     class InclusionProtectionFilters < Struct.new(
+      nil,
       :resource_arns,
       :protection_names,
       :resource_types,
@@ -874,6 +939,7 @@ module Aws::Shield
     #   <p>The aggregation setting of the protection groups that you want to retrieve.  </p>
     #   @return [Array<String>]
     class InclusionProtectionGroupFilters < Struct.new(
+      nil,
       :protection_group_ids,
       :patterns,
       :resource_types,
@@ -887,6 +953,7 @@ module Aws::Shield
     # @!attribute message
     #   @return [String]
     class InternalErrorException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -897,6 +964,7 @@ module Aws::Shield
     # @!attribute message
     #   @return [String]
     class InvalidOperationException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -907,6 +975,7 @@ module Aws::Shield
     # @!attribute message
     #   @return [String]
     class InvalidPaginationTokenException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -923,6 +992,7 @@ module Aws::Shield
     #   <p>Fields that caused the exception.</p>
     #   @return [Array<Types::ValidationExceptionField>]
     class InvalidParameterException < Struct.new(
+      nil,
       :message,
       :reason,
       :fields,
@@ -935,6 +1005,7 @@ module Aws::Shield
     # @!attribute message
     #   @return [String]
     class InvalidResourceException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -949,6 +1020,7 @@ module Aws::Shield
     #   <p>The maximum number of protections that can be created for the specified <code>Type</code>.</p>
     #   @return [Integer]
     class Limit < Struct.new(
+      nil,
       :type,
       :max,
       keyword_init: true
@@ -971,6 +1043,7 @@ module Aws::Shield
     #   <p>The threshold that would be exceeded.</p>
     #   @return [Integer]
     class LimitsExceededException < Struct.new(
+      nil,
       :message,
       :type,
       :limit,
@@ -1012,6 +1085,7 @@ module Aws::Shield
     #            <p>The default setting is 20.</p>
     #   @return [Integer]
     class ListAttacksRequest < Struct.new(
+      nil,
       :resource_arns,
       :start_time,
       :end_time,
@@ -1034,6 +1108,7 @@ module Aws::Shield
     #            <p>Whenever more objects remain that Shield Advanced has not yet returned to you, the response will include a <code>NextToken</code> value.</p>
     #   @return [String]
     class ListAttacksResponse < Struct.new(
+      nil,
       :attack_summaries,
       :next_token,
       keyword_init: true
@@ -1060,6 +1135,7 @@ module Aws::Shield
     #   <p>Narrows the set of protection groups that the call retrieves. You can retrieve a single protection group by its name and you can retrieve all protection groups that are configured with specific pattern or aggregation settings. You can provide up to one criteria per filter type. Shield Advanced returns the protection groups that exactly match all of the search criteria that you provide.</p>
     #   @return [Types::InclusionProtectionGroupFilters]
     class ListProtectionGroupsRequest < Struct.new(
+      nil,
       :next_token,
       :max_results,
       :inclusion_filters,
@@ -1080,6 +1156,7 @@ module Aws::Shield
     #            <p>Whenever more objects remain that Shield Advanced has not yet returned to you, the response will include a <code>NextToken</code> value.</p>
     #   @return [String]
     class ListProtectionGroupsResponse < Struct.new(
+      nil,
       :protection_groups,
       :next_token,
       keyword_init: true
@@ -1106,6 +1183,7 @@ module Aws::Shield
     #   <p>Narrows the set of protections that the call retrieves. You can retrieve a single protection by providing its name or the ARN (Amazon Resource Name) of its protected resource. You can also retrieve all protections for a specific resource type. You can provide up to one criteria per filter type. Shield Advanced returns protections that exactly match all of the filter criteria that you provide.</p>
     #   @return [Types::InclusionProtectionFilters]
     class ListProtectionsRequest < Struct.new(
+      nil,
       :next_token,
       :max_results,
       :inclusion_filters,
@@ -1126,6 +1204,7 @@ module Aws::Shield
     #            <p>Whenever more objects remain that Shield Advanced has not yet returned to you, the response will include a <code>NextToken</code> value.</p>
     #   @return [String]
     class ListProtectionsResponse < Struct.new(
+      nil,
       :protections,
       :next_token,
       keyword_init: true
@@ -1152,6 +1231,7 @@ module Aws::Shield
     #            <p>The default setting is 20.</p>
     #   @return [Integer]
     class ListResourcesInProtectionGroupRequest < Struct.new(
+      nil,
       :protection_group_id,
       :next_token,
       :max_results,
@@ -1172,6 +1252,7 @@ module Aws::Shield
     #            <p>Whenever more objects remain that Shield Advanced has not yet returned to you, the response will include a <code>NextToken</code> value.</p>
     #   @return [String]
     class ListResourcesInProtectionGroupResponse < Struct.new(
+      nil,
       :resource_arns,
       :next_token,
       keyword_init: true
@@ -1183,6 +1264,7 @@ module Aws::Shield
     #   <p>The Amazon Resource Name (ARN) of the resource to get tags for.</p>
     #   @return [String]
     class ListTagsForResourceRequest < Struct.new(
+      nil,
       :resource_arn,
       keyword_init: true
     )
@@ -1193,6 +1275,7 @@ module Aws::Shield
     #   <p>A list of tag key and value pairs associated with the specified resource.</p>
     #   @return [Array<Types::Tag>]
     class ListTagsForResourceResponse < Struct.new(
+      nil,
       :tags,
       keyword_init: true
     )
@@ -1203,6 +1286,7 @@ module Aws::Shield
     # @!attribute message
     #   @return [String]
     class LockedSubscriptionException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -1214,6 +1298,7 @@ module Aws::Shield
     #   <p>The name of the mitigation taken for this attack.</p>
     #   @return [String]
     class Mitigation < Struct.new(
+      nil,
       :mitigation_name,
       keyword_init: true
     )
@@ -1224,6 +1309,7 @@ module Aws::Shield
     # @!attribute message
     #   @return [String]
     class NoAssociatedRoleException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -1235,6 +1321,7 @@ module Aws::Shield
     # @!attribute message
     #   @return [String]
     class OptimisticLockException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -1263,6 +1350,7 @@ module Aws::Shield
     #          manages rules in the web ACL in order to respond to application layer events that Shield Advanced determines to be DDoS attacks. </p>
     #   @return [Types::ApplicationLayerAutomaticResponseConfiguration]
     class Protection < Struct.new(
+      nil,
       :id,
       :name,
       :resource_arn,
@@ -1306,6 +1394,7 @@ module Aws::Shield
     #   <p>The ARN (Amazon Resource Name) of the protection group.</p>
     #   @return [String]
     class ProtectionGroup < Struct.new(
+      nil,
       :protection_group_id,
       :aggregation,
       :pattern,
@@ -1322,6 +1411,7 @@ module Aws::Shield
     #   <p>The maximum number of resources you can specify for a single arbitrary pattern in a protection group.</p>
     #   @return [Integer]
     class ProtectionGroupArbitraryPatternLimits < Struct.new(
+      nil,
       :max_members,
       keyword_init: true
     )
@@ -1341,6 +1431,7 @@ module Aws::Shield
     #   <p>Limits settings by pattern type in the protection groups for your subscription. </p>
     #   @return [Types::ProtectionGroupPatternTypeLimits]
     class ProtectionGroupLimits < Struct.new(
+      nil,
       :max_protection_groups,
       :pattern_type_limits,
       keyword_init: true
@@ -1358,6 +1449,7 @@ module Aws::Shield
     #   <p>Limits settings on protection groups with arbitrary pattern type. </p>
     #   @return [Types::ProtectionGroupArbitraryPatternLimits]
     class ProtectionGroupPatternTypeLimits < Struct.new(
+      nil,
       :arbitrary_pattern_limits,
       keyword_init: true
     )
@@ -1369,6 +1461,7 @@ module Aws::Shield
     #   <p>The maximum number of resource types that you can specify in a protection.</p>
     #   @return [Array<Types::Limit>]
     class ProtectionLimits < Struct.new(
+      nil,
       :protected_resource_type_limits,
       keyword_init: true
     )
@@ -1382,6 +1475,7 @@ module Aws::Shield
     #   <p>The type of resource that already exists.</p>
     #   @return [String]
     class ResourceAlreadyExistsException < Struct.new(
+      nil,
       :message,
       :resource_type,
       keyword_init: true
@@ -1396,6 +1490,7 @@ module Aws::Shield
     #   <p>Type of resource.</p>
     #   @return [String]
     class ResourceNotFoundException < Struct.new(
+      nil,
       :message,
       :resource_type,
       keyword_init: true
@@ -1415,6 +1510,7 @@ module Aws::Shield
     #            <p>You must specify exactly one action, either <code>Block</code> or <code>Count</code>.</p>
     #   @return [Types::CountAction]
     class ResponseAction < Struct.new(
+      nil,
       :block,
       :count,
       keyword_init: true
@@ -1436,6 +1532,7 @@ module Aws::Shield
     #   <p>The counters that describe the details of the attack.</p>
     #   @return [Array<Types::SummarizedCounter>]
     class SubResourceSummary < Struct.new(
+      nil,
       :type,
       :id,
       :attack_vectors,
@@ -1474,6 +1571,7 @@ module Aws::Shield
     #   <p>The ARN (Amazon Resource Name) of the subscription.</p>
     #   @return [String]
     class Subscription < Struct.new(
+      nil,
       :start_time,
       :end_time,
       :time_commitment_in_seconds,
@@ -1500,6 +1598,7 @@ module Aws::Shield
     #   <p>Limits settings on protection groups for your subscription. </p>
     #   @return [Types::ProtectionGroupLimits]
     class SubscriptionLimits < Struct.new(
+      nil,
       :protection_limits,
       :protection_group_limits,
       keyword_init: true
@@ -1515,6 +1614,7 @@ module Aws::Shield
     #   <p>The list of counters that describe the details of the attack.</p>
     #   @return [Array<Types::SummarizedCounter>]
     class SummarizedAttackVector < Struct.new(
+      nil,
       :vector_type,
       :vector_counters,
       keyword_init: true
@@ -1542,6 +1642,7 @@ module Aws::Shield
     #   <p>The unit of the counters.</p>
     #   @return [String]
     class SummarizedCounter < Struct.new(
+      nil,
       :name,
       :max,
       :average,
@@ -1569,6 +1670,7 @@ module Aws::Shield
     #   <p>Part of the key:value pair that defines a tag. You can use a tag value to describe a specific value within a category, such as "companyA" or "companyB." Tag values are case-sensitive.</p>
     #   @return [String]
     class Tag < Struct.new(
+      nil,
       :key,
       :value,
       keyword_init: true
@@ -1583,6 +1685,7 @@ module Aws::Shield
     #   <p>The tags that you want to modify or add to the resource.</p>
     #   @return [Array<Types::Tag>]
     class TagResourceRequest < Struct.new(
+      nil,
       :resource_arn,
       :tags,
       keyword_init: true
@@ -1591,6 +1694,7 @@ module Aws::Shield
     end
 
     class TagResourceResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1604,6 +1708,7 @@ module Aws::Shield
     #   <p>The end time, in Unix time in seconds. </p>
     #   @return [Time]
     class TimeRange < Struct.new(
+      nil,
       :from_inclusive,
       :to_exclusive,
       keyword_init: true
@@ -1618,6 +1723,7 @@ module Aws::Shield
     #   <p>The tag key for each tag that you want to remove from the resource.</p>
     #   @return [Array<String>]
     class UntagResourceRequest < Struct.new(
+      nil,
       :resource_arn,
       :tag_keys,
       keyword_init: true
@@ -1626,6 +1732,7 @@ module Aws::Shield
     end
 
     class UntagResourceResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1640,6 +1747,7 @@ module Aws::Shield
     #      when you enable or update automatic mitigation. Shield Advanced creates the WAF rules in a Shield Advanced-managed rule group, inside the web ACL that you have associated with the resource. </p>
     #   @return [Types::ResponseAction]
     class UpdateApplicationLayerAutomaticResponseRequest < Struct.new(
+      nil,
       :resource_arn,
       :action,
       keyword_init: true
@@ -1648,6 +1756,7 @@ module Aws::Shield
     end
 
     class UpdateApplicationLayerAutomaticResponseResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1658,6 +1767,7 @@ module Aws::Shield
     #            <p>If you have proactive engagement enabled, the contact list must include at least one phone number.</p>
     #   @return [Array<Types::EmergencyContact>]
     class UpdateEmergencyContactSettingsRequest < Struct.new(
+      nil,
       :emergency_contact_list,
       keyword_init: true
     )
@@ -1665,6 +1775,7 @@ module Aws::Shield
     end
 
     class UpdateEmergencyContactSettingsResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1698,6 +1809,7 @@ module Aws::Shield
     #   <p>The Amazon Resource Names (ARNs) of the resources to include in the protection group. You must set this when you set <code>Pattern</code> to <code>ARBITRARY</code> and you must not set it for any other <code>Pattern</code> setting. </p>
     #   @return [Array<String>]
     class UpdateProtectionGroupRequest < Struct.new(
+      nil,
       :protection_group_id,
       :aggregation,
       :pattern,
@@ -1709,6 +1821,7 @@ module Aws::Shield
     end
 
     class UpdateProtectionGroupResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1718,6 +1831,7 @@ module Aws::Shield
     #   <p>When you initally create a subscription, <code>AutoRenew</code> is set to <code>ENABLED</code>. If <code>ENABLED</code>, the subscription will be automatically renewed at the end of the existing subscription period. You can change this by submitting an <code>UpdateSubscription</code> request. If the <code>UpdateSubscription</code> request does not included a value for <code>AutoRenew</code>, the existing value for <code>AutoRenew</code> remains unchanged.</p>
     #   @return [String]
     class UpdateSubscriptionRequest < Struct.new(
+      nil,
       :auto_renew,
       keyword_init: true
     )
@@ -1725,6 +1839,7 @@ module Aws::Shield
     end
 
     class UpdateSubscriptionResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1738,6 +1853,7 @@ module Aws::Shield
     #   <p>The message describing why the parameter failed validation.</p>
     #   @return [String]
     class ValidationExceptionField < Struct.new(
+      nil,
       :name,
       :message,
       keyword_init: true

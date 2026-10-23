@@ -17,6 +17,7 @@ module Aws::XRay
     #   <p>The type of the alias.</p>
     #   @return [String]
     class Alias < Struct.new(
+      nil,
       :name,
       :names,
       :type,
@@ -55,6 +56,7 @@ module Aws::XRay
     #   <p></p>
     #   @return [Types::ServiceId]
     class AnomalousService < Struct.new(
+      nil,
       :service_id,
       keyword_init: true
     )
@@ -66,6 +68,7 @@ module Aws::XRay
     #   <p>The name of a corresponding Availability Zone.</p>
     #   @return [String]
     class AvailabilityZoneDetail < Struct.new(
+      nil,
       :name,
       keyword_init: true
     )
@@ -92,6 +95,7 @@ module Aws::XRay
     #   <p></p>
     #   @return [Integer]
     class BackendConnectionErrors < Struct.new(
+      nil,
       :timeout_count,
       :connection_refused_count,
       :http_code4_xx_count,
@@ -110,6 +114,7 @@ module Aws::XRay
     #   <p>Pagination token.</p>
     #   @return [String]
     class BatchGetTracesRequest < Struct.new(
+      nil,
       :trace_ids,
       :next_token,
       keyword_init: true
@@ -127,6 +132,7 @@ module Aws::XRay
     #   <p>Pagination token.</p>
     #   @return [String]
     class BatchGetTracesResult < Struct.new(
+      nil,
       :traces,
       :unprocessed_trace_ids,
       :next_token,
@@ -141,6 +147,7 @@ module Aws::XRay
     #   </p>
     #   @return [String]
     class CancelTraceRetrievalRequest < Struct.new(
+      nil,
       :retrieval_token,
       keyword_init: true
     )
@@ -148,6 +155,7 @@ module Aws::XRay
     end
 
     class CancelTraceRetrievalResult < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -203,6 +211,7 @@ module Aws::XRay
     #            </ul>
     #   @return [Array<Types::Tag>]
     class CreateGroupRequest < Struct.new(
+      nil,
       :group_name,
       :filter_expression,
       :insights_configuration,
@@ -218,6 +227,7 @@ module Aws::XRay
     #               configuration that was assigned to the group.</p>
     #   @return [Types::Group]
     class CreateGroupResult < Struct.new(
+      nil,
       :group,
       keyword_init: true
     )
@@ -256,6 +266,7 @@ module Aws::XRay
     #            </ul>
     #   @return [Array<Types::Tag>]
     class CreateSamplingRuleRequest < Struct.new(
+      nil,
       :sampling_rule,
       :tags,
       keyword_init: true
@@ -267,6 +278,7 @@ module Aws::XRay
     #   <p>The saved rule definition and metadata.</p>
     #   @return [Types::SamplingRuleRecord]
     class CreateSamplingRuleResult < Struct.new(
+      nil,
       :sampling_rule_record,
       keyword_init: true
     )
@@ -280,6 +292,7 @@ module Aws::XRay
     #   <p>The ARN of the group that was generated on creation.</p>
     #   @return [String]
     class DeleteGroupRequest < Struct.new(
+      nil,
       :group_name,
       :group_arn,
       keyword_init: true
@@ -288,6 +301,7 @@ module Aws::XRay
     end
 
     class DeleteGroupResult < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -302,6 +316,7 @@ module Aws::XRay
     #           </p>
     #   @return [String]
     class DeleteResourcePolicyRequest < Struct.new(
+      nil,
       :policy_name,
       :policy_revision_id,
       keyword_init: true
@@ -310,6 +325,7 @@ module Aws::XRay
     end
 
     class DeleteResourcePolicyResult < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -322,6 +338,7 @@ module Aws::XRay
     #   <p>The ARN of the sampling rule. Specify a rule by either name or ARN, but not both.</p>
     #   @return [String]
     class DeleteSamplingRuleRequest < Struct.new(
+      nil,
       :rule_name,
       :rule_arn,
       keyword_init: true
@@ -333,6 +350,7 @@ module Aws::XRay
     #   <p>The deleted rule definition and metadata.</p>
     #   @return [Types::SamplingRuleRecord]
     class DeleteSamplingRuleResult < Struct.new(
+      nil,
       :sampling_rule_record,
       keyword_init: true
     )
@@ -370,6 +388,7 @@ module Aws::XRay
     #         <code>link</code>.</p>
     #   @return [Array<Types::HistogramEntry>]
     class Edge < Struct.new(
+      nil,
       :reference_id,
       :start_time,
       :end_time,
@@ -400,6 +419,7 @@ module Aws::XRay
     #   <p>The aggregate response time of completed requests.</p>
     #   @return [Float]
     class EdgeStatistics < Struct.new(
+      nil,
       :ok_count,
       :error_statistics,
       :fault_statistics,
@@ -422,6 +442,7 @@ module Aws::XRay
     #         default encryption.</p>
     #   @return [String]
     class EncryptionConfig < Struct.new(
+      nil,
       :key_id,
       :status,
       :type,
@@ -439,6 +460,7 @@ module Aws::XRay
     #   <p>A flag that denotes that the root cause impacts the trace client.</p>
     #   @return [Boolean]
     class ErrorRootCause < Struct.new(
+      nil,
       :services,
       :client_impacting,
       keyword_init: true
@@ -458,6 +480,7 @@ module Aws::XRay
     #   <p>A flag that denotes a remote subsegment.</p>
     #   @return [Boolean]
     class ErrorRootCauseEntity < Struct.new(
+      nil,
       :name,
       :exceptions,
       :remote,
@@ -486,6 +509,7 @@ module Aws::XRay
     #   <p>A Boolean value indicating if the service is inferred from the trace.</p>
     #   @return [Boolean]
     class ErrorRootCauseService < Struct.new(
+      nil,
       :name,
       :names,
       :type,
@@ -509,6 +533,7 @@ module Aws::XRay
     #   <p>The total number of requests that failed with a 4xx Client Error status code.</p>
     #   @return [Integer]
     class ErrorStatistics < Struct.new(
+      nil,
       :throttle_count,
       :other_count,
       :total_count,
@@ -526,6 +551,7 @@ module Aws::XRay
     #   <p>A flag that denotes that the root cause impacts the trace client.</p>
     #   @return [Boolean]
     class FaultRootCause < Struct.new(
+      nil,
       :services,
       :client_impacting,
       keyword_init: true
@@ -545,6 +571,7 @@ module Aws::XRay
     #   <p>A flag that denotes a remote subsegment.</p>
     #   @return [Boolean]
     class FaultRootCauseEntity < Struct.new(
+      nil,
       :name,
       :exceptions,
       :remote,
@@ -573,6 +600,7 @@ module Aws::XRay
     #   <p>A Boolean value indicating if the service is inferred from the trace.</p>
     #   @return [Boolean]
     class FaultRootCauseService < Struct.new(
+      nil,
       :name,
       :names,
       :type,
@@ -593,6 +621,7 @@ module Aws::XRay
     #   <p>The total number of requests that failed with a 5xx Server Error status code.</p>
     #   @return [Integer]
     class FaultStatistics < Struct.new(
+      nil,
       :other_count,
       :total_count,
       keyword_init: true
@@ -609,6 +638,7 @@ module Aws::XRay
     #   <p>The lower limit of fault counts for a service.</p>
     #   @return [Integer]
     class ForecastStatistics < Struct.new(
+      nil,
       :fault_count_high,
       :fault_count_low,
       keyword_init: true
@@ -617,6 +647,7 @@ module Aws::XRay
     end
 
     class GetEncryptionConfigRequest < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -626,6 +657,7 @@ module Aws::XRay
     #   <p>The encryption configuration document.</p>
     #   @return [Types::EncryptionConfig]
     class GetEncryptionConfigResult < Struct.new(
+      nil,
       :encryption_config,
       keyword_init: true
     )
@@ -639,6 +671,7 @@ module Aws::XRay
     #   <p>The ARN of the group that was generated on creation.</p>
     #   @return [String]
     class GetGroupRequest < Struct.new(
+      nil,
       :group_name,
       :group_arn,
       keyword_init: true
@@ -651,6 +684,7 @@ module Aws::XRay
     #               the filter expression, and the insight configuration assigned to the group.</p>
     #   @return [Types::Group]
     class GetGroupResult < Struct.new(
+      nil,
       :group,
       keyword_init: true
     )
@@ -661,6 +695,7 @@ module Aws::XRay
     #   <p>Pagination token.</p>
     #   @return [String]
     class GetGroupsRequest < Struct.new(
+      nil,
       :next_token,
       keyword_init: true
     )
@@ -674,6 +709,7 @@ module Aws::XRay
     #   <p>Pagination token.</p>
     #   @return [String]
     class GetGroupsResult < Struct.new(
+      nil,
       :groups,
       :next_token,
       keyword_init: true
@@ -689,6 +725,7 @@ module Aws::XRay
     #   </p>
     #   @return [String]
     class GetIndexingRulesRequest < Struct.new(
+      nil,
       :next_token,
       keyword_init: true
     )
@@ -705,6 +742,7 @@ module Aws::XRay
     #       </p>
     #   @return [String]
     class GetIndexingRulesResult < Struct.new(
+      nil,
       :indexing_rules,
       :next_token,
       keyword_init: true
@@ -722,6 +760,7 @@ module Aws::XRay
     #   <p>Specify the pagination token returned by a previous request to retrieve the next page of events. </p>
     #   @return [String]
     class GetInsightEventsRequest < Struct.new(
+      nil,
       :insight_id,
       :max_results,
       :next_token,
@@ -739,6 +778,7 @@ module Aws::XRay
     #   <p>Use this token to retrieve the next page of insight events.</p>
     #   @return [String]
     class GetInsightEventsResult < Struct.new(
+      nil,
       :insight_events,
       :next_token,
       keyword_init: true
@@ -761,6 +801,7 @@ module Aws::XRay
     #   <p>Specify the pagination token returned by a previous request to retrieve the next page of results. </p>
     #   @return [String]
     class GetInsightImpactGraphRequest < Struct.new(
+      nil,
       :insight_id,
       :start_time,
       :end_time,
@@ -792,6 +833,7 @@ module Aws::XRay
     #   <p>Pagination token.</p>
     #   @return [String]
     class GetInsightImpactGraphResult < Struct.new(
+      nil,
       :insight_id,
       :start_time,
       :end_time,
@@ -808,6 +850,7 @@ module Aws::XRay
     #   <p>The insight's unique identifier. Use the GetInsightSummaries action to retrieve an InsightId.</p>
     #   @return [String]
     class GetInsightRequest < Struct.new(
+      nil,
       :insight_id,
       keyword_init: true
     )
@@ -818,6 +861,7 @@ module Aws::XRay
     #   <p>The summary information of an insight.</p>
     #   @return [Types::Insight]
     class GetInsightResult < Struct.new(
+      nil,
       :insight,
       keyword_init: true
     )
@@ -847,6 +891,7 @@ module Aws::XRay
     #   <p>Pagination token.</p>
     #   @return [String]
     class GetInsightSummariesRequest < Struct.new(
+      nil,
       :states,
       :group_arn,
       :group_name,
@@ -868,6 +913,7 @@ module Aws::XRay
     #   <p>Pagination token.</p>
     #   @return [String]
     class GetInsightSummariesResult < Struct.new(
+      nil,
       :insight_summaries,
       :next_token,
       keyword_init: true
@@ -888,6 +934,7 @@ module Aws::XRay
     #     </p>
     #   @return [String]
     class GetRetrievedTracesGraphRequest < Struct.new(
+      nil,
       :retrieval_token,
       :next_token,
       keyword_init: true
@@ -913,6 +960,7 @@ module Aws::XRay
     #     </p>
     #   @return [String]
     class GetRetrievedTracesGraphResult < Struct.new(
+      nil,
       :retrieval_status,
       :services,
       :next_token,
@@ -925,6 +973,7 @@ module Aws::XRay
     #   <p>Pagination token.</p>
     #   @return [String]
     class GetSamplingRulesRequest < Struct.new(
+      nil,
       :next_token,
       keyword_init: true
     )
@@ -938,6 +987,7 @@ module Aws::XRay
     #   <p>Pagination token.</p>
     #   @return [String]
     class GetSamplingRulesResult < Struct.new(
+      nil,
       :sampling_rule_records,
       :next_token,
       keyword_init: true
@@ -949,6 +999,7 @@ module Aws::XRay
     #   <p>Pagination token.</p>
     #   @return [String]
     class GetSamplingStatisticSummariesRequest < Struct.new(
+      nil,
       :next_token,
       keyword_init: true
     )
@@ -963,6 +1014,7 @@ module Aws::XRay
     #   <p>Pagination token.</p>
     #   @return [String]
     class GetSamplingStatisticSummariesResult < Struct.new(
+      nil,
       :sampling_statistic_summaries,
       :next_token,
       keyword_init: true
@@ -977,6 +1029,7 @@ module Aws::XRay
     #   <p>Information about rules that the service is using to boost sampling rate.</p>
     #   @return [Array<Types::SamplingBoostStatisticsDocument>]
     class GetSamplingTargetsRequest < Struct.new(
+      nil,
       :sampling_statistics_documents,
       :sampling_boost_statistics_documents,
       keyword_init: true
@@ -1001,6 +1054,7 @@ module Aws::XRay
     #            process.</p>
     #   @return [Array<Types::UnprocessedStatistics>]
     class GetSamplingTargetsResult < Struct.new(
+      nil,
       :sampling_target_documents,
       :last_rule_modification,
       :unprocessed_statistics,
@@ -1026,6 +1080,7 @@ module Aws::XRay
     #   <p>Pagination token.</p>
     #   @return [String]
     class GetServiceGraphRequest < Struct.new(
+      nil,
       :start_time,
       :end_time,
       :group_name,
@@ -1055,6 +1110,7 @@ module Aws::XRay
     #   <p>Pagination token.</p>
     #   @return [String]
     class GetServiceGraphResult < Struct.new(
+      nil,
       :start_time,
       :end_time,
       :services,
@@ -1098,6 +1154,7 @@ module Aws::XRay
     #   <p>Pagination token.</p>
     #   @return [String]
     class GetTimeSeriesServiceStatisticsRequest < Struct.new(
+      nil,
       :start_time,
       :end_time,
       :group_name,
@@ -1122,6 +1179,7 @@ module Aws::XRay
     #   <p>Pagination token.</p>
     #   @return [String]
     class GetTimeSeriesServiceStatisticsResult < Struct.new(
+      nil,
       :time_series_service_statistics,
       :contains_old_group_versions,
       :next_token,
@@ -1142,6 +1200,7 @@ module Aws::XRay
     #   <p>Pagination token.</p>
     #   @return [String]
     class GetTraceGraphRequest < Struct.new(
+      nil,
       :trace_ids,
       :next_token,
       keyword_init: true
@@ -1156,6 +1215,7 @@ module Aws::XRay
     #   <p>Pagination token.</p>
     #   @return [String]
     class GetTraceGraphResult < Struct.new(
+      nil,
       :services,
       :next_token,
       keyword_init: true
@@ -1164,6 +1224,7 @@ module Aws::XRay
     end
 
     class GetTraceSegmentDestinationRequest < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1180,6 +1241,7 @@ module Aws::XRay
     #     </p>
     #   @return [String]
     class GetTraceSegmentDestinationResult < Struct.new(
+      nil,
       :destination,
       :status,
       keyword_init: true
@@ -1213,6 +1275,7 @@ module Aws::XRay
     #         of results.</p>
     #   @return [String]
     class GetTraceSummariesRequest < Struct.new(
+      nil,
       :start_time,
       :end_time,
       :time_range_type,
@@ -1241,6 +1304,7 @@ module Aws::XRay
     #         next page. The first page contains the most recent results, closest to the end of the time frame.</p>
     #   @return [String]
     class GetTraceSummariesResult < Struct.new(
+      nil,
       :trace_summaries,
       :approximate_time,
       :traces_processed_count,
@@ -1269,6 +1333,7 @@ module Aws::XRay
     #   </p>
     #   @return [Array<String>]
     class GraphLink < Struct.new(
+      nil,
       :reference_type,
       :source_trace_id,
       :destination_trace_ids,
@@ -1301,6 +1366,7 @@ module Aws::XRay
     #            </ul>
     #   @return [Types::InsightsConfiguration]
     class Group < Struct.new(
+      nil,
       :group_name,
       :group_arn,
       :filter_expression,
@@ -1334,6 +1400,7 @@ module Aws::XRay
     #            </ul>
     #   @return [Types::InsightsConfiguration]
     class GroupSummary < Struct.new(
+      nil,
       :group_name,
       :group_arn,
       :filter_expression,
@@ -1352,6 +1419,7 @@ module Aws::XRay
     #   <p>The prevalence of the entry.</p>
     #   @return [Integer]
     class HistogramEntry < Struct.new(
+      nil,
       :value,
       :count,
       keyword_init: true
@@ -1382,6 +1450,7 @@ module Aws::XRay
     #   <p>The IP address of the requestor.</p>
     #   @return [String]
     class Http < Struct.new(
+      nil,
       :http_url,
       :http_status,
       :http_method,
@@ -1411,6 +1480,7 @@ module Aws::XRay
     #   </p>
     #   @return [Types::IndexingRuleValue]
     class IndexingRule < Struct.new(
+      nil,
       :name,
       :modified_at,
       :rule,
@@ -1498,6 +1568,7 @@ module Aws::XRay
     #   <p>The service within the insight that is most impacted by the incident.</p>
     #   @return [Array<Types::AnomalousService>]
     class Insight < Struct.new(
+      nil,
       :insight_id,
       :group_arn,
       :group_name,
@@ -1535,6 +1606,7 @@ module Aws::XRay
     #   <p>The service during the event that is most impacted by the incident.</p>
     #   @return [Array<Types::AnomalousService>]
     class InsightEvent < Struct.new(
+      nil,
       :summary,
       :event_time,
       :client_request_impact_statistics,
@@ -1550,6 +1622,7 @@ module Aws::XRay
     #   <p>Identifier of the edge. Unique within a service map.</p>
     #   @return [Integer]
     class InsightImpactGraphEdge < Struct.new(
+      nil,
       :reference_id,
       keyword_init: true
     )
@@ -1594,6 +1667,7 @@ module Aws::XRay
     #   <p>Connections to downstream services.</p>
     #   @return [Array<Types::InsightImpactGraphEdge>]
     class InsightImpactGraphService < Struct.new(
+      nil,
       :reference_id,
       :type,
       :name,
@@ -1648,6 +1722,7 @@ module Aws::XRay
     #   <p>The time, in Unix seconds, that the insight was last updated.</p>
     #   @return [Time]
     class InsightSummary < Struct.new(
+      nil,
       :insight_id,
       :group_arn,
       :group_name,
@@ -1676,6 +1751,7 @@ module Aws::XRay
     #               enabled on a group with InsightsEnabled set to true.</p>
     #   @return [Boolean]
     class InsightsConfiguration < Struct.new(
+      nil,
       :insights_enabled,
       :notifications_enabled,
       keyword_init: true
@@ -1688,6 +1764,7 @@ module Aws::XRay
     #   <p>The ID of a corresponding EC2 instance.</p>
     #   @return [String]
     class InstanceIdDetail < Struct.new(
+      nil,
       :id,
       keyword_init: true
     )
@@ -1699,6 +1776,7 @@ module Aws::XRay
     # @!attribute message
     #   @return [String]
     class InvalidPolicyRevisionIdException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -1709,6 +1787,7 @@ module Aws::XRay
     # @!attribute message
     #   @return [String]
     class InvalidRequestException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -1719,6 +1798,7 @@ module Aws::XRay
     #   <p>Not currently supported.</p>
     #   @return [String]
     class ListResourcePoliciesRequest < Struct.new(
+      nil,
       :next_token,
       keyword_init: true
     )
@@ -1732,6 +1812,7 @@ module Aws::XRay
     #   <p>Pagination token. Not currently supported.</p>
     #   @return [String]
     class ListResourcePoliciesResult < Struct.new(
+      nil,
       :resource_policies,
       :next_token,
       keyword_init: true
@@ -1757,6 +1838,7 @@ module Aws::XRay
     #     </p>
     #   @return [String]
     class ListRetrievedTracesRequest < Struct.new(
+      nil,
       :retrieval_token,
       :trace_format,
       :next_token,
@@ -1788,6 +1870,7 @@ module Aws::XRay
     #     </p>
     #   @return [String]
     class ListRetrievedTracesResult < Struct.new(
+      nil,
       :retrieval_status,
       :trace_format,
       :traces,
@@ -1805,6 +1888,7 @@ module Aws::XRay
     #       the current page of results as the value of this parameter to get the next page of results.</p>
     #   @return [String]
     class ListTagsForResourceRequest < Struct.new(
+      nil,
       :resource_arn,
       :next_token,
       keyword_init: true
@@ -1820,6 +1904,7 @@ module Aws::XRay
     #         the current page of results to get the next page of results.</p>
     #   @return [String]
     class ListTagsForResourceResponse < Struct.new(
+      nil,
       :tags,
       :next_token,
       keyword_init: true
@@ -1831,6 +1916,7 @@ module Aws::XRay
     # @!attribute message
     #   @return [String]
     class LockoutPreventionException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -1841,6 +1927,7 @@ module Aws::XRay
     # @!attribute message
     #   @return [String]
     class MalformedPolicyDocumentException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -1851,6 +1938,7 @@ module Aws::XRay
     # @!attribute message
     #   @return [String]
     class PolicyCountLimitExceededException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -1861,6 +1949,7 @@ module Aws::XRay
     # @!attribute message
     #   @return [String]
     class PolicySizeLimitExceededException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -1881,6 +1970,7 @@ module Aws::XRay
     #   </p>
     #   @return [Float]
     class ProbabilisticRuleValue < Struct.new(
+      nil,
       :desired_sampling_percentage,
       :actual_sampling_percentage,
       keyword_init: true
@@ -1897,6 +1987,7 @@ module Aws::XRay
     #   </p>
     #   @return [Float]
     class ProbabilisticRuleValueUpdate < Struct.new(
+      nil,
       :desired_sampling_percentage,
       keyword_init: true
     )
@@ -1931,6 +2022,7 @@ module Aws::XRay
     #         to <code>NONE</code> for default encryption.</p>
     #   @return [String]
     class PutEncryptionConfigRequest < Struct.new(
+      nil,
       :key_id,
       :type,
       keyword_init: true
@@ -1942,6 +2034,7 @@ module Aws::XRay
     #   <p>The new encryption configuration.</p>
     #   @return [Types::EncryptionConfig]
     class PutEncryptionConfigResult < Struct.new(
+      nil,
       :encryption_config,
       keyword_init: true
     )
@@ -1970,6 +2063,7 @@ module Aws::XRay
     #            <p>The default value is false.</p>
     #   @return [Boolean]
     class PutResourcePolicyRequest < Struct.new(
+      nil,
       :policy_name,
       :policy_document,
       :policy_revision_id,
@@ -1983,6 +2077,7 @@ module Aws::XRay
     #   <p>The resource policy document, as provided in the <code>PutResourcePolicyRequest</code>.</p>
     #   @return [Types::ResourcePolicy]
     class PutResourcePolicyResult < Struct.new(
+      nil,
       :resource_policy,
       keyword_init: true
     )
@@ -2002,6 +2097,7 @@ module Aws::XRay
     #   <p></p>
     #   @return [String]
     class PutTelemetryRecordsRequest < Struct.new(
+      nil,
       :telemetry_records,
       :ec2_instance_id,
       :hostname,
@@ -2012,6 +2108,7 @@ module Aws::XRay
     end
 
     class PutTelemetryRecordsResult < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -2022,6 +2119,7 @@ module Aws::XRay
     #         subsegments.</p>
     #   @return [Array<String>]
     class PutTraceSegmentsRequest < Struct.new(
+      nil,
       :trace_segment_documents,
       keyword_init: true
     )
@@ -2032,6 +2130,7 @@ module Aws::XRay
     #   <p>Segments that failed processing.</p>
     #   @return [Array<Types::UnprocessedTraceSegment>]
     class PutTraceSegmentsResult < Struct.new(
+      nil,
       :unprocessed_trace_segments,
       keyword_init: true
     )
@@ -2049,6 +2148,7 @@ module Aws::XRay
     #   <p>The total number of requests to the service.</p>
     #   @return [Integer]
     class RequestImpactStatistics < Struct.new(
+      nil,
       :fault_count,
       :ok_count,
       :total_count,
@@ -2062,6 +2162,7 @@ module Aws::XRay
     #   <p>The ARN of a corresponding resource.</p>
     #   @return [String]
     class ResourceARNDetail < Struct.new(
+      nil,
       :arn,
       keyword_init: true
     )
@@ -2075,6 +2176,7 @@ module Aws::XRay
     # @!attribute resource_name
     #   @return [String]
     class ResourceNotFoundException < Struct.new(
+      nil,
       :message,
       :resource_name,
       keyword_init: true
@@ -2098,6 +2200,7 @@ module Aws::XRay
     #   <p>When the policy was last updated, in Unix time seconds.</p>
     #   @return [Time]
     class ResourcePolicy < Struct.new(
+      nil,
       :policy_name,
       :policy_document,
       :policy_revision_id,
@@ -2116,6 +2219,7 @@ module Aws::XRay
     #   <p>A flag that denotes that the root cause impacts the trace client.</p>
     #   @return [Boolean]
     class ResponseTimeRootCause < Struct.new(
+      nil,
       :services,
       :client_impacting,
       keyword_init: true
@@ -2135,6 +2239,7 @@ module Aws::XRay
     #   <p>A flag that denotes a remote subsegment.</p>
     #   @return [Boolean]
     class ResponseTimeRootCauseEntity < Struct.new(
+      nil,
       :name,
       :coverage,
       :remote,
@@ -2163,6 +2268,7 @@ module Aws::XRay
     #   <p>A Boolean value indicating if the service is inferred from the trace.</p>
     #   @return [Boolean]
     class ResponseTimeRootCauseService < Struct.new(
+      nil,
       :name,
       :names,
       :type,
@@ -2187,6 +2293,7 @@ module Aws::XRay
     #   </p>
     #   @return [Array<Types::GraphLink>]
     class RetrievedService < Struct.new(
+      nil,
       :service,
       :links,
       keyword_init: true
@@ -2213,6 +2320,7 @@ module Aws::XRay
     #   </p>
     #   @return [Array<Types::Span>]
     class RetrievedTrace < Struct.new(
+      nil,
       :id,
       :duration,
       :spans,
@@ -2229,6 +2337,7 @@ module Aws::XRay
     #   <p>The message of the exception.</p>
     #   @return [String]
     class RootCauseException < Struct.new(
+      nil,
       :name,
       :message,
       keyword_init: true
@@ -2240,6 +2349,7 @@ module Aws::XRay
     # @!attribute message
     #   @return [String]
     class RuleLimitExceededException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -2255,6 +2365,7 @@ module Aws::XRay
     #   <p>When the sampling boost expires.</p>
     #   @return [Time]
     class SamplingBoost < Struct.new(
+      nil,
       :boost_rate,
       :boost_rate_ttl,
       keyword_init: true
@@ -2289,6 +2400,7 @@ module Aws::XRay
     #   <p>The number of requests with anomaly recorded.</p>
     #   @return [Integer]
     class SamplingBoostStatisticsDocument < Struct.new(
+      nil,
       :rule_name,
       :service_name,
       :timestamp,
@@ -2317,6 +2429,7 @@ module Aws::XRay
     #         After a boost occurs, no further boosts are allowed until the next window.</p>
     #   @return [Integer]
     class SamplingRateBoost < Struct.new(
+      nil,
       :max_rate,
       :cooldown_window_minutes,
       keyword_init: true
@@ -2379,6 +2492,7 @@ module Aws::XRay
     #         This boost allows you to temporarily increase sampling without changing the rule's configuration.</p>
     #   @return [Types::SamplingRateBoost]
     class SamplingRule < Struct.new(
+      nil,
       :rule_name,
       :rule_arn,
       :resource_arn,
@@ -2415,6 +2529,7 @@ module Aws::XRay
     #   <p>When the rule was last modified.</p>
     #   @return [Time]
     class SamplingRuleRecord < Struct.new(
+      nil,
       :sampling_rule,
       :created_at,
       :modified_at,
@@ -2467,6 +2582,7 @@ module Aws::XRay
     #         This boost allows you to temporarily increase sampling without changing the rule's configuration.</p>
     #   @return [Types::SamplingRateBoost]
     class SamplingRuleUpdate < Struct.new(
+      nil,
       :rule_name,
       :rule_arn,
       :resource_arn,
@@ -2502,6 +2618,7 @@ module Aws::XRay
     #   <p>The number of requests recorded.</p>
     #   @return [Integer]
     class SamplingStatisticSummary < Struct.new(
+      nil,
       :rule_name,
       :timestamp,
       :request_count,
@@ -2541,6 +2658,7 @@ module Aws::XRay
     #   <p>The number of requests recorded with borrowed reservoir quota.</p>
     #   @return [Integer]
     class SamplingStatisticsDocument < Struct.new(
+      nil,
       :rule_name,
       :client_id,
       :timestamp,
@@ -2567,6 +2685,7 @@ module Aws::XRay
     #   <p>The value of a sampling rule.</p>
     #   @return [Float]
     class SamplingStrategy < Struct.new(
+      nil,
       :name,
       :value,
       keyword_init: true
@@ -2598,6 +2717,7 @@ module Aws::XRay
     #   <p>The sampling boost that X-Ray allocated for this service.</p>
     #   @return [Types::SamplingBoost]
     class SamplingTargetDocument < Struct.new(
+      nil,
       :rule_name,
       :fixed_rate,
       :reservoir_quota,
@@ -2627,6 +2747,7 @@ module Aws::XRay
     #   <p>The segment document.</p>
     #   @return [String]
     class Segment < Struct.new(
+      nil,
       :id,
       :document,
       keyword_init: true
@@ -2696,6 +2817,7 @@ module Aws::XRay
     #   <p>A histogram that maps the spread of service response times.</p>
     #   @return [Array<Types::HistogramEntry>]
     class Service < Struct.new(
+      nil,
       :reference_id,
       :name,
       :names,
@@ -2728,6 +2850,7 @@ module Aws::XRay
     #   <p></p>
     #   @return [String]
     class ServiceId < Struct.new(
+      nil,
       :name,
       :names,
       :account_id,
@@ -2754,6 +2877,7 @@ module Aws::XRay
     #   <p>The aggregate response time of completed requests.</p>
     #   @return [Float]
     class ServiceStatistics < Struct.new(
+      nil,
       :ok_count,
       :error_statistics,
       :fault_statistics,
@@ -2775,6 +2899,7 @@ module Aws::XRay
     #   The span document.</p>
     #   @return [String]
     class Span < Struct.new(
+      nil,
       :id,
       :document,
       keyword_init: true
@@ -2799,6 +2924,7 @@ module Aws::XRay
     #     the number of seconds since January 1, 1970, 00:00:00 UTC.</p>
     #   @return [Time]
     class StartTraceRetrievalRequest < Struct.new(
+      nil,
       :trace_ids,
       :start_time,
       :end_time,
@@ -2813,6 +2939,7 @@ module Aws::XRay
     #   </p>
     #   @return [String]
     class StartTraceRetrievalResult < Struct.new(
+      nil,
       :retrieval_token,
       keyword_init: true
     )
@@ -2848,6 +2975,7 @@ module Aws::XRay
     #            </p>
     #   @return [String]
     class Tag < Struct.new(
+      nil,
       :key,
       :value,
       keyword_init: true
@@ -2887,6 +3015,7 @@ module Aws::XRay
     #            </ul>
     #   @return [Array<Types::Tag>]
     class TagResourceRequest < Struct.new(
+      nil,
       :resource_arn,
       :tags,
       keyword_init: true
@@ -2895,6 +3024,7 @@ module Aws::XRay
     end
 
     class TagResourceResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -2920,6 +3050,7 @@ module Aws::XRay
     #   <p></p>
     #   @return [Types::BackendConnectionErrors]
     class TelemetryRecord < Struct.new(
+      nil,
       :timestamp,
       :segments_received_count,
       :segments_sent_count,
@@ -2935,6 +3066,7 @@ module Aws::XRay
     # @!attribute message
     #   @return [String]
     class ThrottledException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -2958,6 +3090,7 @@ module Aws::XRay
     #   <p>The response time histogram for the selected entities.</p>
     #   @return [Array<Types::HistogramEntry>]
     class TimeSeriesServiceStatistics < Struct.new(
+      nil,
       :timestamp,
       :edge_summary_statistics,
       :service_summary_statistics,
@@ -2974,6 +3107,7 @@ module Aws::XRay
     # @!attribute resource_name
     #   @return [String]
     class TooManyTagsException < Struct.new(
+      nil,
       :message,
       :resource_name,
       keyword_init: true
@@ -2997,6 +3131,7 @@ module Aws::XRay
     #   <p>Segment documents for the segments and subsegments that comprise the trace.</p>
     #   @return [Array<Types::Segment>]
     class Trace < Struct.new(
+      nil,
       :id,
       :duration,
       :limit_exceeded,
@@ -3078,6 +3213,7 @@ module Aws::XRay
     #   <p>The matched time stamp of a defined event.</p>
     #   @return [Time]
     class TraceSummary < Struct.new(
+      nil,
       :id,
       :start_time,
       :duration,
@@ -3117,6 +3253,7 @@ module Aws::XRay
     #   <p>Services that the user's request hit.</p>
     #   @return [Array<Types::ServiceId>]
     class TraceUser < Struct.new(
+      nil,
       :user_name,
       :service_ids,
       keyword_init: true
@@ -3136,6 +3273,7 @@ module Aws::XRay
     #   <p>The error message.</p>
     #   @return [String]
     class UnprocessedStatistics < Struct.new(
+      nil,
       :rule_name,
       :error_code,
       :message,
@@ -3155,6 +3293,7 @@ module Aws::XRay
     #   <p>The error message.</p>
     #   @return [String]
     class UnprocessedTraceSegment < Struct.new(
+      nil,
       :id,
       :error_code,
       :message,
@@ -3170,6 +3309,7 @@ module Aws::XRay
     #   <p>Keys for one or more tags that you want to remove from an X-Ray group or sampling rule.</p>
     #   @return [Array<String>]
     class UntagResourceRequest < Struct.new(
+      nil,
       :resource_arn,
       :tag_keys,
       keyword_init: true
@@ -3178,6 +3318,7 @@ module Aws::XRay
     end
 
     class UntagResourceResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -3206,6 +3347,7 @@ module Aws::XRay
     #            </ul>
     #   @return [Types::InsightsConfiguration]
     class UpdateGroupRequest < Struct.new(
+      nil,
       :group_name,
       :group_arn,
       :filter_expression,
@@ -3221,6 +3363,7 @@ module Aws::XRay
     #               configuration assigned to the group.</p>
     #   @return [Types::Group]
     class UpdateGroupResult < Struct.new(
+      nil,
       :group,
       keyword_init: true
     )
@@ -3238,6 +3381,7 @@ module Aws::XRay
     #     </p>
     #   @return [Types::IndexingRuleValueUpdate]
     class UpdateIndexingRuleRequest < Struct.new(
+      nil,
       :name,
       :rule,
       keyword_init: true
@@ -3251,6 +3395,7 @@ module Aws::XRay
     #     </p>
     #   @return [Types::IndexingRule]
     class UpdateIndexingRuleResult < Struct.new(
+      nil,
       :indexing_rule,
       keyword_init: true
     )
@@ -3261,6 +3406,7 @@ module Aws::XRay
     #   <p>The rule and fields to change.</p>
     #   @return [Types::SamplingRuleUpdate]
     class UpdateSamplingRuleRequest < Struct.new(
+      nil,
       :sampling_rule_update,
       keyword_init: true
     )
@@ -3271,6 +3417,7 @@ module Aws::XRay
     #   <p>The updated rule definition and metadata.</p>
     #   @return [Types::SamplingRuleRecord]
     class UpdateSamplingRuleResult < Struct.new(
+      nil,
       :sampling_rule_record,
       keyword_init: true
     )
@@ -3283,6 +3430,7 @@ module Aws::XRay
     #   </p>
     #   @return [String]
     class UpdateTraceSegmentDestinationRequest < Struct.new(
+      nil,
       :destination,
       keyword_init: true
     )
@@ -3300,6 +3448,7 @@ module Aws::XRay
     #   </p>
     #   @return [String]
     class UpdateTraceSegmentDestinationResult < Struct.new(
+      nil,
       :destination,
       :status,
       keyword_init: true
@@ -3315,6 +3464,7 @@ module Aws::XRay
     #   <p>Services to which the annotation applies.</p>
     #   @return [Array<Types::ServiceId>]
     class ValueWithServiceIds < Struct.new(
+      nil,
       :annotation_value,
       :service_ids,
       keyword_init: true

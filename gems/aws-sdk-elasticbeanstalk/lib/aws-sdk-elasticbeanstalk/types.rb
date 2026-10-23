@@ -16,6 +16,7 @@ module Aws::ElasticBeanstalk
     #         cancel.</p>
     #   @return [String]
     class AbortEnvironmentUpdateMessage < Struct.new(
+      nil,
       :environment_id,
       :environment_name,
       keyword_init: true
@@ -49,6 +50,7 @@ module Aws::ElasticBeanstalk
     #   <p>The lifecycle settings for the application.</p>
     #   @return [Types::ApplicationResourceLifecycleConfig]
     class ApplicationDescription < Struct.new(
+      nil,
       :application_arn,
       :application_name,
       :description,
@@ -67,6 +69,7 @@ module Aws::ElasticBeanstalk
     #   <p>This parameter contains a list of <a>ApplicationDescription</a>.</p>
     #   @return [Array<Types::ApplicationDescription>]
     class ApplicationDescriptionsMessage < Struct.new(
+      nil,
       :applications,
       keyword_init: true
     )
@@ -92,6 +95,7 @@ module Aws::ElasticBeanstalk
     #         seconds. Latencies are in seconds with one millisecond resolution.</p>
     #   @return [Types::Latency]
     class ApplicationMetrics < Struct.new(
+      nil,
       :duration,
       :request_count,
       :status_codes,
@@ -125,6 +129,7 @@ module Aws::ElasticBeanstalk
     #   <p>Defines lifecycle settings for application versions.</p>
     #   @return [Types::ApplicationVersionLifecycleConfig]
     class ApplicationResourceLifecycleConfig < Struct.new(
+      nil,
       :service_role,
       :version_lifecycle_config,
       keyword_init: true
@@ -139,6 +144,7 @@ module Aws::ElasticBeanstalk
     #   <p>The lifecycle configuration.</p>
     #   @return [Types::ApplicationResourceLifecycleConfig]
     class ApplicationResourceLifecycleDescriptionMessage < Struct.new(
+      nil,
       :application_name,
       :resource_lifecycle_config,
       keyword_init: true
@@ -208,6 +214,7 @@ module Aws::ElasticBeanstalk
     #            </ul>
     #   @return [String]
     class ApplicationVersionDescription < Struct.new(
+      nil,
       :application_version_arn,
       :application_name,
       :description,
@@ -233,6 +240,7 @@ module Aws::ElasticBeanstalk
     #         next response page.</p>
     #   @return [String]
     class ApplicationVersionDescriptionsMessage < Struct.new(
+      nil,
       :application_versions,
       :next_token,
       keyword_init: true
@@ -255,6 +263,7 @@ module Aws::ElasticBeanstalk
     #         retained for an application.</p>
     #   @return [Types::MaxAgeRule]
     class ApplicationVersionLifecycleConfig < Struct.new(
+      nil,
       :max_count_rule,
       :max_age_rule,
       keyword_init: true
@@ -273,6 +282,7 @@ module Aws::ElasticBeanstalk
     #   <p>The action ID of the scheduled managed action to execute.</p>
     #   @return [String]
     class ApplyEnvironmentManagedActionRequest < Struct.new(
+      nil,
       :environment_name,
       :environment_id,
       :action_id,
@@ -295,6 +305,7 @@ module Aws::ElasticBeanstalk
     #   <p>The status of the managed action.</p>
     #   @return [String]
     class ApplyEnvironmentManagedActionResult < Struct.new(
+      nil,
       :action_id,
       :action_description,
       :action_type,
@@ -313,6 +324,7 @@ module Aws::ElasticBeanstalk
     #         operations role.</p>
     #   @return [String]
     class AssociateEnvironmentOperationsRoleMessage < Struct.new(
+      nil,
       :environment_name,
       :operations_role,
       keyword_init: true
@@ -325,6 +337,7 @@ module Aws::ElasticBeanstalk
     #   <p>The name of the <code>AutoScalingGroup</code> . </p>
     #   @return [String]
     class AutoScalingGroup < Struct.new(
+      nil,
       :name,
       keyword_init: true
     )
@@ -370,6 +383,7 @@ module Aws::ElasticBeanstalk
     #   <p>How long in minutes, from 5 to 480 (8 hours), for AWS CodeBuild to wait until timing out any related build that does not get marked as completed. The default is 60 minutes.</p>
     #   @return [Integer]
     class BuildConfiguration < Struct.new(
+      nil,
       :artifact_name,
       :code_build_service_role,
       :compute_type,
@@ -385,6 +399,7 @@ module Aws::ElasticBeanstalk
     #   <p>The ARN of the builder.</p>
     #   @return [String]
     class Builder < Struct.new(
+      nil,
       :arn,
       keyword_init: true
     )
@@ -431,6 +446,7 @@ module Aws::ElasticBeanstalk
     #         last 10 seconds.</p>
     #   @return [Float]
     class CPUUtilization < Struct.new(
+      nil,
       :user,
       :nice,
       :system,
@@ -449,6 +465,7 @@ module Aws::ElasticBeanstalk
     #   <p>The prefix used when this CNAME is reserved.</p>
     #   @return [String]
     class CheckDNSAvailabilityMessage < Struct.new(
+      nil,
       :cname_prefix,
       keyword_init: true
     )
@@ -474,6 +491,7 @@ module Aws::ElasticBeanstalk
     #         with the provided prefix.</p>
     #   @return [String]
     class CheckDNSAvailabilityResultMessage < Struct.new(
+      nil,
       :available,
       :fully_qualified_cname,
       keyword_init: true
@@ -486,6 +504,7 @@ module Aws::ElasticBeanstalk
     #   <p>The exception error message.</p>
     #   @return [String]
     class CodeBuildNotInServiceRegionException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -509,6 +528,7 @@ module Aws::ElasticBeanstalk
     #         optionally can specify environment links to create.</p>
     #   @return [Array<String>]
     class ComposeEnvironmentsMessage < Struct.new(
+      nil,
       :application_name,
       :group_name,
       :version_labels,
@@ -526,6 +546,7 @@ module Aws::ElasticBeanstalk
     #         next response page.</p>
     #   @return [String]
     class ComposeEnvironmentsOutput < Struct.new(
+      nil,
       :environments,
       :next_token,
       keyword_init: true
@@ -632,6 +653,7 @@ module Aws::ElasticBeanstalk
     #         regular expression.</p>
     #   @return [Types::OptionRestrictionRegex]
     class ConfigurationOptionDescription < Struct.new(
+      nil,
       :namespace,
       :name,
       :default_value,
@@ -664,6 +686,7 @@ module Aws::ElasticBeanstalk
     #   <p>The current value for the configuration option.</p>
     #   @return [String]
     class ConfigurationOptionSetting < Struct.new(
+      nil,
       :resource_name,
       :namespace,
       :option_name,
@@ -732,6 +755,7 @@ module Aws::ElasticBeanstalk
     #         set.</p>
     #   @return [Array<Types::ConfigurationOptionSetting>]
     class ConfigurationSettingsDescription < Struct.new(
+      nil,
       :solution_stack_name,
       :platform_arn,
       :application_name,
@@ -764,6 +788,7 @@ module Aws::ElasticBeanstalk
     #         application don't inherit the tags.</p>
     #   @return [Array<Types::Tag>]
     class CreateApplicationMessage < Struct.new(
+      nil,
       :application_name,
       :description,
       :resource_lifecycle_config,
@@ -778,6 +803,7 @@ module Aws::ElasticBeanstalk
     #   <p> The <a>ApplicationDescription</a> of the application. </p>
     #   @return [Types::ApplicationDescription]
     class CreateApplicationOutput < Struct.new(
+      nil,
       :application,
       keyword_init: true
     )
@@ -842,6 +868,7 @@ module Aws::ElasticBeanstalk
     #         application version don't inherit the tags.</p>
     #   @return [Array<Types::Tag>]
     class CreateApplicationVersionMessage < Struct.new(
+      nil,
       :application_name,
       :version_label,
       :description,
@@ -862,6 +889,7 @@ module Aws::ElasticBeanstalk
     #       </p>
     #   @return [Types::ApplicationVersionDescription]
     class CreateApplicationVersionOutput < Struct.new(
+      nil,
       :application_version,
       keyword_init: true
     )
@@ -931,6 +959,7 @@ module Aws::ElasticBeanstalk
     #   <p>Specifies the tags applied to the configuration template.</p>
     #   @return [Array<Types::Tag>]
     class CreateConfigurationTemplateMessage < Struct.new(
+      nil,
       :application_name,
       :template_name,
       :solution_stack_name,
@@ -1004,6 +1033,7 @@ module Aws::ElasticBeanstalk
     #         set.</p>
     #   @return [Array<Types::ConfigurationOptionSetting>]
     class CreateConfigurationTemplateOutput < Struct.new(
+      nil,
       :solution_stack_name,
       :platform_arn,
       :application_name,
@@ -1102,6 +1132,7 @@ module Aws::ElasticBeanstalk
     #           <i>AWS Elastic Beanstalk Developer Guide</i>.</p>
     #   @return [String]
     class CreateEnvironmentMessage < Struct.new(
+      nil,
       :application_name,
       :environment_name,
       :group_name,
@@ -1245,6 +1276,7 @@ module Aws::ElasticBeanstalk
     #         see <a href="https://docs.aws.amazon.com/elasticbeanstalk/latest/dg/iam-operationsrole.html">Operations roles</a> in the <i>AWS Elastic Beanstalk Developer Guide</i>.</p>
     #   @return [String]
     class CreateEnvironmentOutput < Struct.new(
+      nil,
       :environment_name,
       :environment_id,
       :application_name,
@@ -1293,6 +1325,7 @@ module Aws::ElasticBeanstalk
     #         the platform version don't inherit the tags.</p>
     #   @return [Array<Types::Tag>]
     class CreatePlatformVersionRequest < Struct.new(
+      nil,
       :platform_name,
       :platform_version,
       :platform_definition_bundle,
@@ -1311,6 +1344,7 @@ module Aws::ElasticBeanstalk
     #   <p>The builder used to create the custom platform.</p>
     #   @return [Types::Builder]
     class CreatePlatformVersionResult < Struct.new(
+      nil,
       :platform_summary,
       :builder,
       keyword_init: true
@@ -1323,6 +1357,7 @@ module Aws::ElasticBeanstalk
     #   <p>The name of the Amazon S3 bucket created.</p>
     #   @return [String]
     class CreateStorageLocationResultMessage < Struct.new(
+      nil,
       :s3_bucket,
       keyword_init: true
     )
@@ -1337,6 +1372,7 @@ module Aws::ElasticBeanstalk
     #   <p>THe ID of the image used to create the custom AMI.</p>
     #   @return [String]
     class CustomAmi < Struct.new(
+      nil,
       :virtualization_type,
       :image_id,
       keyword_init: true
@@ -1353,6 +1389,7 @@ module Aws::ElasticBeanstalk
     #         application.</p>
     #   @return [Boolean]
     class DeleteApplicationMessage < Struct.new(
+      nil,
       :application_name,
       :terminate_env_by_force,
       keyword_init: true
@@ -1373,6 +1410,7 @@ module Aws::ElasticBeanstalk
     #         bundle remains in Amazon S3.</p>
     #   @return [Boolean]
     class DeleteApplicationVersionMessage < Struct.new(
+      nil,
       :application_name,
       :version_label,
       :delete_source_bundle,
@@ -1389,6 +1427,7 @@ module Aws::ElasticBeanstalk
     #   <p>The name of the configuration template to delete.</p>
     #   @return [String]
     class DeleteConfigurationTemplateMessage < Struct.new(
+      nil,
       :application_name,
       :template_name,
       keyword_init: true
@@ -1404,6 +1443,7 @@ module Aws::ElasticBeanstalk
     #   <p>The name of the environment to delete the draft configuration from.</p>
     #   @return [String]
     class DeleteEnvironmentConfigurationMessage < Struct.new(
+      nil,
       :application_name,
       :environment_name,
       keyword_init: true
@@ -1415,6 +1455,7 @@ module Aws::ElasticBeanstalk
     #   <p>The ARN of the version of the custom platform.</p>
     #   @return [String]
     class DeletePlatformVersionRequest < Struct.new(
+      nil,
       :platform_arn,
       keyword_init: true
     )
@@ -1425,6 +1466,7 @@ module Aws::ElasticBeanstalk
     #   <p>Detailed information about the version of the custom platform.</p>
     #   @return [Types::PlatformSummary]
     class DeletePlatformVersionResult < Struct.new(
+      nil,
       :platform_summary,
       keyword_init: true
     )
@@ -1461,6 +1503,7 @@ module Aws::ElasticBeanstalk
     #            <p>For completed deployments, the time that the deployment ended.</p>
     #   @return [Time]
     class Deployment < Struct.new(
+      nil,
       :version_label,
       :deployment_id,
       :status,
@@ -1474,6 +1517,7 @@ module Aws::ElasticBeanstalk
     #   <p>The Elastic Beanstalk resource quotas associated with the calling AWS account.</p>
     #   @return [Types::ResourceQuotas]
     class DescribeAccountAttributesResult < Struct.new(
+      nil,
       :resource_quotas,
       keyword_init: true
     )
@@ -1500,6 +1544,7 @@ module Aws::ElasticBeanstalk
     #            <p>If no <code>NextToken</code> is specified, the first page is retrieved.</p>
     #   @return [String]
     class DescribeApplicationVersionsMessage < Struct.new(
+      nil,
       :application_name,
       :version_labels,
       :max_records,
@@ -1515,6 +1560,7 @@ module Aws::ElasticBeanstalk
     #         those with the specified names.</p>
     #   @return [Array<String>]
     class DescribeApplicationsMessage < Struct.new(
+      nil,
       :application_names,
       keyword_init: true
     )
@@ -1545,6 +1591,7 @@ module Aws::ElasticBeanstalk
     #   <p>If specified, restricts the descriptions to only the specified options.</p>
     #   @return [Array<Types::OptionSpecification>]
     class DescribeConfigurationOptionsMessage < Struct.new(
+      nil,
       :application_name,
       :template_name,
       :environment_name,
@@ -1567,6 +1614,7 @@ module Aws::ElasticBeanstalk
     #   <p> A list of <a>ConfigurationOptionDescription</a>. </p>
     #   @return [Array<Types::ConfigurationOptionDescription>]
     class DescribeConfigurationOptionsOutput < Struct.new(
+      nil,
       :solution_stack_name,
       :platform_arn,
       :options,
@@ -1595,6 +1643,7 @@ module Aws::ElasticBeanstalk
     #           <code>MissingRequiredParameter</code> error. </p>
     #   @return [String]
     class DescribeConfigurationSettingsMessage < Struct.new(
+      nil,
       :application_name,
       :template_name,
       :environment_name,
@@ -1609,6 +1658,7 @@ module Aws::ElasticBeanstalk
     #   <p> A list of <a>ConfigurationSettingsDescription</a>. </p>
     #   @return [Array<Types::ConfigurationSettingsDescription>]
     class DescribeConfigurationSettingsOutput < Struct.new(
+      nil,
       :configuration_settings,
       keyword_init: true
     )
@@ -1630,6 +1680,7 @@ module Aws::ElasticBeanstalk
     #         environment.</p>
     #   @return [Array<String>]
     class DescribeEnvironmentHealthRequest < Struct.new(
+      nil,
       :environment_name,
       :environment_id,
       :attribute_names,
@@ -1668,6 +1719,7 @@ module Aws::ElasticBeanstalk
     #   <p>The date and time that the health information was retrieved.</p>
     #   @return [Time]
     class DescribeEnvironmentHealthResult < Struct.new(
+      nil,
       :environment_name,
       :health_status,
       :status,
@@ -1695,6 +1747,7 @@ module Aws::ElasticBeanstalk
     #   <p>The maximum number of items to return for a single request.</p>
     #   @return [Integer]
     class DescribeEnvironmentManagedActionHistoryRequest < Struct.new(
+      nil,
       :environment_id,
       :environment_name,
       :next_token,
@@ -1713,6 +1766,7 @@ module Aws::ElasticBeanstalk
     #         results.</p>
     #   @return [String]
     class DescribeEnvironmentManagedActionHistoryResult < Struct.new(
+      nil,
       :managed_action_history_items,
       :next_token,
       keyword_init: true
@@ -1731,6 +1785,7 @@ module Aws::ElasticBeanstalk
     #   <p>To show only actions with a particular status, specify a status.</p>
     #   @return [String]
     class DescribeEnvironmentManagedActionsRequest < Struct.new(
+      nil,
       :environment_name,
       :environment_id,
       :status,
@@ -1744,6 +1799,7 @@ module Aws::ElasticBeanstalk
     #   <p>A list of upcoming and in-progress managed actions.</p>
     #   @return [Array<Types::ManagedAction>]
     class DescribeEnvironmentManagedActionsResult < Struct.new(
+      nil,
       :managed_actions,
       keyword_init: true
     )
@@ -1764,6 +1820,7 @@ module Aws::ElasticBeanstalk
     #       </p>
     #   @return [String]
     class DescribeEnvironmentResourcesMessage < Struct.new(
+      nil,
       :environment_id,
       :environment_name,
       keyword_init: true
@@ -1812,6 +1869,7 @@ module Aws::ElasticBeanstalk
     #            <p>If no <code>NextToken</code> is specified, the first page is retrieved.</p>
     #   @return [String]
     class DescribeEnvironmentsMessage < Struct.new(
+      nil,
       :application_name,
       :version_label,
       :environment_ids,
@@ -1834,6 +1892,7 @@ module Aws::ElasticBeanstalk
     #         next response page.</p>
     #   @return [String]
     class DescribeEnvironmentsOutput < Struct.new(
+      nil,
       :environments,
       :next_token,
       keyword_init: true
@@ -1890,6 +1949,7 @@ module Aws::ElasticBeanstalk
     #   <p>Pagination token. If specified, the events return the next batch of results.</p>
     #   @return [String]
     class DescribeEventsMessage < Struct.new(
+      nil,
       :application_name,
       :version_label,
       :template_name,
@@ -1923,6 +1983,7 @@ module Aws::ElasticBeanstalk
     #   <p>Specify the pagination token returned by a previous call.</p>
     #   @return [String]
     class DescribeInstancesHealthRequest < Struct.new(
+      nil,
       :environment_name,
       :environment_id,
       :attribute_names,
@@ -1946,6 +2007,7 @@ module Aws::ElasticBeanstalk
     #   <p>Pagination token for the next page of results, if available.</p>
     #   @return [String]
     class DescribeInstancesHealthResult < Struct.new(
+      nil,
       :instance_health_list,
       :refreshed_at,
       :next_token,
@@ -1958,6 +2020,7 @@ module Aws::ElasticBeanstalk
     #   <p>The ARN of the platform version.</p>
     #   @return [String]
     class DescribePlatformVersionRequest < Struct.new(
+      nil,
       :platform_arn,
       keyword_init: true
     )
@@ -1968,6 +2031,7 @@ module Aws::ElasticBeanstalk
     #   <p>Detailed information about the platform version.</p>
     #   @return [Types::PlatformDescription]
     class DescribePlatformVersionResult < Struct.new(
+      nil,
       :platform_description,
       keyword_init: true
     )
@@ -1979,6 +2043,7 @@ module Aws::ElasticBeanstalk
     #   <p>The name of the environment from which to disassociate the operations role.</p>
     #   @return [String]
     class DisassociateEnvironmentOperationsRoleMessage < Struct.new(
+      nil,
       :environment_name,
       keyword_init: true
     )
@@ -1990,6 +2055,7 @@ module Aws::ElasticBeanstalk
     #   <p>The exception error message.</p>
     #   @return [String]
     class ElasticBeanstalkServiceException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -2120,6 +2186,7 @@ module Aws::ElasticBeanstalk
     #         see <a href="https://docs.aws.amazon.com/elasticbeanstalk/latest/dg/iam-operationsrole.html">Operations roles</a> in the <i>AWS Elastic Beanstalk Developer Guide</i>.</p>
     #   @return [String]
     class EnvironmentDescription < Struct.new(
+      nil,
       :environment_name,
       :environment_id,
       :application_name,
@@ -2163,6 +2230,7 @@ module Aws::ElasticBeanstalk
     #         URL available only to trusted parties.</p>
     #   @return [String]
     class EnvironmentInfoDescription < Struct.new(
+      nil,
       :info_type,
       :ec2_instance_id,
       :sample_timestamp,
@@ -2183,6 +2251,7 @@ module Aws::ElasticBeanstalk
     #   <p>The name of the linked environment (the dependency).</p>
     #   @return [String]
     class EnvironmentLink < Struct.new(
+      nil,
       :link_name,
       :environment_name,
       keyword_init: true
@@ -2216,6 +2285,7 @@ module Aws::ElasticBeanstalk
     #   <p>The queues used by this environment.</p>
     #   @return [Array<Types::Queue>]
     class EnvironmentResourceDescription < Struct.new(
+      nil,
       :environment_name,
       :auto_scaling_groups,
       :instances,
@@ -2234,6 +2304,7 @@ module Aws::ElasticBeanstalk
     #   <p> A list of <a>EnvironmentResourceDescription</a>. </p>
     #   @return [Types::EnvironmentResourceDescription]
     class EnvironmentResourceDescriptionsMessage < Struct.new(
+      nil,
       :environment_resources,
       keyword_init: true
     )
@@ -2246,6 +2317,7 @@ module Aws::ElasticBeanstalk
     #   <p>Describes the LoadBalancer.</p>
     #   @return [Types::LoadBalancerDescription]
     class EnvironmentResourcesDescription < Struct.new(
+      nil,
       :load_balancer,
       keyword_init: true
     )
@@ -2290,6 +2362,7 @@ module Aws::ElasticBeanstalk
     #            </note>
     #   @return [String]
     class EnvironmentTier < Struct.new(
+      nil,
       :name,
       :type,
       :version,
@@ -2327,6 +2400,7 @@ module Aws::ElasticBeanstalk
     #   <p>The severity level of this event.</p>
     #   @return [String]
     class EventDescription < Struct.new(
+      nil,
       :event_date,
       :message,
       :application_name,
@@ -2350,6 +2424,7 @@ module Aws::ElasticBeanstalk
     #         the next <a>DescribeEvents</a> call to get the next batch of events. </p>
     #   @return [String]
     class EventDescriptionsMessage < Struct.new(
+      nil,
       :events,
       :next_token,
       keyword_init: true
@@ -2362,6 +2437,7 @@ module Aws::ElasticBeanstalk
     #   <p>The ID of the Amazon EC2 instance.</p>
     #   @return [String]
     class Instance < Struct.new(
+      nil,
       :id,
       keyword_init: true
     )
@@ -2410,6 +2486,7 @@ module Aws::ElasticBeanstalk
     #         request failures or other issues for an instance or environment.</p>
     #   @return [Integer]
     class InstanceHealthSummary < Struct.new(
+      nil,
       :no_data,
       :unknown,
       :pending,
@@ -2429,6 +2506,7 @@ module Aws::ElasticBeanstalk
     #   <p>The exception error message.</p>
     #   @return [String]
     class InsufficientPrivilegesException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -2441,6 +2519,7 @@ module Aws::ElasticBeanstalk
     #   <p>The exception error message.</p>
     #   @return [String]
     class InvalidRequestException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -2482,6 +2561,7 @@ module Aws::ElasticBeanstalk
     #         seconds.</p>
     #   @return [Float]
     class Latency < Struct.new(
+      nil,
       :p999,
       :p99,
       :p95,
@@ -2500,6 +2580,7 @@ module Aws::ElasticBeanstalk
     #   <p>The name of the launch configuration.</p>
     #   @return [String]
     class LaunchConfiguration < Struct.new(
+      nil,
       :name,
       keyword_init: true
     )
@@ -2511,6 +2592,7 @@ module Aws::ElasticBeanstalk
     #   <p>The ID of the launch template.</p>
     #   @return [String]
     class LaunchTemplate < Struct.new(
+      nil,
       :id,
       keyword_init: true
     )
@@ -2525,6 +2607,7 @@ module Aws::ElasticBeanstalk
     #   <p> A list of available solution stacks and their <a>SolutionStackDescription</a>. </p>
     #   @return [Array<Types::SolutionStackDescription>]
     class ListAvailableSolutionStacksResultMessage < Struct.new(
+      nil,
       :solution_stacks,
       :solution_stack_details,
       keyword_init: true
@@ -2614,6 +2697,7 @@ module Aws::ElasticBeanstalk
     #            <p>If no <code>NextToken</code> is specified, the first page is retrieved.</p>
     #   @return [String]
     class ListPlatformBranchesRequest < Struct.new(
+      nil,
       :filters,
       :max_records,
       :next_token,
@@ -2630,6 +2714,7 @@ module Aws::ElasticBeanstalk
     #         pass in a subsequent request to get the next response page.</p>
     #   @return [String]
     class ListPlatformBranchesResult < Struct.new(
+      nil,
       :platform_branch_summary_list,
       :next_token,
       keyword_init: true
@@ -2652,6 +2737,7 @@ module Aws::ElasticBeanstalk
     #            <p>If no <code>NextToken</code> is specified, the first page is retrieved.</p>
     #   @return [String]
     class ListPlatformVersionsRequest < Struct.new(
+      nil,
       :filters,
       :max_records,
       :next_token,
@@ -2668,6 +2754,7 @@ module Aws::ElasticBeanstalk
     #         pass in a subsequent request to get the next response page.</p>
     #   @return [String]
     class ListPlatformVersionsResult < Struct.new(
+      nil,
       :platform_summary_list,
       :next_token,
       keyword_init: true
@@ -2680,6 +2767,7 @@ module Aws::ElasticBeanstalk
     #            <p>Must be the ARN of an Elastic Beanstalk resource.</p>
     #   @return [String]
     class ListTagsForResourceMessage < Struct.new(
+      nil,
       :resource_arn,
       keyword_init: true
     )
@@ -2694,6 +2782,7 @@ module Aws::ElasticBeanstalk
     #   <p>The port that is used by the Listener.</p>
     #   @return [Integer]
     class Listener < Struct.new(
+      nil,
       :protocol,
       :port,
       keyword_init: true
@@ -2711,6 +2800,7 @@ module Aws::ElasticBeanstalk
     #   <p>The name of the LoadBalancer.</p>
     #   @return [String]
     class LoadBalancer < Struct.new(
+      nil,
       :name,
       keyword_init: true
     )
@@ -2728,6 +2818,7 @@ module Aws::ElasticBeanstalk
     #   <p>A list of Listeners used by the LoadBalancer.</p>
     #   @return [Array<Types::Listener>]
     class LoadBalancerDescription < Struct.new(
+      nil,
       :load_balancer_name,
       :domain,
       :listeners,
@@ -2755,6 +2846,7 @@ module Aws::ElasticBeanstalk
     #         execute.</p>
     #   @return [Time]
     class ManagedAction < Struct.new(
+      nil,
       :action_id,
       :action_description,
       :action_type,
@@ -2791,6 +2883,7 @@ module Aws::ElasticBeanstalk
     #   <p>The date and time that the action finished executing.</p>
     #   @return [Time]
     class ManagedActionHistoryItem < Struct.new(
+      nil,
       :action_id,
       :action_type,
       :action_description,
@@ -2809,6 +2902,7 @@ module Aws::ElasticBeanstalk
     #   <p>The exception error message.</p>
     #   @return [String]
     class ManagedActionInvalidStateException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -2829,6 +2923,7 @@ module Aws::ElasticBeanstalk
     #         Elastic Beanstalk deletes the application version.</p>
     #   @return [Boolean]
     class MaxAgeRule < Struct.new(
+      nil,
       :enabled,
       :max_age_in_days,
       :delete_source_from_s3,
@@ -2851,6 +2946,7 @@ module Aws::ElasticBeanstalk
     #         Elastic Beanstalk deletes the application version.</p>
     #   @return [Boolean]
     class MaxCountRule < Struct.new(
+      nil,
       :enabled,
       :max_count,
       :delete_source_from_s3,
@@ -2865,6 +2961,7 @@ module Aws::ElasticBeanstalk
     #   <p>The exception error message.</p>
     #   @return [String]
     class OperationInProgressException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -2881,6 +2978,7 @@ module Aws::ElasticBeanstalk
     #   <p>A unique name representing this regular expression.</p>
     #   @return [String]
     class OptionRestrictionRegex < Struct.new(
+      nil,
       :pattern,
       :label,
       keyword_init: true
@@ -2899,6 +2997,7 @@ module Aws::ElasticBeanstalk
     #   <p>The name of the configuration option.</p>
     #   @return [String]
     class OptionSpecification < Struct.new(
+      nil,
       :resource_name,
       :namespace,
       :option_name,
@@ -2934,6 +3033,7 @@ module Aws::ElasticBeanstalk
     #            </p>
     #   @return [Array<String>]
     class PlatformBranchSummary < Struct.new(
+      nil,
       :platform_name,
       :branch_name,
       :lifecycle_state,
@@ -3022,6 +3122,7 @@ module Aws::ElasticBeanstalk
     #            </p>
     #   @return [String]
     class PlatformDescription < Struct.new(
+      nil,
       :platform_arn,
       :platform_owner,
       :platform_name,
@@ -3100,6 +3201,7 @@ module Aws::ElasticBeanstalk
     #            </ul>
     #   @return [Array<String>]
     class PlatformFilter < Struct.new(
+      nil,
       :type,
       :operator,
       :values,
@@ -3116,6 +3218,7 @@ module Aws::ElasticBeanstalk
     #   <p>The version of the framework.</p>
     #   @return [String]
     class PlatformFramework < Struct.new(
+      nil,
       :name,
       :version,
       keyword_init: true
@@ -3131,6 +3234,7 @@ module Aws::ElasticBeanstalk
     #   <p>The version of the programming language.</p>
     #   @return [String]
     class PlatformProgrammingLanguage < Struct.new(
+      nil,
       :name,
       :version,
       keyword_init: true
@@ -3183,6 +3287,7 @@ module Aws::ElasticBeanstalk
     #            </p>
     #   @return [String]
     class PlatformSummary < Struct.new(
+      nil,
       :platform_arn,
       :platform_owner,
       :platform_status,
@@ -3205,6 +3310,7 @@ module Aws::ElasticBeanstalk
     #   <p>The exception error message.</p>
     #   @return [String]
     class PlatformVersionStillReferencedException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -3219,6 +3325,7 @@ module Aws::ElasticBeanstalk
     #   <p>The URL of the queue.</p>
     #   @return [String]
     class Queue < Struct.new(
+      nil,
       :name,
       :url,
       keyword_init: true
@@ -3240,6 +3347,7 @@ module Aws::ElasticBeanstalk
     #       </p>
     #   @return [String]
     class RebuildEnvironmentMessage < Struct.new(
+      nil,
       :environment_id,
       :environment_name,
       keyword_init: true
@@ -3269,6 +3377,7 @@ module Aws::ElasticBeanstalk
     #   <p>The type of information to request.</p>
     #   @return [String]
     class RequestEnvironmentInfoMessage < Struct.new(
+      nil,
       :environment_id,
       :environment_name,
       :info_type,
@@ -3282,6 +3391,7 @@ module Aws::ElasticBeanstalk
     #   <p>The exception error message.</p>
     #   @return [String]
     class ResourceNotFoundException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -3295,6 +3405,7 @@ module Aws::ElasticBeanstalk
     #         use.</p>
     #   @return [Integer]
     class ResourceQuota < Struct.new(
+      nil,
       :maximum,
       keyword_init: true
     )
@@ -3319,6 +3430,7 @@ module Aws::ElasticBeanstalk
     #   <p>The quota for custom platforms in the AWS account.</p>
     #   @return [Types::ResourceQuota]
     class ResourceQuotas < Struct.new(
+      nil,
       :application_quota,
       :application_version_quota,
       :environment_quota,
@@ -3336,6 +3448,7 @@ module Aws::ElasticBeanstalk
     #   <p>A list of tag key-value pairs.</p>
     #   @return [Array<Types::Tag>]
     class ResourceTagsDescriptionMessage < Struct.new(
+      nil,
       :resource_arn,
       :resource_tags,
       keyword_init: true
@@ -3348,6 +3461,7 @@ module Aws::ElasticBeanstalk
     #   <p>The exception error message.</p>
     #   @return [String]
     class ResourceTypeNotSupportedException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -3368,6 +3482,7 @@ module Aws::ElasticBeanstalk
     #       </p>
     #   @return [String]
     class RestartAppServerMessage < Struct.new(
+      nil,
       :environment_id,
       :environment_name,
       keyword_init: true
@@ -3395,6 +3510,7 @@ module Aws::ElasticBeanstalk
     #   <p>The type of information to retrieve.</p>
     #   @return [String]
     class RetrieveEnvironmentInfoMessage < Struct.new(
+      nil,
       :environment_id,
       :environment_name,
       :info_type,
@@ -3408,6 +3524,7 @@ module Aws::ElasticBeanstalk
     #   <p> The <a>EnvironmentInfoDescription</a> of the environment. </p>
     #   @return [Array<Types::EnvironmentInfoDescription>]
     class RetrieveEnvironmentInfoResultMessage < Struct.new(
+      nil,
       :environment_info,
       keyword_init: true
     )
@@ -3422,6 +3539,7 @@ module Aws::ElasticBeanstalk
     #   <p>The Amazon S3 key where the data is located.</p>
     #   @return [String]
     class S3Location < Struct.new(
+      nil,
       :s3_bucket,
       :s3_key,
       keyword_init: true
@@ -3446,6 +3564,7 @@ module Aws::ElasticBeanstalk
     #   <p>The exception error message.</p>
     #   @return [String]
     class S3LocationNotInServiceRegionException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -3457,6 +3576,7 @@ module Aws::ElasticBeanstalk
     #   <p>The exception error message.</p>
     #   @return [String]
     class S3SubscriptionRequiredException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -3488,6 +3608,7 @@ module Aws::ElasticBeanstalk
     #         attributes. Number of values and valid values vary by <code>Attribute</code>.</p>
     #   @return [Array<String>]
     class SearchFilter < Struct.new(
+      nil,
       :attribute,
       :operator,
       :values,
@@ -3533,6 +3654,7 @@ module Aws::ElasticBeanstalk
     #   <p>The instance's type.</p>
     #   @return [String]
     class SingleInstanceHealth < Struct.new(
+      nil,
       :instance_id,
       :health_status,
       :color,
@@ -3556,6 +3678,7 @@ module Aws::ElasticBeanstalk
     #   <p>The permitted file types allowed for a solution stack.</p>
     #   @return [Array<String>]
     class SolutionStackDescription < Struct.new(
+      nil,
       :solution_stack_name,
       :permitted_file_types,
       keyword_init: true
@@ -3613,6 +3736,7 @@ module Aws::ElasticBeanstalk
     #            </ul>
     #   @return [String]
     class SourceBuildInformation < Struct.new(
+      nil,
       :source_type,
       :source_repository,
       :source_location,
@@ -3627,6 +3751,7 @@ module Aws::ElasticBeanstalk
     #   <p>The exception error message.</p>
     #   @return [String]
     class SourceBundleDeletionException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -3641,6 +3766,7 @@ module Aws::ElasticBeanstalk
     #   <p>The name of the configuration template.</p>
     #   @return [String]
     class SourceConfiguration < Struct.new(
+      nil,
       :application_name,
       :template_name,
       keyword_init: true
@@ -3668,6 +3794,7 @@ module Aws::ElasticBeanstalk
     #         etc.) status code.</p>
     #   @return [Integer]
     class StatusCodes < Struct.new(
+      nil,
       :status2xx,
       :status3xx,
       :status4xx,
@@ -3706,6 +3833,7 @@ module Aws::ElasticBeanstalk
     #       </p>
     #   @return [String]
     class SwapEnvironmentCNAMEsMessage < Struct.new(
+      nil,
       :source_environment_id,
       :source_environment_name,
       :destination_environment_id,
@@ -3725,6 +3853,7 @@ module Aws::ElasticBeanstalk
     #           <a href="https://docs.aws.amazon.com/elasticbeanstalk/latest/dg/health-enhanced-metrics.html#health-enhanced-metrics-os">Operating System Metrics</a>.</p>
     #   @return [Array<Float>]
     class SystemStatus < Struct.new(
+      nil,
       :cpu_utilization,
       :load_average,
       keyword_init: true
@@ -3740,6 +3869,7 @@ module Aws::ElasticBeanstalk
     #   <p>The value of the tag.</p>
     #   @return [String]
     class Tag < Struct.new(
+      nil,
       :key,
       :value,
       keyword_init: true
@@ -3787,6 +3917,7 @@ module Aws::ElasticBeanstalk
     #         dependent on it.</p>
     #   @return [Boolean]
     class TerminateEnvironmentMessage < Struct.new(
+      nil,
       :environment_id,
       :environment_name,
       :terminate_resources,
@@ -3920,6 +4051,7 @@ module Aws::ElasticBeanstalk
     #         see <a href="https://docs.aws.amazon.com/elasticbeanstalk/latest/dg/iam-operationsrole.html">Operations roles</a> in the <i>AWS Elastic Beanstalk Developer Guide</i>.</p>
     #   @return [String]
     class TerminateEnvironmentOutput < Struct.new(
+      nil,
       :environment_name,
       :environment_id,
       :application_name,
@@ -3951,6 +4083,7 @@ module Aws::ElasticBeanstalk
     #   <p>The exception error message.</p>
     #   @return [String]
     class TooManyApplicationVersionsException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -3962,6 +4095,7 @@ module Aws::ElasticBeanstalk
     #   <p>The exception error message.</p>
     #   @return [String]
     class TooManyApplicationsException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -3973,6 +4107,7 @@ module Aws::ElasticBeanstalk
     #   <p>The exception error message.</p>
     #   @return [String]
     class TooManyBucketsException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -3984,6 +4119,7 @@ module Aws::ElasticBeanstalk
     #   <p>The exception error message.</p>
     #   @return [String]
     class TooManyConfigurationTemplatesException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -3995,6 +4131,7 @@ module Aws::ElasticBeanstalk
     #   <p>The exception error message.</p>
     #   @return [String]
     class TooManyEnvironmentsException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -4006,6 +4143,7 @@ module Aws::ElasticBeanstalk
     #   <p>The exception error message.</p>
     #   @return [String]
     class TooManyPlatformsException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -4020,6 +4158,7 @@ module Aws::ElasticBeanstalk
     #   <p>The exception error message.</p>
     #   @return [String]
     class TooManyTagsException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -4031,6 +4170,7 @@ module Aws::ElasticBeanstalk
     #   <p>The name of the trigger.</p>
     #   @return [String]
     class Trigger < Struct.new(
+      nil,
       :name,
       keyword_init: true
     )
@@ -4049,6 +4189,7 @@ module Aws::ElasticBeanstalk
     #         description.</p>
     #   @return [String]
     class UpdateApplicationMessage < Struct.new(
+      nil,
       :application_name,
       :description,
       keyword_init: true
@@ -4061,6 +4202,7 @@ module Aws::ElasticBeanstalk
     #   <p> The <a>ApplicationDescription</a> of the application. </p>
     #   @return [Types::ApplicationDescription]
     class UpdateApplicationOutput < Struct.new(
+      nil,
       :application,
       keyword_init: true
     )
@@ -4074,6 +4216,7 @@ module Aws::ElasticBeanstalk
     #   <p>The lifecycle configuration.</p>
     #   @return [Types::ApplicationResourceLifecycleConfig]
     class UpdateApplicationResourceLifecycleMessage < Struct.new(
+      nil,
       :application_name,
       :resource_lifecycle_config,
       keyword_init: true
@@ -4096,6 +4239,7 @@ module Aws::ElasticBeanstalk
     #   <p>A new description for this version.</p>
     #   @return [String]
     class UpdateApplicationVersionMessage < Struct.new(
+      nil,
       :application_name,
       :version_label,
       :description,
@@ -4110,6 +4254,7 @@ module Aws::ElasticBeanstalk
     #       </p>
     #   @return [Types::ApplicationVersionDescription]
     class UpdateApplicationVersionOutput < Struct.new(
+      nil,
       :application_version,
       keyword_init: true
     )
@@ -4142,6 +4287,7 @@ module Aws::ElasticBeanstalk
     #       </p>
     #   @return [Array<Types::OptionSpecification>]
     class UpdateConfigurationTemplateMessage < Struct.new(
+      nil,
       :application_name,
       :template_name,
       :description,
@@ -4211,6 +4357,7 @@ module Aws::ElasticBeanstalk
     #         set.</p>
     #   @return [Array<Types::ConfigurationOptionSetting>]
     class UpdateConfigurationTemplateOutput < Struct.new(
+      nil,
       :solution_stack_name,
       :platform_arn,
       :application_name,
@@ -4287,6 +4434,7 @@ module Aws::ElasticBeanstalk
     #         set for this environment.</p>
     #   @return [Array<Types::OptionSpecification>]
     class UpdateEnvironmentMessage < Struct.new(
+      nil,
       :application_name,
       :environment_id,
       :environment_name,
@@ -4428,6 +4576,7 @@ module Aws::ElasticBeanstalk
     #         see <a href="https://docs.aws.amazon.com/elasticbeanstalk/latest/dg/iam-operationsrole.html">Operations roles</a> in the <i>AWS Elastic Beanstalk Developer Guide</i>.</p>
     #   @return [String]
     class UpdateEnvironmentOutput < Struct.new(
+      nil,
       :environment_name,
       :environment_id,
       :application_name,
@@ -4470,6 +4619,7 @@ module Aws::ElasticBeanstalk
     #         <code>TagsToRemove</code>.</p>
     #   @return [Array<String>]
     class UpdateTagsForResourceMessage < Struct.new(
+      nil,
       :resource_arn,
       :tags_to_add,
       :tags_to_remove,
@@ -4495,6 +4645,7 @@ module Aws::ElasticBeanstalk
     #   <p>A list of the options and desired values to evaluate.</p>
     #   @return [Array<Types::ConfigurationOptionSetting>]
     class ValidateConfigurationSettingsMessage < Struct.new(
+      nil,
       :application_name,
       :template_name,
       :environment_name,
@@ -4509,6 +4660,7 @@ module Aws::ElasticBeanstalk
     #   <p> A list of <a>ValidationMessage</a>. </p>
     #   @return [Array<Types::ValidationMessage>]
     class ValidateConfigurationSettingsOutput < Struct.new(
+      nil,
       :messages,
       keyword_init: true
     )
@@ -4541,6 +4693,7 @@ module Aws::ElasticBeanstalk
     #   <p>The name of the option.</p>
     #   @return [String]
     class ValidationMessage < Struct.new(
+      nil,
       :message,
       :severity,
       :namespace,

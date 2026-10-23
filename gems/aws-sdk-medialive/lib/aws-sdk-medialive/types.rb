@@ -37,6 +37,7 @@ module Aws::MediaLive
     #   VBR Quality Level - Only used if rateControlMode is VBR.
     #   @return [String]
     class AacSettings < Struct.new(
+      nil,
       :bitrate,
       :coding_mode,
       :input_type,
@@ -77,6 +78,7 @@ module Aws::MediaLive
     #   Applies a 3 dB attenuation to the surround channels. Applies only when the coding mode parameter is CODING_MODE_3_2_LFE.
     #   @return [String]
     class Ac3Settings < Struct.new(
+      nil,
       :bitrate,
       :bitstream_mode,
       :coding_mode,
@@ -95,6 +97,7 @@ module Aws::MediaLive
     #   The unique ID of the input device to accept. For example, hd-123456789abcdef.
     #   @return [String]
     class AcceptInputDeviceTransferRequest < Struct.new(
+      nil,
       :input_device_id,
       keyword_init: true
     )
@@ -103,6 +106,7 @@ module Aws::MediaLive
 
     # Placeholder documentation for AcceptInputDeviceTransferResponse
     class AcceptInputDeviceTransferResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -113,6 +117,7 @@ module Aws::MediaLive
     #   Specifies the KMS key to use for all features that use key encryption. Specify the ARN of a KMS key that you have created. Or leave blank to use the key that MediaLive creates and manages for you.
     #   @return [String]
     class AccountConfiguration < Struct.new(
+      nil,
       :kms_key_id,
       keyword_init: true
     )
@@ -124,6 +129,7 @@ module Aws::MediaLive
     #   The destination location
     #   @return [Types::OutputLocationRef]
     class AdditionalDestinations < Struct.new(
+      nil,
       :destination,
       keyword_init: true
     )
@@ -135,6 +141,7 @@ module Aws::MediaLive
     #   Specifies the number (1 to 4) of the captions channel you want to extract from the ancillary captions. If you plan to convert the ancillary captions to another format, complete this field. If you plan to choose Embedded as the captions destination in the output (to pass through all the channels in the ancillary captions), leave this field blank because MediaLive ignores the field.
     #   @return [Integer]
     class AncillarySourceSettings < Struct.new(
+      nil,
       :source_ancillary_channel_number,
       keyword_init: true
     )
@@ -149,6 +156,7 @@ module Aws::MediaLive
     #   The ID of the cluster for the channel.
     #   @return [String]
     class AnywhereSettings < Struct.new(
+      nil,
       :channel_placement_group_id,
       :cluster_id,
       keyword_init: true
@@ -161,6 +169,7 @@ module Aws::MediaLive
     #   Archive S3 Settings
     #   @return [Types::ArchiveS3Settings]
     class ArchiveCdnSettings < Struct.new(
+      nil,
       :archive_s3_settings,
       keyword_init: true
     )
@@ -175,6 +184,7 @@ module Aws::MediaLive
     #   Raw Settings
     #   @return [Types::RawSettings]
     class ArchiveContainerSettings < Struct.new(
+      nil,
       :m2ts_settings,
       :raw_settings,
       keyword_init: true
@@ -193,6 +203,7 @@ module Aws::MediaLive
     #   Number of seconds to write to archive file before closing and starting a new one.
     #   @return [Integer]
     class ArchiveGroupSettings < Struct.new(
+      nil,
       :archive_cdn_settings,
       :destination,
       :rollover_interval,
@@ -212,6 +223,7 @@ module Aws::MediaLive
     #   String concatenated to the end of the destination filename.  Required for multiple outputs of the same type.
     #   @return [String]
     class ArchiveOutputSettings < Struct.new(
+      nil,
       :container_settings,
       :extension,
       :name_modifier,
@@ -225,6 +237,7 @@ module Aws::MediaLive
     #   Specify the canned ACL to apply to each S3 request. Defaults to none.
     #   @return [String]
     class ArchiveS3Settings < Struct.new(
+      nil,
       :canned_acl,
       keyword_init: true
     )
@@ -233,6 +246,7 @@ module Aws::MediaLive
 
     # Arib Destination Settings
     class AribDestinationSettings < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -240,6 +254,7 @@ module Aws::MediaLive
 
     # Arib Source Settings
     class AribSourceSettings < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -253,6 +268,7 @@ module Aws::MediaLive
     #   The index of the output channel being produced.
     #   @return [Integer]
     class AudioChannelMapping < Struct.new(
+      nil,
       :input_channel_levels,
       :output_channel,
       keyword_init: true
@@ -283,6 +299,7 @@ module Aws::MediaLive
     #   Wav Settings
     #   @return [Types::WavSettings]
     class AudioCodecSettings < Struct.new(
+      nil,
       :aac_settings,
       :ac3_settings,
       :eac3_atmos_settings,
@@ -339,6 +356,7 @@ module Aws::MediaLive
     #   Identifies DVB DASH accessibility signaling in this audio output. Used in Microsoft Smooth Streaming outputs to signal accessibility information to packagers.
     #   @return [String]
     class AudioDescription < Struct.new(
+      nil,
       :audio_normalization_settings,
       :audio_selector_name,
       :audio_type,
@@ -362,6 +380,7 @@ module Aws::MediaLive
     #   Applies only to Dolby E. Enter the program ID (according to the metadata in the audio) of the Dolby E program to extract from the specified track. One program extracted per audio selector. To select multiple programs, create multiple selectors with the same Track and different Program numbers. “All channels” means to ignore the program IDs and include all the channels in this selector; useful if metadata is known to be incorrect.
     #   @return [String]
     class AudioDolbyEDecode < Struct.new(
+      nil,
       :program_selection,
       keyword_init: true
     )
@@ -376,6 +395,7 @@ module Aws::MediaLive
     #   Specifies the NAME in the #EXT-X-MEDIA tag of the target HLS audio rendition.
     #   @return [String]
     class AudioHlsRenditionSelection < Struct.new(
+      nil,
       :group_id,
       :name,
       keyword_init: true
@@ -391,6 +411,7 @@ module Aws::MediaLive
     #   When set to "strict", the transport stream demux strictly identifies audio streams by their language descriptor. If a PMT update occurs such that an audio stream matching the initially selected language is no longer present then mute will be encoded until the language returns. If "loose", then on a PMT update the demux will choose another audio stream in the program with the same stream type if it can't find one with the same language.
     #   @return [String]
     class AudioLanguageSelection < Struct.new(
+      nil,
       :language_code,
       :language_selection_policy,
       keyword_init: true
@@ -409,6 +430,7 @@ module Aws::MediaLive
     #   Target LKFS(loudness) to adjust volume to. If no value is entered, a default value will be used according to the chosen algorithm.  The CALM Act (1770-1) recommends a target of -24 LKFS. The EBU R-128 specification (1770-2) recommends a target of -23 LKFS.
     #   @return [Float]
     class AudioNormalizationSettings < Struct.new(
+      nil,
       :algorithm,
       :algorithm_control,
       :target_lkfs,
@@ -445,6 +467,7 @@ module Aws::MediaLive
     #   Specifies the segment type.
     #   @return [String]
     class AudioOnlyHlsSettings < Struct.new(
+      nil,
       :audio_group_id,
       :audio_only_image,
       :audio_track_type,
@@ -459,6 +482,7 @@ module Aws::MediaLive
     #   Selects a specific PID from within a source.
     #   @return [Integer]
     class AudioPidSelection < Struct.new(
+      nil,
       :pid,
       keyword_init: true
     )
@@ -473,6 +497,7 @@ module Aws::MediaLive
     #   The audio selector settings.
     #   @return [Types::AudioSelectorSettings]
     class AudioSelector < Struct.new(
+      nil,
       :name,
       :selector_settings,
       keyword_init: true
@@ -494,6 +519,7 @@ module Aws::MediaLive
     #   Audio Track Selection
     #   @return [Types::AudioTrackSelection]
     class AudioSelectorSettings < Struct.new(
+      nil,
       :audio_hls_rendition_selection,
       :audio_language_selection,
       :audio_pid_selection,
@@ -511,6 +537,7 @@ module Aws::MediaLive
     #   The amount of time (in milliseconds) that the active input must be silent before automatic input failover occurs. Silence is defined as audio loss or audio quieter than -50 dBFS.
     #   @return [Integer]
     class AudioSilenceFailoverSettings < Struct.new(
+      nil,
       :audio_selector_name,
       :audio_silence_threshold_msec,
       keyword_init: true
@@ -523,6 +550,7 @@ module Aws::MediaLive
     #   1-based integer value that maps to a specific audio track
     #   @return [Integer]
     class AudioTrack < Struct.new(
+      nil,
       :track,
       keyword_init: true
     )
@@ -537,6 +565,7 @@ module Aws::MediaLive
     #   Configure decoding options for Dolby E streams - these should be Dolby E frames carried in PCM streams tagged with SMPTE-337
     #   @return [Types::AudioDolbyEDecode]
     class AudioTrackSelection < Struct.new(
+      nil,
       :tracks,
       :dolby_e_decode,
       keyword_init: true
@@ -549,6 +578,7 @@ module Aws::MediaLive
     #   Settings to configure Nielsen Watermarks in the audio encode
     #   @return [Types::NielsenWatermarksSettings]
     class AudioWatermarkSettings < Struct.new(
+      nil,
       :nielsen_watermarks_settings,
       keyword_init: true
     )
@@ -569,6 +599,7 @@ module Aws::MediaLive
     #   The input ID of the secondary input in the automatic input failover pair.
     #   @return [String]
     class AutomaticInputFailoverSettings < Struct.new(
+      nil,
       :error_clear_time_msec,
       :failover_conditions,
       :input_preference,
@@ -592,6 +623,7 @@ module Aws::MediaLive
     #   Rec709 Settings
     #   @return [Types::Rec709Settings]
     class Av1ColorSpaceSettings < Struct.new(
+      nil,
       :color_space_passthrough_settings,
       :hdr10_settings,
       :rec601_settings,
@@ -687,6 +719,7 @@ module Aws::MediaLive
     #   Enter a minimum bitrate if you want to keep the output bitrate about a threshold, in order to prevent the downstream system from de-allocating network bandwidth for this output.
     #   @return [Integer]
     class Av1Settings < Struct.new(
+      nil,
       :afd_signaling,
       :buf_size,
       :color_space_settings,
@@ -720,6 +753,7 @@ module Aws::MediaLive
     #   When set to enabled, causes video, audio and captions to be blanked when insertion metadata is added.
     #   @return [String]
     class AvailBlanking < Struct.new(
+      nil,
       :avail_blanking_image,
       :state,
       keyword_init: true
@@ -738,6 +772,7 @@ module Aws::MediaLive
     #   SCTE35_ENABLED_OUTPUT_GROUPS: Insert the segment break only in output groups that have SCTE 35 passthrough enabled. This is the recommended value, because it reduces unnecessary segment breaks.
     #   @return [String]
     class AvailConfiguration < Struct.new(
+      nil,
       :avail_settings,
       :scte35_segmentation_scope,
       keyword_init: true
@@ -756,6 +791,7 @@ module Aws::MediaLive
     #   Atypical configuration that applies segment breaks only on SCTE-35 time signal placement opportunities and breaks.
     #   @return [Types::Scte35TimeSignalApos]
     class AvailSettings < Struct.new(
+      nil,
       :esam,
       :scte35_splice_insert,
       :scte35_time_signal_apos,
@@ -769,6 +805,7 @@ module Aws::MediaLive
     #   Placeholder documentation for __string
     #   @return [String]
     class BadGatewayException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -780,6 +817,7 @@ module Aws::MediaLive
     #   Placeholder documentation for __string
     #   @return [String]
     class BadRequestException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -799,6 +837,7 @@ module Aws::MediaLive
     #   enable this filter and use AUTO, to let MediaLive apply the optimum filtering for the context.
     #   @return [String]
     class BandwidthReductionFilterSettings < Struct.new(
+      nil,
       :post_filter_sharpening,
       :strength,
       keyword_init: true
@@ -820,6 +859,7 @@ module Aws::MediaLive
     #   List of multiplex IDs
     #   @return [Array<String>]
     class BatchDeleteRequest < Struct.new(
+      nil,
       :channel_ids,
       :input_ids,
       :input_security_group_ids,
@@ -837,6 +877,7 @@ module Aws::MediaLive
     #   List of successful operations
     #   @return [Array<Types::BatchSuccessfulResultModel>]
     class BatchDeleteResponse < Struct.new(
+      nil,
       :failed,
       :successful,
       keyword_init: true
@@ -858,6 +899,7 @@ module Aws::MediaLive
     #   Error message for the failed operation
     #   @return [String]
     class BatchFailedResultModel < Struct.new(
+      nil,
       :arn,
       :code,
       :id,
@@ -872,6 +914,7 @@ module Aws::MediaLive
     #   A list of schedule actions to create.
     #   @return [Array<Types::ScheduleAction>]
     class BatchScheduleActionCreateRequest < Struct.new(
+      nil,
       :schedule_actions,
       keyword_init: true
     )
@@ -883,6 +926,7 @@ module Aws::MediaLive
     #   List of actions that have been created in the schedule.
     #   @return [Array<Types::ScheduleAction>]
     class BatchScheduleActionCreateResult < Struct.new(
+      nil,
       :schedule_actions,
       keyword_init: true
     )
@@ -894,6 +938,7 @@ module Aws::MediaLive
     #   A list of schedule actions to delete.
     #   @return [Array<String>]
     class BatchScheduleActionDeleteRequest < Struct.new(
+      nil,
       :action_names,
       keyword_init: true
     )
@@ -905,6 +950,7 @@ module Aws::MediaLive
     #   List of actions that have been deleted from the schedule.
     #   @return [Array<Types::ScheduleAction>]
     class BatchScheduleActionDeleteResult < Struct.new(
+      nil,
       :schedule_actions,
       keyword_init: true
     )
@@ -919,6 +965,7 @@ module Aws::MediaLive
     #   List of multiplex IDs
     #   @return [Array<String>]
     class BatchStartRequest < Struct.new(
+      nil,
       :channel_ids,
       :multiplex_ids,
       keyword_init: true
@@ -934,6 +981,7 @@ module Aws::MediaLive
     #   List of successful operations
     #   @return [Array<Types::BatchSuccessfulResultModel>]
     class BatchStartResponse < Struct.new(
+      nil,
       :failed,
       :successful,
       keyword_init: true
@@ -949,6 +997,7 @@ module Aws::MediaLive
     #   List of multiplex IDs
     #   @return [Array<String>]
     class BatchStopRequest < Struct.new(
+      nil,
       :channel_ids,
       :multiplex_ids,
       keyword_init: true
@@ -964,6 +1013,7 @@ module Aws::MediaLive
     #   List of successful operations
     #   @return [Array<Types::BatchSuccessfulResultModel>]
     class BatchStopResponse < Struct.new(
+      nil,
       :failed,
       :successful,
       keyword_init: true
@@ -982,6 +1032,7 @@ module Aws::MediaLive
     #   Current state of the resource
     #   @return [String]
     class BatchSuccessfulResultModel < Struct.new(
+      nil,
       :arn,
       :id,
       :state,
@@ -1001,6 +1052,7 @@ module Aws::MediaLive
     #   Schedule actions to delete from the schedule.
     #   @return [Types::BatchScheduleActionDeleteRequest]
     class BatchUpdateScheduleRequest < Struct.new(
+      nil,
       :channel_id,
       :creates,
       :deletes,
@@ -1017,6 +1069,7 @@ module Aws::MediaLive
     #   Schedule actions deleted from the schedule.
     #   @return [Types::BatchScheduleActionDeleteResult]
     class BatchUpdateScheduleResponse < Struct.new(
+      nil,
       :creates,
       :deletes,
       keyword_init: true
@@ -1041,6 +1094,7 @@ module Aws::MediaLive
     #   When set to enabled, causes video, audio and captions to be blanked when indicated by program metadata.
     #   @return [String]
     class BlackoutSlate < Struct.new(
+      nil,
       :blackout_slate_image,
       :network_end_blackout,
       :network_end_blackout_image,
@@ -1107,6 +1161,7 @@ module Aws::MediaLive
     #   Applies only when the input captions are Teletext and the output captions are DVB-Sub or Burn-In. Choose the number of lines for the captions bitmap. The captions bitmap is 700 wide × 576 high and will be laid over the video. For example, a value of 16 divides the bitmap into 16 lines, with each line 36 pixels high (16 × 36 = 576). The default is 24 (24 pixels high). Enter the same number in every encode in every output that converts the same Teletext source to DVB-Sub or Burn-in.
     #   @return [String]
     class BurnInDestinationSettings < Struct.new(
+      nil,
       :alignment,
       :background_color,
       :background_opacity,
@@ -1135,6 +1190,7 @@ module Aws::MediaLive
     #   The unique ID of the input device to cancel. For example, hd-123456789abcdef.
     #   @return [String]
     class CancelInputDeviceTransferRequest < Struct.new(
+      nil,
       :input_device_id,
       keyword_init: true
     )
@@ -1143,6 +1199,7 @@ module Aws::MediaLive
 
     # Placeholder documentation for CancelInputDeviceTransferResponse
     class CancelInputDeviceTransferResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1174,6 +1231,7 @@ module Aws::MediaLive
     #   Identifies DVB DASH accessibility signaling in this captions output. Used in Microsoft Smooth Streaming outputs to signal accessibility information to packagers.
     #   @return [String]
     class CaptionDescription < Struct.new(
+      nil,
       :accessibility,
       :caption_selector_name,
       :destination_settings,
@@ -1228,6 +1286,7 @@ module Aws::MediaLive
     #   Webvtt Destination Settings
     #   @return [Types::WebvttDestinationSettings]
     class CaptionDestinationSettings < Struct.new(
+      nil,
       :arib_destination_settings,
       :burn_in_destination_settings,
       :dvb_sub_destination_settings,
@@ -1257,6 +1316,7 @@ module Aws::MediaLive
     #   Textual description of language
     #   @return [String]
     class CaptionLanguageMapping < Struct.new(
+      nil,
       :caption_channel,
       :language_code,
       :language_description,
@@ -1288,6 +1348,7 @@ module Aws::MediaLive
     #   This field corresponds to tts:extent - X in the TTML standard.
     #   @return [Float]
     class CaptionRectangle < Struct.new(
+      nil,
       :height,
       :left_offset,
       :top_offset,
@@ -1308,6 +1369,7 @@ module Aws::MediaLive
     #   Caption selector settings.
     #   @return [Types::CaptionSelectorSettings]
     class CaptionSelector < Struct.new(
+      nil,
       :language_code,
       :name,
       :selector_settings,
@@ -1339,6 +1401,7 @@ module Aws::MediaLive
     #   Teletext Source Settings
     #   @return [Types::TeletextSourceSettings]
     class CaptionSelectorSettings < Struct.new(
+      nil,
       :ancillary_source_settings,
       :arib_source_settings,
       :dvb_sub_source_settings,
@@ -1356,6 +1419,7 @@ module Aws::MediaLive
     #   Maximum CDI input resolution
     #   @return [String]
     class CdiInputSpecification < Struct.new(
+      nil,
       :resolution,
       keyword_init: true
     )
@@ -1426,6 +1490,7 @@ module Aws::MediaLive
     #   Requested engine version for this channel.
     #   @return [Types::ChannelEngineVersionResponse]
     class Channel < Struct.new(
+      nil,
       :arn,
       :cdi_input_specification,
       :channel_class,
@@ -1456,6 +1521,7 @@ module Aws::MediaLive
     #   Public IP of where a channel's output comes from
     #   @return [String]
     class ChannelEgressEndpoint < Struct.new(
+      nil,
       :source_ip,
       keyword_init: true
     )
@@ -1467,6 +1533,7 @@ module Aws::MediaLive
     #   The build identifier of the engine version to use for this channel. Specify 'DEFAULT' to reset to the default version.
     #   @return [String]
     class ChannelEngineVersionRequest < Struct.new(
+      nil,
       :version,
       keyword_init: true
     )
@@ -1481,6 +1548,7 @@ module Aws::MediaLive
     #   The build identifier for this version of the channel version.
     #   @return [String]
     class ChannelEngineVersionResponse < Struct.new(
+      nil,
       :expiration_date,
       :version,
       keyword_init: true
@@ -1549,6 +1617,7 @@ module Aws::MediaLive
     #   The engine version that the running pipelines are using.
     #   @return [Array<Types::ChannelEngineVersionResponse>]
     class ChannelSummary < Struct.new(
+      nil,
       :arn,
       :cdi_input_specification,
       :channel_class,
@@ -1578,6 +1647,7 @@ module Aws::MediaLive
     #   The id of the device you want to claim.
     #   @return [String]
     class ClaimDeviceRequest < Struct.new(
+      nil,
       :id,
       keyword_init: true
     )
@@ -1586,6 +1656,7 @@ module Aws::MediaLive
 
     # Placeholder documentation for ClaimDeviceResponse
     class ClaimDeviceResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1617,6 +1688,7 @@ module Aws::MediaLive
     #   The number of templates in a group.
     #   @return [Integer]
     class CloudWatchAlarmTemplateGroupSummary < Struct.new(
+      nil,
       :arn,
       :created_at,
       :description,
@@ -1683,6 +1755,7 @@ module Aws::MediaLive
     #   Specifies how missing data points are treated when evaluating the alarm's condition.
     #   @return [String]
     class CloudWatchAlarmTemplateSummary < Struct.new(
+      nil,
       :arn,
       :comparison_operator,
       :created_at,
@@ -1713,6 +1786,7 @@ module Aws::MediaLive
     #   An array of interfaceMapping objects for this Cluster. Each mapping logically connects one interface on the nodes with one Network. You need only one mapping for each interface because all the Nodes share the mapping.
     #   @return [Array<Types::InterfaceMapping>]
     class ClusterNetworkSettings < Struct.new(
+      nil,
       :default_route,
       :interface_mappings,
       keyword_init: true
@@ -1728,6 +1802,7 @@ module Aws::MediaLive
     #   An array of interfaceMapping objects for this Cluster. You must create a mapping for node interfaces that you plan to use for encoding traffic. You typically don't create a mapping for the management interface. You define this mapping in the Cluster so that the mapping can be used by all the Nodes. Each mapping logically connects one interface on the nodes with one Network. Each mapping consists of a pair of parameters. The logicalInterfaceName parameter creates a logical name for the Node interface that handles a specific type of traffic. For example, my-Inputs-Interface. The networkID parameter refers to the ID of the network. When you create the Nodes in this Cluster, you will associate the logicalInterfaceName with the appropriate physical interface.
     #   @return [Array<Types::InterfaceMappingCreateRequest>]
     class ClusterNetworkSettingsCreateRequest < Struct.new(
+      nil,
       :default_route,
       :interface_mappings,
       keyword_init: true
@@ -1743,6 +1818,7 @@ module Aws::MediaLive
     #   An array of interfaceMapping objects for this Cluster. Include this parameter only if you want to change the interface mappings for the Cluster. Typically, you change the interface mappings only to fix an error you made when creating the mapping. In an update request, make sure that you enter the entire set of mappings again, not just the mappings that you want to add or change. You define this mapping so that the mapping can be used by all the Nodes. Each mapping logically connects one interface on the nodes with one Network. Each mapping consists of a pair of parameters. The logicalInterfaceName parameter creates a logical name for the Node interface that handles a specific type of traffic. For example, my-Inputs-Interface. The networkID parameter refers to the ID of the network. When you create the Nodes in this Cluster, you will associate the logicalInterfaceName with the appropriate physical interface.
     #   @return [Array<Types::InterfaceMappingUpdateRequest>]
     class ClusterNetworkSettingsUpdateRequest < Struct.new(
+      nil,
       :default_route,
       :interface_mappings,
       keyword_init: true
@@ -1758,6 +1834,7 @@ module Aws::MediaLive
     #   Language code for the language of the caption in this channel.  For example, ger/deu. See http://www.loc.gov/standards/iso639-2
     #   @return [String]
     class CmafIngestCaptionLanguageMapping < Struct.new(
+      nil,
       :caption_channel,
       :language_code,
       keyword_init: true
@@ -1818,6 +1895,7 @@ module Aws::MediaLive
     #   Optional an array of additional destinational HTTP destinations for the OutputGroup outputs
     #   @return [Array<Types::AdditionalDestinations>]
     class CmafIngestGroupSettings < Struct.new(
+      nil,
       :destination,
       :nielsen_id3_behavior,
       :scte35_type,
@@ -1845,6 +1923,7 @@ module Aws::MediaLive
     #   String concatenated to the end of the destination filename.  Required for multiple outputs of the same type.
     #   @return [String]
     class CmafIngestOutputSettings < Struct.new(
+      nil,
       :name_modifier,
       keyword_init: true
     )
@@ -1862,6 +1941,7 @@ module Aws::MediaLive
     #   The URI of the 3D LUT file. The protocol must be 's3:' or 's3ssl:':.
     #   @return [String]
     class ColorCorrection < Struct.new(
+      nil,
       :input_color_space,
       :output_color_space,
       :uri,
@@ -1875,6 +1955,7 @@ module Aws::MediaLive
     #   An array of colorCorrections that applies when you are using 3D LUT files to perform color conversion on video. Each colorCorrection contains one 3D LUT file (that defines the color mapping for converting an input color space to an output color space), and the input/output combination that this 3D LUT file applies to. MediaLive reads the color space in the input metadata, determines the color space that you have specified for the output, and finds and uses the LUT file that applies to this combination.
     #   @return [Array<Types::ColorCorrection>]
     class ColorCorrectionSettings < Struct.new(
+      nil,
       :global_color_corrections,
       keyword_init: true
     )
@@ -1883,6 +1964,7 @@ module Aws::MediaLive
 
     # Passthrough applies no color space conversion to the output
     class ColorSpacePassthroughSettings < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1893,6 +1975,7 @@ module Aws::MediaLive
     #   Placeholder documentation for __string
     #   @return [String]
     class ConflictException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -1916,6 +1999,7 @@ module Aws::MediaLive
     #   A collection of key-value pairs.
     #   @return [Hash<String, String>]
     class CreateChannelPlacementGroupRequest < Struct.new(
+      nil,
       :cluster_id,
       :name,
       :nodes,
@@ -1949,6 +2033,7 @@ module Aws::MediaLive
     #   The current state of the ChannelPlacementGroup.
     #   @return [String]
     class CreateChannelPlacementGroupResponse < Struct.new(
+      nil,
       :arn,
       :channels,
       :cluster_id,
@@ -2016,6 +2101,7 @@ module Aws::MediaLive
     #   Placeholder documentation for __boolean
     #   @return [Boolean]
     class CreateChannelRequest < Struct.new(
+      nil,
       :cdi_input_specification,
       :channel_class,
       :destinations,
@@ -2043,6 +2129,7 @@ module Aws::MediaLive
     #   Placeholder documentation for Channel
     #   @return [Types::Channel]
     class CreateChannelResponse < Struct.new(
+      nil,
       :channel,
       keyword_init: true
     )
@@ -2063,6 +2150,7 @@ module Aws::MediaLive
     #   An ID that you assign to a create request. This ID ensures idempotency when creating resources.
     #   @return [String]
     class CreateCloudWatchAlarmTemplateGroupRequest < Struct.new(
+      nil,
       :description,
       :name,
       :tags,
@@ -2095,6 +2183,7 @@ module Aws::MediaLive
     #   Represents the tags associated with a resource.
     #   @return [Hash<String, String>]
     class CreateCloudWatchAlarmTemplateGroupResponse < Struct.new(
+      nil,
       :arn,
       :created_at,
       :description,
@@ -2151,6 +2240,7 @@ module Aws::MediaLive
     #   An ID that you assign to a create request. This ID ensures idempotency when creating resources.
     #   @return [String]
     class CreateCloudWatchAlarmTemplateRequest < Struct.new(
+      nil,
       :comparison_operator,
       :datapoints_to_alarm,
       :description,
@@ -2223,6 +2313,7 @@ module Aws::MediaLive
     #   Specifies how missing data points are treated when evaluating the alarm's condition.
     #   @return [String]
     class CreateCloudWatchAlarmTemplateResponse < Struct.new(
+      nil,
       :arn,
       :comparison_operator,
       :created_at,
@@ -2265,6 +2356,7 @@ module Aws::MediaLive
     #   A collection of key-value pairs.
     #   @return [Hash<String, String>]
     class CreateClusterRequest < Struct.new(
+      nil,
       :cluster_type,
       :instance_role_arn,
       :name,
@@ -2302,6 +2394,7 @@ module Aws::MediaLive
     #   The current state of the Cluster.
     #   @return [String]
     class CreateClusterResponse < Struct.new(
+      nil,
       :arn,
       :channel_ids,
       :cluster_type,
@@ -2329,6 +2422,7 @@ module Aws::MediaLive
     #   An ID that you assign to a create request. This ID ensures idempotency when creating resources.
     #   @return [String]
     class CreateEventBridgeRuleTemplateGroupRequest < Struct.new(
+      nil,
       :description,
       :name,
       :tags,
@@ -2361,6 +2455,7 @@ module Aws::MediaLive
     #   Represents the tags associated with a resource.
     #   @return [Hash<String, String>]
     class CreateEventBridgeRuleTemplateGroupResponse < Struct.new(
+      nil,
       :arn,
       :created_at,
       :description,
@@ -2396,6 +2491,7 @@ module Aws::MediaLive
     #   An ID that you assign to a create request. This ID ensures idempotency when creating resources.
     #   @return [String]
     class CreateEventBridgeRuleTemplateRequest < Struct.new(
+      nil,
       :description,
       :event_targets,
       :event_type,
@@ -2440,6 +2536,7 @@ module Aws::MediaLive
     #   Represents the tags associated with a resource.
     #   @return [Hash<String, String>]
     class CreateEventBridgeRuleTemplateResponse < Struct.new(
+      nil,
       :arn,
       :created_at,
       :description,
@@ -2514,6 +2611,7 @@ module Aws::MediaLive
     #   SDI Sources for this Input.
     #   @return [Array<String>]
     class CreateInputRequest < Struct.new(
+      nil,
       :destinations,
       :input_devices,
       :input_security_groups,
@@ -2540,6 +2638,7 @@ module Aws::MediaLive
     #   Placeholder documentation for Input
     #   @return [Types::Input]
     class CreateInputResponse < Struct.new(
+      nil,
       :input,
       keyword_init: true
     )
@@ -2554,6 +2653,7 @@ module Aws::MediaLive
     #   List of IPv4 CIDR addresses to whitelist
     #   @return [Array<Types::InputWhitelistRuleCidr>]
     class CreateInputSecurityGroupRequest < Struct.new(
+      nil,
       :tags,
       :whitelist_rules,
       keyword_init: true
@@ -2566,6 +2666,7 @@ module Aws::MediaLive
     #   An Input Security Group
     #   @return [Types::InputSecurityGroup]
     class CreateInputSecurityGroupResponse < Struct.new(
+      nil,
       :security_group,
       keyword_init: true
     )
@@ -2587,6 +2688,7 @@ module Aws::MediaLive
     #   resources.
     #   @return [String]
     class CreateMultiplexProgramRequest < Struct.new(
+      nil,
       :multiplex_id,
       :multiplex_program_settings,
       :program_name,
@@ -2601,6 +2703,7 @@ module Aws::MediaLive
     #   The newly created multiplex program.
     #   @return [Types::MultiplexProgram]
     class CreateMultiplexProgramResponse < Struct.new(
+      nil,
       :multiplex_program,
       keyword_init: true
     )
@@ -2625,6 +2728,7 @@ module Aws::MediaLive
     #   A collection of key-value pairs.
     #   @return [Hash<String, String>]
     class CreateMultiplexRequest < Struct.new(
+      nil,
       :availability_zones,
       :multiplex_settings,
       :name,
@@ -2640,6 +2744,7 @@ module Aws::MediaLive
     #   The newly created multiplex.
     #   @return [Types::Multiplex]
     class CreateMultiplexResponse < Struct.new(
+      nil,
       :multiplex,
       keyword_init: true
     )
@@ -2663,6 +2768,7 @@ module Aws::MediaLive
     #   A collection of key-value pairs.
     #   @return [Hash<String, String>]
     class CreateNetworkRequest < Struct.new(
+      nil,
       :ip_pools,
       :name,
       :request_id,
@@ -2696,6 +2802,7 @@ module Aws::MediaLive
     #   The current state of the Network. Only MediaLive Anywhere can change the state.
     #   @return [String]
     class CreateNetworkResponse < Struct.new(
+      nil,
       :arn,
       :associated_cluster_ids,
       :id,
@@ -2728,6 +2835,7 @@ module Aws::MediaLive
     #   The initial role of the Node in the Cluster. ACTIVE means the Node is available for encoding. BACKUP means the Node is a redundant Node and might get used if an ACTIVE Node fails.
     #   @return [String]
     class CreateNodeRegistrationScriptRequest < Struct.new(
+      nil,
       :cluster_id,
       :id,
       :name,
@@ -2744,6 +2852,7 @@ module Aws::MediaLive
     #   A script that can be run on a Bring Your Own Device Elemental Anywhere system to create a node in a cluster.
     #   @return [String]
     class CreateNodeRegistrationScriptResponse < Struct.new(
+      nil,
       :node_registration_script,
       keyword_init: true
     )
@@ -2770,6 +2879,7 @@ module Aws::MediaLive
     #   A collection of key-value pairs.
     #   @return [Hash<String, String>]
     class CreateNodeRequest < Struct.new(
+      nil,
       :cluster_id,
       :name,
       :node_interface_mappings,
@@ -2816,6 +2926,7 @@ module Aws::MediaLive
     #   An array of SDI source mappings. Each mapping connects one logical SdiSource to the physical SDI card and port that the physical SDI source uses.
     #   @return [Array<Types::SdiSourceMapping>]
     class CreateNodeResponse < Struct.new(
+      nil,
       :arn,
       :channel_placement_groups,
       :cluster_id,
@@ -2844,6 +2955,7 @@ module Aws::MediaLive
     #   A collection of key-value pairs.
     #   @return [Hash<String, String>]
     class CreatePartnerInputRequest < Struct.new(
+      nil,
       :input_id,
       :request_id,
       :tags,
@@ -2857,6 +2969,7 @@ module Aws::MediaLive
     #   Placeholder documentation for Input
     #   @return [Types::Input]
     class CreatePartnerInputResponse < Struct.new(
+      nil,
       :input,
       keyword_init: true
     )
@@ -2880,6 +2993,7 @@ module Aws::MediaLive
     #   Specify the  type of the SDI source: SINGLE: The source  is a single-link source. QUAD: The source  is one part of a quad-link source.
     #   @return [String]
     class CreateSdiSourceRequest < Struct.new(
+      nil,
       :mode,
       :name,
       :request_id,
@@ -2895,6 +3009,7 @@ module Aws::MediaLive
     #   Settings for the SDI source.
     #   @return [Types::SdiSource]
     class CreateSdiSourceResponse < Struct.new(
+      nil,
       :sdi_source,
       keyword_init: true
     )
@@ -2924,6 +3039,7 @@ module Aws::MediaLive
     #   An ID that you assign to a create request. This ID ensures idempotency when creating resources.
     #   @return [String]
     class CreateSignalMapRequest < Struct.new(
+      nil,
       :cloud_watch_alarm_template_group_identifiers,
       :description,
       :discovery_entry_point_arn,
@@ -2992,6 +3108,7 @@ module Aws::MediaLive
     #   Represents the tags associated with a resource.
     #   @return [Hash<String, String>]
     class CreateSignalMapResponse < Struct.new(
+      nil,
       :arn,
       :cloud_watch_alarm_template_group_ids,
       :created_at,
@@ -3023,6 +3140,7 @@ module Aws::MediaLive
     #   Placeholder documentation for Tags
     #   @return [Hash<String, String>]
     class CreateTagsRequest < Struct.new(
+      nil,
       :resource_arn,
       :tags,
       keyword_init: true
@@ -3038,6 +3156,7 @@ module Aws::MediaLive
     #   The ID of the cluster.
     #   @return [String]
     class DeleteChannelPlacementGroupRequest < Struct.new(
+      nil,
       :channel_placement_group_id,
       :cluster_id,
       keyword_init: true
@@ -3068,6 +3187,7 @@ module Aws::MediaLive
     #   The current state of the ChannelPlacementGroup.
     #   @return [String]
     class DeleteChannelPlacementGroupResponse < Struct.new(
+      nil,
       :arn,
       :channels,
       :cluster_id,
@@ -3085,6 +3205,7 @@ module Aws::MediaLive
     #   Unique ID of the channel.
     #   @return [String]
     class DeleteChannelRequest < Struct.new(
+      nil,
       :channel_id,
       keyword_init: true
     )
@@ -3155,6 +3276,7 @@ module Aws::MediaLive
     #   Requested engine version for this channel.
     #   @return [Types::ChannelEngineVersionResponse]
     class DeleteChannelResponse < Struct.new(
+      nil,
       :arn,
       :cdi_input_specification,
       :channel_class,
@@ -3185,6 +3307,7 @@ module Aws::MediaLive
     #   A cloudwatch alarm template group's identifier. Can be either be its id or current name.
     #   @return [String]
     class DeleteCloudWatchAlarmTemplateGroupRequest < Struct.new(
+      nil,
       :identifier,
       keyword_init: true
     )
@@ -3196,6 +3319,7 @@ module Aws::MediaLive
     #   A cloudwatch alarm template's identifier. Can be either be its id or current name.
     #   @return [String]
     class DeleteCloudWatchAlarmTemplateRequest < Struct.new(
+      nil,
       :identifier,
       keyword_init: true
     )
@@ -3207,6 +3331,7 @@ module Aws::MediaLive
     #   The ID of the cluster.
     #   @return [String]
     class DeleteClusterRequest < Struct.new(
+      nil,
       :cluster_id,
       keyword_init: true
     )
@@ -3239,6 +3364,7 @@ module Aws::MediaLive
     #   The current state of the Cluster.
     #   @return [String]
     class DeleteClusterResponse < Struct.new(
+      nil,
       :arn,
       :channel_ids,
       :cluster_type,
@@ -3257,6 +3383,7 @@ module Aws::MediaLive
     #   An eventbridge rule template group's identifier. Can be either be its id or current name.
     #   @return [String]
     class DeleteEventBridgeRuleTemplateGroupRequest < Struct.new(
+      nil,
       :identifier,
       keyword_init: true
     )
@@ -3268,6 +3395,7 @@ module Aws::MediaLive
     #   An eventbridge rule template's identifier. Can be either be its id or current name.
     #   @return [String]
     class DeleteEventBridgeRuleTemplateRequest < Struct.new(
+      nil,
       :identifier,
       keyword_init: true
     )
@@ -3279,6 +3407,7 @@ module Aws::MediaLive
     #   Unique ID of the input
     #   @return [String]
     class DeleteInputRequest < Struct.new(
+      nil,
       :input_id,
       keyword_init: true
     )
@@ -3287,6 +3416,7 @@ module Aws::MediaLive
 
     # Placeholder documentation for DeleteInputResponse
     class DeleteInputResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -3297,6 +3427,7 @@ module Aws::MediaLive
     #   The Input Security Group to delete
     #   @return [String]
     class DeleteInputSecurityGroupRequest < Struct.new(
+      nil,
       :input_security_group_id,
       keyword_init: true
     )
@@ -3305,6 +3436,7 @@ module Aws::MediaLive
 
     # Placeholder documentation for DeleteInputSecurityGroupResponse
     class DeleteInputSecurityGroupResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -3318,6 +3450,7 @@ module Aws::MediaLive
     #   The multiplex program name.
     #   @return [String]
     class DeleteMultiplexProgramRequest < Struct.new(
+      nil,
       :multiplex_id,
       :program_name,
       keyword_init: true
@@ -3342,6 +3475,7 @@ module Aws::MediaLive
     #   The name of the multiplex program.
     #   @return [String]
     class DeleteMultiplexProgramResponse < Struct.new(
+      nil,
       :channel_id,
       :multiplex_program_settings,
       :packet_identifiers_map,
@@ -3357,6 +3491,7 @@ module Aws::MediaLive
     #   The ID of the multiplex.
     #   @return [String]
     class DeleteMultiplexRequest < Struct.new(
+      nil,
       :multiplex_id,
       keyword_init: true
     )
@@ -3395,6 +3530,7 @@ module Aws::MediaLive
     #   A collection of key-value pairs.
     #   @return [Hash<String, String>]
     class DeleteMultiplexResponse < Struct.new(
+      nil,
       :arn,
       :availability_zones,
       :destinations,
@@ -3415,6 +3551,7 @@ module Aws::MediaLive
     #   The ID of the network.
     #   @return [String]
     class DeleteNetworkRequest < Struct.new(
+      nil,
       :network_id,
       keyword_init: true
     )
@@ -3444,6 +3581,7 @@ module Aws::MediaLive
     #   The current state of the Network. Only MediaLive Anywhere can change the state.
     #   @return [String]
     class DeleteNetworkResponse < Struct.new(
+      nil,
       :arn,
       :associated_cluster_ids,
       :id,
@@ -3464,6 +3602,7 @@ module Aws::MediaLive
     #   The ID of the node.
     #   @return [String]
     class DeleteNodeRequest < Struct.new(
+      nil,
       :cluster_id,
       :node_id,
       keyword_init: true
@@ -3506,6 +3645,7 @@ module Aws::MediaLive
     #   An array of SDI source mappings. Each mapping connects one logical SdiSource to the physical SDI card and port that the physical SDI source uses.
     #   @return [Array<Types::SdiSourceMapping>]
     class DeleteNodeResponse < Struct.new(
+      nil,
       :arn,
       :channel_placement_groups,
       :cluster_id,
@@ -3527,6 +3667,7 @@ module Aws::MediaLive
     #   Unique reservation ID, e.g. '1234567'
     #   @return [String]
     class DeleteReservationRequest < Struct.new(
+      nil,
       :reservation_id,
       keyword_init: true
     )
@@ -3592,6 +3733,7 @@ module Aws::MediaLive
     #   Recurring usage charge for each reserved resource, e.g. '157.0'
     #   @return [Float]
     class DeleteReservationResponse < Struct.new(
+      nil,
       :arn,
       :count,
       :currency_code,
@@ -3621,6 +3763,7 @@ module Aws::MediaLive
     #   Id of the channel whose schedule is being deleted.
     #   @return [String]
     class DeleteScheduleRequest < Struct.new(
+      nil,
       :channel_id,
       keyword_init: true
     )
@@ -3629,6 +3772,7 @@ module Aws::MediaLive
 
     # Placeholder documentation for DeleteScheduleResponse
     class DeleteScheduleResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -3639,6 +3783,7 @@ module Aws::MediaLive
     #   The ID of the SdiSource.
     #   @return [String]
     class DeleteSdiSourceRequest < Struct.new(
+      nil,
       :sdi_source_id,
       keyword_init: true
     )
@@ -3650,6 +3795,7 @@ module Aws::MediaLive
     #   Settings for the SDI source.
     #   @return [Types::SdiSource]
     class DeleteSdiSourceResponse < Struct.new(
+      nil,
       :sdi_source,
       keyword_init: true
     )
@@ -3661,6 +3807,7 @@ module Aws::MediaLive
     #   A signal map's identifier. Can be either be its id or current name.
     #   @return [String]
     class DeleteSignalMapRequest < Struct.new(
+      nil,
       :identifier,
       keyword_init: true
     )
@@ -3675,6 +3822,7 @@ module Aws::MediaLive
     #   An array of tag keys to delete
     #   @return [Array<String>]
     class DeleteTagsRequest < Struct.new(
+      nil,
       :resource_arn,
       :tag_keys,
       keyword_init: true
@@ -3684,6 +3832,7 @@ module Aws::MediaLive
 
     # Placeholder documentation for DescribeAccountConfigurationRequest
     class DescribeAccountConfigurationRequest < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -3694,6 +3843,7 @@ module Aws::MediaLive
     #   Placeholder documentation for AccountConfiguration
     #   @return [Types::AccountConfiguration]
     class DescribeAccountConfigurationResponse < Struct.new(
+      nil,
       :account_configuration,
       keyword_init: true
     )
@@ -3708,6 +3858,7 @@ module Aws::MediaLive
     #   The ID of the cluster for the channel.
     #   @return [String]
     class DescribeAnywhereSettings < Struct.new(
+      nil,
       :channel_placement_group_id,
       :cluster_id,
       keyword_init: true
@@ -3723,6 +3874,7 @@ module Aws::MediaLive
     #   The ID of the cluster.
     #   @return [String]
     class DescribeChannelPlacementGroupRequest < Struct.new(
+      nil,
       :channel_placement_group_id,
       :cluster_id,
       keyword_init: true
@@ -3753,6 +3905,7 @@ module Aws::MediaLive
     #   The current state of the ChannelPlacementGroup.
     #   @return [String]
     class DescribeChannelPlacementGroupResponse < Struct.new(
+      nil,
       :arn,
       :channels,
       :cluster_id,
@@ -3788,6 +3941,7 @@ module Aws::MediaLive
     #   The current state of the ChannelPlacementGroup.
     #   @return [String]
     class DescribeChannelPlacementGroupSummary < Struct.new(
+      nil,
       :arn,
       :channels,
       :cluster_id,
@@ -3805,6 +3959,7 @@ module Aws::MediaLive
     #   channel ID
     #   @return [String]
     class DescribeChannelRequest < Struct.new(
+      nil,
       :channel_id,
       keyword_init: true
     )
@@ -3875,6 +4030,7 @@ module Aws::MediaLive
     #   Requested engine version for this channel.
     #   @return [Types::ChannelEngineVersionResponse]
     class DescribeChannelResponse < Struct.new(
+      nil,
       :arn,
       :cdi_input_specification,
       :channel_class,
@@ -3905,6 +4061,7 @@ module Aws::MediaLive
     #   The ID of the cluster.
     #   @return [String]
     class DescribeClusterRequest < Struct.new(
+      nil,
       :cluster_id,
       keyword_init: true
     )
@@ -3937,6 +4094,7 @@ module Aws::MediaLive
     #   The current state of the Cluster.
     #   @return [String]
     class DescribeClusterResponse < Struct.new(
+      nil,
       :arn,
       :channel_ids,
       :cluster_type,
@@ -3976,6 +4134,7 @@ module Aws::MediaLive
     #   The current state of the Cluster.
     #   @return [String]
     class DescribeClusterSummary < Struct.new(
+      nil,
       :arn,
       :channel_ids,
       :cluster_type,
@@ -3994,6 +4153,7 @@ module Aws::MediaLive
     #   The unique ID of this input device. For example, hd-123456789abcdef.
     #   @return [String]
     class DescribeInputDeviceRequest < Struct.new(
+      nil,
       :input_device_id,
       keyword_init: true
     )
@@ -4050,6 +4210,7 @@ module Aws::MediaLive
     #   The output attachment type of the input device. Specifies MEDIACONNECT_FLOW if this device is the source for a MediaConnect flow. Specifies MEDIALIVE_INPUT if this device is the source for a MediaLive input.
     #   @return [String]
     class DescribeInputDeviceResponse < Struct.new(
+      nil,
       :arn,
       :connection_state,
       :device_settings_sync_state,
@@ -4079,6 +4240,7 @@ module Aws::MediaLive
     #   The HTTP Accept header. Indicates the requested type for the thumbnail.
     #   @return [String]
     class DescribeInputDeviceThumbnailRequest < Struct.new(
+      nil,
       :input_device_id,
       :accept,
       keyword_init: true
@@ -4103,6 +4265,7 @@ module Aws::MediaLive
     #   The date and time the thumbnail was last updated at the device.
     #   @return [Time]
     class DescribeInputDeviceThumbnailResponse < Struct.new(
+      nil,
       :body,
       :content_type,
       :content_length,
@@ -4123,6 +4286,7 @@ module Aws::MediaLive
     #   Unique ID of the input
     #   @return [String]
     class DescribeInputRequest < Struct.new(
+      nil,
       :input_id,
       keyword_init: true
     )
@@ -4197,6 +4361,7 @@ module Aws::MediaLive
     #   SDI Sources for this Input.
     #   @return [Array<String>]
     class DescribeInputResponse < Struct.new(
+      nil,
       :arn,
       :attached_channels,
       :destinations,
@@ -4228,6 +4393,7 @@ module Aws::MediaLive
     #   The id of the Input Security Group to describe
     #   @return [String]
     class DescribeInputSecurityGroupRequest < Struct.new(
+      nil,
       :input_security_group_id,
       keyword_init: true
     )
@@ -4254,6 +4420,7 @@ module Aws::MediaLive
     #   Whitelist rules and their sync status
     #   @return [Array<Types::InputWhitelistRule>]
     class DescribeInputSecurityGroupResponse < Struct.new(
+      nil,
       :arn,
       :id,
       :inputs,
@@ -4273,6 +4440,7 @@ module Aws::MediaLive
     #   The name of the program.
     #   @return [String]
     class DescribeMultiplexProgramRequest < Struct.new(
+      nil,
       :multiplex_id,
       :program_name,
       keyword_init: true
@@ -4297,6 +4465,7 @@ module Aws::MediaLive
     #   The name of the multiplex program.
     #   @return [String]
     class DescribeMultiplexProgramResponse < Struct.new(
+      nil,
       :channel_id,
       :multiplex_program_settings,
       :packet_identifiers_map,
@@ -4312,6 +4481,7 @@ module Aws::MediaLive
     #   The ID of the multiplex.
     #   @return [String]
     class DescribeMultiplexRequest < Struct.new(
+      nil,
       :multiplex_id,
       keyword_init: true
     )
@@ -4350,6 +4520,7 @@ module Aws::MediaLive
     #   A collection of key-value pairs.
     #   @return [Hash<String, String>]
     class DescribeMultiplexResponse < Struct.new(
+      nil,
       :arn,
       :availability_zones,
       :destinations,
@@ -4370,6 +4541,7 @@ module Aws::MediaLive
     #   The ID of the network.
     #   @return [String]
     class DescribeNetworkRequest < Struct.new(
+      nil,
       :network_id,
       keyword_init: true
     )
@@ -4399,6 +4571,7 @@ module Aws::MediaLive
     #   The current state of the Network. Only MediaLive Anywhere can change the state.
     #   @return [String]
     class DescribeNetworkResponse < Struct.new(
+      nil,
       :arn,
       :associated_cluster_ids,
       :id,
@@ -4434,6 +4607,7 @@ module Aws::MediaLive
     #   The current state of the Network. Only MediaLive Anywhere can change the state.
     #   @return [String]
     class DescribeNetworkSummary < Struct.new(
+      nil,
       :arn,
       :associated_cluster_ids,
       :id,
@@ -4454,6 +4628,7 @@ module Aws::MediaLive
     #   The ID of the node.
     #   @return [String]
     class DescribeNodeRequest < Struct.new(
+      nil,
       :cluster_id,
       :node_id,
       keyword_init: true
@@ -4496,6 +4671,7 @@ module Aws::MediaLive
     #   An array of SDI source mappings. Each mapping connects one logical SdiSource to the physical SDI card and port that the physical SDI source uses.
     #   @return [Array<Types::SdiSourceMapping>]
     class DescribeNodeResponse < Struct.new(
+      nil,
       :arn,
       :channel_placement_groups,
       :cluster_id,
@@ -4550,6 +4726,7 @@ module Aws::MediaLive
     #   An array of SDI source mappings. Each mapping connects one logical SdiSource to the physical SDI card and port that the physical SDI source uses.
     #   @return [Array<Types::SdiSourceMapping>]
     class DescribeNodeSummary < Struct.new(
+      nil,
       :arn,
       :channel_placement_groups,
       :cluster_id,
@@ -4572,6 +4749,7 @@ module Aws::MediaLive
     #   Unique offering ID, e.g. '87654321'
     #   @return [String]
     class DescribeOfferingRequest < Struct.new(
+      nil,
       :offering_id,
       keyword_init: true
     )
@@ -4613,6 +4791,7 @@ module Aws::MediaLive
     #   Recurring usage charge for each reserved resource, e.g. '157.0'
     #   @return [Float]
     class DescribeOfferingResponse < Struct.new(
+      nil,
       :arn,
       :currency_code,
       :duration,
@@ -4634,6 +4813,7 @@ module Aws::MediaLive
     #   Unique reservation ID, e.g. '1234567'
     #   @return [String]
     class DescribeReservationRequest < Struct.new(
+      nil,
       :reservation_id,
       keyword_init: true
     )
@@ -4699,6 +4879,7 @@ module Aws::MediaLive
     #   Recurring usage charge for each reserved resource, e.g. '157.0'
     #   @return [Float]
     class DescribeReservationResponse < Struct.new(
+      nil,
       :arn,
       :count,
       :currency_code,
@@ -4734,6 +4915,7 @@ module Aws::MediaLive
     #   Placeholder documentation for __string
     #   @return [String]
     class DescribeScheduleRequest < Struct.new(
+      nil,
       :channel_id,
       :max_results,
       :next_token,
@@ -4750,6 +4932,7 @@ module Aws::MediaLive
     #   The list of actions in the schedule.
     #   @return [Array<Types::ScheduleAction>]
     class DescribeScheduleResponse < Struct.new(
+      nil,
       :next_token,
       :schedule_actions,
       keyword_init: true
@@ -4762,6 +4945,7 @@ module Aws::MediaLive
     #   Get details about an SdiSource.
     #   @return [String]
     class DescribeSdiSourceRequest < Struct.new(
+      nil,
       :sdi_source_id,
       keyword_init: true
     )
@@ -4773,6 +4957,7 @@ module Aws::MediaLive
     #   Settings for the SDI source.
     #   @return [Types::SdiSource]
     class DescribeSdiSourceResponse < Struct.new(
+      nil,
       :sdi_source,
       keyword_init: true
     )
@@ -4790,6 +4975,7 @@ module Aws::MediaLive
     #   thumbnail type
     #   @return [String]
     class DescribeThumbnailsRequest < Struct.new(
+      nil,
       :channel_id,
       :pipeline_id,
       :thumbnail_type,
@@ -4803,6 +4989,7 @@ module Aws::MediaLive
     #   Placeholder documentation for __listOfThumbnailDetail
     #   @return [Array<Types::ThumbnailDetail>]
     class DescribeThumbnailsResponse < Struct.new(
+      nil,
       :thumbnail_details,
       keyword_init: true
     )
@@ -4811,6 +4998,7 @@ module Aws::MediaLive
 
     # Dolby Vision81 Settings
     class DolbyVision81Settings < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -4827,6 +5015,7 @@ module Aws::MediaLive
     #   The number of milliseconds between instances of this table in the output transport stream.
     #   @return [Integer]
     class DvbNitSettings < Struct.new(
+      nil,
       :network_id,
       :network_name,
       :rep_interval,
@@ -4849,6 +5038,7 @@ module Aws::MediaLive
     #   The service provider name placed in the serviceDescriptor in the Service Description Table. Maximum length is 256 characters.
     #   @return [String]
     class DvbSdtSettings < Struct.new(
+      nil,
       :output_sdt,
       :rep_interval,
       :service_name,
@@ -4914,6 +5104,7 @@ module Aws::MediaLive
     #   Applies only when the input captions are Teletext and the output captions are DVB-Sub or Burn-In. Choose the number of lines for the captions bitmap. The captions bitmap is 700 wide × 576 high and will be laid over the video. For example, a value of 16 divides the bitmap into 16 lines, with each line 36 pixels high (16 × 36 = 576). The default is 24 (24 pixels high). Enter the same number in every encode in every output that converts the same Teletext source to DVB-Sub or Burn-in.
     #   @return [String]
     class DvbSubDestinationSettings < Struct.new(
+      nil,
       :alignment,
       :background_color,
       :background_opacity,
@@ -4946,6 +5137,7 @@ module Aws::MediaLive
     #   When using DVB-Sub with Burn-In or SMPTE-TT, use this PID for the source content. Unused for DVB-Sub passthrough. All DVB-Sub content is passed through, regardless of selectors.
     #   @return [Integer]
     class DvbSubSourceSettings < Struct.new(
+      nil,
       :ocr_language,
       :pid,
       keyword_init: true
@@ -4958,6 +5150,7 @@ module Aws::MediaLive
     #   The number of milliseconds between instances of this table in the output transport stream.
     #   @return [Integer]
     class DvbTdtSettings < Struct.new(
+      nil,
       :rep_interval,
       keyword_init: true
     )
@@ -4987,6 +5180,7 @@ module Aws::MediaLive
     #   Surround dimensional trim. Sets the maximum amount to attenuate the surround channels when the downstream player isn't configured to handle Dolby Digital Plus with Dolby Atmos and must remix the channels.
     #   @return [Float]
     class Eac3AtmosSettings < Struct.new(
+      nil,
       :bitrate,
       :coding_mode,
       :dialnorm,
@@ -5061,6 +5255,7 @@ module Aws::MediaLive
     #   When encoding 2/0 audio, sets whether Dolby Surround is matrix encoded into the two channels.
     #   @return [String]
     class Eac3Settings < Struct.new(
+      nil,
       :attenuation_control,
       :bitrate,
       :bitstream_mode,
@@ -5106,6 +5301,7 @@ module Aws::MediaLive
     #   Documentation update needed
     #   @return [Integer]
     class EbuTtDDestinationSettings < Struct.new(
+      nil,
       :copyright_holder,
       :fill_line_gap,
       :font_family,
@@ -5119,6 +5315,7 @@ module Aws::MediaLive
 
     # Embedded Destination Settings
     class EmbeddedDestinationSettings < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -5126,6 +5323,7 @@ module Aws::MediaLive
 
     # Embedded Plus Scte20 Destination Settings
     class EmbeddedPlusScte20DestinationSettings < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -5145,6 +5343,7 @@ module Aws::MediaLive
     #   This field is unused and deprecated.
     #   @return [Integer]
     class EmbeddedSourceSettings < Struct.new(
+      nil,
       :convert608_to708,
       :scte20_detection,
       :source608_channel_number,
@@ -5198,6 +5397,7 @@ module Aws::MediaLive
     #   Color Correction Settings
     #   @return [Types::ColorCorrectionSettings]
     class EncoderSettings < Struct.new(
+      nil,
       :audio_descriptions,
       :avail_blanking,
       :avail_configuration,
@@ -5225,6 +5425,7 @@ module Aws::MediaLive
     #   Optional. Enter a time for the jam sync. The default is midnight UTC. When epoch locking is enabled, MediaLive performs a daily jam sync on every output encode to ensure timecodes don’t diverge from the wall clock. The jam sync applies only to encodes with frame rate of 29.97 or 59.94 FPS. To override, enter a time in HH:MM:SS in UTC. Always set the MM:SS portion to 00:00.
     #   @return [String]
     class EpochLockingSettings < Struct.new(
+      nil,
       :custom_epoch,
       :jam_sync_time,
       keyword_init: true
@@ -5252,6 +5453,7 @@ module Aws::MediaLive
     #   Optional data sent as zoneIdentity to identify the MediaLive channel to the POIS.
     #   @return [String]
     class Esam < Struct.new(
+      nil,
       :acquisition_point_id,
       :ad_avail_offset,
       :password_param,
@@ -5289,6 +5491,7 @@ module Aws::MediaLive
     #   The number of templates in a group.
     #   @return [Integer]
     class EventBridgeRuleTemplateGroupSummary < Struct.new(
+      nil,
       :arn,
       :created_at,
       :description,
@@ -5334,6 +5537,7 @@ module Aws::MediaLive
     #   Represents the tags associated with a resource.
     #   @return [Hash<String, String>]
     class EventBridgeRuleTemplateSummary < Struct.new(
+      nil,
       :arn,
       :created_at,
       :description,
@@ -5354,6 +5558,7 @@ module Aws::MediaLive
     #   Target ARNs must be either an SNS topic or CloudWatch log group.
     #   @return [String]
     class EventBridgeRuleTemplateTarget < Struct.new(
+      nil,
       :arn,
       keyword_init: true
     )
@@ -5365,6 +5570,7 @@ module Aws::MediaLive
     #   Failover condition type-specific settings.
     #   @return [Types::FailoverConditionSettings]
     class FailoverCondition < Struct.new(
+      nil,
       :failover_condition_settings,
       keyword_init: true
     )
@@ -5382,6 +5588,7 @@ module Aws::MediaLive
     #   MediaLive will perform a failover if content is considered black for the specified period.
     #   @return [Types::VideoBlackFailoverSettings]
     class FailoverConditionSettings < Struct.new(
+      nil,
       :audio_silence_settings,
       :input_loss_settings,
       :video_black_settings,
@@ -5400,6 +5607,7 @@ module Aws::MediaLive
     #   to display/clear/modify image overlays on an output-by-output bases.
     #   @return [String]
     class FeatureActivations < Struct.new(
+      nil,
       :input_prepare_schedule_actions,
       :output_static_image_overlay_schedule_actions,
       keyword_init: true
@@ -5418,6 +5626,7 @@ module Aws::MediaLive
     #   Parameter L from SMPTE 2022-1. The width of the FEC protection matrix.  Must be between 1 and 20, inclusive. If only Column FEC is used, then larger values increase robustness.  If Row FEC is used, then this is the number of transport stream packets per row error correction packet, and the value must be between 4 and 20, inclusive, if includeFec is columnAndRow. If includeFec is column, this value must be 1 to 20, inclusive.
     #   @return [Integer]
     class FecOutputSettings < Struct.new(
+      nil,
       :column_depth,
       :include_fec,
       :row_length,
@@ -5431,6 +5640,7 @@ module Aws::MediaLive
     #   Start time for the action to start in the channel. (Not the time for the action to be added to the schedule: actions are always added to the schedule immediately.) UTC format: yyyy-mm-ddThh:mm:ss.nnnZ. All the letters are digits (for example, mm might be 01) except for the two constants "T" for time and "Z" for "UTC format".
     #   @return [String]
     class FixedModeScheduleActionStartSettings < Struct.new(
+      nil,
       :time,
       keyword_init: true
     )
@@ -5448,6 +5658,7 @@ module Aws::MediaLive
     #   Set to PASSTHROUGH to enable ID3 metadata insertion. To include metadata, you configure other parameters in the output group or individual outputs, or you add an ID3 action to the channel schedule.
     #   @return [String]
     class Fmp4HlsSettings < Struct.new(
+      nil,
       :audio_rendition_sets,
       :nielsen_id3_behavior,
       :timed_metadata_behavior,
@@ -5464,6 +5675,7 @@ module Aws::MediaLive
     #   The action name of another action that this one refers to.
     #   @return [String]
     class FollowModeScheduleActionStartSettings < Struct.new(
+      nil,
       :follow_point,
       :reference_action_name,
       keyword_init: true
@@ -5476,6 +5688,7 @@ module Aws::MediaLive
     #   Placeholder documentation for __string
     #   @return [String]
     class ForbiddenException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -5487,6 +5700,7 @@ module Aws::MediaLive
     #   Frame Capture S3 Settings
     #   @return [Types::FrameCaptureS3Settings]
     class FrameCaptureCdnSettings < Struct.new(
+      nil,
       :frame_capture_s3_settings,
       keyword_init: true
     )
@@ -5501,6 +5715,7 @@ module Aws::MediaLive
     #   Parameters that control interactions with the CDN.
     #   @return [Types::FrameCaptureCdnSettings]
     class FrameCaptureGroupSettings < Struct.new(
+      nil,
       :destination,
       :frame_capture_cdn_settings,
       keyword_init: true
@@ -5510,6 +5725,7 @@ module Aws::MediaLive
 
     # Frame Capture Hls Settings
     class FrameCaptureHlsSettings < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -5520,6 +5736,7 @@ module Aws::MediaLive
     #   Required if the output group contains more than one output. This modifier forms part of the output file name.
     #   @return [String]
     class FrameCaptureOutputSettings < Struct.new(
+      nil,
       :name_modifier,
       keyword_init: true
     )
@@ -5531,6 +5748,7 @@ module Aws::MediaLive
     #   Specify the canned ACL to apply to each S3 request. Defaults to none.
     #   @return [String]
     class FrameCaptureS3Settings < Struct.new(
+      nil,
       :canned_acl,
       keyword_init: true
     )
@@ -5548,6 +5766,7 @@ module Aws::MediaLive
     #   Timecode burn-in settings
     #   @return [Types::TimecodeBurninSettings]
     class FrameCaptureSettings < Struct.new(
+      nil,
       :capture_interval,
       :capture_interval_units,
       :timecode_burnin_settings,
@@ -5561,6 +5780,7 @@ module Aws::MediaLive
     #   Placeholder documentation for __string
     #   @return [String]
     class GatewayTimeoutException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -5572,6 +5792,7 @@ module Aws::MediaLive
     #   A cloudwatch alarm template group's identifier. Can be either be its id or current name.
     #   @return [String]
     class GetCloudWatchAlarmTemplateGroupRequest < Struct.new(
+      nil,
       :identifier,
       keyword_init: true
     )
@@ -5601,6 +5822,7 @@ module Aws::MediaLive
     #   Represents the tags associated with a resource.
     #   @return [Hash<String, String>]
     class GetCloudWatchAlarmTemplateGroupResponse < Struct.new(
+      nil,
       :arn,
       :created_at,
       :description,
@@ -5618,6 +5840,7 @@ module Aws::MediaLive
     #   A cloudwatch alarm template's identifier. Can be either be its id or current name.
     #   @return [String]
     class GetCloudWatchAlarmTemplateRequest < Struct.new(
+      nil,
       :identifier,
       keyword_init: true
     )
@@ -5677,6 +5900,7 @@ module Aws::MediaLive
     #   Specifies how missing data points are treated when evaluating the alarm's condition.
     #   @return [String]
     class GetCloudWatchAlarmTemplateResponse < Struct.new(
+      nil,
       :arn,
       :comparison_operator,
       :created_at,
@@ -5704,6 +5928,7 @@ module Aws::MediaLive
     #   An eventbridge rule template group's identifier. Can be either be its id or current name.
     #   @return [String]
     class GetEventBridgeRuleTemplateGroupRequest < Struct.new(
+      nil,
       :identifier,
       keyword_init: true
     )
@@ -5733,6 +5958,7 @@ module Aws::MediaLive
     #   Represents the tags associated with a resource.
     #   @return [Hash<String, String>]
     class GetEventBridgeRuleTemplateGroupResponse < Struct.new(
+      nil,
       :arn,
       :created_at,
       :description,
@@ -5750,6 +5976,7 @@ module Aws::MediaLive
     #   An eventbridge rule template's identifier. Can be either be its id or current name.
     #   @return [String]
     class GetEventBridgeRuleTemplateRequest < Struct.new(
+      nil,
       :identifier,
       keyword_init: true
     )
@@ -5788,6 +6015,7 @@ module Aws::MediaLive
     #   Represents the tags associated with a resource.
     #   @return [Hash<String, String>]
     class GetEventBridgeRuleTemplateResponse < Struct.new(
+      nil,
       :arn,
       :created_at,
       :description,
@@ -5808,6 +6036,7 @@ module Aws::MediaLive
     #   A signal map's identifier. Can be either be its id or current name.
     #   @return [String]
     class GetSignalMapRequest < Struct.new(
+      nil,
       :identifier,
       keyword_init: true
     )
@@ -5870,6 +6099,7 @@ module Aws::MediaLive
     #   Represents the tags associated with a resource.
     #   @return [Hash<String, String>]
     class GetSignalMapResponse < Struct.new(
+      nil,
       :arn,
       :cloud_watch_alarm_template_group_ids,
       :created_at,
@@ -5920,6 +6150,7 @@ module Aws::MediaLive
     #   Advanced output locking settings
     #   @return [Types::OutputLockingSettings]
     class GlobalConfiguration < Struct.new(
+      nil,
       :initial_audio_gain,
       :input_end_action,
       :input_loss_behavior,
@@ -5943,6 +6174,7 @@ module Aws::MediaLive
     #   Rec709 Settings
     #   @return [Types::Rec709Settings]
     class H264ColorSpaceSettings < Struct.new(
+      nil,
       :color_space_passthrough_settings,
       :rec601_settings,
       :rec709_settings,
@@ -5959,6 +6191,7 @@ module Aws::MediaLive
     #   Bandwidth Reduction Filter Settings
     #   @return [Types::BandwidthReductionFilterSettings]
     class H264FilterSettings < Struct.new(
+      nil,
       :temporal_filter_settings,
       :bandwidth_reduction_filter_settings,
       keyword_init: true
@@ -6141,6 +6374,7 @@ module Aws::MediaLive
     #   Enter a minimum bitrate if you want to keep the output bitrate about a threshold, in order to prevent the downstream system from de-allocating network bandwidth for this output.
     #   @return [Integer]
     class H264Settings < Struct.new(
+      nil,
       :adaptive_quantization,
       :afd_signaling,
       :bitrate,
@@ -6207,6 +6441,7 @@ module Aws::MediaLive
     #   Rec709 Settings
     #   @return [Types::Rec709Settings]
     class H265ColorSpaceSettings < Struct.new(
+      nil,
       :color_space_passthrough_settings,
       :dolby_vision81_settings,
       :hdr10_settings,
@@ -6225,6 +6460,7 @@ module Aws::MediaLive
     #   Bandwidth Reduction Filter Settings
     #   @return [Types::BandwidthReductionFilterSettings]
     class H265FilterSettings < Struct.new(
+      nil,
       :temporal_filter_settings,
       :bandwidth_reduction_filter_settings,
       keyword_init: true
@@ -6404,6 +6640,7 @@ module Aws::MediaLive
     #   Must be FIXED if resolution is greater than 1080p or when using tiled hevc encoding.
     #   @return [String]
     class H265Settings < Struct.new(
+      nil,
       :adaptive_quantization,
       :afd_signaling,
       :alternative_transfer_function,
@@ -6463,6 +6700,7 @@ module Aws::MediaLive
     #   for any single frame within an encoded HDR video stream or file.
     #   @return [Integer]
     class Hdr10Settings < Struct.new(
+      nil,
       :max_cll,
       :max_fall,
       keyword_init: true
@@ -6493,6 +6731,7 @@ module Aws::MediaLive
     #   Token parameter for authenticated akamai. If not specified, _gda_ is used.
     #   @return [String]
     class HlsAkamaiSettings < Struct.new(
+      nil,
       :connection_retry_interval,
       :filecache_duration,
       :http_transfer_mode,
@@ -6519,6 +6758,7 @@ module Aws::MediaLive
     #   If a streaming output fails, number of seconds to wait until a restart is initiated. A value of 0 means never restart.
     #   @return [Integer]
     class HlsBasicPutSettings < Struct.new(
+      nil,
       :connection_retry_interval,
       :filecache_duration,
       :num_retries,
@@ -6545,6 +6785,7 @@ module Aws::MediaLive
     #   Hls Webdav Settings
     #   @return [Types::HlsWebdavSettings]
     class HlsCdnSettings < Struct.new(
+      nil,
       :hls_akamai_settings,
       :hls_basic_put_settings,
       :hls_media_store_settings,
@@ -6721,6 +6962,7 @@ module Aws::MediaLive
     #   SINGLE_FILE: Applies only if Mode field is VOD. Emit the program as a single .ts media file. The media manifest includes #EXT-X-BYTERANGE tags to index segments for playback. A typical use for this value is when sending the output to AWS Elemental MediaConvert, which can accept only a single media file. Playback while the channel is running is not guaranteed due to HTTP server caching.
     #   @return [String]
     class HlsGroupSettings < Struct.new(
+      nil,
       :ad_markers,
       :base_url_content,
       :base_url_content1,
@@ -6777,6 +7019,7 @@ module Aws::MediaLive
     #   Complete this parameter if you want to specify the entire ID3 metadata. Enter a base64 string that contains one or more fully formed ID3 tags, according to the ID3 specification: http://id3.org/id3v2.4.0-structure
     #   @return [String]
     class HlsId3SegmentTaggingScheduleActionSettings < Struct.new(
+      nil,
       :tag,
       :id3,
       keyword_init: true
@@ -6801,6 +7044,7 @@ module Aws::MediaLive
     #   Identifies the source for the SCTE-35 messages that MediaLive will ingest. Messages can be ingested from the content segments (in the stream) or from tags in the playlist (the HLS manifest). MediaLive ignores SCTE-35 information in the source that is not selected.
     #   @return [String]
     class HlsInputSettings < Struct.new(
+      nil,
       :bandwidth,
       :buffer_segments,
       :retries,
@@ -6828,6 +7072,7 @@ module Aws::MediaLive
     #   If a streaming output fails, number of seconds to wait until a restart is initiated. A value of 0 means never restart.
     #   @return [Integer]
     class HlsMediaStoreSettings < Struct.new(
+      nil,
       :connection_retry_interval,
       :filecache_duration,
       :media_store_storage_class,
@@ -6853,6 +7098,7 @@ module Aws::MediaLive
     #   String concatenated to end of segment filenames.
     #   @return [String]
     class HlsOutputSettings < Struct.new(
+      nil,
       :h265_packaging_type,
       :hls_settings,
       :name_modifier,
@@ -6867,6 +7113,7 @@ module Aws::MediaLive
     #   Specify the canned ACL to apply to each S3 request. Defaults to none.
     #   @return [String]
     class HlsS3Settings < Struct.new(
+      nil,
       :canned_acl,
       keyword_init: true
     )
@@ -6887,6 +7134,7 @@ module Aws::MediaLive
     #   Standard Hls Settings
     #   @return [Types::StandardHlsSettings]
     class HlsSettings < Struct.new(
+      nil,
       :audio_only_hls_settings,
       :fmp4_hls_settings,
       :frame_capture_hls_settings,
@@ -6901,6 +7149,7 @@ module Aws::MediaLive
     #   Enter a base64 string that contains one or more fully formed ID3 tags.See the ID3 specification: http://id3.org/id3v2.4.0-structure
     #   @return [String]
     class HlsTimedMetadataScheduleActionSettings < Struct.new(
+      nil,
       :id3,
       keyword_init: true
     )
@@ -6924,6 +7173,7 @@ module Aws::MediaLive
     #   If a streaming output fails, number of seconds to wait until a restart is initiated. A value of 0 means never restart.
     #   @return [Integer]
     class HlsWebdavSettings < Struct.new(
+      nil,
       :connection_retry_interval,
       :filecache_duration,
       :http_transfer_mode,
@@ -6936,6 +7186,7 @@ module Aws::MediaLive
 
     # Html Motion Graphics Settings
     class HtmlMotionGraphicsSettings < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -6949,6 +7200,7 @@ module Aws::MediaLive
     #   Complete this parameter if you want to specify only the metadata, not the entire frame. MediaLive will insert the metadata in a TXXX frame. Enter the value as plain text. You can include standard MediaLive variable data such as the current segment number.
     #   @return [String]
     class Id3SegmentTaggingScheduleActionSettings < Struct.new(
+      nil,
       :id3,
       :tag,
       keyword_init: true
@@ -6958,6 +7210,7 @@ module Aws::MediaLive
 
     # Settings to configure an action so that it occurs as soon as possible.
     class ImmediateModeScheduleActionStartSettings < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -7031,6 +7284,7 @@ module Aws::MediaLive
     #   SDI Sources for this Input.
     #   @return [Array<String>]
     class Input < Struct.new(
+      nil,
       :arn,
       :attached_channels,
       :destinations,
@@ -7074,6 +7328,7 @@ module Aws::MediaLive
     #   Optional assignment of an input to a logical interface on the Node. Only applies to on premises channels.
     #   @return [Array<String>]
     class InputAttachment < Struct.new(
+      nil,
       :automatic_input_failover_settings,
       :input_attachment_name,
       :input_id,
@@ -7092,6 +7347,7 @@ module Aws::MediaLive
     #   The index of the input channel used as a source.
     #   @return [Integer]
     class InputChannelLevel < Struct.new(
+      nil,
       :gain,
       :input_channel,
       keyword_init: true
@@ -7110,6 +7366,7 @@ module Aws::MediaLive
     #   Settings to identify the end of the clip.
     #   @return [Types::StopTimecode]
     class InputClippingSettings < Struct.new(
+      nil,
       :input_timecode_source,
       :start_timecode,
       :stop_timecode,
@@ -7141,6 +7398,7 @@ module Aws::MediaLive
     #   is going to be on the customer local network.
     #   @return [Array<Types::InputDestinationRoute>]
     class InputDestination < Struct.new(
+      nil,
       :ip,
       :port,
       :url,
@@ -7169,6 +7427,7 @@ module Aws::MediaLive
     #   of the input is going to be on the customer local network.
     #   @return [String]
     class InputDestinationRequest < Struct.new(
+      nil,
       :stream_name,
       :network,
       :network_routes,
@@ -7186,6 +7445,7 @@ module Aws::MediaLive
     #   An optional gateway for the route.
     #   @return [String]
     class InputDestinationRoute < Struct.new(
+      nil,
       :cidr,
       :gateway,
       keyword_init: true
@@ -7201,6 +7461,7 @@ module Aws::MediaLive
     #   The network interface ID of the Input destination in the VPC.
     #   @return [String]
     class InputDestinationVpc < Struct.new(
+      nil,
       :availability_zone,
       :network_interface_id,
       keyword_init: true
@@ -7216,6 +7477,7 @@ module Aws::MediaLive
     #   The profile to set for one audio pair configuration. Choose an enumeration value. Each value describes one audio configuration using the format (rate control algorithm)-(codec)_(quality)-(bitrate in bytes). For example, CBR-AAC_HQ-192000. Or choose DISABLED, in which case the device won't produce audio for this pair.
     #   @return [String]
     class InputDeviceConfigurableAudioChannelPairConfig < Struct.new(
+      nil,
       :id,
       :profile,
       keyword_init: true
@@ -7246,6 +7508,7 @@ module Aws::MediaLive
     #   Choose the resolution of the Link device's source (HD or UHD). Make sure the resolution matches the current source from the device. This value determines MediaLive resource allocation and billing for this input. Only UHD devices can specify this parameter.
     #   @return [String]
     class InputDeviceConfigurableSettings < Struct.new(
+      nil,
       :configured_input,
       :max_bitrate,
       :latency_ms,
@@ -7287,6 +7550,7 @@ module Aws::MediaLive
     #   The Link device's buffer size (latency) in milliseconds (ms). You can specify this value.
     #   @return [Integer]
     class InputDeviceHdSettings < Struct.new(
+      nil,
       :active_input,
       :configured_input,
       :device_state,
@@ -7315,6 +7579,7 @@ module Aws::MediaLive
     #   The name of the MediaConnect Flow source to stream to.
     #   @return [String]
     class InputDeviceMediaConnectConfigurableSettings < Struct.new(
+      nil,
       :flow_arn,
       :role_arn,
       :secret_arn,
@@ -7338,6 +7603,7 @@ module Aws::MediaLive
     #   The name of the MediaConnect flow source.
     #   @return [String]
     class InputDeviceMediaConnectSettings < Struct.new(
+      nil,
       :flow_arn,
       :role_arn,
       :secret_arn,
@@ -7364,6 +7630,7 @@ module Aws::MediaLive
     #   The subnet mask of the input device.
     #   @return [String]
     class InputDeviceNetworkSettings < Struct.new(
+      nil,
       :dns_addresses,
       :gateway,
       :ip_address,
@@ -7379,6 +7646,7 @@ module Aws::MediaLive
     #   The unique ID for the device.
     #   @return [String]
     class InputDeviceRequest < Struct.new(
+      nil,
       :id,
       keyword_init: true
     )
@@ -7390,6 +7658,7 @@ module Aws::MediaLive
     #   The unique ID for the device.
     #   @return [String]
     class InputDeviceSettings < Struct.new(
+      nil,
       :id,
       keyword_init: true
     )
@@ -7446,6 +7715,7 @@ module Aws::MediaLive
     #   The output attachment type of the input device. Specifies MEDIACONNECT_FLOW if this device is the source for a MediaConnect flow. Specifies MEDIALIVE_INPUT if this device is the source for a MediaLive input.
     #   @return [String]
     class InputDeviceSummary < Struct.new(
+      nil,
       :arn,
       :connection_state,
       :device_settings_sync_state,
@@ -7475,6 +7745,7 @@ module Aws::MediaLive
     #   The profile for one audio pair configuration. This property describes one audio configuration in the format (rate control algorithm)-(codec)_(quality)-(bitrate in bytes). For example, CBR-AAC_HQ-192000. Or DISABLED, in which case the device won't produce audio for this pair.
     #   @return [String]
     class InputDeviceUhdAudioChannelPairConfig < Struct.new(
+      nil,
       :id,
       :profile,
       keyword_init: true
@@ -7523,6 +7794,7 @@ module Aws::MediaLive
     #   The resolution of the Link device's source (HD or UHD). This value determines MediaLive resource allocation and billing for this input.
     #   @return [String]
     class InputDeviceUhdSettings < Struct.new(
+      nil,
       :active_input,
       :configured_input,
       :device_state,
@@ -7552,6 +7824,7 @@ module Aws::MediaLive
     #   Documentation update needed
     #   @return [String]
     class InputLocation < Struct.new(
+      nil,
       :password_param,
       :uri,
       :username,
@@ -7577,6 +7850,7 @@ module Aws::MediaLive
     #   Documentation update needed
     #   @return [Integer]
     class InputLossBehavior < Struct.new(
+      nil,
       :black_frame_msec,
       :input_loss_image_color,
       :input_loss_image_slate,
@@ -7592,6 +7866,7 @@ module Aws::MediaLive
     #   The amount of time (in milliseconds) that no input is detected. After that time, an input failover will occur.
     #   @return [Integer]
     class InputLossFailoverSettings < Struct.new(
+      nil,
       :input_loss_threshold_msec,
       keyword_init: true
     )
@@ -7609,6 +7884,7 @@ module Aws::MediaLive
     #   The value for the variable portion of the URL for the dynamic input, for this instance of the input. Each time you use the same dynamic input in an input switch action, you can provide a different value, in order to connect the input to a different content source.
     #   @return [Array<String>]
     class InputPrepareScheduleActionSettings < Struct.new(
+      nil,
       :input_attachment_name_reference,
       :input_clipping_settings,
       :url_path,
@@ -7625,6 +7901,7 @@ module Aws::MediaLive
     #   An optional gateway for the route.
     #   @return [String]
     class InputRequestDestinationRoute < Struct.new(
+      nil,
       :cidr,
       :gateway,
       keyword_init: true
@@ -7640,6 +7917,7 @@ module Aws::MediaLive
     #   The URL of the SDP file for one SMPTE 2110 stream.
     #   @return [String]
     class InputSdpLocation < Struct.new(
+      nil,
       :media_index,
       :sdp_url,
       keyword_init: true
@@ -7667,6 +7945,7 @@ module Aws::MediaLive
     #   Whitelist rules and their sync status
     #   @return [Array<Types::InputWhitelistRule>]
     class InputSecurityGroup < Struct.new(
+      nil,
       :arn,
       :id,
       :inputs,
@@ -7718,6 +7997,7 @@ module Aws::MediaLive
     #   Informs which video elementary stream to decode for input types that have multiple available.
     #   @return [Types::VideoSelector]
     class InputSettings < Struct.new(
+      nil,
       :audio_selectors,
       :caption_selectors,
       :deblock_filter,
@@ -7746,6 +8026,7 @@ module Aws::MediaLive
     #   The username for the input source.
     #   @return [String]
     class InputSource < Struct.new(
+      nil,
       :password_param,
       :url,
       :username,
@@ -7766,6 +8047,7 @@ module Aws::MediaLive
     #   The username for the input source.
     #   @return [String]
     class InputSourceRequest < Struct.new(
+      nil,
       :password_param,
       :url,
       :username,
@@ -7785,6 +8067,7 @@ module Aws::MediaLive
     #   Input resolution, categorized coarsely
     #   @return [String]
     class InputSpecification < Struct.new(
+      nil,
       :codec,
       :maximum_bitrate,
       :resolution,
@@ -7804,6 +8087,7 @@ module Aws::MediaLive
     #   The value for the variable portion of the URL for the dynamic input, for this instance of the input. Each time you use the same dynamic input in an input switch action, you can provide a different value, in order to connect the input to a different content source.
     #   @return [Array<String>]
     class InputSwitchScheduleActionSettings < Struct.new(
+      nil,
       :input_attachment_name_reference,
       :input_clipping_settings,
       :url_path,
@@ -7825,6 +8109,7 @@ module Aws::MediaLive
     #   Subnet IDs must be mapped to two unique availability zones (AZ).
     #   @return [Array<String>]
     class InputVpcRequest < Struct.new(
+      nil,
       :security_group_ids,
       :subnet_ids,
       keyword_init: true
@@ -7837,6 +8122,7 @@ module Aws::MediaLive
     #   The IPv4 CIDR that's whitelisted.
     #   @return [String]
     class InputWhitelistRule < Struct.new(
+      nil,
       :cidr,
       keyword_init: true
     )
@@ -7848,6 +8134,7 @@ module Aws::MediaLive
     #   The IPv4 CIDR to whitelist.
     #   @return [String]
     class InputWhitelistRuleCidr < Struct.new(
+      nil,
       :cidr,
       keyword_init: true
     )
@@ -7862,6 +8149,7 @@ module Aws::MediaLive
     #   The ID of the network that you want to connect to the specified logicalInterfaceName.
     #   @return [String]
     class InterfaceMapping < Struct.new(
+      nil,
       :logical_interface_name,
       :network_id,
       keyword_init: true
@@ -7877,6 +8165,7 @@ module Aws::MediaLive
     #   The ID of the network that you want to connect to the specified logicalInterfaceName.
     #   @return [String]
     class InterfaceMappingCreateRequest < Struct.new(
+      nil,
       :logical_interface_name,
       :network_id,
       keyword_init: true
@@ -7892,6 +8181,7 @@ module Aws::MediaLive
     #   The ID of the network that you want to connect to the specified logicalInterfaceName. You can use the ListNetworks operation to discover all the IDs.
     #   @return [String]
     class InterfaceMappingUpdateRequest < Struct.new(
+      nil,
       :logical_interface_name,
       :network_id,
       keyword_init: true
@@ -7904,6 +8194,7 @@ module Aws::MediaLive
     #   Placeholder documentation for __string
     #   @return [String]
     class InternalServerErrorException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -7915,6 +8206,7 @@ module Aws::MediaLive
     #   A CIDR block of IP addresses that are reserved for MediaLive Anywhere.
     #   @return [String]
     class IpPool < Struct.new(
+      nil,
       :cidr,
       keyword_init: true
     )
@@ -7926,6 +8218,7 @@ module Aws::MediaLive
     #   A CIDR block of IP addresses to reserve for MediaLive Anywhere.
     #   @return [String]
     class IpPoolCreateRequest < Struct.new(
+      nil,
       :cidr,
       keyword_init: true
     )
@@ -7937,6 +8230,7 @@ module Aws::MediaLive
     #   A CIDR block of IP addresses to reserve for MediaLive Anywhere.
     #   @return [String]
     class IpPoolUpdateRequest < Struct.new(
+      nil,
       :cidr,
       keyword_init: true
     )
@@ -7948,6 +8242,7 @@ module Aws::MediaLive
     #   Static Key Settings
     #   @return [Types::StaticKeySettings]
     class KeyProviderSettings < Struct.new(
+      nil,
       :static_key_settings,
       keyword_init: true
     )
@@ -7965,6 +8260,7 @@ module Aws::MediaLive
     #   The token to retrieve the next page of results.
     #   @return [String]
     class ListChannelPlacementGroupsRequest < Struct.new(
+      nil,
       :cluster_id,
       :max_results,
       :next_token,
@@ -7981,6 +8277,7 @@ module Aws::MediaLive
     #   Token for the next result.
     #   @return [String]
     class ListChannelPlacementGroupsResponse < Struct.new(
+      nil,
       :channel_placement_groups,
       :next_token,
       keyword_init: true
@@ -7996,6 +8293,7 @@ module Aws::MediaLive
     #   Placeholder documentation for __string
     #   @return [String]
     class ListChannelsRequest < Struct.new(
+      nil,
       :max_results,
       :next_token,
       keyword_init: true
@@ -8011,6 +8309,7 @@ module Aws::MediaLive
     #   Placeholder documentation for __string
     #   @return [String]
     class ListChannelsResponse < Struct.new(
+      nil,
       :channels,
       :next_token,
       keyword_init: true
@@ -8032,6 +8331,7 @@ module Aws::MediaLive
     #   A signal map's identifier. Can be either be its id or current name.
     #   @return [String]
     class ListCloudWatchAlarmTemplateGroupsRequest < Struct.new(
+      nil,
       :max_results,
       :next_token,
       :scope,
@@ -8049,6 +8349,7 @@ module Aws::MediaLive
     #   A token used to retrieve the next set of results in paginated list responses.
     #   @return [String]
     class ListCloudWatchAlarmTemplateGroupsResponse < Struct.new(
+      nil,
       :cloud_watch_alarm_template_groups,
       :next_token,
       keyword_init: true
@@ -8073,6 +8374,7 @@ module Aws::MediaLive
     #   A signal map's identifier. Can be either be its id or current name.
     #   @return [String]
     class ListCloudWatchAlarmTemplatesRequest < Struct.new(
+      nil,
       :group_identifier,
       :max_results,
       :next_token,
@@ -8091,6 +8393,7 @@ module Aws::MediaLive
     #   A token used to retrieve the next set of results in paginated list responses.
     #   @return [String]
     class ListCloudWatchAlarmTemplatesResponse < Struct.new(
+      nil,
       :cloud_watch_alarm_templates,
       :next_token,
       keyword_init: true
@@ -8106,6 +8409,7 @@ module Aws::MediaLive
     #   The token to retrieve the next page of results.
     #   @return [String]
     class ListClustersRequest < Struct.new(
+      nil,
       :max_results,
       :next_token,
       keyword_init: true
@@ -8121,6 +8425,7 @@ module Aws::MediaLive
     #   Token for the next result.
     #   @return [String]
     class ListClustersResponse < Struct.new(
+      nil,
       :clusters,
       :next_token,
       keyword_init: true
@@ -8139,6 +8444,7 @@ module Aws::MediaLive
     #   A signal map's identifier. Can be either be its id or current name.
     #   @return [String]
     class ListEventBridgeRuleTemplateGroupsRequest < Struct.new(
+      nil,
       :max_results,
       :next_token,
       :signal_map_identifier,
@@ -8155,6 +8461,7 @@ module Aws::MediaLive
     #   A token used to retrieve the next set of results in paginated list responses.
     #   @return [String]
     class ListEventBridgeRuleTemplateGroupsResponse < Struct.new(
+      nil,
       :event_bridge_rule_template_groups,
       :next_token,
       keyword_init: true
@@ -8176,6 +8483,7 @@ module Aws::MediaLive
     #   A signal map's identifier. Can be either be its id or current name.
     #   @return [String]
     class ListEventBridgeRuleTemplatesRequest < Struct.new(
+      nil,
       :group_identifier,
       :max_results,
       :next_token,
@@ -8193,6 +8501,7 @@ module Aws::MediaLive
     #   A token used to retrieve the next set of results in paginated list responses.
     #   @return [String]
     class ListEventBridgeRuleTemplatesResponse < Struct.new(
+      nil,
       :event_bridge_rule_templates,
       :next_token,
       keyword_init: true
@@ -8211,6 +8520,7 @@ module Aws::MediaLive
     #   Placeholder documentation for __string
     #   @return [String]
     class ListInputDeviceTransfersRequest < Struct.new(
+      nil,
       :max_results,
       :next_token,
       :transfer_type,
@@ -8227,6 +8537,7 @@ module Aws::MediaLive
     #   A token to get additional list results.
     #   @return [String]
     class ListInputDeviceTransfersResponse < Struct.new(
+      nil,
       :input_device_transfers,
       :next_token,
       keyword_init: true
@@ -8242,6 +8553,7 @@ module Aws::MediaLive
     #   Placeholder documentation for __string
     #   @return [String]
     class ListInputDevicesRequest < Struct.new(
+      nil,
       :max_results,
       :next_token,
       keyword_init: true
@@ -8257,6 +8569,7 @@ module Aws::MediaLive
     #   A token to get additional list results.
     #   @return [String]
     class ListInputDevicesResponse < Struct.new(
+      nil,
       :input_devices,
       :next_token,
       keyword_init: true
@@ -8272,6 +8585,7 @@ module Aws::MediaLive
     #   Placeholder documentation for __string
     #   @return [String]
     class ListInputSecurityGroupsRequest < Struct.new(
+      nil,
       :max_results,
       :next_token,
       keyword_init: true
@@ -8287,6 +8601,7 @@ module Aws::MediaLive
     #   Placeholder documentation for __string
     #   @return [String]
     class ListInputSecurityGroupsResponse < Struct.new(
+      nil,
       :input_security_groups,
       :next_token,
       keyword_init: true
@@ -8302,6 +8617,7 @@ module Aws::MediaLive
     #   Placeholder documentation for __string
     #   @return [String]
     class ListInputsRequest < Struct.new(
+      nil,
       :max_results,
       :next_token,
       keyword_init: true
@@ -8317,6 +8633,7 @@ module Aws::MediaLive
     #   Placeholder documentation for __string
     #   @return [String]
     class ListInputsResponse < Struct.new(
+      nil,
       :inputs,
       :next_token,
       keyword_init: true
@@ -8335,6 +8652,7 @@ module Aws::MediaLive
     #   The token to retrieve the next page of results.
     #   @return [String]
     class ListMultiplexProgramsRequest < Struct.new(
+      nil,
       :max_results,
       :multiplex_id,
       :next_token,
@@ -8351,6 +8669,7 @@ module Aws::MediaLive
     #   Token for the next ListMultiplexProgram request.
     #   @return [String]
     class ListMultiplexProgramsResponse < Struct.new(
+      nil,
       :multiplex_programs,
       :next_token,
       keyword_init: true
@@ -8366,6 +8685,7 @@ module Aws::MediaLive
     #   The token to retrieve the next page of results.
     #   @return [String]
     class ListMultiplexesRequest < Struct.new(
+      nil,
       :max_results,
       :next_token,
       keyword_init: true
@@ -8381,6 +8701,7 @@ module Aws::MediaLive
     #   Token for the next ListMultiplexes request.
     #   @return [String]
     class ListMultiplexesResponse < Struct.new(
+      nil,
       :multiplexes,
       :next_token,
       keyword_init: true
@@ -8396,6 +8717,7 @@ module Aws::MediaLive
     #   The token to retrieve the next page of results.
     #   @return [String]
     class ListNetworksRequest < Struct.new(
+      nil,
       :max_results,
       :next_token,
       keyword_init: true
@@ -8411,6 +8733,7 @@ module Aws::MediaLive
     #   Token for the next ListNetworks request.
     #   @return [String]
     class ListNetworksResponse < Struct.new(
+      nil,
       :networks,
       :next_token,
       keyword_init: true
@@ -8429,6 +8752,7 @@ module Aws::MediaLive
     #   The token to retrieve the next page of results.
     #   @return [String]
     class ListNodesRequest < Struct.new(
+      nil,
       :cluster_id,
       :max_results,
       :next_token,
@@ -8445,6 +8769,7 @@ module Aws::MediaLive
     #   An array of Nodes that exist in the Cluster.
     #   @return [Array<Types::DescribeNodeSummary>]
     class ListNodesResponse < Struct.new(
+      nil,
       :next_token,
       :nodes,
       keyword_init: true
@@ -8490,6 +8815,7 @@ module Aws::MediaLive
     #   Filter by video quality, 'STANDARD', 'ENHANCED', or 'PREMIUM'
     #   @return [String]
     class ListOfferingsRequest < Struct.new(
+      nil,
       :channel_class,
       :channel_configuration,
       :codec,
@@ -8515,6 +8841,7 @@ module Aws::MediaLive
     #   List of offerings
     #   @return [Array<Types::Offering>]
     class ListOfferingsResponse < Struct.new(
+      nil,
       :next_token,
       :offerings,
       keyword_init: true
@@ -8554,6 +8881,7 @@ module Aws::MediaLive
     #   Filter by video quality, 'STANDARD', 'ENHANCED', or 'PREMIUM'
     #   @return [String]
     class ListReservationsRequest < Struct.new(
+      nil,
       :channel_class,
       :codec,
       :max_results,
@@ -8577,6 +8905,7 @@ module Aws::MediaLive
     #   List of reservations
     #   @return [Array<Types::Reservation>]
     class ListReservationsResponse < Struct.new(
+      nil,
       :next_token,
       :reservations,
       keyword_init: true
@@ -8592,6 +8921,7 @@ module Aws::MediaLive
     #   The token to retrieve the next page of results.
     #   @return [String]
     class ListSdiSourcesRequest < Struct.new(
+      nil,
       :max_results,
       :next_token,
       keyword_init: true
@@ -8607,6 +8937,7 @@ module Aws::MediaLive
     #   Placeholder documentation for __listOfSdiSourceSummary
     #   @return [Array<Types::SdiSourceSummary>]
     class ListSdiSourcesResponse < Struct.new(
+      nil,
       :next_token,
       :sdi_sources,
       keyword_init: true
@@ -8628,6 +8959,7 @@ module Aws::MediaLive
     #   A token used to retrieve the next set of results in paginated list responses.
     #   @return [String]
     class ListSignalMapsRequest < Struct.new(
+      nil,
       :cloud_watch_alarm_template_group_identifier,
       :event_bridge_rule_template_group_identifier,
       :max_results,
@@ -8645,6 +8977,7 @@ module Aws::MediaLive
     #   Placeholder documentation for __listOfSignalMapSummary
     #   @return [Array<Types::SignalMapSummary>]
     class ListSignalMapsResponse < Struct.new(
+      nil,
       :next_token,
       :signal_maps,
       keyword_init: true
@@ -8657,6 +8990,7 @@ module Aws::MediaLive
     #   Placeholder documentation for __string
     #   @return [String]
     class ListTagsForResourceRequest < Struct.new(
+      nil,
       :resource_arn,
       keyword_init: true
     )
@@ -8668,6 +9002,7 @@ module Aws::MediaLive
     #   Placeholder documentation for Tags
     #   @return [Hash<String, String>]
     class ListTagsForResourceResponse < Struct.new(
+      nil,
       :tags,
       keyword_init: true
     )
@@ -8676,6 +9011,7 @@ module Aws::MediaLive
 
     # Placeholder documentation for ListVersionsRequest
     class ListVersionsRequest < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -8686,6 +9022,7 @@ module Aws::MediaLive
     #   List of engine versions that are available for this AWS account.
     #   @return [Array<Types::ChannelEngineVersionResponse>]
     class ListVersionsResponse < Struct.new(
+      nil,
       :versions,
       keyword_init: true
     )
@@ -8842,6 +9179,7 @@ module Aws::MediaLive
     #   Defines the amount SCTE-35 preroll will be increased (in milliseconds) on the output. Preroll is the amount of time between the presence of a SCTE-35 indication in a transport stream and the PTS of the video frame it references. Zero means don't add pullup (it doesn't mean set the preroll to zero). Negative pullup is not supported, which means that you can't make the preroll shorter. Be aware that latency in the output will increase by the pullup amount.
     #   @return [Float]
     class M2tsSettings < Struct.new(
+      nil,
       :absent_input_audio_behavior,
       :arib,
       :arib_captions_pid,
@@ -8954,6 +9292,7 @@ module Aws::MediaLive
     #   Packet Identifier (PID) for input source KLV data to this output. Multiple values are accepted, and can be entered in ranges and/or by comma separation. Can be entered as decimal or hexadecimal values.  Each PID specified must be in the range of 32 (or 0x20)..8182 (or 0x1ff6).
     #   @return [String]
     class M3u8Settings < Struct.new(
+      nil,
       :audio_frames_per_pes,
       :audio_pids,
       :ecm_pid,
@@ -8986,6 +9325,7 @@ module Aws::MediaLive
     #   Choose the hour that maintenance will start. The chosen time is used for all future maintenance windows.
     #   @return [String]
     class MaintenanceCreateSettings < Struct.new(
+      nil,
       :maintenance_day,
       :maintenance_start_time,
       keyword_init: true
@@ -9007,6 +9347,7 @@ module Aws::MediaLive
     #   The currently selected maintenance start time. Time is in UTC.
     #   @return [String]
     class MaintenanceStatus < Struct.new(
+      nil,
       :maintenance_day,
       :maintenance_deadline,
       :maintenance_scheduled_date,
@@ -9027,6 +9368,7 @@ module Aws::MediaLive
     #   Choose the hour that maintenance will start. The chosen time is used for all future maintenance windows.
     #   @return [String]
     class MaintenanceUpdateSettings < Struct.new(
+      nil,
       :maintenance_day,
       :maintenance_scheduled_date,
       :maintenance_start_time,
@@ -9040,6 +9382,7 @@ module Aws::MediaLive
     #   The unique ARN of the MediaConnect Flow being used as a source.
     #   @return [String]
     class MediaConnectFlow < Struct.new(
+      nil,
       :flow_arn,
       keyword_init: true
     )
@@ -9051,6 +9394,7 @@ module Aws::MediaLive
     #   The ARN of the MediaConnect Flow that you want to use as a source.
     #   @return [String]
     class MediaConnectFlowRequest < Struct.new(
+      nil,
       :flow_arn,
       keyword_init: true
     )
@@ -9065,6 +9409,7 @@ module Aws::MediaLive
     #   Parameters that apply only if the destination parameter (for the output group) specifies a channelGroup and channelName. Use of these two paramters indicates that the output group is for MediaPackage V2 (CMAF Ingest).
     #   @return [Types::MediaPackageV2GroupSettings]
     class MediaPackageGroupSettings < Struct.new(
+      nil,
       :destination,
       :mediapackage_v2_group_settings,
       keyword_init: true
@@ -9083,6 +9428,7 @@ module Aws::MediaLive
     #   Name of the channel in MediaPackageV2. Only use if you are sending CMAF Ingest output to a CMAF ingest endpoint on a MediaPackage channel that uses MediaPackage v2.
     #   @return [String]
     class MediaPackageOutputDestinationSettings < Struct.new(
+      nil,
       :channel_id,
       :channel_group,
       :channel_name,
@@ -9096,6 +9442,7 @@ module Aws::MediaLive
     #   Optional settings for MediaPackage V2 destinations
     #   @return [Types::MediaPackageV2DestinationSettings]
     class MediaPackageOutputSettings < Struct.new(
+      nil,
       :media_package_v2_destination_settings,
       keyword_init: true
     )
@@ -9118,6 +9465,7 @@ module Aws::MediaLive
     #   When you consider all the renditions, follow these guidelines. You can set zero or one renditions to YES. You can set zero or more renditions to NO, but you can't set all renditions to NO. You can set zero, some, or all to OMIT.
     #   @return [String]
     class MediaPackageV2DestinationSettings < Struct.new(
+      nil,
       :audio_group_id,
       :audio_rendition_sets,
       :hls_auto_select,
@@ -9159,6 +9507,7 @@ module Aws::MediaLive
     #   Set to enabled to pass through ID3 metadata from the input sources.
     #   @return [String]
     class MediaPackageV2GroupSettings < Struct.new(
+      nil,
       :caption_language_mappings,
       :id3_behavior,
       :klv_behavior,
@@ -9185,6 +9534,7 @@ module Aws::MediaLive
     #   Placeholder documentation for __listOfMediaResourceNeighbor
     #   @return [Array<Types::MediaResourceNeighbor>]
     class MediaResource < Struct.new(
+      nil,
       :destinations,
       :name,
       :sources,
@@ -9201,6 +9551,7 @@ module Aws::MediaLive
     #   The logical name of an AWS media resource.
     #   @return [String]
     class MediaResourceNeighbor < Struct.new(
+      nil,
       :arn,
       :name,
       keyword_init: true
@@ -9219,6 +9570,7 @@ module Aws::MediaLive
     #   A signal map's monitor deployment status.
     #   @return [String]
     class MonitorDeployment < Struct.new(
+      nil,
       :details_uri,
       :error_message,
       :status,
@@ -9241,6 +9593,7 @@ module Aws::MediaLive
     #   Documentation update needed
     #   @return [String]
     class MotionGraphicsActivateScheduleActionSettings < Struct.new(
+      nil,
       :duration,
       :password_param,
       :url,
@@ -9258,6 +9611,7 @@ module Aws::MediaLive
     #   Motion Graphics Settings
     #   @return [Types::MotionGraphicsSettings]
     class MotionGraphicsConfiguration < Struct.new(
+      nil,
       :motion_graphics_insertion,
       :motion_graphics_settings,
       keyword_init: true
@@ -9267,6 +9621,7 @@ module Aws::MediaLive
 
     # Settings to specify the ending of rendering motion graphics into the video stream.
     class MotionGraphicsDeactivateScheduleActionSettings < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -9277,6 +9632,7 @@ module Aws::MediaLive
     #   Html Motion Graphics Settings
     #   @return [Types::HtmlMotionGraphicsSettings]
     class MotionGraphicsSettings < Struct.new(
+      nil,
       :html_motion_graphics_settings,
       keyword_init: true
     )
@@ -9294,6 +9650,7 @@ module Aws::MediaLive
     #   Sample rate in Hz.
     #   @return [Float]
     class Mp2Settings < Struct.new(
+      nil,
       :bitrate,
       :coding_mode,
       :sample_rate,
@@ -9307,6 +9664,7 @@ module Aws::MediaLive
     #   Temporal Filter Settings
     #   @return [Types::TemporalFilterSettings]
     class Mpeg2FilterSettings < Struct.new(
+      nil,
       :temporal_filter_settings,
       keyword_init: true
     )
@@ -9379,6 +9737,7 @@ module Aws::MediaLive
     #   Timecode burn-in settings
     #   @return [Types::TimecodeBurninSettings]
     class Mpeg2Settings < Struct.new(
+      nil,
       :adaptive_quantization,
       :afd_signaling,
       :color_metadata,
@@ -9472,6 +9831,7 @@ module Aws::MediaLive
     #   - useConfiguredOffset: Use an explicitly configured date as the offset
     #   @return [String]
     class MsSmoothGroupSettings < Struct.new(
+      nil,
       :acquisition_point_id,
       :audio_only_timecode_control,
       :certificate_mode,
@@ -9505,6 +9865,7 @@ module Aws::MediaLive
     #   String concatenated to the end of the destination filename.  Required for multiple outputs of the same type.
     #   @return [String]
     class MsSmoothOutputSettings < Struct.new(
+      nil,
       :h265_packaging_type,
       :name_modifier,
       keyword_init: true
@@ -9517,6 +9878,7 @@ module Aws::MediaLive
     #   Optionally, a source ip address to filter by for Source-specific Multicast (SSM)
     #   @return [String]
     class MulticastInputSettings < Struct.new(
+      nil,
       :source_ip_address,
       keyword_init: true
     )
@@ -9528,6 +9890,7 @@ module Aws::MediaLive
     #   Placeholder documentation for __listOfMulticastSource
     #   @return [Array<Types::MulticastSource>]
     class MulticastSettings < Struct.new(
+      nil,
       :sources,
       keyword_init: true
     )
@@ -9539,6 +9902,7 @@ module Aws::MediaLive
     #   Placeholder documentation for __listOfMulticastSourceCreateRequest
     #   @return [Array<Types::MulticastSourceCreateRequest>]
     class MulticastSettingsCreateRequest < Struct.new(
+      nil,
       :sources,
       keyword_init: true
     )
@@ -9550,6 +9914,7 @@ module Aws::MediaLive
     #   Placeholder documentation for __listOfMulticastSourceUpdateRequest
     #   @return [Array<Types::MulticastSourceUpdateRequest>]
     class MulticastSettingsUpdateRequest < Struct.new(
+      nil,
       :sources,
       keyword_init: true
     )
@@ -9564,6 +9929,7 @@ module Aws::MediaLive
     #   This represents the customer's source URL where multicast stream is pulled from.
     #   @return [String]
     class MulticastSource < Struct.new(
+      nil,
       :source_ip,
       :url,
       keyword_init: true
@@ -9579,6 +9945,7 @@ module Aws::MediaLive
     #   This represents the customer's source URL where multicast stream is pulled from.
     #   @return [String]
     class MulticastSourceCreateRequest < Struct.new(
+      nil,
       :source_ip,
       :url,
       keyword_init: true
@@ -9594,6 +9961,7 @@ module Aws::MediaLive
     #   This represents the customer's source URL where multicast stream is pulled from.
     #   @return [String]
     class MulticastSourceUpdateRequest < Struct.new(
+      nil,
       :source_ip,
       :url,
       keyword_init: true
@@ -9633,6 +10001,7 @@ module Aws::MediaLive
     #   A collection of key-value pairs.
     #   @return [Hash<String, String>]
     class Multiplex < Struct.new(
+      nil,
       :arn,
       :availability_zones,
       :destinations,
@@ -9653,6 +10022,7 @@ module Aws::MediaLive
     #   Multiplex M2ts Settings
     #   @return [Types::MultiplexM2tsSettings]
     class MultiplexContainerSettings < Struct.new(
+      nil,
       :multiplex_m2ts_settings,
       keyword_init: true
     )
@@ -9661,6 +10031,7 @@ module Aws::MediaLive
 
     # Multiplex Group Settings
     class MultiplexGroupSettings < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -9710,6 +10081,7 @@ module Aws::MediaLive
     #   Defines the amount SCTE-35 preroll will be increased (in milliseconds) on the output. Preroll is the amount of time between the presence of a SCTE-35 indication in a transport stream and the PTS of the video frame it references. Zero means don't add pullup (it doesn't mean set the preroll to zero). Negative pullup is not supported, which means that you can't make the preroll shorter. Be aware that latency in the output will increase by the pullup amount.
     #   @return [Float]
     class MultiplexM2tsSettings < Struct.new(
+      nil,
       :absent_input_audio_behavior,
       :arib,
       :audio_buffer_model,
@@ -9734,6 +10106,7 @@ module Aws::MediaLive
     #   The MediaConnect entitlement ARN available as a Flow source.
     #   @return [String]
     class MultiplexMediaConnectOutputDestinationSettings < Struct.new(
+      nil,
       :entitlement_arn,
       keyword_init: true
     )
@@ -9745,6 +10118,7 @@ module Aws::MediaLive
     #   Multiplex MediaConnect output destination settings.
     #   @return [Types::MultiplexMediaConnectOutputDestinationSettings]
     class MultiplexOutputDestination < Struct.new(
+      nil,
       :media_connect_settings,
       keyword_init: true
     )
@@ -9759,6 +10133,7 @@ module Aws::MediaLive
     #   Multiplex Container Settings
     #   @return [Types::MultiplexContainerSettings]
     class MultiplexOutputSettings < Struct.new(
+      nil,
       :destination,
       :container_settings,
       keyword_init: true
@@ -9783,6 +10158,7 @@ module Aws::MediaLive
     #   The name of the multiplex program.
     #   @return [String]
     class MultiplexProgram < Struct.new(
+      nil,
       :channel_id,
       :multiplex_program_settings,
       :packet_identifiers_map,
@@ -9802,6 +10178,7 @@ module Aws::MediaLive
     #   The program name of the Multiplex program that the encoder is providing output to.
     #   @return [String]
     class MultiplexProgramChannelDestinationSettings < Struct.new(
+      nil,
       :multiplex_id,
       :program_name,
       keyword_init: true
@@ -9862,6 +10239,7 @@ module Aws::MediaLive
     #   Placeholder documentation for __integer
     #   @return [Integer]
     class MultiplexProgramPacketIdentifiersMap < Struct.new(
+      nil,
       :audio_pids,
       :dvb_sub_pids,
       :dvb_teletext_pid,
@@ -9892,6 +10270,7 @@ module Aws::MediaLive
     #   Identifies a specific pipeline in the multiplex.
     #   @return [String]
     class MultiplexProgramPipelineDetail < Struct.new(
+      nil,
       :active_channel_pipeline,
       :pipeline_id,
       keyword_init: true
@@ -9907,6 +10286,7 @@ module Aws::MediaLive
     #   Name of the service.
     #   @return [String]
     class MultiplexProgramServiceDescriptor < Struct.new(
+      nil,
       :provider_name,
       :service_name,
       keyword_init: true
@@ -9928,6 +10308,7 @@ module Aws::MediaLive
     #   Program video settings configuration.
     #   @return [Types::MultiplexVideoSettings]
     class MultiplexProgramSettings < Struct.new(
+      nil,
       :preferred_channel_pipeline,
       :program_number,
       :service_descriptor,
@@ -9945,6 +10326,7 @@ module Aws::MediaLive
     #   The name of the multiplex program.
     #   @return [String]
     class MultiplexProgramSummary < Struct.new(
+      nil,
       :channel_id,
       :program_name,
       keyword_init: true
@@ -9966,6 +10348,7 @@ module Aws::MediaLive
     #   Transport stream reserved bit rate.
     #   @return [Integer]
     class MultiplexSettings < Struct.new(
+      nil,
       :maximum_video_buffer_delay_milliseconds,
       :transport_stream_bitrate,
       :transport_stream_id,
@@ -9980,6 +10363,7 @@ module Aws::MediaLive
     #   Transport stream bit rate.
     #   @return [Integer]
     class MultiplexSettingsSummary < Struct.new(
+      nil,
       :transport_stream_bitrate,
       keyword_init: true
     )
@@ -9997,6 +10381,7 @@ module Aws::MediaLive
     #   The purpose of the priority is to use a combination of the\nmultiplex rate control algorithm and the QVBR capability of the\nencoder to prioritize the video quality of some channels in a\nmultiplex over others. Channels that have a higher priority will\nget higher video quality at the expense of the video quality of\nother channels in the multiplex with lower priority.
     #   @return [Integer]
     class MultiplexStatmuxVideoSettings < Struct.new(
+      nil,
       :maximum_bitrate,
       :minimum_bitrate,
       :priority,
@@ -10034,6 +10419,7 @@ module Aws::MediaLive
     #   A collection of key-value pairs.
     #   @return [Hash<String, String>]
     class MultiplexSummary < Struct.new(
+      nil,
       :arn,
       :availability_zones,
       :id,
@@ -10058,6 +10444,7 @@ module Aws::MediaLive
     #   When this field is defined, ConstantBitrate must be undefined.
     #   @return [Types::MultiplexStatmuxVideoSettings]
     class MultiplexVideoSettings < Struct.new(
+      nil,
       :constant_bitrate,
       :statmux_settings,
       keyword_init: true
@@ -10076,6 +10463,7 @@ module Aws::MediaLive
     #   Specifies multicast input settings when the uri is for a multicast event.
     #   @return [Types::MulticastInputSettings]
     class NetworkInputSettings < Struct.new(
+      nil,
       :hls_input_settings,
       :server_validation,
       :multicast_input_settings,
@@ -10095,6 +10483,7 @@ module Aws::MediaLive
     #   Enter the CBET Source ID (CSID) to use in the watermark
     #   @return [String]
     class NielsenCBET < Struct.new(
+      nil,
       :cbet_check_digit_string,
       :cbet_stepaside,
       :csid,
@@ -10111,6 +10500,7 @@ module Aws::MediaLive
     #   Enables Nielsen PCM to ID3 tagging
     #   @return [String]
     class NielsenConfiguration < Struct.new(
+      nil,
       :distributor_id,
       :nielsen_pcm_to_id3_tagging,
       keyword_init: true
@@ -10130,6 +10520,7 @@ module Aws::MediaLive
     #   the timestamps will be in Coordinated Universal Time (UTC)
     #   @return [String]
     class NielsenNaesIiNw < Struct.new(
+      nil,
       :check_digit_string,
       :sid,
       :timezone,
@@ -10151,6 +10542,7 @@ module Aws::MediaLive
     #   Complete these fields only if you want to insert watermarks of type Nielsen NAES II (N2) and Nielsen NAES VI (NW).
     #   @return [Types::NielsenNaesIiNw]
     class NielsenWatermarksSettings < Struct.new(
+      nil,
       :nielsen_cbet_settings,
       :nielsen_distribution_type,
       :nielsen_naes_ii_nw_settings,
@@ -10170,6 +10562,7 @@ module Aws::MediaLive
     #   The name of the physical interface on the hardware that will be running Elemental anywhere.
     #   @return [String]
     class NodeInterfaceMapping < Struct.new(
+      nil,
       :logical_interface_name,
       :network_interface_mode,
       :physical_interface_name,
@@ -10189,6 +10582,7 @@ module Aws::MediaLive
     #   Specify the physical name that corresponds to the logicalInterfaceName that you specified in this interface mapping. For example, Eth1 or ENO1234EXAMPLE.
     #   @return [String]
     class NodeInterfaceMappingCreateRequest < Struct.new(
+      nil,
       :logical_interface_name,
       :network_interface_mode,
       :physical_interface_name,
@@ -10202,6 +10596,7 @@ module Aws::MediaLive
     #   Placeholder documentation for __string
     #   @return [String]
     class NotFoundException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -10243,6 +10638,7 @@ module Aws::MediaLive
     #   Recurring usage charge for each reserved resource, e.g. '157.0'
     #   @return [Float]
     class Offering < Struct.new(
+      nil,
       :arn,
       :currency_code,
       :duration,
@@ -10276,6 +10672,7 @@ module Aws::MediaLive
     #   The name of the VideoDescription used as the source for this output.
     #   @return [String]
     class Output < Struct.new(
+      nil,
       :audio_description_names,
       :caption_description_names,
       :output_name,
@@ -10306,6 +10703,7 @@ module Aws::MediaLive
     #   Optional assignment of an output to a logical interface on the Node. Only applies to on premises channels.
     #   @return [Array<String>]
     class OutputDestination < Struct.new(
+      nil,
       :id,
       :media_package_settings,
       :multiplex_settings,
@@ -10331,6 +10729,7 @@ module Aws::MediaLive
     #   username for destination
     #   @return [String]
     class OutputDestinationSettings < Struct.new(
+      nil,
       :password_param,
       :stream_name,
       :url,
@@ -10351,6 +10750,7 @@ module Aws::MediaLive
     #   Placeholder documentation for __listOfOutput
     #   @return [Array<Types::Output>]
     class OutputGroup < Struct.new(
+      nil,
       :name,
       :output_group_settings,
       :outputs,
@@ -10391,6 +10791,7 @@ module Aws::MediaLive
     #   Srt Group Settings
     #   @return [Types::SrtGroupSettings]
     class OutputGroupSettings < Struct.new(
+      nil,
       :archive_group_settings,
       :frame_capture_group_settings,
       :hls_group_settings,
@@ -10411,6 +10812,7 @@ module Aws::MediaLive
     #   Placeholder documentation for __string
     #   @return [String]
     class OutputLocationRef < Struct.new(
+      nil,
       :destination_ref_id,
       keyword_init: true
     )
@@ -10425,6 +10827,7 @@ module Aws::MediaLive
     #   Pipeline Locking Settings
     #   @return [Types::PipelineLockingSettings]
     class OutputLockingSettings < Struct.new(
+      nil,
       :epoch_locking_settings,
       :pipeline_locking_settings,
       keyword_init: true
@@ -10464,6 +10867,7 @@ module Aws::MediaLive
     #   Srt Output Settings
     #   @return [Types::SrtOutputSettings]
     class OutputSettings < Struct.new(
+      nil,
       :archive_output_settings,
       :frame_capture_output_settings,
       :hls_output_settings,
@@ -10481,6 +10885,7 @@ module Aws::MediaLive
 
     # Pass Through Settings
     class PassThroughSettings < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -10491,6 +10896,7 @@ module Aws::MediaLive
     #   Placeholder documentation for __listOfPipelinePauseStateSettings
     #   @return [Array<Types::PipelinePauseStateSettings>]
     class PauseStateScheduleActionSettings < Struct.new(
+      nil,
       :pipelines,
       keyword_init: true
     )
@@ -10517,6 +10923,7 @@ module Aws::MediaLive
     #   Current engine version of the encoder for this pipeline.
     #   @return [Types::ChannelEngineVersionResponse]
     class PipelineDetail < Struct.new(
+      nil,
       :active_input_attachment_name,
       :active_input_switch_action_name,
       :active_motion_graphics_action_name,
@@ -10530,6 +10937,7 @@ module Aws::MediaLive
 
     # Pipeline Locking Settings
     class PipelineLockingSettings < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -10540,6 +10948,7 @@ module Aws::MediaLive
     #   Pipeline ID to pause ("PIPELINE_0" or "PIPELINE_1").
     #   @return [String]
     class PipelinePauseStateSettings < Struct.new(
+      nil,
       :pipeline_id,
       keyword_init: true
     )
@@ -10569,6 +10978,7 @@ module Aws::MediaLive
     #   A collection of key-value pairs
     #   @return [Hash<String, String>]
     class PurchaseOfferingRequest < Struct.new(
+      nil,
       :count,
       :name,
       :offering_id,
@@ -10586,6 +10996,7 @@ module Aws::MediaLive
     #   Reserved resources available to use
     #   @return [Types::Reservation]
     class PurchaseOfferingResponse < Struct.new(
+      nil,
       :reservation,
       keyword_init: true
     )
@@ -10594,6 +11005,7 @@ module Aws::MediaLive
 
     # Raw Settings
     class RawSettings < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -10607,6 +11019,7 @@ module Aws::MediaLive
     #   The unique ID of the input device to reboot. For example, hd-123456789abcdef.
     #   @return [String]
     class RebootInputDeviceRequest < Struct.new(
+      nil,
       :force,
       :input_device_id,
       keyword_init: true
@@ -10616,6 +11029,7 @@ module Aws::MediaLive
 
     # Placeholder documentation for RebootInputDeviceResponse
     class RebootInputDeviceResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -10623,6 +11037,7 @@ module Aws::MediaLive
 
     # Rec601 Settings
     class Rec601Settings < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -10630,6 +11045,7 @@ module Aws::MediaLive
 
     # Rec709 Settings
     class Rec709Settings < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -10640,6 +11056,7 @@ module Aws::MediaLive
     #   The unique ID of the input device to reject. For example, hd-123456789abcdef.
     #   @return [String]
     class RejectInputDeviceTransferRequest < Struct.new(
+      nil,
       :input_device_id,
       keyword_init: true
     )
@@ -10648,6 +11065,7 @@ module Aws::MediaLive
 
     # Placeholder documentation for RejectInputDeviceTransferResponse
     class RejectInputDeviceTransferResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -10665,6 +11083,7 @@ module Aws::MediaLive
     #   Valid values: 1, 2, 4, 6, 8
     #   @return [Integer]
     class RemixSettings < Struct.new(
+      nil,
       :channel_mappings,
       :channels_in,
       :channels_out,
@@ -10681,6 +11100,7 @@ module Aws::MediaLive
     #   Count for the reservation renewal
     #   @return [Integer]
     class RenewalSettings < Struct.new(
+      nil,
       :automatic_renewal,
       :renewal_count,
       keyword_init: true
@@ -10747,6 +11167,7 @@ module Aws::MediaLive
     #   Recurring usage charge for each reserved resource, e.g. '157.0'
     #   @return [Float]
     class Reservation < Struct.new(
+      nil,
       :arn,
       :count,
       :currency_code,
@@ -10797,6 +11218,7 @@ module Aws::MediaLive
     #   Video quality, e.g. 'STANDARD' (Outputs only)
     #   @return [String]
     class ReservationResourceSpecification < Struct.new(
+      nil,
       :channel_class,
       :codec,
       :maximum_bitrate,
@@ -10818,6 +11240,7 @@ module Aws::MediaLive
     #   An array of pipelines to restart in this channel. Format PIPELINE_0 or PIPELINE_1.
     #   @return [Array<String>]
     class RestartChannelPipelinesRequest < Struct.new(
+      nil,
       :channel_id,
       :pipeline_ids,
       keyword_init: true
@@ -10892,6 +11315,7 @@ module Aws::MediaLive
     #   Requested engine version for this channel.
     #   @return [Types::ChannelEngineVersionResponse]
     class RestartChannelPipelinesResponse < Struct.new(
+      nil,
       :arn,
       :cdi_input_specification,
       :channel_class,
@@ -10926,6 +11350,7 @@ module Aws::MediaLive
     #   The IP address of the Gateway for this route, if applicable.
     #   @return [String]
     class Route < Struct.new(
+      nil,
       :cidr,
       :gateway,
       keyword_init: true
@@ -10941,6 +11366,7 @@ module Aws::MediaLive
     #   The IP address of the Gateway for this route, if applicable.
     #   @return [String]
     class RouteCreateRequest < Struct.new(
+      nil,
       :cidr,
       :gateway,
       keyword_init: true
@@ -10956,6 +11382,7 @@ module Aws::MediaLive
     #   The IP address of the Gateway for this route, if applicable.
     #   @return [String]
     class RouteUpdateRequest < Struct.new(
+      nil,
       :cidr,
       :gateway,
       keyword_init: true
@@ -10965,6 +11392,7 @@ module Aws::MediaLive
 
     # Rtmp Caption Info Destination Settings
     class RtmpCaptionInfoDestinationSettings < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -10999,6 +11427,7 @@ module Aws::MediaLive
     #   Applies only when the rate control mode (in the codec settings) is CBR (constant bit rate). Controls whether the RTMP output stream is padded (with FILL NAL units) in order to achieve a constant bit rate that is truly constant. When there is no padding, the bandwidth varies (up to the bitrate value in the codec settings). We recommend that you choose Auto.
     #   @return [String]
     class RtmpGroupSettings < Struct.new(
+      nil,
       :ad_markers,
       :authentication_scheme,
       :cache_full_behavior,
@@ -11026,6 +11455,7 @@ module Aws::MediaLive
     #   Number of retry attempts.
     #   @return [Integer]
     class RtmpOutputSettings < Struct.new(
+      nil,
       :certificate_mode,
       :connection_retry_interval,
       :destination,
@@ -11046,6 +11476,7 @@ module Aws::MediaLive
     #   The time for the action to start in the channel.
     #   @return [Types::ScheduleActionStartSettings]
     class ScheduleAction < Struct.new(
+      nil,
       :action_name,
       :schedule_action_settings,
       :schedule_action_start_settings,
@@ -11107,6 +11538,7 @@ module Aws::MediaLive
     #   Action to insert ID3 metadata once, in applicable output groups
     #   @return [Types::TimedMetadataScheduleActionSettings]
     class ScheduleActionSettings < Struct.new(
+      nil,
       :hls_id3_segment_tagging_settings,
       :hls_timed_metadata_settings,
       :input_prepare_settings,
@@ -11140,6 +11572,7 @@ module Aws::MediaLive
     #   Option for specifying an action that should be applied immediately.
     #   @return [Types::ImmediateModeScheduleActionStartSettings]
     class ScheduleActionStartSettings < Struct.new(
+      nil,
       :fixed_mode_schedule_action_start_settings,
       :follow_mode_schedule_action_start_settings,
       :immediate_mode_schedule_action_start_settings,
@@ -11150,6 +11583,7 @@ module Aws::MediaLive
 
     # Scte20 Plus Embedded Destination Settings
     class Scte20PlusEmbeddedDestinationSettings < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -11163,6 +11597,7 @@ module Aws::MediaLive
     #   Specifies the 608/708 channel number within the video track from which to extract captions. Unused for passthrough.
     #   @return [Integer]
     class Scte20SourceSettings < Struct.new(
+      nil,
       :convert608_to708,
       :source608_channel_number,
       keyword_init: true
@@ -11172,6 +11607,7 @@ module Aws::MediaLive
 
     # Scte27 Destination Settings
     class Scte27DestinationSettings < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -11190,6 +11626,7 @@ module Aws::MediaLive
     #     - Omit PID and omit Language: Valid only if source is DVB-Sub that is being passed through; all languages will be passed through.
     #   @return [Integer]
     class Scte27SourceSettings < Struct.new(
+      nil,
       :ocr_language,
       :pid,
       keyword_init: true
@@ -11211,6 +11648,7 @@ module Aws::MediaLive
     #   Corresponds to SCTE-35 web_delivery_allowed_flag parameter.
     #   @return [String]
     class Scte35DeliveryRestrictions < Struct.new(
+      nil,
       :archive_allowed_flag,
       :device_restrictions,
       :no_regional_blackout_flag,
@@ -11225,6 +11663,7 @@ module Aws::MediaLive
     #   SCTE-35 Descriptor Settings.
     #   @return [Types::Scte35DescriptorSettings]
     class Scte35Descriptor < Struct.new(
+      nil,
       :scte35_descriptor_settings,
       keyword_init: true
     )
@@ -11236,6 +11675,7 @@ module Aws::MediaLive
     #   SCTE-35 Segmentation Descriptor.
     #   @return [Types::Scte35SegmentationDescriptor]
     class Scte35DescriptorSettings < Struct.new(
+      nil,
       :segmentation_descriptor_scte35_descriptor_settings,
       keyword_init: true
     )
@@ -11250,6 +11690,7 @@ module Aws::MediaLive
     #   Whether the SCTE-35 input should be the active input or a fixed input.
     #   @return [String]
     class Scte35InputScheduleActionSettings < Struct.new(
+      nil,
       :input_attachment_name_reference,
       :mode,
       keyword_init: true
@@ -11262,6 +11703,7 @@ module Aws::MediaLive
     #   The splice_event_id for the SCTE-35 splice_insert, as defined in SCTE-35.
     #   @return [Integer]
     class Scte35ReturnToNetworkScheduleActionSettings < Struct.new(
+      nil,
       :splice_event_id,
       keyword_init: true
     )
@@ -11303,6 +11745,7 @@ module Aws::MediaLive
     #   Corresponds to SCTE-35 sub_segments_expected. A value that is valid for the specified segmentation_type_id.
     #   @return [Integer]
     class Scte35SegmentationDescriptor < Struct.new(
+      nil,
       :delivery_restrictions,
       :segment_num,
       :segmentation_cancel_indicator,
@@ -11330,6 +11773,7 @@ module Aws::MediaLive
     #   When set to ignore, Segment Descriptors with webDeliveryAllowedFlag set to 0 will no longer trigger blackouts or Ad Avail slates
     #   @return [String]
     class Scte35SpliceInsert < Struct.new(
+      nil,
       :ad_avail_offset,
       :no_regional_blackout_flag,
       :web_delivery_allowed_flag,
@@ -11346,6 +11790,7 @@ module Aws::MediaLive
     #   The splice_event_id for the SCTE-35 splice_insert, as defined in SCTE-35.
     #   @return [Integer]
     class Scte35SpliceInsertScheduleActionSettings < Struct.new(
+      nil,
       :duration,
       :splice_event_id,
       keyword_init: true
@@ -11364,6 +11809,7 @@ module Aws::MediaLive
     #   When set to ignore, Segment Descriptors with webDeliveryAllowedFlag set to 0 will no longer trigger blackouts or Ad Avail slates
     #   @return [String]
     class Scte35TimeSignalApos < Struct.new(
+      nil,
       :ad_avail_offset,
       :no_regional_blackout_flag,
       :web_delivery_allowed_flag,
@@ -11377,6 +11823,7 @@ module Aws::MediaLive
     #   The list of SCTE-35 descriptors accompanying the SCTE-35 time_signal.
     #   @return [Array<Types::Scte35Descriptor>]
     class Scte35TimeSignalScheduleActionSettings < Struct.new(
+      nil,
       :scte35_descriptors,
       keyword_init: true
     )
@@ -11406,6 +11853,7 @@ module Aws::MediaLive
     #   Used in SdiSource, CreateSdiSourceRequest, UpdateSdiSourceRequest.
     #   @return [String]
     class SdiSource < Struct.new(
+      nil,
       :arn,
       :id,
       :inputs,
@@ -11429,6 +11877,7 @@ module Aws::MediaLive
     #   The ID of the SdiSource to associate with this port on this card. You can use the ListSdiSources operation to discover all the IDs.
     #   @return [String]
     class SdiSourceMapping < Struct.new(
+      nil,
       :card_number,
       :channel_number,
       :sdi_source,
@@ -11448,6 +11897,7 @@ module Aws::MediaLive
     #   The ID of a SDI source streaming on the given SDI capture card port.
     #   @return [String]
     class SdiSourceMappingUpdateRequest < Struct.new(
+      nil,
       :card_number,
       :channel_number,
       :sdi_source,
@@ -11479,6 +11929,7 @@ module Aws::MediaLive
     #   Used in SdiSource, CreateSdiSourceRequest, UpdateSdiSourceRequest.
     #   @return [String]
     class SdiSourceSummary < Struct.new(
+      nil,
       :arn,
       :id,
       :inputs,
@@ -11520,6 +11971,7 @@ module Aws::MediaLive
     #   Represents the tags associated with a resource.
     #   @return [Hash<String, String>]
     class SignalMapSummary < Struct.new(
+      nil,
       :arn,
       :created_at,
       :description,
@@ -11539,6 +11991,7 @@ module Aws::MediaLive
     #   The single Smpte2110ReceiverGroupSdpSettings that identify the video, audio, and ancillary streams for this receiver group.
     #   @return [Types::Smpte2110ReceiverGroupSdpSettings]
     class Smpte2110ReceiverGroup < Struct.new(
+      nil,
       :sdp_settings,
       keyword_init: true
     )
@@ -11557,6 +12010,7 @@ module Aws::MediaLive
     #   The InputSdpLocation that specifies the SDP file and index for the single video SMPTE 2110 stream for this 2110 input.
     #   @return [Types::InputSdpLocation]
     class Smpte2110ReceiverGroupSdpSettings < Struct.new(
+      nil,
       :ancillary_sdps,
       :audio_sdps,
       :video_sdp,
@@ -11570,6 +12024,7 @@ module Aws::MediaLive
     #   Placeholder documentation for __listOfSmpte2110ReceiverGroup
     #   @return [Array<Types::Smpte2110ReceiverGroup>]
     class Smpte2110ReceiverGroupSettings < Struct.new(
+      nil,
       :smpte2110_receiver_groups,
       keyword_init: true
     )
@@ -11578,6 +12033,7 @@ module Aws::MediaLive
 
     # Smpte Tt Destination Settings
     class SmpteTtDestinationSettings < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -11591,6 +12047,7 @@ module Aws::MediaLive
     #   The ARN for the secret in Secrets Manager. Someone in your organization must create a secret and provide you with its ARN. The secret holds the passphrase that MediaLive uses to decrypt the source content.
     #   @return [String]
     class SrtCallerDecryption < Struct.new(
+      nil,
       :algorithm,
       :passphrase_secret_arn,
       keyword_init: true
@@ -11606,6 +12063,7 @@ module Aws::MediaLive
     #   The ARN for the secret in Secrets Manager. Someone in your organization must create a secret and provide you with its ARN. This secret holds the passphrase that MediaLive will use to decrypt the source content.
     #   @return [String]
     class SrtCallerDecryptionRequest < Struct.new(
+      nil,
       :algorithm,
       :passphrase_secret_arn,
       keyword_init: true
@@ -11630,6 +12088,7 @@ module Aws::MediaLive
     #   The stream ID, if the upstream system uses this identifier.
     #   @return [String]
     class SrtCallerSource < Struct.new(
+      nil,
       :decryption,
       :minimum_latency,
       :srt_listener_address,
@@ -11657,6 +12116,7 @@ module Aws::MediaLive
     #   This value is required if the upstream system uses this identifier because without it, the SRT handshake between MediaLive (the caller) and the upstream system (the listener) might fail.
     #   @return [String]
     class SrtCallerSourceRequest < Struct.new(
+      nil,
       :decryption,
       :minimum_latency,
       :srt_listener_address,
@@ -11672,6 +12132,7 @@ module Aws::MediaLive
     #   Specifies behavior of last resort when input video is lost, and no more backup inputs are available. When dropTs is selected the entire transport stream will stop being emitted.  When dropProgram is selected the program can be dropped from the transport stream (and replaced with null packets to meet the TS bitrate requirement).  Or, when emitProgram is chosen the transport stream will continue to be produced normally with repeat frames, black frames, or slate frames substituted for the absent input video.
     #   @return [String]
     class SrtGroupSettings < Struct.new(
+      nil,
       :input_loss_action,
       keyword_init: true
     )
@@ -11689,6 +12150,7 @@ module Aws::MediaLive
     #   A URL specifying a destination
     #   @return [String]
     class SrtOutputDestinationSettings < Struct.new(
+      nil,
       :encryption_passphrase_secret_arn,
       :stream_id,
       :url,
@@ -11714,6 +12176,7 @@ module Aws::MediaLive
     #   The latency value, in milliseconds, that is proposed during the SRT connection handshake. SRT will choose the maximum of the values proposed by the sender and receiver. On the sender side, latency is the amount of time a packet is held to give it a chance to be delivered successfully. On the receiver side, latency is the amount of time the packet is held before delivering to the application, aiding in packet recovery and matching as closely as possible the packet timing of the sender. Range: 40-16000 milliseconds.
     #   @return [Integer]
     class SrtOutputSettings < Struct.new(
+      nil,
       :buffer_msec,
       :container_settings,
       :destination,
@@ -11729,6 +12192,7 @@ module Aws::MediaLive
     #   Placeholder documentation for __listOfSrtCallerSource
     #   @return [Array<Types::SrtCallerSource>]
     class SrtSettings < Struct.new(
+      nil,
       :srt_caller_sources,
       keyword_init: true
     )
@@ -11740,6 +12204,7 @@ module Aws::MediaLive
     #   Placeholder documentation for __listOfSrtCallerSourceRequest
     #   @return [Array<Types::SrtCallerSourceRequest>]
     class SrtSettingsRequest < Struct.new(
+      nil,
       :srt_caller_sources,
       keyword_init: true
     )
@@ -11754,6 +12219,7 @@ module Aws::MediaLive
     #   Settings information for the .m3u8 container
     #   @return [Types::M3u8Settings]
     class StandardHlsSettings < Struct.new(
+      nil,
       :audio_rendition_sets,
       :m3u8_settings,
       keyword_init: true
@@ -11766,6 +12232,7 @@ module Aws::MediaLive
     #   A request to start a channel
     #   @return [String]
     class StartChannelRequest < Struct.new(
+      nil,
       :channel_id,
       keyword_init: true
     )
@@ -11836,6 +12303,7 @@ module Aws::MediaLive
     #   Requested engine version for this channel.
     #   @return [Types::ChannelEngineVersionResponse]
     class StartChannelResponse < Struct.new(
+      nil,
       :arn,
       :cdi_input_specification,
       :channel_class,
@@ -11866,6 +12334,7 @@ module Aws::MediaLive
     #   A signal map's identifier. Can be either be its id or current name.
     #   @return [String]
     class StartDeleteMonitorDeploymentRequest < Struct.new(
+      nil,
       :identifier,
       keyword_init: true
     )
@@ -11928,6 +12397,7 @@ module Aws::MediaLive
     #   Represents the tags associated with a resource.
     #   @return [Hash<String, String>]
     class StartDeleteMonitorDeploymentResponse < Struct.new(
+      nil,
       :arn,
       :cloud_watch_alarm_template_group_ids,
       :created_at,
@@ -11956,6 +12426,7 @@ module Aws::MediaLive
     #   The unique ID of the input device to start a maintenance window for. For example, hd-123456789abcdef.
     #   @return [String]
     class StartInputDeviceMaintenanceWindowRequest < Struct.new(
+      nil,
       :input_device_id,
       keyword_init: true
     )
@@ -11964,6 +12435,7 @@ module Aws::MediaLive
 
     # Placeholder documentation for StartInputDeviceMaintenanceWindowResponse
     class StartInputDeviceMaintenanceWindowResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -11974,6 +12446,7 @@ module Aws::MediaLive
     #   The unique ID of the input device to start. For example, hd-123456789abcdef.
     #   @return [String]
     class StartInputDeviceRequest < Struct.new(
+      nil,
       :input_device_id,
       keyword_init: true
     )
@@ -11982,6 +12455,7 @@ module Aws::MediaLive
 
     # Placeholder documentation for StartInputDeviceResponse
     class StartInputDeviceResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -11995,6 +12469,7 @@ module Aws::MediaLive
     #   A signal map's identifier. Can be either be its id or current name.
     #   @return [String]
     class StartMonitorDeploymentRequest < Struct.new(
+      nil,
       :dry_run,
       :identifier,
       keyword_init: true
@@ -12058,6 +12533,7 @@ module Aws::MediaLive
     #   Represents the tags associated with a resource.
     #   @return [Hash<String, String>]
     class StartMonitorDeploymentResponse < Struct.new(
+      nil,
       :arn,
       :cloud_watch_alarm_template_group_ids,
       :created_at,
@@ -12086,6 +12562,7 @@ module Aws::MediaLive
     #   The ID of the multiplex.
     #   @return [String]
     class StartMultiplexRequest < Struct.new(
+      nil,
       :multiplex_id,
       keyword_init: true
     )
@@ -12124,6 +12601,7 @@ module Aws::MediaLive
     #   A collection of key-value pairs.
     #   @return [Hash<String, String>]
     class StartMultiplexResponse < Struct.new(
+      nil,
       :arn,
       :availability_zones,
       :destinations,
@@ -12144,6 +12622,7 @@ module Aws::MediaLive
     #   The timecode for the frame where you want to start the clip. Optional; if not specified, the clip starts at first frame in the file. Enter the timecode as HH:MM:SS:FF or HH:MM:SS;FF.
     #   @return [String]
     class StartTimecode < Struct.new(
+      nil,
       :timecode,
       keyword_init: true
     )
@@ -12173,6 +12652,7 @@ module Aws::MediaLive
     #   A resource's name. Names must be unique within the scope of a resource type in a specific region.
     #   @return [String]
     class StartUpdateSignalMapRequest < Struct.new(
+      nil,
       :cloud_watch_alarm_template_group_identifiers,
       :description,
       :discovery_entry_point_arn,
@@ -12241,6 +12721,7 @@ module Aws::MediaLive
     #   Represents the tags associated with a resource.
     #   @return [Hash<String, String>]
     class StartUpdateSignalMapResponse < Struct.new(
+      nil,
       :arn,
       :cloud_watch_alarm_template_group_ids,
       :created_at,
@@ -12296,6 +12777,7 @@ module Aws::MediaLive
     #   The width of the image when inserted into the video, in pixels. The overlay will be scaled up or down to the specified width. Leave blank to use the native width of the overlay.
     #   @return [Integer]
     class StaticImageActivateScheduleActionSettings < Struct.new(
+      nil,
       :duration,
       :fade_in,
       :fade_out,
@@ -12319,6 +12801,7 @@ module Aws::MediaLive
     #   The image overlay layer to deactivate, 0 to 7. Default is 0.
     #   @return [Integer]
     class StaticImageDeactivateScheduleActionSettings < Struct.new(
+      nil,
       :fade_out,
       :layer,
       keyword_init: true
@@ -12361,6 +12844,7 @@ module Aws::MediaLive
     #   The width of the image when inserted into the video, in pixels. The overlay will be scaled up or down to the specified width. Leave blank to use the native width of the overlay.
     #   @return [Integer]
     class StaticImageOutputActivateScheduleActionSettings < Struct.new(
+      nil,
       :duration,
       :fade_in,
       :fade_out,
@@ -12388,6 +12872,7 @@ module Aws::MediaLive
     #   The name(s) of the output(s) the deactivation should apply to.
     #   @return [Array<String>]
     class StaticImageOutputDeactivateScheduleActionSettings < Struct.new(
+      nil,
       :fade_out,
       :layer,
       :output_names,
@@ -12404,6 +12889,7 @@ module Aws::MediaLive
     #   Static key value as a 32 character hexadecimal string.
     #   @return [String]
     class StaticKeySettings < Struct.new(
+      nil,
       :key_provider_server,
       :static_key_value,
       keyword_init: true
@@ -12416,6 +12902,7 @@ module Aws::MediaLive
     #   A request to stop a running channel
     #   @return [String]
     class StopChannelRequest < Struct.new(
+      nil,
       :channel_id,
       keyword_init: true
     )
@@ -12486,6 +12973,7 @@ module Aws::MediaLive
     #   Requested engine version for this channel.
     #   @return [Types::ChannelEngineVersionResponse]
     class StopChannelResponse < Struct.new(
+      nil,
       :arn,
       :cdi_input_specification,
       :channel_class,
@@ -12516,6 +13004,7 @@ module Aws::MediaLive
     #   The unique ID of the input device to stop. For example, hd-123456789abcdef.
     #   @return [String]
     class StopInputDeviceRequest < Struct.new(
+      nil,
       :input_device_id,
       keyword_init: true
     )
@@ -12524,6 +13013,7 @@ module Aws::MediaLive
 
     # Placeholder documentation for StopInputDeviceResponse
     class StopInputDeviceResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -12534,6 +13024,7 @@ module Aws::MediaLive
     #   The ID of the multiplex.
     #   @return [String]
     class StopMultiplexRequest < Struct.new(
+      nil,
       :multiplex_id,
       keyword_init: true
     )
@@ -12572,6 +13063,7 @@ module Aws::MediaLive
     #   A collection of key-value pairs.
     #   @return [Hash<String, String>]
     class StopMultiplexResponse < Struct.new(
+      nil,
       :arn,
       :availability_zones,
       :destinations,
@@ -12595,6 +13087,7 @@ module Aws::MediaLive
     #   The timecode for the frame where you want to stop the clip. Optional; if not specified, the clip continues to the end of the file. Enter the timecode as HH:MM:SS:FF or HH:MM:SS;FF.
     #   @return [String]
     class StopTimecode < Struct.new(
+      nil,
       :last_frame_clipping_behavior,
       :timecode,
       keyword_init: true
@@ -12610,6 +13103,7 @@ module Aws::MediaLive
     #   A signal map's monitor deployment status.
     #   @return [String]
     class SuccessfulMonitorDeployment < Struct.new(
+      nil,
       :details_uri,
       :status,
       keyword_init: true
@@ -12619,6 +13113,7 @@ module Aws::MediaLive
 
     # Teletext Destination Settings
     class TeletextDestinationSettings < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -12632,6 +13127,7 @@ module Aws::MediaLive
     #   Specifies the teletext page number within the data stream from which to extract captions. Range of 0x100 (256) to 0x8FF (2303). Unused for passthrough. Should be specified as a hexadecimal string with no "0x" prefix.
     #   @return [String]
     class TeletextSourceSettings < Struct.new(
+      nil,
       :output_rectangle,
       :page_number,
       keyword_init: true
@@ -12649,6 +13145,7 @@ module Aws::MediaLive
     #   Choose a filter strength. We recommend a strength of 1 or 2. A higher strength might take out good information, resulting in an image that is overly soft.
     #   @return [String]
     class TemporalFilterSettings < Struct.new(
+      nil,
       :post_filter_sharpening,
       :strength,
       keyword_init: true
@@ -12670,6 +13167,7 @@ module Aws::MediaLive
     #   Time stamp for the latest thumbnail.
     #   @return [Time]
     class Thumbnail < Struct.new(
+      nil,
       :body,
       :content_type,
       :thumbnail_type,
@@ -12684,6 +13182,7 @@ module Aws::MediaLive
     #   Enables the thumbnail feature. The feature generates thumbnails of the incoming video in each pipeline in the channel. AUTO turns the feature on, DISABLE turns the feature off.
     #   @return [String]
     class ThumbnailConfiguration < Struct.new(
+      nil,
       :state,
       keyword_init: true
     )
@@ -12698,6 +13197,7 @@ module Aws::MediaLive
     #   thumbnails of a single pipeline
     #   @return [Array<Types::Thumbnail>]
     class ThumbnailDetail < Struct.new(
+      nil,
       :pipeline_id,
       :thumbnails,
       keyword_init: true
@@ -12716,6 +13216,7 @@ module Aws::MediaLive
     #   Create a timecode burn-in prefix (optional)
     #   @return [String]
     class TimecodeBurninSettings < Struct.new(
+      nil,
       :font_size,
       :position,
       :prefix,
@@ -12735,6 +13236,7 @@ module Aws::MediaLive
     #   Threshold in frames beyond which output timecode is resynchronized to the input timecode. Discrepancies below this threshold are permitted to avoid unnecessary discontinuities in the output timecode. No timecode sync when this is not specified.
     #   @return [Integer]
     class TimecodeConfig < Struct.new(
+      nil,
       :source,
       :sync_threshold,
       keyword_init: true
@@ -12747,6 +13249,7 @@ module Aws::MediaLive
     #   Enter a base64 string that contains one or more fully formed ID3 tags.See the ID3 specification: http://id3.org/id3v2.4.0-structure
     #   @return [String]
     class TimedMetadataScheduleActionSettings < Struct.new(
+      nil,
       :id3,
       keyword_init: true
     )
@@ -12758,6 +13261,7 @@ module Aws::MediaLive
     #   Placeholder documentation for __string
     #   @return [String]
     class TooManyRequestsException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -12778,6 +13282,7 @@ module Aws::MediaLive
     #   An optional message for the recipient. Maximum 280 characters.
     #   @return [String]
     class TransferInputDeviceRequest < Struct.new(
+      nil,
       :input_device_id,
       :target_customer_id,
       :target_region,
@@ -12789,6 +13294,7 @@ module Aws::MediaLive
 
     # Placeholder documentation for TransferInputDeviceResponse
     class TransferInputDeviceResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -12808,6 +13314,7 @@ module Aws::MediaLive
     #   The type (direction) of the input device transfer.
     #   @return [String]
     class TransferringInputDeviceSummary < Struct.new(
+      nil,
       :id,
       :message,
       :target_customer_id,
@@ -12822,6 +13329,7 @@ module Aws::MediaLive
     #   This field is not currently supported and will not affect the output styling. Leave the default value.
     #   @return [String]
     class TtmlDestinationSettings < Struct.new(
+      nil,
       :style_control,
       keyword_init: true
     )
@@ -12833,6 +13341,7 @@ module Aws::MediaLive
     #   M2ts Settings
     #   @return [Types::M2tsSettings]
     class UdpContainerSettings < Struct.new(
+      nil,
       :m2ts_settings,
       keyword_init: true
     )
@@ -12850,6 +13359,7 @@ module Aws::MediaLive
     #   Timed Metadata interval in seconds.
     #   @return [Integer]
     class UdpGroupSettings < Struct.new(
+      nil,
       :input_loss_action,
       :timed_metadata_id3_frame,
       :timed_metadata_id3_period,
@@ -12872,6 +13382,7 @@ module Aws::MediaLive
     #   Settings for enabling and adjusting Forward Error Correction on UDP outputs.
     #   @return [Types::FecOutputSettings]
     class UdpOutputSettings < Struct.new(
+      nil,
       :buffer_msec,
       :container_settings,
       :destination,
@@ -12889,6 +13400,7 @@ module Aws::MediaLive
     #   A collection of validation error responses.
     #   @return [Array<Types::ValidationError>]
     class UnprocessableEntityException < Struct.new(
+      nil,
       :message,
       :validation_errors,
       keyword_init: true
@@ -12901,6 +13413,7 @@ module Aws::MediaLive
     #   Placeholder documentation for AccountConfiguration
     #   @return [Types::AccountConfiguration]
     class UpdateAccountConfigurationRequest < Struct.new(
+      nil,
       :account_configuration,
       keyword_init: true
     )
@@ -12912,6 +13425,7 @@ module Aws::MediaLive
     #   Placeholder documentation for AccountConfiguration
     #   @return [Types::AccountConfiguration]
     class UpdateAccountConfigurationResponse < Struct.new(
+      nil,
       :account_configuration,
       keyword_init: true
     )
@@ -12929,6 +13443,7 @@ module Aws::MediaLive
     #   A list of output destinations for this channel.
     #   @return [Array<Types::OutputDestination>]
     class UpdateChannelClassRequest < Struct.new(
+      nil,
       :channel_class,
       :channel_id,
       :destinations,
@@ -12942,6 +13457,7 @@ module Aws::MediaLive
     #   Placeholder documentation for Channel
     #   @return [Types::Channel]
     class UpdateChannelClassResponse < Struct.new(
+      nil,
       :channel,
       keyword_init: true
     )
@@ -12962,6 +13478,7 @@ module Aws::MediaLive
     #   Include this parameter only if you want to change the list of Nodes that are associated with the ChannelPlacementGroup.
     #   @return [Array<String>]
     class UpdateChannelPlacementGroupRequest < Struct.new(
+      nil,
       :channel_placement_group_id,
       :cluster_id,
       :name,
@@ -12994,6 +13511,7 @@ module Aws::MediaLive
     #   The current state of the ChannelPlacementGroup.
     #   @return [String]
     class UpdateChannelPlacementGroupResponse < Struct.new(
+      nil,
       :arn,
       :channels,
       :cluster_id,
@@ -13047,6 +13565,7 @@ module Aws::MediaLive
     #   The Elemental Anywhere settings for this channel.
     #   @return [Types::AnywhereSettings]
     class UpdateChannelRequest < Struct.new(
+      nil,
       :cdi_input_specification,
       :channel_id,
       :destinations,
@@ -13070,6 +13589,7 @@ module Aws::MediaLive
     #   Placeholder documentation for Channel
     #   @return [Types::Channel]
     class UpdateChannelResponse < Struct.new(
+      nil,
       :channel,
       keyword_init: true
     )
@@ -13084,6 +13604,7 @@ module Aws::MediaLive
     #   A cloudwatch alarm template group's identifier. Can be either be its id or current name.
     #   @return [String]
     class UpdateCloudWatchAlarmTemplateGroupRequest < Struct.new(
+      nil,
       :description,
       :identifier,
       keyword_init: true
@@ -13114,6 +13635,7 @@ module Aws::MediaLive
     #   Represents the tags associated with a resource.
     #   @return [Hash<String, String>]
     class UpdateCloudWatchAlarmTemplateGroupResponse < Struct.new(
+      nil,
       :arn,
       :created_at,
       :description,
@@ -13167,6 +13689,7 @@ module Aws::MediaLive
     #   Specifies how missing data points are treated when evaluating the alarm's condition.
     #   @return [String]
     class UpdateCloudWatchAlarmTemplateRequest < Struct.new(
+      nil,
       :comparison_operator,
       :datapoints_to_alarm,
       :description,
@@ -13238,6 +13761,7 @@ module Aws::MediaLive
     #   Specifies how missing data points are treated when evaluating the alarm's condition.
     #   @return [String]
     class UpdateCloudWatchAlarmTemplateResponse < Struct.new(
+      nil,
       :arn,
       :comparison_operator,
       :created_at,
@@ -13271,6 +13795,7 @@ module Aws::MediaLive
     #   Include this property only if you want to change the current connections between the Nodes in the Cluster and the Networks the Cluster is associated with.
     #   @return [Types::ClusterNetworkSettingsUpdateRequest]
     class UpdateClusterRequest < Struct.new(
+      nil,
       :cluster_id,
       :name,
       :network_settings,
@@ -13302,6 +13827,7 @@ module Aws::MediaLive
     #   The current state of the Cluster.
     #   @return [String]
     class UpdateClusterResponse < Struct.new(
+      nil,
       :arn,
       :channel_ids,
       :cluster_type,
@@ -13322,6 +13848,7 @@ module Aws::MediaLive
     #   An eventbridge rule template group's identifier. Can be either be its id or current name.
     #   @return [String]
     class UpdateEventBridgeRuleTemplateGroupRequest < Struct.new(
+      nil,
       :description,
       :identifier,
       keyword_init: true
@@ -13352,6 +13879,7 @@ module Aws::MediaLive
     #   Represents the tags associated with a resource.
     #   @return [Hash<String, String>]
     class UpdateEventBridgeRuleTemplateGroupResponse < Struct.new(
+      nil,
       :arn,
       :created_at,
       :description,
@@ -13384,6 +13912,7 @@ module Aws::MediaLive
     #   A resource's name. Names must be unique within the scope of a resource type in a specific region.
     #   @return [String]
     class UpdateEventBridgeRuleTemplateRequest < Struct.new(
+      nil,
       :description,
       :event_targets,
       :event_type,
@@ -13427,6 +13956,7 @@ module Aws::MediaLive
     #   Represents the tags associated with a resource.
     #   @return [Hash<String, String>]
     class UpdateEventBridgeRuleTemplateResponse < Struct.new(
+      nil,
       :arn,
       :created_at,
       :description,
@@ -13459,6 +13989,7 @@ module Aws::MediaLive
     #   The Availability Zone you want associated with this input device.
     #   @return [String]
     class UpdateInputDeviceRequest < Struct.new(
+      nil,
       :hd_device_settings,
       :input_device_id,
       :name,
@@ -13519,6 +14050,7 @@ module Aws::MediaLive
     #   The output attachment type of the input device. Specifies MEDIACONNECT_FLOW if this device is the source for a MediaConnect flow. Specifies MEDIALIVE_INPUT if this device is the source for a MediaLive input.
     #   @return [String]
     class UpdateInputDeviceResponse < Struct.new(
+      nil,
       :arn,
       :connection_state,
       :device_settings_sync_state,
@@ -13582,6 +14114,7 @@ module Aws::MediaLive
     #   SDI Sources for this Input.
     #   @return [Array<String>]
     class UpdateInputRequest < Struct.new(
+      nil,
       :destinations,
       :input_devices,
       :input_id,
@@ -13604,6 +14137,7 @@ module Aws::MediaLive
     #   Placeholder documentation for Input
     #   @return [Types::Input]
     class UpdateInputResponse < Struct.new(
+      nil,
       :input,
       keyword_init: true
     )
@@ -13624,6 +14158,7 @@ module Aws::MediaLive
     #   List of IPv4 CIDR addresses to whitelist
     #   @return [Array<Types::InputWhitelistRuleCidr>]
     class UpdateInputSecurityGroupRequest < Struct.new(
+      nil,
       :input_security_group_id,
       :tags,
       :whitelist_rules,
@@ -13637,6 +14172,7 @@ module Aws::MediaLive
     #   An Input Security Group
     #   @return [Types::InputSecurityGroup]
     class UpdateInputSecurityGroupResponse < Struct.new(
+      nil,
       :security_group,
       keyword_init: true
     )
@@ -13654,6 +14190,7 @@ module Aws::MediaLive
     #   The name of the program to update.
     #   @return [String]
     class UpdateMultiplexProgramRequest < Struct.new(
+      nil,
       :multiplex_id,
       :multiplex_program_settings,
       :program_name,
@@ -13667,6 +14204,7 @@ module Aws::MediaLive
     #   The updated multiplex program.
     #   @return [Types::MultiplexProgram]
     class UpdateMultiplexProgramResponse < Struct.new(
+      nil,
       :multiplex_program,
       keyword_init: true
     )
@@ -13687,6 +14225,7 @@ module Aws::MediaLive
     #   Placeholder documentation for MultiplexPacketIdentifiersMapping
     #   @return [Hash<String, Types::MultiplexProgramPacketIdentifiersMap>]
     class UpdateMultiplexRequest < Struct.new(
+      nil,
       :multiplex_id,
       :multiplex_settings,
       :name,
@@ -13701,6 +14240,7 @@ module Aws::MediaLive
     #   The updated multiplex.
     #   @return [Types::Multiplex]
     class UpdateMultiplexResponse < Struct.new(
+      nil,
       :multiplex,
       keyword_init: true
     )
@@ -13721,6 +14261,7 @@ module Aws::MediaLive
     #   Include this parameter only if you want to change or add routes in the Network. An array of Routes that MediaLive Anywhere needs to know about in order to route encoding traffic.
     #   @return [Array<Types::RouteUpdateRequest>]
     class UpdateNetworkRequest < Struct.new(
+      nil,
       :ip_pools,
       :name,
       :network_id,
@@ -13753,6 +14294,7 @@ module Aws::MediaLive
     #   The current state of the Network. Only MediaLive Anywhere can change the state.
     #   @return [String]
     class UpdateNetworkResponse < Struct.new(
+      nil,
       :arn,
       :associated_cluster_ids,
       :id,
@@ -13782,6 +14324,7 @@ module Aws::MediaLive
     #   The mappings of a SDI capture card port to a logical SDI data stream
     #   @return [Array<Types::SdiSourceMappingUpdateRequest>]
     class UpdateNodeRequest < Struct.new(
+      nil,
       :cluster_id,
       :name,
       :node_id,
@@ -13827,6 +14370,7 @@ module Aws::MediaLive
     #   An array of SDI source mappings. Each mapping connects one logical SdiSource to the physical SDI card and port that the physical SDI source uses.
     #   @return [Array<Types::SdiSourceMapping>]
     class UpdateNodeResponse < Struct.new(
+      nil,
       :arn,
       :channel_placement_groups,
       :cluster_id,
@@ -13854,6 +14398,7 @@ module Aws::MediaLive
     #   The state to apply to the Node. Set to ACTIVE (COMMISSIONED) to indicate that the Node is deployable. MediaLive Anywhere will consider this node it needs a Node to run a Channel on, or when it needs a Node to promote from a backup node to an active node. Set to DRAINING to isolate the Node so that MediaLive Anywhere won't use it.
     #   @return [String]
     class UpdateNodeStateRequest < Struct.new(
+      nil,
       :cluster_id,
       :node_id,
       :state,
@@ -13897,6 +14442,7 @@ module Aws::MediaLive
     #   An array of SDI source mappings. Each mapping connects one logical SdiSource to the physical SDI card and port that the physical SDI source uses.
     #   @return [Array<Types::SdiSourceMapping>]
     class UpdateNodeStateResponse < Struct.new(
+      nil,
       :arn,
       :channel_placement_groups,
       :cluster_id,
@@ -13924,6 +14470,7 @@ module Aws::MediaLive
     #   Unique reservation ID, e.g. '1234567'
     #   @return [String]
     class UpdateReservationRequest < Struct.new(
+      nil,
       :name,
       :renewal_settings,
       :reservation_id,
@@ -13937,6 +14484,7 @@ module Aws::MediaLive
     #   Reserved resources available to use
     #   @return [Types::Reservation]
     class UpdateReservationResponse < Struct.new(
+      nil,
       :reservation,
       keyword_init: true
     )
@@ -13957,6 +14505,7 @@ module Aws::MediaLive
     #   Include this parameter only if you want to change the mode. Specify the type of the SDI source: SINGLE: The source is a single-link source. QUAD: The source is one part of a quad-link source.
     #   @return [String]
     class UpdateSdiSourceRequest < Struct.new(
+      nil,
       :mode,
       :name,
       :sdi_source_id,
@@ -13971,6 +14520,7 @@ module Aws::MediaLive
     #   Settings for the SDI source.
     #   @return [Types::SdiSource]
     class UpdateSdiSourceResponse < Struct.new(
+      nil,
       :sdi_source,
       keyword_init: true
     )
@@ -13985,6 +14535,7 @@ module Aws::MediaLive
     #   The error message.
     #   @return [String]
     class ValidationError < Struct.new(
+      nil,
       :element_path,
       :error_message,
       keyword_init: true
@@ -14000,6 +14551,7 @@ module Aws::MediaLive
     #   The amount of time (in milliseconds) that the active input must be black before automatic input failover occurs.
     #   @return [Integer]
     class VideoBlackFailoverSettings < Struct.new(
+      nil,
       :black_detect_threshold,
       :video_black_threshold_msec,
       keyword_init: true
@@ -14024,6 +14576,7 @@ module Aws::MediaLive
     #   Av1 Settings
     #   @return [Types::Av1Settings]
     class VideoCodecSettings < Struct.new(
+      nil,
       :frame_capture_settings,
       :h264_settings,
       :h265_settings,
@@ -14060,6 +14613,7 @@ module Aws::MediaLive
     #   Output video width, in pixels. Must be an even number. For most codecs, you can leave this field and height blank in order to use the height and width (resolution) from the source. Note, however, that leaving blank is not recommended. For the Frame Capture codec, height and width are required.
     #   @return [Integer]
     class VideoDescription < Struct.new(
+      nil,
       :codec_settings,
       :height,
       :name,
@@ -14086,6 +14640,7 @@ module Aws::MediaLive
     #   The video selector settings.
     #   @return [Types::VideoSelectorSettings]
     class VideoSelector < Struct.new(
+      nil,
       :color_space,
       :color_space_settings,
       :color_space_usage,
@@ -14100,6 +14655,7 @@ module Aws::MediaLive
     #   Hdr10 Settings
     #   @return [Types::Hdr10Settings]
     class VideoSelectorColorSpaceSettings < Struct.new(
+      nil,
       :hdr10_settings,
       keyword_init: true
     )
@@ -14111,6 +14667,7 @@ module Aws::MediaLive
     #   Selects a specific PID from within a video source.
     #   @return [Integer]
     class VideoSelectorPid < Struct.new(
+      nil,
       :pid,
       keyword_init: true
     )
@@ -14122,6 +14679,7 @@ module Aws::MediaLive
     #   Selects a specific program from within a multi-program transport stream. If the program doesn't exist, the first program within the transport stream will be selected by default.
     #   @return [Integer]
     class VideoSelectorProgramId < Struct.new(
+      nil,
       :program_id,
       keyword_init: true
     )
@@ -14136,6 +14694,7 @@ module Aws::MediaLive
     #   Video Selector Program Id
     #   @return [Types::VideoSelectorProgramId]
     class VideoSelectorSettings < Struct.new(
+      nil,
       :video_selector_pid,
       :video_selector_program_id,
       keyword_init: true
@@ -14158,6 +14717,7 @@ module Aws::MediaLive
     #   If STANDARD channel, subnet IDs must be mapped to two unique availability zones (AZ).
     #   @return [Array<String>]
     class VpcOutputSettings < Struct.new(
+      nil,
       :public_address_allocation_ids,
       :security_group_ids,
       :subnet_ids,
@@ -14183,6 +14743,7 @@ module Aws::MediaLive
     #   If STANDARD channel, subnet IDs must be mapped to two unique availability zones (AZ).
     #   @return [Array<String>]
     class VpcOutputSettingsDescription < Struct.new(
+      nil,
       :availability_zones,
       :network_interface_ids,
       :security_group_ids,
@@ -14203,6 +14764,7 @@ module Aws::MediaLive
     #   Sample rate in Hz.
     #   @return [Float]
     class WavSettings < Struct.new(
+      nil,
       :bit_depth,
       :coding_mode,
       :sample_rate,
@@ -14216,6 +14778,7 @@ module Aws::MediaLive
     #   Controls whether the color and position of the source captions is passed through to the WebVTT output captions.  PASSTHROUGH - Valid only if the source captions are EMBEDDED or TELETEXT.  NO_STYLE_DATA - Don't pass through the style. The output captions will not contain any font styling information.
     #   @return [String]
     class WebvttDestinationSettings < Struct.new(
+      nil,
       :style_control,
       keyword_init: true
     )

@@ -11,6 +11,7 @@ module Aws::Kinesis
     # @!attribute message
     #   @return [String]
     class AccessDeniedException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -28,6 +29,7 @@ module Aws::Kinesis
     #   <p>The ARN of the stream.</p>
     #   @return [String]
     class AddTagsToStreamInput < Struct.new(
+      nil,
       :stream_name,
       :tags,
       :stream_arn,
@@ -49,6 +51,7 @@ module Aws::Kinesis
     #               contiguous positive integers.</p>
     #   @return [Types::HashKeyRange]
     class ChildShard < Struct.new(
+      nil,
       :shard_id,
       :parent_shards,
       :hash_key_range,
@@ -78,6 +81,7 @@ module Aws::Kinesis
     #   <p></p>
     #   @return [Time]
     class Consumer < Struct.new(
+      nil,
       :consumer_name,
       :consumer_arn,
       :consumer_status,
@@ -111,6 +115,7 @@ module Aws::Kinesis
     #   <p>The ARN of the stream with which you registered the consumer.</p>
     #   @return [String]
     class ConsumerDescription < Struct.new(
+      nil,
       :consumer_name,
       :consumer_arn,
       :consumer_status,
@@ -143,6 +148,7 @@ module Aws::Kinesis
     #   <p>A set of up to 50 key-value pairs to use to create the tags. A tag consists of a required key and an optional value.</p>
     #   @return [Hash<String, String>]
     class CreateStreamInput < Struct.new(
+      nil,
       :stream_name,
       :shard_count,
       :stream_mode_details,
@@ -164,6 +170,7 @@ module Aws::Kinesis
     #   <p>The ARN of the stream.</p>
     #   @return [String]
     class DecreaseStreamRetentionPeriodInput < Struct.new(
+      nil,
       :stream_name,
       :retention_period_hours,
       :stream_arn,
@@ -176,6 +183,7 @@ module Aws::Kinesis
     #   <p>The Amazon Resource Name (ARN) of the data stream or consumer.</p>
     #   @return [String]
     class DeleteResourcePolicyInput < Struct.new(
+      nil,
       :resource_arn,
       keyword_init: true
     )
@@ -195,6 +203,7 @@ module Aws::Kinesis
     #   <p>The ARN of the stream.</p>
     #   @return [String]
     class DeleteStreamInput < Struct.new(
+      nil,
       :stream_name,
       :enforce_consumer_deletion,
       :stream_arn,
@@ -219,6 +228,7 @@ module Aws::Kinesis
     #               contains its ARN.</p>
     #   @return [String]
     class DeregisterStreamConsumerInput < Struct.new(
+      nil,
       :stream_arn,
       :consumer_name,
       :consumer_arn,
@@ -228,6 +238,7 @@ module Aws::Kinesis
     end
 
     class DescribeLimitsInput < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -246,6 +257,7 @@ module Aws::Kinesis
     #   <p> The maximum number of data streams with the on-demand capacity mode. </p>
     #   @return [Integer]
     class DescribeLimitsOutput < Struct.new(
+      nil,
       :shard_limit,
       :open_shard_count,
       :on_demand_stream_count,
@@ -267,6 +279,7 @@ module Aws::Kinesis
     #   <p>The ARN returned by Kinesis Data Streams when you registered the consumer.</p>
     #   @return [String]
     class DescribeStreamConsumerInput < Struct.new(
+      nil,
       :stream_arn,
       :consumer_name,
       :consumer_arn,
@@ -279,6 +292,7 @@ module Aws::Kinesis
     #   <p>An object that represents the details of the consumer.</p>
     #   @return [Types::ConsumerDescription]
     class DescribeStreamConsumerOutput < Struct.new(
+      nil,
       :consumer_description,
       keyword_init: true
     )
@@ -305,6 +319,7 @@ module Aws::Kinesis
     #   <p>The ARN of the stream.</p>
     #   @return [String]
     class DescribeStreamInput < Struct.new(
+      nil,
       :stream_name,
       :limit,
       :exclusive_start_shard_id,
@@ -321,6 +336,7 @@ module Aws::Kinesis
     #               available.</p>
     #   @return [Types::StreamDescription]
     class DescribeStreamOutput < Struct.new(
+      nil,
       :stream_description,
       keyword_init: true
     )
@@ -334,6 +350,7 @@ module Aws::Kinesis
     #   <p>The ARN of the stream.</p>
     #   @return [String]
     class DescribeStreamSummaryInput < Struct.new(
+      nil,
       :stream_name,
       :stream_arn,
       keyword_init: true
@@ -346,6 +363,7 @@ module Aws::Kinesis
     #               stream.</p>
     #   @return [Types::StreamDescriptionSummary]
     class DescribeStreamSummaryOutput < Struct.new(
+      nil,
       :stream_description_summary,
       keyword_init: true
     )
@@ -410,6 +428,7 @@ module Aws::Kinesis
     #   <p>The ARN of the stream.</p>
     #   @return [String]
     class DisableEnhancedMonitoringInput < Struct.new(
+      nil,
       :stream_name,
       :shard_level_metrics,
       :stream_arn,
@@ -434,6 +453,7 @@ module Aws::Kinesis
     #   <p>The ARN of the stream.</p>
     #   @return [String]
     class DisableEnhancedMonitoringOutput < Struct.new(
+      nil,
       :stream_name,
       :current_shard_level_metrics,
       :desired_shard_level_metrics,
@@ -501,6 +521,7 @@ module Aws::Kinesis
     #   <p>The ARN of the stream.</p>
     #   @return [String]
     class EnableEnhancedMonitoringInput < Struct.new(
+      nil,
       :stream_name,
       :shard_level_metrics,
       :stream_arn,
@@ -525,6 +546,7 @@ module Aws::Kinesis
     #   <p>The ARN of the stream.</p>
     #   @return [String]
     class EnableEnhancedMonitoringOutput < Struct.new(
+      nil,
       :stream_name,
       :current_shard_level_metrics,
       :desired_shard_level_metrics,
@@ -586,6 +608,7 @@ module Aws::Kinesis
     #                   Kinesis Data Streams Developer Guide</i>.</p>
     #   @return [Array<String>]
     class EnhancedMetrics < Struct.new(
+      nil,
       :shard_level_metrics,
       keyword_init: true
     )
@@ -597,6 +620,7 @@ module Aws::Kinesis
     #   <p>A message that provides information about the error.</p>
     #   @return [String]
     class ExpiredIteratorException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -607,6 +631,7 @@ module Aws::Kinesis
     # @!attribute message
     #   @return [String]
     class ExpiredNextTokenException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -628,6 +653,7 @@ module Aws::Kinesis
     #   <p>The ARN of the stream.</p>
     #   @return [String]
     class GetRecordsInput < Struct.new(
+      nil,
       :shard_iterator,
       :limit,
       :stream_arn,
@@ -656,6 +682,7 @@ module Aws::Kinesis
     #               API's response only when the end of the current shard is reached.</p>
     #   @return [Array<Types::ChildShard>]
     class GetRecordsOutput < Struct.new(
+      nil,
       :records,
       :next_shard_iterator,
       :millis_behind_latest,
@@ -669,6 +696,7 @@ module Aws::Kinesis
     #   <p>The Amazon Resource Name (ARN) of the data stream or consumer.</p>
     #   @return [String]
     class GetResourcePolicyInput < Struct.new(
+      nil,
       :resource_arn,
       keyword_init: true
     )
@@ -679,6 +707,7 @@ module Aws::Kinesis
     #   <p>Details of the resource policy. This is formatted as a JSON string.</p>
     #   @return [String]
     class GetResourcePolicyOutput < Struct.new(
+      nil,
       :policy,
       keyword_init: true
     )
@@ -738,6 +767,7 @@ module Aws::Kinesis
     #   <p>The ARN of the stream.</p>
     #   @return [String]
     class GetShardIteratorInput < Struct.new(
+      nil,
       :stream_name,
       :shard_id,
       :shard_iterator_type,
@@ -756,6 +786,7 @@ module Aws::Kinesis
     #               shard.</p>
     #   @return [String]
     class GetShardIteratorOutput < Struct.new(
+      nil,
       :shard_iterator,
       keyword_init: true
     )
@@ -771,6 +802,7 @@ module Aws::Kinesis
     #   <p>The ending hash key of the hash key range.</p>
     #   @return [String]
     class HashKeyRange < Struct.new(
+      nil,
       :starting_hash_key,
       :ending_hash_key,
       keyword_init: true
@@ -790,6 +822,7 @@ module Aws::Kinesis
     #   <p>The ARN of the stream.</p>
     #   @return [String]
     class IncreaseStreamRetentionPeriodInput < Struct.new(
+      nil,
       :stream_name,
       :retention_period_hours,
       :stream_arn,
@@ -803,6 +836,7 @@ module Aws::Kinesis
     # @!attribute message
     #   @return [String]
     class InternalFailureException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -815,6 +849,7 @@ module Aws::Kinesis
     #   <p>A message that provides information about the error.</p>
     #   @return [String]
     class InvalidArgumentException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -827,6 +862,7 @@ module Aws::Kinesis
     #   <p>A message that provides information about the error.</p>
     #   @return [String]
     class KMSAccessDeniedException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -839,6 +875,7 @@ module Aws::Kinesis
     #   <p>A message that provides information about the error.</p>
     #   @return [String]
     class KMSDisabledException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -853,6 +890,7 @@ module Aws::Kinesis
     #   <p>A message that provides information about the error.</p>
     #   @return [String]
     class KMSInvalidStateException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -865,6 +903,7 @@ module Aws::Kinesis
     #   <p>A message that provides information about the error.</p>
     #   @return [String]
     class KMSNotFoundException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -876,6 +915,7 @@ module Aws::Kinesis
     #   <p>A message that provides information about the error.</p>
     #   @return [String]
     class KMSOptInRequired < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -890,6 +930,7 @@ module Aws::Kinesis
     #   <p>A message that provides information about the error.</p>
     #   @return [String]
     class KMSThrottlingException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -902,6 +943,7 @@ module Aws::Kinesis
     #   <p>A message that provides information about the error.</p>
     #   @return [String]
     class LimitExceededException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -985,6 +1027,7 @@ module Aws::Kinesis
     #   <p>The ARN of the stream.</p>
     #   @return [String]
     class ListShardsInput < Struct.new(
+      nil,
       :stream_name,
       :next_token,
       :exclusive_start_shard_id,
@@ -1019,6 +1062,7 @@ module Aws::Kinesis
     #            </important>
     #   @return [String]
     class ListShardsOutput < Struct.new(
+      nil,
       :shards,
       :next_token,
       keyword_init: true
@@ -1069,6 +1113,7 @@ module Aws::Kinesis
     #            <p>You can't specify this parameter if you specify the NextToken parameter. </p>
     #   @return [Time]
     class ListStreamConsumersInput < Struct.new(
+      nil,
       :stream_arn,
       :next_token,
       :max_results,
@@ -1099,6 +1144,7 @@ module Aws::Kinesis
     #            </important>
     #   @return [String]
     class ListStreamConsumersOutput < Struct.new(
+      nil,
       :consumers,
       :next_token,
       keyword_init: true
@@ -1118,6 +1164,7 @@ module Aws::Kinesis
     #   <p></p>
     #   @return [String]
     class ListStreamsInput < Struct.new(
+      nil,
       :limit,
       :exclusive_start_stream_name,
       :next_token,
@@ -1141,6 +1188,7 @@ module Aws::Kinesis
     #   <p></p>
     #   @return [Array<Types::StreamSummary>]
     class ListStreamsOutput < Struct.new(
+      nil,
       :stream_names,
       :has_more_streams,
       :next_token,
@@ -1154,6 +1202,7 @@ module Aws::Kinesis
     #   <p>The Amazon Resource Name (ARN) of the Kinesis resource for which to list tags.</p>
     #   @return [String]
     class ListTagsForResourceInput < Struct.new(
+      nil,
       :resource_arn,
       keyword_init: true
     )
@@ -1164,6 +1213,7 @@ module Aws::Kinesis
     #   <p>An array of tags associated with the specified Kinesis resource.</p>
     #   @return [Array<Types::Tag>]
     class ListTagsForResourceOutput < Struct.new(
+      nil,
       :tags,
       keyword_init: true
     )
@@ -1189,6 +1239,7 @@ module Aws::Kinesis
     #   <p>The ARN of the stream.</p>
     #   @return [String]
     class ListTagsForStreamInput < Struct.new(
+      nil,
       :stream_name,
       :exclusive_start_tag_key,
       :limit,
@@ -1209,6 +1260,7 @@ module Aws::Kinesis
     #                   <code>ExclusiveStartTagKey</code> to the key of the last tag returned.</p>
     #   @return [Boolean]
     class ListTagsForStreamOutput < Struct.new(
+      nil,
       :tags,
       :has_more_tags,
       keyword_init: true
@@ -1230,6 +1282,7 @@ module Aws::Kinesis
     #   <p>The ARN of the stream.</p>
     #   @return [String]
     class MergeShardsInput < Struct.new(
+      nil,
       :stream_name,
       :shard_to_merge,
       :adjacent_shard_to_merge,
@@ -1248,6 +1301,7 @@ module Aws::Kinesis
     #   <p>A message that provides information about the error.</p>
     #   @return [String]
     class ProvisionedThroughputExceededException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -1288,6 +1342,7 @@ module Aws::Kinesis
     #   <p>The ARN of the stream.</p>
     #   @return [String]
     class PutRecordInput < Struct.new(
+      nil,
       :stream_name,
       :data,
       :partition_key,
@@ -1324,6 +1379,7 @@ module Aws::Kinesis
     #            </ul>
     #   @return [String]
     class PutRecordOutput < Struct.new(
+      nil,
       :shard_id,
       :sequence_number,
       :encryption_type,
@@ -1343,6 +1399,7 @@ module Aws::Kinesis
     #   <p>The ARN of the stream.</p>
     #   @return [String]
     class PutRecordsInput < Struct.new(
+      nil,
       :records,
       :stream_name,
       :stream_arn,
@@ -1379,6 +1436,7 @@ module Aws::Kinesis
     #            </ul>
     #   @return [String]
     class PutRecordsOutput < Struct.new(
+      nil,
       :failed_record_count,
       :records,
       :encryption_type,
@@ -1408,6 +1466,7 @@ module Aws::Kinesis
     #               same partition key map to the same shard within the stream.</p>
     #   @return [String]
     class PutRecordsRequestEntry < Struct.new(
+      nil,
       :data,
       :explicit_hash_key,
       :partition_key,
@@ -1439,6 +1498,7 @@ module Aws::Kinesis
     #                   Failure"</code>.</p>
     #   @return [String]
     class PutRecordsResultEntry < Struct.new(
+      nil,
       :sequence_number,
       :shard_id,
       :error_code,
@@ -1455,6 +1515,7 @@ module Aws::Kinesis
     #   <p>Details of the resource policy. It must include the identity of the principal and the actions allowed on this resource. This is formatted as a JSON string.</p>
     #   @return [String]
     class PutResourcePolicyInput < Struct.new(
+      nil,
       :resource_arn,
       :policy,
       keyword_init: true
@@ -1495,6 +1556,7 @@ module Aws::Kinesis
     #            </ul>
     #   @return [String]
     class Record < Struct.new(
+      nil,
       :sequence_number,
       :approximate_arrival_timestamp,
       :data,
@@ -1518,6 +1580,7 @@ module Aws::Kinesis
     #   <p>A set of up to 50 key-value pairs. A tag consists of a required key and an optional value.</p>
     #   @return [Hash<String, String>]
     class RegisterStreamConsumerInput < Struct.new(
+      nil,
       :stream_arn,
       :consumer_name,
       :tags,
@@ -1531,6 +1594,7 @@ module Aws::Kinesis
     #               register a consumer, it gets an ARN that is generated by Kinesis Data Streams.</p>
     #   @return [Types::Consumer]
     class RegisterStreamConsumerOutput < Struct.new(
+      nil,
       :consumer,
       keyword_init: true
     )
@@ -1548,6 +1612,7 @@ module Aws::Kinesis
     #   <p>The ARN of the stream.</p>
     #   @return [String]
     class RemoveTagsFromStreamInput < Struct.new(
+      nil,
       :stream_name,
       :tag_keys,
       :stream_arn,
@@ -1562,6 +1627,7 @@ module Aws::Kinesis
     #   <p>A message that provides information about the error.</p>
     #   @return [String]
     class ResourceInUseException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -1574,6 +1640,7 @@ module Aws::Kinesis
     #   <p>A message that provides information about the error.</p>
     #   @return [String]
     class ResourceNotFoundException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -1589,6 +1656,7 @@ module Aws::Kinesis
     #               ending sequence number of <code>null</code>.</p>
     #   @return [String]
     class SequenceNumberRange < Struct.new(
+      nil,
       :starting_sequence_number,
       :ending_sequence_number,
       keyword_init: true
@@ -1614,6 +1682,7 @@ module Aws::Kinesis
     #   <p>The range of possible sequence numbers for the shard.</p>
     #   @return [Types::SequenceNumberRange]
     class Shard < Struct.new(
+      nil,
       :shard_id,
       :parent_shard_id,
       :adjacent_parent_shard_id,
@@ -1681,6 +1750,7 @@ module Aws::Kinesis
     #               specified.</p>
     #   @return [Time]
     class ShardFilter < Struct.new(
+      nil,
       :type,
       :shard_id,
       :timestamp,
@@ -1709,6 +1779,7 @@ module Aws::Kinesis
     #   <p>The ARN of the stream.</p>
     #   @return [String]
     class SplitShardInput < Struct.new(
+      nil,
       :stream_name,
       :shard_to_split,
       :new_starting_hash_key,
@@ -1761,6 +1832,7 @@ module Aws::Kinesis
     #   <p>The ARN of the stream.</p>
     #   @return [String]
     class StartStreamEncryptionInput < Struct.new(
+      nil,
       :stream_name,
       :encryption_type,
       :key_id,
@@ -1804,6 +1876,7 @@ module Aws::Kinesis
     #               be streamed from the oldest untrimmed data record (<code>TRIM_HORIZON</code>).</p>
     #   @return [Time]
     class StartingPosition < Struct.new(
+      nil,
       :type,
       :sequence_number,
       :timestamp,
@@ -1855,6 +1928,7 @@ module Aws::Kinesis
     #   <p>The ARN of the stream.</p>
     #   @return [String]
     class StopStreamEncryptionInput < Struct.new(
+      nil,
       :stream_name,
       :encryption_type,
       :key_id,
@@ -1970,6 +2044,7 @@ module Aws::Kinesis
     #            </ul>
     #   @return [String]
     class StreamDescription < Struct.new(
+      nil,
       :stream_name,
       :stream_arn,
       :stream_status,
@@ -2091,6 +2166,7 @@ module Aws::Kinesis
     #   <p>The number of enhanced fan-out consumers registered with the stream.</p>
     #   @return [Integer]
     class StreamDescriptionSummary < Struct.new(
+      nil,
       :stream_name,
       :stream_arn,
       :stream_status,
@@ -2114,6 +2190,7 @@ module Aws::Kinesis
     #               Kinesis Data Streams, you can choose between an <b>on-demand</b> capacity mode and a <b>provisioned</b> capacity mode for your data streams. </p>
     #   @return [String]
     class StreamModeDetails < Struct.new(
+      nil,
       :stream_mode,
       keyword_init: true
     )
@@ -2138,6 +2215,7 @@ module Aws::Kinesis
     #   <p>The timestamp at which the stream was created.</p>
     #   @return [Time]
     class StreamSummary < Struct.new(
+      nil,
       :stream_name,
       :stream_arn,
       :stream_status,
@@ -2169,6 +2247,7 @@ module Aws::Kinesis
     #               current shard.</p>
     #   @return [Array<Types::ChildShard>]
     class SubscribeToShardEvent < Struct.new(
+      nil,
       :records,
       :continuation_sequence_number,
       :millis_behind_latest,
@@ -2264,6 +2343,7 @@ module Aws::Kinesis
     #   <p>The starting position in the data stream from which to start streaming.</p>
     #   @return [Types::StartingPosition]
     class SubscribeToShardInput < Struct.new(
+      nil,
       :consumer_arn,
       :shard_id,
       :starting_position,
@@ -2276,6 +2356,7 @@ module Aws::Kinesis
     #   <p>The event stream that your consumer can use to read records from the shard.</p>
     #   @return [Types::SubscribeToShardEventStream]
     class SubscribeToShardOutput < Struct.new(
+      nil,
       :event_stream,
       keyword_init: true
     )
@@ -2293,6 +2374,7 @@ module Aws::Kinesis
     #               @</p>
     #   @return [String]
     class Tag < Struct.new(
+      nil,
       :key,
       :value,
       keyword_init: true
@@ -2308,6 +2390,7 @@ module Aws::Kinesis
     #   <p>The Amazon Resource Name (ARN) of the Kinesis resource to which to add tags.</p>
     #   @return [String]
     class TagResourceInput < Struct.new(
+      nil,
       :tags,
       :resource_arn,
       keyword_init: true
@@ -2322,6 +2405,7 @@ module Aws::Kinesis
     #   <p>The Amazon Resource Name (ARN) of the Kinesis resource from which to remove tags.</p>
     #   @return [String]
     class UntagResourceInput < Struct.new(
+      nil,
       :tag_keys,
       :resource_arn,
       keyword_init: true
@@ -2361,6 +2445,7 @@ module Aws::Kinesis
     #   <p>The ARN of the stream.</p>
     #   @return [String]
     class UpdateShardCountInput < Struct.new(
+      nil,
       :stream_name,
       :target_shard_count,
       :scaling_type,
@@ -2383,6 +2468,7 @@ module Aws::Kinesis
     #   <p>The ARN of the stream.</p>
     #   @return [String]
     class UpdateShardCountOutput < Struct.new(
+      nil,
       :stream_name,
       :current_shard_count,
       :target_shard_count,
@@ -2400,6 +2486,7 @@ module Aws::Kinesis
     #               Kinesis Data Streams, you can choose between an <b>on-demand</b> capacity mode and a <b>provisioned</b> capacity mode for your data streams. </p>
     #   @return [Types::StreamModeDetails]
     class UpdateStreamModeInput < Struct.new(
+      nil,
       :stream_arn,
       :stream_mode_details,
       keyword_init: true
@@ -2413,6 +2500,7 @@ module Aws::Kinesis
     # @!attribute message
     #   @return [String]
     class ValidationException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )

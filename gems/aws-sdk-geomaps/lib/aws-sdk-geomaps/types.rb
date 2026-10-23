@@ -10,6 +10,7 @@ module Aws::GeoMaps
     # @!attribute message
     #   @return [String]
     class AccessDeniedException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -23,6 +24,7 @@ module Aws::GeoMaps
     #   <p>A Unicode range of characters to download glyphs for. This must be aligned to multiples of 256. </p> <p>Example: <code>0-255.pdf</code> </p>
     #   @return [String]
     class GetGlyphsRequest < Struct.new(
+      nil,
       :font_stack,
       :font_unicode_range,
       keyword_init: true
@@ -43,6 +45,7 @@ module Aws::GeoMaps
     #   <p>The glyph's Etag.</p>
     #   @return [String]
     class GetGlyphsResponse < Struct.new(
+      nil,
       :blob,
       :content_type,
       :cache_control,
@@ -65,6 +68,7 @@ module Aws::GeoMaps
     #   <p>Optimizes map styles for specific use case or industry. You can choose allowed variant only with Standard map style.</p> <p>Example: <code>Default</code> </p> <note> <p>Valid values for Variant are case sensitive.</p> </note>
     #   @return [String]
     class GetSpritesRequest < Struct.new(
+      nil,
       :file_name,
       :style,
       :color_scheme,
@@ -87,6 +91,7 @@ module Aws::GeoMaps
     #   <p>The sprite's Etag.</p>
     #   @return [String]
     class GetSpritesResponse < Struct.new(
+      nil,
       :blob,
       :content_type,
       :cache_control,
@@ -157,6 +162,7 @@ module Aws::GeoMaps
     #   <p>Specifies the zoom level of the map image.</p> <note> <p>Cannot be used with <code>Radius</code>.</p> </note>
     #   @return [Float]
     class GetStaticMapRequest < Struct.new(
+      nil,
       :bounding_box,
       :bounded_positions,
       :center,
@@ -198,6 +204,7 @@ module Aws::GeoMaps
     #   <p>The pricing bucket for which the request is charged at.</p>
     #   @return [String]
     class GetStaticMapResponse < Struct.new(
+      nil,
       :blob,
       :content_type,
       :cache_control,
@@ -221,6 +228,7 @@ module Aws::GeoMaps
     #   <p>Optional: The API key to be used for authorization. Either an API key or valid SigV4 signature must be provided when making a request. </p>
     #   @return [String]
     class GetStyleDescriptorRequest < Struct.new(
+      nil,
       :style,
       :color_scheme,
       :political_view,
@@ -243,6 +251,7 @@ module Aws::GeoMaps
     #   <p>The style descriptor's Etag.</p>
     #   @return [String]
     class GetStyleDescriptorResponse < Struct.new(
+      nil,
       :blob,
       :content_type,
       :cache_control,
@@ -268,6 +277,7 @@ module Aws::GeoMaps
     #   <p>Optional: The API key to be used for authorization. Either an API key or valid SigV4 signature must be provided when making a request. </p>
     #   @return [String]
     class GetTileRequest < Struct.new(
+      nil,
       :tileset,
       :z,
       :x,
@@ -294,6 +304,7 @@ module Aws::GeoMaps
     #   <p>The pricing bucket for which the request is charged at.</p>
     #   @return [String]
     class GetTileResponse < Struct.new(
+      nil,
       :blob,
       :content_type,
       :cache_control,
@@ -308,6 +319,7 @@ module Aws::GeoMaps
     # @!attribute message
     #   @return [String]
     class InternalServerException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -318,6 +330,7 @@ module Aws::GeoMaps
     # @!attribute message
     #   @return [String]
     class ResourceNotFoundException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -328,6 +341,7 @@ module Aws::GeoMaps
     # @!attribute message
     #   @return [String]
     class ThrottlingException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -344,6 +358,7 @@ module Aws::GeoMaps
     #   <p>A message with the reason for the validation exception error.</p>
     #   @return [Array<Types::ValidationExceptionField>]
     class ValidationException < Struct.new(
+      nil,
       :message,
       :reason,
       :field_list,
@@ -360,6 +375,7 @@ module Aws::GeoMaps
     #   <p>The error message.</p>
     #   @return [String]
     class ValidationExceptionField < Struct.new(
+      nil,
       :name,
       :message,
       keyword_init: true

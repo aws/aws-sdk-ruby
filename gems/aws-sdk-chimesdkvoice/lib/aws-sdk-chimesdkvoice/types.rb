@@ -12,6 +12,7 @@ module Aws::ChimeSDKVoice
     # @!attribute message
     #   @return [String]
     class AccessDeniedException < Struct.new(
+      nil,
       :code,
       :message,
       keyword_init: true
@@ -53,6 +54,7 @@ module Aws::ChimeSDKVoice
     #   <p>The country of an address.</p>
     #   @return [String]
     class Address < Struct.new(
+      nil,
       :street_name,
       :street_suffix,
       :post_directional,
@@ -79,6 +81,7 @@ module Aws::ChimeSDKVoice
     #            If false, does not associate any phone numbers that have previously existing associations.</p>
     #   @return [Boolean]
     class AssociatePhoneNumbersWithVoiceConnectorGroupRequest < Struct.new(
+      nil,
       :voice_connector_group_id,
       :e164_phone_numbers,
       :force_associate,
@@ -91,6 +94,7 @@ module Aws::ChimeSDKVoice
     #   <p>If the action fails for one or more of the phone numbers in the request, a list of the phone numbers is returned, along with error codes and error messages.</p>
     #   @return [Array<Types::PhoneNumberError>]
     class AssociatePhoneNumbersWithVoiceConnectorGroupResponse < Struct.new(
+      nil,
       :phone_number_errors,
       keyword_init: true
     )
@@ -107,6 +111,7 @@ module Aws::ChimeSDKVoice
     #   <p>If true, associates the provided phone numbers with the provided Amazon Chime SDK Voice Connector and removes any previously existing associations. If false, does not associate any phone numbers that have previously existing associations.</p>
     #   @return [Boolean]
     class AssociatePhoneNumbersWithVoiceConnectorRequest < Struct.new(
+      nil,
       :voice_connector_id,
       :e164_phone_numbers,
       :force_associate,
@@ -120,6 +125,7 @@ module Aws::ChimeSDKVoice
     #            error messages.</p>
     #   @return [Array<Types::PhoneNumberError>]
     class AssociatePhoneNumbersWithVoiceConnectorResponse < Struct.new(
+      nil,
       :phone_number_errors,
       keyword_init: true
     )
@@ -132,6 +138,7 @@ module Aws::ChimeSDKVoice
     # @!attribute message
     #   @return [String]
     class BadRequestException < Struct.new(
+      nil,
       :code,
       :message,
       keyword_init: true
@@ -143,6 +150,7 @@ module Aws::ChimeSDKVoice
     #   <p>List of phone number IDs.</p>
     #   @return [Array<String>]
     class BatchDeletePhoneNumberRequest < Struct.new(
+      nil,
       :phone_number_ids,
       keyword_init: true
     )
@@ -153,6 +161,7 @@ module Aws::ChimeSDKVoice
     #   <p>If the action fails for one or more of the phone numbers in the request, a list of the phone numbers is returned, along with error codes and error messages.</p>
     #   @return [Array<Types::PhoneNumberError>]
     class BatchDeletePhoneNumberResponse < Struct.new(
+      nil,
       :phone_number_errors,
       keyword_init: true
     )
@@ -163,6 +172,7 @@ module Aws::ChimeSDKVoice
     #   <p>Lists the phone numbers in the update request.</p>
     #   @return [Array<Types::UpdatePhoneNumberRequestItem>]
     class BatchUpdatePhoneNumberRequest < Struct.new(
+      nil,
       :update_phone_number_request_items,
       keyword_init: true
     )
@@ -173,6 +183,7 @@ module Aws::ChimeSDKVoice
     #   <p>A list of failed phone numbers and their error messages.</p>
     #   @return [Array<Types::PhoneNumberError>]
     class BatchUpdatePhoneNumberResponse < Struct.new(
+      nil,
       :phone_number_errors,
       keyword_init: true
     )
@@ -190,6 +201,7 @@ module Aws::ChimeSDKVoice
     #   <p>Identifies a person as the caller or the callee.</p>
     #   @return [Boolean]
     class CallDetails < Struct.new(
+      nil,
       :voice_connector_id,
       :transaction_id,
       :is_caller,
@@ -221,6 +233,7 @@ module Aws::ChimeSDKVoice
     #   <p>The country of the candidate address.</p>
     #   @return [String]
     class CandidateAddress < Struct.new(
+      nil,
       :street_info,
       :street_number,
       :city,
@@ -239,6 +252,7 @@ module Aws::ChimeSDKVoice
     # @!attribute message
     #   @return [String]
     class ConflictException < Struct.new(
+      nil,
       :code,
       :message,
       keyword_init: true
@@ -256,6 +270,7 @@ module Aws::ChimeSDKVoice
     #   <p>Specifies the name assigned to one or more phone numbers.</p>
     #   @return [String]
     class CreatePhoneNumberOrderRequest < Struct.new(
+      nil,
       :product_type,
       :e164_phone_numbers,
       :name,
@@ -268,6 +283,7 @@ module Aws::ChimeSDKVoice
     #   <p>The phone number order details.</p>
     #   @return [Types::PhoneNumberOrder]
     class CreatePhoneNumberOrderResponse < Struct.new(
+      nil,
       :phone_number_order,
       keyword_init: true
     )
@@ -300,6 +316,7 @@ module Aws::ChimeSDKVoice
     #   <p>The country and area code for the proxy phone number.</p>
     #   @return [Types::GeoMatchParams]
     class CreateProxySessionRequest < Struct.new(
+      nil,
       :voice_connector_id,
       :participant_phone_numbers,
       :name,
@@ -317,6 +334,7 @@ module Aws::ChimeSDKVoice
     #   <p>The proxy session details.</p>
     #   @return [Types::ProxySession]
     class CreateProxySessionResponse < Struct.new(
+      nil,
       :proxy_session,
       keyword_init: true
     )
@@ -342,6 +360,7 @@ module Aws::ChimeSDKVoice
     #            </p>
     #   @return [Hash<String, String>]
     class CreateSipMediaApplicationCallRequest < Struct.new(
+      nil,
       :from_phone_number,
       :to_phone_number,
       :sip_media_application_id,
@@ -356,6 +375,7 @@ module Aws::ChimeSDKVoice
     #   <p>The actual call.</p>
     #   @return [Types::SipMediaApplicationCall]
     class CreateSipMediaApplicationCallResponse < Struct.new(
+      nil,
       :sip_media_application_call,
       keyword_init: true
     )
@@ -375,6 +395,7 @@ module Aws::ChimeSDKVoice
     #   <p>The tags assigned to the SIP media application.</p>
     #   @return [Array<Types::Tag>]
     class CreateSipMediaApplicationRequest < Struct.new(
+      nil,
       :aws_region,
       :name,
       :endpoints,
@@ -388,6 +409,7 @@ module Aws::ChimeSDKVoice
     #   <p>The SIP media application details.</p>
     #   @return [Types::SipMediaApplication]
     class CreateSipMediaApplicationResponse < Struct.new(
+      nil,
       :sip_media_application,
       keyword_init: true
     )
@@ -420,6 +442,7 @@ module Aws::ChimeSDKVoice
     #            application per AWS Region can be used.</p>
     #   @return [Array<Types::SipRuleTargetApplication>]
     class CreateSipRuleRequest < Struct.new(
+      nil,
       :name,
       :trigger_type,
       :trigger_value,
@@ -434,6 +457,7 @@ module Aws::ChimeSDKVoice
     #   <p>The SIP rule information, including the rule ID, triggers, and target applications.</p>
     #   @return [Types::SipRule]
     class CreateSipRuleResponse < Struct.new(
+      nil,
       :sip_rule,
       keyword_init: true
     )
@@ -447,6 +471,7 @@ module Aws::ChimeSDKVoice
     #   <p>Lists the Voice Connectors that inbound calls are routed to.</p>
     #   @return [Array<Types::VoiceConnectorItem>]
     class CreateVoiceConnectorGroupRequest < Struct.new(
+      nil,
       :name,
       :voice_connector_items,
       keyword_init: true
@@ -458,6 +483,7 @@ module Aws::ChimeSDKVoice
     #   <p>The details of the Voice Connector group.</p>
     #   @return [Types::VoiceConnectorGroup]
     class CreateVoiceConnectorGroupResponse < Struct.new(
+      nil,
       :voice_connector_group,
       keyword_init: true
     )
@@ -512,6 +538,7 @@ module Aws::ChimeSDKVoice
     #   <p>The type of network for the Voice Connector. Either IPv4 only or dual-stack (IPv4 and IPv6).</p>
     #   @return [String]
     class CreateVoiceConnectorRequest < Struct.new(
+      nil,
       :name,
       :aws_region,
       :require_encryption,
@@ -527,6 +554,7 @@ module Aws::ChimeSDKVoice
     #   <p>The details of the Voice Connector.</p>
     #   @return [Types::VoiceConnector]
     class CreateVoiceConnectorResponse < Struct.new(
+      nil,
       :voice_connector,
       keyword_init: true
     )
@@ -549,6 +577,7 @@ module Aws::ChimeSDKVoice
     #   <p>The tags assigned to the domain.</p>
     #   @return [Array<Types::Tag>]
     class CreateVoiceProfileDomainRequest < Struct.new(
+      nil,
       :name,
       :description,
       :server_side_encryption_configuration,
@@ -563,6 +592,7 @@ module Aws::ChimeSDKVoice
     #   <p>The requested voice profile domain.</p>
     #   @return [Types::VoiceProfileDomain]
     class CreateVoiceProfileDomainResponse < Struct.new(
+      nil,
       :voice_profile_domain,
       keyword_init: true
     )
@@ -573,6 +603,7 @@ module Aws::ChimeSDKVoice
     #   <p>The ID of the speaker search task.</p>
     #   @return [String]
     class CreateVoiceProfileRequest < Struct.new(
+      nil,
       :speaker_search_task_id,
       keyword_init: true
     )
@@ -583,6 +614,7 @@ module Aws::ChimeSDKVoice
     #   <p>The requested voice profile.</p>
     #   @return [Types::VoiceProfile]
     class CreateVoiceProfileResponse < Struct.new(
+      nil,
       :voice_profile,
       keyword_init: true
     )
@@ -598,6 +630,7 @@ module Aws::ChimeSDKVoice
     #   <p>The RFC2617 compliant password associated with the SIP credentials, in US-ASCII format.</p>
     #   @return [String]
     class Credential < Struct.new(
+      nil,
       :username,
       :password,
       keyword_init: true
@@ -618,6 +651,7 @@ module Aws::ChimeSDKVoice
     #   <p>The country from which emergency calls are allowed, in ISO 3166-1 alpha-2 format.</p>
     #   @return [String]
     class DNISEmergencyCallingConfiguration < Struct.new(
+      nil,
       :emergency_phone_number,
       :test_phone_number,
       :calling_country,
@@ -630,6 +664,7 @@ module Aws::ChimeSDKVoice
     #   <p>The phone number ID.</p>
     #   @return [String]
     class DeletePhoneNumberRequest < Struct.new(
+      nil,
       :phone_number_id,
       keyword_init: true
     )
@@ -643,6 +678,7 @@ module Aws::ChimeSDKVoice
     #   <p>The proxy session ID.</p>
     #   @return [String]
     class DeleteProxySessionRequest < Struct.new(
+      nil,
       :voice_connector_id,
       :proxy_session_id,
       keyword_init: true
@@ -654,6 +690,7 @@ module Aws::ChimeSDKVoice
     #   <p>The SIP media application ID.</p>
     #   @return [String]
     class DeleteSipMediaApplicationRequest < Struct.new(
+      nil,
       :sip_media_application_id,
       keyword_init: true
     )
@@ -664,6 +701,7 @@ module Aws::ChimeSDKVoice
     #   <p>The SIP rule ID.</p>
     #   @return [String]
     class DeleteSipRuleRequest < Struct.new(
+      nil,
       :sip_rule_id,
       keyword_init: true
     )
@@ -674,6 +712,7 @@ module Aws::ChimeSDKVoice
     #   <p>The Voice Connector ID.</p>
     #   @return [String]
     class DeleteVoiceConnectorEmergencyCallingConfigurationRequest < Struct.new(
+      nil,
       :voice_connector_id,
       keyword_init: true
     )
@@ -685,6 +724,7 @@ module Aws::ChimeSDKVoice
     #            configuration.</p>
     #   @return [String]
     class DeleteVoiceConnectorExternalSystemsConfigurationRequest < Struct.new(
+      nil,
       :voice_connector_id,
       keyword_init: true
     )
@@ -695,6 +735,7 @@ module Aws::ChimeSDKVoice
     #   <p>The Voice Connector Group ID.</p>
     #   @return [String]
     class DeleteVoiceConnectorGroupRequest < Struct.new(
+      nil,
       :voice_connector_group_id,
       keyword_init: true
     )
@@ -705,6 +746,7 @@ module Aws::ChimeSDKVoice
     #   <p>The Voice Connector ID.</p>
     #   @return [String]
     class DeleteVoiceConnectorOriginationRequest < Struct.new(
+      nil,
       :voice_connector_id,
       keyword_init: true
     )
@@ -715,6 +757,7 @@ module Aws::ChimeSDKVoice
     #   <p>The Voice Connector ID.</p>
     #   @return [String]
     class DeleteVoiceConnectorProxyRequest < Struct.new(
+      nil,
       :voice_connector_id,
       keyword_init: true
     )
@@ -725,6 +768,7 @@ module Aws::ChimeSDKVoice
     #   <p>The Voice Connector ID.</p>
     #   @return [String]
     class DeleteVoiceConnectorRequest < Struct.new(
+      nil,
       :voice_connector_id,
       keyword_init: true
     )
@@ -735,6 +779,7 @@ module Aws::ChimeSDKVoice
     #   <p>The Voice Connector ID.</p>
     #   @return [String]
     class DeleteVoiceConnectorStreamingConfigurationRequest < Struct.new(
+      nil,
       :voice_connector_id,
       keyword_init: true
     )
@@ -749,6 +794,7 @@ module Aws::ChimeSDKVoice
     #            in US-ASCII format.</p>
     #   @return [Array<String>]
     class DeleteVoiceConnectorTerminationCredentialsRequest < Struct.new(
+      nil,
       :voice_connector_id,
       :usernames,
       keyword_init: true
@@ -760,6 +806,7 @@ module Aws::ChimeSDKVoice
     #   <p>The Voice Connector ID.</p>
     #   @return [String]
     class DeleteVoiceConnectorTerminationRequest < Struct.new(
+      nil,
       :voice_connector_id,
       keyword_init: true
     )
@@ -770,6 +817,7 @@ module Aws::ChimeSDKVoice
     #   <p>The voice profile domain ID.</p>
     #   @return [String]
     class DeleteVoiceProfileDomainRequest < Struct.new(
+      nil,
       :voice_profile_domain_id,
       keyword_init: true
     )
@@ -780,6 +828,7 @@ module Aws::ChimeSDKVoice
     #   <p>The voice profile ID.</p>
     #   @return [String]
     class DeleteVoiceProfileRequest < Struct.new(
+      nil,
       :voice_profile_id,
       keyword_init: true
     )
@@ -793,6 +842,7 @@ module Aws::ChimeSDKVoice
     #   <p>The list of phone numbers, in E.164 format.</p>
     #   @return [Array<String>]
     class DisassociatePhoneNumbersFromVoiceConnectorGroupRequest < Struct.new(
+      nil,
       :voice_connector_group_id,
       :e164_phone_numbers,
       keyword_init: true
@@ -805,6 +855,7 @@ module Aws::ChimeSDKVoice
     #            a list of the phone numbers is returned, along with error codes and error messages.</p>
     #   @return [Array<Types::PhoneNumberError>]
     class DisassociatePhoneNumbersFromVoiceConnectorGroupResponse < Struct.new(
+      nil,
       :phone_number_errors,
       keyword_init: true
     )
@@ -818,6 +869,7 @@ module Aws::ChimeSDKVoice
     #   <p>List of phone numbers, in E.164 format.</p>
     #   @return [Array<String>]
     class DisassociatePhoneNumbersFromVoiceConnectorRequest < Struct.new(
+      nil,
       :voice_connector_id,
       :e164_phone_numbers,
       keyword_init: true
@@ -830,6 +882,7 @@ module Aws::ChimeSDKVoice
     #            list of the phone numbers is returned, along with error codes and error messages.</p>
     #   @return [Array<Types::PhoneNumberError>]
     class DisassociatePhoneNumbersFromVoiceConnectorResponse < Struct.new(
+      nil,
       :phone_number_errors,
       keyword_init: true
     )
@@ -843,6 +896,7 @@ module Aws::ChimeSDKVoice
     #            details.</p>
     #   @return [Array<Types::DNISEmergencyCallingConfiguration>]
     class EmergencyCallingConfiguration < Struct.new(
+      nil,
       :dnis,
       keyword_init: true
     )
@@ -858,6 +912,7 @@ module Aws::ChimeSDKVoice
     #   <p>The contact center system.</p>
     #   @return [Array<String>]
     class ExternalSystemsConfiguration < Struct.new(
+      nil,
       :session_border_controller_types,
       :contact_center_system_types,
       keyword_init: true
@@ -871,6 +926,7 @@ module Aws::ChimeSDKVoice
     # @!attribute message
     #   @return [String]
     class ForbiddenException < Struct.new(
+      nil,
       :code,
       :message,
       keyword_init: true
@@ -886,6 +942,7 @@ module Aws::ChimeSDKVoice
     #   <p>The area code.</p>
     #   @return [String]
     class GeoMatchParams < Struct.new(
+      nil,
       :country,
       :area_code,
       keyword_init: true
@@ -897,6 +954,7 @@ module Aws::ChimeSDKVoice
     #   <p>The Voice Connector settings.</p>
     #   @return [Types::VoiceConnectorSettings]
     class GetGlobalSettingsResponse < Struct.new(
+      nil,
       :voice_connector,
       keyword_init: true
     )
@@ -907,6 +965,7 @@ module Aws::ChimeSDKVoice
     #   <p>The ID of the phone number order .</p>
     #   @return [String]
     class GetPhoneNumberOrderRequest < Struct.new(
+      nil,
       :phone_number_order_id,
       keyword_init: true
     )
@@ -917,6 +976,7 @@ module Aws::ChimeSDKVoice
     #   <p>The phone number order details.</p>
     #   @return [Types::PhoneNumberOrder]
     class GetPhoneNumberOrderResponse < Struct.new(
+      nil,
       :phone_number_order,
       keyword_init: true
     )
@@ -927,6 +987,7 @@ module Aws::ChimeSDKVoice
     #   <p>The phone number ID.</p>
     #   @return [String]
     class GetPhoneNumberRequest < Struct.new(
+      nil,
       :phone_number_id,
       keyword_init: true
     )
@@ -937,6 +998,7 @@ module Aws::ChimeSDKVoice
     #   <p>The phone number details.</p>
     #   @return [Types::PhoneNumber]
     class GetPhoneNumberResponse < Struct.new(
+      nil,
       :phone_number,
       keyword_init: true
     )
@@ -950,6 +1012,7 @@ module Aws::ChimeSDKVoice
     #   <p>The updated outbound calling name timestamp, in ISO 8601 format.</p>
     #   @return [Time]
     class GetPhoneNumberSettingsResponse < Struct.new(
+      nil,
       :calling_name,
       :calling_name_updated_timestamp,
       keyword_init: true
@@ -964,6 +1027,7 @@ module Aws::ChimeSDKVoice
     #   <p>The proxy session ID.</p>
     #   @return [String]
     class GetProxySessionRequest < Struct.new(
+      nil,
       :voice_connector_id,
       :proxy_session_id,
       keyword_init: true
@@ -975,6 +1039,7 @@ module Aws::ChimeSDKVoice
     #   <p>The proxy session details.</p>
     #   @return [Types::ProxySession]
     class GetProxySessionResponse < Struct.new(
+      nil,
       :proxy_session,
       keyword_init: true
     )
@@ -985,6 +1050,7 @@ module Aws::ChimeSDKVoice
     #   <p>The SIP media application ID.</p>
     #   @return [String]
     class GetSipMediaApplicationAlexaSkillConfigurationRequest < Struct.new(
+      nil,
       :sip_media_application_id,
       keyword_init: true
     )
@@ -995,6 +1061,7 @@ module Aws::ChimeSDKVoice
     #   <p>Returns the Alexa Skill configuration.</p>
     #   @return [Types::SipMediaApplicationAlexaSkillConfiguration]
     class GetSipMediaApplicationAlexaSkillConfigurationResponse < Struct.new(
+      nil,
       :sip_media_application_alexa_skill_configuration,
       keyword_init: true
     )
@@ -1005,6 +1072,7 @@ module Aws::ChimeSDKVoice
     #   <p>The SIP media application ID.</p>
     #   @return [String]
     class GetSipMediaApplicationLoggingConfigurationRequest < Struct.new(
+      nil,
       :sip_media_application_id,
       keyword_init: true
     )
@@ -1015,6 +1083,7 @@ module Aws::ChimeSDKVoice
     #   <p>The actual logging configuration.</p>
     #   @return [Types::SipMediaApplicationLoggingConfiguration]
     class GetSipMediaApplicationLoggingConfigurationResponse < Struct.new(
+      nil,
       :sip_media_application_logging_configuration,
       keyword_init: true
     )
@@ -1025,6 +1094,7 @@ module Aws::ChimeSDKVoice
     #   <p>The SIP media application ID .</p>
     #   @return [String]
     class GetSipMediaApplicationRequest < Struct.new(
+      nil,
       :sip_media_application_id,
       keyword_init: true
     )
@@ -1035,6 +1105,7 @@ module Aws::ChimeSDKVoice
     #   <p>The details of the SIP media application.</p>
     #   @return [Types::SipMediaApplication]
     class GetSipMediaApplicationResponse < Struct.new(
+      nil,
       :sip_media_application,
       keyword_init: true
     )
@@ -1045,6 +1116,7 @@ module Aws::ChimeSDKVoice
     #   <p>The SIP rule ID.</p>
     #   @return [String]
     class GetSipRuleRequest < Struct.new(
+      nil,
       :sip_rule_id,
       keyword_init: true
     )
@@ -1055,6 +1127,7 @@ module Aws::ChimeSDKVoice
     #   <p>The SIP rule details.</p>
     #   @return [Types::SipRule]
     class GetSipRuleResponse < Struct.new(
+      nil,
       :sip_rule,
       keyword_init: true
     )
@@ -1068,6 +1141,7 @@ module Aws::ChimeSDKVoice
     #   <p>The ID of the speaker search task.</p>
     #   @return [String]
     class GetSpeakerSearchTaskRequest < Struct.new(
+      nil,
       :voice_connector_id,
       :speaker_search_task_id,
       keyword_init: true
@@ -1079,6 +1153,7 @@ module Aws::ChimeSDKVoice
     #   <p>The details of the speaker search task.</p>
     #   @return [Types::SpeakerSearchTask]
     class GetSpeakerSearchTaskResponse < Struct.new(
+      nil,
       :speaker_search_task,
       keyword_init: true
     )
@@ -1089,6 +1164,7 @@ module Aws::ChimeSDKVoice
     #   <p>The Voice Connector ID.</p>
     #   @return [String]
     class GetVoiceConnectorEmergencyCallingConfigurationRequest < Struct.new(
+      nil,
       :voice_connector_id,
       keyword_init: true
     )
@@ -1099,6 +1175,7 @@ module Aws::ChimeSDKVoice
     #   <p>The details of the emergency calling configuration.</p>
     #   @return [Types::EmergencyCallingConfiguration]
     class GetVoiceConnectorEmergencyCallingConfigurationResponse < Struct.new(
+      nil,
       :emergency_calling_configuration,
       keyword_init: true
     )
@@ -1110,6 +1187,7 @@ module Aws::ChimeSDKVoice
     #            external system configuration.</p>
     #   @return [String]
     class GetVoiceConnectorExternalSystemsConfigurationRequest < Struct.new(
+      nil,
       :voice_connector_id,
       keyword_init: true
     )
@@ -1120,6 +1198,7 @@ module Aws::ChimeSDKVoice
     #   <p>An object that contains information about an external systems configuration for a Voice Connector.</p>
     #   @return [Types::ExternalSystemsConfiguration]
     class GetVoiceConnectorExternalSystemsConfigurationResponse < Struct.new(
+      nil,
       :external_systems_configuration,
       keyword_init: true
     )
@@ -1130,6 +1209,7 @@ module Aws::ChimeSDKVoice
     #   <p>The Voice Connector group ID.</p>
     #   @return [String]
     class GetVoiceConnectorGroupRequest < Struct.new(
+      nil,
       :voice_connector_group_id,
       keyword_init: true
     )
@@ -1140,6 +1220,7 @@ module Aws::ChimeSDKVoice
     #   <p>The details of the Voice Connector group.</p>
     #   @return [Types::VoiceConnectorGroup]
     class GetVoiceConnectorGroupResponse < Struct.new(
+      nil,
       :voice_connector_group,
       keyword_init: true
     )
@@ -1150,6 +1231,7 @@ module Aws::ChimeSDKVoice
     #   <p>The Voice Connector ID.</p>
     #   @return [String]
     class GetVoiceConnectorLoggingConfigurationRequest < Struct.new(
+      nil,
       :voice_connector_id,
       keyword_init: true
     )
@@ -1160,6 +1242,7 @@ module Aws::ChimeSDKVoice
     #   <p>The logging configuration details .</p>
     #   @return [Types::LoggingConfiguration]
     class GetVoiceConnectorLoggingConfigurationResponse < Struct.new(
+      nil,
       :logging_configuration,
       keyword_init: true
     )
@@ -1170,6 +1253,7 @@ module Aws::ChimeSDKVoice
     #   <p>The Voice Connector ID.</p>
     #   @return [String]
     class GetVoiceConnectorOriginationRequest < Struct.new(
+      nil,
       :voice_connector_id,
       keyword_init: true
     )
@@ -1180,6 +1264,7 @@ module Aws::ChimeSDKVoice
     #   <p>The origination setting details.</p>
     #   @return [Types::Origination]
     class GetVoiceConnectorOriginationResponse < Struct.new(
+      nil,
       :origination,
       keyword_init: true
     )
@@ -1190,6 +1275,7 @@ module Aws::ChimeSDKVoice
     #   <p>The Voice Connector ID.</p>
     #   @return [String]
     class GetVoiceConnectorProxyRequest < Struct.new(
+      nil,
       :voice_connector_id,
       keyword_init: true
     )
@@ -1200,6 +1286,7 @@ module Aws::ChimeSDKVoice
     #   <p>The proxy configuration details.</p>
     #   @return [Types::Proxy]
     class GetVoiceConnectorProxyResponse < Struct.new(
+      nil,
       :proxy,
       keyword_init: true
     )
@@ -1210,6 +1297,7 @@ module Aws::ChimeSDKVoice
     #   <p>The Voice Connector ID.</p>
     #   @return [String]
     class GetVoiceConnectorRequest < Struct.new(
+      nil,
       :voice_connector_id,
       keyword_init: true
     )
@@ -1220,6 +1308,7 @@ module Aws::ChimeSDKVoice
     #   <p>The Voice Connector details.</p>
     #   @return [Types::VoiceConnector]
     class GetVoiceConnectorResponse < Struct.new(
+      nil,
       :voice_connector,
       keyword_init: true
     )
@@ -1230,6 +1319,7 @@ module Aws::ChimeSDKVoice
     #   <p>The Voice Connector ID.</p>
     #   @return [String]
     class GetVoiceConnectorStreamingConfigurationRequest < Struct.new(
+      nil,
       :voice_connector_id,
       keyword_init: true
     )
@@ -1240,6 +1330,7 @@ module Aws::ChimeSDKVoice
     #   <p>The details of the streaming configuration.</p>
     #   @return [Types::StreamingConfiguration]
     class GetVoiceConnectorStreamingConfigurationResponse < Struct.new(
+      nil,
       :streaming_configuration,
       keyword_init: true
     )
@@ -1250,6 +1341,7 @@ module Aws::ChimeSDKVoice
     #   <p>The Voice Connector ID.</p>
     #   @return [String]
     class GetVoiceConnectorTerminationHealthRequest < Struct.new(
+      nil,
       :voice_connector_id,
       keyword_init: true
     )
@@ -1260,6 +1352,7 @@ module Aws::ChimeSDKVoice
     #   <p>The termination health details.</p>
     #   @return [Types::TerminationHealth]
     class GetVoiceConnectorTerminationHealthResponse < Struct.new(
+      nil,
       :termination_health,
       keyword_init: true
     )
@@ -1270,6 +1363,7 @@ module Aws::ChimeSDKVoice
     #   <p>The Voice Connector ID.</p>
     #   @return [String]
     class GetVoiceConnectorTerminationRequest < Struct.new(
+      nil,
       :voice_connector_id,
       keyword_init: true
     )
@@ -1280,6 +1374,7 @@ module Aws::ChimeSDKVoice
     #   <p>The termination setting details.</p>
     #   @return [Types::Termination]
     class GetVoiceConnectorTerminationResponse < Struct.new(
+      nil,
       :termination,
       keyword_init: true
     )
@@ -1290,6 +1385,7 @@ module Aws::ChimeSDKVoice
     #   <p>The voice profile domain ID.</p>
     #   @return [String]
     class GetVoiceProfileDomainRequest < Struct.new(
+      nil,
       :voice_profile_domain_id,
       keyword_init: true
     )
@@ -1300,6 +1396,7 @@ module Aws::ChimeSDKVoice
     #   <p>The details of the voice profile domain.</p>
     #   @return [Types::VoiceProfileDomain]
     class GetVoiceProfileDomainResponse < Struct.new(
+      nil,
       :voice_profile_domain,
       keyword_init: true
     )
@@ -1310,6 +1407,7 @@ module Aws::ChimeSDKVoice
     #   <p>The voice profile ID.</p>
     #   @return [String]
     class GetVoiceProfileRequest < Struct.new(
+      nil,
       :voice_profile_id,
       keyword_init: true
     )
@@ -1320,6 +1418,7 @@ module Aws::ChimeSDKVoice
     #   <p>The voice profile details.</p>
     #   @return [Types::VoiceProfile]
     class GetVoiceProfileResponse < Struct.new(
+      nil,
       :voice_profile,
       keyword_init: true
     )
@@ -1336,6 +1435,7 @@ module Aws::ChimeSDKVoice
     #   <p>Specifies whether the voice being analyzed is the caller (originator) or the callee (responder).</p>
     #   @return [Boolean]
     class GetVoiceToneAnalysisTaskRequest < Struct.new(
+      nil,
       :voice_connector_id,
       :voice_tone_analysis_task_id,
       :is_caller,
@@ -1348,6 +1448,7 @@ module Aws::ChimeSDKVoice
     #   <p>The details of the voice tone analysis task.</p>
     #   @return [Types::VoiceToneAnalysisTask]
     class GetVoiceToneAnalysisTaskResponse < Struct.new(
+      nil,
       :voice_tone_analysis_task,
       keyword_init: true
     )
@@ -1360,6 +1461,7 @@ module Aws::ChimeSDKVoice
     # @!attribute message
     #   @return [String]
     class GoneException < Struct.new(
+      nil,
       :code,
       :message,
       keyword_init: true
@@ -1371,6 +1473,7 @@ module Aws::ChimeSDKVoice
     #   <p>The list of AWS Regions.</p>
     #   @return [Array<String>]
     class ListAvailableVoiceConnectorRegionsResponse < Struct.new(
+      nil,
       :voice_connector_regions,
       keyword_init: true
     )
@@ -1384,6 +1487,7 @@ module Aws::ChimeSDKVoice
     #   <p>The maximum number of results to return in a single call.</p>
     #   @return [Integer]
     class ListPhoneNumberOrdersRequest < Struct.new(
+      nil,
       :next_token,
       :max_results,
       keyword_init: true
@@ -1398,6 +1502,7 @@ module Aws::ChimeSDKVoice
     #   <p>The token used to retrieve the next page of results.</p>
     #   @return [String]
     class ListPhoneNumberOrdersResponse < Struct.new(
+      nil,
       :phone_number_orders,
       :next_token,
       keyword_init: true
@@ -1424,6 +1529,7 @@ module Aws::ChimeSDKVoice
     #   <p>The token used to return the next page of results.</p>
     #   @return [String]
     class ListPhoneNumbersRequest < Struct.new(
+      nil,
       :status,
       :product_type,
       :filter_name,
@@ -1442,6 +1548,7 @@ module Aws::ChimeSDKVoice
     #   <p>The token used to return the next page of results.</p>
     #   @return [String]
     class ListPhoneNumbersResponse < Struct.new(
+      nil,
       :phone_numbers,
       :next_token,
       keyword_init: true
@@ -1462,6 +1569,7 @@ module Aws::ChimeSDKVoice
     #   <p>The maximum number of results to return in a single call.</p>
     #   @return [Integer]
     class ListProxySessionsRequest < Struct.new(
+      nil,
       :voice_connector_id,
       :status,
       :next_token,
@@ -1478,6 +1586,7 @@ module Aws::ChimeSDKVoice
     #   <p>The token used to retrieve the next page of results.</p>
     #   @return [String]
     class ListProxySessionsResponse < Struct.new(
+      nil,
       :proxy_sessions,
       :next_token,
       keyword_init: true
@@ -1492,6 +1601,7 @@ module Aws::ChimeSDKVoice
     #   <p>The token used to return the next page of results.</p>
     #   @return [String]
     class ListSipMediaApplicationsRequest < Struct.new(
+      nil,
       :max_results,
       :next_token,
       keyword_init: true
@@ -1506,6 +1616,7 @@ module Aws::ChimeSDKVoice
     #   <p>The token used to return the next page of results.</p>
     #   @return [String]
     class ListSipMediaApplicationsResponse < Struct.new(
+      nil,
       :sip_media_applications,
       :next_token,
       keyword_init: true
@@ -1523,6 +1634,7 @@ module Aws::ChimeSDKVoice
     #   <p>The token used to return the next page of results.</p>
     #   @return [String]
     class ListSipRulesRequest < Struct.new(
+      nil,
       :sip_media_application_id,
       :max_results,
       :next_token,
@@ -1538,6 +1650,7 @@ module Aws::ChimeSDKVoice
     #   <p>The token used to return the next page of results.</p>
     #   @return [String]
     class ListSipRulesResponse < Struct.new(
+      nil,
       :sip_rules,
       :next_token,
       keyword_init: true
@@ -1549,6 +1662,7 @@ module Aws::ChimeSDKVoice
     #   <p>The phone number product type.</p>
     #   @return [String]
     class ListSupportedPhoneNumberCountriesRequest < Struct.new(
+      nil,
       :product_type,
       keyword_init: true
     )
@@ -1559,6 +1673,7 @@ module Aws::ChimeSDKVoice
     #   <p>The supported phone number countries.</p>
     #   @return [Array<Types::PhoneNumberCountry>]
     class ListSupportedPhoneNumberCountriesResponse < Struct.new(
+      nil,
       :phone_number_countries,
       keyword_init: true
     )
@@ -1569,6 +1684,7 @@ module Aws::ChimeSDKVoice
     #   <p>The resource ARN.</p>
     #   @return [String]
     class ListTagsForResourceRequest < Struct.new(
+      nil,
       :resource_arn,
       keyword_init: true
     )
@@ -1579,6 +1695,7 @@ module Aws::ChimeSDKVoice
     #   <p>The tags in the list.</p>
     #   @return [Array<Types::Tag>]
     class ListTagsForResourceResponse < Struct.new(
+      nil,
       :tags,
       keyword_init: true
     )
@@ -1592,6 +1709,7 @@ module Aws::ChimeSDKVoice
     #   <p>The maximum number of results to return in a single call.  </p>
     #   @return [Integer]
     class ListVoiceConnectorGroupsRequest < Struct.new(
+      nil,
       :next_token,
       :max_results,
       keyword_init: true
@@ -1606,6 +1724,7 @@ module Aws::ChimeSDKVoice
     #   <p>The token used to return the next page of results.</p>
     #   @return [String]
     class ListVoiceConnectorGroupsResponse < Struct.new(
+      nil,
       :voice_connector_groups,
       :next_token,
       keyword_init: true
@@ -1617,6 +1736,7 @@ module Aws::ChimeSDKVoice
     #   <p>The Voice Connector ID.</p>
     #   @return [String]
     class ListVoiceConnectorTerminationCredentialsRequest < Struct.new(
+      nil,
       :voice_connector_id,
       keyword_init: true
     )
@@ -1627,6 +1747,7 @@ module Aws::ChimeSDKVoice
     #   <p>A list of user names.</p>
     #   @return [Array<String>]
     class ListVoiceConnectorTerminationCredentialsResponse < Struct.new(
+      nil,
       :usernames,
       keyword_init: true
     )
@@ -1640,6 +1761,7 @@ module Aws::ChimeSDKVoice
     #   <p>The maximum number of results to return in a single call.</p>
     #   @return [Integer]
     class ListVoiceConnectorsRequest < Struct.new(
+      nil,
       :next_token,
       :max_results,
       keyword_init: true
@@ -1654,6 +1776,7 @@ module Aws::ChimeSDKVoice
     #   <p>The token used to return the next page of results.</p>
     #   @return [String]
     class ListVoiceConnectorsResponse < Struct.new(
+      nil,
       :voice_connectors,
       :next_token,
       keyword_init: true
@@ -1668,6 +1791,7 @@ module Aws::ChimeSDKVoice
     #   <p>The maximum number of results to return in a single call.</p>
     #   @return [Integer]
     class ListVoiceProfileDomainsRequest < Struct.new(
+      nil,
       :next_token,
       :max_results,
       keyword_init: true
@@ -1682,6 +1806,7 @@ module Aws::ChimeSDKVoice
     #   <p>The token used to return the next page of results.</p>
     #   @return [String]
     class ListVoiceProfileDomainsResponse < Struct.new(
+      nil,
       :voice_profile_domains,
       :next_token,
       keyword_init: true
@@ -1699,6 +1824,7 @@ module Aws::ChimeSDKVoice
     #   <p>The maximum number of results in the request.</p>
     #   @return [Integer]
     class ListVoiceProfilesRequest < Struct.new(
+      nil,
       :voice_profile_domain_id,
       :next_token,
       :max_results,
@@ -1714,6 +1840,7 @@ module Aws::ChimeSDKVoice
     #   <p>The token used to retrieve the next page of results.</p>
     #   @return [String]
     class ListVoiceProfilesResponse < Struct.new(
+      nil,
       :voice_profiles,
       :next_token,
       keyword_init: true
@@ -1730,6 +1857,7 @@ module Aws::ChimeSDKVoice
     #   <p>Enables or disables media metrics logging.</p>
     #   @return [Boolean]
     class LoggingConfiguration < Struct.new(
+      nil,
       :enable_sip_logs,
       :enable_media_metric_logs,
       keyword_init: true
@@ -1745,6 +1873,7 @@ module Aws::ChimeSDKVoice
     #   <p>The configuration's ARN.</p>
     #   @return [String]
     class MediaInsightsConfiguration < Struct.new(
+      nil,
       :disabled,
       :configuration_arn,
       keyword_init: true
@@ -1758,6 +1887,7 @@ module Aws::ChimeSDKVoice
     # @!attribute message
     #   @return [String]
     class NotFoundException < Struct.new(
+      nil,
       :code,
       :message,
       keyword_init: true
@@ -1773,6 +1903,7 @@ module Aws::ChimeSDKVoice
     #   <p>The phone number status.</p>
     #   @return [String]
     class OrderedPhoneNumber < Struct.new(
+      nil,
       :e164_phone_number,
       :status,
       keyword_init: true
@@ -1798,6 +1929,7 @@ module Aws::ChimeSDKVoice
     #            <code>Routes</code>.</p>
     #   @return [Boolean]
     class Origination < Struct.new(
+      nil,
       :routes,
       :disabled,
       keyword_init: true
@@ -1830,6 +1962,7 @@ module Aws::ChimeSDKVoice
     #            calls are distributed between them based on their relative weights.</p>
     #   @return [Integer]
     class OriginationRoute < Struct.new(
+      nil,
       :host,
       :port,
       :protocol,
@@ -1848,6 +1981,7 @@ module Aws::ChimeSDKVoice
     #   <p>The participant's proxy phone number.</p>
     #   @return [String]
     class Participant < Struct.new(
+      nil,
       :phone_number,
       :proxy_phone_number,
       keyword_init: true
@@ -1903,6 +2037,7 @@ module Aws::ChimeSDKVoice
     #   <p>The name of the phone number.</p>
     #   @return [String]
     class PhoneNumber < Struct.new(
+      nil,
       :phone_number_id,
       :e164_phone_number,
       :country,
@@ -1935,6 +2070,7 @@ module Aws::ChimeSDKVoice
     #   <p>The timestamp of the phone number association, in ISO 8601 format.</p>
     #   @return [Time]
     class PhoneNumberAssociation < Struct.new(
+      nil,
       :value,
       :name,
       :associated_timestamp,
@@ -1964,6 +2100,7 @@ module Aws::ChimeSDKVoice
     #   <p>Allows or denies inbound MMS messaging for the specified phone number.</p>
     #   @return [Boolean]
     class PhoneNumberCapabilities < Struct.new(
+      nil,
       :inbound_call,
       :outbound_call,
       :inbound_sms,
@@ -1983,6 +2120,7 @@ module Aws::ChimeSDKVoice
     #   <p>The supported phone number types.</p>
     #   @return [Array<String>]
     class PhoneNumberCountry < Struct.new(
+      nil,
       :country_code,
       :supported_phone_number_types,
       keyword_init: true
@@ -2002,6 +2140,7 @@ module Aws::ChimeSDKVoice
     #   <p>The error message.</p>
     #   @return [String]
     class PhoneNumberError < Struct.new(
+      nil,
       :phone_number_id,
       :error_code,
       :error_message,
@@ -2038,6 +2177,7 @@ module Aws::ChimeSDKVoice
     #            if a phone number order is not a porting order.</p>
     #   @return [Time]
     class PhoneNumberOrder < Struct.new(
+      nil,
       :phone_number_order_id,
       :product_type,
       :status,
@@ -2065,6 +2205,7 @@ module Aws::ChimeSDKVoice
     #   <p>The countries for proxy phone numbers to be selected from.</p>
     #   @return [Array<String>]
     class Proxy < Struct.new(
+      nil,
       :default_session_expiry_minutes,
       :disabled,
       :fall_back_phone_number,
@@ -2115,6 +2256,7 @@ module Aws::ChimeSDKVoice
     #   <p>The country and area code for the proxy phone number.</p>
     #   @return [Types::GeoMatchParams]
     class ProxySession < Struct.new(
+      nil,
       :voice_connector_id,
       :proxy_session_id,
       :name,
@@ -2140,6 +2282,7 @@ module Aws::ChimeSDKVoice
     #   <p>The Alexa Skill configuration.</p>
     #   @return [Types::SipMediaApplicationAlexaSkillConfiguration]
     class PutSipMediaApplicationAlexaSkillConfigurationRequest < Struct.new(
+      nil,
       :sip_media_application_id,
       :sip_media_application_alexa_skill_configuration,
       keyword_init: true
@@ -2151,6 +2294,7 @@ module Aws::ChimeSDKVoice
     #   <p>Returns the Alexa Skill configuration.</p>
     #   @return [Types::SipMediaApplicationAlexaSkillConfiguration]
     class PutSipMediaApplicationAlexaSkillConfigurationResponse < Struct.new(
+      nil,
       :sip_media_application_alexa_skill_configuration,
       keyword_init: true
     )
@@ -2164,6 +2308,7 @@ module Aws::ChimeSDKVoice
     #   <p>The logging configuration for the specified SIP media application.</p>
     #   @return [Types::SipMediaApplicationLoggingConfiguration]
     class PutSipMediaApplicationLoggingConfigurationRequest < Struct.new(
+      nil,
       :sip_media_application_id,
       :sip_media_application_logging_configuration,
       keyword_init: true
@@ -2175,6 +2320,7 @@ module Aws::ChimeSDKVoice
     #   <p>The updated logging configuration for the specified SIP media application.</p>
     #   @return [Types::SipMediaApplicationLoggingConfiguration]
     class PutSipMediaApplicationLoggingConfigurationResponse < Struct.new(
+      nil,
       :sip_media_application_logging_configuration,
       keyword_init: true
     )
@@ -2188,6 +2334,7 @@ module Aws::ChimeSDKVoice
     #   <p>The configuration being updated.</p>
     #   @return [Types::EmergencyCallingConfiguration]
     class PutVoiceConnectorEmergencyCallingConfigurationRequest < Struct.new(
+      nil,
       :voice_connector_id,
       :emergency_calling_configuration,
       keyword_init: true
@@ -2199,6 +2346,7 @@ module Aws::ChimeSDKVoice
     #   <p>The updated configuration.</p>
     #   @return [Types::EmergencyCallingConfiguration]
     class PutVoiceConnectorEmergencyCallingConfigurationResponse < Struct.new(
+      nil,
       :emergency_calling_configuration,
       keyword_init: true
     )
@@ -2216,6 +2364,7 @@ module Aws::ChimeSDKVoice
     #   <p>The contact center system to use.</p>
     #   @return [Array<String>]
     class PutVoiceConnectorExternalSystemsConfigurationRequest < Struct.new(
+      nil,
       :voice_connector_id,
       :session_border_controller_types,
       :contact_center_system_types,
@@ -2228,6 +2377,7 @@ module Aws::ChimeSDKVoice
     #   <p>An object that contains information about an external systems configuration for a Voice Connector.</p>
     #   @return [Types::ExternalSystemsConfiguration]
     class PutVoiceConnectorExternalSystemsConfigurationResponse < Struct.new(
+      nil,
       :external_systems_configuration,
       keyword_init: true
     )
@@ -2241,6 +2391,7 @@ module Aws::ChimeSDKVoice
     #   <p>The logging configuration being updated.</p>
     #   @return [Types::LoggingConfiguration]
     class PutVoiceConnectorLoggingConfigurationRequest < Struct.new(
+      nil,
       :voice_connector_id,
       :logging_configuration,
       keyword_init: true
@@ -2252,6 +2403,7 @@ module Aws::ChimeSDKVoice
     #   <p>The updated logging configuration.</p>
     #   @return [Types::LoggingConfiguration]
     class PutVoiceConnectorLoggingConfigurationResponse < Struct.new(
+      nil,
       :logging_configuration,
       keyword_init: true
     )
@@ -2265,6 +2417,7 @@ module Aws::ChimeSDKVoice
     #   <p>The origination settings being updated.</p>
     #   @return [Types::Origination]
     class PutVoiceConnectorOriginationRequest < Struct.new(
+      nil,
       :voice_connector_id,
       :origination,
       keyword_init: true
@@ -2276,6 +2429,7 @@ module Aws::ChimeSDKVoice
     #   <p>The updated origination settings.</p>
     #   @return [Types::Origination]
     class PutVoiceConnectorOriginationResponse < Struct.new(
+      nil,
       :origination,
       keyword_init: true
     )
@@ -2298,6 +2452,7 @@ module Aws::ChimeSDKVoice
     #   <p>When true, stops proxy sessions from being created on the specified Amazon Chime SDK Voice Connector.</p>
     #   @return [Boolean]
     class PutVoiceConnectorProxyRequest < Struct.new(
+      nil,
       :voice_connector_id,
       :default_session_expiry_minutes,
       :phone_number_pool_countries,
@@ -2312,6 +2467,7 @@ module Aws::ChimeSDKVoice
     #   <p>The proxy configuration details.</p>
     #   @return [Types::Proxy]
     class PutVoiceConnectorProxyResponse < Struct.new(
+      nil,
       :proxy,
       keyword_init: true
     )
@@ -2325,6 +2481,7 @@ module Aws::ChimeSDKVoice
     #   <p>The streaming settings being updated.</p>
     #   @return [Types::StreamingConfiguration]
     class PutVoiceConnectorStreamingConfigurationRequest < Struct.new(
+      nil,
       :voice_connector_id,
       :streaming_configuration,
       keyword_init: true
@@ -2336,6 +2493,7 @@ module Aws::ChimeSDKVoice
     #   <p>The updated streaming settings.</p>
     #   @return [Types::StreamingConfiguration]
     class PutVoiceConnectorStreamingConfigurationResponse < Struct.new(
+      nil,
       :streaming_configuration,
       keyword_init: true
     )
@@ -2349,6 +2507,7 @@ module Aws::ChimeSDKVoice
     #   <p>The termination credentials being updated.</p>
     #   @return [Array<Types::Credential>]
     class PutVoiceConnectorTerminationCredentialsRequest < Struct.new(
+      nil,
       :voice_connector_id,
       :credentials,
       keyword_init: true
@@ -2363,6 +2522,7 @@ module Aws::ChimeSDKVoice
     #   <p>The termination settings to be updated.</p>
     #   @return [Types::Termination]
     class PutVoiceConnectorTerminationRequest < Struct.new(
+      nil,
       :voice_connector_id,
       :termination,
       keyword_init: true
@@ -2374,6 +2534,7 @@ module Aws::ChimeSDKVoice
     #   <p>The updated termination settings.</p>
     #   @return [Types::Termination]
     class PutVoiceConnectorTerminationResponse < Struct.new(
+      nil,
       :termination,
       keyword_init: true
     )
@@ -2386,6 +2547,7 @@ module Aws::ChimeSDKVoice
     # @!attribute message
     #   @return [String]
     class ResourceLimitExceededException < Struct.new(
+      nil,
       :code,
       :message,
       keyword_init: true
@@ -2397,6 +2559,7 @@ module Aws::ChimeSDKVoice
     #   <p>The ID of the phone number being restored.</p>
     #   @return [String]
     class RestorePhoneNumberRequest < Struct.new(
+      nil,
       :phone_number_id,
       keyword_init: true
     )
@@ -2407,6 +2570,7 @@ module Aws::ChimeSDKVoice
     #   <p>The restored phone number.</p>
     #   @return [Types::PhoneNumber]
     class RestorePhoneNumberResponse < Struct.new(
+      nil,
       :phone_number,
       keyword_init: true
     )
@@ -2438,6 +2602,7 @@ module Aws::ChimeSDKVoice
     #   <p>The token used to return the next page of results.</p>
     #   @return [String]
     class SearchAvailablePhoneNumbersRequest < Struct.new(
+      nil,
       :area_code,
       :city,
       :country,
@@ -2458,6 +2623,7 @@ module Aws::ChimeSDKVoice
     #   <p>The token used to return the next page of results.</p>
     #   @return [String]
     class SearchAvailablePhoneNumbersResponse < Struct.new(
+      nil,
       :e164_phone_numbers,
       :next_token,
       keyword_init: true
@@ -2474,6 +2640,7 @@ module Aws::ChimeSDKVoice
     #            Asymmetric customer managed keys are not supported.</p>
     #   @return [String]
     class ServerSideEncryptionConfiguration < Struct.new(
+      nil,
       :kms_key_arn,
       keyword_init: true
     )
@@ -2486,6 +2653,7 @@ module Aws::ChimeSDKVoice
     # @!attribute message
     #   @return [String]
     class ServiceFailureException < Struct.new(
+      nil,
       :code,
       :message,
       keyword_init: true
@@ -2499,6 +2667,7 @@ module Aws::ChimeSDKVoice
     # @!attribute message
     #   @return [String]
     class ServiceUnavailableException < Struct.new(
+      nil,
       :code,
       :message,
       keyword_init: true
@@ -2531,6 +2700,7 @@ module Aws::ChimeSDKVoice
     #   <p>The ARN of the SIP media application.</p>
     #   @return [String]
     class SipMediaApplication < Struct.new(
+      nil,
       :sip_media_application_id,
       :aws_region,
       :name,
@@ -2555,6 +2725,7 @@ module Aws::ChimeSDKVoice
     #   <p>The ID of the Alexa Skill configuration.</p>
     #   @return [Array<String>]
     class SipMediaApplicationAlexaSkillConfiguration < Struct.new(
+      nil,
       :alexa_skill_status,
       :alexa_skill_ids,
       keyword_init: true
@@ -2567,6 +2738,7 @@ module Aws::ChimeSDKVoice
     #   <p>The call's transaction ID.</p>
     #   @return [String]
     class SipMediaApplicationCall < Struct.new(
+      nil,
       :transaction_id,
       keyword_init: true
     )
@@ -2579,6 +2751,7 @@ module Aws::ChimeSDKVoice
     #            The function must be created in the same AWS Region as the SIP media application.</p>
     #   @return [String]
     class SipMediaApplicationEndpoint < Struct.new(
+      nil,
       :lambda_arn,
       keyword_init: true
     )
@@ -2590,6 +2763,7 @@ module Aws::ChimeSDKVoice
     #   <p>Enables message logging for the specified SIP media application.</p>
     #   @return [Boolean]
     class SipMediaApplicationLoggingConfiguration < Struct.new(
+      nil,
       :enable_sip_media_application_message_logs,
       keyword_init: true
     )
@@ -2624,6 +2798,7 @@ module Aws::ChimeSDKVoice
     #   <p>The time at which the SIP rule was updated, in ISO 8601 format.</p>
     #   @return [Time]
     class SipRule < Struct.new(
+      nil,
       :sip_rule_id,
       :name,
       :disabled,
@@ -2649,6 +2824,7 @@ module Aws::ChimeSDKVoice
     #   <p>The AWS Region of a rule's target SIP media application.</p>
     #   @return [String]
     class SipRuleTargetApplication < Struct.new(
+      nil,
       :sip_media_application_id,
       :priority,
       :aws_region,
@@ -2665,6 +2841,7 @@ module Aws::ChimeSDKVoice
     #   <p>The status of a voice print generation operation, <code>VoiceprintGenerationSuccess</code> or <code>VoiceprintGenerationFailure</code>..</p>
     #   @return [String]
     class SpeakerSearchDetails < Struct.new(
+      nil,
       :results,
       :voiceprint_generation_status,
       keyword_init: true
@@ -2680,6 +2857,7 @@ module Aws::ChimeSDKVoice
     #   <p>The voice profile ID.</p>
     #   @return [String]
     class SpeakerSearchResult < Struct.new(
+      nil,
       :confidence_score,
       :voice_profile_id,
       keyword_init: true
@@ -2720,6 +2898,7 @@ module Aws::ChimeSDKVoice
     #   <p>A detailed message about the status of a speaker search.</p>
     #   @return [String]
     class SpeakerSearchTask < Struct.new(
+      nil,
       :speaker_search_task_id,
       :speaker_search_task_status,
       :call_details,
@@ -2749,6 +2928,7 @@ module Aws::ChimeSDKVoice
     #   <p>Specifies which call leg to stream for speaker search.</p>
     #   @return [String]
     class StartSpeakerSearchTaskRequest < Struct.new(
+      nil,
       :voice_connector_id,
       :transaction_id,
       :voice_profile_domain_id,
@@ -2763,6 +2943,7 @@ module Aws::ChimeSDKVoice
     #   <p>The details of the speaker search task.</p>
     #   @return [Types::SpeakerSearchTask]
     class StartSpeakerSearchTaskResponse < Struct.new(
+      nil,
       :speaker_search_task,
       keyword_init: true
     )
@@ -2783,6 +2964,7 @@ module Aws::ChimeSDKVoice
     #            tasks.</p>
     #   @return [String]
     class StartVoiceToneAnalysisTaskRequest < Struct.new(
+      nil,
       :voice_connector_id,
       :transaction_id,
       :language_code,
@@ -2796,6 +2978,7 @@ module Aws::ChimeSDKVoice
     #   <p>The details of the voice tone analysis task.</p>
     #   @return [Types::VoiceToneAnalysisTask]
     class StartVoiceToneAnalysisTaskResponse < Struct.new(
+      nil,
       :voice_tone_analysis_task,
       keyword_init: true
     )
@@ -2809,6 +2992,7 @@ module Aws::ChimeSDKVoice
     #   <p>The speaker search task ID.</p>
     #   @return [String]
     class StopSpeakerSearchTaskRequest < Struct.new(
+      nil,
       :voice_connector_id,
       :speaker_search_task_id,
       keyword_init: true
@@ -2823,6 +3007,7 @@ module Aws::ChimeSDKVoice
     #   <p>The ID of the voice tone analysis task.</p>
     #   @return [String]
     class StopVoiceToneAnalysisTaskRequest < Struct.new(
+      nil,
       :voice_connector_id,
       :voice_tone_analysis_task_id,
       keyword_init: true
@@ -2846,6 +3031,7 @@ module Aws::ChimeSDKVoice
     #   <p>The call analytics configuration.</p>
     #   @return [Types::MediaInsightsConfiguration]
     class StreamingConfiguration < Struct.new(
+      nil,
       :data_retention_in_hours,
       :disabled,
       :streaming_notification_targets,
@@ -2860,6 +3046,7 @@ module Aws::ChimeSDKVoice
     #   <p>The streaming notification target.</p>
     #   @return [String]
     class StreamingNotificationTarget < Struct.new(
+      nil,
       :notification_target,
       keyword_init: true
     )
@@ -2874,6 +3061,7 @@ module Aws::ChimeSDKVoice
     #   <p>The tag's value.</p>
     #   @return [String]
     class Tag < Struct.new(
+      nil,
       :key,
       :value,
       keyword_init: true
@@ -2888,6 +3076,7 @@ module Aws::ChimeSDKVoice
     #   <p>A list of the tags being added to the resource.</p>
     #   @return [Array<Types::Tag>]
     class TagResourceRequest < Struct.new(
+      nil,
       :resource_arn,
       :tags,
       keyword_init: true
@@ -2912,6 +3101,7 @@ module Aws::ChimeSDKVoice
     #   <p>When termination is disabled, outbound calls cannot be made.</p>
     #   @return [Boolean]
     class Termination < Struct.new(
+      nil,
       :cps_limit,
       :default_phone_number,
       :calling_regions,
@@ -2930,6 +3120,7 @@ module Aws::ChimeSDKVoice
     #   <p>The source IP address.</p>
     #   @return [String]
     class TerminationHealth < Struct.new(
+      nil,
       :timestamp,
       :source,
       keyword_init: true
@@ -2943,6 +3134,7 @@ module Aws::ChimeSDKVoice
     # @!attribute message
     #   @return [String]
     class ThrottledClientException < Struct.new(
+      nil,
       :code,
       :message,
       keyword_init: true
@@ -2956,6 +3148,7 @@ module Aws::ChimeSDKVoice
     # @!attribute message
     #   @return [String]
     class UnauthorizedClientException < Struct.new(
+      nil,
       :code,
       :message,
       keyword_init: true
@@ -2969,6 +3162,7 @@ module Aws::ChimeSDKVoice
     # @!attribute message
     #   @return [String]
     class UnprocessableEntityException < Struct.new(
+      nil,
       :code,
       :message,
       keyword_init: true
@@ -2983,6 +3177,7 @@ module Aws::ChimeSDKVoice
     #   <p>The keys of the tags being removed from the resource.</p>
     #   @return [Array<String>]
     class UntagResourceRequest < Struct.new(
+      nil,
       :resource_arn,
       :tag_keys,
       keyword_init: true
@@ -2994,6 +3189,7 @@ module Aws::ChimeSDKVoice
     #   <p>The Voice Connector settings.</p>
     #   @return [Types::VoiceConnectorSettings]
     class UpdateGlobalSettingsRequest < Struct.new(
+      nil,
       :voice_connector,
       keyword_init: true
     )
@@ -3013,6 +3209,7 @@ module Aws::ChimeSDKVoice
     #   <p>Specifies the updated name assigned to one or more phone numbers.</p>
     #   @return [String]
     class UpdatePhoneNumberRequest < Struct.new(
+      nil,
       :phone_number_id,
       :product_type,
       :calling_name,
@@ -3037,6 +3234,7 @@ module Aws::ChimeSDKVoice
     #   <p>The name of the phone number.</p>
     #   @return [String]
     class UpdatePhoneNumberRequestItem < Struct.new(
+      nil,
       :phone_number_id,
       :product_type,
       :calling_name,
@@ -3050,6 +3248,7 @@ module Aws::ChimeSDKVoice
     #   <p>The updated phone number details.</p>
     #   @return [Types::PhoneNumber]
     class UpdatePhoneNumberResponse < Struct.new(
+      nil,
       :phone_number,
       keyword_init: true
     )
@@ -3060,6 +3259,7 @@ module Aws::ChimeSDKVoice
     #   <p>The default outbound calling name for the account.</p>
     #   @return [String]
     class UpdatePhoneNumberSettingsRequest < Struct.new(
+      nil,
       :calling_name,
       keyword_init: true
     )
@@ -3079,6 +3279,7 @@ module Aws::ChimeSDKVoice
     #   <p>The number of minutes allowed for the proxy session.</p>
     #   @return [Integer]
     class UpdateProxySessionRequest < Struct.new(
+      nil,
       :voice_connector_id,
       :proxy_session_id,
       :capabilities,
@@ -3092,6 +3293,7 @@ module Aws::ChimeSDKVoice
     #   <p>The updated proxy session details.</p>
     #   @return [Types::ProxySession]
     class UpdateProxySessionResponse < Struct.new(
+      nil,
       :proxy_session,
       keyword_init: true
     )
@@ -3109,6 +3311,7 @@ module Aws::ChimeSDKVoice
     #            <code>CALL_UPDATE_REQUESTED</code> event. Can contain 0-20 key-value pairs.</p>
     #   @return [Hash<String, String>]
     class UpdateSipMediaApplicationCallRequest < Struct.new(
+      nil,
       :sip_media_application_id,
       :transaction_id,
       :arguments,
@@ -3121,6 +3324,7 @@ module Aws::ChimeSDKVoice
     #   <p>A <code>Call</code> instance for a SIP media application.</p>
     #   @return [Types::SipMediaApplicationCall]
     class UpdateSipMediaApplicationCallResponse < Struct.new(
+      nil,
       :sip_media_application_call,
       keyword_init: true
     )
@@ -3137,6 +3341,7 @@ module Aws::ChimeSDKVoice
     #   <p>The new set of endpoints for the specified SIP media application.</p>
     #   @return [Array<Types::SipMediaApplicationEndpoint>]
     class UpdateSipMediaApplicationRequest < Struct.new(
+      nil,
       :sip_media_application_id,
       :name,
       :endpoints,
@@ -3149,6 +3354,7 @@ module Aws::ChimeSDKVoice
     #   <p>The updated SIP media application’s details.</p>
     #   @return [Types::SipMediaApplication]
     class UpdateSipMediaApplicationResponse < Struct.new(
+      nil,
       :sip_media_application,
       keyword_init: true
     )
@@ -3168,6 +3374,7 @@ module Aws::ChimeSDKVoice
     #   <p>The new list of target applications.</p>
     #   @return [Array<Types::SipRuleTargetApplication>]
     class UpdateSipRuleRequest < Struct.new(
+      nil,
       :sip_rule_id,
       :name,
       :disabled,
@@ -3181,6 +3388,7 @@ module Aws::ChimeSDKVoice
     #   <p>The updated SIP rule details.</p>
     #   @return [Types::SipRule]
     class UpdateSipRuleResponse < Struct.new(
+      nil,
       :sip_rule,
       keyword_init: true
     )
@@ -3198,6 +3406,7 @@ module Aws::ChimeSDKVoice
     #            group.</p>
     #   @return [Array<Types::VoiceConnectorItem>]
     class UpdateVoiceConnectorGroupRequest < Struct.new(
+      nil,
       :voice_connector_group_id,
       :name,
       :voice_connector_items,
@@ -3210,6 +3419,7 @@ module Aws::ChimeSDKVoice
     #   <p>The updated Voice Connector group.</p>
     #   @return [Types::VoiceConnectorGroup]
     class UpdateVoiceConnectorGroupResponse < Struct.new(
+      nil,
       :voice_connector_group,
       keyword_init: true
     )
@@ -3226,6 +3436,7 @@ module Aws::ChimeSDKVoice
     #   <p>When enabled, requires encryption for the Voice Connector.</p>
     #   @return [Boolean]
     class UpdateVoiceConnectorRequest < Struct.new(
+      nil,
       :voice_connector_id,
       :name,
       :require_encryption,
@@ -3238,6 +3449,7 @@ module Aws::ChimeSDKVoice
     #   <p>The updated Voice Connector details.</p>
     #   @return [Types::VoiceConnector]
     class UpdateVoiceConnectorResponse < Struct.new(
+      nil,
       :voice_connector,
       keyword_init: true
     )
@@ -3254,6 +3466,7 @@ module Aws::ChimeSDKVoice
     #   <p>The description of the voice profile domain.</p>
     #   @return [String]
     class UpdateVoiceProfileDomainRequest < Struct.new(
+      nil,
       :voice_profile_domain_id,
       :name,
       :description,
@@ -3266,6 +3479,7 @@ module Aws::ChimeSDKVoice
     #   <p>The updated details of the voice profile domain.</p>
     #   @return [Types::VoiceProfileDomain]
     class UpdateVoiceProfileDomainResponse < Struct.new(
+      nil,
       :voice_profile_domain,
       keyword_init: true
     )
@@ -3279,6 +3493,7 @@ module Aws::ChimeSDKVoice
     #   <p>The ID of the speaker search task.</p>
     #   @return [String]
     class UpdateVoiceProfileRequest < Struct.new(
+      nil,
       :voice_profile_id,
       :speaker_search_task_id,
       keyword_init: true
@@ -3290,6 +3505,7 @@ module Aws::ChimeSDKVoice
     #   <p>The updated voice profile settings.</p>
     #   @return [Types::VoiceProfile]
     class UpdateVoiceProfileResponse < Struct.new(
+      nil,
       :voice_profile,
       keyword_init: true
     )
@@ -3320,6 +3536,7 @@ module Aws::ChimeSDKVoice
     #   <p>The dress postal code, such <code>04352</code>.</p>
     #   @return [String]
     class ValidateE911AddressRequest < Struct.new(
+      nil,
       :aws_account_id,
       :street_number,
       :street_info,
@@ -3363,6 +3580,7 @@ module Aws::ChimeSDKVoice
     #   <p>The list of address suggestions..</p>
     #   @return [Array<Types::CandidateAddress>]
     class ValidateE911AddressResponse < Struct.new(
+      nil,
       :validation_result,
       :address_external_id,
       :address,
@@ -3411,6 +3629,7 @@ module Aws::ChimeSDKVoice
     #   <p>The type of network of the Voice Connector. Either IPv4 only or dual-stack (IPv4 and IPv6).</p>
     #   @return [String]
     class VoiceConnector < Struct.new(
+      nil,
       :voice_connector_id,
       :aws_region,
       :name,
@@ -3449,6 +3668,7 @@ module Aws::ChimeSDKVoice
     #   <p>The ARN of the Voice Connector group.</p>
     #   @return [String]
     class VoiceConnectorGroup < Struct.new(
+      nil,
       :voice_connector_group_id,
       :name,
       :voice_connector_items,
@@ -3472,6 +3692,7 @@ module Aws::ChimeSDKVoice
     #              the system distributes calls among them based on their relative weight.</p>
     #   @return [Integer]
     class VoiceConnectorItem < Struct.new(
+      nil,
       :voice_connector_id,
       :priority,
       keyword_init: true
@@ -3485,6 +3706,7 @@ module Aws::ChimeSDKVoice
     #   <p>The S3 bucket that stores the Voice Connector's call detail records.</p>
     #   @return [String]
     class VoiceConnectorSettings < Struct.new(
+      nil,
       :cdr_bucket,
       keyword_init: true
     )
@@ -3512,6 +3734,7 @@ module Aws::ChimeSDKVoice
     #            <code>UpdateVoiceProfile</code> API.</p>
     #   @return [Time]
     class VoiceProfile < Struct.new(
+      nil,
       :voice_profile_id,
       :voice_profile_arn,
       :voice_profile_domain_id,
@@ -3546,6 +3769,7 @@ module Aws::ChimeSDKVoice
     #   <p>The time at which the voice profile was last updated.</p>
     #   @return [Time]
     class VoiceProfileDomain < Struct.new(
+      nil,
       :voice_profile_domain_id,
       :voice_profile_domain_arn,
       :name,
@@ -3578,6 +3802,7 @@ module Aws::ChimeSDKVoice
     #   <p>The time at which the voice profile domain summary was last updated.</p>
     #   @return [Time]
     class VoiceProfileDomainSummary < Struct.new(
+      nil,
       :voice_profile_domain_id,
       :voice_profile_domain_arn,
       :name,
@@ -3609,6 +3834,7 @@ module Aws::ChimeSDKVoice
     #   <p>Extends the life of the voice profile. You can use <code>UpdateVoiceProfile</code> to refresh an existing voice profile's voice print and extend the life of the summary.</p>
     #   @return [Time]
     class VoiceProfileSummary < Struct.new(
+      nil,
       :voice_profile_id,
       :voice_profile_arn,
       :voice_profile_domain_id,
@@ -3644,6 +3870,7 @@ module Aws::ChimeSDKVoice
     #   <p>The status of a voice tone analysis task.</p>
     #   @return [String]
     class VoiceToneAnalysisTask < Struct.new(
+      nil,
       :voice_tone_analysis_task_id,
       :voice_tone_analysis_task_status,
       :call_details,

@@ -10,6 +10,7 @@ module Aws::CodeBuild
     # @!attribute message
     #   @return [String]
     class AccountLimitExceededException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -20,6 +21,7 @@ module Aws::CodeBuild
     # @!attribute message
     #   @return [String]
     class AccountSuspendedException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -44,6 +46,7 @@ module Aws::CodeBuild
     #               <code>null</code> for the initial build.</p>
     #   @return [String]
     class AutoRetryConfig < Struct.new(
+      nil,
       :auto_retry_limit,
       :auto_retry_number,
       :next_auto_retry,
@@ -57,6 +60,7 @@ module Aws::CodeBuild
     #   <p>The IDs of the builds to delete.</p>
     #   @return [Array<String>]
     class BatchDeleteBuildsInput < Struct.new(
+      nil,
       :ids,
       keyword_init: true
     )
@@ -70,6 +74,7 @@ module Aws::CodeBuild
     #   <p>Information about any builds that could not be successfully deleted.</p>
     #   @return [Array<Types::BuildNotDeleted>]
     class BatchDeleteBuildsOutput < Struct.new(
+      nil,
       :builds_deleted,
       :builds_not_deleted,
       keyword_init: true
@@ -81,6 +86,7 @@ module Aws::CodeBuild
     #   <p>An array that contains the batch build identifiers to retrieve.</p>
     #   @return [Array<String>]
     class BatchGetBuildBatchesInput < Struct.new(
+      nil,
       :ids,
       keyword_init: true
     )
@@ -95,6 +101,7 @@ module Aws::CodeBuild
     #   <p>An array that contains the identifiers of any batch builds that are not found.</p>
     #   @return [Array<String>]
     class BatchGetBuildBatchesOutput < Struct.new(
+      nil,
       :build_batches,
       :build_batches_not_found,
       keyword_init: true
@@ -106,6 +113,7 @@ module Aws::CodeBuild
     #   <p>The IDs of the builds.</p>
     #   @return [Array<String>]
     class BatchGetBuildsInput < Struct.new(
+      nil,
       :ids,
       keyword_init: true
     )
@@ -119,6 +127,7 @@ module Aws::CodeBuild
     #   <p>The IDs of builds for which information could not be found.</p>
     #   @return [Array<String>]
     class BatchGetBuildsOutput < Struct.new(
+      nil,
       :builds,
       :builds_not_found,
       keyword_init: true
@@ -133,6 +142,7 @@ module Aws::CodeBuild
     #   <p>A comma separated list of <code>commandExecutionIds</code>.</p>
     #   @return [Array<String>]
     class BatchGetCommandExecutionsInput < Struct.new(
+      nil,
       :sandbox_id,
       :command_execution_ids,
       keyword_init: true
@@ -147,6 +157,7 @@ module Aws::CodeBuild
     #   <p>The IDs of command executions for which information could not be found.</p>
     #   @return [Array<String>]
     class BatchGetCommandExecutionsOutput < Struct.new(
+      nil,
       :command_executions,
       :command_executions_not_found,
       keyword_init: true
@@ -158,6 +169,7 @@ module Aws::CodeBuild
     #   <p>The names or ARNs of the compute fleets.</p>
     #   @return [Array<String>]
     class BatchGetFleetsInput < Struct.new(
+      nil,
       :names,
       keyword_init: true
     )
@@ -171,6 +183,7 @@ module Aws::CodeBuild
     #   <p>The names of compute fleets for which information could not be found.</p>
     #   @return [Array<String>]
     class BatchGetFleetsOutput < Struct.new(
+      nil,
       :fleets,
       :fleets_not_found,
       keyword_init: true
@@ -184,6 +197,7 @@ module Aws::CodeBuild
     #               using its name.</p>
     #   @return [Array<String>]
     class BatchGetProjectsInput < Struct.new(
+      nil,
       :names,
       keyword_init: true
     )
@@ -197,6 +211,7 @@ module Aws::CodeBuild
     #   <p>The names of build projects for which information could not be found.</p>
     #   @return [Array<String>]
     class BatchGetProjectsOutput < Struct.new(
+      nil,
       :projects,
       :projects_not_found,
       keyword_init: true
@@ -210,6 +225,7 @@ module Aws::CodeBuild
     #       </p>
     #   @return [Array<String>]
     class BatchGetReportGroupsInput < Struct.new(
+      nil,
       :report_group_arns,
       keyword_init: true
     )
@@ -227,6 +243,7 @@ module Aws::CodeBuild
     #       </p>
     #   @return [Array<String>]
     class BatchGetReportGroupsOutput < Struct.new(
+      nil,
       :report_groups,
       :report_groups_not_found,
       keyword_init: true
@@ -240,6 +257,7 @@ module Aws::CodeBuild
     #       </p>
     #   @return [Array<String>]
     class BatchGetReportsInput < Struct.new(
+      nil,
       :report_arns,
       keyword_init: true
     )
@@ -257,6 +275,7 @@ module Aws::CodeBuild
     #       </p>
     #   @return [Array<String>]
     class BatchGetReportsOutput < Struct.new(
+      nil,
       :reports,
       :reports_not_found,
       keyword_init: true
@@ -268,6 +287,7 @@ module Aws::CodeBuild
     #   <p>A comma separated list of <code>sandboxIds</code> or <code>sandboxArns</code>.</p>
     #   @return [Array<String>]
     class BatchGetSandboxesInput < Struct.new(
+      nil,
       :ids,
       keyword_init: true
     )
@@ -281,6 +301,7 @@ module Aws::CodeBuild
     #   <p>The IDs of sandboxes for which information could not be found.</p>
     #   @return [Array<String>]
     class BatchGetSandboxesOutput < Struct.new(
+      nil,
       :sandboxes,
       :sandboxes_not_found,
       keyword_init: true
@@ -304,6 +325,7 @@ module Aws::CodeBuild
     #                   for more information. </p>
     #   @return [Array<String>]
     class BatchRestrictions < Struct.new(
+      nil,
       :maximum_builds_allowed,
       :compute_types_allowed,
       :fleets_allowed,
@@ -514,6 +536,7 @@ module Aws::CodeBuild
     #   <p>Information about the auto-retry configuration for the build.</p>
     #   @return [Types::AutoRetryConfig]
     class Build < Struct.new(
+      nil,
       :id,
       :arn,
       :build_number,
@@ -636,6 +659,7 @@ module Aws::CodeBuild
     #            </dl>
     #   @return [String]
     class BuildArtifacts < Struct.new(
+      nil,
       :location,
       :sha256sum,
       :md5sum,
@@ -813,6 +837,7 @@ module Aws::CodeBuild
     #   <p>An array that contains the ARNs of reports created by merging reports from builds associated with this batch build.</p>
     #   @return [Array<String>]
     class BuildBatch < Struct.new(
+      nil,
       :id,
       :arn,
       :start_time,
@@ -860,6 +885,7 @@ module Aws::CodeBuild
     #               be retrieved.</p>
     #   @return [String]
     class BuildBatchFilter < Struct.new(
+      nil,
       :status,
       keyword_init: true
     )
@@ -945,6 +971,7 @@ module Aws::CodeBuild
     #               failed batch build.</p>
     #   @return [Array<Types::PhaseContext>]
     class BuildBatchPhase < Struct.new(
+      nil,
       :phase_type,
       :phase_status,
       :start_time,
@@ -978,6 +1005,7 @@ module Aws::CodeBuild
     #               build groups.</p>
     #   @return [Array<Types::BuildSummary>]
     class BuildGroup < Struct.new(
+      nil,
       :identifier,
       :depends_on,
       :ignore_failure,
@@ -1001,6 +1029,7 @@ module Aws::CodeBuild
     #   <p>Additional information about the build that could not be successfully deleted.</p>
     #   @return [String]
     class BuildNotDeleted < Struct.new(
+      nil,
       :id,
       :status_code,
       keyword_init: true
@@ -1103,6 +1132,7 @@ module Aws::CodeBuild
     #               build.</p>
     #   @return [Array<Types::PhaseContext>]
     class BuildPhase < Struct.new(
+      nil,
       :phase_type,
       :phase_status,
       :start_time,
@@ -1149,6 +1179,7 @@ module Aws::CodeBuild
     #            </dl>
     #   @return [String]
     class BuildStatusConfig < Struct.new(
+      nil,
       :context,
       :target_url,
       keyword_init: true
@@ -1201,6 +1232,7 @@ module Aws::CodeBuild
     #               artifacts for the build group.</p>
     #   @return [Array<Types::ResolvedArtifact>]
     class BuildSummary < Struct.new(
+      nil,
       :arn,
       :requested_on,
       :build_status,
@@ -1234,6 +1266,7 @@ module Aws::CodeBuild
     #                   with Log Groups and Log Streams</a>. </p>
     #   @return [String]
     class CloudWatchLogsConfig < Struct.new(
+      nil,
       :status,
       :group_name,
       :stream_name,
@@ -1278,6 +1311,7 @@ module Aws::CodeBuild
     #   <p>The date and time that the tests were run.</p>
     #   @return [Time]
     class CodeCoverage < Struct.new(
+      nil,
       :id,
       :report_arn,
       :file_path,
@@ -1317,6 +1351,7 @@ module Aws::CodeBuild
     #   <p>The number of conditional branches that are not covered by your tests.</p>
     #   @return [Integer]
     class CodeCoverageReportSummary < Struct.new(
+      nil,
       :line_coverage_percentage,
       :lines_covered,
       :lines_missed,
@@ -1369,6 +1404,7 @@ module Aws::CodeBuild
     #   <p>A <code>sandboxArn</code>.</p>
     #   @return [String]
     class CommandExecution < Struct.new(
+      nil,
       :id,
       :sandbox_id,
       :submit_time,
@@ -1404,6 +1440,7 @@ module Aws::CodeBuild
     #   <p>The EC2 instance type to be launched in your fleet.</p>
     #   @return [String]
     class ComputeConfiguration < Struct.new(
+      nil,
       :v_cpu,
       :memory,
       :disk,
@@ -1634,6 +1671,7 @@ module Aws::CodeBuild
     #         tags.</p>
     #   @return [Array<Types::Tag>]
     class CreateFleetInput < Struct.new(
+      nil,
       :name,
       :base_capacity,
       :environment_type,
@@ -1655,6 +1693,7 @@ module Aws::CodeBuild
     #   <p>Information about the compute fleet</p>
     #   @return [Types::Fleet]
     class CreateFleetOutput < Struct.new(
+      nil,
       :fleet,
       keyword_init: true
     )
@@ -1791,6 +1830,7 @@ module Aws::CodeBuild
     #         retry your build for up to 2 additional times.</p>
     #   @return [Integer]
     class CreateProjectInput < Struct.new(
+      nil,
       :name,
       :description,
       :source,
@@ -1822,6 +1862,7 @@ module Aws::CodeBuild
     #   <p>Information about the build project that was created.</p>
     #   @return [Types::Project]
     class CreateProjectOutput < Struct.new(
+      nil,
       :project,
       keyword_init: true
     )
@@ -1851,6 +1892,7 @@ module Aws::CodeBuild
     #         tags.</p>
     #   @return [Array<Types::Tag>]
     class CreateReportGroupInput < Struct.new(
+      nil,
       :name,
       :type,
       :export_config,
@@ -1866,6 +1908,7 @@ module Aws::CodeBuild
     #       </p>
     #   @return [Types::ReportGroup]
     class CreateReportGroupOutput < Struct.new(
+      nil,
       :report_group,
       keyword_init: true
     )
@@ -1920,6 +1963,7 @@ module Aws::CodeBuild
     #   <p>A PullRequestBuildPolicy object that defines comment-based approval requirements for triggering builds on pull requests. This policy helps control when automated builds are executed based on contributor permissions and approval workflows.</p>
     #   @return [Types::PullRequestBuildPolicy]
     class CreateWebhookInput < Struct.new(
+      nil,
       :project_name,
       :branch_filter,
       :filter_groups,
@@ -1937,6 +1981,7 @@ module Aws::CodeBuild
     #         CodeBuild.</p>
     #   @return [Types::Webhook]
     class CreateWebhookOutput < Struct.new(
+      nil,
       :webhook,
       keyword_init: true
     )
@@ -1954,6 +1999,7 @@ module Aws::CodeBuild
     #               build.</p>
     #   @return [String]
     class DebugSession < Struct.new(
+      nil,
       :session_enabled,
       :session_target,
       keyword_init: true
@@ -1965,6 +2011,7 @@ module Aws::CodeBuild
     #   <p>The identifier of the batch build to delete.</p>
     #   @return [String]
     class DeleteBuildBatchInput < Struct.new(
+      nil,
       :id,
       keyword_init: true
     )
@@ -1982,6 +2029,7 @@ module Aws::CodeBuild
     #               deleted.</p>
     #   @return [Array<Types::BuildNotDeleted>]
     class DeleteBuildBatchOutput < Struct.new(
+      nil,
       :status_code,
       :builds_deleted,
       :builds_not_deleted,
@@ -1994,6 +2042,7 @@ module Aws::CodeBuild
     #   <p>The ARN of the compute fleet.</p>
     #   @return [String]
     class DeleteFleetInput < Struct.new(
+      nil,
       :arn,
       keyword_init: true
     )
@@ -2001,6 +2050,7 @@ module Aws::CodeBuild
     end
 
     class DeleteFleetOutput < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -2010,6 +2060,7 @@ module Aws::CodeBuild
     #   <p>The name of the build project.</p>
     #   @return [String]
     class DeleteProjectInput < Struct.new(
+      nil,
       :name,
       keyword_init: true
     )
@@ -2017,6 +2068,7 @@ module Aws::CodeBuild
     end
 
     class DeleteProjectOutput < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -2033,6 +2085,7 @@ module Aws::CodeBuild
     #               an exception is thrown. </p>
     #   @return [Boolean]
     class DeleteReportGroupInput < Struct.new(
+      nil,
       :arn,
       :delete_reports,
       keyword_init: true
@@ -2041,6 +2094,7 @@ module Aws::CodeBuild
     end
 
     class DeleteReportGroupOutput < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -2052,6 +2106,7 @@ module Aws::CodeBuild
     #       </p>
     #   @return [String]
     class DeleteReportInput < Struct.new(
+      nil,
       :arn,
       keyword_init: true
     )
@@ -2059,6 +2114,7 @@ module Aws::CodeBuild
     end
 
     class DeleteReportOutput < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -2068,6 +2124,7 @@ module Aws::CodeBuild
     #   <p> The ARN of the resource that is associated with the resource policy. </p>
     #   @return [String]
     class DeleteResourcePolicyInput < Struct.new(
+      nil,
       :resource_arn,
       keyword_init: true
     )
@@ -2075,6 +2132,7 @@ module Aws::CodeBuild
     end
 
     class DeleteResourcePolicyOutput < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -2084,6 +2142,7 @@ module Aws::CodeBuild
     #   <p> The Amazon Resource Name (ARN) of the token.</p>
     #   @return [String]
     class DeleteSourceCredentialsInput < Struct.new(
+      nil,
       :arn,
       keyword_init: true
     )
@@ -2094,6 +2153,7 @@ module Aws::CodeBuild
     #   <p> The Amazon Resource Name (ARN) of the token. </p>
     #   @return [String]
     class DeleteSourceCredentialsOutput < Struct.new(
+      nil,
       :arn,
       keyword_init: true
     )
@@ -2104,6 +2164,7 @@ module Aws::CodeBuild
     #   <p>The name of the CodeBuild project.</p>
     #   @return [String]
     class DeleteWebhookInput < Struct.new(
+      nil,
       :project_name,
       keyword_init: true
     )
@@ -2111,6 +2172,7 @@ module Aws::CodeBuild
     end
 
     class DeleteWebhookOutput < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -2152,6 +2214,7 @@ module Aws::CodeBuild
     #   <p>The maximum line coverage percentage to report.</p>
     #   @return [Float]
     class DescribeCodeCoveragesInput < Struct.new(
+      nil,
       :report_arn,
       :next_token,
       :max_results,
@@ -2172,6 +2235,7 @@ module Aws::CodeBuild
     #   <p>An array of <code>CodeCoverage</code> objects that contain the results.</p>
     #   @return [Array<Types::CodeCoverage>]
     class DescribeCodeCoveragesOutput < Struct.new(
+      nil,
       :next_token,
       :code_coverages,
       keyword_init: true
@@ -2205,6 +2269,7 @@ module Aws::CodeBuild
     #       </p>
     #   @return [Types::TestCaseFilter]
     class DescribeTestCasesInput < Struct.new(
+      nil,
       :report_arn,
       :next_token,
       :max_results,
@@ -2229,6 +2294,7 @@ module Aws::CodeBuild
     #       </p>
     #   @return [Array<Types::TestCase>]
     class DescribeTestCasesOutput < Struct.new(
+      nil,
       :next_token,
       :test_cases,
       keyword_init: true
@@ -2278,6 +2344,7 @@ module Aws::CodeBuild
     #   <p>A DockerServerStatus object to use for this docker server.</p>
     #   @return [Types::DockerServerStatus]
     class DockerServer < Struct.new(
+      nil,
       :compute_type,
       :security_group_ids,
       :status,
@@ -2294,6 +2361,7 @@ module Aws::CodeBuild
     #   <p>A message associated with the status of a docker server.</p>
     #   @return [String]
     class DockerServerStatus < Struct.new(
+      nil,
       :status,
       :message,
       keyword_init: true
@@ -2312,6 +2380,7 @@ module Aws::CodeBuild
     #   <p>A list of environment image versions.</p>
     #   @return [Array<String>]
     class EnvironmentImage < Struct.new(
+      nil,
       :name,
       :description,
       :versions,
@@ -2330,6 +2399,7 @@ module Aws::CodeBuild
     #               language.</p>
     #   @return [Array<Types::EnvironmentImage>]
     class EnvironmentLanguage < Struct.new(
+      nil,
       :language,
       :images,
       keyword_init: true
@@ -2346,6 +2416,7 @@ module Aws::CodeBuild
     #               platform.</p>
     #   @return [Array<Types::EnvironmentLanguage>]
     class EnvironmentPlatform < Struct.new(
+      nil,
       :platform,
       :languages,
       keyword_init: true
@@ -2396,6 +2467,7 @@ module Aws::CodeBuild
     #            </ul>
     #   @return [String]
     class EnvironmentVariable < Struct.new(
+      nil,
       :name,
       :value,
       :type,
@@ -2422,6 +2494,7 @@ module Aws::CodeBuild
     #   <p>The value assigned to the exported environment variable.</p>
     #   @return [String]
     class ExportedEnvironmentVariable < Struct.new(
+      nil,
       :name,
       :value,
       keyword_init: true
@@ -2665,6 +2738,7 @@ module Aws::CodeBuild
     #         tags.</p>
     #   @return [Array<Types::Tag>]
     class Fleet < Struct.new(
+      nil,
       :arn,
       :name,
       :id,
@@ -2698,6 +2772,7 @@ module Aws::CodeBuild
     #   <p>The destination of the proxy rule.</p>
     #   @return [Array<String>]
     class FleetProxyRule < Struct.new(
+      nil,
       :type,
       :effect,
       :entities,
@@ -2761,6 +2836,7 @@ module Aws::CodeBuild
     #   <p>A message associated with the status of a compute fleet.</p>
     #   @return [String]
     class FleetStatus < Struct.new(
+      nil,
       :status_code,
       :context,
       :message,
@@ -2840,6 +2916,7 @@ module Aws::CodeBuild
     #            </dl>
     #   @return [String]
     class GetReportGroupTrendInput < Struct.new(
+      nil,
       :report_group_arn,
       :num_of_reports,
       :trend_field,
@@ -2855,6 +2932,7 @@ module Aws::CodeBuild
     #   <p>An array that contains the raw data for each report.</p>
     #   @return [Array<Types::ReportWithRawData>]
     class GetReportGroupTrendOutput < Struct.new(
+      nil,
       :stats,
       :raw_data,
       keyword_init: true
@@ -2866,6 +2944,7 @@ module Aws::CodeBuild
     #   <p> The ARN of the resource that is associated with the resource policy. </p>
     #   @return [String]
     class GetResourcePolicyInput < Struct.new(
+      nil,
       :resource_arn,
       keyword_init: true
     )
@@ -2876,6 +2955,7 @@ module Aws::CodeBuild
     #   <p> The resource policy for the resource identified by the input ARN parameter. </p>
     #   @return [String]
     class GetResourcePolicyOutput < Struct.new(
+      nil,
       :policy,
       keyword_init: true
     )
@@ -2888,6 +2968,7 @@ module Aws::CodeBuild
     #   <p> Set to true to fetch Git submodules for your CodeBuild build project. </p>
     #   @return [Boolean]
     class GitSubmodulesConfig < Struct.new(
+      nil,
       :fetch_submodules,
       keyword_init: true
     )
@@ -2917,6 +2998,7 @@ module Aws::CodeBuild
     #               value is <code>true</code>. </p>
     #   @return [Boolean]
     class ImportSourceCredentialsInput < Struct.new(
+      nil,
       :username,
       :token,
       :server_type,
@@ -2931,6 +3013,7 @@ module Aws::CodeBuild
     #   <p> The Amazon Resource Name (ARN) of the token. </p>
     #   @return [String]
     class ImportSourceCredentialsOutput < Struct.new(
+      nil,
       :arn,
       keyword_init: true
     )
@@ -2941,6 +3024,7 @@ module Aws::CodeBuild
     # @!attribute message
     #   @return [String]
     class InvalidInputException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -2951,6 +3035,7 @@ module Aws::CodeBuild
     #   <p>The name of the CodeBuild build project that the cache is reset for.</p>
     #   @return [String]
     class InvalidateProjectCacheInput < Struct.new(
+      nil,
       :project_name,
       keyword_init: true
     )
@@ -2958,6 +3043,7 @@ module Aws::CodeBuild
     end
 
     class InvalidateProjectCacheOutput < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -2993,6 +3079,7 @@ module Aws::CodeBuild
     #               beginning of the list, exclude this parameter.</p>
     #   @return [String]
     class ListBuildBatchesForProjectInput < Struct.new(
+      nil,
       :project_name,
       :filter,
       :max_results,
@@ -3012,6 +3099,7 @@ module Aws::CodeBuild
     #               items.</p>
     #   @return [String]
     class ListBuildBatchesForProjectOutput < Struct.new(
+      nil,
       :ids,
       :next_token,
       keyword_init: true
@@ -3044,6 +3132,7 @@ module Aws::CodeBuild
     #               beginning of the list, exclude this parameter.</p>
     #   @return [String]
     class ListBuildBatchesInput < Struct.new(
+      nil,
       :filter,
       :max_results,
       :sort_order,
@@ -3061,6 +3150,7 @@ module Aws::CodeBuild
     #               call to <code>ListBuildBatches</code> to retrieve the next set of items.</p>
     #   @return [String]
     class ListBuildBatchesOutput < Struct.new(
+      nil,
       :ids,
       :next_token,
       keyword_init: true
@@ -3097,6 +3187,7 @@ module Aws::CodeBuild
     #               until no more next tokens are returned.</p>
     #   @return [String]
     class ListBuildsForProjectInput < Struct.new(
+      nil,
       :project_name,
       :sort_order,
       :next_token,
@@ -3116,6 +3207,7 @@ module Aws::CodeBuild
     #               call.</p>
     #   @return [String]
     class ListBuildsForProjectOutput < Struct.new(
+      nil,
       :ids,
       :next_token,
       keyword_init: true
@@ -3147,6 +3239,7 @@ module Aws::CodeBuild
     #               until no more next tokens are returned.</p>
     #   @return [String]
     class ListBuildsInput < Struct.new(
+      nil,
       :sort_order,
       :next_token,
       keyword_init: true
@@ -3164,6 +3257,7 @@ module Aws::CodeBuild
     #               call.</p>
     #   @return [String]
     class ListBuildsOutput < Struct.new(
+      nil,
       :ids,
       :next_token,
       keyword_init: true
@@ -3184,6 +3278,7 @@ module Aws::CodeBuild
     #   <p>The next token, if any, to get paginated results. You will get this value from previous execution of list sandboxes.</p>
     #   @return [String]
     class ListCommandExecutionsForSandboxInput < Struct.new(
+      nil,
       :sandbox_id,
       :max_results,
       :sort_order,
@@ -3200,6 +3295,7 @@ module Aws::CodeBuild
     #   <p>Information about the next token to get paginated results.</p>
     #   @return [String]
     class ListCommandExecutionsForSandboxOutput < Struct.new(
+      nil,
       :command_executions,
       :next_token,
       keyword_init: true
@@ -3208,6 +3304,7 @@ module Aws::CodeBuild
     end
 
     class ListCuratedEnvironmentImagesInput < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -3218,6 +3315,7 @@ module Aws::CodeBuild
     #               CodeBuild.</p>
     #   @return [Array<Types::EnvironmentPlatform>]
     class ListCuratedEnvironmentImagesOutput < Struct.new(
+      nil,
       :platforms,
       keyword_init: true
     )
@@ -3273,6 +3371,7 @@ module Aws::CodeBuild
     #                   based on the preceding criteria.</p>
     #   @return [String]
     class ListFleetsInput < Struct.new(
+      nil,
       :next_token,
       :max_results,
       :sort_order,
@@ -3292,6 +3391,7 @@ module Aws::CodeBuild
     #   <p>The list of compute fleet names.</p>
     #   @return [Array<String>]
     class ListFleetsOutput < Struct.new(
+      nil,
       :next_token,
       :fleets,
       keyword_init: true
@@ -3344,6 +3444,7 @@ module Aws::CodeBuild
     #               until no more next tokens are returned.</p>
     #   @return [String]
     class ListProjectsInput < Struct.new(
+      nil,
       :sort_by,
       :sort_order,
       :next_token,
@@ -3363,6 +3464,7 @@ module Aws::CodeBuild
     #               build project.</p>
     #   @return [Array<String>]
     class ListProjectsOutput < Struct.new(
+      nil,
       :next_token,
       :projects,
       keyword_init: true
@@ -3412,6 +3514,7 @@ module Aws::CodeBuild
     #       </p>
     #   @return [Integer]
     class ListReportGroupsInput < Struct.new(
+      nil,
       :sort_order,
       :sort_by,
       :next_token,
@@ -3436,6 +3539,7 @@ module Aws::CodeBuild
     #       </p>
     #   @return [Array<String>]
     class ListReportGroupsOutput < Struct.new(
+      nil,
       :next_token,
       :report_groups,
       keyword_init: true
@@ -3474,6 +3578,7 @@ module Aws::CodeBuild
     #       </p>
     #   @return [Types::ReportFilter]
     class ListReportsForReportGroupInput < Struct.new(
+      nil,
       :report_group_arn,
       :next_token,
       :sort_order,
@@ -3499,6 +3604,7 @@ module Aws::CodeBuild
     #       </p>
     #   @return [Array<String>]
     class ListReportsForReportGroupOutput < Struct.new(
+      nil,
       :next_token,
       :reports,
       keyword_init: true
@@ -3544,6 +3650,7 @@ module Aws::CodeBuild
     #       </p>
     #   @return [Types::ReportFilter]
     class ListReportsInput < Struct.new(
+      nil,
       :sort_order,
       :next_token,
       :max_results,
@@ -3568,6 +3675,7 @@ module Aws::CodeBuild
     #       </p>
     #   @return [Array<String>]
     class ListReportsOutput < Struct.new(
+      nil,
       :next_token,
       :reports,
       keyword_init: true
@@ -3588,6 +3696,7 @@ module Aws::CodeBuild
     #   <p>The next token, if any, to get paginated results. You will get this value from previous execution of list sandboxes.</p>
     #   @return [String]
     class ListSandboxesForProjectInput < Struct.new(
+      nil,
       :project_name,
       :max_results,
       :sort_order,
@@ -3604,6 +3713,7 @@ module Aws::CodeBuild
     #   <p>Information about the next token to get paginated results.</p>
     #   @return [String]
     class ListSandboxesForProjectOutput < Struct.new(
+      nil,
       :ids,
       :next_token,
       keyword_init: true
@@ -3621,6 +3731,7 @@ module Aws::CodeBuild
     #   <p>The next token, if any, to get paginated results. You will get this value from previous execution of list sandboxes.</p>
     #   @return [String]
     class ListSandboxesInput < Struct.new(
+      nil,
       :max_results,
       :sort_order,
       :next_token,
@@ -3636,6 +3747,7 @@ module Aws::CodeBuild
     #   <p>Information about the next token to get paginated results.</p>
     #   @return [String]
     class ListSandboxesOutput < Struct.new(
+      nil,
       :ids,
       :next_token,
       keyword_init: true
@@ -3685,6 +3797,7 @@ module Aws::CodeBuild
     #               token that is returned, until no more next tokens are returned. </p>
     #   @return [String]
     class ListSharedProjectsInput < Struct.new(
+      nil,
       :sort_by,
       :sort_order,
       :max_results,
@@ -3707,6 +3820,7 @@ module Aws::CodeBuild
     #           </p>
     #   @return [Array<String>]
     class ListSharedProjectsOutput < Struct.new(
+      nil,
       :next_token,
       :projects,
       keyword_init: true
@@ -3756,6 +3870,7 @@ module Aws::CodeBuild
     #                   <code>ReportGroup</code> objects. The default value is 100. </p>
     #   @return [Integer]
     class ListSharedReportGroupsInput < Struct.new(
+      nil,
       :sort_order,
       :sort_by,
       :next_token,
@@ -3778,6 +3893,7 @@ module Aws::CodeBuild
     #           </p>
     #   @return [Array<String>]
     class ListSharedReportGroupsOutput < Struct.new(
+      nil,
       :next_token,
       :report_groups,
       keyword_init: true
@@ -3786,6 +3902,7 @@ module Aws::CodeBuild
     end
 
     class ListSourceCredentialsInput < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -3797,6 +3914,7 @@ module Aws::CodeBuild
     #               ARN, and type of source provider for one set of credentials. </p>
     #   @return [Array<Types::SourceCredentialsInfo>]
     class ListSourceCredentialsOutput < Struct.new(
+      nil,
       :source_credentials_infos,
       keyword_init: true
     )
@@ -3813,6 +3931,7 @@ module Aws::CodeBuild
     #               enabled by default. </p>
     #   @return [Types::S3LogsConfig]
     class LogsConfig < Struct.new(
+      nil,
       :cloud_watch_logs,
       :s3_logs,
       keyword_init: true
@@ -3849,6 +3968,7 @@ module Aws::CodeBuild
     #   <p> Information about S3 logs for a build project. </p>
     #   @return [Types::S3LogsConfig]
     class LogsLocation < Struct.new(
+      nil,
       :group_name,
       :stream_name,
       :deep_link,
@@ -3870,6 +3990,7 @@ module Aws::CodeBuild
     #   <p>The ID of the network interface.</p>
     #   @return [String]
     class NetworkInterface < Struct.new(
+      nil,
       :subnet_id,
       :network_interface_id,
       keyword_init: true
@@ -3881,6 +4002,7 @@ module Aws::CodeBuild
     # @!attribute message
     #   @return [String]
     class OAuthProviderException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -3897,6 +4019,7 @@ module Aws::CodeBuild
     #               exit code.</p>
     #   @return [String]
     class PhaseContext < Struct.new(
+      nil,
       :status_code,
       :message,
       keyword_init: true
@@ -4064,6 +4187,7 @@ module Aws::CodeBuild
     #         retry your build for up to 2 additional times.</p>
     #   @return [Integer]
     class Project < Struct.new(
+      nil,
       :name,
       :arn,
       :description,
@@ -4327,6 +4451,7 @@ module Aws::CodeBuild
     #            </dl>
     #   @return [String]
     class ProjectArtifacts < Struct.new(
+      nil,
       :type,
       :location,
       :path,
@@ -4352,6 +4477,7 @@ module Aws::CodeBuild
     #               project. </p>
     #   @return [String]
     class ProjectBadge < Struct.new(
+      nil,
       :badge_enabled,
       :badge_request_url,
       keyword_init: true
@@ -4395,6 +4521,7 @@ module Aws::CodeBuild
     #            </dl>
     #   @return [String]
     class ProjectBuildBatchConfig < Struct.new(
+      nil,
       :service_role,
       :combine_artifacts,
       :restrictions,
@@ -4503,6 +4630,7 @@ module Aws::CodeBuild
     #                   between projects</a> in the <i>CodeBuild User Guide</i>.</p>
     #   @return [String]
     class ProjectCache < Struct.new(
+      nil,
       :type,
       :location,
       :modes,
@@ -4703,6 +4831,7 @@ module Aws::CodeBuild
     #   <p>A DockerServer object to use for this build project.</p>
     #   @return [Types::DockerServer]
     class ProjectEnvironment < Struct.new(
+      nil,
       :type,
       :image,
       :compute_type,
@@ -4757,6 +4886,7 @@ module Aws::CodeBuild
     #                   Options</a>. </p>
     #   @return [String]
     class ProjectFileSystemLocation < Struct.new(
+      nil,
       :type,
       :location,
       :mount_point,
@@ -4774,6 +4904,7 @@ module Aws::CodeBuild
     #   <p>Specifies the compute fleet ARN for the build project.</p>
     #   @return [String]
     class ProjectFleet < Struct.new(
+      nil,
       :fleet_arn,
       keyword_init: true
     )
@@ -4947,6 +5078,7 @@ module Aws::CodeBuild
     #             alphanumeric characters and underscores, and must be less than 128 characters in length. </p>
     #   @return [String]
     class ProjectSource < Struct.new(
+      nil,
       :type,
       :location,
       :git_clone_depth,
@@ -5000,6 +5132,7 @@ module Aws::CodeBuild
     #                 with CodeBuild</a> in the <i>CodeBuild User Guide</i>. </p>
     #   @return [String]
     class ProjectSourceVersion < Struct.new(
+      nil,
       :source_identifier,
       :source_version,
       keyword_init: true
@@ -5015,6 +5148,7 @@ module Aws::CodeBuild
     #   <p>An array of <code>FleetProxyRule</code> objects that represent the specified destination domains or IPs to allow or deny network access control to.</p>
     #   @return [Array<Types::FleetProxyRule>]
     class ProxyConfiguration < Struct.new(
+      nil,
       :default_behavior,
       :ordered_proxy_rules,
       keyword_init: true
@@ -5044,6 +5178,7 @@ module Aws::CodeBuild
     #   <p>List of repository roles that have approval privileges for pull request builds when comment approval is required. Only users with these roles can provide valid comment approvals. If a pull request contributor is one of these roles, their pull request builds will trigger automatically. This field is only applicable when <code>requiresCommentApproval</code> is not <i>DISABLED</i>.</p>
     #   @return [Array<String>]
     class PullRequestBuildPolicy < Struct.new(
+      nil,
       :requires_comment_approval,
       :approver_roles,
       keyword_init: true
@@ -5061,6 +5196,7 @@ module Aws::CodeBuild
     #               associate with a resource policy. </p>
     #   @return [String]
     class PutResourcePolicyInput < Struct.new(
+      nil,
       :policy,
       :resource_arn,
       keyword_init: true
@@ -5073,6 +5209,7 @@ module Aws::CodeBuild
     #               associated with a resource policy. </p>
     #   @return [String]
     class PutResourcePolicyOutput < Struct.new(
+      nil,
       :resource_arn,
       keyword_init: true
     )
@@ -5105,6 +5242,7 @@ module Aws::CodeBuild
     #               valid value, SECRETS_MANAGER, is for Secrets Manager. </p>
     #   @return [String]
     class RegistryCredential < Struct.new(
+      nil,
       :credential,
       :credential_provider,
       keyword_init: true
@@ -5168,6 +5306,7 @@ module Aws::CodeBuild
     #               this report.</p>
     #   @return [Types::CodeCoverageReportSummary]
     class Report < Struct.new(
+      nil,
       :arn,
       :type,
       :name,
@@ -5204,6 +5343,7 @@ module Aws::CodeBuild
     #               bucket where the run of a report is exported. </p>
     #   @return [Types::S3ReportExportConfig]
     class ReportExportConfig < Struct.new(
+      nil,
       :export_config_type,
       :s3_destination,
       keyword_init: true
@@ -5217,6 +5357,7 @@ module Aws::CodeBuild
     #   <p> The status used to filter reports. You can filter using one status only. </p>
     #   @return [String]
     class ReportFilter < Struct.new(
+      nil,
       :status,
       keyword_init: true
     )
@@ -5278,6 +5419,7 @@ module Aws::CodeBuild
     #            </dl>
     #   @return [String]
     class ReportGroup < Struct.new(
+      nil,
       :arn,
       :name,
       :type,
@@ -5303,6 +5445,7 @@ module Aws::CodeBuild
     #   <p>Contains the minimum value analyzed.</p>
     #   @return [String]
     class ReportGroupTrendStats < Struct.new(
+      nil,
       :average,
       :max,
       :min,
@@ -5319,6 +5462,7 @@ module Aws::CodeBuild
     #   <p>The value of the requested data field from the report.</p>
     #   @return [String]
     class ReportWithRawData < Struct.new(
+      nil,
       :report_arn,
       :data,
       keyword_init: true
@@ -5338,6 +5482,7 @@ module Aws::CodeBuild
     #   <p>The identifier of the artifact.</p>
     #   @return [String]
     class ResolvedArtifact < Struct.new(
+      nil,
       :type,
       :location,
       :identifier,
@@ -5351,6 +5496,7 @@ module Aws::CodeBuild
     # @!attribute message
     #   @return [String]
     class ResourceAlreadyExistsException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -5361,6 +5507,7 @@ module Aws::CodeBuild
     # @!attribute message
     #   @return [String]
     class ResourceNotFoundException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -5381,6 +5528,7 @@ module Aws::CodeBuild
     #   <p>Specifies the type of retry to perform.</p>
     #   @return [String]
     class RetryBuildBatchInput < Struct.new(
+      nil,
       :id,
       :idempotency_token,
       :retry_type,
@@ -5393,6 +5541,7 @@ module Aws::CodeBuild
     #   <p>Contains information about a batch build.</p>
     #   @return [Types::BuildBatch]
     class RetryBuildBatchOutput < Struct.new(
+      nil,
       :build_batch,
       keyword_init: true
     )
@@ -5410,6 +5559,7 @@ module Aws::CodeBuild
     #         CodeBuild returns a parameter mismatch error.</p>
     #   @return [String]
     class RetryBuildInput < Struct.new(
+      nil,
       :id,
       :idempotency_token,
       keyword_init: true
@@ -5421,6 +5571,7 @@ module Aws::CodeBuild
     #   <p>Information about a build.</p>
     #   @return [Types::Build]
     class RetryBuildOutput < Struct.new(
+      nil,
       :build,
       keyword_init: true
     )
@@ -5497,6 +5648,7 @@ module Aws::CodeBuild
     #            </dl>
     #   @return [String]
     class S3LogsConfig < Struct.new(
+      nil,
       :status,
       :location,
       :encryption_disabled,
@@ -5539,6 +5691,7 @@ module Aws::CodeBuild
     #   <p> A boolean value that specifies if the results of a report are encrypted. </p>
     #   @return [Boolean]
     class S3ReportExportConfig < Struct.new(
+      nil,
       :bucket,
       :bucket_owner,
       :path,
@@ -5561,6 +5714,7 @@ module Aws::CodeBuild
     #   <p>A URL back to SSM Agent on the managed node that the Session Manager client uses to send commands and receive output from the node.</p>
     #   @return [String]
     class SSMSession < Struct.new(
+      nil,
       :session_id,
       :token_value,
       :stream_url,
@@ -5638,6 +5792,7 @@ module Aws::CodeBuild
     #   <p>The current session for the sandbox.</p>
     #   @return [Types::SandboxSession]
     class Sandbox < Struct.new(
+      nil,
       :id,
       :arn,
       :project_name,
@@ -5692,6 +5847,7 @@ module Aws::CodeBuild
     #   <p>Describes a network interface.</p>
     #   @return [Types::NetworkInterface]
     class SandboxSession < Struct.new(
+      nil,
       :id,
       :status,
       :start_time,
@@ -5753,6 +5909,7 @@ module Aws::CodeBuild
     #   <p> An array of <code>PhaseContext</code> objects. </p>
     #   @return [Array<Types::PhaseContext>]
     class SandboxSessionPhase < Struct.new(
+      nil,
       :phase_type,
       :phase_status,
       :start_time,
@@ -5775,6 +5932,7 @@ module Aws::CodeBuild
     #   <p>The maximum number of instances in the ﬂeet when auto-scaling.</p>
     #   @return [Integer]
     class ScalingConfigurationInput < Struct.new(
+      nil,
       :scaling_type,
       :target_tracking_scaling_configs,
       :max_capacity,
@@ -5797,6 +5955,7 @@ module Aws::CodeBuild
     #   <p>The desired number of instances in the ﬂeet when auto-scaling.</p>
     #   @return [Integer]
     class ScalingConfigurationOutput < Struct.new(
+      nil,
       :scaling_type,
       :target_tracking_scaling_configs,
       :max_capacity,
@@ -5817,6 +5976,7 @@ module Aws::CodeBuild
     #   <p>The type of scope for a GitHub or GitLab webhook. The scope default is GITHUB_ORGANIZATION.</p>
     #   @return [String]
     class ScopeConfiguration < Struct.new(
+      nil,
       :name,
       :domain,
       :scope,
@@ -5834,6 +5994,7 @@ module Aws::CodeBuild
     #   <p>The resource value that applies to the specified authorization type.</p>
     #   @return [String]
     class SourceAuth < Struct.new(
+      nil,
       :type,
       :resource,
       keyword_init: true
@@ -5858,6 +6019,7 @@ module Aws::CodeBuild
     #   <p>The connection ARN if your authType is CODECONNECTIONS or SECRETS_MANAGER.</p>
     #   @return [String]
     class SourceCredentialsInfo < Struct.new(
+      nil,
       :arn,
       :server_type,
       :auth_type,
@@ -6058,6 +6220,7 @@ module Aws::CodeBuild
     #     <a href="https://docs.aws.amazon.com/codebuild/latest/userguide/session-manager.html">Viewing a running build in Session Manager</a>. Batch session debugging is not supported for matrix batch builds.</p>
     #   @return [Boolean]
     class StartBuildBatchInput < Struct.new(
+      nil,
       :project_name,
       :secondary_sources_override,
       :secondary_sources_version_override,
@@ -6098,6 +6261,7 @@ module Aws::CodeBuild
     #   <p>A <code>BuildBatch</code> object that contains information about the batch build.</p>
     #   @return [Types::BuildBatch]
     class StartBuildBatchOutput < Struct.new(
+      nil,
       :build_batch,
       keyword_init: true
     )
@@ -6317,6 +6481,7 @@ module Aws::CodeBuild
     #               retry your build for up to 2 additional times.</p>
     #   @return [Integer]
     class StartBuildInput < Struct.new(
+      nil,
       :project_name,
       :secondary_sources_override,
       :secondary_sources_version_override,
@@ -6359,6 +6524,7 @@ module Aws::CodeBuild
     #   <p>Information about the build to be run.</p>
     #   @return [Types::Build]
     class StartBuildOutput < Struct.new(
+      nil,
       :build,
       keyword_init: true
     )
@@ -6375,6 +6541,7 @@ module Aws::CodeBuild
     #   <p>The command type.</p>
     #   @return [String]
     class StartCommandExecutionInput < Struct.new(
+      nil,
       :sandbox_id,
       :command,
       :type,
@@ -6387,6 +6554,7 @@ module Aws::CodeBuild
     #   <p>Information about the requested command executions.</p>
     #   @return [Types::CommandExecution]
     class StartCommandExecutionOutput < Struct.new(
+      nil,
       :command_execution,
       keyword_init: true
     )
@@ -6397,6 +6565,7 @@ module Aws::CodeBuild
     #   <p>A <code>sandboxId</code> or <code>sandboxArn</code>.</p>
     #   @return [String]
     class StartSandboxConnectionInput < Struct.new(
+      nil,
       :sandbox_id,
       keyword_init: true
     )
@@ -6407,6 +6576,7 @@ module Aws::CodeBuild
     #   <p>Information about the Session Manager session.</p>
     #   @return [Types::SSMSession]
     class StartSandboxConnectionOutput < Struct.new(
+      nil,
       :ssm_session,
       keyword_init: true
     )
@@ -6420,6 +6590,7 @@ module Aws::CodeBuild
     #   <p>A unique client token.</p>
     #   @return [String]
     class StartSandboxInput < Struct.new(
+      nil,
       :project_name,
       :idempotency_token,
       keyword_init: true
@@ -6431,6 +6602,7 @@ module Aws::CodeBuild
     #   <p>Information about the requested sandbox.</p>
     #   @return [Types::Sandbox]
     class StartSandboxOutput < Struct.new(
+      nil,
       :sandbox,
       keyword_init: true
     )
@@ -6441,6 +6613,7 @@ module Aws::CodeBuild
     #   <p>The identifier of the batch build to stop.</p>
     #   @return [String]
     class StopBuildBatchInput < Struct.new(
+      nil,
       :id,
       keyword_init: true
     )
@@ -6451,6 +6624,7 @@ module Aws::CodeBuild
     #   <p>Contains information about a batch build.</p>
     #   @return [Types::BuildBatch]
     class StopBuildBatchOutput < Struct.new(
+      nil,
       :build_batch,
       keyword_init: true
     )
@@ -6461,6 +6635,7 @@ module Aws::CodeBuild
     #   <p>The ID of the build.</p>
     #   @return [String]
     class StopBuildInput < Struct.new(
+      nil,
       :id,
       keyword_init: true
     )
@@ -6471,6 +6646,7 @@ module Aws::CodeBuild
     #   <p>Information about the build.</p>
     #   @return [Types::Build]
     class StopBuildOutput < Struct.new(
+      nil,
       :build,
       keyword_init: true
     )
@@ -6481,6 +6657,7 @@ module Aws::CodeBuild
     #   <p>Information about the requested sandbox ID.</p>
     #   @return [String]
     class StopSandboxInput < Struct.new(
+      nil,
       :id,
       keyword_init: true
     )
@@ -6491,6 +6668,7 @@ module Aws::CodeBuild
     #   <p>Information about the requested sandbox.</p>
     #   @return [Types::Sandbox]
     class StopSandboxOutput < Struct.new(
+      nil,
       :sandbox,
       keyword_init: true
     )
@@ -6506,6 +6684,7 @@ module Aws::CodeBuild
     #   <p>The tag's value.</p>
     #   @return [String]
     class Tag < Struct.new(
+      nil,
       :key,
       :value,
       keyword_init: true
@@ -6521,6 +6700,7 @@ module Aws::CodeBuild
     #   <p>The value of <code>metricType</code> when to start scaling.</p>
     #   @return [Float]
     class TargetTrackingScalingConfiguration < Struct.new(
+      nil,
       :metric_type,
       :target_value,
       keyword_init: true
@@ -6563,6 +6743,7 @@ module Aws::CodeBuild
     #   <p>The name of the test suite that the test case is a part of.</p>
     #   @return [String]
     class TestCase < Struct.new(
+      nil,
       :report_arn,
       :test_raw_data_path,
       :prefix,
@@ -6616,6 +6797,7 @@ module Aws::CodeBuild
     #                   <code>name</code> or the <code>prefix</code> will be returned.</p>
     #   @return [String]
     class TestCaseFilter < Struct.new(
+      nil,
       :status,
       :keyword,
       keyword_init: true
@@ -6637,6 +6819,7 @@ module Aws::CodeBuild
     #           </p>
     #   @return [Integer]
     class TestReportSummary < Struct.new(
+      nil,
       :total,
       :status_counts,
       :duration_in_nano_seconds,
@@ -6866,6 +7049,7 @@ module Aws::CodeBuild
     #         tags.</p>
     #   @return [Array<Types::Tag>]
     class UpdateFleetInput < Struct.new(
+      nil,
       :arn,
       :base_capacity,
       :environment_type,
@@ -6887,6 +7071,7 @@ module Aws::CodeBuild
     #   <p>A <code>Fleet</code> object.</p>
     #   @return [Types::Fleet]
     class UpdateFleetOutput < Struct.new(
+      nil,
       :fleet,
       keyword_init: true
     )
@@ -7023,6 +7208,7 @@ module Aws::CodeBuild
     #         retry your build for up to 2 additional times.</p>
     #   @return [Integer]
     class UpdateProjectInput < Struct.new(
+      nil,
       :name,
       :description,
       :source,
@@ -7054,6 +7240,7 @@ module Aws::CodeBuild
     #   <p>Information about the build project that was changed.</p>
     #   @return [Types::Project]
     class UpdateProjectOutput < Struct.new(
+      nil,
       :project,
       keyword_init: true
     )
@@ -7081,6 +7268,7 @@ module Aws::CodeBuild
     #         the project's builds.</p>
     #   @return [String]
     class UpdateProjectVisibilityInput < Struct.new(
+      nil,
       :project_arn,
       :project_visibility,
       :resource_access_role,
@@ -7109,6 +7297,7 @@ module Aws::CodeBuild
     #            </dl>
     #   @return [String]
     class UpdateProjectVisibilityOutput < Struct.new(
+      nil,
       :project_arn,
       :public_project_alias,
       :project_visibility,
@@ -7147,6 +7336,7 @@ module Aws::CodeBuild
     #         tags.</p>
     #   @return [Array<Types::Tag>]
     class UpdateReportGroupInput < Struct.new(
+      nil,
       :arn,
       :export_config,
       :tags,
@@ -7161,6 +7351,7 @@ module Aws::CodeBuild
     #       </p>
     #   @return [Types::ReportGroup]
     class UpdateReportGroupOutput < Struct.new(
+      nil,
       :report_group,
       keyword_init: true
     )
@@ -7203,6 +7394,7 @@ module Aws::CodeBuild
     #   <p>A PullRequestBuildPolicy object that defines comment-based approval requirements for triggering builds on pull requests. This policy helps control when automated builds are executed based on contributor permissions and approval workflows.</p>
     #   @return [Types::PullRequestBuildPolicy]
     class UpdateWebhookInput < Struct.new(
+      nil,
       :project_name,
       :branch_filter,
       :rotate_secret,
@@ -7219,6 +7411,7 @@ module Aws::CodeBuild
     #       </p>
     #   @return [Types::Webhook]
     class UpdateWebhookOutput < Struct.new(
+      nil,
       :webhook,
       keyword_init: true
     )
@@ -7236,6 +7429,7 @@ module Aws::CodeBuild
     #   <p>A list of one or more security groups IDs in your Amazon VPC.</p>
     #   @return [Array<String>]
     class VpcConfig < Struct.new(
+      nil,
       :vpc_id,
       :subnets,
       :security_group_ids,
@@ -7330,6 +7524,7 @@ module Aws::CodeBuild
     #   <p>A PullRequestBuildPolicy object that defines comment-based approval requirements for triggering builds on pull requests. This policy helps control when automated builds are executed based on contributor permissions and approval workflows.</p>
     #   @return [Types::PullRequestBuildPolicy]
     class Webhook < Struct.new(
+      nil,
       :url,
       :payload_url,
       :secret,
@@ -7523,6 +7718,7 @@ module Aws::CodeBuild
     #               the <code>pattern</code> triggers a build. </p>
     #   @return [Boolean]
     class WebhookFilter < Struct.new(
+      nil,
       :type,
       :pattern,
       :exclude_matched_pattern,

@@ -11,6 +11,7 @@ module Aws::IoTEventsData
     #   <p>The note that you can leave when you acknowledge the alarm.</p>
     #   @return [String]
     class AcknowledgeActionConfiguration < Struct.new(
+      nil,
       :note,
       keyword_init: true
     )
@@ -32,6 +33,7 @@ module Aws::IoTEventsData
     #   <p>The note that you can leave when you acknowledge the alarm.</p>
     #   @return [String]
     class AcknowledgeAlarmActionRequest < Struct.new(
+      nil,
       :request_id,
       :alarm_model_name,
       :key_value,
@@ -65,6 +67,7 @@ module Aws::IoTEventsData
     #   <p>The time the alarm was last updated, in the Unix epoch format.</p>
     #   @return [Time]
     class Alarm < Struct.new(
+      nil,
       :alarm_model_name,
       :alarm_model_version,
       :key_value,
@@ -126,6 +129,7 @@ module Aws::IoTEventsData
     #   <p>Contains information about alarm state changes.</p>
     #   @return [Types::SystemEvent]
     class AlarmState < Struct.new(
+      nil,
       :state_name,
       :rule_evaluation,
       :customer_action,
@@ -191,6 +195,7 @@ module Aws::IoTEventsData
     #   <p>The time the alarm was last updated, in the Unix epoch format.</p>
     #   @return [Time]
     class AlarmSummary < Struct.new(
+      nil,
       :alarm_model_name,
       :alarm_model_version,
       :key_value,
@@ -206,6 +211,7 @@ module Aws::IoTEventsData
     #   <p>The list of acknowledge action requests. You can specify up to 10 requests per operation.</p>
     #   @return [Array<Types::AcknowledgeAlarmActionRequest>]
     class BatchAcknowledgeAlarmRequest < Struct.new(
+      nil,
       :acknowledge_action_requests,
       keyword_init: true
     )
@@ -217,6 +223,7 @@ module Aws::IoTEventsData
     #   Each error entry contains an entry ID that helps you identify the entry that failed.</p>
     #   @return [Array<Types::BatchAlarmActionErrorEntry>]
     class BatchAcknowledgeAlarmResponse < Struct.new(
+      nil,
       :error_entries,
       keyword_init: true
     )
@@ -261,6 +268,7 @@ module Aws::IoTEventsData
     #   <p>A message that describes the error.</p>
     #   @return [String]
     class BatchAlarmActionErrorEntry < Struct.new(
+      nil,
       :request_id,
       :error_code,
       :error_message,
@@ -280,6 +288,7 @@ module Aws::IoTEventsData
     #   <p>A message that describes the error.</p>
     #   @return [String]
     class BatchDeleteDetectorErrorEntry < Struct.new(
+      nil,
       :message_id,
       :error_code,
       :error_message,
@@ -292,6 +301,7 @@ module Aws::IoTEventsData
     #   <p>The list of one or more detectors to be deleted.</p>
     #   @return [Array<Types::DeleteDetectorRequest>]
     class BatchDeleteDetectorRequest < Struct.new(
+      nil,
       :detectors,
       keyword_init: true
     )
@@ -302,6 +312,7 @@ module Aws::IoTEventsData
     #   <p>A list of errors associated with the request, or an empty array (<code>[]</code>) if there are no errors. Each error entry contains a <code>messageId</code> that helps you identify the entry that failed.</p>
     #   @return [Array<Types::BatchDeleteDetectorErrorEntry>]
     class BatchDeleteDetectorResponse < Struct.new(
+      nil,
       :batch_delete_detector_error_entries,
       keyword_init: true
     )
@@ -312,6 +323,7 @@ module Aws::IoTEventsData
     #   <p>The list of disable action requests. You can specify up to 10 requests per operation.</p>
     #   @return [Array<Types::DisableAlarmActionRequest>]
     class BatchDisableAlarmRequest < Struct.new(
+      nil,
       :disable_action_requests,
       keyword_init: true
     )
@@ -323,6 +335,7 @@ module Aws::IoTEventsData
     #   Each error entry contains an entry ID that helps you identify the entry that failed.</p>
     #   @return [Array<Types::BatchAlarmActionErrorEntry>]
     class BatchDisableAlarmResponse < Struct.new(
+      nil,
       :error_entries,
       keyword_init: true
     )
@@ -333,6 +346,7 @@ module Aws::IoTEventsData
     #   <p>The list of enable action requests. You can specify up to 10 requests per operation.</p>
     #   @return [Array<Types::EnableAlarmActionRequest>]
     class BatchEnableAlarmRequest < Struct.new(
+      nil,
       :enable_action_requests,
       keyword_init: true
     )
@@ -344,6 +358,7 @@ module Aws::IoTEventsData
     #   Each error entry contains an entry ID that helps you identify the entry that failed.</p>
     #   @return [Array<Types::BatchAlarmActionErrorEntry>]
     class BatchEnableAlarmResponse < Struct.new(
+      nil,
       :error_entries,
       keyword_init: true
     )
@@ -362,6 +377,7 @@ module Aws::IoTEventsData
     #   <p>A message that describes the error.</p>
     #   @return [String]
     class BatchPutMessageErrorEntry < Struct.new(
+      nil,
       :message_id,
       :error_code,
       :error_message,
@@ -376,6 +392,7 @@ module Aws::IoTEventsData
     #            </p>
     #   @return [Array<Types::Message>]
     class BatchPutMessageRequest < Struct.new(
+      nil,
       :messages,
       keyword_init: true
     )
@@ -386,6 +403,7 @@ module Aws::IoTEventsData
     #   <p>A list of any errors encountered when sending the messages.</p>
     #   @return [Array<Types::BatchPutMessageErrorEntry>]
     class BatchPutMessageResponse < Struct.new(
+      nil,
       :batch_put_message_error_entries,
       keyword_init: true
     )
@@ -396,6 +414,7 @@ module Aws::IoTEventsData
     #   <p>The list of reset action requests. You can specify up to 10 requests per operation.</p>
     #   @return [Array<Types::ResetAlarmActionRequest>]
     class BatchResetAlarmRequest < Struct.new(
+      nil,
       :reset_action_requests,
       keyword_init: true
     )
@@ -407,6 +426,7 @@ module Aws::IoTEventsData
     #   Each error entry contains an entry ID that helps you identify the entry that failed.</p>
     #   @return [Array<Types::BatchAlarmActionErrorEntry>]
     class BatchResetAlarmResponse < Struct.new(
+      nil,
       :error_entries,
       keyword_init: true
     )
@@ -417,6 +437,7 @@ module Aws::IoTEventsData
     #   <p>The list of snooze action requests. You can specify up to 10 requests per operation.</p>
     #   @return [Array<Types::SnoozeAlarmActionRequest>]
     class BatchSnoozeAlarmRequest < Struct.new(
+      nil,
       :snooze_action_requests,
       keyword_init: true
     )
@@ -428,6 +449,7 @@ module Aws::IoTEventsData
     #   Each error entry contains an entry ID that helps you identify the entry that failed.</p>
     #   @return [Array<Types::BatchAlarmActionErrorEntry>]
     class BatchSnoozeAlarmResponse < Struct.new(
+      nil,
       :error_entries,
       keyword_init: true
     )
@@ -446,6 +468,7 @@ module Aws::IoTEventsData
     #   <p>A message that describes the error.</p>
     #   @return [String]
     class BatchUpdateDetectorErrorEntry < Struct.new(
+      nil,
       :message_id,
       :error_code,
       :error_message,
@@ -458,6 +481,7 @@ module Aws::IoTEventsData
     #   <p>The list of detectors (instances) to update, along with the values to update.</p>
     #   @return [Array<Types::UpdateDetectorRequest>]
     class BatchUpdateDetectorRequest < Struct.new(
+      nil,
       :detectors,
       keyword_init: true
     )
@@ -469,6 +493,7 @@ module Aws::IoTEventsData
     #         specific update did not occur.)</p>
     #   @return [Array<Types::BatchUpdateDetectorErrorEntry>]
     class BatchUpdateDetectorResponse < Struct.new(
+      nil,
       :batch_update_detector_error_entries,
       keyword_init: true
     )
@@ -518,6 +543,7 @@ module Aws::IoTEventsData
     #   <p>Contains the configuration information of a reset action.</p>
     #   @return [Types::ResetActionConfiguration]
     class CustomerAction < Struct.new(
+      nil,
       :action_name,
       :snooze_action_configuration,
       :enable_action_configuration,
@@ -540,6 +566,7 @@ module Aws::IoTEventsData
     #   <p>The value of the <a href="https://docs.aws.amazon.com/iotevents/latest/apireference/API_CreateDetectorModel.html#iotevents-CreateDetectorModel-request-key">key</a> used to identify the detector. </p>
     #   @return [String]
     class DeleteDetectorRequest < Struct.new(
+      nil,
       :message_id,
       :detector_model_name,
       :key_value,
@@ -556,6 +583,7 @@ module Aws::IoTEventsData
     #   <a href="https://docs.aws.amazon.com/iotevents/latest/apireference/API_CreateAlarmModel.html#iotevents-CreateAlarmModel-request-key">key</a>.</p>
     #   @return [String]
     class DescribeAlarmRequest < Struct.new(
+      nil,
       :alarm_model_name,
       :key_value,
       keyword_init: true
@@ -567,6 +595,7 @@ module Aws::IoTEventsData
     #   <p>Contains information about an alarm.</p>
     #   @return [Types::Alarm]
     class DescribeAlarmResponse < Struct.new(
+      nil,
       :alarm,
       keyword_init: true
     )
@@ -582,6 +611,7 @@ module Aws::IoTEventsData
     #         ID.</p>
     #   @return [String]
     class DescribeDetectorRequest < Struct.new(
+      nil,
       :detector_model_name,
       :key_value,
       keyword_init: true
@@ -593,6 +623,7 @@ module Aws::IoTEventsData
     #   <p>Information about the detector (instance).</p>
     #   @return [Types::Detector]
     class DescribeDetectorResponse < Struct.new(
+      nil,
       :detector,
       keyword_init: true
     )
@@ -620,6 +651,7 @@ module Aws::IoTEventsData
     #   <p>The time the detector (instance) was last updated.</p>
     #   @return [Time]
     class Detector < Struct.new(
+      nil,
       :detector_model_name,
       :key_value,
       :detector_model_version,
@@ -642,6 +674,7 @@ module Aws::IoTEventsData
     #   <p>The current state of the detector's timers.</p>
     #   @return [Array<Types::Timer>]
     class DetectorState < Struct.new(
+      nil,
       :state_name,
       :variables,
       :timers,
@@ -663,6 +696,7 @@ module Aws::IoTEventsData
     #         and its timeout event won't occur.</p>
     #   @return [Array<Types::TimerDefinition>]
     class DetectorStateDefinition < Struct.new(
+      nil,
       :state_name,
       :variables,
       :timers,
@@ -676,6 +710,7 @@ module Aws::IoTEventsData
     #   <p>The name of the state.</p>
     #   @return [String]
     class DetectorStateSummary < Struct.new(
+      nil,
       :state_name,
       keyword_init: true
     )
@@ -703,6 +738,7 @@ module Aws::IoTEventsData
     #   <p>The time the detector (instance) was last updated.</p>
     #   @return [Time]
     class DetectorSummary < Struct.new(
+      nil,
       :detector_model_name,
       :key_value,
       :detector_model_version,
@@ -719,6 +755,7 @@ module Aws::IoTEventsData
     #   <p>The note that you can leave when you disable the alarm.</p>
     #   @return [String]
     class DisableActionConfiguration < Struct.new(
+      nil,
       :note,
       keyword_init: true
     )
@@ -740,6 +777,7 @@ module Aws::IoTEventsData
     #   <p>The note that you can leave when you disable the alarm.</p>
     #   @return [String]
     class DisableAlarmActionRequest < Struct.new(
+      nil,
       :request_id,
       :alarm_model_name,
       :key_value,
@@ -754,6 +792,7 @@ module Aws::IoTEventsData
     #   <p>The note that you can leave when you enable the alarm.</p>
     #   @return [String]
     class EnableActionConfiguration < Struct.new(
+      nil,
       :note,
       keyword_init: true
     )
@@ -775,6 +814,7 @@ module Aws::IoTEventsData
     #   <p>The note that you can leave when you enable the alarm.</p>
     #   @return [String]
     class EnableAlarmActionRequest < Struct.new(
+      nil,
       :request_id,
       :alarm_model_name,
       :key_value,
@@ -789,6 +829,7 @@ module Aws::IoTEventsData
     #   <p>The message for the exception.</p>
     #   @return [String]
     class InternalFailureException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -800,6 +841,7 @@ module Aws::IoTEventsData
     #   <p>The message for the exception.</p>
     #   @return [String]
     class InvalidRequestException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -816,6 +858,7 @@ module Aws::IoTEventsData
     #   <p>The maximum number of results to be returned per request.</p>
     #   @return [Integer]
     class ListAlarmsRequest < Struct.new(
+      nil,
       :alarm_model_name,
       :next_token,
       :max_results,
@@ -832,6 +875,7 @@ module Aws::IoTEventsData
     #   or <code>null</code> if there are no more results.</p>
     #   @return [String]
     class ListAlarmsResponse < Struct.new(
+      nil,
       :alarm_summaries,
       :next_token,
       keyword_init: true
@@ -852,6 +896,7 @@ module Aws::IoTEventsData
     #   <p>The maximum number of results to be returned per request.</p>
     #   @return [Integer]
     class ListDetectorsRequest < Struct.new(
+      nil,
       :detector_model_name,
       :state_name,
       :next_token,
@@ -869,6 +914,7 @@ module Aws::IoTEventsData
     #   or <code>null</code> if there are no more results.</p>
     #   @return [String]
     class ListDetectorsResponse < Struct.new(
+      nil,
       :detector_summaries,
       :next_token,
       keyword_init: true
@@ -892,6 +938,7 @@ module Aws::IoTEventsData
     #   <p>The timestamp associated with the message.</p>
     #   @return [Types::TimestampValue]
     class Message < Struct.new(
+      nil,
       :message_id,
       :input_name,
       :payload,
@@ -906,6 +953,7 @@ module Aws::IoTEventsData
     #   <p>The note that you can leave when you reset the alarm.</p>
     #   @return [String]
     class ResetActionConfiguration < Struct.new(
+      nil,
       :note,
       keyword_init: true
     )
@@ -927,6 +975,7 @@ module Aws::IoTEventsData
     #   <p>The note that you can leave when you reset the alarm.</p>
     #   @return [String]
     class ResetAlarmActionRequest < Struct.new(
+      nil,
       :request_id,
       :alarm_model_name,
       :key_value,
@@ -941,6 +990,7 @@ module Aws::IoTEventsData
     #   <p>The message for the exception.</p>
     #   @return [String]
     class ResourceNotFoundException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -952,6 +1002,7 @@ module Aws::IoTEventsData
     #   <p>Information needed to compare two values with a comparison operator.</p>
     #   @return [Types::SimpleRuleEvaluation]
     class RuleEvaluation < Struct.new(
+      nil,
       :simple_rule_evaluation,
       keyword_init: true
     )
@@ -963,6 +1014,7 @@ module Aws::IoTEventsData
     #   <p>The message for the exception.</p>
     #   @return [String]
     class ServiceUnavailableException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -980,6 +1032,7 @@ module Aws::IoTEventsData
     #   <p>The threshold value, on the right side of the comparison operator.</p>
     #   @return [String]
     class SimpleRuleEvaluation < Struct.new(
+      nil,
       :input_property_value,
       :operator,
       :threshold_value,
@@ -996,6 +1049,7 @@ module Aws::IoTEventsData
     #   <p>The note that you can leave when you snooze the alarm.</p>
     #   @return [String]
     class SnoozeActionConfiguration < Struct.new(
+      nil,
       :snooze_duration,
       :note,
       keyword_init: true
@@ -1021,6 +1075,7 @@ module Aws::IoTEventsData
     #   <p>The snooze time in seconds. The alarm automatically changes to the <code>NORMAL</code> state after this duration.</p>
     #   @return [Integer]
     class SnoozeAlarmActionRequest < Struct.new(
+      nil,
       :request_id,
       :alarm_model_name,
       :key_value,
@@ -1037,6 +1092,7 @@ module Aws::IoTEventsData
     #         and the alarm automatically changes to the <code>NORMAL</code> state.</p>
     #   @return [String]
     class StateChangeConfiguration < Struct.new(
+      nil,
       :trigger_type,
       keyword_init: true
     )
@@ -1052,6 +1108,7 @@ module Aws::IoTEventsData
     #   <p>Contains the configuration information of alarm state changes.</p>
     #   @return [Types::StateChangeConfiguration]
     class SystemEvent < Struct.new(
+      nil,
       :event_type,
       :state_change_configuration,
       keyword_init: true
@@ -1064,6 +1121,7 @@ module Aws::IoTEventsData
     #   <p>The message for the exception.</p>
     #   @return [String]
     class ThrottlingException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -1078,6 +1136,7 @@ module Aws::IoTEventsData
     #   <p>The expiration time for the timer.</p>
     #   @return [Time]
     class Timer < Struct.new(
+      nil,
       :name,
       :timestamp,
       keyword_init: true
@@ -1093,6 +1152,7 @@ module Aws::IoTEventsData
     #   <p>The new setting of the timer (the number of seconds before the timer elapses).</p>
     #   @return [Integer]
     class TimerDefinition < Struct.new(
+      nil,
       :name,
       :seconds,
       keyword_init: true
@@ -1105,6 +1165,7 @@ module Aws::IoTEventsData
     #   <p>The value of the timestamp, in the Unix epoch format.</p>
     #   @return [Integer]
     class TimestampValue < Struct.new(
+      nil,
       :time_in_millis,
       keyword_init: true
     )
@@ -1127,6 +1188,7 @@ module Aws::IoTEventsData
     #   <p>The new state, variable values, and timer settings of the detector (instance).</p>
     #   @return [Types::DetectorStateDefinition]
     class UpdateDetectorRequest < Struct.new(
+      nil,
       :message_id,
       :detector_model_name,
       :key_value,
@@ -1144,6 +1206,7 @@ module Aws::IoTEventsData
     #   <p>The current value of the variable.</p>
     #   @return [String]
     class Variable < Struct.new(
+      nil,
       :name,
       :value,
       keyword_init: true
@@ -1159,6 +1222,7 @@ module Aws::IoTEventsData
     #   <p>The new value of the variable.</p>
     #   @return [String]
     class VariableDefinition < Struct.new(
+      nil,
       :name,
       :value,
       keyword_init: true

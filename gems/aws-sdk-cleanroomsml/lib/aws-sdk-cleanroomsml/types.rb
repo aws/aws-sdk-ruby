@@ -17,6 +17,7 @@ module Aws::CleanRoomsML
     #   <p>The total remaining budget across all active budget periods for this resource.</p>
     #   @return [Integer]
     class AccessBudget < Struct.new(
+      nil,
       :resource_arn,
       :details,
       :aggregate_remaining_budget,
@@ -45,6 +46,7 @@ module Aws::CleanRoomsML
     #   <p>Specifies whether this budget automatically refreshes when the current period ends.</p>
     #   @return [String]
     class AccessBudgetDetails < Struct.new(
+      nil,
       :start_time,
       :end_time,
       :remaining_budget,
@@ -60,6 +62,7 @@ module Aws::CleanRoomsML
     # @!attribute message
     #   @return [String]
     class AccessDeniedException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -71,6 +74,7 @@ module Aws::CleanRoomsML
     #   <p>The Amazon S3 bucket and path for the configured audience.</p>
     #   @return [Types::S3ConfigMap]
     class AudienceDestination < Struct.new(
+      nil,
       :s3_destination,
       keyword_init: true
     )
@@ -106,6 +110,7 @@ module Aws::CleanRoomsML
     #   <p>The Amazon S3 bucket where the audience export is stored.</p>
     #   @return [String]
     class AudienceExportJobSummary < Struct.new(
+      nil,
       :create_time,
       :update_time,
       :name,
@@ -134,6 +139,7 @@ module Aws::CleanRoomsML
     #   <p>Provides configuration information for the instances that will perform the compute work.</p>
     #   @return [Types::ComputeConfiguration]
     class AudienceGenerationJobDataSource < Struct.new(
+      nil,
       :data_source,
       :role_arn,
       :sql_parameters,
@@ -172,6 +178,7 @@ module Aws::CleanRoomsML
     #   <p>The AWS Account that submitted the job.</p>
     #   @return [String]
     class AudienceGenerationJobSummary < Struct.new(
+      nil,
       :create_time,
       :update_time,
       :audience_generation_job_arn,
@@ -209,6 +216,7 @@ module Aws::CleanRoomsML
     #   <p>The description of the audience model.</p>
     #   @return [String]
     class AudienceModelSummary < Struct.new(
+      nil,
       :create_time,
       :update_time,
       :audience_model_arn,
@@ -229,6 +237,7 @@ module Aws::CleanRoomsML
     #   <p>The recall score of the generated audience. Recall is the percentage of the most similar users (by default, the most similar 20%) from a sample of the training data that are included in the seed audience by the audience generation job. Values range from 0-1, larger values indicate a better audience. A recall value approximately equal to the maximum bin size indicates that the audience model is equivalent to random selection. </p>
     #   @return [Float]
     class AudienceQualityMetrics < Struct.new(
+      nil,
       :relevance_metrics,
       :recall_metric,
       keyword_init: true
@@ -244,6 +253,7 @@ module Aws::CleanRoomsML
     #   <p>Specify an audience size value.</p>
     #   @return [Integer]
     class AudienceSize < Struct.new(
+      nil,
       :type,
       :value,
       keyword_init: true
@@ -259,6 +269,7 @@ module Aws::CleanRoomsML
     #   <p>An array of the different audience output sizes.</p>
     #   @return [Array<Integer>]
     class AudienceSizeConfig < Struct.new(
+      nil,
       :audience_size_type,
       :audience_size_bins,
       keyword_init: true
@@ -273,6 +284,7 @@ module Aws::CleanRoomsML
     #   <p>The Amazon Resource Name (ARN) of the trained model inference job that you want to cancel.</p>
     #   @return [String]
     class CancelTrainedModelInferenceJobRequest < Struct.new(
+      nil,
       :membership_identifier,
       :trained_model_inference_job_arn,
       keyword_init: true
@@ -290,6 +302,7 @@ module Aws::CleanRoomsML
     #   <p>The version identifier of the trained model to cancel. This parameter allows you to specify which version of the trained model you want to cancel when multiple versions exist.</p> <p>If <code>versionIdentifier</code> is not specified, the base model will be cancelled.</p>
     #   @return [String]
     class CancelTrainedModelRequest < Struct.new(
+      nil,
       :membership_identifier,
       :trained_model_arn,
       :version_identifier,
@@ -327,6 +340,7 @@ module Aws::CleanRoomsML
     #   <p>The account ID of the member that created the configured model algorithm association.</p>
     #   @return [String]
     class CollaborationConfiguredModelAlgorithmAssociationSummary < Struct.new(
+      nil,
       :create_time,
       :update_time,
       :configured_model_algorithm_association_arn,
@@ -373,6 +387,7 @@ module Aws::CleanRoomsML
     #   <p>The description of the ML input channel.</p>
     #   @return [String]
     class CollaborationMLInputChannelSummary < Struct.new(
+      nil,
       :create_time,
       :update_time,
       :membership_identifier,
@@ -426,6 +441,7 @@ module Aws::CleanRoomsML
     #   <p>The collaboration ID of the collaboration that contains the trained model export job.</p>
     #   @return [String]
     class CollaborationTrainedModelExportJobSummary < Struct.new(
+      nil,
       :create_time,
       :update_time,
       :name,
@@ -496,6 +512,7 @@ module Aws::CleanRoomsML
     #   <p>The account ID that created the trained model inference job.</p>
     #   @return [String]
     class CollaborationTrainedModelInferenceJobSummary < Struct.new(
+      nil,
       :trained_model_inference_job_arn,
       :configured_model_algorithm_association_arn,
       :membership_identifier,
@@ -556,6 +573,7 @@ module Aws::CleanRoomsML
     #   <p>The account ID of the member that created the trained model.</p>
     #   @return [String]
     class CollaborationTrainedModelSummary < Struct.new(
+      nil,
       :create_time,
       :update_time,
       :trained_model_arn,
@@ -581,6 +599,7 @@ module Aws::CleanRoomsML
     #   <p>The data type of column.</p>
     #   @return [Array<String>]
     class ColumnSchema < Struct.new(
+      nil,
       :column_name,
       :column_types,
       keyword_init: true
@@ -611,6 +630,7 @@ module Aws::CleanRoomsML
     #   <p>The ARN of the IAM role that can write the Amazon S3 bucket.</p>
     #   @return [String]
     class ConfiguredAudienceModelOutputConfig < Struct.new(
+      nil,
       :destination,
       :role_arn,
       keyword_init: true
@@ -644,6 +664,7 @@ module Aws::CleanRoomsML
     #   <p>The status of the configured audience model.</p>
     #   @return [String]
     class ConfiguredAudienceModelSummary < Struct.new(
+      nil,
       :create_time,
       :update_time,
       :name,
@@ -683,6 +704,7 @@ module Aws::CleanRoomsML
     #   <p>The collaboration ID of the collaboration that contains the configured model algorithm association.</p>
     #   @return [String]
     class ConfiguredModelAlgorithmAssociationSummary < Struct.new(
+      nil,
       :create_time,
       :update_time,
       :configured_model_algorithm_association_arn,
@@ -713,6 +735,7 @@ module Aws::CleanRoomsML
     #   <p>The description of the configured model algorithm.</p>
     #   @return [String]
     class ConfiguredModelAlgorithmSummary < Struct.new(
+      nil,
       :create_time,
       :update_time,
       :configured_model_algorithm_arn,
@@ -727,6 +750,7 @@ module Aws::CleanRoomsML
     # @!attribute message
     #   @return [String]
     class ConflictException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -747,6 +771,7 @@ module Aws::CleanRoomsML
     #   <p>A list of metric definition objects. Each object specifies the metric name and regular expressions used to parse algorithm logs. Amazon Web Services Clean Rooms ML publishes each metric to all members' Amazon CloudWatch using IAM role configured in <a>PutMLConfiguration</a>.</p>
     #   @return [Array<Types::MetricDefinition>]
     class ContainerConfig < Struct.new(
+      nil,
       :image_uri,
       :entrypoint,
       :arguments,
@@ -778,6 +803,7 @@ module Aws::CleanRoomsML
     #   <p>The description of the audience model.</p>
     #   @return [String]
     class CreateAudienceModelRequest < Struct.new(
+      nil,
       :training_data_start_time,
       :training_data_end_time,
       :name,
@@ -794,6 +820,7 @@ module Aws::CleanRoomsML
     #   <p>The Amazon Resource Name (ARN) of the audience model.</p>
     #   @return [String]
     class CreateAudienceModelResponse < Struct.new(
+      nil,
       :audience_model_arn,
       keyword_init: true
     )
@@ -828,6 +855,7 @@ module Aws::CleanRoomsML
     #   <p>Configure how the service tags audience generation jobs created using this configured audience model. If you specify <code>NONE</code>, the tags from the <a>StartAudienceGenerationJob</a> request determine the tags of the audience generation job. If you specify <code>FROM_PARENT_RESOURCE</code>, the audience generation job inherits the tags from the configured audience model, by default. Tags in the <a>StartAudienceGenerationJob</a> will override the default.</p> <p>When the client is in a different account than the configured audience model, the tags from the client are never applied to a resource in the caller's account.</p>
     #   @return [String]
     class CreateConfiguredAudienceModelRequest < Struct.new(
+      nil,
       :name,
       :audience_model_arn,
       :output_config,
@@ -846,6 +874,7 @@ module Aws::CleanRoomsML
     #   <p>The Amazon Resource Name (ARN) of the configured audience model.</p>
     #   @return [String]
     class CreateConfiguredAudienceModelResponse < Struct.new(
+      nil,
       :configured_audience_model_arn,
       keyword_init: true
     )
@@ -871,6 +900,7 @@ module Aws::CleanRoomsML
     #   <p>The optional metadata that you apply to the resource to help you categorize and organize them. Each tag consists of a key and an optional value, both of which you define.</p> <p>The following basic restrictions apply to tags:</p> <ul> <li> <p>Maximum number of tags per resource - 50.</p> </li> <li> <p>For each resource, each tag key must be unique, and each tag key can have only one value.</p> </li> <li> <p>Maximum key length - 128 Unicode characters in UTF-8.</p> </li> <li> <p>Maximum value length - 256 Unicode characters in UTF-8.</p> </li> <li> <p>If your tagging schema is used across multiple services and resources, remember that other services may have restrictions on allowed characters. Generally allowed characters are: letters, numbers, and spaces representable in UTF-8, and the following characters: + - = . _ : / @.</p> </li> <li> <p>Tag keys and values are case sensitive.</p> </li> <li> <p>Do not use aws:, AWS:, or any upper or lowercase combination of such as a prefix for keys as it is reserved for AWS use. You cannot edit or delete tag keys with this prefix. Values can have this prefix. If a tag value has aws as its prefix but the key does not, then Clean Rooms ML considers it to be a user tag and will count against the limit of 50 tags. Tags with only the key prefix of aws do not count against your tags per resource limit.</p> </li> </ul>
     #   @return [Hash<String, String>]
     class CreateConfiguredModelAlgorithmAssociationRequest < Struct.new(
+      nil,
       :membership_identifier,
       :configured_model_algorithm_arn,
       :name,
@@ -886,6 +916,7 @@ module Aws::CleanRoomsML
     #   <p>The Amazon Resource Name (ARN) of the configured model algorithm association.</p>
     #   @return [String]
     class CreateConfiguredModelAlgorithmAssociationResponse < Struct.new(
+      nil,
       :configured_model_algorithm_association_arn,
       keyword_init: true
     )
@@ -914,6 +945,7 @@ module Aws::CleanRoomsML
     #   <p>The Amazon Resource Name (ARN) of the KMS key. This key is used to encrypt and decrypt customer-owned data in the configured ML model algorithm and associated data.</p>
     #   @return [String]
     class CreateConfiguredModelAlgorithmRequest < Struct.new(
+      nil,
       :name,
       :description,
       :role_arn,
@@ -930,6 +962,7 @@ module Aws::CleanRoomsML
     #   <p>The Amazon Resource Name (ARN) of the configured model algorithm.</p>
     #   @return [String]
     class CreateConfiguredModelAlgorithmResponse < Struct.new(
+      nil,
       :configured_model_algorithm_arn,
       keyword_init: true
     )
@@ -961,6 +994,7 @@ module Aws::CleanRoomsML
     #   <p>The optional metadata that you apply to the resource to help you categorize and organize them. Each tag consists of a key and an optional value, both of which you define.</p> <p>The following basic restrictions apply to tags:</p> <ul> <li> <p>Maximum number of tags per resource - 50.</p> </li> <li> <p>For each resource, each tag key must be unique, and each tag key can have only one value.</p> </li> <li> <p>Maximum key length - 128 Unicode characters in UTF-8.</p> </li> <li> <p>Maximum value length - 256 Unicode characters in UTF-8.</p> </li> <li> <p>If your tagging schema is used across multiple services and resources, remember that other services may have restrictions on allowed characters. Generally allowed characters are: letters, numbers, and spaces representable in UTF-8, and the following characters: + - = . _ : / @.</p> </li> <li> <p>Tag keys and values are case sensitive.</p> </li> <li> <p>Do not use aws:, AWS:, or any upper or lowercase combination of such as a prefix for keys as it is reserved for AWS use. You cannot edit or delete tag keys with this prefix. Values can have this prefix. If a tag value has aws as its prefix but the key does not, then Clean Rooms ML considers it to be a user tag and will count against the limit of 50 tags. Tags with only the key prefix of aws do not count against your tags per resource limit.</p> </li> </ul>
     #   @return [Hash<String, String>]
     class CreateMLInputChannelRequest < Struct.new(
+      nil,
       :membership_identifier,
       :configured_model_algorithm_associations,
       :input_channel,
@@ -978,6 +1012,7 @@ module Aws::CleanRoomsML
     #   <p>The Amazon Resource Name (ARN) of the ML input channel.</p>
     #   @return [String]
     class CreateMLInputChannelResponse < Struct.new(
+      nil,
       :ml_input_channel_arn,
       keyword_init: true
     )
@@ -1024,6 +1059,7 @@ module Aws::CleanRoomsML
     #   <p>The optional metadata that you apply to the resource to help you categorize and organize them. Each tag consists of a key and an optional value, both of which you define.</p> <p>The following basic restrictions apply to tags:</p> <ul> <li> <p>Maximum number of tags per resource - 50.</p> </li> <li> <p>For each resource, each tag key must be unique, and each tag key can have only one value.</p> </li> <li> <p>Maximum key length - 128 Unicode characters in UTF-8.</p> </li> <li> <p>Maximum value length - 256 Unicode characters in UTF-8.</p> </li> <li> <p>If your tagging schema is used across multiple services and resources, remember that other services may have restrictions on allowed characters. Generally allowed characters are: letters, numbers, and spaces representable in UTF-8, and the following characters: + - = . _ : / @.</p> </li> <li> <p>Tag keys and values are case sensitive.</p> </li> <li> <p>Do not use aws:, AWS:, or any upper or lowercase combination of such as a prefix for keys as it is reserved for AWS use. You cannot edit or delete tag keys with this prefix. Values can have this prefix. If a tag value has aws as its prefix but the key does not, then Clean Rooms ML considers it to be a user tag and will count against the limit of 50 tags. Tags with only the key prefix of aws do not count against your tags per resource limit.</p> </li> </ul>
     #   @return [Hash<String, String>]
     class CreateTrainedModelRequest < Struct.new(
+      nil,
       :membership_identifier,
       :name,
       :configured_model_algorithm_association_arn,
@@ -1049,6 +1085,7 @@ module Aws::CleanRoomsML
     #   <p>The unique version identifier assigned to the newly created trained model. This identifier can be used to reference this specific version of the trained model in subsequent operations such as inference jobs or incremental training.</p> <p>The initial version identifier for the base version of the trained model is "NULL".</p>
     #   @return [String]
     class CreateTrainedModelResponse < Struct.new(
+      nil,
       :trained_model_arn,
       :version_identifier,
       keyword_init: true
@@ -1072,6 +1109,7 @@ module Aws::CleanRoomsML
     #   <p>The description of the training dataset.</p>
     #   @return [String]
     class CreateTrainingDatasetRequest < Struct.new(
+      nil,
       :name,
       :role_arn,
       :training_data,
@@ -1086,6 +1124,7 @@ module Aws::CleanRoomsML
     #   <p>The Amazon Resource Name (ARN) of the training dataset resource.</p>
     #   @return [String]
     class CreateTrainingDatasetResponse < Struct.new(
+      nil,
       :training_dataset_arn,
       keyword_init: true
     )
@@ -1097,6 +1136,7 @@ module Aws::CleanRoomsML
     #   <p>Defines data identifiers for the custom entity configuration. Provide this only if CUSTOM redaction is configured. </p>
     #   @return [Array<String>]
     class CustomEntityConfig < Struct.new(
+      nil,
       :custom_data_identifiers,
       keyword_init: true
     )
@@ -1108,6 +1148,7 @@ module Aws::CleanRoomsML
     #   <p>A GlueDataSource object that defines the catalog ID, database name, and table name for the training data.</p>
     #   @return [Types::GlueDataSource]
     class DataSource < Struct.new(
+      nil,
       :glue_data_source,
       keyword_init: true
     )
@@ -1122,6 +1163,7 @@ module Aws::CleanRoomsML
     #   <p>A DatasetInputConfig object that defines the data source and schema mapping.</p>
     #   @return [Types::DatasetInputConfig]
     class Dataset < Struct.new(
+      nil,
       :type,
       :input_config,
       keyword_init: true
@@ -1137,6 +1179,7 @@ module Aws::CleanRoomsML
     #   <p>A DataSource object that specifies the Glue data source for the training data.</p>
     #   @return [Types::DataSource]
     class DatasetInputConfig < Struct.new(
+      nil,
       :schema,
       :data_source,
       keyword_init: true
@@ -1148,6 +1191,7 @@ module Aws::CleanRoomsML
     #   <p>The Amazon Resource Name (ARN) of the audience generation job that you want to delete.</p>
     #   @return [String]
     class DeleteAudienceGenerationJobRequest < Struct.new(
+      nil,
       :audience_generation_job_arn,
       keyword_init: true
     )
@@ -1158,6 +1202,7 @@ module Aws::CleanRoomsML
     #   <p>The Amazon Resource Name (ARN) of the audience model that you want to delete.</p>
     #   @return [String]
     class DeleteAudienceModelRequest < Struct.new(
+      nil,
       :audience_model_arn,
       keyword_init: true
     )
@@ -1168,6 +1213,7 @@ module Aws::CleanRoomsML
     #   <p>The Amazon Resource Name (ARN) of the configured audience model policy that you want to delete.</p>
     #   @return [String]
     class DeleteConfiguredAudienceModelPolicyRequest < Struct.new(
+      nil,
       :configured_audience_model_arn,
       keyword_init: true
     )
@@ -1178,6 +1224,7 @@ module Aws::CleanRoomsML
     #   <p>The Amazon Resource Name (ARN) of the configured audience model that you want to delete.</p>
     #   @return [String]
     class DeleteConfiguredAudienceModelRequest < Struct.new(
+      nil,
       :configured_audience_model_arn,
       keyword_init: true
     )
@@ -1191,6 +1238,7 @@ module Aws::CleanRoomsML
     #   <p>The membership ID of the member that is deleting the configured model algorithm association.</p>
     #   @return [String]
     class DeleteConfiguredModelAlgorithmAssociationRequest < Struct.new(
+      nil,
       :configured_model_algorithm_association_arn,
       :membership_identifier,
       keyword_init: true
@@ -1202,6 +1250,7 @@ module Aws::CleanRoomsML
     #   <p>The Amazon Resource Name (ARN) of the configured model algorithm that you want to delete.</p>
     #   @return [String]
     class DeleteConfiguredModelAlgorithmRequest < Struct.new(
+      nil,
       :configured_model_algorithm_arn,
       keyword_init: true
     )
@@ -1212,6 +1261,7 @@ module Aws::CleanRoomsML
     #   <p>The membership ID of the of the member that is deleting the ML modeling configuration.</p>
     #   @return [String]
     class DeleteMLConfigurationRequest < Struct.new(
+      nil,
       :membership_identifier,
       keyword_init: true
     )
@@ -1225,6 +1275,7 @@ module Aws::CleanRoomsML
     #   <p>The membership ID of the membership that contains the ML input channel you want to delete.</p>
     #   @return [String]
     class DeleteMLInputChannelDataRequest < Struct.new(
+      nil,
       :ml_input_channel_arn,
       :membership_identifier,
       keyword_init: true
@@ -1242,6 +1293,7 @@ module Aws::CleanRoomsML
     #   <p>The version identifier of the trained model to delete. If not specified, the operation will delete the base version of the trained model. When specified, only the particular version will be deleted.</p>
     #   @return [String]
     class DeleteTrainedModelOutputRequest < Struct.new(
+      nil,
       :trained_model_arn,
       :membership_identifier,
       :version_identifier,
@@ -1254,6 +1306,7 @@ module Aws::CleanRoomsML
     #   <p>The Amazon Resource Name (ARN) of the training dataset that you want to delete.</p>
     #   @return [String]
     class DeleteTrainingDatasetRequest < Struct.new(
+      nil,
       :training_dataset_arn,
       keyword_init: true
     )
@@ -1265,6 +1318,7 @@ module Aws::CleanRoomsML
     #   <p>Provides information about an Amazon S3 bucket and path.</p>
     #   @return [Types::S3ConfigMap]
     class Destination < Struct.new(
+      nil,
       :s3_destination,
       keyword_init: true
     )
@@ -1275,6 +1329,7 @@ module Aws::CleanRoomsML
     #   <p>The Amazon Resource Name (ARN) of the audience generation job that you are interested in.</p>
     #   @return [String]
     class GetAudienceGenerationJobRequest < Struct.new(
+      nil,
       :audience_generation_job_arn,
       keyword_init: true
     )
@@ -1327,6 +1382,7 @@ module Aws::CleanRoomsML
     #   <p>The unique identifier of the protected query for this audience generation job.</p>
     #   @return [String]
     class GetAudienceGenerationJobResponse < Struct.new(
+      nil,
       :create_time,
       :update_time,
       :audience_generation_job_arn,
@@ -1351,6 +1407,7 @@ module Aws::CleanRoomsML
     #   <p>The Amazon Resource Name (ARN) of the audience model that you are interested in.</p>
     #   @return [String]
     class GetAudienceModelRequest < Struct.new(
+      nil,
       :audience_model_arn,
       keyword_init: true
     )
@@ -1394,6 +1451,7 @@ module Aws::CleanRoomsML
     #   <p>The description of the audience model.</p>
     #   @return [String]
     class GetAudienceModelResponse < Struct.new(
+      nil,
       :create_time,
       :update_time,
       :training_data_start_time,
@@ -1418,6 +1476,7 @@ module Aws::CleanRoomsML
     #   <p>The collaboration ID for the collaboration that contains the configured model algorithm association that you want to return information about.</p>
     #   @return [String]
     class GetCollaborationConfiguredModelAlgorithmAssociationRequest < Struct.new(
+      nil,
       :configured_model_algorithm_association_arn,
       :collaboration_identifier,
       keyword_init: true
@@ -1456,6 +1515,7 @@ module Aws::CleanRoomsML
     #   <p>Information about the privacy configuration for a configured model algorithm association.</p>
     #   @return [Types::PrivacyConfiguration]
     class GetCollaborationConfiguredModelAlgorithmAssociationResponse < Struct.new(
+      nil,
       :create_time,
       :update_time,
       :configured_model_algorithm_association_arn,
@@ -1478,6 +1538,7 @@ module Aws::CleanRoomsML
     #   <p>The collaboration ID of the collaboration that contains the ML input channel that you want to get.</p>
     #   @return [String]
     class GetCollaborationMLInputChannelRequest < Struct.new(
+      nil,
       :ml_input_channel_arn,
       :collaboration_identifier,
       keyword_init: true
@@ -1528,6 +1589,7 @@ module Aws::CleanRoomsML
     #   <p>The account ID of the member who created the ML input channel.</p>
     #   @return [String]
     class GetCollaborationMLInputChannelResponse < Struct.new(
+      nil,
       :membership_identifier,
       :collaboration_identifier,
       :ml_input_channel_arn,
@@ -1557,6 +1619,7 @@ module Aws::CleanRoomsML
     #   <p>The version identifier of the trained model to retrieve. If not specified, the operation returns information about the latest version of the trained model.</p>
     #   @return [String]
     class GetCollaborationTrainedModelRequest < Struct.new(
+      nil,
       :trained_model_arn,
       :collaboration_identifier,
       :version_identifier,
@@ -1629,6 +1692,7 @@ module Aws::CleanRoomsML
     #   <p>The account ID of the member that created the trained model.</p>
     #   @return [String]
     class GetCollaborationTrainedModelResponse < Struct.new(
+      nil,
       :membership_identifier,
       :collaboration_identifier,
       :trained_model_arn,
@@ -1659,6 +1723,7 @@ module Aws::CleanRoomsML
     #   <p>The Amazon Resource Name (ARN) of the configured audience model that you are interested in.</p>
     #   @return [String]
     class GetConfiguredAudienceModelPolicyRequest < Struct.new(
+      nil,
       :configured_audience_model_arn,
       keyword_init: true
     )
@@ -1675,6 +1740,7 @@ module Aws::CleanRoomsML
     #   <p>A cryptographic hash of the contents of the policy used to prevent unexpected concurrent modification of the policy.</p>
     #   @return [String]
     class GetConfiguredAudienceModelPolicyResponse < Struct.new(
+      nil,
       :configured_audience_model_arn,
       :configured_audience_model_policy,
       :policy_hash,
@@ -1687,6 +1753,7 @@ module Aws::CleanRoomsML
     #   <p>The Amazon Resource Name (ARN) of the configured audience model that you are interested in.</p>
     #   @return [String]
     class GetConfiguredAudienceModelRequest < Struct.new(
+      nil,
       :configured_audience_model_arn,
       keyword_init: true
     )
@@ -1733,6 +1800,7 @@ module Aws::CleanRoomsML
     #   <p>Provides the <code>childResourceTagOnCreatePolicy</code> that was used for this configured audience model.</p>
     #   @return [String]
     class GetConfiguredAudienceModelResponse < Struct.new(
+      nil,
       :create_time,
       :update_time,
       :configured_audience_model_arn,
@@ -1758,6 +1826,7 @@ module Aws::CleanRoomsML
     #   <p>The membership ID of the member that created the configured model algorithm association.</p>
     #   @return [String]
     class GetConfiguredModelAlgorithmAssociationRequest < Struct.new(
+      nil,
       :configured_model_algorithm_association_arn,
       :membership_identifier,
       keyword_init: true
@@ -1796,6 +1865,7 @@ module Aws::CleanRoomsML
     #   <p>The optional metadata that you applied to the resource to help you categorize and organize them. Each tag consists of a key and an optional value, both of which you define.</p> <p>The following basic restrictions apply to tags:</p> <ul> <li> <p>Maximum number of tags per resource - 50.</p> </li> <li> <p>For each resource, each tag key must be unique, and each tag key can have only one value.</p> </li> <li> <p>Maximum key length - 128 Unicode characters in UTF-8.</p> </li> <li> <p>Maximum value length - 256 Unicode characters in UTF-8.</p> </li> <li> <p>If your tagging schema is used across multiple services and resources, remember that other services may have restrictions on allowed characters. Generally allowed characters are: letters, numbers, and spaces representable in UTF-8, and the following characters: + - = . _ : / @.</p> </li> <li> <p>Tag keys and values are case sensitive.</p> </li> <li> <p>Do not use aws:, AWS:, or any upper or lowercase combination of such as a prefix for keys as it is reserved for AWS use. You cannot edit or delete tag keys with this prefix. Values can have this prefix. If a tag value has aws as its prefix but the key does not, then Clean Rooms ML considers it to be a user tag and will count against the limit of 50 tags. Tags with only the key prefix of aws do not count against your tags per resource limit.</p> </li> </ul>
     #   @return [Hash<String, String>]
     class GetConfiguredModelAlgorithmAssociationResponse < Struct.new(
+      nil,
       :create_time,
       :update_time,
       :configured_model_algorithm_association_arn,
@@ -1815,6 +1885,7 @@ module Aws::CleanRoomsML
     #   <p>The Amazon Resource Name (ARN) of the configured model algorithm that you want to return information about.</p>
     #   @return [String]
     class GetConfiguredModelAlgorithmRequest < Struct.new(
+      nil,
       :configured_model_algorithm_arn,
       keyword_init: true
     )
@@ -1852,6 +1923,7 @@ module Aws::CleanRoomsML
     #   <p>The Amazon Resource Name (ARN) of the KMS key. This key is used to encrypt and decrypt customer-owned data in the configured ML model and associated data.</p>
     #   @return [String]
     class GetConfiguredModelAlgorithmResponse < Struct.new(
+      nil,
       :create_time,
       :update_time,
       :configured_model_algorithm_arn,
@@ -1871,6 +1943,7 @@ module Aws::CleanRoomsML
     #   <p>The membership ID of the member that owns the ML configuration you want to return information about.</p>
     #   @return [String]
     class GetMLConfigurationRequest < Struct.new(
+      nil,
       :membership_identifier,
       keyword_init: true
     )
@@ -1890,6 +1963,7 @@ module Aws::CleanRoomsML
     #   <p>The most recent time at which the ML configuration was updated.</p>
     #   @return [Time]
     class GetMLConfigurationResponse < Struct.new(
+      nil,
       :membership_identifier,
       :default_output_location,
       :create_time,
@@ -1906,6 +1980,7 @@ module Aws::CleanRoomsML
     #   <p>The membership ID of the membership that contains the ML input channel that you want to get.</p>
     #   @return [String]
     class GetMLInputChannelRequest < Struct.new(
+      nil,
       :ml_input_channel_arn,
       :membership_identifier,
       keyword_init: true
@@ -1971,6 +2046,7 @@ module Aws::CleanRoomsML
     #   <p>The optional metadata that you applied to the resource to help you categorize and organize them. Each tag consists of a key and an optional value, both of which you define.</p> <p>The following basic restrictions apply to tags:</p> <ul> <li> <p>Maximum number of tags per resource - 50.</p> </li> <li> <p>For each resource, each tag key must be unique, and each tag key can have only one value.</p> </li> <li> <p>Maximum key length - 128 Unicode characters in UTF-8.</p> </li> <li> <p>Maximum value length - 256 Unicode characters in UTF-8.</p> </li> <li> <p>If your tagging schema is used across multiple services and resources, remember that other services may have restrictions on allowed characters. Generally allowed characters are: letters, numbers, and spaces representable in UTF-8, and the following characters: + - = . _ : / @.</p> </li> <li> <p>Tag keys and values are case sensitive.</p> </li> <li> <p>Do not use aws:, AWS:, or any upper or lowercase combination of such as a prefix for keys as it is reserved for AWS use. You cannot edit or delete tag keys with this prefix. Values can have this prefix. If a tag value has aws as its prefix but the key does not, then Clean Rooms ML considers it to be a user tag and will count against the limit of 50 tags. Tags with only the key prefix of aws do not count against your tags per resource limit.</p> </li> </ul>
     #   @return [Hash<String, String>]
     class GetMLInputChannelResponse < Struct.new(
+      nil,
       :membership_identifier,
       :collaboration_identifier,
       :ml_input_channel_arn,
@@ -2002,6 +2078,7 @@ module Aws::CleanRoomsML
     #   <p>Provides the Amazon Resource Name (ARN) of the trained model inference job that you are interested in.</p>
     #   @return [String]
     class GetTrainedModelInferenceJobRequest < Struct.new(
+      nil,
       :membership_identifier,
       :trained_model_inference_job_arn,
       keyword_init: true
@@ -2079,6 +2156,7 @@ module Aws::CleanRoomsML
     #   <p>The optional metadata that you applied to the resource to help you categorize and organize them. Each tag consists of a key and an optional value, both of which you define.</p> <p>The following basic restrictions apply to tags:</p> <ul> <li> <p>Maximum number of tags per resource - 50.</p> </li> <li> <p>For each resource, each tag key must be unique, and each tag key can have only one value.</p> </li> <li> <p>Maximum key length - 128 Unicode characters in UTF-8.</p> </li> <li> <p>Maximum value length - 256 Unicode characters in UTF-8.</p> </li> <li> <p>If your tagging schema is used across multiple services and resources, remember that other services may have restrictions on allowed characters. Generally allowed characters are: letters, numbers, and spaces representable in UTF-8, and the following characters: + - = . _ : / @.</p> </li> <li> <p>Tag keys and values are case sensitive.</p> </li> <li> <p>Do not use aws:, AWS:, or any upper or lowercase combination of such as a prefix for keys as it is reserved for AWS use. You cannot edit or delete tag keys with this prefix. Values can have this prefix. If a tag value has aws as its prefix but the key does not, then Clean Rooms ML considers it to be a user tag and will count against the limit of 50 tags. Tags with only the key prefix of aws do not count against your tags per resource limit.</p> </li> </ul>
     #   @return [Hash<String, String>]
     class GetTrainedModelInferenceJobResponse < Struct.new(
+      nil,
       :create_time,
       :update_time,
       :trained_model_inference_job_arn,
@@ -2117,6 +2195,7 @@ module Aws::CleanRoomsML
     #   <p>The version identifier of the trained model to retrieve. If not specified, the operation returns information about the latest version of the trained model.</p>
     #   @return [String]
     class GetTrainedModelRequest < Struct.new(
+      nil,
       :trained_model_arn,
       :membership_identifier,
       :version_identifier,
@@ -2201,6 +2280,7 @@ module Aws::CleanRoomsML
     #   <p>The data channels that were used for the trained model.</p>
     #   @return [Array<Types::ModelTrainingDataChannel>]
     class GetTrainedModelResponse < Struct.new(
+      nil,
       :membership_identifier,
       :collaboration_identifier,
       :trained_model_arn,
@@ -2235,6 +2315,7 @@ module Aws::CleanRoomsML
     #   <p>The Amazon Resource Name (ARN) of the training dataset that you are interested in.</p>
     #   @return [String]
     class GetTrainingDatasetRequest < Struct.new(
+      nil,
       :training_dataset_arn,
       keyword_init: true
     )
@@ -2269,6 +2350,7 @@ module Aws::CleanRoomsML
     #   <p>The description of the training dataset.</p>
     #   @return [String]
     class GetTrainingDatasetResponse < Struct.new(
+      nil,
       :create_time,
       :update_time,
       :training_dataset_arn,
@@ -2294,6 +2376,7 @@ module Aws::CleanRoomsML
     #   <p>The Glue catalog that contains the training data.</p>
     #   @return [String]
     class GlueDataSource < Struct.new(
+      nil,
       :table_name,
       :database_name,
       :catalog_id,
@@ -2313,6 +2396,7 @@ module Aws::CleanRoomsML
     #   <p>The name of the incremental training data channel. This name is used to identify the channel during the training process and must be unique within the training job.</p>
     #   @return [String]
     class IncrementalTrainingDataChannel < Struct.new(
+      nil,
       :trained_model_arn,
       :version_identifier,
       :channel_name,
@@ -2332,6 +2416,7 @@ module Aws::CleanRoomsML
     #   <p>The name of the base trained model that was used for incremental training.</p>
     #   @return [String]
     class IncrementalTrainingDataChannelOutput < Struct.new(
+      nil,
       :channel_name,
       :version_identifier,
       :model_name,
@@ -2345,6 +2430,7 @@ module Aws::CleanRoomsML
     #   <p>The registry path of the docker image that contains the inference algorithm. Clean Rooms ML currently only supports the <code>registry/repository[:tag]</code> image path format. For more information about using images in Clean Rooms ML, see the <a href="https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_AlgorithmSpecification.html#sagemaker-Type-AlgorithmSpecification-TrainingImage">Sagemaker API reference</a>.</p>
     #   @return [String]
     class InferenceContainerConfig < Struct.new(
+      nil,
       :image_uri,
       keyword_init: true
     )
@@ -2356,6 +2442,7 @@ module Aws::CleanRoomsML
     #   <p>The maximum size of the inference container payload, specified in MB. </p>
     #   @return [Integer]
     class InferenceContainerExecutionParameters < Struct.new(
+      nil,
       :max_payload_in_mb,
       keyword_init: true
     )
@@ -2370,6 +2457,7 @@ module Aws::CleanRoomsML
     #   <p>Defines the members that can receive inference output.</p>
     #   @return [Array<Types::InferenceReceiverMember>]
     class InferenceOutputConfiguration < Struct.new(
+      nil,
       :accept,
       :members,
       keyword_init: true
@@ -2387,6 +2475,7 @@ module Aws::CleanRoomsML
     #   <p>The account ID of the member that can receive inference results.</p>
     #   @return [String]
     class InferenceReceiverMember < Struct.new(
+      nil,
       :account_id,
       keyword_init: true
     )
@@ -2401,6 +2490,7 @@ module Aws::CleanRoomsML
     #   <p>The number of instances to use.</p>
     #   @return [Integer]
     class InferenceResourceConfig < Struct.new(
+      nil,
       :instance_type,
       :instance_count,
       keyword_init: true
@@ -2421,6 +2511,7 @@ module Aws::CleanRoomsML
     #   <p>The Amazon Resource Name (ARN) of the role used to run the query specified in the <code>dataSource</code> field of the input channel.</p> <p>Passing a role across AWS accounts is not allowed. If you pass a role that isn't in your account, you get an <code>AccessDeniedException</code> error.</p>
     #   @return [String]
     class InputChannel < Struct.new(
+      nil,
       :data_source,
       :role_arn,
       keyword_init: true
@@ -2447,6 +2538,7 @@ module Aws::CleanRoomsML
     # @!attribute message
     #   @return [String]
     class InternalServiceException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -2463,6 +2555,7 @@ module Aws::CleanRoomsML
     #   <p>The Amazon Resource Name (ARN) of the audience generation job that you are interested in.</p>
     #   @return [String]
     class ListAudienceExportJobsRequest < Struct.new(
+      nil,
       :next_token,
       :max_results,
       :audience_generation_job_arn,
@@ -2478,6 +2571,7 @@ module Aws::CleanRoomsML
     #   <p>The audience export jobs that match the request.</p>
     #   @return [Array<Types::AudienceExportJobSummary>]
     class ListAudienceExportJobsResponse < Struct.new(
+      nil,
       :next_token,
       :audience_export_jobs,
       keyword_init: true
@@ -2498,6 +2592,7 @@ module Aws::CleanRoomsML
     #   <p>The identifier of the collaboration that contains the audience generation jobs that you are interested in.</p>
     #   @return [String]
     class ListAudienceGenerationJobsRequest < Struct.new(
+      nil,
       :next_token,
       :max_results,
       :configured_audience_model_arn,
@@ -2514,6 +2609,7 @@ module Aws::CleanRoomsML
     #   <p>The audience generation jobs that match the request.</p>
     #   @return [Array<Types::AudienceGenerationJobSummary>]
     class ListAudienceGenerationJobsResponse < Struct.new(
+      nil,
       :next_token,
       :audience_generation_jobs,
       keyword_init: true
@@ -2528,6 +2624,7 @@ module Aws::CleanRoomsML
     #   <p>The maximum size of the results that is returned per call.</p>
     #   @return [Integer]
     class ListAudienceModelsRequest < Struct.new(
+      nil,
       :next_token,
       :max_results,
       keyword_init: true
@@ -2542,6 +2639,7 @@ module Aws::CleanRoomsML
     #   <p>The audience models that match the request.</p>
     #   @return [Array<Types::AudienceModelSummary>]
     class ListAudienceModelsResponse < Struct.new(
+      nil,
       :next_token,
       :audience_models,
       keyword_init: true
@@ -2559,6 +2657,7 @@ module Aws::CleanRoomsML
     #   <p>The collaboration ID of the collaboration that contains the configured model algorithm associations that you are interested in.</p>
     #   @return [String]
     class ListCollaborationConfiguredModelAlgorithmAssociationsRequest < Struct.new(
+      nil,
       :next_token,
       :max_results,
       :collaboration_identifier,
@@ -2574,6 +2673,7 @@ module Aws::CleanRoomsML
     #   <p>The configured model algorithm associations that belong to this collaboration.</p>
     #   @return [Array<Types::CollaborationConfiguredModelAlgorithmAssociationSummary>]
     class ListCollaborationConfiguredModelAlgorithmAssociationsResponse < Struct.new(
+      nil,
       :next_token,
       :collaboration_configured_model_algorithm_associations,
       keyword_init: true
@@ -2591,6 +2691,7 @@ module Aws::CleanRoomsML
     #   <p>The collaboration ID of the collaboration that contains the ML input channels that you want to list.</p>
     #   @return [String]
     class ListCollaborationMLInputChannelsRequest < Struct.new(
+      nil,
       :next_token,
       :max_results,
       :collaboration_identifier,
@@ -2606,6 +2707,7 @@ module Aws::CleanRoomsML
     #   <p>The list of ML input channels that you wanted.</p>
     #   @return [Array<Types::CollaborationMLInputChannelSummary>]
     class ListCollaborationMLInputChannelsResponse < Struct.new(
+      nil,
       :next_token,
       :collaboration_ml_input_channels_list,
       keyword_init: true
@@ -2629,6 +2731,7 @@ module Aws::CleanRoomsML
     #   <p>The version identifier of the trained model to filter export jobs by. When specified, only export jobs for this specific version of the trained model are returned.</p>
     #   @return [String]
     class ListCollaborationTrainedModelExportJobsRequest < Struct.new(
+      nil,
       :next_token,
       :max_results,
       :collaboration_identifier,
@@ -2646,6 +2749,7 @@ module Aws::CleanRoomsML
     #   <p>The exports jobs that exist for the requested trained model in the requested collaboration.</p>
     #   @return [Array<Types::CollaborationTrainedModelExportJobSummary>]
     class ListCollaborationTrainedModelExportJobsResponse < Struct.new(
+      nil,
       :next_token,
       :collaboration_trained_model_export_jobs,
       keyword_init: true
@@ -2669,6 +2773,7 @@ module Aws::CleanRoomsML
     #   <p>The version identifier of the trained model to filter inference jobs by. When specified, only inference jobs that used this specific version of the trained model are returned.</p>
     #   @return [String]
     class ListCollaborationTrainedModelInferenceJobsRequest < Struct.new(
+      nil,
       :next_token,
       :max_results,
       :collaboration_identifier,
@@ -2686,6 +2791,7 @@ module Aws::CleanRoomsML
     #   <p>The trained model inference jobs that you are interested in.</p>
     #   @return [Array<Types::CollaborationTrainedModelInferenceJobSummary>]
     class ListCollaborationTrainedModelInferenceJobsResponse < Struct.new(
+      nil,
       :next_token,
       :collaboration_trained_model_inference_jobs,
       keyword_init: true
@@ -2703,6 +2809,7 @@ module Aws::CleanRoomsML
     #   <p>The collaboration ID of the collaboration that contains the trained models you are interested in.</p>
     #   @return [String]
     class ListCollaborationTrainedModelsRequest < Struct.new(
+      nil,
       :next_token,
       :max_results,
       :collaboration_identifier,
@@ -2718,6 +2825,7 @@ module Aws::CleanRoomsML
     #   <p>The trained models in the collaboration that you requested.</p>
     #   @return [Array<Types::CollaborationTrainedModelSummary>]
     class ListCollaborationTrainedModelsResponse < Struct.new(
+      nil,
       :next_token,
       :collaboration_trained_models,
       keyword_init: true
@@ -2732,6 +2840,7 @@ module Aws::CleanRoomsML
     #   <p>The maximum size of the results that is returned per call.</p>
     #   @return [Integer]
     class ListConfiguredAudienceModelsRequest < Struct.new(
+      nil,
       :next_token,
       :max_results,
       keyword_init: true
@@ -2746,6 +2855,7 @@ module Aws::CleanRoomsML
     #   <p>The configured audience models.</p>
     #   @return [Array<Types::ConfiguredAudienceModelSummary>]
     class ListConfiguredAudienceModelsResponse < Struct.new(
+      nil,
       :next_token,
       :configured_audience_models,
       keyword_init: true
@@ -2763,6 +2873,7 @@ module Aws::CleanRoomsML
     #   <p>The membership ID of the member that created the configured model algorithm associations you are interested in.</p>
     #   @return [String]
     class ListConfiguredModelAlgorithmAssociationsRequest < Struct.new(
+      nil,
       :next_token,
       :max_results,
       :membership_identifier,
@@ -2778,6 +2889,7 @@ module Aws::CleanRoomsML
     #   <p>The list of configured model algorithm associations.</p>
     #   @return [Array<Types::ConfiguredModelAlgorithmAssociationSummary>]
     class ListConfiguredModelAlgorithmAssociationsResponse < Struct.new(
+      nil,
       :next_token,
       :configured_model_algorithm_associations,
       keyword_init: true
@@ -2792,6 +2904,7 @@ module Aws::CleanRoomsML
     #   <p>The maximum size of the results that is returned per call.</p>
     #   @return [Integer]
     class ListConfiguredModelAlgorithmsRequest < Struct.new(
+      nil,
       :next_token,
       :max_results,
       keyword_init: true
@@ -2806,6 +2919,7 @@ module Aws::CleanRoomsML
     #   <p>The list of configured model algorithms.</p>
     #   @return [Array<Types::ConfiguredModelAlgorithmSummary>]
     class ListConfiguredModelAlgorithmsResponse < Struct.new(
+      nil,
       :next_token,
       :configured_model_algorithms,
       keyword_init: true
@@ -2823,6 +2937,7 @@ module Aws::CleanRoomsML
     #   <p>The membership ID of the membership that contains the ML input channels that you want to list.</p>
     #   @return [String]
     class ListMLInputChannelsRequest < Struct.new(
+      nil,
       :next_token,
       :max_results,
       :membership_identifier,
@@ -2838,6 +2953,7 @@ module Aws::CleanRoomsML
     #   <p>The list of ML input channels that you wanted.</p>
     #   @return [Array<Types::MLInputChannelSummary>]
     class ListMLInputChannelsResponse < Struct.new(
+      nil,
       :next_token,
       :ml_input_channels_list,
       keyword_init: true
@@ -2849,6 +2965,7 @@ module Aws::CleanRoomsML
     #   <p>The Amazon Resource Name (ARN) of the resource that you are interested in.</p>
     #   @return [String]
     class ListTagsForResourceRequest < Struct.new(
+      nil,
       :resource_arn,
       keyword_init: true
     )
@@ -2859,6 +2976,7 @@ module Aws::CleanRoomsML
     #   <p>The tags that are associated with the resource.</p>
     #   @return [Hash<String, String>]
     class ListTagsForResourceResponse < Struct.new(
+      nil,
       :tags,
       keyword_init: true
     )
@@ -2881,6 +2999,7 @@ module Aws::CleanRoomsML
     #   <p>The version identifier of the trained model to filter inference jobs by. When specified, only inference jobs that used this specific version of the trained model are returned.</p>
     #   @return [String]
     class ListTrainedModelInferenceJobsRequest < Struct.new(
+      nil,
       :next_token,
       :max_results,
       :membership_identifier,
@@ -2898,6 +3017,7 @@ module Aws::CleanRoomsML
     #   <p>Returns the requested trained model inference jobs.</p>
     #   @return [Array<Types::TrainedModelInferenceJobSummary>]
     class ListTrainedModelInferenceJobsResponse < Struct.new(
+      nil,
       :next_token,
       :trained_model_inference_jobs,
       keyword_init: true
@@ -2921,6 +3041,7 @@ module Aws::CleanRoomsML
     #   <p>Filter the results to only include trained model versions with the specified status. Valid values include <code>CREATE_PENDING</code>, <code>CREATE_IN_PROGRESS</code>, <code>ACTIVE</code>, <code>CREATE_FAILED</code>, and others.</p>
     #   @return [String]
     class ListTrainedModelVersionsRequest < Struct.new(
+      nil,
       :next_token,
       :max_results,
       :membership_identifier,
@@ -2938,6 +3059,7 @@ module Aws::CleanRoomsML
     #   <p>A list of trained model versions that match the specified criteria. Each entry contains summary information about a trained model version, including its version identifier, status, and creation details.</p>
     #   @return [Array<Types::TrainedModelSummary>]
     class ListTrainedModelVersionsResponse < Struct.new(
+      nil,
       :next_token,
       :trained_models,
       keyword_init: true
@@ -2955,6 +3077,7 @@ module Aws::CleanRoomsML
     #   <p>The membership ID of the member that created the trained models you are interested in.</p>
     #   @return [String]
     class ListTrainedModelsRequest < Struct.new(
+      nil,
       :next_token,
       :max_results,
       :membership_identifier,
@@ -2970,6 +3093,7 @@ module Aws::CleanRoomsML
     #   <p>The list of trained models.</p>
     #   @return [Array<Types::TrainedModelSummary>]
     class ListTrainedModelsResponse < Struct.new(
+      nil,
       :next_token,
       :trained_models,
       keyword_init: true
@@ -2984,6 +3108,7 @@ module Aws::CleanRoomsML
     #   <p>The maximum size of the results that is returned per call.</p>
     #   @return [Integer]
     class ListTrainingDatasetsRequest < Struct.new(
+      nil,
       :next_token,
       :max_results,
       keyword_init: true
@@ -2998,6 +3123,7 @@ module Aws::CleanRoomsML
     #   <p>The training datasets that match the request.</p>
     #   @return [Array<Types::TrainingDatasetSummary>]
     class ListTrainingDatasetsResponse < Struct.new(
+      nil,
       :next_token,
       :training_datasets,
       keyword_init: true
@@ -3013,6 +3139,7 @@ module Aws::CleanRoomsML
     #   <p>Specifies the configuration for custom entities in the context of log redaction.</p>
     #   @return [Types::CustomEntityConfig]
     class LogRedactionConfiguration < Struct.new(
+      nil,
       :entities_to_redact,
       :custom_entity_config,
       keyword_init: true
@@ -3034,6 +3161,7 @@ module Aws::CleanRoomsML
     #   <p>Specifies the log redaction configuration for this policy.</p>
     #   @return [Types::LogRedactionConfiguration]
     class LogsConfigurationPolicy < Struct.new(
+      nil,
       :allowed_account_ids,
       :filter_pattern,
       :log_type,
@@ -3080,6 +3208,7 @@ module Aws::CleanRoomsML
     #   <p>The description of the ML input channel.</p>
     #   @return [String]
     class MLInputChannelSummary < Struct.new(
+      nil,
       :create_time,
       :update_time,
       :membership_identifier,
@@ -3103,6 +3232,7 @@ module Aws::CleanRoomsML
     #   <p>The Amazon Resource Name (ARN) of the service access role that is used to store the model artifacts.</p>
     #   @return [String]
     class MLOutputConfiguration < Struct.new(
+      nil,
       :destination,
       :role_arn,
       keyword_init: true
@@ -3118,6 +3248,7 @@ module Aws::CleanRoomsML
     #   <p>The regular expression statement that defines how the model metric is reported.</p>
     #   @return [String]
     class MetricDefinition < Struct.new(
+      nil,
       :name,
       :regex,
       keyword_init: true
@@ -3130,6 +3261,7 @@ module Aws::CleanRoomsML
     #   <p>The noise level for the generated metrics.</p>
     #   @return [String]
     class MetricsConfigurationPolicy < Struct.new(
+      nil,
       :noise_level,
       keyword_init: true
     )
@@ -3141,6 +3273,7 @@ module Aws::CleanRoomsML
     #   <p>The Amazon Resource Name (ARN) of the ML input channel for this model inference data source.</p>
     #   @return [String]
     class ModelInferenceDataSource < Struct.new(
+      nil,
       :ml_input_channel_arn,
       keyword_init: true
     )
@@ -3158,6 +3291,7 @@ module Aws::CleanRoomsML
     #   <p>Specifies how the training data stored in Amazon S3 should be distributed to training instances. This parameter controls the data distribution strategy for the training job:</p> <ul> <li> <p> <code>FullyReplicated</code> - The entire dataset is replicated on each training instance. This is suitable for smaller datasets and algorithms that require access to the complete dataset.</p> </li> <li> <p> <code>ShardedByS3Key</code> - The dataset is distributed across training instances based on Amazon S3 key names. This is suitable for larger datasets and distributed training scenarios where each instance processes a subset of the data.</p> </li> </ul>
     #   @return [String]
     class ModelTrainingDataChannel < Struct.new(
+      nil,
       :ml_input_channel_arn,
       :channel_name,
       :s3_data_distribution_type,
@@ -3191,6 +3325,7 @@ module Aws::CleanRoomsML
     #   <p>The privacy configuration policies for a configured model algorithm association.</p>
     #   @return [Types::PrivacyConfigurationPolicies]
     class PrivacyConfiguration < Struct.new(
+      nil,
       :policies,
       keyword_init: true
     )
@@ -3208,6 +3343,7 @@ module Aws::CleanRoomsML
     #   <p>Specifies who will receive the trained model inference jobs.</p>
     #   @return [Types::TrainedModelInferenceJobsConfigurationPolicy]
     class PrivacyConfigurationPolicies < Struct.new(
+      nil,
       :trained_models,
       :trained_model_exports,
       :trained_model_inference_jobs,
@@ -3227,6 +3363,7 @@ module Aws::CleanRoomsML
     #   <p>The format in which the query results should be returned. If not specified, defaults to <code>CSV</code>. </p>
     #   @return [String]
     class ProtectedQueryInputParameters < Struct.new(
+      nil,
       :sql_parameters,
       :compute_configuration,
       :result_format,
@@ -3252,6 +3389,7 @@ module Aws::CleanRoomsML
     #   <p>The protected query SQL parameters.</p>
     #   @return [Hash<String, String>]
     class ProtectedQuerySQLParameters < Struct.new(
+      nil,
       :query_string,
       :analysis_template_arn,
       :parameters,
@@ -3273,6 +3411,7 @@ module Aws::CleanRoomsML
     #   <p>Use this to prevent unexpected concurrent modification of the policy.</p>
     #   @return [String]
     class PutConfiguredAudienceModelPolicyRequest < Struct.new(
+      nil,
       :configured_audience_model_arn,
       :configured_audience_model_policy,
       :previous_policy_hash,
@@ -3289,6 +3428,7 @@ module Aws::CleanRoomsML
     #   <p>A cryptographic hash of the contents of the policy used to prevent unexpected concurrent modification of the policy.</p>
     #   @return [String]
     class PutConfiguredAudienceModelPolicyResponse < Struct.new(
+      nil,
       :configured_audience_model_policy,
       :policy_hash,
       keyword_init: true
@@ -3303,6 +3443,7 @@ module Aws::CleanRoomsML
     #   <p>The default Amazon S3 location where ML output is stored for the specified member.</p>
     #   @return [Types::MLOutputConfiguration]
     class PutMLConfigurationRequest < Struct.new(
+      nil,
       :membership_identifier,
       :default_output_location,
       keyword_init: true
@@ -3318,6 +3459,7 @@ module Aws::CleanRoomsML
     #   <p>The relevance score of the generated audience.</p>
     #   @return [Float]
     class RelevanceMetric < Struct.new(
+      nil,
       :audience_size,
       :score,
       keyword_init: true
@@ -3336,6 +3478,7 @@ module Aws::CleanRoomsML
     #   <p>The maximum size of the instance that is used to train the model.</p>
     #   @return [Integer]
     class ResourceConfig < Struct.new(
+      nil,
       :instance_count,
       :instance_type,
       :volume_size_in_gb,
@@ -3353,6 +3496,7 @@ module Aws::CleanRoomsML
     # @!attribute message
     #   @return [String]
     class ResourceNotFoundException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -3364,6 +3508,7 @@ module Aws::CleanRoomsML
     #   <p>The Amazon S3 location URI.</p>
     #   @return [String]
     class S3ConfigMap < Struct.new(
+      nil,
       :s3_uri,
       keyword_init: true
     )
@@ -3380,6 +3525,7 @@ module Aws::CleanRoomsML
     #   The current limit on the service quota that was exceeded
     #   @return [Float]
     class ServiceQuotaExceededException < Struct.new(
+      nil,
       :message,
       :quota_name,
       :quota_value,
@@ -3401,6 +3547,7 @@ module Aws::CleanRoomsML
     #   <p>The description of the audience export job.</p>
     #   @return [String]
     class StartAudienceExportJobRequest < Struct.new(
+      nil,
       :name,
       :audience_generation_job_arn,
       :audience_size,
@@ -3432,6 +3579,7 @@ module Aws::CleanRoomsML
     #   <p>The optional metadata that you apply to the resource to help you categorize and organize them. Each tag consists of a key and an optional value, both of which you define.</p> <p>The following basic restrictions apply to tags:</p> <ul> <li> <p>Maximum number of tags per resource - 50.</p> </li> <li> <p>For each resource, each tag key must be unique, and each tag key can have only one value.</p> </li> <li> <p>Maximum key length - 128 Unicode characters in UTF-8.</p> </li> <li> <p>Maximum value length - 256 Unicode characters in UTF-8.</p> </li> <li> <p>If your tagging schema is used across multiple services and resources, remember that other services may have restrictions on allowed characters. Generally allowed characters are: letters, numbers, and spaces representable in UTF-8, and the following characters: + - = . _ : / @.</p> </li> <li> <p>Tag keys and values are case sensitive.</p> </li> <li> <p>Do not use aws:, AWS:, or any upper or lowercase combination of such as a prefix for keys as it is reserved for AWS use. You cannot edit or delete tag keys with this prefix. Values can have this prefix. If a tag value has aws as its prefix but the key does not, then Clean Rooms ML considers it to be a user tag and will count against the limit of 50 tags. Tags with only the key prefix of aws do not count against your tags per resource limit.</p> </li> </ul>
     #   @return [Hash<String, String>]
     class StartAudienceGenerationJobRequest < Struct.new(
+      nil,
       :name,
       :configured_audience_model_arn,
       :seed_audience,
@@ -3448,6 +3596,7 @@ module Aws::CleanRoomsML
     #   <p>The Amazon Resource Name (ARN) of the audience generation job.</p>
     #   @return [String]
     class StartAudienceGenerationJobResponse < Struct.new(
+      nil,
       :audience_generation_job_arn,
       keyword_init: true
     )
@@ -3473,6 +3622,7 @@ module Aws::CleanRoomsML
     #   <p>The description of the trained model export job.</p>
     #   @return [String]
     class StartTrainedModelExportJobRequest < Struct.new(
+      nil,
       :name,
       :trained_model_arn,
       :trained_model_version_identifier,
@@ -3524,6 +3674,7 @@ module Aws::CleanRoomsML
     #   <p>The optional metadata that you apply to the resource to help you categorize and organize them. Each tag consists of a key and an optional value, both of which you define.</p> <p>The following basic restrictions apply to tags:</p> <ul> <li> <p>Maximum number of tags per resource - 50.</p> </li> <li> <p>For each resource, each tag key must be unique, and each tag key can have only one value.</p> </li> <li> <p>Maximum key length - 128 Unicode characters in UTF-8.</p> </li> <li> <p>Maximum value length - 256 Unicode characters in UTF-8.</p> </li> <li> <p>If your tagging schema is used across multiple services and resources, remember that other services may have restrictions on allowed characters. Generally allowed characters are: letters, numbers, and spaces representable in UTF-8, and the following characters: + - = . _ : / @.</p> </li> <li> <p>Tag keys and values are case sensitive.</p> </li> <li> <p>Do not use aws:, AWS:, or any upper or lowercase combination of such as a prefix for keys as it is reserved for AWS use. You cannot edit or delete tag keys with this prefix. Values can have this prefix. If a tag value has aws as its prefix but the key does not, then Clean Rooms ML considers it to be a user tag and will count against the limit of 50 tags. Tags with only the key prefix of aws do not count against your tags per resource limit.</p> </li> </ul>
     #   @return [Hash<String, String>]
     class StartTrainedModelInferenceJobRequest < Struct.new(
+      nil,
       :membership_identifier,
       :name,
       :trained_model_arn,
@@ -3546,6 +3697,7 @@ module Aws::CleanRoomsML
     #   <p>The Amazon Resource Name (ARN) of the trained model inference job.</p>
     #   @return [String]
     class StartTrainedModelInferenceJobResponse < Struct.new(
+      nil,
       :trained_model_inference_job_arn,
       keyword_init: true
     )
@@ -3560,6 +3712,7 @@ module Aws::CleanRoomsML
     #   <p>The error message that was returned. The message is intended for human consumption and can change at any time. Use the <code>statusCode</code> for programmatic error handling.</p>
     #   @return [String]
     class StatusDetails < Struct.new(
+      nil,
       :status_code,
       :message,
       keyword_init: true
@@ -3572,6 +3725,7 @@ module Aws::CleanRoomsML
     #   <p>The maximum amount of time, in seconds, that model training can run before it is terminated.</p>
     #   @return [Integer]
     class StoppingCondition < Struct.new(
+      nil,
       :max_runtime_in_seconds,
       keyword_init: true
     )
@@ -3590,6 +3744,7 @@ module Aws::CleanRoomsML
     #   <p>The optional metadata that you apply to the resource to help you categorize and organize them. Each tag consists of a key and an optional value, both of which you define.</p> <p>The following basic restrictions apply to tags:</p> <ul> <li> <p>Maximum number of tags per resource - 50.</p> </li> <li> <p>For each resource, each tag key must be unique, and each tag key can have only one value.</p> </li> <li> <p>Maximum key length - 128 Unicode characters in UTF-8.</p> </li> <li> <p>Maximum value length - 256 Unicode characters in UTF-8.</p> </li> <li> <p>If your tagging schema is used across multiple services and resources, remember that other services may have restrictions on allowed characters. Generally allowed characters are: letters, numbers, and spaces representable in UTF-8, and the following characters: + - = . _ : / @.</p> </li> <li> <p>Tag keys and values are case sensitive.</p> </li> <li> <p>Do not use aws:, AWS:, or any upper or lowercase combination of such as a prefix for keys as it is reserved for AWS use. You cannot edit or delete tag keys with this prefix. Values can have this prefix. If a tag value has aws as its prefix but the key does not, then Clean Rooms considers it to be a user tag and will count against the limit of 50 tags. Tags with only the key prefix of aws do not count against your tags per resource limit.</p> </li> </ul>
     #   @return [Hash<String, String>]
     class TagResourceRequest < Struct.new(
+      nil,
       :resource_arn,
       :tags,
       keyword_init: true
@@ -3598,6 +3753,7 @@ module Aws::CleanRoomsML
     end
 
     class TagResourceResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -3607,6 +3763,7 @@ module Aws::CleanRoomsML
     # @!attribute message
     #   @return [String]
     class ThrottlingException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -3621,6 +3778,7 @@ module Aws::CleanRoomsML
     #   <p>The numerical value for the maximum artifact size limit. This value is interpreted according to the specified unit.</p>
     #   @return [Float]
     class TrainedModelArtifactMaxSize < Struct.new(
+      nil,
       :unit,
       :value,
       keyword_init: true
@@ -3633,6 +3791,7 @@ module Aws::CleanRoomsML
     #   <p>The members that will received the exported trained model output.</p>
     #   @return [Array<Types::TrainedModelExportReceiverMember>]
     class TrainedModelExportOutputConfiguration < Struct.new(
+      nil,
       :members,
       keyword_init: true
     )
@@ -3644,6 +3803,7 @@ module Aws::CleanRoomsML
     #   <p>The account ID of the member who will receive trained model exports.</p>
     #   @return [String]
     class TrainedModelExportReceiverMember < Struct.new(
+      nil,
       :account_id,
       keyword_init: true
     )
@@ -3658,6 +3818,7 @@ module Aws::CleanRoomsML
     #   <p>The files that are exported during the trained model export job.</p>
     #   @return [Array<String>]
     class TrainedModelExportsConfigurationPolicy < Struct.new(
+      nil,
       :max_size,
       :files_to_export,
       keyword_init: true
@@ -3673,6 +3834,7 @@ module Aws::CleanRoomsML
     #   <p>The maximum size of the dataset to export.</p>
     #   @return [Float]
     class TrainedModelExportsMaxSize < Struct.new(
+      nil,
       :unit,
       :value,
       keyword_init: true
@@ -3730,6 +3892,7 @@ module Aws::CleanRoomsML
     #   <p>The most recent time at which the trained model inference job was updated.</p>
     #   @return [Time]
     class TrainedModelInferenceJobSummary < Struct.new(
+      nil,
       :trained_model_inference_job_arn,
       :configured_model_algorithm_association_arn,
       :membership_identifier,
@@ -3759,6 +3922,7 @@ module Aws::CleanRoomsML
     #   <p>The maximum allowed size of the output of the trained model inference job.</p>
     #   @return [Types::TrainedModelInferenceMaxOutputSize]
     class TrainedModelInferenceJobsConfigurationPolicy < Struct.new(
+      nil,
       :container_logs,
       :max_output_size,
       keyword_init: true
@@ -3774,6 +3938,7 @@ module Aws::CleanRoomsML
     #   <p>The maximum output size value.</p>
     #   @return [Float]
     class TrainedModelInferenceMaxOutputSize < Struct.new(
+      nil,
       :unit,
       :value,
       keyword_init: true
@@ -3816,6 +3981,7 @@ module Aws::CleanRoomsML
     #   <p>The Amazon Resource Name (ARN) of the configured model algorithm association that was used to create this trained model.</p>
     #   @return [String]
     class TrainedModelSummary < Struct.new(
+      nil,
       :create_time,
       :update_time,
       :trained_model_arn,
@@ -3843,6 +4009,7 @@ module Aws::CleanRoomsML
     #   <p>The maximum size limit for trained model artifacts as defined in the configuration policy. This setting helps enforce consistent size limits across trained models in the collaboration.</p>
     #   @return [Types::TrainedModelArtifactMaxSize]
     class TrainedModelsConfigurationPolicy < Struct.new(
+      nil,
       :container_logs,
       :container_metrics,
       :max_artifact_size,
@@ -3871,6 +4038,7 @@ module Aws::CleanRoomsML
     #   <p>The description of the training dataset.</p>
     #   @return [String]
     class TrainingDatasetSummary < Struct.new(
+      nil,
       :create_time,
       :update_time,
       :training_dataset_arn,
@@ -3889,6 +4057,7 @@ module Aws::CleanRoomsML
     #   <p>The key values of tags that you want to remove.</p>
     #   @return [Array<String>]
     class UntagResourceRequest < Struct.new(
+      nil,
       :resource_arn,
       :tag_keys,
       keyword_init: true
@@ -3897,6 +4066,7 @@ module Aws::CleanRoomsML
     end
 
     class UntagResourceResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -3924,6 +4094,7 @@ module Aws::CleanRoomsML
     #   <p>The new description of the configured audience model.</p>
     #   @return [String]
     class UpdateConfiguredAudienceModelRequest < Struct.new(
+      nil,
       :configured_audience_model_arn,
       :output_config,
       :audience_model_arn,
@@ -3940,6 +4111,7 @@ module Aws::CleanRoomsML
     #   <p>The Amazon Resource Name (ARN) of the configured audience model that was updated.</p>
     #   @return [String]
     class UpdateConfiguredAudienceModelResponse < Struct.new(
+      nil,
       :configured_audience_model_arn,
       keyword_init: true
     )
@@ -3950,6 +4122,7 @@ module Aws::CleanRoomsML
     # @!attribute message
     #   @return [String]
     class ValidationException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -3964,6 +4137,7 @@ module Aws::CleanRoomsML
     #   <p>The number of compute workers that are used.</p>
     #   @return [Integer]
     class WorkerComputeConfiguration < Struct.new(
+      nil,
       :type,
       :number,
       keyword_init: true

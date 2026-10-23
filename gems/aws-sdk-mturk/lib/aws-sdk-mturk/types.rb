@@ -16,6 +16,7 @@ module Aws::MTurk
     #           </p>
     #   @return [Integer]
     class AcceptQualificationRequestRequest < Struct.new(
+      nil,
       :qualification_request_id,
       :integer_value,
       keyword_init: true
@@ -24,6 +25,7 @@ module Aws::MTurk
     end
 
     class AcceptQualificationRequestResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -45,6 +47,7 @@ module Aws::MTurk
     #           </p>
     #   @return [Boolean]
     class ApproveAssignmentRequest < Struct.new(
+      nil,
       :assignment_id,
       :requester_feedback,
       :override_rejection,
@@ -54,6 +57,7 @@ module Aws::MTurk
     end
 
     class ApproveAssignmentResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -120,6 +124,7 @@ module Aws::MTurk
     #               Requester approved or rejected the assignment and specified feedback.</p>
     #   @return [String]
     class Assignment < Struct.new(
+      nil,
       :assignment_id,
       :worker_id,
       :hit_id,
@@ -157,6 +162,7 @@ module Aws::MTurk
     #           </p>
     #   @return [Boolean]
     class AssociateQualificationWithWorkerRequest < Struct.new(
+      nil,
       :qualification_type_id,
       :worker_id,
       :integer_value,
@@ -167,6 +173,7 @@ module Aws::MTurk
     end
 
     class AssociateQualificationWithWorkerResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -189,6 +196,7 @@ module Aws::MTurk
     #   <p>The date and time of when the bonus was granted.</p>
     #   @return [Time]
     class BonusPayment < Struct.new(
+      nil,
       :worker_id,
       :bonus_amount,
       :assignment_id,
@@ -216,6 +224,7 @@ module Aws::MTurk
     #           </p>
     #   @return [String]
     class CreateAdditionalAssignmentsForHITRequest < Struct.new(
+      nil,
       :hit_id,
       :number_of_additional_assignments,
       :unique_request_token,
@@ -225,6 +234,7 @@ module Aws::MTurk
     end
 
     class CreateAdditionalAssignmentsForHITResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -368,6 +378,7 @@ module Aws::MTurk
     #           </p>
     #   @return [Array<Types::HITLayoutParameter>]
     class CreateHITRequest < Struct.new(
+      nil,
       :max_assignments,
       :auto_approval_delay_in_seconds,
       :lifetime_in_seconds,
@@ -396,6 +407,7 @@ module Aws::MTurk
     #           </p>
     #   @return [Types::HIT]
     class CreateHITResponse < Struct.new(
+      nil,
       :hit,
       keyword_init: true
     )
@@ -455,6 +467,7 @@ module Aws::MTurk
     #           </p>
     #   @return [Array<Types::QualificationRequirement>]
     class CreateHITTypeRequest < Struct.new(
+      nil,
       :auto_approval_delay_in_seconds,
       :assignment_duration_in_seconds,
       :reward,
@@ -471,6 +484,7 @@ module Aws::MTurk
     #   <p> The ID of the newly registered HIT type.</p>
     #   @return [String]
     class CreateHITTypeResponse < Struct.new(
+      nil,
       :hit_type_id,
       keyword_init: true
     )
@@ -566,6 +580,7 @@ module Aws::MTurk
     #           </p>
     #   @return [Array<Types::HITLayoutParameter>]
     class CreateHITWithHITTypeRequest < Struct.new(
+      nil,
       :hit_type_id,
       :max_assignments,
       :lifetime_in_seconds,
@@ -588,6 +603,7 @@ module Aws::MTurk
     #           </p>
     #   @return [Types::HIT]
     class CreateHITWithHITTypeResponse < Struct.new(
+      nil,
       :hit,
       keyword_init: true
     )
@@ -665,6 +681,7 @@ module Aws::MTurk
     #               parameter is true.</p>
     #   @return [Integer]
     class CreateQualificationTypeRequest < Struct.new(
+      nil,
       :name,
       :keywords,
       :description,
@@ -685,6 +702,7 @@ module Aws::MTurk
     #               QualificationType data structure.</p>
     #   @return [Types::QualificationType]
     class CreateQualificationTypeResponse < Struct.new(
+      nil,
       :qualification_type,
       keyword_init: true
     )
@@ -698,6 +716,7 @@ module Aws::MTurk
     #   <p>A message explaining the reason for blocking the Worker. This parameter enables you to keep track of your Workers. The Worker does not see this message.</p>
     #   @return [String]
     class CreateWorkerBlockRequest < Struct.new(
+      nil,
       :worker_id,
       :reason,
       keyword_init: true
@@ -706,6 +725,7 @@ module Aws::MTurk
     end
 
     class CreateWorkerBlockResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -715,6 +735,7 @@ module Aws::MTurk
     #   <p>The ID of the HIT to be deleted.</p>
     #   @return [String]
     class DeleteHITRequest < Struct.new(
+      nil,
       :hit_id,
       keyword_init: true
     )
@@ -722,6 +743,7 @@ module Aws::MTurk
     end
 
     class DeleteHITResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -731,6 +753,7 @@ module Aws::MTurk
     #   <p>The ID of the QualificationType to dispose.</p>
     #   @return [String]
     class DeleteQualificationTypeRequest < Struct.new(
+      nil,
       :qualification_type_id,
       keyword_init: true
     )
@@ -738,6 +761,7 @@ module Aws::MTurk
     end
 
     class DeleteQualificationTypeResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -750,6 +774,7 @@ module Aws::MTurk
     #   <p>A message that explains the reason for unblocking the Worker. The Worker does not see this message.</p>
     #   @return [String]
     class DeleteWorkerBlockRequest < Struct.new(
+      nil,
       :worker_id,
       :reason,
       keyword_init: true
@@ -758,6 +783,7 @@ module Aws::MTurk
     end
 
     class DeleteWorkerBlockResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -773,6 +799,7 @@ module Aws::MTurk
     #   <p>A text message that explains why the Qualification was revoked. The user who had the Qualification sees this message.</p>
     #   @return [String]
     class DisassociateQualificationFromWorkerRequest < Struct.new(
+      nil,
       :worker_id,
       :qualification_type_id,
       :reason,
@@ -782,12 +809,14 @@ module Aws::MTurk
     end
 
     class DisassociateQualificationFromWorkerResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
     end
 
     class GetAccountBalanceRequest < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -800,6 +829,7 @@ module Aws::MTurk
     #   <p>A string representing a currency amount.</p>
     #   @return [String]
     class GetAccountBalanceResponse < Struct.new(
+      nil,
       :available_balance,
       :on_hold_balance,
       keyword_init: true
@@ -811,6 +841,7 @@ module Aws::MTurk
     #   <p>The ID of the Assignment to be retrieved.</p>
     #   @return [String]
     class GetAssignmentRequest < Struct.new(
+      nil,
       :assignment_id,
       keyword_init: true
     )
@@ -827,6 +858,7 @@ module Aws::MTurk
     #               includes one HIT element.</p>
     #   @return [Types::HIT]
     class GetAssignmentResponse < Struct.new(
+      nil,
       :assignment,
       :hit,
       keyword_init: true
@@ -843,6 +875,7 @@ module Aws::MTurk
     #               specified in the QuestionForm of the HIT.</p>
     #   @return [String]
     class GetFileUploadURLRequest < Struct.new(
+      nil,
       :assignment_id,
       :question_identifier,
       keyword_init: true
@@ -856,6 +889,7 @@ module Aws::MTurk
     #           </p>
     #   @return [String]
     class GetFileUploadURLResponse < Struct.new(
+      nil,
       :file_upload_url,
       keyword_init: true
     )
@@ -866,6 +900,7 @@ module Aws::MTurk
     #   <p>The ID of the HIT to be retrieved.</p>
     #   @return [String]
     class GetHITRequest < Struct.new(
+      nil,
       :hit_id,
       keyword_init: true
     )
@@ -876,6 +911,7 @@ module Aws::MTurk
     #   <p> Contains the requested HIT data.</p>
     #   @return [Types::HIT]
     class GetHITResponse < Struct.new(
+      nil,
       :hit,
       keyword_init: true
     )
@@ -889,6 +925,7 @@ module Aws::MTurk
     #   <p>The ID of the Worker whose Qualification is being updated.</p>
     #   @return [String]
     class GetQualificationScoreRequest < Struct.new(
+      nil,
       :qualification_type_id,
       :worker_id,
       keyword_init: true
@@ -903,6 +940,7 @@ module Aws::MTurk
     #           </p>
     #   @return [Types::Qualification]
     class GetQualificationScoreResponse < Struct.new(
+      nil,
       :qualification,
       keyword_init: true
     )
@@ -913,6 +951,7 @@ module Aws::MTurk
     #   <p>The ID of the QualificationType.</p>
     #   @return [String]
     class GetQualificationTypeRequest < Struct.new(
+      nil,
       :qualification_type_id,
       keyword_init: true
     )
@@ -923,6 +962,7 @@ module Aws::MTurk
     #   <p> The returned Qualification Type</p>
     #   @return [Types::QualificationType]
     class GetQualificationTypeResponse < Struct.new(
+      nil,
       :qualification_type,
       keyword_init: true
     )
@@ -1024,6 +1064,7 @@ module Aws::MTurk
     #               approved or rejected.</p>
     #   @return [Integer]
     class HIT < Struct.new(
+      nil,
       :hit_id,
       :hit_type_id,
       :hit_group_id,
@@ -1065,6 +1106,7 @@ module Aws::MTurk
     #           </p>
     #   @return [String]
     class HITLayoutParameter < Struct.new(
+      nil,
       :name,
       :value,
       keyword_init: true
@@ -1085,6 +1127,7 @@ module Aws::MTurk
     #               | Rejected</p>
     #   @return [Array<String>]
     class ListAssignmentsForHITRequest < Struct.new(
+      nil,
       :hit_id,
       :next_token,
       :max_results,
@@ -1110,6 +1153,7 @@ module Aws::MTurk
     #               this call.</p>
     #   @return [Array<Types::Assignment>]
     class ListAssignmentsForHITResponse < Struct.new(
+      nil,
       :next_token,
       :num_results,
       :assignments,
@@ -1136,6 +1180,7 @@ module Aws::MTurk
     # @!attribute max_results
     #   @return [Integer]
     class ListBonusPaymentsRequest < Struct.new(
+      nil,
       :hit_id,
       :assignment_id,
       :next_token,
@@ -1163,6 +1208,7 @@ module Aws::MTurk
     #           </p>
     #   @return [Array<Types::BonusPayment>]
     class ListBonusPaymentsResponse < Struct.new(
+      nil,
       :num_results,
       :next_token,
       :bonus_payments,
@@ -1185,6 +1231,7 @@ module Aws::MTurk
     #           </p>
     #   @return [Integer]
     class ListHITsForQualificationTypeRequest < Struct.new(
+      nil,
       :qualification_type_id,
       :next_token,
       :max_results,
@@ -1207,6 +1254,7 @@ module Aws::MTurk
     #   <p> The list of HIT elements returned by the query.</p>
     #   @return [Array<Types::HIT>]
     class ListHITsForQualificationTypeResponse < Struct.new(
+      nil,
       :next_token,
       :num_results,
       :hi_ts,
@@ -1221,6 +1269,7 @@ module Aws::MTurk
     # @!attribute max_results
     #   @return [Integer]
     class ListHITsRequest < Struct.new(
+      nil,
       :next_token,
       :max_results,
       keyword_init: true
@@ -1242,6 +1291,7 @@ module Aws::MTurk
     #   <p> The list of HIT elements returned by the query.</p>
     #   @return [Array<Types::HIT>]
     class ListHITsResponse < Struct.new(
+      nil,
       :next_token,
       :num_results,
       :hi_ts,
@@ -1264,6 +1314,7 @@ module Aws::MTurk
     #           </p>
     #   @return [Integer]
     class ListQualificationRequestsRequest < Struct.new(
+      nil,
       :qualification_type_id,
       :next_token,
       :max_results,
@@ -1289,6 +1340,7 @@ module Aws::MTurk
     #               by the query.</p>
     #   @return [Array<Types::QualificationRequest>]
     class ListQualificationRequestsResponse < Struct.new(
+      nil,
       :num_results,
       :next_token,
       :qualification_requests,
@@ -1329,6 +1381,7 @@ module Aws::MTurk
     #           </p>
     #   @return [Integer]
     class ListQualificationTypesRequest < Struct.new(
+      nil,
       :query,
       :must_be_requestable,
       :must_be_owned_by_caller,
@@ -1357,6 +1410,7 @@ module Aws::MTurk
     #           </p>
     #   @return [Array<Types::QualificationType>]
     class ListQualificationTypesResponse < Struct.new(
+      nil,
       :num_results,
       :next_token,
       :qualification_types,
@@ -1393,6 +1447,7 @@ module Aws::MTurk
     #   <p>Limit the number of results returned.</p>
     #   @return [Integer]
     class ListReviewPolicyResultsForHITRequest < Struct.new(
+      nil,
       :hit_id,
       :policy_levels,
       :retrieve_actions,
@@ -1432,6 +1487,7 @@ module Aws::MTurk
     #           </p>
     #   @return [String]
     class ListReviewPolicyResultsForHITResponse < Struct.new(
+      nil,
       :hit_id,
       :assignment_review_policy,
       :hit_review_policy,
@@ -1464,6 +1520,7 @@ module Aws::MTurk
     #           </p>
     #   @return [Integer]
     class ListReviewableHITsRequest < Struct.new(
+      nil,
       :hit_type_id,
       :status,
       :next_token,
@@ -1488,6 +1545,7 @@ module Aws::MTurk
     #   <p> The list of HIT elements returned by the query.</p>
     #   @return [Array<Types::HIT>]
     class ListReviewableHITsResponse < Struct.new(
+      nil,
       :next_token,
       :num_results,
       :hi_ts,
@@ -1502,6 +1560,7 @@ module Aws::MTurk
     # @!attribute max_results
     #   @return [Integer]
     class ListWorkerBlocksRequest < Struct.new(
+      nil,
       :next_token,
       :max_results,
       keyword_init: true
@@ -1525,6 +1584,7 @@ module Aws::MTurk
     #               Worker IDs and reasons for blocking.</p>
     #   @return [Array<Types::WorkerBlock>]
     class ListWorkerBlocksResponse < Struct.new(
+      nil,
       :next_token,
       :num_results,
       :worker_blocks,
@@ -1552,6 +1612,7 @@ module Aws::MTurk
     #           </p>
     #   @return [Integer]
     class ListWorkersWithQualificationTypeRequest < Struct.new(
+      nil,
       :qualification_type_id,
       :status,
       :next_token,
@@ -1577,6 +1638,7 @@ module Aws::MTurk
     #           </p>
     #   @return [Array<Types::Qualification>]
     class ListWorkersWithQualificationTypeResponse < Struct.new(
+      nil,
       :next_token,
       :num_results,
       :qualifications,
@@ -1598,6 +1660,7 @@ module Aws::MTurk
     #               Washington.</p>
     #   @return [String]
     class Locale < Struct.new(
+      nil,
       :country,
       :subdivision,
       keyword_init: true
@@ -1642,6 +1705,7 @@ module Aws::MTurk
     #           </p>
     #   @return [Array<String>]
     class NotificationSpecification < Struct.new(
+      nil,
       :destination,
       :transport,
       :version,
@@ -1667,6 +1731,7 @@ module Aws::MTurk
     #   <p> The ID of the Worker.</p>
     #   @return [String]
     class NotifyWorkersFailureStatus < Struct.new(
+      nil,
       :notify_workers_failure_code,
       :notify_workers_failure_message,
       :worker_id,
@@ -1689,6 +1754,7 @@ module Aws::MTurk
     #               100 Workers at a time.</p>
     #   @return [Array<String>]
     class NotifyWorkersRequest < Struct.new(
+      nil,
       :subject,
       :message_text,
       :worker_ids,
@@ -1704,6 +1770,7 @@ module Aws::MTurk
     #           </p>
     #   @return [Array<Types::NotifyWorkersFailureStatus>]
     class NotifyWorkersResponse < Struct.new(
+      nil,
       :notify_workers_failure_statuses,
       keyword_init: true
     )
@@ -1726,6 +1793,7 @@ module Aws::MTurk
     #           </p>
     #   @return [Array<String>]
     class ParameterMapEntry < Struct.new(
+      nil,
       :key,
       :values,
       keyword_init: true
@@ -1747,6 +1815,7 @@ module Aws::MTurk
     #           </p>
     #   @return [Array<Types::ParameterMapEntry>]
     class PolicyParameter < Struct.new(
+      nil,
       :key,
       :values,
       :map_entries,
@@ -1784,6 +1853,7 @@ module Aws::MTurk
     #               Revoked.</p>
     #   @return [String]
     class Qualification < Struct.new(
+      nil,
       :qualification_type_id,
       :worker_id,
       :grant_time,
@@ -1834,6 +1904,7 @@ module Aws::MTurk
     #           </p>
     #   @return [Time]
     class QualificationRequest < Struct.new(
+      nil,
       :qualification_request_id,
       :qualification_type_id,
       :worker_id,
@@ -1922,6 +1993,7 @@ module Aws::MTurk
     #           </p>
     #   @return [String]
     class QualificationRequirement < Struct.new(
+      nil,
       :qualification_type_id,
       :comparator,
       :integer_values,
@@ -2018,6 +2090,7 @@ module Aws::MTurk
     #           </p>
     #   @return [Integer]
     class QualificationType < Struct.new(
+      nil,
       :qualification_type_id,
       :creation_time,
       :name,
@@ -2047,6 +2120,7 @@ module Aws::MTurk
     #           </p>
     #   @return [String]
     class RejectAssignmentRequest < Struct.new(
+      nil,
       :assignment_id,
       :requester_feedback,
       keyword_init: true
@@ -2055,6 +2129,7 @@ module Aws::MTurk
     end
 
     class RejectAssignmentResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -2072,6 +2147,7 @@ module Aws::MTurk
     #               shown to the Worker who made the request.</p>
     #   @return [String]
     class RejectQualificationRequestRequest < Struct.new(
+      nil,
       :qualification_request_id,
       :reason,
       keyword_init: true
@@ -2080,6 +2156,7 @@ module Aws::MTurk
     end
 
     class RejectQualificationRequestResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -2091,6 +2168,7 @@ module Aws::MTurk
     # @!attribute turk_error_code
     #   @return [String]
     class RequestError < Struct.new(
+      nil,
       :message,
       :turk_error_code,
       keyword_init: true
@@ -2132,6 +2210,7 @@ module Aws::MTurk
     #   <p> Present only when the Results have a FAILED Status.</p>
     #   @return [String]
     class ReviewActionDetail < Struct.new(
+      nil,
       :action_id,
       :action_name,
       :target_id,
@@ -2157,6 +2236,7 @@ module Aws::MTurk
     #   <p>Name of the parameter from the Review policy.</p>
     #   @return [Array<Types::PolicyParameter>]
     class ReviewPolicy < Struct.new(
+      nil,
       :policy_name,
       :parameters,
       keyword_init: true
@@ -2178,6 +2258,7 @@ module Aws::MTurk
     #           </p>
     #   @return [Array<Types::ReviewActionDetail>]
     class ReviewReport < Struct.new(
+      nil,
       :review_results,
       :review_actions,
       keyword_init: true
@@ -2223,6 +2304,7 @@ module Aws::MTurk
     #           </p>
     #   @return [String]
     class ReviewResultDetail < Struct.new(
+      nil,
       :action_id,
       :subject_id,
       :subject_type,
@@ -2260,6 +2342,7 @@ module Aws::MTurk
     #               request ID.</p>
     #   @return [String]
     class SendBonusRequest < Struct.new(
+      nil,
       :worker_id,
       :bonus_amount,
       :assignment_id,
@@ -2271,6 +2354,7 @@ module Aws::MTurk
     end
 
     class SendBonusResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -2292,6 +2376,7 @@ module Aws::MTurk
     #           </p>
     #   @return [String]
     class SendTestEventNotificationRequest < Struct.new(
+      nil,
       :notification,
       :test_event_type,
       keyword_init: true
@@ -2300,6 +2385,7 @@ module Aws::MTurk
     end
 
     class SendTestEventNotificationResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -2311,6 +2397,7 @@ module Aws::MTurk
     # @!attribute turk_error_code
     #   @return [String]
     class ServiceFault < Struct.new(
+      nil,
       :message,
       :turk_error_code,
       keyword_init: true
@@ -2329,6 +2416,7 @@ module Aws::MTurk
     #           </p>
     #   @return [Time]
     class UpdateExpirationForHITRequest < Struct.new(
+      nil,
       :hit_id,
       :expire_at,
       keyword_init: true
@@ -2337,6 +2425,7 @@ module Aws::MTurk
     end
 
     class UpdateExpirationForHITResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -2365,6 +2454,7 @@ module Aws::MTurk
     #            </ul>
     #   @return [Boolean]
     class UpdateHITReviewStatusRequest < Struct.new(
+      nil,
       :hit_id,
       :revert,
       keyword_init: true
@@ -2373,6 +2463,7 @@ module Aws::MTurk
     end
 
     class UpdateHITReviewStatusResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -2385,6 +2476,7 @@ module Aws::MTurk
     #   <p>The ID of the new HIT type.</p>
     #   @return [String]
     class UpdateHITTypeOfHITRequest < Struct.new(
+      nil,
       :hit_id,
       :hit_type_id,
       keyword_init: true
@@ -2393,6 +2485,7 @@ module Aws::MTurk
     end
 
     class UpdateHITTypeOfHITResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -2417,6 +2510,7 @@ module Aws::MTurk
     #           </p>
     #   @return [Boolean]
     class UpdateNotificationSettingsRequest < Struct.new(
+      nil,
       :hit_type_id,
       :notification,
       :active,
@@ -2426,6 +2520,7 @@ module Aws::MTurk
     end
 
     class UpdateNotificationSettingsResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -2469,6 +2564,7 @@ module Aws::MTurk
     #   <p>The Qualification value to use for automatically granted Qualifications. This parameter is used only if the AutoGranted parameter is true.</p>
     #   @return [Integer]
     class UpdateQualificationTypeRequest < Struct.new(
+      nil,
       :qualification_type_id,
       :description,
       :qualification_type_status,
@@ -2487,6 +2583,7 @@ module Aws::MTurk
     #   <p> Contains a QualificationType data structure.</p>
     #   @return [Types::QualificationType]
     class UpdateQualificationTypeResponse < Struct.new(
+      nil,
       :qualification_type,
       keyword_init: true
     )
@@ -2505,6 +2602,7 @@ module Aws::MTurk
     #           </p>
     #   @return [String]
     class WorkerBlock < Struct.new(
+      nil,
       :worker_id,
       :reason,
       keyword_init: true

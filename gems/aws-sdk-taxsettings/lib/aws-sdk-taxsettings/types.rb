@@ -11,6 +11,7 @@ module Aws::TaxSettings
     # @!attribute message
     #   @return [String]
     class AccessDeniedException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -37,6 +38,7 @@ module Aws::TaxSettings
     #       </p>
     #   @return [Types::AccountMetaData]
     class AccountDetails < Struct.new(
+      nil,
       :account_id,
       :tax_registration,
       :tax_inheritance_details,
@@ -74,6 +76,7 @@ module Aws::TaxSettings
     #       </p>
     #   @return [Hash<String, Types::Jurisdiction>]
     class AccountMetaData < Struct.new(
+      nil,
       :account_name,
       :seller,
       :address,
@@ -166,6 +169,7 @@ module Aws::TaxSettings
     #       </p>
     #   @return [Types::UzbekistanAdditionalInfo]
     class AdditionalInfoRequest < Struct.new(
+      nil,
       :malaysia_additional_info,
       :israel_additional_info,
       :estonia_additional_info,
@@ -276,6 +280,7 @@ module Aws::TaxSettings
     #       </p>
     #   @return [Types::UzbekistanAdditionalInfo]
     class AdditionalInfoResponse < Struct.new(
+      nil,
       :malaysia_additional_info,
       :israel_additional_info,
       :estonia_additional_info,
@@ -336,6 +341,7 @@ module Aws::TaxSettings
     #   <p>The country code for the country that the address is in. </p>
     #   @return [String]
     class Address < Struct.new(
+      nil,
       :address_line1,
       :address_line2,
       :address_line3,
@@ -354,6 +360,7 @@ module Aws::TaxSettings
     # @!attribute message
     #   @return [String]
     class AttachmentUploadException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -373,6 +380,7 @@ module Aws::TaxSettings
     #       </p>
     #   @return [String]
     class Authority < Struct.new(
+      nil,
       :country,
       :state,
       keyword_init: true
@@ -394,6 +402,7 @@ module Aws::TaxSettings
     #   <p> The error code for an individual failure in BatchDeleteTaxRegistration operation. </p>
     #   @return [String]
     class BatchDeleteTaxRegistrationError < Struct.new(
+      nil,
       :account_id,
       :message,
       :code,
@@ -406,6 +415,7 @@ module Aws::TaxSettings
     #   <p>List of unique account identifiers. </p>
     #   @return [Array<String>]
     class BatchDeleteTaxRegistrationRequest < Struct.new(
+      nil,
       :account_ids,
       keyword_init: true
     )
@@ -416,6 +426,7 @@ module Aws::TaxSettings
     #   <p>The list of errors for the accounts the TRN information could not be deleted for. </p>
     #   @return [Array<Types::BatchDeleteTaxRegistrationError>]
     class BatchDeleteTaxRegistrationResponse < Struct.new(
+      nil,
       :errors,
       keyword_init: true
     )
@@ -428,6 +439,7 @@ module Aws::TaxSettings
     #       </p>
     #   @return [Array<String>]
     class BatchGetTaxExemptionsRequest < Struct.new(
+      nil,
       :account_ids,
       keyword_init: true
     )
@@ -443,6 +455,7 @@ module Aws::TaxSettings
     #       </p>
     #   @return [Array<String>]
     class BatchGetTaxExemptionsResponse < Struct.new(
+      nil,
       :tax_exemption_details_map,
       :failed_accounts,
       keyword_init: true
@@ -465,6 +478,7 @@ module Aws::TaxSettings
     #         operation. </p>
     #   @return [String]
     class BatchPutTaxRegistrationError < Struct.new(
+      nil,
       :account_id,
       :message,
       :code,
@@ -481,6 +495,7 @@ module Aws::TaxSettings
     #           <code>putEntries</code>. </p>
     #   @return [Types::TaxRegistrationEntry]
     class BatchPutTaxRegistrationRequest < Struct.new(
+      nil,
       :account_ids,
       :tax_registration_entry,
       keyword_init: true
@@ -498,6 +513,7 @@ module Aws::TaxSettings
     #       </p>
     #   @return [Array<Types::BatchPutTaxRegistrationError>]
     class BatchPutTaxRegistrationResponse < Struct.new(
+      nil,
       :status,
       :errors,
       keyword_init: true
@@ -514,6 +530,7 @@ module Aws::TaxSettings
     #         type.</p>
     #   @return [String]
     class BrazilAdditionalInfo < Struct.new(
+      nil,
       :ccm_code,
       :legal_nature_code,
       keyword_init: true
@@ -558,6 +575,7 @@ module Aws::TaxSettings
     #         or RST number from the <code>provincialSalesTaxId</code> parameter from your request.</p>
     #   @return [Boolean]
     class CanadaAdditionalInfo < Struct.new(
+      nil,
       :provincial_sales_tax_id,
       :canada_quebec_sales_tax_number,
       :canada_retail_sales_tax_number,
@@ -572,6 +590,7 @@ module Aws::TaxSettings
     # @!attribute message
     #   @return [String]
     class CaseCreationLimitExceededException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -585,6 +604,7 @@ module Aws::TaxSettings
     #   <p>409</p>
     #   @return [String]
     class ConflictException < Struct.new(
+      nil,
       :message,
       :error_code,
       keyword_init: true
@@ -598,6 +618,7 @@ module Aws::TaxSettings
     #       </p>
     #   @return [String]
     class DeleteSupplementalTaxRegistrationRequest < Struct.new(
+      nil,
       :authority_id,
       keyword_init: true
     )
@@ -605,6 +626,7 @@ module Aws::TaxSettings
     end
 
     class DeleteSupplementalTaxRegistrationResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -616,6 +638,7 @@ module Aws::TaxSettings
     #         this parameter.</p>
     #   @return [String]
     class DeleteTaxRegistrationRequest < Struct.new(
+      nil,
       :account_id,
       keyword_init: true
     )
@@ -623,6 +646,7 @@ module Aws::TaxSettings
     end
 
     class DeleteTaxRegistrationResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -636,6 +660,7 @@ module Aws::TaxSettings
     #   <p>The Amazon S3 object prefix that you specify for your tax document file.</p>
     #   @return [String]
     class DestinationS3Location < Struct.new(
+      nil,
       :bucket,
       :prefix,
       keyword_init: true
@@ -651,6 +676,7 @@ module Aws::TaxSettings
     #   <p>The expiration date of the unique identification number provided by the Egypt Tax Authority.</p>
     #   @return [String]
     class EgyptAdditionalInfo < Struct.new(
+      nil,
       :unique_identification_number,
       :unique_identification_number_expiration_date,
       keyword_init: true
@@ -664,6 +690,7 @@ module Aws::TaxSettings
     #         string, such as <code>12345678</code>.</p>
     #   @return [String]
     class EstoniaAdditionalInfo < Struct.new(
+      nil,
       :registry_commercial_code,
       keyword_init: true
     )
@@ -681,6 +708,7 @@ module Aws::TaxSettings
     #       </p>
     #   @return [String]
     class ExemptionCertificate < Struct.new(
+      nil,
       :document_name,
       :document_file,
       keyword_init: true
@@ -697,6 +725,7 @@ module Aws::TaxSettings
     #       </p>
     #   @return [String]
     class GeorgiaAdditionalInfo < Struct.new(
+      nil,
       :person_type,
       keyword_init: true
     )
@@ -704,6 +733,7 @@ module Aws::TaxSettings
     end
 
     class GetTaxExemptionTypesRequest < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -714,6 +744,7 @@ module Aws::TaxSettings
     #       </p>
     #   @return [Array<Types::TaxExemptionType>]
     class GetTaxExemptionTypesResponse < Struct.new(
+      nil,
       :tax_exemption_types,
       keyword_init: true
     )
@@ -721,6 +752,7 @@ module Aws::TaxSettings
     end
 
     class GetTaxInheritanceRequest < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -731,6 +763,7 @@ module Aws::TaxSettings
     #       </p>
     #   @return [String]
     class GetTaxInheritanceResponse < Struct.new(
+      nil,
       :heritage_status,
       keyword_init: true
     )
@@ -744,6 +777,7 @@ module Aws::TaxSettings
     #   <p>The metadata for your tax document.</p>
     #   @return [Types::TaxDocumentMetadata]
     class GetTaxRegistrationDocumentRequest < Struct.new(
+      nil,
       :destination_s3_location,
       :tax_document_metadata,
       keyword_init: true
@@ -759,6 +793,7 @@ module Aws::TaxSettings
     #       </p>
     #   @return [String]
     class GetTaxRegistrationDocumentResponse < Struct.new(
+      nil,
       :destination_file_path,
       :presigned_s3_url,
       keyword_init: true
@@ -770,6 +805,7 @@ module Aws::TaxSettings
     #   <p>Your unique account identifier.</p>
     #   @return [String]
     class GetTaxRegistrationRequest < Struct.new(
+      nil,
       :account_id,
       keyword_init: true
     )
@@ -780,6 +816,7 @@ module Aws::TaxSettings
     #   <p>TRN information of the account mentioned in the request. </p>
     #   @return [Types::TaxRegistration]
     class GetTaxRegistrationResponse < Struct.new(
+      nil,
       :tax_registration,
       keyword_init: true
     )
@@ -792,6 +829,7 @@ module Aws::TaxSettings
     #   <p>The code of contracting authority for e-invoicing.</p>
     #   @return [String]
     class GreeceAdditionalInfo < Struct.new(
+      nil,
       :contracting_authority_code,
       keyword_init: true
     )
@@ -807,6 +845,7 @@ module Aws::TaxSettings
     #       </p>
     #   @return [String]
     class IndiaAdditionalInfo < Struct.new(
+      nil,
       :pan,
       keyword_init: true
     )
@@ -824,6 +863,7 @@ module Aws::TaxSettings
     #   <p>VAT-exempt customers have a Directorate General of Taxation (DGT) exemption letter or certificate (Surat Keterangan Bebas) decision number. Non-collected VAT have a DGT letter or certificate (Surat Keterangan Tidak Dipungut).</p>
     #   @return [String]
     class IndonesiaAdditionalInfo < Struct.new(
+      nil,
       :tax_registration_number_type,
       :ppn_exception_designation_code,
       :decision_number,
@@ -839,6 +879,7 @@ module Aws::TaxSettings
     #   <p>500</p>
     #   @return [String]
     class InternalServerException < Struct.new(
+      nil,
       :message,
       :error_code,
       keyword_init: true
@@ -858,6 +899,7 @@ module Aws::TaxSettings
     #         financial institutions.</p>
     #   @return [String]
     class IsraelAdditionalInfo < Struct.new(
+      nil,
       :dealer_type,
       :customer_type,
       keyword_init: true
@@ -888,6 +930,7 @@ module Aws::TaxSettings
     #       </p>
     #   @return [String]
     class ItalyAdditionalInfo < Struct.new(
+      nil,
       :sdi_account_id,
       :cig_number,
       :cup_number,
@@ -907,6 +950,7 @@ module Aws::TaxSettings
     #   <p> The country code of the jurisdiction. </p>
     #   @return [String]
     class Jurisdiction < Struct.new(
+      nil,
       :state_or_region,
       :country_code,
       keyword_init: true
@@ -919,6 +963,7 @@ module Aws::TaxSettings
     #   <p>The legal person or physical person assigned to this TRN in Kenya.</p>
     #   @return [String]
     class KenyaAdditionalInfo < Struct.new(
+      nil,
       :person_type,
       keyword_init: true
     )
@@ -936,6 +981,7 @@ module Aws::TaxSettings
     #       </p>
     #   @return [String]
     class ListSupplementalTaxRegistrationsRequest < Struct.new(
+      nil,
       :max_results,
       :next_token,
       keyword_init: true
@@ -954,6 +1000,7 @@ module Aws::TaxSettings
     #       </p>
     #   @return [String]
     class ListSupplementalTaxRegistrationsResponse < Struct.new(
+      nil,
       :tax_registrations,
       :next_token,
       keyword_init: true
@@ -969,6 +1016,7 @@ module Aws::TaxSettings
     #   <p>The token to retrieve the next set of results. </p>
     #   @return [String]
     class ListTaxExemptionsRequest < Struct.new(
+      nil,
       :max_results,
       :next_token,
       keyword_init: true
@@ -984,6 +1032,7 @@ module Aws::TaxSettings
     #       </p>
     #   @return [Hash<String, Types::TaxExemptionDetails>]
     class ListTaxExemptionsResponse < Struct.new(
+      nil,
       :next_token,
       :tax_exemption_details_map,
       keyword_init: true
@@ -998,6 +1047,7 @@ module Aws::TaxSettings
     #   <p>The token to retrieve the next set of results. </p>
     #   @return [String]
     class ListTaxRegistrationsRequest < Struct.new(
+      nil,
       :max_results,
       :next_token,
       keyword_init: true
@@ -1013,6 +1063,7 @@ module Aws::TaxSettings
     #   <p> The token to retrieve the next set of results. </p>
     #   @return [String]
     class ListTaxRegistrationsResponse < Struct.new(
+      nil,
       :account_details,
       :next_token,
       keyword_init: true
@@ -1038,6 +1089,7 @@ module Aws::TaxSettings
     #            <p>For business resellers with service codes, you must specify <code>businessRegistrationNumber</code>, <code>taxInformationNumber</code>, and distinct <code>serviceTaxCodes</code> in <code>MalaysiaAdditionalInfo</code> with a SST type and valid sales and service tax (SST) number. By using this API operation, Amazon Web Services registers your self-declaration that you’re an authorized business reseller registered with the Royal Malaysia Customs Department (RMCD), and have a valid SST number.</p>
     #   @return [String]
     class MalaysiaAdditionalInfo < Struct.new(
+      nil,
       :service_tax_codes,
       :tax_information_number,
       :business_registration_number,
@@ -1065,6 +1117,7 @@ module Aws::TaxSettings
     #       </p>
     #   @return [Boolean]
     class PolandAdditionalInfo < Struct.new(
+      nil,
       :individual_registration_number,
       :is_group_vat_enabled,
       keyword_init: true
@@ -1078,6 +1131,7 @@ module Aws::TaxSettings
     #       </p>
     #   @return [Types::SupplementalTaxRegistrationEntry]
     class PutSupplementalTaxRegistrationRequest < Struct.new(
+      nil,
       :tax_registration_entry,
       keyword_init: true
     )
@@ -1095,6 +1149,7 @@ module Aws::TaxSettings
     #       </p>
     #   @return [String]
     class PutSupplementalTaxRegistrationResponse < Struct.new(
+      nil,
       :authority_id,
       :status,
       keyword_init: true
@@ -1120,6 +1175,7 @@ module Aws::TaxSettings
     #       </p>
     #   @return [Types::ExemptionCertificate]
     class PutTaxExemptionRequest < Struct.new(
+      nil,
       :account_ids,
       :authority,
       :exemption_type,
@@ -1134,6 +1190,7 @@ module Aws::TaxSettings
     #       </p>
     #   @return [String]
     class PutTaxExemptionResponse < Struct.new(
+      nil,
       :case_id,
       keyword_init: true
     )
@@ -1145,6 +1202,7 @@ module Aws::TaxSettings
     #       </p>
     #   @return [String]
     class PutTaxInheritanceRequest < Struct.new(
+      nil,
       :heritage_status,
       keyword_init: true
     )
@@ -1152,6 +1210,7 @@ module Aws::TaxSettings
     end
 
     class PutTaxInheritanceResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1165,6 +1224,7 @@ module Aws::TaxSettings
     #           <code>accountId</code>. </p>
     #   @return [Types::TaxRegistrationEntry]
     class PutTaxRegistrationRequest < Struct.new(
+      nil,
       :account_id,
       :tax_registration_entry,
       keyword_init: true
@@ -1178,6 +1238,7 @@ module Aws::TaxSettings
     #           <code>Rejected</code>. </p>
     #   @return [String]
     class PutTaxRegistrationResponse < Struct.new(
+      nil,
       :status,
       keyword_init: true
     )
@@ -1191,6 +1252,7 @@ module Aws::TaxSettings
     #   <p>404</p>
     #   @return [String]
     class ResourceNotFoundException < Struct.new(
+      nil,
       :message,
       :error_code,
       keyword_init: true
@@ -1206,6 +1268,7 @@ module Aws::TaxSettings
     #       </p>
     #   @return [String]
     class RomaniaAdditionalInfo < Struct.new(
+      nil,
       :tax_registration_number_type,
       keyword_init: true
     )
@@ -1221,6 +1284,7 @@ module Aws::TaxSettings
     #       </p>
     #   @return [String]
     class SaudiArabiaAdditionalInfo < Struct.new(
+      nil,
       :tax_registration_number_type,
       keyword_init: true
     )
@@ -1235,6 +1299,7 @@ module Aws::TaxSettings
     #   <p>The object key of your tax document object in Amazon S3.</p>
     #   @return [String]
     class SourceS3Location < Struct.new(
+      nil,
       :bucket,
       :key,
       keyword_init: true
@@ -1253,6 +1318,7 @@ module Aws::TaxSettings
     #   <p>Item of business based on the most recently uploaded tax registration certificate.</p>
     #   @return [String]
     class SouthKoreaAdditionalInfo < Struct.new(
+      nil,
       :business_representative_name,
       :line_of_business,
       :item_of_business,
@@ -1266,6 +1332,7 @@ module Aws::TaxSettings
     #   <p>The registration type in Spain.</p>
     #   @return [String]
     class SpainAdditionalInfo < Struct.new(
+      nil,
       :registration_type,
       keyword_init: true
     )
@@ -1305,6 +1372,7 @@ module Aws::TaxSettings
     #       </p>
     #   @return [String]
     class SupplementalTaxRegistration < Struct.new(
+      nil,
       :registration_id,
       :registration_type,
       :legal_name,
@@ -1339,6 +1407,7 @@ module Aws::TaxSettings
     #   <p> The details of the address associated with the TRN information. </p>
     #   @return [Types::Address]
     class SupplementalTaxRegistrationEntry < Struct.new(
+      nil,
       :registration_id,
       :registration_type,
       :legal_name,
@@ -1359,6 +1428,7 @@ module Aws::TaxSettings
     #   <p>The name of your tax document.</p>
     #   @return [String]
     class TaxDocumentMetadata < Struct.new(
+      nil,
       :tax_document_access_token,
       :tax_document_name,
       keyword_init: true
@@ -1393,6 +1463,7 @@ module Aws::TaxSettings
     #       </p>
     #   @return [String]
     class TaxExemption < Struct.new(
+      nil,
       :authority,
       :tax_exemption_type,
       :effective_date,
@@ -1423,6 +1494,7 @@ module Aws::TaxSettings
     #       </p>
     #   @return [String]
     class TaxExemptionDetails < Struct.new(
+      nil,
       :tax_exemptions,
       :heritage_obtained_details,
       :heritage_obtained_parent_entity,
@@ -1447,6 +1519,7 @@ module Aws::TaxSettings
     #       </p>
     #   @return [Array<Types::Authority>]
     class TaxExemptionType < Struct.new(
+      nil,
       :display_name,
       :description,
       :applicable_jurisdictions,
@@ -1469,6 +1542,7 @@ module Aws::TaxSettings
     #       </p>
     #   @return [String]
     class TaxInheritanceDetails < Struct.new(
+      nil,
       :parent_entity_id,
       :inheritance_obtained_reason,
       keyword_init: true
@@ -1509,6 +1583,7 @@ module Aws::TaxSettings
     #   <p> The legal address associated with your TRN registration. </p>
     #   @return [Types::Address]
     class TaxRegistration < Struct.new(
+      nil,
       :registration_id,
       :registration_type,
       :legal_name,
@@ -1534,6 +1609,7 @@ module Aws::TaxSettings
     #       </p>
     #   @return [String]
     class TaxRegistrationDocFile < Struct.new(
+      nil,
       :file_name,
       :file_content,
       keyword_init: true
@@ -1550,6 +1626,7 @@ module Aws::TaxSettings
     #       </p>
     #   @return [Types::TaxRegistrationDocFile]
     class TaxRegistrationDocument < Struct.new(
+      nil,
       :s3_location,
       :file,
       keyword_init: true
@@ -1603,6 +1680,7 @@ module Aws::TaxSettings
     #   <p>The email address to receive VAT invoices.</p>
     #   @return [String]
     class TaxRegistrationEntry < Struct.new(
+      nil,
       :registration_id,
       :registration_type,
       :legal_name,
@@ -1650,6 +1728,7 @@ module Aws::TaxSettings
     #   <p> The jurisdiction associated with your TRN information. </p>
     #   @return [Types::Jurisdiction]
     class TaxRegistrationWithJurisdiction < Struct.new(
+      nil,
       :registration_id,
       :registration_type,
       :legal_name,
@@ -1682,6 +1761,7 @@ module Aws::TaxSettings
     #         information is conditionally mandatory for B2B customers who are subject to KDV tax.</p>
     #   @return [String]
     class TurkeyAdditionalInfo < Struct.new(
+      nil,
       :tax_office,
       :kep_email_id,
       :secondary_tax_id,
@@ -1700,6 +1780,7 @@ module Aws::TaxSettings
     #       </p>
     #   @return [String]
     class UkraineAdditionalInfo < Struct.new(
+      nil,
       :ukraine_trn_type,
       keyword_init: true
     )
@@ -1720,6 +1801,7 @@ module Aws::TaxSettings
     #       </p>
     #   @return [String]
     class UzbekistanAdditionalInfo < Struct.new(
+      nil,
       :tax_registration_number_type,
       :vat_registration_number,
       keyword_init: true
@@ -1738,6 +1820,7 @@ module Aws::TaxSettings
     #   <p>400</p>
     #   @return [Array<Types::ValidationExceptionField>]
     class ValidationException < Struct.new(
+      nil,
       :message,
       :error_code,
       :field_list,
@@ -1751,6 +1834,7 @@ module Aws::TaxSettings
     #   <p>The name of the parameter that caused a <code>ValidationException</code> error.</p>
     #   @return [String]
     class ValidationExceptionField < Struct.new(
+      nil,
       :name,
       keyword_init: true
     )
@@ -1765,6 +1849,7 @@ module Aws::TaxSettings
     #   <p>The tax registration document, which is required for specific countries such as Bangladesh, Kenya, South Korea and Spain.</p>
     #   @return [Array<Types::TaxRegistrationDocument>]
     class VerificationDetails < Struct.new(
+      nil,
       :date_of_birth,
       :tax_registration_documents,
       keyword_init: true
@@ -1786,6 +1871,7 @@ module Aws::TaxSettings
     #   <p>The date on the tax return payment document. This field must be provided for successful API operation.</p>
     #   @return [String]
     class VietnamAdditionalInfo < Struct.new(
+      nil,
       :enterprise_identification_number,
       :electronic_transaction_code_number,
       :payment_voucher_number,

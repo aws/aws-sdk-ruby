@@ -15,6 +15,7 @@ module Aws::AutoScaling
     #   <p>The maximum value.</p>
     #   @return [Integer]
     class AcceleratorCountRequest < Struct.new(
+      nil,
       :min,
       :max,
       keyword_init: true
@@ -31,6 +32,7 @@ module Aws::AutoScaling
     #   <p>The memory maximum in MiB.</p>
     #   @return [Integer]
     class AcceleratorTotalMemoryMiBRequest < Struct.new(
+      nil,
       :min,
       :max,
       keyword_init: true
@@ -43,6 +45,7 @@ module Aws::AutoScaling
     # @!attribute message
     #   @return [String]
     class ActiveInstanceRefreshNotFoundFault < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -89,6 +92,7 @@ module Aws::AutoScaling
     #   <p>The Amazon Resource Name (ARN) of the Auto Scaling group.</p>
     #   @return [String]
     class Activity < Struct.new(
+      nil,
       :activity_id,
       :auto_scaling_group_name,
       :description,
@@ -112,6 +116,7 @@ module Aws::AutoScaling
     #                   <code>ExactCapacity</code>, and <code>PercentChangeInCapacity</code>.</p>
     #   @return [String]
     class AdjustmentType < Struct.new(
+      nil,
       :adjustment_type,
       keyword_init: true
     )
@@ -126,6 +131,7 @@ module Aws::AutoScaling
     #   <p>The Amazon Resource Name (ARN) of the alarm.</p>
     #   @return [String]
     class Alarm < Struct.new(
+      nil,
       :alarm_name,
       :alarm_arn,
       keyword_init: true
@@ -139,6 +145,7 @@ module Aws::AutoScaling
     #               specify up to 10 alarms.</p>
     #   @return [Array<String>]
     class AlarmSpecification < Struct.new(
+      nil,
       :alarms,
       keyword_init: true
     )
@@ -150,6 +157,7 @@ module Aws::AutoScaling
     #   <p></p>
     #   @return [String]
     class AlreadyExistsFault < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -163,6 +171,7 @@ module Aws::AutoScaling
     #   <p>The name of the Auto Scaling group.</p>
     #   @return [String]
     class AttachInstancesInput < Struct.new(
+      nil,
       :instance_ids,
       :auto_scaling_group_name,
       keyword_init: true
@@ -178,6 +187,7 @@ module Aws::AutoScaling
     #               groups. To get the ARN of a target group, use the Elastic Load Balancing <a href="https://docs.aws.amazon.com/elasticloadbalancing/latest/APIReference/API_DescribeTargetGroups.html">DescribeTargetGroups</a> API operation.</p>
     #   @return [Array<String>]
     class AttachLoadBalancerTargetGroupsInput < Struct.new(
+      nil,
       :auto_scaling_group_name,
       :target_group_ar_ns,
       keyword_init: true
@@ -186,6 +196,7 @@ module Aws::AutoScaling
     end
 
     class AttachLoadBalancerTargetGroupsOutput < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -198,6 +209,7 @@ module Aws::AutoScaling
     #   <p>The names of the load balancers. You can specify up to 10 load balancers.</p>
     #   @return [Array<String>]
     class AttachLoadBalancersInput < Struct.new(
+      nil,
       :auto_scaling_group_name,
       :load_balancer_names,
       keyword_init: true
@@ -206,6 +218,7 @@ module Aws::AutoScaling
     end
 
     class AttachLoadBalancersOutput < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -225,6 +238,7 @@ module Aws::AutoScaling
     #           </p>
     #   @return [Boolean]
     class AttachTrafficSourcesInput < Struct.new(
+      nil,
       :auto_scaling_group_name,
       :traffic_sources,
       :skip_zonal_shift_validation,
@@ -234,6 +248,7 @@ module Aws::AutoScaling
     end
 
     class AttachTrafficSourcesOutput < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -368,6 +383,7 @@ module Aws::AutoScaling
     #           </p>
     #   @return [Types::CapacityReservationSpecification]
     class AutoScalingGroup < Struct.new(
+      nil,
       :auto_scaling_group_name,
       :auto_scaling_group_arn,
       :launch_configuration_name,
@@ -462,6 +478,7 @@ module Aws::AutoScaling
     #            <p>Valid Range: Minimum value of 1. Maximum value of 999.</p>
     #   @return [String]
     class AutoScalingInstanceDetails < Struct.new(
+      nil,
       :instance_id,
       :instance_type,
       :auto_scaling_group_name,
@@ -495,6 +512,7 @@ module Aws::AutoScaling
     #            </ul>
     #   @return [String]
     class AvailabilityZoneDistribution < Struct.new(
+      nil,
       :capacity_distribution_strategy,
       keyword_init: true
     )
@@ -518,6 +536,7 @@ module Aws::AutoScaling
     #           </p>
     #   @return [String]
     class AvailabilityZoneImpairmentPolicy < Struct.new(
+      nil,
       :zonal_shift_enabled,
       :impaired_zone_health_check_behavior,
       keyword_init: true
@@ -534,6 +553,7 @@ module Aws::AutoScaling
     #   <p>The maximum value in Mbps.</p>
     #   @return [Integer]
     class BaselineEbsBandwidthMbpsRequest < Struct.new(
+      nil,
       :min,
       :max,
       keyword_init: true
@@ -553,6 +573,7 @@ module Aws::AutoScaling
     #           </p>
     #   @return [Types::CpuPerformanceFactorRequest]
     class BaselinePerformanceFactorsRequest < Struct.new(
+      nil,
       :cpu,
       keyword_init: true
     )
@@ -567,6 +588,7 @@ module Aws::AutoScaling
     #           </p>
     #   @return [Array<String>]
     class BatchDeleteScheduledActionInput < Struct.new(
+      nil,
       :auto_scaling_group_name,
       :scheduled_action_names,
       keyword_init: true
@@ -579,6 +601,7 @@ module Aws::AutoScaling
     #               message.</p>
     #   @return [Array<Types::FailedScheduledUpdateGroupActionRequest>]
     class BatchDeleteScheduledActionOutput < Struct.new(
+      nil,
       :failed_scheduled_actions,
       keyword_init: true
     )
@@ -592,6 +615,7 @@ module Aws::AutoScaling
     #   <p>One or more scheduled actions. The maximum number allowed is 50.</p>
     #   @return [Array<Types::ScheduledUpdateGroupActionRequest>]
     class BatchPutScheduledUpdateGroupActionInput < Struct.new(
+      nil,
       :auto_scaling_group_name,
       :scheduled_update_group_actions,
       keyword_init: true
@@ -604,6 +628,7 @@ module Aws::AutoScaling
     #               error message.</p>
     #   @return [Array<Types::FailedScheduledUpdateGroupActionRequest>]
     class BatchPutScheduledUpdateGroupActionOutput < Struct.new(
+      nil,
       :failed_scheduled_update_group_actions,
       keyword_init: true
     )
@@ -638,6 +663,7 @@ module Aws::AutoScaling
     #               fail the EC2 health check. In that case, Amazon EC2 Auto Scaling launches replacement instances.</p>
     #   @return [Boolean]
     class BlockDeviceMapping < Struct.new(
+      nil,
       :virtual_name,
       :device_name,
       :ebs,
@@ -657,6 +683,7 @@ module Aws::AutoScaling
     #               without waiting for any pending launches or terminations to complete.</p>
     #   @return [Boolean]
     class CancelInstanceRefreshInput < Struct.new(
+      nil,
       :auto_scaling_group_name,
       :wait_for_transitioning_instances,
       keyword_init: true
@@ -669,6 +696,7 @@ module Aws::AutoScaling
     #               the instance refresh when it was started.</p>
     #   @return [String]
     class CancelInstanceRefreshOutput < Struct.new(
+      nil,
       :instance_refresh_id,
       keyword_init: true
     )
@@ -685,6 +713,7 @@ module Aws::AutoScaling
     #   <p>The values of the data points.</p>
     #   @return [Array<Float>]
     class CapacityForecast < Struct.new(
+      nil,
       :timestamps,
       :values,
       keyword_init: true
@@ -724,6 +753,7 @@ module Aws::AutoScaling
     #           </p>
     #   @return [Types::CapacityReservationTarget]
     class CapacityReservationSpecification < Struct.new(
+      nil,
       :capacity_reservation_preference,
       :capacity_reservation_target,
       keyword_init: true
@@ -745,6 +775,7 @@ module Aws::AutoScaling
     #           </p>
     #   @return [Array<String>]
     class CapacityReservationTarget < Struct.new(
+      nil,
       :capacity_reservation_ids,
       :capacity_reservation_resource_group_arns,
       keyword_init: true
@@ -771,6 +802,7 @@ module Aws::AutoScaling
     #   <p>The ID of the instance.</p>
     #   @return [String]
     class CompleteLifecycleActionInput < Struct.new(
+      nil,
       :lifecycle_hook_name,
       :auto_scaling_group_name,
       :lifecycle_action_token,
@@ -782,6 +814,7 @@ module Aws::AutoScaling
     end
 
     class CompleteLifecycleActionOutput < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -800,6 +833,7 @@ module Aws::AutoScaling
     #            </note>
     #   @return [Array<Types::PerformanceFactorReferenceRequest>]
     class CpuPerformanceFactorRequest < Struct.new(
+      nil,
       :references,
       keyword_init: true
     )
@@ -1044,6 +1078,7 @@ module Aws::AutoScaling
     #       </p>
     #   @return [Types::CapacityReservationSpecification]
     class CreateAutoScalingGroupInput < Struct.new(
+      nil,
       :auto_scaling_group_name,
       :launch_configuration_name,
       :launch_template,
@@ -1224,6 +1259,7 @@ module Aws::AutoScaling
     #                   <i>Amazon EC2 Auto Scaling User Guide</i>.</p>
     #   @return [Types::InstanceMetadataOptions]
     class CreateLaunchConfigurationInput < Struct.new(
+      nil,
       :launch_configuration_name,
       :image_id,
       :key_name,
@@ -1252,6 +1288,7 @@ module Aws::AutoScaling
     #   <p>One or more tags.</p>
     #   @return [Array<Types::Tag>]
     class CreateOrUpdateTagsInput < Struct.new(
+      nil,
       :tags,
       keyword_init: true
     )
@@ -1315,6 +1352,7 @@ module Aws::AutoScaling
     #               This can include both raw metric and metric math expressions.</p>
     #   @return [Array<Types::TargetTrackingMetricDataQuery>]
     class CustomizedMetricSpecification < Struct.new(
+      nil,
       :metric_name,
       :namespace,
       :dimensions,
@@ -1336,6 +1374,7 @@ module Aws::AutoScaling
     #               outstanding lifecycle actions associated with the group.</p>
     #   @return [Boolean]
     class DeleteAutoScalingGroupInput < Struct.new(
+      nil,
       :auto_scaling_group_name,
       :force_delete,
       keyword_init: true
@@ -1347,6 +1386,7 @@ module Aws::AutoScaling
     #   <p>The name of the launch configuration.</p>
     #   @return [String]
     class DeleteLaunchConfigurationInput < Struct.new(
+      nil,
       :launch_configuration_name,
       keyword_init: true
     )
@@ -1360,6 +1400,7 @@ module Aws::AutoScaling
     #   <p>The name of the Auto Scaling group.</p>
     #   @return [String]
     class DeleteLifecycleHookInput < Struct.new(
+      nil,
       :lifecycle_hook_name,
       :auto_scaling_group_name,
       keyword_init: true
@@ -1368,6 +1409,7 @@ module Aws::AutoScaling
     end
 
     class DeleteLifecycleHookOutput < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1380,6 +1422,7 @@ module Aws::AutoScaling
     #   <p>The Amazon Resource Name (ARN) of the Amazon SNS topic.</p>
     #   @return [String]
     class DeleteNotificationConfigurationInput < Struct.new(
+      nil,
       :auto_scaling_group_name,
       :topic_arn,
       keyword_init: true
@@ -1394,6 +1437,7 @@ module Aws::AutoScaling
     #   <p>The name or Amazon Resource Name (ARN) of the policy.</p>
     #   @return [String]
     class DeletePolicyInput < Struct.new(
+      nil,
       :auto_scaling_group_name,
       :policy_name,
       keyword_init: true
@@ -1408,6 +1452,7 @@ module Aws::AutoScaling
     #   <p>The name of the action to delete.</p>
     #   @return [String]
     class DeleteScheduledActionInput < Struct.new(
+      nil,
       :auto_scaling_group_name,
       :scheduled_action_name,
       keyword_init: true
@@ -1419,6 +1464,7 @@ module Aws::AutoScaling
     #   <p>One or more tags.</p>
     #   @return [Array<Types::Tag>]
     class DeleteTagsInput < Struct.new(
+      nil,
       :tags,
       keyword_init: true
     )
@@ -1435,6 +1481,7 @@ module Aws::AutoScaling
     #               instances.</p>
     #   @return [Boolean]
     class DeleteWarmPoolInput < Struct.new(
+      nil,
       :auto_scaling_group_name,
       :force_delete,
       keyword_init: true
@@ -1443,6 +1490,7 @@ module Aws::AutoScaling
     end
 
     class DeleteWarmPoolOutput < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1463,6 +1511,7 @@ module Aws::AutoScaling
     #   <p>The current number of launch configurations for your account.</p>
     #   @return [Integer]
     class DescribeAccountLimitsOutput < Struct.new(
+      nil,
       :max_number_of_auto_scaling_groups,
       :max_number_of_launch_configurations,
       :number_of_auto_scaling_groups,
@@ -1476,6 +1525,7 @@ module Aws::AutoScaling
     #   <p>The policy adjustment types.</p>
     #   @return [Array<Types::AdjustmentType>]
     class DescribeAdjustmentTypesOutput < Struct.new(
+      nil,
       :adjustment_types,
       keyword_init: true
     )
@@ -1505,6 +1555,7 @@ module Aws::AutoScaling
     #               </p>
     #   @return [Array<Types::Filter>]
     class DescribeAutoScalingGroupsInput < Struct.new(
+      nil,
       :auto_scaling_group_names,
       :include_instances,
       :next_token,
@@ -1525,6 +1576,7 @@ module Aws::AutoScaling
     #               null when there are no more items to return.</p>
     #   @return [String]
     class DescribeAutoScalingGroupsOutput < Struct.new(
+      nil,
       :auto_scaling_groups,
       :next_token,
       keyword_init: true
@@ -1546,6 +1598,7 @@ module Aws::AutoScaling
     #               previous call.)</p>
     #   @return [String]
     class DescribeAutoScalingInstancesInput < Struct.new(
+      nil,
       :instance_ids,
       :max_records,
       :next_token,
@@ -1564,6 +1617,7 @@ module Aws::AutoScaling
     #               null when there are no more items to return.</p>
     #   @return [String]
     class DescribeAutoScalingInstancesOutput < Struct.new(
+      nil,
       :auto_scaling_instances,
       :next_token,
       keyword_init: true
@@ -1575,6 +1629,7 @@ module Aws::AutoScaling
     #   <p>The notification types.</p>
     #   @return [Array<String>]
     class DescribeAutoScalingNotificationTypesOutput < Struct.new(
+      nil,
       :auto_scaling_notification_types,
       keyword_init: true
     )
@@ -1596,6 +1651,7 @@ module Aws::AutoScaling
     #                   <code>50</code> and the maximum value is <code>100</code>.</p>
     #   @return [Integer]
     class DescribeInstanceRefreshesInput < Struct.new(
+      nil,
       :auto_scaling_group_name,
       :instance_refresh_ids,
       :next_token,
@@ -1616,6 +1672,7 @@ module Aws::AutoScaling
     #               null when there are no more items to return.</p>
     #   @return [String]
     class DescribeInstanceRefreshesOutput < Struct.new(
+      nil,
       :instance_refreshes,
       :next_token,
       keyword_init: true
@@ -1637,6 +1694,7 @@ module Aws::AutoScaling
     #                   <code>50</code> and the maximum value is <code>100</code>.</p>
     #   @return [Integer]
     class DescribeLaunchConfigurationsInput < Struct.new(
+      nil,
       :launch_configuration_names,
       :next_token,
       :max_records,
@@ -1655,6 +1713,7 @@ module Aws::AutoScaling
     #               null when there are no more items to return.</p>
     #   @return [String]
     class DescribeLaunchConfigurationsOutput < Struct.new(
+      nil,
       :launch_configurations,
       :next_token,
       keyword_init: true
@@ -1666,6 +1725,7 @@ module Aws::AutoScaling
     #   <p>The lifecycle hook types.</p>
     #   @return [Array<String>]
     class DescribeLifecycleHookTypesOutput < Struct.new(
+      nil,
       :lifecycle_hook_types,
       keyword_init: true
     )
@@ -1680,6 +1740,7 @@ module Aws::AutoScaling
     #               hooks are described.</p>
     #   @return [Array<String>]
     class DescribeLifecycleHooksInput < Struct.new(
+      nil,
       :auto_scaling_group_name,
       :lifecycle_hook_names,
       keyword_init: true
@@ -1691,6 +1752,7 @@ module Aws::AutoScaling
     #   <p>The lifecycle hooks for the specified group.</p>
     #   @return [Array<Types::LifecycleHook>]
     class DescribeLifecycleHooksOutput < Struct.new(
+      nil,
       :lifecycle_hooks,
       keyword_init: true
     )
@@ -1709,6 +1771,7 @@ module Aws::AutoScaling
     #                   <code>100</code> and the maximum value is <code>100</code>.</p>
     #   @return [Integer]
     class DescribeLoadBalancerTargetGroupsRequest < Struct.new(
+      nil,
       :auto_scaling_group_name,
       :next_token,
       :max_records,
@@ -1727,6 +1790,7 @@ module Aws::AutoScaling
     #               null when there are no more items to return.</p>
     #   @return [String]
     class DescribeLoadBalancerTargetGroupsResponse < Struct.new(
+      nil,
       :load_balancer_target_groups,
       :next_token,
       keyword_init: true
@@ -1746,6 +1810,7 @@ module Aws::AutoScaling
     #                   <code>100</code> and the maximum value is <code>100</code>.</p>
     #   @return [Integer]
     class DescribeLoadBalancersRequest < Struct.new(
+      nil,
       :auto_scaling_group_name,
       :next_token,
       :max_records,
@@ -1764,6 +1829,7 @@ module Aws::AutoScaling
     #               null when there are no more items to return.</p>
     #   @return [String]
     class DescribeLoadBalancersResponse < Struct.new(
+      nil,
       :load_balancers,
       :next_token,
       keyword_init: true
@@ -1778,6 +1844,7 @@ module Aws::AutoScaling
     #   <p>The granularities for the metrics.</p>
     #   @return [Array<Types::MetricGranularityType>]
     class DescribeMetricCollectionTypesOutput < Struct.new(
+      nil,
       :metrics,
       :granularities,
       keyword_init: true
@@ -1797,6 +1864,7 @@ module Aws::AutoScaling
     #                   <code>50</code> and the maximum value is <code>100</code>.</p>
     #   @return [Integer]
     class DescribeNotificationConfigurationsInput < Struct.new(
+      nil,
       :auto_scaling_group_names,
       :next_token,
       :max_records,
@@ -1815,6 +1883,7 @@ module Aws::AutoScaling
     #               null when there are no more items to return.</p>
     #   @return [String]
     class DescribeNotificationConfigurationsOutput < Struct.new(
+      nil,
       :notification_configurations,
       :next_token,
       keyword_init: true
@@ -1845,6 +1914,7 @@ module Aws::AutoScaling
     #                   <code>50</code> and the maximum value is <code>100</code>.</p>
     #   @return [Integer]
     class DescribePoliciesInput < Struct.new(
+      nil,
       :auto_scaling_group_name,
       :policy_names,
       :policy_types,
@@ -1865,6 +1935,7 @@ module Aws::AutoScaling
     #               null when there are no more items to return.</p>
     #   @return [String]
     class DescribePoliciesOutput < Struct.new(
+      nil,
       :scaling_policies,
       :next_token,
       keyword_init: true
@@ -1894,6 +1965,7 @@ module Aws::AutoScaling
     #               previous call.)</p>
     #   @return [String]
     class DescribeScalingActivitiesInput < Struct.new(
+      nil,
       :activity_ids,
       :auto_scaling_group_name,
       :include_deleted_groups,
@@ -1915,6 +1987,7 @@ module Aws::AutoScaling
     #               null when there are no more items to return.</p>
     #   @return [String]
     class DescribeScalingActivitiesOutput < Struct.new(
+      nil,
       :activities,
       :next_token,
       keyword_init: true
@@ -1926,6 +1999,7 @@ module Aws::AutoScaling
     #   <p>The names of the process types.</p>
     #   @return [Array<Types::ProcessType>]
     class DescribeScalingProcessTypesOutput < Struct.new(
+      nil,
       :processes,
       keyword_init: true
     )
@@ -1958,6 +2032,7 @@ module Aws::AutoScaling
     #                   <code>50</code> and the maximum value is <code>100</code>.</p>
     #   @return [Integer]
     class DescribeScheduledActionsInput < Struct.new(
+      nil,
       :auto_scaling_group_name,
       :scheduled_action_names,
       :start_time,
@@ -1979,6 +2054,7 @@ module Aws::AutoScaling
     #               null when there are no more items to return.</p>
     #   @return [String]
     class DescribeScheduledActionsOutput < Struct.new(
+      nil,
       :scheduled_update_group_actions,
       :next_token,
       keyword_init: true
@@ -1999,6 +2075,7 @@ module Aws::AutoScaling
     #                   <code>50</code> and the maximum value is <code>100</code>.</p>
     #   @return [Integer]
     class DescribeTagsInput < Struct.new(
+      nil,
       :filters,
       :next_token,
       :max_records,
@@ -2017,6 +2094,7 @@ module Aws::AutoScaling
     #               null when there are no more items to return.</p>
     #   @return [String]
     class DescribeTagsOutput < Struct.new(
+      nil,
       :tags,
       :next_token,
       keyword_init: true
@@ -2031,6 +2109,7 @@ module Aws::AutoScaling
     #                   <code>OldestLaunchTemplate</code>, and <code>AllocationStrategy</code>.</p>
     #   @return [Array<String>]
     class DescribeTerminationPolicyTypesOutput < Struct.new(
+      nil,
       :termination_policy_types,
       keyword_init: true
     )
@@ -2067,6 +2146,7 @@ module Aws::AutoScaling
     #                   <code>50</code>.</p>
     #   @return [Integer]
     class DescribeTrafficSourcesRequest < Struct.new(
+      nil,
       :auto_scaling_group_name,
       :traffic_source_type,
       :next_token,
@@ -2086,6 +2166,7 @@ module Aws::AutoScaling
     #               null when there are no more items to return.</p>
     #   @return [String]
     class DescribeTrafficSourcesResponse < Struct.new(
+      nil,
       :traffic_sources,
       :next_token,
       keyword_init: true
@@ -2105,6 +2186,7 @@ module Aws::AutoScaling
     #               previous call.)</p>
     #   @return [String]
     class DescribeWarmPoolInput < Struct.new(
+      nil,
       :auto_scaling_group_name,
       :max_records,
       :next_token,
@@ -2126,6 +2208,7 @@ module Aws::AutoScaling
     #               null when there are no more items to return.</p>
     #   @return [String]
     class DescribeWarmPoolOutput < Struct.new(
+      nil,
       :warm_pool_configuration,
       :instances,
       :next_token,
@@ -2151,6 +2234,7 @@ module Aws::AutoScaling
     #                   <i>Amazon EC2 Auto Scaling User Guide</i>.</p>
     #   @return [Types::MixedInstancesPolicy]
     class DesiredConfiguration < Struct.new(
+      nil,
       :launch_template,
       :mixed_instances_policy,
       keyword_init: true
@@ -2169,6 +2253,7 @@ module Aws::AutoScaling
     #               of instances detached.</p>
     #   @return [Boolean]
     class DetachInstancesInput < Struct.new(
+      nil,
       :instance_ids,
       :auto_scaling_group_name,
       :should_decrement_desired_capacity,
@@ -2181,6 +2266,7 @@ module Aws::AutoScaling
     #   <p>The activities related to detaching the instances from the Auto Scaling group.</p>
     #   @return [Array<Types::Activity>]
     class DetachInstancesOutput < Struct.new(
+      nil,
       :activities,
       keyword_init: true
     )
@@ -2195,6 +2281,7 @@ module Aws::AutoScaling
     #               groups.</p>
     #   @return [Array<String>]
     class DetachLoadBalancerTargetGroupsInput < Struct.new(
+      nil,
       :auto_scaling_group_name,
       :target_group_ar_ns,
       keyword_init: true
@@ -2203,6 +2290,7 @@ module Aws::AutoScaling
     end
 
     class DetachLoadBalancerTargetGroupsOutput < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -2215,6 +2303,7 @@ module Aws::AutoScaling
     #   <p>The names of the load balancers. You can specify up to 10 load balancers.</p>
     #   @return [Array<String>]
     class DetachLoadBalancersInput < Struct.new(
+      nil,
       :auto_scaling_group_name,
       :load_balancer_names,
       keyword_init: true
@@ -2223,6 +2312,7 @@ module Aws::AutoScaling
     end
 
     class DetachLoadBalancersOutput < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -2236,6 +2326,7 @@ module Aws::AutoScaling
     #               traffic sources.</p>
     #   @return [Array<Types::TrafficSourceIdentifier>]
     class DetachTrafficSourcesInput < Struct.new(
+      nil,
       :auto_scaling_group_name,
       :traffic_sources,
       keyword_init: true
@@ -2244,6 +2335,7 @@ module Aws::AutoScaling
     end
 
     class DetachTrafficSourcesOutput < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -2362,6 +2454,7 @@ module Aws::AutoScaling
     #                   Amazon EC2 Auto Scaling</a> in the <i>Amazon EC2 Auto Scaling User Guide</i>.</p>
     #   @return [Array<String>]
     class DisableMetricsCollectionInput < Struct.new(
+      nil,
       :auto_scaling_group_name,
       :metrics,
       keyword_init: true
@@ -2455,6 +2548,7 @@ module Aws::AutoScaling
     #   <p>The throughput (MiBps) to provision for a <code>gp3</code> volume.</p>
     #   @return [Integer]
     class Ebs < Struct.new(
+      nil,
       :snapshot_id,
       :volume_size,
       :volume_type,
@@ -2585,6 +2679,7 @@ module Aws::AutoScaling
     #                   <code>1Minute</code>.</p>
     #   @return [String]
     class EnableMetricsCollectionInput < Struct.new(
+      nil,
       :auto_scaling_group_name,
       :metrics,
       :granularity,
@@ -2705,6 +2800,7 @@ module Aws::AutoScaling
     #   <p>The granularity of the metric. The only valid value is <code>1Minute</code>.</p>
     #   @return [String]
     class EnabledMetric < Struct.new(
+      nil,
       :metric,
       :granularity,
       keyword_init: true
@@ -2723,6 +2819,7 @@ module Aws::AutoScaling
     #               instances moved to <code>Standby</code> mode.</p>
     #   @return [Boolean]
     class EnterStandbyInput < Struct.new(
+      nil,
       :instance_ids,
       :auto_scaling_group_name,
       :should_decrement_desired_capacity,
@@ -2735,6 +2832,7 @@ module Aws::AutoScaling
     #   <p>The activities related to moving instances into <code>Standby</code> mode.</p>
     #   @return [Array<Types::Activity>]
     class EnterStandbyOutput < Struct.new(
+      nil,
       :activities,
       keyword_init: true
     )
@@ -2771,6 +2869,7 @@ module Aws::AutoScaling
     #               otherwise.</p>
     #   @return [Float]
     class ExecutePolicyInput < Struct.new(
+      nil,
       :auto_scaling_group_name,
       :policy_name,
       :honor_cooldown,
@@ -2788,6 +2887,7 @@ module Aws::AutoScaling
     #   <p>The name of the Auto Scaling group.</p>
     #   @return [String]
     class ExitStandbyInput < Struct.new(
+      nil,
       :instance_ids,
       :auto_scaling_group_name,
       keyword_init: true
@@ -2799,6 +2899,7 @@ module Aws::AutoScaling
     #   <p>The activities related to moving instances out of <code>Standby</code> mode.</p>
     #   @return [Array<Types::Activity>]
     class ExitStandbyOutput < Struct.new(
+      nil,
       :activities,
       keyword_init: true
     )
@@ -2816,6 +2917,7 @@ module Aws::AutoScaling
     #   <p>The error message accompanying the error code.</p>
     #   @return [String]
     class FailedScheduledUpdateGroupActionRequest < Struct.new(
+      nil,
       :scheduled_action_name,
       :error_code,
       :error_message,
@@ -2897,6 +2999,7 @@ module Aws::AutoScaling
     #               "environment=production" or "environment=development".</p>
     #   @return [Array<String>]
     class Filter < Struct.new(
+      nil,
       :name,
       :values,
       keyword_init: true
@@ -2922,6 +3025,7 @@ module Aws::AutoScaling
     #               periods of two days in advance.</p>
     #   @return [Time]
     class GetPredictiveScalingForecastInput < Struct.new(
+      nil,
       :auto_scaling_group_name,
       :policy_name,
       :start_time,
@@ -2941,6 +3045,7 @@ module Aws::AutoScaling
     #   <p>The time the forecast was made.</p>
     #   @return [Time]
     class GetPredictiveScalingForecastOutput < Struct.new(
+      nil,
       :load_forecast,
       :capacity_forecast,
       :update_time,
@@ -2985,6 +3090,7 @@ module Aws::AutoScaling
     #            <p>Valid Range: Minimum value of 1. Maximum value of 999.</p>
     #   @return [String]
     class Instance < Struct.new(
+      nil,
       :instance_id,
       :instance_type,
       :availability_zone,
@@ -3018,6 +3124,7 @@ module Aws::AutoScaling
     #               increases the number of instances that can be replaced at the same time.</p>
     #   @return [Integer]
     class InstanceMaintenancePolicy < Struct.new(
+      nil,
       :min_healthy_percentage,
       :max_healthy_percentage,
       keyword_init: true
@@ -3054,6 +3161,7 @@ module Aws::AutoScaling
     #            </note>
     #   @return [String]
     class InstanceMetadataOptions < Struct.new(
+      nil,
       :http_tokens,
       :http_put_response_hop_limit,
       :http_endpoint,
@@ -3068,6 +3176,7 @@ module Aws::AutoScaling
     #               enabled.</p>
     #   @return [Boolean]
     class InstanceMonitoring < Struct.new(
+      nil,
       :enabled,
       keyword_init: true
     )
@@ -3174,6 +3283,7 @@ module Aws::AutoScaling
     #   <p>The rollback details.</p>
     #   @return [Types::RollbackDetails]
     class InstanceRefresh < Struct.new(
+      nil,
       :instance_refresh_id,
       :auto_scaling_group_name,
       :status,
@@ -3196,6 +3306,7 @@ module Aws::AutoScaling
     # @!attribute message
     #   @return [String]
     class InstanceRefreshInProgressFault < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -3214,6 +3325,7 @@ module Aws::AutoScaling
     #   <p>The number of instances remaining to update.</p>
     #   @return [Integer]
     class InstanceRefreshLivePoolProgress < Struct.new(
+      nil,
       :percentage_complete,
       :instances_to_update,
       keyword_init: true
@@ -3231,6 +3343,7 @@ module Aws::AutoScaling
     #   <p>Reports progress on replacing instances that are in the warm pool.</p>
     #   @return [Types::InstanceRefreshWarmPoolProgress]
     class InstanceRefreshProgressDetails < Struct.new(
+      nil,
       :live_pool_progress,
       :warm_pool_progress,
       keyword_init: true
@@ -3250,6 +3363,7 @@ module Aws::AutoScaling
     #   <p>The number of instances remaining to update.</p>
     #   @return [Integer]
     class InstanceRefreshWarmPoolProgress < Struct.new(
+      nil,
       :percentage_complete,
       :instances_to_update,
       keyword_init: true
@@ -3577,6 +3691,7 @@ module Aws::AutoScaling
     #           </p>
     #   @return [Types::BaselinePerformanceFactorsRequest]
     class InstanceRequirements < Struct.new(
+      nil,
       :v_cpu_count,
       :memory_mi_b,
       :cpu_manufacturers,
@@ -3615,6 +3730,7 @@ module Aws::AutoScaling
     #               scale in. </p>
     #   @return [Boolean]
     class InstanceReusePolicy < Struct.new(
+      nil,
       :reuse_on_scale_in,
       keyword_init: true
     )
@@ -3729,6 +3845,7 @@ module Aws::AutoScaling
     #            <p>Valid Range: Minimum value of 0.001</p>
     #   @return [String]
     class InstancesDistribution < Struct.new(
+      nil,
       :on_demand_allocation_strategy,
       :on_demand_base_capacity,
       :on_demand_percentage_above_base_capacity,
@@ -3745,6 +3862,7 @@ module Aws::AutoScaling
     #   <p></p>
     #   @return [String]
     class InvalidNextToken < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -3758,6 +3876,7 @@ module Aws::AutoScaling
     # @!attribute message
     #   @return [String]
     class IrreversibleInstanceRefreshFault < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -3864,6 +3983,7 @@ module Aws::AutoScaling
     #                   <i>Amazon EC2 Auto Scaling User Guide</i>.</p>
     #   @return [Types::InstanceMetadataOptions]
     class LaunchConfiguration < Struct.new(
+      nil,
       :launch_configuration_name,
       :launch_configuration_arn,
       :image_id,
@@ -3899,6 +4019,7 @@ module Aws::AutoScaling
     #               template.</p>
     #   @return [Array<Types::LaunchTemplateOverrides>]
     class LaunchTemplate < Struct.new(
+      nil,
       :launch_template_specification,
       :overrides,
       keyword_init: true
@@ -3977,6 +4098,7 @@ module Aws::AutoScaling
     #            </note>
     #   @return [Types::InstanceRequirements]
     class LaunchTemplateOverrides < Struct.new(
+      nil,
       :instance_type,
       :weighted_capacity,
       :launch_template_specification,
@@ -4010,6 +4132,7 @@ module Aws::AutoScaling
     #               template when launching instances. The default value is <code>$Default</code>.</p>
     #   @return [String]
     class LaunchTemplateSpecification < Struct.new(
+      nil,
       :launch_template_id,
       :launch_template_name,
       :version,
@@ -4063,6 +4186,7 @@ module Aws::AutoScaling
     #            </p>
     #   @return [String]
     class LifecycleHook < Struct.new(
+      nil,
       :lifecycle_hook_name,
       :auto_scaling_group_name,
       :lifecycle_transition,
@@ -4126,6 +4250,7 @@ module Aws::AutoScaling
     #            <p>Valid only if the notification target is an Amazon SNS topic or an Amazon SQS queue.</p>
     #   @return [String]
     class LifecycleHookSpecification < Struct.new(
+      nil,
       :lifecycle_hook_name,
       :lifecycle_transition,
       :notification_metadata,
@@ -4146,6 +4271,7 @@ module Aws::AutoScaling
     #   <p></p>
     #   @return [String]
     class LimitExceededFault < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -4188,6 +4314,7 @@ module Aws::AutoScaling
     #            </ul>
     #   @return [String]
     class LoadBalancerState < Struct.new(
+      nil,
       :load_balancer_name,
       :state,
       keyword_init: true
@@ -4231,6 +4358,7 @@ module Aws::AutoScaling
     #            </ul>
     #   @return [String]
     class LoadBalancerTargetGroupState < Struct.new(
+      nil,
       :load_balancer_target_group_arn,
       :state,
       keyword_init: true
@@ -4252,6 +4380,7 @@ module Aws::AutoScaling
     #   <p>The metric specification for the load forecast.</p>
     #   @return [Types::PredictiveScalingMetricSpecification]
     class LoadForecast < Struct.new(
+      nil,
       :timestamps,
       :values,
       :metric_specification,
@@ -4269,6 +4398,7 @@ module Aws::AutoScaling
     #   <p>The memory maximum in GiB.</p>
     #   @return [Float]
     class MemoryGiBPerVCpuRequest < Struct.new(
+      nil,
       :min,
       :max,
       keyword_init: true
@@ -4285,6 +4415,7 @@ module Aws::AutoScaling
     #   <p>The memory maximum in MiB.</p>
     #   @return [Integer]
     class MemoryMiBRequest < Struct.new(
+      nil,
       :min,
       :max,
       keyword_init: true
@@ -4310,6 +4441,7 @@ module Aws::AutoScaling
     #               dimensions in your scaling policy.</p>
     #   @return [Array<Types::MetricDimension>]
     class Metric < Struct.new(
+      nil,
       :namespace,
       :metric_name,
       :dimensions,
@@ -4425,6 +4557,7 @@ module Aws::AutoScaling
     #            </ul>
     #   @return [String]
     class MetricCollectionType < Struct.new(
+      nil,
       :metric,
       keyword_init: true
     )
@@ -4473,6 +4606,7 @@ module Aws::AutoScaling
     #                   (<code>true</code>).</p>
     #   @return [Boolean]
     class MetricDataQuery < Struct.new(
+      nil,
       :id,
       :expression,
       :metric_stat,
@@ -4491,6 +4625,7 @@ module Aws::AutoScaling
     #   <p>The value of the dimension.</p>
     #   @return [String]
     class MetricDimension < Struct.new(
+      nil,
       :name,
       :value,
       keyword_init: true
@@ -4503,6 +4638,7 @@ module Aws::AutoScaling
     #   <p>The granularity. The only valid value is <code>1Minute</code>.</p>
     #   @return [String]
     class MetricGranularityType < Struct.new(
+      nil,
       :granularity,
       keyword_init: true
     )
@@ -4529,6 +4665,7 @@ module Aws::AutoScaling
     #               data type in the <i>Amazon CloudWatch API Reference</i>.</p>
     #   @return [String]
     class MetricStat < Struct.new(
+      nil,
       :metric,
       :stat,
       :unit,
@@ -4551,6 +4688,7 @@ module Aws::AutoScaling
     #   <p>The instances distribution.</p>
     #   @return [Types::InstancesDistribution]
     class MixedInstancesPolicy < Struct.new(
+      nil,
       :launch_template,
       :instances_distribution,
       keyword_init: true
@@ -4574,6 +4712,7 @@ module Aws::AutoScaling
     #   <p>The maximum amount of network bandwidth, in gigabits per second (Gbps).</p>
     #   @return [Float]
     class NetworkBandwidthGbpsRequest < Struct.new(
+      nil,
       :min,
       :max,
       keyword_init: true
@@ -4590,6 +4729,7 @@ module Aws::AutoScaling
     #   <p>The maximum number of network interfaces.</p>
     #   @return [Integer]
     class NetworkInterfaceCountRequest < Struct.new(
+      nil,
       :min,
       :max,
       keyword_init: true
@@ -4635,6 +4775,7 @@ module Aws::AutoScaling
     #            </ul>
     #   @return [String]
     class NotificationConfiguration < Struct.new(
+      nil,
       :auto_scaling_group_name,
       :topic_arn,
       :notification_type,
@@ -4706,6 +4847,7 @@ module Aws::AutoScaling
     #            <p>If you specify an unsupported instance family as a value for baseline performance, the API returns an empty response.</p>
     #   @return [String]
     class PerformanceFactorReferenceRequest < Struct.new(
+      nil,
       :instance_family,
       keyword_init: true
     )
@@ -4763,6 +4905,7 @@ module Aws::AutoScaling
     #               the <a href="https://docs.aws.amazon.com/elasticloadbalancing/latest/APIReference/API_DescribeTargetGroups.html">DescribeTargetGroups</a> API operation.</p>
     #   @return [String]
     class PredefinedMetricSpecification < Struct.new(
+      nil,
       :predefined_metric_type,
       :resource_label,
       keyword_init: true
@@ -4833,6 +4976,7 @@ module Aws::AutoScaling
     #                   <code>IncreaseMaxCapacity</code>, and cannot be used otherwise.</p>
     #   @return [Integer]
     class PredictiveScalingConfiguration < Struct.new(
+      nil,
       :metric_specifications,
       :mode,
       :scheduling_buffer_time,
@@ -4850,6 +4994,7 @@ module Aws::AutoScaling
     #               data. </p>
     #   @return [Array<Types::MetricDataQuery>]
     class PredictiveScalingCustomizedCapacityMetric < Struct.new(
+      nil,
       :metric_data_queries,
       keyword_init: true
     )
@@ -4863,6 +5008,7 @@ module Aws::AutoScaling
     #               data. </p>
     #   @return [Array<Types::MetricDataQuery>]
     class PredictiveScalingCustomizedLoadMetric < Struct.new(
+      nil,
       :metric_data_queries,
       keyword_init: true
     )
@@ -4876,6 +5022,7 @@ module Aws::AutoScaling
     #               data. </p>
     #   @return [Array<Types::MetricDataQuery>]
     class PredictiveScalingCustomizedScalingMetric < Struct.new(
+      nil,
       :metric_data_queries,
       keyword_init: true
     )
@@ -4956,6 +5103,7 @@ module Aws::AutoScaling
     #   <p>The customized capacity metric specification.</p>
     #   @return [Types::PredictiveScalingCustomizedCapacityMetric]
     class PredictiveScalingMetricSpecification < Struct.new(
+      nil,
       :target_value,
       :predefined_metric_pair_specification,
       :predefined_scaling_metric_specification,
@@ -4999,6 +5147,7 @@ module Aws::AutoScaling
     #               the <a href="https://docs.aws.amazon.com/elasticloadbalancing/latest/APIReference/API_DescribeTargetGroups.html">DescribeTargetGroups</a> API operation.</p>
     #   @return [String]
     class PredictiveScalingPredefinedLoadMetric < Struct.new(
+      nil,
       :predefined_metric_type,
       :resource_label,
       keyword_init: true
@@ -5037,6 +5186,7 @@ module Aws::AutoScaling
     #               the <a href="https://docs.aws.amazon.com/elasticloadbalancing/latest/APIReference/API_DescribeTargetGroups.html">DescribeTargetGroups</a> API operation.</p>
     #   @return [String]
     class PredictiveScalingPredefinedMetricPair < Struct.new(
+      nil,
       :predefined_metric_type,
       :resource_label,
       keyword_init: true
@@ -5075,6 +5225,7 @@ module Aws::AutoScaling
     #               the <a href="https://docs.aws.amazon.com/elasticloadbalancing/latest/APIReference/API_DescribeTargetGroups.html">DescribeTargetGroups</a> API operation.</p>
     #   @return [String]
     class PredictiveScalingPredefinedScalingMetric < Struct.new(
+      nil,
       :predefined_metric_type,
       :resource_label,
       keyword_init: true
@@ -5136,6 +5287,7 @@ module Aws::AutoScaling
     #            </ul>
     #   @return [String]
     class ProcessType < Struct.new(
+      nil,
       :process_name,
       keyword_init: true
     )
@@ -5196,6 +5348,7 @@ module Aws::AutoScaling
     #            </p>
     #   @return [String]
     class PutLifecycleHookInput < Struct.new(
+      nil,
       :lifecycle_hook_name,
       :auto_scaling_group_name,
       :lifecycle_transition,
@@ -5210,6 +5363,7 @@ module Aws::AutoScaling
     end
 
     class PutLifecycleHookOutput < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -5226,6 +5380,7 @@ module Aws::AutoScaling
     #               types supported by Amazon EC2 Auto Scaling, call the <a href="https://docs.aws.amazon.com/autoscaling/ec2/APIReference/API_DescribeAutoScalingNotificationTypes.html">DescribeAutoScalingNotificationTypes</a> API.</p>
     #   @return [Array<String>]
     class PutNotificationConfigurationInput < Struct.new(
+      nil,
       :auto_scaling_group_name,
       :topic_arn,
       :notification_types,
@@ -5385,6 +5540,7 @@ module Aws::AutoScaling
     #            <p>Required if the policy type is <code>PredictiveScaling</code>.</p>
     #   @return [Types::PredictiveScalingConfiguration]
     class PutScalingPolicyInput < Struct.new(
+      nil,
       :auto_scaling_group_name,
       :policy_name,
       :policy_type,
@@ -5412,6 +5568,7 @@ module Aws::AutoScaling
     #   <p>The CloudWatch alarms created for the target tracking scaling policy.</p>
     #   @return [Array<Types::Alarm>]
     class PutScalingPolicyOutput < Struct.new(
+      nil,
       :policy_arn,
       :alarms,
       keyword_init: true
@@ -5472,6 +5629,7 @@ module Aws::AutoScaling
     #               more information, see <a href="https://en.wikipedia.org/wiki/List_of_tz_database_time_zones">https://en.wikipedia.org/wiki/List_of_tz_database_time_zones</a>.</p>
     #   @return [String]
     class PutScheduledUpdateGroupActionInput < Struct.new(
+      nil,
       :auto_scaling_group_name,
       :scheduled_action_name,
       :time,
@@ -5525,6 +5683,7 @@ module Aws::AutoScaling
     #               in.</p>
     #   @return [Types::InstanceReusePolicy]
     class PutWarmPoolInput < Struct.new(
+      nil,
       :auto_scaling_group_name,
       :max_group_prepared_capacity,
       :min_size,
@@ -5536,6 +5695,7 @@ module Aws::AutoScaling
     end
 
     class PutWarmPoolOutput < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -5556,6 +5716,7 @@ module Aws::AutoScaling
     #   <p>The ID of the instance.</p>
     #   @return [String]
     class RecordLifecycleActionHeartbeatInput < Struct.new(
+      nil,
       :lifecycle_hook_name,
       :auto_scaling_group_name,
       :lifecycle_action_token,
@@ -5566,6 +5727,7 @@ module Aws::AutoScaling
     end
 
     class RecordLifecycleActionHeartbeatOutput < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -5701,6 +5863,7 @@ module Aws::AutoScaling
     #           </p>
     #   @return [Integer]
     class RefreshPreferences < Struct.new(
+      nil,
       :min_healthy_percentage,
       :instance_warmup,
       :checkpoint_percentages,
@@ -5723,6 +5886,7 @@ module Aws::AutoScaling
     #   <p></p>
     #   @return [String]
     class ResourceContentionFault < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -5734,6 +5898,7 @@ module Aws::AutoScaling
     #   <p></p>
     #   @return [String]
     class ResourceInUseFault < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -5795,6 +5960,7 @@ module Aws::AutoScaling
     #            <p>If you omit this property, all processes are specified.</p>
     #   @return [Array<String>]
     class ResumeProcessesInput < Struct.new(
+      nil,
       :auto_scaling_group_name,
       :scaling_processes,
       keyword_init: true
@@ -5824,6 +5990,7 @@ module Aws::AutoScaling
     #               (the live pool).</p>
     #   @return [Types::InstanceRefreshProgressDetails]
     class RollbackDetails < Struct.new(
+      nil,
       :rollback_reason,
       :rollback_start_time,
       :percentage_complete_on_rollback,
@@ -5838,6 +6005,7 @@ module Aws::AutoScaling
     #   <p>The name of the Auto Scaling group.</p>
     #   @return [String]
     class RollbackInstanceRefreshInput < Struct.new(
+      nil,
       :auto_scaling_group_name,
       keyword_init: true
     )
@@ -5849,6 +6017,7 @@ module Aws::AutoScaling
     #               the instance refresh when it was started.</p>
     #   @return [String]
     class RollbackInstanceRefreshOutput < Struct.new(
+      nil,
       :instance_refresh_id,
       keyword_init: true
     )
@@ -5861,6 +6030,7 @@ module Aws::AutoScaling
     #   <p></p>
     #   @return [String]
     class ScalingActivityInProgressFault < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -5951,6 +6121,7 @@ module Aws::AutoScaling
     #   <p>A predictive scaling policy.</p>
     #   @return [Types::PredictiveScalingConfiguration]
     class ScalingPolicy < Struct.new(
+      nil,
       :auto_scaling_group_name,
       :policy_name,
       :policy_arn,
@@ -6014,6 +6185,7 @@ module Aws::AutoScaling
     #   <p>The time zone for the cron expression.</p>
     #   @return [String]
     class ScheduledUpdateGroupAction < Struct.new(
+      nil,
       :auto_scaling_group_name,
       :scheduled_action_name,
       :scheduled_action_arn,
@@ -6076,6 +6248,7 @@ module Aws::AutoScaling
     #               more information, see <a href="https://en.wikipedia.org/wiki/List_of_tz_database_time_zones">https://en.wikipedia.org/wiki/List_of_tz_database_time_zones</a>.</p>
     #   @return [String]
     class ScheduledUpdateGroupActionRequest < Struct.new(
+      nil,
       :scheduled_action_name,
       :start_time,
       :end_time,
@@ -6093,6 +6266,7 @@ module Aws::AutoScaling
     # @!attribute message
     #   @return [String]
     class ServiceLinkedRoleFailure < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -6112,6 +6286,7 @@ module Aws::AutoScaling
     #               not honor the cooldown period during manual scaling activities.</p>
     #   @return [Boolean]
     class SetDesiredCapacityInput < Struct.new(
+      nil,
       :auto_scaling_group_name,
       :desired_capacity,
       :honor_cooldown,
@@ -6137,6 +6312,7 @@ module Aws::AutoScaling
     #                   <i>Amazon EC2 Auto Scaling User Guide</i>.</p>
     #   @return [Boolean]
     class SetInstanceHealthInput < Struct.new(
+      nil,
       :instance_id,
       :health_status,
       :should_respect_grace_period,
@@ -6156,6 +6332,7 @@ module Aws::AutoScaling
     #               in.</p>
     #   @return [Boolean]
     class SetInstanceProtectionInput < Struct.new(
+      nil,
       :instance_ids,
       :auto_scaling_group_name,
       :protected_from_scale_in,
@@ -6165,6 +6342,7 @@ module Aws::AutoScaling
     end
 
     class SetInstanceProtectionOutput < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -6216,6 +6394,7 @@ module Aws::AutoScaling
     #            </ul>
     #   @return [Types::RefreshPreferences]
     class StartInstanceRefreshInput < Struct.new(
+      nil,
       :auto_scaling_group_name,
       :strategy,
       :desired_configuration,
@@ -6229,6 +6408,7 @@ module Aws::AutoScaling
     #   <p>A unique ID for tracking the progress of the instance refresh.</p>
     #   @return [String]
     class StartInstanceRefreshOutput < Struct.new(
+      nil,
       :instance_refresh_id,
       keyword_init: true
     )
@@ -6291,6 +6471,7 @@ module Aws::AutoScaling
     #               For exact capacity, you must specify a non-negative value.</p>
     #   @return [Integer]
     class StepAdjustment < Struct.new(
+      nil,
       :metric_interval_lower_bound,
       :metric_interval_upper_bound,
       :scaling_adjustment,
@@ -6354,6 +6535,7 @@ module Aws::AutoScaling
     #            <p>If you omit this property, all processes are specified.</p>
     #   @return [Array<String>]
     class SuspendProcessesInput < Struct.new(
+      nil,
       :auto_scaling_group_name,
       :scaling_processes,
       keyword_init: true
@@ -6371,6 +6553,7 @@ module Aws::AutoScaling
     #   <p>The reason that the process was suspended.</p>
     #   @return [String]
     class SuspendedProcess < Struct.new(
+      nil,
       :process_name,
       :suspension_reason,
       keyword_init: true
@@ -6397,6 +6580,7 @@ module Aws::AutoScaling
     #               group.</p>
     #   @return [Boolean]
     class Tag < Struct.new(
+      nil,
       :resource_id,
       :resource_type,
       :key,
@@ -6426,6 +6610,7 @@ module Aws::AutoScaling
     #               group.</p>
     #   @return [Boolean]
     class TagDescription < Struct.new(
+      nil,
       :resource_id,
       :resource_type,
       :key,
@@ -6462,6 +6647,7 @@ module Aws::AutoScaling
     #               the Auto Scaling group. The default is <code>false</code>.</p>
     #   @return [Boolean]
     class TargetTrackingConfiguration < Struct.new(
+      nil,
       :predefined_metric_specification,
       :customized_metric_specification,
       :target_value,
@@ -6517,6 +6703,7 @@ module Aws::AutoScaling
     #               (<code>true</code>).</p>
     #   @return [Boolean]
     class TargetTrackingMetricDataQuery < Struct.new(
+      nil,
       :id,
       :expression,
       :metric_stat,
@@ -6552,6 +6739,7 @@ module Aws::AutoScaling
     #           </p>
     #   @return [Integer]
     class TargetTrackingMetricStat < Struct.new(
+      nil,
       :metric,
       :stat,
       :unit,
@@ -6569,6 +6757,7 @@ module Aws::AutoScaling
     #               group.</p>
     #   @return [Boolean]
     class TerminateInstanceInAutoScalingGroupInput < Struct.new(
+      nil,
       :instance_id,
       :should_decrement_desired_capacity,
       keyword_init: true
@@ -6580,6 +6769,7 @@ module Aws::AutoScaling
     #   <p>A scaling activity.</p>
     #   @return [Types::Activity]
     class TerminateInstanceInAutoScalingGroupOutput < Struct.new(
+      nil,
       :activity,
       keyword_init: true
     )
@@ -6595,6 +6785,7 @@ module Aws::AutoScaling
     #   <p>The storage maximum in GB.</p>
     #   @return [Float]
     class TotalLocalStorageGBRequest < Struct.new(
+      nil,
       :min,
       :max,
       keyword_init: true
@@ -6651,6 +6842,7 @@ module Aws::AutoScaling
     #            <p>Required if the identifier is the name of a Classic Load Balancer.</p>
     #   @return [String]
     class TrafficSourceIdentifier < Struct.new(
+      nil,
       :identifier,
       :type,
       keyword_init: true
@@ -6723,6 +6915,7 @@ module Aws::AutoScaling
     #            <p>Required if the identifier is the name of a Classic Load Balancer.</p>
     #   @return [String]
     class TrafficSourceState < Struct.new(
+      nil,
       :traffic_source,
       :state,
       :identifier,
@@ -6912,6 +7105,7 @@ module Aws::AutoScaling
     #           </p>
     #   @return [Types::CapacityReservationSpecification]
     class UpdateAutoScalingGroupInput < Struct.new(
+      nil,
       :auto_scaling_group_name,
       :launch_configuration_name,
       :launch_template,
@@ -6952,6 +7146,7 @@ module Aws::AutoScaling
     #   <p>The maximum number of vCPUs.</p>
     #   @return [Integer]
     class VCpuCountRequest < Struct.new(
+      nil,
       :min,
       :max,
       keyword_init: true
@@ -6977,6 +7172,7 @@ module Aws::AutoScaling
     #   <p>The instance reuse policy.</p>
     #   @return [Types::InstanceReusePolicy]
     class WarmPoolConfiguration < Struct.new(
+      nil,
       :max_group_prepared_capacity,
       :min_size,
       :pool_state,

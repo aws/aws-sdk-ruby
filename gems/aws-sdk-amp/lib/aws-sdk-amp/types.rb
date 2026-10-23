@@ -11,6 +11,7 @@ module Aws::Amp
     #   <p>Description of the error.</p>
     #   @return [String]
     class AccessDeniedException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -31,6 +32,7 @@ module Aws::Amp
     #   <p>The date and time that the alert manager definition was most recently changed.</p>
     #   @return [Time]
     class AlertManagerDefinitionDescription < Struct.new(
+      nil,
       :status,
       :data,
       :created_at,
@@ -48,6 +50,7 @@ module Aws::Amp
     #   <p>If there is a failure, the reason for the failure.</p>
     #   @return [String]
     class AlertManagerDefinitionStatus < Struct.new(
+      nil,
       :status_code,
       :status_reason,
       keyword_init: true
@@ -60,6 +63,7 @@ module Aws::Amp
     #   <p>ARN of the Amazon Managed Service for Prometheus workspace.</p>
     #   @return [String]
     class AmpConfiguration < Struct.new(
+      nil,
       :workspace_arn,
       keyword_init: true
     )
@@ -71,6 +75,7 @@ module Aws::Amp
     #   <p>The ARN of the CloudWatch log group to which the vended log data will be published. This log group must exist prior to calling this operation.</p>
     #   @return [String]
     class CloudWatchLogDestination < Struct.new(
+      nil,
       :log_group_arn,
       keyword_init: true
     )
@@ -82,6 +87,7 @@ module Aws::Amp
     #   <p>Configuration options for the scraper component.</p>
     #   @return [Hash<String, String>]
     class ComponentConfig < Struct.new(
+      nil,
       :options,
       keyword_init: true
     )
@@ -99,6 +105,7 @@ module Aws::Amp
     #   <p>Type of the resource affected.</p>
     #   @return [String]
     class ConflictException < Struct.new(
+      nil,
       :message,
       :resource_id,
       :resource_type,
@@ -118,6 +125,7 @@ module Aws::Amp
     #   <p>A unique identifier that you can provide to ensure the idempotency of the request. Case-sensitive.</p>
     #   @return [String]
     class CreateAlertManagerDefinitionInput < Struct.new(
+      nil,
       :workspace_id,
       :data,
       :client_token,
@@ -131,6 +139,7 @@ module Aws::Amp
     #   <p>A structure that displays the current status of the alert manager definition.</p>
     #   @return [Types::AlertManagerDefinitionStatus]
     class CreateAlertManagerDefinitionOutput < Struct.new(
+      nil,
       :status,
       keyword_init: true
     )
@@ -148,6 +157,7 @@ module Aws::Amp
     #   <p>A unique identifier that you can provide to ensure the idempotency of the request. Case-sensitive.</p>
     #   @return [String]
     class CreateLoggingConfigurationInput < Struct.new(
+      nil,
       :workspace_id,
       :log_group_arn,
       :client_token,
@@ -161,6 +171,7 @@ module Aws::Amp
     #   <p>A structure that displays the current status of the logging configuration.</p>
     #   @return [Types::LoggingConfigurationStatus]
     class CreateLoggingConfigurationOutput < Struct.new(
+      nil,
       :status,
       keyword_init: true
     )
@@ -177,6 +188,7 @@ module Aws::Amp
     #   <p>(Optional) A unique, case-sensitive identifier that you can provide to ensure the idempotency of the request.</p>
     #   @return [String]
     class CreateQueryLoggingConfigurationRequest < Struct.new(
+      nil,
       :workspace_id,
       :destinations,
       :client_token,
@@ -189,6 +201,7 @@ module Aws::Amp
     #   <p>The current status of the query logging configuration.</p>
     #   @return [Types::QueryLoggingConfigurationStatus]
     class CreateQueryLoggingConfigurationResponse < Struct.new(
+      nil,
       :status,
       keyword_init: true
     )
@@ -212,6 +225,7 @@ module Aws::Amp
     #   <p>The list of tag keys and values to associate with the rule groups namespace.</p>
     #   @return [Hash<String, String>]
     class CreateRuleGroupsNamespaceInput < Struct.new(
+      nil,
       :workspace_id,
       :name,
       :data,
@@ -236,6 +250,7 @@ module Aws::Amp
     #   <p>The list of tag keys and values that are associated with the namespace.</p>
     #   @return [Hash<String, String>]
     class CreateRuleGroupsNamespaceOutput < Struct.new(
+      nil,
       :name,
       :arn,
       :status,
@@ -268,6 +283,7 @@ module Aws::Amp
     #   <p>(Optional) The list of tag keys and values to associate with the scraper.</p>
     #   @return [Hash<String, String>]
     class CreateScraperRequest < Struct.new(
+      nil,
       :alias,
       :scrape_configuration,
       :source,
@@ -294,6 +310,7 @@ module Aws::Amp
     #   <p>The list of tag keys and values that are associated with the scraper.</p>
     #   @return [Hash<String, String>]
     class CreateScraperResponse < Struct.new(
+      nil,
       :scraper_id,
       :arn,
       :status,
@@ -317,6 +334,7 @@ module Aws::Amp
     #   <p>(optional) The ARN for a customer managed KMS key to use for encrypting data within your workspace. For more information about using your own key in your workspace, see <a href="https://docs.aws.amazon.com/prometheus/latest/userguide/encryption-at-rest-Amazon-Service-Prometheus.html">Encryption at rest</a> in the <i>Amazon Managed Service for Prometheus User Guide</i>.</p>
     #   @return [String]
     class CreateWorkspaceInput < Struct.new(
+      nil,
       :alias,
       :client_token,
       :tags,
@@ -343,6 +361,7 @@ module Aws::Amp
     #   <p>(optional) If the workspace was created with a customer managed KMS key, the ARN for the key used.</p>
     #   @return [String]
     class CreateWorkspaceOutput < Struct.new(
+      nil,
       :workspace_id,
       :arn,
       :status,
@@ -361,6 +380,7 @@ module Aws::Amp
     #   <p>A unique identifier that you can provide to ensure the idempotency of the request. Case-sensitive.</p>
     #   @return [String]
     class DeleteAlertManagerDefinitionInput < Struct.new(
+      nil,
       :workspace_id,
       :client_token,
       keyword_init: true
@@ -376,6 +396,7 @@ module Aws::Amp
     #   <p>A unique identifier that you can provide to ensure the idempotency of the request. Case-sensitive.</p>
     #   @return [String]
     class DeleteLoggingConfigurationInput < Struct.new(
+      nil,
       :workspace_id,
       :client_token,
       keyword_init: true
@@ -390,6 +411,7 @@ module Aws::Amp
     #   <p>(Optional) A unique, case-sensitive identifier that you can provide to ensure the idempotency of the request.</p>
     #   @return [String]
     class DeleteQueryLoggingConfigurationRequest < Struct.new(
+      nil,
       :workspace_id,
       :client_token,
       keyword_init: true
@@ -407,6 +429,7 @@ module Aws::Amp
     #   <p>The revision ID of the policy to delete. Use this parameter to ensure that you are deleting the correct version of the policy.</p>
     #   @return [String]
     class DeleteResourcePolicyRequest < Struct.new(
+      nil,
       :workspace_id,
       :client_token,
       :revision_id,
@@ -426,6 +449,7 @@ module Aws::Amp
     #   <p>A unique identifier that you can provide to ensure the idempotency of the request. Case-sensitive.</p>
     #   @return [String]
     class DeleteRuleGroupsNamespaceInput < Struct.new(
+      nil,
       :workspace_id,
       :name,
       :client_token,
@@ -441,6 +465,7 @@ module Aws::Amp
     #   <p>A unique, case-sensitive identifier that you provide to ensure the request is processed exactly once.</p>
     #   @return [String]
     class DeleteScraperLoggingConfigurationRequest < Struct.new(
+      nil,
       :scraper_id,
       :client_token,
       keyword_init: true
@@ -456,6 +481,7 @@ module Aws::Amp
     #   <p>(Optional) A unique, case-sensitive identifier that you can provide to ensure the idempotency of the request.</p>
     #   @return [String]
     class DeleteScraperRequest < Struct.new(
+      nil,
       :scraper_id,
       :client_token,
       keyword_init: true
@@ -471,6 +497,7 @@ module Aws::Amp
     #   <p>The current status of the scraper.</p>
     #   @return [Types::ScraperStatus]
     class DeleteScraperResponse < Struct.new(
+      nil,
       :scraper_id,
       :status,
       keyword_init: true
@@ -486,6 +513,7 @@ module Aws::Amp
     #   <p>A unique identifier that you can provide to ensure the idempotency of the request. Case-sensitive.</p>
     #   @return [String]
     class DeleteWorkspaceInput < Struct.new(
+      nil,
       :workspace_id,
       :client_token,
       keyword_init: true
@@ -498,6 +526,7 @@ module Aws::Amp
     #   <p>The ID of the workspace to retrieve the alert manager definition from.</p>
     #   @return [String]
     class DescribeAlertManagerDefinitionInput < Struct.new(
+      nil,
       :workspace_id,
       keyword_init: true
     )
@@ -509,6 +538,7 @@ module Aws::Amp
     #   <p>The alert manager definition.</p>
     #   @return [Types::AlertManagerDefinitionDescription]
     class DescribeAlertManagerDefinitionOutput < Struct.new(
+      nil,
       :alert_manager_definition,
       keyword_init: true
     )
@@ -520,6 +550,7 @@ module Aws::Amp
     #   <p>The ID of the workspace to describe the logging configuration for.</p>
     #   @return [String]
     class DescribeLoggingConfigurationInput < Struct.new(
+      nil,
       :workspace_id,
       keyword_init: true
     )
@@ -531,6 +562,7 @@ module Aws::Amp
     #   <p>A structure that displays the information about the logging configuration.</p>
     #   @return [Types::LoggingConfigurationMetadata]
     class DescribeLoggingConfigurationOutput < Struct.new(
+      nil,
       :logging_configuration,
       keyword_init: true
     )
@@ -541,6 +573,7 @@ module Aws::Amp
     #   <p>The ID of the workspace for which to retrieve the query logging configuration.</p>
     #   @return [String]
     class DescribeQueryLoggingConfigurationRequest < Struct.new(
+      nil,
       :workspace_id,
       keyword_init: true
     )
@@ -551,6 +584,7 @@ module Aws::Amp
     #   <p>The detailed information about the query logging configuration for the specified workspace.</p>
     #   @return [Types::QueryLoggingConfigurationMetadata]
     class DescribeQueryLoggingConfigurationResponse < Struct.new(
+      nil,
       :query_logging_configuration,
       keyword_init: true
     )
@@ -561,6 +595,7 @@ module Aws::Amp
     #   <p>The ID of the workspace to describe the resource-based policy for.</p>
     #   @return [String]
     class DescribeResourcePolicyRequest < Struct.new(
+      nil,
       :workspace_id,
       keyword_init: true
     )
@@ -577,6 +612,7 @@ module Aws::Amp
     #   <p>The revision ID of the current resource-based policy.</p>
     #   @return [String]
     class DescribeResourcePolicyResponse < Struct.new(
+      nil,
       :policy_document,
       :policy_status,
       :revision_id,
@@ -593,6 +629,7 @@ module Aws::Amp
     #   <p>The name of the rule groups namespace that you want information for.</p>
     #   @return [String]
     class DescribeRuleGroupsNamespaceInput < Struct.new(
+      nil,
       :workspace_id,
       :name,
       keyword_init: true
@@ -605,6 +642,7 @@ module Aws::Amp
     #   <p>The information about the rule groups namespace.</p>
     #   @return [Types::RuleGroupsNamespaceDescription]
     class DescribeRuleGroupsNamespaceOutput < Struct.new(
+      nil,
       :rule_groups_namespace,
       keyword_init: true
     )
@@ -615,6 +653,7 @@ module Aws::Amp
     #   <p>The ID of the scraper whose logging configuration will be described.</p>
     #   @return [String]
     class DescribeScraperLoggingConfigurationRequest < Struct.new(
+      nil,
       :scraper_id,
       keyword_init: true
     )
@@ -637,6 +676,7 @@ module Aws::Amp
     #   <p>The date and time when the logging configuration was last modified.</p>
     #   @return [Time]
     class DescribeScraperLoggingConfigurationResponse < Struct.new(
+      nil,
       :status,
       :scraper_id,
       :logging_destination,
@@ -652,6 +692,7 @@ module Aws::Amp
     #   <p>The ID of the scraper to describe.</p>
     #   @return [String]
     class DescribeScraperRequest < Struct.new(
+      nil,
       :scraper_id,
       keyword_init: true
     )
@@ -663,6 +704,7 @@ module Aws::Amp
     #   <p>Contains details about the scraper.</p>
     #   @return [Types::ScraperDescription]
     class DescribeScraperResponse < Struct.new(
+      nil,
       :scraper,
       keyword_init: true
     )
@@ -673,6 +715,7 @@ module Aws::Amp
     #   <p>The ID of the workspace that you want to retrieve information for. To find the IDs of your workspaces, use the <a href="https://docs.aws.amazon.com/prometheus/latest/APIReference/API_ListWorkspaces.htm">ListWorkspaces</a> operation.</p>
     #   @return [String]
     class DescribeWorkspaceConfigurationRequest < Struct.new(
+      nil,
       :workspace_id,
       keyword_init: true
     )
@@ -683,6 +726,7 @@ module Aws::Amp
     #   <p>This structure contains the information about the workspace configuration.</p>
     #   @return [Types::WorkspaceConfigurationDescription]
     class DescribeWorkspaceConfigurationResponse < Struct.new(
+      nil,
       :workspace_configuration,
       keyword_init: true
     )
@@ -694,6 +738,7 @@ module Aws::Amp
     #   <p>The ID of the workspace to describe.</p>
     #   @return [String]
     class DescribeWorkspaceInput < Struct.new(
+      nil,
       :workspace_id,
       keyword_init: true
     )
@@ -705,6 +750,7 @@ module Aws::Amp
     #   <p>A structure that contains details about the workspace.</p>
     #   @return [Types::WorkspaceDescription]
     class DescribeWorkspaceOutput < Struct.new(
+      nil,
       :workspace,
       keyword_init: true
     )
@@ -737,6 +783,7 @@ module Aws::Amp
     #   <p>A list of subnet IDs for the Amazon EKS cluster VPC configuration.</p>
     #   @return [Array<String>]
     class EksConfiguration < Struct.new(
+      nil,
       :cluster_arn,
       :security_group_ids,
       :subnet_ids,
@@ -747,6 +794,7 @@ module Aws::Amp
 
     # <p>Represents the input of a <code>GetDefaultScraperConfiguration</code> operation.</p>
     class GetDefaultScraperConfigurationRequest < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -757,6 +805,7 @@ module Aws::Amp
     #   <p>The configuration file. Base 64 encoded. For more information, see <a href="https://docs.aws.amazon.com/prometheus/latest/userguide/AMP-collector-how-to.html#AMP-collector-configuration">Scraper configuration</a>in the <i>Amazon Managed Service for Prometheus User Guide</i>.</p>
     #   @return [String]
     class GetDefaultScraperConfigurationResponse < Struct.new(
+      nil,
       :configuration,
       keyword_init: true
     )
@@ -771,6 +820,7 @@ module Aws::Amp
     #   <p>Advice to clients on when the call can be safely retried.</p>
     #   @return [Integer]
     class InternalServerException < Struct.new(
+      nil,
       :message,
       :retry_after_seconds,
       keyword_init: true
@@ -786,6 +836,7 @@ module Aws::Amp
     #   <p>This defines one label set that will have an enforced active time series limit. </p> <p>Label values accept ASCII characters and must contain at least one character that isn't whitespace. ASCII control characters are not accepted. If the label name is metric name label <code>__<i>name</i>__</code>, then the <i>metric</i> part of the name must conform to the following pattern: <code>[a-zA-Z_:][a-zA-Z0-9_:]*</code> </p>
     #   @return [Hash<String, String>]
     class LimitsPerLabelSet < Struct.new(
+      nil,
       :limits,
       :label_set,
       keyword_init: true
@@ -798,6 +849,7 @@ module Aws::Amp
     #   <p>The maximum number of active series that can be ingested that match this label set. </p> <p>Setting this to 0 causes no label set limit to be enforced, but it does cause Amazon Managed Service for Prometheus to vend label set metrics to CloudWatch</p>
     #   @return [Integer]
     class LimitsPerLabelSetEntry < Struct.new(
+      nil,
       :max_series,
       keyword_init: true
     )
@@ -818,6 +870,7 @@ module Aws::Amp
     #   <p>The maximum number of results to return. The default is 100.</p>
     #   @return [Integer]
     class ListRuleGroupsNamespacesInput < Struct.new(
+      nil,
       :workspace_id,
       :name,
       :next_token,
@@ -835,6 +888,7 @@ module Aws::Amp
     #   <p>A token indicating that there are more results to retrieve. You can use this token as part of your next <code>ListRuleGroupsNamespaces</code> request to retrieve those results.</p>
     #   @return [String]
     class ListRuleGroupsNamespacesOutput < Struct.new(
+      nil,
       :rule_groups_namespaces,
       :next_token,
       keyword_init: true
@@ -853,6 +907,7 @@ module Aws::Amp
     #   <p>Optional) The maximum number of scrapers to return in one <code>ListScrapers</code> operation. The range is 1-1000.</p> <p>If you omit this parameter, the default of 100 is used.</p>
     #   @return [Integer]
     class ListScrapersRequest < Struct.new(
+      nil,
       :filters,
       :next_token,
       :max_results,
@@ -869,6 +924,7 @@ module Aws::Amp
     #   <p>A token indicating that there are more results to retrieve. You can use this token as part of your next <code>ListScrapers</code> operation to retrieve those results.</p>
     #   @return [String]
     class ListScrapersResponse < Struct.new(
+      nil,
       :scrapers,
       :next_token,
       keyword_init: true
@@ -880,6 +936,7 @@ module Aws::Amp
     #   <p>The ARN of the resource to list tages for. Must be a workspace, scraper, or rule groups namespace resource.</p>
     #   @return [String]
     class ListTagsForResourceInput < Struct.new(
+      nil,
       :resource_arn,
       keyword_init: true
     )
@@ -890,6 +947,7 @@ module Aws::Amp
     #   <p>The list of tag keys and values associated with the resource.</p>
     #   @return [Hash<String, String>]
     class ListTagsForResourceOutput < Struct.new(
+      nil,
       :tags,
       keyword_init: true
     )
@@ -907,6 +965,7 @@ module Aws::Amp
     #   <p>The maximum number of workspaces to return per request. The default is 100.</p>
     #   @return [Integer]
     class ListWorkspacesInput < Struct.new(
+      nil,
       :next_token,
       :alias,
       :max_results,
@@ -923,6 +982,7 @@ module Aws::Amp
     #   <p>A token indicating that there are more results to retrieve. You can use this token as part of your next <code>ListWorkspaces</code> request to retrieve those results.</p>
     #   @return [String]
     class ListWorkspacesOutput < Struct.new(
+      nil,
       :workspaces,
       :next_token,
       keyword_init: true
@@ -947,6 +1007,7 @@ module Aws::Amp
     #   <p>The date and time that the logging configuration was most recently changed.</p>
     #   @return [Time]
     class LoggingConfigurationMetadata < Struct.new(
+      nil,
       :status,
       :workspace,
       :log_group_arn,
@@ -965,6 +1026,7 @@ module Aws::Amp
     #   <p>If failed, the reason for the failure.</p>
     #   @return [String]
     class LoggingConfigurationStatus < Struct.new(
+      nil,
       :status_code,
       :status_reason,
       keyword_init: true
@@ -980,6 +1042,7 @@ module Aws::Amp
     #   <p>Filtering criteria that determine which queries are logged.</p>
     #   @return [Types::LoggingFilter]
     class LoggingDestination < Struct.new(
+      nil,
       :cloud_watch_logs,
       :filters,
       keyword_init: true
@@ -992,6 +1055,7 @@ module Aws::Amp
     #   <p>The Query Samples Processed (QSP) threshold above which queries will be logged. Queries processing more samples than this threshold will be captured in logs.</p>
     #   @return [Integer]
     class LoggingFilter < Struct.new(
+      nil,
       :qsp_threshold,
       keyword_init: true
     )
@@ -1009,6 +1073,7 @@ module Aws::Amp
     #   <p>A unique identifier that you can provide to ensure the idempotency of the request. Case-sensitive.</p>
     #   @return [String]
     class PutAlertManagerDefinitionInput < Struct.new(
+      nil,
       :workspace_id,
       :data,
       :client_token,
@@ -1022,6 +1087,7 @@ module Aws::Amp
     #   <p>A structure that returns the current status of the alert manager definition.</p>
     #   @return [Types::AlertManagerDefinitionStatus]
     class PutAlertManagerDefinitionOutput < Struct.new(
+      nil,
       :status,
       keyword_init: true
     )
@@ -1041,6 +1107,7 @@ module Aws::Amp
     #   <p>The revision ID of the policy to update. Use this parameter to ensure that you are updating the correct version of the policy. If you don't specify a revision ID, the policy is updated regardless of its current revision.</p> <p>For the first <b>PUT</b> request on a workspace that doesn't have an existing resource policy, you can specify <code>NO_POLICY</code> as the revision ID.</p>
     #   @return [String]
     class PutResourcePolicyRequest < Struct.new(
+      nil,
       :workspace_id,
       :policy_document,
       :client_token,
@@ -1057,6 +1124,7 @@ module Aws::Amp
     #   <p>The revision ID of the newly created or updated resource-based policy.</p>
     #   @return [String]
     class PutResourcePolicyResponse < Struct.new(
+      nil,
       :policy_status,
       :revision_id,
       keyword_init: true
@@ -1078,6 +1146,7 @@ module Aws::Amp
     #   <p>A unique identifier that you can provide to ensure the idempotency of the request. Case-sensitive.</p>
     #   @return [String]
     class PutRuleGroupsNamespaceInput < Struct.new(
+      nil,
       :workspace_id,
       :name,
       :data,
@@ -1101,6 +1170,7 @@ module Aws::Amp
     #   <p>The list of tag keys and values that are associated with the namespace.</p>
     #   @return [Hash<String, String>]
     class PutRuleGroupsNamespaceOutput < Struct.new(
+      nil,
       :name,
       :arn,
       :status,
@@ -1127,6 +1197,7 @@ module Aws::Amp
     #   <p>The date and time when the query logging configuration was last modified.</p>
     #   @return [Time]
     class QueryLoggingConfigurationMetadata < Struct.new(
+      nil,
       :status,
       :workspace,
       :destinations,
@@ -1145,6 +1216,7 @@ module Aws::Amp
     #   <p>If there is a failure, the reason for the failure.</p>
     #   @return [String]
     class QueryLoggingConfigurationStatus < Struct.new(
+      nil,
       :status_code,
       :status_reason,
       keyword_init: true
@@ -1163,6 +1235,7 @@ module Aws::Amp
     #   <p>Type of the resource affected.</p>
     #   @return [String]
     class ResourceNotFoundException < Struct.new(
+      nil,
       :message,
       :resource_id,
       :resource_type,
@@ -1179,6 +1252,7 @@ module Aws::Amp
     #   <p>The Amazon Resource Name (ARN) of the role used in the target account to enable cross-account scraping. For information about the contents of this policy, see <a href="https://docs.aws.amazon.com/prometheus/latest/userguide/AMP-collector-how-to.html#cross-account-remote-write">Cross-account setup</a>.</p>
     #   @return [String]
     class RoleConfiguration < Struct.new(
+      nil,
       :source_role_arn,
       :target_role_arn,
       keyword_init: true
@@ -1209,6 +1283,7 @@ module Aws::Amp
     #   <p>The list of tag keys and values that are associated with the rule groups namespace.</p>
     #   @return [Hash<String, String>]
     class RuleGroupsNamespaceDescription < Struct.new(
+      nil,
       :arn,
       :name,
       :status,
@@ -1229,6 +1304,7 @@ module Aws::Amp
     #   <p>The reason for the failure, if any.</p>
     #   @return [String]
     class RuleGroupsNamespaceStatus < Struct.new(
+      nil,
       :status_code,
       :status_reason,
       keyword_init: true
@@ -1256,6 +1332,7 @@ module Aws::Amp
     #   <p>The list of tag keys and values that are associated with the rule groups namespace.</p>
     #   @return [Hash<String, String>]
     class RuleGroupsNamespaceSummary < Struct.new(
+      nil,
       :arn,
       :name,
       :status,
@@ -1290,6 +1367,7 @@ module Aws::Amp
     #   <p>The configuration settings for the scraper component.</p>
     #   @return [Types::ComponentConfig]
     class ScraperComponent < Struct.new(
+      nil,
       :type,
       :config,
       keyword_init: true
@@ -1338,6 +1416,7 @@ module Aws::Amp
     #   <p>This structure displays information about the IAM roles used for cross-account scraping configuration.</p>
     #   @return [Types::RoleConfiguration]
     class ScraperDescription < Struct.new(
+      nil,
       :alias,
       :scraper_id,
       :arn,
@@ -1364,6 +1443,7 @@ module Aws::Amp
     #   <p>The reason for the current status of the scraper logging configuration.</p>
     #   @return [String]
     class ScraperLoggingConfigurationStatus < Struct.new(
+      nil,
       :status_code,
       :status_reason,
       keyword_init: true
@@ -1391,6 +1471,7 @@ module Aws::Amp
     #   <p>The current status of the scraper.</p>
     #   @return [String]
     class ScraperStatus < Struct.new(
+      nil,
       :status_code,
       keyword_init: true
     )
@@ -1435,6 +1516,7 @@ module Aws::Amp
     #   <p>This structure displays information about the IAM roles used for cross-account scraping configuration.</p>
     #   @return [Types::RoleConfiguration]
     class ScraperSummary < Struct.new(
+      nil,
       :alias,
       :scraper_id,
       :arn,
@@ -1469,6 +1551,7 @@ module Aws::Amp
     #   <p>Service quotas code of the originating quota.</p>
     #   @return [String]
     class ServiceQuotaExceededException < Struct.new(
+      nil,
       :message,
       :resource_id,
       :resource_type,
@@ -1501,6 +1584,7 @@ module Aws::Amp
     #   <p>The list of tag keys and values to associate with the resource.</p> <p>Keys must not begin with <code>aws:</code>.</p>
     #   @return [Hash<String, String>]
     class TagResourceInput < Struct.new(
+      nil,
       :resource_arn,
       :tags,
       keyword_init: true
@@ -1509,6 +1593,7 @@ module Aws::Amp
     end
 
     class TagResourceOutput < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1528,6 +1613,7 @@ module Aws::Amp
     #   <p>Advice to clients on when the call can be safely retried.</p>
     #   @return [Integer]
     class ThrottlingException < Struct.new(
+      nil,
       :message,
       :service_code,
       :quota_code,
@@ -1544,6 +1630,7 @@ module Aws::Amp
     #   <p>The keys of the tags to remove.</p>
     #   @return [Array<String>]
     class UntagResourceInput < Struct.new(
+      nil,
       :resource_arn,
       :tag_keys,
       keyword_init: true
@@ -1552,6 +1639,7 @@ module Aws::Amp
     end
 
     class UntagResourceOutput < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1568,6 +1656,7 @@ module Aws::Amp
     #   <p>A unique identifier that you can provide to ensure the idempotency of the request. Case-sensitive.</p>
     #   @return [String]
     class UpdateLoggingConfigurationInput < Struct.new(
+      nil,
       :workspace_id,
       :log_group_arn,
       :client_token,
@@ -1581,6 +1670,7 @@ module Aws::Amp
     #   <p>A structure that contains the current status of the logging configuration.</p>
     #   @return [Types::LoggingConfigurationStatus]
     class UpdateLoggingConfigurationOutput < Struct.new(
+      nil,
       :status,
       keyword_init: true
     )
@@ -1597,6 +1687,7 @@ module Aws::Amp
     #   <p>(Optional) A unique, case-sensitive identifier that you can provide to ensure the idempotency of the request.</p>
     #   @return [String]
     class UpdateQueryLoggingConfigurationRequest < Struct.new(
+      nil,
       :workspace_id,
       :destinations,
       :client_token,
@@ -1609,6 +1700,7 @@ module Aws::Amp
     #   <p>The current status of the query logging configuration.</p>
     #   @return [Types::QueryLoggingConfigurationStatus]
     class UpdateQueryLoggingConfigurationResponse < Struct.new(
+      nil,
       :status,
       keyword_init: true
     )
@@ -1625,6 +1717,7 @@ module Aws::Amp
     #   <p>The list of scraper components to configure for logging.</p>
     #   @return [Array<Types::ScraperComponent>]
     class UpdateScraperLoggingConfigurationRequest < Struct.new(
+      nil,
       :scraper_id,
       :logging_destination,
       :scraper_components,
@@ -1637,6 +1730,7 @@ module Aws::Amp
     #   <p>The status of the updated scraper logging configuration.</p>
     #   @return [Types::ScraperLoggingConfigurationStatus]
     class UpdateScraperLoggingConfigurationResponse < Struct.new(
+      nil,
       :status,
       keyword_init: true
     )
@@ -1662,6 +1756,7 @@ module Aws::Amp
     #   <p>A unique identifier that you can provide to ensure the idempotency of the request. Case-sensitive.</p>
     #   @return [String]
     class UpdateScraperRequest < Struct.new(
+      nil,
       :scraper_id,
       :alias,
       :scrape_configuration,
@@ -1686,6 +1781,7 @@ module Aws::Amp
     #   <p>The list of tag keys and values that are associated with the scraper.</p>
     #   @return [Hash<String, String>]
     class UpdateScraperResponse < Struct.new(
+      nil,
       :scraper_id,
       :arn,
       :status,
@@ -1706,6 +1802,7 @@ module Aws::Amp
     #   <p>A unique identifier that you can provide to ensure the idempotency of the request. Case-sensitive.</p>
     #   @return [String]
     class UpdateWorkspaceAliasInput < Struct.new(
+      nil,
       :workspace_id,
       :alias,
       :client_token,
@@ -1727,6 +1824,7 @@ module Aws::Amp
     #   <p>Specifies how many days that metrics will be retained in the workspace.</p>
     #   @return [Integer]
     class UpdateWorkspaceConfigurationRequest < Struct.new(
+      nil,
       :workspace_id,
       :client_token,
       :limits_per_label_set,
@@ -1740,6 +1838,7 @@ module Aws::Amp
     #   <p>The status of the workspace configuration.</p>
     #   @return [Types::WorkspaceConfigurationStatus]
     class UpdateWorkspaceConfigurationResponse < Struct.new(
+      nil,
       :status,
       keyword_init: true
     )
@@ -1757,6 +1856,7 @@ module Aws::Amp
     #   <p>The field that caused the error, if applicable.</p>
     #   @return [Array<Types::ValidationExceptionField>]
     class ValidationException < Struct.new(
+      nil,
       :message,
       :reason,
       :field_list,
@@ -1773,6 +1873,7 @@ module Aws::Amp
     #   <p>A message describing why the field caused an exception.</p>
     #   @return [String]
     class ValidationExceptionField < Struct.new(
+      nil,
       :name,
       :message,
       keyword_init: true
@@ -1791,6 +1892,7 @@ module Aws::Amp
     #   <p>This field displays how many days that metrics are retained in the workspace.</p>
     #   @return [Integer]
     class WorkspaceConfigurationDescription < Struct.new(
+      nil,
       :status,
       :limits_per_label_set,
       :retention_period_in_days,
@@ -1807,6 +1909,7 @@ module Aws::Amp
     #   <p>The reason for the current status, if a reason is available.</p>
     #   @return [String]
     class WorkspaceConfigurationStatus < Struct.new(
+      nil,
       :status_code,
       :status_reason,
       keyword_init: true
@@ -1840,6 +1943,7 @@ module Aws::Amp
     #   <p>(optional) If the workspace was created with a customer managed KMS key, the ARN for the key used.</p>
     #   @return [String]
     class WorkspaceDescription < Struct.new(
+      nil,
       :workspace_id,
       :alias,
       :arn,
@@ -1858,6 +1962,7 @@ module Aws::Amp
     #   <p>The current status of the workspace.</p>
     #   @return [String]
     class WorkspaceStatus < Struct.new(
+      nil,
       :status_code,
       keyword_init: true
     )
@@ -1887,6 +1992,7 @@ module Aws::Amp
     #   <p>(optional) If the workspace was created with a customer managed KMS key, the ARN for the key used.</p>
     #   @return [String]
     class WorkspaceSummary < Struct.new(
+      nil,
       :workspace_id,
       :alias,
       :arn,

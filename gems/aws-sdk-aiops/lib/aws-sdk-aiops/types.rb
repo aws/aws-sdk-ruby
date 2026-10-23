@@ -10,6 +10,7 @@ module Aws::AIOps
     # @!attribute message
     #   @return [String]
     class AccessDeniedException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -20,6 +21,7 @@ module Aws::AIOps
     # @!attribute message
     #   @return [String]
     class ConflictException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -54,6 +56,7 @@ module Aws::AIOps
     #   <p>List of <code>sourceRoleArn</code> values that have been configured for cross-account access.</p>
     #   @return [Array<Types::CrossAccountConfiguration>]
     class CreateInvestigationGroupInput < Struct.new(
+      nil,
       :name,
       :role_arn,
       :encryption_configuration,
@@ -72,6 +75,7 @@ module Aws::AIOps
     #   <p>The ARN of the investigation group that you just created.</p>
     #   @return [String]
     class CreateInvestigationGroupOutput < Struct.new(
+      nil,
       :arn,
       keyword_init: true
     )
@@ -83,6 +87,7 @@ module Aws::AIOps
     #   <p>The ARN of an existing role which will be used to do investigations on your behalf. </p>
     #   @return [String]
     class CrossAccountConfiguration < Struct.new(
+      nil,
       :source_role_arn,
       keyword_init: true
     )
@@ -90,6 +95,7 @@ module Aws::AIOps
     end
 
     class DeleteInvestigationGroupPolicyOutput < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -99,6 +105,7 @@ module Aws::AIOps
     #   <p>Specify either the name or the ARN of the investigation group that you want to remove the policy from.</p>
     #   @return [String]
     class DeleteInvestigationGroupPolicyRequest < Struct.new(
+      nil,
       :identifier,
       keyword_init: true
     )
@@ -109,6 +116,7 @@ module Aws::AIOps
     #   <p>Specify either the name or the ARN of the investigation group that you want to delete.</p>
     #   @return [String]
     class DeleteInvestigationGroupRequest < Struct.new(
+      nil,
       :identifier,
       keyword_init: true
     )
@@ -123,6 +131,7 @@ module Aws::AIOps
     #   <p>If the investigation group uses a customer managed key for encryption, this field displays the ID of that key.</p>
     #   @return [String]
     class EncryptionConfiguration < Struct.new(
+      nil,
       :type,
       :kms_key_id,
       keyword_init: true
@@ -134,6 +143,7 @@ module Aws::AIOps
     # @!attribute message
     #   @return [String]
     class ForbiddenException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -144,6 +154,7 @@ module Aws::AIOps
     #   <p>Specify either the name or the ARN of the investigation group that you want to view the policy of.</p>
     #   @return [String]
     class GetInvestigationGroupPolicyRequest < Struct.new(
+      nil,
       :identifier,
       keyword_init: true
     )
@@ -157,6 +168,7 @@ module Aws::AIOps
     #   <p>The policy, in JSON format.</p>
     #   @return [String]
     class GetInvestigationGroupPolicyResponse < Struct.new(
+      nil,
       :investigation_group_arn,
       :policy,
       keyword_init: true
@@ -168,6 +180,7 @@ module Aws::AIOps
     #   <p>Specify either the name or the ARN of the investigation group that you want to view. This is used to set the name of the investigation group.</p>
     #   @return [String]
     class GetInvestigationGroupRequest < Struct.new(
+      nil,
       :identifier,
       keyword_init: true
     )
@@ -214,6 +227,7 @@ module Aws::AIOps
     #   <p>Lists the <code>AWSAccountId</code> of the accounts configured for cross-account access and the results of the last scan performed on each account.</p>
     #   @return [Array<Types::CrossAccountConfiguration>]
     class GetInvestigationGroupResponse < Struct.new(
+      nil,
       :created_by,
       :created_at,
       :last_modified_by,
@@ -236,6 +250,7 @@ module Aws::AIOps
     # @!attribute message
     #   @return [String]
     class InternalServerException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -249,6 +264,7 @@ module Aws::AIOps
     #   <p>The maximum number of results to return in one operation. If you omit this parameter, the default of 50 is used.</p>
     #   @return [Integer]
     class ListInvestigationGroupsInput < Struct.new(
+      nil,
       :next_token,
       :max_results,
       keyword_init: true
@@ -264,6 +280,7 @@ module Aws::AIOps
     #   <p>The name of the investigation group.</p>
     #   @return [String]
     class ListInvestigationGroupsModel < Struct.new(
+      nil,
       :arn,
       :name,
       keyword_init: true
@@ -278,6 +295,7 @@ module Aws::AIOps
     #   <p>An array of structures, where each structure contains the information about one investigation group in the account.</p>
     #   @return [Array<Types::ListInvestigationGroupsModel>]
     class ListInvestigationGroupsOutput < Struct.new(
+      nil,
       :next_token,
       :investigation_groups,
       keyword_init: true
@@ -289,6 +307,7 @@ module Aws::AIOps
     #   <p>The list of tag keys and values associated with the resource you specified.</p>
     #   @return [Hash<String, String>]
     class ListTagsForResourceOutput < Struct.new(
+      nil,
       :tags,
       keyword_init: true
     )
@@ -299,6 +318,7 @@ module Aws::AIOps
     #   <p>The ARN of the CloudWatch investigations resource that you want to view tags for. You can use the <code>ListInvestigationGroups</code> operation to find the ARNs of investigation groups.</p> <p>The ARN format for an investigation group is <code>arn:aws:aiops:<i>Region</i>:<i>account-id</i>:investigation-group:<i>investigation-group-id</i> </code>.</p>
     #   @return [String]
     class ListTagsForResourceRequest < Struct.new(
+      nil,
       :resource_arn,
       keyword_init: true
     )
@@ -312,6 +332,7 @@ module Aws::AIOps
     #   <p>The policy, in JSON format.</p>
     #   @return [String]
     class PutInvestigationGroupPolicyRequest < Struct.new(
+      nil,
       :identifier,
       :policy,
       keyword_init: true
@@ -323,6 +344,7 @@ module Aws::AIOps
     #   <p>The ARN of the investigation group that will use this policy.</p>
     #   @return [String]
     class PutInvestigationGroupPolicyResponse < Struct.new(
+      nil,
       :investigation_group_arn,
       keyword_init: true
     )
@@ -333,6 +355,7 @@ module Aws::AIOps
     # @!attribute message
     #   @return [String]
     class ResourceNotFoundException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -355,6 +378,7 @@ module Aws::AIOps
     #   <p>This quota that was exceeded.</p>
     #   @return [String]
     class ServiceQuotaExceededException < Struct.new(
+      nil,
       :message,
       :resource_id,
       :resource_type,
@@ -372,6 +396,7 @@ module Aws::AIOps
     #   <p>The list of key-value pairs to associate with the resource.</p>
     #   @return [Hash<String, String>]
     class TagResourceRequest < Struct.new(
+      nil,
       :resource_arn,
       :tags,
       keyword_init: true
@@ -380,6 +405,7 @@ module Aws::AIOps
     end
 
     class TagResourceResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -389,6 +415,7 @@ module Aws::AIOps
     # @!attribute message
     #   @return [String]
     class ThrottlingException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -402,6 +429,7 @@ module Aws::AIOps
     #   <p>The list of tag keys to remove from the resource.</p>
     #   @return [Array<String>]
     class UntagResourceRequest < Struct.new(
+      nil,
       :resource_arn,
       :tag_keys,
       keyword_init: true
@@ -410,12 +438,14 @@ module Aws::AIOps
     end
 
     class UntagResourceResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
     end
 
     class UpdateInvestigationGroupOutput < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -443,6 +473,7 @@ module Aws::AIOps
     #   <p>Used to configure cross-account access for an investigation group. It allows the investigation group to access resources in other accounts. </p>
     #   @return [Array<Types::CrossAccountConfiguration>]
     class UpdateInvestigationGroupRequest < Struct.new(
+      nil,
       :identifier,
       :role_arn,
       :encryption_configuration,
@@ -459,6 +490,7 @@ module Aws::AIOps
     # @!attribute message
     #   @return [String]
     class ValidationException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )

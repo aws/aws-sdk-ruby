@@ -39,6 +39,7 @@ module Aws::MarketplaceEntitlementService
     #      to renew their contract will still have entitlements with an expiration date.</p>
     #   @return [Time]
     class Entitlement < Struct.new(
+      nil,
       :product_code,
       :dimension,
       :customer_identifier,
@@ -69,6 +70,7 @@ module Aws::MarketplaceEntitlementService
     #      string type. Otherwise, the field will not be set.</p>
     #   @return [String]
     class EntitlementValue < Struct.new(
+      nil,
       :integer_value,
       :double_value,
       :boolean_value,
@@ -102,6 +104,7 @@ module Aws::MarketplaceEntitlementService
     #      pagination, use the NextToken field in subsequent calls to GetEntitlements.</p>
     #   @return [Integer]
     class GetEntitlementsRequest < Struct.new(
+      nil,
       :product_code,
       :filter,
       :next_token,
@@ -123,6 +126,7 @@ module Aws::MarketplaceEntitlementService
     #         used.</p>
     #   @return [String]
     class GetEntitlementsResult < Struct.new(
+      nil,
       :entitlements,
       :next_token,
       keyword_init: true
@@ -135,6 +139,7 @@ module Aws::MarketplaceEntitlementService
     # @!attribute message
     #   @return [String]
     class InternalServiceErrorException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -145,6 +150,7 @@ module Aws::MarketplaceEntitlementService
     # @!attribute message
     #   @return [String]
     class InvalidParameterException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -155,6 +161,7 @@ module Aws::MarketplaceEntitlementService
     # @!attribute message
     #   @return [String]
     class ThrottlingException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )

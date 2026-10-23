@@ -10,6 +10,7 @@ module Aws::Proton
     #   <p>The ID of the environment account connection.</p>
     #   @return [String]
     class AcceptEnvironmentAccountConnectionOperationInput < Struct.new(
+      nil,
       :id,
       keyword_init: true
     )
@@ -20,6 +21,7 @@ module Aws::Proton
     #   <p>The environment account connection data that's returned by Proton.</p>
     #   @return [Types::EnvironmentAccountConnection]
     class AcceptEnvironmentAccountConnectionOperationOutput < Struct.new(
+      nil,
       :environment_account_connection,
       keyword_init: true
     )
@@ -30,6 +32,7 @@ module Aws::Proton
     # @!attribute message
     #   @return [String]
     class AccessDeniedException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -50,6 +53,7 @@ module Aws::Proton
     #         provisioning.</p>
     #   @return [String]
     class AccountSettings < Struct.new(
+      nil,
       :pipeline_service_role_arn,
       :pipeline_provisioning_repository,
       :pipeline_codebuild_role_arn,
@@ -62,6 +66,7 @@ module Aws::Proton
     #   <p>The name of the component with the deployment to cancel.</p>
     #   @return [String]
     class CancelComponentDeploymentOperationInput < Struct.new(
+      nil,
       :component_name,
       keyword_init: true
     )
@@ -72,6 +77,7 @@ module Aws::Proton
     #   <p>The detailed data of the component with the deployment that is being canceled.</p>
     #   @return [Types::Component]
     class CancelComponentDeploymentOperationOutput < Struct.new(
+      nil,
       :component,
       keyword_init: true
     )
@@ -82,6 +88,7 @@ module Aws::Proton
     #   <p>The name of the environment with the deployment to cancel.</p>
     #   @return [String]
     class CancelEnvironmentDeploymentOperationInput < Struct.new(
+      nil,
       :environment_name,
       keyword_init: true
     )
@@ -92,6 +99,7 @@ module Aws::Proton
     #   <p>The environment summary data that's returned by Proton.</p>
     #   @return [Types::Environment]
     class CancelEnvironmentDeploymentOperationOutput < Struct.new(
+      nil,
       :environment,
       keyword_init: true
     )
@@ -105,6 +113,7 @@ module Aws::Proton
     #   <p>The name of the service with the service instance deployment to cancel.</p>
     #   @return [String]
     class CancelServiceInstanceDeploymentOperationInput < Struct.new(
+      nil,
       :service_instance_name,
       :service_name,
       keyword_init: true
@@ -116,6 +125,7 @@ module Aws::Proton
     #   <p>The service instance summary data that's returned by Proton.</p>
     #   @return [Types::ServiceInstance]
     class CancelServiceInstanceDeploymentOperationOutput < Struct.new(
+      nil,
       :service_instance,
       keyword_init: true
     )
@@ -126,6 +136,7 @@ module Aws::Proton
     #   <p>The name of the service with the service pipeline deployment to cancel.</p>
     #   @return [String]
     class CancelServicePipelineDeploymentOperationInput < Struct.new(
+      nil,
       :service_name,
       keyword_init: true
     )
@@ -136,6 +147,7 @@ module Aws::Proton
     #   <p>The service pipeline detail data that's returned by Proton.</p>
     #   @return [Types::ServicePipeline]
     class CancelServicePipelineDeploymentOperationOutput < Struct.new(
+      nil,
       :pipeline,
       keyword_init: true
     )
@@ -150,6 +162,7 @@ module Aws::Proton
     #   <p>The major version of the compatible environment template.</p>
     #   @return [String]
     class CompatibleEnvironmentTemplate < Struct.new(
+      nil,
       :template_name,
       :major_version,
       keyword_init: true
@@ -165,6 +178,7 @@ module Aws::Proton
     #   <p>The major version of the compatible environment template.</p>
     #   @return [String]
     class CompatibleEnvironmentTemplateInput < Struct.new(
+      nil,
       :template_name,
       :major_version,
       keyword_init: true
@@ -225,6 +239,7 @@ module Aws::Proton
     #   <p>The ID of the last successful deployment of this component.</p>
     #   @return [String]
     class Component < Struct.new(
+      nil,
       :name,
       :description,
       :arn,
@@ -260,6 +275,7 @@ module Aws::Proton
     #   <p>The template file used.</p>
     #   @return [String]
     class ComponentState < Struct.new(
+      nil,
       :service_name,
       :service_instance_name,
       :service_spec,
@@ -313,6 +329,7 @@ module Aws::Proton
     #   <p>The ID of the last successful deployment of this component.</p>
     #   @return [String]
     class ComponentSummary < Struct.new(
+      nil,
       :name,
       :arn,
       :environment_name,
@@ -335,6 +352,7 @@ module Aws::Proton
     # @!attribute message
     #   @return [String]
     class ConflictException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -371,6 +389,7 @@ module Aws::Proton
     #   <p>The staleness counts for Proton pipelines in the Amazon Web Services account.</p>
     #   @return [Types::ResourceCountsSummary]
     class CountsSummary < Struct.new(
+      nil,
       :components,
       :environments,
       :environment_templates,
@@ -424,6 +443,7 @@ module Aws::Proton
     #   <p>The client token for the created component.</p>
     #   @return [String]
     class CreateComponentOperationInput < Struct.new(
+      nil,
       :name,
       :description,
       :service_name,
@@ -443,6 +463,7 @@ module Aws::Proton
     #   <p>The detailed data of the created component.</p>
     #   @return [Types::Component]
     class CreateComponentOperationOutput < Struct.new(
+      nil,
       :component,
       keyword_init: true
     )
@@ -484,6 +505,7 @@ module Aws::Proton
     #         using CodeBuild-based provisioning in the associated environment account.</p>
     #   @return [String]
     class CreateEnvironmentAccountConnectionOperationInput < Struct.new(
+      nil,
       :client_token,
       :management_account_id,
       :role_arn,
@@ -500,6 +522,7 @@ module Aws::Proton
     #   <p>The environment account connection detail data that's returned by Proton.</p>
     #   @return [Types::EnvironmentAccountConnection]
     class CreateEnvironmentAccountConnectionOperationOutput < Struct.new(
+      nil,
       :environment_account_connection,
       keyword_init: true
     )
@@ -563,6 +586,7 @@ module Aws::Proton
     #         <code>environmentAccountConnectionId</code> or <code>codebuildRoleArn</code> parameter.</p>
     #   @return [String]
     class CreateEnvironmentOperationInput < Struct.new(
+      nil,
       :name,
       :template_name,
       :template_major_version,
@@ -584,6 +608,7 @@ module Aws::Proton
     #   <p>The environment detail data that's returned by Proton.</p>
     #   @return [Types::Environment]
     class CreateEnvironmentOperationOutput < Struct.new(
+      nil,
       :environment,
       keyword_init: true
     )
@@ -611,6 +636,7 @@ module Aws::Proton
     #           <i>Proton User Guide</i>.</p>
     #   @return [Array<Types::Tag>]
     class CreateEnvironmentTemplateOperationInput < Struct.new(
+      nil,
       :name,
       :display_name,
       :description,
@@ -626,6 +652,7 @@ module Aws::Proton
     #   <p>The environment template detail data that's returned by Proton.</p>
     #   @return [Types::EnvironmentTemplate]
     class CreateEnvironmentTemplateOperationOutput < Struct.new(
+      nil,
       :environment_template,
       keyword_init: true
     )
@@ -655,6 +682,7 @@ module Aws::Proton
     #           <i>Proton User Guide</i>.</p>
     #   @return [Array<Types::Tag>]
     class CreateEnvironmentTemplateVersionOperationInput < Struct.new(
+      nil,
       :client_token,
       :template_name,
       :description,
@@ -670,6 +698,7 @@ module Aws::Proton
     #   <p>The environment template detail data that's returned by Proton.</p>
     #   @return [Types::EnvironmentTemplateVersion]
     class CreateEnvironmentTemplateVersionOperationOutput < Struct.new(
+      nil,
       :environment_template_version,
       keyword_init: true
     )
@@ -695,6 +724,7 @@ module Aws::Proton
     #           <i>Proton User Guide</i>.</p>
     #   @return [Array<Types::Tag>]
     class CreateRepositoryOperationInput < Struct.new(
+      nil,
       :provider,
       :name,
       :connection_arn,
@@ -709,6 +739,7 @@ module Aws::Proton
     #   <p>The repository link's detail data that's returned by Proton.</p>
     #   @return [Types::Repository]
     class CreateRepositoryOperationOutput < Struct.new(
+      nil,
       :repository,
       keyword_init: true
     )
@@ -743,6 +774,7 @@ module Aws::Proton
     #   <p>The client token of the service instance to create.</p>
     #   @return [String]
     class CreateServiceInstanceOperationInput < Struct.new(
+      nil,
       :name,
       :service_name,
       :spec,
@@ -759,6 +791,7 @@ module Aws::Proton
     #   <p>The detailed data of the service instance being created.</p>
     #   @return [Types::ServiceInstance]
     class CreateServiceInstanceOperationOutput < Struct.new(
+      nil,
       :service_instance,
       keyword_init: true
     )
@@ -810,6 +843,7 @@ module Aws::Proton
     #           <i>Proton User Guide</i>.</p>
     #   @return [Array<Types::Tag>]
     class CreateServiceOperationInput < Struct.new(
+      nil,
       :name,
       :description,
       :template_name,
@@ -829,6 +863,7 @@ module Aws::Proton
     #   <p>The service detail data that's returned by Proton.</p>
     #   @return [Types::Service]
     class CreateServiceOperationOutput < Struct.new(
+      nil,
       :service,
       keyword_init: true
     )
@@ -851,6 +886,7 @@ module Aws::Proton
     #   <p>The path to the Proton Ops file.</p>
     #   @return [String]
     class CreateServiceSyncConfigOperationInput < Struct.new(
+      nil,
       :service_name,
       :repository_provider,
       :repository_name,
@@ -865,6 +901,7 @@ module Aws::Proton
     #   <p>The detailed data of the Proton Ops file.</p>
     #   @return [Types::ServiceSyncConfig]
     class CreateServiceSyncConfigOperationOutput < Struct.new(
+      nil,
       :service_sync_config,
       keyword_init: true
     )
@@ -897,6 +934,7 @@ module Aws::Proton
     #           <i>Proton User Guide</i>.</p>
     #   @return [Array<Types::Tag>]
     class CreateServiceTemplateOperationInput < Struct.new(
+      nil,
       :name,
       :display_name,
       :description,
@@ -912,6 +950,7 @@ module Aws::Proton
     #   <p>The service template detail data that's returned by Proton.</p>
     #   @return [Types::ServiceTemplate]
     class CreateServiceTemplateOperationOutput < Struct.new(
+      nil,
       :service_template,
       keyword_init: true
     )
@@ -958,6 +997,7 @@ module Aws::Proton
     #     <i>Proton User Guide</i>.</p>
     #   @return [Array<String>]
     class CreateServiceTemplateVersionOperationInput < Struct.new(
+      nil,
       :client_token,
       :template_name,
       :description,
@@ -975,6 +1015,7 @@ module Aws::Proton
     #   <p>The service template version summary of detail data that's returned by Proton.</p>
     #   @return [Types::ServiceTemplateVersion]
     class CreateServiceTemplateVersionOperationOutput < Struct.new(
+      nil,
       :service_template_version,
       keyword_init: true
     )
@@ -1001,6 +1042,7 @@ module Aws::Proton
     #      repository directory.</p>
     #   @return [String]
     class CreateTemplateSyncConfigOperationInput < Struct.new(
+      nil,
       :template_name,
       :template_type,
       :repository_provider,
@@ -1016,6 +1058,7 @@ module Aws::Proton
     #   <p>The template sync configuration detail data that's returned by Proton.</p>
     #   @return [Types::TemplateSyncConfig]
     class CreateTemplateSyncConfigOperationOutput < Struct.new(
+      nil,
       :template_sync_config,
       keyword_init: true
     )
@@ -1026,6 +1069,7 @@ module Aws::Proton
     #   <p>The name of the component to delete.</p>
     #   @return [String]
     class DeleteComponentOperationInput < Struct.new(
+      nil,
       :name,
       keyword_init: true
     )
@@ -1036,6 +1080,7 @@ module Aws::Proton
     #   <p>The detailed data of the component being deleted.</p>
     #   @return [Types::Component]
     class DeleteComponentOperationOutput < Struct.new(
+      nil,
       :component,
       keyword_init: true
     )
@@ -1046,6 +1091,7 @@ module Aws::Proton
     #   <p>The ID of the deployment to delete.</p>
     #   @return [String]
     class DeleteDeploymentInput < Struct.new(
+      nil,
       :id,
       keyword_init: true
     )
@@ -1056,6 +1102,7 @@ module Aws::Proton
     #   <p>The detailed data of the deployment being deleted.</p>
     #   @return [Types::Deployment]
     class DeleteDeploymentOutput < Struct.new(
+      nil,
       :deployment,
       keyword_init: true
     )
@@ -1066,6 +1113,7 @@ module Aws::Proton
     #   <p>The ID of the environment account connection to delete.</p>
     #   @return [String]
     class DeleteEnvironmentAccountConnectionOperationInput < Struct.new(
+      nil,
       :id,
       keyword_init: true
     )
@@ -1076,6 +1124,7 @@ module Aws::Proton
     #   <p>The detailed data of the environment account connection being deleted.</p>
     #   @return [Types::EnvironmentAccountConnection]
     class DeleteEnvironmentAccountConnectionOperationOutput < Struct.new(
+      nil,
       :environment_account_connection,
       keyword_init: true
     )
@@ -1086,6 +1135,7 @@ module Aws::Proton
     #   <p>The name of the environment to delete.</p>
     #   @return [String]
     class DeleteEnvironmentOperationInput < Struct.new(
+      nil,
       :name,
       keyword_init: true
     )
@@ -1096,6 +1146,7 @@ module Aws::Proton
     #   <p>The detailed data of the environment being deleted.</p>
     #   @return [Types::Environment]
     class DeleteEnvironmentOperationOutput < Struct.new(
+      nil,
       :environment,
       keyword_init: true
     )
@@ -1106,6 +1157,7 @@ module Aws::Proton
     #   <p>The name of the environment template to delete.</p>
     #   @return [String]
     class DeleteEnvironmentTemplateOperationInput < Struct.new(
+      nil,
       :name,
       keyword_init: true
     )
@@ -1116,6 +1168,7 @@ module Aws::Proton
     #   <p>The detailed data of the environment template being deleted.</p>
     #   @return [Types::EnvironmentTemplate]
     class DeleteEnvironmentTemplateOperationOutput < Struct.new(
+      nil,
       :environment_template,
       keyword_init: true
     )
@@ -1132,6 +1185,7 @@ module Aws::Proton
     #   <p>The environment template minor version to delete.</p>
     #   @return [String]
     class DeleteEnvironmentTemplateVersionOperationInput < Struct.new(
+      nil,
       :template_name,
       :major_version,
       :minor_version,
@@ -1144,6 +1198,7 @@ module Aws::Proton
     #   <p>The detailed data of the environment template version being deleted.</p>
     #   @return [Types::EnvironmentTemplateVersion]
     class DeleteEnvironmentTemplateVersionOperationOutput < Struct.new(
+      nil,
       :environment_template_version,
       keyword_init: true
     )
@@ -1157,6 +1212,7 @@ module Aws::Proton
     #   <p>The repository name.</p>
     #   @return [String]
     class DeleteRepositoryOperationInput < Struct.new(
+      nil,
       :provider,
       :name,
       keyword_init: true
@@ -1168,6 +1224,7 @@ module Aws::Proton
     #   <p>The deleted repository link's detail data that's returned by Proton.</p>
     #   @return [Types::Repository]
     class DeleteRepositoryOperationOutput < Struct.new(
+      nil,
       :repository,
       keyword_init: true
     )
@@ -1178,6 +1235,7 @@ module Aws::Proton
     #   <p>The name of the service to delete.</p>
     #   @return [String]
     class DeleteServiceOperationInput < Struct.new(
+      nil,
       :name,
       keyword_init: true
     )
@@ -1188,6 +1246,7 @@ module Aws::Proton
     #   <p>The detailed data of the service being deleted.</p>
     #   @return [Types::Service]
     class DeleteServiceOperationOutput < Struct.new(
+      nil,
       :service,
       keyword_init: true
     )
@@ -1198,6 +1257,7 @@ module Aws::Proton
     #   <p>The name of the service that you want to delete the service sync configuration for.</p>
     #   @return [String]
     class DeleteServiceSyncConfigOperationInput < Struct.new(
+      nil,
       :service_name,
       keyword_init: true
     )
@@ -1208,6 +1268,7 @@ module Aws::Proton
     #   <p>The detailed data for the service sync config.</p>
     #   @return [Types::ServiceSyncConfig]
     class DeleteServiceSyncConfigOperationOutput < Struct.new(
+      nil,
       :service_sync_config,
       keyword_init: true
     )
@@ -1218,6 +1279,7 @@ module Aws::Proton
     #   <p>The name of the service template to delete.</p>
     #   @return [String]
     class DeleteServiceTemplateOperationInput < Struct.new(
+      nil,
       :name,
       keyword_init: true
     )
@@ -1228,6 +1290,7 @@ module Aws::Proton
     #   <p>The detailed data of the service template being deleted.</p>
     #   @return [Types::ServiceTemplate]
     class DeleteServiceTemplateOperationOutput < Struct.new(
+      nil,
       :service_template,
       keyword_init: true
     )
@@ -1244,6 +1307,7 @@ module Aws::Proton
     #   <p>The service template minor version to delete.</p>
     #   @return [String]
     class DeleteServiceTemplateVersionOperationInput < Struct.new(
+      nil,
       :template_name,
       :major_version,
       :minor_version,
@@ -1256,6 +1320,7 @@ module Aws::Proton
     #   <p>The detailed data of the service template version being deleted.</p>
     #   @return [Types::ServiceTemplateVersion]
     class DeleteServiceTemplateVersionOperationOutput < Struct.new(
+      nil,
       :service_template_version,
       keyword_init: true
     )
@@ -1269,6 +1334,7 @@ module Aws::Proton
     #   <p>The template type.</p>
     #   @return [String]
     class DeleteTemplateSyncConfigOperationInput < Struct.new(
+      nil,
       :template_name,
       :template_type,
       keyword_init: true
@@ -1280,6 +1346,7 @@ module Aws::Proton
     #   <p>The template sync configuration detail data that's returned by Proton.</p>
     #   @return [Types::TemplateSyncConfig]
     class DeleteTemplateSyncConfigOperationOutput < Struct.new(
+      nil,
       :template_sync_config,
       keyword_init: true
     )
@@ -1342,6 +1409,7 @@ module Aws::Proton
     #   <p>The target state of the target resource at the time of the deployment.</p>
     #   @return [Types::DeploymentState]
     class Deployment < Struct.new(
+      nil,
       :id,
       :arn,
       :target_arn,
@@ -1442,6 +1510,7 @@ module Aws::Proton
     #   <p>The current status of the deployment.</p>
     #   @return [String]
     class DeploymentSummary < Struct.new(
+      nil,
       :id,
       :arn,
       :target_arn,
@@ -1535,6 +1604,7 @@ module Aws::Proton
     #   <p>The ID of the last successful deployment of this environment.</p>
     #   @return [String]
     class Environment < Struct.new(
+      nil,
       :name,
       :description,
       :created_at,
@@ -1603,6 +1673,7 @@ module Aws::Proton
     #         using CodeBuild-based provisioning in the associated environment account.</p>
     #   @return [String]
     class EnvironmentAccountConnection < Struct.new(
+      nil,
       :id,
       :arn,
       :management_account_id,
@@ -1657,6 +1728,7 @@ module Aws::Proton
     #     <i>Proton User Guide</i>.</p>
     #   @return [String]
     class EnvironmentAccountConnectionSummary < Struct.new(
+      nil,
       :id,
       :arn,
       :management_account_id,
@@ -1686,6 +1758,7 @@ module Aws::Proton
     #   <p>The minor version of the environment template that was used to create the environment.</p>
     #   @return [String]
     class EnvironmentState < Struct.new(
+      nil,
       :spec,
       :template_name,
       :template_major_version,
@@ -1756,6 +1829,7 @@ module Aws::Proton
     #   <p>The ID of the last successful deployment of this environment.</p>
     #   @return [String]
     class EnvironmentSummary < Struct.new(
+      nil,
       :name,
       :description,
       :created_at,
@@ -1808,6 +1882,7 @@ module Aws::Proton
     #   <p>When included, indicates that the environment template is for customer provisioned and managed infrastructure.</p>
     #   @return [String]
     class EnvironmentTemplate < Struct.new(
+      nil,
       :name,
       :arn,
       :created_at,
@@ -1830,6 +1905,7 @@ module Aws::Proton
     #   <p>Include <code>majorVersion</code> to filter search for a major version.</p>
     #   @return [String]
     class EnvironmentTemplateFilter < Struct.new(
+      nil,
       :template_name,
       :major_version,
       keyword_init: true
@@ -1863,6 +1939,7 @@ module Aws::Proton
     #   <p>When included, indicates that the environment template is for customer provisioned and managed infrastructure.</p>
     #   @return [String]
     class EnvironmentTemplateSummary < Struct.new(
+      nil,
       :name,
       :arn,
       :created_at,
@@ -1911,6 +1988,7 @@ module Aws::Proton
     #   <p>The schema of the version of an environment template.</p>
     #   @return [String]
     class EnvironmentTemplateVersion < Struct.new(
+      nil,
       :template_name,
       :major_version,
       :minor_version,
@@ -1959,6 +2037,7 @@ module Aws::Proton
     #   <p>The time when the version of an environment template was last modified.</p>
     #   @return [Time]
     class EnvironmentTemplateVersionSummary < Struct.new(
+      nil,
       :template_name,
       :major_version,
       :minor_version,
@@ -1975,6 +2054,7 @@ module Aws::Proton
     end
 
     class GetAccountSettingsOperationInput < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1984,6 +2064,7 @@ module Aws::Proton
     #   <p>The Proton pipeline service role detail data that's returned by Proton.</p>
     #   @return [Types::AccountSettings]
     class GetAccountSettingsOperationOutput < Struct.new(
+      nil,
       :account_settings,
       keyword_init: true
     )
@@ -1994,6 +2075,7 @@ module Aws::Proton
     #   <p>The name of the component that you want to get the detailed data for.</p>
     #   @return [String]
     class GetComponentOperationInput < Struct.new(
+      nil,
       :name,
       keyword_init: true
     )
@@ -2004,6 +2086,7 @@ module Aws::Proton
     #   <p>The detailed data of the requested component.</p>
     #   @return [Types::Component]
     class GetComponentOperationOutput < Struct.new(
+      nil,
       :component,
       keyword_init: true
     )
@@ -2027,6 +2110,7 @@ module Aws::Proton
     #   <p>The name of a component that you want to get the detailed data for.</p>
     #   @return [String]
     class GetDeploymentInput < Struct.new(
+      nil,
       :id,
       :environment_name,
       :service_name,
@@ -2041,6 +2125,7 @@ module Aws::Proton
     #   <p>The detailed data of the requested deployment.</p>
     #   @return [Types::Deployment]
     class GetDeploymentOutput < Struct.new(
+      nil,
       :deployment,
       keyword_init: true
     )
@@ -2051,6 +2136,7 @@ module Aws::Proton
     #   <p>The ID of the environment account connection that you want to get the detailed data for.</p>
     #   @return [String]
     class GetEnvironmentAccountConnectionOperationInput < Struct.new(
+      nil,
       :id,
       keyword_init: true
     )
@@ -2061,6 +2147,7 @@ module Aws::Proton
     #   <p>The detailed data of the requested environment account connection.</p>
     #   @return [Types::EnvironmentAccountConnection]
     class GetEnvironmentAccountConnectionOperationOutput < Struct.new(
+      nil,
       :environment_account_connection,
       keyword_init: true
     )
@@ -2071,6 +2158,7 @@ module Aws::Proton
     #   <p>The name of the environment that you want to get the detailed data for.</p>
     #   @return [String]
     class GetEnvironmentOperationInput < Struct.new(
+      nil,
       :name,
       keyword_init: true
     )
@@ -2081,6 +2169,7 @@ module Aws::Proton
     #   <p>The detailed data of the requested environment.</p>
     #   @return [Types::Environment]
     class GetEnvironmentOperationOutput < Struct.new(
+      nil,
       :environment,
       keyword_init: true
     )
@@ -2091,6 +2180,7 @@ module Aws::Proton
     #   <p>The name of the environment template that you want to get the detailed data for.</p>
     #   @return [String]
     class GetEnvironmentTemplateOperationInput < Struct.new(
+      nil,
       :name,
       keyword_init: true
     )
@@ -2101,6 +2191,7 @@ module Aws::Proton
     #   <p>The detailed data of the requested environment template.</p>
     #   @return [Types::EnvironmentTemplate]
     class GetEnvironmentTemplateOperationOutput < Struct.new(
+      nil,
       :environment_template,
       keyword_init: true
     )
@@ -2117,6 +2208,7 @@ module Aws::Proton
     #   <p>To get environment template minor version detail data, include <code>minorVersion</code>.</p>
     #   @return [String]
     class GetEnvironmentTemplateVersionOperationInput < Struct.new(
+      nil,
       :template_name,
       :major_version,
       :minor_version,
@@ -2129,6 +2221,7 @@ module Aws::Proton
     #   <p>The detailed data of the requested environment template version.</p>
     #   @return [Types::EnvironmentTemplateVersion]
     class GetEnvironmentTemplateVersionOperationOutput < Struct.new(
+      nil,
       :environment_template_version,
       keyword_init: true
     )
@@ -2142,6 +2235,7 @@ module Aws::Proton
     #   <p>The repository name, for example <code>myrepos/myrepo</code>.</p>
     #   @return [String]
     class GetRepositoryOperationInput < Struct.new(
+      nil,
       :provider,
       :name,
       keyword_init: true
@@ -2153,6 +2247,7 @@ module Aws::Proton
     #   <p>The repository link's detail data that's returned by Proton.</p>
     #   @return [Types::Repository]
     class GetRepositoryOperationOutput < Struct.new(
+      nil,
       :repository,
       keyword_init: true
     )
@@ -2172,6 +2267,7 @@ module Aws::Proton
     #   <p>The repository sync type.</p>
     #   @return [String]
     class GetRepositorySyncStatusOperationInput < Struct.new(
+      nil,
       :repository_name,
       :repository_provider,
       :branch,
@@ -2185,6 +2281,7 @@ module Aws::Proton
     #   <p>The repository sync status detail data that's returned by Proton.</p>
     #   @return [Types::RepositorySyncAttempt]
     class GetRepositorySyncStatusOperationOutput < Struct.new(
+      nil,
       :latest_sync,
       keyword_init: true
     )
@@ -2192,6 +2289,7 @@ module Aws::Proton
     end
 
     class GetResourcesSummaryOperationInput < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -2201,6 +2299,7 @@ module Aws::Proton
     #   <p>Summary counts of each Proton resource type.</p>
     #   @return [Types::CountsSummary]
     class GetResourcesSummaryOperationOutput < Struct.new(
+      nil,
       :counts,
       keyword_init: true
     )
@@ -2214,6 +2313,7 @@ module Aws::Proton
     #   <p>The name of the service that you want the service instance input for.</p>
     #   @return [String]
     class GetServiceInstanceOperationInput < Struct.new(
+      nil,
       :name,
       :service_name,
       keyword_init: true
@@ -2225,6 +2325,7 @@ module Aws::Proton
     #   <p>The detailed data of the requested service instance.</p>
     #   @return [Types::ServiceInstance]
     class GetServiceInstanceOperationOutput < Struct.new(
+      nil,
       :service_instance,
       keyword_init: true
     )
@@ -2238,6 +2339,7 @@ module Aws::Proton
     #   <p>The name of the service instance that you want the sync status input for.</p>
     #   @return [String]
     class GetServiceInstanceSyncStatusOperationInput < Struct.new(
+      nil,
       :service_name,
       :service_instance_name,
       keyword_init: true
@@ -2255,6 +2357,7 @@ module Aws::Proton
     #   <p>The service instance sync desired state that's returned by Proton</p>
     #   @return [Types::Revision]
     class GetServiceInstanceSyncStatusOperationOutput < Struct.new(
+      nil,
       :latest_sync,
       :latest_successful_sync,
       :desired_state,
@@ -2267,6 +2370,7 @@ module Aws::Proton
     #   <p>The name of the service that you want to get the detailed data for.</p>
     #   @return [String]
     class GetServiceOperationInput < Struct.new(
+      nil,
       :name,
       keyword_init: true
     )
@@ -2277,6 +2381,7 @@ module Aws::Proton
     #   <p>The detailed data of the requested service.</p>
     #   @return [Types::Service]
     class GetServiceOperationOutput < Struct.new(
+      nil,
       :service,
       keyword_init: true
     )
@@ -2293,6 +2398,7 @@ module Aws::Proton
     #         blocked.</p>
     #   @return [String]
     class GetServiceSyncBlockerSummaryOperationInput < Struct.new(
+      nil,
       :service_name,
       :service_instance_name,
       keyword_init: true
@@ -2304,6 +2410,7 @@ module Aws::Proton
     #   <p>The detailed data of the requested service sync blocker summary.</p>
     #   @return [Types::ServiceSyncBlockerSummary]
     class GetServiceSyncBlockerSummaryOperationOutput < Struct.new(
+      nil,
       :service_sync_blocker_summary,
       keyword_init: true
     )
@@ -2314,6 +2421,7 @@ module Aws::Proton
     #   <p>The name of the service that you want to get the service sync configuration for.</p>
     #   @return [String]
     class GetServiceSyncConfigOperationInput < Struct.new(
+      nil,
       :service_name,
       keyword_init: true
     )
@@ -2324,6 +2432,7 @@ module Aws::Proton
     #   <p>The detailed data of the requested service sync configuration.</p>
     #   @return [Types::ServiceSyncConfig]
     class GetServiceSyncConfigOperationOutput < Struct.new(
+      nil,
       :service_sync_config,
       keyword_init: true
     )
@@ -2334,6 +2443,7 @@ module Aws::Proton
     #   <p>The name of the service template that you want to get detailed data for.</p>
     #   @return [String]
     class GetServiceTemplateOperationInput < Struct.new(
+      nil,
       :name,
       keyword_init: true
     )
@@ -2344,6 +2454,7 @@ module Aws::Proton
     #   <p>The detailed data of the requested service template.</p>
     #   @return [Types::ServiceTemplate]
     class GetServiceTemplateOperationOutput < Struct.new(
+      nil,
       :service_template,
       keyword_init: true
     )
@@ -2363,6 +2474,7 @@ module Aws::Proton
     #         <code>minorVersion</code>.</p>
     #   @return [String]
     class GetServiceTemplateVersionOperationInput < Struct.new(
+      nil,
       :template_name,
       :major_version,
       :minor_version,
@@ -2375,6 +2487,7 @@ module Aws::Proton
     #   <p>The detailed data of the requested service template version.</p>
     #   @return [Types::ServiceTemplateVersion]
     class GetServiceTemplateVersionOperationOutput < Struct.new(
+      nil,
       :service_template_version,
       keyword_init: true
     )
@@ -2388,6 +2501,7 @@ module Aws::Proton
     #   <p>The template type.</p>
     #   @return [String]
     class GetTemplateSyncConfigOperationInput < Struct.new(
+      nil,
       :template_name,
       :template_type,
       keyword_init: true
@@ -2399,6 +2513,7 @@ module Aws::Proton
     #   <p>The template sync configuration detail data that's returned by Proton.</p>
     #   @return [Types::TemplateSyncConfig]
     class GetTemplateSyncConfigOperationOutput < Struct.new(
+      nil,
       :template_sync_config,
       keyword_init: true
     )
@@ -2415,6 +2530,7 @@ module Aws::Proton
     #   <p>The template major version.</p>
     #   @return [String]
     class GetTemplateSyncStatusOperationInput < Struct.new(
+      nil,
       :template_name,
       :template_type,
       :template_version,
@@ -2433,6 +2549,7 @@ module Aws::Proton
     #   <p>The template sync desired state that's returned by Proton.</p>
     #   @return [Types::Revision]
     class GetTemplateSyncStatusOperationOutput < Struct.new(
+      nil,
       :latest_sync,
       :latest_successful_sync,
       :desired_state,
@@ -2445,6 +2562,7 @@ module Aws::Proton
     # @!attribute message
     #   @return [String]
     class InternalServerException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -2461,6 +2579,7 @@ module Aws::Proton
     #   <p>The ID of the deployment whose outputs you want.</p>
     #   @return [String]
     class ListComponentOutputsOperationInput < Struct.new(
+      nil,
       :component_name,
       :next_token,
       :deployment_id,
@@ -2476,6 +2595,7 @@ module Aws::Proton
     #   <p>An array of component Infrastructure as Code (IaC) outputs.</p>
     #   @return [Array<Types::Output>]
     class ListComponentOutputsOperationOutput < Struct.new(
+      nil,
       :next_token,
       :outputs,
       keyword_init: true
@@ -2491,6 +2611,7 @@ module Aws::Proton
     #         that was previously requested.</p>
     #   @return [String]
     class ListComponentProvisionedResourcesOperationInput < Struct.new(
+      nil,
       :component_name,
       :next_token,
       keyword_init: true
@@ -2506,6 +2627,7 @@ module Aws::Proton
     #   <p>An array of provisioned resources for a component.</p>
     #   @return [Array<Types::ProvisionedResource>]
     class ListComponentProvisionedResourcesOperationOutput < Struct.new(
+      nil,
       :next_token,
       :provisioned_resources,
       keyword_init: true
@@ -2531,6 +2653,7 @@ module Aws::Proton
     #   <p>The maximum number of components to list.</p>
     #   @return [Integer]
     class ListComponentsOperationInput < Struct.new(
+      nil,
       :next_token,
       :environment_name,
       :service_name,
@@ -2548,6 +2671,7 @@ module Aws::Proton
     #   <p>An array of components with summary data.</p>
     #   @return [Array<Types::ComponentSummary>]
     class ListComponentsOperationOutput < Struct.new(
+      nil,
       :next_token,
       :components,
       keyword_init: true
@@ -2575,6 +2699,7 @@ module Aws::Proton
     #   <p>The maximum number of deployments to list.</p>
     #   @return [Integer]
     class ListDeploymentsInput < Struct.new(
+      nil,
       :next_token,
       :environment_name,
       :service_name,
@@ -2593,6 +2718,7 @@ module Aws::Proton
     #   <p>An array of deployment with summary data.</p>
     #   @return [Array<Types::DeploymentSummary>]
     class ListDeploymentsOutput < Struct.new(
+      nil,
       :next_token,
       :deployments,
       keyword_init: true
@@ -2617,6 +2743,7 @@ module Aws::Proton
     #   <p>The maximum number of environment account connections to list.</p>
     #   @return [Integer]
     class ListEnvironmentAccountConnectionsOperationInput < Struct.new(
+      nil,
       :requested_by,
       :environment_name,
       :statuses,
@@ -2635,6 +2762,7 @@ module Aws::Proton
     #         requested list of environment account connections.</p>
     #   @return [String]
     class ListEnvironmentAccountConnectionsOperationOutput < Struct.new(
+      nil,
       :environment_account_connections,
       :next_token,
       keyword_init: true
@@ -2653,6 +2781,7 @@ module Aws::Proton
     #   <p>The ID of the deployment whose outputs you want.</p>
     #   @return [String]
     class ListEnvironmentOutputsOperationInput < Struct.new(
+      nil,
       :environment_name,
       :next_token,
       :deployment_id,
@@ -2669,6 +2798,7 @@ module Aws::Proton
     #   <p>An array of environment outputs with detail data.</p>
     #   @return [Array<Types::Output>]
     class ListEnvironmentOutputsOperationOutput < Struct.new(
+      nil,
       :next_token,
       :outputs,
       keyword_init: true
@@ -2684,6 +2814,7 @@ module Aws::Proton
     #         environment provisioned resources that was previously requested.</p>
     #   @return [String]
     class ListEnvironmentProvisionedResourcesOperationInput < Struct.new(
+      nil,
       :environment_name,
       :next_token,
       keyword_init: true
@@ -2699,6 +2830,7 @@ module Aws::Proton
     #   <p>An array of environment provisioned resources.</p>
     #   @return [Array<Types::ProvisionedResource>]
     class ListEnvironmentProvisionedResourcesOperationOutput < Struct.new(
+      nil,
       :next_token,
       :provisioned_resources,
       keyword_init: true
@@ -2722,6 +2854,7 @@ module Aws::Proton
     #               <code>major Version</code>.</p>
     #   @return [String]
     class ListEnvironmentTemplateVersionsOperationInput < Struct.new(
+      nil,
       :next_token,
       :max_results,
       :template_name,
@@ -2739,6 +2872,7 @@ module Aws::Proton
     #   <p>An array of major or minor versions of an environment template detail data.</p>
     #   @return [Array<Types::EnvironmentTemplateVersionSummary>]
     class ListEnvironmentTemplateVersionsOperationOutput < Struct.new(
+      nil,
       :next_token,
       :template_versions,
       keyword_init: true
@@ -2754,6 +2888,7 @@ module Aws::Proton
     #   <p>The maximum number of environment templates to list.</p>
     #   @return [Integer]
     class ListEnvironmentTemplatesOperationInput < Struct.new(
+      nil,
       :next_token,
       :max_results,
       keyword_init: true
@@ -2769,6 +2904,7 @@ module Aws::Proton
     #   <p>An array of environment templates with detail data.</p>
     #   @return [Array<Types::EnvironmentTemplateSummary>]
     class ListEnvironmentTemplatesOperationOutput < Struct.new(
+      nil,
       :next_token,
       :templates,
       keyword_init: true
@@ -2787,6 +2923,7 @@ module Aws::Proton
     #   <p>An array of the versions of the environment template.</p>
     #   @return [Array<Types::EnvironmentTemplateFilter>]
     class ListEnvironmentsOperationInput < Struct.new(
+      nil,
       :next_token,
       :max_results,
       :environment_templates,
@@ -2802,6 +2939,7 @@ module Aws::Proton
     #   <p>An array of environment detail data summaries.</p>
     #   @return [Array<Types::EnvironmentSummary>]
     class ListEnvironmentsOperationOutput < Struct.new(
+      nil,
       :next_token,
       :environments,
       keyword_init: true
@@ -2816,6 +2954,7 @@ module Aws::Proton
     #   <p>The maximum number of repositories to list.</p>
     #   @return [Integer]
     class ListRepositoriesOperationInput < Struct.new(
+      nil,
       :next_token,
       :max_results,
       keyword_init: true
@@ -2830,6 +2969,7 @@ module Aws::Proton
     #   <p>An array of repository links.</p>
     #   @return [Array<Types::RepositorySummary>]
     class ListRepositoriesOperationOutput < Struct.new(
+      nil,
       :next_token,
       :repositories,
       keyword_init: true
@@ -2851,6 +2991,7 @@ module Aws::Proton
     #         sync definitions previously requested.</p>
     #   @return [String]
     class ListRepositorySyncDefinitionsOperationInput < Struct.new(
+      nil,
       :repository_name,
       :repository_provider,
       :sync_type,
@@ -2868,6 +3009,7 @@ module Aws::Proton
     #   <p>An array of repository sync definitions.</p>
     #   @return [Array<Types::RepositorySyncDefinition>]
     class ListRepositorySyncDefinitionsOperationOutput < Struct.new(
+      nil,
       :next_token,
       :sync_definitions,
       keyword_init: true
@@ -2889,6 +3031,7 @@ module Aws::Proton
     #   <p>The ID of the deployment whose outputs you want.</p>
     #   @return [String]
     class ListServiceInstanceOutputsOperationInput < Struct.new(
+      nil,
       :service_instance_name,
       :service_name,
       :next_token,
@@ -2906,6 +3049,7 @@ module Aws::Proton
     #   <p>An array of service instance Infrastructure as Code (IaC) outputs.</p>
     #   @return [Array<Types::Output>]
     class ListServiceInstanceOutputsOperationOutput < Struct.new(
+      nil,
       :next_token,
       :outputs,
       keyword_init: true
@@ -2925,6 +3069,7 @@ module Aws::Proton
     #         requested.</p>
     #   @return [String]
     class ListServiceInstanceProvisionedResourcesOperationInput < Struct.new(
+      nil,
       :service_name,
       :service_instance_name,
       :next_token,
@@ -2941,6 +3086,7 @@ module Aws::Proton
     #   <p>An array of provisioned resources for a service instance.</p>
     #   @return [Array<Types::ProvisionedResource>]
     class ListServiceInstanceProvisionedResourcesOperationOutput < Struct.new(
+      nil,
       :next_token,
       :provisioned_resources,
       keyword_init: true
@@ -2959,6 +3105,7 @@ module Aws::Proton
     #           <code>1985-04-12T23:20:50.52Z</code>).</p>
     #   @return [String]
     class ListServiceInstancesFilter < Struct.new(
+      nil,
       :key,
       :value,
       keyword_init: true
@@ -2993,6 +3140,7 @@ module Aws::Proton
     #            </p>
     #   @return [String]
     class ListServiceInstancesOperationInput < Struct.new(
+      nil,
       :service_name,
       :next_token,
       :max_results,
@@ -3012,6 +3160,7 @@ module Aws::Proton
     #   <p>An array of service instances with summary data.</p>
     #   @return [Array<Types::ServiceInstanceSummary>]
     class ListServiceInstancesOperationOutput < Struct.new(
+      nil,
       :next_token,
       :service_instances,
       keyword_init: true
@@ -3030,6 +3179,7 @@ module Aws::Proton
     #   <p>The ID of the deployment you want the outputs for.</p>
     #   @return [String]
     class ListServicePipelineOutputsOperationInput < Struct.new(
+      nil,
       :service_name,
       :next_token,
       :deployment_id,
@@ -3046,6 +3196,7 @@ module Aws::Proton
     #   <p>An array of service pipeline Infrastructure as Code (IaC) outputs.</p>
     #   @return [Array<Types::Output>]
     class ListServicePipelineOutputsOperationOutput < Struct.new(
+      nil,
       :next_token,
       :outputs,
       keyword_init: true
@@ -3062,6 +3213,7 @@ module Aws::Proton
     #         requested.</p>
     #   @return [String]
     class ListServicePipelineProvisionedResourcesOperationInput < Struct.new(
+      nil,
       :service_name,
       :next_token,
       keyword_init: true
@@ -3077,6 +3229,7 @@ module Aws::Proton
     #   <p>An array of provisioned resources for a service and pipeline.</p>
     #   @return [Array<Types::ProvisionedResource>]
     class ListServicePipelineProvisionedResourcesOperationOutput < Struct.new(
+      nil,
       :next_token,
       :provisioned_resources,
       keyword_init: true
@@ -3102,6 +3255,7 @@ module Aws::Proton
     #               <code>major Version</code>.</p>
     #   @return [String]
     class ListServiceTemplateVersionsOperationInput < Struct.new(
+      nil,
       :next_token,
       :max_results,
       :template_name,
@@ -3120,6 +3274,7 @@ module Aws::Proton
     #   <p>An array of major or minor versions of a service template with detail data.</p>
     #   @return [Array<Types::ServiceTemplateVersionSummary>]
     class ListServiceTemplateVersionsOperationOutput < Struct.new(
+      nil,
       :next_token,
       :template_versions,
       keyword_init: true
@@ -3135,6 +3290,7 @@ module Aws::Proton
     #   <p>The maximum number of service templates to list.</p>
     #   @return [Integer]
     class ListServiceTemplatesOperationInput < Struct.new(
+      nil,
       :next_token,
       :max_results,
       keyword_init: true
@@ -3150,6 +3306,7 @@ module Aws::Proton
     #   <p>An array of service templates with detail data.</p>
     #   @return [Array<Types::ServiceTemplateSummary>]
     class ListServiceTemplatesOperationOutput < Struct.new(
+      nil,
       :next_token,
       :templates,
       keyword_init: true
@@ -3165,6 +3322,7 @@ module Aws::Proton
     #   <p>The maximum number of services to list.</p>
     #   @return [Integer]
     class ListServicesOperationInput < Struct.new(
+      nil,
       :next_token,
       :max_results,
       keyword_init: true
@@ -3180,6 +3338,7 @@ module Aws::Proton
     #   <p>An array of services with summaries of detail data.</p>
     #   @return [Array<Types::ServiceSummary>]
     class ListServicesOperationOutput < Struct.new(
+      nil,
       :next_token,
       :services,
       keyword_init: true
@@ -3198,6 +3357,7 @@ module Aws::Proton
     #   <p>The maximum number of tags to list.</p>
     #   @return [Integer]
     class ListTagsForResourceOperationInput < Struct.new(
+      nil,
       :resource_arn,
       :next_token,
       :max_results,
@@ -3214,6 +3374,7 @@ module Aws::Proton
     #      tags.</p>
     #   @return [String]
     class ListTagsForResourceOperationOutput < Struct.new(
+      nil,
       :tags,
       :next_token,
       keyword_init: true
@@ -3237,6 +3398,7 @@ module Aws::Proton
     #   <p>The deployment status message for your provisioned resource.</p>
     #   @return [String]
     class NotifyResourceDeploymentStatusChangeOperationInput < Struct.new(
+      nil,
       :resource_arn,
       :status,
       :outputs,
@@ -3248,6 +3410,7 @@ module Aws::Proton
     end
 
     class NotifyResourceDeploymentStatusChangeOperationOutput < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -3262,6 +3425,7 @@ module Aws::Proton
     #   <p>The output value.</p>
     #   @return [String]
     class Output < Struct.new(
+      nil,
       :key,
       :value_string,
       keyword_init: true
@@ -3282,6 +3446,7 @@ module Aws::Proton
     #            <p>For more information, see <a href="https://docs.aws.amazon.com/proton/latest/userguide/ag-works-prov-methods.html#ag-works-prov-methods-self">Self-managed provisioning</a> in the <i>Proton User Guide</i>.</p>
     #   @return [String]
     class ProvisionedResource < Struct.new(
+      nil,
       :name,
       :identifier,
       :provisioning_engine,
@@ -3294,6 +3459,7 @@ module Aws::Proton
     #   <p>The ID of the environment account connection to reject.</p>
     #   @return [String]
     class RejectEnvironmentAccountConnectionOperationInput < Struct.new(
+      nil,
       :id,
       keyword_init: true
     )
@@ -3304,6 +3470,7 @@ module Aws::Proton
     #   <p>The environment connection account detail data that's returned by Proton.</p>
     #   @return [Types::EnvironmentAccountConnection]
     class RejectEnvironmentAccountConnectionOperationOutput < Struct.new(
+      nil,
       :environment_account_connection,
       keyword_init: true
     )
@@ -3327,6 +3494,7 @@ module Aws::Proton
     #   <p>Your customer Amazon Web Services KMS encryption key.</p>
     #   @return [String]
     class Repository < Struct.new(
+      nil,
       :arn,
       :provider,
       :name,
@@ -3351,6 +3519,7 @@ module Aws::Proton
     #   <p>The repository branch.</p>
     #   @return [String]
     class RepositoryBranch < Struct.new(
+      nil,
       :arn,
       :provider,
       :name,
@@ -3371,6 +3540,7 @@ module Aws::Proton
     #   <p>The repository branch.</p>
     #   @return [String]
     class RepositoryBranchInput < Struct.new(
+      nil,
       :provider,
       :name,
       :branch,
@@ -3393,6 +3563,7 @@ module Aws::Proton
     #   <p>The Amazon Resource Name (ARN) of the of your connection that connects Proton to your repository.</p>
     #   @return [String]
     class RepositorySummary < Struct.new(
+      nil,
       :arn,
       :provider,
       :name,
@@ -3413,6 +3584,7 @@ module Aws::Proton
     #   <p>Detail data for sync attempt events.</p>
     #   @return [Array<Types::RepositorySyncEvent>]
     class RepositorySyncAttempt < Struct.new(
+      nil,
       :started_at,
       :status,
       :events,
@@ -3435,6 +3607,7 @@ module Aws::Proton
     #   <p>The directory in the repository.</p>
     #   @return [String]
     class RepositorySyncDefinition < Struct.new(
+      nil,
       :target,
       :parent,
       :branch,
@@ -3458,6 +3631,7 @@ module Aws::Proton
     #   <p>Event detail for a repository sync attempt.</p>
     #   @return [String]
     class RepositorySyncEvent < Struct.new(
+      nil,
       :type,
       :external_id,
       :time,
@@ -3484,6 +3658,7 @@ module Aws::Proton
     #   <p>The number of resources of this type in the Amazon Web Services account that need a minor template version update.</p>
     #   @return [Integer]
     class ResourceCountsSummary < Struct.new(
+      nil,
       :total,
       :failed,
       :up_to_date,
@@ -3498,6 +3673,7 @@ module Aws::Proton
     # @!attribute message
     #   @return [String]
     class ResourceNotFoundException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -3524,6 +3700,7 @@ module Aws::Proton
     #   <p>An array of events with detail data.</p>
     #   @return [Array<Types::ResourceSyncEvent>]
     class ResourceSyncAttempt < Struct.new(
+      nil,
       :initial_revision,
       :target_revision,
       :target,
@@ -3549,6 +3726,7 @@ module Aws::Proton
     #   <p>A resource sync event.</p>
     #   @return [String]
     class ResourceSyncEvent < Struct.new(
+      nil,
       :type,
       :external_id,
       :time,
@@ -3575,6 +3753,7 @@ module Aws::Proton
     #   <p>The repository branch.</p>
     #   @return [String]
     class Revision < Struct.new(
+      nil,
       :repository_name,
       :repository_provider,
       :sha,
@@ -3593,6 +3772,7 @@ module Aws::Proton
     #   <p>The path to the S3 bucket that contains a template bundle.</p>
     #   @return [String]
     class S3ObjectSource < Struct.new(
+      nil,
       :bucket,
       :key,
       keyword_init: true
@@ -3644,6 +3824,7 @@ module Aws::Proton
     #         Proton.</p>
     #   @return [String]
     class Service < Struct.new(
+      nil,
       :name,
       :description,
       :arn,
@@ -3714,6 +3895,7 @@ module Aws::Proton
     #   <p>The ID of the last successful deployment of this service instance.</p>
     #   @return [String]
     class ServiceInstance < Struct.new(
+      nil,
       :name,
       :arn,
       :created_at,
@@ -3760,6 +3942,7 @@ module Aws::Proton
     #   <p>The ID for the last successful service pipeline deployed for this service instance.</p>
     #   @return [String]
     class ServiceInstanceState < Struct.new(
+      nil,
       :spec,
       :template_name,
       :template_major_version,
@@ -3816,6 +3999,7 @@ module Aws::Proton
     #   <p>The ID of the last successful deployment of this service instance.</p>
     #   @return [String]
     class ServiceInstanceSummary < Struct.new(
+      nil,
       :name,
       :arn,
       :created_at,
@@ -3875,6 +4059,7 @@ module Aws::Proton
     #   <p>The ID of the last successful deployment of this service pipeline.</p>
     #   @return [String]
     class ServicePipeline < Struct.new(
+      nil,
       :arn,
       :created_at,
       :last_deployment_attempted_at,
@@ -3908,6 +4093,7 @@ module Aws::Proton
     #         pipeline.</p>
     #   @return [String]
     class ServicePipelineState < Struct.new(
+      nil,
       :spec,
       :template_name,
       :template_major_version,
@@ -3922,6 +4108,7 @@ module Aws::Proton
     # @!attribute message
     #   @return [String]
     class ServiceQuotaExceededException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -3954,6 +4141,7 @@ module Aws::Proton
     #   <p>A service status message.</p>
     #   @return [String]
     class ServiceSummary < Struct.new(
+      nil,
       :name,
       :description,
       :arn,
@@ -3988,6 +4176,7 @@ module Aws::Proton
     #   <p>The latest active blockers for the synced service.</p>
     #   @return [Array<Types::SyncBlocker>]
     class ServiceSyncBlockerSummary < Struct.new(
+      nil,
       :service_name,
       :service_instance_name,
       :latest_blockers,
@@ -4016,6 +4205,7 @@ module Aws::Proton
     #   <p>The file path to the service sync configuration file.</p>
     #   @return [String]
     class ServiceSyncConfig < Struct.new(
+      nil,
       :service_name,
       :repository_provider,
       :repository_name,
@@ -4057,6 +4247,7 @@ module Aws::Proton
     #         the service template.</p>
     #   @return [String]
     class ServiceTemplate < Struct.new(
+      nil,
       :name,
       :arn,
       :created_at,
@@ -4099,6 +4290,7 @@ module Aws::Proton
     #         the service template.</p>
     #   @return [String]
     class ServiceTemplateSummary < Struct.new(
+      nil,
       :name,
       :arn,
       :created_at,
@@ -4158,6 +4350,7 @@ module Aws::Proton
     #     <i>Proton User Guide</i>.</p>
     #   @return [Array<String>]
     class ServiceTemplateVersion < Struct.new(
+      nil,
       :template_name,
       :major_version,
       :minor_version,
@@ -4208,6 +4401,7 @@ module Aws::Proton
     #   <p>The time when the version of a service template was last modified.</p>
     #   @return [Time]
     class ServiceTemplateVersionSummary < Struct.new(
+      nil,
       :template_name,
       :major_version,
       :minor_version,
@@ -4249,6 +4443,7 @@ module Aws::Proton
     #   <p>The time the sync blocker was resolved.</p>
     #   @return [Time]
     class SyncBlocker < Struct.new(
+      nil,
       :id,
       :type,
       :status,
@@ -4270,6 +4465,7 @@ module Aws::Proton
     #   <p>The value of the sync blocker context.</p>
     #   @return [String]
     class SyncBlockerContext < Struct.new(
+      nil,
       :key,
       :value,
       keyword_init: true
@@ -4285,6 +4481,7 @@ module Aws::Proton
     #   <p>The value of the resource tag.</p>
     #   @return [String]
     class Tag < Struct.new(
+      nil,
       :key,
       :value,
       keyword_init: true
@@ -4299,6 +4496,7 @@ module Aws::Proton
     #   <p>A list of customer tags to apply to the Proton resource.</p>
     #   @return [Array<Types::Tag>]
     class TagResourceOperationInput < Struct.new(
+      nil,
       :resource_arn,
       :tags,
       keyword_init: true
@@ -4307,6 +4505,7 @@ module Aws::Proton
     end
 
     class TagResourceOperationOutput < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -4332,6 +4531,7 @@ module Aws::Proton
     #   <p>A subdirectory path to your template bundle version.</p>
     #   @return [String]
     class TemplateSyncConfig < Struct.new(
+      nil,
       :template_name,
       :template_type,
       :repository_provider,
@@ -4362,6 +4562,7 @@ module Aws::Proton
     # @!attribute message
     #   @return [String]
     class ThrottlingException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -4375,6 +4576,7 @@ module Aws::Proton
     #   <p>A list of customer tag keys that indicate the customer tags to be removed from the resource.</p>
     #   @return [Array<String>]
     class UntagResourceOperationInput < Struct.new(
+      nil,
       :resource_arn,
       :tag_keys,
       keyword_init: true
@@ -4383,6 +4585,7 @@ module Aws::Proton
     end
 
     class UntagResourceOperationOutput < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -4408,6 +4611,7 @@ module Aws::Proton
     #      provisioning.</p>
     #   @return [String]
     class UpdateAccountSettingsOperationInput < Struct.new(
+      nil,
       :pipeline_service_role_arn,
       :pipeline_provisioning_repository,
       :delete_pipeline_provisioning_repository,
@@ -4421,6 +4625,7 @@ module Aws::Proton
     #   <p>The Proton pipeline service role and repository data shared across the Amazon Web Services account.</p>
     #   @return [Types::AccountSettings]
     class UpdateAccountSettingsOperationOutput < Struct.new(
+      nil,
       :account_settings,
       keyword_init: true
     )
@@ -4478,6 +4683,7 @@ module Aws::Proton
     #   <p>The client token for the updated component.</p>
     #   @return [String]
     class UpdateComponentOperationInput < Struct.new(
+      nil,
       :name,
       :deployment_type,
       :description,
@@ -4495,6 +4701,7 @@ module Aws::Proton
     #   <p>The detailed data of the updated component.</p>
     #   @return [Types::Component]
     class UpdateComponentOperationOutput < Struct.new(
+      nil,
       :component,
       keyword_init: true
     )
@@ -4521,6 +4728,7 @@ module Aws::Proton
     #         using CodeBuild-based provisioning in the associated environment account.</p>
     #   @return [String]
     class UpdateEnvironmentAccountConnectionOperationInput < Struct.new(
+      nil,
       :id,
       :role_arn,
       :component_role_arn,
@@ -4534,6 +4742,7 @@ module Aws::Proton
     #   <p>The environment account connection detail data that's returned by Proton.</p>
     #   @return [Types::EnvironmentAccountConnection]
     class UpdateEnvironmentAccountConnectionOperationOutput < Struct.new(
+      nil,
       :environment_account_connection,
       keyword_init: true
     )
@@ -4616,6 +4825,7 @@ module Aws::Proton
     #         behalf.</p>
     #   @return [String]
     class UpdateEnvironmentOperationInput < Struct.new(
+      nil,
       :name,
       :description,
       :spec,
@@ -4636,6 +4846,7 @@ module Aws::Proton
     #   <p>The environment detail data that's returned by Proton.</p>
     #   @return [Types::Environment]
     class UpdateEnvironmentOperationOutput < Struct.new(
+      nil,
       :environment,
       keyword_init: true
     )
@@ -4652,6 +4863,7 @@ module Aws::Proton
     #   <p>A description of the environment template update.</p>
     #   @return [String]
     class UpdateEnvironmentTemplateOperationInput < Struct.new(
+      nil,
       :name,
       :display_name,
       :description,
@@ -4664,6 +4876,7 @@ module Aws::Proton
     #   <p>The environment template detail data that's returned by Proton.</p>
     #   @return [Types::EnvironmentTemplate]
     class UpdateEnvironmentTemplateOperationOutput < Struct.new(
+      nil,
       :environment_template,
       keyword_init: true
     )
@@ -4686,6 +4899,7 @@ module Aws::Proton
     #   <p>The status of the environment template minor version to update.</p>
     #   @return [String]
     class UpdateEnvironmentTemplateVersionOperationInput < Struct.new(
+      nil,
       :template_name,
       :major_version,
       :minor_version,
@@ -4700,6 +4914,7 @@ module Aws::Proton
     #   <p>The environment template version detail data that's returned by Proton.</p>
     #   @return [Types::EnvironmentTemplateVersion]
     class UpdateEnvironmentTemplateVersionOperationOutput < Struct.new(
+      nil,
       :environment_template_version,
       keyword_init: true
     )
@@ -4767,6 +4982,7 @@ module Aws::Proton
     #   <p>The client token of the service instance to update.</p>
     #   @return [String]
     class UpdateServiceInstanceOperationInput < Struct.new(
+      nil,
       :name,
       :service_name,
       :deployment_type,
@@ -4783,6 +4999,7 @@ module Aws::Proton
     #   <p>The service instance summary data that's returned by Proton.</p>
     #   @return [Types::ServiceInstance]
     class UpdateServiceInstanceOperationOutput < Struct.new(
+      nil,
       :service_instance,
       keyword_init: true
     )
@@ -4802,6 +5019,7 @@ module Aws::Proton
     #         in the <i>Proton User Guide</i>.</p>
     #   @return [String]
     class UpdateServiceOperationInput < Struct.new(
+      nil,
       :name,
       :description,
       :spec,
@@ -4814,6 +5032,7 @@ module Aws::Proton
     #   <p>The service detail data that's returned by Proton.</p>
     #   @return [Types::Service]
     class UpdateServiceOperationOutput < Struct.new(
+      nil,
       :service,
       keyword_init: true
     )
@@ -4878,6 +5097,7 @@ module Aws::Proton
     #         pipeline is associated with.</p>
     #   @return [String]
     class UpdateServicePipelineOperationInput < Struct.new(
+      nil,
       :service_name,
       :spec,
       :deployment_type,
@@ -4892,6 +5112,7 @@ module Aws::Proton
     #   <p>The pipeline details that are returned by Proton.</p>
     #   @return [Types::ServicePipeline]
     class UpdateServicePipelineOperationOutput < Struct.new(
+      nil,
       :pipeline,
       keyword_init: true
     )
@@ -4905,6 +5126,7 @@ module Aws::Proton
     #   <p>The reason the service sync blocker was resolved.</p>
     #   @return [String]
     class UpdateServiceSyncBlockerOperationInput < Struct.new(
+      nil,
       :id,
       :resolved_reason,
       keyword_init: true
@@ -4923,6 +5145,7 @@ module Aws::Proton
     #   <p>The detailed data on the service sync blocker that was updated.</p>
     #   @return [Types::SyncBlocker]
     class UpdateServiceSyncBlockerOperationOutput < Struct.new(
+      nil,
       :service_name,
       :service_instance_name,
       :service_sync_blocker,
@@ -4947,6 +5170,7 @@ module Aws::Proton
     #   <p>The path to the Proton Ops file.</p>
     #   @return [String]
     class UpdateServiceSyncConfigOperationInput < Struct.new(
+      nil,
       :service_name,
       :repository_provider,
       :repository_name,
@@ -4961,6 +5185,7 @@ module Aws::Proton
     #   <p>The detailed data of the Proton Ops file.</p>
     #   @return [Types::ServiceSyncConfig]
     class UpdateServiceSyncConfigOperationOutput < Struct.new(
+      nil,
       :service_sync_config,
       keyword_init: true
     )
@@ -4978,6 +5203,7 @@ module Aws::Proton
     #   <p>A description of the service template update.</p>
     #   @return [String]
     class UpdateServiceTemplateOperationInput < Struct.new(
+      nil,
       :name,
       :display_name,
       :description,
@@ -4990,6 +5216,7 @@ module Aws::Proton
     #   <p>The service template detail data that's returned by Proton.</p>
     #   @return [Types::ServiceTemplate]
     class UpdateServiceTemplateOperationOutput < Struct.new(
+      nil,
       :service_template,
       keyword_init: true
     )
@@ -5030,6 +5257,7 @@ module Aws::Proton
     #     <i>Proton User Guide</i>.</p>
     #   @return [Array<String>]
     class UpdateServiceTemplateVersionOperationInput < Struct.new(
+      nil,
       :template_name,
       :major_version,
       :minor_version,
@@ -5046,6 +5274,7 @@ module Aws::Proton
     #   <p>The service template version detail data that's returned by Proton.</p>
     #   @return [Types::ServiceTemplateVersion]
     class UpdateServiceTemplateVersionOperationOutput < Struct.new(
+      nil,
       :service_template_version,
       keyword_init: true
     )
@@ -5071,6 +5300,7 @@ module Aws::Proton
     #   <p>A subdirectory path to your template bundle version. When included, limits the template bundle search to this repository directory.</p>
     #   @return [String]
     class UpdateTemplateSyncConfigOperationInput < Struct.new(
+      nil,
       :template_name,
       :template_type,
       :repository_provider,
@@ -5086,6 +5316,7 @@ module Aws::Proton
     #   <p>The template sync configuration detail data that's returned by Proton.</p>
     #   @return [Types::TemplateSyncConfig]
     class UpdateTemplateSyncConfigOperationOutput < Struct.new(
+      nil,
       :template_sync_config,
       keyword_init: true
     )
@@ -5096,6 +5327,7 @@ module Aws::Proton
     # @!attribute message
     #   @return [String]
     class ValidationException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )

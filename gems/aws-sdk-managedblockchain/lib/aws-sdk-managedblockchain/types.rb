@@ -10,6 +10,7 @@ module Aws::ManagedBlockchain
     # @!attribute message
     #   @return [String]
     class AccessDeniedException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -50,6 +51,7 @@ module Aws::ManagedBlockchain
     #   <p>The blockchain network that the Accessor token is created for.</p>
     #   @return [String]
     class Accessor < Struct.new(
+      nil,
       :id,
       :type,
       :billing_token,
@@ -88,6 +90,7 @@ module Aws::ManagedBlockchain
     #   <p>The blockchain network that the Accessor token is created for.</p>
     #   @return [String]
     class AccessorSummary < Struct.new(
+      nil,
       :id,
       :type,
       :status,
@@ -113,6 +116,7 @@ module Aws::ManagedBlockchain
     #               <code>ThresholdPercentage</code> to be approved.</p>
     #   @return [String]
     class ApprovalThresholdPolicy < Struct.new(
+      nil,
       :threshold_percentage,
       :proposal_duration_in_hours,
       :threshold_comparator,
@@ -177,6 +181,7 @@ module Aws::ManagedBlockchain
     #            </note>
     #   @return [String]
     class CreateAccessorInput < Struct.new(
+      nil,
       :client_request_token,
       :accessor_type,
       :tags,
@@ -198,6 +203,7 @@ module Aws::ManagedBlockchain
     #   <p>The blockchain network that the accessor token is created for.</p>
     #   @return [String]
     class CreateAccessorOutput < Struct.new(
+      nil,
       :accessor_id,
       :billing_token,
       :network_type,
@@ -219,6 +225,7 @@ module Aws::ManagedBlockchain
     #   <p>Member configuration parameters.</p>
     #   @return [Types::MemberConfiguration]
     class CreateMemberInput < Struct.new(
+      nil,
       :client_request_token,
       :invitation_id,
       :network_id,
@@ -232,6 +239,7 @@ module Aws::ManagedBlockchain
     #   <p>The unique identifier of the member.</p>
     #   @return [String]
     class CreateMemberOutput < Struct.new(
+      nil,
       :member_id,
       keyword_init: true
     )
@@ -278,6 +286,7 @@ module Aws::ManagedBlockchain
     #            <p>For more information about tags, see <a href="https://docs.aws.amazon.com/managed-blockchain/latest/ethereum-dev/tagging-resources.html">Tagging Resources</a> in the <i>Amazon Managed Blockchain Ethereum Developer Guide</i>, or <a href="https://docs.aws.amazon.com/managed-blockchain/latest/hyperledger-fabric-dev/tagging-resources.html">Tagging Resources</a> in the <i>Amazon Managed Blockchain Hyperledger Fabric Developer Guide</i>.</p>
     #   @return [Hash<String, String>]
     class CreateNetworkInput < Struct.new(
+      nil,
       :client_request_token,
       :name,
       :description,
@@ -299,6 +308,7 @@ module Aws::ManagedBlockchain
     #   <p>The unique identifier for the first member within the network.</p>
     #   @return [String]
     class CreateNetworkOutput < Struct.new(
+      nil,
       :network_id,
       :member_id,
       keyword_init: true
@@ -335,6 +345,7 @@ module Aws::ManagedBlockchain
     #            <p>For more information about tags, see <a href="https://docs.aws.amazon.com/managed-blockchain/latest/ethereum-dev/tagging-resources.html">Tagging Resources</a> in the <i>Amazon Managed Blockchain Ethereum Developer Guide</i>, or <a href="https://docs.aws.amazon.com/managed-blockchain/latest/hyperledger-fabric-dev/tagging-resources.html">Tagging Resources</a> in the <i>Amazon Managed Blockchain Hyperledger Fabric Developer Guide</i>.</p>
     #   @return [Hash<String, String>]
     class CreateNodeInput < Struct.new(
+      nil,
       :client_request_token,
       :network_id,
       :member_id,
@@ -349,6 +360,7 @@ module Aws::ManagedBlockchain
     #   <p>The unique identifier of the node.</p>
     #   @return [String]
     class CreateNodeOutput < Struct.new(
+      nil,
       :node_id,
       keyword_init: true
     )
@@ -381,6 +393,7 @@ module Aws::ManagedBlockchain
     #            <p>For more information about tags, see <a href="https://docs.aws.amazon.com/managed-blockchain/latest/ethereum-dev/tagging-resources.html">Tagging Resources</a> in the <i>Amazon Managed Blockchain Ethereum Developer Guide</i>, or <a href="https://docs.aws.amazon.com/managed-blockchain/latest/hyperledger-fabric-dev/tagging-resources.html">Tagging Resources</a> in the <i>Amazon Managed Blockchain Hyperledger Fabric Developer Guide</i>.</p>
     #   @return [Hash<String, String>]
     class CreateProposalInput < Struct.new(
+      nil,
       :client_request_token,
       :network_id,
       :member_id,
@@ -396,6 +409,7 @@ module Aws::ManagedBlockchain
     #   <p>The unique identifier of the proposal.</p>
     #   @return [String]
     class CreateProposalOutput < Struct.new(
+      nil,
       :proposal_id,
       keyword_init: true
     )
@@ -406,6 +420,7 @@ module Aws::ManagedBlockchain
     #   <p>The unique identifier of the accessor.</p>
     #   @return [String]
     class DeleteAccessorInput < Struct.new(
+      nil,
       :accessor_id,
       keyword_init: true
     )
@@ -413,6 +428,7 @@ module Aws::ManagedBlockchain
     end
 
     class DeleteAccessorOutput < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -425,6 +441,7 @@ module Aws::ManagedBlockchain
     #   <p>The unique identifier of the member to remove.</p>
     #   @return [String]
     class DeleteMemberInput < Struct.new(
+      nil,
       :network_id,
       :member_id,
       keyword_init: true
@@ -433,6 +450,7 @@ module Aws::ManagedBlockchain
     end
 
     class DeleteMemberOutput < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -457,6 +475,7 @@ module Aws::ManagedBlockchain
     #   <p>The unique identifier of the node.</p>
     #   @return [String]
     class DeleteNodeInput < Struct.new(
+      nil,
       :network_id,
       :member_id,
       :node_id,
@@ -466,6 +485,7 @@ module Aws::ManagedBlockchain
     end
 
     class DeleteNodeOutput < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -475,6 +495,7 @@ module Aws::ManagedBlockchain
     #   <p>The unique identifier of the accessor.</p>
     #   @return [String]
     class GetAccessorInput < Struct.new(
+      nil,
       :accessor_id,
       keyword_init: true
     )
@@ -485,6 +506,7 @@ module Aws::ManagedBlockchain
     #   <p>The properties of the accessor.</p>
     #   @return [Types::Accessor]
     class GetAccessorOutput < Struct.new(
+      nil,
       :accessor,
       keyword_init: true
     )
@@ -498,6 +520,7 @@ module Aws::ManagedBlockchain
     #   <p>The unique identifier of the member.</p>
     #   @return [String]
     class GetMemberInput < Struct.new(
+      nil,
       :network_id,
       :member_id,
       keyword_init: true
@@ -509,6 +532,7 @@ module Aws::ManagedBlockchain
     #   <p>The properties of a member.</p>
     #   @return [Types::Member]
     class GetMemberOutput < Struct.new(
+      nil,
       :member,
       keyword_init: true
     )
@@ -519,6 +543,7 @@ module Aws::ManagedBlockchain
     #   <p>The unique identifier of the network to get information about.</p>
     #   @return [String]
     class GetNetworkInput < Struct.new(
+      nil,
       :network_id,
       keyword_init: true
     )
@@ -529,6 +554,7 @@ module Aws::ManagedBlockchain
     #   <p>An object containing network configuration parameters.</p>
     #   @return [Types::Network]
     class GetNetworkOutput < Struct.new(
+      nil,
       :network,
       keyword_init: true
     )
@@ -546,6 +572,7 @@ module Aws::ManagedBlockchain
     #   <p>The unique identifier of the node.</p>
     #   @return [String]
     class GetNodeInput < Struct.new(
+      nil,
       :network_id,
       :member_id,
       :node_id,
@@ -558,6 +585,7 @@ module Aws::ManagedBlockchain
     #   <p>Properties of the node configuration.</p>
     #   @return [Types::Node]
     class GetNodeOutput < Struct.new(
+      nil,
       :node,
       keyword_init: true
     )
@@ -571,6 +599,7 @@ module Aws::ManagedBlockchain
     #   <p>The unique identifier of the proposal.</p>
     #   @return [String]
     class GetProposalInput < Struct.new(
+      nil,
       :network_id,
       :proposal_id,
       keyword_init: true
@@ -582,6 +611,7 @@ module Aws::ManagedBlockchain
     #   <p>Information about a proposal.</p>
     #   @return [Types::Proposal]
     class GetProposalOutput < Struct.new(
+      nil,
       :proposal,
       keyword_init: true
     )
@@ -592,6 +622,7 @@ module Aws::ManagedBlockchain
     # @!attribute message
     #   @return [String]
     class IllegalActionException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -600,6 +631,7 @@ module Aws::ManagedBlockchain
 
     # <p>The request processing has failed because of an unknown error, exception or failure.</p>
     class InternalServiceErrorException < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -609,6 +641,7 @@ module Aws::ManagedBlockchain
     # @!attribute message
     #   @return [String]
     class InvalidRequestException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -658,6 +691,7 @@ module Aws::ManagedBlockchain
     #   <p>The Amazon Resource Name (ARN) of the invitation. For more information about ARNs and their format, see <a href="https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html">Amazon Resource Names (ARNs)</a> in the <i>Amazon Web Services General Reference</i>.</p>
     #   @return [String]
     class Invitation < Struct.new(
+      nil,
       :invitation_id,
       :creation_date,
       :expiration_date,
@@ -675,6 +709,7 @@ module Aws::ManagedBlockchain
     #   <p>The Amazon Web Services account ID to invite.</p>
     #   @return [String]
     class InviteAction < Struct.new(
+      nil,
       :principal,
       keyword_init: true
     )
@@ -696,6 +731,7 @@ module Aws::ManagedBlockchain
     #            </note>
     #   @return [String]
     class ListAccessorsInput < Struct.new(
+      nil,
       :max_results,
       :next_token,
       :network_type,
@@ -712,6 +748,7 @@ module Aws::ManagedBlockchain
     #   <p> The pagination token that indicates the next set of results to retrieve. </p>
     #   @return [String]
     class ListAccessorsOutput < Struct.new(
+      nil,
       :accessors,
       :next_token,
       keyword_init: true
@@ -726,6 +763,7 @@ module Aws::ManagedBlockchain
     #   <p>The pagination token that indicates the next set of results to retrieve.</p>
     #   @return [String]
     class ListInvitationsInput < Struct.new(
+      nil,
       :max_results,
       :next_token,
       keyword_init: true
@@ -740,6 +778,7 @@ module Aws::ManagedBlockchain
     #   <p>The pagination token that indicates the next set of results to retrieve.</p>
     #   @return [String]
     class ListInvitationsOutput < Struct.new(
+      nil,
       :invitations,
       :next_token,
       keyword_init: true
@@ -768,6 +807,7 @@ module Aws::ManagedBlockchain
     #   <p>The pagination token that indicates the next set of results to retrieve.</p>
     #   @return [String]
     class ListMembersInput < Struct.new(
+      nil,
       :network_id,
       :name,
       :status,
@@ -786,6 +826,7 @@ module Aws::ManagedBlockchain
     #   <p>The pagination token that indicates the next set of results to retrieve.</p>
     #   @return [String]
     class ListMembersOutput < Struct.new(
+      nil,
       :members,
       :next_token,
       keyword_init: true
@@ -810,6 +851,7 @@ module Aws::ManagedBlockchain
     #   <p>The pagination token that indicates the next set of results to retrieve.</p>
     #   @return [String]
     class ListNetworksInput < Struct.new(
+      nil,
       :name,
       :framework,
       :status,
@@ -827,6 +869,7 @@ module Aws::ManagedBlockchain
     #   <p>The pagination token that indicates the next set of results to retrieve.</p>
     #   @return [String]
     class ListNetworksOutput < Struct.new(
+      nil,
       :networks,
       :next_token,
       keyword_init: true
@@ -851,6 +894,7 @@ module Aws::ManagedBlockchain
     #   <p>The pagination token that indicates the next set of results to retrieve.</p>
     #   @return [String]
     class ListNodesInput < Struct.new(
+      nil,
       :network_id,
       :member_id,
       :status,
@@ -868,6 +912,7 @@ module Aws::ManagedBlockchain
     #   <p>The pagination token that indicates the next set of results to retrieve.</p>
     #   @return [String]
     class ListNodesOutput < Struct.new(
+      nil,
       :nodes,
       :next_token,
       keyword_init: true
@@ -896,6 +941,7 @@ module Aws::ManagedBlockchain
     #         </p>
     #   @return [String]
     class ListProposalVotesInput < Struct.new(
+      nil,
       :network_id,
       :proposal_id,
       :max_results,
@@ -916,6 +962,7 @@ module Aws::ManagedBlockchain
     #         </p>
     #   @return [String]
     class ListProposalVotesOutput < Struct.new(
+      nil,
       :proposal_votes,
       :next_token,
       keyword_init: true
@@ -939,6 +986,7 @@ module Aws::ManagedBlockchain
     #         </p>
     #   @return [String]
     class ListProposalsInput < Struct.new(
+      nil,
       :network_id,
       :max_results,
       :next_token,
@@ -954,6 +1002,7 @@ module Aws::ManagedBlockchain
     #   <p>The pagination token that indicates the next set of results to retrieve.</p>
     #   @return [String]
     class ListProposalsOutput < Struct.new(
+      nil,
       :proposals,
       :next_token,
       keyword_init: true
@@ -965,6 +1014,7 @@ module Aws::ManagedBlockchain
     #   <p>The Amazon Resource Name (ARN) of the resource. For more information about ARNs and their format, see <a href="https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html">Amazon Resource Names (ARNs)</a> in the <i>Amazon Web Services General Reference</i>.</p>
     #   @return [String]
     class ListTagsForResourceRequest < Struct.new(
+      nil,
       :resource_arn,
       keyword_init: true
     )
@@ -975,6 +1025,7 @@ module Aws::ManagedBlockchain
     #   <p>The tags assigned to the resource.</p>
     #   @return [Hash<String, String>]
     class ListTagsForResourceResponse < Struct.new(
+      nil,
       :tags,
       keyword_init: true
     )
@@ -986,6 +1037,7 @@ module Aws::ManagedBlockchain
     #   <p>Indicates whether logging is enabled.</p>
     #   @return [Boolean]
     class LogConfiguration < Struct.new(
+      nil,
       :enabled,
       keyword_init: true
     )
@@ -997,6 +1049,7 @@ module Aws::ManagedBlockchain
     #   <p>Parameters for publishing logs to Amazon CloudWatch Logs.</p>
     #   @return [Types::LogConfiguration]
     class LogConfigurations < Struct.new(
+      nil,
       :cloudwatch,
       keyword_init: true
     )
@@ -1074,6 +1127,7 @@ module Aws::ManagedBlockchain
     #            <p>For more information, see <a href="https://docs.aws.amazon.com/managed-blockchain/latest/hyperledger-fabric-dev/managed-blockchain-encryption-at-rest.html">Encryption at Rest</a> in the <i>Amazon Managed Blockchain Hyperledger Fabric Developer Guide</i>.</p>
     #   @return [String]
     class Member < Struct.new(
+      nil,
       :network_id,
       :id,
       :name,
@@ -1127,6 +1181,7 @@ module Aws::ManagedBlockchain
     #            </ul>
     #   @return [String]
     class MemberConfiguration < Struct.new(
+      nil,
       :name,
       :description,
       :framework_configuration,
@@ -1146,6 +1201,7 @@ module Aws::ManagedBlockchain
     #   <p>The endpoint used to access the member's certificate authority.</p>
     #   @return [String]
     class MemberFabricAttributes < Struct.new(
+      nil,
       :admin_username,
       :ca_endpoint,
       keyword_init: true
@@ -1161,6 +1217,7 @@ module Aws::ManagedBlockchain
     #   <p>The password for the member's initial administrative user. The <code>AdminPassword</code> must be at least 8 characters long and no more than 32 characters. It must contain at least one uppercase letter, one lowercase letter, and one digit. It cannot have a single quotation mark (‘), a double quotation marks (“), a forward slash(/), a backward slash(\), @, or a space.</p>
     #   @return [String]
     class MemberFabricConfiguration < Struct.new(
+      nil,
       :admin_username,
       :admin_password,
       keyword_init: true
@@ -1173,6 +1230,7 @@ module Aws::ManagedBlockchain
     #   <p>Configuration properties for logging events associated with a member's Certificate Authority (CA). CA logs help you determine when a member in your account joins the network, or when new peers register with a member CA.</p>
     #   @return [Types::LogConfigurations]
     class MemberFabricLogPublishingConfiguration < Struct.new(
+      nil,
       :ca_logs,
       keyword_init: true
     )
@@ -1184,6 +1242,7 @@ module Aws::ManagedBlockchain
     #   <p>Attributes of Hyperledger Fabric relevant to a member on a Managed Blockchain network that uses Hyperledger Fabric.</p>
     #   @return [Types::MemberFabricAttributes]
     class MemberFrameworkAttributes < Struct.new(
+      nil,
       :fabric,
       keyword_init: true
     )
@@ -1195,6 +1254,7 @@ module Aws::ManagedBlockchain
     #   <p>Attributes of Hyperledger Fabric for a member on a Managed Blockchain network that uses Hyperledger Fabric.</p>
     #   @return [Types::MemberFabricConfiguration]
     class MemberFrameworkConfiguration < Struct.new(
+      nil,
       :fabric,
       keyword_init: true
     )
@@ -1206,6 +1266,7 @@ module Aws::ManagedBlockchain
     #   <p>Configuration properties for logging events associated with a member of a Managed Blockchain network using the Hyperledger Fabric framework.</p>
     #   @return [Types::MemberFabricLogPublishingConfiguration]
     class MemberLogPublishingConfiguration < Struct.new(
+      nil,
       :fabric,
       keyword_init: true
     )
@@ -1269,6 +1330,7 @@ module Aws::ManagedBlockchain
     #   <p>The Amazon Resource Name (ARN) of the member. For more information about ARNs and their format, see <a href="https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html">Amazon Resource Names (ARNs)</a> in the <i>Amazon Web Services General Reference</i>.</p>
     #   @return [String]
     class MemberSummary < Struct.new(
+      nil,
       :id,
       :name,
       :description,
@@ -1320,6 +1382,7 @@ module Aws::ManagedBlockchain
     #   <p>The Amazon Resource Name (ARN) of the network. For more information about ARNs and their format, see <a href="https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html">Amazon Resource Names (ARNs)</a> in the <i>Amazon Web Services General Reference</i>.</p>
     #   @return [String]
     class Network < Struct.new(
+      nil,
       :id,
       :name,
       :description,
@@ -1348,6 +1411,7 @@ module Aws::ManagedBlockchain
     #            </ul>
     #   @return [String]
     class NetworkEthereumAttributes < Struct.new(
+      nil,
       :chain_id,
       keyword_init: true
     )
@@ -1362,6 +1426,7 @@ module Aws::ManagedBlockchain
     #   <p>The edition of Amazon Managed Blockchain that Hyperledger Fabric uses. For more information, see <a href="http://aws.amazon.com/managed-blockchain/pricing/">Amazon Managed Blockchain Pricing</a>.</p>
     #   @return [String]
     class NetworkFabricAttributes < Struct.new(
+      nil,
       :ordering_service_endpoint,
       :edition,
       keyword_init: true
@@ -1374,6 +1439,7 @@ module Aws::ManagedBlockchain
     #   <p>The edition of Amazon Managed Blockchain that the network uses. For more information, see <a href="http://aws.amazon.com/managed-blockchain/pricing/">Amazon Managed Blockchain Pricing</a>.</p>
     #   @return [String]
     class NetworkFabricConfiguration < Struct.new(
+      nil,
       :edition,
       keyword_init: true
     )
@@ -1388,6 +1454,7 @@ module Aws::ManagedBlockchain
     #   <p>Attributes of an Ethereum network for Managed Blockchain resources participating in an Ethereum network. </p>
     #   @return [Types::NetworkEthereumAttributes]
     class NetworkFrameworkAttributes < Struct.new(
+      nil,
       :fabric,
       :ethereum,
       keyword_init: true
@@ -1404,6 +1471,7 @@ module Aws::ManagedBlockchain
     #         </p>
     #   @return [Types::NetworkFabricConfiguration]
     class NetworkFrameworkConfiguration < Struct.new(
+      nil,
       :fabric,
       keyword_init: true
     )
@@ -1436,6 +1504,7 @@ module Aws::ManagedBlockchain
     #   <p>The Amazon Resource Name (ARN) of the network. For more information about ARNs and their format, see <a href="https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html">Amazon Resource Names (ARNs)</a> in the <i>Amazon Web Services General Reference</i>.</p>
     #   @return [String]
     class NetworkSummary < Struct.new(
+      nil,
       :id,
       :name,
       :description,
@@ -1534,6 +1603,7 @@ module Aws::ManagedBlockchain
     #            <p>Applies only to Hyperledger Fabric.</p>
     #   @return [String]
     class Node < Struct.new(
+      nil,
       :network_id,
       :member_id,
       :id,
@@ -1568,6 +1638,7 @@ module Aws::ManagedBlockchain
     #            <p>Applies only to Hyperledger Fabric.</p>
     #   @return [String]
     class NodeConfiguration < Struct.new(
+      nil,
       :instance_type,
       :availability_zone,
       :log_publishing_configuration,
@@ -1585,6 +1656,7 @@ module Aws::ManagedBlockchain
     #   <p>The endpoint on which the Ethereum node listens to run Ethereum JSON-RPC methods over WebSocket connections from a client. Use this endpoint in client code for smart contracts when using a WebSocket connection. Connections to this endpoint are authenticated using <a href="https://docs.aws.amazon.com/general/latest/gr/signature-version-4.html">Signature Version 4</a>.</p>
     #   @return [String]
     class NodeEthereumAttributes < Struct.new(
+      nil,
       :http_endpoint,
       :web_socket_endpoint,
       keyword_init: true
@@ -1600,6 +1672,7 @@ module Aws::ManagedBlockchain
     #   <p>The endpoint that identifies the peer node for peer channel-based event services.</p>
     #   @return [String]
     class NodeFabricAttributes < Struct.new(
+      nil,
       :peer_endpoint,
       :peer_event_endpoint,
       keyword_init: true
@@ -1615,6 +1688,7 @@ module Aws::ManagedBlockchain
     #   <p>Configuration properties for a peer node log. Peer node logs contain messages generated when your client submits transaction proposals to peer nodes, requests to join channels, enrolls an admin peer, and lists the chaincode instances on a peer node. </p>
     #   @return [Types::LogConfigurations]
     class NodeFabricLogPublishingConfiguration < Struct.new(
+      nil,
       :chaincode_logs,
       :peer_logs,
       keyword_init: true
@@ -1630,6 +1704,7 @@ module Aws::ManagedBlockchain
     #   <p>Attributes of Ethereum for a node on a Managed Blockchain network that uses Ethereum. </p>
     #   @return [Types::NodeEthereumAttributes]
     class NodeFrameworkAttributes < Struct.new(
+      nil,
       :fabric,
       :ethereum,
       keyword_init: true
@@ -1642,6 +1717,7 @@ module Aws::ManagedBlockchain
     #   <p>Configuration properties for logging events associated with a node that is owned by a member of a Managed Blockchain network using the Hyperledger Fabric framework.</p>
     #   @return [Types::NodeFabricLogPublishingConfiguration]
     class NodeLogPublishingConfiguration < Struct.new(
+      nil,
       :fabric,
       keyword_init: true
     )
@@ -1668,6 +1744,7 @@ module Aws::ManagedBlockchain
     #   <p>The Amazon Resource Name (ARN) of the node. For more information about ARNs and their format, see <a href="https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html">Amazon Resource Names (ARNs)</a> in the <i>Amazon Web Services General Reference</i>.</p>
     #   @return [String]
     class NodeSummary < Struct.new(
+      nil,
       :id,
       :status,
       :creation_date,
@@ -1757,6 +1834,7 @@ module Aws::ManagedBlockchain
     #   <p>The Amazon Resource Name (ARN) of the proposal. For more information about ARNs and their format, see <a href="https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html">Amazon Resource Names (ARNs)</a> in the <i>Amazon Web Services General Reference</i>.</p>
     #   @return [String]
     class Proposal < Struct.new(
+      nil,
       :proposal_id,
       :network_id,
       :description,
@@ -1791,6 +1869,7 @@ module Aws::ManagedBlockchain
     #         </p>
     #   @return [Array<Types::RemoveAction>]
     class ProposalActions < Struct.new(
+      nil,
       :invitations,
       :removals,
       keyword_init: true
@@ -1859,6 +1938,7 @@ module Aws::ManagedBlockchain
     #   <p>The Amazon Resource Name (ARN) of the proposal. For more information about ARNs and their format, see <a href="https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html">Amazon Resource Names (ARNs)</a> in the <i>Amazon Web Services General Reference</i>.</p>
     #   @return [String]
     class ProposalSummary < Struct.new(
+      nil,
       :proposal_id,
       :description,
       :proposed_by_member_id,
@@ -1876,6 +1956,7 @@ module Aws::ManagedBlockchain
     #   <p>The unique identifier of the invitation to reject.</p>
     #   @return [String]
     class RejectInvitationInput < Struct.new(
+      nil,
       :invitation_id,
       keyword_init: true
     )
@@ -1883,6 +1964,7 @@ module Aws::ManagedBlockchain
     end
 
     class RejectInvitationOutput < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1894,6 +1976,7 @@ module Aws::ManagedBlockchain
     #   <p>The unique identifier of the member to remove.</p>
     #   @return [String]
     class RemoveAction < Struct.new(
+      nil,
       :member_id,
       keyword_init: true
     )
@@ -1904,6 +1987,7 @@ module Aws::ManagedBlockchain
     # @!attribute message
     #   @return [String]
     class ResourceAlreadyExistsException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -1915,6 +1999,7 @@ module Aws::ManagedBlockchain
     # @!attribute message
     #   @return [String]
     class ResourceLimitExceededException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -1928,6 +2013,7 @@ module Aws::ManagedBlockchain
     #   <p>A requested resource doesn't exist. It may have been deleted or referenced inaccurately.</p>
     #   @return [String]
     class ResourceNotFoundException < Struct.new(
+      nil,
       :message,
       :resource_name,
       keyword_init: true
@@ -1939,6 +2025,7 @@ module Aws::ManagedBlockchain
     # @!attribute message
     #   @return [String]
     class ResourceNotReadyException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -1952,6 +2039,7 @@ module Aws::ManagedBlockchain
     #   <p>The tags to assign to the specified resource. Tag values can be empty, for example, <code>"MyTagKey" : ""</code>. You can specify multiple key-value pairs in a single request, with an overall maximum of 50 tags added to each resource.</p>
     #   @return [Hash<String, String>]
     class TagResourceRequest < Struct.new(
+      nil,
       :resource_arn,
       :tags,
       keyword_init: true
@@ -1960,6 +2048,7 @@ module Aws::ManagedBlockchain
     end
 
     class TagResourceResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1970,6 +2059,7 @@ module Aws::ManagedBlockchain
     #          creating resources that exceed your service limit for this resource type. 
     #          Request a limit increase or delete unused resources if possible.</p>
     class ThrottlingException < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1982,6 +2072,7 @@ module Aws::ManagedBlockchain
     #   <p></p>
     #   @return [String]
     class TooManyTagsException < Struct.new(
+      nil,
       :message,
       :resource_name,
       keyword_init: true
@@ -1996,6 +2087,7 @@ module Aws::ManagedBlockchain
     #   <p>The tag keys.</p>
     #   @return [Array<String>]
     class UntagResourceRequest < Struct.new(
+      nil,
       :resource_arn,
       :tag_keys,
       keyword_init: true
@@ -2004,6 +2096,7 @@ module Aws::ManagedBlockchain
     end
 
     class UntagResourceResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -2019,6 +2112,7 @@ module Aws::ManagedBlockchain
     #   <p>Configuration properties for publishing to Amazon CloudWatch Logs.</p>
     #   @return [Types::MemberLogPublishingConfiguration]
     class UpdateMemberInput < Struct.new(
+      nil,
       :network_id,
       :member_id,
       :log_publishing_configuration,
@@ -2028,6 +2122,7 @@ module Aws::ManagedBlockchain
     end
 
     class UpdateMemberOutput < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -2047,6 +2142,7 @@ module Aws::ManagedBlockchain
     #   <p>Configuration properties for publishing to Amazon CloudWatch Logs.</p>
     #   @return [Types::NodeLogPublishingConfiguration]
     class UpdateNodeInput < Struct.new(
+      nil,
       :network_id,
       :member_id,
       :node_id,
@@ -2057,6 +2153,7 @@ module Aws::ManagedBlockchain
     end
 
     class UpdateNodeOutput < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -2082,6 +2179,7 @@ module Aws::ManagedBlockchain
     #         </p>
     #   @return [String]
     class VoteOnProposalInput < Struct.new(
+      nil,
       :network_id,
       :proposal_id,
       :voter_member_id,
@@ -2092,6 +2190,7 @@ module Aws::ManagedBlockchain
     end
 
     class VoteOnProposalOutput < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -2117,6 +2216,7 @@ module Aws::ManagedBlockchain
     #         </p>
     #   @return [String]
     class VoteSummary < Struct.new(
+      nil,
       :vote,
       :member_name,
       :member_id,
@@ -2133,6 +2233,7 @@ module Aws::ManagedBlockchain
     #   <p>Defines the rules for the network for voting on proposals, such as the percentage of <code>YES</code> votes required for the proposal to be approved and the duration of the proposal. The policy applies to all proposals and is specified when the network is created.</p>
     #   @return [Types::ApprovalThresholdPolicy]
     class VotingPolicy < Struct.new(
+      nil,
       :approval_threshold_policy,
       keyword_init: true
     )

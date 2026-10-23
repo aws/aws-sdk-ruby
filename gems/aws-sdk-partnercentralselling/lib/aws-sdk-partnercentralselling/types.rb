@@ -13,6 +13,7 @@ module Aws::PartnerCentralSelling
     #   <p> The <code>Identifier</code> parameter in the <code>AcceptEngagementInvitationRequest</code> specifies the unique identifier of the <code>EngagementInvitation</code> to be accepted. Providing the correct identifier ensures that the intended invitation is accepted. </p>
     #   @return [String]
     class AcceptEngagementInvitationRequest < Struct.new(
+      nil,
       :catalog,
       :identifier,
       keyword_init: true
@@ -24,6 +25,7 @@ module Aws::PartnerCentralSelling
     # @!attribute message
     #   @return [String]
     class AccessDeniedException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -53,6 +55,7 @@ module Aws::PartnerCentralSelling
     #   <p>Indicates the <code>Customer</code> DUNS number, if available.</p>
     #   @return [String]
     class Account < Struct.new(
+      nil,
       :industry,
       :other_industry,
       :company_name,
@@ -73,6 +76,7 @@ module Aws::PartnerCentralSelling
     #   <p>Indicates the AWS account ID of the partner who received the Engagement Invitation. This is a unique identifier for managing engagements with specific AWS accounts.</p>
     #   @return [String]
     class AccountReceiver < Struct.new(
+      nil,
       :alias,
       :aws_account_id,
       keyword_init: true
@@ -97,6 +101,7 @@ module Aws::PartnerCentralSelling
     #   <p>Specifies the end <code>Customer</code>'s address details associated with the <code>Opportunity</code>.</p>
     #   @return [Types::AddressSummary]
     class AccountSummary < Struct.new(
+      nil,
       :industry,
       :other_industry,
       :company_name,
@@ -124,6 +129,7 @@ module Aws::PartnerCentralSelling
     #   <p>Specifies the end <code>Customer</code>'s street address associated with the <code>Opportunity</code>.</p>
     #   @return [String]
     class Address < Struct.new(
+      nil,
       :city,
       :postal_code,
       :state_or_region,
@@ -148,6 +154,7 @@ module Aws::PartnerCentralSelling
     #   <p>Specifies the end <code>Customer</code>'s country associated with the <code>Opportunity</code>.</p>
     #   @return [String]
     class AddressSummary < Struct.new(
+      nil,
       :city,
       :postal_code,
       :state_or_region,
@@ -167,6 +174,7 @@ module Aws::PartnerCentralSelling
     #   <p>Specifies the user or team member responsible for managing the assigned opportunity. This field identifies the <i>Assignee</i> based on the partner's internal team structure. Ensure that the email address is associated with a registered user in your Partner Central account.</p>
     #   @return [Types::AssigneeContact]
     class AssignOpportunityRequest < Struct.new(
+      nil,
       :catalog,
       :identifier,
       :assignee,
@@ -189,6 +197,7 @@ module Aws::PartnerCentralSelling
     #   <p>Specifies the business title of the assignee managing the opportunity. This helps clarify the individual's role and responsibilities within the organization. Use the value <code>PartnerAccountManager</code> to update details of the opportunity owner.</p>
     #   @return [String]
     class AssigneeContact < Struct.new(
+      nil,
       :email,
       :first_name,
       :last_name,
@@ -211,6 +220,7 @@ module Aws::PartnerCentralSelling
     #   <p>Requires the related entity's unique identifier when you want to associate it with the <code> Opportunity</code>. For Amazon Web Services Marketplace entities, provide the Amazon Resource Name (ARN). Use the <a href="https://docs.aws.amazon.com/marketplace-catalog/latest/api-reference/welcome.html"> Amazon Web Services Marketplace API</a> to obtain the ARN.</p>
     #   @return [String]
     class AssociateOpportunityRequest < Struct.new(
+      nil,
       :catalog,
       :opportunity_identifier,
       :related_entity_type,
@@ -225,6 +235,7 @@ module Aws::PartnerCentralSelling
     #   <p>Provides a list of customer contacts involved in the opportunity. These contacts may include decision makers, influencers, and other stakeholders within the customer's organization.</p>
     #   @return [Array<Types::Contact>]
     class AwsOpportunityCustomer < Struct.new(
+      nil,
       :contacts,
       keyword_init: true
     )
@@ -239,6 +250,7 @@ module Aws::PartnerCentralSelling
     #   <p>Represents a score assigned by AWS to indicate the level of engagement and potential success for the opportunity. This score helps partners prioritize their efforts.</p>
     #   @return [String]
     class AwsOpportunityInsights < Struct.new(
+      nil,
       :next_best_actions,
       :engagement_score,
       keyword_init: true
@@ -263,6 +275,7 @@ module Aws::PartnerCentralSelling
     #   <p>Provides a historical log of previous next steps that were taken to move the opportunity forward. This helps in tracking the decision-making process and identifying any delays or obstacles encountered.</p>
     #   @return [Array<Types::ProfileNextStepsHistory>]
     class AwsOpportunityLifeCycle < Struct.new(
+      nil,
       :target_close_date,
       :closed_lost_reason,
       :stage,
@@ -278,6 +291,7 @@ module Aws::PartnerCentralSelling
     #   <p>Indicates the expected spending by the customer over the course of the project. This value helps partners and AWS estimate the financial impact of the opportunity. Use the <a href="https://calculator.aws/#/">AWS Pricing Calculator</a> to create an estimate of the customer’s total spend. If only annual recurring revenue (ARR) is available, distribute it across 12 months to provide an average monthly value.</p>
     #   @return [Array<Types::ExpectedCustomerSpend>]
     class AwsOpportunityProject < Struct.new(
+      nil,
       :expected_customer_spend,
       keyword_init: true
     )
@@ -292,6 +306,7 @@ module Aws::PartnerCentralSelling
     #   <p>Specifies the partner solutions related to the opportunity. These solutions represent the partner's offerings that are being positioned as part of the overall AWS opportunity.</p>
     #   @return [Array<String>]
     class AwsOpportunityRelatedEntities < Struct.new(
+      nil,
       :aws_products,
       :solutions,
       keyword_init: true
@@ -307,6 +322,7 @@ module Aws::PartnerCentralSelling
     #   <p>Determines who can view AWS involvement in the opportunity. Typically, this field is set to <code>Full</code> for most cases, but it may be restricted based on special program requirements or confidentiality needs.</p>
     #   @return [String]
     class AwsSubmission < Struct.new(
+      nil,
       :involvement_type,
       :visibility,
       keyword_init: true
@@ -328,6 +344,7 @@ module Aws::PartnerCentralSelling
     #   <p>Specifies the Amazon Web Services team member's business title and indicates their organizational role.</p>
     #   @return [String]
     class AwsTeamMember < Struct.new(
+      nil,
       :email,
       :first_name,
       :last_name,
@@ -341,6 +358,7 @@ module Aws::PartnerCentralSelling
     # @!attribute message
     #   @return [String]
     class ConflictException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -364,6 +382,7 @@ module Aws::PartnerCentralSelling
     #   <p>The contact's phone number associated with the <code>Opportunity</code>.</p>
     #   @return [String]
     class Contact < Struct.new(
+      nil,
       :email,
       :first_name,
       :last_name,
@@ -387,6 +406,7 @@ module Aws::PartnerCentralSelling
     #   <p> The <code>Invitation</code> object all information necessary to initiate an engagement invitation to a partner. It contains a personalized message from the sender, the invitation's receiver, and a payload. The <code>Payload</code> can be the <code>OpportunityInvitation</code>, which includes detailed structures for sender contacts, partner responsibilities, customer information, and project details. </p>
     #   @return [Types::Invitation]
     class CreateEngagementInvitationRequest < Struct.new(
+      nil,
       :catalog,
       :client_token,
       :engagement_identifier,
@@ -403,6 +423,7 @@ module Aws::PartnerCentralSelling
     #   <p> The Amazon Resource Name (ARN) that uniquely identifies the engagement invitation. </p>
     #   @return [String]
     class CreateEngagementInvitationResponse < Struct.new(
+      nil,
       :id,
       :arn,
       keyword_init: true
@@ -426,6 +447,7 @@ module Aws::PartnerCentralSelling
     #   <p>The <code>Contexts</code> field is a required array of objects, with a maximum of 5 contexts allowed, specifying detailed information about customer projects associated with the Engagement. Each context object contains a <code>Type</code> field indicating the context type, which must be <code>CustomerProject</code> in this version, and a <code>Payload</code> field containing the <code>CustomerProject</code> details. The <code>CustomerProject</code> object is composed of two main components: <code>Customer</code> and <code>Project</code>. The <code>Customer</code> object includes information such as <code>CompanyName</code>, <code>WebsiteUrl</code>, <code>Industry</code>, and <code>CountryCode</code>, providing essential details about the customer. The <code>Project</code> object contains <code>Title</code>, <code>BusinessProblem</code>, and <code>TargetCompletionDate</code>, offering insights into the specific project associated with the customer. This structure allows comprehensive context to be included within the Engagement, facilitating effective collaboration between parties by providing relevant customer and project information.</p>
     #   @return [Array<Types::EngagementContextDetails>]
     class CreateEngagementRequest < Struct.new(
+      nil,
       :catalog,
       :client_token,
       :title,
@@ -443,6 +465,7 @@ module Aws::PartnerCentralSelling
     #   <p>The Amazon Resource Name (ARN) that identifies the engagement.</p>
     #   @return [String]
     class CreateEngagementResponse < Struct.new(
+      nil,
       :id,
       :arn,
       keyword_init: true
@@ -493,6 +516,7 @@ module Aws::PartnerCentralSelling
     #   <p>A map of the key-value pairs of the tag or tags to assign.</p>
     #   @return [Array<Types::Tag>]
     class CreateOpportunityRequest < Struct.new(
+      nil,
       :catalog,
       :primary_needs_from_aws,
       :national_security,
@@ -522,6 +546,7 @@ module Aws::PartnerCentralSelling
     #   <p> <code>DateTime</code> when the opportunity was last modified. When the <code>Opportunity</code> is created, its value is <code>CreatedDate</code>.</p>
     #   @return [Time]
     class CreateOpportunityResponse < Struct.new(
+      nil,
       :id,
       :partner_opportunity_identifier,
       :last_modified_date,
@@ -552,6 +577,7 @@ module Aws::PartnerCentralSelling
     #   <p>A map of the key-value pairs of the tag or tags to assign.</p>
     #   @return [Array<Types::Tag>]
     class CreateResourceSnapshotJobRequest < Struct.new(
+      nil,
       :catalog,
       :client_token,
       :engagement_identifier,
@@ -571,6 +597,7 @@ module Aws::PartnerCentralSelling
     #   <p>The Amazon Resource Name (ARN) of the created snapshot job.</p>
     #   @return [String]
     class CreateResourceSnapshotJobResponse < Struct.new(
+      nil,
       :id,
       :arn,
       keyword_init: true
@@ -597,6 +624,7 @@ module Aws::PartnerCentralSelling
     #   <p> Specifies a unique, client-generated UUID to ensure that the request is handled exactly once. This token helps prevent duplicate snapshot creations. </p>
     #   @return [String]
     class CreateResourceSnapshotRequest < Struct.new(
+      nil,
       :catalog,
       :engagement_identifier,
       :resource_type,
@@ -615,6 +643,7 @@ module Aws::PartnerCentralSelling
     #   <p> Specifies the revision number of the created snapshot. This field provides important information about the snapshot's place in the sequence of snapshots for the given resource. </p>
     #   @return [Integer]
     class CreateResourceSnapshotResponse < Struct.new(
+      nil,
       :arn,
       :revision,
       keyword_init: true
@@ -630,6 +659,7 @@ module Aws::PartnerCentralSelling
     #   <p>Represents the contact details for individuals associated with the customer of the <code>Opportunity</code>. This field captures relevant contacts, including decision-makers, influencers, and technical stakeholders within the customer organization. These contacts are key to progressing the opportunity.</p>
     #   @return [Array<Types::Contact>]
     class Customer < Struct.new(
+      nil,
       :account,
       :contacts,
       keyword_init: true
@@ -645,6 +675,7 @@ module Aws::PartnerCentralSelling
     #   <p>Information about the customer project associated with the Engagement.</p>
     #   @return [Types::EngagementCustomerProjectDetails]
     class CustomerProjectsContext < Struct.new(
+      nil,
       :customer,
       :project,
       keyword_init: true
@@ -657,6 +688,7 @@ module Aws::PartnerCentralSelling
     #   <p>An object that contains a customer's account details.</p>
     #   @return [Types::AccountSummary]
     class CustomerSummary < Struct.new(
+      nil,
       :account,
       keyword_init: true
     )
@@ -670,6 +702,7 @@ module Aws::PartnerCentralSelling
     #   <p> The unique identifier of the resource snapshot job to be deleted. </p>
     #   @return [String]
     class DeleteResourceSnapshotJobRequest < Struct.new(
+      nil,
       :catalog,
       :resource_snapshot_job_identifier,
       keyword_init: true
@@ -690,6 +723,7 @@ module Aws::PartnerCentralSelling
     #   <p>The related entity's identifier that you want to disassociate from the opportunity. Depending on the type of entity, this could be a simple identifier or an Amazon Resource Name (ARN) for entities managed through Amazon Web Services Marketplace.</p> <p>For Amazon Web Services Marketplace entities, use the Amazon Web Services Marketplace API to obtain the necessary ARNs. For guidance on retrieving these ARNs, see <a href="https://docs.aws.amazon.com/marketplace-catalog/latest/api-reference/welcome.html"> Amazon Web Services MarketplaceUsing the Amazon Web Services Marketplace Catalog API</a>.</p> <p>Validation: Ensure the identifier or ARN is valid and corresponds to an existing entity. An incorrect or invalid identifier results in an error.</p>
     #   @return [String]
     class DisassociateOpportunityRequest < Struct.new(
+      nil,
       :catalog,
       :opportunity_identifier,
       :related_entity_type,
@@ -707,6 +741,7 @@ module Aws::PartnerCentralSelling
     #   <p>Contains the specific details of the Engagement context. The structure of this payload varies depending on the Type field. </p>
     #   @return [Types::EngagementContextPayload]
     class EngagementContextDetails < Struct.new(
+      nil,
       :type,
       :payload,
       keyword_init: true
@@ -743,6 +778,7 @@ module Aws::PartnerCentralSelling
     #   <p>Indicates the country in which the customer’s company operates. This field is useful for understanding regional requirements or compliance needs.</p>
     #   @return [String]
     class EngagementCustomer < Struct.new(
+      nil,
       :industry,
       :company_name,
       :website_url,
@@ -763,6 +799,7 @@ module Aws::PartnerCentralSelling
     #   <p>The target completion date for the customer's project.</p>
     #   @return [String]
     class EngagementCustomerProjectDetails < Struct.new(
+      nil,
       :title,
       :business_problem,
       :target_completion_date,
@@ -812,6 +849,7 @@ module Aws::PartnerCentralSelling
     #   <p>Identifies the role of the caller in the engagement invitation.</p>
     #   @return [String]
     class EngagementInvitationSummary < Struct.new(
+      nil,
       :arn,
       :payload_type,
       :id,
@@ -841,6 +879,7 @@ module Aws::PartnerCentralSelling
     #   <p>This is the unique identifier for the AWS account associated with the member organization. It's used for AWS-related operations and identity verification. </p>
     #   @return [String]
     class EngagementMember < Struct.new(
+      nil,
       :company_name,
       :website_url,
       :account_id,
@@ -857,6 +896,7 @@ module Aws::PartnerCentralSelling
     #   <p>The URL of the member company's website. This offers a way to find more information about the member organization and serves as an additional identifier. </p>
     #   @return [String]
     class EngagementMemberSummary < Struct.new(
+      nil,
       :company_name,
       :website_url,
       keyword_init: true
@@ -881,6 +921,7 @@ module Aws::PartnerCentralSelling
     #   <p>The AWS account ID of the entity that owns the resource. Identifies the account responsible for or having primary control over the resource. </p>
     #   @return [String]
     class EngagementResourceAssociationSummary < Struct.new(
+      nil,
       :catalog,
       :engagement_id,
       :resource_type,
@@ -899,6 +940,7 @@ module Aws::PartnerCentralSelling
     #   <p>The field by which to sort the results.</p>
     #   @return [String]
     class EngagementSort < Struct.new(
+      nil,
       :sort_order,
       :sort_by,
       keyword_init: true
@@ -926,6 +968,7 @@ module Aws::PartnerCentralSelling
     #   <p>The number of members in the Engagement.</p>
     #   @return [Integer]
     class EngagementSummary < Struct.new(
+      nil,
       :arn,
       :id,
       :title,
@@ -954,6 +997,7 @@ module Aws::PartnerCentralSelling
     #   <p>A URL providing additional information or context about the spend estimation.</p>
     #   @return [String]
     class ExpectedCustomerSpend < Struct.new(
+      nil,
       :amount,
       :currency_code,
       :frequency,
@@ -971,6 +1015,7 @@ module Aws::PartnerCentralSelling
     #   <p>The unique identifier for the related partner opportunity. Use this field to correlate an AWS opportunity with its corresponding partner opportunity.</p>
     #   @return [String]
     class GetAwsOpportunitySummaryRequest < Struct.new(
+      nil,
       :catalog,
       :related_opportunity_identifier,
       keyword_init: true
@@ -1015,6 +1060,7 @@ module Aws::PartnerCentralSelling
     #   <p>Provides details about the project associated with the AWS Opportunity, including the customer’s business problem, expected outcomes, and project scope. This information is crucial for understanding the broader context of the opportunity.</p>
     #   @return [Types::AwsOpportunityProject]
     class GetAwsOpportunitySummaryResponse < Struct.new(
+      nil,
       :catalog,
       :related_opportunity_id,
       :origin,
@@ -1039,6 +1085,7 @@ module Aws::PartnerCentralSelling
     #   <p>Specifies the unique identifier for the retrieved engagement invitation.</p>
     #   @return [String]
     class GetEngagementInvitationRequest < Struct.new(
+      nil,
       :catalog,
       :identifier,
       keyword_init: true
@@ -1098,6 +1145,7 @@ module Aws::PartnerCentralSelling
     #   <p>A list of active members currently part of the Engagement. This array contains a maximum of 10 members, each represented by an object with the following properties.</p> <ul> <li> <p>CompanyName: The name of the member's company.</p> </li> <li> <p>WebsiteUrl: The website URL of the member's company.</p> </li> </ul>
     #   @return [Array<Types::EngagementMemberSummary>]
     class GetEngagementInvitationResponse < Struct.new(
+      nil,
       :arn,
       :payload_type,
       :id,
@@ -1127,6 +1175,7 @@ module Aws::PartnerCentralSelling
     #   <p>Specifies the identifier of the Engagement record to retrieve.</p>
     #   @return [String]
     class GetEngagementRequest < Struct.new(
+      nil,
       :catalog,
       :identifier,
       keyword_init: true
@@ -1159,6 +1208,7 @@ module Aws::PartnerCentralSelling
     #   <p>A list of context objects associated with the engagement. Each context provides additional information related to the Engagement, such as customer projects or documents.</p>
     #   @return [Array<Types::EngagementContextDetails>]
     class GetEngagementResponse < Struct.new(
+      nil,
       :id,
       :arn,
       :title,
@@ -1179,6 +1229,7 @@ module Aws::PartnerCentralSelling
     #   <p>Read-only, system generated <code>Opportunity</code> unique identifier.</p>
     #   @return [String]
     class GetOpportunityRequest < Struct.new(
+      nil,
       :catalog,
       :identifier,
       keyword_init: true
@@ -1235,6 +1286,7 @@ module Aws::PartnerCentralSelling
     #   <p>Represents the internal team handling the opportunity. Specify the members involved in collaborating on this opportunity within the partner's organization.</p>
     #   @return [Array<Types::Contact>]
     class GetOpportunityResponse < Struct.new(
+      nil,
       :catalog,
       :primary_needs_from_aws,
       :national_security,
@@ -1263,6 +1315,7 @@ module Aws::PartnerCentralSelling
     #   <p>The unique identifier of the resource snapshot job to be retrieved. This identifier is crucial for pinpointing the specific job you want to query. </p>
     #   @return [String]
     class GetResourceSnapshotJobRequest < Struct.new(
+      nil,
       :catalog,
       :resource_snapshot_job_identifier,
       keyword_init: true
@@ -1307,6 +1360,7 @@ module Aws::PartnerCentralSelling
     #   <p>If the job has encountered any failures, this field contains the error message from the most recent failure. This can be useful for troubleshooting issues with the job. </p>
     #   @return [String]
     class GetResourceSnapshotJobResponse < Struct.new(
+      nil,
       :catalog,
       :id,
       :arn,
@@ -1343,6 +1397,7 @@ module Aws::PartnerCentralSelling
     #   <p>Specifies which revision of the snapshot to retrieve. If omitted returns the latest revision.</p>
     #   @return [Integer]
     class GetResourceSnapshotRequest < Struct.new(
+      nil,
       :catalog,
       :engagement_identifier,
       :resource_type,
@@ -1385,6 +1440,7 @@ module Aws::PartnerCentralSelling
     #   <p> Represents the payload of a resource snapshot. This structure is designed to accommodate different types of resource snapshots, currently supporting opportunity summaries. </p>
     #   @return [Types::ResourceSnapshotPayload]
     class GetResourceSnapshotResponse < Struct.new(
+      nil,
       :catalog,
       :arn,
       :created_by,
@@ -1404,6 +1460,7 @@ module Aws::PartnerCentralSelling
     #   <p>Specifies the catalog in which the settings are defined. Acceptable values include <code>AWS</code> for production and <code>Sandbox</code> for testing environments.</p>
     #   @return [String]
     class GetSellingSystemSettingsRequest < Struct.new(
+      nil,
       :catalog,
       keyword_init: true
     )
@@ -1417,6 +1474,7 @@ module Aws::PartnerCentralSelling
     #   <p>Specifies the ARN of the IAM Role used for resource snapshot job executions.</p>
     #   @return [String]
     class GetSellingSystemSettingsResponse < Struct.new(
+      nil,
       :catalog,
       :resource_snapshot_job_role_arn,
       keyword_init: true
@@ -1428,6 +1486,7 @@ module Aws::PartnerCentralSelling
     # @!attribute message
     #   @return [String]
     class InternalServerException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -1445,6 +1504,7 @@ module Aws::PartnerCentralSelling
     #   <p>Contains the data payload associated with the Engagement Invitation. This payload includes essential details related to the AWS opportunity and is used by partners to evaluate whether to accept or reject the engagement.</p>
     #   @return [Types::Payload]
     class Invitation < Struct.new(
+      nil,
       :message,
       :receiver,
       :payload,
@@ -1461,6 +1521,7 @@ module Aws::PartnerCentralSelling
     #   <p>Specifies the date before which the opportunities were modified. Use this filter to retrieve only those opportunities that were modified before a given timestamp.</p>
     #   @return [Time]
     class LastModifiedDate < Struct.new(
+      nil,
       :after_last_modified_date,
       :before_last_modified_date,
       keyword_init: true
@@ -1494,6 +1555,7 @@ module Aws::PartnerCentralSelling
     #   <p>Captures a chronological record of the next steps or actions planned or taken for the current opportunity, along with the timestamp.</p>
     #   @return [Array<Types::NextStepsHistory>]
     class LifeCycle < Struct.new(
+      nil,
       :stage,
       :closed_lost_reason,
       :next_steps,
@@ -1521,6 +1583,7 @@ module Aws::PartnerCentralSelling
     #   <p> Describes the next steps for the opportunity shared through a snapshot. </p>
     #   @return [String]
     class LifeCycleForView < Struct.new(
+      nil,
       :target_close_date,
       :review_status,
       :stage,
@@ -1553,6 +1616,7 @@ module Aws::PartnerCentralSelling
     #   <p>Indicates the reason a specific decision was taken during the opportunity review process. This field combines the reasons for both disqualified and action required statuses, and provides clarity for why an opportunity was disqualified or required further action.</p>
     #   @return [String]
     class LifeCycleSummary < Struct.new(
+      nil,
       :stage,
       :closed_lost_reason,
       :next_steps,
@@ -1594,6 +1658,7 @@ module Aws::PartnerCentralSelling
     #   <p> The unique identifier of the engagement invitation that was accepted. </p>
     #   @return [String]
     class ListEngagementByAcceptingInvitationTaskSummary < Struct.new(
+      nil,
       :task_id,
       :task_arn,
       :start_time,
@@ -1633,6 +1698,7 @@ module Aws::PartnerCentralSelling
     #   <p> Filters tasks by their unique identifiers. Use this when you want to retrieve information about specific tasks. </p>
     #   @return [Array<String>]
     class ListEngagementByAcceptingInvitationTasksRequest < Struct.new(
+      nil,
       :max_results,
       :next_token,
       :sort,
@@ -1653,6 +1719,7 @@ module Aws::PartnerCentralSelling
     #   <p> A token used for pagination to retrieve the next page of results.If there are more results available, this field will contain a token that can be used in a subsequent API call to retrieve the next page. If there are no more results, this field will be null or an empty string. </p>
     #   @return [String]
     class ListEngagementByAcceptingInvitationTasksResponse < Struct.new(
+      nil,
       :task_summaries,
       :next_token,
       keyword_init: true
@@ -1692,6 +1759,7 @@ module Aws::PartnerCentralSelling
     #   <p>The unique identifier of the Engagement Invitation.</p>
     #   @return [String]
     class ListEngagementFromOpportunityTaskSummary < Struct.new(
+      nil,
       :task_id,
       :task_arn,
       :start_time,
@@ -1732,6 +1800,7 @@ module Aws::PartnerCentralSelling
     #   <p> Filters tasks by the identifiers of the engagements they created or are associated with. </p>
     #   @return [Array<String>]
     class ListEngagementFromOpportunityTasksRequest < Struct.new(
+      nil,
       :max_results,
       :next_token,
       :sort,
@@ -1752,6 +1821,7 @@ module Aws::PartnerCentralSelling
     #   <p> A token used for pagination to retrieve the next page of results. If there are more results available, this field will contain a token that can be used in a subsequent API call to retrieve the next page. If there are no more results, this field will be null or an empty string. </p>
     #   @return [String]
     class ListEngagementFromOpportunityTasksResponse < Struct.new(
+      nil,
       :task_summaries,
       :next_token,
       keyword_init: true
@@ -1787,6 +1857,7 @@ module Aws::PartnerCentralSelling
     #   <p> List of sender AWS account IDs to filter the invitations. </p>
     #   @return [Array<String>]
     class ListEngagementInvitationsRequest < Struct.new(
+      nil,
       :catalog,
       :max_results,
       :next_token,
@@ -1808,6 +1879,7 @@ module Aws::PartnerCentralSelling
     #   <p>A pagination token returned when there are more results available than can be returned in a single call. Use this token to retrieve additional pages of engagement invitation summaries.</p>
     #   @return [String]
     class ListEngagementInvitationsResponse < Struct.new(
+      nil,
       :engagement_invitation_summaries,
       :next_token,
       keyword_init: true
@@ -1828,6 +1900,7 @@ module Aws::PartnerCentralSelling
     #   <p>The token for the next set of results.</p>
     #   @return [String]
     class ListEngagementMembersRequest < Struct.new(
+      nil,
       :catalog,
       :identifier,
       :max_results,
@@ -1844,6 +1917,7 @@ module Aws::PartnerCentralSelling
     #   <p>A pagination token used to retrieve the next set of results. If there are more results available than can be returned in a single response, this token will be present. Use this token in a subsequent request to retrieve the next page of results. If there are no more results, this value will be null. </p>
     #   @return [String]
     class ListEngagementMembersResponse < Struct.new(
+      nil,
       :engagement_member_list,
       :next_token,
       keyword_init: true
@@ -1873,6 +1947,7 @@ module Aws::PartnerCentralSelling
     #   <p>Filters the response to include only snapshots of resources owned by the specified AWS account ID. Use this when you want to find associations related to resources owned by a particular account. </p>
     #   @return [String]
     class ListEngagementResourceAssociationsRequest < Struct.new(
+      nil,
       :catalog,
       :max_results,
       :next_token,
@@ -1892,6 +1967,7 @@ module Aws::PartnerCentralSelling
     #   <p> A token to retrieve the next set of results. Use this token in a subsequent request to retrieve additional results if the response was truncated. </p>
     #   @return [String]
     class ListEngagementResourceAssociationsResponse < Struct.new(
+      nil,
       :engagement_resource_association_summaries,
       :next_token,
       keyword_init: true
@@ -1921,6 +1997,7 @@ module Aws::PartnerCentralSelling
     #   <p>An array of strings representing engagement identifiers to retrieve.</p>
     #   @return [Array<String>]
     class ListEngagementsRequest < Struct.new(
+      nil,
       :catalog,
       :created_by,
       :exclude_created_by,
@@ -1940,6 +2017,7 @@ module Aws::PartnerCentralSelling
     #   <p>The token to retrieve the next set of results. This field will be null if there are no more results. </p>
     #   @return [String]
     class ListEngagementsResponse < Struct.new(
+      nil,
       :engagement_summary_list,
       :next_token,
       keyword_init: true
@@ -1975,6 +2053,7 @@ module Aws::PartnerCentralSelling
     #   <p>Filters the opportunities based on the customer's company name. This allows partners to search for opportunities associated with a specific customer by matching the provided company name string.</p>
     #   @return [Array<String>]
     class ListOpportunitiesRequest < Struct.new(
+      nil,
       :catalog,
       :max_results,
       :next_token,
@@ -1996,6 +2075,7 @@ module Aws::PartnerCentralSelling
     #   <p>A pagination token used to retrieve the next set of results in subsequent calls. This token is included in the response only if there are additional result pages available.</p>
     #   @return [String]
     class ListOpportunitiesResponse < Struct.new(
+      nil,
       :opportunity_summaries,
       :next_token,
       keyword_init: true
@@ -2022,6 +2102,7 @@ module Aws::PartnerCentralSelling
     #   <p> Configures the sorting of the response. If omitted, results are sorted by <code>CreatedDate</code> in descending order. </p>
     #   @return [Types::SortObject]
     class ListResourceSnapshotJobsRequest < Struct.new(
+      nil,
       :catalog,
       :max_results,
       :next_token,
@@ -2040,6 +2121,7 @@ module Aws::PartnerCentralSelling
     #   <p> The token to retrieve the next set of results. If there are no additional results, this value is null. </p>
     #   @return [String]
     class ListResourceSnapshotJobsResponse < Struct.new(
+      nil,
       :resource_snapshot_job_summaries,
       :next_token,
       keyword_init: true
@@ -2072,6 +2154,7 @@ module Aws::PartnerCentralSelling
     #   <p>Filters the response to include only snapshots of resources owned by the specified AWS account. </p>
     #   @return [String]
     class ListResourceSnapshotsRequest < Struct.new(
+      nil,
       :catalog,
       :max_results,
       :next_token,
@@ -2092,6 +2175,7 @@ module Aws::PartnerCentralSelling
     #   <p> The token to retrieve the next set of results. If there are no additional results, this value is null. </p>
     #   @return [String]
     class ListResourceSnapshotsResponse < Struct.new(
+      nil,
       :resource_snapshot_summaries,
       :next_token,
       keyword_init: true
@@ -2121,6 +2205,7 @@ module Aws::PartnerCentralSelling
     #   <p>Filters the solutions based on the category to which they belong. This allows partners to search for solutions within specific categories, such as <code>Software</code>, <code>Consulting</code>, or <code>Managed Services</code>.</p>
     #   @return [Array<String>]
     class ListSolutionsRequest < Struct.new(
+      nil,
       :catalog,
       :max_results,
       :next_token,
@@ -2140,6 +2225,7 @@ module Aws::PartnerCentralSelling
     #   <p>A pagination token used to retrieve the next set of results in subsequent calls. This token is included in the response only if there are additional result pages available.</p>
     #   @return [String]
     class ListSolutionsResponse < Struct.new(
+      nil,
       :solution_summaries,
       :next_token,
       keyword_init: true
@@ -2151,6 +2237,7 @@ module Aws::PartnerCentralSelling
     #   <p>The Amazon Resource Name (ARN) of the resource for which you want to retrieve tags.</p>
     #   @return [String]
     class ListTagsForResourceRequest < Struct.new(
+      nil,
       :resource_arn,
       keyword_init: true
     )
@@ -2161,6 +2248,7 @@ module Aws::PartnerCentralSelling
     #   <p>A map of the key-value pairs for the tag or tags assigned to the specified resource.</p>
     #   @return [Array<Types::Tag>]
     class ListTagsForResourceResponse < Struct.new(
+      nil,
       :tags,
       keyword_init: true
     )
@@ -2175,6 +2263,7 @@ module Aws::PartnerCentralSelling
     #   <p> Specifies the field by which the task list should be sorted. </p>
     #   @return [String]
     class ListTasksSortBase < Struct.new(
+      nil,
       :sort_order,
       :sort_by,
       keyword_init: true
@@ -2199,6 +2288,7 @@ module Aws::PartnerCentralSelling
     #   <p>Indicates if the <code>Opportunity</code> is a marketing development fund (MDF) funded activity.</p>
     #   @return [String]
     class Marketing < Struct.new(
+      nil,
       :campaign_name,
       :source,
       :use_cases,
@@ -2217,6 +2307,7 @@ module Aws::PartnerCentralSelling
     #   <p>Specifies the payment currency.</p>
     #   @return [String]
     class MonetaryValue < Struct.new(
+      nil,
       :amount,
       :currency_code,
       keyword_init: true
@@ -2232,6 +2323,7 @@ module Aws::PartnerCentralSelling
     #   <p>Indicates the step execution time.</p>
     #   @return [Time]
     class NextStepsHistory < Struct.new(
+      nil,
       :value,
       :time,
       keyword_init: true
@@ -2247,6 +2339,7 @@ module Aws::PartnerCentralSelling
     #   <p>Specifies the field by which the Engagement Invitations are sorted. Common values include <code>InvitationDate</code> and <code>Status</code>.</p>
     #   @return [String]
     class OpportunityEngagementInvitationSort < Struct.new(
+      nil,
       :sort_order,
       :sort_by,
       keyword_init: true
@@ -2268,6 +2361,7 @@ module Aws::PartnerCentralSelling
     #   <p>Describes the project details associated with the opportunity, including the customer’s needs and the scope of work expected to be performed.</p>
     #   @return [Types::ProjectDetails]
     class OpportunityInvitationPayload < Struct.new(
+      nil,
       :sender_contacts,
       :receiver_responsibilities,
       :customer,
@@ -2285,6 +2379,7 @@ module Aws::PartnerCentralSelling
     #   <p>Field name to sort by.</p>
     #   @return [String]
     class OpportunitySort < Struct.new(
+      nil,
       :sort_order,
       :sort_by,
       keyword_init: true
@@ -2324,6 +2419,7 @@ module Aws::PartnerCentralSelling
     #   <p>An object that contains the <code>Opportunity</code>'s project details summary.</p>
     #   @return [Types::ProjectSummary]
     class OpportunitySummary < Struct.new(
+      nil,
       :catalog,
       :id,
       :arn,
@@ -2362,6 +2458,7 @@ module Aws::PartnerCentralSelling
     #   <p>This field provides the associations' information for other entities with the opportunity. These entities include identifiers for <code>AWSProducts</code>, <code>Partner Solutions</code>, and <code>AWSMarketplaceOffers</code>.</p>
     #   @return [Types::RelatedEntityIdentifiers]
     class OpportunitySummaryView < Struct.new(
+      nil,
       :opportunity_type,
       :lifecycle,
       :opportunity_team,
@@ -2397,6 +2494,7 @@ module Aws::PartnerCentralSelling
     #   <p>Indicates the date and time when a particular next step was recorded or planned. This helps in managing the timeline for the opportunity.</p>
     #   @return [Time]
     class ProfileNextStepsHistory < Struct.new(
+      nil,
       :value,
       :time,
       keyword_init: true
@@ -2442,6 +2540,7 @@ module Aws::PartnerCentralSelling
     #   <p>Captures additional comments or information for the <code>Opportunity</code> that weren't captured in other fields.</p>
     #   @return [String]
     class Project < Struct.new(
+      nil,
       :delivery_models,
       :expected_customer_spend,
       :title,
@@ -2473,6 +2572,7 @@ module Aws::PartnerCentralSelling
     #   <p>Contains revenue estimates for the partner related to the project. This field provides an idea of the financial potential of the opportunity for the partner.</p>
     #   @return [Array<Types::ExpectedCustomerSpend>]
     class ProjectDetails < Struct.new(
+      nil,
       :business_problem,
       :title,
       :target_completion_date,
@@ -2490,6 +2590,7 @@ module Aws::PartnerCentralSelling
     #   <p>Provides a summary of the expected customer spend for the project, offering a high-level view of the potential financial impact.</p>
     #   @return [Array<Types::ExpectedCustomerSpend>]
     class ProjectSummary < Struct.new(
+      nil,
       :delivery_models,
       :expected_customer_spend,
       keyword_init: true
@@ -2514,6 +2615,7 @@ module Aws::PartnerCentralSelling
     #   <p> Offers a description of other solutions if the standard solutions do not adequately cover the project's scope. </p>
     #   @return [String]
     class ProjectView < Struct.new(
+      nil,
       :delivery_models,
       :expected_customer_spend,
       :customer_use_case,
@@ -2531,6 +2633,7 @@ module Aws::PartnerCentralSelling
     #   <p>Specifies the ARN of the IAM Role used for resource snapshot job executions.</p>
     #   @return [String]
     class PutSellingSystemSettingsRequest < Struct.new(
+      nil,
       :catalog,
       :resource_snapshot_job_role_identifier,
       keyword_init: true
@@ -2545,6 +2648,7 @@ module Aws::PartnerCentralSelling
     #   <p>Specifies the ARN of the IAM Role used for resource snapshot job executions.</p>
     #   @return [String]
     class PutSellingSystemSettingsResponse < Struct.new(
+      nil,
       :catalog,
       :resource_snapshot_job_role_arn,
       keyword_init: true
@@ -2577,6 +2681,7 @@ module Aws::PartnerCentralSelling
     #   <p>This describes the reason for rejecting the engagement invitation, which helps AWS track usage patterns. Acceptable values include the following:</p> <ul> <li> <p> <i>Customer problem unclear:</i> The customer's problem isn't understood.</p> </li> <li> <p> <i>Next steps unclear:</i> The next steps required to proceed aren't understood.</p> </li> <li> <p> <i>Unable to support:</i> The partner is unable to provide support due to resource or capability constraints.</p> </li> <li> <p> <i>Duplicate of partner referral:</i> The opportunity is a duplicate of an existing referral.</p> </li> <li> <p> <i>Other:</i> Any reason not covered by other values.</p> </li> </ul>
     #   @return [String]
     class RejectEngagementInvitationRequest < Struct.new(
+      nil,
       :catalog,
       :identifier,
       :rejection_reason,
@@ -2596,6 +2701,7 @@ module Aws::PartnerCentralSelling
     #   <p>Enables the association of specific Amazon Web Services products with the <code>Opportunity</code>. Partners can indicate the relevant Amazon Web Services products for the <code>Opportunity</code>'s solution and align with the customer's needs. Returns multiple values separated by commas. For example, <code>"AWSProducts" : ["AmazonRedshift", "AWSAppFabric", "AWSCleanRooms"]</code>.</p> <p>Use the file with the list of Amazon Web Services products hosted on GitHub: <a href="https://github.com/aws-samples/partner-crm-integration-samples/blob/main/resources/aws_products.json"> Amazon Web Services products</a>.</p>
     #   @return [Array<String>]
     class RelatedEntityIdentifiers < Struct.new(
+      nil,
       :aws_marketplace_offers,
       :solutions,
       :aws_products,
@@ -2608,6 +2714,7 @@ module Aws::PartnerCentralSelling
     # @!attribute message
     #   @return [String]
     class ResourceNotFoundException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -2628,6 +2735,7 @@ module Aws::PartnerCentralSelling
     #   <p>The current status of the snapshot job.</p> <p>Valid values:</p> <ul> <li> <p> STOPPED: The job is not currently running. </p> </li> <li> <p> RUNNING: The job is actively executing. </p> </li> </ul>
     #   @return [String]
     class ResourceSnapshotJobSummary < Struct.new(
+      nil,
       :id,
       :arn,
       :engagement_id,
@@ -2672,6 +2780,7 @@ module Aws::PartnerCentralSelling
     #   <p>The AWS account ID of the entity that owns the resource from which the snapshot was created.</p>
     #   @return [String]
     class ResourceSnapshotSummary < Struct.new(
+      nil,
       :arn,
       :revision,
       :resource_type,
@@ -2700,6 +2809,7 @@ module Aws::PartnerCentralSelling
     #   <p>The sender-provided contact's phone number associated with the <code>EngagementInvitation</code>.</p>
     #   @return [String]
     class SenderContact < Struct.new(
+      nil,
       :email,
       :first_name,
       :last_name,
@@ -2714,6 +2824,7 @@ module Aws::PartnerCentralSelling
     # @!attribute message
     #   @return [String]
     class ServiceQuotaExceededException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -2734,6 +2845,7 @@ module Aws::PartnerCentralSelling
     #   <p>Specifies the expiration date for the contract between the customer and Amazon Web Services partner. It signifies the termination date of the agreed-upon engagement period between both parties.</p>
     #   @return [String]
     class SoftwareRevenue < Struct.new(
+      nil,
       :delivery_model,
       :value,
       :effective_date,
@@ -2766,6 +2878,7 @@ module Aws::PartnerCentralSelling
     #   <p>Indicates the solution creation date. This is useful to track and audit.</p>
     #   @return [Time]
     class SolutionBase < Struct.new(
+      nil,
       :catalog,
       :id,
       :arn,
@@ -2786,6 +2899,7 @@ module Aws::PartnerCentralSelling
     #   <p>Specifies the attribute to sort by, such as <code>Name</code>, <code>CreatedDate</code>, or <code>Status</code>.</p>
     #   @return [String]
     class SolutionSort < Struct.new(
+      nil,
       :sort_order,
       :sort_by,
       keyword_init: true
@@ -2801,6 +2915,7 @@ module Aws::PartnerCentralSelling
     #   <p> Determines the order in which the sorted results are presented. </p>
     #   @return [String]
     class SortObject < Struct.new(
+      nil,
       :sort_by,
       :sort_order,
       keyword_init: true
@@ -2821,6 +2936,7 @@ module Aws::PartnerCentralSelling
     #   <p>A map of the key-value pairs of the tag or tags to assign.</p>
     #   @return [Array<Types::Tag>]
     class StartEngagementByAcceptingInvitationTaskRequest < Struct.new(
+      nil,
       :catalog,
       :client_token,
       :identifier,
@@ -2858,6 +2974,7 @@ module Aws::PartnerCentralSelling
     #   <p>Returns the identifier of the engagement invitation that was accepted and used to create the opportunity.</p>
     #   @return [String]
     class StartEngagementByAcceptingInvitationTaskResponse < Struct.new(
+      nil,
       :task_id,
       :task_arn,
       :start_time,
@@ -2888,6 +3005,7 @@ module Aws::PartnerCentralSelling
     #   <p>A map of the key-value pairs of the tag or tags to assign.</p>
     #   @return [Array<Types::Tag>]
     class StartEngagementFromOpportunityTaskRequest < Struct.new(
+      nil,
       :catalog,
       :client_token,
       :identifier,
@@ -2929,6 +3047,7 @@ module Aws::PartnerCentralSelling
     #   <p>The identifier of the new Engagement invitation. Only populated if TaskStatus is COMPLETE.</p>
     #   @return [String]
     class StartEngagementFromOpportunityTaskResponse < Struct.new(
+      nil,
       :task_id,
       :task_arn,
       :start_time,
@@ -2951,6 +3070,7 @@ module Aws::PartnerCentralSelling
     #   <p>The identifier of the resource snapshot job to start.</p>
     #   @return [String]
     class StartResourceSnapshotJobRequest < Struct.new(
+      nil,
       :catalog,
       :resource_snapshot_job_identifier,
       keyword_init: true
@@ -2965,6 +3085,7 @@ module Aws::PartnerCentralSelling
     #   <p>The identifier of the job to stop.</p>
     #   @return [String]
     class StopResourceSnapshotJobRequest < Struct.new(
+      nil,
       :catalog,
       :resource_snapshot_job_identifier,
       keyword_init: true
@@ -2985,6 +3106,7 @@ module Aws::PartnerCentralSelling
     #   <p>Determines whether to restrict visibility of the opportunity from AWS sales. Default value is Full. Valid values:</p> <ul> <li> <p> <code>Full</code>: The opportunity is fully visible to AWS sales.</p> </li> <li> <p> <code>Limited</code>: The opportunity has restricted visibility to AWS sales.</p> </li> </ul>
     #   @return [String]
     class SubmitOpportunityRequest < Struct.new(
+      nil,
       :catalog,
       :identifier,
       :involvement_type,
@@ -3002,6 +3124,7 @@ module Aws::PartnerCentralSelling
     #   <p>The value in the tag.</p>
     #   @return [String]
     class Tag < Struct.new(
+      nil,
       :key,
       :value,
       keyword_init: true
@@ -3016,6 +3139,7 @@ module Aws::PartnerCentralSelling
     #   <p>A map of the key-value pairs of the tag or tags to assign.</p>
     #   @return [Array<Types::Tag>]
     class TagResourceRequest < Struct.new(
+      nil,
       :resource_arn,
       :tags,
       keyword_init: true
@@ -3024,6 +3148,7 @@ module Aws::PartnerCentralSelling
     end
 
     class TagResourceResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -3033,6 +3158,7 @@ module Aws::PartnerCentralSelling
     # @!attribute message
     #   @return [String]
     class ThrottlingException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -3046,6 +3172,7 @@ module Aws::PartnerCentralSelling
     #   <p>The keys of the key-value pairs for the tag or tags you want to remove from the specified resource.</p>
     #   @return [Array<String>]
     class UntagResourceRequest < Struct.new(
+      nil,
       :resource_arn,
       :tag_keys,
       keyword_init: true
@@ -3054,6 +3181,7 @@ module Aws::PartnerCentralSelling
     end
 
     class UntagResourceResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -3096,6 +3224,7 @@ module Aws::PartnerCentralSelling
     #   <p>An object that contains lifecycle details for the <code>Opportunity</code>.</p>
     #   @return [Types::LifeCycle]
     class UpdateOpportunityRequest < Struct.new(
+      nil,
       :catalog,
       :primary_needs_from_aws,
       :national_security,
@@ -3120,6 +3249,7 @@ module Aws::PartnerCentralSelling
     #   <p> <code>DateTime</code> when the opportunity was last modified.</p>
     #   @return [Time]
     class UpdateOpportunityResponse < Struct.new(
+      nil,
       :id,
       :last_modified_date,
       keyword_init: true
@@ -3137,6 +3267,7 @@ module Aws::PartnerCentralSelling
     #   <p>A list of issues that were discovered in the submitted request or the resource state.</p>
     #   @return [Array<Types::ValidationExceptionError>]
     class ValidationException < Struct.new(
+      nil,
       :message,
       :reason,
       :error_list,
@@ -3156,6 +3287,7 @@ module Aws::PartnerCentralSelling
     #   <p>Specifies the error code for the invalid field value.</p>
     #   @return [String]
     class ValidationExceptionError < Struct.new(
+      nil,
       :field_name,
       :message,
       :code,

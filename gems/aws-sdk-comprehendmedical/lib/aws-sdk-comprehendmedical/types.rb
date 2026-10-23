@@ -48,6 +48,7 @@ module Aws::ComprehendMedical
     #   <p> Contextual information for this attribute. </p>
     #   @return [Array<Types::Trait>]
     class Attribute < Struct.new(
+      nil,
       :type,
       :score,
       :relationship_score,
@@ -72,6 +73,7 @@ module Aws::ComprehendMedical
     #       </p>
     #   @return [Integer]
     class Characters < Struct.new(
+      nil,
       :original_text_characters,
       keyword_init: true
     )
@@ -97,6 +99,7 @@ module Aws::ComprehendMedical
     #         newest to oldest.</p>
     #   @return [Time]
     class ComprehendMedicalAsyncJobFilter < Struct.new(
+      nil,
       :job_name,
       :job_status,
       :submit_time_before,
@@ -156,6 +159,7 @@ module Aws::ComprehendMedical
     #         documents.</p>
     #   @return [String]
     class ComprehendMedicalAsyncJobProperties < Struct.new(
+      nil,
       :job_id,
       :job_name,
       :job_status,
@@ -181,6 +185,7 @@ module Aws::ComprehendMedical
     #         response.</p>
     #   @return [String]
     class DescribeEntitiesDetectionV2JobRequest < Struct.new(
+      nil,
       :job_id,
       keyword_init: true
     )
@@ -191,6 +196,7 @@ module Aws::ComprehendMedical
     #   <p>An object that contains the properties associated with a detection job.</p>
     #   @return [Types::ComprehendMedicalAsyncJobProperties]
     class DescribeEntitiesDetectionV2JobResponse < Struct.new(
+      nil,
       :comprehend_medical_async_job_properties,
       keyword_init: true
     )
@@ -202,6 +208,7 @@ module Aws::ComprehendMedical
     #           StartICD10CMInferenceJob</code> operation returns this identifier in its response.</p>
     #   @return [String]
     class DescribeICD10CMInferenceJobRequest < Struct.new(
+      nil,
       :job_id,
       keyword_init: true
     )
@@ -212,6 +219,7 @@ module Aws::ComprehendMedical
     #   <p>An object that contains the properties associated with a detection job.</p>
     #   @return [Types::ComprehendMedicalAsyncJobProperties]
     class DescribeICD10CMInferenceJobResponse < Struct.new(
+      nil,
       :comprehend_medical_async_job_properties,
       keyword_init: true
     )
@@ -223,6 +231,7 @@ module Aws::ComprehendMedical
     #         operation returns this identifier in its response.</p>
     #   @return [String]
     class DescribePHIDetectionJobRequest < Struct.new(
+      nil,
       :job_id,
       keyword_init: true
     )
@@ -233,6 +242,7 @@ module Aws::ComprehendMedical
     #   <p>An object that contains the properties associated with a detection job.</p>
     #   @return [Types::ComprehendMedicalAsyncJobProperties]
     class DescribePHIDetectionJobResponse < Struct.new(
+      nil,
       :comprehend_medical_async_job_properties,
       keyword_init: true
     )
@@ -244,6 +254,7 @@ module Aws::ComprehendMedical
     #         StartRxNormInferenceJob operation returns this identifier in its response.</p>
     #   @return [String]
     class DescribeRxNormInferenceJobRequest < Struct.new(
+      nil,
       :job_id,
       keyword_init: true
     )
@@ -254,6 +265,7 @@ module Aws::ComprehendMedical
     #   <p>An object that contains the properties associated with a detection job.</p>
     #   @return [Types::ComprehendMedicalAsyncJobProperties]
     class DescribeRxNormInferenceJobResponse < Struct.new(
+      nil,
       :comprehend_medical_async_job_properties,
       keyword_init: true
     )
@@ -266,6 +278,7 @@ module Aws::ComprehendMedical
     #       </p>
     #   @return [String]
     class DescribeSNOMEDCTInferenceJobRequest < Struct.new(
+      nil,
       :job_id,
       keyword_init: true
     )
@@ -276,6 +289,7 @@ module Aws::ComprehendMedical
     #   <p>Provides information about a detection job.</p>
     #   @return [Types::ComprehendMedicalAsyncJobProperties]
     class DescribeSNOMEDCTInferenceJobResponse < Struct.new(
+      nil,
       :comprehend_medical_async_job_properties,
       keyword_init: true
     )
@@ -286,6 +300,7 @@ module Aws::ComprehendMedical
     #   <p> A UTF-8 text string containing the clinical content being examined for entities.</p>
     #   @return [String]
     class DetectEntitiesRequest < Struct.new(
+      nil,
       :text,
       keyword_init: true
     )
@@ -312,6 +327,7 @@ module Aws::ComprehendMedical
     #         documents.</p>
     #   @return [String]
     class DetectEntitiesResponse < Struct.new(
+      nil,
       :entities,
       :unmapped_attributes,
       :pagination_token,
@@ -325,6 +341,7 @@ module Aws::ComprehendMedical
     #   <p>A UTF-8 string containing the clinical content being examined for entities.</p>
     #   @return [String]
     class DetectEntitiesV2Request < Struct.new(
+      nil,
       :text,
       keyword_init: true
     )
@@ -350,6 +367,7 @@ module Aws::ComprehendMedical
     #         documents.</p>
     #   @return [String]
     class DetectEntitiesV2Response < Struct.new(
+      nil,
       :entities,
       :unmapped_attributes,
       :pagination_token,
@@ -363,6 +381,7 @@ module Aws::ComprehendMedical
     #   <p>A UTF-8 text string containing the clinical content being examined for PHI entities.</p>
     #   @return [String]
     class DetectPHIRequest < Struct.new(
+      nil,
       :text,
       keyword_init: true
     )
@@ -385,6 +404,7 @@ module Aws::ComprehendMedical
     #         documents.</p>
     #   @return [String]
     class DetectPHIResponse < Struct.new(
+      nil,
       :entities,
       :pagination_token,
       :model_version,
@@ -425,6 +445,7 @@ module Aws::ComprehendMedical
     #   <p> The extracted attributes that relate to this entity.</p>
     #   @return [Array<Types::Attribute>]
     class Entity < Struct.new(
+      nil,
       :id,
       :begin_offset,
       :end_offset,
@@ -483,6 +504,7 @@ module Aws::ComprehendMedical
     #           be either of <code>OVERLAP</code> or <code>SYSTEM_ORGAN_SITE</code>.</p>
     #   @return [String]
     class ICD10CMAttribute < Struct.new(
+      nil,
       :type,
       :score,
       :relationship_score,
@@ -512,6 +534,7 @@ module Aws::ComprehendMedical
     #         linked to an ICD-10-CM concept.</p>
     #   @return [Float]
     class ICD10CMConcept < Struct.new(
+      nil,
       :description,
       :code,
       :score,
@@ -568,6 +591,7 @@ module Aws::ComprehendMedical
     #         likelihood of the match.</p>
     #   @return [Array<Types::ICD10CMConcept>]
     class ICD10CMEntity < Struct.new(
+      nil,
       :id,
       :text,
       :category,
@@ -594,6 +618,7 @@ module Aws::ComprehendMedical
     #         as a trait.</p>
     #   @return [Float]
     class ICD10CMTrait < Struct.new(
+      nil,
       :name,
       :score,
       keyword_init: true
@@ -605,6 +630,7 @@ module Aws::ComprehendMedical
     #   <p>The input text used for analysis.</p>
     #   @return [String]
     class InferICD10CMRequest < Struct.new(
+      nil,
       :text,
       keyword_init: true
     )
@@ -626,6 +652,7 @@ module Aws::ComprehendMedical
     #         information to track the model used for a particular batch of documents.</p>
     #   @return [String]
     class InferICD10CMResponse < Struct.new(
+      nil,
       :entities,
       :pagination_token,
       :model_version,
@@ -638,6 +665,7 @@ module Aws::ComprehendMedical
     #   <p>The input text used for analysis.</p>
     #   @return [String]
     class InferRxNormRequest < Struct.new(
+      nil,
       :text,
       keyword_init: true
     )
@@ -659,6 +687,7 @@ module Aws::ComprehendMedical
     #         information to track the model used for a particular batch of documents.</p>
     #   @return [String]
     class InferRxNormResponse < Struct.new(
+      nil,
       :entities,
       :pagination_token,
       :model_version,
@@ -671,6 +700,7 @@ module Aws::ComprehendMedical
     #   <p>The input text to be analyzed using InferSNOMEDCT.</p>
     #   @return [String]
     class InferSNOMEDCTRequest < Struct.new(
+      nil,
       :text,
       keyword_init: true
     )
@@ -703,6 +733,7 @@ module Aws::ComprehendMedical
     #       </p>
     #   @return [Types::Characters]
     class InferSNOMEDCTResponse < Struct.new(
+      nil,
       :entities,
       :pagination_token,
       :model_version,
@@ -723,6 +754,7 @@ module Aws::ComprehendMedical
     #   <p>The path to the input data files in the S3 bucket.</p>
     #   @return [String]
     class InputDataConfig < Struct.new(
+      nil,
       :s3_bucket,
       :s3_key,
       keyword_init: true
@@ -734,6 +766,7 @@ module Aws::ComprehendMedical
     # @!attribute message
     #   @return [String]
     class InternalServerException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -745,6 +778,7 @@ module Aws::ComprehendMedical
     # @!attribute message
     #   @return [String]
     class InvalidEncodingException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -756,6 +790,7 @@ module Aws::ComprehendMedical
     # @!attribute message
     #   @return [String]
     class InvalidRequestException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -773,6 +808,7 @@ module Aws::ComprehendMedical
     #   <p>The maximum number of results to return in each page. The default is 100.</p>
     #   @return [Integer]
     class ListEntitiesDetectionV2JobsRequest < Struct.new(
+      nil,
       :filter,
       :next_token,
       :max_results,
@@ -788,6 +824,7 @@ module Aws::ComprehendMedical
     #   <p>Identifies the next page of results to return.</p>
     #   @return [String]
     class ListEntitiesDetectionV2JobsResponse < Struct.new(
+      nil,
       :comprehend_medical_async_job_properties_list,
       :next_token,
       keyword_init: true
@@ -806,6 +843,7 @@ module Aws::ComprehendMedical
     #   <p>The maximum number of results to return in each page. The default is 100.</p>
     #   @return [Integer]
     class ListICD10CMInferenceJobsRequest < Struct.new(
+      nil,
       :filter,
       :next_token,
       :max_results,
@@ -821,6 +859,7 @@ module Aws::ComprehendMedical
     #   <p>Identifies the next page of results to return.</p>
     #   @return [String]
     class ListICD10CMInferenceJobsResponse < Struct.new(
+      nil,
       :comprehend_medical_async_job_properties_list,
       :next_token,
       keyword_init: true
@@ -839,6 +878,7 @@ module Aws::ComprehendMedical
     #   <p>The maximum number of results to return in each page. The default is 100.</p>
     #   @return [Integer]
     class ListPHIDetectionJobsRequest < Struct.new(
+      nil,
       :filter,
       :next_token,
       :max_results,
@@ -854,6 +894,7 @@ module Aws::ComprehendMedical
     #   <p>Identifies the next page of results to return.</p>
     #   @return [String]
     class ListPHIDetectionJobsResponse < Struct.new(
+      nil,
       :comprehend_medical_async_job_properties_list,
       :next_token,
       keyword_init: true
@@ -872,6 +913,7 @@ module Aws::ComprehendMedical
     #   <p>Identifies the next page of results to return.</p>
     #   @return [Integer]
     class ListRxNormInferenceJobsRequest < Struct.new(
+      nil,
       :filter,
       :next_token,
       :max_results,
@@ -887,6 +929,7 @@ module Aws::ComprehendMedical
     #   <p>Identifies the next page of results to return.</p>
     #   @return [String]
     class ListRxNormInferenceJobsResponse < Struct.new(
+      nil,
       :comprehend_medical_async_job_properties_list,
       :next_token,
       keyword_init: true
@@ -908,6 +951,7 @@ module Aws::ComprehendMedical
     #       </p>
     #   @return [Integer]
     class ListSNOMEDCTInferenceJobsRequest < Struct.new(
+      nil,
       :filter,
       :next_token,
       :max_results,
@@ -927,6 +971,7 @@ module Aws::ComprehendMedical
     #       </p>
     #   @return [String]
     class ListSNOMEDCTInferenceJobsResponse < Struct.new(
+      nil,
       :comprehend_medical_async_job_properties_list,
       :next_token,
       keyword_init: true
@@ -947,6 +992,7 @@ module Aws::ComprehendMedical
     #         another.</p>
     #   @return [String]
     class OutputDataConfig < Struct.new(
+      nil,
       :s3_bucket,
       :s3_key,
       keyword_init: true
@@ -959,6 +1005,7 @@ module Aws::ComprehendMedical
     # @!attribute message
     #   @return [String]
     class ResourceNotFoundException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -1001,6 +1048,7 @@ module Aws::ComprehendMedical
     #         form of a medication.</p>
     #   @return [Array<Types::RxNormTrait>]
     class RxNormAttribute < Struct.new(
+      nil,
       :type,
       :score,
       :relationship_score,
@@ -1027,6 +1075,7 @@ module Aws::ComprehendMedical
     #         linked to the reported RxNorm concept.</p>
     #   @return [Float]
     class RxNormConcept < Struct.new(
+      nil,
       :description,
       :code,
       :score,
@@ -1081,6 +1130,7 @@ module Aws::ComprehendMedical
     #         likelihood of the match.</p>
     #   @return [Array<Types::RxNormConcept>]
     class RxNormEntity < Struct.new(
+      nil,
       :id,
       :text,
       :category,
@@ -1107,6 +1157,7 @@ module Aws::ComprehendMedical
     #         trait.</p>
     #   @return [Float]
     class RxNormTrait < Struct.new(
+      nil,
       :name,
       :score,
       keyword_init: true
@@ -1173,6 +1224,7 @@ module Aws::ComprehendMedical
     #       </p>
     #   @return [Array<Types::SNOMEDCTConcept>]
     class SNOMEDCTAttribute < Struct.new(
+      nil,
       :category,
       :type,
       :score,
@@ -1208,6 +1260,7 @@ module Aws::ComprehendMedical
     #       </p>
     #   @return [Float]
     class SNOMEDCTConcept < Struct.new(
+      nil,
       :description,
       :code,
       :score,
@@ -1235,6 +1288,7 @@ module Aws::ComprehendMedical
     #       </p>
     #   @return [String]
     class SNOMEDCTDetails < Struct.new(
+      nil,
       :edition,
       :language,
       :version_date,
@@ -1297,6 +1351,7 @@ module Aws::ComprehendMedical
     #       </p>
     #   @return [Array<Types::SNOMEDCTConcept>]
     class SNOMEDCTEntity < Struct.new(
+      nil,
       :id,
       :text,
       :category,
@@ -1326,6 +1381,7 @@ module Aws::ComprehendMedical
     #       </p>
     #   @return [Float]
     class SNOMEDCTTrait < Struct.new(
+      nil,
       :name,
       :score,
       keyword_init: true
@@ -1338,6 +1394,7 @@ module Aws::ComprehendMedical
     # @!attribute message
     #   @return [String]
     class ServiceUnavailableException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -1369,6 +1426,7 @@ module Aws::ComprehendMedical
     #   <p>The language of the input documents. All documents must be in the same language. Amazon Comprehend Medical processes files in US English (en).</p>
     #   @return [String]
     class StartEntitiesDetectionV2JobRequest < Struct.new(
+      nil,
       :input_data_config,
       :output_data_config,
       :data_access_role_arn,
@@ -1386,6 +1444,7 @@ module Aws::ComprehendMedical
     #         the <code>DescribeEntitiesDetectionV2Job</code> operation.</p>
     #   @return [String]
     class StartEntitiesDetectionV2JobResponse < Struct.new(
+      nil,
       :job_id,
       keyword_init: true
     )
@@ -1416,6 +1475,7 @@ module Aws::ComprehendMedical
     #   <p>The language of the input documents. All documents must be in the same language.</p>
     #   @return [String]
     class StartICD10CMInferenceJobRequest < Struct.new(
+      nil,
       :input_data_config,
       :output_data_config,
       :data_access_role_arn,
@@ -1433,6 +1493,7 @@ module Aws::ComprehendMedical
     #         the <code>StartICD10CMInferenceJob</code> operation.</p>
     #   @return [String]
     class StartICD10CMInferenceJobResponse < Struct.new(
+      nil,
       :job_id,
       keyword_init: true
     )
@@ -1464,6 +1525,7 @@ module Aws::ComprehendMedical
     #   <p>The language of the input documents. All documents must be in the same language.</p>
     #   @return [String]
     class StartPHIDetectionJobRequest < Struct.new(
+      nil,
       :input_data_config,
       :output_data_config,
       :data_access_role_arn,
@@ -1481,6 +1543,7 @@ module Aws::ComprehendMedical
     #         the <code>DescribePHIDetectionJob</code> operation.</p>
     #   @return [String]
     class StartPHIDetectionJobResponse < Struct.new(
+      nil,
       :job_id,
       keyword_init: true
     )
@@ -1512,6 +1575,7 @@ module Aws::ComprehendMedical
     #   <p>The language of the input documents. All documents must be in the same language.</p>
     #   @return [String]
     class StartRxNormInferenceJobRequest < Struct.new(
+      nil,
       :input_data_config,
       :output_data_config,
       :data_access_role_arn,
@@ -1528,6 +1592,7 @@ module Aws::ComprehendMedical
     #   <p>The identifier of the job.</p>
     #   @return [String]
     class StartRxNormInferenceJobResponse < Struct.new(
+      nil,
       :job_id,
       keyword_init: true
     )
@@ -1567,6 +1632,7 @@ module Aws::ComprehendMedical
     #       </p>
     #   @return [String]
     class StartSNOMEDCTInferenceJobRequest < Struct.new(
+      nil,
       :input_data_config,
       :output_data_config,
       :data_access_role_arn,
@@ -1585,6 +1651,7 @@ module Aws::ComprehendMedical
     #       </p>
     #   @return [String]
     class StartSNOMEDCTInferenceJobResponse < Struct.new(
+      nil,
       :job_id,
       keyword_init: true
     )
@@ -1595,6 +1662,7 @@ module Aws::ComprehendMedical
     #   <p>The identifier of the medical entities job to stop.</p>
     #   @return [String]
     class StopEntitiesDetectionV2JobRequest < Struct.new(
+      nil,
       :job_id,
       keyword_init: true
     )
@@ -1605,6 +1673,7 @@ module Aws::ComprehendMedical
     #   <p>The identifier of the medical entities detection job that was stopped.</p>
     #   @return [String]
     class StopEntitiesDetectionV2JobResponse < Struct.new(
+      nil,
       :job_id,
       keyword_init: true
     )
@@ -1615,6 +1684,7 @@ module Aws::ComprehendMedical
     #   <p>The identifier of the job.</p>
     #   @return [String]
     class StopICD10CMInferenceJobRequest < Struct.new(
+      nil,
       :job_id,
       keyword_init: true
     )
@@ -1626,6 +1696,7 @@ module Aws::ComprehendMedical
     #         the <code>DescribeICD10CMInferenceJob</code> operation.</p>
     #   @return [String]
     class StopICD10CMInferenceJobResponse < Struct.new(
+      nil,
       :job_id,
       keyword_init: true
     )
@@ -1636,6 +1707,7 @@ module Aws::ComprehendMedical
     #   <p>The identifier of the PHI detection job to stop.</p>
     #   @return [String]
     class StopPHIDetectionJobRequest < Struct.new(
+      nil,
       :job_id,
       keyword_init: true
     )
@@ -1646,6 +1718,7 @@ module Aws::ComprehendMedical
     #   <p>The identifier of the PHI detection job that was stopped.</p>
     #   @return [String]
     class StopPHIDetectionJobResponse < Struct.new(
+      nil,
       :job_id,
       keyword_init: true
     )
@@ -1656,6 +1729,7 @@ module Aws::ComprehendMedical
     #   <p>The identifier of the job.</p>
     #   @return [String]
     class StopRxNormInferenceJobRequest < Struct.new(
+      nil,
       :job_id,
       keyword_init: true
     )
@@ -1667,6 +1741,7 @@ module Aws::ComprehendMedical
     #         the <code>DescribeRxNormInferenceJob</code> operation.</p>
     #   @return [String]
     class StopRxNormInferenceJobResponse < Struct.new(
+      nil,
       :job_id,
       keyword_init: true
     )
@@ -1679,6 +1754,7 @@ module Aws::ComprehendMedical
     #       </p>
     #   @return [String]
     class StopSNOMEDCTInferenceJobRequest < Struct.new(
+      nil,
       :job_id,
       keyword_init: true
     )
@@ -1691,6 +1767,7 @@ module Aws::ComprehendMedical
     #       </p>
     #   @return [String]
     class StopSNOMEDCTInferenceJobResponse < Struct.new(
+      nil,
       :job_id,
       keyword_init: true
     )
@@ -1702,6 +1779,7 @@ module Aws::ComprehendMedical
     # @!attribute message
     #   @return [String]
     class TextSizeLimitExceededException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -1714,6 +1792,7 @@ module Aws::ComprehendMedical
     # @!attribute message
     #   @return [String]
     class TooManyRequestsException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -1728,6 +1807,7 @@ module Aws::ComprehendMedical
     #   <p> The level of confidence that Amazon Comprehend Medical has in the accuracy of this trait.</p>
     #   @return [Float]
     class Trait < Struct.new(
+      nil,
       :name,
       :score,
       keyword_init: true
@@ -1745,6 +1825,7 @@ module Aws::ComprehendMedical
     #   <p> The specific attribute that has been extracted but not mapped to an entity. </p>
     #   @return [Types::Attribute]
     class UnmappedAttribute < Struct.new(
+      nil,
       :type,
       :attribute,
       keyword_init: true
@@ -1757,6 +1838,7 @@ module Aws::ComprehendMedical
     # @!attribute message
     #   @return [String]
     class ValidationException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )

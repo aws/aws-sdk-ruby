@@ -43,6 +43,7 @@ module Aws::ServiceCatalog
     #            </p>
     #   @return [String]
     class AcceptPortfolioShareInput < Struct.new(
+      nil,
       :accept_language,
       :portfolio_id,
       :portfolio_share_type,
@@ -52,6 +53,7 @@ module Aws::ServiceCatalog
     end
 
     class AcceptPortfolioShareOutput < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -79,6 +81,7 @@ module Aws::ServiceCatalog
     #   <p>The user to which the access level applies. The only supported value is <code>self</code>.</p>
     #   @return [String]
     class AccessLevelFilter < Struct.new(
+      nil,
       :key,
       :value,
       keyword_init: true
@@ -93,6 +96,7 @@ module Aws::ServiceCatalog
     #   <p> The resource identifier. Either a portfolio-id or a product-id.</p>
     #   @return [String]
     class AssociateBudgetWithResourceInput < Struct.new(
+      nil,
       :budget_name,
       :resource_id,
       keyword_init: true
@@ -101,6 +105,7 @@ module Aws::ServiceCatalog
     end
 
     class AssociateBudgetWithResourceOutput < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -184,6 +189,7 @@ module Aws::ServiceCatalog
     #            with or without wildcard characters. </p>
     #   @return [String]
     class AssociatePrincipalWithPortfolioInput < Struct.new(
+      nil,
       :accept_language,
       :portfolio_id,
       :principal_arn,
@@ -194,6 +200,7 @@ module Aws::ServiceCatalog
     end
 
     class AssociatePrincipalWithPortfolioOutput < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -222,6 +229,7 @@ module Aws::ServiceCatalog
     #   <p>The identifier of the source portfolio.</p>
     #   @return [String]
     class AssociateProductWithPortfolioInput < Struct.new(
+      nil,
       :accept_language,
       :product_id,
       :portfolio_id,
@@ -232,6 +240,7 @@ module Aws::ServiceCatalog
     end
 
     class AssociateProductWithPortfolioOutput < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -263,6 +272,7 @@ module Aws::ServiceCatalog
     #   <p>A unique identifier that you provide to ensure idempotency. If multiple requests from the same Amazon Web Services account use the same idempotency token, the same response is returned for each repeated request. </p>
     #   @return [String]
     class AssociateServiceActionWithProvisioningArtifactInput < Struct.new(
+      nil,
       :product_id,
       :provisioning_artifact_id,
       :service_action_id,
@@ -274,6 +284,7 @@ module Aws::ServiceCatalog
     end
 
     class AssociateServiceActionWithProvisioningArtifactOutput < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -286,6 +297,7 @@ module Aws::ServiceCatalog
     #   <p>The TagOption identifier.</p>
     #   @return [String]
     class AssociateTagOptionWithResourceInput < Struct.new(
+      nil,
       :resource_id,
       :tag_option_id,
       keyword_init: true
@@ -294,6 +306,7 @@ module Aws::ServiceCatalog
     end
 
     class AssociateTagOptionWithResourceOutput < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -316,6 +329,7 @@ module Aws::ServiceCatalog
     #            </ul>
     #   @return [String]
     class BatchAssociateServiceActionWithProvisioningArtifactInput < Struct.new(
+      nil,
       :service_action_associations,
       :accept_language,
       keyword_init: true
@@ -327,6 +341,7 @@ module Aws::ServiceCatalog
     #   <p>An object that contains a list of errors, along with information to help you identify the self-service action.</p>
     #   @return [Array<Types::FailedServiceActionAssociation>]
     class BatchAssociateServiceActionWithProvisioningArtifactOutput < Struct.new(
+      nil,
       :failed_service_action_associations,
       keyword_init: true
     )
@@ -350,6 +365,7 @@ module Aws::ServiceCatalog
     #            </ul>
     #   @return [String]
     class BatchDisassociateServiceActionFromProvisioningArtifactInput < Struct.new(
+      nil,
       :service_action_associations,
       :accept_language,
       keyword_init: true
@@ -361,6 +377,7 @@ module Aws::ServiceCatalog
     #   <p>An object that contains a list of errors, along with information to help you identify the self-service action.</p>
     #   @return [Array<Types::FailedServiceActionAssociation>]
     class BatchDisassociateServiceActionFromProvisioningArtifactOutput < Struct.new(
+      nil,
       :failed_service_action_associations,
       keyword_init: true
     )
@@ -372,6 +389,7 @@ module Aws::ServiceCatalog
     #   <p>Name of the associated budget.</p>
     #   @return [String]
     class BudgetDetail < Struct.new(
+      nil,
       :budget_name,
       keyword_init: true
     )
@@ -383,6 +401,7 @@ module Aws::ServiceCatalog
     #   <p>The name of the CloudWatch dashboard.</p>
     #   @return [String]
     class CloudWatchDashboard < Struct.new(
+      nil,
       :name,
       keyword_init: true
     )
@@ -405,6 +424,7 @@ module Aws::ServiceCatalog
     #            "folder/file.json." </p>
     #   @return [String]
     class CodeStarParameters < Struct.new(
+      nil,
       :connection_arn,
       :repository,
       :branch,
@@ -454,6 +474,7 @@ module Aws::ServiceCatalog
     #   <p>The identifier of the portfolio the product resides in. The constraint applies only to the instance of the product that lives within this portfolio.</p>
     #   @return [String]
     class ConstraintDetail < Struct.new(
+      nil,
       :constraint_id,
       :type,
       :description,
@@ -493,6 +514,7 @@ module Aws::ServiceCatalog
     #   <p>The description of the constraint.</p>
     #   @return [String]
     class ConstraintSummary < Struct.new(
+      nil,
       :type,
       :description,
       keyword_init: true
@@ -535,6 +557,7 @@ module Aws::ServiceCatalog
     #     the same response is returned for each repeated request. </p>
     #   @return [String]
     class CopyProductInput < Struct.new(
+      nil,
       :accept_language,
       :source_product_arn,
       :target_product_id,
@@ -551,6 +574,7 @@ module Aws::ServiceCatalog
     #   <p>The token to use to track the progress of the operation.</p>
     #   @return [String]
     class CopyProductOutput < Struct.new(
+      nil,
       :copy_product_token,
       keyword_init: true
     )
@@ -668,6 +692,7 @@ module Aws::ServiceCatalog
     #     the same response is returned for each repeated request.</p>
     #   @return [String]
     class CreateConstraintInput < Struct.new(
+      nil,
       :accept_language,
       :portfolio_id,
       :product_id,
@@ -690,6 +715,7 @@ module Aws::ServiceCatalog
     #   <p>The status of the current request.</p>
     #   @return [String]
     class CreateConstraintOutput < Struct.new(
+      nil,
       :constraint_detail,
       :constraint_parameters,
       :status,
@@ -728,6 +754,7 @@ module Aws::ServiceCatalog
     #     the same response is returned for each repeated request.</p>
     #   @return [String]
     class CreatePortfolioInput < Struct.new(
+      nil,
       :accept_language,
       :display_name,
       :description,
@@ -746,6 +773,7 @@ module Aws::ServiceCatalog
     #   <p>Information about the tags associated with the portfolio.</p>
     #   @return [Array<Types::Tag>]
     class CreatePortfolioOutput < Struct.new(
+      nil,
       :portfolio_detail,
       :tags,
       keyword_init: true
@@ -793,6 +821,7 @@ module Aws::ServiceCatalog
     #            after creating the share. </p>
     #   @return [Boolean]
     class CreatePortfolioShareInput < Struct.new(
+      nil,
       :accept_language,
       :portfolio_id,
       :account_id,
@@ -808,6 +837,7 @@ module Aws::ServiceCatalog
     #   <p>The portfolio shares a unique identifier that only returns if the portfolio is shared to an organization node.</p>
     #   @return [String]
     class CreatePortfolioShareOutput < Struct.new(
+      nil,
       :portfolio_share_token,
       keyword_init: true
     )
@@ -881,6 +911,7 @@ module Aws::ServiceCatalog
     #            </ul>
     #   @return [Types::SourceConnection]
     class CreateProductInput < Struct.new(
+      nil,
       :accept_language,
       :name,
       :owner,
@@ -909,6 +940,7 @@ module Aws::ServiceCatalog
     #   <p>Information about the tags associated with the product.</p>
     #   @return [Array<Types::Tag>]
     class CreateProductOutput < Struct.new(
+      nil,
       :product_view_detail,
       :provisioning_artifact_detail,
       :tags,
@@ -968,6 +1000,7 @@ module Aws::ServiceCatalog
     #            <p>If the plan is for an existing provisioned product, the product must have a <code>RESOURCE_UPDATE</code> constraint with <code>TagUpdatesOnProvisionedProduct</code> set to <code>ALLOWED</code> to allow tag updates.</p>
     #   @return [Array<Types::Tag>]
     class CreateProvisionedProductPlanInput < Struct.new(
+      nil,
       :accept_language,
       :plan_name,
       :plan_type,
@@ -1000,6 +1033,7 @@ module Aws::ServiceCatalog
     #   <p>The identifier of the provisioning artifact.</p>
     #   @return [String]
     class CreateProvisionedProductPlanOutput < Struct.new(
+      nil,
       :plan_name,
       :plan_id,
       :provision_product_id,
@@ -1034,6 +1068,7 @@ module Aws::ServiceCatalog
     #     the same response is returned for each repeated request.</p>
     #   @return [String]
     class CreateProvisioningArtifactInput < Struct.new(
+      nil,
       :accept_language,
       :product_id,
       :parameters,
@@ -1063,6 +1098,7 @@ module Aws::ServiceCatalog
     #   <p>The status of the current request.</p>
     #   @return [String]
     class CreateProvisioningArtifactOutput < Struct.new(
+      nil,
       :provisioning_artifact_detail,
       :info,
       :status,
@@ -1123,6 +1159,7 @@ module Aws::ServiceCatalog
     #     the same response is returned for each repeated request.</p>
     #   @return [String]
     class CreateServiceActionInput < Struct.new(
+      nil,
       :name,
       :definition_type,
       :definition,
@@ -1138,6 +1175,7 @@ module Aws::ServiceCatalog
     #   <p>An object containing information about the self-service action.</p>
     #   @return [Types::ServiceActionDetail]
     class CreateServiceActionOutput < Struct.new(
+      nil,
       :service_action_detail,
       keyword_init: true
     )
@@ -1151,6 +1189,7 @@ module Aws::ServiceCatalog
     #   <p>The TagOption value.</p>
     #   @return [String]
     class CreateTagOptionInput < Struct.new(
+      nil,
       :key,
       :value,
       keyword_init: true
@@ -1162,6 +1201,7 @@ module Aws::ServiceCatalog
     #   <p>Information about the TagOption.</p>
     #   @return [Types::TagOptionDetail]
     class CreateTagOptionOutput < Struct.new(
+      nil,
       :tag_option_detail,
       keyword_init: true
     )
@@ -1185,6 +1225,7 @@ module Aws::ServiceCatalog
     #   <p>The identifier of the constraint.</p>
     #   @return [String]
     class DeleteConstraintInput < Struct.new(
+      nil,
       :accept_language,
       :id,
       keyword_init: true
@@ -1193,6 +1234,7 @@ module Aws::ServiceCatalog
     end
 
     class DeleteConstraintOutput < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1215,6 +1257,7 @@ module Aws::ServiceCatalog
     #   <p>The portfolio identifier.</p>
     #   @return [String]
     class DeletePortfolioInput < Struct.new(
+      nil,
       :accept_language,
       :id,
       keyword_init: true
@@ -1223,6 +1266,7 @@ module Aws::ServiceCatalog
     end
 
     class DeletePortfolioOutput < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1251,6 +1295,7 @@ module Aws::ServiceCatalog
     #   <p>The organization node to whom you are going to stop sharing.</p>
     #   @return [Types::OrganizationNode]
     class DeletePortfolioShareInput < Struct.new(
+      nil,
       :accept_language,
       :portfolio_id,
       :account_id,
@@ -1264,6 +1309,7 @@ module Aws::ServiceCatalog
     #   <p>The portfolio share unique identifier. This will only be returned if delete is made to an organization node.</p>
     #   @return [String]
     class DeletePortfolioShareOutput < Struct.new(
+      nil,
       :portfolio_share_token,
       keyword_init: true
     )
@@ -1287,6 +1333,7 @@ module Aws::ServiceCatalog
     #   <p>The product identifier.</p>
     #   @return [String]
     class DeleteProductInput < Struct.new(
+      nil,
       :accept_language,
       :id,
       keyword_init: true
@@ -1295,6 +1342,7 @@ module Aws::ServiceCatalog
     end
 
     class DeleteProductOutput < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1321,6 +1369,7 @@ module Aws::ServiceCatalog
     #            if it cannot delete the underlying resources.</p>
     #   @return [Boolean]
     class DeleteProvisionedProductPlanInput < Struct.new(
+      nil,
       :accept_language,
       :plan_id,
       :ignore_errors,
@@ -1330,6 +1379,7 @@ module Aws::ServiceCatalog
     end
 
     class DeleteProvisionedProductPlanOutput < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1355,6 +1405,7 @@ module Aws::ServiceCatalog
     #   <p>The identifier of the provisioning artifact.</p>
     #   @return [String]
     class DeleteProvisioningArtifactInput < Struct.new(
+      nil,
       :accept_language,
       :product_id,
       :provisioning_artifact_id,
@@ -1364,6 +1415,7 @@ module Aws::ServiceCatalog
     end
 
     class DeleteProvisioningArtifactOutput < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1389,6 +1441,7 @@ module Aws::ServiceCatalog
     #   <p>A unique identifier that you provide to ensure idempotency. If multiple requests from the same Amazon Web Services account use the same idempotency token, the same response is returned for each repeated request. </p>
     #   @return [String]
     class DeleteServiceActionInput < Struct.new(
+      nil,
       :id,
       :accept_language,
       :idempotency_token,
@@ -1398,6 +1451,7 @@ module Aws::ServiceCatalog
     end
 
     class DeleteServiceActionOutput < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1407,6 +1461,7 @@ module Aws::ServiceCatalog
     #   <p>The TagOption identifier.</p>
     #   @return [String]
     class DeleteTagOptionInput < Struct.new(
+      nil,
       :id,
       keyword_init: true
     )
@@ -1414,6 +1469,7 @@ module Aws::ServiceCatalog
     end
 
     class DeleteTagOptionOutput < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1436,6 +1492,7 @@ module Aws::ServiceCatalog
     #   <p>The identifier of the constraint.</p>
     #   @return [String]
     class DescribeConstraintInput < Struct.new(
+      nil,
       :accept_language,
       :id,
       keyword_init: true
@@ -1453,6 +1510,7 @@ module Aws::ServiceCatalog
     #   <p>The status of the current request.</p>
     #   @return [String]
     class DescribeConstraintOutput < Struct.new(
+      nil,
       :constraint_detail,
       :constraint_parameters,
       :status,
@@ -1478,6 +1536,7 @@ module Aws::ServiceCatalog
     #   <p>The token for the copy product operation. This token is returned by <a>CopyProduct</a>.</p>
     #   @return [String]
     class DescribeCopyProductStatusInput < Struct.new(
+      nil,
       :accept_language,
       :copy_product_token,
       keyword_init: true
@@ -1495,6 +1554,7 @@ module Aws::ServiceCatalog
     #   <p>The status message.</p>
     #   @return [String]
     class DescribeCopyProductStatusOutput < Struct.new(
+      nil,
       :copy_product_status,
       :target_product_id,
       :status_detail,
@@ -1520,6 +1580,7 @@ module Aws::ServiceCatalog
     #   <p>The portfolio identifier.</p>
     #   @return [String]
     class DescribePortfolioInput < Struct.new(
+      nil,
       :accept_language,
       :id,
       keyword_init: true
@@ -1540,6 +1601,7 @@ module Aws::ServiceCatalog
     #   <p>Information about the associated budgets.</p>
     #   @return [Array<Types::BudgetDetail>]
     class DescribePortfolioOutput < Struct.new(
+      nil,
       :portfolio_detail,
       :tags,
       :tag_options,
@@ -1553,6 +1615,7 @@ module Aws::ServiceCatalog
     #   <p>The token for the portfolio share operation. This token is returned either by CreatePortfolioShare or by DeletePortfolioShare.</p>
     #   @return [String]
     class DescribePortfolioShareStatusInput < Struct.new(
+      nil,
       :portfolio_share_token,
       keyword_init: true
     )
@@ -1575,6 +1638,7 @@ module Aws::ServiceCatalog
     #   <p>Information about the portfolio share operation.</p>
     #   @return [Types::ShareDetails]
     class DescribePortfolioShareStatusOutput < Struct.new(
+      nil,
       :portfolio_share_token,
       :portfolio_id,
       :organization_node_value,
@@ -1602,6 +1666,7 @@ module Aws::ServiceCatalog
     #   <p>The maximum number of items to return with this call.</p>
     #   @return [Integer]
     class DescribePortfolioSharesInput < Struct.new(
+      nil,
       :portfolio_id,
       :type,
       :page_token,
@@ -1618,6 +1683,7 @@ module Aws::ServiceCatalog
     #   <p>Summaries about each of the portfolio shares.</p>
     #   @return [Array<Types::PortfolioShareDetail>]
     class DescribePortfolioSharesOutput < Struct.new(
+      nil,
       :next_page_token,
       :portfolio_share_details,
       keyword_init: true
@@ -1653,6 +1719,7 @@ module Aws::ServiceCatalog
     #            product. Otherwise only local TagOptions will be returned. </p>
     #   @return [String]
     class DescribeProductAsAdminInput < Struct.new(
+      nil,
       :accept_language,
       :id,
       :name,
@@ -1678,6 +1745,7 @@ module Aws::ServiceCatalog
     #   <p>Information about the associated budgets.</p>
     #   @return [Array<Types::BudgetDetail>]
     class DescribeProductAsAdminOutput < Struct.new(
+      nil,
       :product_view_detail,
       :provisioning_artifact_summaries,
       :tags,
@@ -1708,6 +1776,7 @@ module Aws::ServiceCatalog
     #   <p>The product name.</p>
     #   @return [String]
     class DescribeProductInput < Struct.new(
+      nil,
       :accept_language,
       :id,
       :name,
@@ -1729,6 +1798,7 @@ module Aws::ServiceCatalog
     #   <p>Information about the associated launch paths.</p>
     #   @return [Array<Types::LaunchPath>]
     class DescribeProductOutput < Struct.new(
+      nil,
       :product_view_summary,
       :provisioning_artifacts,
       :budgets,
@@ -1755,6 +1825,7 @@ module Aws::ServiceCatalog
     #   <p>The product view identifier.</p>
     #   @return [String]
     class DescribeProductViewInput < Struct.new(
+      nil,
       :accept_language,
       :id,
       keyword_init: true
@@ -1769,6 +1840,7 @@ module Aws::ServiceCatalog
     #   <p>Information about the provisioning artifacts for the product.</p>
     #   @return [Array<Types::ProvisioningArtifact>]
     class DescribeProductViewOutput < Struct.new(
+      nil,
       :product_view_summary,
       :provisioning_artifacts,
       keyword_init: true
@@ -1808,6 +1880,7 @@ module Aws::ServiceCatalog
     #            <p>If you do not provide a name or ID, or you provide both name and ID, an <code>InvalidParametersException</code> will occur.</p>
     #   @return [String]
     class DescribeProvisionedProductInput < Struct.new(
+      nil,
       :accept_language,
       :id,
       :name,
@@ -1823,6 +1896,7 @@ module Aws::ServiceCatalog
     #   <p>Any CloudWatch dashboards that were created when provisioning the product.</p>
     #   @return [Array<Types::CloudWatchDashboard>]
     class DescribeProvisionedProductOutput < Struct.new(
+      nil,
       :provisioned_product_detail,
       :cloud_watch_dashboards,
       keyword_init: true
@@ -1853,6 +1927,7 @@ module Aws::ServiceCatalog
     #   <p>The page token for the next set of results. To retrieve the first set of results, use null.</p>
     #   @return [String]
     class DescribeProvisionedProductPlanInput < Struct.new(
+      nil,
       :accept_language,
       :plan_id,
       :page_size,
@@ -1872,6 +1947,7 @@ module Aws::ServiceCatalog
     #   <p>The page token to use to retrieve the next set of results. If there are no additional results, this value is null.</p>
     #   @return [String]
     class DescribeProvisionedProductPlanOutput < Struct.new(
+      nil,
       :provisioned_product_plan_details,
       :resource_changes,
       :next_page_token,
@@ -1912,6 +1988,7 @@ module Aws::ServiceCatalog
     #   <p>Indicates if the API call response does or does not include additional details about the provisioning parameters. </p>
     #   @return [Boolean]
     class DescribeProvisioningArtifactInput < Struct.new(
+      nil,
       :accept_language,
       :provisioning_artifact_id,
       :product_id,
@@ -1937,6 +2014,7 @@ module Aws::ServiceCatalog
     #   <p>Information about the parameters used to provision the product.  </p>
     #   @return [Array<Types::ProvisioningArtifactParameter>]
     class DescribeProvisioningArtifactOutput < Struct.new(
+      nil,
       :provisioning_artifact_detail,
       :info,
       :status,
@@ -1980,6 +2058,7 @@ module Aws::ServiceCatalog
     #   <p>The name of the path. You must provide the name or ID, but not both.</p>
     #   @return [String]
     class DescribeProvisioningParametersInput < Struct.new(
+      nil,
       :accept_language,
       :product_id,
       :product_name,
@@ -2017,6 +2096,7 @@ module Aws::ServiceCatalog
     #   <p>A list of the keys and descriptions of the outputs. These outputs can be referenced from a provisioned product launched from this provisioning artifact.</p>
     #   @return [Array<Types::ProvisioningArtifactOutput>]
     class DescribeProvisioningParametersOutput < Struct.new(
+      nil,
       :provisioning_artifact_parameters,
       :constraint_summaries,
       :usage_instructions,
@@ -2053,6 +2133,7 @@ module Aws::ServiceCatalog
     #   <p>The maximum number of items to return with this call.</p>
     #   @return [Integer]
     class DescribeRecordInput < Struct.new(
+      nil,
       :accept_language,
       :id,
       :page_token,
@@ -2073,6 +2154,7 @@ module Aws::ServiceCatalog
     #   <p>The page token to use to retrieve the next set of results. If there are no additional results, this value is null.</p>
     #   @return [String]
     class DescribeRecordOutput < Struct.new(
+      nil,
       :record_detail,
       :record_outputs,
       :next_page_token,
@@ -2101,6 +2183,7 @@ module Aws::ServiceCatalog
     #            </ul>
     #   @return [String]
     class DescribeServiceActionExecutionParametersInput < Struct.new(
+      nil,
       :provisioned_product_id,
       :service_action_id,
       :accept_language,
@@ -2113,6 +2196,7 @@ module Aws::ServiceCatalog
     #   <p>The parameters of the self-service action.</p>
     #   @return [Array<Types::ExecutionParameter>]
     class DescribeServiceActionExecutionParametersOutput < Struct.new(
+      nil,
       :service_action_parameters,
       keyword_init: true
     )
@@ -2136,6 +2220,7 @@ module Aws::ServiceCatalog
     #            </ul>
     #   @return [String]
     class DescribeServiceActionInput < Struct.new(
+      nil,
       :id,
       :accept_language,
       keyword_init: true
@@ -2147,6 +2232,7 @@ module Aws::ServiceCatalog
     #   <p>Detailed information about the self-service action.</p>
     #   @return [Types::ServiceActionDetail]
     class DescribeServiceActionOutput < Struct.new(
+      nil,
       :service_action_detail,
       keyword_init: true
     )
@@ -2157,6 +2243,7 @@ module Aws::ServiceCatalog
     #   <p>The TagOption identifier.</p>
     #   @return [String]
     class DescribeTagOptionInput < Struct.new(
+      nil,
       :id,
       keyword_init: true
     )
@@ -2167,6 +2254,7 @@ module Aws::ServiceCatalog
     #   <p>Information about the TagOption.</p>
     #   @return [Types::TagOptionDetail]
     class DescribeTagOptionOutput < Struct.new(
+      nil,
       :tag_option_detail,
       keyword_init: true
     )
@@ -2174,12 +2262,14 @@ module Aws::ServiceCatalog
     end
 
     class DisableAWSOrganizationsAccessInput < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
     end
 
     class DisableAWSOrganizationsAccessOutput < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -2192,6 +2282,7 @@ module Aws::ServiceCatalog
     #   <p>The resource identifier you want to disassociate from. Either a portfolio-id or a product-id.</p>
     #   @return [String]
     class DisassociateBudgetFromResourceInput < Struct.new(
+      nil,
       :budget_name,
       :resource_id,
       keyword_init: true
@@ -2200,6 +2291,7 @@ module Aws::ServiceCatalog
     end
 
     class DisassociateBudgetFromResourceOutput < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -2230,6 +2322,7 @@ module Aws::ServiceCatalog
     #            if you specify an <code>IAM</code> ARN with no AccountId, with or without wildcard characters. </p>
     #   @return [String]
     class DisassociatePrincipalFromPortfolioInput < Struct.new(
+      nil,
       :accept_language,
       :portfolio_id,
       :principal_arn,
@@ -2240,6 +2333,7 @@ module Aws::ServiceCatalog
     end
 
     class DisassociatePrincipalFromPortfolioOutput < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -2265,6 +2359,7 @@ module Aws::ServiceCatalog
     #   <p>The portfolio identifier.</p>
     #   @return [String]
     class DisassociateProductFromPortfolioInput < Struct.new(
+      nil,
       :accept_language,
       :product_id,
       :portfolio_id,
@@ -2274,6 +2369,7 @@ module Aws::ServiceCatalog
     end
 
     class DisassociateProductFromPortfolioOutput < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -2305,6 +2401,7 @@ module Aws::ServiceCatalog
     #   <p>A unique identifier that you provide to ensure idempotency. If multiple requests from the same Amazon Web Services account use the same idempotency token, the same response is returned for each repeated request. </p>
     #   @return [String]
     class DisassociateServiceActionFromProvisioningArtifactInput < Struct.new(
+      nil,
       :product_id,
       :provisioning_artifact_id,
       :service_action_id,
@@ -2316,6 +2413,7 @@ module Aws::ServiceCatalog
     end
 
     class DisassociateServiceActionFromProvisioningArtifactOutput < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -2328,6 +2426,7 @@ module Aws::ServiceCatalog
     #   <p>The TagOption identifier.</p>
     #   @return [String]
     class DisassociateTagOptionFromResourceInput < Struct.new(
+      nil,
       :resource_id,
       :tag_option_id,
       keyword_init: true
@@ -2336,6 +2435,7 @@ module Aws::ServiceCatalog
     end
 
     class DisassociateTagOptionFromResourceOutput < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -2345,6 +2445,7 @@ module Aws::ServiceCatalog
     # @!attribute message
     #   @return [String]
     class DuplicateResourceException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -2352,12 +2453,14 @@ module Aws::ServiceCatalog
     end
 
     class EnableAWSOrganizationsAccessInput < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
     end
 
     class EnableAWSOrganizationsAccessOutput < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -2377,6 +2480,7 @@ module Aws::ServiceCatalog
     #         </p>
     #   @return [Types::UniqueTagResourceIdentifier]
     class EngineWorkflowResourceIdentifier < Struct.new(
+      nil,
       :unique_tag,
       keyword_init: true
     )
@@ -2404,6 +2508,7 @@ module Aws::ServiceCatalog
     #     the same response is returned for each repeated request.</p>
     #   @return [String]
     class ExecuteProvisionedProductPlanInput < Struct.new(
+      nil,
       :accept_language,
       :plan_id,
       :idempotency_token,
@@ -2416,6 +2521,7 @@ module Aws::ServiceCatalog
     #   <p>Information about the result of provisioning the product.</p>
     #   @return [Types::RecordDetail]
     class ExecuteProvisionedProductPlanOutput < Struct.new(
+      nil,
       :record_detail,
       keyword_init: true
     )
@@ -2450,6 +2556,7 @@ module Aws::ServiceCatalog
     #               any special parameters such as <code>TARGET</code>.</p>
     #   @return [Hash<String, Array<String>>]
     class ExecuteProvisionedProductServiceActionInput < Struct.new(
+      nil,
       :provisioned_product_id,
       :service_action_id,
       :execute_token,
@@ -2464,6 +2571,7 @@ module Aws::ServiceCatalog
     #   <p>An object containing detailed information about the result of provisioning the product.</p>
     #   @return [Types::RecordDetail]
     class ExecuteProvisionedProductServiceActionOutput < Struct.new(
+      nil,
       :record_detail,
       keyword_init: true
     )
@@ -2481,6 +2589,7 @@ module Aws::ServiceCatalog
     #   <p>The default values for the execution parameter.</p>
     #   @return [Array<String>]
     class ExecutionParameter < Struct.new(
+      nil,
       :name,
       :type,
       :default_values,
@@ -2506,6 +2615,7 @@ module Aws::ServiceCatalog
     #   <p>A text description of the error.</p>
     #   @return [String]
     class FailedServiceActionAssociation < Struct.new(
+      nil,
       :service_action_id,
       :product_id,
       :provisioning_artifact_id,
@@ -2517,6 +2627,7 @@ module Aws::ServiceCatalog
     end
 
     class GetAWSOrganizationsAccessStatusInput < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -2526,6 +2637,7 @@ module Aws::ServiceCatalog
     #   <p>The status of the portfolio share feature.</p>
     #   @return [String]
     class GetAWSOrganizationsAccessStatusOutput < Struct.new(
+      nil,
       :access_status,
       keyword_init: true
     )
@@ -2561,6 +2673,7 @@ module Aws::ServiceCatalog
     #   <p>The page token for the next set of results. To retrieve the first set of results, use null.</p>
     #   @return [String]
     class GetProvisionedProductOutputsInput < Struct.new(
+      nil,
       :accept_language,
       :provisioned_product_id,
       :provisioned_product_name,
@@ -2580,6 +2693,7 @@ module Aws::ServiceCatalog
     #   <p>The page token to use to retrieve the next set of results. If there are no additional results, this value is null.</p>
     #   @return [String]
     class GetProvisionedProductOutputsOutput < Struct.new(
+      nil,
       :outputs,
       :next_page_token,
       keyword_init: true
@@ -2619,6 +2733,7 @@ module Aws::ServiceCatalog
     #     the same response is returned for each repeated request.</p>
     #   @return [String]
     class ImportAsProvisionedProductInput < Struct.new(
+      nil,
       :accept_language,
       :product_id,
       :provisioning_artifact_id,
@@ -2634,6 +2749,7 @@ module Aws::ServiceCatalog
     #   <p>Information about a request operation.</p>
     #   @return [Types::RecordDetail]
     class ImportAsProvisionedProductOutput < Struct.new(
+      nil,
       :record_detail,
       keyword_init: true
     )
@@ -2644,6 +2760,7 @@ module Aws::ServiceCatalog
     # @!attribute message
     #   @return [String]
     class InvalidParametersException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -2655,6 +2772,7 @@ module Aws::ServiceCatalog
     # @!attribute message
     #   @return [String]
     class InvalidStateException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -2705,6 +2823,7 @@ module Aws::ServiceCatalog
     #   <p>The ProvisioningArtifactID of the ProvisioningArtifact created from the latest successful sync. </p>
     #   @return [String]
     class LastSync < Struct.new(
+      nil,
       :last_sync_time,
       :last_sync_status,
       :last_sync_status_message,
@@ -2723,6 +2842,7 @@ module Aws::ServiceCatalog
     #   <p>The name of the launch path.</p>
     #   @return [String]
     class LaunchPath < Struct.new(
+      nil,
       :id,
       :name,
       keyword_init: true
@@ -2744,6 +2864,7 @@ module Aws::ServiceCatalog
     #   <p>The name of the portfolio that contains the product. </p>
     #   @return [String]
     class LaunchPathSummary < Struct.new(
+      nil,
       :id,
       :constraint_summaries,
       :tags,
@@ -2758,6 +2879,7 @@ module Aws::ServiceCatalog
     # @!attribute message
     #   @return [String]
     class LimitExceededException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -2802,6 +2924,7 @@ module Aws::ServiceCatalog
     #            </ul>
     #   @return [String]
     class ListAcceptedPortfolioSharesInput < Struct.new(
+      nil,
       :accept_language,
       :page_token,
       :page_size,
@@ -2818,6 +2941,7 @@ module Aws::ServiceCatalog
     #   <p>The page token to use to retrieve the next set of results. If there are no additional results, this value is null.</p>
     #   @return [String]
     class ListAcceptedPortfolioSharesOutput < Struct.new(
+      nil,
       :portfolio_details,
       :next_page_token,
       keyword_init: true
@@ -2848,6 +2972,7 @@ module Aws::ServiceCatalog
     #   <p>The page token for the next set of results. To retrieve the first set of results, use null.</p>
     #   @return [String]
     class ListBudgetsForResourceInput < Struct.new(
+      nil,
       :accept_language,
       :resource_id,
       :page_size,
@@ -2864,6 +2989,7 @@ module Aws::ServiceCatalog
     #   <p>The page token to use to retrieve the next set of results. If there are no additional results, this value is null.</p>
     #   @return [String]
     class ListBudgetsForResourceOutput < Struct.new(
+      nil,
       :budgets,
       :next_page_token,
       keyword_init: true
@@ -2897,6 +3023,7 @@ module Aws::ServiceCatalog
     #   <p>The page token for the next set of results. To retrieve the first set of results, use null.</p>
     #   @return [String]
     class ListConstraintsForPortfolioInput < Struct.new(
+      nil,
       :accept_language,
       :portfolio_id,
       :product_id,
@@ -2914,6 +3041,7 @@ module Aws::ServiceCatalog
     #   <p>The page token to use to retrieve the next set of results. If there are no additional results, this value is null.</p>
     #   @return [String]
     class ListConstraintsForPortfolioOutput < Struct.new(
+      nil,
       :constraint_details,
       :next_page_token,
       keyword_init: true
@@ -2944,6 +3072,7 @@ module Aws::ServiceCatalog
     #   <p>The page token for the next set of results. To retrieve the first set of results, use null.</p>
     #   @return [String]
     class ListLaunchPathsInput < Struct.new(
+      nil,
       :accept_language,
       :product_id,
       :page_size,
@@ -2960,6 +3089,7 @@ module Aws::ServiceCatalog
     #   <p>The page token to use to retrieve the next set of results. If there are no additional results, this value is null.</p>
     #   @return [String]
     class ListLaunchPathsOutput < Struct.new(
+      nil,
       :launch_path_summaries,
       :next_page_token,
       keyword_init: true
@@ -3007,6 +3137,7 @@ module Aws::ServiceCatalog
     #   <p>The maximum number of items to return with this call.</p>
     #   @return [Integer]
     class ListOrganizationPortfolioAccessInput < Struct.new(
+      nil,
       :accept_language,
       :portfolio_id,
       :organization_node_type,
@@ -3024,6 +3155,7 @@ module Aws::ServiceCatalog
     #   <p>The page token to use to retrieve the next set of results. If there are no additional results, this value is null.</p>
     #   @return [String]
     class ListOrganizationPortfolioAccessOutput < Struct.new(
+      nil,
       :organization_nodes,
       :next_page_token,
       keyword_init: true
@@ -3057,6 +3189,7 @@ module Aws::ServiceCatalog
     #   <p>The maximum number of items to return with this call.</p>
     #   @return [Integer]
     class ListPortfolioAccessInput < Struct.new(
+      nil,
       :accept_language,
       :portfolio_id,
       :organization_parent_id,
@@ -3074,6 +3207,7 @@ module Aws::ServiceCatalog
     #   <p>The page token to use to retrieve the next set of results. If there are no additional results, this value is null.</p>
     #   @return [String]
     class ListPortfolioAccessOutput < Struct.new(
+      nil,
       :account_ids,
       :next_page_token,
       keyword_init: true
@@ -3104,6 +3238,7 @@ module Aws::ServiceCatalog
     #   <p>The maximum number of items to return with this call.</p>
     #   @return [Integer]
     class ListPortfoliosForProductInput < Struct.new(
+      nil,
       :accept_language,
       :product_id,
       :page_token,
@@ -3120,6 +3255,7 @@ module Aws::ServiceCatalog
     #   <p>The page token to use to retrieve the next set of results. If there are no additional results, this value is null.</p>
     #   @return [String]
     class ListPortfoliosForProductOutput < Struct.new(
+      nil,
       :portfolio_details,
       :next_page_token,
       keyword_init: true
@@ -3147,6 +3283,7 @@ module Aws::ServiceCatalog
     #   <p>The maximum number of items to return with this call.</p>
     #   @return [Integer]
     class ListPortfoliosInput < Struct.new(
+      nil,
       :accept_language,
       :page_token,
       :page_size,
@@ -3162,6 +3299,7 @@ module Aws::ServiceCatalog
     #   <p>The page token to use to retrieve the next set of results. If there are no additional results, this value is null.</p>
     #   @return [String]
     class ListPortfoliosOutput < Struct.new(
+      nil,
       :portfolio_details,
       :next_page_token,
       keyword_init: true
@@ -3192,6 +3330,7 @@ module Aws::ServiceCatalog
     #   <p>The page token for the next set of results. To retrieve the first set of results, use null.</p>
     #   @return [String]
     class ListPrincipalsForPortfolioInput < Struct.new(
+      nil,
       :accept_language,
       :portfolio_id,
       :page_size,
@@ -3208,6 +3347,7 @@ module Aws::ServiceCatalog
     #   <p>The page token to use to retrieve the next set of results. If there are no additional results, this value is null.</p>
     #   @return [String]
     class ListPrincipalsForPortfolioOutput < Struct.new(
+      nil,
       :principals,
       :next_page_token,
       keyword_init: true
@@ -3241,6 +3381,7 @@ module Aws::ServiceCatalog
     #   <p>The access level to use to obtain results. The default is <code>User</code>.</p>
     #   @return [Types::AccessLevelFilter]
     class ListProvisionedProductPlansInput < Struct.new(
+      nil,
       :accept_language,
       :provision_product_id,
       :page_size,
@@ -3258,6 +3399,7 @@ module Aws::ServiceCatalog
     #   <p>The page token to use to retrieve the next set of results. If there are no additional results, this value is null.</p>
     #   @return [String]
     class ListProvisionedProductPlansOutput < Struct.new(
+      nil,
       :provisioned_product_plans,
       :next_page_token,
       keyword_init: true
@@ -3288,6 +3430,7 @@ module Aws::ServiceCatalog
     #            </ul>
     #   @return [String]
     class ListProvisioningArtifactsForServiceActionInput < Struct.new(
+      nil,
       :service_action_id,
       :page_size,
       :page_token,
@@ -3304,6 +3447,7 @@ module Aws::ServiceCatalog
     #   <p>The page token to use to retrieve the next set of results. If there are no additional results, this value is null.</p>
     #   @return [String]
     class ListProvisioningArtifactsForServiceActionOutput < Struct.new(
+      nil,
       :provisioning_artifact_views,
       :next_page_token,
       keyword_init: true
@@ -3328,6 +3472,7 @@ module Aws::ServiceCatalog
     #   <p>The product identifier.</p>
     #   @return [String]
     class ListProvisioningArtifactsInput < Struct.new(
+      nil,
       :accept_language,
       :product_id,
       keyword_init: true
@@ -3342,6 +3487,7 @@ module Aws::ServiceCatalog
     #   <p>The page token to use to retrieve the next set of results. If there are no additional results, this value is null.</p>
     #   @return [String]
     class ListProvisioningArtifactsOutput < Struct.new(
+      nil,
       :provisioning_artifact_details,
       :next_page_token,
       keyword_init: true
@@ -3375,6 +3521,7 @@ module Aws::ServiceCatalog
     #   <p>The page token for the next set of results. To retrieve the first set of results, use null.</p>
     #   @return [String]
     class ListRecordHistoryInput < Struct.new(
+      nil,
       :accept_language,
       :access_level_filter,
       :search_filter,
@@ -3392,6 +3539,7 @@ module Aws::ServiceCatalog
     #   <p>The page token to use to retrieve the next set of results. If there are no additional results, this value is null.</p>
     #   @return [String]
     class ListRecordHistoryOutput < Struct.new(
+      nil,
       :record_details,
       :next_page_token,
       keyword_init: true
@@ -3417,6 +3565,7 @@ module Aws::ServiceCatalog
     #   <p>The filter value.</p>
     #   @return [String]
     class ListRecordHistorySearchFilter < Struct.new(
+      nil,
       :key,
       :value,
       keyword_init: true
@@ -3449,6 +3598,7 @@ module Aws::ServiceCatalog
     #   <p>The page token for the next set of results. To retrieve the first set of results, use null.</p>
     #   @return [String]
     class ListResourcesForTagOptionInput < Struct.new(
+      nil,
       :tag_option_id,
       :resource_type,
       :page_size,
@@ -3465,6 +3615,7 @@ module Aws::ServiceCatalog
     #   <p>The page token for the next set of results. To retrieve the first set of results, use null.</p>
     #   @return [String]
     class ListResourcesForTagOptionOutput < Struct.new(
+      nil,
       :resource_details,
       :page_token,
       keyword_init: true
@@ -3498,6 +3649,7 @@ module Aws::ServiceCatalog
     #            </ul>
     #   @return [String]
     class ListServiceActionsForProvisioningArtifactInput < Struct.new(
+      nil,
       :product_id,
       :provisioning_artifact_id,
       :page_size,
@@ -3515,6 +3667,7 @@ module Aws::ServiceCatalog
     #   <p>The page token to use to retrieve the next set of results. If there are no additional results, this value is null.</p>
     #   @return [String]
     class ListServiceActionsForProvisioningArtifactOutput < Struct.new(
+      nil,
       :service_action_summaries,
       :next_page_token,
       keyword_init: true
@@ -3542,6 +3695,7 @@ module Aws::ServiceCatalog
     #   <p>The page token for the next set of results. To retrieve the first set of results, use null.</p>
     #   @return [String]
     class ListServiceActionsInput < Struct.new(
+      nil,
       :accept_language,
       :page_size,
       :page_token,
@@ -3557,6 +3711,7 @@ module Aws::ServiceCatalog
     #   <p>The page token to use to retrieve the next set of results. If there are no additional results, this value is null.</p>
     #   @return [String]
     class ListServiceActionsOutput < Struct.new(
+      nil,
       :service_action_summaries,
       :next_page_token,
       keyword_init: true
@@ -3587,6 +3742,7 @@ module Aws::ServiceCatalog
     #   <p>The maximum number of items to return with this call.</p>
     #   @return [Integer]
     class ListStackInstancesForProvisionedProductInput < Struct.new(
+      nil,
       :accept_language,
       :provisioned_product_id,
       :page_token,
@@ -3603,6 +3759,7 @@ module Aws::ServiceCatalog
     #   <p>The page token to use to retrieve the next set of results. If there are no additional results, this value is null.</p>
     #   @return [String]
     class ListStackInstancesForProvisionedProductOutput < Struct.new(
+      nil,
       :stack_instances,
       :next_page_token,
       keyword_init: true
@@ -3621,6 +3778,7 @@ module Aws::ServiceCatalog
     #   <p>The active state.</p>
     #   @return [Boolean]
     class ListTagOptionsFilters < Struct.new(
+      nil,
       :key,
       :value,
       :active,
@@ -3639,6 +3797,7 @@ module Aws::ServiceCatalog
     #   <p>The page token for the next set of results. To retrieve the first set of results, use null.</p>
     #   @return [String]
     class ListTagOptionsInput < Struct.new(
+      nil,
       :filters,
       :page_size,
       :page_token,
@@ -3654,6 +3813,7 @@ module Aws::ServiceCatalog
     #   <p>The page token for the next set of results. To retrieve the first set of results, use null.</p>
     #   @return [String]
     class ListTagOptionsOutput < Struct.new(
+      nil,
       :tag_option_details,
       :page_token,
       keyword_init: true
@@ -3708,6 +3868,7 @@ module Aws::ServiceCatalog
     #         </p>
     #   @return [String]
     class NotifyProvisionProductEngineWorkflowResultInput < Struct.new(
+      nil,
       :workflow_token,
       :record_id,
       :status,
@@ -3721,6 +3882,7 @@ module Aws::ServiceCatalog
     end
 
     class NotifyProvisionProductEngineWorkflowResultOutput < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -3759,6 +3921,7 @@ module Aws::ServiceCatalog
     #         </p>
     #   @return [String]
     class NotifyTerminateProvisionedProductEngineWorkflowResultInput < Struct.new(
+      nil,
       :workflow_token,
       :record_id,
       :status,
@@ -3770,6 +3933,7 @@ module Aws::ServiceCatalog
     end
 
     class NotifyTerminateProvisionedProductEngineWorkflowResultOutput < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -3814,6 +3978,7 @@ module Aws::ServiceCatalog
     #         </p>
     #   @return [String]
     class NotifyUpdateProvisionedProductEngineWorkflowResultInput < Struct.new(
+      nil,
       :workflow_token,
       :record_id,
       :status,
@@ -3826,6 +3991,7 @@ module Aws::ServiceCatalog
     end
 
     class NotifyUpdateProvisionedProductEngineWorkflowResultOutput < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -3835,6 +4001,7 @@ module Aws::ServiceCatalog
     # @!attribute message
     #   @return [String]
     class OperationNotSupportedException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -3849,6 +4016,7 @@ module Aws::ServiceCatalog
     #   <p>The identifier of the organization node.</p>
     #   @return [String]
     class OrganizationNode < Struct.new(
+      nil,
       :type,
       :value,
       keyword_init: true
@@ -3886,6 +4054,7 @@ module Aws::ServiceCatalog
     #   <p>A numeric value that determines the smallest numeric value you want to allow for <code>Number</code> types. </p>
     #   @return [String]
     class ParameterConstraints < Struct.new(
+      nil,
       :allowed_values,
       :allowed_pattern,
       :constraint_description,
@@ -3918,6 +4087,7 @@ module Aws::ServiceCatalog
     #   <p>The name of the portfolio provider.</p>
     #   @return [String]
     class PortfolioDetail < Struct.new(
+      nil,
       :id,
       :arn,
       :display_name,
@@ -3951,6 +4121,7 @@ module Aws::ServiceCatalog
     #   <p>Indicates if <code>Principal</code> sharing is enabled or disabled for the portfolio share. </p>
     #   @return [Boolean]
     class PortfolioShareDetail < Struct.new(
+      nil,
       :principal_id,
       :type,
       :accepted,
@@ -3980,6 +4151,7 @@ module Aws::ServiceCatalog
     #            <code>IAM_PATTERN</code> if you use an ARN with no <code>accountID</code>, with or without wildcard characters. </p>
     #   @return [String]
     class Principal < Struct.new(
+      nil,
       :principal_arn,
       :principal_type,
       keyword_init: true
@@ -3996,6 +4168,7 @@ module Aws::ServiceCatalog
     #   <p>An approximate count of the products that match the value.</p>
     #   @return [Integer]
     class ProductViewAggregationValue < Struct.new(
+      nil,
       :value,
       :approximate_count,
       keyword_init: true
@@ -4043,6 +4216,7 @@ module Aws::ServiceCatalog
     #            addition of the <code>LastSync</code> response.</p>
     #   @return [Types::SourceConnectionDetail]
     class ProductViewDetail < Struct.new(
+      nil,
       :product_view_summary,
       :status,
       :product_arn,
@@ -4095,6 +4269,7 @@ module Aws::ServiceCatalog
     #   <p>The URL information to obtain support for this Product.</p>
     #   @return [String]
     class ProductViewSummary < Struct.new(
+      nil,
       :id,
       :product_id,
       :name,
@@ -4171,6 +4346,7 @@ module Aws::ServiceCatalog
     #   <p>An idempotency token that uniquely identifies the provisioning request.</p>
     #   @return [String]
     class ProvisionProductInput < Struct.new(
+      nil,
       :accept_language,
       :product_id,
       :product_name,
@@ -4193,6 +4369,7 @@ module Aws::ServiceCatalog
     #   <p>Information about the result of provisioning the product.</p>
     #   @return [Types::RecordDetail]
     class ProvisionProductOutput < Struct.new(
+      nil,
       :record_detail,
       keyword_init: true
     )
@@ -4333,6 +4510,7 @@ module Aws::ServiceCatalog
     #   <p>The ARN of the user in the session. This ARN might contain a session ID.</p>
     #   @return [String]
     class ProvisionedProductAttribute < Struct.new(
+      nil,
       :name,
       :arn,
       :type,
@@ -4476,6 +4654,7 @@ module Aws::ServiceCatalog
     #   <p>The ARN of the launch role associated with the provisioned product.</p>
     #   @return [String]
     class ProvisionedProductDetail < Struct.new(
+      nil,
       :name,
       :arn,
       :type,
@@ -4546,6 +4725,7 @@ module Aws::ServiceCatalog
     #   <p>The status message.</p>
     #   @return [String]
     class ProvisionedProductPlanDetails < Struct.new(
+      nil,
       :created_time,
       :path_id,
       :product_id,
@@ -4586,6 +4766,7 @@ module Aws::ServiceCatalog
     #   <p>The identifier of the provisioning artifact.</p>
     #   @return [String]
     class ProvisionedProductPlanSummary < Struct.new(
+      nil,
       :plan_name,
       :plan_id,
       :provision_product_id,
@@ -4614,6 +4795,7 @@ module Aws::ServiceCatalog
     #   <p>Information set by the administrator to provide guidance to end users about which provisioning artifacts to use.</p>
     #   @return [String]
     class ProvisioningArtifact < Struct.new(
+      nil,
       :id,
       :name,
       :description,
@@ -4674,6 +4856,7 @@ module Aws::ServiceCatalog
     #            <p>This field only exists for Repo-Synced products. </p>
     #   @return [String]
     class ProvisioningArtifactDetail < Struct.new(
+      nil,
       :id,
       :name,
       :description,
@@ -4695,6 +4878,7 @@ module Aws::ServiceCatalog
     #   <p>Description of the provisioning artifact output key.</p>
     #   @return [String]
     class ProvisioningArtifactOutput < Struct.new(
+      nil,
       :key,
       :description,
       keyword_init: true
@@ -4723,6 +4907,7 @@ module Aws::ServiceCatalog
     #   <p>Constraints that the administrator has put on a parameter.</p>
     #   @return [Types::ParameterConstraints]
     class ProvisioningArtifactParameter < Struct.new(
+      nil,
       :parameter_key,
       :default_value,
       :parameter_type,
@@ -4750,6 +4935,7 @@ module Aws::ServiceCatalog
     #            <p>Applicable only to a <code>CFN_STACKSET</code> provisioned product type.</p>
     #   @return [Array<String>]
     class ProvisioningArtifactPreferences < Struct.new(
+      nil,
       :stack_set_accounts,
       :stack_set_regions,
       keyword_init: true
@@ -4804,6 +4990,7 @@ module Aws::ServiceCatalog
     #            <p>Service Catalog does not support template validation for the <code>TERRAFORM_OS</code> product type. </p>
     #   @return [Boolean]
     class ProvisioningArtifactProperties < Struct.new(
+      nil,
       :name,
       :description,
       :info,
@@ -4836,6 +5023,7 @@ module Aws::ServiceCatalog
     #   <p>The metadata for the provisioning artifact. This is used with Amazon Web Services Marketplace products.</p>
     #   @return [Hash<String, String>]
     class ProvisioningArtifactSummary < Struct.new(
+      nil,
       :id,
       :name,
       :description,
@@ -4854,6 +5042,7 @@ module Aws::ServiceCatalog
     #   <p>Information about a provisioning artifact. A provisioning artifact is also known as a product version.</p>
     #   @return [Types::ProvisioningArtifact]
     class ProvisioningArtifactView < Struct.new(
+      nil,
       :product_view_summary,
       :provisioning_artifact,
       keyword_init: true
@@ -4869,6 +5058,7 @@ module Aws::ServiceCatalog
     #   <p>The parameter value.</p>
     #   @return [String]
     class ProvisioningParameter < Struct.new(
+      nil,
       :key,
       :value,
       keyword_init: true
@@ -4924,6 +5114,7 @@ module Aws::ServiceCatalog
     #            <p>Conditional: You must specify either <code>StackSetMaxConcurrentCount</code> or <code>StackSetMaxConcurrentPercentage</code>, but not both.</p>
     #   @return [Integer]
     class ProvisioningPreferences < Struct.new(
+      nil,
       :stack_set_accounts,
       :stack_set_regions,
       :stack_set_failure_tolerance_count,
@@ -5021,6 +5212,7 @@ module Aws::ServiceCatalog
     #   <p>The ARN of the launch role associated with the provisioned product.</p>
     #   @return [String]
     class RecordDetail < Struct.new(
+      nil,
       :record_id,
       :provisioned_product_name,
       :status,
@@ -5048,6 +5240,7 @@ module Aws::ServiceCatalog
     #   <p>The description of the error.</p>
     #   @return [String]
     class RecordError < Struct.new(
+      nil,
       :code,
       :description,
       keyword_init: true
@@ -5067,6 +5260,7 @@ module Aws::ServiceCatalog
     #   <p>The description of the output.</p>
     #   @return [String]
     class RecordOutput < Struct.new(
+      nil,
       :output_key,
       :output_value,
       :description,
@@ -5083,6 +5277,7 @@ module Aws::ServiceCatalog
     #   <p>The value for this tag.</p>
     #   @return [String]
     class RecordTag < Struct.new(
+      nil,
       :key,
       :value,
       keyword_init: true
@@ -5127,6 +5322,7 @@ module Aws::ServiceCatalog
     #            </p>
     #   @return [String]
     class RejectPortfolioShareInput < Struct.new(
+      nil,
       :accept_language,
       :portfolio_id,
       :portfolio_share_type,
@@ -5136,6 +5332,7 @@ module Aws::ServiceCatalog
     end
 
     class RejectPortfolioShareOutput < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -5165,6 +5362,7 @@ module Aws::ServiceCatalog
     #   <p>Information about the resource changes.</p>
     #   @return [Array<Types::ResourceChangeDetail>]
     class ResourceChange < Struct.new(
+      nil,
       :action,
       :logical_resource_id,
       :physical_resource_id,
@@ -5189,6 +5387,7 @@ module Aws::ServiceCatalog
     #   <p>The ID of the entity that caused the change.</p>
     #   @return [String]
     class ResourceChangeDetail < Struct.new(
+      nil,
       :target,
       :evaluation,
       :causing_entity,
@@ -5214,6 +5413,7 @@ module Aws::ServiceCatalog
     #   <p>The creation time of the resource.</p>
     #   @return [Time]
     class ResourceDetail < Struct.new(
+      nil,
       :id,
       :arn,
       :name,
@@ -5228,6 +5428,7 @@ module Aws::ServiceCatalog
     # @!attribute message
     #   @return [String]
     class ResourceInUseException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -5238,6 +5439,7 @@ module Aws::ServiceCatalog
     # @!attribute message
     #   @return [String]
     class ResourceNotFoundException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -5257,6 +5459,7 @@ module Aws::ServiceCatalog
     #            causes the resource to be re-created.</p>
     #   @return [String]
     class ResourceTargetDefinition < Struct.new(
+      nil,
       :attribute,
       :name,
       :requires_recreation,
@@ -5288,6 +5491,7 @@ module Aws::ServiceCatalog
     #   <p>The page token for the next set of results. To retrieve the first set of results, use null.</p>
     #   @return [String]
     class ScanProvisionedProductsInput < Struct.new(
+      nil,
       :accept_language,
       :access_level_filter,
       :page_size,
@@ -5304,6 +5508,7 @@ module Aws::ServiceCatalog
     #   <p>The page token to use to retrieve the next set of results. If there are no additional results, this value is null.</p>
     #   @return [String]
     class ScanProvisionedProductsOutput < Struct.new(
+      nil,
       :provisioned_products,
       :next_page_token,
       keyword_init: true
@@ -5347,6 +5552,7 @@ module Aws::ServiceCatalog
     #   <p>Access level of the source of the product.</p>
     #   @return [String]
     class SearchProductsAsAdminInput < Struct.new(
+      nil,
       :accept_language,
       :portfolio_id,
       :filters,
@@ -5367,6 +5573,7 @@ module Aws::ServiceCatalog
     #   <p>The page token to use to retrieve the next set of results. If there are no additional results, this value is null.</p>
     #   @return [String]
     class SearchProductsAsAdminOutput < Struct.new(
+      nil,
       :product_view_details,
       :next_page_token,
       keyword_init: true
@@ -5404,6 +5611,7 @@ module Aws::ServiceCatalog
     #   <p>The page token for the next set of results. To retrieve the first set of results, use null.</p>
     #   @return [String]
     class SearchProductsInput < Struct.new(
+      nil,
       :accept_language,
       :filters,
       :page_size,
@@ -5425,6 +5633,7 @@ module Aws::ServiceCatalog
     #   <p>The page token to use to retrieve the next set of results. If there are no additional results, this value is null.</p>
     #   @return [String]
     class SearchProductsOutput < Struct.new(
+      nil,
       :product_view_summaries,
       :product_view_aggregations,
       :next_page_token,
@@ -5475,6 +5684,7 @@ module Aws::ServiceCatalog
     #   <p>The page token for the next set of results. To retrieve the first set of results, use null.</p>
     #   @return [String]
     class SearchProvisionedProductsInput < Struct.new(
+      nil,
       :accept_language,
       :access_level_filter,
       :filters,
@@ -5497,6 +5707,7 @@ module Aws::ServiceCatalog
     #   <p>The page token to use to retrieve the next set of results. If there are no additional results, this value is null.</p>
     #   @return [String]
     class SearchProvisionedProductsOutput < Struct.new(
+      nil,
       :provisioned_products,
       :total_results_count,
       :next_page_token,
@@ -5521,6 +5732,7 @@ module Aws::ServiceCatalog
     #   <p>The identifier of the provisioning artifact. For example, <code>pa-4abcdjnxjj6ne</code>.</p>
     #   @return [String]
     class ServiceActionAssociation < Struct.new(
+      nil,
       :service_action_id,
       :product_id,
       :provisioning_artifact_id,
@@ -5537,6 +5749,7 @@ module Aws::ServiceCatalog
     #   <p>A map that defines the self-service action.</p>
     #   @return [Hash<String, String>]
     class ServiceActionDetail < Struct.new(
+      nil,
       :service_action_summary,
       :definition,
       keyword_init: true
@@ -5558,6 +5771,7 @@ module Aws::ServiceCatalog
     #   <p>The self-service action definition type. For example, <code>SSM_AUTOMATION</code>.</p>
     #   @return [String]
     class ServiceActionSummary < Struct.new(
+      nil,
       :id,
       :name,
       :description,
@@ -5575,6 +5789,7 @@ module Aws::ServiceCatalog
     #   <p>List of errors.</p>
     #   @return [Array<Types::ShareError>]
     class ShareDetails < Struct.new(
+      nil,
       :successful_shares,
       :share_errors,
       keyword_init: true
@@ -5593,6 +5808,7 @@ module Aws::ServiceCatalog
     #   <p>Error type that happened when processing the operation.</p>
     #   @return [String]
     class ShareError < Struct.new(
+      nil,
       :accounts,
       :message,
       :error,
@@ -5613,6 +5829,7 @@ module Aws::ServiceCatalog
     #   <p>The connection details based on the connection <code>Type</code>. </p>
     #   @return [Types::SourceConnectionParameters]
     class SourceConnection < Struct.new(
+      nil,
       :type,
       :connection_parameters,
       keyword_init: true
@@ -5658,6 +5875,7 @@ module Aws::ServiceCatalog
     #            </ul>
     #   @return [Types::LastSync]
     class SourceConnectionDetail < Struct.new(
+      nil,
       :type,
       :connection_parameters,
       :last_sync,
@@ -5671,6 +5889,7 @@ module Aws::ServiceCatalog
     #   <p>Provides <code>ConnectionType</code> details.</p>
     #   @return [Types::CodeStarParameters]
     class SourceConnectionParameters < Struct.new(
+      nil,
       :code_star,
       keyword_init: true
     )
@@ -5704,6 +5923,7 @@ module Aws::ServiceCatalog
     #            </ul>
     #   @return [String]
     class StackInstance < Struct.new(
+      nil,
       :account,
       :region,
       :stack_instance_status,
@@ -5721,6 +5941,7 @@ module Aws::ServiceCatalog
     #   <p>The value for this key.</p>
     #   @return [String]
     class Tag < Struct.new(
+      nil,
       :key,
       :value,
       keyword_init: true
@@ -5745,6 +5966,7 @@ module Aws::ServiceCatalog
     #   <p>The Amazon Web Services account Id of the owner account that created the TagOption.</p>
     #   @return [String]
     class TagOptionDetail < Struct.new(
+      nil,
       :key,
       :value,
       :active,
@@ -5761,6 +5983,7 @@ module Aws::ServiceCatalog
     # @!attribute message
     #   @return [String]
     class TagOptionNotMigratedException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -5775,6 +5998,7 @@ module Aws::ServiceCatalog
     #   <p>The TagOption value.</p>
     #   @return [Array<String>]
     class TagOptionSummary < Struct.new(
+      nil,
       :key,
       :values,
       keyword_init: true
@@ -5820,6 +6044,7 @@ module Aws::ServiceCatalog
     #            default value is false.</p>
     #   @return [Boolean]
     class TerminateProvisionedProductInput < Struct.new(
+      nil,
       :provisioned_product_name,
       :provisioned_product_id,
       :terminate_token,
@@ -5835,6 +6060,7 @@ module Aws::ServiceCatalog
     #   <p>Information about the result of this request.</p>
     #   @return [Types::RecordDetail]
     class TerminateProvisionedProductOutput < Struct.new(
+      nil,
       :record_detail,
       keyword_init: true
     )
@@ -5861,6 +6087,7 @@ module Aws::ServiceCatalog
     #         </p>
     #   @return [String]
     class UniqueTagResourceIdentifier < Struct.new(
+      nil,
       :key,
       :value,
       keyword_init: true
@@ -5942,6 +6169,7 @@ module Aws::ServiceCatalog
     #            </dl>
     #   @return [String]
     class UpdateConstraintInput < Struct.new(
+      nil,
       :accept_language,
       :id,
       :description,
@@ -5961,6 +6189,7 @@ module Aws::ServiceCatalog
     #   <p>The status of the current request.</p>
     #   @return [String]
     class UpdateConstraintOutput < Struct.new(
+      nil,
       :constraint_detail,
       :constraint_parameters,
       :status,
@@ -6001,6 +6230,7 @@ module Aws::ServiceCatalog
     #   <p>The tags to remove.</p>
     #   @return [Array<String>]
     class UpdatePortfolioInput < Struct.new(
+      nil,
       :accept_language,
       :id,
       :display_name,
@@ -6020,6 +6250,7 @@ module Aws::ServiceCatalog
     #   <p>Information about the tags associated with the portfolio.</p>
     #   @return [Array<Types::Tag>]
     class UpdatePortfolioOutput < Struct.new(
+      nil,
       :portfolio_detail,
       :tags,
       keyword_init: true
@@ -6058,6 +6289,7 @@ module Aws::ServiceCatalog
     #            the current state of the <code>Principals</code> sharing on the portfolio share will not be modified. </p>
     #   @return [Boolean]
     class UpdatePortfolioShareInput < Struct.new(
+      nil,
       :accept_language,
       :portfolio_id,
       :account_id,
@@ -6078,6 +6310,7 @@ module Aws::ServiceCatalog
     #         </p>
     #   @return [String]
     class UpdatePortfolioShareOutput < Struct.new(
+      nil,
       :portfolio_share_token,
       :status,
       keyword_init: true
@@ -6146,6 +6379,7 @@ module Aws::ServiceCatalog
     #            </ul>
     #   @return [Types::SourceConnection]
     class UpdateProductInput < Struct.new(
+      nil,
       :accept_language,
       :id,
       :name,
@@ -6170,6 +6404,7 @@ module Aws::ServiceCatalog
     #   <p>Information about the tags associated with the product.</p>
     #   @return [Array<Types::Tag>]
     class UpdateProductOutput < Struct.new(
+      nil,
       :product_view_detail,
       :tags,
       keyword_init: true
@@ -6229,6 +6464,7 @@ module Aws::ServiceCatalog
     #   <p>The idempotency token that uniquely identifies the provisioning update request.</p>
     #   @return [String]
     class UpdateProvisionedProductInput < Struct.new(
+      nil,
       :accept_language,
       :provisioned_product_name,
       :provisioned_product_id,
@@ -6251,6 +6487,7 @@ module Aws::ServiceCatalog
     #   <p>Information about the result of the request.</p>
     #   @return [Types::RecordDetail]
     class UpdateProvisionedProductOutput < Struct.new(
+      nil,
       :record_detail,
       keyword_init: true
     )
@@ -6299,6 +6536,7 @@ module Aws::ServiceCatalog
     #   <p>The idempotency token that uniquely identifies the provisioning product update request.</p>
     #   @return [String]
     class UpdateProvisionedProductPropertiesInput < Struct.new(
+      nil,
       :accept_language,
       :provisioned_product_id,
       :provisioned_product_properties,
@@ -6321,6 +6559,7 @@ module Aws::ServiceCatalog
     #   <p>The status of the request.</p>
     #   @return [String]
     class UpdateProvisionedProductPropertiesOutput < Struct.new(
+      nil,
       :provisioned_product_id,
       :provisioned_product_properties,
       :record_id,
@@ -6367,6 +6606,7 @@ module Aws::ServiceCatalog
     #             of a deprecated version but cannot launch new provisioned products using a deprecated version.</p>
     #   @return [String]
     class UpdateProvisioningArtifactInput < Struct.new(
+      nil,
       :accept_language,
       :product_id,
       :provisioning_artifact_id,
@@ -6389,6 +6629,7 @@ module Aws::ServiceCatalog
     #   <p>The status of the current request.</p>
     #   @return [String]
     class UpdateProvisioningArtifactOutput < Struct.new(
+      nil,
       :provisioning_artifact_detail,
       :info,
       :status,
@@ -6408,6 +6649,7 @@ module Aws::ServiceCatalog
     #   <p>If set to true, <code>Value</code> is ignored and the previous parameter value is kept.</p>
     #   @return [Boolean]
     class UpdateProvisioningParameter < Struct.new(
+      nil,
       :key,
       :value,
       :use_previous_value,
@@ -6478,6 +6720,7 @@ module Aws::ServiceCatalog
     #            </dl>
     #   @return [String]
     class UpdateProvisioningPreferences < Struct.new(
+      nil,
       :stack_set_accounts,
       :stack_set_regions,
       :stack_set_failure_tolerance_count,
@@ -6516,6 +6759,7 @@ module Aws::ServiceCatalog
     #            </ul>
     #   @return [String]
     class UpdateServiceActionInput < Struct.new(
+      nil,
       :id,
       :name,
       :definition,
@@ -6530,6 +6774,7 @@ module Aws::ServiceCatalog
     #   <p>Detailed information about the self-service action.</p>
     #   @return [Types::ServiceActionDetail]
     class UpdateServiceActionOutput < Struct.new(
+      nil,
       :service_action_detail,
       keyword_init: true
     )
@@ -6546,6 +6791,7 @@ module Aws::ServiceCatalog
     #   <p>The updated active state.</p>
     #   @return [Boolean]
     class UpdateTagOptionInput < Struct.new(
+      nil,
       :id,
       :value,
       :active,
@@ -6558,6 +6804,7 @@ module Aws::ServiceCatalog
     #   <p>Information about the TagOption.</p>
     #   @return [Types::TagOptionDetail]
     class UpdateTagOptionOutput < Struct.new(
+      nil,
       :tag_option_detail,
       keyword_init: true
     )
@@ -6572,6 +6819,7 @@ module Aws::ServiceCatalog
     #   <p>The usage instruction value for this type.</p>
     #   @return [String]
     class UsageInstruction < Struct.new(
+      nil,
       :type,
       :value,
       keyword_init: true

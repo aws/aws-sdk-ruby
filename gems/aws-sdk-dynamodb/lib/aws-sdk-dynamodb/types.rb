@@ -28,6 +28,7 @@ module Aws::DynamoDB
     #               name, you will need to delete the original table.</p>
     #   @return [String]
     class ArchivalSummary < Struct.new(
+      nil,
       :archival_date_time,
       :archival_reason,
       :archival_backup_arn,
@@ -58,6 +59,7 @@ module Aws::DynamoDB
     #            </ul>
     #   @return [String]
     class AttributeDefinition < Struct.new(
+      nil,
       :attribute_name,
       :attribute_type,
       keyword_init: true
@@ -278,6 +280,7 @@ module Aws::DynamoDB
     #            </ul>
     #   @return [String]
     class AttributeValueUpdate < Struct.new(
+      nil,
       :value,
       :action,
       keyword_init: true
@@ -293,6 +296,7 @@ module Aws::DynamoDB
     #   <p>Represents a target tracking scaling policy configuration.</p>
     #   @return [Types::AutoScalingTargetTrackingScalingPolicyConfigurationDescription]
     class AutoScalingPolicyDescription < Struct.new(
+      nil,
       :policy_name,
       :target_tracking_scaling_policy_configuration,
       keyword_init: true
@@ -308,6 +312,7 @@ module Aws::DynamoDB
     #   <p>Represents a target tracking scaling policy configuration.</p>
     #   @return [Types::AutoScalingTargetTrackingScalingPolicyConfigurationUpdate]
     class AutoScalingPolicyUpdate < Struct.new(
+      nil,
       :policy_name,
       :target_tracking_scaling_policy_configuration,
       keyword_init: true
@@ -335,6 +340,7 @@ module Aws::DynamoDB
     #   <p>Information about the scaling policies.</p>
     #   @return [Array<Types::AutoScalingPolicyDescription>]
     class AutoScalingSettingsDescription < Struct.new(
+      nil,
       :minimum_units,
       :maximum_units,
       :auto_scaling_disabled,
@@ -366,6 +372,7 @@ module Aws::DynamoDB
     #               capacity units.</p>
     #   @return [Types::AutoScalingPolicyUpdate]
     class AutoScalingSettingsUpdate < Struct.new(
+      nil,
       :minimum_units,
       :maximum_units,
       :auto_scaling_disabled,
@@ -403,6 +410,7 @@ module Aws::DynamoDB
     #               or 2e-360 to 2e360 (Base 2).</p>
     #   @return [Float]
     class AutoScalingTargetTrackingScalingPolicyConfigurationDescription < Struct.new(
+      nil,
       :disable_scale_in,
       :scale_in_cooldown,
       :scale_out_cooldown,
@@ -440,6 +448,7 @@ module Aws::DynamoDB
     #               or 2e-360 to 2e360 (Base 2).</p>
     #   @return [Float]
     class AutoScalingTargetTrackingScalingPolicyConfigurationUpdate < Struct.new(
+      nil,
       :disable_scale_in,
       :scale_in_cooldown,
       :scale_out_cooldown,
@@ -461,6 +470,7 @@ module Aws::DynamoDB
     #               For example, LSIs, GSIs, streams, TTL.</p>
     #   @return [Types::SourceTableFeatureDetails]
     class BackupDescription < Struct.new(
+      nil,
       :backup_details,
       :source_table_details,
       :source_table_feature_details,
@@ -513,6 +523,7 @@ module Aws::DynamoDB
     #               its creation.</p>
     #   @return [Time]
     class BackupDetails < Struct.new(
+      nil,
       :backup_arn,
       :backup_name,
       :backup_size_bytes,
@@ -530,6 +541,7 @@ module Aws::DynamoDB
     # @!attribute message
     #   @return [String]
     class BackupInUseException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -540,6 +552,7 @@ module Aws::DynamoDB
     # @!attribute message
     #   @return [String]
     class BackupNotFoundException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -598,6 +611,7 @@ module Aws::DynamoDB
     #   <p>Size of the backup in bytes.</p>
     #   @return [Integer]
     class BackupSummary < Struct.new(
+      nil,
       :table_name,
       :table_id,
       :table_arn,
@@ -644,6 +658,7 @@ module Aws::DynamoDB
     #            </ul>
     #   @return [String]
     class BatchExecuteStatementInput < Struct.new(
+      nil,
       :statements,
       :return_consumed_capacity,
       keyword_init: true
@@ -660,6 +675,7 @@ module Aws::DynamoDB
     #               ordered according to the ordering of the statements.</p>
     #   @return [Array<Types::ConsumedCapacity>]
     class BatchExecuteStatementOutput < Struct.new(
+      nil,
       :responses,
       :consumed_capacity,
       keyword_init: true
@@ -797,6 +813,7 @@ module Aws::DynamoDB
     #            </ul>
     #   @return [String]
     class BatchGetItemInput < Struct.new(
+      nil,
       :request_items,
       :return_consumed_capacity,
       keyword_init: true
@@ -856,6 +873,7 @@ module Aws::DynamoDB
     #            </ul>
     #   @return [Array<Types::ConsumedCapacity>]
     class BatchGetItemOutput < Struct.new(
+      nil,
       :responses,
       :unprocessed_keys,
       :consumed_capacity,
@@ -876,6 +894,7 @@ module Aws::DynamoDB
     #               ReturnValuesOnConditionCheckFailure is specified as <code>ALL_OLD</code>.</p>
     #   @return [Hash<String, Types::AttributeValue>]
     class BatchStatementError < Struct.new(
+      nil,
       :code,
       :message,
       :item,
@@ -902,6 +921,7 @@ module Aws::DynamoDB
     #               units are consumed.</p>
     #   @return [String]
     class BatchStatementRequest < Struct.new(
+      nil,
       :statement,
       :parameters,
       :consistent_read,
@@ -922,6 +942,7 @@ module Aws::DynamoDB
     #   <p> A DynamoDB item associated with a BatchStatementResponse </p>
     #   @return [Hash<String, Types::AttributeValue>]
     class BatchStatementResponse < Struct.new(
+      nil,
       :error,
       :table_name,
       :item,
@@ -1010,6 +1031,7 @@ module Aws::DynamoDB
     #               default), no statistics are returned.</p>
     #   @return [String]
     class BatchWriteItemInput < Struct.new(
+      nil,
       :request_items,
       :return_consumed_capacity,
       :return_item_collection_metrics,
@@ -1108,6 +1130,7 @@ module Aws::DynamoDB
     #            </ul>
     #   @return [Array<Types::ConsumedCapacity>]
     class BatchWriteItemOutput < Struct.new(
+      nil,
       :unprocessed_items,
       :item_collection_metrics,
       :consumed_capacity,
@@ -1146,6 +1169,7 @@ module Aws::DynamoDB
     #               capacity mode.</p>
     #   @return [Time]
     class BillingModeSummary < Struct.new(
+      nil,
       :billing_mode,
       :last_update_to_pay_per_request_date_time,
       keyword_init: true
@@ -1167,6 +1191,7 @@ module Aws::DynamoDB
     #   <p>Cancellation reason message description.</p>
     #   @return [String]
     class CancellationReason < Struct.new(
+      nil,
       :item,
       :code,
       :message,
@@ -1187,6 +1212,7 @@ module Aws::DynamoDB
     #   <p>The total number of capacity units consumed on a table or an index.</p>
     #   @return [Float]
     class Capacity < Struct.new(
+      nil,
       :read_capacity_units,
       :write_capacity_units,
       :capacity_units,
@@ -1415,6 +1441,7 @@ module Aws::DynamoDB
     #                   Guide</i>.</p>
     #   @return [String]
     class Condition < Struct.new(
+      nil,
       :attribute_value_list,
       :comparison_operator,
       keyword_init: true
@@ -1454,6 +1481,7 @@ module Aws::DynamoDB
     #               ALL_OLD.</p>
     #   @return [String]
     class ConditionCheck < Struct.new(
+      nil,
       :key,
       :table_name,
       :condition_expression,
@@ -1473,6 +1501,7 @@ module Aws::DynamoDB
     #   <p>Item which caused the <code>ConditionalCheckFailedException</code>.</p>
     #   @return [Hash<String, Types::AttributeValue>]
     class ConditionalCheckFailedException < Struct.new(
+      nil,
       :message,
       :item,
       keyword_init: true
@@ -1510,6 +1539,7 @@ module Aws::DynamoDB
     #               operation.</p>
     #   @return [Hash<String, Types::Capacity>]
     class ConsumedCapacity < Struct.new(
+      nil,
       :table_name,
       :capacity_units,
       :read_capacity_units,
@@ -1533,6 +1563,7 @@ module Aws::DynamoDB
     #   <p>The description of the point in time recovery settings applied to the table.</p>
     #   @return [Types::PointInTimeRecoveryDescription]
     class ContinuousBackupsDescription < Struct.new(
+      nil,
       :continuous_backups_status,
       :point_in_time_recovery_description,
       keyword_init: true
@@ -1544,6 +1575,7 @@ module Aws::DynamoDB
     # @!attribute message
     #   @return [String]
     class ContinuousBackupsUnavailableException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -1567,6 +1599,7 @@ module Aws::DynamoDB
     #               table or index.</p>
     #   @return [String]
     class ContributorInsightsSummary < Struct.new(
+      nil,
       :table_name,
       :index_name,
       :contributor_insights_status,
@@ -1584,6 +1617,7 @@ module Aws::DynamoDB
     #   <p>Specified name for the backup.</p>
     #   @return [String]
     class CreateBackupInput < Struct.new(
+      nil,
       :table_name,
       :backup_name,
       keyword_init: true
@@ -1595,6 +1629,7 @@ module Aws::DynamoDB
     #   <p>Contains the details of the backup created for the table.</p>
     #   @return [Types::BackupDetails]
     class CreateBackupOutput < Struct.new(
+      nil,
       :backup_details,
       keyword_init: true
     )
@@ -1632,6 +1667,7 @@ module Aws::DynamoDB
     #               second) when creating a secondary index.</p>
     #   @return [Types::WarmThroughput]
     class CreateGlobalSecondaryIndexAction < Struct.new(
+      nil,
       :index_name,
       :key_schema,
       :projection,
@@ -1650,6 +1686,7 @@ module Aws::DynamoDB
     #   <p>The Regions where the global table needs to be created.</p>
     #   @return [Array<Types::Replica>]
     class CreateGlobalTableInput < Struct.new(
+      nil,
       :global_table_name,
       :replication_group,
       keyword_init: true
@@ -1661,6 +1698,7 @@ module Aws::DynamoDB
     #   <p>Contains the details of the global table.</p>
     #   @return [Types::GlobalTableDescription]
     class CreateGlobalTableOutput < Struct.new(
+      nil,
       :global_table_description,
       keyword_init: true
     )
@@ -1689,6 +1727,7 @@ module Aws::DynamoDB
     #            </ul>
     #   @return [String]
     class CreateGlobalTableWitnessGroupMemberAction < Struct.new(
+      nil,
       :region_name,
       keyword_init: true
     )
@@ -1700,6 +1739,7 @@ module Aws::DynamoDB
     #   <p>The Region of the replica to be added.</p>
     #   @return [String]
     class CreateReplicaAction < Struct.new(
+      nil,
       :region_name,
       keyword_init: true
     )
@@ -1734,6 +1774,7 @@ module Aws::DynamoDB
     #               class.</p>
     #   @return [String]
     class CreateReplicationGroupMemberAction < Struct.new(
+      nil,
       :region_name,
       :kms_master_key_id,
       :provisioned_throughput_override,
@@ -2035,6 +2076,7 @@ module Aws::DynamoDB
     #                   <code>MaxReadRequestUnits</code>, <code>MaxWriteRequestUnits</code>, or both.</p>
     #   @return [Types::OnDemandThroughput]
     class CreateTableInput < Struct.new(
+      nil,
       :attribute_definitions,
       :table_name,
       :key_schema,
@@ -2060,6 +2102,7 @@ module Aws::DynamoDB
     #   <p>Represents the properties of the table.</p>
     #   @return [Types::TableDescription]
     class CreateTableOutput < Struct.new(
+      nil,
       :table_description,
       keyword_init: true
     )
@@ -2077,6 +2120,7 @@ module Aws::DynamoDB
     #               CSV file is treated as the header. </p>
     #   @return [Array<String>]
     class CsvOptions < Struct.new(
+      nil,
       :delimiter,
       :header_list,
       keyword_init: true
@@ -2110,6 +2154,7 @@ module Aws::DynamoDB
     #               ALL_OLD.</p>
     #   @return [String]
     class Delete < Struct.new(
+      nil,
       :key,
       :table_name,
       :condition_expression,
@@ -2125,6 +2170,7 @@ module Aws::DynamoDB
     #   <p>The ARN associated with the backup.</p>
     #   @return [String]
     class DeleteBackupInput < Struct.new(
+      nil,
       :backup_arn,
       keyword_init: true
     )
@@ -2135,6 +2181,7 @@ module Aws::DynamoDB
     #   <p>Contains the description of the backup created for the table.</p>
     #   @return [Types::BackupDescription]
     class DeleteBackupOutput < Struct.new(
+      nil,
       :backup_description,
       keyword_init: true
     )
@@ -2146,6 +2193,7 @@ module Aws::DynamoDB
     #   <p>The name of the global secondary index to be deleted.</p>
     #   @return [String]
     class DeleteGlobalSecondaryIndexAction < Struct.new(
+      nil,
       :index_name,
       keyword_init: true
     )
@@ -2160,6 +2208,7 @@ module Aws::DynamoDB
     #   <p>The witness Region name to be removed from the MRSC global table.</p>
     #   @return [String]
     class DeleteGlobalTableWitnessGroupMemberAction < Struct.new(
+      nil,
       :region_name,
       keyword_init: true
     )
@@ -2353,6 +2402,7 @@ module Aws::DynamoDB
     #               units are consumed.</p>
     #   @return [String]
     class DeleteItemInput < Struct.new(
+      nil,
       :table_name,
       :key,
       :expected,
@@ -2411,6 +2461,7 @@ module Aws::DynamoDB
     #            </ul>
     #   @return [Types::ItemCollectionMetrics]
     class DeleteItemOutput < Struct.new(
+      nil,
       :attributes,
       :consumed_capacity,
       :item_collection_metrics,
@@ -2424,6 +2475,7 @@ module Aws::DynamoDB
     #   <p>The Region of the replica to be removed.</p>
     #   @return [String]
     class DeleteReplicaAction < Struct.new(
+      nil,
       :region_name,
       keyword_init: true
     )
@@ -2435,6 +2487,7 @@ module Aws::DynamoDB
     #   <p>The Region where the replica exists.</p>
     #   @return [String]
     class DeleteReplicationGroupMemberAction < Struct.new(
+      nil,
       :region_name,
       keyword_init: true
     )
@@ -2448,6 +2501,7 @@ module Aws::DynamoDB
     #               types must match those of the table's key schema.</p>
     #   @return [Hash<String, Types::AttributeValue>]
     class DeleteRequest < Struct.new(
+      nil,
       :key,
       keyword_init: true
     )
@@ -2468,6 +2522,7 @@ module Aws::DynamoDB
     #               and return a <code>PolicyNotFoundException</code>.</p>
     #   @return [String]
     class DeleteResourcePolicyInput < Struct.new(
+      nil,
       :resource_arn,
       :expected_revision_id,
       keyword_init: true
@@ -2481,6 +2536,7 @@ module Aws::DynamoDB
     #               policy.</p>
     #   @return [String]
     class DeleteResourcePolicyOutput < Struct.new(
+      nil,
       :revision_id,
       keyword_init: true
     )
@@ -2493,6 +2549,7 @@ module Aws::DynamoDB
     #               this parameter.</p>
     #   @return [String]
     class DeleteTableInput < Struct.new(
+      nil,
       :table_name,
       keyword_init: true
     )
@@ -2504,6 +2561,7 @@ module Aws::DynamoDB
     #   <p>Represents the properties of a table.</p>
     #   @return [Types::TableDescription]
     class DeleteTableOutput < Struct.new(
+      nil,
       :table_description,
       keyword_init: true
     )
@@ -2514,6 +2572,7 @@ module Aws::DynamoDB
     #   <p>The Amazon Resource Name (ARN) associated with the backup.</p>
     #   @return [String]
     class DescribeBackupInput < Struct.new(
+      nil,
       :backup_arn,
       keyword_init: true
     )
@@ -2524,6 +2583,7 @@ module Aws::DynamoDB
     #   <p>Contains the description of the backup created for the table.</p>
     #   @return [Types::BackupDescription]
     class DescribeBackupOutput < Struct.new(
+      nil,
       :backup_description,
       keyword_init: true
     )
@@ -2536,6 +2596,7 @@ module Aws::DynamoDB
     #            <p>You can also provide the Amazon Resource Name (ARN) of the table in this parameter.</p>
     #   @return [String]
     class DescribeContinuousBackupsInput < Struct.new(
+      nil,
       :table_name,
       keyword_init: true
     )
@@ -2547,6 +2608,7 @@ module Aws::DynamoDB
     #               table.</p>
     #   @return [Types::ContinuousBackupsDescription]
     class DescribeContinuousBackupsOutput < Struct.new(
+      nil,
       :continuous_backups_description,
       keyword_init: true
     )
@@ -2561,6 +2623,7 @@ module Aws::DynamoDB
     #   <p>The name of the global secondary index to describe, if applicable.</p>
     #   @return [String]
     class DescribeContributorInsightsInput < Struct.new(
+      nil,
       :table_name,
       :index_name,
       keyword_init: true
@@ -2612,6 +2675,7 @@ module Aws::DynamoDB
     #               events only.</p>
     #   @return [String]
     class DescribeContributorInsightsOutput < Struct.new(
+      nil,
       :table_name,
       :index_name,
       :contributor_insights_rule_list,
@@ -2625,6 +2689,7 @@ module Aws::DynamoDB
     end
 
     class DescribeEndpointsRequest < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -2634,6 +2699,7 @@ module Aws::DynamoDB
     #   <p>List of endpoints.</p>
     #   @return [Array<Types::Endpoint>]
     class DescribeEndpointsResponse < Struct.new(
+      nil,
       :endpoints,
       keyword_init: true
     )
@@ -2644,6 +2710,7 @@ module Aws::DynamoDB
     #   <p>The Amazon Resource Name (ARN) associated with the export.</p>
     #   @return [String]
     class DescribeExportInput < Struct.new(
+      nil,
       :export_arn,
       keyword_init: true
     )
@@ -2654,6 +2721,7 @@ module Aws::DynamoDB
     #   <p>Represents the properties of the export.</p>
     #   @return [Types::ExportDescription]
     class DescribeExportOutput < Struct.new(
+      nil,
       :export_description,
       keyword_init: true
     )
@@ -2664,6 +2732,7 @@ module Aws::DynamoDB
     #   <p>The name of the global table.</p>
     #   @return [String]
     class DescribeGlobalTableInput < Struct.new(
+      nil,
       :global_table_name,
       keyword_init: true
     )
@@ -2674,6 +2743,7 @@ module Aws::DynamoDB
     #   <p>Contains the details of the global table.</p>
     #   @return [Types::GlobalTableDescription]
     class DescribeGlobalTableOutput < Struct.new(
+      nil,
       :global_table_description,
       keyword_init: true
     )
@@ -2684,6 +2754,7 @@ module Aws::DynamoDB
     #   <p>The name of the global table to describe.</p>
     #   @return [String]
     class DescribeGlobalTableSettingsInput < Struct.new(
+      nil,
       :global_table_name,
       keyword_init: true
     )
@@ -2697,6 +2768,7 @@ module Aws::DynamoDB
     #   <p>The Region-specific settings for the global table.</p>
     #   @return [Array<Types::ReplicaSettingsDescription>]
     class DescribeGlobalTableSettingsOutput < Struct.new(
+      nil,
       :global_table_name,
       :replica_settings,
       keyword_init: true
@@ -2708,6 +2780,7 @@ module Aws::DynamoDB
     #   <p> The Amazon Resource Name (ARN) associated with the table you're importing to. </p>
     #   @return [String]
     class DescribeImportInput < Struct.new(
+      nil,
       :import_arn,
       keyword_init: true
     )
@@ -2720,6 +2793,7 @@ module Aws::DynamoDB
     #               how many errors were encountered. </p>
     #   @return [Types::ImportTableDescription]
     class DescribeImportOutput < Struct.new(
+      nil,
       :import_table_description,
       keyword_init: true
     )
@@ -2731,6 +2805,7 @@ module Aws::DynamoDB
     #               in this parameter.</p>
     #   @return [String]
     class DescribeKinesisStreamingDestinationInput < Struct.new(
+      nil,
       :table_name,
       keyword_init: true
     )
@@ -2744,6 +2819,7 @@ module Aws::DynamoDB
     #   <p>The list of replica structures for the table being described.</p>
     #   @return [Array<Types::KinesisDataStreamDestination>]
     class DescribeKinesisStreamingDestinationOutput < Struct.new(
+      nil,
       :table_name,
       :kinesis_data_stream_destinations,
       keyword_init: true
@@ -2754,6 +2830,7 @@ module Aws::DynamoDB
     # <p>Represents the input of a <code>DescribeLimits</code> operation. Has no
     #             content.</p>
     class DescribeLimitsInput < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -2779,6 +2856,7 @@ module Aws::DynamoDB
     #               provisioned for its global secondary indexes (GSIs).</p>
     #   @return [Integer]
     class DescribeLimitsOutput < Struct.new(
+      nil,
       :account_max_read_capacity_units,
       :account_max_write_capacity_units,
       :table_max_read_capacity_units,
@@ -2794,6 +2872,7 @@ module Aws::DynamoDB
     #               this parameter.</p>
     #   @return [String]
     class DescribeTableInput < Struct.new(
+      nil,
       :table_name,
       keyword_init: true
     )
@@ -2805,6 +2884,7 @@ module Aws::DynamoDB
     #   <p>The properties of the table.</p>
     #   @return [Types::TableDescription]
     class DescribeTableOutput < Struct.new(
+      nil,
       :table,
       keyword_init: true
     )
@@ -2816,6 +2896,7 @@ module Aws::DynamoDB
     #               parameter.</p>
     #   @return [String]
     class DescribeTableReplicaAutoScalingInput < Struct.new(
+      nil,
       :table_name,
       keyword_init: true
     )
@@ -2826,6 +2907,7 @@ module Aws::DynamoDB
     #   <p>Represents the auto scaling properties of the table.</p>
     #   @return [Types::TableAutoScalingDescription]
     class DescribeTableReplicaAutoScalingOutput < Struct.new(
+      nil,
       :table_auto_scaling_description,
       keyword_init: true
     )
@@ -2837,6 +2919,7 @@ module Aws::DynamoDB
     #               in this parameter.</p>
     #   @return [String]
     class DescribeTimeToLiveInput < Struct.new(
+      nil,
       :table_name,
       keyword_init: true
     )
@@ -2847,6 +2930,7 @@ module Aws::DynamoDB
     #   <p></p>
     #   @return [Types::TimeToLiveDescription]
     class DescribeTimeToLiveOutput < Struct.new(
+      nil,
       :time_to_live_description,
       keyword_init: true
     )
@@ -2864,6 +2948,7 @@ module Aws::DynamoDB
     #   <p>The source for the Kinesis streaming information that is being enabled.</p>
     #   @return [Types::EnableKinesisStreamingConfiguration]
     class DisableKinesisStreamingDestinationInput < Struct.new(
+      nil,
       :table_name,
       :stream_arn,
       :enable_kinesis_streaming_configuration,
@@ -2885,6 +2970,7 @@ module Aws::DynamoDB
     #   <p>The destination for the Kinesis streaming information that is being enabled.</p>
     #   @return [Types::EnableKinesisStreamingConfiguration]
     class DisableKinesisStreamingDestinationOutput < Struct.new(
+      nil,
       :table_name,
       :stream_arn,
       :destination_status,
@@ -2899,6 +2985,7 @@ module Aws::DynamoDB
     # @!attribute message
     #   @return [String]
     class DuplicateItemException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -2911,6 +2998,7 @@ module Aws::DynamoDB
     #                   <code>MILLISECOND</code> or <code>MICROSECOND</code>.</p>
     #   @return [String]
     class EnableKinesisStreamingConfiguration < Struct.new(
+      nil,
       :approximate_creation_date_time_precision,
       keyword_init: true
     )
@@ -2928,6 +3016,7 @@ module Aws::DynamoDB
     #   <p>The source for the Kinesis streaming information that is being enabled.</p>
     #   @return [Types::EnableKinesisStreamingConfiguration]
     class EnableKinesisStreamingDestinationInput < Struct.new(
+      nil,
       :table_name,
       :stream_arn,
       :enable_kinesis_streaming_configuration,
@@ -2949,6 +3038,7 @@ module Aws::DynamoDB
     #   <p>The destination for the Kinesis streaming information that is being enabled.</p>
     #   @return [Types::EnableKinesisStreamingConfiguration]
     class EnableKinesisStreamingDestinationOutput < Struct.new(
+      nil,
       :table_name,
       :stream_arn,
       :destination_status,
@@ -2966,6 +3056,7 @@ module Aws::DynamoDB
     #   <p>Endpoint cache time to live (TTL) value.</p>
     #   @return [Integer]
     class Endpoint < Struct.new(
+      nil,
       :address,
       :cache_period_in_minutes,
       keyword_init: true
@@ -3037,6 +3128,7 @@ module Aws::DynamoDB
     #               units are consumed.</p>
     #   @return [String]
     class ExecuteStatementInput < Struct.new(
+      nil,
       :statement,
       :parameters,
       :consistent_read,
@@ -3076,6 +3168,7 @@ module Aws::DynamoDB
     #               the result set is when <code>LastEvaluatedKey</code> is empty. </p>
     #   @return [Hash<String, Types::AttributeValue>]
     class ExecuteStatementOutput < Struct.new(
+      nil,
       :items,
       :next_token,
       :consumed_capacity,
@@ -3097,6 +3190,7 @@ module Aws::DynamoDB
     #               consumption that is returned in the response. For more information, see <a href="https://docs.aws.amazon.com/amazondynamodb/latest/APIReference/API_TransactGetItems.html">TransactGetItems</a> and <a href="https://docs.aws.amazon.com/amazondynamodb/latest/APIReference/API_TransactWriteItems.html">TransactWriteItems</a>.</p>
     #   @return [String]
     class ExecuteTransactionInput < Struct.new(
+      nil,
       :transact_statements,
       :client_request_token,
       :return_consumed_capacity,
@@ -3113,6 +3207,7 @@ module Aws::DynamoDB
     #               ordered according to the ordering of the statements.</p>
     #   @return [Array<Types::ConsumedCapacity>]
     class ExecuteTransactionOutput < Struct.new(
+      nil,
       :responses,
       :consumed_capacity,
       keyword_init: true
@@ -3389,6 +3484,7 @@ module Aws::DynamoDB
     #               in the <i>Amazon DynamoDB Developer Guide</i>.</p>
     #   @return [Array<Types::AttributeValue>]
     class ExpectedAttributeValue < Struct.new(
+      nil,
       :value,
       :exists,
       :comparison_operator,
@@ -3402,6 +3498,7 @@ module Aws::DynamoDB
     # @!attribute message
     #   @return [String]
     class ExportConflictException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -3494,6 +3591,7 @@ module Aws::DynamoDB
     #   <p>Optional object containing the parameters specific to an incremental export.</p>
     #   @return [Types::IncrementalExportSpecification]
     class ExportDescription < Struct.new(
+      nil,
       :export_arn,
       :export_status,
       :start_time,
@@ -3524,6 +3622,7 @@ module Aws::DynamoDB
     # @!attribute message
     #   @return [String]
     class ExportNotFoundException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -3543,6 +3642,7 @@ module Aws::DynamoDB
     #                   <code>INCREMENTAL_EXPORT</code>.</p>
     #   @return [String]
     class ExportSummary < Struct.new(
+      nil,
       :export_arn,
       :export_status,
       :export_type,
@@ -3620,6 +3720,7 @@ module Aws::DynamoDB
     #   <p>Optional object containing the parameters specific to an incremental export.</p>
     #   @return [Types::IncrementalExportSpecification]
     class ExportTableToPointInTimeInput < Struct.new(
+      nil,
       :table_arn,
       :export_time,
       :client_token,
@@ -3640,6 +3741,7 @@ module Aws::DynamoDB
     #   <p>Contains a description of the table export.</p>
     #   @return [Types::ExportDescription]
     class ExportTableToPointInTimeOutput < Struct.new(
+      nil,
       :export_description,
       keyword_init: true
     )
@@ -3654,6 +3756,7 @@ module Aws::DynamoDB
     #   <p>Description of the failure.</p>
     #   @return [String]
     class FailureException < Struct.new(
+      nil,
       :exception_name,
       :exception_description,
       keyword_init: true
@@ -3682,6 +3785,7 @@ module Aws::DynamoDB
     #               parameter.</p>
     #   @return [Hash<String, String>]
     class Get < Struct.new(
+      nil,
       :key,
       :table_name,
       :projection_expression,
@@ -3804,6 +3908,7 @@ module Aws::DynamoDB
     #                   Guide</i>.</p>
     #   @return [Hash<String, String>]
     class GetItemInput < Struct.new(
+      nil,
       :table_name,
       :key,
       :attributes_to_get,
@@ -3830,6 +3935,7 @@ module Aws::DynamoDB
     #                   DynamoDB Developer Guide</i>.</p>
     #   @return [Types::ConsumedCapacity]
     class GetItemOutput < Struct.new(
+      nil,
       :item,
       :consumed_capacity,
       keyword_init: true
@@ -3842,6 +3948,7 @@ module Aws::DynamoDB
     #               resources you can specify include tables and streams.</p>
     #   @return [String]
     class GetResourcePolicyInput < Struct.new(
+      nil,
       :resource_arn,
       keyword_init: true
     )
@@ -3856,6 +3963,7 @@ module Aws::DynamoDB
     #   <p>A unique string that represents the revision ID of the policy. If you're comparing revision IDs, make sure to always use string comparison logic.</p>
     #   @return [String]
     class GetResourcePolicyOutput < Struct.new(
+      nil,
       :policy,
       :revision_id,
       keyword_init: true
@@ -3918,6 +4026,7 @@ module Aws::DynamoDB
     #                   <code>ReadUnitsPerSecond</code>, <code>WriteUnitsPerSecond</code>, or both.</p>
     #   @return [Types::WarmThroughput]
     class GlobalSecondaryIndex < Struct.new(
+      nil,
       :index_name,
       :key_schema,
       :projection,
@@ -3939,6 +4048,7 @@ module Aws::DynamoDB
     #               secondary index.</p>
     #   @return [Types::AutoScalingSettingsUpdate]
     class GlobalSecondaryIndexAutoScalingUpdate < Struct.new(
+      nil,
       :index_name,
       :provisioned_write_capacity_auto_scaling_update,
       keyword_init: true
@@ -4045,6 +4155,7 @@ module Aws::DynamoDB
     #               second) for the specified secondary index.</p>
     #   @return [Types::GlobalSecondaryIndexWarmThroughputDescription]
     class GlobalSecondaryIndexDescription < Struct.new(
+      nil,
       :index_name,
       :key_schema,
       :projection,
@@ -4104,6 +4215,7 @@ module Aws::DynamoDB
     #                   <code>MaxWriteRequestUnits</code>, or both.</p>
     #   @return [Types::OnDemandThroughput]
     class GlobalSecondaryIndexInfo < Struct.new(
+      nil,
       :index_name,
       :key_schema,
       :projection,
@@ -4167,6 +4279,7 @@ module Aws::DynamoDB
     #   <p>The name of an existing global secondary index to be removed.</p>
     #   @return [Types::DeleteGlobalSecondaryIndexAction]
     class GlobalSecondaryIndexUpdate < Struct.new(
+      nil,
       :update,
       :create,
       :delete,
@@ -4189,6 +4302,7 @@ module Aws::DynamoDB
     #               index. The status can only be <code>UPDATING</code> or <code>ACTIVE</code>.</p>
     #   @return [String]
     class GlobalSecondaryIndexWarmThroughputDescription < Struct.new(
+      nil,
       :read_units_per_second,
       :write_units_per_second,
       :status,
@@ -4205,6 +4319,7 @@ module Aws::DynamoDB
     #   <p>The Regions where the global table has replicas.</p>
     #   @return [Array<Types::Replica>]
     class GlobalTable < Struct.new(
+      nil,
       :global_table_name,
       :replication_group,
       keyword_init: true
@@ -4216,6 +4331,7 @@ module Aws::DynamoDB
     # @!attribute message
     #   @return [String]
     class GlobalTableAlreadyExistsException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -4257,6 +4373,7 @@ module Aws::DynamoDB
     #   <p>The global table name.</p>
     #   @return [String]
     class GlobalTableDescription < Struct.new(
+      nil,
       :replication_group,
       :global_table_arn,
       :creation_date_time,
@@ -4283,6 +4400,7 @@ module Aws::DynamoDB
     #               units.</p>
     #   @return [Types::AutoScalingSettingsUpdate]
     class GlobalTableGlobalSecondaryIndexSettingsUpdate < Struct.new(
+      nil,
       :index_name,
       :provisioned_write_capacity_units,
       :provisioned_write_capacity_auto_scaling_settings_update,
@@ -4295,6 +4413,7 @@ module Aws::DynamoDB
     # @!attribute message
     #   @return [String]
     class GlobalTableNotFoundException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -4310,6 +4429,7 @@ module Aws::DynamoDB
     #   <p>The current status of the witness Region in the MRSC global table.</p>
     #   @return [String]
     class GlobalTableWitnessDescription < Struct.new(
+      nil,
       :region_name,
       :witness_status,
       keyword_init: true
@@ -4337,6 +4457,7 @@ module Aws::DynamoDB
     #               converts the remaining replica to a single-Region DynamoDB table.</p>
     #   @return [Types::DeleteGlobalTableWitnessGroupMemberAction]
     class GlobalTableWitnessGroupUpdate < Struct.new(
+      nil,
       :create,
       :delete,
       keyword_init: true
@@ -4349,6 +4470,7 @@ module Aws::DynamoDB
     # @!attribute message
     #   @return [String]
     class IdempotentParameterMismatchException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -4361,6 +4483,7 @@ module Aws::DynamoDB
     # @!attribute message
     #   @return [String]
     class ImportConflictException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -4371,6 +4494,7 @@ module Aws::DynamoDB
     # @!attribute message
     #   @return [String]
     class ImportNotFoundException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -4409,6 +4533,7 @@ module Aws::DynamoDB
     #               creation of the table it was imported to?) </p>
     #   @return [Time]
     class ImportSummary < Struct.new(
+      nil,
       :import_arn,
       :import_status,
       :table_arn,
@@ -4495,6 +4620,7 @@ module Aws::DynamoDB
     #               execution. </p>
     #   @return [String]
     class ImportTableDescription < Struct.new(
+      nil,
       :import_arn,
       :import_status,
       :table_arn,
@@ -4555,6 +4681,7 @@ module Aws::DynamoDB
     #   <p>Parameters for the table to import the data into. </p>
     #   @return [Types::TableCreationParameters]
     class ImportTableInput < Struct.new(
+      nil,
       :client_token,
       :s3_bucket_source,
       :input_format,
@@ -4572,6 +4699,7 @@ module Aws::DynamoDB
     #               how many errors were encountered. </p>
     #   @return [Types::ImportTableDescription]
     class ImportTableOutput < Struct.new(
+      nil,
       :import_table_description,
       keyword_init: true
     )
@@ -4596,6 +4724,7 @@ module Aws::DynamoDB
     #                   <code>NEW_AND_OLD_IMAGES</code>.</p>
     #   @return [String]
     class IncrementalExportSpecification < Struct.new(
+      nil,
       :export_from_time,
       :export_to_time,
       :export_view_type,
@@ -4608,6 +4737,7 @@ module Aws::DynamoDB
     # @!attribute message
     #   @return [String]
     class IndexNotFoundException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -4621,6 +4751,7 @@ module Aws::DynamoDB
     #               HeaderList. </p>
     #   @return [Types::CsvOptions]
     class InputFormatOptions < Struct.new(
+      nil,
       :csv,
       keyword_init: true
     )
@@ -4632,6 +4763,7 @@ module Aws::DynamoDB
     #   <p>The server encountered an internal error trying to fulfill the request.</p>
     #   @return [String]
     class InternalServerError < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -4641,6 +4773,7 @@ module Aws::DynamoDB
     # @!attribute message
     #   @return [String]
     class InvalidEndpointException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -4652,6 +4785,7 @@ module Aws::DynamoDB
     # @!attribute message
     #   @return [String]
     class InvalidExportTimeException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -4663,6 +4797,7 @@ module Aws::DynamoDB
     # @!attribute message
     #   @return [String]
     class InvalidRestoreTimeException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -4687,6 +4822,7 @@ module Aws::DynamoDB
     #               or accuracy of the estimate.</p>
     #   @return [Array<Float>]
     class ItemCollectionMetrics < Struct.new(
+      nil,
       :item_collection_key,
       :size_estimate_range_gb,
       keyword_init: true
@@ -4701,6 +4837,7 @@ module Aws::DynamoDB
     #               gigabytes.</p>
     #   @return [String]
     class ItemCollectionSizeLimitExceededException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -4712,6 +4849,7 @@ module Aws::DynamoDB
     #   <p>Map of attribute data consisting of the data type and attribute value.</p>
     #   @return [Hash<String, Types::AttributeValue>]
     class ItemResponse < Struct.new(
+      nil,
       :item,
       keyword_init: true
     )
@@ -4755,6 +4893,7 @@ module Aws::DynamoDB
     #            </note>
     #   @return [String]
     class KeySchemaElement < Struct.new(
+      nil,
       :attribute_name,
       :key_type,
       keyword_init: true
@@ -4845,6 +4984,7 @@ module Aws::DynamoDB
     #                   Guide</i>.</p>
     #   @return [Hash<String, String>]
     class KeysAndAttributes < Struct.new(
+      nil,
       :keys,
       :attributes_to_get,
       :consistent_read,
@@ -4870,6 +5010,7 @@ module Aws::DynamoDB
     #                   <code>MILLISECOND</code> or <code>MICROSECOND</code>.</p>
     #   @return [String]
     class KinesisDataStreamDestination < Struct.new(
+      nil,
       :stream_arn,
       :destination_status,
       :destination_status_description,
@@ -4899,6 +5040,7 @@ module Aws::DynamoDB
     #   <p>Too many operations for a given subscriber.</p>
     #   @return [String]
     class LimitExceededException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -4948,6 +5090,7 @@ module Aws::DynamoDB
     #            </ul>
     #   @return [String]
     class ListBackupsInput < Struct.new(
+      nil,
       :table_name,
       :limit,
       :time_range_lower_bound,
@@ -4974,6 +5117,7 @@ module Aws::DynamoDB
     #               if and only if no value for <code>LastEvaluatedBackupArn</code> is returned. </p>
     #   @return [String]
     class ListBackupsOutput < Struct.new(
+      nil,
       :backup_summaries,
       :last_evaluated_backup_arn,
       keyword_init: true
@@ -4992,6 +5136,7 @@ module Aws::DynamoDB
     #   <p>Maximum number of results to return per page.</p>
     #   @return [Integer]
     class ListContributorInsightsInput < Struct.new(
+      nil,
       :table_name,
       :next_token,
       :max_results,
@@ -5007,6 +5152,7 @@ module Aws::DynamoDB
     #   <p>A token to go to the next page if there is one.</p>
     #   @return [String]
     class ListContributorInsightsOutput < Struct.new(
+      nil,
       :contributor_insights_summaries,
       :next_token,
       keyword_init: true
@@ -5026,6 +5172,7 @@ module Aws::DynamoDB
     #               page of results.</p>
     #   @return [String]
     class ListExportsInput < Struct.new(
+      nil,
       :table_arn,
       :max_results,
       :next_token,
@@ -5043,6 +5190,7 @@ module Aws::DynamoDB
     #               value.</p>
     #   @return [String]
     class ListExportsOutput < Struct.new(
+      nil,
       :export_summaries,
       :next_token,
       keyword_init: true
@@ -5065,6 +5213,7 @@ module Aws::DynamoDB
     #   <p>Lists the global tables in a specific Region.</p>
     #   @return [String]
     class ListGlobalTablesInput < Struct.new(
+      nil,
       :exclusive_start_global_table_name,
       :limit,
       :region_name,
@@ -5080,6 +5229,7 @@ module Aws::DynamoDB
     #   <p>Last evaluated global table name.</p>
     #   @return [String]
     class ListGlobalTablesOutput < Struct.new(
+      nil,
       :global_tables,
       :last_evaluated_global_table_name,
       keyword_init: true
@@ -5100,6 +5250,7 @@ module Aws::DynamoDB
     #               page of results. </p>
     #   @return [String]
     class ListImportsInput < Struct.new(
+      nil,
       :table_arn,
       :page_size,
       :next_token,
@@ -5117,6 +5268,7 @@ module Aws::DynamoDB
     #               value. </p>
     #   @return [String]
     class ListImportsOutput < Struct.new(
+      nil,
       :import_summary_list,
       :next_token,
       keyword_init: true
@@ -5135,6 +5287,7 @@ module Aws::DynamoDB
     #               limit is 100.</p>
     #   @return [Integer]
     class ListTablesInput < Struct.new(
+      nil,
       :exclusive_start_table_name,
       :limit,
       keyword_init: true
@@ -5158,6 +5311,7 @@ module Aws::DynamoDB
     #               this means that there are no more table names to be retrieved.</p>
     #   @return [String]
     class ListTablesOutput < Struct.new(
+      nil,
       :table_names,
       :last_evaluated_table_name,
       keyword_init: true
@@ -5175,6 +5329,7 @@ module Aws::DynamoDB
     #               of results.</p>
     #   @return [String]
     class ListTagsOfResourceInput < Struct.new(
+      nil,
       :resource_arn,
       :next_token,
       keyword_init: true
@@ -5190,6 +5345,7 @@ module Aws::DynamoDB
     #               them, call ListTagsOfResource again, with NextToken set to this value.</p>
     #   @return [String]
     class ListTagsOfResourceOutput < Struct.new(
+      nil,
       :tags,
       :next_token,
       keyword_init: true
@@ -5232,6 +5388,7 @@ module Aws::DynamoDB
     #               attributes, which are automatically projected. </p>
     #   @return [Types::Projection]
     class LocalSecondaryIndex < Struct.new(
+      nil,
       :index_name,
       :key_schema,
       :projection,
@@ -5287,6 +5444,7 @@ module Aws::DynamoDB
     #   <p>The Amazon Resource Name (ARN) that uniquely identifies the index.</p>
     #   @return [String]
     class LocalSecondaryIndexDescription < Struct.new(
+      nil,
       :index_name,
       :key_schema,
       :projection,
@@ -5333,6 +5491,7 @@ module Aws::DynamoDB
     #               attributes, which are automatically projected. </p>
     #   @return [Types::Projection]
     class LocalSecondaryIndexInfo < Struct.new(
+      nil,
       :index_name,
       :key_schema,
       :projection,
@@ -5359,6 +5518,7 @@ module Aws::DynamoDB
     #               value of <code>MaxWriteRequestUnits</code> to -1.</p>
     #   @return [Integer]
     class OnDemandThroughput < Struct.new(
+      nil,
       :max_read_request_units,
       :max_write_request_units,
       keyword_init: true
@@ -5373,6 +5533,7 @@ module Aws::DynamoDB
     #   <p>Maximum number of read request units for the specified replica table.</p>
     #   @return [Integer]
     class OnDemandThroughputOverride < Struct.new(
+      nil,
       :max_read_request_units,
       keyword_init: true
     )
@@ -5394,6 +5555,7 @@ module Aws::DynamoDB
     #               units are consumed.</p>
     #   @return [String]
     class ParameterizedStatement < Struct.new(
+      nil,
       :statement,
       :parameters,
       :return_values_on_condition_check_failure,
@@ -5431,6 +5593,7 @@ module Aws::DynamoDB
     #           </p>
     #   @return [Time]
     class PointInTimeRecoveryDescription < Struct.new(
+      nil,
       :point_in_time_recovery_status,
       :recovery_period_in_days,
       :earliest_restorable_date_time,
@@ -5452,6 +5615,7 @@ module Aws::DynamoDB
     #               default to 35.</p>
     #   @return [Integer]
     class PointInTimeRecoverySpecification < Struct.new(
+      nil,
       :point_in_time_recovery_enabled,
       :recovery_period_in_days,
       keyword_init: true
@@ -5463,6 +5627,7 @@ module Aws::DynamoDB
     # @!attribute message
     #   @return [String]
     class PointInTimeRecoveryUnavailableException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -5475,6 +5640,7 @@ module Aws::DynamoDB
     # @!attribute message
     #   @return [String]
     class PolicyNotFoundException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -5517,6 +5683,7 @@ module Aws::DynamoDB
     #               if the table has more than 100 attributes.</p>
     #   @return [Array<String>]
     class Projection < Struct.new(
+      nil,
       :projection_type,
       :non_key_attributes,
       keyword_init: true
@@ -5547,6 +5714,7 @@ module Aws::DynamoDB
     #               0.</p>
     #   @return [Integer]
     class ProvisionedThroughput < Struct.new(
+      nil,
       :read_capacity_units,
       :write_capacity_units,
       keyword_init: true
@@ -5580,6 +5748,7 @@ module Aws::DynamoDB
     #                   <code>ThrottlingException</code>.</p>
     #   @return [Integer]
     class ProvisionedThroughputDescription < Struct.new(
+      nil,
       :last_increase_date_time,
       :last_decrease_date_time,
       :number_of_decreases_today,
@@ -5605,6 +5774,7 @@ module Aws::DynamoDB
     #       </p>
     #   @return [Array<Types::ThrottlingReason>]
     class ProvisionedThroughputExceededException < Struct.new(
+      nil,
       :message,
       :throttling_reasons,
       keyword_init: true
@@ -5619,6 +5789,7 @@ module Aws::DynamoDB
     #               capacity settings.</p>
     #   @return [Integer]
     class ProvisionedThroughputOverride < Struct.new(
+      nil,
       :read_capacity_units,
       keyword_init: true
     )
@@ -5654,6 +5825,7 @@ module Aws::DynamoDB
     #               ALL_OLD.</p>
     #   @return [String]
     class Put < Struct.new(
+      nil,
       :item,
       :table_name,
       :condition_expression,
@@ -5866,6 +6038,7 @@ module Aws::DynamoDB
     #               units are consumed.</p>
     #   @return [String]
     class PutItemInput < Struct.new(
+      nil,
       :table_name,
       :item,
       :expected,
@@ -5923,6 +6096,7 @@ module Aws::DynamoDB
     #            </ul>
     #   @return [Types::ItemCollectionMetrics]
     class PutItemOutput < Struct.new(
+      nil,
       :attributes,
       :consumed_capacity,
       :item_collection_metrics,
@@ -5940,6 +6114,7 @@ module Aws::DynamoDB
     #               their types must match the index key schema.</p>
     #   @return [Hash<String, Types::AttributeValue>]
     class PutRequest < Struct.new(
+      nil,
       :item,
       keyword_init: true
     )
@@ -5987,6 +6162,7 @@ module Aws::DynamoDB
     #               permissions to change the policy of this resource in the future.</p>
     #   @return [Boolean]
     class PutResourcePolicyInput < Struct.new(
+      nil,
       :resource_arn,
       :policy,
       :expected_revision_id,
@@ -6000,6 +6176,7 @@ module Aws::DynamoDB
     #   <p>A unique string that represents the revision ID of the policy. If you're comparing revision IDs, make sure to always use string comparison logic.</p>
     #   @return [String]
     class PutResourcePolicyOutput < Struct.new(
+      nil,
       :revision_id,
       keyword_init: true
     )
@@ -6372,6 +6549,7 @@ module Aws::DynamoDB
     #                   Guide</i>.</p>
     #   @return [Hash<String, Types::AttributeValue>]
     class QueryInput < Struct.new(
+      nil,
       :table_name,
       :index_name,
       :select,
@@ -6434,6 +6612,7 @@ module Aws::DynamoDB
     #                   DynamoDB Developer Guide</i>.</p>
     #   @return [Types::ConsumedCapacity]
     class QueryOutput < Struct.new(
+      nil,
       :items,
       :count,
       :scanned_count,
@@ -6455,6 +6634,7 @@ module Aws::DynamoDB
     #   <p>The Region where the replica needs to be created.</p>
     #   @return [String]
     class Replica < Struct.new(
+      nil,
       :region_name,
       keyword_init: true
     )
@@ -6465,6 +6645,7 @@ module Aws::DynamoDB
     # @!attribute message
     #   @return [String]
     class ReplicaAlreadyExistsException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -6508,6 +6689,7 @@ module Aws::DynamoDB
     #            </ul>
     #   @return [String]
     class ReplicaAutoScalingDescription < Struct.new(
+      nil,
       :region_name,
       :global_secondary_indexes,
       :replica_provisioned_read_capacity_auto_scaling_settings,
@@ -6531,6 +6713,7 @@ module Aws::DynamoDB
     #               secondary index.</p>
     #   @return [Types::AutoScalingSettingsUpdate]
     class ReplicaAutoScalingUpdate < Struct.new(
+      nil,
       :region_name,
       :replica_global_secondary_index_updates,
       :replica_provisioned_read_capacity_auto_scaling_update,
@@ -6618,6 +6801,7 @@ module Aws::DynamoDB
     #   <p>Contains details of the table class.</p>
     #   @return [Types::TableClassSummary]
     class ReplicaDescription < Struct.new(
+      nil,
       :region_name,
       :replica_status,
       :replica_status_description,
@@ -6647,6 +6831,7 @@ module Aws::DynamoDB
     #               index in the specified replica table.</p>
     #   @return [Types::OnDemandThroughputOverride]
     class ReplicaGlobalSecondaryIndex < Struct.new(
+      nil,
       :index_name,
       :provisioned_throughput_override,
       :on_demand_throughput_override,
@@ -6692,6 +6877,7 @@ module Aws::DynamoDB
     #               index.</p>
     #   @return [Types::AutoScalingSettingsDescription]
     class ReplicaGlobalSecondaryIndexAutoScalingDescription < Struct.new(
+      nil,
       :index_name,
       :index_status,
       :provisioned_read_capacity_auto_scaling_settings,
@@ -6711,6 +6897,7 @@ module Aws::DynamoDB
     #               secondary index.</p>
     #   @return [Types::AutoScalingSettingsUpdate]
     class ReplicaGlobalSecondaryIndexAutoScalingUpdate < Struct.new(
+      nil,
       :index_name,
       :provisioned_read_capacity_auto_scaling_update,
       keyword_init: true
@@ -6733,6 +6920,7 @@ module Aws::DynamoDB
     #   <p>Represents the warm throughput of the global secondary index for this replica.</p>
     #   @return [Types::GlobalSecondaryIndexWarmThroughputDescription]
     class ReplicaGlobalSecondaryIndexDescription < Struct.new(
+      nil,
       :index_name,
       :provisioned_throughput_override,
       :on_demand_throughput_override,
@@ -6785,6 +6973,7 @@ module Aws::DynamoDB
     #               units.</p>
     #   @return [Types::AutoScalingSettingsDescription]
     class ReplicaGlobalSecondaryIndexSettingsDescription < Struct.new(
+      nil,
       :index_name,
       :index_status,
       :provisioned_read_capacity_units,
@@ -6811,6 +7000,7 @@ module Aws::DynamoDB
     #               units.</p>
     #   @return [Types::AutoScalingSettingsUpdate]
     class ReplicaGlobalSecondaryIndexSettingsUpdate < Struct.new(
+      nil,
       :index_name,
       :provisioned_read_capacity_units,
       :provisioned_read_capacity_auto_scaling_settings_update,
@@ -6823,6 +7013,7 @@ module Aws::DynamoDB
     # @!attribute message
     #   @return [String]
     class ReplicaNotFoundException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -6880,6 +7071,7 @@ module Aws::DynamoDB
     #   <p>Contains details of the table class.</p>
     #   @return [Types::TableClassSummary]
     class ReplicaSettingsDescription < Struct.new(
+      nil,
       :region_name,
       :replica_status,
       :replica_billing_mode_summary,
@@ -6916,6 +7108,7 @@ module Aws::DynamoDB
     #               class.</p>
     #   @return [String]
     class ReplicaSettingsUpdate < Struct.new(
+      nil,
       :region_name,
       :replica_provisioned_read_capacity_units,
       :replica_provisioned_read_capacity_auto_scaling_settings_update,
@@ -6945,6 +7138,7 @@ module Aws::DynamoDB
     #   <p>The name of the existing replica to be removed.</p>
     #   @return [Types::DeleteReplicaAction]
     class ReplicaUpdate < Struct.new(
+      nil,
       :create,
       :delete,
       keyword_init: true
@@ -6957,6 +7151,7 @@ module Aws::DynamoDB
     # @!attribute message
     #   @return [String]
     class ReplicatedWriteConflictException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -6995,6 +7190,7 @@ module Aws::DynamoDB
     #   <p>The parameters required for deleting a replica for the table.</p>
     #   @return [Types::DeleteReplicationGroupMemberAction]
     class ReplicationGroupUpdate < Struct.new(
+      nil,
       :create,
       :update,
       :delete,
@@ -7015,6 +7211,7 @@ module Aws::DynamoDB
     #       </p>
     #   @return [Array<Types::ThrottlingReason>]
     class RequestLimitExceeded < Struct.new(
+      nil,
       :message,
       :throttling_reasons,
       keyword_init: true
@@ -7041,6 +7238,7 @@ module Aws::DynamoDB
     #   <p>The resource which is being attempted to be changed is in use.</p>
     #   @return [String]
     class ResourceInUseException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -7053,6 +7251,7 @@ module Aws::DynamoDB
     #   <p>The resource which is being requested does not exist.</p>
     #   @return [String]
     class ResourceNotFoundException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -7073,6 +7272,7 @@ module Aws::DynamoDB
     #   <p>Indicates if a restore is in progress or not.</p>
     #   @return [Boolean]
     class RestoreSummary < Struct.new(
+      nil,
       :source_backup_arn,
       :source_table_arn,
       :restore_date_time,
@@ -7113,6 +7313,7 @@ module Aws::DynamoDB
     #   <p>The new server-side encryption settings for the restored table.</p>
     #   @return [Types::SSESpecification]
     class RestoreTableFromBackupInput < Struct.new(
+      nil,
       :target_table_name,
       :backup_arn,
       :billing_mode_override,
@@ -7130,6 +7331,7 @@ module Aws::DynamoDB
     #   <p>The description of the table created from an existing backup.</p>
     #   @return [Types::TableDescription]
     class RestoreTableFromBackupOutput < Struct.new(
+      nil,
       :table_description,
       keyword_init: true
     )
@@ -7178,6 +7380,7 @@ module Aws::DynamoDB
     #   <p>The new server-side encryption settings for the restored table.</p>
     #   @return [Types::SSESpecification]
     class RestoreTableToPointInTimeInput < Struct.new(
+      nil,
       :source_table_arn,
       :source_table_name,
       :target_table_name,
@@ -7198,6 +7401,7 @@ module Aws::DynamoDB
     #   <p>Represents the properties of a table.</p>
     #   @return [Types::TableDescription]
     class RestoreTableToPointInTimeOutput < Struct.new(
+      nil,
       :table_description,
       keyword_init: true
     )
@@ -7216,6 +7420,7 @@ module Aws::DynamoDB
     #   <p> The key prefix shared by all S3 Objects that are being imported. </p>
     #   @return [String]
     class S3BucketSource < Struct.new(
+      nil,
       :s3_bucket_owner,
       :s3_bucket,
       :s3_key_prefix,
@@ -7259,6 +7464,7 @@ module Aws::DynamoDB
     #               again. DynamoDB will initiate the table archival process when table's KMS key remains inaccessible for more than seven days from this date.</p>
     #   @return [Time]
     class SSEDescription < Struct.new(
+      nil,
       :status,
       :sse_type,
       :kms_master_key_arn,
@@ -7292,6 +7498,7 @@ module Aws::DynamoDB
     #               default DynamoDB key <code>alias/aws/dynamodb</code>.</p>
     #   @return [String]
     class SSESpecification < Struct.new(
+      nil,
       :enabled,
       :sse_type,
       :kms_master_key_id,
@@ -7575,6 +7782,7 @@ module Aws::DynamoDB
     #               true, you will receive a <code>ValidationException</code>.</p>
     #   @return [Boolean]
     class ScanInput < Struct.new(
+      nil,
       :table_name,
       :index_name,
       :attributes_to_get,
@@ -7637,6 +7845,7 @@ module Aws::DynamoDB
     #                   DynamoDB Developer Guide</i>.</p>
     #   @return [Types::ConsumedCapacity]
     class ScanOutput < Struct.new(
+      nil,
       :items,
       :count,
       :scanned_count,
@@ -7702,6 +7911,7 @@ module Aws::DynamoDB
     #            </ul>
     #   @return [String]
     class SourceTableDetails < Struct.new(
+      nil,
       :table_name,
       :table_id,
       :table_arn,
@@ -7740,6 +7950,7 @@ module Aws::DynamoDB
     #               created.</p>
     #   @return [Types::SSEDescription]
     class SourceTableFeatureDetails < Struct.new(
+      nil,
       :local_secondary_indexes,
       :global_secondary_indexes,
       :stream_description,
@@ -7783,6 +7994,7 @@ module Aws::DynamoDB
     #            </ul>
     #   @return [String]
     class StreamSpecification < Struct.new(
+      nil,
       :stream_enabled,
       :stream_view_type,
       keyword_init: true
@@ -7794,6 +8006,7 @@ module Aws::DynamoDB
     # @!attribute message
     #   @return [String]
     class TableAlreadyExistsException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -7829,6 +8042,7 @@ module Aws::DynamoDB
     #   <p>Represents replicas of the global table.</p>
     #   @return [Array<Types::ReplicaAutoScalingDescription>]
     class TableAutoScalingDescription < Struct.new(
+      nil,
       :table_name,
       :table_status,
       :replicas,
@@ -7846,6 +8060,7 @@ module Aws::DynamoDB
     #   <p>The date and time at which the table class was last updated.</p>
     #   @return [Time]
     class TableClassSummary < Struct.new(
+      nil,
       :table_class,
       :last_update_date_time,
       keyword_init: true
@@ -7889,6 +8104,7 @@ module Aws::DynamoDB
     #               operation. </p>
     #   @return [Array<Types::GlobalSecondaryIndex>]
     class TableCreationParameters < Struct.new(
+      nil,
       :table_name,
       :attribute_definitions,
       :key_schema,
@@ -8298,6 +8514,7 @@ module Aws::DynamoDB
     #                   Consistency modes</a> in DynamoDB developer guide. </p>
     #   @return [String]
     class TableDescription < Struct.new(
+      nil,
       :attribute_definitions,
       :table_name,
       :key_schema,
@@ -8335,6 +8552,7 @@ module Aws::DynamoDB
     # @!attribute message
     #   @return [String]
     class TableInUseException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -8347,6 +8565,7 @@ module Aws::DynamoDB
     # @!attribute message
     #   @return [String]
     class TableNotFoundException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -8366,6 +8585,7 @@ module Aws::DynamoDB
     #   <p>Represents warm throughput value of the base table.</p>
     #   @return [String]
     class TableWarmThroughputDescription < Struct.new(
+      nil,
       :read_units_per_second,
       :write_units_per_second,
       :status,
@@ -8393,6 +8613,7 @@ module Aws::DynamoDB
     #   <p>The value of the tag. Tag values are case-sensitive and can be null.</p>
     #   @return [String]
     class Tag < Struct.new(
+      nil,
       :key,
       :value,
       keyword_init: true
@@ -8408,6 +8629,7 @@ module Aws::DynamoDB
     #   <p>The tags to be assigned to the Amazon DynamoDB resource.</p>
     #   @return [Array<Types::Tag>]
     class TagResourceInput < Struct.new(
+      nil,
       :resource_arn,
       :tags,
       keyword_init: true
@@ -8425,6 +8647,7 @@ module Aws::DynamoDB
     #       </p>
     #   @return [Array<Types::ThrottlingReason>]
     class ThrottlingException < Struct.new(
+      nil,
       :message,
       :throttling_reasons,
       keyword_init: true
@@ -8493,6 +8716,7 @@ module Aws::DynamoDB
     #               throttling event.</p>
     #   @return [String]
     class ThrottlingReason < Struct.new(
+      nil,
       :reason,
       :resource,
       keyword_init: true
@@ -8508,6 +8732,7 @@ module Aws::DynamoDB
     #   <p> The name of the TTL attribute for items in the table.</p>
     #   @return [String]
     class TimeToLiveDescription < Struct.new(
+      nil,
       :time_to_live_status,
       :attribute_name,
       keyword_init: true
@@ -8525,6 +8750,7 @@ module Aws::DynamoDB
     #               table.</p>
     #   @return [String]
     class TimeToLiveSpecification < Struct.new(
+      nil,
       :enabled,
       :attribute_name,
       keyword_init: true
@@ -8539,6 +8765,7 @@ module Aws::DynamoDB
     #               retrieve.</p>
     #   @return [Types::Get]
     class TransactGetItem < Struct.new(
+      nil,
       :get,
       keyword_init: true
     )
@@ -8555,6 +8782,7 @@ module Aws::DynamoDB
     #               value is valid.</p>
     #   @return [String]
     class TransactGetItemsInput < Struct.new(
+      nil,
       :transact_items,
       :return_consumed_capacity,
       keyword_init: true
@@ -8580,6 +8808,7 @@ module Aws::DynamoDB
     #               attributes, the corresponding <code>ItemResponse</code> object is an empty Map. </p>
     #   @return [Array<Types::ItemResponse>]
     class TransactGetItemsOutput < Struct.new(
+      nil,
       :consumed_capacity,
       :responses,
       keyword_init: true
@@ -8602,6 +8831,7 @@ module Aws::DynamoDB
     #   <p>A request to perform an <code>UpdateItem</code> operation.</p>
     #   @return [Types::Update]
     class TransactWriteItem < Struct.new(
+      nil,
       :condition_check,
       :put,
       :delete,
@@ -8671,6 +8901,7 @@ module Aws::DynamoDB
     #                   <code>IdempotentParameterMismatch</code> exception.</p>
     #   @return [String]
     class TransactWriteItemsInput < Struct.new(
+      nil,
       :transact_items,
       :return_consumed_capacity,
       :return_item_collection_metrics,
@@ -8692,6 +8923,7 @@ module Aws::DynamoDB
     #               operations. </p>
     #   @return [Hash<String, Array<Types::ItemCollectionMetrics>>]
     class TransactWriteItemsOutput < Struct.new(
+      nil,
       :consumed_capacity,
       :item_collection_metrics,
       keyword_init: true
@@ -8942,6 +9174,7 @@ module Aws::DynamoDB
     #   <p>A list of cancellation reasons.</p>
     #   @return [Array<Types::CancellationReason>]
     class TransactionCanceledException < Struct.new(
+      nil,
       :message,
       :cancellation_reasons,
       keyword_init: true
@@ -8954,6 +9187,7 @@ module Aws::DynamoDB
     # @!attribute message
     #   @return [String]
     class TransactionConflictException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -9020,6 +9254,7 @@ module Aws::DynamoDB
     # @!attribute message
     #   @return [String]
     class TransactionInProgressException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -9035,6 +9270,7 @@ module Aws::DynamoDB
     #               will be removed from the DynamoDB resource.</p>
     #   @return [Array<String>]
     class UntagResourceInput < Struct.new(
+      nil,
       :resource_arn,
       :tag_keys,
       keyword_init: true
@@ -9072,6 +9308,7 @@ module Aws::DynamoDB
     #               ALL_OLD.</p>
     #   @return [String]
     class Update < Struct.new(
+      nil,
       :key,
       :update_expression,
       :table_name,
@@ -9092,6 +9329,7 @@ module Aws::DynamoDB
     #   <p>Represents the settings used to enable point in time recovery.</p>
     #   @return [Types::PointInTimeRecoverySpecification]
     class UpdateContinuousBackupsInput < Struct.new(
+      nil,
       :table_name,
       :point_in_time_recovery_specification,
       keyword_init: true
@@ -9104,6 +9342,7 @@ module Aws::DynamoDB
     #               table.</p>
     #   @return [Types::ContinuousBackupsDescription]
     class UpdateContinuousBackupsOutput < Struct.new(
+      nil,
       :continuous_backups_description,
       keyword_init: true
     )
@@ -9125,6 +9364,7 @@ module Aws::DynamoDB
     #               the DynamoDB table or index.</p>
     #   @return [String]
     class UpdateContributorInsightsInput < Struct.new(
+      nil,
       :table_name,
       :index_name,
       :contributor_insights_action,
@@ -9148,6 +9388,7 @@ module Aws::DynamoDB
     #               all access and throttled events or to track throttled events exclusively.</p>
     #   @return [String]
     class UpdateContributorInsightsOutput < Struct.new(
+      nil,
       :table_name,
       :index_name,
       :contributor_insights_status,
@@ -9179,6 +9420,7 @@ module Aws::DynamoDB
     #               applied to a global secondary index.</p>
     #   @return [Types::WarmThroughput]
     class UpdateGlobalSecondaryIndexAction < Struct.new(
+      nil,
       :index_name,
       :provisioned_throughput,
       :on_demand_throughput,
@@ -9195,6 +9437,7 @@ module Aws::DynamoDB
     #   <p>A list of Regions that should be added or removed from the global table.</p>
     #   @return [Array<Types::ReplicaUpdate>]
     class UpdateGlobalTableInput < Struct.new(
+      nil,
       :global_table_name,
       :replica_updates,
       keyword_init: true
@@ -9206,6 +9449,7 @@ module Aws::DynamoDB
     #   <p>Contains the details of the global table.</p>
     #   @return [Types::GlobalTableDescription]
     class UpdateGlobalTableOutput < Struct.new(
+      nil,
       :global_table_description,
       keyword_init: true
     )
@@ -9250,6 +9494,7 @@ module Aws::DynamoDB
     #   <p>Represents the settings for a global table in a Region that will be modified.</p>
     #   @return [Array<Types::ReplicaSettingsUpdate>]
     class UpdateGlobalTableSettingsInput < Struct.new(
+      nil,
       :global_table_name,
       :global_table_billing_mode,
       :global_table_provisioned_write_capacity_units,
@@ -9268,6 +9513,7 @@ module Aws::DynamoDB
     #   <p>The Region-specific settings for the global table.</p>
     #   @return [Array<Types::ReplicaSettingsDescription>]
     class UpdateGlobalTableSettingsOutput < Struct.new(
+      nil,
       :global_table_name,
       :replica_settings,
       keyword_init: true
@@ -9584,6 +9830,7 @@ module Aws::DynamoDB
     #               units are consumed.</p>
     #   @return [String]
     class UpdateItemInput < Struct.new(
+      nil,
       :table_name,
       :key,
       :attribute_updates,
@@ -9645,6 +9892,7 @@ module Aws::DynamoDB
     #            </ul>
     #   @return [Types::ItemCollectionMetrics]
     class UpdateItemOutput < Struct.new(
+      nil,
       :attributes,
       :consumed_capacity,
       :item_collection_metrics,
@@ -9658,6 +9906,7 @@ module Aws::DynamoDB
     #   <p>Enables updating the precision of Kinesis data stream timestamp. </p>
     #   @return [String]
     class UpdateKinesisStreamingConfiguration < Struct.new(
+      nil,
       :approximate_creation_date_time_precision,
       keyword_init: true
     )
@@ -9675,6 +9924,7 @@ module Aws::DynamoDB
     #   <p>The command to update the Kinesis stream configuration.</p>
     #   @return [Types::UpdateKinesisStreamingConfiguration]
     class UpdateKinesisStreamingDestinationInput < Struct.new(
+      nil,
       :table_name,
       :stream_arn,
       :update_kinesis_streaming_configuration,
@@ -9696,6 +9946,7 @@ module Aws::DynamoDB
     #   <p>The command to update the Kinesis streaming destination configuration.</p>
     #   @return [Types::UpdateKinesisStreamingConfiguration]
     class UpdateKinesisStreamingDestinationOutput < Struct.new(
+      nil,
       :table_name,
       :stream_arn,
       :destination_status,
@@ -9730,6 +9981,7 @@ module Aws::DynamoDB
     #               class.</p>
     #   @return [String]
     class UpdateReplicationGroupMemberAction < Struct.new(
+      nil,
       :region_name,
       :kms_master_key_id,
       :provisioned_throughput_override,
@@ -9873,6 +10125,7 @@ module Aws::DynamoDB
     #               for updating a table.</p>
     #   @return [Types::WarmThroughput]
     class UpdateTableInput < Struct.new(
+      nil,
       :attribute_definitions,
       :table_name,
       :billing_mode,
@@ -9897,6 +10150,7 @@ module Aws::DynamoDB
     #   <p>Represents the properties of the table.</p>
     #   @return [Types::TableDescription]
     class UpdateTableOutput < Struct.new(
+      nil,
       :table_description,
       keyword_init: true
     )
@@ -9920,6 +10174,7 @@ module Aws::DynamoDB
     #               modified.</p>
     #   @return [Array<Types::ReplicaAutoScalingUpdate>]
     class UpdateTableReplicaAutoScalingInput < Struct.new(
+      nil,
       :global_secondary_index_updates,
       :table_name,
       :provisioned_write_capacity_auto_scaling_update,
@@ -9933,6 +10188,7 @@ module Aws::DynamoDB
     #   <p>Returns information about the auto scaling settings of a table with replicas.</p>
     #   @return [Types::TableAutoScalingDescription]
     class UpdateTableReplicaAutoScalingOutput < Struct.new(
+      nil,
       :table_auto_scaling_description,
       keyword_init: true
     )
@@ -9949,6 +10205,7 @@ module Aws::DynamoDB
     #               table.</p>
     #   @return [Types::TimeToLiveSpecification]
     class UpdateTimeToLiveInput < Struct.new(
+      nil,
       :table_name,
       :time_to_live_specification,
       keyword_init: true
@@ -9960,6 +10217,7 @@ module Aws::DynamoDB
     #   <p>Represents the output of an <code>UpdateTimeToLive</code> operation.</p>
     #   @return [Types::TimeToLiveSpecification]
     class UpdateTimeToLiveOutput < Struct.new(
+      nil,
       :time_to_live_specification,
       keyword_init: true
     )
@@ -9979,6 +10237,7 @@ module Aws::DynamoDB
     #               support.</p>
     #   @return [Integer]
     class WarmThroughput < Struct.new(
+      nil,
       :read_units_per_second,
       :write_units_per_second,
       keyword_init: true
@@ -9997,6 +10256,7 @@ module Aws::DynamoDB
     #   <p>A request to perform a <code>DeleteItem</code> operation.</p>
     #   @return [Types::DeleteRequest]
     class WriteRequest < Struct.new(
+      nil,
       :put_request,
       :delete_request,
       keyword_init: true

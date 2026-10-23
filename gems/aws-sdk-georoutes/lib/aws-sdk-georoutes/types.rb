@@ -10,6 +10,7 @@ module Aws::GeoRoutes
     # @!attribute message
     #   @return [String]
     class AccessDeniedException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -71,6 +72,7 @@ module Aws::GeoRoutes
     #   <p>Travel mode related options for the provided travel mode.</p>
     #   @return [Types::IsolineTravelModeOptions]
     class CalculateIsolinesRequest < Struct.new(
+      nil,
       :allow,
       :arrival_time,
       :avoid,
@@ -116,6 +118,7 @@ module Aws::GeoRoutes
     #   <p>Snapped origin that was used for the Isoline calculation.</p>
     #   @return [Array<Float>]
     class CalculateIsolinesResponse < Struct.new(
+      nil,
       :arrival_time,
       :departure_time,
       :isoline_geometry_format,
@@ -168,6 +171,7 @@ module Aws::GeoRoutes
     #   <p>Travel mode related options for the provided travel mode.</p>
     #   @return [Types::RouteMatrixTravelModeOptions]
     class CalculateRouteMatrixRequest < Struct.new(
+      nil,
       :allow,
       :avoid,
       :depart_now,
@@ -199,6 +203,7 @@ module Aws::GeoRoutes
     #   <p>Boundary within which the matrix is to be calculated. All data, origins and destinations outside the boundary are considered invalid.</p> <note> <p>When request routing boundary was set as AutoCircle, the response routing boundary will return Circle derived from the AutoCircle settings.</p> </note>
     #   @return [Types::RouteMatrixBoundary]
     class CalculateRouteMatrixResponse < Struct.new(
+      nil,
       :error_count,
       :pricing_bucket,
       :route_matrix,
@@ -284,6 +289,7 @@ module Aws::GeoRoutes
     #   <p>List of waypoints between the Origin and Destination.</p>
     #   @return [Array<Types::RouteWaypoint>]
     class CalculateRoutesRequest < Struct.new(
+      nil,
       :allow,
       :arrival_time,
       :avoid,
@@ -327,6 +333,7 @@ module Aws::GeoRoutes
     #   <p>The path from the origin to the destination.</p>
     #   @return [Array<Types::Route>]
     class CalculateRoutesResponse < Struct.new(
+      nil,
       :leg_geometry_format,
       :notices,
       :pricing_bucket,
@@ -345,6 +352,7 @@ module Aws::GeoRoutes
     #   <p>Radius of the Circle.</p> <p> <b>Unit</b>: <code>meters</code> </p>
     #   @return [Float]
     class Circle < Struct.new(
+      nil,
       :center,
       :radius,
       keyword_init: true
@@ -361,6 +369,7 @@ module Aws::GeoRoutes
     #   <p>Radius that defines the width of the corridor.</p>
     #   @return [Integer]
     class Corridor < Struct.new(
+      nil,
       :line_string,
       :radius,
       keyword_init: true
@@ -372,6 +381,7 @@ module Aws::GeoRoutes
     # @!attribute message
     #   @return [String]
     class InternalServerException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -392,6 +402,7 @@ module Aws::GeoRoutes
     #   <p>Time threshold corresponding to the calculated isoline.</p>
     #   @return [Integer]
     class Isoline < Struct.new(
+      nil,
       :connections,
       :distance_threshold,
       :geometries,
@@ -415,6 +426,7 @@ module Aws::GeoRoutes
     #   <p>Allow Hov (High Occupancy vehicle) lanes while calculating an isoline.</p> <p>Default value: <code>false</code> </p>
     #   @return [Boolean]
     class IsolineAllowOptions < Struct.new(
+      nil,
       :hot,
       :hov,
       keyword_init: true
@@ -430,6 +442,7 @@ module Aws::GeoRoutes
     #   <p>Geometry of the area to be avoided.</p>
     #   @return [Types::IsolineAvoidanceAreaGeometry]
     class IsolineAvoidanceArea < Struct.new(
+      nil,
       :except,
       :geometry,
       keyword_init: true
@@ -454,6 +467,7 @@ module Aws::GeoRoutes
     #   <p>A list of PolylinePolygon's that are excluded for calculating isolines, the list can only contain 1 polygon. For more information on polyline encoding, see <a href="https://github.com/heremaps/flexiblepolyline/blob/master/README.md">https://github.com/heremaps/flexiblepolyline/blob/master/README.md</a>. </p>
     #   @return [Array<String>]
     class IsolineAvoidanceAreaGeometry < Struct.new(
+      nil,
       :bounding_box,
       :corridor,
       :polygon,
@@ -502,6 +516,7 @@ module Aws::GeoRoutes
     #   <p>Zone categories to be avoided.</p>
     #   @return [Array<Types::IsolineAvoidanceZoneCategory>]
     class IsolineAvoidanceOptions < Struct.new(
+      nil,
       :areas,
       :car_shuttle_trains,
       :controlled_access_highways,
@@ -524,6 +539,7 @@ module Aws::GeoRoutes
     #   <p>Zone category to be avoided.</p>
     #   @return [String]
     class IsolineAvoidanceZoneCategory < Struct.new(
+      nil,
       :category,
       keyword_init: true
     )
@@ -544,6 +560,7 @@ module Aws::GeoRoutes
     #   <p>The number of occupants in the vehicle.</p> <p>Default Value: <code>1</code> </p>
     #   @return [Integer]
     class IsolineCarOptions < Struct.new(
+      nil,
       :engine_type,
       :license_plate,
       :max_speed,
@@ -570,6 +587,7 @@ module Aws::GeoRoutes
     #   <p>Index of the polygon corresponding to the "to" component of the connection. The polygon is available from <code>Isoline[].Geometries</code>.</p>
     #   @return [Integer]
     class IsolineConnection < Struct.new(
+      nil,
       :from_polygon_index,
       :geometry,
       :to_polygon_index,
@@ -586,6 +604,7 @@ module Aws::GeoRoutes
     #   <p>An ordered list of positions used to plot a route on a map in a lossy compression format.</p> <note> <p>LineString and Polyline are mutually exclusive properties.</p> </note>
     #   @return [String]
     class IsolineConnectionGeometry < Struct.new(
+      nil,
       :line_string,
       :polyline,
       keyword_init: true
@@ -607,6 +626,7 @@ module Aws::GeoRoutes
     #   <p>Options to configure matching the provided position to a side of the street.</p>
     #   @return [Types::IsolineSideOfStreetOptions]
     class IsolineDestinationOptions < Struct.new(
+      nil,
       :avoid_actions_for_distance,
       :heading,
       :matching,
@@ -630,6 +650,7 @@ module Aws::GeoRoutes
     #   <p>Maximum resolution of the returned isoline.</p> <p> <b>Unit</b>: <code>meters</code> </p>
     #   @return [Integer]
     class IsolineGranularityOptions < Struct.new(
+      nil,
       :max_points,
       :max_resolution,
       keyword_init: true
@@ -657,6 +678,7 @@ module Aws::GeoRoutes
     #   <p>Strategy that defines matching of the position onto the road network. MatchAny considers all roads possible, whereas MatchMostSignificantRoad matches to the most significant road.</p>
     #   @return [String]
     class IsolineMatchingOptions < Struct.new(
+      nil,
       :name_hint,
       :on_road_threshold,
       :radius,
@@ -686,6 +708,7 @@ module Aws::GeoRoutes
     #   <p>Options to configure matching the provided position to a side of the street.</p>
     #   @return [Types::IsolineSideOfStreetOptions]
     class IsolineOriginOptions < Struct.new(
+      nil,
       :avoid_actions_for_distance,
       :heading,
       :matching,
@@ -715,6 +738,7 @@ module Aws::GeoRoutes
     #   <p>The number of occupants in the vehicle.</p> <p>Default Value: <code>1</code> </p>
     #   @return [Integer]
     class IsolineScooterOptions < Struct.new(
+      nil,
       :engine_type,
       :license_plate,
       :max_speed,
@@ -738,6 +762,7 @@ module Aws::GeoRoutes
     #   <p>A list of Isoline PolylinePolygon, for each isoline PolylinePolygon, it contains PolylinePolygon of the first linear ring (the outer ring) and from 2nd item to the last item (the inner rings). For more information on polyline encoding, see <a href="https://github.com/heremaps/flexiblepolyline/blob/master/README.md">https://github.com/heremaps/flexiblepolyline/blob/master/README.md</a>.</p>
     #   @return [Array<String>]
     class IsolineShapeGeometry < Struct.new(
+      nil,
       :polygon,
       :polyline_polygon,
       keyword_init: true
@@ -753,6 +778,7 @@ module Aws::GeoRoutes
     #   <p>Strategy that defines when the side of street position should be used. AnyStreet will always use the provided position.</p> <p>Default Value: <code>DividedStreetOnly</code> </p>
     #   @return [String]
     class IsolineSideOfStreetOptions < Struct.new(
+      nil,
       :position,
       :use_with,
       keyword_init: true
@@ -768,6 +794,7 @@ module Aws::GeoRoutes
     #   <p>Time to be used for the isoline calculation.</p>
     #   @return [Array<Integer>]
     class IsolineThresholds < Struct.new(
+      nil,
       :distance,
       :time,
       keyword_init: true
@@ -783,6 +810,7 @@ module Aws::GeoRoutes
     #   <p>Determines if traffic should be used or ignored while calculating the route.</p> <p>Default Value: <code>UseTrafficData</code> </p>
     #   @return [String]
     class IsolineTrafficOptions < Struct.new(
+      nil,
       :flow_event_threshold_override,
       :usage,
       keyword_init: true
@@ -803,6 +831,7 @@ module Aws::GeoRoutes
     #   <p>Number of trailers attached to the vehicle.</p> <p>Default Value: <code>0</code> </p>
     #   @return [Integer]
     class IsolineTrailerOptions < Struct.new(
+      nil,
       :axle_count,
       :trailer_count,
       keyword_init: true
@@ -827,6 +856,7 @@ module Aws::GeoRoutes
     #   <p>Travel mode options when the provided travel mode is "Truck"</p>
     #   @return [Types::IsolineTruckOptions]
     class IsolineTravelModeOptions < Struct.new(
+      nil,
       :car,
       :scooter,
       :truck,
@@ -894,6 +924,7 @@ module Aws::GeoRoutes
     #   <p>Width of the vehicle.</p> <p> <b>Unit</b>: <code>centimeters</code> </p>
     #   @return [Integer]
     class IsolineTruckOptions < Struct.new(
+      nil,
       :axle_count,
       :engine_type,
       :gross_weight,
@@ -940,6 +971,7 @@ module Aws::GeoRoutes
     #   <p>The last character of the License Plate.</p>
     #   @return [String]
     class IsolineVehicleLicensePlate < Struct.new(
+      nil,
       :last_character,
       keyword_init: true
     )
@@ -954,6 +986,7 @@ module Aws::GeoRoutes
     #   <p>The value of the localized string.</p>
     #   @return [String]
     class LocalizedString < Struct.new(
+      nil,
       :language,
       :value,
       keyword_init: true
@@ -1007,6 +1040,7 @@ module Aws::GeoRoutes
     #   <p>List of waypoints between the <code>Origin</code> and <code>Destination</code>.</p>
     #   @return [Array<Types::WaypointOptimizationWaypoint>]
     class OptimizeWaypointsRequest < Struct.new(
+      nil,
       :avoid,
       :clustering,
       :departure_time,
@@ -1049,6 +1083,7 @@ module Aws::GeoRoutes
     #   <p>Time breakdown for the sequence.</p>
     #   @return [Types::WaypointOptimizationTimeBreakdown]
     class OptimizeWaypointsResponse < Struct.new(
+      nil,
       :connections,
       :distance,
       :duration,
@@ -1076,6 +1111,7 @@ module Aws::GeoRoutes
     #   <p>Considers all roads within the provided radius to match the provided destination to. The roads that are considered are determined by the provided Strategy.</p> <p> <b>Unit</b>: <code>Meters</code> </p>
     #   @return [Integer]
     class PolylineCorridor < Struct.new(
+      nil,
       :polyline,
       :radius,
       keyword_init: true
@@ -1094,6 +1130,7 @@ module Aws::GeoRoutes
     #   <p>TracePoint indices for which the provided notice code corresponds to.</p>
     #   @return [Array<Integer>]
     class RoadSnapNotice < Struct.new(
+      nil,
       :code,
       :title,
       :trace_point_indexes,
@@ -1110,6 +1147,7 @@ module Aws::GeoRoutes
     #   <p>An ordered list of positions used to plot a route on a map in a lossy compression format.</p> <note> <p>LineString and Polyline are mutually exclusive properties.</p> </note>
     #   @return [String]
     class RoadSnapSnappedGeometry < Struct.new(
+      nil,
       :line_string,
       :polyline,
       keyword_init: true
@@ -1128,6 +1166,7 @@ module Aws::GeoRoutes
     #   <p>Snapped position of the TracePoint provided within the request, at the same index. </p>
     #   @return [Array<Float>]
     class RoadSnapSnappedTracePoint < Struct.new(
+      nil,
       :confidence,
       :original_position,
       :snapped_position,
@@ -1150,6 +1189,7 @@ module Aws::GeoRoutes
     #   <p>Timestamp of the event.</p>
     #   @return [String]
     class RoadSnapTracePoint < Struct.new(
+      nil,
       :heading,
       :position,
       :speed,
@@ -1170,6 +1210,7 @@ module Aws::GeoRoutes
     #   <p>Number of trailers attached to the vehicle.</p> <p>Default Value: <code>0</code> </p>
     #   @return [Integer]
     class RoadSnapTrailerOptions < Struct.new(
+      nil,
       :trailer_count,
       keyword_init: true
     )
@@ -1181,6 +1222,7 @@ module Aws::GeoRoutes
     #   <p>Travel mode options when the provided travel mode is "Truck".</p>
     #   @return [Types::RoadSnapTruckOptions]
     class RoadSnapTravelModeOptions < Struct.new(
+      nil,
       :truck,
       keyword_init: true
     )
@@ -1210,6 +1252,7 @@ module Aws::GeoRoutes
     #   <p>Width of the vehicle in centimenters.</p>
     #   @return [Integer]
     class RoadSnapTruckOptions < Struct.new(
+      nil,
       :gross_weight,
       :hazardous_cargos,
       :height,
@@ -1241,6 +1284,7 @@ module Aws::GeoRoutes
     #   <p>Summarized details of the leg.</p>
     #   @return [Types::RouteSummary]
     class Route < Struct.new(
+      nil,
       :legs,
       :major_road_labels,
       :summary,
@@ -1257,6 +1301,7 @@ module Aws::GeoRoutes
     #   <p>Allow Hov (High Occupancy vehicle) lanes while calculating the route.</p> <p>Default value: <code>false</code> </p>
     #   @return [Boolean]
     class RouteAllowOptions < Struct.new(
+      nil,
       :hot,
       :hov,
       keyword_init: true
@@ -1272,6 +1317,7 @@ module Aws::GeoRoutes
     #   <p>Geometry of the area to be avoided.</p>
     #   @return [Types::RouteAvoidanceAreaGeometry]
     class RouteAvoidanceArea < Struct.new(
+      nil,
       :except,
       :geometry,
       keyword_init: true
@@ -1296,6 +1342,7 @@ module Aws::GeoRoutes
     #   <p>A list of Isoline PolylinePolygon, for each isoline PolylinePolygon, it contains PolylinePolygon of the first linear ring (the outer ring) and from 2nd item to the last item (the inner rings). For more information on polyline encoding, see <a href="https://github.com/heremaps/flexiblepolyline/blob/master/README.md">https://github.com/heremaps/flexiblepolyline/blob/master/README.md</a>.</p>
     #   @return [Array<String>]
     class RouteAvoidanceAreaGeometry < Struct.new(
+      nil,
       :corridor,
       :bounding_box,
       :polygon,
@@ -1344,6 +1391,7 @@ module Aws::GeoRoutes
     #   <p>Zone categories to be avoided.</p>
     #   @return [Array<Types::RouteAvoidanceZoneCategory>]
     class RouteAvoidanceOptions < Struct.new(
+      nil,
       :areas,
       :car_shuttle_trains,
       :controlled_access_highways,
@@ -1366,6 +1414,7 @@ module Aws::GeoRoutes
     #   <p>Zone category to be avoided.</p>
     #   @return [String]
     class RouteAvoidanceZoneCategory < Struct.new(
+      nil,
       :category,
       keyword_init: true
     )
@@ -1386,6 +1435,7 @@ module Aws::GeoRoutes
     #   <p>The number of occupants in the vehicle.</p> <p>Default Value: <code>1</code> </p>
     #   @return [Integer]
     class RouteCarOptions < Struct.new(
+      nil,
       :engine_type,
       :license_plate,
       :max_speed,
@@ -1415,6 +1465,7 @@ module Aws::GeoRoutes
     #   <p>Intensity of the turn.</p>
     #   @return [String]
     class RouteContinueHighwayStepDetails < Struct.new(
+      nil,
       :intersection,
       :steering_direction,
       :turn_angle,
@@ -1434,6 +1485,7 @@ module Aws::GeoRoutes
     #   <p>Name of the intersection, if applicable to the step.</p>
     #   @return [Array<Types::LocalizedString>]
     class RouteContinueStepDetails < Struct.new(
+      nil,
       :intersection,
       keyword_init: true
     )
@@ -1460,6 +1512,7 @@ module Aws::GeoRoutes
     #   <p>Duration of the stop.</p> <p> <b>Unit</b>: <code>seconds</code> </p>
     #   @return [Integer]
     class RouteDestinationOptions < Struct.new(
+      nil,
       :avoid_actions_for_distance,
       :avoid_u_turns,
       :heading,
@@ -1483,6 +1536,7 @@ module Aws::GeoRoutes
     #   <p>Driver work-rest schedule. Stops are added to fulfil the provided rest schedule.</p>
     #   @return [Array<Types::RouteDriverScheduleInterval>]
     class RouteDriverOptions < Struct.new(
+      nil,
       :schedule,
       keyword_init: true
     )
@@ -1497,6 +1551,7 @@ module Aws::GeoRoutes
     #   <p>Resting time before the driver can continue driving.</p> <p> <b>Unit</b>: <code>seconds</code> </p>
     #   @return [Integer]
     class RouteDriverScheduleInterval < Struct.new(
+      nil,
       :drive_duration,
       :rest_duration,
       keyword_init: true
@@ -1518,6 +1573,7 @@ module Aws::GeoRoutes
     #   <p>Type of the emission.</p> <p> <b>Valid values</b>: <code>Euro1, Euro2, Euro3, Euro4, Euro5, Euro6, EuroEev</code> </p>
     #   @return [String]
     class RouteEmissionType < Struct.new(
+      nil,
       :co2_emission_class,
       :type,
       keyword_init: true
@@ -1539,6 +1595,7 @@ module Aws::GeoRoutes
     #   <p>Intensity of the turn.</p>
     #   @return [String]
     class RouteEnterHighwayStepDetails < Struct.new(
+      nil,
       :intersection,
       :steering_direction,
       :turn_angle,
@@ -1558,6 +1615,7 @@ module Aws::GeoRoutes
     #   <p>List of countries to be avoided defined by two-letter or three-letter country codes.</p>
     #   @return [Array<String>]
     class RouteExclusionOptions < Struct.new(
+      nil,
       :countries,
       keyword_init: true
     )
@@ -1581,6 +1639,7 @@ module Aws::GeoRoutes
     #   <p>Intensity of the turn.</p>
     #   @return [String]
     class RouteExitStepDetails < Struct.new(
+      nil,
       :intersection,
       :relative_exit,
       :steering_direction,
@@ -1608,6 +1667,7 @@ module Aws::GeoRoutes
     #   <p>Type of the step.</p>
     #   @return [String]
     class RouteFerryAfterTravelStep < Struct.new(
+      nil,
       :duration,
       :instruction,
       :type,
@@ -1629,6 +1689,7 @@ module Aws::GeoRoutes
     #   <p>The time.</p>
     #   @return [String]
     class RouteFerryArrival < Struct.new(
+      nil,
       :place,
       :time,
       keyword_init: true
@@ -1647,6 +1708,7 @@ module Aws::GeoRoutes
     #   <p>Type of the step.</p>
     #   @return [String]
     class RouteFerryBeforeTravelStep < Struct.new(
+      nil,
       :duration,
       :instruction,
       :type,
@@ -1668,6 +1730,7 @@ module Aws::GeoRoutes
     #   <p>The time.</p>
     #   @return [String]
     class RouteFerryDeparture < Struct.new(
+      nil,
       :place,
       :time,
       keyword_init: true
@@ -1707,6 +1770,7 @@ module Aws::GeoRoutes
     #   <p>Steps of a leg that must be performed before the travel portion of the leg.</p>
     #   @return [Array<Types::RouteFerryTravelStep>]
     class RouteFerryLegDetails < Struct.new(
+      nil,
       :after_travel_steps,
       :arrival,
       :before_travel_steps,
@@ -1730,6 +1794,7 @@ module Aws::GeoRoutes
     #   <p>Impact corresponding to the issue. While Low impact notices can be safely ignored, High impact notices must be evaluated further to determine the impact.</p>
     #   @return [String]
     class RouteFerryNotice < Struct.new(
+      nil,
       :code,
       :impact,
       keyword_init: true
@@ -1745,6 +1810,7 @@ module Aws::GeoRoutes
     #   <p>Duration of the step.</p> <p> <b>Unit</b>: <code>seconds</code> </p>
     #   @return [Integer]
     class RouteFerryOverviewSummary < Struct.new(
+      nil,
       :distance,
       :duration,
       keyword_init: true
@@ -1772,6 +1838,7 @@ module Aws::GeoRoutes
     #   <p>Index of the waypoint in the request.</p>
     #   @return [Integer]
     class RouteFerryPlace < Struct.new(
+      nil,
       :name,
       :original_position,
       :position,
@@ -1801,6 +1868,7 @@ module Aws::GeoRoutes
     #   <p>2-3 letter Region code corresponding to the Span. This is either a province or a state.</p>
     #   @return [String]
     class RouteFerrySpan < Struct.new(
+      nil,
       :country,
       :distance,
       :duration,
@@ -1826,6 +1894,7 @@ module Aws::GeoRoutes
     #   <p>Summarized details for the leg including travel steps only. The Distance for the travel only portion of the journey is in meters</p>
     #   @return [Types::RouteFerryTravelOnlySummary]
     class RouteFerrySummary < Struct.new(
+      nil,
       :overview,
       :travel_only,
       keyword_init: true
@@ -1838,6 +1907,7 @@ module Aws::GeoRoutes
     #   <p>Total duration in free flowing traffic, which is the best case or shortest duration possible to cover the leg.</p> <p> <b>Unit</b>: <code>seconds</code> </p>
     #   @return [Integer]
     class RouteFerryTravelOnlySummary < Struct.new(
+      nil,
       :duration,
       keyword_init: true
     )
@@ -1866,6 +1936,7 @@ module Aws::GeoRoutes
     #   <p>Type of the step.</p>
     #   @return [String]
     class RouteFerryTravelStep < Struct.new(
+      nil,
       :distance,
       :duration,
       :geometry_offset,
@@ -1896,6 +1967,7 @@ module Aws::GeoRoutes
     #   <p>Intensity of the turn.</p>
     #   @return [String]
     class RouteKeepStepDetails < Struct.new(
+      nil,
       :intersection,
       :steering_direction,
       :turn_angle,
@@ -1933,6 +2005,7 @@ module Aws::GeoRoutes
     #   <p>Details related to the vehicle leg.</p>
     #   @return [Types::RouteVehicleLegDetails]
     class RouteLeg < Struct.new(
+      nil,
       :ferry_leg_details,
       :geometry,
       :language,
@@ -1953,6 +2026,7 @@ module Aws::GeoRoutes
     #   <p>An ordered list of positions used to plot a route on a map in a lossy compression format.</p> <note> <p>LineString and Polyline are mutually exclusive properties.</p> </note>
     #   @return [String]
     class RouteLegGeometry < Struct.new(
+      nil,
       :line_string,
       :polyline,
       keyword_init: true
@@ -1968,6 +2042,7 @@ module Aws::GeoRoutes
     #   <p>Route number of the road.</p>
     #   @return [Types::RouteNumber]
     class RouteMajorRoadLabel < Struct.new(
+      nil,
       :road_name,
       :route_number,
       keyword_init: true
@@ -1989,6 +2064,7 @@ module Aws::GeoRoutes
     #   <p>Strategy that defines matching of the position onto the road network. MatchAny considers all roads possible, whereas MatchMostSignificantRoad matches to the most significant road.</p>
     #   @return [String]
     class RouteMatchingOptions < Struct.new(
+      nil,
       :name_hint,
       :on_road_threshold,
       :radius,
@@ -2013,6 +2089,7 @@ module Aws::GeoRoutes
     #   <p>Allow Hov (High Occupancy vehicle) lanes while calculating the route.</p> <p>Default value: <code>false</code> </p>
     #   @return [Boolean]
     class RouteMatrixAllowOptions < Struct.new(
+      nil,
       :hot,
       :hov,
       keyword_init: true
@@ -2028,6 +2105,7 @@ module Aws::GeoRoutes
     #   <p>The maximum size of the radius provided for the calculation.</p>
     #   @return [Integer]
     class RouteMatrixAutoCircle < Struct.new(
+      nil,
       :margin,
       :max_radius,
       keyword_init: true
@@ -2046,6 +2124,7 @@ module Aws::GeoRoutes
     #   <p>Geometry of the area to be avoided.</p>
     #   @return [Types::RouteMatrixAvoidanceAreaGeometry]
     class RouteMatrixAvoidanceArea < Struct.new(
+      nil,
       :geometry,
       keyword_init: true
     )
@@ -2063,6 +2142,7 @@ module Aws::GeoRoutes
     #   <p>A list of Isoline PolylinePolygon, for each isoline PolylinePolygon, it contains PolylinePolygon of the first linear ring (the outer ring) and from second item to the last item (the inner rings). For more information on polyline encoding, see <a href="https://github.com/heremaps/flexiblepolyline/blob/master/README.md">https://github.com/heremaps/flexiblepolyline/blob/master/README.md</a>.</p>
     #   @return [Array<String>]
     class RouteMatrixAvoidanceAreaGeometry < Struct.new(
+      nil,
       :bounding_box,
       :polygon,
       :polyline_polygon,
@@ -2106,6 +2186,7 @@ module Aws::GeoRoutes
     #   <p>Zone categories to be avoided.</p>
     #   @return [Array<Types::RouteMatrixAvoidanceZoneCategory>]
     class RouteMatrixAvoidanceOptions < Struct.new(
+      nil,
       :areas,
       :car_shuttle_trains,
       :controlled_access_highways,
@@ -2127,6 +2208,7 @@ module Aws::GeoRoutes
     #   <p>Zone category to be avoided.</p>
     #   @return [String]
     class RouteMatrixAvoidanceZoneCategory < Struct.new(
+      nil,
       :category,
       keyword_init: true
     )
@@ -2141,6 +2223,7 @@ module Aws::GeoRoutes
     #   <p>No restrictions in terms of a routing boundary, and is typically used for longer routes.</p>
     #   @return [Boolean]
     class RouteMatrixBoundary < Struct.new(
+      nil,
       :geometry,
       :unbounded,
       keyword_init: true
@@ -2162,6 +2245,7 @@ module Aws::GeoRoutes
     #   <p>Geometry defined as a polygon with only one linear ring.</p>
     #   @return [Array<Array<Array<Float>>>]
     class RouteMatrixBoundaryGeometry < Struct.new(
+      nil,
       :auto_circle,
       :circle,
       :bounding_box,
@@ -2182,6 +2266,7 @@ module Aws::GeoRoutes
     #   <p>The number of occupants in the vehicle.</p> <p>Default Value: <code>1</code> </p>
     #   @return [Integer]
     class RouteMatrixCarOptions < Struct.new(
+      nil,
       :license_plate,
       :max_speed,
       :occupancy,
@@ -2204,6 +2289,7 @@ module Aws::GeoRoutes
     #   <p>Position defined as <code>[longitude, latitude]</code>.</p>
     #   @return [Array<Float>]
     class RouteMatrixDestination < Struct.new(
+      nil,
       :options,
       :position,
       keyword_init: true
@@ -2225,6 +2311,7 @@ module Aws::GeoRoutes
     #   <p>Options to configure matching the provided position to a side of the street.</p>
     #   @return [Types::RouteMatrixSideOfStreetOptions]
     class RouteMatrixDestinationOptions < Struct.new(
+      nil,
       :avoid_actions_for_distance,
       :heading,
       :matching,
@@ -2251,6 +2338,7 @@ module Aws::GeoRoutes
     #   <p>Error code that occurred during calculation of the route.</p>
     #   @return [String]
     class RouteMatrixEntry < Struct.new(
+      nil,
       :distance,
       :duration,
       :error,
@@ -2270,6 +2358,7 @@ module Aws::GeoRoutes
     #   <p>List of countries to be avoided defined by two-letter or three-letter country codes.</p>
     #   @return [Array<String>]
     class RouteMatrixExclusionOptions < Struct.new(
+      nil,
       :countries,
       keyword_init: true
     )
@@ -2290,6 +2379,7 @@ module Aws::GeoRoutes
     #   <p>Strategy that defines matching of the position onto the road network. MatchAny considers all roads possible, whereas MatchMostSignificantRoad matches to the most significant road.</p>
     #   @return [String]
     class RouteMatrixMatchingOptions < Struct.new(
+      nil,
       :name_hint,
       :on_road_threshold,
       :radius,
@@ -2313,6 +2403,7 @@ module Aws::GeoRoutes
     #   <p>Position defined as <code>[longitude, latitude]</code>.</p>
     #   @return [Array<Float>]
     class RouteMatrixOrigin < Struct.new(
+      nil,
       :options,
       :position,
       keyword_init: true
@@ -2334,6 +2425,7 @@ module Aws::GeoRoutes
     #   <p>Options to configure matching the provided position to a side of the street.</p>
     #   @return [Types::RouteMatrixSideOfStreetOptions]
     class RouteMatrixOriginOptions < Struct.new(
+      nil,
       :avoid_actions_for_distance,
       :heading,
       :matching,
@@ -2360,6 +2452,7 @@ module Aws::GeoRoutes
     #   <p>The number of occupants in the vehicle.</p> <p>Default Value: <code>1</code> </p>
     #   @return [Integer]
     class RouteMatrixScooterOptions < Struct.new(
+      nil,
       :license_plate,
       :max_speed,
       :occupancy,
@@ -2382,6 +2475,7 @@ module Aws::GeoRoutes
     #   <p>Strategy that defines when the side of street position should be used. AnyStreet will always use the provided position.</p> <p>Default Value: <code>DividedStreetOnly</code> </p>
     #   @return [String]
     class RouteMatrixSideOfStreetOptions < Struct.new(
+      nil,
       :position,
       :use_with,
       keyword_init: true
@@ -2397,6 +2491,7 @@ module Aws::GeoRoutes
     #   <p>Determines if traffic should be used or ignored while calculating the route.</p> <p>Default Value: <code>UseTrafficData</code> </p>
     #   @return [String]
     class RouteMatrixTrafficOptions < Struct.new(
+      nil,
       :flow_event_threshold_override,
       :usage,
       keyword_init: true
@@ -2414,6 +2509,7 @@ module Aws::GeoRoutes
     #   <p>Number of trailers attached to the vehicle.</p> <p>Default Value: <code>0</code> </p>
     #   @return [Integer]
     class RouteMatrixTrailerOptions < Struct.new(
+      nil,
       :trailer_count,
       keyword_init: true
     )
@@ -2431,6 +2527,7 @@ module Aws::GeoRoutes
     #   <p>Travel mode options when the provided travel mode is "Truck"</p>
     #   @return [Types::RouteMatrixTruckOptions]
     class RouteMatrixTravelModeOptions < Struct.new(
+      nil,
       :car,
       :scooter,
       :truck,
@@ -2489,6 +2586,7 @@ module Aws::GeoRoutes
     #   <p>Width of the vehicle.</p> <p> <b>Unit</b>: <code>centimeters</code> </p>
     #   @return [Integer]
     class RouteMatrixTruckOptions < Struct.new(
+      nil,
       :axle_count,
       :gross_weight,
       :hazardous_cargos,
@@ -2530,6 +2628,7 @@ module Aws::GeoRoutes
     #   <p>The last character of the License Plate.</p>
     #   @return [String]
     class RouteMatrixVehicleLicensePlate < Struct.new(
+      nil,
       :last_character,
       keyword_init: true
     )
@@ -2544,6 +2643,7 @@ module Aws::GeoRoutes
     #   <p>Maximum value for the range.</p>
     #   @return [Integer]
     class RouteNoticeDetailRange < Struct.new(
+      nil,
       :min,
       :max,
       keyword_init: true
@@ -2562,6 +2662,7 @@ module Aws::GeoRoutes
     #   <p>The route number.</p>
     #   @return [String]
     class RouteNumber < Struct.new(
+      nil,
       :direction,
       :language,
       :value,
@@ -2587,6 +2688,7 @@ module Aws::GeoRoutes
     #   <p>Options to configure matching the provided position to a side of the street.</p>
     #   @return [Types::RouteSideOfStreetOptions]
     class RouteOriginOptions < Struct.new(
+      nil,
       :avoid_actions_for_distance,
       :avoid_u_turns,
       :heading,
@@ -2614,6 +2716,7 @@ module Aws::GeoRoutes
     #   <p>Index of the waypoint in the request.</p>
     #   @return [Integer]
     class RoutePassThroughPlace < Struct.new(
+      nil,
       :original_position,
       :position,
       :waypoint_index,
@@ -2630,6 +2733,7 @@ module Aws::GeoRoutes
     #   <p>The place details.</p>
     #   @return [Types::RoutePassThroughPlace]
     class RoutePassThroughWaypoint < Struct.new(
+      nil,
       :geometry_offset,
       :place,
       keyword_init: true
@@ -2645,6 +2749,7 @@ module Aws::GeoRoutes
     #   <p>The time.</p>
     #   @return [String]
     class RoutePedestrianArrival < Struct.new(
+      nil,
       :place,
       :time,
       keyword_init: true
@@ -2660,6 +2765,7 @@ module Aws::GeoRoutes
     #   <p>The time.</p>
     #   @return [String]
     class RoutePedestrianDeparture < Struct.new(
+      nil,
       :place,
       :time,
       keyword_init: true
@@ -2690,6 +2796,7 @@ module Aws::GeoRoutes
     #   <p>Steps of a leg that must be performed before the travel portion of the leg.</p>
     #   @return [Array<Types::RoutePedestrianTravelStep>]
     class RoutePedestrianLegDetails < Struct.new(
+      nil,
       :arrival,
       :departure,
       :notices,
@@ -2710,6 +2817,7 @@ module Aws::GeoRoutes
     #   <p>Impact corresponding to the issue. While Low impact notices can be safely ignored, High impact notices must be evaluated further to determine the impact.</p>
     #   @return [String]
     class RoutePedestrianNotice < Struct.new(
+      nil,
       :code,
       :impact,
       keyword_init: true
@@ -2722,6 +2830,7 @@ module Aws::GeoRoutes
     #   <p>Walking speed in Kilometers per hour.</p>
     #   @return [Float]
     class RoutePedestrianOptions < Struct.new(
+      nil,
       :speed,
       keyword_init: true
     )
@@ -2741,6 +2850,7 @@ module Aws::GeoRoutes
     #   <p>Duration of the step.</p>
     #   @return [Integer]
     class RoutePedestrianOverviewSummary < Struct.new(
+      nil,
       :distance,
       :duration,
       keyword_init: true
@@ -2771,6 +2881,7 @@ module Aws::GeoRoutes
     #   <p>Index of the waypoint in the request.</p>
     #   @return [Integer]
     class RoutePedestrianPlace < Struct.new(
+      nil,
       :name,
       :original_position,
       :position,
@@ -2828,6 +2939,7 @@ module Aws::GeoRoutes
     #   <p>Duration of the computed span under typical traffic congestion.</p> <p> <b>Unit</b>: <code>seconds</code> </p>
     #   @return [Integer]
     class RoutePedestrianSpan < Struct.new(
+      nil,
       :best_case_duration,
       :country,
       :distance,
@@ -2864,6 +2976,7 @@ module Aws::GeoRoutes
     #   <p>Summarized details for the leg including travel steps only. The Distance for the travel only portion of the journey is in meters</p>
     #   @return [Types::RoutePedestrianTravelOnlySummary]
     class RoutePedestrianSummary < Struct.new(
+      nil,
       :overview,
       :travel_only,
       keyword_init: true
@@ -2876,6 +2989,7 @@ module Aws::GeoRoutes
     #   <p>Duration of the step.</p> <p> <b>Unit</b>: <code>seconds</code> </p>
     #   @return [Integer]
     class RoutePedestrianTravelOnlySummary < Struct.new(
+      nil,
       :duration,
       keyword_init: true
     )
@@ -2934,6 +3048,7 @@ module Aws::GeoRoutes
     #   <p>Type of the step.</p>
     #   @return [String]
     class RoutePedestrianTravelStep < Struct.new(
+      nil,
       :continue_step_details,
       :current_road,
       :distance,
@@ -2974,6 +3089,7 @@ module Aws::GeoRoutes
     #   <p>Intensity of the turn.</p>
     #   @return [String]
     class RouteRampStepDetails < Struct.new(
+      nil,
       :intersection,
       :steering_direction,
       :turn_angle,
@@ -2996,6 +3112,7 @@ module Aws::GeoRoutes
     #   <p>Impact corresponding to the issue. While Low impact notices can be safely ignored, High impact notices must be evaluated further to determine the impact.</p>
     #   @return [String]
     class RouteResponseNotice < Struct.new(
+      nil,
       :code,
       :impact,
       keyword_init: true
@@ -3017,6 +3134,7 @@ module Aws::GeoRoutes
     #   <p>The type of road.</p>
     #   @return [String]
     class RouteRoad < Struct.new(
+      nil,
       :road_name,
       :route_number,
       :towards,
@@ -3040,6 +3158,7 @@ module Aws::GeoRoutes
     #   <p>Intensity of the turn.</p>
     #   @return [String]
     class RouteRoundaboutEnterStepDetails < Struct.new(
+      nil,
       :intersection,
       :steering_direction,
       :turn_angle,
@@ -3068,6 +3187,7 @@ module Aws::GeoRoutes
     #   <p>Steering direction for the step.</p>
     #   @return [String]
     class RouteRoundaboutExitStepDetails < Struct.new(
+      nil,
       :intersection,
       :relative_exit,
       :roundabout_angle,
@@ -3097,6 +3217,7 @@ module Aws::GeoRoutes
     #   <p>Intensity of the turn.</p>
     #   @return [String]
     class RouteRoundaboutPassStepDetails < Struct.new(
+      nil,
       :intersection,
       :steering_direction,
       :turn_angle,
@@ -3125,6 +3246,7 @@ module Aws::GeoRoutes
     #   <p>The number of occupants in the vehicle.</p> <p>Default Value: <code>1</code> </p>
     #   @return [Integer]
     class RouteScooterOptions < Struct.new(
+      nil,
       :engine_type,
       :license_plate,
       :max_speed,
@@ -3148,6 +3270,7 @@ module Aws::GeoRoutes
     #   <p>Strategy that defines when the side of street position should be used.</p> <p>Default Value: <code>DividedStreetOnly</code> </p>
     #   @return [String]
     class RouteSideOfStreetOptions < Struct.new(
+      nil,
       :position,
       :use_with,
       keyword_init: true
@@ -3160,6 +3283,7 @@ module Aws::GeoRoutes
     #   <p>Labels present on the sign post.</p>
     #   @return [Array<Types::RouteSignpostLabel>]
     class RouteSignpost < Struct.new(
+      nil,
       :labels,
       keyword_init: true
     )
@@ -3174,6 +3298,7 @@ module Aws::GeoRoutes
     #   <p>The Signpost text.</p>
     #   @return [Types::LocalizedString]
     class RouteSignpostLabel < Struct.new(
+      nil,
       :route_number,
       :text,
       keyword_init: true
@@ -3192,6 +3317,7 @@ module Aws::GeoRoutes
     #   <p>Estimated speed while traversing the span under typical traffic congestion.</p> <p> <b>Unit</b>: <code>KilometersPerHour</code> </p>
     #   @return [Float]
     class RouteSpanDynamicSpeedDetails < Struct.new(
+      nil,
       :best_case_speed,
       :turn_duration,
       :typical_speed,
@@ -3215,6 +3341,7 @@ module Aws::GeoRoutes
     #   <p>If the span doesn't have a speed limit like the Autobahn.</p>
     #   @return [Boolean]
     class RouteSpanSpeedLimitDetails < Struct.new(
+      nil,
       :max_speed,
       :unlimited,
       keyword_init: true
@@ -3238,6 +3365,7 @@ module Aws::GeoRoutes
     #   <p>Toll summary for the complete route.</p>
     #   @return [Types::RouteTollSummary]
     class RouteSummary < Struct.new(
+      nil,
       :distance,
       :duration,
       :tolls,
@@ -3266,6 +3394,7 @@ module Aws::GeoRoutes
     #   <p>Toll systems are authorities that collect payments for the toll.</p>
     #   @return [Array<Integer>]
     class RouteToll < Struct.new(
+      nil,
       :country,
       :payment_sites,
       :rates,
@@ -3292,6 +3421,7 @@ module Aws::GeoRoutes
     #   <p>Vehicle category for toll cost calculation.</p>
     #   @return [String]
     class RouteTollOptions < Struct.new(
+      nil,
       :all_transponders,
       :all_vignettes,
       :currency,
@@ -3319,6 +3449,7 @@ module Aws::GeoRoutes
     #   <p>Period for which the pass is valid.</p>
     #   @return [Types::RouteTollPassValidityPeriod]
     class RouteTollPass < Struct.new(
+      nil,
       :includes_return_trip,
       :senior_pass,
       :transfer_count,
@@ -3337,6 +3468,7 @@ module Aws::GeoRoutes
     #   <p>Counts for the validity period.</p>
     #   @return [Integer]
     class RouteTollPassValidityPeriod < Struct.new(
+      nil,
       :period,
       :period_count,
       keyword_init: true
@@ -3352,6 +3484,7 @@ module Aws::GeoRoutes
     #   <p>Position defined as <code>[longitude, latitude]</code>.</p>
     #   @return [Array<Float>]
     class RouteTollPaymentSite < Struct.new(
+      nil,
       :name,
       :position,
       keyword_init: true
@@ -3379,6 +3512,7 @@ module Aws::GeoRoutes
     #   <p>Exact price, if not a range.</p>
     #   @return [Float]
     class RouteTollPrice < Struct.new(
+      nil,
       :currency,
       :estimate,
       :per_duration,
@@ -3412,6 +3546,7 @@ module Aws::GeoRoutes
     #   <p>Exact price, if not a range.</p>
     #   @return [Float]
     class RouteTollPriceSummary < Struct.new(
+      nil,
       :currency,
       :estimate,
       :range,
@@ -3430,6 +3565,7 @@ module Aws::GeoRoutes
     #   <p>Maximum price.</p>
     #   @return [Float]
     class RouteTollPriceValueRange < Struct.new(
+      nil,
       :min,
       :max,
       keyword_init: true
@@ -3463,6 +3599,7 @@ module Aws::GeoRoutes
     #   <p>Transponders for which this toll can be applied.</p>
     #   @return [Array<Types::RouteTransponder>]
     class RouteTollRate < Struct.new(
+      nil,
       :applicable_times,
       :converted_price,
       :id,
@@ -3481,6 +3618,7 @@ module Aws::GeoRoutes
     #   <p>Total toll summary for the complete route. Total is the only summary available today.</p>
     #   @return [Types::RouteTollPriceSummary]
     class RouteTollSummary < Struct.new(
+      nil,
       :total,
       keyword_init: true
     )
@@ -3492,6 +3630,7 @@ module Aws::GeoRoutes
     #   <p>The toll system name.</p>
     #   @return [String]
     class RouteTollSystem < Struct.new(
+      nil,
       :name,
       keyword_init: true
     )
@@ -3506,6 +3645,7 @@ module Aws::GeoRoutes
     #   <p>Determines if traffic should be used or ignored while calculating the route.</p> <p>Default Value: <code>UseTrafficData</code> </p>
     #   @return [String]
     class RouteTrafficOptions < Struct.new(
+      nil,
       :flow_event_threshold_override,
       :usage,
       keyword_init: true
@@ -3526,6 +3666,7 @@ module Aws::GeoRoutes
     #   <p>Number of trailers attached to the vehicle.</p> <p>Default Value: <code>0</code> </p>
     #   @return [Integer]
     class RouteTrailerOptions < Struct.new(
+      nil,
       :axle_count,
       :trailer_count,
       keyword_init: true
@@ -3544,6 +3685,7 @@ module Aws::GeoRoutes
     #   <p>Names of the toll system collecting the toll.</p>
     #   @return [String]
     class RouteTransponder < Struct.new(
+      nil,
       :system_name,
       keyword_init: true
     )
@@ -3564,6 +3706,7 @@ module Aws::GeoRoutes
     #   <p>Travel mode options when the provided travel mode is "Truck"</p>
     #   @return [Types::RouteTruckOptions]
     class RouteTravelModeOptions < Struct.new(
+      nil,
       :car,
       :pedestrian,
       :scooter,
@@ -3632,6 +3775,7 @@ module Aws::GeoRoutes
     #   <p>Width of the vehicle.</p> <p> <b>Unit</b>: <code>centimeters</code> </p>
     #   @return [Integer]
     class RouteTruckOptions < Struct.new(
+      nil,
       :axle_count,
       :engine_type,
       :gross_weight,
@@ -3686,6 +3830,7 @@ module Aws::GeoRoutes
     #   <p>Intensity of the turn.</p>
     #   @return [String]
     class RouteTurnStepDetails < Struct.new(
+      nil,
       :intersection,
       :steering_direction,
       :turn_angle,
@@ -3714,6 +3859,7 @@ module Aws::GeoRoutes
     #   <p>Intensity of the turn.</p>
     #   @return [String]
     class RouteUTurnStepDetails < Struct.new(
+      nil,
       :intersection,
       :steering_direction,
       :turn_angle,
@@ -3736,6 +3882,7 @@ module Aws::GeoRoutes
     #   <p>The time.</p>
     #   @return [String]
     class RouteVehicleArrival < Struct.new(
+      nil,
       :place,
       :time,
       keyword_init: true
@@ -3751,6 +3898,7 @@ module Aws::GeoRoutes
     #   <p>The departure time.</p>
     #   @return [String]
     class RouteVehicleDeparture < Struct.new(
+      nil,
       :place,
       :time,
       keyword_init: true
@@ -3775,6 +3923,7 @@ module Aws::GeoRoutes
     #   <p>Type of the incident.</p>
     #   @return [String]
     class RouteVehicleIncident < Struct.new(
+      nil,
       :description,
       :end_time,
       :severity,
@@ -3823,6 +3972,7 @@ module Aws::GeoRoutes
     #   <p>Zones corresponding to this leg of the route.</p>
     #   @return [Array<Types::RouteZone>]
     class RouteVehicleLegDetails < Struct.new(
+      nil,
       :arrival,
       :departure,
       :incidents,
@@ -3845,6 +3995,7 @@ module Aws::GeoRoutes
     #   <p>The last character of the License Plate.</p>
     #   @return [String]
     class RouteVehicleLicensePlate < Struct.new(
+      nil,
       :last_character,
       keyword_init: true
     )
@@ -3862,6 +4013,7 @@ module Aws::GeoRoutes
     #   <p>Impact corresponding to the issue. While Low impact notices can be safely ignored, High impact notices must be evaluated further to determine the impact.</p>
     #   @return [String]
     class RouteVehicleNotice < Struct.new(
+      nil,
       :code,
       :details,
       :impact,
@@ -3878,6 +4030,7 @@ module Aws::GeoRoutes
     #   <p>Any violated constraints.</p>
     #   @return [Types::RouteViolatedConstraints]
     class RouteVehicleNoticeDetail < Struct.new(
+      nil,
       :title,
       :violated_constraints,
       keyword_init: true
@@ -3899,6 +4052,7 @@ module Aws::GeoRoutes
     #   <p>Duration of the computed span under typical traffic congestion. </p> <p> <b>Unit</b>: <code>seconds</code> </p>
     #   @return [Integer]
     class RouteVehicleOverviewSummary < Struct.new(
+      nil,
       :best_case_duration,
       :distance,
       :duration,
@@ -3933,6 +4087,7 @@ module Aws::GeoRoutes
     #   <p>Index of the waypoint in the request.</p>
     #   @return [Integer]
     class RouteVehiclePlace < Struct.new(
+      nil,
       :name,
       :original_position,
       :position,
@@ -4014,6 +4169,7 @@ module Aws::GeoRoutes
     #   <p>Zones corresponding to this leg of the route.</p>
     #   @return [Array<Integer>]
     class RouteVehicleSpan < Struct.new(
+      nil,
       :best_case_duration,
       :car_access,
       :country,
@@ -4058,6 +4214,7 @@ module Aws::GeoRoutes
     #   <p>Summarized details for the leg including travel steps only. The Distance for the travel only portion of the journey is in meters</p>
     #   @return [Types::RouteVehicleTravelOnlySummary]
     class RouteVehicleSummary < Struct.new(
+      nil,
       :overview,
       :travel_only,
       keyword_init: true
@@ -4076,6 +4233,7 @@ module Aws::GeoRoutes
     #   <p>Duration of the computed span under typical traffic congestion.</p> <p> <b>Unit</b>: <code>seconds</code> </p>
     #   @return [Integer]
     class RouteVehicleTravelOnlySummary < Struct.new(
+      nil,
       :best_case_duration,
       :duration,
       :typical_duration,
@@ -4153,6 +4311,7 @@ module Aws::GeoRoutes
     #   <p>Details that are specific to a Turn step.</p>
     #   @return [Types::RouteUTurnStepDetails]
     class RouteVehicleTravelStep < Struct.new(
+      nil,
       :continue_highway_step_details,
       :continue_step_details,
       :current_road,
@@ -4243,6 +4402,7 @@ module Aws::GeoRoutes
     #   <p>The tunnel restriction code.</p> <p>Tunnel categories in this list indicate the restrictions which apply to certain tunnels in Great Britain. They relate to the types of dangerous goods that can be transported through them.</p> <ul> <li> <p> <i>Tunnel Category B</i> </p> <ul> <li> <p> <i>Risk Level</i>: Limited risk</p> </li> <li> <p> <i>Restrictions</i>: Few restrictions</p> </li> </ul> </li> <li> <p> <i>Tunnel Category C</i> </p> <ul> <li> <p> <i>Risk Level</i>: Medium risk</p> </li> <li> <p> <i>Restrictions</i>: Some restrictions</p> </li> </ul> </li> <li> <p> <i>Tunnel Category D</i> </p> <ul> <li> <p> <i>Risk Level</i>: High risk</p> </li> <li> <p> <i>Restrictions</i>: Many restrictions occur</p> </li> </ul> </li> <li> <p> <i>Tunnel Category E</i> </p> <ul> <li> <p> <i>Risk Level</i>: Very high risk</p> </li> <li> <p> <i>Restrictions</i>: Restricted tunnel</p> </li> </ul> </li> </ul>
     #   @return [String]
     class RouteViolatedConstraints < Struct.new(
+      nil,
       :all_hazards_restricted,
       :axle_count,
       :hazardous_cargos,
@@ -4303,6 +4463,7 @@ module Aws::GeoRoutes
     #   <p>Duration of the stop.</p> <p> <b>Unit</b>: <code>seconds</code> </p>
     #   @return [Integer]
     class RouteWaypoint < Struct.new(
+      nil,
       :avoid_actions_for_distance,
       :avoid_u_turns,
       :heading,
@@ -4331,6 +4492,7 @@ module Aws::GeoRoutes
     #   <p>The constraint value.</p> <p> <b>Unit</b>: <code>Kilograms</code> </p>
     #   @return [Integer]
     class RouteWeightConstraint < Struct.new(
+      nil,
       :type,
       :value,
       keyword_init: true
@@ -4351,6 +4513,7 @@ module Aws::GeoRoutes
     #   <p>The name of the zone.</p>
     #   @return [String]
     class RouteZone < Struct.new(
+      nil,
       :category,
       :name,
       keyword_init: true
@@ -4377,6 +4540,7 @@ module Aws::GeoRoutes
     #   <p>Travel mode related options for the provided travel mode.</p>
     #   @return [Types::RoadSnapTravelModeOptions]
     class SnapToRoadsRequest < Struct.new(
+      nil,
       :key,
       :snapped_geometry_format,
       :snap_radius,
@@ -4404,6 +4568,7 @@ module Aws::GeoRoutes
     #   <p>The trace points snapped onto the road network. </p>
     #   @return [Array<Types::RoadSnapSnappedTracePoint>]
     class SnapToRoadsResponse < Struct.new(
+      nil,
       :notices,
       :pricing_bucket,
       :snapped_geometry,
@@ -4418,6 +4583,7 @@ module Aws::GeoRoutes
     # @!attribute message
     #   @return [String]
     class ThrottlingException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -4434,6 +4600,7 @@ module Aws::GeoRoutes
     #   <p>The field where the invalid entry was detected.</p>
     #   @return [Array<Types::ValidationExceptionField>]
     class ValidationException < Struct.new(
+      nil,
       :message,
       :reason,
       :field_list,
@@ -4450,6 +4617,7 @@ module Aws::GeoRoutes
     #   <p>The error message.</p>
     #   @return [String]
     class ValidationExceptionField < Struct.new(
+      nil,
       :name,
       :message,
       keyword_init: true
@@ -4465,6 +4633,7 @@ module Aws::GeoRoutes
     #   <p>Contains the ID of the ending waypoint in this connection.</p>
     #   @return [Types::WaypointOptimizationAccessHoursEntry]
     class WaypointOptimizationAccessHours < Struct.new(
+      nil,
       :from,
       :to,
       keyword_init: true
@@ -4480,6 +4649,7 @@ module Aws::GeoRoutes
     #   <p>Time of the day.</p>
     #   @return [String]
     class WaypointOptimizationAccessHoursEntry < Struct.new(
+      nil,
       :day_of_week,
       :time_of_day,
       keyword_init: true
@@ -4492,6 +4662,7 @@ module Aws::GeoRoutes
     #   <p>Geometry of the area to be avoided.</p>
     #   @return [Types::WaypointOptimizationAvoidanceAreaGeometry]
     class WaypointOptimizationAvoidanceArea < Struct.new(
+      nil,
       :geometry,
       keyword_init: true
     )
@@ -4503,6 +4674,7 @@ module Aws::GeoRoutes
     #   <p>Geometry defined as a bounding box. The first pair represents the X and Y coordinates (longitude and latitude,) of the southwest corner of the bounding box; the second pair represents the X and Y coordinates (longitude and latitude) of the northeast corner.</p>
     #   @return [Array<Float>]
     class WaypointOptimizationAvoidanceAreaGeometry < Struct.new(
+      nil,
       :bounding_box,
       keyword_init: true
     )
@@ -4535,6 +4707,7 @@ module Aws::GeoRoutes
     #   <p>Avoid U-turns for calculation on highways and motorways.</p>
     #   @return [Boolean]
     class WaypointOptimizationAvoidanceOptions < Struct.new(
+      nil,
       :areas,
       :car_shuttle_trains,
       :controlled_access_highways,
@@ -4556,6 +4729,7 @@ module Aws::GeoRoutes
     #   <p>Driving distance options to be used when the clustering algorithm is DrivingDistance.</p>
     #   @return [Types::WaypointOptimizationDrivingDistanceOptions]
     class WaypointOptimizationClusteringOptions < Struct.new(
+      nil,
       :algorithm,
       :driving_distance_options,
       keyword_init: true
@@ -4583,6 +4757,7 @@ module Aws::GeoRoutes
     #   <p>Duration of a wait step.</p> <p> <b>Unit</b>: <code>seconds</code> </p>
     #   @return [Integer]
     class WaypointOptimizationConnection < Struct.new(
+      nil,
       :distance,
       :from,
       :rest_duration,
@@ -4622,6 +4797,7 @@ module Aws::GeoRoutes
     #   <p>Options to configure matching the provided position to a side of the street.</p>
     #   @return [Types::WaypointOptimizationSideOfStreetOptions]
     class WaypointOptimizationDestinationOptions < Struct.new(
+      nil,
       :access_hours,
       :appointment_time,
       :heading,
@@ -4650,6 +4826,7 @@ module Aws::GeoRoutes
     #   <p>If the service time provided at a waypoint/destination should be considered as rest or work. This contributes to the total time breakdown returned within the response.</p>
     #   @return [String]
     class WaypointOptimizationDriverOptions < Struct.new(
+      nil,
       :rest_cycles,
       :rest_profile,
       :treat_service_time_as,
@@ -4663,6 +4840,7 @@ module Aws::GeoRoutes
     #   <p>DrivingDistance assigns all the waypoints that are within driving distance of each other into a single cluster.</p>
     #   @return [Integer]
     class WaypointOptimizationDrivingDistanceOptions < Struct.new(
+      nil,
       :driving_distance,
       keyword_init: true
     )
@@ -4679,6 +4857,7 @@ module Aws::GeoRoutes
     #   <p>List of countries to be avoided defined by two-letter or three-letter country codes.</p>
     #   @return [Array<String>]
     class WaypointOptimizationExclusionOptions < Struct.new(
+      nil,
       :countries,
       keyword_init: true
     )
@@ -4693,6 +4872,7 @@ module Aws::GeoRoutes
     #   <p>Reason for the failed constraint.</p>
     #   @return [String]
     class WaypointOptimizationFailedConstraint < Struct.new(
+      nil,
       :constraint,
       :reason,
       keyword_init: true
@@ -4711,6 +4891,7 @@ module Aws::GeoRoutes
     #   <p>Position defined as <code>[longitude, latitude]</code>.</p>
     #   @return [Array<Float>]
     class WaypointOptimizationImpedingWaypoint < Struct.new(
+      nil,
       :failed_constraints,
       :id,
       :position,
@@ -4736,6 +4917,7 @@ module Aws::GeoRoutes
     #   <p>Position defined as <code>[longitude, latitude]</code>.</p>
     #   @return [Array<Float>]
     class WaypointOptimizationOptimizedWaypoint < Struct.new(
+      nil,
       :arrival_time,
       :cluster_index,
       :departure_time,
@@ -4751,6 +4933,7 @@ module Aws::GeoRoutes
     #   <p>The Origin Id.</p>
     #   @return [String]
     class WaypointOptimizationOriginOptions < Struct.new(
+      nil,
       :id,
       keyword_init: true
     )
@@ -4762,6 +4945,7 @@ module Aws::GeoRoutes
     #   <p>Walking speed.</p> <p> <b>Unit</b>: <code>KilometersPerHour</code> </p>
     #   @return [Float]
     class WaypointOptimizationPedestrianOptions < Struct.new(
+      nil,
       :speed,
       keyword_init: true
     )
@@ -4781,6 +4965,7 @@ module Aws::GeoRoutes
     #   <p>Working phase of the cycle.</p> <p> <b>Unit</b>: <code>seconds</code> </p>
     #   @return [Integer]
     class WaypointOptimizationRestCycleDurations < Struct.new(
+      nil,
       :rest_duration,
       :work_duration,
       keyword_init: true
@@ -4802,6 +4987,7 @@ module Aws::GeoRoutes
     #   <p>Short cycle for a driver work-rest schedule</p>
     #   @return [Types::WaypointOptimizationRestCycleDurations]
     class WaypointOptimizationRestCycles < Struct.new(
+      nil,
       :long_cycle,
       :short_cycle,
       keyword_init: true
@@ -4814,6 +5000,7 @@ module Aws::GeoRoutes
     #   <p>Pre defined rest profiles for a driver schedule. The only currently supported profile is EU.</p>
     #   @return [String]
     class WaypointOptimizationRestProfile < Struct.new(
+      nil,
       :profile,
       keyword_init: true
     )
@@ -4828,6 +5015,7 @@ module Aws::GeoRoutes
     #   <p>Strategy that defines when the side of street position should be used. AnyStreet will always use the provided position.</p> <p>Default Value: <code>DividedStreetOnly</code> </p>
     #   @return [String]
     class WaypointOptimizationSideOfStreetOptions < Struct.new(
+      nil,
       :position,
       :use_with,
       keyword_init: true
@@ -4849,6 +5037,7 @@ module Aws::GeoRoutes
     #   <p>Waiting phase of the cycle.</p> <p> <b>Unit</b>: <code>seconds</code> </p>
     #   @return [Integer]
     class WaypointOptimizationTimeBreakdown < Struct.new(
+      nil,
       :rest_duration,
       :service_duration,
       :travel_duration,
@@ -4871,6 +5060,7 @@ module Aws::GeoRoutes
     #   <p>Determines if traffic should be used or ignored while calculating the route.</p> <p>Default Value: <code>UseTrafficData</code> </p>
     #   @return [String]
     class WaypointOptimizationTrafficOptions < Struct.new(
+      nil,
       :usage,
       keyword_init: true
     )
@@ -4882,6 +5072,7 @@ module Aws::GeoRoutes
     #   <p>Number of trailers attached to the vehicle.</p> <p>Default Value: <code>0</code> </p>
     #   @return [Integer]
     class WaypointOptimizationTrailerOptions < Struct.new(
+      nil,
       :trailer_count,
       keyword_init: true
     )
@@ -4896,6 +5087,7 @@ module Aws::GeoRoutes
     #   <p>Travel mode options when the provided travel mode is "Truck"</p>
     #   @return [Types::WaypointOptimizationTruckOptions]
     class WaypointOptimizationTravelModeOptions < Struct.new(
+      nil,
       :pedestrian,
       :truck,
       keyword_init: true
@@ -4932,6 +5124,7 @@ module Aws::GeoRoutes
     #   <p>Width of the vehicle.</p> <p> <b>Unit</b>: <code>centimeters</code> </p>
     #   @return [Integer]
     class WaypointOptimizationTruckOptions < Struct.new(
+      nil,
       :gross_weight,
       :hazardous_cargos,
       :height,
@@ -4981,6 +5174,7 @@ module Aws::GeoRoutes
     #   <p>Options to configure matching the provided position to a side of the street.</p>
     #   @return [Types::WaypointOptimizationSideOfStreetOptions]
     class WaypointOptimizationWaypoint < Struct.new(
+      nil,
       :access_hours,
       :appointment_time,
       :before,
@@ -5017,6 +5211,7 @@ module Aws::GeoRoutes
     #   <p>Weight for quad quint group.</p> <p> <b>Unit</b>: <code>Kilograms</code> </p>
     #   @return [Integer]
     class WeightPerAxleGroup < Struct.new(
+      nil,
       :single,
       :tandem,
       :triple,

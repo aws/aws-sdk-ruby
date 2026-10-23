@@ -9,6 +9,7 @@ module Aws::ApiGatewayV2
     # @!attribute message
     #   @return [String]
     class AccessDeniedException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -23,6 +24,7 @@ module Aws::ApiGatewayV2
     #   <p>A single line format of the access logs of data, as specified by selected $context variables. The format must include at least $context.requestId.</p>
     #   @return [String]
     class AccessLogSettings < Struct.new(
+      nil,
       :destination_arn,
       :format,
       keyword_init: true
@@ -83,6 +85,7 @@ module Aws::ApiGatewayV2
     #   <p>The warning messages reported when failonwarnings is turned on during API import.</p>
     #   @return [Array<String>]
     class Api < Struct.new(
+      nil,
       :api_endpoint,
       :api_gateway_managed,
       :api_id,
@@ -119,6 +122,7 @@ module Aws::ApiGatewayV2
     #   <p>The API stage.</p>
     #   @return [String]
     class ApiMapping < Struct.new(
+      nil,
       :api_id,
       :api_mapping_id,
       :api_mapping_key,
@@ -164,6 +168,7 @@ module Aws::ApiGatewayV2
     #   <p>The name of the authorizer.</p>
     #   @return [String]
     class Authorizer < Struct.new(
+      nil,
       :authorizer_credentials_arn,
       :authorizer_id,
       :authorizer_payload_format_version,
@@ -185,6 +190,7 @@ module Aws::ApiGatewayV2
     #   <p>Describes the error encountered.</p>
     #   @return [String]
     class BadRequestException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -196,6 +202,7 @@ module Aws::ApiGatewayV2
     #   <p>Describes the error encountered.</p>
     #   @return [String]
     class ConflictException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -222,6 +229,7 @@ module Aws::ApiGatewayV2
     #   <p>The number of seconds that the browser should cache preflight request results. Supported only for HTTP APIs.</p>
     #   @return [Integer]
     class Cors < Struct.new(
+      nil,
       :allow_credentials,
       :allow_headers,
       :allow_methods,
@@ -247,6 +255,7 @@ module Aws::ApiGatewayV2
     #   <p>The API stage.</p>
     #   @return [String]
     class CreateApiMappingRequest < Struct.new(
+      nil,
       :api_id,
       :api_mapping_key,
       :domain_name,
@@ -269,6 +278,7 @@ module Aws::ApiGatewayV2
     #   <p>The API stage.</p>
     #   @return [String]
     class CreateApiMappingResponse < Struct.new(
+      nil,
       :api_id,
       :api_mapping_id,
       :api_mapping_key,
@@ -322,6 +332,7 @@ module Aws::ApiGatewayV2
     #   <p>A version identifier for the API.</p>
     #   @return [String]
     class CreateApiRequest < Struct.new(
+      nil,
       :api_key_selection_expression,
       :cors_configuration,
       :credentials_arn,
@@ -393,6 +404,7 @@ module Aws::ApiGatewayV2
     #   <p>The warning messages reported when failonwarnings is turned on during API import.</p>
     #   @return [Array<String>]
     class CreateApiResponse < Struct.new(
+      nil,
       :api_endpoint,
       :api_gateway_managed,
       :api_id,
@@ -451,6 +463,7 @@ module Aws::ApiGatewayV2
     #   <p>The name of the authorizer.</p>
     #   @return [String]
     class CreateAuthorizerRequest < Struct.new(
+      nil,
       :api_id,
       :authorizer_credentials_arn,
       :authorizer_payload_format_version,
@@ -502,6 +515,7 @@ module Aws::ApiGatewayV2
     #   <p>The name of the authorizer.</p>
     #   @return [String]
     class CreateAuthorizerResponse < Struct.new(
+      nil,
       :authorizer_credentials_arn,
       :authorizer_id,
       :authorizer_payload_format_version,
@@ -529,6 +543,7 @@ module Aws::ApiGatewayV2
     #   <p>The name of the Stage resource for the Deployment resource to create.</p>
     #   @return [String]
     class CreateDeploymentRequest < Struct.new(
+      nil,
       :api_id,
       :description,
       :stage_name,
@@ -556,6 +571,7 @@ module Aws::ApiGatewayV2
     #   <p>The description for the deployment.</p>
     #   @return [String]
     class CreateDeploymentResponse < Struct.new(
+      nil,
       :auto_deployed,
       :created_date,
       :deployment_id,
@@ -584,6 +600,7 @@ module Aws::ApiGatewayV2
     #   <p>The collection of tags associated with a domain name.</p>
     #   @return [Hash<String, String>]
     class CreateDomainNameRequest < Struct.new(
+      nil,
       :domain_name,
       :domain_name_configurations,
       :mutual_tls_authentication,
@@ -616,6 +633,7 @@ module Aws::ApiGatewayV2
     #   <p>The collection of tags associated with a domain name.</p>
     #   @return [Hash<String, String>]
     class CreateDomainNameResponse < Struct.new(
+      nil,
       :api_mapping_selection_expression,
       :domain_name,
       :domain_name_arn,
@@ -689,6 +707,7 @@ module Aws::ApiGatewayV2
     #   <p>The TLS configuration for a private integration. If you specify a TLS configuration, private integration traffic uses the HTTPS protocol. Supported only for HTTP APIs.</p>
     #   @return [Types::TlsConfigInput]
     class CreateIntegrationRequest < Struct.new(
+      nil,
       :api_id,
       :connection_id,
       :connection_type,
@@ -735,6 +754,7 @@ module Aws::ApiGatewayV2
     #   <p>The template selection expression for the integration response. Supported only for WebSocket APIs.</p>
     #   @return [String]
     class CreateIntegrationResponseRequest < Struct.new(
+      nil,
       :api_id,
       :content_handling_strategy,
       :integration_id,
@@ -766,6 +786,7 @@ module Aws::ApiGatewayV2
     #   <p>The template selection expressions for the integration response.</p>
     #   @return [String]
     class CreateIntegrationResponseResponse < Struct.new(
+      nil,
       :content_handling_strategy,
       :integration_response_id,
       :integration_response_key,
@@ -843,6 +864,7 @@ module Aws::ApiGatewayV2
     #   <p>The TLS configuration for a private integration. If you specify a TLS configuration, private integration traffic uses the HTTPS protocol. Supported only for HTTP APIs.</p>
     #   @return [Types::TlsConfig]
     class CreateIntegrationResult < Struct.new(
+      nil,
       :api_gateway_managed,
       :connection_id,
       :connection_type,
@@ -885,6 +907,7 @@ module Aws::ApiGatewayV2
     #   <p>The schema for the model. For application/json models, this should be JSON schema draft 4 model.</p>
     #   @return [String]
     class CreateModelRequest < Struct.new(
+      nil,
       :api_id,
       :content_type,
       :description,
@@ -911,6 +934,7 @@ module Aws::ApiGatewayV2
     #   <p>The schema for the model. For application/json models, this should be JSON schema draft 4 model.</p>
     #   @return [String]
     class CreateModelResponse < Struct.new(
+      nil,
       :content_type,
       :description,
       :model_id,
@@ -959,6 +983,7 @@ module Aws::ApiGatewayV2
     #   <p>The target for the route.</p>
     #   @return [String]
     class CreateRouteRequest < Struct.new(
+      nil,
       :api_id,
       :api_key_required,
       :authorization_scopes,
@@ -996,6 +1021,7 @@ module Aws::ApiGatewayV2
     #   <p>The route response key.</p>
     #   @return [String]
     class CreateRouteResponseRequest < Struct.new(
+      nil,
       :api_id,
       :model_selection_expression,
       :response_models,
@@ -1023,6 +1049,7 @@ module Aws::ApiGatewayV2
     #   <p>Represents the route response key of a route response.</p>
     #   @return [String]
     class CreateRouteResponseResponse < Struct.new(
+      nil,
       :model_selection_expression,
       :response_models,
       :response_parameters,
@@ -1073,6 +1100,7 @@ module Aws::ApiGatewayV2
     #   <p>The target for the route.</p>
     #   @return [String]
     class CreateRouteResult < Struct.new(
+      nil,
       :api_gateway_managed,
       :api_key_required,
       :authorization_scopes,
@@ -1107,6 +1135,7 @@ module Aws::ApiGatewayV2
     #   Represents the priority of the routing rule.
     #   @return [Integer]
     class CreateRoutingRuleRequest < Struct.new(
+      nil,
       :actions,
       :conditions,
       :domain_name,
@@ -1133,6 +1162,7 @@ module Aws::ApiGatewayV2
     #   <p>The routing rule ID.</p>
     #   @return [String]
     class CreateRoutingRuleResponse < Struct.new(
+      nil,
       :actions,
       :conditions,
       :priority,
@@ -1178,6 +1208,7 @@ module Aws::ApiGatewayV2
     #   <p>The collection of tags. Each tag element is associated with a given resource.</p>
     #   @return [Hash<String, String>]
     class CreateStageRequest < Struct.new(
+      nil,
       :access_log_settings,
       :api_id,
       :auto_deploy,
@@ -1237,6 +1268,7 @@ module Aws::ApiGatewayV2
     #   <p>The collection of tags. Each tag element is associated with a given resource.</p>
     #   @return [Hash<String, String>]
     class CreateStageResponse < Struct.new(
+      nil,
       :access_log_settings,
       :api_gateway_managed,
       :auto_deploy,
@@ -1270,6 +1302,7 @@ module Aws::ApiGatewayV2
     #   <p>A list of tags.</p>
     #   @return [Hash<String, String>]
     class CreateVpcLinkRequest < Struct.new(
+      nil,
       :name,
       :security_group_ids,
       :subnet_ids,
@@ -1307,6 +1340,7 @@ module Aws::ApiGatewayV2
     #   <p>The version of the VPC link.</p>
     #   @return [String]
     class CreateVpcLinkResponse < Struct.new(
+      nil,
       :created_date,
       :name,
       :security_group_ids,
@@ -1328,6 +1362,7 @@ module Aws::ApiGatewayV2
     #   <p>The stage name. Stage names can only contain alphanumeric characters, hyphens, and underscores. Maximum length is 128 characters.</p>
     #   @return [String]
     class DeleteAccessLogSettingsRequest < Struct.new(
+      nil,
       :api_id,
       :stage_name,
       keyword_init: true
@@ -1342,6 +1377,7 @@ module Aws::ApiGatewayV2
     #   <p>The domain name.</p>
     #   @return [String]
     class DeleteApiMappingRequest < Struct.new(
+      nil,
       :api_mapping_id,
       :domain_name,
       keyword_init: true
@@ -1353,6 +1389,7 @@ module Aws::ApiGatewayV2
     #   <p>The API identifier.</p>
     #   @return [String]
     class DeleteApiRequest < Struct.new(
+      nil,
       :api_id,
       keyword_init: true
     )
@@ -1366,6 +1403,7 @@ module Aws::ApiGatewayV2
     #   <p>The authorizer identifier.</p>
     #   @return [String]
     class DeleteAuthorizerRequest < Struct.new(
+      nil,
       :api_id,
       :authorizer_id,
       keyword_init: true
@@ -1377,6 +1415,7 @@ module Aws::ApiGatewayV2
     #   <p>The API identifier.</p>
     #   @return [String]
     class DeleteCorsConfigurationRequest < Struct.new(
+      nil,
       :api_id,
       keyword_init: true
     )
@@ -1390,6 +1429,7 @@ module Aws::ApiGatewayV2
     #   <p>The deployment ID.</p>
     #   @return [String]
     class DeleteDeploymentRequest < Struct.new(
+      nil,
       :api_id,
       :deployment_id,
       keyword_init: true
@@ -1401,6 +1441,7 @@ module Aws::ApiGatewayV2
     #   <p>The domain name.</p>
     #   @return [String]
     class DeleteDomainNameRequest < Struct.new(
+      nil,
       :domain_name,
       keyword_init: true
     )
@@ -1414,6 +1455,7 @@ module Aws::ApiGatewayV2
     #   <p>The integration ID.</p>
     #   @return [String]
     class DeleteIntegrationRequest < Struct.new(
+      nil,
       :api_id,
       :integration_id,
       keyword_init: true
@@ -1431,6 +1473,7 @@ module Aws::ApiGatewayV2
     #   <p>The integration response ID.</p>
     #   @return [String]
     class DeleteIntegrationResponseRequest < Struct.new(
+      nil,
       :api_id,
       :integration_id,
       :integration_response_id,
@@ -1446,6 +1489,7 @@ module Aws::ApiGatewayV2
     #   <p>The model ID.</p>
     #   @return [String]
     class DeleteModelRequest < Struct.new(
+      nil,
       :api_id,
       :model_id,
       keyword_init: true
@@ -1460,6 +1504,7 @@ module Aws::ApiGatewayV2
     #   <p>The route ID.</p>
     #   @return [String]
     class DeleteRouteRequest < Struct.new(
+      nil,
       :api_id,
       :route_id,
       keyword_init: true
@@ -1477,6 +1522,7 @@ module Aws::ApiGatewayV2
     #   <p>The route ID.</p>
     #   @return [String]
     class DeleteRouteRequestParameterRequest < Struct.new(
+      nil,
       :api_id,
       :request_parameter_key,
       :route_id,
@@ -1495,6 +1541,7 @@ module Aws::ApiGatewayV2
     #   <p>The route response ID.</p>
     #   @return [String]
     class DeleteRouteResponseRequest < Struct.new(
+      nil,
       :api_id,
       :route_id,
       :route_response_id,
@@ -1513,6 +1560,7 @@ module Aws::ApiGatewayV2
     #   <p>The stage name. Stage names can only contain alphanumeric characters, hyphens, and underscores. Maximum length is 128 characters.</p>
     #   @return [String]
     class DeleteRouteSettingsRequest < Struct.new(
+      nil,
       :api_id,
       :route_key,
       :stage_name,
@@ -1531,6 +1579,7 @@ module Aws::ApiGatewayV2
     #   <p>The routing rule ID.</p>
     #   @return [String]
     class DeleteRoutingRuleRequest < Struct.new(
+      nil,
       :domain_name,
       :domain_name_id,
       :routing_rule_id,
@@ -1546,6 +1595,7 @@ module Aws::ApiGatewayV2
     #   <p>The stage name. Stage names can only contain alphanumeric characters, hyphens, and underscores. Maximum length is 128 characters.</p>
     #   @return [String]
     class DeleteStageRequest < Struct.new(
+      nil,
       :api_id,
       :stage_name,
       keyword_init: true
@@ -1557,6 +1607,7 @@ module Aws::ApiGatewayV2
     #   <p>The ID of the VPC link.</p>
     #   @return [String]
     class DeleteVpcLinkRequest < Struct.new(
+      nil,
       :vpc_link_id,
       keyword_init: true
     )
@@ -1564,6 +1615,7 @@ module Aws::ApiGatewayV2
     end
 
     class DeleteVpcLinkResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1589,6 +1641,7 @@ module Aws::ApiGatewayV2
     #   <p>The description for the deployment.</p>
     #   @return [String]
     class Deployment < Struct.new(
+      nil,
       :auto_deployed,
       :created_date,
       :deployment_id,
@@ -1623,6 +1676,7 @@ module Aws::ApiGatewayV2
     #   <p>The collection of tags associated with a domain name.</p>
     #   @return [Hash<String, String>]
     class DomainName < Struct.new(
+      nil,
       :api_mapping_selection_expression,
       :domain_name,
       :domain_name_arn,
@@ -1670,6 +1724,7 @@ module Aws::ApiGatewayV2
     #   <p>The ARN of the public certificate issued by ACM to validate ownership of your custom domain. Only required when configuring mutual TLS and using an ACM imported or private CA certificate ARN as the regionalCertificateArn</p>
     #   @return [String]
     class DomainNameConfiguration < Struct.new(
+      nil,
       :api_gateway_domain_name,
       :certificate_arn,
       :certificate_name,
@@ -1705,6 +1760,7 @@ module Aws::ApiGatewayV2
     #   <p>The name of the API stage to export. If you don't specify this property, a representation of the latest API configuration is exported.</p>
     #   @return [String]
     class ExportApiRequest < Struct.new(
+      nil,
       :api_id,
       :export_version,
       :include_extensions,
@@ -1720,6 +1776,7 @@ module Aws::ApiGatewayV2
     #   <p>Represents an exported definition of an API in a particular output format, for example, YAML. The API is serialized to the requested specification, for example, OpenAPI 3.0.</p>
     #   @return [String]
     class ExportApiResponse < Struct.new(
+      nil,
       :body,
       keyword_init: true
     )
@@ -1733,6 +1790,7 @@ module Aws::ApiGatewayV2
     #   <p>The domain name.</p>
     #   @return [String]
     class GetApiMappingRequest < Struct.new(
+      nil,
       :api_mapping_id,
       :domain_name,
       keyword_init: true
@@ -1753,6 +1811,7 @@ module Aws::ApiGatewayV2
     #   <p>The API stage.</p>
     #   @return [String]
     class GetApiMappingResponse < Struct.new(
+      nil,
       :api_id,
       :api_mapping_id,
       :api_mapping_key,
@@ -1772,6 +1831,7 @@ module Aws::ApiGatewayV2
     #   <p>The next page of elements from this collection. Not valid for the last element of the collection.</p>
     #   @return [String]
     class GetApiMappingsRequest < Struct.new(
+      nil,
       :domain_name,
       :max_results,
       :next_token,
@@ -1787,6 +1847,7 @@ module Aws::ApiGatewayV2
     #   <p>The next page of elements from this collection. Not valid for the last element of the collection.</p>
     #   @return [String]
     class GetApiMappingsResponse < Struct.new(
+      nil,
       :items,
       :next_token,
       keyword_init: true
@@ -1798,6 +1859,7 @@ module Aws::ApiGatewayV2
     #   <p>The API identifier.</p>
     #   @return [String]
     class GetApiRequest < Struct.new(
+      nil,
       :api_id,
       keyword_init: true
     )
@@ -1856,6 +1918,7 @@ module Aws::ApiGatewayV2
     #   <p>The warning messages reported when failonwarnings is turned on during API import.</p>
     #   @return [Array<String>]
     class GetApiResponse < Struct.new(
+      nil,
       :api_endpoint,
       :api_gateway_managed,
       :api_id,
@@ -1885,6 +1948,7 @@ module Aws::ApiGatewayV2
     #   <p>The next page of elements from this collection. Not valid for the last element of the collection.</p>
     #   @return [String]
     class GetApisRequest < Struct.new(
+      nil,
       :max_results,
       :next_token,
       keyword_init: true
@@ -1899,6 +1963,7 @@ module Aws::ApiGatewayV2
     #   <p>The next page of elements from this collection. Not valid for the last element of the collection.</p>
     #   @return [String]
     class GetApisResponse < Struct.new(
+      nil,
       :items,
       :next_token,
       keyword_init: true
@@ -1913,6 +1978,7 @@ module Aws::ApiGatewayV2
     #   <p>The authorizer identifier.</p>
     #   @return [String]
     class GetAuthorizerRequest < Struct.new(
+      nil,
       :api_id,
       :authorizer_id,
       keyword_init: true
@@ -1955,6 +2021,7 @@ module Aws::ApiGatewayV2
     #   <p>The name of the authorizer.</p>
     #   @return [String]
     class GetAuthorizerResponse < Struct.new(
+      nil,
       :authorizer_credentials_arn,
       :authorizer_id,
       :authorizer_payload_format_version,
@@ -1981,6 +2048,7 @@ module Aws::ApiGatewayV2
     #   <p>The next page of elements from this collection. Not valid for the last element of the collection.</p>
     #   @return [String]
     class GetAuthorizersRequest < Struct.new(
+      nil,
       :api_id,
       :max_results,
       :next_token,
@@ -1996,6 +2064,7 @@ module Aws::ApiGatewayV2
     #   <p>The next page of elements from this collection. Not valid for the last element of the collection.</p>
     #   @return [String]
     class GetAuthorizersResponse < Struct.new(
+      nil,
       :items,
       :next_token,
       keyword_init: true
@@ -2010,6 +2079,7 @@ module Aws::ApiGatewayV2
     #   <p>The deployment ID.</p>
     #   @return [String]
     class GetDeploymentRequest < Struct.new(
+      nil,
       :api_id,
       :deployment_id,
       keyword_init: true
@@ -2036,6 +2106,7 @@ module Aws::ApiGatewayV2
     #   <p>The description for the deployment.</p>
     #   @return [String]
     class GetDeploymentResponse < Struct.new(
+      nil,
       :auto_deployed,
       :created_date,
       :deployment_id,
@@ -2057,6 +2128,7 @@ module Aws::ApiGatewayV2
     #   <p>The next page of elements from this collection. Not valid for the last element of the collection.</p>
     #   @return [String]
     class GetDeploymentsRequest < Struct.new(
+      nil,
       :api_id,
       :max_results,
       :next_token,
@@ -2072,6 +2144,7 @@ module Aws::ApiGatewayV2
     #   <p>The next page of elements from this collection. Not valid for the last element of the collection.</p>
     #   @return [String]
     class GetDeploymentsResponse < Struct.new(
+      nil,
       :items,
       :next_token,
       keyword_init: true
@@ -2083,6 +2156,7 @@ module Aws::ApiGatewayV2
     #   <p>The domain name.</p>
     #   @return [String]
     class GetDomainNameRequest < Struct.new(
+      nil,
       :domain_name,
       keyword_init: true
     )
@@ -2111,6 +2185,7 @@ module Aws::ApiGatewayV2
     #   <p>The collection of tags associated with a domain name.</p>
     #   @return [Hash<String, String>]
     class GetDomainNameResponse < Struct.new(
+      nil,
       :api_mapping_selection_expression,
       :domain_name,
       :domain_name_arn,
@@ -2130,6 +2205,7 @@ module Aws::ApiGatewayV2
     #   <p>The next page of elements from this collection. Not valid for the last element of the collection.</p>
     #   @return [String]
     class GetDomainNamesRequest < Struct.new(
+      nil,
       :max_results,
       :next_token,
       keyword_init: true
@@ -2144,6 +2220,7 @@ module Aws::ApiGatewayV2
     #   <p>The next page of elements from this collection. Not valid for the last element of the collection.</p>
     #   @return [String]
     class GetDomainNamesResponse < Struct.new(
+      nil,
       :items,
       :next_token,
       keyword_init: true
@@ -2158,6 +2235,7 @@ module Aws::ApiGatewayV2
     #   <p>The integration ID.</p>
     #   @return [String]
     class GetIntegrationRequest < Struct.new(
+      nil,
       :api_id,
       :integration_id,
       keyword_init: true
@@ -2175,6 +2253,7 @@ module Aws::ApiGatewayV2
     #   <p>The integration response ID.</p>
     #   @return [String]
     class GetIntegrationResponseRequest < Struct.new(
+      nil,
       :api_id,
       :integration_id,
       :integration_response_id,
@@ -2202,6 +2281,7 @@ module Aws::ApiGatewayV2
     #   <p>The template selection expressions for the integration response.</p>
     #   @return [String]
     class GetIntegrationResponseResponse < Struct.new(
+      nil,
       :content_handling_strategy,
       :integration_response_id,
       :integration_response_key,
@@ -2226,6 +2306,7 @@ module Aws::ApiGatewayV2
     #   <p>The next page of elements from this collection. Not valid for the last element of the collection.</p>
     #   @return [String]
     class GetIntegrationResponsesRequest < Struct.new(
+      nil,
       :api_id,
       :integration_id,
       :max_results,
@@ -2242,6 +2323,7 @@ module Aws::ApiGatewayV2
     #   <p>The next page of elements from this collection. Not valid for the last element of the collection.</p>
     #   @return [String]
     class GetIntegrationResponsesResponse < Struct.new(
+      nil,
       :items,
       :next_token,
       keyword_init: true
@@ -2315,6 +2397,7 @@ module Aws::ApiGatewayV2
     #   <p>The TLS configuration for a private integration. If you specify a TLS configuration, private integration traffic uses the HTTPS protocol. Supported only for HTTP APIs.</p>
     #   @return [Types::TlsConfig]
     class GetIntegrationResult < Struct.new(
+      nil,
       :api_gateway_managed,
       :connection_id,
       :connection_type,
@@ -2350,6 +2433,7 @@ module Aws::ApiGatewayV2
     #   <p>The next page of elements from this collection. Not valid for the last element of the collection.</p>
     #   @return [String]
     class GetIntegrationsRequest < Struct.new(
+      nil,
       :api_id,
       :max_results,
       :next_token,
@@ -2365,6 +2449,7 @@ module Aws::ApiGatewayV2
     #   <p>The next page of elements from this collection. Not valid for the last element of the collection.</p>
     #   @return [String]
     class GetIntegrationsResponse < Struct.new(
+      nil,
       :items,
       :next_token,
       keyword_init: true
@@ -2379,6 +2464,7 @@ module Aws::ApiGatewayV2
     #   <p>The model ID.</p>
     #   @return [String]
     class GetModelRequest < Struct.new(
+      nil,
       :api_id,
       :model_id,
       keyword_init: true
@@ -2402,6 +2488,7 @@ module Aws::ApiGatewayV2
     #   <p>The schema for the model. For application/json models, this should be JSON schema draft 4 model.</p>
     #   @return [String]
     class GetModelResponse < Struct.new(
+      nil,
       :content_type,
       :description,
       :model_id,
@@ -2419,6 +2506,7 @@ module Aws::ApiGatewayV2
     #   <p>The model ID.</p>
     #   @return [String]
     class GetModelTemplateRequest < Struct.new(
+      nil,
       :api_id,
       :model_id,
       keyword_init: true
@@ -2430,6 +2518,7 @@ module Aws::ApiGatewayV2
     #   <p>The template value.</p>
     #   @return [String]
     class GetModelTemplateResponse < Struct.new(
+      nil,
       :value,
       keyword_init: true
     )
@@ -2446,6 +2535,7 @@ module Aws::ApiGatewayV2
     #   <p>The next page of elements from this collection. Not valid for the last element of the collection.</p>
     #   @return [String]
     class GetModelsRequest < Struct.new(
+      nil,
       :api_id,
       :max_results,
       :next_token,
@@ -2461,6 +2551,7 @@ module Aws::ApiGatewayV2
     #   <p>The next page of elements from this collection. Not valid for the last element of the collection.</p>
     #   @return [String]
     class GetModelsResponse < Struct.new(
+      nil,
       :items,
       :next_token,
       keyword_init: true
@@ -2475,6 +2566,7 @@ module Aws::ApiGatewayV2
     #   <p>The route ID.</p>
     #   @return [String]
     class GetRouteRequest < Struct.new(
+      nil,
       :api_id,
       :route_id,
       keyword_init: true
@@ -2492,6 +2584,7 @@ module Aws::ApiGatewayV2
     #   <p>The route response ID.</p>
     #   @return [String]
     class GetRouteResponseRequest < Struct.new(
+      nil,
       :api_id,
       :route_id,
       :route_response_id,
@@ -2516,6 +2609,7 @@ module Aws::ApiGatewayV2
     #   <p>Represents the route response key of a route response.</p>
     #   @return [String]
     class GetRouteResponseResponse < Struct.new(
+      nil,
       :model_selection_expression,
       :response_models,
       :response_parameters,
@@ -2539,6 +2633,7 @@ module Aws::ApiGatewayV2
     #   <p>The route ID.</p>
     #   @return [String]
     class GetRouteResponsesRequest < Struct.new(
+      nil,
       :api_id,
       :max_results,
       :next_token,
@@ -2555,6 +2650,7 @@ module Aws::ApiGatewayV2
     #   <p>The next page of elements from this collection. Not valid for the last element of the collection.</p>
     #   @return [String]
     class GetRouteResponsesResponse < Struct.new(
+      nil,
       :items,
       :next_token,
       keyword_init: true
@@ -2602,6 +2698,7 @@ module Aws::ApiGatewayV2
     #   <p>The target for the route.</p>
     #   @return [String]
     class GetRouteResult < Struct.new(
+      nil,
       :api_gateway_managed,
       :api_key_required,
       :authorization_scopes,
@@ -2630,6 +2727,7 @@ module Aws::ApiGatewayV2
     #   <p>The next page of elements from this collection. Not valid for the last element of the collection.</p>
     #   @return [String]
     class GetRoutesRequest < Struct.new(
+      nil,
       :api_id,
       :max_results,
       :next_token,
@@ -2645,6 +2743,7 @@ module Aws::ApiGatewayV2
     #   <p>The next page of elements from this collection. Not valid for the last element of the collection.</p>
     #   @return [String]
     class GetRoutesResponse < Struct.new(
+      nil,
       :items,
       :next_token,
       keyword_init: true
@@ -2662,6 +2761,7 @@ module Aws::ApiGatewayV2
     #   <p>The routing rule ID.</p>
     #   @return [String]
     class GetRoutingRuleRequest < Struct.new(
+      nil,
       :domain_name,
       :domain_name_id,
       :routing_rule_id,
@@ -2686,6 +2786,7 @@ module Aws::ApiGatewayV2
     #   <p>The routing rule ID.</p>
     #   @return [String]
     class GetRoutingRuleResponse < Struct.new(
+      nil,
       :actions,
       :conditions,
       :priority,
@@ -2703,6 +2804,7 @@ module Aws::ApiGatewayV2
     #   <p>The stage name. Stage names can only contain alphanumeric characters, hyphens, and underscores. Maximum length is 128 characters.</p>
     #   @return [String]
     class GetStageRequest < Struct.new(
+      nil,
       :api_id,
       :stage_name,
       keyword_init: true
@@ -2753,6 +2855,7 @@ module Aws::ApiGatewayV2
     #   <p>The collection of tags. Each tag element is associated with a given resource.</p>
     #   @return [Hash<String, String>]
     class GetStageResponse < Struct.new(
+      nil,
       :access_log_settings,
       :api_gateway_managed,
       :auto_deploy,
@@ -2782,6 +2885,7 @@ module Aws::ApiGatewayV2
     #   <p>The next page of elements from this collection. Not valid for the last element of the collection.</p>
     #   @return [String]
     class GetStagesRequest < Struct.new(
+      nil,
       :api_id,
       :max_results,
       :next_token,
@@ -2797,6 +2901,7 @@ module Aws::ApiGatewayV2
     #   <p>The next page of elements from this collection. Not valid for the last element of the collection.</p>
     #   @return [String]
     class GetStagesResponse < Struct.new(
+      nil,
       :items,
       :next_token,
       keyword_init: true
@@ -2808,6 +2913,7 @@ module Aws::ApiGatewayV2
     #   <p>The resource ARN for the tag.</p>
     #   @return [String]
     class GetTagsRequest < Struct.new(
+      nil,
       :resource_arn,
       keyword_init: true
     )
@@ -2818,6 +2924,7 @@ module Aws::ApiGatewayV2
     #   <p>Represents a collection of tags associated with the resource.</p>
     #   @return [Hash<String, String>]
     class GetTagsResponse < Struct.new(
+      nil,
       :tags,
       keyword_init: true
     )
@@ -2828,6 +2935,7 @@ module Aws::ApiGatewayV2
     #   <p>The ID of the VPC link.</p>
     #   @return [String]
     class GetVpcLinkRequest < Struct.new(
+      nil,
       :vpc_link_id,
       keyword_init: true
     )
@@ -2862,6 +2970,7 @@ module Aws::ApiGatewayV2
     #   <p>The version of the VPC link.</p>
     #   @return [String]
     class GetVpcLinkResponse < Struct.new(
+      nil,
       :created_date,
       :name,
       :security_group_ids,
@@ -2883,6 +2992,7 @@ module Aws::ApiGatewayV2
     #   <p>The next page of elements from this collection. Not valid for the last element of the collection.</p>
     #   @return [String]
     class GetVpcLinksRequest < Struct.new(
+      nil,
       :max_results,
       :next_token,
       keyword_init: true
@@ -2897,6 +3007,7 @@ module Aws::ApiGatewayV2
     #   <p>The next page of elements from this collection. Not valid for the last element of the collection.</p>
     #   @return [String]
     class GetVpcLinksResponse < Struct.new(
+      nil,
       :items,
       :next_token,
       keyword_init: true
@@ -2915,6 +3026,7 @@ module Aws::ApiGatewayV2
     #   <p>Specifies whether to rollback the API creation when a warning is encountered. By default, API creation continues if a warning is encountered.</p>
     #   @return [Boolean]
     class ImportApiRequest < Struct.new(
+      nil,
       :basepath,
       :body,
       :fail_on_warnings,
@@ -2975,6 +3087,7 @@ module Aws::ApiGatewayV2
     #   <p>The warning messages reported when failonwarnings is turned on during API import.</p>
     #   @return [Array<String>]
     class ImportApiResponse < Struct.new(
+      nil,
       :api_endpoint,
       :api_gateway_managed,
       :api_id,
@@ -3064,6 +3177,7 @@ module Aws::ApiGatewayV2
     #   <p>The TLS configuration for a private integration. If you specify a TLS configuration, private integration traffic uses the HTTPS protocol. Supported only for HTTP APIs.</p>
     #   @return [Types::TlsConfig]
     class Integration < Struct.new(
+      nil,
       :api_gateway_managed,
       :connection_id,
       :connection_type,
@@ -3109,6 +3223,7 @@ module Aws::ApiGatewayV2
     #   <p>The template selection expressions for the integration response.</p>
     #   @return [String]
     class IntegrationResponse < Struct.new(
+      nil,
       :content_handling_strategy,
       :integration_response_id,
       :integration_response_key,
@@ -3129,6 +3244,7 @@ module Aws::ApiGatewayV2
     #                  . Required for the JWT authorizer type. Supported only for HTTP APIs.</p>
     #   @return [String]
     class JWTConfiguration < Struct.new(
+      nil,
       :audience,
       :issuer,
       keyword_init: true
@@ -3149,6 +3265,7 @@ module Aws::ApiGatewayV2
     #   <p>The next page of elements from this collection. Not valid for the last element of the collection.</p>
     #   @return [String]
     class ListRoutingRulesRequest < Struct.new(
+      nil,
       :domain_name,
       :domain_name_id,
       :max_results,
@@ -3165,6 +3282,7 @@ module Aws::ApiGatewayV2
     #   <p>The routing rules.<p>
     #   @return [Array<Types::RoutingRule>]
     class ListRoutingRulesResponse < Struct.new(
+      nil,
       :next_token,
       :routing_rules,
       keyword_init: true
@@ -3189,6 +3307,7 @@ module Aws::ApiGatewayV2
     #   <p>The schema for the model. For application/json models, this should be JSON schema draft 4 model.</p>
     #   @return [String]
     class Model < Struct.new(
+      nil,
       :content_type,
       :description,
       :model_id,
@@ -3209,6 +3328,7 @@ module Aws::ApiGatewayV2
     #   <p>A list of warnings that API Gateway returns while processing your truststore. Invalid certificates produce warnings. Mutual TLS is still enabled, but some clients might not be able to access your API. To resolve warnings, upload a new truststore to S3, and then update you domain name to use the new version.</p>
     #   @return [Array<String>]
     class MutualTlsAuthentication < Struct.new(
+      nil,
       :truststore_uri,
       :truststore_version,
       :truststore_warnings,
@@ -3224,6 +3344,7 @@ module Aws::ApiGatewayV2
     #   <p>The version of the S3 object that contains your truststore. To specify a version, you must have versioning enabled for the S3 bucket.</p>
     #   @return [String]
     class MutualTlsAuthenticationInput < Struct.new(
+      nil,
       :truststore_uri,
       :truststore_version,
       keyword_init: true
@@ -3239,6 +3360,7 @@ module Aws::ApiGatewayV2
     #   <p>The resource type.</p>
     #   @return [String]
     class NotFoundException < Struct.new(
+      nil,
       :message,
       :resource_type,
       keyword_init: true
@@ -3251,6 +3373,7 @@ module Aws::ApiGatewayV2
     #   <p>Whether or not the parameter is required.</p>
     #   @return [Boolean]
     class ParameterConstraints < Struct.new(
+      nil,
       :required,
       keyword_init: true
     )
@@ -3276,6 +3399,7 @@ module Aws::ApiGatewayV2
     #   <p>The routing rule ID.</p>
     #   @return [String]
     class PutRoutingRuleRequest < Struct.new(
+      nil,
       :actions,
       :conditions,
       :domain_name,
@@ -3303,6 +3427,7 @@ module Aws::ApiGatewayV2
     #   <p>The routing rule ID.</p>
     #   @return [String]
     class PutRoutingRuleResponse < Struct.new(
+      nil,
       :actions,
       :conditions,
       :priority,
@@ -3327,6 +3452,7 @@ module Aws::ApiGatewayV2
     #   <p>Specifies whether to rollback the API creation when a warning is encountered. By default, API creation continues if a warning is encountered.</p>
     #   @return [Boolean]
     class ReimportApiRequest < Struct.new(
+      nil,
       :api_id,
       :basepath,
       :body,
@@ -3388,6 +3514,7 @@ module Aws::ApiGatewayV2
     #   <p>The warning messages reported when failonwarnings is turned on during API import.</p>
     #   @return [Array<String>]
     class ReimportApiResponse < Struct.new(
+      nil,
       :api_endpoint,
       :api_gateway_managed,
       :api_id,
@@ -3417,6 +3544,7 @@ module Aws::ApiGatewayV2
     #   <p>The stage name. Stage names can contain only alphanumeric characters, hyphens, and underscores, or be $default. Maximum length is 128 characters.</p>
     #   @return [String]
     class ResetAuthorizersCacheRequest < Struct.new(
+      nil,
       :api_id,
       :stage_name,
       keyword_init: true
@@ -3465,6 +3593,7 @@ module Aws::ApiGatewayV2
     #   <p>The target for the route.</p>
     #   @return [String]
     class Route < Struct.new(
+      nil,
       :api_gateway_managed,
       :api_key_required,
       :authorization_scopes,
@@ -3500,6 +3629,7 @@ module Aws::ApiGatewayV2
     #   <p>Represents the route response key of a route response.</p>
     #   @return [String]
     class RouteResponse < Struct.new(
+      nil,
       :model_selection_expression,
       :response_models,
       :response_parameters,
@@ -3527,6 +3657,7 @@ module Aws::ApiGatewayV2
     #   <p>Specifies the throttling rate limit.</p>
     #   @return [Float]
     class RouteSettings < Struct.new(
+      nil,
       :data_trace_enabled,
       :detailed_metrics_enabled,
       :logging_level,
@@ -3554,6 +3685,7 @@ module Aws::ApiGatewayV2
     #   <p>The routing rule ID.</p>
     #   @return [String]
     class RoutingRule < Struct.new(
+      nil,
       :actions,
       :conditions,
       :priority,
@@ -3569,6 +3701,7 @@ module Aws::ApiGatewayV2
     #   <p>Represents an InvokeApi action.</p>
     #   @return [Types::RoutingRuleActionInvokeApi]
     class RoutingRuleAction < Struct.new(
+      nil,
       :invoke_api,
       keyword_init: true
     )
@@ -3586,6 +3719,7 @@ module Aws::ApiGatewayV2
     #   <p>The strip base path setting.</p>
     #   @return [Boolean]
     class RoutingRuleActionInvokeApi < Struct.new(
+      nil,
       :api_id,
       :stage,
       :strip_base_path,
@@ -3602,6 +3736,7 @@ module Aws::ApiGatewayV2
     #   <p>The headers to be matched.</p>
     #   @return [Types::RoutingRuleMatchHeaders]
     class RoutingRuleCondition < Struct.new(
+      nil,
       :match_base_paths,
       :match_headers,
       keyword_init: true
@@ -3614,6 +3749,7 @@ module Aws::ApiGatewayV2
     #   The string of the case sensitive base path to be matched.
     #   @return [Array<String>]
     class RoutingRuleMatchBasePaths < Struct.new(
+      nil,
       :any_of,
       keyword_init: true
     )
@@ -3628,6 +3764,7 @@ module Aws::ApiGatewayV2
     #   <p>An expression used to extract information at runtime. See <a href="https://docs.aws.amazon.com/apigateway/latest/developerguide/apigateway-websocket-api-selection-expressions.html#apigateway-websocket-api-apikey-selection-expressions">Selection Expressions</a> for more information.</p>
     #   @return [String]
     class RoutingRuleMatchHeaderValue < Struct.new(
+      nil,
       :header,
       :value_glob,
       keyword_init: true
@@ -3640,6 +3777,7 @@ module Aws::ApiGatewayV2
     #   <p>The header name and header value glob to be matched. The matchHeaders condition is matched if any of the header name and header value globs are matched.</p>
     #   @return [Array<Types::RoutingRuleMatchHeaderValue>]
     class RoutingRuleMatchHeaders < Struct.new(
+      nil,
       :any_of,
       keyword_init: true
     )
@@ -3690,6 +3828,7 @@ module Aws::ApiGatewayV2
     #   <p>The collection of tags. Each tag element is associated with a given resource.</p>
     #   @return [Hash<String, String>]
     class Stage < Struct.new(
+      nil,
       :access_log_settings,
       :api_gateway_managed,
       :auto_deploy,
@@ -3717,6 +3856,7 @@ module Aws::ApiGatewayV2
     #   <p>The collection of tags. Each tag element is associated with a given resource.</p>
     #   @return [Hash<String, String>]
     class TagResourceRequest < Struct.new(
+      nil,
       :resource_arn,
       :tags,
       keyword_init: true
@@ -3725,6 +3865,7 @@ module Aws::ApiGatewayV2
     end
 
     class TagResourceResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -3735,6 +3876,7 @@ module Aws::ApiGatewayV2
     #   <p>If you specify a server name, API Gateway uses it to verify the hostname on the integration's certificate. The server name is also included in the TLS handshake to support Server Name Indication (SNI) or virtual hosting.</p>
     #   @return [String]
     class TlsConfig < Struct.new(
+      nil,
       :server_name_to_verify,
       keyword_init: true
     )
@@ -3746,6 +3888,7 @@ module Aws::ApiGatewayV2
     #   <p>If you specify a server name, API Gateway uses it to verify the hostname on the integration's certificate. The server name is also included in the TLS handshake to support Server Name Indication (SNI) or virtual hosting.</p>
     #   @return [String]
     class TlsConfigInput < Struct.new(
+      nil,
       :server_name_to_verify,
       keyword_init: true
     )
@@ -3760,6 +3903,7 @@ module Aws::ApiGatewayV2
     #   <p>Describes the error encountered.</p>
     #   @return [String]
     class TooManyRequestsException < Struct.new(
+      nil,
       :limit_type,
       :message,
       keyword_init: true
@@ -3774,6 +3918,7 @@ module Aws::ApiGatewayV2
     #   <p>The Tag keys to delete</p>
     #   @return [Array<String>]
     class UntagResourceRequest < Struct.new(
+      nil,
       :resource_arn,
       :tag_keys,
       keyword_init: true
@@ -3798,6 +3943,7 @@ module Aws::ApiGatewayV2
     #   <p>The API stage.</p>
     #   @return [String]
     class UpdateApiMappingRequest < Struct.new(
+      nil,
       :api_id,
       :api_mapping_id,
       :api_mapping_key,
@@ -3821,6 +3967,7 @@ module Aws::ApiGatewayV2
     #   <p>The API stage.</p>
     #   @return [String]
     class UpdateApiMappingResponse < Struct.new(
+      nil,
       :api_id,
       :api_mapping_id,
       :api_mapping_key,
@@ -3871,6 +4018,7 @@ module Aws::ApiGatewayV2
     #   <p>A version identifier for the API.</p>
     #   @return [String]
     class UpdateApiRequest < Struct.new(
+      nil,
       :api_id,
       :api_key_selection_expression,
       :cors_configuration,
@@ -3941,6 +4089,7 @@ module Aws::ApiGatewayV2
     #   <p>The warning messages reported when failonwarnings is turned on during API import.</p>
     #   @return [Array<String>]
     class UpdateApiResponse < Struct.new(
+      nil,
       :api_endpoint,
       :api_gateway_managed,
       :api_id,
@@ -4002,6 +4151,7 @@ module Aws::ApiGatewayV2
     #   <p>The name of the authorizer.</p>
     #   @return [String]
     class UpdateAuthorizerRequest < Struct.new(
+      nil,
       :api_id,
       :authorizer_credentials_arn,
       :authorizer_id,
@@ -4054,6 +4204,7 @@ module Aws::ApiGatewayV2
     #   <p>The name of the authorizer.</p>
     #   @return [String]
     class UpdateAuthorizerResponse < Struct.new(
+      nil,
       :authorizer_credentials_arn,
       :authorizer_id,
       :authorizer_payload_format_version,
@@ -4081,6 +4232,7 @@ module Aws::ApiGatewayV2
     #   <p>The description for the deployment resource.</p>
     #   @return [String]
     class UpdateDeploymentRequest < Struct.new(
+      nil,
       :api_id,
       :deployment_id,
       :description,
@@ -4108,6 +4260,7 @@ module Aws::ApiGatewayV2
     #   <p>The description for the deployment.</p>
     #   @return [String]
     class UpdateDeploymentResponse < Struct.new(
+      nil,
       :auto_deployed,
       :created_date,
       :deployment_id,
@@ -4133,6 +4286,7 @@ module Aws::ApiGatewayV2
     #   <p>The routing mode.</p>
     #   @return [String]
     class UpdateDomainNameRequest < Struct.new(
+      nil,
       :domain_name,
       :domain_name_configurations,
       :mutual_tls_authentication,
@@ -4164,6 +4318,7 @@ module Aws::ApiGatewayV2
     #   <p>The collection of tags associated with a domain name.</p>
     #   @return [Hash<String, String>]
     class UpdateDomainNameResponse < Struct.new(
+      nil,
       :api_mapping_selection_expression,
       :domain_name,
       :domain_name_arn,
@@ -4240,6 +4395,7 @@ module Aws::ApiGatewayV2
     #   <p>The TLS configuration for a private integration. If you specify a TLS configuration, private integration traffic uses the HTTPS protocol. Supported only for HTTP APIs.</p>
     #   @return [Types::TlsConfigInput]
     class UpdateIntegrationRequest < Struct.new(
+      nil,
       :api_id,
       :connection_id,
       :connection_type,
@@ -4297,6 +4453,7 @@ module Aws::ApiGatewayV2
     #   <p>The template selection expression for the integration response. Supported only for WebSocket APIs.</p>
     #   @return [String]
     class UpdateIntegrationResponseRequest < Struct.new(
+      nil,
       :api_id,
       :content_handling_strategy,
       :integration_id,
@@ -4329,6 +4486,7 @@ module Aws::ApiGatewayV2
     #   <p>The template selection expressions for the integration response.</p>
     #   @return [String]
     class UpdateIntegrationResponseResponse < Struct.new(
+      nil,
       :content_handling_strategy,
       :integration_response_id,
       :integration_response_key,
@@ -4406,6 +4564,7 @@ module Aws::ApiGatewayV2
     #   <p>The TLS configuration for a private integration. If you specify a TLS configuration, private integration traffic uses the HTTPS protocol. Supported only for HTTP APIs.</p>
     #   @return [Types::TlsConfig]
     class UpdateIntegrationResult < Struct.new(
+      nil,
       :api_gateway_managed,
       :connection_id,
       :connection_type,
@@ -4451,6 +4610,7 @@ module Aws::ApiGatewayV2
     #   <p>The schema for the model. For application/json models, this should be JSON schema draft 4 model.</p>
     #   @return [String]
     class UpdateModelRequest < Struct.new(
+      nil,
       :api_id,
       :content_type,
       :description,
@@ -4478,6 +4638,7 @@ module Aws::ApiGatewayV2
     #   <p>The schema for the model. For application/json models, this should be JSON schema draft 4 model.</p>
     #   @return [String]
     class UpdateModelResponse < Struct.new(
+      nil,
       :content_type,
       :description,
       :model_id,
@@ -4529,6 +4690,7 @@ module Aws::ApiGatewayV2
     #   <p>The target for the route.</p>
     #   @return [String]
     class UpdateRouteRequest < Struct.new(
+      nil,
       :api_id,
       :api_key_required,
       :authorization_scopes,
@@ -4570,6 +4732,7 @@ module Aws::ApiGatewayV2
     #   <p>The route response key.</p>
     #   @return [String]
     class UpdateRouteResponseRequest < Struct.new(
+      nil,
       :api_id,
       :model_selection_expression,
       :response_models,
@@ -4598,6 +4761,7 @@ module Aws::ApiGatewayV2
     #   <p>Represents the route response key of a route response.</p>
     #   @return [String]
     class UpdateRouteResponseResponse < Struct.new(
+      nil,
       :model_selection_expression,
       :response_models,
       :response_parameters,
@@ -4648,6 +4812,7 @@ module Aws::ApiGatewayV2
     #   <p>The target for the route.</p>
     #   @return [String]
     class UpdateRouteResult < Struct.new(
+      nil,
       :api_gateway_managed,
       :api_key_required,
       :authorization_scopes,
@@ -4698,6 +4863,7 @@ module Aws::ApiGatewayV2
     #   <p>A map that defines the stage variables for a Stage. Variable names can have alphanumeric and underscore characters, and the values must match [A-Za-z0-9-._~:/?#&amp;=,]+.</p>
     #   @return [Hash<String, String>]
     class UpdateStageRequest < Struct.new(
+      nil,
       :access_log_settings,
       :api_id,
       :auto_deploy,
@@ -4756,6 +4922,7 @@ module Aws::ApiGatewayV2
     #   <p>The collection of tags. Each tag element is associated with a given resource.</p>
     #   @return [Hash<String, String>]
     class UpdateStageResponse < Struct.new(
+      nil,
       :access_log_settings,
       :api_gateway_managed,
       :auto_deploy,
@@ -4783,6 +4950,7 @@ module Aws::ApiGatewayV2
     #   <p>The ID of the VPC link.</p>
     #   @return [String]
     class UpdateVpcLinkRequest < Struct.new(
+      nil,
       :name,
       :vpc_link_id,
       keyword_init: true
@@ -4818,6 +4986,7 @@ module Aws::ApiGatewayV2
     #   <p>The version of the VPC link.</p>
     #   @return [String]
     class UpdateVpcLinkResponse < Struct.new(
+      nil,
       :created_date,
       :name,
       :security_group_ids,
@@ -4861,6 +5030,7 @@ module Aws::ApiGatewayV2
     #   <p>The version of the VPC link.</p>
     #   @return [String]
     class VpcLink < Struct.new(
+      nil,
       :created_date,
       :name,
       :security_group_ids,

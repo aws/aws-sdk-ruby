@@ -11,6 +11,7 @@ module Aws::Glue
     #   <p>A message describing the problem.</p>
     #   @return [String]
     class AccessDeniedException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -47,6 +48,7 @@ module Aws::Glue
     #   <p>The name of the crawler to be used with this action.</p>
     #   @return [String]
     class Action < Struct.new(
+      nil,
       :job_name,
       :arguments,
       :timeout,
@@ -72,6 +74,7 @@ module Aws::Glue
     #   <p>Specifies the aggregate functions to be performed on specified fields. </p>
     #   @return [Array<Types::AggregateOperation>]
     class Aggregate < Struct.new(
+      nil,
       :name,
       :inputs,
       :groups,
@@ -91,6 +94,7 @@ module Aws::Glue
     #         stddev_samp, stddev_pop, sum, sumDistinct, var_samp, var_pop</p>
     #   @return [String]
     class AggregateOperation < Struct.new(
+      nil,
       :column,
       :agg_func,
       keyword_init: true
@@ -106,6 +110,7 @@ module Aws::Glue
     #   <p>The value allowed for the property.</p>
     #   @return [String]
     class AllowedValue < Struct.new(
+      nil,
       :description,
       :value,
       keyword_init: true
@@ -118,6 +123,7 @@ module Aws::Glue
     #   <p>A message describing the problem.</p>
     #   @return [String]
     class AlreadyExistsException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -132,6 +138,7 @@ module Aws::Glue
     #   <p>The value for the additional connection option.</p>
     #   @return [String]
     class AmazonRedshiftAdvancedOption < Struct.new(
+      nil,
       :key,
       :value,
       keyword_init: true
@@ -219,6 +226,7 @@ module Aws::Glue
     #   <p>The list of column names used to determine a matching record when doing a MERGE or APPEND with upsert.</p>
     #   @return [Array<Types::Option>]
     class AmazonRedshiftNodeData < Struct.new(
+      nil,
       :access_type,
       :source_type,
       :connection,
@@ -263,6 +271,7 @@ module Aws::Glue
     #   <p>Specifies the data of the Amazon Reshift source node.</p>
     #   @return [Types::AmazonRedshiftNodeData]
     class AmazonRedshiftSource < Struct.new(
+      nil,
       :name,
       :data,
       keyword_init: true
@@ -281,6 +290,7 @@ module Aws::Glue
     #   <p>The nodes that are inputs to the data target.</p>
     #   @return [Array<String>]
     class AmazonRedshiftTarget < Struct.new(
+      nil,
       :name,
       :data,
       :inputs,
@@ -300,6 +310,7 @@ module Aws::Glue
     #   <p>The reason why the annotation failed.</p>
     #   @return [String]
     class AnnotationError < Struct.new(
+      nil,
       :profile_id,
       :statistic_id,
       :failure_reason,
@@ -319,6 +330,7 @@ module Aws::Glue
     #   <p>Specifies the mapping of data property keys in the data source to data property keys in the data target.</p>
     #   @return [Array<Types::Mapping>]
     class ApplyMapping < Struct.new(
+      nil,
       :name,
       :inputs,
       :mapping,
@@ -350,6 +362,7 @@ module Aws::Glue
     #   <p>Specifies the data schema for the custom Athena source.</p>
     #   @return [Array<Types::GlueSchema>]
     class AthenaConnectorSource < Struct.new(
+      nil,
       :name,
       :connection_name,
       :connector_name,
@@ -373,6 +386,7 @@ module Aws::Glue
     #   <p>All columns request for audit.</p>
     #   @return [Boolean]
     class AuditContext < Struct.new(
+      nil,
       :additional_audit_context,
       :requested_columns,
       :all_columns_requested,
@@ -398,6 +412,7 @@ module Aws::Glue
     #   <p>A map of key-value pairs for the custom authentication properties. Each value is a a <code>Property</code> object.</p>
     #   @return [Hash<String, Types::Property>]
     class AuthConfiguration < Struct.new(
+      nil,
       :authentication_type,
       :secret_arn,
       :o_auth2_properties,
@@ -423,6 +438,7 @@ module Aws::Glue
     #   <p>The properties for OAuth2 authentication.</p>
     #   @return [Types::OAuth2Properties]
     class AuthenticationConfiguration < Struct.new(
+      nil,
       :authentication_type,
       :secret_arn,
       :kms_key_arn,
@@ -452,6 +468,7 @@ module Aws::Glue
     #   <p>The credentials used when the authentication type is custom authentication.</p>
     #   @return [Hash<String, String>]
     class AuthenticationConfigurationInput < Struct.new(
+      nil,
       :authentication_type,
       :o_auth2_properties,
       :secret_arn,
@@ -471,6 +488,7 @@ module Aws::Glue
     #   <p>The redirect URI where the user gets redirected to by authorization server when issuing an authorization code. The URI is subsequently used when the authorization code is exchanged for an access token.</p>
     #   @return [String]
     class AuthorizationCodeProperties < Struct.new(
+      nil,
       :authorization_code,
       :redirect_uri,
       keyword_init: true
@@ -487,6 +505,7 @@ module Aws::Glue
     #   <p>The evaluation context for the automatic data quality checks. This defines the scope and parameters for the data quality evaluation.</p>
     #   @return [String]
     class AutoDataQuality < Struct.new(
+      nil,
       :is_enabled,
       :evaluation_context,
       keyword_init: true
@@ -525,6 +544,7 @@ module Aws::Glue
     #   <p>A list of a limited number of partitions in the response.</p>
     #   @return [Array<Types::PartitionValueList>]
     class BackfillError < Struct.new(
+      nil,
       :code,
       :partitions,
       keyword_init: true
@@ -540,6 +560,7 @@ module Aws::Glue
     #   <p>The password to connect to the data source.</p>
     #   @return [String]
     class BasicAuthenticationCredentials < Struct.new(
+      nil,
       :username,
       :password,
       keyword_init: true
@@ -564,6 +585,7 @@ module Aws::Glue
     #   <p>The table that defines the schema of your output data. This table must already exist in the Data Catalog.</p>
     #   @return [String]
     class BasicCatalogTarget < Struct.new(
+      nil,
       :name,
       :inputs,
       :partition_keys,
@@ -590,6 +612,7 @@ module Aws::Glue
     #         the partitions to be created.</p>
     #   @return [Array<Types::PartitionInput>]
     class BatchCreatePartitionRequest < Struct.new(
+      nil,
       :catalog_id,
       :database_name,
       :table_name,
@@ -603,6 +626,7 @@ module Aws::Glue
     #   <p>The errors encountered when trying to create the requested partitions.</p>
     #   @return [Array<Types::PartitionError>]
     class BatchCreatePartitionResponse < Struct.new(
+      nil,
       :errors,
       keyword_init: true
     )
@@ -617,6 +641,7 @@ module Aws::Glue
     #   <p>A list of names of the connections to delete.</p>
     #   @return [Array<String>]
     class BatchDeleteConnectionRequest < Struct.new(
+      nil,
       :catalog_id,
       :connection_name_list,
       keyword_init: true
@@ -633,6 +658,7 @@ module Aws::Glue
     #          deleted to error details.</p>
     #   @return [Hash<String, Types::ErrorDetail>]
     class BatchDeleteConnectionResponse < Struct.new(
+      nil,
       :succeeded,
       :errors,
       keyword_init: true
@@ -656,6 +682,7 @@ module Aws::Glue
     #         the partitions to be deleted.</p>
     #   @return [Array<Types::PartitionValueList>]
     class BatchDeletePartitionRequest < Struct.new(
+      nil,
       :catalog_id,
       :database_name,
       :table_name,
@@ -669,6 +696,7 @@ module Aws::Glue
     #   <p>The errors encountered when trying to delete the requested partitions.</p>
     #   @return [Array<Types::PartitionError>]
     class BatchDeletePartitionResponse < Struct.new(
+      nil,
       :errors,
       keyword_init: true
     )
@@ -690,6 +718,7 @@ module Aws::Glue
     #   <p>The transaction ID at which to delete the table contents.</p>
     #   @return [String]
     class BatchDeleteTableRequest < Struct.new(
+      nil,
       :catalog_id,
       :database_name,
       :tables_to_delete,
@@ -703,6 +732,7 @@ module Aws::Glue
     #   <p>A list of errors encountered in attempting to delete the specified tables.</p>
     #   @return [Array<Types::TableError>]
     class BatchDeleteTableResponse < Struct.new(
+      nil,
       :errors,
       keyword_init: true
     )
@@ -725,6 +755,7 @@ module Aws::Glue
     #   <p>A list of the IDs of versions to be deleted. A <code>VersionId</code> is a string representation of an integer. Each version is incremented by 1.</p>
     #   @return [Array<String>]
     class BatchDeleteTableVersionRequest < Struct.new(
+      nil,
       :catalog_id,
       :database_name,
       :table_name,
@@ -739,6 +770,7 @@ module Aws::Glue
     #         the specified table versions.</p>
     #   @return [Array<Types::TableVersionError>]
     class BatchDeleteTableVersionResponse < Struct.new(
+      nil,
       :errors,
       keyword_init: true
     )
@@ -755,6 +787,7 @@ module Aws::Glue
     #   <p>Specifies whether or not to include the parameters, as a JSON string, for the blueprint in the response.</p>
     #   @return [Boolean]
     class BatchGetBlueprintsRequest < Struct.new(
+      nil,
       :names,
       :include_blueprint,
       :include_parameter_spec,
@@ -770,6 +803,7 @@ module Aws::Glue
     #   <p>Returns a list of <code>BlueprintNames</code> that were not found.</p>
     #   @return [Array<String>]
     class BatchGetBlueprintsResponse < Struct.new(
+      nil,
       :blueprints,
       :missing_blueprints,
       keyword_init: true
@@ -782,6 +816,7 @@ module Aws::Glue
     #           <code>ListCrawlers</code> operation.</p>
     #   @return [Array<String>]
     class BatchGetCrawlersRequest < Struct.new(
+      nil,
       :crawler_names,
       keyword_init: true
     )
@@ -795,6 +830,7 @@ module Aws::Glue
     #   <p>A list of names of crawlers that were not found.</p>
     #   @return [Array<String>]
     class BatchGetCrawlersResponse < Struct.new(
+      nil,
       :crawlers,
       :crawlers_not_found,
       keyword_init: true
@@ -806,6 +842,7 @@ module Aws::Glue
     #   <p>A list of names of the custom patterns that you want to retrieve.</p>
     #   @return [Array<String>]
     class BatchGetCustomEntityTypesRequest < Struct.new(
+      nil,
       :names,
       keyword_init: true
     )
@@ -819,6 +856,7 @@ module Aws::Glue
     #   <p>A list of the names of custom patterns that were not found.</p>
     #   @return [Array<String>]
     class BatchGetCustomEntityTypesResponse < Struct.new(
+      nil,
       :custom_entity_types,
       :custom_entity_types_not_found,
       keyword_init: true
@@ -830,6 +868,7 @@ module Aws::Glue
     #   <p>A list of unique result IDs for the data quality results.</p>
     #   @return [Array<String>]
     class BatchGetDataQualityResultRequest < Struct.new(
+      nil,
       :result_ids,
       keyword_init: true
     )
@@ -843,6 +882,7 @@ module Aws::Glue
     #   <p>A list of result IDs for which results were not found.</p>
     #   @return [Array<String>]
     class BatchGetDataQualityResultResponse < Struct.new(
+      nil,
       :results,
       :results_not_found,
       keyword_init: true
@@ -855,6 +895,7 @@ module Aws::Glue
     #           <code>ListDevEndpoint</code> operation.</p>
     #   @return [Array<String>]
     class BatchGetDevEndpointsRequest < Struct.new(
+      nil,
       :dev_endpoint_names,
       keyword_init: true
     )
@@ -868,6 +909,7 @@ module Aws::Glue
     #   <p>A list of <code>DevEndpoints</code> not found.</p>
     #   @return [Array<String>]
     class BatchGetDevEndpointsResponse < Struct.new(
+      nil,
       :dev_endpoints,
       :dev_endpoints_not_found,
       keyword_init: true
@@ -880,6 +922,7 @@ module Aws::Glue
     #         operation.</p>
     #   @return [Array<String>]
     class BatchGetJobsRequest < Struct.new(
+      nil,
       :job_names,
       keyword_init: true
     )
@@ -893,6 +936,7 @@ module Aws::Glue
     #   <p>A list of names of jobs not found.</p>
     #   @return [Array<String>]
     class BatchGetJobsResponse < Struct.new(
+      nil,
       :jobs,
       :jobs_not_found,
       keyword_init: true
@@ -914,6 +958,7 @@ module Aws::Glue
     #   <p>A list of partition values identifying the partitions to retrieve.</p>
     #   @return [Array<Types::PartitionValueList>]
     class BatchGetPartitionRequest < Struct.new(
+      nil,
       :catalog_id,
       :database_name,
       :table_name,
@@ -931,6 +976,7 @@ module Aws::Glue
     #         returned.</p>
     #   @return [Array<Types::PartitionValueList>]
     class BatchGetPartitionResponse < Struct.new(
+      nil,
       :partitions,
       :unprocessed_keys,
       keyword_init: true
@@ -952,6 +998,7 @@ module Aws::Glue
     #   <p>The type of table optimizer.</p>
     #   @return [String]
     class BatchGetTableOptimizerEntry < Struct.new(
+      nil,
       :catalog_id,
       :database_name,
       :table_name,
@@ -978,6 +1025,7 @@ module Aws::Glue
     #   <p>The type of table optimizer.</p>
     #   @return [String]
     class BatchGetTableOptimizerError < Struct.new(
+      nil,
       :error,
       :catalog_id,
       :database_name,
@@ -992,6 +1040,7 @@ module Aws::Glue
     #   <p>A list of <code>BatchGetTableOptimizerEntry</code> objects specifying the table optimizers to retrieve.</p>
     #   @return [Array<Types::BatchGetTableOptimizerEntry>]
     class BatchGetTableOptimizerRequest < Struct.new(
+      nil,
       :entries,
       keyword_init: true
     )
@@ -1005,6 +1054,7 @@ module Aws::Glue
     #   <p>A list of errors from the operation.</p>
     #   @return [Array<Types::BatchGetTableOptimizerError>]
     class BatchGetTableOptimizerResponse < Struct.new(
+      nil,
       :table_optimizers,
       :failures,
       keyword_init: true
@@ -1016,6 +1066,7 @@ module Aws::Glue
     #   <p>A list of trigger names, which may be the names returned from the <code>ListTriggers</code> operation.</p>
     #   @return [Array<String>]
     class BatchGetTriggersRequest < Struct.new(
+      nil,
       :trigger_names,
       keyword_init: true
     )
@@ -1029,6 +1080,7 @@ module Aws::Glue
     #   <p>A list of names of triggers not found.</p>
     #   @return [Array<String>]
     class BatchGetTriggersResponse < Struct.new(
+      nil,
       :triggers,
       :triggers_not_found,
       keyword_init: true
@@ -1043,6 +1095,7 @@ module Aws::Glue
     #   <p>Specifies whether to include a graph when returning the workflow resource metadata.</p>
     #   @return [Boolean]
     class BatchGetWorkflowsRequest < Struct.new(
+      nil,
       :names,
       :include_graph,
       keyword_init: true
@@ -1057,6 +1110,7 @@ module Aws::Glue
     #   <p>A list of names of workflows not found.</p>
     #   @return [Array<String>]
     class BatchGetWorkflowsResponse < Struct.new(
+      nil,
       :workflows,
       :missing_workflows,
       keyword_init: true
@@ -1072,6 +1126,7 @@ module Aws::Glue
     #   <p>Client Token.</p>
     #   @return [String]
     class BatchPutDataQualityStatisticAnnotationRequest < Struct.new(
+      nil,
       :inclusion_annotations,
       :client_token,
       keyword_init: true
@@ -1083,6 +1138,7 @@ module Aws::Glue
     #   <p>A list of <code>AnnotationError</code>'s.</p>
     #   @return [Array<Types::AnnotationError>]
     class BatchPutDataQualityStatisticAnnotationResponse < Struct.new(
+      nil,
       :failed_inclusion_annotations,
       keyword_init: true
     )
@@ -1101,6 +1157,7 @@ module Aws::Glue
     #   <p>Specifies details about the error that was encountered.</p>
     #   @return [Types::ErrorDetail]
     class BatchStopJobRunError < Struct.new(
+      nil,
       :job_name,
       :job_run_id,
       :error_detail,
@@ -1117,6 +1174,7 @@ module Aws::Glue
     #         definition.</p>
     #   @return [Array<String>]
     class BatchStopJobRunRequest < Struct.new(
+      nil,
       :job_name,
       :job_run_ids,
       keyword_init: true
@@ -1133,6 +1191,7 @@ module Aws::Glue
     #         error.</p>
     #   @return [Array<Types::BatchStopJobRunError>]
     class BatchStopJobRunResponse < Struct.new(
+      nil,
       :successful_submissions,
       :errors,
       keyword_init: true
@@ -1148,6 +1207,7 @@ module Aws::Glue
     #   <p>The <code>JobRunId</code> of the job run that was stopped.</p>
     #   @return [String]
     class BatchStopJobRunSuccessfulSubmission < Struct.new(
+      nil,
       :job_name,
       :job_run_id,
       keyword_init: true
@@ -1169,6 +1229,7 @@ module Aws::Glue
     #   <p>A <code>TableOptimizer</code> object that contains details on the configuration and last run of a table optimizer.</p>
     #   @return [Types::TableOptimizer]
     class BatchTableOptimizer < Struct.new(
+      nil,
       :catalog_id,
       :database_name,
       :table_name,
@@ -1186,6 +1247,7 @@ module Aws::Glue
     #   <p>The details about the batch update partition error.</p>
     #   @return [Types::ErrorDetail]
     class BatchUpdatePartitionFailureEntry < Struct.new(
+      nil,
       :partition_value_list,
       :error_detail,
       keyword_init: true
@@ -1208,6 +1270,7 @@ module Aws::Glue
     #   <p>A list of up to 100 <code>BatchUpdatePartitionRequestEntry</code> objects to update.</p>
     #   @return [Array<Types::BatchUpdatePartitionRequestEntry>]
     class BatchUpdatePartitionRequest < Struct.new(
+      nil,
       :catalog_id,
       :database_name,
       :table_name,
@@ -1225,6 +1288,7 @@ module Aws::Glue
     #   <p>The structure used to update a partition.</p>
     #   @return [Types::PartitionInput]
     class BatchUpdatePartitionRequestEntry < Struct.new(
+      nil,
       :partition_value_list,
       :partition_input,
       keyword_init: true
@@ -1236,6 +1300,7 @@ module Aws::Glue
     #   <p>The errors encountered when trying to update the requested partitions. A list of <code>BatchUpdatePartitionFailureEntry</code> objects.</p>
     #   @return [Array<Types::BatchUpdatePartitionFailureEntry>]
     class BatchUpdatePartitionResponse < Struct.new(
+      nil,
       :errors,
       keyword_init: true
     )
@@ -1253,6 +1318,7 @@ module Aws::Glue
     #   <p>The number of null values in the column.</p>
     #   @return [Integer]
     class BinaryColumnStatisticsData < Struct.new(
+      nil,
       :maximum_length,
       :average_length,
       :number_of_nulls,
@@ -1314,6 +1380,7 @@ module Aws::Glue
     #   <p>When there are multiple versions of a blueprint and the latest version has some errors, this attribute indicates the last successful blueprint definition that is available with the service.</p>
     #   @return [Types::LastActiveDefinition]
     class Blueprint < Struct.new(
+      nil,
       :name,
       :description,
       :created_on,
@@ -1337,6 +1404,7 @@ module Aws::Glue
     #   <p>The run ID for this blueprint.</p>
     #   @return [String]
     class BlueprintDetails < Struct.new(
+      nil,
       :blueprint_name,
       :run_id,
       keyword_init: true
@@ -1390,6 +1458,7 @@ module Aws::Glue
     #   <p>The role ARN. This role will be assumed by the Glue service and will be used to create the workflow and other entities of a workflow.</p>
     #   @return [String]
     class BlueprintRun < Struct.new(
+      nil,
       :blueprint_name,
       :run_id,
       :workflow_name,
@@ -1416,6 +1485,7 @@ module Aws::Glue
     #   <p>The number of null values in the column.</p>
     #   @return [Integer]
     class BooleanColumnStatisticsData < Struct.new(
+      nil,
       :number_of_trues,
       :number_of_falses,
       :number_of_nulls,
@@ -1435,6 +1505,7 @@ module Aws::Glue
     #   <p>The unique run identifier associated with this run.</p>
     #   @return [String]
     class CancelDataQualityRuleRecommendationRunRequest < Struct.new(
+      nil,
       :run_id,
       keyword_init: true
     )
@@ -1442,6 +1513,7 @@ module Aws::Glue
     end
 
     class CancelDataQualityRuleRecommendationRunResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1451,6 +1523,7 @@ module Aws::Glue
     #   <p>The unique run identifier associated with this run.</p>
     #   @return [String]
     class CancelDataQualityRulesetEvaluationRunRequest < Struct.new(
+      nil,
       :run_id,
       keyword_init: true
     )
@@ -1458,6 +1531,7 @@ module Aws::Glue
     end
 
     class CancelDataQualityRulesetEvaluationRunResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1470,6 +1544,7 @@ module Aws::Glue
     #   <p>A unique identifier for the task run.</p>
     #   @return [String]
     class CancelMLTaskRunRequest < Struct.new(
+      nil,
       :transform_id,
       :task_run_id,
       keyword_init: true
@@ -1487,6 +1562,7 @@ module Aws::Glue
     #   <p>The status for this run.</p>
     #   @return [String]
     class CancelMLTaskRunResponse < Struct.new(
+      nil,
       :transform_id,
       :task_run_id,
       :status,
@@ -1505,6 +1581,7 @@ module Aws::Glue
     #   <p>The origin of the request to cancel the statement.</p>
     #   @return [String]
     class CancelStatementRequest < Struct.new(
+      nil,
       :session_id,
       :id,
       :request_origin,
@@ -1514,6 +1591,7 @@ module Aws::Glue
     end
 
     class CancelStatementResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1530,6 +1608,7 @@ module Aws::Glue
     #   <p>A list of supported compute environments.</p>
     #   @return [Array<String>]
     class Capabilities < Struct.new(
+      nil,
       :supported_authentication_types,
       :supported_data_operations,
       :supported_compute_environments,
@@ -1581,6 +1660,7 @@ module Aws::Glue
     #       </p>
     #   @return [String]
     class Catalog < Struct.new(
+      nil,
       :catalog_id,
       :name,
       :resource_arn,
@@ -1616,6 +1696,7 @@ module Aws::Glue
     #   <p>Specifies the data schema for the Delta Lake source.</p>
     #   @return [Array<Types::GlueSchema>]
     class CatalogDeltaSource < Struct.new(
+      nil,
       :name,
       :database,
       :table,
@@ -1634,6 +1715,7 @@ module Aws::Glue
     #   <p>The name of the table in question.</p>
     #   @return [String]
     class CatalogEntry < Struct.new(
+      nil,
       :database_name,
       :table_name,
       keyword_init: true
@@ -1658,6 +1740,7 @@ module Aws::Glue
     #   <p>Specifies the data schema for the Hudi source.</p>
     #   @return [Array<Types::GlueSchema>]
     class CatalogHudiSource < Struct.new(
+      nil,
       :name,
       :database,
       :table,
@@ -1685,6 +1768,7 @@ module Aws::Glue
     #   <p>Specifies the data schema for the Iceberg source.</p>
     #   @return [Array<Types::GlueSchema>]
     class CatalogIcebergSource < Struct.new(
+      nil,
       :name,
       :database,
       :table,
@@ -1707,6 +1791,7 @@ module Aws::Glue
     #   <p>The name of the person who initiated the migration.</p>
     #   @return [String]
     class CatalogImportStatus < Struct.new(
+      nil,
       :import_completed,
       :import_time,
       :imported_by,
@@ -1748,6 +1833,7 @@ module Aws::Glue
     #       </p>
     #   @return [String]
     class CatalogInput < Struct.new(
+      nil,
       :description,
       :federated_catalog,
       :parameters,
@@ -1784,6 +1870,7 @@ module Aws::Glue
     #   <p>Specifies options related to data preview for viewing a sample of your data.</p>
     #   @return [Types::StreamingDataPreviewOptions]
     class CatalogKafkaSource < Struct.new(
+      nil,
       :name,
       :window_size,
       :detect_schema,
@@ -1819,6 +1906,7 @@ module Aws::Glue
     #   <p>Additional options for data preview.</p>
     #   @return [Types::StreamingDataPreviewOptions]
     class CatalogKinesisSource < Struct.new(
+      nil,
       :name,
       :window_size,
       :detect_schema,
@@ -1843,6 +1931,7 @@ module Aws::Glue
     #   <p>Additional key-value properties for the catalog, such as column statistics optimizations.</p>
     #   @return [Hash<String, String>]
     class CatalogProperties < Struct.new(
+      nil,
       :data_lake_access_properties,
       :iceberg_optimization_properties,
       :custom_properties,
@@ -1863,6 +1952,7 @@ module Aws::Glue
     #   <p>Additional key-value properties for the catalog, such as column statistics optimizations.</p>
     #   @return [Hash<String, String>]
     class CatalogPropertiesOutput < Struct.new(
+      nil,
       :data_lake_access_properties,
       :iceberg_optimization_properties,
       :custom_properties,
@@ -1879,6 +1969,7 @@ module Aws::Glue
     #   <p>The update behavior when the crawler finds a changed schema.</p>
     #   @return [String]
     class CatalogSchemaChangePolicy < Struct.new(
+      nil,
       :enable_update_catalog,
       :update_behavior,
       keyword_init: true
@@ -1905,6 +1996,7 @@ module Aws::Glue
     #   <p>Specifies the data schema for the catalog source.</p>
     #   @return [Array<Types::GlueSchema>]
     class CatalogSource < Struct.new(
+      nil,
       :name,
       :database,
       :table,
@@ -1932,6 +2024,7 @@ module Aws::Glue
     #   <p>A valid Amazon dead-letter SQS ARN. For example, <code>arn:aws:sqs:region:account:deadLetterQueue</code>.</p>
     #   @return [String]
     class CatalogTarget < Struct.new(
+      nil,
       :database_name,
       :tables,
       :connection_name,
@@ -1949,6 +2042,7 @@ module Aws::Glue
     #   <p>The definition of the schema that has to be validated.</p>
     #   @return [String]
     class CheckSchemaVersionValidityInput < Struct.new(
+      nil,
       :data_format,
       :schema_definition,
       keyword_init: true
@@ -1963,6 +2057,7 @@ module Aws::Glue
     #   <p>A validation failure error message.</p>
     #   @return [String]
     class CheckSchemaVersionValidityResponse < Struct.new(
+      nil,
       :valid,
       :error,
       keyword_init: true
@@ -1996,6 +2091,7 @@ module Aws::Glue
     #   <p>A classifier for comma-separated values (CSV).</p>
     #   @return [Types::CsvClassifier]
     class Classifier < Struct.new(
+      nil,
       :grok_classifier,
       :xml_classifier,
       :json_classifier,
@@ -2013,6 +2109,7 @@ module Aws::Glue
     #   <p>The Amazon Resource Name (ARN) of the KMS key to be used to encrypt the data.</p>
     #   @return [String]
     class CloudWatchEncryption < Struct.new(
+      nil,
       :cloud_watch_encryption_mode,
       :kms_key_arn,
       keyword_init: true
@@ -2261,6 +2358,7 @@ module Aws::Glue
     #   <p>Specifies a DynamoDB ELT connector source for extracting data from DynamoDB tables.</p>
     #   @return [Types::DynamoDBELTConnectorSource]
     class CodeGenConfigurationNode < Struct.new(
+      nil,
       :athena_connector_source,
       :jdbc_connector_source,
       :spark_connector_source,
@@ -2356,6 +2454,7 @@ module Aws::Glue
     #   <p>The target of the edge.</p>
     #   @return [String]
     class CodeGenEdge < Struct.new(
+      nil,
       :source,
       :target,
       :target_parameter,
@@ -2378,6 +2477,7 @@ module Aws::Glue
     #   <p>The line number of the node.</p>
     #   @return [Integer]
     class CodeGenNode < Struct.new(
+      nil,
       :id,
       :node_type,
       :args,
@@ -2403,6 +2503,7 @@ module Aws::Glue
     #   <p>True if the value is used as a parameter.</p>
     #   @return [Boolean]
     class CodeGenNodeArg < Struct.new(
+      nil,
       :name,
       :value,
       :param,
@@ -2430,6 +2531,7 @@ module Aws::Glue
     #   <p>These key-value pairs define properties associated with the column.</p>
     #   @return [Hash<String, String>]
     class Column < Struct.new(
+      nil,
       :name,
       :type,
       :comment,
@@ -2447,6 +2549,7 @@ module Aws::Glue
     #   <p>An error message with the reason for the failure of an operation.</p>
     #   @return [Types::ErrorDetail]
     class ColumnError < Struct.new(
+      nil,
       :column_name,
       :error,
       keyword_init: true
@@ -2463,6 +2566,7 @@ module Aws::Glue
     #   <p>The column importance score for the column, as a decimal.</p>
     #   @return [Float]
     class ColumnImportance < Struct.new(
+      nil,
       :column_name,
       :importance,
       keyword_init: true
@@ -2478,6 +2582,7 @@ module Aws::Glue
     #   <p>A string containing the row-level filter expression.</p>
     #   @return [String]
     class ColumnRowFilter < Struct.new(
+      nil,
       :column_name,
       :row_filter_expression,
       keyword_init: true
@@ -2499,6 +2604,7 @@ module Aws::Glue
     #   <p>A <code>ColumnStatisticData</code> object that contains the statistics data values.</p>
     #   @return [Types::ColumnStatisticsData]
     class ColumnStatistics < Struct.new(
+      nil,
       :column_name,
       :column_type,
       :analyzed_time,
@@ -2538,6 +2644,7 @@ module Aws::Glue
     #   <p>Binary column statistics data.</p>
     #   @return [Types::BinaryColumnStatisticsData]
     class ColumnStatisticsData < Struct.new(
+      nil,
       :type,
       :boolean_column_statistics_data,
       :date_column_statistics_data,
@@ -2559,6 +2666,7 @@ module Aws::Glue
     #   <p>An error message with the reason for the failure of an operation.</p>
     #   @return [Types::ErrorDetail]
     class ColumnStatisticsError < Struct.new(
+      nil,
       :column_statistics,
       :error,
       keyword_init: true
@@ -2571,6 +2679,7 @@ module Aws::Glue
     #   <p>A message describing the problem.</p>
     #   @return [String]
     class ColumnStatisticsTaskNotRunningException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -2636,6 +2745,7 @@ module Aws::Glue
     #   <p>The calculated DPU usage in seconds for all autoscaled workers.</p>
     #   @return [Float]
     class ColumnStatisticsTaskRun < Struct.new(
+      nil,
       :customer_id,
       :column_statistics_task_run_id,
       :database_name,
@@ -2672,6 +2782,7 @@ module Aws::Glue
     #   <p>A message describing the problem.</p>
     #   @return [String]
     class ColumnStatisticsTaskRunningException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -2713,6 +2824,7 @@ module Aws::Glue
     #   <p>The last <code>ExecutionAttempt</code> for the column statistics task run.</p>
     #   @return [Types::ExecutionAttempt]
     class ColumnStatisticsTaskSettings < Struct.new(
+      nil,
       :database_name,
       :table_name,
       :schedule,
@@ -2739,6 +2851,7 @@ module Aws::Glue
     #   <p>A message describing the problem.</p>
     #   @return [String]
     class ColumnStatisticsTaskStoppingException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -2751,6 +2864,7 @@ module Aws::Glue
     #   <p>The configuration for an Iceberg compaction optimizer.</p>
     #   @return [Types::IcebergCompactionConfiguration]
     class CompactionConfiguration < Struct.new(
+      nil,
       :iceberg_configuration,
       keyword_init: true
     )
@@ -2762,6 +2876,7 @@ module Aws::Glue
     #   <p>A structure containing the Iceberg compaction metrics for the optimizer run.</p>
     #   @return [Types::IcebergCompactionMetrics]
     class CompactionMetrics < Struct.new(
+      nil,
       :iceberg_metrics,
       keyword_init: true
     )
@@ -2797,6 +2912,7 @@ module Aws::Glue
     #   <p>Indicates whether <code>PhysicalConnectionProperties</code> are required for the compute environment.</p>
     #   @return [Boolean]
     class ComputeEnvironmentConfiguration < Struct.new(
+      nil,
       :name,
       :description,
       :compute_environment,
@@ -2821,6 +2937,7 @@ module Aws::Glue
     #   <p>A message describing the problem.</p>
     #   @return [String]
     class ConcurrentModificationException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -2832,6 +2949,7 @@ module Aws::Glue
     #   <p>A message describing the problem.</p>
     #   @return [String]
     class ConcurrentRunsExceededException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -2856,6 +2974,7 @@ module Aws::Glue
     #   <p>The state of the crawler to which this condition applies.</p>
     #   @return [String]
     class Condition < Struct.new(
+      nil,
       :logical_operator,
       :job_name,
       :state,
@@ -2871,6 +2990,7 @@ module Aws::Glue
     #   <p>A message describing the problem.</p>
     #   @return [String]
     class ConditionCheckFailureException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -2888,6 +3008,7 @@ module Aws::Glue
     #   <p>The target column of the condition expressions.</p>
     #   @return [String]
     class ConditionExpression < Struct.new(
+      nil,
       :condition,
       :value,
       :target_column,
@@ -2910,6 +3031,7 @@ module Aws::Glue
     #   <p>A maximum allowed value for the parameter.</p>
     #   @return [String]
     class ConfigurationObject < Struct.new(
+      nil,
       :default_value,
       :allowed_values,
       :min_value,
@@ -2924,6 +3046,7 @@ module Aws::Glue
     #   <p>A message describing the problem.</p>
     #   @return [String]
     class ConflictException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -2947,6 +3070,7 @@ module Aws::Glue
     #   <p>The number of matches in the data that the transform didn't find, in the confusion matrix for your transform.</p>
     #   @return [Integer]
     class ConfusionMatrix < Struct.new(
+      nil,
       :num_true_positives,
       :num_false_positives,
       :num_true_negatives,
@@ -3211,6 +3335,7 @@ module Aws::Glue
     #   <p>A list of compute environments compatible with the connection.</p>
     #   @return [Array<String>]
     class Connection < Struct.new(
+      nil,
       :name,
       :description,
       :connection_type,
@@ -3452,6 +3577,7 @@ module Aws::Glue
     #   <p>The compute environments that the specified connection properties are validated against.</p>
     #   @return [Array<String>]
     class ConnectionInput < Struct.new(
+      nil,
       :name,
       :description,
       :connection_type,
@@ -3495,6 +3621,7 @@ module Aws::Glue
     #            <p>You can set the decrypt permission to enable or restrict access on the password key according to your security requirements.</p>
     #   @return [String]
     class ConnectionPasswordEncryption < Struct.new(
+      nil,
       :return_connection_password_encrypted,
       :aws_kms_key_id,
       keyword_init: true
@@ -3535,6 +3662,7 @@ module Aws::Glue
     #         implementations of the same general connection type.</p>
     #   @return [Array<Types::ConnectionTypeVariant>]
     class ConnectionTypeBrief < Struct.new(
+      nil,
       :connection_type,
       :display_name,
       :vendor,
@@ -3564,6 +3692,7 @@ module Aws::Glue
     #   <p>The URL of the logo associated with a connection type variant.</p>
     #   @return [String]
     class ConnectionTypeVariant < Struct.new(
+      nil,
       :connection_type_variant_name,
       :display_name,
       :description,
@@ -3578,6 +3707,7 @@ module Aws::Glue
     #   <p>A list of connections used by the job.</p>
     #   @return [Array<String>]
     class ConnectionsList < Struct.new(
+      nil,
       :connections,
       keyword_init: true
     )
@@ -3639,6 +3769,7 @@ module Aws::Glue
     #   <p>Specifies the data schema for this source.</p>
     #   @return [Array<Types::GlueSchema>]
     class ConnectorDataSource < Struct.new(
+      nil,
       :name,
       :connection_type,
       :data,
@@ -3703,6 +3834,7 @@ module Aws::Glue
     #   <p>The nodes that are inputs to the data target.</p>
     #   @return [Array<String>]
     class ConnectorDataTarget < Struct.new(
+      nil,
       :name,
       :connection_type,
       :data,
@@ -3732,6 +3864,7 @@ module Aws::Glue
     #   <p>The log stream associated with the crawl.</p>
     #   @return [String]
     class Crawl < Struct.new(
+      nil,
       :state,
       :started_on,
       :completed_on,
@@ -3813,6 +3946,7 @@ module Aws::Glue
     #   <p>Specifies whether the crawler should use Lake Formation credentials for the crawler instead of the IAM role credentials.</p>
     #   @return [Types::LakeFormationConfiguration]
     class Crawler < Struct.new(
+      nil,
       :name,
       :role,
       :targets,
@@ -3876,6 +4010,7 @@ module Aws::Glue
     #   <p>The number of data processing units (DPU) used in hours for the crawl.</p>
     #   @return [Float]
     class CrawlerHistory < Struct.new(
+      nil,
       :crawl_id,
       :state,
       :start_time,
@@ -3922,6 +4057,7 @@ module Aws::Glue
     #   <p>The number of tables deleted by this crawler.</p>
     #   @return [Integer]
     class CrawlerMetrics < Struct.new(
+      nil,
       :crawler_name,
       :time_left_seconds,
       :still_estimating,
@@ -3951,6 +4087,7 @@ module Aws::Glue
     #   <p>A list of crawls represented by the crawl node.</p>
     #   @return [Array<Types::Crawl>]
     class CrawlerNodeDetails < Struct.new(
+      nil,
       :crawls,
       keyword_init: true
     )
@@ -3962,6 +4099,7 @@ module Aws::Glue
     #   <p>A message describing the problem.</p>
     #   @return [String]
     class CrawlerNotRunningException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -3973,6 +4111,7 @@ module Aws::Glue
     #   <p>A message describing the problem.</p>
     #   @return [String]
     class CrawlerRunningException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -3984,6 +4123,7 @@ module Aws::Glue
     #   <p>A message describing the problem.</p>
     #   @return [String]
     class CrawlerStoppingException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -4016,6 +4156,7 @@ module Aws::Glue
     #   <p>Specifies Apache Hudi data store targets.</p>
     #   @return [Array<Types::HudiTarget>]
     class CrawlerTargets < Struct.new(
+      nil,
       :s3_targets,
       :jdbc_targets,
       :mongo_db_targets,
@@ -4084,6 +4225,7 @@ module Aws::Glue
     #   <p>The value provided for comparison on the crawl field. </p>
     #   @return [String]
     class CrawlsFilter < Struct.new(
+      nil,
       :field_name,
       :filter_operator,
       :field_value,
@@ -4105,6 +4247,7 @@ module Aws::Glue
     #   <p>The tags to be applied to this blueprint.</p>
     #   @return [Hash<String, String>]
     class CreateBlueprintRequest < Struct.new(
+      nil,
       :name,
       :description,
       :blueprint_location,
@@ -4118,6 +4261,7 @@ module Aws::Glue
     #   <p>Returns the name of the blueprint that was registered.</p>
     #   @return [String]
     class CreateBlueprintResponse < Struct.new(
+      nil,
       :name,
       keyword_init: true
     )
@@ -4134,6 +4278,7 @@ module Aws::Glue
     #   <p>A map array of key-value pairs, not more than 50 pairs. Each key is a UTF-8 string, not less than 1 or more than 128 bytes long. Each value is a UTF-8 string, not more than 256 bytes long. The tags you assign to the catalog.</p>
     #   @return [Hash<String, String>]
     class CreateCatalogRequest < Struct.new(
+      nil,
       :name,
       :catalog_input,
       :tags,
@@ -4143,6 +4288,7 @@ module Aws::Glue
     end
 
     class CreateCatalogResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -4165,6 +4311,7 @@ module Aws::Glue
     #         to create.</p>
     #   @return [Types::CreateCsvClassifierRequest]
     class CreateClassifierRequest < Struct.new(
+      nil,
       :grok_classifier,
       :xml_classifier,
       :json_classifier,
@@ -4175,6 +4322,7 @@ module Aws::Glue
     end
 
     class CreateClassifierResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -4208,6 +4356,7 @@ module Aws::Glue
     #   <p>A map of tags.</p>
     #   @return [Hash<String, String>]
     class CreateColumnStatisticsTaskSettingsRequest < Struct.new(
+      nil,
       :database_name,
       :table_name,
       :role,
@@ -4223,6 +4372,7 @@ module Aws::Glue
     end
 
     class CreateColumnStatisticsTaskSettingsResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -4240,6 +4390,7 @@ module Aws::Glue
     #   <p>The tags you assign to the connection.</p>
     #   @return [Hash<String, String>]
     class CreateConnectionRequest < Struct.new(
+      nil,
       :catalog_id,
       :connection_input,
       :tags,
@@ -4252,6 +4403,7 @@ module Aws::Glue
     #   <p>The status of the connection creation request. The request can take some time for certain authentication types, for example when creating an OAuth connection with token exchange over VPC.</p>
     #   @return [String]
     class CreateConnectionResponse < Struct.new(
+      nil,
       :create_connection_status,
       keyword_init: true
     )
@@ -4315,6 +4467,7 @@ module Aws::Glue
     #               guide.</p>
     #   @return [Hash<String, String>]
     class CreateCrawlerRequest < Struct.new(
+      nil,
       :name,
       :role,
       :database_name,
@@ -4336,6 +4489,7 @@ module Aws::Glue
     end
 
     class CreateCrawlerResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -4373,6 +4527,7 @@ module Aws::Glue
     #   <p>Sets the SerDe for processing CSV in the classifier, which will be applied in the Data Catalog. Valid values are <code>OpenCSVSerDe</code>, <code>LazySimpleSerDe</code>, and <code>None</code>. You can specify the <code>None</code> value when you want the crawler to do the detection.</p>
     #   @return [String]
     class CreateCsvClassifierRequest < Struct.new(
+      nil,
       :name,
       :delimiter,
       :quote_symbol,
@@ -4402,6 +4557,7 @@ module Aws::Glue
     #   <p>A list of tags applied to the custom entity type.</p>
     #   @return [Hash<String, String>]
     class CreateCustomEntityTypeRequest < Struct.new(
+      nil,
       :name,
       :regex_string,
       :context_words,
@@ -4415,6 +4571,7 @@ module Aws::Glue
     #   <p>The name of the custom pattern you created.</p>
     #   @return [String]
     class CreateCustomEntityTypeResponse < Struct.new(
+      nil,
       :name,
       keyword_init: true
     )
@@ -4444,6 +4601,7 @@ module Aws::Glue
     #   <p>Used for idempotency and is recommended to be set to a random ID (such as a UUID) to avoid creating or starting multiple instances of the same resource.</p>
     #   @return [String]
     class CreateDataQualityRulesetRequest < Struct.new(
+      nil,
       :name,
       :description,
       :ruleset,
@@ -4460,6 +4618,7 @@ module Aws::Glue
     #   <p>A unique name for the data quality ruleset.</p>
     #   @return [String]
     class CreateDataQualityRulesetResponse < Struct.new(
+      nil,
       :name,
       keyword_init: true
     )
@@ -4477,6 +4636,7 @@ module Aws::Glue
     #   <p>The tags you assign to the database.</p>
     #   @return [Hash<String, String>]
     class CreateDatabaseRequest < Struct.new(
+      nil,
       :catalog_id,
       :database_input,
       :tags,
@@ -4486,6 +4646,7 @@ module Aws::Glue
     end
 
     class CreateDatabaseResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -4575,6 +4736,7 @@ module Aws::Glue
     #   <p>A map of arguments used to configure the <code>DevEndpoint</code>.</p>
     #   @return [Hash<String, String>]
     class CreateDevEndpointRequest < Struct.new(
+      nil,
       :endpoint_name,
       :role_arn,
       :security_group_ids,
@@ -4667,6 +4829,7 @@ module Aws::Glue
     #            <p>You can specify a version of Python support for development endpoints by using the <code>Arguments</code> parameter in the <code>CreateDevEndpoint</code> or <code>UpdateDevEndpoint</code> APIs. If no arguments are provided, the version defaults to Python 2.</p>
     #   @return [Hash<String, String>]
     class CreateDevEndpointResponse < Struct.new(
+      nil,
       :endpoint_name,
       :status,
       :security_group_ids,
@@ -4705,6 +4868,7 @@ module Aws::Glue
     #   <p>A list of Identity Center scopes that define the permissions and access levels for the Glue configuration.</p>
     #   @return [Array<String>]
     class CreateGlueIdentityCenterConfigurationRequest < Struct.new(
+      nil,
       :instance_arn,
       :scopes,
       keyword_init: true
@@ -4717,6 +4881,7 @@ module Aws::Glue
     #   <p>The Amazon Resource Name (ARN) of the Identity Center application that was created for the Glue configuration.</p>
     #   @return [String]
     class CreateGlueIdentityCenterConfigurationResponse < Struct.new(
+      nil,
       :application_arn,
       keyword_init: true
     )
@@ -4739,6 +4904,7 @@ module Aws::Glue
     #   <p>Optional custom grok patterns used by this classifier.</p>
     #   @return [String]
     class CreateGrokClassifierRequest < Struct.new(
+      nil,
       :classification,
       :name,
       :grok_pattern,
@@ -4766,6 +4932,7 @@ module Aws::Glue
     #   <p>Key-value pairs of additional table properties and configuration settings for the Iceberg table.</p>
     #   @return [Hash<String, String>]
     class CreateIcebergTableInput < Struct.new(
+      nil,
       :location,
       :schema,
       :partition_spec,
@@ -4804,6 +4971,7 @@ module Aws::Glue
     #   <p>The configuration settings.</p>
     #   @return [Types::IntegrationConfig]
     class CreateIntegrationRequest < Struct.new(
+      nil,
       :integration_name,
       :source_arn,
       :target_arn,
@@ -4828,6 +4996,7 @@ module Aws::Glue
     #   <p>The resource properties associated with the integration target.</p>
     #   @return [Types::TargetProcessingProperties]
     class CreateIntegrationResourcePropertyRequest < Struct.new(
+      nil,
       :resource_arn,
       :source_processing_properties,
       :target_processing_properties,
@@ -4846,6 +5015,7 @@ module Aws::Glue
     #   <p>The resource properties associated with the integration target.</p>
     #   @return [Types::TargetProcessingProperties]
     class CreateIntegrationResourcePropertyResponse < Struct.new(
+      nil,
       :resource_arn,
       :source_processing_properties,
       :target_processing_properties,
@@ -4918,6 +5088,7 @@ module Aws::Glue
     #   <p>The configuration settings.</p>
     #   @return [Types::IntegrationConfig]
     class CreateIntegrationResponse < Struct.new(
+      nil,
       :source_arn,
       :target_arn,
       :integration_name,
@@ -4952,6 +5123,7 @@ module Aws::Glue
     #   <p>A structure for the target table configuration.</p>
     #   @return [Types::TargetTableConfig]
     class CreateIntegrationTablePropertiesRequest < Struct.new(
+      nil,
       :resource_arn,
       :table_name,
       :source_table_config,
@@ -4962,6 +5134,7 @@ module Aws::Glue
     end
 
     class CreateIntegrationTablePropertiesResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -5141,6 +5314,7 @@ module Aws::Glue
     #            <p>Glue will restart the job within 3 hours of the specified maintenance window. For instance, if you set up the maintenance window for Monday at 10:00AM GMT, your jobs will be restarted between 10:00AM GMT to 1:00PM GMT.</p>
     #   @return [String]
     class CreateJobRequest < Struct.new(
+      nil,
       :name,
       :job_mode,
       :job_run_queuing_enabled,
@@ -5175,6 +5349,7 @@ module Aws::Glue
     #   <p>The unique name that was provided for this job definition.</p>
     #   @return [String]
     class CreateJobResponse < Struct.new(
+      nil,
       :name,
       keyword_init: true
     )
@@ -5190,6 +5365,7 @@ module Aws::Glue
     #         Glue supports a subset of JsonPath, as described in <a href="https://docs.aws.amazon.com/glue/latest/dg/custom-classifier.html#custom-classifier-json">Writing JsonPath Custom Classifiers</a>.</p>
     #   @return [String]
     class CreateJsonClassifierRequest < Struct.new(
+      nil,
       :name,
       :json_path,
       keyword_init: true
@@ -5298,6 +5474,7 @@ module Aws::Glue
     #   <p>The encryption-at-rest settings of the transform that apply to accessing user data. Machine learning transforms can access user data encrypted in Amazon S3 using KMS.</p>
     #   @return [Types::TransformEncryption]
     class CreateMLTransformRequest < Struct.new(
+      nil,
       :name,
       :description,
       :input_record_tables,
@@ -5320,6 +5497,7 @@ module Aws::Glue
     #   <p>A unique identifier that is generated for the transform.</p>
     #   @return [String]
     class CreateMLTransformResponse < Struct.new(
+      nil,
       :transform_id,
       keyword_init: true
     )
@@ -5339,6 +5517,7 @@ module Aws::Glue
     #   <p>Specifies a <code>PartitionIndex</code> structure to create a partition index in an existing table.</p>
     #   @return [Types::PartitionIndex]
     class CreatePartitionIndexRequest < Struct.new(
+      nil,
       :catalog_id,
       :database_name,
       :table_name,
@@ -5349,6 +5528,7 @@ module Aws::Glue
     end
 
     class CreatePartitionIndexResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -5369,6 +5549,7 @@ module Aws::Glue
     #         to be created.</p>
     #   @return [Types::PartitionInput]
     class CreatePartitionRequest < Struct.new(
+      nil,
       :catalog_id,
       :database_name,
       :table_name,
@@ -5379,6 +5560,7 @@ module Aws::Glue
     end
 
     class CreatePartitionResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -5394,6 +5576,7 @@ module Aws::Glue
     #   <p>Amazon Web Services tags that contain a key value pair and may be searched by console, command line, or API.</p>
     #   @return [Hash<String, String>]
     class CreateRegistryInput < Struct.new(
+      nil,
       :registry_name,
       :description,
       :tags,
@@ -5415,6 +5598,7 @@ module Aws::Glue
     #   <p>The tags for the registry.</p>
     #   @return [Hash<String, String>]
     class CreateRegistryResponse < Struct.new(
+      nil,
       :registry_arn,
       :registry_name,
       :description,
@@ -5480,6 +5664,7 @@ module Aws::Glue
     #   <p>The schema definition using the <code>DataFormat</code> setting for <code>SchemaName</code>.</p>
     #   @return [String]
     class CreateSchemaInput < Struct.new(
+      nil,
       :registry_id,
       :schema_name,
       :data_format,
@@ -5535,6 +5720,7 @@ module Aws::Glue
     #   <p>The status of the first schema version created.</p>
     #   @return [String]
     class CreateSchemaResponse < Struct.new(
+      nil,
       :registry_name,
       :registry_arn,
       :schema_name,
@@ -5564,6 +5750,7 @@ module Aws::Glue
     #   <p>The programming language of the resulting code from the DAG.</p>
     #   @return [String]
     class CreateScriptRequest < Struct.new(
+      nil,
       :dag_nodes,
       :dag_edges,
       :language,
@@ -5579,6 +5766,7 @@ module Aws::Glue
     #   <p>The Scala code generated from the DAG.</p>
     #   @return [String]
     class CreateScriptResponse < Struct.new(
+      nil,
       :python_script,
       :scala_code,
       keyword_init: true
@@ -5593,6 +5781,7 @@ module Aws::Glue
     #   <p>The encryption configuration for the new security configuration.</p>
     #   @return [Types::EncryptionConfiguration]
     class CreateSecurityConfigurationRequest < Struct.new(
+      nil,
       :name,
       :encryption_configuration,
       keyword_init: true
@@ -5607,6 +5796,7 @@ module Aws::Glue
     #   <p>The time at which the new security configuration was created.</p>
     #   @return [Time]
     class CreateSecurityConfigurationResponse < Struct.new(
+      nil,
       :name,
       :created_timestamp,
       keyword_init: true
@@ -5689,6 +5879,7 @@ module Aws::Glue
     #   <p>The origin of the request. </p>
     #   @return [String]
     class CreateSessionRequest < Struct.new(
+      nil,
       :id,
       :description,
       :role,
@@ -5713,6 +5904,7 @@ module Aws::Glue
     #   <p>Returns the session object in the response.</p>
     #   @return [Types::Session]
     class CreateSessionResponse < Struct.new(
+      nil,
       :session,
       keyword_init: true
     )
@@ -5735,6 +5927,7 @@ module Aws::Glue
     #   <p>A <code>TableOptimizerConfiguration</code> object representing the configuration of a table optimizer.</p>
     #   @return [Types::TableOptimizerConfiguration]
     class CreateTableOptimizerRequest < Struct.new(
+      nil,
       :catalog_id,
       :database_name,
       :table_name,
@@ -5746,6 +5939,7 @@ module Aws::Glue
     end
 
     class CreateTableOptimizerResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -5777,6 +5971,7 @@ module Aws::Glue
     #   <p>Specifies an <code>OpenTableFormatInput</code> structure when creating an open format table.</p>
     #   @return [Types::OpenTableFormatInput]
     class CreateTableRequest < Struct.new(
+      nil,
       :catalog_id,
       :database_name,
       :name,
@@ -5790,6 +5985,7 @@ module Aws::Glue
     end
 
     class CreateTableResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -5834,6 +6030,7 @@ module Aws::Glue
     #         before EventBridge event trigger fires.</p>
     #   @return [Types::EventBatchingCondition]
     class CreateTriggerRequest < Struct.new(
+      nil,
       :name,
       :workflow_name,
       :type,
@@ -5853,6 +6050,7 @@ module Aws::Glue
     #   <p>The name of the trigger.</p>
     #   @return [String]
     class CreateTriggerResponse < Struct.new(
+      nil,
       :name,
       keyword_init: true
     )
@@ -5872,6 +6070,7 @@ module Aws::Glue
     #   <p>A list of tags applied to the usage profile.</p>
     #   @return [Hash<String, String>]
     class CreateUsageProfileRequest < Struct.new(
+      nil,
       :name,
       :description,
       :configuration,
@@ -5885,6 +6084,7 @@ module Aws::Glue
     #   <p>The name of the usage profile that was created.</p>
     #   @return [String]
     class CreateUsageProfileResponse < Struct.new(
+      nil,
       :name,
       keyword_init: true
     )
@@ -5903,6 +6103,7 @@ module Aws::Glue
     #         to create in the Data Catalog.</p>
     #   @return [Types::UserDefinedFunctionInput]
     class CreateUserDefinedFunctionRequest < Struct.new(
+      nil,
       :catalog_id,
       :database_name,
       :function_input,
@@ -5912,6 +6113,7 @@ module Aws::Glue
     end
 
     class CreateUserDefinedFunctionResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -5934,6 +6136,7 @@ module Aws::Glue
     #   <p>You can use this parameter to prevent unwanted multiple updates to data, to control costs, or in some cases, to prevent exceeding the maximum number of concurrent runs of any of the component jobs. If you leave this parameter blank, there is no limit to the number of concurrent workflow runs.</p>
     #   @return [Integer]
     class CreateWorkflowRequest < Struct.new(
+      nil,
       :name,
       :description,
       :default_run_properties,
@@ -5948,6 +6151,7 @@ module Aws::Glue
     #   <p>The name of the workflow which was provided as part of the request.</p>
     #   @return [String]
     class CreateWorkflowResponse < Struct.new(
+      nil,
       :name,
       keyword_init: true
     )
@@ -5969,6 +6173,7 @@ module Aws::Glue
     #           <code><row item_a="A" item_b="B" /></code> is not).</p>
     #   @return [String]
     class CreateXMLClassifierRequest < Struct.new(
+      nil,
       :classification,
       :name,
       :row_tag,
@@ -6020,6 +6225,7 @@ module Aws::Glue
     #   <p>Sets the SerDe for processing CSV in the classifier, which will be applied in the Data Catalog. Valid values are <code>OpenCSVSerDe</code>, <code>LazySimpleSerDe</code>, and <code>None</code>. You can specify the <code>None</code> value when you want the crawler to do the detection.</p>
     #   @return [String]
     class CsvClassifier < Struct.new(
+      nil,
       :name,
       :creation_time,
       :last_updated,
@@ -6060,6 +6266,7 @@ module Aws::Glue
     #   <p>Specifies the data schema for the custom code transform.</p>
     #   @return [Array<Types::GlueSchema>]
     class CustomCode < Struct.new(
+      nil,
       :name,
       :inputs,
       :code,
@@ -6082,6 +6289,7 @@ module Aws::Glue
     #            <p>If no context words are passed only a regular expression is checked.</p>
     #   @return [Array<String>]
     class CustomEntityType < Struct.new(
+      nil,
       :name,
       :regex_string,
       :context_words,
@@ -6098,6 +6306,7 @@ module Aws::Glue
     #   <p>Specifies whether to unnest DynamoDB JSON format. When set to <code>true</code>, nested JSON structures in DynamoDB items are flattened.</p>
     #   @return [Boolean]
     class DDBELTCatalogAdditionalOptions < Struct.new(
+      nil,
       :dynamodb_export,
       :dynamodb_unnest_ddb_json,
       keyword_init: true
@@ -6141,6 +6350,7 @@ module Aws::Glue
     #         This role must have the necessary permissions to read from the DynamoDB table and write to the intermediate S3 bucket. </p>
     #   @return [String]
     class DDBELTConnectionOptions < Struct.new(
+      nil,
       :dynamodb_export,
       :dynamodb_unnest_ddb_json,
       :dynamodb_table_arn,
@@ -6172,6 +6382,7 @@ module Aws::Glue
     #   <p>Enable publishing for your data quality results.</p>
     #   @return [Boolean]
     class DQResultsPublishingOptions < Struct.new(
+      nil,
       :evaluation_context,
       :results_s3_prefix,
       :cloud_watch_metrics_enabled,
@@ -6186,6 +6397,7 @@ module Aws::Glue
     #   <p>When to stop job if your data quality evaluation fails. Options are Immediate or AfterDataLoad.</p>
     #   @return [String]
     class DQStopJobOnFailureOptions < Struct.new(
+      nil,
       :stop_job_on_failure_timing,
       keyword_init: true
     )
@@ -6204,6 +6416,7 @@ module Aws::Glue
     #         encryption.</p>
     #   @return [Types::ConnectionPasswordEncryption]
     class DataCatalogEncryptionSettings < Struct.new(
+      nil,
       :encryption_at_rest,
       :connection_password_encryption,
       keyword_init: true
@@ -6225,6 +6438,7 @@ module Aws::Glue
     #   <p>Specifies a federated catalog type for the native catalog resource. The currently supported type is <code>aws:redshift</code>.</p>
     #   @return [String]
     class DataLakeAccessProperties < Struct.new(
+      nil,
       :data_lake_access,
       :data_transfer_role,
       :kms_key,
@@ -6265,6 +6479,7 @@ module Aws::Glue
     #   <p>Specifies a federated catalog type for the native catalog resource. The currently supported type is <code>aws:redshift</code>.</p>
     #   @return [String]
     class DataLakeAccessPropertiesOutput < Struct.new(
+      nil,
       :data_lake_access,
       :data_transfer_role,
       :kms_key,
@@ -6288,6 +6503,7 @@ module Aws::Glue
     #   <p>An identifier for the Lake Formation principal.</p>
     #   @return [String]
     class DataLakePrincipal < Struct.new(
+      nil,
       :data_lake_principal_identifier,
       keyword_init: true
     )
@@ -6314,6 +6530,7 @@ module Aws::Glue
     #   <p>The total number of data quality rules that failed their evaluation criteria.</p>
     #   @return [Float]
     class DataQualityAggregatedMetrics < Struct.new(
+      nil,
       :total_rows_processed,
       :total_rows_passed,
       :total_rows_failed,
@@ -6339,6 +6556,7 @@ module Aws::Glue
     #   <p>A map of metrics associated with the evaluation of the analyzer.</p>
     #   @return [Hash<String, Float>]
     class DataQualityAnalyzerResult < Struct.new(
+      nil,
       :name,
       :description,
       :evaluation_message,
@@ -6357,6 +6575,7 @@ module Aws::Glue
     #   <p>The Amazon Resource Name (ARN) of the KMS key to be used to encrypt the data.</p>
     #   @return [String]
     class DataQualityEncryption < Struct.new(
+      nil,
       :data_quality_encryption_mode,
       :kms_key_arn,
       keyword_init: true
@@ -6375,6 +6594,7 @@ module Aws::Glue
     #   <p>Set the evaluation method for composite rules in the ruleset to ROW/COLUMN</p>
     #   @return [String]
     class DataQualityEvaluationRunAdditionalRunOptions < Struct.new(
+      nil,
       :cloud_watch_metrics_enabled,
       :results_s3_prefix,
       :composite_rule_evaluation_method,
@@ -6415,6 +6635,7 @@ module Aws::Glue
     #               before running the Data Quality Operation.</p>
     #   @return [String]
     class DataQualityGlueTable < Struct.new(
+      nil,
       :database_name,
       :table_name,
       :catalog_id,
@@ -6440,6 +6661,7 @@ module Aws::Glue
     #   <p>The upper limit of the data quality metric value according to the analysis of historical data.</p>
     #   @return [Float]
     class DataQualityMetricValues < Struct.new(
+      nil,
       :actual_value,
       :expected_value,
       :lower_limit,
@@ -6457,6 +6679,7 @@ module Aws::Glue
     #   <p>An object of type <code>MetricBasedObservation</code> representing the observation that is based on evaluated data quality metrics.</p>
     #   @return [Types::MetricBasedObservation]
     class DataQualityObservation < Struct.new(
+      nil,
       :description,
       :metric_based_observation,
       keyword_init: true
@@ -6511,6 +6734,7 @@ module Aws::Glue
     #   <p> A summary of <code>DataQualityAggregatedMetrics</code> objects showing the total counts of processed rows and rules, including their pass/fail statistics based on row-level results. </p>
     #   @return [Types::DataQualityAggregatedMetrics]
     class DataQualityResult < Struct.new(
+      nil,
       :result_id,
       :profile_id,
       :score,
@@ -6548,6 +6772,7 @@ module Aws::Glue
     #   <p>The time that the run started for this data quality result.</p>
     #   @return [Time]
     class DataQualityResultDescription < Struct.new(
+      nil,
       :result_id,
       :data_source,
       :job_name,
@@ -6575,6 +6800,7 @@ module Aws::Glue
     #   <p>Filter results by runs that started before this time.</p>
     #   @return [Time]
     class DataQualityResultFilterCriteria < Struct.new(
+      nil,
       :data_source,
       :job_name,
       :job_run_id,
@@ -6599,6 +6825,7 @@ module Aws::Glue
     #   <p>The data source (Glue table) associated with the recommendation run.</p>
     #   @return [Types::DataSource]
     class DataQualityRuleRecommendationRunDescription < Struct.new(
+      nil,
       :run_id,
       :status,
       :started_on,
@@ -6619,6 +6846,7 @@ module Aws::Glue
     #   <p>Filter based on time for results started after provided time.</p>
     #   @return [Time]
     class DataQualityRuleRecommendationRunFilter < Struct.new(
+      nil,
       :data_source,
       :started_before,
       :started_after,
@@ -6650,6 +6878,7 @@ module Aws::Glue
     #   <p>A map containing metrics associated with the evaluation of the rule based on row-level results. </p>
     #   @return [Hash<String, Float>]
     class DataQualityRuleResult < Struct.new(
+      nil,
       :name,
       :description,
       :evaluation_message,
@@ -6676,6 +6905,7 @@ module Aws::Glue
     #   <p>The data source (an Glue table) associated with the run.</p>
     #   @return [Types::DataSource]
     class DataQualityRulesetEvaluationRunDescription < Struct.new(
+      nil,
       :run_id,
       :status,
       :started_on,
@@ -6696,6 +6926,7 @@ module Aws::Glue
     #   <p>Filter results by runs that started after this time.</p>
     #   @return [Time]
     class DataQualityRulesetEvaluationRunFilter < Struct.new(
+      nil,
       :data_source,
       :started_before,
       :started_after,
@@ -6727,6 +6958,7 @@ module Aws::Glue
     #   <p>The name and database name of the target table.</p>
     #   @return [Types::DataQualityTargetTable]
     class DataQualityRulesetFilterCriteria < Struct.new(
+      nil,
       :name,
       :description,
       :created_before,
@@ -6762,6 +6994,7 @@ module Aws::Glue
     #   <p>The number of rules in the ruleset.</p>
     #   @return [Integer]
     class DataQualityRulesetListDetails < Struct.new(
+      nil,
       :name,
       :description,
       :created_on,
@@ -6785,6 +7018,7 @@ module Aws::Glue
     #   <p>The catalog id where the Glue table exists.</p>
     #   @return [String]
     class DataQualityTargetTable < Struct.new(
+      nil,
       :table_name,
       :database_name,
       :catalog_id,
@@ -6801,6 +7035,7 @@ module Aws::Glue
     #   <p>An Glue table for Data Quality Operations.</p>
     #   @return [Types::DataQualityGlueTable]
     class DataSource < Struct.new(
+      nil,
       :glue_table,
       :data_quality_glue_table,
       keyword_init: true
@@ -6840,6 +7075,7 @@ module Aws::Glue
     #   <p>A <code>FederatedDatabase</code> structure that references an entity outside the Glue Data Catalog.</p>
     #   @return [Types::FederatedDatabase]
     class Database < Struct.new(
+      nil,
       :name,
       :description,
       :location_uri,
@@ -6865,6 +7101,7 @@ module Aws::Glue
     #   <p>Region of the target database.</p>
     #   @return [String]
     class DatabaseIdentifier < Struct.new(
+      nil,
       :catalog_id,
       :database_name,
       :region,
@@ -6899,6 +7136,7 @@ module Aws::Glue
     #   <p>A <code>FederatedDatabase</code> structure that references an entity outside the Glue Data Catalog.</p>
     #   @return [Types::FederatedDatabase]
     class DatabaseInput < Struct.new(
+      nil,
       :name,
       :description,
       :location_uri,
@@ -6922,6 +7160,7 @@ module Aws::Glue
     #   <p>The inclusion annotation value to apply to the statistic.</p>
     #   @return [String]
     class DatapointInclusionAnnotation < Struct.new(
+      nil,
       :profile_id,
       :statistic_id,
       :inclusion_annotation,
@@ -6938,6 +7177,7 @@ module Aws::Glue
     #   <p>A label assigned to the datatype.</p>
     #   @return [String]
     class Datatype < Struct.new(
+      nil,
       :id,
       :label,
       keyword_init: true
@@ -6959,6 +7199,7 @@ module Aws::Glue
     #   <p>The number of distinct values in a column.</p>
     #   @return [Integer]
     class DateColumnStatisticsData < Struct.new(
+      nil,
       :minimum_value,
       :maximum_value,
       :number_of_nulls,
@@ -6988,6 +7229,7 @@ module Aws::Glue
     #   <p>The number of distinct values in a column.</p>
     #   @return [Integer]
     class DecimalColumnStatisticsData < Struct.new(
+      nil,
       :minimum_value,
       :maximum_value,
       :number_of_nulls,
@@ -7012,6 +7254,7 @@ module Aws::Glue
     #         unscaled value.</p>
     #   @return [Integer]
     class DecimalNumber < Struct.new(
+      nil,
       :unscaled_value,
       :scale,
       keyword_init: true
@@ -7028,6 +7271,7 @@ module Aws::Glue
     #   <p>The name of the blueprint to delete.</p>
     #   @return [String]
     class DeleteBlueprintRequest < Struct.new(
+      nil,
       :name,
       keyword_init: true
     )
@@ -7038,6 +7282,7 @@ module Aws::Glue
     #   <p>Returns the name of the blueprint that was deleted.</p>
     #   @return [String]
     class DeleteBlueprintResponse < Struct.new(
+      nil,
       :name,
       keyword_init: true
     )
@@ -7048,6 +7293,7 @@ module Aws::Glue
     #   <p>The ID of the catalog.</p>
     #   @return [String]
     class DeleteCatalogRequest < Struct.new(
+      nil,
       :catalog_id,
       keyword_init: true
     )
@@ -7055,6 +7301,7 @@ module Aws::Glue
     end
 
     class DeleteCatalogResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -7064,6 +7311,7 @@ module Aws::Glue
     #   <p>Name of the classifier to remove.</p>
     #   @return [String]
     class DeleteClassifierRequest < Struct.new(
+      nil,
       :name,
       keyword_init: true
     )
@@ -7071,6 +7319,7 @@ module Aws::Glue
     end
 
     class DeleteClassifierResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -7093,6 +7342,7 @@ module Aws::Glue
     #   <p>Name of the column.</p>
     #   @return [String]
     class DeleteColumnStatisticsForPartitionRequest < Struct.new(
+      nil,
       :catalog_id,
       :database_name,
       :table_name,
@@ -7104,6 +7354,7 @@ module Aws::Glue
     end
 
     class DeleteColumnStatisticsForPartitionResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -7123,6 +7374,7 @@ module Aws::Glue
     #   <p>The name of the column.</p>
     #   @return [String]
     class DeleteColumnStatisticsForTableRequest < Struct.new(
+      nil,
       :catalog_id,
       :database_name,
       :table_name,
@@ -7133,6 +7385,7 @@ module Aws::Glue
     end
 
     class DeleteColumnStatisticsForTableResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -7145,6 +7398,7 @@ module Aws::Glue
     #   <p>The name of the table for which to delete column statistics.</p>
     #   @return [String]
     class DeleteColumnStatisticsTaskSettingsRequest < Struct.new(
+      nil,
       :database_name,
       :table_name,
       keyword_init: true
@@ -7153,6 +7407,7 @@ module Aws::Glue
     end
 
     class DeleteColumnStatisticsTaskSettingsResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -7166,6 +7421,7 @@ module Aws::Glue
     #   <p>The name of the connection to delete.</p>
     #   @return [String]
     class DeleteConnectionRequest < Struct.new(
+      nil,
       :catalog_id,
       :connection_name,
       keyword_init: true
@@ -7174,6 +7430,7 @@ module Aws::Glue
     end
 
     class DeleteConnectionResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -7183,6 +7440,7 @@ module Aws::Glue
     #   <p>The name of the crawler to remove.</p>
     #   @return [String]
     class DeleteCrawlerRequest < Struct.new(
+      nil,
       :name,
       keyword_init: true
     )
@@ -7190,6 +7448,7 @@ module Aws::Glue
     end
 
     class DeleteCrawlerResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -7199,6 +7458,7 @@ module Aws::Glue
     #   <p>The name of the custom pattern that you want to delete.</p>
     #   @return [String]
     class DeleteCustomEntityTypeRequest < Struct.new(
+      nil,
       :name,
       keyword_init: true
     )
@@ -7209,6 +7469,7 @@ module Aws::Glue
     #   <p>The name of the custom pattern you deleted.</p>
     #   @return [String]
     class DeleteCustomEntityTypeResponse < Struct.new(
+      nil,
       :name,
       keyword_init: true
     )
@@ -7219,6 +7480,7 @@ module Aws::Glue
     #   <p>A name for the data quality ruleset.</p>
     #   @return [String]
     class DeleteDataQualityRulesetRequest < Struct.new(
+      nil,
       :name,
       keyword_init: true
     )
@@ -7226,6 +7488,7 @@ module Aws::Glue
     end
 
     class DeleteDataQualityRulesetResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -7240,6 +7503,7 @@ module Aws::Glue
     #         lowercase.</p>
     #   @return [String]
     class DeleteDatabaseRequest < Struct.new(
+      nil,
       :catalog_id,
       :name,
       keyword_init: true
@@ -7248,6 +7512,7 @@ module Aws::Glue
     end
 
     class DeleteDatabaseResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -7257,6 +7522,7 @@ module Aws::Glue
     #   <p>The name of the <code>DevEndpoint</code>.</p>
     #   @return [String]
     class DeleteDevEndpointRequest < Struct.new(
+      nil,
       :endpoint_name,
       keyword_init: true
     )
@@ -7264,6 +7530,7 @@ module Aws::Glue
     end
 
     class DeleteDevEndpointResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -7271,6 +7538,7 @@ module Aws::Glue
 
     # <p>Request to delete the existing Glue Identity Center configuration.</p>
     class DeleteGlueIdentityCenterConfigurationRequest < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -7278,6 +7546,7 @@ module Aws::Glue
 
     # <p>Response from deleting the Glue Identity Center configuration.</p>
     class DeleteGlueIdentityCenterConfigurationResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -7287,6 +7556,7 @@ module Aws::Glue
     #   <p>The Amazon Resource Name (ARN) for the integration.</p>
     #   @return [String]
     class DeleteIntegrationRequest < Struct.new(
+      nil,
       :integration_identifier,
       keyword_init: true
     )
@@ -7354,6 +7624,7 @@ module Aws::Glue
     #   <p>Selects source tables for the integration using Maxwell filter syntax.</p>
     #   @return [String]
     class DeleteIntegrationResponse < Struct.new(
+      nil,
       :source_arn,
       :target_arn,
       :integration_name,
@@ -7378,6 +7649,7 @@ module Aws::Glue
     #   <p>The name of the table to be replicated.</p>
     #   @return [String]
     class DeleteIntegrationTablePropertiesRequest < Struct.new(
+      nil,
       :resource_arn,
       :table_name,
       keyword_init: true
@@ -7386,6 +7658,7 @@ module Aws::Glue
     end
 
     class DeleteIntegrationTablePropertiesResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -7395,6 +7668,7 @@ module Aws::Glue
     #   <p>The name of the job definition to delete.</p>
     #   @return [String]
     class DeleteJobRequest < Struct.new(
+      nil,
       :job_name,
       keyword_init: true
     )
@@ -7405,6 +7679,7 @@ module Aws::Glue
     #   <p>The name of the job definition that was deleted.</p>
     #   @return [String]
     class DeleteJobResponse < Struct.new(
+      nil,
       :job_name,
       keyword_init: true
     )
@@ -7415,6 +7690,7 @@ module Aws::Glue
     #   <p>The unique identifier of the transform to delete.</p>
     #   @return [String]
     class DeleteMLTransformRequest < Struct.new(
+      nil,
       :transform_id,
       keyword_init: true
     )
@@ -7425,6 +7701,7 @@ module Aws::Glue
     #   <p>The unique identifier of the transform that was deleted.</p>
     #   @return [String]
     class DeleteMLTransformResponse < Struct.new(
+      nil,
       :transform_id,
       keyword_init: true
     )
@@ -7444,6 +7721,7 @@ module Aws::Glue
     #   <p>The name of the partition index to be deleted.</p>
     #   @return [String]
     class DeletePartitionIndexRequest < Struct.new(
+      nil,
       :catalog_id,
       :database_name,
       :table_name,
@@ -7454,6 +7732,7 @@ module Aws::Glue
     end
 
     class DeletePartitionIndexResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -7474,6 +7753,7 @@ module Aws::Glue
     #   <p>The values that define the partition.</p>
     #   @return [Array<String>]
     class DeletePartitionRequest < Struct.new(
+      nil,
       :catalog_id,
       :database_name,
       :table_name,
@@ -7484,6 +7764,7 @@ module Aws::Glue
     end
 
     class DeletePartitionResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -7493,6 +7774,7 @@ module Aws::Glue
     #   <p>This is a wrapper structure that may contain the registry name and Amazon Resource Name (ARN).</p>
     #   @return [Types::RegistryId]
     class DeleteRegistryInput < Struct.new(
+      nil,
       :registry_id,
       keyword_init: true
     )
@@ -7509,6 +7791,7 @@ module Aws::Glue
     #   <p>The status of the registry. A successful operation will return the <code>Deleting</code> status.</p>
     #   @return [String]
     class DeleteRegistryResponse < Struct.new(
+      nil,
       :registry_name,
       :registry_arn,
       :status,
@@ -7524,6 +7807,7 @@ module Aws::Glue
     #   <p>The ARN of the Glue resource for the resource policy to be deleted.</p>
     #   @return [String]
     class DeleteResourcePolicyRequest < Struct.new(
+      nil,
       :policy_hash_condition,
       :resource_arn,
       keyword_init: true
@@ -7532,6 +7816,7 @@ module Aws::Glue
     end
 
     class DeleteResourcePolicyResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -7541,6 +7826,7 @@ module Aws::Glue
     #   <p>This is a wrapper structure that may contain the schema name and Amazon Resource Name (ARN).</p>
     #   @return [Types::SchemaId]
     class DeleteSchemaInput < Struct.new(
+      nil,
       :schema_id,
       keyword_init: true
     )
@@ -7557,6 +7843,7 @@ module Aws::Glue
     #   <p>The status of the schema.</p>
     #   @return [String]
     class DeleteSchemaResponse < Struct.new(
+      nil,
       :schema_arn,
       :schema_name,
       :status,
@@ -7580,6 +7867,7 @@ module Aws::Glue
     #            </ul>
     #   @return [String]
     class DeleteSchemaVersionsInput < Struct.new(
+      nil,
       :schema_id,
       :versions,
       keyword_init: true
@@ -7591,6 +7879,7 @@ module Aws::Glue
     #   <p>A list of <code>SchemaVersionErrorItem</code> objects, each containing an error and schema version.</p>
     #   @return [Array<Types::SchemaVersionErrorItem>]
     class DeleteSchemaVersionsResponse < Struct.new(
+      nil,
       :schema_version_errors,
       keyword_init: true
     )
@@ -7601,6 +7890,7 @@ module Aws::Glue
     #   <p>The name of the security configuration to delete.</p>
     #   @return [String]
     class DeleteSecurityConfigurationRequest < Struct.new(
+      nil,
       :name,
       keyword_init: true
     )
@@ -7608,6 +7898,7 @@ module Aws::Glue
     end
 
     class DeleteSecurityConfigurationResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -7620,6 +7911,7 @@ module Aws::Glue
     #   <p>The name of the origin of the delete session request.</p>
     #   @return [String]
     class DeleteSessionRequest < Struct.new(
+      nil,
       :id,
       :request_origin,
       keyword_init: true
@@ -7631,6 +7923,7 @@ module Aws::Glue
     #   <p>Returns the ID of the deleted session.</p>
     #   @return [String]
     class DeleteSessionResponse < Struct.new(
+      nil,
       :id,
       keyword_init: true
     )
@@ -7650,6 +7943,7 @@ module Aws::Glue
     #   <p>The type of table optimizer.</p>
     #   @return [String]
     class DeleteTableOptimizerRequest < Struct.new(
+      nil,
       :catalog_id,
       :database_name,
       :table_name,
@@ -7660,6 +7954,7 @@ module Aws::Glue
     end
 
     class DeleteTableOptimizerResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -7681,6 +7976,7 @@ module Aws::Glue
     #   <p>The transaction ID at which to delete the table contents.</p>
     #   @return [String]
     class DeleteTableRequest < Struct.new(
+      nil,
       :catalog_id,
       :database_name,
       :name,
@@ -7691,6 +7987,7 @@ module Aws::Glue
     end
 
     class DeleteTableResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -7712,6 +8009,7 @@ module Aws::Glue
     #   <p>The ID of the table version to be deleted. A <code>VersionID</code> is a string representation of an integer. Each version is incremented by 1.</p>
     #   @return [String]
     class DeleteTableVersionRequest < Struct.new(
+      nil,
       :catalog_id,
       :database_name,
       :table_name,
@@ -7722,6 +8020,7 @@ module Aws::Glue
     end
 
     class DeleteTableVersionResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -7731,6 +8030,7 @@ module Aws::Glue
     #   <p>The name of the trigger to delete.</p>
     #   @return [String]
     class DeleteTriggerRequest < Struct.new(
+      nil,
       :name,
       keyword_init: true
     )
@@ -7741,6 +8041,7 @@ module Aws::Glue
     #   <p>The name of the trigger that was deleted.</p>
     #   @return [String]
     class DeleteTriggerResponse < Struct.new(
+      nil,
       :name,
       keyword_init: true
     )
@@ -7751,6 +8052,7 @@ module Aws::Glue
     #   <p>The name of the usage profile to delete.</p>
     #   @return [String]
     class DeleteUsageProfileRequest < Struct.new(
+      nil,
       :name,
       keyword_init: true
     )
@@ -7758,6 +8060,7 @@ module Aws::Glue
     end
 
     class DeleteUsageProfileResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -7774,6 +8077,7 @@ module Aws::Glue
     #   <p>The name of the function definition to be deleted.</p>
     #   @return [String]
     class DeleteUserDefinedFunctionRequest < Struct.new(
+      nil,
       :catalog_id,
       :database_name,
       :function_name,
@@ -7783,6 +8087,7 @@ module Aws::Glue
     end
 
     class DeleteUserDefinedFunctionResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -7792,6 +8097,7 @@ module Aws::Glue
     #   <p>Name of the workflow to be deleted.</p>
     #   @return [String]
     class DeleteWorkflowRequest < Struct.new(
+      nil,
       :name,
       keyword_init: true
     )
@@ -7802,6 +8108,7 @@ module Aws::Glue
     #   <p>Name of the workflow specified in input.</p>
     #   @return [String]
     class DeleteWorkflowResponse < Struct.new(
+      nil,
       :name,
       keyword_init: true
     )
@@ -7822,6 +8129,7 @@ module Aws::Glue
     #   <p>Specifies whether the crawler will create native tables, to allow integration with query engines that support querying of the Delta transaction log directly.</p>
     #   @return [Boolean]
     class DeltaTarget < Struct.new(
+      nil,
       :delta_tables,
       :connection_name,
       :write_manifest,
@@ -7835,6 +8143,7 @@ module Aws::Glue
     #   <p>The name of the connection type to be described.</p>
     #   @return [String]
     class DescribeConnectionTypeRequest < Struct.new(
+      nil,
       :connection_type,
       keyword_init: true
     )
@@ -7875,6 +8184,7 @@ module Aws::Glue
     #   <p>Connection properties specific to the Spark compute environment.</p>
     #   @return [Hash<String, Types::Property>]
     class DescribeConnectionTypeResponse < Struct.new(
+      nil,
       :connection_type,
       :description,
       :capabilities,
@@ -7907,6 +8217,7 @@ module Aws::Glue
     #   <p>The version of the API used for the data store.</p>
     #   @return [String]
     class DescribeEntityRequest < Struct.new(
+      nil,
       :connection_name,
       :catalog_id,
       :entity_name,
@@ -7924,6 +8235,7 @@ module Aws::Glue
     #   <p>A continuation token, present if the current segment is not the last.</p>
     #   @return [String]
     class DescribeEntityResponse < Struct.new(
+      nil,
       :fields,
       :next_token,
       keyword_init: true
@@ -7944,6 +8256,7 @@ module Aws::Glue
     #   <p>The Amazon Resource Name (ARN) of the target resource in the integration.</p>
     #   @return [String]
     class DescribeInboundIntegrationsRequest < Struct.new(
+      nil,
       :integration_arn,
       :marker,
       :max_records,
@@ -7960,6 +8273,7 @@ module Aws::Glue
     #   <p>A value that indicates the starting point for the next set of response records in a subsequent request.</p>
     #   @return [String]
     class DescribeInboundIntegrationsResponse < Struct.new(
+      nil,
       :inbound_integrations,
       :marker,
       keyword_init: true
@@ -7980,6 +8294,7 @@ module Aws::Glue
     #   <p>A list of key and values, to filter down the results. Supported keys are "Status", "IntegrationName", and "SourceArn". IntegrationName is limited to only one value.</p>
     #   @return [Array<Types::IntegrationFilter>]
     class DescribeIntegrationsRequest < Struct.new(
+      nil,
       :integration_identifier,
       :marker,
       :max_records,
@@ -7996,6 +8311,7 @@ module Aws::Glue
     #   <p>A value that indicates the starting point for the next set of response records in a subsequent request.</p>
     #   @return [String]
     class DescribeIntegrationsResponse < Struct.new(
+      nil,
       :integrations,
       :marker,
       keyword_init: true
@@ -8135,6 +8451,7 @@ module Aws::Glue
     #            <p>You can specify a version of Python support for development endpoints by using the <code>Arguments</code> parameter in the <code>CreateDevEndpoint</code> or <code>UpdateDevEndpoint</code> APIs. If no arguments are provided, the version defaults to Python 2.</p>
     #   @return [Hash<String, String>]
     class DevEndpoint < Struct.new(
+      nil,
       :endpoint_name,
       :role_arn,
       :security_group_ids,
@@ -8190,6 +8507,7 @@ module Aws::Glue
     #            </note>
     #   @return [String]
     class DevEndpointCustomLibraries < Struct.new(
+      nil,
       :extra_python_libs_s3_path,
       :extra_jars_s3_path,
       keyword_init: true
@@ -8220,6 +8538,7 @@ module Aws::Glue
     #   <p>Specifies the data schema for the direct JDBC source.</p>
     #   @return [Array<Types::GlueSchema>]
     class DirectJDBCSource < Struct.new(
+      nil,
       :name,
       :database,
       :table,
@@ -8249,6 +8568,7 @@ module Aws::Glue
     #   <p>Specifies options related to data preview for viewing a sample of your data.</p>
     #   @return [Types::StreamingDataPreviewOptions]
     class DirectKafkaSource < Struct.new(
+      nil,
       :name,
       :streaming_options,
       :window_size,
@@ -8276,6 +8596,7 @@ module Aws::Glue
     #   <p>Additional options for data preview.</p>
     #   @return [Types::StreamingDataPreviewOptions]
     class DirectKinesisSource < Struct.new(
+      nil,
       :name,
       :window_size,
       :detect_schema,
@@ -8300,6 +8621,7 @@ module Aws::Glue
     #   <p>Specifies the database that the schema change policy applies to.</p>
     #   @return [String]
     class DirectSchemaChangePolicy < Struct.new(
+      nil,
       :enable_update_catalog,
       :update_behavior,
       :table,
@@ -8323,6 +8645,7 @@ module Aws::Glue
     #   <p>The number of distinct values in a column.</p>
     #   @return [Integer]
     class DoubleColumnStatisticsData < Struct.new(
+      nil,
       :minimum_value,
       :maximum_value,
       :number_of_nulls,
@@ -8351,6 +8674,7 @@ module Aws::Glue
     #   <p>The name of the columns to be merged or removed if repeating.</p>
     #   @return [Array<Array<String>>]
     class DropDuplicates < Struct.new(
+      nil,
       :name,
       :inputs,
       :columns,
@@ -8370,6 +8694,7 @@ module Aws::Glue
     #   <p>A JSON path to a variable in the data structure.</p>
     #   @return [Array<Array<String>>]
     class DropFields < Struct.new(
+      nil,
       :name,
       :inputs,
       :paths,
@@ -8393,6 +8718,7 @@ module Aws::Glue
     #            <p>The <code>DropNullFields</code> transform removes custom null values only if both the value of the null placeholder and the datatype match the data.</p>
     #   @return [Array<Types::NullValueField>]
     class DropNullFields < Struct.new(
+      nil,
       :name,
       :inputs,
       :null_check_box_list,
@@ -8428,6 +8754,7 @@ module Aws::Glue
     #   <p>Specifies the data schema for the dynamic transform.</p>
     #   @return [Array<Types::GlueSchema>]
     class DynamicTransform < Struct.new(
+      nil,
       :name,
       :transform_name,
       :inputs,
@@ -8459,6 +8786,7 @@ module Aws::Glue
     #   <p>Specifies additional connection options for the DynamoDB data source.</p>
     #   @return [Types::DDBELTCatalogAdditionalOptions]
     class DynamoDBCatalogSource < Struct.new(
+      nil,
       :name,
       :database,
       :table,
@@ -8480,6 +8808,7 @@ module Aws::Glue
     #   <p>Specifies the data schema for the DynamoDB ELT connector source.</p>
     #   @return [Array<Types::GlueSchema>]
     class DynamoDBELTConnectorSource < Struct.new(
+      nil,
       :name,
       :connection_options,
       :output_schemas,
@@ -8501,6 +8830,7 @@ module Aws::Glue
     #            <p>The valid values are null or a value between 0.1 to 1.5. A null value is used when user does not provide a value, and defaults to 0.5 of the configured Read Capacity Unit (for provisioned tables), or 0.25 of the max configured Read Capacity Unit (for tables using on-demand mode).</p>
     #   @return [Float]
     class DynamoDBTarget < Struct.new(
+      nil,
       :path,
       :scan_all,
       :scan_rate,
@@ -8518,6 +8848,7 @@ module Aws::Glue
     #   <p>The unique of the node within the workflow where the edge ends.</p>
     #   @return [String]
     class Edge < Struct.new(
+      nil,
       :source_id,
       :destination_id,
       keyword_init: true
@@ -8536,6 +8867,7 @@ module Aws::Glue
     #   <p>The role that Glue assumes to encrypt and decrypt the Data Catalog objects on the caller's behalf.</p>
     #   @return [String]
     class EncryptionAtRest < Struct.new(
+      nil,
       :catalog_encryption_mode,
       :sse_aws_kms_key_id,
       :catalog_encryption_service_role,
@@ -8558,6 +8890,7 @@ module Aws::Glue
     #   <p>The encryption configuration for Glue Data Quality assets.</p>
     #   @return [Types::DataQualityEncryption]
     class EncryptionConfiguration < Struct.new(
+      nil,
       :s3_encryption,
       :cloud_watch_encryption,
       :job_bookmarks_encryption,
@@ -8587,6 +8920,7 @@ module Aws::Glue
     #   <p>An optional map of keys which may be returned for an entity by a connector.</p>
     #   @return [Hash<String, String>]
     class Entity < Struct.new(
+      nil,
       :entity_name,
       :label,
       :is_parent_entity,
@@ -8606,6 +8940,7 @@ module Aws::Glue
     #   <p>Indicates whether or not the exception relates to a federated source.</p>
     #   @return [Boolean]
     class EntityNotFoundException < Struct.new(
+      nil,
       :message,
       :from_federation_source,
       keyword_init: true
@@ -8621,6 +8956,7 @@ module Aws::Glue
     #   <p>A message describing the error.</p>
     #   @return [String]
     class ErrorDetail < Struct.new(
+      nil,
       :error_code,
       :error_message,
       keyword_init: true
@@ -8636,6 +8972,7 @@ module Aws::Glue
     #   <p>The error message for an error.</p>
     #   @return [String]
     class ErrorDetails < Struct.new(
+      nil,
       :error_code,
       :error_message,
       keyword_init: true
@@ -8663,6 +9000,7 @@ module Aws::Glue
     #   <p>Options to configure how your job will stop if your data quality evaluation fails.</p>
     #   @return [Types::DQStopJobOnFailureOptions]
     class EvaluateDataQuality < Struct.new(
+      nil,
       :name,
       :inputs,
       :ruleset,
@@ -8697,6 +9035,7 @@ module Aws::Glue
     #   <p>Options to configure how your job will stop if your data quality evaluation fails.</p>
     #   @return [Types::DQStopJobOnFailureOptions]
     class EvaluateDataQualityMultiFrame < Struct.new(
+      nil,
       :name,
       :inputs,
       :additional_data_sources,
@@ -8717,6 +9056,7 @@ module Aws::Glue
     #   <p>The evaluation metrics for the find matches algorithm.</p>
     #   @return [Types::FindMatchesMetrics]
     class EvaluationMetrics < Struct.new(
+      nil,
       :transform_type,
       :find_matches_metrics,
       keyword_init: true
@@ -8733,6 +9073,7 @@ module Aws::Glue
     #   <p>Window of time in seconds after which EventBridge event trigger fires. Window starts when first event is received.</p>
     #   @return [Integer]
     class EventBatchingCondition < Struct.new(
+      nil,
       :batch_size,
       :batch_window,
       keyword_init: true
@@ -8754,6 +9095,7 @@ module Aws::Glue
     #   <p>An error message associated with the last column statistics task run.</p>
     #   @return [String]
     class ExecutionAttempt < Struct.new(
+      nil,
       :status,
       :column_statistics_task_run_id,
       :execution_timestamp,
@@ -8770,6 +9112,7 @@ module Aws::Glue
     #         The maximum value you can specify is controlled by a service limit.</p>
     #   @return [Integer]
     class ExecutionProperty < Struct.new(
+      nil,
       :max_concurrent_runs,
       keyword_init: true
     )
@@ -8787,6 +9130,7 @@ module Aws::Glue
     #         labels.</p>
     #   @return [String]
     class ExportLabelsTaskRunProperties < Struct.new(
+      nil,
       :output_s3_path,
       keyword_init: true
     )
@@ -8805,6 +9149,7 @@ module Aws::Glue
     #       external data source.</p>
     #   @return [String]
     class FederatedCatalog < Struct.new(
+      nil,
       :identifier,
       :connection_name,
       :connection_type,
@@ -8824,6 +9169,7 @@ module Aws::Glue
     #   <p>The type of connection used to access the federated database, such as JDBC, ODBC, or other supported connection protocols.</p>
     #   @return [String]
     class FederatedDatabase < Struct.new(
+      nil,
       :identifier,
       :connection_name,
       :connection_type,
@@ -8840,6 +9186,7 @@ module Aws::Glue
     #   <p>The associated Glue resource already exists.</p>
     #   @return [String]
     class FederatedResourceAlreadyExistsException < Struct.new(
+      nil,
       :message,
       :associated_glue_resource,
       keyword_init: true
@@ -8861,6 +9208,7 @@ module Aws::Glue
     #   <p>The type of connection used to access the federated table, specifying the protocol or method for connecting to the external data source.</p>
     #   @return [String]
     class FederatedTable < Struct.new(
+      nil,
       :identifier,
       :database_identifier,
       :connection_name,
@@ -8878,6 +9226,7 @@ module Aws::Glue
     #   <p>The message describing the problem.</p>
     #   @return [String]
     class FederationSourceException < Struct.new(
+      nil,
       :federation_source_error_code,
       :message,
       keyword_init: true
@@ -8890,6 +9239,7 @@ module Aws::Glue
     #   <p>A message describing the problem.</p>
     #   @return [String]
     class FederationSourceRetryableException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -8952,6 +9302,7 @@ module Aws::Glue
     #   <p>Optional map of keys which may be returned.</p>
     #   @return [Hash<String, String>]
     class Field < Struct.new(
+      nil,
       :field_name,
       :label,
       :description,
@@ -8989,6 +9340,7 @@ module Aws::Glue
     #   <p>A JSON path to a variable in the data structure for the dataset that is filled.</p>
     #   @return [String]
     class FillMissingValues < Struct.new(
+      nil,
       :name,
       :inputs,
       :imputed_path,
@@ -9012,6 +9364,7 @@ module Aws::Glue
     #   <p>Specifies a filter expression.</p>
     #   @return [Array<Types::FilterExpression>]
     class Filter < Struct.new(
+      nil,
       :name,
       :inputs,
       :logical_operator,
@@ -9032,6 +9385,7 @@ module Aws::Glue
     #   <p>A list of filter values.</p>
     #   @return [Array<Types::FilterValue>]
     class FilterExpression < Struct.new(
+      nil,
       :operation,
       :negated,
       :values,
@@ -9048,6 +9402,7 @@ module Aws::Glue
     #   <p>The value to be associated.</p>
     #   @return [Array<String>]
     class FilterValue < Struct.new(
+      nil,
       :type,
       :value,
       keyword_init: true
@@ -9087,6 +9442,7 @@ module Aws::Glue
     #   <p>A list of <code>ColumnImportance</code> structures containing column importance metrics, sorted in order of descending importance.</p>
     #   @return [Array<Types::ColumnImportance>]
     class FindMatchesMetrics < Struct.new(
+      nil,
       :area_under_pr_curve,
       :precision,
       :recall,
@@ -9126,6 +9482,7 @@ module Aws::Glue
     #            <p>Note that setting this value to true may increase the conflation execution time.</p>
     #   @return [Boolean]
     class FindMatchesParameters < Struct.new(
+      nil,
       :primary_key_column_name,
       :precision_recall_tradeoff,
       :accuracy_cost_tradeoff,
@@ -9146,6 +9503,7 @@ module Aws::Glue
     #   <p>The job run ID for the Find Matches task run.</p>
     #   @return [String]
     class FindMatchesTaskRunProperties < Struct.new(
+      nil,
       :job_id,
       :job_name,
       :job_run_id,
@@ -9164,6 +9522,7 @@ module Aws::Glue
     #   <p>Specifies whether or not to include the parameter specification.</p>
     #   @return [Boolean]
     class GetBlueprintRequest < Struct.new(
+      nil,
       :name,
       :include_blueprint,
       :include_parameter_spec,
@@ -9176,6 +9535,7 @@ module Aws::Glue
     #   <p>Returns a <code>Blueprint</code> object.</p>
     #   @return [Types::Blueprint]
     class GetBlueprintResponse < Struct.new(
+      nil,
       :blueprint,
       keyword_init: true
     )
@@ -9189,6 +9549,7 @@ module Aws::Glue
     #   <p>The run ID for the blueprint run you want to retrieve.</p>
     #   @return [String]
     class GetBlueprintRunRequest < Struct.new(
+      nil,
       :blueprint_name,
       :run_id,
       keyword_init: true
@@ -9200,6 +9561,7 @@ module Aws::Glue
     #   <p>Returns a <code>BlueprintRun</code> object.</p>
     #   @return [Types::BlueprintRun]
     class GetBlueprintRunResponse < Struct.new(
+      nil,
       :blueprint_run,
       keyword_init: true
     )
@@ -9216,6 +9578,7 @@ module Aws::Glue
     #   <p>The maximum size of a list to return.</p>
     #   @return [Integer]
     class GetBlueprintRunsRequest < Struct.new(
+      nil,
       :blueprint_name,
       :next_token,
       :max_results,
@@ -9231,6 +9594,7 @@ module Aws::Glue
     #   <p>A continuation token, if not all blueprint runs have been returned.</p>
     #   @return [String]
     class GetBlueprintRunsResponse < Struct.new(
+      nil,
       :blueprint_runs,
       :next_token,
       keyword_init: true
@@ -9242,6 +9606,7 @@ module Aws::Glue
     #   <p>The ID of the catalog to migrate. Currently, this should be the Amazon Web Services account ID.</p>
     #   @return [String]
     class GetCatalogImportStatusRequest < Struct.new(
+      nil,
       :catalog_id,
       keyword_init: true
     )
@@ -9252,6 +9617,7 @@ module Aws::Glue
     #   <p>The status of the specified catalog migration.</p>
     #   @return [Types::CatalogImportStatus]
     class GetCatalogImportStatusResponse < Struct.new(
+      nil,
       :import_status,
       keyword_init: true
     )
@@ -9262,6 +9628,7 @@ module Aws::Glue
     #   <p>The ID of the parent catalog in which the catalog resides. If none is provided, the Amazon Web Services Account Number is used by default.</p>
     #   @return [String]
     class GetCatalogRequest < Struct.new(
+      nil,
       :catalog_id,
       keyword_init: true
     )
@@ -9272,6 +9639,7 @@ module Aws::Glue
     #   <p>A <code>Catalog</code> object. The definition of the specified catalog in the Glue Data Catalog.</p>
     #   @return [Types::Catalog]
     class GetCatalogResponse < Struct.new(
+      nil,
       :catalog,
       keyword_init: true
     )
@@ -9295,6 +9663,7 @@ module Aws::Glue
     #            <p>When the <code>ParentCatalogId</code> is not equal to null, and this attribute is passed as <code>false</code> or <code>true</code>, an <code>InvalidInputException</code> is thrown.</p>
     #   @return [Boolean]
     class GetCatalogsRequest < Struct.new(
+      nil,
       :parent_catalog_id,
       :next_token,
       :max_results,
@@ -9312,6 +9681,7 @@ module Aws::Glue
     #   <p>A continuation token for paginating the returned list of tokens, returned if the current segment of the list is not the last.</p>
     #   @return [String]
     class GetCatalogsResponse < Struct.new(
+      nil,
       :catalog_list,
       :next_token,
       keyword_init: true
@@ -9323,6 +9693,7 @@ module Aws::Glue
     #   <p>Name of the classifier to retrieve.</p>
     #   @return [String]
     class GetClassifierRequest < Struct.new(
+      nil,
       :name,
       keyword_init: true
     )
@@ -9333,6 +9704,7 @@ module Aws::Glue
     #   <p>The requested classifier.</p>
     #   @return [Types::Classifier]
     class GetClassifierResponse < Struct.new(
+      nil,
       :classifier,
       keyword_init: true
     )
@@ -9346,6 +9718,7 @@ module Aws::Glue
     #   <p>An optional continuation token.</p>
     #   @return [String]
     class GetClassifiersRequest < Struct.new(
+      nil,
       :max_results,
       :next_token,
       keyword_init: true
@@ -9361,6 +9734,7 @@ module Aws::Glue
     #   <p>A continuation token.</p>
     #   @return [String]
     class GetClassifiersResponse < Struct.new(
+      nil,
       :classifiers,
       :next_token,
       keyword_init: true
@@ -9385,6 +9759,7 @@ module Aws::Glue
     #   <p>A list of the column names.</p>
     #   @return [Array<String>]
     class GetColumnStatisticsForPartitionRequest < Struct.new(
+      nil,
       :catalog_id,
       :database_name,
       :table_name,
@@ -9402,6 +9777,7 @@ module Aws::Glue
     #   <p>Error occurred during retrieving column statistics data.</p>
     #   @return [Array<Types::ColumnError>]
     class GetColumnStatisticsForPartitionResponse < Struct.new(
+      nil,
       :column_statistics_list,
       :errors,
       keyword_init: true
@@ -9423,6 +9799,7 @@ module Aws::Glue
     #   <p>A list of the column names.</p>
     #   @return [Array<String>]
     class GetColumnStatisticsForTableRequest < Struct.new(
+      nil,
       :catalog_id,
       :database_name,
       :table_name,
@@ -9439,6 +9816,7 @@ module Aws::Glue
     #   <p>List of ColumnStatistics that failed to be retrieved.</p>
     #   @return [Array<Types::ColumnError>]
     class GetColumnStatisticsForTableResponse < Struct.new(
+      nil,
       :column_statistics_list,
       :errors,
       keyword_init: true
@@ -9450,6 +9828,7 @@ module Aws::Glue
     #   <p>The identifier for the particular column statistics task run.</p>
     #   @return [String]
     class GetColumnStatisticsTaskRunRequest < Struct.new(
+      nil,
       :column_statistics_task_run_id,
       keyword_init: true
     )
@@ -9460,6 +9839,7 @@ module Aws::Glue
     #   <p>A <code>ColumnStatisticsTaskRun</code> object representing the details of the column stats run.</p>
     #   @return [Types::ColumnStatisticsTaskRun]
     class GetColumnStatisticsTaskRunResponse < Struct.new(
+      nil,
       :column_statistics_task_run,
       keyword_init: true
     )
@@ -9479,6 +9859,7 @@ module Aws::Glue
     #   <p>A continuation token, if this is a continuation call.</p>
     #   @return [String]
     class GetColumnStatisticsTaskRunsRequest < Struct.new(
+      nil,
       :database_name,
       :table_name,
       :max_results,
@@ -9495,6 +9876,7 @@ module Aws::Glue
     #   <p>A continuation token, if not all task runs have yet been returned.</p>
     #   @return [String]
     class GetColumnStatisticsTaskRunsResponse < Struct.new(
+      nil,
       :column_statistics_task_runs,
       :next_token,
       keyword_init: true
@@ -9509,6 +9891,7 @@ module Aws::Glue
     #   <p>The name of the table for which to retrieve column statistics.</p>
     #   @return [String]
     class GetColumnStatisticsTaskSettingsRequest < Struct.new(
+      nil,
       :database_name,
       :table_name,
       keyword_init: true
@@ -9520,6 +9903,7 @@ module Aws::Glue
     #   <p>A <code>ColumnStatisticsTaskSettings</code> object representing the settings for the column statistics task.</p>
     #   @return [Types::ColumnStatisticsTaskSettings]
     class GetColumnStatisticsTaskSettingsResponse < Struct.new(
+      nil,
       :column_statistics_task_settings,
       keyword_init: true
     )
@@ -9544,6 +9928,7 @@ module Aws::Glue
     #   <p>For connections that may be used in multiple services, specifies returning properties for the specified compute environment.</p>
     #   @return [String]
     class GetConnectionRequest < Struct.new(
+      nil,
       :catalog_id,
       :name,
       :hide_password,
@@ -9557,6 +9942,7 @@ module Aws::Glue
     #   <p>The requested connection definition.</p>
     #   @return [Types::Connection]
     class GetConnectionResponse < Struct.new(
+      nil,
       :connection,
       keyword_init: true
     )
@@ -9576,6 +9962,7 @@ module Aws::Glue
     #   <p>Denotes if the connection was created with schema version 1 or 2.</p>
     #   @return [Integer]
     class GetConnectionsFilter < Struct.new(
+      nil,
       :match_criteria,
       :connection_type,
       :connection_schema_version,
@@ -9605,6 +9992,7 @@ module Aws::Glue
     #   <p>The maximum number of connections to return in one response.</p>
     #   @return [Integer]
     class GetConnectionsRequest < Struct.new(
+      nil,
       :catalog_id,
       :filter,
       :hide_password,
@@ -9623,6 +10011,7 @@ module Aws::Glue
     #         include the last of the filtered connections.</p>
     #   @return [String]
     class GetConnectionsResponse < Struct.new(
+      nil,
       :connection_list,
       :next_token,
       keyword_init: true
@@ -9640,6 +10029,7 @@ module Aws::Glue
     #   <p>A continuation token, if this is a continuation call.</p>
     #   @return [String]
     class GetCrawlerMetricsRequest < Struct.new(
+      nil,
       :crawler_name_list,
       :max_results,
       :next_token,
@@ -9656,6 +10046,7 @@ module Aws::Glue
     #         last metric available.</p>
     #   @return [String]
     class GetCrawlerMetricsResponse < Struct.new(
+      nil,
       :crawler_metrics_list,
       :next_token,
       keyword_init: true
@@ -9667,6 +10058,7 @@ module Aws::Glue
     #   <p>The name of the crawler to retrieve metadata for.</p>
     #   @return [String]
     class GetCrawlerRequest < Struct.new(
+      nil,
       :name,
       keyword_init: true
     )
@@ -9677,6 +10069,7 @@ module Aws::Glue
     #   <p>The metadata for the specified crawler.</p>
     #   @return [Types::Crawler]
     class GetCrawlerResponse < Struct.new(
+      nil,
       :crawler,
       keyword_init: true
     )
@@ -9690,6 +10083,7 @@ module Aws::Glue
     #   <p>A continuation token, if this is a continuation request.</p>
     #   @return [String]
     class GetCrawlersRequest < Struct.new(
+      nil,
       :max_results,
       :next_token,
       keyword_init: true
@@ -9705,6 +10099,7 @@ module Aws::Glue
     #         of those defined in this customer account.</p>
     #   @return [String]
     class GetCrawlersResponse < Struct.new(
+      nil,
       :crawlers,
       :next_token,
       keyword_init: true
@@ -9716,6 +10111,7 @@ module Aws::Glue
     #   <p>The name of the custom pattern that you want to retrieve.</p>
     #   @return [String]
     class GetCustomEntityTypeRequest < Struct.new(
+      nil,
       :name,
       keyword_init: true
     )
@@ -9732,6 +10128,7 @@ module Aws::Glue
     #   <p>A list of context words if specified when you created the custom pattern. If none of these context words are found within the vicinity of the regular expression the data will not be detected as sensitive data.</p>
     #   @return [Array<String>]
     class GetCustomEntityTypeResponse < Struct.new(
+      nil,
       :name,
       :regex_string,
       :context_words,
@@ -9745,6 +10142,7 @@ module Aws::Glue
     #         provided, the Amazon Web Services account ID is used by default.</p>
     #   @return [String]
     class GetDataCatalogEncryptionSettingsRequest < Struct.new(
+      nil,
       :catalog_id,
       keyword_init: true
     )
@@ -9755,6 +10153,7 @@ module Aws::Glue
     #   <p>The requested security configuration.</p>
     #   @return [Types::DataCatalogEncryptionSettings]
     class GetDataCatalogEncryptionSettingsResponse < Struct.new(
+      nil,
       :data_catalog_encryption_settings,
       keyword_init: true
     )
@@ -9768,6 +10167,7 @@ module Aws::Glue
     #   <p>The Profile ID.</p>
     #   @return [String]
     class GetDataQualityModelRequest < Struct.new(
+      nil,
       :statistic_id,
       :profile_id,
       keyword_init: true
@@ -9788,6 +10188,7 @@ module Aws::Glue
     #   <p>The training failure reason.</p>
     #   @return [String]
     class GetDataQualityModelResponse < Struct.new(
+      nil,
       :status,
       :started_on,
       :completed_on,
@@ -9804,6 +10205,7 @@ module Aws::Glue
     #   <p>The Profile ID.</p>
     #   @return [String]
     class GetDataQualityModelResultRequest < Struct.new(
+      nil,
       :statistic_id,
       :profile_id,
       keyword_init: true
@@ -9819,6 +10221,7 @@ module Aws::Glue
     #            </p>
     #   @return [Array<Types::StatisticModelResult>]
     class GetDataQualityModelResultResponse < Struct.new(
+      nil,
       :completed_on,
       :model,
       keyword_init: true
@@ -9830,6 +10233,7 @@ module Aws::Glue
     #   <p>A unique result ID for the data quality result.</p>
     #   @return [String]
     class GetDataQualityResultRequest < Struct.new(
+      nil,
       :result_id,
       keyword_init: true
     )
@@ -9883,6 +10287,7 @@ module Aws::Glue
     #   <p> A summary of <code>DataQualityAggregatedMetrics</code> objects showing the total counts of processed rows and rules, including their pass/fail statistics based on row-level results. </p>
     #   @return [Types::DataQualityAggregatedMetrics]
     class GetDataQualityResultResponse < Struct.new(
+      nil,
       :result_id,
       :profile_id,
       :score,
@@ -9907,6 +10312,7 @@ module Aws::Glue
     #   <p>The unique run identifier associated with this run.</p>
     #   @return [String]
     class GetDataQualityRuleRecommendationRunRequest < Struct.new(
+      nil,
       :run_id,
       keyword_init: true
     )
@@ -9957,6 +10363,7 @@ module Aws::Glue
     #   <p>The name of the security configuration created with the data quality encryption option.</p>
     #   @return [String]
     class GetDataQualityRuleRecommendationRunResponse < Struct.new(
+      nil,
       :run_id,
       :data_source,
       :role,
@@ -9985,6 +10392,7 @@ module Aws::Glue
     #   <p>The unique run identifier associated with this run.</p>
     #   @return [String]
     class GetDataQualityRulesetEvaluationRunRequest < Struct.new(
+      nil,
       :run_id,
       keyword_init: true
     )
@@ -10037,6 +10445,7 @@ module Aws::Glue
     #   <p>A map of reference strings to additional data sources you can specify for an evaluation run.</p>
     #   @return [Hash<String, Types::DataSource>]
     class GetDataQualityRulesetEvaluationRunResponse < Struct.new(
+      nil,
       :run_id,
       :data_source,
       :role,
@@ -10066,6 +10475,7 @@ module Aws::Glue
     #   <p>The name of the ruleset.</p>
     #   @return [String]
     class GetDataQualityRulesetRequest < Struct.new(
+      nil,
       :name,
       keyword_init: true
     )
@@ -10098,6 +10508,7 @@ module Aws::Glue
     #   <p>The name of the security configuration created with the data quality encryption option.</p>
     #   @return [String]
     class GetDataQualityRulesetResponse < Struct.new(
+      nil,
       :name,
       :description,
       :ruleset,
@@ -10120,6 +10531,7 @@ module Aws::Glue
     #         should be all lowercase.</p>
     #   @return [String]
     class GetDatabaseRequest < Struct.new(
+      nil,
       :catalog_id,
       :name,
       keyword_init: true
@@ -10131,6 +10543,7 @@ module Aws::Glue
     #   <p>The definition of the specified database in the Data Catalog.</p>
     #   @return [Types::Database]
     class GetDatabaseResponse < Struct.new(
+      nil,
       :database,
       keyword_init: true
     )
@@ -10165,6 +10578,7 @@ module Aws::Glue
     #   <p>Specifies the database fields returned by the <code>GetDatabases</code> call. This parameter doesn’t accept an empty list. The request must include the <code>NAME</code>.</p>
     #   @return [Array<String>]
     class GetDatabasesRequest < Struct.new(
+      nil,
       :catalog_id,
       :next_token,
       :max_results,
@@ -10183,6 +10597,7 @@ module Aws::Glue
     #         returned if the current segment of the list is not the last.</p>
     #   @return [String]
     class GetDatabasesResponse < Struct.new(
+      nil,
       :database_list,
       :next_token,
       keyword_init: true
@@ -10194,6 +10609,7 @@ module Aws::Glue
     #   <p>The Python script to transform.</p>
     #   @return [String]
     class GetDataflowGraphRequest < Struct.new(
+      nil,
       :python_script,
       keyword_init: true
     )
@@ -10207,6 +10623,7 @@ module Aws::Glue
     #   <p>A list of the edges in the resulting DAG.</p>
     #   @return [Array<Types::CodeGenEdge>]
     class GetDataflowGraphResponse < Struct.new(
+      nil,
       :dag_nodes,
       :dag_edges,
       keyword_init: true
@@ -10218,6 +10635,7 @@ module Aws::Glue
     #   <p>Name of the <code>DevEndpoint</code> to retrieve information for.</p>
     #   @return [String]
     class GetDevEndpointRequest < Struct.new(
+      nil,
       :endpoint_name,
       keyword_init: true
     )
@@ -10228,6 +10646,7 @@ module Aws::Glue
     #   <p>A <code>DevEndpoint</code> definition.</p>
     #   @return [Types::DevEndpoint]
     class GetDevEndpointResponse < Struct.new(
+      nil,
       :dev_endpoint,
       keyword_init: true
     )
@@ -10241,6 +10660,7 @@ module Aws::Glue
     #   <p>A continuation token, if this is a continuation call.</p>
     #   @return [String]
     class GetDevEndpointsRequest < Struct.new(
+      nil,
       :max_results,
       :next_token,
       keyword_init: true
@@ -10256,6 +10676,7 @@ module Aws::Glue
     #         returned.</p>
     #   @return [String]
     class GetDevEndpointsResponse < Struct.new(
+      nil,
       :dev_endpoints,
       :next_token,
       keyword_init: true
@@ -10294,6 +10715,7 @@ module Aws::Glue
     #   <p> List of fields that we want to fetch as part of preview data.</p>
     #   @return [Array<String>]
     class GetEntityRecordsRequest < Struct.new(
+      nil,
       :connection_name,
       :catalog_id,
       :entity_name,
@@ -10316,6 +10738,7 @@ module Aws::Glue
     #   <p>A continuation token, present if the current segment is not the last.</p>
     #   @return [String]
     class GetEntityRecordsResponse < Struct.new(
+      nil,
       :records,
       :next_token,
       keyword_init: true
@@ -10325,6 +10748,7 @@ module Aws::Glue
 
     # <p>Request to retrieve the Glue Identity Center configuration.</p>
     class GetGlueIdentityCenterConfigurationRequest < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -10341,6 +10765,7 @@ module Aws::Glue
     #   <p>A list of Identity Center scopes that define the permissions and access levels for the Glue configuration.</p>
     #   @return [Array<String>]
     class GetGlueIdentityCenterConfigurationResponse < Struct.new(
+      nil,
       :application_arn,
       :instance_arn,
       :scopes,
@@ -10353,6 +10778,7 @@ module Aws::Glue
     #   <p>The connection ARN of the source, or the database ARN of the target.</p>
     #   @return [String]
     class GetIntegrationResourcePropertyRequest < Struct.new(
+      nil,
       :resource_arn,
       keyword_init: true
     )
@@ -10369,6 +10795,7 @@ module Aws::Glue
     #   <p>The resource properties associated with the integration target.</p>
     #   @return [Types::TargetProcessingProperties]
     class GetIntegrationResourcePropertyResponse < Struct.new(
+      nil,
       :resource_arn,
       :source_processing_properties,
       :target_processing_properties,
@@ -10387,6 +10814,7 @@ module Aws::Glue
     #   <p>The name of the table to be replicated.</p>
     #   @return [String]
     class GetIntegrationTablePropertiesRequest < Struct.new(
+      nil,
       :resource_arn,
       :table_name,
       keyword_init: true
@@ -10410,6 +10838,7 @@ module Aws::Glue
     #   <p>A structure for the target table configuration.</p>
     #   @return [Types::TargetTableConfig]
     class GetIntegrationTablePropertiesResponse < Struct.new(
+      nil,
       :resource_arn,
       :table_name,
       :source_table_config,
@@ -10426,6 +10855,7 @@ module Aws::Glue
     #   <p>The unique run identifier associated with this job run.</p>
     #   @return [String]
     class GetJobBookmarkRequest < Struct.new(
+      nil,
       :job_name,
       :run_id,
       keyword_init: true
@@ -10437,6 +10867,7 @@ module Aws::Glue
     #   <p>A structure that defines a point that a job can resume processing.</p>
     #   @return [Types::JobBookmarkEntry]
     class GetJobBookmarkResponse < Struct.new(
+      nil,
       :job_bookmark_entry,
       keyword_init: true
     )
@@ -10447,6 +10878,7 @@ module Aws::Glue
     #   <p>The name of the job definition to retrieve.</p>
     #   @return [String]
     class GetJobRequest < Struct.new(
+      nil,
       :job_name,
       keyword_init: true
     )
@@ -10457,6 +10889,7 @@ module Aws::Glue
     #   <p>The requested job definition.</p>
     #   @return [Types::Job]
     class GetJobResponse < Struct.new(
+      nil,
       :job,
       keyword_init: true
     )
@@ -10473,6 +10906,7 @@ module Aws::Glue
     #   <p>True if a list of predecessor runs should be returned.</p>
     #   @return [Boolean]
     class GetJobRunRequest < Struct.new(
+      nil,
       :job_name,
       :run_id,
       :predecessors_included,
@@ -10485,6 +10919,7 @@ module Aws::Glue
     #   <p>The requested job-run metadata.</p>
     #   @return [Types::JobRun]
     class GetJobRunResponse < Struct.new(
+      nil,
       :job_run,
       keyword_init: true
     )
@@ -10501,6 +10936,7 @@ module Aws::Glue
     #   <p>The maximum size of the response.</p>
     #   @return [Integer]
     class GetJobRunsRequest < Struct.new(
+      nil,
       :job_name,
       :next_token,
       :max_results,
@@ -10516,6 +10952,7 @@ module Aws::Glue
     #   <p>A continuation token, if not all requested job runs have been returned.</p>
     #   @return [String]
     class GetJobRunsResponse < Struct.new(
+      nil,
       :job_runs,
       :next_token,
       keyword_init: true
@@ -10530,6 +10967,7 @@ module Aws::Glue
     #   <p>The maximum size of the response.</p>
     #   @return [Integer]
     class GetJobsRequest < Struct.new(
+      nil,
       :next_token,
       :max_results,
       keyword_init: true
@@ -10544,6 +10982,7 @@ module Aws::Glue
     #   <p>A continuation token, if not all job definitions have yet been returned.</p>
     #   @return [String]
     class GetJobsResponse < Struct.new(
+      nil,
       :jobs,
       :next_token,
       keyword_init: true
@@ -10558,6 +10997,7 @@ module Aws::Glue
     #   <p>The unique identifier of the task run.</p>
     #   @return [String]
     class GetMLTaskRunRequest < Struct.new(
+      nil,
       :transform_id,
       :task_run_id,
       keyword_init: true
@@ -10596,6 +11036,7 @@ module Aws::Glue
     #   <p>The amount of time (in seconds) that the task run consumed resources.</p>
     #   @return [Integer]
     class GetMLTaskRunResponse < Struct.new(
+      nil,
       :transform_id,
       :task_run_id,
       :status,
@@ -10632,6 +11073,7 @@ module Aws::Glue
     #   <p>The sorting criteria, in the <code>TaskRunSortCriteria</code> structure, for the task run.</p>
     #   @return [Types::TaskRunSortCriteria]
     class GetMLTaskRunsRequest < Struct.new(
+      nil,
       :transform_id,
       :next_token,
       :max_results,
@@ -10649,6 +11091,7 @@ module Aws::Glue
     #   <p>A pagination token, if more results are available.</p>
     #   @return [String]
     class GetMLTaskRunsResponse < Struct.new(
+      nil,
       :task_runs,
       :next_token,
       keyword_init: true
@@ -10661,6 +11104,7 @@ module Aws::Glue
     #         created.</p>
     #   @return [String]
     class GetMLTransformRequest < Struct.new(
+      nil,
       :transform_id,
       keyword_init: true
     )
@@ -10743,6 +11187,7 @@ module Aws::Glue
     #   <p>The encryption-at-rest settings of the transform that apply to accessing user data. Machine learning transforms can access user data encrypted in Amazon S3 using KMS.</p>
     #   @return [Types::TransformEncryption]
     class GetMLTransformResponse < Struct.new(
+      nil,
       :transform_id,
       :name,
       :description,
@@ -10785,6 +11230,7 @@ module Aws::Glue
     #   <p>The sorting criteria.</p>
     #   @return [Types::TransformSortCriteria]
     class GetMLTransformsRequest < Struct.new(
+      nil,
       :next_token,
       :max_results,
       :filter,
@@ -10801,6 +11247,7 @@ module Aws::Glue
     #   <p>A pagination token, if more results are available.</p>
     #   @return [String]
     class GetMLTransformsResponse < Struct.new(
+      nil,
       :transforms,
       :next_token,
       keyword_init: true
@@ -10818,6 +11265,7 @@ module Aws::Glue
     #   <p>Parameters for the mapping.</p>
     #   @return [Types::Location]
     class GetMappingRequest < Struct.new(
+      nil,
       :source,
       :sinks,
       :location,
@@ -10830,6 +11278,7 @@ module Aws::Glue
     #   <p>A list of mappings to the specified targets.</p>
     #   @return [Array<Types::MappingEntry>]
     class GetMappingResponse < Struct.new(
+      nil,
       :mapping,
       keyword_init: true
     )
@@ -10849,6 +11298,7 @@ module Aws::Glue
     #   <p>A continuation token, included if this is a continuation call.</p>
     #   @return [String]
     class GetPartitionIndexesRequest < Struct.new(
+      nil,
       :catalog_id,
       :database_name,
       :table_name,
@@ -10865,6 +11315,7 @@ module Aws::Glue
     #   <p>A continuation token, present if the current list segment is not the last.</p>
     #   @return [String]
     class GetPartitionIndexesResponse < Struct.new(
+      nil,
       :partition_index_descriptor_list,
       :next_token,
       keyword_init: true
@@ -10886,6 +11337,7 @@ module Aws::Glue
     #   <p>The values that define the partition.</p>
     #   @return [Array<String>]
     class GetPartitionRequest < Struct.new(
+      nil,
       :catalog_id,
       :database_name,
       :table_name,
@@ -10900,6 +11352,7 @@ module Aws::Glue
     #         object.</p>
     #   @return [Types::Partition]
     class GetPartitionResponse < Struct.new(
+      nil,
       :partition,
       keyword_init: true
     )
@@ -11043,6 +11496,7 @@ module Aws::Glue
     #   <p>The time as of when to read the partition contents. If not set, the most recent transaction commit time will be used. Cannot be specified along with <code>TransactionId</code>.</p>
     #   @return [Time]
     class GetPartitionsRequest < Struct.new(
+      nil,
       :catalog_id,
       :database_name,
       :table_name,
@@ -11066,6 +11520,7 @@ module Aws::Glue
     #         one.</p>
     #   @return [String]
     class GetPartitionsResponse < Struct.new(
+      nil,
       :partitions,
       :next_token,
       keyword_init: true
@@ -11102,6 +11557,7 @@ module Aws::Glue
     #            </ul>
     #   @return [Hash<String, String>]
     class GetPlanRequest < Struct.new(
+      nil,
       :mapping,
       :source,
       :sinks,
@@ -11120,6 +11576,7 @@ module Aws::Glue
     #   <p>The Scala code to perform the mapping.</p>
     #   @return [String]
     class GetPlanResponse < Struct.new(
+      nil,
       :python_script,
       :scala_code,
       keyword_init: true
@@ -11131,6 +11588,7 @@ module Aws::Glue
     #   <p>This is a wrapper structure that may contain the registry name and Amazon Resource Name (ARN).</p>
     #   @return [Types::RegistryId]
     class GetRegistryInput < Struct.new(
+      nil,
       :registry_id,
       keyword_init: true
     )
@@ -11156,6 +11614,7 @@ module Aws::Glue
     #   <p>The date and time the registry was updated.</p>
     #   @return [String]
     class GetRegistryResponse < Struct.new(
+      nil,
       :registry_name,
       :registry_arn,
       :description,
@@ -11174,6 +11633,7 @@ module Aws::Glue
     #   <p>The maximum size of a list to return.</p>
     #   @return [Integer]
     class GetResourcePoliciesRequest < Struct.new(
+      nil,
       :next_token,
       :max_results,
       keyword_init: true
@@ -11188,6 +11648,7 @@ module Aws::Glue
     #   <p>A continuation token, if the returned list does not contain the last resource policy available.</p>
     #   @return [String]
     class GetResourcePoliciesResponse < Struct.new(
+      nil,
       :get_resource_policies_response_list,
       :next_token,
       keyword_init: true
@@ -11202,6 +11663,7 @@ module Aws::Glue
     #       </p>
     #   @return [String]
     class GetResourcePolicyRequest < Struct.new(
+      nil,
       :resource_arn,
       keyword_init: true
     )
@@ -11221,6 +11683,7 @@ module Aws::Glue
     #   <p>The date and time at which the policy was last updated.</p>
     #   @return [Time]
     class GetResourcePolicyResponse < Struct.new(
+      nil,
       :policy_in_json,
       :policy_hash,
       :create_time,
@@ -11245,6 +11708,7 @@ module Aws::Glue
     #   <p>The definition of the schema for which schema details are required.</p>
     #   @return [String]
     class GetSchemaByDefinitionInput < Struct.new(
+      nil,
       :schema_id,
       :schema_definition,
       keyword_init: true
@@ -11268,6 +11732,7 @@ module Aws::Glue
     #   <p>The date and time the schema was created.</p>
     #   @return [String]
     class GetSchemaByDefinitionResponse < Struct.new(
+      nil,
       :schema_version_id,
       :schema_arn,
       :data_format,
@@ -11290,6 +11755,7 @@ module Aws::Glue
     #            </ul>
     #   @return [Types::SchemaId]
     class GetSchemaInput < Struct.new(
+      nil,
       :schema_id,
       keyword_init: true
     )
@@ -11336,6 +11802,7 @@ module Aws::Glue
     #   <p>The date and time the schema was updated.</p>
     #   @return [String]
     class GetSchemaResponse < Struct.new(
+      nil,
       :registry_name,
       :registry_arn,
       :schema_name,
@@ -11372,6 +11839,7 @@ module Aws::Glue
     #   <p>The version number of the schema.</p>
     #   @return [Types::SchemaVersionNumber]
     class GetSchemaVersionInput < Struct.new(
+      nil,
       :schema_id,
       :schema_version_id,
       :schema_version_number,
@@ -11402,6 +11870,7 @@ module Aws::Glue
     #   <p>The date and time the schema version was created.</p>
     #   @return [String]
     class GetSchemaVersionResponse < Struct.new(
+      nil,
       :schema_version_id,
       :schema_definition,
       :data_format,
@@ -11435,6 +11904,7 @@ module Aws::Glue
     #   <p>Refers to <code>SYNTAX_DIFF</code>, which is the currently supported diff type.</p>
     #   @return [String]
     class GetSchemaVersionsDiffInput < Struct.new(
+      nil,
       :schema_id,
       :first_schema_version_number,
       :second_schema_version_number,
@@ -11448,6 +11918,7 @@ module Aws::Glue
     #   <p>The difference between schemas as a string in JsonPatch format.</p>
     #   @return [String]
     class GetSchemaVersionsDiffResponse < Struct.new(
+      nil,
       :diff,
       keyword_init: true
     )
@@ -11458,6 +11929,7 @@ module Aws::Glue
     #   <p>The name of the security configuration to retrieve.</p>
     #   @return [String]
     class GetSecurityConfigurationRequest < Struct.new(
+      nil,
       :name,
       keyword_init: true
     )
@@ -11468,6 +11940,7 @@ module Aws::Glue
     #   <p>The requested security configuration.</p>
     #   @return [Types::SecurityConfiguration]
     class GetSecurityConfigurationResponse < Struct.new(
+      nil,
       :security_configuration,
       keyword_init: true
     )
@@ -11481,6 +11954,7 @@ module Aws::Glue
     #   <p>A continuation token, if this is a continuation call.</p>
     #   @return [String]
     class GetSecurityConfigurationsRequest < Struct.new(
+      nil,
       :max_results,
       :next_token,
       keyword_init: true
@@ -11496,6 +11970,7 @@ module Aws::Glue
     #         configurations to return.</p>
     #   @return [String]
     class GetSecurityConfigurationsResponse < Struct.new(
+      nil,
       :security_configurations,
       :next_token,
       keyword_init: true
@@ -11510,6 +11985,7 @@ module Aws::Glue
     #   <p>The origin of the request. </p>
     #   @return [String]
     class GetSessionRequest < Struct.new(
+      nil,
       :id,
       :request_origin,
       keyword_init: true
@@ -11521,6 +11997,7 @@ module Aws::Glue
     #   <p>The session object is returned in the response.</p>
     #   @return [Types::Session]
     class GetSessionResponse < Struct.new(
+      nil,
       :session,
       keyword_init: true
     )
@@ -11537,6 +12014,7 @@ module Aws::Glue
     #   <p>The origin of the request.</p>
     #   @return [String]
     class GetStatementRequest < Struct.new(
+      nil,
       :session_id,
       :id,
       :request_origin,
@@ -11549,6 +12027,7 @@ module Aws::Glue
     #   <p>Returns the statement.</p>
     #   @return [Types::Statement]
     class GetStatementResponse < Struct.new(
+      nil,
       :statement,
       keyword_init: true
     )
@@ -11568,6 +12047,7 @@ module Aws::Glue
     #   <p>The type of table optimizer.</p>
     #   @return [String]
     class GetTableOptimizerRequest < Struct.new(
+      nil,
       :catalog_id,
       :database_name,
       :table_name,
@@ -11590,6 +12070,7 @@ module Aws::Glue
     #   <p>The optimizer associated with the specified table.</p>
     #   @return [Types::TableOptimizer]
     class GetTableOptimizerResponse < Struct.new(
+      nil,
       :catalog_id,
       :database_name,
       :table_name,
@@ -11621,6 +12102,7 @@ module Aws::Glue
     #   <p>Specifies whether to include status details related to a request to create or update an Glue Data Catalog view.</p>
     #   @return [Boolean]
     class GetTableRequest < Struct.new(
+      nil,
       :catalog_id,
       :database_name,
       :name,
@@ -11636,6 +12118,7 @@ module Aws::Glue
     #   <p>The <code>Table</code> object that defines the specified table.</p>
     #   @return [Types::Table]
     class GetTableResponse < Struct.new(
+      nil,
       :table,
       keyword_init: true
     )
@@ -11658,6 +12141,7 @@ module Aws::Glue
     #   <p>The ID value of the table version to be retrieved. A <code>VersionID</code> is a string representation of an integer. Each version is incremented by 1. </p>
     #   @return [String]
     class GetTableVersionRequest < Struct.new(
+      nil,
       :catalog_id,
       :database_name,
       :table_name,
@@ -11671,6 +12155,7 @@ module Aws::Glue
     #   <p>The requested table version.</p>
     #   @return [Types::TableVersion]
     class GetTableVersionResponse < Struct.new(
+      nil,
       :table_version,
       keyword_init: true
     )
@@ -11696,6 +12181,7 @@ module Aws::Glue
     #   <p>The maximum number of table versions to return in one response.</p>
     #   @return [Integer]
     class GetTableVersionsRequest < Struct.new(
+      nil,
       :catalog_id,
       :database_name,
       :table_name,
@@ -11715,6 +12201,7 @@ module Aws::Glue
     #         not include the last one.</p>
     #   @return [String]
     class GetTableVersionsResponse < Struct.new(
+      nil,
       :table_versions,
       :next_token,
       keyword_init: true
@@ -11764,6 +12251,7 @@ module Aws::Glue
     #            </ul>
     #   @return [Array<String>]
     class GetTablesRequest < Struct.new(
+      nil,
       :catalog_id,
       :database_name,
       :expression,
@@ -11785,6 +12273,7 @@ module Aws::Glue
     #   <p>A continuation token, present if the current list segment is not the last.</p>
     #   @return [String]
     class GetTablesResponse < Struct.new(
+      nil,
       :table_list,
       :next_token,
       keyword_init: true
@@ -11796,6 +12285,7 @@ module Aws::Glue
     #   <p>The Amazon Resource Name (ARN) of the resource for which to retrieve tags.</p>
     #   @return [String]
     class GetTagsRequest < Struct.new(
+      nil,
       :resource_arn,
       keyword_init: true
     )
@@ -11806,6 +12296,7 @@ module Aws::Glue
     #   <p>The requested tags.</p>
     #   @return [Hash<String, String>]
     class GetTagsResponse < Struct.new(
+      nil,
       :tags,
       keyword_init: true
     )
@@ -11816,6 +12307,7 @@ module Aws::Glue
     #   <p>The name of the trigger to retrieve.</p>
     #   @return [String]
     class GetTriggerRequest < Struct.new(
+      nil,
       :name,
       keyword_init: true
     )
@@ -11826,6 +12318,7 @@ module Aws::Glue
     #   <p>The requested trigger definition.</p>
     #   @return [Types::Trigger]
     class GetTriggerResponse < Struct.new(
+      nil,
       :trigger,
       keyword_init: true
     )
@@ -11843,6 +12336,7 @@ module Aws::Glue
     #   <p>The maximum size of the response.</p>
     #   @return [Integer]
     class GetTriggersRequest < Struct.new(
+      nil,
       :next_token,
       :dependent_job_name,
       :max_results,
@@ -11859,6 +12353,7 @@ module Aws::Glue
     #         have yet been returned.</p>
     #   @return [String]
     class GetTriggersResponse < Struct.new(
+      nil,
       :triggers,
       :next_token,
       keyword_init: true
@@ -11891,6 +12386,7 @@ module Aws::Glue
     #   <p>A structure used as a protocol between query engines and Lake Formation or Glue. Contains both a Lake Formation generated authorization identifier and information from the request's authorization context.</p>
     #   @return [Types::QuerySessionContext]
     class GetUnfilteredPartitionMetadataRequest < Struct.new(
+      nil,
       :region,
       :catalog_id,
       :database_name,
@@ -11915,6 +12411,7 @@ module Aws::Glue
     #             with Lake Formation.</p>
     #   @return [Boolean]
     class GetUnfilteredPartitionMetadataResponse < Struct.new(
+      nil,
       :partition,
       :authorized_columns,
       :is_registered_with_lake_formation,
@@ -12063,6 +12560,7 @@ module Aws::Glue
     #   <p>A structure used as a protocol between query engines and Lake Formation or Glue. Contains both a Lake Formation generated authorization identifier and information from the request's authorization context.</p>
     #   @return [Types::QuerySessionContext]
     class GetUnfilteredPartitionsMetadataRequest < Struct.new(
+      nil,
       :region,
       :catalog_id,
       :database_name,
@@ -12087,6 +12585,7 @@ module Aws::Glue
     #         one.</p>
     #   @return [String]
     class GetUnfilteredPartitionsMetadataResponse < Struct.new(
+      nil,
       :unfiltered_partitions,
       :next_token,
       keyword_init: true
@@ -12148,6 +12647,7 @@ module Aws::Glue
     #   <p>A structure used as a protocol between query engines and Lake Formation or Glue. Contains both a Lake Formation generated authorization identifier and information from the request's authorization context.</p>
     #   @return [Types::QuerySessionContext]
     class GetUnfilteredTableMetadataRequest < Struct.new(
+      nil,
       :region,
       :catalog_id,
       :database_name,
@@ -12196,6 +12696,7 @@ module Aws::Glue
     #   <p>The filter that applies to the table. For example when applying the filter in SQL, it would go in the <code>WHERE</code> clause and can be evaluated by using an <code>AND</code> operator with any other predicates applied by the user querying the table.</p>
     #   @return [String]
     class GetUnfilteredTableMetadataResponse < Struct.new(
+      nil,
       :table,
       :authorized_columns,
       :is_registered_with_lake_formation,
@@ -12222,6 +12723,7 @@ module Aws::Glue
     #   <p>The name of the usage profile to retrieve.</p>
     #   @return [String]
     class GetUsageProfileRequest < Struct.new(
+      nil,
       :name,
       keyword_init: true
     )
@@ -12244,6 +12746,7 @@ module Aws::Glue
     #   <p>The date and time when the usage profile was last modified.</p>
     #   @return [Time]
     class GetUsageProfileResponse < Struct.new(
+      nil,
       :name,
       :description,
       :configuration,
@@ -12265,6 +12768,7 @@ module Aws::Glue
     #   <p>The name of the function.</p>
     #   @return [String]
     class GetUserDefinedFunctionRequest < Struct.new(
+      nil,
       :catalog_id,
       :database_name,
       :function_name,
@@ -12277,6 +12781,7 @@ module Aws::Glue
     #   <p>The requested function definition.</p>
     #   @return [Types::UserDefinedFunction]
     class GetUserDefinedFunctionResponse < Struct.new(
+      nil,
       :user_defined_function,
       keyword_init: true
     )
@@ -12302,6 +12807,7 @@ module Aws::Glue
     #   <p>The maximum number of functions to return in one response.</p>
     #   @return [Integer]
     class GetUserDefinedFunctionsRequest < Struct.new(
+      nil,
       :catalog_id,
       :database_name,
       :pattern,
@@ -12320,6 +12826,7 @@ module Aws::Glue
     #         not include the last requested function.</p>
     #   @return [String]
     class GetUserDefinedFunctionsResponse < Struct.new(
+      nil,
       :user_defined_functions,
       :next_token,
       keyword_init: true
@@ -12334,6 +12841,7 @@ module Aws::Glue
     #   <p>Specifies whether to include a graph when returning the workflow resource metadata.</p>
     #   @return [Boolean]
     class GetWorkflowRequest < Struct.new(
+      nil,
       :name,
       :include_graph,
       keyword_init: true
@@ -12345,6 +12853,7 @@ module Aws::Glue
     #   <p>The resource metadata for the workflow.</p>
     #   @return [Types::Workflow]
     class GetWorkflowResponse < Struct.new(
+      nil,
       :workflow,
       keyword_init: true
     )
@@ -12358,6 +12867,7 @@ module Aws::Glue
     #   <p>The ID of the workflow run whose run properties should be returned.</p>
     #   @return [String]
     class GetWorkflowRunPropertiesRequest < Struct.new(
+      nil,
       :name,
       :run_id,
       keyword_init: true
@@ -12369,6 +12879,7 @@ module Aws::Glue
     #   <p>The workflow run properties which were set during the specified run.</p>
     #   @return [Hash<String, String>]
     class GetWorkflowRunPropertiesResponse < Struct.new(
+      nil,
       :run_properties,
       keyword_init: true
     )
@@ -12385,6 +12896,7 @@ module Aws::Glue
     #   <p>Specifies whether to include the workflow graph in response or not.</p>
     #   @return [Boolean]
     class GetWorkflowRunRequest < Struct.new(
+      nil,
       :name,
       :run_id,
       :include_graph,
@@ -12397,6 +12909,7 @@ module Aws::Glue
     #   <p>The requested workflow run metadata.</p>
     #   @return [Types::WorkflowRun]
     class GetWorkflowRunResponse < Struct.new(
+      nil,
       :run,
       keyword_init: true
     )
@@ -12416,6 +12929,7 @@ module Aws::Glue
     #   <p>The maximum number of workflow runs to be included in the response.</p>
     #   @return [Integer]
     class GetWorkflowRunsRequest < Struct.new(
+      nil,
       :name,
       :include_graph,
       :next_token,
@@ -12432,6 +12946,7 @@ module Aws::Glue
     #   <p>A continuation token, if not all requested workflow runs have been returned.</p>
     #   @return [String]
     class GetWorkflowRunsResponse < Struct.new(
+      nil,
       :runs,
       :next_token,
       keyword_init: true
@@ -12444,6 +12959,7 @@ module Aws::Glue
     #   <p>The message describing the problem.</p>
     #   @return [String]
     class GlueEncryptionException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -12464,6 +12980,7 @@ module Aws::Glue
     #   <p>The date and time at which the policy was last updated.</p>
     #   @return [Time]
     class GluePolicy < Struct.new(
+      nil,
       :policy_in_json,
       :policy_hash,
       :create_time,
@@ -12478,6 +12995,7 @@ module Aws::Glue
     #   <p>Specifies the column definitions that make up a Glue schema.</p>
     #   @return [Array<Types::GlueStudioSchemaColumn>]
     class GlueSchema < Struct.new(
+      nil,
       :columns,
       keyword_init: true
     )
@@ -12495,6 +13013,7 @@ module Aws::Glue
     #   <p>The data type of the column as defined in Glue Studio.</p>
     #   @return [String]
     class GlueStudioSchemaColumn < Struct.new(
+      nil,
       :name,
       :type,
       :glue_studio_type,
@@ -12530,6 +13049,7 @@ module Aws::Glue
     #            </ul>
     #   @return [Hash<String, String>]
     class GlueTable < Struct.new(
+      nil,
       :database_name,
       :table_name,
       :catalog_id,
@@ -12557,6 +13077,7 @@ module Aws::Glue
     #   <p>Specifies additional connection options.</p>
     #   @return [Types::S3SourceAdditionalOptions]
     class GovernedCatalogSource < Struct.new(
+      nil,
       :name,
       :database,
       :table,
@@ -12587,6 +13108,7 @@ module Aws::Glue
     #   <p>A policy that specifies update behavior for the governed catalog.</p>
     #   @return [Types::CatalogSchemaChangePolicy]
     class GovernedCatalogTarget < Struct.new(
+      nil,
       :name,
       :inputs,
       :partition_keys,
@@ -12624,6 +13146,7 @@ module Aws::Glue
     #         For more information, see custom patterns in <a href="https://docs.aws.amazon.com/glue/latest/dg/custom-classifier.html">Writing Custom Classifiers</a>.</p>
     #   @return [String]
     class GrokClassifier < Struct.new(
+      nil,
       :name,
       :classification,
       :creation_time,
@@ -12652,6 +13175,7 @@ module Aws::Glue
     #   <p>The logical operator used to combine the filters in this group. Determines whether all filters must match (AND) or any filter can match (OR).</p>
     #   @return [String]
     class GroupFilters < Struct.new(
+      nil,
       :group_name,
       :filters,
       :logical_operator,
@@ -12676,6 +13200,7 @@ module Aws::Glue
     #   <p>The maximum depth of Amazon S3 paths that the crawler can traverse to discover the Hudi metadata folder in your Amazon S3 path. Used to limit the crawler run time.</p>
     #   @return [Integer]
     class HudiTarget < Struct.new(
+      nil,
       :paths,
       :connection_name,
       :exclusions,
@@ -12719,6 +13244,7 @@ module Aws::Glue
     #   <p>The minimum number of deletes that must be present in a data file to make it eligible for compaction. This parameter helps optimize compaction by focusing on files that contain a significant number of delete operations, which can improve query performance by removing deleted records. If an input is not provided, the default value 1 will be used.</p>
     #   @return [Integer]
     class IcebergCompactionConfiguration < Struct.new(
+      nil,
       :strategy,
       :min_input_files,
       :delete_file_threshold,
@@ -12744,6 +13270,7 @@ module Aws::Glue
     #   <p>The duration of the job in hours.</p>
     #   @return [Float]
     class IcebergCompactionMetrics < Struct.new(
+      nil,
       :number_of_bytes_compacted,
       :number_of_files_compacted,
       :dpu_hours,
@@ -12775,6 +13302,7 @@ module Aws::Glue
     #         and metadata specifications.</p>
     #   @return [Types::CreateIcebergTableInput]
     class IcebergInput < Struct.new(
+      nil,
       :metadata_operation,
       :version,
       :create_iceberg_table_input,
@@ -12797,6 +13325,7 @@ module Aws::Glue
     #   <p>A map of key-value pairs that specify configuration parameters for Iceberg orphan file deletion operations, which identify and remove files that are no longer referenced by the table metadata.</p>
     #   @return [Hash<String, String>]
     class IcebergOptimizationProperties < Struct.new(
+      nil,
       :role_arn,
       :compaction,
       :retention,
@@ -12824,6 +13353,7 @@ module Aws::Glue
     #   <p>The timestamp when the Iceberg optimization properties were last updated.</p>
     #   @return [Time]
     class IcebergOptimizationPropertiesOutput < Struct.new(
+      nil,
       :role_arn,
       :compaction,
       :retention,
@@ -12845,6 +13375,7 @@ module Aws::Glue
     #   <p>The interval in hours between orphan file deletion job runs. This parameter controls how frequently the orphan file deletion optimizer will run to clean up orphan files. The value must be between 3 and 168 hours (7 days). If an input is not provided, the default value 24 will be used.</p>
     #   @return [Integer]
     class IcebergOrphanFileDeletionConfiguration < Struct.new(
+      nil,
       :orphan_file_retention_period_in_days,
       :location,
       :run_rate_in_hours,
@@ -12867,6 +13398,7 @@ module Aws::Glue
     #   <p>The duration of the job in hours.</p>
     #   @return [Float]
     class IcebergOrphanFileDeletionMetrics < Struct.new(
+      nil,
       :number_of_orphan_files_deleted,
       :dpu_hours,
       :number_of_dpus,
@@ -12899,6 +13431,7 @@ module Aws::Glue
     #   <p>The unique identifier assigned to this partition field within the Iceberg table's partition specification.</p>
     #   @return [Integer]
     class IcebergPartitionField < Struct.new(
+      nil,
       :source_id,
       :transform,
       :name,
@@ -12922,6 +13455,7 @@ module Aws::Glue
     #   <p>The unique identifier for this partition specification within the Iceberg table's metadata history.</p>
     #   @return [Integer]
     class IcebergPartitionSpec < Struct.new(
+      nil,
       :fields,
       :spec_id,
       keyword_init: true
@@ -12948,6 +13482,7 @@ module Aws::Glue
     #   <p>The interval in hours between retention job runs. This parameter controls how frequently the retention optimizer will run to clean up expired snapshots. The value must be between 3 and 168 hours (7 days). If an input is not provided, the default value 24 will be used.</p>
     #   @return [Integer]
     class IcebergRetentionConfiguration < Struct.new(
+      nil,
       :snapshot_retention_period_in_days,
       :number_of_snapshots_to_retain,
       :clean_expired_files,
@@ -12977,6 +13512,7 @@ module Aws::Glue
     #   <p>The duration of the job in hours.</p>
     #   @return [Float]
     class IcebergRetentionMetrics < Struct.new(
+      nil,
       :number_of_data_files_deleted,
       :number_of_manifest_files_deleted,
       :number_of_manifest_lists_deleted,
@@ -13012,6 +13548,7 @@ module Aws::Glue
     #   <p>The list of field definitions that make up the table schema, including field names, types, and metadata.</p>
     #   @return [Array<Types::IcebergStructField>]
     class IcebergSchema < Struct.new(
+      nil,
       :schema_id,
       :identifier_field_ids,
       :type,
@@ -13040,6 +13577,7 @@ module Aws::Glue
     #   <p>The ordering behavior for null values in this field, specifying whether nulls should appear first or last in the sort order.</p>
     #   @return [String]
     class IcebergSortField < Struct.new(
+      nil,
       :source_id,
       :transform,
       :direction,
@@ -13063,6 +13601,7 @@ module Aws::Glue
     #   <p>The list of fields and their sort directions that define the ordering criteria for the Iceberg table data.</p>
     #   @return [Array<Types::IcebergSortField>]
     class IcebergSortOrder < Struct.new(
+      nil,
       :order_id,
       :fields,
       keyword_init: true
@@ -13092,6 +13631,7 @@ module Aws::Glue
     #   <p>Optional documentation or description text that provides additional context about the purpose and usage of this field.</p>
     #   @return [String]
     class IcebergStructField < Struct.new(
+      nil,
       :id,
       :name,
       :type,
@@ -13126,6 +13666,7 @@ module Aws::Glue
     #   <p>Updated key-value pairs of table properties and configuration settings for the Iceberg table.</p>
     #   @return [Hash<String, String>]
     class IcebergTableUpdate < Struct.new(
+      nil,
       :schema,
       :partition_spec,
       :sort_order,
@@ -13151,6 +13692,7 @@ module Aws::Glue
     #   <p>The maximum depth of Amazon S3 paths that the crawler can traverse to discover the Iceberg metadata folder in your Amazon S3 path. Used to limit the crawler run time.</p>
     #   @return [Integer]
     class IcebergTarget < Struct.new(
+      nil,
       :paths,
       :connection_name,
       :exclusions,
@@ -13165,6 +13707,7 @@ module Aws::Glue
     #   <p>A message describing the problem.</p>
     #   @return [String]
     class IdempotentParameterMismatchException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -13176,6 +13719,7 @@ module Aws::Glue
     #   <p>A message describing the problem.</p>
     #   @return [String]
     class IllegalBlueprintStateException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -13187,6 +13731,7 @@ module Aws::Glue
     #   <p>A message describing the problem.</p>
     #   @return [String]
     class IllegalSessionStateException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -13198,6 +13743,7 @@ module Aws::Glue
     #   <p>A message describing the problem.</p>
     #   @return [String]
     class IllegalWorkflowStateException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -13208,6 +13754,7 @@ module Aws::Glue
     #   <p>The ID of the catalog to import. Currently, this should be the Amazon Web Services account ID.</p>
     #   @return [String]
     class ImportCatalogToGlueRequest < Struct.new(
+      nil,
       :catalog_id,
       keyword_init: true
     )
@@ -13215,6 +13762,7 @@ module Aws::Glue
     end
 
     class ImportCatalogToGlueResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -13229,6 +13777,7 @@ module Aws::Glue
     #   <p>Indicates whether to overwrite your existing labels.</p>
     #   @return [Boolean]
     class ImportLabelsTaskRunProperties < Struct.new(
+      nil,
       :input_s3_path,
       :replace,
       keyword_init: true
@@ -13287,6 +13836,7 @@ module Aws::Glue
     #   <p>A list of errors associated with the integration.</p>
     #   @return [Array<Types::IntegrationError>]
     class InboundIntegration < Struct.new(
+      nil,
       :source_arn,
       :target_arn,
       :integration_arn,
@@ -13363,6 +13913,7 @@ module Aws::Glue
     #   <p>Selects source tables for the integration using Maxwell filter syntax.</p>
     #   @return [String]
     class Integration < Struct.new(
+      nil,
       :source_arn,
       :target_arn,
       :description,
@@ -13398,6 +13949,7 @@ module Aws::Glue
     #         and Amazon S3.</p>
     #   @return [Boolean]
     class IntegrationConfig < Struct.new(
+      nil,
       :refresh_interval,
       :source_properties,
       :continuous_sync,
@@ -13411,6 +13963,7 @@ module Aws::Glue
     #   <p>A message describing the problem.</p>
     #   @return [String]
     class IntegrationConflictOperationFault < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -13425,6 +13978,7 @@ module Aws::Glue
     #   <p>A message describing the error.</p>
     #   @return [String]
     class IntegrationError < Struct.new(
+      nil,
       :error_code,
       :error_message,
       keyword_init: true
@@ -13440,6 +13994,7 @@ module Aws::Glue
     #   <p>A list of filter values.</p>
     #   @return [Array<String>]
     class IntegrationFilter < Struct.new(
+      nil,
       :name,
       :values,
       keyword_init: true
@@ -13452,6 +14007,7 @@ module Aws::Glue
     #   <p>A message describing the problem.</p>
     #   @return [String]
     class IntegrationNotFoundFault < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -13530,6 +14086,7 @@ module Aws::Glue
     #            </note>
     #   @return [String]
     class IntegrationPartition < Struct.new(
+      nil,
       :field_name,
       :function_spec,
       :conversion_spec,
@@ -13543,6 +14100,7 @@ module Aws::Glue
     #   <p>A message describing the problem.</p>
     #   @return [String]
     class IntegrationQuotaExceededFault < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -13554,6 +14112,7 @@ module Aws::Glue
     #   <p>A message describing the problem.</p>
     #   @return [String]
     class InternalServerException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -13565,6 +14124,7 @@ module Aws::Glue
     #   <p>A message describing the problem.</p>
     #   @return [String]
     class InternalServiceException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -13579,6 +14139,7 @@ module Aws::Glue
     #   <p>Indicates whether or not the exception relates to a federated source.</p>
     #   @return [Boolean]
     class InvalidInputException < Struct.new(
+      nil,
       :message,
       :from_federation_source,
       keyword_init: true
@@ -13591,6 +14152,7 @@ module Aws::Glue
     #   <p>A message describing the problem.</p>
     #   @return [String]
     class InvalidIntegrationStateFault < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -13602,6 +14164,7 @@ module Aws::Glue
     #   <p>A message describing the problem.</p>
     #   @return [String]
     class InvalidStateException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -13638,6 +14201,7 @@ module Aws::Glue
     #   <p>Custom data type mapping that builds a mapping from a JDBC data type to an Glue data type. For example, the option <code>"dataTypeMapping":{"FLOAT":"STRING"}</code> maps data fields of JDBC type <code>FLOAT</code> into the Java <code>String</code> type by calling the <code>ResultSet.getString()</code> method of the driver, and uses it to build the Glue record. The <code>ResultSet</code> object is implemented by each driver, so the behavior is specific to the driver you use. Refer to the documentation for your JDBC driver to understand how the driver performs the conversions.</p>
     #   @return [Hash<String, String>]
     class JDBCConnectorOptions < Struct.new(
+      nil,
       :filter_predicate,
       :partition_column,
       :lower_bound,
@@ -13677,6 +14241,7 @@ module Aws::Glue
     #   <p>Specifies the data schema for the custom JDBC source.</p>
     #   @return [Array<Types::GlueSchema>]
     class JDBCConnectorSource < Struct.new(
+      nil,
       :name,
       :connection_name,
       :connector_name,
@@ -13716,6 +14281,7 @@ module Aws::Glue
     #   <p>Specifies the data schema for the JDBC target.</p>
     #   @return [Array<Types::GlueSchema>]
     class JDBCConnectorTarget < Struct.new(
+      nil,
       :name,
       :inputs,
       :connection_name,
@@ -13745,6 +14311,7 @@ module Aws::Glue
     #            <p>If you do not need additional metadata, keep the field empty.</p>
     #   @return [Array<String>]
     class JdbcTarget < Struct.new(
+      nil,
       :connection_name,
       :path,
       :exclusions,
@@ -13952,6 +14519,7 @@ module Aws::Glue
     #   <p>The name of an Glue usage profile associated with the job.</p>
     #   @return [String]
     class Job < Struct.new(
+      nil,
       :name,
       :job_mode,
       :job_run_queuing_enabled,
@@ -14013,6 +14581,7 @@ module Aws::Glue
     #   <p>The bookmark itself.</p>
     #   @return [String]
     class JobBookmarkEntry < Struct.new(
+      nil,
       :job_name,
       :version,
       :run,
@@ -14040,6 +14609,7 @@ module Aws::Glue
     #   <p>The Amazon Resource Name (ARN) of the KMS key to be used to encrypt the data.</p>
     #   @return [String]
     class JobBookmarksEncryption < Struct.new(
+      nil,
       :job_bookmarks_encryption_mode,
       :kms_key_arn,
       keyword_init: true
@@ -14068,6 +14638,7 @@ module Aws::Glue
     #         in the Glue Developer Guide.</p>
     #   @return [String]
     class JobCommand < Struct.new(
+      nil,
       :name,
       :script_location,
       :python_version,
@@ -14082,6 +14653,7 @@ module Aws::Glue
     #   <p>The information for the job runs represented by the job node.</p>
     #   @return [Array<Types::JobRun>]
     class JobNodeDetails < Struct.new(
+      nil,
       :job_runs,
       keyword_init: true
     )
@@ -14283,6 +14855,7 @@ module Aws::Glue
     #         execution role for the scope of the job, without requiring the creation of additional IAM roles.</p>
     #   @return [String]
     class JobRun < Struct.new(
+      nil,
       :id,
       :attempt,
       :previous_run_id,
@@ -14479,6 +15052,7 @@ module Aws::Glue
     #            <p>Glue will restart the job within 3 hours of the specified maintenance window. For instance, if you set up the maintenance window for Monday at 10:00AM GMT, your jobs will be restarted between 10:00AM GMT to 1:00PM GMT.</p>
     #   @return [String]
     class JobUpdate < Struct.new(
+      nil,
       :job_mode,
       :job_run_queuing_enabled,
       :description,
@@ -14527,6 +15101,7 @@ module Aws::Glue
     #   <p>A list of the two columns to be joined.</p>
     #   @return [Array<Types::JoinColumn>]
     class Join < Struct.new(
+      nil,
       :name,
       :inputs,
       :join_type,
@@ -14544,6 +15119,7 @@ module Aws::Glue
     #   <p>The key of the column to be joined.</p>
     #   @return [Array<Array<String>>]
     class JoinColumn < Struct.new(
+      nil,
       :from,
       :keys,
       keyword_init: true
@@ -14569,6 +15145,7 @@ module Aws::Glue
     #         Glue supports a subset of JsonPath, as described in <a href="https://docs.aws.amazon.com/glue/latest/dg/custom-classifier.html#custom-classifier-json">Writing JsonPath Custom Classifiers</a>.</p>
     #   @return [String]
     class JsonClassifier < Struct.new(
+      nil,
       :name,
       :creation_time,
       :last_updated,
@@ -14589,6 +15166,7 @@ module Aws::Glue
     #   <p>A message describing the problem.</p>
     #   @return [String]
     class KMSKeyNotAccessibleFault < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -14657,6 +15235,7 @@ module Aws::Glue
     #            <p>Only one of <code>StartingTimestamp</code> or <code>StartingOffsets</code> must be set.</p>
     #   @return [Time]
     class KafkaStreamingSourceOptions < Struct.new(
+      nil,
       :bootstrap_servers,
       :security_protocol,
       :connection_name,
@@ -14689,6 +15268,7 @@ module Aws::Glue
     #   <p>The type of a partition key.</p>
     #   @return [String]
     class KeySchemaElement < Struct.new(
+      nil,
       :name,
       :type,
       keyword_init: true
@@ -14766,6 +15346,7 @@ module Aws::Glue
     #         dedicated throughput and lower latency data consumption.</p>
     #   @return [String]
     class KinesisStreamingSourceOptions < Struct.new(
+      nil,
       :endpoint_url,
       :stream_name,
       :classification,
@@ -14799,6 +15380,7 @@ module Aws::Glue
     #         set.</p>
     #   @return [String]
     class LabelingSetGenerationTaskRunProperties < Struct.new(
+      nil,
       :output_s3_path,
       keyword_init: true
     )
@@ -14813,6 +15395,7 @@ module Aws::Glue
     #   <p>Required for cross account crawls. For same account crawls as the target data, this can be left as null.</p>
     #   @return [String]
     class LakeFormationConfiguration < Struct.new(
+      nil,
       :use_lake_formation_credentials,
       :account_id,
       keyword_init: true
@@ -14837,6 +15420,7 @@ module Aws::Glue
     #   <p>Specifies a path in Amazon S3 where the blueprint is copied when you create or update the blueprint.</p>
     #   @return [String]
     class LastActiveDefinition < Struct.new(
+      nil,
       :description,
       :last_modified_on,
       :parameter_spec,
@@ -14867,6 +15451,7 @@ module Aws::Glue
     #   <p>The time at which the crawl started.</p>
     #   @return [Time]
     class LastCrawlInfo < Struct.new(
+      nil,
       :status,
       :error_message,
       :log_group,
@@ -14891,6 +15476,7 @@ module Aws::Glue
     #            </ul>
     #   @return [String]
     class LineageConfiguration < Struct.new(
+      nil,
       :crawler_lineage_settings,
       keyword_init: true
     )
@@ -14907,6 +15493,7 @@ module Aws::Glue
     #   <p>Filters the list by an Amazon Web Services resource tag.</p>
     #   @return [Hash<String, String>]
     class ListBlueprintsRequest < Struct.new(
+      nil,
       :next_token,
       :max_results,
       :tags,
@@ -14922,6 +15509,7 @@ module Aws::Glue
     #   <p>A continuation token, if not all blueprint names have been returned.</p>
     #   @return [String]
     class ListBlueprintsResponse < Struct.new(
+      nil,
       :blueprints,
       :next_token,
       keyword_init: true
@@ -14936,6 +15524,7 @@ module Aws::Glue
     #   <p>A continuation token, if this is a continuation call.</p>
     #   @return [String]
     class ListColumnStatisticsTaskRunsRequest < Struct.new(
+      nil,
       :max_results,
       :next_token,
       keyword_init: true
@@ -14950,6 +15539,7 @@ module Aws::Glue
     #   <p>A continuation token, if not all task run IDs have yet been returned.</p>
     #   @return [String]
     class ListColumnStatisticsTaskRunsResponse < Struct.new(
+      nil,
       :column_statistics_task_run_ids,
       :next_token,
       keyword_init: true
@@ -14964,6 +15554,7 @@ module Aws::Glue
     #   <p>A continuation token, if this is a continuation call.</p>
     #   @return [String]
     class ListConnectionTypesRequest < Struct.new(
+      nil,
       :max_results,
       :next_token,
       keyword_init: true
@@ -14978,6 +15569,7 @@ module Aws::Glue
     #   <p>A continuation token, if the current list segment is not the last.</p>
     #   @return [String]
     class ListConnectionTypesResponse < Struct.new(
+      nil,
       :connection_types,
       :next_token,
       keyword_init: true
@@ -14995,6 +15587,7 @@ module Aws::Glue
     #   <p>Specifies to return only these tagged resources.</p>
     #   @return [Hash<String, String>]
     class ListCrawlersRequest < Struct.new(
+      nil,
       :max_results,
       :next_token,
       :tags,
@@ -15011,6 +15604,7 @@ module Aws::Glue
     #         last metric available.</p>
     #   @return [String]
     class ListCrawlersResponse < Struct.new(
+      nil,
       :crawler_names,
       :next_token,
       keyword_init: true
@@ -15031,6 +15625,7 @@ module Aws::Glue
     #   <p>A continuation token, if this is a continuation call.</p>
     #   @return [String]
     class ListCrawlsRequest < Struct.new(
+      nil,
       :crawler_name,
       :max_results,
       :filters,
@@ -15047,6 +15642,7 @@ module Aws::Glue
     #   <p>A continuation token for paginating the returned list of tokens, returned if the current segment of the list is not the last.</p>
     #   @return [String]
     class ListCrawlsResponse < Struct.new(
+      nil,
       :crawls,
       :next_token,
       keyword_init: true
@@ -15064,6 +15660,7 @@ module Aws::Glue
     #   <p>A list of key-value pair tags.</p>
     #   @return [Hash<String, String>]
     class ListCustomEntityTypesRequest < Struct.new(
+      nil,
       :next_token,
       :max_results,
       :tags,
@@ -15079,6 +15676,7 @@ module Aws::Glue
     #   <p>A pagination token, if more results are available.</p>
     #   @return [String]
     class ListCustomEntityTypesResponse < Struct.new(
+      nil,
       :custom_entity_types,
       :next_token,
       keyword_init: true
@@ -15096,6 +15694,7 @@ module Aws::Glue
     #   <p>The maximum number of results to return.</p>
     #   @return [Integer]
     class ListDataQualityResultsRequest < Struct.new(
+      nil,
       :filter,
       :next_token,
       :max_results,
@@ -15111,6 +15710,7 @@ module Aws::Glue
     #   <p>A pagination token, if more results are available.</p>
     #   @return [String]
     class ListDataQualityResultsResponse < Struct.new(
+      nil,
       :results,
       :next_token,
       keyword_init: true
@@ -15128,6 +15728,7 @@ module Aws::Glue
     #   <p>The maximum number of results to return.</p>
     #   @return [Integer]
     class ListDataQualityRuleRecommendationRunsRequest < Struct.new(
+      nil,
       :filter,
       :next_token,
       :max_results,
@@ -15143,6 +15744,7 @@ module Aws::Glue
     #   <p>A pagination token, if more results are available.</p>
     #   @return [String]
     class ListDataQualityRuleRecommendationRunsResponse < Struct.new(
+      nil,
       :runs,
       :next_token,
       keyword_init: true
@@ -15160,6 +15762,7 @@ module Aws::Glue
     #   <p>The maximum number of results to return.</p>
     #   @return [Integer]
     class ListDataQualityRulesetEvaluationRunsRequest < Struct.new(
+      nil,
       :filter,
       :next_token,
       :max_results,
@@ -15175,6 +15778,7 @@ module Aws::Glue
     #   <p>A pagination token, if more results are available.</p>
     #   @return [String]
     class ListDataQualityRulesetEvaluationRunsResponse < Struct.new(
+      nil,
       :runs,
       :next_token,
       keyword_init: true
@@ -15195,6 +15799,7 @@ module Aws::Glue
     #   <p>A list of key-value pair tags.</p>
     #   @return [Hash<String, String>]
     class ListDataQualityRulesetsRequest < Struct.new(
+      nil,
       :next_token,
       :max_results,
       :filter,
@@ -15211,6 +15816,7 @@ module Aws::Glue
     #   <p>A pagination token, if more results are available.</p>
     #   @return [String]
     class ListDataQualityRulesetsResponse < Struct.new(
+      nil,
       :rulesets,
       :next_token,
       keyword_init: true
@@ -15234,6 +15840,7 @@ module Aws::Glue
     #   <p>A pagination token to retrieve the next set of results.</p>
     #   @return [String]
     class ListDataQualityStatisticAnnotationsRequest < Struct.new(
+      nil,
       :statistic_id,
       :profile_id,
       :timestamp_filter,
@@ -15251,6 +15858,7 @@ module Aws::Glue
     #   <p>A pagination token to retrieve the next set of results.</p>
     #   @return [String]
     class ListDataQualityStatisticAnnotationsResponse < Struct.new(
+      nil,
       :annotations,
       :next_token,
       keyword_init: true
@@ -15274,6 +15882,7 @@ module Aws::Glue
     #   <p>A pagination token to request the next page of results.</p>
     #   @return [String]
     class ListDataQualityStatisticsRequest < Struct.new(
+      nil,
       :statistic_id,
       :profile_id,
       :timestamp_filter,
@@ -15291,6 +15900,7 @@ module Aws::Glue
     #   <p>A pagination token to request the next page of results.</p>
     #   @return [String]
     class ListDataQualityStatisticsResponse < Struct.new(
+      nil,
       :statistics,
       :next_token,
       keyword_init: true
@@ -15308,6 +15918,7 @@ module Aws::Glue
     #   <p>Specifies to return only these tagged resources.</p>
     #   @return [Hash<String, String>]
     class ListDevEndpointsRequest < Struct.new(
+      nil,
       :next_token,
       :max_results,
       :tags,
@@ -15325,6 +15936,7 @@ module Aws::Glue
     #         last metric available.</p>
     #   @return [String]
     class ListDevEndpointsResponse < Struct.new(
+      nil,
       :dev_endpoint_names,
       :next_token,
       keyword_init: true
@@ -15348,6 +15960,7 @@ module Aws::Glue
     #   <p>The API version of the SaaS connector.</p>
     #   @return [String]
     class ListEntitiesRequest < Struct.new(
+      nil,
       :connection_name,
       :catalog_id,
       :parent_entity_name,
@@ -15365,6 +15978,7 @@ module Aws::Glue
     #   <p>A continuation token, present if the current segment is not the last.</p>
     #   @return [String]
     class ListEntitiesResponse < Struct.new(
+      nil,
       :entities,
       :next_token,
       keyword_init: true
@@ -15382,6 +15996,7 @@ module Aws::Glue
     #   <p>Specifies to return only these tagged resources.</p>
     #   @return [Hash<String, String>]
     class ListJobsRequest < Struct.new(
+      nil,
       :next_token,
       :max_results,
       :tags,
@@ -15398,6 +16013,7 @@ module Aws::Glue
     #         last metric available.</p>
     #   @return [String]
     class ListJobsResponse < Struct.new(
+      nil,
       :job_names,
       :next_token,
       keyword_init: true
@@ -15421,6 +16037,7 @@ module Aws::Glue
     #   <p>Specifies to return only these tagged resources.</p>
     #   @return [Hash<String, String>]
     class ListMLTransformsRequest < Struct.new(
+      nil,
       :next_token,
       :max_results,
       :filter,
@@ -15440,6 +16057,7 @@ module Aws::Glue
     #         last metric available.</p>
     #   @return [String]
     class ListMLTransformsResponse < Struct.new(
+      nil,
       :transform_ids,
       :next_token,
       keyword_init: true
@@ -15454,6 +16072,7 @@ module Aws::Glue
     #   <p>A continuation token, if this is a continuation call.</p>
     #   @return [String]
     class ListRegistriesInput < Struct.new(
+      nil,
       :max_results,
       :next_token,
       keyword_init: true
@@ -15468,6 +16087,7 @@ module Aws::Glue
     #   <p>A continuation token for paginating the returned list of tokens, returned if the current segment of the list is not the last.</p>
     #   @return [String]
     class ListRegistriesResponse < Struct.new(
+      nil,
       :registries,
       :next_token,
       keyword_init: true
@@ -15493,6 +16113,7 @@ module Aws::Glue
     #   <p>A continuation token, if this is a continuation call.</p>
     #   @return [String]
     class ListSchemaVersionsInput < Struct.new(
+      nil,
       :schema_id,
       :max_results,
       :next_token,
@@ -15508,6 +16129,7 @@ module Aws::Glue
     #   <p>A continuation token for paginating the returned list of tokens, returned if the current segment of the list is not the last.</p>
     #   @return [String]
     class ListSchemaVersionsResponse < Struct.new(
+      nil,
       :schemas,
       :next_token,
       keyword_init: true
@@ -15525,6 +16147,7 @@ module Aws::Glue
     #   <p>A continuation token, if this is a continuation call.</p>
     #   @return [String]
     class ListSchemasInput < Struct.new(
+      nil,
       :registry_id,
       :max_results,
       :next_token,
@@ -15540,6 +16163,7 @@ module Aws::Glue
     #   <p>A continuation token for paginating the returned list of tokens, returned if the current segment of the list is not the last.</p>
     #   @return [String]
     class ListSchemasResponse < Struct.new(
+      nil,
       :schemas,
       :next_token,
       keyword_init: true
@@ -15560,6 +16184,7 @@ module Aws::Glue
     #   <p>The origin of the request. </p>
     #   @return [String]
     class ListSessionsRequest < Struct.new(
+      nil,
       :next_token,
       :max_results,
       :tags,
@@ -15579,6 +16204,7 @@ module Aws::Glue
     #   <p>The token for the next set of results, or null if there are no more result. </p>
     #   @return [String]
     class ListSessionsResponse < Struct.new(
+      nil,
       :ids,
       :sessions,
       :next_token,
@@ -15597,6 +16223,7 @@ module Aws::Glue
     #   <p>A continuation token, if this is a continuation call.</p>
     #   @return [String]
     class ListStatementsRequest < Struct.new(
+      nil,
       :session_id,
       :request_origin,
       :next_token,
@@ -15612,6 +16239,7 @@ module Aws::Glue
     #   <p>A continuation token, if not all statements have yet been returned.</p>
     #   @return [String]
     class ListStatementsResponse < Struct.new(
+      nil,
       :statements,
       :next_token,
       keyword_init: true
@@ -15638,6 +16266,7 @@ module Aws::Glue
     #   <p>A continuation token, if this is a continuation call.</p>
     #   @return [String]
     class ListTableOptimizerRunsRequest < Struct.new(
+      nil,
       :catalog_id,
       :database_name,
       :table_name,
@@ -15665,6 +16294,7 @@ module Aws::Glue
     #   <p>A list of the optimizer runs associated with a table.</p>
     #   @return [Array<Types::TableOptimizerRun>]
     class ListTableOptimizerRunsResponse < Struct.new(
+      nil,
       :catalog_id,
       :database_name,
       :table_name,
@@ -15689,6 +16319,7 @@ module Aws::Glue
     #   <p>Specifies to return only these tagged resources.</p>
     #   @return [Hash<String, String>]
     class ListTriggersRequest < Struct.new(
+      nil,
       :next_token,
       :dependent_job_name,
       :max_results,
@@ -15706,6 +16337,7 @@ module Aws::Glue
     #         last metric available.</p>
     #   @return [String]
     class ListTriggersResponse < Struct.new(
+      nil,
       :trigger_names,
       :next_token,
       keyword_init: true
@@ -15720,6 +16352,7 @@ module Aws::Glue
     #   <p>The maximum number of usage profiles to return in a single response.</p>
     #   @return [Integer]
     class ListUsageProfilesRequest < Struct.new(
+      nil,
       :next_token,
       :max_results,
       keyword_init: true
@@ -15734,6 +16367,7 @@ module Aws::Glue
     #   <p>A continuation token, present if the current list segment is not the last.</p>
     #   @return [String]
     class ListUsageProfilesResponse < Struct.new(
+      nil,
       :profiles,
       :next_token,
       keyword_init: true
@@ -15748,6 +16382,7 @@ module Aws::Glue
     #   <p>The maximum size of a list to return.</p>
     #   @return [Integer]
     class ListWorkflowsRequest < Struct.new(
+      nil,
       :next_token,
       :max_results,
       keyword_init: true
@@ -15762,6 +16397,7 @@ module Aws::Glue
     #   <p>A continuation token, if not all workflow names have been returned.</p>
     #   @return [String]
     class ListWorkflowsResponse < Struct.new(
+      nil,
       :workflows,
       :next_token,
       keyword_init: true
@@ -15780,6 +16416,7 @@ module Aws::Glue
     #   <p>An Amazon DynamoDB table location.</p>
     #   @return [Array<Types::CodeGenNodeArg>]
     class Location < Struct.new(
+      nil,
       :jdbc,
       :s3,
       :dynamo_db,
@@ -15802,6 +16439,7 @@ module Aws::Glue
     #   <p>The number of distinct values in a column.</p>
     #   @return [Integer]
     class LongColumnStatisticsData < Struct.new(
+      nil,
       :minimum_value,
       :maximum_value,
       :number_of_nulls,
@@ -15943,6 +16581,7 @@ module Aws::Glue
     #   <p>The encryption-at-rest settings of the transform that apply to accessing user data. Machine learning transforms can access user data encrypted in Amazon S3 using KMS.</p>
     #   @return [Types::TransformEncryption]
     class MLTransform < Struct.new(
+      nil,
       :transform_id,
       :name,
       :description,
@@ -15977,6 +16616,7 @@ module Aws::Glue
     #   <p>A message describing the problem.</p>
     #   @return [String]
     class MLTransformNotReadyException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -15999,6 +16639,7 @@ module Aws::Glue
     #   <p>The ID for the customer-provided KMS key.</p>
     #   @return [String]
     class MLUserDataEncryption < Struct.new(
+      nil,
       :ml_user_data_encryption_mode,
       :kms_key_id,
       keyword_init: true
@@ -16056,6 +16697,7 @@ module Aws::Glue
     #            </p>
     #   @return [Array<Types::Mapping>]
     class Mapping < Struct.new(
+      nil,
       :to_key,
       :from_path,
       :from_type,
@@ -16087,6 +16729,7 @@ module Aws::Glue
     #   <p>The target type.</p>
     #   @return [String]
     class MappingEntry < Struct.new(
+      nil,
       :source_table,
       :source_path,
       :source_type,
@@ -16112,6 +16755,7 @@ module Aws::Glue
     #   <p>The list of primary key fields to match records from the source and staging dynamic frames.</p>
     #   @return [Array<Array<String>>]
     class Merge < Struct.new(
+      nil,
       :name,
       :inputs,
       :source,
@@ -16132,6 +16776,7 @@ module Aws::Glue
     #   <p>Other metadata belonging to the same metadata key.</p>
     #   @return [Array<Types::OtherMetadataValueListItem>]
     class MetadataInfo < Struct.new(
+      nil,
       :metadata_value,
       :created_time,
       :other_metadata_value_list,
@@ -16148,6 +16793,7 @@ module Aws::Glue
     #   <p>A metadata key’s corresponding value.</p>
     #   @return [String]
     class MetadataKeyValuePair < Struct.new(
+      nil,
       :metadata_key,
       :metadata_value,
       keyword_init: true
@@ -16169,6 +16815,7 @@ module Aws::Glue
     #   <p>A list of new data quality rules generated as part of the observation based on the data quality metric value.</p>
     #   @return [Array<String>]
     class MetricBasedObservation < Struct.new(
+      nil,
       :metric_name,
       :statistic_id,
       :metric_values,
@@ -16189,6 +16836,7 @@ module Aws::Glue
     #   <p>The name of the table in the database to read from.</p>
     #   @return [String]
     class MicrosoftSQLServerCatalogSource < Struct.new(
+      nil,
       :name,
       :database,
       :table,
@@ -16211,6 +16859,7 @@ module Aws::Glue
     #   <p>The name of the table in the database to write to.</p>
     #   @return [String]
     class MicrosoftSQLServerCatalogTarget < Struct.new(
+      nil,
       :name,
       :inputs,
       :database,
@@ -16236,6 +16885,7 @@ module Aws::Glue
     #   <p>A unique name for an integration in Glue.</p>
     #   @return [String]
     class ModifyIntegrationRequest < Struct.new(
+      nil,
       :integration_identifier,
       :description,
       :data_filter,
@@ -16310,6 +16960,7 @@ module Aws::Glue
     #   <p>Properties associated with the integration.</p>
     #   @return [Types::IntegrationConfig]
     class ModifyIntegrationResponse < Struct.new(
+      nil,
       :source_arn,
       :target_arn,
       :integration_name,
@@ -16340,6 +16991,7 @@ module Aws::Glue
     #            <p>A value of <code>true</code> means to scan all records, while a value of <code>false</code> means to sample the records. If no value is specified, the value defaults to <code>true</code>.</p>
     #   @return [Boolean]
     class MongoDBTarget < Struct.new(
+      nil,
       :connection_name,
       :path,
       :scan_all,
@@ -16359,6 +17011,7 @@ module Aws::Glue
     #   <p>The name of the table in the database to read from.</p>
     #   @return [String]
     class MySQLCatalogSource < Struct.new(
+      nil,
       :name,
       :database,
       :table,
@@ -16381,6 +17034,7 @@ module Aws::Glue
     #   <p>The name of the table in the database to write to.</p>
     #   @return [String]
     class MySQLCatalogTarget < Struct.new(
+      nil,
       :name,
       :inputs,
       :database,
@@ -16395,6 +17049,7 @@ module Aws::Glue
     #   <p>A message describing the problem.</p>
     #   @return [String]
     class NoScheduleException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -16421,6 +17076,7 @@ module Aws::Glue
     #   <p>Details of the crawler when the node represents a crawler.</p>
     #   @return [Types::CrawlerNodeDetails]
     class Node < Struct.new(
+      nil,
       :type,
       :name,
       :unique_id,
@@ -16438,6 +17094,7 @@ module Aws::Glue
     #         sending a job run delay notification.</p>
     #   @return [Integer]
     class NotificationProperty < Struct.new(
+      nil,
       :notify_delay_after,
       keyword_init: true
     )
@@ -16455,6 +17112,7 @@ module Aws::Glue
     #   <p>Specifies that an integer value of -1 is considered as a null value.</p>
     #   @return [Boolean]
     class NullCheckBoxList < Struct.new(
+      nil,
       :is_empty,
       :is_null_string,
       :is_neg_one,
@@ -16471,6 +17129,7 @@ module Aws::Glue
     #   <p>The datatype of the value.</p>
     #   @return [Types::Datatype]
     class NullValueField < Struct.new(
+      nil,
       :value,
       :datatype,
       keyword_init: true
@@ -16486,6 +17145,7 @@ module Aws::Glue
     #   <p>The reference to the SaaS-side client app that is Amazon Web Services managed.</p>
     #   @return [String]
     class OAuth2ClientApplication < Struct.new(
+      nil,
       :user_managed_client_application_client_id,
       :aws_managed_client_application_reference,
       keyword_init: true
@@ -16507,6 +17167,7 @@ module Aws::Glue
     #   <p>The JSON Web Token (JWT) used when the authentication type is OAuth2.</p>
     #   @return [String]
     class OAuth2Credentials < Struct.new(
+      nil,
       :user_managed_client_application_client_secret,
       :access_token,
       :refresh_token,
@@ -16530,6 +17191,7 @@ module Aws::Glue
     #   <p>A map of parameters that are added to the token <code>GET</code> request.</p>
     #   @return [Hash<String, String>]
     class OAuth2Properties < Struct.new(
+      nil,
       :o_auth2_grant_type,
       :o_auth2_client_application,
       :token_url,
@@ -16559,6 +17221,7 @@ module Aws::Glue
     #   <p>The credentials used when the authentication type is OAuth2 authentication.</p>
     #   @return [Types::OAuth2Credentials]
     class OAuth2PropertiesInput < Struct.new(
+      nil,
       :o_auth2_grant_type,
       :o_auth2_client_application,
       :token_url,
@@ -16575,6 +17238,7 @@ module Aws::Glue
     #   <p>Specifies an <code>IcebergInput</code> structure that defines an Apache Iceberg metadata table.</p>
     #   @return [Types::IcebergInput]
     class OpenTableFormatInput < Struct.new(
+      nil,
       :iceberg_input,
       keyword_init: true
     )
@@ -16586,6 +17250,7 @@ module Aws::Glue
     #   <p>A message describing the problem.</p>
     #   @return [String]
     class OperationNotSupportedException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -16597,6 +17262,7 @@ module Aws::Glue
     #   <p>A message describing the problem.</p>
     #   @return [String]
     class OperationTimeoutException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -16614,6 +17280,7 @@ module Aws::Glue
     #   <p>Specifies the description of the option.</p>
     #   @return [String]
     class Option < Struct.new(
+      nil,
       :value,
       :label,
       :description,
@@ -16633,6 +17300,7 @@ module Aws::Glue
     #   <p>The name of the table in the database to read from.</p>
     #   @return [String]
     class OracleSQLCatalogSource < Struct.new(
+      nil,
       :name,
       :database,
       :table,
@@ -16655,6 +17323,7 @@ module Aws::Glue
     #   <p>The name of the table in the database to write to.</p>
     #   @return [String]
     class OracleSQLCatalogTarget < Struct.new(
+      nil,
       :name,
       :inputs,
       :database,
@@ -16673,6 +17342,7 @@ module Aws::Glue
     #         (<code>== 1</code>), or in descending order (<code>==0</code>).</p>
     #   @return [Integer]
     class Order < Struct.new(
+      nil,
       :column,
       :sort_order,
       keyword_init: true
@@ -16690,6 +17360,7 @@ module Aws::Glue
     #   <p>The configuration for an Iceberg orphan file deletion optimizer.</p>
     #   @return [Types::IcebergOrphanFileDeletionConfiguration]
     class OrphanFileDeletionConfiguration < Struct.new(
+      nil,
       :iceberg_configuration,
       keyword_init: true
     )
@@ -16701,6 +17372,7 @@ module Aws::Glue
     #   <p>A structure containing the Iceberg orphan file deletion metrics for the optimizer run.</p>
     #   @return [Types::IcebergOrphanFileDeletionMetrics]
     class OrphanFileDeletionMetrics < Struct.new(
+      nil,
       :iceberg_metrics,
       keyword_init: true
     )
@@ -16715,6 +17387,7 @@ module Aws::Glue
     #   <p>The time at which the entry was created.</p>
     #   @return [String]
     class OtherMetadataValueListItem < Struct.new(
+      nil,
       :metadata_value,
       :created_time,
       keyword_init: true
@@ -16774,6 +17447,7 @@ module Aws::Glue
     #   <p>The sensitivity level for PII detection. Higher sensitivity levels detect more potential PII but may result in more false positives.</p>
     #   @return [String]
     class PIIDetection < Struct.new(
+      nil,
       :name,
       :inputs,
       :pii_type,
@@ -16825,6 +17499,7 @@ module Aws::Glue
     #   <p>The ID of the Data Catalog in which the partition resides.</p>
     #   @return [String]
     class Partition < Struct.new(
+      nil,
       :values,
       :database_name,
       :table_name,
@@ -16847,6 +17522,7 @@ module Aws::Glue
     #   <p>The details about the partition error.</p>
     #   @return [Types::ErrorDetail]
     class PartitionError < Struct.new(
+      nil,
       :partition_values,
       :error_detail,
       keyword_init: true
@@ -16862,6 +17538,7 @@ module Aws::Glue
     #   <p>The name of the partition index.</p>
     #   @return [String]
     class PartitionIndex < Struct.new(
+      nil,
       :keys,
       :index_name,
       keyword_init: true
@@ -16898,6 +17575,7 @@ module Aws::Glue
     #   <p>A list of errors that can occur when registering partition indexes for an existing table.</p>
     #   @return [Array<Types::BackfillError>]
     class PartitionIndexDescriptor < Struct.new(
+      nil,
       :index_name,
       :keys,
       :index_status,
@@ -16926,6 +17604,7 @@ module Aws::Glue
     #   <p>The last time at which column statistics were computed for this partition.</p>
     #   @return [Time]
     class PartitionInput < Struct.new(
+      nil,
       :values,
       :last_access_time,
       :storage_descriptor,
@@ -16941,6 +17620,7 @@ module Aws::Glue
     #   <p>The list of values.</p>
     #   @return [Array<String>]
     class PartitionValueList < Struct.new(
+      nil,
       :values,
       keyword_init: true
     )
@@ -16953,6 +17633,7 @@ module Aws::Glue
     #             and the permissions defined on the target table.</p>
     #   @return [String]
     class PermissionTypeMismatchException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -16970,6 +17651,7 @@ module Aws::Glue
     #   <p>The connection's Availability Zone.</p>
     #   @return [String]
     class PhysicalConnectionRequirements < Struct.new(
+      nil,
       :subnet_id,
       :security_group_id_list,
       :availability_zone,
@@ -16989,6 +17671,7 @@ module Aws::Glue
     #   <p>The name of the table in the database to read from.</p>
     #   @return [String]
     class PostgreSQLCatalogSource < Struct.new(
+      nil,
       :name,
       :database,
       :table,
@@ -17011,6 +17694,7 @@ module Aws::Glue
     #   <p>The name of the table in the database to write to.</p>
     #   @return [String]
     class PostgreSQLCatalogTarget < Struct.new(
+      nil,
       :name,
       :inputs,
       :database,
@@ -17029,6 +17713,7 @@ module Aws::Glue
     #   <p>The job-run ID of the predecessor job run.</p>
     #   @return [String]
     class Predecessor < Struct.new(
+      nil,
       :job_name,
       :run_id,
       keyword_init: true
@@ -17045,6 +17730,7 @@ module Aws::Glue
     #   <p>A list of the conditions that determine when the trigger will fire.</p>
     #   @return [Array<Types::Condition>]
     class Predicate < Struct.new(
+      nil,
       :logical,
       :conditions,
       keyword_init: true
@@ -17060,6 +17746,7 @@ module Aws::Glue
     #   <p>The permissions that are granted to the principal.</p>
     #   @return [Array<String>]
     class PrincipalPermissions < Struct.new(
+      nil,
       :principal,
       :permissions,
       keyword_init: true
@@ -17075,6 +17762,7 @@ module Aws::Glue
     #   <p>A key-value map of configuration parameters for Glue jobs. </p>
     #   @return [Hash<String, Types::ConfigurationObject>]
     class ProfileConfiguration < Struct.new(
+      nil,
       :session_configuration,
       :job_configuration,
       keyword_init: true
@@ -17105,6 +17793,7 @@ module Aws::Glue
     #   <p>Indicates which data operations are applicable to the property.</p>
     #   @return [Array<String>]
     class Property < Struct.new(
+      nil,
       :name,
       :description,
       :required,
@@ -17133,6 +17822,7 @@ module Aws::Glue
     #   <p>The comparator used to compare this property to others.</p>
     #   @return [String]
     class PropertyPredicate < Struct.new(
+      nil,
       :key,
       :value,
       :comparator,
@@ -17149,6 +17839,7 @@ module Aws::Glue
     #   <p>The security configuration to set.</p>
     #   @return [Types::DataCatalogEncryptionSettings]
     class PutDataCatalogEncryptionSettingsRequest < Struct.new(
+      nil,
       :catalog_id,
       :data_catalog_encryption_settings,
       keyword_init: true
@@ -17157,6 +17848,7 @@ module Aws::Glue
     end
 
     class PutDataCatalogEncryptionSettingsResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -17169,6 +17861,7 @@ module Aws::Glue
     #   <p>The inclusion annotation value to apply to the profile.</p>
     #   @return [String]
     class PutDataQualityProfileAnnotationRequest < Struct.new(
+      nil,
       :profile_id,
       :inclusion_annotation,
       keyword_init: true
@@ -17178,6 +17871,7 @@ module Aws::Glue
 
     # <p>Left blank.</p>
     class PutDataQualityProfileAnnotationResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -17215,6 +17909,7 @@ module Aws::Glue
     #         grant cross-account access, otherwise the call fails. Default is 'FALSE'.</p>
     #   @return [String]
     class PutResourcePolicyRequest < Struct.new(
+      nil,
       :policy_in_json,
       :resource_arn,
       :policy_hash_condition,
@@ -17231,6 +17926,7 @@ module Aws::Glue
     #         this policy.</p>
     #   @return [String]
     class PutResourcePolicyResponse < Struct.new(
+      nil,
       :policy_hash,
       keyword_init: true
     )
@@ -17250,6 +17946,7 @@ module Aws::Glue
     #   <p>The metadata key's corresponding value.</p>
     #   @return [Types::MetadataKeyValuePair]
     class PutSchemaVersionMetadataInput < Struct.new(
+      nil,
       :schema_id,
       :schema_version_number,
       :schema_version_id,
@@ -17284,6 +17981,7 @@ module Aws::Glue
     #   <p>The value of the metadata key.</p>
     #   @return [String]
     class PutSchemaVersionMetadataResponse < Struct.new(
+      nil,
       :schema_arn,
       :schema_name,
       :registry_name,
@@ -17313,6 +18011,7 @@ module Aws::Glue
     #            <p>Run properties may be logged. Do not pass plaintext secrets as properties. Retrieve secrets from a Glue Connection, Amazon Web Services Secrets Manager or other secret management mechanism if you intend to use them within the workflow run.</p>
     #   @return [Hash<String, String>]
     class PutWorkflowRunPropertiesRequest < Struct.new(
+      nil,
       :name,
       :run_id,
       :run_properties,
@@ -17322,6 +18021,7 @@ module Aws::Glue
     end
 
     class PutWorkflowRunPropertiesResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -17346,6 +18046,7 @@ module Aws::Glue
     #   <p>A continuation token, if this is a continuation call.</p>
     #   @return [String]
     class QuerySchemaVersionMetadataInput < Struct.new(
+      nil,
       :schema_id,
       :schema_version_number,
       :schema_version_id,
@@ -17367,6 +18068,7 @@ module Aws::Glue
     #   <p>A continuation token for paginating the returned list of tokens, returned if the current segment of the list is not the last.</p>
     #   @return [String]
     class QuerySchemaVersionMetadataResponse < Struct.new(
+      nil,
       :metadata_info_map,
       :schema_version_id,
       :next_token,
@@ -17392,6 +18094,7 @@ module Aws::Glue
     #   <p>An opaque string-string map passed by the query engine.</p>
     #   @return [Hash<String, String>]
     class QuerySessionContext < Struct.new(
+      nil,
       :query_id,
       :query_start_time,
       :cluster_id,
@@ -17416,6 +18119,7 @@ module Aws::Glue
     #   <p>Transform steps used in the recipe node.</p>
     #   @return [Array<Types::RecipeStep>]
     class Recipe < Struct.new(
+      nil,
       :name,
       :inputs,
       :recipe_reference,
@@ -17433,6 +18137,7 @@ module Aws::Glue
     #   <p>The parameters of the recipe action.</p>
     #   @return [Hash<String, String>]
     class RecipeAction < Struct.new(
+      nil,
       :operation,
       :parameters,
       keyword_init: true
@@ -17448,6 +18153,7 @@ module Aws::Glue
     #   <p>The RecipeVersion of the DataBrew recipe.</p>
     #   @return [String]
     class RecipeReference < Struct.new(
+      nil,
       :recipe_arn,
       :recipe_version,
       keyword_init: true
@@ -17463,6 +18169,7 @@ module Aws::Glue
     #   <p>The condition expressions for the recipe step.</p>
     #   @return [Array<Types::ConditionExpression>]
     class RecipeStep < Struct.new(
+      nil,
       :action,
       :condition_expressions,
       keyword_init: true
@@ -17478,6 +18185,7 @@ module Aws::Glue
     #            <p>A value of <code>CRAWL_EVENT_MODE</code> specifies crawling only the changes identified by Amazon S3 events.</p>
     #   @return [String]
     class RecrawlPolicy < Struct.new(
+      nil,
       :recrawl_behavior,
       keyword_init: true
     )
@@ -17501,6 +18209,7 @@ module Aws::Glue
     #   <p>The IAM role with permissions.</p>
     #   @return [String]
     class RedshiftSource < Struct.new(
+      nil,
       :name,
       :database,
       :table,
@@ -17534,6 +18243,7 @@ module Aws::Glue
     #   <p>The set of options to configure an upsert operation when writing to a Redshift target.</p>
     #   @return [Types::UpsertRedshiftTargetOptions]
     class RedshiftTarget < Struct.new(
+      nil,
       :name,
       :inputs,
       :database,
@@ -17561,6 +18271,7 @@ module Aws::Glue
     #   <p>The schema definition using the <code>DataFormat</code> setting for the <code>SchemaName</code>.</p>
     #   @return [String]
     class RegisterSchemaVersionInput < Struct.new(
+      nil,
       :schema_id,
       :schema_definition,
       keyword_init: true
@@ -17578,6 +18289,7 @@ module Aws::Glue
     #   <p>The status of the schema version.</p>
     #   @return [String]
     class RegisterSchemaVersionResponse < Struct.new(
+      nil,
       :schema_version_id,
       :version_number,
       :status,
@@ -17594,6 +18306,7 @@ module Aws::Glue
     #   <p>Arn of the registry to be updated. One of <code>RegistryArn</code> or <code>RegistryName</code> has to be provided.</p>
     #   @return [String]
     class RegistryId < Struct.new(
+      nil,
       :registry_name,
       :registry_arn,
       keyword_init: true
@@ -17621,6 +18334,7 @@ module Aws::Glue
     #   <p>The date the registry was updated.</p>
     #   @return [String]
     class RegistryListItem < Struct.new(
+      nil,
       :registry_name,
       :registry_arn,
       :description,
@@ -17643,6 +18357,7 @@ module Aws::Glue
     #   <p>The name of the table in the database to read from.</p>
     #   @return [String]
     class RelationalCatalogSource < Struct.new(
+      nil,
       :name,
       :database,
       :table,
@@ -17664,6 +18379,7 @@ module Aws::Glue
     #   <p>The value of the metadata key.</p>
     #   @return [Types::MetadataKeyValuePair]
     class RemoveSchemaVersionMetadataInput < Struct.new(
+      nil,
       :schema_id,
       :schema_version_number,
       :schema_version_id,
@@ -17698,6 +18414,7 @@ module Aws::Glue
     #   <p>The value of the metadata key.</p>
     #   @return [String]
     class RemoveSchemaVersionMetadataResponse < Struct.new(
+      nil,
       :schema_arn,
       :schema_name,
       :registry_name,
@@ -17730,6 +18447,7 @@ module Aws::Glue
     #   <p>A JSON path to a variable in the data structure for the target data.</p>
     #   @return [Array<String>]
     class RenameField < Struct.new(
+      nil,
       :name,
       :inputs,
       :source_path,
@@ -17746,6 +18464,7 @@ module Aws::Glue
     #   <p>The unique run identifier associated with this job run.</p>
     #   @return [String]
     class ResetJobBookmarkRequest < Struct.new(
+      nil,
       :job_name,
       :run_id,
       keyword_init: true
@@ -17757,6 +18476,7 @@ module Aws::Glue
     #   <p>The reset bookmark entry.</p>
     #   @return [Types::JobBookmarkEntry]
     class ResetJobBookmarkResponse < Struct.new(
+      nil,
       :job_bookmark_entry,
       keyword_init: true
     )
@@ -17768,6 +18488,7 @@ module Aws::Glue
     #   <p>A message describing the problem.</p>
     #   @return [String]
     class ResourceNotFoundException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -17779,6 +18500,7 @@ module Aws::Glue
     #   <p>A message describing the problem.</p>
     #   @return [String]
     class ResourceNotReadyException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -17790,6 +18512,7 @@ module Aws::Glue
     #   <p>A message describing the problem.</p>
     #   @return [String]
     class ResourceNumberLimitExceededException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -17804,6 +18527,7 @@ module Aws::Glue
     #   <p>The URI for accessing the resource.</p>
     #   @return [String]
     class ResourceUri < Struct.new(
+      nil,
       :resource_type,
       :uri,
       keyword_init: true
@@ -17821,6 +18545,7 @@ module Aws::Glue
     #   <p>A list of the node IDs for the nodes you want to restart. The nodes that are to be restarted must have a run attempt in the original run.</p>
     #   @return [Array<String>]
     class ResumeWorkflowRunRequest < Struct.new(
+      nil,
       :name,
       :run_id,
       :node_ids,
@@ -17836,6 +18561,7 @@ module Aws::Glue
     #   <p>A list of the node IDs for the nodes that were actually restarted.</p>
     #   @return [Array<String>]
     class ResumeWorkflowRunResponse < Struct.new(
+      nil,
       :run_id,
       :node_ids,
       keyword_init: true
@@ -17848,6 +18574,7 @@ module Aws::Glue
     #   <p>The configuration for an Iceberg snapshot retention optimizer.</p>
     #   @return [Types::IcebergRetentionConfiguration]
     class RetentionConfiguration < Struct.new(
+      nil,
       :iceberg_configuration,
       keyword_init: true
     )
@@ -17859,6 +18586,7 @@ module Aws::Glue
     #   <p>A structure containing the Iceberg retention metrics for the optimizer run.</p>
     #   @return [Types::IcebergRetentionMetrics]
     class RetentionMetrics < Struct.new(
+      nil,
       :iceberg_metrics,
       keyword_init: true
     )
@@ -17876,6 +18604,7 @@ module Aws::Glue
     #   <p>A list of group filters that define the routing conditions and criteria for directing data to different output paths.</p>
     #   @return [Array<Types::GroupFilters>]
     class Route < Struct.new(
+      nil,
       :name,
       :inputs,
       :group_filters_list,
@@ -17892,6 +18621,7 @@ module Aws::Glue
     #   <p>The Job Run ID.</p>
     #   @return [String]
     class RunIdentifier < Struct.new(
+      nil,
       :run_id,
       :job_run_id,
       keyword_init: true
@@ -17914,6 +18644,7 @@ module Aws::Glue
     #   <p>The duration of the job in hours.</p>
     #   @return [String]
     class RunMetrics < Struct.new(
+      nil,
       :number_of_bytes_compacted,
       :number_of_files_compacted,
       :number_of_dpus,
@@ -17933,6 +18664,7 @@ module Aws::Glue
     #   <p>The origin of the request.</p>
     #   @return [String]
     class RunStatementRequest < Struct.new(
+      nil,
       :session_id,
       :code,
       :request_origin,
@@ -17945,6 +18677,7 @@ module Aws::Glue
     #   <p>Returns the Id of the statement that was run.</p>
     #   @return [Integer]
     class RunStatementResponse < Struct.new(
+      nil,
       :id,
       keyword_init: true
     )
@@ -17973,6 +18706,7 @@ module Aws::Glue
     #   <p>Specifies the data schema for the Delta Lake source.</p>
     #   @return [Array<Types::GlueSchema>]
     class S3CatalogDeltaSource < Struct.new(
+      nil,
       :name,
       :database,
       :table,
@@ -18000,6 +18734,7 @@ module Aws::Glue
     #   <p>Specifies the data schema for the Hudi source.</p>
     #   @return [Array<Types::GlueSchema>]
     class S3CatalogHudiSource < Struct.new(
+      nil,
       :name,
       :database,
       :table,
@@ -18027,6 +18762,7 @@ module Aws::Glue
     #   <p>Specifies the data schema for the Iceberg source.</p>
     #   @return [Array<Types::GlueSchema>]
     class S3CatalogIcebergSource < Struct.new(
+      nil,
       :name,
       :database,
       :table,
@@ -18054,6 +18790,7 @@ module Aws::Glue
     #   <p>Specifies additional connection options.</p>
     #   @return [Types::S3SourceAdditionalOptions]
     class S3CatalogSource < Struct.new(
+      nil,
       :name,
       :database,
       :table,
@@ -18088,6 +18825,7 @@ module Aws::Glue
     #         When set to <code>true</code>, data quality checks are performed automatically during the write operation.</p>
     #   @return [Types::AutoDataQuality]
     class S3CatalogTarget < Struct.new(
+      nil,
       :name,
       :inputs,
       :partition_keys,
@@ -18159,6 +18897,7 @@ module Aws::Glue
     #   <p>Specifies the data schema for the S3 CSV source.</p>
     #   @return [Array<Types::GlueSchema>]
     class S3CsvSource < Struct.new(
+      nil,
       :name,
       :paths,
       :compression_type,
@@ -18218,6 +18957,7 @@ module Aws::Glue
     #   <p>Specifies the data schema for the S3 Delta catalog target.</p>
     #   @return [Array<Types::GlueSchema>]
     class S3DeltaCatalogTarget < Struct.new(
+      nil,
       :name,
       :inputs,
       :partition_keys,
@@ -18265,6 +19005,7 @@ module Aws::Glue
     #         data quality checks are performed automatically during the write operation.</p>
     #   @return [Types::AutoDataQuality]
     class S3DeltaDirectTarget < Struct.new(
+      nil,
       :name,
       :inputs,
       :partition_keys,
@@ -18297,6 +19038,7 @@ module Aws::Glue
     #   <p>Specifies the data schema for the Delta Lake source.</p>
     #   @return [Array<Types::GlueSchema>]
     class S3DeltaSource < Struct.new(
+      nil,
       :name,
       :paths,
       :additional_delta_options,
@@ -18321,6 +19063,7 @@ module Aws::Glue
     #   <p>If enabled, specifies the sample path.</p>
     #   @return [String]
     class S3DirectSourceAdditionalOptions < Struct.new(
+      nil,
       :bounded_size,
       :bounded_files,
       :enable_sample_path,
@@ -18363,6 +19106,7 @@ module Aws::Glue
     #   <p>Specifies the data schema for the S3 direct target.</p>
     #   @return [Array<Types::GlueSchema>]
     class S3DirectTarget < Struct.new(
+      nil,
       :name,
       :inputs,
       :partition_keys,
@@ -18386,6 +19130,7 @@ module Aws::Glue
     #   <p>The Amazon Resource Name (ARN) of the KMS key to be used to encrypt the data.</p>
     #   @return [String]
     class S3Encryption < Struct.new(
+      nil,
       :s3_encryption_mode,
       :kms_key_arn,
       keyword_init: true
@@ -18434,6 +19179,7 @@ module Aws::Glue
     #   <p>The Glue schemas to apply to the processed data.</p>
     #   @return [Array<Types::GlueSchema>]
     class S3ExcelSource < Struct.new(
+      nil,
       :name,
       :paths,
       :compression_type,
@@ -18479,6 +19225,7 @@ module Aws::Glue
     #         data quality checks are performed automatically during the write operation.</p>
     #   @return [Types::AutoDataQuality]
     class S3GlueParquetTarget < Struct.new(
+      nil,
       :name,
       :inputs,
       :partition_keys,
@@ -18522,6 +19269,7 @@ module Aws::Glue
     #   <p>Specifies the data schema for the S3 Hudi catalog target.</p>
     #   @return [Array<Types::GlueSchema>]
     class S3HudiCatalogTarget < Struct.new(
+      nil,
       :name,
       :inputs,
       :partition_keys,
@@ -18569,6 +19317,7 @@ module Aws::Glue
     #         data quality checks are performed automatically during the write operation.</p>
     #   @return [Types::AutoDataQuality]
     class S3HudiDirectTarget < Struct.new(
+      nil,
       :name,
       :inputs,
       :path,
@@ -18601,6 +19350,7 @@ module Aws::Glue
     #   <p>Specifies the data schema for the Hudi source.</p>
     #   @return [Array<Types::GlueSchema>]
     class S3HudiSource < Struct.new(
+      nil,
       :name,
       :paths,
       :additional_hudi_options,
@@ -18640,6 +19390,7 @@ module Aws::Glue
     #   <p>Specifies the data schema for the S3 Hyper direct target.</p>
     #   @return [Array<Types::GlueSchema>]
     class S3HyperDirectTarget < Struct.new(
+      nil,
       :name,
       :inputs,
       :format,
@@ -18680,6 +19431,7 @@ module Aws::Glue
     #   <p>Specifies whether to automatically enable data quality evaluation for the S3 Iceberg catalog target. When set to <code>true</code>, data quality checks are performed automatically during the write operation.</p>
     #   @return [Types::AutoDataQuality]
     class S3IcebergCatalogTarget < Struct.new(
+      nil,
       :name,
       :inputs,
       :partition_keys,
@@ -18729,6 +19481,7 @@ module Aws::Glue
     #   <p>Specifies the data schema for the S3 Iceberg direct target.</p>
     #   @return [Array<Types::GlueSchema>]
     class S3IcebergDirectTarget < Struct.new(
+      nil,
       :name,
       :inputs,
       :partition_keys,
@@ -18786,6 +19539,7 @@ module Aws::Glue
     #   <p>Specifies the data schema for the S3 JSON source.</p>
     #   @return [Array<Types::GlueSchema>]
     class S3JsonSource < Struct.new(
+      nil,
       :name,
       :paths,
       :compression_type,
@@ -18839,6 +19593,7 @@ module Aws::Glue
     #   <p>Specifies the data schema for the S3 Parquet source.</p>
     #   @return [Array<Types::GlueSchema>]
     class S3ParquetSource < Struct.new(
+      nil,
       :name,
       :paths,
       :compression_type,
@@ -18863,6 +19618,7 @@ module Aws::Glue
     #   <p>Sets the upper limit for the target number of files that will be processed.</p>
     #   @return [Integer]
     class S3SourceAdditionalOptions < Struct.new(
+      nil,
       :bounded_size,
       :bounded_files,
       keyword_init: true
@@ -18891,6 +19647,7 @@ module Aws::Glue
     #   <p>A valid Amazon dead-letter SQS ARN. For example, <code>arn:aws:sqs:region:account:deadLetterQueue</code>.</p>
     #   @return [String]
     class S3Target < Struct.new(
+      nil,
       :path,
       :exclusions,
       :connection_name,
@@ -18912,6 +19669,7 @@ module Aws::Glue
     #   <p>The state of the schedule.</p>
     #   @return [String]
     class Schedule < Struct.new(
+      nil,
       :schedule_expression,
       :state,
       keyword_init: true
@@ -18924,6 +19682,7 @@ module Aws::Glue
     #   <p>A message describing the problem.</p>
     #   @return [String]
     class SchedulerNotRunningException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -18935,6 +19694,7 @@ module Aws::Glue
     #   <p>A message describing the problem.</p>
     #   @return [String]
     class SchedulerRunningException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -18946,6 +19706,7 @@ module Aws::Glue
     #   <p>A message describing the problem.</p>
     #   @return [String]
     class SchedulerTransitioningException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -18960,6 +19721,7 @@ module Aws::Glue
     #   <p>The deletion behavior when the crawler finds a deleted object.</p>
     #   @return [String]
     class SchemaChangePolicy < Struct.new(
+      nil,
       :update_behavior,
       :delete_behavior,
       keyword_init: true
@@ -18976,6 +19738,7 @@ module Aws::Glue
     #   <p>The type of data in the column.</p>
     #   @return [String]
     class SchemaColumn < Struct.new(
+      nil,
       :name,
       :data_type,
       keyword_init: true
@@ -18994,6 +19757,7 @@ module Aws::Glue
     #   <p>The name of the schema registry that contains the schema.</p>
     #   @return [String]
     class SchemaId < Struct.new(
+      nil,
       :schema_arn,
       :schema_name,
       :registry_name,
@@ -19025,6 +19789,7 @@ module Aws::Glue
     #   <p>The date and time that a schema was updated.</p>
     #   @return [String]
     class SchemaListItem < Struct.new(
+      nil,
       :registry_name,
       :schema_name,
       :schema_arn,
@@ -19048,6 +19813,7 @@ module Aws::Glue
     #   <p>The version number of the schema.</p>
     #   @return [Integer]
     class SchemaReference < Struct.new(
+      nil,
       :schema_id,
       :schema_version_id,
       :schema_version_number,
@@ -19064,6 +19830,7 @@ module Aws::Glue
     #   <p>The details of the error for the schema version.</p>
     #   @return [Types::ErrorDetails]
     class SchemaVersionErrorItem < Struct.new(
+      nil,
       :version_number,
       :error_details,
       keyword_init: true
@@ -19088,6 +19855,7 @@ module Aws::Glue
     #   <p>The date and time the schema version was created.</p>
     #   @return [String]
     class SchemaVersionListItem < Struct.new(
+      nil,
       :schema_arn,
       :schema_version_id,
       :version_number,
@@ -19106,6 +19874,7 @@ module Aws::Glue
     #   <p>The version number of the schema.</p>
     #   @return [Integer]
     class SchemaVersionNumber < Struct.new(
+      nil,
       :latest_version,
       :version_number,
       keyword_init: true
@@ -19155,6 +19924,7 @@ module Aws::Glue
     #   <p>Specifies whether to include status details related to a request to create or update an Glue Data Catalog view.</p>
     #   @return [Boolean]
     class SearchTablesRequest < Struct.new(
+      nil,
       :catalog_id,
       :next_token,
       :filters,
@@ -19175,6 +19945,7 @@ module Aws::Glue
     #   <p>A list of the requested <code>Table</code> objects. The <code>SearchTables</code> response returns only the tables that you have access to.</p>
     #   @return [Array<Types::Table>]
     class SearchTablesResponse < Struct.new(
+      nil,
       :next_token,
       :table_list,
       keyword_init: true
@@ -19193,6 +19964,7 @@ module Aws::Glue
     #   <p>The encryption configuration associated with this security configuration.</p>
     #   @return [Types::EncryptionConfiguration]
     class SecurityConfiguration < Struct.new(
+      nil,
       :name,
       :created_time_stamp,
       :encryption_configuration,
@@ -19211,6 +19983,7 @@ module Aws::Glue
     #   <p>The total number of segments.</p>
     #   @return [Integer]
     class Segment < Struct.new(
+      nil,
       :segment_number,
       :total_segments,
       keyword_init: true
@@ -19234,6 +20007,7 @@ module Aws::Glue
     #   <p>A JSON path to a variable in the data structure.</p>
     #   @return [Array<Array<String>>]
     class SelectFields < Struct.new(
+      nil,
       :name,
       :inputs,
       :paths,
@@ -19254,6 +20028,7 @@ module Aws::Glue
     #   <p>The index for the DynamicFrame to be selected.</p>
     #   @return [Integer]
     class SelectFromCollection < Struct.new(
+      nil,
       :name,
       :inputs,
       :index,
@@ -19280,6 +20055,7 @@ module Aws::Glue
     #   <p>These key-value pairs define initialization parameters for the SerDe.</p>
     #   @return [Hash<String, String>]
     class SerDeInfo < Struct.new(
+      nil,
       :name,
       :serialization_library,
       :parameters,
@@ -19352,6 +20128,7 @@ module Aws::Glue
     #   <p>The name of an Glue usage profile associated with the session.</p>
     #   @return [String]
     class Session < Struct.new(
+      nil,
       :id,
       :created_on,
       :status,
@@ -19390,6 +20167,7 @@ module Aws::Glue
     #   <p>Specifies the Python version. The Python version indicates the version supported for jobs of type Spark.</p>
     #   @return [String]
     class SessionCommand < Struct.new(
+      nil,
       :name,
       :python_version,
       keyword_init: true
@@ -19410,6 +20188,7 @@ module Aws::Glue
     #   <p>A mapping of skewed values to the columns that contain them.</p>
     #   @return [Hash<String, String>]
     class SkewedInfo < Struct.new(
+      nil,
       :skewed_column_names,
       :skewed_column_values,
       :skewed_column_value_location_maps,
@@ -19499,6 +20278,7 @@ module Aws::Glue
     #         , <code>label</code> and <code>description</code> keys. Each structure defines a column.</p>
     #   @return [Array<Types::Option>]
     class SnowflakeNodeData < Struct.new(
+      nil,
       :source_type,
       :connection,
       :schema,
@@ -19542,6 +20322,7 @@ module Aws::Glue
     #   <p>Specifies user-defined schemas for your output data.</p>
     #   @return [Array<Types::GlueSchema>]
     class SnowflakeSource < Struct.new(
+      nil,
       :name,
       :data,
       :output_schemas,
@@ -19561,6 +20342,7 @@ module Aws::Glue
     #   <p>The nodes that are inputs to the data target.</p>
     #   @return [Array<String>]
     class SnowflakeTarget < Struct.new(
+      nil,
       :name,
       :data,
       :inputs,
@@ -19577,6 +20359,7 @@ module Aws::Glue
     #   <p>An ascending or descending sort.</p>
     #   @return [String]
     class SortCriterion < Struct.new(
+      nil,
       :field_name,
       :sort,
       keyword_init: true
@@ -19610,6 +20393,7 @@ module Aws::Glue
     #   <p>The value of an authorization token.</p>
     #   @return [String]
     class SourceControlDetails < Struct.new(
+      nil,
       :provider,
       :repository,
       :owner,
@@ -19628,6 +20412,7 @@ module Aws::Glue
     #   <p>The IAM role to access the Glue connection.</p>
     #   @return [String]
     class SourceProcessingProperties < Struct.new(
+      nil,
       :role_arn,
       keyword_init: true
     )
@@ -19649,6 +20434,7 @@ module Aws::Glue
     #   <p>Incremental pull timestamp-based field. Currently unsupported.</p>
     #   @return [String]
     class SourceTableConfig < Struct.new(
+      nil,
       :fields,
       :filter_predicate,
       :primary_key,
@@ -19678,6 +20464,7 @@ module Aws::Glue
     #   <p>Specifies data schema for the custom spark source.</p>
     #   @return [Array<Types::GlueSchema>]
     class SparkConnectorSource < Struct.new(
+      nil,
       :name,
       :connection_name,
       :connector_name,
@@ -19712,6 +20499,7 @@ module Aws::Glue
     #   <p>Specifies the data schema for the custom spark target.</p>
     #   @return [Array<Types::GlueSchema>]
     class SparkConnectorTarget < Struct.new(
+      nil,
       :name,
       :inputs,
       :connection_name,
@@ -19746,6 +20534,7 @@ module Aws::Glue
     #   <p>Specifies the data schema for the SparkSQL transform.</p>
     #   @return [Array<Types::GlueSchema>]
     class SparkSQL < Struct.new(
+      nil,
       :name,
       :inputs,
       :sql_query,
@@ -19773,6 +20562,7 @@ module Aws::Glue
     #   <p>The probability (a decimal value with a maximum value of 1) of picking any given record. A value of 1 indicates that each row read from the dataset should be included in the sample output.</p>
     #   @return [Float]
     class Spigot < Struct.new(
+      nil,
       :name,
       :inputs,
       :path,
@@ -19794,6 +20584,7 @@ module Aws::Glue
     #   <p>A JSON path to a variable in the data structure.</p>
     #   @return [Array<Array<String>>]
     class SplitFields < Struct.new(
+      nil,
       :name,
       :inputs,
       :paths,
@@ -19810,6 +20601,7 @@ module Aws::Glue
     #   <p>A temporary name given to a table, or a column in a table.</p>
     #   @return [String]
     class SqlAlias < Struct.new(
+      nil,
       :from,
       :alias,
       keyword_init: true
@@ -19827,6 +20619,7 @@ module Aws::Glue
     #   <p>Specifies the IAM role used to create the workflow.</p>
     #   @return [String]
     class StartBlueprintRunRequest < Struct.new(
+      nil,
       :blueprint_name,
       :parameters,
       :role_arn,
@@ -19839,6 +20632,7 @@ module Aws::Glue
     #   <p>The run ID for this blueprint run.</p>
     #   @return [String]
     class StartBlueprintRunResponse < Struct.new(
+      nil,
       :run_id,
       keyword_init: true
     )
@@ -19867,6 +20661,7 @@ module Aws::Glue
     #   <p>Name of the security configuration that is used to encrypt CloudWatch logs for the column stats task run.</p>
     #   @return [String]
     class StartColumnStatisticsTaskRunRequest < Struct.new(
+      nil,
       :database_name,
       :table_name,
       :column_name_list,
@@ -19883,6 +20678,7 @@ module Aws::Glue
     #   <p>The identifier for the column statistics task run.</p>
     #   @return [String]
     class StartColumnStatisticsTaskRunResponse < Struct.new(
+      nil,
       :column_statistics_task_run_id,
       keyword_init: true
     )
@@ -19896,6 +20692,7 @@ module Aws::Glue
     #   <p>The name of the table for which to start a column statistic task run schedule.</p>
     #   @return [String]
     class StartColumnStatisticsTaskRunScheduleRequest < Struct.new(
+      nil,
       :database_name,
       :table_name,
       keyword_init: true
@@ -19904,6 +20701,7 @@ module Aws::Glue
     end
 
     class StartColumnStatisticsTaskRunScheduleResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -19913,6 +20711,7 @@ module Aws::Glue
     #   <p>Name of the crawler to start.</p>
     #   @return [String]
     class StartCrawlerRequest < Struct.new(
+      nil,
       :name,
       keyword_init: true
     )
@@ -19920,6 +20719,7 @@ module Aws::Glue
     end
 
     class StartCrawlerResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -19929,6 +20729,7 @@ module Aws::Glue
     #   <p>Name of the crawler to schedule.</p>
     #   @return [String]
     class StartCrawlerScheduleRequest < Struct.new(
+      nil,
       :crawler_name,
       keyword_init: true
     )
@@ -19936,6 +20737,7 @@ module Aws::Glue
     end
 
     class StartCrawlerScheduleResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -19964,6 +20766,7 @@ module Aws::Glue
     #   <p>Used for idempotency and is recommended to be set to a random ID (such as a UUID) to avoid creating or starting multiple instances of the same resource.</p>
     #   @return [String]
     class StartDataQualityRuleRecommendationRunRequest < Struct.new(
+      nil,
       :data_source,
       :role,
       :number_of_workers,
@@ -19980,6 +20783,7 @@ module Aws::Glue
     #   <p>The unique run identifier associated with this run.</p>
     #   @return [String]
     class StartDataQualityRuleRecommendationRunResponse < Struct.new(
+      nil,
       :run_id,
       keyword_init: true
     )
@@ -20011,6 +20815,7 @@ module Aws::Glue
     #   <p>A map of reference strings to additional data sources you can specify for an evaluation run.</p>
     #   @return [Hash<String, Types::DataSource>]
     class StartDataQualityRulesetEvaluationRunRequest < Struct.new(
+      nil,
       :data_source,
       :role,
       :number_of_workers,
@@ -20028,6 +20833,7 @@ module Aws::Glue
     #   <p>The unique run identifier associated with this run.</p>
     #   @return [String]
     class StartDataQualityRulesetEvaluationRunResponse < Struct.new(
+      nil,
       :run_id,
       keyword_init: true
     )
@@ -20041,6 +20847,7 @@ module Aws::Glue
     #   <p>The Amazon S3 path where you export the labels.</p>
     #   @return [String]
     class StartExportLabelsTaskRunRequest < Struct.new(
+      nil,
       :transform_id,
       :output_s3_path,
       keyword_init: true
@@ -20052,6 +20859,7 @@ module Aws::Glue
     #   <p>The unique identifier for the task run.</p>
     #   @return [String]
     class StartExportLabelsTaskRunResponse < Struct.new(
+      nil,
       :task_run_id,
       keyword_init: true
     )
@@ -20069,6 +20877,7 @@ module Aws::Glue
     #   <p>Indicates whether to overwrite your existing labels.</p>
     #   @return [Boolean]
     class StartImportLabelsTaskRunRequest < Struct.new(
+      nil,
       :transform_id,
       :input_s3_path,
       :replace_all_labels,
@@ -20081,6 +20890,7 @@ module Aws::Glue
     #   <p>The unique identifier for the task run.</p>
     #   @return [String]
     class StartImportLabelsTaskRunResponse < Struct.new(
+      nil,
       :task_run_id,
       keyword_init: true
     )
@@ -20198,6 +21008,7 @@ module Aws::Glue
     #         execution role for the scope of the job, without requiring the creation of additional IAM roles.</p>
     #   @return [String]
     class StartJobRunRequest < Struct.new(
+      nil,
       :job_name,
       :job_run_queuing_enabled,
       :job_run_id,
@@ -20220,6 +21031,7 @@ module Aws::Glue
     #   <p>The ID assigned to this job run.</p>
     #   @return [String]
     class StartJobRunResponse < Struct.new(
+      nil,
       :job_run_id,
       keyword_init: true
     )
@@ -20230,6 +21042,7 @@ module Aws::Glue
     #   <p>The unique identifier of the machine learning transform.</p>
     #   @return [String]
     class StartMLEvaluationTaskRunRequest < Struct.new(
+      nil,
       :transform_id,
       keyword_init: true
     )
@@ -20240,6 +21053,7 @@ module Aws::Glue
     #   <p>The unique identifier associated with this run.</p>
     #   @return [String]
     class StartMLEvaluationTaskRunResponse < Struct.new(
+      nil,
       :task_run_id,
       keyword_init: true
     )
@@ -20254,6 +21068,7 @@ module Aws::Glue
     #         set.</p>
     #   @return [String]
     class StartMLLabelingSetGenerationTaskRunRequest < Struct.new(
+      nil,
       :transform_id,
       :output_s3_path,
       keyword_init: true
@@ -20265,6 +21080,7 @@ module Aws::Glue
     #   <p>The unique run identifier that is associated with this task run.</p>
     #   @return [String]
     class StartMLLabelingSetGenerationTaskRunResponse < Struct.new(
+      nil,
       :task_run_id,
       keyword_init: true
     )
@@ -20275,6 +21091,7 @@ module Aws::Glue
     #   <p>The name of the trigger to start.</p>
     #   @return [String]
     class StartTriggerRequest < Struct.new(
+      nil,
       :name,
       keyword_init: true
     )
@@ -20285,6 +21102,7 @@ module Aws::Glue
     #   <p>The name of the trigger that was started.</p>
     #   @return [String]
     class StartTriggerResponse < Struct.new(
+      nil,
       :name,
       keyword_init: true
     )
@@ -20299,6 +21117,7 @@ module Aws::Glue
     #            <p>Run properties may be logged. Do not pass plaintext secrets as properties. Retrieve secrets from a Glue Connection, Amazon Web Services Secrets Manager or other secret management mechanism if you intend to use them within the workflow run.</p>
     #   @return [Hash<String, String>]
     class StartWorkflowRunRequest < Struct.new(
+      nil,
       :name,
       :run_properties,
       keyword_init: true
@@ -20310,6 +21129,7 @@ module Aws::Glue
     #   <p>An Id for the new run.</p>
     #   @return [String]
     class StartWorkflowRunResponse < Struct.new(
+      nil,
       :run_id,
       keyword_init: true
     )
@@ -20326,6 +21146,7 @@ module Aws::Glue
     #   <p>Duration of the batch window in seconds.</p>
     #   @return [Integer]
     class StartingEventBatchCondition < Struct.new(
+      nil,
       :batch_size,
       :batch_window,
       keyword_init: true
@@ -20356,6 +21177,7 @@ module Aws::Glue
     #   <p>The unix time and date that the job definition was completed.</p>
     #   @return [Integer]
     class Statement < Struct.new(
+      nil,
       :id,
       :code,
       :state,
@@ -20396,6 +21218,7 @@ module Aws::Glue
     #   <p>The traceback of the output.</p>
     #   @return [Array<String>]
     class StatementOutput < Struct.new(
+      nil,
       :data,
       :execution_count,
       :status,
@@ -20417,6 +21240,7 @@ module Aws::Glue
     #   <p>The code execution output in text format.</p>
     #   @return [String]
     class StatementOutputData < Struct.new(
+      nil,
       :text_plain,
       keyword_init: true
     )
@@ -20437,6 +21261,7 @@ module Aws::Glue
     #   <p>The inclusion annotation applied to the statistic.</p>
     #   @return [Types::TimestampedInclusionAnnotation]
     class StatisticAnnotation < Struct.new(
+      nil,
       :profile_id,
       :statistic_id,
       :statistic_recorded_on,
@@ -20466,6 +21291,7 @@ module Aws::Glue
     #   <p>The inclusion annotation.</p>
     #   @return [String]
     class StatisticModelResult < Struct.new(
+      nil,
       :lower_bound,
       :upper_bound,
       :predicted_value,
@@ -20513,6 +21339,7 @@ module Aws::Glue
     #   <p>The inclusion annotation for the statistic.</p>
     #   @return [Types::TimestampedInclusionAnnotation]
     class StatisticSummary < Struct.new(
+      nil,
       :statistic_id,
       :profile_id,
       :run_identifier,
@@ -20542,6 +21369,7 @@ module Aws::Glue
     #   <p>A list of <code>ViewValidation</code> objects that contain information for an analytical engine to validate a view.</p>
     #   @return [Array<Types::ViewValidation>]
     class StatusDetails < Struct.new(
+      nil,
       :requested_change,
       :view_validations,
       keyword_init: true
@@ -20556,6 +21384,7 @@ module Aws::Glue
     #   <p>The name of the table.</p>
     #   @return [String]
     class StopColumnStatisticsTaskRunRequest < Struct.new(
+      nil,
       :database_name,
       :table_name,
       keyword_init: true
@@ -20564,6 +21393,7 @@ module Aws::Glue
     end
 
     class StopColumnStatisticsTaskRunResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -20576,6 +21406,7 @@ module Aws::Glue
     #   <p>The name of the table for which to stop a column statistic task run schedule.</p>
     #   @return [String]
     class StopColumnStatisticsTaskRunScheduleRequest < Struct.new(
+      nil,
       :database_name,
       :table_name,
       keyword_init: true
@@ -20584,6 +21415,7 @@ module Aws::Glue
     end
 
     class StopColumnStatisticsTaskRunScheduleResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -20593,6 +21425,7 @@ module Aws::Glue
     #   <p>Name of the crawler to stop.</p>
     #   @return [String]
     class StopCrawlerRequest < Struct.new(
+      nil,
       :name,
       keyword_init: true
     )
@@ -20600,6 +21433,7 @@ module Aws::Glue
     end
 
     class StopCrawlerResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -20609,6 +21443,7 @@ module Aws::Glue
     #   <p>Name of the crawler whose schedule state to set.</p>
     #   @return [String]
     class StopCrawlerScheduleRequest < Struct.new(
+      nil,
       :crawler_name,
       keyword_init: true
     )
@@ -20616,6 +21451,7 @@ module Aws::Glue
     end
 
     class StopCrawlerScheduleResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -20628,6 +21464,7 @@ module Aws::Glue
     #   <p>The origin of the request.</p>
     #   @return [String]
     class StopSessionRequest < Struct.new(
+      nil,
       :id,
       :request_origin,
       keyword_init: true
@@ -20639,6 +21476,7 @@ module Aws::Glue
     #   <p>Returns the Id of the stopped session.</p>
     #   @return [String]
     class StopSessionResponse < Struct.new(
+      nil,
       :id,
       keyword_init: true
     )
@@ -20649,6 +21487,7 @@ module Aws::Glue
     #   <p>The name of the trigger to stop.</p>
     #   @return [String]
     class StopTriggerRequest < Struct.new(
+      nil,
       :name,
       keyword_init: true
     )
@@ -20659,6 +21498,7 @@ module Aws::Glue
     #   <p>The name of the trigger that was stopped.</p>
     #   @return [String]
     class StopTriggerResponse < Struct.new(
+      nil,
       :name,
       keyword_init: true
     )
@@ -20672,6 +21512,7 @@ module Aws::Glue
     #   <p>The ID of the workflow run to stop.</p>
     #   @return [String]
     class StopWorkflowRunRequest < Struct.new(
+      nil,
       :name,
       :run_id,
       keyword_init: true
@@ -20680,6 +21521,7 @@ module Aws::Glue
     end
 
     class StopWorkflowRunResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -20739,6 +21581,7 @@ module Aws::Glue
     #            <p>When creating a table, you can pass an empty list of columns for the schema, and instead use a schema reference.</p>
     #   @return [Types::SchemaReference]
     class StorageDescriptor < Struct.new(
+      nil,
       :columns,
       :location,
       :additional_locations,
@@ -20773,6 +21616,7 @@ module Aws::Glue
     #   <p>The limit to the number of records polled.</p>
     #   @return [Integer]
     class StreamingDataPreviewOptions < Struct.new(
+      nil,
       :polling_time,
       :record_polling_limit,
       keyword_init: true
@@ -20794,6 +21638,7 @@ module Aws::Glue
     #   <p>The number of distinct values in a column.</p>
     #   @return [Integer]
     class StringColumnStatisticsData < Struct.new(
+      nil,
       :maximum_length,
       :average_length,
       :number_of_nulls,
@@ -20819,6 +21664,7 @@ module Aws::Glue
     #   <p>The version of the dialect of the query engine. For example, 3.0.0.</p>
     #   @return [String]
     class SupportedDialect < Struct.new(
+      nil,
       :dialect,
       :dialect_version,
       keyword_init: true
@@ -20927,6 +21773,7 @@ module Aws::Glue
     #   <p>A structure containing information about the state of an asynchronous change to a table.</p>
     #   @return [Types::TableStatus]
     class Table < Struct.new(
+      nil,
       :name,
       :database_name,
       :description,
@@ -20970,6 +21817,7 @@ module Aws::Glue
     #   <p>The details about the error.</p>
     #   @return [Types::ErrorDetail]
     class TableError < Struct.new(
+      nil,
       :table_name,
       :error_detail,
       keyword_init: true
@@ -20991,6 +21839,7 @@ module Aws::Glue
     #   <p>Region of the target table.</p>
     #   @return [String]
     class TableIdentifier < Struct.new(
+      nil,
       :catalog_id,
       :database_name,
       :name,
@@ -21069,6 +21918,7 @@ module Aws::Glue
     #   <p>A structure that contains all the information that defines the view, including the dialect or dialects for the view, and the query.</p>
     #   @return [Types::ViewDefinitionInput]
     class TableInput < Struct.new(
+      nil,
       :name,
       :description,
       :owner,
@@ -21124,6 +21974,7 @@ module Aws::Glue
     #       </p>
     #   @return [String]
     class TableOptimizer < Struct.new(
+      nil,
       :type,
       :configuration,
       :last_run,
@@ -21155,6 +22006,7 @@ module Aws::Glue
     #   <p>The configuration for an orphan file deletion optimizer.</p>
     #   @return [Types::OrphanFileDeletionConfiguration]
     class TableOptimizerConfiguration < Struct.new(
+      nil,
       :role_arn,
       :enabled,
       :vpc_configuration,
@@ -21221,6 +22073,7 @@ module Aws::Glue
     #   <p>An <code>OrphanFileDeletionMetrics</code> object containing metrics for the optimizer run.</p>
     #   @return [Types::OrphanFileDeletionMetrics]
     class TableOptimizerRun < Struct.new(
+      nil,
       :event_type,
       :start_timestamp,
       :end_timestamp,
@@ -21277,6 +22130,7 @@ module Aws::Glue
     #   <p>A <code>StatusDetails</code> object with information about the requested change.</p>
     #   @return [Types::StatusDetails]
     class TableStatus < Struct.new(
+      nil,
       :requested_by,
       :updated_by,
       :request_time,
@@ -21298,6 +22152,7 @@ module Aws::Glue
     #   <p>The ID value that identifies this table version. A <code>VersionId</code> is a string representation of an integer. Each version is incremented by 1.</p>
     #   @return [String]
     class TableVersion < Struct.new(
+      nil,
       :table,
       :version_id,
       keyword_init: true
@@ -21316,6 +22171,7 @@ module Aws::Glue
     #   <p>The details about the error.</p>
     #   @return [Types::ErrorDetail]
     class TableVersionError < Struct.new(
+      nil,
       :table_name,
       :version_id,
       :error_detail,
@@ -21335,6 +22191,7 @@ module Aws::Glue
     #   <p>The tag value. The value is optional when you create a tag on an object. The value is case-sensitive, and must not contain the prefix aws.</p>
     #   @return [String]
     class Tag < Struct.new(
+      nil,
       :key,
       :value,
       keyword_init: true
@@ -21350,6 +22207,7 @@ module Aws::Glue
     #   <p>Tags to add to this resource.</p>
     #   @return [Hash<String, String>]
     class TagResourceRequest < Struct.new(
+      nil,
       :resource_arn,
       :tags_to_add,
       keyword_init: true
@@ -21358,6 +22216,7 @@ module Aws::Glue
     end
 
     class TagResourceResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -21377,6 +22236,7 @@ module Aws::Glue
     #   <p>The ARN of an Eventbridge event bus to receive the integration status notification.</p>
     #   @return [String]
     class TargetProcessingProperties < Struct.new(
+      nil,
       :role_arn,
       :kms_arn,
       :connection_name,
@@ -21391,6 +22251,7 @@ module Aws::Glue
     #   <p>The Amazon Resource Name (ARN) of the catalog resource.</p>
     #   @return [String]
     class TargetRedshiftCatalog < Struct.new(
+      nil,
       :catalog_arn,
       keyword_init: true
     )
@@ -21402,6 +22263,7 @@ module Aws::Glue
     #   <p>A message describing the problem.</p>
     #   @return [String]
     class TargetResourceNotFound < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -21419,6 +22281,7 @@ module Aws::Glue
     #   <p>The optional name of a target table.</p>
     #   @return [String]
     class TargetTableConfig < Struct.new(
+      nil,
       :unnest_spec,
       :partition_spec,
       :target_table_name,
@@ -21459,6 +22322,7 @@ module Aws::Glue
     #   <p>The amount of time (in seconds) that the task run consumed resources.</p>
     #   @return [Integer]
     class TaskRun < Struct.new(
+      nil,
       :transform_id,
       :task_run_id,
       :status,
@@ -21494,6 +22358,7 @@ module Aws::Glue
     #   <p>Filter on task runs started after this date.</p>
     #   @return [Time]
     class TaskRunFilterCriteria < Struct.new(
+      nil,
       :task_run_type,
       :status,
       :started_before,
@@ -21520,6 +22385,7 @@ module Aws::Glue
     #   <p>The configuration properties for a find matches task run.</p>
     #   @return [Types::FindMatchesTaskRunProperties]
     class TaskRunProperties < Struct.new(
+      nil,
       :task_type,
       :import_labels_task_run_properties,
       :export_labels_task_run_properties,
@@ -21541,6 +22407,7 @@ module Aws::Glue
     #         transform.</p>
     #   @return [String]
     class TaskRunSortCriteria < Struct.new(
+      nil,
       :column,
       :sort_direction,
       keyword_init: true
@@ -21572,6 +22439,7 @@ module Aws::Glue
     #   <p>A structure containing the authentication configuration in the TestConnection request. Required for a connection to Salesforce using OAuth authentication.</p>
     #   @return [Types::AuthenticationConfigurationInput]
     class TestConnectionInput < Struct.new(
+      nil,
       :connection_type,
       :connection_properties,
       :authentication_configuration,
@@ -21590,6 +22458,7 @@ module Aws::Glue
     #   <p>A structure that is used to specify testing a connection to a service.</p>
     #   @return [Types::TestConnectionInput]
     class TestConnectionRequest < Struct.new(
+      nil,
       :connection_name,
       :catalog_id,
       :test_connection_input,
@@ -21599,6 +22468,7 @@ module Aws::Glue
     end
 
     class TestConnectionResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -21609,6 +22479,7 @@ module Aws::Glue
     #   <p>A message describing the problem.</p>
     #   @return [String]
     class ThrottlingException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -21623,6 +22494,7 @@ module Aws::Glue
     #   <p>The timestamp after which statistics should be included in the results.</p>
     #   @return [Time]
     class TimestampFilter < Struct.new(
+      nil,
       :recorded_before,
       :recorded_after,
       keyword_init: true
@@ -21638,6 +22510,7 @@ module Aws::Glue
     #   <p>The timestamp when the inclusion annotation was last modified.</p>
     #   @return [Time]
     class TimestampedInclusionAnnotation < Struct.new(
+      nil,
       :value,
       :last_modified_on,
       keyword_init: true
@@ -21668,6 +22541,7 @@ module Aws::Glue
     #   <p>Specifies whether the parameter is optional or not in the config file of the dynamic transform.</p>
     #   @return [Boolean]
     class TransformConfigParameter < Struct.new(
+      nil,
       :name,
       :type,
       :validation_rule,
@@ -21689,6 +22563,7 @@ module Aws::Glue
     #   <p>The name of the security configuration.</p>
     #   @return [String]
     class TransformEncryption < Struct.new(
+      nil,
       :ml_user_data_encryption,
       :task_run_security_configuration_name,
       keyword_init: true
@@ -21729,6 +22604,7 @@ module Aws::Glue
     #         such as an integer or string. Has an upper bound of 100 columns.</p>
     #   @return [Array<Types::SchemaColumn>]
     class TransformFilterCriteria < Struct.new(
+      nil,
       :name,
       :transform_type,
       :status,
@@ -21753,6 +22629,7 @@ module Aws::Glue
     #   <p>The parameters for the find matches algorithm.</p>
     #   @return [Types::FindMatchesParameters]
     class TransformParameters < Struct.new(
+      nil,
       :transform_type,
       :find_matches_parameters,
       keyword_init: true
@@ -21770,6 +22647,7 @@ module Aws::Glue
     #         learning transform.</p>
     #   @return [String]
     class TransformSortCriteria < Struct.new(
+      nil,
       :column,
       :sort_direction,
       keyword_init: true
@@ -21813,6 +22691,7 @@ module Aws::Glue
     #         before EventBridge event trigger fires.</p>
     #   @return [Types::EventBatchingCondition]
     class Trigger < Struct.new(
+      nil,
       :name,
       :workflow_name,
       :id,
@@ -21833,6 +22712,7 @@ module Aws::Glue
     #   <p>The information of the trigger represented by the trigger node.</p>
     #   @return [Types::Trigger]
     class TriggerNodeDetails < Struct.new(
+      nil,
       :trigger,
       keyword_init: true
     )
@@ -21864,6 +22744,7 @@ module Aws::Glue
     #         before EventBridge event trigger fires.</p>
     #   @return [Types::EventBatchingCondition]
     class TriggerUpdate < Struct.new(
+      nil,
       :name,
       :description,
       :schedule,
@@ -21886,6 +22767,7 @@ module Aws::Glue
     #   <p>A Boolean value indicating that the partition location is registered with Lake Formation.</p>
     #   @return [Boolean]
     class UnfilteredPartition < Struct.new(
+      nil,
       :partition,
       :authorized_columns,
       :is_registered_with_lake_formation,
@@ -21912,6 +22794,7 @@ module Aws::Glue
     #            <p>Specify <code>DISTINCT</code> to remove duplicate rows in the resulting DynamicFrame.</p>
     #   @return [String]
     class Union < Struct.new(
+      nil,
       :name,
       :inputs,
       :union_type,
@@ -21927,6 +22810,7 @@ module Aws::Glue
     #   <p>Tags to remove from this resource.</p>
     #   @return [Array<String>]
     class UntagResourceRequest < Struct.new(
+      nil,
       :resource_arn,
       :tags_to_remove,
       keyword_init: true
@@ -21935,6 +22819,7 @@ module Aws::Glue
     end
 
     class UntagResourceResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -21950,6 +22835,7 @@ module Aws::Glue
     #   <p>Specifies a path in Amazon S3 where the blueprint is published.</p>
     #   @return [String]
     class UpdateBlueprintRequest < Struct.new(
+      nil,
       :name,
       :description,
       :blueprint_location,
@@ -21962,6 +22848,7 @@ module Aws::Glue
     #   <p>Returns the name of the blueprint that was updated.</p>
     #   @return [String]
     class UpdateBlueprintResponse < Struct.new(
+      nil,
       :name,
       keyword_init: true
     )
@@ -21975,6 +22862,7 @@ module Aws::Glue
     #   <p>A <code>CatalogInput</code> object specifying the new properties of an existing catalog.</p>
     #   @return [Types::CatalogInput]
     class UpdateCatalogRequest < Struct.new(
+      nil,
       :catalog_id,
       :catalog_input,
       keyword_init: true
@@ -21983,6 +22871,7 @@ module Aws::Glue
     end
 
     class UpdateCatalogResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -22001,6 +22890,7 @@ module Aws::Glue
     #   <p>A <code>CsvClassifier</code> object with updated fields.</p>
     #   @return [Types::UpdateCsvClassifierRequest]
     class UpdateClassifierRequest < Struct.new(
+      nil,
       :grok_classifier,
       :xml_classifier,
       :json_classifier,
@@ -22011,6 +22901,7 @@ module Aws::Glue
     end
 
     class UpdateClassifierResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -22033,6 +22924,7 @@ module Aws::Glue
     #   <p>A list of the column statistics.</p>
     #   @return [Array<Types::ColumnStatistics>]
     class UpdateColumnStatisticsForPartitionRequest < Struct.new(
+      nil,
       :catalog_id,
       :database_name,
       :table_name,
@@ -22047,6 +22939,7 @@ module Aws::Glue
     #   <p>Error occurred during updating column statistics data.</p>
     #   @return [Array<Types::ColumnStatisticsError>]
     class UpdateColumnStatisticsForPartitionResponse < Struct.new(
+      nil,
       :errors,
       keyword_init: true
     )
@@ -22067,6 +22960,7 @@ module Aws::Glue
     #   <p>A list of the column statistics.</p>
     #   @return [Array<Types::ColumnStatistics>]
     class UpdateColumnStatisticsForTableRequest < Struct.new(
+      nil,
       :catalog_id,
       :database_name,
       :table_name,
@@ -22080,6 +22974,7 @@ module Aws::Glue
     #   <p>List of ColumnStatisticsErrors.</p>
     #   @return [Array<Types::ColumnStatisticsError>]
     class UpdateColumnStatisticsForTableResponse < Struct.new(
+      nil,
       :errors,
       keyword_init: true
     )
@@ -22111,6 +23006,7 @@ module Aws::Glue
     #   <p>Name of the security configuration that is used to encrypt CloudWatch logs.</p>
     #   @return [String]
     class UpdateColumnStatisticsTaskSettingsRequest < Struct.new(
+      nil,
       :database_name,
       :table_name,
       :role,
@@ -22125,6 +23021,7 @@ module Aws::Glue
     end
 
     class UpdateColumnStatisticsTaskSettingsResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -22142,6 +23039,7 @@ module Aws::Glue
     #         in question.</p>
     #   @return [Types::ConnectionInput]
     class UpdateConnectionRequest < Struct.new(
+      nil,
       :catalog_id,
       :name,
       :connection_input,
@@ -22151,6 +23049,7 @@ module Aws::Glue
     end
 
     class UpdateConnectionResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -22209,6 +23108,7 @@ module Aws::Glue
     #         crawler.</p>
     #   @return [String]
     class UpdateCrawlerRequest < Struct.new(
+      nil,
       :name,
       :role,
       :database_name,
@@ -22229,6 +23129,7 @@ module Aws::Glue
     end
 
     class UpdateCrawlerResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -22243,6 +23144,7 @@ module Aws::Glue
     #         <code>cron(15 12 * * ? *)</code>.</p>
     #   @return [String]
     class UpdateCrawlerScheduleRequest < Struct.new(
+      nil,
       :crawler_name,
       :schedule,
       keyword_init: true
@@ -22251,6 +23153,7 @@ module Aws::Glue
     end
 
     class UpdateCrawlerScheduleResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -22289,6 +23192,7 @@ module Aws::Glue
     #   <p>Sets the SerDe for processing CSV in the classifier, which will be applied in the Data Catalog. Valid values are <code>OpenCSVSerDe</code>, <code>LazySimpleSerDe</code>, and <code>None</code>. You can specify the <code>None</code> value when you want the crawler to do the detection.</p>
     #   @return [String]
     class UpdateCsvClassifierRequest < Struct.new(
+      nil,
       :name,
       :delimiter,
       :quote_symbol,
@@ -22314,6 +23218,7 @@ module Aws::Glue
     #   <p>A Data Quality Definition Language (DQDL) ruleset. For more information, see the Glue developer guide.</p>
     #   @return [String]
     class UpdateDataQualityRulesetRequest < Struct.new(
+      nil,
       :name,
       :description,
       :ruleset,
@@ -22332,6 +23237,7 @@ module Aws::Glue
     #   <p>A Data Quality Definition Language (DQDL) ruleset. For more information, see the Glue developer guide.</p>
     #   @return [String]
     class UpdateDataQualityRulesetResponse < Struct.new(
+      nil,
       :name,
       :description,
       :ruleset,
@@ -22353,6 +23259,7 @@ module Aws::Glue
     #         of the metadata database in the catalog.</p>
     #   @return [Types::DatabaseInput]
     class UpdateDatabaseRequest < Struct.new(
+      nil,
       :catalog_id,
       :name,
       :database_input,
@@ -22362,6 +23269,7 @@ module Aws::Glue
     end
 
     class UpdateDatabaseResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -22405,6 +23313,7 @@ module Aws::Glue
     #            <p>You can specify a version of Python support for development endpoints by using the <code>Arguments</code> parameter in the <code>CreateDevEndpoint</code> or <code>UpdateDevEndpoint</code> APIs. If no arguments are provided, the version defaults to Python 2.</p>
     #   @return [Hash<String, String>]
     class UpdateDevEndpointRequest < Struct.new(
+      nil,
       :endpoint_name,
       :public_key,
       :add_public_keys,
@@ -22419,6 +23328,7 @@ module Aws::Glue
     end
 
     class UpdateDevEndpointResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -22429,6 +23339,7 @@ module Aws::Glue
     #   <p>A list of Identity Center scopes that define the updated permissions and access levels for the Glue configuration.</p>
     #   @return [Array<String>]
     class UpdateGlueIdentityCenterConfigurationRequest < Struct.new(
+      nil,
       :scopes,
       keyword_init: true
     )
@@ -22437,6 +23348,7 @@ module Aws::Glue
 
     # <p>Response from updating an existing Glue Identity Center configuration.</p>
     class UpdateGlueIdentityCenterConfigurationResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -22458,6 +23370,7 @@ module Aws::Glue
     #   <p>Optional custom grok patterns used by this classifier.</p>
     #   @return [String]
     class UpdateGrokClassifierRequest < Struct.new(
+      nil,
       :name,
       :classification,
       :grok_pattern,
@@ -22476,6 +23389,7 @@ module Aws::Glue
     #         partitions, and properties.</p>
     #   @return [Types::UpdateIcebergTableInput]
     class UpdateIcebergInput < Struct.new(
+      nil,
       :update_iceberg_table_input,
       keyword_init: true
     )
@@ -22489,6 +23403,7 @@ module Aws::Glue
     #         specifications, and table properties.</p>
     #   @return [Array<Types::IcebergTableUpdate>]
     class UpdateIcebergTableInput < Struct.new(
+      nil,
       :updates,
       keyword_init: true
     )
@@ -22505,6 +23420,7 @@ module Aws::Glue
     #   <p>The resource properties associated with the integration target.</p>
     #   @return [Types::TargetProcessingProperties]
     class UpdateIntegrationResourcePropertyRequest < Struct.new(
+      nil,
       :resource_arn,
       :source_processing_properties,
       :target_processing_properties,
@@ -22523,6 +23439,7 @@ module Aws::Glue
     #   <p>The resource properties associated with the integration target.</p>
     #   @return [Types::TargetProcessingProperties]
     class UpdateIntegrationResourcePropertyResponse < Struct.new(
+      nil,
       :resource_arn,
       :source_processing_properties,
       :target_processing_properties,
@@ -22544,6 +23461,7 @@ module Aws::Glue
     #   <p>A structure for the target table configuration.</p>
     #   @return [Types::TargetTableConfig]
     class UpdateIntegrationTablePropertiesRequest < Struct.new(
+      nil,
       :resource_arn,
       :table_name,
       :source_table_config,
@@ -22554,6 +23472,7 @@ module Aws::Glue
     end
 
     class UpdateIntegrationTablePropertiesResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -22592,6 +23511,7 @@ module Aws::Glue
     #   <p>The value of the authorization token.</p>
     #   @return [String]
     class UpdateJobFromSourceControlRequest < Struct.new(
+      nil,
       :job_name,
       :provider,
       :repository_name,
@@ -22610,6 +23530,7 @@ module Aws::Glue
     #   <p>The name of the Glue job.</p>
     #   @return [String]
     class UpdateJobFromSourceControlResponse < Struct.new(
+      nil,
       :job_name,
       keyword_init: true
     )
@@ -22623,6 +23544,7 @@ module Aws::Glue
     #   <p>Specifies the values with which to update the job definition. Unspecified configuration is removed or reset to default values.</p>
     #   @return [Types::JobUpdate]
     class UpdateJobRequest < Struct.new(
+      nil,
       :job_name,
       :job_update,
       keyword_init: true
@@ -22634,6 +23556,7 @@ module Aws::Glue
     #   <p>Returns the name of the updated job definition.</p>
     #   @return [String]
     class UpdateJobResponse < Struct.new(
+      nil,
       :job_name,
       keyword_init: true
     )
@@ -22649,6 +23572,7 @@ module Aws::Glue
     #         Glue supports a subset of JsonPath, as described in <a href="https://docs.aws.amazon.com/glue/latest/dg/custom-classifier.html#custom-classifier-json">Writing JsonPath Custom Classifiers</a>.</p>
     #   @return [String]
     class UpdateJsonClassifierRequest < Struct.new(
+      nil,
       :name,
       :json_path,
       keyword_init: true
@@ -22707,6 +23631,7 @@ module Aws::Glue
     #   <p>The maximum number of times to retry a task for this transform after a task run fails.</p>
     #   @return [Integer]
     class UpdateMLTransformRequest < Struct.new(
+      nil,
       :transform_id,
       :name,
       :description,
@@ -22727,6 +23652,7 @@ module Aws::Glue
     #   <p>The unique identifier for the transform that was updated.</p>
     #   @return [String]
     class UpdateMLTransformResponse < Struct.new(
+      nil,
       :transform_id,
       keyword_init: true
     )
@@ -22741,6 +23667,7 @@ module Aws::Glue
     #         properties.</p>
     #   @return [Types::UpdateIcebergInput]
     class UpdateOpenTableFormatInput < Struct.new(
+      nil,
       :update_iceberg_input,
       keyword_init: true
     )
@@ -22766,6 +23693,7 @@ module Aws::Glue
     #            <p>The <code>Values</code> property can't be changed. If you want to change the partition key values for a partition, delete and recreate the partition.</p>
     #   @return [Types::PartitionInput]
     class UpdatePartitionRequest < Struct.new(
+      nil,
       :catalog_id,
       :database_name,
       :table_name,
@@ -22777,6 +23705,7 @@ module Aws::Glue
     end
 
     class UpdatePartitionResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -22789,6 +23718,7 @@ module Aws::Glue
     #   <p>A description of the registry. If description is not provided, this field will not be updated.</p>
     #   @return [String]
     class UpdateRegistryInput < Struct.new(
+      nil,
       :registry_id,
       :description,
       keyword_init: true
@@ -22803,6 +23733,7 @@ module Aws::Glue
     #   <p>The Amazon Resource name (ARN) of the updated registry.</p>
     #   @return [String]
     class UpdateRegistryResponse < Struct.new(
+      nil,
       :registry_name,
       :registry_arn,
       keyword_init: true
@@ -22831,6 +23762,7 @@ module Aws::Glue
     #   <p>The new description for the schema.</p>
     #   @return [String]
     class UpdateSchemaInput < Struct.new(
+      nil,
       :schema_id,
       :schema_version_number,
       :compatibility,
@@ -22850,6 +23782,7 @@ module Aws::Glue
     #   <p>The name of the registry that contains the schema.</p>
     #   @return [String]
     class UpdateSchemaResponse < Struct.new(
+      nil,
       :schema_arn,
       :schema_name,
       :registry_name,
@@ -22891,6 +23824,7 @@ module Aws::Glue
     #   <p>The value of the authorization token.</p>
     #   @return [String]
     class UpdateSourceControlFromJobRequest < Struct.new(
+      nil,
       :job_name,
       :provider,
       :repository_name,
@@ -22909,6 +23843,7 @@ module Aws::Glue
     #   <p>The name of the Glue job.</p>
     #   @return [String]
     class UpdateSourceControlFromJobResponse < Struct.new(
+      nil,
       :job_name,
       keyword_init: true
     )
@@ -22931,6 +23866,7 @@ module Aws::Glue
     #   <p>A <code>TableOptimizerConfiguration</code> object representing the configuration of a table optimizer.</p>
     #   @return [Types::TableOptimizerConfiguration]
     class UpdateTableOptimizerRequest < Struct.new(
+      nil,
       :catalog_id,
       :database_name,
       :table_name,
@@ -22942,6 +23878,7 @@ module Aws::Glue
     end
 
     class UpdateTableOptimizerResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -22985,6 +23922,7 @@ module Aws::Glue
     #         serving as a wrapper for format-specific update operations such as Apache Iceberg.</p>
     #   @return [Types::UpdateOpenTableFormatInput]
     class UpdateTableRequest < Struct.new(
+      nil,
       :catalog_id,
       :database_name,
       :name,
@@ -23001,6 +23939,7 @@ module Aws::Glue
     end
 
     class UpdateTableResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -23013,6 +23952,7 @@ module Aws::Glue
     #   <p>The new values with which to update the trigger.</p>
     #   @return [Types::TriggerUpdate]
     class UpdateTriggerRequest < Struct.new(
+      nil,
       :name,
       :trigger_update,
       keyword_init: true
@@ -23024,6 +23964,7 @@ module Aws::Glue
     #   <p>The resulting trigger definition.</p>
     #   @return [Types::Trigger]
     class UpdateTriggerResponse < Struct.new(
+      nil,
       :trigger,
       keyword_init: true
     )
@@ -23040,6 +23981,7 @@ module Aws::Glue
     #   <p>A <code>ProfileConfiguration</code> object specifying the job and session values for the profile.</p>
     #   @return [Types::ProfileConfiguration]
     class UpdateUsageProfileRequest < Struct.new(
+      nil,
       :name,
       :description,
       :configuration,
@@ -23052,6 +23994,7 @@ module Aws::Glue
     #   <p>The name of the usage profile that was updated.</p>
     #   @return [String]
     class UpdateUsageProfileResponse < Struct.new(
+      nil,
       :name,
       keyword_init: true
     )
@@ -23074,6 +24017,7 @@ module Aws::Glue
     #         Catalog.</p>
     #   @return [Types::UserDefinedFunctionInput]
     class UpdateUserDefinedFunctionRequest < Struct.new(
+      nil,
       :catalog_id,
       :database_name,
       :function_name,
@@ -23084,6 +24028,7 @@ module Aws::Glue
     end
 
     class UpdateUserDefinedFunctionResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -23103,6 +24048,7 @@ module Aws::Glue
     #   <p>You can use this parameter to prevent unwanted multiple updates to data, to control costs, or in some cases, to prevent exceeding the maximum number of concurrent runs of any of the component jobs. If you leave this parameter blank, there is no limit to the number of concurrent workflow runs.</p>
     #   @return [Integer]
     class UpdateWorkflowRequest < Struct.new(
+      nil,
       :name,
       :description,
       :default_run_properties,
@@ -23116,6 +24062,7 @@ module Aws::Glue
     #   <p>The name of the workflow which was specified in input.</p>
     #   @return [String]
     class UpdateWorkflowResponse < Struct.new(
+      nil,
       :name,
       keyword_init: true
     )
@@ -23137,6 +24084,7 @@ module Aws::Glue
     #           <code><row item_a="A" item_b="B" /></code> is not).</p>
     #   @return [String]
     class UpdateXMLClassifierRequest < Struct.new(
+      nil,
       :name,
       :classification,
       :row_tag,
@@ -23156,6 +24104,7 @@ module Aws::Glue
     #   <p>The keys used to determine whether to perform an update or insert.</p>
     #   @return [Array<String>]
     class UpsertRedshiftTargetOptions < Struct.new(
+      nil,
       :table_location,
       :connection_name,
       :upsert_keys,
@@ -23178,6 +24127,7 @@ module Aws::Glue
     #   <p>The date and time when the usage profile was last modified.</p>
     #   @return [Time]
     class UsageProfileDefinition < Struct.new(
+      nil,
       :name,
       :description,
       :created_on,
@@ -23214,6 +24164,7 @@ module Aws::Glue
     #   <p>The ID of the Data Catalog in which the function resides.</p>
     #   @return [String]
     class UserDefinedFunction < Struct.new(
+      nil,
       :function_name,
       :database_name,
       :class_name,
@@ -23244,6 +24195,7 @@ module Aws::Glue
     #   <p>The resource URIs for the function.</p>
     #   @return [Array<Types::ResourceUri>]
     class UserDefinedFunctionInput < Struct.new(
+      nil,
       :function_name,
       :class_name,
       :owner_name,
@@ -23259,6 +24211,7 @@ module Aws::Glue
     #   <p>A message describing the problem.</p>
     #   @return [String]
     class ValidationException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -23270,6 +24223,7 @@ module Aws::Glue
     #   <p>A message describing the problem.</p>
     #   @return [String]
     class VersionMismatchException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -23290,6 +24244,7 @@ module Aws::Glue
     #   <p>A list of representations.</p>
     #   @return [Array<Types::ViewRepresentation>]
     class ViewDefinition < Struct.new(
+      nil,
       :is_protected,
       :definer,
       :sub_objects,
@@ -23313,6 +24268,7 @@ module Aws::Glue
     #   <p>A list of base table ARNs that make up the view.</p>
     #   @return [Array<String>]
     class ViewDefinitionInput < Struct.new(
+      nil,
       :is_protected,
       :definer,
       :representations,
@@ -23348,6 +24304,7 @@ module Aws::Glue
     #   <p>Dialects marked as stale are no longer valid and must be updated before they can be queried in their respective query engines.</p>
     #   @return [Boolean]
     class ViewRepresentation < Struct.new(
+      nil,
       :dialect,
       :dialect_version,
       :view_original_text,
@@ -23376,6 +24333,7 @@ module Aws::Glue
     #   <p>A string that represents the SQL query that describes the view with expanded resource ARNs</p>
     #   @return [String]
     class ViewRepresentationInput < Struct.new(
+      nil,
       :dialect,
       :dialect_version,
       :view_original_text,
@@ -23406,6 +24364,7 @@ module Aws::Glue
     #   <p>An error associated with the validation.</p>
     #   @return [Types::ErrorDetail]
     class ViewValidation < Struct.new(
+      nil,
       :dialect,
       :dialect_version,
       :view_validation_text,
@@ -23451,6 +24410,7 @@ module Aws::Glue
     #   <p>This structure indicates the details of the blueprint that this particular workflow is created from.</p>
     #   @return [Types::BlueprintDetails]
     class Workflow < Struct.new(
+      nil,
       :name,
       :description,
       :default_run_properties,
@@ -23474,6 +24434,7 @@ module Aws::Glue
     #   <p>A list of all the directed connections between the nodes belonging to the workflow.</p>
     #   @return [Array<Types::Edge>]
     class WorkflowGraph < Struct.new(
+      nil,
       :nodes,
       :edges,
       keyword_init: true
@@ -23517,6 +24478,7 @@ module Aws::Glue
     #   <p>The batch condition that started the workflow run.</p>
     #   @return [Types::StartingEventBatchCondition]
     class WorkflowRun < Struct.new(
+      nil,
       :name,
       :workflow_run_id,
       :previous_run_id,
@@ -23559,6 +24521,7 @@ module Aws::Glue
     #   <p>Indicates the count of job runs in WAITING state in the workflow run.</p>
     #   @return [Integer]
     class WorkflowRunStatistics < Struct.new(
+      nil,
       :total_actions,
       :timeout_actions,
       :failed_actions,
@@ -23608,6 +24571,7 @@ module Aws::Glue
     #           <code><row item_a="A" item_b="B" /></code> is not).</p>
     #   @return [String]
     class XMLClassifier < Struct.new(
+      nil,
       :name,
       :classification,
       :creation_time,

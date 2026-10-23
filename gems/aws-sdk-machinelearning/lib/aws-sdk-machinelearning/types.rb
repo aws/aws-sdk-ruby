@@ -16,6 +16,7 @@ module Aws::MachineLearning
     #   <p>The type of the ML object to tag.</p>
     #   @return [String]
     class AddTagsInput < Struct.new(
+      nil,
       :tags,
       :resource_id,
       :resource_type,
@@ -32,6 +33,7 @@ module Aws::MachineLearning
     #   <p>The type of the ML object that was tagged.</p>
     #   @return [String]
     class AddTagsOutput < Struct.new(
+      nil,
       :resource_id,
       :resource_type,
       keyword_init: true
@@ -115,6 +117,7 @@ module Aws::MachineLearning
     #   <p>Long integer type that is a 64-bit signed number.</p>
     #   @return [Integer]
     class BatchPrediction < Struct.new(
+      nil,
       :batch_prediction_id,
       :ml_model_id,
       :batch_prediction_data_source_id,
@@ -154,6 +157,7 @@ module Aws::MachineLearning
     #           <p>Amazon ML needs permissions to store and retrieve the logs on your behalf. For information about how to set permissions, see the <a href="https://docs.aws.amazon.com/machine-learning/latest/dg">Amazon Machine Learning Developer Guide</a>.</p>
     #   @return [String]
     class CreateBatchPredictionInput < Struct.new(
+      nil,
       :batch_prediction_id,
       :batch_prediction_name,
       :ml_model_id,
@@ -173,6 +177,7 @@ module Aws::MachineLearning
     #               <code>BatchPredictionId</code> in the request.</p>
     #   @return [String]
     class CreateBatchPredictionOutput < Struct.new(
+      nil,
       :batch_prediction_id,
       keyword_init: true
     )
@@ -248,6 +253,7 @@ module Aws::MachineLearning
     #               </p>
     #   @return [Boolean]
     class CreateDataSourceFromRDSInput < Struct.new(
+      nil,
       :data_source_id,
       :data_source_name,
       :rds_data,
@@ -270,6 +276,7 @@ module Aws::MachineLearning
     #           </p>
     #   @return [String]
     class CreateDataSourceFromRDSOutput < Struct.new(
+      nil,
       :data_source_id,
       keyword_init: true
     )
@@ -344,6 +351,7 @@ module Aws::MachineLearning
     #             be used for <code>MLModel</code> training.</p>
     #   @return [Boolean]
     class CreateDataSourceFromRedshiftInput < Struct.new(
+      nil,
       :data_source_id,
       :data_source_name,
       :data_spec,
@@ -363,6 +371,7 @@ module Aws::MachineLearning
     #           </p>
     #   @return [String]
     class CreateDataSourceFromRedshiftOutput < Struct.new(
+      nil,
       :data_source_id,
       keyword_init: true
     )
@@ -401,6 +410,7 @@ module Aws::MachineLearning
     #               This parameter must be set to <code>true</code> if the <code></code>DataSource<code></code> needs to be used for <code>MLModel</code> training.</p>
     #   @return [Boolean]
     class CreateDataSourceFromS3Input < Struct.new(
+      nil,
       :data_source_id,
       :data_source_name,
       :data_spec,
@@ -419,6 +429,7 @@ module Aws::MachineLearning
     #           </p>
     #   @return [String]
     class CreateDataSourceFromS3Output < Struct.new(
+      nil,
       :data_source_id,
       keyword_init: true
     )
@@ -440,6 +451,7 @@ module Aws::MachineLearning
     #               must match the schema used to create the <code>MLModel</code>.</p>
     #   @return [String]
     class CreateEvaluationInput < Struct.new(
+      nil,
       :evaluation_id,
       :evaluation_name,
       :ml_model_id,
@@ -460,6 +472,7 @@ module Aws::MachineLearning
     #               <code>EvaluationId</code> in the request.</p>
     #   @return [String]
     class CreateEvaluationOutput < Struct.new(
+      nil,
       :evaluation_id,
       keyword_init: true
     )
@@ -545,6 +558,7 @@ module Aws::MachineLearning
     #   <p>The Amazon Simple Storage Service (Amazon S3) location and file name that contains the <code>MLModel</code> recipe. You must specify either the recipe or its URI. If you don't specify a recipe or its URI, Amazon ML creates a default.</p>
     #   @return [String]
     class CreateMLModelInput < Struct.new(
+      nil,
       :ml_model_id,
       :ml_model_name,
       :ml_model_type,
@@ -567,6 +581,7 @@ module Aws::MachineLearning
     #           </p>
     #   @return [String]
     class CreateMLModelOutput < Struct.new(
+      nil,
       :ml_model_id,
       keyword_init: true
     )
@@ -577,6 +592,7 @@ module Aws::MachineLearning
     #   <p>The ID assigned to the <code>MLModel</code> during creation.</p>
     #   @return [String]
     class CreateRealtimeEndpointInput < Struct.new(
+      nil,
       :ml_model_id,
       keyword_init: true
     )
@@ -596,6 +612,7 @@ module Aws::MachineLearning
     #            </p>
     #   @return [Types::RealtimeEndpointInfo]
     class CreateRealtimeEndpointOutput < Struct.new(
+      nil,
       :ml_model_id,
       :realtime_endpoint_info,
       keyword_init: true
@@ -681,6 +698,7 @@ module Aws::MachineLearning
     #   <p>A timestamp represented in epoch time.</p>
     #   @return [Time]
     class DataSource < Struct.new(
+      nil,
       :data_source_id,
       :data_location_s3,
       :data_rearrangement,
@@ -713,6 +731,7 @@ module Aws::MachineLearning
     #   <p>A user-supplied ID that uniquely identifies the <code>BatchPrediction</code>.</p>
     #   @return [String]
     class DeleteBatchPredictionInput < Struct.new(
+      nil,
       :batch_prediction_id,
       keyword_init: true
     )
@@ -726,6 +745,7 @@ module Aws::MachineLearning
     #   <p>A user-supplied ID that uniquely identifies the <code>BatchPrediction</code>. This value should be identical to the value of the <code>BatchPredictionID</code> in the request.</p>
     #   @return [String]
     class DeleteBatchPredictionOutput < Struct.new(
+      nil,
       :batch_prediction_id,
       keyword_init: true
     )
@@ -736,6 +756,7 @@ module Aws::MachineLearning
     #   <p>A user-supplied ID that uniquely identifies the <code>DataSource</code>.</p>
     #   @return [String]
     class DeleteDataSourceInput < Struct.new(
+      nil,
       :data_source_id,
       keyword_init: true
     )
@@ -747,6 +768,7 @@ module Aws::MachineLearning
     #   <p>A user-supplied ID that uniquely identifies the <code>DataSource</code>. This value should be identical to the value of the <code>DataSourceID</code> in the request.</p>
     #   @return [String]
     class DeleteDataSourceOutput < Struct.new(
+      nil,
       :data_source_id,
       keyword_init: true
     )
@@ -757,6 +779,7 @@ module Aws::MachineLearning
     #   <p>A user-supplied ID that uniquely identifies the <code>Evaluation</code> to delete.</p>
     #   @return [String]
     class DeleteEvaluationInput < Struct.new(
+      nil,
       :evaluation_id,
       keyword_init: true
     )
@@ -770,6 +793,7 @@ module Aws::MachineLearning
     #   <p>A user-supplied ID that uniquely identifies the <code>Evaluation</code>. This value should be identical to the value of the <code>EvaluationId</code> in the request.</p>
     #   @return [String]
     class DeleteEvaluationOutput < Struct.new(
+      nil,
       :evaluation_id,
       keyword_init: true
     )
@@ -780,6 +804,7 @@ module Aws::MachineLearning
     #   <p>A user-supplied ID that uniquely identifies the <code>MLModel</code>.</p>
     #   @return [String]
     class DeleteMLModelInput < Struct.new(
+      nil,
       :ml_model_id,
       keyword_init: true
     )
@@ -793,6 +818,7 @@ module Aws::MachineLearning
     #   <p>A user-supplied ID that uniquely identifies the <code>MLModel</code>. This value should be identical to the value of the <code>MLModelID</code> in the request.</p>
     #   @return [String]
     class DeleteMLModelOutput < Struct.new(
+      nil,
       :ml_model_id,
       keyword_init: true
     )
@@ -803,6 +829,7 @@ module Aws::MachineLearning
     #   <p>The ID assigned to the <code>MLModel</code> during creation.</p>
     #   @return [String]
     class DeleteRealtimeEndpointInput < Struct.new(
+      nil,
       :ml_model_id,
       keyword_init: true
     )
@@ -820,6 +847,7 @@ module Aws::MachineLearning
     #            </p>
     #   @return [Types::RealtimeEndpointInfo]
     class DeleteRealtimeEndpointOutput < Struct.new(
+      nil,
       :ml_model_id,
       :realtime_endpoint_info,
       keyword_init: true
@@ -837,6 +865,7 @@ module Aws::MachineLearning
     #   <p>The type of the tagged ML object.</p>
     #   @return [String]
     class DeleteTagsInput < Struct.new(
+      nil,
       :tag_keys,
       :resource_id,
       :resource_type,
@@ -853,6 +882,7 @@ module Aws::MachineLearning
     #   <p>The type of the ML object from which tags were deleted.</p>
     #   @return [String]
     class DeleteTagsOutput < Struct.new(
+      nil,
       :resource_id,
       :resource_type,
       keyword_init: true
@@ -958,6 +988,7 @@ module Aws::MachineLearning
     #   <p>The number of pages of information to include in the result. The range of acceptable values is <code>1</code> through <code>100</code>. The default value is <code>100</code>.</p>
     #   @return [Integer]
     class DescribeBatchPredictionsInput < Struct.new(
+      nil,
       :filter_variable,
       :eq,
       :gt,
@@ -983,6 +1014,7 @@ module Aws::MachineLearning
     #   <p>The ID of the next page in the paginated results that indicates at least one more page follows.</p>
     #   @return [String]
     class DescribeBatchPredictionsOutput < Struct.new(
+      nil,
       :results,
       :next_token,
       keyword_init: true
@@ -1079,6 +1111,7 @@ module Aws::MachineLearning
     #   <p> The maximum number of <code>DataSource</code> to include in the result.</p>
     #   @return [Integer]
     class DescribeDataSourcesInput < Struct.new(
+      nil,
       :filter_variable,
       :eq,
       :gt,
@@ -1104,6 +1137,7 @@ module Aws::MachineLearning
     #   <p>An ID of the next page in the paginated results that indicates at least one more page follows.</p>
     #   @return [String]
     class DescribeDataSourcesOutput < Struct.new(
+      nil,
       :results,
       :next_token,
       keyword_init: true
@@ -1209,6 +1243,7 @@ module Aws::MachineLearning
     #   <p> The maximum number of <code>Evaluation</code> to include in the result.</p>
     #   @return [Integer]
     class DescribeEvaluationsInput < Struct.new(
+      nil,
       :filter_variable,
       :eq,
       :gt,
@@ -1234,6 +1269,7 @@ module Aws::MachineLearning
     #   <p>The ID of the next page in the paginated results that indicates at least one more page follows.</p>
     #   @return [String]
     class DescribeEvaluationsOutput < Struct.new(
+      nil,
       :results,
       :next_token,
       keyword_init: true
@@ -1347,6 +1383,7 @@ module Aws::MachineLearning
     #   <p>The number of pages of information to include in the result. The range of acceptable values is <code>1</code> through <code>100</code>. The default value is <code>100</code>.</p>
     #   @return [Integer]
     class DescribeMLModelsInput < Struct.new(
+      nil,
       :filter_variable,
       :eq,
       :gt,
@@ -1371,6 +1408,7 @@ module Aws::MachineLearning
     #   <p>The ID of the next page in the paginated results that indicates at least one more page follows.</p>
     #   @return [String]
     class DescribeMLModelsOutput < Struct.new(
+      nil,
       :results,
       :next_token,
       keyword_init: true
@@ -1385,6 +1423,7 @@ module Aws::MachineLearning
     #   <p>The type of the ML object.</p>
     #   @return [String]
     class DescribeTagsInput < Struct.new(
+      nil,
       :resource_id,
       :resource_type,
       keyword_init: true
@@ -1403,6 +1442,7 @@ module Aws::MachineLearning
     #   <p>A list of tags associated with the ML object.</p>
     #   @return [Array<Types::Tag>]
     class DescribeTagsOutput < Struct.new(
+      nil,
       :resource_id,
       :resource_type,
       :tags,
@@ -1495,6 +1535,7 @@ module Aws::MachineLearning
     #   <p>A timestamp represented in epoch time.</p>
     #   @return [Time]
     class Evaluation < Struct.new(
+      nil,
       :evaluation_id,
       :ml_model_id,
       :evaluation_data_source_id,
@@ -1518,6 +1559,7 @@ module Aws::MachineLearning
     #   <p>An ID assigned to the <code>BatchPrediction</code> at creation.</p>
     #   @return [String]
     class GetBatchPredictionInput < Struct.new(
+      nil,
       :batch_prediction_id,
       keyword_init: true
     )
@@ -1601,6 +1643,7 @@ module Aws::MachineLearning
     #   <p>The number of invalid records that Amazon Machine Learning saw while processing the <code>BatchPrediction</code>.</p>
     #   @return [Integer]
     class GetBatchPredictionOutput < Struct.new(
+      nil,
       :batch_prediction_id,
       :ml_model_id,
       :batch_prediction_data_source_id,
@@ -1632,6 +1675,7 @@ module Aws::MachineLearning
     #           <p>If false, <code>DataSourceSchema</code> is not returned.</p>
     #   @return [Boolean]
     class GetDataSourceInput < Struct.new(
+      nil,
       :data_source_id,
       :verbose,
       keyword_init: true
@@ -1728,6 +1772,7 @@ module Aws::MachineLearning
     #               <b>Note:</b> This parameter is provided as part of the verbose format.</p>
     #   @return [String]
     class GetDataSourceOutput < Struct.new(
+      nil,
       :data_source_id,
       :data_location_s3,
       :data_rearrangement,
@@ -1762,6 +1807,7 @@ module Aws::MachineLearning
     #   <p>The ID of the <code>Evaluation</code> to retrieve. The evaluation of each <code>MLModel</code> is recorded and cataloged. The ID provides the means to access the information. </p>
     #   @return [String]
     class GetEvaluationInput < Struct.new(
+      nil,
       :evaluation_id,
       keyword_init: true
     )
@@ -1852,6 +1898,7 @@ module Aws::MachineLearning
     #   <p>The epoch time when Amazon Machine Learning marked the <code>Evaluation</code> as <code>INPROGRESS</code>. <code>StartedAt</code> isn't available if the <code>Evaluation</code> is in the <code>PENDING</code> state.</p>
     #   @return [Time]
     class GetEvaluationOutput < Struct.new(
+      nil,
       :evaluation_id,
       :ml_model_id,
       :evaluation_data_source_id,
@@ -1881,6 +1928,7 @@ module Aws::MachineLearning
     #           <p>If false, <code>Recipe</code> is not returned.</p>
     #   @return [Boolean]
     class GetMLModelInput < Struct.new(
+      nil,
       :ml_model_id,
       :verbose,
       keyword_init: true
@@ -2045,6 +2093,7 @@ module Aws::MachineLearning
     #               <b>Note:</b> This parameter is provided as part of the verbose format.</p>
     #   @return [String]
     class GetMLModelOutput < Struct.new(
+      nil,
       :ml_model_id,
       :training_data_source_id,
       :created_by_iam_user,
@@ -2077,6 +2126,7 @@ module Aws::MachineLearning
     # @!attribute code
     #   @return [Integer]
     class IdempotentParameterMismatchException < Struct.new(
+      nil,
       :message,
       :code,
       keyword_init: true
@@ -2095,6 +2145,7 @@ module Aws::MachineLearning
     # @!attribute code
     #   @return [Integer]
     class InternalServerException < Struct.new(
+      nil,
       :message,
       :code,
       keyword_init: true
@@ -2113,6 +2164,7 @@ module Aws::MachineLearning
     # @!attribute code
     #   @return [Integer]
     class InvalidInputException < Struct.new(
+      nil,
       :message,
       :code,
       keyword_init: true
@@ -2128,6 +2180,7 @@ module Aws::MachineLearning
     # @!attribute message
     #   @return [String]
     class InvalidTagException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -2140,6 +2193,7 @@ module Aws::MachineLearning
     # @!attribute code
     #   @return [Integer]
     class LimitExceededException < Struct.new(
+      nil,
       :message,
       :code,
       keyword_init: true
@@ -2302,6 +2356,7 @@ module Aws::MachineLearning
     #   <p>A timestamp represented in epoch time.</p>
     #   @return [Time]
     class MLModel < Struct.new(
+      nil,
       :ml_model_id,
       :training_data_source_id,
       :created_by_iam_user,
@@ -2345,6 +2400,7 @@ module Aws::MachineLearning
     # @!attribute properties
     #   @return [Hash<String, String>]
     class PerformanceMetrics < Struct.new(
+      nil,
       :properties,
       keyword_init: true
     )
@@ -2360,6 +2416,7 @@ module Aws::MachineLearning
     # @!attribute predict_endpoint
     #   @return [String]
     class PredictInput < Struct.new(
+      nil,
       :ml_model_id,
       :record,
       :predict_endpoint,
@@ -2399,6 +2456,7 @@ module Aws::MachineLearning
     #            </ul>
     #   @return [Types::Prediction]
     class PredictOutput < Struct.new(
+      nil,
       :prediction,
       keyword_init: true
     )
@@ -2448,6 +2506,7 @@ module Aws::MachineLearning
     #   <p>Provides any additional details regarding the prediction.</p>
     #   @return [Hash<String, String>]
     class Prediction < Struct.new(
+      nil,
       :predicted_label,
       :predicted_value,
       :predicted_scores,
@@ -2461,6 +2520,7 @@ module Aws::MachineLearning
     # @!attribute message
     #   @return [String]
     class PredictorNotMountedException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -2605,6 +2665,7 @@ module Aws::MachineLearning
     #   <p>The security group IDs to be used to access a VPC-based RDS DB instance. Ensure that there are appropriate ingress rules set up to allow access to the RDS DB instance. This attribute is used by Data Pipeline to carry out the copy operation from Amazon RDS to an Amazon S3 task.</p>
     #   @return [Array<String>]
     class RDSDataSpec < Struct.new(
+      nil,
       :database_information,
       :select_sql_query,
       :database_credentials,
@@ -2629,6 +2690,7 @@ module Aws::MachineLearning
     #   <p>The name of a database hosted on an RDS DB instance.</p>
     #   @return [String]
     class RDSDatabase < Struct.new(
+      nil,
       :instance_identifier,
       :database_name,
       keyword_init: true
@@ -2646,6 +2708,7 @@ module Aws::MachineLearning
     #               The password should have sufficient permissions to execute the <code>RDSSelectQuery</code> query.</p>
     #   @return [String]
     class RDSDatabaseCredentials < Struct.new(
+      nil,
       :username,
       :password,
       keyword_init: true
@@ -2674,6 +2737,7 @@ module Aws::MachineLearning
     #   <p>The ID of the Data Pipeline instance that is used to carry to copy data from Amazon RDS to Amazon S3. You can use the ID to find details about the instance in the Data Pipeline console.</p>
     #   @return [String]
     class RDSMetadata < Struct.new(
+      nil,
       :database,
       :database_user_name,
       :select_sql_query,
@@ -2715,6 +2779,7 @@ module Aws::MachineLearning
     #            </ul>
     #   @return [String]
     class RealtimeEndpointInfo < Struct.new(
+      nil,
       :peak_requests_per_second,
       :created_at,
       :endpoint_url,
@@ -2854,6 +2919,7 @@ module Aws::MachineLearning
     #   <p>Describes the schema location for an Amazon Redshift <code>DataSource</code>.</p>
     #   @return [String]
     class RedshiftDataSpec < Struct.new(
+      nil,
       :database_information,
       :select_sql_query,
       :database_credentials,
@@ -2874,6 +2940,7 @@ module Aws::MachineLearning
     #   <p>The ID of an Amazon Redshift cluster.</p>
     #   @return [String]
     class RedshiftDatabase < Struct.new(
+      nil,
       :database_name,
       :cluster_identifier,
       keyword_init: true
@@ -2891,6 +2958,7 @@ module Aws::MachineLearning
     #             The password should have sufficient permissions to execute a <code>RedshiftSelectSqlQuery</code> query. The password should be valid for an Amazon Redshift <a href="https://docs.aws.amazon.com/redshift/latest/dg/r_CREATE_USER.html">USER</a>.</p>
     #   @return [String]
     class RedshiftDatabaseCredentials < Struct.new(
+      nil,
       :username,
       :password,
       keyword_init: true
@@ -2910,6 +2978,7 @@ module Aws::MachineLearning
     #   <p> The SQL query that is specified during <a>CreateDataSourceFromRedshift</a>. Returns only if <code>Verbose</code> is true in GetDataSourceInput. </p>
     #   @return [String]
     class RedshiftMetadata < Struct.new(
+      nil,
       :redshift_database,
       :database_user_name,
       :select_sql_query,
@@ -2924,6 +2993,7 @@ module Aws::MachineLearning
     # @!attribute code
     #   @return [Integer]
     class ResourceNotFoundException < Struct.new(
+      nil,
       :message,
       :code,
       keyword_init: true
@@ -3053,6 +3123,7 @@ module Aws::MachineLearning
     #              <code>DataSchema</code> or the <code>DataSchemaLocationS3</code>.</p>
     #   @return [String]
     class S3DataSpec < Struct.new(
+      nil,
       :data_location_s3,
       :data_rearrangement,
       :data_schema,
@@ -3070,6 +3141,7 @@ module Aws::MachineLearning
     #   <p>An optional string, typically used to describe or define the tag. Valid characters include Unicode letters, digits, white space, _, ., /, =, +, -, %, and @.</p>
     #   @return [String]
     class Tag < Struct.new(
+      nil,
       :key,
       :value,
       keyword_init: true
@@ -3080,6 +3152,7 @@ module Aws::MachineLearning
     # @!attribute message
     #   @return [String]
     class TagLimitExceededException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -3093,6 +3166,7 @@ module Aws::MachineLearning
     #   <p>A new user-supplied name or description of the <code>BatchPrediction</code>.</p>
     #   @return [String]
     class UpdateBatchPredictionInput < Struct.new(
+      nil,
       :batch_prediction_id,
       :batch_prediction_name,
       keyword_init: true
@@ -3107,6 +3181,7 @@ module Aws::MachineLearning
     #               of the <code>BatchPredictionId</code> in the request.</p>
     #   @return [String]
     class UpdateBatchPredictionOutput < Struct.new(
+      nil,
       :batch_prediction_id,
       keyword_init: true
     )
@@ -3120,6 +3195,7 @@ module Aws::MachineLearning
     #   <p>A new user-supplied name or description of the <code>DataSource</code> that will replace the current description. </p>
     #   @return [String]
     class UpdateDataSourceInput < Struct.new(
+      nil,
       :data_source_id,
       :data_source_name,
       keyword_init: true
@@ -3134,6 +3210,7 @@ module Aws::MachineLearning
     #               of the <code>DataSourceID</code> in the request.</p>
     #   @return [String]
     class UpdateDataSourceOutput < Struct.new(
+      nil,
       :data_source_id,
       keyword_init: true
     )
@@ -3147,6 +3224,7 @@ module Aws::MachineLearning
     #   <p>A new user-supplied name or description of the <code>Evaluation</code> that will replace the current content. </p>
     #   @return [String]
     class UpdateEvaluationInput < Struct.new(
+      nil,
       :evaluation_id,
       :evaluation_name,
       keyword_init: true
@@ -3161,6 +3239,7 @@ module Aws::MachineLearning
     #               of the <code>Evaluation</code> in the request.</p>
     #   @return [String]
     class UpdateEvaluationOutput < Struct.new(
+      nil,
       :evaluation_id,
       keyword_init: true
     )
@@ -3178,6 +3257,7 @@ module Aws::MachineLearning
     #           <p>Output values greater than or equal to the <code>ScoreThreshold</code> receive a positive result from the <code>MLModel</code>, such as <code>true</code>. Output values less than the <code>ScoreThreshold</code> receive a negative response from the <code>MLModel</code>, such as <code>false</code>.</p>
     #   @return [Float]
     class UpdateMLModelInput < Struct.new(
+      nil,
       :ml_model_id,
       :ml_model_name,
       :score_threshold,
@@ -3193,6 +3273,7 @@ module Aws::MachineLearning
     #               of the <code>MLModelID</code> in the request.</p>
     #   @return [String]
     class UpdateMLModelOutput < Struct.new(
+      nil,
       :ml_model_id,
       keyword_init: true
     )

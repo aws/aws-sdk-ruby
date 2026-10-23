@@ -16,6 +16,14 @@ module Aws
           end
         end
 
+        def after_initialize(client)
+          super
+          return unless client.config.stub_responses
+
+          # Restore the stub send handler after every plugin has registered its handlers.
+          client.handlers.add(Smithy::Client::Plugins::StubResponses::StubHandler, step: :send)
+        end
+
         private
 
         def remove_context_handlers(client)

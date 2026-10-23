@@ -10,6 +10,7 @@ module Aws::S3Outposts
     # @!attribute message
     #   @return [String]
     class AccessDeniedException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -20,6 +21,7 @@ module Aws::S3Outposts
     # @!attribute message
     #   @return [String]
     class ConflictException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -52,6 +54,7 @@ module Aws::S3Outposts
     #               are allocated from this pool for the endpoint.</p>
     #   @return [String]
     class CreateEndpointRequest < Struct.new(
+      nil,
       :outpost_id,
       :subnet_id,
       :security_group_id,
@@ -66,6 +69,7 @@ module Aws::S3Outposts
     #   <p>The Amazon Resource Name (ARN) of the endpoint.</p>
     #   @return [String]
     class CreateEndpointResult < Struct.new(
+      nil,
       :endpoint_arn,
       keyword_init: true
     )
@@ -79,6 +83,7 @@ module Aws::S3Outposts
     #   <p>The ID of the Outposts. </p>
     #   @return [String]
     class DeleteEndpointRequest < Struct.new(
+      nil,
       :endpoint_id,
       :outpost_id,
       keyword_init: true
@@ -127,6 +132,7 @@ module Aws::S3Outposts
     #   <p>The failure reason, if any, for a create or delete endpoint operation.</p>
     #   @return [Types::FailedReason]
     class Endpoint < Struct.new(
+      nil,
       :endpoint_arn,
       :outposts_id,
       :cidr_block,
@@ -152,6 +158,7 @@ module Aws::S3Outposts
     #   <p>Additional error details describing the endpoint failure and recommended action.</p>
     #   @return [String]
     class FailedReason < Struct.new(
+      nil,
       :error_code,
       :message,
       keyword_init: true
@@ -163,6 +170,7 @@ module Aws::S3Outposts
     # @!attribute message
     #   @return [String]
     class InternalServerException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -177,6 +185,7 @@ module Aws::S3Outposts
     #   <p>The maximum number of endpoints that will be returned in the response.</p>
     #   @return [Integer]
     class ListEndpointsRequest < Struct.new(
+      nil,
       :next_token,
       :max_results,
       keyword_init: true
@@ -192,6 +201,7 @@ module Aws::S3Outposts
     #               you can include this value in subsequent calls to this operation to retrieve more results.</p>
     #   @return [String]
     class ListEndpointsResult < Struct.new(
+      nil,
       :endpoints,
       :next_token,
       keyword_init: true
@@ -209,6 +219,7 @@ module Aws::S3Outposts
     #   <p>The maximum number of Outposts to return. The limit is 100.</p>
     #   @return [Integer]
     class ListOutpostsWithS3Request < Struct.new(
+      nil,
       :next_token,
       :max_results,
       keyword_init: true
@@ -234,6 +245,7 @@ module Aws::S3Outposts
     #   <p>Returns a token that you can use to call <code>ListOutpostsWithS3</code> again and receive additional results, if there are any.</p>
     #   @return [String]
     class ListOutpostsWithS3Result < Struct.new(
+      nil,
       :outposts,
       :next_token,
       keyword_init: true
@@ -252,6 +264,7 @@ module Aws::S3Outposts
     #   <p>The ID of the Amazon Web Services Outpost.</p>
     #   @return [String]
     class ListSharedEndpointsRequest < Struct.new(
+      nil,
       :next_token,
       :max_results,
       :outpost_id,
@@ -268,6 +281,7 @@ module Aws::S3Outposts
     #               you can include this value in subsequent calls to this operation to retrieve more results.</p>
     #   @return [String]
     class ListSharedEndpointsResult < Struct.new(
+      nil,
       :endpoints,
       :next_token,
       keyword_init: true
@@ -280,6 +294,7 @@ module Aws::S3Outposts
     #   <p>The ID for the network interface.</p>
     #   @return [String]
     class NetworkInterface < Struct.new(
+      nil,
       :network_interface_id,
       keyword_init: true
     )
@@ -303,6 +318,7 @@ module Aws::S3Outposts
     #   <p>The Amazon S3 capacity of the outpost in bytes.</p>
     #   @return [Integer]
     class Outpost < Struct.new(
+      nil,
       :outpost_arn,
       :s3_outpost_arn,
       :outpost_id,
@@ -322,6 +338,7 @@ module Aws::S3Outposts
     # @!attribute message
     #   @return [String]
     class OutpostOfflineException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -332,6 +349,7 @@ module Aws::S3Outposts
     # @!attribute message
     #   @return [String]
     class ResourceNotFoundException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -342,6 +360,7 @@ module Aws::S3Outposts
     # @!attribute message
     #   @return [String]
     class ThrottlingException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -352,6 +371,7 @@ module Aws::S3Outposts
     # @!attribute message
     #   @return [String]
     class ValidationException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )

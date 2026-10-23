@@ -11,6 +11,7 @@ module Aws::MPA
     #   <p>Message for the <code>AccessDeniedException</code> error.</p>
     #   @return [String]
     class AccessDeniedException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -55,6 +56,7 @@ module Aws::MPA
     #   <p>Amazon Resource Name (ARN) for the identity source. The identity source manages the user authentication for approvers.</p>
     #   @return [String]
     class ApprovalTeamRequestApprover < Struct.new(
+      nil,
       :primary_identity_id,
       :primary_identity_source_arn,
       keyword_init: true
@@ -66,6 +68,7 @@ module Aws::MPA
     #   <p>Amazon Resource Name (ARN) for the session.</p>
     #   @return [String]
     class CancelSessionRequest < Struct.new(
+      nil,
       :session_arn,
       keyword_init: true
     )
@@ -73,6 +76,7 @@ module Aws::MPA
     end
 
     class CancelSessionResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -83,6 +87,7 @@ module Aws::MPA
     #   <p>Message for the <code>ConflictException</code> error.</p>
     #   @return [String]
     class ConflictException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -111,6 +116,7 @@ module Aws::MPA
     #   <p>Tags you want to attach to the team.</p>
     #   @return [Hash<String, String>]
     class CreateApprovalTeamRequest < Struct.new(
+      nil,
       :client_token,
       :approval_strategy,
       :approvers,
@@ -136,6 +142,7 @@ module Aws::MPA
     #   <p>Version ID for the team that was created. When a team is updated, the version ID changes.</p>
     #   @return [String]
     class CreateApprovalTeamResponse < Struct.new(
+      nil,
       :creation_time,
       :arn,
       :name,
@@ -155,6 +162,7 @@ module Aws::MPA
     #   <p>Tag you want to attach to the identity source.</p>
     #   @return [Hash<String, String>]
     class CreateIdentitySourceRequest < Struct.new(
+      nil,
       :identity_source_parameters,
       :client_token,
       :tags,
@@ -173,6 +181,7 @@ module Aws::MPA
     #   <p>Timestamp when the identity source was created.</p>
     #   @return [Time]
     class CreateIdentitySourceResponse < Struct.new(
+      nil,
       :identity_source_type,
       :identity_source_arn,
       :creation_time,
@@ -185,6 +194,7 @@ module Aws::MPA
     #   <p>Amazon Resource Name (ARN) for identity source.</p>
     #   @return [String]
     class DeleteIdentitySourceRequest < Struct.new(
+      nil,
       :identity_source_arn,
       keyword_init: true
     )
@@ -198,6 +208,7 @@ module Aws::MPA
     #   <p>Version ID for the team.</p>
     #   @return [String]
     class DeleteInactiveApprovalTeamVersionRequest < Struct.new(
+      nil,
       :arn,
       :version_id,
       keyword_init: true
@@ -206,6 +217,7 @@ module Aws::MPA
     end
 
     class DeleteInactiveApprovalTeamVersionResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -222,6 +234,7 @@ module Aws::MPA
     #   <p>Value to use for filtering. For the <code>BETWEEN</code> operator, specify values in the format <code>a AND b</code> (<code>AND</code> is case-insensitive).</p>
     #   @return [String]
     class Filter < Struct.new(
+      nil,
       :field_name,
       :operator,
       :value,
@@ -234,6 +247,7 @@ module Aws::MPA
     #   <p>Amazon Resource Name (ARN) for the team.</p>
     #   @return [String]
     class GetApprovalTeamRequest < Struct.new(
+      nil,
       :arn,
       keyword_init: true
     )
@@ -286,6 +300,7 @@ module Aws::MPA
     #   <p>A <code>PendingUpdate</code> object. Contains details for the pending updates for the team, if applicable.</p>
     #   @return [Types::PendingUpdate]
     class GetApprovalTeamResponse < Struct.new(
+      nil,
       :creation_time,
       :approval_strategy,
       :number_of_approvers,
@@ -323,6 +338,7 @@ module Aws::MPA
     #   <p>Status for the identity source. For example, if an approver has accepted a team invitation with a user authentication method managed by the identity source.</p>
     #   @return [String]
     class GetApprovalTeamResponseApprover < Struct.new(
+      nil,
       :approver_id,
       :response_time,
       :primary_identity_id,
@@ -337,6 +353,7 @@ module Aws::MPA
     #   <p>Amazon Resource Name (ARN) for the identity source.</p>
     #   @return [String]
     class GetIdentitySourceRequest < Struct.new(
+      nil,
       :identity_source_arn,
       keyword_init: true
     )
@@ -365,6 +382,7 @@ module Aws::MPA
     #   <p>Message describing the status for the identity source.</p>
     #   @return [String]
     class GetIdentitySourceResponse < Struct.new(
+      nil,
       :identity_source_type,
       :identity_source_parameters,
       :identity_source_arn,
@@ -381,6 +399,7 @@ module Aws::MPA
     #   <p>Amazon Resource Name (ARN) for the policy.</p>
     #   @return [String]
     class GetPolicyVersionRequest < Struct.new(
+      nil,
       :policy_version_arn,
       keyword_init: true
     )
@@ -391,6 +410,7 @@ module Aws::MPA
     #   <p>A <code>PolicyVersion</code> object. Contains details for the version of the policy. Policies define the permissions for team resources.</p> <p>The protected operation for a service integration might require specific permissions. For more information, see <a href="https://docs.aws.amazon.com/mpa/latest/userguide/mpa-integrations.html">How other services work with Multi-party approval</a> in the <i>Multi-party approval User Guide</i>.</p>
     #   @return [Types::PolicyVersion]
     class GetPolicyVersionResponse < Struct.new(
+      nil,
       :policy_version,
       keyword_init: true
     )
@@ -407,6 +427,7 @@ module Aws::MPA
     #   <p>The type of policy.</p>
     #   @return [String]
     class GetResourcePolicyRequest < Struct.new(
+      nil,
       :resource_arn,
       :policy_name,
       :policy_type,
@@ -431,6 +452,7 @@ module Aws::MPA
     #   <p>Document that contains the contents for the policy.</p>
     #   @return [String]
     class GetResourcePolicyResponse < Struct.new(
+      nil,
       :resource_arn,
       :policy_type,
       :policy_version_arn,
@@ -445,6 +467,7 @@ module Aws::MPA
     #   <p>Amazon Resource Name (ARN) for the session.</p>
     #   @return [String]
     class GetSessionRequest < Struct.new(
+      nil,
       :session_arn,
       keyword_init: true
     )
@@ -521,6 +544,7 @@ module Aws::MPA
     #   <p>An array of <code>GetSessionResponseApproverResponse</code> objects. Contains details for approver responses in the session.</p>
     #   @return [Array<Types::GetSessionResponseApproverResponse>]
     class GetSessionResponse < Struct.new(
+      nil,
       :session_arn,
       :approval_team_arn,
       :approval_team_name,
@@ -566,6 +590,7 @@ module Aws::MPA
     #   <p>Timestamp when a approver responded to the operation request.</p>
     #   @return [Time]
     class GetSessionResponseApproverResponse < Struct.new(
+      nil,
       :approver_id,
       :identity_source_arn,
       :identity_id,
@@ -584,6 +609,7 @@ module Aws::MPA
     #   <p>Amazon Web Services Region where the IAM Identity Center instance is located.</p>
     #   @return [String]
     class IamIdentityCenter < Struct.new(
+      nil,
       :instance_arn,
       :region,
       keyword_init: true
@@ -602,6 +628,7 @@ module Aws::MPA
     #   <p>Amazon Web Services Region where the IAM Identity Center instance is located.</p>
     #   @return [String]
     class IamIdentityCenterForGet < Struct.new(
+      nil,
       :instance_arn,
       :approval_portal_url,
       :region,
@@ -621,6 +648,7 @@ module Aws::MPA
     #   <p>Amazon Web Services Region where the IAM Identity Center instance is located.</p>
     #   @return [String]
     class IamIdentityCenterForList < Struct.new(
+      nil,
       :instance_arn,
       :approval_portal_url,
       :region,
@@ -652,6 +680,7 @@ module Aws::MPA
     #   <p>Message describing the status for the identity source.</p>
     #   @return [String]
     class IdentitySourceForList < Struct.new(
+      nil,
       :identity_source_type,
       :identity_source_parameters,
       :identity_source_arn,
@@ -669,6 +698,7 @@ module Aws::MPA
     #   <p>IAM Identity Center credentials.</p>
     #   @return [Types::IamIdentityCenter]
     class IdentitySourceParameters < Struct.new(
+      nil,
       :iam_identity_center,
       keyword_init: true
     )
@@ -710,6 +740,7 @@ module Aws::MPA
     #   <p>Message for the <code>InternalServerException</code> error.</p>
     #   @return [String]
     class InternalServerException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -721,6 +752,7 @@ module Aws::MPA
     #   <p>Message for the <code>InvalidParameterException</code> error.</p>
     #   @return [String]
     class InvalidParameterException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -734,6 +766,7 @@ module Aws::MPA
     #   <p>If present, indicates that more output is available than is included in the current response. Use this value in the <code>NextToken</code> request parameter in a next call to the operation to get more output. You can repeat this until the <code>NextToken</code> response element returns <code>null</code>.</p>
     #   @return [String]
     class ListApprovalTeamsRequest < Struct.new(
+      nil,
       :max_results,
       :next_token,
       keyword_init: true
@@ -748,6 +781,7 @@ module Aws::MPA
     #   <p>An array of <code>ListApprovalTeamsResponseApprovalTeam</code> objects. Contains details for approval teams.</p>
     #   @return [Array<Types::ListApprovalTeamsResponseApprovalTeam>]
     class ListApprovalTeamsResponse < Struct.new(
+      nil,
       :next_token,
       :approval_teams,
       keyword_init: true
@@ -784,6 +818,7 @@ module Aws::MPA
     #   <p>Message describing the status for the team.</p>
     #   @return [String]
     class ListApprovalTeamsResponseApprovalTeam < Struct.new(
+      nil,
       :creation_time,
       :approval_strategy,
       :number_of_approvers,
@@ -805,6 +840,7 @@ module Aws::MPA
     #   <p>If present, indicates that more output is available than is included in the current response. Use this value in the <code>NextToken</code> request parameter in a next call to the operation to get more output. You can repeat this until the <code>NextToken</code> response element returns <code>null</code>.</p>
     #   @return [String]
     class ListIdentitySourcesRequest < Struct.new(
+      nil,
       :max_results,
       :next_token,
       keyword_init: true
@@ -819,6 +855,7 @@ module Aws::MPA
     #   <p>A <code>IdentitySources</code>. Contains details for identity sources.</p>
     #   @return [Array<Types::IdentitySourceForList>]
     class ListIdentitySourcesResponse < Struct.new(
+      nil,
       :next_token,
       :identity_sources,
       keyword_init: true
@@ -833,6 +870,7 @@ module Aws::MPA
     #   <p>If present, indicates that more output is available than is included in the current response. Use this value in the <code>NextToken</code> request parameter in a next call to the operation to get more output. You can repeat this until the <code>NextToken</code> response element returns <code>null</code>.</p>
     #   @return [String]
     class ListPoliciesRequest < Struct.new(
+      nil,
       :max_results,
       :next_token,
       keyword_init: true
@@ -847,6 +885,7 @@ module Aws::MPA
     #   <p>An array of <code>Policy</code> objects. Contains a list of policies that define the permissions for team resources.</p> <p>The protected operation for a service integration might require specific permissions. For more information, see <a href="https://docs.aws.amazon.com/mpa/latest/userguide/mpa-integrations.html">How other services work with Multi-party approval</a> in the <i>Multi-party approval User Guide</i>.</p>
     #   @return [Array<Types::Policy>]
     class ListPoliciesResponse < Struct.new(
+      nil,
       :next_token,
       :policies,
       keyword_init: true
@@ -864,6 +903,7 @@ module Aws::MPA
     #   <p>Amazon Resource Name (ARN) for the policy.</p>
     #   @return [String]
     class ListPolicyVersionsRequest < Struct.new(
+      nil,
       :max_results,
       :next_token,
       :policy_arn,
@@ -879,6 +919,7 @@ module Aws::MPA
     #   <p>An array of <code>PolicyVersionSummary</code> objects. Contains details for the version of the policies that define the permissions for team resources.</p> <p>The protected operation for a service integration might require specific permissions. For more information, see <a href="https://docs.aws.amazon.com/mpa/latest/userguide/mpa-integrations.html">How other services work with Multi-party approval</a> in the <i>Multi-party approval User Guide</i>.</p>
     #   @return [Array<Types::PolicyVersionSummary>]
     class ListPolicyVersionsResponse < Struct.new(
+      nil,
       :next_token,
       :policy_versions,
       keyword_init: true
@@ -896,6 +937,7 @@ module Aws::MPA
     #   <p>If present, indicates that more output is available than is included in the current response. Use this value in the <code>NextToken</code> request parameter in a next call to the operation to get more output. You can repeat this until the <code>NextToken</code> response element returns <code>null</code>.</p>
     #   @return [String]
     class ListResourcePoliciesRequest < Struct.new(
+      nil,
       :resource_arn,
       :max_results,
       :next_token,
@@ -911,6 +953,7 @@ module Aws::MPA
     #   <p>An array of <code>ListResourcePoliciesResponseResourcePolicy</code> objects. Contains details about the policy for the resource.</p>
     #   @return [Array<Types::ListResourcePoliciesResponseResourcePolicy>]
     class ListResourcePoliciesResponse < Struct.new(
+      nil,
       :next_token,
       :resource_policies,
       keyword_init: true
@@ -929,6 +972,7 @@ module Aws::MPA
     #   <p>Name of the policy.</p>
     #   @return [String]
     class ListResourcePoliciesResponseResourcePolicy < Struct.new(
+      nil,
       :policy_arn,
       :policy_type,
       :policy_name,
@@ -950,6 +994,7 @@ module Aws::MPA
     #   <p>An array of <code>Filter</code> objects. Contains the filter to apply when listing sessions.</p>
     #   @return [Array<Types::Filter>]
     class ListSessionsRequest < Struct.new(
+      nil,
       :approval_team_arn,
       :max_results,
       :next_token,
@@ -966,6 +1011,7 @@ module Aws::MPA
     #   <p>An array of <code>ListSessionsResponseSession</code> objects. Contains details for the sessions.</p>
     #   @return [Array<Types::ListSessionsResponseSession>]
     class ListSessionsResponse < Struct.new(
+      nil,
       :next_token,
       :sessions,
       keyword_init: true
@@ -1026,6 +1072,7 @@ module Aws::MPA
     #   <p>Strategy for executing the protected operation. <code>AUTO_COMPLETION_UPON_APPROVAL</code> means the operation is executed automatically using the requester's permissions, if approved.</p>
     #   @return [String]
     class ListSessionsResponseSession < Struct.new(
+      nil,
       :session_arn,
       :approval_team_name,
       :approval_team_arn,
@@ -1052,6 +1099,7 @@ module Aws::MPA
     #   <p>Amazon Resource Name (ARN) for the resource.</p>
     #   @return [String]
     class ListTagsForResourceRequest < Struct.new(
+      nil,
       :resource_arn,
       keyword_init: true
     )
@@ -1062,6 +1110,7 @@ module Aws::MPA
     #   <p>Tags attached to the resource.</p>
     #   @return [Hash<String, String>]
     class ListTagsForResourceResponse < Struct.new(
+      nil,
       :tags,
       keyword_init: true
     )
@@ -1073,6 +1122,7 @@ module Aws::MPA
     #   <p>Minimum number of approvals (M) required for a total number of approvers (N).</p>
     #   @return [Integer]
     class MofNApprovalStrategy < Struct.new(
+      nil,
       :min_approvals_required,
       keyword_init: true
     )
@@ -1108,6 +1158,7 @@ module Aws::MPA
     #   <p>Timestamp when the update request was initiated.</p>
     #   @return [Time]
     class PendingUpdate < Struct.new(
+      nil,
       :version_id,
       :description,
       :approval_strategy,
@@ -1136,6 +1187,7 @@ module Aws::MPA
     #   <p>Name of the policy.</p>
     #   @return [String]
     class Policy < Struct.new(
+      nil,
       :arn,
       :default_version,
       :policy_type,
@@ -1150,6 +1202,7 @@ module Aws::MPA
     #   <p>Amazon Resource Name (ARN) for the policy.</p>
     #   @return [String]
     class PolicyReference < Struct.new(
+      nil,
       :policy_arn,
       keyword_init: true
     )
@@ -1188,6 +1241,7 @@ module Aws::MPA
     #   <p>Document that contains the policy contents.</p>
     #   @return [String]
     class PolicyVersion < Struct.new(
+      nil,
       :arn,
       :policy_arn,
       :version_id,
@@ -1232,6 +1286,7 @@ module Aws::MPA
     #   <p>Timestamp when the policy was last updated.</p>
     #   @return [Time]
     class PolicyVersionSummary < Struct.new(
+      nil,
       :arn,
       :policy_arn,
       :version_id,
@@ -1251,6 +1306,7 @@ module Aws::MPA
     #   <p>Message for the <code>ResourceNotFoundException</code> error.</p>
     #   @return [String]
     class ResourceNotFoundException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -1262,6 +1318,7 @@ module Aws::MPA
     #   <p>Message for the <code>ServiceQuotaExceededException</code> error.</p>
     #   @return [String]
     class ServiceQuotaExceededException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -1275,6 +1332,7 @@ module Aws::MPA
     #   <p>Amazon Resource Name (ARN) for the team.</p>
     #   @return [String]
     class StartActiveApprovalTeamDeletionRequest < Struct.new(
+      nil,
       :pending_window_days,
       :arn,
       keyword_init: true
@@ -1289,6 +1347,7 @@ module Aws::MPA
     #   <p>Timestamp when the deletion process was initiated.</p>
     #   @return [Time]
     class StartActiveApprovalTeamDeletionResponse < Struct.new(
+      nil,
       :deletion_completion_time,
       :deletion_start_time,
       keyword_init: true
@@ -1303,6 +1362,7 @@ module Aws::MPA
     #   <p>Tags that you have added to the specified resource.</p>
     #   @return [Hash<String, String>]
     class TagResourceRequest < Struct.new(
+      nil,
       :resource_arn,
       :tags,
       keyword_init: true
@@ -1311,6 +1371,7 @@ module Aws::MPA
     end
 
     class TagResourceResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1321,6 +1382,7 @@ module Aws::MPA
     #   <p>Message for the <code>ThrottlingException</code> error.</p>
     #   @return [String]
     class ThrottlingException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -1335,6 +1397,7 @@ module Aws::MPA
     #   <p>Name of the resource for the <code>TooManyTagsException</code> error.</p>
     #   @return [String]
     class TooManyTagsException < Struct.new(
+      nil,
       :message,
       :resource_name,
       keyword_init: true
@@ -1349,6 +1412,7 @@ module Aws::MPA
     #   <p>Array of tag key-value pairs that you want to untag.</p>
     #   @return [Array<String>]
     class UntagResourceRequest < Struct.new(
+      nil,
       :resource_arn,
       :tag_keys,
       keyword_init: true
@@ -1357,6 +1421,7 @@ module Aws::MPA
     end
 
     class UntagResourceResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1375,6 +1440,7 @@ module Aws::MPA
     #   <p>Amazon Resource Name (ARN) for the team.</p>
     #   @return [String]
     class UpdateApprovalTeamRequest < Struct.new(
+      nil,
       :approval_strategy,
       :approvers,
       :description,
@@ -1388,6 +1454,7 @@ module Aws::MPA
     #   <p>Version ID for the team that was created. When an approval team is updated, the version ID changes.</p>
     #   @return [String]
     class UpdateApprovalTeamResponse < Struct.new(
+      nil,
       :version_id,
       keyword_init: true
     )
@@ -1399,6 +1466,7 @@ module Aws::MPA
     #   <p>Message for the <code>ValidationException</code> error.</p>
     #   @return [String]
     class ValidationException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )

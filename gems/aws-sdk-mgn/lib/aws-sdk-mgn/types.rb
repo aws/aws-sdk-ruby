@@ -12,6 +12,7 @@ module Aws::Mgn
     # @!attribute code
     #   @return [String]
     class AccessDeniedException < Struct.new(
+      nil,
       :message,
       :code,
       keyword_init: true
@@ -50,6 +51,7 @@ module Aws::Mgn
     #   <p>Application wave ID.</p>
     #   @return [String]
     class Application < Struct.new(
+      nil,
       :application_id,
       :arn,
       :name,
@@ -79,6 +81,7 @@ module Aws::Mgn
     #   <p>Application aggregated status total source servers amount.</p>
     #   @return [Integer]
     class ApplicationAggregatedStatus < Struct.new(
+      nil,
       :last_update_date_time,
       :health_status,
       :progress_status,
@@ -100,6 +103,7 @@ module Aws::Mgn
     #   <p>Account ID.</p>
     #   @return [String]
     class ArchiveApplicationInput < Struct.new(
+      nil,
       :application_id,
       :account_id,
       keyword_init: true
@@ -138,6 +142,7 @@ module Aws::Mgn
     #   <p>Application wave ID.</p>
     #   @return [String]
     class ArchiveApplicationOutput < Struct.new(
+      nil,
       :application_id,
       :arn,
       :name,
@@ -160,6 +165,7 @@ module Aws::Mgn
     #   <p>Account ID.</p>
     #   @return [String]
     class ArchiveWaveInput < Struct.new(
+      nil,
       :wave_id,
       :account_id,
       keyword_init: true
@@ -195,6 +201,7 @@ module Aws::Mgn
     #   <p>Wave tags.</p>
     #   @return [Hash<String, String>]
     class ArchiveWaveOutput < Struct.new(
+      nil,
       :wave_id,
       :arn,
       :name,
@@ -219,6 +226,7 @@ module Aws::Mgn
     #   <p>Account ID.</p>
     #   @return [String]
     class AssociateApplicationsInput < Struct.new(
+      nil,
       :wave_id,
       :application_i_ds,
       :account_id,
@@ -228,6 +236,7 @@ module Aws::Mgn
     end
 
     class AssociateApplicationsOutput < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -243,6 +252,7 @@ module Aws::Mgn
     #   <p>Account ID.</p>
     #   @return [String]
     class AssociateSourceServersInput < Struct.new(
+      nil,
       :application_id,
       :source_server_i_ds,
       :account_id,
@@ -252,6 +262,7 @@ module Aws::Mgn
     end
 
     class AssociateSourceServersOutput < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -265,6 +276,7 @@ module Aws::Mgn
     #   <p>The source server's CPU model name.</p>
     #   @return [String]
     class CPU < Struct.new(
+      nil,
       :cores,
       :model_name,
       keyword_init: true
@@ -287,6 +299,7 @@ module Aws::Mgn
     #   <p>The request to change the source server migration account ID.</p>
     #   @return [String]
     class ChangeServerLifeCycleStateInput < Struct.new(
+      nil,
       :source_server_id,
       :life_cycle,
       :account_id,
@@ -338,6 +351,7 @@ module Aws::Mgn
     #   <p>Source Server connector action.</p>
     #   @return [Types::SourceServerConnectorAction]
     class ChangeServerLifeCycleStateOutput < Struct.new(
+      nil,
       :source_server_id,
       :arn,
       :is_archived,
@@ -362,6 +376,7 @@ module Aws::Mgn
     #   <p>The request to change the source server migration lifecycle state.</p>
     #   @return [String]
     class ChangeServerLifeCycleStateSourceServerLifecycle < Struct.new(
+      nil,
       :state,
       keyword_init: true
     )
@@ -383,6 +398,7 @@ module Aws::Mgn
     #   <p>Conflict Exception specific errors.</p>
     #   @return [Array<Types::ErrorDetails>]
     class ConflictException < Struct.new(
+      nil,
       :message,
       :code,
       :resource_id,
@@ -412,6 +428,7 @@ module Aws::Mgn
     #   <p>Connector SSM command config.</p>
     #   @return [Types::ConnectorSsmCommandConfig]
     class Connector < Struct.new(
+      nil,
       :connector_id,
       :name,
       :ssm_instance_id,
@@ -437,6 +454,7 @@ module Aws::Mgn
     #   <p>Connector SSM command config CloudWatch log group name.</p>
     #   @return [String]
     class ConnectorSsmCommandConfig < Struct.new(
+      nil,
       :s3_output_enabled,
       :output_s3_bucket_name,
       :cloud_watch_output_enabled,
@@ -459,6 +477,7 @@ module Aws::Mgn
     #   <p>Account ID.</p>
     #   @return [String]
     class CreateApplicationInput < Struct.new(
+      nil,
       :name,
       :description,
       :tags,
@@ -499,6 +518,7 @@ module Aws::Mgn
     #   <p>Application wave ID.</p>
     #   @return [String]
     class CreateApplicationOutput < Struct.new(
+      nil,
       :application_id,
       :arn,
       :name,
@@ -533,6 +553,7 @@ module Aws::Mgn
     #   <p>Connector SSM command config.</p>
     #   @return [Types::ConnectorSsmCommandConfig]
     class CreateConnectorOutput < Struct.new(
+      nil,
       :connector_id,
       :name,
       :ssm_instance_id,
@@ -557,6 +578,7 @@ module Aws::Mgn
     #   <p>Create Connector request SSM command config.</p>
     #   @return [Types::ConnectorSsmCommandConfig]
     class CreateConnectorRequest < Struct.new(
+      nil,
       :name,
       :ssm_instance_id,
       :tags,
@@ -609,6 +631,7 @@ module Aws::Mgn
     #   <p>Large volume config.</p>
     #   @return [Types::LaunchTemplateDiskConf]
     class CreateLaunchConfigurationTemplateInput < Struct.new(
+      nil,
       :post_launch_actions,
       :enable_map_auto_tagging,
       :map_auto_tagging_mpe_id,
@@ -680,6 +703,7 @@ module Aws::Mgn
     #   <p>Large volume config.</p>
     #   @return [Types::LaunchTemplateDiskConf]
     class CreateLaunchConfigurationTemplateOutput < Struct.new(
+      nil,
       :launch_configuration_template_id,
       :arn,
       :post_launch_actions,
@@ -750,6 +774,7 @@ module Aws::Mgn
     #   <p>Request to configure tags during Replication Settings template creation.</p>
     #   @return [Hash<String, String>]
     class CreateReplicationConfigurationTemplateInput < Struct.new(
+      nil,
       :staging_area_subnet_id,
       :associate_default_security_group,
       :replication_servers_security_groups_i_ds,
@@ -818,6 +843,7 @@ module Aws::Mgn
     #   <p>Replication Configuration template Tags.</p>
     #   @return [Hash<String, String>]
     class CreateReplicationConfigurationTemplateOutput < Struct.new(
+      nil,
       :replication_configuration_template_id,
       :arn,
       :staging_area_subnet_id,
@@ -857,6 +883,7 @@ module Aws::Mgn
     #   <p>Account ID.</p>
     #   @return [String]
     class CreateWaveInput < Struct.new(
+      nil,
       :name,
       :description,
       :tags,
@@ -894,6 +921,7 @@ module Aws::Mgn
     #   <p>Wave tags.</p>
     #   @return [Hash<String, String>]
     class CreateWaveOutput < Struct.new(
+      nil,
       :wave_id,
       :arn,
       :name,
@@ -916,6 +944,7 @@ module Aws::Mgn
     #   <p>Error in data replication.</p>
     #   @return [String]
     class DataReplicationError < Struct.new(
+      nil,
       :error,
       :raw_error,
       keyword_init: true
@@ -946,6 +975,7 @@ module Aws::Mgn
     #   <p>Request to query data replication last snapshot time.</p>
     #   @return [String]
     class DataReplicationInfo < Struct.new(
+      nil,
       :lag_duration,
       :eta_date_time,
       :replicated_disks,
@@ -975,6 +1005,7 @@ module Aws::Mgn
     #   <p>Request to query data replication backlog size in bytes.</p>
     #   @return [Integer]
     class DataReplicationInfoReplicatedDisk < Struct.new(
+      nil,
       :device_name,
       :total_storage_bytes,
       :replicated_storage_bytes,
@@ -1004,6 +1035,7 @@ module Aws::Mgn
     #   <p>Request to query data initiation steps.</p>
     #   @return [Array<Types::DataReplicationInitiationStep>]
     class DataReplicationInitiation < Struct.new(
+      nil,
       :start_date_time,
       :next_attempt_date_time,
       :steps,
@@ -1020,6 +1052,7 @@ module Aws::Mgn
     #   <p>Request to query data initiation status.</p>
     #   @return [String]
     class DataReplicationInitiationStep < Struct.new(
+      nil,
       :name,
       :status,
       keyword_init: true
@@ -1034,6 +1067,7 @@ module Aws::Mgn
     #   <p>Account ID.</p>
     #   @return [String]
     class DeleteApplicationInput < Struct.new(
+      nil,
       :application_id,
       :account_id,
       keyword_init: true
@@ -1042,6 +1076,7 @@ module Aws::Mgn
     end
 
     class DeleteApplicationOutput < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1051,6 +1086,7 @@ module Aws::Mgn
     #   <p>Delete Connector request connector ID.</p>
     #   @return [String]
     class DeleteConnectorRequest < Struct.new(
+      nil,
       :connector_id,
       keyword_init: true
     )
@@ -1064,6 +1100,7 @@ module Aws::Mgn
     #   <p>Request to delete Job from service by Account ID.</p>
     #   @return [String]
     class DeleteJobInput < Struct.new(
+      nil,
       :job_id,
       :account_id,
       keyword_init: true
@@ -1072,6 +1109,7 @@ module Aws::Mgn
     end
 
     class DeleteJobOutput < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1081,6 +1119,7 @@ module Aws::Mgn
     #   <p>ID of resource to be deleted.</p>
     #   @return [String]
     class DeleteLaunchConfigurationTemplateInput < Struct.new(
+      nil,
       :launch_configuration_template_id,
       keyword_init: true
     )
@@ -1088,6 +1127,7 @@ module Aws::Mgn
     end
 
     class DeleteLaunchConfigurationTemplateOutput < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1097,6 +1137,7 @@ module Aws::Mgn
     #   <p>Request to delete Replication Configuration Template from service by Replication Configuration Template ID.</p>
     #   @return [String]
     class DeleteReplicationConfigurationTemplateInput < Struct.new(
+      nil,
       :replication_configuration_template_id,
       keyword_init: true
     )
@@ -1104,6 +1145,7 @@ module Aws::Mgn
     end
 
     class DeleteReplicationConfigurationTemplateOutput < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1116,6 +1158,7 @@ module Aws::Mgn
     #   <p>Request to delete Source Server from service by Account ID.</p>
     #   @return [String]
     class DeleteSourceServerInput < Struct.new(
+      nil,
       :source_server_id,
       :account_id,
       keyword_init: true
@@ -1124,6 +1167,7 @@ module Aws::Mgn
     end
 
     class DeleteSourceServerOutput < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1133,6 +1177,7 @@ module Aws::Mgn
     #   <p>ID of resource to be deleted.</p>
     #   @return [String]
     class DeleteVcenterClientInput < Struct.new(
+      nil,
       :vcenter_client_id,
       keyword_init: true
     )
@@ -1146,6 +1191,7 @@ module Aws::Mgn
     #   <p>Account ID.</p>
     #   @return [String]
     class DeleteWaveInput < Struct.new(
+      nil,
       :wave_id,
       :account_id,
       keyword_init: true
@@ -1154,6 +1200,7 @@ module Aws::Mgn
     end
 
     class DeleteWaveOutput < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1172,6 +1219,7 @@ module Aws::Mgn
     #   <p>Request to describe Job log Account ID.</p>
     #   @return [String]
     class DescribeJobLogItemsInput < Struct.new(
+      nil,
       :job_id,
       :max_results,
       :next_token,
@@ -1188,6 +1236,7 @@ module Aws::Mgn
     #   <p>Request to describe Job log response next token.</p>
     #   @return [String]
     class DescribeJobLogItemsOutput < Struct.new(
+      nil,
       :items,
       :next_token,
       keyword_init: true
@@ -1208,6 +1257,7 @@ module Aws::Mgn
     #   <p>Request to describe job log items by Account ID.</p>
     #   @return [String]
     class DescribeJobsInput < Struct.new(
+      nil,
       :filters,
       :max_results,
       :next_token,
@@ -1224,6 +1274,7 @@ module Aws::Mgn
     #   <p>Request to describe Job response by next token.</p>
     #   @return [String]
     class DescribeJobsOutput < Struct.new(
+      nil,
       :items,
       :next_token,
       keyword_init: true
@@ -1242,6 +1293,7 @@ module Aws::Mgn
     #   <p>Request to describe job log items by last date.</p>
     #   @return [String]
     class DescribeJobsRequestFilters < Struct.new(
+      nil,
       :job_i_ds,
       :from_date,
       :to_date,
@@ -1260,6 +1312,7 @@ module Aws::Mgn
     #   <p>Next pagination token returned from DescribeLaunchConfigurationTemplates.</p>
     #   @return [String]
     class DescribeLaunchConfigurationTemplatesInput < Struct.new(
+      nil,
       :launch_configuration_template_i_ds,
       :max_results,
       :next_token,
@@ -1275,6 +1328,7 @@ module Aws::Mgn
     #   <p>Next pagination token returned from DescribeLaunchConfigurationTemplates.</p>
     #   @return [String]
     class DescribeLaunchConfigurationTemplatesOutput < Struct.new(
+      nil,
       :items,
       :next_token,
       keyword_init: true
@@ -1292,6 +1346,7 @@ module Aws::Mgn
     #   <p>Request to describe Replication Configuration template by next token.</p>
     #   @return [String]
     class DescribeReplicationConfigurationTemplatesInput < Struct.new(
+      nil,
       :replication_configuration_template_i_ds,
       :max_results,
       :next_token,
@@ -1307,6 +1362,7 @@ module Aws::Mgn
     #   <p>Request to describe Replication Configuration template by next token.</p>
     #   @return [String]
     class DescribeReplicationConfigurationTemplatesOutput < Struct.new(
+      nil,
       :items,
       :next_token,
       keyword_init: true
@@ -1327,6 +1383,7 @@ module Aws::Mgn
     #   <p>Request to filter Source Servers list by Accoun ID.</p>
     #   @return [String]
     class DescribeSourceServersInput < Struct.new(
+      nil,
       :filters,
       :max_results,
       :next_token,
@@ -1343,6 +1400,7 @@ module Aws::Mgn
     #   <p>Request to filter Source Servers next token.</p>
     #   @return [String]
     class DescribeSourceServersOutput < Struct.new(
+      nil,
       :items,
       :next_token,
       keyword_init: true
@@ -1367,6 +1425,7 @@ module Aws::Mgn
     #   <p>Request to filter Source Servers list by application IDs.</p>
     #   @return [Array<String>]
     class DescribeSourceServersRequestFilters < Struct.new(
+      nil,
       :source_server_i_ds,
       :is_archived,
       :replication_types,
@@ -1384,6 +1443,7 @@ module Aws::Mgn
     #   <p>Next pagination token to be provided for DescribeVcenterClients.</p>
     #   @return [String]
     class DescribeVcenterClientsInput < Struct.new(
+      nil,
       :max_results,
       :next_token,
       keyword_init: true
@@ -1398,6 +1458,7 @@ module Aws::Mgn
     #   <p>Next pagination token returned from DescribeVcenterClients.</p>
     #   @return [String]
     class DescribeVcenterClientsOutput < Struct.new(
+      nil,
       :items,
       :next_token,
       keyword_init: true
@@ -1415,6 +1476,7 @@ module Aws::Mgn
     #   <p>Account ID.</p>
     #   @return [String]
     class DisassociateApplicationsInput < Struct.new(
+      nil,
       :wave_id,
       :application_i_ds,
       :account_id,
@@ -1424,6 +1486,7 @@ module Aws::Mgn
     end
 
     class DisassociateApplicationsOutput < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1439,6 +1502,7 @@ module Aws::Mgn
     #   <p>Account ID.</p>
     #   @return [String]
     class DisassociateSourceServersInput < Struct.new(
+      nil,
       :application_id,
       :source_server_i_ds,
       :account_id,
@@ -1448,6 +1512,7 @@ module Aws::Mgn
     end
 
     class DisassociateSourceServersOutput < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1460,6 +1525,7 @@ module Aws::Mgn
     #   <p>Request to disconnect Source Server from service by Account ID.</p>
     #   @return [String]
     class DisconnectFromServiceInput < Struct.new(
+      nil,
       :source_server_id,
       :account_id,
       keyword_init: true
@@ -1510,6 +1576,7 @@ module Aws::Mgn
     #   <p>Source Server connector action.</p>
     #   @return [Types::SourceServerConnectorAction]
     class DisconnectFromServiceOutput < Struct.new(
+      nil,
       :source_server_id,
       :arn,
       :is_archived,
@@ -1537,6 +1604,7 @@ module Aws::Mgn
     #   <p>The amount of storage on the disk in bytes.</p>
     #   @return [Integer]
     class Disk < Struct.new(
+      nil,
       :device_name,
       :bytes,
       keyword_init: true
@@ -1563,6 +1631,7 @@ module Aws::Mgn
     #   <p>Error details resourceType.</p>
     #   @return [String]
     class ErrorDetails < Struct.new(
+      nil,
       :message,
       :code,
       :resource_id,
@@ -1577,6 +1646,7 @@ module Aws::Mgn
     #   <p>Export errors data raw error.</p>
     #   @return [String]
     class ExportErrorData < Struct.new(
+      nil,
       :raw_error,
       keyword_init: true
     )
@@ -1612,6 +1682,7 @@ module Aws::Mgn
     #   <p>Export task summary.</p>
     #   @return [Types::ExportTaskSummary]
     class ExportTask < Struct.new(
+      nil,
       :export_id,
       :s3_bucket,
       :s3_key,
@@ -1634,6 +1705,7 @@ module Aws::Mgn
     #   <p>Export task error data.</p>
     #   @return [Types::ExportErrorData]
     class ExportTaskError < Struct.new(
+      nil,
       :error_date_time,
       :error_data,
       keyword_init: true
@@ -1652,6 +1724,7 @@ module Aws::Mgn
     #   <p>Export task summary waves count.</p>
     #   @return [Integer]
     class ExportTaskSummary < Struct.new(
+      nil,
       :servers_count,
       :applications_count,
       :waves_count,
@@ -1674,6 +1747,7 @@ module Aws::Mgn
     #   <p>Request to finalize Cutover by Source Account ID.</p>
     #   @return [String]
     class FinalizeCutoverInput < Struct.new(
+      nil,
       :source_server_id,
       :account_id,
       keyword_init: true
@@ -1724,6 +1798,7 @@ module Aws::Mgn
     #   <p>Source Server connector action.</p>
     #   @return [Types::SourceServerConnectorAction]
     class FinalizeCutoverOutput < Struct.new(
+      nil,
       :source_server_id,
       :arn,
       :is_archived,
@@ -1750,6 +1825,7 @@ module Aws::Mgn
     #   <p>Request to get Launch Configuration information by Account ID.</p>
     #   @return [String]
     class GetLaunchConfigurationInput < Struct.new(
+      nil,
       :source_server_id,
       :account_id,
       keyword_init: true
@@ -1794,6 +1870,7 @@ module Aws::Mgn
     #   <p>Map auto tagging MPE ID.</p>
     #   @return [String]
     class GetLaunchConfigurationOutput < Struct.new(
+      nil,
       :source_server_id,
       :name,
       :ec2_launch_template_id,
@@ -1818,6 +1895,7 @@ module Aws::Mgn
     #   <p>Request to get Replication Configuration by Account ID.</p>
     #   @return [String]
     class GetReplicationConfigurationInput < Struct.new(
+      nil,
       :source_server_id,
       :account_id,
       keyword_init: true
@@ -1874,6 +1952,7 @@ module Aws::Mgn
     #   <p>Replication Configuration use Fips Endpoint.</p>
     #   @return [Boolean]
     class GetReplicationConfigurationOutput < Struct.new(
+      nil,
       :source_server_id,
       :name,
       :staging_area_subnet_id,
@@ -1917,6 +1996,7 @@ module Aws::Mgn
     #   <p>vCenter VM path identification hint.</p>
     #   @return [String]
     class IdentificationHints < Struct.new(
+      nil,
       :fqdn,
       :hostname,
       :vm_ware_uuid,
@@ -1950,6 +2030,7 @@ module Aws::Mgn
     #   <p>Import error data source account ID.</p>
     #   @return [String]
     class ImportErrorData < Struct.new(
+      nil,
       :source_server_id,
       :application_id,
       :wave_id,
@@ -1990,6 +2071,7 @@ module Aws::Mgn
     #   <p>Import task summary.</p>
     #   @return [Types::ImportTaskSummary]
     class ImportTask < Struct.new(
+      nil,
       :import_id,
       :s3_bucket_source,
       :creation_date_time,
@@ -2013,6 +2095,7 @@ module Aws::Mgn
     #   <p>Import task error data.</p>
     #   @return [Types::ImportErrorData]
     class ImportTaskError < Struct.new(
+      nil,
       :error_date_time,
       :error_type,
       :error_data,
@@ -2032,6 +2115,7 @@ module Aws::Mgn
     #   <p>Import task summary servers.</p>
     #   @return [Types::ImportTaskSummaryServers]
     class ImportTaskSummary < Struct.new(
+      nil,
       :waves,
       :applications,
       :servers,
@@ -2048,6 +2132,7 @@ module Aws::Mgn
     #   <p>Import task summary applications modified count.</p>
     #   @return [Integer]
     class ImportTaskSummaryApplications < Struct.new(
+      nil,
       :created_count,
       :modified_count,
       keyword_init: true
@@ -2069,6 +2154,7 @@ module Aws::Mgn
     #   <p>Import task summary servers modified count.</p>
     #   @return [Integer]
     class ImportTaskSummaryServers < Struct.new(
+      nil,
       :created_count,
       :modified_count,
       keyword_init: true
@@ -2090,6 +2176,7 @@ module Aws::Mgn
     #   <p>Import task summery waves modified count.</p>
     #   @return [Integer]
     class ImportTaskSummaryWaves < Struct.new(
+      nil,
       :created_count,
       :modified_count,
       keyword_init: true
@@ -2104,12 +2191,14 @@ module Aws::Mgn
     end
 
     class InitializeServiceInput < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
     end
 
     class InitializeServiceOutput < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -2122,6 +2211,7 @@ module Aws::Mgn
     #   <p>The server encountered an unexpected condition that prevented it from fulfilling the request. The request will be retried again after x seconds.</p>
     #   @return [Integer]
     class InternalServerException < Struct.new(
+      nil,
       :message,
       :retry_after_seconds,
       keyword_init: true
@@ -2163,6 +2253,7 @@ module Aws::Mgn
     #   <p>Tags associated with specific Job.</p>
     #   @return [Hash<String, String>]
     class Job < Struct.new(
+      nil,
       :job_id,
       :arn,
       :type,
@@ -2188,6 +2279,7 @@ module Aws::Mgn
     #   <p>Job event data</p>
     #   @return [Types::JobLogEventData]
     class JobLog < Struct.new(
+      nil,
       :log_date_time,
       :event,
       :event_data,
@@ -2210,6 +2302,7 @@ module Aws::Mgn
     #   <p>Job error.</p>
     #   @return [String]
     class JobLogEventData < Struct.new(
+      nil,
       :source_server_id,
       :conversion_server_id,
       :target_instance_id,
@@ -2236,6 +2329,7 @@ module Aws::Mgn
     #   <p>AWS Systems Manager Document's failure reason.</p>
     #   @return [String]
     class JobPostLaunchActionsLaunchStatus < Struct.new(
+      nil,
       :ssm_document,
       :ssm_document_type,
       :execution_id,
@@ -2298,6 +2392,7 @@ module Aws::Mgn
     #   <p>Large volume config.</p>
     #   @return [Types::LaunchTemplateDiskConf]
     class LaunchConfigurationTemplate < Struct.new(
+      nil,
       :launch_configuration_template_id,
       :arn,
       :post_launch_actions,
@@ -2336,6 +2431,7 @@ module Aws::Mgn
     #   <p>Launch template disk throughput configuration.</p>
     #   @return [Integer]
     class LaunchTemplateDiskConf < Struct.new(
+      nil,
       :volume_type,
       :iops,
       :throughput,
@@ -2355,6 +2451,7 @@ module Aws::Mgn
     #   <p>Launched instance first boot.</p>
     #   @return [String]
     class LaunchedInstance < Struct.new(
+      nil,
       :ec2_instance_id,
       :job_id,
       :first_boot,
@@ -2368,6 +2465,7 @@ module Aws::Mgn
     #   <p>Configure BYOL OS licensing.</p>
     #   @return [Boolean]
     class Licensing < Struct.new(
+      nil,
       :os_byol,
       keyword_init: true
     )
@@ -2397,6 +2495,7 @@ module Aws::Mgn
     #   <p>Lifecycle state.</p>
     #   @return [String]
     class LifeCycle < Struct.new(
+      nil,
       :added_to_service_date_time,
       :first_byte_date_time,
       :elapsed_replication_duration,
@@ -2420,6 +2519,7 @@ module Aws::Mgn
     #   <p>Lifecycle Cutover finalized date and time.</p>
     #   @return [Types::LifeCycleLastCutoverFinalized]
     class LifeCycleLastCutover < Struct.new(
+      nil,
       :initiated,
       :reverted,
       :finalized,
@@ -2433,6 +2533,7 @@ module Aws::Mgn
     #   <p>Lifecycle Cutover finalized date and time.</p>
     #   @return [String]
     class LifeCycleLastCutoverFinalized < Struct.new(
+      nil,
       :api_call_date_time,
       keyword_init: true
     )
@@ -2447,6 +2548,7 @@ module Aws::Mgn
     #   <p>Lifecycle last Cutover initiated by Job ID.</p>
     #   @return [String]
     class LifeCycleLastCutoverInitiated < Struct.new(
+      nil,
       :api_call_date_time,
       :job_id,
       keyword_init: true
@@ -2459,6 +2561,7 @@ module Aws::Mgn
     #   <p>Lifecycle last Cutover reverted API call date time.</p>
     #   @return [String]
     class LifeCycleLastCutoverReverted < Struct.new(
+      nil,
       :api_call_date_time,
       keyword_init: true
     )
@@ -2476,6 +2579,7 @@ module Aws::Mgn
     #   <p>Lifecycle last Test finalized.</p>
     #   @return [Types::LifeCycleLastTestFinalized]
     class LifeCycleLastTest < Struct.new(
+      nil,
       :initiated,
       :reverted,
       :finalized,
@@ -2489,6 +2593,7 @@ module Aws::Mgn
     #   <p>Lifecycle Test failed API call date and time.</p>
     #   @return [String]
     class LifeCycleLastTestFinalized < Struct.new(
+      nil,
       :api_call_date_time,
       keyword_init: true
     )
@@ -2503,6 +2608,7 @@ module Aws::Mgn
     #   <p>Lifecycle last Test initiated Job ID.</p>
     #   @return [String]
     class LifeCycleLastTestInitiated < Struct.new(
+      nil,
       :api_call_date_time,
       :job_id,
       keyword_init: true
@@ -2515,6 +2621,7 @@ module Aws::Mgn
     #   <p>Lifecycle last Test reverted API call date and time.</p>
     #   @return [String]
     class LifeCycleLastTestReverted < Struct.new(
+      nil,
       :api_call_date_time,
       keyword_init: true
     )
@@ -2534,6 +2641,7 @@ module Aws::Mgn
     #   <p>Applications list Account ID.</p>
     #   @return [String]
     class ListApplicationsInput < Struct.new(
+      nil,
       :filters,
       :max_results,
       :next_token,
@@ -2550,6 +2658,7 @@ module Aws::Mgn
     #   <p>Response next token.</p>
     #   @return [String]
     class ListApplicationsOutput < Struct.new(
+      nil,
       :items,
       :next_token,
       keyword_init: true
@@ -2568,6 +2677,7 @@ module Aws::Mgn
     #   <p>Filter applications list by wave ID.</p>
     #   @return [Array<String>]
     class ListApplicationsRequestFilters < Struct.new(
+      nil,
       :application_i_ds,
       :is_archived,
       :wave_i_ds,
@@ -2586,6 +2696,7 @@ module Aws::Mgn
     #   <p>List Connectors Request next token.</p>
     #   @return [String]
     class ListConnectorsRequest < Struct.new(
+      nil,
       :filters,
       :max_results,
       :next_token,
@@ -2599,6 +2710,7 @@ module Aws::Mgn
     #   <p>List Connectors Request Filters connector IDs.</p>
     #   @return [Array<String>]
     class ListConnectorsRequestFilters < Struct.new(
+      nil,
       :connector_i_ds,
       keyword_init: true
     )
@@ -2612,6 +2724,7 @@ module Aws::Mgn
     #   <p>List connectors response next token.</p>
     #   @return [String]
     class ListConnectorsResponse < Struct.new(
+      nil,
       :items,
       :next_token,
       keyword_init: true
@@ -2630,6 +2743,7 @@ module Aws::Mgn
     #   <p>List export errors request next token.</p>
     #   @return [String]
     class ListExportErrorsInput < Struct.new(
+      nil,
       :export_id,
       :max_results,
       :next_token,
@@ -2646,6 +2760,7 @@ module Aws::Mgn
     #   <p>List export errors response next token.</p>
     #   @return [String]
     class ListExportErrorsOutput < Struct.new(
+      nil,
       :items,
       :next_token,
       keyword_init: true
@@ -2664,6 +2779,7 @@ module Aws::Mgn
     #   <p>List export request next token.</p>
     #   @return [String]
     class ListExportsInput < Struct.new(
+      nil,
       :filters,
       :max_results,
       :next_token,
@@ -2680,6 +2796,7 @@ module Aws::Mgn
     #   <p>List export response next token.</p>
     #   @return [String]
     class ListExportsOutput < Struct.new(
+      nil,
       :items,
       :next_token,
       keyword_init: true
@@ -2692,6 +2809,7 @@ module Aws::Mgn
     #   <p>List exports request filters export ids.</p>
     #   @return [Array<String>]
     class ListExportsRequestFilters < Struct.new(
+      nil,
       :export_i_ds,
       keyword_init: true
     )
@@ -2709,6 +2827,7 @@ module Aws::Mgn
     #   <p>List import errors request next token.</p>
     #   @return [String]
     class ListImportErrorsInput < Struct.new(
+      nil,
       :import_id,
       :max_results,
       :next_token,
@@ -2725,6 +2844,7 @@ module Aws::Mgn
     #   <p>List imports errors response next token.</p>
     #   @return [String]
     class ListImportErrorsOutput < Struct.new(
+      nil,
       :items,
       :next_token,
       keyword_init: true
@@ -2743,6 +2863,7 @@ module Aws::Mgn
     #   <p>List imports request next token.</p>
     #   @return [String]
     class ListImportsInput < Struct.new(
+      nil,
       :filters,
       :max_results,
       :next_token,
@@ -2759,6 +2880,7 @@ module Aws::Mgn
     #   <p>List import response next token.</p>
     #   @return [String]
     class ListImportsOutput < Struct.new(
+      nil,
       :items,
       :next_token,
       keyword_init: true
@@ -2771,6 +2893,7 @@ module Aws::Mgn
     #   <p>List imports request filters import IDs.</p>
     #   @return [Array<String>]
     class ListImportsRequestFilters < Struct.new(
+      nil,
       :import_i_ds,
       keyword_init: true
     )
@@ -2785,6 +2908,7 @@ module Aws::Mgn
     #   <p>List managed accounts request next token.</p>
     #   @return [String]
     class ListManagedAccountsRequest < Struct.new(
+      nil,
       :max_results,
       :next_token,
       keyword_init: true
@@ -2800,6 +2924,7 @@ module Aws::Mgn
     #   <p>List managed accounts response next token.</p>
     #   @return [String]
     class ListManagedAccountsResponse < Struct.new(
+      nil,
       :items,
       :next_token,
       keyword_init: true
@@ -2823,6 +2948,7 @@ module Aws::Mgn
     #   <p>Account ID to return when listing source server post migration custom actions.</p>
     #   @return [String]
     class ListSourceServerActionsInput < Struct.new(
+      nil,
       :source_server_id,
       :filters,
       :max_results,
@@ -2840,6 +2966,7 @@ module Aws::Mgn
     #   <p>Next token returned when listing source server post migration custom actions.</p>
     #   @return [String]
     class ListSourceServerActionsOutput < Struct.new(
+      nil,
       :items,
       :next_token,
       keyword_init: true
@@ -2851,6 +2978,7 @@ module Aws::Mgn
     #   <p>List tags for resource request by ARN.</p>
     #   @return [String]
     class ListTagsForResourceInput < Struct.new(
+      nil,
       :resource_arn,
       keyword_init: true
     )
@@ -2861,6 +2989,7 @@ module Aws::Mgn
     #   <p>List tags for resource response.</p>
     #   @return [Hash<String, String>]
     class ListTagsForResourceOutput < Struct.new(
+      nil,
       :tags,
       keyword_init: true
     )
@@ -2880,6 +3009,7 @@ module Aws::Mgn
     #   <p>Next token to use when listing template post migration custom actions.</p>
     #   @return [String]
     class ListTemplateActionsInput < Struct.new(
+      nil,
       :launch_configuration_template_id,
       :filters,
       :max_results,
@@ -2896,6 +3026,7 @@ module Aws::Mgn
     #   <p>Next token returned when listing template post migration custom actions.</p>
     #   @return [String]
     class ListTemplateActionsOutput < Struct.new(
+      nil,
       :items,
       :next_token,
       keyword_init: true
@@ -2916,6 +3047,7 @@ module Aws::Mgn
     #   <p>Request account ID.</p>
     #   @return [String]
     class ListWavesInput < Struct.new(
+      nil,
       :filters,
       :max_results,
       :next_token,
@@ -2932,6 +3064,7 @@ module Aws::Mgn
     #   <p>Response next token.</p>
     #   @return [String]
     class ListWavesOutput < Struct.new(
+      nil,
       :items,
       :next_token,
       keyword_init: true
@@ -2947,6 +3080,7 @@ module Aws::Mgn
     #   <p>Filter waves list by archival status.</p>
     #   @return [Boolean]
     class ListWavesRequestFilters < Struct.new(
+      nil,
       :wave_i_ds,
       :is_archived,
       keyword_init: true
@@ -2959,6 +3093,7 @@ module Aws::Mgn
     #   <p>Managed account, account ID.</p>
     #   @return [String]
     class ManagedAccount < Struct.new(
+      nil,
       :account_id,
       keyword_init: true
     )
@@ -2972,6 +3107,7 @@ module Aws::Mgn
     #   <p>Mark as archived by Account ID.</p>
     #   @return [String]
     class MarkAsArchivedInput < Struct.new(
+      nil,
       :source_server_id,
       :account_id,
       keyword_init: true
@@ -3022,6 +3158,7 @@ module Aws::Mgn
     #   <p>Source Server connector action.</p>
     #   @return [Types::SourceServerConnectorAction]
     class MarkAsArchivedOutput < Struct.new(
+      nil,
       :source_server_id,
       :arn,
       :is_archived,
@@ -3052,6 +3189,7 @@ module Aws::Mgn
     #   <p>Network interface primary IP.</p>
     #   @return [Boolean]
     class NetworkInterface < Struct.new(
+      nil,
       :mac_address,
       :ips,
       :is_primary,
@@ -3065,6 +3203,7 @@ module Aws::Mgn
     #   <p>OS full string.</p>
     #   @return [String]
     class OS < Struct.new(
+      nil,
       :full_string,
       keyword_init: true
     )
@@ -3085,6 +3224,7 @@ module Aws::Mgn
     #   <p>Participating server's Post Launch Actions Status.</p>
     #   @return [Types::PostLaunchActionsStatus]
     class ParticipatingServer < Struct.new(
+      nil,
       :source_server_id,
       :launch_status,
       :launched_ec2_instance_id,
@@ -3137,6 +3277,7 @@ module Aws::Mgn
     #   <p>Source Server connector action.</p>
     #   @return [Types::SourceServerConnectorAction]
     class PauseReplicationOutput < Struct.new(
+      nil,
       :source_server_id,
       :arn,
       :is_archived,
@@ -3163,6 +3304,7 @@ module Aws::Mgn
     #   <p>Pause Replication Request account ID.</p>
     #   @return [String]
     class PauseReplicationRequest < Struct.new(
+      nil,
       :source_server_id,
       :account_id,
       keyword_init: true
@@ -3187,6 +3329,7 @@ module Aws::Mgn
     #   <p>AWS Systems Manager Documents.</p>
     #   @return [Array<Types::SsmDocument>]
     class PostLaunchActions < Struct.new(
+      nil,
       :deployment,
       :s3_log_bucket,
       :s3_output_key_prefix,
@@ -3205,6 +3348,7 @@ module Aws::Mgn
     #   <p>List of Post Launch Action status.</p>
     #   @return [Array<Types::JobPostLaunchActionsLaunchStatus>]
     class PostLaunchActionsStatus < Struct.new(
+      nil,
       :ssm_agent_discovery_datetime,
       :post_launch_actions_launch_status_list,
       keyword_init: true
@@ -3255,6 +3399,7 @@ module Aws::Mgn
     #   <p>Source server post migration custom account ID.</p>
     #   @return [String]
     class PutSourceServerActionInput < Struct.new(
+      nil,
       :source_server_id,
       :action_name,
       :document_identifier,
@@ -3311,6 +3456,7 @@ module Aws::Mgn
     #   <p>Source server post migration custom action category.</p>
     #   @return [String]
     class PutSourceServerActionOutput < Struct.new(
+      nil,
       :action_id,
       :action_name,
       :document_identifier,
@@ -3371,6 +3517,7 @@ module Aws::Mgn
     #   <p>Template post migration custom action category.</p>
     #   @return [String]
     class PutTemplateActionInput < Struct.new(
+      nil,
       :launch_configuration_template_id,
       :action_name,
       :document_identifier,
@@ -3430,6 +3577,7 @@ module Aws::Mgn
     #   <p>Template post migration custom action category.</p>
     #   @return [String]
     class PutTemplateActionOutput < Struct.new(
+      nil,
       :action_id,
       :action_name,
       :document_identifier,
@@ -3458,6 +3606,7 @@ module Aws::Mgn
     #   <p>Source server post migration account ID.</p>
     #   @return [String]
     class RemoveSourceServerActionInput < Struct.new(
+      nil,
       :source_server_id,
       :action_id,
       :account_id,
@@ -3467,6 +3616,7 @@ module Aws::Mgn
     end
 
     class RemoveSourceServerActionOutput < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -3479,6 +3629,7 @@ module Aws::Mgn
     #   <p>Template post migration custom action ID to remove.</p>
     #   @return [String]
     class RemoveTemplateActionInput < Struct.new(
+      nil,
       :launch_configuration_template_id,
       :action_id,
       keyword_init: true
@@ -3487,6 +3638,7 @@ module Aws::Mgn
     end
 
     class RemoveTemplateActionOutput < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -3509,6 +3661,7 @@ module Aws::Mgn
     #   <p>Replication Configuration replicated disk throughput.</p>
     #   @return [Integer]
     class ReplicationConfigurationReplicatedDisk < Struct.new(
+      nil,
       :device_name,
       :is_boot_disk,
       :staging_disk_type,
@@ -3574,6 +3727,7 @@ module Aws::Mgn
     #   <p>Replication Configuration template Tags.</p>
     #   @return [Hash<String, String>]
     class ReplicationConfigurationTemplate < Struct.new(
+      nil,
       :replication_configuration_template_id,
       :arn,
       :staging_area_subnet_id,
@@ -3612,6 +3766,7 @@ module Aws::Mgn
     #   <p>Resource type not found error.</p>
     #   @return [String]
     class ResourceNotFoundException < Struct.new(
+      nil,
       :message,
       :code,
       :resource_id,
@@ -3664,6 +3819,7 @@ module Aws::Mgn
     #   <p>Source Server connector action.</p>
     #   @return [Types::SourceServerConnectorAction]
     class ResumeReplicationOutput < Struct.new(
+      nil,
       :source_server_id,
       :arn,
       :is_archived,
@@ -3690,6 +3846,7 @@ module Aws::Mgn
     #   <p>Resume Replication Request account ID.</p>
     #   @return [String]
     class ResumeReplicationRequest < Struct.new(
+      nil,
       :source_server_id,
       :account_id,
       keyword_init: true
@@ -3704,6 +3861,7 @@ module Aws::Mgn
     #   <p>Retry data replication for Account ID.</p>
     #   @return [String]
     class RetryDataReplicationInput < Struct.new(
+      nil,
       :source_server_id,
       :account_id,
       keyword_init: true
@@ -3754,6 +3912,7 @@ module Aws::Mgn
     #   <p>Source Server connector action.</p>
     #   @return [Types::SourceServerConnectorAction]
     class RetryDataReplicationOutput < Struct.new(
+      nil,
       :source_server_id,
       :arn,
       :is_archived,
@@ -3784,6 +3943,7 @@ module Aws::Mgn
     #   <p>S3 bucket source s3 bucket owner.</p>
     #   @return [String]
     class S3BucketSource < Struct.new(
+      nil,
       :s3_bucket,
       :s3_key,
       :s3_bucket_owner,
@@ -3813,6 +3973,7 @@ module Aws::Mgn
     #   <p>Exceeded the service quota value.</p>
     #   @return [Integer]
     class ServiceQuotaExceededException < Struct.new(
+      nil,
       :message,
       :code,
       :resource_id,
@@ -3851,6 +4012,7 @@ module Aws::Mgn
     #   <p>Source server OS.</p>
     #   @return [Types::OS]
     class SourceProperties < Struct.new(
+      nil,
       :last_updated_date_time,
       :recommended_instance_type,
       :identification_hints,
@@ -3912,6 +4074,7 @@ module Aws::Mgn
     #   <p>Source Server connector action.</p>
     #   @return [Types::SourceServerConnectorAction]
     class SourceServer < Struct.new(
+      nil,
       :source_server_id,
       :arn,
       :is_archived,
@@ -3968,6 +4131,7 @@ module Aws::Mgn
     #   <p>Source server post migration custom action category.</p>
     #   @return [String]
     class SourceServerActionDocument < Struct.new(
+      nil,
       :action_id,
       :action_name,
       :document_identifier,
@@ -3990,6 +4154,7 @@ module Aws::Mgn
     #   <p>Action IDs to filter source server post migration custom actions by.</p>
     #   @return [Array<String>]
     class SourceServerActionsRequestFilters < Struct.new(
+      nil,
       :action_i_ds,
       keyword_init: true
     )
@@ -4004,6 +4169,7 @@ module Aws::Mgn
     #   <p>Source Server connector action connector arn.</p>
     #   @return [String]
     class SourceServerConnectorAction < Struct.new(
+      nil,
       :credentials_secret_arn,
       :connector_arn,
       keyword_init: true
@@ -4031,6 +4197,7 @@ module Aws::Mgn
     #   <p>AWS Systems Manager Document external parameters.</p>
     #   @return [Hash<String, Types::SsmExternalParameter>]
     class SsmDocument < Struct.new(
+      nil,
       :action_name,
       :ssm_document_name,
       :timeout_seconds,
@@ -4065,6 +4232,7 @@ module Aws::Mgn
     #   <p>AWS Systems Manager Parameter Store parameter name.</p>
     #   @return [String]
     class SsmParameterStoreParameter < Struct.new(
+      nil,
       :parameter_type,
       :parameter_name,
       keyword_init: true
@@ -4082,6 +4250,7 @@ module Aws::Mgn
     #   <p>Start Cutover by Account IDs</p>
     #   @return [String]
     class StartCutoverInput < Struct.new(
+      nil,
       :source_server_i_ds,
       :tags,
       :account_id,
@@ -4094,6 +4263,7 @@ module Aws::Mgn
     #   <p>Start Cutover Job response.</p>
     #   @return [Types::Job]
     class StartCutoverOutput < Struct.new(
+      nil,
       :job,
       keyword_init: true
     )
@@ -4111,6 +4281,7 @@ module Aws::Mgn
     #   <p>Start export request s3 bucket owner.</p>
     #   @return [String]
     class StartExportInput < Struct.new(
+      nil,
       :s3_bucket,
       :s3_key,
       :s3_bucket_owner,
@@ -4124,6 +4295,7 @@ module Aws::Mgn
     #   <p>Start export response export task.</p>
     #   @return [Types::ExportTask]
     class StartExportOutput < Struct.new(
+      nil,
       :export_task,
       keyword_init: true
     )
@@ -4138,6 +4310,7 @@ module Aws::Mgn
     #   <p>Start import request s3 bucket source.</p>
     #   @return [Types::S3BucketSource]
     class StartImportInput < Struct.new(
+      nil,
       :client_token,
       :s3_bucket_source,
       keyword_init: true
@@ -4150,6 +4323,7 @@ module Aws::Mgn
     #   <p>Start import response import task.</p>
     #   @return [Types::ImportTask]
     class StartImportOutput < Struct.new(
+      nil,
       :import_task,
       keyword_init: true
     )
@@ -4163,6 +4337,7 @@ module Aws::Mgn
     #   <p>Account ID on which to start replication.</p>
     #   @return [String]
     class StartReplicationInput < Struct.new(
+      nil,
       :source_server_id,
       :account_id,
       keyword_init: true
@@ -4213,6 +4388,7 @@ module Aws::Mgn
     #   <p>Source Server connector action.</p>
     #   @return [Types::SourceServerConnectorAction]
     class StartReplicationOutput < Struct.new(
+      nil,
       :source_server_id,
       :arn,
       :is_archived,
@@ -4242,6 +4418,7 @@ module Aws::Mgn
     #   <p>Start Test for Account ID.</p>
     #   @return [String]
     class StartTestInput < Struct.new(
+      nil,
       :source_server_i_ds,
       :tags,
       :account_id,
@@ -4254,6 +4431,7 @@ module Aws::Mgn
     #   <p>Start Test Job response.</p>
     #   @return [Types::Job]
     class StartTestOutput < Struct.new(
+      nil,
       :job,
       keyword_init: true
     )
@@ -4303,6 +4481,7 @@ module Aws::Mgn
     #   <p>Source Server connector action.</p>
     #   @return [Types::SourceServerConnectorAction]
     class StopReplicationOutput < Struct.new(
+      nil,
       :source_server_id,
       :arn,
       :is_archived,
@@ -4329,6 +4508,7 @@ module Aws::Mgn
     #   <p>Stop Replication Request account ID.</p>
     #   @return [String]
     class StopReplicationRequest < Struct.new(
+      nil,
       :source_server_id,
       :account_id,
       keyword_init: true
@@ -4343,6 +4523,7 @@ module Aws::Mgn
     #   <p>Tag resource by Tags.</p>
     #   @return [Hash<String, String>]
     class TagResourceInput < Struct.new(
+      nil,
       :resource_arn,
       :tags,
       keyword_init: true
@@ -4390,6 +4571,7 @@ module Aws::Mgn
     #   <p>Template post migration custom action category.</p>
     #   @return [String]
     class TemplateActionDocument < Struct.new(
+      nil,
       :action_id,
       :action_name,
       :document_identifier,
@@ -4413,6 +4595,7 @@ module Aws::Mgn
     #   <p>Action IDs to filter template post migration custom actions by.</p>
     #   @return [Array<String>]
     class TemplateActionsRequestFilters < Struct.new(
+      nil,
       :action_i_ds,
       keyword_init: true
     )
@@ -4429,6 +4612,7 @@ module Aws::Mgn
     #   <p>Terminate Target instance by Account ID</p>
     #   @return [String]
     class TerminateTargetInstancesInput < Struct.new(
+      nil,
       :source_server_i_ds,
       :tags,
       :account_id,
@@ -4441,6 +4625,7 @@ module Aws::Mgn
     #   <p>Terminate Target instance Job response.</p>
     #   @return [Types::Job]
     class TerminateTargetInstancesOutput < Struct.new(
+      nil,
       :job,
       keyword_init: true
     )
@@ -4460,6 +4645,7 @@ module Aws::Mgn
     #   <p>Reached throttling quota exception will retry after x seconds.</p>
     #   @return [String]
     class ThrottlingException < Struct.new(
+      nil,
       :message,
       :service_code,
       :quota_code,
@@ -4476,6 +4662,7 @@ module Aws::Mgn
     #   <p>Account ID.</p>
     #   @return [String]
     class UnarchiveApplicationInput < Struct.new(
+      nil,
       :application_id,
       :account_id,
       keyword_init: true
@@ -4514,6 +4701,7 @@ module Aws::Mgn
     #   <p>Application wave ID.</p>
     #   @return [String]
     class UnarchiveApplicationOutput < Struct.new(
+      nil,
       :application_id,
       :arn,
       :name,
@@ -4536,6 +4724,7 @@ module Aws::Mgn
     #   <p>Account ID.</p>
     #   @return [String]
     class UnarchiveWaveInput < Struct.new(
+      nil,
       :wave_id,
       :account_id,
       keyword_init: true
@@ -4571,6 +4760,7 @@ module Aws::Mgn
     #   <p>Wave tags.</p>
     #   @return [Hash<String, String>]
     class UnarchiveWaveOutput < Struct.new(
+      nil,
       :wave_id,
       :arn,
       :name,
@@ -4591,6 +4781,7 @@ module Aws::Mgn
     # @!attribute code
     #   @return [String]
     class UninitializedAccountException < Struct.new(
+      nil,
       :message,
       :code,
       keyword_init: true
@@ -4605,6 +4796,7 @@ module Aws::Mgn
     #   <p>Untag resource by Keys.</p>
     #   @return [Array<String>]
     class UntagResourceInput < Struct.new(
+      nil,
       :resource_arn,
       :tag_keys,
       keyword_init: true
@@ -4625,6 +4817,7 @@ module Aws::Mgn
     #   <p>Account ID.</p>
     #   @return [String]
     class UpdateApplicationInput < Struct.new(
+      nil,
       :application_id,
       :name,
       :description,
@@ -4665,6 +4858,7 @@ module Aws::Mgn
     #   <p>Application wave ID.</p>
     #   @return [String]
     class UpdateApplicationOutput < Struct.new(
+      nil,
       :application_id,
       :arn,
       :name,
@@ -4699,6 +4893,7 @@ module Aws::Mgn
     #   <p>Connector SSM command config.</p>
     #   @return [Types::ConnectorSsmCommandConfig]
     class UpdateConnectorOutput < Struct.new(
+      nil,
       :connector_id,
       :name,
       :ssm_instance_id,
@@ -4720,6 +4915,7 @@ module Aws::Mgn
     #   <p>Update Connector request SSM command config.</p>
     #   @return [Types::ConnectorSsmCommandConfig]
     class UpdateConnectorRequest < Struct.new(
+      nil,
       :connector_id,
       :name,
       :ssm_command_config,
@@ -4765,6 +4961,7 @@ module Aws::Mgn
     #   <p>Update Launch configuration Account ID.</p>
     #   @return [String]
     class UpdateLaunchConfigurationInput < Struct.new(
+      nil,
       :source_server_id,
       :name,
       :launch_disposition,
@@ -4819,6 +5016,7 @@ module Aws::Mgn
     #   <p>Map auto tagging MPE ID.</p>
     #   @return [String]
     class UpdateLaunchConfigurationOutput < Struct.new(
+      nil,
       :source_server_id,
       :name,
       :ec2_launch_template_id,
@@ -4879,6 +5077,7 @@ module Aws::Mgn
     #   <p>Large volume config.</p>
     #   @return [Types::LaunchTemplateDiskConf]
     class UpdateLaunchConfigurationTemplateInput < Struct.new(
+      nil,
       :launch_configuration_template_id,
       :post_launch_actions,
       :enable_map_auto_tagging,
@@ -4950,6 +5149,7 @@ module Aws::Mgn
     #   <p>Large volume config.</p>
     #   @return [Types::LaunchTemplateDiskConf]
     class UpdateLaunchConfigurationTemplateOutput < Struct.new(
+      nil,
       :launch_configuration_template_id,
       :arn,
       :post_launch_actions,
@@ -5029,6 +5229,7 @@ module Aws::Mgn
     #   <p>Update replication configuration Account ID request.</p>
     #   @return [String]
     class UpdateReplicationConfigurationInput < Struct.new(
+      nil,
       :source_server_id,
       :name,
       :staging_area_subnet_id,
@@ -5100,6 +5301,7 @@ module Aws::Mgn
     #   <p>Replication Configuration use Fips Endpoint.</p>
     #   @return [Boolean]
     class UpdateReplicationConfigurationOutput < Struct.new(
+      nil,
       :source_server_id,
       :name,
       :staging_area_subnet_id,
@@ -5172,6 +5374,7 @@ module Aws::Mgn
     #   <p>Update replication configuration template use Fips Endpoint request.</p>
     #   @return [Boolean]
     class UpdateReplicationConfigurationTemplateInput < Struct.new(
+      nil,
       :replication_configuration_template_id,
       :arn,
       :staging_area_subnet_id,
@@ -5241,6 +5444,7 @@ module Aws::Mgn
     #   <p>Replication Configuration template Tags.</p>
     #   @return [Hash<String, String>]
     class UpdateReplicationConfigurationTemplateOutput < Struct.new(
+      nil,
       :replication_configuration_template_id,
       :arn,
       :staging_area_subnet_id,
@@ -5310,6 +5514,7 @@ module Aws::Mgn
     #   <p>Source Server connector action.</p>
     #   @return [Types::SourceServerConnectorAction]
     class UpdateSourceServerOutput < Struct.new(
+      nil,
       :source_server_id,
       :arn,
       :is_archived,
@@ -5339,6 +5544,7 @@ module Aws::Mgn
     #   <p>Account ID on which to update replication type.</p>
     #   @return [String]
     class UpdateSourceServerReplicationTypeInput < Struct.new(
+      nil,
       :source_server_id,
       :replication_type,
       :account_id,
@@ -5390,6 +5596,7 @@ module Aws::Mgn
     #   <p>Source Server connector action.</p>
     #   @return [Types::SourceServerConnectorAction]
     class UpdateSourceServerReplicationTypeOutput < Struct.new(
+      nil,
       :source_server_id,
       :arn,
       :is_archived,
@@ -5419,6 +5626,7 @@ module Aws::Mgn
     #   <p>Update Source Server request connector action.</p>
     #   @return [Types::SourceServerConnectorAction]
     class UpdateSourceServerRequest < Struct.new(
+      nil,
       :account_id,
       :source_server_id,
       :connector_action,
@@ -5440,6 +5648,7 @@ module Aws::Mgn
     #   <p>Account ID.</p>
     #   @return [String]
     class UpdateWaveInput < Struct.new(
+      nil,
       :wave_id,
       :name,
       :description,
@@ -5477,6 +5686,7 @@ module Aws::Mgn
     #   <p>Wave tags.</p>
     #   @return [Hash<String, String>]
     class UpdateWaveOutput < Struct.new(
+      nil,
       :wave_id,
       :arn,
       :name,
@@ -5503,6 +5713,7 @@ module Aws::Mgn
     #   <p>Validate exception field list.</p>
     #   @return [Array<Types::ValidationExceptionField>]
     class ValidationException < Struct.new(
+      nil,
       :message,
       :code,
       :reason,
@@ -5520,6 +5731,7 @@ module Aws::Mgn
     #   <p>Validate exception field message.</p>
     #   @return [String]
     class ValidationExceptionField < Struct.new(
+      nil,
       :name,
       :message,
       keyword_init: true
@@ -5553,6 +5765,7 @@ module Aws::Mgn
     #   <p>Tags for vCenter client.</p>
     #   @return [Hash<String, String>]
     class VcenterClient < Struct.new(
+      nil,
       :vcenter_client_id,
       :arn,
       :hostname,
@@ -5594,6 +5807,7 @@ module Aws::Mgn
     #   <p>Wave tags.</p>
     #   @return [Hash<String, String>]
     class Wave < Struct.new(
+      nil,
       :wave_id,
       :arn,
       :name,
@@ -5625,6 +5839,7 @@ module Aws::Mgn
     #   <p>Wave aggregated status total applications amount.</p>
     #   @return [Integer]
     class WaveAggregatedStatus < Struct.new(
+      nil,
       :last_update_date_time,
       :replication_started_date_time,
       :health_status,

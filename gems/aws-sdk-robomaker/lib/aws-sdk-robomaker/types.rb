@@ -10,6 +10,7 @@ module Aws::RoboMaker
     #   <p>A list of Amazon Resource Names (arns) that correspond to worlds to delete.</p>
     #   @return [Array<String>]
     class BatchDeleteWorldsRequest < Struct.new(
+      nil,
       :worlds,
       keyword_init: true
     )
@@ -21,6 +22,7 @@ module Aws::RoboMaker
     #            deleted.</p>
     #   @return [Array<String>]
     class BatchDeleteWorldsResponse < Struct.new(
+      nil,
       :unprocessed_worlds,
       keyword_init: true
     )
@@ -31,6 +33,7 @@ module Aws::RoboMaker
     #   <p>A list of Amazon Resource Names (ARNs) of simulation jobs to describe.</p>
     #   @return [Array<String>]
     class BatchDescribeSimulationJobRequest < Struct.new(
+      nil,
       :jobs,
       keyword_init: true
     )
@@ -44,6 +47,7 @@ module Aws::RoboMaker
     #   <p>A list of unprocessed simulation job Amazon Resource Names (ARNs).</p>
     #   @return [Array<String>]
     class BatchDescribeSimulationJobResponse < Struct.new(
+      nil,
       :jobs,
       :unprocessed_jobs,
       keyword_init: true
@@ -70,6 +74,7 @@ module Aws::RoboMaker
     #               <code>Terminating</code>. All other states are terminal states. </p>
     #   @return [Integer]
     class BatchPolicy < Struct.new(
+      nil,
       :timeout_in_seconds,
       :max_concurrency,
       keyword_init: true
@@ -83,6 +88,7 @@ module Aws::RoboMaker
     #   <p>The deployment job ARN to cancel.</p>
     #   @return [String]
     class CancelDeploymentJobRequest < Struct.new(
+      nil,
       :job,
       keyword_init: true
     )
@@ -92,6 +98,7 @@ module Aws::RoboMaker
     # @deprecated
     #   Support for the AWS RoboMaker application deployment feature has ended. For additional information, see https://docs.aws.amazon.com/robomaker/latest/dg/fleets.html.
     class CancelDeploymentJobResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -101,6 +108,7 @@ module Aws::RoboMaker
     #   <p>The id of the batch to cancel.</p>
     #   @return [String]
     class CancelSimulationJobBatchRequest < Struct.new(
+      nil,
       :batch,
       keyword_init: true
     )
@@ -108,6 +116,7 @@ module Aws::RoboMaker
     end
 
     class CancelSimulationJobBatchResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -117,6 +126,7 @@ module Aws::RoboMaker
     #   <p>The simulation job ARN to cancel.</p>
     #   @return [String]
     class CancelSimulationJobRequest < Struct.new(
+      nil,
       :job,
       keyword_init: true
     )
@@ -124,6 +134,7 @@ module Aws::RoboMaker
     end
 
     class CancelSimulationJobResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -133,6 +144,7 @@ module Aws::RoboMaker
     #   <p>The Amazon Resource Name (arn) of the world export job to cancel.</p>
     #   @return [String]
     class CancelWorldExportJobRequest < Struct.new(
+      nil,
       :job,
       keyword_init: true
     )
@@ -140,6 +152,7 @@ module Aws::RoboMaker
     end
 
     class CancelWorldExportJobResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -149,6 +162,7 @@ module Aws::RoboMaker
     #   <p>The Amazon Resource Name (arn) of the world generator job to cancel.</p>
     #   @return [String]
     class CancelWorldGenerationJobRequest < Struct.new(
+      nil,
       :job,
       keyword_init: true
     )
@@ -156,6 +170,7 @@ module Aws::RoboMaker
     end
 
     class CancelWorldGenerationJobResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -176,6 +191,7 @@ module Aws::RoboMaker
     #           allocated to the SimulationJob.</p>
     #   @return [Integer]
     class Compute < Struct.new(
+      nil,
       :simulation_unit_limit,
       :compute_type,
       :gpu_unit_limit,
@@ -199,6 +215,7 @@ module Aws::RoboMaker
     #            allocated to the SimulationJob.</p>
     #   @return [Integer]
     class ComputeResponse < Struct.new(
+      nil,
       :simulation_unit_limit,
       :compute_type,
       :gpu_unit_limit,
@@ -211,6 +228,7 @@ module Aws::RoboMaker
     # @!attribute message
     #   @return [String]
     class ConcurrentDeploymentException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -237,6 +255,7 @@ module Aws::RoboMaker
     #            job.</p>
     #   @return [Hash<String, String>]
     class CreateDeploymentJobRequest < Struct.new(
+      nil,
       :deployment_config,
       :client_request_token,
       :fleet,
@@ -337,6 +356,7 @@ module Aws::RoboMaker
     #   <p>The list of all tags added to the deployment job.</p>
     #   @return [Hash<String, String>]
     class CreateDeploymentJobResponse < Struct.new(
+      nil,
       :arn,
       :fleet,
       :status,
@@ -360,6 +380,7 @@ module Aws::RoboMaker
     #   <p>A map that contains tag keys and tag values that are attached to the fleet.</p>
     #   @return [Hash<String, String>]
     class CreateFleetRequest < Struct.new(
+      nil,
       :name,
       :tags,
       keyword_init: true
@@ -382,6 +403,7 @@ module Aws::RoboMaker
     #   <p>The list of all tags added to the fleet.</p>
     #   @return [Hash<String, String>]
     class CreateFleetResponse < Struct.new(
+      nil,
       :arn,
       :name,
       :created_at,
@@ -409,6 +431,7 @@ module Aws::RoboMaker
     #            application.</p>
     #   @return [Types::Environment]
     class CreateRobotApplicationRequest < Struct.new(
+      nil,
       :name,
       :sources,
       :robot_software_suite,
@@ -449,6 +472,7 @@ module Aws::RoboMaker
     #            application.</p>
     #   @return [Types::Environment]
     class CreateRobotApplicationResponse < Struct.new(
+      nil,
       :arn,
       :name,
       :version,
@@ -478,6 +502,7 @@ module Aws::RoboMaker
     #   <p>A SHA256 identifier for the Docker image that you use for your robot application.</p>
     #   @return [String]
     class CreateRobotApplicationVersionRequest < Struct.new(
+      nil,
       :application,
       :current_revision_id,
       :s3_etags,
@@ -514,6 +539,7 @@ module Aws::RoboMaker
     #            application.</p>
     #   @return [Types::Environment]
     class CreateRobotApplicationVersionResponse < Struct.new(
+      nil,
       :arn,
       :name,
       :version,
@@ -542,6 +568,7 @@ module Aws::RoboMaker
     #   <p>A map that contains tag keys and tag values that are attached to the robot.</p>
     #   @return [Hash<String, String>]
     class CreateRobotRequest < Struct.new(
+      nil,
       :name,
       :architecture,
       :greengrass_group_id,
@@ -572,6 +599,7 @@ module Aws::RoboMaker
     #   <p>The list of all tags added to the robot.</p>
     #   @return [Hash<String, String>]
     class CreateRobotResponse < Struct.new(
+      nil,
       :arn,
       :name,
       :created_at,
@@ -607,6 +635,7 @@ module Aws::RoboMaker
     #            application.</p>
     #   @return [Types::Environment]
     class CreateSimulationApplicationRequest < Struct.new(
+      nil,
       :name,
       :sources,
       :simulation_software_suite,
@@ -655,6 +684,7 @@ module Aws::RoboMaker
     #            application.</p>
     #   @return [Types::Environment]
     class CreateSimulationApplicationResponse < Struct.new(
+      nil,
       :arn,
       :name,
       :version,
@@ -687,6 +717,7 @@ module Aws::RoboMaker
     #            application.</p>
     #   @return [String]
     class CreateSimulationApplicationVersionRequest < Struct.new(
+      nil,
       :application,
       :current_revision_id,
       :s3_etags,
@@ -729,6 +760,7 @@ module Aws::RoboMaker
     #            application.</p>
     #   @return [Types::Environment]
     class CreateSimulationApplicationVersionResponse < Struct.new(
+      nil,
       :arn,
       :name,
       :version,
@@ -805,6 +837,7 @@ module Aws::RoboMaker
     #   <p>Compute information for the simulation job.</p>
     #   @return [Types::Compute]
     class CreateSimulationJobRequest < Struct.new(
+      nil,
       :client_request_token,
       :output_location,
       :logging_config,
@@ -942,6 +975,7 @@ module Aws::RoboMaker
     #   <p>Compute information for the simulation job.</p>
     #   @return [Types::ComputeResponse]
     class CreateSimulationJobResponse < Struct.new(
+      nil,
       :arn,
       :status,
       :last_started_at,
@@ -990,6 +1024,7 @@ module Aws::RoboMaker
     #            job.</p>
     #   @return [Hash<String, String>]
     class CreateWorldExportJobRequest < Struct.new(
+      nil,
       :client_request_token,
       :worlds,
       :output_location,
@@ -1084,6 +1119,7 @@ module Aws::RoboMaker
     #            job.</p>
     #   @return [Hash<String, String>]
     class CreateWorldExportJobResponse < Struct.new(
+      nil,
       :arn,
       :status,
       :created_at,
@@ -1117,6 +1153,7 @@ module Aws::RoboMaker
     #            worlds.</p>
     #   @return [Hash<String, String>]
     class CreateWorldGenerationJobRequest < Struct.new(
+      nil,
       :client_request_token,
       :template,
       :world_count,
@@ -1213,6 +1250,7 @@ module Aws::RoboMaker
     #            worlds.</p>
     #   @return [Hash<String, String>]
     class CreateWorldGenerationJobResponse < Struct.new(
+      nil,
       :arn,
       :status,
       :created_at,
@@ -1245,6 +1283,7 @@ module Aws::RoboMaker
     #            template.</p>
     #   @return [Hash<String, String>]
     class CreateWorldTemplateRequest < Struct.new(
+      nil,
       :client_request_token,
       :name,
       :template_body,
@@ -1273,6 +1312,7 @@ module Aws::RoboMaker
     #            template.</p>
     #   @return [Hash<String, String>]
     class CreateWorldTemplateResponse < Struct.new(
+      nil,
       :arn,
       :client_request_token,
       :created_at,
@@ -1311,6 +1351,7 @@ module Aws::RoboMaker
     #            provide the Amazon S3 path to the file that you're using as your data source.</p>
     #   @return [String]
     class DataSource < Struct.new(
+      nil,
       :name,
       :s3_bucket,
       :s3_keys,
@@ -1349,6 +1390,7 @@ module Aws::RoboMaker
     #            provide the Amazon S3 path to the file that you're using as your data source.</p>
     #   @return [String]
     class DataSourceConfig < Struct.new(
+      nil,
       :name,
       :s3_bucket,
       :s3_keys,
@@ -1365,6 +1407,7 @@ module Aws::RoboMaker
     #   <p>The Amazon Resource Name (ARN) of the fleet.</p>
     #   @return [String]
     class DeleteFleetRequest < Struct.new(
+      nil,
       :fleet,
       keyword_init: true
     )
@@ -1374,6 +1417,7 @@ module Aws::RoboMaker
     # @deprecated
     #   Support for the AWS RoboMaker application deployment feature has ended. For additional information, see https://docs.aws.amazon.com/robomaker/latest/dg/fleets.html.
     class DeleteFleetResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1386,6 +1430,7 @@ module Aws::RoboMaker
     #   <p>The version of the robot application to delete.</p>
     #   @return [String]
     class DeleteRobotApplicationRequest < Struct.new(
+      nil,
       :application,
       :application_version,
       keyword_init: true
@@ -1394,6 +1439,7 @@ module Aws::RoboMaker
     end
 
     class DeleteRobotApplicationResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1405,6 +1451,7 @@ module Aws::RoboMaker
     #   <p>The Amazon Resource Name (ARN) of the robot.</p>
     #   @return [String]
     class DeleteRobotRequest < Struct.new(
+      nil,
       :robot,
       keyword_init: true
     )
@@ -1414,6 +1461,7 @@ module Aws::RoboMaker
     # @deprecated
     #   Support for the AWS RoboMaker application deployment feature has ended. For additional information, see https://docs.aws.amazon.com/robomaker/latest/dg/fleets.html.
     class DeleteRobotResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1426,6 +1474,7 @@ module Aws::RoboMaker
     #   <p>The version of the simulation application to delete.</p>
     #   @return [String]
     class DeleteSimulationApplicationRequest < Struct.new(
+      nil,
       :application,
       :application_version,
       keyword_init: true
@@ -1434,6 +1483,7 @@ module Aws::RoboMaker
     end
 
     class DeleteSimulationApplicationResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1443,6 +1493,7 @@ module Aws::RoboMaker
     #   <p>The Amazon Resource Name (arn) of the world template you want to delete.</p>
     #   @return [String]
     class DeleteWorldTemplateRequest < Struct.new(
+      nil,
       :template,
       keyword_init: true
     )
@@ -1450,6 +1501,7 @@ module Aws::RoboMaker
     end
 
     class DeleteWorldTemplateResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1466,6 +1518,7 @@ module Aws::RoboMaker
     #   <p>The launch configuration.</p>
     #   @return [Types::DeploymentLaunchConfig]
     class DeploymentApplicationConfig < Struct.new(
+      nil,
       :application,
       :application_version,
       :launch_config,
@@ -1489,6 +1542,7 @@ module Aws::RoboMaker
     #   <p>The download condition file.</p>
     #   @return [Types::S3Object]
     class DeploymentConfig < Struct.new(
+      nil,
       :concurrent_deployment_percentage,
       :failure_threshold_percentage,
       :robot_deployment_timeout_in_seconds,
@@ -1524,6 +1578,7 @@ module Aws::RoboMaker
     #   <p>The time, in milliseconds since the epoch, when the deployment job was created.</p>
     #   @return [Time]
     class DeploymentJob < Struct.new(
+      nil,
       :arn,
       :fleet,
       :status,
@@ -1557,6 +1612,7 @@ module Aws::RoboMaker
     #            application</p>
     #   @return [Hash<String, String>]
     class DeploymentLaunchConfig < Struct.new(
+      nil,
       :package_name,
       :pre_launch_file,
       :launch_file,
@@ -1576,6 +1632,7 @@ module Aws::RoboMaker
     #   <p>The Amazon Resource Name (ARN) of the robot.</p>
     #   @return [String]
     class DeregisterRobotRequest < Struct.new(
+      nil,
       :fleet,
       :robot,
       keyword_init: true
@@ -1592,6 +1649,7 @@ module Aws::RoboMaker
     #   <p>The Amazon Resource Name (ARN) of the robot.</p>
     #   @return [String]
     class DeregisterRobotResponse < Struct.new(
+      nil,
       :fleet,
       :robot,
       keyword_init: true
@@ -1605,6 +1663,7 @@ module Aws::RoboMaker
     #   <p>The Amazon Resource Name (ARN) of the deployment job.</p>
     #   @return [String]
     class DescribeDeploymentJobRequest < Struct.new(
+      nil,
       :job,
       keyword_init: true
     )
@@ -1644,6 +1703,7 @@ module Aws::RoboMaker
     #   <p>The list of all tags added to the specified deployment job.</p>
     #   @return [Hash<String, String>]
     class DescribeDeploymentJobResponse < Struct.new(
+      nil,
       :arn,
       :fleet,
       :status,
@@ -1665,6 +1725,7 @@ module Aws::RoboMaker
     #   <p>The Amazon Resource Name (ARN) of the fleet.</p>
     #   @return [String]
     class DescribeFleetRequest < Struct.new(
+      nil,
       :fleet,
       keyword_init: true
     )
@@ -1698,6 +1759,7 @@ module Aws::RoboMaker
     #   <p>The list of all tags added to the specified fleet.</p>
     #   @return [Hash<String, String>]
     class DescribeFleetResponse < Struct.new(
+      nil,
       :name,
       :arn,
       :robots,
@@ -1718,6 +1780,7 @@ module Aws::RoboMaker
     #   <p>The version of the robot application to describe.</p>
     #   @return [String]
     class DescribeRobotApplicationRequest < Struct.new(
+      nil,
       :application,
       :application_version,
       keyword_init: true
@@ -1758,6 +1821,7 @@ module Aws::RoboMaker
     #   <p>A SHA256 identifier for the Docker image that you use for your robot application.</p>
     #   @return [String]
     class DescribeRobotApplicationResponse < Struct.new(
+      nil,
       :arn,
       :name,
       :version,
@@ -1779,6 +1843,7 @@ module Aws::RoboMaker
     #   <p>The Amazon Resource Name (ARN) of the robot to be described.</p>
     #   @return [String]
     class DescribeRobotRequest < Struct.new(
+      nil,
       :robot,
       keyword_init: true
     )
@@ -1818,6 +1883,7 @@ module Aws::RoboMaker
     #   <p>The list of all tags added to the specified robot.</p>
     #   @return [Hash<String, String>]
     class DescribeRobotResponse < Struct.new(
+      nil,
       :arn,
       :name,
       :fleet_arn,
@@ -1840,6 +1906,7 @@ module Aws::RoboMaker
     #   <p>The version of the simulation application to describe.</p>
     #   @return [String]
     class DescribeSimulationApplicationRequest < Struct.new(
+      nil,
       :application,
       :application_version,
       keyword_init: true
@@ -1887,6 +1954,7 @@ module Aws::RoboMaker
     #            application.</p>
     #   @return [String]
     class DescribeSimulationApplicationResponse < Struct.new(
+      nil,
       :arn,
       :name,
       :version,
@@ -1908,6 +1976,7 @@ module Aws::RoboMaker
     #   <p>The id of the batch to describe.</p>
     #   @return [String]
     class DescribeSimulationJobBatchRequest < Struct.new(
+      nil,
       :batch,
       keyword_init: true
     )
@@ -2006,6 +2075,7 @@ module Aws::RoboMaker
     #            batch.</p>
     #   @return [Hash<String, String>]
     class DescribeSimulationJobBatchResponse < Struct.new(
+      nil,
       :arn,
       :status,
       :last_updated_at,
@@ -2027,6 +2097,7 @@ module Aws::RoboMaker
     #   <p>The Amazon Resource Name (ARN) of the simulation job to be described.</p>
     #   @return [String]
     class DescribeSimulationJobRequest < Struct.new(
+      nil,
       :job,
       keyword_init: true
     )
@@ -2164,6 +2235,7 @@ module Aws::RoboMaker
     #   <p>Compute information for the simulation job.</p>
     #   @return [Types::ComputeResponse]
     class DescribeSimulationJobResponse < Struct.new(
+      nil,
       :arn,
       :name,
       :status,
@@ -2200,6 +2272,7 @@ module Aws::RoboMaker
     #   <p>The Amazon Resource Name (arn) of the world export job to describe.</p>
     #   @return [String]
     class DescribeWorldExportJobRequest < Struct.new(
+      nil,
       :job,
       keyword_init: true
     )
@@ -2290,6 +2363,7 @@ module Aws::RoboMaker
     #            job.</p>
     #   @return [Hash<String, String>]
     class DescribeWorldExportJobResponse < Struct.new(
+      nil,
       :arn,
       :status,
       :created_at,
@@ -2309,6 +2383,7 @@ module Aws::RoboMaker
     #   <p>The Amazon Resource Name (arn) of the world generation job to describe.</p>
     #   @return [String]
     class DescribeWorldGenerationJobRequest < Struct.new(
+      nil,
       :job,
       keyword_init: true
     )
@@ -2407,6 +2482,7 @@ module Aws::RoboMaker
     #            worlds.</p>
     #   @return [Hash<String, String>]
     class DescribeWorldGenerationJobResponse < Struct.new(
+      nil,
       :arn,
       :status,
       :created_at,
@@ -2427,6 +2503,7 @@ module Aws::RoboMaker
     #   <p>The Amazon Resource Name (arn) of the world you want to describe.</p>
     #   @return [String]
     class DescribeWorldRequest < Struct.new(
+      nil,
       :world,
       keyword_init: true
     )
@@ -2453,6 +2530,7 @@ module Aws::RoboMaker
     #   <p>Returns the JSON formatted string that describes the contents of your world.</p>
     #   @return [String]
     class DescribeWorldResponse < Struct.new(
+      nil,
       :arn,
       :generation_job,
       :template,
@@ -2468,6 +2546,7 @@ module Aws::RoboMaker
     #   <p>The Amazon Resource Name (arn) of the world template you want to describe.</p>
     #   @return [String]
     class DescribeWorldTemplateRequest < Struct.new(
+      nil,
       :template,
       keyword_init: true
     )
@@ -2499,6 +2578,7 @@ module Aws::RoboMaker
     #   <p>The version of the world template that you're using.</p>
     #   @return [String]
     class DescribeWorldTemplateResponse < Struct.new(
+      nil,
       :arn,
       :client_request_token,
       :name,
@@ -2517,6 +2597,7 @@ module Aws::RoboMaker
     #   <p>The Docker image URI for either your robot or simulation applications.</p>
     #   @return [String]
     class Environment < Struct.new(
+      nil,
       :uri,
       keyword_init: true
     )
@@ -2537,6 +2618,7 @@ module Aws::RoboMaker
     #   <p>The time, in milliseconds since the epoch, when the simulation job batch failed.</p>
     #   @return [Time]
     class FailedCreateSimulationJobRequest < Struct.new(
+      nil,
       :request,
       :failure_reason,
       :failure_code,
@@ -2554,6 +2636,7 @@ module Aws::RoboMaker
     #   <p>The worlds that failed.</p>
     #   @return [Array<Types::WorldFailure>]
     class FailureSummary < Struct.new(
+      nil,
       :total_failure_count,
       :failures,
       keyword_init: true
@@ -2574,6 +2657,7 @@ module Aws::RoboMaker
     #   <p>A list of values.</p>
     #   @return [Array<String>]
     class Filter < Struct.new(
+      nil,
       :name,
       :values,
       keyword_init: true
@@ -2592,6 +2676,7 @@ module Aws::RoboMaker
     #   <p>Information about worlds that failed.</p>
     #   @return [Types::FailureSummary]
     class FinishedWorldsSummary < Struct.new(
+      nil,
       :finished_count,
       :succeeded_worlds,
       :failure_summary,
@@ -2625,6 +2710,7 @@ module Aws::RoboMaker
     #   <p>The time of the last deployment.</p>
     #   @return [Time]
     class Fleet < Struct.new(
+      nil,
       :name,
       :arn,
       :created_at,
@@ -2643,6 +2729,7 @@ module Aws::RoboMaker
     #   <p>The Amazon Resource Name (arn) of the world generator job.</p>
     #   @return [String]
     class GetWorldTemplateBodyRequest < Struct.new(
+      nil,
       :template,
       :generation_job,
       keyword_init: true
@@ -2654,6 +2741,7 @@ module Aws::RoboMaker
     #   <p>The world template body.</p>
     #   @return [String]
     class GetWorldTemplateBodyResponse < Struct.new(
+      nil,
       :template_body,
       keyword_init: true
     )
@@ -2665,6 +2753,7 @@ module Aws::RoboMaker
     # @!attribute message
     #   @return [String]
     class IdempotentParameterMismatchException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -2675,6 +2764,7 @@ module Aws::RoboMaker
     # @!attribute message
     #   @return [String]
     class InternalServerException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -2686,6 +2776,7 @@ module Aws::RoboMaker
     # @!attribute message
     #   @return [String]
     class InvalidParameterException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -2716,6 +2807,7 @@ module Aws::RoboMaker
     #            <p>If you've specified <code>SimulationRuntime</code> as the value for your <code>SimulationSoftwareSuite</code>, you can use this field to specify a list of commands for your container image.</p>
     #   @return [Array<String>]
     class LaunchConfig < Struct.new(
+      nil,
       :package_name,
       :launch_file,
       :environment_variables,
@@ -2737,6 +2829,7 @@ module Aws::RoboMaker
     # @!attribute message
     #   @return [String]
     class LimitExceededException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -2769,6 +2862,7 @@ module Aws::RoboMaker
     #            value if applicable. </p>
     #   @return [Integer]
     class ListDeploymentJobsRequest < Struct.new(
+      nil,
       :filters,
       :next_token,
       :max_results,
@@ -2790,6 +2884,7 @@ module Aws::RoboMaker
     #            the previous response object's NextToken parameter is set to null. </p>
     #   @return [String]
     class ListDeploymentJobsResponse < Struct.new(
+      nil,
       :deployment_jobs,
       :next_token,
       keyword_init: true
@@ -2825,6 +2920,7 @@ module Aws::RoboMaker
     #            complete value of the filtered item. You can use up to three filters.</p>
     #   @return [Array<Types::Filter>]
     class ListFleetsRequest < Struct.new(
+      nil,
       :next_token,
       :max_results,
       :filters,
@@ -2846,6 +2942,7 @@ module Aws::RoboMaker
     #            previous response object's NextToken parameter is set to null. </p>
     #   @return [String]
     class ListFleetsResponse < Struct.new(
+      nil,
       :fleet_details,
       :next_token,
       keyword_init: true
@@ -2878,6 +2975,7 @@ module Aws::RoboMaker
     #            complete value of the filtered item. You can use up to three filters.</p>
     #   @return [Array<Types::Filter>]
     class ListRobotApplicationsRequest < Struct.new(
+      nil,
       :version_qualifier,
       :next_token,
       :max_results,
@@ -2898,6 +2996,7 @@ module Aws::RoboMaker
     #            the previous response object's NextToken parameter is set to null. </p>
     #   @return [String]
     class ListRobotApplicationsResponse < Struct.new(
+      nil,
       :robot_application_summaries,
       :next_token,
       keyword_init: true
@@ -2931,6 +3030,7 @@ module Aws::RoboMaker
     #            items with the status <code>Registered</code> or the status <code>Available</code>.</p>
     #   @return [Array<Types::Filter>]
     class ListRobotsRequest < Struct.new(
+      nil,
       :next_token,
       :max_results,
       :filters,
@@ -2952,6 +3052,7 @@ module Aws::RoboMaker
     #            previous response object's NextToken parameter is set to null. </p>
     #   @return [String]
     class ListRobotsResponse < Struct.new(
+      nil,
       :robots,
       :next_token,
       keyword_init: true
@@ -2984,6 +3085,7 @@ module Aws::RoboMaker
     #            complete value of the filtered item. You can use up to three filters.</p>
     #   @return [Array<Types::Filter>]
     class ListSimulationApplicationsRequest < Struct.new(
+      nil,
       :version_qualifier,
       :next_token,
       :max_results,
@@ -3004,6 +3106,7 @@ module Aws::RoboMaker
     #            results, the previous response object's NextToken parameter is set to null. </p>
     #   @return [String]
     class ListSimulationApplicationsResponse < Struct.new(
+      nil,
       :simulation_application_summaries,
       :next_token,
       keyword_init: true
@@ -3029,6 +3132,7 @@ module Aws::RoboMaker
     #   <p>Optional filters to limit results.</p>
     #   @return [Array<Types::Filter>]
     class ListSimulationJobBatchesRequest < Struct.new(
+      nil,
       :next_token,
       :max_results,
       :filters,
@@ -3048,6 +3152,7 @@ module Aws::RoboMaker
     #            results, the previous response object's NextToken parameter is set to null. </p>
     #   @return [String]
     class ListSimulationJobBatchesResponse < Struct.new(
+      nil,
       :simulation_job_batch_summaries,
       :next_token,
       keyword_init: true
@@ -3080,6 +3185,7 @@ module Aws::RoboMaker
     #               <code>Preparing</code> or the status <code>Running</code>.</p>
     #   @return [Array<Types::Filter>]
     class ListSimulationJobsRequest < Struct.new(
+      nil,
       :next_token,
       :max_results,
       :filters,
@@ -3099,6 +3205,7 @@ module Aws::RoboMaker
     #            the previous response object's NextToken parameter is set to null. </p>
     #   @return [String]
     class ListSimulationJobsResponse < Struct.new(
+      nil,
       :simulation_job_summaries,
       :next_token,
       keyword_init: true
@@ -3110,6 +3217,7 @@ module Aws::RoboMaker
     #   <p>The AWS RoboMaker Amazon Resource Name (ARN) with tags to be listed.</p>
     #   @return [String]
     class ListTagsForResourceRequest < Struct.new(
+      nil,
       :resource_arn,
       keyword_init: true
     )
@@ -3120,6 +3228,7 @@ module Aws::RoboMaker
     #   <p>The list of all tags added to the specified resource.</p>
     #   @return [Hash<String, String>]
     class ListTagsForResourceResponse < Struct.new(
+      nil,
       :tags,
       keyword_init: true
     )
@@ -3147,6 +3256,7 @@ module Aws::RoboMaker
     #               <code>templateId</code>.</p>
     #   @return [Array<Types::Filter>]
     class ListWorldExportJobsRequest < Struct.new(
+      nil,
       :next_token,
       :max_results,
       :filters,
@@ -3166,6 +3276,7 @@ module Aws::RoboMaker
     #            results, the previous response object's NextToken parameter is set to null. </p>
     #   @return [String]
     class ListWorldExportJobsResponse < Struct.new(
+      nil,
       :world_export_job_summaries,
       :next_token,
       keyword_init: true
@@ -3194,6 +3305,7 @@ module Aws::RoboMaker
     #               <code>templateId</code>.</p>
     #   @return [Array<Types::Filter>]
     class ListWorldGenerationJobsRequest < Struct.new(
+      nil,
       :next_token,
       :max_results,
       :filters,
@@ -3213,6 +3325,7 @@ module Aws::RoboMaker
     #            results, the previous response object's NextToken parameter is set to null. </p>
     #   @return [String]
     class ListWorldGenerationJobsResponse < Struct.new(
+      nil,
       :world_generation_job_summaries,
       :next_token,
       keyword_init: true
@@ -3237,6 +3350,7 @@ module Aws::RoboMaker
     #            value if applicable. </p>
     #   @return [Integer]
     class ListWorldTemplatesRequest < Struct.new(
+      nil,
       :next_token,
       :max_results,
       keyword_init: true
@@ -3255,6 +3369,7 @@ module Aws::RoboMaker
     #            the previous response object's NextToken parameter is set to null. </p>
     #   @return [String]
     class ListWorldTemplatesResponse < Struct.new(
+      nil,
       :template_summaries,
       :next_token,
       keyword_init: true
@@ -3282,6 +3397,7 @@ module Aws::RoboMaker
     #   <p>Optional filters to limit results. You can use <code>status</code>.</p>
     #   @return [Array<Types::Filter>]
     class ListWorldsRequest < Struct.new(
+      nil,
       :next_token,
       :max_results,
       :filters,
@@ -3301,6 +3417,7 @@ module Aws::RoboMaker
     #            previous response object's NextToken parameter is set to null. </p>
     #   @return [String]
     class ListWorldsResponse < Struct.new(
+      nil,
       :world_summaries,
       :next_token,
       keyword_init: true
@@ -3318,6 +3435,7 @@ module Aws::RoboMaker
     #     AWS RoboMaker is ending support for ROS software suite. For additional information, see https://docs.aws.amazon.com/robomaker/latest/dg/software-support-policy.html.
     #   @return [Boolean]
     class LoggingConfig < Struct.new(
+      nil,
       :record_all_ros_topics,
       keyword_init: true
     )
@@ -3335,6 +3453,7 @@ module Aws::RoboMaker
     #   <p>The IPv4 public address of the network interface.</p>
     #   @return [String]
     class NetworkInterface < Struct.new(
+      nil,
       :network_interface_id,
       :private_ip_address,
       :public_ip_address,
@@ -3351,6 +3470,7 @@ module Aws::RoboMaker
     #   <p>The S3 folder in the <code>s3Bucket</code> where output files will be placed.</p>
     #   @return [String]
     class OutputLocation < Struct.new(
+      nil,
       :s3_bucket,
       :s3_prefix,
       keyword_init: true
@@ -3363,6 +3483,7 @@ module Aws::RoboMaker
     #   <p>The port mappings for the configuration.</p>
     #   @return [Array<Types::PortMapping>]
     class PortForwardingConfig < Struct.new(
+      nil,
       :port_mappings,
       keyword_init: true
     )
@@ -3381,6 +3502,7 @@ module Aws::RoboMaker
     #   <p>A Boolean indicating whether to enable this port mapping on public IP.</p>
     #   @return [Boolean]
     class PortMapping < Struct.new(
+      nil,
       :job_port,
       :application_port,
       :enable_on_public_ip,
@@ -3438,6 +3560,7 @@ module Aws::RoboMaker
     #   <p>The Amazon Resource Name (ARN) of the deployment job.</p>
     #   @return [String]
     class ProgressDetail < Struct.new(
+      nil,
       :current_progress,
       :percent_done,
       :estimated_time_remaining_seconds,
@@ -3456,6 +3579,7 @@ module Aws::RoboMaker
     #   <p>The Amazon Resource Name (ARN) of the robot.</p>
     #   @return [String]
     class RegisterRobotRequest < Struct.new(
+      nil,
       :fleet,
       :robot,
       keyword_init: true
@@ -3472,6 +3596,7 @@ module Aws::RoboMaker
     #   <p>Information about the robot registration.</p>
     #   @return [String]
     class RegisterRobotResponse < Struct.new(
+      nil,
       :fleet,
       :robot,
       keyword_init: true
@@ -3487,6 +3612,7 @@ module Aws::RoboMaker
     #   <p>The version of the rendering engine.</p>
     #   @return [String]
     class RenderingEngine < Struct.new(
+      nil,
       :name,
       :version,
       keyword_init: true
@@ -3498,6 +3624,7 @@ module Aws::RoboMaker
     # @!attribute message
     #   @return [String]
     class ResourceAlreadyExistsException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -3508,6 +3635,7 @@ module Aws::RoboMaker
     # @!attribute message
     #   @return [String]
     class ResourceNotFoundException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -3518,6 +3646,7 @@ module Aws::RoboMaker
     #   <p>The Amazon Resource Name (ARN) of the simulation job.</p>
     #   @return [String]
     class RestartSimulationJobRequest < Struct.new(
+      nil,
       :job,
       keyword_init: true
     )
@@ -3525,6 +3654,7 @@ module Aws::RoboMaker
     end
 
     class RestartSimulationJobResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -3559,6 +3689,7 @@ module Aws::RoboMaker
     #   <p>The time of the last deployment.</p>
     #   @return [Time]
     class Robot < Struct.new(
+      nil,
       :arn,
       :name,
       :fleet_arn,
@@ -3610,6 +3741,7 @@ module Aws::RoboMaker
     #     AWS RoboMaker is ending support for ROS software suite. For additional information, see https://docs.aws.amazon.com/robomaker/latest/dg/software-support-policy.html.
     #   @return [Boolean]
     class RobotApplicationConfig < Struct.new(
+      nil,
       :application,
       :application_version,
       :launch_config,
@@ -3640,6 +3772,7 @@ module Aws::RoboMaker
     #   <p>Information about a robot software suite.</p>
     #   @return [Types::RobotSoftwareSuite]
     class RobotApplicationSummary < Struct.new(
+      nil,
       :name,
       :arn,
       :version,
@@ -3673,6 +3806,7 @@ module Aws::RoboMaker
     #   <p>The robot deployment failure code.</p>
     #   @return [String]
     class RobotDeployment < Struct.new(
+      nil,
       :arn,
       :deployment_start_time,
       :deployment_finish_time,
@@ -3693,6 +3827,7 @@ module Aws::RoboMaker
     #   <p>The version of the robot software suite. Not applicable for General software suite.</p>
     #   @return [String]
     class RobotSoftwareSuite < Struct.new(
+      nil,
       :name,
       :version,
       keyword_init: true
@@ -3708,6 +3843,7 @@ module Aws::RoboMaker
     #   <p>The etag for the object.</p>
     #   @return [String]
     class S3KeyOutput < Struct.new(
+      nil,
       :s3_key,
       :etag,
       keyword_init: true
@@ -3726,6 +3862,7 @@ module Aws::RoboMaker
     #   <p>The etag of the object.</p>
     #   @return [String]
     class S3Object < Struct.new(
+      nil,
       :bucket,
       :key,
       :etag,
@@ -3738,6 +3875,7 @@ module Aws::RoboMaker
     # @!attribute message
     #   @return [String]
     class ServiceUnavailableException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -3787,6 +3925,7 @@ module Aws::RoboMaker
     #     AWS RoboMaker is ending support for ROS software suite. For additional information, see https://docs.aws.amazon.com/robomaker/latest/dg/software-support-policy.html.
     #   @return [Boolean]
     class SimulationApplicationConfig < Struct.new(
+      nil,
       :application,
       :application_version,
       :launch_config,
@@ -3821,6 +3960,7 @@ module Aws::RoboMaker
     #   <p>Information about a simulation software suite.</p>
     #   @return [Types::SimulationSoftwareSuite]
     class SimulationApplicationSummary < Struct.new(
+      nil,
       :name,
       :arn,
       :version,
@@ -3914,6 +4054,7 @@ module Aws::RoboMaker
     #   <p>Compute information for the simulation job</p>
     #   @return [Types::ComputeResponse]
     class SimulationJob < Struct.new(
+      nil,
       :arn,
       :name,
       :status,
@@ -4020,6 +4161,7 @@ module Aws::RoboMaker
     #   <p>The number of created simulation job requests.</p>
     #   @return [Integer]
     class SimulationJobBatchSummary < Struct.new(
+      nil,
       :arn,
       :last_updated_at,
       :created_at,
@@ -4100,6 +4242,7 @@ module Aws::RoboMaker
     #            request.</p>
     #   @return [Hash<String, String>]
     class SimulationJobRequest < Struct.new(
+      nil,
       :output_location,
       :logging_config,
       :max_job_duration_in_seconds,
@@ -4149,6 +4292,7 @@ module Aws::RoboMaker
     #   <p>The compute type for the simulation job summary.</p>
     #   @return [String]
     class SimulationJobSummary < Struct.new(
+      nil,
       :arn,
       :last_updated_at,
       :name,
@@ -4170,6 +4314,7 @@ module Aws::RoboMaker
     #   <p>The version of the simulation software suite. Not applicable for <code>SimulationRuntime</code>.</p>
     #   @return [String]
     class SimulationSoftwareSuite < Struct.new(
+      nil,
       :name,
       :version,
       keyword_init: true
@@ -4191,6 +4336,7 @@ module Aws::RoboMaker
     #   <p>The taget processor architecture for the application.</p>
     #   @return [String]
     class Source < Struct.new(
+      nil,
       :s3_bucket,
       :s3_key,
       :etag,
@@ -4211,6 +4357,7 @@ module Aws::RoboMaker
     #   <p>The target processor architecture for the application.</p>
     #   @return [String]
     class SourceConfig < Struct.new(
+      nil,
       :s3_bucket,
       :s3_key,
       :architecture,
@@ -4234,6 +4381,7 @@ module Aws::RoboMaker
     #            batch.</p>
     #   @return [Hash<String, String>]
     class StartSimulationJobBatchRequest < Struct.new(
+      nil,
       :client_request_token,
       :batch_policy,
       :create_simulation_job_requests,
@@ -4331,6 +4479,7 @@ module Aws::RoboMaker
     #            batch.</p>
     #   @return [Hash<String, String>]
     class StartSimulationJobBatchResponse < Struct.new(
+      nil,
       :arn,
       :status,
       :created_at,
@@ -4357,6 +4506,7 @@ module Aws::RoboMaker
     #   <p>The target fleet for the synchronization.</p>
     #   @return [String]
     class SyncDeploymentJobRequest < Struct.new(
+      nil,
       :client_request_token,
       :fleet,
       keyword_init: true
@@ -4452,6 +4602,7 @@ module Aws::RoboMaker
     #   <p>The time, in milliseconds since the epoch, when the fleet was created.</p>
     #   @return [Time]
     class SyncDeploymentJobResponse < Struct.new(
+      nil,
       :arn,
       :fleet,
       :status,
@@ -4472,6 +4623,7 @@ module Aws::RoboMaker
     #   <p>A map that contains tag keys and tag values that are attached to the resource.</p>
     #   @return [Hash<String, String>]
     class TagResourceRequest < Struct.new(
+      nil,
       :resource_arn,
       :tags,
       keyword_init: true
@@ -4480,6 +4632,7 @@ module Aws::RoboMaker
     end
 
     class TagResourceResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -4493,6 +4646,7 @@ module Aws::RoboMaker
     #   <p>The list of S3 keys identifying the data source files.</p>
     #   @return [String]
     class TemplateLocation < Struct.new(
+      nil,
       :s3_bucket,
       :s3_key,
       keyword_init: true
@@ -4517,6 +4671,7 @@ module Aws::RoboMaker
     #   <p>The version of the template that you're using.</p>
     #   @return [String]
     class TemplateSummary < Struct.new(
+      nil,
       :arn,
       :created_at,
       :last_updated_at,
@@ -4531,6 +4686,7 @@ module Aws::RoboMaker
     # @!attribute message
     #   @return [String]
     class ThrottlingException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -4560,6 +4716,7 @@ module Aws::RoboMaker
     #            default is <code>RESTART</code>. </p>
     #   @return [String]
     class Tool < Struct.new(
+      nil,
       :stream_ui,
       :name,
       :command,
@@ -4579,6 +4736,7 @@ module Aws::RoboMaker
     #            resource.</p>
     #   @return [Array<String>]
     class UntagResourceRequest < Struct.new(
+      nil,
       :resource_arn,
       :tag_keys,
       keyword_init: true
@@ -4587,6 +4745,7 @@ module Aws::RoboMaker
     end
 
     class UntagResourceResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -4608,6 +4767,7 @@ module Aws::RoboMaker
     #   <p>The object that contains the Docker image URI for your robot application.</p>
     #   @return [Types::Environment]
     class UpdateRobotApplicationRequest < Struct.new(
+      nil,
       :application,
       :sources,
       :robot_software_suite,
@@ -4644,6 +4804,7 @@ module Aws::RoboMaker
     #   <p>The object that contains the Docker image URI for your robot application.</p>
     #   @return [Types::Environment]
     class UpdateRobotApplicationResponse < Struct.new(
+      nil,
       :arn,
       :name,
       :version,
@@ -4679,6 +4840,7 @@ module Aws::RoboMaker
     #   <p>The object that contains the Docker image URI for your simulation application.</p>
     #   @return [Types::Environment]
     class UpdateSimulationApplicationRequest < Struct.new(
+      nil,
       :application,
       :sources,
       :simulation_software_suite,
@@ -4724,6 +4886,7 @@ module Aws::RoboMaker
     #            application.</p>
     #   @return [Types::Environment]
     class UpdateSimulationApplicationResponse < Struct.new(
+      nil,
       :arn,
       :name,
       :version,
@@ -4752,6 +4915,7 @@ module Aws::RoboMaker
     #   <p>The location of the world template.</p>
     #   @return [Types::TemplateLocation]
     class UpdateWorldTemplateRequest < Struct.new(
+      nil,
       :template,
       :name,
       :template_body,
@@ -4775,6 +4939,7 @@ module Aws::RoboMaker
     #            updated.</p>
     #   @return [Time]
     class UpdateWorldTemplateResponse < Struct.new(
+      nil,
       :arn,
       :name,
       :created_at,
@@ -4819,6 +4984,7 @@ module Aws::RoboMaker
     #            </dl>
     #   @return [String]
     class UploadConfiguration < Struct.new(
+      nil,
       :name,
       :path,
       :upload_behavior,
@@ -4840,6 +5006,7 @@ module Aws::RoboMaker
     #   <p>A boolean indicating whether to assign a public IP address.</p>
     #   @return [Boolean]
     class VPCConfig < Struct.new(
+      nil,
       :subnets,
       :security_groups,
       :assign_public_ip,
@@ -4867,6 +5034,7 @@ module Aws::RoboMaker
     #   <p>A boolean indicating if a public IP was assigned.</p>
     #   @return [Boolean]
     class VPCConfigResponse < Struct.new(
+      nil,
       :subnets,
       :security_groups,
       :vpc_id,
@@ -4886,6 +5054,7 @@ module Aws::RoboMaker
     #   <p>The world generated by Simulation WorldForge.</p>
     #   @return [String]
     class WorldConfig < Struct.new(
+      nil,
       :world,
       keyword_init: true
     )
@@ -4906,6 +5075,7 @@ module Aws::RoboMaker
     #   <p>The number of unique interiors per floorplan.</p>
     #   @return [Integer]
     class WorldCount < Struct.new(
+      nil,
       :floorplan_count,
       :interior_count_per_floorplan,
       keyword_init: true
@@ -4957,6 +5127,7 @@ module Aws::RoboMaker
     #   <p>The output location.</p>
     #   @return [Types::OutputLocation]
     class WorldExportJobSummary < Struct.new(
+      nil,
       :arn,
       :status,
       :created_at,
@@ -5002,6 +5173,7 @@ module Aws::RoboMaker
     #   <p>The number of failed worlds.</p>
     #   @return [Integer]
     class WorldFailure < Struct.new(
+      nil,
       :failure_code,
       :sample_failure_reason,
       :failure_count,
@@ -5070,6 +5242,7 @@ module Aws::RoboMaker
     #   <p>The number of worlds that failed.</p>
     #   @return [Integer]
     class WorldGenerationJobSummary < Struct.new(
+      nil,
       :arn,
       :template,
       :created_at,
@@ -5102,6 +5275,7 @@ module Aws::RoboMaker
     #   <p>The Amazon Resource Name (arn) of the world template.</p>
     #   @return [String]
     class WorldSummary < Struct.new(
+      nil,
       :arn,
       :created_at,
       :generation_job,

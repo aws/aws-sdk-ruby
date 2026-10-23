@@ -10,6 +10,7 @@ module Aws::CodeGuruReviewer
     # @!attribute message
     #   @return [String]
     class AccessDeniedException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -54,6 +55,7 @@ module Aws::CodeGuruReviewer
     #            </ul>
     #   @return [Types::KMSKeyDetails]
     class AssociateRepositoryRequest < Struct.new(
+      nil,
       :repository,
       :client_request_token,
       :tags,
@@ -83,6 +85,7 @@ module Aws::CodeGuruReviewer
     #            </ul>
     #   @return [Hash<String, String>]
     class AssociateRepositoryResponse < Struct.new(
+      nil,
       :repository_association,
       :tags,
       keyword_init: true
@@ -100,6 +103,7 @@ module Aws::CodeGuruReviewer
     #   <p>The destination branch for a diff in an associated repository.</p>
     #   @return [String]
     class BranchDiffSourceCodeType < Struct.new(
+      nil,
       :source_branch_name,
       :destination_branch_name,
       keyword_init: true
@@ -130,6 +134,7 @@ module Aws::CodeGuruReviewer
     #               Guide</i>.</p>
     #   @return [String]
     class CodeArtifacts < Struct.new(
+      nil,
       :source_code_artifacts_object_key,
       :build_artifacts_object_key,
       keyword_init: true
@@ -145,6 +150,7 @@ module Aws::CodeGuruReviewer
     #            Reference</i>.</p>
     #   @return [String]
     class CodeCommitRepository < Struct.new(
+      nil,
       :name,
       keyword_init: true
     )
@@ -228,6 +234,7 @@ module Aws::CodeGuruReviewer
     #            with errors at the root directory of your repository.</p>
     #   @return [String]
     class CodeReview < Struct.new(
+      nil,
       :name,
       :code_review_arn,
       :repository_name,
@@ -309,6 +316,7 @@ module Aws::CodeGuruReviewer
     #   <p>Specifies the source code that is analyzed in a code review.</p>
     #   @return [Types::SourceCodeType]
     class CodeReviewSummary < Struct.new(
+      nil,
       :name,
       :code_review_arn,
       :repository_name,
@@ -349,6 +357,7 @@ module Aws::CodeGuruReviewer
     #            You can specify either <code>Security</code>, <code>CodeQuality</code>, or both.</p>
     #   @return [Array<String>]
     class CodeReviewType < Struct.new(
+      nil,
       :repository_analysis,
       :analysis_types,
       keyword_init: true
@@ -372,6 +381,7 @@ module Aws::CodeGuruReviewer
     #   <p>The SHA of the merge base of a commit.</p>
     #   @return [String]
     class CommitDiffSourceCodeType < Struct.new(
+      nil,
       :source_commit,
       :destination_commit,
       :merge_base_commit,
@@ -386,6 +396,7 @@ module Aws::CodeGuruReviewer
     # @!attribute message
     #   @return [String]
     class ConflictException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -410,6 +421,7 @@ module Aws::CodeGuruReviewer
     #            if there are failures and retries.</p>
     #   @return [String]
     class CreateCodeReviewRequest < Struct.new(
+      nil,
       :name,
       :repository_association_arn,
       :type,
@@ -424,6 +436,7 @@ module Aws::CodeGuruReviewer
     #            contains the reviewed code.</p>
     #   @return [Types::CodeReview]
     class CreateCodeReviewResponse < Struct.new(
+      nil,
       :code_review,
       keyword_init: true
     )
@@ -435,6 +448,7 @@ module Aws::CodeGuruReviewer
     #         </p>
     #   @return [String]
     class DescribeCodeReviewRequest < Struct.new(
+      nil,
       :code_review_arn,
       keyword_init: true
     )
@@ -445,6 +459,7 @@ module Aws::CodeGuruReviewer
     #   <p>Information about the code review.</p>
     #   @return [Types::CodeReview]
     class DescribeCodeReviewResponse < Struct.new(
+      nil,
       :code_review,
       keyword_init: true
     )
@@ -468,6 +483,7 @@ module Aws::CodeGuruReviewer
     #               Specifying a Principal</a> in the <i>Amazon Web Services Identity and Access Management User Guide</i>.</p>
     #   @return [String]
     class DescribeRecommendationFeedbackRequest < Struct.new(
+      nil,
       :code_review_arn,
       :recommendation_id,
       :user_id,
@@ -480,6 +496,7 @@ module Aws::CodeGuruReviewer
     #   <p>The recommendation feedback given by the user.</p>
     #   @return [Types::RecommendationFeedback]
     class DescribeRecommendationFeedbackResponse < Struct.new(
+      nil,
       :recommendation_feedback,
       keyword_init: true
     )
@@ -490,6 +507,7 @@ module Aws::CodeGuruReviewer
     #   <p>The Amazon Resource Name (ARN) of the <a href="https://docs.aws.amazon.com/codeguru/latest/reviewer-api/API_RepositoryAssociation.html">RepositoryAssociation</a> object. You can retrieve this ARN by calling <a href="https://docs.aws.amazon.com/codeguru/latest/reviewer-api/API_ListRepositoryAssociations.html">ListRepositoryAssociations</a>.</p>
     #   @return [String]
     class DescribeRepositoryAssociationRequest < Struct.new(
+      nil,
       :association_arn,
       keyword_init: true
     )
@@ -516,6 +534,7 @@ module Aws::CodeGuruReviewer
     #            </ul>
     #   @return [Hash<String, String>]
     class DescribeRepositoryAssociationResponse < Struct.new(
+      nil,
       :repository_association,
       :tags,
       keyword_init: true
@@ -527,6 +546,7 @@ module Aws::CodeGuruReviewer
     #   <p>The Amazon Resource Name (ARN) of the <a href="https://docs.aws.amazon.com/codeguru/latest/reviewer-api/API_RepositoryAssociation.html">RepositoryAssociation</a> object. You can retrieve this ARN by calling <a href="https://docs.aws.amazon.com/codeguru/latest/reviewer-api/API_ListRepositoryAssociations.html">ListRepositoryAssociations</a>.</p>
     #   @return [String]
     class DisassociateRepositoryRequest < Struct.new(
+      nil,
       :association_arn,
       keyword_init: true
     )
@@ -553,6 +573,7 @@ module Aws::CodeGuruReviewer
     #            </ul>
     #   @return [Hash<String, String>]
     class DisassociateRepositoryResponse < Struct.new(
+      nil,
       :repository_association,
       :tags,
       keyword_init: true
@@ -571,6 +592,7 @@ module Aws::CodeGuruReviewer
     #   <p>The state of an event. The state might be open, closed, or another state.</p>
     #   @return [String]
     class EventInfo < Struct.new(
+      nil,
       :name,
       :state,
       keyword_init: true
@@ -582,6 +604,7 @@ module Aws::CodeGuruReviewer
     # @!attribute message
     #   @return [String]
     class InternalServerException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -609,6 +632,7 @@ module Aws::CodeGuruReviewer
     #               (<code>CUSTOMER_MANAGED_CMK</code>).</p>
     #   @return [String]
     class KMSKeyDetails < Struct.new(
+      nil,
       :kms_key_id,
       :encryption_option,
       keyword_init: true
@@ -661,6 +685,7 @@ module Aws::CodeGuruReviewer
     #            unchanged.</p>
     #   @return [String]
     class ListCodeReviewsRequest < Struct.new(
+      nil,
       :provider_types,
       :states,
       :repository_names,
@@ -679,6 +704,7 @@ module Aws::CodeGuruReviewer
     #   <p>Pagination token.</p>
     #   @return [String]
     class ListCodeReviewsResponse < Struct.new(
+      nil,
       :code_review_summaries,
       :next_token,
       keyword_init: true
@@ -711,6 +737,7 @@ module Aws::CodeGuruReviewer
     #   <p>Used to query the recommendation feedback for a given recommendation.</p>
     #   @return [Array<String>]
     class ListRecommendationFeedbackRequest < Struct.new(
+      nil,
       :next_token,
       :max_results,
       :code_review_arn,
@@ -731,6 +758,7 @@ module Aws::CodeGuruReviewer
     #            unchanged.</p>
     #   @return [String]
     class ListRecommendationFeedbackResponse < Struct.new(
+      nil,
       :recommendation_feedback_summaries,
       :next_token,
       keyword_init: true
@@ -749,6 +777,7 @@ module Aws::CodeGuruReviewer
     #         </p>
     #   @return [String]
     class ListRecommendationsRequest < Struct.new(
+      nil,
       :next_token,
       :max_results,
       :code_review_arn,
@@ -764,6 +793,7 @@ module Aws::CodeGuruReviewer
     #   <p>Pagination token.</p>
     #   @return [String]
     class ListRecommendationsResponse < Struct.new(
+      nil,
       :recommendation_summaries,
       :next_token,
       keyword_init: true
@@ -842,6 +872,7 @@ module Aws::CodeGuruReviewer
     #            </note>
     #   @return [String]
     class ListRepositoryAssociationsRequest < Struct.new(
+      nil,
       :provider_types,
       :states,
       :names,
@@ -863,6 +894,7 @@ module Aws::CodeGuruReviewer
     #            This value is <code>null</code> when there are no more results to return. </p>
     #   @return [String]
     class ListRepositoryAssociationsResponse < Struct.new(
+      nil,
       :repository_association_summaries,
       :next_token,
       keyword_init: true
@@ -874,6 +906,7 @@ module Aws::CodeGuruReviewer
     #   <p>The Amazon Resource Name (ARN) of the <a href="https://docs.aws.amazon.com/codeguru/latest/reviewer-api/API_RepositoryAssociation.html">RepositoryAssociation</a> object. You can retrieve this ARN by calling <a href="https://docs.aws.amazon.com/codeguru/latest/reviewer-api/API_ListRepositoryAssociations.html">ListRepositoryAssociations</a>.</p>
     #   @return [String]
     class ListTagsForResourceRequest < Struct.new(
+      nil,
       :resource_arn,
       keyword_init: true
     )
@@ -897,6 +930,7 @@ module Aws::CodeGuruReviewer
     #            </ul>
     #   @return [Hash<String, String>]
     class ListTagsForResourceResponse < Struct.new(
+      nil,
       :tags,
       keyword_init: true
     )
@@ -922,6 +956,7 @@ module Aws::CodeGuruReviewer
     #   <p>Total number of recommendations found in the code review.</p>
     #   @return [Integer]
     class Metrics < Struct.new(
+      nil,
       :metered_lines_of_code_count,
       :suppressed_lines_of_code_count,
       :findings_count,
@@ -963,6 +998,7 @@ module Aws::CodeGuruReviewer
     #   <p>Total number of recommendations found in the code review.</p>
     #   @return [Integer]
     class MetricsSummary < Struct.new(
+      nil,
       :metered_lines_of_code_count,
       :suppressed_lines_of_code_count,
       :findings_count,
@@ -975,6 +1011,7 @@ module Aws::CodeGuruReviewer
     # @!attribute message
     #   @return [String]
     class NotFoundException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -994,6 +1031,7 @@ module Aws::CodeGuruReviewer
     #            empty list it clears all your feedback.</p>
     #   @return [Array<String>]
     class PutRecommendationFeedbackRequest < Struct.new(
+      nil,
       :code_review_arn,
       :recommendation_id,
       :reactions,
@@ -1003,6 +1041,7 @@ module Aws::CodeGuruReviewer
     end
 
     class PutRecommendationFeedbackResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1035,6 +1074,7 @@ module Aws::CodeGuruReviewer
     #   <p>The time at which the feedback was last updated.</p>
     #   @return [Time]
     class RecommendationFeedback < Struct.new(
+      nil,
       :code_review_arn,
       :recommendation_id,
       :reactions,
@@ -1062,6 +1102,7 @@ module Aws::CodeGuruReviewer
     #               Specifying a Principal</a> in the <i>Amazon Web Services Identity and Access Management User Guide</i>.</p>
     #   @return [String]
     class RecommendationFeedbackSummary < Struct.new(
+      nil,
       :recommendation_id,
       :reactions,
       :user_id,
@@ -1100,6 +1141,7 @@ module Aws::CodeGuruReviewer
     #   <p>The severity of the issue in the code that generated this recommendation.</p>
     #   @return [String]
     class RecommendationSummary < Struct.new(
+      nil,
       :file_path,
       :recommendation_id,
       :start_line,
@@ -1130,6 +1172,7 @@ module Aws::CodeGuruReviewer
     #   <p>Information about a repository in an S3 bucket.</p>
     #   @return [Types::S3Repository]
     class Repository < Struct.new(
+      nil,
       :code_commit,
       :bitbucket,
       :git_hub_enterprise_server,
@@ -1149,6 +1192,7 @@ module Aws::CodeGuruReviewer
     #   <p>Specifies the source code that is analyzed in a code review.</p>
     #   @return [Types::SourceCodeType]
     class RepositoryAnalysis < Struct.new(
+      nil,
       :repository_head,
       :source_code_type,
       keyword_init: true
@@ -1247,6 +1291,7 @@ module Aws::CodeGuruReviewer
     #            contains .jar or .class files.</p>
     #   @return [Types::S3RepositoryDetails]
     class RepositoryAssociation < Struct.new(
+      nil,
       :association_id,
       :association_arn,
       :connection_arn,
@@ -1329,6 +1374,7 @@ module Aws::CodeGuruReviewer
     #            </ul>
     #   @return [String]
     class RepositoryAssociationSummary < Struct.new(
+      nil,
       :association_arn,
       :connection_arn,
       :last_updated_time_stamp,
@@ -1349,6 +1395,7 @@ module Aws::CodeGuruReviewer
     #               <code>RepositoryHeadSourceCodeType</code> specifies the tip of this branch.</p>
     #   @return [String]
     class RepositoryHeadSourceCodeType < Struct.new(
+      nil,
       :branch_name,
       keyword_init: true
     )
@@ -1376,6 +1423,7 @@ module Aws::CodeGuruReviewer
     #            is GitHub. For more information, see the definition for <code>ProviderType</code> in <a href="https://docs.aws.amazon.com/codeguru/latest/reviewer-api/API_RepositoryAssociation.html">RepositoryAssociation</a>.</p>
     #   @return [String]
     class RequestMetadata < Struct.new(
+      nil,
       :request_id,
       :requester,
       :event_info,
@@ -1389,6 +1437,7 @@ module Aws::CodeGuruReviewer
     # @!attribute message
     #   @return [String]
     class ResourceNotFoundException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -1412,6 +1461,7 @@ module Aws::CodeGuruReviewer
     #   <p>Tags that are associated with the rule.</p>
     #   @return [Array<String>]
     class RuleMetadata < Struct.new(
+      nil,
       :rule_id,
       :rule_name,
       :short_description,
@@ -1433,6 +1483,7 @@ module Aws::CodeGuruReviewer
     #   <p>An <code>S3RepositoryDetails</code> object that specifies the name of an S3 bucket and a <code>CodeArtifacts</code> object. The <code>CodeArtifacts</code> object includes the S3 object keys for a source code .zip file and for a build artifacts .zip file.</p>
     #   @return [Types::S3RepositoryDetails]
     class S3BucketRepository < Struct.new(
+      nil,
       :name,
       :details,
       keyword_init: true
@@ -1448,6 +1499,7 @@ module Aws::CodeGuruReviewer
     #   <p>The name of the S3 bucket used for associating a new S3 repository. It must begin with <code>codeguru-reviewer-</code>. </p>
     #   @return [String]
     class S3Repository < Struct.new(
+      nil,
       :name,
       :bucket_name,
       keyword_init: true
@@ -1467,6 +1519,7 @@ module Aws::CodeGuruReviewer
     #            .jar or .class files.</p>
     #   @return [Types::CodeArtifacts]
     class S3RepositoryDetails < Struct.new(
+      nil,
       :bucket_name,
       :code_artifacts,
       keyword_init: true
@@ -1498,6 +1551,7 @@ module Aws::CodeGuruReviewer
     #            pull request.</p>
     #   @return [Types::RequestMetadata]
     class SourceCodeType < Struct.new(
+      nil,
       :commit_diff,
       :repository_head,
       :branch_diff,
@@ -1528,6 +1582,7 @@ module Aws::CodeGuruReviewer
     #            </ul>
     #   @return [Hash<String, String>]
     class TagResourceRequest < Struct.new(
+      nil,
       :resource_arn,
       :tags,
       keyword_init: true
@@ -1536,6 +1591,7 @@ module Aws::CodeGuruReviewer
     end
 
     class TagResourceResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1554,6 +1610,7 @@ module Aws::CodeGuruReviewer
     #            can be the username or Amazon Web Services account ID </p>
     #   @return [String]
     class ThirdPartySourceRepository < Struct.new(
+      nil,
       :name,
       :connection_arn,
       :owner,
@@ -1566,6 +1623,7 @@ module Aws::CodeGuruReviewer
     # @!attribute message
     #   @return [String]
     class ThrottlingException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -1579,6 +1637,7 @@ module Aws::CodeGuruReviewer
     #   <p>A list of the keys for each tag you want to remove from an associated repository.</p>
     #   @return [Array<String>]
     class UntagResourceRequest < Struct.new(
+      nil,
       :resource_arn,
       :tag_keys,
       keyword_init: true
@@ -1587,6 +1646,7 @@ module Aws::CodeGuruReviewer
     end
 
     class UntagResourceResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1596,6 +1656,7 @@ module Aws::CodeGuruReviewer
     # @!attribute message
     #   @return [String]
     class ValidationException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )

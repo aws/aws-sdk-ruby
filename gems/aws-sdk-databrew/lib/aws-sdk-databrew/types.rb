@@ -10,6 +10,7 @@ module Aws::DataBrew
     # @!attribute message
     #   @return [String]
     class AccessDeniedException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -23,6 +24,7 @@ module Aws::DataBrew
     #   <p>One or more column statistics to allow for columns that contain detected entities.</p>
     #   @return [Array<String>]
     class AllowedStatistics < Struct.new(
+      nil,
       :statistics,
       keyword_init: true
     )
@@ -38,6 +40,7 @@ module Aws::DataBrew
     #                   <code>LATEST_PUBLISHED</code> is not supported.</p>
     #   @return [Array<String>]
     class BatchDeleteRecipeVersionRequest < Struct.new(
+      nil,
       :name,
       :recipe_versions,
       keyword_init: true
@@ -52,6 +55,7 @@ module Aws::DataBrew
     #   <p>Errors, if any, that occurred while attempting to delete the recipe versions.</p>
     #   @return [Array<Types::RecipeVersionErrorDetail>]
     class BatchDeleteRecipeVersionResponse < Struct.new(
+      nil,
       :name,
       :errors,
       keyword_init: true
@@ -68,6 +72,7 @@ module Aws::DataBrew
     #   <p>The name of a column from a dataset.</p>
     #   @return [String]
     class ColumnSelector < Struct.new(
+      nil,
       :regex,
       :name,
       keyword_init: true
@@ -89,6 +94,7 @@ module Aws::DataBrew
     #           </p>
     #   @return [Types::StatisticsConfiguration]
     class ColumnStatisticsConfiguration < Struct.new(
+      nil,
       :selectors,
       :statistics,
       keyword_init: true
@@ -114,6 +120,7 @@ module Aws::DataBrew
     #   <p>A column to apply this condition to.</p>
     #   @return [String]
     class ConditionExpression < Struct.new(
+      nil,
       :condition,
       :value,
       :target_column,
@@ -126,6 +133,7 @@ module Aws::DataBrew
     # @!attribute message
     #   @return [String]
     class ConflictException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -154,6 +162,7 @@ module Aws::DataBrew
     #   <p>Metadata tags to apply to this dataset.</p>
     #   @return [Hash<String, String>]
     class CreateDatasetRequest < Struct.new(
+      nil,
       :name,
       :format,
       :format_options,
@@ -169,6 +178,7 @@ module Aws::DataBrew
     #   <p>The name of the dataset that you created.</p>
     #   @return [String]
     class CreateDatasetResponse < Struct.new(
+      nil,
       :name,
       keyword_init: true
     )
@@ -240,6 +250,7 @@ module Aws::DataBrew
     #               size parameter.</p>
     #   @return [Types::JobSample]
     class CreateProfileJobRequest < Struct.new(
+      nil,
       :dataset_name,
       :encryption_key_arn,
       :encryption_mode,
@@ -263,6 +274,7 @@ module Aws::DataBrew
     #   <p>The name of the job that was created.</p>
     #   @return [String]
     class CreateProfileJobResponse < Struct.new(
+      nil,
       :name,
       keyword_init: true
     )
@@ -291,6 +303,7 @@ module Aws::DataBrew
     #   <p>Metadata tags to apply to this project.</p>
     #   @return [Hash<String, String>]
     class CreateProjectRequest < Struct.new(
+      nil,
       :dataset_name,
       :name,
       :recipe_name,
@@ -306,6 +319,7 @@ module Aws::DataBrew
     #   <p>The name of the project that you created.</p>
     #   @return [String]
     class CreateProjectResponse < Struct.new(
+      nil,
       :name,
       keyword_init: true
     )
@@ -376,6 +390,7 @@ module Aws::DataBrew
     #               period ends with a status of <code>TIMEOUT</code>.</p>
     #   @return [Integer]
     class CreateRecipeJobRequest < Struct.new(
+      nil,
       :dataset_name,
       :encryption_key_arn,
       :encryption_mode,
@@ -400,6 +415,7 @@ module Aws::DataBrew
     #   <p>The name of the job that you created.</p>
     #   @return [String]
     class CreateRecipeJobResponse < Struct.new(
+      nil,
       :name,
       keyword_init: true
     )
@@ -421,6 +437,7 @@ module Aws::DataBrew
     #   <p>Metadata tags to apply to this recipe.</p>
     #   @return [Hash<String, String>]
     class CreateRecipeRequest < Struct.new(
+      nil,
       :description,
       :name,
       :steps,
@@ -434,6 +451,7 @@ module Aws::DataBrew
     #   <p>The name of the recipe that you created.</p>
     #   @return [String]
     class CreateRecipeResponse < Struct.new(
+      nil,
       :name,
       keyword_init: true
     )
@@ -459,6 +477,7 @@ module Aws::DataBrew
     #   <p>Metadata tags to apply to the ruleset.</p>
     #   @return [Hash<String, String>]
     class CreateRulesetRequest < Struct.new(
+      nil,
       :name,
       :description,
       :target_arn,
@@ -473,6 +492,7 @@ module Aws::DataBrew
     #   <p>The unique name of the created ruleset.</p>
     #   @return [String]
     class CreateRulesetResponse < Struct.new(
+      nil,
       :name,
       keyword_init: true
     )
@@ -496,6 +516,7 @@ module Aws::DataBrew
     #               hyphen (-), period (.), and space.</p>
     #   @return [String]
     class CreateScheduleRequest < Struct.new(
+      nil,
       :job_names,
       :cron_expression,
       :tags,
@@ -509,6 +530,7 @@ module Aws::DataBrew
     #   <p>The name of the schedule that was created.</p>
     #   @return [String]
     class CreateScheduleResponse < Struct.new(
+      nil,
       :name,
       keyword_init: true
     )
@@ -525,6 +547,7 @@ module Aws::DataBrew
     #               header. If this value is false, column names are auto-generated.</p>
     #   @return [Boolean]
     class CsvOptions < Struct.new(
+      nil,
       :delimiter,
       :header_row,
       keyword_init: true
@@ -538,6 +561,7 @@ module Aws::DataBrew
     #   <p>A single character that specifies the delimiter used to create CSV job output.</p>
     #   @return [String]
     class CsvOutputOptions < Struct.new(
+      nil,
       :delimiter,
       keyword_init: true
     )
@@ -561,6 +585,7 @@ module Aws::DataBrew
     #   <p>Represents an Amazon location where DataBrew can store intermediate results.</p>
     #   @return [Types::S3Location]
     class DataCatalogInputDefinition < Struct.new(
+      nil,
       :catalog_id,
       :database_name,
       :table_name,
@@ -595,6 +620,7 @@ module Aws::DataBrew
     #               is overwritten with new output. Not supported with DatabaseOptions.</p>
     #   @return [Boolean]
     class DataCatalogOutput < Struct.new(
+      nil,
       :catalog_id,
       :database_name,
       :table_name,
@@ -628,6 +654,7 @@ module Aws::DataBrew
     #               the input for DataBrew projects and jobs.</p>
     #   @return [String]
     class DatabaseInputDefinition < Struct.new(
+      nil,
       :glue_connection_name,
       :database_table_name,
       :temp_directory,
@@ -651,6 +678,7 @@ module Aws::DataBrew
     #   <p>The output mode to write into the database. Currently supported option: NEW_TABLE.</p>
     #   @return [String]
     class DatabaseOutput < Struct.new(
+      nil,
       :glue_connection_name,
       :database_options,
       :database_output_mode,
@@ -669,6 +697,7 @@ module Aws::DataBrew
     #   <p>A prefix for the name of a table DataBrew will create in the database.</p>
     #   @return [String]
     class DatabaseTableOutputOptions < Struct.new(
+      nil,
       :temp_directory,
       :table_name,
       keyword_init: true
@@ -719,6 +748,7 @@ module Aws::DataBrew
     #   <p>The unique Amazon Resource Name (ARN) for the dataset.</p>
     #   @return [String]
     class Dataset < Struct.new(
+      nil,
       :account_id,
       :created_by,
       :create_date,
@@ -756,6 +786,7 @@ module Aws::DataBrew
     #   <p>The optional filter expression structure to apply additional matching criteria to the parameter.</p>
     #   @return [Types::FilterExpression]
     class DatasetParameter < Struct.new(
+      nil,
       :name,
       :type,
       :datetime_options,
@@ -787,6 +818,7 @@ module Aws::DataBrew
     #   <p>Optional value for a non-US locale code, needed for correct interpretation of some date formats.</p>
     #   @return [String]
     class DatetimeOptions < Struct.new(
+      nil,
       :format,
       :timezone_offset,
       :locale_code,
@@ -799,6 +831,7 @@ module Aws::DataBrew
     #   <p>The name of the dataset to be deleted.</p>
     #   @return [String]
     class DeleteDatasetRequest < Struct.new(
+      nil,
       :name,
       keyword_init: true
     )
@@ -809,6 +842,7 @@ module Aws::DataBrew
     #   <p>The name of the dataset that you deleted.</p>
     #   @return [String]
     class DeleteDatasetResponse < Struct.new(
+      nil,
       :name,
       keyword_init: true
     )
@@ -819,6 +853,7 @@ module Aws::DataBrew
     #   <p>The name of the job to be deleted.</p>
     #   @return [String]
     class DeleteJobRequest < Struct.new(
+      nil,
       :name,
       keyword_init: true
     )
@@ -829,6 +864,7 @@ module Aws::DataBrew
     #   <p>The name of the job that you deleted.</p>
     #   @return [String]
     class DeleteJobResponse < Struct.new(
+      nil,
       :name,
       keyword_init: true
     )
@@ -839,6 +875,7 @@ module Aws::DataBrew
     #   <p>The name of the project to be deleted.</p>
     #   @return [String]
     class DeleteProjectRequest < Struct.new(
+      nil,
       :name,
       keyword_init: true
     )
@@ -849,6 +886,7 @@ module Aws::DataBrew
     #   <p>The name of the project that you deleted.</p>
     #   @return [String]
     class DeleteProjectResponse < Struct.new(
+      nil,
       :name,
       keyword_init: true
     )
@@ -864,6 +902,7 @@ module Aws::DataBrew
     #               not supported.</p>
     #   @return [String]
     class DeleteRecipeVersionRequest < Struct.new(
+      nil,
       :name,
       :recipe_version,
       keyword_init: true
@@ -878,6 +917,7 @@ module Aws::DataBrew
     #   <p>The version of the recipe that was deleted.</p>
     #   @return [String]
     class DeleteRecipeVersionResponse < Struct.new(
+      nil,
       :name,
       :recipe_version,
       keyword_init: true
@@ -889,6 +929,7 @@ module Aws::DataBrew
     #   <p>The name of the ruleset to be deleted.</p>
     #   @return [String]
     class DeleteRulesetRequest < Struct.new(
+      nil,
       :name,
       keyword_init: true
     )
@@ -899,6 +940,7 @@ module Aws::DataBrew
     #   <p>The name of the deleted ruleset.</p>
     #   @return [String]
     class DeleteRulesetResponse < Struct.new(
+      nil,
       :name,
       keyword_init: true
     )
@@ -909,6 +951,7 @@ module Aws::DataBrew
     #   <p>The name of the schedule to be deleted.</p>
     #   @return [String]
     class DeleteScheduleRequest < Struct.new(
+      nil,
       :name,
       keyword_init: true
     )
@@ -919,6 +962,7 @@ module Aws::DataBrew
     #   <p>The name of the schedule that was deleted.</p>
     #   @return [String]
     class DeleteScheduleResponse < Struct.new(
+      nil,
       :name,
       keyword_init: true
     )
@@ -929,6 +973,7 @@ module Aws::DataBrew
     #   <p>The name of the dataset to be described.</p>
     #   @return [String]
     class DescribeDatasetRequest < Struct.new(
+      nil,
       :name,
       keyword_init: true
     )
@@ -977,6 +1022,7 @@ module Aws::DataBrew
     #   <p>The Amazon Resource Name (ARN) of the dataset.</p>
     #   @return [String]
     class DescribeDatasetResponse < Struct.new(
+      nil,
       :created_by,
       :create_date,
       :name,
@@ -998,6 +1044,7 @@ module Aws::DataBrew
     #   <p>The name of the job to be described.</p>
     #   @return [String]
     class DescribeJobRequest < Struct.new(
+      nil,
       :name,
       keyword_init: true
     )
@@ -1108,6 +1155,7 @@ module Aws::DataBrew
     #               profile job will be executed.</p>
     #   @return [Types::JobSample]
     class DescribeJobResponse < Struct.new(
+      nil,
       :create_date,
       :created_by,
       :dataset_name,
@@ -1151,6 +1199,7 @@ module Aws::DataBrew
     #   <p>The unique identifier of the job run.</p>
     #   @return [String]
     class DescribeJobRunRequest < Struct.new(
+      nil,
       :name,
       :run_id,
       keyword_init: true
@@ -1223,6 +1272,7 @@ module Aws::DataBrew
     #               size parameter.</p>
     #   @return [Types::JobSample]
     class DescribeJobRunResponse < Struct.new(
+      nil,
       :attempt,
       :completed_on,
       :dataset_name,
@@ -1257,6 +1307,7 @@ module Aws::DataBrew
     #   <p>The name of the project to be described.</p>
     #   @return [String]
     class DescribeProjectRequest < Struct.new(
+      nil,
       :name,
       keyword_init: true
     )
@@ -1322,6 +1373,7 @@ module Aws::DataBrew
     #   <p>The date and time when the project was opened. </p>
     #   @return [Time]
     class DescribeProjectResponse < Struct.new(
+      nil,
       :create_date,
       :created_by,
       :dataset_name,
@@ -1349,6 +1401,7 @@ module Aws::DataBrew
     #               published version is returned.</p>
     #   @return [String]
     class DescribeRecipeRequest < Struct.new(
+      nil,
       :name,
       :recipe_version,
       keyword_init: true
@@ -1397,6 +1450,7 @@ module Aws::DataBrew
     #   <p>The recipe version identifier.</p>
     #   @return [String]
     class DescribeRecipeResponse < Struct.new(
+      nil,
       :created_by,
       :create_date,
       :last_modified_by,
@@ -1419,6 +1473,7 @@ module Aws::DataBrew
     #   <p>The name of the ruleset to be described.</p>
     #   @return [String]
     class DescribeRulesetRequest < Struct.new(
+      nil,
       :name,
       keyword_init: true
     )
@@ -1458,6 +1513,7 @@ module Aws::DataBrew
     #   <p>Metadata tags that have been applied to the ruleset.</p>
     #   @return [Hash<String, String>]
     class DescribeRulesetResponse < Struct.new(
+      nil,
       :name,
       :description,
       :target_arn,
@@ -1477,6 +1533,7 @@ module Aws::DataBrew
     #   <p>The name of the schedule to be described.</p>
     #   @return [String]
     class DescribeScheduleRequest < Struct.new(
+      nil,
       :name,
       keyword_init: true
     )
@@ -1513,6 +1570,7 @@ module Aws::DataBrew
     #   <p>The name of the schedule.</p>
     #   @return [String]
     class DescribeScheduleResponse < Struct.new(
+      nil,
       :create_date,
       :created_by,
       :job_names,
@@ -1599,6 +1657,7 @@ module Aws::DataBrew
     #               on columns that contain detected entities.</p>
     #   @return [Array<Types::AllowedStatistics>]
     class EntityDetectorConfiguration < Struct.new(
+      nil,
       :entity_types,
       :allowed_statistics,
       keyword_init: true
@@ -1620,6 +1679,7 @@ module Aws::DataBrew
     #               header. If this value is false, column names are auto-generated.</p>
     #   @return [Boolean]
     class ExcelOptions < Struct.new(
+      nil,
       :sheet_names,
       :sheet_indexes,
       :header_row,
@@ -1643,6 +1703,7 @@ module Aws::DataBrew
     #               possible value is ASCENDING.</p>
     #   @return [String]
     class FilesLimit < Struct.new(
+      nil,
       :max_files,
       :ordered_by,
       :order,
@@ -1664,6 +1725,7 @@ module Aws::DataBrew
     #   <p>The map of substitution variable names to their values used in this filter expression.</p>
     #   @return [Hash<String, String>]
     class FilterExpression < Struct.new(
+      nil,
       :expression,
       :values_map,
       keyword_init: true
@@ -1683,6 +1745,7 @@ module Aws::DataBrew
     #   <p>Options that define how CSV input is to be interpreted by DataBrew.</p>
     #   @return [Types::CsvOptions]
     class FormatOptions < Struct.new(
+      nil,
       :json,
       :excel,
       :csv,
@@ -1706,6 +1769,7 @@ module Aws::DataBrew
     #   <p>Contains additional resource information needed for specific datasets.</p>
     #   @return [Types::Metadata]
     class Input < Struct.new(
+      nil,
       :s3_input_definition,
       :data_catalog_input_definition,
       :database_input_definition,
@@ -1719,6 +1783,7 @@ module Aws::DataBrew
     # @!attribute message
     #   @return [String]
     class InternalServerException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -1830,6 +1895,7 @@ module Aws::DataBrew
     #   <p>List of validation configurations that are applied to the profile job.</p>
     #   @return [Array<Types::ValidationConfiguration>]
     class Job < Struct.new(
+      nil,
       :account_id,
       :created_by,
       :create_date,
@@ -1928,6 +1994,7 @@ module Aws::DataBrew
     #   <p>List of validation configurations that are applied to the profile job run.</p>
     #   @return [Array<Types::ValidationConfiguration>]
     class JobRun < Struct.new(
+      nil,
       :attempt,
       :completed_on,
       :dataset_name,
@@ -1981,6 +2048,7 @@ module Aws::DataBrew
     #            <p>Long.MAX_VALUE = 9223372036854775807</p>
     #   @return [Integer]
     class JobSample < Struct.new(
+      nil,
       :mode,
       :size,
       keyword_init: true
@@ -1994,6 +2062,7 @@ module Aws::DataBrew
     #               characters.</p>
     #   @return [Boolean]
     class JsonOptions < Struct.new(
+      nil,
       :multi_line,
       keyword_init: true
     )
@@ -2012,6 +2081,7 @@ module Aws::DataBrew
     #   <p>The token returned by a previous call to retrieve the next set of results.</p>
     #   @return [String]
     class ListDatasetsRequest < Struct.new(
+      nil,
       :max_results,
       :next_token,
       keyword_init: true
@@ -2027,6 +2097,7 @@ module Aws::DataBrew
     #               results.</p>
     #   @return [String]
     class ListDatasetsResponse < Struct.new(
+      nil,
       :datasets,
       :next_token,
       keyword_init: true
@@ -2044,6 +2115,7 @@ module Aws::DataBrew
     #   <p>The token returned by a previous call to retrieve the next set of results.</p>
     #   @return [String]
     class ListJobRunsRequest < Struct.new(
+      nil,
       :name,
       :max_results,
       :next_token,
@@ -2060,6 +2132,7 @@ module Aws::DataBrew
     #               results.</p>
     #   @return [String]
     class ListJobRunsResponse < Struct.new(
+      nil,
       :job_runs,
       :next_token,
       keyword_init: true
@@ -2084,6 +2157,7 @@ module Aws::DataBrew
     #               are associated with the specified project.</p>
     #   @return [String]
     class ListJobsRequest < Struct.new(
+      nil,
       :dataset_name,
       :max_results,
       :next_token,
@@ -2101,6 +2175,7 @@ module Aws::DataBrew
     #               results.</p>
     #   @return [String]
     class ListJobsResponse < Struct.new(
+      nil,
       :jobs,
       :next_token,
       keyword_init: true
@@ -2115,6 +2190,7 @@ module Aws::DataBrew
     #   <p>The maximum number of results to return in this request. </p>
     #   @return [Integer]
     class ListProjectsRequest < Struct.new(
+      nil,
       :next_token,
       :max_results,
       keyword_init: true
@@ -2130,6 +2206,7 @@ module Aws::DataBrew
     #               results.</p>
     #   @return [String]
     class ListProjectsResponse < Struct.new(
+      nil,
       :projects,
       :next_token,
       keyword_init: true
@@ -2147,6 +2224,7 @@ module Aws::DataBrew
     #   <p>The name of the recipe for which to return version information.</p>
     #   @return [String]
     class ListRecipeVersionsRequest < Struct.new(
+      nil,
       :max_results,
       :next_token,
       :name,
@@ -2163,6 +2241,7 @@ module Aws::DataBrew
     #   <p>A list of versions for the specified recipe.</p>
     #   @return [Array<Types::Recipe>]
     class ListRecipeVersionsResponse < Struct.new(
+      nil,
       :next_token,
       :recipes,
       keyword_init: true
@@ -2185,6 +2264,7 @@ module Aws::DataBrew
     #            </p>
     #   @return [String]
     class ListRecipesRequest < Struct.new(
+      nil,
       :max_results,
       :next_token,
       :recipe_version,
@@ -2201,6 +2281,7 @@ module Aws::DataBrew
     #               results.</p>
     #   @return [String]
     class ListRecipesResponse < Struct.new(
+      nil,
       :recipes,
       :next_token,
       keyword_init: true
@@ -2221,6 +2302,7 @@ module Aws::DataBrew
     #               the NextToken value from the response object of the previous page call.</p>
     #   @return [String]
     class ListRulesetsRequest < Struct.new(
+      nil,
       :target_arn,
       :max_results,
       :next_token,
@@ -2237,6 +2319,7 @@ module Aws::DataBrew
     #               results.</p>
     #   @return [String]
     class ListRulesetsResponse < Struct.new(
+      nil,
       :rulesets,
       :next_token,
       keyword_init: true
@@ -2254,6 +2337,7 @@ module Aws::DataBrew
     #   <p>The token returned by a previous call to retrieve the next set of results.</p>
     #   @return [String]
     class ListSchedulesRequest < Struct.new(
+      nil,
       :job_name,
       :max_results,
       :next_token,
@@ -2270,6 +2354,7 @@ module Aws::DataBrew
     #               results.</p>
     #   @return [String]
     class ListSchedulesResponse < Struct.new(
+      nil,
       :schedules,
       :next_token,
       keyword_init: true
@@ -2282,6 +2367,7 @@ module Aws::DataBrew
     #           </p>
     #   @return [String]
     class ListTagsForResourceRequest < Struct.new(
+      nil,
       :resource_arn,
       keyword_init: true
     )
@@ -2292,6 +2378,7 @@ module Aws::DataBrew
     #   <p>A list of tags associated with the DataBrew resource.</p>
     #   @return [Hash<String, String>]
     class ListTagsForResourceResponse < Struct.new(
+      nil,
       :tags,
       keyword_init: true
     )
@@ -2304,6 +2391,7 @@ module Aws::DataBrew
     #               only supports ARNs from Amazon AppFlow.</p>
     #   @return [String]
     class Metadata < Struct.new(
+      nil,
       :source_arn,
       keyword_init: true
     )
@@ -2336,6 +2424,7 @@ module Aws::DataBrew
     #               by column(s), the MaxOutputFiles value is the maximum number of files per partition.</p>
     #   @return [Integer]
     class Output < Struct.new(
+      nil,
       :compression_format,
       :format,
       :partition_columns,
@@ -2359,6 +2448,7 @@ module Aws::DataBrew
     #               job output.</p>
     #   @return [Types::CsvOutputOptions]
     class OutputFormatOptions < Struct.new(
+      nil,
       :csv,
       keyword_init: true
     )
@@ -2378,6 +2468,7 @@ module Aws::DataBrew
     #   <p>A structure that maps names of parameters used in the Amazon S3 path of a dataset to their definitions.</p>
     #   @return [Hash<String, Types::DatasetParameter>]
     class PathOptions < Struct.new(
+      nil,
       :last_modified_date_condition,
       :files_limit,
       :parameters,
@@ -2412,6 +2503,7 @@ module Aws::DataBrew
     #   <p>Configuration of entity detection for a profile job. When undefined, entity detection is disabled.</p>
     #   @return [Types::EntityDetectorConfiguration]
     class ProfileConfiguration < Struct.new(
+      nil,
       :dataset_statistics_configuration,
       :profile_columns,
       :column_statistics_configurations,
@@ -2467,6 +2559,7 @@ module Aws::DataBrew
     #   <p>The date and time when the project was opened.</p>
     #   @return [Time]
     class Project < Struct.new(
+      nil,
       :account_id,
       :create_date,
       :created_by,
@@ -2493,6 +2586,7 @@ module Aws::DataBrew
     #   <p>The name of the recipe to be published.</p>
     #   @return [String]
     class PublishRecipeRequest < Struct.new(
+      nil,
       :description,
       :name,
       keyword_init: true
@@ -2504,6 +2598,7 @@ module Aws::DataBrew
     #   <p>The name of the recipe that you published.</p>
     #   @return [String]
     class PublishRecipeResponse < Struct.new(
+      nil,
       :name,
       keyword_init: true
     )
@@ -2568,6 +2663,7 @@ module Aws::DataBrew
     #            </ul>
     #   @return [String]
     class Recipe < Struct.new(
+      nil,
       :created_by,
       :create_date,
       :last_modified_by,
@@ -2596,6 +2692,7 @@ module Aws::DataBrew
     #   <p>Contextual parameters for the transformation.</p>
     #   @return [Hash<String, String>]
     class RecipeAction < Struct.new(
+      nil,
       :operation,
       :parameters,
       keyword_init: true
@@ -2611,6 +2708,7 @@ module Aws::DataBrew
     #   <p>The identifier for the version for the recipe. </p>
     #   @return [String]
     class RecipeReference < Struct.new(
+      nil,
       :name,
       :recipe_version,
       keyword_init: true
@@ -2630,6 +2728,7 @@ module Aws::DataBrew
     #            </note>
     #   @return [Array<Types::ConditionExpression>]
     class RecipeStep < Struct.new(
+      nil,
       :action,
       :condition_expressions,
       keyword_init: true
@@ -2649,6 +2748,7 @@ module Aws::DataBrew
     #   <p>The identifier for the recipe version associated with this error.</p>
     #   @return [String]
     class RecipeVersionErrorDetail < Struct.new(
+      nil,
       :error_code,
       :error_message,
       :recipe_version,
@@ -2661,6 +2761,7 @@ module Aws::DataBrew
     # @!attribute message
     #   @return [String]
     class ResourceNotFoundException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -2708,6 +2809,7 @@ module Aws::DataBrew
     #               expression from the dataset. Rule will be applied to selected columns.</p>
     #   @return [Array<Types::ColumnSelector>]
     class Rule < Struct.new(
+      nil,
       :name,
       :disabled,
       :check_expression,
@@ -2760,6 +2862,7 @@ module Aws::DataBrew
     #               associated with.</p>
     #   @return [String]
     class RulesetItem < Struct.new(
+      nil,
       :account_id,
       :created_by,
       :create_date,
@@ -2793,6 +2896,7 @@ module Aws::DataBrew
     #   <p>The Amazon Web Services account ID of the bucket owner.</p>
     #   @return [String]
     class S3Location < Struct.new(
+      nil,
       :bucket,
       :key,
       :bucket_owner,
@@ -2808,6 +2912,7 @@ module Aws::DataBrew
     #               from a job.</p>
     #   @return [Types::S3Location]
     class S3TableOutputOptions < Struct.new(
+      nil,
       :location,
       keyword_init: true
     )
@@ -2823,6 +2928,7 @@ module Aws::DataBrew
     #   <p>The way in which DataBrew obtains rows from a dataset.</p>
     #   @return [String]
     class Sample < Struct.new(
+      nil,
       :size,
       :type,
       keyword_init: true
@@ -2864,6 +2970,7 @@ module Aws::DataBrew
     #   <p>The name of the schedule.</p>
     #   @return [String]
     class Schedule < Struct.new(
+      nil,
       :account_id,
       :created_by,
       :create_date,
@@ -2901,6 +3008,7 @@ module Aws::DataBrew
     #   <p>Represents the data being transformed during an action.</p>
     #   @return [Types::ViewFrame]
     class SendProjectSessionActionRequest < Struct.new(
+      nil,
       :preview,
       :name,
       :recipe_step,
@@ -2922,6 +3030,7 @@ module Aws::DataBrew
     #   <p>A unique identifier for the action that was performed.</p>
     #   @return [Integer]
     class SendProjectSessionActionResponse < Struct.new(
+      nil,
       :result,
       :name,
       :action_id,
@@ -2934,6 +3043,7 @@ module Aws::DataBrew
     # @!attribute message
     #   @return [String]
     class ServiceQuotaExceededException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -2944,6 +3054,7 @@ module Aws::DataBrew
     #   <p>The name of the job to be run.</p>
     #   @return [String]
     class StartJobRunRequest < Struct.new(
+      nil,
       :name,
       keyword_init: true
     )
@@ -2954,6 +3065,7 @@ module Aws::DataBrew
     #   <p>A system-generated identifier for this particular job run.</p>
     #   @return [String]
     class StartJobRunResponse < Struct.new(
+      nil,
       :run_id,
       keyword_init: true
     )
@@ -2968,6 +3080,7 @@ module Aws::DataBrew
     #               client is currently accessing the project.</p>
     #   @return [Boolean]
     class StartProjectSessionRequest < Struct.new(
+      nil,
       :name,
       :assume_control,
       keyword_init: true
@@ -2982,6 +3095,7 @@ module Aws::DataBrew
     #   <p>A system-generated identifier for the session.</p>
     #   @return [String]
     class StartProjectSessionResponse < Struct.new(
+      nil,
       :name,
       :client_session_id,
       keyword_init: true
@@ -2997,6 +3111,7 @@ module Aws::DataBrew
     #   <p>A map that includes overrides of an evaluation’s parameters.</p>
     #   @return [Hash<String, String>]
     class StatisticOverride < Struct.new(
+      nil,
       :statistic,
       :parameters,
       keyword_init: true
@@ -3015,6 +3130,7 @@ module Aws::DataBrew
     #   <p>List of overrides for evaluations.</p>
     #   @return [Array<Types::StatisticOverride>]
     class StatisticsConfiguration < Struct.new(
+      nil,
       :included_statistics,
       :overrides,
       keyword_init: true
@@ -3029,6 +3145,7 @@ module Aws::DataBrew
     #   <p>The ID of the job run to be stopped.</p>
     #   @return [String]
     class StopJobRunRequest < Struct.new(
+      nil,
       :name,
       :run_id,
       keyword_init: true
@@ -3040,6 +3157,7 @@ module Aws::DataBrew
     #   <p>The ID of the job run that you stopped.</p>
     #   @return [String]
     class StopJobRunResponse < Struct.new(
+      nil,
       :run_id,
       keyword_init: true
     )
@@ -3055,6 +3173,7 @@ module Aws::DataBrew
     #   <p>One or more tags to be assigned to the resource.</p>
     #   @return [Hash<String, String>]
     class TagResourceRequest < Struct.new(
+      nil,
       :resource_arn,
       :tags,
       keyword_init: true
@@ -3063,6 +3182,7 @@ module Aws::DataBrew
     end
 
     class TagResourceResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -3083,6 +3203,7 @@ module Aws::DataBrew
     #               used for validation.</p>
     #   @return [String]
     class Threshold < Struct.new(
+      nil,
       :value,
       :type,
       :unit,
@@ -3104,6 +3225,7 @@ module Aws::DataBrew
     #   <p>The tag keys (names) of one or more tags to be removed.</p>
     #   @return [Array<String>]
     class UntagResourceRequest < Struct.new(
+      nil,
       :resource_arn,
       :tag_keys,
       keyword_init: true
@@ -3112,6 +3234,7 @@ module Aws::DataBrew
     end
 
     class UntagResourceResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -3135,6 +3258,7 @@ module Aws::DataBrew
     #   <p>A set of options that defines how DataBrew interprets an Amazon S3 path of the dataset.</p>
     #   @return [Types::PathOptions]
     class UpdateDatasetRequest < Struct.new(
+      nil,
       :name,
       :format,
       :format_options,
@@ -3149,6 +3273,7 @@ module Aws::DataBrew
     #   <p>The name of the dataset that you updated.</p>
     #   @return [String]
     class UpdateDatasetResponse < Struct.new(
+      nil,
       :name,
       keyword_init: true
     )
@@ -3214,6 +3339,7 @@ module Aws::DataBrew
     #               20000 for the size parameter.</p>
     #   @return [Types::JobSample]
     class UpdateProfileJobRequest < Struct.new(
+      nil,
       :configuration,
       :encryption_key_arn,
       :encryption_mode,
@@ -3235,6 +3361,7 @@ module Aws::DataBrew
     #   <p>The name of the job that was updated.</p>
     #   @return [String]
     class UpdateProfileJobResponse < Struct.new(
+      nil,
       :name,
       keyword_init: true
     )
@@ -3252,6 +3379,7 @@ module Aws::DataBrew
     #   <p>The name of the project to be updated.</p>
     #   @return [String]
     class UpdateProjectRequest < Struct.new(
+      nil,
       :sample,
       :role_arn,
       :name,
@@ -3267,6 +3395,7 @@ module Aws::DataBrew
     #   <p>The name of the project that you updated.</p>
     #   @return [String]
     class UpdateProjectResponse < Struct.new(
+      nil,
       :last_modified_date,
       :name,
       keyword_init: true
@@ -3324,6 +3453,7 @@ module Aws::DataBrew
     #               period ends with a status of <code>TIMEOUT</code>.</p>
     #   @return [Integer]
     class UpdateRecipeJobRequest < Struct.new(
+      nil,
       :encryption_key_arn,
       :encryption_mode,
       :name,
@@ -3344,6 +3474,7 @@ module Aws::DataBrew
     #   <p>The name of the job that you updated.</p>
     #   @return [String]
     class UpdateRecipeJobResponse < Struct.new(
+      nil,
       :name,
       keyword_init: true
     )
@@ -3361,6 +3492,7 @@ module Aws::DataBrew
     #               the conditions under which the action should succeed.</p>
     #   @return [Array<Types::RecipeStep>]
     class UpdateRecipeRequest < Struct.new(
+      nil,
       :description,
       :name,
       :steps,
@@ -3373,6 +3505,7 @@ module Aws::DataBrew
     #   <p>The name of the recipe that was updated.</p>
     #   @return [String]
     class UpdateRecipeResponse < Struct.new(
+      nil,
       :name,
       keyword_init: true
     )
@@ -3390,6 +3523,7 @@ module Aws::DataBrew
     #               checks to be validated on a DataBrew dataset.</p>
     #   @return [Array<Types::Rule>]
     class UpdateRulesetRequest < Struct.new(
+      nil,
       :name,
       :description,
       :rules,
@@ -3402,6 +3536,7 @@ module Aws::DataBrew
     #   <p>The name of the updated ruleset.</p>
     #   @return [String]
     class UpdateRulesetResponse < Struct.new(
+      nil,
       :name,
       keyword_init: true
     )
@@ -3421,6 +3556,7 @@ module Aws::DataBrew
     #   <p>The name of the schedule to update.</p>
     #   @return [String]
     class UpdateScheduleRequest < Struct.new(
+      nil,
       :job_names,
       :cron_expression,
       :name,
@@ -3433,6 +3569,7 @@ module Aws::DataBrew
     #   <p>The name of the schedule that was updated.</p>
     #   @return [String]
     class UpdateScheduleResponse < Struct.new(
+      nil,
       :name,
       keyword_init: true
     )
@@ -3452,6 +3589,7 @@ module Aws::DataBrew
     #               defined in the selected ruleset.</p>
     #   @return [String]
     class ValidationConfiguration < Struct.new(
+      nil,
       :ruleset_arn,
       :validation_mode,
       keyword_init: true
@@ -3463,6 +3601,7 @@ module Aws::DataBrew
     # @!attribute message
     #   @return [String]
     class ValidationException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -3492,6 +3631,7 @@ module Aws::DataBrew
     #   <p>Controls if analytics computation is enabled or disabled. Enabled by default.</p>
     #   @return [String]
     class ViewFrame < Struct.new(
+      nil,
       :start_column_index,
       :column_range,
       :hidden_columns,

@@ -18,6 +18,7 @@ module Aws::GameLift
     #   <p>Player response to the proposed match.</p>
     #   @return [String]
     class AcceptMatchInput < Struct.new(
+      nil,
       :ticket_id,
       :player_ids,
       :acceptance_type,
@@ -27,6 +28,7 @@ module Aws::GameLift
     end
 
     class AcceptMatchOutput < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -62,6 +64,7 @@ module Aws::GameLift
     #   <p>The time that this data object was last modified. Format is a number expressed in Unix time as milliseconds (for example <code>"1469498468.057"</code>).</p>
     #   @return [Time]
     class Alias < Struct.new(
+      nil,
       :alias_id,
       :name,
       :alias_arn,
@@ -81,6 +84,7 @@ module Aws::GameLift
     #                   up queues</a> in the <i>Amazon GameLift Servers Developer Guide</i>.</p>
     #   @return [String]
     class AnywhereConfiguration < Struct.new(
+      nil,
       :cost,
       keyword_init: true
     )
@@ -107,6 +111,7 @@ module Aws::GameLift
     #               100 characters. </p>
     #   @return [Hash<String, Float>]
     class AttributeValue < Struct.new(
+      nil,
       :s,
       :n,
       :sl,
@@ -144,6 +149,7 @@ module Aws::GameLift
     #   <p>The token that users must pass to the service API to use the temporary credentials. </p>
     #   @return [String]
     class AwsCredentials < Struct.new(
+      nil,
       :access_key_id,
       :secret_access_key,
       :session_token,
@@ -219,6 +225,7 @@ module Aws::GameLift
     #   <p>The Amazon GameLift Servers Server SDK version used to develop your game server.</p>
     #   @return [String]
     class Build < Struct.new(
+      nil,
       :build_id,
       :build_arn,
       :name,
@@ -254,6 +261,7 @@ module Aws::GameLift
     #            </ul>
     #   @return [String]
     class CertificateConfiguration < Struct.new(
+      nil,
       :certificate_type,
       keyword_init: true
     )
@@ -271,6 +279,7 @@ module Aws::GameLift
     #               <code>ACTIVE</code> status.</p>
     #   @return [Array<String>]
     class ClaimFilterOption < Struct.new(
+      nil,
       :instance_statuses,
       keyword_init: true
     )
@@ -293,6 +302,7 @@ module Aws::GameLift
     #   <p>Object that restricts how a claimed game server is chosen.</p>
     #   @return [Types::ClaimFilterOption]
     class ClaimGameServerInput < Struct.new(
+      nil,
       :game_server_group_name,
       :game_server_id,
       :game_server_data,
@@ -306,6 +316,7 @@ module Aws::GameLift
     #   <p>Object that describes the newly claimed game server.</p>
     #   @return [Types::GameServer]
     class ClaimGameServerOutput < Struct.new(
+      nil,
       :game_server,
       keyword_init: true
     )
@@ -393,6 +404,7 @@ module Aws::GameLift
     #   <p>The game server container group definition for the compute.</p>
     #   @return [String]
     class Compute < Struct.new(
+      nil,
       :fleet_id,
       :fleet_arn,
       :compute_name,
@@ -421,6 +433,7 @@ module Aws::GameLift
     # @!attribute message
     #   @return [String]
     class ConflictException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -438,6 +451,7 @@ module Aws::GameLift
     #               or greater than <code>FromPort</code>.</p>
     #   @return [Integer]
     class ConnectionPortRange < Struct.new(
+      nil,
       :from_port,
       :to_port,
       keyword_init: true
@@ -458,6 +472,7 @@ module Aws::GameLift
     #         the compute.</p>
     #   @return [String]
     class ContainerAttribute < Struct.new(
+      nil,
       :container_name,
       :container_runtime_id,
       keyword_init: true
@@ -507,6 +522,7 @@ module Aws::GameLift
     #            </ul>
     #   @return [String]
     class ContainerDependency < Struct.new(
+      nil,
       :container_name,
       :condition,
       keyword_init: true
@@ -530,6 +546,7 @@ module Aws::GameLift
     #   <p>The environment variable value.</p>
     #   @return [String]
     class ContainerEnvironment < Struct.new(
+      nil,
       :name,
       :value,
       keyword_init: true
@@ -687,6 +704,7 @@ module Aws::GameLift
     #               deployed.</p>
     #   @return [Array<Types::ContainerFleetLocationAttributes>]
     class ContainerFleet < Struct.new(
+      nil,
       :fleet_id,
       :fleet_arn,
       :fleet_role_arn,
@@ -753,6 +771,7 @@ module Aws::GameLift
     #            </ul>
     #   @return [String]
     class ContainerFleetLocationAttributes < Struct.new(
+      nil,
       :location,
       :status,
       keyword_init: true
@@ -888,6 +907,7 @@ module Aws::GameLift
     #            </ul>
     #   @return [String]
     class ContainerGroupDefinition < Struct.new(
+      nil,
       :container_group_definition_arn,
       :creation_time,
       :operating_system,
@@ -943,6 +963,7 @@ module Aws::GameLift
     #         failed health check. </p>
     #   @return [Integer]
     class ContainerHealthCheck < Struct.new(
+      nil,
       :command,
       :interval,
       :retries,
@@ -973,6 +994,7 @@ module Aws::GameLift
     #           <code>Compute</code> object.</p>
     #   @return [String]
     class ContainerIdentifier < Struct.new(
+      nil,
       :container_name,
       :container_runtime_id,
       keyword_init: true
@@ -996,6 +1018,7 @@ module Aws::GameLift
     #   <p>The type of access for the container.</p>
     #   @return [String]
     class ContainerMountPoint < Struct.new(
+      nil,
       :instance_path,
       :container_path,
       :access_level,
@@ -1033,6 +1056,7 @@ module Aws::GameLift
     #         recommended. </p>
     #   @return [Array<Types::ContainerPortRange>]
     class ContainerPortConfiguration < Struct.new(
+      nil,
       :container_port_ranges,
       keyword_init: true
     )
@@ -1057,6 +1081,7 @@ module Aws::GameLift
     #   <p>The network protocol that these ports support. </p>
     #   @return [String]
     class ContainerPortRange < Struct.new(
+      nil,
       :from_port,
       :to_port,
       :protocol,
@@ -1082,6 +1107,7 @@ module Aws::GameLift
     #                   <i>Amazon Web Services General Reference</i>.</p>
     #   @return [Array<Types::Tag>]
     class CreateAliasInput < Struct.new(
+      nil,
       :name,
       :description,
       :routing_strategy,
@@ -1095,6 +1121,7 @@ module Aws::GameLift
     #   <p>The newly created alias resource.</p>
     #   @return [Types::Alias]
     class CreateAliasOutput < Struct.new(
+      nil,
       :alias,
       keyword_init: true
     )
@@ -1149,6 +1176,7 @@ module Aws::GameLift
     #                   <code>4.0.2</code>.</p>
     #   @return [String]
     class CreateBuildInput < Struct.new(
+      nil,
       :name,
       :version,
       :storage_location,
@@ -1173,6 +1201,7 @@ module Aws::GameLift
     #   <p>Amazon S3 location for your game build file, including bucket name and key.</p>
     #   @return [Types::S3Location]
     class CreateBuildOutput < Struct.new(
+      nil,
       :build,
       :upload_credentials,
       :storage_location,
@@ -1361,6 +1390,7 @@ module Aws::GameLift
     #               <i>Amazon Web Services General Reference</i>.</p>
     #   @return [Array<Types::Tag>]
     class CreateContainerFleetInput < Struct.new(
+      nil,
       :fleet_role_arn,
       :description,
       :game_server_container_group_definition_name,
@@ -1386,6 +1416,7 @@ module Aws::GameLift
     #               initially placed in <code>PENDING</code> status. </p>
     #   @return [Types::ContainerFleet]
     class CreateContainerFleetOutput < Struct.new(
+      nil,
       :container_fleet,
       keyword_init: true
     )
@@ -1448,6 +1479,7 @@ module Aws::GameLift
     #           <i>Amazon Web Services General Reference</i>. </p>
     #   @return [Array<Types::Tag>]
     class CreateContainerGroupDefinitionInput < Struct.new(
+      nil,
       :name,
       :container_group_type,
       :total_memory_limit_mebibytes,
@@ -1467,6 +1499,7 @@ module Aws::GameLift
     #         create a container fleet.</p>
     #   @return [Types::ContainerGroupDefinition]
     class CreateContainerGroupDefinitionOutput < Struct.new(
+      nil,
       :container_group_definition,
       keyword_init: true
     )
@@ -1651,6 +1684,7 @@ module Aws::GameLift
     #                   with other Amazon Web Services resources from your fleets</a>.</p>
     #   @return [String]
     class CreateFleetInput < Struct.new(
+      nil,
       :name,
       :description,
       :build_id,
@@ -1688,6 +1722,7 @@ module Aws::GameLift
     #               Amazon Web Services Region code such as <code>us-west-2</code>. </p>
     #   @return [Array<Types::LocationConfiguration>]
     class CreateFleetLocationsInput < Struct.new(
+      nil,
       :fleet_id,
       :locations,
       keyword_init: true
@@ -1709,6 +1744,7 @@ module Aws::GameLift
     #               remote locations that were already added to the fleet.</p>
     #   @return [Array<Types::LocationState>]
     class CreateFleetLocationsOutput < Struct.new(
+      nil,
       :fleet_id,
       :fleet_arn,
       :location_states,
@@ -1729,6 +1765,7 @@ module Aws::GameLift
     #               remote locations, only one entry, representing the home Region, is returned.</p>
     #   @return [Array<Types::LocationState>]
     class CreateFleetOutput < Struct.new(
+      nil,
       :fleet_attributes,
       :location_states,
       keyword_init: true
@@ -1842,6 +1879,7 @@ module Aws::GameLift
     #                   Resources</a> in the <i>Amazon Web Services General Reference</i>.</p>
     #   @return [Array<Types::Tag>]
     class CreateGameServerGroupInput < Struct.new(
+      nil,
       :game_server_group_name,
       :role_arn,
       :min_size,
@@ -1865,6 +1903,7 @@ module Aws::GameLift
     #               group status reaches <code>ACTIVE</code>. </p>
     #   @return [Types::GameServerGroup]
     class CreateGameServerGroupOutput < Struct.new(
+      nil,
       :game_server_group,
       keyword_init: true
     )
@@ -1935,6 +1974,7 @@ module Aws::GameLift
     #               custom location.</p>
     #   @return [String]
     class CreateGameSessionInput < Struct.new(
+      nil,
       :fleet_id,
       :alias_id,
       :maximum_player_session_count,
@@ -1954,6 +1994,7 @@ module Aws::GameLift
     #   <p>Object that describes the newly created game session record.</p>
     #   @return [Types::GameSession]
     class CreateGameSessionOutput < Struct.new(
+      nil,
       :game_session,
       keyword_init: true
     )
@@ -2001,6 +2042,7 @@ module Aws::GameLift
     #                   Resources</a> in the <i>Amazon Web Services General Reference</i>.</p>
     #   @return [Array<Types::Tag>]
     class CreateGameSessionQueueInput < Struct.new(
+      nil,
       :name,
       :timeout_in_seconds,
       :player_latency_policies,
@@ -2019,6 +2061,7 @@ module Aws::GameLift
     #   <p>An object that describes the newly created game session queue.</p>
     #   @return [Types::GameSessionQueue]
     class CreateGameSessionQueueOutput < Struct.new(
+      nil,
       :game_session_queue,
       keyword_init: true
     )
@@ -2035,6 +2078,7 @@ module Aws::GameLift
     #                   <i>Amazon Web Services General Rareference</i>.</p>
     #   @return [Array<Types::Tag>]
     class CreateLocationInput < Struct.new(
+      nil,
       :location_name,
       :tags,
       keyword_init: true
@@ -2046,6 +2090,7 @@ module Aws::GameLift
     #   <p>The details of the custom location you created.</p>
     #   @return [Types::LocationModel]
     class CreateLocationOutput < Struct.new(
+      nil,
       :location,
       keyword_init: true
     )
@@ -2142,6 +2187,7 @@ module Aws::GameLift
     #                   Resources</a> in the <i>Amazon Web Services General Reference</i>.</p>
     #   @return [Array<Types::Tag>]
     class CreateMatchmakingConfigurationInput < Struct.new(
+      nil,
       :name,
       :description,
       :game_session_queue_arns,
@@ -2166,6 +2212,7 @@ module Aws::GameLift
     #   <p>Object that describes the newly created matchmaking configuration.</p>
     #   @return [Types::MatchmakingConfiguration]
     class CreateMatchmakingConfigurationOutput < Struct.new(
+      nil,
       :configuration,
       keyword_init: true
     )
@@ -2188,6 +2235,7 @@ module Aws::GameLift
     #                   Resources</a> in the <i>Amazon Web Services General Reference</i>.</p>
     #   @return [Array<Types::Tag>]
     class CreateMatchmakingRuleSetInput < Struct.new(
+      nil,
       :name,
       :rule_set_body,
       :tags,
@@ -2200,6 +2248,7 @@ module Aws::GameLift
     #   <p>The newly created matchmaking rule set.</p>
     #   @return [Types::MatchmakingRuleSet]
     class CreateMatchmakingRuleSetOutput < Struct.new(
+      nil,
       :rule_set,
       keyword_init: true
     )
@@ -2216,6 +2265,7 @@ module Aws::GameLift
     #   <p>Developer-defined information related to a player. Amazon GameLift Servers does not use this data, so it can be formatted as needed for use in the game.</p>
     #   @return [String]
     class CreatePlayerSessionInput < Struct.new(
+      nil,
       :game_session_id,
       :player_id,
       :player_data,
@@ -2228,6 +2278,7 @@ module Aws::GameLift
     #   <p>Object that describes the newly created player session record.</p>
     #   @return [Types::PlayerSession]
     class CreatePlayerSessionOutput < Struct.new(
+      nil,
       :player_session,
       keyword_init: true
     )
@@ -2247,6 +2298,7 @@ module Aws::GameLift
     #               included in the <code>PlayerIds</code> parameter are ignored. </p>
     #   @return [Hash<String, String>]
     class CreatePlayerSessionsInput < Struct.new(
+      nil,
       :game_session_id,
       :player_ids,
       :player_data_map,
@@ -2259,6 +2311,7 @@ module Aws::GameLift
     #   <p>A collection of player session objects created for the added players.</p>
     #   @return [Array<Types::PlayerSession>]
     class CreatePlayerSessionsOutput < Struct.new(
+      nil,
       :player_sessions,
       keyword_init: true
     )
@@ -2301,6 +2354,7 @@ module Aws::GameLift
     #               limits.</p>
     #   @return [Array<Types::Tag>]
     class CreateScriptInput < Struct.new(
+      nil,
       :name,
       :version,
       :storage_location,
@@ -2320,6 +2374,7 @@ module Aws::GameLift
     #               the Amazon GameLift Servers service.</p>
     #   @return [Types::Script]
     class CreateScriptOutput < Struct.new(
+      nil,
       :script,
       keyword_init: true
     )
@@ -2337,6 +2392,7 @@ module Aws::GameLift
     #               Learn more about VPC peering in <a href="https://docs.aws.amazon.com/gamelift/latest/developerguide/vpc-peering.html">VPC Peering with Amazon GameLift Servers Fleets</a>.</p>
     #   @return [String]
     class CreateVpcPeeringAuthorizationInput < Struct.new(
+      nil,
       :game_lift_aws_account_id,
       :peer_vpc_id,
       keyword_init: true
@@ -2348,6 +2404,7 @@ module Aws::GameLift
     #   <p>Details on the requested VPC peering authorization, including expiration.</p>
     #   @return [Types::VpcPeeringAuthorization]
     class CreateVpcPeeringAuthorizationOutput < Struct.new(
+      nil,
       :vpc_peering_authorization,
       keyword_init: true
     )
@@ -2370,6 +2427,7 @@ module Aws::GameLift
     #               Learn more about VPC peering in <a href="https://docs.aws.amazon.com/gamelift/latest/developerguide/vpc-peering.html">VPC Peering with Amazon GameLift Servers Fleets</a>.</p>
     #   @return [String]
     class CreateVpcPeeringConnectionInput < Struct.new(
+      nil,
       :fleet_id,
       :peer_vpc_aws_account_id,
       :peer_vpc_id,
@@ -2379,6 +2437,7 @@ module Aws::GameLift
     end
 
     class CreateVpcPeeringConnectionOutput < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -2389,6 +2448,7 @@ module Aws::GameLift
     #               ID or ARN value.</p>
     #   @return [String]
     class DeleteAliasInput < Struct.new(
+      nil,
       :alias_id,
       keyword_init: true
     )
@@ -2399,6 +2459,7 @@ module Aws::GameLift
     #   <p>A unique identifier for the build to delete. You can use either the build ID or ARN value. </p>
     #   @return [String]
     class DeleteBuildInput < Struct.new(
+      nil,
       :build_id,
       keyword_init: true
     )
@@ -2410,6 +2471,7 @@ module Aws::GameLift
     #               or ARN value.</p>
     #   @return [String]
     class DeleteContainerFleetInput < Struct.new(
+      nil,
       :fleet_id,
       keyword_init: true
     )
@@ -2417,6 +2479,7 @@ module Aws::GameLift
     end
 
     class DeleteContainerFleetOutput < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -2433,6 +2496,7 @@ module Aws::GameLift
     #   <p>The number of most recent versions to keep while deleting all older versions.</p>
     #   @return [Integer]
     class DeleteContainerGroupDefinitionInput < Struct.new(
+      nil,
       :name,
       :version_number,
       :version_count_to_retain,
@@ -2442,6 +2506,7 @@ module Aws::GameLift
     end
 
     class DeleteContainerGroupDefinitionOutput < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -2451,6 +2516,7 @@ module Aws::GameLift
     #   <p>A unique identifier for the fleet to be deleted. You can use either the fleet ID or ARN value.</p>
     #   @return [String]
     class DeleteFleetInput < Struct.new(
+      nil,
       :fleet_id,
       keyword_init: true
     )
@@ -2465,6 +2531,7 @@ module Aws::GameLift
     #               Region code, such as <code>us-west-2</code>.</p>
     #   @return [Array<String>]
     class DeleteFleetLocationsInput < Struct.new(
+      nil,
       :fleet_id,
       :locations,
       keyword_init: true
@@ -2483,6 +2550,7 @@ module Aws::GameLift
     #                   <code>DELETING</code>.</p>
     #   @return [Array<Types::LocationState>]
     class DeleteFleetLocationsOutput < Struct.new(
+      nil,
       :fleet_id,
       :fleet_arn,
       :location_states,
@@ -2517,6 +2585,7 @@ module Aws::GameLift
     #            </ul>
     #   @return [String]
     class DeleteGameServerGroupInput < Struct.new(
+      nil,
       :game_server_group_name,
       :delete_option,
       keyword_init: true
@@ -2529,6 +2598,7 @@ module Aws::GameLift
     #               to <code>DELETE_SCHEDULED</code>. </p>
     #   @return [Types::GameServerGroup]
     class DeleteGameServerGroupOutput < Struct.new(
+      nil,
       :game_server_group,
       keyword_init: true
     )
@@ -2539,6 +2609,7 @@ module Aws::GameLift
     #   <p>A descriptive label that is associated with game session queue. Queue names must be unique within each Region. You can use either the queue ID or ARN value. </p>
     #   @return [String]
     class DeleteGameSessionQueueInput < Struct.new(
+      nil,
       :name,
       keyword_init: true
     )
@@ -2546,6 +2617,7 @@ module Aws::GameLift
     end
 
     class DeleteGameSessionQueueOutput < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -2555,6 +2627,7 @@ module Aws::GameLift
     #   <p>The location name of the custom location to be deleted.</p>
     #   @return [String]
     class DeleteLocationInput < Struct.new(
+      nil,
       :location_name,
       keyword_init: true
     )
@@ -2562,6 +2635,7 @@ module Aws::GameLift
     end
 
     class DeleteLocationOutput < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -2571,6 +2645,7 @@ module Aws::GameLift
     #   <p>A unique identifier for the matchmaking configuration. You can use either the configuration name or ARN value.</p>
     #   @return [String]
     class DeleteMatchmakingConfigurationInput < Struct.new(
+      nil,
       :name,
       keyword_init: true
     )
@@ -2578,6 +2653,7 @@ module Aws::GameLift
     end
 
     class DeleteMatchmakingConfigurationOutput < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -2588,6 +2664,7 @@ module Aws::GameLift
     #               field in the rule set body.) You can use either the rule set name or ARN value.</p>
     #   @return [String]
     class DeleteMatchmakingRuleSetInput < Struct.new(
+      nil,
       :name,
       keyword_init: true
     )
@@ -2595,6 +2672,7 @@ module Aws::GameLift
     end
 
     class DeleteMatchmakingRuleSetOutput < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -2607,6 +2685,7 @@ module Aws::GameLift
     #   <p>A unique identifier for the fleet to be deleted. You can use either the fleet ID or ARN value.</p>
     #   @return [String]
     class DeleteScalingPolicyInput < Struct.new(
+      nil,
       :name,
       :fleet_id,
       keyword_init: true
@@ -2618,6 +2697,7 @@ module Aws::GameLift
     #   <p>A unique identifier for the Realtime script to delete. You can use either the script ID or ARN value.</p>
     #   @return [String]
     class DeleteScriptInput < Struct.new(
+      nil,
       :script_id,
       keyword_init: true
     )
@@ -2635,6 +2715,7 @@ module Aws::GameLift
     #               Learn more about VPC peering in <a href="https://docs.aws.amazon.com/gamelift/latest/developerguide/vpc-peering.html">VPC Peering with Amazon GameLift Servers Fleets</a>.</p>
     #   @return [String]
     class DeleteVpcPeeringAuthorizationInput < Struct.new(
+      nil,
       :game_lift_aws_account_id,
       :peer_vpc_id,
       keyword_init: true
@@ -2643,6 +2724,7 @@ module Aws::GameLift
     end
 
     class DeleteVpcPeeringAuthorizationOutput < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -2656,6 +2738,7 @@ module Aws::GameLift
     #   <p>A unique identifier for a VPC peering connection.</p>
     #   @return [String]
     class DeleteVpcPeeringConnectionInput < Struct.new(
+      nil,
       :fleet_id,
       :vpc_peering_connection_id,
       keyword_init: true
@@ -2664,6 +2747,7 @@ module Aws::GameLift
     end
 
     class DeleteVpcPeeringConnectionOutput < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -2688,6 +2772,7 @@ module Aws::GameLift
     #               tasks return to the last successful deployment.</p>
     #   @return [String]
     class DeploymentConfiguration < Struct.new(
+      nil,
       :protection_strategy,
       :minimum_healthy_percentage,
       :impairment_strategy,
@@ -2701,6 +2786,7 @@ module Aws::GameLift
     #   <p>A unique identifier for a fleet deployment.</p>
     #   @return [String]
     class DeploymentDetails < Struct.new(
+      nil,
       :latest_deployment_id,
       keyword_init: true
     )
@@ -2715,6 +2801,7 @@ module Aws::GameLift
     #               compute, use the registered compute name.</p>
     #   @return [String]
     class DeregisterComputeInput < Struct.new(
+      nil,
       :fleet_id,
       :compute_name,
       keyword_init: true
@@ -2723,6 +2810,7 @@ module Aws::GameLift
     end
 
     class DeregisterComputeOutput < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -2735,6 +2823,7 @@ module Aws::GameLift
     #   <p>A custom string that uniquely identifies the game server to deregister.</p>
     #   @return [String]
     class DeregisterGameServerInput < Struct.new(
+      nil,
       :game_server_group_name,
       :game_server_id,
       keyword_init: true
@@ -2747,6 +2836,7 @@ module Aws::GameLift
     #               either the alias ID or ARN value. </p>
     #   @return [String]
     class DescribeAliasInput < Struct.new(
+      nil,
       :alias_id,
       keyword_init: true
     )
@@ -2757,6 +2847,7 @@ module Aws::GameLift
     #   <p>The requested alias resource.</p>
     #   @return [Types::Alias]
     class DescribeAliasOutput < Struct.new(
+      nil,
       :alias,
       keyword_init: true
     )
@@ -2768,6 +2859,7 @@ module Aws::GameLift
     #           </p>
     #   @return [String]
     class DescribeBuildInput < Struct.new(
+      nil,
       :build_id,
       keyword_init: true
     )
@@ -2778,6 +2870,7 @@ module Aws::GameLift
     #   <p>Set of properties describing the requested build.</p>
     #   @return [Types::Build]
     class DescribeBuildOutput < Struct.new(
+      nil,
       :build,
       keyword_init: true
     )
@@ -2794,6 +2887,7 @@ module Aws::GameLift
     #               instance ID. To retrieve a fleet's compute identifiers, call <a href="https://docs.aws.amazon.com/gamelift/latest/apireference/API_ListCompute.html">ListCompute</a>.</p>
     #   @return [String]
     class DescribeComputeInput < Struct.new(
+      nil,
       :fleet_id,
       :compute_name,
       keyword_init: true
@@ -2805,6 +2899,7 @@ module Aws::GameLift
     #   <p>The set of properties for the requested compute resource.</p>
     #   @return [Types::Compute]
     class DescribeComputeOutput < Struct.new(
+      nil,
       :compute,
       keyword_init: true
     )
@@ -2816,6 +2911,7 @@ module Aws::GameLift
     #               ID or ARN value.</p>
     #   @return [String]
     class DescribeContainerFleetInput < Struct.new(
+      nil,
       :fleet_id,
       keyword_init: true
     )
@@ -2826,6 +2922,7 @@ module Aws::GameLift
     #   <p>The properties for the requested container fleet, including current status.</p>
     #   @return [Types::ContainerFleet]
     class DescribeContainerFleetOutput < Struct.new(
+      nil,
       :container_fleet,
       keyword_init: true
     )
@@ -2840,6 +2937,7 @@ module Aws::GameLift
     #   <p>The specific version to retrieve.</p>
     #   @return [Integer]
     class DescribeContainerGroupDefinitionInput < Struct.new(
+      nil,
       :name,
       :version_number,
       keyword_init: true
@@ -2851,6 +2949,7 @@ module Aws::GameLift
     #   <p>The properties of the requested container group definition resource.</p>
     #   @return [Types::ContainerGroupDefinition]
     class DescribeContainerGroupDefinitionOutput < Struct.new(
+      nil,
       :container_group_definition,
       keyword_init: true
     )
@@ -2868,6 +2967,7 @@ module Aws::GameLift
     #               Region code such as <code>us-west-2</code>.</p>
     #   @return [String]
     class DescribeEC2InstanceLimitsInput < Struct.new(
+      nil,
       :ec2_instance_type,
       :location,
       keyword_init: true
@@ -2879,6 +2979,7 @@ module Aws::GameLift
     #   <p>The maximum number of instances for the specified instance type.</p>
     #   @return [Array<Types::EC2InstanceLimit>]
     class DescribeEC2InstanceLimitsOutput < Struct.new(
+      nil,
       :ec2_instance_limits,
       keyword_init: true
     )
@@ -2899,6 +3000,7 @@ module Aws::GameLift
     #               IDs.</p>
     #   @return [String]
     class DescribeFleetAttributesInput < Struct.new(
+      nil,
       :fleet_ids,
       :limit,
       :next_token,
@@ -2915,6 +3017,7 @@ module Aws::GameLift
     #   <p>A token that indicates where to resume retrieving results on the next call to this operation. If no token is returned, these results represent the end of the list.</p>
     #   @return [String]
     class DescribeFleetAttributesOutput < Struct.new(
+      nil,
       :fleet_attributes,
       :next_token,
       keyword_init: true
@@ -2936,6 +3039,7 @@ module Aws::GameLift
     #               IDs.</p>
     #   @return [String]
     class DescribeFleetCapacityInput < Struct.new(
+      nil,
       :fleet_ids,
       :limit,
       :next_token,
@@ -2953,6 +3057,7 @@ module Aws::GameLift
     #   <p>A token that indicates where to resume retrieving results on the next call to this operation. If no token is returned, these results represent the end of the list.</p>
     #   @return [String]
     class DescribeFleetCapacityOutput < Struct.new(
+      nil,
       :fleet_capacity,
       :next_token,
       keyword_init: true
@@ -2968,6 +3073,7 @@ module Aws::GameLift
     #   <p>A unique identifier for the deployment to return information for. </p>
     #   @return [String]
     class DescribeFleetDeploymentInput < Struct.new(
+      nil,
       :fleet_id,
       :deployment_id,
       keyword_init: true
@@ -2983,6 +3089,7 @@ module Aws::GameLift
     #               status in each fleet location.</p>
     #   @return [Hash<String, Types::LocationalDeployment>]
     class DescribeFleetDeploymentOutput < Struct.new(
+      nil,
       :fleet_deployment,
       :locational_deployments,
       keyword_init: true
@@ -3010,6 +3117,7 @@ module Aws::GameLift
     #   <p>A token that indicates the start of the next sequential page of results. Use the token that is returned with a previous call to this operation. To start at the beginning of the result set, do not specify a value.</p>
     #   @return [String]
     class DescribeFleetEventsInput < Struct.new(
+      nil,
       :fleet_id,
       :start_time,
       :end_time,
@@ -3027,6 +3135,7 @@ module Aws::GameLift
     #   <p>A token that indicates where to resume retrieving results on the next call to this operation. If no token is returned, these results represent the end of the list.</p>
     #   @return [String]
     class DescribeFleetEventsOutput < Struct.new(
+      nil,
       :events,
       :next_token,
       keyword_init: true
@@ -3049,6 +3158,7 @@ module Aws::GameLift
     #   <p>A token that indicates the start of the next sequential page of results. Use the token that is returned with a previous call to this operation. To start at the beginning of the result set, do not specify a value.</p>
     #   @return [String]
     class DescribeFleetLocationAttributesInput < Struct.new(
+      nil,
       :fleet_id,
       :locations,
       :limit,
@@ -3071,6 +3181,7 @@ module Aws::GameLift
     #   <p>A token that indicates where to resume retrieving results on the next call to this operation. If no token is returned, these results represent the end of the list.</p>
     #   @return [String]
     class DescribeFleetLocationAttributesOutput < Struct.new(
+      nil,
       :fleet_id,
       :fleet_arn,
       :location_attributes,
@@ -3089,6 +3200,7 @@ module Aws::GameLift
     #               form of an Amazon Web Services Region code, such as <code>us-west-2</code>.</p>
     #   @return [String]
     class DescribeFleetLocationCapacityInput < Struct.new(
+      nil,
       :fleet_id,
       :location,
       keyword_init: true
@@ -3102,6 +3214,7 @@ module Aws::GameLift
     #               value can take up to 1 minute to be reflected.</p>
     #   @return [Types::FleetCapacity]
     class DescribeFleetLocationCapacityOutput < Struct.new(
+      nil,
       :fleet_capacity,
       keyword_init: true
     )
@@ -3117,6 +3230,7 @@ module Aws::GameLift
     #               form of an Amazon Web Services Region code, such as <code>us-west-2</code>.</p>
     #   @return [String]
     class DescribeFleetLocationUtilizationInput < Struct.new(
+      nil,
       :fleet_id,
       :location,
       keyword_init: true
@@ -3129,6 +3243,7 @@ module Aws::GameLift
     #               returned only for fleets and locations that currently exist.</p>
     #   @return [Types::FleetUtilization]
     class DescribeFleetLocationUtilizationOutput < Struct.new(
+      nil,
       :fleet_utilization,
       keyword_init: true
     )
@@ -3144,6 +3259,7 @@ module Aws::GameLift
     #               code format, such as <code>us-west-2</code>.</p>
     #   @return [String]
     class DescribeFleetPortSettingsInput < Struct.new(
+      nil,
       :fleet_id,
       :location,
       keyword_init: true
@@ -3170,6 +3286,7 @@ module Aws::GameLift
     #                   <code>us-west-2</code>. </p>
     #   @return [String]
     class DescribeFleetPortSettingsOutput < Struct.new(
+      nil,
       :fleet_id,
       :fleet_arn,
       :inbound_permissions,
@@ -3193,6 +3310,7 @@ module Aws::GameLift
     #               IDs.</p>
     #   @return [String]
     class DescribeFleetUtilizationInput < Struct.new(
+      nil,
       :fleet_ids,
       :limit,
       :next_token,
@@ -3209,6 +3327,7 @@ module Aws::GameLift
     #   <p>A token that indicates where to resume retrieving results on the next call to this operation. If no token is returned, these results represent the end of the list.</p>
     #   @return [String]
     class DescribeFleetUtilizationOutput < Struct.new(
+      nil,
       :fleet_utilization,
       :next_token,
       keyword_init: true
@@ -3220,6 +3339,7 @@ module Aws::GameLift
     #   <p>A unique identifier for the game server group. Use either the name or ARN value.</p>
     #   @return [String]
     class DescribeGameServerGroupInput < Struct.new(
+      nil,
       :game_server_group_name,
       keyword_init: true
     )
@@ -3231,6 +3351,7 @@ module Aws::GameLift
     #           </p>
     #   @return [Types::GameServerGroup]
     class DescribeGameServerGroupOutput < Struct.new(
+      nil,
       :game_server_group,
       keyword_init: true
     )
@@ -3244,6 +3365,7 @@ module Aws::GameLift
     #   <p>A custom string that uniquely identifies the game server information to be retrieved.</p>
     #   @return [String]
     class DescribeGameServerInput < Struct.new(
+      nil,
       :game_server_group_name,
       :game_server_id,
       keyword_init: true
@@ -3266,6 +3388,7 @@ module Aws::GameLift
     #   <p>A token that indicates the start of the next sequential page of results. Use the token that is returned with a previous call to this operation. To start at the beginning of the result set, do not specify a value.</p>
     #   @return [String]
     class DescribeGameServerInstancesInput < Struct.new(
+      nil,
       :game_server_group_name,
       :instance_ids,
       :limit,
@@ -3282,6 +3405,7 @@ module Aws::GameLift
     #   <p>A token that indicates where to resume retrieving results on the next call to this operation. If no token is returned, these results represent the end of the list.</p>
     #   @return [String]
     class DescribeGameServerInstancesOutput < Struct.new(
+      nil,
       :game_server_instances,
       :next_token,
       keyword_init: true
@@ -3293,6 +3417,7 @@ module Aws::GameLift
     #   <p>Object that describes the requested game server.</p>
     #   @return [Types::GameServer]
     class DescribeGameServerOutput < Struct.new(
+      nil,
       :game_server,
       keyword_init: true
     )
@@ -3327,6 +3452,7 @@ module Aws::GameLift
     #   <p>A token that indicates the start of the next sequential page of results. Use the token that is returned with a previous call to this operation. To start at the beginning of the result set, do not specify a value.</p>
     #   @return [String]
     class DescribeGameSessionDetailsInput < Struct.new(
+      nil,
       :fleet_id,
       :game_session_id,
       :alias_id,
@@ -3346,6 +3472,7 @@ module Aws::GameLift
     #   <p>A token that indicates where to resume retrieving results on the next call to this operation. If no token is returned, these results represent the end of the list.</p>
     #   @return [String]
     class DescribeGameSessionDetailsOutput < Struct.new(
+      nil,
       :game_session_details,
       :next_token,
       keyword_init: true
@@ -3357,6 +3484,7 @@ module Aws::GameLift
     #   <p>A unique identifier for a game session placement to retrieve.</p>
     #   @return [String]
     class DescribeGameSessionPlacementInput < Struct.new(
+      nil,
       :placement_id,
       keyword_init: true
     )
@@ -3367,6 +3495,7 @@ module Aws::GameLift
     #   <p>Object that describes the requested game session placement.</p>
     #   @return [Types::GameSessionPlacement]
     class DescribeGameSessionPlacementOutput < Struct.new(
+      nil,
       :game_session_placement,
       keyword_init: true
     )
@@ -3384,6 +3513,7 @@ module Aws::GameLift
     #   <p>A token that indicates the start of the next sequential page of results. Use the token that is returned with a previous call to this operation. To start at the beginning of the result set, do not specify a value.</p>
     #   @return [String]
     class DescribeGameSessionQueuesInput < Struct.new(
+      nil,
       :names,
       :limit,
       :next_token,
@@ -3399,6 +3529,7 @@ module Aws::GameLift
     #   <p>A token that indicates where to resume retrieving results on the next call to this operation. If no token is returned, these results represent the end of the list.</p>
     #   @return [String]
     class DescribeGameSessionQueuesOutput < Struct.new(
+      nil,
       :game_session_queues,
       :next_token,
       keyword_init: true
@@ -3435,6 +3566,7 @@ module Aws::GameLift
     #   <p>A token that indicates the start of the next sequential page of results. Use the token that is returned with a previous call to this operation. To start at the beginning of the result set, do not specify a value.</p>
     #   @return [String]
     class DescribeGameSessionsInput < Struct.new(
+      nil,
       :fleet_id,
       :game_session_id,
       :alias_id,
@@ -3454,6 +3586,7 @@ module Aws::GameLift
     #   <p>A token that indicates where to resume retrieving results on the next call to this operation. If no token is returned, these results represent the end of the list.</p>
     #   @return [String]
     class DescribeGameSessionsOutput < Struct.new(
+      nil,
       :game_sessions,
       :next_token,
       keyword_init: true
@@ -3480,6 +3613,7 @@ module Aws::GameLift
     #               Region code such as <code>us-west-2</code>. </p>
     #   @return [String]
     class DescribeInstancesInput < Struct.new(
+      nil,
       :fleet_id,
       :instance_id,
       :limit,
@@ -3497,6 +3631,7 @@ module Aws::GameLift
     #   <p>A token that indicates where to resume retrieving results on the next call to this operation. If no token is returned, these results represent the end of the list.</p>
     #   @return [String]
     class DescribeInstancesOutput < Struct.new(
+      nil,
       :instances,
       :next_token,
       keyword_init: true
@@ -3519,6 +3654,7 @@ module Aws::GameLift
     #   <p>A token that indicates the start of the next sequential page of results. Use the token that is returned with a previous call to this operation. To start at the beginning of the result set, do not specify a value.</p>
     #   @return [String]
     class DescribeMatchmakingConfigurationsInput < Struct.new(
+      nil,
       :names,
       :rule_set_name,
       :limit,
@@ -3535,6 +3671,7 @@ module Aws::GameLift
     #   <p>A token that indicates where to resume retrieving results on the next call to this operation. If no token is returned, these results represent the end of the list.</p>
     #   @return [String]
     class DescribeMatchmakingConfigurationsOutput < Struct.new(
+      nil,
       :configurations,
       :next_token,
       keyword_init: true
@@ -3546,6 +3683,7 @@ module Aws::GameLift
     #   <p>A unique identifier for a matchmaking ticket. You can include up to 10 ID values. </p>
     #   @return [Array<String>]
     class DescribeMatchmakingInput < Struct.new(
+      nil,
       :ticket_ids,
       keyword_init: true
     )
@@ -3556,6 +3694,7 @@ module Aws::GameLift
     #   <p>A collection of existing matchmaking ticket objects matching the request.</p>
     #   @return [Array<Types::MatchmakingTicket>]
     class DescribeMatchmakingOutput < Struct.new(
+      nil,
       :ticket_list,
       keyword_init: true
     )
@@ -3574,6 +3713,7 @@ module Aws::GameLift
     #   <p>A token that indicates the start of the next sequential page of results. Use the token that is returned with a previous call to this operation. To start at the beginning of the result set, do not specify a value.</p>
     #   @return [String]
     class DescribeMatchmakingRuleSetsInput < Struct.new(
+      nil,
       :names,
       :limit,
       :next_token,
@@ -3589,6 +3729,7 @@ module Aws::GameLift
     #   <p>A token that indicates where to resume retrieving results on the next call to this operation. If no token is returned, these results represent the end of the list.</p>
     #   @return [String]
     class DescribeMatchmakingRuleSetsOutput < Struct.new(
+      nil,
       :rule_sets,
       :next_token,
       keyword_init: true
@@ -3642,6 +3783,7 @@ module Aws::GameLift
     #   <p>A token that indicates the start of the next sequential page of results. Use the token that is returned with a previous call to this operation. To start at the beginning of the result set, do not specify a value. If a player session ID is specified, this parameter is ignored.</p>
     #   @return [String]
     class DescribePlayerSessionsInput < Struct.new(
+      nil,
       :game_session_id,
       :player_id,
       :player_session_id,
@@ -3661,6 +3803,7 @@ module Aws::GameLift
     #   <p>A token that indicates where to resume retrieving results on the next call to this operation. If no token is returned, these results represent the end of the list.</p>
     #   @return [String]
     class DescribePlayerSessionsOutput < Struct.new(
+      nil,
       :player_sessions,
       :next_token,
       keyword_init: true
@@ -3673,6 +3816,7 @@ module Aws::GameLift
     #               value.</p>
     #   @return [String]
     class DescribeRuntimeConfigurationInput < Struct.new(
+      nil,
       :fleet_id,
       keyword_init: true
     )
@@ -3684,6 +3828,7 @@ module Aws::GameLift
     #               computes in the fleet.</p>
     #   @return [Types::RuntimeConfiguration]
     class DescribeRuntimeConfigurationOutput < Struct.new(
+      nil,
       :runtime_configuration,
       keyword_init: true
     )
@@ -3746,6 +3891,7 @@ module Aws::GameLift
     #               scaling policies of every location in the fleet. </p>
     #   @return [String]
     class DescribeScalingPoliciesInput < Struct.new(
+      nil,
       :fleet_id,
       :status_filter,
       :limit,
@@ -3763,6 +3909,7 @@ module Aws::GameLift
     #   <p>A token that indicates where to resume retrieving results on the next call to this operation. If no token is returned, these results represent the end of the list.</p>
     #   @return [String]
     class DescribeScalingPoliciesOutput < Struct.new(
+      nil,
       :scaling_policies,
       :next_token,
       keyword_init: true
@@ -3775,6 +3922,7 @@ module Aws::GameLift
     #               value.</p>
     #   @return [String]
     class DescribeScriptInput < Struct.new(
+      nil,
       :script_id,
       keyword_init: true
     )
@@ -3785,6 +3933,7 @@ module Aws::GameLift
     #   <p>A set of properties describing the requested script.</p>
     #   @return [Types::Script]
     class DescribeScriptOutput < Struct.new(
+      nil,
       :script,
       keyword_init: true
     )
@@ -3792,6 +3941,7 @@ module Aws::GameLift
     end
 
     class DescribeVpcPeeringAuthorizationsInput < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -3802,6 +3952,7 @@ module Aws::GameLift
     #               Amazon Web Services account.</p>
     #   @return [Array<Types::VpcPeeringAuthorization>]
     class DescribeVpcPeeringAuthorizationsOutput < Struct.new(
+      nil,
       :vpc_peering_authorizations,
       keyword_init: true
     )
@@ -3812,6 +3963,7 @@ module Aws::GameLift
     #   <p>A unique identifier for the fleet. You can use either the fleet ID or ARN value.</p>
     #   @return [String]
     class DescribeVpcPeeringConnectionsInput < Struct.new(
+      nil,
       :fleet_id,
       keyword_init: true
     )
@@ -3822,6 +3974,7 @@ module Aws::GameLift
     #   <p>A collection of VPC peering connection records that match the request.</p>
     #   @return [Array<Types::VpcPeeringConnection>]
     class DescribeVpcPeeringConnectionsOutput < Struct.new(
+      nil,
       :vpc_peering_connections,
       keyword_init: true
     )
@@ -3837,6 +3990,7 @@ module Aws::GameLift
     #   <p>Developer-defined information related to a player. Amazon GameLift Servers does not use this data, so it can be formatted as needed for use in the game.</p>
     #   @return [String]
     class DesiredPlayerSession < Struct.new(
+      nil,
       :player_id,
       :player_data,
       keyword_init: true
@@ -3872,6 +4026,7 @@ module Aws::GameLift
     #   <p>Number of instances that are no longer active but haven't yet been terminated.</p>
     #   @return [Integer]
     class EC2InstanceCounts < Struct.new(
+      nil,
       :desired,
       :minimum,
       :maximum,
@@ -3905,6 +4060,7 @@ module Aws::GameLift
     #   <p>An Amazon Web Services Region code, such as <code>us-west-2</code>. </p>
     #   @return [String]
     class EC2InstanceLimit < Struct.new(
+      nil,
       :ec2_instance_type,
       :current_instances,
       :instance_limit,
@@ -4167,6 +4323,7 @@ module Aws::GameLift
     #   <p>The number of times that this event occurred.</p>
     #   @return [Integer]
     class Event < Struct.new(
+      nil,
       :event_id,
       :resource_id,
       :event_code,
@@ -4188,6 +4345,7 @@ module Aws::GameLift
     #               codes such as <code>us-west-2</code>. </p>
     #   @return [Array<String>]
     class FilterConfiguration < Struct.new(
+      nil,
       :allowed_locations,
       keyword_init: true
     )
@@ -4392,6 +4550,7 @@ module Aws::GameLift
     #                   fleets where <code>ComputeType</code> is <code>EC2</code>.</p>
     #   @return [String]
     class FleetAttributes < Struct.new(
+      nil,
       :fleet_id,
       :fleet_arn,
       :fleet_type,
@@ -4455,6 +4614,7 @@ module Aws::GameLift
     #   <p>The number and status of game server container groups deployed in a container fleet. </p>
     #   @return [Types::GameServerContainerGroupCounts]
     class FleetCapacity < Struct.new(
+      nil,
       :fleet_id,
       :fleet_arn,
       :instance_type,
@@ -4472,6 +4632,7 @@ module Aws::GameLift
     # @!attribute message
     #   @return [String]
     class FleetCapacityExceededException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -4543,6 +4704,7 @@ module Aws::GameLift
     #   <p>A time stamp indicating when this data object was created. Format is a number expressed in Unix time as milliseconds (for example <code>"1469498468.057"</code>).</p>
     #   @return [Time]
     class FleetDeployment < Struct.new(
+      nil,
       :deployment_id,
       :fleet_id,
       :game_server_binary_arn,
@@ -4586,6 +4748,7 @@ module Aws::GameLift
     #               code, such as <code>us-west-2</code>. </p>
     #   @return [String]
     class FleetUtilization < Struct.new(
+      nil,
       :fleet_id,
       :fleet_arn,
       :active_server_process_count,
@@ -4613,6 +4776,7 @@ module Aws::GameLift
     #   <p>The game property value.</p>
     #   @return [String]
     class GameProperty < Struct.new(
+      nil,
       :key,
       :value,
       keyword_init: true
@@ -4693,6 +4857,7 @@ module Aws::GameLift
     #               only changed when a game server update specifies a health check value.</p>
     #   @return [Time]
     class GameServer < Struct.new(
+      nil,
       :game_server_group_name,
       :game_server_group_arn,
       :game_server_id,
@@ -4763,6 +4928,7 @@ module Aws::GameLift
     #         using 5.2.0 or higher are compatible with container fleets.</p>
     #   @return [String]
     class GameServerContainerDefinition < Struct.new(
+      nil,
       :container_name,
       :depends_on,
       :mount_points,
@@ -4850,6 +5016,7 @@ module Aws::GameLift
     #         using 5.2.0 or higher are compatible with container fleets.</p>
     #   @return [String]
     class GameServerContainerDefinitionInput < Struct.new(
+      nil,
       :container_name,
       :depends_on,
       :mount_points,
@@ -4888,6 +5055,7 @@ module Aws::GameLift
     #   <p> The number of container groups that are in the process of shutting down. </p>
     #   @return [Integer]
     class GameServerContainerGroupCounts < Struct.new(
+      nil,
       :pending,
       :active,
       :idle,
@@ -5020,6 +5188,7 @@ module Aws::GameLift
     #   <p>A timestamp that indicates when this game server group was last updated.</p>
     #   @return [Time]
     class GameServerGroup < Struct.new(
+      nil,
       :game_server_group_name,
       :game_server_group_arn,
       :role_arn,
@@ -5060,6 +5229,7 @@ module Aws::GameLift
     #               capacity so that the metric returns to the target value. </p>
     #   @return [Types::TargetTrackingConfiguration]
     class GameServerGroupAutoScalingPolicy < Struct.new(
+      nil,
       :estimated_instance_warmup,
       :target_tracking_configuration,
       keyword_init: true
@@ -5094,6 +5264,7 @@ module Aws::GameLift
     #   <p>Current status of the game server instance</p>
     #   @return [String]
     class GameServerInstance < Struct.new(
+      nil,
       :game_server_group_name,
       :game_server_group_arn,
       :instance_id,
@@ -5212,6 +5383,7 @@ module Aws::GameLift
     #               such as <code>us-west-2</code>. </p>
     #   @return [String]
     class GameSession < Struct.new(
+      nil,
       :game_session_id,
       :name,
       :fleet_id,
@@ -5269,6 +5441,7 @@ module Aws::GameLift
     #               original matchmaking request. </p>
     #   @return [Array<Types::MatchedPlayerSession>]
     class GameSessionConnectionInfo < Struct.new(
+      nil,
       :game_session_arn,
       :ip_address,
       :dns_name,
@@ -5299,6 +5472,7 @@ module Aws::GameLift
     #   <p>The time span used in evaluating the resource creation limit policy. </p>
     #   @return [Integer]
     class GameSessionCreationLimitPolicy < Struct.new(
+      nil,
       :new_game_sessions_per_creator,
       :policy_period_in_minutes,
       keyword_init: true
@@ -5327,6 +5501,7 @@ module Aws::GameLift
     #            </ul>
     #   @return [String]
     class GameSessionDetail < Struct.new(
+      nil,
       :game_session,
       :protection_policy,
       keyword_init: true
@@ -5339,6 +5514,7 @@ module Aws::GameLift
     # @!attribute message
     #   @return [String]
     class GameSessionFullException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -5474,6 +5650,7 @@ module Aws::GameLift
     #               what action to take (if any) in the event that it failed to place a new game session. </p>
     #   @return [Types::PriorityConfigurationOverride]
     class GameSessionPlacement < Struct.new(
+      nil,
       :placement_id,
       :game_session_queue_name,
       :status,
@@ -5540,6 +5717,7 @@ module Aws::GameLift
     #                   notifications for game session placement</a>.</p>
     #   @return [String]
     class GameSessionQueue < Struct.new(
+      nil,
       :name,
       :game_session_queue_arn,
       :timeout_in_seconds,
@@ -5562,6 +5740,7 @@ module Aws::GameLift
     #               Regions.</p>
     #   @return [String]
     class GameSessionQueueDestination < Struct.new(
+      nil,
       :destination_arn,
       keyword_init: true
     )
@@ -5578,6 +5757,7 @@ module Aws::GameLift
     #               retrieve a fleet's compute names by calling <a href="https://docs.aws.amazon.com/gamelift/latest/apireference/API_ListCompute.html">ListCompute</a>.</p>
     #   @return [String]
     class GetComputeAccessInput < Struct.new(
+      nil,
       :fleet_id,
       :compute_name,
       keyword_init: true
@@ -5612,6 +5792,7 @@ module Aws::GameLift
     #               runtime ID with Docker commands to connect to a specific container. </p>
     #   @return [Array<Types::ContainerIdentifier>]
     class GetComputeAccessOutput < Struct.new(
+      nil,
       :fleet_id,
       :fleet_arn,
       :compute_name,
@@ -5633,6 +5814,7 @@ module Aws::GameLift
     #               use the instance ID.</p>
     #   @return [String]
     class GetComputeAuthTokenInput < Struct.new(
+      nil,
       :fleet_id,
       :compute_name,
       keyword_init: true
@@ -5661,6 +5843,7 @@ module Aws::GameLift
     #   <p>The amount of time until the authentication token is no longer valid.</p>
     #   @return [Time]
     class GetComputeAuthTokenOutput < Struct.new(
+      nil,
       :fleet_id,
       :fleet_arn,
       :compute_name,
@@ -5676,6 +5859,7 @@ module Aws::GameLift
     #   <p>A unique identifier for the game session to get logs for. </p>
     #   @return [String]
     class GetGameSessionLogUrlInput < Struct.new(
+      nil,
       :game_session_id,
       keyword_init: true
     )
@@ -5688,6 +5872,7 @@ module Aws::GameLift
     #               request a new URL any time within the 14-day period that the logs are retained.</p>
     #   @return [String]
     class GetGameSessionLogUrlOutput < Struct.new(
+      nil,
       :pre_signed_url,
       keyword_init: true
     )
@@ -5706,6 +5891,7 @@ module Aws::GameLift
     #   <p>A unique identifier for the instance you want to access. You can access an instance in any status.</p>
     #   @return [String]
     class GetInstanceAccessInput < Struct.new(
+      nil,
       :fleet_id,
       :instance_id,
       keyword_init: true
@@ -5718,6 +5904,7 @@ module Aws::GameLift
     #               credentials.</p>
     #   @return [Types::InstanceAccess]
     class GetInstanceAccessOutput < Struct.new(
+      nil,
       :instance_access,
       keyword_init: true
     )
@@ -5729,6 +5916,7 @@ module Aws::GameLift
     # @!attribute message
     #   @return [String]
     class IdempotentParameterMismatchException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -5811,6 +5999,7 @@ module Aws::GameLift
     #                   <code>us-west-2</code>. </p>
     #   @return [String]
     class Instance < Struct.new(
+      nil,
       :fleet_id,
       :fleet_arn,
       :instance_id,
@@ -5845,6 +6034,7 @@ module Aws::GameLift
     #   <p>Security credentials that are required to access the instance.</p>
     #   @return [Types::InstanceCredentials]
     class InstanceAccess < Struct.new(
+      nil,
       :fleet_id,
       :instance_id,
       :ip_address,
@@ -5868,6 +6058,7 @@ module Aws::GameLift
     #               Remote Desktop. For Linux instances, it's a private key for use with SSH.</p>
     #   @return [String]
     class InstanceCredentials < Struct.new(
+      nil,
       :user_name,
       :secret,
       keyword_init: true
@@ -5894,6 +6085,7 @@ module Aws::GameLift
     #               Default value is "1".</p>
     #   @return [String]
     class InstanceDefinition < Struct.new(
+      nil,
       :instance_type,
       :weighted_capacity,
       keyword_init: true
@@ -5906,6 +6098,7 @@ module Aws::GameLift
     # @!attribute message
     #   @return [String]
     class InternalServiceException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -5918,6 +6111,7 @@ module Aws::GameLift
     # @!attribute message
     #   @return [String]
     class InvalidFleetStatusException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -5930,6 +6124,7 @@ module Aws::GameLift
     # @!attribute message
     #   @return [String]
     class InvalidGameSessionStatusException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -5941,6 +6136,7 @@ module Aws::GameLift
     # @!attribute message
     #   @return [String]
     class InvalidRequestException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -5973,6 +6169,7 @@ module Aws::GameLift
     #   <p>The network communication protocol used by the fleet.</p>
     #   @return [String]
     class IpPermission < Struct.new(
+      nil,
       :from_port,
       :to_port,
       :ip_range,
@@ -6001,6 +6198,7 @@ module Aws::GameLift
     #               template. If none is set, the default is the first version created.</p>
     #   @return [String]
     class LaunchTemplateSpecification < Struct.new(
+      nil,
       :launch_template_id,
       :launch_template_name,
       :version,
@@ -6014,6 +6212,7 @@ module Aws::GameLift
     # @!attribute message
     #   @return [String]
     class LimitExceededException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -6048,6 +6247,7 @@ module Aws::GameLift
     #   <p>A token that indicates the start of the next sequential page of results. Use the token that is returned with a previous call to this operation. To start at the beginning of the result set, do not specify a value.</p>
     #   @return [String]
     class ListAliasesInput < Struct.new(
+      nil,
       :routing_strategy_type,
       :name,
       :limit,
@@ -6064,6 +6264,7 @@ module Aws::GameLift
     #   <p>A token that indicates where to resume retrieving results on the next call to this operation. If no token is returned, these results represent the end of the list.</p>
     #   @return [String]
     class ListAliasesOutput < Struct.new(
+      nil,
       :aliases,
       :next_token,
       keyword_init: true
@@ -6102,6 +6303,7 @@ module Aws::GameLift
     #   <p>A token that indicates the start of the next sequential page of results. Use the token that is returned with a previous call to this operation. To start at the beginning of the result set, do not specify a value.</p>
     #   @return [String]
     class ListBuildsInput < Struct.new(
+      nil,
       :status,
       :limit,
       :next_token,
@@ -6117,6 +6319,7 @@ module Aws::GameLift
     #   <p>A token that indicates where to resume retrieving results on the next call to this operation. If no token is returned, these results represent the end of the list.</p>
     #   @return [String]
     class ListBuildsOutput < Struct.new(
+      nil,
       :builds,
       :next_token,
       keyword_init: true
@@ -6160,6 +6363,7 @@ module Aws::GameLift
     #   <p>A token that indicates the start of the next sequential page of results. Use the token that is returned with a previous call to this operation. To start at the beginning of the result set, do not specify a value.</p>
     #   @return [String]
     class ListComputeInput < Struct.new(
+      nil,
       :fleet_id,
       :location,
       :container_group_definition_name,
@@ -6178,6 +6382,7 @@ module Aws::GameLift
     #   <p>A token that indicates where to resume retrieving results on the next call to this operation. If no token is returned, these results represent the end of the list.</p>
     #   @return [String]
     class ListComputeOutput < Struct.new(
+      nil,
       :compute_list,
       :next_token,
       keyword_init: true
@@ -6198,6 +6403,7 @@ module Aws::GameLift
     #   <p>A token that indicates the start of the next sequential page of results. Use the token that is returned with a previous call to this operation. To start at the beginning of the result set, do not specify a value.</p>
     #   @return [String]
     class ListContainerFleetsInput < Struct.new(
+      nil,
       :container_group_definition_name,
       :limit,
       :next_token,
@@ -6214,6 +6420,7 @@ module Aws::GameLift
     #   <p>A token that indicates where to resume retrieving results on the next call to this operation. If no token is returned, these results represent the end of the list.</p>
     #   @return [String]
     class ListContainerFleetsOutput < Struct.new(
+      nil,
       :container_fleets,
       :next_token,
       keyword_init: true
@@ -6232,6 +6439,7 @@ module Aws::GameLift
     #   <p>A token that indicates the start of the next sequential page of results. Use the token that is returned with a previous call to this operation. To start at the beginning of the result set, do not specify a value.</p>
     #   @return [String]
     class ListContainerGroupDefinitionVersionsInput < Struct.new(
+      nil,
       :name,
       :limit,
       :next_token,
@@ -6247,6 +6455,7 @@ module Aws::GameLift
     #   <p>A token that indicates where to resume retrieving results on the next call to this operation. If no token is returned, these results represent the end of the list.</p>
     #   @return [String]
     class ListContainerGroupDefinitionVersionsOutput < Struct.new(
+      nil,
       :container_group_definitions,
       :next_token,
       keyword_init: true
@@ -6265,6 +6474,7 @@ module Aws::GameLift
     #   <p>A token that indicates the start of the next sequential page of results. Use the token that is returned with a previous call to this operation. To start at the beginning of the result set, do not specify a value.</p>
     #   @return [String]
     class ListContainerGroupDefinitionsInput < Struct.new(
+      nil,
       :container_group_type,
       :limit,
       :next_token,
@@ -6280,6 +6490,7 @@ module Aws::GameLift
     #   <p>A token that indicates where to resume retrieving results on the next call to this operation. If no token is returned, these results represent the end of the list.</p>
     #   @return [String]
     class ListContainerGroupDefinitionsOutput < Struct.new(
+      nil,
       :container_group_definitions,
       :next_token,
       keyword_init: true
@@ -6298,6 +6509,7 @@ module Aws::GameLift
     #   <p>A token that indicates the start of the next sequential page of results. Use the token that is returned with a previous call to this operation. To start at the beginning of the result set, do not specify a value.</p>
     #   @return [String]
     class ListFleetDeploymentsInput < Struct.new(
+      nil,
       :fleet_id,
       :limit,
       :next_token,
@@ -6313,6 +6525,7 @@ module Aws::GameLift
     #   <p>A token that indicates where to resume retrieving results on the next call to this operation. If no token is returned, these results represent the end of the list.</p>
     #   @return [String]
     class ListFleetDeploymentsOutput < Struct.new(
+      nil,
       :fleet_deployments,
       :next_token,
       keyword_init: true
@@ -6335,6 +6548,7 @@ module Aws::GameLift
     #   <p>A token that indicates the start of the next sequential page of results. Use the token that is returned with a previous call to this operation. To start at the beginning of the result set, do not specify a value.</p>
     #   @return [String]
     class ListFleetsInput < Struct.new(
+      nil,
       :build_id,
       :script_id,
       :limit,
@@ -6351,6 +6565,7 @@ module Aws::GameLift
     #   <p>A token that indicates where to resume retrieving results on the next call to this operation. If no token is returned, these results represent the end of the list.</p>
     #   @return [String]
     class ListFleetsOutput < Struct.new(
+      nil,
       :fleet_ids,
       :next_token,
       keyword_init: true
@@ -6366,6 +6581,7 @@ module Aws::GameLift
     #               results.</p>
     #   @return [String]
     class ListGameServerGroupsInput < Struct.new(
+      nil,
       :limit,
       :next_token,
       keyword_init: true
@@ -6381,6 +6597,7 @@ module Aws::GameLift
     #               results.</p>
     #   @return [String]
     class ListGameServerGroupsOutput < Struct.new(
+      nil,
       :game_server_groups,
       :next_token,
       keyword_init: true
@@ -6405,6 +6622,7 @@ module Aws::GameLift
     #   <p>A token that indicates the start of the next sequential page of results. Use the token that is returned with a previous call to this operation. To start at the beginning of the result set, do not specify a value.</p>
     #   @return [String]
     class ListGameServersInput < Struct.new(
+      nil,
       :game_server_group_name,
       :sort_order,
       :limit,
@@ -6421,6 +6639,7 @@ module Aws::GameLift
     #   <p>A token that indicates where to resume retrieving results on the next call to this operation. If no token is returned, these results represent the end of the list.</p>
     #   @return [String]
     class ListGameServersOutput < Struct.new(
+      nil,
       :game_servers,
       :next_token,
       keyword_init: true
@@ -6440,6 +6659,7 @@ module Aws::GameLift
     #   <p>A token that indicates the start of the next sequential page of results. Use the token that is returned with a previous call to this operation. To start at the beginning of the result set, do not specify a value.</p>
     #   @return [String]
     class ListLocationsInput < Struct.new(
+      nil,
       :filters,
       :limit,
       :next_token,
@@ -6457,6 +6677,7 @@ module Aws::GameLift
     #   <p>A token that indicates where to resume retrieving results on the next call to this operation. If no token is returned, these results represent the end of the list.</p>
     #   @return [String]
     class ListLocationsOutput < Struct.new(
+      nil,
       :locations,
       :next_token,
       keyword_init: true
@@ -6471,6 +6692,7 @@ module Aws::GameLift
     #   <p>A token that indicates the start of the next sequential page of results. Use the token that is returned with a previous call to this operation. To start at the beginning of the result set, do not specify a value.</p>
     #   @return [String]
     class ListScriptsInput < Struct.new(
+      nil,
       :limit,
       :next_token,
       keyword_init: true
@@ -6485,6 +6707,7 @@ module Aws::GameLift
     #   <p>A token that indicates where to resume retrieving results on the next call to this operation. If no token is returned, these results represent the end of the list.</p>
     #   @return [String]
     class ListScriptsOutput < Struct.new(
+      nil,
       :scripts,
       :next_token,
       keyword_init: true
@@ -6499,6 +6722,7 @@ module Aws::GameLift
     #                   <code>List</code> or <code>Describe</code> operation for the resource type. </p>
     #   @return [String]
     class ListTagsForResourceRequest < Struct.new(
+      nil,
       :resource_arn,
       keyword_init: true
     )
@@ -6509,6 +6733,7 @@ module Aws::GameLift
     #   <p>The collection of tags assigned to the resource. </p>
     #   @return [Array<Types::Tag>]
     class ListTagsForResourceResponse < Struct.new(
+      nil,
       :tags,
       keyword_init: true
     )
@@ -6529,6 +6754,7 @@ module Aws::GameLift
     #               completed for the location.</p>
     #   @return [String]
     class LocationAttributes < Struct.new(
+      nil,
       :location_state,
       :stopped_actions,
       :update_status,
@@ -6545,6 +6771,7 @@ module Aws::GameLift
     #                   locations</a> for managed hosting.</p>
     #   @return [String]
     class LocationConfiguration < Struct.new(
+      nil,
       :location,
       keyword_init: true
     )
@@ -6565,6 +6792,7 @@ module Aws::GameLift
     #   <p>Information about the UDP ping beacon for this location. </p>
     #   @return [Types::PingBeacon]
     class LocationModel < Struct.new(
+      nil,
       :location_name,
       :location_arn,
       :ping_beacon,
@@ -6623,6 +6851,7 @@ module Aws::GameLift
     #   <p>The life-cycle status of a fleet location. </p>
     #   @return [String]
     class LocationState < Struct.new(
+      nil,
       :location,
       :status,
       keyword_init: true
@@ -6665,6 +6894,7 @@ module Aws::GameLift
     #            </ul>
     #   @return [String]
     class LocationalDeployment < Struct.new(
+      nil,
       :deployment_status,
       keyword_init: true
     )
@@ -6698,6 +6928,7 @@ module Aws::GameLift
     #   <p>If log destination is <code>CLOUDWATCH</code>, logs are sent to the specified log group in Amazon CloudWatch.</p>
     #   @return [String]
     class LogConfiguration < Struct.new(
+      nil,
       :log_destination,
       :s3_bucket_name,
       :log_group_arn,
@@ -6718,6 +6949,7 @@ module Aws::GameLift
     #   <p>A unique identifier for a player session</p>
     #   @return [String]
     class MatchedPlayerSession < Struct.new(
+      nil,
       :player_id,
       :player_session_id,
       keyword_init: true
@@ -6818,6 +7050,7 @@ module Aws::GameLift
     #            </ul>
     #   @return [String]
     class MatchmakingConfiguration < Struct.new(
+      nil,
       :name,
       :configuration_arn,
       :description,
@@ -6892,6 +7125,7 @@ module Aws::GameLift
     #   <p>A time stamp indicating when this data object was created. Format is a number expressed in Unix time as milliseconds (for example <code>"1469498468.057"</code>).</p>
     #   @return [Time]
     class MatchmakingRuleSet < Struct.new(
+      nil,
       :rule_set_name,
       :rule_set_arn,
       :rule_set_body,
@@ -7002,6 +7236,7 @@ module Aws::GameLift
     #               there is not enough recent data, this property may be empty.</p>
     #   @return [Integer]
     class MatchmakingTicket < Struct.new(
+      nil,
       :ticket_id,
       :configuration_name,
       :configuration_arn,
@@ -7022,6 +7257,7 @@ module Aws::GameLift
     # @!attribute message
     #   @return [String]
     class NotFoundException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -7034,6 +7270,7 @@ module Aws::GameLift
     # @!attribute message
     #   @return [String]
     class NotReadyException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -7046,6 +7283,7 @@ module Aws::GameLift
     # @!attribute message
     #   @return [String]
     class OutOfCapacityException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -7058,6 +7296,7 @@ module Aws::GameLift
     #   <p>The domain name and port of the UDP ping beacon. </p>
     #   @return [Types::UDPEndpoint]
     class PingBeacon < Struct.new(
+      nil,
       :udp_endpoint,
       keyword_init: true
     )
@@ -7073,6 +7312,7 @@ module Aws::GameLift
     #   <p>A unique identifier for a player session.</p>
     #   @return [String]
     class PlacedPlayerSession < Struct.new(
+      nil,
       :player_id,
       :player_session_id,
       keyword_init: true
@@ -7105,6 +7345,7 @@ module Aws::GameLift
     #               no Regions are available to the player and the ticket is not matchable. </p>
     #   @return [Hash<String, Integer>]
     class Player < Struct.new(
+      nil,
       :player_id,
       :player_attributes,
       :team,
@@ -7130,6 +7371,7 @@ module Aws::GameLift
     #               to the specified Region.</p>
     #   @return [Float]
     class PlayerLatency < Struct.new(
+      nil,
       :player_id,
       :region_identifier,
       :latency_in_milliseconds,
@@ -7153,6 +7395,7 @@ module Aws::GameLift
     #               queue times out.</p>
     #   @return [Integer]
     class PlayerLatencyPolicy < Struct.new(
+      nil,
       :maximum_individual_player_latency_milliseconds,
       :policy_duration_seconds,
       keyword_init: true
@@ -7249,6 +7492,7 @@ module Aws::GameLift
     #   <p>Developer-defined information related to a player. Amazon GameLift Servers does not use this data, so it can be formatted as needed for use in the game. </p>
     #   @return [String]
     class PlayerSession < Struct.new(
+      nil,
       :player_session_id,
       :player_id,
       :game_session_id,
@@ -7325,6 +7569,7 @@ module Aws::GameLift
     #            </p>
     #   @return [Array<String>]
     class PriorityConfiguration < Struct.new(
+      nil,
       :priority_order,
       :location_order,
       keyword_init: true
@@ -7370,6 +7615,7 @@ module Aws::GameLift
     #            </p>
     #   @return [Array<String>]
     class PriorityConfigurationOverride < Struct.new(
+      nil,
       :placement_fallback_strategy,
       :location_order,
       keyword_init: true
@@ -7503,6 +7749,7 @@ module Aws::GameLift
     #   <p>An object that contains settings for a target-based scaling policy.</p>
     #   @return [Types::TargetConfiguration]
     class PutScalingPolicyInput < Struct.new(
+      nil,
       :name,
       :fleet_id,
       :scaling_adjustment,
@@ -7522,6 +7769,7 @@ module Aws::GameLift
     #   <p>A descriptive label that is associated with a fleet's scaling policy. Policy names do not need to be unique.</p>
     #   @return [String]
     class PutScalingPolicyOutput < Struct.new(
+      nil,
       :name,
       keyword_init: true
     )
@@ -7551,6 +7799,7 @@ module Aws::GameLift
     #               This parameter is required when registering a compute for an Anywhere fleet.</p>
     #   @return [String]
     class RegisterComputeInput < Struct.new(
+      nil,
       :fleet_id,
       :compute_name,
       :certificate_path,
@@ -7566,6 +7815,7 @@ module Aws::GameLift
     #   <p>The details of the compute resource you registered.</p>
     #   @return [Types::Compute]
     class RegisterComputeOutput < Struct.new(
+      nil,
       :compute,
       keyword_init: true
     )
@@ -7593,6 +7843,7 @@ module Aws::GameLift
     #               is passed to a game client or service when it requests information on game servers. </p>
     #   @return [String]
     class RegisterGameServerInput < Struct.new(
+      nil,
       :game_server_group_name,
       :game_server_id,
       :instance_id,
@@ -7607,6 +7858,7 @@ module Aws::GameLift
     #   <p>Object that describes the newly registered game server.</p>
     #   @return [Types::GameServer]
     class RegisterGameServerOutput < Struct.new(
+      nil,
       :game_server,
       keyword_init: true
     )
@@ -7617,6 +7869,7 @@ module Aws::GameLift
     #   <p>A unique identifier for the build to get credentials for. You can use either the build ID or ARN value. </p>
     #   @return [String]
     class RequestUploadCredentialsInput < Struct.new(
+      nil,
       :build_id,
       keyword_init: true
     )
@@ -7633,6 +7886,7 @@ module Aws::GameLift
     #               stored.</p>
     #   @return [Types::S3Location]
     class RequestUploadCredentialsOutput < Struct.new(
+      nil,
       :upload_credentials,
       :storage_location,
       keyword_init: true
@@ -7645,6 +7899,7 @@ module Aws::GameLift
     #               use either the alias ID or ARN value.</p>
     #   @return [String]
     class ResolveAliasInput < Struct.new(
+      nil,
       :alias_id,
       keyword_init: true
     )
@@ -7659,6 +7914,7 @@ module Aws::GameLift
     #           </p>
     #   @return [String]
     class ResolveAliasOutput < Struct.new(
+      nil,
       :fleet_id,
       :fleet_arn,
       keyword_init: true
@@ -7686,6 +7942,7 @@ module Aws::GameLift
     #   <p>The time span used in evaluating the resource creation limit policy. </p>
     #   @return [Integer]
     class ResourceCreationLimitPolicy < Struct.new(
+      nil,
       :new_game_sessions_per_creator,
       :policy_period_in_minutes,
       keyword_init: true
@@ -7700,6 +7957,7 @@ module Aws::GameLift
     #   <p>The activity to resume for this game server group.</p>
     #   @return [Array<String>]
     class ResumeGameServerGroupInput < Struct.new(
+      nil,
       :game_server_group_name,
       :resume_actions,
       keyword_init: true
@@ -7713,6 +7971,7 @@ module Aws::GameLift
     #               activity.</p>
     #   @return [Types::GameServerGroup]
     class ResumeGameServerGroupOutput < Struct.new(
+      nil,
       :game_server_group,
       keyword_init: true
     )
@@ -7750,6 +8009,7 @@ module Aws::GameLift
     #   <p>The message text to be used with a terminal routing strategy.</p>
     #   @return [String]
     class RoutingStrategy < Struct.new(
+      nil,
       :type,
       :fleet_id,
       :message,
@@ -7784,6 +8044,7 @@ module Aws::GameLift
     #               <code>TERMINATED</code>.</p>
     #   @return [Integer]
     class RuntimeConfiguration < Struct.new(
+      nil,
       :server_processes,
       :max_concurrent_game_session_activations,
       :game_session_activation_timeout_seconds,
@@ -7815,6 +8076,7 @@ module Aws::GameLift
     #               the file is retrieved. </p>
     #   @return [String]
     class S3Location < Struct.new(
+      nil,
       :bucket,
       :key,
       :role_arn,
@@ -8002,6 +8264,7 @@ module Aws::GameLift
     #   <p> The fleet location. </p>
     #   @return [String]
     class ScalingPolicy < Struct.new(
+      nil,
       :fleet_id,
       :fleet_arn,
       :name,
@@ -8058,6 +8321,7 @@ module Aws::GameLift
     #               version. </p>
     #   @return [Types::S3Location]
     class Script < Struct.new(
+      nil,
       :script_id,
       :script_arn,
       :name,
@@ -8177,6 +8441,7 @@ module Aws::GameLift
     #   <p>A token that indicates the start of the next sequential page of results. Use the token that is returned with a previous call to this operation. To start at the beginning of the result set, do not specify a value.</p>
     #   @return [String]
     class SearchGameSessionsInput < Struct.new(
+      nil,
       :fleet_id,
       :alias_id,
       :location,
@@ -8197,6 +8462,7 @@ module Aws::GameLift
     #   <p>A token that indicates where to resume retrieving results on the next call to this operation. If no token is returned, these results represent the end of the list.</p>
     #   @return [String]
     class SearchGameSessionsOutput < Struct.new(
+      nil,
       :game_sessions,
       :next_token,
       keyword_init: true
@@ -8237,6 +8503,7 @@ module Aws::GameLift
     #               instance or compute.</p>
     #   @return [Integer]
     class ServerProcess < Struct.new(
+      nil,
       :launch_path,
       :parameters,
       :concurrent_executions,
@@ -8256,6 +8523,7 @@ module Aws::GameLift
     #               Amazon Web Services Region code, such as <code>us-west-2</code>.</p>
     #   @return [String]
     class StartFleetActionsInput < Struct.new(
+      nil,
       :fleet_id,
       :actions,
       :location,
@@ -8271,6 +8539,7 @@ module Aws::GameLift
     #   <p>The Amazon Resource Name (<a href="https://docs.aws.amazon.com/AmazonS3/latest/dev/s3-arn-format.html">ARN</a>) that is assigned to a Amazon GameLift Servers fleet resource and uniquely identifies it. ARNs are unique across all Regions. Format is <code>arn:aws:gamelift:<region>::fleet/fleet-a1234567-b8c9-0d1e-2fa3-b45c6d7e8912</code>.</p>
     #   @return [String]
     class StartFleetActionsOutput < Struct.new(
+      nil,
       :fleet_id,
       :fleet_arn,
       keyword_init: true
@@ -8319,6 +8588,7 @@ module Aws::GameLift
     #               priority override list. </p>
     #   @return [Types::PriorityConfigurationOverride]
     class StartGameSessionPlacementInput < Struct.new(
+      nil,
       :placement_id,
       :game_session_queue_name,
       :game_properties,
@@ -8339,6 +8609,7 @@ module Aws::GameLift
     #               placement status. </p>
     #   @return [Types::GameSessionPlacement]
     class StartGameSessionPlacementOutput < Struct.new(
+      nil,
       :game_session_placement,
       keyword_init: true
     )
@@ -8384,6 +8655,7 @@ module Aws::GameLift
     #            </ul>
     #   @return [Array<Types::Player>]
     class StartMatchBackfillInput < Struct.new(
+      nil,
       :ticket_id,
       :configuration_name,
       :game_session_arn,
@@ -8399,6 +8671,7 @@ module Aws::GameLift
     #               matchmaking process.</p>
     #   @return [Types::MatchmakingTicket]
     class StartMatchBackfillOutput < Struct.new(
+      nil,
       :matchmaking_ticket,
       keyword_init: true
     )
@@ -8424,6 +8697,7 @@ module Aws::GameLift
     #               request.</p>
     #   @return [Array<Types::Player>]
     class StartMatchmakingInput < Struct.new(
+      nil,
       :ticket_id,
       :configuration_name,
       :players,
@@ -8438,6 +8712,7 @@ module Aws::GameLift
     #               matchmaking process.</p>
     #   @return [Types::MatchmakingTicket]
     class StartMatchmakingOutput < Struct.new(
+      nil,
       :matchmaking_ticket,
       keyword_init: true
     )
@@ -8455,6 +8730,7 @@ module Aws::GameLift
     #               Amazon Web Services Region code, such as <code>us-west-2</code>.</p>
     #   @return [String]
     class StopFleetActionsInput < Struct.new(
+      nil,
       :fleet_id,
       :actions,
       :location,
@@ -8470,6 +8746,7 @@ module Aws::GameLift
     #   <p>The Amazon Resource Name (<a href="https://docs.aws.amazon.com/AmazonS3/latest/dev/s3-arn-format.html">ARN</a>) that is assigned to a Amazon GameLift Servers fleet resource and uniquely identifies it. ARNs are unique across all Regions. Format is <code>arn:aws:gamelift:<region>::fleet/fleet-a1234567-b8c9-0d1e-2fa3-b45c6d7e8912</code>.</p>
     #   @return [String]
     class StopFleetActionsOutput < Struct.new(
+      nil,
       :fleet_id,
       :fleet_arn,
       keyword_init: true
@@ -8481,6 +8758,7 @@ module Aws::GameLift
     #   <p>A unique identifier for a game session placement to stop.</p>
     #   @return [String]
     class StopGameSessionPlacementInput < Struct.new(
+      nil,
       :placement_id,
       keyword_init: true
     )
@@ -8492,6 +8770,7 @@ module Aws::GameLift
     #               status and an end time stamp. </p>
     #   @return [Types::GameSessionPlacement]
     class StopGameSessionPlacementOutput < Struct.new(
+      nil,
       :game_session_placement,
       keyword_init: true
     )
@@ -8502,6 +8781,7 @@ module Aws::GameLift
     #   <p>A unique identifier for a matchmaking ticket.</p>
     #   @return [String]
     class StopMatchmakingInput < Struct.new(
+      nil,
       :ticket_id,
       keyword_init: true
     )
@@ -8509,6 +8789,7 @@ module Aws::GameLift
     end
 
     class StopMatchmakingOutput < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -8588,6 +8869,7 @@ module Aws::GameLift
     #            </p>
     #   @return [Float]
     class SupportContainerDefinition < Struct.new(
+      nil,
       :container_name,
       :depends_on,
       :mount_points,
@@ -8704,6 +8986,7 @@ module Aws::GameLift
     #       </p>
     #   @return [Float]
     class SupportContainerDefinitionInput < Struct.new(
+      nil,
       :container_name,
       :depends_on,
       :mount_points,
@@ -8726,6 +9009,7 @@ module Aws::GameLift
     #   <p>The activity to suspend for this game server group.</p>
     #   @return [Array<String>]
     class SuspendGameServerGroupInput < Struct.new(
+      nil,
       :game_server_group_name,
       :suspend_actions,
       keyword_init: true
@@ -8739,6 +9023,7 @@ module Aws::GameLift
     #               activity.</p>
     #   @return [Types::GameServerGroup]
     class SuspendGameServerGroupOutput < Struct.new(
+      nil,
       :game_server_group,
       keyword_init: true
     )
@@ -8770,6 +9055,7 @@ module Aws::GameLift
     #   <p>The value for a developer-defined key value pair for tagging an Amazon Web Services resource. </p>
     #   @return [String]
     class Tag < Struct.new(
+      nil,
       :key,
       :value,
       keyword_init: true
@@ -8790,6 +9076,7 @@ module Aws::GameLift
     #                   Tagging Amazon Web Services Resources</a> for tagging limits.</p>
     #   @return [Array<Types::Tag>]
     class TagResourceRequest < Struct.new(
+      nil,
       :resource_arn,
       :tags,
       keyword_init: true
@@ -8798,6 +9085,7 @@ module Aws::GameLift
     end
 
     class TagResourceResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -8809,6 +9097,7 @@ module Aws::GameLift
     # @!attribute message
     #   @return [String]
     class TaggingFailedException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -8828,6 +9117,7 @@ module Aws::GameLift
     #               sessions).</p>
     #   @return [Float]
     class TargetConfiguration < Struct.new(
+      nil,
       :target_value,
       keyword_init: true
     )
@@ -8847,6 +9137,7 @@ module Aws::GameLift
     #   <p>Desired value to use with a game server group target-based scaling policy. </p>
     #   @return [Float]
     class TargetTrackingConfiguration < Struct.new(
+      nil,
       :target_value,
       keyword_init: true
     )
@@ -8860,6 +9151,7 @@ module Aws::GameLift
     # @!attribute message
     #   @return [String]
     class TerminalRoutingStrategyException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -8900,6 +9192,7 @@ module Aws::GameLift
     #            </ul>
     #   @return [String]
     class TerminateGameSessionInput < Struct.new(
+      nil,
       :game_session_id,
       :termination_mode,
       keyword_init: true
@@ -8919,6 +9212,7 @@ module Aws::GameLift
     #            </p>
     #   @return [Types::GameSession]
     class TerminateGameSessionOutput < Struct.new(
+      nil,
       :game_session,
       keyword_init: true
     )
@@ -8933,6 +9227,7 @@ module Aws::GameLift
     #   <p>The port number of the UDP endpoint. </p>
     #   @return [Integer]
     class UDPEndpoint < Struct.new(
+      nil,
       :domain,
       :port,
       keyword_init: true
@@ -8944,6 +9239,7 @@ module Aws::GameLift
     # @!attribute message
     #   @return [String]
     class UnauthorizedException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -8954,6 +9250,7 @@ module Aws::GameLift
     # @!attribute message
     #   @return [String]
     class UnsupportedRegionException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -8970,6 +9267,7 @@ module Aws::GameLift
     #   <p>A list of one or more tag keys to remove from the specified Amazon GameLift Servers resource. </p>
     #   @return [Array<String>]
     class UntagResourceRequest < Struct.new(
+      nil,
       :resource_arn,
       :tag_keys,
       keyword_init: true
@@ -8978,6 +9276,7 @@ module Aws::GameLift
     end
 
     class UntagResourceResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -8998,6 +9297,7 @@ module Aws::GameLift
     #               alias.</p>
     #   @return [Types::RoutingStrategy]
     class UpdateAliasInput < Struct.new(
+      nil,
       :alias_id,
       :name,
       :description,
@@ -9011,6 +9311,7 @@ module Aws::GameLift
     #   <p>The updated alias resource.</p>
     #   @return [Types::Alias]
     class UpdateAliasOutput < Struct.new(
+      nil,
       :alias,
       keyword_init: true
     )
@@ -9027,6 +9328,7 @@ module Aws::GameLift
     #   <p>Version information that is associated with a build or script. Version strings do not need to be unique.</p>
     #   @return [String]
     class UpdateBuildInput < Struct.new(
+      nil,
       :build_id,
       :name,
       :version,
@@ -9039,6 +9341,7 @@ module Aws::GameLift
     #   <p>The updated build resource.</p>
     #   @return [Types::Build]
     class UpdateBuildOutput < Struct.new(
+      nil,
       :build,
       keyword_init: true
     )
@@ -9121,6 +9424,7 @@ module Aws::GameLift
     #               can't remove a fleet's game server container group definition.</p>
     #   @return [Array<String>]
     class UpdateContainerFleetInput < Struct.new(
+      nil,
       :fleet_id,
       :game_server_container_group_definition_name,
       :per_instance_container_group_definition_name,
@@ -9145,6 +9449,7 @@ module Aws::GameLift
     #               criteria.</p>
     #   @return [Types::ContainerFleet]
     class UpdateContainerFleetOutput < Struct.new(
+      nil,
       :container_fleet,
       keyword_init: true
     )
@@ -9194,6 +9499,7 @@ module Aws::GameLift
     #            </note>
     #   @return [String]
     class UpdateContainerGroupDefinitionInput < Struct.new(
+      nil,
       :name,
       :game_server_container_definition,
       :support_container_definitions,
@@ -9211,6 +9517,7 @@ module Aws::GameLift
     #   <p>The properties of the updated container group definition version.</p>
     #   @return [Types::ContainerGroupDefinition]
     class UpdateContainerGroupDefinitionOutput < Struct.new(
+      nil,
       :container_group_definition,
       keyword_init: true
     )
@@ -9259,6 +9566,7 @@ module Aws::GameLift
     #   <p>Amazon GameLift Servers Anywhere configuration options.</p>
     #   @return [Types::AnywhereConfiguration]
     class UpdateFleetAttributesInput < Struct.new(
+      nil,
       :fleet_id,
       :name,
       :description,
@@ -9278,6 +9586,7 @@ module Aws::GameLift
     #   <p>The Amazon Resource Name (<a href="https://docs.aws.amazon.com/AmazonS3/latest/dev/s3-arn-format.html">ARN</a>) that is assigned to a Amazon GameLift Servers fleet resource and uniquely identifies it. ARNs are unique across all Regions. Format is <code>arn:aws:gamelift:<region>::fleet/fleet-a1234567-b8c9-0d1e-2fa3-b45c6d7e8912</code>.</p>
     #   @return [String]
     class UpdateFleetAttributesOutput < Struct.new(
+      nil,
       :fleet_id,
       :fleet_arn,
       keyword_init: true
@@ -9308,6 +9617,7 @@ module Aws::GameLift
     #               Amazon Web Services Region code such as <code>us-west-2</code>.</p>
     #   @return [String]
     class UpdateFleetCapacityInput < Struct.new(
+      nil,
       :fleet_id,
       :desired_instances,
       :min_size,
@@ -9329,6 +9639,7 @@ module Aws::GameLift
     #               <code>us-west-2</code>.</p>
     #   @return [String]
     class UpdateFleetCapacityOutput < Struct.new(
+      nil,
       :fleet_id,
       :fleet_arn,
       :location,
@@ -9348,6 +9659,7 @@ module Aws::GameLift
     #   <p>A collection of port settings to be removed from the fleet resource.</p>
     #   @return [Array<Types::IpPermission>]
     class UpdateFleetPortSettingsInput < Struct.new(
+      nil,
       :fleet_id,
       :inbound_permission_authorizations,
       :inbound_permission_revocations,
@@ -9363,6 +9675,7 @@ module Aws::GameLift
     #   <p>The Amazon Resource Name (<a href="https://docs.aws.amazon.com/AmazonS3/latest/dev/s3-arn-format.html">ARN</a>) that is assigned to a Amazon GameLift Servers fleet resource and uniquely identifies it. ARNs are unique across all Regions. Format is <code>arn:aws:gamelift:<region>::fleet/fleet-a1234567-b8c9-0d1e-2fa3-b45c6d7e8912</code>.</p>
     #   @return [String]
     class UpdateFleetPortSettingsOutput < Struct.new(
+      nil,
       :fleet_id,
       :fleet_arn,
       keyword_init: true
@@ -9425,6 +9738,7 @@ module Aws::GameLift
     #            </ul>
     #   @return [String]
     class UpdateGameServerGroupInput < Struct.new(
+      nil,
       :game_server_group_name,
       :role_arn,
       :instance_definitions,
@@ -9440,6 +9754,7 @@ module Aws::GameLift
     #           </p>
     #   @return [Types::GameServerGroup]
     class UpdateGameServerGroupOutput < Struct.new(
+      nil,
       :game_server_group,
       keyword_init: true
     )
@@ -9467,6 +9782,7 @@ module Aws::GameLift
     #               updates the game server's <i>LastHealthCheckTime</i> timestamp. </p>
     #   @return [String]
     class UpdateGameServerInput < Struct.new(
+      nil,
       :game_server_group_name,
       :game_server_id,
       :game_server_data,
@@ -9481,6 +9797,7 @@ module Aws::GameLift
     #   <p>Object that describes the newly updated game server.</p>
     #   @return [Types::GameServer]
     class UpdateGameServerOutput < Struct.new(
+      nil,
       :game_server,
       keyword_init: true
     )
@@ -9525,6 +9842,7 @@ module Aws::GameLift
     #         </p>
     #   @return [Array<Types::GameProperty>]
     class UpdateGameSessionInput < Struct.new(
+      nil,
       :game_session_id,
       :maximum_player_session_count,
       :name,
@@ -9540,6 +9858,7 @@ module Aws::GameLift
     #   <p>The updated game session properties.</p>
     #   @return [Types::GameSession]
     class UpdateGameSessionOutput < Struct.new(
+      nil,
       :game_session,
       keyword_init: true
     )
@@ -9581,6 +9900,7 @@ module Aws::GameLift
     #                   notifications for game session placement</a>.</p>
     #   @return [String]
     class UpdateGameSessionQueueInput < Struct.new(
+      nil,
       :name,
       :timeout_in_seconds,
       :player_latency_policies,
@@ -9598,6 +9918,7 @@ module Aws::GameLift
     #   <p>An object that describes the newly updated game session queue.</p>
     #   @return [Types::GameSessionQueue]
     class UpdateGameSessionQueueOutput < Struct.new(
+      nil,
       :game_session_queue,
       keyword_init: true
     )
@@ -9685,6 +10006,7 @@ module Aws::GameLift
     #            </ul>
     #   @return [String]
     class UpdateMatchmakingConfigurationInput < Struct.new(
+      nil,
       :name,
       :description,
       :game_session_queue_arns,
@@ -9708,6 +10030,7 @@ module Aws::GameLift
     #   <p>The updated matchmaking configuration.</p>
     #   @return [Types::MatchmakingConfiguration]
     class UpdateMatchmakingConfigurationOutput < Struct.new(
+      nil,
       :configuration,
       keyword_init: true
     )
@@ -9725,6 +10048,7 @@ module Aws::GameLift
     #               run concurrently.</p>
     #   @return [Types::RuntimeConfiguration]
     class UpdateRuntimeConfigurationInput < Struct.new(
+      nil,
       :fleet_id,
       :runtime_configuration,
       keyword_init: true
@@ -9737,6 +10061,7 @@ module Aws::GameLift
     #               successful, all property changes are shown. </p>
     #   @return [Types::RuntimeConfiguration]
     class UpdateRuntimeConfigurationOutput < Struct.new(
+      nil,
       :runtime_configuration,
       keyword_init: true
     )
@@ -9770,6 +10095,7 @@ module Aws::GameLift
     #                   fileb://myRealtimeScript.zip</code>.</p>
     #   @return [String]
     class UpdateScriptInput < Struct.new(
+      nil,
       :script_id,
       :name,
       :version,
@@ -9789,6 +10115,7 @@ module Aws::GameLift
     #               service.</p>
     #   @return [Types::Script]
     class UpdateScriptOutput < Struct.new(
+      nil,
       :script,
       keyword_init: true
     )
@@ -9799,6 +10126,7 @@ module Aws::GameLift
     #   <p>A collection of matchmaking rules to validate, formatted as a JSON string.</p>
     #   @return [String]
     class ValidateMatchmakingRuleSetInput < Struct.new(
+      nil,
       :rule_set_body,
       keyword_init: true
     )
@@ -9809,6 +10137,7 @@ module Aws::GameLift
     #   <p>A response indicating whether the rule set is valid.</p>
     #   @return [Boolean]
     class ValidateMatchmakingRuleSetOutput < Struct.new(
+      nil,
       :valid,
       keyword_init: true
     )
@@ -9846,6 +10175,7 @@ module Aws::GameLift
     #               Format is a number expressed in Unix time as milliseconds (for example <code>"1469498468.057"</code>).</p>
     #   @return [Time]
     class VpcPeeringAuthorization < Struct.new(
+      nil,
       :game_lift_aws_account_id,
       :peer_vpc_aws_account_id,
       :peer_vpc_id,
@@ -9896,6 +10226,7 @@ module Aws::GameLift
     #               This VPC is managed by Amazon GameLift Servers and does not appear in your Amazon Web Services account. </p>
     #   @return [String]
     class VpcPeeringConnection < Struct.new(
+      nil,
       :fleet_id,
       :fleet_arn,
       :ip_v4_cidr_block,
@@ -9918,6 +10249,7 @@ module Aws::GameLift
     #   <p>Additional messaging associated with the connection status. </p>
     #   @return [String]
     class VpcPeeringConnectionStatus < Struct.new(
+      nil,
       :code,
       :message,
       keyword_init: true

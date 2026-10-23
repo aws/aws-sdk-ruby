@@ -11,6 +11,7 @@ module Aws::CodeCommit
     #   <p>Any message associated with the exception.</p>
     #   @return [String]
     class ActorDoesNotExistException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -25,6 +26,7 @@ module Aws::CodeCommit
     #   <p>The state of the approval, APPROVE or REVOKE. REVOKE states are not stored.</p>
     #   @return [String]
     class Approval < Struct.new(
+      nil,
       :user_arn,
       :approval_state,
       keyword_init: true
@@ -58,6 +60,7 @@ module Aws::CodeCommit
     #   <p>The approval rule template used to create the rule.</p>
     #   @return [Types::OriginApprovalRuleTemplate]
     class ApprovalRule < Struct.new(
+      nil,
       :approval_rule_id,
       :approval_rule_name,
       :approval_rule_content,
@@ -76,6 +79,7 @@ module Aws::CodeCommit
     #   <p>Any message associated with the exception.</p>
     #   @return [String]
     class ApprovalRuleContentRequiredException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -87,6 +91,7 @@ module Aws::CodeCommit
     #   <p>Any message associated with the exception.</p>
     #   @return [String]
     class ApprovalRuleDoesNotExistException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -104,6 +109,7 @@ module Aws::CodeCommit
     #   <p>The content of the approval rule.</p>
     #   @return [String]
     class ApprovalRuleEventMetadata < Struct.new(
+      nil,
       :approval_rule_name,
       :approval_rule_id,
       :approval_rule_content,
@@ -118,6 +124,7 @@ module Aws::CodeCommit
     #   <p>Any message associated with the exception.</p>
     #   @return [String]
     class ApprovalRuleNameAlreadyExistsException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -129,6 +136,7 @@ module Aws::CodeCommit
     #   <p>Any message associated with the exception.</p>
     #   @return [String]
     class ApprovalRuleNameRequiredException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -143,6 +151,7 @@ module Aws::CodeCommit
     #   <p>The status of the override event.</p>
     #   @return [String]
     class ApprovalRuleOverriddenEventMetadata < Struct.new(
+      nil,
       :revision_id,
       :override_status,
       keyword_init: true
@@ -176,6 +185,7 @@ module Aws::CodeCommit
     #   <p>The Amazon Resource Name (ARN) of the user who made the most recent changes to the approval rule template.</p>
     #   @return [String]
     class ApprovalRuleTemplate < Struct.new(
+      nil,
       :approval_rule_template_id,
       :approval_rule_template_name,
       :approval_rule_template_description,
@@ -194,6 +204,7 @@ module Aws::CodeCommit
     #   <p>Any message associated with the exception.</p>
     #   @return [String]
     class ApprovalRuleTemplateContentRequiredException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -206,6 +217,7 @@ module Aws::CodeCommit
     #   <p>Any message associated with the exception.</p>
     #   @return [String]
     class ApprovalRuleTemplateDoesNotExistException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -218,6 +230,7 @@ module Aws::CodeCommit
     #   <p>Any message associated with the exception.</p>
     #   @return [String]
     class ApprovalRuleTemplateInUseException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -231,6 +244,7 @@ module Aws::CodeCommit
     #   <p>Any message associated with the exception.</p>
     #   @return [String]
     class ApprovalRuleTemplateNameAlreadyExistsException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -242,6 +256,7 @@ module Aws::CodeCommit
     #   <p>Any message associated with the exception.</p>
     #   @return [String]
     class ApprovalRuleTemplateNameRequiredException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -256,6 +271,7 @@ module Aws::CodeCommit
     #   <p>The approval status for the pull request.</p>
     #   @return [String]
     class ApprovalStateChangedEventMetadata < Struct.new(
+      nil,
       :revision_id,
       :approval_status,
       keyword_init: true
@@ -268,6 +284,7 @@ module Aws::CodeCommit
     #   <p>Any message associated with the exception.</p>
     #   @return [String]
     class ApprovalStateRequiredException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -281,6 +298,7 @@ module Aws::CodeCommit
     #   <p>The name of the repository that you want to associate with the template.</p>
     #   @return [String]
     class AssociateApprovalRuleTemplateWithRepositoryInput < Struct.new(
+      nil,
       :approval_rule_template_name,
       :repository_name,
       keyword_init: true
@@ -293,6 +311,7 @@ module Aws::CodeCommit
     #   <p>Any message associated with the exception.</p>
     #   @return [String]
     class AuthorDoesNotExistException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -310,6 +329,7 @@ module Aws::CodeCommit
     #   <p>An error message that provides details about why the repository name was not found or not valid.</p>
     #   @return [String]
     class BatchAssociateApprovalRuleTemplateWithRepositoriesError < Struct.new(
+      nil,
       :repository_name,
       :error_code,
       :error_message,
@@ -328,6 +348,7 @@ module Aws::CodeCommit
     #            </note>
     #   @return [Array<String>]
     class BatchAssociateApprovalRuleTemplateWithRepositoriesInput < Struct.new(
+      nil,
       :approval_rule_template_name,
       :repository_names,
       keyword_init: true
@@ -342,6 +363,7 @@ module Aws::CodeCommit
     #   <p>A list of any errors that might have occurred while attempting to create the association between the template and the repositories.</p>
     #   @return [Array<Types::BatchAssociateApprovalRuleTemplateWithRepositoriesError>]
     class BatchAssociateApprovalRuleTemplateWithRepositoriesOutput < Struct.new(
+      nil,
       :associated_repository_names,
       :errors,
       keyword_init: true
@@ -360,6 +382,7 @@ module Aws::CodeCommit
     #   <p>The message provided by the exception.</p>
     #   @return [String]
     class BatchDescribeMergeConflictsError < Struct.new(
+      nil,
       :file_path,
       :exception_name,
       :message,
@@ -407,6 +430,7 @@ module Aws::CodeCommit
     #               results.</p>
     #   @return [String]
     class BatchDescribeMergeConflictsInput < Struct.new(
+      nil,
       :repository_name,
       :destination_commit_specifier,
       :source_commit_specifier,
@@ -441,6 +465,7 @@ module Aws::CodeCommit
     #   <p>The commit ID of the merge base.</p>
     #   @return [String]
     class BatchDescribeMergeConflictsOutput < Struct.new(
+      nil,
       :conflicts,
       :next_token,
       :errors,
@@ -464,6 +489,7 @@ module Aws::CodeCommit
     #   <p>An error message that provides details about why the repository name was either not found or not valid.</p>
     #   @return [String]
     class BatchDisassociateApprovalRuleTemplateFromRepositoriesError < Struct.new(
+      nil,
       :repository_name,
       :error_code,
       :error_message,
@@ -483,6 +509,7 @@ module Aws::CodeCommit
     #            </note>
     #   @return [Array<String>]
     class BatchDisassociateApprovalRuleTemplateFromRepositoriesInput < Struct.new(
+      nil,
       :approval_rule_template_name,
       :repository_names,
       keyword_init: true
@@ -498,6 +525,7 @@ module Aws::CodeCommit
     #   <p>A list of any errors that might have occurred while attempting to remove the association between the template and the repositories.</p>
     #   @return [Array<Types::BatchDisassociateApprovalRuleTemplateFromRepositoriesError>]
     class BatchDisassociateApprovalRuleTemplateFromRepositoriesOutput < Struct.new(
+      nil,
       :disassociated_repository_names,
       :errors,
       keyword_init: true
@@ -516,6 +544,7 @@ module Aws::CodeCommit
     #   <p>An error message that provides detail about why the commit ID either was not found or was not valid.</p>
     #   @return [String]
     class BatchGetCommitsError < Struct.new(
+      nil,
       :commit_id,
       :error_code,
       :error_message,
@@ -535,6 +564,7 @@ module Aws::CodeCommit
     #   <p>The name of the repository that contains the commits.</p>
     #   @return [String]
     class BatchGetCommitsInput < Struct.new(
+      nil,
       :commit_ids,
       :repository_name,
       keyword_init: true
@@ -551,6 +581,7 @@ module Aws::CodeCommit
     #               repository, the ID returns an error object with more information.</p>
     #   @return [Array<Types::BatchGetCommitsError>]
     class BatchGetCommitsOutput < Struct.new(
+      nil,
       :commits,
       :errors,
       keyword_init: true
@@ -572,6 +603,7 @@ module Aws::CodeCommit
     #   <p>An error message that provides detail about why the repository either was not found or was not in a valid state.</p>
     #   @return [String]
     class BatchGetRepositoriesError < Struct.new(
+      nil,
       :repository_id,
       :repository_name,
       :error_code,
@@ -589,6 +621,7 @@ module Aws::CodeCommit
     #            </note>
     #   @return [Array<String>]
     class BatchGetRepositoriesInput < Struct.new(
+      nil,
       :repository_names,
       keyword_init: true
     )
@@ -606,6 +639,7 @@ module Aws::CodeCommit
     #   <p>Returns information about any errors returned when attempting to retrieve information about the repositories.</p>
     #   @return [Array<Types::BatchGetRepositoriesError>]
     class BatchGetRepositoriesOutput < Struct.new(
+      nil,
       :repositories,
       :repositories_not_found,
       :errors,
@@ -619,6 +653,7 @@ module Aws::CodeCommit
     #   <p>Any message associated with the exception.</p>
     #   @return [String]
     class BeforeCommitIdAndAfterCommitIdAreSameException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -630,6 +665,7 @@ module Aws::CodeCommit
     #   <p>Any message associated with the exception.</p>
     #   @return [String]
     class BlobIdDoesNotExistException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -641,6 +677,7 @@ module Aws::CodeCommit
     #   <p>Any message associated with the exception.</p>
     #   @return [String]
     class BlobIdRequiredException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -676,6 +713,7 @@ module Aws::CodeCommit
     #            </ul>
     #   @return [String]
     class BlobMetadata < Struct.new(
+      nil,
       :blob_id,
       :path,
       :mode,
@@ -689,6 +727,7 @@ module Aws::CodeCommit
     #   <p>Any message associated with the exception.</p>
     #   @return [String]
     class BranchDoesNotExistException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -703,6 +742,7 @@ module Aws::CodeCommit
     #   <p>The ID of the last commit made to the branch.</p>
     #   @return [String]
     class BranchInfo < Struct.new(
+      nil,
       :branch_name,
       :commit_id,
       keyword_init: true
@@ -717,6 +757,7 @@ module Aws::CodeCommit
     #   <p>Any message associated with the exception.</p>
     #   @return [String]
     class BranchNameExistsException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -729,6 +770,7 @@ module Aws::CodeCommit
     #   <p>Any message associated with the exception.</p>
     #   @return [String]
     class BranchNameIsTagNameException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -740,6 +782,7 @@ module Aws::CodeCommit
     #   <p>Any message associated with the exception.</p>
     #   @return [String]
     class BranchNameRequiredException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -752,6 +795,7 @@ module Aws::CodeCommit
     #   <p>Any message associated with the exception.</p>
     #   @return [String]
     class CannotDeleteApprovalRuleFromTemplateException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -764,6 +808,7 @@ module Aws::CodeCommit
     #   <p>Any message associated with the exception.</p>
     #   @return [String]
     class CannotModifyApprovalRuleFromTemplateException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -779,6 +824,7 @@ module Aws::CodeCommit
     #   <p>Any message associated with the exception.</p>
     #   @return [String]
     class ClientRequestTokenRequiredException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -820,6 +866,7 @@ module Aws::CodeCommit
     #   <p>A string to integer map that represents the number of individual users who have responded to a comment with the specified reactions.</p>
     #   @return [Hash<String, Integer>]
     class Comment < Struct.new(
+      nil,
       :comment_id,
       :content,
       :in_reply_to,
@@ -845,6 +892,7 @@ module Aws::CodeCommit
     #   <p>Any message associated with the exception.</p>
     #   @return [String]
     class CommentContentRequiredException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -856,6 +904,7 @@ module Aws::CodeCommit
     #   <p>Any message associated with the exception.</p>
     #   @return [String]
     class CommentContentSizeLimitExceededException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -867,6 +916,7 @@ module Aws::CodeCommit
     #   <p>Any message associated with the exception.</p>
     #   @return [String]
     class CommentDeletedException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -879,6 +929,7 @@ module Aws::CodeCommit
     #   <p>Any message associated with the exception.</p>
     #   @return [String]
     class CommentDoesNotExistException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -890,6 +941,7 @@ module Aws::CodeCommit
     #   <p>Any message associated with the exception.</p>
     #   @return [String]
     class CommentIdRequiredException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -901,6 +953,7 @@ module Aws::CodeCommit
     #   <p>Any message associated with the exception.</p>
     #   @return [String]
     class CommentNotCreatedByCallerException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -934,6 +987,7 @@ module Aws::CodeCommit
     #            between commits.</p>
     #   @return [Array<Types::Comment>]
     class CommentsForComparedCommit < Struct.new(
+      nil,
       :repository_name,
       :before_commit_id,
       :after_commit_id,
@@ -977,6 +1031,7 @@ module Aws::CodeCommit
     #   <p>An array of comment objects. Each comment object contains information about a comment on the pull request.</p>
     #   @return [Array<Types::Comment>]
     class CommentsForPullRequest < Struct.new(
+      nil,
       :pull_request_id,
       :repository_name,
       :before_commit_id,
@@ -1020,6 +1075,7 @@ module Aws::CodeCommit
     #   <p>Any other data associated with the specified commit.</p>
     #   @return [String]
     class Commit < Struct.new(
+      nil,
       :commit_id,
       :tree_id,
       :parents,
@@ -1037,6 +1093,7 @@ module Aws::CodeCommit
     #   <p>Any message associated with the exception.</p>
     #   @return [String]
     class CommitDoesNotExistException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -1048,6 +1105,7 @@ module Aws::CodeCommit
     #   <p>Any message associated with the exception.</p>
     #   @return [String]
     class CommitIdDoesNotExistException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -1059,6 +1117,7 @@ module Aws::CodeCommit
     #   <p>Any message associated with the exception.</p>
     #   @return [String]
     class CommitIdRequiredException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -1070,6 +1129,7 @@ module Aws::CodeCommit
     #   <p>Any message associated with the exception.</p>
     #   @return [String]
     class CommitIdsLimitExceededException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -1081,6 +1141,7 @@ module Aws::CodeCommit
     #   <p>Any message associated with the exception.</p>
     #   @return [String]
     class CommitIdsListRequiredException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -1092,6 +1153,7 @@ module Aws::CodeCommit
     #   <p>Any message associated with the exception.</p>
     #   @return [String]
     class CommitMessageLengthExceededException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -1103,6 +1165,7 @@ module Aws::CodeCommit
     #   <p>Any message associated with the exception.</p>
     #   @return [String]
     class CommitRequiredException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -1114,6 +1177,7 @@ module Aws::CodeCommit
     #   <p>Any message associated with the exception.</p>
     #   @return [String]
     class ConcurrentReferenceUpdateException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -1128,6 +1192,7 @@ module Aws::CodeCommit
     #   <p>A list of hunks that contain the differences between files or lines causing the conflict.</p>
     #   @return [Array<Types::MergeHunk>]
     class Conflict < Struct.new(
+      nil,
       :conflict_metadata,
       :merge_hunks,
       keyword_init: true
@@ -1167,6 +1232,7 @@ module Aws::CodeCommit
     #   <p>Whether an add, modify, or delete operation caused the conflict between the source and destination of the merge.</p>
     #   @return [Types::MergeOperations]
     class ConflictMetadata < Struct.new(
+      nil,
       :file_path,
       :file_sizes,
       :file_modes,
@@ -1202,6 +1268,7 @@ module Aws::CodeCommit
     #   <p>File modes that are set as part of the merge conflict resolution.</p>
     #   @return [Array<Types::SetFileModeEntry>]
     class ConflictResolution < Struct.new(
+      nil,
       :replace_contents,
       :delete_files,
       :set_file_modes,
@@ -1266,6 +1333,7 @@ module Aws::CodeCommit
     #               repositories.</p>
     #   @return [String]
     class CreateApprovalRuleTemplateInput < Struct.new(
+      nil,
       :approval_rule_template_name,
       :approval_rule_template_content,
       :approval_rule_template_description,
@@ -1278,6 +1346,7 @@ module Aws::CodeCommit
     #   <p>The content and structure of the created approval rule template.</p>
     #   @return [Types::ApprovalRuleTemplate]
     class CreateApprovalRuleTemplateOutput < Struct.new(
+      nil,
       :approval_rule_template,
       keyword_init: true
     )
@@ -1295,6 +1364,7 @@ module Aws::CodeCommit
     #   <p>The ID of the commit to point the new branch to.</p>
     #   @return [String]
     class CreateBranchInput < Struct.new(
+      nil,
       :repository_name,
       :branch_name,
       :commit_id,
@@ -1339,6 +1409,7 @@ module Aws::CodeCommit
     #   <p>The file modes to update for files in this commit.</p>
     #   @return [Array<Types::SetFileModeEntry>]
     class CreateCommitInput < Struct.new(
+      nil,
       :repository_name,
       :branch_name,
       :parent_commit_id,
@@ -1370,6 +1441,7 @@ module Aws::CodeCommit
     #   <p>The files deleted as part of the committed file changes.</p>
     #   @return [Array<Types::FileMetadata>]
     class CreateCommitOutput < Struct.new(
+      nil,
       :commit_id,
       :tree_id,
       :files_added,
@@ -1431,6 +1503,7 @@ module Aws::CodeCommit
     #            </note>
     #   @return [String]
     class CreatePullRequestApprovalRuleInput < Struct.new(
+      nil,
       :pull_request_id,
       :approval_rule_name,
       :approval_rule_content,
@@ -1443,6 +1516,7 @@ module Aws::CodeCommit
     #   <p>Information about the created approval rule.</p>
     #   @return [Types::ApprovalRule]
     class CreatePullRequestApprovalRuleOutput < Struct.new(
+      nil,
       :approval_rule,
       keyword_init: true
     )
@@ -1472,6 +1546,7 @@ module Aws::CodeCommit
     #            </note>
     #   @return [String]
     class CreatePullRequestInput < Struct.new(
+      nil,
       :title,
       :description,
       :targets,
@@ -1485,6 +1560,7 @@ module Aws::CodeCommit
     #   <p>Information about the newly created pull request.</p>
     #   @return [Types::PullRequest]
     class CreatePullRequestOutput < Struct.new(
+      nil,
       :pull_request,
       keyword_init: true
     )
@@ -1523,6 +1599,7 @@ module Aws::CodeCommit
     #            <p>If no key is specified, the default <code>aws/codecommit</code> Amazon Web Services managed key is used.</p>
     #   @return [String]
     class CreateRepositoryInput < Struct.new(
+      nil,
       :repository_name,
       :repository_description,
       :tags,
@@ -1537,6 +1614,7 @@ module Aws::CodeCommit
     #   <p>Information about the newly created repository.</p>
     #   @return [Types::RepositoryMetadata]
     class CreateRepositoryOutput < Struct.new(
+      nil,
       :repository_metadata,
       keyword_init: true
     )
@@ -1588,6 +1666,7 @@ module Aws::CodeCommit
     #               resolving conflicts during a merge.</p>
     #   @return [Types::ConflictResolution]
     class CreateUnreferencedMergeCommitInput < Struct.new(
+      nil,
       :repository_name,
       :source_commit_specifier,
       :destination_commit_specifier,
@@ -1611,6 +1690,7 @@ module Aws::CodeCommit
     #   <p>The full SHA-1 pointer of the tree information for the commit that contains the merge results.</p>
     #   @return [String]
     class CreateUnreferencedMergeCommitOutput < Struct.new(
+      nil,
       :commit_id,
       :tree_id,
       keyword_init: true
@@ -1623,6 +1703,7 @@ module Aws::CodeCommit
     #   <p>Any message associated with the exception.</p>
     #   @return [String]
     class DefaultBranchCannotBeDeletedException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -1633,6 +1714,7 @@ module Aws::CodeCommit
     #   <p>The name of the approval rule template to delete.</p>
     #   @return [String]
     class DeleteApprovalRuleTemplateInput < Struct.new(
+      nil,
       :approval_rule_template_name,
       keyword_init: true
     )
@@ -1644,6 +1726,7 @@ module Aws::CodeCommit
     #               been previously deleted, the only response is a 200 OK.</p>
     #   @return [String]
     class DeleteApprovalRuleTemplateOutput < Struct.new(
+      nil,
       :approval_rule_template_id,
       keyword_init: true
     )
@@ -1658,6 +1741,7 @@ module Aws::CodeCommit
     #   <p>The name of the branch to delete.</p>
     #   @return [String]
     class DeleteBranchInput < Struct.new(
+      nil,
       :repository_name,
       :branch_name,
       keyword_init: true
@@ -1670,6 +1754,7 @@ module Aws::CodeCommit
     #   <p>Information about the branch deleted by the operation, including the branch name and the commit ID that was the tip of the branch.</p>
     #   @return [Types::BranchInfo]
     class DeleteBranchOutput < Struct.new(
+      nil,
       :deleted_branch,
       keyword_init: true
     )
@@ -1681,6 +1766,7 @@ module Aws::CodeCommit
     #            or <a>GetCommentsForPullRequest</a>.</p>
     #   @return [String]
     class DeleteCommentContentInput < Struct.new(
+      nil,
       :comment_id,
       keyword_init: true
     )
@@ -1691,6 +1777,7 @@ module Aws::CodeCommit
     #   <p>Information about the comment you just deleted.</p>
     #   @return [Types::Comment]
     class DeleteCommentContentOutput < Struct.new(
+      nil,
       :comment,
       keyword_init: true
     )
@@ -1702,6 +1789,7 @@ module Aws::CodeCommit
     #   <p>The full path of the file to be deleted, including the name of the file.</p>
     #   @return [String]
     class DeleteFileEntry < Struct.new(
+      nil,
       :file_path,
       keyword_init: true
     )
@@ -1744,6 +1832,7 @@ module Aws::CodeCommit
     #               specified, the email address is left blank.</p>
     #   @return [String]
     class DeleteFileInput < Struct.new(
+      nil,
       :repository_name,
       :branch_name,
       :file_path,
@@ -1771,6 +1860,7 @@ module Aws::CodeCommit
     #               extension of that file.</p>
     #   @return [String]
     class DeleteFileOutput < Struct.new(
+      nil,
       :commit_id,
       :blob_id,
       :tree_id,
@@ -1787,6 +1877,7 @@ module Aws::CodeCommit
     #   <p>The name of the approval rule you want to delete.</p>
     #   @return [String]
     class DeletePullRequestApprovalRuleInput < Struct.new(
+      nil,
       :pull_request_id,
       :approval_rule_name,
       keyword_init: true
@@ -1802,6 +1893,7 @@ module Aws::CodeCommit
     #            </note>
     #   @return [String]
     class DeletePullRequestApprovalRuleOutput < Struct.new(
+      nil,
       :approval_rule_id,
       keyword_init: true
     )
@@ -1813,6 +1905,7 @@ module Aws::CodeCommit
     #   <p>The name of the repository to delete.</p>
     #   @return [String]
     class DeleteRepositoryInput < Struct.new(
+      nil,
       :repository_name,
       keyword_init: true
     )
@@ -1824,6 +1917,7 @@ module Aws::CodeCommit
     #   <p>The ID of the repository that was deleted.</p>
     #   @return [String]
     class DeleteRepositoryOutput < Struct.new(
+      nil,
       :repository_id,
       keyword_init: true
     )
@@ -1866,6 +1960,7 @@ module Aws::CodeCommit
     #               results.</p>
     #   @return [String]
     class DescribeMergeConflictsInput < Struct.new(
+      nil,
       :repository_name,
       :destination_commit_specifier,
       :source_commit_specifier,
@@ -1899,6 +1994,7 @@ module Aws::CodeCommit
     #   <p>The commit ID of the merge base.</p>
     #   @return [String]
     class DescribeMergeConflictsOutput < Struct.new(
+      nil,
       :conflict_metadata,
       :merge_hunks,
       :next_token,
@@ -1930,6 +2026,7 @@ module Aws::CodeCommit
     #               The default is 100 events, which is also the maximum number of events that can be returned in a result.</p>
     #   @return [Integer]
     class DescribePullRequestEventsInput < Struct.new(
+      nil,
       :pull_request_id,
       :pull_request_event_type,
       :actor_arn,
@@ -1947,6 +2044,7 @@ module Aws::CodeCommit
     #   <p>An enumeration token that can be used in a request to return the next batch of the results.</p>
     #   @return [String]
     class DescribePullRequestEventsOutput < Struct.new(
+      nil,
       :pull_request_events,
       :next_token,
       keyword_init: true
@@ -1967,6 +2065,7 @@ module Aws::CodeCommit
     #   <p>Whether the change type of the difference is an addition (A), deletion (D), or modification (M).</p>
     #   @return [String]
     class Difference < Struct.new(
+      nil,
       :before_blob,
       :after_blob,
       :change_type,
@@ -1981,6 +2080,7 @@ module Aws::CodeCommit
     #   <p>Any message associated with the exception.</p>
     #   @return [String]
     class DirectoryNameConflictsWithFileNameException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -1994,6 +2094,7 @@ module Aws::CodeCommit
     #   <p>The name of the repository you want to disassociate from the template.</p>
     #   @return [String]
     class DisassociateApprovalRuleTemplateFromRepositoryInput < Struct.new(
+      nil,
       :approval_rule_template_name,
       :repository_name,
       keyword_init: true
@@ -2006,6 +2107,7 @@ module Aws::CodeCommit
     #   <p>Any message associated with the exception.</p>
     #   @return [String]
     class EncryptionIntegrityChecksFailedException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -2017,6 +2119,7 @@ module Aws::CodeCommit
     #   <p>Any message associated with the exception.</p>
     #   @return [String]
     class EncryptionKeyAccessDeniedException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -2028,6 +2131,7 @@ module Aws::CodeCommit
     #   <p>Any message associated with the exception.</p>
     #   @return [String]
     class EncryptionKeyDisabledException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -2039,6 +2143,7 @@ module Aws::CodeCommit
     #   <p>Any message associated with the exception.</p>
     #   @return [String]
     class EncryptionKeyInvalidIdException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -2051,6 +2156,7 @@ module Aws::CodeCommit
     #   <p>Any message associated with the exception.</p>
     #   @return [String]
     class EncryptionKeyInvalidUsageException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -2062,6 +2168,7 @@ module Aws::CodeCommit
     #   <p>Any message associated with the exception.</p>
     #   @return [String]
     class EncryptionKeyNotFoundException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -2073,6 +2180,7 @@ module Aws::CodeCommit
     #   <p>Any message associated with the exception.</p>
     #   @return [String]
     class EncryptionKeyRequiredException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -2084,6 +2192,7 @@ module Aws::CodeCommit
     #   <p>Any message associated with the exception.</p>
     #   @return [String]
     class EncryptionKeyUnavailableException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -2099,6 +2208,7 @@ module Aws::CodeCommit
     #               <a>GetPullRequest</a>.</p>
     #   @return [String]
     class EvaluatePullRequestApprovalRulesInput < Struct.new(
+      nil,
       :pull_request_id,
       :revision_id,
       keyword_init: true
@@ -2111,6 +2221,7 @@ module Aws::CodeCommit
     #           not been met (if any), whether the pull request is in the approved state, and whether the pull request approval rule has been set aside by an override. </p>
     #   @return [Types::Evaluation]
     class EvaluatePullRequestApprovalRulesOutput < Struct.new(
+      nil,
       :evaluation,
       keyword_init: true
     )
@@ -2131,6 +2242,7 @@ module Aws::CodeCommit
     #   <p>The names of the approval rules that have not had their conditions met.</p>
     #   @return [Array<String>]
     class Evaluation < Struct.new(
+      nil,
       :approved,
       :overridden,
       :approval_rules_satisfied,
@@ -2160,6 +2272,7 @@ module Aws::CodeCommit
     #   <p>The extrapolated file mode permissions for the file. Valid values include EXECUTABLE and NORMAL.</p>
     #   @return [String]
     class File < Struct.new(
+      nil,
       :blob_id,
       :absolute_path,
       :relative_path,
@@ -2176,6 +2289,7 @@ module Aws::CodeCommit
     #   <p>Any message associated with the exception.</p>
     #   @return [String]
     class FileContentAndSourceFileSpecifiedException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -2187,6 +2301,7 @@ module Aws::CodeCommit
     #   <p>Any message associated with the exception.</p>
     #   @return [String]
     class FileContentRequiredException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -2200,6 +2315,7 @@ module Aws::CodeCommit
     #   <p>Any message associated with the exception.</p>
     #   @return [String]
     class FileContentSizeLimitExceededException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -2212,6 +2328,7 @@ module Aws::CodeCommit
     #   <p>Any message associated with the exception.</p>
     #   @return [String]
     class FileDoesNotExistException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -2223,6 +2340,7 @@ module Aws::CodeCommit
     #   <p>Any message associated with the exception.</p>
     #   @return [String]
     class FileEntryRequiredException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -2241,6 +2359,7 @@ module Aws::CodeCommit
     #   <p>The extrapolated file mode permissions for the file. Valid values include EXECUTABLE and NORMAL.</p>
     #   @return [String]
     class FileMetadata < Struct.new(
+      nil,
       :absolute_path,
       :blob_id,
       :file_mode,
@@ -2255,6 +2374,7 @@ module Aws::CodeCommit
     #   <p>Any message associated with the exception.</p>
     #   @return [String]
     class FileModeRequiredException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -2272,6 +2392,7 @@ module Aws::CodeCommit
     #   <p>The file mode of a file in the base of a merge or pull request.</p>
     #   @return [String]
     class FileModes < Struct.new(
+      nil,
       :source,
       :destination,
       :base,
@@ -2286,6 +2407,7 @@ module Aws::CodeCommit
     #   <p>Any message associated with the exception.</p>
     #   @return [String]
     class FileNameConflictsWithDirectoryNameException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -2298,6 +2420,7 @@ module Aws::CodeCommit
     #   <p>Any message associated with the exception.</p>
     #   @return [String]
     class FilePathConflictsWithSubmodulePathException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -2315,6 +2438,7 @@ module Aws::CodeCommit
     #   <p>The size of a file in the base of a merge or pull request.</p>
     #   @return [Integer]
     class FileSizes < Struct.new(
+      nil,
       :source,
       :destination,
       :base,
@@ -2336,6 +2460,7 @@ module Aws::CodeCommit
     #   <p>Any message associated with the exception.</p>
     #   @return [String]
     class FileTooLargeException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -2357,6 +2482,7 @@ module Aws::CodeCommit
     #   <p>An array of commit IDs that contain more recent versions of this file. If there are no additional versions of the file, this array will be empty.</p>
     #   @return [Array<String>]
     class FileVersion < Struct.new(
+      nil,
       :commit,
       :blob_id,
       :path,
@@ -2377,6 +2503,7 @@ module Aws::CodeCommit
     #   <p>The relative path of the specified folder from the folder where the query originated.</p>
     #   @return [String]
     class Folder < Struct.new(
+      nil,
       :tree_id,
       :absolute_path,
       :relative_path,
@@ -2392,6 +2519,7 @@ module Aws::CodeCommit
     #   <p>Any message associated with the exception.</p>
     #   @return [String]
     class FolderContentSizeLimitExceededException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -2404,6 +2532,7 @@ module Aws::CodeCommit
     #   <p>Any message associated with the exception.</p>
     #   @return [String]
     class FolderDoesNotExistException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -2414,6 +2543,7 @@ module Aws::CodeCommit
     #   <p>The name of the approval rule template for which you want to get information.</p>
     #   @return [String]
     class GetApprovalRuleTemplateInput < Struct.new(
+      nil,
       :approval_rule_template_name,
       keyword_init: true
     )
@@ -2424,6 +2554,7 @@ module Aws::CodeCommit
     #   <p>The content and structure of the approval rule template.</p>
     #   @return [Types::ApprovalRuleTemplate]
     class GetApprovalRuleTemplateOutput < Struct.new(
+      nil,
       :approval_rule_template,
       keyword_init: true
     )
@@ -2438,6 +2569,7 @@ module Aws::CodeCommit
     #   <p>The ID of the blob, which is its SHA-1 pointer.</p>
     #   @return [String]
     class GetBlobInput < Struct.new(
+      nil,
       :repository_name,
       :blob_id,
       keyword_init: true
@@ -2450,6 +2582,7 @@ module Aws::CodeCommit
     #   <p>The content of the blob, usually a file.</p>
     #   @return [String]
     class GetBlobOutput < Struct.new(
+      nil,
       :content,
       keyword_init: true
     )
@@ -2464,6 +2597,7 @@ module Aws::CodeCommit
     #   <p>The name of the branch for which you want to retrieve information.</p>
     #   @return [String]
     class GetBranchInput < Struct.new(
+      nil,
       :repository_name,
       :branch_name,
       keyword_init: true
@@ -2476,6 +2610,7 @@ module Aws::CodeCommit
     #   <p>The name of the branch.</p>
     #   @return [Types::BranchInfo]
     class GetBranchOutput < Struct.new(
+      nil,
       :branch,
       keyword_init: true
     )
@@ -2487,6 +2622,7 @@ module Aws::CodeCommit
     #               or <a>GetCommentsForPullRequest</a>.</p>
     #   @return [String]
     class GetCommentInput < Struct.new(
+      nil,
       :comment_id,
       keyword_init: true
     )
@@ -2497,6 +2633,7 @@ module Aws::CodeCommit
     #   <p>The contents of the comment.</p>
     #   @return [Types::Comment]
     class GetCommentOutput < Struct.new(
+      nil,
       :comment,
       keyword_init: true
     )
@@ -2516,6 +2653,7 @@ module Aws::CodeCommit
     #   <p>A non-zero, non-negative integer used to limit the number of returned results.  The default is the same as the allowed maximum, 1,000.</p>
     #   @return [Integer]
     class GetCommentReactionsInput < Struct.new(
+      nil,
       :comment_id,
       :reaction_user_arn,
       :next_token,
@@ -2532,6 +2670,7 @@ module Aws::CodeCommit
     #   <p>An enumeration token that can be used in a request to return the next batch of the results.</p>
     #   @return [String]
     class GetCommentReactionsOutput < Struct.new(
+      nil,
       :reactions_for_comment,
       :next_token,
       keyword_init: true
@@ -2558,6 +2697,7 @@ module Aws::CodeCommit
     #               default is 100 comments, but you can configure up to 500.</p>
     #   @return [Integer]
     class GetCommentsForComparedCommitInput < Struct.new(
+      nil,
       :repository_name,
       :before_commit_id,
       :after_commit_id,
@@ -2575,6 +2715,7 @@ module Aws::CodeCommit
     #   <p>An enumeration token that can be used in a request to return the next batch of the results.</p>
     #   @return [String]
     class GetCommentsForComparedCommitOutput < Struct.new(
+      nil,
       :comments_for_compared_commit_data,
       :next_token,
       keyword_init: true
@@ -2606,6 +2747,7 @@ module Aws::CodeCommit
     #               You can return up to 500 comments with a single request.</p>
     #   @return [Integer]
     class GetCommentsForPullRequestInput < Struct.new(
+      nil,
       :pull_request_id,
       :repository_name,
       :before_commit_id,
@@ -2624,6 +2766,7 @@ module Aws::CodeCommit
     #   <p>An enumeration token that can be used in a request to return the next batch of the results.</p>
     #   @return [String]
     class GetCommentsForPullRequestOutput < Struct.new(
+      nil,
       :comments_for_pull_request_data,
       :next_token,
       keyword_init: true
@@ -2639,6 +2782,7 @@ module Aws::CodeCommit
     #   <p>The commit ID. Commit IDs are the full SHA ID of the commit.</p>
     #   @return [String]
     class GetCommitInput < Struct.new(
+      nil,
       :repository_name,
       :commit_id,
       keyword_init: true
@@ -2651,6 +2795,7 @@ module Aws::CodeCommit
     #   <p>A commit data type object that contains information about the specified commit.</p>
     #   @return [Types::Commit]
     class GetCommitOutput < Struct.new(
+      nil,
       :commit,
       keyword_init: true
     )
@@ -2689,6 +2834,7 @@ module Aws::CodeCommit
     #               results.</p>
     #   @return [String]
     class GetDifferencesInput < Struct.new(
+      nil,
       :repository_name,
       :before_commit_specifier,
       :after_commit_specifier,
@@ -2709,6 +2855,7 @@ module Aws::CodeCommit
     #   <p>An enumeration token that can be used in a request to return the next batch of the results.</p>
     #   @return [String]
     class GetDifferencesOutput < Struct.new(
+      nil,
       :differences,
       :next_token,
       keyword_init: true
@@ -2730,6 +2877,7 @@ module Aws::CodeCommit
     #               in a folder named examples.</p>
     #   @return [String]
     class GetFileInput < Struct.new(
+      nil,
       :repository_name,
       :commit_specifier,
       :file_path,
@@ -2763,6 +2911,7 @@ module Aws::CodeCommit
     #   <p>The base-64 encoded binary data object that represents the content of the file.</p>
     #   @return [String]
     class GetFileOutput < Struct.new(
+      nil,
       :commit_id,
       :blob_id,
       :file_path,
@@ -2794,6 +2943,7 @@ module Aws::CodeCommit
     #               that was created off of the root directory (/) of a repository. </p>
     #   @return [String]
     class GetFolderInput < Struct.new(
+      nil,
       :repository_name,
       :commit_specifier,
       :folder_path,
@@ -2826,6 +2976,7 @@ module Aws::CodeCommit
     #   <p>The list of submodules in the specified folder, if any.</p>
     #   @return [Array<Types::SubModule>]
     class GetFolderOutput < Struct.new(
+      nil,
       :commit_id,
       :folder_path,
       :tree_id,
@@ -2861,6 +3012,7 @@ module Aws::CodeCommit
     #               conflicts to be resolved manually before the merge operation is successful.</p>
     #   @return [String]
     class GetMergeCommitInput < Struct.new(
+      nil,
       :repository_name,
       :source_commit_specifier,
       :destination_commit_specifier,
@@ -2886,6 +3038,7 @@ module Aws::CodeCommit
     #               commit.</p>
     #   @return [String]
     class GetMergeCommitOutput < Struct.new(
+      nil,
       :source_commit_id,
       :destination_commit_id,
       :base_commit_id,
@@ -2928,6 +3081,7 @@ module Aws::CodeCommit
     #               results.</p>
     #   @return [String]
     class GetMergeConflictsInput < Struct.new(
+      nil,
       :repository_name,
       :destination_commit_specifier,
       :source_commit_specifier,
@@ -2961,6 +3115,7 @@ module Aws::CodeCommit
     #   <p>An enumeration token that can be used in a request to return the next batch of the results.</p>
     #   @return [String]
     class GetMergeConflictsOutput < Struct.new(
+      nil,
       :mergeable,
       :destination_commit_id,
       :source_commit_id,
@@ -3000,6 +3155,7 @@ module Aws::CodeCommit
     #               conflicts to be resolved manually before the merge operation is successful.</p>
     #   @return [String]
     class GetMergeOptionsInput < Struct.new(
+      nil,
       :repository_name,
       :source_commit_specifier,
       :destination_commit_specifier,
@@ -3023,6 +3179,7 @@ module Aws::CodeCommit
     #   <p>The commit ID of the merge base.</p>
     #   @return [String]
     class GetMergeOptionsOutput < Struct.new(
+      nil,
       :merge_options,
       :source_commit_id,
       :destination_commit_id,
@@ -3039,6 +3196,7 @@ module Aws::CodeCommit
     #   <p>The system-generated ID for the pull request revision.</p>
     #   @return [String]
     class GetPullRequestApprovalStatesInput < Struct.new(
+      nil,
       :pull_request_id,
       :revision_id,
       keyword_init: true
@@ -3050,6 +3208,7 @@ module Aws::CodeCommit
     #   <p>Information about users who have approved the pull request.</p>
     #   @return [Array<Types::Approval>]
     class GetPullRequestApprovalStatesOutput < Struct.new(
+      nil,
       :approvals,
       keyword_init: true
     )
@@ -3060,6 +3219,7 @@ module Aws::CodeCommit
     #   <p>The system-generated ID of the pull request. To get this ID, use <a>ListPullRequests</a>.</p>
     #   @return [String]
     class GetPullRequestInput < Struct.new(
+      nil,
       :pull_request_id,
       keyword_init: true
     )
@@ -3070,6 +3230,7 @@ module Aws::CodeCommit
     #   <p>Information about the specified pull request.</p>
     #   @return [Types::PullRequest]
     class GetPullRequestOutput < Struct.new(
+      nil,
       :pull_request,
       keyword_init: true
     )
@@ -3085,6 +3246,7 @@ module Aws::CodeCommit
     #               <a>GetPullRequest</a>.</p>
     #   @return [String]
     class GetPullRequestOverrideStateInput < Struct.new(
+      nil,
       :pull_request_id,
       :revision_id,
       keyword_init: true
@@ -3099,6 +3261,7 @@ module Aws::CodeCommit
     #   <p>The Amazon Resource Name (ARN) of the user or identity that overrode the rules and their requirements for the pull request.</p>
     #   @return [String]
     class GetPullRequestOverrideStateOutput < Struct.new(
+      nil,
       :overridden,
       :overrider,
       keyword_init: true
@@ -3116,6 +3279,7 @@ module Aws::CodeCommit
     #   <p>The name of the repository to get information about.</p>
     #   @return [String]
     class GetRepositoryInput < Struct.new(
+      nil,
       :repository_name,
       keyword_init: true
     )
@@ -3127,6 +3291,7 @@ module Aws::CodeCommit
     #   <p>Information about the repository.</p>
     #   @return [Types::RepositoryMetadata]
     class GetRepositoryOutput < Struct.new(
+      nil,
       :repository_metadata,
       keyword_init: true
     )
@@ -3138,6 +3303,7 @@ module Aws::CodeCommit
     #   <p>The name of the repository for which the trigger is configured.</p>
     #   @return [String]
     class GetRepositoryTriggersInput < Struct.new(
+      nil,
       :repository_name,
       keyword_init: true
     )
@@ -3152,6 +3318,7 @@ module Aws::CodeCommit
     #   <p>The JSON block of configuration information for each trigger.</p>
     #   @return [Array<Types::RepositoryTrigger>]
     class GetRepositoryTriggersOutput < Struct.new(
+      nil,
       :configuration_id,
       :triggers,
       keyword_init: true
@@ -3165,6 +3332,7 @@ module Aws::CodeCommit
     #   <p>Any message associated with the exception.</p>
     #   @return [String]
     class IdempotencyParameterMismatchException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -3177,6 +3345,7 @@ module Aws::CodeCommit
     #   <p>Any message associated with the exception.</p>
     #   @return [String]
     class InvalidActorArnException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -3188,6 +3357,7 @@ module Aws::CodeCommit
     #   <p>Any message associated with the exception.</p>
     #   @return [String]
     class InvalidApprovalRuleContentException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -3199,6 +3369,7 @@ module Aws::CodeCommit
     #   <p>Any message associated with the exception.</p>
     #   @return [String]
     class InvalidApprovalRuleNameException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -3210,6 +3381,7 @@ module Aws::CodeCommit
     #   <p>Any message associated with the exception.</p>
     #   @return [String]
     class InvalidApprovalRuleTemplateContentException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -3223,6 +3395,7 @@ module Aws::CodeCommit
     #   <p>Any message associated with the exception.</p>
     #   @return [String]
     class InvalidApprovalRuleTemplateDescriptionException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -3236,6 +3409,7 @@ module Aws::CodeCommit
     #   <p>Any message associated with the exception.</p>
     #   @return [String]
     class InvalidApprovalRuleTemplateNameException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -3247,6 +3421,7 @@ module Aws::CodeCommit
     #   <p>Any message associated with the exception.</p>
     #   @return [String]
     class InvalidApprovalStateException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -3258,6 +3433,7 @@ module Aws::CodeCommit
     #   <p>Any message associated with the exception.</p>
     #   @return [String]
     class InvalidAuthorArnException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -3269,6 +3445,7 @@ module Aws::CodeCommit
     #   <p>Any message associated with the exception.</p>
     #   @return [String]
     class InvalidBlobIdException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -3280,6 +3457,7 @@ module Aws::CodeCommit
     #   <p>Any message associated with the exception.</p>
     #   @return [String]
     class InvalidBranchNameException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -3291,6 +3469,7 @@ module Aws::CodeCommit
     #   <p>Any message associated with the exception.</p>
     #   @return [String]
     class InvalidClientRequestTokenException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -3302,6 +3481,7 @@ module Aws::CodeCommit
     #   <p>Any message associated with the exception.</p>
     #   @return [String]
     class InvalidCommentIdException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -3313,6 +3493,7 @@ module Aws::CodeCommit
     #   <p>Any message associated with the exception.</p>
     #   @return [String]
     class InvalidCommitException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -3324,6 +3505,7 @@ module Aws::CodeCommit
     #   <p>Any message associated with the exception.</p>
     #   @return [String]
     class InvalidCommitIdException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -3335,6 +3517,7 @@ module Aws::CodeCommit
     #   <p>Any message associated with the exception.</p>
     #   @return [String]
     class InvalidConflictDetailLevelException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -3346,6 +3529,7 @@ module Aws::CodeCommit
     #   <p>Any message associated with the exception.</p>
     #   @return [String]
     class InvalidConflictResolutionException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -3357,6 +3541,7 @@ module Aws::CodeCommit
     #   <p>Any message associated with the exception.</p>
     #   @return [String]
     class InvalidConflictResolutionStrategyException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -3368,6 +3553,7 @@ module Aws::CodeCommit
     #   <p>Any message associated with the exception.</p>
     #   @return [String]
     class InvalidContinuationTokenException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -3379,6 +3565,7 @@ module Aws::CodeCommit
     #   <p>Any message associated with the exception.</p>
     #   @return [String]
     class InvalidDeletionParameterException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -3391,6 +3578,7 @@ module Aws::CodeCommit
     #   <p>Any message associated with the exception.</p>
     #   @return [String]
     class InvalidDescriptionException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -3402,6 +3590,7 @@ module Aws::CodeCommit
     #   <p>Any message associated with the exception.</p>
     #   @return [String]
     class InvalidDestinationCommitSpecifierException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -3414,6 +3603,7 @@ module Aws::CodeCommit
     #   <p>Any message associated with the exception.</p>
     #   @return [String]
     class InvalidEmailException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -3426,6 +3616,7 @@ module Aws::CodeCommit
     #   <p>Any message associated with the exception.</p>
     #   @return [String]
     class InvalidFileLocationException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -3437,6 +3628,7 @@ module Aws::CodeCommit
     #   <p>Any message associated with the exception.</p>
     #   @return [String]
     class InvalidFileModeException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -3448,6 +3640,7 @@ module Aws::CodeCommit
     #   <p>Any message associated with the exception.</p>
     #   @return [String]
     class InvalidFilePositionException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -3459,6 +3652,7 @@ module Aws::CodeCommit
     #   <p>Any message associated with the exception.</p>
     #   @return [String]
     class InvalidMaxConflictFilesException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -3470,6 +3664,7 @@ module Aws::CodeCommit
     #   <p>Any message associated with the exception.</p>
     #   @return [String]
     class InvalidMaxMergeHunksException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -3481,6 +3676,7 @@ module Aws::CodeCommit
     #   <p>Any message associated with the exception.</p>
     #   @return [String]
     class InvalidMaxResultsException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -3492,6 +3688,7 @@ module Aws::CodeCommit
     #   <p>Any message associated with the exception.</p>
     #   @return [String]
     class InvalidMergeOptionException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -3503,6 +3700,7 @@ module Aws::CodeCommit
     #   <p>Any message associated with the exception.</p>
     #   @return [String]
     class InvalidOrderException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -3514,6 +3712,7 @@ module Aws::CodeCommit
     #   <p>Any message associated with the exception.</p>
     #   @return [String]
     class InvalidOverrideStatusException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -3526,6 +3725,7 @@ module Aws::CodeCommit
     #   <p>Any message associated with the exception.</p>
     #   @return [String]
     class InvalidParentCommitIdException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -3537,6 +3737,7 @@ module Aws::CodeCommit
     #   <p>Any message associated with the exception.</p>
     #   @return [String]
     class InvalidPathException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -3548,6 +3749,7 @@ module Aws::CodeCommit
     #   <p>Any message associated with the exception.</p>
     #   @return [String]
     class InvalidPullRequestEventTypeException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -3559,6 +3761,7 @@ module Aws::CodeCommit
     #   <p>Any message associated with the exception.</p>
     #   @return [String]
     class InvalidPullRequestIdException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -3570,6 +3773,7 @@ module Aws::CodeCommit
     #   <p>Any message associated with the exception.</p>
     #   @return [String]
     class InvalidPullRequestStatusException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -3581,6 +3785,7 @@ module Aws::CodeCommit
     #   <p>Any message associated with the exception.</p>
     #   @return [String]
     class InvalidPullRequestStatusUpdateException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -3592,6 +3797,7 @@ module Aws::CodeCommit
     #   <p>Any message associated with the exception.</p>
     #   @return [String]
     class InvalidReactionUserArnException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -3603,6 +3809,7 @@ module Aws::CodeCommit
     #   <p>Any message associated with the exception.</p>
     #   @return [String]
     class InvalidReactionValueException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -3616,6 +3823,7 @@ module Aws::CodeCommit
     #   <p>Any message associated with the exception.</p>
     #   @return [String]
     class InvalidReferenceNameException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -3627,6 +3835,7 @@ module Aws::CodeCommit
     #   <p>Any message associated with the exception.</p>
     #   @return [String]
     class InvalidRelativeFileVersionEnumException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -3638,6 +3847,7 @@ module Aws::CodeCommit
     #   <p>Any message associated with the exception.</p>
     #   @return [String]
     class InvalidReplacementContentException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -3649,6 +3859,7 @@ module Aws::CodeCommit
     #   <p>Any message associated with the exception.</p>
     #   @return [String]
     class InvalidReplacementTypeException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -3660,6 +3871,7 @@ module Aws::CodeCommit
     #   <p>Any message associated with the exception.</p>
     #   @return [String]
     class InvalidRepositoryDescriptionException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -3676,6 +3888,7 @@ module Aws::CodeCommit
     #   <p>Any message associated with the exception.</p>
     #   @return [String]
     class InvalidRepositoryNameException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -3687,6 +3900,7 @@ module Aws::CodeCommit
     #   <p>Any message associated with the exception.</p>
     #   @return [String]
     class InvalidRepositoryTriggerBranchNameException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -3698,6 +3912,7 @@ module Aws::CodeCommit
     #   <p>Any message associated with the exception.</p>
     #   @return [String]
     class InvalidRepositoryTriggerCustomDataException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -3709,6 +3924,7 @@ module Aws::CodeCommit
     #   <p>Any message associated with the exception.</p>
     #   @return [String]
     class InvalidRepositoryTriggerDestinationArnException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -3720,6 +3936,7 @@ module Aws::CodeCommit
     #   <p>Any message associated with the exception.</p>
     #   @return [String]
     class InvalidRepositoryTriggerEventsException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -3731,6 +3948,7 @@ module Aws::CodeCommit
     #   <p>Any message associated with the exception.</p>
     #   @return [String]
     class InvalidRepositoryTriggerNameException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -3744,6 +3962,7 @@ module Aws::CodeCommit
     #   <p>Any message associated with the exception.</p>
     #   @return [String]
     class InvalidRepositoryTriggerRegionException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -3757,6 +3976,7 @@ module Aws::CodeCommit
     #   <p>Any message associated with the exception.</p>
     #   @return [String]
     class InvalidResourceArnException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -3768,6 +3988,7 @@ module Aws::CodeCommit
     #   <p>Any message associated with the exception.</p>
     #   @return [String]
     class InvalidRevisionIdException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -3779,6 +4000,7 @@ module Aws::CodeCommit
     #   <p>Any message associated with the exception.</p>
     #   @return [String]
     class InvalidRuleContentSha256Exception < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -3790,6 +4012,7 @@ module Aws::CodeCommit
     #   <p>Any message associated with the exception.</p>
     #   @return [String]
     class InvalidSortByException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -3801,6 +4024,7 @@ module Aws::CodeCommit
     #   <p>Any message associated with the exception.</p>
     #   @return [String]
     class InvalidSourceCommitSpecifierException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -3812,6 +4036,7 @@ module Aws::CodeCommit
     #   <p>Any message associated with the exception.</p>
     #   @return [String]
     class InvalidSystemTagUsageException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -3823,6 +4048,7 @@ module Aws::CodeCommit
     #   <p>Any message associated with the exception.</p>
     #   @return [String]
     class InvalidTagKeysListException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -3834,6 +4060,7 @@ module Aws::CodeCommit
     #   <p>Any message associated with the exception.</p>
     #   @return [String]
     class InvalidTagsMapException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -3845,6 +4072,7 @@ module Aws::CodeCommit
     #   <p>Any message associated with the exception.</p>
     #   @return [String]
     class InvalidTargetBranchException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -3856,6 +4084,7 @@ module Aws::CodeCommit
     #   <p>Any message associated with the exception.</p>
     #   @return [String]
     class InvalidTargetException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -3868,6 +4097,7 @@ module Aws::CodeCommit
     #   <p>Any message associated with the exception.</p>
     #   @return [String]
     class InvalidTargetsException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -3879,6 +4109,7 @@ module Aws::CodeCommit
     #   <p>Any message associated with the exception.</p>
     #   @return [String]
     class InvalidTitleException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -3896,6 +4127,7 @@ module Aws::CodeCommit
     #   <p>The binary or non-binary status of a file in the base of a merge or pull request.</p>
     #   @return [Boolean]
     class IsBinaryFile < Struct.new(
+      nil,
       :source,
       :destination,
       :base,
@@ -3912,6 +4144,7 @@ module Aws::CodeCommit
     #   <p>A non-zero, non-negative integer used to limit the number of returned results.</p>
     #   @return [Integer]
     class ListApprovalRuleTemplatesInput < Struct.new(
+      nil,
       :next_token,
       :max_results,
       keyword_init: true
@@ -3926,6 +4159,7 @@ module Aws::CodeCommit
     #   <p>An enumeration token that allows the operation to batch the next results of the operation.</p>
     #   @return [String]
     class ListApprovalRuleTemplatesOutput < Struct.new(
+      nil,
       :approval_rule_template_names,
       :next_token,
       keyword_init: true
@@ -3944,6 +4178,7 @@ module Aws::CodeCommit
     #   <p>A non-zero, non-negative integer used to limit the number of returned results.</p>
     #   @return [Integer]
     class ListAssociatedApprovalRuleTemplatesForRepositoryInput < Struct.new(
+      nil,
       :repository_name,
       :next_token,
       :max_results,
@@ -3959,6 +4194,7 @@ module Aws::CodeCommit
     #   <p>An enumeration token that allows the operation to batch the next results of the operation.</p>
     #   @return [String]
     class ListAssociatedApprovalRuleTemplatesForRepositoryOutput < Struct.new(
+      nil,
       :approval_rule_template_names,
       :next_token,
       keyword_init: true
@@ -3974,6 +4210,7 @@ module Aws::CodeCommit
     #   <p>An enumeration token that allows the operation to batch the results.</p>
     #   @return [String]
     class ListBranchesInput < Struct.new(
+      nil,
       :repository_name,
       :next_token,
       keyword_init: true
@@ -3989,6 +4226,7 @@ module Aws::CodeCommit
     #   <p>An enumeration token that returns the batch of the results.</p>
     #   @return [String]
     class ListBranchesOutput < Struct.new(
+      nil,
       :branches,
       :next_token,
       keyword_init: true
@@ -4014,6 +4252,7 @@ module Aws::CodeCommit
     #   <p>An enumeration token that allows the operation to batch the results.</p>
     #   @return [String]
     class ListFileCommitHistoryRequest < Struct.new(
+      nil,
       :repository_name,
       :commit_specifier,
       :file_path,
@@ -4031,6 +4270,7 @@ module Aws::CodeCommit
     #   <p>An enumeration token that can be used to return the next batch of results.</p>
     #   @return [String]
     class ListFileCommitHistoryResponse < Struct.new(
+      nil,
       :revision_dag,
       :next_token,
       keyword_init: true
@@ -4056,6 +4296,7 @@ module Aws::CodeCommit
     #   <p>A non-zero, non-negative integer used to limit the number of returned results.</p>
     #   @return [Integer]
     class ListPullRequestsInput < Struct.new(
+      nil,
       :repository_name,
       :author_arn,
       :pull_request_status,
@@ -4073,6 +4314,7 @@ module Aws::CodeCommit
     #   <p>An enumeration token that allows the operation to batch the next results of the operation.</p>
     #   @return [String]
     class ListPullRequestsOutput < Struct.new(
+      nil,
       :pull_request_ids,
       :next_token,
       keyword_init: true
@@ -4091,6 +4333,7 @@ module Aws::CodeCommit
     #   <p>A non-zero, non-negative integer used to limit the number of returned results.</p>
     #   @return [Integer]
     class ListRepositoriesForApprovalRuleTemplateInput < Struct.new(
+      nil,
       :approval_rule_template_name,
       :next_token,
       :max_results,
@@ -4106,6 +4349,7 @@ module Aws::CodeCommit
     #   <p>An enumeration token that allows the operation to batch the next results of the operation.</p>
     #   @return [String]
     class ListRepositoriesForApprovalRuleTemplateOutput < Struct.new(
+      nil,
       :repository_names,
       :next_token,
       keyword_init: true
@@ -4126,6 +4370,7 @@ module Aws::CodeCommit
     #   <p>The order in which to sort the results of a list repositories operation.</p>
     #   @return [String]
     class ListRepositoriesInput < Struct.new(
+      nil,
       :next_token,
       :sort_by,
       :order,
@@ -4144,6 +4389,7 @@ module Aws::CodeCommit
     #               another page of 1,000 records is retrieved.</p>
     #   @return [String]
     class ListRepositoriesOutput < Struct.new(
+      nil,
       :repositories,
       :next_token,
       keyword_init: true
@@ -4160,6 +4406,7 @@ module Aws::CodeCommit
     #               results.</p>
     #   @return [String]
     class ListTagsForResourceInput < Struct.new(
+      nil,
       :resource_arn,
       :next_token,
       keyword_init: true
@@ -4174,6 +4421,7 @@ module Aws::CodeCommit
     #   <p>An enumeration token that allows the operation to batch the next results of the operation.</p>
     #   @return [String]
     class ListTagsForResourceOutput < Struct.new(
+      nil,
       :tags,
       :next_token,
       keyword_init: true
@@ -4193,6 +4441,7 @@ module Aws::CodeCommit
     #               after of that comparison.</p>
     #   @return [String]
     class Location < Struct.new(
+      nil,
       :file_path,
       :file_position,
       :relative_file_version,
@@ -4206,6 +4455,7 @@ module Aws::CodeCommit
     #   <p>Any message associated with the exception.</p>
     #   @return [String]
     class ManualMergeRequiredException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -4217,6 +4467,7 @@ module Aws::CodeCommit
     #   <p>Any message associated with the exception.</p>
     #   @return [String]
     class MaximumBranchesExceededException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -4228,6 +4479,7 @@ module Aws::CodeCommit
     #   <p>Any message associated with the exception.</p>
     #   @return [String]
     class MaximumConflictResolutionEntriesExceededException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -4239,6 +4491,7 @@ module Aws::CodeCommit
     #   <p>Any message associated with the exception.</p>
     #   @return [String]
     class MaximumFileContentToLoadExceededException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -4251,6 +4504,7 @@ module Aws::CodeCommit
     #   <p>Any message associated with the exception.</p>
     #   @return [String]
     class MaximumFileEntriesExceededException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -4262,6 +4516,7 @@ module Aws::CodeCommit
     #   <p>Any message associated with the exception.</p>
     #   @return [String]
     class MaximumItemsToCompareExceededException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -4273,6 +4528,7 @@ module Aws::CodeCommit
     #   <p>Any message associated with the exception.</p>
     #   @return [String]
     class MaximumNumberOfApprovalsExceededException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -4285,6 +4541,7 @@ module Aws::CodeCommit
     #   <p>Any message associated with the exception.</p>
     #   @return [String]
     class MaximumOpenPullRequestsExceededException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -4296,6 +4553,7 @@ module Aws::CodeCommit
     #   <p>Any message associated with the exception.</p>
     #   @return [String]
     class MaximumRepositoryNamesExceededException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -4307,6 +4565,7 @@ module Aws::CodeCommit
     #   <p>Any message associated with the exception.</p>
     #   @return [String]
     class MaximumRepositoryTriggersExceededException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -4319,6 +4578,7 @@ module Aws::CodeCommit
     #   <p>Any message associated with the exception.</p>
     #   @return [String]
     class MaximumRuleTemplatesAssociatedWithRepositoryException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -4340,6 +4600,7 @@ module Aws::CodeCommit
     #   <p>The branch where the merge is applied.</p>
     #   @return [String]
     class MergeBranchesByFastForwardInput < Struct.new(
+      nil,
       :repository_name,
       :source_commit_specifier,
       :destination_commit_specifier,
@@ -4356,6 +4617,7 @@ module Aws::CodeCommit
     #   <p>The tree ID of the merge in the destination or target branch.</p>
     #   @return [String]
     class MergeBranchesByFastForwardOutput < Struct.new(
+      nil,
       :commit_id,
       :tree_id,
       keyword_init: true
@@ -4409,6 +4671,7 @@ module Aws::CodeCommit
     #               resolving conflicts during a merge.</p>
     #   @return [Types::ConflictResolution]
     class MergeBranchesBySquashInput < Struct.new(
+      nil,
       :repository_name,
       :source_commit_specifier,
       :destination_commit_specifier,
@@ -4432,6 +4695,7 @@ module Aws::CodeCommit
     #   <p>The tree ID of the merge in the destination or target branch.</p>
     #   @return [String]
     class MergeBranchesBySquashOutput < Struct.new(
+      nil,
       :commit_id,
       :tree_id,
       keyword_init: true
@@ -4485,6 +4749,7 @@ module Aws::CodeCommit
     #               resolving conflicts during a merge.</p>
     #   @return [Types::ConflictResolution]
     class MergeBranchesByThreeWayInput < Struct.new(
+      nil,
       :repository_name,
       :source_commit_specifier,
       :destination_commit_specifier,
@@ -4508,6 +4773,7 @@ module Aws::CodeCommit
     #   <p>The tree ID of the merge in the destination or target branch.</p>
     #   @return [String]
     class MergeBranchesByThreeWayOutput < Struct.new(
+      nil,
       :commit_id,
       :tree_id,
       keyword_init: true
@@ -4533,6 +4799,7 @@ module Aws::CodeCommit
     #   <p>Information about the merge hunk in the base of a merge or pull request.</p>
     #   @return [Types::MergeHunkDetail]
     class MergeHunk < Struct.new(
+      nil,
       :is_conflict,
       :source,
       :destination,
@@ -4559,6 +4826,7 @@ module Aws::CodeCommit
     #               conflict.</p>
     #   @return [String]
     class MergeHunkDetail < Struct.new(
+      nil,
       :start_line,
       :end_line,
       :hunk_content,
@@ -4581,6 +4849,7 @@ module Aws::CodeCommit
     #   <p>The merge strategy used in the merge.</p>
     #   @return [String]
     class MergeMetadata < Struct.new(
+      nil,
       :is_merged,
       :merged_by,
       :merge_commit_id,
@@ -4604,6 +4873,7 @@ module Aws::CodeCommit
     #   <p>The operation on a file in the destination of a merge or pull request.</p>
     #   @return [String]
     class MergeOperations < Struct.new(
+      nil,
       :source,
       :destination,
       keyword_init: true
@@ -4616,6 +4886,7 @@ module Aws::CodeCommit
     #   <p>Any message associated with the exception.</p>
     #   @return [String]
     class MergeOptionRequiredException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -4633,6 +4904,7 @@ module Aws::CodeCommit
     #           exception thrown if the current commit ID of the tip of the source branch does not match this commit ID.</p>
     #   @return [String]
     class MergePullRequestByFastForwardInput < Struct.new(
+      nil,
       :pull_request_id,
       :repository_name,
       :source_commit_id,
@@ -4645,6 +4917,7 @@ module Aws::CodeCommit
     #   <p>Information about the specified pull request, including the merge.</p>
     #   @return [Types::PullRequest]
     class MergePullRequestByFastForwardOutput < Struct.new(
+      nil,
       :pull_request,
       keyword_init: true
     )
@@ -4693,6 +4966,7 @@ module Aws::CodeCommit
     #               resolving conflicts during a merge.</p>
     #   @return [Types::ConflictResolution]
     class MergePullRequestBySquashInput < Struct.new(
+      nil,
       :pull_request_id,
       :repository_name,
       :source_commit_id,
@@ -4712,6 +4986,7 @@ module Aws::CodeCommit
     #   <p>Returns information about a pull request.</p>
     #   @return [Types::PullRequest]
     class MergePullRequestBySquashOutput < Struct.new(
+      nil,
       :pull_request,
       keyword_init: true
     )
@@ -4760,6 +5035,7 @@ module Aws::CodeCommit
     #               resolving conflicts during a merge.</p>
     #   @return [Types::ConflictResolution]
     class MergePullRequestByThreeWayInput < Struct.new(
+      nil,
       :pull_request_id,
       :repository_name,
       :source_commit_id,
@@ -4779,6 +5055,7 @@ module Aws::CodeCommit
     #   <p>Returns information about a pull request.</p>
     #   @return [Types::PullRequest]
     class MergePullRequestByThreeWayOutput < Struct.new(
+      nil,
       :pull_request,
       keyword_init: true
     )
@@ -4790,6 +5067,7 @@ module Aws::CodeCommit
     #   <p>Any message associated with the exception.</p>
     #   @return [String]
     class MultipleConflictResolutionEntriesException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -4801,6 +5079,7 @@ module Aws::CodeCommit
     #   <p>Any message associated with the exception.</p>
     #   @return [String]
     class MultipleRepositoriesInPullRequestException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -4812,6 +5091,7 @@ module Aws::CodeCommit
     #   <p>Any message associated with the exception.</p>
     #   @return [String]
     class NameLengthExceededException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -4823,6 +5103,7 @@ module Aws::CodeCommit
     #   <p>Any message associated with the exception.</p>
     #   @return [String]
     class NoChangeException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -4834,6 +5115,7 @@ module Aws::CodeCommit
     #   <p>Any message associated with the exception.</p>
     #   @return [String]
     class NumberOfRuleTemplatesExceededException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -4845,6 +5127,7 @@ module Aws::CodeCommit
     #   <p>Any message associated with the exception.</p>
     #   @return [String]
     class NumberOfRulesExceededException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -4862,6 +5145,7 @@ module Aws::CodeCommit
     #   <p>The type of the object in the base commit of the merge.</p>
     #   @return [String]
     class ObjectTypes < Struct.new(
+      nil,
       :source,
       :destination,
       :base,
@@ -4875,6 +5159,7 @@ module Aws::CodeCommit
     #   <p>Any message associated with the exception.</p>
     #   @return [String]
     class OperationNotAllowedException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -4889,6 +5174,7 @@ module Aws::CodeCommit
     #   <p>The name of the template that created the approval rule.</p>
     #   @return [String]
     class OriginApprovalRuleTemplate < Struct.new(
+      nil,
       :approval_rule_template_id,
       :approval_rule_template_name,
       keyword_init: true
@@ -4901,6 +5187,7 @@ module Aws::CodeCommit
     #   <p>Any message associated with the exception.</p>
     #   @return [String]
     class OverrideAlreadySetException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -4921,6 +5208,7 @@ module Aws::CodeCommit
     #           approval rule requirements (REVOKE). REVOKE status is not stored.</p>
     #   @return [String]
     class OverridePullRequestApprovalRulesInput < Struct.new(
+      nil,
       :pull_request_id,
       :revision_id,
       :override_status,
@@ -4934,6 +5222,7 @@ module Aws::CodeCommit
     #   <p>Any message associated with the exception.</p>
     #   @return [String]
     class OverrideStatusRequiredException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -4945,6 +5234,7 @@ module Aws::CodeCommit
     #   <p>Any message associated with the exception.</p>
     #   @return [String]
     class ParentCommitDoesNotExistException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -4957,6 +5247,7 @@ module Aws::CodeCommit
     #   <p>Any message associated with the exception.</p>
     #   @return [String]
     class ParentCommitIdOutdatedException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -4969,6 +5260,7 @@ module Aws::CodeCommit
     #   <p>Any message associated with the exception.</p>
     #   @return [String]
     class ParentCommitIdRequiredException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -4980,6 +5272,7 @@ module Aws::CodeCommit
     #   <p>Any message associated with the exception.</p>
     #   @return [String]
     class PathDoesNotExistException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -4991,6 +5284,7 @@ module Aws::CodeCommit
     #   <p>Any message associated with the exception.</p>
     #   @return [String]
     class PathRequiredException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -5022,6 +5316,7 @@ module Aws::CodeCommit
     #               initial request that used that token.</p>
     #   @return [String]
     class PostCommentForComparedCommitInput < Struct.new(
+      nil,
       :repository_name,
       :before_commit_id,
       :after_commit_id,
@@ -5055,6 +5350,7 @@ module Aws::CodeCommit
     #   <p>The content of the comment you posted.</p>
     #   @return [Types::Comment]
     class PostCommentForComparedCommitOutput < Struct.new(
+      nil,
       :repository_name,
       :before_commit_id,
       :after_commit_id,
@@ -5094,6 +5390,7 @@ module Aws::CodeCommit
     #               initial request that used that token.</p>
     #   @return [String]
     class PostCommentForPullRequestInput < Struct.new(
+      nil,
       :pull_request_id,
       :repository_name,
       :before_commit_id,
@@ -5133,6 +5430,7 @@ module Aws::CodeCommit
     #   <p>The content of the comment you posted.</p>
     #   @return [Types::Comment]
     class PostCommentForPullRequestOutput < Struct.new(
+      nil,
       :repository_name,
       :pull_request_id,
       :before_commit_id,
@@ -5160,6 +5458,7 @@ module Aws::CodeCommit
     #   <p>The contents of your reply to a comment.</p>
     #   @return [String]
     class PostCommentReplyInput < Struct.new(
+      nil,
       :in_reply_to,
       :client_request_token,
       :content,
@@ -5172,6 +5471,7 @@ module Aws::CodeCommit
     #   <p>Information about the reply to a comment.</p>
     #   @return [Types::Comment]
     class PostCommentReplyOutput < Struct.new(
+      nil,
       :comment,
       keyword_init: true
     )
@@ -5217,6 +5517,7 @@ module Aws::CodeCommit
     #   <p>The approval rules applied to the pull request.</p>
     #   @return [Array<Types::ApprovalRule>]
     class PullRequest < Struct.new(
+      nil,
       :pull_request_id,
       :title,
       :description,
@@ -5238,6 +5539,7 @@ module Aws::CodeCommit
     #   <p>Any message associated with the exception.</p>
     #   @return [String]
     class PullRequestAlreadyClosedException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -5249,6 +5551,7 @@ module Aws::CodeCommit
     #   <p>Any message associated with the exception.</p>
     #   @return [String]
     class PullRequestApprovalRulesNotSatisfiedException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -5261,6 +5564,7 @@ module Aws::CodeCommit
     #   <p>Any message associated with the exception.</p>
     #   @return [String]
     class PullRequestCannotBeApprovedByAuthorException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -5281,6 +5585,7 @@ module Aws::CodeCommit
     #   <p>The commit ID of the most recent commit that the source branch and the destination branch have in common.</p>
     #   @return [String]
     class PullRequestCreatedEventMetadata < Struct.new(
+      nil,
       :repository_name,
       :source_commit_id,
       :destination_commit_id,
@@ -5295,6 +5600,7 @@ module Aws::CodeCommit
     #   <p>Any message associated with the exception.</p>
     #   @return [String]
     class PullRequestDoesNotExistException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -5340,6 +5646,7 @@ module Aws::CodeCommit
     #   <p>Information about an approval rule override event for a pull request.</p>
     #   @return [Types::ApprovalRuleOverriddenEventMetadata]
     class PullRequestEvent < Struct.new(
+      nil,
       :pull_request_id,
       :event_date,
       :pull_request_event_type,
@@ -5361,6 +5668,7 @@ module Aws::CodeCommit
     #   <p>Any message associated with the exception.</p>
     #   @return [String]
     class PullRequestIdRequiredException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -5378,6 +5686,7 @@ module Aws::CodeCommit
     #   <p>Information about the merge state change event.</p>
     #   @return [Types::MergeMetadata]
     class PullRequestMergedStateChangedEventMetadata < Struct.new(
+      nil,
       :repository_name,
       :destination_reference,
       :merge_metadata,
@@ -5400,6 +5709,7 @@ module Aws::CodeCommit
     #   <p>The commit ID of the most recent commit that the source branch and the destination branch have in common.</p>
     #   @return [String]
     class PullRequestSourceReferenceUpdatedEventMetadata < Struct.new(
+      nil,
       :repository_name,
       :before_commit_id,
       :after_commit_id,
@@ -5414,6 +5724,7 @@ module Aws::CodeCommit
     #   <p>The changed status of the pull request.</p>
     #   @return [String]
     class PullRequestStatusChangedEventMetadata < Struct.new(
+      nil,
       :pull_request_status,
       keyword_init: true
     )
@@ -5425,6 +5736,7 @@ module Aws::CodeCommit
     #   <p>Any message associated with the exception.</p>
     #   @return [String]
     class PullRequestStatusRequiredException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -5457,6 +5769,7 @@ module Aws::CodeCommit
     #   <p>Returns metadata about the state of the merge, including whether the merge has been made.</p>
     #   @return [Types::MergeMetadata]
     class PullRequestTarget < Struct.new(
+      nil,
       :repository_name,
       :source_reference,
       :destination_reference,
@@ -5477,6 +5790,7 @@ module Aws::CodeCommit
     #               For information about emoji reaction values supported in CodeCommit, see the <a href="https://docs.aws.amazon.com/codecommit/latest/userguide/how-to-commit-comment.html#emoji-reaction-table">CodeCommit User Guide</a>.</p>
     #   @return [String]
     class PutCommentReactionInput < Struct.new(
+      nil,
       :comment_id,
       :reaction_value,
       keyword_init: true
@@ -5499,6 +5813,7 @@ module Aws::CodeCommit
     #           if you are not providing the file content directly.</p>
     #   @return [Types::SourceFileSpecifier]
     class PutFileEntry < Struct.new(
+      nil,
       :file_path,
       :file_mode,
       :file_content,
@@ -5513,6 +5828,7 @@ module Aws::CodeCommit
     #   <p>Any message associated with the exception.</p>
     #   @return [String]
     class PutFileEntryConflictException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -5558,6 +5874,7 @@ module Aws::CodeCommit
     #   <p>An email address for the person adding or updating the file.</p>
     #   @return [String]
     class PutFileInput < Struct.new(
+      nil,
       :repository_name,
       :branch_name,
       :file_content,
@@ -5582,6 +5899,7 @@ module Aws::CodeCommit
     #   <p>The full SHA-1 pointer of the tree information for the commit that contains this file change.</p>
     #   @return [String]
     class PutFileOutput < Struct.new(
+      nil,
       :commit_id,
       :blob_id,
       :tree_id,
@@ -5598,6 +5916,7 @@ module Aws::CodeCommit
     #   <p>The JSON block of configuration information for each trigger.</p>
     #   @return [Array<Types::RepositoryTrigger>]
     class PutRepositoryTriggersInput < Struct.new(
+      nil,
       :repository_name,
       :triggers,
       keyword_init: true
@@ -5610,6 +5929,7 @@ module Aws::CodeCommit
     #   <p>The system-generated unique ID for the create or update operation.</p>
     #   @return [String]
     class PutRepositoryTriggersOutput < Struct.new(
+      nil,
       :configuration_id,
       keyword_init: true
     )
@@ -5628,6 +5948,7 @@ module Aws::CodeCommit
     #               from IAM. While these IAM users or roles no longer exist, the reactions might still appear in total reaction counts.</p>
     #   @return [Integer]
     class ReactionForComment < Struct.new(
+      nil,
       :reaction,
       :reaction_users,
       :reactions_from_deleted_users_count,
@@ -5641,6 +5962,7 @@ module Aws::CodeCommit
     #   <p>Any message associated with the exception.</p>
     #   @return [String]
     class ReactionLimitExceededException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -5658,6 +5980,7 @@ module Aws::CodeCommit
     #   <p>The Unicode codepoint for the reaction.</p>
     #   @return [String]
     class ReactionValueFormats < Struct.new(
+      nil,
       :emoji,
       :short_code,
       :unicode,
@@ -5671,6 +5994,7 @@ module Aws::CodeCommit
     #   <p>Any message associated with the exception.</p>
     #   @return [String]
     class ReactionValueRequiredException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -5682,6 +6006,7 @@ module Aws::CodeCommit
     #   <p>Any message associated with the exception.</p>
     #   @return [String]
     class ReferenceDoesNotExistException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -5693,6 +6018,7 @@ module Aws::CodeCommit
     #   <p>Any message associated with the exception.</p>
     #   @return [String]
     class ReferenceNameRequiredException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -5704,6 +6030,7 @@ module Aws::CodeCommit
     #   <p>Any message associated with the exception.</p>
     #   @return [String]
     class ReferenceTypeNotSupportedException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -5724,6 +6051,7 @@ module Aws::CodeCommit
     #   <p>The file mode to apply during conflict resoltion.</p>
     #   @return [String]
     class ReplaceContentEntry < Struct.new(
+      nil,
       :file_path,
       :replacement_type,
       :content,
@@ -5738,6 +6066,7 @@ module Aws::CodeCommit
     #   <p>Any message associated with the exception.</p>
     #   @return [String]
     class ReplacementContentRequiredException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -5749,6 +6078,7 @@ module Aws::CodeCommit
     #   <p>Any message associated with the exception.</p>
     #   @return [String]
     class ReplacementTypeRequiredException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -5760,6 +6090,7 @@ module Aws::CodeCommit
     #   <p>Any message associated with the exception.</p>
     #   @return [String]
     class RepositoryDoesNotExistException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -5771,6 +6102,7 @@ module Aws::CodeCommit
     #   <p>Any message associated with the exception.</p>
     #   @return [String]
     class RepositoryLimitExceededException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -5812,6 +6144,7 @@ module Aws::CodeCommit
     #   <p>The ID of the Key Management Service encryption key used to encrypt and decrypt the repository.</p>
     #   @return [String]
     class RepositoryMetadata < Struct.new(
+      nil,
       :account_id,
       :repository_id,
       :repository_name,
@@ -5833,6 +6166,7 @@ module Aws::CodeCommit
     #   <p>Any message associated with the exception.</p>
     #   @return [String]
     class RepositoryNameExistsException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -5847,6 +6181,7 @@ module Aws::CodeCommit
     #   <p>The ID associated with the repository.</p>
     #   @return [String]
     class RepositoryNameIdPair < Struct.new(
+      nil,
       :repository_name,
       :repository_id,
       keyword_init: true
@@ -5859,6 +6194,7 @@ module Aws::CodeCommit
     #   <p>Any message associated with the exception.</p>
     #   @return [String]
     class RepositoryNameRequiredException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -5870,6 +6206,7 @@ module Aws::CodeCommit
     #   <p>Any message associated with the exception.</p>
     #   @return [String]
     class RepositoryNamesRequiredException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -5881,6 +6218,7 @@ module Aws::CodeCommit
     #   <p>Any message associated with the exception.</p>
     #   @return [String]
     class RepositoryNotAssociatedWithPullRequestException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -5921,6 +6259,7 @@ module Aws::CodeCommit
     #            </note>
     #   @return [Array<String>]
     class RepositoryTrigger < Struct.new(
+      nil,
       :name,
       :destination_arn,
       :custom_data,
@@ -5937,6 +6276,7 @@ module Aws::CodeCommit
     #   <p>Any message associated with the exception.</p>
     #   @return [String]
     class RepositoryTriggerBranchNameListRequiredException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -5949,6 +6289,7 @@ module Aws::CodeCommit
     #   <p>Any message associated with the exception.</p>
     #   @return [String]
     class RepositoryTriggerDestinationArnRequiredException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -5960,6 +6301,7 @@ module Aws::CodeCommit
     #   <p>Any message associated with the exception.</p>
     #   @return [String]
     class RepositoryTriggerEventsListRequiredException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -5974,6 +6316,7 @@ module Aws::CodeCommit
     #   <p>Message information about the trigger that did not run.</p>
     #   @return [String]
     class RepositoryTriggerExecutionFailure < Struct.new(
+      nil,
       :trigger,
       :failure_message,
       keyword_init: true
@@ -5986,6 +6329,7 @@ module Aws::CodeCommit
     #   <p>Any message associated with the exception.</p>
     #   @return [String]
     class RepositoryTriggerNameRequiredException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -5997,6 +6341,7 @@ module Aws::CodeCommit
     #   <p>Any message associated with the exception.</p>
     #   @return [String]
     class RepositoryTriggersListRequiredException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -6010,6 +6355,7 @@ module Aws::CodeCommit
     #   <p>Any message associated with the exception.</p>
     #   @return [String]
     class ResourceArnRequiredException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -6021,6 +6367,7 @@ module Aws::CodeCommit
     #   <p>Any message associated with the exception.</p>
     #   @return [String]
     class RestrictedSourceFileException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -6032,6 +6379,7 @@ module Aws::CodeCommit
     #   <p>Any message associated with the exception.</p>
     #   @return [String]
     class RevisionIdRequiredException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -6043,6 +6391,7 @@ module Aws::CodeCommit
     #   <p>Any message associated with the exception.</p>
     #   @return [String]
     class RevisionNotCurrentException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -6055,6 +6404,7 @@ module Aws::CodeCommit
     #   <p>Any message associated with the exception.</p>
     #   @return [String]
     class SameFileContentException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -6068,6 +6418,7 @@ module Aws::CodeCommit
     #   <p>Any message associated with the exception.</p>
     #   @return [String]
     class SamePathRequestException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -6082,6 +6433,7 @@ module Aws::CodeCommit
     #   <p>The file mode for the file.</p>
     #   @return [String]
     class SetFileModeEntry < Struct.new(
+      nil,
       :file_path,
       :file_mode,
       keyword_init: true
@@ -6095,6 +6447,7 @@ module Aws::CodeCommit
     #   <p>Any message associated with the exception.</p>
     #   @return [String]
     class SourceAndDestinationAreSameException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -6106,6 +6459,7 @@ module Aws::CodeCommit
     #   <p>Any message associated with the exception.</p>
     #   @return [String]
     class SourceFileOrContentRequiredException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -6120,6 +6474,7 @@ module Aws::CodeCommit
     #   <p>Whether to remove the source file from the parent commit.</p>
     #   @return [Boolean]
     class SourceFileSpecifier < Struct.new(
+      nil,
       :file_path,
       :is_move,
       keyword_init: true
@@ -6143,6 +6498,7 @@ module Aws::CodeCommit
     #   <p>The relative path of the submodule from the folder where the query originated.</p>
     #   @return [String]
     class SubModule < Struct.new(
+      nil,
       :commit_id,
       :absolute_path,
       :relative_path,
@@ -6165,6 +6521,7 @@ module Aws::CodeCommit
     #   <p>The file mode permissions of the blob that cotains information about the symbolic link.</p>
     #   @return [String]
     class SymbolicLink < Struct.new(
+      nil,
       :blob_id,
       :absolute_path,
       :relative_path,
@@ -6179,6 +6536,7 @@ module Aws::CodeCommit
     #   <p>Any message associated with the exception.</p>
     #   @return [String]
     class TagKeysListRequiredException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -6190,6 +6548,7 @@ module Aws::CodeCommit
     #   <p>Any message associated with the exception.</p>
     #   @return [String]
     class TagPolicyException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -6203,6 +6562,7 @@ module Aws::CodeCommit
     #   <p>The key-value pair to use when tagging this repository.</p>
     #   @return [Hash<String, String>]
     class TagResourceInput < Struct.new(
+      nil,
       :resource_arn,
       :tags,
       keyword_init: true
@@ -6215,6 +6575,7 @@ module Aws::CodeCommit
     #   <p>Any message associated with the exception.</p>
     #   @return [String]
     class TagsMapRequiredException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -6233,6 +6594,7 @@ module Aws::CodeCommit
     #               the destination branch.</p>
     #   @return [String]
     class Target < Struct.new(
+      nil,
       :repository_name,
       :source_reference,
       :destination_reference,
@@ -6246,6 +6608,7 @@ module Aws::CodeCommit
     #   <p>Any message associated with the exception.</p>
     #   @return [String]
     class TargetRequiredException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -6257,6 +6620,7 @@ module Aws::CodeCommit
     #   <p>Any message associated with the exception.</p>
     #   @return [String]
     class TargetsRequiredException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -6271,6 +6635,7 @@ module Aws::CodeCommit
     #   <p>The list of triggers to test.</p>
     #   @return [Array<Types::RepositoryTrigger>]
     class TestRepositoryTriggersInput < Struct.new(
+      nil,
       :repository_name,
       :triggers,
       keyword_init: true
@@ -6287,6 +6652,7 @@ module Aws::CodeCommit
     #               triggers that could not be tested, separated by commas.</p>
     #   @return [Array<Types::RepositoryTriggerExecutionFailure>]
     class TestRepositoryTriggersOutput < Struct.new(
+      nil,
       :successful_executions,
       :failed_executions,
       keyword_init: true
@@ -6300,6 +6666,7 @@ module Aws::CodeCommit
     #   <p>Any message associated with the exception.</p>
     #   @return [String]
     class TipOfSourceReferenceIsDifferentException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -6312,6 +6679,7 @@ module Aws::CodeCommit
     #   <p>Any message associated with the exception.</p>
     #   @return [String]
     class TipsDivergenceExceededException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -6323,6 +6691,7 @@ module Aws::CodeCommit
     #   <p>Any message associated with the exception.</p>
     #   @return [String]
     class TitleRequiredException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -6334,6 +6703,7 @@ module Aws::CodeCommit
     #   <p>Any message associated with the exception.</p>
     #   @return [String]
     class TooManyTagsException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -6347,6 +6717,7 @@ module Aws::CodeCommit
     #   <p>The tag key for each tag that you want to remove from the resource.</p>
     #   @return [Array<String>]
     class UntagResourceInput < Struct.new(
+      nil,
       :resource_arn,
       :tag_keys,
       keyword_init: true
@@ -6367,6 +6738,7 @@ module Aws::CodeCommit
     #               <a>GetPullRequest</a>.</p>
     #   @return [String]
     class UpdateApprovalRuleTemplateContentInput < Struct.new(
+      nil,
       :approval_rule_template_name,
       :new_rule_content,
       :existing_rule_content_sha256,
@@ -6379,6 +6751,7 @@ module Aws::CodeCommit
     #   <p>Returns information about an approval rule template.</p>
     #   @return [Types::ApprovalRuleTemplate]
     class UpdateApprovalRuleTemplateContentOutput < Struct.new(
+      nil,
       :approval_rule_template,
       keyword_init: true
     )
@@ -6392,6 +6765,7 @@ module Aws::CodeCommit
     #   <p>The updated description of the approval rule template.</p>
     #   @return [String]
     class UpdateApprovalRuleTemplateDescriptionInput < Struct.new(
+      nil,
       :approval_rule_template_name,
       :approval_rule_template_description,
       keyword_init: true
@@ -6403,6 +6777,7 @@ module Aws::CodeCommit
     #   <p>The structure and content of the updated approval rule template.</p>
     #   @return [Types::ApprovalRuleTemplate]
     class UpdateApprovalRuleTemplateDescriptionOutput < Struct.new(
+      nil,
       :approval_rule_template,
       keyword_init: true
     )
@@ -6416,6 +6791,7 @@ module Aws::CodeCommit
     #   <p>The new name you want to apply to the approval rule template.</p>
     #   @return [String]
     class UpdateApprovalRuleTemplateNameInput < Struct.new(
+      nil,
       :old_approval_rule_template_name,
       :new_approval_rule_template_name,
       keyword_init: true
@@ -6427,6 +6803,7 @@ module Aws::CodeCommit
     #   <p>The structure and content of the updated approval rule template.</p>
     #   @return [Types::ApprovalRuleTemplate]
     class UpdateApprovalRuleTemplateNameOutput < Struct.new(
+      nil,
       :approval_rule_template,
       keyword_init: true
     )
@@ -6441,6 +6818,7 @@ module Aws::CodeCommit
     #   <p>The updated content to replace the existing content of the comment.</p>
     #   @return [String]
     class UpdateCommentInput < Struct.new(
+      nil,
       :comment_id,
       :content,
       keyword_init: true
@@ -6452,6 +6830,7 @@ module Aws::CodeCommit
     #   <p>Information about the updated comment.</p>
     #   @return [Types::Comment]
     class UpdateCommentOutput < Struct.new(
+      nil,
       :comment,
       keyword_init: true
     )
@@ -6466,6 +6845,7 @@ module Aws::CodeCommit
     #   <p>The name of the branch to set as the default branch.</p>
     #   @return [String]
     class UpdateDefaultBranchInput < Struct.new(
+      nil,
       :repository_name,
       :default_branch_name,
       keyword_init: true
@@ -6527,6 +6907,7 @@ module Aws::CodeCommit
     #            </note>
     #   @return [String]
     class UpdatePullRequestApprovalRuleContentInput < Struct.new(
+      nil,
       :pull_request_id,
       :approval_rule_name,
       :existing_rule_content_sha256,
@@ -6540,6 +6921,7 @@ module Aws::CodeCommit
     #   <p>Information about the updated approval rule.</p>
     #   @return [Types::ApprovalRule]
     class UpdatePullRequestApprovalRuleContentOutput < Struct.new(
+      nil,
       :approval_rule,
       keyword_init: true
     )
@@ -6556,6 +6938,7 @@ module Aws::CodeCommit
     #   <p>The approval state to associate with the user on the pull request.</p>
     #   @return [String]
     class UpdatePullRequestApprovalStateInput < Struct.new(
+      nil,
       :pull_request_id,
       :revision_id,
       :approval_state,
@@ -6572,6 +6955,7 @@ module Aws::CodeCommit
     #               existing description.</p>
     #   @return [String]
     class UpdatePullRequestDescriptionInput < Struct.new(
+      nil,
       :pull_request_id,
       :description,
       keyword_init: true
@@ -6583,6 +6967,7 @@ module Aws::CodeCommit
     #   <p>Information about the updated pull request.</p>
     #   @return [Types::PullRequest]
     class UpdatePullRequestDescriptionOutput < Struct.new(
+      nil,
       :pull_request,
       keyword_init: true
     )
@@ -6598,6 +6983,7 @@ module Aws::CodeCommit
     #               from <code>CLOSED</code> to <code>CLOSED</code>.</p>
     #   @return [String]
     class UpdatePullRequestStatusInput < Struct.new(
+      nil,
       :pull_request_id,
       :pull_request_status,
       keyword_init: true
@@ -6609,6 +6995,7 @@ module Aws::CodeCommit
     #   <p>Information about the pull request.</p>
     #   @return [Types::PullRequest]
     class UpdatePullRequestStatusOutput < Struct.new(
+      nil,
       :pull_request,
       keyword_init: true
     )
@@ -6622,6 +7009,7 @@ module Aws::CodeCommit
     #   <p>The updated title of the pull request. This replaces the existing title.</p>
     #   @return [String]
     class UpdatePullRequestTitleInput < Struct.new(
+      nil,
       :pull_request_id,
       :title,
       keyword_init: true
@@ -6633,6 +7021,7 @@ module Aws::CodeCommit
     #   <p>Information about the updated pull request.</p>
     #   @return [Types::PullRequest]
     class UpdatePullRequestTitleOutput < Struct.new(
+      nil,
       :pull_request,
       keyword_init: true
     )
@@ -6647,6 +7036,7 @@ module Aws::CodeCommit
     #   <p>The new comment or description for the specified repository. Repository descriptions are limited to 1,000 characters.</p>
     #   @return [String]
     class UpdateRepositoryDescriptionInput < Struct.new(
+      nil,
       :repository_name,
       :repository_description,
       keyword_init: true
@@ -6664,6 +7054,7 @@ module Aws::CodeCommit
     #           the <i>Key Management Service API Reference</i>.</p>
     #   @return [String]
     class UpdateRepositoryEncryptionKeyInput < Struct.new(
+      nil,
       :repository_name,
       :kms_key_id,
       keyword_init: true
@@ -6681,6 +7072,7 @@ module Aws::CodeCommit
     #   <p>The ID of the encryption key formerly used to encrypt and decrypt the repository.</p>
     #   @return [String]
     class UpdateRepositoryEncryptionKeyOutput < Struct.new(
+      nil,
       :repository_id,
       :kms_key_id,
       :original_kms_key_id,
@@ -6697,6 +7089,7 @@ module Aws::CodeCommit
     #   <p>The new name for the repository.</p>
     #   @return [String]
     class UpdateRepositoryNameInput < Struct.new(
+      nil,
       :old_name,
       :new_name,
       keyword_init: true
@@ -6715,6 +7108,7 @@ module Aws::CodeCommit
     #   <p>The date when the specified commit was commited, in timestamp format with GMT offset.</p>
     #   @return [String]
     class UserInfo < Struct.new(
+      nil,
       :name,
       :email,
       :date,

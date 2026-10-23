@@ -23,6 +23,7 @@ module Aws::LexRuntimeService
     #         default values for slots in subsequent events.</p>
     #   @return [Hash<String, String>]
     class ActiveContext < Struct.new(
+      nil,
       :name,
       :time_to_live,
       :parameters,
@@ -45,6 +46,7 @@ module Aws::LexRuntimeService
     #         request and the corresponding response from Amazon Lex.</p>
     #   @return [Integer]
     class ActiveContextTimeToLive < Struct.new(
+      nil,
       :time_to_live_in_seconds,
       :turns_to_live,
       keyword_init: true
@@ -58,6 +60,7 @@ module Aws::LexRuntimeService
     # @!attribute message
     #   @return [String]
     class BadGatewayException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -70,6 +73,7 @@ module Aws::LexRuntimeService
     # @!attribute message
     #   @return [String]
     class BadRequestException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -87,6 +91,7 @@ module Aws::LexRuntimeService
     #         value sent can be "New York City."</p>
     #   @return [String]
     class Button < Struct.new(
+      nil,
       :text,
       :value,
       keyword_init: true
@@ -99,6 +104,7 @@ module Aws::LexRuntimeService
     # @!attribute message
     #   @return [String]
     class ConflictException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -115,6 +121,7 @@ module Aws::LexRuntimeService
     #   <p>The identifier of the user associated with the session data.</p>
     #   @return [String]
     class DeleteSessionRequest < Struct.new(
+      nil,
       :bot_name,
       :bot_alias,
       :user_id,
@@ -136,6 +143,7 @@ module Aws::LexRuntimeService
     #   <p>The unique identifier for the session.</p>
     #   @return [String]
     class DeleteSessionResponse < Struct.new(
+      nil,
       :bot_name,
       :bot_alias,
       :user_id,
@@ -164,6 +172,7 @@ module Aws::LexRuntimeService
     # @!attribute message
     #   @return [String]
     class DependencyFailedException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -268,6 +277,7 @@ module Aws::LexRuntimeService
     #            </ul>
     #   @return [String]
     class DialogAction < Struct.new(
+      nil,
       :type,
       :intent_name,
       :slots,
@@ -298,6 +308,7 @@ module Aws::LexRuntimeService
     #   <p>The list of options to show to the user.</p>
     #   @return [Array<Types::Button>]
     class GenericAttachment < Struct.new(
+      nil,
       :title,
       :sub_title,
       :attachment_link_url,
@@ -326,6 +337,7 @@ module Aws::LexRuntimeService
     #         returned.</p>
     #   @return [String]
     class GetSessionRequest < Struct.new(
+      nil,
       :bot_name,
       :bot_alias,
       :user_id,
@@ -363,6 +375,7 @@ module Aws::LexRuntimeService
     #         intent, or to modify the operation of your application.</p>
     #   @return [Array<Types::ActiveContext>]
     class GetSessionResponse < Struct.new(
+      nil,
       :recent_intent_summary_view,
       :session_attributes,
       :session_id,
@@ -381,6 +394,7 @@ module Aws::LexRuntimeService
     #         higher confidence.</p>
     #   @return [Float]
     class IntentConfidence < Struct.new(
+      nil,
       :score,
       keyword_init: true
     )
@@ -488,6 +502,7 @@ module Aws::LexRuntimeService
     #         the field is blank.</p>
     #   @return [String]
     class IntentSummary < Struct.new(
+      nil,
       :intent_name,
       :checkpoint_label,
       :slots,
@@ -504,6 +519,7 @@ module Aws::LexRuntimeService
     # @!attribute message
     #   @return [String]
     class InternalFailureException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -516,6 +532,7 @@ module Aws::LexRuntimeService
     # @!attribute message
     #   @return [String]
     class LimitExceededException < Struct.new(
+      nil,
       :retry_after_seconds,
       :message,
       keyword_init: true
@@ -527,6 +544,7 @@ module Aws::LexRuntimeService
     # @!attribute message
     #   @return [String]
     class LoopDetectedException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -537,6 +555,7 @@ module Aws::LexRuntimeService
     # @!attribute message
     #   @return [String]
     class NotAcceptableException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -548,6 +567,7 @@ module Aws::LexRuntimeService
     # @!attribute message
     #   @return [String]
     class NotFoundException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -713,6 +733,7 @@ module Aws::LexRuntimeService
     #         contexts for the session are cleared.</p>
     #   @return [String]
     class PostContentRequest < Struct.new(
+      nil,
       :bot_name,
       :bot_alias,
       :user_id,
@@ -955,6 +976,7 @@ module Aws::LexRuntimeService
     #         intent, or to modify the operation of your application.</p>
     #   @return [String]
     class PostContentResponse < Struct.new(
+      nil,
       :content_type,
       :intent_name,
       :nlu_intent_confidence,
@@ -1045,6 +1067,7 @@ module Aws::LexRuntimeService
     #         contexts for the session are cleared.</p>
     #   @return [Array<Types::ActiveContext>]
     class PostTextRequest < Struct.new(
+      nil,
       :bot_name,
       :bot_alias,
       :user_id,
@@ -1227,6 +1250,7 @@ module Aws::LexRuntimeService
     #         intent, or to modify the operation of your application.</p>
     #   @return [Array<Types::ActiveContext>]
     class PostTextResponse < Struct.new(
+      nil,
       :intent_name,
       :nlu_intent_confidence,
       :alternative_intents,
@@ -1261,6 +1285,7 @@ module Aws::LexRuntimeService
     #   <p>The slot and slot values associated with the predicted intent.</p>
     #   @return [Hash<String, String>]
     class PredictedIntent < Struct.new(
+      nil,
       :intent_name,
       :nlu_intent_confidence,
       :slots,
@@ -1377,6 +1402,7 @@ module Aws::LexRuntimeService
     #         contexts for the session are cleared.</p>
     #   @return [Array<Types::ActiveContext>]
     class PutSessionRequest < Struct.new(
+      nil,
       :bot_name,
       :bot_alias,
       :user_id,
@@ -1508,6 +1534,7 @@ module Aws::LexRuntimeService
     #   <p>A list of active contexts for the session.</p>
     #   @return [String]
     class PutSessionResponse < Struct.new(
+      nil,
       :content_type,
       :intent_name,
       :slots,
@@ -1534,6 +1561,7 @@ module Aws::LexRuntimeService
     # @!attribute message
     #   @return [String]
     class RequestTimeoutException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -1555,6 +1583,7 @@ module Aws::LexRuntimeService
     #   <p>An array of attachment objects representing options.</p>
     #   @return [Array<Types::GenericAttachment>]
     class ResponseCard < Struct.new(
+      nil,
       :version,
       :content_type,
       :generic_attachments,
@@ -1575,6 +1604,7 @@ module Aws::LexRuntimeService
     #   <p>The likelihood that the sentiment was correctly inferred.</p>
     #   @return [String]
     class SentimentResponse < Struct.new(
+      nil,
       :sentiment_label,
       :sentiment_score,
       keyword_init: true
@@ -1587,6 +1617,7 @@ module Aws::LexRuntimeService
     # @!attribute message
     #   @return [String]
     class UnsupportedMediaTypeException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )

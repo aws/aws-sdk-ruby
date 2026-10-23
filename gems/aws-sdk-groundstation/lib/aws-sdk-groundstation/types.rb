@@ -29,6 +29,7 @@ module Aws::GroundStation
     #   <p>List of versions being used by agent components.</p>
     #   @return [Array<Types::ComponentVersion>]
     class AgentDetails < Struct.new(
+      nil,
       :agent_version,
       :instance_id,
       :instance_type,
@@ -48,6 +49,7 @@ module Aws::GroundStation
     #   <p>Sparse map of failure signatures.</p>
     #   @return [Hash<String, Boolean>]
     class AggregateStatus < Struct.new(
+      nil,
       :status,
       :signature_map,
       keyword_init: true
@@ -60,6 +62,7 @@ module Aws::GroundStation
     #   <p>Name of an antenna demod decode output node used in a contact.</p>
     #   @return [String]
     class AntennaDemodDecodeDetails < Struct.new(
+      nil,
       :output_node,
       keyword_init: true
     )
@@ -72,6 +75,7 @@ module Aws::GroundStation
     #   <p>Object that describes a spectral <code>Config</code>.</p>
     #   @return [Types::SpectrumConfig]
     class AntennaDownlinkConfig < Struct.new(
+      nil,
       :spectrum_config,
       keyword_init: true
     )
@@ -89,6 +93,7 @@ module Aws::GroundStation
     #   <p>Information about the decode <code>Config</code>.</p>
     #   @return [Types::DecodeConfig]
     class AntennaDownlinkDemodDecodeConfig < Struct.new(
+      nil,
       :spectrum_config,
       :demodulation_config,
       :decode_config,
@@ -108,6 +113,7 @@ module Aws::GroundStation
     #   <p>EIRP of the target.</p>
     #   @return [Types::Eirp]
     class AntennaUplinkConfig < Struct.new(
+      nil,
       :transmit_disabled,
       :spectrum_config,
       :target_eirp,
@@ -133,6 +139,7 @@ module Aws::GroundStation
     #   <p>The results of the audit.</p>
     #   @return [String]
     class AwsGroundStationAgentEndpoint < Struct.new(
+      nil,
       :name,
       :egress_address,
       :ingress_address,
@@ -148,6 +155,7 @@ module Aws::GroundStation
     #   <p>UUID of a contact.</p>
     #   @return [String]
     class CancelContactInput < Struct.new(
+      nil,
       :contact_id,
       keyword_init: true
     )
@@ -159,6 +167,7 @@ module Aws::GroundStation
     #   <p>UUID of a contact.</p>
     #   @return [String]
     class CancelContactOutput < Struct.new(
+      nil,
       :contact_id,
       keyword_init: true
     )
@@ -188,6 +197,7 @@ module Aws::GroundStation
     #   <p>Dataflow UUID associated with the component.</p>
     #   @return [String]
     class ComponentStatusData < Struct.new(
+      nil,
       :component_type,
       :capability_arn,
       :status,
@@ -208,6 +218,7 @@ module Aws::GroundStation
     #   <p>List of versions.</p>
     #   @return [Array<String>]
     class ComponentVersion < Struct.new(
+      nil,
       :component_type,
       :versions,
       keyword_init: true
@@ -254,6 +265,7 @@ module Aws::GroundStation
     #   <p>Name of a <code>Config</code>.</p>
     #   @return [String]
     class ConfigListItem < Struct.new(
+      nil,
       :config_id,
       :config_type,
       :config_arn,
@@ -318,6 +330,7 @@ module Aws::GroundStation
     #   <p>Maximum transmission unit (MTU) size in bytes of a dataflow endpoint.</p>
     #   @return [Integer]
     class ConnectionDetails < Struct.new(
+      nil,
       :socket_address,
       :mtu,
       keyword_init: true
@@ -384,6 +397,7 @@ module Aws::GroundStation
     #            </p>
     #   @return [Time]
     class ContactData < Struct.new(
+      nil,
       :contact_id,
       :mission_profile_arn,
       :satellite_arn,
@@ -415,6 +429,7 @@ module Aws::GroundStation
     #   <p>Tags assigned to a <code>Config</code>.</p>
     #   @return [Hash<String, String>]
     class CreateConfigInput < Struct.new(
+      nil,
       :name,
       :config_data,
       :tags,
@@ -434,6 +449,7 @@ module Aws::GroundStation
     #   <p>ARN of a <code>Config</code>.</p>
     #   @return [String]
     class CreateConfigOutput < Struct.new(
+      nil,
       :config_id,
       :config_type,
       :config_arn,
@@ -464,6 +480,7 @@ module Aws::GroundStation
     #   <p>Amount of time, in seconds, after a contact ends that the Ground Station Dataflow Endpoint Group will be in a <code>POSTPASS</code> state. A Ground Station Dataflow Endpoint Group State Change event will be emitted when the Dataflow Endpoint Group enters and exits the <code>POSTPASS</code> state.</p>
     #   @return [Integer]
     class CreateDataflowEndpointGroupInput < Struct.new(
+      nil,
       :endpoint_details,
       :tags,
       :contact_pre_pass_duration_seconds,
@@ -478,6 +495,7 @@ module Aws::GroundStation
     #   <p>UUID of a dataflow endpoint group.</p>
     #   @return [String]
     class CreateDataflowEndpointGroupOutput < Struct.new(
+      nil,
       :dataflow_endpoint_group_id,
       keyword_init: true
     )
@@ -512,6 +530,7 @@ module Aws::GroundStation
     #   <p>Tags assigned to an ephemeris.</p>
     #   @return [Hash<String, String>]
     class CreateEphemerisInput < Struct.new(
+      nil,
       :satellite_id,
       :enabled,
       :priority,
@@ -529,6 +548,7 @@ module Aws::GroundStation
     #   <p>The AWS Ground Station ephemeris ID.</p>
     #   @return [String]
     class CreateEphemerisOutput < Struct.new(
+      nil,
       :ephemeris_id,
       keyword_init: true
     )
@@ -566,6 +586,7 @@ module Aws::GroundStation
     #   <p>Role to use for encrypting streams with KMS key.</p>
     #   @return [String]
     class CreateMissionProfileInput < Struct.new(
+      nil,
       :name,
       :contact_pre_pass_duration_seconds,
       :contact_post_pass_duration_seconds,
@@ -585,6 +606,7 @@ module Aws::GroundStation
     #   <p>UUID of a mission profile.</p>
     #   @return [String]
     class CreateMissionProfileOutput < Struct.new(
+      nil,
       :mission_profile_id,
       keyword_init: true
     )
@@ -602,6 +624,7 @@ module Aws::GroundStation
     #   <p>Error message for a dataflow.</p>
     #   @return [String]
     class DataflowDetail < Struct.new(
+      nil,
       :source,
       :destination,
       :error_message,
@@ -624,6 +647,7 @@ module Aws::GroundStation
     #   <p>Maximum transmission unit (MTU) size in bytes of a dataflow endpoint.</p>
     #   @return [Integer]
     class DataflowEndpoint < Struct.new(
+      nil,
       :name,
       :address,
       :status,
@@ -641,6 +665,7 @@ module Aws::GroundStation
     #   <p>Region of a dataflow endpoint.</p>
     #   @return [String]
     class DataflowEndpointConfig < Struct.new(
+      nil,
       :dataflow_endpoint_name,
       :dataflow_endpoint_region,
       keyword_init: true
@@ -656,6 +681,7 @@ module Aws::GroundStation
     #   <p>ARN of a dataflow endpoint group.</p>
     #   @return [String]
     class DataflowEndpointListItem < Struct.new(
+      nil,
       :dataflow_endpoint_group_id,
       :dataflow_endpoint_group_arn,
       keyword_init: true
@@ -668,6 +694,7 @@ module Aws::GroundStation
     #   <p>Unvalidated JSON of a decode <code>Config</code>.</p>
     #   @return [String]
     class DecodeConfig < Struct.new(
+      nil,
       :unvalidated_json,
       keyword_init: true
     )
@@ -682,6 +709,7 @@ module Aws::GroundStation
     #   <p>Type of a <code>Config</code>.</p>
     #   @return [String]
     class DeleteConfigInput < Struct.new(
+      nil,
       :config_id,
       :config_type,
       keyword_init: true
@@ -700,6 +728,7 @@ module Aws::GroundStation
     #   <p>ARN of a <code>Config</code>.</p>
     #   @return [String]
     class DeleteConfigOutput < Struct.new(
+      nil,
       :config_id,
       :config_type,
       :config_arn,
@@ -713,6 +742,7 @@ module Aws::GroundStation
     #   <p>UUID of a dataflow endpoint group.</p>
     #   @return [String]
     class DeleteDataflowEndpointGroupInput < Struct.new(
+      nil,
       :dataflow_endpoint_group_id,
       keyword_init: true
     )
@@ -724,6 +754,7 @@ module Aws::GroundStation
     #   <p>UUID of a dataflow endpoint group.</p>
     #   @return [String]
     class DeleteDataflowEndpointGroupOutput < Struct.new(
+      nil,
       :dataflow_endpoint_group_id,
       keyword_init: true
     )
@@ -734,6 +765,7 @@ module Aws::GroundStation
     #   <p>The AWS Ground Station ephemeris ID.</p>
     #   @return [String]
     class DeleteEphemerisInput < Struct.new(
+      nil,
       :ephemeris_id,
       keyword_init: true
     )
@@ -744,6 +776,7 @@ module Aws::GroundStation
     #   <p>The AWS Ground Station ephemeris ID.</p>
     #   @return [String]
     class DeleteEphemerisOutput < Struct.new(
+      nil,
       :ephemeris_id,
       keyword_init: true
     )
@@ -755,6 +788,7 @@ module Aws::GroundStation
     #   <p>UUID of a mission profile.</p>
     #   @return [String]
     class DeleteMissionProfileInput < Struct.new(
+      nil,
       :mission_profile_id,
       keyword_init: true
     )
@@ -766,6 +800,7 @@ module Aws::GroundStation
     #   <p>UUID of a mission profile.</p>
     #   @return [String]
     class DeleteMissionProfileOutput < Struct.new(
+      nil,
       :mission_profile_id,
       keyword_init: true
     )
@@ -777,6 +812,7 @@ module Aws::GroundStation
     #   <p>Unvalidated JSON of a demodulation <code>Config</code>.</p>
     #   @return [String]
     class DemodulationConfig < Struct.new(
+      nil,
       :unvalidated_json,
       keyword_init: true
     )
@@ -790,6 +826,7 @@ module Aws::GroundStation
     #   <p/>
     #   @return [String]
     class DependencyException < Struct.new(
+      nil,
       :message,
       :parameter_name,
       keyword_init: true
@@ -802,6 +839,7 @@ module Aws::GroundStation
     #   <p>UUID of a contact.</p>
     #   @return [String]
     class DescribeContactInput < Struct.new(
+      nil,
       :contact_id,
       keyword_init: true
     )
@@ -868,6 +906,7 @@ module Aws::GroundStation
     #         </p>
     #   @return [Time]
     class DescribeContactOutput < Struct.new(
+      nil,
       :contact_id,
       :mission_profile_arn,
       :satellite_arn,
@@ -893,6 +932,7 @@ module Aws::GroundStation
     #   <p>The AWS Ground Station ephemeris ID.</p>
     #   @return [String]
     class DescribeEphemerisInput < Struct.new(
+      nil,
       :ephemeris_id,
       keyword_init: true
     )
@@ -932,6 +972,7 @@ module Aws::GroundStation
     #   <p>Reason that an ephemeris failed validation. Only provided for ephemerides with <code>INVALID</code> status.</p>
     #   @return [String]
     class DescribeEphemerisOutput < Struct.new(
+      nil,
       :ephemeris_id,
       :satellite_id,
       :status,
@@ -961,6 +1002,7 @@ module Aws::GroundStation
     #   <p>Region of a dataflow destination.</p>
     #   @return [String]
     class Destination < Struct.new(
+      nil,
       :config_type,
       :config_id,
       :config_details,
@@ -981,6 +1023,7 @@ module Aws::GroundStation
     #   <p>List of capabilities to associate with agent.</p>
     #   @return [Array<String>]
     class DiscoveryData < Struct.new(
+      nil,
       :public_ip_addresses,
       :private_ip_addresses,
       :capability_arns,
@@ -997,6 +1040,7 @@ module Aws::GroundStation
     #   <p>Units of an EIRP.</p>
     #   @return [String]
     class Eirp < Struct.new(
+      nil,
       :value,
       :units,
       keyword_init: true
@@ -1012,6 +1056,7 @@ module Aws::GroundStation
     #   <p>Elevation angle units.</p>
     #   @return [String]
     class Elevation < Struct.new(
+      nil,
       :value,
       :unit,
       keyword_init: true
@@ -1036,6 +1081,7 @@ module Aws::GroundStation
     #   <p>Health reasons for a dataflow endpoint. This field is ignored when calling <code>CreateDataflowEndpointGroup</code>.</p>
     #   @return [Array<String>]
     class EndpointDetails < Struct.new(
+      nil,
       :security_details,
       :endpoint,
       :aws_ground_station_agent_endpoint,
@@ -1079,6 +1125,7 @@ module Aws::GroundStation
     #   <p>Supplied ephemeris data.</p>
     #   @return [String]
     class EphemerisDescription < Struct.new(
+      nil,
       :source_s3_object,
       :ephemeris_data,
       keyword_init: true
@@ -1111,6 +1158,7 @@ module Aws::GroundStation
     #   <p>Source S3 object used for the ephemeris.</p>
     #   @return [Types::S3Object]
     class EphemerisItem < Struct.new(
+      nil,
       :ephemeris_id,
       :status,
       :priority,
@@ -1140,6 +1188,7 @@ module Aws::GroundStation
     #            <p>A name is only returned for customer-provider ephemerides that have a name associated.</p>
     #   @return [String]
     class EphemerisMetaData < Struct.new(
+      nil,
       :source,
       :ephemeris_id,
       :epoch,
@@ -1177,6 +1226,7 @@ module Aws::GroundStation
     #   <p>Frequency units.</p>
     #   @return [String]
     class Frequency < Struct.new(
+      nil,
       :value,
       :units,
       keyword_init: true
@@ -1203,6 +1253,7 @@ module Aws::GroundStation
     #   <p>Frequency bandwidth units.</p>
     #   @return [String]
     class FrequencyBandwidth < Struct.new(
+      nil,
       :value,
       :units,
       keyword_init: true
@@ -1214,6 +1265,7 @@ module Aws::GroundStation
     #   <p>UUID of agent to get configuration information for.</p>
     #   @return [String]
     class GetAgentConfigurationInput < Struct.new(
+      nil,
       :agent_id,
       keyword_init: true
     )
@@ -1227,6 +1279,7 @@ module Aws::GroundStation
     #   <p>Tasking document for agent.</p>
     #   @return [String]
     class GetAgentConfigurationOutput < Struct.new(
+      nil,
       :agent_id,
       :tasking_document,
       keyword_init: true
@@ -1242,6 +1295,7 @@ module Aws::GroundStation
     #   <p>Type of a <code>Config</code>.</p>
     #   @return [String]
     class GetConfigInput < Struct.new(
+      nil,
       :config_id,
       :config_type,
       keyword_init: true
@@ -1270,6 +1324,7 @@ module Aws::GroundStation
     #   <p>Tags assigned to a <code>Config</code>.</p>
     #   @return [Hash<String, String>]
     class GetConfigOutput < Struct.new(
+      nil,
       :config_id,
       :config_arn,
       :name,
@@ -1286,6 +1341,7 @@ module Aws::GroundStation
     #   <p>UUID of a dataflow endpoint group.</p>
     #   @return [String]
     class GetDataflowEndpointGroupInput < Struct.new(
+      nil,
       :dataflow_endpoint_group_id,
       keyword_init: true
     )
@@ -1312,6 +1368,7 @@ module Aws::GroundStation
     #   <p>Amount of time, in seconds, after a contact ends that the Ground Station Dataflow Endpoint Group will be in a <code>POSTPASS</code> state. A Ground Station Dataflow Endpoint Group State Change event will be emitted when the Dataflow Endpoint Group enters and exits the <code>POSTPASS</code> state.</p>
     #   @return [Integer]
     class GetDataflowEndpointGroupOutput < Struct.new(
+      nil,
       :dataflow_endpoint_group_id,
       :dataflow_endpoint_group_arn,
       :endpoints_details,
@@ -1331,6 +1388,7 @@ module Aws::GroundStation
     #   <p>The year being requested, in the format of YYYY.</p>
     #   @return [Integer]
     class GetMinuteUsageInput < Struct.new(
+      nil,
       :month,
       :year,
       keyword_init: true
@@ -1355,6 +1413,7 @@ module Aws::GroundStation
     #   <p>Estimated number of minutes remaining for an account, specific to the month being requested.</p>
     #   @return [Integer]
     class GetMinuteUsageOutput < Struct.new(
+      nil,
       :is_reserved_minutes_customer,
       :total_reserved_minute_allocation,
       :upcoming_minutes_scheduled,
@@ -1370,6 +1429,7 @@ module Aws::GroundStation
     #   <p>UUID of a mission profile.</p>
     #   @return [String]
     class GetMissionProfileInput < Struct.new(
+      nil,
       :mission_profile_id,
       keyword_init: true
     )
@@ -1416,6 +1476,7 @@ module Aws::GroundStation
     #   <p>Role to use for encrypting streams with KMS key.</p>
     #   @return [String]
     class GetMissionProfileOutput < Struct.new(
+      nil,
       :mission_profile_id,
       :mission_profile_arn,
       :name,
@@ -1438,6 +1499,7 @@ module Aws::GroundStation
     #   <p>UUID of a satellite.</p>
     #   @return [String]
     class GetSatelliteInput < Struct.new(
+      nil,
       :satellite_id,
       keyword_init: true
     )
@@ -1461,6 +1523,7 @@ module Aws::GroundStation
     #   <p>The current ephemeris being used to compute the trajectory of the satellite.</p>
     #   @return [Types::EphemerisMetaData]
     class GetSatelliteOutput < Struct.new(
+      nil,
       :satellite_id,
       :satellite_arn,
       :norad_satellite_id,
@@ -1487,6 +1550,7 @@ module Aws::GroundStation
     #   <p>Ground station Region.</p>
     #   @return [String]
     class GroundStationData < Struct.new(
+      nil,
       :ground_station_id,
       :ground_station_name,
       :region,
@@ -1503,6 +1567,7 @@ module Aws::GroundStation
     #   <p>A maximum value.</p>
     #   @return [Integer]
     class IntegerRange < Struct.new(
+      nil,
       :minimum,
       :maximum,
       keyword_init: true
@@ -1517,6 +1582,7 @@ module Aws::GroundStation
     #   <p/>
     #   @return [String]
     class InvalidParameterException < Struct.new(
+      nil,
       :message,
       :parameter_name,
       keyword_init: true
@@ -1557,6 +1623,7 @@ module Aws::GroundStation
     #   <p>Next token returned in the request of a previous <code>ListConfigs</code> call. Used to get the next page of results.</p>
     #   @return [String]
     class ListConfigsInput < Struct.new(
+      nil,
       :max_results,
       :next_token,
       keyword_init: true
@@ -1572,6 +1639,7 @@ module Aws::GroundStation
     #   <p>List of <code>Config</code> items.</p>
     #   @return [Array<Types::ConfigListItem>]
     class ListConfigsOutput < Struct.new(
+      nil,
       :next_token,
       :config_list,
       keyword_init: true
@@ -1605,6 +1673,7 @@ module Aws::GroundStation
     #   <p>ARN of a mission profile.</p>
     #   @return [String]
     class ListContactsInput < Struct.new(
+      nil,
       :max_results,
       :next_token,
       :status_list,
@@ -1626,6 +1695,7 @@ module Aws::GroundStation
     #   <p>List of contacts.</p>
     #   @return [Array<Types::ContactData>]
     class ListContactsOutput < Struct.new(
+      nil,
       :next_token,
       :contact_list,
       keyword_init: true
@@ -1641,6 +1711,7 @@ module Aws::GroundStation
     #   <p>Next token returned in the request of a previous <code>ListDataflowEndpointGroups</code> call. Used to get the next page of results.</p>
     #   @return [String]
     class ListDataflowEndpointGroupsInput < Struct.new(
+      nil,
       :max_results,
       :next_token,
       keyword_init: true
@@ -1656,6 +1727,7 @@ module Aws::GroundStation
     #   <p>A list of dataflow endpoint groups.</p>
     #   @return [Array<Types::DataflowEndpointListItem>]
     class ListDataflowEndpointGroupsOutput < Struct.new(
+      nil,
       :next_token,
       :dataflow_endpoint_group_list,
       keyword_init: true
@@ -1682,6 +1754,7 @@ module Aws::GroundStation
     #   <p>Pagination token.</p>
     #   @return [String]
     class ListEphemeridesInput < Struct.new(
+      nil,
       :satellite_id,
       :start_time,
       :end_time,
@@ -1700,6 +1773,7 @@ module Aws::GroundStation
     #   <p>List of ephemerides.</p>
     #   @return [Array<Types::EphemerisItem>]
     class ListEphemeridesOutput < Struct.new(
+      nil,
       :next_token,
       :ephemerides,
       keyword_init: true
@@ -1718,6 +1792,7 @@ module Aws::GroundStation
     #   <p>Next token that can be supplied in the next call to get the next page of ground stations.</p>
     #   @return [String]
     class ListGroundStationsInput < Struct.new(
+      nil,
       :satellite_id,
       :max_results,
       :next_token,
@@ -1734,6 +1809,7 @@ module Aws::GroundStation
     #   <p>List of ground stations.</p>
     #   @return [Array<Types::GroundStationData>]
     class ListGroundStationsOutput < Struct.new(
+      nil,
       :next_token,
       :ground_station_list,
       keyword_init: true
@@ -1749,6 +1825,7 @@ module Aws::GroundStation
     #   <p>Next token returned in the request of a previous <code>ListMissionProfiles</code> call. Used to get the next page of results.</p>
     #   @return [String]
     class ListMissionProfilesInput < Struct.new(
+      nil,
       :max_results,
       :next_token,
       keyword_init: true
@@ -1764,6 +1841,7 @@ module Aws::GroundStation
     #   <p>List of mission profiles.</p>
     #   @return [Array<Types::MissionProfileListItem>]
     class ListMissionProfilesOutput < Struct.new(
+      nil,
       :next_token,
       :mission_profile_list,
       keyword_init: true
@@ -1779,6 +1857,7 @@ module Aws::GroundStation
     #   <p>Next token that can be supplied in the next call to get the next page of satellites.</p>
     #   @return [String]
     class ListSatellitesInput < Struct.new(
+      nil,
       :max_results,
       :next_token,
       keyword_init: true
@@ -1794,6 +1873,7 @@ module Aws::GroundStation
     #   <p>List of satellites.</p>
     #   @return [Array<Types::SatelliteListItem>]
     class ListSatellitesOutput < Struct.new(
+      nil,
       :next_token,
       :satellites,
       keyword_init: true
@@ -1806,6 +1886,7 @@ module Aws::GroundStation
     #   <p>ARN of a resource.</p>
     #   @return [String]
     class ListTagsForResourceInput < Struct.new(
+      nil,
       :resource_arn,
       keyword_init: true
     )
@@ -1817,6 +1898,7 @@ module Aws::GroundStation
     #   <p>Tags assigned to a resource.</p>
     #   @return [Hash<String, String>]
     class ListTagsForResourceOutput < Struct.new(
+      nil,
       :tags,
       keyword_init: true
     )
@@ -1837,6 +1919,7 @@ module Aws::GroundStation
     #   <p>Name of a mission profile.</p>
     #   @return [String]
     class MissionProfileListItem < Struct.new(
+      nil,
       :mission_profile_id,
       :mission_profile_arn,
       :region,
@@ -1859,6 +1942,7 @@ module Aws::GroundStation
     #   <p>The data for an OEM ephemeris, supplied directly in the request rather than through an S3 object.</p>
     #   @return [String]
     class OEMEphemeris < Struct.new(
+      nil,
       :s3_object,
       :oem_data,
       keyword_init: true
@@ -1874,6 +1958,7 @@ module Aws::GroundStation
     #   <p>Maximum transmission unit (MTU) size in bytes of a dataflow endpoint.</p>
     #   @return [Integer]
     class RangedConnectionDetails < Struct.new(
+      nil,
       :socket_address,
       :mtu,
       keyword_init: true
@@ -1889,6 +1974,7 @@ module Aws::GroundStation
     #   <p>Port range of a socket address.</p>
     #   @return [Types::IntegerRange]
     class RangedSocketAddress < Struct.new(
+      nil,
       :name,
       :port_range,
       keyword_init: true
@@ -1906,6 +1992,7 @@ module Aws::GroundStation
     #   <p>Tags assigned to an <code>Agent</code>.</p>
     #   @return [Hash<String, String>]
     class RegisterAgentInput < Struct.new(
+      nil,
       :discovery_data,
       :agent_details,
       :tags,
@@ -1918,6 +2005,7 @@ module Aws::GroundStation
     #   <p>UUID of registered agent.</p>
     #   @return [String]
     class RegisterAgentOutput < Struct.new(
+      nil,
       :agent_id,
       keyword_init: true
     )
@@ -1944,6 +2032,7 @@ module Aws::GroundStation
     #   <p>Tags assigned to a contact.</p>
     #   @return [Hash<String, String>]
     class ReserveContactInput < Struct.new(
+      nil,
       :mission_profile_arn,
       :satellite_arn,
       :start_time,
@@ -1960,6 +2049,7 @@ module Aws::GroundStation
     #   <p>UUID of a contact.</p>
     #   @return [String]
     class ReserveContactOutput < Struct.new(
+      nil,
       :contact_id,
       keyword_init: true
     )
@@ -1973,6 +2063,7 @@ module Aws::GroundStation
     #   <p/>
     #   @return [String]
     class ResourceLimitExceededException < Struct.new(
+      nil,
       :message,
       :parameter_name,
       keyword_init: true
@@ -1984,6 +2075,7 @@ module Aws::GroundStation
     # @!attribute message
     #   @return [String]
     class ResourceNotFoundException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -2001,6 +2093,7 @@ module Aws::GroundStation
     #   <p>For versioned S3 objects, the version to use for the ephemeris.</p>
     #   @return [String]
     class S3Object < Struct.new(
+      nil,
       :bucket,
       :key,
       :version,
@@ -2020,6 +2113,7 @@ module Aws::GroundStation
     #   <p>S3 Key prefix to prefice data files.</p>
     #   @return [String]
     class S3RecordingConfig < Struct.new(
+      nil,
       :bucket_arn,
       :role_arn,
       :prefix,
@@ -2036,6 +2130,7 @@ module Aws::GroundStation
     #   <p>Key template used for the S3 Recording Configuration</p>
     #   @return [String]
     class S3RecordingDetails < Struct.new(
+      nil,
       :bucket_arn,
       :key_template,
       keyword_init: true
@@ -2060,6 +2155,7 @@ module Aws::GroundStation
     #   <p>The current ephemeris being used to compute the trajectory of the satellite.</p>
     #   @return [Types::EphemerisMetaData]
     class SatelliteListItem < Struct.new(
+      nil,
       :satellite_id,
       :satellite_arn,
       :norad_satellite_id,
@@ -2086,6 +2182,7 @@ module Aws::GroundStation
     #   <p>ARN to a role needed for connecting streams to your instances. </p>
     #   @return [String]
     class SecurityDetails < Struct.new(
+      nil,
       :subnet_ids,
       :security_group_ids,
       :role_arn,
@@ -2102,6 +2199,7 @@ module Aws::GroundStation
     #   <p>Port of a socket address.</p>
     #   @return [Integer]
     class SocketAddress < Struct.new(
+      nil,
       :name,
       :port,
       keyword_init: true
@@ -2124,6 +2222,7 @@ module Aws::GroundStation
     #   <p>Region of a dataflow source.</p>
     #   @return [String]
     class Source < Struct.new(
+      nil,
       :config_type,
       :config_id,
       :config_details,
@@ -2155,6 +2254,7 @@ module Aws::GroundStation
     #   <p>Polarization of a spectral <code>Config</code>. Capturing both <code>"RIGHT_HAND"</code> and <code>"LEFT_HAND"</code> polarization requires two separate configs.</p>
     #   @return [String]
     class SpectrumConfig < Struct.new(
+      nil,
       :center_frequency,
       :bandwidth,
       :polarization,
@@ -2174,6 +2274,7 @@ module Aws::GroundStation
     #   <p>The valid time range for the TLE. Gaps or overlap are not permitted.</p>
     #   @return [Types::TimeRange]
     class TLEData < Struct.new(
+      nil,
       :tle_line1,
       :tle_line2,
       :valid_time_range,
@@ -2190,6 +2291,7 @@ module Aws::GroundStation
     #   <p>The data for a TLE ephemeris, supplied directly in the request rather than through an S3 object.</p>
     #   @return [Array<Types::TLEData>]
     class TLEEphemeris < Struct.new(
+      nil,
       :s3_object,
       :tle_data,
       keyword_init: true
@@ -2205,6 +2307,7 @@ module Aws::GroundStation
     #   <p>Tags assigned to a resource.</p>
     #   @return [Hash<String, String>]
     class TagResourceInput < Struct.new(
+      nil,
       :resource_arn,
       :tags,
       keyword_init: true
@@ -2214,6 +2317,7 @@ module Aws::GroundStation
 
     # <p/>
     class TagResourceOutput < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -2227,6 +2331,7 @@ module Aws::GroundStation
     #   <p>Time in UTC at which the time range ends.</p>
     #   @return [Time]
     class TimeRange < Struct.new(
+      nil,
       :start_time,
       :end_time,
       keyword_init: true
@@ -2240,6 +2345,7 @@ module Aws::GroundStation
     #   <p>Current setting for autotrack.</p>
     #   @return [String]
     class TrackingConfig < Struct.new(
+      nil,
       :autotrack,
       keyword_init: true
     )
@@ -2254,6 +2360,7 @@ module Aws::GroundStation
     #   <p>Keys of a resource tag.</p>
     #   @return [Array<String>]
     class UntagResourceInput < Struct.new(
+      nil,
       :resource_arn,
       :tag_keys,
       keyword_init: true
@@ -2263,6 +2370,7 @@ module Aws::GroundStation
 
     # <p/>
     class UntagResourceOutput < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -2281,6 +2389,7 @@ module Aws::GroundStation
     #   <p>List of component statuses for agent.</p>
     #   @return [Array<Types::ComponentStatusData>]
     class UpdateAgentStatusInput < Struct.new(
+      nil,
       :agent_id,
       :task_id,
       :aggregate_status,
@@ -2294,6 +2403,7 @@ module Aws::GroundStation
     #   <p>UUID of updated agent.</p>
     #   @return [String]
     class UpdateAgentStatusOutput < Struct.new(
+      nil,
       :agent_id,
       keyword_init: true
     )
@@ -2314,6 +2424,7 @@ module Aws::GroundStation
     #   <p>Parameters of a <code>Config</code>.</p>
     #   @return [Types::ConfigTypeData]
     class UpdateConfigInput < Struct.new(
+      nil,
       :config_id,
       :name,
       :config_type,
@@ -2334,6 +2445,7 @@ module Aws::GroundStation
     #   <p>ARN of a <code>Config</code>.</p>
     #   @return [String]
     class UpdateConfigOutput < Struct.new(
+      nil,
       :config_id,
       :config_type,
       :config_arn,
@@ -2357,6 +2469,7 @@ module Aws::GroundStation
     #            <p>Priority must be 1 or greater</p>
     #   @return [Integer]
     class UpdateEphemerisInput < Struct.new(
+      nil,
       :ephemeris_id,
       :enabled,
       :name,
@@ -2370,6 +2483,7 @@ module Aws::GroundStation
     #   <p>The AWS Ground Station ephemeris ID.</p>
     #   @return [String]
     class UpdateEphemerisOutput < Struct.new(
+      nil,
       :ephemeris_id,
       keyword_init: true
     )
@@ -2407,6 +2521,7 @@ module Aws::GroundStation
     #   <p>Role to use for encrypting streams with KMS key.</p>
     #   @return [String]
     class UpdateMissionProfileInput < Struct.new(
+      nil,
       :mission_profile_id,
       :name,
       :contact_pre_pass_duration_seconds,
@@ -2426,6 +2541,7 @@ module Aws::GroundStation
     #   <p>UUID of a mission profile.</p>
     #   @return [String]
     class UpdateMissionProfileOutput < Struct.new(
+      nil,
       :mission_profile_id,
       keyword_init: true
     )
@@ -2443,6 +2559,7 @@ module Aws::GroundStation
     #   <p>ARN of an uplink <code>Config</code>.</p>
     #   @return [String]
     class UplinkEchoConfig < Struct.new(
+      nil,
       :enabled,
       :antenna_uplink_config_arn,
       keyword_init: true
@@ -2458,6 +2575,7 @@ module Aws::GroundStation
     #   <p>Polarization of an uplink spectral <code>Config</code>. Capturing both <code>"RIGHT_HAND"</code> and <code>"LEFT_HAND"</code> polarization requires two separate configs.</p>
     #   @return [String]
     class UplinkSpectrumConfig < Struct.new(
+      nil,
       :center_frequency,
       :polarization,
       keyword_init: true

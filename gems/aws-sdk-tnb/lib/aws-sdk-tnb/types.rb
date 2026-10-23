@@ -10,6 +10,7 @@ module Aws::Tnb
     # @!attribute message
     #   @return [String]
     class AccessDeniedException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -20,6 +21,7 @@ module Aws::Tnb
     #   <p>The identifier of the network operation.</p>
     #   @return [String]
     class CancelSolNetworkOperationInput < Struct.new(
+      nil,
       :ns_lcm_op_occ_id,
       keyword_init: true
     )
@@ -30,6 +32,7 @@ module Aws::Tnb
     #   <p>A tag is a label that you assign to an Amazon Web Services resource. Each tag consists of a key and an optional value. You can use tags to search and filter your resources or track your Amazon Web Services costs.</p>
     #   @return [Hash<String, String>]
     class CreateSolFunctionPackageInput < Struct.new(
+      nil,
       :tags,
       keyword_init: true
     )
@@ -55,6 +58,7 @@ module Aws::Tnb
     #   <p>A tag is a label that you assign to an Amazon Web Services resource. Each tag consists of a key and an optional value. You can use tags to search and filter your resources or track your Amazon Web Services costs.</p>
     #   @return [Hash<String, String>]
     class CreateSolFunctionPackageOutput < Struct.new(
+      nil,
       :id,
       :arn,
       :onboarding_state,
@@ -79,6 +83,7 @@ module Aws::Tnb
     #   <p>A tag is a label that you assign to an Amazon Web Services resource. Each tag consists of a key and an optional value. You can use tags to search and filter your resources or track your Amazon Web Services costs.</p>
     #   @return [Hash<String, String>]
     class CreateSolNetworkInstanceInput < Struct.new(
+      nil,
       :nsd_info_id,
       :ns_name,
       :ns_description,
@@ -104,6 +109,7 @@ module Aws::Tnb
     #   <p>A tag is a label that you assign to an Amazon Web Services resource. Each tag consists of a key and an optional value. You can use tags to search and filter your resources or track your Amazon Web Services costs.</p>
     #   @return [Hash<String, String>]
     class CreateSolNetworkInstanceOutput < Struct.new(
+      nil,
       :id,
       :arn,
       :nsd_info_id,
@@ -118,6 +124,7 @@ module Aws::Tnb
     #   <p>A tag is a label that you assign to an Amazon Web Services resource. Each tag consists of a key and an optional value. You can use tags to search and filter your resources or track your Amazon Web Services costs.</p>
     #   @return [Hash<String, String>]
     class CreateSolNetworkPackageInput < Struct.new(
+      nil,
       :tags,
       keyword_init: true
     )
@@ -143,6 +150,7 @@ module Aws::Tnb
     #   <p>A tag is a label that you assign to an Amazon Web Services resource. Each tag consists of a key and an optional value. You can use tags to search and filter your resources or track your Amazon Web Services costs.</p>
     #   @return [Hash<String, String>]
     class CreateSolNetworkPackageOutput < Struct.new(
+      nil,
       :id,
       :arn,
       :nsd_onboarding_state,
@@ -158,6 +166,7 @@ module Aws::Tnb
     #   <p>ID of the function package.</p>
     #   @return [String]
     class DeleteSolFunctionPackageInput < Struct.new(
+      nil,
       :vnf_pkg_id,
       keyword_init: true
     )
@@ -168,6 +177,7 @@ module Aws::Tnb
     #   <p>Network instance ID.</p>
     #   @return [String]
     class DeleteSolNetworkInstanceInput < Struct.new(
+      nil,
       :ns_instance_id,
       keyword_init: true
     )
@@ -178,6 +188,7 @@ module Aws::Tnb
     #   <p>ID of the network service descriptor in the network package.</p>
     #   @return [String]
     class DeleteSolNetworkPackageInput < Struct.new(
+      nil,
       :nsd_info_id,
       keyword_init: true
     )
@@ -192,6 +203,7 @@ module Aws::Tnb
     #   <p>Error details.</p>
     #   @return [String]
     class ErrorInfo < Struct.new(
+      nil,
       :cause,
       :details,
       keyword_init: true
@@ -205,6 +217,7 @@ module Aws::Tnb
     #   <p>Lists of function package overrides.</p>
     #   @return [Array<Types::ToscaOverride>]
     class FunctionArtifactMeta < Struct.new(
+      nil,
       :overrides,
       keyword_init: true
     )
@@ -215,6 +228,7 @@ module Aws::Tnb
     #   <p>ID of the network function.</p>
     #   @return [String]
     class GetSolFunctionInstanceInput < Struct.new(
+      nil,
       :vnf_instance_id,
       keyword_init: true
     )
@@ -230,6 +244,7 @@ module Aws::Tnb
     #   <p>The date that the resource was last modified.</p>
     #   @return [Time]
     class GetSolFunctionInstanceMetadata < Struct.new(
+      nil,
       :created_at,
       :last_modified,
       keyword_init: true
@@ -276,6 +291,7 @@ module Aws::Tnb
     #   <p>A tag is a label that you assign to an Amazon Web Services resource. Each tag consists of a key and an optional value. You can use tags to search and filter your resources or track your Amazon Web Services costs.</p>
     #   @return [Hash<String, String>]
     class GetSolFunctionInstanceOutput < Struct.new(
+      nil,
       :id,
       :arn,
       :ns_instance_id,
@@ -300,6 +316,7 @@ module Aws::Tnb
     #   <p>The format of the package that you want to download from the function packages.</p>
     #   @return [String]
     class GetSolFunctionPackageContentInput < Struct.new(
+      nil,
       :vnf_pkg_id,
       :accept,
       keyword_init: true
@@ -314,6 +331,7 @@ module Aws::Tnb
     #   <p>Contents of the function package.</p>
     #   @return [String]
     class GetSolFunctionPackageContentOutput < Struct.new(
+      nil,
       :content_type,
       :package_content,
       keyword_init: true
@@ -329,6 +347,7 @@ module Aws::Tnb
     #            understand.</p>
     #   @return [String]
     class GetSolFunctionPackageDescriptorInput < Struct.new(
+      nil,
       :vnf_pkg_id,
       :accept,
       keyword_init: true
@@ -343,6 +362,7 @@ module Aws::Tnb
     #   <p>Contents of the function package descriptor.</p>
     #   @return [String]
     class GetSolFunctionPackageDescriptorOutput < Struct.new(
+      nil,
       :content_type,
       :vnfd,
       keyword_init: true
@@ -354,6 +374,7 @@ module Aws::Tnb
     #   <p>ID of the function package.</p>
     #   @return [String]
     class GetSolFunctionPackageInput < Struct.new(
+      nil,
       :vnf_pkg_id,
       keyword_init: true
     )
@@ -372,6 +393,7 @@ module Aws::Tnb
     #   <p>The date that the resource was last modified.</p>
     #   @return [Time]
     class GetSolFunctionPackageMetadata < Struct.new(
+      nil,
       :vnfd,
       :created_at,
       :last_modified,
@@ -415,6 +437,7 @@ module Aws::Tnb
     #   <p>A tag is a label that you assign to an Amazon Web Services resource. Each tag consists of a key and an optional value. You can use tags to search and filter your resources or track your Amazon Web Services costs.</p>
     #   @return [Hash<String, String>]
     class GetSolFunctionPackageOutput < Struct.new(
+      nil,
       :id,
       :arn,
       :onboarding_state,
@@ -437,6 +460,7 @@ module Aws::Tnb
     #   <p>State of the network function.</p>
     #   @return [String]
     class GetSolInstantiatedVnfInfo < Struct.new(
+      nil,
       :vnf_state,
       keyword_init: true
     )
@@ -447,6 +471,7 @@ module Aws::Tnb
     #   <p>ID of the network instance.</p>
     #   @return [String]
     class GetSolNetworkInstanceInput < Struct.new(
+      nil,
       :ns_instance_id,
       keyword_init: true
     )
@@ -462,6 +487,7 @@ module Aws::Tnb
     #   <p>The date that the resource was last modified.</p>
     #   @return [Time]
     class GetSolNetworkInstanceMetadata < Struct.new(
+      nil,
       :created_at,
       :last_modified,
       keyword_init: true
@@ -502,6 +528,7 @@ module Aws::Tnb
     #   <p>A tag is a label that you assign to an Amazon Web Services resource. Each tag consists of a key and an optional value. You can use tags to search and filter your resources or track your Amazon Web Services costs.</p>
     #   @return [Hash<String, String>]
     class GetSolNetworkInstanceOutput < Struct.new(
+      nil,
       :id,
       :arn,
       :ns_instance_name,
@@ -521,6 +548,7 @@ module Aws::Tnb
     #   <p>The identifier of the network operation.</p>
     #   @return [String]
     class GetSolNetworkOperationInput < Struct.new(
+      nil,
       :ns_lcm_op_occ_id,
       keyword_init: true
     )
@@ -550,6 +578,7 @@ module Aws::Tnb
     #   <p>The date that the resource was last modified.</p>
     #   @return [Time]
     class GetSolNetworkOperationMetadata < Struct.new(
+      nil,
       :update_ns_metadata,
       :modify_vnf_info_metadata,
       :instantiate_metadata,
@@ -592,6 +621,7 @@ module Aws::Tnb
     #   <p>A tag is a label that you assign to an Amazon Web Services resource. Each tag consists of a key and an optional value. You can use tags to search and filter your resources or track your Amazon Web Services costs.</p>
     #   @return [Hash<String, String>]
     class GetSolNetworkOperationOutput < Struct.new(
+      nil,
       :id,
       :arn,
       :operation_state,
@@ -628,6 +658,7 @@ module Aws::Tnb
     #   <p>Task end time.</p>
     #   @return [Time]
     class GetSolNetworkOperationTaskDetails < Struct.new(
+      nil,
       :task_name,
       :task_context,
       :task_error_details,
@@ -646,6 +677,7 @@ module Aws::Tnb
     #   <p>The format of the package you want to download from the network package.</p>
     #   @return [String]
     class GetSolNetworkPackageContentInput < Struct.new(
+      nil,
       :nsd_info_id,
       :accept,
       keyword_init: true
@@ -660,6 +692,7 @@ module Aws::Tnb
     #   <p>Content of the network service descriptor in the network package.</p>
     #   @return [String]
     class GetSolNetworkPackageContentOutput < Struct.new(
+      nil,
       :content_type,
       :nsd_content,
       keyword_init: true
@@ -671,6 +704,7 @@ module Aws::Tnb
     #   <p>ID of the network service descriptor in the network package.</p>
     #   @return [String]
     class GetSolNetworkPackageDescriptorInput < Struct.new(
+      nil,
       :nsd_info_id,
       keyword_init: true
     )
@@ -684,6 +718,7 @@ module Aws::Tnb
     #   <p>Contents of the network service descriptor in the network package.</p>
     #   @return [String]
     class GetSolNetworkPackageDescriptorOutput < Struct.new(
+      nil,
       :content_type,
       :nsd,
       keyword_init: true
@@ -695,6 +730,7 @@ module Aws::Tnb
     #   <p>ID of the network service descriptor in the network package.</p>
     #   @return [String]
     class GetSolNetworkPackageInput < Struct.new(
+      nil,
       :nsd_info_id,
       keyword_init: true
     )
@@ -714,6 +750,7 @@ module Aws::Tnb
     #   <p>The date that the resource was last modified.</p>
     #   @return [Time]
     class GetSolNetworkPackageMetadata < Struct.new(
+      nil,
       :nsd,
       :created_at,
       :last_modified,
@@ -758,6 +795,7 @@ module Aws::Tnb
     #   <p>A tag is a label that you assign to an Amazon Web Services resource. Each tag consists of a key and an optional value. You can use tags to search and filter your resources or track your Amazon Web Services costs.</p>
     #   @return [Hash<String, String>]
     class GetSolNetworkPackageOutput < Struct.new(
+      nil,
       :id,
       :arn,
       :nsd_onboarding_state,
@@ -783,6 +821,7 @@ module Aws::Tnb
     #   <p>Compute info used by the network function instance.</p>
     #   @return [Array<Types::GetSolVnfcResourceInfo>]
     class GetSolVnfInfo < Struct.new(
+      nil,
       :vnf_state,
       :vnfc_resource_info,
       keyword_init: true
@@ -796,6 +835,7 @@ module Aws::Tnb
     #   <p>The metadata of the network function compute.</p>
     #   @return [Types::GetSolVnfcResourceInfoMetadata]
     class GetSolVnfcResourceInfo < Struct.new(
+      nil,
       :metadata,
       keyword_init: true
     )
@@ -814,6 +854,7 @@ module Aws::Tnb
     #   <p>Information about the helm chart.</p>
     #   @return [String]
     class GetSolVnfcResourceInfoMetadata < Struct.new(
+      nil,
       :node_group,
       :cluster,
       :helm_chart,
@@ -830,6 +871,7 @@ module Aws::Tnb
     #   <p>The configurable properties used during instantiation.</p>
     #   @return [JSON]
     class InstantiateMetadata < Struct.new(
+      nil,
       :nsd_info_id,
       :additional_params_for_ns,
       keyword_init: true
@@ -852,6 +894,7 @@ module Aws::Tnb
     #   <p>A tag is a label that you assign to an Amazon Web Services resource. Each tag consists of a key and an optional value. When you use this API, the tags are only applied to the network operation that is created. These tags are not applied to the network instance. Use tags to search and filter your resources or track your Amazon Web Services costs.</p>
     #   @return [Hash<String, String>]
     class InstantiateSolNetworkInstanceInput < Struct.new(
+      nil,
       :ns_instance_id,
       :dry_run,
       :additional_params_for_ns,
@@ -868,6 +911,7 @@ module Aws::Tnb
     #   <p>A tag is a label that you assign to an Amazon Web Services resource. Each tag consists of a key and an optional value. When you use this API, the tags are only applied to the network operation that is created. These tags are not applied to the network instance. Use tags to search and filter your resources or track your Amazon Web Services costs.</p>
     #   @return [Hash<String, String>]
     class InstantiateSolNetworkInstanceOutput < Struct.new(
+      nil,
       :ns_lcm_op_occ_id,
       :tags,
       keyword_init: true
@@ -879,6 +923,7 @@ module Aws::Tnb
     # @!attribute message
     #   @return [String]
     class InternalServerException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -891,6 +936,7 @@ module Aws::Tnb
     #   <p>The identifier of the network operation.</p>
     #   @return [String]
     class LcmOperationInfo < Struct.new(
+      nil,
       :ns_lcm_op_occ_id,
       keyword_init: true
     )
@@ -925,6 +971,7 @@ module Aws::Tnb
     #   <p>Network function instance metadata.</p>
     #   @return [Types::ListSolFunctionInstanceMetadata]
     class ListSolFunctionInstanceInfo < Struct.new(
+      nil,
       :id,
       :arn,
       :ns_instance_id,
@@ -947,6 +994,7 @@ module Aws::Tnb
     #   <p>When the network function instance was last modified.</p>
     #   @return [Time]
     class ListSolFunctionInstanceMetadata < Struct.new(
+      nil,
       :created_at,
       :last_modified,
       keyword_init: true
@@ -961,6 +1009,7 @@ module Aws::Tnb
     #   <p>The token for the next page of results.</p>
     #   @return [String]
     class ListSolFunctionInstancesInput < Struct.new(
+      nil,
       :max_results,
       :next_token,
       keyword_init: true
@@ -975,6 +1024,7 @@ module Aws::Tnb
     #   <p>Network function instances.</p>
     #   @return [Array<Types::ListSolFunctionInstanceInfo>]
     class ListSolFunctionInstancesOutput < Struct.new(
+      nil,
       :next_token,
       :function_instances,
       keyword_init: true
@@ -1015,6 +1065,7 @@ module Aws::Tnb
     #   <p>The metadata of the function package.</p>
     #   @return [Types::ListSolFunctionPackageMetadata]
     class ListSolFunctionPackageInfo < Struct.new(
+      nil,
       :id,
       :arn,
       :onboarding_state,
@@ -1039,6 +1090,7 @@ module Aws::Tnb
     #   <p>The date that the resource was last modified.</p>
     #   @return [Time]
     class ListSolFunctionPackageMetadata < Struct.new(
+      nil,
       :created_at,
       :last_modified,
       keyword_init: true
@@ -1053,6 +1105,7 @@ module Aws::Tnb
     #   <p>The token for the next page of results.</p>
     #   @return [String]
     class ListSolFunctionPackagesInput < Struct.new(
+      nil,
       :max_results,
       :next_token,
       keyword_init: true
@@ -1067,6 +1120,7 @@ module Aws::Tnb
     #   <p>Function packages. A function package is a .zip file in CSAR (Cloud Service Archive) format that contains a network function (an ETSI standard telecommunication application) and function package descriptor that uses the TOSCA standard to describe how the network functions should run on your network.</p>
     #   @return [Array<Types::ListSolFunctionPackageInfo>]
     class ListSolFunctionPackagesOutput < Struct.new(
+      nil,
       :next_token,
       :function_packages,
       keyword_init: true
@@ -1101,6 +1155,7 @@ module Aws::Tnb
     #   <p>The metadata of the network instance.</p>
     #   @return [Types::ListSolNetworkInstanceMetadata]
     class ListSolNetworkInstanceInfo < Struct.new(
+      nil,
       :id,
       :arn,
       :ns_instance_name,
@@ -1123,6 +1178,7 @@ module Aws::Tnb
     #   <p>The date that the resource was last modified.</p>
     #   @return [Time]
     class ListSolNetworkInstanceMetadata < Struct.new(
+      nil,
       :created_at,
       :last_modified,
       keyword_init: true
@@ -1137,6 +1193,7 @@ module Aws::Tnb
     #   <p>The token for the next page of results.</p>
     #   @return [String]
     class ListSolNetworkInstancesInput < Struct.new(
+      nil,
       :max_results,
       :next_token,
       keyword_init: true
@@ -1151,6 +1208,7 @@ module Aws::Tnb
     #   <p>Lists network instances.</p>
     #   @return [Array<Types::ListSolNetworkInstanceInfo>]
     class ListSolNetworkInstancesOutput < Struct.new(
+      nil,
       :next_token,
       :network_instances,
       keyword_init: true
@@ -1184,6 +1242,7 @@ module Aws::Tnb
     #   <p>Metadata related to this network operation.</p>
     #   @return [Types::ListSolNetworkOperationsMetadata]
     class ListSolNetworkOperationsInfo < Struct.new(
+      nil,
       :id,
       :arn,
       :operation_state,
@@ -1207,6 +1266,7 @@ module Aws::Tnb
     #   <p>The token for the next page of results.</p>
     #   @return [String]
     class ListSolNetworkOperationsInput < Struct.new(
+      nil,
       :ns_instance_id,
       :max_results,
       :next_token,
@@ -1232,6 +1292,7 @@ module Aws::Tnb
     #   <p>The date that the resource was last modified.</p>
     #   @return [Time]
     class ListSolNetworkOperationsMetadata < Struct.new(
+      nil,
       :nsd_info_id,
       :vnf_instance_id,
       :created_at,
@@ -1248,6 +1309,7 @@ module Aws::Tnb
     #   <p>Lists network operation occurrences. Lifecycle management operations are deploy, update, or delete operations.</p>
     #   @return [Array<Types::ListSolNetworkOperationsInfo>]
     class ListSolNetworkOperationsOutput < Struct.new(
+      nil,
       :next_token,
       :network_operations,
       keyword_init: true
@@ -1295,6 +1357,7 @@ module Aws::Tnb
     #   <p>The metadata of the network package.</p>
     #   @return [Types::ListSolNetworkPackageMetadata]
     class ListSolNetworkPackageInfo < Struct.new(
+      nil,
       :id,
       :arn,
       :nsd_onboarding_state,
@@ -1321,6 +1384,7 @@ module Aws::Tnb
     #   <p>The date that the resource was last modified.</p>
     #   @return [Time]
     class ListSolNetworkPackageMetadata < Struct.new(
+      nil,
       :created_at,
       :last_modified,
       keyword_init: true
@@ -1335,6 +1399,7 @@ module Aws::Tnb
     #   <p>The token for the next page of results.</p>
     #   @return [String]
     class ListSolNetworkPackagesInput < Struct.new(
+      nil,
       :max_results,
       :next_token,
       keyword_init: true
@@ -1349,6 +1414,7 @@ module Aws::Tnb
     #   <p>Network packages. A network package is a .zip file in CSAR (Cloud Service Archive) format defines the function packages you want to deploy and the Amazon Web Services infrastructure you want to deploy them on.</p>
     #   @return [Array<Types::ListSolNetworkPackageInfo>]
     class ListSolNetworkPackagesOutput < Struct.new(
+      nil,
       :next_token,
       :network_packages,
       keyword_init: true
@@ -1360,6 +1426,7 @@ module Aws::Tnb
     #   <p>Resource ARN.</p>
     #   @return [String]
     class ListTagsForResourceInput < Struct.new(
+      nil,
       :resource_arn,
       keyword_init: true
     )
@@ -1370,6 +1437,7 @@ module Aws::Tnb
     #   <p>A tag is a label that you assign to an Amazon Web Services resource. Each tag consists of a key and an optional value. You can use tags to search and filter your resources or track your Amazon Web Services costs.</p>
     #   @return [Hash<String, String>]
     class ListTagsForResourceOutput < Struct.new(
+      nil,
       :tags,
       keyword_init: true
     )
@@ -1385,6 +1453,7 @@ module Aws::Tnb
     #   <p>The configurable properties used during update of the network function instance.</p>
     #   @return [JSON]
     class ModifyVnfInfoMetadata < Struct.new(
+      nil,
       :vnf_instance_id,
       :vnf_configurable_properties,
       keyword_init: true
@@ -1398,6 +1467,7 @@ module Aws::Tnb
     #   <p>Lists network package overrides.</p>
     #   @return [Array<Types::ToscaOverride>]
     class NetworkArtifactMeta < Struct.new(
+      nil,
       :overrides,
       keyword_init: true
     )
@@ -1412,6 +1482,7 @@ module Aws::Tnb
     #   <p>A human-readable title of the problem type.</p>
     #   @return [String]
     class ProblemDetails < Struct.new(
+      nil,
       :detail,
       :title,
       keyword_init: true
@@ -1429,6 +1500,7 @@ module Aws::Tnb
     #   <p>Function package file.</p>
     #   @return [String]
     class PutSolFunctionPackageContentInput < Struct.new(
+      nil,
       :vnf_pkg_id,
       :content_type,
       :file,
@@ -1444,6 +1516,7 @@ module Aws::Tnb
     #            <p>Artifacts are the contents of the package descriptor file and the state of the package.</p>
     #   @return [Types::FunctionArtifactMeta]
     class PutSolFunctionPackageContentMetadata < Struct.new(
+      nil,
       :vnfd,
       keyword_init: true
     )
@@ -1469,6 +1542,7 @@ module Aws::Tnb
     #   <p>Function package metadata.</p>
     #   @return [Types::PutSolFunctionPackageContentMetadata]
     class PutSolFunctionPackageContentOutput < Struct.new(
+      nil,
       :id,
       :vnfd_id,
       :vnf_product_name,
@@ -1490,6 +1564,7 @@ module Aws::Tnb
     #   <p>Network package file.</p>
     #   @return [String]
     class PutSolNetworkPackageContentInput < Struct.new(
+      nil,
       :nsd_info_id,
       :content_type,
       :file,
@@ -1505,6 +1580,7 @@ module Aws::Tnb
     #            <p>Artifacts are the contents of the package descriptor file and the state of the package.</p>
     #   @return [Types::NetworkArtifactMeta]
     class PutSolNetworkPackageContentMetadata < Struct.new(
+      nil,
       :nsd,
       keyword_init: true
     )
@@ -1533,6 +1609,7 @@ module Aws::Tnb
     #   <p>Network package metadata.</p>
     #   @return [Types::PutSolNetworkPackageContentMetadata]
     class PutSolNetworkPackageContentOutput < Struct.new(
+      nil,
       :id,
       :arn,
       :nsd_id,
@@ -1549,6 +1626,7 @@ module Aws::Tnb
     # @!attribute message
     #   @return [String]
     class ResourceNotFoundException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -1559,6 +1637,7 @@ module Aws::Tnb
     # @!attribute message
     #   @return [String]
     class ServiceQuotaExceededException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -1572,6 +1651,7 @@ module Aws::Tnb
     #   <p>A tag is a label that you assign to an Amazon Web Services resource. Each tag consists of a key and an optional value. You can use tags to search and filter your resources or track your Amazon Web Services costs.</p>
     #   @return [Hash<String, String>]
     class TagResourceInput < Struct.new(
+      nil,
       :resource_arn,
       :tags,
       keyword_init: true
@@ -1580,6 +1660,7 @@ module Aws::Tnb
     end
 
     class TagResourceOutput < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1592,6 +1673,7 @@ module Aws::Tnb
     #   <p>A tag is a label that you assign to an Amazon Web Services resource. Each tag consists of a key and an optional value. When you use this API, the tags are only applied to the network operation that is created. These tags are not applied to the network instance. Use tags to search and filter your resources or track your Amazon Web Services costs.</p>
     #   @return [Hash<String, String>]
     class TerminateSolNetworkInstanceInput < Struct.new(
+      nil,
       :ns_instance_id,
       :tags,
       keyword_init: true
@@ -1606,6 +1688,7 @@ module Aws::Tnb
     #   <p>A tag is a label that you assign to an Amazon Web Services resource. Each tag consists of a key and an optional value. When you use this API, the tags are only applied to the network operation that is created. These tags are not applied to the network instance. Use tags to search and filter your resources or track your Amazon Web Services costs.</p>
     #   @return [Hash<String, String>]
     class TerminateSolNetworkInstanceOutput < Struct.new(
+      nil,
       :ns_lcm_op_occ_id,
       :tags,
       keyword_init: true
@@ -1617,6 +1700,7 @@ module Aws::Tnb
     # @!attribute message
     #   @return [String]
     class ThrottlingException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -1631,6 +1715,7 @@ module Aws::Tnb
     #   <p>Default value for the override.</p>
     #   @return [String]
     class ToscaOverride < Struct.new(
+      nil,
       :name,
       :default_value,
       keyword_init: true
@@ -1645,6 +1730,7 @@ module Aws::Tnb
     #   <p>Tag keys.</p>
     #   @return [Array<String>]
     class UntagResourceInput < Struct.new(
+      nil,
       :resource_arn,
       :tag_keys,
       keyword_init: true
@@ -1653,6 +1739,7 @@ module Aws::Tnb
     end
 
     class UntagResourceOutput < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1666,6 +1753,7 @@ module Aws::Tnb
     #   <p>The configurable properties used during update.</p>
     #   @return [JSON]
     class UpdateNsMetadata < Struct.new(
+      nil,
       :nsd_info_id,
       :additional_params_for_ns,
       keyword_init: true
@@ -1680,6 +1768,7 @@ module Aws::Tnb
     #   <p>Operational state of the function package.</p>
     #   @return [String]
     class UpdateSolFunctionPackageInput < Struct.new(
+      nil,
       :vnf_pkg_id,
       :operational_state,
       keyword_init: true
@@ -1691,6 +1780,7 @@ module Aws::Tnb
     #   <p>Operational state of the function package.</p>
     #   @return [String]
     class UpdateSolFunctionPackageOutput < Struct.new(
+      nil,
       :operational_state,
       keyword_init: true
     )
@@ -1727,6 +1817,7 @@ module Aws::Tnb
     #   <p>A tag is a label that you assign to an Amazon Web Services resource. Each tag consists of a key and an optional value. When you use this API, the tags are only applied to the network operation that is created. These tags are not applied to the network instance. Use tags to search and filter your resources or track your Amazon Web Services costs.</p>
     #   @return [Hash<String, String>]
     class UpdateSolNetworkInstanceInput < Struct.new(
+      nil,
       :ns_instance_id,
       :update_type,
       :modify_vnf_info_data,
@@ -1744,6 +1835,7 @@ module Aws::Tnb
     #   <p>A tag is a label that you assign to an Amazon Web Services resource. Each tag consists of a key and an optional value. When you use this API, the tags are only applied to the network operation that is created. These tags are not applied to the network instance. Use tags to search and filter your resources or track your Amazon Web Services costs.</p>
     #   @return [Hash<String, String>]
     class UpdateSolNetworkInstanceOutput < Struct.new(
+      nil,
       :ns_lcm_op_occ_id,
       :tags,
       keyword_init: true
@@ -1762,6 +1854,7 @@ module Aws::Tnb
     #            descriptor.</p>
     #   @return [JSON]
     class UpdateSolNetworkModify < Struct.new(
+      nil,
       :vnf_instance_id,
       :vnf_configurable_properties,
       keyword_init: true
@@ -1776,6 +1869,7 @@ module Aws::Tnb
     #   <p>Operational state of the network service descriptor in the network package.</p>
     #   @return [String]
     class UpdateSolNetworkPackageInput < Struct.new(
+      nil,
       :nsd_info_id,
       :nsd_operational_state,
       keyword_init: true
@@ -1787,6 +1881,7 @@ module Aws::Tnb
     #   <p>Operational state of the network service descriptor in the network package.</p>
     #   @return [String]
     class UpdateSolNetworkPackageOutput < Struct.new(
+      nil,
       :nsd_operational_state,
       keyword_init: true
     )
@@ -1801,6 +1896,7 @@ module Aws::Tnb
     #   <p>Values for the configurable properties declared in the network service descriptor.</p>
     #   @return [JSON]
     class UpdateSolNetworkServiceData < Struct.new(
+      nil,
       :nsd_info_id,
       :additional_params_for_ns,
       keyword_init: true
@@ -1818,6 +1914,7 @@ module Aws::Tnb
     #   <p>Function package file.</p>
     #   @return [String]
     class ValidateSolFunctionPackageContentInput < Struct.new(
+      nil,
       :vnf_pkg_id,
       :content_type,
       :file,
@@ -1833,6 +1930,7 @@ module Aws::Tnb
     #            <p>Artifacts are the contents of the package descriptor file and the state of the package.</p>
     #   @return [Types::FunctionArtifactMeta]
     class ValidateSolFunctionPackageContentMetadata < Struct.new(
+      nil,
       :vnfd,
       keyword_init: true
     )
@@ -1858,6 +1956,7 @@ module Aws::Tnb
     #   <p>Function package metadata.</p>
     #   @return [Types::ValidateSolFunctionPackageContentMetadata]
     class ValidateSolFunctionPackageContentOutput < Struct.new(
+      nil,
       :id,
       :vnfd_id,
       :vnf_product_name,
@@ -1879,6 +1978,7 @@ module Aws::Tnb
     #   <p>Network package file.</p>
     #   @return [String]
     class ValidateSolNetworkPackageContentInput < Struct.new(
+      nil,
       :nsd_info_id,
       :content_type,
       :file,
@@ -1894,6 +1994,7 @@ module Aws::Tnb
     #            <p>Artifacts are the contents of the package descriptor file and the state of the package.</p>
     #   @return [Types::NetworkArtifactMeta]
     class ValidateSolNetworkPackageContentMetadata < Struct.new(
+      nil,
       :nsd,
       keyword_init: true
     )
@@ -1922,6 +2023,7 @@ module Aws::Tnb
     #   <p>Network package metadata.</p>
     #   @return [Types::ValidateSolNetworkPackageContentMetadata]
     class ValidateSolNetworkPackageContentOutput < Struct.new(
+      nil,
       :id,
       :arn,
       :nsd_id,
@@ -1939,6 +2041,7 @@ module Aws::Tnb
     # @!attribute message
     #   @return [String]
     class ValidationException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )

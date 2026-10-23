@@ -10,6 +10,7 @@ module Aws::Bedrock
     # @!attribute message
     #   @return [String]
     class AccessDeniedException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -24,6 +25,7 @@ module Aws::Bedrock
     #   <p>Error message.</p>
     #   @return [String]
     class AgreementAvailability < Struct.new(
+      nil,
       :status,
       :error_message,
       keyword_init: true
@@ -42,6 +44,7 @@ module Aws::Bedrock
     #   <p>Defines the configuration of custom metrics to be used in an evaluation job.</p>
     #   @return [Types::AutomatedEvaluationCustomMetricConfig]
     class AutomatedEvaluationConfig < Struct.new(
+      nil,
       :dataset_metric_configs,
       :evaluator_model_config,
       :custom_metric_config,
@@ -58,6 +61,7 @@ module Aws::Bedrock
     #   <p>Configuration of the evaluator model you want to use to evaluate custom metrics in an Amazon Bedrock evaluation job.</p>
     #   @return [Types::CustomMetricEvaluatorModelConfig]
     class AutomatedEvaluationCustomMetricConfig < Struct.new(
+      nil,
       :custom_metrics,
       :evaluator_model_config,
       keyword_init: true
@@ -136,6 +140,7 @@ module Aws::Bedrock
     #   <p>Indication of a logic issue with the translation without needing to consider the automated reasoning policy rules.</p>
     #   @return [Types::AutomatedReasoningCheckLogicWarning]
     class AutomatedReasoningCheckImpossibleFinding < Struct.new(
+      nil,
       :translation,
       :contradicting_rules,
       :logic_warning,
@@ -149,6 +154,7 @@ module Aws::Bedrock
     #   <p>The specific text from the original input that this reference points to.</p>
     #   @return [String]
     class AutomatedReasoningCheckInputTextReference < Struct.new(
+      nil,
       :text,
       keyword_init: true
     )
@@ -166,6 +172,7 @@ module Aws::Bedrock
     #   <p>Indication of a logic issue with the translation without needing to consider the automated reasoning policy rules.</p>
     #   @return [Types::AutomatedReasoningCheckLogicWarning]
     class AutomatedReasoningCheckInvalidFinding < Struct.new(
+      nil,
       :translation,
       :contradicting_rules,
       :logic_warning,
@@ -185,6 +192,7 @@ module Aws::Bedrock
     #   <p>The logical statements that are validated while assuming the policy and premises.</p>
     #   @return [Array<Types::AutomatedReasoningLogicStatement>]
     class AutomatedReasoningCheckLogicWarning < Struct.new(
+      nil,
       :type,
       :premises,
       :claims,
@@ -195,6 +203,7 @@ module Aws::Bedrock
 
     # <p>Indicates that no relevant logical information could be extracted from the input for validation.</p>
     class AutomatedReasoningCheckNoTranslationsFinding < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -208,6 +217,7 @@ module Aws::Bedrock
     #   <p>The ARN of the automated reasoning policy version that contains this rule.</p>
     #   @return [String]
     class AutomatedReasoningCheckRule < Struct.new(
+      nil,
       :id,
       :policy_version_arn,
       keyword_init: true
@@ -229,6 +239,7 @@ module Aws::Bedrock
     #   <p>Indication of a logic issue with the translation without needing to consider the automated reasoning policy rules.</p>
     #   @return [Types::AutomatedReasoningCheckLogicWarning]
     class AutomatedReasoningCheckSatisfiableFinding < Struct.new(
+      nil,
       :translation,
       :claims_true_scenario,
       :claims_false_scenario,
@@ -243,6 +254,7 @@ module Aws::Bedrock
     #   <p>List of logical assignments and statements that define this scenario.</p>
     #   @return [Array<Types::AutomatedReasoningLogicStatement>]
     class AutomatedReasoningCheckScenario < Struct.new(
+      nil,
       :statements,
       keyword_init: true
     )
@@ -251,6 +263,7 @@ module Aws::Bedrock
 
     # <p>Indicates that the input exceeds the processing capacity due to the volume or complexity of the logical information.</p>
     class AutomatedReasoningCheckTooComplexFinding < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -273,6 +286,7 @@ module Aws::Bedrock
     #   <p>A confidence score between 0 and 1 indicating how certain the system is about the logical translation.</p>
     #   @return [Float]
     class AutomatedReasoningCheckTranslation < Struct.new(
+      nil,
       :premises,
       :claims,
       :untranslated_premises,
@@ -291,6 +305,7 @@ module Aws::Bedrock
     #   <p>Scenarios showing how the different translation options differ in meaning.</p>
     #   @return [Array<Types::AutomatedReasoningCheckScenario>]
     class AutomatedReasoningCheckTranslationAmbiguousFinding < Struct.new(
+      nil,
       :options,
       :difference_scenarios,
       keyword_init: true
@@ -303,6 +318,7 @@ module Aws::Bedrock
     #   <p>Different logical interpretations that were detected during translation of the input.</p>
     #   @return [Array<Types::AutomatedReasoningCheckTranslation>]
     class AutomatedReasoningCheckTranslationOption < Struct.new(
+      nil,
       :translations,
       keyword_init: true
     )
@@ -323,6 +339,7 @@ module Aws::Bedrock
     #   <p>Indication of a logic issue with the translation without needing to consider the automated reasoning policy rules.</p>
     #   @return [Types::AutomatedReasoningCheckLogicWarning]
     class AutomatedReasoningCheckValidFinding < Struct.new(
+      nil,
       :translation,
       :claims_true_scenario,
       :supporting_rules,
@@ -340,6 +357,7 @@ module Aws::Bedrock
     #   <p>The natural language representation of the logical statement, providing a human-readable interpretation of the formal logic.</p>
     #   @return [String]
     class AutomatedReasoningLogicStatement < Struct.new(
+      nil,
       :logic,
       :natural_language,
       keyword_init: true
@@ -352,6 +370,7 @@ module Aws::Bedrock
     #   <p>The formal logical expression that defines the rule, using mathematical notation and referencing policy variables and types.</p>
     #   @return [String]
     class AutomatedReasoningPolicyAddRuleAnnotation < Struct.new(
+      nil,
       :expression,
       keyword_init: true
     )
@@ -363,6 +382,7 @@ module Aws::Bedrock
     #   <p>The natural language description of the rule that should be converted into a formal logical expression.</p>
     #   @return [String]
     class AutomatedReasoningPolicyAddRuleFromNaturalLanguageAnnotation < Struct.new(
+      nil,
       :natural_language,
       keyword_init: true
     )
@@ -374,6 +394,7 @@ module Aws::Bedrock
     #   <p>The rule definition that specifies the formal logical expression and metadata for the new rule being added to the policy.</p>
     #   @return [Types::AutomatedReasoningPolicyDefinitionRule]
     class AutomatedReasoningPolicyAddRuleMutation < Struct.new(
+      nil,
       :rule,
       keyword_init: true
     )
@@ -391,6 +412,7 @@ module Aws::Bedrock
     #   <p>The list of possible values that variables of this type can take, each with its own description and identifier.</p>
     #   @return [Array<Types::AutomatedReasoningPolicyDefinitionTypeValue>]
     class AutomatedReasoningPolicyAddTypeAnnotation < Struct.new(
+      nil,
       :name,
       :description,
       :values,
@@ -404,6 +426,7 @@ module Aws::Bedrock
     #   <p>The type definition that specifies the name, description, and possible values for the new custom type being added to the policy.</p>
     #   @return [Types::AutomatedReasoningPolicyDefinitionType]
     class AutomatedReasoningPolicyAddTypeMutation < Struct.new(
+      nil,
       :type,
       keyword_init: true
     )
@@ -418,6 +441,7 @@ module Aws::Bedrock
     #   <p>A description of what this new type value represents and when it should be used.</p>
     #   @return [String]
     class AutomatedReasoningPolicyAddTypeValue < Struct.new(
+      nil,
       :value,
       :description,
       keyword_init: true
@@ -436,6 +460,7 @@ module Aws::Bedrock
     #   <p>A description of what the variable represents and how it should be used in rules.</p>
     #   @return [String]
     class AutomatedReasoningPolicyAddVariableAnnotation < Struct.new(
+      nil,
       :name,
       :type,
       :description,
@@ -449,6 +474,7 @@ module Aws::Bedrock
     #   <p>The variable definition that specifies the name, type, and description for the new variable being added to the policy.</p>
     #   @return [Types::AutomatedReasoningPolicyDefinitionVariable]
     class AutomatedReasoningPolicyAddVariableMutation < Struct.new(
+      nil,
       :variable,
       keyword_init: true
     )
@@ -535,6 +561,7 @@ module Aws::Bedrock
     #   <p>A list of log entries documenting each step in the policy build process, including timestamps, status, and detailed messages.</p>
     #   @return [Array<Types::AutomatedReasoningPolicyBuildLogEntry>]
     class AutomatedReasoningPolicyBuildLog < Struct.new(
+      nil,
       :entries,
       keyword_init: true
     )
@@ -552,6 +579,7 @@ module Aws::Bedrock
     #   <p>Detailed information about the specific build steps that were executed, including any sub-operations or transformations.</p>
     #   @return [Array<Types::AutomatedReasoningPolicyBuildStep>]
     class AutomatedReasoningPolicyBuildLogEntry < Struct.new(
+      nil,
       :annotation,
       :status,
       :build_steps,
@@ -596,6 +624,7 @@ module Aws::Bedrock
     #   <p>A list of messages generated during this build step, including informational messages, warnings, and error details.</p>
     #   @return [Array<Types::AutomatedReasoningPolicyBuildStepMessage>]
     class AutomatedReasoningPolicyBuildStep < Struct.new(
+      nil,
       :context,
       :prior_element,
       :messages,
@@ -632,6 +661,7 @@ module Aws::Bedrock
     #   <p>The type of message (e.g., INFO, WARNING, ERROR) indicating its severity and purpose.</p>
     #   @return [String]
     class AutomatedReasoningPolicyBuildStepMessage < Struct.new(
+      nil,
       :message,
       :message_type,
       keyword_init: true
@@ -653,6 +683,7 @@ module Aws::Bedrock
     #   <p>A detailed description of the document's content and how it should be used in the policy generation process.</p>
     #   @return [String]
     class AutomatedReasoningPolicyBuildWorkflowDocument < Struct.new(
+      nil,
       :document,
       :document_content_type,
       :document_name,
@@ -667,6 +698,7 @@ module Aws::Bedrock
     #   <p>Specific annotations or modifications to apply during the policy repair process, such as rule corrections or variable updates.</p>
     #   @return [Array<Types::AutomatedReasoningPolicyAnnotation>]
     class AutomatedReasoningPolicyBuildWorkflowRepairContent < Struct.new(
+      nil,
       :annotations,
       keyword_init: true
     )
@@ -681,6 +713,7 @@ module Aws::Bedrock
     #   <p>The actual content to be processed in the build workflow, such as documents to analyze or repair instructions to apply.</p>
     #   @return [Types::AutomatedReasoningPolicyWorkflowTypeContent]
     class AutomatedReasoningPolicyBuildWorkflowSource < Struct.new(
+      nil,
       :policy_definition,
       :workflow_content,
       keyword_init: true
@@ -708,6 +741,7 @@ module Aws::Bedrock
     #   <p>The timestamp when the build workflow was last updated.</p>
     #   @return [Time]
     class AutomatedReasoningPolicyBuildWorkflowSummary < Struct.new(
+      nil,
       :policy_arn,
       :build_workflow_id,
       :status,
@@ -733,6 +767,7 @@ module Aws::Bedrock
     #   <p>The variables that represent concepts in the policy. Variables can have values assigned when translating natural language into formal logic. Their descriptions are crucial for accurate translation.</p>
     #   @return [Array<Types::AutomatedReasoningPolicyDefinitionVariable>]
     class AutomatedReasoningPolicyDefinition < Struct.new(
+      nil,
       :version,
       :types,
       :rules,
@@ -798,6 +833,7 @@ module Aws::Bedrock
     #   <p>Groups of rules that operate on completely separate sets of variables, indicating the policy may be addressing multiple unrelated concerns.</p>
     #   @return [Array<Types::AutomatedReasoningPolicyDisjointRuleSet>]
     class AutomatedReasoningPolicyDefinitionQualityReport < Struct.new(
+      nil,
       :type_count,
       :variable_count,
       :rule_count,
@@ -822,6 +858,7 @@ module Aws::Bedrock
     #   <p>The human-readable form of the rule expression, often in natural language or simplified notation.</p>
     #   @return [String]
     class AutomatedReasoningPolicyDefinitionRule < Struct.new(
+      nil,
       :id,
       :expression,
       :alternate_expression,
@@ -841,6 +878,7 @@ module Aws::Bedrock
     #   <p>The possible values for this enum-based type, each with its own description.</p>
     #   @return [Array<Types::AutomatedReasoningPolicyDefinitionTypeValue>]
     class AutomatedReasoningPolicyDefinitionType < Struct.new(
+      nil,
       :name,
       :description,
       :values,
@@ -857,6 +895,7 @@ module Aws::Bedrock
     #   <p>A human-readable description explaining what this type value represents and when it should be used.</p>
     #   @return [String]
     class AutomatedReasoningPolicyDefinitionTypeValue < Struct.new(
+      nil,
       :value,
       :description,
       keyword_init: true
@@ -872,6 +911,7 @@ module Aws::Bedrock
     #   <p>The name of the specific value within the type.</p>
     #   @return [String]
     class AutomatedReasoningPolicyDefinitionTypeValuePair < Struct.new(
+      nil,
       :type_name,
       :value_name,
       keyword_init: true
@@ -890,6 +930,7 @@ module Aws::Bedrock
     #   <p>The description of the variable that explains what it represents and how users might refer to it. Clear and comprehensive descriptions are essential for accurate natural language translation.</p>
     #   @return [String]
     class AutomatedReasoningPolicyDefinitionVariable < Struct.new(
+      nil,
       :name,
       :type,
       :description,
@@ -903,6 +944,7 @@ module Aws::Bedrock
     #   <p>The unique identifier of the rule to delete from the policy.</p>
     #   @return [String]
     class AutomatedReasoningPolicyDeleteRuleAnnotation < Struct.new(
+      nil,
       :rule_id,
       keyword_init: true
     )
@@ -914,6 +956,7 @@ module Aws::Bedrock
     #   <p>The unique identifier of the rule to delete.</p>
     #   @return [String]
     class AutomatedReasoningPolicyDeleteRuleMutation < Struct.new(
+      nil,
       :id,
       keyword_init: true
     )
@@ -925,6 +968,7 @@ module Aws::Bedrock
     #   <p>The name of the custom type to delete from the policy. The type must not be referenced by any variables or rules.</p>
     #   @return [String]
     class AutomatedReasoningPolicyDeleteTypeAnnotation < Struct.new(
+      nil,
       :name,
       keyword_init: true
     )
@@ -936,6 +980,7 @@ module Aws::Bedrock
     #   <p>The name of the custom type to delete.</p>
     #   @return [String]
     class AutomatedReasoningPolicyDeleteTypeMutation < Struct.new(
+      nil,
       :name,
       keyword_init: true
     )
@@ -947,6 +992,7 @@ module Aws::Bedrock
     #   <p>The identifier or name of the value to remove from the type.</p>
     #   @return [String]
     class AutomatedReasoningPolicyDeleteTypeValue < Struct.new(
+      nil,
       :value,
       keyword_init: true
     )
@@ -958,6 +1004,7 @@ module Aws::Bedrock
     #   <p>The name of the variable to delete from the policy. The variable must not be referenced by any rules.</p>
     #   @return [String]
     class AutomatedReasoningPolicyDeleteVariableAnnotation < Struct.new(
+      nil,
       :name,
       keyword_init: true
     )
@@ -969,6 +1016,7 @@ module Aws::Bedrock
     #   <p>The name of the variable to delete.</p>
     #   @return [String]
     class AutomatedReasoningPolicyDeleteVariableMutation < Struct.new(
+      nil,
       :name,
       keyword_init: true
     )
@@ -983,6 +1031,7 @@ module Aws::Bedrock
     #   <p>The list of rules that form this disjoint set, all operating on the same set of variables.</p>
     #   @return [Array<String>]
     class AutomatedReasoningPolicyDisjointRuleSet < Struct.new(
+      nil,
       :variables,
       :rules,
       keyword_init: true
@@ -995,6 +1044,7 @@ module Aws::Bedrock
     #   <p>The new content to be analyzed and incorporated into the policy, such as additional documents or rule descriptions.</p>
     #   @return [String]
     class AutomatedReasoningPolicyIngestContentAnnotation < Struct.new(
+      nil,
       :content,
       keyword_init: true
     )
@@ -1058,6 +1108,7 @@ module Aws::Bedrock
 
     # <p>Represents the planning phase of policy build workflow, where the system analyzes source content and determines what operations to perform.</p>
     class AutomatedReasoningPolicyPlanning < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1077,6 +1128,7 @@ module Aws::Bedrock
     #   <p>The expected outcome when this scenario is evaluated against the policy (e.g., PASS, FAIL, VIOLATION).</p>
     #   @return [String]
     class AutomatedReasoningPolicyScenario < Struct.new(
+      nil,
       :expression,
       :alternate_expression,
       :rule_ids,
@@ -1109,6 +1161,7 @@ module Aws::Bedrock
     #   <p>The timestamp when the policy was last updated.</p>
     #   @return [Time]
     class AutomatedReasoningPolicySummary < Struct.new(
+      nil,
       :policy_arn,
       :name,
       :description,
@@ -1144,6 +1197,7 @@ module Aws::Bedrock
     #   <p>The minimum confidence level for logic validation. Content meeting this threshold is considered high-confidence and can be validated.</p>
     #   @return [Float]
     class AutomatedReasoningPolicyTestCase < Struct.new(
+      nil,
       :test_case_id,
       :guard_content,
       :query_content,
@@ -1179,6 +1233,7 @@ module Aws::Bedrock
     #   <p>The timestamp when the test results were last updated.</p>
     #   @return [Time]
     class AutomatedReasoningPolicyTestResult < Struct.new(
+      nil,
       :test_case,
       :policy_arn,
       :test_run_status,
@@ -1224,6 +1279,7 @@ module Aws::Bedrock
     #   <p>The feedback information about rule performance, including suggestions for improvements or corrections.</p>
     #   @return [String]
     class AutomatedReasoningPolicyUpdateFromRuleFeedbackAnnotation < Struct.new(
+      nil,
       :rule_ids,
       :feedback,
       keyword_init: true
@@ -1242,6 +1298,7 @@ module Aws::Bedrock
     #   <p>The feedback information about scenario performance, including any issues or improvements identified.</p>
     #   @return [String]
     class AutomatedReasoningPolicyUpdateFromScenarioFeedbackAnnotation < Struct.new(
+      nil,
       :rule_ids,
       :scenario_expression,
       :feedback,
@@ -1258,6 +1315,7 @@ module Aws::Bedrock
     #   <p>The new formal logical expression for the rule, replacing the previous expression.</p>
     #   @return [String]
     class AutomatedReasoningPolicyUpdateRuleAnnotation < Struct.new(
+      nil,
       :rule_id,
       :expression,
       keyword_init: true
@@ -1270,6 +1328,7 @@ module Aws::Bedrock
     #   <p>The updated rule definition containing the modified formal logical expression and any changed metadata for the existing rule.</p>
     #   @return [Types::AutomatedReasoningPolicyDefinitionRule]
     class AutomatedReasoningPolicyUpdateRuleMutation < Struct.new(
+      nil,
       :rule,
       keyword_init: true
     )
@@ -1290,6 +1349,7 @@ module Aws::Bedrock
     #   <p>The updated list of values for the custom type, which can include additions, modifications, or removals.</p>
     #   @return [Array<Types::AutomatedReasoningPolicyTypeValueAnnotation>]
     class AutomatedReasoningPolicyUpdateTypeAnnotation < Struct.new(
+      nil,
       :name,
       :new_name,
       :description,
@@ -1304,6 +1364,7 @@ module Aws::Bedrock
     #   <p>The updated type definition containing the modified name, description, or values for the existing custom type.</p>
     #   @return [Types::AutomatedReasoningPolicyDefinitionType]
     class AutomatedReasoningPolicyUpdateTypeMutation < Struct.new(
+      nil,
       :type,
       keyword_init: true
     )
@@ -1321,6 +1382,7 @@ module Aws::Bedrock
     #   <p>The new description for the type value, replacing the previous description.</p>
     #   @return [String]
     class AutomatedReasoningPolicyUpdateTypeValue < Struct.new(
+      nil,
       :value,
       :new_value,
       :description,
@@ -1340,6 +1402,7 @@ module Aws::Bedrock
     #   <p>The new description for the variable, replacing the previous description.</p>
     #   @return [String]
     class AutomatedReasoningPolicyUpdateVariableAnnotation < Struct.new(
+      nil,
       :name,
       :new_name,
       :description,
@@ -1353,6 +1416,7 @@ module Aws::Bedrock
     #   <p>The updated variable definition containing the modified name, type, or description for the existing variable.</p>
     #   @return [Types::AutomatedReasoningPolicyDefinitionVariable]
     class AutomatedReasoningPolicyUpdateVariableMutation < Struct.new(
+      nil,
       :variable,
       keyword_init: true
     )
@@ -1390,6 +1454,7 @@ module Aws::Bedrock
     #   <p>A status message about the evaluation job deletion.</p>
     #   @return [String]
     class BatchDeleteEvaluationJobError < Struct.new(
+      nil,
       :job_identifier,
       :code,
       :message,
@@ -1406,6 +1471,7 @@ module Aws::Bedrock
     #   <p>The status of the evaluation job for deletion.</p>
     #   @return [String]
     class BatchDeleteEvaluationJobItem < Struct.new(
+      nil,
       :job_identifier,
       :job_status,
       keyword_init: true
@@ -1417,6 +1483,7 @@ module Aws::Bedrock
     #   <p>A list of one or more evaluation job Amazon Resource Names (ARNs) you want to delete.</p>
     #   @return [Array<String>]
     class BatchDeleteEvaluationJobRequest < Struct.new(
+      nil,
       :job_identifiers,
       keyword_init: true
     )
@@ -1430,6 +1497,7 @@ module Aws::Bedrock
     #   <p>The list of evaluation jobs for deletion.</p>
     #   @return [Array<Types::BatchDeleteEvaluationJobItem>]
     class BatchDeleteEvaluationJobResponse < Struct.new(
+      nil,
       :errors,
       :evaluation_jobs,
       keyword_init: true
@@ -1442,6 +1510,7 @@ module Aws::Bedrock
     #   <p>The Amazon Resource Name (ARN) of the evaluator model used used in knowledge base evaluation job or in model evaluation job that use a model as judge.</p>
     #   @return [String]
     class BedrockEvaluatorModel < Struct.new(
+      nil,
       :model_identifier,
       keyword_init: true
     )
@@ -1459,6 +1528,7 @@ module Aws::Bedrock
     #   <p>The byte value of the file to upload, encoded as a Base-64 string.</p>
     #   @return [String]
     class ByteContentDoc < Struct.new(
+      nil,
       :identifier,
       :content_type,
       :data,
@@ -1474,6 +1544,7 @@ module Aws::Bedrock
     #   <p>The unique identifier of the build workflow to cancel. You can get this ID from the StartAutomatedReasoningPolicyBuildWorkflow response or by listing build workflows.</p>
     #   @return [String]
     class CancelAutomatedReasoningPolicyBuildWorkflowRequest < Struct.new(
+      nil,
       :policy_arn,
       :build_workflow_id,
       keyword_init: true
@@ -1482,6 +1553,7 @@ module Aws::Bedrock
     end
 
     class CancelAutomatedReasoningPolicyBuildWorkflowResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1498,6 +1570,7 @@ module Aws::Bedrock
     #   <p>S3 configuration for delivering a large amount of data.</p>
     #   @return [Types::S3Config]
     class CloudWatchConfig < Struct.new(
+      nil,
       :log_group_name,
       :role_arn,
       :large_data_delivery_s3_config,
@@ -1510,6 +1583,7 @@ module Aws::Bedrock
     # @!attribute message
     #   @return [String]
     class ConflictException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -1532,6 +1606,7 @@ module Aws::Bedrock
     #   <p>A list of tags to associate with the Automated Reasoning policy. Tags help you organize and manage your policies.</p>
     #   @return [Array<Types::Tag>]
     class CreateAutomatedReasoningPolicyRequest < Struct.new(
+      nil,
       :name,
       :description,
       :client_request_token,
@@ -1564,6 +1639,7 @@ module Aws::Bedrock
     #   <p>The timestamp when the policy was last updated.</p>
     #   @return [Time]
     class CreateAutomatedReasoningPolicyResponse < Struct.new(
+      nil,
       :policy_arn,
       :version,
       :name,
@@ -1595,6 +1671,7 @@ module Aws::Bedrock
     #   <p>The minimum confidence level for logic validation. Content that meets the threshold is considered a high-confidence finding that can be validated.</p>
     #   @return [Float]
     class CreateAutomatedReasoningPolicyTestCaseRequest < Struct.new(
+      nil,
       :policy_arn,
       :guard_content,
       :query_content,
@@ -1613,6 +1690,7 @@ module Aws::Bedrock
     #   <p>The unique identifier of the created test.</p>
     #   @return [String]
     class CreateAutomatedReasoningPolicyTestCaseResponse < Struct.new(
+      nil,
       :policy_arn,
       :test_case_id,
       keyword_init: true
@@ -1633,6 +1711,7 @@ module Aws::Bedrock
     #   <p>A list of tags to associate with the policy version.</p>
     #   @return [Array<Types::Tag>]
     class CreateAutomatedReasoningPolicyVersionRequest < Struct.new(
+      nil,
       :policy_arn,
       :client_request_token,
       :last_updated_definition_hash,
@@ -1661,6 +1740,7 @@ module Aws::Bedrock
     #   <p>The timestamp when the policy version was created.</p>
     #   @return [Time]
     class CreateAutomatedReasoningPolicyVersionResponse < Struct.new(
+      nil,
       :policy_arn,
       :version,
       :name,
@@ -1688,6 +1768,7 @@ module Aws::Bedrock
     #   <p>A unique, case-sensitive identifier to ensure that the operation completes no more than one time. If this token matches a previous request, Amazon Bedrock ignores the request, but does not return an error. For more information, see <a href="https://docs.aws.amazon.com/bedrock/latest/userguide/model-customization-idempotency.html">Ensuring idempotency</a>.</p>
     #   @return [String]
     class CreateCustomModelDeploymentRequest < Struct.new(
+      nil,
       :model_deployment_name,
       :model_arn,
       :description,
@@ -1702,6 +1783,7 @@ module Aws::Bedrock
     #   <p>The Amazon Resource Name (ARN) of the custom model deployment. Use this ARN as the <code>modelId</code> parameter when invoking the model with the <code>InvokeModel</code> or <code>Converse</code> operations.</p>
     #   @return [String]
     class CreateCustomModelDeploymentResponse < Struct.new(
+      nil,
       :custom_model_deployment_arn,
       keyword_init: true
     )
@@ -1727,6 +1809,7 @@ module Aws::Bedrock
     #   <p>A unique, case-sensitive identifier to ensure that the API request completes no more than one time. If this token matches a previous request, Amazon Bedrock ignores the request, but does not return an error. For more information, see <a href="https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html">Ensuring idempotency</a>.</p>
     #   @return [String]
     class CreateCustomModelRequest < Struct.new(
+      nil,
       :model_name,
       :model_source_config,
       :model_kms_key_arn,
@@ -1742,6 +1825,7 @@ module Aws::Bedrock
     #   <p>The Amazon Resource Name (ARN) of the new custom model.</p>
     #   @return [String]
     class CreateCustomModelResponse < Struct.new(
+      nil,
       :model_arn,
       keyword_init: true
     )
@@ -1779,6 +1863,7 @@ module Aws::Bedrock
     #   <p>Contains the configuration details of the Amazon S3 bucket for storing the results of the evaluation job.</p>
     #   @return [Types::EvaluationOutputDataConfig]
     class CreateEvaluationJobRequest < Struct.new(
+      nil,
       :job_name,
       :job_description,
       :client_request_token,
@@ -1798,6 +1883,7 @@ module Aws::Bedrock
     #   <p>The Amazon Resource Name (ARN) of the evaluation job.</p>
     #   @return [String]
     class CreateEvaluationJobResponse < Struct.new(
+      nil,
       :job_arn,
       keyword_init: true
     )
@@ -1811,6 +1897,7 @@ module Aws::Bedrock
     #   <p>Model Id of the model for the access request.</p>
     #   @return [String]
     class CreateFoundationModelAgreementRequest < Struct.new(
+      nil,
       :offer_token,
       :model_id,
       keyword_init: true
@@ -1822,6 +1909,7 @@ module Aws::Bedrock
     #   <p>Model Id of the model for the access request.</p>
     #   @return [String]
     class CreateFoundationModelAgreementResponse < Struct.new(
+      nil,
       :model_id,
       keyword_init: true
     )
@@ -1871,6 +1959,7 @@ module Aws::Bedrock
     #   <p>A unique, case-sensitive identifier to ensure that the API request completes no more than once. If this token matches a previous request, Amazon Bedrock ignores the request, but does not return an error. For more information, see <a href="https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html">Ensuring idempotency</a> in the <i>Amazon S3 User Guide</i>.</p>
     #   @return [String]
     class CreateGuardrailRequest < Struct.new(
+      nil,
       :name,
       :description,
       :topic_policy_config,
@@ -1903,6 +1992,7 @@ module Aws::Bedrock
     #   <p>The time at which the guardrail was created.</p>
     #   @return [Time]
     class CreateGuardrailResponse < Struct.new(
+      nil,
       :guardrail_id,
       :guardrail_arn,
       :version,
@@ -1922,6 +2012,7 @@ module Aws::Bedrock
     #   <p>A unique, case-sensitive identifier to ensure that the API request completes no more than once. If this token matches a previous request, Amazon Bedrock ignores the request, but does not return an error. For more information, see <a href="https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html">Ensuring idempotency</a> in the <i>Amazon S3 User Guide</i>.</p>
     #   @return [String]
     class CreateGuardrailVersionRequest < Struct.new(
+      nil,
       :guardrail_identifier,
       :description,
       :client_request_token,
@@ -1937,6 +2028,7 @@ module Aws::Bedrock
     #   <p>The number of the version of the guardrail.</p>
     #   @return [String]
     class CreateGuardrailVersionResponse < Struct.new(
+      nil,
       :guardrail_id,
       :version,
       keyword_init: true
@@ -1960,6 +2052,7 @@ module Aws::Bedrock
     #   <p>An array of objects, each of which contains a tag and its value. For more information, see <a href="https://docs.aws.amazon.com/bedrock/latest/userguide/what-is-service.html">Tagging resources</a> in the <a href="https://docs.aws.amazon.com/bedrock/latest/userguide/what-is-service.html">Amazon Bedrock User Guide</a>.</p>
     #   @return [Array<Types::Tag>]
     class CreateInferenceProfileRequest < Struct.new(
+      nil,
       :inference_profile_name,
       :description,
       :client_request_token,
@@ -1977,6 +2070,7 @@ module Aws::Bedrock
     #   <p>The status of the inference profile. <code>ACTIVE</code> means that the inference profile is ready to be used.</p>
     #   @return [String]
     class CreateInferenceProfileResponse < Struct.new(
+      nil,
       :inference_profile_arn,
       :status,
       keyword_init: true
@@ -2003,6 +2097,7 @@ module Aws::Bedrock
     #   <p>An array of key-value pairs to apply to the underlying Amazon SageMaker endpoint. You can use these tags to organize and identify your Amazon Web Services resources.</p>
     #   @return [Array<Types::Tag>]
     class CreateMarketplaceModelEndpointRequest < Struct.new(
+      nil,
       :model_source_identifier,
       :endpoint_config,
       :accept_eula,
@@ -2018,6 +2113,7 @@ module Aws::Bedrock
     #   <p>Details about the created endpoint.</p>
     #   @return [Types::MarketplaceModelEndpoint]
     class CreateMarketplaceModelEndpointResponse < Struct.new(
+      nil,
       :marketplace_model_endpoint,
       keyword_init: true
     )
@@ -2040,6 +2136,7 @@ module Aws::Bedrock
     #   <p>A unique, case-sensitive identifier to ensure that the API request completes no more than one time. If this token matches a previous request, Amazon Bedrock ignores the request, but does not return an error. For more information, see <a href="https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html">Ensuring idempotency</a>.</p>
     #   @return [String]
     class CreateModelCopyJobRequest < Struct.new(
+      nil,
       :source_model_arn,
       :target_model_name,
       :model_kms_key_id,
@@ -2054,6 +2151,7 @@ module Aws::Bedrock
     #   <p>The Amazon Resource Name (ARN) of the model copy job.</p>
     #   @return [String]
     class CreateModelCopyJobResponse < Struct.new(
+      nil,
       :job_arn,
       keyword_init: true
     )
@@ -2106,6 +2204,7 @@ module Aws::Bedrock
     #   <p>The customization configuration for the model customization job.</p>
     #   @return [Types::CustomizationConfig]
     class CreateModelCustomizationJobRequest < Struct.new(
+      nil,
       :job_name,
       :custom_model_name,
       :role_arn,
@@ -2130,6 +2229,7 @@ module Aws::Bedrock
     #   <p>Amazon Resource Name (ARN) of the fine tuning job</p>
     #   @return [String]
     class CreateModelCustomizationJobResponse < Struct.new(
+      nil,
       :job_arn,
       keyword_init: true
     )
@@ -2164,6 +2264,7 @@ module Aws::Bedrock
     #   <p>The imported model is encrypted at rest using this key.</p>
     #   @return [String]
     class CreateModelImportJobRequest < Struct.new(
+      nil,
       :job_name,
       :imported_model_name,
       :role_arn,
@@ -2182,6 +2283,7 @@ module Aws::Bedrock
     #   <p>The Amazon Resource Name (ARN) of the model import job.</p>
     #   @return [String]
     class CreateModelImportJobResponse < Struct.new(
+      nil,
       :job_arn,
       keyword_init: true
     )
@@ -2216,6 +2318,7 @@ module Aws::Bedrock
     #   <p>Any tags to associate with the batch inference job. For more information, see <a href="https://docs.aws.amazon.com/bedrock/latest/userguide/tagging.html">Tagging Amazon Bedrock resources</a>.</p>
     #   @return [Array<Types::Tag>]
     class CreateModelInvocationJobRequest < Struct.new(
+      nil,
       :job_name,
       :role_arn,
       :client_request_token,
@@ -2234,6 +2337,7 @@ module Aws::Bedrock
     #   <p>The Amazon Resource Name (ARN) of the batch inference job.</p>
     #   @return [String]
     class CreateModelInvocationJobResponse < Struct.new(
+      nil,
       :job_arn,
       keyword_init: true
     )
@@ -2262,6 +2366,7 @@ module Aws::Bedrock
     #   <p>An array of key-value pairs to apply to this resource as tags. You can use tags to categorize and manage your Amazon Web Services resources.</p>
     #   @return [Array<Types::Tag>]
     class CreatePromptRouterRequest < Struct.new(
+      nil,
       :client_request_token,
       :prompt_router_name,
       :models,
@@ -2278,6 +2383,7 @@ module Aws::Bedrock
     #   <p>The Amazon Resource Name (ARN) that uniquely identifies the prompt router.</p>
     #   @return [String]
     class CreatePromptRouterResponse < Struct.new(
+      nil,
       :prompt_router_arn,
       keyword_init: true
     )
@@ -2303,6 +2409,7 @@ module Aws::Bedrock
     #   <p>Tags to associate with this Provisioned Throughput.</p>
     #   @return [Array<Types::Tag>]
     class CreateProvisionedModelThroughputRequest < Struct.new(
+      nil,
       :client_request_token,
       :model_units,
       :provisioned_model_name,
@@ -2318,6 +2425,7 @@ module Aws::Bedrock
     #   <p>The Amazon Resource Name (ARN) for this Provisioned Throughput.</p>
     #   @return [String]
     class CreateProvisionedModelThroughputResponse < Struct.new(
+      nil,
       :provisioned_model_arn,
       keyword_init: true
     )
@@ -2329,6 +2437,7 @@ module Aws::Bedrock
     #   <p>The Amazon Resource Name (ARN) of the evaluator model for custom metrics. For a list of supported evaluator models, see <a href="https://docs.aws.amazon.com/bedrock/latest/userguide/evaluation-judge.html">Evaluate model performance using another LLM as a judge</a> and <a href="https://docs.aws.amazon.com/bedrock/latest/userguide/evaluation-kb.html">Evaluate the performance of RAG sources using Amazon Bedrock evaluations</a>.</p>
     #   @return [String]
     class CustomMetricBedrockEvaluatorModel < Struct.new(
+      nil,
       :model_identifier,
       keyword_init: true
     )
@@ -2347,6 +2456,7 @@ module Aws::Bedrock
     #   <p>Defines the rating scale to be used for a custom metric. We recommend that you always define a ratings scale when creating a custom metric. If you don't define a scale, Amazon Bedrock won't be able to visually display the results of the evaluation in the console or calculate average values of numerical scores. For more information on specifying a rating scale, see <a href="https://docs.aws.amazon.com/bedrock/latest/userguide/model-evaluation-custom-metrics-prompt-formats.html#model-evaluation-custom-metrics-prompt-formats-schema">Specifying an output schema (rating scale)</a>.</p>
     #   @return [Array<Types::RatingScaleItem>]
     class CustomMetricDefinition < Struct.new(
+      nil,
       :name,
       :instructions,
       :rating_scale,
@@ -2360,6 +2470,7 @@ module Aws::Bedrock
     #   <p>Defines the model you want to evaluate custom metrics in an Amazon Bedrock evaluation job.</p>
     #   @return [Array<Types::CustomMetricBedrockEvaluatorModel>]
     class CustomMetricEvaluatorModelConfig < Struct.new(
+      nil,
       :bedrock_evaluator_models,
       keyword_init: true
     )
@@ -2389,6 +2500,7 @@ module Aws::Bedrock
     #   <p>If the deployment status is <code>FAILED</code>, this field contains a message describing the failure reason.</p>
     #   @return [String]
     class CustomModelDeploymentSummary < Struct.new(
+      nil,
       :custom_model_deployment_arn,
       :custom_model_deployment_name,
       :model_arn,
@@ -2427,6 +2539,7 @@ module Aws::Bedrock
     #   <p>The current status of the custom model. Possible values include:</p> <ul> <li> <p> <code>Creating</code> - The model is being created and validated.</p> </li> <li> <p> <code>Active</code> - The model has been successfully created and is ready for use.</p> </li> <li> <p> <code>Failed</code> - The model creation process failed.</p> </li> </ul>
     #   @return [String]
     class CustomModelSummary < Struct.new(
+      nil,
       :model_arn,
       :model_name,
       :creation_time,
@@ -2448,6 +2561,7 @@ module Aws::Bedrock
     #   <p>The version of the custom model unit. Use to determine the billing rate for the custom model unit.</p>
     #   @return [String]
     class CustomModelUnits < Struct.new(
+      nil,
       :custom_model_units_per_model_copy,
       :custom_model_units_version,
       keyword_init: true
@@ -2481,6 +2595,7 @@ module Aws::Bedrock
     #   <p>The latest update to the data processing sub-task of the job.</p>
     #   @return [Time]
     class DataProcessingDetails < Struct.new(
+      nil,
       :status,
       :creation_time,
       :last_modified_time,
@@ -2499,6 +2614,7 @@ module Aws::Bedrock
     #   <p>The timestamp when the build workflow was last updated. This is used for optimistic concurrency control to prevent accidental deletion of workflows that have been modified.</p>
     #   @return [Time]
     class DeleteAutomatedReasoningPolicyBuildWorkflowRequest < Struct.new(
+      nil,
       :policy_arn,
       :build_workflow_id,
       :last_updated_at,
@@ -2508,6 +2624,7 @@ module Aws::Bedrock
     end
 
     class DeleteAutomatedReasoningPolicyBuildWorkflowResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -2517,6 +2634,7 @@ module Aws::Bedrock
     #   <p>The Amazon Resource Name (ARN) of the Automated Reasoning policy to delete.</p>
     #   @return [String]
     class DeleteAutomatedReasoningPolicyRequest < Struct.new(
+      nil,
       :policy_arn,
       keyword_init: true
     )
@@ -2524,6 +2642,7 @@ module Aws::Bedrock
     end
 
     class DeleteAutomatedReasoningPolicyResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -2539,6 +2658,7 @@ module Aws::Bedrock
     #   <p>The timestamp when the test was last updated. This is used as a concurrency token to prevent conflicting modifications.</p>
     #   @return [Time]
     class DeleteAutomatedReasoningPolicyTestCaseRequest < Struct.new(
+      nil,
       :policy_arn,
       :test_case_id,
       :last_updated_at,
@@ -2548,6 +2668,7 @@ module Aws::Bedrock
     end
 
     class DeleteAutomatedReasoningPolicyTestCaseResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -2557,6 +2678,7 @@ module Aws::Bedrock
     #   <p>The Amazon Resource Name (ARN) or name of the custom model deployment to delete.</p>
     #   @return [String]
     class DeleteCustomModelDeploymentRequest < Struct.new(
+      nil,
       :custom_model_deployment_identifier,
       keyword_init: true
     )
@@ -2564,6 +2686,7 @@ module Aws::Bedrock
     end
 
     class DeleteCustomModelDeploymentResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -2573,6 +2696,7 @@ module Aws::Bedrock
     #   <p>Name of the model to delete.</p>
     #   @return [String]
     class DeleteCustomModelRequest < Struct.new(
+      nil,
       :model_identifier,
       keyword_init: true
     )
@@ -2580,6 +2704,7 @@ module Aws::Bedrock
     end
 
     class DeleteCustomModelResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -2589,6 +2714,7 @@ module Aws::Bedrock
     #   <p>Model Id of the model access to delete.</p>
     #   @return [String]
     class DeleteFoundationModelAgreementRequest < Struct.new(
+      nil,
       :model_id,
       keyword_init: true
     )
@@ -2596,6 +2722,7 @@ module Aws::Bedrock
     end
 
     class DeleteFoundationModelAgreementResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -2608,6 +2735,7 @@ module Aws::Bedrock
     #   <p>The version of the guardrail.</p>
     #   @return [String]
     class DeleteGuardrailRequest < Struct.new(
+      nil,
       :guardrail_identifier,
       :guardrail_version,
       keyword_init: true
@@ -2616,6 +2744,7 @@ module Aws::Bedrock
     end
 
     class DeleteGuardrailResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -2625,6 +2754,7 @@ module Aws::Bedrock
     #   <p>Name of the imported model to delete.</p>
     #   @return [String]
     class DeleteImportedModelRequest < Struct.new(
+      nil,
       :model_identifier,
       keyword_init: true
     )
@@ -2632,6 +2762,7 @@ module Aws::Bedrock
     end
 
     class DeleteImportedModelResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -2641,6 +2772,7 @@ module Aws::Bedrock
     #   <p>The Amazon Resource Name (ARN) or ID of the application inference profile to delete.</p>
     #   @return [String]
     class DeleteInferenceProfileRequest < Struct.new(
+      nil,
       :inference_profile_identifier,
       keyword_init: true
     )
@@ -2648,6 +2780,7 @@ module Aws::Bedrock
     end
 
     class DeleteInferenceProfileResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -2657,6 +2790,7 @@ module Aws::Bedrock
     #   <p>The Amazon Resource Name (ARN) of the endpoint you want to delete.</p>
     #   @return [String]
     class DeleteMarketplaceModelEndpointRequest < Struct.new(
+      nil,
       :endpoint_arn,
       keyword_init: true
     )
@@ -2664,18 +2798,21 @@ module Aws::Bedrock
     end
 
     class DeleteMarketplaceModelEndpointResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
     end
 
     class DeleteModelInvocationLoggingConfigurationRequest < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
     end
 
     class DeleteModelInvocationLoggingConfigurationResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -2685,6 +2822,7 @@ module Aws::Bedrock
     #   <p>The Amazon Resource Name (ARN) of the prompt router to delete.</p>
     #   @return [String]
     class DeletePromptRouterRequest < Struct.new(
+      nil,
       :prompt_router_arn,
       keyword_init: true
     )
@@ -2692,6 +2830,7 @@ module Aws::Bedrock
     end
 
     class DeletePromptRouterResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -2701,6 +2840,7 @@ module Aws::Bedrock
     #   <p>The Amazon Resource Name (ARN) or name of the Provisioned Throughput.</p>
     #   @return [String]
     class DeleteProvisionedModelThroughputRequest < Struct.new(
+      nil,
       :provisioned_model_id,
       keyword_init: true
     )
@@ -2708,6 +2848,7 @@ module Aws::Bedrock
     end
 
     class DeleteProvisionedModelThroughputResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -2717,6 +2858,7 @@ module Aws::Bedrock
     #   <p>The Amazon Resource Name (ARN) of the endpoint you want to deregister.</p>
     #   @return [String]
     class DeregisterMarketplaceModelEndpointRequest < Struct.new(
+      nil,
       :endpoint_arn,
       keyword_init: true
     )
@@ -2724,6 +2866,7 @@ module Aws::Bedrock
     end
 
     class DeregisterMarketplaceModelEndpointResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -2743,6 +2886,7 @@ module Aws::Bedrock
     #   <p>Unit associated with the price.</p>
     #   @return [String]
     class DimensionalPriceRate < Struct.new(
+      nil,
       :dimension,
       :price,
       :description,
@@ -2757,6 +2901,7 @@ module Aws::Bedrock
     #   <p>The teacher model configuration.</p>
     #   @return [Types::TeacherModelConfig]
     class DistillationConfig < Struct.new(
+      nil,
       :teacher_model_config,
       keyword_init: true
     )
@@ -2789,6 +2934,7 @@ module Aws::Bedrock
     #   <p>Specifies performance settings for the model or inference profile.</p>
     #   @return [Types::PerformanceConfiguration]
     class EvaluationBedrockModel < Struct.new(
+      nil,
       :model_identifier,
       :inference_params,
       :performance_config,
@@ -2830,6 +2976,7 @@ module Aws::Bedrock
     #   <p>For custom prompt datasets, you must specify the location in Amazon S3 where the prompt dataset is saved.</p>
     #   @return [Types::EvaluationDatasetLocation]
     class EvaluationDataset < Struct.new(
+      nil,
       :name,
       :dataset_location,
       keyword_init: true
@@ -2863,6 +3010,7 @@ module Aws::Bedrock
     #   <p>The names of the metrics you want to use for your evaluation job.</p> <p>For knowledge base evaluation jobs that evaluate retrieval only, valid values are "<code>Builtin.ContextRelevance</code>", "<code>Builtin.ContextCoverage</code>".</p> <p>For knowledge base evaluation jobs that evaluate retrieval with response generation, valid values are "<code>Builtin.Correctness</code>", "<code>Builtin.Completeness</code>", "<code>Builtin.Helpfulness</code>", "<code>Builtin.LogicalCoherence</code>", "<code>Builtin.Faithfulness</code>", "<code>Builtin.Harmfulness</code>", "<code>Builtin.Stereotyping</code>", "<code>Builtin.Refusal</code>".</p> <p>For automated model evaluation jobs, valid values are "<code>Builtin.Accuracy</code>", "<code>Builtin.Robustness</code>", and "<code>Builtin.Toxicity</code>". In model evaluation jobs that use a LLM as judge you can specify "<code>Builtin.Correctness</code>", "<code>Builtin.Completeness"</code>, "<code>Builtin.Faithfulness"</code>, "<code>Builtin.Helpfulness</code>", "<code>Builtin.Coherence</code>", "<code>Builtin.Relevance</code>", "<code>Builtin.FollowingInstructions</code>", "<code>Builtin.ProfessionalStyleAndTone</code>", You can also specify the following responsible AI related metrics only for model evaluation job that use a LLM as judge "<code>Builtin.Harmfulness</code>", "<code>Builtin.Stereotyping</code>", and "<code>Builtin.Refusal</code>".</p> <p>For human-based model evaluation jobs, the list of strings must match the <code>name</code> parameter specified in <code>HumanEvaluationCustomMetric</code>.</p>
     #   @return [Array<String>]
     class EvaluationDatasetMetricConfig < Struct.new(
+      nil,
       :task_type,
       :dataset,
       :metric_names,
@@ -2899,6 +3047,7 @@ module Aws::Bedrock
     #   <p>A summary of the RAG resources used in an Amazon Bedrock Knowledge Base evaluation job. These resources can be Knowledge Bases in Amazon Bedrock or RAG sources outside of Amazon Bedrock that you use to generate your own inference response data.</p>
     #   @return [Types::EvaluationRagConfigSummary]
     class EvaluationInferenceConfigSummary < Struct.new(
+      nil,
       :model_config_summary,
       :rag_config_summary,
       keyword_init: true
@@ -2934,6 +3083,7 @@ module Aws::Bedrock
     #   <p>A label that identifies the models used for a model evaluation job where you provide your own inference response data.</p>
     #   @return [Array<String>]
     class EvaluationModelConfigSummary < Struct.new(
+      nil,
       :bedrock_model_identifiers,
       :precomputed_inference_source_identifiers,
       keyword_init: true
@@ -2946,6 +3096,7 @@ module Aws::Bedrock
     #   <p>The Amazon S3 URI where the results of the evaluation job are saved.</p>
     #   @return [String]
     class EvaluationOutputDataConfig < Struct.new(
+      nil,
       :s3_uri,
       keyword_init: true
     )
@@ -2957,6 +3108,7 @@ module Aws::Bedrock
     #   <p>A label that identifies a model used in a model evaluation job where you provide your own inference response data.</p>
     #   @return [String]
     class EvaluationPrecomputedInferenceSource < Struct.new(
+      nil,
       :inference_source_identifier,
       keyword_init: true
     )
@@ -2988,6 +3140,7 @@ module Aws::Bedrock
     #   <p>A label that identifies the RAG source used for a retrieve-and-generate Knowledge Base evaluation job where you provide your own inference response data.</p>
     #   @return [String]
     class EvaluationPrecomputedRetrieveAndGenerateSourceConfig < Struct.new(
+      nil,
       :rag_source_identifier,
       keyword_init: true
     )
@@ -2999,6 +3152,7 @@ module Aws::Bedrock
     #   <p>A label that identifies the RAG source used for a retrieve-only Knowledge Base evaluation job where you provide your own inference response data.</p>
     #   @return [String]
     class EvaluationPrecomputedRetrieveSourceConfig < Struct.new(
+      nil,
       :rag_source_identifier,
       keyword_init: true
     )
@@ -3013,6 +3167,7 @@ module Aws::Bedrock
     #   <p>A label that identifies the RAG sources used for a Knowledge Base evaluation job where you provide your own inference response data.</p>
     #   @return [Array<String>]
     class EvaluationRagConfigSummary < Struct.new(
+      nil,
       :bedrock_knowledge_base_identifiers,
       :precomputed_rag_source_identifiers,
       keyword_init: true
@@ -3064,6 +3219,7 @@ module Aws::Bedrock
     #   <p>Specifies whether the evaluation job is for evaluating a model or evaluating a knowledge base (retrieval and response generation).</p>
     #   @return [String]
     class EvaluationSummary < Struct.new(
+      nil,
       :job_arn,
       :job_name,
       :status,
@@ -3105,6 +3261,7 @@ module Aws::Bedrock
     #   <p>The Amazon Resource Name (ARN) of the Automated Reasoning policy to export. Can be either the unversioned ARN for the draft policy or a versioned ARN for a specific policy version.</p>
     #   @return [String]
     class ExportAutomatedReasoningPolicyVersionRequest < Struct.new(
+      nil,
       :policy_arn,
       keyword_init: true
     )
@@ -3115,6 +3272,7 @@ module Aws::Bedrock
     #   <p>The exported policy definition containing the formal logic rules, variables, and custom variable types.</p>
     #   @return [Types::AutomatedReasoningPolicyDefinition]
     class ExportAutomatedReasoningPolicyVersionResponse < Struct.new(
+      nil,
       :policy_definition,
       keyword_init: true
     )
@@ -3132,6 +3290,7 @@ module Aws::Bedrock
     #   <p>The identifier, content type, and data of the external source wrapper object.</p>
     #   @return [Types::ByteContentDoc]
     class ExternalSource < Struct.new(
+      nil,
       :source_type,
       :s3_location,
       :byte_content,
@@ -3154,6 +3313,7 @@ module Aws::Bedrock
     #   <p>Additional model parameters and their corresponding values not included in the text inference configuration for an external source. Takes in custom model parameters specific to the language model being used.</p>
     #   @return [Hash<String, JSON>]
     class ExternalSourcesGenerationConfiguration < Struct.new(
+      nil,
       :prompt_template,
       :guardrail_configuration,
       :kb_inference_config,
@@ -3174,6 +3334,7 @@ module Aws::Bedrock
     #   <p>Contains configurations details for response generation based on retrieved text chunks.</p>
     #   @return [Types::ExternalSourcesGenerationConfiguration]
     class ExternalSourcesRetrieveAndGenerateConfiguration < Struct.new(
+      nil,
       :model_arn,
       :sources,
       :generation_configuration,
@@ -3187,6 +3348,7 @@ module Aws::Bedrock
     #   <p>The name of the metadata field to be used during the reranking process.</p>
     #   @return [String]
     class FieldForReranking < Struct.new(
+      nil,
       :field_name,
       keyword_init: true
     )
@@ -3201,6 +3363,7 @@ module Aws::Bedrock
     #   <p>The value of the metadata attribute/field.</p>
     #   @return [JSON]
     class FilterAttribute < Struct.new(
+      nil,
       :key,
       :value,
       keyword_init: true
@@ -3240,6 +3403,7 @@ module Aws::Bedrock
     #   <p>Contains details about whether a model version is available or deprecated</p>
     #   @return [Types::FoundationModelLifecycle]
     class FoundationModelDetails < Struct.new(
+      nil,
       :model_arn,
       :model_id,
       :model_name,
@@ -3260,6 +3424,7 @@ module Aws::Bedrock
     #   <p>Specifies whether a model version is available (<code>ACTIVE</code>) or deprecated (<code>LEGACY</code>.</p>
     #   @return [String]
     class FoundationModelLifecycle < Struct.new(
+      nil,
       :status,
       keyword_init: true
     )
@@ -3298,6 +3463,7 @@ module Aws::Bedrock
     #   <p>Contains details about whether a model version is available or deprecated.</p>
     #   @return [Types::FoundationModelLifecycle]
     class FoundationModelSummary < Struct.new(
+      nil,
       :model_arn,
       :model_id,
       :model_name,
@@ -3327,6 +3493,7 @@ module Aws::Bedrock
     #   <p>Additional model parameters and corresponding values not included in the <code>textInferenceConfig</code> structure for a knowledge base. This allows you to provide custom model parameters specific to the language model being used.</p>
     #   @return [Hash<String, JSON>]
     class GenerationConfiguration < Struct.new(
+      nil,
       :prompt_template,
       :guardrail_configuration,
       :kb_inference_config,
@@ -3343,6 +3510,7 @@ module Aws::Bedrock
     #   <p>The unique identifier of the build workflow whose annotations you want to retrieve.</p>
     #   @return [String]
     class GetAutomatedReasoningPolicyAnnotationsRequest < Struct.new(
+      nil,
       :policy_arn,
       :build_workflow_id,
       keyword_init: true
@@ -3369,6 +3537,7 @@ module Aws::Bedrock
     #   <p>The timestamp when the annotations were last updated.</p>
     #   @return [Time]
     class GetAutomatedReasoningPolicyAnnotationsResponse < Struct.new(
+      nil,
       :policy_arn,
       :name,
       :build_workflow_id,
@@ -3387,6 +3556,7 @@ module Aws::Bedrock
     #   <p>The unique identifier of the build workflow to retrieve.</p>
     #   @return [String]
     class GetAutomatedReasoningPolicyBuildWorkflowRequest < Struct.new(
+      nil,
       :policy_arn,
       :build_workflow_id,
       keyword_init: true
@@ -3422,6 +3592,7 @@ module Aws::Bedrock
     #   <p>The timestamp when the build workflow was last updated.</p>
     #   @return [Time]
     class GetAutomatedReasoningPolicyBuildWorkflowResponse < Struct.new(
+      nil,
       :policy_arn,
       :build_workflow_id,
       :status,
@@ -3446,6 +3617,7 @@ module Aws::Bedrock
     #   <p>The type of asset to retrieve (e.g., BUILD_LOG, QUALITY_REPORT, POLICY_DEFINITION).</p>
     #   @return [String]
     class GetAutomatedReasoningPolicyBuildWorkflowResultAssetsRequest < Struct.new(
+      nil,
       :policy_arn,
       :build_workflow_id,
       :asset_type,
@@ -3464,6 +3636,7 @@ module Aws::Bedrock
     #   <p>The requested build workflow asset. This is a union type that returns only one of the available asset types (logs, reports, or generated artifacts) based on the specific asset type requested in the API call.</p>
     #   @return [Types::AutomatedReasoningPolicyBuildResultAssets]
     class GetAutomatedReasoningPolicyBuildWorkflowResultAssetsResponse < Struct.new(
+      nil,
       :policy_arn,
       :build_workflow_id,
       :build_workflow_assets,
@@ -3479,6 +3652,7 @@ module Aws::Bedrock
     #   <p>The unique identifier of the build workflow associated with the test scenarios.</p>
     #   @return [String]
     class GetAutomatedReasoningPolicyNextScenarioRequest < Struct.new(
+      nil,
       :policy_arn,
       :build_workflow_id,
       keyword_init: true
@@ -3493,6 +3667,7 @@ module Aws::Bedrock
     #   <p>The next test scenario to validate, including the test expression and expected results.</p>
     #   @return [Types::AutomatedReasoningPolicyScenario]
     class GetAutomatedReasoningPolicyNextScenarioResponse < Struct.new(
+      nil,
       :policy_arn,
       :scenario,
       keyword_init: true
@@ -3504,6 +3679,7 @@ module Aws::Bedrock
     #   <p>The Amazon Resource Name (ARN) of the Automated Reasoning policy to retrieve. Can be either the unversioned ARN for the draft policy or an ARN for a specific policy version.</p>
     #   @return [String]
     class GetAutomatedReasoningPolicyRequest < Struct.new(
+      nil,
       :policy_arn,
       keyword_init: true
     )
@@ -3535,6 +3711,7 @@ module Aws::Bedrock
     #   <p>The timestamp when the policy was last updated.</p>
     #   @return [Time]
     class GetAutomatedReasoningPolicyResponse < Struct.new(
+      nil,
       :policy_arn,
       :name,
       :version,
@@ -3555,6 +3732,7 @@ module Aws::Bedrock
     #   <p>The unique identifier of the test to retrieve.</p>
     #   @return [String]
     class GetAutomatedReasoningPolicyTestCaseRequest < Struct.new(
+      nil,
       :policy_arn,
       :test_case_id,
       keyword_init: true
@@ -3569,6 +3747,7 @@ module Aws::Bedrock
     #   <p>The test details including the content, query, expected result, and metadata.</p>
     #   @return [Types::AutomatedReasoningPolicyTestCase]
     class GetAutomatedReasoningPolicyTestCaseResponse < Struct.new(
+      nil,
       :policy_arn,
       :test_case,
       keyword_init: true
@@ -3586,6 +3765,7 @@ module Aws::Bedrock
     #   <p>The unique identifier of the test for which to retrieve results.</p>
     #   @return [String]
     class GetAutomatedReasoningPolicyTestResultRequest < Struct.new(
+      nil,
       :policy_arn,
       :build_workflow_id,
       :test_case_id,
@@ -3598,6 +3778,7 @@ module Aws::Bedrock
     #   <p>The test result containing validation findings, execution status, and detailed analysis.</p>
     #   @return [Types::AutomatedReasoningPolicyTestResult]
     class GetAutomatedReasoningPolicyTestResultResponse < Struct.new(
+      nil,
       :test_result,
       keyword_init: true
     )
@@ -3608,6 +3789,7 @@ module Aws::Bedrock
     #   <p>The Amazon Resource Name (ARN) or name of the custom model deployment to retrieve information about.</p>
     #   @return [String]
     class GetCustomModelDeploymentRequest < Struct.new(
+      nil,
       :custom_model_deployment_identifier,
       keyword_init: true
     )
@@ -3639,6 +3821,7 @@ module Aws::Bedrock
     #   <p>The date and time when the custom model deployment was last updated.</p>
     #   @return [Time]
     class GetCustomModelDeploymentResponse < Struct.new(
+      nil,
       :custom_model_deployment_arn,
       :model_deployment_name,
       :model_arn,
@@ -3656,6 +3839,7 @@ module Aws::Bedrock
     #   <p>Name or Amazon Resource Name (ARN) of the custom model.</p>
     #   @return [String]
     class GetCustomModelRequest < Struct.new(
+      nil,
       :model_identifier,
       keyword_init: true
     )
@@ -3714,6 +3898,7 @@ module Aws::Bedrock
     #   <p>A failure message for any issues that occurred when creating the custom model. This is included for only a failed CreateCustomModel operation.</p>
     #   @return [String]
     class GetCustomModelResponse < Struct.new(
+      nil,
       :model_arn,
       :model_name,
       :job_name,
@@ -3740,6 +3925,7 @@ module Aws::Bedrock
     #   <p>The Amazon Resource Name (ARN) of the evaluation job you want get information on.</p>
     #   @return [String]
     class GetEvaluationJobRequest < Struct.new(
+      nil,
       :job_identifier,
       keyword_init: true
     )
@@ -3789,6 +3975,7 @@ module Aws::Bedrock
     #   <p>A list of strings that specify why the evaluation job failed to create.</p>
     #   @return [Array<String>]
     class GetEvaluationJobResponse < Struct.new(
+      nil,
       :job_name,
       :status,
       :job_arn,
@@ -3812,6 +3999,7 @@ module Aws::Bedrock
     #   <p>The model Id of the foundation model.</p>
     #   @return [String]
     class GetFoundationModelAvailabilityRequest < Struct.new(
+      nil,
       :model_id,
       keyword_init: true
     )
@@ -3834,6 +4022,7 @@ module Aws::Bedrock
     #   <p>Region availability. </p>
     #   @return [String]
     class GetFoundationModelAvailabilityResponse < Struct.new(
+      nil,
       :model_id,
       :agreement_availability,
       :authorization_status,
@@ -3848,6 +4037,7 @@ module Aws::Bedrock
     #   <p>The model identifier. </p>
     #   @return [String]
     class GetFoundationModelRequest < Struct.new(
+      nil,
       :model_identifier,
       keyword_init: true
     )
@@ -3858,6 +4048,7 @@ module Aws::Bedrock
     #   <p>Information about the foundation model.</p>
     #   @return [Types::FoundationModelDetails]
     class GetFoundationModelResponse < Struct.new(
+      nil,
       :model_details,
       keyword_init: true
     )
@@ -3871,6 +4062,7 @@ module Aws::Bedrock
     #   <p>The version of the guardrail for which to get details. If you don't specify a version, the response returns details for the <code>DRAFT</code> version.</p>
     #   @return [String]
     class GetGuardrailRequest < Struct.new(
+      nil,
       :guardrail_identifier,
       :guardrail_version,
       keyword_init: true
@@ -3939,6 +4131,7 @@ module Aws::Bedrock
     #   <p>The ARN of the KMS key that encrypts the guardrail.</p>
     #   @return [String]
     class GetGuardrailResponse < Struct.new(
+      nil,
       :name,
       :description,
       :guardrail_id,
@@ -3968,6 +4161,7 @@ module Aws::Bedrock
     #   <p>Name or Amazon Resource Name (ARN) of the imported model.</p>
     #   @return [String]
     class GetImportedModelRequest < Struct.new(
+      nil,
       :model_identifier,
       keyword_init: true
     )
@@ -4005,6 +4199,7 @@ module Aws::Bedrock
     #   <p>Information about the hardware utilization for a single copy of the model.</p>
     #   @return [Types::CustomModelUnits]
     class GetImportedModelResponse < Struct.new(
+      nil,
       :model_arn,
       :model_name,
       :job_name,
@@ -4024,6 +4219,7 @@ module Aws::Bedrock
     #   <p>The ID or Amazon Resource Name (ARN) of the inference profile.</p>
     #   @return [String]
     class GetInferenceProfileRequest < Struct.new(
+      nil,
       :inference_profile_identifier,
       keyword_init: true
     )
@@ -4058,6 +4254,7 @@ module Aws::Bedrock
     #   <p>The type of the inference profile. The following types are possible:</p> <ul> <li> <p> <code>SYSTEM_DEFINED</code> – The inference profile is defined by Amazon Bedrock. You can route inference requests across regions with these inference profiles.</p> </li> <li> <p> <code>APPLICATION</code> – The inference profile was created by a user. This type of inference profile can track metrics and costs when invoking the model in it. The inference profile may route requests to one or multiple regions.</p> </li> </ul>
     #   @return [String]
     class GetInferenceProfileResponse < Struct.new(
+      nil,
       :inference_profile_name,
       :description,
       :created_at,
@@ -4076,6 +4273,7 @@ module Aws::Bedrock
     #   <p>The Amazon Resource Name (ARN) of the endpoint you want to get information about.</p>
     #   @return [String]
     class GetMarketplaceModelEndpointRequest < Struct.new(
+      nil,
       :endpoint_arn,
       keyword_init: true
     )
@@ -4086,6 +4284,7 @@ module Aws::Bedrock
     #   <p>Details about the requested endpoint.</p>
     #   @return [Types::MarketplaceModelEndpoint]
     class GetMarketplaceModelEndpointResponse < Struct.new(
+      nil,
       :marketplace_model_endpoint,
       keyword_init: true
     )
@@ -4096,6 +4295,7 @@ module Aws::Bedrock
     #   <p>The Amazon Resource Name (ARN) of the model copy job.</p>
     #   @return [String]
     class GetModelCopyJobRequest < Struct.new(
+      nil,
       :job_arn,
       keyword_init: true
     )
@@ -4136,6 +4336,7 @@ module Aws::Bedrock
     #   <p>The name of the original model being copied.</p>
     #   @return [String]
     class GetModelCopyJobResponse < Struct.new(
+      nil,
       :job_arn,
       :status,
       :creation_time,
@@ -4156,6 +4357,7 @@ module Aws::Bedrock
     #   <p>Identifier for the customization job.</p>
     #   @return [String]
     class GetModelCustomizationJobRequest < Struct.new(
+      nil,
       :job_identifier,
       keyword_init: true
     )
@@ -4232,6 +4434,7 @@ module Aws::Bedrock
     #   <p>The customization configuration for the model customization job.</p>
     #   @return [Types::CustomizationConfig]
     class GetModelCustomizationJobResponse < Struct.new(
+      nil,
       :job_arn,
       :job_name,
       :output_model_name,
@@ -4264,6 +4467,7 @@ module Aws::Bedrock
     #   <p>The identifier of the import job.</p>
     #   @return [String]
     class GetModelImportJobRequest < Struct.new(
+      nil,
       :job_identifier,
       keyword_init: true
     )
@@ -4310,6 +4514,7 @@ module Aws::Bedrock
     #   <p>The imported model is encrypted at rest using this key.</p>
     #   @return [String]
     class GetModelImportJobResponse < Struct.new(
+      nil,
       :job_arn,
       :job_name,
       :imported_model_name,
@@ -4332,6 +4537,7 @@ module Aws::Bedrock
     #   <p>The Amazon Resource Name (ARN) of the batch inference job.</p>
     #   @return [String]
     class GetModelInvocationJobRequest < Struct.new(
+      nil,
       :job_identifier,
       keyword_init: true
     )
@@ -4384,6 +4590,7 @@ module Aws::Bedrock
     #   <p>The time at which the batch inference job times or timed out.</p>
     #   @return [Time]
     class GetModelInvocationJobResponse < Struct.new(
+      nil,
       :job_arn,
       :job_name,
       :model_id,
@@ -4405,6 +4612,7 @@ module Aws::Bedrock
     end
 
     class GetModelInvocationLoggingConfigurationRequest < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -4414,6 +4622,7 @@ module Aws::Bedrock
     #   <p>The current configuration values.</p>
     #   @return [Types::LoggingConfig]
     class GetModelInvocationLoggingConfigurationResponse < Struct.new(
+      nil,
       :logging_config,
       keyword_init: true
     )
@@ -4424,6 +4633,7 @@ module Aws::Bedrock
     #   <p>The prompt router's ARN</p>
     #   @return [String]
     class GetPromptRouterRequest < Struct.new(
+      nil,
       :prompt_router_arn,
       keyword_init: true
     )
@@ -4461,6 +4671,7 @@ module Aws::Bedrock
     #   <p>The router's type.</p>
     #   @return [String]
     class GetPromptRouterResponse < Struct.new(
+      nil,
       :prompt_router_name,
       :routing_criteria,
       :description,
@@ -4480,6 +4691,7 @@ module Aws::Bedrock
     #   <p>The Amazon Resource Name (ARN) or name of the Provisioned Throughput.</p>
     #   @return [String]
     class GetProvisionedModelThroughputRequest < Struct.new(
+      nil,
       :provisioned_model_id,
       keyword_init: true
     )
@@ -4526,6 +4738,7 @@ module Aws::Bedrock
     #   <p>The timestamp for when the commitment term for the Provisioned Throughput expires.</p>
     #   @return [Time]
     class GetProvisionedModelThroughputResponse < Struct.new(
+      nil,
       :model_units,
       :desired_model_units,
       :provisioned_model_name,
@@ -4545,6 +4758,7 @@ module Aws::Bedrock
     end
 
     class GetUseCaseForModelAccessRequest < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -4554,6 +4768,7 @@ module Aws::Bedrock
     #   <p>Get customer profile Response.</p>
     #   @return [String]
     class GetUseCaseForModelAccessResponse < Struct.new(
+      nil,
       :form_data,
       keyword_init: true
     )
@@ -4568,6 +4783,7 @@ module Aws::Bedrock
     #   <p>The minimum confidence level required for Automated Reasoning policy violations to trigger guardrail actions. Values range from 0.0 to 1.0.</p>
     #   @return [Float]
     class GuardrailAutomatedReasoningPolicy < Struct.new(
+      nil,
       :policies,
       :confidence_threshold,
       keyword_init: true
@@ -4583,6 +4799,7 @@ module Aws::Bedrock
     #   <p>The confidence threshold for triggering guardrail actions based on Automated Reasoning policy violations.</p>
     #   @return [Float]
     class GuardrailAutomatedReasoningPolicyConfig < Struct.new(
+      nil,
       :policies,
       :confidence_threshold,
       keyword_init: true
@@ -4598,6 +4815,7 @@ module Aws::Bedrock
     #   <p>The version of the guardrail.</p>
     #   @return [String]
     class GuardrailConfiguration < Struct.new(
+      nil,
       :guardrail_id,
       :guardrail_version,
       keyword_init: true
@@ -4634,6 +4852,7 @@ module Aws::Bedrock
     #   <p>Indicates whether guardrail evaluation is enabled on the output. When disabled, you aren't charged for the evaluation. The evaluation doesn't appear in the response.</p>
     #   @return [Boolean]
     class GuardrailContentFilter < Struct.new(
+      nil,
       :type,
       :input_strength,
       :output_strength,
@@ -4677,6 +4896,7 @@ module Aws::Bedrock
     #   <p>Specifies whether to enable guardrail evaluation on the output. When disabled, you aren't charged for the evaluation. The evaluation doesn't appear in the response.</p>
     #   @return [Boolean]
     class GuardrailContentFilterConfig < Struct.new(
+      nil,
       :type,
       :input_strength,
       :output_strength,
@@ -4696,6 +4916,7 @@ module Aws::Bedrock
     #   <p>The tier that your guardrail uses for content filters. Valid values include:</p> <ul> <li> <p> <code>CLASSIC</code> tier – Provides established guardrails functionality supporting English, French, and Spanish languages.</p> </li> <li> <p> <code>STANDARD</code> tier – Provides a more robust solution than the <code>CLASSIC</code> tier and has more comprehensive language support. This tier requires that your guardrail use <a href="https://docs.aws.amazon.com/bedrock/latest/userguide/guardrails-cross-region.html">cross-Region inference</a>.</p> </li> </ul>
     #   @return [String]
     class GuardrailContentFiltersTier < Struct.new(
+      nil,
       :tier_name,
       keyword_init: true
     )
@@ -4707,6 +4928,7 @@ module Aws::Bedrock
     #   <p>The tier that your guardrail uses for content filters. Valid values include:</p> <ul> <li> <p> <code>CLASSIC</code> tier – Provides established guardrails functionality supporting English, French, and Spanish languages.</p> </li> <li> <p> <code>STANDARD</code> tier – Provides a more robust solution than the <code>CLASSIC</code> tier and has more comprehensive language support. This tier requires that your guardrail use <a href="https://docs.aws.amazon.com/bedrock/latest/userguide/guardrails-cross-region.html">cross-Region inference</a>.</p> </li> </ul>
     #   @return [String]
     class GuardrailContentFiltersTierConfig < Struct.new(
+      nil,
       :tier_name,
       keyword_init: true
     )
@@ -4721,6 +4943,7 @@ module Aws::Bedrock
     #   <p>The tier that your guardrail uses for content filters.</p>
     #   @return [Types::GuardrailContentFiltersTier]
     class GuardrailContentPolicy < Struct.new(
+      nil,
       :filters,
       :tier,
       keyword_init: true
@@ -4736,6 +4959,7 @@ module Aws::Bedrock
     #   <p>The tier that your guardrail uses for content filters.</p>
     #   @return [Types::GuardrailContentFiltersTierConfig]
     class GuardrailContentPolicyConfig < Struct.new(
+      nil,
       :filters_config,
       :tier_config,
       keyword_init: true
@@ -4757,6 +4981,7 @@ module Aws::Bedrock
     #   <p>Indicates whether contextual grounding is enabled for evaluation. When disabled, you aren't charged for the evaluation. The evaluation doesn't appear in the response.</p>
     #   @return [Boolean]
     class GuardrailContextualGroundingFilter < Struct.new(
+      nil,
       :type,
       :threshold,
       :action,
@@ -4780,6 +5005,7 @@ module Aws::Bedrock
     #   <p>Specifies whether to enable contextual grounding evaluation. When disabled, you aren't charged for the evaluation. The evaluation doesn't appear in the response.</p>
     #   @return [Boolean]
     class GuardrailContextualGroundingFilterConfig < Struct.new(
+      nil,
       :type,
       :threshold,
       :action,
@@ -4794,6 +5020,7 @@ module Aws::Bedrock
     #   <p>The filter details for the guardrails contextual grounding policy.</p>
     #   @return [Array<Types::GuardrailContextualGroundingFilter>]
     class GuardrailContextualGroundingPolicy < Struct.new(
+      nil,
       :filters,
       keyword_init: true
     )
@@ -4805,6 +5032,7 @@ module Aws::Bedrock
     #   <p>The filter configuration details for the guardrails contextual grounding policy.</p>
     #   @return [Array<Types::GuardrailContextualGroundingFilterConfig>]
     class GuardrailContextualGroundingPolicyConfig < Struct.new(
+      nil,
       :filters_config,
       keyword_init: true
     )
@@ -4816,6 +5044,7 @@ module Aws::Bedrock
     #   <p>The ID or Amazon Resource Name (ARN) of the guardrail profile that your guardrail is using. Guardrail profile availability depends on your current Amazon Web Services Region. For more information, see the <a href="https://docs.aws.amazon.com/bedrock/latest/userguide/guardrails-cross-region-support.html">Amazon Bedrock User Guide</a>.</p>
     #   @return [String]
     class GuardrailCrossRegionConfig < Struct.new(
+      nil,
       :guardrail_profile_identifier,
       keyword_init: true
     )
@@ -4830,6 +5059,7 @@ module Aws::Bedrock
     #   <p>The Amazon Resource Name (ARN) of the guardrail profile that you're using with your guardrail.</p>
     #   @return [String]
     class GuardrailCrossRegionDetails < Struct.new(
+      nil,
       :guardrail_profile_id,
       :guardrail_profile_arn,
       keyword_init: true
@@ -4854,6 +5084,7 @@ module Aws::Bedrock
     #   <p>Indicates whether guardrail evaluation is enabled on the output. When disabled, you aren't charged for the evaluation. The evaluation doesn't appear in the response.</p>
     #   @return [Boolean]
     class GuardrailManagedWords < Struct.new(
+      nil,
       :type,
       :input_action,
       :output_action,
@@ -4881,6 +5112,7 @@ module Aws::Bedrock
     #   <p>Specifies whether to enable guardrail evaluation on the output. When disabled, you aren't charged for the evaluation. The evaluation doesn't appear in the response.</p>
     #   @return [Boolean]
     class GuardrailManagedWordsConfig < Struct.new(
+      nil,
       :type,
       :input_action,
       :output_action,
@@ -4911,6 +5143,7 @@ module Aws::Bedrock
     #   <p>Indicates whether guardrail evaluation is enabled on the output. When disabled, you aren't charged for the evaluation. The evaluation doesn't appear in the response.</p>
     #   @return [Boolean]
     class GuardrailPiiEntity < Struct.new(
+      nil,
       :type,
       :action,
       :input_action,
@@ -4942,6 +5175,7 @@ module Aws::Bedrock
     #   <p>Specifies whether to enable guardrail evaluation on the output. When disabled, you aren't charged for the evaluation. The evaluation doesn't appear in the response.</p>
     #   @return [Boolean]
     class GuardrailPiiEntityConfig < Struct.new(
+      nil,
       :type,
       :action,
       :input_action,
@@ -4979,6 +5213,7 @@ module Aws::Bedrock
     #   <p>Indicates whether guardrail evaluation is enabled on the output. When disabled, you aren't charged for the evaluation. The evaluation doesn't appear in the response.</p>
     #   @return [Boolean]
     class GuardrailRegex < Struct.new(
+      nil,
       :name,
       :description,
       :pattern,
@@ -5018,6 +5253,7 @@ module Aws::Bedrock
     #   <p>Specifies whether to enable guardrail evaluation on the output. When disabled, you aren't charged for the evaluation. The evaluation doesn't appear in the response.</p>
     #   @return [Boolean]
     class GuardrailRegexConfig < Struct.new(
+      nil,
       :name,
       :description,
       :pattern,
@@ -5039,6 +5275,7 @@ module Aws::Bedrock
     #   <p>The list of regular expressions configured for the guardrail.</p>
     #   @return [Array<Types::GuardrailRegex>]
     class GuardrailSensitiveInformationPolicy < Struct.new(
+      nil,
       :pii_entities,
       :regexes,
       keyword_init: true
@@ -5054,6 +5291,7 @@ module Aws::Bedrock
     #   <p>A list of regular expressions to configure to the guardrail.</p>
     #   @return [Array<Types::GuardrailRegexConfig>]
     class GuardrailSensitiveInformationPolicyConfig < Struct.new(
+      nil,
       :pii_entities_config,
       :regexes_config,
       keyword_init: true
@@ -5090,6 +5328,7 @@ module Aws::Bedrock
     #   <p>Details about the system-defined guardrail profile that you're using with your guardrail, including the guardrail profile ID and Amazon Resource Name (ARN).</p>
     #   @return [Types::GuardrailCrossRegionDetails]
     class GuardrailSummary < Struct.new(
+      nil,
       :id,
       :arn,
       :status,
@@ -5130,6 +5369,7 @@ module Aws::Bedrock
     #   <p>Indicates whether guardrail evaluation is enabled on the output. When disabled, you aren't charged for the evaluation. The evaluation doesn't appear in the response.</p>
     #   @return [Boolean]
     class GuardrailTopic < Struct.new(
+      nil,
       :name,
       :definition,
       :examples,
@@ -5169,6 +5409,7 @@ module Aws::Bedrock
     #   <p>Specifies whether to enable guardrail evaluation on the output. When disabled, you aren't charged for the evaluation. The evaluation doesn't appear in the response.</p>
     #   @return [Boolean]
     class GuardrailTopicConfig < Struct.new(
+      nil,
       :name,
       :definition,
       :examples,
@@ -5190,6 +5431,7 @@ module Aws::Bedrock
     #   <p>The tier that your guardrail uses for denied topic filters.</p>
     #   @return [Types::GuardrailTopicsTier]
     class GuardrailTopicPolicy < Struct.new(
+      nil,
       :topics,
       :tier,
       keyword_init: true
@@ -5205,6 +5447,7 @@ module Aws::Bedrock
     #   <p>The tier that your guardrail uses for denied topic filters.</p>
     #   @return [Types::GuardrailTopicsTierConfig]
     class GuardrailTopicPolicyConfig < Struct.new(
+      nil,
       :topics_config,
       :tier_config,
       keyword_init: true
@@ -5217,6 +5460,7 @@ module Aws::Bedrock
     #   <p>The tier that your guardrail uses for denied topic filters. Valid values include:</p> <ul> <li> <p> <code>CLASSIC</code> tier – Provides established guardrails functionality supporting English, French, and Spanish languages.</p> </li> <li> <p> <code>STANDARD</code> tier – Provides a more robust solution than the <code>CLASSIC</code> tier and has more comprehensive language support. This tier requires that your guardrail use <a href="https://docs.aws.amazon.com/bedrock/latest/userguide/guardrails-cross-region.html">cross-Region inference</a>.</p> </li> </ul>
     #   @return [String]
     class GuardrailTopicsTier < Struct.new(
+      nil,
       :tier_name,
       keyword_init: true
     )
@@ -5228,6 +5472,7 @@ module Aws::Bedrock
     #   <p>The tier that your guardrail uses for denied topic filters. Valid values include:</p> <ul> <li> <p> <code>CLASSIC</code> tier – Provides established guardrails functionality supporting English, French, and Spanish languages.</p> </li> <li> <p> <code>STANDARD</code> tier – Provides a more robust solution than the <code>CLASSIC</code> tier and has more comprehensive language support. This tier requires that your guardrail use <a href="https://docs.aws.amazon.com/bedrock/latest/userguide/guardrails-cross-region.html">cross-Region inference</a>.</p> </li> </ul>
     #   @return [String]
     class GuardrailTopicsTierConfig < Struct.new(
+      nil,
       :tier_name,
       keyword_init: true
     )
@@ -5251,6 +5496,7 @@ module Aws::Bedrock
     #   <p>Indicates whether guardrail evaluation is enabled on the output. When disabled, you aren't charged for the evaluation. The evaluation doesn't appear in the response.</p>
     #   @return [Boolean]
     class GuardrailWord < Struct.new(
+      nil,
       :text,
       :input_action,
       :output_action,
@@ -5278,6 +5524,7 @@ module Aws::Bedrock
     #   <p>Specifies whether to enable guardrail evaluation on the output. When disabled, you aren't charged for the evaluation. The evaluation doesn't appear in the response.</p>
     #   @return [Boolean]
     class GuardrailWordConfig < Struct.new(
+      nil,
       :text,
       :input_action,
       :output_action,
@@ -5296,6 +5543,7 @@ module Aws::Bedrock
     #   <p>A list of managed words configured for the guardrail.</p>
     #   @return [Array<Types::GuardrailManagedWords>]
     class GuardrailWordPolicy < Struct.new(
+      nil,
       :words,
       :managed_word_lists,
       keyword_init: true
@@ -5311,6 +5559,7 @@ module Aws::Bedrock
     #   <p>A list of managed words to configure for the guardrail.</p>
     #   @return [Array<Types::GuardrailManagedWordsConfig>]
     class GuardrailWordPolicyConfig < Struct.new(
+      nil,
       :words_config,
       :managed_word_lists_config,
       keyword_init: true
@@ -5329,6 +5578,7 @@ module Aws::Bedrock
     #   <p>Use to specify the metrics, task, and prompt dataset to be used in your model evaluation job.</p>
     #   @return [Array<Types::EvaluationDatasetMetricConfig>]
     class HumanEvaluationConfig < Struct.new(
+      nil,
       :human_workflow_config,
       :custom_metrics,
       :dataset_metric_configs,
@@ -5348,6 +5598,7 @@ module Aws::Bedrock
     #   <p>Choose how you want your human workers to evaluation your model. Valid values for rating methods are <code>ThumbsUpDown</code>, <code>IndividualLikertScale</code>,<code>ComparisonLikertScale</code>, <code>ComparisonChoice</code>, and <code>ComparisonRank</code> </p>
     #   @return [String]
     class HumanEvaluationCustomMetric < Struct.new(
+      nil,
       :name,
       :description,
       :rating_method,
@@ -5364,6 +5615,7 @@ module Aws::Bedrock
     #   <p>Instructions for the flow definition</p>
     #   @return [String]
     class HumanWorkflowConfig < Struct.new(
+      nil,
       :flow_definition_arn,
       :instructions,
       keyword_init: true
@@ -5379,6 +5631,7 @@ module Aws::Bedrock
     #   <p>The Amazon Resource Name (ARN) of the foundation model used for implicit filtering. This model processes the query to extract relevant filtering criteria.</p>
     #   @return [String]
     class ImplicitFilterConfiguration < Struct.new(
+      nil,
       :metadata_attributes,
       :model_arn,
       keyword_init: true
@@ -5403,6 +5656,7 @@ module Aws::Bedrock
     #   <p>The architecture of the imported model.</p>
     #   @return [String]
     class ImportedModelSummary < Struct.new(
+      nil,
       :model_arn,
       :model_name,
       :creation_time,
@@ -5418,6 +5672,7 @@ module Aws::Bedrock
     #   <p>The Amazon Resource Name (ARN) of the model.</p>
     #   @return [String]
     class InferenceProfileModel < Struct.new(
+      nil,
       :model_arn,
       keyword_init: true
     )
@@ -5468,6 +5723,7 @@ module Aws::Bedrock
     #   <p>The type of the inference profile. The following types are possible:</p> <ul> <li> <p> <code>SYSTEM_DEFINED</code> – The inference profile is defined by Amazon Bedrock. You can route inference requests across regions with these inference profiles.</p> </li> <li> <p> <code>APPLICATION</code> – The inference profile was created by a user. This type of inference profile can track metrics and costs when invoking the model in it. The inference profile may route requests to one or multiple regions.</p> </li> </ul>
     #   @return [String]
     class InferenceProfileSummary < Struct.new(
+      nil,
       :inference_profile_name,
       :description,
       :created_at,
@@ -5486,6 +5742,7 @@ module Aws::Bedrock
     # @!attribute message
     #   @return [String]
     class InternalServerException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -5518,6 +5775,7 @@ module Aws::Bedrock
     #   <p>Rules for filtering invocation logs based on request metadata.</p>
     #   @return [Types::RequestMetadataFilters]
     class InvocationLogsConfig < Struct.new(
+      nil,
       :use_prompt_response,
       :invocation_log_source,
       :request_metadata_filters,
@@ -5536,6 +5794,7 @@ module Aws::Bedrock
     #   <p>Contains configuration details for text generation using a language model via the <code>RetrieveAndGenerate</code> function.</p>
     #   @return [Types::TextInferenceConfig]
     class KbInferenceConfig < Struct.new(
+      nil,
       :text_inference_config,
       keyword_init: true
     )
@@ -5567,6 +5826,7 @@ module Aws::Bedrock
     #   <p>Contains configuration details for returning the results from the vector search.</p>
     #   @return [Types::KnowledgeBaseVectorSearchConfiguration]
     class KnowledgeBaseRetrievalConfiguration < Struct.new(
+      nil,
       :vector_search_configuration,
       keyword_init: true
     )
@@ -5590,6 +5850,7 @@ module Aws::Bedrock
     #   <p>Contains configuration details for the model to process the prompt prior to retrieval and response generation.</p>
     #   @return [Types::OrchestrationConfiguration]
     class KnowledgeBaseRetrieveAndGenerateConfiguration < Struct.new(
+      nil,
       :knowledge_base_id,
       :model_arn,
       :retrieval_configuration,
@@ -5617,6 +5878,7 @@ module Aws::Bedrock
     #   <p>Configuration for reranking search results in Knowledge Base vector searches. Reranking improves search relevance by reordering initial vector search results using more sophisticated relevance models.</p>
     #   @return [Types::VectorSearchRerankingConfiguration]
     class KnowledgeBaseVectorSearchConfiguration < Struct.new(
+      nil,
       :number_of_results,
       :override_search_type,
       :filter,
@@ -5632,6 +5894,7 @@ module Aws::Bedrock
     #   <p>URL to the legal term document.</p>
     #   @return [String]
     class LegalTerm < Struct.new(
+      nil,
       :url,
       keyword_init: true
     )
@@ -5648,6 +5911,7 @@ module Aws::Bedrock
     #   <p>The maximum number of policies to return in a single call.</p>
     #   @return [Integer]
     class ListAutomatedReasoningPoliciesRequest < Struct.new(
+      nil,
       :policy_arn,
       :next_token,
       :max_results,
@@ -5663,6 +5927,7 @@ module Aws::Bedrock
     #   <p>The pagination token to use in a subsequent request to retrieve the next page of results.</p>
     #   @return [String]
     class ListAutomatedReasoningPoliciesResponse < Struct.new(
+      nil,
       :automated_reasoning_policy_summaries,
       :next_token,
       keyword_init: true
@@ -5680,6 +5945,7 @@ module Aws::Bedrock
     #   <p>The maximum number of build workflows to return in a single response. Valid range is 1-100.</p>
     #   @return [Integer]
     class ListAutomatedReasoningPolicyBuildWorkflowsRequest < Struct.new(
+      nil,
       :policy_arn,
       :next_token,
       :max_results,
@@ -5695,6 +5961,7 @@ module Aws::Bedrock
     #   <p>A pagination token to use in subsequent requests to retrieve additional build workflows.</p>
     #   @return [String]
     class ListAutomatedReasoningPolicyBuildWorkflowsResponse < Struct.new(
+      nil,
       :automated_reasoning_policy_build_workflow_summaries,
       :next_token,
       keyword_init: true
@@ -5712,6 +5979,7 @@ module Aws::Bedrock
     #   <p>The maximum number of tests to return in a single call.</p>
     #   @return [Integer]
     class ListAutomatedReasoningPolicyTestCasesRequest < Struct.new(
+      nil,
       :policy_arn,
       :next_token,
       :max_results,
@@ -5727,6 +5995,7 @@ module Aws::Bedrock
     #   <p>The pagination token to use in a subsequent request to retrieve the next page of results.</p>
     #   @return [String]
     class ListAutomatedReasoningPolicyTestCasesResponse < Struct.new(
+      nil,
       :test_cases,
       :next_token,
       keyword_init: true
@@ -5747,6 +6016,7 @@ module Aws::Bedrock
     #   <p>The maximum number of test results to return in a single response. Valid range is 1-100.</p>
     #   @return [Integer]
     class ListAutomatedReasoningPolicyTestResultsRequest < Struct.new(
+      nil,
       :policy_arn,
       :build_workflow_id,
       :next_token,
@@ -5763,6 +6033,7 @@ module Aws::Bedrock
     #   <p>A pagination token to use in subsequent requests to retrieve additional test results.</p>
     #   @return [String]
     class ListAutomatedReasoningPolicyTestResultsResponse < Struct.new(
+      nil,
       :test_results,
       :next_token,
       keyword_init: true
@@ -5798,6 +6069,7 @@ module Aws::Bedrock
     #   <p>Filters deployments by the Amazon Resource Name (ARN) of the associated custom model.</p>
     #   @return [String]
     class ListCustomModelDeploymentsRequest < Struct.new(
+      nil,
       :created_before,
       :created_after,
       :name_contains,
@@ -5819,6 +6091,7 @@ module Aws::Bedrock
     #   <p>A list of custom model deployment summaries.</p>
     #   @return [Array<Types::CustomModelDeploymentSummary>]
     class ListCustomModelDeploymentsResponse < Struct.new(
+      nil,
       :next_token,
       :model_deployment_summaries,
       keyword_init: true
@@ -5860,6 +6133,7 @@ module Aws::Bedrock
     #   <p>The status of them model to filter results by. Possible values include:</p> <ul> <li> <p> <code>Creating</code> - Include only models that are currently being created and validated.</p> </li> <li> <p> <code>Active</code> - Include only models that have been successfully created and are ready for use.</p> </li> <li> <p> <code>Failed</code> - Include only models where the creation process failed.</p> </li> </ul> <p>If you don't specify a status, the API returns models in all states.</p>
     #   @return [String]
     class ListCustomModelsRequest < Struct.new(
+      nil,
       :creation_time_before,
       :creation_time_after,
       :name_contains,
@@ -5883,6 +6157,7 @@ module Aws::Bedrock
     #   <p>Model summaries.</p>
     #   @return [Array<Types::CustomModelSummary>]
     class ListCustomModelsResponse < Struct.new(
+      nil,
       :next_token,
       :model_summaries,
       keyword_init: true
@@ -5918,6 +6193,7 @@ module Aws::Bedrock
     #   <p>Specifies whether to sort the list of evaluation jobs by either ascending or descending order.</p>
     #   @return [String]
     class ListEvaluationJobsRequest < Struct.new(
+      nil,
       :creation_time_after,
       :creation_time_before,
       :status_equals,
@@ -5939,6 +6215,7 @@ module Aws::Bedrock
     #   <p>A list of summaries of the evaluation jobs.</p>
     #   @return [Array<Types::EvaluationSummary>]
     class ListEvaluationJobsResponse < Struct.new(
+      nil,
       :next_token,
       :job_summaries,
       keyword_init: true
@@ -5953,6 +6230,7 @@ module Aws::Bedrock
     #   <p>Type of offer associated with the model.</p>
     #   @return [String]
     class ListFoundationModelAgreementOffersRequest < Struct.new(
+      nil,
       :model_id,
       :offer_type,
       keyword_init: true
@@ -5967,6 +6245,7 @@ module Aws::Bedrock
     #   <p>List of the offers associated with the specified model.</p>
     #   @return [Array<Types::Offer>]
     class ListFoundationModelAgreementOffersResponse < Struct.new(
+      nil,
       :model_id,
       :offers,
       keyword_init: true
@@ -5987,6 +6266,7 @@ module Aws::Bedrock
     #   <p>Return models that support the inference type that you specify. For more information, see <a href="https://docs.aws.amazon.com/bedrock/latest/userguide/prov-throughput.html">Provisioned Throughput</a> in the <a href="https://docs.aws.amazon.com/bedrock/latest/userguide/what-is-service.html">Amazon Bedrock User Guide</a>.</p>
     #   @return [String]
     class ListFoundationModelsRequest < Struct.new(
+      nil,
       :by_provider,
       :by_customization_type,
       :by_output_modality,
@@ -6000,6 +6280,7 @@ module Aws::Bedrock
     #   <p>A list of Amazon Bedrock foundation models.</p>
     #   @return [Array<Types::FoundationModelSummary>]
     class ListFoundationModelsResponse < Struct.new(
+      nil,
       :model_summaries,
       keyword_init: true
     )
@@ -6016,6 +6297,7 @@ module Aws::Bedrock
     #   <p>If there are more results than were returned in the response, the response returns a <code>nextToken</code> that you can send in another <code>ListGuardrails</code> request to see the next batch of results.</p>
     #   @return [String]
     class ListGuardrailsRequest < Struct.new(
+      nil,
       :guardrail_identifier,
       :max_results,
       :next_token,
@@ -6031,6 +6313,7 @@ module Aws::Bedrock
     #   <p>If there are more results than were returned in the response, the response returns a <code>nextToken</code> that you can send in another <code>ListGuardrails</code> request to see the next batch of results.</p>
     #   @return [String]
     class ListGuardrailsResponse < Struct.new(
+      nil,
       :guardrails,
       :next_token,
       keyword_init: true
@@ -6060,6 +6343,7 @@ module Aws::Bedrock
     #   <p>Specifies whetehr to sort the results in ascending or descending order.</p>
     #   @return [String]
     class ListImportedModelsRequest < Struct.new(
+      nil,
       :creation_time_before,
       :creation_time_after,
       :name_contains,
@@ -6079,6 +6363,7 @@ module Aws::Bedrock
     #   <p>Model summaries.</p>
     #   @return [Array<Types::ImportedModelSummary>]
     class ListImportedModelsResponse < Struct.new(
+      nil,
       :next_token,
       :model_summaries,
       keyword_init: true
@@ -6096,6 +6381,7 @@ module Aws::Bedrock
     #   <p>Filters for inference profiles that match the type you specify.</p> <ul> <li> <p> <code>SYSTEM_DEFINED</code> – The inference profile is defined by Amazon Bedrock. You can route inference requests across regions with these inference profiles.</p> </li> <li> <p> <code>APPLICATION</code> – The inference profile was created by a user. This type of inference profile can track metrics and costs when invoking the model in it. The inference profile may route requests to one or multiple regions.</p> </li> </ul>
     #   @return [String]
     class ListInferenceProfilesRequest < Struct.new(
+      nil,
       :max_results,
       :next_token,
       :type_equals,
@@ -6111,6 +6397,7 @@ module Aws::Bedrock
     #   <p>If the total number of results is greater than the <code>maxResults</code> value provided in the request, use this token when making another request in the <code>nextToken</code> field to return the next batch of results.</p>
     #   @return [String]
     class ListInferenceProfilesResponse < Struct.new(
+      nil,
       :inference_profile_summaries,
       :next_token,
       keyword_init: true
@@ -6128,6 +6415,7 @@ module Aws::Bedrock
     #   <p>If specified, only endpoints for the given model source identifier are returned.</p>
     #   @return [String]
     class ListMarketplaceModelEndpointsRequest < Struct.new(
+      nil,
       :max_results,
       :next_token,
       :model_source_equals,
@@ -6143,6 +6431,7 @@ module Aws::Bedrock
     #   <p>The token for the next set of results. Use this token to get the next set of results.</p>
     #   @return [String]
     class ListMarketplaceModelEndpointsResponse < Struct.new(
+      nil,
       :marketplace_model_endpoints,
       :next_token,
       keyword_init: true
@@ -6181,6 +6470,7 @@ module Aws::Bedrock
     #   <p>Specifies whether to sort the results in ascending or descending order.</p>
     #   @return [String]
     class ListModelCopyJobsRequest < Struct.new(
+      nil,
       :creation_time_after,
       :creation_time_before,
       :status_equals,
@@ -6203,6 +6493,7 @@ module Aws::Bedrock
     #   <p>A list of information about each model copy job.</p>
     #   @return [Array<Types::ModelCopyJobSummary>]
     class ListModelCopyJobsResponse < Struct.new(
+      nil,
       :next_token,
       :model_copy_job_summaries,
       keyword_init: true
@@ -6235,6 +6526,7 @@ module Aws::Bedrock
     #   <p>The sort order of the results.</p>
     #   @return [String]
     class ListModelCustomizationJobsRequest < Struct.new(
+      nil,
       :creation_time_after,
       :creation_time_before,
       :status_equals,
@@ -6255,6 +6547,7 @@ module Aws::Bedrock
     #   <p>Job summaries.</p>
     #   @return [Array<Types::ModelCustomizationJobSummary>]
     class ListModelCustomizationJobsResponse < Struct.new(
+      nil,
       :next_token,
       :model_customization_job_summaries,
       keyword_init: true
@@ -6287,6 +6580,7 @@ module Aws::Bedrock
     #   <p>Specifies whether to sort the results in ascending or descending order.</p>
     #   @return [String]
     class ListModelImportJobsRequest < Struct.new(
+      nil,
       :creation_time_after,
       :creation_time_before,
       :status_equals,
@@ -6307,6 +6601,7 @@ module Aws::Bedrock
     #   <p>Import job summaries.</p>
     #   @return [Array<Types::ModelImportJobSummary>]
     class ListModelImportJobsResponse < Struct.new(
+      nil,
       :next_token,
       :model_import_job_summaries,
       keyword_init: true
@@ -6339,6 +6634,7 @@ module Aws::Bedrock
     #   <p>Specifies whether to sort the results by ascending or descending order.</p>
     #   @return [String]
     class ListModelInvocationJobsRequest < Struct.new(
+      nil,
       :submit_time_after,
       :submit_time_before,
       :status_equals,
@@ -6359,6 +6655,7 @@ module Aws::Bedrock
     #   <p>A list of items, each of which contains a summary about a batch inference job.</p>
     #   @return [Array<Types::ModelInvocationJobSummary>]
     class ListModelInvocationJobsResponse < Struct.new(
+      nil,
       :next_token,
       :invocation_job_summaries,
       keyword_init: true
@@ -6376,6 +6673,7 @@ module Aws::Bedrock
     #   <p>The type of the prompt routers, such as whether it's default or custom.</p>
     #   @return [String]
     class ListPromptRoutersRequest < Struct.new(
+      nil,
       :max_results,
       :next_token,
       :type,
@@ -6391,6 +6689,7 @@ module Aws::Bedrock
     #   <p>Specify the pagination token from a previous request to retrieve the next page of results.</p>
     #   @return [String]
     class ListPromptRoutersResponse < Struct.new(
+      nil,
       :prompt_router_summaries,
       :next_token,
       keyword_init: true
@@ -6426,6 +6725,7 @@ module Aws::Bedrock
     #   <p>The sort order of the results.</p>
     #   @return [String]
     class ListProvisionedModelThroughputsRequest < Struct.new(
+      nil,
       :creation_time_after,
       :creation_time_before,
       :status_equals,
@@ -6447,6 +6747,7 @@ module Aws::Bedrock
     #   <p>A list of summaries, one for each Provisioned Throughput in the response.</p>
     #   @return [Array<Types::ProvisionedModelSummary>]
     class ListProvisionedModelThroughputsResponse < Struct.new(
+      nil,
       :next_token,
       :provisioned_model_summaries,
       keyword_init: true
@@ -6458,6 +6759,7 @@ module Aws::Bedrock
     #   <p>The Amazon Resource Name (ARN) of the resource.</p>
     #   @return [String]
     class ListTagsForResourceRequest < Struct.new(
+      nil,
       :resource_arn,
       keyword_init: true
     )
@@ -6468,6 +6770,7 @@ module Aws::Bedrock
     #   <p>An array of the tags associated with this resource.</p>
     #   @return [Array<Types::Tag>]
     class ListTagsForResourceResponse < Struct.new(
+      nil,
       :tags,
       keyword_init: true
     )
@@ -6494,6 +6797,7 @@ module Aws::Bedrock
     #   <p>Set to include video data in the log delivery.</p>
     #   @return [Boolean]
     class LoggingConfig < Struct.new(
+      nil,
       :cloud_watch_config,
       :s3_config,
       :text_data_delivery_enabled,
@@ -6534,6 +6838,7 @@ module Aws::Bedrock
     #   <p>Additional information about the endpoint status, if available.</p>
     #   @return [String]
     class MarketplaceModelEndpoint < Struct.new(
+      nil,
       :endpoint_arn,
       :model_source_identifier,
       :status,
@@ -6568,6 +6873,7 @@ module Aws::Bedrock
     #   <p>The timestamp when the endpoint was last updated.</p>
     #   @return [Time]
     class MarketplaceModelEndpointSummary < Struct.new(
+      nil,
       :endpoint_arn,
       :model_source_identifier,
       :status,
@@ -6591,6 +6897,7 @@ module Aws::Bedrock
     #   <p>An optional description of the metadata attribute that provides additional context about its purpose and usage.</p>
     #   @return [String]
     class MetadataAttributeSchema < Struct.new(
+      nil,
       :key,
       :type,
       :description,
@@ -6607,6 +6914,7 @@ module Aws::Bedrock
     #   <p>Configuration for selective mode, which allows you to explicitly include or exclude specific metadata fields during reranking. This is only used when selectionMode is set to SELECTIVE.</p>
     #   @return [Types::RerankingMetadataSelectiveModeConfiguration]
     class MetadataConfigurationForReranking < Struct.new(
+      nil,
       :selection_mode,
       :selective_mode_configuration,
       keyword_init: true
@@ -6649,6 +6957,7 @@ module Aws::Bedrock
     #   <p>The name of the original model being copied.</p>
     #   @return [String]
     class ModelCopyJobSummary < Struct.new(
+      nil,
       :job_arn,
       :status,
       :creation_time,
@@ -6700,6 +7009,7 @@ module Aws::Bedrock
     #   <p>Specifies whether to carry out continued pre-training of a model or whether to fine-tune it. For more information, see <a href="https://docs.aws.amazon.com/bedrock/latest/userguide/custom-models.html">Custom models</a>.</p>
     #   @return [String]
     class ModelCustomizationJobSummary < Struct.new(
+      nil,
       :job_arn,
       :base_model_arn,
       :job_name,
@@ -6757,6 +7067,7 @@ module Aws::Bedrock
     #   <p>The name of the imported model.</p>
     #   @return [String]
     class ModelImportJobSummary < Struct.new(
+      nil,
       :job_arn,
       :job_name,
       :status,
@@ -6811,6 +7122,7 @@ module Aws::Bedrock
     #   <p>The ID of the Amazon Web Services account that owns the S3 bucket containing the input data.</p>
     #   @return [String]
     class ModelInvocationJobS3InputDataConfig < Struct.new(
+      nil,
       :s3_input_format,
       :s3_uri,
       :s3_bucket_owner,
@@ -6830,6 +7142,7 @@ module Aws::Bedrock
     #   <p>The ID of the Amazon Web Services account that owns the S3 bucket containing the output data.</p>
     #   @return [String]
     class ModelInvocationJobS3OutputDataConfig < Struct.new(
+      nil,
       :s3_uri,
       :s3_encryption_key_id,
       :s3_bucket_owner,
@@ -6885,6 +7198,7 @@ module Aws::Bedrock
     #   <p>The time at which the batch inference job times or timed out.</p>
     #   @return [Time]
     class ModelInvocationJobSummary < Struct.new(
+      nil,
       :job_arn,
       :job_name,
       :model_id,
@@ -6916,6 +7230,7 @@ module Aws::Bedrock
     #   <p>Details about the terms of the offer.</p>
     #   @return [Types::TermDetails]
     class Offer < Struct.new(
+      nil,
       :offer_id,
       :offer_token,
       :term_details,
@@ -6929,6 +7244,7 @@ module Aws::Bedrock
     #   <p>Contains configuration details for transforming the prompt.</p>
     #   @return [Types::QueryTransformationConfiguration]
     class OrchestrationConfiguration < Struct.new(
+      nil,
       :query_transformation_configuration,
       keyword_init: true
     )
@@ -6940,6 +7256,7 @@ module Aws::Bedrock
     #   <p>The S3 URI where the output data is stored.</p>
     #   @return [String]
     class OutputDataConfig < Struct.new(
+      nil,
       :s3_uri,
       keyword_init: true
     )
@@ -6951,6 +7268,7 @@ module Aws::Bedrock
     #   <p>Specifies whether to use the latency-optimized or standard version of a model or inference profile.</p>
     #   @return [String]
     class PerformanceConfiguration < Struct.new(
+      nil,
       :latency,
       keyword_init: true
     )
@@ -6962,6 +7280,7 @@ module Aws::Bedrock
     #   <p>Describes a usage price for each dimension.</p>
     #   @return [Array<Types::DimensionalPriceRate>]
     class PricingTerm < Struct.new(
+      nil,
       :rate_card,
       keyword_init: true
     )
@@ -7000,6 +7319,7 @@ module Aws::Bedrock
     #   <p>The summary's type.</p>
     #   @return [String]
     class PromptRouterSummary < Struct.new(
+      nil,
       :prompt_router_name,
       :routing_criteria,
       :description,
@@ -7020,6 +7340,7 @@ module Aws::Bedrock
     #   <p>The target model's ARN.</p>
     #   @return [String]
     class PromptRouterTargetModel < Struct.new(
+      nil,
       :model_arn,
       keyword_init: true
     )
@@ -7031,6 +7352,7 @@ module Aws::Bedrock
     #   <p>The template for the prompt that's sent to the model for response generation. You can include prompt placeholders, which become replaced before the prompt is sent to the model to provide instructions and context to the model. In addition, you can include XML tags to delineate meaningful sections of the prompt template.</p> <p>For more information, see <a href="https://docs.aws.amazon.com/bedrock/latest/userguide/kb-test-config.html">Knowledge base prompt template</a> and <a href="https://docs.anthropic.com/en/docs/build-with-claude/prompt-engineering/use-xml-tags">Use XML tags with Anthropic Claude models</a>.</p>
     #   @return [String]
     class PromptTemplate < Struct.new(
+      nil,
       :text_prompt_template,
       keyword_init: true
     )
@@ -7075,6 +7397,7 @@ module Aws::Bedrock
     #   <p>The time that the Provisioned Throughput was last modified. </p>
     #   @return [Time]
     class ProvisionedModelSummary < Struct.new(
+      nil,
       :provisioned_model_name,
       :provisioned_model_arn,
       :model_arn,
@@ -7096,6 +7419,7 @@ module Aws::Bedrock
     #   <p>The logging configuration values to set.</p>
     #   @return [Types::LoggingConfig]
     class PutModelInvocationLoggingConfigurationRequest < Struct.new(
+      nil,
       :logging_config,
       keyword_init: true
     )
@@ -7103,6 +7427,7 @@ module Aws::Bedrock
     end
 
     class PutModelInvocationLoggingConfigurationResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -7112,6 +7437,7 @@ module Aws::Bedrock
     #   <p>Put customer profile Request.</p>
     #   @return [String]
     class PutUseCaseForModelAccessRequest < Struct.new(
+      nil,
       :form_data,
       keyword_init: true
     )
@@ -7119,6 +7445,7 @@ module Aws::Bedrock
     end
 
     class PutUseCaseForModelAccessResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -7129,6 +7456,7 @@ module Aws::Bedrock
     #   <p>The type of transformation to apply to the prompt.</p>
     #   @return [String]
     class QueryTransformationConfiguration < Struct.new(
+      nil,
       :type,
       keyword_init: true
     )
@@ -7163,6 +7491,7 @@ module Aws::Bedrock
     #   <p>Defines the value for one rating in a custom metric rating scale.</p>
     #   @return [Types::RatingScaleItemValue]
     class RatingScaleItem < Struct.new(
+      nil,
       :definition,
       :value,
       keyword_init: true
@@ -7197,6 +7526,7 @@ module Aws::Bedrock
     #   <p>The ARN of the model from Amazon Bedrock Marketplace that is deployed on the endpoint.</p>
     #   @return [String]
     class RegisterMarketplaceModelEndpointRequest < Struct.new(
+      nil,
       :endpoint_identifier,
       :model_source_identifier,
       keyword_init: true
@@ -7208,6 +7538,7 @@ module Aws::Bedrock
     #   <p>Details about the registered endpoint.</p>
     #   @return [Types::MarketplaceModelEndpoint]
     class RegisterMarketplaceModelEndpointResponse < Struct.new(
+      nil,
       :marketplace_model_endpoint,
       keyword_init: true
     )
@@ -7222,6 +7553,7 @@ module Aws::Bedrock
     #   <p>Include results where the key does not equal the value.</p>
     #   @return [Hash<String, String>]
     class RequestMetadataBaseFilters < Struct.new(
+      nil,
       :equals,
       :not_equals,
       keyword_init: true
@@ -7283,6 +7615,7 @@ module Aws::Bedrock
     # @!attribute message
     #   @return [String]
     class ResourceInUseException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -7293,6 +7626,7 @@ module Aws::Bedrock
     # @!attribute message
     #   @return [String]
     class ResourceNotFoundException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -7386,6 +7720,7 @@ module Aws::Bedrock
     #   <p>The configuration for the external source wrapper object in the <code>retrieveAndGenerate</code> function.</p>
     #   @return [Types::ExternalSourcesRetrieveAndGenerateConfiguration]
     class RetrieveAndGenerateConfiguration < Struct.new(
+      nil,
       :type,
       :knowledge_base_configuration,
       :external_sources_configuration,
@@ -7402,6 +7737,7 @@ module Aws::Bedrock
     #   <p>Contains configuration details for knowledge base retrieval.</p>
     #   @return [Types::KnowledgeBaseRetrievalConfiguration]
     class RetrieveConfig < Struct.new(
+      nil,
       :knowledge_base_id,
       :knowledge_base_retrieval_configuration,
       keyword_init: true
@@ -7414,6 +7750,7 @@ module Aws::Bedrock
     #   <p>The criteria's response quality difference.</p>
     #   @return [Float]
     class RoutingCriteria < Struct.new(
+      nil,
       :response_quality_difference,
       keyword_init: true
     )
@@ -7428,6 +7765,7 @@ module Aws::Bedrock
     #   <p>S3 prefix. </p>
     #   @return [String]
     class S3Config < Struct.new(
+      nil,
       :bucket_name,
       :key_prefix,
       keyword_init: true
@@ -7440,6 +7778,7 @@ module Aws::Bedrock
     #   <p>The URI of the Amazon S3 data source.</p>
     #   @return [String]
     class S3DataSource < Struct.new(
+      nil,
       :s3_uri,
       keyword_init: true
     )
@@ -7451,6 +7790,7 @@ module Aws::Bedrock
     #   <p>The S3 URI location for the wrapper object of the document.</p>
     #   @return [String]
     class S3ObjectDoc < Struct.new(
+      nil,
       :uri,
       keyword_init: true
     )
@@ -7474,6 +7814,7 @@ module Aws::Bedrock
     #   <p>The VPC configuration for the endpoint.</p>
     #   @return [Types::VpcConfig]
     class SageMakerEndpoint < Struct.new(
+      nil,
       :initial_instance_count,
       :instance_type,
       :execution_role,
@@ -7488,6 +7829,7 @@ module Aws::Bedrock
     # @!attribute message
     #   @return [String]
     class ServiceQuotaExceededException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -7498,6 +7840,7 @@ module Aws::Bedrock
     # @!attribute message
     #   @return [String]
     class ServiceUnavailableException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -7517,6 +7860,7 @@ module Aws::Bedrock
     #   <p>The source content for the build workflow, such as documents to analyze or repair instructions for existing policies.</p>
     #   @return [Types::AutomatedReasoningPolicyBuildWorkflowSource]
     class StartAutomatedReasoningPolicyBuildWorkflowRequest < Struct.new(
+      nil,
       :policy_arn,
       :build_workflow_type,
       :client_request_token,
@@ -7533,6 +7877,7 @@ module Aws::Bedrock
     #   <p>The unique identifier of the newly started build workflow. Use this ID to track the workflow's progress and retrieve its results.</p>
     #   @return [String]
     class StartAutomatedReasoningPolicyBuildWorkflowResponse < Struct.new(
+      nil,
       :policy_arn,
       :build_workflow_id,
       keyword_init: true
@@ -7553,6 +7898,7 @@ module Aws::Bedrock
     #   <p>A unique, case-sensitive identifier to ensure that the operation completes no more than one time. If this token matches a previous request, Amazon Bedrock ignores the request but doesn't return an error.</p>
     #   @return [String]
     class StartAutomatedReasoningPolicyTestWorkflowRequest < Struct.new(
+      nil,
       :policy_arn,
       :build_workflow_id,
       :test_case_ids,
@@ -7566,6 +7912,7 @@ module Aws::Bedrock
     #   <p>The Amazon Resource Name (ARN) of the policy for which the test workflow was started.</p>
     #   @return [String]
     class StartAutomatedReasoningPolicyTestWorkflowResponse < Struct.new(
+      nil,
       :policy_arn,
       keyword_init: true
     )
@@ -7583,6 +7930,7 @@ module Aws::Bedrock
     #   <p>The status details for the training sub-task of the job.</p>
     #   @return [Types::TrainingDetails]
     class StatusDetails < Struct.new(
+      nil,
       :validation_details,
       :data_processing_details,
       :training_details,
@@ -7595,6 +7943,7 @@ module Aws::Bedrock
     #   <p>The Amazon Resource Name (ARN) of the evaluation job you want to stop.</p>
     #   @return [String]
     class StopEvaluationJobRequest < Struct.new(
+      nil,
       :job_identifier,
       keyword_init: true
     )
@@ -7602,6 +7951,7 @@ module Aws::Bedrock
     end
 
     class StopEvaluationJobResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -7611,6 +7961,7 @@ module Aws::Bedrock
     #   <p>Job identifier of the job to stop.</p>
     #   @return [String]
     class StopModelCustomizationJobRequest < Struct.new(
+      nil,
       :job_identifier,
       keyword_init: true
     )
@@ -7618,6 +7969,7 @@ module Aws::Bedrock
     end
 
     class StopModelCustomizationJobResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -7627,6 +7979,7 @@ module Aws::Bedrock
     #   <p>The Amazon Resource Name (ARN) of the batch inference job to stop.</p>
     #   @return [String]
     class StopModelInvocationJobRequest < Struct.new(
+      nil,
       :job_identifier,
       keyword_init: true
     )
@@ -7634,6 +7987,7 @@ module Aws::Bedrock
     end
 
     class StopModelInvocationJobResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -7644,6 +7998,7 @@ module Aws::Bedrock
     #   <p>Describes the refund policy.</p>
     #   @return [String]
     class SupportTerm < Struct.new(
+      nil,
       :refund_policy_description,
       keyword_init: true
     )
@@ -7658,6 +8013,7 @@ module Aws::Bedrock
     #   <p>Value for the tag.</p>
     #   @return [String]
     class Tag < Struct.new(
+      nil,
       :key,
       :value,
       keyword_init: true
@@ -7672,6 +8028,7 @@ module Aws::Bedrock
     #   <p>Tags to associate with the resource.</p>
     #   @return [Array<Types::Tag>]
     class TagResourceRequest < Struct.new(
+      nil,
       :resource_arn,
       :tags,
       keyword_init: true
@@ -7680,6 +8037,7 @@ module Aws::Bedrock
     end
 
     class TagResourceResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -7693,6 +8051,7 @@ module Aws::Bedrock
     #   <p>The maximum number of tokens requested when the customization job invokes the teacher model.</p>
     #   @return [Integer]
     class TeacherModelConfig < Struct.new(
+      nil,
       :teacher_model_identifier,
       :max_response_length_for_inference,
       keyword_init: true
@@ -7714,6 +8073,7 @@ module Aws::Bedrock
     #   <p>Describes the validity terms.</p>
     #   @return [Types::ValidityTerm]
     class TermDetails < Struct.new(
+      nil,
       :usage_based_pricing_term,
       :legal_term,
       :support_term,
@@ -7737,6 +8097,7 @@ module Aws::Bedrock
     #   <p>A list of sequences of characters that, if generated, will cause the model to stop generating further tokens. Do not use a minimum length of 1 or a maximum length of 1000. The limit values described here are arbitrary values, for actual values consult the limits defined by your specific model.</p>
     #   @return [Array<String>]
     class TextInferenceConfig < Struct.new(
+      nil,
       :temperature,
       :top_p,
       :max_tokens,
@@ -7750,6 +8111,7 @@ module Aws::Bedrock
     # @!attribute message
     #   @return [String]
     class ThrottlingException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -7763,6 +8125,7 @@ module Aws::Bedrock
     #   <p>The name of the resource with too many tags.</p>
     #   @return [String]
     class TooManyTagsException < Struct.new(
+      nil,
       :message,
       :resource_name,
       keyword_init: true
@@ -7778,6 +8141,7 @@ module Aws::Bedrock
     #   <p>Settings for using invocation logs to customize a model.</p>
     #   @return [Types::InvocationLogsConfig]
     class TrainingDataConfig < Struct.new(
+      nil,
       :s3_uri,
       :invocation_logs_config,
       keyword_init: true
@@ -7796,6 +8160,7 @@ module Aws::Bedrock
     #   <p>The latest update to the training sub-task of the job.</p>
     #   @return [Time]
     class TrainingDetails < Struct.new(
+      nil,
       :status,
       :creation_time,
       :last_modified_time,
@@ -7809,6 +8174,7 @@ module Aws::Bedrock
     #   <p>Loss metric associated with the custom job.</p>
     #   @return [Float]
     class TrainingMetrics < Struct.new(
+      nil,
       :training_loss,
       keyword_init: true
     )
@@ -7822,6 +8188,7 @@ module Aws::Bedrock
     #   <p>Tag keys of the tags to remove from the resource.</p>
     #   @return [Array<String>]
     class UntagResourceRequest < Struct.new(
+      nil,
       :resource_arn,
       :tag_keys,
       keyword_init: true
@@ -7830,6 +8197,7 @@ module Aws::Bedrock
     end
 
     class UntagResourceResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -7848,6 +8216,7 @@ module Aws::Bedrock
     #   <p>The hash value of the annotation set that you're updating. This is used for optimistic concurrency control to prevent conflicting updates.</p>
     #   @return [String]
     class UpdateAutomatedReasoningPolicyAnnotationsRequest < Struct.new(
+      nil,
       :policy_arn,
       :build_workflow_id,
       :annotations,
@@ -7870,6 +8239,7 @@ module Aws::Bedrock
     #   <p>The timestamp when the annotations were updated.</p>
     #   @return [Time]
     class UpdateAutomatedReasoningPolicyAnnotationsResponse < Struct.new(
+      nil,
       :policy_arn,
       :build_workflow_id,
       :annotation_set_hash,
@@ -7892,6 +8262,7 @@ module Aws::Bedrock
     #   <p>The updated description for the Automated Reasoning policy.</p>
     #   @return [String]
     class UpdateAutomatedReasoningPolicyRequest < Struct.new(
+      nil,
       :policy_arn,
       :policy_definition,
       :name,
@@ -7914,6 +8285,7 @@ module Aws::Bedrock
     #   <p>The timestamp when the policy was last updated.</p>
     #   @return [Time]
     class UpdateAutomatedReasoningPolicyResponse < Struct.new(
+      nil,
       :policy_arn,
       :name,
       :definition_hash,
@@ -7948,6 +8320,7 @@ module Aws::Bedrock
     #   <p>A unique, case-sensitive identifier to ensure that the operation completes no more than one time. If this token matches a previous request, Amazon Bedrock ignores the request, but does not return an error.</p>
     #   @return [String]
     class UpdateAutomatedReasoningPolicyTestCaseRequest < Struct.new(
+      nil,
       :policy_arn,
       :test_case_id,
       :guard_content,
@@ -7968,6 +8341,7 @@ module Aws::Bedrock
     #   <p>The unique identifier of the updated test.</p>
     #   @return [String]
     class UpdateAutomatedReasoningPolicyTestCaseResponse < Struct.new(
+      nil,
       :policy_arn,
       :test_case_id,
       keyword_init: true
@@ -8015,6 +8389,7 @@ module Aws::Bedrock
     #   <p>The ARN of the KMS key with which to encrypt the guardrail.</p>
     #   @return [String]
     class UpdateGuardrailRequest < Struct.new(
+      nil,
       :guardrail_identifier,
       :name,
       :description,
@@ -8046,6 +8421,7 @@ module Aws::Bedrock
     #   <p>The date and time at which the guardrail was updated.</p>
     #   @return [Time]
     class UpdateGuardrailResponse < Struct.new(
+      nil,
       :guardrail_id,
       :guardrail_arn,
       :version,
@@ -8065,6 +8441,7 @@ module Aws::Bedrock
     #   <p>A unique, case-sensitive identifier that you provide to ensure the idempotency of the request. This token is listed as not required because Amazon Web Services SDKs automatically generate it for you and set this parameter. If you're not using the Amazon Web Services SDK or the CLI, you must provide this token or the action will fail.</p>
     #   @return [String]
     class UpdateMarketplaceModelEndpointRequest < Struct.new(
+      nil,
       :endpoint_arn,
       :endpoint_config,
       :client_request_token,
@@ -8077,6 +8454,7 @@ module Aws::Bedrock
     #   <p>Details about the updated endpoint.</p>
     #   @return [Types::MarketplaceModelEndpoint]
     class UpdateMarketplaceModelEndpointResponse < Struct.new(
+      nil,
       :marketplace_model_endpoint,
       keyword_init: true
     )
@@ -8093,6 +8471,7 @@ module Aws::Bedrock
     #   <p>The Amazon Resource Name (ARN) of the new model to associate with this Provisioned Throughput. You can't specify this field if this Provisioned Throughput is associated with a base model.</p> <p>If this Provisioned Throughput is associated with a custom model, you can specify one of the following options:</p> <ul> <li> <p>The base model from which the custom model was customized.</p> </li> <li> <p>Another custom model that was customized from the same base model as the custom model.</p> </li> </ul>
     #   @return [String]
     class UpdateProvisionedModelThroughputRequest < Struct.new(
+      nil,
       :provisioned_model_id,
       :desired_provisioned_model_name,
       :desired_model_id,
@@ -8102,6 +8481,7 @@ module Aws::Bedrock
     end
 
     class UpdateProvisionedModelThroughputResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -8112,6 +8492,7 @@ module Aws::Bedrock
     #   <p>Information about the validators.</p>
     #   @return [Array<Types::Validator>]
     class ValidationDataConfig < Struct.new(
+      nil,
       :validators,
       keyword_init: true
     )
@@ -8129,6 +8510,7 @@ module Aws::Bedrock
     #   <p>The latest update to the validation sub-task of the job.</p>
     #   @return [Time]
     class ValidationDetails < Struct.new(
+      nil,
       :status,
       :creation_time,
       :last_modified_time,
@@ -8141,6 +8523,7 @@ module Aws::Bedrock
     # @!attribute message
     #   @return [String]
     class ValidationException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -8152,6 +8535,7 @@ module Aws::Bedrock
     #   <p>The S3 URI where the validation data is stored.</p>
     #   @return [String]
     class Validator < Struct.new(
+      nil,
       :s3_uri,
       keyword_init: true
     )
@@ -8163,6 +8547,7 @@ module Aws::Bedrock
     #   <p>The validation loss associated with this validator.</p>
     #   @return [Float]
     class ValidatorMetric < Struct.new(
+      nil,
       :validation_loss,
       keyword_init: true
     )
@@ -8174,6 +8559,7 @@ module Aws::Bedrock
     #   <p>Describes the agreement duration.</p>
     #   @return [String]
     class ValidityTerm < Struct.new(
+      nil,
       :agreement_duration,
       keyword_init: true
     )
@@ -8191,6 +8577,7 @@ module Aws::Bedrock
     #   <p>Configuration for how document metadata should be used during the reranking process. This determines which metadata fields are included when reordering search results.</p>
     #   @return [Types::MetadataConfigurationForReranking]
     class VectorSearchBedrockRerankingConfiguration < Struct.new(
+      nil,
       :model_configuration,
       :number_of_reranked_results,
       :metadata_configuration,
@@ -8207,6 +8594,7 @@ module Aws::Bedrock
     #   <p>A list of additional fields to include in the model request during reranking. These fields provide extra context or configuration options specific to the selected foundation model.</p>
     #   @return [Hash<String, JSON>]
     class VectorSearchBedrockRerankingModelConfiguration < Struct.new(
+      nil,
       :model_arn,
       :additional_model_request_fields,
       keyword_init: true
@@ -8222,6 +8610,7 @@ module Aws::Bedrock
     #   <p>Configuration for using Amazon Bedrock foundation models to rerank search results. This is required when the reranking type is set to BEDROCK.</p>
     #   @return [Types::VectorSearchBedrockRerankingConfiguration]
     class VectorSearchRerankingConfiguration < Struct.new(
+      nil,
       :type,
       :bedrock_reranking_configuration,
       keyword_init: true
@@ -8237,6 +8626,7 @@ module Aws::Bedrock
     #   <p>An array of IDs for each security group in the VPC to use.</p>
     #   @return [Array<String>]
     class VpcConfig < Struct.new(
+      nil,
       :subnet_ids,
       :security_group_ids,
       keyword_init: true

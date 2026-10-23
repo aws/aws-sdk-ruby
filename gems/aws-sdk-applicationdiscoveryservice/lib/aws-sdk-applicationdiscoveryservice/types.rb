@@ -22,6 +22,7 @@ module Aws::ApplicationDiscoveryService
     #   <p>A description of the operation performed.</p>
     #   @return [String]
     class AgentConfigurationStatus < Struct.new(
+      nil,
       :agent_id,
       :operation_succeeded,
       :description,
@@ -71,6 +72,7 @@ module Aws::ApplicationDiscoveryService
     #   <p>Agent's first registration timestamp in UTC.</p>
     #   @return [String]
     class AgentInfo < Struct.new(
+      nil,
       :agent_id,
       :host_name,
       :agent_network_info_list,
@@ -95,6 +97,7 @@ module Aws::ApplicationDiscoveryService
     #   <p>The MAC address for the host where the agent/collector resides.</p>
     #   @return [String]
     class AgentNetworkInfo < Struct.new(
+      nil,
       :ip_address,
       :mac_address,
       keyword_init: true
@@ -109,6 +112,7 @@ module Aws::ApplicationDiscoveryService
     #   <p>The ID of each configuration item to be associated with an application.</p>
     #   @return [Array<String>]
     class AssociateConfigurationItemsToApplicationRequest < Struct.new(
+      nil,
       :application_configuration_id,
       :configuration_ids,
       keyword_init: true
@@ -117,6 +121,7 @@ module Aws::ApplicationDiscoveryService
     end
 
     class AssociateConfigurationItemsToApplicationResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -127,6 +132,7 @@ module Aws::ApplicationDiscoveryService
     # @!attribute message
     #   @return [String]
     class AuthorizationErrorException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -154,6 +160,7 @@ module Aws::ApplicationDiscoveryService
     #       </p>
     #   @return [String]
     class BatchDeleteAgentError < Struct.new(
+      nil,
       :agent_id,
       :error_message,
       :error_code,
@@ -168,6 +175,7 @@ module Aws::ApplicationDiscoveryService
     #       </p>
     #   @return [Array<Types::DeleteAgent>]
     class BatchDeleteAgentsRequest < Struct.new(
+      nil,
       :delete_agents,
       keyword_init: true
     )
@@ -180,6 +188,7 @@ module Aws::ApplicationDiscoveryService
     #       </p>
     #   @return [Array<Types::BatchDeleteAgentError>]
     class BatchDeleteAgentsResponse < Struct.new(
+      nil,
       :errors,
       keyword_init: true
     )
@@ -238,6 +247,7 @@ module Aws::ApplicationDiscoveryService
     #       </p>
     #   @return [Array<Types::DeletionWarning>]
     class BatchDeleteConfigurationTask < Struct.new(
+      nil,
       :task_id,
       :status,
       :start_time,
@@ -264,6 +274,7 @@ module Aws::ApplicationDiscoveryService
     #   <p>The description of the error that occurred for a specific import task.</p>
     #   @return [String]
     class BatchDeleteImportDataError < Struct.new(
+      nil,
       :import_task_id,
       :error_code,
       :error_description,
@@ -282,6 +293,7 @@ module Aws::ApplicationDiscoveryService
     #       </p>
     #   @return [Boolean]
     class BatchDeleteImportDataRequest < Struct.new(
+      nil,
       :import_task_ids,
       :delete_history,
       keyword_init: true
@@ -294,6 +306,7 @@ module Aws::ApplicationDiscoveryService
     #         command.</p>
     #   @return [Array<Types::BatchDeleteImportDataError>]
     class BatchDeleteImportDataResponse < Struct.new(
+      nil,
       :errors,
       keyword_init: true
     )
@@ -322,6 +335,7 @@ module Aws::ApplicationDiscoveryService
     #         (UTC).</p>
     #   @return [Time]
     class ConfigurationTag < Struct.new(
+      nil,
       :configuration_type,
       :configuration_id,
       :key,
@@ -336,6 +350,7 @@ module Aws::ApplicationDiscoveryService
     # @!attribute message
     #   @return [String]
     class ConflictErrorException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -478,6 +493,7 @@ module Aws::ApplicationDiscoveryService
     #            </ul>
     #   @return [Hash<String, String>]
     class ContinuousExportDescription < Struct.new(
+      nil,
       :export_id,
       :status,
       :status_detail,
@@ -501,6 +517,7 @@ module Aws::ApplicationDiscoveryService
     #   <p>The name of the migration wave of the application to be created.</p>
     #   @return [String]
     class CreateApplicationRequest < Struct.new(
+      nil,
       :name,
       :description,
       :wave,
@@ -513,6 +530,7 @@ module Aws::ApplicationDiscoveryService
     #   <p>The configuration ID of an application to be created.</p>
     #   @return [String]
     class CreateApplicationResponse < Struct.new(
+      nil,
       :configuration_id,
       keyword_init: true
     )
@@ -531,6 +549,7 @@ module Aws::ApplicationDiscoveryService
     #            </p>
     #   @return [Array<Types::Tag>]
     class CreateTagsRequest < Struct.new(
+      nil,
       :configuration_ids,
       :tags,
       keyword_init: true
@@ -539,6 +558,7 @@ module Aws::ApplicationDiscoveryService
     end
 
     class CreateTagsResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -567,6 +587,7 @@ module Aws::ApplicationDiscoveryService
     #   <p>Number of unknown discovery agents.</p>
     #   @return [Integer]
     class CustomerAgentInfo < Struct.new(
+      nil,
       :active_agents,
       :healthy_agents,
       :black_listed_agents,
@@ -614,6 +635,7 @@ module Aws::ApplicationDiscoveryService
     #   <p> The number of unknown Agentless Collector collectors. </p>
     #   @return [Integer]
     class CustomerAgentlessCollectorInfo < Struct.new(
+      nil,
       :active_agentless_collectors,
       :healthy_agentless_collectors,
       :deny_listed_agentless_collectors,
@@ -660,6 +682,7 @@ module Aws::ApplicationDiscoveryService
     #   <p>Number of unknown discovery connectors.</p>
     #   @return [Integer]
     class CustomerConnectorInfo < Struct.new(
+      nil,
       :active_connectors,
       :healthy_connectors,
       :black_listed_connectors,
@@ -706,6 +729,7 @@ module Aws::ApplicationDiscoveryService
     #   <p> The number of unknown Migration Evaluator collectors. </p>
     #   @return [Integer]
     class CustomerMeCollectorInfo < Struct.new(
+      nil,
       :active_me_collectors,
       :healthy_me_collectors,
       :deny_listed_me_collectors,
@@ -746,6 +770,7 @@ module Aws::ApplicationDiscoveryService
     #       </p>
     #   @return [Boolean]
     class DeleteAgent < Struct.new(
+      nil,
       :agent_id,
       :force,
       keyword_init: true
@@ -762,6 +787,7 @@ module Aws::ApplicationDiscoveryService
     #   <p>Configuration ID of an application to be deleted.</p>
     #   @return [Array<String>]
     class DeleteApplicationsRequest < Struct.new(
+      nil,
       :configuration_ids,
       keyword_init: true
     )
@@ -769,6 +795,7 @@ module Aws::ApplicationDiscoveryService
     end
 
     class DeleteApplicationsResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -786,6 +813,7 @@ module Aws::ApplicationDiscoveryService
     #            </p>
     #   @return [Array<Types::Tag>]
     class DeleteTagsRequest < Struct.new(
+      nil,
       :configuration_ids,
       :tags,
       keyword_init: true
@@ -794,6 +822,7 @@ module Aws::ApplicationDiscoveryService
     end
 
     class DeleteTagsResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -818,6 +847,7 @@ module Aws::ApplicationDiscoveryService
     #       </p>
     #   @return [String]
     class DeletionWarning < Struct.new(
+      nil,
       :configuration_id,
       :warning_code,
       :warning_text,
@@ -853,6 +883,7 @@ module Aws::ApplicationDiscoveryService
     #         with a token. Use that token in this query to get the next set of 10.</p>
     #   @return [String]
     class DescribeAgentsRequest < Struct.new(
+      nil,
       :agent_ids,
       :filters,
       :max_results,
@@ -875,6 +906,7 @@ module Aws::ApplicationDiscoveryService
     #         with this token. Use this token in the next query to retrieve the next set of 10.</p>
     #   @return [String]
     class DescribeAgentsResponse < Struct.new(
+      nil,
       :agents_info,
       :next_token,
       keyword_init: true
@@ -888,6 +920,7 @@ module Aws::ApplicationDiscoveryService
     #         </p>
     #   @return [String]
     class DescribeBatchDeleteConfigurationTaskRequest < Struct.new(
+      nil,
       :task_id,
       keyword_init: true
     )
@@ -900,6 +933,7 @@ module Aws::ApplicationDiscoveryService
     #         </p>
     #   @return [Types::BatchDeleteConfigurationTask]
     class DescribeBatchDeleteConfigurationTaskResponse < Struct.new(
+      nil,
       :task,
       keyword_init: true
     )
@@ -910,6 +944,7 @@ module Aws::ApplicationDiscoveryService
     #   <p>One or more configuration IDs.</p>
     #   @return [Array<String>]
     class DescribeConfigurationsRequest < Struct.new(
+      nil,
       :configuration_ids,
       keyword_init: true
     )
@@ -920,6 +955,7 @@ module Aws::ApplicationDiscoveryService
     #   <p>A key in the response map. The value is an array of data.</p>
     #   @return [Array<Hash<String, String>>]
     class DescribeConfigurationsResponse < Struct.new(
+      nil,
       :configurations,
       keyword_init: true
     )
@@ -937,6 +973,7 @@ module Aws::ApplicationDiscoveryService
     #   <p>The token from the previous call to <code>DescribeExportTasks</code>.</p>
     #   @return [String]
     class DescribeContinuousExportsRequest < Struct.new(
+      nil,
       :export_ids,
       :max_results,
       :next_token,
@@ -952,6 +989,7 @@ module Aws::ApplicationDiscoveryService
     #   <p>The token from the previous call to <code>DescribeExportTasks</code>.</p>
     #   @return [String]
     class DescribeContinuousExportsResponse < Struct.new(
+      nil,
       :descriptions,
       :next_token,
       keyword_init: true
@@ -970,6 +1008,7 @@ module Aws::ApplicationDiscoveryService
     #   <p>The token from the previous call to describe-export-tasks.</p>
     #   @return [String]
     class DescribeExportConfigurationsRequest < Struct.new(
+      nil,
       :export_ids,
       :max_results,
       :next_token,
@@ -985,6 +1024,7 @@ module Aws::ApplicationDiscoveryService
     #   <p>The token from the previous call to describe-export-tasks.</p>
     #   @return [String]
     class DescribeExportConfigurationsResponse < Struct.new(
+      nil,
       :exports_info,
       :next_token,
       keyword_init: true
@@ -1019,6 +1059,7 @@ module Aws::ApplicationDiscoveryService
     #         are no more results to return.</p>
     #   @return [String]
     class DescribeExportTasksRequest < Struct.new(
+      nil,
       :export_ids,
       :filters,
       :max_results,
@@ -1041,6 +1082,7 @@ module Aws::ApplicationDiscoveryService
     #         to return.</p>
     #   @return [String]
     class DescribeExportTasksResponse < Struct.new(
+      nil,
       :exports_info,
       :next_token,
       keyword_init: true
@@ -1060,6 +1102,7 @@ module Aws::ApplicationDiscoveryService
     #   <p>The token to request a specific page of results.</p>
     #   @return [String]
     class DescribeImportTasksRequest < Struct.new(
+      nil,
       :filters,
       :max_results,
       :next_token,
@@ -1076,6 +1119,7 @@ module Aws::ApplicationDiscoveryService
     #         number of maximum results.</p>
     #   @return [Array<Types::ImportTask>]
     class DescribeImportTasksResponse < Struct.new(
+      nil,
       :next_token,
       :tasks,
       keyword_init: true
@@ -1096,6 +1140,7 @@ module Aws::ApplicationDiscoveryService
     #   <p>A token to start the list. Use this token to get the next set of results.</p>
     #   @return [String]
     class DescribeTagsRequest < Struct.new(
+      nil,
       :filters,
       :max_results,
       :next_token,
@@ -1112,6 +1157,7 @@ module Aws::ApplicationDiscoveryService
     #   <p>The call returns a token. Use this token to get the next set of results.</p>
     #   @return [String]
     class DescribeTagsResponse < Struct.new(
+      nil,
       :tags,
       :next_token,
       keyword_init: true
@@ -1126,6 +1172,7 @@ module Aws::ApplicationDiscoveryService
     #   <p>Configuration ID of each item to be disassociated from an application.</p>
     #   @return [Array<String>]
     class DisassociateConfigurationItemsFromApplicationRequest < Struct.new(
+      nil,
       :application_configuration_id,
       :configuration_ids,
       keyword_init: true
@@ -1134,6 +1181,7 @@ module Aws::ApplicationDiscoveryService
     end
 
     class DisassociateConfigurationItemsFromApplicationResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1184,6 +1232,7 @@ module Aws::ApplicationDiscoveryService
     #       </p>
     #   @return [Types::ReservedInstanceOptions]
     class Ec2RecommendationsExportPreferences < Struct.new(
+      nil,
       :enabled,
       :cpu_performance_metric_basis,
       :ram_performance_metric_basis,
@@ -1205,6 +1254,7 @@ module Aws::ApplicationDiscoveryService
     #   <p>A unique identifier that you can use to query the export status.</p>
     #   @return [String]
     class ExportConfigurationsResponse < Struct.new(
+      nil,
       :export_id,
       keyword_init: true
     )
@@ -1226,6 +1276,7 @@ module Aws::ApplicationDiscoveryService
     #            </p>
     #   @return [String]
     class ExportFilter < Struct.new(
+      nil,
       :name,
       :values,
       :condition,
@@ -1269,6 +1320,7 @@ module Aws::ApplicationDiscoveryService
     #         <code>ExportInfo</code>.</p>
     #   @return [Time]
     class ExportInfo < Struct.new(
+      nil,
       :export_id,
       :export_status,
       :status_message,
@@ -1328,6 +1380,7 @@ module Aws::ApplicationDiscoveryService
     #       </p>
     #   @return [String]
     class FailedConfiguration < Struct.new(
+      nil,
       :configuration_id,
       :error_status_code,
       :error_message,
@@ -1362,6 +1415,7 @@ module Aws::ApplicationDiscoveryService
     #         returns attributes of matching configuration items.</p>
     #   @return [String]
     class Filter < Struct.new(
+      nil,
       :name,
       :values,
       :condition,
@@ -1371,6 +1425,7 @@ module Aws::ApplicationDiscoveryService
     end
 
     class GetDiscoverySummaryRequest < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1401,6 +1456,7 @@ module Aws::ApplicationDiscoveryService
     #   <p> Details about Agentless Collector collectors, including status. </p>
     #   @return [Types::CustomerAgentlessCollectorInfo]
     class GetDiscoverySummaryResponse < Struct.new(
+      nil,
       :servers,
       :applications,
       :servers_mapped_to_applications,
@@ -1426,6 +1482,7 @@ module Aws::ApplicationDiscoveryService
     # @!attribute message
     #   @return [String]
     class HomeRegionNotSetException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -1500,6 +1557,7 @@ module Aws::ApplicationDiscoveryService
     #         to correct and update the larger original file and attempt importing it again.</p>
     #   @return [String]
     class ImportTask < Struct.new(
+      nil,
       :import_task_id,
       :client_request_token,
       :name,
@@ -1540,6 +1598,7 @@ module Aws::ApplicationDiscoveryService
     #         import task ID to filter the results for your import task queries.</p>
     #   @return [Array<String>]
     class ImportTaskFilter < Struct.new(
+      nil,
       :name,
       :values,
       keyword_init: true
@@ -1551,6 +1610,7 @@ module Aws::ApplicationDiscoveryService
     # @!attribute message
     #   @return [String]
     class InvalidParameterException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -1562,6 +1622,7 @@ module Aws::ApplicationDiscoveryService
     # @!attribute message
     #   @return [String]
     class InvalidParameterValueException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -1574,6 +1635,7 @@ module Aws::ApplicationDiscoveryService
     # @!attribute message
     #   @return [String]
     class LimitExceededException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -1608,6 +1670,7 @@ module Aws::ApplicationDiscoveryService
     #           Service User Guide</i>.</p>
     #   @return [Array<Types::OrderByElement>]
     class ListConfigurationsRequest < Struct.new(
+      nil,
       :configuration_type,
       :filters,
       :max_results,
@@ -1630,6 +1693,7 @@ module Aws::ApplicationDiscoveryService
     #         10.</p>
     #   @return [String]
     class ListConfigurationsResponse < Struct.new(
+      nil,
       :configurations,
       :next_token,
       keyword_init: true
@@ -1657,6 +1721,7 @@ module Aws::ApplicationDiscoveryService
     #         along with a token. Use that token in this query to get the next set of 10.</p>
     #   @return [String]
     class ListServerNeighborsRequest < Struct.new(
+      nil,
       :configuration_id,
       :port_information_needed,
       :neighbor_configuration_ids,
@@ -1681,6 +1746,7 @@ module Aws::ApplicationDiscoveryService
     #   <p>Count of distinct servers that are one hop away from the given server.</p>
     #   @return [Integer]
     class ListServerNeighborsResponse < Struct.new(
+      nil,
       :neighbors,
       :next_token,
       :known_dependency_count,
@@ -1711,6 +1777,7 @@ module Aws::ApplicationDiscoveryService
     #   <p>The number of open network connections with the neighboring server.</p>
     #   @return [Integer]
     class NeighborConnectionDetail < Struct.new(
+      nil,
       :source_server_id,
       :destination_server_id,
       :destination_port,
@@ -1730,6 +1797,7 @@ module Aws::ApplicationDiscoveryService
     # @!attribute message
     #   @return [String]
     class OperationNotPermittedException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -1744,6 +1812,7 @@ module Aws::ApplicationDiscoveryService
     #   <p>Ordering direction.</p>
     #   @return [String]
     class OrderByElement < Struct.new(
+      nil,
       :field_name,
       :sort_order,
       keyword_init: true
@@ -1770,6 +1839,7 @@ module Aws::ApplicationDiscoveryService
     #       </p>
     #   @return [String]
     class ReservedInstanceOptions < Struct.new(
+      nil,
       :purchasing_option,
       :offering_class,
       :term_length,
@@ -1786,6 +1856,7 @@ module Aws::ApplicationDiscoveryService
     # @!attribute message
     #   @return [String]
     class ResourceInUseException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -1797,6 +1868,7 @@ module Aws::ApplicationDiscoveryService
     # @!attribute message
     #   @return [String]
     class ResourceNotFoundException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -1807,6 +1879,7 @@ module Aws::ApplicationDiscoveryService
     # @!attribute message
     #   @return [String]
     class ServerInternalErrorException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -1824,6 +1897,7 @@ module Aws::ApplicationDiscoveryService
     #         </p>
     #   @return [Array<String>]
     class StartBatchDeleteConfigurationTaskRequest < Struct.new(
+      nil,
       :configuration_type,
       :configuration_ids,
       keyword_init: true
@@ -1837,6 +1911,7 @@ module Aws::ApplicationDiscoveryService
     #         </p>
     #   @return [String]
     class StartBatchDeleteConfigurationTaskResponse < Struct.new(
+      nil,
       :task_id,
       keyword_init: true
     )
@@ -1844,6 +1919,7 @@ module Aws::ApplicationDiscoveryService
     end
 
     class StartContinuousExportRequest < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1873,6 +1949,7 @@ module Aws::ApplicationDiscoveryService
     #            </ul>
     #   @return [Hash<String, String>]
     class StartContinuousExportResponse < Struct.new(
+      nil,
       :export_id,
       :s3_bucket,
       :start_time,
@@ -1893,6 +1970,7 @@ module Aws::ApplicationDiscoveryService
     #         field.</p>
     #   @return [Array<String>]
     class StartDataCollectionByAgentIdsRequest < Struct.new(
+      nil,
       :agent_ids,
       keyword_init: true
     )
@@ -1905,6 +1983,7 @@ module Aws::ApplicationDiscoveryService
     #         configuration was updated.</p>
     #   @return [Array<Types::AgentConfigurationStatus>]
     class StartDataCollectionByAgentIdsResponse < Struct.new(
+      nil,
       :agents_configuration_status,
       keyword_init: true
     )
@@ -1944,6 +2023,7 @@ module Aws::ApplicationDiscoveryService
     #       </p>
     #   @return [Types::ExportPreferences]
     class StartExportTaskRequest < Struct.new(
+      nil,
       :export_data_format,
       :filters,
       :start_time,
@@ -1958,6 +2038,7 @@ module Aws::ApplicationDiscoveryService
     #   <p>A unique identifier used to query the status of an export request.</p>
     #   @return [String]
     class StartExportTaskResponse < Struct.new(
+      nil,
       :export_id,
       keyword_init: true
     )
@@ -1986,6 +2067,7 @@ module Aws::ApplicationDiscoveryService
     #            </note>
     #   @return [String]
     class StartImportTaskRequest < Struct.new(
+      nil,
       :client_request_token,
       :name,
       :import_url,
@@ -1999,6 +2081,7 @@ module Aws::ApplicationDiscoveryService
     #         times, IDs, the Amazon S3 Object URL for the import file, and more. </p>
     #   @return [Types::ImportTask]
     class StartImportTaskResponse < Struct.new(
+      nil,
       :task,
       keyword_init: true
     )
@@ -2009,6 +2092,7 @@ module Aws::ApplicationDiscoveryService
     #   <p>The unique ID assigned to this export.</p>
     #   @return [String]
     class StopContinuousExportRequest < Struct.new(
+      nil,
       :export_id,
       keyword_init: true
     )
@@ -2023,6 +2107,7 @@ module Aws::ApplicationDiscoveryService
     #   <p>Timestamp that represents when this continuous export was stopped.</p>
     #   @return [Time]
     class StopContinuousExportResponse < Struct.new(
+      nil,
       :start_time,
       :stop_time,
       keyword_init: true
@@ -2034,6 +2119,7 @@ module Aws::ApplicationDiscoveryService
     #   <p>The IDs of the agents from which to stop collecting data.</p>
     #   @return [Array<String>]
     class StopDataCollectionByAgentIdsRequest < Struct.new(
+      nil,
       :agent_ids,
       keyword_init: true
     )
@@ -2046,6 +2132,7 @@ module Aws::ApplicationDiscoveryService
     #         configuration was updated.</p>
     #   @return [Array<Types::AgentConfigurationStatus>]
     class StopDataCollectionByAgentIdsResponse < Struct.new(
+      nil,
       :agents_configuration_status,
       keyword_init: true
     )
@@ -2063,6 +2150,7 @@ module Aws::ApplicationDiscoveryService
     #   <p>A value for a tag key on which to filter.</p>
     #   @return [String]
     class Tag < Struct.new(
+      nil,
       :key,
       :value,
       keyword_init: true
@@ -2079,6 +2167,7 @@ module Aws::ApplicationDiscoveryService
     #   <p>Values for the tag filter.</p>
     #   @return [Array<String>]
     class TagFilter < Struct.new(
+      nil,
       :name,
       :values,
       keyword_init: true
@@ -2099,6 +2188,7 @@ module Aws::ApplicationDiscoveryService
     #   <p>The new migration wave of the application that you want to update.</p>
     #   @return [String]
     class UpdateApplicationRequest < Struct.new(
+      nil,
       :configuration_id,
       :name,
       :description,
@@ -2109,6 +2199,7 @@ module Aws::ApplicationDiscoveryService
     end
 
     class UpdateApplicationResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -2128,6 +2219,7 @@ module Aws::ApplicationDiscoveryService
     #       </p>
     #   @return [Float]
     class UsageMetricBasis < Struct.new(
+      nil,
       :name,
       :percentage_adjust,
       keyword_init: true

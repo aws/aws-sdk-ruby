@@ -16,6 +16,7 @@ module Aws::Chatbot
     #     </p>
     #   @return [Boolean]
     class AccountPreferences < Struct.new(
+      nil,
       :user_authorization_required,
       :training_data_collection_enabled,
       keyword_init: true
@@ -30,6 +31,7 @@ module Aws::Chatbot
     #   <p>The channel configuration to associate with the resource.</p>
     #   @return [String]
     class AssociateToConfigurationRequest < Struct.new(
+      nil,
       :resource,
       :chat_configuration,
       keyword_init: true
@@ -38,6 +40,7 @@ module Aws::Chatbot
     end
 
     class AssociateToConfigurationResult < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -48,6 +51,7 @@ module Aws::Chatbot
     #   <p>The Amazon Resource Name (ARN) of the resource (for example, a custom action).</p>
     #   @return [String]
     class AssociationListing < Struct.new(
+      nil,
       :resource,
       keyword_init: true
     )
@@ -88,6 +92,7 @@ module Aws::Chatbot
     #   <p>Provided if State is <code>DISABLED</code>. Provides context as to why the resource is disabled.</p>
     #   @return [String]
     class ChimeWebhookConfiguration < Struct.new(
+      nil,
       :webhook_description,
       :chat_configuration_arn,
       :iam_role_arn,
@@ -122,6 +127,7 @@ module Aws::Chatbot
     #   <p>Provided if State is <code>DISABLED</code>. Provides context as to why the resource is disabled.</p>
     #   @return [String]
     class ConfiguredTeam < Struct.new(
+      nil,
       :tenant_id,
       :team_id,
       :team_name,
@@ -136,6 +142,7 @@ module Aws::Chatbot
     # @!attribute message
     #   @return [String]
     class ConflictException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -146,6 +153,7 @@ module Aws::Chatbot
     # @!attribute message
     #   @return [String]
     class CreateChimeWebhookConfigurationException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -178,6 +186,7 @@ module Aws::Chatbot
     #   <p>A map of tags assigned to a resource. A tag is a string-to-string map of key-value pairs.</p>
     #   @return [Array<Types::Tag>]
     class CreateChimeWebhookConfigurationRequest < Struct.new(
+      nil,
       :webhook_description,
       :webhook_url,
       :sns_topic_arns,
@@ -194,6 +203,7 @@ module Aws::Chatbot
     #   <p>An Amazon Chime webhook configuration.</p>
     #   @return [Types::ChimeWebhookConfiguration]
     class CreateChimeWebhookConfigurationResult < Struct.new(
+      nil,
       :webhook_configuration,
       keyword_init: true
     )
@@ -220,6 +230,7 @@ module Aws::Chatbot
     #   <p>The name of the custom action. This name is included in the Amazon Resource Name (ARN).</p>
     #   @return [String]
     class CreateCustomActionRequest < Struct.new(
+      nil,
       :definition,
       :alias_name,
       :attachments,
@@ -235,6 +246,7 @@ module Aws::Chatbot
     #   <p>The fully defined ARN of the custom action.</p>
     #   @return [String]
     class CreateCustomActionResult < Struct.new(
+      nil,
       :custom_action_arn,
       keyword_init: true
     )
@@ -245,6 +257,7 @@ module Aws::Chatbot
     # @!attribute message
     #   @return [String]
     class CreateSlackChannelConfigurationException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -287,6 +300,7 @@ module Aws::Chatbot
     #   <p>A map of tags assigned to a resource. A tag is a string-to-string map of key-value pairs.</p>
     #   @return [Array<Types::Tag>]
     class CreateSlackChannelConfigurationRequest < Struct.new(
+      nil,
       :slack_team_id,
       :slack_channel_id,
       :slack_channel_name,
@@ -306,6 +320,7 @@ module Aws::Chatbot
     #   <p>The configuration for a Slack channel configured with AWS Chatbot.</p>
     #   @return [Types::SlackChannelConfiguration]
     class CreateSlackChannelConfigurationResult < Struct.new(
+      nil,
       :channel_configuration,
       keyword_init: true
     )
@@ -316,6 +331,7 @@ module Aws::Chatbot
     # @!attribute message
     #   @return [String]
     class CreateTeamsChannelConfigurationException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -364,6 +380,7 @@ module Aws::Chatbot
     #   <p>A map of tags assigned to a resource. A tag is a string-to-string map of key-value pairs.</p>
     #   @return [Array<Types::Tag>]
     class CreateTeamsChannelConfigurationRequest < Struct.new(
+      nil,
       :channel_id,
       :channel_name,
       :team_id,
@@ -385,6 +402,7 @@ module Aws::Chatbot
     #   <p>The configuration for a Microsoft Teams channel configured with AWS Chatbot.</p>
     #   @return [Types::TeamsChannelConfiguration]
     class CreateTeamsChannelConfigurationResult < Struct.new(
+      nil,
       :channel_configuration,
       keyword_init: true
     )
@@ -408,6 +426,7 @@ module Aws::Chatbot
     #   <p>The name of the custom action that is included in the ARN.</p>
     #   @return [String]
     class CustomAction < Struct.new(
+      nil,
       :custom_action_arn,
       :definition,
       :alias_name,
@@ -432,6 +451,7 @@ module Aws::Chatbot
     #   <p>The variables to extract from the notification.</p>
     #   @return [Hash<String, String>]
     class CustomActionAttachment < Struct.new(
+      nil,
       :notification_type,
       :button_text,
       :criteria,
@@ -452,6 +472,7 @@ module Aws::Chatbot
     #   <p>A value that is compared with the actual value of the variable based on the behavior of the operator.</p>
     #   @return [String]
     class CustomActionAttachmentCriteria < Struct.new(
+      nil,
       :operator,
       :variable_name,
       :value,
@@ -465,6 +486,7 @@ module Aws::Chatbot
     #   <p>The command string to run which may include variables by prefixing with a dollar sign ($).</p>
     #   @return [String]
     class CustomActionDefinition < Struct.new(
+      nil,
       :command_text,
       keyword_init: true
     )
@@ -475,6 +497,7 @@ module Aws::Chatbot
     # @!attribute message
     #   @return [String]
     class DeleteChimeWebhookConfigurationException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -485,6 +508,7 @@ module Aws::Chatbot
     #   <p>The Amazon Resource Name (ARN) of the ChimeWebhookConfiguration to delete.</p>
     #   @return [String]
     class DeleteChimeWebhookConfigurationRequest < Struct.new(
+      nil,
       :chat_configuration_arn,
       keyword_init: true
     )
@@ -492,6 +516,7 @@ module Aws::Chatbot
     end
 
     class DeleteChimeWebhookConfigurationResult < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -501,6 +526,7 @@ module Aws::Chatbot
     #   <p>The fully defined ARN of the custom action.</p>
     #   @return [String]
     class DeleteCustomActionRequest < Struct.new(
+      nil,
       :custom_action_arn,
       keyword_init: true
     )
@@ -508,6 +534,7 @@ module Aws::Chatbot
     end
 
     class DeleteCustomActionResult < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -517,6 +544,7 @@ module Aws::Chatbot
     # @!attribute message
     #   @return [String]
     class DeleteMicrosoftTeamsUserIdentityException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -530,6 +558,7 @@ module Aws::Chatbot
     #   <p>The Microsoft Teams user ID.</p>
     #   @return [String]
     class DeleteMicrosoftTeamsUserIdentityRequest < Struct.new(
+      nil,
       :chat_configuration_arn,
       :user_id,
       keyword_init: true
@@ -538,6 +567,7 @@ module Aws::Chatbot
     end
 
     class DeleteMicrosoftTeamsUserIdentityResult < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -547,6 +577,7 @@ module Aws::Chatbot
     # @!attribute message
     #   @return [String]
     class DeleteSlackChannelConfigurationException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -557,6 +588,7 @@ module Aws::Chatbot
     #   <p>The Amazon Resource Name (ARN) of the SlackChannelConfiguration to delete.</p>
     #   @return [String]
     class DeleteSlackChannelConfigurationRequest < Struct.new(
+      nil,
       :chat_configuration_arn,
       keyword_init: true
     )
@@ -564,6 +596,7 @@ module Aws::Chatbot
     end
 
     class DeleteSlackChannelConfigurationResult < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -573,6 +606,7 @@ module Aws::Chatbot
     # @!attribute message
     #   @return [String]
     class DeleteSlackUserIdentityException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -589,6 +623,7 @@ module Aws::Chatbot
     #   <p>The ID of the user in Slack</p>
     #   @return [String]
     class DeleteSlackUserIdentityRequest < Struct.new(
+      nil,
       :chat_configuration_arn,
       :slack_team_id,
       :slack_user_id,
@@ -598,6 +633,7 @@ module Aws::Chatbot
     end
 
     class DeleteSlackUserIdentityResult < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -607,6 +643,7 @@ module Aws::Chatbot
     # @!attribute message
     #   @return [String]
     class DeleteSlackWorkspaceAuthorizationFault < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -617,6 +654,7 @@ module Aws::Chatbot
     #   <p>The ID of the Slack workspace authorized with AWS Chatbot.</p>
     #   @return [String]
     class DeleteSlackWorkspaceAuthorizationRequest < Struct.new(
+      nil,
       :slack_team_id,
       keyword_init: true
     )
@@ -624,6 +662,7 @@ module Aws::Chatbot
     end
 
     class DeleteSlackWorkspaceAuthorizationResult < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -633,6 +672,7 @@ module Aws::Chatbot
     # @!attribute message
     #   @return [String]
     class DeleteTeamsChannelConfigurationException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -643,6 +683,7 @@ module Aws::Chatbot
     #   <p>The Amazon Resource Name (ARN) of the MicrosoftTeamsChannelConfiguration associated with the user identity to delete.</p>
     #   @return [String]
     class DeleteTeamsChannelConfigurationRequest < Struct.new(
+      nil,
       :chat_configuration_arn,
       keyword_init: true
     )
@@ -650,6 +691,7 @@ module Aws::Chatbot
     end
 
     class DeleteTeamsChannelConfigurationResult < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -659,6 +701,7 @@ module Aws::Chatbot
     # @!attribute message
     #   @return [String]
     class DeleteTeamsConfiguredTeamException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -671,6 +714,7 @@ module Aws::Chatbot
     #   </p>
     #   @return [String]
     class DeleteTeamsConfiguredTeamRequest < Struct.new(
+      nil,
       :team_id,
       keyword_init: true
     )
@@ -678,6 +722,7 @@ module Aws::Chatbot
     end
 
     class DeleteTeamsConfiguredTeamResult < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -687,6 +732,7 @@ module Aws::Chatbot
     # @!attribute message
     #   @return [String]
     class DescribeChimeWebhookConfigurationsException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -705,6 +751,7 @@ module Aws::Chatbot
     #   <p>An optional Amazon Resource Name (ARN) of a ChimeWebhookConfiguration to describe.</p>
     #   @return [String]
     class DescribeChimeWebhookConfigurationsRequest < Struct.new(
+      nil,
       :max_results,
       :next_token,
       :chat_configuration_arn,
@@ -721,6 +768,7 @@ module Aws::Chatbot
     #   <p>A list of Amazon Chime webhooks associated with the account.</p>
     #   @return [Array<Types::ChimeWebhookConfiguration>]
     class DescribeChimeWebhookConfigurationsResult < Struct.new(
+      nil,
       :next_token,
       :webhook_configurations,
       keyword_init: true
@@ -732,6 +780,7 @@ module Aws::Chatbot
     # @!attribute message
     #   @return [String]
     class DescribeSlackChannelConfigurationsException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -750,6 +799,7 @@ module Aws::Chatbot
     #   <p>An optional Amazon Resource Name (ARN) of a SlackChannelConfiguration to describe.</p>
     #   @return [String]
     class DescribeSlackChannelConfigurationsRequest < Struct.new(
+      nil,
       :max_results,
       :next_token,
       :chat_configuration_arn,
@@ -766,6 +816,7 @@ module Aws::Chatbot
     #   <p>A list of Slack channel configurations.</p>
     #   @return [Array<Types::SlackChannelConfiguration>]
     class DescribeSlackChannelConfigurationsResult < Struct.new(
+      nil,
       :next_token,
       :slack_channel_configurations,
       keyword_init: true
@@ -777,6 +828,7 @@ module Aws::Chatbot
     # @!attribute message
     #   @return [String]
     class DescribeSlackUserIdentitiesException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -795,6 +847,7 @@ module Aws::Chatbot
     #     </p>
     #   @return [Integer]
     class DescribeSlackUserIdentitiesRequest < Struct.new(
+      nil,
       :chat_configuration_arn,
       :next_token,
       :max_results,
@@ -811,6 +864,7 @@ module Aws::Chatbot
     #     </p>
     #   @return [String]
     class DescribeSlackUserIdentitiesResult < Struct.new(
+      nil,
       :slack_user_identities,
       :next_token,
       keyword_init: true
@@ -822,6 +876,7 @@ module Aws::Chatbot
     # @!attribute message
     #   @return [String]
     class DescribeSlackWorkspacesException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -837,6 +892,7 @@ module Aws::Chatbot
     #     </p>
     #   @return [String]
     class DescribeSlackWorkspacesRequest < Struct.new(
+      nil,
       :max_results,
       :next_token,
       keyword_init: true
@@ -852,6 +908,7 @@ module Aws::Chatbot
     #     </p>
     #   @return [String]
     class DescribeSlackWorkspacesResult < Struct.new(
+      nil,
       :slack_workspaces,
       :next_token,
       keyword_init: true
@@ -866,6 +923,7 @@ module Aws::Chatbot
     #   <p>The channel configuration the resource is being disassociated from.</p>
     #   @return [String]
     class DisassociateFromConfigurationRequest < Struct.new(
+      nil,
       :resource,
       :chat_configuration,
       keyword_init: true
@@ -874,6 +932,7 @@ module Aws::Chatbot
     end
 
     class DisassociateFromConfigurationResult < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -883,6 +942,7 @@ module Aws::Chatbot
     # @!attribute message
     #   @return [String]
     class GetAccountPreferencesException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -890,6 +950,7 @@ module Aws::Chatbot
     end
 
     class GetAccountPreferencesRequest < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -899,6 +960,7 @@ module Aws::Chatbot
     #   <p>The preferences related to AWS Chatbot usage in the calling AWS account.</p>
     #   @return [Types::AccountPreferences]
     class GetAccountPreferencesResult < Struct.new(
+      nil,
       :account_preferences,
       keyword_init: true
     )
@@ -909,6 +971,7 @@ module Aws::Chatbot
     #   <p>Returns the fully defined Amazon Resource Name (ARN) of the custom action.</p>
     #   @return [String]
     class GetCustomActionRequest < Struct.new(
+      nil,
       :custom_action_arn,
       keyword_init: true
     )
@@ -919,6 +982,7 @@ module Aws::Chatbot
     #   <p>Returns the custom action.</p>
     #   @return [Types::CustomAction]
     class GetCustomActionResult < Struct.new(
+      nil,
       :custom_action,
       keyword_init: true
     )
@@ -929,6 +993,7 @@ module Aws::Chatbot
     # @!attribute message
     #   @return [String]
     class GetTeamsChannelConfigurationException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -939,6 +1004,7 @@ module Aws::Chatbot
     #   <p>The Amazon Resource Name (ARN) of the MicrosoftTeamsChannelConfiguration to retrieve.</p>
     #   @return [String]
     class GetTeamsChannelConfigurationRequest < Struct.new(
+      nil,
       :chat_configuration_arn,
       keyword_init: true
     )
@@ -949,6 +1015,7 @@ module Aws::Chatbot
     #   <p>The configuration for a Microsoft Teams channel configured with AWS Chatbot.</p>
     #   @return [Types::TeamsChannelConfiguration]
     class GetTeamsChannelConfigurationResult < Struct.new(
+      nil,
       :channel_configuration,
       keyword_init: true
     )
@@ -959,6 +1026,7 @@ module Aws::Chatbot
     # @!attribute message
     #   @return [String]
     class InternalServiceError < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -969,6 +1037,7 @@ module Aws::Chatbot
     # @!attribute message
     #   @return [String]
     class InvalidParameterException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -979,6 +1048,7 @@ module Aws::Chatbot
     # @!attribute message
     #   @return [String]
     class InvalidRequestException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -989,6 +1059,7 @@ module Aws::Chatbot
     # @!attribute message
     #   @return [String]
     class LimitExceededException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -1005,6 +1076,7 @@ module Aws::Chatbot
     #   <p>An optional token returned from a prior request. Use this token for pagination of results from this action. If this parameter is specified, the response includes only results beyond the token, up to the value specified by MaxResults.</p>
     #   @return [String]
     class ListAssociationsRequest < Struct.new(
+      nil,
       :chat_configuration,
       :max_results,
       :next_token,
@@ -1020,6 +1092,7 @@ module Aws::Chatbot
     #   <p>An optional token returned from a prior request. Use this token for pagination of results from this action. If this parameter is specified, the response includes only results beyond the token, up to the value specified by MaxResults.</p>
     #   @return [String]
     class ListAssociationsResult < Struct.new(
+      nil,
       :associations,
       :next_token,
       keyword_init: true
@@ -1034,6 +1107,7 @@ module Aws::Chatbot
     #   <p>An optional token returned from a prior request. Use this token for pagination of results from this action. If this parameter is specified, the response includes only results beyond the token, up to the value specified by MaxResults.</p>
     #   @return [String]
     class ListCustomActionsRequest < Struct.new(
+      nil,
       :max_results,
       :next_token,
       keyword_init: true
@@ -1048,6 +1122,7 @@ module Aws::Chatbot
     #   <p>An optional token returned from a prior request. Use this token for pagination of results from this action. If this parameter is specified, the response includes only results beyond the token, up to the value specified by MaxResults.</p>
     #   @return [String]
     class ListCustomActionsResult < Struct.new(
+      nil,
       :custom_actions,
       :next_token,
       keyword_init: true
@@ -1059,6 +1134,7 @@ module Aws::Chatbot
     # @!attribute message
     #   @return [String]
     class ListMicrosoftTeamsConfiguredTeamsException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -1072,6 +1148,7 @@ module Aws::Chatbot
     #   <p>An optional token returned from a prior request. Use this token for pagination of results from this action. If this parameter is specified, the response includes only results beyond the token, up to the value specified by MaxResults.</p>
     #   @return [String]
     class ListMicrosoftTeamsConfiguredTeamsRequest < Struct.new(
+      nil,
       :max_results,
       :next_token,
       keyword_init: true
@@ -1086,6 +1163,7 @@ module Aws::Chatbot
     #   <p>An optional token returned from a prior request. Use this token for pagination of results from this action. If this parameter is specified, the response includes only results beyond the token, up to the value specified by MaxResults.</p>
     #   @return [String]
     class ListMicrosoftTeamsConfiguredTeamsResult < Struct.new(
+      nil,
       :configured_teams,
       :next_token,
       keyword_init: true
@@ -1097,6 +1175,7 @@ module Aws::Chatbot
     # @!attribute message
     #   @return [String]
     class ListMicrosoftTeamsUserIdentitiesException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -1115,6 +1194,7 @@ module Aws::Chatbot
     #     </p>
     #   @return [Integer]
     class ListMicrosoftTeamsUserIdentitiesRequest < Struct.new(
+      nil,
       :chat_configuration_arn,
       :next_token,
       :max_results,
@@ -1131,6 +1211,7 @@ module Aws::Chatbot
     #     </p>
     #   @return [String]
     class ListMicrosoftTeamsUserIdentitiesResult < Struct.new(
+      nil,
       :teams_user_identities,
       :next_token,
       keyword_init: true
@@ -1142,6 +1223,7 @@ module Aws::Chatbot
     #   <p>The ARN of the resource to list tags for.</p>
     #   @return [String]
     class ListTagsForResourceRequest < Struct.new(
+      nil,
       :resource_arn,
       keyword_init: true
     )
@@ -1152,6 +1234,7 @@ module Aws::Chatbot
     #   <p>Key-value pairs that are assigned to a resource, usually for the purpose of grouping and searching for items. Tags are metadata that you define.</p>
     #   @return [Array<Types::Tag>]
     class ListTagsForResourceResponse < Struct.new(
+      nil,
       :tags,
       keyword_init: true
     )
@@ -1162,6 +1245,7 @@ module Aws::Chatbot
     # @!attribute message
     #   @return [String]
     class ListTeamsChannelConfigurationsException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -1180,6 +1264,7 @@ module Aws::Chatbot
     #   </p>
     #   @return [String]
     class ListTeamsChannelConfigurationsRequest < Struct.new(
+      nil,
       :max_results,
       :next_token,
       :team_id,
@@ -1195,6 +1280,7 @@ module Aws::Chatbot
     #   <p>A list of AWS Chatbot channel configurations for Microsoft Teams.</p>
     #   @return [Array<Types::TeamsChannelConfiguration>]
     class ListTeamsChannelConfigurationsResult < Struct.new(
+      nil,
       :next_token,
       :team_channel_configurations,
       keyword_init: true
@@ -1206,6 +1292,7 @@ module Aws::Chatbot
     # @!attribute message
     #   @return [String]
     class ResourceNotFoundException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -1216,6 +1303,7 @@ module Aws::Chatbot
     # @!attribute message
     #   @return [String]
     class ServiceUnavailableException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -1272,6 +1360,7 @@ module Aws::Chatbot
     #   <p>Provided if State is <code>DISABLED</code>. Provides context as to why the resource is disabled.</p>
     #   @return [String]
     class SlackChannelConfiguration < Struct.new(
+      nil,
       :slack_team_name,
       :slack_team_id,
       :slack_channel_id,
@@ -1310,6 +1399,7 @@ module Aws::Chatbot
     #   <p>The AWS user identity ARN used to associate a Slack user ID with an IAM Role.</p>
     #   @return [String]
     class SlackUserIdentity < Struct.new(
+      nil,
       :iam_role_arn,
       :chat_configuration_arn,
       :slack_team_id,
@@ -1335,6 +1425,7 @@ module Aws::Chatbot
     #   <p>Provided if State is <code>DISABLED</code>. Provides context as to why the resource is disabled.</p>
     #   @return [String]
     class SlackWorkspace < Struct.new(
+      nil,
       :slack_team_id,
       :slack_team_name,
       :state,
@@ -1356,6 +1447,7 @@ module Aws::Chatbot
     #   <p>The value of the tag.</p>
     #   @return [String]
     class Tag < Struct.new(
+      nil,
       :tag_key,
       :tag_value,
       keyword_init: true
@@ -1370,6 +1462,7 @@ module Aws::Chatbot
     #   <p>A list of tags to apply to the configuration.</p>
     #   @return [Array<Types::Tag>]
     class TagResourceRequest < Struct.new(
+      nil,
       :resource_arn,
       :tags,
       keyword_init: true
@@ -1378,6 +1471,7 @@ module Aws::Chatbot
     end
 
     class TagResourceResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1436,6 +1530,7 @@ module Aws::Chatbot
     #   <p>Provided if State is <code>DISABLED</code>. Provides context as to why the resource is disabled.</p>
     #   @return [String]
     class TeamsChannelConfiguration < Struct.new(
+      nil,
       :channel_id,
       :channel_name,
       :team_id,
@@ -1483,6 +1578,7 @@ module Aws::Chatbot
     #   <p>The ID of the Microsoft Teams tenant.</p>
     #   @return [String]
     class TeamsUserIdentity < Struct.new(
+      nil,
       :iam_role_arn,
       :chat_configuration_arn,
       :team_id,
@@ -1499,6 +1595,7 @@ module Aws::Chatbot
     # @!attribute message
     #   @return [String]
     class TooManyTagsException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -1509,6 +1606,7 @@ module Aws::Chatbot
     # @!attribute message
     #   @return [String]
     class UnauthorizedException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -1522,6 +1620,7 @@ module Aws::Chatbot
     #   <p>TagKeys are key-value pairs assigned to ARNs that can be used to group and search for resources by type. This metadata can be attached to resources for any purpose.</p>
     #   @return [Array<String>]
     class UntagResourceRequest < Struct.new(
+      nil,
       :resource_arn,
       :tag_keys,
       keyword_init: true
@@ -1530,6 +1629,7 @@ module Aws::Chatbot
     end
 
     class UntagResourceResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1539,6 +1639,7 @@ module Aws::Chatbot
     # @!attribute message
     #   @return [String]
     class UpdateAccountPreferencesException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -1554,6 +1655,7 @@ module Aws::Chatbot
     #     </p>
     #   @return [Boolean]
     class UpdateAccountPreferencesRequest < Struct.new(
+      nil,
       :user_authorization_required,
       :training_data_collection_enabled,
       keyword_init: true
@@ -1565,6 +1667,7 @@ module Aws::Chatbot
     #   <p>Preferences related to AWS Chatbot usage in the calling AWS account.</p>
     #   @return [Types::AccountPreferences]
     class UpdateAccountPreferencesResult < Struct.new(
+      nil,
       :account_preferences,
       keyword_init: true
     )
@@ -1575,6 +1678,7 @@ module Aws::Chatbot
     # @!attribute message
     #   @return [String]
     class UpdateChimeWebhookConfigurationException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -1604,6 +1708,7 @@ module Aws::Chatbot
     #   <p>Logging levels include <code>ERROR</code>, <code>INFO</code>, or <code>NONE</code>.</p>
     #   @return [String]
     class UpdateChimeWebhookConfigurationRequest < Struct.new(
+      nil,
       :chat_configuration_arn,
       :webhook_description,
       :webhook_url,
@@ -1619,6 +1724,7 @@ module Aws::Chatbot
     #   <p>A Amazon Chime webhook configuration.</p>
     #   @return [Types::ChimeWebhookConfiguration]
     class UpdateChimeWebhookConfigurationResult < Struct.new(
+      nil,
       :webhook_configuration,
       keyword_init: true
     )
@@ -1638,6 +1744,7 @@ module Aws::Chatbot
     #   <p>Defines when this custom action button should be attached to a notification.</p>
     #   @return [Array<Types::CustomActionAttachment>]
     class UpdateCustomActionRequest < Struct.new(
+      nil,
       :custom_action_arn,
       :definition,
       :alias_name,
@@ -1651,6 +1758,7 @@ module Aws::Chatbot
     #   <p>The fully defined ARN of the custom action.</p>
     #   @return [String]
     class UpdateCustomActionResult < Struct.new(
+      nil,
       :custom_action_arn,
       keyword_init: true
     )
@@ -1661,6 +1769,7 @@ module Aws::Chatbot
     # @!attribute message
     #   @return [String]
     class UpdateSlackChannelConfigurationException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -1697,6 +1806,7 @@ module Aws::Chatbot
     #   <p>Enables use of a user role requirement in your chat configuration.</p>
     #   @return [Boolean]
     class UpdateSlackChannelConfigurationRequest < Struct.new(
+      nil,
       :chat_configuration_arn,
       :slack_channel_id,
       :slack_channel_name,
@@ -1714,6 +1824,7 @@ module Aws::Chatbot
     #   <p>The configuration for a Slack channel configured with AWS Chatbot.</p>
     #   @return [Types::SlackChannelConfiguration]
     class UpdateSlackChannelConfigurationResult < Struct.new(
+      nil,
       :channel_configuration,
       keyword_init: true
     )
@@ -1724,6 +1835,7 @@ module Aws::Chatbot
     # @!attribute message
     #   @return [String]
     class UpdateTeamsChannelConfigurationException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -1758,6 +1870,7 @@ module Aws::Chatbot
     #   <p>Enables use of a user role requirement in your chat configuration.</p>
     #   @return [Boolean]
     class UpdateTeamsChannelConfigurationRequest < Struct.new(
+      nil,
       :chat_configuration_arn,
       :channel_id,
       :channel_name,
@@ -1775,6 +1888,7 @@ module Aws::Chatbot
     #   <p>The configuration for a Microsoft Teams channel configured with AWS Chatbot.</p>
     #   @return [Types::TeamsChannelConfiguration]
     class UpdateTeamsChannelConfigurationResult < Struct.new(
+      nil,
       :channel_configuration,
       keyword_init: true
     )

@@ -19,6 +19,7 @@ module Aws::ResourceGroupsTaggingAPI
     #   <p>Whether a resource is compliant with the effective tag policy.</p>
     #   @return [Boolean]
     class ComplianceDetails < Struct.new(
+      nil,
       :noncompliant_keys,
       :keys_with_noncompliant_values,
       :compliance_status,
@@ -32,6 +33,7 @@ module Aws::ResourceGroupsTaggingAPI
     # @!attribute message
     #   @return [String]
     class ConcurrentModificationException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -61,6 +63,7 @@ module Aws::ResourceGroupsTaggingAPI
     # @!attribute message
     #   @return [String]
     class ConstraintViolationException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -68,6 +71,7 @@ module Aws::ResourceGroupsTaggingAPI
     end
 
     class DescribeReportCreationInput < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -108,6 +112,7 @@ module Aws::ResourceGroupsTaggingAPI
     #   <p>Details of the common errors that all operations return.</p>
     #   @return [String]
     class DescribeReportCreationOutput < Struct.new(
+      nil,
       :status,
       :s3_location,
       :start_date,
@@ -161,6 +166,7 @@ module Aws::ResourceGroupsTaggingAPI
     #   <p>The message of the common error.</p>
     #   @return [String]
     class FailureInfo < Struct.new(
+      nil,
       :status_code,
       :error_code,
       :error_message,
@@ -234,6 +240,7 @@ module Aws::ResourceGroupsTaggingAPI
     #       in your initial request.</p>
     #   @return [String]
     class GetComplianceSummaryInput < Struct.new(
+      nil,
       :target_id_filters,
       :region_filters,
       :resource_type_filters,
@@ -255,6 +262,7 @@ module Aws::ResourceGroupsTaggingAPI
     #       as the <code>PaginationToken</code> value in the request for the next page.</p>
     #   @return [String]
     class GetComplianceSummaryOutput < Struct.new(
+      nil,
       :summary_list,
       :pagination_token,
       keyword_init: true
@@ -392,6 +400,7 @@ module Aws::ResourceGroupsTaggingAPI
     #                   <i>Amazon Web Services General Reference</i>.</p>
     #   @return [Array<String>]
     class GetResourcesInput < Struct.new(
+      nil,
       :pagination_token,
       :tag_filters,
       :resources_per_page,
@@ -415,6 +424,7 @@ module Aws::ResourceGroupsTaggingAPI
     #       each.</p>
     #   @return [Array<Types::ResourceTagMapping>]
     class GetResourcesOutput < Struct.new(
+      nil,
       :pagination_token,
       :resource_tag_mapping_list,
       keyword_init: true
@@ -428,6 +438,7 @@ module Aws::ResourceGroupsTaggingAPI
     #       in your initial request.</p>
     #   @return [String]
     class GetTagKeysInput < Struct.new(
+      nil,
       :pagination_token,
       keyword_init: true
     )
@@ -443,6 +454,7 @@ module Aws::ResourceGroupsTaggingAPI
     #   <p>A list of all tag keys in the Amazon Web Services account.</p>
     #   @return [Array<String>]
     class GetTagKeysOutput < Struct.new(
+      nil,
       :pagination_token,
       :tag_keys,
       keyword_init: true
@@ -460,6 +472,7 @@ module Aws::ResourceGroupsTaggingAPI
     #               currently used in the specified Amazon Web Services Region for the calling account.</p>
     #   @return [String]
     class GetTagValuesInput < Struct.new(
+      nil,
       :pagination_token,
       :key,
       keyword_init: true
@@ -477,6 +490,7 @@ module Aws::ResourceGroupsTaggingAPI
     #               Region for the calling account.</p>
     #   @return [Array<String>]
     class GetTagValuesOutput < Struct.new(
+      nil,
       :pagination_token,
       :tag_values,
       keyword_init: true
@@ -489,6 +503,7 @@ module Aws::ResourceGroupsTaggingAPI
     # @!attribute message
     #   @return [String]
     class InternalServiceException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -519,6 +534,7 @@ module Aws::ResourceGroupsTaggingAPI
     # @!attribute message
     #   @return [String]
     class InvalidParameterException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -530,6 +546,7 @@ module Aws::ResourceGroupsTaggingAPI
     # @!attribute message
     #   @return [String]
     class PaginationTokenExpiredException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -549,6 +566,7 @@ module Aws::ResourceGroupsTaggingAPI
     #               including details on any noncompliant tag keys.</p>
     #   @return [Types::ComplianceDetails]
     class ResourceTagMapping < Struct.new(
+      nil,
       :resource_arn,
       :tags,
       :compliance_details,
@@ -566,6 +584,7 @@ module Aws::ResourceGroupsTaggingAPI
     #               see the example S3 bucket policy on this page.</p>
     #   @return [String]
     class StartReportCreationInput < Struct.new(
+      nil,
       :s3_bucket,
       keyword_init: true
     )
@@ -573,6 +592,7 @@ module Aws::ResourceGroupsTaggingAPI
     end
 
     class StartReportCreationOutput < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -599,6 +619,7 @@ module Aws::ResourceGroupsTaggingAPI
     #   <p>The count of noncompliant resources.</p>
     #   @return [Integer]
     class Summary < Struct.new(
+      nil,
       :last_updated,
       :target_id,
       :target_id_type,
@@ -627,6 +648,7 @@ module Aws::ResourceGroupsTaggingAPI
     #       descriptor within a tag category (key). The value can be empty or null.</p>
     #   @return [String]
     class Tag < Struct.new(
+      nil,
       :key,
       :value,
       keyword_init: true
@@ -645,6 +667,7 @@ module Aws::ResourceGroupsTaggingAPI
     #       descriptor within a tag category (key). The value can be empty or null.</p>
     #   @return [Array<String>]
     class TagFilter < Struct.new(
+      nil,
       :key,
       :values,
       keyword_init: true
@@ -664,6 +687,7 @@ module Aws::ResourceGroupsTaggingAPI
     #               consists of a key and a value that you define.</p>
     #   @return [Hash<String, String>]
     class TagResourcesInput < Struct.new(
+      nil,
       :resource_arn_list,
       :tags,
       keyword_init: true
@@ -678,6 +702,7 @@ module Aws::ResourceGroupsTaggingAPI
     #               errors, the <code>FailedResourcesMap</code> is empty.</p>
     #   @return [Hash<String, Types::FailureInfo>]
     class TagResourcesOutput < Struct.new(
+      nil,
       :failed_resources_map,
       keyword_init: true
     )
@@ -688,6 +713,7 @@ module Aws::ResourceGroupsTaggingAPI
     # @!attribute message
     #   @return [String]
     class ThrottledException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -706,6 +732,7 @@ module Aws::ResourceGroupsTaggingAPI
     #               resources.</p>
     #   @return [Array<String>]
     class UntagResourcesInput < Struct.new(
+      nil,
       :resource_arn_list,
       :tag_keys,
       keyword_init: true
@@ -720,6 +747,7 @@ module Aws::ResourceGroupsTaggingAPI
     #               errors, the <code>FailedResourcesMap</code> is empty.</p>
     #   @return [Hash<String, Types::FailureInfo>]
     class UntagResourcesOutput < Struct.new(
+      nil,
       :failed_resources_map,
       keyword_init: true
     )

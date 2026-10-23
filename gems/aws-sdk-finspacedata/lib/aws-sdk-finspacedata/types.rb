@@ -10,6 +10,7 @@ module Aws::Finspacedata
     # @!attribute message
     #   @return [String]
     class AccessDeniedException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -26,6 +27,7 @@ module Aws::Finspacedata
     #   <p>A token that ensures idempotency. This token expires in 10 minutes.</p>
     #   @return [String]
     class AssociateUserToPermissionGroupRequest < Struct.new(
+      nil,
       :permission_group_id,
       :user_id,
       :client_token,
@@ -38,6 +40,7 @@ module Aws::Finspacedata
     #   <p>The returned status code of the response.</p>
     #   @return [Integer]
     class AssociateUserToPermissionGroupResponse < Struct.new(
+      nil,
       :status_code,
       keyword_init: true
     )
@@ -64,6 +67,7 @@ module Aws::Finspacedata
     #   <p> The Epoch time when the current credentials expire.</p>
     #   @return [Integer]
     class AwsCredentials < Struct.new(
+      nil,
       :access_key_id,
       :secret_access_key,
       :session_token,
@@ -125,6 +129,7 @@ module Aws::Finspacedata
     #            </ul>
     #   @return [String]
     class ChangesetErrorInfo < Struct.new(
+      nil,
       :error_message,
       :error_category,
       keyword_init: true
@@ -212,6 +217,7 @@ module Aws::Finspacedata
     #   <p>The unique identifier of the updated Changeset.</p>
     #   @return [String]
     class ChangesetSummary < Struct.new(
+      nil,
       :changeset_id,
       :changeset_arn,
       :dataset_id,
@@ -276,6 +282,7 @@ module Aws::Finspacedata
     #   <p>Description for a column.</p>
     #   @return [String]
     class ColumnDefinition < Struct.new(
+      nil,
       :data_type,
       :column_name,
       :column_description,
@@ -290,6 +297,7 @@ module Aws::Finspacedata
     # @!attribute reason
     #   @return [String]
     class ConflictException < Struct.new(
+      nil,
       :message,
       :reason,
       keyword_init: true
@@ -387,6 +395,7 @@ module Aws::Finspacedata
     #            <p> For more information about supported file formats, see <a href="https://docs.aws.amazon.com/finspace/latest/userguide/supported-data-types.html">Supported Data Types and File Formats</a> in the FinSpace User Guide.</p>
     #   @return [Hash<String, String>]
     class CreateChangesetRequest < Struct.new(
+      nil,
       :client_token,
       :dataset_id,
       :change_type,
@@ -405,6 +414,7 @@ module Aws::Finspacedata
     #   <p>The unique identifier of the Changeset that is created.</p>
     #   @return [String]
     class CreateChangesetResponse < Struct.new(
+      nil,
       :dataset_id,
       :changeset_id,
       keyword_init: true
@@ -435,6 +445,7 @@ module Aws::Finspacedata
     #   <p>Options that define the destination type for the Dataview.</p>
     #   @return [Types::DataViewDestinationTypeParams]
     class CreateDataViewRequest < Struct.new(
+      nil,
       :client_token,
       :dataset_id,
       :auto_update,
@@ -455,6 +466,7 @@ module Aws::Finspacedata
     #   <p>The unique identifier for the created Dataview.</p>
     #   @return [String]
     class CreateDataViewResponse < Struct.new(
+      nil,
       :dataset_id,
       :data_view_id,
       keyword_init: true
@@ -498,6 +510,7 @@ module Aws::Finspacedata
     #   <p>Definition for a schema on a tabular Dataset.</p>
     #   @return [Types::SchemaUnion]
     class CreateDatasetRequest < Struct.new(
+      nil,
       :client_token,
       :dataset_title,
       :kind,
@@ -516,6 +529,7 @@ module Aws::Finspacedata
     #   <p>The unique identifier for the created Dataset.</p>
     #   @return [String]
     class CreateDatasetResponse < Struct.new(
+      nil,
       :dataset_id,
       keyword_init: true
     )
@@ -568,6 +582,7 @@ module Aws::Finspacedata
     #   <p>A token that ensures idempotency. This token expires in 10 minutes.</p>
     #   @return [String]
     class CreatePermissionGroupRequest < Struct.new(
+      nil,
       :name,
       :description,
       :application_permissions,
@@ -581,6 +596,7 @@ module Aws::Finspacedata
     #   <p>The unique identifier for the permission group.</p>
     #   @return [String]
     class CreatePermissionGroupResponse < Struct.new(
+      nil,
       :permission_group_id,
       keyword_init: true
     )
@@ -629,6 +645,7 @@ module Aws::Finspacedata
     #   <p>A token that ensures idempotency. This token expires in 10 minutes.</p>
     #   @return [String]
     class CreateUserRequest < Struct.new(
+      nil,
       :email_address,
       :type,
       :first_name,
@@ -645,6 +662,7 @@ module Aws::Finspacedata
     #   <p>The unique identifier for the user.</p>
     #   @return [String]
     class CreateUserResponse < Struct.new(
+      nil,
       :user_id,
       keyword_init: true
     )
@@ -663,6 +681,7 @@ module Aws::Finspacedata
     #   <p>The session token.</p>
     #   @return [String]
     class Credentials < Struct.new(
+      nil,
       :access_key_id,
       :secret_access_key,
       :session_token,
@@ -712,6 +731,7 @@ module Aws::Finspacedata
     #            </p>
     #   @return [Hash<String, String>]
     class DataViewDestinationTypeParams < Struct.new(
+      nil,
       :destination_type,
       :s3_destination_export_file_format,
       :s3_destination_export_file_format_options,
@@ -767,6 +787,7 @@ module Aws::Finspacedata
     #            </ul>
     #   @return [String]
     class DataViewErrorInfo < Struct.new(
+      nil,
       :error_message,
       :error_category,
       keyword_init: true
@@ -846,6 +867,7 @@ module Aws::Finspacedata
     #   <p>The last time that a Dataview was modified. The value is determined as epoch time in milliseconds. For example, the value for Monday, November 1, 2021 12:00:00 PM UTC is specified as 1635768000000.</p>
     #   @return [Integer]
     class DataViewSummary < Struct.new(
+      nil,
       :data_view_id,
       :data_view_arn,
       :dataset_id,
@@ -913,6 +935,7 @@ module Aws::Finspacedata
     #   <p>The unique resource identifier for a Dataset.</p>
     #   @return [String]
     class Dataset < Struct.new(
+      nil,
       :dataset_id,
       :dataset_arn,
       :dataset_title,
@@ -945,6 +968,7 @@ module Aws::Finspacedata
     #   <p>Email address for the Dataset owner.</p>
     #   @return [String]
     class DatasetOwnerInfo < Struct.new(
+      nil,
       :name,
       :phone_number,
       :email,
@@ -961,6 +985,7 @@ module Aws::Finspacedata
     #   <p>The unique identifier of the Dataset to be deleted.</p>
     #   @return [String]
     class DeleteDatasetRequest < Struct.new(
+      nil,
       :client_token,
       :dataset_id,
       keyword_init: true
@@ -973,6 +998,7 @@ module Aws::Finspacedata
     #   <p>The unique identifier for the deleted Dataset.</p>
     #   @return [String]
     class DeleteDatasetResponse < Struct.new(
+      nil,
       :dataset_id,
       keyword_init: true
     )
@@ -986,6 +1012,7 @@ module Aws::Finspacedata
     #   <p>A token that ensures idempotency. This token expires in 10 minutes.</p>
     #   @return [String]
     class DeletePermissionGroupRequest < Struct.new(
+      nil,
       :permission_group_id,
       :client_token,
       keyword_init: true
@@ -997,6 +1024,7 @@ module Aws::Finspacedata
     #   <p>The unique identifier for the deleted permission group.</p>
     #   @return [String]
     class DeletePermissionGroupResponse < Struct.new(
+      nil,
       :permission_group_id,
       keyword_init: true
     )
@@ -1010,6 +1038,7 @@ module Aws::Finspacedata
     #   <p>A token that ensures idempotency. This token expires in 10 minutes.</p>
     #   @return [String]
     class DisableUserRequest < Struct.new(
+      nil,
       :user_id,
       :client_token,
       keyword_init: true
@@ -1021,6 +1050,7 @@ module Aws::Finspacedata
     #   <p>The unique identifier for the deactivated user.</p>
     #   @return [String]
     class DisableUserResponse < Struct.new(
+      nil,
       :user_id,
       keyword_init: true
     )
@@ -1037,6 +1067,7 @@ module Aws::Finspacedata
     #   <p>A token that ensures idempotency. This token expires in 10 minutes.</p>
     #   @return [String]
     class DisassociateUserFromPermissionGroupRequest < Struct.new(
+      nil,
       :permission_group_id,
       :user_id,
       :client_token,
@@ -1049,6 +1080,7 @@ module Aws::Finspacedata
     #   <p>The returned status code of the response.</p>
     #   @return [Integer]
     class DisassociateUserFromPermissionGroupResponse < Struct.new(
+      nil,
       :status_code,
       keyword_init: true
     )
@@ -1067,6 +1099,7 @@ module Aws::Finspacedata
     #   <p>A token that ensures idempotency. This token expires in 10 minutes.</p>
     #   @return [String]
     class EnableUserRequest < Struct.new(
+      nil,
       :user_id,
       :client_token,
       keyword_init: true
@@ -1078,6 +1111,7 @@ module Aws::Finspacedata
     #   <p>The unique identifier for the active user.</p>
     #   @return [String]
     class EnableUserResponse < Struct.new(
+      nil,
       :user_id,
       keyword_init: true
     )
@@ -1092,6 +1126,7 @@ module Aws::Finspacedata
     #   <p>The unique identifier of the Changeset for which to get data.</p>
     #   @return [String]
     class GetChangesetRequest < Struct.new(
+      nil,
       :dataset_id,
       :changeset_id,
       keyword_init: true
@@ -1154,6 +1189,7 @@ module Aws::Finspacedata
     #   <p>The unique identifier of the updated Changeset.</p>
     #   @return [String]
     class GetChangesetResponse < Struct.new(
+      nil,
       :changeset_id,
       :changeset_arn,
       :dataset_id,
@@ -1187,6 +1223,7 @@ module Aws::Finspacedata
     #   <p>The unique identifier for the Dataset used in the Dataview.</p>
     #   @return [String]
     class GetDataViewRequest < Struct.new(
+      nil,
       :data_view_id,
       :dataset_id,
       keyword_init: true
@@ -1266,6 +1303,7 @@ module Aws::Finspacedata
     #            </ul>
     #   @return [String]
     class GetDataViewResponse < Struct.new(
+      nil,
       :auto_update,
       :partition_columns,
       :dataset_id,
@@ -1296,6 +1334,7 @@ module Aws::Finspacedata
     #   <p>The unique identifier for a Dataset.</p>
     #   @return [String]
     class GetDatasetRequest < Struct.new(
+      nil,
       :dataset_id,
       keyword_init: true
     )
@@ -1362,6 +1401,7 @@ module Aws::Finspacedata
     #            </ul>
     #   @return [String]
     class GetDatasetResponse < Struct.new(
+      nil,
       :dataset_id,
       :dataset_arn,
       :dataset_title,
@@ -1390,6 +1430,7 @@ module Aws::Finspacedata
     #   <p>The unique identifier for the Dataset.</p>
     #   @return [String]
     class GetExternalDataViewAccessDetailsRequest < Struct.new(
+      nil,
       :data_view_id,
       :dataset_id,
       keyword_init: true
@@ -1404,6 +1445,7 @@ module Aws::Finspacedata
     #   <p>The location where the external Dataview is stored.</p>
     #   @return [Types::S3Location]
     class GetExternalDataViewAccessDetailsResponse < Struct.new(
+      nil,
       :credentials,
       :s3_location,
       keyword_init: true
@@ -1415,6 +1457,7 @@ module Aws::Finspacedata
     #   <p>The unique identifier for the permission group.</p>
     #   @return [String]
     class GetPermissionGroupRequest < Struct.new(
+      nil,
       :permission_group_id,
       keyword_init: true
     )
@@ -1425,6 +1468,7 @@ module Aws::Finspacedata
     #   <p>The structure for a permission group.</p>
     #   @return [Types::PermissionGroup]
     class GetPermissionGroupResponse < Struct.new(
+      nil,
       :permission_group,
       keyword_init: true
     )
@@ -1439,6 +1483,7 @@ module Aws::Finspacedata
     #   <p>The FinSpace environment identifier.</p>
     #   @return [String]
     class GetProgrammaticAccessCredentialsRequest < Struct.new(
+      nil,
       :duration_in_minutes,
       :environment_id,
       keyword_init: true
@@ -1454,6 +1499,7 @@ module Aws::Finspacedata
     #   <p>Returns the duration in which the credentials will remain valid.</p>
     #   @return [Integer]
     class GetProgrammaticAccessCredentialsResponse < Struct.new(
+      nil,
       :credentials,
       :duration_in_minutes,
       keyword_init: true
@@ -1465,6 +1511,7 @@ module Aws::Finspacedata
     #   <p>The unique identifier of the user to get data for.</p>
     #   @return [String]
     class GetUserRequest < Struct.new(
+      nil,
       :user_id,
       keyword_init: true
     )
@@ -1547,6 +1594,7 @@ module Aws::Finspacedata
     #   <p>Describes the last time that the user logged into their account. The value is determined as epoch time in milliseconds.</p>
     #   @return [Integer]
     class GetUserResponse < Struct.new(
+      nil,
       :user_id,
       :status,
       :first_name,
@@ -1590,6 +1638,7 @@ module Aws::Finspacedata
     #            </ul>
     #   @return [String]
     class GetWorkingLocationRequest < Struct.new(
+      nil,
       :location_type,
       keyword_init: true
     )
@@ -1606,6 +1655,7 @@ module Aws::Finspacedata
     #   <p>Returns the Amazon S3 bucket name for the working location.</p>
     #   @return [String]
     class GetWorkingLocationResponse < Struct.new(
+      nil,
       :s3_uri,
       :s3_path,
       :s3_bucket,
@@ -1619,6 +1669,7 @@ module Aws::Finspacedata
     # @!attribute message
     #   @return [String]
     class InternalServerException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -1629,6 +1680,7 @@ module Aws::Finspacedata
     # @!attribute message
     #   @return [String]
     class LimitExceededException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -1646,6 +1698,7 @@ module Aws::Finspacedata
     #   <p>A token that indicates where a results page should begin.</p>
     #   @return [String]
     class ListChangesetsRequest < Struct.new(
+      nil,
       :dataset_id,
       :max_results,
       :next_token,
@@ -1662,6 +1715,7 @@ module Aws::Finspacedata
     #   <p>A token that indicates where a results page should begin.</p>
     #   @return [String]
     class ListChangesetsResponse < Struct.new(
+      nil,
       :changesets,
       :next_token,
       keyword_init: true
@@ -1680,6 +1734,7 @@ module Aws::Finspacedata
     #   <p>The maximum number of results per page.</p>
     #   @return [Integer]
     class ListDataViewsRequest < Struct.new(
+      nil,
       :dataset_id,
       :next_token,
       :max_results,
@@ -1695,6 +1750,7 @@ module Aws::Finspacedata
     #   <p>A list of Dataviews.</p>
     #   @return [Array<Types::DataViewSummary>]
     class ListDataViewsResponse < Struct.new(
+      nil,
       :next_token,
       :data_views,
       keyword_init: true
@@ -1710,6 +1766,7 @@ module Aws::Finspacedata
     #   <p>The maximum number of results per page.</p>
     #   @return [Integer]
     class ListDatasetsRequest < Struct.new(
+      nil,
       :next_token,
       :max_results,
       keyword_init: true
@@ -1725,6 +1782,7 @@ module Aws::Finspacedata
     #   <p>A token that indicates where a results page should begin.</p>
     #   @return [String]
     class ListDatasetsResponse < Struct.new(
+      nil,
       :datasets,
       :next_token,
       keyword_init: true
@@ -1742,6 +1800,7 @@ module Aws::Finspacedata
     #   <p>The maximum number of results per page.</p>
     #   @return [Integer]
     class ListPermissionGroupsByUserRequest < Struct.new(
+      nil,
       :user_id,
       :next_token,
       :max_results,
@@ -1757,6 +1816,7 @@ module Aws::Finspacedata
     #   <p>A token that indicates where a results page should begin.</p>
     #   @return [String]
     class ListPermissionGroupsByUserResponse < Struct.new(
+      nil,
       :permission_groups,
       :next_token,
       keyword_init: true
@@ -1771,6 +1831,7 @@ module Aws::Finspacedata
     #   <p>The maximum number of results per page.</p>
     #   @return [Integer]
     class ListPermissionGroupsRequest < Struct.new(
+      nil,
       :next_token,
       :max_results,
       keyword_init: true
@@ -1785,6 +1846,7 @@ module Aws::Finspacedata
     #   <p>A token that indicates where a results page should begin.</p>
     #   @return [String]
     class ListPermissionGroupsResponse < Struct.new(
+      nil,
       :permission_groups,
       :next_token,
       keyword_init: true
@@ -1802,6 +1864,7 @@ module Aws::Finspacedata
     #   <p>The maximum number of results per page.</p>
     #   @return [Integer]
     class ListUsersByPermissionGroupRequest < Struct.new(
+      nil,
       :permission_group_id,
       :next_token,
       :max_results,
@@ -1817,6 +1880,7 @@ module Aws::Finspacedata
     #   <p>A token that indicates where a results page should begin.</p>
     #   @return [String]
     class ListUsersByPermissionGroupResponse < Struct.new(
+      nil,
       :users,
       :next_token,
       keyword_init: true
@@ -1831,6 +1895,7 @@ module Aws::Finspacedata
     #   <p>The maximum number of results per page.</p>
     #   @return [Integer]
     class ListUsersRequest < Struct.new(
+      nil,
       :next_token,
       :max_results,
       keyword_init: true
@@ -1845,6 +1910,7 @@ module Aws::Finspacedata
     #   <p>A token that indicates where a results page should begin.</p>
     #   @return [String]
     class ListUsersResponse < Struct.new(
+      nil,
       :users,
       :next_token,
       keyword_init: true
@@ -1924,6 +1990,7 @@ module Aws::Finspacedata
     #            </ul>
     #   @return [String]
     class PermissionGroup < Struct.new(
+      nil,
       :permission_group_id,
       :name,
       :description,
@@ -1967,6 +2034,7 @@ module Aws::Finspacedata
     #            </ul>
     #   @return [String]
     class PermissionGroupByUser < Struct.new(
+      nil,
       :permission_group_id,
       :name,
       :membership_status,
@@ -1997,6 +2065,7 @@ module Aws::Finspacedata
     #   <p>List of resource permissions.</p>
     #   @return [Array<Types::ResourcePermission>]
     class PermissionGroupParams < Struct.new(
+      nil,
       :permission_group_id,
       :dataset_permissions,
       keyword_init: true
@@ -2011,6 +2080,7 @@ module Aws::Finspacedata
     #   <p>A token that ensures idempotency. This token expires in 10 minutes.</p>
     #   @return [String]
     class ResetUserPasswordRequest < Struct.new(
+      nil,
       :user_id,
       :client_token,
       keyword_init: true
@@ -2025,6 +2095,7 @@ module Aws::Finspacedata
     #   <p>A randomly generated temporary password for the requested user. This password expires in 7 days.</p>
     #   @return [String]
     class ResetUserPasswordResponse < Struct.new(
+      nil,
       :user_id,
       :temporary_password,
       keyword_init: true
@@ -2038,6 +2109,7 @@ module Aws::Finspacedata
     # @!attribute reason
     #   @return [String]
     class ResourceNotFoundException < Struct.new(
+      nil,
       :message,
       :reason,
       keyword_init: true
@@ -2086,6 +2158,7 @@ module Aws::Finspacedata
     #   <p>Permission for a resource.</p>
     #   @return [String]
     class ResourcePermission < Struct.new(
+      nil,
       :permission,
       keyword_init: true
     )
@@ -2100,6 +2173,7 @@ module Aws::Finspacedata
     #   <p> The path of the folder, within the S3 bucket that contains the Dataset.</p>
     #   @return [String]
     class S3Location < Struct.new(
+      nil,
       :bucket,
       :key,
       keyword_init: true
@@ -2115,6 +2189,7 @@ module Aws::Finspacedata
     #   <p>List of column names used for primary key.</p>
     #   @return [Array<String>]
     class SchemaDefinition < Struct.new(
+      nil,
       :columns,
       :primary_key_columns,
       keyword_init: true
@@ -2127,6 +2202,7 @@ module Aws::Finspacedata
     #   <p>The configuration for a schema on a tabular Dataset.</p>
     #   @return [Types::SchemaDefinition]
     class SchemaUnion < Struct.new(
+      nil,
       :tabular_schema_config,
       keyword_init: true
     )
@@ -2135,6 +2211,7 @@ module Aws::Finspacedata
 
     # <p>The request was denied due to request throttling.</p>
     class ThrottlingException < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -2213,6 +2290,7 @@ module Aws::Finspacedata
     #            <p> For more information about supported file formats, see <a href="https://docs.aws.amazon.com/finspace/latest/userguide/supported-data-types.html">Supported Data Types and File Formats</a> in the FinSpace User Guide.</p>
     #   @return [Hash<String, String>]
     class UpdateChangesetRequest < Struct.new(
+      nil,
       :client_token,
       :dataset_id,
       :changeset_id,
@@ -2231,6 +2309,7 @@ module Aws::Finspacedata
     #   <p>The unique identifier for the FinSpace Dataset in which the Changeset is created.</p>
     #   @return [String]
     class UpdateChangesetResponse < Struct.new(
+      nil,
       :changeset_id,
       :dataset_id,
       keyword_init: true
@@ -2271,6 +2350,7 @@ module Aws::Finspacedata
     #   <p>Definition for a schema on a tabular Dataset.</p>
     #   @return [Types::SchemaUnion]
     class UpdateDatasetRequest < Struct.new(
+      nil,
       :client_token,
       :dataset_id,
       :dataset_title,
@@ -2288,6 +2368,7 @@ module Aws::Finspacedata
     #   <p>The unique identifier for updated Dataset.</p>
     #   @return [String]
     class UpdateDatasetResponse < Struct.new(
+      nil,
       :dataset_id,
       keyword_init: true
     )
@@ -2343,6 +2424,7 @@ module Aws::Finspacedata
     #   <p>A token that ensures idempotency. This token expires in 10 minutes.</p>
     #   @return [String]
     class UpdatePermissionGroupRequest < Struct.new(
+      nil,
       :permission_group_id,
       :name,
       :description,
@@ -2357,6 +2439,7 @@ module Aws::Finspacedata
     #   <p>The unique identifier for the updated permission group.</p>
     #   @return [String]
     class UpdatePermissionGroupResponse < Struct.new(
+      nil,
       :permission_group_id,
       keyword_init: true
     )
@@ -2405,6 +2488,7 @@ module Aws::Finspacedata
     #   <p>A token that ensures idempotency. This token expires in 10 minutes.</p>
     #   @return [String]
     class UpdateUserRequest < Struct.new(
+      nil,
       :user_id,
       :type,
       :first_name,
@@ -2421,6 +2505,7 @@ module Aws::Finspacedata
     #   <p>The unique identifier of the updated user.</p>
     #   @return [String]
     class UpdateUserResponse < Struct.new(
+      nil,
       :user_id,
       keyword_init: true
     )
@@ -2505,6 +2590,7 @@ module Aws::Finspacedata
     #       </p>
     #   @return [Integer]
     class User < Struct.new(
+      nil,
       :user_id,
       :status,
       :first_name,
@@ -2609,6 +2695,7 @@ module Aws::Finspacedata
     #            </ul>
     #   @return [String]
     class UserByPermissionGroup < Struct.new(
+      nil,
       :user_id,
       :status,
       :first_name,
@@ -2629,6 +2716,7 @@ module Aws::Finspacedata
     # @!attribute reason
     #   @return [String]
     class ValidationException < Struct.new(
+      nil,
       :message,
       :reason,
       keyword_init: true

@@ -10,6 +10,7 @@ module Aws::HealthLake
     # @!attribute message
     #   @return [String]
     class AccessDeniedException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -21,6 +22,7 @@ module Aws::HealthLake
     # @!attribute message
     #   @return [String]
     class ConflictException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -52,6 +54,7 @@ module Aws::HealthLake
     #   <p>The identity provider configuration to use for the data store.</p>
     #   @return [Types::IdentityProviderConfiguration]
     class CreateFHIRDatastoreRequest < Struct.new(
+      nil,
       :datastore_name,
       :datastore_type_version,
       :sse_configuration,
@@ -77,6 +80,7 @@ module Aws::HealthLake
     #   <p>The AWS endpoint created for the data store.</p>
     #   @return [String]
     class CreateFHIRDatastoreResponse < Struct.new(
+      nil,
       :datastore_id,
       :datastore_arn,
       :datastore_status,
@@ -102,6 +106,7 @@ module Aws::HealthLake
     #            are included in the results.</p>
     #   @return [Time]
     class DatastoreFilter < Struct.new(
+      nil,
       :datastore_name,
       :datastore_status,
       :created_before,
@@ -148,6 +153,7 @@ module Aws::HealthLake
     #   <p>The error cause for the current data store operation.</p>
     #   @return [Types::ErrorCause]
     class DatastoreProperties < Struct.new(
+      nil,
       :datastore_id,
       :datastore_arn,
       :datastore_name,
@@ -168,6 +174,7 @@ module Aws::HealthLake
     #   <p> The AWS-generated identifier for the data store to be deleted.</p>
     #   @return [String]
     class DeleteFHIRDatastoreRequest < Struct.new(
+      nil,
       :datastore_id,
       keyword_init: true
     )
@@ -187,6 +194,7 @@ module Aws::HealthLake
     #   <p>The AWS endpoint of the data store to be deleted.</p>
     #   @return [String]
     class DeleteFHIRDatastoreResponse < Struct.new(
+      nil,
       :datastore_id,
       :datastore_arn,
       :datastore_status,
@@ -200,6 +208,7 @@ module Aws::HealthLake
     #   <p>The data store identifier.</p>
     #   @return [String]
     class DescribeFHIRDatastoreRequest < Struct.new(
+      nil,
       :datastore_id,
       keyword_init: true
     )
@@ -210,6 +219,7 @@ module Aws::HealthLake
     #   <p>The data store properties.</p>
     #   @return [Types::DatastoreProperties]
     class DescribeFHIRDatastoreResponse < Struct.new(
+      nil,
       :datastore_properties,
       keyword_init: true
     )
@@ -223,6 +233,7 @@ module Aws::HealthLake
     #   <p>The export job identifier.</p>
     #   @return [String]
     class DescribeFHIRExportJobRequest < Struct.new(
+      nil,
       :datastore_id,
       :job_id,
       keyword_init: true
@@ -234,6 +245,7 @@ module Aws::HealthLake
     #   <p>The export job properties.</p>
     #   @return [Types::ExportJobProperties]
     class DescribeFHIRExportJobResponse < Struct.new(
+      nil,
       :export_job_properties,
       keyword_init: true
     )
@@ -247,6 +259,7 @@ module Aws::HealthLake
     #   <p>The import job identifier.</p>
     #   @return [String]
     class DescribeFHIRImportJobRequest < Struct.new(
+      nil,
       :datastore_id,
       :job_id,
       keyword_init: true
@@ -258,6 +271,7 @@ module Aws::HealthLake
     #   <p>The import job properties.</p>
     #   @return [Types::ImportJobProperties]
     class DescribeFHIRImportJobResponse < Struct.new(
+      nil,
       :import_job_properties,
       keyword_init: true
     )
@@ -273,6 +287,7 @@ module Aws::HealthLake
     #   <p>The error category for <code>ErrorCause</code>.</p>
     #   @return [String]
     class ErrorCause < Struct.new(
+      nil,
       :error_message,
       :error_category,
       keyword_init: true
@@ -309,6 +324,7 @@ module Aws::HealthLake
     #   <p>An explanation of any errors that might have occurred during the export job.</p>
     #   @return [String]
     class ExportJobProperties < Struct.new(
+      nil,
       :job_id,
       :job_name,
       :job_status,
@@ -379,6 +395,7 @@ module Aws::HealthLake
     #            authorization server.</p>
     #   @return [String]
     class IdentityProviderConfiguration < Struct.new(
+      nil,
       :authorization_strategy,
       :fine_grained_authorization_enabled,
       :metadata,
@@ -432,6 +449,7 @@ module Aws::HealthLake
     #   <p>The validation level of the import job.</p>
     #   @return [String]
     class ImportJobProperties < Struct.new(
+      nil,
       :job_id,
       :job_name,
       :job_status,
@@ -469,6 +487,7 @@ module Aws::HealthLake
     # @!attribute message
     #   @return [String]
     class InternalServerException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -502,6 +521,7 @@ module Aws::HealthLake
     #   <p>The transaction rate the import job is processed at.</p>
     #   @return [Float]
     class JobProgressReport < Struct.new(
+      nil,
       :total_number_of_scanned_files,
       :total_size_of_scanned_files_in_mb,
       :total_number_of_imported_files,
@@ -525,6 +545,7 @@ module Aws::HealthLake
     #            rest.</p>
     #   @return [String]
     class KmsEncryptionConfig < Struct.new(
+      nil,
       :cmk_type,
       :kms_key_id,
       keyword_init: true
@@ -543,6 +564,7 @@ module Aws::HealthLake
     #   <p>The maximum number of data stores returned on a page.</p>
     #   @return [Integer]
     class ListFHIRDatastoresRequest < Struct.new(
+      nil,
       :filter,
       :next_token,
       :max_results,
@@ -558,6 +580,7 @@ module Aws::HealthLake
     #   <p>The pagination token used to retrieve the next page of results.</p>
     #   @return [String]
     class ListFHIRDatastoresResponse < Struct.new(
+      nil,
       :datastore_properties_list,
       :next_token,
       keyword_init: true
@@ -588,6 +611,7 @@ module Aws::HealthLake
     #   <p>Limits the response to FHIR export jobs submitted after a user-specified date.</p>
     #   @return [Time]
     class ListFHIRExportJobsRequest < Struct.new(
+      nil,
       :datastore_id,
       :next_token,
       :max_results,
@@ -607,6 +631,7 @@ module Aws::HealthLake
     #   <p>The pagination token used to identify the next page of results to return.</p>
     #   @return [String]
     class ListFHIRExportJobsResponse < Struct.new(
+      nil,
       :export_job_properties_list,
       :next_token,
       keyword_init: true
@@ -637,6 +662,7 @@ module Aws::HealthLake
     #   <p>Limits the response to FHIR import jobs submitted after a user-specified date.</p>
     #   @return [Time]
     class ListFHIRImportJobsRequest < Struct.new(
+      nil,
       :datastore_id,
       :next_token,
       :max_results,
@@ -656,6 +682,7 @@ module Aws::HealthLake
     #   <p>The pagination token used to identify the next page of results to return.</p>
     #   @return [String]
     class ListFHIRImportJobsResponse < Struct.new(
+      nil,
       :import_job_properties_list,
       :next_token,
       keyword_init: true
@@ -667,6 +694,7 @@ module Aws::HealthLake
     #   <p>The Amazon Resource Name (ARN) of the data store to which tags are being added.</p>
     #   @return [String]
     class ListTagsForResourceRequest < Struct.new(
+      nil,
       :resource_arn,
       keyword_init: true
     )
@@ -677,6 +705,7 @@ module Aws::HealthLake
     #   <p>Returns a list of tags associated with a data store. </p>
     #   @return [Array<Types::Tag>]
     class ListTagsForResourceResponse < Struct.new(
+      nil,
       :tags,
       keyword_init: true
     )
@@ -703,6 +732,7 @@ module Aws::HealthLake
     #   <p>The type of preloaded data. Only Synthea preloaded data is supported.</p>
     #   @return [String]
     class PreloadDataConfig < Struct.new(
+      nil,
       :preload_data_type,
       keyword_init: true
     )
@@ -713,6 +743,7 @@ module Aws::HealthLake
     # @!attribute message
     #   @return [String]
     class ResourceNotFoundException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -729,6 +760,7 @@ module Aws::HealthLake
     #   <p>The Key Management Service (KMS) key ID used to access the S3 bucket. </p>
     #   @return [String]
     class S3Configuration < Struct.new(
+      nil,
       :s3_uri,
       :kms_key_id,
       keyword_init: true
@@ -743,6 +775,7 @@ module Aws::HealthLake
     #            encryption.</p>
     #   @return [Types::KmsEncryptionConfig]
     class SseConfiguration < Struct.new(
+      nil,
       :kms_encryption_config,
       keyword_init: true
     )
@@ -765,6 +798,7 @@ module Aws::HealthLake
     #   <p>An optional user provided token used for ensuring API idempotency.</p>
     #   @return [String]
     class StartFHIRExportJobRequest < Struct.new(
+      nil,
       :job_name,
       :output_data_config,
       :datastore_id,
@@ -785,6 +819,7 @@ module Aws::HealthLake
     #   <p>The data store identifier from which files are being exported.</p>
     #   @return [String]
     class StartFHIRExportJobResponse < Struct.new(
+      nil,
       :job_id,
       :job_status,
       :datastore_id,
@@ -815,6 +850,7 @@ module Aws::HealthLake
     #   <p>The validation level of the import job.</p>
     #   @return [String]
     class StartFHIRImportJobRequest < Struct.new(
+      nil,
       :job_name,
       :input_data_config,
       :job_output_data_config,
@@ -837,6 +873,7 @@ module Aws::HealthLake
     #   <p>The data store identifier.</p>
     #   @return [String]
     class StartFHIRImportJobResponse < Struct.new(
+      nil,
       :job_id,
       :job_status,
       :datastore_id,
@@ -854,6 +891,7 @@ module Aws::HealthLake
     #   <p> The value portion of a tag. Tag values are case-sensitive.</p>
     #   @return [String]
     class Tag < Struct.new(
+      nil,
       :key,
       :value,
       keyword_init: true
@@ -868,6 +906,7 @@ module Aws::HealthLake
     #   <p>The user-specified key and value pair tags being added to a data store.</p>
     #   @return [Array<Types::Tag>]
     class TagResourceRequest < Struct.new(
+      nil,
       :resource_arn,
       :tags,
       keyword_init: true
@@ -876,6 +915,7 @@ module Aws::HealthLake
     end
 
     class TagResourceResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -885,6 +925,7 @@ module Aws::HealthLake
     # @!attribute message
     #   @return [String]
     class ThrottlingException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -898,6 +939,7 @@ module Aws::HealthLake
     #   <p>The keys for the tags to be removed from the data store.</p>
     #   @return [Array<String>]
     class UntagResourceRequest < Struct.new(
+      nil,
       :resource_arn,
       :tag_keys,
       keyword_init: true
@@ -906,6 +948,7 @@ module Aws::HealthLake
     end
 
     class UntagResourceResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -915,6 +958,7 @@ module Aws::HealthLake
     # @!attribute message
     #   @return [String]
     class ValidationException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )

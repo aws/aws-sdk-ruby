@@ -15,6 +15,7 @@ module Aws::SWF
     #   <p>The unique ID of the task.</p>
     #   @return [String]
     class ActivityTaskCancelRequestedEventAttributes < Struct.new(
+      nil,
       :decision_task_completed_event_id,
       :activity_id,
       keyword_init: true
@@ -43,6 +44,7 @@ module Aws::SWF
     #   <p>If set, contains the ID of the last <code>ActivityTaskCancelRequested</code> event recorded for this activity task. This information can be useful for diagnosing problems by tracing back the chain of events leading up to this event.</p>
     #   @return [Integer]
     class ActivityTaskCanceledEventAttributes < Struct.new(
+      nil,
       :details,
       :scheduled_event_id,
       :started_event_id,
@@ -72,6 +74,7 @@ module Aws::SWF
     #         event.</p>
     #   @return [Integer]
     class ActivityTaskCompletedEventAttributes < Struct.new(
+      nil,
       :result,
       :scheduled_event_id,
       :started_event_id,
@@ -102,6 +105,7 @@ module Aws::SWF
     #         event.</p>
     #   @return [Integer]
     class ActivityTaskFailedEventAttributes < Struct.new(
+      nil,
       :reason,
       :details,
       :scheduled_event_id,
@@ -159,6 +163,7 @@ module Aws::SWF
     #         the worker subsequently attempts to record a heartbeat or return a result, it is ignored.</p>
     #   @return [String]
     class ActivityTaskScheduledEventAttributes < Struct.new(
+      nil,
       :activity_type,
       :activity_id,
       :input,
@@ -188,6 +193,7 @@ module Aws::SWF
     #   <p>The ID of the <code>ActivityTaskScheduled</code> event that was recorded when this activity task was scheduled. This information can be useful for diagnosing problems by tracing back the chain of events leading up to this event.</p>
     #   @return [Integer]
     class ActivityTaskStartedEventAttributes < Struct.new(
+      nil,
       :identity,
       :scheduled_event_id,
       keyword_init: true
@@ -217,6 +223,7 @@ module Aws::SWF
     #         <code>RecordActivityTaskHeartbeat</code>.</p>
     #   @return [String]
     class ActivityTaskTimedOutEventAttributes < Struct.new(
+      nil,
       :timeout_type,
       :scheduled_event_id,
       :started_event_id,
@@ -246,6 +253,7 @@ module Aws::SWF
     #            </note>
     #   @return [String]
     class ActivityType < Struct.new(
+      nil,
       :name,
       :version,
       keyword_init: true
@@ -306,6 +314,7 @@ module Aws::SWF
     #            <p>The duration is specified in seconds, an integer greater than or equal to <code>0</code>. You can use <code>NONE</code> to specify unlimited duration.</p>
     #   @return [String]
     class ActivityTypeConfiguration < Struct.new(
+      nil,
       :default_task_start_to_close_timeout,
       :default_task_heartbeat_timeout,
       :default_task_list,
@@ -334,6 +343,7 @@ module Aws::SWF
     #   <p>If DEPRECATED, the date and time <a>DeprecateActivityType</a> was called.</p>
     #   @return [Time]
     class ActivityTypeInfo < Struct.new(
+      nil,
       :activity_type,
       :status,
       :description,
@@ -370,6 +380,7 @@ module Aws::SWF
     #            The unique ID of the timer to cancel.</p>
     #   @return [String]
     class CancelTimerDecisionAttributes < Struct.new(
+      nil,
       :timer_id,
       keyword_init: true
     )
@@ -392,6 +403,7 @@ module Aws::SWF
     #   <p>The ID of the <code>DecisionTaskCompleted</code> event corresponding to the decision task that resulted in the <code>CancelTimer</code> decision to cancel this timer. This information can be useful for diagnosing problems by tracing back the chain of events leading up to this event.</p>
     #   @return [Integer]
     class CancelTimerFailedEventAttributes < Struct.new(
+      nil,
       :timer_id,
       :cause,
       :decision_task_completed_event_id,
@@ -431,6 +443,7 @@ module Aws::SWF
     #            Details of the cancellation.</p>
     #   @return [String]
     class CancelWorkflowExecutionDecisionAttributes < Struct.new(
+      nil,
       :details,
       keyword_init: true
     )
@@ -450,6 +463,7 @@ module Aws::SWF
     #   <p>The ID of the <code>DecisionTaskCompleted</code> event corresponding to the decision task that resulted in the <code>CancelWorkflowExecution</code> decision for this cancellation request. This information can be useful for diagnosing problems by tracing back the chain of events leading up to this event.</p>
     #   @return [Integer]
     class CancelWorkflowExecutionFailedEventAttributes < Struct.new(
+      nil,
       :cause,
       :decision_task_completed_event_id,
       keyword_init: true
@@ -485,6 +499,7 @@ module Aws::SWF
     #     events leading up to this event.</p>
     #   @return [Integer]
     class ChildWorkflowExecutionCanceledEventAttributes < Struct.new(
+      nil,
       :workflow_execution,
       :workflow_type,
       :details,
@@ -521,6 +536,7 @@ module Aws::SWF
     #     events leading up to this event.</p>
     #   @return [Integer]
     class ChildWorkflowExecutionCompletedEventAttributes < Struct.new(
+      nil,
       :workflow_execution,
       :workflow_type,
       :result,
@@ -563,6 +579,7 @@ module Aws::SWF
     #     events leading up to this event.</p>
     #   @return [Integer]
     class ChildWorkflowExecutionFailedEventAttributes < Struct.new(
+      nil,
       :workflow_execution,
       :workflow_type,
       :reason,
@@ -595,6 +612,7 @@ module Aws::SWF
     #     events leading up to this event.</p>
     #   @return [Integer]
     class ChildWorkflowExecutionStartedEventAttributes < Struct.new(
+      nil,
       :workflow_execution,
       :workflow_type,
       :initiated_event_id,
@@ -628,6 +646,7 @@ module Aws::SWF
     #     events leading up to this event.</p>
     #   @return [Integer]
     class ChildWorkflowExecutionTerminatedEventAttributes < Struct.new(
+      nil,
       :workflow_execution,
       :workflow_type,
       :initiated_event_id,
@@ -665,6 +684,7 @@ module Aws::SWF
     #     events leading up to this event.</p>
     #   @return [Integer]
     class ChildWorkflowExecutionTimedOutEventAttributes < Struct.new(
+      nil,
       :workflow_execution,
       :workflow_type,
       :timeout_type,
@@ -688,6 +708,7 @@ module Aws::SWF
     #         this filter.</p>
     #   @return [String]
     class CloseStatusFilter < Struct.new(
+      nil,
       :status,
       keyword_init: true
     )
@@ -719,6 +740,7 @@ module Aws::SWF
     #   <p>The result of the workflow execution. The form of the result is implementation defined.</p>
     #   @return [String]
     class CompleteWorkflowExecutionDecisionAttributes < Struct.new(
+      nil,
       :result,
       keyword_init: true
     )
@@ -740,6 +762,7 @@ module Aws::SWF
     #     events leading up to this event.</p>
     #   @return [Integer]
     class CompleteWorkflowExecutionFailedEventAttributes < Struct.new(
+      nil,
       :cause,
       :decision_task_completed_event_id,
       keyword_init: true
@@ -858,6 +881,7 @@ module Aws::SWF
     #   <p>The IAM role to attach to the new (continued) execution.</p>
     #   @return [String]
     class ContinueAsNewWorkflowExecutionDecisionAttributes < Struct.new(
+      nil,
       :input,
       :execution_start_to_close_timeout,
       :task_list,
@@ -887,6 +911,7 @@ module Aws::SWF
     #     events leading up to this event.</p>
     #   @return [Integer]
     class ContinueAsNewWorkflowExecutionFailedEventAttributes < Struct.new(
+      nil,
       :cause,
       :decision_task_completed_event_id,
       keyword_init: true
@@ -961,6 +986,7 @@ module Aws::SWF
     #            </note>
     #   @return [Types::CloseStatusFilter]
     class CountClosedWorkflowExecutionsInput < Struct.new(
+      nil,
       :domain,
       :start_time_filter,
       :close_time_filter,
@@ -983,6 +1009,7 @@ module Aws::SWF
     #   <p>If set to true, indicates that the actual count was more than the maximum supported by this API and the count returned is the truncated value.</p>
     #   @return [Boolean]
     class CountClosedWorkflowExecutionsOutput < Struct.new(
+      nil,
       :count,
       :truncated,
       keyword_init: true
@@ -1030,6 +1057,7 @@ module Aws::SWF
     #            </note>
     #   @return [Types::WorkflowExecutionFilter]
     class CountOpenWorkflowExecutionsInput < Struct.new(
+      nil,
       :domain,
       :start_time_filter,
       :type_filter,
@@ -1050,6 +1078,7 @@ module Aws::SWF
     #   <p>If set to true, indicates that the actual count was more than the maximum supported by this API and the count returned is the truncated value.</p>
     #   @return [Boolean]
     class CountOpenWorkflowExecutionsOutput < Struct.new(
+      nil,
       :count,
       :truncated,
       keyword_init: true
@@ -1070,6 +1099,7 @@ module Aws::SWF
     #   <p>The name of the task list.</p>
     #   @return [Types::TaskList]
     class CountPendingActivityTasksInput < Struct.new(
+      nil,
       :domain,
       :task_list,
       keyword_init: true
@@ -1085,6 +1115,7 @@ module Aws::SWF
     #   <p>If set to true, indicates that the actual count was more than the maximum supported by this API and the count returned is the truncated value.</p>
     #   @return [Boolean]
     class CountPendingActivityTasksOutput < Struct.new(
+      nil,
       :count,
       :truncated,
       keyword_init: true
@@ -1105,6 +1136,7 @@ module Aws::SWF
     #   <p>The name of the task list.</p>
     #   @return [Types::TaskList]
     class CountPendingDecisionTasksInput < Struct.new(
+      nil,
       :domain,
       :task_list,
       keyword_init: true
@@ -1120,6 +1152,7 @@ module Aws::SWF
     #   <p>If set to true, indicates that the actual count was more than the maximum supported by this API and the count returned is the truncated value.</p>
     #   @return [Boolean]
     class CountPendingDecisionTasksOutput < Struct.new(
+      nil,
       :count,
       :truncated,
       keyword_init: true
@@ -1447,6 +1480,7 @@ module Aws::SWF
     #         for other decision types.</p>
     #   @return [Types::ScheduleLambdaFunctionDecisionAttributes]
     class Decision < Struct.new(
+      nil,
       :decision_type,
       :schedule_activity_task_decision_attributes,
       :request_cancel_activity_task_decision_attributes,
@@ -1487,6 +1521,7 @@ module Aws::SWF
     #   <p>The maximum amount of time the decision task can wait to be assigned to a worker.</p>
     #   @return [String]
     class DecisionTaskCompletedEventAttributes < Struct.new(
+      nil,
       :execution_context,
       :scheduled_event_id,
       :started_event_id,
@@ -1522,6 +1557,7 @@ module Aws::SWF
     #   <p>The maximum amount of time the decision task can wait to be assigned to a worker.</p>
     #   @return [String]
     class DecisionTaskScheduledEventAttributes < Struct.new(
+      nil,
       :task_list,
       :task_priority,
       :start_to_close_timeout,
@@ -1541,6 +1577,7 @@ module Aws::SWF
     #     events leading up to this event.</p>
     #   @return [Integer]
     class DecisionTaskStartedEventAttributes < Struct.new(
+      nil,
       :identity,
       :scheduled_event_id,
       keyword_init: true
@@ -1568,6 +1605,7 @@ module Aws::SWF
     #         event.</p>
     #   @return [Integer]
     class DecisionTaskTimedOutEventAttributes < Struct.new(
+      nil,
       :timeout_type,
       :scheduled_event_id,
       :started_event_id,
@@ -1596,6 +1634,7 @@ module Aws::SWF
     # @!attribute message
     #   @return [String]
     class DefaultUndefinedFault < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -1609,6 +1648,7 @@ module Aws::SWF
     #   <p>The activity type to delete.</p>
     #   @return [Types::ActivityType]
     class DeleteActivityTypeInput < Struct.new(
+      nil,
       :domain,
       :activity_type,
       keyword_init: true
@@ -1623,6 +1663,7 @@ module Aws::SWF
     #   <p>The workflow type to delete.</p>
     #   @return [Types::WorkflowType]
     class DeleteWorkflowTypeInput < Struct.new(
+      nil,
       :domain,
       :workflow_type,
       keyword_init: true
@@ -1637,6 +1678,7 @@ module Aws::SWF
     #   <p>The activity type to deprecate.</p>
     #   @return [Types::ActivityType]
     class DeprecateActivityTypeInput < Struct.new(
+      nil,
       :domain,
       :activity_type,
       keyword_init: true
@@ -1648,6 +1690,7 @@ module Aws::SWF
     #   <p>The name of the domain to deprecate.</p>
     #   @return [String]
     class DeprecateDomainInput < Struct.new(
+      nil,
       :name,
       keyword_init: true
     )
@@ -1661,6 +1704,7 @@ module Aws::SWF
     #   <p>The workflow type to deprecate.</p>
     #   @return [Types::WorkflowType]
     class DeprecateWorkflowTypeInput < Struct.new(
+      nil,
       :domain,
       :workflow_type,
       keyword_init: true
@@ -1677,6 +1721,7 @@ module Aws::SWF
     #         registered.</p>
     #   @return [Types::ActivityType]
     class DescribeActivityTypeInput < Struct.new(
+      nil,
       :domain,
       :activity_type,
       keyword_init: true
@@ -1708,6 +1753,7 @@ module Aws::SWF
     #   <p>The configuration settings registered with the activity type.</p>
     #   @return [Types::ActivityTypeConfiguration]
     class DescribeActivityTypeOutput < Struct.new(
+      nil,
       :type_info,
       :configuration,
       keyword_init: true
@@ -1719,6 +1765,7 @@ module Aws::SWF
     #   <p>The name of the domain to describe.</p>
     #   @return [String]
     class DescribeDomainInput < Struct.new(
+      nil,
       :name,
       keyword_init: true
     )
@@ -1735,6 +1782,7 @@ module Aws::SWF
     #         period.</p>
     #   @return [Types::DomainConfiguration]
     class DescribeDomainOutput < Struct.new(
+      nil,
       :domain_info,
       :configuration,
       keyword_init: true
@@ -1749,6 +1797,7 @@ module Aws::SWF
     #   <p>The workflow execution to describe.</p>
     #   @return [Types::WorkflowExecution]
     class DescribeWorkflowExecutionInput < Struct.new(
+      nil,
       :domain,
       :execution,
       keyword_init: true
@@ -1774,6 +1823,7 @@ module Aws::SWF
     #         executionContext (a free-form string) when closing a decision task using <a>RespondDecisionTaskCompleted</a>.</p>
     #   @return [String]
     class DescribeWorkflowExecutionOutput < Struct.new(
+      nil,
       :execution_info,
       :execution_configuration,
       :open_counts,
@@ -1791,6 +1841,7 @@ module Aws::SWF
     #   <p>The workflow type to describe.</p>
     #   @return [Types::WorkflowType]
     class DescribeWorkflowTypeInput < Struct.new(
+      nil,
       :domain,
       :workflow_type,
       keyword_init: true
@@ -1819,6 +1870,7 @@ module Aws::SWF
     #            </p>
     #   @return [Types::WorkflowTypeConfiguration]
     class DescribeWorkflowTypeOutput < Struct.new(
+      nil,
       :type_info,
       :configuration,
       keyword_init: true
@@ -1831,6 +1883,7 @@ module Aws::SWF
     #   <p>A description that may help with diagnosing the cause of the fault.</p>
     #   @return [String]
     class DomainAlreadyExistsFault < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -1842,6 +1895,7 @@ module Aws::SWF
     #   <p>The retention period for workflow executions in this domain.</p>
     #   @return [String]
     class DomainConfiguration < Struct.new(
+      nil,
       :workflow_execution_retention_period_in_days,
       keyword_init: true
     )
@@ -1853,6 +1907,7 @@ module Aws::SWF
     #   <p>A description that may help with diagnosing the cause of the fault.</p>
     #   @return [String]
     class DomainDeprecatedFault < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -1887,6 +1942,7 @@ module Aws::SWF
     #   <p>The ARN of the domain.</p>
     #   @return [String]
     class DomainInfo < Struct.new(
+      nil,
       :name,
       :status,
       :description,
@@ -1907,6 +1963,7 @@ module Aws::SWF
     #   <p>Specifies the latest start or close date and time to return.</p>
     #   @return [Time]
     class ExecutionTimeFilter < Struct.new(
+      nil,
       :oldest_date,
       :latest_date,
       keyword_init: true
@@ -1925,6 +1982,7 @@ module Aws::SWF
     #         event.</p>
     #   @return [Integer]
     class ExternalWorkflowExecutionCancelRequestedEventAttributes < Struct.new(
+      nil,
       :workflow_execution,
       :initiated_event_id,
       keyword_init: true
@@ -1947,6 +2005,7 @@ module Aws::SWF
     #     events leading up to this event.</p>
     #   @return [Integer]
     class ExternalWorkflowExecutionSignaledEventAttributes < Struct.new(
+      nil,
       :workflow_execution,
       :initiated_event_id,
       keyword_init: true
@@ -1989,6 +2048,7 @@ module Aws::SWF
     #            Details of the failure.</p>
     #   @return [String]
     class FailWorkflowExecutionDecisionAttributes < Struct.new(
+      nil,
       :reason,
       :details,
       keyword_init: true
@@ -2011,6 +2071,7 @@ module Aws::SWF
     #     events leading up to this event.</p>
     #   @return [Integer]
     class FailWorkflowExecutionFailedEventAttributes < Struct.new(
+      nil,
       :cause,
       :decision_task_completed_event_id,
       keyword_init: true
@@ -2048,6 +2109,7 @@ module Aws::SWF
     #         events.</p>
     #   @return [Boolean]
     class GetWorkflowExecutionHistoryInput < Struct.new(
+      nil,
       :domain,
       :execution,
       :next_page_token,
@@ -2069,6 +2131,7 @@ module Aws::SWF
     #            <p>The configured <code>maximumPageSize</code> determines how many results can be returned in a single call.</p>
     #   @return [String]
     class GetWorkflowExecutionHistoryOutput < Struct.new(
+      nil,
       :events,
       :next_page_token,
       keyword_init: true
@@ -2520,6 +2583,7 @@ module Aws::SWF
     #         for other event types.</p>
     #   @return [Types::StartLambdaFunctionFailedEventAttributes]
     class HistoryEvent < Struct.new(
+      nil,
       :event_timestamp,
       :event_type,
       :event_id,
@@ -2601,6 +2665,7 @@ module Aws::SWF
     #   <p>The results of the Lambda task.</p>
     #   @return [String]
     class LambdaFunctionCompletedEventAttributes < Struct.new(
+      nil,
       :scheduled_event_id,
       :started_event_id,
       :result,
@@ -2632,6 +2697,7 @@ module Aws::SWF
     #   <p>The details of the failure.</p>
     #   @return [String]
     class LambdaFunctionFailedEventAttributes < Struct.new(
+      nil,
       :scheduled_event_id,
       :started_event_id,
       :reason,
@@ -2670,6 +2736,7 @@ module Aws::SWF
     #         that resulted in scheduling this activity task. To help diagnose issues, use this information to trace back the chain of events leading up to this event.</p>
     #   @return [Integer]
     class LambdaFunctionScheduledEventAttributes < Struct.new(
+      nil,
       :id,
       :name,
       :control,
@@ -2693,6 +2760,7 @@ module Aws::SWF
     #         activity task was scheduled. To help diagnose issues, use this information to trace back the chain of events leading up to this event.</p>
     #   @return [Integer]
     class LambdaFunctionStartedEventAttributes < Struct.new(
+      nil,
       :scheduled_event_id,
       keyword_init: true
     )
@@ -2717,6 +2785,7 @@ module Aws::SWF
     #   <p>The type of the timeout that caused this event.</p>
     #   @return [String]
     class LambdaFunctionTimedOutEventAttributes < Struct.new(
+      nil,
       :scheduled_event_id,
       :started_event_id,
       :timeout_type,
@@ -2736,6 +2805,7 @@ module Aws::SWF
     #   <p>A description that may help with diagnosing the cause of the fault.</p>
     #   @return [String]
     class LimitExceededFault < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -2770,6 +2840,7 @@ module Aws::SWF
     #         types.</p>
     #   @return [Boolean]
     class ListActivityTypesInput < Struct.new(
+      nil,
       :domain,
       :name,
       :registration_status,
@@ -2792,6 +2863,7 @@ module Aws::SWF
     #            <p>The configured <code>maximumPageSize</code> determines how many results can be returned in a single call.</p>
     #   @return [String]
     class ListActivityTypesOutput < Struct.new(
+      nil,
       :type_infos,
       :next_page_token,
       keyword_init: true
@@ -2881,6 +2953,7 @@ module Aws::SWF
     #         executions.</p>
     #   @return [Boolean]
     class ListClosedWorkflowExecutionsInput < Struct.new(
+      nil,
       :domain,
       :start_time_filter,
       :close_time_filter,
@@ -2907,6 +2980,7 @@ module Aws::SWF
     #            <p>The configured <code>maximumPageSize</code> determines how many results can be returned in a single call.</p>
     #   @return [String]
     class ListClosedWorkflowExecutionsOutput < Struct.new(
+      nil,
       :execution_infos,
       :next_page_token,
       keyword_init: true
@@ -2936,6 +3010,7 @@ module Aws::SWF
     #         domains.</p>
     #   @return [Boolean]
     class ListDomainsInput < Struct.new(
+      nil,
       :next_page_token,
       :registration_status,
       :maximum_page_size,
@@ -2956,6 +3031,7 @@ module Aws::SWF
     #            <p>The configured <code>maximumPageSize</code> determines how many results can be returned in a single call.</p>
     #   @return [String]
     class ListDomainsOutput < Struct.new(
+      nil,
       :domain_infos,
       :next_page_token,
       keyword_init: true
@@ -3014,6 +3090,7 @@ module Aws::SWF
     #            </note>
     #   @return [Types::WorkflowExecutionFilter]
     class ListOpenWorkflowExecutionsInput < Struct.new(
+      nil,
       :domain,
       :start_time_filter,
       :type_filter,
@@ -3038,6 +3115,7 @@ module Aws::SWF
     #            <p>The configured <code>maximumPageSize</code> determines how many results can be returned in a single call.</p>
     #   @return [String]
     class ListOpenWorkflowExecutionsOutput < Struct.new(
+      nil,
       :execution_infos,
       :next_page_token,
       keyword_init: true
@@ -3049,6 +3127,7 @@ module Aws::SWF
     #   <p>The Amazon Resource Name (ARN) for the Amazon SWF domain.</p>
     #   @return [String]
     class ListTagsForResourceInput < Struct.new(
+      nil,
       :resource_arn,
       keyword_init: true
     )
@@ -3059,6 +3138,7 @@ module Aws::SWF
     #   <p>An array of tags associated with the domain.</p>
     #   @return [Array<Types::ResourceTag>]
     class ListTagsForResourceOutput < Struct.new(
+      nil,
       :tags,
       keyword_init: true
     )
@@ -3093,6 +3173,7 @@ module Aws::SWF
     #         types.</p>
     #   @return [Boolean]
     class ListWorkflowTypesInput < Struct.new(
+      nil,
       :domain,
       :name,
       :registration_status,
@@ -3115,6 +3196,7 @@ module Aws::SWF
     #            <p>The configured <code>maximumPageSize</code> determines how many results can be returned in a single call.</p>
     #   @return [String]
     class ListWorkflowTypesOutput < Struct.new(
+      nil,
       :type_infos,
       :next_page_token,
       keyword_init: true
@@ -3135,6 +3217,7 @@ module Aws::SWF
     #     events leading up to this event.</p>
     #   @return [Integer]
     class MarkerRecordedEventAttributes < Struct.new(
+      nil,
       :marker_name,
       :details,
       :decision_task_completed_event_id,
@@ -3153,6 +3236,7 @@ module Aws::SWF
     #   <p>A description that may help with diagnosing the cause of the fault.</p>
     #   @return [String]
     class OperationNotPermittedFault < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -3175,6 +3259,7 @@ module Aws::SWF
     #         tracing when problems arise. The form of this identity is user defined.</p>
     #   @return [String]
     class PollForActivityTaskInput < Struct.new(
+      nil,
       :domain,
       :task_list,
       :identity,
@@ -3203,6 +3288,7 @@ module Aws::SWF
     #   <p>The inputs provided when the activity task was scheduled. The form of the input is user defined and should be meaningful to the activity implementation.</p>
     #   @return [String]
     class PollForActivityTaskOutput < Struct.new(
+      nil,
       :task_token,
       :activity_id,
       :started_event_id,
@@ -3264,6 +3350,7 @@ module Aws::SWF
     #   <p>When set to <code>true</code>, returns the events with <code>eventTimestamp</code> greater than or equal to <code>eventTimestamp</code> of the most recent <code>DecisionTaskStarted</code> event. By default, this parameter is set to <code>false</code>.</p>
     #   @return [Boolean]
     class PollForDecisionTaskInput < Struct.new(
+      nil,
       :domain,
       :task_list,
       :identity,
@@ -3302,6 +3389,7 @@ module Aws::SWF
     #   <p>The ID of the DecisionTaskStarted event of the previous decision task of this workflow execution that was processed by the decider. This can be used to determine the events in the history new since the last decision task received by the decider.</p>
     #   @return [Integer]
     class PollForDecisionTaskOutput < Struct.new(
+      nil,
       :task_token,
       :started_event_id,
       :workflow_execution,
@@ -3333,6 +3421,7 @@ module Aws::SWF
     #   <p>If specified, contains details about the progress of the task.</p>
     #   @return [String]
     class RecordActivityTaskHeartbeatInput < Struct.new(
+      nil,
       :task_token,
       :details,
       keyword_init: true
@@ -3345,6 +3434,7 @@ module Aws::SWF
     #   <p>Set to <code>true</code> if cancellation of the task is requested.</p>
     #   @return [Boolean]
     class RecordActivityTaskHeartbeatOutput < Struct.new(
+      nil,
       :cancel_requested,
       keyword_init: true
     )
@@ -3386,6 +3476,7 @@ module Aws::SWF
     #            The details of the marker.</p>
     #   @return [String]
     class RecordMarkerDecisionAttributes < Struct.new(
+      nil,
       :marker_name,
       :details,
       keyword_init: true
@@ -3411,6 +3502,7 @@ module Aws::SWF
     #     events leading up to this event.</p>
     #   @return [Integer]
     class RecordMarkerFailedEventAttributes < Struct.new(
+      nil,
       :marker_name,
       :cause,
       :decision_task_completed_event_id,
@@ -3500,6 +3592,7 @@ module Aws::SWF
     #           <code>0</code>. You can use <code>NONE</code> to specify unlimited duration.</p>
     #   @return [String]
     class RegisterActivityTypeInput < Struct.new(
+      nil,
       :domain,
       :name,
       :version,
@@ -3542,6 +3635,7 @@ module Aws::SWF
     #            <p>Tags may only contain unicode letters, digits, whitespace, or these symbols: <code>_ . : / = + - @</code>.</p>
     #   @return [Array<Types::ResourceTag>]
     class RegisterDomainInput < Struct.new(
+      nil,
       :name,
       :description,
       :workflow_execution_retention_period_in_days,
@@ -3643,6 +3737,7 @@ module Aws::SWF
     #            </note>
     #   @return [String]
     class RegisterWorkflowTypeInput < Struct.new(
+      nil,
       :domain,
       :name,
       :version,
@@ -3684,6 +3779,7 @@ module Aws::SWF
     #   <p>The <code>activityId</code> of the activity task to be canceled.</p>
     #   @return [String]
     class RequestCancelActivityTaskDecisionAttributes < Struct.new(
+      nil,
       :activity_id,
       keyword_init: true
     )
@@ -3708,6 +3804,7 @@ module Aws::SWF
     #     events leading up to this event.</p>
     #   @return [Integer]
     class RequestCancelActivityTaskFailedEventAttributes < Struct.new(
+      nil,
       :activity_id,
       :cause,
       :decision_task_completed_event_id,
@@ -3753,6 +3850,7 @@ module Aws::SWF
     #   <p>The data attached to the event that can be used by the decider in subsequent workflow tasks.</p>
     #   @return [String]
     class RequestCancelExternalWorkflowExecutionDecisionAttributes < Struct.new(
+      nil,
       :workflow_id,
       :run_id,
       :control,
@@ -3792,6 +3890,7 @@ module Aws::SWF
     #         This data isn't sent to the workflow execution.</p>
     #   @return [String]
     class RequestCancelExternalWorkflowExecutionFailedEventAttributes < Struct.new(
+      nil,
       :workflow_id,
       :run_id,
       :cause,
@@ -3826,6 +3925,7 @@ module Aws::SWF
     #   <p>Data attached to the event that can be used by the decider in subsequent workflow tasks.</p>
     #   @return [String]
     class RequestCancelExternalWorkflowExecutionInitiatedEventAttributes < Struct.new(
+      nil,
       :workflow_id,
       :run_id,
       :decision_task_completed_event_id,
@@ -3850,6 +3950,7 @@ module Aws::SWF
     #   <p>The runId of the workflow execution to cancel.</p>
     #   @return [String]
     class RequestCancelWorkflowExecutionInput < Struct.new(
+      nil,
       :domain,
       :workflow_id,
       :run_id,
@@ -3868,6 +3969,7 @@ module Aws::SWF
     #   <p>The value of a tag.</p>
     #   @return [String]
     class ResourceTag < Struct.new(
+      nil,
       :key,
       :value,
       keyword_init: true
@@ -3888,6 +3990,7 @@ module Aws::SWF
     #   <p> Information about the cancellation.</p>
     #   @return [String]
     class RespondActivityTaskCanceledInput < Struct.new(
+      nil,
       :task_token,
       :details,
       keyword_init: true
@@ -3909,6 +4012,7 @@ module Aws::SWF
     #         specific.</p>
     #   @return [String]
     class RespondActivityTaskCompletedInput < Struct.new(
+      nil,
       :task_token,
       :result,
       keyword_init: true
@@ -3932,6 +4036,7 @@ module Aws::SWF
     #   <p> Detailed information about the failure.</p>
     #   @return [String]
     class RespondActivityTaskFailedInput < Struct.new(
+      nil,
       :task_token,
       :reason,
       :details,
@@ -3966,6 +4071,7 @@ module Aws::SWF
     #            <p>If a decision task scheduled on the override task list is started within the timeout, but not completed within the start-to-close timeout, Amazon SWF will also revert the override and schedule a new decision task to the original task list.</p>
     #   @return [String]
     class RespondDecisionTaskCompletedInput < Struct.new(
+      nil,
       :task_token,
       :decisions,
       :execution_context,
@@ -4084,6 +4190,7 @@ module Aws::SWF
     #            <p>The duration is specified in seconds, an integer greater than or equal to <code>0</code>. You can use <code>NONE</code> to specify unlimited duration.</p>
     #   @return [String]
     class ScheduleActivityTaskDecisionAttributes < Struct.new(
+      nil,
       :activity_type,
       :activity_id,
       :control,
@@ -4120,6 +4227,7 @@ module Aws::SWF
     #     events leading up to this event.</p>
     #   @return [Integer]
     class ScheduleActivityTaskFailedEventAttributes < Struct.new(
+      nil,
       :activity_type,
       :activity_id,
       :cause,
@@ -4155,6 +4263,7 @@ module Aws::SWF
     #            <p>If no value is supplied, then a default value of 900s is assumed.</p>
     #   @return [String]
     class ScheduleLambdaFunctionDecisionAttributes < Struct.new(
+      nil,
       :id,
       :name,
       :control,
@@ -4189,6 +4298,7 @@ module Aws::SWF
     #         that resulted in scheduling this Lambda task. To help diagnose issues, use this information to trace back the chain of events leading up to this event.</p>
     #   @return [Integer]
     class ScheduleLambdaFunctionFailedEventAttributes < Struct.new(
+      nil,
       :id,
       :name,
       :cause,
@@ -4245,6 +4355,7 @@ module Aws::SWF
     #   <p>The data attached to the event that can be used by the decider in subsequent decision tasks.</p>
     #   @return [String]
     class SignalExternalWorkflowExecutionDecisionAttributes < Struct.new(
+      nil,
       :workflow_id,
       :run_id,
       :signal_name,
@@ -4285,6 +4396,7 @@ module Aws::SWF
     #         This data isn't sent to the workflow execution.</p>
     #   @return [String]
     class SignalExternalWorkflowExecutionFailedEventAttributes < Struct.new(
+      nil,
       :workflow_id,
       :run_id,
       :cause,
@@ -4324,6 +4436,7 @@ module Aws::SWF
     #   <p>Data attached to the event that can be used by the decider in subsequent decision tasks.</p>
     #   @return [String]
     class SignalExternalWorkflowExecutionInitiatedEventAttributes < Struct.new(
+      nil,
       :workflow_id,
       :run_id,
       :signal_name,
@@ -4357,6 +4470,7 @@ module Aws::SWF
     #         workflow execution's history.</p>
     #   @return [String]
     class SignalWorkflowExecutionInput < Struct.new(
+      nil,
       :domain,
       :workflow_id,
       :run_id,
@@ -4496,6 +4610,7 @@ module Aws::SWF
     #   <p>The IAM role attached to the child workflow execution.</p>
     #   @return [String]
     class StartChildWorkflowExecutionDecisionAttributes < Struct.new(
+      nil,
       :workflow_type,
       :workflow_id,
       :control,
@@ -4545,6 +4660,7 @@ module Aws::SWF
     #         This data isn't sent to the child workflow execution.</p>
     #   @return [String]
     class StartChildWorkflowExecutionFailedEventAttributes < Struct.new(
+      nil,
       :workflow_type,
       :cause,
       :workflow_id,
@@ -4627,6 +4743,7 @@ module Aws::SWF
     #   <p>The IAM role to attach to the child workflow execution.</p>
     #   @return [String]
     class StartChildWorkflowExecutionInitiatedEventAttributes < Struct.new(
+      nil,
       :workflow_id,
       :workflow_type,
       :control,
@@ -4668,6 +4785,7 @@ module Aws::SWF
     #   <p>A description that can help diagnose the cause of the fault.</p>
     #   @return [String]
     class StartLambdaFunctionFailedEventAttributes < Struct.new(
+      nil,
       :scheduled_event_id,
       :cause,
       :message,
@@ -4719,6 +4837,7 @@ module Aws::SWF
     #            <p>The duration is specified in seconds, an integer greater than or equal to <code>0</code>.</p>
     #   @return [String]
     class StartTimerDecisionAttributes < Struct.new(
+      nil,
       :timer_id,
       :control,
       :start_to_fire_timeout,
@@ -4745,6 +4864,7 @@ module Aws::SWF
     #     events leading up to this event.</p>
     #   @return [Integer]
     class StartTimerFailedEventAttributes < Struct.new(
+      nil,
       :timer_id,
       :cause,
       :decision_task_completed_event_id,
@@ -4879,6 +4999,7 @@ module Aws::SWF
     #            </note>
     #   @return [String]
     class StartWorkflowExecutionInput < Struct.new(
+      nil,
       :domain,
       :workflow_id,
       :workflow_type,
@@ -4901,6 +5022,7 @@ module Aws::SWF
     #         can be used to uniquely identify the workflow execution within a domain.</p>
     #   @return [String]
     class StartWorkflowExecutionOutput < Struct.new(
+      nil,
       :run_id,
       keyword_init: true
     )
@@ -4915,6 +5037,7 @@ module Aws::SWF
     #            <p>Tags may only contain unicode letters, digits, whitespace, or these symbols: <code>_ . : / = + - @</code>.</p>
     #   @return [String]
     class TagFilter < Struct.new(
+      nil,
       :tag,
       keyword_init: true
     )
@@ -4929,6 +5052,7 @@ module Aws::SWF
     #            <p>Tags may only contain unicode letters, digits, whitespace, or these symbols: <code>_ . : / = + - @</code>.</p>
     #   @return [Array<Types::ResourceTag>]
     class TagResourceInput < Struct.new(
+      nil,
       :resource_arn,
       :tags,
       keyword_init: true
@@ -4941,6 +5065,7 @@ module Aws::SWF
     #   <p>The name of the task list.</p>
     #   @return [String]
     class TaskList < Struct.new(
+      nil,
       :name,
       keyword_init: true
     )
@@ -4992,6 +5117,7 @@ module Aws::SWF
     #            </note>
     #   @return [String]
     class TerminateWorkflowExecutionInput < Struct.new(
+      nil,
       :domain,
       :workflow_id,
       :run_id,
@@ -5020,6 +5146,7 @@ module Aws::SWF
     #     events leading up to this event.</p>
     #   @return [Integer]
     class TimerCanceledEventAttributes < Struct.new(
+      nil,
       :timer_id,
       :started_event_id,
       :decision_task_completed_event_id,
@@ -5044,6 +5171,7 @@ module Aws::SWF
     #     events leading up to this event.</p>
     #   @return [Integer]
     class TimerFiredEventAttributes < Struct.new(
+      nil,
       :timer_id,
       :started_event_id,
       keyword_init: true
@@ -5073,6 +5201,7 @@ module Aws::SWF
     #     events leading up to this event.</p>
     #   @return [Integer]
     class TimerStartedEventAttributes < Struct.new(
+      nil,
       :timer_id,
       :control,
       :start_to_fire_timeout,
@@ -5091,6 +5220,7 @@ module Aws::SWF
     # @!attribute message
     #   @return [String]
     class TooManyTagsFault < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -5102,6 +5232,7 @@ module Aws::SWF
     #   <p>A description that may help with diagnosing the cause of the fault.</p>
     #   @return [String]
     class TypeAlreadyExistsFault < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -5113,6 +5244,7 @@ module Aws::SWF
     #   <p>A description that may help with diagnosing the cause of the fault.</p>
     #   @return [String]
     class TypeDeprecatedFault < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -5123,6 +5255,7 @@ module Aws::SWF
     # @!attribute message
     #   @return [String]
     class TypeNotDeprecatedFault < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -5136,6 +5269,7 @@ module Aws::SWF
     #   <p>The activity type to undeprecate.</p>
     #   @return [Types::ActivityType]
     class UndeprecateActivityTypeInput < Struct.new(
+      nil,
       :domain,
       :activity_type,
       keyword_init: true
@@ -5147,6 +5281,7 @@ module Aws::SWF
     #   <p>The name of the domain of the deprecated workflow type.</p>
     #   @return [String]
     class UndeprecateDomainInput < Struct.new(
+      nil,
       :name,
       keyword_init: true
     )
@@ -5160,6 +5295,7 @@ module Aws::SWF
     #   <p>The name of the domain of the deprecated workflow type.</p>
     #   @return [Types::WorkflowType]
     class UndeprecateWorkflowTypeInput < Struct.new(
+      nil,
       :domain,
       :workflow_type,
       keyword_init: true
@@ -5172,6 +5308,7 @@ module Aws::SWF
     #   <p>A description that may help with diagnosing the cause of the fault.</p>
     #   @return [String]
     class UnknownResourceFault < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -5185,6 +5322,7 @@ module Aws::SWF
     #   <p>The list of tags to remove from the Amazon SWF domain.</p>
     #   @return [Array<String>]
     class UntagResourceInput < Struct.new(
+      nil,
       :resource_arn,
       :tag_keys,
       keyword_init: true
@@ -5200,6 +5338,7 @@ module Aws::SWF
     #   <p>A system-generated unique identifier for the workflow execution.</p>
     #   @return [String]
     class WorkflowExecution < Struct.new(
+      nil,
       :workflow_id,
       :run_id,
       keyword_init: true
@@ -5213,6 +5352,7 @@ module Aws::SWF
     #   <p>A description that may help with diagnosing the cause of the fault.</p>
     #   @return [String]
     class WorkflowExecutionAlreadyStartedFault < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -5233,6 +5373,7 @@ module Aws::SWF
     #   <p>If set, indicates that the request to cancel the workflow execution was automatically generated, and specifies the cause. This happens if the parent workflow execution times out or is terminated, and the child policy is set to cancel child executions.</p>
     #   @return [String]
     class WorkflowExecutionCancelRequestedEventAttributes < Struct.new(
+      nil,
       :external_workflow_execution,
       :external_initiated_event_id,
       :cause,
@@ -5256,6 +5397,7 @@ module Aws::SWF
     #     events leading up to this event.</p>
     #   @return [Integer]
     class WorkflowExecutionCanceledEventAttributes < Struct.new(
+      nil,
       :details,
       :decision_task_completed_event_id,
       keyword_init: true
@@ -5278,6 +5420,7 @@ module Aws::SWF
     #     events leading up to this event.</p>
     #   @return [Integer]
     class WorkflowExecutionCompletedEventAttributes < Struct.new(
+      nil,
       :result,
       :decision_task_completed_event_id,
       keyword_init: true
@@ -5332,6 +5475,7 @@ module Aws::SWF
     #   <p>The IAM role attached to the child workflow execution.</p>
     #   @return [String]
     class WorkflowExecutionConfiguration < Struct.new(
+      nil,
       :task_start_to_close_timeout,
       :execution_start_to_close_timeout,
       :task_list,
@@ -5402,6 +5546,7 @@ module Aws::SWF
     #   <p>The IAM role to attach to the new (continued) workflow execution.</p>
     #   @return [String]
     class WorkflowExecutionContinuedAsNewEventAttributes < Struct.new(
+      nil,
       :input,
       :decision_task_completed_event_id,
       :new_execution_run_id,
@@ -5436,6 +5581,7 @@ module Aws::SWF
     #     events leading up to this event.</p>
     #   @return [Integer]
     class WorkflowExecutionFailedEventAttributes < Struct.new(
+      nil,
       :reason,
       :details,
       :decision_task_completed_event_id,
@@ -5454,6 +5600,7 @@ module Aws::SWF
     #   <p>The workflowId to pass of match the criteria of this filter.</p>
     #   @return [String]
     class WorkflowExecutionFilter < Struct.new(
+      nil,
       :workflow_id,
       keyword_init: true
     )
@@ -5518,6 +5665,7 @@ module Aws::SWF
     #   <p>Set to true if a cancellation is requested for this workflow execution.</p>
     #   @return [Boolean]
     class WorkflowExecutionInfo < Struct.new(
+      nil,
       :execution,
       :workflow_type,
       :start_timestamp,
@@ -5554,6 +5702,7 @@ module Aws::SWF
     #   <p>The count of Lambda tasks whose status is <code>OPEN</code>.</p>
     #   @return [Integer]
     class WorkflowExecutionOpenCounts < Struct.new(
+      nil,
       :open_activity_tasks,
       :open_decision_tasks,
       :open_timers,
@@ -5591,6 +5740,7 @@ module Aws::SWF
     #         the signal was initiated by another workflow execution.</p>
     #   @return [Integer]
     class WorkflowExecutionSignaledEventAttributes < Struct.new(
+      nil,
       :signal_name,
       :input,
       :external_workflow_execution,
@@ -5669,6 +5819,7 @@ module Aws::SWF
     #   <p>The IAM role attached to the workflow execution.</p>
     #   @return [String]
     class WorkflowExecutionStartedEventAttributes < Struct.new(
+      nil,
       :input,
       :execution_start_to_close_timeout,
       :task_start_to_close_timeout,
@@ -5722,6 +5873,7 @@ module Aws::SWF
     #   <p>If set, indicates that the workflow execution was automatically terminated, and specifies the cause. This happens if the parent workflow execution times out or is terminated and the child policy is set to terminate child executions.</p>
     #   @return [String]
     class WorkflowExecutionTerminatedEventAttributes < Struct.new(
+      nil,
       :reason,
       :details,
       :child_policy,
@@ -5756,6 +5908,7 @@ module Aws::SWF
     #            </ul>
     #   @return [String]
     class WorkflowExecutionTimedOutEventAttributes < Struct.new(
+      nil,
       :timeout_type,
       :child_policy,
       keyword_init: true
@@ -5779,6 +5932,7 @@ module Aws::SWF
     #            </note>
     #   @return [String]
     class WorkflowType < Struct.new(
+      nil,
       :name,
       :version,
       keyword_init: true
@@ -5856,6 +6010,7 @@ module Aws::SWF
     #            </note>
     #   @return [String]
     class WorkflowTypeConfiguration < Struct.new(
+      nil,
       :default_task_start_to_close_timeout,
       :default_execution_start_to_close_timeout,
       :default_task_list,
@@ -5876,6 +6031,7 @@ module Aws::SWF
     #   <p>Version of the workflow type.</p>
     #   @return [String]
     class WorkflowTypeFilter < Struct.new(
+      nil,
       :name,
       :version,
       keyword_init: true
@@ -5900,6 +6056,7 @@ module Aws::SWF
     #   <p>If the type is in deprecated state, then it is set to the date when the type was deprecated.</p>
     #   @return [Time]
     class WorkflowTypeInfo < Struct.new(
+      nil,
       :workflow_type,
       :status,
       :description,

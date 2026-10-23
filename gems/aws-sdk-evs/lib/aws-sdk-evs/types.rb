@@ -19,6 +19,7 @@ module Aws::Evs
     #   <p>The Elastic IP address allocation ID.</p>
     #   @return [String]
     class AssociateEipToVlanRequest < Struct.new(
+      nil,
       :client_token,
       :environment_id,
       :vlan_name,
@@ -32,6 +33,7 @@ module Aws::Evs
     #   <p>The VLANs that Amazon EVS creates during environment creation.</p>
     #   @return [Types::Vlan]
     class AssociateEipToVlanResponse < Struct.new(
+      nil,
       :vlan,
       keyword_init: true
     )
@@ -49,6 +51,7 @@ module Aws::Evs
     #   <p>The time when environment health began to be impaired.</p>
     #   @return [Time]
     class Check < Struct.new(
+      nil,
       :type,
       :result,
       :impaired_since,
@@ -62,6 +65,7 @@ module Aws::Evs
     #   <p>The unique IDs for private route server peers.</p>
     #   @return [Array<String>]
     class ConnectivityInfo < Struct.new(
+      nil,
       :private_route_server_peerings,
       keyword_init: true
     )
@@ -78,6 +82,7 @@ module Aws::Evs
     #   <p>The host that is created and added to the environment.</p>
     #   @return [Types::HostInfoForCreate]
     class CreateEnvironmentHostRequest < Struct.new(
+      nil,
       :client_token,
       :environment_id,
       :host,
@@ -93,6 +98,7 @@ module Aws::Evs
     #   <p>A description of the created host.</p>
     #   @return [Types::Host]
     class CreateEnvironmentHostResponse < Struct.new(
+      nil,
       :environment_summary,
       :host,
       keyword_init: true
@@ -146,6 +152,7 @@ module Aws::Evs
     #   <p>The Broadcom Site ID that is allocated to you as part of your electronic software delivery. This ID allows customer access to the Broadcom portal, and is provided to you by Broadcom at the close of your software contract or contract renewal. Amazon EVS uses the Broadcom Site ID that you provide to meet Broadcom VCF license usage reporting requirements for Amazon EVS.</p>
     #   @return [String]
     class CreateEnvironmentRequest < Struct.new(
+      nil,
       :client_token,
       :environment_name,
       :kms_key_id,
@@ -170,6 +177,7 @@ module Aws::Evs
     #   <p>A description of the created environment.</p>
     #   @return [Types::Environment]
     class CreateEnvironmentResponse < Struct.new(
+      nil,
       :environment,
       keyword_init: true
     )
@@ -186,6 +194,7 @@ module Aws::Evs
     #   <p>The DNS hostname associated with the host to be deleted.</p>
     #   @return [String]
     class DeleteEnvironmentHostRequest < Struct.new(
+      nil,
       :client_token,
       :environment_id,
       :host_name,
@@ -201,6 +210,7 @@ module Aws::Evs
     #   <p>A description of the deleted host.</p>
     #   @return [Types::Host]
     class DeleteEnvironmentHostResponse < Struct.new(
+      nil,
       :environment_summary,
       :host,
       keyword_init: true
@@ -215,6 +225,7 @@ module Aws::Evs
     #   <p>A unique ID associated with the environment to be deleted.</p>
     #   @return [String]
     class DeleteEnvironmentRequest < Struct.new(
+      nil,
       :client_token,
       :environment_id,
       keyword_init: true
@@ -226,6 +237,7 @@ module Aws::Evs
     #   <p>A description of the deleted environment.</p>
     #   @return [Types::Environment]
     class DeleteEnvironmentResponse < Struct.new(
+      nil,
       :environment,
       keyword_init: true
     )
@@ -245,6 +257,7 @@ module Aws::Evs
     #   <p> A unique ID for the Elastic IP address association.</p>
     #   @return [String]
     class DisassociateEipFromVlanRequest < Struct.new(
+      nil,
       :client_token,
       :environment_id,
       :vlan_name,
@@ -258,6 +271,7 @@ module Aws::Evs
     #   <p>The VLANs that Amazon EVS creates during environment creation.</p>
     #   @return [Types::Vlan]
     class DisassociateEipFromVlanResponse < Struct.new(
+      nil,
       :vlan,
       keyword_init: true
     )
@@ -275,6 +289,7 @@ module Aws::Evs
     #   <p>The Elastic IP address.</p>
     #   @return [String]
     class EipAssociation < Struct.new(
+      nil,
       :association_id,
       :allocation_id,
       :ip_address,
@@ -345,6 +360,7 @@ module Aws::Evs
     #   <p>The VCF credentials that are stored as Amazon EVS managed secrets in Amazon Web Services Secrets Manager.</p> <p>Amazon EVS stores credentials that are needed to install vCenter Server, NSX, and SDDC Manager.</p>
     #   @return [Array<Types::Secret>]
     class Environment < Struct.new(
+      nil,
       :environment_id,
       :environment_state,
       :state_details,
@@ -396,6 +412,7 @@ module Aws::Evs
     #   <p>The Amazon Resource Name (ARN) that is associated with the environment.</p>
     #   @return [String]
     class EnvironmentSummary < Struct.new(
+      nil,
       :environment_id,
       :environment_name,
       :vcf_version,
@@ -413,6 +430,7 @@ module Aws::Evs
     #   <p>A unique ID for the environment.</p>
     #   @return [String]
     class GetEnvironmentRequest < Struct.new(
+      nil,
       :environment_id,
       keyword_init: true
     )
@@ -423,6 +441,7 @@ module Aws::Evs
     #   <p>A description of the requested environment.</p>
     #   @return [Types::Environment]
     class GetEnvironmentResponse < Struct.new(
+      nil,
       :environment,
       keyword_init: true
     )
@@ -467,6 +486,7 @@ module Aws::Evs
     #   <p>The elastic network interfaces that are attached to the host.</p>
     #   @return [Array<Types::NetworkInterface>]
     class Host < Struct.new(
+      nil,
       :host_name,
       :ip_address,
       :key_name,
@@ -501,6 +521,7 @@ module Aws::Evs
     #   <p>The unique ID of the Amazon EC2 Dedicated Host.</p>
     #   @return [String]
     class HostInfoForCreate < Struct.new(
+      nil,
       :host_name,
       :key_name,
       :instance_type,
@@ -516,6 +537,7 @@ module Aws::Evs
     #   <p> The CIDR block that you provide to create an Amazon EVS VLAN subnet. Amazon EVS VLAN subnets have a minimum CIDR block size of /28 and a maximum size of /24. Amazon EVS VLAN subnet CIDR blocks must not overlap with other subnets in the VPC.</p>
     #   @return [String]
     class InitialVlanInfo < Struct.new(
+      nil,
       :cidr,
       keyword_init: true
     )
@@ -560,6 +582,7 @@ module Aws::Evs
     #   <p>A unique ID for a network access control list that the HCX VLAN uses. Required when <code>isHcxPublic</code> is set to <code>true</code>.</p>
     #   @return [String]
     class InitialVlans < Struct.new(
+      nil,
       :vmk_management,
       :vm_management,
       :v_motion,
@@ -590,6 +613,7 @@ module Aws::Evs
     #   <p> The VSAN license key. This license unlocks vSAN features. The vSAN license key must provide at least 110 TiB of vSAN capacity.</p>
     #   @return [String]
     class LicenseInfo < Struct.new(
+      nil,
       :solution_key,
       :vsan_key,
       keyword_init: true
@@ -607,6 +631,7 @@ module Aws::Evs
     #   <p>A unique ID for the environment.</p>
     #   @return [String]
     class ListEnvironmentHostsRequest < Struct.new(
+      nil,
       :next_token,
       :max_results,
       :environment_id,
@@ -622,6 +647,7 @@ module Aws::Evs
     #   <p>A list of hosts in the environment.</p>
     #   @return [Array<Types::Host>]
     class ListEnvironmentHostsResponse < Struct.new(
+      nil,
       :next_token,
       :environment_hosts,
       keyword_init: true
@@ -639,6 +665,7 @@ module Aws::Evs
     #   <p>A unique ID for the environment.</p>
     #   @return [String]
     class ListEnvironmentVlansRequest < Struct.new(
+      nil,
       :next_token,
       :max_results,
       :environment_id,
@@ -654,6 +681,7 @@ module Aws::Evs
     #   <p>A list of VLANs that are associated with the specified environment.</p>
     #   @return [Array<Types::Vlan>]
     class ListEnvironmentVlansResponse < Struct.new(
+      nil,
       :next_token,
       :environment_vlans,
       keyword_init: true
@@ -671,6 +699,7 @@ module Aws::Evs
     #   <p>The state of an environment. Used to filter response results to return only environments with the specified <code>environmentState</code>.</p>
     #   @return [Array<String>]
     class ListEnvironmentsRequest < Struct.new(
+      nil,
       :next_token,
       :max_results,
       :state,
@@ -686,6 +715,7 @@ module Aws::Evs
     #   <p>A list of environments with summarized environment details.</p>
     #   @return [Array<Types::EnvironmentSummary>]
     class ListEnvironmentsResponse < Struct.new(
+      nil,
       :next_token,
       :environment_summaries,
       keyword_init: true
@@ -697,6 +727,7 @@ module Aws::Evs
     #   <p>The Amazon Resource Name (ARN) that identifies the resource to list tags for.</p>
     #   @return [String]
     class ListTagsForResourceRequest < Struct.new(
+      nil,
       :resource_arn,
       keyword_init: true
     )
@@ -707,6 +738,7 @@ module Aws::Evs
     #   <p>The tags for the resource.</p>
     #   @return [Hash<String, String>]
     class ListTagsForResourceResponse < Struct.new(
+      nil,
       :tags,
       keyword_init: true
     )
@@ -718,6 +750,7 @@ module Aws::Evs
     #   <p>The unique ID of the elastic network interface.</p>
     #   @return [String]
     class NetworkInterface < Struct.new(
+      nil,
       :network_interface_id,
       keyword_init: true
     )
@@ -735,6 +768,7 @@ module Aws::Evs
     #   <p>The type of the resource that is associated with the error.</p>
     #   @return [String]
     class ResourceNotFoundException < Struct.new(
+      nil,
       :message,
       :resource_id,
       :resource_type,
@@ -748,6 +782,7 @@ module Aws::Evs
     #   <p> The Amazon Resource Name (ARN) of the secret.</p>
     #   @return [String]
     class Secret < Struct.new(
+      nil,
       :secret_arn,
       keyword_init: true
     )
@@ -759,6 +794,7 @@ module Aws::Evs
     #   <p>The security groups that allow service access.</p>
     #   @return [Array<String>]
     class ServiceAccessSecurityGroups < Struct.new(
+      nil,
       :security_groups,
       keyword_init: true
     )
@@ -770,6 +806,7 @@ module Aws::Evs
     #   <p>Describes the error encountered.</p>
     #   @return [String]
     class ServiceQuotaExceededException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -781,6 +818,7 @@ module Aws::Evs
     #   <p>Describes the error encountered</p>
     #   @return [String]
     class TagPolicyException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -794,6 +832,7 @@ module Aws::Evs
     #   <p>Metadata that assists with categorization and organization. Each tag consists of a key and an optional value. You define both. Tags don't propagate to any other environment or Amazon Web Services resources.</p>
     #   @return [Hash<String, String>]
     class TagResourceRequest < Struct.new(
+      nil,
       :resource_arn,
       :tags,
       keyword_init: true
@@ -802,6 +841,7 @@ module Aws::Evs
     end
 
     class TagResourceResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -815,6 +855,7 @@ module Aws::Evs
     #   <p>The seconds to wait to retry.</p>
     #   @return [Integer]
     class ThrottlingException < Struct.new(
+      nil,
       :message,
       :retry_after_seconds,
       keyword_init: true
@@ -827,6 +868,7 @@ module Aws::Evs
     #   <p>Describes the error encountered.</p>
     #   @return [String]
     class TooManyTagsException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -840,6 +882,7 @@ module Aws::Evs
     #   <p>The keys of the tags to delete.</p>
     #   @return [Array<String>]
     class UntagResourceRequest < Struct.new(
+      nil,
       :resource_arn,
       :tag_keys,
       keyword_init: true
@@ -848,6 +891,7 @@ module Aws::Evs
     end
 
     class UntagResourceResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -864,6 +908,7 @@ module Aws::Evs
     #   <p>A list of fields that didn't validate.</p>
     #   @return [Array<Types::ValidationExceptionField>]
     class ValidationException < Struct.new(
+      nil,
       :message,
       :reason,
       :field_list,
@@ -880,6 +925,7 @@ module Aws::Evs
     #   <p> A message describing why the field failed validation.</p>
     #   @return [String]
     class ValidationExceptionField < Struct.new(
+      nil,
       :name,
       :message,
       keyword_init: true
@@ -916,6 +962,7 @@ module Aws::Evs
     #   <p>The hostname for VMware Cloud Builder.</p>
     #   @return [String]
     class VcfHostnames < Struct.new(
+      nil,
       :v_center,
       :nsx,
       :nsx_manager1,
@@ -968,6 +1015,7 @@ module Aws::Evs
     #   <p>A unique ID for a network access control list.</p>
     #   @return [String]
     class Vlan < Struct.new(
+      nil,
       :vlan_id,
       :cidr,
       :availability_zone,

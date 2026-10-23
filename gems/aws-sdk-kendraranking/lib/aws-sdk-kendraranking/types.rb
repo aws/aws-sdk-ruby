@@ -12,6 +12,7 @@ module Aws::KendraRanking
     # @!attribute message
     #   @return [String]
     class AccessDeniedException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -31,6 +32,7 @@ module Aws::KendraRanking
     #               up to 1000 extra capacity units.</p>
     #   @return [Integer]
     class CapacityUnitsConfiguration < Struct.new(
+      nil,
       :rescore_capacity_units,
       keyword_init: true
     )
@@ -42,6 +44,7 @@ module Aws::KendraRanking
     # @!attribute message
     #   @return [String]
     class ConflictException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -77,6 +80,7 @@ module Aws::KendraRanking
     #               same client token will create only one rescore execution plan.</p>
     #   @return [String]
     class CreateRescoreExecutionPlanRequest < Struct.new(
+      nil,
       :name,
       :description,
       :capacity_units,
@@ -95,6 +99,7 @@ module Aws::KendraRanking
     #               execution plan.</p>
     #   @return [String]
     class CreateRescoreExecutionPlanResponse < Struct.new(
+      nil,
       :id,
       :arn,
       keyword_init: true
@@ -107,6 +112,7 @@ module Aws::KendraRanking
     #               want to delete.</p>
     #   @return [String]
     class DeleteRescoreExecutionPlanRequest < Struct.new(
+      nil,
       :id,
       keyword_init: true
     )
@@ -118,6 +124,7 @@ module Aws::KendraRanking
     #               to get information on.</p>
     #   @return [String]
     class DescribeRescoreExecutionPlanRequest < Struct.new(
+      nil,
       :id,
       keyword_init: true
     )
@@ -165,6 +172,7 @@ module Aws::KendraRanking
     #               contains a message that explains why.</p>
     #   @return [String]
     class DescribeRescoreExecutionPlanResponse < Struct.new(
+      nil,
       :id,
       :arn,
       :name,
@@ -214,6 +222,7 @@ module Aws::KendraRanking
     #               score or rank based on its intelligent search algorithms.</p>
     #   @return [Float]
     class Document < Struct.new(
+      nil,
       :id,
       :group_id,
       :title,
@@ -234,6 +243,7 @@ module Aws::KendraRanking
     # @!attribute message
     #   @return [String]
     class InternalServerException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -250,6 +260,7 @@ module Aws::KendraRanking
     #   <p>The maximum number of rescore execution plans to return.</p>
     #   @return [Integer]
     class ListRescoreExecutionPlansRequest < Struct.new(
+      nil,
       :next_token,
       :max_results,
       keyword_init: true
@@ -266,6 +277,7 @@ module Aws::KendraRanking
     #               Ranking returns a pagination token in the response.</p>
     #   @return [String]
     class ListRescoreExecutionPlansResponse < Struct.new(
+      nil,
       :summary_items,
       :next_token,
       keyword_init: true
@@ -282,6 +294,7 @@ module Aws::KendraRanking
     #               plan to get a list of tags for.</p>
     #   @return [String]
     class ListTagsForResourceRequest < Struct.new(
+      nil,
       :resource_arn,
       keyword_init: true
     )
@@ -295,6 +308,7 @@ module Aws::KendraRanking
     #               plan.</p>
     #   @return [Array<Types::Tag>]
     class ListTagsForResourceResponse < Struct.new(
+      nil,
       :tags,
       keyword_init: true
     )
@@ -324,6 +338,7 @@ module Aws::KendraRanking
     #               plan is ready for use.</p>
     #   @return [String]
     class RescoreExecutionPlanSummary < Struct.new(
+      nil,
       :name,
       :id,
       :created_at,
@@ -347,6 +362,7 @@ module Aws::KendraRanking
     #               Ranking to rescore or rank on.</p>
     #   @return [Array<Types::Document>]
     class RescoreRequest < Struct.new(
+      nil,
       :rescore_execution_plan_id,
       :search_query,
       :documents,
@@ -366,6 +382,7 @@ module Aws::KendraRanking
     #               scores. The results are in descending order.</p>
     #   @return [Array<Types::RescoreResultItem>]
     class RescoreResult < Struct.new(
+      nil,
       :rescore_id,
       :result_items,
       keyword_init: true
@@ -382,6 +399,7 @@ module Aws::KendraRanking
     #               Intelligent Ranking gives to the result.</p>
     #   @return [Float]
     class RescoreResultItem < Struct.new(
+      nil,
       :document_id,
       :score,
       keyword_init: true
@@ -395,6 +413,7 @@ module Aws::KendraRanking
     # @!attribute message
     #   @return [String]
     class ResourceNotFoundException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -407,6 +426,7 @@ module Aws::KendraRanking
     # @!attribute message
     #   @return [String]
     class ResourceUnavailableException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -421,6 +441,7 @@ module Aws::KendraRanking
     # @!attribute message
     #   @return [String]
     class ServiceQuotaExceededException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -443,6 +464,7 @@ module Aws::KendraRanking
     #               empty string but it can't be null.</p>
     #   @return [String]
     class Tag < Struct.new(
+      nil,
       :key,
       :value,
       keyword_init: true
@@ -464,6 +486,7 @@ module Aws::KendraRanking
     #               with the new value.</p>
     #   @return [Array<Types::Tag>]
     class TagResourceRequest < Struct.new(
+      nil,
       :resource_arn,
       :tags,
       keyword_init: true
@@ -474,6 +497,7 @@ module Aws::KendraRanking
     # <p>If the action is successful, the service sends back an 
     #             HTTP 200 response with an empty HTTP body.</p>
     class TagResourceResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -484,6 +508,7 @@ module Aws::KendraRanking
     # @!attribute message
     #   @return [String]
     class ThrottlingException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -504,6 +529,7 @@ module Aws::KendraRanking
     #               ignored.</p>
     #   @return [Array<String>]
     class UntagResourceRequest < Struct.new(
+      nil,
       :resource_arn,
       :tag_keys,
       keyword_init: true
@@ -514,6 +540,7 @@ module Aws::KendraRanking
     # <p>If the action is successful, the service sends back an 
     #             HTTP 200 response with an empty HTTP body.</p>
     class UntagResourceResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -538,6 +565,7 @@ module Aws::KendraRanking
     #               <a href="https://docs.aws.amazon.com/kendra/latest/dg/adjusting-capacity.html">Adjusting capacity</a>.</p>
     #   @return [Types::CapacityUnitsConfiguration]
     class UpdateRescoreExecutionPlanRequest < Struct.new(
+      nil,
       :id,
       :name,
       :description,
@@ -553,6 +581,7 @@ module Aws::KendraRanking
     # @!attribute message
     #   @return [String]
     class ValidationException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )

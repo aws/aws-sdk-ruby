@@ -10,6 +10,7 @@ module Aws::AppSync
     # @!attribute message
     #   @return [String]
     class AccessDeniedException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -31,6 +32,7 @@ module Aws::AppSync
     #   <p>Configuration for Lambda function authorization.</p>
     #   @return [Types::LambdaAuthorizerConfig]
     class AdditionalAuthenticationProvider < Struct.new(
+      nil,
       :authentication_type,
       :open_id_connect_config,
       :user_pool_config,
@@ -78,6 +80,7 @@ module Aws::AppSync
     #            connecting, publishing, and subscribing to an Event API.</p>
     #   @return [Types::EventConfig]
     class Api < Struct.new(
+      nil,
       :api_id,
       :name,
       :owner_contact,
@@ -129,6 +132,7 @@ module Aws::AppSync
     #   <p>Details about the last deployment status.</p>
     #   @return [String]
     class ApiAssociation < Struct.new(
+      nil,
       :domain_name,
       :api_id,
       :association_status,
@@ -295,6 +299,7 @@ module Aws::AppSync
     #               <code>DISABLED</code>.</p>
     #   @return [String]
     class ApiCache < Struct.new(
+      nil,
       :ttl,
       :api_caching_behavior,
       :transit_encryption_enabled,
@@ -397,6 +402,7 @@ module Aws::AppSync
     #            the epoch, rounded down to the nearest hour.</p>
     #   @return [Integer]
     class ApiKey < Struct.new(
+      nil,
       :id,
       :description,
       :expires,
@@ -416,6 +422,7 @@ module Aws::AppSync
     # @!attribute message
     #   @return [String]
     class ApiKeyLimitExceededException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -427,6 +434,7 @@ module Aws::AppSync
     # @!attribute message
     #   @return [String]
     class ApiKeyValidityOutOfBoundsException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -437,6 +445,7 @@ module Aws::AppSync
     # @!attribute message
     #   @return [String]
     class ApiLimitExceededException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -454,6 +463,7 @@ module Aws::AppSync
     #               <code>1.0.0</code>.</p>
     #   @return [String]
     class AppSyncRuntime < Struct.new(
+      nil,
       :name,
       :runtime_version,
       keyword_init: true
@@ -468,6 +478,7 @@ module Aws::AppSync
     #   <p>The API ID. Private APIs can not be associated with custom domains.</p>
     #   @return [String]
     class AssociateApiRequest < Struct.new(
+      nil,
       :domain_name,
       :api_id,
       keyword_init: true
@@ -479,6 +490,7 @@ module Aws::AppSync
     #   <p>The <code>ApiAssociation</code> object.</p>
     #   @return [Types::ApiAssociation]
     class AssociateApiResponse < Struct.new(
+      nil,
       :api_association,
       keyword_init: true
     )
@@ -504,6 +516,7 @@ module Aws::AppSync
     #   <p>The <code>SourceApiAssociationConfig</code> object data.</p>
     #   @return [Types::SourceApiAssociationConfig]
     class AssociateMergedGraphqlApiRequest < Struct.new(
+      nil,
       :source_api_identifier,
       :merged_api_identifier,
       :description,
@@ -517,6 +530,7 @@ module Aws::AppSync
     #   <p>The <code>SourceApiAssociation</code> object data.</p>
     #   @return [Types::SourceApiAssociation]
     class AssociateMergedGraphqlApiResponse < Struct.new(
+      nil,
       :source_api_association,
       keyword_init: true
     )
@@ -542,6 +556,7 @@ module Aws::AppSync
     #   <p>The <code>SourceApiAssociationConfig</code> object data.</p>
     #   @return [Types::SourceApiAssociationConfig]
     class AssociateSourceGraphqlApiRequest < Struct.new(
+      nil,
       :merged_api_identifier,
       :source_api_identifier,
       :description,
@@ -555,6 +570,7 @@ module Aws::AppSync
     #   <p>The <code>SourceApiAssociation</code> object data.</p>
     #   @return [Types::SourceApiAssociation]
     class AssociateSourceGraphqlApiResponse < Struct.new(
+      nil,
       :source_api_association,
       keyword_init: true
     )
@@ -567,6 +583,7 @@ module Aws::AppSync
     #   <p>The authorization type.</p>
     #   @return [String]
     class AuthMode < Struct.new(
+      nil,
       :auth_type,
       keyword_init: true
     )
@@ -589,6 +606,7 @@ module Aws::AppSync
     #            time.</p>
     #   @return [Types::LambdaAuthorizerConfig]
     class AuthProvider < Struct.new(
+      nil,
       :auth_type,
       :cognito_config,
       :open_id_connect_config,
@@ -613,6 +631,7 @@ module Aws::AppSync
     #   <p>The Identity and Access Management (IAM) settings.</p>
     #   @return [Types::AwsIamConfig]
     class AuthorizationConfig < Struct.new(
+      nil,
       :authorization_type,
       :aws_iam_config,
       keyword_init: true
@@ -628,6 +647,7 @@ module Aws::AppSync
     #   <p>The signing service name for IAM authorization.</p>
     #   @return [String]
     class AwsIamConfig < Struct.new(
+      nil,
       :signing_region,
       :signing_service_name,
       keyword_init: true
@@ -641,6 +661,7 @@ module Aws::AppSync
     #   <p>Contains the list of errors in the request.</p>
     #   @return [Array<Types::CodeError>]
     class BadRequestDetail < Struct.new(
+      nil,
       :code_errors,
       keyword_init: true
     )
@@ -660,6 +681,7 @@ module Aws::AppSync
     #               <code>CODE_ERROR</code>, the detail will contain a list of code errors.</p>
     #   @return [Types::BadRequestDetail]
     class BadRequestException < Struct.new(
+      nil,
       :message,
       :reason,
       :detail,
@@ -679,6 +701,7 @@ module Aws::AppSync
     #               <code>$context.source</code>, and <code>$context.identity</code> maps.</p>
     #   @return [Array<String>]
     class CachingConfig < Struct.new(
+      nil,
       :ttl,
       :caching_keys,
       keyword_init: true
@@ -730,6 +753,7 @@ module Aws::AppSync
     #   <p>The configuration for the <code>OnPublish</code> and <code>OnSubscribe</code> handlers.</p>
     #   @return [Types::HandlerConfigs]
     class ChannelNamespace < Struct.new(
+      nil,
       :api_id,
       :name,
       :subscribe_auth_modes,
@@ -760,6 +784,7 @@ module Aws::AppSync
     #   <p>The line, column, and span location of the error in the code.</p>
     #   @return [Types::CodeErrorLocation]
     class CodeError < Struct.new(
+      nil,
       :error_type,
       :value,
       :location,
@@ -779,6 +804,7 @@ module Aws::AppSync
     #   <p>The span/length of the error. Defaults to <code>-1</code> if unknown.</p>
     #   @return [Integer]
     class CodeErrorLocation < Struct.new(
+      nil,
       :line,
       :column,
       :span,
@@ -806,6 +832,7 @@ module Aws::AppSync
     #            ID. If this value isn't set, no filtering is applied.</p>
     #   @return [String]
     class CognitoConfig < Struct.new(
+      nil,
       :user_pool_id,
       :aws_region,
       :app_id_client_regex,
@@ -826,6 +853,7 @@ module Aws::AppSync
     #            ID. If this value isn't set, no filtering is applied.</p>
     #   @return [String]
     class CognitoUserPoolConfig < Struct.new(
+      nil,
       :user_pool_id,
       :aws_region,
       :app_id_client_regex,
@@ -839,6 +867,7 @@ module Aws::AppSync
     # @!attribute message
     #   @return [String]
     class ConcurrentModificationException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -851,6 +880,7 @@ module Aws::AppSync
     # @!attribute message
     #   @return [String]
     class ConflictException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -993,6 +1023,7 @@ module Aws::AppSync
     #               <code>DISABLED</code>.</p>
     #   @return [String]
     class CreateApiCacheRequest < Struct.new(
+      nil,
       :api_id,
       :ttl,
       :transit_encryption_enabled,
@@ -1010,6 +1041,7 @@ module Aws::AppSync
     #   <p>The <code>ApiCache</code> object.</p>
     #   @return [Types::ApiCache]
     class CreateApiCacheResponse < Struct.new(
+      nil,
       :api_cache,
       keyword_init: true
     )
@@ -1028,6 +1060,7 @@ module Aws::AppSync
     #            for this parameter is 7 days from creation time. For more information, see .</p>
     #   @return [Integer]
     class CreateApiKeyRequest < Struct.new(
+      nil,
       :api_id,
       :description,
       :expires,
@@ -1040,6 +1073,7 @@ module Aws::AppSync
     #   <p>The API key.</p>
     #   @return [Types::ApiKey]
     class CreateApiKeyResponse < Struct.new(
+      nil,
       :api_key,
       keyword_init: true
     )
@@ -1061,6 +1095,7 @@ module Aws::AppSync
     #            connecting, publishing, and subscribing to an Event API.</p>
     #   @return [Types::EventConfig]
     class CreateApiRequest < Struct.new(
+      nil,
       :name,
       :owner_contact,
       :tags,
@@ -1074,6 +1109,7 @@ module Aws::AppSync
     #   <p>The <code>Api</code> object.</p>
     #   @return [Types::Api]
     class CreateApiResponse < Struct.new(
+      nil,
       :api,
       keyword_init: true
     )
@@ -1108,6 +1144,7 @@ module Aws::AppSync
     #   <p>The configuration for the <code>OnPublish</code> and <code>OnSubscribe</code> handlers.</p>
     #   @return [Types::HandlerConfigs]
     class CreateChannelNamespaceRequest < Struct.new(
+      nil,
       :api_id,
       :name,
       :subscribe_auth_modes,
@@ -1124,6 +1161,7 @@ module Aws::AppSync
     #   <p>The <code>ChannelNamespace</code> object.</p>
     #   @return [Types::ChannelNamespace]
     class CreateChannelNamespaceResponse < Struct.new(
+      nil,
       :channel_namespace,
       keyword_init: true
     )
@@ -1180,6 +1218,7 @@ module Aws::AppSync
     #               <code>metricsConfig</code> can be <code>ENABLED</code> or <code>DISABLED</code>.</p>
     #   @return [String]
     class CreateDataSourceRequest < Struct.new(
+      nil,
       :api_id,
       :name,
       :description,
@@ -1202,6 +1241,7 @@ module Aws::AppSync
     #   <p>The <code>DataSource</code> object.</p>
     #   @return [Types::DataSource]
     class CreateDataSourceResponse < Struct.new(
+      nil,
       :data_source,
       keyword_init: true
     )
@@ -1224,6 +1264,7 @@ module Aws::AppSync
     #            objects.</p>
     #   @return [Hash<String, String>]
     class CreateDomainNameRequest < Struct.new(
+      nil,
       :domain_name,
       :certificate_arn,
       :description,
@@ -1237,6 +1278,7 @@ module Aws::AppSync
     #   <p>The configuration for the <code>DomainName</code>.</p>
     #   @return [Types::DomainNameConfig]
     class CreateDomainNameResponse < Struct.new(
+      nil,
       :domain_name_config,
       keyword_init: true
     )
@@ -1286,6 +1328,7 @@ module Aws::AppSync
     #               <code>APPSYNC_JS</code>.</p>
     #   @return [String]
     class CreateFunctionRequest < Struct.new(
+      nil,
       :api_id,
       :name,
       :description,
@@ -1306,6 +1349,7 @@ module Aws::AppSync
     #   <p>The <code>Function</code> object.</p>
     #   @return [Types::FunctionConfiguration]
     class CreateFunctionResponse < Struct.new(
+      nil,
       :function_configuration,
       keyword_init: true
     )
@@ -1390,6 +1434,7 @@ module Aws::AppSync
     #   <p>The <code>enhancedMetricsConfig</code> object.</p>
     #   @return [Types::EnhancedMetricsConfig]
     class CreateGraphqlApiRequest < Struct.new(
+      nil,
       :name,
       :log_config,
       :authentication_type,
@@ -1416,6 +1461,7 @@ module Aws::AppSync
     #   <p>The <code>GraphqlApi</code>.</p>
     #   @return [Types::GraphqlApi]
     class CreateGraphqlApiResponse < Struct.new(
+      nil,
       :graphql_api,
       keyword_init: true
     )
@@ -1496,6 +1542,7 @@ module Aws::AppSync
     #               <code>metricsConfig</code> can be <code>ENABLED</code> or <code>DISABLED</code>.</p>
     #   @return [String]
     class CreateResolverRequest < Struct.new(
+      nil,
       :api_id,
       :type_name,
       :field_name,
@@ -1519,6 +1566,7 @@ module Aws::AppSync
     #   <p>The <code>Resolver</code> object.</p>
     #   @return [Types::Resolver]
     class CreateResolverResponse < Struct.new(
+      nil,
       :resolver,
       keyword_init: true
     )
@@ -1537,6 +1585,7 @@ module Aws::AppSync
     #   <p>The type format: SDL or JSON.</p>
     #   @return [String]
     class CreateTypeRequest < Struct.new(
+      nil,
       :api_id,
       :definition,
       :format,
@@ -1549,6 +1598,7 @@ module Aws::AppSync
     #   <p>The <code>Type</code> object.</p>
     #   @return [Types::Type]
     class CreateTypeResponse < Struct.new(
+      nil,
       :type,
       keyword_init: true
     )
@@ -1651,6 +1701,7 @@ module Aws::AppSync
     #               <code>metricsConfig</code> can be <code>ENABLED</code> or <code>DISABLED</code>.</p>
     #   @return [String]
     class DataSource < Struct.new(
+      nil,
       :data_source_arn,
       :name,
       :description,
@@ -1690,6 +1741,7 @@ module Aws::AppSync
     #               <code>GetDataSourceIntrospection</code> operation.</p>
     #   @return [String]
     class DataSourceIntrospectionModel < Struct.new(
+      nil,
       :name,
       :fields,
       :primary_key,
@@ -1711,6 +1763,7 @@ module Aws::AppSync
     #   <p>The length value of the introspected field.</p>
     #   @return [Integer]
     class DataSourceIntrospectionModelField < Struct.new(
+      nil,
       :name,
       :type,
       :length,
@@ -1767,6 +1820,7 @@ module Aws::AppSync
     #            equivalent of the introspected field.</p>
     #   @return [Array<String>]
     class DataSourceIntrospectionModelFieldType < Struct.new(
+      nil,
       :kind,
       :name,
       :type,
@@ -1784,6 +1838,7 @@ module Aws::AppSync
     #   <p>The fields of the index.</p>
     #   @return [Array<String>]
     class DataSourceIntrospectionModelIndex < Struct.new(
+      nil,
       :name,
       :fields,
       keyword_init: true
@@ -1802,6 +1857,7 @@ module Aws::AppSync
     #            response.</p>
     #   @return [String]
     class DataSourceIntrospectionResult < Struct.new(
+      nil,
       :models,
       :next_token,
       keyword_init: true
@@ -1814,6 +1870,7 @@ module Aws::AppSync
     #   <p>The API ID.</p>
     #   @return [String]
     class DeleteApiCacheRequest < Struct.new(
+      nil,
       :api_id,
       keyword_init: true
     )
@@ -1822,6 +1879,7 @@ module Aws::AppSync
 
     # <p>Represents the output of a <code>DeleteApiCache</code> operation.</p>
     class DeleteApiCacheResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1834,6 +1892,7 @@ module Aws::AppSync
     #   <p>The ID for the API key.</p>
     #   @return [String]
     class DeleteApiKeyRequest < Struct.new(
+      nil,
       :api_id,
       :id,
       keyword_init: true
@@ -1842,6 +1901,7 @@ module Aws::AppSync
     end
 
     class DeleteApiKeyResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1851,6 +1911,7 @@ module Aws::AppSync
     #   <p>The <code>Api</code> ID.</p>
     #   @return [String]
     class DeleteApiRequest < Struct.new(
+      nil,
       :api_id,
       keyword_init: true
     )
@@ -1858,6 +1919,7 @@ module Aws::AppSync
     end
 
     class DeleteApiResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1870,6 +1932,7 @@ module Aws::AppSync
     #   <p>The name of the <code>ChannelNamespace</code>.</p>
     #   @return [String]
     class DeleteChannelNamespaceRequest < Struct.new(
+      nil,
       :api_id,
       :name,
       keyword_init: true
@@ -1878,6 +1941,7 @@ module Aws::AppSync
     end
 
     class DeleteChannelNamespaceResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1890,6 +1954,7 @@ module Aws::AppSync
     #   <p>The name of the data source.</p>
     #   @return [String]
     class DeleteDataSourceRequest < Struct.new(
+      nil,
       :api_id,
       :name,
       keyword_init: true
@@ -1898,6 +1963,7 @@ module Aws::AppSync
     end
 
     class DeleteDataSourceResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1907,6 +1973,7 @@ module Aws::AppSync
     #   <p>The domain name.</p>
     #   @return [String]
     class DeleteDomainNameRequest < Struct.new(
+      nil,
       :domain_name,
       keyword_init: true
     )
@@ -1914,6 +1981,7 @@ module Aws::AppSync
     end
 
     class DeleteDomainNameResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1926,6 +1994,7 @@ module Aws::AppSync
     #   <p>The <code>Function</code> ID.</p>
     #   @return [String]
     class DeleteFunctionRequest < Struct.new(
+      nil,
       :api_id,
       :function_id,
       keyword_init: true
@@ -1934,6 +2003,7 @@ module Aws::AppSync
     end
 
     class DeleteFunctionResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1943,6 +2013,7 @@ module Aws::AppSync
     #   <p>The API ID.</p>
     #   @return [String]
     class DeleteGraphqlApiRequest < Struct.new(
+      nil,
       :api_id,
       keyword_init: true
     )
@@ -1950,6 +2021,7 @@ module Aws::AppSync
     end
 
     class DeleteGraphqlApiResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1965,6 +2037,7 @@ module Aws::AppSync
     #   <p>The resolver field name.</p>
     #   @return [String]
     class DeleteResolverRequest < Struct.new(
+      nil,
       :api_id,
       :type_name,
       :field_name,
@@ -1974,6 +2047,7 @@ module Aws::AppSync
     end
 
     class DeleteResolverResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1986,6 +2060,7 @@ module Aws::AppSync
     #   <p>The type name.</p>
     #   @return [String]
     class DeleteTypeRequest < Struct.new(
+      nil,
       :api_id,
       :type_name,
       keyword_init: true
@@ -1994,6 +2069,7 @@ module Aws::AppSync
     end
 
     class DeleteTypeResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -2011,6 +2087,7 @@ module Aws::AppSync
     #            table.</p>
     #   @return [Integer]
     class DeltaSyncConfig < Struct.new(
+      nil,
       :base_table_ttl,
       :delta_sync_table_name,
       :delta_sync_table_ttl,
@@ -2029,6 +2106,7 @@ module Aws::AppSync
     #   <p>The domain name.</p>
     #   @return [String]
     class DisassociateApiRequest < Struct.new(
+      nil,
       :domain_name,
       keyword_init: true
     )
@@ -2036,6 +2114,7 @@ module Aws::AppSync
     end
 
     class DisassociateApiResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -2051,6 +2130,7 @@ module Aws::AppSync
     #   <p>The ID generated by the AppSync service for the source API association.</p>
     #   @return [String]
     class DisassociateMergedGraphqlApiRequest < Struct.new(
+      nil,
       :source_api_identifier,
       :association_id,
       keyword_init: true
@@ -2062,6 +2142,7 @@ module Aws::AppSync
     #   <p>The state of the source API association.</p>
     #   @return [String]
     class DisassociateMergedGraphqlApiResponse < Struct.new(
+      nil,
       :source_api_association_status,
       keyword_init: true
     )
@@ -2078,6 +2159,7 @@ module Aws::AppSync
     #   <p>The ID generated by the AppSync service for the source API association.</p>
     #   @return [String]
     class DisassociateSourceGraphqlApiRequest < Struct.new(
+      nil,
       :merged_api_identifier,
       :association_id,
       keyword_init: true
@@ -2089,6 +2171,7 @@ module Aws::AppSync
     #   <p>The state of the source API association.</p>
     #   @return [String]
     class DisassociateSourceGraphqlApiResponse < Struct.new(
+      nil,
       :source_api_association_status,
       keyword_init: true
     )
@@ -2121,6 +2204,7 @@ module Aws::AppSync
     #   <p>The Amazon Resource Name (ARN) of the domain name.</p>
     #   @return [String]
     class DomainNameConfig < Struct.new(
+      nil,
       :domain_name,
       :description,
       :certificate_arn,
@@ -2150,6 +2234,7 @@ module Aws::AppSync
     #   <p>Set to TRUE to use Conflict Detection and Resolution with this data source.</p>
     #   @return [Boolean]
     class DynamodbDataSourceConfig < Struct.new(
+      nil,
       :table_name,
       :aws_region,
       :use_caller_credentials,
@@ -2177,6 +2262,7 @@ module Aws::AppSync
     #   <p>The Amazon Web Services Region.</p>
     #   @return [String]
     class ElasticsearchDataSourceConfig < Struct.new(
+      nil,
       :endpoint,
       :aws_region,
       keyword_init: true
@@ -2371,6 +2457,7 @@ module Aws::AppSync
     #               <code>ENABLED</code> or <code>DISABLED</code>.</p>
     #   @return [String]
     class EnhancedMetricsConfig < Struct.new(
+      nil,
       :resolver_level_metrics_behavior,
       :data_source_level_metrics_behavior,
       :operation_level_metrics_config,
@@ -2385,6 +2472,7 @@ module Aws::AppSync
     #   <p>The error payload.</p>
     #   @return [String]
     class ErrorDetail < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -2399,6 +2487,7 @@ module Aws::AppSync
     #   <p>Contains the list of <code>CodeError</code> objects.</p>
     #   @return [Array<Types::CodeError>]
     class EvaluateCodeErrorDetail < Struct.new(
+      nil,
       :message,
       :code_errors,
       keyword_init: true
@@ -2424,6 +2513,7 @@ module Aws::AppSync
     #               <code>request</code> and <code>response</code>.</p>
     #   @return [String]
     class EvaluateCodeRequest < Struct.new(
+      nil,
       :runtime,
       :code,
       :context,
@@ -2450,6 +2540,7 @@ module Aws::AppSync
     #   <p>The list of runtime errors that are added to the GraphQL operation response.</p>
     #   @return [String]
     class EvaluateCodeResponse < Struct.new(
+      nil,
       :evaluation_result,
       :error,
       :logs,
@@ -2469,6 +2560,7 @@ module Aws::AppSync
     #               <code>context</code> is required for this action.</p>
     #   @return [String]
     class EvaluateMappingTemplateRequest < Struct.new(
+      nil,
       :template,
       :context,
       keyword_init: true
@@ -2493,6 +2585,7 @@ module Aws::AppSync
     #   <p>The list of runtime errors that are added to the GraphQL operation response.</p>
     #   @return [String]
     class EvaluateMappingTemplateResponse < Struct.new(
+      nil,
       :evaluation_result,
       :error,
       :logs,
@@ -2509,6 +2602,7 @@ module Aws::AppSync
     #               EventBridge event buses</a>.</p>
     #   @return [String]
     class EventBridgeDataSourceConfig < Struct.new(
+      nil,
       :event_bus_arn,
       keyword_init: true
     )
@@ -2533,6 +2627,7 @@ module Aws::AppSync
     #   <p>The CloudWatch Logs configuration for the Event API.</p>
     #   @return [Types::EventLogConfig]
     class EventConfig < Struct.new(
+      nil,
       :auth_providers,
       :connection_auth_modes,
       :default_publish_auth_modes,
@@ -2551,6 +2646,7 @@ module Aws::AppSync
     #   <p>The IAM service role that AppSync assumes to publish CloudWatch Logs in your account.</p>
     #   @return [String]
     class EventLogConfig < Struct.new(
+      nil,
       :log_level,
       :cloud_watch_logs_role_arn,
       keyword_init: true
@@ -2563,6 +2659,7 @@ module Aws::AppSync
     #   <p>The API ID.</p>
     #   @return [String]
     class FlushApiCacheRequest < Struct.new(
+      nil,
       :api_id,
       keyword_init: true
     )
@@ -2571,6 +2668,7 @@ module Aws::AppSync
 
     # <p>Represents the output of a <code>FlushApiCache</code> operation.</p>
     class FlushApiCacheResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -2622,6 +2720,7 @@ module Aws::AppSync
     #               <code>APPSYNC_JS</code>.</p>
     #   @return [String]
     class FunctionConfiguration < Struct.new(
+      nil,
       :function_id,
       :function_arn,
       :name,
@@ -2648,6 +2747,7 @@ module Aws::AppSync
     #   <p>The domain name.</p>
     #   @return [String]
     class GetApiAssociationRequest < Struct.new(
+      nil,
       :domain_name,
       keyword_init: true
     )
@@ -2658,6 +2758,7 @@ module Aws::AppSync
     #   <p>The <code>ApiAssociation</code> object.</p>
     #   @return [Types::ApiAssociation]
     class GetApiAssociationResponse < Struct.new(
+      nil,
       :api_association,
       keyword_init: true
     )
@@ -2669,6 +2770,7 @@ module Aws::AppSync
     #   <p>The API ID.</p>
     #   @return [String]
     class GetApiCacheRequest < Struct.new(
+      nil,
       :api_id,
       keyword_init: true
     )
@@ -2680,6 +2782,7 @@ module Aws::AppSync
     #   <p>The <code>ApiCache</code> object.</p>
     #   @return [Types::ApiCache]
     class GetApiCacheResponse < Struct.new(
+      nil,
       :api_cache,
       keyword_init: true
     )
@@ -2690,6 +2793,7 @@ module Aws::AppSync
     #   <p>The <code>Api</code> ID.</p>
     #   @return [String]
     class GetApiRequest < Struct.new(
+      nil,
       :api_id,
       keyword_init: true
     )
@@ -2700,6 +2804,7 @@ module Aws::AppSync
     #   <p>The <code>Api</code> object.</p>
     #   @return [Types::Api]
     class GetApiResponse < Struct.new(
+      nil,
       :api,
       keyword_init: true
     )
@@ -2713,6 +2818,7 @@ module Aws::AppSync
     #   <p>The name of the <code>ChannelNamespace</code>.</p>
     #   @return [String]
     class GetChannelNamespaceRequest < Struct.new(
+      nil,
       :api_id,
       :name,
       keyword_init: true
@@ -2724,6 +2830,7 @@ module Aws::AppSync
     #   <p>The <code>ChannelNamespace</code> object.</p>
     #   @return [Types::ChannelNamespace]
     class GetChannelNamespaceResponse < Struct.new(
+      nil,
       :channel_namespace,
       keyword_init: true
     )
@@ -2750,6 +2857,7 @@ module Aws::AppSync
     #            response.</p>
     #   @return [Integer]
     class GetDataSourceIntrospectionRequest < Struct.new(
+      nil,
       :introspection_id,
       :include_models_sdl,
       :next_token,
@@ -2779,6 +2887,7 @@ module Aws::AppSync
     #   <p>The <code>DataSourceIntrospectionResult</code> object data.</p>
     #   @return [Types::DataSourceIntrospectionResult]
     class GetDataSourceIntrospectionResponse < Struct.new(
+      nil,
       :introspection_id,
       :introspection_status,
       :introspection_status_detail,
@@ -2795,6 +2904,7 @@ module Aws::AppSync
     #   <p>The name of the data source.</p>
     #   @return [String]
     class GetDataSourceRequest < Struct.new(
+      nil,
       :api_id,
       :name,
       keyword_init: true
@@ -2806,6 +2916,7 @@ module Aws::AppSync
     #   <p>The <code>DataSource</code> object.</p>
     #   @return [Types::DataSource]
     class GetDataSourceResponse < Struct.new(
+      nil,
       :data_source,
       keyword_init: true
     )
@@ -2816,6 +2927,7 @@ module Aws::AppSync
     #   <p>The domain name.</p>
     #   @return [String]
     class GetDomainNameRequest < Struct.new(
+      nil,
       :domain_name,
       keyword_init: true
     )
@@ -2826,6 +2938,7 @@ module Aws::AppSync
     #   <p>The configuration for the <code>DomainName</code>.</p>
     #   @return [Types::DomainNameConfig]
     class GetDomainNameResponse < Struct.new(
+      nil,
       :domain_name_config,
       keyword_init: true
     )
@@ -2839,6 +2952,7 @@ module Aws::AppSync
     #   <p>The <code>Function</code> ID.</p>
     #   @return [String]
     class GetFunctionRequest < Struct.new(
+      nil,
       :api_id,
       :function_id,
       keyword_init: true
@@ -2850,6 +2964,7 @@ module Aws::AppSync
     #   <p>The <code>Function</code> object.</p>
     #   @return [Types::FunctionConfiguration]
     class GetFunctionResponse < Struct.new(
+      nil,
       :function_configuration,
       keyword_init: true
     )
@@ -2860,6 +2975,7 @@ module Aws::AppSync
     #   <p>The ID of the API from which the environmental variable list will be retrieved.</p>
     #   @return [String]
     class GetGraphqlApiEnvironmentVariablesRequest < Struct.new(
+      nil,
       :api_id,
       keyword_init: true
     )
@@ -2871,6 +2987,7 @@ module Aws::AppSync
     #            format.</p>
     #   @return [Hash<String, String>]
     class GetGraphqlApiEnvironmentVariablesResponse < Struct.new(
+      nil,
       :environment_variables,
       keyword_init: true
     )
@@ -2881,6 +2998,7 @@ module Aws::AppSync
     #   <p>The API ID for the GraphQL API.</p>
     #   @return [String]
     class GetGraphqlApiRequest < Struct.new(
+      nil,
       :api_id,
       keyword_init: true
     )
@@ -2891,6 +3009,7 @@ module Aws::AppSync
     #   <p>The <code>GraphqlApi</code> object.</p>
     #   @return [Types::GraphqlApi]
     class GetGraphqlApiResponse < Struct.new(
+      nil,
       :graphql_api,
       keyword_init: true
     )
@@ -2907,6 +3026,7 @@ module Aws::AppSync
     #   <p>A flag that specifies whether the schema introspection should contain directives.</p>
     #   @return [Boolean]
     class GetIntrospectionSchemaRequest < Struct.new(
+      nil,
       :api_id,
       :format,
       :include_directives,
@@ -2921,6 +3041,7 @@ module Aws::AppSync
     #               documentation</a>.</p>
     #   @return [String]
     class GetIntrospectionSchemaResponse < Struct.new(
+      nil,
       :schema,
       keyword_init: true
     )
@@ -2937,6 +3058,7 @@ module Aws::AppSync
     #   <p>The resolver field name.</p>
     #   @return [String]
     class GetResolverRequest < Struct.new(
+      nil,
       :api_id,
       :type_name,
       :field_name,
@@ -2949,6 +3071,7 @@ module Aws::AppSync
     #   <p>The <code>Resolver</code> object.</p>
     #   @return [Types::Resolver]
     class GetResolverResponse < Struct.new(
+      nil,
       :resolver,
       keyword_init: true
     )
@@ -2959,6 +3082,7 @@ module Aws::AppSync
     #   <p>The API ID.</p>
     #   @return [String]
     class GetSchemaCreationStatusRequest < Struct.new(
+      nil,
       :api_id,
       keyword_init: true
     )
@@ -2973,6 +3097,7 @@ module Aws::AppSync
     #   <p>Detailed information about the status of the schema creation operation.</p>
     #   @return [String]
     class GetSchemaCreationStatusResponse < Struct.new(
+      nil,
       :status,
       :details,
       keyword_init: true
@@ -2990,6 +3115,7 @@ module Aws::AppSync
     #   <p>The ID generated by the AppSync service for the source API association.</p>
     #   @return [String]
     class GetSourceApiAssociationRequest < Struct.new(
+      nil,
       :merged_api_identifier,
       :association_id,
       keyword_init: true
@@ -3001,6 +3127,7 @@ module Aws::AppSync
     #   <p>The <code>SourceApiAssociation</code> object data.</p>
     #   @return [Types::SourceApiAssociation]
     class GetSourceApiAssociationResponse < Struct.new(
+      nil,
       :source_api_association,
       keyword_init: true
     )
@@ -3017,6 +3144,7 @@ module Aws::AppSync
     #   <p>The type format: SDL or JSON.</p>
     #   @return [String]
     class GetTypeRequest < Struct.new(
+      nil,
       :api_id,
       :type_name,
       :format,
@@ -3029,6 +3157,7 @@ module Aws::AppSync
     #   <p>The <code>Type</code> object.</p>
     #   @return [Types::Type]
     class GetTypeResponse < Struct.new(
+      nil,
       :type,
       keyword_init: true
     )
@@ -3039,6 +3168,7 @@ module Aws::AppSync
     # @!attribute message
     #   @return [String]
     class GraphQLSchemaException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -3142,6 +3272,7 @@ module Aws::AppSync
     #   <p>The <code>enhancedMetricsConfig</code> object.</p>
     #   @return [Types::EnhancedMetricsConfig]
     class GraphqlApi < Struct.new(
+      nil,
       :name,
       :api_id,
       :authentication_type,
@@ -3185,6 +3316,7 @@ module Aws::AppSync
     #   <p>The integration data source configuration for the handler.</p>
     #   @return [Types::Integration]
     class HandlerConfig < Struct.new(
+      nil,
       :behavior,
       :integration,
       keyword_init: true
@@ -3200,6 +3332,7 @@ module Aws::AppSync
     #   <p>The configuration for the <code>OnSubscribe</code> handler.</p>
     #   @return [Types::HandlerConfig]
     class HandlerConfigs < Struct.new(
+      nil,
       :on_publish,
       :on_subscribe,
       keyword_init: true
@@ -3218,6 +3351,7 @@ module Aws::AppSync
     #   <p>The authorization configuration in case the HTTP endpoint requires authorization.</p>
     #   @return [Types::AuthorizationConfig]
     class HttpDataSourceConfig < Struct.new(
+      nil,
       :endpoint,
       :authorization_config,
       keyword_init: true
@@ -3233,6 +3367,7 @@ module Aws::AppSync
     #   <p>The configuration for a Lambda data source.</p>
     #   @return [Types::LambdaConfig]
     class Integration < Struct.new(
+      nil,
       :data_source_name,
       :lambda_config,
       keyword_init: true
@@ -3244,6 +3379,7 @@ module Aws::AppSync
     # @!attribute message
     #   @return [String]
     class InternalFailureException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -3280,6 +3416,7 @@ module Aws::AppSync
     #            called.</p>
     #   @return [String]
     class LambdaAuthorizerConfig < Struct.new(
+      nil,
       :authorizer_result_ttl_in_seconds,
       :authorizer_uri,
       :identity_validation_expression,
@@ -3298,6 +3435,7 @@ module Aws::AppSync
     #   <p>The invocation type for a Lambda data source.</p>
     #   @return [String]
     class LambdaConfig < Struct.new(
+      nil,
       :invoke_type,
       keyword_init: true
     )
@@ -3311,6 +3449,7 @@ module Aws::AppSync
     #            Conflict Handler.</p>
     #   @return [String]
     class LambdaConflictHandlerConfig < Struct.new(
+      nil,
       :lambda_conflict_handler_arn,
       keyword_init: true
     )
@@ -3322,6 +3461,7 @@ module Aws::AppSync
     #   <p>The Amazon Resource Name (ARN) for the Lambda function.</p>
     #   @return [String]
     class LambdaDataSourceConfig < Struct.new(
+      nil,
       :lambda_function_arn,
       keyword_init: true
     )
@@ -3332,6 +3472,7 @@ module Aws::AppSync
     # @!attribute message
     #   @return [String]
     class LimitExceededException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -3349,6 +3490,7 @@ module Aws::AppSync
     #   <p>The maximum number of results that you want the request to return.</p>
     #   @return [Integer]
     class ListApiKeysRequest < Struct.new(
+      nil,
       :api_id,
       :next_token,
       :max_results,
@@ -3365,6 +3507,7 @@ module Aws::AppSync
     #            items in the list.</p>
     #   @return [String]
     class ListApiKeysResponse < Struct.new(
+      nil,
       :api_keys,
       :next_token,
       keyword_init: true
@@ -3380,6 +3523,7 @@ module Aws::AppSync
     #   <p>The maximum number of results that you want the request to return.</p>
     #   @return [Integer]
     class ListApisRequest < Struct.new(
+      nil,
       :next_token,
       :max_results,
       keyword_init: true
@@ -3395,6 +3539,7 @@ module Aws::AppSync
     #            use to return the next set of items in the list.</p>
     #   @return [String]
     class ListApisResponse < Struct.new(
+      nil,
       :apis,
       :next_token,
       keyword_init: true
@@ -3413,6 +3558,7 @@ module Aws::AppSync
     #   <p>The maximum number of results that you want the request to return.</p>
     #   @return [Integer]
     class ListChannelNamespacesRequest < Struct.new(
+      nil,
       :api_id,
       :next_token,
       :max_results,
@@ -3429,6 +3575,7 @@ module Aws::AppSync
     #            use to return the next set of items in the list.</p>
     #   @return [String]
     class ListChannelNamespacesResponse < Struct.new(
+      nil,
       :channel_namespaces,
       :next_token,
       keyword_init: true
@@ -3447,6 +3594,7 @@ module Aws::AppSync
     #   <p>The maximum number of results that you want the request to return.</p>
     #   @return [Integer]
     class ListDataSourcesRequest < Struct.new(
+      nil,
       :api_id,
       :next_token,
       :max_results,
@@ -3463,6 +3611,7 @@ module Aws::AppSync
     #            items in the list.</p>
     #   @return [String]
     class ListDataSourcesResponse < Struct.new(
+      nil,
       :data_sources,
       :next_token,
       keyword_init: true
@@ -3478,6 +3627,7 @@ module Aws::AppSync
     #   <p>The maximum number of results that you want the request to return.</p>
     #   @return [Integer]
     class ListDomainNamesRequest < Struct.new(
+      nil,
       :next_token,
       :max_results,
       keyword_init: true
@@ -3493,6 +3643,7 @@ module Aws::AppSync
     #            use to return the next set of items in the list.</p>
     #   @return [String]
     class ListDomainNamesResponse < Struct.new(
+      nil,
       :domain_name_configs,
       :next_token,
       keyword_init: true
@@ -3511,6 +3662,7 @@ module Aws::AppSync
     #   <p>The maximum number of results that you want the request to return.</p>
     #   @return [Integer]
     class ListFunctionsRequest < Struct.new(
+      nil,
       :api_id,
       :next_token,
       :max_results,
@@ -3527,6 +3679,7 @@ module Aws::AppSync
     #            use to return the next set of items in the list.</p>
     #   @return [String]
     class ListFunctionsResponse < Struct.new(
+      nil,
       :functions,
       :next_token,
       keyword_init: true
@@ -3549,6 +3702,7 @@ module Aws::AppSync
     #   <p>The account owner of the GraphQL API.</p>
     #   @return [String]
     class ListGraphqlApisRequest < Struct.new(
+      nil,
       :next_token,
       :max_results,
       :api_type,
@@ -3566,6 +3720,7 @@ module Aws::AppSync
     #            items in the list.</p>
     #   @return [String]
     class ListGraphqlApisResponse < Struct.new(
+      nil,
       :graphql_apis,
       :next_token,
       keyword_init: true
@@ -3587,6 +3742,7 @@ module Aws::AppSync
     #   <p>The maximum number of results that you want the request to return.</p>
     #   @return [Integer]
     class ListResolversByFunctionRequest < Struct.new(
+      nil,
       :api_id,
       :function_id,
       :next_token,
@@ -3603,6 +3759,7 @@ module Aws::AppSync
     #   <p>An identifier that you can use to return the next set of items in the list.</p>
     #   @return [String]
     class ListResolversByFunctionResponse < Struct.new(
+      nil,
       :resolvers,
       :next_token,
       keyword_init: true
@@ -3624,6 +3781,7 @@ module Aws::AppSync
     #   <p>The maximum number of results that you want the request to return.</p>
     #   @return [Integer]
     class ListResolversRequest < Struct.new(
+      nil,
       :api_id,
       :type_name,
       :next_token,
@@ -3641,6 +3799,7 @@ module Aws::AppSync
     #            items in the list.</p>
     #   @return [String]
     class ListResolversResponse < Struct.new(
+      nil,
       :resolvers,
       :next_token,
       keyword_init: true
@@ -3659,6 +3818,7 @@ module Aws::AppSync
     #   <p>The maximum number of results that you want the request to return.</p>
     #   @return [Integer]
     class ListSourceApiAssociationsRequest < Struct.new(
+      nil,
       :api_id,
       :next_token,
       :max_results,
@@ -3675,6 +3835,7 @@ module Aws::AppSync
     #            use to return the next set of items in the list.</p>
     #   @return [String]
     class ListSourceApiAssociationsResponse < Struct.new(
+      nil,
       :source_api_association_summaries,
       :next_token,
       keyword_init: true
@@ -3686,6 +3847,7 @@ module Aws::AppSync
     #   <p>The <code>GraphqlApi</code> Amazon Resource Name (ARN).</p>
     #   @return [String]
     class ListTagsForResourceRequest < Struct.new(
+      nil,
       :resource_arn,
       keyword_init: true
     )
@@ -3696,6 +3858,7 @@ module Aws::AppSync
     #   <p>A <code>TagMap</code> object.</p>
     #   @return [Hash<String, String>]
     class ListTagsForResourceResponse < Struct.new(
+      nil,
       :tags,
       keyword_init: true
     )
@@ -3722,6 +3885,7 @@ module Aws::AppSync
     #   <p>The maximum number of results that you want the request to return.</p>
     #   @return [Integer]
     class ListTypesByAssociationRequest < Struct.new(
+      nil,
       :merged_api_identifier,
       :association_id,
       :format,
@@ -3740,6 +3904,7 @@ module Aws::AppSync
     #            use to return the next set of items in the list.</p>
     #   @return [String]
     class ListTypesByAssociationResponse < Struct.new(
+      nil,
       :types,
       :next_token,
       keyword_init: true
@@ -3761,6 +3926,7 @@ module Aws::AppSync
     #   <p>The maximum number of results that you want the request to return.</p>
     #   @return [Integer]
     class ListTypesRequest < Struct.new(
+      nil,
       :api_id,
       :format,
       :next_token,
@@ -3778,6 +3944,7 @@ module Aws::AppSync
     #            items in the list.</p>
     #   @return [String]
     class ListTypesResponse < Struct.new(
+      nil,
       :types,
       :next_token,
       keyword_init: true
@@ -3836,6 +4003,7 @@ module Aws::AppSync
     #            evaluated mapping templates, regardless of logging level.</p>
     #   @return [Boolean]
     class LogConfig < Struct.new(
+      nil,
       :field_log_level,
       :cloud_watch_logs_role_arn,
       :exclude_verbose_content,
@@ -3854,6 +4022,7 @@ module Aws::AppSync
     # @!attribute message
     #   @return [String]
     class NotFoundException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -3878,6 +4047,7 @@ module Aws::AppSync
     #   <p>The number of milliseconds that a token is valid after being authenticated.</p>
     #   @return [Integer]
     class OpenIDConnectConfig < Struct.new(
+      nil,
       :issuer,
       :client_id,
       :iat_ttl,
@@ -3901,6 +4071,7 @@ module Aws::AppSync
     #   <p>The Amazon Web Services Region.</p>
     #   @return [String]
     class OpenSearchServiceDataSourceConfig < Struct.new(
+      nil,
       :endpoint,
       :aws_region,
       keyword_init: true
@@ -3913,6 +4084,7 @@ module Aws::AppSync
     #   <p>A list of <code>Function</code> objects.</p>
     #   @return [Array<String>]
     class PipelineConfig < Struct.new(
+      nil,
       :functions,
       keyword_init: true
     )
@@ -3953,6 +4125,7 @@ module Aws::AppSync
     #            variables in the list each time you call this action.</p>
     #   @return [Hash<String, String>]
     class PutGraphqlApiEnvironmentVariablesRequest < Struct.new(
+      nil,
       :api_id,
       :environment_variables,
       keyword_init: true
@@ -3965,6 +4138,7 @@ module Aws::AppSync
     #            format.</p>
     #   @return [Hash<String, String>]
     class PutGraphqlApiEnvironmentVariablesResponse < Struct.new(
+      nil,
       :environment_variables,
       keyword_init: true
     )
@@ -3985,6 +4159,7 @@ module Aws::AppSync
     #   <p>The name of the database in the cluster.</p>
     #   @return [String]
     class RdsDataApiConfig < Struct.new(
+      nil,
       :resource_arn,
       :secret_arn,
       :database_name,
@@ -4011,6 +4186,7 @@ module Aws::AppSync
     #            credentials.</p>
     #   @return [String]
     class RdsHttpEndpointConfig < Struct.new(
+      nil,
       :aws_region,
       :db_cluster_identifier,
       :database_name,
@@ -4037,6 +4213,7 @@ module Aws::AppSync
     #   <p>Amazon RDS HTTP endpoint settings.</p>
     #   @return [Types::RdsHttpEndpointConfig]
     class RelationalDatabaseDataSourceConfig < Struct.new(
+      nil,
       :relational_database_source_type,
       :rds_http_endpoint_config,
       keyword_init: true
@@ -4113,6 +4290,7 @@ module Aws::AppSync
     #               <code>metricsConfig</code> can be <code>ENABLED</code> or <code>DISABLED</code>.</p>
     #   @return [String]
     class Resolver < Struct.new(
+      nil,
       :type_name,
       :field_name,
       :data_source_name,
@@ -4141,6 +4319,7 @@ module Aws::AppSync
     # @!attribute message
     #   @return [String]
     class ServiceQuotaExceededException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -4188,6 +4367,7 @@ module Aws::AppSync
     #            result will be in UTC format and your local time zone.</p>
     #   @return [Time]
     class SourceApiAssociation < Struct.new(
+      nil,
       :association_id,
       :association_arn,
       :source_api_id,
@@ -4216,6 +4396,7 @@ module Aws::AppSync
     #            operations.</p>
     #   @return [String]
     class SourceApiAssociationConfig < Struct.new(
+      nil,
       :merge_type,
       keyword_init: true
     )
@@ -4245,6 +4426,7 @@ module Aws::AppSync
     #   <p>The description field.</p>
     #   @return [String]
     class SourceApiAssociationSummary < Struct.new(
+      nil,
       :association_id,
       :association_arn,
       :source_api_id,
@@ -4261,6 +4443,7 @@ module Aws::AppSync
     #   <p>The <code>rdsDataApiConfig</code> object data.</p>
     #   @return [Types::RdsDataApiConfig]
     class StartDataSourceIntrospectionRequest < Struct.new(
+      nil,
       :rds_data_api_config,
       keyword_init: true
     )
@@ -4284,6 +4467,7 @@ module Aws::AppSync
     #            will also return the exact error that was generated during the operation.</p>
     #   @return [String]
     class StartDataSourceIntrospectionResponse < Struct.new(
+      nil,
       :introspection_id,
       :introspection_status,
       :introspection_status_detail,
@@ -4299,6 +4483,7 @@ module Aws::AppSync
     #   <p>The schema definition, in GraphQL schema language format.</p>
     #   @return [String]
     class StartSchemaCreationRequest < Struct.new(
+      nil,
       :api_id,
       :definition,
       keyword_init: true
@@ -4311,6 +4496,7 @@ module Aws::AppSync
     #            the schema is in the ACTIVE state, you can add data.</p>
     #   @return [String]
     class StartSchemaCreationResponse < Struct.new(
+      nil,
       :status,
       keyword_init: true
     )
@@ -4327,6 +4513,7 @@ module Aws::AppSync
     #            strictly require the full resource ARN of the merged API.</p>
     #   @return [String]
     class StartSchemaMergeRequest < Struct.new(
+      nil,
       :association_id,
       :merged_api_identifier,
       keyword_init: true
@@ -4338,6 +4525,7 @@ module Aws::AppSync
     #   <p>The state of the source API association.</p>
     #   @return [String]
     class StartSchemaMergeResponse < Struct.new(
+      nil,
       :source_api_association_status,
       keyword_init: true
     )
@@ -4388,6 +4576,7 @@ module Aws::AppSync
     #            Conflict Handler.</p>
     #   @return [Types::LambdaConflictHandlerConfig]
     class SyncConfig < Struct.new(
+      nil,
       :conflict_handler,
       :conflict_detection,
       :lambda_conflict_handler_config,
@@ -4403,6 +4592,7 @@ module Aws::AppSync
     #   <p>A <code>TagMap</code> object.</p>
     #   @return [Hash<String, String>]
     class TagResourceRequest < Struct.new(
+      nil,
       :resource_arn,
       :tags,
       keyword_init: true
@@ -4411,6 +4601,7 @@ module Aws::AppSync
     end
 
     class TagResourceResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -4433,6 +4624,7 @@ module Aws::AppSync
     #   <p>The type format: SDL or JSON.</p>
     #   @return [String]
     class Type < Struct.new(
+      nil,
       :name,
       :description,
       :arn,
@@ -4447,6 +4639,7 @@ module Aws::AppSync
     # @!attribute message
     #   @return [String]
     class UnauthorizedException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -4460,6 +4653,7 @@ module Aws::AppSync
     #   <p>A list of <code>TagKey</code> objects.</p>
     #   @return [Array<String>]
     class UntagResourceRequest < Struct.new(
+      nil,
       :resource_arn,
       :tag_keys,
       keyword_init: true
@@ -4468,6 +4662,7 @@ module Aws::AppSync
     end
 
     class UntagResourceResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -4596,6 +4791,7 @@ module Aws::AppSync
     #               <code>DISABLED</code>.</p>
     #   @return [String]
     class UpdateApiCacheRequest < Struct.new(
+      nil,
       :api_id,
       :ttl,
       :api_caching_behavior,
@@ -4611,6 +4807,7 @@ module Aws::AppSync
     #   <p>The <code>ApiCache</code> object.</p>
     #   @return [Types::ApiCache]
     class UpdateApiCacheResponse < Struct.new(
+      nil,
       :api_cache,
       keyword_init: true
     )
@@ -4631,6 +4828,7 @@ module Aws::AppSync
     #            as seconds since the epoch. For more information, see .</p>
     #   @return [Integer]
     class UpdateApiKeyRequest < Struct.new(
+      nil,
       :api_id,
       :id,
       :description,
@@ -4644,6 +4842,7 @@ module Aws::AppSync
     #   <p>The API key.</p>
     #   @return [Types::ApiKey]
     class UpdateApiKeyResponse < Struct.new(
+      nil,
       :api_key,
       keyword_init: true
     )
@@ -4664,6 +4863,7 @@ module Aws::AppSync
     #            connecting, publishing, and subscribing to an Event API.</p>
     #   @return [Types::EventConfig]
     class UpdateApiRequest < Struct.new(
+      nil,
       :api_id,
       :name,
       :owner_contact,
@@ -4677,6 +4877,7 @@ module Aws::AppSync
     #   <p>The <code>Api</code> object.</p>
     #   @return [Types::Api]
     class UpdateApiResponse < Struct.new(
+      nil,
       :api,
       keyword_init: true
     )
@@ -4705,6 +4906,7 @@ module Aws::AppSync
     #   <p>The configuration for the <code>OnPublish</code> and <code>OnSubscribe</code> handlers.</p>
     #   @return [Types::HandlerConfigs]
     class UpdateChannelNamespaceRequest < Struct.new(
+      nil,
       :api_id,
       :name,
       :subscribe_auth_modes,
@@ -4720,6 +4922,7 @@ module Aws::AppSync
     #   <p>The <code>ChannelNamespace</code> object.</p>
     #   @return [Types::ChannelNamespace]
     class UpdateChannelNamespaceResponse < Struct.new(
+      nil,
       :channel_namespace,
       keyword_init: true
     )
@@ -4775,6 +4978,7 @@ module Aws::AppSync
     #               <code>metricsConfig</code> can be <code>ENABLED</code> or <code>DISABLED</code>.</p>
     #   @return [String]
     class UpdateDataSourceRequest < Struct.new(
+      nil,
       :api_id,
       :name,
       :description,
@@ -4797,6 +5001,7 @@ module Aws::AppSync
     #   <p>The updated <code>DataSource</code> object.</p>
     #   @return [Types::DataSource]
     class UpdateDataSourceResponse < Struct.new(
+      nil,
       :data_source,
       keyword_init: true
     )
@@ -4810,6 +5015,7 @@ module Aws::AppSync
     #   <p>A description of the <code>DomainName</code>.</p>
     #   @return [String]
     class UpdateDomainNameRequest < Struct.new(
+      nil,
       :domain_name,
       :description,
       keyword_init: true
@@ -4821,6 +5027,7 @@ module Aws::AppSync
     #   <p>The configuration for the <code>DomainName</code>.</p>
     #   @return [Types::DomainNameConfig]
     class UpdateDomainNameResponse < Struct.new(
+      nil,
       :domain_name_config,
       keyword_init: true
     )
@@ -4873,6 +5080,7 @@ module Aws::AppSync
     #               <code>APPSYNC_JS</code>.</p>
     #   @return [String]
     class UpdateFunctionRequest < Struct.new(
+      nil,
       :api_id,
       :name,
       :description,
@@ -4894,6 +5102,7 @@ module Aws::AppSync
     #   <p>The <code>Function</code> object.</p>
     #   @return [Types::FunctionConfiguration]
     class UpdateFunctionResponse < Struct.new(
+      nil,
       :function_configuration,
       keyword_init: true
     )
@@ -4968,6 +5177,7 @@ module Aws::AppSync
     #   <p>The <code>enhancedMetricsConfig</code> object.</p>
     #   @return [Types::EnhancedMetricsConfig]
     class UpdateGraphqlApiRequest < Struct.new(
+      nil,
       :api_id,
       :name,
       :log_config,
@@ -4992,6 +5202,7 @@ module Aws::AppSync
     #   <p>The updated <code>GraphqlApi</code> object.</p>
     #   @return [Types::GraphqlApi]
     class UpdateGraphqlApiResponse < Struct.new(
+      nil,
       :graphql_api,
       keyword_init: true
     )
@@ -5072,6 +5283,7 @@ module Aws::AppSync
     #               <code>metricsConfig</code> can be <code>ENABLED</code> or <code>DISABLED</code>.</p>
     #   @return [String]
     class UpdateResolverRequest < Struct.new(
+      nil,
       :api_id,
       :type_name,
       :field_name,
@@ -5095,6 +5307,7 @@ module Aws::AppSync
     #   <p>The updated <code>Resolver</code> object.</p>
     #   @return [Types::Resolver]
     class UpdateResolverResponse < Struct.new(
+      nil,
       :resolver,
       keyword_init: true
     )
@@ -5117,6 +5330,7 @@ module Aws::AppSync
     #   <p>The <code>SourceApiAssociationConfig</code> object data.</p>
     #   @return [Types::SourceApiAssociationConfig]
     class UpdateSourceApiAssociationRequest < Struct.new(
+      nil,
       :association_id,
       :merged_api_identifier,
       :description,
@@ -5130,6 +5344,7 @@ module Aws::AppSync
     #   <p>The <code>SourceApiAssociation</code> object data.</p>
     #   @return [Types::SourceApiAssociation]
     class UpdateSourceApiAssociationResponse < Struct.new(
+      nil,
       :source_api_association,
       keyword_init: true
     )
@@ -5149,6 +5364,7 @@ module Aws::AppSync
     #   <p>The new type format: SDL or JSON.</p>
     #   @return [String]
     class UpdateTypeRequest < Struct.new(
+      nil,
       :api_id,
       :type_name,
       :definition,
@@ -5162,6 +5378,7 @@ module Aws::AppSync
     #   <p>The updated <code>Type</code> object.</p>
     #   @return [Types::Type]
     class UpdateTypeResponse < Struct.new(
+      nil,
       :type,
       keyword_init: true
     )
@@ -5184,6 +5401,7 @@ module Aws::AppSync
     #            ID. If this value isn't set, no filtering is applied.</p>
     #   @return [String]
     class UserPoolConfig < Struct.new(
+      nil,
       :user_pool_id,
       :aws_region,
       :default_action,

@@ -24,6 +24,7 @@ module Aws::Pipes
     #               <code>EcsParameters</code> is set to <code>FARGATE</code>.</p>
     #   @return [String]
     class AwsVpcConfiguration < Struct.new(
+      nil,
       :subnets,
       :security_groups,
       :assign_public_ip,
@@ -38,6 +39,7 @@ module Aws::Pipes
     #   <p>The size of the array, if this is an array batch job.</p>
     #   @return [Integer]
     class BatchArrayProperties < Struct.new(
+      nil,
       :size,
       keyword_init: true
     )
@@ -71,6 +73,7 @@ module Aws::Pipes
     #               <code>MEMORY</code>, and <code>VCPU</code>.</p>
     #   @return [Array<Types::BatchResourceRequirement>]
     class BatchContainerOverrides < Struct.new(
+      nil,
       :command,
       :environment,
       :instance_type,
@@ -96,6 +99,7 @@ module Aws::Pipes
     #            environment variable.</p>
     #   @return [String]
     class BatchEnvironmentVariable < Struct.new(
+      nil,
       :name,
       :value,
       keyword_init: true
@@ -112,6 +116,7 @@ module Aws::Pipes
     #   <p>The type of the job dependency.</p>
     #   @return [String]
     class BatchJobDependency < Struct.new(
+      nil,
       :job_id,
       :type,
       keyword_init: true
@@ -301,6 +306,7 @@ module Aws::Pipes
     #            </dl>
     #   @return [String]
     class BatchResourceRequirement < Struct.new(
+      nil,
       :type,
       :value,
       keyword_init: true
@@ -316,6 +322,7 @@ module Aws::Pipes
     #            of attempts as the value.</p>
     #   @return [Integer]
     class BatchRetryStrategy < Struct.new(
+      nil,
       :attempts,
       keyword_init: true
     )
@@ -337,6 +344,7 @@ module Aws::Pipes
     #            defined. If no value is specified, the default value of 0 is used. </p>
     #   @return [Integer]
     class CapacityProviderStrategyItem < Struct.new(
+      nil,
       :capacity_provider,
       :weight,
       :base,
@@ -356,6 +364,7 @@ module Aws::Pipes
     #   <p>The Amazon Web Services Resource Name (ARN) for the CloudWatch log group to which EventBridge sends the log records.</p>
     #   @return [String]
     class CloudwatchLogsLogDestination < Struct.new(
+      nil,
       :log_group_arn,
       keyword_init: true
     )
@@ -367,6 +376,7 @@ module Aws::Pipes
     #   <p>The Amazon Web Services Resource Name (ARN) for the CloudWatch log group to which EventBridge sends the log records.</p>
     #   @return [String]
     class CloudwatchLogsLogDestinationParameters < Struct.new(
+      nil,
       :log_group_arn,
       keyword_init: true
     )
@@ -383,6 +393,7 @@ module Aws::Pipes
     #   <p>The type of resource that caused the exception.</p>
     #   @return [String]
     class ConflictException < Struct.new(
+      nil,
       :message,
       :resource_id,
       :resource_type,
@@ -438,6 +449,7 @@ module Aws::Pipes
     #                                   Developer Guide</i>. </p>
     #   @return [String]
     class CreatePipeRequest < Struct.new(
+      nil,
       :name,
       :description,
       :desired_state,
@@ -475,6 +487,7 @@ module Aws::Pipes
     #   <p>When the pipe was last updated, in <a href="https://www.w3.org/TR/NOTE-datetime">ISO-8601 format</a> (YYYY-MM-DDThh:mm:ss.sTZD).</p>
     #   @return [Time]
     class CreatePipeResponse < Struct.new(
+      nil,
       :arn,
       :name,
       :desired_state,
@@ -494,6 +507,7 @@ module Aws::Pipes
     #            either an Amazon SNS topic or Amazon SQS queue ARN.</p>
     #   @return [String]
     class DeadLetterConfig < Struct.new(
+      nil,
       :arn,
       keyword_init: true
     )
@@ -504,6 +518,7 @@ module Aws::Pipes
     #   <p>The name of the pipe.</p>
     #   @return [String]
     class DeletePipeRequest < Struct.new(
+      nil,
       :name,
       keyword_init: true
     )
@@ -529,6 +544,7 @@ module Aws::Pipes
     #   <p>When the pipe was last updated, in <a href="https://www.w3.org/TR/NOTE-datetime">ISO-8601 format</a> (YYYY-MM-DDThh:mm:ss.sTZD).</p>
     #   @return [Time]
     class DeletePipeResponse < Struct.new(
+      nil,
       :arn,
       :name,
       :desired_state,
@@ -544,6 +560,7 @@ module Aws::Pipes
     #   <p>The name of the pipe.</p>
     #   @return [String]
     class DescribePipeRequest < Struct.new(
+      nil,
       :name,
       keyword_init: true
     )
@@ -608,6 +625,7 @@ module Aws::Pipes
     #            <p>For more information, see <a href="https://docs.aws.amazon.com/eventbridge/latest/userguide/eb-encryption.html">Data encryption in EventBridge</a> in the <i>Amazon EventBridge User Guide</i>.</p>
     #   @return [String]
     class DescribePipeResponse < Struct.new(
+      nil,
       :arn,
       :name,
       :description,
@@ -647,6 +665,7 @@ module Aws::Pipes
     #            dimensions.</p>
     #   @return [String]
     class DimensionMapping < Struct.new(
+      nil,
       :dimension_value,
       :dimension_value_type,
       :dimension_name,
@@ -695,6 +714,7 @@ module Aws::Pipes
     #            from the task definition. The only supported resource is a GPU.</p>
     #   @return [Array<Types::EcsResourceRequirement>]
     class EcsContainerOverride < Struct.new(
+      nil,
       :command,
       :cpu,
       :environment,
@@ -740,6 +760,7 @@ module Aws::Pipes
     #            environment variable file.</p>
     #   @return [String]
     class EcsEnvironmentFile < Struct.new(
+      nil,
       :type,
       :value,
       keyword_init: true
@@ -760,6 +781,7 @@ module Aws::Pipes
     #            environment variable.</p>
     #   @return [String]
     class EcsEnvironmentVariable < Struct.new(
+      nil,
       :name,
       :value,
       keyword_init: true
@@ -782,6 +804,7 @@ module Aws::Pipes
     #            GiB.</p>
     #   @return [Integer]
     class EcsEphemeralStorage < Struct.new(
+      nil,
       :size_in_gi_b,
       keyword_init: true
     )
@@ -801,6 +824,7 @@ module Aws::Pipes
     #   <p>The Elastic Inference accelerator type to use.</p>
     #   @return [String]
     class EcsInferenceAcceleratorOverride < Struct.new(
+      nil,
       :device_name,
       :device_type,
       keyword_init: true
@@ -829,6 +853,7 @@ module Aws::Pipes
     #            definition.</p>
     #   @return [String]
     class EcsResourceRequirement < Struct.new(
+      nil,
       :type,
       :value,
       keyword_init: true
@@ -877,6 +902,7 @@ module Aws::Pipes
     #            the <i>Amazon Elastic Container Service Developer Guide</i>.</p>
     #   @return [String]
     class EcsTaskOverride < Struct.new(
+      nil,
       :container_overrides,
       :cpu,
       :ephemeral_storage,
@@ -895,6 +921,7 @@ module Aws::Pipes
     #   <p>The event pattern.</p>
     #   @return [String]
     class Filter < Struct.new(
+      nil,
       :pattern,
       keyword_init: true
     )
@@ -909,6 +936,7 @@ module Aws::Pipes
     #   <p>The event patterns.</p>
     #   @return [Array<Types::Filter>]
     class FilterCriteria < Struct.new(
+      nil,
       :filters,
       keyword_init: true
     )
@@ -920,6 +948,7 @@ module Aws::Pipes
     #   <p>The Amazon Resource Name (ARN) of the Firehose delivery stream to which EventBridge delivers the pipe log records.</p>
     #   @return [String]
     class FirehoseLogDestination < Struct.new(
+      nil,
       :delivery_stream_arn,
       keyword_init: true
     )
@@ -932,6 +961,7 @@ module Aws::Pipes
     #            which EventBridge delivers the pipe log records.</p>
     #   @return [String]
     class FirehoseLogDestinationParameters < Struct.new(
+      nil,
       :delivery_stream_arn,
       keyword_init: true
     )
@@ -946,6 +976,7 @@ module Aws::Pipes
     #            exception.</p>
     #   @return [Integer]
     class InternalException < Struct.new(
+      nil,
       :message,
       :retry_after_seconds,
       keyword_init: true
@@ -979,6 +1010,7 @@ module Aws::Pipes
     #   <p>The maximum number of pipes to include in the response.</p>
     #   @return [Integer]
     class ListPipesRequest < Struct.new(
+      nil,
       :name_prefix,
       :desired_state,
       :current_state,
@@ -1000,6 +1032,7 @@ module Aws::Pipes
     #            token will return an HTTP 400 InvalidToken error.</p>
     #   @return [String]
     class ListPipesResponse < Struct.new(
+      nil,
       :pipes,
       :next_token,
       keyword_init: true
@@ -1011,6 +1044,7 @@ module Aws::Pipes
     #   <p>The ARN of the pipe for which you want to view tags.</p>
     #   @return [String]
     class ListTagsForResourceInput < Struct.new(
+      nil,
       :resource_arn,
       keyword_init: true
     )
@@ -1021,6 +1055,7 @@ module Aws::Pipes
     #   <p>The list of key-value pairs to associate with the pipe.</p>
     #   @return [Hash<String, String>]
     class ListTagsForResourceOutput < Struct.new(
+      nil,
       :tags,
       keyword_init: true
     )
@@ -1074,6 +1109,7 @@ module Aws::Pipes
     #   <p>Target measure name to be used.</p>
     #   @return [String]
     class MultiMeasureAttributeMapping < Struct.new(
+      nil,
       :measure_value,
       :measure_value_type,
       :multi_measure_attribute_name,
@@ -1094,6 +1130,7 @@ module Aws::Pipes
     #               Timestream for LiveAnalytics record.</p>
     #   @return [Array<Types::MultiMeasureAttributeMapping>]
     class MultiMeasureMapping < Struct.new(
+      nil,
       :multi_measure_name,
       :multi_measure_attribute_mappings,
       keyword_init: true
@@ -1109,6 +1146,7 @@ module Aws::Pipes
     #            that use the <code>awsvpc</code> network mode.</p>
     #   @return [Types::AwsVpcConfiguration]
     class NetworkConfiguration < Struct.new(
+      nil,
       :awsvpc_configuration,
       keyword_init: true
     )
@@ -1119,6 +1157,7 @@ module Aws::Pipes
     # @!attribute message
     #   @return [String]
     class NotFoundException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -1158,6 +1197,7 @@ module Aws::Pipes
     #   <p>The ARN of the enrichment resource.</p>
     #   @return [String]
     class Pipe < Struct.new(
+      nil,
       :name,
       :arn,
       :desired_state,
@@ -1189,6 +1229,7 @@ module Aws::Pipes
     #               API Gateway REST API or EventBridge ApiDestination.</p>
     #   @return [Hash<String, String>]
     class PipeEnrichmentHttpParameters < Struct.new(
+      nil,
       :path_parameter_values,
       :header_parameters,
       :query_string_parameters,
@@ -1214,6 +1255,7 @@ module Aws::Pipes
     #            keys, values from the Connection take precedence.</p>
     #   @return [Types::PipeEnrichmentHttpParameters]
     class PipeEnrichmentParameters < Struct.new(
+      nil,
       :input_template,
       :http_parameters,
       keyword_init: true
@@ -1243,6 +1285,7 @@ module Aws::Pipes
     #               Guide</i>.</p>
     #   @return [Array<String>]
     class PipeLogConfiguration < Struct.new(
+      nil,
       :s3_log_destination,
       :firehose_log_destination,
       :cloudwatch_logs_log_destination,
@@ -1294,6 +1337,7 @@ module Aws::Pipes
     #            <p>By default, execution data is not included.</p>
     #   @return [Array<String>]
     class PipeLogConfigurationParameters < Struct.new(
+      nil,
       :s3_log_destination,
       :firehose_log_destination,
       :cloudwatch_logs_log_destination,
@@ -1318,6 +1362,7 @@ module Aws::Pipes
     #   <p>The maximum length of a time to wait for events.</p>
     #   @return [Integer]
     class PipeSourceActiveMQBrokerParameters < Struct.new(
+      nil,
       :credentials,
       :queue_name,
       :batch_size,
@@ -1356,6 +1401,7 @@ module Aws::Pipes
     #   <p>The position in a stream from which to start reading.</p>
     #   @return [String]
     class PipeSourceDynamoDBStreamParameters < Struct.new(
+      nil,
       :batch_size,
       :dead_letter_config,
       :on_partial_batch_item_failure,
@@ -1402,6 +1448,7 @@ module Aws::Pipes
     #            to start reading, in Unix time seconds.</p>
     #   @return [Time]
     class PipeSourceKinesisStreamParameters < Struct.new(
+      nil,
       :batch_size,
       :dead_letter_config,
       :on_partial_batch_item_failure,
@@ -1436,6 +1483,7 @@ module Aws::Pipes
     #   <p>The credentials needed to access the resource.</p>
     #   @return [Types::MSKAccessCredentials]
     class PipeSourceManagedStreamingKafkaParameters < Struct.new(
+      nil,
       :topic_name,
       :starting_position,
       :batch_size,
@@ -1480,6 +1528,7 @@ module Aws::Pipes
     #         Cloud</a>, <a href="https://www.cloudkarafka.com/">CloudKarafka</a>, or <a href="https://redpanda.com/">Redpanda</a>. For more information, see <a href="https://docs.aws.amazon.com/eventbridge/latest/userguide/eb-pipes-kafka.html">Apache Kafka streams as a source</a> in the <i>Amazon EventBridge User Guide</i>.</p>
     #   @return [Types::PipeSourceSelfManagedKafkaParameters]
     class PipeSourceParameters < Struct.new(
+      nil,
       :filter_criteria,
       :kinesis_stream_parameters,
       :dynamo_db_stream_parameters,
@@ -1510,6 +1559,7 @@ module Aws::Pipes
     #   <p>The maximum length of a time to wait for events.</p>
     #   @return [Integer]
     class PipeSourceRabbitMQBrokerParameters < Struct.new(
+      nil,
       :credentials,
       :queue_name,
       :virtual_host,
@@ -1553,6 +1603,7 @@ module Aws::Pipes
     #   <p>This structure specifies the VPC subnets and security groups for the stream, and whether a public IP address is to be used.</p>
     #   @return [Types::SelfManagedKafkaAccessConfigurationVpc]
     class PipeSourceSelfManagedKafkaParameters < Struct.new(
+      nil,
       :topic_name,
       :starting_position,
       :additional_bootstrap_servers,
@@ -1575,6 +1626,7 @@ module Aws::Pipes
     #   <p>The maximum length of a time to wait for events.</p>
     #   @return [Integer]
     class PipeSourceSqsQueueParameters < Struct.new(
+      nil,
       :batch_size,
       :maximum_batching_window_in_seconds,
       keyword_init: true
@@ -1619,6 +1671,7 @@ module Aws::Pipes
     #            job definition.</p>
     #   @return [Hash<String, String>]
     class PipeTargetBatchJobParameters < Struct.new(
+      nil,
       :job_definition,
       :job_name,
       :array_properties,
@@ -1640,6 +1693,7 @@ module Aws::Pipes
     #            00:00:00 UTC.</p>
     #   @return [String]
     class PipeTargetCloudWatchLogsParameters < Struct.new(
+      nil,
       :log_stream_name,
       :timestamp,
       keyword_init: true
@@ -1726,6 +1780,7 @@ module Aws::Pipes
     #               <a href="https://docs.aws.amazon.com/AmazonECS/latest/APIReference/API_RunTask.html#ECS-RunTask-request-tags">RunTask</a> in the Amazon ECS API Reference.</p>
     #   @return [Array<Types::Tag>]
     class PipeTargetEcsTaskParameters < Struct.new(
+      nil,
       :task_definition_arn,
       :task_count,
       :launch_type,
@@ -1773,6 +1828,7 @@ module Aws::Pipes
     #   <p>The time stamp of the event, per <a href="https://www.rfc-editor.org/rfc/rfc3339.txt">RFC3339</a>. If no time stamp is provided, the time stamp of the <a href="https://docs.aws.amazon.com/eventbridge/latest/APIReference/API_PutEvents.html">PutEvents</a> call is used.</p>
     #   @return [String]
     class PipeTargetEventBridgeEventBusParameters < Struct.new(
+      nil,
       :endpoint_id,
       :detail_type,
       :source,
@@ -1797,6 +1853,7 @@ module Aws::Pipes
     #               API Gateway REST API or EventBridge ApiDestination.</p>
     #   @return [Hash<String, String>]
     class PipeTargetHttpParameters < Struct.new(
+      nil,
       :path_parameter_values,
       :header_parameters,
       :query_string_parameters,
@@ -1815,6 +1872,7 @@ module Aws::Pipes
     #            key map to the same shard within the stream.</p>
     #   @return [String]
     class PipeTargetKinesisStreamParameters < Struct.new(
+      nil,
       :partition_key,
       keyword_init: true
     )
@@ -1846,6 +1904,7 @@ module Aws::Pipes
     #               types</a> in the <i>Amazon EventBridge User Guide</i>.</p>
     #   @return [String]
     class PipeTargetLambdaFunctionParameters < Struct.new(
+      nil,
       :invocation_type,
       keyword_init: true
     )
@@ -1900,6 +1959,7 @@ module Aws::Pipes
     #            target.</p>
     #   @return [Types::PipeTargetTimestreamParameters]
     class PipeTargetParameters < Struct.new(
+      nil,
       :input_template,
       :lambda_function_parameters,
       :step_function_state_machine_parameters,
@@ -1943,6 +2003,7 @@ module Aws::Pipes
     #   <p>The SQL statement text to run.</p>
     #   @return [Array<String>]
     class PipeTargetRedshiftDataParameters < Struct.new(
+      nil,
       :secret_manager_arn,
       :database,
       :db_user,
@@ -1965,6 +2026,7 @@ module Aws::Pipes
     #            execution.</p>
     #   @return [Array<Types::SageMakerPipelineParameter>]
     class PipeTargetSageMakerPipelineParameters < Struct.new(
+      nil,
       :pipeline_parameter_list,
       keyword_init: true
     )
@@ -1980,6 +2042,7 @@ module Aws::Pipes
     #            <p>The token used for deduplication of sent messages.</p>
     #   @return [String]
     class PipeTargetSqsQueueParameters < Struct.new(
+      nil,
       :message_group_id,
       :message_deduplication_id,
       keyword_init: true
@@ -2014,6 +2077,7 @@ module Aws::Pipes
     #               types</a> in the <i>Amazon EventBridge User Guide</i>.</p>
     #   @return [String]
     class PipeTargetStateMachineParameters < Struct.new(
+      nil,
       :invocation_type,
       keyword_init: true
     )
@@ -2068,6 +2132,7 @@ module Aws::Pipes
     #   <p>Maps multiple measures from the source event to the same record in the specified Timestream for LiveAnalytics table.</p>
     #   @return [Array<Types::MultiMeasureMapping>]
     class PipeTargetTimestreamParameters < Struct.new(
+      nil,
       :time_value,
       :epoch_time_unit,
       :time_field_type,
@@ -2095,6 +2160,7 @@ module Aws::Pipes
     #               Language</a> in the Amazon Elastic Container Service Developer Guide. </p>
     #   @return [String]
     class PlacementConstraint < Struct.new(
+      nil,
       :type,
       :expression,
       keyword_init: true
@@ -2121,6 +2187,7 @@ module Aws::Pipes
     #            placement strategy, this field is not used. </p>
     #   @return [String]
     class PlacementStrategy < Struct.new(
+      nil,
       :type,
       :field,
       keyword_init: true
@@ -2146,6 +2213,7 @@ module Aws::Pipes
     #            <p>EventBridge currently only supports <code>json</code> formatting.</p>
     #   @return [String]
     class S3LogDestination < Struct.new(
+      nil,
       :bucket_name,
       :prefix,
       :bucket_owner,
@@ -2177,6 +2245,7 @@ module Aws::Pipes
     #               prefixes</a> in the <i>Amazon Simple Storage Service User Guide</i>.</p>
     #   @return [String]
     class S3LogDestinationParameters < Struct.new(
+      nil,
       :bucket_name,
       :bucket_owner,
       :output_format,
@@ -2197,6 +2266,7 @@ module Aws::Pipes
     #            Pipeline.</p>
     #   @return [String]
     class SageMakerPipelineParameter < Struct.new(
+      nil,
       :name,
       :value,
       keyword_init: true
@@ -2245,6 +2315,7 @@ module Aws::Pipes
     #            be in the same VPC. You can specify as many as five security groups.</p>
     #   @return [Array<String>]
     class SelfManagedKafkaAccessConfigurationVpc < Struct.new(
+      nil,
       :subnets,
       :security_group,
       keyword_init: true
@@ -2268,6 +2339,7 @@ module Aws::Pipes
     #   <p>The identifier of the quota that caused the exception.</p>
     #   @return [String]
     class ServiceQuotaExceededException < Struct.new(
+      nil,
       :message,
       :resource_id,
       :resource_type,
@@ -2292,6 +2364,7 @@ module Aws::Pipes
     #   <p>Target measure name for the measurement attribute in the Timestream table.</p>
     #   @return [String]
     class SingleMeasureMapping < Struct.new(
+      nil,
       :measure_value,
       :measure_value_type,
       :measure_name,
@@ -2304,6 +2377,7 @@ module Aws::Pipes
     #   <p>The name of the pipe.</p>
     #   @return [String]
     class StartPipeRequest < Struct.new(
+      nil,
       :name,
       keyword_init: true
     )
@@ -2329,6 +2403,7 @@ module Aws::Pipes
     #   <p>When the pipe was last updated, in <a href="https://www.w3.org/TR/NOTE-datetime">ISO-8601 format</a> (YYYY-MM-DDThh:mm:ss.sTZD).</p>
     #   @return [Time]
     class StartPipeResponse < Struct.new(
+      nil,
       :arn,
       :name,
       :desired_state,
@@ -2344,6 +2419,7 @@ module Aws::Pipes
     #   <p>The name of the pipe.</p>
     #   @return [String]
     class StopPipeRequest < Struct.new(
+      nil,
       :name,
       keyword_init: true
     )
@@ -2369,6 +2445,7 @@ module Aws::Pipes
     #   <p>When the pipe was last updated, in <a href="https://www.w3.org/TR/NOTE-datetime">ISO-8601 format</a> (YYYY-MM-DDThh:mm:ss.sTZD).</p>
     #   @return [Time]
     class StopPipeResponse < Struct.new(
+      nil,
       :arn,
       :name,
       :desired_state,
@@ -2390,6 +2467,7 @@ module Aws::Pipes
     #   <p>The value for the specified tag key.</p>
     #   @return [String]
     class Tag < Struct.new(
+      nil,
       :key,
       :value,
       keyword_init: true
@@ -2404,6 +2482,7 @@ module Aws::Pipes
     #   <p>The list of key-value pairs associated with the pipe.</p>
     #   @return [Hash<String, String>]
     class TagResourceInput < Struct.new(
+      nil,
       :resource_arn,
       :tags,
       keyword_init: true
@@ -2412,6 +2491,7 @@ module Aws::Pipes
     end
 
     class TagResourceOutput < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -2431,6 +2511,7 @@ module Aws::Pipes
     #            exception.</p>
     #   @return [Integer]
     class ThrottlingException < Struct.new(
+      nil,
       :message,
       :service_code,
       :quota_code,
@@ -2447,6 +2528,7 @@ module Aws::Pipes
     #   <p>The list of tag keys to remove from the pipe.</p>
     #   @return [Array<String>]
     class UntagResourceInput < Struct.new(
+      nil,
       :resource_arn,
       :tag_keys,
       keyword_init: true
@@ -2455,6 +2537,7 @@ module Aws::Pipes
     end
 
     class UntagResourceOutput < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -2502,6 +2585,7 @@ module Aws::Pipes
     #               Developer Guide</i>. </p>
     #   @return [String]
     class UpdatePipeRequest < Struct.new(
+      nil,
       :name,
       :description,
       :desired_state,
@@ -2537,6 +2621,7 @@ module Aws::Pipes
     #   <p>When the pipe was last updated, in <a href="https://www.w3.org/TR/NOTE-datetime">ISO-8601 format</a> (YYYY-MM-DDThh:mm:ss.sTZD).</p>
     #   @return [Time]
     class UpdatePipeResponse < Struct.new(
+      nil,
       :arn,
       :name,
       :desired_state,
@@ -2559,6 +2644,7 @@ module Aws::Pipes
     #   <p>The maximum length of a time to wait for events.</p>
     #   @return [Integer]
     class UpdatePipeSourceActiveMQBrokerParameters < Struct.new(
+      nil,
       :credentials,
       :batch_size,
       :maximum_batching_window_in_seconds,
@@ -2593,6 +2679,7 @@ module Aws::Pipes
     #   <p>The number of batches to process concurrently from each shard. The default value is 1.</p>
     #   @return [Integer]
     class UpdatePipeSourceDynamoDBStreamParameters < Struct.new(
+      nil,
       :batch_size,
       :dead_letter_config,
       :on_partial_batch_item_failure,
@@ -2631,6 +2718,7 @@ module Aws::Pipes
     #   <p>The number of batches to process concurrently from each shard. The default value is 1.</p>
     #   @return [Integer]
     class UpdatePipeSourceKinesisStreamParameters < Struct.new(
+      nil,
       :batch_size,
       :dead_letter_config,
       :on_partial_batch_item_failure,
@@ -2654,6 +2742,7 @@ module Aws::Pipes
     #   <p>The maximum length of a time to wait for events.</p>
     #   @return [Integer]
     class UpdatePipeSourceManagedStreamingKafkaParameters < Struct.new(
+      nil,
       :batch_size,
       :credentials,
       :maximum_batching_window_in_seconds,
@@ -2695,6 +2784,7 @@ module Aws::Pipes
     #         Cloud</a>, <a href="https://www.cloudkarafka.com/">CloudKarafka</a>, or <a href="https://redpanda.com/">Redpanda</a>. For more information, see <a href="https://docs.aws.amazon.com/eventbridge/latest/userguide/eb-pipes-kafka.html">Apache Kafka streams as a source</a> in the <i>Amazon EventBridge User Guide</i>.</p>
     #   @return [Types::UpdatePipeSourceSelfManagedKafkaParameters]
     class UpdatePipeSourceParameters < Struct.new(
+      nil,
       :filter_criteria,
       :kinesis_stream_parameters,
       :dynamo_db_stream_parameters,
@@ -2719,6 +2809,7 @@ module Aws::Pipes
     #   <p>The maximum length of a time to wait for events.</p>
     #   @return [Integer]
     class UpdatePipeSourceRabbitMQBrokerParameters < Struct.new(
+      nil,
       :credentials,
       :batch_size,
       :maximum_batching_window_in_seconds,
@@ -2748,6 +2839,7 @@ module Aws::Pipes
     #   <p>This structure specifies the VPC subnets and security groups for the stream, and whether a public IP address is to be used.</p>
     #   @return [Types::SelfManagedKafkaAccessConfigurationVpc]
     class UpdatePipeSourceSelfManagedKafkaParameters < Struct.new(
+      nil,
       :batch_size,
       :maximum_batching_window_in_seconds,
       :credentials,
@@ -2766,6 +2858,7 @@ module Aws::Pipes
     #   <p>The maximum length of a time to wait for events.</p>
     #   @return [Integer]
     class UpdatePipeSourceSqsQueueParameters < Struct.new(
+      nil,
       :batch_size,
       :maximum_batching_window_in_seconds,
       keyword_init: true
@@ -2781,6 +2874,7 @@ module Aws::Pipes
     #            messages.</p>
     #   @return [Array<Types::ValidationExceptionField>]
     class ValidationException < Struct.new(
+      nil,
       :message,
       :field_list,
       keyword_init: true
@@ -2796,6 +2890,7 @@ module Aws::Pipes
     #   <p>The message of the exception.</p>
     #   @return [String]
     class ValidationExceptionField < Struct.new(
+      nil,
       :name,
       :message,
       keyword_init: true

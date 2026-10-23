@@ -10,6 +10,7 @@ module Aws::SocialMessaging
     # @!attribute message
     #   @return [String]
     class AccessDeniedByMetaException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -20,6 +21,7 @@ module Aws::SocialMessaging
     # @!attribute message
     #   @return [String]
     class AccessDeniedException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -33,6 +35,7 @@ module Aws::SocialMessaging
     #   <p>A JSON object that contains the phone numbers and WhatsApp Business Account to link to your account.</p>
     #   @return [Types::WhatsAppSetupFinalization]
     class AssociateWhatsAppBusinessAccountInput < Struct.new(
+      nil,
       :signup_callback,
       :setup_finalization,
       keyword_init: true
@@ -47,6 +50,7 @@ module Aws::SocialMessaging
     #   <p>The status code for the response.</p>
     #   @return [Integer]
     class AssociateWhatsAppBusinessAccountOutput < Struct.new(
+      nil,
       :signup_callback_result,
       :status_code,
       keyword_init: true
@@ -61,6 +65,7 @@ module Aws::SocialMessaging
     #   <p>The ID of the WhatsApp Business Account to associate with this template.</p>
     #   @return [String]
     class CreateWhatsAppMessageTemplateFromLibraryInput < Struct.new(
+      nil,
       :meta_library_template,
       :id,
       keyword_init: true
@@ -78,6 +83,7 @@ module Aws::SocialMessaging
     #   <p>The category of the template (for example, UTILITY or MARKETING).</p>
     #   @return [String]
     class CreateWhatsAppMessageTemplateFromLibraryOutput < Struct.new(
+      nil,
       :meta_template_id,
       :template_status,
       :category,
@@ -93,6 +99,7 @@ module Aws::SocialMessaging
     #   <p>The ID of the WhatsApp Business Account to associate with this template.</p>
     #   @return [String]
     class CreateWhatsAppMessageTemplateInput < Struct.new(
+      nil,
       :template_definition,
       :id,
       keyword_init: true
@@ -107,6 +114,7 @@ module Aws::SocialMessaging
     #   <p>Contains information for the S3 bucket that contains media files.</p>
     #   @return [Types::S3File]
     class CreateWhatsAppMessageTemplateMediaInput < Struct.new(
+      nil,
       :id,
       :source_s3_file,
       keyword_init: true
@@ -118,6 +126,7 @@ module Aws::SocialMessaging
     #   <p>The handle assigned to the uploaded media by Meta, used to reference the media in templates.</p>
     #   @return [String]
     class CreateWhatsAppMessageTemplateMediaOutput < Struct.new(
+      nil,
       :meta_header_handle,
       keyword_init: true
     )
@@ -134,6 +143,7 @@ module Aws::SocialMessaging
     #   <p>The category of the template, such as UTILITY or MARKETING.</p>
     #   @return [String]
     class CreateWhatsAppMessageTemplateOutput < Struct.new(
+      nil,
       :meta_template_id,
       :template_status,
       :category,
@@ -153,6 +163,7 @@ module Aws::SocialMessaging
     #            id.</p>
     #   @return [String]
     class DeleteWhatsAppMessageMediaInput < Struct.new(
+      nil,
       :media_id,
       :origination_phone_number_id,
       keyword_init: true
@@ -164,6 +175,7 @@ module Aws::SocialMessaging
     #   <p>Success indicator for deleting the media file.</p>
     #   @return [Boolean]
     class DeleteWhatsAppMessageMediaOutput < Struct.new(
+      nil,
       :success,
       keyword_init: true
     )
@@ -183,6 +195,7 @@ module Aws::SocialMessaging
     #   <p>The name of the template to delete.</p>
     #   @return [String]
     class DeleteWhatsAppMessageTemplateInput < Struct.new(
+      nil,
       :meta_template_id,
       :delete_all_languages,
       :id,
@@ -193,6 +206,7 @@ module Aws::SocialMessaging
     end
 
     class DeleteWhatsAppMessageTemplateOutput < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -202,6 +216,7 @@ module Aws::SocialMessaging
     # @!attribute message
     #   @return [String]
     class DependencyException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -214,6 +229,7 @@ module Aws::SocialMessaging
     #            <a href="https://docs.aws.amazon.com/social-messaging/latest/APIReference/API_ListLinkedWhatsAppBusinessAccounts.html">ListLinkedWhatsAppBusinessAccounts</a> to list all WABAs and their details.</p>
     #   @return [String]
     class DisassociateWhatsAppBusinessAccountInput < Struct.new(
+      nil,
       :id,
       keyword_init: true
     )
@@ -221,6 +237,7 @@ module Aws::SocialMessaging
     end
 
     class DisassociateWhatsAppBusinessAccountOutput < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -233,6 +250,7 @@ module Aws::SocialMessaging
     #            <a href="https://docs.aws.amazon.com/social-messaging/latest/APIReference/API_ListLinkedWhatsAppBusinessAccounts.html">ListLinkedWhatsAppBusinessAccounts</a> to list all WABAs and their details.</p>
     #   @return [String]
     class GetLinkedWhatsAppBusinessAccountInput < Struct.new(
+      nil,
       :id,
       keyword_init: true
     )
@@ -243,6 +261,7 @@ module Aws::SocialMessaging
     #   <p>The details of the linked WhatsApp Business Account.</p>
     #   @return [Types::LinkedWhatsAppBusinessAccount]
     class GetLinkedWhatsAppBusinessAccountOutput < Struct.new(
+      nil,
       :account,
       keyword_init: true
     )
@@ -256,6 +275,7 @@ module Aws::SocialMessaging
     #            id.</p>
     #   @return [String]
     class GetLinkedWhatsAppBusinessAccountPhoneNumberInput < Struct.new(
+      nil,
       :id,
       keyword_init: true
     )
@@ -270,6 +290,7 @@ module Aws::SocialMessaging
     #            <code>waba-01234567890123456789012345678901</code>.</p>
     #   @return [String]
     class GetLinkedWhatsAppBusinessAccountPhoneNumberOutput < Struct.new(
+      nil,
       :phone_number,
       :linked_whats_app_business_account_id,
       keyword_init: true
@@ -297,6 +318,7 @@ module Aws::SocialMessaging
     #   <p>The <code>bucketName</code> and <code>key</code> of the S3 media file.</p>
     #   @return [Types::S3File]
     class GetWhatsAppMessageMediaInput < Struct.new(
+      nil,
       :media_id,
       :origination_phone_number_id,
       :metadata_only,
@@ -314,6 +336,7 @@ module Aws::SocialMessaging
     #   <p>The file size of the media, in KB.</p>
     #   @return [Integer]
     class GetWhatsAppMessageMediaOutput < Struct.new(
+      nil,
       :mime_type,
       :file_size,
       keyword_init: true
@@ -328,6 +351,7 @@ module Aws::SocialMessaging
     #   <p>The ID of the WhatsApp Business Account associated with this template.</p>
     #   @return [String]
     class GetWhatsAppMessageTemplateInput < Struct.new(
+      nil,
       :meta_template_id,
       :id,
       keyword_init: true
@@ -339,6 +363,7 @@ module Aws::SocialMessaging
     #   <p>The complete template definition as a JSON string (maximum 6000 characters).</p>
     #   @return [String]
     class GetWhatsAppMessageTemplateOutput < Struct.new(
+      nil,
       :template,
       keyword_init: true
     )
@@ -350,6 +375,7 @@ module Aws::SocialMessaging
     # @!attribute message
     #   @return [String]
     class InternalServiceException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -360,6 +386,7 @@ module Aws::SocialMessaging
     # @!attribute message
     #   @return [String]
     class InvalidParametersException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -383,6 +410,7 @@ module Aws::SocialMessaging
     #   <p>The number of minutes until a verification code or OTP expires.</p>
     #   @return [Integer]
     class LibraryTemplateBodyInputs < Struct.new(
+      nil,
       :add_contact_number,
       :add_learn_more_link,
       :add_security_recommendation,
@@ -413,6 +441,7 @@ module Aws::SocialMessaging
     #   <p>List of supported applications for this button type.</p>
     #   @return [Array<Hash<String, String>>]
     class LibraryTemplateButtonInput < Struct.new(
+      nil,
       :type,
       :phone_number,
       :url,
@@ -447,6 +476,7 @@ module Aws::SocialMessaging
     #   <p>List of supported applications for this button type.</p>
     #   @return [Array<Hash<String, String>>]
     class LibraryTemplateButtonList < Struct.new(
+      nil,
       :type,
       :text,
       :phone_number,
@@ -463,6 +493,7 @@ module Aws::SocialMessaging
     # @!attribute message
     #   @return [String]
     class LimitExceededException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -495,6 +526,7 @@ module Aws::SocialMessaging
     #   <p>The phone numbers associated with the Linked WhatsApp Business Account.</p>
     #   @return [Array<Types::WhatsAppPhoneNumberSummary>]
     class LinkedWhatsAppBusinessAccount < Struct.new(
+      nil,
       :arn,
       :id,
       :waba_id,
@@ -523,6 +555,7 @@ module Aws::SocialMessaging
     #   <p>The Amazon Resource Name (ARN) of the WhatsApp Business Account ID.</p>
     #   @return [String]
     class LinkedWhatsAppBusinessAccountIdMetaData < Struct.new(
+      nil,
       :account_name,
       :registration_status,
       :unregistered_whats_app_phone_numbers,
@@ -555,6 +588,7 @@ module Aws::SocialMessaging
     #   <p>The event destinations for the linked WhatsApp Business Account.</p>
     #   @return [Array<Types::WhatsAppBusinessAccountEventDestination>]
     class LinkedWhatsAppBusinessAccountSummary < Struct.new(
+      nil,
       :arn,
       :id,
       :waba_id,
@@ -574,6 +608,7 @@ module Aws::SocialMessaging
     #   <p>The maximum number of results to return.</p>
     #   @return [Integer]
     class ListLinkedWhatsAppBusinessAccountsInput < Struct.new(
+      nil,
       :next_token,
       :max_results,
       keyword_init: true
@@ -588,6 +623,7 @@ module Aws::SocialMessaging
     #   <p>The next token for pagination.</p>
     #   @return [String]
     class ListLinkedWhatsAppBusinessAccountsOutput < Struct.new(
+      nil,
       :linked_accounts,
       :next_token,
       keyword_init: true
@@ -599,6 +635,7 @@ module Aws::SocialMessaging
     #   <p>The Amazon Resource Name (ARN) of the resource to retrieve the tags from.</p>
     #   @return [String]
     class ListTagsForResourceInput < Struct.new(
+      nil,
       :resource_arn,
       keyword_init: true
     )
@@ -612,6 +649,7 @@ module Aws::SocialMessaging
     #   <p>The tags for the resource.</p>
     #   @return [Array<Types::Tag>]
     class ListTagsForResourceOutput < Struct.new(
+      nil,
       :status_code,
       :tags,
       keyword_init: true
@@ -629,6 +667,7 @@ module Aws::SocialMessaging
     #   <p>The maximum number of results to return per page (1-100).</p>
     #   @return [Integer]
     class ListWhatsAppMessageTemplatesInput < Struct.new(
+      nil,
       :id,
       :next_token,
       :max_results,
@@ -644,6 +683,7 @@ module Aws::SocialMessaging
     #   <p>The token to retrieve the next page of results, if any.</p>
     #   @return [String]
     class ListWhatsAppMessageTemplatesOutput < Struct.new(
+      nil,
       :templates,
       :next_token,
       keyword_init: true
@@ -664,6 +704,7 @@ module Aws::SocialMessaging
     #   <p>Map of filters to apply (searchKey, topic, usecase, industry, language).</p>
     #   @return [Hash<String, String>]
     class ListWhatsAppTemplateLibraryInput < Struct.new(
+      nil,
       :next_token,
       :max_results,
       :id,
@@ -680,6 +721,7 @@ module Aws::SocialMessaging
     #   <p>The token to retrieve the next page of results, if any.</p>
     #   @return [String]
     class ListWhatsAppTemplateLibraryOutput < Struct.new(
+      nil,
       :meta_library_templates,
       :next_token,
       keyword_init: true
@@ -707,6 +749,7 @@ module Aws::SocialMessaging
     #   <p>Body text customizations for the template.</p>
     #   @return [Types::LibraryTemplateBodyInputs]
     class MetaLibraryTemplate < Struct.new(
+      nil,
       :template_name,
       :library_template_name,
       :template_category,
@@ -750,6 +793,7 @@ module Aws::SocialMessaging
     #   <p>The ID of the template in Meta's library.</p>
     #   @return [String]
     class MetaLibraryTemplateDefinition < Struct.new(
+      nil,
       :template_name,
       :template_language,
       :template_category,
@@ -778,6 +822,7 @@ module Aws::SocialMessaging
     #   <p>The source S3 url for the media file.</p>
     #   @return [Types::S3File]
     class PostWhatsAppMessageMediaInput < Struct.new(
+      nil,
       :origination_phone_number_id,
       :source_s3_presigned_url,
       :source_s3_file,
@@ -790,6 +835,7 @@ module Aws::SocialMessaging
     #   <p>The unique identifier of the posted WhatsApp message.</p>
     #   @return [String]
     class PostWhatsAppMessageMediaOutput < Struct.new(
+      nil,
       :media_id,
       keyword_init: true
     )
@@ -805,6 +851,7 @@ module Aws::SocialMessaging
     #   <p>An array of <code>WhatsAppBusinessAccountEventDestination</code> event destinations.</p>
     #   @return [Array<Types::WhatsAppBusinessAccountEventDestination>]
     class PutWhatsAppBusinessAccountEventDestinationsInput < Struct.new(
+      nil,
       :id,
       :event_destinations,
       keyword_init: true
@@ -813,6 +860,7 @@ module Aws::SocialMessaging
     end
 
     class PutWhatsAppBusinessAccountEventDestinationsOutput < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -822,6 +870,7 @@ module Aws::SocialMessaging
     # @!attribute message
     #   @return [String]
     class ResourceNotFoundException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -837,6 +886,7 @@ module Aws::SocialMessaging
     #   <p>The object key of the media file.</p>
     #   @return [String]
     class S3File < Struct.new(
+      nil,
       :bucket_name,
       :key,
       keyword_init: true
@@ -856,6 +906,7 @@ module Aws::SocialMessaging
     #            </p>
     #   @return [Hash<String, String>]
     class S3PresignedUrl < Struct.new(
+      nil,
       :url,
       :headers,
       keyword_init: true
@@ -881,6 +932,7 @@ module Aws::SocialMessaging
     #                  <i>Amazon Web Services End User Messaging Social API</i> Service Endpoints</a> in the <i>Amazon Web Services General Reference</i>.</p>
     #   @return [String]
     class SendWhatsAppMessageInput < Struct.new(
+      nil,
       :origination_phone_number_id,
       :message,
       :meta_api_version,
@@ -893,6 +945,7 @@ module Aws::SocialMessaging
     #   <p>The unique identifier of the message.</p>
     #   @return [String]
     class SendWhatsAppMessageOutput < Struct.new(
+      nil,
       :message_id,
       keyword_init: true
     )
@@ -907,6 +960,7 @@ module Aws::SocialMessaging
     #   <p>The tag value.</p>
     #   @return [String]
     class Tag < Struct.new(
+      nil,
       :key,
       :value,
       keyword_init: true
@@ -921,6 +975,7 @@ module Aws::SocialMessaging
     #   <p>The tags to add to the resource.</p>
     #   @return [Array<Types::Tag>]
     class TagResourceInput < Struct.new(
+      nil,
       :resource_arn,
       :tags,
       keyword_init: true
@@ -932,6 +987,7 @@ module Aws::SocialMessaging
     #   <p>The status code of the tag resource operation.</p>
     #   @return [Integer]
     class TagResourceOutput < Struct.new(
+      nil,
       :status_code,
       keyword_init: true
     )
@@ -958,6 +1014,7 @@ module Aws::SocialMessaging
     #   <p>The category of the template (for example, UTILITY or MARKETING).</p>
     #   @return [String]
     class TemplateSummary < Struct.new(
+      nil,
       :template_name,
       :meta_template_id,
       :template_status,
@@ -973,6 +1030,7 @@ module Aws::SocialMessaging
     # @!attribute message
     #   @return [String]
     class ThrottledRequestException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -986,6 +1044,7 @@ module Aws::SocialMessaging
     #   <p>The keys of the tags to remove from the resource.</p>
     #   @return [Array<String>]
     class UntagResourceInput < Struct.new(
+      nil,
       :resource_arn,
       :tag_keys,
       keyword_init: true
@@ -997,6 +1056,7 @@ module Aws::SocialMessaging
     #   <p>The status code of the untag resource operation.</p>
     #   @return [Integer]
     class UntagResourceOutput < Struct.new(
+      nil,
       :status_code,
       keyword_init: true
     )
@@ -1016,6 +1076,7 @@ module Aws::SocialMessaging
     #   <p>The updated components of the template as a JSON blob (maximum 3000 characters).</p>
     #   @return [String]
     class UpdateWhatsAppMessageTemplateInput < Struct.new(
+      nil,
       :id,
       :meta_template_id,
       :template_category,
@@ -1026,6 +1087,7 @@ module Aws::SocialMessaging
     end
 
     class UpdateWhatsAppMessageTemplateOutput < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1035,6 +1097,7 @@ module Aws::SocialMessaging
     # @!attribute message
     #   @return [String]
     class ValidationException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -1142,6 +1205,7 @@ module Aws::SocialMessaging
     #   <p>An array of key and value pair tags.</p>
     #   @return [Array<Types::Tag>]
     class WabaPhoneNumberSetupFinalization < Struct.new(
+      nil,
       :id,
       :two_factor_pin,
       :data_localization_region,
@@ -1162,6 +1226,7 @@ module Aws::SocialMessaging
     #   <p>An array of key and value pair tags.</p>
     #   @return [Array<Types::Tag>]
     class WabaSetupFinalization < Struct.new(
+      nil,
       :id,
       :event_destinations,
       :tags,
@@ -1179,6 +1244,7 @@ module Aws::SocialMessaging
     #            that is able to import phone numbers and write events.</p>
     #   @return [String]
     class WhatsAppBusinessAccountEventDestination < Struct.new(
+      nil,
       :event_destination_arn,
       :role_arn,
       keyword_init: true
@@ -1212,6 +1278,7 @@ module Aws::SocialMessaging
     #   <p>The geographic region where the WhatsApp phone number's data is stored and processed.</p>
     #   @return [String]
     class WhatsAppPhoneNumberDetail < Struct.new(
+      nil,
       :arn,
       :phone_number,
       :phone_number_id,
@@ -1251,6 +1318,7 @@ module Aws::SocialMessaging
     #   <p>The geographic region where the WhatsApp phone number's data is stored and processed.</p>
     #   @return [String]
     class WhatsAppPhoneNumberSummary < Struct.new(
+      nil,
       :arn,
       :phone_number,
       :phone_number_id,
@@ -1278,6 +1346,7 @@ module Aws::SocialMessaging
     #   <p>Used to create a new WhatsApp Business Account and add a phone number. This field can't be used when the <code>phoneNumberParent</code> field is present.</p>
     #   @return [Types::WabaSetupFinalization]
     class WhatsAppSetupFinalization < Struct.new(
+      nil,
       :associate_in_progress_token,
       :phone_numbers,
       :phone_number_parent,
@@ -1295,6 +1364,7 @@ module Aws::SocialMessaging
     #   <p>The URL where WhatsApp will send callback notifications for this account.</p>
     #   @return [String]
     class WhatsAppSignupCallback < Struct.new(
+      nil,
       :access_token,
       :callback_url,
       keyword_init: true
@@ -1310,6 +1380,7 @@ module Aws::SocialMessaging
     #   <p>A LinkedWhatsAppBusinessAccountIdMetaData object map containing the details of any WhatsAppBusiness accounts that have incomplete setup.</p>
     #   @return [Hash<String, Types::LinkedWhatsAppBusinessAccountIdMetaData>]
     class WhatsAppSignupCallbackResult < Struct.new(
+      nil,
       :associate_in_progress_token,
       :linked_accounts_with_incomplete_setup,
       keyword_init: true

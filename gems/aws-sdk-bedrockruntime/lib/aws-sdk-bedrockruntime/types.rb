@@ -10,6 +10,7 @@ module Aws::BedrockRuntime
     # @!attribute message
     #   @return [String]
     class AccessDeniedException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -18,6 +19,7 @@ module Aws::BedrockRuntime
 
     # <p>The model must request at least one tool (no text is generated). For example, <code>{"any" : {}}</code>.</p>
     class AnyToolChoice < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -39,6 +41,7 @@ module Aws::BedrockRuntime
     #   <p>Specifies the scope of the output that you get in the response. Set to <code>FULL</code> to return the entire output, including any detected and non-detected entries in the response for enhanced debugging.</p> <p>Note that the full output scope doesn't apply to word filters or regex in sensitive information filters. It does apply to all other filtering policies, including sensitive information with filters that can detect personally identifiable information (PII).</p>
     #   @return [String]
     class ApplyGuardrailRequest < Struct.new(
+      nil,
       :guardrail_identifier,
       :guardrail_version,
       :source,
@@ -68,6 +71,7 @@ module Aws::BedrockRuntime
     #   <p>The guardrail coverage details in the apply guardrail response.</p>
     #   @return [Types::GuardrailCoverage]
     class ApplyGuardrailResponse < Struct.new(
+      nil,
       :usage,
       :action,
       :action_reason,
@@ -105,6 +109,7 @@ module Aws::BedrockRuntime
     #   <p>If the bucket belongs to another AWS account, specify that account's ID.</p>
     #   @return [String]
     class AsyncInvokeS3OutputDataConfig < Struct.new(
+      nil,
       :s3_uri,
       :kms_key_id,
       :bucket_owner,
@@ -142,6 +147,7 @@ module Aws::BedrockRuntime
     #   <p>The invocation's output data settings.</p>
     #   @return [Types::AsyncInvokeOutputDataConfig]
     class AsyncInvokeSummary < Struct.new(
+      nil,
       :invocation_arn,
       :model_arn,
       :client_request_token,
@@ -158,6 +164,7 @@ module Aws::BedrockRuntime
 
     # <p>The Model automatically decides if a tool should be called or whether to generate text instead. For example, <code>{"auto" : {}}</code>.</p>
     class AutoToolChoice < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -169,6 +176,7 @@ module Aws::BedrockRuntime
     #   <p>The audio content for the bidirectional input.</p>
     #   @return [String]
     class BidirectionalInputPayloadPart < Struct.new(
+      nil,
       :bytes,
       keyword_init: true
     )
@@ -181,6 +189,7 @@ module Aws::BedrockRuntime
     #   <p>The speech output of the bidirectional stream.</p>
     #   @return [String]
     class BidirectionalOutputPayloadPart < Struct.new(
+      nil,
       :bytes,
       keyword_init: true
     )
@@ -192,6 +201,7 @@ module Aws::BedrockRuntime
     #   <p>Specifies the type of cache point within the CachePointBlock.</p>
     #   @return [String]
     class CachePointBlock < Struct.new(
+      nil,
       :type,
       keyword_init: true
     )
@@ -209,6 +219,7 @@ module Aws::BedrockRuntime
     #   <p>The precise location within the source document where the cited content can be found, including character positions, page numbers, or chunk identifiers.</p>
     #   @return [Types::CitationLocation]
     class Citation < Struct.new(
+      nil,
       :title,
       :source_content,
       :location,
@@ -277,6 +288,7 @@ module Aws::BedrockRuntime
     #   <p>An incremental update to the text content from the source document that is being cited.</p>
     #   @return [String]
     class CitationSourceContentDelta < Struct.new(
+      nil,
       :text,
       keyword_init: true
     )
@@ -288,6 +300,7 @@ module Aws::BedrockRuntime
     #   <p>Specifies whether document citations should be included in the model's response. When set to true, the model can generate citations that reference the source documents used to inform the response.</p>
     #   @return [Boolean]
     class CitationsConfig < Struct.new(
+      nil,
       :enabled,
       keyword_init: true
     )
@@ -302,6 +315,7 @@ module Aws::BedrockRuntime
     #   <p>An array of citations that reference the source documents used to generate the associated content.</p>
     #   @return [Array<Types::Citation>]
     class CitationsContentBlock < Struct.new(
+      nil,
       :content,
       :citations,
       keyword_init: true
@@ -320,6 +334,7 @@ module Aws::BedrockRuntime
     #   <p>Specifies the precise location within a source document where cited content can be found. This can include character-level positions, page numbers, or document chunks depending on the document type and indexing method.</p>
     #   @return [Types::CitationLocation]
     class CitationsDelta < Struct.new(
+      nil,
       :title,
       :source_content,
       :location,
@@ -332,6 +347,7 @@ module Aws::BedrockRuntime
     # @!attribute message
     #   @return [String]
     class ConflictException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -436,6 +452,7 @@ module Aws::BedrockRuntime
     #   <p>The block index for a content block delta event. </p>
     #   @return [Integer]
     class ContentBlockDeltaEvent < Struct.new(
+      nil,
       :delta,
       :content_block_index,
       keyword_init: true
@@ -466,6 +483,7 @@ module Aws::BedrockRuntime
     #   <p>The index for a content block start event.</p>
     #   @return [Integer]
     class ContentBlockStartEvent < Struct.new(
+      nil,
       :start,
       :content_block_index,
       keyword_init: true
@@ -478,6 +496,7 @@ module Aws::BedrockRuntime
     #   <p>The index for a content block.</p>
     #   @return [Integer]
     class ContentBlockStopEvent < Struct.new(
+      nil,
       :content_block_index,
       keyword_init: true
     )
@@ -489,6 +508,7 @@ module Aws::BedrockRuntime
     #   <p>The latency of the call to <code>Converse</code>, in milliseconds. </p>
     #   @return [Integer]
     class ConverseMetrics < Struct.new(
+      nil,
       :latency_ms,
       keyword_init: true
     )
@@ -544,6 +564,7 @@ module Aws::BedrockRuntime
     #   <p>Model performance settings for the request.</p>
     #   @return [Types::PerformanceConfiguration]
     class ConverseRequest < Struct.new(
+      nil,
       :model_id,
       :messages,
       :system,
@@ -582,6 +603,7 @@ module Aws::BedrockRuntime
     #   <p>Model performance settings for the request.</p>
     #   @return [Types::PerformanceConfiguration]
     class ConverseResponse < Struct.new(
+      nil,
       :output,
       :stop_reason,
       :usage,
@@ -608,6 +630,7 @@ module Aws::BedrockRuntime
     #   <p>Model performance configuration metadata for the conversation stream event.</p>
     #   @return [Types::PerformanceConfiguration]
     class ConverseStreamMetadataEvent < Struct.new(
+      nil,
       :usage,
       :metrics,
       :trace,
@@ -622,6 +645,7 @@ module Aws::BedrockRuntime
     #   <p>The latency for the streaming request, in milliseconds.</p>
     #   @return [Integer]
     class ConverseStreamMetrics < Struct.new(
+      nil,
       :latency_ms,
       keyword_init: true
     )
@@ -727,6 +751,7 @@ module Aws::BedrockRuntime
     #   <p>Model performance settings for the request.</p>
     #   @return [Types::PerformanceConfiguration]
     class ConverseStreamRequest < Struct.new(
+      nil,
       :model_id,
       :messages,
       :system,
@@ -747,6 +772,7 @@ module Aws::BedrockRuntime
     #   <p>The output stream that the model generated.</p>
     #   @return [Types::ConverseStreamOutput]
     class ConverseStreamResponse < Struct.new(
+      nil,
       :stream,
       keyword_init: true
     )
@@ -761,6 +787,7 @@ module Aws::BedrockRuntime
     #   <p>The request's prompt router.</p>
     #   @return [Types::PromptRouterTrace]
     class ConverseStreamTrace < Struct.new(
+      nil,
       :guardrail,
       :prompt_router,
       keyword_init: true
@@ -776,6 +803,7 @@ module Aws::BedrockRuntime
     #   <p>The system content blocks to count tokens for. System content provides instructions or context to the model about how it should behave or respond. The token count will include any system content provided.</p>
     #   @return [Array<Types::SystemContentBlock>]
     class ConverseTokensRequest < Struct.new(
+      nil,
       :messages,
       :system,
       keyword_init: true
@@ -791,6 +819,7 @@ module Aws::BedrockRuntime
     #   <p>The request's prompt router.</p>
     #   @return [Types::PromptRouterTrace]
     class ConverseTrace < Struct.new(
+      nil,
       :guardrail,
       :prompt_router,
       keyword_init: true
@@ -825,6 +854,7 @@ module Aws::BedrockRuntime
     #   <p>The input for which to count tokens. The structure of this parameter depends on whether you're counting tokens for an <code>InvokeModel</code> or <code>Converse</code> request:</p> <ul> <li> <p>For <code>InvokeModel</code> requests, provide the request body in the <code>invokeModel</code> field</p> </li> <li> <p>For <code>Converse</code> requests, provide the messages and system content in the <code>converse</code> field</p> </li> </ul> <p>The input format must be compatible with the model specified in the <code>modelId</code> parameter.</p>
     #   @return [Types::CountTokensInput]
     class CountTokensRequest < Struct.new(
+      nil,
       :model_id,
       :input,
       keyword_init: true
@@ -836,6 +866,7 @@ module Aws::BedrockRuntime
     #   <p>The number of tokens in the provided input according to the specified model's tokenization rules. This count represents the number of input tokens that would be processed if the same input were sent to the model in an inference request. Use this value to estimate costs and ensure your inputs stay within model token limits.</p>
     #   @return [Integer]
     class CountTokensResponse < Struct.new(
+      nil,
       :input_tokens,
       keyword_init: true
     )
@@ -859,6 +890,7 @@ module Aws::BedrockRuntime
     #   <p>Configuration settings that control how citations should be generated for this specific document.</p>
     #   @return [Types::CitationsConfig]
     class DocumentBlock < Struct.new(
+      nil,
       :format,
       :name,
       :source,
@@ -885,6 +917,7 @@ module Aws::BedrockRuntime
     #   <p>The ending character position of the cited content within the document.</p>
     #   @return [Integer]
     class DocumentCharLocation < Struct.new(
+      nil,
       :document_index,
       :start,
       :end,
@@ -904,6 +937,7 @@ module Aws::BedrockRuntime
     #   <p>The ending chunk identifier or index of the cited content within the document.</p>
     #   @return [Integer]
     class DocumentChunkLocation < Struct.new(
+      nil,
       :document_index,
       :start,
       :end,
@@ -938,6 +972,7 @@ module Aws::BedrockRuntime
     #   <p>The ending page number of the cited content within the document.</p>
     #   @return [Integer]
     class DocumentPageLocation < Struct.new(
+      nil,
       :document_index,
       :start,
       :end,
@@ -980,6 +1015,7 @@ module Aws::BedrockRuntime
     #   <p>The invocation's ARN.</p>
     #   @return [String]
     class GetAsyncInvokeRequest < Struct.new(
+      nil,
       :invocation_arn,
       keyword_init: true
     )
@@ -1014,6 +1050,7 @@ module Aws::BedrockRuntime
     #   <p>Output data settings.</p>
     #   @return [Types::AsyncInvokeOutputDataConfig]
     class GetAsyncInvokeResponse < Struct.new(
+      nil,
       :invocation_arn,
       :model_arn,
       :client_request_token,
@@ -1051,6 +1088,7 @@ module Aws::BedrockRuntime
     #   <p>The invocation metrics for the guardrail assessment.</p>
     #   @return [Types::GuardrailInvocationMetrics]
     class GuardrailAssessment < Struct.new(
+      nil,
       :topic_policy,
       :content_policy,
       :word_policy,
@@ -1119,6 +1157,7 @@ module Aws::BedrockRuntime
     #   <p>Indication of a logic issue with the translation without needing to consider the automated reasoning policy rules.</p>
     #   @return [Types::GuardrailAutomatedReasoningLogicWarning]
     class GuardrailAutomatedReasoningImpossibleFinding < Struct.new(
+      nil,
       :translation,
       :contradicting_rules,
       :logic_warning,
@@ -1132,6 +1171,7 @@ module Aws::BedrockRuntime
     #   <p>The specific text from the original input that this reference points to.</p>
     #   @return [String]
     class GuardrailAutomatedReasoningInputTextReference < Struct.new(
+      nil,
       :text,
       keyword_init: true
     )
@@ -1149,6 +1189,7 @@ module Aws::BedrockRuntime
     #   <p>Indication of a logic issue with the translation without needing to consider the automated reasoning policy rules.</p>
     #   @return [Types::GuardrailAutomatedReasoningLogicWarning]
     class GuardrailAutomatedReasoningInvalidFinding < Struct.new(
+      nil,
       :translation,
       :contradicting_rules,
       :logic_warning,
@@ -1168,6 +1209,7 @@ module Aws::BedrockRuntime
     #   <p>The logical statements that are validated while assuming the policy and premises.</p>
     #   @return [Array<Types::GuardrailAutomatedReasoningStatement>]
     class GuardrailAutomatedReasoningLogicWarning < Struct.new(
+      nil,
       :type,
       :premises,
       :claims,
@@ -1178,6 +1220,7 @@ module Aws::BedrockRuntime
 
     # <p>Indicates that no relevant logical information could be extracted from the input for validation.</p>
     class GuardrailAutomatedReasoningNoTranslationsFinding < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1188,6 +1231,7 @@ module Aws::BedrockRuntime
     #   <p>List of logical validation results produced by evaluating the input content against automated reasoning policies.</p>
     #   @return [Array<Types::GuardrailAutomatedReasoningFinding>]
     class GuardrailAutomatedReasoningPolicyAssessment < Struct.new(
+      nil,
       :findings,
       keyword_init: true
     )
@@ -1202,6 +1246,7 @@ module Aws::BedrockRuntime
     #   <p>The ARN of the automated reasoning policy version that contains this rule.</p>
     #   @return [String]
     class GuardrailAutomatedReasoningRule < Struct.new(
+      nil,
       :identifier,
       :policy_version_arn,
       keyword_init: true
@@ -1223,6 +1268,7 @@ module Aws::BedrockRuntime
     #   <p>Indication of a logic issue with the translation without needing to consider the automated reasoning policy rules.</p>
     #   @return [Types::GuardrailAutomatedReasoningLogicWarning]
     class GuardrailAutomatedReasoningSatisfiableFinding < Struct.new(
+      nil,
       :translation,
       :claims_true_scenario,
       :claims_false_scenario,
@@ -1237,6 +1283,7 @@ module Aws::BedrockRuntime
     #   <p>List of logical assignments and statements that define this scenario.</p>
     #   @return [Array<Types::GuardrailAutomatedReasoningStatement>]
     class GuardrailAutomatedReasoningScenario < Struct.new(
+      nil,
       :statements,
       keyword_init: true
     )
@@ -1251,6 +1298,7 @@ module Aws::BedrockRuntime
     #   <p>The natural language explanation of the logical statement.</p>
     #   @return [String]
     class GuardrailAutomatedReasoningStatement < Struct.new(
+      nil,
       :logic,
       :natural_language,
       keyword_init: true
@@ -1260,6 +1308,7 @@ module Aws::BedrockRuntime
 
     # <p>Indicates that the input exceeds the processing capacity due to the volume or complexity of the logical information.</p>
     class GuardrailAutomatedReasoningTooComplexFinding < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1282,6 +1331,7 @@ module Aws::BedrockRuntime
     #   <p>A confidence score between 0 and 1 indicating how certain the system is about the logical translation.</p>
     #   @return [Float]
     class GuardrailAutomatedReasoningTranslation < Struct.new(
+      nil,
       :premises,
       :claims,
       :untranslated_premises,
@@ -1300,6 +1350,7 @@ module Aws::BedrockRuntime
     #   <p>Scenarios showing how the different translation options differ in meaning.</p>
     #   @return [Array<Types::GuardrailAutomatedReasoningScenario>]
     class GuardrailAutomatedReasoningTranslationAmbiguousFinding < Struct.new(
+      nil,
       :options,
       :difference_scenarios,
       keyword_init: true
@@ -1312,6 +1363,7 @@ module Aws::BedrockRuntime
     #   <p>Example translations that provide this possible interpretation of the input.</p>
     #   @return [Array<Types::GuardrailAutomatedReasoningTranslation>]
     class GuardrailAutomatedReasoningTranslationOption < Struct.new(
+      nil,
       :translations,
       keyword_init: true
     )
@@ -1332,6 +1384,7 @@ module Aws::BedrockRuntime
     #   <p>Indication of a logic issue with the translation without needing to consider the automated reasoning policy rules.</p>
     #   @return [Types::GuardrailAutomatedReasoningLogicWarning]
     class GuardrailAutomatedReasoningValidFinding < Struct.new(
+      nil,
       :translation,
       :claims_true_scenario,
       :supporting_rules,
@@ -1352,6 +1405,7 @@ module Aws::BedrockRuntime
     #   <p>The trace behavior for the guardrail.</p>
     #   @return [String]
     class GuardrailConfiguration < Struct.new(
+      nil,
       :guardrail_identifier,
       :guardrail_version,
       :trace,
@@ -1402,6 +1456,7 @@ module Aws::BedrockRuntime
     #   <p>Indicates whether content that breaches the guardrail configuration is detected.</p>
     #   @return [Boolean]
     class GuardrailContentFilter < Struct.new(
+      nil,
       :type,
       :confidence,
       :filter_strength,
@@ -1417,6 +1472,7 @@ module Aws::BedrockRuntime
     #   <p>The content policy filters.</p>
     #   @return [Array<Types::GuardrailContentFilter>]
     class GuardrailContentPolicyAssessment < Struct.new(
+      nil,
       :filters,
       keyword_init: true
     )
@@ -1440,6 +1496,7 @@ module Aws::BedrockRuntime
     #   <p>Indicates whether content that fails the contextual grounding evaluation (grounding or relevance score less than the corresponding threshold) was detected.</p>
     #   @return [Boolean]
     class GuardrailContextualGroundingFilter < Struct.new(
+      nil,
       :type,
       :threshold,
       :score,
@@ -1455,6 +1512,7 @@ module Aws::BedrockRuntime
     #   <p>The filter details for the guardrails contextual grounding filter.</p>
     #   @return [Array<Types::GuardrailContextualGroundingFilter>]
     class GuardrailContextualGroundingPolicyAssessment < Struct.new(
+      nil,
       :filters,
       keyword_init: true
     )
@@ -1490,6 +1548,7 @@ module Aws::BedrockRuntime
     #   <p>The image source (image bytes) of the guardrail converse image block.</p>
     #   @return [Types::GuardrailConverseImageSource]
     class GuardrailConverseImageBlock < Struct.new(
+      nil,
       :format,
       :source,
       keyword_init: true
@@ -1521,6 +1580,7 @@ module Aws::BedrockRuntime
     #   <p>The qualifier details for the guardrails contextual grounding filter.</p>
     #   @return [Array<String>]
     class GuardrailConverseTextBlock < Struct.new(
+      nil,
       :text,
       :qualifiers,
       keyword_init: true
@@ -1536,6 +1596,7 @@ module Aws::BedrockRuntime
     #   <p>The guardrail coverage for images (the number of images that guardrails guarded).</p>
     #   @return [Types::GuardrailImageCoverage]
     class GuardrailCoverage < Struct.new(
+      nil,
       :text_characters,
       :images,
       keyword_init: true
@@ -1554,6 +1615,7 @@ module Aws::BedrockRuntime
     #   <p>Indicates whether custom word content that breaches the guardrail configuration is detected.</p>
     #   @return [Boolean]
     class GuardrailCustomWord < Struct.new(
+      nil,
       :match,
       :action,
       :detected,
@@ -1571,6 +1633,7 @@ module Aws::BedrockRuntime
     #   <p>The image source (image bytes) details of the image blocked by the guardrail.</p>
     #   @return [Types::GuardrailImageSource]
     class GuardrailImageBlock < Struct.new(
+      nil,
       :format,
       :source,
       keyword_init: true
@@ -1586,6 +1649,7 @@ module Aws::BedrockRuntime
     #   <p>Represents the total number of images (integer) that were in the request (guarded and unguarded).</p>
     #   @return [Integer]
     class GuardrailImageCoverage < Struct.new(
+      nil,
       :guarded,
       :total,
       keyword_init: true
@@ -1620,6 +1684,7 @@ module Aws::BedrockRuntime
     #   <p>The coverage details for the guardrail invocation metrics.</p>
     #   @return [Types::GuardrailCoverage]
     class GuardrailInvocationMetrics < Struct.new(
+      nil,
       :guardrail_processing_latency,
       :usage,
       :guardrail_coverage,
@@ -1642,6 +1707,7 @@ module Aws::BedrockRuntime
     #   <p>Indicates whether managed word content that breaches the guardrail configuration is detected.</p>
     #   @return [Boolean]
     class GuardrailManagedWord < Struct.new(
+      nil,
       :match,
       :type,
       :action,
@@ -1656,6 +1722,7 @@ module Aws::BedrockRuntime
     #   <p>The specific text for the output content produced by the guardrail.</p>
     #   @return [String]
     class GuardrailOutputContent < Struct.new(
+      nil,
       :text,
       keyword_init: true
     )
@@ -1676,6 +1743,7 @@ module Aws::BedrockRuntime
     #   <p>Indicates whether personally identifiable information (PII) that breaches the guardrail configuration is detected.</p>
     #   @return [Boolean]
     class GuardrailPiiEntityFilter < Struct.new(
+      nil,
       :match,
       :type,
       :action,
@@ -1702,6 +1770,7 @@ module Aws::BedrockRuntime
     #   <p>Indicates whether custom regex entities that breach the guardrail configuration are detected.</p>
     #   @return [Boolean]
     class GuardrailRegexFilter < Struct.new(
+      nil,
       :name,
       :match,
       :regex,
@@ -1720,6 +1789,7 @@ module Aws::BedrockRuntime
     #   <p>The regex queries in the assessment.</p>
     #   @return [Array<Types::GuardrailRegexFilter>]
     class GuardrailSensitiveInformationPolicyAssessment < Struct.new(
+      nil,
       :pii_entities,
       :regexes,
       keyword_init: true
@@ -1741,6 +1811,7 @@ module Aws::BedrockRuntime
     #   <p>The processing mode. </p> <p>The processing mode. For more information, see <i>Configure streaming response behavior</i> in the <i>Amazon Bedrock User Guide</i>. </p>
     #   @return [String]
     class GuardrailStreamConfiguration < Struct.new(
+      nil,
       :guardrail_identifier,
       :guardrail_version,
       :trace,
@@ -1764,6 +1835,7 @@ module Aws::BedrockRuntime
     #   <p>The qualifiers describing the text block.</p>
     #   @return [Array<String>]
     class GuardrailTextBlock < Struct.new(
+      nil,
       :text,
       :qualifiers,
       keyword_init: true
@@ -1779,6 +1851,7 @@ module Aws::BedrockRuntime
     #   <p>The total text characters by the guardrail coverage.</p>
     #   @return [Integer]
     class GuardrailTextCharactersCoverage < Struct.new(
+      nil,
       :guarded,
       :total,
       keyword_init: true
@@ -1800,6 +1873,7 @@ module Aws::BedrockRuntime
     #   <p>Indicates whether topic content that breaches the guardrail configuration is detected.</p>
     #   @return [Boolean]
     class GuardrailTopic < Struct.new(
+      nil,
       :name,
       :type,
       :action,
@@ -1814,6 +1888,7 @@ module Aws::BedrockRuntime
     #   <p>The topics in the assessment.</p>
     #   @return [Array<Types::GuardrailTopic>]
     class GuardrailTopicPolicyAssessment < Struct.new(
+      nil,
       :topics,
       keyword_init: true
     )
@@ -1834,6 +1909,7 @@ module Aws::BedrockRuntime
     #   <p>Provides the reason for the action taken when harmful content is detected.</p>
     #   @return [String]
     class GuardrailTraceAssessment < Struct.new(
+      nil,
       :model_output,
       :input_assessment,
       :output_assessments,
@@ -1872,6 +1948,7 @@ module Aws::BedrockRuntime
     #   <p>The number of automated reasoning policies that were processed during the guardrail evaluation.</p>
     #   @return [Integer]
     class GuardrailUsage < Struct.new(
+      nil,
       :topic_policy_units,
       :content_policy_units,
       :word_policy_units,
@@ -1894,6 +1971,7 @@ module Aws::BedrockRuntime
     #   <p>Managed word lists in the assessment.</p>
     #   @return [Array<Types::GuardrailManagedWord>]
     class GuardrailWordPolicyAssessment < Struct.new(
+      nil,
       :custom_words,
       :managed_word_lists,
       keyword_init: true
@@ -1909,6 +1987,7 @@ module Aws::BedrockRuntime
     #   <p>The source for the image.</p>
     #   @return [Types::ImageSource]
     class ImageBlock < Struct.new(
+      nil,
       :format,
       :source,
       keyword_init: true
@@ -1950,6 +2029,7 @@ module Aws::BedrockRuntime
     #   <p>A list of stop sequences. A stop sequence is a sequence of characters that causes the model to stop generating the response. </p>
     #   @return [Array<String>]
     class InferenceConfiguration < Struct.new(
+      nil,
       :max_tokens,
       :temperature,
       :top_p,
@@ -1963,6 +2043,7 @@ module Aws::BedrockRuntime
     # @!attribute message
     #   @return [String]
     class InternalServerException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -1994,6 +2075,7 @@ module Aws::BedrockRuntime
     #   <p>Model performance settings for the request.</p>
     #   @return [String]
     class InvokeModelRequest < Struct.new(
+      nil,
       :body,
       :content_type,
       :accept,
@@ -2017,6 +2099,7 @@ module Aws::BedrockRuntime
     #   <p>Model performance settings for the request.</p>
     #   @return [String]
     class InvokeModelResponse < Struct.new(
+      nil,
       :body,
       :content_type,
       :performance_config_latency,
@@ -2030,6 +2113,7 @@ module Aws::BedrockRuntime
     #   <p>The request body to count tokens for, formatted according to the model's expected input format. To learn about the input format for different models, see <a href="https://docs.aws.amazon.com/bedrock/latest/userguide/model-parameters.html">Model inference parameters and responses</a>.</p>
     #   @return [String]
     class InvokeModelTokensRequest < Struct.new(
+      nil,
       :body,
       keyword_init: true
     )
@@ -2103,6 +2187,7 @@ module Aws::BedrockRuntime
     #   <p>The prompt and inference parameters in the format specified in the <code>BidirectionalInputPayloadPart</code> in the header. You must provide the body in JSON format. To see the format and content of the request and response bodies for different models, refer to <a href="https://docs.aws.amazon.com/bedrock/latest/userguide/model-parameters.html">Inference parameters</a>. For more information, see <a href="https://docs.aws.amazon.com/bedrock/latest/userguide/api-methods-run.html">Run inference</a> in the Bedrock User Guide.</p>
     #   @return [Types::InvokeModelWithBidirectionalStreamInput]
     class InvokeModelWithBidirectionalStreamRequest < Struct.new(
+      nil,
       :model_id,
       :body,
       keyword_init: true
@@ -2114,6 +2199,7 @@ module Aws::BedrockRuntime
     #   <p>Streaming response from the model in the format specified by the <code>BidirectionalOutputPayloadPart</code> header.</p>
     #   @return [Types::InvokeModelWithBidirectionalStreamOutput]
     class InvokeModelWithBidirectionalStreamResponse < Struct.new(
+      nil,
       :body,
       keyword_init: true
     )
@@ -2145,6 +2231,7 @@ module Aws::BedrockRuntime
     #   <p>Model performance settings for the request.</p>
     #   @return [String]
     class InvokeModelWithResponseStreamRequest < Struct.new(
+      nil,
       :body,
       :content_type,
       :accept,
@@ -2168,6 +2255,7 @@ module Aws::BedrockRuntime
     #   <p>Model performance settings for the request.</p>
     #   @return [String]
     class InvokeModelWithResponseStreamResponse < Struct.new(
+      nil,
       :body,
       :content_type,
       :performance_config_latency,
@@ -2198,6 +2286,7 @@ module Aws::BedrockRuntime
     #   <p>The sorting order for the response.</p>
     #   @return [String]
     class ListAsyncInvokesRequest < Struct.new(
+      nil,
       :submit_time_after,
       :submit_time_before,
       :status_equals,
@@ -2217,6 +2306,7 @@ module Aws::BedrockRuntime
     #   <p>A list of invocation summaries.</p>
     #   @return [Array<Types::AsyncInvokeSummary>]
     class ListAsyncInvokesResponse < Struct.new(
+      nil,
       :next_token,
       :async_invoke_summaries,
       keyword_init: true
@@ -2232,6 +2322,7 @@ module Aws::BedrockRuntime
     #   <p>The message content. Note the following restrictions:</p> <ul> <li> <p>You can include up to 20 images. Each image's size, height, and width must be no more than 3.75 MB, 8000 px, and 8000 px, respectively.</p> </li> <li> <p>You can include up to five documents. Each document's size must be no more than 4.5 MB.</p> </li> <li> <p>If you include a <code>ContentBlock</code> with a <code>document</code> field in the array, you must also include a <code>ContentBlock</code> with a <code>text</code> field.</p> </li> <li> <p>You can only include images and documents if the <code>role</code> is <code>user</code>.</p> </li> </ul>
     #   @return [Array<Types::ContentBlock>]
     class Message < Struct.new(
+      nil,
       :role,
       :content,
       keyword_init: true
@@ -2244,6 +2335,7 @@ module Aws::BedrockRuntime
     #   <p>The role for the message.</p>
     #   @return [String]
     class MessageStartEvent < Struct.new(
+      nil,
       :role,
       keyword_init: true
     )
@@ -2258,6 +2350,7 @@ module Aws::BedrockRuntime
     #   <p>The additional model response fields.</p>
     #   @return [JSON]
     class MessageStopEvent < Struct.new(
+      nil,
       :stop_reason,
       :additional_model_response_fields,
       keyword_init: true
@@ -2275,6 +2368,7 @@ module Aws::BedrockRuntime
     #   <p>The resource name.</p>
     #   @return [String]
     class ModelErrorException < Struct.new(
+      nil,
       :message,
       :original_status_code,
       :resource_name,
@@ -2287,6 +2381,7 @@ module Aws::BedrockRuntime
     # @!attribute message
     #   @return [String]
     class ModelNotReadyException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -2303,6 +2398,7 @@ module Aws::BedrockRuntime
     #   <p>The original message.</p>
     #   @return [String]
     class ModelStreamErrorException < Struct.new(
+      nil,
       :message,
       :original_status_code,
       :original_message,
@@ -2315,6 +2411,7 @@ module Aws::BedrockRuntime
     # @!attribute message
     #   @return [String]
     class ModelTimeoutException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -2327,6 +2424,7 @@ module Aws::BedrockRuntime
     #   <p>Base64-encoded bytes of payload data.</p>
     #   @return [String]
     class PayloadPart < Struct.new(
+      nil,
       :bytes,
       keyword_init: true
     )
@@ -2338,6 +2436,7 @@ module Aws::BedrockRuntime
     #   <p>To use a latency-optimized version of the model, set to <code>optimized</code>.</p>
     #   @return [String]
     class PerformanceConfiguration < Struct.new(
+      nil,
       :latency,
       keyword_init: true
     )
@@ -2354,6 +2453,7 @@ module Aws::BedrockRuntime
     #   <p>The ID of the invoked model.</p>
     #   @return [String]
     class PromptRouterTrace < Struct.new(
+      nil,
       :invoked_model_id,
       keyword_init: true
     )
@@ -2431,6 +2531,7 @@ module Aws::BedrockRuntime
     #   <p>A token that verifies that the reasoning text was generated by the model. If you pass a reasoning block back to the API in a multi-turn conversation, include the text and its signature unmodified.</p>
     #   @return [String]
     class ReasoningTextBlock < Struct.new(
+      nil,
       :text,
       :signature,
       keyword_init: true
@@ -2442,6 +2543,7 @@ module Aws::BedrockRuntime
     # @!attribute message
     #   @return [String]
     class ResourceNotFoundException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -2501,6 +2603,7 @@ module Aws::BedrockRuntime
     #   <p>If the bucket belongs to another AWS account, specify that account's ID.</p>
     #   @return [String]
     class S3Location < Struct.new(
+      nil,
       :uri,
       :bucket_owner,
       keyword_init: true
@@ -2512,6 +2615,7 @@ module Aws::BedrockRuntime
     # @!attribute message
     #   @return [String]
     class ServiceQuotaExceededException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -2522,6 +2626,7 @@ module Aws::BedrockRuntime
     # @!attribute message
     #   @return [String]
     class ServiceUnavailableException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -2533,6 +2638,7 @@ module Aws::BedrockRuntime
     #   <p>The name of the tool that the model must request. </p>
     #   @return [String]
     class SpecificToolChoice < Struct.new(
+      nil,
       :name,
       keyword_init: true
     )
@@ -2555,6 +2661,7 @@ module Aws::BedrockRuntime
     #   <p>Tags to apply to the invocation.</p>
     #   @return [Array<Types::Tag>]
     class StartAsyncInvokeRequest < Struct.new(
+      nil,
       :client_request_token,
       :model_id,
       :model_input,
@@ -2569,6 +2676,7 @@ module Aws::BedrockRuntime
     #   <p>The ARN of the invocation.</p>
     #   @return [String]
     class StartAsyncInvokeResponse < Struct.new(
+      nil,
       :invocation_arn,
       keyword_init: true
     )
@@ -2608,6 +2716,7 @@ module Aws::BedrockRuntime
     #   <p>The tag's value.</p>
     #   @return [String]
     class Tag < Struct.new(
+      nil,
       :key,
       :value,
       keyword_init: true
@@ -2619,6 +2728,7 @@ module Aws::BedrockRuntime
     # @!attribute message
     #   @return [String]
     class ThrottlingException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -2642,6 +2752,7 @@ module Aws::BedrockRuntime
     #   <p>The number of input tokens written to the cache for the request.</p>
     #   @return [Integer]
     class TokenUsage < Struct.new(
+      nil,
       :input_tokens,
       :output_tokens,
       :total_tokens,
@@ -2705,6 +2816,7 @@ module Aws::BedrockRuntime
     #   <p>If supported by model, forces the model to request a tool.</p>
     #   @return [Types::ToolChoice]
     class ToolConfiguration < Struct.new(
+      nil,
       :tools,
       :tool_choice,
       keyword_init: true
@@ -2738,6 +2850,7 @@ module Aws::BedrockRuntime
     #   <p>The status for the tool result content block.</p> <note> <p>This field is only supported Anthropic Claude 3 models.</p> </note>
     #   @return [String]
     class ToolResultBlock < Struct.new(
+      nil,
       :tool_use_id,
       :content,
       :status,
@@ -2792,6 +2905,7 @@ module Aws::BedrockRuntime
     #   <p>The input schema for the tool in JSON format.</p>
     #   @return [Types::ToolInputSchema]
     class ToolSpecification < Struct.new(
+      nil,
       :name,
       :description,
       :input_schema,
@@ -2811,6 +2925,7 @@ module Aws::BedrockRuntime
     #   <p>The input to pass to the tool. </p>
     #   @return [JSON]
     class ToolUseBlock < Struct.new(
+      nil,
       :tool_use_id,
       :name,
       :input,
@@ -2824,6 +2939,7 @@ module Aws::BedrockRuntime
     #   <p>The input for a requested tool.</p>
     #   @return [String]
     class ToolUseBlockDelta < Struct.new(
+      nil,
       :input,
       keyword_init: true
     )
@@ -2838,6 +2954,7 @@ module Aws::BedrockRuntime
     #   <p>The name of the tool that the model is requesting to use.</p>
     #   @return [String]
     class ToolUseBlockStart < Struct.new(
+      nil,
       :tool_use_id,
       :name,
       keyword_init: true
@@ -2849,6 +2966,7 @@ module Aws::BedrockRuntime
     # @!attribute message
     #   @return [String]
     class ValidationException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -2863,6 +2981,7 @@ module Aws::BedrockRuntime
     #   <p>The block's source.</p>
     #   @return [Types::VideoSource]
     class VideoBlock < Struct.new(
+      nil,
       :format,
       :source,
       keyword_init: true

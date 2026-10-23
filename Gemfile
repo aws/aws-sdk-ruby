@@ -7,6 +7,7 @@ gem 'cgi', '~> 0.4.1' # TODO: CGI.parse is deprecated so we need ot find alterna
 gem 'logger'
 gem 'pry'
 gem 'rake', require: false
+gem 'rdoc'
 
 gem 'aws-partitions', path: 'gems/aws-partitions'
 gem 'aws-sdk-core', path: 'gems/aws-sdk-core'

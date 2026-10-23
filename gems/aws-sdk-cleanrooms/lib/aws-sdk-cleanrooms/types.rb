@@ -17,6 +17,7 @@ module Aws::CleanRooms
     #   <p>The total remaining budget across all budget parameters, showing the lower value between the per-period budget and lifetime budget for this access budget. For individual parameter budgets, see <code>remainingBudget</code>.</p>
     #   @return [Integer]
     class AccessBudget < Struct.new(
+      nil,
       :resource_arn,
       :details,
       :aggregate_remaining_budget,
@@ -45,6 +46,7 @@ module Aws::CleanRooms
     #   <p>Indicates whether the budget automatically refreshes for each time period specified in <code>budgetType</code>. Valid values are:</p> <p> <code>ENABLED</code> - The budget refreshes automatically at the start of each period.</p> <p> <code>DISABLED</code> - The budget must be refreshed manually.</p> <p> <code>NULL</code> - The value is null when <code>budgetType</code> is set to <code>LIFETIME</code>.</p>
     #   @return [String]
     class AccessBudgetDetails < Struct.new(
+      nil,
       :start_time,
       :end_time,
       :remaining_budget,
@@ -64,6 +66,7 @@ module Aws::CleanRooms
     #   <p>The Amazon Resource Name (ARN) of the resource associated with this privacy budget template.</p>
     #   @return [String]
     class AccessBudgetsPrivacyTemplateParametersInput < Struct.new(
+      nil,
       :budget_parameters,
       :resource_arn,
       keyword_init: true
@@ -79,6 +82,7 @@ module Aws::CleanRooms
     #   <p>The Amazon Resource Name (ARN) of the resource associated with this privacy budget template.</p>
     #   @return [String]
     class AccessBudgetsPrivacyTemplateParametersOutput < Struct.new(
+      nil,
       :budget_parameters,
       :resource_arn,
       keyword_init: true
@@ -91,6 +95,7 @@ module Aws::CleanRooms
     #   <p>Updated array of budget parameters for the access budget configuration.</p>
     #   @return [Array<Types::BudgetParameter>]
     class AccessBudgetsPrivacyTemplateUpdateParameters < Struct.new(
+      nil,
       :budget_parameters,
       keyword_init: true
     )
@@ -104,6 +109,7 @@ module Aws::CleanRooms
     #   <p>A reason code for the exception.</p>
     #   @return [String]
     class AccessDeniedException < Struct.new(
+      nil,
       :message,
       :reason,
       keyword_init: true
@@ -119,6 +125,7 @@ module Aws::CleanRooms
     #   <p>Aggregation function that can be applied to aggregate column in query.</p>
     #   @return [String]
     class AggregateColumn < Struct.new(
+      nil,
       :column_names,
       :function,
       keyword_init: true
@@ -137,6 +144,7 @@ module Aws::CleanRooms
     #   <p>The type of aggregation the constraint allows. The only valid value is currently `COUNT_DISTINCT`.</p>
     #   @return [String]
     class AggregationConstraint < Struct.new(
+      nil,
       :column_name,
       :minimum,
       :type,
@@ -157,6 +165,7 @@ module Aws::CleanRooms
     #   <p>Optional. The default value that is applied in the analysis template. The member who can query can override this value in the query editor.</p>
     #   @return [String]
     class AnalysisParameter < Struct.new(
+      nil,
       :name,
       :type,
       :default_value,
@@ -191,6 +200,7 @@ module Aws::CleanRooms
     #   <p> The consolidated policy for the analysis rule.</p>
     #   @return [Types::ConsolidatedPolicy]
     class AnalysisRule < Struct.new(
+      nil,
       :collaboration_id,
       :type,
       :name,
@@ -230,6 +240,7 @@ module Aws::CleanRooms
     #   <p> An indicator as to whether additional analyses (such as Clean Rooms ML) can be applied to the output of the direct query. </p> <p>The <code>additionalAnalyses</code> parameter is currently supported for the list analysis rule (<code>AnalysisRuleList</code>) and the custom analysis rule (<code>AnalysisRuleCustom</code>).</p>
     #   @return [String]
     class AnalysisRuleAggregation < Struct.new(
+      nil,
       :aggregate_columns,
       :join_columns,
       :join_required,
@@ -260,6 +271,7 @@ module Aws::CleanRooms
     #   <p>The differential privacy configuration.</p>
     #   @return [Types::DifferentialPrivacyConfiguration]
     class AnalysisRuleCustom < Struct.new(
+      nil,
       :allowed_analyses,
       :allowed_analysis_providers,
       :additional_analyses,
@@ -281,6 +293,7 @@ module Aws::CleanRooms
     #   <p>The columns that query runners are allowed to select, group by, or filter by.</p>
     #   @return [Array<String>]
     class AnalysisRuleIdMappingTable < Struct.new(
+      nil,
       :join_columns,
       :query_constraints,
       :dimension_columns,
@@ -303,6 +316,7 @@ module Aws::CleanRooms
     #   <p> An indicator as to whether additional analyses (such as Clean Rooms ML) can be applied to the output of the direct query.</p>
     #   @return [String]
     class AnalysisRuleList < Struct.new(
+      nil,
       :join_columns,
       :allowed_join_operators,
       :list_columns,
@@ -362,6 +376,7 @@ module Aws::CleanRooms
     #   <p>The tables referenced in the analysis schema.</p>
     #   @return [Array<String>]
     class AnalysisSchema < Struct.new(
+      nil,
       :referenced_tables,
       keyword_init: true
     )
@@ -456,6 +471,7 @@ module Aws::CleanRooms
     #   <p>The configuration that specifies the level of detail in error messages returned by analyses using this template. When set to <code>DETAILED</code>, error messages include more information to help troubleshoot issues with PySpark jobs. Detailed error messages may expose underlying data, including sensitive information. Recommended for faster troubleshooting in development and testing environments.</p>
     #   @return [Types::ErrorMessageConfiguration]
     class AnalysisTemplate < Struct.new(
+      nil,
       :id,
       :arn,
       :collaboration_id,
@@ -483,6 +499,7 @@ module Aws::CleanRooms
     #   <p> The artifact location.</p>
     #   @return [Types::S3Location]
     class AnalysisTemplateArtifact < Struct.new(
+      nil,
       :location,
       keyword_init: true
     )
@@ -497,6 +514,7 @@ module Aws::CleanRooms
     #   <p> Additional artifact hashes for the analysis template.</p>
     #   @return [Array<Types::Hash>]
     class AnalysisTemplateArtifactMetadata < Struct.new(
+      nil,
       :entry_point_hash,
       :additional_artifact_hashes,
       keyword_init: true
@@ -515,6 +533,7 @@ module Aws::CleanRooms
     #   <p> The role ARN for the analysis template artifacts.</p>
     #   @return [String]
     class AnalysisTemplateArtifacts < Struct.new(
+      nil,
       :entry_point,
       :additional_artifacts,
       :role_arn,
@@ -555,6 +574,7 @@ module Aws::CleanRooms
     #   <p>The description of the analysis template.</p>
     #   @return [String]
     class AnalysisTemplateSummary < Struct.new(
+      nil,
       :arn,
       :create_time,
       :id,
@@ -581,6 +601,7 @@ module Aws::CleanRooms
     #   <p>The reasons for the validation results.</p>
     #   @return [Array<Types::AnalysisTemplateValidationStatusReason>]
     class AnalysisTemplateValidationStatusDetail < Struct.new(
+      nil,
       :type,
       :status,
       :reasons,
@@ -594,6 +615,7 @@ module Aws::CleanRooms
     #   <p>The validation message.</p>
     #   @return [String]
     class AnalysisTemplateValidationStatusReason < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -617,6 +639,7 @@ module Aws::CleanRooms
     #   <p> The table reference.</p>
     #   @return [String]
     class AthenaTableReference < Struct.new(
+      nil,
       :region,
       :work_group,
       :output_location,
@@ -638,6 +661,7 @@ module Aws::CleanRooms
     #   <p>A description of why the call failed.</p>
     #   @return [String]
     class BatchGetCollaborationAnalysisTemplateError < Struct.new(
+      nil,
       :arn,
       :code,
       :message,
@@ -653,6 +677,7 @@ module Aws::CleanRooms
     #   <p>The Amazon Resource Name (ARN) associated with the analysis template within a collaboration.</p>
     #   @return [Array<String>]
     class BatchGetCollaborationAnalysisTemplateOperationInput < Struct.new(
+      nil,
       :collaboration_identifier,
       :analysis_template_arns,
       keyword_init: true
@@ -667,6 +692,7 @@ module Aws::CleanRooms
     #   <p>Error reasons for collaboration analysis templates that could not be retrieved. One error is returned for every collaboration analysis template that could not be retrieved.</p>
     #   @return [Array<Types::BatchGetCollaborationAnalysisTemplateError>]
     class BatchGetCollaborationAnalysisTemplateOperationOutput < Struct.new(
+      nil,
       :collaboration_analysis_templates,
       :errors,
       keyword_init: true
@@ -688,6 +714,7 @@ module Aws::CleanRooms
     #   <p>A description of why the call failed.</p>
     #   @return [String]
     class BatchGetSchemaAnalysisRuleError < Struct.new(
+      nil,
       :name,
       :type,
       :code,
@@ -704,6 +731,7 @@ module Aws::CleanRooms
     #   <p>The information that's necessary to retrieve a schema analysis rule.</p>
     #   @return [Array<Types::SchemaAnalysisRuleRequest>]
     class BatchGetSchemaAnalysisRuleInput < Struct.new(
+      nil,
       :collaboration_identifier,
       :schema_analysis_rule_requests,
       keyword_init: true
@@ -718,6 +746,7 @@ module Aws::CleanRooms
     #   <p>Error reasons for schemas that could not be retrieved. One error is returned for every schema that could not be retrieved.</p>
     #   @return [Array<Types::BatchGetSchemaAnalysisRuleError>]
     class BatchGetSchemaAnalysisRuleOutput < Struct.new(
+      nil,
       :analysis_rules,
       :errors,
       keyword_init: true
@@ -736,6 +765,7 @@ module Aws::CleanRooms
     #   <p>An error message for the error.</p>
     #   @return [String]
     class BatchGetSchemaError < Struct.new(
+      nil,
       :name,
       :code,
       :message,
@@ -751,6 +781,7 @@ module Aws::CleanRooms
     #   <p>The names for the schema objects to retrieve.</p>
     #   @return [Array<String>]
     class BatchGetSchemaOperationInput < Struct.new(
+      nil,
       :collaboration_identifier,
       :names,
       keyword_init: true
@@ -765,6 +796,7 @@ module Aws::CleanRooms
     #   <p>Error reasons for schemas that could not be retrieved. One error is returned for every schema that could not be retrieved.</p>
     #   @return [Array<Types::BatchGetSchemaError>]
     class BatchGetSchemaOperationOutput < Struct.new(
+      nil,
       :schemas,
       :errors,
       keyword_init: true
@@ -777,6 +809,7 @@ module Aws::CleanRooms
     #   <p> The number of Clean Rooms Processing Unit (CRPU) hours that have been billed.</p>
     #   @return [Float]
     class BilledJobResourceUtilization < Struct.new(
+      nil,
       :units,
       keyword_init: true
     )
@@ -788,6 +821,7 @@ module Aws::CleanRooms
     #   <p> The number of Clean Rooms Processing Unit (CRPU) hours that have been billed.</p>
     #   @return [Float]
     class BilledResourceUtilization < Struct.new(
+      nil,
       :units,
       keyword_init: true
     )
@@ -805,6 +839,7 @@ module Aws::CleanRooms
     #   <p>Whether this individual budget parameter automatically refreshes when the budget period resets.</p>
     #   @return [String]
     class BudgetParameter < Struct.new(
+      nil,
       :type,
       :budget,
       :auto_refresh,
@@ -824,6 +859,7 @@ module Aws::CleanRooms
     #   <p>The list of change types that were applied.</p>
     #   @return [Array<String>]
     class Change < Struct.new(
+      nil,
       :specification_type,
       :specification,
       :types,
@@ -840,6 +876,7 @@ module Aws::CleanRooms
     #   <p>The specification details for the change. The structure depends on the specification type.</p>
     #   @return [Types::ChangeSpecification]
     class ChangeInput < Struct.new(
+      nil,
       :specification_type,
       :specification,
       keyword_init: true
@@ -915,6 +952,7 @@ module Aws::CleanRooms
     #   <p>The Amazon Web Services Regions where collaboration query results can be stored. Returns the list of Region identifiers that were specified when the collaboration was created. This list is used to enforce regional storage policies and compliance requirements.</p>
     #   @return [Array<String>]
     class Collaboration < Struct.new(
+      nil,
       :id,
       :arn,
       :name,
@@ -987,6 +1025,7 @@ module Aws::CleanRooms
     #   <p>The configuration that specifies the level of detail in error messages returned by analyses using this template. When set to <code>DETAILED</code>, error messages include more information to help troubleshoot issues with PySpark jobs. Detailed error messages may expose underlying data, including sensitive information. Recommended for faster troubleshooting in development and testing environments.</p>
     #   @return [Types::ErrorMessageConfiguration]
     class CollaborationAnalysisTemplate < Struct.new(
+      nil,
       :id,
       :arn,
       :collaboration_id,
@@ -1037,6 +1076,7 @@ module Aws::CleanRooms
     #   <p>The description of the analysis template.</p>
     #   @return [String]
     class CollaborationAnalysisTemplateSummary < Struct.new(
+      nil,
       :arn,
       :create_time,
       :id,
@@ -1074,6 +1114,7 @@ module Aws::CleanRooms
     #   <p>The list of changes specified in this change request.</p>
     #   @return [Array<Types::Change>]
     class CollaborationChangeRequest < Struct.new(
+      nil,
       :id,
       :collaboration_id,
       :create_time,
@@ -1109,6 +1150,7 @@ module Aws::CleanRooms
     #   <p>Summary of the changes in this change request.</p>
     #   @return [Array<Types::Change>]
     class CollaborationChangeRequestSummary < Struct.new(
+      nil,
       :id,
       :collaboration_id,
       :create_time,
@@ -1153,6 +1195,7 @@ module Aws::CleanRooms
     #   <p>The most recent time at which the configured audience model association was updated.</p>
     #   @return [Time]
     class CollaborationConfiguredAudienceModelAssociation < Struct.new(
+      nil,
       :id,
       :arn,
       :collaboration_id,
@@ -1197,6 +1240,7 @@ module Aws::CleanRooms
     #   <p>The description of the configured audience model association.</p>
     #   @return [String]
     class CollaborationConfiguredAudienceModelAssociationSummary < Struct.new(
+      nil,
       :arn,
       :create_time,
       :id,
@@ -1249,6 +1293,7 @@ module Aws::CleanRooms
     #   <p>The configuration settings for the ID mapping table.</p>
     #   @return [Types::IdMappingConfig]
     class CollaborationIdNamespaceAssociation < Struct.new(
+      nil,
       :id,
       :arn,
       :collaboration_id,
@@ -1301,6 +1346,7 @@ module Aws::CleanRooms
     #   <p>The input reference properties that are used to create the collaboration ID namespace association.</p>
     #   @return [Types::IdNamespaceAssociationInputReferencePropertiesSummary]
     class CollaborationIdNamespaceAssociationSummary < Struct.new(
+      nil,
       :arn,
       :create_time,
       :id,
@@ -1349,6 +1395,7 @@ module Aws::CleanRooms
     #   <p>The includes epsilon provided and utility in terms of aggregations.</p>
     #   @return [Types::PrivacyBudget]
     class CollaborationPrivacyBudgetSummary < Struct.new(
+      nil,
       :id,
       :privacy_budget_template_id,
       :privacy_budget_template_arn,
@@ -1396,6 +1443,7 @@ module Aws::CleanRooms
     #   <p>Specifies the epsilon and noise parameters for the privacy budget template.</p>
     #   @return [Types::PrivacyBudgetTemplateParametersOutput]
     class CollaborationPrivacyBudgetTemplate < Struct.new(
+      nil,
       :id,
       :arn,
       :collaboration_id,
@@ -1437,6 +1485,7 @@ module Aws::CleanRooms
     #   <p>The most recent time at which the collaboration privacy budget template was updated.</p>
     #   @return [Time]
     class CollaborationPrivacyBudgetTemplateSummary < Struct.new(
+      nil,
       :id,
       :arn,
       :collaboration_id,
@@ -1485,6 +1534,7 @@ module Aws::CleanRooms
     #   <p> The analytics engine.</p> <note> <p>After July 16, 2025, the <code>CLEAN_ROOMS_SQL</code> parameter will no longer be available. </p> </note>
     #   @return [String]
     class CollaborationSummary < Struct.new(
+      nil,
       :id,
       :arn,
       :name,
@@ -1509,6 +1559,7 @@ module Aws::CleanRooms
     #   <p>The type of the column.</p>
     #   @return [String]
     class Column < Struct.new(
+      nil,
       :name,
       :type,
       keyword_init: true
@@ -1584,6 +1635,7 @@ module Aws::CleanRooms
     #   <p>The most recent time at which the configured audience model association was updated.</p>
     #   @return [Time]
     class ConfiguredAudienceModelAssociation < Struct.new(
+      nil,
       :id,
       :arn,
       :configured_audience_model_arn,
@@ -1636,6 +1688,7 @@ module Aws::CleanRooms
     #   <p>The description of the configured audience model association.</p>
     #   @return [String]
     class ConfiguredAudienceModelAssociationSummary < Struct.new(
+      nil,
       :membership_id,
       :membership_arn,
       :collaboration_arn,
@@ -1687,6 +1740,7 @@ module Aws::CleanRooms
     #   <p> The selected analysis methods for the configured table.</p>
     #   @return [Array<String>]
     class ConfiguredTable < Struct.new(
+      nil,
       :id,
       :arn,
       :name,
@@ -1723,6 +1777,7 @@ module Aws::CleanRooms
     #   <p>The time the configured table analysis rule was last updated.</p>
     #   @return [Time]
     class ConfiguredTableAnalysisRule < Struct.new(
+      nil,
       :configured_table_id,
       :configured_table_arn,
       :policy,
@@ -1812,6 +1867,7 @@ module Aws::CleanRooms
     #   <p>The time the configured table association was last updated.</p>
     #   @return [Time]
     class ConfiguredTableAssociation < Struct.new(
+      nil,
       :arn,
       :id,
       :configured_table_id,
@@ -1852,6 +1908,7 @@ module Aws::CleanRooms
     #   <p> The update time of the configured table association analysis rule.</p>
     #   @return [Time]
     class ConfiguredTableAssociationAnalysisRule < Struct.new(
+      nil,
       :membership_identifier,
       :configured_table_association_id,
       :configured_table_association_arn,
@@ -1872,6 +1929,7 @@ module Aws::CleanRooms
     #   <p> The list of resources or wildcards (ARNs) that are allowed to perform additional analysis on query output.</p> <p>The <code>allowedAdditionalAnalyses</code> parameter is currently supported for the list analysis rule (<code>AnalysisRuleList</code>) and the custom analysis rule (<code>AnalysisRuleCustom</code>).</p>
     #   @return [Array<String>]
     class ConfiguredTableAssociationAnalysisRuleAggregation < Struct.new(
+      nil,
       :allowed_result_receivers,
       :allowed_additional_analyses,
       keyword_init: true
@@ -1887,6 +1945,7 @@ module Aws::CleanRooms
     #   <p> The list of resources or wildcards (ARNs) that are allowed to perform additional analysis on query output.</p>
     #   @return [Array<String>]
     class ConfiguredTableAssociationAnalysisRuleCustom < Struct.new(
+      nil,
       :allowed_result_receivers,
       :allowed_additional_analyses,
       keyword_init: true
@@ -1902,6 +1961,7 @@ module Aws::CleanRooms
     #   <p> The list of resources or wildcards (ARNs) that are allowed to perform additional analysis on query output.</p>
     #   @return [Array<String>]
     class ConfiguredTableAssociationAnalysisRuleList < Struct.new(
+      nil,
       :allowed_result_receivers,
       :allowed_additional_analyses,
       keyword_init: true
@@ -1978,6 +2038,7 @@ module Aws::CleanRooms
     #   <p>The analysis rule types that are associated with the configured table associations in this summary. </p>
     #   @return [Array<String>]
     class ConfiguredTableAssociationSummary < Struct.new(
+      nil,
       :configured_table_id,
       :membership_id,
       :membership_arn,
@@ -2018,6 +2079,7 @@ module Aws::CleanRooms
     #   <p> The selected analysis methods for the configured table summary.</p>
     #   @return [Array<String>]
     class ConfiguredTableSummary < Struct.new(
+      nil,
       :id,
       :arn,
       :name,
@@ -2044,6 +2106,7 @@ module Aws::CleanRooms
     #   <p>A reason code for the exception.</p>
     #   @return [String]
     class ConflictException < Struct.new(
+      nil,
       :message,
       :resource_id,
       :resource_type,
@@ -2100,6 +2163,7 @@ module Aws::CleanRooms
     #   <p> The additional analyses allowed by the consolidated policy aggregation.</p>
     #   @return [Array<String>]
     class ConsolidatedPolicyAggregation < Struct.new(
+      nil,
       :aggregate_columns,
       :join_columns,
       :join_required,
@@ -2138,6 +2202,7 @@ module Aws::CleanRooms
     #   <p> The additional analyses allowed by the consolidated policy.</p>
     #   @return [Array<String>]
     class ConsolidatedPolicyCustom < Struct.new(
+      nil,
       :allowed_analyses,
       :allowed_analysis_providers,
       :additional_analyses,
@@ -2170,6 +2235,7 @@ module Aws::CleanRooms
     #   <p> The additional analyses allowed by the consolidated policy list.</p>
     #   @return [Array<String>]
     class ConsolidatedPolicyList < Struct.new(
+      nil,
       :join_columns,
       :allowed_join_operators,
       :list_columns,
@@ -2234,6 +2300,7 @@ module Aws::CleanRooms
     #   <p>The configuration that specifies the level of detail in error messages returned by analyses using this template. When set to <code>DETAILED</code>, error messages include more information to help troubleshoot issues with PySpark jobs. Detailed error messages may expose underlying data, including sensitive information. Recommended for faster troubleshooting in development and testing environments.</p>
     #   @return [Types::ErrorMessageConfiguration]
     class CreateAnalysisTemplateOperationInput < Struct.new(
+      nil,
       :description,
       :membership_identifier,
       :name,
@@ -2252,6 +2319,7 @@ module Aws::CleanRooms
     #   <p>The analysis template.</p>
     #   @return [Types::AnalysisTemplate]
     class CreateAnalysisTemplateOperationOutput < Struct.new(
+      nil,
       :analysis_template,
       keyword_init: true
     )
@@ -2265,6 +2333,7 @@ module Aws::CleanRooms
     #   <p>The list of changes to apply to the collaboration. Each change specifies the type of modification and the details of what should be changed.</p>
     #   @return [Array<Types::ChangeInput>]
     class CreateCollaborationChangeRequestInput < Struct.new(
+      nil,
       :collaboration_identifier,
       :changes,
       keyword_init: true
@@ -2276,6 +2345,7 @@ module Aws::CleanRooms
     #   <p>Represents a request to modify a collaboration. Change requests enable structured modifications to collaborations after they have been created.</p>
     #   @return [Types::CollaborationChangeRequest]
     class CreateCollaborationChangeRequestOutput < Struct.new(
+      nil,
       :collaboration_change_request,
       keyword_init: true
     )
@@ -2325,6 +2395,7 @@ module Aws::CleanRooms
     #   <p>The Amazon Web Services Regions where collaboration query results can be stored. When specified, results can only be written to these Regions. This parameter enables you to meet your compliance and data governance requirements, and implement regional data governance policies.</p>
     #   @return [Array<String>]
     class CreateCollaborationOperationInput < Struct.new(
+      nil,
       :members,
       :name,
       :description,
@@ -2348,6 +2419,7 @@ module Aws::CleanRooms
     #   <p>The collaboration.</p>
     #   @return [Types::Collaboration]
     class CreateCollaborationOperationOutput < Struct.new(
+      nil,
       :collaboration,
       keyword_init: true
     )
@@ -2373,6 +2445,7 @@ module Aws::CleanRooms
     #   <p>A description of the configured audience model association.</p>
     #   @return [String]
     class CreateConfiguredAudienceModelAssociationInput < Struct.new(
+      nil,
       :membership_identifier,
       :configured_audience_model_arn,
       :configured_audience_model_association_name,
@@ -2388,6 +2461,7 @@ module Aws::CleanRooms
     #   <p>Information about the configured audience model association.</p>
     #   @return [Types::ConfiguredAudienceModelAssociation]
     class CreateConfiguredAudienceModelAssociationOutput < Struct.new(
+      nil,
       :configured_audience_model_association,
       keyword_init: true
     )
@@ -2404,6 +2478,7 @@ module Aws::CleanRooms
     #   <p>The analysis rule policy that was created for the configured table.</p>
     #   @return [Types::ConfiguredTableAnalysisRulePolicy]
     class CreateConfiguredTableAnalysisRuleOperationInput < Struct.new(
+      nil,
       :configured_table_identifier,
       :analysis_rule_type,
       :analysis_rule_policy,
@@ -2416,6 +2491,7 @@ module Aws::CleanRooms
     #   <p>The analysis rule that was created for the configured table.</p>
     #   @return [Types::ConfiguredTableAnalysisRule]
     class CreateConfiguredTableAnalysisRuleOperationOutput < Struct.new(
+      nil,
       :analysis_rule,
       keyword_init: true
     )
@@ -2435,6 +2511,7 @@ module Aws::CleanRooms
     #   <p>The analysis rule policy that was created for the configured table association.</p>
     #   @return [Types::ConfiguredTableAssociationAnalysisRulePolicy]
     class CreateConfiguredTableAssociationAnalysisRuleInput < Struct.new(
+      nil,
       :membership_identifier,
       :configured_table_association_identifier,
       :analysis_rule_type,
@@ -2448,6 +2525,7 @@ module Aws::CleanRooms
     #   <p>The analysis rule for the conﬁgured table association. In the console, the <code>ConfiguredTableAssociationAnalysisRule</code> is referred to as the <i>collaboration analysis rule</i>.</p>
     #   @return [Types::ConfiguredTableAssociationAnalysisRule]
     class CreateConfiguredTableAssociationAnalysisRuleOutput < Struct.new(
+      nil,
       :analysis_rule,
       keyword_init: true
     )
@@ -2473,6 +2551,7 @@ module Aws::CleanRooms
     #   <p>An optional label that you can assign to a resource when you create it. Each tag consists of a key and an optional value, both of which you define. When you use tagging, you can also use tag-based access control in IAM policies to control access to this resource.</p>
     #   @return [Hash<String, String>]
     class CreateConfiguredTableAssociationOperationInput < Struct.new(
+      nil,
       :name,
       :description,
       :membership_identifier,
@@ -2488,6 +2567,7 @@ module Aws::CleanRooms
     #   <p>The configured table association.</p>
     #   @return [Types::ConfiguredTableAssociation]
     class CreateConfiguredTableAssociationOperationOutput < Struct.new(
+      nil,
       :configured_table_association,
       keyword_init: true
     )
@@ -2516,6 +2596,7 @@ module Aws::CleanRooms
     #   <p>An optional label that you can assign to a resource when you create it. Each tag consists of a key and an optional value, both of which you define. When you use tagging, you can also use tag-based access control in IAM policies to control access to this resource.</p>
     #   @return [Hash<String, String>]
     class CreateConfiguredTableOperationInput < Struct.new(
+      nil,
       :name,
       :description,
       :table_reference,
@@ -2532,6 +2613,7 @@ module Aws::CleanRooms
     #   <p>The created configured table.</p>
     #   @return [Types::ConfiguredTable]
     class CreateConfiguredTableOperationOutput < Struct.new(
+      nil,
       :configured_table,
       keyword_init: true
     )
@@ -2557,6 +2639,7 @@ module Aws::CleanRooms
     #   <p>The Amazon Resource Name (ARN) of the Amazon Web Services KMS key. This value is used to encrypt the mapping table data that is stored by Clean Rooms.</p>
     #   @return [String]
     class CreateIdMappingTableInput < Struct.new(
+      nil,
       :membership_identifier,
       :name,
       :description,
@@ -2572,6 +2655,7 @@ module Aws::CleanRooms
     #   <p>The ID mapping table that was created.</p>
     #   @return [Types::IdMappingTable]
     class CreateIdMappingTableOutput < Struct.new(
+      nil,
       :id_mapping_table,
       keyword_init: true
     )
@@ -2597,6 +2681,7 @@ module Aws::CleanRooms
     #   <p>The configuration settings for the ID mapping table.</p>
     #   @return [Types::IdMappingConfig]
     class CreateIdNamespaceAssociationInput < Struct.new(
+      nil,
       :membership_identifier,
       :input_reference_config,
       :tags,
@@ -2612,6 +2697,7 @@ module Aws::CleanRooms
     #   <p>The ID namespace association that was created.</p>
     #   @return [Types::IdNamespaceAssociation]
     class CreateIdNamespaceAssociationOutput < Struct.new(
+      nil,
       :id_namespace_association,
       keyword_init: true
     )
@@ -2640,6 +2726,7 @@ module Aws::CleanRooms
     #   <p>The payment responsibilities accepted by the collaboration member.</p> <p>Not required if the collaboration member has the member ability to run queries. </p> <p>Required if the collaboration member doesn't have the member ability to run queries but is configured as a payer by the collaboration creator. </p>
     #   @return [Types::MembershipPaymentConfiguration]
     class CreateMembershipOperationInput < Struct.new(
+      nil,
       :collaboration_identifier,
       :query_log_status,
       :job_log_status,
@@ -2656,6 +2743,7 @@ module Aws::CleanRooms
     #   <p>The membership that was created.</p>
     #   @return [Types::Membership]
     class CreateMembershipOperationOutput < Struct.new(
+      nil,
       :membership,
       keyword_init: true
     )
@@ -2678,6 +2766,7 @@ module Aws::CleanRooms
     #   <p>An optional label that you can assign to a resource when you create it. Each tag consists of a key and an optional value, both of which you define. When you use tagging, you can also use tag-based access control in IAM policies to control access to this resource.</p>
     #   @return [Hash<String, String>]
     class CreatePrivacyBudgetTemplateInput < Struct.new(
+      nil,
       :membership_identifier,
       :auto_refresh,
       :privacy_budget_type,
@@ -2692,6 +2781,7 @@ module Aws::CleanRooms
     #   <p>A summary of the elements in the privacy budget template.</p>
     #   @return [Types::PrivacyBudgetTemplate]
     class CreatePrivacyBudgetTemplateOutput < Struct.new(
+      nil,
       :privacy_budget_template,
       keyword_init: true
     )
@@ -2712,6 +2802,7 @@ module Aws::CleanRooms
     #   <p>Indicates whether NULL values are to be copied as NULL to encrypted tables (<code>TRUE</code>) or cryptographically processed (<code>FALSE</code>).</p>
     #   @return [Boolean]
     class DataEncryptionMetadata < Struct.new(
+      nil,
       :allow_cleartext,
       :allow_duplicates,
       :allow_joins_on_columns_with_different_names,
@@ -2728,6 +2819,7 @@ module Aws::CleanRooms
     #   <p>The identifier for the analysis template resource.</p>
     #   @return [String]
     class DeleteAnalysisTemplateOperationInput < Struct.new(
+      nil,
       :membership_identifier,
       :analysis_template_identifier,
       keyword_init: true
@@ -2736,6 +2828,7 @@ module Aws::CleanRooms
     end
 
     class DeleteAnalysisTemplateOperationOutput < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -2745,6 +2838,7 @@ module Aws::CleanRooms
     #   <p>The identifier for the collaboration.</p>
     #   @return [String]
     class DeleteCollaborationOperationInput < Struct.new(
+      nil,
       :collaboration_identifier,
       keyword_init: true
     )
@@ -2752,6 +2846,7 @@ module Aws::CleanRooms
     end
 
     class DeleteCollaborationOperationOutput < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -2764,6 +2859,7 @@ module Aws::CleanRooms
     #   <p>A unique identifier of the membership that contains the audience model association that you want to delete.</p>
     #   @return [String]
     class DeleteConfiguredAudienceModelAssociationInput < Struct.new(
+      nil,
       :configured_audience_model_association_identifier,
       :membership_identifier,
       keyword_init: true
@@ -2772,6 +2868,7 @@ module Aws::CleanRooms
     end
 
     class DeleteConfiguredAudienceModelAssociationOutput < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -2784,6 +2881,7 @@ module Aws::CleanRooms
     #   <p>The analysis rule type to be deleted. Configured table analysis rules are uniquely identified by their configured table identifier and analysis rule type.</p>
     #   @return [String]
     class DeleteConfiguredTableAnalysisRuleOperationInput < Struct.new(
+      nil,
       :configured_table_identifier,
       :analysis_rule_type,
       keyword_init: true
@@ -2793,6 +2891,7 @@ module Aws::CleanRooms
 
     # <p>An empty response that indicates a successful delete.</p>
     class DeleteConfiguredTableAnalysisRuleOperationOutput < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -2808,6 +2907,7 @@ module Aws::CleanRooms
     #   <p>The type of the analysis rule that you want to delete.</p>
     #   @return [String]
     class DeleteConfiguredTableAssociationAnalysisRuleInput < Struct.new(
+      nil,
       :membership_identifier,
       :configured_table_association_identifier,
       :analysis_rule_type,
@@ -2817,6 +2917,7 @@ module Aws::CleanRooms
     end
 
     class DeleteConfiguredTableAssociationAnalysisRuleOutput < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -2829,6 +2930,7 @@ module Aws::CleanRooms
     #   <p>A unique identifier for the membership that the configured table association belongs to. Currently accepts the membership ID.</p>
     #   @return [String]
     class DeleteConfiguredTableAssociationOperationInput < Struct.new(
+      nil,
       :configured_table_association_identifier,
       :membership_identifier,
       keyword_init: true
@@ -2837,6 +2939,7 @@ module Aws::CleanRooms
     end
 
     class DeleteConfiguredTableAssociationOperationOutput < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -2846,6 +2949,7 @@ module Aws::CleanRooms
     #   <p>The unique ID for the configured table to delete.</p>
     #   @return [String]
     class DeleteConfiguredTableOperationInput < Struct.new(
+      nil,
       :configured_table_identifier,
       keyword_init: true
     )
@@ -2854,6 +2958,7 @@ module Aws::CleanRooms
 
     # <p>The empty output for a successful deletion.</p>
     class DeleteConfiguredTableOperationOutput < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -2866,6 +2971,7 @@ module Aws::CleanRooms
     #   <p>The unique identifier of the membership that contains the ID mapping table that you want to delete.</p>
     #   @return [String]
     class DeleteIdMappingTableInput < Struct.new(
+      nil,
       :id_mapping_table_identifier,
       :membership_identifier,
       keyword_init: true
@@ -2874,6 +2980,7 @@ module Aws::CleanRooms
     end
 
     class DeleteIdMappingTableOutput < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -2886,6 +2993,7 @@ module Aws::CleanRooms
     #   <p>The unique identifier of the membership that contains the ID namespace association that you want to delete.</p>
     #   @return [String]
     class DeleteIdNamespaceAssociationInput < Struct.new(
+      nil,
       :id_namespace_association_identifier,
       :membership_identifier,
       keyword_init: true
@@ -2894,6 +3002,7 @@ module Aws::CleanRooms
     end
 
     class DeleteIdNamespaceAssociationOutput < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -2906,6 +3015,7 @@ module Aws::CleanRooms
     #   <p>The account ID of the member to remove.</p>
     #   @return [String]
     class DeleteMemberOperationInput < Struct.new(
+      nil,
       :collaboration_identifier,
       :account_id,
       keyword_init: true
@@ -2914,6 +3024,7 @@ module Aws::CleanRooms
     end
 
     class DeleteMemberOperationOutput < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -2923,6 +3034,7 @@ module Aws::CleanRooms
     #   <p>The identifier for a membership resource.</p>
     #   @return [String]
     class DeleteMembershipOperationInput < Struct.new(
+      nil,
       :membership_identifier,
       keyword_init: true
     )
@@ -2930,6 +3042,7 @@ module Aws::CleanRooms
     end
 
     class DeleteMembershipOperationOutput < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -2942,6 +3055,7 @@ module Aws::CleanRooms
     #   <p>A unique identifier for your privacy budget template. </p>
     #   @return [String]
     class DeletePrivacyBudgetTemplateInput < Struct.new(
+      nil,
       :membership_identifier,
       :privacy_budget_template_identifier,
       keyword_init: true
@@ -2950,6 +3064,7 @@ module Aws::CleanRooms
     end
 
     class DeletePrivacyBudgetTemplateOutput < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -2960,6 +3075,7 @@ module Aws::CleanRooms
     #   <p>The name of the column, such as user_id, that contains the unique identifier of your users, whose privacy you want to protect. If you want to turn on differential privacy for two or more tables in a collaboration, you must configure the same column as the user identifier column in both analysis rules.</p>
     #   @return [String]
     class DifferentialPrivacyColumn < Struct.new(
+      nil,
       :name,
       keyword_init: true
     )
@@ -2971,6 +3087,7 @@ module Aws::CleanRooms
     #   <p>The name of the column (such as user_id) that contains the unique identifier of your users whose privacy you want to protect. If you want to turn on diﬀerential privacy for two or more tables in a collaboration, you must conﬁgure the same column as the user identiﬁer column in both analysis rules.</p>
     #   @return [Array<Types::DifferentialPrivacyColumn>]
     class DifferentialPrivacyConfiguration < Struct.new(
+      nil,
       :columns,
       keyword_init: true
     )
@@ -2982,6 +3099,7 @@ module Aws::CleanRooms
     #   <p>Provides the sensitivity parameters that you can use to better understand the total amount of noise in query results.</p>
     #   @return [Array<Types::DifferentialPrivacySensitivityParameters>]
     class DifferentialPrivacyParameters < Struct.new(
+      nil,
       :sensitivity_parameters,
       keyword_init: true
     )
@@ -2996,6 +3114,7 @@ module Aws::CleanRooms
     #   <p>The maximum number of aggregations that the member who can query can run given the epsilon and noise parameters.</p>
     #   @return [Integer]
     class DifferentialPrivacyPreviewAggregation < Struct.new(
+      nil,
       :type,
       :max_count,
       keyword_init: true
@@ -3011,6 +3130,7 @@ module Aws::CleanRooms
     #   <p>Noise added per query is measured in terms of the number of users whose contributions you want to obscure. This value governs the rate at which the privacy budget is depleted.</p>
     #   @return [Integer]
     class DifferentialPrivacyPreviewParametersInput < Struct.new(
+      nil,
       :epsilon,
       :users_noise_per_query,
       keyword_init: true
@@ -3026,6 +3146,7 @@ module Aws::CleanRooms
     #   <p>The epsilon value that you configured.</p>
     #   @return [Integer]
     class DifferentialPrivacyPrivacyBudget < Struct.new(
+      nil,
       :aggregations,
       :epsilon,
       keyword_init: true
@@ -3044,6 +3165,7 @@ module Aws::CleanRooms
     #   <p>The remaining number of aggregation functions that can be run with the available privacy budget.</p>
     #   @return [Integer]
     class DifferentialPrivacyPrivacyBudgetAggregation < Struct.new(
+      nil,
       :type,
       :max_count,
       :remaining_count,
@@ -3057,6 +3179,7 @@ module Aws::CleanRooms
     #   <p>The number of aggregation functions that you can perform.</p>
     #   @return [Array<Types::DifferentialPrivacyPreviewAggregation>]
     class DifferentialPrivacyPrivacyImpact < Struct.new(
+      nil,
       :aggregations,
       keyword_init: true
     )
@@ -3080,6 +3203,7 @@ module Aws::CleanRooms
     #   <p>The upper bound of the aggregation expression.</p>
     #   @return [Float]
     class DifferentialPrivacySensitivityParameters < Struct.new(
+      nil,
       :aggregation_type,
       :aggregation_expression,
       :user_contribution_limit,
@@ -3098,6 +3222,7 @@ module Aws::CleanRooms
     #   <p>Noise added per query is measured in terms of the number of users whose contributions you want to obscure. This value governs the rate at which the privacy budget is depleted.</p>
     #   @return [Integer]
     class DifferentialPrivacyTemplateParametersInput < Struct.new(
+      nil,
       :epsilon,
       :users_noise_per_query,
       keyword_init: true
@@ -3113,6 +3238,7 @@ module Aws::CleanRooms
     #   <p>Noise added per query is measured in terms of the number of users whose contributions you want to obscure. This value governs the rate at which the privacy budget is depleted.</p>
     #   @return [Integer]
     class DifferentialPrivacyTemplateParametersOutput < Struct.new(
+      nil,
       :epsilon,
       :users_noise_per_query,
       keyword_init: true
@@ -3128,6 +3254,7 @@ module Aws::CleanRooms
     #   <p>The updated value of noise added per query. It is measured in terms of the number of users whose contributions you want to obscure. This value governs the rate at which the privacy budget is depleted.</p>
     #   @return [Integer]
     class DifferentialPrivacyTemplateUpdateParameters < Struct.new(
+      nil,
       :epsilon,
       :users_noise_per_query,
       keyword_init: true
@@ -3140,6 +3267,7 @@ module Aws::CleanRooms
     #   <p> The account IDs for the member who received the results of a protected query.</p>
     #   @return [Array<String>]
     class DirectAnalysisConfigurationDetails < Struct.new(
+      nil,
       :receiver_account_ids,
       keyword_init: true
     )
@@ -3151,6 +3279,7 @@ module Aws::CleanRooms
     #   <p>The level of detail for error messages returned by the PySpark job. When set to DETAILED, error messages include more information to help troubleshoot issues with your PySpark job.</p> <p>Because this setting may expose sensitive data, it is recommended for development and testing environments.</p>
     #   @return [String]
     class ErrorMessageConfiguration < Struct.new(
+      nil,
       :type,
       keyword_init: true
     )
@@ -3164,6 +3293,7 @@ module Aws::CleanRooms
     #   <p>The identifier for the analysis template resource.</p>
     #   @return [String]
     class GetAnalysisTemplateOperationInput < Struct.new(
+      nil,
       :membership_identifier,
       :analysis_template_identifier,
       keyword_init: true
@@ -3175,6 +3305,7 @@ module Aws::CleanRooms
     #   <p>The analysis template.</p>
     #   @return [Types::AnalysisTemplate]
     class GetAnalysisTemplateOperationOutput < Struct.new(
+      nil,
       :analysis_template,
       keyword_init: true
     )
@@ -3188,6 +3319,7 @@ module Aws::CleanRooms
     #   <p>The Amazon Resource Name (ARN) associated with the analysis template within a collaboration.</p>
     #   @return [String]
     class GetCollaborationAnalysisTemplateOperationInput < Struct.new(
+      nil,
       :collaboration_identifier,
       :analysis_template_arn,
       keyword_init: true
@@ -3199,6 +3331,7 @@ module Aws::CleanRooms
     #   <p>The analysis template within a collaboration.</p>
     #   @return [Types::CollaborationAnalysisTemplate]
     class GetCollaborationAnalysisTemplateOperationOutput < Struct.new(
+      nil,
       :collaboration_analysis_template,
       keyword_init: true
     )
@@ -3212,6 +3345,7 @@ module Aws::CleanRooms
     #   <p>A unique identifier for the change request to retrieve.</p>
     #   @return [String]
     class GetCollaborationChangeRequestInput < Struct.new(
+      nil,
       :collaboration_identifier,
       :change_request_identifier,
       keyword_init: true
@@ -3223,6 +3357,7 @@ module Aws::CleanRooms
     #   <p>The collaboration change request that was requested.</p>
     #   @return [Types::CollaborationChangeRequest]
     class GetCollaborationChangeRequestOutput < Struct.new(
+      nil,
       :collaboration_change_request,
       keyword_init: true
     )
@@ -3236,6 +3371,7 @@ module Aws::CleanRooms
     #   <p>A unique identifier for the configured audience model association that you want to retrieve.</p>
     #   @return [String]
     class GetCollaborationConfiguredAudienceModelAssociationInput < Struct.new(
+      nil,
       :collaboration_identifier,
       :configured_audience_model_association_identifier,
       keyword_init: true
@@ -3247,6 +3383,7 @@ module Aws::CleanRooms
     #   <p>The metadata of the configured audience model association.</p>
     #   @return [Types::CollaborationConfiguredAudienceModelAssociation]
     class GetCollaborationConfiguredAudienceModelAssociationOutput < Struct.new(
+      nil,
       :collaboration_configured_audience_model_association,
       keyword_init: true
     )
@@ -3260,6 +3397,7 @@ module Aws::CleanRooms
     #   <p>The unique identifier of the ID namespace association that you want to retrieve.</p>
     #   @return [String]
     class GetCollaborationIdNamespaceAssociationInput < Struct.new(
+      nil,
       :collaboration_identifier,
       :id_namespace_association_identifier,
       keyword_init: true
@@ -3271,6 +3409,7 @@ module Aws::CleanRooms
     #   <p>The ID namespace association that you requested.</p>
     #   @return [Types::CollaborationIdNamespaceAssociation]
     class GetCollaborationIdNamespaceAssociationOutput < Struct.new(
+      nil,
       :collaboration_id_namespace_association,
       keyword_init: true
     )
@@ -3281,6 +3420,7 @@ module Aws::CleanRooms
     #   <p>The identifier for the collaboration.</p>
     #   @return [String]
     class GetCollaborationOperationInput < Struct.new(
+      nil,
       :collaboration_identifier,
       keyword_init: true
     )
@@ -3291,6 +3431,7 @@ module Aws::CleanRooms
     #   <p>The entire collaboration for this identifier.</p>
     #   @return [Types::Collaboration]
     class GetCollaborationOperationOutput < Struct.new(
+      nil,
       :collaboration,
       keyword_init: true
     )
@@ -3304,6 +3445,7 @@ module Aws::CleanRooms
     #   <p>A unique identifier for one of your privacy budget templates.</p>
     #   @return [String]
     class GetCollaborationPrivacyBudgetTemplateInput < Struct.new(
+      nil,
       :collaboration_identifier,
       :privacy_budget_template_identifier,
       keyword_init: true
@@ -3315,6 +3457,7 @@ module Aws::CleanRooms
     #   <p>Returns the details of the privacy budget template that you requested.</p>
     #   @return [Types::CollaborationPrivacyBudgetTemplate]
     class GetCollaborationPrivacyBudgetTemplateOutput < Struct.new(
+      nil,
       :collaboration_privacy_budget_template,
       keyword_init: true
     )
@@ -3328,6 +3471,7 @@ module Aws::CleanRooms
     #   <p>A unique identifier for the membership that contains the configured audience model association that you want to retrieve.</p>
     #   @return [String]
     class GetConfiguredAudienceModelAssociationInput < Struct.new(
+      nil,
       :configured_audience_model_association_identifier,
       :membership_identifier,
       keyword_init: true
@@ -3339,6 +3483,7 @@ module Aws::CleanRooms
     #   <p>Information about the configured audience model association that you requested.</p>
     #   @return [Types::ConfiguredAudienceModelAssociation]
     class GetConfiguredAudienceModelAssociationOutput < Struct.new(
+      nil,
       :configured_audience_model_association,
       keyword_init: true
     )
@@ -3352,6 +3497,7 @@ module Aws::CleanRooms
     #   <p>The analysis rule to be retrieved. Configured table analysis rules are uniquely identified by their configured table identifier and analysis rule type.</p>
     #   @return [String]
     class GetConfiguredTableAnalysisRuleOperationInput < Struct.new(
+      nil,
       :configured_table_identifier,
       :analysis_rule_type,
       keyword_init: true
@@ -3363,6 +3509,7 @@ module Aws::CleanRooms
     #   <p>The entire analysis rule output.</p>
     #   @return [Types::ConfiguredTableAnalysisRule]
     class GetConfiguredTableAnalysisRuleOperationOutput < Struct.new(
+      nil,
       :analysis_rule,
       keyword_init: true
     )
@@ -3379,6 +3526,7 @@ module Aws::CleanRooms
     #   <p> The type of analysis rule that you want to retrieve.</p>
     #   @return [String]
     class GetConfiguredTableAssociationAnalysisRuleInput < Struct.new(
+      nil,
       :membership_identifier,
       :configured_table_association_identifier,
       :analysis_rule_type,
@@ -3391,6 +3539,7 @@ module Aws::CleanRooms
     #   <p>The analysis rule for the conﬁgured table association. In the console, the <code>ConfiguredTableAssociationAnalysisRule</code> is referred to as the <i>collaboration analysis rule</i>.</p>
     #   @return [Types::ConfiguredTableAssociationAnalysisRule]
     class GetConfiguredTableAssociationAnalysisRuleOutput < Struct.new(
+      nil,
       :analysis_rule,
       keyword_init: true
     )
@@ -3404,6 +3553,7 @@ module Aws::CleanRooms
     #   <p>A unique identifier for the membership that the configured table association belongs to. Currently accepts the membership ID.</p>
     #   @return [String]
     class GetConfiguredTableAssociationOperationInput < Struct.new(
+      nil,
       :configured_table_association_identifier,
       :membership_identifier,
       keyword_init: true
@@ -3415,6 +3565,7 @@ module Aws::CleanRooms
     #   <p>The entire configured table association object.</p>
     #   @return [Types::ConfiguredTableAssociation]
     class GetConfiguredTableAssociationOperationOutput < Struct.new(
+      nil,
       :configured_table_association,
       keyword_init: true
     )
@@ -3425,6 +3576,7 @@ module Aws::CleanRooms
     #   <p>The unique ID for the configured table to retrieve.</p>
     #   @return [String]
     class GetConfiguredTableOperationInput < Struct.new(
+      nil,
       :configured_table_identifier,
       keyword_init: true
     )
@@ -3435,6 +3587,7 @@ module Aws::CleanRooms
     #   <p>The retrieved configured table.</p>
     #   @return [Types::ConfiguredTable]
     class GetConfiguredTableOperationOutput < Struct.new(
+      nil,
       :configured_table,
       keyword_init: true
     )
@@ -3448,6 +3601,7 @@ module Aws::CleanRooms
     #   <p>The unique identifier of the membership that contains the ID mapping table that you want to retrieve.</p>
     #   @return [String]
     class GetIdMappingTableInput < Struct.new(
+      nil,
       :id_mapping_table_identifier,
       :membership_identifier,
       keyword_init: true
@@ -3459,6 +3613,7 @@ module Aws::CleanRooms
     #   <p>The ID mapping table that you requested.</p>
     #   @return [Types::IdMappingTable]
     class GetIdMappingTableOutput < Struct.new(
+      nil,
       :id_mapping_table,
       keyword_init: true
     )
@@ -3472,6 +3627,7 @@ module Aws::CleanRooms
     #   <p>The unique identifier of the membership that contains the ID namespace association that you want to retrieve.</p>
     #   @return [String]
     class GetIdNamespaceAssociationInput < Struct.new(
+      nil,
       :id_namespace_association_identifier,
       :membership_identifier,
       keyword_init: true
@@ -3483,6 +3639,7 @@ module Aws::CleanRooms
     #   <p>The ID namespace association that you requested.</p>
     #   @return [Types::IdNamespaceAssociation]
     class GetIdNamespaceAssociationOutput < Struct.new(
+      nil,
       :id_namespace_association,
       keyword_init: true
     )
@@ -3493,6 +3650,7 @@ module Aws::CleanRooms
     #   <p>The identifier for a membership resource.</p>
     #   @return [String]
     class GetMembershipOperationInput < Struct.new(
+      nil,
       :membership_identifier,
       keyword_init: true
     )
@@ -3503,6 +3661,7 @@ module Aws::CleanRooms
     #   <p>The membership retrieved for the provided identifier.</p>
     #   @return [Types::Membership]
     class GetMembershipOperationOutput < Struct.new(
+      nil,
       :membership,
       keyword_init: true
     )
@@ -3516,6 +3675,7 @@ module Aws::CleanRooms
     #   <p>A unique identifier for your privacy budget template.</p>
     #   @return [String]
     class GetPrivacyBudgetTemplateInput < Struct.new(
+      nil,
       :membership_identifier,
       :privacy_budget_template_identifier,
       keyword_init: true
@@ -3527,6 +3687,7 @@ module Aws::CleanRooms
     #   <p>Returns the details of the privacy budget template that you requested.</p>
     #   @return [Types::PrivacyBudgetTemplate]
     class GetPrivacyBudgetTemplateOutput < Struct.new(
+      nil,
       :privacy_budget_template,
       keyword_init: true
     )
@@ -3540,6 +3701,7 @@ module Aws::CleanRooms
     #   <p> The identifier for the protected job instance.</p>
     #   @return [String]
     class GetProtectedJobInput < Struct.new(
+      nil,
       :membership_identifier,
       :protected_job_identifier,
       keyword_init: true
@@ -3551,6 +3713,7 @@ module Aws::CleanRooms
     #   <p> The protected job metadata.</p>
     #   @return [Types::ProtectedJob]
     class GetProtectedJobOutput < Struct.new(
+      nil,
       :protected_job,
       keyword_init: true
     )
@@ -3564,6 +3727,7 @@ module Aws::CleanRooms
     #   <p>The identifier for a protected query instance.</p>
     #   @return [String]
     class GetProtectedQueryOperationInput < Struct.new(
+      nil,
       :membership_identifier,
       :protected_query_identifier,
       keyword_init: true
@@ -3575,6 +3739,7 @@ module Aws::CleanRooms
     #   <p>The query processing metadata.</p>
     #   @return [Types::ProtectedQuery]
     class GetProtectedQueryOperationOutput < Struct.new(
+      nil,
       :protected_query,
       keyword_init: true
     )
@@ -3591,6 +3756,7 @@ module Aws::CleanRooms
     #   <p>The type of the schema analysis rule to retrieve. Schema analysis rules are uniquely identified by a combination of the collaboration, the schema name, and their type.</p>
     #   @return [String]
     class GetSchemaAnalysisRuleOperationInput < Struct.new(
+      nil,
       :collaboration_identifier,
       :name,
       :type,
@@ -3603,6 +3769,7 @@ module Aws::CleanRooms
     #   <p>A specification about how data from the configured table can be used.</p>
     #   @return [Types::AnalysisRule]
     class GetSchemaAnalysisRuleOperationOutput < Struct.new(
+      nil,
       :analysis_rule,
       keyword_init: true
     )
@@ -3616,6 +3783,7 @@ module Aws::CleanRooms
     #   <p>The name of the relation to retrieve the schema for.</p>
     #   @return [String]
     class GetSchemaOperationInput < Struct.new(
+      nil,
       :collaboration_identifier,
       :name,
       keyword_init: true
@@ -3627,6 +3795,7 @@ module Aws::CleanRooms
     #   <p>The entire schema object.</p>
     #   @return [Types::Schema]
     class GetSchemaOperationOutput < Struct.new(
+      nil,
       :schema,
       keyword_init: true
     )
@@ -3644,6 +3813,7 @@ module Aws::CleanRooms
     #   <p>The name of the database the Glue table belongs to.</p>
     #   @return [String]
     class GlueTableReference < Struct.new(
+      nil,
       :region,
       :table_name,
       :database_name,
@@ -3657,6 +3827,7 @@ module Aws::CleanRooms
     #   <p> The SHA-256 hash value.</p>
     #   @return [String]
     class Hash < Struct.new(
+      nil,
       :sha256,
       keyword_init: true
     )
@@ -3668,6 +3839,7 @@ module Aws::CleanRooms
     #   <p>An indicator as to whether you can use your column as a dimension column in the ID mapping table (<code>TRUE</code>) or not (<code>FALSE</code>).</p> <p>Default is <code>FALSE</code>.</p>
     #   @return [Boolean]
     class IdMappingConfig < Struct.new(
+      nil,
       :allow_use_as_dimension_column,
       keyword_init: true
     )
@@ -3720,6 +3892,7 @@ module Aws::CleanRooms
     #   <p>The Amazon Resource Name (ARN) of the Amazon Web Services KMS key.</p>
     #   @return [String]
     class IdMappingTable < Struct.new(
+      nil,
       :id,
       :arn,
       :input_reference_config,
@@ -3746,6 +3919,7 @@ module Aws::CleanRooms
     #   <p>When <code>TRUE</code>, Clean Rooms manages permissions for the ID mapping table resource. </p> <p>When <code>FALSE</code>, the resource owner manages permissions for the ID mapping table resource.</p>
     #   @return [Boolean]
     class IdMappingTableInputReferenceConfig < Struct.new(
+      nil,
       :input_reference_arn,
       :manage_resource_policies,
       keyword_init: true
@@ -3758,6 +3932,7 @@ module Aws::CleanRooms
     #   <p>The input source of the ID mapping table.</p>
     #   @return [Array<Types::IdMappingTableInputSource>]
     class IdMappingTableInputReferenceProperties < Struct.new(
+      nil,
       :id_mapping_table_input_source,
       keyword_init: true
     )
@@ -3772,6 +3947,7 @@ module Aws::CleanRooms
     #   <p>The type of the input source of the ID mapping table.</p>
     #   @return [String]
     class IdMappingTableInputSource < Struct.new(
+      nil,
       :id_namespace_association_id,
       :type,
       keyword_init: true
@@ -3784,6 +3960,7 @@ module Aws::CleanRooms
     #   <p>Defines which ID namespace associations are used to create the ID mapping table.</p>
     #   @return [Array<Types::IdMappingTableInputSource>]
     class IdMappingTableSchemaTypeProperties < Struct.new(
+      nil,
       :id_mapping_table_input_source,
       keyword_init: true
     )
@@ -3825,6 +4002,7 @@ module Aws::CleanRooms
     #   <p>The name of this ID mapping table.</p>
     #   @return [String]
     class IdMappingTableSummary < Struct.new(
+      nil,
       :collaboration_arn,
       :collaboration_id,
       :membership_id,
@@ -3882,6 +4060,7 @@ module Aws::CleanRooms
     #   <p>The configuration settings for the ID mapping table.</p>
     #   @return [Types::IdMappingConfig]
     class IdNamespaceAssociation < Struct.new(
+      nil,
       :id,
       :arn,
       :membership_id,
@@ -3908,6 +4087,7 @@ module Aws::CleanRooms
     #   <p>When <code>TRUE</code>, Clean Rooms manages permissions for the ID namespace association resource.</p> <p>When <code>FALSE</code>, the resource owner manages permissions for the ID namespace association resource.</p>
     #   @return [Boolean]
     class IdNamespaceAssociationInputReferenceConfig < Struct.new(
+      nil,
       :input_reference_arn,
       :manage_resource_policies,
       keyword_init: true
@@ -3923,6 +4103,7 @@ module Aws::CleanRooms
     #   <p>Defines how ID mapping workflows are supported for this ID namespace association.</p>
     #   @return [Array<JSON>]
     class IdNamespaceAssociationInputReferenceProperties < Struct.new(
+      nil,
       :id_namespace_type,
       :id_mapping_workflows_supported,
       keyword_init: true
@@ -3935,6 +4116,7 @@ module Aws::CleanRooms
     #   <p>The ID namespace type for this ID namespace association.</p>
     #   @return [String]
     class IdNamespaceAssociationInputReferencePropertiesSummary < Struct.new(
+      nil,
       :id_namespace_type,
       keyword_init: true
     )
@@ -3979,6 +4161,7 @@ module Aws::CleanRooms
     #   <p>The input reference properties for this ID namespace association.</p>
     #   @return [Types::IdNamespaceAssociationInputReferencePropertiesSummary]
     class IdNamespaceAssociationSummary < Struct.new(
+      nil,
       :membership_id,
       :membership_arn,
       :collaboration_arn,
@@ -4000,6 +4183,7 @@ module Aws::CleanRooms
     # @!attribute message
     #   @return [String]
     class InternalServerException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -4011,6 +4195,7 @@ module Aws::CleanRooms
     #   <p>Indicates whether the collaboration creator has configured the collaboration member to pay for query and job compute costs (<code>TRUE</code>) or has not configured the collaboration member to pay for query and job compute costs (<code>FALSE</code>).</p> <p>Exactly one member can be configured to pay for query and job compute costs. An error is returned if the collaboration creator sets a <code>TRUE</code> value for more than one member in the collaboration. </p> <p>An error is returned if the collaboration creator sets a <code>FALSE</code> value for the member who can run queries and jobs.</p>
     #   @return [Boolean]
     class JobComputePaymentConfig < Struct.new(
+      nil,
       :is_responsible,
       keyword_init: true
     )
@@ -4027,6 +4212,7 @@ module Aws::CleanRooms
     #   <p>The maximum number of results that are returned for an API request call. The service chooses a default number if you don't set one. The service might return a `nextToken` even if the `maxResults` value has not been met.</p>
     #   @return [Integer]
     class ListAnalysisTemplatesOperationInput < Struct.new(
+      nil,
       :membership_identifier,
       :next_token,
       :max_results,
@@ -4042,6 +4228,7 @@ module Aws::CleanRooms
     #   <p>Lists analysis template metadata.</p>
     #   @return [Array<Types::AnalysisTemplateSummary>]
     class ListAnalysisTemplatesOperationOutput < Struct.new(
+      nil,
       :next_token,
       :analysis_template_summaries,
       keyword_init: true
@@ -4059,6 +4246,7 @@ module Aws::CleanRooms
     #   <p>The maximum number of results that are returned for an API request call. The service chooses a default number if you don't set one. The service might return a `nextToken` even if the `maxResults` value has not been met.</p>
     #   @return [Integer]
     class ListCollaborationAnalysisTemplatesOperationInput < Struct.new(
+      nil,
       :collaboration_identifier,
       :next_token,
       :max_results,
@@ -4074,6 +4262,7 @@ module Aws::CleanRooms
     #   <p>The metadata of the analysis template within a collaboration.</p>
     #   @return [Array<Types::CollaborationAnalysisTemplateSummary>]
     class ListCollaborationAnalysisTemplatesOperationOutput < Struct.new(
+      nil,
       :next_token,
       :collaboration_analysis_template_summaries,
       keyword_init: true
@@ -4094,6 +4283,7 @@ module Aws::CleanRooms
     #   <p>The maximum number of results that are returned for an API request call.</p>
     #   @return [Integer]
     class ListCollaborationChangeRequestsInput < Struct.new(
+      nil,
       :collaboration_identifier,
       :status,
       :next_token,
@@ -4110,6 +4300,7 @@ module Aws::CleanRooms
     #   <p>The pagination token that's used to fetch the next set of results.</p>
     #   @return [String]
     class ListCollaborationChangeRequestsOutput < Struct.new(
+      nil,
       :collaboration_change_request_summaries,
       :next_token,
       keyword_init: true
@@ -4127,6 +4318,7 @@ module Aws::CleanRooms
     #   <p>The maximum number of results that are returned for an API request call. The service chooses a default number if you don't set one. The service might return a `nextToken` even if the `maxResults` value has not been met.</p>
     #   @return [Integer]
     class ListCollaborationConfiguredAudienceModelAssociationsInput < Struct.new(
+      nil,
       :collaboration_identifier,
       :next_token,
       :max_results,
@@ -4142,6 +4334,7 @@ module Aws::CleanRooms
     #   <p>The pagination token that's used to fetch the next set of results.</p>
     #   @return [String]
     class ListCollaborationConfiguredAudienceModelAssociationsOutput < Struct.new(
+      nil,
       :collaboration_configured_audience_model_association_summaries,
       :next_token,
       keyword_init: true
@@ -4159,6 +4352,7 @@ module Aws::CleanRooms
     #   <p>The maximum size of the results that is returned per call. Service chooses a default if it has not been set. Service may return a nextToken even if the maximum results has not been met.&gt;</p>
     #   @return [Integer]
     class ListCollaborationIdNamespaceAssociationsInput < Struct.new(
+      nil,
       :collaboration_identifier,
       :next_token,
       :max_results,
@@ -4174,6 +4368,7 @@ module Aws::CleanRooms
     #   <p>The summary information of the collaboration ID namespace associations that you requested.</p>
     #   @return [Array<Types::CollaborationIdNamespaceAssociationSummary>]
     class ListCollaborationIdNamespaceAssociationsOutput < Struct.new(
+      nil,
       :next_token,
       :collaboration_id_namespace_association_summaries,
       keyword_init: true
@@ -4191,6 +4386,7 @@ module Aws::CleanRooms
     #   <p>The maximum number of results that are returned for an API request call. The service chooses a default number if you don't set one. The service might return a `nextToken` even if the `maxResults` value has not been met.</p>
     #   @return [Integer]
     class ListCollaborationPrivacyBudgetTemplatesInput < Struct.new(
+      nil,
       :collaboration_identifier,
       :next_token,
       :max_results,
@@ -4206,6 +4402,7 @@ module Aws::CleanRooms
     #   <p>An array that summarizes the collaboration privacy budget templates. The summary includes collaboration information, creation information, the privacy budget type.</p>
     #   @return [Array<Types::CollaborationPrivacyBudgetTemplateSummary>]
     class ListCollaborationPrivacyBudgetTemplatesOutput < Struct.new(
+      nil,
       :next_token,
       :collaboration_privacy_budget_template_summaries,
       keyword_init: true
@@ -4229,6 +4426,7 @@ module Aws::CleanRooms
     #   <p>The Amazon Resource Name (ARN) of the Configured Table Association (ConfiguredTableAssociation) used to filter privacy budgets.</p>
     #   @return [String]
     class ListCollaborationPrivacyBudgetsInput < Struct.new(
+      nil,
       :collaboration_identifier,
       :privacy_budget_type,
       :max_results,
@@ -4246,6 +4444,7 @@ module Aws::CleanRooms
     #   <p>The pagination token that's used to fetch the next set of results.</p>
     #   @return [String]
     class ListCollaborationPrivacyBudgetsOutput < Struct.new(
+      nil,
       :collaboration_privacy_budget_summaries,
       :next_token,
       keyword_init: true
@@ -4263,6 +4462,7 @@ module Aws::CleanRooms
     #   <p>The caller's status in a collaboration.</p>
     #   @return [String]
     class ListCollaborationsOperationInput < Struct.new(
+      nil,
       :next_token,
       :max_results,
       :member_status,
@@ -4278,6 +4478,7 @@ module Aws::CleanRooms
     #   <p>The list of collaborations.</p>
     #   @return [Array<Types::CollaborationSummary>]
     class ListCollaborationsOperationOutput < Struct.new(
+      nil,
       :next_token,
       :collaboration_list,
       keyword_init: true
@@ -4295,6 +4496,7 @@ module Aws::CleanRooms
     #   <p>The maximum number of results that are returned for an API request call. The service chooses a default number if you don't set one. The service might return a `nextToken` even if the `maxResults` value has not been met.</p>
     #   @return [Integer]
     class ListConfiguredAudienceModelAssociationsInput < Struct.new(
+      nil,
       :membership_identifier,
       :next_token,
       :max_results,
@@ -4310,6 +4512,7 @@ module Aws::CleanRooms
     #   <p>The token value provided to access the next page of results.</p>
     #   @return [String]
     class ListConfiguredAudienceModelAssociationsOutput < Struct.new(
+      nil,
       :configured_audience_model_association_summaries,
       :next_token,
       keyword_init: true
@@ -4327,6 +4530,7 @@ module Aws::CleanRooms
     #   <p>The maximum number of results that are returned for an API request call. The service chooses a default number if you don't set one. The service might return a `nextToken` even if the `maxResults` value has not been met.</p>
     #   @return [Integer]
     class ListConfiguredTableAssociationsOperationInput < Struct.new(
+      nil,
       :membership_identifier,
       :next_token,
       :max_results,
@@ -4342,6 +4546,7 @@ module Aws::CleanRooms
     #   <p>The pagination token that's used to fetch the next set of results.</p>
     #   @return [String]
     class ListConfiguredTableAssociationsOperationOutput < Struct.new(
+      nil,
       :configured_table_association_summaries,
       :next_token,
       keyword_init: true
@@ -4356,6 +4561,7 @@ module Aws::CleanRooms
     #   <p>The maximum number of results that are returned for an API request call. The service chooses a default number if you don't set one. The service might return a `nextToken` even if the `maxResults` value has not been met.</p>
     #   @return [Integer]
     class ListConfiguredTablesOperationInput < Struct.new(
+      nil,
       :next_token,
       :max_results,
       keyword_init: true
@@ -4370,6 +4576,7 @@ module Aws::CleanRooms
     #   <p>The pagination token that's used to fetch the next set of results.</p>
     #   @return [String]
     class ListConfiguredTablesOperationOutput < Struct.new(
+      nil,
       :configured_table_summaries,
       :next_token,
       keyword_init: true
@@ -4387,6 +4594,7 @@ module Aws::CleanRooms
     #   <p>The maximum size of the results that is returned per call. Service chooses a default if it has not been set. Service may return a nextToken even if the maximum results has not been met.</p>
     #   @return [Integer]
     class ListIdMappingTablesInput < Struct.new(
+      nil,
       :membership_identifier,
       :next_token,
       :max_results,
@@ -4402,6 +4610,7 @@ module Aws::CleanRooms
     #   <p>The token value provided to access the next page of results.</p>
     #   @return [String]
     class ListIdMappingTablesOutput < Struct.new(
+      nil,
       :id_mapping_table_summaries,
       :next_token,
       keyword_init: true
@@ -4419,6 +4628,7 @@ module Aws::CleanRooms
     #   <p>The maximum size of the results that is returned per call. Service chooses a default if it has not been set. Service may return a nextToken even if the maximum results has not been met.</p>
     #   @return [Integer]
     class ListIdNamespaceAssociationsInput < Struct.new(
+      nil,
       :membership_identifier,
       :next_token,
       :max_results,
@@ -4434,6 +4644,7 @@ module Aws::CleanRooms
     #   <p>The summary information of the ID namespace associations that you requested.</p>
     #   @return [Array<Types::IdNamespaceAssociationSummary>]
     class ListIdNamespaceAssociationsOutput < Struct.new(
+      nil,
       :next_token,
       :id_namespace_association_summaries,
       keyword_init: true
@@ -4451,6 +4662,7 @@ module Aws::CleanRooms
     #   <p>The maximum number of results that are returned for an API request call. The service chooses a default number if you don't set one. The service might return a `nextToken` even if the `maxResults` value has not been met.</p>
     #   @return [Integer]
     class ListMembersOperationInput < Struct.new(
+      nil,
       :collaboration_identifier,
       :next_token,
       :max_results,
@@ -4466,6 +4678,7 @@ module Aws::CleanRooms
     #   <p>The list of members returned by the ListMembers operation.</p>
     #   @return [Array<Types::MemberSummary>]
     class ListMembersOperationOutput < Struct.new(
+      nil,
       :next_token,
       :member_summaries,
       keyword_init: true
@@ -4483,6 +4696,7 @@ module Aws::CleanRooms
     #   <p>A filter which will return only memberships in the specified status.</p>
     #   @return [String]
     class ListMembershipsOperationInput < Struct.new(
+      nil,
       :next_token,
       :max_results,
       :status,
@@ -4498,6 +4712,7 @@ module Aws::CleanRooms
     #   <p>The list of memberships returned from the ListMemberships operation.</p>
     #   @return [Array<Types::MembershipSummary>]
     class ListMembershipsOperationOutput < Struct.new(
+      nil,
       :next_token,
       :membership_summaries,
       keyword_init: true
@@ -4515,6 +4730,7 @@ module Aws::CleanRooms
     #   <p>The maximum number of results that are returned for an API request call. The service chooses a default number if you don't set one. The service might return a `nextToken` even if the `maxResults` value has not been met.</p>
     #   @return [Integer]
     class ListPrivacyBudgetTemplatesInput < Struct.new(
+      nil,
       :membership_identifier,
       :next_token,
       :max_results,
@@ -4530,6 +4746,7 @@ module Aws::CleanRooms
     #   <p>An array that summarizes the privacy budget templates. The summary includes collaboration information, creation information, and privacy budget type.</p>
     #   @return [Array<Types::PrivacyBudgetTemplateSummary>]
     class ListPrivacyBudgetTemplatesOutput < Struct.new(
+      nil,
       :next_token,
       :privacy_budget_template_summaries,
       keyword_init: true
@@ -4553,6 +4770,7 @@ module Aws::CleanRooms
     #   <p>The Amazon Resource Name (ARN) of the access budget resource to filter privacy budgets by.</p>
     #   @return [String]
     class ListPrivacyBudgetsInput < Struct.new(
+      nil,
       :membership_identifier,
       :privacy_budget_type,
       :next_token,
@@ -4570,6 +4788,7 @@ module Aws::CleanRooms
     #   <p>The pagination token that's used to fetch the next set of results.</p>
     #   @return [String]
     class ListPrivacyBudgetsOutput < Struct.new(
+      nil,
       :privacy_budget_summaries,
       :next_token,
       keyword_init: true
@@ -4590,6 +4809,7 @@ module Aws::CleanRooms
     #   <p>The maximum number of results that are returned for an API request call. The service chooses a default number if you don't set one. The service might return a `nextToken` even if the `maxResults` value has not been met. </p>
     #   @return [Integer]
     class ListProtectedJobsInput < Struct.new(
+      nil,
       :membership_identifier,
       :status,
       :next_token,
@@ -4606,6 +4826,7 @@ module Aws::CleanRooms
     #   <p>A list of protected job summaries.</p>
     #   @return [Array<Types::ProtectedJobSummary>]
     class ListProtectedJobsOutput < Struct.new(
+      nil,
       :next_token,
       :protected_jobs,
       keyword_init: true
@@ -4626,6 +4847,7 @@ module Aws::CleanRooms
     #   <p>The maximum number of results that are returned for an API request call. The service chooses a default number if you don't set one. The service might return a `nextToken` even if the `maxResults` value has not been met. </p>
     #   @return [Integer]
     class ListProtectedQueriesOperationInput < Struct.new(
+      nil,
       :membership_identifier,
       :status,
       :next_token,
@@ -4642,6 +4864,7 @@ module Aws::CleanRooms
     #   <p>A list of protected queries.</p>
     #   @return [Array<Types::ProtectedQuerySummary>]
     class ListProtectedQueriesOperationOutput < Struct.new(
+      nil,
       :next_token,
       :protected_queries,
       keyword_init: true
@@ -4662,6 +4885,7 @@ module Aws::CleanRooms
     #   <p>The maximum number of results that are returned for an API request call. The service chooses a default number if you don't set one. The service might return a `nextToken` even if the `maxResults` value has not been met.</p>
     #   @return [Integer]
     class ListSchemasOperationInput < Struct.new(
+      nil,
       :collaboration_identifier,
       :schema_type,
       :next_token,
@@ -4678,6 +4902,7 @@ module Aws::CleanRooms
     #   <p>The pagination token that's used to fetch the next set of results.</p>
     #   @return [String]
     class ListSchemasOperationOutput < Struct.new(
+      nil,
       :schema_summaries,
       :next_token,
       keyword_init: true
@@ -4689,6 +4914,7 @@ module Aws::CleanRooms
     #   <p>The Amazon Resource Name (ARN) associated with the resource you want to list tags on.</p>
     #   @return [String]
     class ListTagsForResourceInput < Struct.new(
+      nil,
       :resource_arn,
       keyword_init: true
     )
@@ -4699,6 +4925,7 @@ module Aws::CleanRooms
     #   <p>A map of objects specifying each key name and value.</p>
     #   @return [Hash<String, String>]
     class ListTagsForResourceOutput < Struct.new(
+      nil,
       :tags,
       keyword_init: true
     )
@@ -4710,6 +4937,7 @@ module Aws::CleanRooms
     #   <p>The custom ML member abilities for a collaboration member. </p>
     #   @return [Array<String>]
     class MLMemberAbilities < Struct.new(
+      nil,
       :custom_ml_member_abilities,
       keyword_init: true
     )
@@ -4724,6 +4952,7 @@ module Aws::CleanRooms
     #   <p>The payment responsibilities accepted by the member for model inference.</p>
     #   @return [Types::ModelInferencePaymentConfig]
     class MLPaymentConfig < Struct.new(
+      nil,
       :model_training,
       :model_inference,
       keyword_init: true
@@ -4742,6 +4971,7 @@ module Aws::CleanRooms
     #   <p>Specifies the display name that will be shown for this member in the collaboration. While this field is required when inviting new members, it becomes optional when modifying abilities of existing collaboration members. </p>
     #   @return [String]
     class MemberChangeSpecification < Struct.new(
+      nil,
       :account_id,
       :member_abilities,
       :display_name,
@@ -4767,6 +4997,7 @@ module Aws::CleanRooms
     #   <p>The collaboration member's payment responsibilities set by the collaboration creator. </p> <p>If the collaboration creator hasn't speciﬁed anyone as the member paying for query compute costs, then the member who can query is the default payer.</p>
     #   @return [Types::PaymentConfiguration]
     class MemberSpecification < Struct.new(
+      nil,
       :account_id,
       :member_abilities,
       :ml_member_abilities,
@@ -4809,6 +5040,7 @@ module Aws::CleanRooms
     #   <p>The collaboration member's payment responsibilities set by the collaboration creator. </p>
     #   @return [Types::PaymentConfiguration]
     class MemberSummary < Struct.new(
+      nil,
       :account_id,
       :status,
       :display_name,
@@ -4877,6 +5109,7 @@ module Aws::CleanRooms
     #   <p>The payment responsibilities accepted by the collaboration member.</p>
     #   @return [Types::MembershipPaymentConfiguration]
     class Membership < Struct.new(
+      nil,
       :id,
       :arn,
       :collaboration_arn,
@@ -4904,6 +5137,7 @@ module Aws::CleanRooms
     #   <p>Indicates whether the collaboration member has accepted to pay for job compute costs (<code>TRUE</code>) or has not accepted to pay for query and job compute costs (<code>FALSE</code>).</p> <p>There is only one member who pays for queries and jobs. </p> <p>An error message is returned for the following reasons: </p> <ul> <li> <p>If you set the value to <code>FALSE</code> but you are responsible to pay for query and job compute costs. </p> </li> <li> <p>If you set the value to <code>TRUE</code> but you are not responsible to pay for query and job compute costs. </p> </li> </ul>
     #   @return [Boolean]
     class MembershipJobComputePaymentConfig < Struct.new(
+      nil,
       :is_responsible,
       keyword_init: true
     )
@@ -4918,6 +5152,7 @@ module Aws::CleanRooms
     #   <p>The payment responsibilities accepted by the member for model inference.</p>
     #   @return [Types::MembershipModelInferencePaymentConfig]
     class MembershipMLPaymentConfig < Struct.new(
+      nil,
       :model_training,
       :model_inference,
       keyword_init: true
@@ -4930,6 +5165,7 @@ module Aws::CleanRooms
     #   <p>Indicates whether the collaboration member has accepted to pay for model inference costs (<code>TRUE</code>) or has not accepted to pay for model inference costs (<code>FALSE</code>).</p> <p>If the collaboration creator has not specified anyone to pay for model inference costs, then the member who can query is the default payer. </p> <p>An error message is returned for the following reasons: </p> <ul> <li> <p>If you set the value to <code>FALSE</code> but you are responsible to pay for model inference costs. </p> </li> <li> <p>If you set the value to <code>TRUE</code> but you are not responsible to pay for model inference costs. </p> </li> </ul>
     #   @return [Boolean]
     class MembershipModelInferencePaymentConfig < Struct.new(
+      nil,
       :is_responsible,
       keyword_init: true
     )
@@ -4941,6 +5177,7 @@ module Aws::CleanRooms
     #   <p>Indicates whether the collaboration member has accepted to pay for model training costs (<code>TRUE</code>) or has not accepted to pay for model training costs (<code>FALSE</code>).</p> <p>If the collaboration creator has not specified anyone to pay for model training costs, then the member who can query is the default payer. </p> <p>An error message is returned for the following reasons: </p> <ul> <li> <p>If you set the value to <code>FALSE</code> but you are responsible to pay for model training costs. </p> </li> <li> <p>If you set the value to <code>TRUE</code> but you are not responsible to pay for model training costs. </p> </li> </ul>
     #   @return [Boolean]
     class MembershipModelTrainingPaymentConfig < Struct.new(
+      nil,
       :is_responsible,
       keyword_init: true
     )
@@ -4958,6 +5195,7 @@ module Aws::CleanRooms
     #   <p>The payment responsibilities accepted by the collaboration member for job compute costs.</p>
     #   @return [Types::MembershipJobComputePaymentConfig]
     class MembershipPaymentConfiguration < Struct.new(
+      nil,
       :query_compute,
       :machine_learning,
       :job_compute,
@@ -4989,6 +5227,7 @@ module Aws::CleanRooms
     #   <p>The unique ARN for an IAM role that is used by Clean Rooms to write protected job results to the result location, given by the member who can receive results.</p>
     #   @return [String]
     class MembershipProtectedJobResultConfiguration < Struct.new(
+      nil,
       :output_configuration,
       :role_arn,
       keyword_init: true
@@ -5019,6 +5258,7 @@ module Aws::CleanRooms
     #   <p>The unique ARN for an IAM role that is used by Clean Rooms to write protected query results to the result location, given by the member who can receive results.</p>
     #   @return [String]
     class MembershipProtectedQueryResultConfiguration < Struct.new(
+      nil,
       :output_configuration,
       :role_arn,
       keyword_init: true
@@ -5031,6 +5271,7 @@ module Aws::CleanRooms
     #   <p>Indicates whether the collaboration member has accepted to pay for query compute costs (<code>TRUE</code>) or has not accepted to pay for query compute costs (<code>FALSE</code>).</p> <p>If the collaboration creator has not specified anyone to pay for query compute costs, then the member who can query is the default payer. </p> <p>An error message is returned for the following reasons: </p> <ul> <li> <p>If you set the value to <code>FALSE</code> but you are responsible to pay for query compute costs. </p> </li> <li> <p>If you set the value to <code>TRUE</code> but you are not responsible to pay for query compute costs. </p> </li> </ul>
     #   @return [Boolean]
     class MembershipQueryComputePaymentConfig < Struct.new(
+      nil,
       :is_responsible,
       keyword_init: true
     )
@@ -5078,6 +5319,7 @@ module Aws::CleanRooms
     #   <p>The payment responsibilities accepted by the collaboration member.</p>
     #   @return [Types::MembershipPaymentConfiguration]
     class MembershipSummary < Struct.new(
+      nil,
       :id,
       :arn,
       :collaboration_arn,
@@ -5101,6 +5343,7 @@ module Aws::CleanRooms
     #   <p>Indicates whether the collaboration creator has configured the collaboration member to pay for model inference costs (<code>TRUE</code>) or has not configured the collaboration member to pay for model inference costs (<code>FALSE</code>).</p> <p>Exactly one member can be configured to pay for model inference costs. An error is returned if the collaboration creator sets a <code>TRUE</code> value for more than one member in the collaboration. </p> <p>If the collaboration creator hasn't specified anyone as the member paying for model inference costs, then the member who can query is the default payer. An error is returned if the collaboration creator sets a <code>FALSE</code> value for the member who can query.</p>
     #   @return [Boolean]
     class ModelInferencePaymentConfig < Struct.new(
+      nil,
       :is_responsible,
       keyword_init: true
     )
@@ -5112,6 +5355,7 @@ module Aws::CleanRooms
     #   <p>Indicates whether the collaboration creator has configured the collaboration member to pay for model training costs (<code>TRUE</code>) or has not configured the collaboration member to pay for model training costs (<code>FALSE</code>).</p> <p>Exactly one member can be configured to pay for model training costs. An error is returned if the collaboration creator sets a <code>TRUE</code> value for more than one member in the collaboration. </p> <p>If the collaboration creator hasn't specified anyone as the member paying for model training costs, then the member who can query is the default payer. An error is returned if the collaboration creator sets a <code>FALSE</code> value for the member who can query.</p>
     #   @return [Boolean]
     class ModelTrainingPaymentConfig < Struct.new(
+      nil,
       :is_responsible,
       keyword_init: true
     )
@@ -5129,6 +5373,7 @@ module Aws::CleanRooms
     #   <p> The compute configuration for the job.</p>
     #   @return [Types::JobComputePaymentConfig]
     class PaymentConfiguration < Struct.new(
+      nil,
       :query_compute,
       :machine_learning,
       :job_compute,
@@ -5147,6 +5392,7 @@ module Aws::CleanRooms
     #   <p>The job type of the rule-based ID mapping job. Valid values include:</p> <p> <code>INCREMENTAL</code>: Processes only new or changed data since the last job run. This is the default job type if the ID mapping workflow was created in Entity Resolution with <code>incrementalRunConfig</code> specified.</p> <p> <code>BATCH</code>: Processes all data from the input source, regardless of previous job runs. This is the default job type if the ID mapping workflow was created in Entity Resolution but <code>incrementalRunConfig</code> wasn't specified.</p> <p> <code>DELETE_ONLY</code>: Processes only deletion requests from <code>BatchDeleteUniqueId</code>, which is set in Entity Resolution.</p> <p>For more information about <code>incrementalRunConfig</code> and <code>BatchDeleteUniqueId</code>, see the <a href="https://docs.aws.amazon.com/entityresolution/latest/apireference/Welcome.html">Entity Resolution API Reference</a>.</p>
     #   @return [String]
     class PopulateIdMappingTableInput < Struct.new(
+      nil,
       :id_mapping_table_identifier,
       :membership_identifier,
       :job_type,
@@ -5159,6 +5405,7 @@ module Aws::CleanRooms
     #   <p>The unique identifier of the mapping job that will populate the ID mapping table.</p>
     #   @return [String]
     class PopulateIdMappingTableOutput < Struct.new(
+      nil,
       :id_mapping_job_id,
       keyword_init: true
     )
@@ -5172,6 +5419,7 @@ module Aws::CleanRooms
     #   <p>Specifies the desired epsilon and noise parameters to preview.</p>
     #   @return [Types::PreviewPrivacyImpactParametersInput]
     class PreviewPrivacyImpactInput < Struct.new(
+      nil,
       :membership_identifier,
       :parameters,
       keyword_init: true
@@ -5183,6 +5431,7 @@ module Aws::CleanRooms
     #   <p>An estimate of the number of aggregation functions that the member who can query can run given the epsilon and noise parameters. This does not change the privacy budget.</p>
     #   @return [Types::PrivacyImpact]
     class PreviewPrivacyImpactOutput < Struct.new(
+      nil,
       :privacy_impact,
       keyword_init: true
     )
@@ -5259,6 +5508,7 @@ module Aws::CleanRooms
     #   <p>The provided privacy budget.</p>
     #   @return [Types::PrivacyBudget]
     class PrivacyBudgetSummary < Struct.new(
+      nil,
       :id,
       :privacy_budget_template_id,
       :privacy_budget_template_arn,
@@ -5310,6 +5560,7 @@ module Aws::CleanRooms
     #   <p>Specifies the epsilon and noise parameters for the privacy budget template.</p>
     #   @return [Types::PrivacyBudgetTemplateParametersOutput]
     class PrivacyBudgetTemplate < Struct.new(
+      nil,
       :id,
       :arn,
       :membership_id,
@@ -5395,6 +5646,7 @@ module Aws::CleanRooms
     #   <p>The most recent time at which the privacy budget template was updated.</p>
     #   @return [Time]
     class PrivacyBudgetTemplateSummary < Struct.new(
+      nil,
       :id,
       :arn,
       :membership_id,
@@ -5479,6 +5731,7 @@ module Aws::CleanRooms
     #   <p>The compute configuration for the protected job.</p>
     #   @return [Types::ProtectedJobComputeConfiguration]
     class ProtectedJob < Struct.new(
+      nil,
       :id,
       :membership_id,
       :membership_arn,
@@ -5530,6 +5783,7 @@ module Aws::CleanRooms
     #   <p> The receiver account IDs.</p>
     #   @return [Array<String>]
     class ProtectedJobDirectAnalysisConfigurationDetails < Struct.new(
+      nil,
       :receiver_account_ids,
       keyword_init: true
     )
@@ -5544,6 +5798,7 @@ module Aws::CleanRooms
     #   <p> The error code for the protected job.</p>
     #   @return [String]
     class ProtectedJobError < Struct.new(
+      nil,
       :message,
       :code,
       keyword_init: true
@@ -5556,6 +5811,7 @@ module Aws::CleanRooms
     #   <p> The account ID.</p>
     #   @return [String]
     class ProtectedJobMemberOutputConfigurationInput < Struct.new(
+      nil,
       :account_id,
       keyword_init: true
     )
@@ -5567,6 +5823,7 @@ module Aws::CleanRooms
     #   <p> The account ID.</p>
     #   @return [String]
     class ProtectedJobMemberOutputConfigurationOutput < Struct.new(
+      nil,
       :account_id,
       keyword_init: true
     )
@@ -5633,6 +5890,7 @@ module Aws::CleanRooms
     #   <p> The ARN of the analysis template.</p>
     #   @return [String]
     class ProtectedJobParameters < Struct.new(
+      nil,
       :analysis_template_arn,
       keyword_init: true
     )
@@ -5647,6 +5905,7 @@ module Aws::CleanRooms
     #   <p> The configuration details for the protected job receiver.</p>
     #   @return [Types::ProtectedJobConfigurationDetails]
     class ProtectedJobReceiverConfiguration < Struct.new(
+      nil,
       :analysis_type,
       :configuration_details,
       keyword_init: true
@@ -5659,6 +5918,7 @@ module Aws::CleanRooms
     #   <p> The output of the protected job.</p>
     #   @return [Types::ProtectedJobOutput]
     class ProtectedJobResult < Struct.new(
+      nil,
       :output,
       keyword_init: true
     )
@@ -5670,6 +5930,7 @@ module Aws::CleanRooms
     #   <p> The output configuration for a protected job result.</p>
     #   @return [Types::ProtectedJobOutputConfigurationInput]
     class ProtectedJobResultConfigurationInput < Struct.new(
+      nil,
       :output_configuration,
       keyword_init: true
     )
@@ -5681,6 +5942,7 @@ module Aws::CleanRooms
     #   <p>The output configuration.</p>
     #   @return [Types::ProtectedJobOutputConfigurationOutput]
     class ProtectedJobResultConfigurationOutput < Struct.new(
+      nil,
       :output_configuration,
       keyword_init: true
     )
@@ -5692,6 +5954,7 @@ module Aws::CleanRooms
     #   <p> The S3 location for the protected job output.</p>
     #   @return [String]
     class ProtectedJobS3Output < Struct.new(
+      nil,
       :location,
       keyword_init: true
     )
@@ -5706,6 +5969,7 @@ module Aws::CleanRooms
     #   <p>The S3 prefix to unload the protected job results.</p>
     #   @return [String]
     class ProtectedJobS3OutputConfigurationInput < Struct.new(
+      nil,
       :bucket,
       :key_prefix,
       keyword_init: true
@@ -5721,6 +5985,7 @@ module Aws::CleanRooms
     #   <p>The S3 prefix to unload the protected job results.</p>
     #   @return [String]
     class ProtectedJobS3OutputConfigurationOutput < Struct.new(
+      nil,
       :bucket,
       :key_prefix,
       keyword_init: true
@@ -5733,6 +5998,7 @@ module Aws::CleanRooms
     #   <p>The Amazon Web Services account ID of the member in the collaboration who can receive results from analyses.</p>
     #   @return [String]
     class ProtectedJobSingleMemberOutput < Struct.new(
+      nil,
       :account_id,
       keyword_init: true
     )
@@ -5747,6 +6013,7 @@ module Aws::CleanRooms
     #   <p> The billed resource utilization for the protected job.</p>
     #   @return [Types::BilledJobResourceUtilization]
     class ProtectedJobStatistics < Struct.new(
+      nil,
       :total_duration_in_millis,
       :billed_resource_utilization,
       keyword_init: true
@@ -5774,6 +6041,7 @@ module Aws::CleanRooms
     #   <p> The receiver configurations for the protected job.</p>
     #   @return [Array<Types::ProtectedJobReceiverConfiguration>]
     class ProtectedJobSummary < Struct.new(
+      nil,
       :id,
       :membership_id,
       :membership_arn,
@@ -5798,6 +6066,7 @@ module Aws::CleanRooms
     #   <p>The number of workers for a PySpark job.</p>
     #   @return [Integer]
     class ProtectedJobWorkerComputeConfiguration < Struct.new(
+      nil,
       :type,
       :number,
       keyword_init: true
@@ -5843,6 +6112,7 @@ module Aws::CleanRooms
     #   <p> The compute configuration for the protected query.</p>
     #   @return [Types::ComputeConfiguration]
     class ProtectedQuery < Struct.new(
+      nil,
       :id,
       :membership_id,
       :membership_arn,
@@ -5868,6 +6138,7 @@ module Aws::CleanRooms
     #   <p> Contains the output results for each member location specified in the distribute output configuration. Each entry provides details about the result distribution to a specific collaboration member. </p>
     #   @return [Array<Types::ProtectedQuerySingleMemberOutput>]
     class ProtectedQueryDistributeOutput < Struct.new(
+      nil,
       :s3,
       :member_list,
       keyword_init: true
@@ -5880,6 +6151,7 @@ module Aws::CleanRooms
     #   <p> A list of locations where you want to distribute the protected query results. Each location must specify either an S3 destination or a collaboration member destination.</p> <important> <p>You can't specify more than one S3 location.</p> <p>You can't specify the query runner's account as a member location.</p> <p>You must include either an S3 or member output configuration for each location, but not both.</p> </important>
     #   @return [Array<Types::ProtectedQueryDistributeOutputConfigurationLocation>]
     class ProtectedQueryDistributeOutputConfiguration < Struct.new(
+      nil,
       :locations,
       keyword_init: true
     )
@@ -5914,6 +6186,7 @@ module Aws::CleanRooms
     #   <p>An error code for the error.</p>
     #   @return [String]
     class ProtectedQueryError < Struct.new(
+      nil,
       :message,
       :code,
       keyword_init: true
@@ -5926,6 +6199,7 @@ module Aws::CleanRooms
     #   <p>The unique identifier for the account.</p>
     #   @return [String]
     class ProtectedQueryMemberOutputConfiguration < Struct.new(
+      nil,
       :account_id,
       keyword_init: true
     )
@@ -5987,6 +6261,7 @@ module Aws::CleanRooms
     #   <p>The output of the protected query.</p>
     #   @return [Types::ProtectedQueryOutput]
     class ProtectedQueryResult < Struct.new(
+      nil,
       :output,
       keyword_init: true
     )
@@ -5998,6 +6273,7 @@ module Aws::CleanRooms
     #   <p>Configuration for protected query results.</p>
     #   @return [Types::ProtectedQueryOutputConfiguration]
     class ProtectedQueryResultConfiguration < Struct.new(
+      nil,
       :output_configuration,
       keyword_init: true
     )
@@ -6009,6 +6285,7 @@ module Aws::CleanRooms
     #   <p>The S3 location of the result.</p>
     #   @return [String]
     class ProtectedQueryS3Output < Struct.new(
+      nil,
       :location,
       keyword_init: true
     )
@@ -6029,6 +6306,7 @@ module Aws::CleanRooms
     #   <p>Indicates whether files should be output as a single file (<code>TRUE</code>) or output as multiple files (<code>FALSE</code>). This parameter is only supported for analyses with the Spark analytics engine.</p>
     #   @return [Boolean]
     class ProtectedQueryS3OutputConfiguration < Struct.new(
+      nil,
       :result_format,
       :bucket,
       :key_prefix,
@@ -6050,6 +6328,7 @@ module Aws::CleanRooms
     #   <p>The protected query SQL parameters.</p>
     #   @return [Hash<String, String>]
     class ProtectedQuerySQLParameters < Struct.new(
+      nil,
       :query_string,
       :analysis_template_arn,
       :parameters,
@@ -6063,6 +6342,7 @@ module Aws::CleanRooms
     #   <p>The Amazon Web Services account ID of the member in the collaboration who can receive results for the query.</p>
     #   @return [String]
     class ProtectedQuerySingleMemberOutput < Struct.new(
+      nil,
       :account_id,
       keyword_init: true
     )
@@ -6077,6 +6357,7 @@ module Aws::CleanRooms
     #   <p> The billed resource utilization.</p>
     #   @return [Types::BilledResourceUtilization]
     class ProtectedQueryStatistics < Struct.new(
+      nil,
       :total_duration_in_millis,
       :billed_resource_utilization,
       keyword_init: true
@@ -6104,6 +6385,7 @@ module Aws::CleanRooms
     #   <p> The receiver configuration.</p>
     #   @return [Array<Types::ReceiverConfiguration>]
     class ProtectedQuerySummary < Struct.new(
+      nil,
       :id,
       :membership_id,
       :membership_arn,
@@ -6125,6 +6407,7 @@ module Aws::CleanRooms
     #   <p>Indicates whether the collaboration creator has configured the collaboration member to pay for query compute costs (<code>TRUE</code>) or has not configured the collaboration member to pay for query compute costs (<code>FALSE</code>).</p> <p>Exactly one member can be configured to pay for query compute costs. An error is returned if the collaboration creator sets a <code>TRUE</code> value for more than one member in the collaboration. </p> <p>If the collaboration creator hasn't specified anyone as the member paying for query compute costs, then the member who can query is the default payer. An error is returned if the collaboration creator sets a <code>FALSE</code> value for the member who can query.</p>
     #   @return [Boolean]
     class QueryComputePaymentConfig < Struct.new(
+      nil,
       :is_responsible,
       keyword_init: true
     )
@@ -6151,6 +6434,7 @@ module Aws::CleanRooms
     #   <p>The columns that are required to overlap.</p>
     #   @return [Array<String>]
     class QueryConstraintRequireOverlap < Struct.new(
+      nil,
       :columns,
       keyword_init: true
     )
@@ -6165,6 +6449,7 @@ module Aws::CleanRooms
     #   <p> The configuration details of the receiver configuration.</p>
     #   @return [Types::ConfigurationDetails]
     class ReceiverConfiguration < Struct.new(
+      nil,
       :analysis_type,
       :configuration_details,
       keyword_init: true
@@ -6182,6 +6467,7 @@ module Aws::CleanRooms
     #   <p>The type of the missing resource.</p>
     #   @return [String]
     class ResourceNotFoundException < Struct.new(
+      nil,
       :message,
       :resource_id,
       :resource_type,
@@ -6198,6 +6484,7 @@ module Aws::CleanRooms
     #   <p> The object key.</p>
     #   @return [String]
     class S3Location < Struct.new(
+      nil,
       :bucket,
       :key,
       keyword_init: true
@@ -6255,6 +6542,7 @@ module Aws::CleanRooms
     #   <p>The schema type properties.</p>
     #   @return [Types::SchemaTypeProperties]
     class Schema < Struct.new(
+      nil,
       :columns,
       :partition_keys,
       :analysis_rule_types,
@@ -6289,6 +6577,7 @@ module Aws::CleanRooms
     #   <p>The type of analysis rule schema that you are requesting.</p>
     #   @return [String]
     class SchemaAnalysisRuleRequest < Struct.new(
+      nil,
       :name,
       :type,
       keyword_init: true
@@ -6313,6 +6602,7 @@ module Aws::CleanRooms
     #   <p>The type of analysis that can be performed on the schema.</p> <p>A schema can have an <code>analysisType</code> of <code>DIRECT_ANALYSIS</code>, <code>ADDITIONAL_ANALYSIS_FOR_AUDIENCE_GENERATION</code>, or both.</p>
     #   @return [String]
     class SchemaStatusDetail < Struct.new(
+      nil,
       :status,
       :reasons,
       :analysis_rule_type,
@@ -6336,6 +6626,7 @@ module Aws::CleanRooms
     #   <p>An explanation of the schema status reason code.</p>
     #   @return [String]
     class SchemaStatusReason < Struct.new(
+      nil,
       :code,
       :message,
       keyword_init: true
@@ -6378,6 +6669,7 @@ module Aws::CleanRooms
     #   <p> The selected analysis methods for the schema.</p>
     #   @return [Array<String>]
     class SchemaSummary < Struct.new(
+      nil,
       :name,
       :type,
       :creator_account_id,
@@ -6419,6 +6711,7 @@ module Aws::CleanRooms
     #   <p>The value of the quota.</p>
     #   @return [Float]
     class ServiceQuotaExceededException < Struct.new(
+      nil,
       :message,
       :quota_name,
       :quota_value,
@@ -6447,6 +6740,7 @@ module Aws::CleanRooms
     #   <p> The schema of the Snowflake table.</p>
     #   @return [Types::SnowflakeTableSchema]
     class SnowflakeTableReference < Struct.new(
+      nil,
       :secret_arn,
       :account_identifier,
       :database_name,
@@ -6481,6 +6775,7 @@ module Aws::CleanRooms
     #   <p> The column's data type. Supported data types: <code>ARRAY</code>, <code>BIGINT</code>, <code>BOOLEAN</code>, <code>CHAR</code>, <code>DATE</code>, <code>DECIMAL</code>, <code>DOUBLE</code>, <code>DOUBLE PRECISION</code>, <code>FLOAT</code>, <code>FLOAT4</code>, <code>INT</code>, <code>INTEGER</code>, <code>MAP</code>, <code>NUMERIC</code>, <code>NUMBER</code>, <code>REAL</code>, <code>SMALLINT</code>, <code>STRING</code>, <code>TIMESTAMP</code>, <code>TIMESTAMP_LTZ</code>, <code>TIMESTAMP_NTZ</code>, <code>DATETIME</code>, <code>TINYINT</code>, <code>VARCHAR</code>, <code>TEXT</code>, <code>CHARACTER</code>.</p>
     #   @return [String]
     class SnowflakeTableSchemaV1 < Struct.new(
+      nil,
       :column_name,
       :column_type,
       keyword_init: true
@@ -6504,6 +6799,7 @@ module Aws::CleanRooms
     #   <p>The compute configuration for the protected job.</p>
     #   @return [Types::ProtectedJobComputeConfiguration]
     class StartProtectedJobInput < Struct.new(
+      nil,
       :type,
       :membership_identifier,
       :job_parameters,
@@ -6518,6 +6814,7 @@ module Aws::CleanRooms
     #   <p> The protected job.</p>
     #   @return [Types::ProtectedJob]
     class StartProtectedJobOutput < Struct.new(
+      nil,
       :protected_job,
       keyword_init: true
     )
@@ -6540,6 +6837,7 @@ module Aws::CleanRooms
     #   <p> The compute configuration for the protected query.</p>
     #   @return [Types::ComputeConfiguration]
     class StartProtectedQueryOperationInput < Struct.new(
+      nil,
       :type,
       :membership_identifier,
       :sql_parameters,
@@ -6554,6 +6852,7 @@ module Aws::CleanRooms
     #   <p>The protected query.</p>
     #   @return [Types::ProtectedQuery]
     class StartProtectedQueryOperationOutput < Struct.new(
+      nil,
       :protected_query,
       keyword_init: true
     )
@@ -6592,6 +6891,7 @@ module Aws::CleanRooms
     #   <p>A map of objects specifying each key name and value.</p>
     #   @return [Hash<String, String>]
     class TagResourceInput < Struct.new(
+      nil,
       :resource_arn,
       :tags,
       keyword_init: true
@@ -6600,6 +6900,7 @@ module Aws::CleanRooms
     end
 
     class TagResourceOutput < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -6609,6 +6910,7 @@ module Aws::CleanRooms
     # @!attribute message
     #   @return [String]
     class ThrottlingException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -6622,6 +6924,7 @@ module Aws::CleanRooms
     #   <p>A list of key names of tags to be removed.</p>
     #   @return [Array<String>]
     class UntagResourceInput < Struct.new(
+      nil,
       :resource_arn,
       :tag_keys,
       keyword_init: true
@@ -6630,6 +6933,7 @@ module Aws::CleanRooms
     end
 
     class UntagResourceOutput < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -6645,6 +6949,7 @@ module Aws::CleanRooms
     #   <p>A new description for the analysis template.</p>
     #   @return [String]
     class UpdateAnalysisTemplateOperationInput < Struct.new(
+      nil,
       :membership_identifier,
       :analysis_template_identifier,
       :description,
@@ -6657,6 +6962,7 @@ module Aws::CleanRooms
     #   <p>The analysis template.</p>
     #   @return [Types::AnalysisTemplate]
     class UpdateAnalysisTemplateOperationOutput < Struct.new(
+      nil,
       :analysis_template,
       keyword_init: true
     )
@@ -6676,6 +6982,7 @@ module Aws::CleanRooms
     #   <p>The analytics engine.</p> <note> <p>After July 16, 2025, the <code>CLEAN_ROOMS_SQL</code> parameter will no longer be available. </p> </note>
     #   @return [String]
     class UpdateCollaborationOperationInput < Struct.new(
+      nil,
       :collaboration_identifier,
       :name,
       :description,
@@ -6689,6 +6996,7 @@ module Aws::CleanRooms
     #   <p>The entire collaboration that has been updated.</p>
     #   @return [Types::Collaboration]
     class UpdateCollaborationOperationOutput < Struct.new(
+      nil,
       :collaboration,
       keyword_init: true
     )
@@ -6708,6 +7016,7 @@ module Aws::CleanRooms
     #   <p>A new name for the configured audience model association.</p>
     #   @return [String]
     class UpdateConfiguredAudienceModelAssociationInput < Struct.new(
+      nil,
       :configured_audience_model_association_identifier,
       :membership_identifier,
       :description,
@@ -6721,6 +7030,7 @@ module Aws::CleanRooms
     #   <p>Details about the configured audience model association that you updated.</p>
     #   @return [Types::ConfiguredAudienceModelAssociation]
     class UpdateConfiguredAudienceModelAssociationOutput < Struct.new(
+      nil,
       :configured_audience_model_association,
       keyword_init: true
     )
@@ -6737,6 +7047,7 @@ module Aws::CleanRooms
     #   <p>The new analysis rule policy for the configured table analysis rule.</p>
     #   @return [Types::ConfiguredTableAnalysisRulePolicy]
     class UpdateConfiguredTableAnalysisRuleOperationInput < Struct.new(
+      nil,
       :configured_table_identifier,
       :analysis_rule_type,
       :analysis_rule_policy,
@@ -6749,6 +7060,7 @@ module Aws::CleanRooms
     #   <p>The entire updated analysis rule.</p>
     #   @return [Types::ConfiguredTableAnalysisRule]
     class UpdateConfiguredTableAnalysisRuleOperationOutput < Struct.new(
+      nil,
       :analysis_rule,
       keyword_init: true
     )
@@ -6768,6 +7080,7 @@ module Aws::CleanRooms
     #   <p> The updated analysis rule policy for the conﬁgured table association.</p>
     #   @return [Types::ConfiguredTableAssociationAnalysisRulePolicy]
     class UpdateConfiguredTableAssociationAnalysisRuleInput < Struct.new(
+      nil,
       :membership_identifier,
       :configured_table_association_identifier,
       :analysis_rule_type,
@@ -6781,6 +7094,7 @@ module Aws::CleanRooms
     #   <p> The updated analysis rule for the conﬁgured table association. In the console, the <code>ConfiguredTableAssociationAnalysisRule</code> is referred to as the <i>collaboration analysis rule</i>.</p>
     #   @return [Types::ConfiguredTableAssociationAnalysisRule]
     class UpdateConfiguredTableAssociationAnalysisRuleOutput < Struct.new(
+      nil,
       :analysis_rule,
       keyword_init: true
     )
@@ -6800,6 +7114,7 @@ module Aws::CleanRooms
     #   <p>The service will assume this role to access catalog metadata and query the table.</p>
     #   @return [String]
     class UpdateConfiguredTableAssociationOperationInput < Struct.new(
+      nil,
       :configured_table_association_identifier,
       :membership_identifier,
       :description,
@@ -6813,6 +7128,7 @@ module Aws::CleanRooms
     #   <p>The entire updated configured table association.</p>
     #   @return [Types::ConfiguredTableAssociation]
     class UpdateConfiguredTableAssociationOperationOutput < Struct.new(
+      nil,
       :configured_table_association,
       keyword_init: true
     )
@@ -6841,6 +7157,7 @@ module Aws::CleanRooms
     #   <p> The selected analysis methods for the table configuration update.</p>
     #   @return [Array<String>]
     class UpdateConfiguredTableOperationInput < Struct.new(
+      nil,
       :configured_table_identifier,
       :name,
       :description,
@@ -6857,6 +7174,7 @@ module Aws::CleanRooms
     #   <p>The updated configured table.</p>
     #   @return [Types::ConfiguredTable]
     class UpdateConfiguredTableOperationOutput < Struct.new(
+      nil,
       :configured_table,
       keyword_init: true
     )
@@ -6876,6 +7194,7 @@ module Aws::CleanRooms
     #   <p>The Amazon Resource Name (ARN) of the Amazon Web Services KMS key.</p>
     #   @return [String]
     class UpdateIdMappingTableInput < Struct.new(
+      nil,
       :id_mapping_table_identifier,
       :membership_identifier,
       :description,
@@ -6889,6 +7208,7 @@ module Aws::CleanRooms
     #   <p>The updated ID mapping table.</p>
     #   @return [Types::IdMappingTable]
     class UpdateIdMappingTableOutput < Struct.new(
+      nil,
       :id_mapping_table,
       keyword_init: true
     )
@@ -6911,6 +7231,7 @@ module Aws::CleanRooms
     #   <p>The configuration settings for the ID mapping table.</p>
     #   @return [Types::IdMappingConfig]
     class UpdateIdNamespaceAssociationInput < Struct.new(
+      nil,
       :id_namespace_association_identifier,
       :membership_identifier,
       :name,
@@ -6925,6 +7246,7 @@ module Aws::CleanRooms
     #   <p>The updated ID namespace association.</p>
     #   @return [Types::IdNamespaceAssociation]
     class UpdateIdNamespaceAssociationOutput < Struct.new(
+      nil,
       :id_namespace_association,
       keyword_init: true
     )
@@ -6947,6 +7269,7 @@ module Aws::CleanRooms
     #   <p> The default job result configuration.</p>
     #   @return [Types::MembershipProtectedJobResultConfiguration]
     class UpdateMembershipOperationInput < Struct.new(
+      nil,
       :membership_identifier,
       :query_log_status,
       :job_log_status,
@@ -6961,6 +7284,7 @@ module Aws::CleanRooms
     #   <p>The membership object.</p>
     #   @return [Types::Membership]
     class UpdateMembershipOperationOutput < Struct.new(
+      nil,
       :membership,
       keyword_init: true
     )
@@ -6980,6 +7304,7 @@ module Aws::CleanRooms
     #   <p>Specifies the epsilon and noise parameters for the privacy budget template.</p>
     #   @return [Types::PrivacyBudgetTemplateUpdateParameters]
     class UpdatePrivacyBudgetTemplateInput < Struct.new(
+      nil,
       :membership_identifier,
       :privacy_budget_template_identifier,
       :privacy_budget_type,
@@ -6993,6 +7318,7 @@ module Aws::CleanRooms
     #   <p>Summary of the privacy budget template.</p>
     #   @return [Types::PrivacyBudgetTemplate]
     class UpdatePrivacyBudgetTemplateOutput < Struct.new(
+      nil,
       :privacy_budget_template,
       keyword_init: true
     )
@@ -7009,6 +7335,7 @@ module Aws::CleanRooms
     #   <p>The target status of a protected job. Used to update the execution status of a currently running job.</p>
     #   @return [String]
     class UpdateProtectedJobInput < Struct.new(
+      nil,
       :membership_identifier,
       :protected_job_identifier,
       :target_status,
@@ -7021,6 +7348,7 @@ module Aws::CleanRooms
     #   <p>The protected job output.</p>
     #   @return [Types::ProtectedJob]
     class UpdateProtectedJobOutput < Struct.new(
+      nil,
       :protected_job,
       keyword_init: true
     )
@@ -7037,6 +7365,7 @@ module Aws::CleanRooms
     #   <p>The target status of a query. Used to update the execution status of a currently running query.</p>
     #   @return [String]
     class UpdateProtectedQueryOperationInput < Struct.new(
+      nil,
       :membership_identifier,
       :protected_query_identifier,
       :target_status,
@@ -7049,6 +7378,7 @@ module Aws::CleanRooms
     #   <p>The protected query output.</p>
     #   @return [Types::ProtectedQuery]
     class UpdateProtectedQueryOperationOutput < Struct.new(
+      nil,
       :protected_query,
       keyword_init: true
     )
@@ -7065,6 +7395,7 @@ module Aws::CleanRooms
     #   <p>Validation errors for specific input parameters.</p>
     #   @return [Array<Types::ValidationExceptionField>]
     class ValidationException < Struct.new(
+      nil,
       :message,
       :reason,
       :field_list,
@@ -7081,6 +7412,7 @@ module Aws::CleanRooms
     #   <p>A message for the input validation error.</p>
     #   @return [String]
     class ValidationExceptionField < Struct.new(
+      nil,
       :name,
       :message,
       keyword_init: true
@@ -7096,6 +7428,7 @@ module Aws::CleanRooms
     #   <p> The number of workers.</p> <p>SQL queries support a minimum value of 2 and a maximum value of 400. </p> <p>PySpark jobs support a minimum value of 4 and a maximum value of 128.</p>
     #   @return [Integer]
     class WorkerComputeConfiguration < Struct.new(
+      nil,
       :type,
       :number,
       keyword_init: true

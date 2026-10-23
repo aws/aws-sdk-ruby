@@ -10,6 +10,7 @@ module Aws::SSMQuickSetup
     # @!attribute message
     #   @return [String]
     class AccessDeniedException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -39,6 +40,7 @@ module Aws::SSMQuickSetup
     #   <p>The ID of the configuration definition.</p>
     #   @return [String]
     class ConfigurationDefinition < Struct.new(
+      nil,
       :type,
       :parameters,
       :type_version,
@@ -1449,6 +1451,7 @@ module Aws::SSMQuickSetup
     #                     deployments.</p>
     #   @return [String]
     class ConfigurationDefinitionInput < Struct.new(
+      nil,
       :type,
       :parameters,
       :type_version,
@@ -1474,6 +1477,7 @@ module Aws::SSMQuickSetup
     #   <p>The common parameters and values for the configuration definition.</p>
     #   @return [Hash<String, String>]
     class ConfigurationDefinitionSummary < Struct.new(
+      nil,
       :id,
       :type,
       :type_version,
@@ -1503,6 +1507,7 @@ module Aws::SSMQuickSetup
     #   <p>A summary of the Quick Setup configuration definition.</p>
     #   @return [Array<Types::ConfigurationDefinitionSummary>]
     class ConfigurationManagerSummary < Struct.new(
+      nil,
       :manager_arn,
       :description,
       :name,
@@ -1546,6 +1551,7 @@ module Aws::SSMQuickSetup
     #                     statuses, association statuses, drift statuses, health checks, and more.</p>
     #   @return [Array<Types::StatusSummary>]
     class ConfigurationSummary < Struct.new(
+      nil,
       :id,
       :manager_arn,
       :configuration_definition_id,
@@ -1565,6 +1571,7 @@ module Aws::SSMQuickSetup
     # @!attribute message
     #   @return [String]
     class ConflictException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -1585,6 +1592,7 @@ module Aws::SSMQuickSetup
     #   <p>Key-value pairs of metadata to assign to the configuration manager.</p>
     #   @return [Hash<String, String>]
     class CreateConfigurationManagerInput < Struct.new(
+      nil,
       :name,
       :description,
       :configuration_definitions,
@@ -1598,6 +1606,7 @@ module Aws::SSMQuickSetup
     #   <p>The ARN for the newly created configuration manager.</p>
     #   @return [String]
     class CreateConfigurationManagerOutput < Struct.new(
+      nil,
       :manager_arn,
       keyword_init: true
     )
@@ -1608,6 +1617,7 @@ module Aws::SSMQuickSetup
     #   <p>The ID of the configuration manager.</p>
     #   @return [String]
     class DeleteConfigurationManagerInput < Struct.new(
+      nil,
       :manager_arn,
       keyword_init: true
     )
@@ -1622,6 +1632,7 @@ module Aws::SSMQuickSetup
     #   <p>The values for the filter keys.</p>
     #   @return [Array<String>]
     class Filter < Struct.new(
+      nil,
       :key,
       :values,
       keyword_init: true
@@ -1633,6 +1644,7 @@ module Aws::SSMQuickSetup
     #   <p>A service generated identifier for the configuration.</p>
     #   @return [String]
     class GetConfigurationInput < Struct.new(
+      nil,
       :configuration_id,
       keyword_init: true
     )
@@ -1643,6 +1655,7 @@ module Aws::SSMQuickSetup
     #   <p>The ARN of the configuration manager.</p>
     #   @return [String]
     class GetConfigurationManagerInput < Struct.new(
+      nil,
       :manager_arn,
       keyword_init: true
     )
@@ -1675,6 +1688,7 @@ module Aws::SSMQuickSetup
     #   <p>Key-value pairs of metadata to assign to the configuration manager.</p>
     #   @return [Hash<String, String>]
     class GetConfigurationManagerOutput < Struct.new(
+      nil,
       :manager_arn,
       :description,
       :name,
@@ -1723,6 +1737,7 @@ module Aws::SSMQuickSetup
     #   <p>The parameters for the configuration definition type.</p>
     #   @return [Hash<String, String>]
     class GetConfigurationOutput < Struct.new(
+      nil,
       :id,
       :manager_arn,
       :configuration_definition_id,
@@ -1743,6 +1758,7 @@ module Aws::SSMQuickSetup
     #   <p>Returns details about the settings for Quick Setup in the requesting Amazon Web Services account and Amazon Web Services Region.</p>
     #   @return [Types::ServiceSettings]
     class GetServiceSettingsOutput < Struct.new(
+      nil,
       :service_settings,
       keyword_init: true
     )
@@ -1753,6 +1769,7 @@ module Aws::SSMQuickSetup
     # @!attribute message
     #   @return [String]
     class InternalServerException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -1770,6 +1787,7 @@ module Aws::SSMQuickSetup
     #   <p>Filters the results returned by the request.</p>
     #   @return [Array<Types::Filter>]
     class ListConfigurationManagersInput < Struct.new(
+      nil,
       :starting_token,
       :max_items,
       :filters,
@@ -1786,6 +1804,7 @@ module Aws::SSMQuickSetup
     #                     are no additional operations to return, the string is empty.</p>
     #   @return [String]
     class ListConfigurationManagersOutput < Struct.new(
+      nil,
       :configuration_managers_list,
       :next_token,
       keyword_init: true
@@ -1810,6 +1829,7 @@ module Aws::SSMQuickSetup
     #   <p>The ID of the configuration definition.</p>
     #   @return [String]
     class ListConfigurationsInput < Struct.new(
+      nil,
       :starting_token,
       :max_items,
       :filters,
@@ -1828,6 +1848,7 @@ module Aws::SSMQuickSetup
     #                     return, the string is empty.</p>
     #   @return [String]
     class ListConfigurationsOutput < Struct.new(
+      nil,
       :configurations_list,
       :next_token,
       keyword_init: true
@@ -1839,6 +1860,7 @@ module Aws::SSMQuickSetup
     #   <p>An array of Quick Setup types.</p>
     #   @return [Array<Types::QuickSetupTypeOutput>]
     class ListQuickSetupTypesOutput < Struct.new(
+      nil,
       :quick_setup_type_list,
       keyword_init: true
     )
@@ -1849,6 +1871,7 @@ module Aws::SSMQuickSetup
     #   <p>The ARN of the resource the tag is assigned to.</p>
     #   @return [String]
     class ListTagsForResourceRequest < Struct.new(
+      nil,
       :resource_arn,
       keyword_init: true
     )
@@ -1859,6 +1882,7 @@ module Aws::SSMQuickSetup
     #   <p>Key-value pairs of metadata assigned to the resource.</p>
     #   @return [Array<Types::TagEntry>]
     class ListTagsForResourceResponse < Struct.new(
+      nil,
       :tags,
       keyword_init: true
     )
@@ -1873,6 +1897,7 @@ module Aws::SSMQuickSetup
     #   <p>The latest version number of the configuration.</p>
     #   @return [String]
     class QuickSetupTypeOutput < Struct.new(
+      nil,
       :type,
       :latest_version,
       keyword_init: true
@@ -1884,6 +1909,7 @@ module Aws::SSMQuickSetup
     # @!attribute message
     #   @return [String]
     class ResourceNotFoundException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -1895,6 +1921,7 @@ module Aws::SSMQuickSetup
     #   <p>The IAM role used to enable Explorer.</p>
     #   @return [String]
     class ServiceSettings < Struct.new(
+      nil,
       :explorer_enabling_role_arn,
       keyword_init: true
     )
@@ -1921,6 +1948,7 @@ module Aws::SSMQuickSetup
     #   <p>Details about the status.</p>
     #   @return [Hash<String, String>]
     class StatusSummary < Struct.new(
+      nil,
       :status_type,
       :status,
       :status_message,
@@ -1940,6 +1968,7 @@ module Aws::SSMQuickSetup
     #   <p>The value for the tag.</p>
     #   @return [String]
     class TagEntry < Struct.new(
+      nil,
       :key,
       :value,
       keyword_init: true
@@ -1954,6 +1983,7 @@ module Aws::SSMQuickSetup
     #   <p>Key-value pairs of metadata to assign to the resource.</p>
     #   @return [Hash<String, String>]
     class TagResourceInput < Struct.new(
+      nil,
       :resource_arn,
       :tags,
       keyword_init: true
@@ -1965,6 +1995,7 @@ module Aws::SSMQuickSetup
     # @!attribute message
     #   @return [String]
     class ThrottlingException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -1978,6 +2009,7 @@ module Aws::SSMQuickSetup
     #   <p>The keys of the tags to remove from the resource.</p>
     #   @return [Array<String>]
     class UntagResourceInput < Struct.new(
+      nil,
       :resource_arn,
       :tag_keys,
       keyword_init: true
@@ -2007,6 +2039,7 @@ module Aws::SSMQuickSetup
     #                     deployments.</p>
     #   @return [String]
     class UpdateConfigurationDefinitionInput < Struct.new(
+      nil,
       :manager_arn,
       :id,
       :type_version,
@@ -2028,6 +2061,7 @@ module Aws::SSMQuickSetup
     #   <p>A description of the configuration manager.</p>
     #   @return [String]
     class UpdateConfigurationManagerInput < Struct.new(
+      nil,
       :manager_arn,
       :name,
       :description,
@@ -2040,6 +2074,7 @@ module Aws::SSMQuickSetup
     #   <p>The IAM role used to enable Explorer.</p>
     #   @return [String]
     class UpdateServiceSettingsInput < Struct.new(
+      nil,
       :explorer_enabling_role_arn,
       keyword_init: true
     )
@@ -2051,6 +2086,7 @@ module Aws::SSMQuickSetup
     # @!attribute message
     #   @return [String]
     class ValidationException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )

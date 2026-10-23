@@ -10,6 +10,7 @@ module Aws::LicenseManagerLinuxSubscriptions
     #   <p>The Amazon Resource Name (ARN) of the subscription provider resource to deregister.</p>
     #   @return [String]
     class DeregisterSubscriptionProviderRequest < Struct.new(
+      nil,
       :subscription_provider_arn,
       keyword_init: true
     )
@@ -17,6 +18,7 @@ module Aws::LicenseManagerLinuxSubscriptions
     end
 
     class DeregisterSubscriptionProviderResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -34,6 +36,7 @@ module Aws::LicenseManagerLinuxSubscriptions
     #   <p>An operator for filtering results.</p>
     #   @return [String]
     class Filter < Struct.new(
+      nil,
       :name,
       :values,
       :operator,
@@ -46,6 +49,7 @@ module Aws::LicenseManagerLinuxSubscriptions
     #   <p>The Amazon Resource Name (ARN) of the BYOL registration resource to get details for.</p>
     #   @return [String]
     class GetRegisteredSubscriptionProviderRequest < Struct.new(
+      nil,
       :subscription_provider_arn,
       keyword_init: true
     )
@@ -75,6 +79,7 @@ module Aws::LicenseManagerLinuxSubscriptions
     #   			from your registered third-party Linux subscription provider.</p>
     #   @return [String]
     class GetRegisteredSubscriptionProviderResponse < Struct.new(
+      nil,
       :subscription_provider_arn,
       :subscription_provider_source,
       :secret_arn,
@@ -87,6 +92,7 @@ module Aws::LicenseManagerLinuxSubscriptions
     end
 
     class GetServiceSettingsInput < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -110,6 +116,7 @@ module Aws::LicenseManagerLinuxSubscriptions
     #         subscriptions.</p>
     #   @return [Array<String>]
     class GetServiceSettingsOutput < Struct.new(
+      nil,
       :linux_subscriptions_discovery,
       :linux_subscriptions_discovery_settings,
       :status,
@@ -174,6 +181,7 @@ module Aws::LicenseManagerLinuxSubscriptions
     #   			a third-party Linux subscription provider that you've registered with License Manager.</p>
     #   @return [String]
     class Instance < Struct.new(
+      nil,
       :ami_id,
       :instance_id,
       :instance_type,
@@ -198,6 +206,7 @@ module Aws::LicenseManagerLinuxSubscriptions
     # @!attribute message
     #   @return [String]
     class InternalServerException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -212,6 +221,7 @@ module Aws::LicenseManagerLinuxSubscriptions
     #   <p>Details if you have enabled resource discovery across your accounts in Organizations.</p>
     #   @return [String]
     class LinuxSubscriptionsDiscoverySettings < Struct.new(
+      nil,
       :source_regions,
       :organization_integration,
       keyword_init: true
@@ -303,6 +313,7 @@ module Aws::LicenseManagerLinuxSubscriptions
     #   	is the nextToken from a previously truncated response.</p>
     #   @return [String]
     class ListLinuxSubscriptionInstancesInput < Struct.new(
+      nil,
       :filters,
       :max_results,
       :next_token,
@@ -321,6 +332,7 @@ module Aws::LicenseManagerLinuxSubscriptions
     #   	additional objects.</p>
     #   @return [String]
     class ListLinuxSubscriptionInstancesOutput < Struct.new(
+      nil,
       :instances,
       :next_token,
       keyword_init: true
@@ -370,6 +382,7 @@ module Aws::LicenseManagerLinuxSubscriptions
     #   	is the nextToken from a previously truncated response.</p>
     #   @return [String]
     class ListLinuxSubscriptionsInput < Struct.new(
+      nil,
       :filters,
       :max_results,
       :next_token,
@@ -388,6 +401,7 @@ module Aws::LicenseManagerLinuxSubscriptions
     #   	additional objects.</p>
     #   @return [String]
     class ListLinuxSubscriptionsOutput < Struct.new(
+      nil,
       :subscriptions,
       :next_token,
       keyword_init: true
@@ -407,6 +421,7 @@ module Aws::LicenseManagerLinuxSubscriptions
     #   	is the nextToken from a previously truncated response.</p>
     #   @return [String]
     class ListRegisteredSubscriptionProvidersRequest < Struct.new(
+      nil,
       :subscription_provider_sources,
       :max_results,
       :next_token,
@@ -426,6 +441,7 @@ module Aws::LicenseManagerLinuxSubscriptions
     #   	additional objects.</p>
     #   @return [String]
     class ListRegisteredSubscriptionProvidersResponse < Struct.new(
+      nil,
       :registered_subscription_providers,
       :next_token,
       keyword_init: true
@@ -437,6 +453,7 @@ module Aws::LicenseManagerLinuxSubscriptions
     #   <p>The Amazon Resource Name (ARN) of the resource for which to list metadata tags.</p>
     #   @return [String]
     class ListTagsForResourceRequest < Struct.new(
+      nil,
       :resource_arn,
       keyword_init: true
     )
@@ -447,6 +464,7 @@ module Aws::LicenseManagerLinuxSubscriptions
     #   <p>The metadata tags for the requested resource.</p>
     #   @return [Hash<String, String>]
     class ListTagsForResourceResponse < Struct.new(
+      nil,
       :tags,
       keyword_init: true
     )
@@ -466,6 +484,7 @@ module Aws::LicenseManagerLinuxSubscriptions
     #   			resource.</p>
     #   @return [Hash<String, String>]
     class RegisterSubscriptionProviderRequest < Struct.new(
+      nil,
       :subscription_provider_source,
       :secret_arn,
       :tags,
@@ -485,6 +504,7 @@ module Aws::LicenseManagerLinuxSubscriptions
     #   			that you requested.</p>
     #   @return [String]
     class RegisterSubscriptionProviderResponse < Struct.new(
+      nil,
       :subscription_provider_source,
       :subscription_provider_arn,
       :subscription_provider_status,
@@ -521,6 +541,7 @@ module Aws::LicenseManagerLinuxSubscriptions
     #   			for your account from your registered Linux subscription provider.</p>
     #   @return [String]
     class RegisteredSubscriptionProvider < Struct.new(
+      nil,
       :subscription_provider_arn,
       :subscription_provider_source,
       :secret_arn,
@@ -536,6 +557,7 @@ module Aws::LicenseManagerLinuxSubscriptions
     # @!attribute message
     #   @return [String]
     class ResourceNotFoundException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -555,6 +577,7 @@ module Aws::LicenseManagerLinuxSubscriptions
     #   <p>The total amount of running instances using this subscription.</p>
     #   @return [Integer]
     class Subscription < Struct.new(
+      nil,
       :name,
       :type,
       :instance_count,
@@ -572,6 +595,7 @@ module Aws::LicenseManagerLinuxSubscriptions
     #   			formatted as key value pairs.</p>
     #   @return [Hash<String, String>]
     class TagResourceRequest < Struct.new(
+      nil,
       :resource_arn,
       :tags,
       keyword_init: true
@@ -580,6 +604,7 @@ module Aws::LicenseManagerLinuxSubscriptions
     end
 
     class TagResourceResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -589,6 +614,7 @@ module Aws::LicenseManagerLinuxSubscriptions
     # @!attribute message
     #   @return [String]
     class ThrottlingException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -603,6 +629,7 @@ module Aws::LicenseManagerLinuxSubscriptions
     #   			resource.</p>
     #   @return [Array<String>]
     class UntagResourceRequest < Struct.new(
+      nil,
       :resource_arn,
       :tag_keys,
       keyword_init: true
@@ -611,6 +638,7 @@ module Aws::LicenseManagerLinuxSubscriptions
     end
 
     class UntagResourceResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -628,6 +656,7 @@ module Aws::LicenseManagerLinuxSubscriptions
     #         allow updates, you can aggregate Linux subscription data in more than one home Region.</p>
     #   @return [Boolean]
     class UpdateServiceSettingsInput < Struct.new(
+      nil,
       :linux_subscriptions_discovery,
       :linux_subscriptions_discovery_settings,
       :allow_update,
@@ -654,6 +683,7 @@ module Aws::LicenseManagerLinuxSubscriptions
     #         subscriptions.</p>
     #   @return [Array<String>]
     class UpdateServiceSettingsOutput < Struct.new(
+      nil,
       :linux_subscriptions_discovery,
       :linux_subscriptions_discovery_settings,
       :status,
@@ -668,6 +698,7 @@ module Aws::LicenseManagerLinuxSubscriptions
     # @!attribute message
     #   @return [String]
     class ValidationException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )

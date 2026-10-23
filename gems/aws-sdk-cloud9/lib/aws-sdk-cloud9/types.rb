@@ -14,6 +14,7 @@ module Aws::Cloud9
     # @!attribute code
     #   @return [Integer]
     class BadRequestException < Struct.new(
+      nil,
       :message,
       :class_name,
       :code,
@@ -35,6 +36,7 @@ module Aws::Cloud9
     # @!attribute code
     #   @return [Integer]
     class ConcurrentAccessException < Struct.new(
+      nil,
       :message,
       :class_name,
       :code,
@@ -56,6 +58,7 @@ module Aws::Cloud9
     # @!attribute code
     #   @return [Integer]
     class ConflictException < Struct.new(
+      nil,
       :message,
       :class_name,
       :code,
@@ -174,6 +177,7 @@ module Aws::Cloud9
     #   <p>Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     class CreateEnvironmentEC2Request < Struct.new(
+      nil,
       :name,
       :description,
       :client_request_token,
@@ -194,6 +198,7 @@ module Aws::Cloud9
     #   <p>The ID of the environment that was created.</p>
     #   @return [String]
     class CreateEnvironmentEC2Result < Struct.new(
+      nil,
       :environment_id,
       keyword_init: true
     )
@@ -221,6 +226,7 @@ module Aws::Cloud9
     #            </ul>
     #   @return [String]
     class CreateEnvironmentMembershipRequest < Struct.new(
+      nil,
       :environment_id,
       :user_arn,
       :permissions,
@@ -233,6 +239,7 @@ module Aws::Cloud9
     #   <p>Information about the environment member that was added.</p>
     #   @return [Types::EnvironmentMember]
     class CreateEnvironmentMembershipResult < Struct.new(
+      nil,
       :membership,
       keyword_init: true
     )
@@ -247,6 +254,7 @@ module Aws::Cloud9
     #         environment.</p>
     #   @return [String]
     class DeleteEnvironmentMembershipRequest < Struct.new(
+      nil,
       :environment_id,
       :user_arn,
       keyword_init: true
@@ -255,6 +263,7 @@ module Aws::Cloud9
     end
 
     class DeleteEnvironmentMembershipResult < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -264,6 +273,7 @@ module Aws::Cloud9
     #   <p>The ID of the environment to delete.</p>
     #   @return [String]
     class DeleteEnvironmentRequest < Struct.new(
+      nil,
       :environment_id,
       keyword_init: true
     )
@@ -271,6 +281,7 @@ module Aws::Cloud9
     end
 
     class DeleteEnvironmentResult < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -314,6 +325,7 @@ module Aws::Cloud9
     #   <p>The maximum number of environment members to get information about.</p>
     #   @return [Integer]
     class DescribeEnvironmentMembershipsRequest < Struct.new(
+      nil,
       :user_arn,
       :environment_id,
       :permissions,
@@ -333,6 +345,7 @@ module Aws::Cloud9
     #         in the list, call this operation again, adding the next token to the call.</p>
     #   @return [String]
     class DescribeEnvironmentMembershipsResult < Struct.new(
+      nil,
       :memberships,
       :next_token,
       keyword_init: true
@@ -344,6 +357,7 @@ module Aws::Cloud9
     #   <p>The ID of the environment to get status information about.</p>
     #   @return [String]
     class DescribeEnvironmentStatusRequest < Struct.new(
+      nil,
       :environment_id,
       keyword_init: true
     )
@@ -387,6 +401,7 @@ module Aws::Cloud9
     #   <p>Any informational message about the status of the environment.</p>
     #   @return [String]
     class DescribeEnvironmentStatusResult < Struct.new(
+      nil,
       :status,
       :message,
       keyword_init: true
@@ -398,6 +413,7 @@ module Aws::Cloud9
     #   <p>The IDs of individual environments to get information about.</p>
     #   @return [Array<String>]
     class DescribeEnvironmentsRequest < Struct.new(
+      nil,
       :environment_ids,
       keyword_init: true
     )
@@ -408,6 +424,7 @@ module Aws::Cloud9
     #   <p>Information about the environments that are returned.</p>
     #   @return [Array<Types::Environment>]
     class DescribeEnvironmentsResult < Struct.new(
+      nil,
       :environments,
       keyword_init: true
     )
@@ -507,6 +524,7 @@ module Aws::Cloud9
     #            </ul>
     #   @return [String]
     class Environment < Struct.new(
+      nil,
       :id,
       :name,
       :description,
@@ -556,6 +574,7 @@ module Aws::Cloud9
     #         resource.</p>
     #   @return [String]
     class EnvironmentLifecycle < Struct.new(
+      nil,
       :status,
       :reason,
       :failure_resource,
@@ -597,6 +616,7 @@ module Aws::Cloud9
     #         environment.</p>
     #   @return [Time]
     class EnvironmentMember < Struct.new(
+      nil,
       :permissions,
       :user_id,
       :user_arn,
@@ -615,6 +635,7 @@ module Aws::Cloud9
     # @!attribute code
     #   @return [Integer]
     class ForbiddenException < Struct.new(
+      nil,
       :message,
       :class_name,
       :code,
@@ -636,6 +657,7 @@ module Aws::Cloud9
     # @!attribute code
     #   @return [Integer]
     class InternalServerErrorException < Struct.new(
+      nil,
       :message,
       :class_name,
       :code,
@@ -657,6 +679,7 @@ module Aws::Cloud9
     # @!attribute code
     #   @return [Integer]
     class LimitExceededException < Struct.new(
+      nil,
       :message,
       :class_name,
       :code,
@@ -681,6 +704,7 @@ module Aws::Cloud9
     #   <p>The maximum number of environments to get identifiers for.</p>
     #   @return [Integer]
     class ListEnvironmentsRequest < Struct.new(
+      nil,
       :next_token,
       :max_results,
       keyword_init: true
@@ -697,6 +721,7 @@ module Aws::Cloud9
     #   <p>The list of environment identifiers.</p>
     #   @return [Array<String>]
     class ListEnvironmentsResult < Struct.new(
+      nil,
       :next_token,
       :environment_ids,
       keyword_init: true
@@ -709,6 +734,7 @@ module Aws::Cloud9
     #         for.</p>
     #   @return [String]
     class ListTagsForResourceRequest < Struct.new(
+      nil,
       :resource_arn,
       keyword_init: true
     )
@@ -719,6 +745,7 @@ module Aws::Cloud9
     #   <p>The list of tags associated with the Cloud9 development environment.</p>
     #   @return [Array<Types::Tag>]
     class ListTagsForResourceResponse < Struct.new(
+      nil,
       :tags,
       keyword_init: true
     )
@@ -733,6 +760,7 @@ module Aws::Cloud9
     # @!attribute code
     #   @return [Integer]
     class NotFoundException < Struct.new(
+      nil,
       :message,
       :class_name,
       :code,
@@ -759,6 +787,7 @@ module Aws::Cloud9
     #   <p>The <b>value</b> part of a tag.</p>
     #   @return [String]
     class Tag < Struct.new(
+      nil,
       :key,
       :value,
       keyword_init: true
@@ -774,6 +803,7 @@ module Aws::Cloud9
     #   <p>The list of tags to add to the given Cloud9 development environment.</p>
     #   @return [Array<Types::Tag>]
     class TagResourceRequest < Struct.new(
+      nil,
       :resource_arn,
       :tags,
       keyword_init: true
@@ -782,6 +812,7 @@ module Aws::Cloud9
     end
 
     class TagResourceResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -795,6 +826,7 @@ module Aws::Cloud9
     # @!attribute code
     #   @return [Integer]
     class TooManyRequestsException < Struct.new(
+      nil,
       :message,
       :class_name,
       :code,
@@ -817,6 +849,7 @@ module Aws::Cloud9
     #         environment.</p>
     #   @return [Array<String>]
     class UntagResourceRequest < Struct.new(
+      nil,
       :resource_arn,
       :tag_keys,
       keyword_init: true
@@ -825,6 +858,7 @@ module Aws::Cloud9
     end
 
     class UntagResourceResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -853,6 +887,7 @@ module Aws::Cloud9
     #            </ul>
     #   @return [String]
     class UpdateEnvironmentMembershipRequest < Struct.new(
+      nil,
       :environment_id,
       :user_arn,
       :permissions,
@@ -865,6 +900,7 @@ module Aws::Cloud9
     #   <p>Information about the environment member whose settings were changed.</p>
     #   @return [Types::EnvironmentMember]
     class UpdateEnvironmentMembershipResult < Struct.new(
+      nil,
       :membership,
       keyword_init: true
     )
@@ -901,6 +937,7 @@ module Aws::Cloud9
     #            </note>
     #   @return [String]
     class UpdateEnvironmentRequest < Struct.new(
+      nil,
       :environment_id,
       :name,
       :description,
@@ -911,6 +948,7 @@ module Aws::Cloud9
     end
 
     class UpdateEnvironmentResult < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure

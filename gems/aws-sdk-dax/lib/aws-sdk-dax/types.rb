@@ -98,6 +98,7 @@ module Aws::DAX
     #            </ul>
     #   @return [String]
     class Cluster < Struct.new(
+      nil,
       :cluster_name,
       :description,
       :cluster_arn,
@@ -126,6 +127,7 @@ module Aws::DAX
     # @!attribute message
     #   @return [String]
     class ClusterAlreadyExistsFault < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -137,6 +139,7 @@ module Aws::DAX
     # @!attribute message
     #   @return [String]
     class ClusterNotFoundFault < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -148,6 +151,7 @@ module Aws::DAX
     # @!attribute message
     #   @return [String]
     class ClusterQuotaForCustomerExceededFault < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -325,6 +329,7 @@ module Aws::DAX
     #            </note>
     #   @return [String]
     class CreateClusterRequest < Struct.new(
+      nil,
       :cluster_name,
       :node_type,
       :description,
@@ -349,6 +354,7 @@ module Aws::DAX
     #   <p>A description of the DAX cluster that you have created.</p>
     #   @return [Types::Cluster]
     class CreateClusterResponse < Struct.new(
+      nil,
       :cluster,
       keyword_init: true
     )
@@ -363,6 +369,7 @@ module Aws::DAX
     #   <p>A description of the parameter group.</p>
     #   @return [String]
     class CreateParameterGroupRequest < Struct.new(
+      nil,
       :parameter_group_name,
       :description,
       keyword_init: true
@@ -375,6 +382,7 @@ module Aws::DAX
     #               action.</p>
     #   @return [Types::ParameterGroup]
     class CreateParameterGroupResponse < Struct.new(
+      nil,
       :parameter_group,
       keyword_init: true
     )
@@ -391,6 +399,7 @@ module Aws::DAX
     #   <p>A list of VPC subnet IDs for the subnet group.</p>
     #   @return [Array<String>]
     class CreateSubnetGroupRequest < Struct.new(
+      nil,
       :subnet_group_name,
       :description,
       :subnet_ids,
@@ -404,6 +413,7 @@ module Aws::DAX
     #               operation.</p>
     #   @return [Types::SubnetGroup]
     class CreateSubnetGroupResponse < Struct.new(
+      nil,
       :subnet_group,
       keyword_init: true
     )
@@ -424,6 +434,7 @@ module Aws::DAX
     #   <p>The unique identifiers of the nodes to be removed from the cluster.</p>
     #   @return [Array<String>]
     class DecreaseReplicationFactorRequest < Struct.new(
+      nil,
       :cluster_name,
       :new_replication_factor,
       :availability_zones,
@@ -438,6 +449,7 @@ module Aws::DAX
     #               replication factor.</p>
     #   @return [Types::Cluster]
     class DecreaseReplicationFactorResponse < Struct.new(
+      nil,
       :cluster,
       keyword_init: true
     )
@@ -448,6 +460,7 @@ module Aws::DAX
     #   <p>The name of the cluster to be deleted.</p>
     #   @return [String]
     class DeleteClusterRequest < Struct.new(
+      nil,
       :cluster_name,
       keyword_init: true
     )
@@ -458,6 +471,7 @@ module Aws::DAX
     #   <p>A description of the DAX cluster that is being deleted.</p>
     #   @return [Types::Cluster]
     class DeleteClusterResponse < Struct.new(
+      nil,
       :cluster,
       keyword_init: true
     )
@@ -468,6 +482,7 @@ module Aws::DAX
     #   <p>The name of the parameter group to delete.</p>
     #   @return [String]
     class DeleteParameterGroupRequest < Struct.new(
+      nil,
       :parameter_group_name,
       keyword_init: true
     )
@@ -479,6 +494,7 @@ module Aws::DAX
     #               group).</p>
     #   @return [String]
     class DeleteParameterGroupResponse < Struct.new(
+      nil,
       :deletion_message,
       keyword_init: true
     )
@@ -489,6 +505,7 @@ module Aws::DAX
     #   <p>The name of the subnet group to delete.</p>
     #   @return [String]
     class DeleteSubnetGroupRequest < Struct.new(
+      nil,
       :subnet_group_name,
       keyword_init: true
     )
@@ -500,6 +517,7 @@ module Aws::DAX
     #               group).</p>
     #   @return [String]
     class DeleteSubnetGroupResponse < Struct.new(
+      nil,
       :deletion_message,
       keyword_init: true
     )
@@ -522,6 +540,7 @@ module Aws::DAX
     #               <code>MaxResults</code>.</p>
     #   @return [String]
     class DescribeClustersRequest < Struct.new(
+      nil,
       :cluster_names,
       :max_results,
       :next_token,
@@ -538,6 +557,7 @@ module Aws::DAX
     #                   <i>DescribeClusters</i> request.</p>
     #   @return [Array<Types::Cluster>]
     class DescribeClustersResponse < Struct.new(
+      nil,
       :next_token,
       :clusters,
       keyword_init: true
@@ -558,6 +578,7 @@ module Aws::DAX
     #               <code>MaxResults</code>.</p>
     #   @return [String]
     class DescribeDefaultParametersRequest < Struct.new(
+      nil,
       :max_results,
       :next_token,
       keyword_init: true
@@ -572,6 +593,7 @@ module Aws::DAX
     #   <p>A list of parameters. Each element in the list represents one parameter.</p>
     #   @return [Array<Types::Parameter>]
     class DescribeDefaultParametersResponse < Struct.new(
+      nil,
       :next_token,
       :parameters,
       keyword_init: true
@@ -611,6 +633,7 @@ module Aws::DAX
     #               <code>MaxResults</code>.</p>
     #   @return [String]
     class DescribeEventsRequest < Struct.new(
+      nil,
       :source_name,
       :source_type,
       :start_time,
@@ -630,6 +653,7 @@ module Aws::DAX
     #   <p>An array of events. Each element in the array represents one event.</p>
     #   @return [Array<Types::Event>]
     class DescribeEventsResponse < Struct.new(
+      nil,
       :next_token,
       :events,
       keyword_init: true
@@ -653,6 +677,7 @@ module Aws::DAX
     #               <code>MaxResults</code>.</p>
     #   @return [String]
     class DescribeParameterGroupsRequest < Struct.new(
+      nil,
       :parameter_group_names,
       :max_results,
       :next_token,
@@ -669,6 +694,7 @@ module Aws::DAX
     #               group.</p>
     #   @return [Array<Types::ParameterGroup>]
     class DescribeParameterGroupsResponse < Struct.new(
+      nil,
       :next_token,
       :parameter_groups,
       keyword_init: true
@@ -696,6 +722,7 @@ module Aws::DAX
     #               <code>MaxResults</code>.</p>
     #   @return [String]
     class DescribeParametersRequest < Struct.new(
+      nil,
       :parameter_group_name,
       :source,
       :max_results,
@@ -713,6 +740,7 @@ module Aws::DAX
     #               one parameter.</p>
     #   @return [Array<Types::Parameter>]
     class DescribeParametersResponse < Struct.new(
+      nil,
       :next_token,
       :parameters,
       keyword_init: true
@@ -736,6 +764,7 @@ module Aws::DAX
     #               <code>MaxResults</code>.</p>
     #   @return [String]
     class DescribeSubnetGroupsRequest < Struct.new(
+      nil,
       :subnet_group_names,
       :max_results,
       :next_token,
@@ -752,6 +781,7 @@ module Aws::DAX
     #               group.</p>
     #   @return [Array<Types::SubnetGroup>]
     class DescribeSubnetGroupsResponse < Struct.new(
+      nil,
       :next_token,
       :subnet_groups,
       keyword_init: true
@@ -772,6 +802,7 @@ module Aws::DAX
     #               are 8111 for the "dax" protocol and 9111 for the "daxs" protocol.</p>
     #   @return [String]
     class Endpoint < Struct.new(
+      nil,
       :address,
       :port,
       :url,
@@ -803,6 +834,7 @@ module Aws::DAX
     #   <p>The date and time when the event occurred.</p>
     #   @return [Time]
     class Event < Struct.new(
+      nil,
       :source_name,
       :source_type,
       :message,
@@ -824,6 +856,7 @@ module Aws::DAX
     #               you want to distribute the nodes across multiple AZs.</p>
     #   @return [Array<String>]
     class IncreaseReplicationFactorRequest < Struct.new(
+      nil,
       :cluster_name,
       :new_replication_factor,
       :availability_zones,
@@ -837,6 +870,7 @@ module Aws::DAX
     #               factor.</p>
     #   @return [Types::Cluster]
     class IncreaseReplicationFactorResponse < Struct.new(
+      nil,
       :cluster,
       keyword_init: true
     )
@@ -848,6 +882,7 @@ module Aws::DAX
     # @!attribute message
     #   @return [String]
     class InsufficientClusterCapacityFault < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -858,6 +893,7 @@ module Aws::DAX
     # @!attribute message
     #   @return [String]
     class InvalidARNFault < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -869,6 +905,7 @@ module Aws::DAX
     # @!attribute message
     #   @return [String]
     class InvalidClusterStateFault < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -879,6 +916,7 @@ module Aws::DAX
     # @!attribute message
     #   @return [String]
     class InvalidParameterCombinationException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -889,6 +927,7 @@ module Aws::DAX
     # @!attribute message
     #   @return [String]
     class InvalidParameterGroupStateFault < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -899,6 +938,7 @@ module Aws::DAX
     # @!attribute message
     #   @return [String]
     class InvalidParameterValueException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -909,6 +949,7 @@ module Aws::DAX
     # @!attribute message
     #   @return [String]
     class InvalidSubnet < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -919,6 +960,7 @@ module Aws::DAX
     # @!attribute message
     #   @return [String]
     class InvalidVPCNetworkStateFault < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -934,6 +976,7 @@ module Aws::DAX
     #               results beyond the token.</p>
     #   @return [String]
     class ListTagsRequest < Struct.new(
+      nil,
       :resource_name,
       :next_token,
       keyword_init: true
@@ -950,6 +993,7 @@ module Aws::DAX
     #               value.</p>
     #   @return [String]
     class ListTagsResponse < Struct.new(
+      nil,
       :tags,
       :next_token,
       keyword_init: true
@@ -981,6 +1025,7 @@ module Aws::DAX
     #                   <code>in-sync</code>.</p>
     #   @return [String]
     class Node < Struct.new(
+      nil,
       :node_id,
       :endpoint,
       :node_create_time,
@@ -996,6 +1041,7 @@ module Aws::DAX
     # @!attribute message
     #   @return [String]
     class NodeNotFoundFault < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -1007,6 +1053,7 @@ module Aws::DAX
     # @!attribute message
     #   @return [String]
     class NodeQuotaForClusterExceededFault < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -1017,6 +1064,7 @@ module Aws::DAX
     # @!attribute message
     #   @return [String]
     class NodeQuotaForCustomerExceededFault < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -1032,6 +1080,7 @@ module Aws::DAX
     #   <p>The parameter value for this node type.</p>
     #   @return [String]
     class NodeTypeSpecificValue < Struct.new(
+      nil,
       :node_type,
       :value,
       keyword_init: true
@@ -1051,6 +1100,7 @@ module Aws::DAX
     #               the topic.</p>
     #   @return [String]
     class NotificationConfiguration < Struct.new(
+      nil,
       :topic_arn,
       :topic_status,
       keyword_init: true
@@ -1095,6 +1145,7 @@ module Aws::DAX
     #               take effect if a node is rebooted.</p>
     #   @return [String]
     class Parameter < Struct.new(
+      nil,
       :parameter_name,
       :parameter_type,
       :parameter_value,
@@ -1118,6 +1169,7 @@ module Aws::DAX
     #   <p>A description of the parameter group.</p>
     #   @return [String]
     class ParameterGroup < Struct.new(
+      nil,
       :parameter_group_name,
       :description,
       keyword_init: true
@@ -1129,6 +1181,7 @@ module Aws::DAX
     # @!attribute message
     #   @return [String]
     class ParameterGroupAlreadyExistsFault < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -1139,6 +1192,7 @@ module Aws::DAX
     # @!attribute message
     #   @return [String]
     class ParameterGroupNotFoundFault < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -1149,6 +1203,7 @@ module Aws::DAX
     # @!attribute message
     #   @return [String]
     class ParameterGroupQuotaExceededFault < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -1166,6 +1221,7 @@ module Aws::DAX
     #   <p>The node IDs of one or more nodes to be rebooted.</p>
     #   @return [Array<String>]
     class ParameterGroupStatus < Struct.new(
+      nil,
       :parameter_group_name,
       :parameter_apply_status,
       :node_ids_to_reboot,
@@ -1182,6 +1238,7 @@ module Aws::DAX
     #   <p>The value of the parameter.</p>
     #   @return [String]
     class ParameterNameValue < Struct.new(
+      nil,
       :parameter_name,
       :parameter_value,
       keyword_init: true
@@ -1197,6 +1254,7 @@ module Aws::DAX
     #   <p>The system-assigned ID of the node to be rebooted.</p>
     #   @return [String]
     class RebootNodeRequest < Struct.new(
+      nil,
       :cluster_name,
       :node_id,
       keyword_init: true
@@ -1209,6 +1267,7 @@ module Aws::DAX
     #               rebooted.</p>
     #   @return [Types::Cluster]
     class RebootNodeResponse < Struct.new(
+      nil,
       :cluster,
       keyword_init: true
     )
@@ -1239,6 +1298,7 @@ module Aws::DAX
     #            </ul>
     #   @return [String]
     class SSEDescription < Struct.new(
+      nil,
       :status,
       keyword_init: true
     )
@@ -1251,6 +1311,7 @@ module Aws::DAX
     #               the cluster.</p>
     #   @return [Boolean]
     class SSESpecification < Struct.new(
+      nil,
       :enabled,
       keyword_init: true
     )
@@ -1265,6 +1326,7 @@ module Aws::DAX
     #   <p>The status of this security group.</p>
     #   @return [String]
     class SecurityGroupMembership < Struct.new(
+      nil,
       :security_group_identifier,
       :status,
       keyword_init: true
@@ -1276,6 +1338,7 @@ module Aws::DAX
     # @!attribute message
     #   @return [String]
     class ServiceLinkedRoleNotFoundFault < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -1286,6 +1349,7 @@ module Aws::DAX
     #             encrypted clusters in a 30 day period. Contact Amazon Web Services customer support to
     #             discuss options for continuing to create encrypted clusters.</p>
     class ServiceQuotaExceededException < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1306,6 +1370,7 @@ module Aws::DAX
     #               supports IPv4 only, IPv6 only, or dual-stack deployments.</p>
     #   @return [Array<String>]
     class Subnet < Struct.new(
+      nil,
       :subnet_identifier,
       :subnet_availability_zone,
       :supported_network_types,
@@ -1345,6 +1410,7 @@ module Aws::DAX
     #               group supports IPv4 only, IPv6 only, or dual-stack deployments. </p>
     #   @return [Array<String>]
     class SubnetGroup < Struct.new(
+      nil,
       :subnet_group_name,
       :description,
       :vpc_id,
@@ -1359,6 +1425,7 @@ module Aws::DAX
     # @!attribute message
     #   @return [String]
     class SubnetGroupAlreadyExistsFault < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -1369,6 +1436,7 @@ module Aws::DAX
     # @!attribute message
     #   @return [String]
     class SubnetGroupInUseFault < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -1380,6 +1448,7 @@ module Aws::DAX
     # @!attribute message
     #   @return [String]
     class SubnetGroupNotFoundFault < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -1391,6 +1460,7 @@ module Aws::DAX
     # @!attribute message
     #   @return [String]
     class SubnetGroupQuotaExceededFault < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -1401,6 +1471,7 @@ module Aws::DAX
     # @!attribute message
     #   @return [String]
     class SubnetInUse < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -1415,6 +1486,7 @@ module Aws::DAX
     # @!attribute message
     #   @return [String]
     class SubnetNotAllowedFault < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -1426,6 +1498,7 @@ module Aws::DAX
     # @!attribute message
     #   @return [String]
     class SubnetQuotaExceededFault < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -1448,6 +1521,7 @@ module Aws::DAX
     #   <p>The value of the tag. Tag values are case-sensitive and can be null.</p>
     #   @return [String]
     class Tag < Struct.new(
+      nil,
       :key,
       :value,
       keyword_init: true
@@ -1459,6 +1533,7 @@ module Aws::DAX
     # @!attribute message
     #   @return [String]
     class TagNotFoundFault < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -1469,6 +1544,7 @@ module Aws::DAX
     # @!attribute message
     #   @return [String]
     class TagQuotaPerResourceExceeded < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -1483,6 +1559,7 @@ module Aws::DAX
     #   <p>The tags to be assigned to the DAX resource. </p>
     #   @return [Array<Types::Tag>]
     class TagResourceRequest < Struct.new(
+      nil,
       :resource_name,
       :tags,
       keyword_init: true
@@ -1494,6 +1571,7 @@ module Aws::DAX
     #   <p>The list of tags that are associated with the DAX resource.</p>
     #   @return [Array<Types::Tag>]
     class TagResourceResponse < Struct.new(
+      nil,
       :tags,
       keyword_init: true
     )
@@ -1509,6 +1587,7 @@ module Aws::DAX
     #               then the tags are removed from the cluster.</p>
     #   @return [Array<String>]
     class UntagResourceRequest < Struct.new(
+      nil,
       :resource_name,
       :tag_keys,
       keyword_init: true
@@ -1520,6 +1599,7 @@ module Aws::DAX
     #   <p>The tag keys that have been removed from the cluster.</p>
     #   @return [Array<Types::Tag>]
     class UntagResourceResponse < Struct.new(
+      nil,
       :tags,
       keyword_init: true
     )
@@ -1554,6 +1634,7 @@ module Aws::DAX
     #               to each node.</p>
     #   @return [Array<String>]
     class UpdateClusterRequest < Struct.new(
+      nil,
       :cluster_name,
       :description,
       :preferred_maintenance_window,
@@ -1570,6 +1651,7 @@ module Aws::DAX
     #   <p>A description of the DAX cluster, after it has been modified.</p>
     #   @return [Types::Cluster]
     class UpdateClusterResponse < Struct.new(
+      nil,
       :cluster,
       keyword_init: true
     )
@@ -1589,6 +1671,7 @@ module Aws::DAX
     #            </note>
     #   @return [Array<Types::ParameterNameValue>]
     class UpdateParameterGroupRequest < Struct.new(
+      nil,
       :parameter_group_name,
       :parameter_name_values,
       keyword_init: true
@@ -1600,6 +1683,7 @@ module Aws::DAX
     #   <p>The parameter group that has been modified.</p>
     #   @return [Types::ParameterGroup]
     class UpdateParameterGroupResponse < Struct.new(
+      nil,
       :parameter_group,
       keyword_init: true
     )
@@ -1616,6 +1700,7 @@ module Aws::DAX
     #   <p>A list of subnet IDs in the subnet group.</p>
     #   @return [Array<String>]
     class UpdateSubnetGroupRequest < Struct.new(
+      nil,
       :subnet_group_name,
       :description,
       :subnet_ids,
@@ -1628,6 +1713,7 @@ module Aws::DAX
     #   <p>The subnet group that has been modified.</p>
     #   @return [Types::SubnetGroup]
     class UpdateSubnetGroupResponse < Struct.new(
+      nil,
       :subnet_group,
       keyword_init: true
     )

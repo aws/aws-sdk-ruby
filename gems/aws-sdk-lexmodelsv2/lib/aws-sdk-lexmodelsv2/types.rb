@@ -11,6 +11,7 @@ module Aws::LexModelsV2
     #   <p>The name of active context.</p>
     #   @return [String]
     class ActiveContext < Struct.new(
+      nil,
       :name,
       keyword_init: true
     )
@@ -22,6 +23,7 @@ module Aws::LexModelsV2
     #   <p>Enables using the slot values as a custom vocabulary for recognizing user utterances.</p>
     #   @return [String]
     class AdvancedRecognitionSetting < Struct.new(
+      nil,
       :audio_recognition_strategy,
       keyword_init: true
     )
@@ -45,6 +47,7 @@ module Aws::LexModelsV2
     #   <p>The actual intent for the agent turn in a test set execution.</p>
     #   @return [String]
     class AgentTurnResult < Struct.new(
+      nil,
       :expected_agent_prompt,
       :actual_agent_prompt,
       :error_details,
@@ -60,6 +63,7 @@ module Aws::LexModelsV2
     #   <p>The agent prompt for the agent turn in a test set.</p>
     #   @return [String]
     class AgentTurnSpecification < Struct.new(
+      nil,
       :agent_prompt,
       keyword_init: true
     )
@@ -82,6 +86,7 @@ module Aws::LexModelsV2
     #            utterances that contain the specified value.</p>
     #   @return [String]
     class AggregatedUtterancesFilter < Struct.new(
+      nil,
       :name,
       :values,
       :operator,
@@ -99,6 +104,7 @@ module Aws::LexModelsV2
     #            descending order.</p>
     #   @return [String]
     class AggregatedUtterancesSortBy < Struct.new(
+      nil,
       :attribute,
       :order,
       keyword_init: true
@@ -141,6 +147,7 @@ module Aws::LexModelsV2
     #            this kind of data, this field is set to true.</p>
     #   @return [Boolean]
     class AggregatedUtterancesSummary < Struct.new(
+      nil,
       :utterance,
       :hit_count,
       :missed_count,
@@ -160,6 +167,7 @@ module Aws::LexModelsV2
     #   <p>Indicates whether DTMF input is allowed.</p>
     #   @return [Boolean]
     class AllowedInputTypes < Struct.new(
+      nil,
       :allow_audio_input,
       :allow_dtmf_input,
       keyword_init: true
@@ -178,6 +186,7 @@ module Aws::LexModelsV2
     #   <p>Specifies whether to bin the analytics data in ascending or descending order. If this field is left blank, the default order is by the key of the bin in descending order.</p>
     #   @return [String]
     class AnalyticsBinBySpecification < Struct.new(
+      nil,
       :name,
       :interval,
       :order,
@@ -194,6 +203,7 @@ module Aws::LexModelsV2
     #   <p>The value of the criterion that defines the bin.</p>
     #   @return [Integer]
     class AnalyticsBinKey < Struct.new(
+      nil,
       :name,
       :value,
       keyword_init: true
@@ -358,6 +368,7 @@ module Aws::LexModelsV2
     #   <p>An array containing the values of the category by which to apply the operator to filter the results. You can provide multiple values if the operator is <code>EQ</code> or <code>CO</code>. If you provide multiple values, you filter for results that equal/contain any of the values. For example, if the <code>name</code>, <code>operator</code>, and <code>values</code> fields are <code>Modality</code>, <code>EQ</code>, and <code>[Speech, Text]</code>, the operation filters for results where the modality was either <code>Speech</code> or <code>Text</code>.</p>
     #   @return [Array<String>]
     class AnalyticsIntentFilter < Struct.new(
+      nil,
       :name,
       :operator,
       :values,
@@ -374,6 +385,7 @@ module Aws::LexModelsV2
     #   <p>A member of the category by which the intent analytics were grouped.</p>
     #   @return [String]
     class AnalyticsIntentGroupByKey < Struct.new(
+      nil,
       :name,
       :value,
       keyword_init: true
@@ -386,6 +398,7 @@ module Aws::LexModelsV2
     #   <p>Specifies whether to group the intent stages by their name or their end state.</p>
     #   @return [String]
     class AnalyticsIntentGroupBySpecification < Struct.new(
+      nil,
       :name,
       keyword_init: true
     )
@@ -439,6 +452,7 @@ module Aws::LexModelsV2
     #   <p>Specifies whether to sort the results in ascending or descending order.</p>
     #   @return [String]
     class AnalyticsIntentMetric < Struct.new(
+      nil,
       :name,
       :statistic,
       :order,
@@ -494,6 +508,7 @@ module Aws::LexModelsV2
     #   <p>The value of the summary statistic for the metric that you requested.</p>
     #   @return [Float]
     class AnalyticsIntentMetricResult < Struct.new(
+      nil,
       :name,
       :statistic,
       :value,
@@ -519,6 +534,7 @@ module Aws::LexModelsV2
     #   <p>Specifies whether the node is the end of a path (<code>Exit</code>) or not (<code>Inner</code>).</p>
     #   @return [String]
     class AnalyticsIntentNodeSummary < Struct.new(
+      nil,
       :intent_name,
       :intent_path,
       :intent_count,
@@ -540,6 +556,7 @@ module Aws::LexModelsV2
     #   <p>A list of objects, each of which contains a metric you want to list, the statistic for the metric you want to return, and the method by which to organize the results.</p>
     #   @return [Array<Types::AnalyticsIntentMetricResult>]
     class AnalyticsIntentResult < Struct.new(
+      nil,
       :bin_keys,
       :group_by_keys,
       :metrics_results,
@@ -705,6 +722,7 @@ module Aws::LexModelsV2
     #   <p>An array containing the values of the category by which to apply the operator to filter the results. You can provide multiple values if the operator is <code>EQ</code> or <code>CO</code>. If you provide multiple values, you filter for results that equal/contain any of the values. For example, if the <code>name</code>, <code>operator</code>, and <code>values</code> fields are <code>Modality</code>, <code>EQ</code>, and <code>[Speech, Text]</code>, the operation filters for results where the modality was either <code>Speech</code> or <code>Text</code>.</p>
     #   @return [Array<String>]
     class AnalyticsIntentStageFilter < Struct.new(
+      nil,
       :name,
       :operator,
       :values,
@@ -721,6 +739,7 @@ module Aws::LexModelsV2
     #   <p>A member of the category by which the intent stage analytics were grouped.</p>
     #   @return [String]
     class AnalyticsIntentStageGroupByKey < Struct.new(
+      nil,
       :name,
       :value,
       keyword_init: true
@@ -733,6 +752,7 @@ module Aws::LexModelsV2
     #   <p>Specifies whether to group the intent stages by their name or the intent to which the session was switched.</p>
     #   @return [String]
     class AnalyticsIntentStageGroupBySpecification < Struct.new(
+      nil,
       :name,
       keyword_init: true
     )
@@ -786,6 +806,7 @@ module Aws::LexModelsV2
     #   <p>Specifies whether to sort the results in ascending or descending order of the summary statistic (<code>value</code> in the response).</p>
     #   @return [String]
     class AnalyticsIntentStageMetric < Struct.new(
+      nil,
       :name,
       :statistic,
       :order,
@@ -841,6 +862,7 @@ module Aws::LexModelsV2
     #   <p>The value of the summary statistic for the metric that you requested.</p>
     #   @return [Float]
     class AnalyticsIntentStageMetricResult < Struct.new(
+      nil,
       :name,
       :statistic,
       :value,
@@ -860,6 +882,7 @@ module Aws::LexModelsV2
     #   <p>A list of objects, each of which contains a metric you want to list, the statistic for the metric you want to return, and the method by which to organize the results.</p>
     #   @return [Array<Types::AnalyticsIntentStageMetricResult>]
     class AnalyticsIntentStageResult < Struct.new(
+      nil,
       :bin_keys,
       :group_by_keys,
       :metrics_results,
@@ -977,6 +1000,7 @@ module Aws::LexModelsV2
     #   <p>An array containing the values of the category by which to apply the operator to filter the results. You can provide multiple values if the operator is <code>EQ</code> or <code>CO</code>. If you provide multiple values, you filter for results that equal/contain any of the values. For example, if the <code>name</code>, <code>operator</code>, and <code>values</code> fields are <code>Modality</code>, <code>EQ</code>, and <code>[Speech, Text]</code>, the operation filters for results where the modality was either <code>Speech</code> or <code>Text</code>.</p>
     #   @return [Array<String>]
     class AnalyticsPathFilter < Struct.new(
+      nil,
       :name,
       :operator,
       :values,
@@ -1154,6 +1178,7 @@ module Aws::LexModelsV2
     #   <p>An array containing the values of the category by which to apply the operator to filter the results. You can provide multiple values if the operator is <code>EQ</code> or <code>CO</code>. If you provide multiple values, you filter for results that equal/contain any of the values. For example, if the <code>name</code>, <code>operator</code>, and <code>values</code> fields are <code>Modality</code>, <code>EQ</code>, and <code>[Speech, Text]</code>, the operation filters for results where the modality was either <code>Speech</code> or <code>Text</code>.</p>
     #   @return [Array<String>]
     class AnalyticsSessionFilter < Struct.new(
+      nil,
       :name,
       :operator,
       :values,
@@ -1170,6 +1195,7 @@ module Aws::LexModelsV2
     #   <p>A member of the category by which the session analytics were grouped.</p>
     #   @return [String]
     class AnalyticsSessionGroupByKey < Struct.new(
+      nil,
       :name,
       :value,
       keyword_init: true
@@ -1182,6 +1208,7 @@ module Aws::LexModelsV2
     #   <p>Specifies whether to group the session by their end state or their locale.</p>
     #   @return [String]
     class AnalyticsSessionGroupBySpecification < Struct.new(
+      nil,
       :name,
       keyword_init: true
     )
@@ -1243,6 +1270,7 @@ module Aws::LexModelsV2
     #   <p>Specifies whether to sort the results in ascending or descending order.</p>
     #   @return [String]
     class AnalyticsSessionMetric < Struct.new(
+      nil,
       :name,
       :statistic,
       :order,
@@ -1306,6 +1334,7 @@ module Aws::LexModelsV2
     #   <p>The value of the summary statistic for the metric that you requested.</p>
     #   @return [Float]
     class AnalyticsSessionMetricResult < Struct.new(
+      nil,
       :name,
       :statistic,
       :value,
@@ -1325,6 +1354,7 @@ module Aws::LexModelsV2
     #   <p>A list of objects, each of which contains a metric you want to list, the statistic for the metric you want to return, and the method by which to organize the results.</p>
     #   @return [Array<Types::AnalyticsSessionMetricResult>]
     class AnalyticsSessionResult < Struct.new(
+      nil,
       :bin_keys,
       :group_by_keys,
       :metrics_results,
@@ -1338,6 +1368,7 @@ module Aws::LexModelsV2
     #   <p>An attribute to return. The only available attribute is the intent that the bot mapped the utterance to.</p>
     #   @return [String]
     class AnalyticsUtteranceAttribute < Struct.new(
+      nil,
       :name,
       keyword_init: true
     )
@@ -1349,6 +1380,7 @@ module Aws::LexModelsV2
     #   <p>The intent that the bot mapped the utterance to.</p>
     #   @return [String]
     class AnalyticsUtteranceAttributeResult < Struct.new(
+      nil,
       :last_used_intent,
       keyword_init: true
     )
@@ -1512,6 +1544,7 @@ module Aws::LexModelsV2
     #   <p>An array containing the values of the category by which to apply the operator to filter the results. You can provide multiple values if the operator is <code>EQ</code> or <code>CO</code>. If you provide multiple values, you filter for results that equal/contain any of the values. For example, if the <code>name</code>, <code>operator</code>, and <code>values</code> fields are <code>Modality</code>, <code>EQ</code>, and <code>[Speech, Text]</code>, the operation filters for results where the modality was either <code>Speech</code> or <code>Text</code>.</p>
     #   @return [Array<String>]
     class AnalyticsUtteranceFilter < Struct.new(
+      nil,
       :name,
       :operator,
       :values,
@@ -1528,6 +1561,7 @@ module Aws::LexModelsV2
     #   <p>A member of the category by which the utterance analytics were grouped.</p>
     #   @return [String]
     class AnalyticsUtteranceGroupByKey < Struct.new(
+      nil,
       :name,
       :value,
       keyword_init: true
@@ -1540,6 +1574,7 @@ module Aws::LexModelsV2
     #   <p>Specifies whether to group the utterances by their text or their state.</p>
     #   @return [String]
     class AnalyticsUtteranceGroupBySpecification < Struct.new(
+      nil,
       :name,
       keyword_init: true
     )
@@ -1589,6 +1624,7 @@ module Aws::LexModelsV2
     #   <p>Specifies whether to sort the results in ascending or descending order.</p>
     #   @return [String]
     class AnalyticsUtteranceMetric < Struct.new(
+      nil,
       :name,
       :statistic,
       :order,
@@ -1640,6 +1676,7 @@ module Aws::LexModelsV2
     #   <p>The value of the summary statistic for the metric that you requested.</p>
     #   @return [Float]
     class AnalyticsUtteranceMetricResult < Struct.new(
+      nil,
       :name,
       :statistic,
       :value,
@@ -1662,6 +1699,7 @@ module Aws::LexModelsV2
     #   <p>A list of objects containing information about the last used intent at the time of an utterance.</p>
     #   @return [Array<Types::AnalyticsUtteranceAttributeResult>]
     class AnalyticsUtteranceResult < Struct.new(
+      nil,
       :bin_keys,
       :group_by_keys,
       :metrics_results,
@@ -1679,6 +1717,7 @@ module Aws::LexModelsV2
     #               format</a>.</p>
     #   @return [String]
     class AssociatedTranscript < Struct.new(
+      nil,
       :transcript,
       keyword_init: true
     )
@@ -1694,6 +1733,7 @@ module Aws::LexModelsV2
     #   <p>The values to use to filter the transcript.</p>
     #   @return [Array<String>]
     class AssociatedTranscriptFilter < Struct.new(
+      nil,
       :name,
       :values,
       keyword_init: true
@@ -1713,6 +1753,7 @@ module Aws::LexModelsV2
     #   <p>Specifies the settings on DTMF input.</p>
     #   @return [Types::DTMFSpecification]
     class AudioAndDTMFInputSpecification < Struct.new(
+      nil,
       :start_timeout_ms,
       :audio_specification,
       :dtmf_specification,
@@ -1729,6 +1770,7 @@ module Aws::LexModelsV2
     #            bucket.</p>
     #   @return [Types::S3BucketLogDestination]
     class AudioLogDestination < Struct.new(
+      nil,
       :s3_bucket,
       keyword_init: true
     )
@@ -1749,6 +1791,7 @@ module Aws::LexModelsV2
     #   <p>The option to enable selective conversation log capture for audio.</p>
     #   @return [Boolean]
     class AudioLogSetting < Struct.new(
+      nil,
       :enabled,
       :destination,
       :selective_logging_enabled,
@@ -1772,6 +1815,7 @@ module Aws::LexModelsV2
     #            utterance is finished.</p>
     #   @return [Integer]
     class AudioSpecification < Struct.new(
+      nil,
       :max_length_ms,
       :end_timeout_ms,
       keyword_init: true
@@ -1796,6 +1840,7 @@ module Aws::LexModelsV2
     #            can optionally contain a displayAs and/or a weight.</p>
     #   @return [Array<Types::NewCustomVocabularyItem>]
     class BatchCreateCustomVocabularyItemRequest < Struct.new(
+      nil,
       :bot_id,
       :bot_version,
       :locale_id,
@@ -1826,6 +1871,7 @@ module Aws::LexModelsV2
     #            successfully created during the operation.</p>
     #   @return [Array<Types::CustomVocabularyItem>]
     class BatchCreateCustomVocabularyItemResponse < Struct.new(
+      nil,
       :bot_id,
       :bot_version,
       :locale_id,
@@ -1853,6 +1899,7 @@ module Aws::LexModelsV2
     #            Each entry must contain the unique custom vocabulary entry identifier.</p>
     #   @return [Array<Types::CustomVocabularyEntryId>]
     class BatchDeleteCustomVocabularyItemRequest < Struct.new(
+      nil,
       :bot_id,
       :bot_version,
       :locale_id,
@@ -1884,6 +1931,7 @@ module Aws::LexModelsV2
     #            successfully deleted during the operation.</p>
     #   @return [Array<Types::CustomVocabularyItem>]
     class BatchDeleteCustomVocabularyItemResponse < Struct.new(
+      nil,
       :bot_id,
       :bot_version,
       :locale_id,
@@ -1911,6 +1959,7 @@ module Aws::LexModelsV2
     #            and can optionally contain a displayAs and/or a weight.</p>
     #   @return [Array<Types::CustomVocabularyItem>]
     class BatchUpdateCustomVocabularyItemRequest < Struct.new(
+      nil,
       :bot_id,
       :bot_version,
       :locale_id,
@@ -1941,6 +1990,7 @@ module Aws::LexModelsV2
     #            successfully updated during the operation.</p>
     #   @return [Array<Types::CustomVocabularyItem>]
     class BatchUpdateCustomVocabularyItemResponse < Struct.new(
+      nil,
       :bot_id,
       :bot_version,
       :locale_id,
@@ -1959,6 +2009,7 @@ module Aws::LexModelsV2
     #   <p>The guardrail version for the Bedrock guardrail configuration.</p>
     #   @return [String]
     class BedrockGuardrailConfiguration < Struct.new(
+      nil,
       :identifier,
       :version,
       keyword_init: true
@@ -1977,6 +2028,7 @@ module Aws::LexModelsV2
     #   <p>Contains the names of the fields used for an exact response to the user.</p>
     #   @return [Types::BedrockKnowledgeStoreExactResponseFields]
     class BedrockKnowledgeStoreConfiguration < Struct.new(
+      nil,
       :bedrock_knowledge_base_arn,
       :exact_response,
       :exact_response_fields,
@@ -1995,6 +2047,7 @@ module Aws::LexModelsV2
     #   <p>The answer field used for an exact response from Bedrock Knowledge Store.</p>
     #   @return [String]
     class BedrockKnowledgeStoreExactResponseFields < Struct.new(
+      nil,
       :answer_field,
       keyword_init: true
     )
@@ -2015,6 +2068,7 @@ module Aws::LexModelsV2
     #   <p>The custom prompt used in the Bedrock model specification details.</p>
     #   @return [String]
     class BedrockModelSpecification < Struct.new(
+      nil,
       :model_arn,
       :guardrail,
       :trace_status,
@@ -2036,6 +2090,7 @@ module Aws::LexModelsV2
     #   <p>The date and time that the event ended.</p>
     #   @return [Time]
     class BotAliasHistoryEvent < Struct.new(
+      nil,
       :bot_version,
       :start_date,
       :end_date,
@@ -2055,6 +2110,7 @@ module Aws::LexModelsV2
     #            locale.</p>
     #   @return [Types::CodeHookSpecification]
     class BotAliasLocaleSettings < Struct.new(
+      nil,
       :enabled,
       :code_hook_specification,
       keyword_init: true
@@ -2087,6 +2143,7 @@ module Aws::LexModelsV2
     #   <p>The reasons for failure for the aliases bot replications.</p>
     #   @return [Array<String>]
     class BotAliasReplicaSummary < Struct.new(
+      nil,
       :bot_alias_id,
       :bot_alias_replication_status,
       :bot_version,
@@ -2125,6 +2182,7 @@ module Aws::LexModelsV2
     #            updated.</p>
     #   @return [Time]
     class BotAliasSummary < Struct.new(
+      nil,
       :bot_alias_id,
       :bot_alias_name,
       :description,
@@ -2148,6 +2206,7 @@ module Aws::LexModelsV2
     #   <p>The locale Id of the bot alias used in the test set execution.</p>
     #   @return [String]
     class BotAliasTestExecutionTarget < Struct.new(
+      nil,
       :bot_id,
       :bot_alias_id,
       :locale_id,
@@ -2165,6 +2224,7 @@ module Aws::LexModelsV2
     #               <code>DRAFT</code> or the version number.</p>
     #   @return [String]
     class BotExportSpecification < Struct.new(
+      nil,
       :bot_id,
       :bot_version,
       keyword_init: true
@@ -2188,6 +2248,7 @@ module Aws::LexModelsV2
     #            the specified value.</p>
     #   @return [String]
     class BotFilter < Struct.new(
+      nil,
       :name,
       :values,
       :operator,
@@ -2235,6 +2296,7 @@ module Aws::LexModelsV2
     #               <code>TagResource</code> operation.</p>
     #   @return [Hash<String, String>]
     class BotImportSpecification < Struct.new(
+      nil,
       :bot_name,
       :role_arn,
       :data_privacy,
@@ -2260,6 +2322,7 @@ module Aws::LexModelsV2
     #            match one of the locales in the bot.</p>
     #   @return [String]
     class BotLocaleExportSpecification < Struct.new(
+      nil,
       :bot_id,
       :bot_version,
       :locale_id,
@@ -2284,6 +2347,7 @@ module Aws::LexModelsV2
     #            contain the specified value.</p>
     #   @return [String]
     class BotLocaleFilter < Struct.new(
+      nil,
       :name,
       :values,
       :operator,
@@ -2301,6 +2365,7 @@ module Aws::LexModelsV2
     #   <p>A timestamp of the date and time that the event occurred.</p>
     #   @return [Time]
     class BotLocaleHistoryEvent < Struct.new(
+      nil,
       :event,
       :event_date,
       keyword_init: true
@@ -2387,6 +2452,7 @@ module Aws::LexModelsV2
     #            </ul>
     #   @return [Types::VoiceSettings]
     class BotLocaleImportSpecification < Struct.new(
+      nil,
       :bot_id,
       :bot_version,
       :locale_id,
@@ -2406,6 +2472,7 @@ module Aws::LexModelsV2
     #            order.</p>
     #   @return [String]
     class BotLocaleSortBy < Struct.new(
+      nil,
       :attribute,
       :order,
       keyword_init: true
@@ -2436,6 +2503,7 @@ module Aws::LexModelsV2
     #            built.</p>
     #   @return [Time]
     class BotLocaleSummary < Struct.new(
+      nil,
       :locale_id,
       :locale_name,
       :description,
@@ -2464,6 +2532,7 @@ module Aws::LexModelsV2
     #   <p>The version of a bot that is a member of this network of bots.</p>
     #   @return [String]
     class BotMember < Struct.new(
+      nil,
       :bot_member_id,
       :bot_member_name,
       :bot_member_alias_id,
@@ -2484,6 +2553,7 @@ module Aws::LexModelsV2
     #               recommendation results.</p>
     #   @return [Types::SlotTypeStatistics]
     class BotRecommendationResultStatistics < Struct.new(
+      nil,
       :intents,
       :slot_types,
       keyword_init: true
@@ -2504,6 +2574,7 @@ module Aws::LexModelsV2
     #   <p>The statistical summary of the bot recommendation results.</p>
     #   @return [Types::BotRecommendationResultStatistics]
     class BotRecommendationResults < Struct.new(
+      nil,
       :bot_locale_export_url,
       :associated_transcripts_url,
       :statistics,
@@ -2531,6 +2602,7 @@ module Aws::LexModelsV2
     #            last updated.</p>
     #   @return [Time]
     class BotRecommendationSummary < Struct.new(
+      nil,
       :bot_recommendation_status,
       :bot_recommendation_id,
       :creation_date_time,
@@ -2554,6 +2626,7 @@ module Aws::LexModelsV2
     #   <p>The reasons for the failure for the replicated bot.</p>
     #   @return [Array<String>]
     class BotReplicaSummary < Struct.new(
+      nil,
       :replica_region,
       :creation_date_time,
       :bot_replica_status,
@@ -2572,6 +2645,7 @@ module Aws::LexModelsV2
     #            descending.</p>
     #   @return [String]
     class BotSortBy < Struct.new(
+      nil,
       :attribute,
       :order,
       keyword_init: true
@@ -2604,6 +2678,7 @@ module Aws::LexModelsV2
     #   <p>The type of the bot.</p>
     #   @return [String]
     class BotSummary < Struct.new(
+      nil,
       :bot_id,
       :bot_name,
       :description,
@@ -2621,6 +2696,7 @@ module Aws::LexModelsV2
     #   <p>The version of a bot used for a bot locale.</p>
     #   @return [String]
     class BotVersionLocaleDetails < Struct.new(
+      nil,
       :source_bot_version,
       keyword_init: true
     )
@@ -2635,6 +2711,7 @@ module Aws::LexModelsV2
     #   <p>The order of the sort category for the version replicated bots.</p>
     #   @return [String]
     class BotVersionReplicaSortBy < Struct.new(
+      nil,
       :attribute,
       :order,
       keyword_init: true
@@ -2656,6 +2733,7 @@ module Aws::LexModelsV2
     #   <p>The reasons for replication failure for all the replicated bots.</p>
     #   @return [Array<String>]
     class BotVersionReplicaSummary < Struct.new(
+      nil,
       :bot_version,
       :bot_version_replication_status,
       :creation_date_time,
@@ -2674,6 +2752,7 @@ module Aws::LexModelsV2
     #            order.</p>
     #   @return [String]
     class BotVersionSortBy < Struct.new(
+      nil,
       :attribute,
       :order,
       keyword_init: true
@@ -2701,6 +2780,7 @@ module Aws::LexModelsV2
     #            created.</p>
     #   @return [Time]
     class BotVersionSummary < Struct.new(
+      nil,
       :bot_name,
       :bot_version,
       :description,
@@ -2726,6 +2806,7 @@ module Aws::LexModelsV2
     #            locale. For more information, see <a href="https://docs.aws.amazon.com/lexv2/latest/dg/how-languages.html">Supported languages</a>.</p>
     #   @return [String]
     class BuildBotLocaleRequest < Struct.new(
+      nil,
       :bot_id,
       :bot_version,
       :locale_id,
@@ -2757,6 +2838,7 @@ module Aws::LexModelsV2
     #            for this locale.</p>
     #   @return [Time]
     class BuildBotLocaleResponse < Struct.new(
+      nil,
       :bot_id,
       :bot_version,
       :locale_id,
@@ -2775,6 +2857,7 @@ module Aws::LexModelsV2
     #   <p>Contains specifications for the sample utterance generation feature.</p>
     #   @return [Types::SampleUtteranceGenerationSpecification]
     class BuildtimeSettings < Struct.new(
+      nil,
       :descriptive_bot_builder,
       :sample_utterance_generation,
       keyword_init: true
@@ -2791,6 +2874,7 @@ module Aws::LexModelsV2
     #            order.</p>
     #   @return [String]
     class BuiltInIntentSortBy < Struct.new(
+      nil,
       :attribute,
       :order,
       keyword_init: true
@@ -2807,6 +2891,7 @@ module Aws::LexModelsV2
     #   <p>The description of the intent.</p>
     #   @return [String]
     class BuiltInIntentSummary < Struct.new(
+      nil,
       :intent_signature,
       :description,
       keyword_init: true
@@ -2824,6 +2909,7 @@ module Aws::LexModelsV2
     #            descending.</p>
     #   @return [String]
     class BuiltInSlotTypeSortBy < Struct.new(
+      nil,
       :attribute,
       :order,
       keyword_init: true
@@ -2842,6 +2928,7 @@ module Aws::LexModelsV2
     #   <p>The description of the built-in slot type.</p>
     #   @return [String]
     class BuiltInSlotTypeSummary < Struct.new(
+      nil,
       :slot_type_signature,
       :description,
       keyword_init: true
@@ -2860,6 +2947,7 @@ module Aws::LexModelsV2
     #            must be one of the slot values configured for the slot.</p>
     #   @return [String]
     class Button < Struct.new(
+      nil,
       :text,
       :value,
       keyword_init: true
@@ -2878,6 +2966,7 @@ module Aws::LexModelsV2
     #            specified </p>
     #   @return [String]
     class CloudWatchLogGroupLogDestination < Struct.new(
+      nil,
       :cloud_watch_log_group_arn,
       :log_prefix,
       keyword_init: true
@@ -2892,6 +2981,7 @@ module Aws::LexModelsV2
     #            fulfills the user's request to a bot.</p>
     #   @return [Types::LambdaCodeHook]
     class CodeHookSpecification < Struct.new(
+      nil,
       :lambda_code_hook,
       keyword_init: true
     )
@@ -2904,6 +2994,7 @@ module Aws::LexModelsV2
     #   <p>Subslots in the composite slot.</p>
     #   @return [Array<Types::SubSlotTypeComposition>]
     class CompositeSlotTypeSetting < Struct.new(
+      nil,
       :sub_slots,
       keyword_init: true
     )
@@ -2915,6 +3006,7 @@ module Aws::LexModelsV2
     #   <p>The expression string that is evaluated. </p>
     #   @return [String]
     class Condition < Struct.new(
+      nil,
       :expression_string,
       keyword_init: true
     )
@@ -2938,6 +3030,7 @@ module Aws::LexModelsV2
     #            user input.</p>
     #   @return [Types::ResponseSpecification]
     class ConditionalBranch < Struct.new(
+      nil,
       :name,
       :condition,
       :next_step,
@@ -2969,6 +3062,7 @@ module Aws::LexModelsV2
     #            of a condition, a response and a next step.</p>
     #   @return [Types::DefaultConditionalBranch]
     class ConditionalSpecification < Struct.new(
+      nil,
       :active,
       :conditional_branches,
       :default_branch,
@@ -2983,6 +3077,7 @@ module Aws::LexModelsV2
     # @!attribute message
     #   @return [String]
     class ConflictException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -2998,6 +3093,7 @@ module Aws::LexModelsV2
     #         success or failure.</p>
     #   @return [String]
     class ConversationLevelIntentClassificationResultItem < Struct.new(
+      nil,
       :intent_name,
       :match_result,
       keyword_init: true
@@ -3013,6 +3109,7 @@ module Aws::LexModelsV2
     #   <p>The speech transcription success or failure details of the conversation.</p>
     #   @return [String]
     class ConversationLevelResultDetail < Struct.new(
+      nil,
       :end_to_end_result,
       :speech_transcription_result,
       keyword_init: true
@@ -3031,6 +3128,7 @@ module Aws::LexModelsV2
     #   <p>The number of matching slots used in the slots listings for the slot resolution evaluation.</p>
     #   @return [String]
     class ConversationLevelSlotResolutionResultItem < Struct.new(
+      nil,
       :intent_name,
       :slot_name,
       :match_result,
@@ -3056,6 +3154,7 @@ module Aws::LexModelsV2
     #   <p>The slot success or failure of the test result evaluation item.</p>
     #   @return [Array<Types::ConversationLevelSlotResolutionResultItem>]
     class ConversationLevelTestResultItem < Struct.new(
+      nil,
       :conversation_id,
       :end_to_end_result,
       :speech_transcription_result,
@@ -3071,6 +3170,7 @@ module Aws::LexModelsV2
     #   <p>The item list in the test set results data at the conversation level.</p>
     #   @return [Array<Types::ConversationLevelTestResultItem>]
     class ConversationLevelTestResults < Struct.new(
+      nil,
       :items,
       keyword_init: true
     )
@@ -3083,6 +3183,7 @@ module Aws::LexModelsV2
     #         at the conversation level.</p>
     #   @return [String]
     class ConversationLevelTestResultsFilterBy < Struct.new(
+      nil,
       :end_to_end_result,
       keyword_init: true
     )
@@ -3098,6 +3199,7 @@ module Aws::LexModelsV2
     #   <p>The Amazon S3 settings for logging audio to an S3 bucket.</p>
     #   @return [Array<Types::AudioLogSetting>]
     class ConversationLogSettings < Struct.new(
+      nil,
       :text_log_settings,
       :audio_log_settings,
       keyword_init: true
@@ -3119,6 +3221,7 @@ module Aws::LexModelsV2
     #   <p>The filter for the data source of the conversation log.</p>
     #   @return [Types::ConversationLogsDataSourceFilterBy]
     class ConversationLogsDataSource < Struct.new(
+      nil,
       :bot_id,
       :bot_alias_id,
       :locale_id,
@@ -3139,6 +3242,7 @@ module Aws::LexModelsV2
     #   <p>The selection to filter by input mode for the conversation logs. </p>
     #   @return [String]
     class ConversationLogsDataSourceFilterBy < Struct.new(
+      nil,
       :start_time,
       :end_time,
       :input_mode,
@@ -3184,6 +3288,7 @@ module Aws::LexModelsV2
     #               <code>TagResource</code> operation.</p>
     #   @return [Hash<String, String>]
     class CreateBotAliasRequest < Struct.new(
+      nil,
       :bot_alias_name,
       :description,
       :bot_version,
@@ -3237,6 +3342,7 @@ module Aws::LexModelsV2
     #   <p>A list of tags associated with the bot alias.</p>
     #   @return [Hash<String, String>]
     class CreateBotAliasResponse < Struct.new(
+      nil,
       :bot_alias_id,
       :bot_alias_name,
       :description,
@@ -3305,6 +3411,7 @@ module Aws::LexModelsV2
     #   <p>Contains specifications about the generative AI capabilities from Amazon Bedrock that you can turn on for your bot.</p>
     #   @return [Types::GenerativeAISettings]
     class CreateBotLocaleRequest < Struct.new(
+      nil,
       :bot_id,
       :bot_version,
       :locale_id,
@@ -3362,6 +3469,7 @@ module Aws::LexModelsV2
     #   <p>Contains specifications about the generative AI capabilities from Amazon Bedrock that you can turn on for your bot.</p>
     #   @return [Types::GenerativeAISettings]
     class CreateBotLocaleResponse < Struct.new(
+      nil,
       :bot_id,
       :bot_version,
       :locale_name,
@@ -3384,6 +3492,7 @@ module Aws::LexModelsV2
     #   <p>The request for the secondary region that will be used in the replication of the source bot.</p>
     #   @return [String]
     class CreateBotReplicaRequest < Struct.new(
+      nil,
       :bot_id,
       :replica_region,
       keyword_init: true
@@ -3407,6 +3516,7 @@ module Aws::LexModelsV2
     #   <p>The operational status of the replicated bot generated.</p>
     #   @return [String]
     class CreateBotReplicaResponse < Struct.new(
+      nil,
       :bot_id,
       :replica_region,
       :source_region,
@@ -3464,6 +3574,7 @@ module Aws::LexModelsV2
     #   <p>Specifies the configuration for error logging during bot creation.</p>
     #   @return [Types::ErrorLogSettings]
     class CreateBotRequest < Struct.new(
+      nil,
       :bot_name,
       :description,
       :role_arn,
@@ -3524,6 +3635,7 @@ module Aws::LexModelsV2
     #   <p>Specifies configuration settings for delivering error logs to Cloudwatch Logs in an Amazon Lex bot response.</p>
     #   @return [Types::ErrorLogSettings]
     class CreateBotResponse < Struct.new(
+      nil,
       :bot_id,
       :bot_name,
       :description,
@@ -3556,6 +3668,7 @@ module Aws::LexModelsV2
     #            data is copied from the source version to the new version.</p>
     #   @return [Hash<String, Types::BotVersionLocaleDetails>]
     class CreateBotVersionRequest < Struct.new(
+      nil,
       :bot_id,
       :description,
       :bot_version_locale_specification,
@@ -3587,6 +3700,7 @@ module Aws::LexModelsV2
     #            created.</p>
     #   @return [Time]
     class CreateBotVersionResponse < Struct.new(
+      nil,
       :bot_id,
       :description,
       :bot_version,
@@ -3611,6 +3725,7 @@ module Aws::LexModelsV2
     #            transit between Amazon Lex and your local computer.</p>
     #   @return [String]
     class CreateExportRequest < Struct.new(
+      nil,
       :resource_specification,
       :file_format,
       :file_password,
@@ -3640,6 +3755,7 @@ module Aws::LexModelsV2
     #            created.</p>
     #   @return [Time]
     class CreateExportResponse < Struct.new(
+      nil,
       :export_id,
       :resource_specification,
       :file_format,
@@ -3757,6 +3873,7 @@ module Aws::LexModelsV2
     #   <p>Qinconnect intent configuration details for the create intent request.</p>
     #   @return [Types::QInConnectIntentConfiguration]
     class CreateIntentRequest < Struct.new(
+      nil,
       :intent_name,
       :description,
       :parent_intent_signature,
@@ -3840,6 +3957,7 @@ module Aws::LexModelsV2
     #   <p>Qinconnect intent configuration details for the create intent response.</p>
     #   @return [Types::QInConnectIntentConfiguration]
     class CreateIntentResponse < Struct.new(
+      nil,
       :intent_id,
       :intent_name,
       :description,
@@ -3878,6 +3996,7 @@ module Aws::LexModelsV2
     #            exception.</p>
     #   @return [String]
     class CreateResourcePolicyRequest < Struct.new(
+      nil,
       :resource_arn,
       :policy,
       keyword_init: true
@@ -3896,6 +4015,7 @@ module Aws::LexModelsV2
     #            resource, or update a resource.</p>
     #   @return [String]
     class CreateResourcePolicyResponse < Struct.new(
+      nil,
       :resource_arn,
       :revision_id,
       keyword_init: true
@@ -3944,6 +4064,7 @@ module Aws::LexModelsV2
     #            the policy with the new values.</p>
     #   @return [String]
     class CreateResourcePolicyStatementRequest < Struct.new(
+      nil,
       :resource_arn,
       :statement_id,
       :effect,
@@ -3967,6 +4088,7 @@ module Aws::LexModelsV2
     #            resource, or update a resource.</p>
     #   @return [String]
     class CreateResourcePolicyStatementResponse < Struct.new(
+      nil,
       :resource_arn,
       :revision_id,
       keyword_init: true
@@ -4027,6 +4149,7 @@ module Aws::LexModelsV2
     #           expression for the composite slot.</p>
     #   @return [Types::SubSlotSetting]
     class CreateSlotRequest < Struct.new(
+      nil,
       :slot_name,
       :description,
       :slot_type_id,
@@ -4088,6 +4211,7 @@ module Aws::LexModelsV2
     #           expression for the composite slot.</p>
     #   @return [Types::SubSlotSetting]
     class CreateSlotResponse < Struct.new(
+      nil,
       :slot_id,
       :slot_name,
       :description,
@@ -4167,6 +4291,7 @@ module Aws::LexModelsV2
     #   <p>Specifications for a composite slot type.</p>
     #   @return [Types::CompositeSlotTypeSetting]
     class CreateSlotTypeRequest < Struct.new(
+      nil,
       :slot_type_name,
       :description,
       :slot_type_values,
@@ -4225,6 +4350,7 @@ module Aws::LexModelsV2
     #   <p>Specifications for a composite slot type.</p>
     #   @return [Types::CompositeSlotTypeSetting]
     class CreateSlotTypeResponse < Struct.new(
+      nil,
       :slot_type_id,
       :slot_type_name,
       :description,
@@ -4249,6 +4375,7 @@ module Aws::LexModelsV2
     #   <p>The target bot for the test set discrepancy report.</p>
     #   @return [Types::TestSetDiscrepancyReportResourceTarget]
     class CreateTestSetDiscrepancyReportRequest < Struct.new(
+      nil,
       :test_set_id,
       :target,
       keyword_init: true
@@ -4269,6 +4396,7 @@ module Aws::LexModelsV2
     #   <p>The target bot for the test set discrepancy report.</p>
     #   @return [Types::TestSetDiscrepancyReportResourceTarget]
     class CreateTestSetDiscrepancyReportResponse < Struct.new(
+      nil,
       :test_set_discrepancy_report_id,
       :creation_date_time,
       :test_set_id,
@@ -4279,6 +4407,7 @@ module Aws::LexModelsV2
     end
 
     class CreateUploadUrlRequest < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -4293,6 +4422,7 @@ module Aws::LexModelsV2
     #            the definition of your bot or bot locale.</p>
     #   @return [String]
     class CreateUploadUrlResponse < Struct.new(
+      nil,
       :import_id,
       :upload_url,
       keyword_init: true
@@ -4306,6 +4436,7 @@ module Aws::LexModelsV2
     #   <p>The string that is sent to your application.</p>
     #   @return [String]
     class CustomPayload < Struct.new(
+      nil,
       :value,
       keyword_init: true
     )
@@ -4319,6 +4450,7 @@ module Aws::LexModelsV2
     #            items.</p>
     #   @return [String]
     class CustomVocabularyEntryId < Struct.new(
+      nil,
       :item_id,
       keyword_init: true
     )
@@ -4336,6 +4468,7 @@ module Aws::LexModelsV2
     #   <p>The locale of the bot that contains the custom vocabulary to export.</p>
     #   @return [String]
     class CustomVocabularyExportSpecification < Struct.new(
+      nil,
       :bot_id,
       :bot_version,
       :locale_id,
@@ -4356,6 +4489,7 @@ module Aws::LexModelsV2
     #               be <code>en_GB</code>.</p>
     #   @return [String]
     class CustomVocabularyImportSpecification < Struct.new(
+      nil,
       :bot_id,
       :bot_version,
       :locale_id,
@@ -4383,6 +4517,7 @@ module Aws::LexModelsV2
     #            from the custom vocabulary list.</p>
     #   @return [String]
     class CustomVocabularyItem < Struct.new(
+      nil,
       :item_id,
       :phrase,
       :weight,
@@ -4409,6 +4544,7 @@ module Aws::LexModelsV2
     #            character, the input ends after the end timeout.</p>
     #   @return [String]
     class DTMFSpecification < Struct.new(
+      nil,
       :max_length,
       :end_timeout_ms,
       :deletion_character,
@@ -4451,6 +4587,7 @@ module Aws::LexModelsV2
     #               FAQ</a>.</p>
     #   @return [Boolean]
     class DataPrivacy < Struct.new(
+      nil,
       :child_directed,
       keyword_init: true
     )
@@ -4473,6 +4610,7 @@ module Aws::LexModelsV2
     #   <p>Contains details about the configuration of the Amazon Bedrock knowledge base used for the <code>AMAZON.QnAIntent</code>. To set up a knowledge base, follow the steps at <a href="https://docs.aws.amazon.com/bedrock/latest/userguide/knowledge-base.html">Building a knowledge base</a>.</p>
     #   @return [Types::BedrockKnowledgeStoreConfiguration]
     class DataSourceConfiguration < Struct.new(
+      nil,
       :opensearch_configuration,
       :kendra_configuration,
       :bedrock_knowledge_store_configuration,
@@ -4492,6 +4630,7 @@ module Aws::LexModelsV2
     #               filter.</p>
     #   @return [Time]
     class DateRangeFilter < Struct.new(
+      nil,
       :start_date_time,
       :end_date_time,
       keyword_init: true
@@ -4509,6 +4648,7 @@ module Aws::LexModelsV2
     #            user input.</p>
     #   @return [Types::ResponseSpecification]
     class DefaultConditionalBranch < Struct.new(
+      nil,
       :next_step,
       :response,
       keyword_init: true
@@ -4532,6 +4672,7 @@ module Aws::LexModelsV2
     #            another resource.</p>
     #   @return [Boolean]
     class DeleteBotAliasRequest < Struct.new(
+      nil,
       :bot_alias_id,
       :bot_id,
       :skip_resource_in_use_check,
@@ -4554,6 +4695,7 @@ module Aws::LexModelsV2
     #            the <code>ListBotAliases</code> operation.</p>
     #   @return [String]
     class DeleteBotAliasResponse < Struct.new(
+      nil,
       :bot_alias_id,
       :bot_id,
       :bot_alias_status,
@@ -4574,6 +4716,7 @@ module Aws::LexModelsV2
     #            see <a href="https://docs.aws.amazon.com/lexv2/latest/dg/how-languages.html">Supported languages</a>.</p>
     #   @return [String]
     class DeleteBotLocaleRequest < Struct.new(
+      nil,
       :bot_id,
       :bot_version,
       :locale_id,
@@ -4597,6 +4740,7 @@ module Aws::LexModelsV2
     #            longer appears in the list of locales for the bot.</p>
     #   @return [String]
     class DeleteBotLocaleResponse < Struct.new(
+      nil,
       :bot_id,
       :bot_version,
       :locale_id,
@@ -4613,6 +4757,7 @@ module Aws::LexModelsV2
     #   <p>The secondary region of the replicated bot that will be deleted.</p>
     #   @return [String]
     class DeleteBotReplicaRequest < Struct.new(
+      nil,
       :bot_id,
       :replica_region,
       keyword_init: true
@@ -4630,6 +4775,7 @@ module Aws::LexModelsV2
     #   <p>The operational status of the replicated bot generated.</p>
     #   @return [String]
     class DeleteBotReplicaResponse < Struct.new(
+      nil,
       :bot_id,
       :replica_region,
       :bot_replica_status,
@@ -4650,6 +4796,7 @@ module Aws::LexModelsV2
     #            another resource.</p>
     #   @return [Boolean]
     class DeleteBotRequest < Struct.new(
+      nil,
       :bot_id,
       :skip_resource_in_use_check,
       keyword_init: true
@@ -4665,6 +4812,7 @@ module Aws::LexModelsV2
     #            while the bot and its associated resources are being deleted.</p>
     #   @return [String]
     class DeleteBotResponse < Struct.new(
+      nil,
       :bot_id,
       :bot_status,
       keyword_init: true
@@ -4687,6 +4835,7 @@ module Aws::LexModelsV2
     #            another resource.</p>
     #   @return [Boolean]
     class DeleteBotVersionRequest < Struct.new(
+      nil,
       :bot_id,
       :bot_version,
       :skip_resource_in_use_check,
@@ -4705,6 +4854,7 @@ module Aws::LexModelsV2
     #   <p>The current status of the bot. </p>
     #   @return [String]
     class DeleteBotVersionResponse < Struct.new(
+      nil,
       :bot_id,
       :bot_version,
       :bot_status,
@@ -4726,6 +4876,7 @@ module Aws::LexModelsV2
     #         custom vocabulary to remove.</p>
     #   @return [String]
     class DeleteCustomVocabularyRequest < Struct.new(
+      nil,
       :bot_id,
       :bot_version,
       :locale_id,
@@ -4750,6 +4901,7 @@ module Aws::LexModelsV2
     #   <p>The status of removing the custom vocabulary.</p>
     #   @return [String]
     class DeleteCustomVocabularyResponse < Struct.new(
+      nil,
       :bot_id,
       :bot_version,
       :locale_id,
@@ -4763,6 +4915,7 @@ module Aws::LexModelsV2
     #   <p>The unique identifier of the export to delete.</p>
     #   @return [String]
     class DeleteExportRequest < Struct.new(
+      nil,
       :export_id,
       keyword_init: true
     )
@@ -4779,6 +4932,7 @@ module Aws::LexModelsV2
     #            fail.</p>
     #   @return [String]
     class DeleteExportResponse < Struct.new(
+      nil,
       :export_id,
       :export_status,
       keyword_init: true
@@ -4790,6 +4944,7 @@ module Aws::LexModelsV2
     #   <p>The unique identifier of the import to delete.</p>
     #   @return [String]
     class DeleteImportRequest < Struct.new(
+      nil,
       :import_id,
       keyword_init: true
     )
@@ -4805,6 +4960,7 @@ module Aws::LexModelsV2
     #            fail.</p>
     #   @return [String]
     class DeleteImportResponse < Struct.new(
+      nil,
       :import_id,
       :import_status,
       keyword_init: true
@@ -4827,6 +4983,7 @@ module Aws::LexModelsV2
     #            information, see <a href="https://docs.aws.amazon.com/lexv2/latest/dg/how-languages.html">Supported languages</a>.</p>
     #   @return [String]
     class DeleteIntentRequest < Struct.new(
+      nil,
       :intent_id,
       :bot_id,
       :bot_version,
@@ -4847,6 +5004,7 @@ module Aws::LexModelsV2
     #            policy.</p>
     #   @return [String]
     class DeleteResourcePolicyRequest < Struct.new(
+      nil,
       :resource_arn,
       :expected_revision_id,
       keyword_init: true
@@ -4865,6 +5023,7 @@ module Aws::LexModelsV2
     #            resource, or update a resource.</p>
     #   @return [String]
     class DeleteResourcePolicyResponse < Struct.new(
+      nil,
       :resource_arn,
       :revision_id,
       keyword_init: true
@@ -4887,6 +5046,7 @@ module Aws::LexModelsV2
     #            of the statement. </p>
     #   @return [String]
     class DeleteResourcePolicyStatementRequest < Struct.new(
+      nil,
       :resource_arn,
       :statement_id,
       :expected_revision_id,
@@ -4906,6 +5066,7 @@ module Aws::LexModelsV2
     #            resource, or update a resource.</p>
     #   @return [String]
     class DeleteResourcePolicyStatementResponse < Struct.new(
+      nil,
       :resource_arn,
       :revision_id,
       keyword_init: true
@@ -4931,6 +5092,7 @@ module Aws::LexModelsV2
     #   <p>The identifier of the intent associated with the slot.</p>
     #   @return [String]
     class DeleteSlotRequest < Struct.new(
+      nil,
       :slot_id,
       :bot_id,
       :bot_version,
@@ -4963,6 +5125,7 @@ module Aws::LexModelsV2
     #            type even if a slot uses it.</p>
     #   @return [Boolean]
     class DeleteSlotTypeRequest < Struct.new(
+      nil,
       :slot_type_id,
       :bot_id,
       :bot_version,
@@ -4977,6 +5140,7 @@ module Aws::LexModelsV2
     #   <p>The test set Id of the test set to be deleted.</p>
     #   @return [String]
     class DeleteTestSetRequest < Struct.new(
+      nil,
       :test_set_id,
       keyword_init: true
     )
@@ -4998,6 +5162,7 @@ module Aws::LexModelsV2
     #            returned in the response from the <a href="https://docs.aws.amazon.com/lexv2/latest/APIReference/API_runtime_RecognizeText.html">RecognizeText</a> and <a href="https://docs.aws.amazon.com/lexv2/latest/APIReference/API_runtime_RecognizeUtterance.html">RecognizeUtterance</a> operations.</p>
     #   @return [String]
     class DeleteUtterancesRequest < Struct.new(
+      nil,
       :bot_id,
       :locale_id,
       :session_id,
@@ -5007,6 +5172,7 @@ module Aws::LexModelsV2
     end
 
     class DeleteUtterancesResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -5020,6 +5186,7 @@ module Aws::LexModelsV2
     #            describe.</p>
     #   @return [String]
     class DescribeBotAliasRequest < Struct.new(
+      nil,
       :bot_alias_id,
       :bot_id,
       keyword_init: true
@@ -5073,6 +5240,7 @@ module Aws::LexModelsV2
     #   <p>A list of the networks to which the bot alias you described belongs.</p>
     #   @return [Array<Types::ParentBotNetwork>]
     class DescribeBotAliasResponse < Struct.new(
+      nil,
       :bot_alias_id,
       :bot_alias_name,
       :description,
@@ -5103,6 +5271,7 @@ module Aws::LexModelsV2
     #            match one of the supported locales. For more information, see <a href="https://docs.aws.amazon.com/lexv2/latest/dg/how-languages.html">Supported languages</a>. </p>
     #   @return [String]
     class DescribeBotLocaleRequest < Struct.new(
+      nil,
       :bot_id,
       :bot_version,
       :locale_id,
@@ -5174,6 +5343,7 @@ module Aws::LexModelsV2
     #   <p>Contains settings for Amazon Bedrock's generative AI features for your bot locale.</p>
     #   @return [Types::GenerativeAISettings]
     class DescribeBotLocaleResponse < Struct.new(
+      nil,
       :bot_id,
       :bot_version,
       :locale_id,
@@ -5213,6 +5383,7 @@ module Aws::LexModelsV2
     #   <p>The identifier of the bot recommendation to describe.</p>
     #   @return [String]
     class DescribeBotRecommendationRequest < Struct.new(
+      nil,
       :bot_id,
       :bot_version,
       :locale_id,
@@ -5267,6 +5438,7 @@ module Aws::LexModelsV2
     #            recommendation results.</p>
     #   @return [Types::BotRecommendationResults]
     class DescribeBotRecommendationResponse < Struct.new(
+      nil,
       :bot_id,
       :bot_version,
       :locale_id,
@@ -5290,6 +5462,7 @@ module Aws::LexModelsV2
     #   <p>The request for the region of the replicated bot being monitored.</p>
     #   @return [String]
     class DescribeBotReplicaRequest < Struct.new(
+      nil,
       :bot_id,
       :replica_region,
       keyword_init: true
@@ -5316,6 +5489,7 @@ module Aws::LexModelsV2
     #   <p>The failure reasons the bot being monitored failed to replicate.</p>
     #   @return [Array<String>]
     class DescribeBotReplicaResponse < Struct.new(
+      nil,
       :bot_id,
       :replica_region,
       :source_region,
@@ -5331,6 +5505,7 @@ module Aws::LexModelsV2
     #   <p>The unique identifier of the bot to describe.</p>
     #   @return [String]
     class DescribeBotRequest < Struct.new(
+      nil,
       :bot_id,
       keyword_init: true
     )
@@ -5351,6 +5526,7 @@ module Aws::LexModelsV2
     #            return the generation details.</p>
     #   @return [String]
     class DescribeBotResourceGenerationRequest < Struct.new(
+      nil,
       :bot_id,
       :bot_version,
       :locale_id,
@@ -5395,6 +5571,7 @@ module Aws::LexModelsV2
     #   <p>The date and time at which the generated item was updated.</p>
     #   @return [Time]
     class DescribeBotResourceGenerationResponse < Struct.new(
+      nil,
       :bot_id,
       :bot_version,
       :locale_id,
@@ -5458,6 +5635,7 @@ module Aws::LexModelsV2
     #   <p>Contains the configuration for error logging that specifies where and how bot errors are recorded, including destinations like CloudWatch Logs.</p>
     #   @return [Types::ErrorLogSettings]
     class DescribeBotResponse < Struct.new(
+      nil,
       :bot_id,
       :bot_name,
       :description,
@@ -5484,6 +5662,7 @@ module Aws::LexModelsV2
     #   <p>The version of the bot to return metadata for.</p>
     #   @return [String]
     class DescribeBotVersionRequest < Struct.new(
+      nil,
       :bot_id,
       :bot_version,
       keyword_init: true
@@ -5536,6 +5715,7 @@ module Aws::LexModelsV2
     #   <p>The members of bot network in the version that was described.</p>
     #   @return [Array<Types::BotMember>]
     class DescribeBotVersionResponse < Struct.new(
+      nil,
       :bot_id,
       :bot_name,
       :bot_version,
@@ -5565,6 +5745,7 @@ module Aws::LexModelsV2
     #         The locale must be <code>en_GB</code>.</p>
     #   @return [String]
     class DescribeCustomVocabularyMetadataRequest < Struct.new(
+      nil,
       :bot_id,
       :bot_version,
       :locale_id,
@@ -5593,6 +5774,7 @@ module Aws::LexModelsV2
     #   <p>The date and time that the custom vocabulary was last updated.</p>
     #   @return [Time]
     class DescribeCustomVocabularyMetadataResponse < Struct.new(
+      nil,
       :bot_id,
       :bot_version,
       :locale_id,
@@ -5608,6 +5790,7 @@ module Aws::LexModelsV2
     #   <p>The unique identifier of the export to describe.</p>
     #   @return [String]
     class DescribeExportRequest < Struct.new(
+      nil,
       :export_id,
       keyword_init: true
     )
@@ -5645,6 +5828,7 @@ module Aws::LexModelsV2
     #   <p>The last date and time that the export was updated.</p>
     #   @return [Time]
     class DescribeExportResponse < Struct.new(
+      nil,
       :export_id,
       :resource_specification,
       :file_format,
@@ -5662,6 +5846,7 @@ module Aws::LexModelsV2
     #   <p>The unique identifier of the import to describe.</p>
     #   @return [String]
     class DescribeImportRequest < Struct.new(
+      nil,
       :import_id,
       keyword_init: true
     )
@@ -5704,6 +5889,7 @@ module Aws::LexModelsV2
     #   <p>The date and time that the import was last updated.</p>
     #   @return [Time]
     class DescribeImportResponse < Struct.new(
+      nil,
       :import_id,
       :resource_specification,
       :imported_resource_id,
@@ -5733,6 +5919,7 @@ module Aws::LexModelsV2
     #            information, see <a href="https://docs.aws.amazon.com/lexv2/latest/dg/how-languages.html">Supported languages</a>.</p>
     #   @return [String]
     class DescribeIntentRequest < Struct.new(
+      nil,
       :intent_id,
       :bot_id,
       :bot_version,
@@ -5816,6 +6003,7 @@ module Aws::LexModelsV2
     #   <p>Qinconnect intent configuration details for the describe intent response.</p>
     #   @return [Types::QInConnectIntentConfiguration]
     class DescribeIntentResponse < Struct.new(
+      nil,
       :intent_id,
       :intent_name,
       :description,
@@ -5847,6 +6035,7 @@ module Aws::LexModelsV2
     #            resource policy is attached to.</p>
     #   @return [String]
     class DescribeResourcePolicyRequest < Struct.new(
+      nil,
       :resource_arn,
       keyword_init: true
     )
@@ -5869,6 +6058,7 @@ module Aws::LexModelsV2
     #            resource, or update a resource.</p>
     #   @return [String]
     class DescribeResourcePolicyResponse < Struct.new(
+      nil,
       :resource_arn,
       :policy,
       :revision_id,
@@ -5895,6 +6085,7 @@ module Aws::LexModelsV2
     #   <p>The identifier of the intent that contains the slot.</p>
     #   @return [String]
     class DescribeSlotRequest < Struct.new(
+      nil,
       :slot_id,
       :bot_id,
       :bot_version,
@@ -5956,6 +6147,7 @@ module Aws::LexModelsV2
     #           expression for the composite slot.</p>
     #   @return [Types::SubSlotSetting]
     class DescribeSlotResponse < Struct.new(
+      nil,
       :slot_id,
       :slot_name,
       :description,
@@ -5990,6 +6182,7 @@ module Aws::LexModelsV2
     #            information, see <a href="https://docs.aws.amazon.com/lexv2/latest/dg/how-languages.html">Supported languages</a>.</p>
     #   @return [String]
     class DescribeSlotTypeRequest < Struct.new(
+      nil,
       :slot_type_id,
       :bot_id,
       :bot_version,
@@ -6043,6 +6236,7 @@ module Aws::LexModelsV2
     #   <p>Specifications for a composite slot type.</p>
     #   @return [Types::CompositeSlotTypeSetting]
     class DescribeSlotTypeResponse < Struct.new(
+      nil,
       :slot_type_id,
       :slot_type_name,
       :description,
@@ -6065,6 +6259,7 @@ module Aws::LexModelsV2
     #   <p>The execution Id of the test set execution.</p>
     #   @return [String]
     class DescribeTestExecutionRequest < Struct.new(
+      nil,
       :test_execution_id,
       keyword_init: true
     )
@@ -6105,6 +6300,7 @@ module Aws::LexModelsV2
     #   <p>Reasons for the failure of the test set execution.</p>
     #   @return [Array<String>]
     class DescribeTestExecutionResponse < Struct.new(
+      nil,
       :test_execution_id,
       :creation_date_time,
       :last_updated_date_time,
@@ -6124,6 +6320,7 @@ module Aws::LexModelsV2
     #   <p>The unique identifier of the test set discrepancy report.</p>
     #   @return [String]
     class DescribeTestSetDiscrepancyReportRequest < Struct.new(
+      nil,
       :test_set_discrepancy_report_id,
       keyword_init: true
     )
@@ -6158,6 +6355,7 @@ module Aws::LexModelsV2
     #   <p>The failure report for the test set discrepancy report generation action.</p>
     #   @return [Array<String>]
     class DescribeTestSetDiscrepancyReportResponse < Struct.new(
+      nil,
       :test_set_discrepancy_report_id,
       :test_set_id,
       :creation_date_time,
@@ -6176,6 +6374,7 @@ module Aws::LexModelsV2
     #   <p>The unique identifier of the test set generation.</p>
     #   @return [String]
     class DescribeTestSetGenerationRequest < Struct.new(
+      nil,
       :test_set_generation_id,
       keyword_init: true
     )
@@ -6216,6 +6415,7 @@ module Aws::LexModelsV2
     #   <p>The date and time of the last update for the test set generation.</p>
     #   @return [Time]
     class DescribeTestSetGenerationResponse < Struct.new(
+      nil,
       :test_set_generation_id,
       :test_set_generation_status,
       :failure_reasons,
@@ -6236,6 +6436,7 @@ module Aws::LexModelsV2
     #   <p>The test set Id for the test set request.</p>
     #   @return [String]
     class DescribeTestSetRequest < Struct.new(
+      nil,
       :test_set_id,
       keyword_init: true
     )
@@ -6274,6 +6475,7 @@ module Aws::LexModelsV2
     #   <p>The date and time for the last update of the test set data.</p>
     #   @return [Time]
     class DescribeTestSetResponse < Struct.new(
+      nil,
       :test_set_id,
       :test_set_name,
       :description,
@@ -6297,6 +6499,7 @@ module Aws::LexModelsV2
     #   <p>An object containing information about the Amazon Bedrock model used to interpret the prompt used in descriptive bot building.</p>
     #   @return [Types::BedrockModelSpecification]
     class DescriptiveBotBuilderSpecification < Struct.new(
+      nil,
       :enabled,
       :bedrock_model_specification,
       keyword_init: true
@@ -6322,6 +6525,7 @@ module Aws::LexModelsV2
     #   <p>When true the next message for the intent is not used.</p>
     #   @return [Boolean]
     class DialogAction < Struct.new(
+      nil,
       :type,
       :slot_to_elicit,
       :suppress_next_message,
@@ -6349,6 +6553,7 @@ module Aws::LexModelsV2
     #            after the Lambda function is complete.</p>
     #   @return [Types::PostDialogCodeHookInvocationSpecification]
     class DialogCodeHookInvocationSetting < Struct.new(
+      nil,
       :enable_code_hook_invocation,
       :active,
       :invocation_label,
@@ -6365,6 +6570,7 @@ module Aws::LexModelsV2
     #            requests.</p>
     #   @return [Boolean]
     class DialogCodeHookSettings < Struct.new(
+      nil,
       :enabled,
       keyword_init: true
     )
@@ -6389,6 +6595,7 @@ module Aws::LexModelsV2
     #            information. It contains application information passed between Amazon Lex and a client application.</p>
     #   @return [Hash<String, String>]
     class DialogState < Struct.new(
+      nil,
       :dialog_action,
       :intent,
       :session_attributes,
@@ -6407,6 +6614,7 @@ module Aws::LexModelsV2
     #            hook is happening.</p>
     #   @return [String]
     class ElicitationCodeHookInvocationSetting < Struct.new(
+      nil,
       :enable_code_hook_invocation,
       :invocation_label,
       keyword_init: true
@@ -6429,6 +6637,7 @@ module Aws::LexModelsV2
     #   <p>The password used to encrypt the associated transcript file.</p>
     #   @return [String]
     class EncryptionSetting < Struct.new(
+      nil,
       :kms_key_arn,
       :bot_locale_export_password,
       :associated_transcripts_password,
@@ -6442,6 +6651,7 @@ module Aws::LexModelsV2
     #   <p>Settings parameters for the error logs, when it is enabled.</p>
     #   @return [Boolean]
     class ErrorLogSettings < Struct.new(
+      nil,
       :enabled,
       keyword_init: true
     )
@@ -6456,6 +6666,7 @@ module Aws::LexModelsV2
     #   <p>The name of the field that contains the answer to the query made to the OpenSearch Service database.</p>
     #   @return [String]
     class ExactResponseFields < Struct.new(
+      nil,
       :question_field,
       :answer_field,
       keyword_init: true
@@ -6471,6 +6682,7 @@ module Aws::LexModelsV2
     #   <p>The message describing the error.</p>
     #   @return [String]
     class ExecutionErrorDetails < Struct.new(
+      nil,
       :error_code,
       :error_message,
       keyword_init: true
@@ -6495,6 +6707,7 @@ module Aws::LexModelsV2
     #            contain the specified value.</p>
     #   @return [String]
     class ExportFilter < Struct.new(
+      nil,
       :name,
       :values,
       :operator,
@@ -6519,6 +6732,7 @@ module Aws::LexModelsV2
     #   <p>Specifications for the test set that is exported as a resource.</p>
     #   @return [Types::TestSetExportSpecification]
     class ExportResourceSpecification < Struct.new(
+      nil,
       :bot_export_specification,
       :bot_locale_export_specification,
       :custom_vocabulary_export_specification,
@@ -6536,6 +6750,7 @@ module Aws::LexModelsV2
     #   <p>The order to sort the list.</p>
     #   @return [String]
     class ExportSortBy < Struct.new(
+      nil,
       :attribute,
       :order,
       keyword_init: true
@@ -6565,6 +6780,7 @@ module Aws::LexModelsV2
     #   <p>The date and time that the export was last updated.</p>
     #   @return [Time]
     class ExportSummary < Struct.new(
+      nil,
       :export_id,
       :resource_specification,
       :file_format,
@@ -6581,6 +6797,7 @@ module Aws::LexModelsV2
     #   <p>Settings required for a slot type based on a grammar that you provide.</p>
     #   @return [Types::GrammarSlotTypeSetting]
     class ExternalSourceSetting < Struct.new(
+      nil,
       :grammar_slot_type_setting,
       keyword_init: true
     )
@@ -6602,6 +6819,7 @@ module Aws::LexModelsV2
     #            from the custom vocabulary list.</p>
     #   @return [String]
     class FailedCustomVocabularyItem < Struct.new(
+      nil,
       :item_id,
       :error_message,
       :error_code,
@@ -6631,6 +6849,7 @@ module Aws::LexModelsV2
     #               <code>active</code> is false, the code hook doesn't run.</p>
     #   @return [Boolean]
     class FulfillmentCodeHookSettings < Struct.new(
+      nil,
       :enabled,
       :post_fulfillment_status_specification,
       :fulfillment_updates_specification,
@@ -6661,6 +6880,7 @@ module Aws::LexModelsV2
     #            is playing.</p>
     #   @return [Boolean]
     class FulfillmentStartResponseSpecification < Struct.new(
+      nil,
       :delay_in_seconds,
       :message_groups,
       :allow_interrupt,
@@ -6686,6 +6906,7 @@ module Aws::LexModelsV2
     #            is playing.</p>
     #   @return [Boolean]
     class FulfillmentUpdateResponseSpecification < Struct.new(
+      nil,
       :frequency_in_seconds,
       :message_groups,
       :allow_interrupt,
@@ -6716,6 +6937,7 @@ module Aws::LexModelsV2
     #            before it times out.</p>
     #   @return [Integer]
     class FulfillmentUpdatesSpecification < Struct.new(
+      nil,
       :active,
       :start_response,
       :update_response,
@@ -6738,6 +6960,7 @@ module Aws::LexModelsV2
     #   <p>The unique locale Id for the bot request to generate utterances.</p>
     #   @return [String]
     class GenerateBotElementRequest < Struct.new(
+      nil,
       :intent_id,
       :bot_id,
       :bot_version,
@@ -6763,6 +6986,7 @@ module Aws::LexModelsV2
     #   <p>The sample utterances for the bot which received the response.</p>
     #   @return [Array<Types::SampleUtterance>]
     class GenerateBotElementResponse < Struct.new(
+      nil,
       :bot_id,
       :bot_version,
       :locale_id,
@@ -6791,6 +7015,7 @@ module Aws::LexModelsV2
     #   <p>The order by which to sort the generation request information.</p>
     #   @return [String]
     class GenerationSortBy < Struct.new(
+      nil,
       :attribute,
       :order,
       keyword_init: true
@@ -6812,6 +7037,7 @@ module Aws::LexModelsV2
     #   <p>The date and time at which the generation request was last updated.</p>
     #   @return [Time]
     class GenerationSummary < Struct.new(
+      nil,
       :generation_id,
       :generation_status,
       :creation_date_time,
@@ -6829,6 +7055,7 @@ module Aws::LexModelsV2
     #   <p>Contains specifications about the Amazon Lex build time generative AI capabilities from Amazon Bedrock that you can turn on for your bot.</p>
     #   @return [Types::BuildtimeSettings]
     class GenerativeAISettings < Struct.new(
+      nil,
       :runtime_settings,
       :buildtime_settings,
       keyword_init: true
@@ -6840,6 +7067,7 @@ module Aws::LexModelsV2
     #   <p>The unique identifier of the completed test execution.</p>
     #   @return [String]
     class GetTestExecutionArtifactsUrlRequest < Struct.new(
+      nil,
       :test_execution_id,
       keyword_init: true
     )
@@ -6853,6 +7081,7 @@ module Aws::LexModelsV2
     #   <p>The pre-signed Amazon S3 URL to download completed test execution.</p>
     #   @return [String]
     class GetTestExecutionArtifactsUrlResponse < Struct.new(
+      nil,
       :test_execution_id,
       :download_artifacts_url,
       keyword_init: true
@@ -6865,6 +7094,7 @@ module Aws::LexModelsV2
     #   <p>The source of the grammar used to create the slot type.</p>
     #   @return [Types::GrammarSlotTypeSource]
     class GrammarSlotTypeSetting < Struct.new(
+      nil,
       :source,
       keyword_init: true
     )
@@ -6883,6 +7113,7 @@ module Aws::LexModelsV2
     #   <p>The KMS key required to decrypt the contents of the grammar, if any.</p>
     #   @return [String]
     class GrammarSlotTypeSource < Struct.new(
+      nil,
       :s3_bucket_name,
       :s3_object_key,
       :kms_key_arn,
@@ -6915,6 +7146,7 @@ module Aws::LexModelsV2
     #            the button.</p>
     #   @return [Array<Types::Button>]
     class ImageResponseCard < Struct.new(
+      nil,
       :title,
       :subtitle,
       :image_url,
@@ -6941,6 +7173,7 @@ module Aws::LexModelsV2
     #            contain the specified value.</p>
     #   @return [String]
     class ImportFilter < Struct.new(
+      nil,
       :name,
       :values,
       :operator,
@@ -6965,6 +7198,7 @@ module Aws::LexModelsV2
     #   <p>Specifications for the test set that is imported.</p>
     #   @return [Types::TestSetImportResourceSpecification]
     class ImportResourceSpecification < Struct.new(
+      nil,
       :bot_import_specification,
       :bot_locale_import_specification,
       :custom_vocabulary_import_specification,
@@ -6982,6 +7216,7 @@ module Aws::LexModelsV2
     #   <p>The order to sort the list.</p>
     #   @return [String]
     class ImportSortBy < Struct.new(
+      nil,
       :attribute,
       :order,
       keyword_init: true
@@ -7019,6 +7254,7 @@ module Aws::LexModelsV2
     #   <p>The type of resource that was imported.</p>
     #   @return [String]
     class ImportSummary < Struct.new(
+      nil,
       :import_id,
       :imported_resource_id,
       :imported_resource_name,
@@ -7053,6 +7289,7 @@ module Aws::LexModelsV2
     #            called by Amazon Lex at a step of the conversation. </p>
     #   @return [Types::DialogCodeHookInvocationSetting]
     class InitialResponseSetting < Struct.new(
+      nil,
       :initial_response,
       :next_step,
       :conditional,
@@ -7068,6 +7305,7 @@ module Aws::LexModelsV2
     #   <p>The name of the context.</p>
     #   @return [String]
     class InputContext < Struct.new(
+      nil,
       :name,
       keyword_init: true
     )
@@ -7086,6 +7324,7 @@ module Aws::LexModelsV2
     #   <p>Runtime hints for the session state.</p>
     #   @return [Types::RuntimeHints]
     class InputSessionStateSpecification < Struct.new(
+      nil,
       :session_attributes,
       :active_contexts,
       :runtime_hints,
@@ -7105,6 +7344,7 @@ module Aws::LexModelsV2
     #   <p>The result of the intent classification test.</p>
     #   @return [Types::IntentClassificationTestResultItemCounts]
     class IntentClassificationTestResultItem < Struct.new(
+      nil,
       :intent_name,
       :multi_turn_conversation,
       :result_counts,
@@ -7129,6 +7369,7 @@ module Aws::LexModelsV2
     #   <p>The number of matched and mismatched results for intent recognition for the intent.</p>
     #   @return [Hash<String, Integer>]
     class IntentClassificationTestResultItemCounts < Struct.new(
+      nil,
       :total_result_count,
       :speech_transcription_result_counts,
       :intent_match_result_counts,
@@ -7142,6 +7383,7 @@ module Aws::LexModelsV2
     #   <p>A list of the results for the intent classification test.</p>
     #   @return [Array<Types::IntentClassificationTestResultItem>]
     class IntentClassificationTestResults < Struct.new(
+      nil,
       :items,
       keyword_init: true
     )
@@ -7170,6 +7412,7 @@ module Aws::LexModelsV2
     #            attribute is set to <code>EvalutateConditional</code>.</p>
     #   @return [Types::ConditionalSpecification]
     class IntentClosingSetting < Struct.new(
+      nil,
       :closing_response,
       :active,
       :next_step,
@@ -7250,6 +7493,7 @@ module Aws::LexModelsV2
     #            hook is invoked during confirmation prompt retries.</p>
     #   @return [Types::ElicitationCodeHookInvocationSetting]
     class IntentConfirmationSetting < Struct.new(
+      nil,
       :prompt_specification,
       :declination_response,
       :active,
@@ -7284,6 +7528,7 @@ module Aws::LexModelsV2
     #            contain the specified value.</p>
     #   @return [String]
     class IntentFilter < Struct.new(
+      nil,
       :name,
       :values,
       :operator,
@@ -7303,6 +7548,7 @@ module Aws::LexModelsV2
     #   <p>The results for the slot resolution in the test execution result.</p>
     #   @return [Array<Types::SlotResolutionTestResultItem>]
     class IntentLevelSlotResolutionTestResultItem < Struct.new(
+      nil,
       :intent_name,
       :multi_turn_conversation,
       :slot_resolution_results,
@@ -7321,6 +7567,7 @@ module Aws::LexModelsV2
     #   <p>Indicates the items for the slot level resolution for the intents.</p>
     #   @return [Array<Types::IntentLevelSlotResolutionTestResultItem>]
     class IntentLevelSlotResolutionTestResults < Struct.new(
+      nil,
       :items,
       keyword_init: true
     )
@@ -7338,6 +7585,7 @@ module Aws::LexModelsV2
     #            the map aren't overridden.</p>
     #   @return [Hash<String, Types::SlotValueOverride>]
     class IntentOverride < Struct.new(
+      nil,
       :name,
       :slots,
       keyword_init: true
@@ -7354,6 +7602,7 @@ module Aws::LexModelsV2
     #            descending.</p>
     #   @return [String]
     class IntentSortBy < Struct.new(
+      nil,
       :attribute,
       :order,
       keyword_init: true
@@ -7368,6 +7617,7 @@ module Aws::LexModelsV2
     #               recommendation.</p>
     #   @return [Integer]
     class IntentStatistics < Struct.new(
+      nil,
       :discovered_intent_count,
       keyword_init: true
     )
@@ -7404,6 +7654,7 @@ module Aws::LexModelsV2
     #            updated.</p>
     #   @return [Time]
     class IntentSummary < Struct.new(
+      nil,
       :intent_id,
       :intent_name,
       :description,
@@ -7421,6 +7672,7 @@ module Aws::LexModelsV2
     # @!attribute message
     #   @return [String]
     class InternalServerException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -7432,6 +7684,7 @@ module Aws::LexModelsV2
     #   <p>The name of an intent that was invoked.</p>
     #   @return [String]
     class InvokedIntentSample < Struct.new(
+      nil,
       :intent_name,
       keyword_init: true
     )
@@ -7458,6 +7711,7 @@ module Aws::LexModelsV2
     #            queries</a>.</p>
     #   @return [String]
     class KendraConfiguration < Struct.new(
+      nil,
       :kendra_index,
       :query_filter_string_enabled,
       :query_filter_string,
@@ -7481,6 +7735,7 @@ module Aws::LexModelsV2
     #            invoke your Lambda function.</p>
     #   @return [String]
     class LambdaCodeHook < Struct.new(
+      nil,
       :lambda_arn,
       :code_hook_interface_version,
       keyword_init: true
@@ -7496,6 +7751,7 @@ module Aws::LexModelsV2
     #               files that are within the date range.</p>
     #   @return [Types::DateRangeFilter]
     class LexTranscriptFilter < Struct.new(
+      nil,
       :date_range_filter,
       keyword_init: true
     )
@@ -7548,6 +7804,7 @@ module Aws::LexModelsV2
     #            return the next page of results.</p>
     #   @return [String]
     class ListAggregatedUtterancesRequest < Struct.new(
+      nil,
       :bot_id,
       :bot_alias_id,
       :bot_version,
@@ -7624,6 +7881,7 @@ module Aws::LexModelsV2
     #            next page of results.</p>
     #   @return [String]
     class ListAggregatedUtterancesResponse < Struct.new(
+      nil,
       :bot_id,
       :bot_alias_id,
       :bot_version,
@@ -7652,6 +7910,7 @@ module Aws::LexModelsV2
     #   <p>The request for the next token for the replicated bot created from the source bot alias.</p>
     #   @return [String]
     class ListBotAliasReplicasRequest < Struct.new(
+      nil,
       :bot_id,
       :replica_region,
       :max_results,
@@ -7677,6 +7936,7 @@ module Aws::LexModelsV2
     #   <p>The next token for the replicated bots created from the source bot alias.</p>
     #   @return [String]
     class ListBotAliasReplicasResponse < Struct.new(
+      nil,
       :bot_id,
       :source_region,
       :replica_region,
@@ -7703,6 +7963,7 @@ module Aws::LexModelsV2
     #            results.</p>
     #   @return [String]
     class ListBotAliasesRequest < Struct.new(
+      nil,
       :bot_id,
       :max_results,
       :next_token,
@@ -7729,6 +7990,7 @@ module Aws::LexModelsV2
     #   <p>The identifier of the bot associated with the aliases.</p>
     #   @return [String]
     class ListBotAliasesResponse < Struct.new(
+      nil,
       :bot_alias_summaries,
       :next_token,
       :bot_id,
@@ -7765,6 +8027,7 @@ module Aws::LexModelsV2
     #         </p>
     #   @return [String]
     class ListBotLocalesRequest < Struct.new(
+      nil,
       :bot_id,
       :bot_version,
       :sort_by,
@@ -7797,6 +8060,7 @@ module Aws::LexModelsV2
     #            get the next page of results.</p>
     #   @return [Array<Types::BotLocaleSummary>]
     class ListBotLocalesResponse < Struct.new(
+      nil,
       :bot_id,
       :bot_version,
       :next_token,
@@ -7830,6 +8094,7 @@ module Aws::LexModelsV2
     #            return the next page of results.</p>
     #   @return [String]
     class ListBotRecommendationsRequest < Struct.new(
+      nil,
       :bot_id,
       :bot_version,
       :locale_id,
@@ -7867,6 +8132,7 @@ module Aws::LexModelsV2
     #            results. </p>
     #   @return [String]
     class ListBotRecommendationsResponse < Struct.new(
+      nil,
       :bot_id,
       :bot_version,
       :locale_id,
@@ -7881,6 +8147,7 @@ module Aws::LexModelsV2
     #   <p>The request for the unique bot IDs in the list of replicated bots.</p>
     #   @return [String]
     class ListBotReplicasRequest < Struct.new(
+      nil,
       :bot_id,
       keyword_init: true
     )
@@ -7897,6 +8164,7 @@ module Aws::LexModelsV2
     #   <p>The summary details for the replicated bots.</p>
     #   @return [Array<Types::BotReplicaSummary>]
     class ListBotReplicasResponse < Struct.new(
+      nil,
       :bot_id,
       :source_region,
       :bot_replica_summaries,
@@ -7931,6 +8199,7 @@ module Aws::LexModelsV2
     #         return the next batch of results.</p>
     #   @return [String]
     class ListBotResourceGenerationsRequest < Struct.new(
+      nil,
       :bot_id,
       :bot_version,
       :locale_id,
@@ -7961,6 +8230,7 @@ module Aws::LexModelsV2
     #            return the next batch of results.</p>
     #   @return [String]
     class ListBotResourceGenerationsResponse < Struct.new(
+      nil,
       :bot_id,
       :bot_version,
       :locale_id,
@@ -7987,6 +8257,7 @@ module Aws::LexModelsV2
     #   <p>The requested sort category for the list of replicated bots.</p>
     #   @return [Types::BotVersionReplicaSortBy]
     class ListBotVersionReplicasRequest < Struct.new(
+      nil,
       :bot_id,
       :replica_region,
       :max_results,
@@ -8013,6 +8284,7 @@ module Aws::LexModelsV2
     #   <p>The next token used for the replicated bots in the list of replicated bots.</p>
     #   @return [String]
     class ListBotVersionReplicasResponse < Struct.new(
+      nil,
       :bot_id,
       :source_region,
       :replica_region,
@@ -8044,6 +8316,7 @@ module Aws::LexModelsV2
     #            results.</p>
     #   @return [String]
     class ListBotVersionsRequest < Struct.new(
+      nil,
       :bot_id,
       :sort_by,
       :max_results,
@@ -8071,6 +8344,7 @@ module Aws::LexModelsV2
     #            operation request to get the next page of results.</p>
     #   @return [String]
     class ListBotVersionsResponse < Struct.new(
+      nil,
       :bot_id,
       :bot_version_summaries,
       :next_token,
@@ -8105,6 +8379,7 @@ module Aws::LexModelsV2
     #            null.</p>
     #   @return [String]
     class ListBotsRequest < Struct.new(
+      nil,
       :sort_by,
       :filters,
       :max_results,
@@ -8129,6 +8404,7 @@ module Aws::LexModelsV2
     #            operation request to get the next page of results.</p>
     #   @return [String]
     class ListBotsResponse < Struct.new(
+      nil,
       :bot_summaries,
       :next_token,
       keyword_init: true
@@ -8159,6 +8435,7 @@ module Aws::LexModelsV2
     #            results.</p>
     #   @return [String]
     class ListBuiltInIntentsRequest < Struct.new(
+      nil,
       :locale_id,
       :sort_by,
       :max_results,
@@ -8186,6 +8463,7 @@ module Aws::LexModelsV2
     #   <p>The language and locale of the intents in the list.</p>
     #   @return [String]
     class ListBuiltInIntentsResponse < Struct.new(
+      nil,
       :built_in_intent_summaries,
       :next_token,
       :locale_id,
@@ -8218,6 +8496,7 @@ module Aws::LexModelsV2
     #            results.</p>
     #   @return [String]
     class ListBuiltInSlotTypesRequest < Struct.new(
+      nil,
       :locale_id,
       :sort_by,
       :max_results,
@@ -8246,6 +8525,7 @@ module Aws::LexModelsV2
     #   <p>The language and locale of the slot types in the list.</p>
     #   @return [String]
     class ListBuiltInSlotTypesResponse < Struct.new(
+      nil,
       :built_in_slot_type_summaries,
       :next_token,
       :locale_id,
@@ -8276,6 +8556,7 @@ module Aws::LexModelsV2
     #            request.</p>
     #   @return [String]
     class ListCustomVocabularyItemsRequest < Struct.new(
+      nil,
       :bot_id,
       :bot_version,
       :locale_id,
@@ -8307,6 +8588,7 @@ module Aws::LexModelsV2
     #            response.</p>
     #   @return [String]
     class ListCustomVocabularyItemsResponse < Struct.new(
+      nil,
       :bot_id,
       :bot_version,
       :locale_id,
@@ -8354,6 +8636,7 @@ module Aws::LexModelsV2
     #         both bot locales and custom vocabularies are exported.</p>
     #   @return [String]
     class ListExportsRequest < Struct.new(
+      nil,
       :bot_id,
       :bot_version,
       :sort_by,
@@ -8390,6 +8673,7 @@ module Aws::LexModelsV2
     #   <p>The locale specified in the request.</p>
     #   @return [String]
     class ListExportsResponse < Struct.new(
+      nil,
       :bot_id,
       :bot_version,
       :export_summaries,
@@ -8437,6 +8721,7 @@ module Aws::LexModelsV2
     #            the list contains both bot locales and custom vocabularies.</p>
     #   @return [String]
     class ListImportsRequest < Struct.new(
+      nil,
       :bot_id,
       :bot_version,
       :sort_by,
@@ -8474,6 +8759,7 @@ module Aws::LexModelsV2
     #   <p>The locale specified in the request.</p>
     #   @return [String]
     class ListImportsResponse < Struct.new(
+      nil,
       :bot_id,
       :bot_version,
       :import_summaries,
@@ -8523,6 +8809,7 @@ module Aws::LexModelsV2
     #            <p>Use the returned token in the nextToken parameter of a ListIntentMetrics request to return the next page of results. For a complete set of results, call the ListIntentMetrics operation until the nextToken returned in the response is null.</p>
     #   @return [String]
     class ListIntentMetricsRequest < Struct.new(
+      nil,
       :bot_id,
       :start_date_time,
       :end_date_time,
@@ -8548,6 +8835,7 @@ module Aws::LexModelsV2
     #            <p>Use the returned token in the nextToken parameter of a ListIntentMetrics request to return the next page of results. For a complete set of results, call the ListIntentMetrics operation until the nextToken returned in the response is null.</p>
     #   @return [String]
     class ListIntentMetricsResponse < Struct.new(
+      nil,
       :bot_id,
       :results,
       :next_token,
@@ -8583,6 +8871,7 @@ module Aws::LexModelsV2
     #   <p>A list of objects, each describes a condition by which you want to filter the results.</p>
     #   @return [Array<Types::AnalyticsPathFilter>]
     class ListIntentPathsRequest < Struct.new(
+      nil,
       :bot_id,
       :start_date_time,
       :end_date_time,
@@ -8597,6 +8886,7 @@ module Aws::LexModelsV2
     #   <p>A list of objects, each of which contains information about a node in the intent path for which you requested metrics.</p>
     #   @return [Array<Types::AnalyticsIntentNodeSummary>]
     class ListIntentPathsResponse < Struct.new(
+      nil,
       :node_summaries,
       keyword_init: true
     )
@@ -8642,6 +8932,7 @@ module Aws::LexModelsV2
     #            <p>Use the returned token in the nextToken parameter of a ListIntentStageMetrics request to return the next page of results. For a complete set of results, call the ListIntentStageMetrics operation until the nextToken returned in the response is null.</p>
     #   @return [String]
     class ListIntentStageMetricsRequest < Struct.new(
+      nil,
       :bot_id,
       :start_date_time,
       :end_date_time,
@@ -8667,6 +8958,7 @@ module Aws::LexModelsV2
     #            <p>Use the returned token in the nextToken parameter of a ListIntentStageMetrics request to return the next page of results. For a complete set of results, call the ListIntentStageMetrics operation until the nextToken returned in the response is null.</p>
     #   @return [String]
     class ListIntentStageMetricsResponse < Struct.new(
+      nil,
       :bot_id,
       :results,
       :next_token,
@@ -8713,6 +9005,7 @@ module Aws::LexModelsV2
     #            null.</p>
     #   @return [String]
     class ListIntentsRequest < Struct.new(
+      nil,
       :bot_id,
       :bot_version,
       :locale_id,
@@ -8749,6 +9042,7 @@ module Aws::LexModelsV2
     #            operation request to get the next page of results.</p>
     #   @return [String]
     class ListIntentsResponse < Struct.new(
+      nil,
       :bot_id,
       :bot_version,
       :locale_id,
@@ -8786,6 +9080,7 @@ module Aws::LexModelsV2
     #            actual number of results are returned.</p>
     #   @return [Integer]
     class ListRecommendedIntentsRequest < Struct.new(
+      nil,
       :bot_id,
       :bot_version,
       :locale_id,
@@ -8828,6 +9123,7 @@ module Aws::LexModelsV2
     #            results.</p>
     #   @return [String]
     class ListRecommendedIntentsResponse < Struct.new(
+      nil,
       :bot_id,
       :bot_version,
       :locale_id,
@@ -8862,6 +9158,7 @@ module Aws::LexModelsV2
     #            <p>Use the returned token in the nextToken parameter of a ListSessionAnalyticsData request to return the next page of results. For a complete set of results, call the ListSessionAnalyticsData operation until the nextToken returned in the response is null.</p>
     #   @return [String]
     class ListSessionAnalyticsDataRequest < Struct.new(
+      nil,
       :bot_id,
       :start_date_time,
       :end_date_time,
@@ -8885,6 +9182,7 @@ module Aws::LexModelsV2
     #   <p>A list of objects, each of which contains information about a session with the bot.</p>
     #   @return [Array<Types::SessionSpecification>]
     class ListSessionAnalyticsDataResponse < Struct.new(
+      nil,
       :bot_id,
       :next_token,
       :sessions,
@@ -8932,6 +9230,7 @@ module Aws::LexModelsV2
     #            <p>Use the returned token in the nextToken parameter of a ListSessionMetrics request to return the next page of results. For a complete set of results, call the ListSessionMetrics operation until the nextToken returned in the response is null.</p>
     #   @return [String]
     class ListSessionMetricsRequest < Struct.new(
+      nil,
       :bot_id,
       :start_date_time,
       :end_date_time,
@@ -8957,6 +9256,7 @@ module Aws::LexModelsV2
     #            <p>Use the returned token in the nextToken parameter of a ListSessionMetrics request to return the next page of results. For a complete set of results, call the ListSessionMetrics operation until the nextToken returned in the response is null.</p>
     #   @return [String]
     class ListSessionMetricsResponse < Struct.new(
+      nil,
       :bot_id,
       :results,
       :next_token,
@@ -9001,6 +9301,7 @@ module Aws::LexModelsV2
     #            results.</p>
     #   @return [String]
     class ListSlotTypesRequest < Struct.new(
+      nil,
       :bot_id,
       :bot_version,
       :locale_id,
@@ -9037,6 +9338,7 @@ module Aws::LexModelsV2
     #            operation request to get the next page of results.</p>
     #   @return [String]
     class ListSlotTypesResponse < Struct.new(
+      nil,
       :bot_id,
       :bot_version,
       :locale_id,
@@ -9085,6 +9387,7 @@ module Aws::LexModelsV2
     #            results.</p>
     #   @return [String]
     class ListSlotsRequest < Struct.new(
+      nil,
       :bot_id,
       :bot_version,
       :locale_id,
@@ -9125,6 +9428,7 @@ module Aws::LexModelsV2
     #            operation request to get the next page of results.</p>
     #   @return [String]
     class ListSlotsResponse < Struct.new(
+      nil,
       :bot_id,
       :bot_version,
       :locale_id,
@@ -9141,6 +9445,7 @@ module Aws::LexModelsV2
     #            for.</p>
     #   @return [String]
     class ListTagsForResourceRequest < Struct.new(
+      nil,
       :resource_arn,
       keyword_init: true
     )
@@ -9151,6 +9456,7 @@ module Aws::LexModelsV2
     #   <p>The tags associated with a resource.</p>
     #   @return [Hash<String, String>]
     class ListTagsForResourceResponse < Struct.new(
+      nil,
       :tags,
       keyword_init: true
     )
@@ -9175,6 +9481,7 @@ module Aws::LexModelsV2
     #         parameter to return the next page of results.</p>
     #   @return [String]
     class ListTestExecutionResultItemsRequest < Struct.new(
+      nil,
       :test_execution_id,
       :result_filter_by,
       :max_results,
@@ -9195,6 +9502,7 @@ module Aws::LexModelsV2
     #         operation request to get the next page of results.</p>
     #   @return [String]
     class ListTestExecutionResultItemsResponse < Struct.new(
+      nil,
       :test_execution_results,
       :next_token,
       keyword_init: true
@@ -9216,6 +9524,7 @@ module Aws::LexModelsV2
     #         Use that token in the nextToken parameter to return the next page of results.</p>
     #   @return [String]
     class ListTestExecutionsRequest < Struct.new(
+      nil,
       :sort_by,
       :max_results,
       :next_token,
@@ -9234,6 +9543,7 @@ module Aws::LexModelsV2
     #         get the next page of results.</p>
     #   @return [String]
     class ListTestExecutionsResponse < Struct.new(
+      nil,
       :test_executions,
       :next_token,
       keyword_init: true
@@ -9255,6 +9565,7 @@ module Aws::LexModelsV2
     #         Use that token in the nextToken parameter to return the next page of results.</p>
     #   @return [String]
     class ListTestSetRecordsRequest < Struct.new(
+      nil,
       :test_set_id,
       :max_results,
       :next_token,
@@ -9273,6 +9584,7 @@ module Aws::LexModelsV2
     #         request to get the next page of records.</p>
     #   @return [String]
     class ListTestSetRecordsResponse < Struct.new(
+      nil,
       :test_set_records,
       :next_token,
       keyword_init: true
@@ -9293,6 +9605,7 @@ module Aws::LexModelsV2
     #         that token in the nextToken parameter to return the next page of results.</p>
     #   @return [String]
     class ListTestSetsRequest < Struct.new(
+      nil,
       :sort_by,
       :max_results,
       :next_token,
@@ -9311,6 +9624,7 @@ module Aws::LexModelsV2
     #         the next page of results.</p>
     #   @return [String]
     class ListTestSetsResponse < Struct.new(
+      nil,
       :test_sets,
       :next_token,
       keyword_init: true
@@ -9341,6 +9655,7 @@ module Aws::LexModelsV2
     #            <p>Use the returned token in the nextToken parameter of a ListUtteranceAnalyticsData request to return the next page of results. For a complete set of results, call the ListUtteranceAnalyticsData operation until the nextToken returned in the response is null.</p>
     #   @return [String]
     class ListUtteranceAnalyticsDataRequest < Struct.new(
+      nil,
       :bot_id,
       :start_date_time,
       :end_date_time,
@@ -9364,6 +9679,7 @@ module Aws::LexModelsV2
     #   <p>A list of objects, each of which contains information about an utterance in a user session with your bot.</p>
     #   @return [Array<Types::UtteranceSpecification>]
     class ListUtteranceAnalyticsDataResponse < Struct.new(
+      nil,
       :bot_id,
       :next_token,
       :utterances,
@@ -9420,6 +9736,7 @@ module Aws::LexModelsV2
     #            <p>Use the returned token in the nextToken parameter of a ListUtteranceMetrics request to return the next page of results. For a complete set of results, call the ListUtteranceMetrics operation until the nextToken returned in the response is null.</p>
     #   @return [String]
     class ListUtteranceMetricsRequest < Struct.new(
+      nil,
       :bot_id,
       :start_date_time,
       :end_date_time,
@@ -9446,6 +9763,7 @@ module Aws::LexModelsV2
     #            <p>Use the returned token in the nextToken parameter of a ListUtteranceMetrics request to return the next page of results. For a complete set of results, call the ListUtteranceMetrics operation until the nextToken returned in the response is null.</p>
     #   @return [String]
     class ListUtteranceMetricsResponse < Struct.new(
+      nil,
       :bot_id,
       :results,
       :next_token,
@@ -9470,6 +9788,7 @@ module Aws::LexModelsV2
     #            can show to the user.</p>
     #   @return [Types::ImageResponseCard]
     class Message < Struct.new(
+      nil,
       :plain_text_message,
       :custom_payload,
       :ssml_message,
@@ -9490,6 +9809,7 @@ module Aws::LexModelsV2
     #            the user.</p>
     #   @return [Array<Types::Message>]
     class MessageGroup < Struct.new(
+      nil,
       :message,
       :variations,
       keyword_init: true
@@ -9510,6 +9830,7 @@ module Aws::LexModelsV2
     #            value is <code>false</code>.</p>
     #   @return [Boolean]
     class MultipleValuesSetting < Struct.new(
+      nil,
       :allow_multiple_values,
       keyword_init: true
     )
@@ -9536,6 +9857,7 @@ module Aws::LexModelsV2
     #            vocabulary list.</p>
     #   @return [String]
     class NewCustomVocabularyItem < Struct.new(
+      nil,
       :phrase,
       :weight,
       :display_as,
@@ -9549,6 +9871,7 @@ module Aws::LexModelsV2
     #   <p>Specifies whether the assisted nlu feature is enabled.</p>
     #   @return [Boolean]
     class NluImprovementSpecification < Struct.new(
+      nil,
       :enabled,
       keyword_init: true
     )
@@ -9567,6 +9890,7 @@ module Aws::LexModelsV2
     #            conversation logs. The default is to obscure the values.</p>
     #   @return [String]
     class ObfuscationSetting < Struct.new(
+      nil,
       :obfuscation_setting_type,
       keyword_init: true
     )
@@ -9590,6 +9914,7 @@ module Aws::LexModelsV2
     #   <p>Contains a list of fields from the Amazon OpenSearch Service that the model can use to generate the answer to the query.</p>
     #   @return [Array<String>]
     class OpensearchConfiguration < Struct.new(
+      nil,
       :domain_endpoint,
       :index_name,
       :exact_response,
@@ -9621,6 +9946,7 @@ module Aws::LexModelsV2
     #            the context is sent to the user.</p>
     #   @return [Integer]
     class OutputContext < Struct.new(
+      nil,
       :name,
       :time_to_live_in_seconds,
       :turns_to_live,
@@ -9643,6 +9969,7 @@ module Aws::LexModelsV2
     #   <p>The number of results that succeeded.</p>
     #   @return [Hash<String, Integer>]
     class OverallTestResultItem < Struct.new(
+      nil,
       :multi_turn_conversation,
       :total_result_count,
       :speech_transcription_result_counts,
@@ -9662,6 +9989,7 @@ module Aws::LexModelsV2
     #   <p>A list of the overall test results.</p>
     #   @return [Array<Types::OverallTestResultItem>]
     class OverallTestResults < Struct.new(
+      nil,
       :items,
       keyword_init: true
     )
@@ -9676,6 +10004,7 @@ module Aws::LexModelsV2
     #   <p>The version of the network of bots.</p>
     #   @return [String]
     class ParentBotNetwork < Struct.new(
+      nil,
       :bot_id,
       :bot_version,
       keyword_init: true
@@ -9693,6 +10022,7 @@ module Aws::LexModelsV2
     #               this set of sub-folders.</p>
     #   @return [Array<String>]
     class PathFormat < Struct.new(
+      nil,
       :object_prefixes,
       keyword_init: true
     )
@@ -9704,6 +10034,7 @@ module Aws::LexModelsV2
     #   <p>The message to send to the user.</p>
     #   @return [String]
     class PlainTextMessage < Struct.new(
+      nil,
       :value,
       keyword_init: true
     )
@@ -9751,6 +10082,7 @@ module Aws::LexModelsV2
     #            out.</p>
     #   @return [Types::ConditionalSpecification]
     class PostDialogCodeHookInvocationSpecification < Struct.new(
+      nil,
       :success_response,
       :success_next_step,
       :success_conditional,
@@ -9808,6 +10140,7 @@ module Aws::LexModelsV2
     #            hook times out.</p>
     #   @return [Types::ConditionalSpecification]
     class PostFulfillmentStatusSpecification < Struct.new(
+      nil,
       :success_response,
       :failure_response,
       :timeout_response,
@@ -9828,6 +10161,7 @@ module Aws::LexModelsV2
     # @!attribute message
     #   @return [String]
     class PreconditionFailedException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -9845,6 +10179,7 @@ module Aws::LexModelsV2
     #   <p>The Amazon Resource Name (ARN) of the principal.</p>
     #   @return [String]
     class Principal < Struct.new(
+      nil,
       :service,
       :arn,
       keyword_init: true
@@ -9866,6 +10201,7 @@ module Aws::LexModelsV2
     #   <p>Specifies the settings on text input.</p>
     #   @return [Types::TextInputSpecification]
     class PromptAttemptSpecification < Struct.new(
+      nil,
       :allow_interrupt,
       :allowed_input_types,
       :audio_and_dtmf_input_specification,
@@ -9896,6 +10232,7 @@ module Aws::LexModelsV2
     #   <p>Specifies the advanced settings on each attempt of the prompt.</p>
     #   @return [Hash<String, Types::PromptAttemptSpecification>]
     class PromptSpecification < Struct.new(
+      nil,
       :message_groups,
       :max_retries,
       :allow_interrupt,
@@ -9911,6 +10248,7 @@ module Aws::LexModelsV2
     #   <p>The assistant Arn details of the Qinconnect assistant configuration.</p>
     #   @return [String]
     class QInConnectAssistantConfiguration < Struct.new(
+      nil,
       :assistant_arn,
       keyword_init: true
     )
@@ -9922,6 +10260,7 @@ module Aws::LexModelsV2
     #   <p>The Qinconnect assistant configuration details of the Qinconnect intent.</p>
     #   @return [Types::QInConnectAssistantConfiguration]
     class QInConnectIntentConfiguration < Struct.new(
+      nil,
       :q_in_connect_assistant_configuration,
       keyword_init: true
     )
@@ -9936,6 +10275,7 @@ module Aws::LexModelsV2
     #   <p>Contains information about the Amazon Bedrock model used to interpret the prompt used in descriptive bot building.</p>
     #   @return [Types::BedrockModelSpecification]
     class QnAIntentConfiguration < Struct.new(
+      nil,
       :data_source_configuration,
       :bedrock_model_configuration,
       keyword_init: true
@@ -9957,6 +10297,7 @@ module Aws::LexModelsV2
     #   <p>Specifies whether to return an exact response from the Amazon Kendra index or to let the Amazon Bedrock model you select generate a response based on the results. To use this feature, you must first add FAQ questions to your index by following the steps at <a href="https://docs.aws.amazon.com/kendra/latest/dg/in-creating-faq.html">Adding frequently asked questions (FAQs) to an index</a>.</p>
     #   @return [Boolean]
     class QnAKendraConfiguration < Struct.new(
+      nil,
       :kendra_index,
       :query_filter_string_enabled,
       :query_filter_string,
@@ -9986,6 +10327,7 @@ module Aws::LexModelsV2
     #               associated with a bot recommendation.</p>
     #   @return [Integer]
     class RecommendedIntentSummary < Struct.new(
+      nil,
       :intent_id,
       :intent_name,
       :sample_utterances_count,
@@ -10048,6 +10390,7 @@ module Aws::LexModelsV2
     #            </ul>
     #   @return [Integer]
     class RelativeAggregationDuration < Struct.new(
+      nil,
       :time_dimension,
       :time_value,
       keyword_init: true
@@ -10060,6 +10403,7 @@ module Aws::LexModelsV2
     # @!attribute message
     #   @return [String]
     class ResourceNotFoundException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -10077,6 +10421,7 @@ module Aws::LexModelsV2
     #            Amazon Lex.</p>
     #   @return [Boolean]
     class ResponseSpecification < Struct.new(
+      nil,
       :message_groups,
       :allow_interrupt,
       keyword_init: true
@@ -10098,6 +10443,7 @@ module Aws::LexModelsV2
     #    The intent name, composite slot name and the constituent sub slot names must exist.</p>
     #   @return [Hash<String, Types::RuntimeHintDetails>]
     class RuntimeHintDetails < Struct.new(
+      nil,
       :runtime_hint_values,
       :sub_slot_hints,
       keyword_init: true
@@ -10112,6 +10458,7 @@ module Aws::LexModelsV2
     #    bot.</p>
     #   @return [String]
     class RuntimeHintValue < Struct.new(
+      nil,
       :phrase,
       keyword_init: true
     )
@@ -10137,6 +10484,7 @@ module Aws::LexModelsV2
     #            <p>The intent name and slot name must exist.</p>
     #   @return [Hash<String, Hash<String, Types::RuntimeHintDetails>>]
     class RuntimeHints < Struct.new(
+      nil,
       :slot_hints,
       keyword_init: true
     )
@@ -10151,6 +10499,7 @@ module Aws::LexModelsV2
     #   <p>An object containing specifications for the assisted nlu feature.</p>
     #   @return [Types::NluImprovementSpecification]
     class RuntimeSettings < Struct.new(
+      nil,
       :slot_resolution_improvement,
       :nlu_improvement,
       keyword_init: true
@@ -10171,6 +10520,7 @@ module Aws::LexModelsV2
     #   <p>The S3 prefix to assign to audio log files.</p>
     #   @return [String]
     class S3BucketLogDestination < Struct.new(
+      nil,
       :kms_key_arn,
       :s3_bucket_arn,
       :log_prefix,
@@ -10207,6 +10557,7 @@ module Aws::LexModelsV2
     #               customer managed KMS key.</p>
     #   @return [String]
     class S3BucketTranscriptSource < Struct.new(
+      nil,
       :s3_bucket_name,
       :path_format,
       :transcript_format,
@@ -10222,6 +10573,7 @@ module Aws::LexModelsV2
     #   <p>The SSML text that defines the prompt.</p>
     #   @return [String]
     class SSMLMessage < Struct.new(
+      nil,
       :value,
       keyword_init: true
     )
@@ -10235,6 +10587,7 @@ module Aws::LexModelsV2
     #            model to recognize intents.</p>
     #   @return [String]
     class SampleUtterance < Struct.new(
+      nil,
       :utterance,
       keyword_init: true
     )
@@ -10249,6 +10602,7 @@ module Aws::LexModelsV2
     #   <p>Contains information about the Amazon Bedrock model used to interpret the prompt used in descriptive bot building.</p>
     #   @return [Types::BedrockModelSpecification]
     class SampleUtteranceGenerationSpecification < Struct.new(
+      nil,
       :enabled,
       :bedrock_model_specification,
       keyword_init: true
@@ -10266,6 +10620,7 @@ module Aws::LexModelsV2
     #   <p>The value that can be used for a slot type.</p>
     #   @return [String]
     class SampleValue < Struct.new(
+      nil,
       :value,
       keyword_init: true
     )
@@ -10309,6 +10664,7 @@ module Aws::LexModelsV2
     #            nextIndex parameter to return the next page of results.</p>
     #   @return [Integer]
     class SearchAssociatedTranscriptsRequest < Struct.new(
+      nil,
       :bot_id,
       :bot_version,
       :locale_id,
@@ -10355,6 +10711,7 @@ module Aws::LexModelsV2
     #   <p>The total number of transcripts returned by the search.</p>
     #   @return [Integer]
     class SearchAssociatedTranscriptsResponse < Struct.new(
+      nil,
       :bot_id,
       :bot_version,
       :locale_id,
@@ -10374,6 +10731,7 @@ module Aws::LexModelsV2
     #            utterances.</p>
     #   @return [Boolean]
     class SentimentAnalysisSettings < Struct.new(
+      nil,
       :detect_sentiment,
       keyword_init: true
     )
@@ -10389,6 +10747,7 @@ module Aws::LexModelsV2
     # @!attribute message
     #   @return [String]
     class ServiceQuotaExceededException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -10417,6 +10776,7 @@ module Aws::LexModelsV2
     #   <p>Specifies whether to sort the results in ascending or descending order.</p>
     #   @return [String]
     class SessionDataSortBy < Struct.new(
+      nil,
       :name,
       :order,
       keyword_init: true
@@ -10483,6 +10843,7 @@ module Aws::LexModelsV2
     #   <p>The identifier of the first request in a session.</p>
     #   @return [String]
     class SessionSpecification < Struct.new(
+      nil,
       :bot_alias_id,
       :bot_version,
       :locale_id,
@@ -10536,6 +10897,7 @@ module Aws::LexModelsV2
     #            value.</p>
     #   @return [Types::ElicitationCodeHookInvocationSetting]
     class SlotCaptureSetting < Struct.new(
+      nil,
       :capture_response,
       :capture_next_step,
       :capture_conditional,
@@ -10556,6 +10918,7 @@ module Aws::LexModelsV2
     #            slot.</p>
     #   @return [String]
     class SlotDefaultValue < Struct.new(
+      nil,
       :default_value,
       keyword_init: true
     )
@@ -10569,6 +10932,7 @@ module Aws::LexModelsV2
     #            the order that they are presented in the list.</p>
     #   @return [Array<Types::SlotDefaultValue>]
     class SlotDefaultValueSpecification < Struct.new(
+      nil,
       :default_value_list,
       keyword_init: true
     )
@@ -10591,6 +10955,7 @@ module Aws::LexModelsV2
     #            the specified value.</p>
     #   @return [String]
     class SlotFilter < Struct.new(
+      nil,
       :name,
       :values,
       :operator,
@@ -10608,6 +10973,7 @@ module Aws::LexModelsV2
     #   <p>The unique identifier of the slot.</p>
     #   @return [String]
     class SlotPriority < Struct.new(
+      nil,
       :priority,
       :slot_id,
       keyword_init: true
@@ -10623,6 +10989,7 @@ module Aws::LexModelsV2
     #   <p>An object containing information about the Amazon Bedrock model used to assist slot resolution.</p>
     #   @return [Types::BedrockModelSpecification]
     class SlotResolutionImprovementSpecification < Struct.new(
+      nil,
       :enabled,
       :bedrock_model_specification,
       keyword_init: true
@@ -10640,6 +11007,7 @@ module Aws::LexModelsV2
     #   <p>Specifies whether assisted slot resolution is turned on for the slot or not. If the value is <code>EnhancedFallback</code>, assisted slot resolution is activated when Amazon Lex defaults to the <code>AMAZON.FallbackIntent</code>. If the value is <code>Default</code>, assisted slot resolution is turned off.</p>
     #   @return [String]
     class SlotResolutionSetting < Struct.new(
+      nil,
       :slot_resolution_strategy,
       keyword_init: true
     )
@@ -10655,6 +11023,7 @@ module Aws::LexModelsV2
     #   <p>A result for slot resolution in the results of a test execution.</p>
     #   @return [Types::SlotResolutionTestResultItemCounts]
     class SlotResolutionTestResultItem < Struct.new(
+      nil,
       :slot_name,
       :result_counts,
       keyword_init: true
@@ -10673,6 +11042,7 @@ module Aws::LexModelsV2
     #   <p>The number of matched and mismatched results for slot resolution for the slot.</p>
     #   @return [Hash<String, Integer>]
     class SlotResolutionTestResultItemCounts < Struct.new(
+      nil,
       :total_result_count,
       :speech_transcription_result_counts,
       :slot_match_result_counts,
@@ -10690,6 +11060,7 @@ module Aws::LexModelsV2
     #            descending.</p>
     #   @return [String]
     class SlotSortBy < Struct.new(
+      nil,
       :attribute,
       :order,
       keyword_init: true
@@ -10725,6 +11096,7 @@ module Aws::LexModelsV2
     #            updated.</p>
     #   @return [Time]
     class SlotSummary < Struct.new(
+      nil,
       :slot_id,
       :slot_name,
       :description,
@@ -10753,6 +11125,7 @@ module Aws::LexModelsV2
     #            contain the specified value.</p>
     #   @return [String]
     class SlotTypeFilter < Struct.new(
+      nil,
       :name,
       :values,
       :operator,
@@ -10770,6 +11143,7 @@ module Aws::LexModelsV2
     #            descending.</p>
     #   @return [String]
     class SlotTypeSortBy < Struct.new(
+      nil,
       :attribute,
       :order,
       keyword_init: true
@@ -10784,6 +11158,7 @@ module Aws::LexModelsV2
     #               recommendation.</p>
     #   @return [Integer]
     class SlotTypeStatistics < Struct.new(
+      nil,
       :discovered_slot_type_count,
       keyword_init: true
     )
@@ -10833,6 +11208,7 @@ module Aws::LexModelsV2
     #            </ul>
     #   @return [String]
     class SlotTypeSummary < Struct.new(
+      nil,
       :slot_type_id,
       :slot_type_name,
       :description,
@@ -10854,6 +11230,7 @@ module Aws::LexModelsV2
     #   <p>Additional values related to the slot type entry.</p>
     #   @return [Array<Types::SampleValue>]
     class SlotTypeValue < Struct.new(
+      nil,
       :sample_value,
       :synonyms,
       keyword_init: true
@@ -10870,6 +11247,7 @@ module Aws::LexModelsV2
     #               <code>resolvedValues</code> list.</p>
     #   @return [String]
     class SlotValue < Struct.new(
+      nil,
       :interpreted_value,
       keyword_init: true
     )
@@ -10908,6 +11286,7 @@ module Aws::LexModelsV2
     #   <p>An object containing information about whether assisted slot resolution is turned on for the slot or not.</p>
     #   @return [Types::SlotResolutionSetting]
     class SlotValueElicitationSetting < Struct.new(
+      nil,
       :default_value_specification,
       :slot_constraint,
       :prompt_specification,
@@ -10937,6 +11316,7 @@ module Aws::LexModelsV2
     #            might be "pepperoni" and "pineapple."</p>
     #   @return [Array<Types::SlotValueOverride>]
     class SlotValueOverride < Struct.new(
+      nil,
       :shape,
       :value,
       :values,
@@ -10975,6 +11355,7 @@ module Aws::LexModelsV2
     #            </ul>
     #   @return [String]
     class SlotValueRegexFilter < Struct.new(
+      nil,
       :pattern,
       keyword_init: true
     )
@@ -11011,6 +11392,7 @@ module Aws::LexModelsV2
     #            vocabulary for recognizing user utterances.</p>
     #   @return [Types::AdvancedRecognitionSetting]
     class SlotValueSelectionSetting < Struct.new(
+      nil,
       :resolution_strategy,
       :regex_filter,
       :advanced_recognition_setting,
@@ -11027,6 +11409,7 @@ module Aws::LexModelsV2
     #   <p>Specifies the elicitation setting details for constituent sub slots of a composite slot.</p>
     #   @return [Types::SubSlotValueElicitationSetting]
     class Specifications < Struct.new(
+      nil,
       :slot_type_id,
       :value_elicitation_setting,
       keyword_init: true
@@ -11057,6 +11440,7 @@ module Aws::LexModelsV2
     #            key ARN used to encrypt the associated metadata.</p>
     #   @return [Types::EncryptionSetting]
     class StartBotRecommendationRequest < Struct.new(
+      nil,
       :bot_id,
       :bot_version,
       :locale_id,
@@ -11103,6 +11487,7 @@ module Aws::LexModelsV2
     #            ARN used to encrypt the associated metadata.</p>
     #   @return [Types::EncryptionSetting]
     class StartBotRecommendationResponse < Struct.new(
+      nil,
       :bot_id,
       :bot_version,
       :locale_id,
@@ -11129,6 +11514,7 @@ module Aws::LexModelsV2
     #   <p>The locale of the bot for which to generate intents and slot types.</p>
     #   @return [String]
     class StartBotResourceGenerationRequest < Struct.new(
+      nil,
       :generation_input_prompt,
       :bot_id,
       :bot_version,
@@ -11160,6 +11546,7 @@ module Aws::LexModelsV2
     #   <p>The date and time at which the generation request was made.</p>
     #   @return [Time]
     class StartBotResourceGenerationResponse < Struct.new(
+      nil,
       :generation_input_prompt,
       :generation_id,
       :bot_id,
@@ -11192,6 +11579,7 @@ module Aws::LexModelsV2
     #            protect it during transit between your site and Amazon Lex.</p>
     #   @return [String]
     class StartImportRequest < Struct.new(
+      nil,
       :import_id,
       :resource_specification,
       :merge_strategy,
@@ -11222,6 +11610,7 @@ module Aws::LexModelsV2
     #   <p>The date and time that the import request was created.</p>
     #   @return [Time]
     class StartImportResponse < Struct.new(
+      nil,
       :import_id,
       :resource_specification,
       :merge_strategy,
@@ -11248,6 +11637,7 @@ module Aws::LexModelsV2
     #   <p>Indicates whether audio or text is used.</p>
     #   @return [String]
     class StartTestExecutionRequest < Struct.new(
+      nil,
       :test_set_id,
       :target,
       :api_mode,
@@ -11278,6 +11668,7 @@ module Aws::LexModelsV2
     #   <p>Indicates whether audio or text is used.</p>
     #   @return [String]
     class StartTestExecutionResponse < Struct.new(
+      nil,
       :test_execution_id,
       :creation_date_time,
       :test_set_id,
@@ -11309,6 +11700,7 @@ module Aws::LexModelsV2
     #   <p>A list of tags to add to the test set. You can only add tags when you import/generate a new test set. You can't use the <code>UpdateTestSet</code> operation to update tags. To update tags, use the <code>TagResource</code> operation.</p>
     #   @return [Hash<String, String>]
     class StartTestSetGenerationRequest < Struct.new(
+      nil,
       :test_set_name,
       :description,
       :storage_location,
@@ -11349,6 +11741,7 @@ module Aws::LexModelsV2
     #   <p>A list of tags that was used for the test set that is being generated.</p>
     #   @return [Hash<String, String>]
     class StartTestSetGenerationResponse < Struct.new(
+      nil,
       :test_set_generation_id,
       :creation_date_time,
       :test_set_generation_status,
@@ -11382,6 +11775,7 @@ module Aws::LexModelsV2
     #            the message is being played.</p>
     #   @return [Boolean]
     class StillWaitingResponseSpecification < Struct.new(
+      nil,
       :message_groups,
       :frequency_in_seconds,
       :timeout_in_seconds,
@@ -11409,6 +11803,7 @@ module Aws::LexModelsV2
     #            stopped.</p>
     #   @return [String]
     class StopBotRecommendationRequest < Struct.new(
+      nil,
       :bot_id,
       :bot_version,
       :locale_id,
@@ -11441,6 +11836,7 @@ module Aws::LexModelsV2
     #            stopped.</p>
     #   @return [String]
     class StopBotRecommendationResponse < Struct.new(
+      nil,
       :bot_id,
       :bot_version,
       :locale_id,
@@ -11460,6 +11856,7 @@ module Aws::LexModelsV2
     #   <p>Specifications for the constituent sub slots of a composite slot.</p>
     #   @return [Hash<String, Types::Specifications>]
     class SubSlotSetting < Struct.new(
+      nil,
       :expression,
       :slot_specifications,
       keyword_init: true
@@ -11476,6 +11873,7 @@ module Aws::LexModelsV2
     #           This refers to either a built-in slot type or the unique slotTypeId of a custom slot type.</p>
     #   @return [String]
     class SubSlotTypeComposition < Struct.new(
+      nil,
       :name,
       :slot_type_id,
       keyword_init: true
@@ -11509,6 +11907,7 @@ module Aws::LexModelsV2
     #            customer input. </p>
     #   @return [Types::WaitAndContinueSpecification]
     class SubSlotValueElicitationSetting < Struct.new(
+      nil,
       :default_value_specification,
       :prompt_specification,
       :sample_utterances,
@@ -11527,6 +11926,7 @@ module Aws::LexModelsV2
     #            exists, the existing value is replaced with the new value.</p>
     #   @return [Hash<String, String>]
     class TagResourceRequest < Struct.new(
+      nil,
       :resource_arn,
       :tags,
       keyword_init: true
@@ -11535,6 +11935,7 @@ module Aws::LexModelsV2
     end
 
     class TagResourceResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -11549,6 +11950,7 @@ module Aws::LexModelsV2
     #   <p>Contains information about the method for filtering Conversation level test results.</p>
     #   @return [Types::ConversationLevelTestResultsFilterBy]
     class TestExecutionResultFilterBy < Struct.new(
+      nil,
       :result_type_filter,
       :conversation_level_test_results_filter_by,
       keyword_init: true
@@ -11579,6 +11981,7 @@ module Aws::LexModelsV2
     #   <p>Results related to utterances in the test set.</p>
     #   @return [Types::UtteranceLevelTestResults]
     class TestExecutionResultItems < Struct.new(
+      nil,
       :overall_test_results,
       :conversation_level_test_results,
       :intent_classification_test_results,
@@ -11598,6 +12001,7 @@ module Aws::LexModelsV2
     #   <p>Specifies whether to sort in ascending or descending order.</p>
     #   @return [String]
     class TestExecutionSortBy < Struct.new(
+      nil,
       :attribute,
       :order,
       keyword_init: true
@@ -11636,6 +12040,7 @@ module Aws::LexModelsV2
     #         or spoken.</p>
     #   @return [String]
     class TestExecutionSummary < Struct.new(
+      nil,
       :test_execution_id,
       :creation_date_time,
       :last_updated_date_time,
@@ -11655,6 +12060,7 @@ module Aws::LexModelsV2
     #   <p>Contains information about the bot alias used for the test execution.</p>
     #   @return [Types::BotAliasTestExecutionTarget]
     class TestExecutionTarget < Struct.new(
+      nil,
       :bot_alias_target,
       keyword_init: true
     )
@@ -11669,6 +12075,7 @@ module Aws::LexModelsV2
     #   <p>Contains information about discrepancies found for slots between the test set and the bot.</p>
     #   @return [Array<Types::TestSetSlotDiscrepancyItem>]
     class TestSetDiscrepancyErrors < Struct.new(
+      nil,
       :intent_discrepancies,
       :slot_discrepancies,
       keyword_init: true
@@ -11688,6 +12095,7 @@ module Aws::LexModelsV2
     #   <p>The unique identifier of the locale associated with the bot alias.</p>
     #   @return [String]
     class TestSetDiscrepancyReportBotAliasTarget < Struct.new(
+      nil,
       :bot_id,
       :bot_alias_id,
       :locale_id,
@@ -11703,6 +12111,7 @@ module Aws::LexModelsV2
     #    test set discrepancy report.</p>
     #   @return [Types::TestSetDiscrepancyReportBotAliasTarget]
     class TestSetDiscrepancyReportResourceTarget < Struct.new(
+      nil,
       :bot_alias_target,
       keyword_init: true
     )
@@ -11714,6 +12123,7 @@ module Aws::LexModelsV2
     #   <p>The unique identifier of the test set.</p>
     #   @return [String]
     class TestSetExportSpecification < Struct.new(
+      nil,
       :test_set_id,
       keyword_init: true
     )
@@ -11725,6 +12135,7 @@ module Aws::LexModelsV2
     #   <p>Contains information about the bot from which the conversation logs are sourced.</p>
     #   @return [Types::ConversationLogsDataSource]
     class TestSetGenerationDataSource < Struct.new(
+      nil,
       :conversation_logs_data_source,
       keyword_init: true
     )
@@ -11739,6 +12150,7 @@ module Aws::LexModelsV2
     #   <p>The path inside the Amazon S3 bucket pointing to the test-set CSV file.</p>
     #   @return [String]
     class TestSetImportInputLocation < Struct.new(
+      nil,
       :s3_bucket_name,
       :s3_path,
       keyword_init: true
@@ -11770,6 +12182,7 @@ module Aws::LexModelsV2
     #   <p>A list of tags to add to the test set. You can only add tags when you import/generate a new test set. You can't use the <code>UpdateTestSet</code> operation to update tags. To update tags, use the <code>TagResource</code> operation.</p>
     #   @return [Hash<String, String>]
     class TestSetImportResourceSpecification < Struct.new(
+      nil,
       :test_set_name,
       :description,
       :role_arn,
@@ -11791,6 +12204,7 @@ module Aws::LexModelsV2
     #   <p>The error message for a discrepancy for an intent between the test set and the bot.</p>
     #   @return [String]
     class TestSetIntentDiscrepancyItem < Struct.new(
+      nil,
       :intent_name,
       :error_message,
       keyword_init: true
@@ -11809,6 +12223,7 @@ module Aws::LexModelsV2
     #   <p>The error message for a discrepancy for an intent between the test set and the bot.</p>
     #   @return [String]
     class TestSetSlotDiscrepancyItem < Struct.new(
+      nil,
       :intent_name,
       :slot_name,
       :error_message,
@@ -11825,6 +12240,7 @@ module Aws::LexModelsV2
     #   <p>Specifies whether to sort in ascending or descending order.</p>
     #   @return [String]
     class TestSetSortBy < Struct.new(
+      nil,
       :attribute,
       :order,
       keyword_init: true
@@ -11844,6 +12260,7 @@ module Aws::LexModelsV2
     #    (KMS) key for encrypting the test set.</p>
     #   @return [String]
     class TestSetStorageLocation < Struct.new(
+      nil,
       :s3_bucket_name,
       :s3_path,
       :kms_key_arn,
@@ -11885,6 +12302,7 @@ module Aws::LexModelsV2
     #   <p>The date and time at which the test set was last updated.</p>
     #   @return [Time]
     class TestSetSummary < Struct.new(
+      nil,
       :test_set_id,
       :test_set_name,
       :description,
@@ -11914,6 +12332,7 @@ module Aws::LexModelsV2
     #   <p>Contains information about the agent or user turn depending upon type of turn.</p>
     #   @return [Types::TurnSpecification]
     class TestSetTurnRecord < Struct.new(
+      nil,
       :record_number,
       :conversation_id,
       :turn_number,
@@ -11931,6 +12350,7 @@ module Aws::LexModelsV2
     #   <p>Contains information about the user messages in the turn.</p>
     #   @return [Types::UserTurnResult]
     class TestSetTurnResult < Struct.new(
+      nil,
       :agent,
       :user,
       keyword_init: true
@@ -11943,6 +12363,7 @@ module Aws::LexModelsV2
     #   <p>Time for which a bot waits before re-prompting a customer for text input.</p>
     #   @return [Integer]
     class TextInputSpecification < Struct.new(
+      nil,
       :start_timeout_ms,
       keyword_init: true
     )
@@ -11956,6 +12377,7 @@ module Aws::LexModelsV2
     #            delivered.</p>
     #   @return [Types::CloudWatchLogGroupLogDestination]
     class TextLogDestination < Struct.new(
+      nil,
       :cloud_watch,
       keyword_init: true
     )
@@ -11975,6 +12397,7 @@ module Aws::LexModelsV2
     #   <p>The option to enable selective conversation log capture for text.</p>
     #   @return [Boolean]
     class TextLogSetting < Struct.new(
+      nil,
       :enabled,
       :destination,
       :selective_logging_enabled,
@@ -11996,6 +12419,7 @@ module Aws::LexModelsV2
     # @!attribute message
     #   @return [String]
     class ThrottlingException < Struct.new(
+      nil,
       :retry_after_seconds,
       :message,
       keyword_init: true
@@ -12016,6 +12440,7 @@ module Aws::LexModelsV2
     #               format.</p>
     #   @return [Types::LexTranscriptFilter]
     class TranscriptFilter < Struct.new(
+      nil,
       :lex_transcript_filter,
       keyword_init: true
     )
@@ -12029,6 +12454,7 @@ module Aws::LexModelsV2
     #               stored.</p>
     #   @return [Types::S3BucketTranscriptSource]
     class TranscriptSourceSetting < Struct.new(
+      nil,
       :s3_bucket_transcript_source,
       keyword_init: true
     )
@@ -12043,6 +12469,7 @@ module Aws::LexModelsV2
     #   <p>Contains information about the user messages in the turn.</p>
     #   @return [Types::UserTurnSpecification]
     class TurnSpecification < Struct.new(
+      nil,
       :agent_turn,
       :user_turn,
       keyword_init: true
@@ -12059,6 +12486,7 @@ module Aws::LexModelsV2
     #            not exist on the resource, it is ignored.</p>
     #   @return [Array<String>]
     class UntagResourceRequest < Struct.new(
+      nil,
       :resource_arn,
       :tag_keys,
       keyword_init: true
@@ -12067,6 +12495,7 @@ module Aws::LexModelsV2
     end
 
     class UntagResourceResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -12100,6 +12529,7 @@ module Aws::LexModelsV2
     #   <p>The identifier of the bot with the updated alias.</p>
     #   @return [String]
     class UpdateBotAliasRequest < Struct.new(
+      nil,
       :bot_alias_id,
       :bot_alias_name,
       :description,
@@ -12152,6 +12582,7 @@ module Aws::LexModelsV2
     #            updated.</p>
     #   @return [Time]
     class UpdateBotAliasResponse < Struct.new(
+      nil,
       :bot_alias_id,
       :bot_alias_name,
       :description,
@@ -12197,6 +12628,7 @@ module Aws::LexModelsV2
     #         may differ if you turn a feature on. For more information, see LINK.</p>
     #   @return [Types::GenerativeAISettings]
     class UpdateBotLocaleRequest < Struct.new(
+      nil,
       :bot_id,
       :bot_version,
       :locale_id,
@@ -12258,6 +12690,7 @@ module Aws::LexModelsV2
     #   <p>Contains settings for generative AI features powered by Amazon Bedrock for your bot locale.</p>
     #   @return [Types::GenerativeAISettings]
     class UpdateBotLocaleResponse < Struct.new(
+      nil,
       :bot_id,
       :bot_version,
       :locale_id,
@@ -12300,6 +12733,7 @@ module Aws::LexModelsV2
     #            key ARN used to encrypt the associated metadata.</p>
     #   @return [Types::EncryptionSetting]
     class UpdateBotRecommendationRequest < Struct.new(
+      nil,
       :bot_id,
       :bot_version,
       :locale_id,
@@ -12351,6 +12785,7 @@ module Aws::LexModelsV2
     #            ARN used to encrypt the associated metadata.</p>
     #   @return [Types::EncryptionSetting]
     class UpdateBotRecommendationResponse < Struct.new(
+      nil,
       :bot_id,
       :bot_version,
       :locale_id,
@@ -12404,6 +12839,7 @@ module Aws::LexModelsV2
     #   <p>Allows you to modify how Amazon Lex logs errors during bot interactions, including destinations for error logs and the types of errors to be captured.</p>
     #   @return [Types::ErrorLogSettings]
     class UpdateBotRequest < Struct.new(
+      nil,
       :bot_id,
       :bot_name,
       :description,
@@ -12461,6 +12897,7 @@ module Aws::LexModelsV2
     #   <p>Settings for managing error logs within the response of an update bot operation.</p>
     #   @return [Types::ErrorLogSettings]
     class UpdateBotResponse < Struct.new(
+      nil,
       :bot_id,
       :bot_name,
       :description,
@@ -12485,6 +12922,7 @@ module Aws::LexModelsV2
     #   <p>The new password to use to encrypt the export zip archive.</p>
     #   @return [String]
     class UpdateExportRequest < Struct.new(
+      nil,
       :export_id,
       :file_password,
       keyword_init: true
@@ -12515,6 +12953,7 @@ module Aws::LexModelsV2
     #   <p>The date and time that the export was last updated.</p>
     #   @return [Time]
     class UpdateExportResponse < Struct.new(
+      nil,
       :export_id,
       :resource_specification,
       :file_format,
@@ -12596,6 +13035,7 @@ module Aws::LexModelsV2
     #   <p>Qinconnect intent configuration details for the update intent request.</p>
     #   @return [Types::QInConnectIntentConfiguration]
     class UpdateIntentRequest < Struct.new(
+      nil,
       :intent_id,
       :intent_name,
       :description,
@@ -12694,6 +13134,7 @@ module Aws::LexModelsV2
     #   <p>Qinconnect intent configuration details for the update intent response.</p>
     #   @return [Types::QInConnectIntentConfiguration]
     class UpdateIntentResponse < Struct.new(
+      nil,
       :intent_id,
       :intent_name,
       :description,
@@ -12741,6 +13182,7 @@ module Aws::LexModelsV2
     #            the policy with the new values.</p>
     #   @return [String]
     class UpdateResourcePolicyRequest < Struct.new(
+      nil,
       :resource_arn,
       :policy,
       :expected_revision_id,
@@ -12760,6 +13202,7 @@ module Aws::LexModelsV2
     #            resource, or update a resource.</p>
     #   @return [String]
     class UpdateResourcePolicyResponse < Struct.new(
+      nil,
       :resource_arn,
       :revision_id,
       keyword_init: true
@@ -12816,6 +13259,7 @@ module Aws::LexModelsV2
     #           expression for the composite slot.</p>
     #   @return [Types::SubSlotSetting]
     class UpdateSlotRequest < Struct.new(
+      nil,
       :slot_id,
       :slot_name,
       :description,
@@ -12883,6 +13327,7 @@ module Aws::LexModelsV2
     #           expression for the composite slot.</p>
     #   @return [Types::SubSlotSetting]
     class UpdateSlotResponse < Struct.new(
+      nil,
       :slot_id,
       :slot_name,
       :description,
@@ -12942,6 +13387,7 @@ module Aws::LexModelsV2
     #   <p>Specifications for a composite slot type.</p>
     #   @return [Types::CompositeSlotTypeSetting]
     class UpdateSlotTypeRequest < Struct.new(
+      nil,
       :slot_type_id,
       :slot_type_name,
       :description,
@@ -13003,6 +13449,7 @@ module Aws::LexModelsV2
     #   <p>Specifications for a composite slot type.</p>
     #   @return [Types::CompositeSlotTypeSetting]
     class UpdateSlotTypeResponse < Struct.new(
+      nil,
       :slot_type_id,
       :slot_type_name,
       :description,
@@ -13031,6 +13478,7 @@ module Aws::LexModelsV2
     #   <p>The new test set description.</p>
     #   @return [String]
     class UpdateTestSetRequest < Struct.new(
+      nil,
       :test_set_id,
       :test_set_name,
       :description,
@@ -13071,6 +13519,7 @@ module Aws::LexModelsV2
     #   <p> The date and time of the last update for the updated test set.</p>
     #   @return [Time]
     class UpdateTestSetResponse < Struct.new(
+      nil,
       :test_set_id,
       :test_set_name,
       :description,
@@ -13097,6 +13546,7 @@ module Aws::LexModelsV2
     #   <p>Contains information about the session state in the input.</p>
     #   @return [Types::InputSessionStateSpecification]
     class UserTurnInputSpecification < Struct.new(
+      nil,
       :utterance_input,
       :request_attributes,
       :session_state,
@@ -13113,6 +13563,7 @@ module Aws::LexModelsV2
     #   <p>The slots associated with the intent.</p>
     #   @return [Hash<String, Types::UserTurnSlotOutput>]
     class UserTurnIntentOutput < Struct.new(
+      nil,
       :name,
       :slots,
       keyword_init: true
@@ -13131,6 +13582,7 @@ module Aws::LexModelsV2
     #   <p>The transcript that is output for the user turn by the test execution.</p>
     #   @return [String]
     class UserTurnOutputSpecification < Struct.new(
+      nil,
       :intent,
       :active_contexts,
       :transcript,
@@ -13168,6 +13620,7 @@ module Aws::LexModelsV2
     #   <p>Contains information about the results related to the conversation associated with the user turn.</p>
     #   @return [Types::ConversationLevelResultDetail]
     class UserTurnResult < Struct.new(
+      nil,
       :input,
       :expected_output,
       :actual_output,
@@ -13193,6 +13646,7 @@ module Aws::LexModelsV2
     #   <p>A list of items mapping the name of the subslots to information about those subslots.</p>
     #   @return [Hash<String, Types::UserTurnSlotOutput>]
     class UserTurnSlotOutput < Struct.new(
+      nil,
       :value,
       :values,
       :sub_slots,
@@ -13209,6 +13663,7 @@ module Aws::LexModelsV2
     #   <p>Contains results about the expected output for the user turn.</p>
     #   @return [Types::UserTurnOutputSpecification]
     class UserTurnSpecification < Struct.new(
+      nil,
       :input,
       :expected,
       keyword_init: true
@@ -13222,6 +13677,7 @@ module Aws::LexModelsV2
     #   <p>The desired time window for aggregating utterances. </p>
     #   @return [Types::RelativeAggregationDuration]
     class UtteranceAggregationDuration < Struct.new(
+      nil,
       :relative_aggregation_duration,
       keyword_init: true
     )
@@ -13233,6 +13689,7 @@ module Aws::LexModelsV2
     #   <p>Amazon S3 file pointing to the audio.</p>
     #   @return [String]
     class UtteranceAudioInputSpecification < Struct.new(
+      nil,
       :audio_file_s3_location,
       keyword_init: true
     )
@@ -13271,6 +13728,7 @@ module Aws::LexModelsV2
     #            constrained to the text associated with a button on the card.</p>
     #   @return [Types::ImageResponseCard]
     class UtteranceBotResponse < Struct.new(
+      nil,
       :content,
       :content_type,
       :image_response_card,
@@ -13297,6 +13755,7 @@ module Aws::LexModelsV2
     #   <p>Specifies whether to sort the results in ascending or descending order.</p>
     #   @return [String]
     class UtteranceDataSortBy < Struct.new(
+      nil,
       :name,
       :order,
       keyword_init: true
@@ -13312,6 +13771,7 @@ module Aws::LexModelsV2
     #   <p>Contains information about the audio input for an utterance.</p>
     #   @return [Types::UtteranceAudioInputSpecification]
     class UtteranceInputSpecification < Struct.new(
+      nil,
       :text_input,
       :audio_input,
       keyword_init: true
@@ -13330,6 +13790,7 @@ module Aws::LexModelsV2
     #   <p>Contains information about the turn associated with the result.</p>
     #   @return [Types::TestSetTurnResult]
     class UtteranceLevelTestResultItem < Struct.new(
+      nil,
       :record_number,
       :conversation_id,
       :turn_result,
@@ -13343,6 +13804,7 @@ module Aws::LexModelsV2
     #   <p>Contains information about an utterance in the results of the test set execution.</p>
     #   @return [Array<Types::UtteranceLevelTestResultItem>]
     class UtteranceLevelTestResults < Struct.new(
+      nil,
       :items,
       keyword_init: true
     )
@@ -13503,6 +13965,7 @@ module Aws::LexModelsV2
     #   <p>A list of objects containing information about the bot response to the utterance.</p>
     #   @return [Array<Types::UtteranceBotResponse>]
     class UtteranceSpecification < Struct.new(
+      nil,
       :bot_alias_id,
       :bot_version,
       :locale_id,
@@ -13540,6 +14003,7 @@ module Aws::LexModelsV2
     # @!attribute message
     #   @return [String]
     class ValidationException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -13580,6 +14044,7 @@ module Aws::LexModelsV2
     #            <p>If you do not specify a value, the default is <code>standard</code>.</p>
     #   @return [String]
     class VoiceSettings < Struct.new(
+      nil,
       :voice_id,
       :engine,
       keyword_init: true
@@ -13608,6 +14073,7 @@ module Aws::LexModelsV2
     #            true.</p>
     #   @return [Boolean]
     class WaitAndContinueSpecification < Struct.new(
+      nil,
       :waiting_response,
       :continue_response,
       :still_waiting_response,

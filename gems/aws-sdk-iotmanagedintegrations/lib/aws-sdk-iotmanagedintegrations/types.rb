@@ -20,6 +20,7 @@ module Aws::IoTManagedIntegrations
     #   <p>The minimum percentage of over-the-air (OTA) task execution failures that must occur to initiate the last abort.</p>
     #   @return [Float]
     class AbortConfigCriteria < Struct.new(
+      nil,
       :action,
       :failure_type,
       :min_number_of_executed_things,
@@ -33,6 +34,7 @@ module Aws::IoTManagedIntegrations
     # @!attribute message
     #   @return [String]
     class AccessDeniedException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -62,6 +64,7 @@ module Aws::IoTManagedIntegrations
     #   <p>The Amazon Resource Name (ARN) of the account association.</p>
     #   @return [String]
     class AccountAssociationItem < Struct.new(
+      nil,
       :account_association_id,
       :association_state,
       :error_message,
@@ -79,6 +82,7 @@ module Aws::IoTManagedIntegrations
     #   <p>The OAuth configuration settings used for authentication with the third-party service.</p>
     #   @return [Types::OAuthConfig]
     class AuthConfig < Struct.new(
+      nil,
       :o_auth,
       keyword_init: true
     )
@@ -90,6 +94,7 @@ module Aws::IoTManagedIntegrations
     #   <p>The updated OAuth configuration settings for the authentication configuration.</p>
     #   @return [Types::OAuthUpdate]
     class AuthConfigUpdate < Struct.new(
+      nil,
       :o_auth_update,
       keyword_init: true
     )
@@ -110,6 +115,7 @@ module Aws::IoTManagedIntegrations
     #   <p>Describe a capability action with a capability property.</p>
     #   @return [JSON]
     class CapabilityAction < Struct.new(
+      nil,
       :name,
       :ref,
       :action_trace_id,
@@ -130,6 +136,7 @@ module Aws::IoTManagedIntegrations
     #   <p>The endpoints used in the capability report.</p>
     #   @return [Array<Types::CapabilityReportEndpoint>]
     class CapabilityReport < Struct.new(
+      nil,
       :version,
       :node_id,
       :endpoints,
@@ -158,6 +165,7 @@ module Aws::IoTManagedIntegrations
     #   <p>The capability events used in the capability report.</p>
     #   @return [Array<String>]
     class CapabilityReportCapability < Struct.new(
+      nil,
       :id,
       :name,
       :version,
@@ -180,6 +188,7 @@ module Aws::IoTManagedIntegrations
     #   <p>The capabilities used in the capability report.</p>
     #   @return [Array<Types::CapabilityReportCapability>]
     class CapabilityReportEndpoint < Struct.new(
+      nil,
       :id,
       :device_types,
       :capabilities,
@@ -205,6 +214,7 @@ module Aws::IoTManagedIntegrations
     #   <p>The actual schema definition that describes the capability's properties, actions, and events.</p>
     #   @return [JSON]
     class CapabilitySchemaItem < Struct.new(
+      nil,
       :format,
       :capability_id,
       :extrinsic_id,
@@ -229,6 +239,7 @@ module Aws::IoTManagedIntegrations
     #   <p>Describe the command capability with the actions it supports.</p>
     #   @return [Array<Types::CapabilityAction>]
     class CommandCapability < Struct.new(
+      nil,
       :id,
       :name,
       :version,
@@ -246,6 +257,7 @@ module Aws::IoTManagedIntegrations
     #   <p>Describe the endpoint with an id, a name, and the relevant capabilities for sending commands.</p>
     #   @return [Array<Types::CommandCapability>]
     class CommandEndpoint < Struct.new(
+      nil,
       :endpoint_id,
       :capabilities,
       keyword_init: true
@@ -261,6 +273,7 @@ module Aws::IoTManagedIntegrations
     #   <p>The error message returned when the default encryption configuration update fails.</p>
     #   @return [String]
     class ConfigurationError < Struct.new(
+      nil,
       :code,
       :message,
       keyword_init: true
@@ -276,6 +289,7 @@ module Aws::IoTManagedIntegrations
     #   <p>The status state describing the default encryption configuration update.</p>
     #   @return [String]
     class ConfigurationStatus < Struct.new(
+      nil,
       :error,
       :state,
       keyword_init: true
@@ -287,6 +301,7 @@ module Aws::IoTManagedIntegrations
     # @!attribute message
     #   @return [String]
     class ConflictException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -307,6 +322,7 @@ module Aws::IoTManagedIntegrations
     #   <p>The unique identifier of the connector destination.</p>
     #   @return [String]
     class ConnectorDestinationSummary < Struct.new(
+      nil,
       :name,
       :description,
       :cloud_connector_id,
@@ -336,6 +352,7 @@ module Aws::IoTManagedIntegrations
     #   <p>The type of cloud connector created.</p>
     #   @return [String]
     class ConnectorItem < Struct.new(
+      nil,
       :name,
       :endpoint_config,
       :description,
@@ -363,6 +380,7 @@ module Aws::IoTManagedIntegrations
     #   <p>A set of key/value pairs that are used to manage the account association.</p>
     #   @return [Hash<String, String>]
     class CreateAccountAssociationRequest < Struct.new(
+      nil,
       :client_token,
       :connector_destination_id,
       :name,
@@ -386,6 +404,7 @@ module Aws::IoTManagedIntegrations
     #   <p>The Amazon Resource Name (ARN) of the account association.</p>
     #   @return [String]
     class CreateAccountAssociationResponse < Struct.new(
+      nil,
       :o_auth_authorization_url,
       :account_association_id,
       :association_state,
@@ -411,6 +430,7 @@ module Aws::IoTManagedIntegrations
     #   <p>An idempotency token. If you retry a request that completed successfully initially using the same client token and parameters, then the retry attempt will succeed without performing any further actions.</p>
     #   @return [String]
     class CreateCloudConnectorRequest < Struct.new(
+      nil,
       :name,
       :endpoint_config,
       :description,
@@ -425,6 +445,7 @@ module Aws::IoTManagedIntegrations
     #   <p>The unique identifier assigned to the newly created cloud connector.</p>
     #   @return [String]
     class CreateCloudConnectorResponse < Struct.new(
+      nil,
       :id,
       keyword_init: true
     )
@@ -453,6 +474,7 @@ module Aws::IoTManagedIntegrations
     #   <p>An idempotency token. If you retry a request that completed successfully initially using the same client token and parameters, then the retry attempt will succeed without performing any further actions.</p>
     #   @return [String]
     class CreateConnectorDestinationRequest < Struct.new(
+      nil,
       :name,
       :description,
       :cloud_connector_id,
@@ -469,6 +491,7 @@ module Aws::IoTManagedIntegrations
     #   <p>The identifier of the C2C connector destination creation request.</p>
     #   @return [String]
     class CreateConnectorDestinationResponse < Struct.new(
+      nil,
       :id,
       keyword_init: true
     )
@@ -485,6 +508,7 @@ module Aws::IoTManagedIntegrations
     #   <p>A set of key/value pairs that are used to manage the credential locker.</p>
     #   @return [Hash<String, String>]
     class CreateCredentialLockerRequest < Struct.new(
+      nil,
       :name,
       :client_token,
       :tags,
@@ -503,6 +527,7 @@ module Aws::IoTManagedIntegrations
     #   <p>The timestamp value of when the credential locker request occurred.</p>
     #   @return [Time]
     class CreateCredentialLockerResponse < Struct.new(
+      nil,
       :id,
       :arn,
       :created_at,
@@ -536,6 +561,7 @@ module Aws::IoTManagedIntegrations
     #     Since: 06-25-2025
     #   @return [Hash<String, String>]
     class CreateDestinationRequest < Struct.new(
+      nil,
       :delivery_destination_arn,
       :delivery_destination_type,
       :name,
@@ -552,6 +578,7 @@ module Aws::IoTManagedIntegrations
     #   <p>The name of the customer-managed destination.</p>
     #   @return [String]
     class CreateDestinationResponse < Struct.new(
+      nil,
       :name,
       keyword_init: true
     )
@@ -571,6 +598,7 @@ module Aws::IoTManagedIntegrations
     #   <p>An idempotency token. If you retry a request that completed successfully initially using the same client token and parameters, then the retry attempt will succeed without performing any further actions.</p>
     #   @return [String]
     class CreateEventLogConfigurationRequest < Struct.new(
+      nil,
       :resource_type,
       :resource_id,
       :event_log_level,
@@ -584,6 +612,7 @@ module Aws::IoTManagedIntegrations
     #   <p>The identifier of the event log configuration request.</p>
     #   @return [String]
     class CreateEventLogConfigurationResponse < Struct.new(
+      nil,
       :id,
       keyword_init: true
     )
@@ -639,6 +668,7 @@ module Aws::IoTManagedIntegrations
     #   <p>The metadata for the managed thing.</p> <note> <p>The <code>managedThing</code> <code>metadata</code> parameter is used for associating attributes with a <code>managedThing</code> that can be used for grouping over-the-air (OTA) tasks. Name value pairs in <code>metadata</code> can be used in the <code>OtaTargetQueryString</code> parameter for the <code>CreateOtaTask</code> API operation.</p> </note>
     #   @return [Hash<String, String>]
     class CreateManagedThingRequest < Struct.new(
+      nil,
       :role,
       :owner,
       :credential_locker_id,
@@ -670,6 +700,7 @@ module Aws::IoTManagedIntegrations
     #   <p>The timestamp value of when the device creation request occurred.</p>
     #   @return [Time]
     class CreateManagedThingResponse < Struct.new(
+      nil,
       :id,
       :arn,
       :created_at,
@@ -694,6 +725,7 @@ module Aws::IoTManagedIntegrations
     #     Since: 06-25-2025
     #   @return [Hash<String, String>]
     class CreateNotificationConfigurationRequest < Struct.new(
+      nil,
       :event_type,
       :destination_name,
       :client_token,
@@ -707,6 +739,7 @@ module Aws::IoTManagedIntegrations
     #   <p>The type of event triggering a device notification to the customer-managed destination.</p>
     #   @return [String]
     class CreateNotificationConfigurationResponse < Struct.new(
+      nil,
       :event_type,
       keyword_init: true
     )
@@ -726,6 +759,7 @@ module Aws::IoTManagedIntegrations
     #   <p>An idempotency token. If you retry a request that completed successfully initially using the same client token and parameters, then the retry attempt will succeed without performing any further actions.</p>
     #   @return [String]
     class CreateOtaTaskConfigurationRequest < Struct.new(
+      nil,
       :description,
       :name,
       :push_config,
@@ -739,6 +773,7 @@ module Aws::IoTManagedIntegrations
     #   <p>The identifier of the over-the-air (OTA) task configuration.</p>
     #   @return [String]
     class CreateOtaTaskConfigurationResponse < Struct.new(
+      nil,
       :task_configuration_id,
       keyword_init: true
     )
@@ -782,6 +817,7 @@ module Aws::IoTManagedIntegrations
     #   <p>A set of key/value pairs that are used to manage the over-the-air (OTA) task.</p>
     #   @return [Hash<String, String>]
     class CreateOtaTaskRequest < Struct.new(
+      nil,
       :description,
       :s3_url,
       :protocol,
@@ -809,6 +845,7 @@ module Aws::IoTManagedIntegrations
     #   <p>A description of the over-the-air (OTA) task.</p>
     #   @return [String]
     class CreateOtaTaskResponse < Struct.new(
+      nil,
       :task_id,
       :task_arn,
       :description,
@@ -833,6 +870,7 @@ module Aws::IoTManagedIntegrations
     #   <p>A set of key/value pairs that are used to manage the provisioning profile.</p>
     #   @return [Hash<String, String>]
     class CreateProvisioningProfileRequest < Struct.new(
+      nil,
       :provisioning_type,
       :ca_certificate,
       :name,
@@ -862,6 +900,7 @@ module Aws::IoTManagedIntegrations
     #   <p>The private key of the claim certificate. This is stored securely on the device for validating the connection endpoint with IoT managed integrations using the public key.</p>
     #   @return [String]
     class CreateProvisioningProfileResponse < Struct.new(
+      nil,
       :arn,
       :name,
       :provisioning_type,
@@ -887,6 +926,7 @@ module Aws::IoTManagedIntegrations
     #   <p>The timestampe value of when the credential locker was created at.</p>
     #   @return [Time]
     class CredentialLockerSummary < Struct.new(
+      nil,
       :id,
       :arn,
       :name,
@@ -900,6 +940,7 @@ module Aws::IoTManagedIntegrations
     #   <p>The unique identifier of the account association to be deleted.</p>
     #   @return [String]
     class DeleteAccountAssociationRequest < Struct.new(
+      nil,
       :account_association_id,
       keyword_init: true
     )
@@ -910,6 +951,7 @@ module Aws::IoTManagedIntegrations
     #   <p>The identifier of the cloud connector.</p>
     #   @return [String]
     class DeleteCloudConnectorRequest < Struct.new(
+      nil,
       :identifier,
       keyword_init: true
     )
@@ -920,6 +962,7 @@ module Aws::IoTManagedIntegrations
     #   <p>The identifier of the connector destination.</p>
     #   @return [String]
     class DeleteConnectorDestinationRequest < Struct.new(
+      nil,
       :identifier,
       keyword_init: true
     )
@@ -930,6 +973,7 @@ module Aws::IoTManagedIntegrations
     #   <p>The identifier of the credential locker.</p>
     #   @return [String]
     class DeleteCredentialLockerRequest < Struct.new(
+      nil,
       :identifier,
       keyword_init: true
     )
@@ -940,6 +984,7 @@ module Aws::IoTManagedIntegrations
     #   <p>The id of the customer-managed destination.</p>
     #   @return [String]
     class DeleteDestinationRequest < Struct.new(
+      nil,
       :name,
       keyword_init: true
     )
@@ -950,6 +995,7 @@ module Aws::IoTManagedIntegrations
     #   <p>The identifier of the event log configuration.</p>
     #   @return [String]
     class DeleteEventLogConfigurationRequest < Struct.new(
+      nil,
       :id,
       keyword_init: true
     )
@@ -963,6 +1009,7 @@ module Aws::IoTManagedIntegrations
     #   <p>When set to <code>TRUE</code>, a forceful deteletion of the managed thing will occur. When set to <code>FALSE</code>, a non-forceful deletion of the managed thing will occur.</p>
     #   @return [Boolean]
     class DeleteManagedThingRequest < Struct.new(
+      nil,
       :identifier,
       :force,
       keyword_init: true
@@ -974,6 +1021,7 @@ module Aws::IoTManagedIntegrations
     #   <p>The type of event triggering a device notification to the customer-managed destination.</p>
     #   @return [String]
     class DeleteNotificationConfigurationRequest < Struct.new(
+      nil,
       :event_type,
       keyword_init: true
     )
@@ -984,6 +1032,7 @@ module Aws::IoTManagedIntegrations
     #   <p>The identifier of the over-the-air (OTA) task configuration.</p>
     #   @return [String]
     class DeleteOtaTaskConfigurationRequest < Struct.new(
+      nil,
       :identifier,
       keyword_init: true
     )
@@ -994,6 +1043,7 @@ module Aws::IoTManagedIntegrations
     #   <p>The identifier of the over-the-air (OTA) task.</p>
     #   @return [String]
     class DeleteOtaTaskRequest < Struct.new(
+      nil,
       :identifier,
       keyword_init: true
     )
@@ -1004,6 +1054,7 @@ module Aws::IoTManagedIntegrations
     #   <p>The name of the provisioning template.</p>
     #   @return [String]
     class DeleteProvisioningProfileRequest < Struct.new(
+      nil,
       :identifier,
       keyword_init: true
     )
@@ -1018,6 +1069,7 @@ module Aws::IoTManagedIntegrations
     #   <p>The unique identifier of the account association to be deregistered.</p>
     #   @return [String]
     class DeregisterAccountAssociationRequest < Struct.new(
+      nil,
       :managed_thing_id,
       :account_association_id,
       keyword_init: true
@@ -1042,6 +1094,7 @@ module Aws::IoTManagedIntegrations
     #   <p>The Amazon Resource Name (ARN) of the delivery destination.</p>
     #   @return [String]
     class DestinationSummary < Struct.new(
+      nil,
       :description,
       :delivery_destination_arn,
       :delivery_destination_type,
@@ -1069,6 +1122,7 @@ module Aws::IoTManagedIntegrations
     #   <p>The metadata attributes for a device.</p>
     #   @return [JSON]
     class Device < Struct.new(
+      nil,
       :connector_device_id,
       :connector_device_name,
       :capability_report,
@@ -1090,6 +1144,7 @@ module Aws::IoTManagedIntegrations
     #   <p>The current status of the device discovery job.</p>
     #   @return [String]
     class DeviceDiscoverySummary < Struct.new(
+      nil,
       :id,
       :discovery_type,
       :status,
@@ -1127,6 +1182,7 @@ module Aws::IoTManagedIntegrations
     #   <p>The authentication material required for connecting to the discovered device, such as credentials or tokens.</p>
     #   @return [String]
     class DiscoveredDeviceSummary < Struct.new(
+      nil,
       :connector_device_id,
       :connector_device_name,
       :device_types,
@@ -1146,6 +1202,7 @@ module Aws::IoTManagedIntegrations
     #   <p>The Lambda function configuration for the endpoint, used when the endpoint communicates through an AWS Lambda function.</p>
     #   @return [Types::LambdaConfig]
     class EndpointConfig < Struct.new(
+      nil,
       :lambda,
       keyword_init: true
     )
@@ -1166,6 +1223,7 @@ module Aws::IoTManagedIntegrations
     #   <p>The logging level for the event log configuration.</p>
     #   @return [String]
     class EventLogConfigurationSummary < Struct.new(
+      nil,
       :id,
       :resource_type,
       :resource_id,
@@ -1186,6 +1244,7 @@ module Aws::IoTManagedIntegrations
     #   <p>The criteria for increasing the rollout rate of an over-the-air (OTA) task.</p>
     #   @return [Types::RolloutRateIncreaseCriteria]
     class ExponentialRolloutRate < Struct.new(
+      nil,
       :base_rate_per_minute,
       :increment_factor,
       :rate_increase_criteria,
@@ -1198,6 +1257,7 @@ module Aws::IoTManagedIntegrations
     #   <p>The unique identifier of the account association to retrieve.</p>
     #   @return [String]
     class GetAccountAssociationRequest < Struct.new(
+      nil,
       :account_association_id,
       keyword_init: true
     )
@@ -1232,6 +1292,7 @@ module Aws::IoTManagedIntegrations
     #   <p>A set of key/value pairs that are used to manage the account association.</p>
     #   @return [Hash<String, String>]
     class GetAccountAssociationResponse < Struct.new(
+      nil,
       :account_association_id,
       :association_state,
       :error_message,
@@ -1250,6 +1311,7 @@ module Aws::IoTManagedIntegrations
     #   <p>The identifier of the C2C connector.</p>
     #   @return [String]
     class GetCloudConnectorRequest < Struct.new(
+      nil,
       :identifier,
       keyword_init: true
     )
@@ -1275,6 +1337,7 @@ module Aws::IoTManagedIntegrations
     #   <p>The type of cloud connector created.</p>
     #   @return [String]
     class GetCloudConnectorResponse < Struct.new(
+      nil,
       :name,
       :endpoint_config,
       :description,
@@ -1290,6 +1353,7 @@ module Aws::IoTManagedIntegrations
     #   <p>The identifier of the C2C connector destination.</p>
     #   @return [String]
     class GetConnectorDestinationRequest < Struct.new(
+      nil,
       :identifier,
       keyword_init: true
     )
@@ -1321,6 +1385,7 @@ module Aws::IoTManagedIntegrations
     #   <p>The URL where users are redirected after completing the OAuth authorization process for the connector destination.</p>
     #   @return [String]
     class GetConnectorDestinationResponse < Struct.new(
+      nil,
       :name,
       :description,
       :cloud_connector_id,
@@ -1338,6 +1403,7 @@ module Aws::IoTManagedIntegrations
     #   <p>The identifier of the credential locker.</p>
     #   @return [String]
     class GetCredentialLockerRequest < Struct.new(
+      nil,
       :identifier,
       keyword_init: true
     )
@@ -1360,6 +1426,7 @@ module Aws::IoTManagedIntegrations
     #   <p>A set of key/value pairs that are used to manage the credential locker.</p>
     #   @return [Hash<String, String>]
     class GetCredentialLockerResponse < Struct.new(
+      nil,
       :id,
       :arn,
       :name,
@@ -1371,6 +1438,7 @@ module Aws::IoTManagedIntegrations
     end
 
     class GetCustomEndpointRequest < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1380,6 +1448,7 @@ module Aws::IoTManagedIntegrations
     #   <p>The IoT managed integrations dedicated, custom endpoint for the device to route traffic through.</p>
     #   @return [String]
     class GetCustomEndpointResponse < Struct.new(
+      nil,
       :endpoint_address,
       keyword_init: true
     )
@@ -1387,6 +1456,7 @@ module Aws::IoTManagedIntegrations
     end
 
     class GetDefaultEncryptionConfigurationRequest < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1402,6 +1472,7 @@ module Aws::IoTManagedIntegrations
     #   <p>The Key Amazon Resource Name (ARN) of the AWS KMS key used for KMS encryption if you use <code>KMS_BASED_ENCRYPTION</code>.</p>
     #   @return [String]
     class GetDefaultEncryptionConfigurationResponse < Struct.new(
+      nil,
       :configuration_status,
       :encryption_type,
       :kms_key_arn,
@@ -1414,6 +1485,7 @@ module Aws::IoTManagedIntegrations
     #   <p>The name of the customer-managed destination.</p>
     #   @return [String]
     class GetDestinationRequest < Struct.new(
+      nil,
       :name,
       keyword_init: true
     )
@@ -1448,6 +1520,7 @@ module Aws::IoTManagedIntegrations
     #     Since: 06-25-2025
     #   @return [Hash<String, String>]
     class GetDestinationResponse < Struct.new(
+      nil,
       :description,
       :delivery_destination_arn,
       :delivery_destination_type,
@@ -1465,6 +1538,7 @@ module Aws::IoTManagedIntegrations
     #   <p>The id of the device discovery job request.</p>
     #   @return [String]
     class GetDeviceDiscoveryRequest < Struct.new(
+      nil,
       :identifier,
       keyword_init: true
     )
@@ -1508,6 +1582,7 @@ module Aws::IoTManagedIntegrations
     #     Since: 06-25-2025
     #   @return [Hash<String, String>]
     class GetDeviceDiscoveryResponse < Struct.new(
+      nil,
       :id,
       :arn,
       :discovery_type,
@@ -1527,6 +1602,7 @@ module Aws::IoTManagedIntegrations
     #   <p>The identifier of the event log configuration.</p>
     #   @return [String]
     class GetEventLogConfigurationRequest < Struct.new(
+      nil,
       :id,
       keyword_init: true
     )
@@ -1546,6 +1622,7 @@ module Aws::IoTManagedIntegrations
     #   <p>The logging level for the event log configuration.</p>
     #   @return [String]
     class GetEventLogConfigurationResponse < Struct.new(
+      nil,
       :id,
       :resource_type,
       :resource_id,
@@ -1556,6 +1633,7 @@ module Aws::IoTManagedIntegrations
     end
 
     class GetHubConfigurationRequest < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1568,6 +1646,7 @@ module Aws::IoTManagedIntegrations
     #   <p>The timestamp value of when the hub configuration was updated.</p>
     #   @return [Time]
     class GetHubConfigurationResponse < Struct.new(
+      nil,
       :hub_token_timer_expiry_setting_in_seconds,
       :updated_at,
       keyword_init: true
@@ -1579,6 +1658,7 @@ module Aws::IoTManagedIntegrations
     #   <p>The id of the device.</p>
     #   @return [String]
     class GetManagedThingCapabilitiesRequest < Struct.new(
+      nil,
       :identifier,
       keyword_init: true
     )
@@ -1595,6 +1675,7 @@ module Aws::IoTManagedIntegrations
     #   <p>A report of the capabilities for the managed thing.</p>
     #   @return [Types::CapabilityReport]
     class GetManagedThingCapabilitiesResponse < Struct.new(
+      nil,
       :managed_thing_id,
       :capabilities,
       :capability_report,
@@ -1607,6 +1688,7 @@ module Aws::IoTManagedIntegrations
     #   <p>The identifier of a managed thing.</p>
     #   @return [String]
     class GetManagedThingConnectivityDataRequest < Struct.new(
+      nil,
       :identifier,
       keyword_init: true
     )
@@ -1626,6 +1708,7 @@ module Aws::IoTManagedIntegrations
     #   <p>The reason for the connectivity disconnect with the managed thing.</p>
     #   @return [String]
     class GetManagedThingConnectivityDataResponse < Struct.new(
+      nil,
       :managed_thing_id,
       :connected,
       :timestamp,
@@ -1639,6 +1722,7 @@ module Aws::IoTManagedIntegrations
     #   <p>The managed thing id.</p>
     #   @return [String]
     class GetManagedThingMetaDataRequest < Struct.new(
+      nil,
       :identifier,
       keyword_init: true
     )
@@ -1652,6 +1736,7 @@ module Aws::IoTManagedIntegrations
     #   <p>The metadata for the managed thing.</p>
     #   @return [Hash<String, String>]
     class GetManagedThingMetaDataResponse < Struct.new(
+      nil,
       :managed_thing_id,
       :meta_data,
       keyword_init: true
@@ -1663,6 +1748,7 @@ module Aws::IoTManagedIntegrations
     #   <p>The id of the managed thing.</p>
     #   @return [String]
     class GetManagedThingRequest < Struct.new(
+      nil,
       :identifier,
       keyword_init: true
     )
@@ -1751,6 +1837,7 @@ module Aws::IoTManagedIntegrations
     #   <p>A set of key/value pairs that are used to manage the managed thing.</p>
     #   @return [Hash<String, String>]
     class GetManagedThingResponse < Struct.new(
+      nil,
       :id,
       :arn,
       :owner,
@@ -1786,6 +1873,7 @@ module Aws::IoTManagedIntegrations
     #   <p>The id of the device.</p>
     #   @return [String]
     class GetManagedThingStateRequest < Struct.new(
+      nil,
       :managed_thing_id,
       keyword_init: true
     )
@@ -1796,6 +1884,7 @@ module Aws::IoTManagedIntegrations
     #   <p>The device endpoint.</p>
     #   @return [Array<Types::StateEndpoint>]
     class GetManagedThingStateResponse < Struct.new(
+      nil,
       :endpoints,
       keyword_init: true
     )
@@ -1806,6 +1895,7 @@ module Aws::IoTManagedIntegrations
     #   <p>The type of event triggering a device notification to the customer-managed destination.</p>
     #   @return [String]
     class GetNotificationConfigurationRequest < Struct.new(
+      nil,
       :event_type,
       keyword_init: true
     )
@@ -1831,6 +1921,7 @@ module Aws::IoTManagedIntegrations
     #     Since: 06-25-2025
     #   @return [Hash<String, String>]
     class GetNotificationConfigurationResponse < Struct.new(
+      nil,
       :event_type,
       :destination_name,
       :created_at,
@@ -1845,6 +1936,7 @@ module Aws::IoTManagedIntegrations
     #   <p>The over-the-air (OTA) task configuration id.</p>
     #   @return [String]
     class GetOtaTaskConfigurationRequest < Struct.new(
+      nil,
       :identifier,
       keyword_init: true
     )
@@ -1867,6 +1959,7 @@ module Aws::IoTManagedIntegrations
     #   <p>The timestamp value of when the over-the-air (OTA) task configuration was created at.</p>
     #   @return [Time]
     class GetOtaTaskConfigurationResponse < Struct.new(
+      nil,
       :task_configuration_id,
       :name,
       :push_config,
@@ -1881,6 +1974,7 @@ module Aws::IoTManagedIntegrations
     #   <p>The over-the-air (OTA) task id.</p>
     #   @return [String]
     class GetOtaTaskRequest < Struct.new(
+      nil,
       :identifier,
       keyword_init: true
     )
@@ -1939,6 +2033,7 @@ module Aws::IoTManagedIntegrations
     #   <p>A set of key/value pairs that are used to manage the over-the-air (OTA) task.</p>
     #   @return [Hash<String, String>]
     class GetOtaTaskResponse < Struct.new(
+      nil,
       :task_id,
       :task_arn,
       :description,
@@ -1965,6 +2060,7 @@ module Aws::IoTManagedIntegrations
     #   <p>The provisioning template the device uses for the provisioning process.</p>
     #   @return [String]
     class GetProvisioningProfileRequest < Struct.new(
+      nil,
       :identifier,
       keyword_init: true
     )
@@ -1990,6 +2086,7 @@ module Aws::IoTManagedIntegrations
     #   <p>A set of key/value pairs that are used to manage the provisioning profile.</p>
     #   @return [Hash<String, String>]
     class GetProvisioningProfileResponse < Struct.new(
+      nil,
       :arn,
       :name,
       :provisioning_type,
@@ -2005,6 +2102,7 @@ module Aws::IoTManagedIntegrations
     #   <p>The id for a managed thing.</p>
     #   @return [String]
     class GetRuntimeLogConfigurationRequest < Struct.new(
+      nil,
       :managed_thing_id,
       keyword_init: true
     )
@@ -2018,6 +2116,7 @@ module Aws::IoTManagedIntegrations
     #   <p>The runtime log configuration for a managed thing.</p>
     #   @return [Types::RuntimeLogConfigurations]
     class GetRuntimeLogConfigurationResponse < Struct.new(
+      nil,
       :managed_thing_id,
       :runtime_log_configurations,
       keyword_init: true
@@ -2035,6 +2134,7 @@ module Aws::IoTManagedIntegrations
     #   <p>The format of the schema version.</p>
     #   @return [String]
     class GetSchemaVersionRequest < Struct.new(
+      nil,
       :type,
       :schema_versioned_id,
       :format,
@@ -2065,6 +2165,7 @@ module Aws::IoTManagedIntegrations
     #   <p>The schema of the schema version.</p>
     #   @return [JSON]
     class GetSchemaVersionResponse < Struct.new(
+      nil,
       :schema_id,
       :type,
       :description,
@@ -2081,6 +2182,7 @@ module Aws::IoTManagedIntegrations
     # @!attribute message
     #   @return [String]
     class InternalFailureException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -2091,6 +2193,7 @@ module Aws::IoTManagedIntegrations
     # @!attribute message
     #   @return [String]
     class InternalServerException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -2101,6 +2204,7 @@ module Aws::IoTManagedIntegrations
     # @!attribute message
     #   @return [String]
     class InvalidRequestException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -2112,6 +2216,7 @@ module Aws::IoTManagedIntegrations
     #   <p>The Amazon Resource Name (ARN) of the Lambda function used as an endpoint.</p>
     #   @return [String]
     class LambdaConfig < Struct.new(
+      nil,
       :arn,
       keyword_init: true
     )
@@ -2122,6 +2227,7 @@ module Aws::IoTManagedIntegrations
     # @!attribute message
     #   @return [String]
     class LimitExceededException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -2138,6 +2244,7 @@ module Aws::IoTManagedIntegrations
     #   <p>A token used for pagination of results.</p>
     #   @return [String]
     class ListAccountAssociationsRequest < Struct.new(
+      nil,
       :connector_destination_id,
       :max_results,
       :next_token,
@@ -2153,6 +2260,7 @@ module Aws::IoTManagedIntegrations
     #   <p>A token used for pagination of results when there are more account associations than can be returned in a single response.</p>
     #   @return [String]
     class ListAccountAssociationsResponse < Struct.new(
+      nil,
       :items,
       :next_token,
       keyword_init: true
@@ -2173,6 +2281,7 @@ module Aws::IoTManagedIntegrations
     #   <p>A token that can be used to retrieve the next set of results.</p>
     #   @return [String]
     class ListCloudConnectorsRequest < Struct.new(
+      nil,
       :type,
       :lambda_arn,
       :max_results,
@@ -2189,6 +2298,7 @@ module Aws::IoTManagedIntegrations
     #   <p>A token that can be used to retrieve the next set of results.</p>
     #   @return [String]
     class ListCloudConnectorsResponse < Struct.new(
+      nil,
       :items,
       :next_token,
       keyword_init: true
@@ -2206,6 +2316,7 @@ module Aws::IoTManagedIntegrations
     #   <p>The maximum number of connector destinations to return in a single response.</p>
     #   @return [Integer]
     class ListConnectorDestinationsRequest < Struct.new(
+      nil,
       :cloud_connector_id,
       :next_token,
       :max_results,
@@ -2221,6 +2332,7 @@ module Aws::IoTManagedIntegrations
     #   <p>A token used for pagination of results when there are more connector destinations than can be returned in a single response.</p>
     #   @return [String]
     class ListConnectorDestinationsResponse < Struct.new(
+      nil,
       :connector_destination_list,
       :next_token,
       keyword_init: true
@@ -2235,6 +2347,7 @@ module Aws::IoTManagedIntegrations
     #   <p>The maximum number of results to return at one time.</p>
     #   @return [Integer]
     class ListCredentialLockersRequest < Struct.new(
+      nil,
       :next_token,
       :max_results,
       keyword_init: true
@@ -2249,6 +2362,7 @@ module Aws::IoTManagedIntegrations
     #   <p>A token that can be used to retrieve the next set of results.</p>
     #   @return [String]
     class ListCredentialLockersResponse < Struct.new(
+      nil,
       :items,
       :next_token,
       keyword_init: true
@@ -2263,6 +2377,7 @@ module Aws::IoTManagedIntegrations
     #   <p>The maximum number of results to return at one time.</p>
     #   @return [Integer]
     class ListDestinationsRequest < Struct.new(
+      nil,
       :next_token,
       :max_results,
       keyword_init: true
@@ -2277,6 +2392,7 @@ module Aws::IoTManagedIntegrations
     #   <p>A token that can be used to retrieve the next set of results.</p>
     #   @return [String]
     class ListDestinationsResponse < Struct.new(
+      nil,
       :destination_list,
       :next_token,
       keyword_init: true
@@ -2297,6 +2413,7 @@ module Aws::IoTManagedIntegrations
     #   <p>The status to filter device discovery jobs by.</p>
     #   @return [String]
     class ListDeviceDiscoveriesRequest < Struct.new(
+      nil,
       :next_token,
       :max_results,
       :type_filter,
@@ -2313,6 +2430,7 @@ module Aws::IoTManagedIntegrations
     #   <p>A token used for pagination of results when there are more device discovery jobs than can be returned in a single response.</p>
     #   @return [String]
     class ListDeviceDiscoveriesResponse < Struct.new(
+      nil,
       :items,
       :next_token,
       keyword_init: true
@@ -2330,6 +2448,7 @@ module Aws::IoTManagedIntegrations
     #   <p>The maximum number of discovered devices to return in a single response.</p>
     #   @return [Integer]
     class ListDiscoveredDevicesRequest < Struct.new(
+      nil,
       :identifier,
       :next_token,
       :max_results,
@@ -2345,6 +2464,7 @@ module Aws::IoTManagedIntegrations
     #   <p>A token used for pagination of results when there are more discovered devices than can be returned in a single response.</p>
     #   @return [String]
     class ListDiscoveredDevicesResponse < Struct.new(
+      nil,
       :items,
       :next_token,
       keyword_init: true
@@ -2359,6 +2479,7 @@ module Aws::IoTManagedIntegrations
     #   <p>The maximum number of results to return at one time.</p>
     #   @return [Integer]
     class ListEventLogConfigurationsRequest < Struct.new(
+      nil,
       :next_token,
       :max_results,
       keyword_init: true
@@ -2373,6 +2494,7 @@ module Aws::IoTManagedIntegrations
     #   <p>A token that can be used to retrieve the next set of results.</p>
     #   @return [String]
     class ListEventLogConfigurationsResponse < Struct.new(
+      nil,
       :event_log_configuration_list,
       :next_token,
       keyword_init: true
@@ -2393,6 +2515,7 @@ module Aws::IoTManagedIntegrations
     #   <p>A token used for pagination of results.</p>
     #   @return [String]
     class ListManagedThingAccountAssociationsRequest < Struct.new(
+      nil,
       :managed_thing_id,
       :account_association_id,
       :max_results,
@@ -2409,6 +2532,7 @@ module Aws::IoTManagedIntegrations
     #   <p>A token used for pagination of results when there are more account associations than can be returned in a single response.</p>
     #   @return [String]
     class ListManagedThingAccountAssociationsResponse < Struct.new(
+      nil,
       :items,
       :next_token,
       keyword_init: true
@@ -2432,6 +2556,7 @@ module Aws::IoTManagedIntegrations
     #   <p>The maximum number of results to return at one time.</p>
     #   @return [Integer]
     class ListManagedThingSchemasRequest < Struct.new(
+      nil,
       :identifier,
       :endpoint_id_filter,
       :capability_id_filter,
@@ -2449,6 +2574,7 @@ module Aws::IoTManagedIntegrations
     #   <p>A token that can be used to retrieve the next set of results.</p>
     #   @return [String]
     class ListManagedThingSchemasResponse < Struct.new(
+      nil,
       :items,
       :next_token,
       keyword_init: true
@@ -2493,6 +2619,7 @@ module Aws::IoTManagedIntegrations
     #   <p>The maximum number of results to return at one time.</p>
     #   @return [Integer]
     class ListManagedThingsRequest < Struct.new(
+      nil,
       :owner_filter,
       :credential_locker_filter,
       :role_filter,
@@ -2516,6 +2643,7 @@ module Aws::IoTManagedIntegrations
     #   <p>A token that can be used to retrieve the next set of results.</p>
     #   @return [String]
     class ListManagedThingsResponse < Struct.new(
+      nil,
       :items,
       :next_token,
       keyword_init: true
@@ -2530,6 +2658,7 @@ module Aws::IoTManagedIntegrations
     #   <p>A token that can be used to retrieve the next set of results.</p>
     #   @return [String]
     class ListNotificationConfigurationsRequest < Struct.new(
+      nil,
       :max_results,
       :next_token,
       keyword_init: true
@@ -2544,6 +2673,7 @@ module Aws::IoTManagedIntegrations
     #   <p>A token that can be used to retrieve the next set of results.</p>
     #   @return [String]
     class ListNotificationConfigurationsResponse < Struct.new(
+      nil,
       :notification_configuration_list,
       :next_token,
       keyword_init: true
@@ -2558,6 +2688,7 @@ module Aws::IoTManagedIntegrations
     #   <p>The maximum number of results to return at one time.</p>
     #   @return [Integer]
     class ListOtaTaskConfigurationsRequest < Struct.new(
+      nil,
       :next_token,
       :max_results,
       keyword_init: true
@@ -2572,6 +2703,7 @@ module Aws::IoTManagedIntegrations
     #   <p>A token that can be used to retrieve the next set of results.</p>
     #   @return [String]
     class ListOtaTaskConfigurationsResponse < Struct.new(
+      nil,
       :items,
       :next_token,
       keyword_init: true
@@ -2589,6 +2721,7 @@ module Aws::IoTManagedIntegrations
     #   <p>The maximum number of results to return at one time.</p>
     #   @return [Integer]
     class ListOtaTaskExecutionsRequest < Struct.new(
+      nil,
       :identifier,
       :next_token,
       :max_results,
@@ -2604,6 +2737,7 @@ module Aws::IoTManagedIntegrations
     #   <p>A token that can be used to retrieve the next set of results.</p>
     #   @return [String]
     class ListOtaTaskExecutionsResponse < Struct.new(
+      nil,
       :execution_summaries,
       :next_token,
       keyword_init: true
@@ -2618,6 +2752,7 @@ module Aws::IoTManagedIntegrations
     #   <p>The maximum number of results to return at one time.</p>
     #   @return [Integer]
     class ListOtaTasksRequest < Struct.new(
+      nil,
       :next_token,
       :max_results,
       keyword_init: true
@@ -2632,6 +2767,7 @@ module Aws::IoTManagedIntegrations
     #   <p>A token that can be used to retrieve the next set of results.</p>
     #   @return [String]
     class ListOtaTasksResponse < Struct.new(
+      nil,
       :tasks,
       :next_token,
       keyword_init: true
@@ -2646,6 +2782,7 @@ module Aws::IoTManagedIntegrations
     #   <p>The maximum number of results to return at one time.</p>
     #   @return [Integer]
     class ListProvisioningProfilesRequest < Struct.new(
+      nil,
       :next_token,
       :max_results,
       keyword_init: true
@@ -2660,6 +2797,7 @@ module Aws::IoTManagedIntegrations
     #   <p>A token that can be used to retrieve the next set of results.</p>
     #   @return [String]
     class ListProvisioningProfilesResponse < Struct.new(
+      nil,
       :items,
       :next_token,
       keyword_init: true
@@ -2689,6 +2827,7 @@ module Aws::IoTManagedIntegrations
     #   <p>The schema version. If this is left blank, it defaults to the latest version.</p>
     #   @return [String]
     class ListSchemaVersionsRequest < Struct.new(
+      nil,
       :type,
       :max_results,
       :next_token,
@@ -2708,6 +2847,7 @@ module Aws::IoTManagedIntegrations
     #   <p>A token that can be used to retrieve the next set of results.</p>
     #   @return [String]
     class ListSchemaVersionsResponse < Struct.new(
+      nil,
       :items,
       :next_token,
       keyword_init: true
@@ -2719,6 +2859,7 @@ module Aws::IoTManagedIntegrations
     #   The ARN of the resource for which to list tags.
     #   @return [String]
     class ListTagsForResourceRequest < Struct.new(
+      nil,
       :resource_arn,
       keyword_init: true
     )
@@ -2729,6 +2870,7 @@ module Aws::IoTManagedIntegrations
     #   A set of key/value pairs that are used to manage the resource.
     #   @return [Hash<String, String>]
     class ListTagsForResourceResponse < Struct.new(
+      nil,
       :tags,
       keyword_init: true
     )
@@ -2743,6 +2885,7 @@ module Aws::IoTManagedIntegrations
     #   <p>The identifier of the account association in the association.</p>
     #   @return [String]
     class ManagedThingAssociation < Struct.new(
+      nil,
       :managed_thing_id,
       :account_association_id,
       keyword_init: true
@@ -2761,6 +2904,7 @@ module Aws::IoTManagedIntegrations
     #   <p>The validation schema for one schema item associated with a managed thing.</p>
     #   @return [JSON]
     class ManagedThingSchemaListItem < Struct.new(
+      nil,
       :endpoint_id,
       :capability_id,
       :schema,
@@ -2831,6 +2975,7 @@ module Aws::IoTManagedIntegrations
     #   <p>The timestampe value of when the managed thing was activated at.</p>
     #   @return [Time]
     class ManagedThingSummary < Struct.new(
+      nil,
       :id,
       :arn,
       :advertised_product_id,
@@ -2866,6 +3011,7 @@ module Aws::IoTManagedIntegrations
     #   <p>The endpoints used in the capability report.</p>
     #   @return [Array<Types::MatterCapabilityReportEndpoint>]
     class MatterCapabilityReport < Struct.new(
+      nil,
       :version,
       :node_id,
       :endpoints,
@@ -2885,6 +3031,7 @@ module Aws::IoTManagedIntegrations
     #   <p>Value for the Amazon Web Services Matter capability report attribute.</p>
     #   @return [JSON]
     class MatterCapabilityReportAttribute < Struct.new(
+      nil,
       :id,
       :name,
       :value,
@@ -2928,6 +3075,7 @@ module Aws::IoTManagedIntegrations
     #   <p>The fabric index for the Amazon Web Services Matter capability report.</p>
     #   @return [Integer]
     class MatterCapabilityReportCluster < Struct.new(
+      nil,
       :id,
       :revision,
       :public_id,
@@ -2964,6 +3112,7 @@ module Aws::IoTManagedIntegrations
     #   <p>Semantic information related to endpoint.</p>
     #   @return [Array<String>]
     class MatterCapabilityReportEndpoint < Struct.new(
+      nil,
       :id,
       :device_types,
       :clusters,
@@ -2989,6 +3138,7 @@ module Aws::IoTManagedIntegrations
     #   <p>Describe the Matter events with the Matter event identifier mapped to the event fields.</p>
     #   @return [Hash<String, JSON>]
     class MatterCluster < Struct.new(
+      nil,
       :id,
       :attributes,
       :commands,
@@ -3006,6 +3156,7 @@ module Aws::IoTManagedIntegrations
     #   <p>A list of Matter clusters for a managed thing.</p>
     #   @return [Array<Types::MatterCluster>]
     class MatterEndpoint < Struct.new(
+      nil,
       :id,
       :clusters,
       keyword_init: true
@@ -3021,6 +3172,7 @@ module Aws::IoTManagedIntegrations
     #   <p>The name of the destination for the notification configuration.</p>
     #   @return [String]
     class NotificationConfigurationSummary < Struct.new(
+      nil,
       :event_type,
       :destination_name,
       keyword_init: true
@@ -3048,6 +3200,7 @@ module Aws::IoTManagedIntegrations
     #   <p>Configuration for proactively refreshing OAuth tokens before they expire.</p>
     #   @return [Types::ProactiveRefreshTokenRenewal]
     class OAuthConfig < Struct.new(
+      nil,
       :auth_url,
       :token_url,
       :scope,
@@ -3067,6 +3220,7 @@ module Aws::IoTManagedIntegrations
     #   <p>Updated configuration for proactively refreshing OAuth tokens before they expire.</p>
     #   @return [Types::ProactiveRefreshTokenRenewal]
     class OAuthUpdate < Struct.new(
+      nil,
       :o_auth_complete_redirect_url,
       :proactive_refresh_token_renewal,
       keyword_init: true
@@ -3079,6 +3233,7 @@ module Aws::IoTManagedIntegrations
     #   <p>The list of criteria for the abort config.</p>
     #   @return [Array<Types::AbortConfigCriteria>]
     class OtaTaskAbortConfig < Struct.new(
+      nil,
       :abort_config_criteria_list,
       keyword_init: true
     )
@@ -3096,6 +3251,7 @@ module Aws::IoTManagedIntegrations
     #   <p>The timestamp value of when the over-the-air (OTA) task configuration was created at.</p>
     #   @return [Time]
     class OtaTaskConfigurationSummary < Struct.new(
+      nil,
       :task_configuration_id,
       :name,
       :created_at,
@@ -3109,6 +3265,7 @@ module Aws::IoTManagedIntegrations
     #   <p>The list of retry config criteria.</p>
     #   @return [Array<Types::RetryConfigCriteria>]
     class OtaTaskExecutionRetryConfig < Struct.new(
+      nil,
       :retry_config_criteria,
       keyword_init: true
     )
@@ -3123,6 +3280,7 @@ module Aws::IoTManagedIntegrations
     #   <p>The maximum number of things that will be notified of a pending task, per minute.</p>
     #   @return [Integer]
     class OtaTaskExecutionRolloutConfig < Struct.new(
+      nil,
       :exponential_rollout_rate,
       :maximum_per_minute,
       keyword_init: true
@@ -3138,6 +3296,7 @@ module Aws::IoTManagedIntegrations
     #   <p>The id of a managed thing.</p>
     #   @return [String]
     class OtaTaskExecutionSummaries < Struct.new(
+      nil,
       :task_execution_summary,
       :managed_thing_id,
       keyword_init: true
@@ -3165,6 +3324,7 @@ module Aws::IoTManagedIntegrations
     #   <p>The status of the over-the-air (OTA) task execution summary.</p>
     #   @return [String]
     class OtaTaskExecutionSummary < Struct.new(
+      nil,
       :execution_number,
       :last_updated_at,
       :queued_at,
@@ -3190,6 +3350,7 @@ module Aws::IoTManagedIntegrations
     #   <p>The time an over-the-air (OTA) task will start.</p>
     #   @return [String]
     class OtaTaskSchedulingConfig < Struct.new(
+      nil,
       :end_behavior,
       :end_time,
       :maintenance_windows,
@@ -3219,6 +3380,7 @@ module Aws::IoTManagedIntegrations
     #   <p>The status of the over-the-air (OTA) task summary.</p>
     #   @return [String]
     class OtaTaskSummary < Struct.new(
+      nil,
       :task_id,
       :task_arn,
       :created_at,
@@ -3235,6 +3397,7 @@ module Aws::IoTManagedIntegrations
     #   <p>Specifies the amount of time the device has to finish execution of this task. The timeout interval can be anywhere between 1 minute and 7 days.</p>
     #   @return [Integer]
     class OtaTaskTimeoutConfig < Struct.new(
+      nil,
       :in_progress_timeout_in_minutes,
       keyword_init: true
     )
@@ -3249,6 +3412,7 @@ module Aws::IoTManagedIntegrations
     #   <p>The days before token expiration when the system should attempt to renew the token, specified in days.</p>
     #   @return [Integer]
     class ProactiveRefreshTokenRenewal < Struct.new(
+      nil,
       :enabled,
       :days_before_renewal,
       keyword_init: true
@@ -3270,6 +3434,7 @@ module Aws::IoTManagedIntegrations
     #   <p>The type of provisioning workflow the device uses for onboarding to IoT managed integrations.</p>
     #   @return [String]
     class ProvisioningProfileSummary < Struct.new(
+      nil,
       :name,
       :id,
       :arn,
@@ -3290,6 +3455,7 @@ module Aws::IoTManagedIntegrations
     #   <p>Structure representing one timeout config.</p>
     #   @return [Types::OtaTaskTimeoutConfig]
     class PushConfig < Struct.new(
+      nil,
       :abort_config,
       :rollout_config,
       :timeout_config,
@@ -3305,6 +3471,7 @@ module Aws::IoTManagedIntegrations
     #   <p>The Key Amazon Resource Name (ARN) of the AWS KMS key used for KMS encryption if you use <code>KMS_BASED_ENCRYPTION</code>.</p>
     #   @return [String]
     class PutDefaultEncryptionConfigurationRequest < Struct.new(
+      nil,
       :encryption_type,
       :kms_key_arn,
       keyword_init: true
@@ -3322,6 +3489,7 @@ module Aws::IoTManagedIntegrations
     #   <p>The Key Amazon Resource Name (ARN) of the AWS KMS key used for KMS encryption if you use <code>KMS_BASED_ENCRYPTION</code>.</p>
     #   @return [String]
     class PutDefaultEncryptionConfigurationResponse < Struct.new(
+      nil,
       :configuration_status,
       :encryption_type,
       :kms_key_arn,
@@ -3334,6 +3502,7 @@ module Aws::IoTManagedIntegrations
     #   <p>A user-defined integer value that represents the hub token timer expiry setting in seconds.</p>
     #   @return [Integer]
     class PutHubConfigurationRequest < Struct.new(
+      nil,
       :hub_token_timer_expiry_setting_in_seconds,
       keyword_init: true
     )
@@ -3344,6 +3513,7 @@ module Aws::IoTManagedIntegrations
     #   <p>A user-defined integer value that represents the hub token timer expiry setting in seconds.</p>
     #   @return [Integer]
     class PutHubConfigurationResponse < Struct.new(
+      nil,
       :hub_token_timer_expiry_setting_in_seconds,
       keyword_init: true
     )
@@ -3357,6 +3527,7 @@ module Aws::IoTManagedIntegrations
     #   <p>The runtime log configuration for a managed thing.</p>
     #   @return [Types::RuntimeLogConfigurations]
     class PutRuntimeLogConfigurationRequest < Struct.new(
+      nil,
       :managed_thing_id,
       :runtime_log_configurations,
       keyword_init: true
@@ -3374,6 +3545,7 @@ module Aws::IoTManagedIntegrations
     #   <p>The identifier of the device discovery job associated with this registration.</p>
     #   @return [String]
     class RegisterAccountAssociationRequest < Struct.new(
+      nil,
       :managed_thing_id,
       :account_association_id,
       :device_discovery_id,
@@ -3392,6 +3564,7 @@ module Aws::IoTManagedIntegrations
     #   <p>The identifier of the managed thing that was registered with the account association.</p>
     #   @return [String]
     class RegisterAccountAssociationResponse < Struct.new(
+      nil,
       :account_association_id,
       :device_discovery_id,
       :managed_thing_id,
@@ -3401,6 +3574,7 @@ module Aws::IoTManagedIntegrations
     end
 
     class RegisterCustomEndpointRequest < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -3410,6 +3584,7 @@ module Aws::IoTManagedIntegrations
     #   <p>The IoT managed integrations dedicated, custom endpoint for the device to route traffic through.</p>
     #   @return [String]
     class RegisterCustomEndpointResponse < Struct.new(
+      nil,
       :endpoint_address,
       keyword_init: true
     )
@@ -3420,6 +3595,7 @@ module Aws::IoTManagedIntegrations
     #   <p>The id of a managed thing.</p>
     #   @return [String]
     class ResetRuntimeLogConfigurationRequest < Struct.new(
+      nil,
       :managed_thing_id,
       keyword_init: true
     )
@@ -3436,6 +3612,7 @@ module Aws::IoTManagedIntegrations
     #   Type of the affected resource
     #   @return [String]
     class ResourceNotFoundException < Struct.new(
+      nil,
       :message,
       :resource_id,
       :resource_type,
@@ -3452,6 +3629,7 @@ module Aws::IoTManagedIntegrations
     #   <p>The number of retries allowed for a failure type for the over-the-air (OTA) task.</p>
     #   @return [Integer]
     class RetryConfigCriteria < Struct.new(
+      nil,
       :failure_type,
       :min_number_of_retries,
       keyword_init: true
@@ -3467,6 +3645,7 @@ module Aws::IoTManagedIntegrations
     #   <p>The threshold for number of succeeded things that will initiate the increase in rate of rollout.</p>
     #   @return [Integer]
     class RolloutRateIncreaseCriteria < Struct.new(
+      nil,
       :number_of_notified_things,
       :number_of_succeeded_things,
       keyword_init: true
@@ -3500,6 +3679,7 @@ module Aws::IoTManagedIntegrations
     #   <p>Configuration to enable or disable deleting of runtime logs in the device once uploaded to the cloud.</p>
     #   @return [Boolean]
     class RuntimeLogConfigurations < Struct.new(
+      nil,
       :log_level,
       :log_flush_level,
       :local_store_location,
@@ -3521,6 +3701,7 @@ module Aws::IoTManagedIntegrations
     #   <p>Displays the start time of the next maintenance window.</p>
     #   @return [String]
     class ScheduleMaintenanceWindow < Struct.new(
+      nil,
       :duration_in_minutes,
       :start_time,
       keyword_init: true
@@ -3548,6 +3729,7 @@ module Aws::IoTManagedIntegrations
     #   <p>The visibility of the schema version.</p>
     #   @return [String]
     class SchemaVersionListItem < Struct.new(
+      nil,
       :schema_id,
       :type,
       :description,
@@ -3567,6 +3749,7 @@ module Aws::IoTManagedIntegrations
     #   <p>The version ID of the AWS Secrets Manager secret.</p>
     #   @return [String]
     class SecretsManager < Struct.new(
+      nil,
       :arn,
       :version_id,
       keyword_init: true
@@ -3608,6 +3791,7 @@ module Aws::IoTManagedIntegrations
     #   <p>The device endpoint.</p>
     #   @return [Types::MatterEndpoint]
     class SendConnectorEventRequest < Struct.new(
+      nil,
       :connector_id,
       :user_id,
       :operation,
@@ -3628,6 +3812,7 @@ module Aws::IoTManagedIntegrations
     #   <p>The id of the connector between the third-party cloud provider and IoT managed integrations.</p>
     #   @return [String]
     class SendConnectorEventResponse < Struct.new(
+      nil,
       :connector_id,
       keyword_init: true
     )
@@ -3650,6 +3835,7 @@ module Aws::IoTManagedIntegrations
     #   <p>The identifier of the account association to use when sending a command to a managed thing.</p>
     #   @return [String]
     class SendManagedThingCommandRequest < Struct.new(
+      nil,
       :managed_thing_id,
       :endpoints,
       :connector_association_id,
@@ -3663,6 +3849,7 @@ module Aws::IoTManagedIntegrations
     #   <p>The trace request identifier. This is specified by the device owner, but will be generated by IoT managed integrations if not provided by the device owner.</p>
     #   @return [String]
     class SendManagedThingCommandResponse < Struct.new(
+      nil,
       :trace_id,
       keyword_init: true
     )
@@ -3673,6 +3860,7 @@ module Aws::IoTManagedIntegrations
     # @!attribute message
     #   @return [String]
     class ServiceQuotaExceededException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -3683,6 +3871,7 @@ module Aws::IoTManagedIntegrations
     # @!attribute message
     #   @return [String]
     class ServiceUnavailableException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -3693,6 +3882,7 @@ module Aws::IoTManagedIntegrations
     #   <p>The unique identifier of the account association to refresh.</p>
     #   @return [String]
     class StartAccountAssociationRefreshRequest < Struct.new(
+      nil,
       :account_association_id,
       keyword_init: true
     )
@@ -3703,6 +3893,7 @@ module Aws::IoTManagedIntegrations
     #   <p>Third-party IoT platform OAuth authorization server URL with all required parameters to perform end-user authentication during the refresh process.</p>
     #   @return [String]
     class StartAccountAssociationRefreshResponse < Struct.new(
+      nil,
       :o_auth_authorization_url,
       keyword_init: true
     )
@@ -3743,6 +3934,7 @@ module Aws::IoTManagedIntegrations
     #     Since: 06-25-2025
     #   @return [Hash<String, String>]
     class StartDeviceDiscoveryRequest < Struct.new(
+      nil,
       :discovery_type,
       :custom_protocol_detail,
       :controller_identifier,
@@ -3764,6 +3956,7 @@ module Aws::IoTManagedIntegrations
     #   <p>The timestamp value for the start time of the device discovery.</p>
     #   @return [Time]
     class StartDeviceDiscoveryResponse < Struct.new(
+      nil,
       :id,
       :started_at,
       keyword_init: true
@@ -3785,6 +3978,7 @@ module Aws::IoTManagedIntegrations
     #   <p>Describe the command capability with the properties it supports.</p>
     #   @return [JSON]
     class StateCapability < Struct.new(
+      nil,
       :id,
       :name,
       :version,
@@ -3802,6 +3996,7 @@ module Aws::IoTManagedIntegrations
     #   <p>Describe the endpoint with an id, a name, and the relevant capabilities for the reporting state.</p>
     #   @return [Array<Types::StateCapability>]
     class StateEndpoint < Struct.new(
+      nil,
       :endpoint_id,
       :capabilities,
       keyword_init: true
@@ -3816,6 +4011,7 @@ module Aws::IoTManagedIntegrations
     #   A set of key/value pairs that are used to manage the resource
     #   @return [Hash<String, String>]
     class TagResourceRequest < Struct.new(
+      nil,
       :resource_arn,
       :tags,
       keyword_init: true
@@ -3824,6 +4020,7 @@ module Aws::IoTManagedIntegrations
     end
 
     class TagResourceResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -3858,6 +4055,7 @@ module Aws::IoTManagedIntegrations
     #   <p>The targets of the over-the-air (OTA) task.</p>
     #   @return [Array<String>]
     class TaskProcessingDetails < Struct.new(
+      nil,
       :number_of_canceled_things,
       :number_of_failed_things,
       :number_of_in_progress_things,
@@ -3876,6 +4074,7 @@ module Aws::IoTManagedIntegrations
     # @!attribute message
     #   @return [String]
     class ThrottlingException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -3886,6 +4085,7 @@ module Aws::IoTManagedIntegrations
     # @!attribute message
     #   @return [String]
     class UnauthorizedException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -3899,6 +4099,7 @@ module Aws::IoTManagedIntegrations
     #   A list of tag keys to remove from the resource.
     #   @return [Array<String>]
     class UntagResourceRequest < Struct.new(
+      nil,
       :resource_arn,
       :tag_keys,
       keyword_init: true
@@ -3907,6 +4108,7 @@ module Aws::IoTManagedIntegrations
     end
 
     class UntagResourceResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -3922,6 +4124,7 @@ module Aws::IoTManagedIntegrations
     #   <p>The new description to assign to the account association.</p>
     #   @return [String]
     class UpdateAccountAssociationRequest < Struct.new(
+      nil,
       :account_association_id,
       :name,
       :description,
@@ -3940,6 +4143,7 @@ module Aws::IoTManagedIntegrations
     #   <p>The new description to assign to the cloud connector.</p>
     #   @return [String]
     class UpdateCloudConnectorRequest < Struct.new(
+      nil,
       :identifier,
       :name,
       :description,
@@ -3967,6 +4171,7 @@ module Aws::IoTManagedIntegrations
     #   <p>The updated AWS Secrets Manager configuration for the connector destination.</p>
     #   @return [Types::SecretsManager]
     class UpdateConnectorDestinationRequest < Struct.new(
+      nil,
       :identifier,
       :description,
       :name,
@@ -3994,6 +4199,7 @@ module Aws::IoTManagedIntegrations
     #   <p>The description of the customer-managed destination.</p>
     #   @return [String]
     class UpdateDestinationRequest < Struct.new(
+      nil,
       :name,
       :delivery_destination_arn,
       :delivery_destination_type,
@@ -4011,6 +4217,7 @@ module Aws::IoTManagedIntegrations
     #   <p>The log level for the event in terms of severity.</p>
     #   @return [String]
     class UpdateEventLogConfigurationRequest < Struct.new(
+      nil,
       :id,
       :event_log_level,
       keyword_init: true
@@ -4058,6 +4265,7 @@ module Aws::IoTManagedIntegrations
     #   <p>The metadata for the managed thing.</p>
     #   @return [Hash<String, String>]
     class UpdateManagedThingRequest < Struct.new(
+      nil,
       :identifier,
       :owner,
       :credential_locker_id,
@@ -4083,6 +4291,7 @@ module Aws::IoTManagedIntegrations
     #   <p>The name of the destination for the notification configuration.</p>
     #   @return [String]
     class UpdateNotificationConfigurationRequest < Struct.new(
+      nil,
       :event_type,
       :destination_name,
       keyword_init: true
@@ -4100,6 +4309,7 @@ module Aws::IoTManagedIntegrations
     #   <p>The identifier for the over-the-air (OTA) task configuration.</p>
     #   @return [String]
     class UpdateOtaTaskRequest < Struct.new(
+      nil,
       :identifier,
       :description,
       :task_configuration_id,
@@ -4112,6 +4322,7 @@ module Aws::IoTManagedIntegrations
     # @!attribute message
     #   @return [String]
     class ValidationException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )

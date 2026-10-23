@@ -10,6 +10,7 @@ module Aws::CloudControl
     # @!attribute message
     #   @return [String]
     class AlreadyExistsException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -21,6 +22,7 @@ module Aws::CloudControl
     #         resource operation request.</p>
     #   @return [String]
     class CancelResourceRequestOperationInput < Struct.new(
+      nil,
       :request_token,
       keyword_init: true
     )
@@ -33,6 +35,7 @@ module Aws::CloudControl
     #           <i>Amazon Web Services Cloud Control API User Guide</i>.</p>
     #   @return [Types::ProgressEvent]
     class CancelResourceRequestOperationOutput < Struct.new(
+      nil,
       :progress_event,
       keyword_init: true
     )
@@ -45,6 +48,7 @@ module Aws::CloudControl
     # @!attribute message
     #   @return [String]
     class ClientTokenConflictException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -55,6 +59,7 @@ module Aws::CloudControl
     # @!attribute message
     #   @return [String]
     class ConcurrentModificationException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -65,6 +70,7 @@ module Aws::CloudControl
     # @!attribute message
     #   @return [String]
     class ConcurrentOperationException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -128,6 +134,7 @@ module Aws::CloudControl
     #         topic for the resource in the <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-template-resource-type-ref.html">Resource and property types reference</a> in the <i>CloudFormation Users Guide</i>.</p>
     #   @return [String]
     class CreateResourceOperationInput < Struct.new(
+      nil,
       :type_name,
       :type_version_id,
       :role_arn,
@@ -145,6 +152,7 @@ module Aws::CloudControl
     #           <code>ProgressEvent</code> returned by <code>CreateResource</code>.</p>
     #   @return [Types::ProgressEvent]
     class CreateResourceOperationOutput < Struct.new(
+      nil,
       :progress_event,
       keyword_init: true
     )
@@ -202,6 +210,7 @@ module Aws::CloudControl
     #                                               resources</a> in the <i>Amazon Web Services Cloud Control API User Guide</i>.</p>
     #   @return [String]
     class DeleteResourceOperationInput < Struct.new(
+      nil,
       :type_name,
       :type_version_id,
       :role_arn,
@@ -219,6 +228,7 @@ module Aws::CloudControl
     #           <code>ProgressEvent</code> returned by <code>DeleteResource</code>.</p>
     #   @return [Types::ProgressEvent]
     class DeleteResourceOperationOutput < Struct.new(
+      nil,
       :progress_event,
       keyword_init: true
     )
@@ -230,6 +240,7 @@ module Aws::CloudControl
     # @!attribute message
     #   @return [String]
     class GeneralServiceException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -274,6 +285,7 @@ module Aws::CloudControl
     #                                               resources</a> in the <i>Amazon Web Services Cloud Control API User Guide</i>.</p>
     #   @return [String]
     class GetResourceOperationInput < Struct.new(
+      nil,
       :type_name,
       :type_version_id,
       :role_arn,
@@ -290,6 +302,7 @@ module Aws::CloudControl
     #   <p>Represents information about a provisioned resource.</p>
     #   @return [Types::ResourceDescription]
     class GetResourceOperationOutput < Struct.new(
+      nil,
       :type_name,
       :resource_description,
       keyword_init: true
@@ -303,6 +316,7 @@ module Aws::CloudControl
     #         operation request.</p>
     #   @return [String]
     class GetResourceRequestStatusOperationInput < Struct.new(
+      nil,
       :request_token,
       keyword_init: true
     )
@@ -316,6 +330,7 @@ module Aws::CloudControl
     #   <p>Lists Hook invocations for the specified target in the request. This is a list since the same target can invoke multiple Hooks.</p>
     #   @return [Array<Types::HookProgressEvent>]
     class GetResourceRequestStatusOperationOutput < Struct.new(
+      nil,
       :progress_event,
       :hooks_progress_event,
       keyword_init: true
@@ -328,6 +343,7 @@ module Aws::CloudControl
     # @!attribute message
     #   @return [String]
     class HandlerFailureException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -339,6 +355,7 @@ module Aws::CloudControl
     # @!attribute message
     #   @return [String]
     class HandlerInternalFailureException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -406,6 +423,7 @@ module Aws::CloudControl
     #            </ul>
     #   @return [String]
     class HookProgressEvent < Struct.new(
+      nil,
       :hook_type_name,
       :hook_type_version_id,
       :hook_type_arn,
@@ -424,6 +442,7 @@ module Aws::CloudControl
     # @!attribute message
     #   @return [String]
     class InvalidCredentialsException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -435,6 +454,7 @@ module Aws::CloudControl
     # @!attribute message
     #   @return [String]
     class InvalidRequestException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -460,6 +480,7 @@ module Aws::CloudControl
     #   <p>The filter criteria to apply to the requests returned.</p>
     #   @return [Types::ResourceRequestStatusFilter]
     class ListResourceRequestsOperationInput < Struct.new(
+      nil,
       :max_results,
       :next_token,
       :resource_request_status_filter,
@@ -479,6 +500,7 @@ module Aws::CloudControl
     #                                       <code>NextToken</code> is set to null.</p>
     #   @return [String]
     class ListResourceRequestsOutput < Struct.new(
+      nil,
       :resource_request_status_summaries,
       :next_token,
       keyword_init: true
@@ -524,6 +546,7 @@ module Aws::CloudControl
     #   <p>The resource model to use to select the resources to return.</p>
     #   @return [String]
     class ListResourcesOperationInput < Struct.new(
+      nil,
       :type_name,
       :type_version_id,
       :role_arn,
@@ -550,6 +573,7 @@ module Aws::CloudControl
     #                                       <code>NextToken</code> is set to null.</p>
     #   @return [String]
     class ListResourcesOutput < Struct.new(
+      nil,
       :type_name,
       :resource_descriptions,
       :next_token,
@@ -563,6 +587,7 @@ module Aws::CloudControl
     # @!attribute message
     #   @return [String]
     class NetworkFailureException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -574,6 +599,7 @@ module Aws::CloudControl
     # @!attribute message
     #   @return [String]
     class NotStabilizedException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -585,6 +611,7 @@ module Aws::CloudControl
     # @!attribute message
     #   @return [String]
     class NotUpdatableException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -597,6 +624,7 @@ module Aws::CloudControl
     # @!attribute message
     #   @return [String]
     class PrivateTypeException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -677,6 +705,7 @@ module Aws::CloudControl
     #   <p>When to next request the status of this resource operation request.</p>
     #   @return [Time]
     class ProgressEvent < Struct.new(
+      nil,
       :type_name,
       :identifier,
       :request_token,
@@ -697,6 +726,7 @@ module Aws::CloudControl
     # @!attribute message
     #   @return [String]
     class RequestTokenNotFoundException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -709,6 +739,7 @@ module Aws::CloudControl
     # @!attribute message
     #   @return [String]
     class ResourceConflictException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -725,6 +756,7 @@ module Aws::CloudControl
     #   <p>A list of the resource properties and their current values.</p>
     #   @return [String]
     class ResourceDescription < Struct.new(
+      nil,
       :identifier,
       :properties,
       keyword_init: true
@@ -736,6 +768,7 @@ module Aws::CloudControl
     # @!attribute message
     #   @return [String]
     class ResourceNotFoundException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -777,6 +810,7 @@ module Aws::CloudControl
     #            </ul>
     #   @return [Array<String>]
     class ResourceRequestStatusFilter < Struct.new(
+      nil,
       :operations,
       :operation_statuses,
       keyword_init: true
@@ -789,6 +823,7 @@ module Aws::CloudControl
     # @!attribute message
     #   @return [String]
     class ServiceInternalErrorException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -800,6 +835,7 @@ module Aws::CloudControl
     # @!attribute message
     #   @return [String]
     class ServiceLimitExceededException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -810,6 +846,7 @@ module Aws::CloudControl
     # @!attribute message
     #   @return [String]
     class ThrottlingException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -820,6 +857,7 @@ module Aws::CloudControl
     # @!attribute message
     #   @return [String]
     class TypeNotFoundException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -830,6 +868,7 @@ module Aws::CloudControl
     # @!attribute message
     #   @return [String]
     class UnsupportedActionException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -892,6 +931,7 @@ module Aws::CloudControl
     #         Guide</i>.</p>
     #   @return [String]
     class UpdateResourceOperationInput < Struct.new(
+      nil,
       :type_name,
       :type_version_id,
       :role_arn,
@@ -909,6 +949,7 @@ module Aws::CloudControl
     #         request.</p>
     #   @return [Types::ProgressEvent]
     class UpdateResourceOperationOutput < Struct.new(
+      nil,
       :progress_event,
       keyword_init: true
     )

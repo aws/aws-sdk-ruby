@@ -10,6 +10,7 @@ module Aws::SnowDeviceManagement
     # @!attribute message
     #   @return [String]
     class AccessDeniedException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -21,6 +22,7 @@ module Aws::SnowDeviceManagement
     #         the <code>ListTasks</code> operation.</p>
     #   @return [String]
     class CancelTaskOperationInput < Struct.new(
+      nil,
       :task_id,
       keyword_init: true
     )
@@ -31,6 +33,7 @@ module Aws::SnowDeviceManagement
     #   <p>The ID of the task that you are attempting to cancel.</p>
     #   @return [String]
     class CancelTaskOperationOutput < Struct.new(
+      nil,
       :task_id,
       keyword_init: true
     )
@@ -54,6 +57,7 @@ module Aws::SnowDeviceManagement
     #   <p>The amount of capacity available for use on the device.</p>
     #   @return [Integer]
     class Capacity < Struct.new(
+      nil,
       :name,
       :unit,
       :total,
@@ -92,6 +96,7 @@ module Aws::SnowDeviceManagement
     #   <p>The number of threads per core in the CPU.</p>
     #   @return [Integer]
     class CpuOptions < Struct.new(
+      nil,
       :core_count,
       :threads_per_core,
       keyword_init: true
@@ -116,6 +121,7 @@ module Aws::SnowDeviceManagement
     #   <p>A token ensuring that the action is called only once with the specified details.</p>
     #   @return [String]
     class CreateTaskOperationInput < Struct.new(
+      nil,
       :targets,
       :command,
       :description,
@@ -133,6 +139,7 @@ module Aws::SnowDeviceManagement
     #   <p>The Amazon Resource Name (ARN) of the task that you created.</p>
     #   @return [String]
     class CreateTaskOperationOutput < Struct.new(
+      nil,
       :task_id,
       :task_arn,
       keyword_init: true
@@ -147,6 +154,7 @@ module Aws::SnowDeviceManagement
     #   <p>A list of instance IDs associated with the managed device.</p>
     #   @return [Array<String>]
     class DescribeDeviceEc2InstancesInput < Struct.new(
+      nil,
       :managed_device_id,
       :instance_ids,
       keyword_init: true
@@ -158,6 +166,7 @@ module Aws::SnowDeviceManagement
     #   <p>A list of structures containing information about each instance. </p>
     #   @return [Array<Types::InstanceSummary>]
     class DescribeDeviceEc2InstancesOutput < Struct.new(
+      nil,
       :instances,
       keyword_init: true
     )
@@ -168,6 +177,7 @@ module Aws::SnowDeviceManagement
     #   <p>The ID of the device that you are checking the information of.</p>
     #   @return [String]
     class DescribeDeviceOperationInput < Struct.new(
+      nil,
       :managed_device_id,
       keyword_init: true
     )
@@ -211,6 +221,7 @@ module Aws::SnowDeviceManagement
     #   <p>The software installed on the device.</p>
     #   @return [Types::SoftwareInformation]
     class DescribeDeviceOperationOutput < Struct.new(
+      nil,
       :last_reached_out_at,
       :last_updated_at,
       :tags,
@@ -234,6 +245,7 @@ module Aws::SnowDeviceManagement
     #   <p>The ID of the managed device.</p>
     #   @return [String]
     class DescribeExecutionOperationInput < Struct.new(
+      nil,
       :task_id,
       :managed_device_id,
       keyword_init: true
@@ -260,6 +272,7 @@ module Aws::SnowDeviceManagement
     #   <p>When the status of the execution was last updated.</p>
     #   @return [Time]
     class DescribeExecutionOperationOutput < Struct.new(
+      nil,
       :task_id,
       :execution_id,
       :managed_device_id,
@@ -275,6 +288,7 @@ module Aws::SnowDeviceManagement
     #   <p>The ID of the task to be described.</p>
     #   @return [String]
     class DescribeTaskOperationInput < Struct.new(
+      nil,
       :task_id,
       keyword_init: true
     )
@@ -310,6 +324,7 @@ module Aws::SnowDeviceManagement
     #         in different ways, such as by purpose, owner, or environment.</p>
     #   @return [Hash<String, String>]
     class DescribeTaskOperationOutput < Struct.new(
+      nil,
       :task_id,
       :task_arn,
       :targets,
@@ -339,6 +354,7 @@ module Aws::SnowDeviceManagement
     #         in different ways, such as by purpose, owner, or environment.</p>
     #   @return [Hash<String, String>]
     class DeviceSummary < Struct.new(
+      nil,
       :managed_device_id,
       :managed_device_arn,
       :associated_with_job,
@@ -363,6 +379,7 @@ module Aws::SnowDeviceManagement
     #   <p>The ID of the Amazon EBS volume.</p>
     #   @return [String]
     class EbsInstanceBlockDevice < Struct.new(
+      nil,
       :attach_time,
       :delete_on_termination,
       :status,
@@ -386,6 +403,7 @@ module Aws::SnowDeviceManagement
     #   <p>The state of the execution.</p>
     #   @return [String]
     class ExecutionSummary < Struct.new(
+      nil,
       :task_id,
       :execution_id,
       :managed_device_id,
@@ -439,6 +457,7 @@ module Aws::SnowDeviceManagement
     #   <p>The device name of the root device volume (for example, <code>/dev/sda1</code>). </p>
     #   @return [String]
     class Instance < Struct.new(
+      nil,
       :image_id,
       :ami_launch_index,
       :instance_id,
@@ -466,6 +485,7 @@ module Aws::SnowDeviceManagement
     #         volumes when the instance is launched. </p>
     #   @return [Types::EbsInstanceBlockDevice]
     class InstanceBlockDeviceMapping < Struct.new(
+      nil,
       :device_name,
       :ebs,
       keyword_init: true
@@ -524,6 +544,7 @@ module Aws::SnowDeviceManagement
     #         of the instance.</p>
     #   @return [String]
     class InstanceState < Struct.new(
+      nil,
       :code,
       :name,
       keyword_init: true
@@ -539,6 +560,7 @@ module Aws::SnowDeviceManagement
     #   <p>When the instance summary was last updated.</p>
     #   @return [Time]
     class InstanceSummary < Struct.new(
+      nil,
       :instance,
       :last_updated_at,
       keyword_init: true
@@ -550,6 +572,7 @@ module Aws::SnowDeviceManagement
     # @!attribute message
     #   @return [String]
     class InternalServerException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -569,6 +592,7 @@ module Aws::SnowDeviceManagement
     #   <p>A pagination token to continue to the next page of results.</p>
     #   @return [String]
     class ListDeviceResourcesOperationInput < Struct.new(
+      nil,
       :managed_device_id,
       :type,
       :max_results,
@@ -585,6 +609,7 @@ module Aws::SnowDeviceManagement
     #   <p>A pagination token to continue to the next page of results.</p>
     #   @return [String]
     class ListDeviceResourcesOperationOutput < Struct.new(
+      nil,
       :resources,
       :next_token,
       keyword_init: true
@@ -602,6 +627,7 @@ module Aws::SnowDeviceManagement
     #   <p>A pagination token to continue to the next page of results.</p>
     #   @return [String]
     class ListDevicesOperationInput < Struct.new(
+      nil,
       :job_id,
       :max_results,
       :next_token,
@@ -617,6 +643,7 @@ module Aws::SnowDeviceManagement
     #   <p>A pagination token to continue to the next page of devices.</p>
     #   @return [String]
     class ListDevicesOperationOutput < Struct.new(
+      nil,
       :devices,
       :next_token,
       keyword_init: true
@@ -637,6 +664,7 @@ module Aws::SnowDeviceManagement
     #   <p>A pagination token to continue to the next page of tasks.</p>
     #   @return [String]
     class ListExecutionsOperationInput < Struct.new(
+      nil,
       :task_id,
       :state,
       :max_results,
@@ -654,6 +682,7 @@ module Aws::SnowDeviceManagement
     #   <p>A pagination token to continue to the next page of executions.</p>
     #   @return [String]
     class ListExecutionsOperationOutput < Struct.new(
+      nil,
       :executions,
       :next_token,
       keyword_init: true
@@ -665,6 +694,7 @@ module Aws::SnowDeviceManagement
     #   <p>The Amazon Resource Name (ARN) of the device or task.</p>
     #   @return [String]
     class ListTagsForResourceOperationInput < Struct.new(
+      nil,
       :resource_arn,
       keyword_init: true
     )
@@ -675,6 +705,7 @@ module Aws::SnowDeviceManagement
     #   <p>The list of tags for the device or task.</p>
     #   @return [Hash<String, String>]
     class ListTagsForResourceOperationOutput < Struct.new(
+      nil,
       :tags,
       keyword_init: true
     )
@@ -691,6 +722,7 @@ module Aws::SnowDeviceManagement
     #   <p>A pagination token to continue to the next page of tasks.</p>
     #   @return [String]
     class ListTasksOperationInput < Struct.new(
+      nil,
       :state,
       :max_results,
       :next_token,
@@ -706,6 +738,7 @@ module Aws::SnowDeviceManagement
     #   <p>A pagination token to continue to the next page of tasks.</p>
     #   @return [String]
     class ListTasksOperationOutput < Struct.new(
+      nil,
       :tasks,
       :next_token,
       keyword_init: true
@@ -738,6 +771,7 @@ module Aws::SnowDeviceManagement
     #   <p>The MAC address of the device.</p>
     #   @return [String]
     class PhysicalNetworkInterface < Struct.new(
+      nil,
       :physical_network_interface_id,
       :physical_connector_type,
       :ip_address_assignment,
@@ -752,6 +786,7 @@ module Aws::SnowDeviceManagement
 
     # <p>A structure used to reboot the device.</p>
     class Reboot < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -761,6 +796,7 @@ module Aws::SnowDeviceManagement
     # @!attribute message
     #   @return [String]
     class ResourceNotFoundException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -778,6 +814,7 @@ module Aws::SnowDeviceManagement
     #   <p>The ID of the resource.</p>
     #   @return [String]
     class ResourceSummary < Struct.new(
+      nil,
       :resource_type,
       :arn,
       :id,
@@ -794,6 +831,7 @@ module Aws::SnowDeviceManagement
     #   <p>The security group name.</p>
     #   @return [String]
     class SecurityGroupIdentifier < Struct.new(
+      nil,
       :group_id,
       :group_name,
       keyword_init: true
@@ -805,6 +843,7 @@ module Aws::SnowDeviceManagement
     # @!attribute message
     #   @return [String]
     class ServiceQuotaExceededException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -823,6 +862,7 @@ module Aws::SnowDeviceManagement
     #         device.</p>
     #   @return [String]
     class SoftwareInformation < Struct.new(
+      nil,
       :installed_version,
       :installing_version,
       :install_state,
@@ -839,6 +879,7 @@ module Aws::SnowDeviceManagement
     #         in different ways, such as by purpose, owner, or environment.</p>
     #   @return [Hash<String, String>]
     class TagResourceOperationInput < Struct.new(
+      nil,
       :resource_arn,
       :tags,
       keyword_init: true
@@ -861,6 +902,7 @@ module Aws::SnowDeviceManagement
     #         in different ways, such as by purpose, owner, or environment.</p>
     #   @return [Hash<String, String>]
     class TaskSummary < Struct.new(
+      nil,
       :task_id,
       :task_arn,
       :state,
@@ -874,6 +916,7 @@ module Aws::SnowDeviceManagement
     # @!attribute message
     #   @return [String]
     class ThrottlingException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -882,6 +925,7 @@ module Aws::SnowDeviceManagement
 
     # <p>A structure used to unlock a device.</p>
     class Unlock < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -895,6 +939,7 @@ module Aws::SnowDeviceManagement
     #         in different ways, such as by purpose, owner, or environment.</p>
     #   @return [Array<String>]
     class UntagResourceOperationInput < Struct.new(
+      nil,
       :resource_arn,
       :tag_keys,
       keyword_init: true
@@ -906,6 +951,7 @@ module Aws::SnowDeviceManagement
     # @!attribute message
     #   @return [String]
     class ValidationException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )

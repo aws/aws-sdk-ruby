@@ -12,6 +12,7 @@ module Aws::Chime
     # @!attribute message
     #   @return [String]
     class AccessDeniedException < Struct.new(
+      nil,
       :code,
       :message,
       keyword_init: true
@@ -50,6 +51,7 @@ module Aws::Chime
     #   <p>The sign-in delegate groups associated with the account.</p>
     #   @return [Array<Types::SigninDelegateGroup>]
     class Account < Struct.new(
+      nil,
       :aws_account_id,
       :account_id,
       :name,
@@ -75,6 +77,7 @@ module Aws::Chime
     #       <a href="https://docs.aws.amazon.com/chime/latest/ug/chime-join-meeting.html">Join a Meeting without the Amazon Chime App</a>.</p>
     #   @return [Boolean]
     class AccountSettings < Struct.new(
+      nil,
       :disable_remote_control,
       :enable_dial_out,
       keyword_init: true
@@ -90,6 +93,7 @@ module Aws::Chime
     #   <p>The ARN of the room resource.</p>
     #   @return [String]
     class AlexaForBusinessMetadata < Struct.new(
+      nil,
       :is_alexa_for_business_enabled,
       :alexa_for_business_room_arn,
       keyword_init: true
@@ -107,6 +111,7 @@ module Aws::Chime
     #   <p>The phone number, in E.164 format.</p>
     #   @return [String]
     class AssociatePhoneNumberWithUserRequest < Struct.new(
+      nil,
       :account_id,
       :user_id,
       :e164_phone_number,
@@ -116,6 +121,7 @@ module Aws::Chime
     end
 
     class AssociatePhoneNumberWithUserResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -128,6 +134,7 @@ module Aws::Chime
     #   <p>The sign-in delegate groups.</p>
     #   @return [Array<Types::SigninDelegateGroup>]
     class AssociateSigninDelegateGroupsWithAccountRequest < Struct.new(
+      nil,
       :account_id,
       :signin_delegate_groups,
       keyword_init: true
@@ -136,6 +143,7 @@ module Aws::Chime
     end
 
     class AssociateSigninDelegateGroupsWithAccountResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -147,6 +155,7 @@ module Aws::Chime
     # @!attribute message
     #   @return [String]
     class BadRequestException < Struct.new(
+      nil,
       :code,
       :message,
       keyword_init: true
@@ -164,6 +173,7 @@ module Aws::Chime
     #   <p>The list of membership items.</p>
     #   @return [Array<Types::MembershipItem>]
     class BatchCreateRoomMembershipRequest < Struct.new(
+      nil,
       :account_id,
       :room_id,
       :membership_item_list,
@@ -176,6 +186,7 @@ module Aws::Chime
     #   <p>If the action fails for one or more of the member IDs in the request, a list of the member IDs is returned, along with error codes and error messages.</p>
     #   @return [Array<Types::MemberError>]
     class BatchCreateRoomMembershipResponse < Struct.new(
+      nil,
       :errors,
       keyword_init: true
     )
@@ -186,6 +197,7 @@ module Aws::Chime
     #   <p>List of phone number IDs.</p>
     #   @return [Array<String>]
     class BatchDeletePhoneNumberRequest < Struct.new(
+      nil,
       :phone_number_ids,
       keyword_init: true
     )
@@ -196,6 +208,7 @@ module Aws::Chime
     #   <p>If the action fails for one or more of the phone numbers in the request, a list of the phone numbers is returned, along with error codes and error messages.</p>
     #   @return [Array<Types::PhoneNumberError>]
     class BatchDeletePhoneNumberResponse < Struct.new(
+      nil,
       :phone_number_errors,
       keyword_init: true
     )
@@ -209,6 +222,7 @@ module Aws::Chime
     #   <p>The request containing the user IDs to suspend.</p>
     #   @return [Array<String>]
     class BatchSuspendUserRequest < Struct.new(
+      nil,
       :account_id,
       :user_id_list,
       keyword_init: true
@@ -221,6 +235,7 @@ module Aws::Chime
     #               request, a list of the user IDs is returned, along with error codes and error messages.</p>
     #   @return [Array<Types::UserError>]
     class BatchSuspendUserResponse < Struct.new(
+      nil,
       :user_errors,
       keyword_init: true
     )
@@ -234,6 +249,7 @@ module Aws::Chime
     #   <p>The request containing the user IDs to unsuspend.</p>
     #   @return [Array<String>]
     class BatchUnsuspendUserRequest < Struct.new(
+      nil,
       :account_id,
       :user_id_list,
       keyword_init: true
@@ -246,6 +262,7 @@ module Aws::Chime
     #               request, a list of the user IDs is returned, along with error codes and error messages.</p>
     #   @return [Array<Types::UserError>]
     class BatchUnsuspendUserResponse < Struct.new(
+      nil,
       :user_errors,
       keyword_init: true
     )
@@ -256,6 +273,7 @@ module Aws::Chime
     #   <p>The request containing the phone number IDs and product types or calling names to update.</p>
     #   @return [Array<Types::UpdatePhoneNumberRequestItem>]
     class BatchUpdatePhoneNumberRequest < Struct.new(
+      nil,
       :update_phone_number_request_items,
       keyword_init: true
     )
@@ -266,6 +284,7 @@ module Aws::Chime
     #   <p>If the action fails for one or more of the phone numbers in the request, a list of the phone numbers is returned, along with error codes and error messages.</p>
     #   @return [Array<Types::PhoneNumberError>]
     class BatchUpdatePhoneNumberResponse < Struct.new(
+      nil,
       :phone_number_errors,
       keyword_init: true
     )
@@ -279,6 +298,7 @@ module Aws::Chime
     #   <p>The request containing the user IDs and details to update.</p>
     #   @return [Array<Types::UpdateUserRequestItem>]
     class BatchUpdateUserRequest < Struct.new(
+      nil,
       :account_id,
       :update_user_request_items,
       keyword_init: true
@@ -291,6 +311,7 @@ module Aws::Chime
     #               request, a list of the user IDs is returned, along with error codes and error messages.</p>
     #   @return [Array<Types::UserError>]
     class BatchUpdateUserResponse < Struct.new(
+      nil,
       :user_errors,
       keyword_init: true
     )
@@ -326,6 +347,7 @@ module Aws::Chime
     #   <p>The security token used to authenticate Amazon Chime with the outgoing event endpoint.</p>
     #   @return [String]
     class Bot < Struct.new(
+      nil,
       :bot_id,
       :user_id,
       :display_name,
@@ -346,6 +368,7 @@ module Aws::Chime
     #   <p>The Amazon S3 bucket designated for call detail record storage.</p>
     #   @return [String]
     class BusinessCallingSettings < Struct.new(
+      nil,
       :cdr_bucket,
       keyword_init: true
     )
@@ -359,6 +382,7 @@ module Aws::Chime
     # @!attribute message
     #   @return [String]
     class ConflictException < Struct.new(
+      nil,
       :code,
       :message,
       keyword_init: true
@@ -371,6 +395,7 @@ module Aws::Chime
     #   <p>The number of days for which to retain conversation messages.</p>
     #   @return [Integer]
     class ConversationRetentionSettings < Struct.new(
+      nil,
       :retention_days,
       keyword_init: true
     )
@@ -381,6 +406,7 @@ module Aws::Chime
     #   <p>The name of the Amazon Chime account.</p>
     #   @return [String]
     class CreateAccountRequest < Struct.new(
+      nil,
       :name,
       keyword_init: true
     )
@@ -391,6 +417,7 @@ module Aws::Chime
     #   <p>The Amazon Chime account details.</p>
     #   @return [Types::Account]
     class CreateAccountResponse < Struct.new(
+      nil,
       :account,
       keyword_init: true
     )
@@ -407,6 +434,7 @@ module Aws::Chime
     #   <p>The domain of the Amazon Chime Enterprise account.</p>
     #   @return [String]
     class CreateBotRequest < Struct.new(
+      nil,
       :account_id,
       :display_name,
       :domain,
@@ -419,6 +447,7 @@ module Aws::Chime
     #   <p>The bot details.</p>
     #   @return [Types::Bot]
     class CreateBotResponse < Struct.new(
+      nil,
       :bot,
       keyword_init: true
     )
@@ -438,6 +467,7 @@ module Aws::Chime
     #   <p>Token used by the Amazon Chime SDK attendee. Call the <a href="https://docs.aws.amazon.com/chime/latest/APIReference/API_CreateAttendee.html">CreateAttendee</a> action to get a join token.</p>
     #   @return [String]
     class CreateMeetingDialOutRequest < Struct.new(
+      nil,
       :meeting_id,
       :from_phone_number,
       :to_phone_number,
@@ -451,6 +481,7 @@ module Aws::Chime
     #   <p>Unique ID that tracks API calls.</p>
     #   @return [String]
     class CreateMeetingDialOutResponse < Struct.new(
+      nil,
       :transaction_id,
       keyword_init: true
     )
@@ -464,6 +495,7 @@ module Aws::Chime
     #   <p>List of phone numbers, in E.164 format.</p>
     #   @return [Array<String>]
     class CreatePhoneNumberOrderRequest < Struct.new(
+      nil,
       :product_type,
       :e164_phone_numbers,
       keyword_init: true
@@ -475,6 +507,7 @@ module Aws::Chime
     #   <p>The phone number order details.</p>
     #   @return [Types::PhoneNumberOrder]
     class CreatePhoneNumberOrderResponse < Struct.new(
+      nil,
       :phone_number_order,
       keyword_init: true
     )
@@ -494,6 +527,7 @@ module Aws::Chime
     #   <p>The role of the member.</p>
     #   @return [String]
     class CreateRoomMembershipRequest < Struct.new(
+      nil,
       :account_id,
       :room_id,
       :member_id,
@@ -507,6 +541,7 @@ module Aws::Chime
     #   <p>The room membership details.</p>
     #   @return [Types::RoomMembership]
     class CreateRoomMembershipResponse < Struct.new(
+      nil,
       :room_membership,
       keyword_init: true
     )
@@ -523,6 +558,7 @@ module Aws::Chime
     #   <p>The idempotency token for the request.</p>
     #   @return [String]
     class CreateRoomRequest < Struct.new(
+      nil,
       :account_id,
       :name,
       :client_request_token,
@@ -535,6 +571,7 @@ module Aws::Chime
     #   <p>The room details.</p>
     #   @return [Types::Room]
     class CreateRoomResponse < Struct.new(
+      nil,
       :room,
       keyword_init: true
     )
@@ -554,6 +591,7 @@ module Aws::Chime
     #   <p>The user type.</p>
     #   @return [String]
     class CreateUserRequest < Struct.new(
+      nil,
       :account_id,
       :username,
       :email,
@@ -567,6 +605,7 @@ module Aws::Chime
     #   <p>The user on the Amazon Chime account.</p>
     #   @return [Types::User]
     class CreateUserResponse < Struct.new(
+      nil,
       :user,
       keyword_init: true
     )
@@ -577,6 +616,7 @@ module Aws::Chime
     #   <p>The Amazon Chime account ID.</p>
     #   @return [String]
     class DeleteAccountRequest < Struct.new(
+      nil,
       :account_id,
       keyword_init: true
     )
@@ -584,6 +624,7 @@ module Aws::Chime
     end
 
     class DeleteAccountResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -596,6 +637,7 @@ module Aws::Chime
     #   <p>The bot ID.</p>
     #   @return [String]
     class DeleteEventsConfigurationRequest < Struct.new(
+      nil,
       :account_id,
       :bot_id,
       keyword_init: true
@@ -607,6 +649,7 @@ module Aws::Chime
     #   <p>The phone number ID.</p>
     #   @return [String]
     class DeletePhoneNumberRequest < Struct.new(
+      nil,
       :phone_number_id,
       keyword_init: true
     )
@@ -623,6 +666,7 @@ module Aws::Chime
     #   <p>The member ID (user ID or bot ID).</p>
     #   @return [String]
     class DeleteRoomMembershipRequest < Struct.new(
+      nil,
       :account_id,
       :room_id,
       :member_id,
@@ -638,6 +682,7 @@ module Aws::Chime
     #   <p>The chat room ID.</p>
     #   @return [String]
     class DeleteRoomRequest < Struct.new(
+      nil,
       :account_id,
       :room_id,
       keyword_init: true
@@ -652,6 +697,7 @@ module Aws::Chime
     #   <p>The user ID.</p>
     #   @return [String]
     class DisassociatePhoneNumberFromUserRequest < Struct.new(
+      nil,
       :account_id,
       :user_id,
       keyword_init: true
@@ -660,6 +706,7 @@ module Aws::Chime
     end
 
     class DisassociatePhoneNumberFromUserResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -672,6 +719,7 @@ module Aws::Chime
     #   <p>The sign-in delegate group names.</p>
     #   @return [Array<String>]
     class DisassociateSigninDelegateGroupsFromAccountRequest < Struct.new(
+      nil,
       :account_id,
       :group_names,
       keyword_init: true
@@ -680,6 +728,7 @@ module Aws::Chime
     end
 
     class DisassociateSigninDelegateGroupsFromAccountResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -696,6 +745,7 @@ module Aws::Chime
     #   <p>Lambda function ARN that allows a bot to receive outgoing events.</p>
     #   @return [String]
     class EventsConfiguration < Struct.new(
+      nil,
       :bot_id,
       :outbound_events_https_endpoint,
       :lambda_function_arn,
@@ -710,6 +760,7 @@ module Aws::Chime
     # @!attribute message
     #   @return [String]
     class ForbiddenException < Struct.new(
+      nil,
       :code,
       :message,
       keyword_init: true
@@ -721,6 +772,7 @@ module Aws::Chime
     #   <p>The Amazon Chime account ID.</p>
     #   @return [String]
     class GetAccountRequest < Struct.new(
+      nil,
       :account_id,
       keyword_init: true
     )
@@ -731,6 +783,7 @@ module Aws::Chime
     #   <p>The Amazon Chime account details.</p>
     #   @return [Types::Account]
     class GetAccountResponse < Struct.new(
+      nil,
       :account,
       keyword_init: true
     )
@@ -741,6 +794,7 @@ module Aws::Chime
     #   <p>The Amazon Chime account ID.</p>
     #   @return [String]
     class GetAccountSettingsRequest < Struct.new(
+      nil,
       :account_id,
       keyword_init: true
     )
@@ -751,6 +805,7 @@ module Aws::Chime
     #   <p>The Amazon Chime account settings.</p>
     #   @return [Types::AccountSettings]
     class GetAccountSettingsResponse < Struct.new(
+      nil,
       :account_settings,
       keyword_init: true
     )
@@ -764,6 +819,7 @@ module Aws::Chime
     #   <p>The bot ID.</p>
     #   @return [String]
     class GetBotRequest < Struct.new(
+      nil,
       :account_id,
       :bot_id,
       keyword_init: true
@@ -775,6 +831,7 @@ module Aws::Chime
     #   <p>The chat bot details.</p>
     #   @return [Types::Bot]
     class GetBotResponse < Struct.new(
+      nil,
       :bot,
       keyword_init: true
     )
@@ -788,6 +845,7 @@ module Aws::Chime
     #   <p>The bot ID.</p>
     #   @return [String]
     class GetEventsConfigurationRequest < Struct.new(
+      nil,
       :account_id,
       :bot_id,
       keyword_init: true
@@ -799,6 +857,7 @@ module Aws::Chime
     #   <p>The events configuration details.</p>
     #   @return [Types::EventsConfiguration]
     class GetEventsConfigurationResponse < Struct.new(
+      nil,
       :events_configuration,
       keyword_init: true
     )
@@ -812,6 +871,7 @@ module Aws::Chime
     #   <p>The Amazon Chime Voice Connector settings.</p>
     #   @return [Types::VoiceConnectorSettings]
     class GetGlobalSettingsResponse < Struct.new(
+      nil,
       :business_calling,
       :voice_connector,
       keyword_init: true
@@ -823,6 +883,7 @@ module Aws::Chime
     #   <p>The ID for the phone number order.</p>
     #   @return [String]
     class GetPhoneNumberOrderRequest < Struct.new(
+      nil,
       :phone_number_order_id,
       keyword_init: true
     )
@@ -833,6 +894,7 @@ module Aws::Chime
     #   <p>The phone number order details.</p>
     #   @return [Types::PhoneNumberOrder]
     class GetPhoneNumberOrderResponse < Struct.new(
+      nil,
       :phone_number_order,
       keyword_init: true
     )
@@ -843,6 +905,7 @@ module Aws::Chime
     #   <p>The phone number ID.</p>
     #   @return [String]
     class GetPhoneNumberRequest < Struct.new(
+      nil,
       :phone_number_id,
       keyword_init: true
     )
@@ -853,6 +916,7 @@ module Aws::Chime
     #   <p>The phone number details.</p>
     #   @return [Types::PhoneNumber]
     class GetPhoneNumberResponse < Struct.new(
+      nil,
       :phone_number,
       keyword_init: true
     )
@@ -866,6 +930,7 @@ module Aws::Chime
     #   <p>The updated outbound calling name timestamp, in ISO 8601 format.</p>
     #   @return [Time]
     class GetPhoneNumberSettingsResponse < Struct.new(
+      nil,
       :calling_name,
       :calling_name_updated_timestamp,
       keyword_init: true
@@ -877,6 +942,7 @@ module Aws::Chime
     #   <p>The Amazon Chime account ID.</p>
     #   @return [String]
     class GetRetentionSettingsRequest < Struct.new(
+      nil,
       :account_id,
       keyword_init: true
     )
@@ -890,6 +956,7 @@ module Aws::Chime
     #   <p>The timestamp representing the time at which the specified items are permanently deleted, in ISO 8601 format.</p>
     #   @return [Time]
     class GetRetentionSettingsResponse < Struct.new(
+      nil,
       :retention_settings,
       :initiate_deletion_timestamp,
       keyword_init: true
@@ -904,6 +971,7 @@ module Aws::Chime
     #   <p>The room ID.</p>
     #   @return [String]
     class GetRoomRequest < Struct.new(
+      nil,
       :account_id,
       :room_id,
       keyword_init: true
@@ -915,6 +983,7 @@ module Aws::Chime
     #   <p>The room details.</p>
     #   @return [Types::Room]
     class GetRoomResponse < Struct.new(
+      nil,
       :room,
       keyword_init: true
     )
@@ -928,6 +997,7 @@ module Aws::Chime
     #   <p>The user ID.</p>
     #   @return [String]
     class GetUserRequest < Struct.new(
+      nil,
       :account_id,
       :user_id,
       keyword_init: true
@@ -939,6 +1009,7 @@ module Aws::Chime
     #   <p>The user details.</p>
     #   @return [Types::User]
     class GetUserResponse < Struct.new(
+      nil,
       :user,
       keyword_init: true
     )
@@ -952,6 +1023,7 @@ module Aws::Chime
     #   <p>The user ID.</p>
     #   @return [String]
     class GetUserSettingsRequest < Struct.new(
+      nil,
       :account_id,
       :user_id,
       keyword_init: true
@@ -963,6 +1035,7 @@ module Aws::Chime
     #   <p>The user settings.</p>
     #   @return [Types::UserSettings]
     class GetUserSettingsResponse < Struct.new(
+      nil,
       :user_settings,
       keyword_init: true
     )
@@ -984,6 +1057,7 @@ module Aws::Chime
     #   <p>The status of the invite email.</p>
     #   @return [String]
     class Invite < Struct.new(
+      nil,
       :invite_id,
       :status,
       :email_address,
@@ -1003,6 +1077,7 @@ module Aws::Chime
     #   <p>The user type.</p>
     #   @return [String]
     class InviteUsersRequest < Struct.new(
+      nil,
       :account_id,
       :user_email_list,
       :user_type,
@@ -1015,6 +1090,7 @@ module Aws::Chime
     #   <p>The email invitation details.</p>
     #   @return [Array<Types::Invite>]
     class InviteUsersResponse < Struct.new(
+      nil,
       :invites,
       keyword_init: true
     )
@@ -1034,6 +1110,7 @@ module Aws::Chime
     #   <p>The maximum number of results to return in a single call. Defaults to 100.</p>
     #   @return [Integer]
     class ListAccountsRequest < Struct.new(
+      nil,
       :name,
       :user_email,
       :next_token,
@@ -1050,6 +1127,7 @@ module Aws::Chime
     #   <p>The token to use to retrieve the next page of results.</p>
     #   @return [String]
     class ListAccountsResponse < Struct.new(
+      nil,
       :accounts,
       :next_token,
       keyword_init: true
@@ -1067,6 +1145,7 @@ module Aws::Chime
     #   <p>The token to use to retrieve the next page of results.</p>
     #   @return [String]
     class ListBotsRequest < Struct.new(
+      nil,
       :account_id,
       :max_results,
       :next_token,
@@ -1082,6 +1161,7 @@ module Aws::Chime
     #   <p>The token to use to retrieve the next page of results.</p>
     #   @return [String]
     class ListBotsResponse < Struct.new(
+      nil,
       :bots,
       :next_token,
       keyword_init: true
@@ -1096,6 +1176,7 @@ module Aws::Chime
     #   <p>The maximum number of results to return in a single call.</p>
     #   @return [Integer]
     class ListPhoneNumberOrdersRequest < Struct.new(
+      nil,
       :next_token,
       :max_results,
       keyword_init: true
@@ -1110,6 +1191,7 @@ module Aws::Chime
     #   <p>The token to use to retrieve the next page of results.</p>
     #   @return [String]
     class ListPhoneNumberOrdersResponse < Struct.new(
+      nil,
       :phone_number_orders,
       :next_token,
       keyword_init: true
@@ -1136,6 +1218,7 @@ module Aws::Chime
     #   <p>The token to use to retrieve the next page of results.</p>
     #   @return [String]
     class ListPhoneNumbersRequest < Struct.new(
+      nil,
       :status,
       :product_type,
       :filter_name,
@@ -1154,6 +1237,7 @@ module Aws::Chime
     #   <p>The token to use to retrieve the next page of results.</p>
     #   @return [String]
     class ListPhoneNumbersResponse < Struct.new(
+      nil,
       :phone_numbers,
       :next_token,
       keyword_init: true
@@ -1174,6 +1258,7 @@ module Aws::Chime
     #   <p>The token to use to retrieve the next page of results.</p>
     #   @return [String]
     class ListRoomMembershipsRequest < Struct.new(
+      nil,
       :account_id,
       :room_id,
       :max_results,
@@ -1190,6 +1275,7 @@ module Aws::Chime
     #   <p>The token to use to retrieve the next page of results.</p>
     #   @return [String]
     class ListRoomMembershipsResponse < Struct.new(
+      nil,
       :room_memberships,
       :next_token,
       keyword_init: true
@@ -1210,6 +1296,7 @@ module Aws::Chime
     #   <p>The token to use to retrieve the next page of results.</p>
     #   @return [String]
     class ListRoomsRequest < Struct.new(
+      nil,
       :account_id,
       :member_id,
       :max_results,
@@ -1226,6 +1313,7 @@ module Aws::Chime
     #   <p>The token to use to retrieve the next page of results.</p>
     #   @return [String]
     class ListRoomsResponse < Struct.new(
+      nil,
       :rooms,
       :next_token,
       keyword_init: true
@@ -1237,6 +1325,7 @@ module Aws::Chime
     #   <p>The phone number product type.</p>
     #   @return [String]
     class ListSupportedPhoneNumberCountriesRequest < Struct.new(
+      nil,
       :product_type,
       keyword_init: true
     )
@@ -1247,6 +1336,7 @@ module Aws::Chime
     #   <p>The supported phone number countries.</p>
     #   @return [Array<Types::PhoneNumberCountry>]
     class ListSupportedPhoneNumberCountriesResponse < Struct.new(
+      nil,
       :phone_number_countries,
       keyword_init: true
     )
@@ -1269,6 +1359,7 @@ module Aws::Chime
     #   <p>The token to use to retrieve the next page of results.</p>
     #   @return [String]
     class ListUsersRequest < Struct.new(
+      nil,
       :account_id,
       :user_email,
       :user_type,
@@ -1286,6 +1377,7 @@ module Aws::Chime
     #   <p>The token to use to retrieve the next page of results.</p>
     #   @return [String]
     class ListUsersResponse < Struct.new(
+      nil,
       :users,
       :next_token,
       keyword_init: true
@@ -1300,6 +1392,7 @@ module Aws::Chime
     #   <p>The user ID.</p>
     #   @return [String]
     class LogoutUserRequest < Struct.new(
+      nil,
       :account_id,
       :user_id,
       keyword_init: true
@@ -1308,6 +1401,7 @@ module Aws::Chime
     end
 
     class LogoutUserResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1330,6 +1424,7 @@ module Aws::Chime
     #   <p>The Amazon Chime account ID.</p>
     #   @return [String]
     class Member < Struct.new(
+      nil,
       :member_id,
       :member_type,
       :email,
@@ -1351,6 +1446,7 @@ module Aws::Chime
     #   <p>The error message.</p>
     #   @return [String]
     class MemberError < Struct.new(
+      nil,
       :member_id,
       :error_code,
       :error_message,
@@ -1367,6 +1463,7 @@ module Aws::Chime
     #   <p>The member role.</p>
     #   @return [String]
     class MembershipItem < Struct.new(
+      nil,
       :member_id,
       :role,
       keyword_init: true
@@ -1380,6 +1477,7 @@ module Aws::Chime
     # @!attribute message
     #   @return [String]
     class NotFoundException < Struct.new(
+      nil,
       :code,
       :message,
       keyword_init: true
@@ -1395,6 +1493,7 @@ module Aws::Chime
     #   <p>The phone number status.</p>
     #   @return [String]
     class OrderedPhoneNumber < Struct.new(
+      nil,
       :e164_phone_number,
       :status,
       keyword_init: true
@@ -1444,6 +1543,7 @@ module Aws::Chime
     #   <p>The deleted phone number timestamp, in ISO 8601 format.</p>
     #   @return [Time]
     class PhoneNumber < Struct.new(
+      nil,
       :phone_number_id,
       :e164_phone_number,
       :country,
@@ -1475,6 +1575,7 @@ module Aws::Chime
     #   <p>The timestamp of the phone number association, in ISO 8601 format.</p>
     #   @return [Time]
     class PhoneNumberAssociation < Struct.new(
+      nil,
       :value,
       :name,
       :associated_timestamp,
@@ -1504,6 +1605,7 @@ module Aws::Chime
     #   <p>Allows or denies outbound MMS messaging for the specified phone number.</p>
     #   @return [Boolean]
     class PhoneNumberCapabilities < Struct.new(
+      nil,
       :inbound_call,
       :outbound_call,
       :inbound_sms,
@@ -1523,6 +1625,7 @@ module Aws::Chime
     #   <p>The supported phone number types. </p>
     #   @return [Array<String>]
     class PhoneNumberCountry < Struct.new(
+      nil,
       :country_code,
       :supported_phone_number_types,
       keyword_init: true
@@ -1542,6 +1645,7 @@ module Aws::Chime
     #   <p>The error message.</p>
     #   @return [String]
     class PhoneNumberError < Struct.new(
+      nil,
       :phone_number_id,
       :error_code,
       :error_message,
@@ -1571,6 +1675,7 @@ module Aws::Chime
     #   <p>The updated phone number order time stamp, in ISO 8601 format.</p>
     #   @return [Time]
     class PhoneNumberOrder < Struct.new(
+      nil,
       :phone_number_order_id,
       :product_type,
       :status,
@@ -1595,6 +1700,7 @@ module Aws::Chime
     #   <p>Lambda function ARN that allows the bot to receive outgoing events.</p>
     #   @return [String]
     class PutEventsConfigurationRequest < Struct.new(
+      nil,
       :account_id,
       :bot_id,
       :outbound_events_https_endpoint,
@@ -1609,6 +1715,7 @@ module Aws::Chime
     #               AWS Lambda function ARN.</p>
     #   @return [Types::EventsConfiguration]
     class PutEventsConfigurationResponse < Struct.new(
+      nil,
       :events_configuration,
       keyword_init: true
     )
@@ -1622,6 +1729,7 @@ module Aws::Chime
     #   <p>The retention settings.</p>
     #   @return [Types::RetentionSettings]
     class PutRetentionSettingsRequest < Struct.new(
+      nil,
       :account_id,
       :retention_settings,
       keyword_init: true
@@ -1636,6 +1744,7 @@ module Aws::Chime
     #   <p>The timestamp representing the time at which the specified items are permanently deleted, in ISO 8601 format.</p>
     #   @return [Time]
     class PutRetentionSettingsResponse < Struct.new(
+      nil,
       :retention_settings,
       :initiate_deletion_timestamp,
       keyword_init: true
@@ -1653,6 +1762,7 @@ module Aws::Chime
     #   <p>The message ID.</p>
     #   @return [String]
     class RedactConversationMessageRequest < Struct.new(
+      nil,
       :account_id,
       :conversation_id,
       :message_id,
@@ -1662,6 +1772,7 @@ module Aws::Chime
     end
 
     class RedactConversationMessageResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1677,6 +1788,7 @@ module Aws::Chime
     #   <p>The message ID.</p>
     #   @return [String]
     class RedactRoomMessageRequest < Struct.new(
+      nil,
       :account_id,
       :room_id,
       :message_id,
@@ -1686,6 +1798,7 @@ module Aws::Chime
     end
 
     class RedactRoomMessageResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1698,6 +1811,7 @@ module Aws::Chime
     #   <p>The bot ID.</p>
     #   @return [String]
     class RegenerateSecurityTokenRequest < Struct.new(
+      nil,
       :account_id,
       :bot_id,
       keyword_init: true
@@ -1709,6 +1823,7 @@ module Aws::Chime
     #   <p>A resource that allows Enterprise account administrators to configure an interface that receives events from Amazon Chime.</p>
     #   @return [Types::Bot]
     class RegenerateSecurityTokenResponse < Struct.new(
+      nil,
       :bot,
       keyword_init: true
     )
@@ -1722,6 +1837,7 @@ module Aws::Chime
     #   <p>The user ID.</p>
     #   @return [String]
     class ResetPersonalPINRequest < Struct.new(
+      nil,
       :account_id,
       :user_id,
       keyword_init: true
@@ -1733,6 +1849,7 @@ module Aws::Chime
     #   <p>The user details and new personal meeting PIN.</p>
     #   @return [Types::User]
     class ResetPersonalPINResponse < Struct.new(
+      nil,
       :user,
       keyword_init: true
     )
@@ -1745,6 +1862,7 @@ module Aws::Chime
     # @!attribute message
     #   @return [String]
     class ResourceLimitExceededException < Struct.new(
+      nil,
       :code,
       :message,
       keyword_init: true
@@ -1756,6 +1874,7 @@ module Aws::Chime
     #   <p>The phone number.</p>
     #   @return [String]
     class RestorePhoneNumberRequest < Struct.new(
+      nil,
       :phone_number_id,
       keyword_init: true
     )
@@ -1766,6 +1885,7 @@ module Aws::Chime
     #   <p>The phone number details.</p>
     #   @return [Types::PhoneNumber]
     class RestorePhoneNumberResponse < Struct.new(
+      nil,
       :phone_number,
       keyword_init: true
     )
@@ -1780,6 +1900,7 @@ module Aws::Chime
     #   <p>The chat conversation retention settings.</p>
     #   @return [Types::ConversationRetentionSettings]
     class RetentionSettings < Struct.new(
+      nil,
       :room_retention_settings,
       :conversation_retention_settings,
       keyword_init: true
@@ -1807,6 +1928,7 @@ module Aws::Chime
     #   <p>The room update timestamp, in ISO 8601 format.</p>
     #   @return [Time]
     class Room < Struct.new(
+      nil,
       :room_id,
       :name,
       :account_id,
@@ -1835,6 +1957,7 @@ module Aws::Chime
     #   <p>The room membership update timestamp, in ISO 8601 format.</p>
     #   @return [Time]
     class RoomMembership < Struct.new(
+      nil,
       :room_id,
       :member,
       :role,
@@ -1850,6 +1973,7 @@ module Aws::Chime
     #   <p>The number of days for which to retain chat-room messages.</p>
     #   @return [Integer]
     class RoomRetentionSettings < Struct.new(
+      nil,
       :retention_days,
       keyword_init: true
     )
@@ -1881,6 +2005,7 @@ module Aws::Chime
     #   <p>The token used to retrieve the next page of results.</p>
     #   @return [String]
     class SearchAvailablePhoneNumbersRequest < Struct.new(
+      nil,
       :area_code,
       :city,
       :country,
@@ -1901,6 +2026,7 @@ module Aws::Chime
     #   <p>The token used to retrieve the next page of search results.</p>
     #   @return [String]
     class SearchAvailablePhoneNumbersResponse < Struct.new(
+      nil,
       :e164_phone_numbers,
       :next_token,
       keyword_init: true
@@ -1914,6 +2040,7 @@ module Aws::Chime
     # @!attribute message
     #   @return [String]
     class ServiceFailureException < Struct.new(
+      nil,
       :code,
       :message,
       keyword_init: true
@@ -1927,6 +2054,7 @@ module Aws::Chime
     # @!attribute message
     #   @return [String]
     class ServiceUnavailableException < Struct.new(
+      nil,
       :code,
       :message,
       keyword_init: true
@@ -1939,6 +2067,7 @@ module Aws::Chime
     #   <p>The group name.</p>
     #   @return [String]
     class SigninDelegateGroup < Struct.new(
+      nil,
       :group_name,
       keyword_init: true
     )
@@ -1957,6 +2086,7 @@ module Aws::Chime
     #   <p>Allows or denies SMS messaging.</p>
     #   @return [Boolean]
     class TelephonySettings < Struct.new(
+      nil,
       :inbound_calling,
       :outbound_calling,
       :sms,
@@ -1971,6 +2101,7 @@ module Aws::Chime
     # @!attribute message
     #   @return [String]
     class ThrottledClientException < Struct.new(
+      nil,
       :code,
       :message,
       keyword_init: true
@@ -1984,6 +2115,7 @@ module Aws::Chime
     # @!attribute message
     #   @return [String]
     class UnauthorizedClientException < Struct.new(
+      nil,
       :code,
       :message,
       keyword_init: true
@@ -1997,6 +2129,7 @@ module Aws::Chime
     # @!attribute message
     #   @return [String]
     class UnprocessableEntityException < Struct.new(
+      nil,
       :code,
       :message,
       keyword_init: true
@@ -2014,6 +2147,7 @@ module Aws::Chime
     #   <p>The default license applied when you add users to an Amazon Chime account.</p>
     #   @return [String]
     class UpdateAccountRequest < Struct.new(
+      nil,
       :account_id,
       :name,
       :default_license,
@@ -2026,6 +2160,7 @@ module Aws::Chime
     #   <p>The updated Amazon Chime account details.</p>
     #   @return [Types::Account]
     class UpdateAccountResponse < Struct.new(
+      nil,
       :account,
       keyword_init: true
     )
@@ -2039,6 +2174,7 @@ module Aws::Chime
     #   <p>The Amazon Chime account settings to update.</p>
     #   @return [Types::AccountSettings]
     class UpdateAccountSettingsRequest < Struct.new(
+      nil,
       :account_id,
       :account_settings,
       keyword_init: true
@@ -2047,6 +2183,7 @@ module Aws::Chime
     end
 
     class UpdateAccountSettingsResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -2062,6 +2199,7 @@ module Aws::Chime
     #   <p>When true, stops the specified bot from running in your account.</p>
     #   @return [Boolean]
     class UpdateBotRequest < Struct.new(
+      nil,
       :account_id,
       :bot_id,
       :disabled,
@@ -2074,6 +2212,7 @@ module Aws::Chime
     #   <p>The updated bot details.</p>
     #   @return [Types::Bot]
     class UpdateBotResponse < Struct.new(
+      nil,
       :bot,
       keyword_init: true
     )
@@ -2087,6 +2226,7 @@ module Aws::Chime
     #   <p>The Amazon Chime Voice Connector settings.</p>
     #   @return [Types::VoiceConnectorSettings]
     class UpdateGlobalSettingsRequest < Struct.new(
+      nil,
       :business_calling,
       :voice_connector,
       keyword_init: true
@@ -2104,6 +2244,7 @@ module Aws::Chime
     #   <p>The outbound calling name associated with the phone number.</p>
     #   @return [String]
     class UpdatePhoneNumberRequest < Struct.new(
+      nil,
       :phone_number_id,
       :product_type,
       :calling_name,
@@ -2124,6 +2265,7 @@ module Aws::Chime
     #   <p>The outbound calling name to update.</p>
     #   @return [String]
     class UpdatePhoneNumberRequestItem < Struct.new(
+      nil,
       :phone_number_id,
       :product_type,
       :calling_name,
@@ -2136,6 +2278,7 @@ module Aws::Chime
     #   <p>The updated phone number details.</p>
     #   @return [Types::PhoneNumber]
     class UpdatePhoneNumberResponse < Struct.new(
+      nil,
       :phone_number,
       keyword_init: true
     )
@@ -2146,6 +2289,7 @@ module Aws::Chime
     #   <p>The default outbound calling name for the account.</p>
     #   @return [String]
     class UpdatePhoneNumberSettingsRequest < Struct.new(
+      nil,
       :calling_name,
       keyword_init: true
     )
@@ -2165,6 +2309,7 @@ module Aws::Chime
     #   <p>The role of the member.</p>
     #   @return [String]
     class UpdateRoomMembershipRequest < Struct.new(
+      nil,
       :account_id,
       :room_id,
       :member_id,
@@ -2178,6 +2323,7 @@ module Aws::Chime
     #   <p>The room membership details.</p>
     #   @return [Types::RoomMembership]
     class UpdateRoomMembershipResponse < Struct.new(
+      nil,
       :room_membership,
       keyword_init: true
     )
@@ -2194,6 +2340,7 @@ module Aws::Chime
     #   <p>The room name.</p>
     #   @return [String]
     class UpdateRoomRequest < Struct.new(
+      nil,
       :account_id,
       :room_id,
       :name,
@@ -2206,6 +2353,7 @@ module Aws::Chime
     #   <p>The room details.</p>
     #   @return [Types::Room]
     class UpdateRoomResponse < Struct.new(
+      nil,
       :room,
       keyword_init: true
     )
@@ -2229,6 +2377,7 @@ module Aws::Chime
     #   <p>The Alexa for Business metadata.</p>
     #   @return [Types::AlexaForBusinessMetadata]
     class UpdateUserRequest < Struct.new(
+      nil,
       :account_id,
       :user_id,
       :license_type,
@@ -2254,6 +2403,7 @@ module Aws::Chime
     #   <p>The Alexa for Business metadata.</p>
     #   @return [Types::AlexaForBusinessMetadata]
     class UpdateUserRequestItem < Struct.new(
+      nil,
       :user_id,
       :license_type,
       :user_type,
@@ -2267,6 +2417,7 @@ module Aws::Chime
     #   <p>The updated user details.</p>
     #   @return [Types::User]
     class UpdateUserResponse < Struct.new(
+      nil,
       :user,
       keyword_init: true
     )
@@ -2283,6 +2434,7 @@ module Aws::Chime
     #   <p>The user settings to update.</p>
     #   @return [Types::UserSettings]
     class UpdateUserSettingsRequest < Struct.new(
+      nil,
       :account_id,
       :user_id,
       :user_settings,
@@ -2332,6 +2484,7 @@ module Aws::Chime
     #   <p>The user's personal meeting PIN.</p>
     #   @return [String]
     class User < Struct.new(
+      nil,
       :user_id,
       :account_id,
       :primary_email,
@@ -2362,6 +2515,7 @@ module Aws::Chime
     #   <p>The error message.</p>
     #   @return [String]
     class UserError < Struct.new(
+      nil,
       :user_id,
       :error_code,
       :error_message,
@@ -2376,6 +2530,7 @@ module Aws::Chime
     #   <p>The telephony settings associated with the user.</p>
     #   @return [Types::TelephonySettings]
     class UserSettings < Struct.new(
+      nil,
       :telephony,
       keyword_init: true
     )
@@ -2388,6 +2543,7 @@ module Aws::Chime
     #   <p>The Amazon S3 bucket designated for call detail record storage.</p>
     #   @return [String]
     class VoiceConnectorSettings < Struct.new(
+      nil,
       :cdr_bucket,
       keyword_init: true
     )

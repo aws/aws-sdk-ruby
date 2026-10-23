@@ -15,6 +15,7 @@ module Aws::EMRcontainers
     #   <p>Encryption-related configuration input for the security configuration.</p>
     #   @return [Types::EncryptionConfiguration]
     class AuthorizationConfiguration < Struct.new(
+      nil,
       :lake_formation_configuration,
       :encryption_configuration,
       keyword_init: true
@@ -29,6 +30,7 @@ module Aws::EMRcontainers
     #   <p>The ID of the virtual cluster for which the job run will be canceled.</p>
     #   @return [String]
     class CancelJobRunRequest < Struct.new(
+      nil,
       :id,
       :virtual_cluster_id,
       keyword_init: true
@@ -43,6 +45,7 @@ module Aws::EMRcontainers
     #   <p>The output contains the virtual cluster ID for which the job run is cancelled.</p>
     #   @return [String]
     class CancelJobRunResponse < Struct.new(
+      nil,
       :id,
       :virtual_cluster_id,
       keyword_init: true
@@ -58,6 +61,7 @@ module Aws::EMRcontainers
     #   <p>The base64 encoded PEM certificate data generated for managed endpoint.</p>
     #   @return [String]
     class Certificate < Struct.new(
+      nil,
       :certificate_arn,
       :certificate_data,
       keyword_init: true
@@ -74,6 +78,7 @@ module Aws::EMRcontainers
     #   <p>The specified name prefix for log streams.</p>
     #   @return [String]
     class CloudWatchMonitoringConfiguration < Struct.new(
+      nil,
       :log_group_name,
       :log_stream_name_prefix,
       keyword_init: true
@@ -96,6 +101,7 @@ module Aws::EMRcontainers
     #   <p>A list of additional configurations to apply within a configuration object.</p>
     #   @return [Array<Types::Configuration>]
     class Configuration < Struct.new(
+      nil,
       :classification,
       :properties,
       :configurations,
@@ -112,6 +118,7 @@ module Aws::EMRcontainers
     #   <p>The configurations for monitoring.</p>
     #   @return [Types::MonitoringConfiguration]
     class ConfigurationOverrides < Struct.new(
+      nil,
       :application_configuration,
       :monitoring_configuration,
       keyword_init: true
@@ -142,6 +149,7 @@ module Aws::EMRcontainers
     #   <p>The number of files to keep in container after rotation.</p>
     #   @return [Integer]
     class ContainerLogRotationConfiguration < Struct.new(
+      nil,
       :rotation_size,
       :max_files_to_keep,
       keyword_init: true
@@ -161,6 +169,7 @@ module Aws::EMRcontainers
     #   <p>The information about the container cluster.</p>
     #   @return [Types::ContainerInfo]
     class ContainerProvider < Struct.new(
+      nil,
       :type,
       :id,
       :info,
@@ -185,6 +194,7 @@ module Aws::EMRcontainers
     #   <p>The KMS key ARN used to encrypt the job template.</p>
     #   @return [String]
     class CreateJobTemplateRequest < Struct.new(
+      nil,
       :name,
       :client_token,
       :job_template_data,
@@ -208,6 +218,7 @@ module Aws::EMRcontainers
     #   <p>This output displays the date and time when the job template was created.</p>
     #   @return [Time]
     class CreateJobTemplateResponse < Struct.new(
+      nil,
       :id,
       :name,
       :arn,
@@ -248,6 +259,7 @@ module Aws::EMRcontainers
     #   <p>The tags of the managed endpoint. </p>
     #   @return [Hash<String, String>]
     class CreateManagedEndpointRequest < Struct.new(
+      nil,
       :name,
       :virtual_cluster_id,
       :type,
@@ -275,6 +287,7 @@ module Aws::EMRcontainers
     #   <p>The output contains the ID of the virtual cluster.</p>
     #   @return [String]
     class CreateManagedEndpointResponse < Struct.new(
+      nil,
       :id,
       :name,
       :arn,
@@ -300,6 +313,7 @@ module Aws::EMRcontainers
     #   <p>The tags to add to the security configuration.</p>
     #   @return [Hash<String, String>]
     class CreateSecurityConfigurationRequest < Struct.new(
+      nil,
       :client_token,
       :name,
       :container_provider,
@@ -320,6 +334,7 @@ module Aws::EMRcontainers
     #   <p>The ARN (Amazon Resource Name) of the security configuration.</p>
     #   @return [String]
     class CreateSecurityConfigurationResponse < Struct.new(
+      nil,
       :id,
       :name,
       :arn,
@@ -344,6 +359,7 @@ module Aws::EMRcontainers
     #   <p>The ID of the security configuration.</p>
     #   @return [String]
     class CreateVirtualClusterRequest < Struct.new(
+      nil,
       :name,
       :container_provider,
       :client_token,
@@ -364,6 +380,7 @@ module Aws::EMRcontainers
     #   <p>This output contains the ARN of virtual cluster.</p>
     #   @return [String]
     class CreateVirtualClusterResponse < Struct.new(
+      nil,
       :id,
       :name,
       :arn,
@@ -391,6 +408,7 @@ module Aws::EMRcontainers
     #   <p>The ID of the job template that will be deleted.</p>
     #   @return [String]
     class DeleteJobTemplateRequest < Struct.new(
+      nil,
       :id,
       keyword_init: true
     )
@@ -401,6 +419,7 @@ module Aws::EMRcontainers
     #   <p>This output contains the ID of the job template that was deleted.</p>
     #   @return [String]
     class DeleteJobTemplateResponse < Struct.new(
+      nil,
       :id,
       keyword_init: true
     )
@@ -414,6 +433,7 @@ module Aws::EMRcontainers
     #   <p>The ID of the endpoint's virtual cluster.</p>
     #   @return [String]
     class DeleteManagedEndpointRequest < Struct.new(
+      nil,
       :id,
       :virtual_cluster_id,
       keyword_init: true
@@ -428,6 +448,7 @@ module Aws::EMRcontainers
     #   <p>The output displays the ID of the endpoint's virtual cluster.</p>
     #   @return [String]
     class DeleteManagedEndpointResponse < Struct.new(
+      nil,
       :id,
       :virtual_cluster_id,
       keyword_init: true
@@ -439,6 +460,7 @@ module Aws::EMRcontainers
     #   <p>The ID of the virtual cluster that will be deleted.</p>
     #   @return [String]
     class DeleteVirtualClusterRequest < Struct.new(
+      nil,
       :id,
       keyword_init: true
     )
@@ -449,6 +471,7 @@ module Aws::EMRcontainers
     #   <p>This output contains the ID of the virtual cluster that will be deleted. </p>
     #   @return [String]
     class DeleteVirtualClusterResponse < Struct.new(
+      nil,
       :id,
       keyword_init: true
     )
@@ -462,6 +485,7 @@ module Aws::EMRcontainers
     #   <p>The ID of the virtual cluster for which the job run is submitted.</p>
     #   @return [String]
     class DescribeJobRunRequest < Struct.new(
+      nil,
       :id,
       :virtual_cluster_id,
       keyword_init: true
@@ -473,6 +497,7 @@ module Aws::EMRcontainers
     #   <p>The output displays information about a job run.</p>
     #   @return [Types::JobRun]
     class DescribeJobRunResponse < Struct.new(
+      nil,
       :job_run,
       keyword_init: true
     )
@@ -483,6 +508,7 @@ module Aws::EMRcontainers
     #   <p>The ID of the job template that will be described.</p>
     #   @return [String]
     class DescribeJobTemplateRequest < Struct.new(
+      nil,
       :id,
       keyword_init: true
     )
@@ -493,6 +519,7 @@ module Aws::EMRcontainers
     #   <p>This output displays information about the specified job template.</p>
     #   @return [Types::JobTemplate]
     class DescribeJobTemplateResponse < Struct.new(
+      nil,
       :job_template,
       keyword_init: true
     )
@@ -506,6 +533,7 @@ module Aws::EMRcontainers
     #   <p>The ID of the endpoint's virtual cluster.</p>
     #   @return [String]
     class DescribeManagedEndpointRequest < Struct.new(
+      nil,
       :id,
       :virtual_cluster_id,
       keyword_init: true
@@ -517,6 +545,7 @@ module Aws::EMRcontainers
     #   <p>This output displays information about a managed endpoint.</p>
     #   @return [Types::Endpoint]
     class DescribeManagedEndpointResponse < Struct.new(
+      nil,
       :endpoint,
       keyword_init: true
     )
@@ -527,6 +556,7 @@ module Aws::EMRcontainers
     #   <p>The ID of the security configuration.</p>
     #   @return [String]
     class DescribeSecurityConfigurationRequest < Struct.new(
+      nil,
       :id,
       keyword_init: true
     )
@@ -537,6 +567,7 @@ module Aws::EMRcontainers
     #   <p>Details of the security configuration.</p>
     #   @return [Types::SecurityConfiguration]
     class DescribeSecurityConfigurationResponse < Struct.new(
+      nil,
       :security_configuration,
       keyword_init: true
     )
@@ -547,6 +578,7 @@ module Aws::EMRcontainers
     #   <p>The ID of the virtual cluster that will be described.</p>
     #   @return [String]
     class DescribeVirtualClusterRequest < Struct.new(
+      nil,
       :id,
       keyword_init: true
     )
@@ -557,6 +589,7 @@ module Aws::EMRcontainers
     #   <p>This output displays information about the specified virtual cluster.</p>
     #   @return [Types::VirtualCluster]
     class DescribeVirtualClusterResponse < Struct.new(
+      nil,
       :virtual_cluster,
       keyword_init: true
     )
@@ -567,6 +600,7 @@ module Aws::EMRcontainers
     # @!attribute message
     #   @return [String]
     class EKSRequestThrottledException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -581,6 +615,7 @@ module Aws::EMRcontainers
     #   <p>The nodeLabel of the nodes where the resources of this virtual cluster can get scheduled. It requires relevant scaling and policy engine addons.</p>
     #   @return [String]
     class EksInfo < Struct.new(
+      nil,
       :namespace,
       :node_label,
       keyword_init: true
@@ -593,6 +628,7 @@ module Aws::EMRcontainers
     #   <p>In-transit encryption-related input for the security configuration.</p>
     #   @return [Types::InTransitEncryptionConfiguration]
     class EncryptionConfiguration < Struct.new(
+      nil,
       :in_transit_encryption_configuration,
       keyword_init: true
     )
@@ -660,6 +696,7 @@ module Aws::EMRcontainers
     #   <p>The tags of the endpoint. </p>
     #   @return [Hash<String, String>]
     class Endpoint < Struct.new(
+      nil,
       :id,
       :name,
       :arn,
@@ -707,6 +744,7 @@ module Aws::EMRcontainers
     #   <p>The client idempotency token of the job run request.</p>
     #   @return [String]
     class GetManagedEndpointSessionCredentialsRequest < Struct.new(
+      nil,
       :endpoint_identifier,
       :virtual_cluster_identifier,
       :execution_role_arn,
@@ -729,6 +767,7 @@ module Aws::EMRcontainers
     #   <p>The date and time when the session token will expire.</p>
     #   @return [Time]
     class GetManagedEndpointSessionCredentialsResponse < Struct.new(
+      nil,
       :id,
       :credentials,
       :expires_at,
@@ -742,6 +781,7 @@ module Aws::EMRcontainers
     #   <p>TLS certificate-related configuration input for the security configuration.</p>
     #   @return [Types::TLSCertificateConfiguration]
     class InTransitEncryptionConfiguration < Struct.new(
+      nil,
       :tls_certificate_configuration,
       keyword_init: true
     )
@@ -752,6 +792,7 @@ module Aws::EMRcontainers
     # @!attribute message
     #   @return [String]
     class InternalServerException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -767,6 +808,7 @@ module Aws::EMRcontainers
     #   <p>The job driver for job type.</p>
     #   @return [Types::SparkSqlJobDriver]
     class JobDriver < Struct.new(
+      nil,
       :spark_submit_job_driver,
       :spark_sql_job_driver,
       keyword_init: true
@@ -831,6 +873,7 @@ module Aws::EMRcontainers
     #   <p>The current status of the retry policy executed on the job.</p>
     #   @return [Types::RetryPolicyExecution]
     class JobRun < Struct.new(
+      nil,
       :id,
       :name,
       :virtual_cluster_id,
@@ -886,6 +929,7 @@ module Aws::EMRcontainers
     #   <p>The error message in case the decryption of job template fails.</p>
     #   @return [String]
     class JobTemplate < Struct.new(
+      nil,
       :name,
       :id,
       :arn,
@@ -922,6 +966,7 @@ module Aws::EMRcontainers
     #   <p>The tags assigned to jobs started using the job template.</p>
     #   @return [Hash<String, String>]
     class JobTemplateData < Struct.new(
+      nil,
       :execution_role_arn,
       :release_label,
       :configuration_overrides,
@@ -947,6 +992,7 @@ module Aws::EMRcontainers
     #            the Lake Formation calls.</p>
     #   @return [String]
     class LakeFormationConfiguration < Struct.new(
+      nil,
       :authorized_session_tag_value,
       :secure_namespace_info,
       :query_engine_role_arn,
@@ -977,6 +1023,7 @@ module Aws::EMRcontainers
     #   <p>The token for the next set of job runs to return.</p>
     #   @return [String]
     class ListJobRunsRequest < Struct.new(
+      nil,
       :virtual_cluster_id,
       :created_before,
       :created_after,
@@ -996,6 +1043,7 @@ module Aws::EMRcontainers
     #   <p>This output displays the token for the next set of job runs.</p>
     #   @return [String]
     class ListJobRunsResponse < Struct.new(
+      nil,
       :job_runs,
       :next_token,
       keyword_init: true
@@ -1016,6 +1064,7 @@ module Aws::EMRcontainers
     #   <p> The token for the next set of job templates to return.</p>
     #   @return [String]
     class ListJobTemplatesRequest < Struct.new(
+      nil,
       :created_after,
       :created_before,
       :max_results,
@@ -1032,6 +1081,7 @@ module Aws::EMRcontainers
     #   <p> This output displays the token for the next set of job templates.</p>
     #   @return [String]
     class ListJobTemplatesResponse < Struct.new(
+      nil,
       :templates,
       :next_token,
       keyword_init: true
@@ -1061,6 +1111,7 @@ module Aws::EMRcontainers
     #   <p> The token for the next set of managed endpoints to return. </p>
     #   @return [String]
     class ListManagedEndpointsRequest < Struct.new(
+      nil,
       :virtual_cluster_id,
       :created_before,
       :created_after,
@@ -1080,6 +1131,7 @@ module Aws::EMRcontainers
     #   <p> The token for the next set of endpoints to return. </p>
     #   @return [String]
     class ListManagedEndpointsResponse < Struct.new(
+      nil,
       :endpoints,
       :next_token,
       keyword_init: true
@@ -1100,6 +1152,7 @@ module Aws::EMRcontainers
     #   <p>The token for the next set of security configurations to return.</p>
     #   @return [String]
     class ListSecurityConfigurationsRequest < Struct.new(
+      nil,
       :created_after,
       :created_before,
       :max_results,
@@ -1116,6 +1169,7 @@ module Aws::EMRcontainers
     #   <p>The token for the next set of security configurations to return.</p>
     #   @return [String]
     class ListSecurityConfigurationsResponse < Struct.new(
+      nil,
       :security_configurations,
       :next_token,
       keyword_init: true
@@ -1127,6 +1181,7 @@ module Aws::EMRcontainers
     #   <p>The ARN of tagged resources.</p>
     #   @return [String]
     class ListTagsForResourceRequest < Struct.new(
+      nil,
       :resource_arn,
       keyword_init: true
     )
@@ -1137,6 +1192,7 @@ module Aws::EMRcontainers
     #   <p>The tags assigned to resources.</p>
     #   @return [Hash<String, String>]
     class ListTagsForResourceResponse < Struct.new(
+      nil,
       :tags,
       keyword_init: true
     )
@@ -1171,6 +1227,7 @@ module Aws::EMRcontainers
     #         the operation returns all applicable virtual clusters.</p>
     #   @return [Boolean]
     class ListVirtualClustersRequest < Struct.new(
+      nil,
       :container_provider_id,
       :container_provider_type,
       :created_after,
@@ -1191,6 +1248,7 @@ module Aws::EMRcontainers
     #   <p>This output displays the token for the next set of virtual clusters.</p>
     #   @return [String]
     class ListVirtualClustersResponse < Struct.new(
+      nil,
       :virtual_clusters,
       :next_token,
       keyword_init: true
@@ -1206,6 +1264,7 @@ module Aws::EMRcontainers
     #   <p>The Amazon resource name (ARN) of the encryption key for logs.</p>
     #   @return [String]
     class ManagedLogs < Struct.new(
+      nil,
       :allow_aws_to_retain_logs,
       :encryption_key_arn,
       keyword_init: true
@@ -1230,6 +1289,7 @@ module Aws::EMRcontainers
     #   <p>Enable or disable container log rotation.</p>
     #   @return [Types::ContainerLogRotationConfiguration]
     class MonitoringConfiguration < Struct.new(
+      nil,
       :managed_logs,
       :persistent_app_ui,
       :cloud_watch_monitoring_configuration,
@@ -1250,6 +1310,7 @@ module Aws::EMRcontainers
     #   <p> The specified name prefix for log streams.</p>
     #   @return [String]
     class ParametricCloudWatchMonitoringConfiguration < Struct.new(
+      nil,
       :log_group_name,
       :log_stream_name_prefix,
       keyword_init: true
@@ -1266,6 +1327,7 @@ module Aws::EMRcontainers
     #   <p> The configurations for monitoring. </p>
     #   @return [Types::ParametricMonitoringConfiguration]
     class ParametricConfigurationOverrides < Struct.new(
+      nil,
       :application_configuration,
       :monitoring_configuration,
       keyword_init: true
@@ -1285,6 +1347,7 @@ module Aws::EMRcontainers
     #   <p> Amazon S3 configuration for monitoring log publishing.</p>
     #   @return [Types::ParametricS3MonitoringConfiguration]
     class ParametricMonitoringConfiguration < Struct.new(
+      nil,
       :persistent_app_ui,
       :cloud_watch_monitoring_configuration,
       :s3_monitoring_configuration,
@@ -1300,6 +1363,7 @@ module Aws::EMRcontainers
     #   <p>Amazon S3 destination URI for log publishing.</p>
     #   @return [String]
     class ParametricS3MonitoringConfiguration < Struct.new(
+      nil,
       :log_uri,
       keyword_init: true
     )
@@ -1310,6 +1374,7 @@ module Aws::EMRcontainers
     # @!attribute message
     #   @return [String]
     class RequestThrottledException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -1320,6 +1385,7 @@ module Aws::EMRcontainers
     # @!attribute message
     #   @return [String]
     class ResourceNotFoundException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -1331,6 +1397,7 @@ module Aws::EMRcontainers
     #   <p>The maximum number of attempts on the job's driver.</p>
     #   @return [Integer]
     class RetryPolicyConfiguration < Struct.new(
+      nil,
       :max_attempts,
       keyword_init: true
     )
@@ -1342,6 +1409,7 @@ module Aws::EMRcontainers
     #   <p>The current number of attempts made on the driver of the job.</p>
     #   @return [Integer]
     class RetryPolicyExecution < Struct.new(
+      nil,
       :current_attempt_count,
       keyword_init: true
     )
@@ -1354,6 +1422,7 @@ module Aws::EMRcontainers
     #   <p>Amazon S3 destination URI for log publishing.</p>
     #   @return [String]
     class S3MonitoringConfiguration < Struct.new(
+      nil,
       :log_uri,
       keyword_init: true
     )
@@ -1368,6 +1437,7 @@ module Aws::EMRcontainers
     #   <p>The namespace of the Amazon EKS cluster where the system jobs run.</p>
     #   @return [String]
     class SecureNamespaceInfo < Struct.new(
+      nil,
       :cluster_id,
       :namespace,
       keyword_init: true
@@ -1401,6 +1471,7 @@ module Aws::EMRcontainers
     #   <p>The tags to assign to the security configuration.</p>
     #   @return [Hash<String, String>]
     class SecurityConfiguration < Struct.new(
+      nil,
       :id,
       :name,
       :arn,
@@ -1418,6 +1489,7 @@ module Aws::EMRcontainers
     #   <p>Authorization-related configuration input for the security configuration.</p>
     #   @return [Types::AuthorizationConfiguration]
     class SecurityConfigurationData < Struct.new(
+      nil,
       :authorization_configuration,
       keyword_init: true
     )
@@ -1432,6 +1504,7 @@ module Aws::EMRcontainers
     #   <p>The Spark parameters to be included in the Spark SQL command.</p>
     #   @return [String]
     class SparkSqlJobDriver < Struct.new(
+      nil,
       :entry_point,
       :spark_sql_parameters,
       keyword_init: true
@@ -1450,6 +1523,7 @@ module Aws::EMRcontainers
     #   <p>The Spark submit parameters that are used for job runs.</p>
     #   @return [String]
     class SparkSubmitJobDriver < Struct.new(
+      nil,
       :entry_point,
       :entry_point_arguments,
       :spark_submit_parameters,
@@ -1492,6 +1566,7 @@ module Aws::EMRcontainers
     #   <p>The retry policy configuration for the job run.</p>
     #   @return [Types::RetryPolicyConfiguration]
     class StartJobRunRequest < Struct.new(
+      nil,
       :name,
       :virtual_cluster_id,
       :client_token,
@@ -1521,6 +1596,7 @@ module Aws::EMRcontainers
     #   <p>This output displays the virtual cluster ID for which the job run was submitted.</p>
     #   @return [String]
     class StartJobRunResponse < Struct.new(
+      nil,
       :id,
       :name,
       :arn,
@@ -1544,6 +1620,7 @@ module Aws::EMRcontainers
     #            communication between the user job and the system job.</p>
     #   @return [String]
     class TLSCertificateConfiguration < Struct.new(
+      nil,
       :certificate_provider_type,
       :public_certificate_secret_arn,
       :private_certificate_secret_arn,
@@ -1559,6 +1636,7 @@ module Aws::EMRcontainers
     #   <p>The tags assigned to resources.</p>
     #   @return [Hash<String, String>]
     class TagResourceRequest < Struct.new(
+      nil,
       :resource_arn,
       :tags,
       keyword_init: true
@@ -1567,6 +1645,7 @@ module Aws::EMRcontainers
     end
 
     class TagResourceResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1580,6 +1659,7 @@ module Aws::EMRcontainers
     #   <p>The default value for the job template parameter.</p>
     #   @return [String]
     class TemplateParameterConfiguration < Struct.new(
+      nil,
       :type,
       :default_value,
       keyword_init: true
@@ -1594,6 +1674,7 @@ module Aws::EMRcontainers
     #   <p>The tag keys of the resources.</p>
     #   @return [Array<String>]
     class UntagResourceRequest < Struct.new(
+      nil,
       :resource_arn,
       :tag_keys,
       keyword_init: true
@@ -1602,6 +1683,7 @@ module Aws::EMRcontainers
     end
 
     class UntagResourceResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1611,6 +1693,7 @@ module Aws::EMRcontainers
     # @!attribute message
     #   @return [String]
     class ValidationException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -1648,6 +1731,7 @@ module Aws::EMRcontainers
     #   <p>The ID of the security configuration.</p>
     #   @return [String]
     class VirtualCluster < Struct.new(
+      nil,
       :id,
       :name,
       :arn,

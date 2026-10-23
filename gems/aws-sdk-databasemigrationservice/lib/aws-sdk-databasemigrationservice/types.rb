@@ -12,6 +12,7 @@ module Aws::DatabaseMigrationService
     #   <p></p>
     #   @return [String]
     class AccessDeniedFault < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -30,6 +31,7 @@ module Aws::DatabaseMigrationService
     #   <p>The maximum allowed value for the quota.</p>
     #   @return [Integer]
     class AccountQuota < Struct.new(
+      nil,
       :account_quota_name,
       :used,
       :max,
@@ -55,6 +57,7 @@ module Aws::DatabaseMigrationService
     #   <p>One or more tags to be assigned to the resource.</p>
     #   @return [Array<Types::Tag>]
     class AddTagsToResourceMessage < Struct.new(
+      nil,
       :resource_arn,
       :tags,
       keyword_init: true
@@ -64,6 +67,7 @@ module Aws::DatabaseMigrationService
 
     # <p></p>
     class AddTagsToResourceResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -102,6 +106,7 @@ module Aws::DatabaseMigrationService
     #            </ul>
     #   @return [String]
     class ApplyPendingMaintenanceActionMessage < Struct.new(
+      nil,
       :replication_instance_arn,
       :apply_action,
       :opt_in_type,
@@ -115,6 +120,7 @@ module Aws::DatabaseMigrationService
     #   <p>The DMS resource that the pending maintenance action will be applied to.</p>
     #   @return [Types::ResourcePendingMaintenanceActions]
     class ApplyPendingMaintenanceActionResponse < Struct.new(
+      nil,
       :resource_pending_maintenance_actions,
       keyword_init: true
     )
@@ -131,6 +137,7 @@ module Aws::DatabaseMigrationService
     #   <p>The name of the Availability Zone.</p>
     #   @return [String]
     class AvailabilityZone < Struct.new(
+      nil,
       :name,
       keyword_init: true
     )
@@ -149,6 +156,7 @@ module Aws::DatabaseMigrationService
     #   <p>The code of an error that occurred during the analysis of the source database.</p>
     #   @return [String]
     class BatchStartRecommendationsErrorEntry < Struct.new(
+      nil,
       :database_id,
       :message,
       :code,
@@ -162,6 +170,7 @@ module Aws::DatabaseMigrationService
     #               Advisor recommends target engines for each source database.</p>
     #   @return [Array<Types::StartRecommendationsRequestEntry>]
     class BatchStartRecommendationsRequest < Struct.new(
+      nil,
       :data,
       keyword_init: true
     )
@@ -172,6 +181,7 @@ module Aws::DatabaseMigrationService
     #   <p>A list with error details about the analysis of each source database.</p>
     #   @return [Array<Types::BatchStartRecommendationsErrorEntry>]
     class BatchStartRecommendationsResponse < Struct.new(
+      nil,
       :error_entries,
       keyword_init: true
     )
@@ -183,6 +193,7 @@ module Aws::DatabaseMigrationService
     #   <p>Amazon Resource Name (ARN) of the premigration assessment run to be canceled.</p>
     #   @return [String]
     class CancelReplicationTaskAssessmentRunMessage < Struct.new(
+      nil,
       :replication_task_assessment_run_arn,
       keyword_init: true
     )
@@ -195,6 +206,7 @@ module Aws::DatabaseMigrationService
     #            run.</p>
     #   @return [Types::ReplicationTaskAssessmentRun]
     class CancelReplicationTaskAssessmentRunResponse < Struct.new(
+      nil,
       :replication_task_assessment_run,
       keyword_init: true
     )
@@ -238,6 +250,7 @@ module Aws::DatabaseMigrationService
     #   <p>The key length of the cryptographic algorithm being used.</p>
     #   @return [Integer]
     class Certificate < Struct.new(
+      nil,
       :certificate_identifier,
       :certificate_creation_date,
       :certificate_pem,
@@ -268,6 +281,7 @@ module Aws::DatabaseMigrationService
     #               to access the Fleet Advisor web collector.</p>
     #   @return [Boolean]
     class CollectorHealthCheck < Struct.new(
+      nil,
       :collector_status,
       :local_collector_s3_access,
       :web_collector_s3_access,
@@ -281,6 +295,7 @@ module Aws::DatabaseMigrationService
     # @!attribute message
     #   @return [String]
     class CollectorNotFoundFault < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -338,6 +353,7 @@ module Aws::DatabaseMigrationService
     #   <p>Describes a Fleet Advisor collector inventory.</p>
     #   @return [Types::InventoryData]
     class CollectorResponse < Struct.new(
+      nil,
       :collector_referenced_id,
       :collector_name,
       :collector_version,
@@ -364,6 +380,7 @@ module Aws::DatabaseMigrationService
     #   <p>The name of the Fleet Advisor collector.</p>
     #   @return [String]
     class CollectorShortInfoResponse < Struct.new(
+      nil,
       :collector_referenced_id,
       :collector_name,
       keyword_init: true
@@ -436,6 +453,7 @@ module Aws::DatabaseMigrationService
     #            replication.</p>
     #   @return [Array<String>]
     class ComputeConfig < Struct.new(
+      nil,
       :availability_zone,
       :dns_name_servers,
       :kms_key_id,
@@ -496,6 +514,7 @@ module Aws::DatabaseMigrationService
     #            string.</p>
     #   @return [String]
     class Connection < Struct.new(
+      nil,
       :replication_instance_arn,
       :endpoint_arn,
       :status,
@@ -555,6 +574,7 @@ module Aws::DatabaseMigrationService
     #            from the migration.</p>
     #   @return [String]
     class CreateDataMigrationMessage < Struct.new(
+      nil,
       :data_migration_name,
       :migration_project_identifier,
       :data_migration_type,
@@ -574,6 +594,7 @@ module Aws::DatabaseMigrationService
     #   <p>Information about the created data migration.</p>
     #   @return [Types::DataMigration]
     class CreateDataMigrationResponse < Struct.new(
+      nil,
       :data_migration,
       keyword_init: true
     )
@@ -601,6 +622,7 @@ module Aws::DatabaseMigrationService
     #   <p>One or more tags to be assigned to the data provider.</p>
     #   @return [Array<Types::Tag>]
     class CreateDataProviderMessage < Struct.new(
+      nil,
       :data_provider_name,
       :description,
       :engine,
@@ -616,6 +638,7 @@ module Aws::DatabaseMigrationService
     #   <p>The data provider that was created.</p>
     #   @return [Types::DataProvider]
     class CreateDataProviderResponse < Struct.new(
+      nil,
       :data_provider,
       keyword_init: true
     )
@@ -831,6 +854,7 @@ module Aws::DatabaseMigrationService
     #   <p>Settings in JSON format for the target Amazon Timestream endpoint.</p>
     #   @return [Types::TimestreamSettings]
     class CreateEndpointMessage < Struct.new(
+      nil,
       :endpoint_identifier,
       :endpoint_type,
       :engine_name,
@@ -876,6 +900,7 @@ module Aws::DatabaseMigrationService
     #   <p>The endpoint that was created.</p>
     #   @return [Types::Endpoint]
     class CreateEndpointResponse < Struct.new(
+      nil,
       :endpoint,
       keyword_init: true
     )
@@ -920,6 +945,7 @@ module Aws::DatabaseMigrationService
     #   <p>One or more tags to be assigned to the event subscription.</p>
     #   @return [Array<Types::Tag>]
     class CreateEventSubscriptionMessage < Struct.new(
+      nil,
       :subscription_name,
       :sns_topic_arn,
       :source_type,
@@ -937,6 +963,7 @@ module Aws::DatabaseMigrationService
     #   <p>The event subscription that was created.</p>
     #   @return [Types::EventSubscription]
     class CreateEventSubscriptionResponse < Struct.new(
+      nil,
       :event_subscription,
       keyword_init: true
     )
@@ -956,6 +983,7 @@ module Aws::DatabaseMigrationService
     #   <p>The Amazon S3 bucket that the Fleet Advisor collector uses to store inventory metadata.</p>
     #   @return [String]
     class CreateFleetAdvisorCollectorRequest < Struct.new(
+      nil,
       :collector_name,
       :description,
       :service_access_role_arn,
@@ -983,6 +1011,7 @@ module Aws::DatabaseMigrationService
     #   <p>The Amazon S3 bucket that the collector uses to store inventory metadata.</p>
     #   @return [String]
     class CreateFleetAdvisorCollectorResponse < Struct.new(
+      nil,
       :collector_referenced_id,
       :collector_name,
       :description,
@@ -1034,6 +1063,7 @@ module Aws::DatabaseMigrationService
     #            The VPC security group must work with the VPC containing the instance profile.</p>
     #   @return [Array<String>]
     class CreateInstanceProfileMessage < Struct.new(
+      nil,
       :availability_zone,
       :kms_key_arn,
       :publicly_accessible,
@@ -1052,6 +1082,7 @@ module Aws::DatabaseMigrationService
     #   <p>The instance profile that was created.</p>
     #   @return [Types::InstanceProfile]
     class CreateInstanceProfileResponse < Struct.new(
+      nil,
       :instance_profile,
       keyword_init: true
     )
@@ -1087,6 +1118,7 @@ module Aws::DatabaseMigrationService
     #   <p>The schema conversion application attributes, including the Amazon S3 bucket name and Amazon S3 role ARN.</p>
     #   @return [Types::SCApplicationAttributes]
     class CreateMigrationProjectMessage < Struct.new(
+      nil,
       :migration_project_name,
       :source_data_provider_descriptors,
       :target_data_provider_descriptors,
@@ -1104,6 +1136,7 @@ module Aws::DatabaseMigrationService
     #   <p>The migration project that was created.</p>
     #   @return [Types::MigrationProject]
     class CreateMigrationProjectResponse < Struct.new(
+      nil,
       :migration_project,
       keyword_init: true
     )
@@ -1177,6 +1210,7 @@ module Aws::DatabaseMigrationService
     #            replication. For more information, see <a href="https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Tagging.html"> Tagging resources in Database Migration Service</a>.</p>
     #   @return [Array<Types::Tag>]
     class CreateReplicationConfigMessage < Struct.new(
+      nil,
       :replication_config_identifier,
       :source_endpoint_arn,
       :target_endpoint_arn,
@@ -1198,6 +1232,7 @@ module Aws::DatabaseMigrationService
     #            created.</p>
     #   @return [Types::ReplicationConfig]
     class CreateReplicationConfigResponse < Struct.new(
+      nil,
       :replication_config,
       keyword_init: true
     )
@@ -1320,6 +1355,7 @@ module Aws::DatabaseMigrationService
     #            replication instance.</p>
     #   @return [Types::KerberosAuthenticationSettings]
     class CreateReplicationInstanceMessage < Struct.new(
+      nil,
       :replication_instance_identifier,
       :allocated_storage,
       :replication_instance_class,
@@ -1347,6 +1383,7 @@ module Aws::DatabaseMigrationService
     #   <p>The replication instance that was created.</p>
     #   @return [Types::ReplicationInstance]
     class CreateReplicationInstanceResponse < Struct.new(
+      nil,
       :replication_instance,
       keyword_init: true
     )
@@ -1374,6 +1411,7 @@ module Aws::DatabaseMigrationService
     #   <p>One or more tags to be assigned to the subnet group.</p>
     #   @return [Array<Types::Tag>]
     class CreateReplicationSubnetGroupMessage < Struct.new(
+      nil,
       :replication_subnet_group_identifier,
       :replication_subnet_group_description,
       :subnet_ids,
@@ -1388,6 +1426,7 @@ module Aws::DatabaseMigrationService
     #   <p>The replication subnet group that was created.</p>
     #   @return [Types::ReplicationSubnetGroup]
     class CreateReplicationSubnetGroupResponse < Struct.new(
+      nil,
       :replication_subnet_group,
       keyword_init: true
     )
@@ -1486,6 +1525,7 @@ module Aws::DatabaseMigrationService
     #            for the end of <code>EndpointArn</code>.</p>
     #   @return [String]
     class CreateReplicationTaskMessage < Struct.new(
+      nil,
       :replication_task_identifier,
       :source_endpoint_arn,
       :target_endpoint_arn,
@@ -1509,6 +1549,7 @@ module Aws::DatabaseMigrationService
     #   <p>The replication task that was created.</p>
     #   @return [Types::ReplicationTask]
     class CreateReplicationTaskResponse < Struct.new(
+      nil,
       :replication_task,
       keyword_init: true
     )
@@ -1571,6 +1612,7 @@ module Aws::DatabaseMigrationService
     #   <p>The reason the data migration last stopped.</p>
     #   @return [String]
     class DataMigration < Struct.new(
+      nil,
       :data_migration_name,
       :data_migration_arn,
       :data_migration_create_time,
@@ -1608,6 +1650,7 @@ module Aws::DatabaseMigrationService
     #            migration.</p>
     #   @return [String]
     class DataMigrationSettings < Struct.new(
+      nil,
       :number_of_jobs,
       :cloudwatch_logs_enabled,
       :selection_rules,
@@ -1646,6 +1689,7 @@ module Aws::DatabaseMigrationService
     #   <p>The time when the migration stopped or failed.</p>
     #   @return [Time]
     class DataMigrationStatistics < Struct.new(
+      nil,
       :tables_loaded,
       :elapsed_time_millis,
       :tables_loading,
@@ -1698,6 +1742,7 @@ module Aws::DatabaseMigrationService
     #   <p>The settings in JSON format for a data provider.</p>
     #   @return [Types::DataProviderSettings]
     class DataProvider < Struct.new(
+      nil,
       :data_provider_name,
       :data_provider_arn,
       :data_provider_creation_time,
@@ -1724,6 +1769,7 @@ module Aws::DatabaseMigrationService
     #   <p>The Amazon Resource Name (ARN) of the data provider.</p>
     #   @return [String]
     class DataProviderDescriptor < Struct.new(
+      nil,
       :secrets_manager_secret_id,
       :secrets_manager_access_role_arn,
       :data_provider_name,
@@ -1744,6 +1790,7 @@ module Aws::DatabaseMigrationService
     #   <p>The ARN of the role used to access Amazon Web Services Secrets Manager.</p>
     #   @return [String]
     class DataProviderDescriptorDefinition < Struct.new(
+      nil,
       :data_provider_identifier,
       :secrets_manager_secret_id,
       :secrets_manager_access_role_arn,
@@ -1839,6 +1886,7 @@ module Aws::DatabaseMigrationService
     #                   ends on November 14th, 2024</code>.</p>
     #   @return [String]
     class DatabaseInstanceSoftwareDetailsResponse < Struct.new(
+      nil,
       :engine,
       :engine_version,
       :engine_edition,
@@ -1875,6 +1923,7 @@ module Aws::DatabaseMigrationService
     #   <p>A list of collectors associated with the database.</p>
     #   @return [Array<Types::CollectorShortInfoResponse>]
     class DatabaseResponse < Struct.new(
+      nil,
       :database_id,
       :database_name,
       :ip_address,
@@ -1902,6 +1951,7 @@ module Aws::DatabaseMigrationService
     #                   <code>PostgreSQL</code>.</p>
     #   @return [String]
     class DatabaseShortInfoResponse < Struct.new(
+      nil,
       :database_id,
       :database_name,
       :database_ip_address,
@@ -1916,6 +1966,7 @@ module Aws::DatabaseMigrationService
     #   <p>The error message.</p>
     #   @return [String]
     class DefaultErrorDetails < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -1926,6 +1977,7 @@ module Aws::DatabaseMigrationService
     #   <p>The Amazon Resource Name (ARN) of the certificate.</p>
     #   @return [String]
     class DeleteCertificateMessage < Struct.new(
+      nil,
       :certificate_arn,
       keyword_init: true
     )
@@ -1936,6 +1988,7 @@ module Aws::DatabaseMigrationService
     #   <p>The Secure Sockets Layer (SSL) certificate.</p>
     #   @return [Types::Certificate]
     class DeleteCertificateResponse < Struct.new(
+      nil,
       :certificate,
       keyword_init: true
     )
@@ -1946,6 +1999,7 @@ module Aws::DatabaseMigrationService
     #   <p>The reference ID of the Fleet Advisor collector to delete.</p>
     #   @return [String]
     class DeleteCollectorRequest < Struct.new(
+      nil,
       :collector_referenced_id,
       keyword_init: true
     )
@@ -1960,6 +2014,7 @@ module Aws::DatabaseMigrationService
     #   <p>The Amazon Resource Name (ARN) of the replication instance.</p>
     #   @return [String]
     class DeleteConnectionMessage < Struct.new(
+      nil,
       :endpoint_arn,
       :replication_instance_arn,
       keyword_init: true
@@ -1972,6 +2027,7 @@ module Aws::DatabaseMigrationService
     #   <p>The connection that is being deleted.</p>
     #   @return [Types::Connection]
     class DeleteConnectionResponse < Struct.new(
+      nil,
       :connection,
       keyword_init: true
     )
@@ -1982,6 +2038,7 @@ module Aws::DatabaseMigrationService
     #   <p>The identifier (name or ARN) of the data migration to delete.</p>
     #   @return [String]
     class DeleteDataMigrationMessage < Struct.new(
+      nil,
       :data_migration_identifier,
       keyword_init: true
     )
@@ -1992,6 +2049,7 @@ module Aws::DatabaseMigrationService
     #   <p>The deleted data migration.</p>
     #   @return [Types::DataMigration]
     class DeleteDataMigrationResponse < Struct.new(
+      nil,
       :data_migration,
       keyword_init: true
     )
@@ -2002,6 +2060,7 @@ module Aws::DatabaseMigrationService
     #   <p>The identifier of the data provider to delete.</p>
     #   @return [String]
     class DeleteDataProviderMessage < Struct.new(
+      nil,
       :data_provider_identifier,
       keyword_init: true
     )
@@ -2012,6 +2071,7 @@ module Aws::DatabaseMigrationService
     #   <p>The data provider that was deleted.</p>
     #   @return [Types::DataProvider]
     class DeleteDataProviderResponse < Struct.new(
+      nil,
       :data_provider,
       keyword_init: true
     )
@@ -2023,6 +2083,7 @@ module Aws::DatabaseMigrationService
     #   <p>The Amazon Resource Name (ARN) string that uniquely identifies the endpoint.</p>
     #   @return [String]
     class DeleteEndpointMessage < Struct.new(
+      nil,
       :endpoint_arn,
       keyword_init: true
     )
@@ -2034,6 +2095,7 @@ module Aws::DatabaseMigrationService
     #   <p>The endpoint that was deleted.</p>
     #   @return [Types::Endpoint]
     class DeleteEndpointResponse < Struct.new(
+      nil,
       :endpoint,
       keyword_init: true
     )
@@ -2045,6 +2107,7 @@ module Aws::DatabaseMigrationService
     #   <p>The name of the DMS event notification subscription to be deleted.</p>
     #   @return [String]
     class DeleteEventSubscriptionMessage < Struct.new(
+      nil,
       :subscription_name,
       keyword_init: true
     )
@@ -2056,6 +2119,7 @@ module Aws::DatabaseMigrationService
     #   <p>The event subscription that was deleted.</p>
     #   @return [Types::EventSubscription]
     class DeleteEventSubscriptionResponse < Struct.new(
+      nil,
       :event_subscription,
       keyword_init: true
     )
@@ -2066,6 +2130,7 @@ module Aws::DatabaseMigrationService
     #   <p>The IDs of the Fleet Advisor collector databases to delete.</p>
     #   @return [Array<String>]
     class DeleteFleetAdvisorDatabasesRequest < Struct.new(
+      nil,
       :database_ids,
       keyword_init: true
     )
@@ -2076,6 +2141,7 @@ module Aws::DatabaseMigrationService
     #   <p>The IDs of the databases that the operation deleted.</p>
     #   @return [Array<String>]
     class DeleteFleetAdvisorDatabasesResponse < Struct.new(
+      nil,
       :database_ids,
       keyword_init: true
     )
@@ -2086,6 +2152,7 @@ module Aws::DatabaseMigrationService
     #   <p>The identifier of the instance profile to delete.</p>
     #   @return [String]
     class DeleteInstanceProfileMessage < Struct.new(
+      nil,
       :instance_profile_identifier,
       keyword_init: true
     )
@@ -2096,6 +2163,7 @@ module Aws::DatabaseMigrationService
     #   <p>The instance profile that was deleted.</p>
     #   @return [Types::InstanceProfile]
     class DeleteInstanceProfileResponse < Struct.new(
+      nil,
       :instance_profile,
       keyword_init: true
     )
@@ -2106,6 +2174,7 @@ module Aws::DatabaseMigrationService
     #   <p>The name or Amazon Resource Name (ARN) of the migration project to delete.</p>
     #   @return [String]
     class DeleteMigrationProjectMessage < Struct.new(
+      nil,
       :migration_project_identifier,
       keyword_init: true
     )
@@ -2116,6 +2185,7 @@ module Aws::DatabaseMigrationService
     #   <p>The migration project that was deleted.</p>
     #   @return [Types::MigrationProject]
     class DeleteMigrationProjectResponse < Struct.new(
+      nil,
       :migration_project,
       keyword_init: true
     )
@@ -2127,6 +2197,7 @@ module Aws::DatabaseMigrationService
     #   <p>The replication config to delete.</p>
     #   @return [String]
     class DeleteReplicationConfigMessage < Struct.new(
+      nil,
       :replication_config_arn,
       keyword_init: true
     )
@@ -2139,6 +2210,7 @@ module Aws::DatabaseMigrationService
     #            deleted.</p>
     #   @return [Types::ReplicationConfig]
     class DeleteReplicationConfigResponse < Struct.new(
+      nil,
       :replication_config,
       keyword_init: true
     )
@@ -2150,6 +2222,7 @@ module Aws::DatabaseMigrationService
     #   <p>The Amazon Resource Name (ARN) of the replication instance to be deleted.</p>
     #   @return [String]
     class DeleteReplicationInstanceMessage < Struct.new(
+      nil,
       :replication_instance_arn,
       keyword_init: true
     )
@@ -2161,6 +2234,7 @@ module Aws::DatabaseMigrationService
     #   <p>The replication instance that was deleted.</p>
     #   @return [Types::ReplicationInstance]
     class DeleteReplicationInstanceResponse < Struct.new(
+      nil,
       :replication_instance,
       keyword_init: true
     )
@@ -2172,6 +2246,7 @@ module Aws::DatabaseMigrationService
     #   <p>The subnet group name of the replication instance.</p>
     #   @return [String]
     class DeleteReplicationSubnetGroupMessage < Struct.new(
+      nil,
       :replication_subnet_group_identifier,
       keyword_init: true
     )
@@ -2180,6 +2255,7 @@ module Aws::DatabaseMigrationService
 
     # <p></p>
     class DeleteReplicationSubnetGroupResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -2190,6 +2266,7 @@ module Aws::DatabaseMigrationService
     #   <p>Amazon Resource Name (ARN) of the premigration assessment run to be deleted.</p>
     #   @return [String]
     class DeleteReplicationTaskAssessmentRunMessage < Struct.new(
+      nil,
       :replication_task_assessment_run_arn,
       keyword_init: true
     )
@@ -2202,6 +2279,7 @@ module Aws::DatabaseMigrationService
     #            run.</p>
     #   @return [Types::ReplicationTaskAssessmentRun]
     class DeleteReplicationTaskAssessmentRunResponse < Struct.new(
+      nil,
       :replication_task_assessment_run,
       keyword_init: true
     )
@@ -2213,6 +2291,7 @@ module Aws::DatabaseMigrationService
     #   <p>The Amazon Resource Name (ARN) of the replication task to be deleted.</p>
     #   @return [String]
     class DeleteReplicationTaskMessage < Struct.new(
+      nil,
       :replication_task_arn,
       keyword_init: true
     )
@@ -2224,6 +2303,7 @@ module Aws::DatabaseMigrationService
     #   <p>The deleted replication task.</p>
     #   @return [Types::ReplicationTask]
     class DeleteReplicationTaskResponse < Struct.new(
+      nil,
       :replication_task,
       keyword_init: true
     )
@@ -2232,6 +2312,7 @@ module Aws::DatabaseMigrationService
 
     # <p></p>
     class DescribeAccountAttributesMessage < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -2256,6 +2337,7 @@ module Aws::DatabaseMigrationService
     #            </note>
     #   @return [String]
     class DescribeAccountAttributesResponse < Struct.new(
+      nil,
       :account_quotas,
       :unique_account_identifier,
       keyword_init: true
@@ -2298,6 +2380,7 @@ module Aws::DatabaseMigrationService
     #            by <code>MaxRecords</code>.</p>
     #   @return [String]
     class DescribeApplicableIndividualAssessmentsMessage < Struct.new(
+      nil,
       :replication_task_arn,
       :replication_instance_arn,
       :replication_config_arn,
@@ -2327,6 +2410,7 @@ module Aws::DatabaseMigrationService
     #               <code>MaxRecords</code>.</p>
     #   @return [String]
     class DescribeApplicableIndividualAssessmentsResponse < Struct.new(
+      nil,
       :individual_assessment_names,
       :marker,
       keyword_init: true
@@ -2350,6 +2434,7 @@ module Aws::DatabaseMigrationService
     #            by <code>MaxRecords</code>. </p>
     #   @return [String]
     class DescribeCertificatesMessage < Struct.new(
+      nil,
       :filters,
       :max_records,
       :marker,
@@ -2366,6 +2451,7 @@ module Aws::DatabaseMigrationService
     #            instance.</p>
     #   @return [Array<Types::Certificate>]
     class DescribeCertificatesResponse < Struct.new(
+      nil,
       :marker,
       :certificates,
       keyword_init: true
@@ -2391,6 +2477,7 @@ module Aws::DatabaseMigrationService
     #            by <code>MaxRecords</code>. </p>
     #   @return [String]
     class DescribeConnectionsMessage < Struct.new(
+      nil,
       :filters,
       :max_records,
       :marker,
@@ -2409,6 +2496,7 @@ module Aws::DatabaseMigrationService
     #   <p>A description of the connections.</p>
     #   @return [Array<Types::Connection>]
     class DescribeConnectionsResponse < Struct.new(
+      nil,
       :marker,
       :connections,
       keyword_init: true
@@ -2420,6 +2508,7 @@ module Aws::DatabaseMigrationService
     #   <p>The name or Amazon Resource Name (ARN) for the schema conversion project to describe.</p>
     #   @return [String]
     class DescribeConversionConfigurationMessage < Struct.new(
+      nil,
       :migration_project_identifier,
       keyword_init: true
     )
@@ -2433,6 +2522,7 @@ module Aws::DatabaseMigrationService
     #   <p>The configuration parameters for the schema conversion project.</p>
     #   @return [String]
     class DescribeConversionConfigurationResponse < Struct.new(
+      nil,
       :migration_project_identifier,
       :conversion_configuration,
       keyword_init: true
@@ -2464,6 +2554,7 @@ module Aws::DatabaseMigrationService
     #               <code>true</code>; otherwise, choose <code>false</code> (the default).</p>
     #   @return [Boolean]
     class DescribeDataMigrationsMessage < Struct.new(
+      nil,
       :filters,
       :max_records,
       :marker,
@@ -2483,6 +2574,7 @@ module Aws::DatabaseMigrationService
     #            by <code>MaxRecords</code>. </p>
     #   @return [String]
     class DescribeDataMigrationsResponse < Struct.new(
+      nil,
       :data_migrations,
       :marker,
       keyword_init: true
@@ -2508,6 +2600,7 @@ module Aws::DatabaseMigrationService
     #            make the call again using the returned token and keeping all other arguments unchanged.</p>
     #   @return [String]
     class DescribeDataProvidersMessage < Struct.new(
+      nil,
       :filters,
       :max_records,
       :marker,
@@ -2528,6 +2621,7 @@ module Aws::DatabaseMigrationService
     #   <p>A description of data providers.</p>
     #   @return [Array<Types::DataProvider>]
     class DescribeDataProvidersResponse < Struct.new(
+      nil,
       :marker,
       :data_providers,
       keyword_init: true
@@ -2549,6 +2643,7 @@ module Aws::DatabaseMigrationService
     #            by <code>MaxRecords</code>.</p>
     #   @return [String]
     class DescribeEndpointSettingsMessage < Struct.new(
+      nil,
       :engine_name,
       :max_records,
       :marker,
@@ -2567,6 +2662,7 @@ module Aws::DatabaseMigrationService
     #            engine.</p>
     #   @return [Array<Types::EndpointSetting>]
     class DescribeEndpointSettingsResponse < Struct.new(
+      nil,
       :marker,
       :endpoint_settings,
       keyword_init: true
@@ -2592,6 +2688,7 @@ module Aws::DatabaseMigrationService
     #            by <code>MaxRecords</code>. </p>
     #   @return [String]
     class DescribeEndpointTypesMessage < Struct.new(
+      nil,
       :filters,
       :max_records,
       :marker,
@@ -2610,6 +2707,7 @@ module Aws::DatabaseMigrationService
     #   <p>The types of endpoints that are supported.</p>
     #   @return [Array<Types::SupportedEndpointType>]
     class DescribeEndpointTypesResponse < Struct.new(
+      nil,
       :marker,
       :supported_endpoint_types,
       keyword_init: true
@@ -2635,6 +2733,7 @@ module Aws::DatabaseMigrationService
     #            by <code>MaxRecords</code>. </p>
     #   @return [String]
     class DescribeEndpointsMessage < Struct.new(
+      nil,
       :filters,
       :max_records,
       :marker,
@@ -2653,6 +2752,7 @@ module Aws::DatabaseMigrationService
     #   <p>Endpoint description.</p>
     #   @return [Array<Types::Endpoint>]
     class DescribeEndpointsResponse < Struct.new(
+      nil,
       :marker,
       :endpoints,
       keyword_init: true
@@ -2671,6 +2771,7 @@ module Aws::DatabaseMigrationService
     #            by <code>MaxRecords</code>. </p>
     #   @return [String]
     class DescribeEngineVersionsMessage < Struct.new(
+      nil,
       :max_records,
       :marker,
       keyword_init: true
@@ -2688,6 +2789,7 @@ module Aws::DatabaseMigrationService
     #            by <code>MaxRecords</code>. </p>
     #   @return [String]
     class DescribeEngineVersionsResponse < Struct.new(
+      nil,
       :engine_versions,
       :marker,
       keyword_init: true
@@ -2704,6 +2806,7 @@ module Aws::DatabaseMigrationService
     #   <p>Filters applied to the event categories.</p>
     #   @return [Array<Types::Filter>]
     class DescribeEventCategoriesMessage < Struct.new(
+      nil,
       :source_type,
       :filters,
       keyword_init: true
@@ -2716,6 +2819,7 @@ module Aws::DatabaseMigrationService
     #   <p>A list of event categories.</p>
     #   @return [Array<Types::EventCategoryGroup>]
     class DescribeEventCategoriesResponse < Struct.new(
+      nil,
       :event_category_group_list,
       keyword_init: true
     )
@@ -2744,6 +2848,7 @@ module Aws::DatabaseMigrationService
     #            by <code>MaxRecords</code>. </p>
     #   @return [String]
     class DescribeEventSubscriptionsMessage < Struct.new(
+      nil,
       :subscription_name,
       :filters,
       :max_records,
@@ -2763,6 +2868,7 @@ module Aws::DatabaseMigrationService
     #   <p>A list of event subscriptions.</p>
     #   @return [Array<Types::EventSubscription>]
     class DescribeEventSubscriptionsResponse < Struct.new(
+      nil,
       :marker,
       :event_subscriptions_list,
       keyword_init: true
@@ -2807,6 +2913,7 @@ module Aws::DatabaseMigrationService
     #            by <code>MaxRecords</code>. </p>
     #   @return [String]
     class DescribeEventsMessage < Struct.new(
+      nil,
       :source_identifier,
       :source_type,
       :start_time,
@@ -2831,6 +2938,7 @@ module Aws::DatabaseMigrationService
     #   <p>The events described.</p>
     #   @return [Array<Types::Event>]
     class DescribeEventsResponse < Struct.new(
+      nil,
       :marker,
       :events,
       keyword_init: true
@@ -2858,6 +2966,7 @@ module Aws::DatabaseMigrationService
     #            in the response so that you can retrieve the remaining results.</p>
     #   @return [Integer]
     class DescribeExtensionPackAssociationsMessage < Struct.new(
+      nil,
       :migration_project_identifier,
       :filters,
       :marker,
@@ -2879,6 +2988,7 @@ module Aws::DatabaseMigrationService
     #   <p>A paginated list of extension pack associations for the specified migration project.</p>
     #   @return [Array<Types::SchemaConversionRequest>]
     class DescribeExtensionPackAssociationsResponse < Struct.new(
+      nil,
       :marker,
       :requests,
       keyword_init: true
@@ -2914,6 +3024,7 @@ module Aws::DatabaseMigrationService
     #               other arguments unchanged. </p>
     #   @return [String]
     class DescribeFleetAdvisorCollectorsRequest < Struct.new(
+      nil,
       :filters,
       :max_records,
       :next_token,
@@ -2933,6 +3044,7 @@ module Aws::DatabaseMigrationService
     #               unchanged. </p>
     #   @return [String]
     class DescribeFleetAdvisorCollectorsResponse < Struct.new(
+      nil,
       :collectors,
       :next_token,
       keyword_init: true
@@ -2985,6 +3097,7 @@ module Aws::DatabaseMigrationService
     #               other arguments unchanged. </p>
     #   @return [String]
     class DescribeFleetAdvisorDatabasesRequest < Struct.new(
+      nil,
       :filters,
       :max_records,
       :next_token,
@@ -3004,6 +3117,7 @@ module Aws::DatabaseMigrationService
     #               unchanged. </p>
     #   @return [String]
     class DescribeFleetAdvisorDatabasesResponse < Struct.new(
+      nil,
       :databases,
       :next_token,
       keyword_init: true
@@ -3021,6 +3135,7 @@ module Aws::DatabaseMigrationService
     #               other arguments unchanged. </p>
     #   @return [String]
     class DescribeFleetAdvisorLsaAnalysisRequest < Struct.new(
+      nil,
       :max_records,
       :next_token,
       keyword_init: true
@@ -3038,6 +3153,7 @@ module Aws::DatabaseMigrationService
     #               unchanged. </p>
     #   @return [String]
     class DescribeFleetAdvisorLsaAnalysisResponse < Struct.new(
+      nil,
       :analysis,
       :next_token,
       keyword_init: true
@@ -3074,6 +3190,7 @@ module Aws::DatabaseMigrationService
     #               other arguments unchanged. </p>
     #   @return [String]
     class DescribeFleetAdvisorSchemaObjectSummaryRequest < Struct.new(
+      nil,
       :filters,
       :max_records,
       :next_token,
@@ -3092,6 +3209,7 @@ module Aws::DatabaseMigrationService
     #               unchanged. </p>
     #   @return [String]
     class DescribeFleetAdvisorSchemaObjectSummaryResponse < Struct.new(
+      nil,
       :fleet_advisor_schema_objects,
       :next_token,
       keyword_init: true
@@ -3160,6 +3278,7 @@ module Aws::DatabaseMigrationService
     #               other arguments unchanged. </p>
     #   @return [String]
     class DescribeFleetAdvisorSchemasRequest < Struct.new(
+      nil,
       :filters,
       :max_records,
       :next_token,
@@ -3178,6 +3297,7 @@ module Aws::DatabaseMigrationService
     #               unchanged. </p>
     #   @return [String]
     class DescribeFleetAdvisorSchemasResponse < Struct.new(
+      nil,
       :fleet_advisor_schemas,
       :next_token,
       keyword_init: true
@@ -3203,6 +3323,7 @@ module Aws::DatabaseMigrationService
     #            make the call again using the returned token and keeping all other arguments unchanged.</p>
     #   @return [String]
     class DescribeInstanceProfilesMessage < Struct.new(
+      nil,
       :filters,
       :max_records,
       :marker,
@@ -3223,6 +3344,7 @@ module Aws::DatabaseMigrationService
     #   <p>A description of instance profiles.</p>
     #   @return [Array<Types::InstanceProfile>]
     class DescribeInstanceProfilesResponse < Struct.new(
+      nil,
       :marker,
       :instance_profiles,
       keyword_init: true
@@ -3250,6 +3372,7 @@ module Aws::DatabaseMigrationService
     #            in the response so that you can retrieve the remaining results.</p>
     #   @return [Integer]
     class DescribeMetadataModelAssessmentsMessage < Struct.new(
+      nil,
       :migration_project_identifier,
       :filters,
       :marker,
@@ -3271,6 +3394,7 @@ module Aws::DatabaseMigrationService
     #   <p>A paginated list of metadata model assessments for the specified migration project.</p>
     #   @return [Array<Types::SchemaConversionRequest>]
     class DescribeMetadataModelAssessmentsResponse < Struct.new(
+      nil,
       :marker,
       :requests,
       keyword_init: true
@@ -3298,6 +3422,7 @@ module Aws::DatabaseMigrationService
     #            in the response so that you can retrieve the remaining results.</p>
     #   @return [Integer]
     class DescribeMetadataModelConversionsMessage < Struct.new(
+      nil,
       :migration_project_identifier,
       :filters,
       :marker,
@@ -3319,6 +3444,7 @@ module Aws::DatabaseMigrationService
     #   <p>A paginated list of metadata model conversions.</p>
     #   @return [Array<Types::SchemaConversionRequest>]
     class DescribeMetadataModelConversionsResponse < Struct.new(
+      nil,
       :marker,
       :requests,
       keyword_init: true
@@ -3346,6 +3472,7 @@ module Aws::DatabaseMigrationService
     #            in the response so that you can retrieve the remaining results.</p>
     #   @return [Integer]
     class DescribeMetadataModelExportsAsScriptMessage < Struct.new(
+      nil,
       :migration_project_identifier,
       :filters,
       :marker,
@@ -3367,6 +3494,7 @@ module Aws::DatabaseMigrationService
     #   <p>A paginated list of metadata model exports.</p>
     #   @return [Array<Types::SchemaConversionRequest>]
     class DescribeMetadataModelExportsAsScriptResponse < Struct.new(
+      nil,
       :marker,
       :requests,
       keyword_init: true
@@ -3394,6 +3522,7 @@ module Aws::DatabaseMigrationService
     #            in the response so that you can retrieve the remaining results.</p>
     #   @return [Integer]
     class DescribeMetadataModelExportsToTargetMessage < Struct.new(
+      nil,
       :migration_project_identifier,
       :filters,
       :marker,
@@ -3415,6 +3544,7 @@ module Aws::DatabaseMigrationService
     #   <p>A paginated list of metadata model exports.</p>
     #   @return [Array<Types::SchemaConversionRequest>]
     class DescribeMetadataModelExportsToTargetResponse < Struct.new(
+      nil,
       :marker,
       :requests,
       keyword_init: true
@@ -3440,6 +3570,7 @@ module Aws::DatabaseMigrationService
     #   <p>A paginated list of metadata model imports.</p>
     #   @return [Integer]
     class DescribeMetadataModelImportsMessage < Struct.new(
+      nil,
       :migration_project_identifier,
       :filters,
       :marker,
@@ -3461,6 +3592,7 @@ module Aws::DatabaseMigrationService
     #   <p>A paginated list of metadata model imports.</p>
     #   @return [Array<Types::SchemaConversionRequest>]
     class DescribeMetadataModelImportsResponse < Struct.new(
+      nil,
       :marker,
       :requests,
       keyword_init: true
@@ -3497,6 +3629,7 @@ module Aws::DatabaseMigrationService
     #            make the call again using the returned token and keeping all other arguments unchanged.</p>
     #   @return [String]
     class DescribeMigrationProjectsMessage < Struct.new(
+      nil,
       :filters,
       :max_records,
       :marker,
@@ -3517,6 +3650,7 @@ module Aws::DatabaseMigrationService
     #   <p>A description of migration projects.</p>
     #   @return [Array<Types::MigrationProject>]
     class DescribeMigrationProjectsResponse < Struct.new(
+      nil,
       :marker,
       :migration_projects,
       keyword_init: true
@@ -3538,6 +3672,7 @@ module Aws::DatabaseMigrationService
     #            by <code>MaxRecords</code>. </p>
     #   @return [String]
     class DescribeOrderableReplicationInstancesMessage < Struct.new(
+      nil,
       :max_records,
       :marker,
       keyword_init: true
@@ -3555,6 +3690,7 @@ module Aws::DatabaseMigrationService
     #            by <code>MaxRecords</code>. </p>
     #   @return [String]
     class DescribeOrderableReplicationInstancesResponse < Struct.new(
+      nil,
       :orderable_replication_instances,
       :marker,
       keyword_init: true
@@ -3582,6 +3718,7 @@ module Aws::DatabaseMigrationService
     #            <p>Constraints: Minimum 20, maximum 100.</p>
     #   @return [Integer]
     class DescribePendingMaintenanceActionsMessage < Struct.new(
+      nil,
       :replication_instance_arn,
       :filters,
       :marker,
@@ -3601,6 +3738,7 @@ module Aws::DatabaseMigrationService
     #            by <code>MaxRecords</code>. </p>
     #   @return [String]
     class DescribePendingMaintenanceActionsResponse < Struct.new(
+      nil,
       :pending_maintenance_actions,
       :marker,
       keyword_init: true
@@ -3628,6 +3766,7 @@ module Aws::DatabaseMigrationService
     #               other arguments unchanged.</p>
     #   @return [String]
     class DescribeRecommendationLimitationsRequest < Struct.new(
+      nil,
       :filters,
       :max_records,
       :next_token,
@@ -3646,6 +3785,7 @@ module Aws::DatabaseMigrationService
     #   <p>The list of limitations for recommendations of target Amazon Web Services engines.</p>
     #   @return [Array<Types::Limitation>]
     class DescribeRecommendationLimitationsResponse < Struct.new(
+      nil,
       :next_token,
       :limitations,
       keyword_init: true
@@ -3674,6 +3814,7 @@ module Aws::DatabaseMigrationService
     #               other arguments unchanged.</p>
     #   @return [String]
     class DescribeRecommendationsRequest < Struct.new(
+      nil,
       :filters,
       :max_records,
       :next_token,
@@ -3693,6 +3834,7 @@ module Aws::DatabaseMigrationService
     #               source database.</p>
     #   @return [Array<Types::Recommendation>]
     class DescribeRecommendationsResponse < Struct.new(
+      nil,
       :next_token,
       :recommendations,
       keyword_init: true
@@ -3705,6 +3847,7 @@ module Aws::DatabaseMigrationService
     #   <p>The Amazon Resource Name (ARN) string that uniquely identifies the endpoint.</p>
     #   @return [String]
     class DescribeRefreshSchemasStatusMessage < Struct.new(
+      nil,
       :endpoint_arn,
       keyword_init: true
     )
@@ -3716,6 +3859,7 @@ module Aws::DatabaseMigrationService
     #   <p>The status of the schema.</p>
     #   @return [Types::RefreshSchemasStatus]
     class DescribeRefreshSchemasStatusResponse < Struct.new(
+      nil,
       :refresh_schemas_status,
       keyword_init: true
     )
@@ -3737,6 +3881,7 @@ module Aws::DatabaseMigrationService
     #            by <code>MaxRecords</code>. </p>
     #   @return [String]
     class DescribeReplicationConfigsMessage < Struct.new(
+      nil,
       :filters,
       :max_records,
       :marker,
@@ -3756,6 +3901,7 @@ module Aws::DatabaseMigrationService
     #            replication.</p>
     #   @return [Array<Types::ReplicationConfig>]
     class DescribeReplicationConfigsResponse < Struct.new(
+      nil,
       :marker,
       :replication_configs,
       keyword_init: true
@@ -3779,6 +3925,7 @@ module Aws::DatabaseMigrationService
     #            by <code>MaxRecords</code>.</p>
     #   @return [String]
     class DescribeReplicationInstanceTaskLogsMessage < Struct.new(
+      nil,
       :replication_instance_arn,
       :max_records,
       :marker,
@@ -3800,6 +3947,7 @@ module Aws::DatabaseMigrationService
     #            by <code>MaxRecords</code>.</p>
     #   @return [String]
     class DescribeReplicationInstanceTaskLogsResponse < Struct.new(
+      nil,
       :replication_instance_arn,
       :replication_instance_task_logs,
       :marker,
@@ -3827,6 +3975,7 @@ module Aws::DatabaseMigrationService
     #            by <code>MaxRecords</code>. </p>
     #   @return [String]
     class DescribeReplicationInstancesMessage < Struct.new(
+      nil,
       :filters,
       :max_records,
       :marker,
@@ -3845,6 +3994,7 @@ module Aws::DatabaseMigrationService
     #   <p>The replication instances described.</p>
     #   @return [Array<Types::ReplicationInstance>]
     class DescribeReplicationInstancesResponse < Struct.new(
+      nil,
       :marker,
       :replication_instances,
       keyword_init: true
@@ -3870,6 +4020,7 @@ module Aws::DatabaseMigrationService
     #            by <code>MaxRecords</code>. </p>
     #   @return [String]
     class DescribeReplicationSubnetGroupsMessage < Struct.new(
+      nil,
       :filters,
       :max_records,
       :marker,
@@ -3888,6 +4039,7 @@ module Aws::DatabaseMigrationService
     #   <p>A description of the replication subnet groups.</p>
     #   @return [Array<Types::ReplicationSubnetGroup>]
     class DescribeReplicationSubnetGroupsResponse < Struct.new(
+      nil,
       :marker,
       :replication_subnet_groups,
       keyword_init: true
@@ -3913,6 +4065,7 @@ module Aws::DatabaseMigrationService
     #   <p>Filters applied to the replication table statistics.</p>
     #   @return [Array<Types::Filter>]
     class DescribeReplicationTableStatisticsMessage < Struct.new(
+      nil,
       :replication_config_arn,
       :max_records,
       :marker,
@@ -3936,6 +4089,7 @@ module Aws::DatabaseMigrationService
     #            updated, and rows deleted.</p>
     #   @return [Array<Types::TableStatistics>]
     class DescribeReplicationTableStatisticsResponse < Struct.new(
+      nil,
       :replication_config_arn,
       :marker,
       :replication_table_statistics,
@@ -3963,6 +4117,7 @@ module Aws::DatabaseMigrationService
     #            by <code>MaxRecords</code>. </p>
     #   @return [String]
     class DescribeReplicationTaskAssessmentResultsMessage < Struct.new(
+      nil,
       :replication_task_arn,
       :max_records,
       :marker,
@@ -3984,6 +4139,7 @@ module Aws::DatabaseMigrationService
     #   <p> The task assessment report. </p>
     #   @return [Array<Types::ReplicationTaskAssessmentResult>]
     class DescribeReplicationTaskAssessmentResultsResponse < Struct.new(
+      nil,
       :marker,
       :bucket_name,
       :replication_task_assessment_results,
@@ -4012,6 +4168,7 @@ module Aws::DatabaseMigrationService
     #            by <code>MaxRecords</code>.</p>
     #   @return [String]
     class DescribeReplicationTaskAssessmentRunsMessage < Struct.new(
+      nil,
       :filters,
       :max_records,
       :marker,
@@ -4031,6 +4188,7 @@ module Aws::DatabaseMigrationService
     #   <p>One or more premigration assessment runs as specified by <code>Filters</code>.</p>
     #   @return [Array<Types::ReplicationTaskAssessmentRun>]
     class DescribeReplicationTaskAssessmentRunsResponse < Struct.new(
+      nil,
       :marker,
       :replication_task_assessment_runs,
       keyword_init: true
@@ -4057,6 +4215,7 @@ module Aws::DatabaseMigrationService
     #            by <code>MaxRecords</code>.</p>
     #   @return [String]
     class DescribeReplicationTaskIndividualAssessmentsMessage < Struct.new(
+      nil,
       :filters,
       :max_records,
       :marker,
@@ -4076,6 +4235,7 @@ module Aws::DatabaseMigrationService
     #   <p>One or more individual assessments as specified by <code>Filters</code>.</p>
     #   @return [Array<Types::ReplicationTaskIndividualAssessment>]
     class DescribeReplicationTaskIndividualAssessmentsResponse < Struct.new(
+      nil,
       :marker,
       :replication_task_individual_assessments,
       keyword_init: true
@@ -4107,6 +4267,7 @@ module Aws::DatabaseMigrationService
     #               <code>true</code>; otherwise, choose <code>false</code> (the default).</p>
     #   @return [Boolean]
     class DescribeReplicationTasksMessage < Struct.new(
+      nil,
       :filters,
       :max_records,
       :marker,
@@ -4126,6 +4287,7 @@ module Aws::DatabaseMigrationService
     #   <p>A description of the replication tasks.</p>
     #   @return [Array<Types::ReplicationTask>]
     class DescribeReplicationTasksResponse < Struct.new(
+      nil,
       :marker,
       :replication_tasks,
       keyword_init: true
@@ -4150,6 +4312,7 @@ module Aws::DatabaseMigrationService
     #            by <code>MaxRecords</code>. </p>
     #   @return [String]
     class DescribeReplicationsMessage < Struct.new(
+      nil,
       :filters,
       :max_records,
       :marker,
@@ -4168,6 +4331,7 @@ module Aws::DatabaseMigrationService
     #   <p>The replication descriptions.</p>
     #   @return [Array<Types::Replication>]
     class DescribeReplicationsResponse < Struct.new(
+      nil,
       :marker,
       :replications,
       keyword_init: true
@@ -4192,6 +4356,7 @@ module Aws::DatabaseMigrationService
     #            by <code>MaxRecords</code>. </p>
     #   @return [String]
     class DescribeSchemasMessage < Struct.new(
+      nil,
       :endpoint_arn,
       :max_records,
       :marker,
@@ -4210,6 +4375,7 @@ module Aws::DatabaseMigrationService
     #   <p>The described schema.</p>
     #   @return [Array<String>]
     class DescribeSchemasResponse < Struct.new(
+      nil,
       :marker,
       :schemas,
       keyword_init: true
@@ -4240,6 +4406,7 @@ module Aws::DatabaseMigrationService
     #            specified filters.</p>
     #   @return [Array<Types::Filter>]
     class DescribeTableStatisticsMessage < Struct.new(
+      nil,
       :replication_task_arn,
       :max_records,
       :marker,
@@ -4262,6 +4429,7 @@ module Aws::DatabaseMigrationService
     #            by <code>MaxRecords</code>. </p>
     #   @return [String]
     class DescribeTableStatisticsResponse < Struct.new(
+      nil,
       :replication_task_arn,
       :table_statistics,
       :marker,
@@ -4279,6 +4447,7 @@ module Aws::DatabaseMigrationService
     #   <p> The name of the S3 bucket to use. </p>
     #   @return [String]
     class DmsTransferSettings < Struct.new(
+      nil,
       :service_access_role_arn,
       :bucket_name,
       keyword_init: true
@@ -4304,6 +4473,7 @@ module Aws::DatabaseMigrationService
     #   <p>The Amazon Resource Name (ARN) of the certificate used for SSL connection.</p>
     #   @return [String]
     class DocDbDataProviderSettings < Struct.new(
+      nil,
       :server_name,
       :port,
       :database_name,
@@ -4395,6 +4565,7 @@ module Aws::DatabaseMigrationService
     #            </ul>
     #   @return [Boolean]
     class DocDbSettings < Struct.new(
+      nil,
       :username,
       :password,
       :server_name,
@@ -4420,6 +4591,7 @@ module Aws::DatabaseMigrationService
     #            must allow the <code>iam:PassRole</code> action.</p>
     #   @return [String]
     class DynamoDbSettings < Struct.new(
+      nil,
       :service_access_role_arn,
       keyword_init: true
     )
@@ -4453,6 +4625,7 @@ module Aws::DatabaseMigrationService
     #               <code>false</code>.</p>
     #   @return [Boolean]
     class ElasticsearchSettings < Struct.new(
+      nil,
       :service_access_role_arn,
       :endpoint_uri,
       :full_load_error_percentage,
@@ -4629,6 +4802,7 @@ module Aws::DatabaseMigrationService
     #               <code>TimestreamSettings</code> structure.</p>
     #   @return [Types::TimestreamSettings]
     class Endpoint < Struct.new(
+      nil,
       :endpoint_identifier,
       :endpoint_type,
       :engine_name,
@@ -4702,6 +4876,7 @@ module Aws::DatabaseMigrationService
     #               <code>CreateEndpoint</code> or <code>ModifyEndpoint</code>.</p>
     #   @return [String]
     class EndpointSetting < Struct.new(
+      nil,
       :name,
       :type,
       :enum_values,
@@ -4745,6 +4920,7 @@ module Aws::DatabaseMigrationService
     #   <p>The list of valid replication instance versions that you can upgrade to.</p>
     #   @return [Array<String>]
     class EngineVersion < Struct.new(
+      nil,
       :version,
       :lifecycle,
       :release_status,
@@ -4793,6 +4969,7 @@ module Aws::DatabaseMigrationService
     #   <p>The date of the event.</p>
     #   @return [Time]
     class Event < Struct.new(
+      nil,
       :source_identifier,
       :source_type,
       :message,
@@ -4816,6 +4993,7 @@ module Aws::DatabaseMigrationService
     #   <p> A list of event categories from a source type that you've chosen.</p>
     #   @return [Array<String>]
     class EventCategoryGroup < Struct.new(
+      nil,
       :source_type,
       :event_categories,
       keyword_init: true
@@ -4862,6 +5040,7 @@ module Aws::DatabaseMigrationService
     #   <p>Boolean value that indicates if the event subscription is enabled.</p>
     #   @return [Boolean]
     class EventSubscription < Struct.new(
+      nil,
       :customer_aws_id,
       :cust_subscription_id,
       :sns_topic_arn,
@@ -4894,6 +5073,7 @@ module Aws::DatabaseMigrationService
     #   <p>The file format of the assessment file.</p>
     #   @return [Array<String>]
     class ExportMetadataModelAssessmentMessage < Struct.new(
+      nil,
       :migration_project_identifier,
       :selection_rules,
       :file_name,
@@ -4910,6 +5090,7 @@ module Aws::DatabaseMigrationService
     #   <p>The Amazon S3 details for an assessment exported in CSV format.</p>
     #   @return [Types::ExportMetadataModelAssessmentResultEntry]
     class ExportMetadataModelAssessmentResponse < Struct.new(
+      nil,
       :pdf_report,
       :csv_report,
       keyword_init: true
@@ -4925,6 +5106,7 @@ module Aws::DatabaseMigrationService
     #   <p>The URL for the object containing the exported metadata model assessment.</p>
     #   @return [String]
     class ExportMetadataModelAssessmentResultEntry < Struct.new(
+      nil,
       :s3_object_key,
       :object_url,
       keyword_init: true
@@ -4940,6 +5122,7 @@ module Aws::DatabaseMigrationService
     #   <p>The URL for the object containing the exported metadata model assessment.</p>
     #   @return [String]
     class ExportSqlDetails < Struct.new(
+      nil,
       :s3_object_key,
       :object_url,
       keyword_init: true
@@ -4951,6 +5134,7 @@ module Aws::DatabaseMigrationService
     # @!attribute message
     #   @return [String]
     class FailedDependencyFault < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -4971,6 +5155,7 @@ module Aws::DatabaseMigrationService
     #            results.</p>
     #   @return [Array<String>]
     class Filter < Struct.new(
+      nil,
       :name,
       :values,
       keyword_init: true
@@ -4986,6 +5171,7 @@ module Aws::DatabaseMigrationService
     #   <p>The status of an LSA analysis run by a Fleet Advisor collector.</p>
     #   @return [String]
     class FleetAdvisorLsaAnalysisResponse < Struct.new(
+      nil,
       :lsa_analysis_id,
       :status,
       keyword_init: true
@@ -5033,6 +5219,7 @@ module Aws::DatabaseMigrationService
     #   <p>The size level of the code in a schema object in a Fleet Advisor collector inventory.</p>
     #   @return [Integer]
     class FleetAdvisorSchemaObjectResponse < Struct.new(
+      nil,
       :schema_id,
       :object_type,
       :number_of_objects,
@@ -5134,6 +5321,7 @@ module Aws::DatabaseMigrationService
     #            that contains the MySQL endpoint connection details. </p>
     #   @return [String]
     class GcpMySQLSettings < Struct.new(
+      nil,
       :after_connect_script,
       :clean_source_metadata_on_mismatch,
       :database_name,
@@ -5218,6 +5406,7 @@ module Aws::DatabaseMigrationService
     #            <p>The default value is false. </p>
     #   @return [Boolean]
     class IBMDb2Settings < Struct.new(
+      nil,
       :database_name,
       :password,
       :port,
@@ -5261,6 +5450,7 @@ module Aws::DatabaseMigrationService
     #   <p>The ARN for the role the application uses to access its Amazon S3 bucket.</p>
     #   @return [String]
     class IbmDb2LuwDataProviderSettings < Struct.new(
+      nil,
       :server_name,
       :port,
       :database_name,
@@ -5297,6 +5487,7 @@ module Aws::DatabaseMigrationService
     #   <p>The ARN for the role the application uses to access its Amazon S3 bucket.</p>
     #   @return [String]
     class IbmDb2zOsDataProviderSettings < Struct.new(
+      nil,
       :server_name,
       :port,
       :database_name,
@@ -5328,6 +5519,7 @@ module Aws::DatabaseMigrationService
     #   <p>The tags associated with the certificate.</p>
     #   @return [Array<Types::Tag>]
     class ImportCertificateMessage < Struct.new(
+      nil,
       :certificate_identifier,
       :certificate_pem,
       :certificate_wallet,
@@ -5341,6 +5533,7 @@ module Aws::DatabaseMigrationService
     #   <p>The certificate to be uploaded.</p>
     #   @return [Types::Certificate]
     class ImportCertificateResponse < Struct.new(
+      nil,
       :certificate,
       keyword_init: true
     )
@@ -5392,6 +5585,7 @@ module Aws::DatabaseMigrationService
     #            The VPC security group must work with the VPC containing the instance profile.</p>
     #   @return [Array<String>]
     class InstanceProfile < Struct.new(
+      nil,
       :instance_profile_arn,
       :availability_zone,
       :kms_key_arn,
@@ -5412,6 +5606,7 @@ module Aws::DatabaseMigrationService
     #   <p></p>
     #   @return [String]
     class InsufficientResourceCapacityFault < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -5422,6 +5617,7 @@ module Aws::DatabaseMigrationService
     # @!attribute message
     #   @return [String]
     class InvalidCertificateFault < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -5432,6 +5628,7 @@ module Aws::DatabaseMigrationService
     # @!attribute message
     #   @return [String]
     class InvalidOperationFault < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -5443,6 +5640,7 @@ module Aws::DatabaseMigrationService
     #   <p></p>
     #   @return [String]
     class InvalidResourceStateFault < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -5454,6 +5652,7 @@ module Aws::DatabaseMigrationService
     #   <p></p>
     #   @return [String]
     class InvalidSubnet < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -5468,6 +5667,7 @@ module Aws::DatabaseMigrationService
     #   <p>The number of schemas in the Fleet Advisor collector inventory.</p>
     #   @return [Integer]
     class InventoryData < Struct.new(
+      nil,
       :number_of_databases,
       :number_of_schemas,
       keyword_init: true
@@ -5479,6 +5679,7 @@ module Aws::DatabaseMigrationService
     # @!attribute message
     #   @return [String]
     class KMSAccessDeniedFault < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -5489,6 +5690,7 @@ module Aws::DatabaseMigrationService
     # @!attribute message
     #   @return [String]
     class KMSDisabledFault < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -5499,6 +5701,7 @@ module Aws::DatabaseMigrationService
     # @!attribute message
     #   @return [String]
     class KMSFault < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -5509,6 +5712,7 @@ module Aws::DatabaseMigrationService
     # @!attribute message
     #   @return [String]
     class KMSInvalidStateFault < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -5520,6 +5724,7 @@ module Aws::DatabaseMigrationService
     #   <p></p>
     #   @return [String]
     class KMSKeyNotAccessibleFault < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -5530,6 +5735,7 @@ module Aws::DatabaseMigrationService
     # @!attribute message
     #   @return [String]
     class KMSNotFoundFault < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -5540,6 +5746,7 @@ module Aws::DatabaseMigrationService
     # @!attribute message
     #   @return [String]
     class KMSThrottlingFault < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -5658,6 +5865,7 @@ module Aws::DatabaseMigrationService
     #   <p>Specifies using the large integer value with Kafka.</p>
     #   @return [Boolean]
     class KafkaSettings < Struct.new(
+      nil,
       :broker,
       :topic,
       :message_format,
@@ -5699,6 +5907,7 @@ module Aws::DatabaseMigrationService
     #            authentication.</p>
     #   @return [String]
     class KerberosAuthenticationSettings < Struct.new(
+      nil,
       :key_cache_secret_id,
       :key_cache_secret_iam_arn,
       :krb5_file_contents,
@@ -5765,6 +5974,7 @@ module Aws::DatabaseMigrationService
     #   <p>Specifies using the large integer value with Kinesis.</p>
     #   @return [Boolean]
     class KinesisSettings < Struct.new(
+      nil,
       :stream_arn,
       :message_format,
       :service_access_role_arn,
@@ -5815,6 +6025,7 @@ module Aws::DatabaseMigrationService
     #               feature.</p>
     #   @return [String]
     class Limitation < Struct.new(
+      nil,
       :database_id,
       :engine_name,
       :name,
@@ -5839,6 +6050,7 @@ module Aws::DatabaseMigrationService
     #            each listed tag is created. </p>
     #   @return [Array<String>]
     class ListTagsForResourceMessage < Struct.new(
+      nil,
       :resource_arn,
       :resource_arn_list,
       keyword_init: true
@@ -5851,6 +6063,7 @@ module Aws::DatabaseMigrationService
     #   <p>A list of tags for the resource.</p>
     #   @return [Array<Types::Tag>]
     class ListTagsForResourceResponse < Struct.new(
+      nil,
       :tag_list,
       keyword_init: true
     )
@@ -5878,6 +6091,7 @@ module Aws::DatabaseMigrationService
     #   <p>The ARN for the role the application uses to access its Amazon S3 bucket.</p>
     #   @return [String]
     class MariaDbDataProviderSettings < Struct.new(
+      nil,
       :server_name,
       :port,
       :ssl_mode,
@@ -5990,6 +6204,7 @@ module Aws::DatabaseMigrationService
     #   <p>Specifies the authentication method to be used with Microsoft SQL Server.</p>
     #   @return [String]
     class MicrosoftSQLServerSettings < Struct.new(
+      nil,
       :port,
       :bcp_packet_size,
       :database_name,
@@ -6037,6 +6252,7 @@ module Aws::DatabaseMigrationService
     #   <p>The ARN for the role the application uses to access its Amazon S3 bucket.</p>
     #   @return [String]
     class MicrosoftSqlServerDataProviderSettings < Struct.new(
+      nil,
       :server_name,
       :port,
       :database_name,
@@ -6083,6 +6299,7 @@ module Aws::DatabaseMigrationService
     #   <p>The schema conversion application attributes, including the Amazon S3 bucket name and Amazon S3 role ARN.</p>
     #   @return [Types::SCApplicationAttributes]
     class MigrationProject < Struct.new(
+      nil,
       :migration_project_name,
       :migration_project_arn,
       :migration_project_creation_time,
@@ -6105,6 +6322,7 @@ module Aws::DatabaseMigrationService
     #   <p>The new conversion configuration.</p>
     #   @return [String]
     class ModifyConversionConfigurationMessage < Struct.new(
+      nil,
       :migration_project_identifier,
       :conversion_configuration,
       keyword_init: true
@@ -6116,6 +6334,7 @@ module Aws::DatabaseMigrationService
     #   <p>The name or Amazon Resource Name (ARN) of  the modified configuration.</p>
     #   @return [String]
     class ModifyConversionConfigurationResponse < Struct.new(
+      nil,
       :migration_project_identifier,
       keyword_init: true
     )
@@ -6152,6 +6371,7 @@ module Aws::DatabaseMigrationService
     #            migration.</p>
     #   @return [String]
     class ModifyDataMigrationMessage < Struct.new(
+      nil,
       :data_migration_identifier,
       :data_migration_name,
       :enable_cloudwatch_logs,
@@ -6170,6 +6390,7 @@ module Aws::DatabaseMigrationService
     #   <p>Information about the modified data migration.</p>
     #   @return [Types::DataMigration]
     class ModifyDataMigrationResponse < Struct.new(
+      nil,
       :data_migration,
       keyword_init: true
     )
@@ -6214,6 +6435,7 @@ module Aws::DatabaseMigrationService
     #   <p>The settings in JSON format for a data provider.</p>
     #   @return [Types::DataProviderSettings]
     class ModifyDataProviderMessage < Struct.new(
+      nil,
       :data_provider_identifier,
       :data_provider_name,
       :description,
@@ -6230,6 +6452,7 @@ module Aws::DatabaseMigrationService
     #   <p>The data provider that was modified.</p>
     #   @return [Types::DataProvider]
     class ModifyDataProviderResponse < Struct.new(
+      nil,
       :data_provider,
       keyword_init: true
     )
@@ -6441,6 +6664,7 @@ module Aws::DatabaseMigrationService
     #   <p>Settings in JSON format for the target Amazon Timestream endpoint.</p>
     #   @return [Types::TimestreamSettings]
     class ModifyEndpointMessage < Struct.new(
+      nil,
       :endpoint_arn,
       :endpoint_identifier,
       :endpoint_type,
@@ -6485,6 +6709,7 @@ module Aws::DatabaseMigrationService
     #   <p>The modified endpoint.</p>
     #   @return [Types::Endpoint]
     class ModifyEndpointResponse < Struct.new(
+      nil,
       :endpoint,
       keyword_init: true
     )
@@ -6512,6 +6737,7 @@ module Aws::DatabaseMigrationService
     #            subscription. </p>
     #   @return [Boolean]
     class ModifyEventSubscriptionMessage < Struct.new(
+      nil,
       :subscription_name,
       :sns_topic_arn,
       :source_type,
@@ -6527,6 +6753,7 @@ module Aws::DatabaseMigrationService
     #   <p>The modified event subscription.</p>
     #   @return [Types::EventSubscription]
     class ModifyEventSubscriptionResponse < Struct.new(
+      nil,
       :event_subscription,
       keyword_init: true
     )
@@ -6574,6 +6801,7 @@ module Aws::DatabaseMigrationService
     #            The VPC security group must work with the VPC containing the instance profile.</p>
     #   @return [Array<String>]
     class ModifyInstanceProfileMessage < Struct.new(
+      nil,
       :instance_profile_identifier,
       :availability_zone,
       :kms_key_arn,
@@ -6592,6 +6820,7 @@ module Aws::DatabaseMigrationService
     #   <p>The instance profile that was modified.</p>
     #   @return [Types::InstanceProfile]
     class ModifyInstanceProfileResponse < Struct.new(
+      nil,
       :instance_profile,
       keyword_init: true
     )
@@ -6627,6 +6856,7 @@ module Aws::DatabaseMigrationService
     #   <p>The schema conversion application attributes, including the Amazon S3 bucket name and Amazon S3 role ARN.</p>
     #   @return [Types::SCApplicationAttributes]
     class ModifyMigrationProjectMessage < Struct.new(
+      nil,
       :migration_project_identifier,
       :migration_project_name,
       :source_data_provider_descriptors,
@@ -6644,6 +6874,7 @@ module Aws::DatabaseMigrationService
     #   <p>The migration project that was modified.</p>
     #   @return [Types::MigrationProject]
     class ModifyMigrationProjectResponse < Struct.new(
+      nil,
       :migration_project,
       keyword_init: true
     )
@@ -6681,6 +6912,7 @@ module Aws::DatabaseMigrationService
     #            replication configuration.</p>
     #   @return [String]
     class ModifyReplicationConfigMessage < Struct.new(
+      nil,
       :replication_config_arn,
       :replication_config_identifier,
       :replication_type,
@@ -6699,6 +6931,7 @@ module Aws::DatabaseMigrationService
     #   <p>Information about the serverless replication config that was modified.</p>
     #   @return [Types::ReplicationConfig]
     class ModifyReplicationConfigResponse < Struct.new(
+      nil,
       :replication_config,
       keyword_init: true
     )
@@ -6789,6 +7022,7 @@ module Aws::DatabaseMigrationService
     #            instance.</p>
     #   @return [Types::KerberosAuthenticationSettings]
     class ModifyReplicationInstanceMessage < Struct.new(
+      nil,
       :replication_instance_arn,
       :allocated_storage,
       :apply_immediately,
@@ -6812,6 +7046,7 @@ module Aws::DatabaseMigrationService
     #   <p>The modified replication instance.</p>
     #   @return [Types::ReplicationInstance]
     class ModifyReplicationInstanceResponse < Struct.new(
+      nil,
       :replication_instance,
       keyword_init: true
     )
@@ -6829,6 +7064,7 @@ module Aws::DatabaseMigrationService
     #   <p>A list of subnet IDs.</p>
     #   @return [Array<String>]
     class ModifyReplicationSubnetGroupMessage < Struct.new(
+      nil,
       :replication_subnet_group_identifier,
       :replication_subnet_group_description,
       :subnet_ids,
@@ -6842,6 +7078,7 @@ module Aws::DatabaseMigrationService
     #   <p>The modified replication subnet group.</p>
     #   @return [Types::ReplicationSubnetGroup]
     class ModifyReplicationSubnetGroupResponse < Struct.new(
+      nil,
       :replication_subnet_group,
       keyword_init: true
     )
@@ -6917,6 +7154,7 @@ module Aws::DatabaseMigrationService
     #            </p>
     #   @return [String]
     class ModifyReplicationTaskMessage < Struct.new(
+      nil,
       :replication_task_arn,
       :replication_task_identifier,
       :migration_type,
@@ -6936,6 +7174,7 @@ module Aws::DatabaseMigrationService
     #   <p>The replication task that was modified.</p>
     #   @return [Types::ReplicationTask]
     class ModifyReplicationTaskResponse < Struct.new(
+      nil,
       :replication_task,
       keyword_init: true
     )
@@ -6971,6 +7210,7 @@ module Aws::DatabaseMigrationService
     #   <p>The authentication method for connecting to the data provider. Valid values are DEFAULT, MONGODB_CR, or SCRAM_SHA_1.</p>
     #   @return [String]
     class MongoDbDataProviderSettings < Struct.new(
+      nil,
       :server_name,
       :port,
       :database_name,
@@ -7083,6 +7323,7 @@ module Aws::DatabaseMigrationService
     #            </ul>
     #   @return [Boolean]
     class MongoDbSettings < Struct.new(
+      nil,
       :username,
       :password,
       :server_name,
@@ -7112,6 +7353,7 @@ module Aws::DatabaseMigrationService
     #   <p>The ARN of the replication instance where you want to move the task to.</p>
     #   @return [String]
     class MoveReplicationTaskMessage < Struct.new(
+      nil,
       :replication_task_arn,
       :target_replication_instance_arn,
       keyword_init: true
@@ -7124,6 +7366,7 @@ module Aws::DatabaseMigrationService
     #   <p>The replication task that was moved.</p>
     #   @return [Types::ReplicationTask]
     class MoveReplicationTaskResponse < Struct.new(
+      nil,
       :replication_task,
       keyword_init: true
     )
@@ -7232,6 +7475,7 @@ module Aws::DatabaseMigrationService
     #   <p>This attribute allows you to specify the authentication method as "iam auth".</p>
     #   @return [String]
     class MySQLSettings < Struct.new(
+      nil,
       :after_connect_script,
       :clean_source_metadata_on_mismatch,
       :database_name,
@@ -7275,6 +7519,7 @@ module Aws::DatabaseMigrationService
     #   <p>The ARN for the role the application uses to access its Amazon S3 bucket.</p>
     #   @return [String]
     class MySqlDataProviderSettings < Struct.new(
+      nil,
       :server_name,
       :port,
       :ssl_mode,
@@ -7324,6 +7569,7 @@ module Aws::DatabaseMigrationService
     #            specified by <code>ServiceAccessRoleArn</code>. The default is <code>false</code>.</p>
     #   @return [Boolean]
     class NeptuneSettings < Struct.new(
+      nil,
       :service_access_role_arn,
       :s3_bucket_name,
       :s3_bucket_folder,
@@ -7383,6 +7629,7 @@ module Aws::DatabaseMigrationService
     #   <p>The ARN for the role the application uses to access its Amazon S3 bucket.</p>
     #   @return [String]
     class OracleDataProviderSettings < Struct.new(
+      nil,
       :server_name,
       :port,
       :database_name,
@@ -7695,6 +7942,7 @@ module Aws::DatabaseMigrationService
     #   <p>Specifies the authentication method to be used with Oracle.</p>
     #   @return [String]
     class OracleSettings < Struct.new(
+      nil,
       :add_supplemental_logging,
       :archived_log_dest_id,
       :additional_archived_log_dest_id,
@@ -7790,6 +8038,7 @@ module Aws::DatabaseMigrationService
     #            </note>
     #   @return [String]
     class OrderableReplicationInstance < Struct.new(
+      nil,
       :engine_version,
       :replication_instance_class,
       :storage_type,
@@ -7845,6 +8094,7 @@ module Aws::DatabaseMigrationService
     #   <p>A description providing more detail about the maintenance action.</p>
     #   @return [String]
     class PendingMaintenanceAction < Struct.new(
+      nil,
       :action,
       :auto_applied_after_date,
       :forced_apply_date,
@@ -8008,6 +8258,7 @@ module Aws::DatabaseMigrationService
     #   <p>This attribute allows you to specify the authentication method as "iam auth".</p>
     #   @return [String]
     class PostgreSQLSettings < Struct.new(
+      nil,
       :after_connect_script,
       :capture_ddls,
       :max_file_size,
@@ -8064,6 +8315,7 @@ module Aws::DatabaseMigrationService
     #   <p>The ARN for the role the application uses to access its Amazon S3 bucket.</p>
     #   @return [String]
     class PostgreSqlDataProviderSettings < Struct.new(
+      nil,
       :server_name,
       :port,
       :database_name,
@@ -8176,6 +8428,7 @@ module Aws::DatabaseMigrationService
     #   <p>The object containing the result statistics for a completed assessment run.</p>
     #   @return [Types::ReplicationTaskAssessmentRunResultStatistic]
     class PremigrationAssessmentStatus < Struct.new(
+      nil,
       :premigration_assessment_run_arn,
       :fail_on_assessment_failure,
       :status,
@@ -8218,6 +8471,7 @@ module Aws::DatabaseMigrationService
     #            replication.</p>
     #   @return [String]
     class ProvisionData < Struct.new(
+      nil,
       :provision_state,
       :provisioned_capacity_units,
       :date_provisioned,
@@ -8274,6 +8528,7 @@ module Aws::DatabaseMigrationService
     #   <p>Describes the recommended target Amazon RDS engine version.</p>
     #   @return [String]
     class RdsConfiguration < Struct.new(
+      nil,
       :engine_edition,
       :instance_type,
       :instance_vcpu,
@@ -8299,6 +8554,7 @@ module Aws::DatabaseMigrationService
     #               Amazon RDS.</p>
     #   @return [Types::RdsConfiguration]
     class RdsRecommendation < Struct.new(
+      nil,
       :requirements_to_target,
       :target_configuration,
       keyword_init: true
@@ -8333,6 +8589,7 @@ module Aws::DatabaseMigrationService
     #   <p>The required target Amazon RDS engine version.</p>
     #   @return [String]
     class RdsRequirements < Struct.new(
+      nil,
       :engine_edition,
       :instance_vcpu,
       :instance_memory,
@@ -8362,6 +8619,7 @@ module Aws::DatabaseMigrationService
     #               <code>--force-failover</code> can't both be set to <code>true</code>.)</p>
     #   @return [Boolean]
     class RebootReplicationInstanceMessage < Struct.new(
+      nil,
       :replication_instance_arn,
       :force_failover,
       :force_planned_failover,
@@ -8374,6 +8632,7 @@ module Aws::DatabaseMigrationService
     #   <p>The replication instance that is being rebooted. </p>
     #   @return [Types::ReplicationInstance]
     class RebootReplicationInstanceResponse < Struct.new(
+      nil,
       :replication_instance,
       keyword_init: true
     )
@@ -8419,6 +8678,7 @@ module Aws::DatabaseMigrationService
     #   <p>The recommendation of a target engine for the specified source database.</p>
     #   @return [Types::RecommendationData]
     class Recommendation < Struct.new(
+      nil,
       :database_id,
       :engine_name,
       :created_date,
@@ -8436,6 +8696,7 @@ module Aws::DatabaseMigrationService
     #   <p>The recommendation of a target Amazon RDS database engine.</p>
     #   @return [Types::RdsRecommendation]
     class RecommendationData < Struct.new(
+      nil,
       :rds_engine,
       keyword_init: true
     )
@@ -8455,6 +8716,7 @@ module Aws::DatabaseMigrationService
     #                   <code>"production"</code>.</p>
     #   @return [String]
     class RecommendationSettings < Struct.new(
+      nil,
       :instance_sizing_type,
       :workload_type,
       keyword_init: true
@@ -8499,6 +8761,7 @@ module Aws::DatabaseMigrationService
     #            connect to your Redis target endpoint.</p>
     #   @return [String]
     class RedisSettings < Struct.new(
+      nil,
       :server_name,
       :port,
       :ssl_security_protocol,
@@ -8533,6 +8796,7 @@ module Aws::DatabaseMigrationService
     #   <p>The ARN for the role the application uses to access its Amazon S3 bucket.</p>
     #   @return [String]
     class RedshiftDataProviderSettings < Struct.new(
+      nil,
       :server_name,
       :port,
       :database_name,
@@ -8732,6 +8996,7 @@ module Aws::DatabaseMigrationService
     #            and target endpoints for it to take effect.</p>
     #   @return [Boolean]
     class RedshiftSettings < Struct.new(
+      nil,
       :accept_any_date,
       :after_connect_script,
       :bucket_folder,
@@ -8776,6 +9041,7 @@ module Aws::DatabaseMigrationService
     #   <p>The Amazon Resource Name (ARN) of the replication instance.</p>
     #   @return [String]
     class RefreshSchemasMessage < Struct.new(
+      nil,
       :endpoint_arn,
       :replication_instance_arn,
       keyword_init: true
@@ -8788,6 +9054,7 @@ module Aws::DatabaseMigrationService
     #   <p>The status of the refreshed schema.</p>
     #   @return [Types::RefreshSchemasStatus]
     class RefreshSchemasResponse < Struct.new(
+      nil,
       :refresh_schemas_status,
       keyword_init: true
     )
@@ -8812,6 +9079,7 @@ module Aws::DatabaseMigrationService
     #   <p>The last failure message for the schema.</p>
     #   @return [String]
     class RefreshSchemasStatus < Struct.new(
+      nil,
       :endpoint_arn,
       :replication_instance_arn,
       :status,
@@ -8835,6 +9103,7 @@ module Aws::DatabaseMigrationService
     #            This option applies only when validation is enabled for the replication. </p>
     #   @return [String]
     class ReloadReplicationTablesMessage < Struct.new(
+      nil,
       :replication_config_arn,
       :tables_to_reload,
       :reload_option,
@@ -8848,6 +9117,7 @@ module Aws::DatabaseMigrationService
     #   <p>The Amazon Resource Name of the replication config for which to reload tables.</p>
     #   @return [String]
     class ReloadReplicationTablesResponse < Struct.new(
+      nil,
       :replication_config_arn,
       keyword_init: true
     )
@@ -8868,6 +9138,7 @@ module Aws::DatabaseMigrationService
     #            <p>Default value is data-reload.</p>
     #   @return [String]
     class ReloadTablesMessage < Struct.new(
+      nil,
       :replication_task_arn,
       :tables_to_reload,
       :reload_option,
@@ -8880,6 +9151,7 @@ module Aws::DatabaseMigrationService
     #   <p>The Amazon Resource Name (ARN) of the replication task. </p>
     #   @return [String]
     class ReloadTablesResponse < Struct.new(
+      nil,
       :replication_task_arn,
       keyword_init: true
     )
@@ -8895,6 +9167,7 @@ module Aws::DatabaseMigrationService
     #   <p>The tag key (name) of the tag to be removed.</p>
     #   @return [Array<String>]
     class RemoveTagsFromResourceMessage < Struct.new(
+      nil,
       :resource_arn,
       :tag_keys,
       keyword_init: true
@@ -8904,6 +9177,7 @@ module Aws::DatabaseMigrationService
 
     # <p></p>
     class RemoveTagsFromResourceResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -9056,6 +9330,7 @@ module Aws::DatabaseMigrationService
     #   <p>The timestamp when DMS will deprovision the replication.</p>
     #   @return [Time]
     class Replication < Struct.new(
+      nil,
       :replication_config_identifier,
       :replication_config_arn,
       :source_endpoint_arn,
@@ -9120,6 +9395,7 @@ module Aws::DatabaseMigrationService
     #   <p>The time the serverless replication config was updated.</p>
     #   @return [Time]
     class ReplicationConfig < Struct.new(
+      nil,
       :replication_config_identifier,
       :replication_config_arn,
       :source_endpoint_arn,
@@ -9328,6 +9604,7 @@ module Aws::DatabaseMigrationService
     #            instance.</p>
     #   @return [Types::KerberosAuthenticationSettings]
     class ReplicationInstance < Struct.new(
+      nil,
       :replication_instance_identifier,
       :replication_instance_class,
       :replication_instance_status,
@@ -9378,6 +9655,7 @@ module Aws::DatabaseMigrationService
     #   <p>The size, in bytes, of the replication task log.</p>
     #   @return [Integer]
     class ReplicationInstanceTaskLog < Struct.new(
+      nil,
       :replication_task_name,
       :replication_task_arn,
       :replication_instance_task_log_size,
@@ -9420,6 +9698,7 @@ module Aws::DatabaseMigrationService
     #            supported.</p>
     #   @return [String]
     class ReplicationPendingModifiedValues < Struct.new(
+      nil,
       :replication_instance_class,
       :allocated_storage,
       :multi_az,
@@ -9466,6 +9745,7 @@ module Aws::DatabaseMigrationService
     #   <p>The date the replication full load was finished.</p>
     #   @return [Time]
     class ReplicationStats < Struct.new(
+      nil,
       :full_load_progress_percent,
       :elapsed_time_millis,
       :tables_loaded,
@@ -9515,6 +9795,7 @@ module Aws::DatabaseMigrationService
     #            addressing. IPv6 only is not yet supported.</p>
     #   @return [Array<String>]
     class ReplicationSubnetGroup < Struct.new(
+      nil,
       :replication_subnet_group_identifier,
       :replication_subnet_group_description,
       :vpc_id,
@@ -9531,6 +9812,7 @@ module Aws::DatabaseMigrationService
     #   <p></p>
     #   @return [String]
     class ReplicationSubnetGroupDoesNotCoverEnoughAZs < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -9813,6 +10095,7 @@ module Aws::DatabaseMigrationService
     #            parameter isn't a member of the <code>ReplicationTask</code> object.</p>
     #   @return [String]
     class ReplicationTask < Struct.new(
+      nil,
       :replication_task_identifier,
       :source_endpoint_arn,
       :target_endpoint_arn,
@@ -9865,6 +10148,7 @@ module Aws::DatabaseMigrationService
     #            request.</p>
     #   @return [String]
     class ReplicationTaskAssessmentResult < Struct.new(
+      nil,
       :replication_task_identifier,
       :replication_task_arn,
       :replication_task_last_assessment_date,
@@ -9987,6 +10271,7 @@ module Aws::DatabaseMigrationService
     #         </p>
     #   @return [Types::ReplicationTaskAssessmentRunResultStatistic]
     class ReplicationTaskAssessmentRun < Struct.new(
+      nil,
       :replication_task_assessment_run_arn,
       :replication_task_arn,
       :status,
@@ -10020,6 +10305,7 @@ module Aws::DatabaseMigrationService
     #   <p>The number of individual assessments that have completed, successfully or not.</p>
     #   @return [Integer]
     class ReplicationTaskAssessmentRunProgress < Struct.new(
+      nil,
       :individual_assessment_count,
       :individual_assessment_completed_count,
       keyword_init: true
@@ -10055,6 +10341,7 @@ module Aws::DatabaseMigrationService
     #   <p>The number of individual assessments that were skipped during the assessment run.</p>
     #   @return [Integer]
     class ReplicationTaskAssessmentRunResultStatistic < Struct.new(
+      nil,
       :passed,
       :failed,
       :error,
@@ -10134,6 +10421,7 @@ module Aws::DatabaseMigrationService
     #               <code>StartReplicationTaskAssessmentRun</code> operation.</p>
     #   @return [Time]
     class ReplicationTaskIndividualAssessment < Struct.new(
+      nil,
       :replication_task_individual_assessment_arn,
       :replication_task_assessment_run_arn,
       :individual_assessment_name,
@@ -10182,6 +10470,7 @@ module Aws::DatabaseMigrationService
     #   <p>The date the replication task full load was completed.</p>
     #   @return [Time]
     class ReplicationTaskStats < Struct.new(
+      nil,
       :full_load_progress_percent,
       :elapsed_time_millis,
       :tables_loaded,
@@ -10216,6 +10505,7 @@ module Aws::DatabaseMigrationService
     #   <p></p>
     #   @return [String]
     class ResourceAlreadyExistsFault < Struct.new(
+      nil,
       :message,
       :resource_arn,
       keyword_init: true
@@ -10228,6 +10518,7 @@ module Aws::DatabaseMigrationService
     #   <p></p>
     #   @return [String]
     class ResourceNotFoundFault < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -10244,6 +10535,7 @@ module Aws::DatabaseMigrationService
     #   <p>Detailed information about the pending maintenance action.</p>
     #   @return [Array<Types::PendingMaintenanceAction>]
     class ResourcePendingMaintenanceActions < Struct.new(
+      nil,
       :resource_identifier,
       :pending_maintenance_action_details,
       keyword_init: true
@@ -10256,6 +10548,7 @@ module Aws::DatabaseMigrationService
     #   <p></p>
     #   @return [String]
     class ResourceQuotaExceededFault < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -10269,6 +10562,7 @@ module Aws::DatabaseMigrationService
     #   <p>The status of the LSA analysis, for example <code>COMPLETED</code>.</p>
     #   @return [String]
     class RunFleetAdvisorLsaAnalysisResponse < Struct.new(
+      nil,
       :lsa_analysis_id,
       :status,
       keyword_init: true
@@ -10280,6 +10574,7 @@ module Aws::DatabaseMigrationService
     # @!attribute message
     #   @return [String]
     class S3AccessDeniedFault < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -10291,6 +10586,7 @@ module Aws::DatabaseMigrationService
     # @!attribute message
     #   @return [String]
     class S3ResourceNotFoundFault < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -10777,6 +11073,7 @@ module Aws::DatabaseMigrationService
     #            use Athena to query your data.</p>
     #   @return [Boolean]
     class S3Settings < Struct.new(
+      nil,
       :service_access_role_arn,
       :external_table_definition,
       :csv_row_delimiter,
@@ -10831,6 +11128,7 @@ module Aws::DatabaseMigrationService
     #   <p>The ARN for the role the application uses to access its Amazon S3 bucket.</p>
     #   @return [String]
     class SCApplicationAttributes < Struct.new(
+      nil,
       :s3_bucket_path,
       :s3_bucket_role_arn,
       keyword_init: true
@@ -10843,6 +11141,7 @@ module Aws::DatabaseMigrationService
     #   <p></p>
     #   @return [String]
     class SNSInvalidTopicFault < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -10854,6 +11153,7 @@ module Aws::DatabaseMigrationService
     #   <p></p>
     #   @return [String]
     class SNSNoAuthorizationFault < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -10877,6 +11177,7 @@ module Aws::DatabaseMigrationService
     #   <p>Provides information about a metadata model assessment exported to SQL.</p>
     #   @return [Types::ExportSqlDetails]
     class SchemaConversionRequest < Struct.new(
+      nil,
       :status,
       :request_identifier,
       :migration_project_arn,
@@ -10917,6 +11218,7 @@ module Aws::DatabaseMigrationService
     #               indicates that a schema is likely to be a duplicate.</p>
     #   @return [Float]
     class SchemaResponse < Struct.new(
+      nil,
       :code_line_count,
       :code_size,
       :complexity,
@@ -10948,6 +11250,7 @@ module Aws::DatabaseMigrationService
     #   <p>The IP address of a database in a Fleet Advisor collector inventory.</p>
     #   @return [String]
     class SchemaShortInfoResponse < Struct.new(
+      nil,
       :schema_id,
       :schema_name,
       :database_id,
@@ -10969,6 +11272,7 @@ module Aws::DatabaseMigrationService
     #   <p>The name address of a server in a Fleet Advisor collector inventory.</p>
     #   @return [String]
     class ServerShortInfoResponse < Struct.new(
+      nil,
       :server_id,
       :ip_address,
       :server_name,
@@ -10992,6 +11296,7 @@ module Aws::DatabaseMigrationService
     #            valid for a PostgreSQL or Aurora PostgreSQL source.</p>
     #   @return [String]
     class SourceDataSetting < Struct.new(
+      nil,
       :cdc_start_position,
       :cdc_start_time,
       :cdc_stop_time,
@@ -11010,6 +11315,7 @@ module Aws::DatabaseMigrationService
     #               <code>resume-processing</code>.</p>
     #   @return [String]
     class StartDataMigrationMessage < Struct.new(
+      nil,
       :data_migration_identifier,
       :start_type,
       keyword_init: true
@@ -11021,6 +11327,7 @@ module Aws::DatabaseMigrationService
     #   <p>The data migration that DMS started.</p>
     #   @return [Types::DataMigration]
     class StartDataMigrationResponse < Struct.new(
+      nil,
       :data_migration,
       keyword_init: true
     )
@@ -11031,6 +11338,7 @@ module Aws::DatabaseMigrationService
     #   <p>The migration project name or Amazon Resource Name (ARN).</p>
     #   @return [String]
     class StartExtensionPackAssociationMessage < Struct.new(
+      nil,
       :migration_project_identifier,
       keyword_init: true
     )
@@ -11041,6 +11349,7 @@ module Aws::DatabaseMigrationService
     #   <p>The identifier for the request operation.</p>
     #   @return [String]
     class StartExtensionPackAssociationResponse < Struct.new(
+      nil,
       :request_identifier,
       keyword_init: true
     )
@@ -11054,6 +11363,7 @@ module Aws::DatabaseMigrationService
     #   <p>A value that specifies the database objects to assess.</p>
     #   @return [String]
     class StartMetadataModelAssessmentMessage < Struct.new(
+      nil,
       :migration_project_identifier,
       :selection_rules,
       keyword_init: true
@@ -11065,6 +11375,7 @@ module Aws::DatabaseMigrationService
     #   <p>The identifier for the assessment operation.</p>
     #   @return [String]
     class StartMetadataModelAssessmentResponse < Struct.new(
+      nil,
       :request_identifier,
       keyword_init: true
     )
@@ -11078,6 +11389,7 @@ module Aws::DatabaseMigrationService
     #   <p>A value that specifies the database objects to convert.</p>
     #   @return [String]
     class StartMetadataModelConversionMessage < Struct.new(
+      nil,
       :migration_project_identifier,
       :selection_rules,
       keyword_init: true
@@ -11089,6 +11401,7 @@ module Aws::DatabaseMigrationService
     #   <p>The identifier for the conversion operation.</p>
     #   @return [String]
     class StartMetadataModelConversionResponse < Struct.new(
+      nil,
       :request_identifier,
       keyword_init: true
     )
@@ -11108,6 +11421,7 @@ module Aws::DatabaseMigrationService
     #   <p>The name of the model file to create in the Amazon S3 bucket.</p>
     #   @return [String]
     class StartMetadataModelExportAsScriptMessage < Struct.new(
+      nil,
       :migration_project_identifier,
       :selection_rules,
       :origin,
@@ -11121,6 +11435,7 @@ module Aws::DatabaseMigrationService
     #   <p>The identifier for the export operation.</p>
     #   @return [String]
     class StartMetadataModelExportAsScriptResponse < Struct.new(
+      nil,
       :request_identifier,
       keyword_init: true
     )
@@ -11139,6 +11454,7 @@ module Aws::DatabaseMigrationService
     #            to the target database.</p>
     #   @return [Boolean]
     class StartMetadataModelExportToTargetMessage < Struct.new(
+      nil,
       :migration_project_identifier,
       :selection_rules,
       :overwrite_extension_pack,
@@ -11151,6 +11467,7 @@ module Aws::DatabaseMigrationService
     #   <p>The identifier for the export operation.</p>
     #   @return [String]
     class StartMetadataModelExportToTargetResponse < Struct.new(
+      nil,
       :request_identifier,
       keyword_init: true
     )
@@ -11170,6 +11487,7 @@ module Aws::DatabaseMigrationService
     #   <p>If <code>true</code>, DMS loads metadata for the specified objects from the source database.</p>
     #   @return [Boolean]
     class StartMetadataModelImportMessage < Struct.new(
+      nil,
       :migration_project_identifier,
       :selection_rules,
       :origin,
@@ -11183,6 +11501,7 @@ module Aws::DatabaseMigrationService
     #   <p>The identifier for the import operation.</p>
     #   @return [String]
     class StartMetadataModelImportResponse < Struct.new(
+      nil,
       :request_identifier,
       keyword_init: true
     )
@@ -11202,6 +11521,7 @@ module Aws::DatabaseMigrationService
     #               Dev/Test (Single-AZ deployments).</p>
     #   @return [Types::RecommendationSettings]
     class StartRecommendationsRequest < Struct.new(
+      nil,
       :database_id,
       :settings,
       keyword_init: true
@@ -11218,6 +11538,7 @@ module Aws::DatabaseMigrationService
     #   <p>The required target engine settings.</p>
     #   @return [Types::RecommendationSettings]
     class StartRecommendationsRequestEntry < Struct.new(
+      nil,
       :database_id,
       :settings,
       keyword_init: true
@@ -11303,6 +11624,7 @@ module Aws::DatabaseMigrationService
     #            either server time or commit time.</p>
     #   @return [String]
     class StartReplicationMessage < Struct.new(
+      nil,
       :replication_config_arn,
       :start_replication_type,
       :premigration_assessment_settings,
@@ -11319,6 +11641,7 @@ module Aws::DatabaseMigrationService
     #   <p>The replication that DMS started.</p>
     #   @return [Types::Replication]
     class StartReplicationResponse < Struct.new(
+      nil,
       :replication,
       keyword_init: true
     )
@@ -11330,6 +11653,7 @@ module Aws::DatabaseMigrationService
     #   <p> The Amazon Resource Name (ARN) of the replication task. </p>
     #   @return [String]
     class StartReplicationTaskAssessmentMessage < Struct.new(
+      nil,
       :replication_task_arn,
       keyword_init: true
     )
@@ -11341,6 +11665,7 @@ module Aws::DatabaseMigrationService
     #   <p> The assessed replication task. </p>
     #   @return [Types::ReplicationTask]
     class StartReplicationTaskAssessmentResponse < Struct.new(
+      nil,
       :replication_task,
       keyword_init: true
     )
@@ -11423,6 +11748,7 @@ module Aws::DatabaseMigrationService
     #            start.</p>
     #   @return [Array<Types::Tag>]
     class StartReplicationTaskAssessmentRunMessage < Struct.new(
+      nil,
       :replication_task_arn,
       :service_access_role_arn,
       :result_location_bucket,
@@ -11443,6 +11769,7 @@ module Aws::DatabaseMigrationService
     #   <p>The premigration assessment run that was started.</p>
     #   @return [Types::ReplicationTaskAssessmentRun]
     class StartReplicationTaskAssessmentRunResponse < Struct.new(
+      nil,
       :replication_task_assessment_run,
       keyword_init: true
     )
@@ -11496,6 +11823,7 @@ module Aws::DatabaseMigrationService
     #            <p>Commit time example: --cdc-stop-position “commit_time:2018-02-09T12:12:12“</p>
     #   @return [String]
     class StartReplicationTaskMessage < Struct.new(
+      nil,
       :replication_task_arn,
       :start_replication_task_type,
       :cdc_start_time,
@@ -11511,6 +11839,7 @@ module Aws::DatabaseMigrationService
     #   <p>The replication task started.</p>
     #   @return [Types::ReplicationTask]
     class StartReplicationTaskResponse < Struct.new(
+      nil,
       :replication_task,
       keyword_init: true
     )
@@ -11521,6 +11850,7 @@ module Aws::DatabaseMigrationService
     #   <p>The identifier (name or ARN) of the data migration to stop.</p>
     #   @return [String]
     class StopDataMigrationMessage < Struct.new(
+      nil,
       :data_migration_identifier,
       keyword_init: true
     )
@@ -11531,6 +11861,7 @@ module Aws::DatabaseMigrationService
     #   <p>The data migration that DMS stopped.</p>
     #   @return [Types::DataMigration]
     class StopDataMigrationResponse < Struct.new(
+      nil,
       :data_migration,
       keyword_init: true
     )
@@ -11542,6 +11873,7 @@ module Aws::DatabaseMigrationService
     #   <p>The Amazon Resource Name of the replication to stop.</p>
     #   @return [String]
     class StopReplicationMessage < Struct.new(
+      nil,
       :replication_config_arn,
       keyword_init: true
     )
@@ -11552,6 +11884,7 @@ module Aws::DatabaseMigrationService
     #   <p>The replication that DMS stopped.</p>
     #   @return [Types::Replication]
     class StopReplicationResponse < Struct.new(
+      nil,
       :replication,
       keyword_init: true
     )
@@ -11563,6 +11896,7 @@ module Aws::DatabaseMigrationService
     #   <p>The Amazon Resource Name(ARN) of the replication task to be stopped.</p>
     #   @return [String]
     class StopReplicationTaskMessage < Struct.new(
+      nil,
       :replication_task_arn,
       keyword_init: true
     )
@@ -11574,6 +11908,7 @@ module Aws::DatabaseMigrationService
     #   <p>The replication task stopped.</p>
     #   @return [Types::ReplicationTask]
     class StopReplicationTaskResponse < Struct.new(
+      nil,
       :replication_task,
       keyword_init: true
     )
@@ -11585,6 +11920,7 @@ module Aws::DatabaseMigrationService
     #   <p></p>
     #   @return [String]
     class StorageQuotaExceededFault < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -11604,6 +11940,7 @@ module Aws::DatabaseMigrationService
     #   <p>The status of the subnet.</p>
     #   @return [String]
     class Subnet < Struct.new(
+      nil,
       :subnet_identifier,
       :subnet_availability_zone,
       :subnet_status,
@@ -11617,6 +11954,7 @@ module Aws::DatabaseMigrationService
     #   <p></p>
     #   @return [String]
     class SubnetAlreadyInUse < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -11654,6 +11992,7 @@ module Aws::DatabaseMigrationService
     #            parameter is "aurora", this value would be "Amazon Aurora MySQL".</p>
     #   @return [String]
     class SupportedEndpointType < Struct.new(
+      nil,
       :engine_name,
       :supports_cdc,
       :endpoint_type,
@@ -11707,6 +12046,7 @@ module Aws::DatabaseMigrationService
     #            that contains the SAP SAE endpoint connection details.</p>
     #   @return [String]
     class SybaseSettings < Struct.new(
+      nil,
       :database_name,
       :password,
       :port,
@@ -11879,6 +12219,7 @@ module Aws::DatabaseMigrationService
     #   <p>Calculates the percentage of failed validations that were successfully resynced to the system.</p>
     #   @return [Float]
     class TableStatistics < Struct.new(
+      nil,
       :schema_name,
       :table_name,
       :inserts,
@@ -11934,6 +12275,7 @@ module Aws::DatabaseMigrationService
     #   <p>The table name of the table to be reloaded.</p>
     #   @return [String]
     class TableToReload < Struct.new(
+      nil,
       :schema_name,
       :table_name,
       keyword_init: true
@@ -11977,6 +12319,7 @@ module Aws::DatabaseMigrationService
     #            the tag is created.</p>
     #   @return [String]
     class Tag < Struct.new(
+      nil,
       :key,
       :value,
       :resource_arn,
@@ -11992,6 +12335,7 @@ module Aws::DatabaseMigrationService
     #            the existing data in the target tables.</p>
     #   @return [String]
     class TargetDataSetting < Struct.new(
+      nil,
       :table_preparation_mode,
       keyword_init: true
     )
@@ -12006,6 +12350,7 @@ module Aws::DatabaseMigrationService
     #   <p>The Amazon Resource Name (ARN) string that uniquely identifies the endpoint.</p>
     #   @return [String]
     class TestConnectionMessage < Struct.new(
+      nil,
       :replication_instance_arn,
       :endpoint_arn,
       keyword_init: true
@@ -12018,6 +12363,7 @@ module Aws::DatabaseMigrationService
     #   <p>The connection tested.</p>
     #   @return [Types::Connection]
     class TestConnectionResponse < Struct.new(
+      nil,
       :connection,
       keyword_init: true
     )
@@ -12054,6 +12400,7 @@ module Aws::DatabaseMigrationService
     #               Guide</a>.</p>
     #   @return [Boolean]
     class TimestreamSettings < Struct.new(
+      nil,
       :database_name,
       :memory_duration,
       :magnetic_duration,
@@ -12071,6 +12418,7 @@ module Aws::DatabaseMigrationService
     #            false, this operation runs only when all your replication instances are from DMS version 3.4.5 or higher. </p>
     #   @return [Boolean]
     class UpdateSubscriptionsToEventBridgeMessage < Struct.new(
+      nil,
       :force_move,
       keyword_init: true
     )
@@ -12083,6 +12431,7 @@ module Aws::DatabaseMigrationService
     #            to be migrated.</p>
     #   @return [String]
     class UpdateSubscriptionsToEventBridgeResponse < Struct.new(
+      nil,
       :result,
       keyword_init: true
     )
@@ -12094,6 +12443,7 @@ module Aws::DatabaseMigrationService
     #   <p></p>
     #   @return [String]
     class UpgradeDependencyFailureFault < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -12109,6 +12459,7 @@ module Aws::DatabaseMigrationService
     #   <p>The status of the VPC security group.</p>
     #   @return [String]
     class VpcSecurityGroupMembership < Struct.new(
+      nil,
       :vpc_security_group_id,
       :status,
       keyword_init: true

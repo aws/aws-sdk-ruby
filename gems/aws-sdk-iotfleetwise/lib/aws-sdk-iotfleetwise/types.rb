@@ -10,6 +10,7 @@ module Aws::IoTFleetWise
     # @!attribute message
     #   @return [String]
     class AccessDeniedException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -62,6 +63,7 @@ module Aws::IoTFleetWise
     #               <code>Vehicle.Door.LockStruct</code>.</p>
     #   @return [String]
     class Actuator < Struct.new(
+      nil,
       :fully_qualified_name,
       :data_type,
       :description,
@@ -85,6 +87,7 @@ module Aws::IoTFleetWise
     #   <p> The ID of a fleet. </p>
     #   @return [String]
     class AssociateVehicleFleetInput < Struct.new(
+      nil,
       :vehicle_name,
       :fleet_id,
       keyword_init: true
@@ -93,6 +96,7 @@ module Aws::IoTFleetWise
     end
 
     class AssociateVehicleFleetOutput < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -137,6 +141,7 @@ module Aws::IoTFleetWise
     #   <p>A comment in addition to the description.</p>
     #   @return [String]
     class Attribute < Struct.new(
+      nil,
       :fully_qualified_name,
       :data_type,
       :description,
@@ -158,6 +163,7 @@ module Aws::IoTFleetWise
     #                    API data type.</p>
     #   @return [Array<Types::CreateVehicleRequestItem>]
     class BatchCreateVehicleInput < Struct.new(
+      nil,
       :vehicles,
       keyword_init: true
     )
@@ -173,6 +179,7 @@ module Aws::IoTFleetWise
     #               errors. </p>
     #   @return [Array<Types::CreateVehicleError>]
     class BatchCreateVehicleOutput < Struct.new(
+      nil,
       :vehicles,
       :errors,
       keyword_init: true
@@ -185,6 +192,7 @@ module Aws::IoTFleetWise
     #                    API data type.</p>
     #   @return [Array<Types::UpdateVehicleRequestItem>]
     class BatchUpdateVehicleInput < Struct.new(
+      nil,
       :vehicles,
       keyword_init: true
     )
@@ -202,6 +210,7 @@ module Aws::IoTFleetWise
     #               there aren't any errors, an empty list.</p>
     #   @return [Array<Types::UpdateVehicleError>]
     class BatchUpdateVehicleOutput < Struct.new(
+      nil,
       :vehicles,
       :errors,
       keyword_init: true
@@ -224,6 +233,7 @@ module Aws::IoTFleetWise
     #   <p>A comment in addition to the description.</p>
     #   @return [String]
     class Branch < Struct.new(
+      nil,
       :fully_qualified_name,
       :description,
       :deprecation_message,
@@ -284,6 +294,7 @@ module Aws::IoTFleetWise
     #   <p>The last time the campaign was modified.</p>
     #   @return [Time]
     class CampaignSummary < Struct.new(
+      nil,
       :arn,
       :name,
       :description,
@@ -310,6 +321,7 @@ module Aws::IoTFleetWise
     #   <p>Pairs every signal specified in your vehicle model with a signal decoder.</p>
     #   @return [Hash<String, String>]
     class CanDbcDefinition < Struct.new(
+      nil,
       :network_interface,
       :can_dbc_files,
       :signals_map,
@@ -329,6 +341,7 @@ module Aws::IoTFleetWise
     #   <p>The version of the communication protocol for the interface.</p>
     #   @return [String]
     class CanInterface < Struct.new(
+      nil,
       :name,
       :protocol_name,
       :protocol_version,
@@ -373,6 +386,7 @@ module Aws::IoTFleetWise
     #   <p>The value type of the signal. The default value is <code>INTEGER</code>.</p>
     #   @return [String]
     class CanSignal < Struct.new(
+      nil,
       :message_id,
       :is_big_endian,
       :is_signed,
@@ -404,6 +418,7 @@ module Aws::IoTFleetWise
     #   <p>The Amazon CloudWatch Logs group the operation sends data to.</p>
     #   @return [String]
     class CloudWatchLogDeliveryOptions < Struct.new(
+      nil,
       :log_type,
       :log_group_name,
       keyword_init: true
@@ -456,6 +471,7 @@ module Aws::IoTFleetWise
     #   <p>Specifies the version of the conditional expression language.</p>
     #   @return [Integer]
     class ConditionBasedCollectionScheme < Struct.new(
+      nil,
       :expression,
       :minimum_trigger_interval_ms,
       :trigger_mode,
@@ -473,6 +489,7 @@ module Aws::IoTFleetWise
     #   <p>Indicates the mode in which the signal fetch is triggered.</p>
     #   @return [String]
     class ConditionBasedSignalFetchConfig < Struct.new(
+      nil,
       :condition_expression,
       :trigger_mode,
       keyword_init: true
@@ -491,6 +508,7 @@ module Aws::IoTFleetWise
     #   <p>The type of resource on which there are conflicting operations..</p>
     #   @return [String]
     class ConflictException < Struct.new(
+      nil,
       :message,
       :resource,
       :resource_type,
@@ -601,6 +619,7 @@ module Aws::IoTFleetWise
     #   <p>A list of information about signals to fetch.</p>
     #   @return [Array<Types::SignalFetchInformation>]
     class CreateCampaignInput < Struct.new(
+      nil,
       :name,
       :description,
       :signal_catalog_arn,
@@ -631,6 +650,7 @@ module Aws::IoTFleetWise
     #   <p> The ARN of the created campaign. </p>
     #   @return [String]
     class CreateCampaignOutput < Struct.new(
+      nil,
       :name,
       :arn,
       keyword_init: true
@@ -663,6 +683,7 @@ module Aws::IoTFleetWise
     #   <p>Metadata that can be used to manage the decoder manifest.</p>
     #   @return [Array<Types::Tag>]
     class CreateDecoderManifestInput < Struct.new(
+      nil,
       :name,
       :description,
       :model_manifest_arn,
@@ -682,6 +703,7 @@ module Aws::IoTFleetWise
     #   <p> The ARN of the created decoder manifest. </p>
     #   @return [String]
     class CreateDecoderManifestOutput < Struct.new(
+      nil,
       :name,
       :arn,
       keyword_init: true
@@ -702,6 +724,7 @@ module Aws::IoTFleetWise
     #   <p>Metadata that can be used to manage the fleet.</p>
     #   @return [Array<Types::Tag>]
     class CreateFleetInput < Struct.new(
+      nil,
       :fleet_id,
       :description,
       :signal_catalog_arn,
@@ -718,6 +741,7 @@ module Aws::IoTFleetWise
     #   <p> The ARN of the created fleet. </p>
     #   @return [String]
     class CreateFleetOutput < Struct.new(
+      nil,
       :id,
       :arn,
       keyword_init: true
@@ -741,6 +765,7 @@ module Aws::IoTFleetWise
     #   <p>Metadata that can be used to manage the vehicle model.</p>
     #   @return [Array<Types::Tag>]
     class CreateModelManifestInput < Struct.new(
+      nil,
       :name,
       :description,
       :nodes,
@@ -758,6 +783,7 @@ module Aws::IoTFleetWise
     #   <p> The ARN of the created vehicle model.</p>
     #   @return [String]
     class CreateModelManifestOutput < Struct.new(
+      nil,
       :name,
       :arn,
       keyword_init: true
@@ -779,6 +805,7 @@ module Aws::IoTFleetWise
     #   <p>Metadata that can be used to manage the signal catalog.</p>
     #   @return [Array<Types::Tag>]
     class CreateSignalCatalogInput < Struct.new(
+      nil,
       :name,
       :description,
       :nodes,
@@ -795,6 +822,7 @@ module Aws::IoTFleetWise
     #   <p> The ARN of the created signal catalog. </p>
     #   @return [String]
     class CreateSignalCatalogOutput < Struct.new(
+      nil,
       :name,
       :arn,
       keyword_init: true
@@ -834,6 +862,7 @@ module Aws::IoTFleetWise
     #   <p>Metadata that can be used to manage the state template.</p>
     #   @return [Array<Types::Tag>]
     class CreateStateTemplateRequest < Struct.new(
+      nil,
       :name,
       :description,
       :signal_catalog_arn,
@@ -856,6 +885,7 @@ module Aws::IoTFleetWise
     #   <p>The unique ID of the state template.</p>
     #   @return [String]
     class CreateStateTemplateResponse < Struct.new(
+      nil,
       :name,
       :arn,
       :id,
@@ -875,6 +905,7 @@ module Aws::IoTFleetWise
     #   <p>A description of the HTTP error.</p>
     #   @return [String]
     class CreateVehicleError < Struct.new(
+      nil,
       :vehicle_name,
       :code,
       :message,
@@ -913,6 +944,7 @@ module Aws::IoTFleetWise
     #   <p>Associate state templates with the vehicle. You can monitor the last known state of the vehicle in near real time.</p>
     #   @return [Array<Types::StateTemplateAssociation>]
     class CreateVehicleInput < Struct.new(
+      nil,
       :vehicle_name,
       :model_manifest_arn,
       :decoder_manifest_arn,
@@ -935,6 +967,7 @@ module Aws::IoTFleetWise
     #   <p> The ARN of a created or validated Amazon Web Services IoT thing. </p>
     #   @return [String]
     class CreateVehicleOutput < Struct.new(
+      nil,
       :vehicle_name,
       :arn,
       :thing_arn,
@@ -970,6 +1003,7 @@ module Aws::IoTFleetWise
     #   <p>Associate state templates to track the state of the vehicle. State templates determine which signal updates the vehicle sends to the cloud.</p>
     #   @return [Array<Types::StateTemplateAssociation>]
     class CreateVehicleRequestItem < Struct.new(
+      nil,
       :vehicle_name,
       :model_manifest_arn,
       :decoder_manifest_arn,
@@ -993,6 +1027,7 @@ module Aws::IoTFleetWise
     #   <p>The ARN of a created or validated Amazon Web Services IoT thing.</p>
     #   @return [String]
     class CreateVehicleResponseItem < Struct.new(
+      nil,
       :vehicle_name,
       :arn,
       :thing_arn,
@@ -1009,6 +1044,7 @@ module Aws::IoTFleetWise
     #   <p>The name of the interface.</p>
     #   @return [String]
     class CustomDecodingInterface < Struct.new(
+      nil,
       :name,
       keyword_init: true
     )
@@ -1023,6 +1059,7 @@ module Aws::IoTFleetWise
     #   <p>The ID of the signal.</p>
     #   @return [String]
     class CustomDecodingSignal < Struct.new(
+      nil,
       :id,
       keyword_init: true
     )
@@ -1056,6 +1093,7 @@ module Aws::IoTFleetWise
     #               of the custom property is <code>Struct</code> or <code>StructArray</code>. </p>
     #   @return [String]
     class CustomProperty < Struct.new(
+      nil,
       :fully_qualified_name,
       :data_type,
       :data_encoding,
@@ -1084,6 +1122,7 @@ module Aws::IoTFleetWise
     #   <p>A comment in addition to the description.</p>
     #   @return [String]
     class CustomStruct < Struct.new(
+      nil,
       :fully_qualified_name,
       :description,
       :deprecation_message,
@@ -1139,6 +1178,7 @@ module Aws::IoTFleetWise
     #   <p>The upload options for the data partition.</p>
     #   @return [Types::DataPartitionUploadOptions]
     class DataPartition < Struct.new(
+      nil,
       :id,
       :storage_options,
       :upload_options,
@@ -1176,6 +1216,7 @@ module Aws::IoTFleetWise
     #            </ul>
     #   @return [Types::StorageMinimumTimeToLive]
     class DataPartitionStorageOptions < Struct.new(
+      nil,
       :maximum_size,
       :storage_location,
       :minimum_time_to_live,
@@ -1197,6 +1238,7 @@ module Aws::IoTFleetWise
     #               version.</p>
     #   @return [Integer]
     class DataPartitionUploadOptions < Struct.new(
+      nil,
       :expression,
       :condition_language_version,
       keyword_init: true
@@ -1239,6 +1281,7 @@ module Aws::IoTFleetWise
     #               information.</p>
     #   @return [String]
     class DecoderManifestSummary < Struct.new(
+      nil,
       :name,
       :arn,
       :model_manifest_arn,
@@ -1264,6 +1307,7 @@ module Aws::IoTFleetWise
     # @!attribute message
     #   @return [String]
     class DecoderManifestValidationException < Struct.new(
+      nil,
       :invalid_signals,
       :invalid_network_interfaces,
       :message,
@@ -1276,6 +1320,7 @@ module Aws::IoTFleetWise
     #   <p> The name of the campaign to delete. </p>
     #   @return [String]
     class DeleteCampaignInput < Struct.new(
+      nil,
       :name,
       keyword_init: true
     )
@@ -1292,6 +1337,7 @@ module Aws::IoTFleetWise
     #            </note>
     #   @return [String]
     class DeleteCampaignOutput < Struct.new(
+      nil,
       :name,
       :arn,
       keyword_init: true
@@ -1303,6 +1349,7 @@ module Aws::IoTFleetWise
     #   <p> The name of the decoder manifest to delete. </p>
     #   @return [String]
     class DeleteDecoderManifestInput < Struct.new(
+      nil,
       :name,
       keyword_init: true
     )
@@ -1316,6 +1363,7 @@ module Aws::IoTFleetWise
     #   <p>The Amazon Resource Name (ARN) of the deleted decoder manifest.</p>
     #   @return [String]
     class DeleteDecoderManifestOutput < Struct.new(
+      nil,
       :name,
       :arn,
       keyword_init: true
@@ -1327,6 +1375,7 @@ module Aws::IoTFleetWise
     #   <p> The ID of the fleet to delete. </p>
     #   @return [String]
     class DeleteFleetInput < Struct.new(
+      nil,
       :fleet_id,
       keyword_init: true
     )
@@ -1340,6 +1389,7 @@ module Aws::IoTFleetWise
     #   <p>The Amazon Resource Name (ARN) of the deleted fleet.</p>
     #   @return [String]
     class DeleteFleetOutput < Struct.new(
+      nil,
       :id,
       :arn,
       keyword_init: true
@@ -1351,6 +1401,7 @@ module Aws::IoTFleetWise
     #   <p> The name of the model manifest to delete. </p>
     #   @return [String]
     class DeleteModelManifestInput < Struct.new(
+      nil,
       :name,
       keyword_init: true
     )
@@ -1364,6 +1415,7 @@ module Aws::IoTFleetWise
     #   <p>The Amazon Resource Name (ARN) of the deleted model manifest.</p>
     #   @return [String]
     class DeleteModelManifestOutput < Struct.new(
+      nil,
       :name,
       :arn,
       keyword_init: true
@@ -1375,6 +1427,7 @@ module Aws::IoTFleetWise
     #   <p> The name of the signal catalog to delete. </p>
     #   @return [String]
     class DeleteSignalCatalogInput < Struct.new(
+      nil,
       :name,
       keyword_init: true
     )
@@ -1388,6 +1441,7 @@ module Aws::IoTFleetWise
     #   <p>The Amazon Resource Name (ARN) of the deleted signal catalog.</p>
     #   @return [String]
     class DeleteSignalCatalogOutput < Struct.new(
+      nil,
       :name,
       :arn,
       keyword_init: true
@@ -1399,6 +1453,7 @@ module Aws::IoTFleetWise
     #   <p>The unique ID of the state template.</p>
     #   @return [String]
     class DeleteStateTemplateRequest < Struct.new(
+      nil,
       :identifier,
       keyword_init: true
     )
@@ -1415,6 +1470,7 @@ module Aws::IoTFleetWise
     #   <p>The unique ID of the state template.</p>
     #   @return [String]
     class DeleteStateTemplateResponse < Struct.new(
+      nil,
       :name,
       :arn,
       :id,
@@ -1427,6 +1483,7 @@ module Aws::IoTFleetWise
     #   <p>The ID of the vehicle to delete. </p>
     #   @return [String]
     class DeleteVehicleInput < Struct.new(
+      nil,
       :vehicle_name,
       keyword_init: true
     )
@@ -1440,6 +1497,7 @@ module Aws::IoTFleetWise
     #   <p>The Amazon Resource Name (ARN) of the deleted vehicle.</p>
     #   @return [String]
     class DeleteVehicleOutput < Struct.new(
+      nil,
       :vehicle_name,
       :arn,
       keyword_init: true
@@ -1454,6 +1512,7 @@ module Aws::IoTFleetWise
     #   <p> The unique ID of a fleet. </p>
     #   @return [String]
     class DisassociateVehicleFleetInput < Struct.new(
+      nil,
       :vehicle_name,
       :fleet_id,
       keyword_init: true
@@ -1462,6 +1521,7 @@ module Aws::IoTFleetWise
     end
 
     class DisassociateVehicleFleetOutput < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1491,6 +1551,7 @@ module Aws::IoTFleetWise
     #               midnight UTC time).</p>
     #   @return [Time]
     class FleetSummary < Struct.new(
+      nil,
       :id,
       :arn,
       :description,
@@ -1524,6 +1585,7 @@ module Aws::IoTFleetWise
     #   <p> The name of the campaign to retrieve information about. </p>
     #   @return [String]
     class GetCampaignInput < Struct.new(
+      nil,
       :name,
       keyword_init: true
     )
@@ -1612,6 +1674,7 @@ module Aws::IoTFleetWise
     #   <p>Information about a list of signals to fetch data from.</p>
     #   @return [Array<Types::SignalFetchInformation>]
     class GetCampaignOutput < Struct.new(
+      nil,
       :name,
       :arn,
       :description,
@@ -1642,6 +1705,7 @@ module Aws::IoTFleetWise
     #   <p> The name of the decoder manifest to retrieve information about. </p>
     #   @return [String]
     class GetDecoderManifestInput < Struct.new(
+      nil,
       :name,
       keyword_init: true
     )
@@ -1678,6 +1742,7 @@ module Aws::IoTFleetWise
     #               information.</p>
     #   @return [String]
     class GetDecoderManifestOutput < Struct.new(
+      nil,
       :name,
       :arn,
       :description,
@@ -1692,6 +1757,7 @@ module Aws::IoTFleetWise
     end
 
     class GetEncryptionConfigurationRequest < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1721,6 +1787,7 @@ module Aws::IoTFleetWise
     #               midnight UTC time).</p>
     #   @return [Time]
     class GetEncryptionConfigurationResponse < Struct.new(
+      nil,
       :kms_key_id,
       :encryption_status,
       :encryption_type,
@@ -1736,6 +1803,7 @@ module Aws::IoTFleetWise
     #   <p> The ID of the fleet to retrieve information about. </p>
     #   @return [String]
     class GetFleetInput < Struct.new(
+      nil,
       :fleet_id,
       keyword_init: true
     )
@@ -1763,6 +1831,7 @@ module Aws::IoTFleetWise
     #               midnight UTC time). </p>
     #   @return [Time]
     class GetFleetOutput < Struct.new(
+      nil,
       :id,
       :arn,
       :description,
@@ -1775,6 +1844,7 @@ module Aws::IoTFleetWise
     end
 
     class GetLoggingOptionsInput < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1784,6 +1854,7 @@ module Aws::IoTFleetWise
     #   <p>Returns information about log delivery to Amazon CloudWatch Logs.</p>
     #   @return [Types::CloudWatchLogDeliveryOptions]
     class GetLoggingOptionsOutput < Struct.new(
+      nil,
       :cloud_watch_log_delivery,
       keyword_init: true
     )
@@ -1794,6 +1865,7 @@ module Aws::IoTFleetWise
     #   <p> The name of the vehicle model to retrieve information about. </p>
     #   @return [String]
     class GetModelManifestInput < Struct.new(
+      nil,
       :name,
       keyword_init: true
     )
@@ -1825,6 +1897,7 @@ module Aws::IoTFleetWise
     #   <p>The last time the vehicle model was modified.</p>
     #   @return [Time]
     class GetModelManifestOutput < Struct.new(
+      nil,
       :name,
       :arn,
       :description,
@@ -1838,6 +1911,7 @@ module Aws::IoTFleetWise
     end
 
     class GetRegisterAccountStatusInput < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1882,6 +1956,7 @@ module Aws::IoTFleetWise
     #               at midnight UTC time). </p>
     #   @return [Time]
     class GetRegisterAccountStatusOutput < Struct.new(
+      nil,
       :customer_account_id,
       :account_status,
       :timestream_registration_response,
@@ -1897,6 +1972,7 @@ module Aws::IoTFleetWise
     #   <p> The name of the signal catalog to retrieve information about. </p>
     #   @return [String]
     class GetSignalCatalogInput < Struct.new(
+      nil,
       :name,
       keyword_init: true
     )
@@ -1922,6 +1998,7 @@ module Aws::IoTFleetWise
     #   <p>The last time the signal catalog was modified.</p>
     #   @return [Time]
     class GetSignalCatalogOutput < Struct.new(
+      nil,
       :name,
       :arn,
       :description,
@@ -1937,6 +2014,7 @@ module Aws::IoTFleetWise
     #   <p>The unique ID of the state template.</p>
     #   @return [String]
     class GetStateTemplateRequest < Struct.new(
+      nil,
       :identifier,
       keyword_init: true
     )
@@ -1978,6 +2056,7 @@ module Aws::IoTFleetWise
     #   <p>The unique ID of the state template.</p>
     #   @return [String]
     class GetStateTemplateResponse < Struct.new(
+      nil,
       :name,
       :arn,
       :description,
@@ -1997,6 +2076,7 @@ module Aws::IoTFleetWise
     #   <p> The ID of the vehicle to retrieve information about. </p>
     #   @return [String]
     class GetVehicleInput < Struct.new(
+      nil,
       :vehicle_name,
       keyword_init: true
     )
@@ -2031,6 +2111,7 @@ module Aws::IoTFleetWise
     #   <p> The time the vehicle was last updated in seconds since epoch (January 1, 1970 at midnight UTC time).  </p>
     #   @return [Time]
     class GetVehicleOutput < Struct.new(
+      nil,
       :vehicle_name,
       :arn,
       :model_manifest_arn,
@@ -2060,6 +2141,7 @@ module Aws::IoTFleetWise
     #   <p> The ID of the vehicle to retrieve information about. </p>
     #   @return [String]
     class GetVehicleStatusInput < Struct.new(
+      nil,
       :next_token,
       :max_results,
       :vehicle_name,
@@ -2075,6 +2157,7 @@ module Aws::IoTFleetWise
     #   <p> The token to retrieve the next set of results, or <code>null</code> if there are no more results. </p>
     #   @return [String]
     class GetVehicleStatusOutput < Struct.new(
+      nil,
       :campaigns,
       :next_token,
       keyword_init: true
@@ -2096,6 +2179,7 @@ module Aws::IoTFleetWise
     #   <p>A message associated with a registration error.</p>
     #   @return [String]
     class IamRegistrationResponse < Struct.new(
+      nil,
       :role_arn,
       :registration_status,
       :error_message,
@@ -2114,6 +2198,7 @@ module Aws::IoTFleetWise
     #           </p>
     #   @return [String]
     class IamResources < Struct.new(
+      nil,
       :role_arn,
       keyword_init: true
     )
@@ -2127,6 +2212,7 @@ module Aws::IoTFleetWise
     #   <p> The file to load into an Amazon Web Services account. </p>
     #   @return [Array<Types::NetworkFileDefinition>]
     class ImportDecoderManifestInput < Struct.new(
+      nil,
       :name,
       :network_file_definitions,
       keyword_init: true
@@ -2141,6 +2227,7 @@ module Aws::IoTFleetWise
     #   <p> The Amazon Resource Name (ARN) of the decoder manifest that was imported. </p>
     #   @return [String]
     class ImportDecoderManifestOutput < Struct.new(
+      nil,
       :name,
       :arn,
       keyword_init: true
@@ -2162,6 +2249,7 @@ module Aws::IoTFleetWise
     #   <p>Metadata that can be used to manage the signal catalog.</p>
     #   @return [Array<Types::Tag>]
     class ImportSignalCatalogInput < Struct.new(
+      nil,
       :name,
       :description,
       :vss,
@@ -2178,6 +2266,7 @@ module Aws::IoTFleetWise
     #   <p> The Amazon Resource Name (ARN) of the imported signal catalog.</p>
     #   @return [String]
     class ImportSignalCatalogOutput < Struct.new(
+      nil,
       :name,
       :arn,
       keyword_init: true
@@ -2192,6 +2281,7 @@ module Aws::IoTFleetWise
     #   <p>The number of seconds to wait before retrying the command.</p>
     #   @return [Integer]
     class InternalServerException < Struct.new(
+      nil,
       :message,
       :retry_after_seconds,
       keyword_init: true
@@ -2212,6 +2302,7 @@ module Aws::IoTFleetWise
     #   <p>A message about why the interface isn't valid. </p>
     #   @return [String]
     class InvalidNetworkInterface < Struct.new(
+      nil,
       :interface_id,
       :reason,
       keyword_init: true
@@ -2230,6 +2321,7 @@ module Aws::IoTFleetWise
     # @!attribute message
     #   @return [String]
     class InvalidNodeException < Struct.new(
+      nil,
       :invalid_nodes,
       :reason,
       :message,
@@ -2246,6 +2338,7 @@ module Aws::IoTFleetWise
     #   <p>A message about why the signal isn't valid.</p>
     #   @return [String]
     class InvalidSignal < Struct.new(
+      nil,
       :name,
       :reason,
       keyword_init: true
@@ -2264,6 +2357,7 @@ module Aws::IoTFleetWise
     #   <p>The possible cause for the invalid signal decoder.</p>
     #   @return [String]
     class InvalidSignalDecoder < Struct.new(
+      nil,
       :name,
       :reason,
       :hint,
@@ -2280,6 +2374,7 @@ module Aws::IoTFleetWise
     #   <p>The signals which caused the exception.</p>
     #   @return [Array<Types::InvalidSignal>]
     class InvalidSignalsException < Struct.new(
+      nil,
       :message,
       :invalid_signals,
       keyword_init: true
@@ -2297,6 +2392,7 @@ module Aws::IoTFleetWise
     #   <p>The type of resource that was exceeded.</p>
     #   @return [String]
     class LimitExceededException < Struct.new(
+      nil,
       :message,
       :resource_id,
       :resource_type,
@@ -2322,6 +2418,7 @@ module Aws::IoTFleetWise
     #   <p>When you set the <code>listResponseScope</code> parameter to <code>METADATA_ONLY</code>, the list response includes: campaign name, Amazon Resource Name (ARN), creation time, and last modification time.</p>
     #   @return [String]
     class ListCampaignsInput < Struct.new(
+      nil,
       :next_token,
       :max_results,
       :status,
@@ -2338,6 +2435,7 @@ module Aws::IoTFleetWise
     #   <p> The token to retrieve the next set of results, or <code>null</code> if there are no more results. </p>
     #   @return [String]
     class ListCampaignsOutput < Struct.new(
+      nil,
       :campaign_summaries,
       :next_token,
       keyword_init: true
@@ -2356,6 +2454,7 @@ module Aws::IoTFleetWise
     #   <p>The maximum number of items to return, between 1 and 100, inclusive.</p>
     #   @return [Integer]
     class ListDecoderManifestNetworkInterfacesInput < Struct.new(
+      nil,
       :name,
       :next_token,
       :max_results,
@@ -2371,6 +2470,7 @@ module Aws::IoTFleetWise
     #   <p> The token to retrieve the next set of results, or <code>null</code> if there are no more results. </p>
     #   @return [String]
     class ListDecoderManifestNetworkInterfacesOutput < Struct.new(
+      nil,
       :network_interfaces,
       :next_token,
       keyword_init: true
@@ -2389,6 +2489,7 @@ module Aws::IoTFleetWise
     #   <p>The maximum number of items to return, between 1 and 100, inclusive.</p>
     #   @return [Integer]
     class ListDecoderManifestSignalsInput < Struct.new(
+      nil,
       :name,
       :next_token,
       :max_results,
@@ -2404,6 +2505,7 @@ module Aws::IoTFleetWise
     #   <p> The token to retrieve the next set of results, or <code>null</code> if there are no more results. </p>
     #   @return [String]
     class ListDecoderManifestSignalsOutput < Struct.new(
+      nil,
       :signal_decoders,
       :next_token,
       keyword_init: true
@@ -2426,6 +2528,7 @@ module Aws::IoTFleetWise
     #   <p>When you set the <code>listResponseScope</code> parameter to <code>METADATA_ONLY</code>, the list response includes: decoder manifest name, Amazon Resource Name (ARN), creation time, and last modification time.</p>
     #   @return [String]
     class ListDecoderManifestsInput < Struct.new(
+      nil,
       :model_manifest_arn,
       :next_token,
       :max_results,
@@ -2442,6 +2545,7 @@ module Aws::IoTFleetWise
     #   <p> The token to retrieve the next set of results, or <code>null</code> if there are no more results. </p>
     #   @return [String]
     class ListDecoderManifestsOutput < Struct.new(
+      nil,
       :summaries,
       :next_token,
       keyword_init: true
@@ -2460,6 +2564,7 @@ module Aws::IoTFleetWise
     #   <p>The maximum number of items to return, between 1 and 100, inclusive.</p>
     #   @return [Integer]
     class ListFleetsForVehicleInput < Struct.new(
+      nil,
       :vehicle_name,
       :next_token,
       :max_results,
@@ -2475,6 +2580,7 @@ module Aws::IoTFleetWise
     #   <p> The token to retrieve the next set of results, or <code>null</code> if there are no more results. </p>
     #   @return [String]
     class ListFleetsForVehicleOutput < Struct.new(
+      nil,
       :fleets,
       :next_token,
       keyword_init: true
@@ -2493,6 +2599,7 @@ module Aws::IoTFleetWise
     #   <p>When you set the <code>listResponseScope</code> parameter to <code>METADATA_ONLY</code>, the list response includes: fleet ID, Amazon Resource Name (ARN), creation time, and last modification time.</p>
     #   @return [String]
     class ListFleetsInput < Struct.new(
+      nil,
       :next_token,
       :max_results,
       :list_response_scope,
@@ -2508,6 +2615,7 @@ module Aws::IoTFleetWise
     #   <p> The token to retrieve the next set of results, or <code>null</code> if there are no more results. </p>
     #   @return [String]
     class ListFleetsOutput < Struct.new(
+      nil,
       :fleet_summaries,
       :next_token,
       keyword_init: true
@@ -2526,6 +2634,7 @@ module Aws::IoTFleetWise
     #   <p>The maximum number of items to return, between 1 and 100, inclusive.</p>
     #   @return [Integer]
     class ListModelManifestNodesInput < Struct.new(
+      nil,
       :name,
       :next_token,
       :max_results,
@@ -2541,6 +2650,7 @@ module Aws::IoTFleetWise
     #   <p> The token to retrieve the next set of results, or <code>null</code> if there are no more results. </p>
     #   @return [String]
     class ListModelManifestNodesOutput < Struct.new(
+      nil,
       :nodes,
       :next_token,
       keyword_init: true
@@ -2563,6 +2673,7 @@ module Aws::IoTFleetWise
     #   <p>When you set the <code>listResponseScope</code> parameter to <code>METADATA_ONLY</code>, the list response includes: model manifest name, Amazon Resource Name (ARN), creation time, and last modification time.</p>
     #   @return [String]
     class ListModelManifestsInput < Struct.new(
+      nil,
       :signal_catalog_arn,
       :next_token,
       :max_results,
@@ -2579,6 +2690,7 @@ module Aws::IoTFleetWise
     #   <p> The token to retrieve the next set of results, or <code>null</code> if there are no more results. </p>
     #   @return [String]
     class ListModelManifestsOutput < Struct.new(
+      nil,
       :summaries,
       :next_token,
       keyword_init: true
@@ -2600,6 +2712,7 @@ module Aws::IoTFleetWise
     #   <p>The type of node in the signal catalog.</p>
     #   @return [String]
     class ListSignalCatalogNodesInput < Struct.new(
+      nil,
       :name,
       :next_token,
       :max_results,
@@ -2616,6 +2729,7 @@ module Aws::IoTFleetWise
     #   <p> The token to retrieve the next set of results, or <code>null</code> if there are no more results. </p>
     #   @return [String]
     class ListSignalCatalogNodesOutput < Struct.new(
+      nil,
       :nodes,
       :next_token,
       keyword_init: true
@@ -2631,6 +2745,7 @@ module Aws::IoTFleetWise
     #   <p>The maximum number of items to return, between 1 and 100, inclusive.</p>
     #   @return [Integer]
     class ListSignalCatalogsInput < Struct.new(
+      nil,
       :next_token,
       :max_results,
       keyword_init: true
@@ -2645,6 +2760,7 @@ module Aws::IoTFleetWise
     #   <p> The token to retrieve the next set of results, or <code>null</code> if there are no more results. </p>
     #   @return [String]
     class ListSignalCatalogsOutput < Struct.new(
+      nil,
       :summaries,
       :next_token,
       keyword_init: true
@@ -2662,6 +2778,7 @@ module Aws::IoTFleetWise
     #   <p>When you set the <code>listResponseScope</code> parameter to <code>METADATA_ONLY</code>, the list response includes: state template ID, Amazon Resource Name (ARN), creation time, and last modification time.</p>
     #   @return [String]
     class ListStateTemplatesRequest < Struct.new(
+      nil,
       :next_token,
       :max_results,
       :list_response_scope,
@@ -2677,6 +2794,7 @@ module Aws::IoTFleetWise
     #   <p> The token to retrieve the next set of results, or <code>null</code> if there are no more results. </p>
     #   @return [String]
     class ListStateTemplatesResponse < Struct.new(
+      nil,
       :summaries,
       :next_token,
       keyword_init: true
@@ -2688,6 +2806,7 @@ module Aws::IoTFleetWise
     #   <p>The ARN of the resource.</p>
     #   @return [String]
     class ListTagsForResourceInput < Struct.new(
+      nil,
       :resource_arn,
       keyword_init: true
     )
@@ -2698,6 +2817,7 @@ module Aws::IoTFleetWise
     #   <p>The list of tags assigned to the resource.</p>
     #   @return [Array<Types::Tag>]
     class ListTagsForResourceOutput < Struct.new(
+      nil,
       :tags,
       keyword_init: true
     )
@@ -2715,6 +2835,7 @@ module Aws::IoTFleetWise
     #   <p>The maximum number of items to return, between 1 and 100, inclusive.</p>
     #   @return [Integer]
     class ListVehiclesInFleetInput < Struct.new(
+      nil,
       :fleet_id,
       :next_token,
       :max_results,
@@ -2730,6 +2851,7 @@ module Aws::IoTFleetWise
     #   <p> The token to retrieve the next set of results, or <code>null</code> if there are no more results. </p>
     #   @return [String]
     class ListVehiclesInFleetOutput < Struct.new(
+      nil,
       :vehicles,
       :next_token,
       keyword_init: true
@@ -2775,6 +2897,7 @@ module Aws::IoTFleetWise
     #   <p>When you set the <code>listResponseScope</code> parameter to <code>METADATA_ONLY</code>, the list response includes: vehicle name, Amazon Resource Name (ARN), creation time, and last modification time.</p>
     #   @return [String]
     class ListVehiclesInput < Struct.new(
+      nil,
       :model_manifest_arn,
       :attribute_names,
       :attribute_values,
@@ -2793,6 +2916,7 @@ module Aws::IoTFleetWise
     #   <p> The token to retrieve the next set of results, or <code>null</code> if there are no more results. </p>
     #   @return [String]
     class ListVehiclesOutput < Struct.new(
+      nil,
       :vehicle_summaries,
       :next_token,
       keyword_init: true
@@ -2812,6 +2936,7 @@ module Aws::IoTFleetWise
     #                   <code>structuredMessageDefinition</code> recursively.</p>
     #   @return [Types::StructuredMessage]
     class MessageSignal < Struct.new(
+      nil,
       :topic_name,
       :structured_message,
       keyword_init: true
@@ -2847,6 +2972,7 @@ module Aws::IoTFleetWise
     #               at midnight UTC time).</p>
     #   @return [Time]
     class ModelManifestSummary < Struct.new(
+      nil,
       :name,
       :arn,
       :signal_catalog_arn,
@@ -2872,6 +2998,7 @@ module Aws::IoTFleetWise
     #             the MQTT topic.</p>
     #   @return [String]
     class MqttTopicConfig < Struct.new(
+      nil,
       :mqtt_topic_arn,
       :execution_role_arn,
       keyword_init: true
@@ -2926,6 +3053,7 @@ module Aws::IoTFleetWise
     #             interface</a>.</p>
     #   @return [Types::CustomDecodingInterface]
     class NetworkInterface < Struct.new(
+      nil,
       :interface_id,
       :type,
       :can_interface,
@@ -3015,6 +3143,7 @@ module Aws::IoTFleetWise
     #   <p>The total properties for the node.</p>
     #   @return [Integer]
     class NodeCounts < Struct.new(
+      nil,
       :total_nodes,
       :total_branches,
       :total_sensors,
@@ -3062,6 +3191,7 @@ module Aws::IoTFleetWise
     #   <p>Whether the vehicle has a transmission control module (TCM).</p>
     #   @return [Boolean]
     class ObdInterface < Struct.new(
+      nil,
       :name,
       :request_message_id,
       :obd_standard,
@@ -3120,6 +3250,7 @@ module Aws::IoTFleetWise
     #   <p>The value type of the signal. The default value is <code>INTEGER</code>.</p>
     #   @return [String]
     class ObdSignal < Struct.new(
+      nil,
       :pid_response_length,
       :service_mode,
       :pid,
@@ -3147,6 +3278,7 @@ module Aws::IoTFleetWise
 
     # <p>Vehicles associated with the state template will stream telemetry data when there is a change.</p>
     class OnChangeStateTemplateUpdateStrategy < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -3157,6 +3289,7 @@ module Aws::IoTFleetWise
     #   <p>The length of time between state template updates.</p>
     #   @return [Types::TimePeriod]
     class PeriodicStateTemplateUpdateStrategy < Struct.new(
+      nil,
       :state_template_update_rate,
       keyword_init: true
     )
@@ -3187,6 +3320,7 @@ module Aws::IoTFleetWise
     #                   <code>FLEETWISE_DEFAULT_ENCRYPTION</code> to use an Amazon Web Services managed key.</p>
     #   @return [String]
     class PutEncryptionConfigurationRequest < Struct.new(
+      nil,
       :kms_key_id,
       :encryption_type,
       keyword_init: true
@@ -3206,6 +3340,7 @@ module Aws::IoTFleetWise
     #               key that is owned by the Amazon Web Services IoT FleetWise service account.</p>
     #   @return [String]
     class PutEncryptionConfigurationResponse < Struct.new(
+      nil,
       :kms_key_id,
       :encryption_status,
       :encryption_type,
@@ -3218,6 +3353,7 @@ module Aws::IoTFleetWise
     #   <p>Creates or updates the log delivery option to Amazon CloudWatch Logs.</p>
     #   @return [Types::CloudWatchLogDeliveryOptions]
     class PutLoggingOptionsInput < Struct.new(
+      nil,
       :cloud_watch_log_delivery,
       keyword_init: true
     )
@@ -3225,6 +3361,7 @@ module Aws::IoTFleetWise
     end
 
     class PutLoggingOptionsOutput < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -3248,6 +3385,7 @@ module Aws::IoTFleetWise
     #                   <code>WSTRING</code>.</p>
     #   @return [Integer]
     class ROS2PrimitiveMessageDefinition < Struct.new(
+      nil,
       :primitive_type,
       :offset,
       :scaling,
@@ -3269,6 +3407,7 @@ module Aws::IoTFleetWise
     #     iamResources is no longer used or needed as input
     #   @return [Types::IamResources]
     class RegisterAccountInput < Struct.new(
+      nil,
       :timestream_resources,
       :iam_resources,
       keyword_init: true
@@ -3296,6 +3435,7 @@ module Aws::IoTFleetWise
     #               at midnight UTC time). </p>
     #   @return [Time]
     class RegisterAccountOutput < Struct.new(
+      nil,
       :register_account_status,
       :timestream_resources,
       :iam_resources,
@@ -3316,6 +3456,7 @@ module Aws::IoTFleetWise
     #   <p>The type of resource that wasn't found.</p>
     #   @return [String]
     class ResourceNotFoundException < Struct.new(
+      nil,
       :message,
       :resource_id,
       :resource_type,
@@ -3360,6 +3501,7 @@ module Aws::IoTFleetWise
     #                   <code>vehicles/processed-data/year=YY/month=MM/date=DD/hour=HH/</code>.</p>
     #   @return [String]
     class S3Config < Struct.new(
+      nil,
       :bucket_arn,
       :data_format,
       :storage_compression_format,
@@ -3408,6 +3550,7 @@ module Aws::IoTFleetWise
     #               fully qualified name of a sensor might be <code>Vehicle.ADAS.CameraStruct</code>.</p>
     #   @return [String]
     class Sensor < Struct.new(
+      nil,
       :fully_qualified_name,
       :data_type,
       :description,
@@ -3438,6 +3581,7 @@ module Aws::IoTFleetWise
     #   <p>The time the signal catalog was last updated in seconds since epoch (January 1, 1970 at midnight UTC time). </p>
     #   @return [Time]
     class SignalCatalogSummary < Struct.new(
+      nil,
       :name,
       :arn,
       :creation_time,
@@ -3481,6 +3625,7 @@ module Aws::IoTFleetWise
     #            </important>
     #   @return [Types::CustomDecodingSignal]
     class SignalDecoder < Struct.new(
+      nil,
       :fully_qualified_name,
       :type,
       :interface_id,
@@ -3533,6 +3678,7 @@ module Aws::IoTFleetWise
     #   <p>The actions to be performed by the signal fetch.</p>
     #   @return [Array<String>]
     class SignalFetchInformation < Struct.new(
+      nil,
       :fully_qualified_name,
       :signal_fetch_config,
       :condition_language_version,
@@ -3571,6 +3717,7 @@ module Aws::IoTFleetWise
     #            </important>
     #   @return [String]
     class SignalInformation < Struct.new(
+      nil,
       :name,
       :max_sample_count,
       :minimum_sampling_interval_ms,
@@ -3594,6 +3741,7 @@ module Aws::IoTFleetWise
     #            </important>
     #   @return [Types::StateTemplateUpdateStrategy]
     class StateTemplateAssociation < Struct.new(
+      nil,
       :identifier,
       :state_template_update_strategy,
       keyword_init: true
@@ -3627,6 +3775,7 @@ module Aws::IoTFleetWise
     #   <p>The unique ID of the state template.</p>
     #   @return [String]
     class StateTemplateSummary < Struct.new(
+      nil,
       :name,
       :arn,
       :signal_catalog_arn,
@@ -3673,6 +3822,7 @@ module Aws::IoTFleetWise
     #   <p>The maximum amount of time to store data.</p>
     #   @return [Integer]
     class StorageMaximumSize < Struct.new(
+      nil,
       :unit,
       :value,
       keyword_init: true
@@ -3691,6 +3841,7 @@ module Aws::IoTFleetWise
     #   <p>The minimum amount of time to store the data.</p>
     #   @return [Integer]
     class StorageMinimumTimeToLive < Struct.new(
+      nil,
       :unit,
       :value,
       keyword_init: true
@@ -3736,6 +3887,7 @@ module Aws::IoTFleetWise
     #   <p>The data type. </p>
     #   @return [Types::StructuredMessage]
     class StructuredMessageFieldNameAndDataTypePair < Struct.new(
+      nil,
       :field_name,
       :data_type,
       keyword_init: true
@@ -3758,6 +3910,7 @@ module Aws::IoTFleetWise
     #                   <code>FIXED_CAPACITY</code> or <code>DYNAMIC_BOUNDED_CAPACITY</code>.</p>
     #   @return [Integer]
     class StructuredMessageListDefinition < Struct.new(
+      nil,
       :name,
       :member_type,
       :list_type,
@@ -3780,6 +3933,7 @@ module Aws::IoTFleetWise
     #   <p>The tag's value.</p>
     #   @return [String]
     class Tag < Struct.new(
+      nil,
       :key,
       :value,
       keyword_init: true
@@ -3794,6 +3948,7 @@ module Aws::IoTFleetWise
     #   <p>The new or modified tags for the resource.</p>
     #   @return [Array<Types::Tag>]
     class TagResourceInput < Struct.new(
+      nil,
       :resource_arn,
       :tags,
       keyword_init: true
@@ -3802,6 +3957,7 @@ module Aws::IoTFleetWise
     end
 
     class TagResourceOutput < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -3820,6 +3976,7 @@ module Aws::IoTFleetWise
     #   <p>The number of seconds to wait before retrying the command.</p>
     #   @return [Integer]
     class ThrottlingException < Struct.new(
+      nil,
       :message,
       :quota_code,
       :service_code,
@@ -3842,6 +3999,7 @@ module Aws::IoTFleetWise
     #               minute.</p>
     #   @return [Integer]
     class TimeBasedCollectionScheme < Struct.new(
+      nil,
       :period_ms,
       keyword_init: true
     )
@@ -3853,6 +4011,7 @@ module Aws::IoTFleetWise
     #   <p>The frequency with which the signal fetch will be executed.</p>
     #   @return [Integer]
     class TimeBasedSignalFetchConfig < Struct.new(
+      nil,
       :execution_frequency_ms,
       keyword_init: true
     )
@@ -3867,6 +4026,7 @@ module Aws::IoTFleetWise
     #   <p>A number of time units.</p>
     #   @return [Integer]
     class TimePeriod < Struct.new(
+      nil,
       :unit,
       :value,
       keyword_init: true
@@ -3886,6 +4046,7 @@ module Aws::IoTFleetWise
     #               deliver data to the Amazon Timestream table.</p>
     #   @return [String]
     class TimestreamConfig < Struct.new(
+      nil,
       :timestream_table_arn,
       :execution_role_arn,
       keyword_init: true
@@ -3915,6 +4076,7 @@ module Aws::IoTFleetWise
     #   <p>A message associated with a registration error.</p>
     #   @return [String]
     class TimestreamRegistrationResponse < Struct.new(
+      nil,
       :timestream_database_name,
       :timestream_table_name,
       :timestream_database_arn,
@@ -3935,6 +4097,7 @@ module Aws::IoTFleetWise
     #   <p>The name of the registered Amazon Timestream database table.</p>
     #   @return [String]
     class TimestreamResources < Struct.new(
+      nil,
       :timestream_database_name,
       :timestream_table_name,
       keyword_init: true
@@ -3949,6 +4112,7 @@ module Aws::IoTFleetWise
     #   <p>A list of the keys of the tags to be removed from the resource.</p>
     #   @return [Array<String>]
     class UntagResourceInput < Struct.new(
+      nil,
       :resource_arn,
       :tag_keys,
       keyword_init: true
@@ -3957,6 +4121,7 @@ module Aws::IoTFleetWise
     end
 
     class UntagResourceOutput < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -3999,6 +4164,7 @@ module Aws::IoTFleetWise
     #            </ul>
     #   @return [String]
     class UpdateCampaignInput < Struct.new(
+      nil,
       :name,
       :description,
       :data_extra_dimensions,
@@ -4039,6 +4205,7 @@ module Aws::IoTFleetWise
     #            </ul>
     #   @return [String]
     class UpdateCampaignOutput < Struct.new(
+      nil,
       :arn,
       :name,
       :status,
@@ -4087,6 +4254,7 @@ module Aws::IoTFleetWise
     #            </important>
     #   @return [String]
     class UpdateDecoderManifestInput < Struct.new(
+      nil,
       :name,
       :description,
       :signal_decoders_to_add,
@@ -4109,6 +4277,7 @@ module Aws::IoTFleetWise
     #   <p> The Amazon Resource Name (ARN) of the updated decoder manifest. </p>
     #   @return [String]
     class UpdateDecoderManifestOutput < Struct.new(
+      nil,
       :name,
       :arn,
       keyword_init: true
@@ -4123,6 +4292,7 @@ module Aws::IoTFleetWise
     #   <p> An updated description of the fleet. </p>
     #   @return [String]
     class UpdateFleetInput < Struct.new(
+      nil,
       :fleet_id,
       :description,
       keyword_init: true
@@ -4137,6 +4307,7 @@ module Aws::IoTFleetWise
     #   <p>The Amazon Resource Name (ARN) of the updated fleet.</p>
     #   @return [String]
     class UpdateFleetOutput < Struct.new(
+      nil,
       :id,
       :arn,
       keyword_init: true
@@ -4164,6 +4335,7 @@ module Aws::IoTFleetWise
     #               model. </p>
     #   @return [String]
     class UpdateModelManifestInput < Struct.new(
+      nil,
       :name,
       :description,
       :nodes_to_add,
@@ -4181,6 +4353,7 @@ module Aws::IoTFleetWise
     #   <p> The Amazon Resource Name (ARN) of the updated vehicle model. </p>
     #   @return [String]
     class UpdateModelManifestOutput < Struct.new(
+      nil,
       :name,
       :arn,
       keyword_init: true
@@ -4205,6 +4378,7 @@ module Aws::IoTFleetWise
     #           </p>
     #   @return [Array<String>]
     class UpdateSignalCatalogInput < Struct.new(
+      nil,
       :name,
       :description,
       :nodes_to_add,
@@ -4222,6 +4396,7 @@ module Aws::IoTFleetWise
     #   <p> The ARN of the updated signal catalog. </p>
     #   @return [String]
     class UpdateSignalCatalogOutput < Struct.new(
+      nil,
       :name,
       :arn,
       keyword_init: true
@@ -4258,6 +4433,7 @@ module Aws::IoTFleetWise
     #             will include these attributes as User Properties with the MQTT message.</p>
     #   @return [Array<String>]
     class UpdateStateTemplateRequest < Struct.new(
+      nil,
       :identifier,
       :description,
       :state_template_properties_to_add,
@@ -4279,6 +4455,7 @@ module Aws::IoTFleetWise
     #   <p>The unique ID of the state template.</p>
     #   @return [String]
     class UpdateStateTemplateResponse < Struct.new(
+      nil,
       :name,
       :arn,
       :id,
@@ -4298,6 +4475,7 @@ module Aws::IoTFleetWise
     #   <p>A message associated with the error.</p>
     #   @return [String]
     class UpdateVehicleError < Struct.new(
+      nil,
       :vehicle_name,
       :code,
       :message,
@@ -4342,6 +4520,7 @@ module Aws::IoTFleetWise
     #   <p>Change the <code>stateTemplateUpdateStrategy</code> of state templates already associated with the vehicle.</p>
     #   @return [Array<Types::StateTemplateAssociation>]
     class UpdateVehicleInput < Struct.new(
+      nil,
       :vehicle_name,
       :model_manifest_arn,
       :decoder_manifest_arn,
@@ -4362,6 +4541,7 @@ module Aws::IoTFleetWise
     #   <p>The ARN of the updated vehicle.</p>
     #   @return [String]
     class UpdateVehicleOutput < Struct.new(
+      nil,
       :vehicle_name,
       :arn,
       keyword_init: true
@@ -4405,6 +4585,7 @@ module Aws::IoTFleetWise
     #   <p>Change the <code>stateTemplateUpdateStrategy</code> of state templates already associated with the vehicle.</p>
     #   @return [Array<Types::StateTemplateAssociation>]
     class UpdateVehicleRequestItem < Struct.new(
+      nil,
       :vehicle_name,
       :model_manifest_arn,
       :decoder_manifest_arn,
@@ -4426,6 +4607,7 @@ module Aws::IoTFleetWise
     #   <p>The Amazon Resource Name (ARN) of the updated vehicle.</p>
     #   @return [String]
     class UpdateVehicleResponseItem < Struct.new(
+      nil,
       :vehicle_name,
       :arn,
       keyword_init: true
@@ -4445,6 +4627,7 @@ module Aws::IoTFleetWise
     #               service.</p>
     #   @return [Array<Types::ValidationExceptionField>]
     class ValidationException < Struct.new(
+      nil,
       :message,
       :reason,
       :field_list,
@@ -4462,6 +4645,7 @@ module Aws::IoTFleetWise
     #   <p>A message about the validation error.</p>
     #   @return [String]
     class ValidationExceptionField < Struct.new(
+      nil,
       :name,
       :message,
       keyword_init: true
@@ -4478,6 +4662,7 @@ module Aws::IoTFleetWise
     #   <p>The protocol name of the vehicle middleware. </p>
     #   @return [String]
     class VehicleMiddleware < Struct.new(
+      nil,
       :name,
       :protocol_name,
       keyword_init: true
@@ -4522,6 +4707,7 @@ module Aws::IoTFleetWise
     #            </ul>
     #   @return [String]
     class VehicleStatus < Struct.new(
+      nil,
       :campaign_name,
       :vehicle_name,
       :status,
@@ -4557,6 +4743,7 @@ module Aws::IoTFleetWise
     #            </p>
     #   @return [Hash<String, String>]
     class VehicleSummary < Struct.new(
+      nil,
       :vehicle_name,
       :arn,
       :model_manifest_arn,

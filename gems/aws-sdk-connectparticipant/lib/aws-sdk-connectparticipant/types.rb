@@ -10,6 +10,7 @@ module Aws::ConnectParticipant
     # @!attribute message
     #   @return [String]
     class AccessDeniedException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -31,6 +32,7 @@ module Aws::ConnectParticipant
     #   <p>Status of the attachment.</p>
     #   @return [String]
     class AttachmentItem < Struct.new(
+      nil,
       :content_type,
       :attachment_id,
       :attachment_name,
@@ -48,6 +50,7 @@ module Aws::ConnectParticipant
     #   <p>The join token used by the Amazon Chime SDK attendee.</p>
     #   @return [String]
     class Attendee < Struct.new(
+      nil,
       :attendee_id,
       :join_token,
       keyword_init: true
@@ -60,6 +63,7 @@ module Aws::ConnectParticipant
     #   <p>Makes echo reduction available to clients who connect to the meeting.</p>
     #   @return [String]
     class AudioFeatures < Struct.new(
+      nil,
       :echo_reduction,
       keyword_init: true
     )
@@ -74,6 +78,7 @@ module Aws::ConnectParticipant
     #   <p>The authentication token associated with the participant's connection.</p>
     #   @return [String]
     class CancelParticipantAuthenticationRequest < Struct.new(
+      nil,
       :session_id,
       :connection_token,
       keyword_init: true
@@ -82,6 +87,7 @@ module Aws::ConnectParticipant
     end
 
     class CancelParticipantAuthenticationResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -100,6 +106,7 @@ module Aws::ConnectParticipant
     #   <p>The authentication token associated with the participant's connection.</p>
     #   @return [String]
     class CompleteAttachmentUploadRequest < Struct.new(
+      nil,
       :attachment_ids,
       :client_token,
       :connection_token,
@@ -109,6 +116,7 @@ module Aws::ConnectParticipant
     end
 
     class CompleteAttachmentUploadResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -119,6 +127,7 @@ module Aws::ConnectParticipant
     # @!attribute message
     #   @return [String]
     class ConflictException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -135,6 +144,7 @@ module Aws::ConnectParticipant
     #               2019-11-08T02:41:28.172Z.</p>
     #   @return [String]
     class ConnectionCredentials < Struct.new(
+      nil,
       :connection_token,
       :expiry,
       keyword_init: true
@@ -158,6 +168,7 @@ module Aws::ConnectParticipant
     #               non-streaming chats.</p>
     #   @return [Boolean]
     class CreateParticipantConnectionRequest < Struct.new(
+      nil,
       :type,
       :participant_token,
       :connect_participant,
@@ -178,6 +189,7 @@ module Aws::ConnectParticipant
     #               (mobile application or website) to connect to the call. </p>
     #   @return [Types::WebRTCConnection]
     class CreateParticipantConnectionResponse < Struct.new(
+      nil,
       :websocket,
       :connection_credentials,
       :web_rtc_connection,
@@ -194,6 +206,7 @@ module Aws::ConnectParticipant
     #   <p>The connection token.</p>
     #   @return [String]
     class DescribeViewRequest < Struct.new(
+      nil,
       :view_token,
       :connection_token,
       keyword_init: true
@@ -206,6 +219,7 @@ module Aws::ConnectParticipant
     #               view.</p>
     #   @return [Types::View]
     class DescribeViewResponse < Struct.new(
+      nil,
       :view,
       keyword_init: true
     )
@@ -222,6 +236,7 @@ module Aws::ConnectParticipant
     #   <p>The authentication token associated with the participant's connection.</p>
     #   @return [String]
     class DisconnectParticipantRequest < Struct.new(
+      nil,
       :client_token,
       :connection_token,
       keyword_init: true
@@ -230,6 +245,7 @@ module Aws::ConnectParticipant
     end
 
     class DisconnectParticipantResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -246,6 +262,7 @@ module Aws::ConnectParticipant
     #               yyyy-MM-ddThh:mm:ss.SSSZ. For example, 2019-11-08T02:41:28.172Z.</p>
     #   @return [Integer]
     class GetAttachmentRequest < Struct.new(
+      nil,
       :attachment_id,
       :connection_token,
       :url_expiry_in_seconds,
@@ -265,6 +282,7 @@ module Aws::ConnectParticipant
     #   <p>The size of the attachment in bytes.</p>
     #   @return [Integer]
     class GetAttachmentResponse < Struct.new(
+      nil,
       :url,
       :url_expiry,
       :attachment_size_in_bytes,
@@ -289,6 +307,7 @@ module Aws::ConnectParticipant
     #   <p>The authentication token associated with the participant's connection.</p>
     #   @return [String]
     class GetAuthenticationUrlRequest < Struct.new(
+      nil,
       :session_id,
       :redirect_uri,
       :connection_token,
@@ -302,6 +321,7 @@ module Aws::ConnectParticipant
     #               the authorize endpoint for the Cognito UserPool used in the authentication.</p>
     #   @return [String]
     class GetAuthenticationUrlResponse < Struct.new(
+      nil,
       :authentication_url,
       keyword_init: true
     )
@@ -332,6 +352,7 @@ module Aws::ConnectParticipant
     #   <p>The authentication token associated with the participant's connection.</p>
     #   @return [String]
     class GetTranscriptRequest < Struct.new(
+      nil,
       :contact_id,
       :max_results,
       :next_token,
@@ -355,6 +376,7 @@ module Aws::ConnectParticipant
     #               to retrieve the next set of results.</p>
     #   @return [String]
     class GetTranscriptResponse < Struct.new(
+      nil,
       :initial_contact_id,
       :transcript,
       :next_token,
@@ -367,6 +389,7 @@ module Aws::ConnectParticipant
     # @!attribute message
     #   @return [String]
     class InternalServerException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -418,6 +441,7 @@ module Aws::ConnectParticipant
     #               populated only when the transcript item is from the current chat session.</p>
     #   @return [String]
     class Item < Struct.new(
+      nil,
       :absolute_time,
       :content,
       :content_type,
@@ -440,6 +464,7 @@ module Aws::ConnectParticipant
     #   <p>The configuration settings for the audio features available to a meeting.</p>
     #   @return [Types::AudioFeatures]
     class MeetingFeaturesConfiguration < Struct.new(
+      nil,
       :audio,
       keyword_init: true
     )
@@ -454,6 +479,7 @@ module Aws::ConnectParticipant
     #   <p>The list of receipt information for a message for different recipients.</p>
     #   @return [Array<Types::Receipt>]
     class MessageMetadata < Struct.new(
+      nil,
       :message_id,
       :receipts,
       keyword_init: true
@@ -472,6 +498,7 @@ module Aws::ConnectParticipant
     #   <p>The identifier of the recipient of the message. </p>
     #   @return [String]
     class Receipt < Struct.new(
+      nil,
       :delivered_timestamp,
       :read_timestamp,
       :recipient_participant_id,
@@ -490,6 +517,7 @@ module Aws::ConnectParticipant
     #   <p>The type of Amazon Connect resource.</p>
     #   @return [String]
     class ResourceNotFoundException < Struct.new(
+      nil,
       :message,
       :resource_id,
       :resource_type,
@@ -531,6 +559,7 @@ module Aws::ConnectParticipant
     #   <p>The authentication token associated with the participant's connection.</p>
     #   @return [String]
     class SendEventRequest < Struct.new(
+      nil,
       :content_type,
       :content,
       :client_token,
@@ -549,6 +578,7 @@ module Aws::ConnectParticipant
     #               2019-11-08T02:41:28.172Z.</p>
     #   @return [String]
     class SendEventResponse < Struct.new(
+      nil,
       :id,
       :absolute_time,
       keyword_init: true
@@ -595,6 +625,7 @@ module Aws::ConnectParticipant
     #   <p>The authentication token associated with the connection.</p>
     #   @return [String]
     class SendMessageRequest < Struct.new(
+      nil,
       :content_type,
       :content,
       :client_token,
@@ -613,6 +644,7 @@ module Aws::ConnectParticipant
     #               2019-11-08T02:41:28.172Z.</p>
     #   @return [String]
     class SendMessageResponse < Struct.new(
+      nil,
       :id,
       :absolute_time,
       keyword_init: true
@@ -624,6 +656,7 @@ module Aws::ConnectParticipant
     # @!attribute message
     #   @return [String]
     class ServiceQuotaExceededException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -649,6 +682,7 @@ module Aws::ConnectParticipant
     #   <p>The authentication token associated with the participant's connection.</p>
     #   @return [String]
     class StartAttachmentUploadRequest < Struct.new(
+      nil,
       :content_type,
       :attachment_size_in_bytes,
       :attachment_name,
@@ -666,6 +700,7 @@ module Aws::ConnectParticipant
     #   <p>The headers to be provided while uploading the file to the URL.</p>
     #   @return [Types::UploadMetadata]
     class StartAttachmentUploadResponse < Struct.new(
+      nil,
       :attachment_id,
       :upload_metadata,
       keyword_init: true
@@ -687,6 +722,7 @@ module Aws::ConnectParticipant
     #   <p>The start position of the most recent message where you want to start. </p>
     #   @return [Integer]
     class StartPosition < Struct.new(
+      nil,
       :id,
       :absolute_time,
       :most_recent,
@@ -704,6 +740,7 @@ module Aws::ConnectParticipant
     # @!attribute message
     #   @return [String]
     class ThrottlingException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -722,6 +759,7 @@ module Aws::ConnectParticipant
     #   <p>The headers to be provided while uploading the file to the URL.</p>
     #   @return [Hash<String, String>]
     class UploadMetadata < Struct.new(
+      nil,
       :url,
       :url_expiry,
       :headers_to_include,
@@ -734,6 +772,7 @@ module Aws::ConnectParticipant
     # @!attribute message
     #   @return [String]
     class ValidationException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -759,6 +798,7 @@ module Aws::ConnectParticipant
     #               input data.</p>
     #   @return [Types::ViewContent]
     class View < Struct.new(
+      nil,
       :id,
       :arn,
       :name,
@@ -782,6 +822,7 @@ module Aws::ConnectParticipant
     #   <p>A list of actions possible from the view</p>
     #   @return [Array<String>]
     class ViewContent < Struct.new(
+      nil,
       :input_schema,
       :template,
       :actions,
@@ -799,6 +840,7 @@ module Aws::ConnectParticipant
     #   <p>A meeting created using the Amazon Chime SDK.</p>
     #   @return [Types::WebRTCMeeting]
     class WebRTCConnection < Struct.new(
+      nil,
       :attendee,
       :meeting,
       keyword_init: true
@@ -821,6 +863,7 @@ module Aws::ConnectParticipant
     #   <p>The event ingestion URL to which you send client meeting events.</p>
     #   @return [String]
     class WebRTCMediaPlacement < Struct.new(
+      nil,
       :audio_host_url,
       :audio_fallback_url,
       :signaling_url,
@@ -841,6 +884,7 @@ module Aws::ConnectParticipant
     #   <p>The Amazon Chime SDK meeting ID.</p>
     #   @return [String]
     class WebRTCMeeting < Struct.new(
+      nil,
       :media_placement,
       :meeting_features,
       :meeting_id,
@@ -859,6 +903,7 @@ module Aws::ConnectParticipant
     #               2019-11-08T02:41:28.172Z.</p>
     #   @return [String]
     class Websocket < Struct.new(
+      nil,
       :url,
       :connection_expiry,
       keyword_init: true

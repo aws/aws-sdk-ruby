@@ -20,6 +20,7 @@ module Aws::Translate
     #         applied will be the first 250 terms in the source text. </p>
     #   @return [Array<Types::Term>]
     class AppliedTerminology < Struct.new(
+      nil,
       :name,
       :terms,
       keyword_init: true
@@ -32,6 +33,7 @@ module Aws::Translate
     # @!attribute message
     #   @return [String]
     class ConcurrentModificationException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -42,6 +44,7 @@ module Aws::Translate
     # @!attribute message
     #   @return [String]
     class ConflictException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -72,6 +75,7 @@ module Aws::Translate
     #           Tagging your resources</a>.</p>
     #   @return [Array<Types::Tag>]
     class CreateParallelDataRequest < Struct.new(
+      nil,
       :name,
       :description,
       :parallel_data_config,
@@ -91,6 +95,7 @@ module Aws::Translate
     #         status is <code>ACTIVE</code>.</p>
     #   @return [String]
     class CreateParallelDataResponse < Struct.new(
+      nil,
       :name,
       :status,
       keyword_init: true
@@ -102,6 +107,7 @@ module Aws::Translate
     #   <p>The name of the parallel data resource that is being deleted.</p>
     #   @return [String]
     class DeleteParallelDataRequest < Struct.new(
+      nil,
       :name,
       keyword_init: true
     )
@@ -115,6 +121,7 @@ module Aws::Translate
     #   <p>The status of the parallel data deletion.</p>
     #   @return [String]
     class DeleteParallelDataResponse < Struct.new(
+      nil,
       :name,
       :status,
       keyword_init: true
@@ -126,6 +133,7 @@ module Aws::Translate
     #   <p>The name of the custom terminology being deleted. </p>
     #   @return [String]
     class DeleteTerminologyRequest < Struct.new(
+      nil,
       :name,
       keyword_init: true
     )
@@ -137,6 +145,7 @@ module Aws::Translate
     #         response.</p>
     #   @return [String]
     class DescribeTextTranslationJobRequest < Struct.new(
+      nil,
       :job_id,
       keyword_init: true
     )
@@ -148,6 +157,7 @@ module Aws::Translate
     #         job.</p>
     #   @return [Types::TextTranslationJobProperties]
     class DescribeTextTranslationJobResponse < Struct.new(
+      nil,
       :text_translation_job_properties,
       keyword_init: true
     )
@@ -164,6 +174,7 @@ module Aws::Translate
     #   <p>The language code of the auto-detected language from Amazon Comprehend.</p>
     #   @return [String]
     class DetectedLanguageLowConfidenceException < Struct.new(
+      nil,
       :message,
       :detected_language_code,
       keyword_init: true
@@ -200,6 +211,7 @@ module Aws::Translate
     #            </ul>
     #   @return [String]
     class Document < Struct.new(
+      nil,
       :content,
       :content_type,
       keyword_init: true
@@ -215,6 +227,7 @@ module Aws::Translate
     #   <p>The Amazon Resource Name (ARN) of the encryption key being used to encrypt this object.</p>
     #   @return [String]
     class EncryptionKey < Struct.new(
+      nil,
       :type,
       :id,
       keyword_init: true
@@ -226,6 +239,7 @@ module Aws::Translate
     #   <p>The name of the parallel data resource that is being retrieved.</p>
     #   @return [String]
     class GetParallelDataRequest < Struct.new(
+      nil,
       :name,
       keyword_init: true
     )
@@ -263,6 +277,7 @@ module Aws::Translate
     #         expiration.</p>
     #   @return [Types::ParallelDataDataLocation]
     class GetParallelDataResponse < Struct.new(
+      nil,
       :parallel_data_properties,
       :data_location,
       :auxiliary_data_location,
@@ -284,6 +299,7 @@ module Aws::Translate
     #         Amazon Translate throws an error.</p>
     #   @return [String]
     class GetTerminologyRequest < Struct.new(
+      nil,
       :name,
       :terminology_data_format,
       keyword_init: true
@@ -316,6 +332,7 @@ module Aws::Translate
     #         expiration.</p>
     #   @return [Types::TerminologyDataLocation]
     class GetTerminologyResponse < Struct.new(
+      nil,
       :terminology_properties,
       :terminology_data_location,
       :auxiliary_data_location,
@@ -348,6 +365,7 @@ module Aws::Translate
     #           Tagging your resources</a>.</p>
     #   @return [Array<Types::Tag>]
     class ImportTerminologyRequest < Struct.new(
+      nil,
       :name,
       :merge_strategy,
       :description,
@@ -369,6 +387,7 @@ module Aws::Translate
     #         expiration.</p>
     #   @return [Types::TerminologyDataLocation]
     class ImportTerminologyResponse < Struct.new(
+      nil,
       :terminology_properties,
       :auxiliary_data_location,
       keyword_init: true
@@ -427,6 +446,7 @@ module Aws::Translate
     #            </important>
     #   @return [String]
     class InputDataConfig < Struct.new(
+      nil,
       :s3_uri,
       :content_type,
       keyword_init: true
@@ -438,6 +458,7 @@ module Aws::Translate
     # @!attribute message
     #   @return [String]
     class InternalServerException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -448,6 +469,7 @@ module Aws::Translate
     # @!attribute message
     #   @return [String]
     class InvalidFilterException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -459,6 +481,7 @@ module Aws::Translate
     # @!attribute message
     #   @return [String]
     class InvalidParameterValueException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -470,6 +493,7 @@ module Aws::Translate
     # @!attribute message
     #   @return [String]
     class InvalidRequestException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -488,6 +512,7 @@ module Aws::Translate
     #   <p>The number of documents used as input in a translation job.</p>
     #   @return [Integer]
     class JobDetails < Struct.new(
+      nil,
       :translated_documents_count,
       :documents_with_errors_count,
       :input_documents_count,
@@ -504,6 +529,7 @@ module Aws::Translate
     #   <p>Language code for the supported language.</p>
     #   @return [String]
     class Language < Struct.new(
+      nil,
       :language_name,
       :language_code,
       keyword_init: true
@@ -516,6 +542,7 @@ module Aws::Translate
     # @!attribute message
     #   @return [String]
     class LimitExceededException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -533,6 +560,7 @@ module Aws::Translate
     #   <p>The maximum number of results to return in each response.</p>
     #   @return [Integer]
     class ListLanguagesRequest < Struct.new(
+      nil,
       :display_language_code,
       :next_token,
       :max_results,
@@ -552,6 +580,7 @@ module Aws::Translate
     #         in the next request to fetch the next group of supported languages.</p>
     #   @return [String]
     class ListLanguagesResponse < Struct.new(
+      nil,
       :languages,
       :display_language_code,
       :next_token,
@@ -567,6 +596,7 @@ module Aws::Translate
     #   <p>The maximum number of parallel data resources returned for each request.</p>
     #   @return [Integer]
     class ListParallelDataRequest < Struct.new(
+      nil,
       :next_token,
       :max_results,
       keyword_init: true
@@ -582,6 +612,7 @@ module Aws::Translate
     #         response. This value is null if there are no additional pages.</p>
     #   @return [String]
     class ListParallelDataResponse < Struct.new(
+      nil,
       :parallel_data_properties_list,
       :next_token,
       keyword_init: true
@@ -594,6 +625,7 @@ module Aws::Translate
     #       </p>
     #   @return [String]
     class ListTagsForResourceRequest < Struct.new(
+      nil,
       :resource_arn,
       keyword_init: true
     )
@@ -607,6 +639,7 @@ module Aws::Translate
     #       </p>
     #   @return [Array<Types::Tag>]
     class ListTagsForResourceResponse < Struct.new(
+      nil,
       :tags,
       keyword_init: true
     )
@@ -621,6 +654,7 @@ module Aws::Translate
     #   <p>The maximum number of custom terminologies returned per list request.</p>
     #   @return [Integer]
     class ListTerminologiesRequest < Struct.new(
+      nil,
       :next_token,
       :max_results,
       keyword_init: true
@@ -636,6 +670,7 @@ module Aws::Translate
     #         group of custom terminologies.</p>
     #   @return [String]
     class ListTerminologiesResponse < Struct.new(
+      nil,
       :terminology_properties_list,
       :next_token,
       keyword_init: true
@@ -654,6 +689,7 @@ module Aws::Translate
     #   <p>The maximum number of results to return in each page. The default value is 100.</p>
     #   @return [Integer]
     class ListTextTranslationJobsRequest < Struct.new(
+      nil,
       :filter,
       :next_token,
       :max_results,
@@ -670,6 +706,7 @@ module Aws::Translate
     #         when there are no more results to return.</p>
     #   @return [String]
     class ListTextTranslationJobsResponse < Struct.new(
+      nil,
       :text_translation_job_properties_list,
       :next_token,
       keyword_init: true
@@ -686,6 +723,7 @@ module Aws::Translate
     #   <p>The encryption key used to encrypt this object.</p>
     #   @return [Types::EncryptionKey]
     class OutputDataConfig < Struct.new(
+      nil,
       :s3_uri,
       :encryption_key,
       keyword_init: true
@@ -702,6 +740,7 @@ module Aws::Translate
     #   <p>The format of the parallel data input file.</p>
     #   @return [String]
     class ParallelDataConfig < Struct.new(
+      nil,
       :s3_uri,
       :format,
       keyword_init: true
@@ -729,6 +768,7 @@ module Aws::Translate
     #            </important>
     #   @return [String]
     class ParallelDataDataLocation < Struct.new(
+      nil,
       :repository_type,
       :location,
       keyword_init: true
@@ -796,6 +836,7 @@ module Aws::Translate
     #   <p>The time that the most recent update was attempted.</p>
     #   @return [Time]
     class ParallelDataProperties < Struct.new(
+      nil,
       :name,
       :arn,
       :description,
@@ -824,6 +865,7 @@ module Aws::Translate
     # @!attribute message
     #   @return [String]
     class ResourceNotFoundException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -835,6 +877,7 @@ module Aws::Translate
     # @!attribute message
     #   @return [String]
     class ServiceUnavailableException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -915,6 +958,7 @@ module Aws::Translate
     #            </ul>
     #   @return [Types::TranslationSettings]
     class StartTextTranslationJobRequest < Struct.new(
+      nil,
       :job_name,
       :input_data_config,
       :output_data_config,
@@ -972,6 +1016,7 @@ module Aws::Translate
     #            </ul>
     #   @return [String]
     class StartTextTranslationJobResponse < Struct.new(
+      nil,
       :job_id,
       :job_status,
       keyword_init: true
@@ -983,6 +1028,7 @@ module Aws::Translate
     #   <p>The job ID of the job to be stopped.</p>
     #   @return [String]
     class StopTextTranslationJobRequest < Struct.new(
+      nil,
       :job_id,
       keyword_init: true
     )
@@ -997,6 +1043,7 @@ module Aws::Translate
     #           <code>STOPPED</code>.</p>
     #   @return [String]
     class StopTextTranslationJobResponse < Struct.new(
+      nil,
       :job_id,
       :job_status,
       keyword_init: true
@@ -1013,6 +1060,7 @@ module Aws::Translate
     #   <p> The second part of a key-value pair that forms a tag associated with a given resource.</p>
     #   @return [String]
     class Tag < Struct.new(
+      nil,
       :key,
       :value,
       keyword_init: true
@@ -1029,6 +1077,7 @@ module Aws::Translate
     #         of 50 tags (both existing and pending) associated with a specific resource.</p>
     #   @return [Array<Types::Tag>]
     class TagResourceRequest < Struct.new(
+      nil,
       :resource_arn,
       :tags,
       keyword_init: true
@@ -1037,6 +1086,7 @@ module Aws::Translate
     end
 
     class TagResourceResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1050,6 +1100,7 @@ module Aws::Translate
     #   <p>The target text of the term being translated by the custom terminology.</p>
     #   @return [String]
     class Term < Struct.new(
+      nil,
       :source_text,
       :target_text,
       keyword_init: true
@@ -1090,6 +1141,7 @@ module Aws::Translate
     #         behaves as uni-directional terminology, although this parameter will have a null value.</p>
     #   @return [String]
     class TerminologyData < Struct.new(
+      nil,
       :file,
       :format,
       :directionality,
@@ -1118,6 +1170,7 @@ module Aws::Translate
     #            </important>
     #   @return [String]
     class TerminologyDataLocation < Struct.new(
+      nil,
       :repository_type,
       :location,
       keyword_init: true
@@ -1184,6 +1237,7 @@ module Aws::Translate
     #   <p>The format of the custom terminology input file.</p>
     #   @return [String]
     class TerminologyProperties < Struct.new(
+      nil,
       :name,
       :description,
       :arn,
@@ -1208,6 +1262,7 @@ module Aws::Translate
     # @!attribute message
     #   @return [String]
     class TextSizeLimitExceededException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -1233,6 +1288,7 @@ module Aws::Translate
     #         order, newest to oldest.</p>
     #   @return [Time]
     class TextTranslationJobFilter < Struct.new(
+      nil,
       :job_name,
       :job_status,
       :submitted_before_time,
@@ -1296,6 +1352,7 @@ module Aws::Translate
     #   <p>Settings that modify the translation output.</p>
     #   @return [Types::TranslationSettings]
     class TextTranslationJobProperties < Struct.new(
+      nil,
       :job_id,
       :job_name,
       :job_status,
@@ -1321,6 +1378,7 @@ module Aws::Translate
     # @!attribute message
     #   @return [String]
     class TooManyRequestsException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -1333,6 +1391,7 @@ module Aws::Translate
     # @!attribute resource_arn
     #   @return [String]
     class TooManyTagsException < Struct.new(
+      nil,
       :message,
       :resource_arn,
       keyword_init: true
@@ -1384,6 +1443,7 @@ module Aws::Translate
     #            </ul>
     #   @return [Types::TranslationSettings]
     class TranslateDocumentRequest < Struct.new(
+      nil,
       :document,
       :terminology_names,
       :source_language_code,
@@ -1423,6 +1483,7 @@ module Aws::Translate
     #            </ul>
     #   @return [Types::TranslationSettings]
     class TranslateDocumentResponse < Struct.new(
+      nil,
       :translated_document,
       :source_language_code,
       :target_language_code,
@@ -1476,6 +1537,7 @@ module Aws::Translate
     #            </ul>
     #   @return [Types::TranslationSettings]
     class TranslateTextRequest < Struct.new(
+      nil,
       :text,
       :terminology_names,
       :source_language_code,
@@ -1503,6 +1565,7 @@ module Aws::Translate
     #   <p>Optional settings that modify the translation output.</p>
     #   @return [Types::TranslationSettings]
     class TranslateTextResponse < Struct.new(
+      nil,
       :translated_text,
       :source_language_code,
       :target_language_code,
@@ -1518,6 +1581,7 @@ module Aws::Translate
     #   <p>The document containing the translated content.</p>
     #   @return [String]
     class TranslatedDocument < Struct.new(
+      nil,
       :content,
       keyword_init: true
     )
@@ -1573,6 +1637,7 @@ module Aws::Translate
     #         Amazon Translate Developer Guide.</p>
     #   @return [String]
     class TranslationSettings < Struct.new(
+      nil,
       :formality,
       :profanity,
       :brevity,
@@ -1588,6 +1653,7 @@ module Aws::Translate
     #   <p>Language code passed in with the request.</p>
     #   @return [String]
     class UnsupportedDisplayLanguageCodeException < Struct.new(
+      nil,
       :message,
       :display_language_code,
       keyword_init: true
@@ -1606,6 +1672,7 @@ module Aws::Translate
     #   <p>The language code for the language of the translated text. </p>
     #   @return [String]
     class UnsupportedLanguagePairException < Struct.new(
+      nil,
       :message,
       :source_language_code,
       :target_language_code,
@@ -1624,6 +1691,7 @@ module Aws::Translate
     #       </p>
     #   @return [Array<String>]
     class UntagResourceRequest < Struct.new(
+      nil,
       :resource_arn,
       :tag_keys,
       keyword_init: true
@@ -1632,6 +1700,7 @@ module Aws::Translate
     end
 
     class UntagResourceResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1651,6 +1720,7 @@ module Aws::Translate
     #         Amazon Translate through an AWS SDK.</p>
     #   @return [String]
     class UpdateParallelDataRequest < Struct.new(
+      nil,
       :name,
       :description,
       :parallel_data_config,
@@ -1676,6 +1746,7 @@ module Aws::Translate
     #   <p>The time that the most recent update was attempted.</p>
     #   @return [Time]
     class UpdateParallelDataResponse < Struct.new(
+      nil,
       :name,
       :status,
       :latest_update_attempt_status,

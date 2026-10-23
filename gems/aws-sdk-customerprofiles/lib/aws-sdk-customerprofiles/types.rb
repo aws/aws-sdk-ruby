@@ -10,6 +10,7 @@ module Aws::CustomerProfiles
     # @!attribute message
     #   @return [String]
     class AccessDeniedException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -33,6 +34,7 @@ module Aws::CustomerProfiles
     #   <p>The unique name of the domain.</p>
     #   @return [String]
     class AddProfileKeyRequest < Struct.new(
+      nil,
       :profile_id,
       :key_name,
       :values,
@@ -49,6 +51,7 @@ module Aws::CustomerProfiles
     #   <p>A list of key values.</p>
     #   @return [Array<String>]
     class AddProfileKeyResponse < Struct.new(
+      nil,
       :key_name,
       :values,
       keyword_init: true
@@ -66,6 +69,7 @@ module Aws::CustomerProfiles
     #   <p>A list of key values.</p>
     #   @return [Array<String>]
     class AdditionalSearchKey < Struct.new(
+      nil,
       :key_name,
       :values,
       keyword_init: true
@@ -107,6 +111,7 @@ module Aws::CustomerProfiles
     #   <p>The postal code of a customer address.</p>
     #   @return [String]
     class Address < Struct.new(
+      nil,
       :address1,
       :address2,
       :address3,
@@ -142,6 +147,7 @@ module Aws::CustomerProfiles
     #   <p>The state belonging to the address.</p>
     #   @return [Types::ProfileDimension]
     class AddressDimension < Struct.new(
+      nil,
       :city,
       :country,
       :county,
@@ -163,6 +169,7 @@ module Aws::CustomerProfiles
     #   <p>Batches in workflow of type <code>APPFLOW_INTEGRATION</code>.</p>
     #   @return [Array<Types::Batch>]
     class AppflowIntegration < Struct.new(
+      nil,
       :flow_definition,
       :batches,
       keyword_init: true
@@ -183,6 +190,7 @@ module Aws::CustomerProfiles
     #   <p>The Amazon Resource Name (ARN) of the IAM role. Customer Profiles assumes this role to create resources on your behalf as part of workflow execution.</p>
     #   @return [String]
     class AppflowIntegrationWorkflowAttributes < Struct.new(
+      nil,
       :source_connector_type,
       :connector_profile_name,
       :role_arn,
@@ -203,6 +211,7 @@ module Aws::CustomerProfiles
     #   <p>Total steps in <code>APPFLOW_INTEGRATION</code> workflow.</p>
     #   @return [Integer]
     class AppflowIntegrationWorkflowMetrics < Struct.new(
+      nil,
       :records_processed,
       :steps_completed,
       :total_steps,
@@ -252,6 +261,7 @@ module Aws::CustomerProfiles
     #            workflow.</p>
     #   @return [Time]
     class AppflowIntegrationWorkflowStep < Struct.new(
+      nil,
       :flow_name,
       :status,
       :execution_message,
@@ -282,6 +292,7 @@ module Aws::CustomerProfiles
     #            \"{ObjectTypeName.AttributeName}\".</p>
     #   @return [String]
     class AttributeDetails < Struct.new(
+      nil,
       :attributes,
       :expression,
       keyword_init: true
@@ -297,6 +308,7 @@ module Aws::CustomerProfiles
     #   <p>The values to apply the DimensionType on.</p>
     #   @return [Array<String>]
     class AttributeDimension < Struct.new(
+      nil,
       :dimension_type,
       :values,
       keyword_init: true
@@ -309,6 +321,7 @@ module Aws::CustomerProfiles
     #   <p>The name of an attribute defined in a profile object type.</p>
     #   @return [String]
     class AttributeItem < Struct.new(
+      nil,
       :name,
       keyword_init: true
     )
@@ -394,6 +407,7 @@ module Aws::CustomerProfiles
     #            matching rule.</p>
     #   @return [Array<String>]
     class AttributeTypesSelector < Struct.new(
+      nil,
       :attribute_matching_model,
       :address,
       :phone_number,
@@ -408,6 +422,7 @@ module Aws::CustomerProfiles
     #   <p>An individual value belonging to the given attribute.</p>
     #   @return [String]
     class AttributeValueItem < Struct.new(
+      nil,
       :value,
       keyword_init: true
     )
@@ -434,6 +449,7 @@ module Aws::CustomerProfiles
     #            means higher similarity required to merge profiles. </p>
     #   @return [Float]
     class AutoMerging < Struct.new(
+      nil,
       :enabled,
       :consolidation,
       :conflict_resolution,
@@ -447,6 +463,7 @@ module Aws::CustomerProfiles
     # @!attribute message
     #   @return [String]
     class BadRequestException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -463,6 +480,7 @@ module Aws::CustomerProfiles
     #   <p>End time of batch to split ingestion.</p>
     #   @return [Time]
     class Batch < Struct.new(
+      nil,
       :start_time,
       :end_time,
       keyword_init: true
@@ -481,6 +499,7 @@ module Aws::CustomerProfiles
     #   <p>The profile id that failed.</p>
     #   @return [String]
     class BatchGetCalculatedAttributeForProfileError < Struct.new(
+      nil,
       :code,
       :message,
       :profile_id,
@@ -503,6 +522,7 @@ module Aws::CustomerProfiles
     #            definition.</p>
     #   @return [Types::ConditionOverrides]
     class BatchGetCalculatedAttributeForProfileRequest < Struct.new(
+      nil,
       :calculated_attribute_name,
       :domain_name,
       :profile_ids,
@@ -523,6 +543,7 @@ module Aws::CustomerProfiles
     #            definition.</p>
     #   @return [Types::ConditionOverrides]
     class BatchGetCalculatedAttributeForProfileResponse < Struct.new(
+      nil,
       :errors,
       :calculated_attribute_values,
       :condition_overrides,
@@ -542,6 +563,7 @@ module Aws::CustomerProfiles
     #   <p>The profile id that failed.</p>
     #   @return [String]
     class BatchGetProfileError < Struct.new(
+      nil,
       :code,
       :message,
       :profile_id,
@@ -557,6 +579,7 @@ module Aws::CustomerProfiles
     #   <p>List of unique identifiers for customer profiles to retrieve.</p>
     #   @return [Array<String>]
     class BatchGetProfileRequest < Struct.new(
+      nil,
       :domain_name,
       :profile_ids,
       keyword_init: true
@@ -572,6 +595,7 @@ module Aws::CustomerProfiles
     #   <p>Array of Profile Objects.</p>
     #   @return [Array<Types::Profile>]
     class BatchGetProfileResponse < Struct.new(
+      nil,
       :errors,
       :profiles,
       keyword_init: true
@@ -590,6 +614,7 @@ module Aws::CustomerProfiles
     #   <p>Applies the given condition over the initial Calculated Attribute's definition.</p>
     #   @return [Types::ConditionOverrides]
     class CalculatedAttributeDimension < Struct.new(
+      nil,
       :dimension_type,
       :values,
       :condition_overrides,
@@ -620,6 +645,7 @@ module Aws::CustomerProfiles
     #            calculation.</p>
     #   @return [Time]
     class CalculatedAttributeValue < Struct.new(
+      nil,
       :calculated_attribute_name,
       :display_name,
       :is_data_partial,
@@ -638,6 +664,7 @@ module Aws::CustomerProfiles
     #            override.</p>
     #   @return [Types::RangeOverride]
     class ConditionOverrides < Struct.new(
+      nil,
       :range,
       keyword_init: true
     )
@@ -657,6 +684,7 @@ module Aws::CustomerProfiles
     #   <p>The threshold for the calculated attribute.</p>
     #   @return [Types::Threshold]
     class Conditions < Struct.new(
+      nil,
       :range,
       :object_count,
       :threshold,
@@ -687,6 +715,7 @@ module Aws::CustomerProfiles
     #            choosing <code>SOURCE</code> as the <code>ConflictResolvingModel</code>.</p>
     #   @return [String]
     class ConflictResolution < Struct.new(
+      nil,
       :conflict_resolving_model,
       :source_name,
       keyword_init: true
@@ -711,6 +740,7 @@ module Aws::CustomerProfiles
     #   <p>The operation to be performed on the provided Zendesk source fields.</p>
     #   @return [String]
     class ConnectorOperator < Struct.new(
+      nil,
       :marketo,
       :s3,
       :salesforce,
@@ -726,6 +756,7 @@ module Aws::CustomerProfiles
     #   <p>A list of matching criteria.</p>
     #   @return [Array<Array<String>>]
     class Consolidation < Struct.new(
+      nil,
       :matching_attributes_list,
       keyword_init: true
     )
@@ -747,6 +778,7 @@ module Aws::CustomerProfiles
     #            PersonalEmailAddress.</p>
     #   @return [String]
     class ContactPreference < Struct.new(
+      nil,
       :key_name,
       :key_value,
       :profile_id,
@@ -791,6 +823,7 @@ module Aws::CustomerProfiles
     #   <p>The tags used to organize, track, or control access for this resource.</p>
     #   @return [Hash<String, String>]
     class CreateCalculatedAttributeDefinitionRequest < Struct.new(
+      nil,
       :domain_name,
       :calculated_attribute_name,
       :display_name,
@@ -852,6 +885,7 @@ module Aws::CustomerProfiles
     #   <p>The tags used to organize, track, or control access for this resource.</p>
     #   @return [Hash<String, String>]
     class CreateCalculatedAttributeDefinitionResponse < Struct.new(
+      nil,
       :calculated_attribute_name,
       :display_name,
       :description,
@@ -897,6 +931,7 @@ module Aws::CustomerProfiles
     #   <p>The tags used to organize, track, or control access for this resource.</p>
     #   @return [Hash<String, String>]
     class CreateDomainLayoutRequest < Struct.new(
+      nil,
       :domain_name,
       :layout_definition_name,
       :description,
@@ -944,6 +979,7 @@ module Aws::CustomerProfiles
     #   <p>The timestamp of when the layout was most recently updated.</p>
     #   @return [Time]
     class CreateDomainLayoutResponse < Struct.new(
+      nil,
       :layout_definition_name,
       :description,
       :display_name,
@@ -1003,6 +1039,7 @@ module Aws::CustomerProfiles
     #   <p>The tags used to organize, track, or control access for this resource.</p>
     #   @return [Hash<String, String>]
     class CreateDomainRequest < Struct.new(
+      nil,
       :domain_name,
       :default_expiration_days,
       :default_encryption_key,
@@ -1058,6 +1095,7 @@ module Aws::CustomerProfiles
     #   <p>The tags used to organize, track, or control access for this resource.</p>
     #   @return [Hash<String, String>]
     class CreateDomainResponse < Struct.new(
+      nil,
       :domain_name,
       :default_expiration_days,
       :default_encryption_key,
@@ -1086,6 +1124,7 @@ module Aws::CustomerProfiles
     #   <p>The tags used to organize, track, or control access for this resource.</p>
     #   @return [Hash<String, String>]
     class CreateEventStreamRequest < Struct.new(
+      nil,
       :domain_name,
       :uri,
       :event_stream_name,
@@ -1102,6 +1141,7 @@ module Aws::CustomerProfiles
     #   <p>The tags used to organize, track, or control access for this resource.</p>
     #   @return [Hash<String, String>]
     class CreateEventStreamResponse < Struct.new(
+      nil,
       :event_stream_arn,
       :tags,
       keyword_init: true
@@ -1136,6 +1176,7 @@ module Aws::CustomerProfiles
     #   <p>An array of key-value pairs to apply to this resource.</p>
     #   @return [Hash<String, String>]
     class CreateEventTriggerRequest < Struct.new(
+      nil,
       :domain_name,
       :event_trigger_name,
       :object_type_name,
@@ -1179,6 +1220,7 @@ module Aws::CustomerProfiles
     #   <p>An array of key-value pairs to apply to this resource.</p>
     #   @return [Hash<String, String>]
     class CreateEventTriggerResponse < Struct.new(
+      nil,
       :event_trigger_name,
       :object_type_name,
       :description,
@@ -1212,6 +1254,7 @@ module Aws::CustomerProfiles
     #   <p>The tags used to organize, track, or control access for this resource.</p>
     #   @return [Hash<String, String>]
     class CreateIntegrationWorkflowRequest < Struct.new(
+      nil,
       :domain_name,
       :workflow_type,
       :integration_config,
@@ -1230,6 +1273,7 @@ module Aws::CustomerProfiles
     #   <p>A message indicating create request was received.</p>
     #   @return [String]
     class CreateIntegrationWorkflowResponse < Struct.new(
+      nil,
       :workflow_id,
       :message,
       keyword_init: true
@@ -1319,6 +1363,7 @@ module Aws::CustomerProfiles
     #   <p>Object that defines the preferred methods of engagement, per channel.</p>
     #   @return [Types::EngagementPreferences]
     class CreateProfileRequest < Struct.new(
+      nil,
       :domain_name,
       :account_number,
       :additional_information,
@@ -1354,6 +1399,7 @@ module Aws::CustomerProfiles
     #   <p>The unique identifier of a customer profile.</p>
     #   @return [String]
     class CreateProfileResponse < Struct.new(
+      nil,
       :profile_id,
       keyword_init: true
     )
@@ -1380,6 +1426,7 @@ module Aws::CustomerProfiles
     #   <p>The tags used to organize, track, or control access for this resource.</p>
     #   @return [Hash<String, String>]
     class CreateSegmentDefinitionRequest < Struct.new(
+      nil,
       :domain_name,
       :segment_definition_name,
       :display_name,
@@ -1410,6 +1457,7 @@ module Aws::CustomerProfiles
     #   <p>The tags used to organize, track, or control access for this resource.</p>
     #   @return [Hash<String, String>]
     class CreateSegmentDefinitionResponse < Struct.new(
+      nil,
       :segment_definition_name,
       :display_name,
       :description,
@@ -1428,6 +1476,7 @@ module Aws::CustomerProfiles
     #   <p>The segment query for calculating a segment estimate.</p>
     #   @return [Types::SegmentGroupStructure]
     class CreateSegmentEstimateRequest < Struct.new(
+      nil,
       :domain_name,
       :segment_query,
       keyword_init: true
@@ -1447,6 +1496,7 @@ module Aws::CustomerProfiles
     #   <p>The status code for the response.</p>
     #   @return [Integer]
     class CreateSegmentEstimateResponse < Struct.new(
+      nil,
       :domain_name,
       :estimate_id,
       :status_code,
@@ -1482,6 +1532,7 @@ module Aws::CustomerProfiles
     #            the request is not submitted from the Amazon Connect Admin Website.</p>
     #   @return [String]
     class CreateSegmentSnapshotRequest < Struct.new(
+      nil,
       :domain_name,
       :segment_definition_name,
       :data_format,
@@ -1497,6 +1548,7 @@ module Aws::CustomerProfiles
     #   <p>The unique identifier of the segment snapshot.</p>
     #   @return [String]
     class CreateSegmentSnapshotResponse < Struct.new(
+      nil,
       :snapshot_id,
       keyword_init: true
     )
@@ -1524,6 +1576,7 @@ module Aws::CustomerProfiles
     #            default of 2 weeks is used. </p>
     #   @return [Integer]
     class CreateUploadJobRequest < Struct.new(
+      nil,
       :domain_name,
       :display_name,
       :fields,
@@ -1538,6 +1591,7 @@ module Aws::CustomerProfiles
     #   <p>The unique identifier for the created upload job. </p>
     #   @return [String]
     class CreateUploadJobResponse < Struct.new(
+      nil,
       :job_id,
       keyword_init: true
     )
@@ -1552,6 +1606,7 @@ module Aws::CustomerProfiles
     #   <p>The values to apply the DimensionType on.</p>
     #   @return [Array<String>]
     class DateDimension < Struct.new(
+      nil,
       :dimension_type,
       :values,
       keyword_init: true
@@ -1566,6 +1621,7 @@ module Aws::CustomerProfiles
     #   <p>The unique name of the calculated attribute.</p>
     #   @return [String]
     class DeleteCalculatedAttributeDefinitionRequest < Struct.new(
+      nil,
       :domain_name,
       :calculated_attribute_name,
       keyword_init: true
@@ -1574,6 +1630,7 @@ module Aws::CustomerProfiles
     end
 
     class DeleteCalculatedAttributeDefinitionResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1586,6 +1643,7 @@ module Aws::CustomerProfiles
     #   <p>The unique name of the layout.</p>
     #   @return [String]
     class DeleteDomainLayoutRequest < Struct.new(
+      nil,
       :domain_name,
       :layout_definition_name,
       keyword_init: true
@@ -1597,6 +1655,7 @@ module Aws::CustomerProfiles
     #   <p>A message that indicates the delete request is done.</p>
     #   @return [String]
     class DeleteDomainLayoutResponse < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -1607,6 +1666,7 @@ module Aws::CustomerProfiles
     #   <p>The unique name of the domain.</p>
     #   @return [String]
     class DeleteDomainRequest < Struct.new(
+      nil,
       :domain_name,
       keyword_init: true
     )
@@ -1617,6 +1677,7 @@ module Aws::CustomerProfiles
     #   <p>A message that indicates the delete request is done.</p>
     #   @return [String]
     class DeleteDomainResponse < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -1630,6 +1691,7 @@ module Aws::CustomerProfiles
     #   <p>The name of the event stream</p>
     #   @return [String]
     class DeleteEventStreamRequest < Struct.new(
+      nil,
       :domain_name,
       :event_stream_name,
       keyword_init: true
@@ -1638,6 +1700,7 @@ module Aws::CustomerProfiles
     end
 
     class DeleteEventStreamResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1650,6 +1713,7 @@ module Aws::CustomerProfiles
     #   <p>The unique name of the event trigger.</p>
     #   @return [String]
     class DeleteEventTriggerRequest < Struct.new(
+      nil,
       :domain_name,
       :event_trigger_name,
       keyword_init: true
@@ -1661,6 +1725,7 @@ module Aws::CustomerProfiles
     #   <p>A message that indicates the delete request is done.</p>
     #   @return [String]
     class DeleteEventTriggerResponse < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -1674,6 +1739,7 @@ module Aws::CustomerProfiles
     #   <p>The URI of the S3 bucket or any other type of data source.</p>
     #   @return [String]
     class DeleteIntegrationRequest < Struct.new(
+      nil,
       :domain_name,
       :uri,
       keyword_init: true
@@ -1685,6 +1751,7 @@ module Aws::CustomerProfiles
     #   <p>A message that indicates the delete request is done.</p>
     #   @return [String]
     class DeleteIntegrationResponse < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -1704,6 +1771,7 @@ module Aws::CustomerProfiles
     #   <p>The unique name of the domain.</p>
     #   @return [String]
     class DeleteProfileKeyRequest < Struct.new(
+      nil,
       :profile_id,
       :key_name,
       :values,
@@ -1717,6 +1785,7 @@ module Aws::CustomerProfiles
     #   <p>A message that indicates the delete request is done.</p>
     #   @return [String]
     class DeleteProfileKeyResponse < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -1736,6 +1805,7 @@ module Aws::CustomerProfiles
     #   <p>The unique name of the domain.</p>
     #   @return [String]
     class DeleteProfileObjectRequest < Struct.new(
+      nil,
       :profile_id,
       :profile_object_unique_key,
       :object_type_name,
@@ -1749,6 +1819,7 @@ module Aws::CustomerProfiles
     #   <p>A message that indicates the delete request is done.</p>
     #   @return [String]
     class DeleteProfileObjectResponse < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -1762,6 +1833,7 @@ module Aws::CustomerProfiles
     #   <p>The name of the profile object type.</p>
     #   @return [String]
     class DeleteProfileObjectTypeRequest < Struct.new(
+      nil,
       :domain_name,
       :object_type_name,
       keyword_init: true
@@ -1773,6 +1845,7 @@ module Aws::CustomerProfiles
     #   <p>A message that indicates the delete request is done.</p>
     #   @return [String]
     class DeleteProfileObjectTypeResponse < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -1786,6 +1859,7 @@ module Aws::CustomerProfiles
     #   <p>The unique name of the domain.</p>
     #   @return [String]
     class DeleteProfileRequest < Struct.new(
+      nil,
       :profile_id,
       :domain_name,
       keyword_init: true
@@ -1797,6 +1871,7 @@ module Aws::CustomerProfiles
     #   <p>A message that indicates the delete request is done.</p>
     #   @return [String]
     class DeleteProfileResponse < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -1810,6 +1885,7 @@ module Aws::CustomerProfiles
     #   <p>The unique name of the segment definition.</p>
     #   @return [String]
     class DeleteSegmentDefinitionRequest < Struct.new(
+      nil,
       :domain_name,
       :segment_definition_name,
       keyword_init: true
@@ -1821,6 +1897,7 @@ module Aws::CustomerProfiles
     #   <p>A message that indicates the delete request is done.</p>
     #   @return [String]
     class DeleteSegmentDefinitionResponse < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -1834,6 +1911,7 @@ module Aws::CustomerProfiles
     #   <p>Unique identifier for the workflow.</p>
     #   @return [String]
     class DeleteWorkflowRequest < Struct.new(
+      nil,
       :domain_name,
       :workflow_id,
       keyword_init: true
@@ -1842,6 +1920,7 @@ module Aws::CustomerProfiles
     end
 
     class DeleteWorkflowResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1859,6 +1938,7 @@ module Aws::CustomerProfiles
     #   <p>The timestamp when the status last changed to <code>UNHEALHY</code>.</p>
     #   @return [Time]
     class DestinationSummary < Struct.new(
+      nil,
       :uri,
       :status,
       :unhealthy_since,
@@ -1874,6 +1954,7 @@ module Aws::CustomerProfiles
     #   <p>The unique name of the domain.</p>
     #   @return [String]
     class DetectProfileObjectTypeRequest < Struct.new(
+      nil,
       :objects,
       :domain_name,
       keyword_init: true
@@ -1886,6 +1967,7 @@ module Aws::CustomerProfiles
     #            mapping is supported.</p>
     #   @return [Array<Types::DetectedProfileObjectType>]
     class DetectProfileObjectTypeResponse < Struct.new(
+      nil,
       :detected_profile_object_types,
       keyword_init: true
     )
@@ -1904,6 +1986,7 @@ module Aws::CustomerProfiles
     #   <p>A list of unique keys that can be used to map data to a profile.</p>
     #   @return [Hash<String, Array<Types::ObjectTypeKey>>]
     class DetectedProfileObjectType < Struct.new(
+      nil,
       :source_last_updated_timestamp_format,
       :fields,
       :keys,
@@ -1948,6 +2031,7 @@ module Aws::CustomerProfiles
     #   <p>The total size, in bytes, of all objects in the domain.</p>
     #   @return [Integer]
     class DomainStats < Struct.new(
+      nil,
       :profile_count,
       :metering_profile_count,
       :object_count,
@@ -1974,6 +2058,7 @@ module Aws::CustomerProfiles
     #   <p>A list of email-related contact preferences</p>
     #   @return [Array<Types::ContactPreference>]
     class EngagementPreferences < Struct.new(
+      nil,
       :phone,
       :email,
       keyword_init: true
@@ -1997,6 +2082,7 @@ module Aws::CustomerProfiles
     #            streaming destination.</p>
     #   @return [String]
     class EventStreamDestinationDetails < Struct.new(
+      nil,
       :uri,
       :status,
       :unhealthy_since,
@@ -2029,6 +2115,7 @@ module Aws::CustomerProfiles
     #   <p>The tags used to organize, track, or control access for this resource.</p>
     #   @return [Hash<String, String>]
     class EventStreamSummary < Struct.new(
+      nil,
       :domain_name,
       :event_stream_name,
       :event_stream_arn,
@@ -2049,6 +2136,7 @@ module Aws::CustomerProfiles
     #   <p>The operator used to combine multiple dimensions.</p>
     #   @return [String]
     class EventTriggerCondition < Struct.new(
+      nil,
       :event_trigger_dimensions,
       :logical_operator,
       keyword_init: true
@@ -2061,6 +2149,7 @@ module Aws::CustomerProfiles
     #   <p>A list of object attributes to be evaluated.</p>
     #   @return [Array<Types::ObjectAttribute>]
     class EventTriggerDimension < Struct.new(
+      nil,
       :object_attributes,
       keyword_init: true
     )
@@ -2077,6 +2166,7 @@ module Aws::CustomerProfiles
     #   <p>A list of time periods during which the limits apply.</p>
     #   @return [Array<Types::Period>]
     class EventTriggerLimits < Struct.new(
+      nil,
       :event_expiration,
       :periods,
       keyword_init: true
@@ -2104,6 +2194,7 @@ module Aws::CustomerProfiles
     #   <p>An array of key-value pairs to apply to this resource.</p>
     #   @return [Hash<String, String>]
     class EventTriggerSummaryItem < Struct.new(
+      nil,
       :object_type_name,
       :event_trigger_name,
       :description,
@@ -2125,6 +2216,7 @@ module Aws::CustomerProfiles
     #   <p>The S3 location where Identity Resolution Jobs write result files.</p>
     #   @return [Types::S3ExportingConfig]
     class ExportingConfig < Struct.new(
+      nil,
       :s3_exporting,
       keyword_init: true
     )
@@ -2136,6 +2228,7 @@ module Aws::CustomerProfiles
     #   <p>Information about the S3 location where Identity Resolution Jobs write result files.</p>
     #   @return [Types::S3ExportingLocation]
     class ExportingLocation < Struct.new(
+      nil,
       :s3_exporting,
       keyword_init: true
     )
@@ -2151,6 +2244,7 @@ module Aws::CustomerProfiles
     #   <p>The values to apply the DimensionType on.</p>
     #   @return [Array<String>]
     class ExtraLengthValueProfileDimension < Struct.new(
+      nil,
       :dimension_type,
       :values,
       keyword_init: true
@@ -2229,6 +2323,7 @@ module Aws::CustomerProfiles
     #   <p>A unique identifier for the engagement preferences field to be merged.</p>
     #   @return [String]
     class FieldSourceProfileIds < Struct.new(
+      nil,
       :account_number,
       :additional_information,
       :party_type,
@@ -2266,6 +2361,7 @@ module Aws::CustomerProfiles
     #   <p>Holds the list of Filter groups within the Filter definition.</p>
     #   @return [Array<Types::FilterGroup>]
     class Filter < Struct.new(
+      nil,
       :include,
       :groups,
       keyword_init: true
@@ -2282,6 +2378,7 @@ module Aws::CustomerProfiles
     #   <p>The values to apply the DimensionType on.</p>
     #   @return [Array<String>]
     class FilterAttributeDimension < Struct.new(
+      nil,
       :dimension_type,
       :values,
       keyword_init: true
@@ -2294,6 +2391,7 @@ module Aws::CustomerProfiles
     #   <p>Is the attribute within the FilterDimension map</p>
     #   @return [Hash<String, Types::FilterAttributeDimension>]
     class FilterDimension < Struct.new(
+      nil,
       :attributes,
       keyword_init: true
     )
@@ -2308,6 +2406,7 @@ module Aws::CustomerProfiles
     #   <p>Object that holds the attributes to filter on.</p>
     #   @return [Array<Types::FilterDimension>]
     class FilterGroup < Struct.new(
+      nil,
       :type,
       :dimensions,
       keyword_init: true
@@ -2341,6 +2440,7 @@ module Aws::CustomerProfiles
     #   <p>The trigger settings that determine how and when the flow runs.</p>
     #   @return [Types::TriggerConfig]
     class FlowDefinition < Struct.new(
+      nil,
       :description,
       :flow_name,
       :kms_arn,
@@ -2362,6 +2462,7 @@ module Aws::CustomerProfiles
     #   <p>A list of key values.</p>
     #   @return [Array<String>]
     class FoundByKeyValue < Struct.new(
+      nil,
       :key_name,
       :values,
       keyword_init: true
@@ -2383,6 +2484,7 @@ module Aws::CustomerProfiles
     #            during the auto-merge process.</p>
     #   @return [Float]
     class GetAutoMergingPreviewRequest < Struct.new(
+      nil,
       :domain_name,
       :consolidation,
       :conflict_resolution,
@@ -2406,6 +2508,7 @@ module Aws::CustomerProfiles
     #   <p>The number of profiles that would be merged if this wasn't a preview dry run.</p>
     #   @return [Integer]
     class GetAutoMergingPreviewResponse < Struct.new(
+      nil,
       :domain_name,
       :number_of_matches_in_sample,
       :number_of_profiles_in_sample,
@@ -2429,6 +2532,7 @@ module Aws::CustomerProfiles
     #   <p>The unique name of the calculated attribute.</p>
     #   @return [String]
     class GetCalculatedAttributeDefinitionRequest < Struct.new(
+      nil,
       :domain_name,
       :calculated_attribute_name,
       keyword_init: true
@@ -2482,6 +2586,7 @@ module Aws::CustomerProfiles
     #   <p>The tags used to organize, track, or control access for this resource.</p>
     #   @return [Hash<String, String>]
     class GetCalculatedAttributeDefinitionResponse < Struct.new(
+      nil,
       :calculated_attribute_name,
       :display_name,
       :description,
@@ -2510,6 +2615,7 @@ module Aws::CustomerProfiles
     #   <p>The unique name of the calculated attribute.</p>
     #   @return [String]
     class GetCalculatedAttributeForProfileRequest < Struct.new(
+      nil,
       :domain_name,
       :profile_id,
       :calculated_attribute_name,
@@ -2536,6 +2642,7 @@ module Aws::CustomerProfiles
     #            calculation.</p>
     #   @return [Time]
     class GetCalculatedAttributeForProfileResponse < Struct.new(
+      nil,
       :calculated_attribute_name,
       :display_name,
       :is_data_partial,
@@ -2553,6 +2660,7 @@ module Aws::CustomerProfiles
     #   <p>The unique name of the layout.</p>
     #   @return [String]
     class GetDomainLayoutRequest < Struct.new(
+      nil,
       :domain_name,
       :layout_definition_name,
       keyword_init: true
@@ -2593,6 +2701,7 @@ module Aws::CustomerProfiles
     #   <p>The tags used to organize, track, or control access for this resource.</p>
     #   @return [Hash<String, String>]
     class GetDomainLayoutResponse < Struct.new(
+      nil,
       :layout_definition_name,
       :description,
       :display_name,
@@ -2617,6 +2726,7 @@ module Aws::CustomerProfiles
     #   <p>The unique name of the domain.</p>
     #   @return [String]
     class GetDomainRequest < Struct.new(
+      nil,
       :domain_name,
       keyword_init: true
     )
@@ -2669,6 +2779,7 @@ module Aws::CustomerProfiles
     #   <p>The tags used to organize, track, or control access for this resource.</p>
     #   @return [Hash<String, String>]
     class GetDomainResponse < Struct.new(
+      nil,
       :domain_name,
       :default_expiration_days,
       :default_encryption_key,
@@ -2691,6 +2802,7 @@ module Aws::CustomerProfiles
     #   <p>The name of the event stream provided during create operations.</p>
     #   @return [String]
     class GetEventStreamRequest < Struct.new(
+      nil,
       :domain_name,
       :event_stream_name,
       keyword_init: true
@@ -2720,6 +2832,7 @@ module Aws::CustomerProfiles
     #   <p>The tags used to organize, track, or control access for this resource.</p>
     #   @return [Hash<String, String>]
     class GetEventStreamResponse < Struct.new(
+      nil,
       :domain_name,
       :event_stream_arn,
       :created_at,
@@ -2739,6 +2852,7 @@ module Aws::CustomerProfiles
     #   <p>The unique name of the event trigger.</p>
     #   @return [String]
     class GetEventTriggerRequest < Struct.new(
+      nil,
       :domain_name,
       :event_trigger_name,
       keyword_init: true
@@ -2776,6 +2890,7 @@ module Aws::CustomerProfiles
     #   <p>An array of key-value pairs to apply to this resource.</p>
     #   @return [Hash<String, String>]
     class GetEventTriggerResponse < Struct.new(
+      nil,
       :event_trigger_name,
       :object_type_name,
       :description,
@@ -2797,6 +2912,7 @@ module Aws::CustomerProfiles
     #   <p>The unique identifier of the Identity Resolution Job.</p>
     #   @return [String]
     class GetIdentityResolutionJobRequest < Struct.new(
+      nil,
       :domain_name,
       :job_id,
       keyword_init: true
@@ -2873,6 +2989,7 @@ module Aws::CustomerProfiles
     #   <p>Statistics about the Identity Resolution Job.</p>
     #   @return [Types::JobStats]
     class GetIdentityResolutionJobResponse < Struct.new(
+      nil,
       :domain_name,
       :job_id,
       :status,
@@ -2896,6 +3013,7 @@ module Aws::CustomerProfiles
     #   <p>The URI of the S3 bucket or any other type of data source.</p>
     #   @return [String]
     class GetIntegrationRequest < Struct.new(
+      nil,
       :domain_name,
       :uri,
       keyword_init: true
@@ -2943,6 +3061,7 @@ module Aws::CustomerProfiles
     #            list would be empty if no Event Trigger is associated with the integration.</p>
     #   @return [Array<String>]
     class GetIntegrationResponse < Struct.new(
+      nil,
       :domain_name,
       :uri,
       :object_type_name,
@@ -2970,6 +3089,7 @@ module Aws::CustomerProfiles
     #   <p>The unique name of the domain.</p>
     #   @return [String]
     class GetMatchesRequest < Struct.new(
+      nil,
       :next_token,
       :max_results,
       :domain_name,
@@ -2991,6 +3111,7 @@ module Aws::CustomerProfiles
     #   <p>The list of matched profiles for this instance.</p>
     #   @return [Array<Types::MatchItem>]
     class GetMatchesResponse < Struct.new(
+      nil,
       :next_token,
       :match_generation_date,
       :potential_matches,
@@ -3010,6 +3131,7 @@ module Aws::CustomerProfiles
     #   <p>The unique identifier of the profile history record to return.</p>
     #   @return [String]
     class GetProfileHistoryRecordRequest < Struct.new(
+      nil,
       :domain_name,
       :profile_id,
       :id,
@@ -3043,6 +3165,7 @@ module Aws::CustomerProfiles
     #   <p>The Amazon Resource Name (ARN) of the person or service principal who performed the action.</p>
     #   @return [String]
     class GetProfileHistoryRecordResponse < Struct.new(
+      nil,
       :id,
       :object_type_name,
       :created_at,
@@ -3063,6 +3186,7 @@ module Aws::CustomerProfiles
     #   <p>The name of the profile object type.</p>
     #   @return [String]
     class GetProfileObjectTypeRequest < Struct.new(
+      nil,
       :domain_name,
       :object_type_name,
       keyword_init: true
@@ -3119,6 +3243,7 @@ module Aws::CustomerProfiles
     #   <p>The tags used to organize, track, or control access for this resource.</p>
     #   @return [Hash<String, String>]
     class GetProfileObjectTypeResponse < Struct.new(
+      nil,
       :object_type_name,
       :description,
       :template_id,
@@ -3147,6 +3272,7 @@ module Aws::CustomerProfiles
     #   <p>A unique identifier for the object template.</p>
     #   @return [String]
     class GetProfileObjectTypeTemplateRequest < Struct.new(
+      nil,
       :template_id,
       keyword_init: true
     )
@@ -3180,6 +3306,7 @@ module Aws::CustomerProfiles
     #   <p>A list of unique keys that can be used to map data to the profile.</p>
     #   @return [Hash<String, Array<Types::ObjectTypeKey>>]
     class GetProfileObjectTypeTemplateResponse < Struct.new(
+      nil,
       :template_id,
       :source_name,
       :source_object,
@@ -3204,6 +3331,7 @@ module Aws::CustomerProfiles
     #   <p>The unique name of the segment definition.</p>
     #   @return [String]
     class GetSegmentDefinitionRequest < Struct.new(
+      nil,
       :domain_name,
       :segment_definition_name,
       keyword_init: true
@@ -3233,6 +3361,7 @@ module Aws::CustomerProfiles
     #   <p>The tags used to organize, track, or control access for this resource.</p>
     #   @return [Hash<String, String>]
     class GetSegmentDefinitionResponse < Struct.new(
+      nil,
       :segment_definition_name,
       :display_name,
       :description,
@@ -3252,6 +3381,7 @@ module Aws::CustomerProfiles
     #   <p>The query Id passed by a previous <code>CreateSegmentEstimate</code> operation.</p>
     #   @return [String]
     class GetSegmentEstimateRequest < Struct.new(
+      nil,
       :domain_name,
       :estimate_id,
       keyword_init: true
@@ -3279,6 +3409,7 @@ module Aws::CustomerProfiles
     #   <p>The status code of the segment estimate.</p>
     #   @return [Integer]
     class GetSegmentEstimateResponse < Struct.new(
+      nil,
       :domain_name,
       :estimate_id,
       :status,
@@ -3305,6 +3436,7 @@ module Aws::CustomerProfiles
     #   <p>The list of profile IDs to query for.</p>
     #   @return [Array<String>]
     class GetSegmentMembershipRequest < Struct.new(
+      nil,
       :domain_name,
       :segment_definition_name,
       :profile_ids,
@@ -3324,6 +3456,7 @@ module Aws::CustomerProfiles
     #            request.</p>
     #   @return [Array<Types::ProfileQueryFailures>]
     class GetSegmentMembershipResponse < Struct.new(
+      nil,
       :segment_definition_name,
       :profiles,
       :failures,
@@ -3342,6 +3475,7 @@ module Aws::CustomerProfiles
     #   <p>The unique identifier of the segment snapshot.</p>
     #   @return [String]
     class GetSegmentSnapshotRequest < Struct.new(
+      nil,
       :domain_name,
       :segment_definition_name,
       :snapshot_id,
@@ -3375,6 +3509,7 @@ module Aws::CustomerProfiles
     #            the request is not submitted from the Amazon Connect Admin Website.</p>
     #   @return [String]
     class GetSegmentSnapshotResponse < Struct.new(
+      nil,
       :snapshot_id,
       :status,
       :status_message,
@@ -3406,6 +3541,7 @@ module Aws::CustomerProfiles
     #   <p>The string based on <code>SearchKey</code> to be searched for similar profiles.</p>
     #   @return [String]
     class GetSimilarProfilesRequest < Struct.new(
+      nil,
       :next_token,
       :max_results,
       :domain_name,
@@ -3443,6 +3579,7 @@ module Aws::CustomerProfiles
     #   <p>The pagination token from the previous <code>GetSimilarProfiles</code> API call.</p>
     #   @return [String]
     class GetSimilarProfilesResponse < Struct.new(
+      nil,
       :profile_ids,
       :match_id,
       :match_type,
@@ -3462,6 +3599,7 @@ module Aws::CustomerProfiles
     #            generated from the CreateUploadJob API. </p>
     #   @return [String]
     class GetUploadJobPathRequest < Struct.new(
+      nil,
       :domain_name,
       :job_id,
       keyword_init: true
@@ -3493,6 +3631,7 @@ module Aws::CustomerProfiles
     #            valid. </p>
     #   @return [Time]
     class GetUploadJobPathResponse < Struct.new(
+      nil,
       :url,
       :client_token,
       :valid_until,
@@ -3508,6 +3647,7 @@ module Aws::CustomerProfiles
     #   <p>The unique identifier of the upload job to retrieve. </p>
     #   @return [String]
     class GetUploadJobRequest < Struct.new(
+      nil,
       :domain_name,
       :job_id,
       keyword_init: true
@@ -3594,6 +3734,7 @@ module Aws::CustomerProfiles
     #   <p>The expiry duration for the profiles ingested with the upload job. </p>
     #   @return [Integer]
     class GetUploadJobResponse < Struct.new(
+      nil,
       :job_id,
       :display_name,
       :status,
@@ -3616,6 +3757,7 @@ module Aws::CustomerProfiles
     #   <p>Unique identifier for the workflow.</p>
     #   @return [String]
     class GetWorkflowRequest < Struct.new(
+      nil,
       :domain_name,
       :workflow_id,
       keyword_init: true
@@ -3648,6 +3790,7 @@ module Aws::CustomerProfiles
     #   <p>Workflow specific execution metrics.</p>
     #   @return [Types::WorkflowMetrics]
     class GetWorkflowResponse < Struct.new(
+      nil,
       :workflow_id,
       :workflow_type,
       :status,
@@ -3675,6 +3818,7 @@ module Aws::CustomerProfiles
     #   <p>The maximum number of results to return per page.</p>
     #   @return [Integer]
     class GetWorkflowStepsRequest < Struct.new(
+      nil,
       :domain_name,
       :workflow_id,
       :next_token,
@@ -3697,6 +3841,7 @@ module Aws::CustomerProfiles
     #   <p>If there are additional results, this is the token for the next set of results.</p>
     #   @return [String]
     class GetWorkflowStepsResponse < Struct.new(
+      nil,
       :workflow_id,
       :workflow_type,
       :items,
@@ -3720,6 +3865,7 @@ module Aws::CustomerProfiles
     #   <p>Defines how to interact with the profiles found in the current filtering.</p>
     #   @return [String]
     class Group < Struct.new(
+      nil,
       :dimensions,
       :source_segments,
       :source_type,
@@ -3796,6 +3942,7 @@ module Aws::CustomerProfiles
     #   <p>The error messages that are generated when the Identity Resolution Job runs.</p>
     #   @return [String]
     class IdentityResolutionJob < Struct.new(
+      nil,
       :domain_name,
       :job_id,
       :status,
@@ -3816,6 +3963,7 @@ module Aws::CustomerProfiles
     #            importing incremental records from the source.</p>
     #   @return [String]
     class IncrementalPullConfig < Struct.new(
+      nil,
       :datetime_type_field_name,
       keyword_init: true
     )
@@ -3827,6 +3975,7 @@ module Aws::CustomerProfiles
     #   <p>Configuration data for <code>APPFLOW_INTEGRATION</code> workflow type.</p>
     #   @return [Types::AppflowIntegration]
     class IntegrationConfig < Struct.new(
+      nil,
       :appflow_integration,
       keyword_init: true
     )
@@ -3837,6 +3986,7 @@ module Aws::CustomerProfiles
     # @!attribute message
     #   @return [String]
     class InternalServerException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -3851,6 +4001,7 @@ module Aws::CustomerProfiles
     #   <p>The time when the Identity Resolution Job should run every week.</p>
     #   @return [String]
     class JobSchedule < Struct.new(
+      nil,
       :day_of_the_week,
       :time,
       keyword_init: true
@@ -3869,6 +4020,7 @@ module Aws::CustomerProfiles
     #   <p>The number of merges completed.</p>
     #   @return [Integer]
     class JobStats < Struct.new(
+      nil,
       :number_of_profiles_reviewed,
       :number_of_matches_found,
       :number_of_merges_done,
@@ -3913,6 +4065,7 @@ module Aws::CustomerProfiles
     #   <p>The timestamp of when the layout was most recently updated.</p>
     #   @return [Time]
     class LayoutItem < Struct.new(
+      nil,
       :layout_definition_name,
       :description,
       :display_name,
@@ -3944,6 +4097,7 @@ module Aws::CustomerProfiles
     #   <p>Boolean to indicate if hidden integration should be returned. Defaults to <code>False</code>.</p>
     #   @return [Boolean]
     class ListAccountIntegrationsRequest < Struct.new(
+      nil,
       :uri,
       :next_token,
       :max_results,
@@ -3960,6 +4114,7 @@ module Aws::CustomerProfiles
     #   <p>The pagination token from the previous ListAccountIntegrations API call.</p>
     #   @return [String]
     class ListAccountIntegrationsResponse < Struct.new(
+      nil,
       :items,
       :next_token,
       keyword_init: true
@@ -3996,6 +4151,7 @@ module Aws::CustomerProfiles
     #   <p>The tags used to organize, track, or control access for this resource.</p>
     #   @return [Hash<String, String>]
     class ListCalculatedAttributeDefinitionItem < Struct.new(
+      nil,
       :calculated_attribute_name,
       :display_name,
       :description,
@@ -4020,6 +4176,7 @@ module Aws::CustomerProfiles
     #   <p>The maximum number of calculated attribute definitions returned per page.</p>
     #   @return [Integer]
     class ListCalculatedAttributeDefinitionsRequest < Struct.new(
+      nil,
       :domain_name,
       :next_token,
       :max_results,
@@ -4036,6 +4193,7 @@ module Aws::CustomerProfiles
     #            ListCalculatedAttributeDefinitions.</p>
     #   @return [String]
     class ListCalculatedAttributeDefinitionsResponse < Struct.new(
+      nil,
       :items,
       :next_token,
       keyword_init: true
@@ -4062,6 +4220,7 @@ module Aws::CustomerProfiles
     #            calculation.</p>
     #   @return [Time]
     class ListCalculatedAttributeForProfileItem < Struct.new(
+      nil,
       :calculated_attribute_name,
       :display_name,
       :is_data_partial,
@@ -4086,6 +4245,7 @@ module Aws::CustomerProfiles
     #   <p>The unique identifier of a customer profile.</p>
     #   @return [String]
     class ListCalculatedAttributesForProfileRequest < Struct.new(
+      nil,
       :next_token,
       :max_results,
       :domain_name,
@@ -4103,6 +4263,7 @@ module Aws::CustomerProfiles
     #            ListCalculatedAttributesForProfile.</p>
     #   @return [String]
     class ListCalculatedAttributesForProfileResponse < Struct.new(
+      nil,
       :items,
       :next_token,
       keyword_init: true
@@ -4124,6 +4285,7 @@ module Aws::CustomerProfiles
     #   <p>The tags used to organize, track, or control access for this resource.</p>
     #   @return [Hash<String, String>]
     class ListDomainItem < Struct.new(
+      nil,
       :domain_name,
       :created_at,
       :last_updated_at,
@@ -4143,6 +4305,7 @@ module Aws::CustomerProfiles
     #   <p>The maximum number of objects returned per page.</p>
     #   @return [Integer]
     class ListDomainLayoutsRequest < Struct.new(
+      nil,
       :domain_name,
       :next_token,
       :max_results,
@@ -4158,6 +4321,7 @@ module Aws::CustomerProfiles
     #   <p>Identifies the next page of results to return.</p>
     #   @return [String]
     class ListDomainLayoutsResponse < Struct.new(
+      nil,
       :items,
       :next_token,
       keyword_init: true
@@ -4172,6 +4336,7 @@ module Aws::CustomerProfiles
     #   <p>The maximum number of objects returned per page.</p>
     #   @return [Integer]
     class ListDomainsRequest < Struct.new(
+      nil,
       :next_token,
       :max_results,
       keyword_init: true
@@ -4186,6 +4351,7 @@ module Aws::CustomerProfiles
     #   <p>The pagination token from the previous ListDomains API call.</p>
     #   @return [String]
     class ListDomainsResponse < Struct.new(
+      nil,
       :items,
       :next_token,
       keyword_init: true
@@ -4203,6 +4369,7 @@ module Aws::CustomerProfiles
     #   <p>The maximum number of objects returned per page.</p>
     #   @return [Integer]
     class ListEventStreamsRequest < Struct.new(
+      nil,
       :domain_name,
       :next_token,
       :max_results,
@@ -4218,6 +4385,7 @@ module Aws::CustomerProfiles
     #   <p>Identifies the next page of results to return.</p>
     #   @return [String]
     class ListEventStreamsResponse < Struct.new(
+      nil,
       :items,
       :next_token,
       keyword_init: true
@@ -4235,6 +4403,7 @@ module Aws::CustomerProfiles
     #   <p>The maximum number of results to return per page.</p>
     #   @return [Integer]
     class ListEventTriggersRequest < Struct.new(
+      nil,
       :domain_name,
       :next_token,
       :max_results,
@@ -4250,6 +4419,7 @@ module Aws::CustomerProfiles
     #   <p>The pagination token from the previous call to ListEventTriggers.</p>
     #   @return [String]
     class ListEventTriggersResponse < Struct.new(
+      nil,
       :items,
       :next_token,
       keyword_init: true
@@ -4268,6 +4438,7 @@ module Aws::CustomerProfiles
     #   <p>The maximum number of results to return per page.</p>
     #   @return [Integer]
     class ListIdentityResolutionJobsRequest < Struct.new(
+      nil,
       :domain_name,
       :next_token,
       :max_results,
@@ -4283,6 +4454,7 @@ module Aws::CustomerProfiles
     #   <p>If there are additional results, this is the token for the next set of results.</p>
     #   @return [String]
     class ListIdentityResolutionJobsResponse < Struct.new(
+      nil,
       :identity_resolution_jobs_list,
       :next_token,
       keyword_init: true
@@ -4330,6 +4502,7 @@ module Aws::CustomerProfiles
     #   <p>A list of unique names for active event triggers associated with the integration.</p>
     #   @return [Array<String>]
     class ListIntegrationItem < Struct.new(
+      nil,
       :domain_name,
       :uri,
       :object_type_name,
@@ -4359,6 +4532,7 @@ module Aws::CustomerProfiles
     #   <p>Boolean to indicate if hidden integration should be returned. Defaults to <code>False</code>.</p>
     #   @return [Boolean]
     class ListIntegrationsRequest < Struct.new(
+      nil,
       :domain_name,
       :next_token,
       :max_results,
@@ -4375,6 +4549,7 @@ module Aws::CustomerProfiles
     #   <p>The pagination token from the previous ListIntegrations API call.</p>
     #   @return [String]
     class ListIntegrationsResponse < Struct.new(
+      nil,
       :items,
       :next_token,
       keyword_init: true
@@ -4390,6 +4565,7 @@ module Aws::CustomerProfiles
     #   <p>When the attribute was last updated.</p>
     #   @return [Time]
     class ListObjectTypeAttributeItem < Struct.new(
+      nil,
       :attribute_name,
       :last_updated_at,
       keyword_init: true
@@ -4410,6 +4586,7 @@ module Aws::CustomerProfiles
     #   <p>The name of the profile object type.</p>
     #   @return [String]
     class ListObjectTypeAttributesRequest < Struct.new(
+      nil,
       :next_token,
       :max_results,
       :domain_name,
@@ -4426,6 +4603,7 @@ module Aws::CustomerProfiles
     #   <p>The pagination token from the previous call.</p>
     #   @return [String]
     class ListObjectTypeAttributesResponse < Struct.new(
+      nil,
       :items,
       :next_token,
       keyword_init: true
@@ -4456,6 +4634,7 @@ module Aws::CustomerProfiles
     #   <p>Applies a filter to include profile history records only with the specified <code>PerformedBy</code> value in the response. The <code>PerformedBy</code> value can be the Amazon Resource Name (ARN) of the person or service principal who performed the action.</p>
     #   @return [String]
     class ListProfileHistoryRecordsRequest < Struct.new(
+      nil,
       :domain_name,
       :profile_id,
       :object_type_name,
@@ -4475,6 +4654,7 @@ module Aws::CustomerProfiles
     #   <p>If there are additional results, this is the token for the next set of results.</p>
     #   @return [String]
     class ListProfileHistoryRecordsResponse < Struct.new(
+      nil,
       :profile_history_records,
       :next_token,
       keyword_init: true
@@ -4505,6 +4685,7 @@ module Aws::CustomerProfiles
     #   <p>The tags used to organize, track, or control access for this resource.</p>
     #   @return [Hash<String, String>]
     class ListProfileObjectTypeItem < Struct.new(
+      nil,
       :object_type_name,
       :description,
       :created_at,
@@ -4528,6 +4709,7 @@ module Aws::CustomerProfiles
     #   <p>The source of the object template.</p>
     #   @return [String]
     class ListProfileObjectTypeTemplateItem < Struct.new(
+      nil,
       :template_id,
       :source_name,
       :source_object,
@@ -4543,6 +4725,7 @@ module Aws::CustomerProfiles
     #   <p>The maximum number of objects returned per page.</p>
     #   @return [Integer]
     class ListProfileObjectTypeTemplatesRequest < Struct.new(
+      nil,
       :next_token,
       :max_results,
       keyword_init: true
@@ -4557,6 +4740,7 @@ module Aws::CustomerProfiles
     #   <p>The pagination token from the previous ListObjectTypeTemplates API call. </p>
     #   @return [String]
     class ListProfileObjectTypeTemplatesResponse < Struct.new(
+      nil,
       :items,
       :next_token,
       keyword_init: true
@@ -4574,6 +4758,7 @@ module Aws::CustomerProfiles
     #   <p>The maximum number of objects returned per page.</p>
     #   @return [Integer]
     class ListProfileObjectTypesRequest < Struct.new(
+      nil,
       :domain_name,
       :next_token,
       :max_results,
@@ -4589,6 +4774,7 @@ module Aws::CustomerProfiles
     #   <p>Identifies the next page of results to return.</p>
     #   @return [String]
     class ListProfileObjectTypesResponse < Struct.new(
+      nil,
       :items,
       :next_token,
       keyword_init: true
@@ -4608,6 +4794,7 @@ module Aws::CustomerProfiles
     #   <p>A JSON representation of a ProfileObject that belongs to a profile.</p>
     #   @return [String]
     class ListProfileObjectsItem < Struct.new(
+      nil,
       :object_type_name,
       :profile_object_unique_key,
       :object,
@@ -4636,6 +4823,7 @@ module Aws::CustomerProfiles
     #            values.</p>
     #   @return [Types::ObjectFilter]
     class ListProfileObjectsRequest < Struct.new(
+      nil,
       :next_token,
       :max_results,
       :domain_name,
@@ -4654,6 +4842,7 @@ module Aws::CustomerProfiles
     #   <p>The pagination token from the previous call to ListProfileObjects.</p>
     #   @return [String]
     class ListProfileObjectsResponse < Struct.new(
+      nil,
       :items,
       :next_token,
       keyword_init: true
@@ -4672,6 +4861,7 @@ module Aws::CustomerProfiles
     #   <p>The unique name of the domain.</p>
     #   @return [String]
     class ListRuleBasedMatchesRequest < Struct.new(
+      nil,
       :next_token,
       :max_results,
       :domain_name,
@@ -4688,6 +4878,7 @@ module Aws::CustomerProfiles
     #            call.</p>
     #   @return [String]
     class ListRuleBasedMatchesResponse < Struct.new(
+      nil,
       :match_ids,
       :next_token,
       keyword_init: true
@@ -4705,6 +4896,7 @@ module Aws::CustomerProfiles
     #   <p>The pagination token from the previous call. </p>
     #   @return [String]
     class ListSegmentDefinitionsRequest < Struct.new(
+      nil,
       :domain_name,
       :max_results,
       :next_token,
@@ -4720,6 +4912,7 @@ module Aws::CustomerProfiles
     #   <p>List of segment definitions.</p>
     #   @return [Array<Types::SegmentDefinitionItem>]
     class ListSegmentDefinitionsResponse < Struct.new(
+      nil,
       :next_token,
       :items,
       keyword_init: true
@@ -4731,6 +4924,7 @@ module Aws::CustomerProfiles
     #   <p>The ARN of the resource for which you want to view tags.</p>
     #   @return [String]
     class ListTagsForResourceRequest < Struct.new(
+      nil,
       :resource_arn,
       keyword_init: true
     )
@@ -4741,6 +4935,7 @@ module Aws::CustomerProfiles
     #   <p>The tags used to organize, track, or control access for this resource.</p>
     #   @return [Hash<String, String>]
     class ListTagsForResourceResponse < Struct.new(
+      nil,
       :tags,
       keyword_init: true
     )
@@ -4758,6 +4953,7 @@ module Aws::CustomerProfiles
     #         </p>
     #   @return [String]
     class ListUploadJobsRequest < Struct.new(
+      nil,
       :domain_name,
       :max_results,
       :next_token,
@@ -4773,6 +4969,7 @@ module Aws::CustomerProfiles
     #   <p>The list of upload jobs for the specified domain. </p>
     #   @return [Array<Types::UploadJobItem>]
     class ListUploadJobsResponse < Struct.new(
+      nil,
       :next_token,
       :items,
       keyword_init: true
@@ -4800,6 +4997,7 @@ module Aws::CustomerProfiles
     #   <p>Last updated timestamp for workflow.</p>
     #   @return [Time]
     class ListWorkflowsItem < Struct.new(
+      nil,
       :workflow_type,
       :workflow_id,
       :status,
@@ -4834,6 +5032,7 @@ module Aws::CustomerProfiles
     #   <p>The maximum number of results to return per page.</p>
     #   @return [Integer]
     class ListWorkflowsRequest < Struct.new(
+      nil,
       :domain_name,
       :workflow_type,
       :status,
@@ -4853,6 +5052,7 @@ module Aws::CustomerProfiles
     #   <p>If there are additional results, this is the token for the next set of results.</p>
     #   @return [String]
     class ListWorkflowsResponse < Struct.new(
+      nil,
       :items,
       :next_token,
       keyword_init: true
@@ -4865,6 +5065,7 @@ module Aws::CustomerProfiles
     #   <p>The object specified in the Marketo flow source.</p>
     #   @return [String]
     class MarketoSourceProperties < Struct.new(
+      nil,
       :object,
       keyword_init: true
     )
@@ -4888,6 +5089,7 @@ module Aws::CustomerProfiles
     #            absolute measure of matching quality.</p>
     #   @return [Float]
     class MatchItem < Struct.new(
+      nil,
       :match_id,
       :profile_ids,
       :confidence_score,
@@ -4911,6 +5113,7 @@ module Aws::CustomerProfiles
     #            bucket.</p>
     #   @return [Types::ExportingConfig]
     class MatchingRequest < Struct.new(
+      nil,
       :enabled,
       :job_schedule,
       :auto_merging,
@@ -4935,6 +5138,7 @@ module Aws::CustomerProfiles
     #            bucket.</p>
     #   @return [Types::ExportingConfig]
     class MatchingResponse < Struct.new(
+      nil,
       :enabled,
       :job_schedule,
       :auto_merging,
@@ -5006,6 +5210,7 @@ module Aws::CustomerProfiles
     #            matching process should match profiles.</p>
     #   @return [Array<String>]
     class MatchingRule < Struct.new(
+      nil,
       :rule,
       keyword_init: true
     )
@@ -5027,6 +5232,7 @@ module Aws::CustomerProfiles
     #            MainProfile. This would be the identifier of the EmailAddress field in Profile1. </p>
     #   @return [Types::FieldSourceProfileIds]
     class MergeProfilesRequest < Struct.new(
+      nil,
       :domain_name,
       :main_profile_id,
       :profile_ids_to_be_merged,
@@ -5040,6 +5246,7 @@ module Aws::CustomerProfiles
     #   <p>A message that indicates the merge request is complete.</p>
     #   @return [String]
     class MergeProfilesResponse < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -5061,6 +5268,7 @@ module Aws::CustomerProfiles
     #   <p>A list of attribute values used for comparison.</p>
     #   @return [Array<String>]
     class ObjectAttribute < Struct.new(
+      nil,
       :source,
       :field_name,
       :comparison_operator,
@@ -5083,6 +5291,7 @@ module Aws::CustomerProfiles
     #   <p>A list of key values.</p>
     #   @return [Array<String>]
     class ObjectFilter < Struct.new(
+      nil,
       :key_name,
       :values,
       keyword_init: true
@@ -5103,6 +5312,7 @@ module Aws::CustomerProfiles
     #   <p>The content type of the field. Used for determining equality when searching.</p>
     #   @return [String]
     class ObjectTypeField < Struct.new(
+      nil,
       :source,
       :target,
       :content_type,
@@ -5128,6 +5338,7 @@ module Aws::CustomerProfiles
     #   <p>The reference for the key name of the fields map.</p>
     #   @return [Array<String>]
     class ObjectTypeKey < Struct.new(
+      nil,
       :standard_identifiers,
       :field_names,
       keyword_init: true
@@ -5150,6 +5361,7 @@ module Aws::CustomerProfiles
     #            The default is false.</p>
     #   @return [Boolean]
     class Period < Struct.new(
+      nil,
       :unit,
       :value,
       :max_invocations_per_profile,
@@ -5272,6 +5484,7 @@ module Aws::CustomerProfiles
     #   <p>The customer or account’s engagement preferences.</p>
     #   @return [Types::EngagementPreferences]
     class Profile < Struct.new(
+      nil,
       :profile_id,
       :account_number,
       :additional_information,
@@ -5311,6 +5524,7 @@ module Aws::CustomerProfiles
     #   <p>The attribute name.</p>
     #   @return [String]
     class ProfileAttributeValuesRequest < Struct.new(
+      nil,
       :domain_name,
       :attribute_name,
       keyword_init: true
@@ -5331,6 +5545,7 @@ module Aws::CustomerProfiles
     #   <p>The status code for the response.</p>
     #   @return [Integer]
     class ProfileAttributeValuesResponse < Struct.new(
+      nil,
       :domain_name,
       :attribute_name,
       :items,
@@ -5414,6 +5629,7 @@ module Aws::CustomerProfiles
     #   <p>A field to describe values to segment on within profile type.</p>
     #   @return [Types::ProfileTypeDimension]
     class ProfileAttributes < Struct.new(
+      nil,
       :account_number,
       :additional_information,
       :first_name,
@@ -5449,6 +5665,7 @@ module Aws::CustomerProfiles
     #   <p>The values to apply the DimensionType on.</p>
     #   @return [Array<String>]
     class ProfileDimension < Struct.new(
+      nil,
       :dimension_type,
       :values,
       keyword_init: true
@@ -5479,6 +5696,7 @@ module Aws::CustomerProfiles
     #   <p>The Amazon Resource Name (ARN) of the person or service principal who performed the action.</p>
     #   @return [String]
     class ProfileHistoryRecord < Struct.new(
+      nil,
       :id,
       :object_type_name,
       :created_at,
@@ -5502,6 +5720,7 @@ module Aws::CustomerProfiles
     #   <p>The status describing the failure.</p>
     #   @return [Integer]
     class ProfileQueryFailures < Struct.new(
+      nil,
       :profile_id,
       :message,
       :status,
@@ -5521,6 +5740,7 @@ module Aws::CustomerProfiles
     #   <p>The standard profile of a customer.</p>
     #   @return [Types::Profile]
     class ProfileQueryResult < Struct.new(
+      nil,
       :profile_id,
       :query_result,
       :profile,
@@ -5537,6 +5757,7 @@ module Aws::CustomerProfiles
     #   <p>The values to apply the DimensionType on.</p>
     #   @return [Array<String>]
     class ProfileTypeDimension < Struct.new(
+      nil,
       :dimension_type,
       :values,
       keyword_init: true
@@ -5573,6 +5794,7 @@ module Aws::CustomerProfiles
     #   <p>A list of unique names for active event triggers associated with the integration.</p>
     #   @return [Array<String>]
     class PutIntegrationRequest < Struct.new(
+      nil,
       :domain_name,
       :uri,
       :object_type_name,
@@ -5626,6 +5848,7 @@ module Aws::CustomerProfiles
     #            list would be empty if no Event Trigger is associated with the integration.</p>
     #   @return [Array<String>]
     class PutIntegrationResponse < Struct.new(
+      nil,
       :domain_name,
       :uri,
       :object_type_name,
@@ -5652,6 +5875,7 @@ module Aws::CustomerProfiles
     #   <p>The unique name of the domain.</p>
     #   @return [String]
     class PutProfileObjectRequest < Struct.new(
+      nil,
       :object_type_name,
       :object,
       :domain_name,
@@ -5664,6 +5888,7 @@ module Aws::CustomerProfiles
     #   <p>The unique identifier of the profile object generated by the service.</p>
     #   @return [String]
     class PutProfileObjectResponse < Struct.new(
+      nil,
       :profile_object_unique_key,
       keyword_init: true
     )
@@ -5719,6 +5944,7 @@ module Aws::CustomerProfiles
     #   <p>The tags used to organize, track, or control access for this resource.</p>
     #   @return [Hash<String, String>]
     class PutProfileObjectTypeRequest < Struct.new(
+      nil,
       :domain_name,
       :object_type_name,
       :description,
@@ -5786,6 +6012,7 @@ module Aws::CustomerProfiles
     #   <p>The tags used to organize, track, or control access for this resource.</p>
     #   @return [Hash<String, String>]
     class PutProfileObjectTypeResponse < Struct.new(
+      nil,
       :object_type_name,
       :description,
       :template_id,
@@ -5839,6 +6066,7 @@ module Aws::CustomerProfiles
     #            TimestampFormat should be "ISO_8601".</p>
     #   @return [String]
     class Range < Struct.new(
+      nil,
       :value,
       :unit,
       :value_range,
@@ -5866,6 +6094,7 @@ module Aws::CustomerProfiles
     #   <p>The unit for start and end.</p>
     #   @return [String]
     class RangeOverride < Struct.new(
+      nil,
       :start,
       :end,
       :unit,
@@ -5889,6 +6118,7 @@ module Aws::CustomerProfiles
     #   <p>Any customer messaging.</p>
     #   @return [String]
     class Readiness < Struct.new(
+      nil,
       :progress_percentage,
       :message,
       keyword_init: true
@@ -5900,6 +6130,7 @@ module Aws::CustomerProfiles
     # @!attribute message
     #   @return [String]
     class ResourceNotFoundException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -5918,6 +6149,7 @@ module Aws::CustomerProfiles
     #   <p>The number of records that failed to be processed during the upload job. </p>
     #   @return [Integer]
     class ResultsSummary < Struct.new(
+      nil,
       :updated_records,
       :created_records,
       :failed_records,
@@ -5958,6 +6190,7 @@ module Aws::CustomerProfiles
     #            </note>
     #   @return [Types::ExportingConfig]
     class RuleBasedMatchingRequest < Struct.new(
+      nil,
       :enabled,
       :matching_rules,
       :max_allowed_rule_level_for_merging,
@@ -6028,6 +6261,7 @@ module Aws::CustomerProfiles
     #            </note>
     #   @return [Types::ExportingConfig]
     class RuleBasedMatchingResponse < Struct.new(
+      nil,
       :enabled,
       :matching_rules,
       :status,
@@ -6049,6 +6283,7 @@ module Aws::CustomerProfiles
     #   <p>The S3 key name of the location where Identity Resolution Jobs write result files.</p>
     #   @return [String]
     class S3ExportingConfig < Struct.new(
+      nil,
       :s3_bucket_name,
       :s3_key_name,
       keyword_init: true
@@ -6064,6 +6299,7 @@ module Aws::CustomerProfiles
     #   <p>The S3 key name of the location where Identity Resolution Jobs write result files.</p>
     #   @return [String]
     class S3ExportingLocation < Struct.new(
+      nil,
       :s3_bucket_name,
       :s3_key_name,
       keyword_init: true
@@ -6079,6 +6315,7 @@ module Aws::CustomerProfiles
     #   <p>The object key for the Amazon S3 bucket in which the source files are stored.</p>
     #   @return [String]
     class S3SourceProperties < Struct.new(
+      nil,
       :bucket_name,
       :bucket_prefix,
       keyword_init: true
@@ -6098,6 +6335,7 @@ module Aws::CustomerProfiles
     #   <p>Indicates whether Amazon AppFlow includes deleted files in the flow run.</p>
     #   @return [Boolean]
     class SalesforceSourceProperties < Struct.new(
+      nil,
       :object,
       :enable_dynamic_field_update,
       :include_deleted_records,
@@ -6141,6 +6379,7 @@ module Aws::CustomerProfiles
     #            run.</p>
     #   @return [Time]
     class ScheduledTriggerProperties < Struct.new(
+      nil,
       :schedule_expression,
       :data_pull_mode,
       :schedule_start_time,
@@ -6209,6 +6448,7 @@ module Aws::CustomerProfiles
     #            included in the request.</p>
     #   @return [String]
     class SearchProfilesRequest < Struct.new(
+      nil,
       :next_token,
       :max_results,
       :domain_name,
@@ -6228,6 +6468,7 @@ module Aws::CustomerProfiles
     #   <p>The pagination token from the previous SearchProfiles API call.</p>
     #   @return [String]
     class SearchProfilesResponse < Struct.new(
+      nil,
       :items,
       :next_token,
       keyword_init: true
@@ -6255,6 +6496,7 @@ module Aws::CustomerProfiles
     #   <p>The tags belonging to the segment definition.</p>
     #   @return [Hash<String, String>]
     class SegmentDefinitionItem < Struct.new(
+      nil,
       :segment_definition_name,
       :display_name,
       :description,
@@ -6275,6 +6517,7 @@ module Aws::CustomerProfiles
     #   <p>Defines whether to include or exclude the profiles that fit the segment criteria.</p>
     #   @return [String]
     class SegmentGroup < Struct.new(
+      nil,
       :groups,
       :include,
       keyword_init: true
@@ -6295,6 +6538,7 @@ module Aws::CustomerProfiles
     #   <p>Define whether to include or exclude the profiles that fit the segment criteria.</p>
     #   @return [String]
     class SegmentGroupStructure < Struct.new(
+      nil,
       :groups,
       :include,
       keyword_init: true
@@ -6307,6 +6551,7 @@ module Aws::CustomerProfiles
     #   <p>The object specified in the ServiceNow flow source.</p>
     #   @return [String]
     class ServiceNowSourceProperties < Struct.new(
+      nil,
       :object,
       keyword_init: true
     )
@@ -6331,6 +6576,7 @@ module Aws::CustomerProfiles
     #   <p>The properties that are applied when using Zendesk as a flow source.</p>
     #   @return [Types::ZendeskSourceProperties]
     class SourceConnectorProperties < Struct.new(
+      nil,
       :marketo,
       :s3,
       :salesforce,
@@ -6360,6 +6606,7 @@ module Aws::CustomerProfiles
     #            connector.</p>
     #   @return [Types::SourceConnectorProperties]
     class SourceFlowConfig < Struct.new(
+      nil,
       :connector_profile_name,
       :connector_type,
       :incremental_pull_config,
@@ -6374,6 +6621,7 @@ module Aws::CustomerProfiles
     #   <p>The unique name of the segment definition.</p>
     #   @return [String]
     class SourceSegment < Struct.new(
+      nil,
       :segment_definition_name,
       keyword_init: true
     )
@@ -6387,6 +6635,7 @@ module Aws::CustomerProfiles
     #   <p>The unique identifier of the upload job to start. </p>
     #   @return [String]
     class StartUploadJobRequest < Struct.new(
+      nil,
       :domain_name,
       :job_id,
       keyword_init: true
@@ -6395,6 +6644,7 @@ module Aws::CustomerProfiles
     end
 
     class StartUploadJobResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -6407,6 +6657,7 @@ module Aws::CustomerProfiles
     #   <p>The unique identifier of the upload job to stop. </p>
     #   @return [String]
     class StopUploadJobRequest < Struct.new(
+      nil,
       :domain_name,
       :job_id,
       keyword_init: true
@@ -6415,6 +6666,7 @@ module Aws::CustomerProfiles
     end
 
     class StopUploadJobResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -6427,6 +6679,7 @@ module Aws::CustomerProfiles
     #   <p>The tags used to organize, track, or control access for this resource.</p>
     #   @return [Hash<String, String>]
     class TagResourceRequest < Struct.new(
+      nil,
       :resource_arn,
       :tags,
       keyword_init: true
@@ -6435,6 +6688,7 @@ module Aws::CustomerProfiles
     end
 
     class TagResourceResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -6460,6 +6714,7 @@ module Aws::CustomerProfiles
     #   <p>Specifies the particular task implementation that Amazon AppFlow performs.</p>
     #   @return [String]
     class Task < Struct.new(
+      nil,
       :connector_operator,
       :destination_field,
       :source_fields,
@@ -6478,6 +6733,7 @@ module Aws::CustomerProfiles
     #   <p>The operator of the threshold.</p>
     #   @return [String]
     class Threshold < Struct.new(
+      nil,
       :value,
       :operator,
       keyword_init: true
@@ -6489,6 +6745,7 @@ module Aws::CustomerProfiles
     # @!attribute message
     #   @return [String]
     class ThrottlingException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -6505,6 +6762,7 @@ module Aws::CustomerProfiles
     #            Currently, these settings only apply to the Scheduled trigger type.</p>
     #   @return [Types::TriggerProperties]
     class TriggerConfig < Struct.new(
+      nil,
       :trigger_type,
       :trigger_properties,
       keyword_init: true
@@ -6518,6 +6776,7 @@ module Aws::CustomerProfiles
     #   <p>Specifies the configuration details of a schedule-triggered flow that you define.</p>
     #   @return [Types::ScheduledTriggerProperties]
     class TriggerProperties < Struct.new(
+      nil,
       :scheduled,
       keyword_init: true
     )
@@ -6531,6 +6790,7 @@ module Aws::CustomerProfiles
     #   <p>The list of tag keys to remove from the resource.</p>
     #   @return [Array<String>]
     class UntagResourceRequest < Struct.new(
+      nil,
       :resource_arn,
       :tag_keys,
       keyword_init: true
@@ -6539,6 +6799,7 @@ module Aws::CustomerProfiles
     end
 
     class UntagResourceResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -6577,6 +6838,7 @@ module Aws::CustomerProfiles
     #   <p>The postal code of a customer address.</p>
     #   @return [String]
     class UpdateAddress < Struct.new(
+      nil,
       :address1,
       :address2,
       :address3,
@@ -6609,6 +6871,7 @@ module Aws::CustomerProfiles
     #            attribute.</p>
     #   @return [Types::Conditions]
     class UpdateCalculatedAttributeDefinitionRequest < Struct.new(
+      nil,
       :domain_name,
       :calculated_attribute_name,
       :display_name,
@@ -6662,6 +6925,7 @@ module Aws::CustomerProfiles
     #   <p>The tags used to organize, track, or control access for this resource.</p>
     #   @return [Hash<String, String>]
     class UpdateCalculatedAttributeDefinitionResponse < Struct.new(
+      nil,
       :calculated_attribute_name,
       :display_name,
       :description,
@@ -6703,6 +6967,7 @@ module Aws::CustomerProfiles
     #   <p>A customizable layout that can be used to view data under a Customer Profiles domain.</p>
     #   @return [String]
     class UpdateDomainLayoutRequest < Struct.new(
+      nil,
       :domain_name,
       :layout_definition_name,
       :description,
@@ -6748,6 +7013,7 @@ module Aws::CustomerProfiles
     #   <p>The tags used to organize, track, or control access for this resource.</p>
     #   @return [Hash<String, String>]
     class UpdateDomainLayoutResponse < Struct.new(
+      nil,
       :layout_definition_name,
       :description,
       :display_name,
@@ -6809,6 +7075,7 @@ module Aws::CustomerProfiles
     #   <p>The tags used to organize, track, or control access for this resource.</p>
     #   @return [Hash<String, String>]
     class UpdateDomainRequest < Struct.new(
+      nil,
       :domain_name,
       :default_expiration_days,
       :default_encryption_key,
@@ -6864,6 +7131,7 @@ module Aws::CustomerProfiles
     #   <p>The tags used to organize, track, or control access for this resource.</p>
     #   @return [Hash<String, String>]
     class UpdateDomainResponse < Struct.new(
+      nil,
       :domain_name,
       :default_expiration_days,
       :default_encryption_key,
@@ -6902,6 +7170,7 @@ module Aws::CustomerProfiles
     #            latency and the number of invocations per profile over specific time periods.</p>
     #   @return [Types::EventTriggerLimits]
     class UpdateEventTriggerRequest < Struct.new(
+      nil,
       :domain_name,
       :event_trigger_name,
       :object_type_name,
@@ -6944,6 +7213,7 @@ module Aws::CustomerProfiles
     #   <p>An array of key-value pairs to apply to this resource.</p>
     #   @return [Hash<String, String>]
     class UpdateEventTriggerResponse < Struct.new(
+      nil,
       :event_trigger_name,
       :object_type_name,
       :description,
@@ -7043,6 +7313,7 @@ module Aws::CustomerProfiles
     #   <p>Object that defines users preferred methods of engagement.</p>
     #   @return [Types::EngagementPreferences]
     class UpdateProfileRequest < Struct.new(
+      nil,
       :domain_name,
       :profile_id,
       :additional_information,
@@ -7079,6 +7350,7 @@ module Aws::CustomerProfiles
     #   <p>The unique identifier of a customer profile.</p>
     #   @return [String]
     class UpdateProfileResponse < Struct.new(
+      nil,
       :profile_id,
       keyword_init: true
     )
@@ -7108,6 +7380,7 @@ module Aws::CustomerProfiles
     #   <p>The expiry duration for the profiles ingested with the upload job. </p>
     #   @return [Integer]
     class UploadJobItem < Struct.new(
+      nil,
       :job_id,
       :display_name,
       :status,
@@ -7133,6 +7406,7 @@ module Aws::CustomerProfiles
     #            starting point is in the past, and negative numbers to indicate it is in the future.</p>
     #   @return [Integer]
     class ValueRange < Struct.new(
+      nil,
       :start,
       :end,
       keyword_init: true
@@ -7145,6 +7419,7 @@ module Aws::CustomerProfiles
     #   <p>Workflow attributes specific to <code>APPFLOW_INTEGRATION</code> workflow.</p>
     #   @return [Types::AppflowIntegrationWorkflowAttributes]
     class WorkflowAttributes < Struct.new(
+      nil,
       :appflow_integration,
       keyword_init: true
     )
@@ -7156,6 +7431,7 @@ module Aws::CustomerProfiles
     #   <p>Workflow execution metrics for <code>APPFLOW_INTEGRATION</code> workflow.</p>
     #   @return [Types::AppflowIntegrationWorkflowMetrics]
     class WorkflowMetrics < Struct.new(
+      nil,
       :appflow_integration,
       keyword_init: true
     )
@@ -7167,6 +7443,7 @@ module Aws::CustomerProfiles
     #   <p>Workflow step information specific to <code>APPFLOW_INTEGRATION</code> workflow.</p>
     #   @return [Types::AppflowIntegrationWorkflowStep]
     class WorkflowStepItem < Struct.new(
+      nil,
       :appflow_integration,
       keyword_init: true
     )
@@ -7178,6 +7455,7 @@ module Aws::CustomerProfiles
     #   <p>The object specified in the Zendesk flow source.</p>
     #   @return [String]
     class ZendeskSourceProperties < Struct.new(
+      nil,
       :object,
       keyword_init: true
     )

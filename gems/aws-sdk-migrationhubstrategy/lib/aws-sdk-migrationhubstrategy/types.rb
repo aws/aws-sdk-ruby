@@ -11,6 +11,7 @@ module Aws::MigrationHubStrategy
     # @!attribute message
     #   @return [String]
     class AccessDeniedException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -51,6 +52,7 @@ module Aws::MigrationHubStrategy
     #   The virtual machine id of the analyzable server.
     #   @return [String]
     class AnalyzableServerSummary < Struct.new(
+      nil,
       :hostname,
       :ip_address,
       :source,
@@ -99,6 +101,7 @@ module Aws::MigrationHubStrategy
     #   <p>The status message for the anti-pattern.</p>
     #   @return [String]
     class AntipatternReportResult < Struct.new(
+      nil,
       :analyzer_name,
       :anti_pattern_report_s3_object,
       :antipattern_report_status,
@@ -116,6 +119,7 @@ module Aws::MigrationHubStrategy
     #   <p> Contains the count of anti-patterns. </p>
     #   @return [Integer]
     class AntipatternSeveritySummary < Struct.new(
+      nil,
       :severity,
       :count,
       keyword_init: true
@@ -128,6 +132,7 @@ module Aws::MigrationHubStrategy
     #   <p>The category of the error.</p>
     #   @return [String]
     class AppUnitError < Struct.new(
+      nil,
       :app_unit_error_category,
       keyword_init: true
     )
@@ -208,6 +213,7 @@ module Aws::MigrationHubStrategy
     #   <p>A list of the analysis results.</p>
     #   @return [Array<Types::Result>]
     class ApplicationComponentDetail < Struct.new(
+      nil,
       :id,
       :name,
       :recommendation_set,
@@ -245,6 +251,7 @@ module Aws::MigrationHubStrategy
     #         analysis.</p>
     #   @return [Integer]
     class ApplicationComponentStatusSummary < Struct.new(
+      nil,
       :src_code_or_db_analysis_status,
       :count,
       keyword_init: true
@@ -264,6 +271,7 @@ module Aws::MigrationHubStrategy
     #   <p> Set to true if the recommendation is set as preferred. </p>
     #   @return [Boolean]
     class ApplicationComponentStrategy < Struct.new(
+      nil,
       :recommendation,
       :status,
       :is_preferred,
@@ -280,6 +288,7 @@ module Aws::MigrationHubStrategy
     #   <p> Contains the count of application type. </p>
     #   @return [Integer]
     class ApplicationComponentSummary < Struct.new(
+      nil,
       :app_type,
       :count,
       keyword_init: true
@@ -292,6 +301,7 @@ module Aws::MigrationHubStrategy
     #   <p> Application preferences that you specify to prefer managed environment. </p>
     #   @return [Types::ManagementPreference]
     class ApplicationPreferences < Struct.new(
+      nil,
       :management_preference,
       keyword_init: true
     )
@@ -333,6 +343,7 @@ module Aws::MigrationHubStrategy
     #   <p>List of status summaries of the analyzed servers.</p>
     #   @return [Array<Types::ServerStatusSummary>]
     class AssessmentSummary < Struct.new(
+      nil,
       :list_server_strategy_summary,
       :list_application_component_strategy_summary,
       :list_antipattern_severity_summary,
@@ -360,6 +371,7 @@ module Aws::MigrationHubStrategy
     #   <p>Values of an assessment.</p>
     #   @return [Array<String>]
     class AssessmentTarget < Struct.new(
+      nil,
       :condition,
       :name,
       :values,
@@ -376,6 +388,7 @@ module Aws::MigrationHubStrategy
     #   <p> ID of the application as defined in Application Discovery Service. </p>
     #   @return [String]
     class AssociatedApplication < Struct.new(
+      nil,
       :name,
       :id,
       keyword_init: true
@@ -388,6 +401,7 @@ module Aws::MigrationHubStrategy
     #   <p> The choice of application destination that you specify. </p>
     #   @return [Array<String>]
     class AwsManagedResources < Struct.new(
+      nil,
       :target_destination,
       keyword_init: true
     )
@@ -409,6 +423,7 @@ module Aws::MigrationHubStrategy
     #   <p> Business goal to reduce license costs. </p>
     #   @return [Integer]
     class BusinessGoals < Struct.new(
+      nil,
       :speed_of_migration,
       :reduce_operational_overhead_with_managed_services,
       :modernize_infrastructure_with_cloud_native_technologies,
@@ -445,6 +460,7 @@ module Aws::MigrationHubStrategy
     #   <p>Summary of the collector configuration.</p>
     #   @return [Types::ConfigurationSummary]
     class Collector < Struct.new(
+      nil,
       :collector_id,
       :ip_address,
       :host_name,
@@ -475,6 +491,7 @@ module Aws::MigrationHubStrategy
     #   <p>Info about the remote server source code configuration.</p>
     #   @return [Types::RemoteSourceCodeAnalysisServerInfo]
     class ConfigurationSummary < Struct.new(
+      nil,
       :vcenter_based_remote_info_list,
       :ip_address_based_remote_info_list,
       :version_control_info_list,
@@ -490,6 +507,7 @@ module Aws::MigrationHubStrategy
     # @!attribute message
     #   @return [String]
     class ConflictException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -522,6 +540,7 @@ module Aws::MigrationHubStrategy
     #   <p>The status message of the assessment.</p>
     #   @return [String]
     class DataCollectionDetails < Struct.new(
+      nil,
       :status,
       :servers,
       :failed,
@@ -541,6 +560,7 @@ module Aws::MigrationHubStrategy
     #       </p>
     #   @return [String]
     class DatabaseConfigDetail < Struct.new(
+      nil,
       :secret_name,
       keyword_init: true
     )
@@ -583,6 +603,7 @@ module Aws::MigrationHubStrategy
     #   <p> Specifies your preferred migration path. </p>
     #   @return [Types::DatabaseMigrationPreference]
     class DatabasePreferences < Struct.new(
+      nil,
       :database_management_preference,
       :database_migration_preference,
       keyword_init: true
@@ -594,6 +615,7 @@ module Aws::MigrationHubStrategy
     # @!attribute message
     #   @return [String]
     class DependencyException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -604,6 +626,7 @@ module Aws::MigrationHubStrategy
     #   <p> The ID of the application component. The ID is unique within an AWS account.</p>
     #   @return [String]
     class GetApplicationComponentDetailsInput < Struct.new(
+      nil,
       :application_component_id,
       keyword_init: true
     )
@@ -624,6 +647,7 @@ module Aws::MigrationHubStrategy
     #   <p> A list of the IDs of the servers on which the application component is running. </p>
     #   @return [Array<String>]
     class GetApplicationComponentDetailsOutput < Struct.new(
+      nil,
       :application_component_detail,
       :associated_applications,
       :more_application_resource,
@@ -637,6 +661,7 @@ module Aws::MigrationHubStrategy
     #   <p> The ID of the application component. The ID is unique within an AWS account.</p>
     #   @return [String]
     class GetApplicationComponentStrategiesInput < Struct.new(
+      nil,
       :application_component_id,
       keyword_init: true
     )
@@ -647,6 +672,7 @@ module Aws::MigrationHubStrategy
     #   <p> A list of application component strategy recommendations. </p>
     #   @return [Array<Types::ApplicationComponentStrategy>]
     class GetApplicationComponentStrategiesOutput < Struct.new(
+      nil,
       :application_component_strategies,
       keyword_init: true
     )
@@ -657,6 +683,7 @@ module Aws::MigrationHubStrategy
     #   <p> The <code>assessmentid</code> returned by <a>StartAssessment</a>.</p>
     #   @return [String]
     class GetAssessmentInput < Struct.new(
+      nil,
       :id,
       keyword_init: true
     )
@@ -673,6 +700,7 @@ module Aws::MigrationHubStrategy
     #   <p>List of criteria for assessment.</p>
     #   @return [Array<Types::AssessmentTarget>]
     class GetAssessmentOutput < Struct.new(
+      nil,
       :id,
       :data_collection_details,
       :assessment_targets,
@@ -685,6 +713,7 @@ module Aws::MigrationHubStrategy
     #   <p> The ID of the import file task. This ID is returned in the response of <a>StartImportFileTask</a>. </p>
     #   @return [String]
     class GetImportFileTaskInput < Struct.new(
+      nil,
       :id,
       keyword_init: true
     )
@@ -726,6 +755,7 @@ module Aws::MigrationHubStrategy
     #   <p> The name of the import task given in <a>StartImportFileTask</a>. </p>
     #   @return [String]
     class GetImportFileTaskOutput < Struct.new(
+      nil,
       :id,
       :status,
       :start_time,
@@ -743,6 +773,7 @@ module Aws::MigrationHubStrategy
     end
 
     class GetLatestAssessmentIdInput < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -752,6 +783,7 @@ module Aws::MigrationHubStrategy
     #   <p>The latest ID for the specific assessment task.</p>
     #   @return [String]
     class GetLatestAssessmentIdOutput < Struct.new(
+      nil,
       :id,
       keyword_init: true
     )
@@ -759,6 +791,7 @@ module Aws::MigrationHubStrategy
     end
 
     class GetPortfolioPreferencesInput < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -777,6 +810,7 @@ module Aws::MigrationHubStrategy
     #   <p>The classification for application component types.</p>
     #   @return [String]
     class GetPortfolioPreferencesOutput < Struct.new(
+      nil,
       :prioritize_business_goals,
       :application_preferences,
       :database_preferences,
@@ -787,6 +821,7 @@ module Aws::MigrationHubStrategy
     end
 
     class GetPortfolioSummaryInput < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -797,6 +832,7 @@ module Aws::MigrationHubStrategy
     #         overall number of anti-patterns. </p>
     #   @return [Types::AssessmentSummary]
     class GetPortfolioSummaryOutput < Struct.new(
+      nil,
       :assessment_summary,
       keyword_init: true
     )
@@ -807,6 +843,7 @@ module Aws::MigrationHubStrategy
     #   <p> The recommendation report generation task <code>id</code> returned by <a>StartRecommendationReportGeneration</a>. </p>
     #   @return [String]
     class GetRecommendationReportDetailsInput < Struct.new(
+      nil,
       :id,
       keyword_init: true
     )
@@ -820,6 +857,7 @@ module Aws::MigrationHubStrategy
     #   <p> Detailed information about the recommendation report. </p>
     #   @return [Types::RecommendationReportDetails]
     class GetRecommendationReportDetailsOutput < Struct.new(
+      nil,
       :id,
       :recommendation_report_details,
       keyword_init: true
@@ -839,6 +877,7 @@ module Aws::MigrationHubStrategy
     #   <p> The maximum number of items to include in the response. The maximum value is 100. </p>
     #   @return [Integer]
     class GetServerDetailsInput < Struct.new(
+      nil,
       :server_id,
       :next_token,
       :max_results,
@@ -858,6 +897,7 @@ module Aws::MigrationHubStrategy
     #       </p>
     #   @return [Array<Types::AssociatedApplication>]
     class GetServerDetailsOutput < Struct.new(
+      nil,
       :next_token,
       :server_detail,
       :associated_applications,
@@ -870,6 +910,7 @@ module Aws::MigrationHubStrategy
     #   <p> The ID of the server. </p>
     #   @return [String]
     class GetServerStrategiesInput < Struct.new(
+      nil,
       :server_id,
       keyword_init: true
     )
@@ -880,6 +921,7 @@ module Aws::MigrationHubStrategy
     #   <p> A list of strategy recommendations for the server. </p>
     #   @return [Array<Types::ServerStrategy>]
     class GetServerStrategiesOutput < Struct.new(
+      nil,
       :server_strategies,
       keyword_init: true
     )
@@ -894,6 +936,7 @@ module Aws::MigrationHubStrategy
     #   <p> The value of the specific import group. </p>
     #   @return [String]
     class Group < Struct.new(
+      nil,
       :name,
       :value,
       keyword_init: true
@@ -906,6 +949,7 @@ module Aws::MigrationHubStrategy
     #   <p> The target database engine for heterogeneous database migration preference. </p>
     #   @return [Array<String>]
     class Heterogeneous < Struct.new(
+      nil,
       :target_database_engine,
       keyword_init: true
     )
@@ -917,6 +961,7 @@ module Aws::MigrationHubStrategy
     #   <p> The target database engine for homogeneous database migration preferences. </p>
     #   @return [Array<String>]
     class Homogeneous < Struct.new(
+      nil,
       :target_database_engine,
       keyword_init: true
     )
@@ -934,6 +979,7 @@ module Aws::MigrationHubStrategy
     #   <p>The type of the operating system.</p>
     #   @return [String]
     class IPAddressBasedRemoteInfo < Struct.new(
+      nil,
       :ip_address_configuration_time_stamp,
       :auth_type,
       :os_type,
@@ -978,6 +1024,7 @@ module Aws::MigrationHubStrategy
     #   <p> The name of the import task given in <code>StartImportFileTask</code>. </p>
     #   @return [String]
     class ImportFileTaskInformation < Struct.new(
+      nil,
       :id,
       :status,
       :start_time,
@@ -998,6 +1045,7 @@ module Aws::MigrationHubStrategy
     # @!attribute message
     #   @return [String]
     class InternalServerException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -1015,6 +1063,7 @@ module Aws::MigrationHubStrategy
     #   The maximum number of items to include in the response. The maximum value is 100.
     #   @return [Integer]
     class ListAnalyzableServersRequest < Struct.new(
+      nil,
       :sort,
       :next_token,
       :max_results,
@@ -1031,6 +1080,7 @@ module Aws::MigrationHubStrategy
     #   The token you use to retrieve the next set of results, or null if there are no more results.
     #   @return [String]
     class ListAnalyzableServersResponse < Struct.new(
+      nil,
       :analyzable_servers,
       :next_token,
       keyword_init: true
@@ -1063,6 +1113,7 @@ module Aws::MigrationHubStrategy
     #   <p> The maximum number of items to include in the response. The maximum value is 100. </p>
     #   @return [Integer]
     class ListApplicationComponentsInput < Struct.new(
+      nil,
       :application_component_criteria,
       :filter_value,
       :sort,
@@ -1082,6 +1133,7 @@ module Aws::MigrationHubStrategy
     #   <p> The token you use to retrieve the next set of results, or null if there are no more results. </p>
     #   @return [String]
     class ListApplicationComponentsOutput < Struct.new(
+      nil,
       :application_component_infos,
       :next_token,
       keyword_init: true
@@ -1098,6 +1150,7 @@ module Aws::MigrationHubStrategy
     #   <p> The maximum number of items to include in the response. The maximum value is 100. </p>
     #   @return [Integer]
     class ListCollectorsInput < Struct.new(
+      nil,
       :next_token,
       :max_results,
       keyword_init: true
@@ -1112,6 +1165,7 @@ module Aws::MigrationHubStrategy
     #   <p> The token you use to retrieve the next set of results, or null if there are no more results. </p>
     #   @return [String]
     class ListCollectorsOutput < Struct.new(
+      nil,
       :collectors,
       :next_token,
       keyword_init: true
@@ -1128,6 +1182,7 @@ module Aws::MigrationHubStrategy
     #   <p> The total number of items to return. The maximum value is 100. </p>
     #   @return [Integer]
     class ListImportFileTaskInput < Struct.new(
+      nil,
       :next_token,
       :max_results,
       keyword_init: true
@@ -1142,6 +1197,7 @@ module Aws::MigrationHubStrategy
     #   <p> The token you use to retrieve the next set of results, or null if there are no more results. </p>
     #   @return [String]
     class ListImportFileTaskOutput < Struct.new(
+      nil,
       :task_infos,
       :next_token,
       keyword_init: true
@@ -1174,6 +1230,7 @@ module Aws::MigrationHubStrategy
     #   <p> The maximum number of items to include in the response. The maximum value is 100. </p>
     #   @return [Integer]
     class ListServersInput < Struct.new(
+      nil,
       :server_criteria,
       :filter_value,
       :sort,
@@ -1192,6 +1249,7 @@ module Aws::MigrationHubStrategy
     #   <p> The token you use to retrieve the next set of results, or null if there are no more results. </p>
     #   @return [String]
     class ListServersOutput < Struct.new(
+      nil,
       :server_infos,
       :next_token,
       keyword_init: true
@@ -1239,6 +1297,7 @@ module Aws::MigrationHubStrategy
     #   <p> Information about the subnet mask of the server for which the assessment was run. </p>
     #   @return [String]
     class NetworkInfo < Struct.new(
+      nil,
       :interface_name,
       :ip_address,
       :mac_address,
@@ -1254,6 +1313,7 @@ module Aws::MigrationHubStrategy
     #   <p> The target database engine for database migration preference that you specify. </p>
     #   @return [Array<String>]
     class NoDatabaseMigrationPreference < Struct.new(
+      nil,
       :target_database_engine,
       keyword_init: true
     )
@@ -1265,6 +1325,7 @@ module Aws::MigrationHubStrategy
     #   <p> The choice of application destination that you specify. </p>
     #   @return [Array<String>]
     class NoManagementPreference < Struct.new(
+      nil,
       :target_destination,
       keyword_init: true
     )
@@ -1279,6 +1340,7 @@ module Aws::MigrationHubStrategy
     #   <p> Information about the version of operating system. </p>
     #   @return [String]
     class OSInfo < Struct.new(
+      nil,
       :type,
       :version,
       keyword_init: true
@@ -1294,6 +1356,7 @@ module Aws::MigrationHubStrategy
     #   <p>The time when the pipeline info was configured.</p>
     #   @return [String]
     class PipelineInfo < Struct.new(
+      nil,
       :pipeline_type,
       :pipeline_configuration_time_stamp,
       keyword_init: true
@@ -1306,6 +1369,7 @@ module Aws::MigrationHubStrategy
     #   <p> Rank of business goals based on priority. </p>
     #   @return [Types::BusinessGoals]
     class PrioritizeBusinessGoals < Struct.new(
+      nil,
       :business_goals,
       keyword_init: true
     )
@@ -1325,6 +1389,7 @@ module Aws::MigrationHubStrategy
     #   <p>The classification for application component types.</p>
     #   @return [String]
     class PutPortfolioPreferencesInput < Struct.new(
+      nil,
       :prioritize_business_goals,
       :application_preferences,
       :database_preferences,
@@ -1335,6 +1400,7 @@ module Aws::MigrationHubStrategy
     end
 
     class PutPortfolioPreferencesOutput < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1360,6 +1426,7 @@ module Aws::MigrationHubStrategy
     #   <p> The Amazon S3 key name of the report file. </p>
     #   @return [Array<String>]
     class RecommendationReportDetails < Struct.new(
+      nil,
       :status,
       :status_message,
       :start_time,
@@ -1382,6 +1449,7 @@ module Aws::MigrationHubStrategy
     #   <p> The recommended strategy. </p>
     #   @return [String]
     class RecommendationSet < Struct.new(
+      nil,
       :transformation_tool,
       :target_destination,
       :strategy,
@@ -1395,6 +1463,7 @@ module Aws::MigrationHubStrategy
     #   <p>The time when the remote source code server was configured.</p>
     #   @return [String]
     class RemoteSourceCodeAnalysisServerInfo < Struct.new(
+      nil,
       :remote_source_code_analysis_server_configuration_timestamp,
       keyword_init: true
     )
@@ -1405,6 +1474,7 @@ module Aws::MigrationHubStrategy
     # @!attribute message
     #   @return [String]
     class ResourceNotFoundException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -1425,6 +1495,7 @@ module Aws::MigrationHubStrategy
     #   <p>The error in server analysis.</p>
     #   @return [Array<Types::AntipatternReportResult>]
     class Result < Struct.new(
+      nil,
       :analysis_type,
       :analysis_status,
       :status_message,
@@ -1442,6 +1513,7 @@ module Aws::MigrationHubStrategy
     #   <p> The Amazon S3 key name. </p>
     #   @return [String]
     class S3Object < Struct.new(
+      nil,
       :s3_bucket,
       :s3key,
       keyword_init: true
@@ -1454,6 +1526,7 @@ module Aws::MigrationHubStrategy
     #   <p> Self-managed resources target destination. </p>
     #   @return [Array<String>]
     class SelfManageResources < Struct.new(
+      nil,
       :target_destination,
       keyword_init: true
     )
@@ -1505,6 +1578,7 @@ module Aws::MigrationHubStrategy
     #   <p>The error in server analysis.</p>
     #   @return [Types::ServerError]
     class ServerDetail < Struct.new(
+      nil,
       :id,
       :name,
       :recommendation_set,
@@ -1529,6 +1603,7 @@ module Aws::MigrationHubStrategy
     #   <p>The error category of server analysis.</p>
     #   @return [String]
     class ServerError < Struct.new(
+      nil,
       :server_error_category,
       keyword_init: true
     )
@@ -1544,6 +1619,7 @@ module Aws::MigrationHubStrategy
     #         analysis.</p>
     #   @return [Integer]
     class ServerStatusSummary < Struct.new(
+      nil,
       :run_time_assessment_status,
       :count,
       keyword_init: true
@@ -1566,6 +1642,7 @@ module Aws::MigrationHubStrategy
     #   <p> Set to true if the recommendation is set as preferred. </p>
     #   @return [Boolean]
     class ServerStrategy < Struct.new(
+      nil,
       :recommendation,
       :status,
       :number_of_application_components,
@@ -1583,6 +1660,7 @@ module Aws::MigrationHubStrategy
     #   <p> Number of servers. </p>
     #   @return [Integer]
     class ServerSummary < Struct.new(
+      nil,
       :server_os_type,
       :count,
       keyword_init: true
@@ -1594,6 +1672,7 @@ module Aws::MigrationHubStrategy
     # @!attribute message
     #   @return [String]
     class ServiceLinkedRoleLockClientException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -1605,6 +1684,7 @@ module Aws::MigrationHubStrategy
     # @!attribute message
     #   @return [String]
     class ServiceQuotaExceededException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -1626,6 +1706,7 @@ module Aws::MigrationHubStrategy
     #   <p>The name of the project.</p>
     #   @return [String]
     class SourceCode < Struct.new(
+      nil,
       :version_control,
       :source_version,
       :location,
@@ -1650,6 +1731,7 @@ module Aws::MigrationHubStrategy
     #   <p>The name of the project.</p>
     #   @return [String]
     class SourceCodeRepository < Struct.new(
+      nil,
       :repository,
       :branch,
       :version_control_type,
@@ -1674,6 +1756,7 @@ module Aws::MigrationHubStrategy
     #   The data source type of an assessment to be started.
     #   @return [String]
     class StartAssessmentInput < Struct.new(
+      nil,
       :s3bucket_for_analysis_data,
       :s3bucket_for_report_data,
       :assessment_targets,
@@ -1687,6 +1770,7 @@ module Aws::MigrationHubStrategy
     #   <p> The ID of the assessment. </p>
     #   @return [String]
     class StartAssessmentOutput < Struct.new(
+      nil,
       :assessment_id,
       keyword_init: true
     )
@@ -1716,6 +1800,7 @@ module Aws::MigrationHubStrategy
     #         begin with migrationhub-strategy-. </p>
     #   @return [String]
     class StartImportFileTaskInput < Struct.new(
+      nil,
       :name,
       :s3_bucket,
       :s3key,
@@ -1731,6 +1816,7 @@ module Aws::MigrationHubStrategy
     #   <p> The ID for a specific import task. The ID is unique within an AWS account. </p>
     #   @return [String]
     class StartImportFileTaskOutput < Struct.new(
+      nil,
       :id,
       keyword_init: true
     )
@@ -1745,6 +1831,7 @@ module Aws::MigrationHubStrategy
     #   <p> Groups the resources in the recommendation report with a unique name. </p>
     #   @return [Array<Types::Group>]
     class StartRecommendationReportGenerationInput < Struct.new(
+      nil,
       :output_format,
       :group_id_filter,
       keyword_init: true
@@ -1756,6 +1843,7 @@ module Aws::MigrationHubStrategy
     #   <p> The ID of the recommendation report generation task. </p>
     #   @return [String]
     class StartRecommendationReportGenerationOutput < Struct.new(
+      nil,
       :id,
       keyword_init: true
     )
@@ -1766,6 +1854,7 @@ module Aws::MigrationHubStrategy
     #   <p> The <code>assessmentId</code> returned by <a>StartAssessment</a>. </p>
     #   @return [String]
     class StopAssessmentInput < Struct.new(
+      nil,
       :assessment_id,
       keyword_init: true
     )
@@ -1773,6 +1862,7 @@ module Aws::MigrationHubStrategy
     end
 
     class StopAssessmentOutput < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1795,6 +1885,7 @@ module Aws::MigrationHubStrategy
     #   <p> Indicates if a specific strategy is preferred for the application component. </p>
     #   @return [Boolean]
     class StrategyOption < Struct.new(
+      nil,
       :strategy,
       :tool_name,
       :target_destination,
@@ -1812,6 +1903,7 @@ module Aws::MigrationHubStrategy
     #   <p> The count of recommendations per strategy. </p>
     #   @return [Integer]
     class StrategySummary < Struct.new(
+      nil,
       :strategy,
       :count,
       keyword_init: true
@@ -1833,6 +1925,7 @@ module Aws::MigrationHubStrategy
     #   <p> CPU architecture type for the server. </p>
     #   @return [String]
     class SystemInfo < Struct.new(
+      nil,
       :os_info,
       :file_system_type,
       :network_info_list,
@@ -1846,6 +1939,7 @@ module Aws::MigrationHubStrategy
     # @!attribute message
     #   @return [String]
     class ThrottlingException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -1864,6 +1958,7 @@ module Aws::MigrationHubStrategy
     #   <p> URL for installing the tool. </p>
     #   @return [String]
     class TransformationTool < Struct.new(
+      nil,
       :name,
       :description,
       :tranformation_tool_installation_link,
@@ -1897,6 +1992,7 @@ module Aws::MigrationHubStrategy
     #   <p>The type of known component.</p>
     #   @return [String]
     class UpdateApplicationComponentConfigInput < Struct.new(
+      nil,
       :application_component_id,
       :inclusion_status,
       :strategy_option,
@@ -1910,6 +2006,7 @@ module Aws::MigrationHubStrategy
     end
 
     class UpdateApplicationComponentConfigOutput < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1922,6 +2019,7 @@ module Aws::MigrationHubStrategy
     #   <p> The preferred strategy options for the application component. See the response from <a>GetServerStrategies</a>.</p>
     #   @return [Types::StrategyOption]
     class UpdateServerConfigInput < Struct.new(
+      nil,
       :server_id,
       :strategy_option,
       keyword_init: true
@@ -1930,6 +2028,7 @@ module Aws::MigrationHubStrategy
     end
 
     class UpdateServerConfigOutput < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1939,6 +2038,7 @@ module Aws::MigrationHubStrategy
     # @!attribute message
     #   @return [String]
     class ValidationException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -1953,6 +2053,7 @@ module Aws::MigrationHubStrategy
     #   <p>The type of the operating system.</p>
     #   @return [String]
     class VcenterBasedRemoteInfo < Struct.new(
+      nil,
       :vcenter_configuration_time_stamp,
       :os_type,
       keyword_init: true
@@ -1968,6 +2069,7 @@ module Aws::MigrationHubStrategy
     #   <p>The time when the version control system was last configured.</p>
     #   @return [String]
     class VersionControlInfo < Struct.new(
+      nil,
       :version_control_type,
       :version_control_configuration_time_stamp,
       keyword_init: true

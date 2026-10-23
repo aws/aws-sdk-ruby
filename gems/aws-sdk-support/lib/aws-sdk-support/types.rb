@@ -22,6 +22,7 @@ module Aws::Support
     #               attachment, such as <code>troubleshoot-screenshot.png</code>.</p>
     #   @return [Array<Types::Attachment>]
     class AddAttachmentsToSetRequest < Struct.new(
+      nil,
       :attachment_set_id,
       :attachments,
       keyword_init: true
@@ -40,6 +41,7 @@ module Aws::Support
     #   <p>The time and date when the attachment set expires.</p>
     #   @return [String]
     class AddAttachmentsToSetResponse < Struct.new(
+      nil,
       :attachment_set_id,
       :expiry_time,
       keyword_init: true
@@ -65,6 +67,7 @@ module Aws::Support
     #            </p>
     #   @return [String]
     class AddCommunicationToCaseRequest < Struct.new(
+      nil,
       :case_id,
       :communication_body,
       :cc_email_addresses,
@@ -80,6 +83,7 @@ module Aws::Support
     #               error.</p>
     #   @return [Boolean]
     class AddCommunicationToCaseResponse < Struct.new(
+      nil,
       :result,
       keyword_init: true
     )
@@ -100,6 +104,7 @@ module Aws::Support
     #   <p>The content of the attachment file.</p>
     #   @return [String]
     class Attachment < Struct.new(
+      nil,
       :file_name,
       :data,
       keyword_init: true
@@ -116,6 +121,7 @@ module Aws::Support
     #   <p>The file name of the attachment.</p>
     #   @return [String]
     class AttachmentDetails < Struct.new(
+      nil,
       :attachment_id,
       :file_name,
       keyword_init: true
@@ -128,6 +134,7 @@ module Aws::Support
     #   <p>An attachment with the specified ID could not be found.</p>
     #   @return [String]
     class AttachmentIdNotFound < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -141,6 +148,7 @@ module Aws::Support
     #               exceeded.</p>
     #   @return [String]
     class AttachmentLimitExceeded < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -154,6 +162,7 @@ module Aws::Support
     #               it is created.</p>
     #   @return [String]
     class AttachmentSetExpired < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -165,6 +174,7 @@ module Aws::Support
     #   <p>An attachment set with the specified ID could not be found.</p>
     #   @return [String]
     class AttachmentSetIdNotFound < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -178,6 +188,7 @@ module Aws::Support
     #               attachments and 5 MB per attachment.</p>
     #   @return [String]
     class AttachmentSetSizeLimitExceeded < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -190,6 +201,7 @@ module Aws::Support
     #               have open.</p>
     #   @return [String]
     class CaseCreationLimitExceeded < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -398,6 +410,7 @@ module Aws::Support
     #   code for the <code>language</code> parameter if you want support in that language.</p>
     #   @return [String]
     class CaseDetails < Struct.new(
+      nil,
       :case_id,
       :display_id,
       :subject,
@@ -420,6 +433,7 @@ module Aws::Support
     #   <p>The requested <code>CaseId</code> could not be located.</p>
     #   @return [String]
     class CaseIdNotFound < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -436,6 +450,7 @@ module Aws::Support
     #   <p>The category name for the support case.</p>
     #   @return [String]
     class Category < Struct.new(
+      nil,
       :code,
       :name,
       keyword_init: true
@@ -469,6 +484,7 @@ module Aws::Support
     #   <p>Information about the attachments to the case communication.</p>
     #   @return [Array<Types::AttachmentDetails>]
     class Communication < Struct.new(
+      nil,
       :case_id,
       :body,
       :submitted_by,
@@ -521,6 +537,7 @@ module Aws::Support
     #           </p>
     #   @return [Array<Types::DateInterval>]
     class CommunicationTypeOptions < Struct.new(
+      nil,
       :type,
       :supported_hours,
       :dates_without_support,
@@ -576,6 +593,7 @@ module Aws::Support
     #                   <a>AddAttachmentsToSet</a> operation.</p>
     #   @return [String]
     class CreateCaseRequest < Struct.new(
+      nil,
       :subject,
       :service_code,
       :severity_code,
@@ -598,6 +616,7 @@ module Aws::Support
     #            </p>
     #   @return [String]
     class CreateCaseResponse < Struct.new(
+      nil,
       :case_id,
       keyword_init: true
     )
@@ -616,6 +635,7 @@ module Aws::Support
     #           </p>
     #   @return [String]
     class DateInterval < Struct.new(
+      nil,
       :start_date_time,
       :end_date_time,
       keyword_init: true
@@ -630,6 +650,7 @@ module Aws::Support
     #               period of time has been exceeded.</p>
     #   @return [String]
     class DescribeAttachmentLimitExceeded < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -640,6 +661,7 @@ module Aws::Support
     #   <p>The ID of the attachment to return. Attachment IDs are returned by the <a>DescribeCommunications</a> operation.</p>
     #   @return [String]
     class DescribeAttachmentRequest < Struct.new(
+      nil,
       :attachment_id,
       keyword_init: true
     )
@@ -655,6 +677,7 @@ module Aws::Support
     #                   <code>troubleshoot-screenshot.png</code>.</p>
     #   @return [Types::Attachment]
     class DescribeAttachmentResponse < Struct.new(
+      nil,
       :attachment,
       keyword_init: true
     )
@@ -696,6 +719,7 @@ module Aws::Support
     #               response. By default, communications are included.</p>
     #   @return [Boolean]
     class DescribeCasesRequest < Struct.new(
+      nil,
       :case_id_list,
       :display_id,
       :after_time,
@@ -720,6 +744,7 @@ module Aws::Support
     #   <p>A resumption point for pagination.</p>
     #   @return [String]
     class DescribeCasesResponse < Struct.new(
+      nil,
       :cases,
       :next_token,
       keyword_init: true
@@ -748,6 +773,7 @@ module Aws::Support
     #   <p>The maximum number of results to return before paginating.</p>
     #   @return [Integer]
     class DescribeCommunicationsRequest < Struct.new(
+      nil,
       :case_id,
       :before_time,
       :after_time,
@@ -767,6 +793,7 @@ module Aws::Support
     #   <p>A resumption point for pagination.</p>
     #   @return [String]
     class DescribeCommunicationsResponse < Struct.new(
+      nil,
       :communications,
       :next_token,
       keyword_init: true
@@ -793,6 +820,7 @@ module Aws::Support
     #               Amazon Web Services service defines its own set of category codes.</p>
     #   @return [String]
     class DescribeCreateCaseOptionsRequest < Struct.new(
+      nil,
       :issue_type,
       :service_code,
       :language,
@@ -829,6 +857,7 @@ module Aws::Support
     #           </p>
     #   @return [Array<Types::CommunicationTypeOptions>]
     class DescribeCreateCaseOptionsResponse < Struct.new(
+      nil,
       :language_availability,
       :communication_types,
       keyword_init: true
@@ -845,6 +874,7 @@ module Aws::Support
     #   code for the <code>language</code> parameter if you want support in that language.</p>
     #   @return [String]
     class DescribeServicesRequest < Struct.new(
+      nil,
       :service_code_list,
       :language,
       keyword_init: true
@@ -858,6 +888,7 @@ module Aws::Support
     #   <p>A JSON-formatted list of Amazon Web Services services.</p>
     #   @return [Array<Types::Service>]
     class DescribeServicesResponse < Struct.new(
+      nil,
       :services,
       keyword_init: true
     )
@@ -870,6 +901,7 @@ module Aws::Support
     #   code for the <code>language</code> parameter if you want support in that language.</p>
     #   @return [String]
     class DescribeSeverityLevelsRequest < Struct.new(
+      nil,
       :language,
       keyword_init: true
     )
@@ -883,6 +915,7 @@ module Aws::Support
     #               defined by your service level agreement with Amazon Web Services.</p>
     #   @return [Array<Types::SeverityLevel>]
     class DescribeSeverityLevelsResponse < Struct.new(
+      nil,
       :severity_levels,
       keyword_init: true
     )
@@ -902,6 +935,7 @@ module Aws::Support
     #               Amazon Web Services service defines its own set of category codes.</p>
     #   @return [String]
     class DescribeSupportedLanguagesRequest < Struct.new(
+      nil,
       :issue_type,
       :service_code,
       :category_code,
@@ -916,6 +950,7 @@ module Aws::Support
     #           </p>
     #   @return [Array<Types::SupportedLanguage>]
     class DescribeSupportedLanguagesResponse < Struct.new(
+      nil,
       :supported_languages,
       keyword_init: true
     )
@@ -930,6 +965,7 @@ module Aws::Support
     #            </note>
     #   @return [Array<String>]
     class DescribeTrustedAdvisorCheckRefreshStatusesRequest < Struct.new(
+      nil,
       :check_ids,
       keyword_init: true
     )
@@ -941,6 +977,7 @@ module Aws::Support
     #   <p>The refresh status of the specified Trusted Advisor checks.</p>
     #   @return [Array<Types::TrustedAdvisorCheckRefreshStatus>]
     class DescribeTrustedAdvisorCheckRefreshStatusesResponse < Struct.new(
+      nil,
       :statuses,
       keyword_init: true
     )
@@ -1003,6 +1040,7 @@ module Aws::Support
     #            </ul>
     #   @return [String]
     class DescribeTrustedAdvisorCheckResultRequest < Struct.new(
+      nil,
       :check_id,
       :language,
       keyword_init: true
@@ -1015,6 +1053,7 @@ module Aws::Support
     #   <p>The detailed results of the Trusted Advisor check.</p>
     #   @return [Types::TrustedAdvisorCheckResult]
     class DescribeTrustedAdvisorCheckResultResponse < Struct.new(
+      nil,
       :result,
       keyword_init: true
     )
@@ -1025,6 +1064,7 @@ module Aws::Support
     #   <p>The IDs of the Trusted Advisor checks.</p>
     #   @return [Array<String>]
     class DescribeTrustedAdvisorCheckSummariesRequest < Struct.new(
+      nil,
       :check_ids,
       keyword_init: true
     )
@@ -1036,6 +1076,7 @@ module Aws::Support
     #   <p>The summary information for the requested Trusted Advisor checks.</p>
     #   @return [Array<Types::TrustedAdvisorCheckSummary>]
     class DescribeTrustedAdvisorCheckSummariesResponse < Struct.new(
+      nil,
       :summaries,
       keyword_init: true
     )
@@ -1093,6 +1134,7 @@ module Aws::Support
     #            </ul>
     #   @return [String]
     class DescribeTrustedAdvisorChecksRequest < Struct.new(
+      nil,
       :language,
       keyword_init: true
     )
@@ -1104,6 +1146,7 @@ module Aws::Support
     #   <p>Information about all available Trusted Advisor checks.</p>
     #   @return [Array<Types::TrustedAdvisorCheckDescription>]
     class DescribeTrustedAdvisorChecksResponse < Struct.new(
+      nil,
       :checks,
       keyword_init: true
     )
@@ -1115,6 +1158,7 @@ module Aws::Support
     #   <p>An internal server error occurred.</p>
     #   @return [String]
     class InternalServerError < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -1129,6 +1173,7 @@ module Aws::Support
     #   <p>A resumption point for pagination.</p>
     #   @return [String]
     class RecentCaseCommunications < Struct.new(
+      nil,
       :communications,
       :next_token,
       keyword_init: true
@@ -1145,6 +1190,7 @@ module Aws::Support
     #            </note>
     #   @return [String]
     class RefreshTrustedAdvisorCheckRequest < Struct.new(
+      nil,
       :check_id,
       keyword_init: true
     )
@@ -1157,6 +1203,7 @@ module Aws::Support
     #               is eligible for refresh.</p>
     #   @return [Types::TrustedAdvisorCheckRefreshStatus]
     class RefreshTrustedAdvisorCheckResponse < Struct.new(
+      nil,
       :status,
       keyword_init: true
     )
@@ -1170,6 +1217,7 @@ module Aws::Support
     #            </p>
     #   @return [String]
     class ResolveCaseRequest < Struct.new(
+      nil,
       :case_id,
       keyword_init: true
     )
@@ -1185,6 +1233,7 @@ module Aws::Support
     #               processed.</p>
     #   @return [String]
     class ResolveCaseResponse < Struct.new(
+      nil,
       :initial_case_status,
       :final_case_status,
       keyword_init: true
@@ -1208,6 +1257,7 @@ module Aws::Support
     #               passed to Amazon Web Services Support when you call <a>CreateCase</a>.</p>
     #   @return [Array<Types::Category>]
     class Service < Struct.new(
+      nil,
       :code,
       :name,
       :categories,
@@ -1260,6 +1310,7 @@ module Aws::Support
     #                   severity</a> in the <i>Amazon Web Services Support User Guide</i>.</p>
     #   @return [String]
     class SeverityLevel < Struct.new(
+      nil,
       :code,
       :name,
       keyword_init: true
@@ -1279,6 +1330,7 @@ module Aws::Support
     #           </p>
     #   @return [String]
     class SupportedHour < Struct.new(
+      nil,
       :start_time,
       :end_time,
       keyword_init: true
@@ -1307,6 +1359,7 @@ module Aws::Support
     #            </p>
     #   @return [String]
     class SupportedLanguage < Struct.new(
+      nil,
       :code,
       :language,
       :display,
@@ -1321,6 +1374,7 @@ module Aws::Support
     # @!attribute message
     #   @return [String]
     class ThrottlingException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -1334,6 +1388,7 @@ module Aws::Support
     #               Optimizing category.</p>
     #   @return [Types::TrustedAdvisorCostOptimizingSummary]
     class TrustedAdvisorCategorySpecificSummary < Struct.new(
+      nil,
       :cost_optimizing,
       keyword_init: true
     )
@@ -1362,6 +1417,7 @@ module Aws::Support
     #           </p>
     #   @return [Array<String>]
     class TrustedAdvisorCheckDescription < Struct.new(
+      nil,
       :id,
       :name,
       :description,
@@ -1410,6 +1466,7 @@ module Aws::Support
     #               refresh.</p>
     #   @return [Integer]
     class TrustedAdvisorCheckRefreshStatus < Struct.new(
+      nil,
       :check_id,
       :status,
       :millis_until_next_refreshable,
@@ -1445,6 +1502,7 @@ module Aws::Support
     #   <p>The details about each resource listed in the check result.</p>
     #   @return [Array<Types::TrustedAdvisorResourceDetail>]
     class TrustedAdvisorCheckResult < Struct.new(
+      nil,
       :check_id,
       :timestamp,
       :status,
@@ -1479,6 +1537,7 @@ module Aws::Support
     #               only category that is currently supported.</p>
     #   @return [Types::TrustedAdvisorCategorySpecificSummary]
     class TrustedAdvisorCheckSummary < Struct.new(
+      nil,
       :check_id,
       :timestamp,
       :status,
@@ -1506,6 +1565,7 @@ module Aws::Support
     #               operations are taken.</p>
     #   @return [Float]
     class TrustedAdvisorCostOptimizingSummary < Struct.new(
+      nil,
       :estimated_monthly_savings,
       :estimated_percent_monthly_savings,
       keyword_init: true
@@ -1540,6 +1600,7 @@ module Aws::Support
     #               download, even in those cases where the UI shows just summary data.</p>
     #   @return [Array<String>]
     class TrustedAdvisorResourceDetail < Struct.new(
+      nil,
       :status,
       :region,
       :resource_id,
@@ -1571,6 +1632,7 @@ module Aws::Support
     #               suppressed by the user.</p>
     #   @return [Integer]
     class TrustedAdvisorResourcesSummary < Struct.new(
+      nil,
       :resources_processed,
       :resources_flagged,
       :resources_ignored,

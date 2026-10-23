@@ -15,6 +15,7 @@ module Aws::Forecastquery
     #   <p>The forecast value.</p>
     #   @return [Float]
     class DataPoint < Struct.new(
+      nil,
       :timestamp,
       :value,
       keyword_init: true
@@ -42,6 +43,7 @@ module Aws::Forecastquery
     #            </p>
     #   @return [Hash<String, Array<Types::DataPoint>>]
     class Forecast < Struct.new(
+      nil,
       :predictions,
       keyword_init: true
     )
@@ -52,6 +54,7 @@ module Aws::Forecastquery
     # @!attribute message
     #   @return [String]
     class InvalidInputException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -62,6 +65,7 @@ module Aws::Forecastquery
     # @!attribute message
     #   @return [String]
     class InvalidNextTokenException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -72,6 +76,7 @@ module Aws::Forecastquery
     # @!attribute message
     #   @return [String]
     class LimitExceededException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -106,6 +111,7 @@ module Aws::Forecastquery
     #         request. Tokens expire after 24 hours.</p>
     #   @return [String]
     class QueryForecastRequest < Struct.new(
+      nil,
       :forecast_arn,
       :start_date,
       :end_date,
@@ -120,6 +126,7 @@ module Aws::Forecastquery
     #   <p>The forecast.</p>
     #   @return [Types::Forecast]
     class QueryForecastResponse < Struct.new(
+      nil,
       :forecast,
       keyword_init: true
     )
@@ -152,6 +159,7 @@ module Aws::Forecastquery
     #         request. Tokens expire after 24 hours.</p>
     #   @return [String]
     class QueryWhatIfForecastRequest < Struct.new(
+      nil,
       :what_if_forecast_arn,
       :start_date,
       :end_date,
@@ -166,6 +174,7 @@ module Aws::Forecastquery
     #   <p>Provides information about a forecast. Returned as part of the <a>QueryForecast</a> response.</p>
     #   @return [Types::Forecast]
     class QueryWhatIfForecastResponse < Struct.new(
+      nil,
       :forecast,
       keyword_init: true
     )
@@ -176,6 +185,7 @@ module Aws::Forecastquery
     # @!attribute message
     #   @return [String]
     class ResourceInUseException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -187,6 +197,7 @@ module Aws::Forecastquery
     # @!attribute message
     #   @return [String]
     class ResourceNotFoundException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )

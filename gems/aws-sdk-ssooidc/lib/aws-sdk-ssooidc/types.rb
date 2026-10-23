@@ -18,6 +18,7 @@ module Aws::SSOOIDC
     #         in understanding the error that occurred.</p>
     #   @return [String]
     class AccessDeniedException < Struct.new(
+      nil,
       :error,
       :reason,
       :error_description,
@@ -37,6 +38,7 @@ module Aws::SSOOIDC
     #         in understanding the error that occurred.</p>
     #   @return [String]
     class AuthorizationPendingException < Struct.new(
+      nil,
       :error,
       :error_description,
       keyword_init: true
@@ -53,6 +55,7 @@ module Aws::SSOOIDC
     #         decisions when they receive requests.</p>
     #   @return [String]
     class AwsAdditionalDetails < Struct.new(
+      nil,
       :identity_context,
       keyword_init: true
     )
@@ -106,6 +109,7 @@ module Aws::SSOOIDC
     #         passed at authorization time.</p>
     #   @return [String]
     class CreateTokenRequest < Struct.new(
+      nil,
       :client_id,
       :client_secret,
       :grant_type,
@@ -146,6 +150,7 @@ module Aws::SSOOIDC
     #       </p>
     #   @return [String]
     class CreateTokenResponse < Struct.new(
+      nil,
       :access_token,
       :token_type,
       :expires_in,
@@ -234,6 +239,7 @@ module Aws::SSOOIDC
     #         passed at authorization time.</p>
     #   @return [String]
     class CreateTokenWithIAMRequest < Struct.new(
+      nil,
       :client_id,
       :grant_type,
       :code,
@@ -287,6 +293,7 @@ module Aws::SSOOIDC
     #         information.</p>
     #   @return [Types::AwsAdditionalDetails]
     class CreateTokenWithIAMResponse < Struct.new(
+      nil,
       :access_token,
       :token_type,
       :expires_in,
@@ -314,6 +321,7 @@ module Aws::SSOOIDC
     #         in understanding the error that occurred.</p>
     #   @return [String]
     class ExpiredTokenException < Struct.new(
+      nil,
       :error,
       :error_description,
       keyword_init: true
@@ -331,6 +339,7 @@ module Aws::SSOOIDC
     #         in understanding the error that occurred.</p>
     #   @return [String]
     class InternalServerException < Struct.new(
+      nil,
       :error,
       :error_description,
       keyword_init: true
@@ -350,6 +359,7 @@ module Aws::SSOOIDC
     #         in understanding the error that occurred.</p>
     #   @return [String]
     class InvalidClientException < Struct.new(
+      nil,
       :error,
       :error_description,
       keyword_init: true
@@ -368,6 +378,7 @@ module Aws::SSOOIDC
     #         in understanding the error that occurred.</p>
     #   @return [String]
     class InvalidClientMetadataException < Struct.new(
+      nil,
       :error,
       :error_description,
       keyword_init: true
@@ -385,6 +396,7 @@ module Aws::SSOOIDC
     #         in understanding the error that occurred.</p>
     #   @return [String]
     class InvalidGrantException < Struct.new(
+      nil,
       :error,
       :error_description,
       keyword_init: true
@@ -403,6 +415,7 @@ module Aws::SSOOIDC
     #         in understanding the error that occurred.</p>
     #   @return [String]
     class InvalidRedirectUriException < Struct.new(
+      nil,
       :error,
       :error_description,
       keyword_init: true
@@ -424,6 +437,7 @@ module Aws::SSOOIDC
     #         in understanding the error that occurred.</p>
     #   @return [String]
     class InvalidRequestException < Struct.new(
+      nil,
       :error,
       :reason,
       :error_description,
@@ -449,6 +463,7 @@ module Aws::SSOOIDC
     #   <p>Indicates the region which the requester may call with this token.</p>
     #   @return [String]
     class InvalidRequestRegionException < Struct.new(
+      nil,
       :error,
       :error_description,
       :endpoint,
@@ -467,6 +482,7 @@ module Aws::SSOOIDC
     #         in understanding the error that occurred.</p>
     #   @return [String]
     class InvalidScopeException < Struct.new(
+      nil,
       :error,
       :error_description,
       keyword_init: true
@@ -510,6 +526,7 @@ module Aws::SSOOIDC
     #         available to this client will be restricted by this application resource.</p>
     #   @return [String]
     class RegisterClientRequest < Struct.new(
+      nil,
       :client_name,
       :client_type,
       :scopes,
@@ -545,6 +562,7 @@ module Aws::SSOOIDC
     #   <p>An endpoint that the client can use to create tokens.</p>
     #   @return [String]
     class RegisterClientResponse < Struct.new(
+      nil,
       :client_id,
       :client_secret,
       :client_id_issued_at,
@@ -572,6 +590,7 @@ module Aws::SSOOIDC
     #         in understanding the error that occurred.</p>
     #   @return [String]
     class SlowDownException < Struct.new(
+      nil,
       :error,
       :error_description,
       keyword_init: true
@@ -593,6 +612,7 @@ module Aws::SSOOIDC
     #           the Amazon Web Services access portal</a> in the <i>IAM Identity Center User Guide</i>.</p>
     #   @return [String]
     class StartDeviceAuthorizationRequest < Struct.new(
+      nil,
       :client_id,
       :client_secret,
       :start_url,
@@ -624,6 +644,7 @@ module Aws::SSOOIDC
     #         session.</p>
     #   @return [Integer]
     class StartDeviceAuthorizationResponse < Struct.new(
+      nil,
       :device_code,
       :user_code,
       :verification_uri,
@@ -652,6 +673,7 @@ module Aws::SSOOIDC
     #         in understanding the error that occurred.</p>
     #   @return [String]
     class UnauthorizedClientException < Struct.new(
+      nil,
       :error,
       :error_description,
       keyword_init: true
@@ -669,6 +691,7 @@ module Aws::SSOOIDC
     #         in understanding the error that occurred.</p>
     #   @return [String]
     class UnsupportedGrantTypeException < Struct.new(
+      nil,
       :error,
       :error_description,
       keyword_init: true

@@ -12,6 +12,7 @@ module Aws::RDS
     #               a count of usage toward the quota maximum, and a maximum value for the quota.</p>
     #   @return [Array<Types::AccountQuota>]
     class AccountAttributesMessage < Struct.new(
+      nil,
       :account_quotas,
       keyword_init: true
     )
@@ -138,6 +139,7 @@ module Aws::RDS
     #   <p>The maximum allowed value for the quota.</p>
     #   @return [Integer]
     class AccountQuota < Struct.new(
+      nil,
       :account_quota_name,
       :used,
       :max,
@@ -158,6 +160,7 @@ module Aws::RDS
     #               For information about supported feature names, see <a>DBEngineVersion</a>.</p>
     #   @return [String]
     class AddRoleToDBClusterMessage < Struct.new(
+      nil,
       :db_cluster_identifier,
       :role_arn,
       :feature_name,
@@ -178,6 +181,7 @@ module Aws::RDS
     #               For information about supported feature names, see <a>DBEngineVersion</a>.</p>
     #   @return [String]
     class AddRoleToDBInstanceMessage < Struct.new(
+      nil,
       :db_instance_identifier,
       :role_arn,
       :feature_name,
@@ -218,6 +222,7 @@ module Aws::RDS
     #            </ul>
     #   @return [String]
     class AddSourceIdentifierToSubscriptionMessage < Struct.new(
+      nil,
       :subscription_name,
       :source_identifier,
       keyword_init: true
@@ -229,6 +234,7 @@ module Aws::RDS
     #   <p>Contains the results of a successful invocation of the <code>DescribeEventSubscriptions</code> action.</p>
     #   @return [Types::EventSubscription]
     class AddSourceIdentifierToSubscriptionResult < Struct.new(
+      nil,
       :event_subscription,
       keyword_init: true
     )
@@ -246,6 +252,7 @@ module Aws::RDS
     #   <p>The tags to be assigned to the Amazon RDS resource.</p>
     #   @return [Array<Types::Tag>]
     class AddTagsToResourceMessage < Struct.new(
+      nil,
       :resource_name,
       :tags,
       keyword_init: true
@@ -317,6 +324,7 @@ module Aws::RDS
     #            </ul>
     #   @return [String]
     class ApplyPendingMaintenanceActionMessage < Struct.new(
+      nil,
       :resource_identifier,
       :apply_action,
       :opt_in_type,
@@ -329,6 +337,7 @@ module Aws::RDS
     #   <p>Describes the pending maintenance actions for a resource.</p>
     #   @return [Types::ResourcePendingMaintenanceActions]
     class ApplyPendingMaintenanceActionResult < Struct.new(
+      nil,
       :resource_pending_maintenance_actions,
       keyword_init: true
     )
@@ -340,6 +349,7 @@ module Aws::RDS
     # @!attribute message
     #   @return [String]
     class AuthorizationAlreadyExistsFault < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -353,6 +363,7 @@ module Aws::RDS
     # @!attribute message
     #   @return [String]
     class AuthorizationNotFoundFault < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -363,6 +374,7 @@ module Aws::RDS
     # @!attribute message
     #   @return [String]
     class AuthorizationQuotaExceededFault < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -395,6 +407,7 @@ module Aws::RDS
     #           Otherwise, <code>EC2SecurityGroupOwnerId</code> and either <code>EC2SecurityGroupName</code> or <code>EC2SecurityGroupId</code> must be provided.</p>
     #   @return [String]
     class AuthorizeDBSecurityGroupIngressMessage < Struct.new(
+      nil,
       :db_security_group_name,
       :cidrip,
       :ec2_security_group_name,
@@ -411,6 +424,7 @@ module Aws::RDS
     #             in the <code>DescribeDBSecurityGroups</code> action.</p>
     #   @return [Types::DBSecurityGroup]
     class AuthorizeDBSecurityGroupIngressResult < Struct.new(
+      nil,
       :db_security_group,
       keyword_init: true
     )
@@ -424,6 +438,7 @@ module Aws::RDS
     #   <p>The name of the Availability Zone.</p>
     #   @return [String]
     class AvailabilityZone < Struct.new(
+      nil,
       :name,
       keyword_init: true
     )
@@ -446,6 +461,7 @@ module Aws::RDS
     #   <p>The allowed values for the processor feature of the DB instance class.</p>
     #   @return [String]
     class AvailableProcessorFeature < Struct.new(
+      nil,
       :name,
       :default_value,
       :allowed_values,
@@ -505,6 +521,7 @@ module Aws::RDS
     #               backtrack time, an error occurs.</p>
     #   @return [Boolean]
     class BacktrackDBClusterMessage < Struct.new(
+      nil,
       :db_cluster_identifier,
       :backtrack_to,
       :force,
@@ -553,6 +570,7 @@ module Aws::RDS
     #            </ul>
     #   @return [String]
     class BacktrackDBClusterOutput < Struct.new(
+      nil,
       :db_cluster_identifier,
       :backtrack_identifier,
       :backtrack_to,
@@ -569,6 +587,7 @@ module Aws::RDS
     # @!attribute message
     #   @return [String]
     class BackupPolicyNotFoundFault < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -655,6 +674,7 @@ module Aws::RDS
     #               </p>
     #   @return [Array<Types::Tag>]
     class BlueGreenDeployment < Struct.new(
+      nil,
       :blue_green_deployment_identifier,
       :blue_green_deployment_name,
       :source,
@@ -675,6 +695,7 @@ module Aws::RDS
     # @!attribute message
     #   @return [String]
     class BlueGreenDeploymentAlreadyExistsFault < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -686,6 +707,7 @@ module Aws::RDS
     # @!attribute message
     #   @return [String]
     class BlueGreenDeploymentNotFoundFault < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -724,6 +746,7 @@ module Aws::RDS
     #            </ul>
     #   @return [String]
     class BlueGreenDeploymentTask < Struct.new(
+      nil,
       :name,
       :status,
       keyword_init: true
@@ -735,6 +758,7 @@ module Aws::RDS
     #   <p>The identifier of the snapshot or cluster export task to cancel.</p>
     #   @return [String]
     class CancelExportTaskMessage < Struct.new(
+      nil,
       :export_task_identifier,
       keyword_init: true
     )
@@ -852,6 +876,7 @@ module Aws::RDS
     #   <p>The type of source for the export.</p>
     #   @return [String]
     class CancelExportTaskOutput < Struct.new(
+      nil,
       :export_task_identifier,
       :source_arn,
       :export_only,
@@ -905,6 +930,7 @@ module Aws::RDS
     #               expires.</p>
     #   @return [Time]
     class Certificate < Struct.new(
+      nil,
       :certificate_identifier,
       :certificate_type,
       :thumbprint,
@@ -931,6 +957,7 @@ module Aws::RDS
     #   <p>The expiration date of the DB instance’s server certificate.</p>
     #   @return [Time]
     class CertificateDetails < Struct.new(
+      nil,
       :ca_identifier,
       :valid_till,
       keyword_init: true
@@ -955,6 +982,7 @@ module Aws::RDS
     #               up to the value specified by <code>MaxRecords</code> .</p>
     #   @return [String]
     class CertificateMessage < Struct.new(
+      nil,
       :default_certificate_for_new_launches,
       :certificates,
       :marker,
@@ -969,6 +997,7 @@ module Aws::RDS
     # @!attribute message
     #   @return [String]
     class CertificateNotFoundFault < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -983,6 +1012,7 @@ module Aws::RDS
     #   <p>The description of the character set.</p>
     #   @return [String]
     class CharacterSet < Struct.new(
+      nil,
       :character_set_name,
       :character_set_description,
       keyword_init: true
@@ -1042,6 +1072,7 @@ module Aws::RDS
     #            </ul>
     #   @return [Array<String>]
     class CloudwatchLogsExportConfiguration < Struct.new(
+      nil,
       :enable_log_types,
       :disable_log_types,
       keyword_init: true
@@ -1092,6 +1123,7 @@ module Aws::RDS
     #               User Guide</i>.</p>
     #   @return [Types::CertificateDetails]
     class ClusterPendingModifiedValues < Struct.new(
+      nil,
       :pending_cloudwatch_logs_exports,
       :db_cluster_identifier,
       :master_user_password,
@@ -1169,6 +1201,7 @@ module Aws::RDS
     #            </important>
     #   @return [String]
     class ConnectionPoolConfiguration < Struct.new(
+      nil,
       :max_connections_percent,
       :max_idle_connections_percent,
       :connection_borrow_timeout,
@@ -1213,6 +1246,7 @@ module Aws::RDS
     #            </important>
     #   @return [String]
     class ConnectionPoolConfigurationInfo < Struct.new(
+      nil,
       :max_connections_percent,
       :max_idle_connections_percent,
       :connection_borrow_timeout,
@@ -1231,6 +1265,7 @@ module Aws::RDS
     #   <p>The value of <code>ContextAttribute</code>.</p>
     #   @return [String]
     class ContextAttribute < Struct.new(
+      nil,
       :key,
       :value,
       keyword_init: true
@@ -1282,6 +1317,7 @@ module Aws::RDS
     #               </p>
     #   @return [Array<Types::Tag>]
     class CopyDBClusterParameterGroupMessage < Struct.new(
+      nil,
       :source_db_cluster_parameter_group_identifier,
       :target_db_cluster_parameter_group_identifier,
       :target_db_cluster_parameter_group_description,
@@ -1296,6 +1332,7 @@ module Aws::RDS
     #            <p>This data type is used as a response element in the <code>DescribeDBClusterParameterGroups</code> action.</p>
     #   @return [Types::DBClusterParameterGroup]
     class CopyDBClusterParameterGroupResult < Struct.new(
+      nil,
       :db_cluster_parameter_group,
       keyword_init: true
     )
@@ -1419,6 +1456,7 @@ module Aws::RDS
     #   <p>The source region of the snapshot. This is only needed when the shapshot is encrypted and in a different region.</p>
     #   @return [String]
     class CopyDBClusterSnapshotMessage < Struct.new(
+      nil,
       :source_db_cluster_snapshot_identifier,
       :target_db_cluster_snapshot_identifier,
       :kms_key_id,
@@ -1437,6 +1475,7 @@ module Aws::RDS
     #             in the <code>DescribeDBClusterSnapshots</code> action.</p>
     #   @return [Types::DBClusterSnapshot]
     class CopyDBClusterSnapshotResult < Struct.new(
+      nil,
       :db_cluster_snapshot,
       keyword_init: true
     )
@@ -1488,6 +1527,7 @@ module Aws::RDS
     #               </p>
     #   @return [Array<Types::Tag>]
     class CopyDBParameterGroupMessage < Struct.new(
+      nil,
       :source_db_parameter_group_identifier,
       :target_db_parameter_group_identifier,
       :target_db_parameter_group_description,
@@ -1502,6 +1542,7 @@ module Aws::RDS
     #            <p>This data type is used as a response element in the <code>DescribeDBParameterGroups</code> action.</p>
     #   @return [Types::DBParameterGroup]
     class CopyDBParameterGroupResult < Struct.new(
+      nil,
       :db_parameter_group,
       keyword_init: true
     )
@@ -1675,6 +1716,7 @@ module Aws::RDS
     #   <p>The source region of the snapshot. This is only needed when the shapshot is encrypted and in a different region.</p>
     #   @return [String]
     class CopyDBSnapshotMessage < Struct.new(
+      nil,
       :source_db_snapshot_identifier,
       :target_db_snapshot_identifier,
       :kms_key_id,
@@ -1698,6 +1740,7 @@ module Aws::RDS
     #             in the <code>DescribeDBSnapshots</code> action.</p>
     #   @return [Types::DBSnapshot]
     class CopyDBSnapshotResult < Struct.new(
+      nil,
       :db_snapshot,
       keyword_init: true
     )
@@ -1745,6 +1788,7 @@ module Aws::RDS
     #               </p>
     #   @return [Array<Types::Tag>]
     class CopyOptionGroupMessage < Struct.new(
+      nil,
       :source_option_group_identifier,
       :target_option_group_identifier,
       :target_option_group_description,
@@ -1758,6 +1802,7 @@ module Aws::RDS
     #   <p></p>
     #   @return [Types::OptionGroup]
     class CopyOptionGroupResult < Struct.new(
+      nil,
       :option_group,
       keyword_init: true
     )
@@ -1833,6 +1878,7 @@ module Aws::RDS
     #            <p>This setting doesn't apply to Amazon Aurora blue/green deployments.</p>
     #   @return [Integer]
     class CreateBlueGreenDeploymentRequest < Struct.new(
+      nil,
       :blue_green_deployment_name,
       :source,
       :target_engine_version,
@@ -1859,6 +1905,7 @@ module Aws::RDS
     #                   User Guide</i>.</p>
     #   @return [Types::BlueGreenDeployment]
     class CreateBlueGreenDeploymentResponse < Struct.new(
+      nil,
       :blue_green_deployment,
       keyword_init: true
     )
@@ -1869,6 +1916,7 @@ module Aws::RDS
     # @!attribute message
     #   @return [String]
     class CreateCustomDBEngineVersionFault < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -1983,6 +2031,7 @@ module Aws::RDS
     #               </p>
     #   @return [Array<Types::Tag>]
     class CreateCustomDBEngineVersionMessage < Struct.new(
+      nil,
       :engine,
       :engine_version,
       :database_installation_files_s3_bucket_name,
@@ -2144,6 +2193,7 @@ module Aws::RDS
     #         </p>
     #   @return [Types::ServerlessV2FeaturesSupport]
     class CreateCustomDBEngineVersionOutput < Struct.new(
+      nil,
       :engine,
       :major_engine_version,
       :engine_version,
@@ -2206,6 +2256,7 @@ module Aws::RDS
     #   <p>The tags to be assigned to the Amazon RDS resource.</p>
     #   @return [Array<Types::Tag>]
     class CreateDBClusterEndpointMessage < Struct.new(
+      nil,
       :db_cluster_identifier,
       :db_cluster_endpoint_identifier,
       :endpoint_type,
@@ -2279,6 +2330,7 @@ module Aws::RDS
     #   <p>The Amazon Resource Name (ARN) for the endpoint.</p>
     #   @return [String]
     class CreateDBClusterEndpointOutput < Struct.new(
+      nil,
       :db_cluster_endpoint_identifier,
       :db_cluster_identifier,
       :db_cluster_endpoint_resource_identifier,
@@ -3046,6 +3098,7 @@ module Aws::RDS
     #   <p>The source region of the snapshot. This is only needed when the shapshot is encrypted and in a different region.</p>
     #   @return [String]
     class CreateDBClusterMessage < Struct.new(
+      nil,
       :availability_zones,
       :backup_retention_period,
       :character_set_name,
@@ -3187,6 +3240,7 @@ module Aws::RDS
     #   <p>Tags to assign to the DB cluster parameter group.</p>
     #   @return [Array<Types::Tag>]
     class CreateDBClusterParameterGroupMessage < Struct.new(
+      nil,
       :db_cluster_parameter_group_name,
       :db_parameter_group_family,
       :description,
@@ -3201,6 +3255,7 @@ module Aws::RDS
     #            <p>This data type is used as a response element in the <code>DescribeDBClusterParameterGroups</code> action.</p>
     #   @return [Types::DBClusterParameterGroup]
     class CreateDBClusterParameterGroupResult < Struct.new(
+      nil,
       :db_cluster_parameter_group,
       keyword_init: true
     )
@@ -3228,6 +3283,7 @@ module Aws::RDS
     #            </p>
     #   @return [Types::DBCluster]
     class CreateDBClusterResult < Struct.new(
+      nil,
       :db_cluster,
       keyword_init: true
     )
@@ -3267,6 +3323,7 @@ module Aws::RDS
     #   <p>The tags to be assigned to the DB cluster snapshot.</p>
     #   @return [Array<Types::Tag>]
     class CreateDBClusterSnapshotMessage < Struct.new(
+      nil,
       :db_cluster_snapshot_identifier,
       :db_cluster_identifier,
       :tags,
@@ -3281,6 +3338,7 @@ module Aws::RDS
     #             in the <code>DescribeDBClusterSnapshots</code> action.</p>
     #   @return [Types::DBClusterSnapshot]
     class CreateDBClusterSnapshotResult < Struct.new(
+      nil,
       :db_cluster_snapshot,
       keyword_init: true
     )
@@ -4554,6 +4612,7 @@ module Aws::RDS
     #            <p>This option is only valid for RDS for PostgreSQL and Aurora PostgreSQL engines.</p>
     #   @return [String]
     class CreateDBInstanceMessage < Struct.new(
+      nil,
       :db_name,
       :db_instance_identifier,
       :allocated_storage,
@@ -5211,6 +5270,7 @@ module Aws::RDS
     #   <p>The source region of the snapshot. This is only needed when the shapshot is encrypted and in a different region.</p>
     #   @return [String]
     class CreateDBInstanceReadReplicaMessage < Struct.new(
+      nil,
       :db_instance_identifier,
       :source_db_instance_identifier,
       :db_instance_class,
@@ -5273,6 +5333,7 @@ module Aws::RDS
     #             <code>StartDBInstance</code>, and <code>StopDBInstance</code>.</p>
     #   @return [Types::DBInstance]
     class CreateDBInstanceReadReplicaResult < Struct.new(
+      nil,
       :db_instance,
       keyword_init: true
     )
@@ -5288,6 +5349,7 @@ module Aws::RDS
     #             <code>StartDBInstance</code>, and <code>StopDBInstance</code>.</p>
     #   @return [Types::DBInstance]
     class CreateDBInstanceResult < Struct.new(
+      nil,
       :db_instance,
       keyword_init: true
     )
@@ -5407,6 +5469,7 @@ module Aws::RDS
     #   <p>Tags to assign to the DB parameter group.</p>
     #   @return [Array<Types::Tag>]
     class CreateDBParameterGroupMessage < Struct.new(
+      nil,
       :db_parameter_group_name,
       :db_parameter_group_family,
       :description,
@@ -5421,6 +5484,7 @@ module Aws::RDS
     #            <p>This data type is used as a response element in the <code>DescribeDBParameterGroups</code> action.</p>
     #   @return [Types::DBParameterGroup]
     class CreateDBParameterGroupResult < Struct.new(
+      nil,
       :db_parameter_group,
       keyword_init: true
     )
@@ -5484,6 +5548,7 @@ module Aws::RDS
     #            </ul>
     #   @return [String]
     class CreateDBProxyEndpointRequest < Struct.new(
+      nil,
       :db_proxy_name,
       :db_proxy_endpoint_name,
       :vpc_subnet_ids,
@@ -5502,6 +5567,7 @@ module Aws::RDS
     #           or read-only operations, or using a different VPC than the proxy's default VPC.</p>
     #   @return [Types::DBProxyEndpoint]
     class CreateDBProxyEndpointResponse < Struct.new(
+      nil,
       :db_proxy_endpoint,
       keyword_init: true
     )
@@ -5610,6 +5676,7 @@ module Aws::RDS
     #            </ul>
     #   @return [String]
     class CreateDBProxyRequest < Struct.new(
+      nil,
       :db_proxy_name,
       :engine_family,
       :default_auth_scheme,
@@ -5632,6 +5699,7 @@ module Aws::RDS
     #   <p>The <code>DBProxy</code> structure corresponding to the new proxy.</p>
     #   @return [Types::DBProxy]
     class CreateDBProxyResponse < Struct.new(
+      nil,
       :db_proxy,
       keyword_init: true
     )
@@ -5666,6 +5734,7 @@ module Aws::RDS
     #   <p>Tags to assign to the DB security group.</p>
     #   @return [Array<Types::Tag>]
     class CreateDBSecurityGroupMessage < Struct.new(
+      nil,
       :db_security_group_name,
       :db_security_group_description,
       :tags,
@@ -5680,6 +5749,7 @@ module Aws::RDS
     #             in the <code>DescribeDBSecurityGroups</code> action.</p>
     #   @return [Types::DBSecurityGroup]
     class CreateDBSecurityGroupResult < Struct.new(
+      nil,
       :db_security_group,
       keyword_init: true
     )
@@ -5748,6 +5818,7 @@ module Aws::RDS
     #               </p>
     #   @return [Array<Types::Tag>]
     class CreateDBShardGroupMessage < Struct.new(
+      nil,
       :db_shard_group_identifier,
       :db_cluster_identifier,
       :compute_redundancy,
@@ -5819,6 +5890,7 @@ module Aws::RDS
     #               </p>
     #   @return [Array<Types::Tag>]
     class CreateDBShardGroupOutput < Struct.new(
+      nil,
       :db_shard_group_resource_id,
       :db_shard_group_identifier,
       :db_cluster_identifier,
@@ -5873,6 +5945,7 @@ module Aws::RDS
     #               </p>
     #   @return [Array<Types::Tag>]
     class CreateDBSnapshotMessage < Struct.new(
+      nil,
       :db_snapshot_identifier,
       :db_instance_identifier,
       :tags,
@@ -5887,6 +5960,7 @@ module Aws::RDS
     #             in the <code>DescribeDBSnapshots</code> action.</p>
     #   @return [Types::DBSnapshot]
     class CreateDBSnapshotResult < Struct.new(
+      nil,
       :db_snapshot,
       keyword_init: true
     )
@@ -5921,6 +5995,7 @@ module Aws::RDS
     #   <p>Tags to assign to the DB subnet group.</p>
     #   @return [Array<Types::Tag>]
     class CreateDBSubnetGroupMessage < Struct.new(
+      nil,
       :db_subnet_group_name,
       :db_subnet_group_description,
       :subnet_ids,
@@ -5936,6 +6011,7 @@ module Aws::RDS
     #             in the <code>DescribeDBSubnetGroups</code> action.</p>
     #   @return [Types::DBSubnetGroup]
     class CreateDBSubnetGroupResult < Struct.new(
+      nil,
       :db_subnet_group,
       keyword_init: true
     )
@@ -6017,6 +6093,7 @@ module Aws::RDS
     #               </p>
     #   @return [Array<Types::Tag>]
     class CreateEventSubscriptionMessage < Struct.new(
+      nil,
       :subscription_name,
       :sns_topic_arn,
       :source_type,
@@ -6033,6 +6110,7 @@ module Aws::RDS
     #   <p>Contains the results of a successful invocation of the <code>DescribeEventSubscriptions</code> action.</p>
     #   @return [Types::EventSubscription]
     class CreateEventSubscriptionResult < Struct.new(
+      nil,
       :event_subscription,
       keyword_init: true
     )
@@ -6130,6 +6208,7 @@ module Aws::RDS
     #   <p>Tags to assign to the global cluster.</p>
     #   @return [Array<Types::Tag>]
     class CreateGlobalClusterMessage < Struct.new(
+      nil,
       :global_cluster_identifier,
       :source_db_cluster_identifier,
       :engine,
@@ -6148,6 +6227,7 @@ module Aws::RDS
     #   <p>A data type representing an Aurora global database.</p>
     #   @return [Types::GlobalCluster]
     class CreateGlobalClusterResult < Struct.new(
+      nil,
       :global_cluster,
       keyword_init: true
     )
@@ -6194,6 +6274,7 @@ module Aws::RDS
     #   <p>A description of the integration.</p>
     #   @return [String]
     class CreateIntegrationMessage < Struct.new(
+      nil,
       :source_arn,
       :target_arn,
       :integration_name,
@@ -6255,6 +6336,7 @@ module Aws::RDS
     #   <p>Any errors associated with the integration.</p>
     #   @return [Array<Types::IntegrationError>]
     class CreateIntegrationOutput < Struct.new(
+      nil,
       :source_arn,
       :target_arn,
       :integration_name,
@@ -6371,6 +6453,7 @@ module Aws::RDS
     #   <p>Tags to assign to the option group.</p>
     #   @return [Array<Types::Tag>]
     class CreateOptionGroupMessage < Struct.new(
+      nil,
       :option_group_name,
       :engine_name,
       :major_engine_version,
@@ -6385,6 +6468,7 @@ module Aws::RDS
     #   <p></p>
     #   @return [Types::OptionGroup]
     class CreateOptionGroupResult < Struct.new(
+      nil,
       :option_group,
       keyword_init: true
     )
@@ -6477,6 +6561,7 @@ module Aws::RDS
     #               </p>
     #   @return [Array<Types::Tag>]
     class CreateTenantDatabaseMessage < Struct.new(
+      nil,
       :db_instance_identifier,
       :tenant_db_name,
       :master_username,
@@ -6496,6 +6581,7 @@ module Aws::RDS
     #               the <code>DescribeTenantDatabases</code> action.</p>
     #   @return [Types::TenantDatabase]
     class CreateTenantDatabaseResult < Struct.new(
+      nil,
       :tenant_database,
       keyword_init: true
     )
@@ -6508,6 +6594,7 @@ module Aws::RDS
     # @!attribute message
     #   @return [String]
     class CustomAvailabilityZoneNotFoundFault < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -6522,6 +6609,7 @@ module Aws::RDS
     #   <p>A value that indicates the status of a custom engine version (CEV).</p>
     #   @return [String]
     class CustomDBEngineVersionAMI < Struct.new(
+      nil,
       :image_id,
       :status,
       keyword_init: true
@@ -6533,6 +6621,7 @@ module Aws::RDS
     # @!attribute message
     #   @return [String]
     class CustomDBEngineVersionAlreadyExistsFault < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -6543,6 +6632,7 @@ module Aws::RDS
     # @!attribute message
     #   @return [String]
     class CustomDBEngineVersionNotFoundFault < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -6553,6 +6643,7 @@ module Aws::RDS
     # @!attribute message
     #   @return [String]
     class CustomDBEngineVersionQuotaExceededFault < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -6945,6 +7036,7 @@ module Aws::RDS
     #            <p>For more information, see CreateDBCluster.</p>
     #   @return [String]
     class DBCluster < Struct.new(
+      nil,
       :allocated_storage,
       :availability_zones,
       :backup_retention_period,
@@ -7038,6 +7130,7 @@ module Aws::RDS
     # @!attribute message
     #   @return [String]
     class DBClusterAlreadyExistsFault < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -7140,6 +7233,7 @@ module Aws::RDS
     #   <p>The Amazon Resource Name (ARN) of the recovery point in Amazon Web Services Backup.</p>
     #   @return [String]
     class DBClusterAutomatedBackup < Struct.new(
+      nil,
       :engine,
       :vpc_id,
       :db_cluster_automated_backups_arn,
@@ -7178,6 +7272,7 @@ module Aws::RDS
     #   <p>A list of <code>DBClusterAutomatedBackup</code> backups.</p>
     #   @return [Array<Types::DBClusterAutomatedBackup>]
     class DBClusterAutomatedBackupMessage < Struct.new(
+      nil,
       :marker,
       :db_cluster_automated_backups,
       keyword_init: true
@@ -7189,6 +7284,7 @@ module Aws::RDS
     # @!attribute message
     #   @return [String]
     class DBClusterAutomatedBackupNotFoundFault < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -7200,6 +7296,7 @@ module Aws::RDS
     # @!attribute message
     #   @return [String]
     class DBClusterAutomatedBackupQuotaExceededFault < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -7245,6 +7342,7 @@ module Aws::RDS
     #            </ul>
     #   @return [String]
     class DBClusterBacktrack < Struct.new(
+      nil,
       :db_cluster_identifier,
       :backtrack_identifier,
       :backtrack_to,
@@ -7264,6 +7362,7 @@ module Aws::RDS
     #   <p>Contains a list of backtracks for the user.</p>
     #   @return [Array<Types::DBClusterBacktrack>]
     class DBClusterBacktrackMessage < Struct.new(
+      nil,
       :marker,
       :db_cluster_backtracks,
       keyword_init: true
@@ -7276,6 +7375,7 @@ module Aws::RDS
     # @!attribute message
     #   @return [String]
     class DBClusterBacktrackNotFoundFault < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -7344,6 +7444,7 @@ module Aws::RDS
     #   <p>The Amazon Resource Name (ARN) for the endpoint.</p>
     #   @return [String]
     class DBClusterEndpoint < Struct.new(
+      nil,
       :db_cluster_endpoint_identifier,
       :db_cluster_identifier,
       :db_cluster_endpoint_resource_identifier,
@@ -7363,6 +7464,7 @@ module Aws::RDS
     # @!attribute message
     #   @return [String]
     class DBClusterEndpointAlreadyExistsFault < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -7381,6 +7483,7 @@ module Aws::RDS
     #          and matching any filter conditions.</p>
     #   @return [Array<Types::DBClusterEndpoint>]
     class DBClusterEndpointMessage < Struct.new(
+      nil,
       :marker,
       :db_cluster_endpoints,
       keyword_init: true
@@ -7392,6 +7495,7 @@ module Aws::RDS
     # @!attribute message
     #   @return [String]
     class DBClusterEndpointNotFoundFault < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -7402,6 +7506,7 @@ module Aws::RDS
     # @!attribute message
     #   @return [String]
     class DBClusterEndpointQuotaExceededFault < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -7425,6 +7530,7 @@ module Aws::RDS
     #             Fault Tolerance for an Aurora DB Cluster</a> in the <i>Amazon Aurora User Guide</i>.</p>
     #   @return [Integer]
     class DBClusterMember < Struct.new(
+      nil,
       :db_instance_identifier,
       :is_cluster_writer,
       :db_cluster_parameter_group_status,
@@ -7442,6 +7548,7 @@ module Aws::RDS
     #   <p>Contains a list of DB clusters for the user.</p>
     #   @return [Array<Types::DBCluster>]
     class DBClusterMessage < Struct.new(
+      nil,
       :marker,
       :db_clusters,
       keyword_init: true
@@ -7454,6 +7561,7 @@ module Aws::RDS
     # @!attribute message
     #   @return [String]
     class DBClusterNotFoundFault < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -7468,6 +7576,7 @@ module Aws::RDS
     #   <p>Specifies the status of the DB cluster option group.</p>
     #   @return [String]
     class DBClusterOptionGroupStatus < Struct.new(
+      nil,
       :db_cluster_option_group_name,
       :status,
       keyword_init: true
@@ -7490,6 +7599,7 @@ module Aws::RDS
     #   <p>The Amazon Resource Name (ARN) for the DB cluster parameter group.</p>
     #   @return [String]
     class DBClusterParameterGroup < Struct.new(
+      nil,
       :db_cluster_parameter_group_name,
       :db_parameter_group_family,
       :description,
@@ -7505,6 +7615,7 @@ module Aws::RDS
     # @!attribute message
     #   @return [String]
     class DBClusterParameterGroupNotFoundFault < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -7523,6 +7634,7 @@ module Aws::RDS
     #   <p>A list of DB cluster parameter groups.</p>
     #   @return [Array<Types::DBClusterParameterGroup>]
     class DBClusterParameterGroupsMessage < Struct.new(
+      nil,
       :marker,
       :db_cluster_parameter_groups,
       keyword_init: true
@@ -7535,6 +7647,7 @@ module Aws::RDS
     # @!attribute message
     #   @return [String]
     class DBClusterQuotaExceededFault < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -7570,6 +7683,7 @@ module Aws::RDS
     #               For information about supported feature names, see <a>DBEngineVersion</a>.</p>
     #   @return [String]
     class DBClusterRole < Struct.new(
+      nil,
       :role_arn,
       :status,
       :feature_name,
@@ -7582,6 +7696,7 @@ module Aws::RDS
     # @!attribute message
     #   @return [String]
     class DBClusterRoleAlreadyExistsFault < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -7592,6 +7707,7 @@ module Aws::RDS
     # @!attribute message
     #   @return [String]
     class DBClusterRoleNotFoundFault < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -7602,6 +7718,7 @@ module Aws::RDS
     # @!attribute message
     #   @return [String]
     class DBClusterRoleQuotaExceededFault < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -7715,6 +7832,7 @@ module Aws::RDS
     #   <p>Reserved for future use.</p>
     #   @return [String]
     class DBClusterSnapshot < Struct.new(
+      nil,
       :availability_zones,
       :db_cluster_snapshot_identifier,
       :db_cluster_identifier,
@@ -7750,6 +7868,7 @@ module Aws::RDS
     # @!attribute message
     #   @return [String]
     class DBClusterSnapshotAlreadyExistsFault < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -7775,6 +7894,7 @@ module Aws::RDS
     #               is public and available for any Amazon Web Services account to copy or restore.</p>
     #   @return [Array<String>]
     class DBClusterSnapshotAttribute < Struct.new(
+      nil,
       :attribute_name,
       :attribute_values,
       keyword_init: true
@@ -7794,6 +7914,7 @@ module Aws::RDS
     #   <p>The list of attributes and values for the manual DB cluster snapshot.</p>
     #   @return [Array<Types::DBClusterSnapshotAttribute>]
     class DBClusterSnapshotAttributesResult < Struct.new(
+      nil,
       :db_cluster_snapshot_identifier,
       :db_cluster_snapshot_attributes,
       keyword_init: true
@@ -7813,6 +7934,7 @@ module Aws::RDS
     #   <p>Provides a list of DB cluster snapshots for the user.</p>
     #   @return [Array<Types::DBClusterSnapshot>]
     class DBClusterSnapshotMessage < Struct.new(
+      nil,
       :marker,
       :db_cluster_snapshots,
       keyword_init: true
@@ -7825,6 +7947,7 @@ module Aws::RDS
     # @!attribute message
     #   @return [String]
     class DBClusterSnapshotNotFoundFault < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -7845,6 +7968,7 @@ module Aws::RDS
     #   <p>Reserved for future use.</p>
     #   @return [String]
     class DBClusterStatusInfo < Struct.new(
+      nil,
       :status_type,
       :normal,
       :status,
@@ -7999,6 +8123,7 @@ module Aws::RDS
     #         </p>
     #   @return [Types::ServerlessV2FeaturesSupport]
     class DBEngineVersion < Struct.new(
+      nil,
       :engine,
       :major_engine_version,
       :engine_version,
@@ -8050,6 +8175,7 @@ module Aws::RDS
     #   <p>A list of <code>DBEngineVersion</code> elements.</p>
     #   @return [Array<Types::DBEngineVersion>]
     class DBEngineVersionMessage < Struct.new(
+      nil,
       :marker,
       :db_engine_versions,
       keyword_init: true
@@ -8469,6 +8595,7 @@ module Aws::RDS
     #            <p>For more information, see CreateDBInstance.</p>
     #   @return [String]
     class DBInstance < Struct.new(
+      nil,
       :db_instance_identifier,
       :db_instance_class,
       :engine,
@@ -8565,6 +8692,7 @@ module Aws::RDS
     # @!attribute message
     #   @return [String]
     class DBInstanceAlreadyExistsFault < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -8692,6 +8820,7 @@ module Aws::RDS
     #   <p>Indicates whether the DB instance has a dedicated log volume (DLV) enabled.</p>
     #   @return [Boolean]
     class DBInstanceAutomatedBackup < Struct.new(
+      nil,
       :db_instance_arn,
       :dbi_resource_id,
       :region,
@@ -8739,6 +8868,7 @@ module Aws::RDS
     #   <p>A list of <code>DBInstanceAutomatedBackup</code> instances.</p>
     #   @return [Array<Types::DBInstanceAutomatedBackup>]
     class DBInstanceAutomatedBackupMessage < Struct.new(
+      nil,
       :marker,
       :db_instance_automated_backups,
       keyword_init: true
@@ -8750,6 +8880,7 @@ module Aws::RDS
     # @!attribute message
     #   @return [String]
     class DBInstanceAutomatedBackupNotFoundFault < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -8762,6 +8893,7 @@ module Aws::RDS
     # @!attribute message
     #   @return [String]
     class DBInstanceAutomatedBackupQuotaExceededFault < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -8773,6 +8905,7 @@ module Aws::RDS
     #   <p>The Amazon Resource Name (ARN) of the replicated automated backups.</p>
     #   @return [String]
     class DBInstanceAutomatedBackupsReplication < Struct.new(
+      nil,
       :db_instance_automated_backups_arn,
       keyword_init: true
     )
@@ -8790,6 +8923,7 @@ module Aws::RDS
     #   <p>A list of <code>DBInstance</code> instances.</p>
     #   @return [Array<Types::DBInstance>]
     class DBInstanceMessage < Struct.new(
+      nil,
       :marker,
       :db_instances,
       keyword_init: true
@@ -8802,6 +8936,7 @@ module Aws::RDS
     # @!attribute message
     #   @return [String]
     class DBInstanceNotFoundFault < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -8812,6 +8947,7 @@ module Aws::RDS
     # @!attribute message
     #   @return [String]
     class DBInstanceNotReadyFault < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -8848,6 +8984,7 @@ module Aws::RDS
     #            </ul>
     #   @return [String]
     class DBInstanceRole < Struct.new(
+      nil,
       :role_arn,
       :feature_name,
       :status,
@@ -8860,6 +8997,7 @@ module Aws::RDS
     # @!attribute message
     #   @return [String]
     class DBInstanceRoleAlreadyExistsFault < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -8871,6 +9009,7 @@ module Aws::RDS
     # @!attribute message
     #   @return [String]
     class DBInstanceRoleNotFoundFault < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -8881,6 +9020,7 @@ module Aws::RDS
     # @!attribute message
     #   @return [String]
     class DBInstanceRoleQuotaExceededFault < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -8903,6 +9043,7 @@ module Aws::RDS
     #   <p>Details of the error if there is an error for the instance. If the instance isn't in an error state, this value is blank.</p>
     #   @return [String]
     class DBInstanceStatusInfo < Struct.new(
+      nil,
       :status_type,
       :normal,
       :status,
@@ -8917,6 +9058,7 @@ module Aws::RDS
     # @!attribute message
     #   @return [String]
     class DBLogFileNotFoundFault < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -8936,6 +9078,7 @@ module Aws::RDS
     #                   <code>DescribeDBMajorEngineVersions</code> operation.</p>
     #   @return [Array<Types::SupportedEngineLifecycle>]
     class DBMajorEngineVersion < Struct.new(
+      nil,
       :engine,
       :major_engine_version,
       :supported_engine_lifecycles,
@@ -8959,6 +9102,7 @@ module Aws::RDS
     #   <p>The Amazon Resource Name (ARN) for the DB parameter group.</p>
     #   @return [String]
     class DBParameterGroup < Struct.new(
+      nil,
       :db_parameter_group_name,
       :db_parameter_group_family,
       :description,
@@ -8972,6 +9116,7 @@ module Aws::RDS
     # @!attribute message
     #   @return [String]
     class DBParameterGroupAlreadyExistsFault < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -8984,6 +9129,7 @@ module Aws::RDS
     # @!attribute message
     #   @return [String]
     class DBParameterGroupNotFoundFault < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -8995,6 +9141,7 @@ module Aws::RDS
     # @!attribute message
     #   @return [String]
     class DBParameterGroupQuotaExceededFault < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -9069,6 +9216,7 @@ module Aws::RDS
     #            </ul>
     #   @return [String]
     class DBParameterGroupStatus < Struct.new(
+      nil,
       :db_parameter_group_name,
       :parameter_apply_status,
       keyword_init: true
@@ -9087,6 +9235,7 @@ module Aws::RDS
     #   <p>A list of <code>DBParameterGroup</code> instances.</p>
     #   @return [Array<Types::DBParameterGroup>]
     class DBParameterGroupsMessage < Struct.new(
+      nil,
       :marker,
       :db_parameter_groups,
       keyword_init: true
@@ -9195,6 +9344,7 @@ module Aws::RDS
     #            </ul>
     #   @return [String]
     class DBProxy < Struct.new(
+      nil,
       :db_proxy_name,
       :db_proxy_arn,
       :status,
@@ -9222,6 +9372,7 @@ module Aws::RDS
     # @!attribute message
     #   @return [String]
     class DBProxyAlreadyExistsFault < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -9292,6 +9443,7 @@ module Aws::RDS
     #            </ul>
     #   @return [String]
     class DBProxyEndpoint < Struct.new(
+      nil,
       :db_proxy_endpoint_name,
       :db_proxy_endpoint_arn,
       :db_proxy_name,
@@ -9313,6 +9465,7 @@ module Aws::RDS
     # @!attribute message
     #   @return [String]
     class DBProxyEndpointAlreadyExistsFault < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -9323,6 +9476,7 @@ module Aws::RDS
     # @!attribute message
     #   @return [String]
     class DBProxyEndpointNotFoundFault < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -9333,6 +9487,7 @@ module Aws::RDS
     # @!attribute message
     #   @return [String]
     class DBProxyEndpointQuotaExceededFault < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -9343,6 +9498,7 @@ module Aws::RDS
     # @!attribute message
     #   @return [String]
     class DBProxyNotFoundFault < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -9353,6 +9509,7 @@ module Aws::RDS
     # @!attribute message
     #   @return [String]
     class DBProxyQuotaExceededFault < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -9388,6 +9545,7 @@ module Aws::RDS
     #   <p>Information about the connection health of the RDS Proxy target.</p>
     #   @return [Types::TargetHealth]
     class DBProxyTarget < Struct.new(
+      nil,
       :target_arn,
       :endpoint,
       :tracked_cluster_id,
@@ -9405,6 +9563,7 @@ module Aws::RDS
     # @!attribute message
     #   @return [String]
     class DBProxyTargetAlreadyRegisteredFault < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -9443,6 +9602,7 @@ module Aws::RDS
     #   <p>The date and time when the target group was last updated.</p>
     #   @return [Time]
     class DBProxyTargetGroup < Struct.new(
+      nil,
       :db_proxy_name,
       :target_group_name,
       :target_group_arn,
@@ -9460,6 +9620,7 @@ module Aws::RDS
     # @!attribute message
     #   @return [String]
     class DBProxyTargetGroupNotFoundFault < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -9470,6 +9631,7 @@ module Aws::RDS
     # @!attribute message
     #   @return [String]
     class DBProxyTargetNotFoundFault < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -9614,6 +9776,7 @@ module Aws::RDS
     #   <p>Details of the issue that caused the recommendation.</p>
     #   @return [Types::IssueDetails]
     class DBRecommendation < Struct.new(
+      nil,
       :recommendation_id,
       :type_id,
       :severity,
@@ -9643,6 +9806,7 @@ module Aws::RDS
     #   <p>The recommendation for your DB instances, DB clusters, and DB parameter groups.</p>
     #   @return [Types::DBRecommendation]
     class DBRecommendationMessage < Struct.new(
+      nil,
       :db_recommendation,
       keyword_init: true
     )
@@ -9658,6 +9822,7 @@ module Aws::RDS
     #           </p>
     #   @return [String]
     class DBRecommendationsMessage < Struct.new(
+      nil,
       :db_recommendations,
       :marker,
       keyword_init: true
@@ -9690,6 +9855,7 @@ module Aws::RDS
     #   <p>The Amazon Resource Name (ARN) for the DB security group.</p>
     #   @return [String]
     class DBSecurityGroup < Struct.new(
+      nil,
       :owner_id,
       :db_security_group_name,
       :db_security_group_description,
@@ -9707,6 +9873,7 @@ module Aws::RDS
     # @!attribute message
     #   @return [String]
     class DBSecurityGroupAlreadyExistsFault < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -9743,6 +9910,7 @@ module Aws::RDS
     #   <p>The status of the DB security group.</p>
     #   @return [String]
     class DBSecurityGroupMembership < Struct.new(
+      nil,
       :db_security_group_name,
       :status,
       keyword_init: true
@@ -9761,6 +9929,7 @@ module Aws::RDS
     #   <p>A list of <code>DBSecurityGroup</code> instances.</p>
     #   @return [Array<Types::DBSecurityGroup>]
     class DBSecurityGroupMessage < Struct.new(
+      nil,
       :marker,
       :db_security_groups,
       keyword_init: true
@@ -9773,6 +9942,7 @@ module Aws::RDS
     # @!attribute message
     #   @return [String]
     class DBSecurityGroupNotFoundFault < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -9783,6 +9953,7 @@ module Aws::RDS
     # @!attribute message
     #   @return [String]
     class DBSecurityGroupNotSupportedFault < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -9794,6 +9965,7 @@ module Aws::RDS
     # @!attribute message
     #   @return [String]
     class DBSecurityGroupQuotaExceededFault < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -9859,6 +10031,7 @@ module Aws::RDS
     #               </p>
     #   @return [Array<Types::Tag>]
     class DBShardGroup < Struct.new(
+      nil,
       :db_shard_group_resource_id,
       :db_shard_group_identifier,
       :db_cluster_identifier,
@@ -9879,6 +10052,7 @@ module Aws::RDS
     # @!attribute message
     #   @return [String]
     class DBShardGroupAlreadyExistsFault < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -9889,6 +10063,7 @@ module Aws::RDS
     # @!attribute message
     #   @return [String]
     class DBShardGroupNotFoundFault < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -10030,6 +10205,7 @@ module Aws::RDS
     #   <p>Specifies the name of the Availability Zone where RDS stores the DB snapshot. This value is valid only for snapshots that RDS stores on a Dedicated Local Zone.</p>
     #   @return [String]
     class DBSnapshot < Struct.new(
+      nil,
       :db_snapshot_identifier,
       :db_instance_identifier,
       :snapshot_create_time,
@@ -10077,6 +10253,7 @@ module Aws::RDS
     # @!attribute message
     #   @return [String]
     class DBSnapshotAlreadyExistsFault < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -10102,6 +10279,7 @@ module Aws::RDS
     #         is public and available for any Amazon Web Services account to copy or restore.</p>
     #   @return [Array<String>]
     class DBSnapshotAttribute < Struct.new(
+      nil,
       :attribute_name,
       :attribute_values,
       keyword_init: true
@@ -10121,6 +10299,7 @@ module Aws::RDS
     #   <p>The list of attributes and values for the manual DB snapshot.</p>
     #   @return [Array<Types::DBSnapshotAttribute>]
     class DBSnapshotAttributesResult < Struct.new(
+      nil,
       :db_snapshot_identifier,
       :db_snapshot_attributes,
       keyword_init: true
@@ -10139,6 +10318,7 @@ module Aws::RDS
     #   <p>A list of <code>DBSnapshot</code> instances.</p>
     #   @return [Array<Types::DBSnapshot>]
     class DBSnapshotMessage < Struct.new(
+      nil,
       :marker,
       :db_snapshots,
       keyword_init: true
@@ -10151,6 +10331,7 @@ module Aws::RDS
     # @!attribute message
     #   @return [String]
     class DBSnapshotNotFoundFault < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -10204,6 +10385,7 @@ module Aws::RDS
     #               </p>
     #   @return [Array<Types::Tag>]
     class DBSnapshotTenantDatabase < Struct.new(
+      nil,
       :db_snapshot_identifier,
       :db_instance_identifier,
       :dbi_resource_id,
@@ -10226,6 +10408,7 @@ module Aws::RDS
     # @!attribute message
     #   @return [String]
     class DBSnapshotTenantDatabaseNotFoundFault < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -10241,6 +10424,7 @@ module Aws::RDS
     #   <p>A list of DB snapshot tenant databases.</p>
     #   @return [Array<Types::DBSnapshotTenantDatabase>]
     class DBSnapshotTenantDatabasesMessage < Struct.new(
+      nil,
       :marker,
       :db_snapshot_tenant_databases,
       keyword_init: true
@@ -10294,6 +10478,7 @@ module Aws::RDS
     #            </p>
     #   @return [Array<String>]
     class DBSubnetGroup < Struct.new(
+      nil,
       :db_subnet_group_name,
       :db_subnet_group_description,
       :vpc_id,
@@ -10311,6 +10496,7 @@ module Aws::RDS
     # @!attribute message
     #   @return [String]
     class DBSubnetGroupAlreadyExistsFault < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -10321,6 +10507,7 @@ module Aws::RDS
     # @!attribute message
     #   @return [String]
     class DBSubnetGroupDoesNotCoverEnoughAZs < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -10338,6 +10525,7 @@ module Aws::RDS
     #   <p>A list of <code>DBSubnetGroup</code> instances.</p>
     #   @return [Array<Types::DBSubnetGroup>]
     class DBSubnetGroupMessage < Struct.new(
+      nil,
       :marker,
       :db_subnet_groups,
       keyword_init: true
@@ -10350,6 +10538,7 @@ module Aws::RDS
     # @!attribute message
     #   @return [String]
     class DBSubnetGroupNotAllowedFault < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -10361,6 +10550,7 @@ module Aws::RDS
     # @!attribute message
     #   @return [String]
     class DBSubnetGroupNotFoundFault < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -10372,6 +10562,7 @@ module Aws::RDS
     # @!attribute message
     #   @return [String]
     class DBSubnetGroupQuotaExceededFault < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -10383,6 +10574,7 @@ module Aws::RDS
     # @!attribute message
     #   @return [String]
     class DBSubnetQuotaExceededFault < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -10394,6 +10586,7 @@ module Aws::RDS
     # @!attribute message
     #   @return [String]
     class DBUpgradeDependencyFailureFault < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -10417,6 +10610,7 @@ module Aws::RDS
     #                   <code>SWITCHOVER_COMPLETED</code>.</p>
     #   @return [Boolean]
     class DeleteBlueGreenDeploymentRequest < Struct.new(
+      nil,
       :blue_green_deployment_identifier,
       :delete_target,
       keyword_init: true
@@ -10433,6 +10627,7 @@ module Aws::RDS
     #                   User Guide</i>.</p>
     #   @return [Types::BlueGreenDeployment]
     class DeleteBlueGreenDeploymentResponse < Struct.new(
+      nil,
       :blue_green_deployment,
       keyword_init: true
     )
@@ -10470,6 +10665,7 @@ module Aws::RDS
     #               <code>EngineVersion</code> is unique per customer per Amazon Web Services Region.</p>
     #   @return [String]
     class DeleteCustomDBEngineVersionMessage < Struct.new(
+      nil,
       :engine,
       :engine_version,
       keyword_init: true
@@ -10622,6 +10818,7 @@ module Aws::RDS
     #         </p>
     #   @return [Types::ServerlessV2FeaturesSupport]
     class DeleteCustomDBEngineVersionOutput < Struct.new(
+      nil,
       :engine,
       :major_engine_version,
       :engine_version,
@@ -10666,6 +10863,7 @@ module Aws::RDS
     #   <p>The identifier for the source DB cluster, which can't be changed and which is unique to an Amazon Web Services Region.</p>
     #   @return [String]
     class DeleteDBClusterAutomatedBackupMessage < Struct.new(
+      nil,
       :db_cluster_resource_id,
       keyword_init: true
     )
@@ -10677,6 +10875,7 @@ module Aws::RDS
     #               properties that existed at the time you deleted the source cluster.</p>
     #   @return [Types::DBClusterAutomatedBackup]
     class DeleteDBClusterAutomatedBackupResult < Struct.new(
+      nil,
       :db_cluster_automated_backup,
       keyword_init: true
     )
@@ -10687,6 +10886,7 @@ module Aws::RDS
     #   <p>The identifier associated with the custom endpoint. This parameter is stored as a lowercase string.</p>
     #   @return [String]
     class DeleteDBClusterEndpointMessage < Struct.new(
+      nil,
       :db_cluster_endpoint_identifier,
       keyword_init: true
     )
@@ -10755,6 +10955,7 @@ module Aws::RDS
     #   <p>The Amazon Resource Name (ARN) for the endpoint.</p>
     #   @return [String]
     class DeleteDBClusterEndpointOutput < Struct.new(
+      nil,
       :db_cluster_endpoint_identifier,
       :db_cluster_identifier,
       :db_cluster_endpoint_resource_identifier,
@@ -10819,6 +11020,7 @@ module Aws::RDS
     #               policy specifies a point-in-time restore rule.</p>
     #   @return [Boolean]
     class DeleteDBClusterMessage < Struct.new(
+      nil,
       :db_cluster_identifier,
       :skip_final_snapshot,
       :final_db_snapshot_identifier,
@@ -10845,6 +11047,7 @@ module Aws::RDS
     #            </ul>
     #   @return [String]
     class DeleteDBClusterParameterGroupMessage < Struct.new(
+      nil,
       :db_cluster_parameter_group_name,
       keyword_init: true
     )
@@ -10872,6 +11075,7 @@ module Aws::RDS
     #            </p>
     #   @return [Types::DBCluster]
     class DeleteDBClusterResult < Struct.new(
+      nil,
       :db_cluster,
       keyword_init: true
     )
@@ -10884,6 +11088,7 @@ module Aws::RDS
     #            <p>Constraints: Must be the name of an existing DB cluster snapshot in the <code>available</code> state.</p>
     #   @return [String]
     class DeleteDBClusterSnapshotMessage < Struct.new(
+      nil,
       :db_cluster_snapshot_identifier,
       keyword_init: true
     )
@@ -10896,6 +11101,7 @@ module Aws::RDS
     #             in the <code>DescribeDBClusterSnapshots</code> action.</p>
     #   @return [Types::DBClusterSnapshot]
     class DeleteDBClusterSnapshotResult < Struct.new(
+      nil,
       :db_cluster_snapshot,
       keyword_init: true
     )
@@ -10912,6 +11118,7 @@ module Aws::RDS
     #            <p>This setting doesn't apply to RDS Custom.</p>
     #   @return [String]
     class DeleteDBInstanceAutomatedBackupMessage < Struct.new(
+      nil,
       :dbi_resource_id,
       :db_instance_automated_backups_arn,
       keyword_init: true
@@ -10924,6 +11131,7 @@ module Aws::RDS
     #               existed at the time you deleted the source instance.</p>
     #   @return [Types::DBInstanceAutomatedBackup]
     class DeleteDBInstanceAutomatedBackupResult < Struct.new(
+      nil,
       :db_instance_automated_backup,
       keyword_init: true
     )
@@ -10982,6 +11190,7 @@ module Aws::RDS
     #               automated backups immediately after the DB instance is deleted.</p>
     #   @return [Boolean]
     class DeleteDBInstanceMessage < Struct.new(
+      nil,
       :db_instance_identifier,
       :skip_final_snapshot,
       :final_db_snapshot_identifier,
@@ -11000,6 +11209,7 @@ module Aws::RDS
     #             <code>StartDBInstance</code>, and <code>StopDBInstance</code>.</p>
     #   @return [Types::DBInstance]
     class DeleteDBInstanceResult < Struct.new(
+      nil,
       :db_instance,
       keyword_init: true
     )
@@ -11023,6 +11233,7 @@ module Aws::RDS
     #            </ul>
     #   @return [String]
     class DeleteDBParameterGroupMessage < Struct.new(
+      nil,
       :db_parameter_group_name,
       keyword_init: true
     )
@@ -11033,6 +11244,7 @@ module Aws::RDS
     #   <p>The name of the DB proxy endpoint to delete.</p>
     #   @return [String]
     class DeleteDBProxyEndpointRequest < Struct.new(
+      nil,
       :db_proxy_endpoint_name,
       keyword_init: true
     )
@@ -11043,6 +11255,7 @@ module Aws::RDS
     #   <p>The data structure representing the details of the DB proxy endpoint that you delete.</p>
     #   @return [Types::DBProxyEndpoint]
     class DeleteDBProxyEndpointResponse < Struct.new(
+      nil,
       :db_proxy_endpoint,
       keyword_init: true
     )
@@ -11053,6 +11266,7 @@ module Aws::RDS
     #   <p>The name of the DB proxy to delete.</p>
     #   @return [String]
     class DeleteDBProxyRequest < Struct.new(
+      nil,
       :db_proxy_name,
       keyword_init: true
     )
@@ -11063,6 +11277,7 @@ module Aws::RDS
     #   <p>The data structure representing the details of the DB proxy that you delete.</p>
     #   @return [Types::DBProxy]
     class DeleteDBProxyResponse < Struct.new(
+      nil,
       :db_proxy,
       keyword_init: true
     )
@@ -11092,6 +11307,7 @@ module Aws::RDS
     #            </ul>
     #   @return [String]
     class DeleteDBSecurityGroupMessage < Struct.new(
+      nil,
       :db_security_group_name,
       keyword_init: true
     )
@@ -11102,6 +11318,7 @@ module Aws::RDS
     #   <p>The name of the DB shard group to delete.</p>
     #   @return [String]
     class DeleteDBShardGroupMessage < Struct.new(
+      nil,
       :db_shard_group_identifier,
       keyword_init: true
     )
@@ -11167,6 +11384,7 @@ module Aws::RDS
     #               </p>
     #   @return [Array<Types::Tag>]
     class DeleteDBShardGroupOutput < Struct.new(
+      nil,
       :db_shard_group_resource_id,
       :db_shard_group_identifier,
       :db_cluster_identifier,
@@ -11189,6 +11407,7 @@ module Aws::RDS
     #            <p>Constraints: Must be the name of an existing DB snapshot in the <code>available</code> state.</p>
     #   @return [String]
     class DeleteDBSnapshotMessage < Struct.new(
+      nil,
       :db_snapshot_identifier,
       keyword_init: true
     )
@@ -11201,6 +11420,7 @@ module Aws::RDS
     #             in the <code>DescribeDBSnapshots</code> action.</p>
     #   @return [Types::DBSnapshot]
     class DeleteDBSnapshotResult < Struct.new(
+      nil,
       :db_snapshot,
       keyword_init: true
     )
@@ -11218,6 +11438,7 @@ module Aws::RDS
     #            </p>
     #   @return [String]
     class DeleteDBSubnetGroupMessage < Struct.new(
+      nil,
       :db_subnet_group_name,
       keyword_init: true
     )
@@ -11229,6 +11450,7 @@ module Aws::RDS
     #   <p>The name of the RDS event notification subscription you want to delete.</p>
     #   @return [String]
     class DeleteEventSubscriptionMessage < Struct.new(
+      nil,
       :subscription_name,
       keyword_init: true
     )
@@ -11239,6 +11461,7 @@ module Aws::RDS
     #   <p>Contains the results of a successful invocation of the <code>DescribeEventSubscriptions</code> action.</p>
     #   @return [Types::EventSubscription]
     class DeleteEventSubscriptionResult < Struct.new(
+      nil,
       :event_subscription,
       keyword_init: true
     )
@@ -11249,6 +11472,7 @@ module Aws::RDS
     #   <p>The cluster identifier of the global database cluster being deleted.</p>
     #   @return [String]
     class DeleteGlobalClusterMessage < Struct.new(
+      nil,
       :global_cluster_identifier,
       keyword_init: true
     )
@@ -11259,6 +11483,7 @@ module Aws::RDS
     #   <p>A data type representing an Aurora global database.</p>
     #   @return [Types::GlobalCluster]
     class DeleteGlobalClusterResult < Struct.new(
+      nil,
       :global_cluster,
       keyword_init: true
     )
@@ -11269,6 +11494,7 @@ module Aws::RDS
     #   <p>The unique identifier of the integration.</p>
     #   @return [String]
     class DeleteIntegrationMessage < Struct.new(
+      nil,
       :integration_identifier,
       keyword_init: true
     )
@@ -11323,6 +11549,7 @@ module Aws::RDS
     #   <p>Any errors associated with the integration.</p>
     #   @return [Array<Types::IntegrationError>]
     class DeleteIntegrationOutput < Struct.new(
+      nil,
       :source_arn,
       :target_arn,
       :integration_name,
@@ -11348,6 +11575,7 @@ module Aws::RDS
     #            </note>
     #   @return [String]
     class DeleteOptionGroupMessage < Struct.new(
+      nil,
       :option_group_name,
       keyword_init: true
     )
@@ -11380,6 +11608,7 @@ module Aws::RDS
     #            </note>
     #   @return [String]
     class DeleteTenantDatabaseMessage < Struct.new(
+      nil,
       :db_instance_identifier,
       :tenant_db_name,
       :skip_final_snapshot,
@@ -11394,6 +11623,7 @@ module Aws::RDS
     #               the <code>DescribeTenantDatabases</code> action.</p>
     #   @return [Types::TenantDatabase]
     class DeleteTenantDatabaseResult < Struct.new(
+      nil,
       :tenant_database,
       keyword_init: true
     )
@@ -11413,6 +11643,7 @@ module Aws::RDS
     #   <p>One or more DB cluster identifiers.</p>
     #   @return [Array<String>]
     class DeregisterDBProxyTargetsRequest < Struct.new(
+      nil,
       :db_proxy_name,
       :target_group_name,
       :db_instance_identifiers,
@@ -11423,6 +11654,7 @@ module Aws::RDS
     end
 
     class DeregisterDBProxyTargetsResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -11430,6 +11662,7 @@ module Aws::RDS
 
     # <p></p>
     class DescribeAccountAttributesMessage < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -11499,6 +11732,7 @@ module Aws::RDS
     #            </ul>
     #   @return [Integer]
     class DescribeBlueGreenDeploymentsRequest < Struct.new(
+      nil,
       :blue_green_deployment_identifier,
       :filters,
       :marker,
@@ -11516,6 +11750,7 @@ module Aws::RDS
     #                   <code>DescribeBlueGreenDeployments</code> request.</p>
     #   @return [String]
     class DescribeBlueGreenDeploymentsResponse < Struct.new(
+      nil,
       :blue_green_deployments,
       :marker,
       keyword_init: true
@@ -11551,6 +11786,7 @@ module Aws::RDS
     #           up to the value specified by <code>MaxRecords</code>.</p>
     #   @return [String]
     class DescribeCertificatesMessage < Struct.new(
+      nil,
       :certificate_identifier,
       :filters,
       :max_records,
@@ -11605,6 +11841,7 @@ module Aws::RDS
     #               records beyond the marker, up to <code>MaxRecords</code>.</p>
     #   @return [String]
     class DescribeDBClusterAutomatedBackupsMessage < Struct.new(
+      nil,
       :db_cluster_resource_id,
       :db_cluster_identifier,
       :filters,
@@ -11703,6 +11940,7 @@ module Aws::RDS
     #               up to the value specified by <code>MaxRecords</code>.</p>
     #   @return [String]
     class DescribeDBClusterBacktracksMessage < Struct.new(
+      nil,
       :db_cluster_identifier,
       :backtrack_identifier,
       :filters,
@@ -11744,6 +11982,7 @@ module Aws::RDS
     #               up to the value specified by <code>MaxRecords</code>.</p>
     #   @return [String]
     class DescribeDBClusterEndpointsMessage < Struct.new(
+      nil,
       :db_cluster_identifier,
       :db_cluster_endpoint_identifier,
       :filters,
@@ -11782,6 +12021,7 @@ module Aws::RDS
     #           up to the value specified by <code>MaxRecords</code>.</p>
     #   @return [String]
     class DescribeDBClusterParameterGroupsMessage < Struct.new(
+      nil,
       :db_cluster_parameter_group_name,
       :filters,
       :max_records,
@@ -11841,6 +12081,7 @@ module Aws::RDS
     #         up to the value specified by <code>MaxRecords</code>.</p>
     #   @return [String]
     class DescribeDBClusterParametersMessage < Struct.new(
+      nil,
       :db_cluster_parameter_group_name,
       :source,
       :filters,
@@ -11863,6 +12104,7 @@ module Aws::RDS
     #               up to the value specified by <code>MaxRecords</code>.</p>
     #   @return [String]
     class DescribeDBClusterParametersOutput < Struct.new(
+      nil,
       :parameters,
       :marker,
       keyword_init: true
@@ -11875,6 +12117,7 @@ module Aws::RDS
     #   <p>The identifier for the DB cluster snapshot to describe the attributes for.</p>
     #   @return [String]
     class DescribeDBClusterSnapshotAttributesMessage < Struct.new(
+      nil,
       :db_cluster_snapshot_identifier,
       keyword_init: true
     )
@@ -11889,6 +12132,7 @@ module Aws::RDS
     #               API action.</p>
     #   @return [Types::DBClusterSnapshotAttributesResult]
     class DescribeDBClusterSnapshotAttributesResult < Struct.new(
+      nil,
       :db_cluster_snapshot_attributes_result,
       keyword_init: true
     )
@@ -12006,6 +12250,7 @@ module Aws::RDS
     #   <p>A specific DB cluster resource ID to describe.</p>
     #   @return [String]
     class DescribeDBClusterSnapshotsMessage < Struct.new(
+      nil,
       :db_cluster_identifier,
       :db_cluster_snapshot_identifier,
       :snapshot_type,
@@ -12086,6 +12331,7 @@ module Aws::RDS
     #             shared from other Amazon Web Services accounts.</p>
     #   @return [Boolean]
     class DescribeDBClustersMessage < Struct.new(
+      nil,
       :db_cluster_identifier,
       :filters,
       :max_records,
@@ -12321,6 +12567,7 @@ module Aws::RDS
     #   <p>Specifies whether to also list the engine versions that aren't available. The default is to list only available engine versions.</p>
     #   @return [Boolean]
     class DescribeDBEngineVersionsMessage < Struct.new(
+      nil,
       :engine,
       :engine_version,
       :db_parameter_group_family,
@@ -12397,6 +12644,7 @@ module Aws::RDS
     #            <p>This setting doesn't apply to RDS Custom.</p>
     #   @return [String]
     class DescribeDBInstanceAutomatedBackupsMessage < Struct.new(
+      nil,
       :dbi_resource_id,
       :db_instance_identifier,
       :filters,
@@ -12468,6 +12716,7 @@ module Aws::RDS
     #           up to the value specified by <code>MaxRecords</code>.</p>
     #   @return [String]
     class DescribeDBInstancesMessage < Struct.new(
+      nil,
       :db_instance_identifier,
       :filters,
       :max_records,
@@ -12488,6 +12737,7 @@ module Aws::RDS
     #   <p>The size, in bytes, of the log file for the specified DB instance.</p>
     #   @return [Integer]
     class DescribeDBLogFilesDetails < Struct.new(
+      nil,
       :log_file_name,
       :last_written,
       :size,
@@ -12525,6 +12775,7 @@ module Aws::RDS
     #   <p>The pagination token provided in the previous request. If this parameter is specified the response includes only records beyond the marker, up to MaxRecords.</p>
     #   @return [String]
     class DescribeDBLogFilesMessage < Struct.new(
+      nil,
       :db_instance_identifier,
       :filename_contains,
       :file_last_written,
@@ -12545,6 +12796,7 @@ module Aws::RDS
     #   <p>A pagination token that can be used in a later <code>DescribeDBLogFiles</code> request.</p>
     #   @return [String]
     class DescribeDBLogFilesResponse < Struct.new(
+      nil,
       :describe_db_log_files,
       :marker,
       keyword_init: true
@@ -12665,6 +12917,7 @@ module Aws::RDS
     #            <p>Default: 100</p>
     #   @return [Integer]
     class DescribeDBMajorEngineVersionsRequest < Struct.new(
+      nil,
       :engine,
       :major_engine_version,
       :marker,
@@ -12683,6 +12936,7 @@ module Aws::RDS
     #               specified by <code>MaxRecords</code>.</p>
     #   @return [String]
     class DescribeDBMajorEngineVersionsResponse < Struct.new(
+      nil,
       :db_major_engine_versions,
       :marker,
       keyword_init: true
@@ -12719,6 +12973,7 @@ module Aws::RDS
     #           up to the value specified by <code>MaxRecords</code>.</p>
     #   @return [String]
     class DescribeDBParameterGroupsMessage < Struct.new(
+      nil,
       :db_parameter_group_name,
       :filters,
       :max_records,
@@ -12763,6 +13018,7 @@ module Aws::RDS
     #           up to the value specified by <code>MaxRecords</code>.</p>
     #   @return [String]
     class DescribeDBParametersMessage < Struct.new(
+      nil,
       :db_parameter_group_name,
       :source,
       :filters,
@@ -12784,6 +13040,7 @@ module Aws::RDS
     #               up to the value specified by <code>MaxRecords</code>.</p>
     #   @return [String]
     class DescribeDBParametersOutput < Struct.new(
+      nil,
       :parameters,
       :marker,
       keyword_init: true
@@ -12812,6 +13069,7 @@ module Aws::RDS
     #            <p>Constraints: Minimum 20, maximum 100.</p>
     #   @return [Integer]
     class DescribeDBProxiesRequest < Struct.new(
+      nil,
       :db_proxy_name,
       :filters,
       :marker,
@@ -12830,6 +13088,7 @@ module Aws::RDS
     #           up to the value specified by <code>MaxRecords</code>.</p>
     #   @return [String]
     class DescribeDBProxiesResponse < Struct.new(
+      nil,
       :db_proxies,
       :marker,
       keyword_init: true
@@ -12863,6 +13122,7 @@ module Aws::RDS
     #            <p>Constraints: Minimum 20, maximum 100.</p>
     #   @return [Integer]
     class DescribeDBProxyEndpointsRequest < Struct.new(
+      nil,
       :db_proxy_name,
       :db_proxy_endpoint_name,
       :filters,
@@ -12882,6 +13142,7 @@ module Aws::RDS
     #           up to the value specified by <code>MaxRecords</code>.</p>
     #   @return [String]
     class DescribeDBProxyEndpointsResponse < Struct.new(
+      nil,
       :db_proxy_endpoints,
       :marker,
       keyword_init: true
@@ -12912,6 +13173,7 @@ module Aws::RDS
     #            <p>Constraints: Minimum 20, maximum 100.</p>
     #   @return [Integer]
     class DescribeDBProxyTargetGroupsRequest < Struct.new(
+      nil,
       :db_proxy_name,
       :target_group_name,
       :filters,
@@ -12931,6 +13193,7 @@ module Aws::RDS
     #           up to the value specified by <code>MaxRecords</code>.</p>
     #   @return [String]
     class DescribeDBProxyTargetGroupsResponse < Struct.new(
+      nil,
       :target_groups,
       :marker,
       keyword_init: true
@@ -12961,6 +13224,7 @@ module Aws::RDS
     #            <p>Constraints: Minimum 20, maximum 100.</p>
     #   @return [Integer]
     class DescribeDBProxyTargetsRequest < Struct.new(
+      nil,
       :db_proxy_name,
       :target_group_name,
       :filters,
@@ -12980,6 +13244,7 @@ module Aws::RDS
     #           up to the value specified by <code>MaxRecords</code>.</p>
     #   @return [String]
     class DescribeDBProxyTargetsResponse < Struct.new(
+      nil,
       :targets,
       :marker,
       keyword_init: true
@@ -13159,6 +13424,7 @@ module Aws::RDS
     #              </p>
     #   @return [String]
     class DescribeDBRecommendationsMessage < Struct.new(
+      nil,
       :last_updated_after,
       :last_updated_before,
       :locale,
@@ -13193,6 +13459,7 @@ module Aws::RDS
     #           up to the value specified by <code>MaxRecords</code>.</p>
     #   @return [String]
     class DescribeDBSecurityGroupsMessage < Struct.new(
+      nil,
       :db_security_group_name,
       :filters,
       :max_records,
@@ -13226,6 +13493,7 @@ module Aws::RDS
     #            <p>Constraints: Minimum 20, maximum 100</p>
     #   @return [Integer]
     class DescribeDBShardGroupsMessage < Struct.new(
+      nil,
       :db_shard_group_identifier,
       :filters,
       :marker,
@@ -13242,6 +13510,7 @@ module Aws::RDS
     #   <p>A pagination token that can be used in a later <code>DescribeDBClusters</code> request.</p>
     #   @return [String]
     class DescribeDBShardGroupsResponse < Struct.new(
+      nil,
       :db_shard_groups,
       :marker,
       keyword_init: true
@@ -13254,6 +13523,7 @@ module Aws::RDS
     #   <p>The identifier for the DB snapshot to describe the attributes for.</p>
     #   @return [String]
     class DescribeDBSnapshotAttributesMessage < Struct.new(
+      nil,
       :db_snapshot_identifier,
       keyword_init: true
     )
@@ -13268,6 +13538,7 @@ module Aws::RDS
     #         API action.</p>
     #   @return [Types::DBSnapshotAttributesResult]
     class DescribeDBSnapshotAttributesResult < Struct.new(
+      nil,
       :db_snapshot_attributes_result,
       keyword_init: true
     )
@@ -13381,6 +13652,7 @@ module Aws::RDS
     #   <p>A specific DB resource identifier to describe.</p>
     #   @return [String]
     class DescribeDBSnapshotTenantDatabasesMessage < Struct.new(
+      nil,
       :db_instance_identifier,
       :db_snapshot_identifier,
       :snapshot_type,
@@ -13518,6 +13790,7 @@ module Aws::RDS
     #   <p>A specific DB resource ID to describe.</p>
     #   @return [String]
     class DescribeDBSnapshotsMessage < Struct.new(
+      nil,
       :db_instance_identifier,
       :db_snapshot_identifier,
       :snapshot_type,
@@ -13554,6 +13827,7 @@ module Aws::RDS
     #               up to the value specified by <code>MaxRecords</code>.</p>
     #   @return [String]
     class DescribeDBSubnetGroupsMessage < Struct.new(
+      nil,
       :db_subnet_group_name,
       :filters,
       :max_records,
@@ -13585,6 +13859,7 @@ module Aws::RDS
     #         up to the value specified by <code>MaxRecords</code>.</p>
     #   @return [String]
     class DescribeEngineDefaultClusterParametersMessage < Struct.new(
+      nil,
       :db_parameter_group_family,
       :filters,
       :max_records,
@@ -13598,6 +13873,7 @@ module Aws::RDS
     #   <p>Contains the result of a successful invocation of the <code>DescribeEngineDefaultParameters</code> action.</p>
     #   @return [Types::EngineDefaults]
     class DescribeEngineDefaultClusterParametersResult < Struct.new(
+      nil,
       :engine_defaults,
       keyword_init: true
     )
@@ -13875,6 +14151,7 @@ module Aws::RDS
     #           up to the value specified by <code>MaxRecords</code>.</p>
     #   @return [String]
     class DescribeEngineDefaultParametersMessage < Struct.new(
+      nil,
       :db_parameter_group_family,
       :filters,
       :max_records,
@@ -13888,6 +14165,7 @@ module Aws::RDS
     #   <p>Contains the result of a successful invocation of the <code>DescribeEngineDefaultParameters</code> action.</p>
     #   @return [Types::EngineDefaults]
     class DescribeEngineDefaultParametersResult < Struct.new(
+      nil,
       :engine_defaults,
       keyword_init: true
     )
@@ -13904,6 +14182,7 @@ module Aws::RDS
     #   <p>This parameter isn't currently supported.</p>
     #   @return [Array<Types::Filter>]
     class DescribeEventCategoriesMessage < Struct.new(
+      nil,
       :source_type,
       :filters,
       keyword_init: true
@@ -13934,6 +14213,7 @@ module Aws::RDS
     #               up to the value specified by <code>MaxRecords</code> .</p>
     #   @return [String]
     class DescribeEventSubscriptionsMessage < Struct.new(
+      nil,
       :subscription_name,
       :filters,
       :max_records,
@@ -14020,6 +14300,7 @@ module Aws::RDS
     #           up to the value specified by <code>MaxRecords</code>.</p>
     #   @return [String]
     class DescribeEventsMessage < Struct.new(
+      nil,
       :source_identifier,
       :source_type,
       :start_time,
@@ -14112,6 +14393,7 @@ module Aws::RDS
     #   <p>The type of source for the export.</p>
     #   @return [String]
     class DescribeExportTasksMessage < Struct.new(
+      nil,
       :export_task_identifier,
       :source_arn,
       :filters,
@@ -14150,6 +14432,7 @@ module Aws::RDS
     #           specified by <code>MaxRecords</code>.</p>
     #   @return [String]
     class DescribeGlobalClustersMessage < Struct.new(
+      nil,
       :global_cluster_identifier,
       :filters,
       :max_records,
@@ -14178,6 +14461,7 @@ module Aws::RDS
     #               marker, up to the value specified by <code>MaxRecords</code>.</p>
     #   @return [String]
     class DescribeIntegrationsMessage < Struct.new(
+      nil,
       :integration_identifier,
       :filters,
       :max_records,
@@ -14195,6 +14479,7 @@ module Aws::RDS
     #   <p>A list of integrations.</p>
     #   @return [Array<Types::Integration>]
     class DescribeIntegrationsResponse < Struct.new(
+      nil,
       :marker,
       :integrations,
       keyword_init: true
@@ -14295,6 +14580,7 @@ module Aws::RDS
     #               up to the value specified by <code>MaxRecords</code>.</p>
     #   @return [String]
     class DescribeOptionGroupOptionsMessage < Struct.new(
+      nil,
       :engine_name,
       :major_engine_version,
       :filters,
@@ -14401,6 +14687,7 @@ module Aws::RDS
     #   <p>Filters the list of option groups to only include groups associated with a specific database engine version. If specified, then EngineName must also be specified.</p>
     #   @return [String]
     class DescribeOptionGroupsMessage < Struct.new(
+      nil,
       :option_group_name,
       :filters,
       :marker,
@@ -14423,6 +14710,7 @@ module Aws::RDS
     #               up to the value specified by <code>MaxRecords</code>.</p>
     #   @return [String]
     class DescribeOptionGroupsOutput < Struct.new(
+      nil,
       :option_groups_list,
       :marker,
       keyword_init: true
@@ -14572,6 +14860,7 @@ module Aws::RDS
     #               up to the value specified by <code>MaxRecords</code>.</p>
     #   @return [String]
     class DescribeOrderableDBInstanceOptionsMessage < Struct.new(
+      nil,
       :engine,
       :engine_version,
       :db_instance_class,
@@ -14624,6 +14913,7 @@ module Aws::RDS
     #            <p>Constraints: Minimum 20, maximum 100.</p>
     #   @return [Integer]
     class DescribePendingMaintenanceActionsMessage < Struct.new(
+      nil,
       :resource_identifier,
       :filters,
       :marker,
@@ -14682,6 +14972,7 @@ module Aws::RDS
     #           up to the value specified by <code>MaxRecords</code>.</p>
     #   @return [String]
     class DescribeReservedDBInstancesMessage < Struct.new(
+      nil,
       :reserved_db_instance_id,
       :reserved_db_instances_offering_id,
       :db_instance_class,
@@ -14743,6 +15034,7 @@ module Aws::RDS
     #           up to the value specified by <code>MaxRecords</code>.</p>
     #   @return [String]
     class DescribeReservedDBInstancesOfferingsMessage < Struct.new(
+      nil,
       :reserved_db_instances_offering_id,
       :db_instance_class,
       :duration,
@@ -14783,6 +15075,7 @@ module Aws::RDS
     #   <p>This parameter isn't currently supported.</p>
     #   @return [Array<Types::Filter>]
     class DescribeSourceRegionsMessage < Struct.new(
+      nil,
       :region_name,
       :max_records,
       :marker,
@@ -14837,6 +15130,7 @@ module Aws::RDS
     #               included in the response so that you can retrieve the remaining results.</p>
     #   @return [Integer]
     class DescribeTenantDatabasesMessage < Struct.new(
+      nil,
       :db_instance_identifier,
       :tenant_db_name,
       :filters,
@@ -14852,6 +15146,7 @@ module Aws::RDS
     #   <p>The customer identifier or the ARN of your DB instance.</p>
     #   @return [String]
     class DescribeValidDBInstanceModificationsMessage < Struct.new(
+      nil,
       :db_instance_identifier,
       keyword_init: true
     )
@@ -14866,6 +15161,7 @@ module Aws::RDS
     #               <code>ModifyDBInstance</code>.</p>
     #   @return [Types::ValidDBInstanceModificationsMessage]
     class DescribeValidDBInstanceModificationsResult < Struct.new(
+      nil,
       :valid_db_instance_modifications_message,
       keyword_init: true
     )
@@ -14876,6 +15172,7 @@ module Aws::RDS
     #   <p>The Amazon Resource Name (ARN) of the DB cluster.</p>
     #   @return [String]
     class DisableHttpEndpointRequest < Struct.new(
+      nil,
       :resource_arn,
       keyword_init: true
     )
@@ -14889,6 +15186,7 @@ module Aws::RDS
     #   <p>Indicates whether the HTTP endpoint is enabled or disabled for the DB cluster.</p>
     #   @return [Boolean]
     class DisableHttpEndpointResponse < Struct.new(
+      nil,
       :resource_arn,
       :http_endpoint_enabled,
       keyword_init: true
@@ -14904,6 +15202,7 @@ module Aws::RDS
     #   <p>The URL for the documentation for the recommendation.</p>
     #   @return [String]
     class DocLink < Struct.new(
+      nil,
       :text,
       :url,
       keyword_init: true
@@ -14934,6 +15233,7 @@ module Aws::RDS
     #   <p>The IPv4 DNS IP addresses of the primary and secondary Active Directory domain controllers.</p>
     #   @return [Array<String>]
     class DomainMembership < Struct.new(
+      nil,
       :domain,
       :status,
       :fqdn,
@@ -14951,6 +15251,7 @@ module Aws::RDS
     # @!attribute message
     #   @return [String]
     class DomainNotFoundFault < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -14965,6 +15266,7 @@ module Aws::RDS
     #   <p>The maximum value in the range.</p>
     #   @return [Float]
     class DoubleRange < Struct.new(
+      nil,
       :from,
       :to,
       keyword_init: true
@@ -15016,6 +15318,7 @@ module Aws::RDS
     #            </ul>
     #   @return [Integer]
     class DownloadDBLogFilePortionMessage < Struct.new(
+      nil,
       :db_instance_identifier,
       :log_file_name,
       :marker,
@@ -15036,6 +15339,7 @@ module Aws::RDS
     #   <p>A Boolean value that, if true, indicates there is more data to be downloaded.</p>
     #   @return [Boolean]
     class DownloadDBLogFilePortionOutput < Struct.new(
+      nil,
       :log_file_data,
       :marker,
       :additional_data_pending,
@@ -15076,6 +15380,7 @@ module Aws::RDS
     #           specified in the <code>EC2SecurityGroupName</code> field.</p>
     #   @return [String]
     class EC2SecurityGroup < Struct.new(
+      nil,
       :status,
       :ec2_security_group_name,
       :ec2_security_group_id,
@@ -15089,6 +15394,7 @@ module Aws::RDS
     # @!attribute message
     #   @return [String]
     class Ec2ImagePropertiesNotSupportedFault < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -15099,6 +15405,7 @@ module Aws::RDS
     #   <p>The Amazon Resource Name (ARN) of the DB cluster.</p>
     #   @return [String]
     class EnableHttpEndpointRequest < Struct.new(
+      nil,
       :resource_arn,
       keyword_init: true
     )
@@ -15112,6 +15419,7 @@ module Aws::RDS
     #   <p>Indicates whether the HTTP endpoint is enabled or disabled for the DB cluster.</p>
     #   @return [Boolean]
     class EnableHttpEndpointResponse < Struct.new(
+      nil,
       :resource_arn,
       :http_endpoint_enabled,
       keyword_init: true
@@ -15150,6 +15458,7 @@ module Aws::RDS
     #   <p>Specifies the ID that Amazon Route 53 assigns when you create a hosted zone.</p>
     #   @return [String]
     class Endpoint < Struct.new(
+      nil,
       :address,
       :port,
       :hosted_zone_id,
@@ -15173,6 +15482,7 @@ module Aws::RDS
     #   <p>Contains a list of engine default parameters.</p>
     #   @return [Array<Types::Parameter>]
     class EngineDefaults < Struct.new(
+      nil,
       :db_parameter_group_family,
       :marker,
       :parameters,
@@ -15201,6 +15511,7 @@ module Aws::RDS
     #   <p>The Amazon Resource Name (ARN) for the event.</p>
     #   @return [String]
     class Event < Struct.new(
+      nil,
       :source_identifier,
       :source_type,
       :message,
@@ -15221,6 +15532,7 @@ module Aws::RDS
     #   <p>The event categories for the specified source type</p>
     #   @return [Array<String>]
     class EventCategoriesMap < Struct.new(
+      nil,
       :source_type,
       :event_categories,
       keyword_init: true
@@ -15233,6 +15545,7 @@ module Aws::RDS
     #   <p>A list of <code>EventCategoriesMap</code> data types.</p>
     #   @return [Array<Types::EventCategoriesMap>]
     class EventCategoriesMessage < Struct.new(
+      nil,
       :event_categories_map_list,
       keyword_init: true
     )
@@ -15274,6 +15587,7 @@ module Aws::RDS
     #   <p>The Amazon Resource Name (ARN) for the event subscription.</p>
     #   @return [String]
     class EventSubscription < Struct.new(
+      nil,
       :customer_aws_id,
       :cust_subscription_id,
       :sns_topic_arn,
@@ -15293,6 +15607,7 @@ module Aws::RDS
     # @!attribute message
     #   @return [String]
     class EventSubscriptionQuotaExceededFault < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -15311,6 +15626,7 @@ module Aws::RDS
     #   <p>A list of EventSubscriptions data types.</p>
     #   @return [Array<Types::EventSubscription>]
     class EventSubscriptionsMessage < Struct.new(
+      nil,
       :marker,
       :event_subscriptions_list,
       keyword_init: true
@@ -15330,6 +15646,7 @@ module Aws::RDS
     #   <p>A list of <code>Event</code> instances.</p>
     #   @return [Array<Types::Event>]
     class EventsMessage < Struct.new(
+      nil,
       :marker,
       :events,
       keyword_init: true
@@ -15448,6 +15765,7 @@ module Aws::RDS
     #   <p>The type of source for the export.</p>
     #   @return [String]
     class ExportTask < Struct.new(
+      nil,
       :export_task_identifier,
       :source_arn,
       :export_only,
@@ -15473,6 +15791,7 @@ module Aws::RDS
     # @!attribute message
     #   @return [String]
     class ExportTaskAlreadyExistsFault < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -15483,6 +15802,7 @@ module Aws::RDS
     # @!attribute message
     #   @return [String]
     class ExportTaskNotFoundFault < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -15498,6 +15818,7 @@ module Aws::RDS
     #   <p>Information about an export of a snapshot or cluster to Amazon S3.</p>
     #   @return [Array<Types::ExportTask>]
     class ExportTasksMessage < Struct.new(
+      nil,
       :marker,
       :export_tasks,
       keyword_init: true
@@ -15522,6 +15843,7 @@ module Aws::RDS
     #            <p>This setting isn't supported for RDS for MySQL Multi-AZ DB clusters.</p>
     #   @return [String]
     class FailoverDBClusterMessage < Struct.new(
+      nil,
       :db_cluster_identifier,
       :target_db_instance_identifier,
       keyword_init: true
@@ -15550,6 +15872,7 @@ module Aws::RDS
     #            </p>
     #   @return [Types::DBCluster]
     class FailoverDBClusterResult < Struct.new(
+      nil,
       :db_cluster,
       keyword_init: true
     )
@@ -15591,6 +15914,7 @@ module Aws::RDS
     #            </ul>
     #   @return [Boolean]
     class FailoverGlobalClusterMessage < Struct.new(
+      nil,
       :global_cluster_identifier,
       :target_db_cluster_identifier,
       :allow_data_loss,
@@ -15604,6 +15928,7 @@ module Aws::RDS
     #   <p>A data type representing an Aurora global database.</p>
     #   @return [Types::GlobalCluster]
     class FailoverGlobalClusterResult < Struct.new(
+      nil,
       :global_cluster,
       keyword_init: true
     )
@@ -15647,6 +15972,7 @@ module Aws::RDS
     #          Otherwise, it's a switchover.</p>
     #   @return [Boolean]
     class FailoverState < Struct.new(
+      nil,
       :status,
       :from_db_cluster_arn,
       :to_db_cluster_arn,
@@ -15708,6 +16034,7 @@ module Aws::RDS
     #   <p>One or more filter values. Filter values are case-sensitive.</p>
     #   @return [Array<String>]
     class Filter < Struct.new(
+      nil,
       :name,
       :values,
       keyword_init: true
@@ -15770,6 +16097,7 @@ module Aws::RDS
     #               </p>
     #   @return [Array<Types::Tag>]
     class GlobalCluster < Struct.new(
+      nil,
       :global_cluster_identifier,
       :global_cluster_resource_id,
       :global_cluster_arn,
@@ -15794,6 +16122,7 @@ module Aws::RDS
     # @!attribute message
     #   @return [String]
     class GlobalClusterAlreadyExistsFault < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -15821,6 +16150,7 @@ module Aws::RDS
     #   <p>The status of synchronization of each Aurora DB cluster in the global cluster.</p>
     #   @return [String]
     class GlobalClusterMember < Struct.new(
+      nil,
       :db_cluster_arn,
       :readers,
       :is_writer,
@@ -15835,6 +16165,7 @@ module Aws::RDS
     # @!attribute message
     #   @return [String]
     class GlobalClusterNotFoundFault < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -15845,6 +16176,7 @@ module Aws::RDS
     # @!attribute message
     #   @return [String]
     class GlobalClusterQuotaExceededFault < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -15860,6 +16192,7 @@ module Aws::RDS
     #   <p>The list of global clusters returned by this request.</p>
     #   @return [Array<Types::GlobalCluster>]
     class GlobalClustersMessage < Struct.new(
+      nil,
       :marker,
       :global_clusters,
       keyword_init: true
@@ -15875,6 +16208,7 @@ module Aws::RDS
     #   <p>The IP range.</p>
     #   @return [String]
     class IPRange < Struct.new(
+      nil,
       :status,
       :cidrip,
       keyword_init: true
@@ -15886,6 +16220,7 @@ module Aws::RDS
     # @!attribute message
     #   @return [String]
     class IamRoleMissingPermissionsFault < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -15896,6 +16231,7 @@ module Aws::RDS
     # @!attribute message
     #   @return [String]
     class IamRoleNotFoundFault < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -15907,6 +16243,7 @@ module Aws::RDS
     # @!attribute message
     #   @return [String]
     class InstanceQuotaExceededFault < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -15919,6 +16256,7 @@ module Aws::RDS
     # @!attribute message
     #   @return [String]
     class InsufficientAvailableIPsInSubnetFault < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -15929,6 +16267,7 @@ module Aws::RDS
     # @!attribute message
     #   @return [String]
     class InsufficientDBClusterCapacityFault < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -15940,6 +16279,7 @@ module Aws::RDS
     # @!attribute message
     #   @return [String]
     class InsufficientDBInstanceCapacityFault < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -15952,6 +16292,7 @@ module Aws::RDS
     # @!attribute message
     #   @return [String]
     class InsufficientStorageClusterCapacityFault < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -16006,6 +16347,7 @@ module Aws::RDS
     #   <p>Any errors associated with the integration.</p>
     #   @return [Array<Types::IntegrationError>]
     class Integration < Struct.new(
+      nil,
       :source_arn,
       :target_arn,
       :integration_name,
@@ -16027,6 +16369,7 @@ module Aws::RDS
     # @!attribute message
     #   @return [String]
     class IntegrationAlreadyExistsFault < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -16039,6 +16382,7 @@ module Aws::RDS
     # @!attribute message
     #   @return [String]
     class IntegrationConflictOperationFault < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -16053,6 +16397,7 @@ module Aws::RDS
     #   <p>A message explaining the error.</p>
     #   @return [String]
     class IntegrationError < Struct.new(
+      nil,
       :error_code,
       :error_message,
       keyword_init: true
@@ -16064,6 +16409,7 @@ module Aws::RDS
     # @!attribute message
     #   @return [String]
     class IntegrationNotFoundFault < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -16074,6 +16420,7 @@ module Aws::RDS
     # @!attribute message
     #   @return [String]
     class IntegrationQuotaExceededFault < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -16085,6 +16432,7 @@ module Aws::RDS
     # @!attribute message
     #   @return [String]
     class InvalidBlueGreenDeploymentStateFault < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -16095,6 +16443,7 @@ module Aws::RDS
     # @!attribute message
     #   @return [String]
     class InvalidCustomDBEngineVersionStateFault < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -16106,6 +16455,7 @@ module Aws::RDS
     # @!attribute message
     #   @return [String]
     class InvalidDBClusterAutomatedBackupStateFault < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -16119,6 +16469,7 @@ module Aws::RDS
     # @!attribute message
     #   @return [String]
     class InvalidDBClusterCapacityFault < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -16129,6 +16480,7 @@ module Aws::RDS
     # @!attribute message
     #   @return [String]
     class InvalidDBClusterEndpointStateFault < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -16139,6 +16491,7 @@ module Aws::RDS
     # @!attribute message
     #   @return [String]
     class InvalidDBClusterSnapshotStateFault < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -16149,6 +16502,7 @@ module Aws::RDS
     # @!attribute message
     #   @return [String]
     class InvalidDBClusterStateFault < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -16160,6 +16514,7 @@ module Aws::RDS
     # @!attribute message
     #   @return [String]
     class InvalidDBInstanceAutomatedBackupStateFault < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -16170,6 +16525,7 @@ module Aws::RDS
     # @!attribute message
     #   @return [String]
     class InvalidDBInstanceStateFault < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -16182,6 +16538,7 @@ module Aws::RDS
     # @!attribute message
     #   @return [String]
     class InvalidDBParameterGroupStateFault < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -16192,6 +16549,7 @@ module Aws::RDS
     # @!attribute message
     #   @return [String]
     class InvalidDBProxyEndpointStateFault < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -16202,6 +16560,7 @@ module Aws::RDS
     # @!attribute message
     #   @return [String]
     class InvalidDBProxyStateFault < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -16212,6 +16571,7 @@ module Aws::RDS
     # @!attribute message
     #   @return [String]
     class InvalidDBSecurityGroupStateFault < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -16222,6 +16582,7 @@ module Aws::RDS
     # @!attribute message
     #   @return [String]
     class InvalidDBShardGroupStateFault < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -16232,6 +16593,7 @@ module Aws::RDS
     # @!attribute message
     #   @return [String]
     class InvalidDBSnapshotStateFault < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -16243,6 +16605,7 @@ module Aws::RDS
     # @!attribute message
     #   @return [String]
     class InvalidDBSubnetGroupFault < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -16253,6 +16616,7 @@ module Aws::RDS
     # @!attribute message
     #   @return [String]
     class InvalidDBSubnetGroupStateFault < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -16263,6 +16627,7 @@ module Aws::RDS
     # @!attribute message
     #   @return [String]
     class InvalidDBSubnetStateFault < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -16273,6 +16638,7 @@ module Aws::RDS
     # @!attribute message
     #   @return [String]
     class InvalidEventSubscriptionStateFault < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -16283,6 +16649,7 @@ module Aws::RDS
     # @!attribute message
     #   @return [String]
     class InvalidExportOnlyFault < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -16293,6 +16660,7 @@ module Aws::RDS
     # @!attribute message
     #   @return [String]
     class InvalidExportSourceStateFault < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -16303,6 +16671,7 @@ module Aws::RDS
     # @!attribute message
     #   @return [String]
     class InvalidExportTaskStateFault < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -16313,6 +16682,7 @@ module Aws::RDS
     # @!attribute message
     #   @return [String]
     class InvalidGlobalClusterStateFault < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -16323,6 +16693,7 @@ module Aws::RDS
     # @!attribute message
     #   @return [String]
     class InvalidIntegrationStateFault < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -16333,6 +16704,7 @@ module Aws::RDS
     # @!attribute message
     #   @return [String]
     class InvalidOptionGroupStateFault < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -16343,6 +16715,7 @@ module Aws::RDS
     # @!attribute message
     #   @return [String]
     class InvalidResourceStateFault < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -16353,6 +16726,7 @@ module Aws::RDS
     # @!attribute message
     #   @return [String]
     class InvalidRestoreFault < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -16364,6 +16738,7 @@ module Aws::RDS
     # @!attribute message
     #   @return [String]
     class InvalidS3BucketFault < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -16374,6 +16749,7 @@ module Aws::RDS
     # @!attribute message
     #   @return [String]
     class InvalidSubnet < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -16385,6 +16761,7 @@ module Aws::RDS
     # @!attribute message
     #   @return [String]
     class InvalidVPCNetworkStateFault < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -16396,6 +16773,7 @@ module Aws::RDS
     #   <p>A detailed description of the issue when the recommendation category is <code>performance</code>.</p>
     #   @return [Types::PerformanceIssueDetails]
     class IssueDetails < Struct.new(
+      nil,
       :performance_issue_details,
       keyword_init: true
     )
@@ -16406,6 +16784,7 @@ module Aws::RDS
     # @!attribute message
     #   @return [String]
     class KMSKeyNotAccessibleFault < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -16420,6 +16799,7 @@ module Aws::RDS
     #   <p>The minimum required capacity for Aurora Limitless Database in Aurora capacity units (ACUs).</p>
     #   @return [Float]
     class LimitlessDatabase < Struct.new(
+      nil,
       :status,
       :min_required_acu,
       keyword_init: true
@@ -16438,6 +16818,7 @@ module Aws::RDS
     #   <p>This parameter isn't currently supported.</p>
     #   @return [Array<Types::Filter>]
     class ListTagsForResourceMessage < Struct.new(
+      nil,
       :resource_name,
       :filters,
       keyword_init: true
@@ -16486,6 +16867,7 @@ module Aws::RDS
     #   <p>The Amazon Web Services KMS key identifier that is used to encrypt the secret.</p>
     #   @return [String]
     class MasterUserSecret < Struct.new(
+      nil,
       :secret_arn,
       :secret_status,
       :kms_key_id,
@@ -16498,6 +16880,7 @@ module Aws::RDS
     # @!attribute message
     #   @return [String]
     class MaxDBShardGroupLimitReached < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -16518,6 +16901,7 @@ module Aws::RDS
     #   <p>The query to retrieve metric data points.</p>
     #   @return [Types::MetricQuery]
     class Metric < Struct.new(
+      nil,
       :name,
       :references,
       :statistics_details,
@@ -16532,6 +16916,7 @@ module Aws::RDS
     #   <p>The Performance Insights query that you can use to retrieve Performance Insights metric data points.</p>
     #   @return [Types::PerformanceInsightsMetricQuery]
     class MetricQuery < Struct.new(
+      nil,
       :performance_insights_metric_query,
       keyword_init: true
     )
@@ -16546,6 +16931,7 @@ module Aws::RDS
     #   <p>The details of a performance issue.</p>
     #   @return [Types::ReferenceDetails]
     class MetricReference < Struct.new(
+      nil,
       :name,
       :reference_details,
       keyword_init: true
@@ -16561,6 +16947,7 @@ module Aws::RDS
     #   <p>The minimum DB engine version required for the allowed value.</p>
     #   @return [String]
     class MinimumEngineVersionPerAllowedValue < Struct.new(
+      nil,
       :allowed_value,
       :minimum_engine_version,
       keyword_init: true
@@ -16577,6 +16964,7 @@ module Aws::RDS
     #               read-only. You can edit your audit policy only when the activity stream is unlocked or stopped.</p>
     #   @return [String]
     class ModifyActivityStreamRequest < Struct.new(
+      nil,
       :resource_arn,
       :audit_policy_state,
       keyword_init: true
@@ -16603,6 +16991,7 @@ module Aws::RDS
     #   <p>The status of the modification to the policy state of the database activity stream.</p>
     #   @return [String]
     class ModifyActivityStreamResponse < Struct.new(
+      nil,
       :kms_key_id,
       :kinesis_stream_name,
       :status,
@@ -16625,6 +17014,7 @@ module Aws::RDS
     #               default.</p>
     #   @return [Boolean]
     class ModifyCertificatesMessage < Struct.new(
+      nil,
       :certificate_identifier,
       :remove_customer_override,
       keyword_init: true
@@ -16641,6 +17031,7 @@ module Aws::RDS
     #               User Guide</i>.</p>
     #   @return [Types::Certificate]
     class ModifyCertificatesResult < Struct.new(
+      nil,
       :certificate,
       keyword_init: true
     )
@@ -16683,6 +17074,7 @@ module Aws::RDS
     #               <code>RollbackCapacityChange</code> ignores the capacity change if a scaling point isn't found in the timeout period.</p>
     #   @return [String]
     class ModifyCurrentDBClusterCapacityMessage < Struct.new(
+      nil,
       :db_cluster_identifier,
       :capacity,
       :seconds_before_timeout,
@@ -16710,6 +17102,7 @@ module Aws::RDS
     #               <code>ForceApplyCapacityChange</code> or <code>RollbackCapacityChange</code>.</p>
     #   @return [String]
     class ModifyCurrentDBClusterCapacityOutput < Struct.new(
+      nil,
       :db_cluster_identifier,
       :pending_capacity,
       :current_capacity,
@@ -16773,6 +17166,7 @@ module Aws::RDS
     #               RDS Custom instance, snapshot, or automated backup.</p>
     #   @return [String]
     class ModifyCustomDBEngineVersionMessage < Struct.new(
+      nil,
       :engine,
       :engine_version,
       :description,
@@ -16927,6 +17321,7 @@ module Aws::RDS
     #         </p>
     #   @return [Types::ServerlessV2FeaturesSupport]
     class ModifyCustomDBEngineVersionOutput < Struct.new(
+      nil,
       :engine,
       :major_engine_version,
       :engine_version,
@@ -16982,6 +17377,7 @@ module Aws::RDS
     #          Only relevant if the list of static members is empty.</p>
     #   @return [Array<String>]
     class ModifyDBClusterEndpointMessage < Struct.new(
+      nil,
       :db_cluster_endpoint_identifier,
       :endpoint_type,
       :static_members,
@@ -17053,6 +17449,7 @@ module Aws::RDS
     #   <p>The Amazon Resource Name (ARN) for the endpoint.</p>
     #   @return [String]
     class ModifyDBClusterEndpointOutput < Struct.new(
+      nil,
       :db_cluster_endpoint_identifier,
       :db_cluster_identifier,
       :db_cluster_endpoint_resource_identifier,
@@ -17622,6 +18019,7 @@ module Aws::RDS
     #            <p>This option is only valid for RDS for PostgreSQL and Aurora PostgreSQL engines.</p>
     #   @return [String]
     class ModifyDBClusterMessage < Struct.new(
+      nil,
       :db_cluster_identifier,
       :new_db_cluster_identifier,
       :apply_immediately,
@@ -17692,6 +18090,7 @@ module Aws::RDS
     #            </note>
     #   @return [Array<Types::Parameter>]
     class ModifyDBClusterParameterGroupMessage < Struct.new(
+      nil,
       :db_cluster_parameter_group_name,
       :parameters,
       keyword_init: true
@@ -17719,6 +18118,7 @@ module Aws::RDS
     #            </note>
     #   @return [String]
     class ModifyDBClusterParameterGroupOutput < Struct.new(
+      nil,
       :db_cluster_parameter_group_name,
       keyword_init: true
     )
@@ -17746,6 +18146,7 @@ module Aws::RDS
     #            </p>
     #   @return [Types::DBCluster]
     class ModifyDBClusterResult < Struct.new(
+      nil,
       :db_cluster,
       keyword_init: true
     )
@@ -17783,6 +18184,7 @@ module Aws::RDS
     #               can still copy or restore a manual DB cluster snapshot.</p>
     #   @return [Array<String>]
     class ModifyDBClusterSnapshotAttributeMessage < Struct.new(
+      nil,
       :db_cluster_snapshot_identifier,
       :attribute_name,
       :values_to_add,
@@ -17800,6 +18202,7 @@ module Aws::RDS
     #               API action.</p>
     #   @return [Types::DBClusterSnapshotAttributesResult]
     class ModifyDBClusterSnapshotAttributeResult < Struct.new(
+      nil,
       :db_cluster_snapshot_attributes_result,
       keyword_init: true
     )
@@ -18785,6 +19188,7 @@ module Aws::RDS
     #            <p>This option is only valid for RDS for PostgreSQL and Aurora PostgreSQL engines.</p>
     #   @return [String]
     class ModifyDBInstanceMessage < Struct.new(
+      nil,
       :db_instance_identifier,
       :allocated_storage,
       :db_instance_class,
@@ -18861,6 +19265,7 @@ module Aws::RDS
     #             <code>StartDBInstance</code>, and <code>StopDBInstance</code>.</p>
     #   @return [Types::DBInstance]
     class ModifyDBInstanceResult < Struct.new(
+      nil,
       :db_instance,
       keyword_init: true
     )
@@ -18895,6 +19300,7 @@ module Aws::RDS
     #             with DB parameter groups</a> in the <i>Amazon RDS User Guide</i>.</p>
     #   @return [Array<Types::Parameter>]
     class ModifyDBParameterGroupMessage < Struct.new(
+      nil,
       :db_parameter_group_name,
       :parameters,
       keyword_init: true
@@ -18908,6 +19314,7 @@ module Aws::RDS
     #   <p>The name of the DB parameter group.</p>
     #   @return [String]
     class ModifyDBParameterGroupOutput < Struct.new(
+      nil,
       :db_parameter_group_name,
       keyword_init: true
     )
@@ -18928,6 +19335,7 @@ module Aws::RDS
     #           set of security group IDs than for the original proxy.</p>
     #   @return [Array<String>]
     class ModifyDBProxyEndpointRequest < Struct.new(
+      nil,
       :db_proxy_endpoint_name,
       :new_db_proxy_endpoint_name,
       :vpc_security_group_ids,
@@ -18940,6 +19348,7 @@ module Aws::RDS
     #   <p>The <code>DBProxyEndpoint</code> object representing the new settings for the DB proxy endpoint.</p>
     #   @return [Types::DBProxyEndpoint]
     class ModifyDBProxyEndpointResponse < Struct.new(
+      nil,
       :db_proxy_endpoint,
       keyword_init: true
     )
@@ -18983,6 +19392,7 @@ module Aws::RDS
     #   <p>The new list of security groups for the <code>DBProxy</code>.</p>
     #   @return [Array<String>]
     class ModifyDBProxyRequest < Struct.new(
+      nil,
       :db_proxy_name,
       :new_db_proxy_name,
       :default_auth_scheme,
@@ -19001,6 +19411,7 @@ module Aws::RDS
     #   <p>The <code>DBProxy</code> object representing the new settings for the proxy.</p>
     #   @return [Types::DBProxy]
     class ModifyDBProxyResponse < Struct.new(
+      nil,
       :db_proxy,
       keyword_init: true
     )
@@ -19021,6 +19432,7 @@ module Aws::RDS
     #            <p>You can't rename the <code>default</code> target group.</p>
     #   @return [String]
     class ModifyDBProxyTargetGroupRequest < Struct.new(
+      nil,
       :target_group_name,
       :db_proxy_name,
       :connection_pool_config,
@@ -19034,6 +19446,7 @@ module Aws::RDS
     #   <p>The settings of the modified <code>DBProxyTarget</code>.</p>
     #   @return [Types::DBProxyTargetGroup]
     class ModifyDBProxyTargetGroupResponse < Struct.new(
+      nil,
       :db_proxy_target_group,
       keyword_init: true
     )
@@ -19062,6 +19475,7 @@ module Aws::RDS
     #   <p>The list of recommended action status to update. You can update multiple recommended actions at one time.</p>
     #   @return [Array<Types::RecommendedActionUpdate>]
     class ModifyDBRecommendationMessage < Struct.new(
+      nil,
       :recommendation_id,
       :locale,
       :status,
@@ -19095,6 +19509,7 @@ module Aws::RDS
     #            </ul>
     #   @return [Integer]
     class ModifyDBShardGroupMessage < Struct.new(
+      nil,
       :db_shard_group_identifier,
       :max_acu,
       :min_acu,
@@ -19163,6 +19578,7 @@ module Aws::RDS
     #               </p>
     #   @return [Array<Types::Tag>]
     class ModifyDBShardGroupOutput < Struct.new(
+      nil,
       :db_shard_group_resource_id,
       :db_shard_group_identifier,
       :db_cluster_identifier,
@@ -19210,6 +19626,7 @@ module Aws::RDS
     #         can still copy or restore the manual DB snapshot.</p>
     #   @return [Array<String>]
     class ModifyDBSnapshotAttributeMessage < Struct.new(
+      nil,
       :db_snapshot_identifier,
       :attribute_name,
       :values_to_add,
@@ -19227,6 +19644,7 @@ module Aws::RDS
     #         API action.</p>
     #   @return [Types::DBSnapshotAttributesResult]
     class ModifyDBSnapshotAttributeResult < Struct.new(
+      nil,
       :db_snapshot_attributes_result,
       keyword_init: true
     )
@@ -19305,6 +19723,7 @@ module Aws::RDS
     #            </p>
     #   @return [String]
     class ModifyDBSnapshotMessage < Struct.new(
+      nil,
       :db_snapshot_identifier,
       :engine_version,
       :option_group_name,
@@ -19319,6 +19738,7 @@ module Aws::RDS
     #             in the <code>DescribeDBSnapshots</code> action.</p>
     #   @return [Types::DBSnapshot]
     class ModifyDBSnapshotResult < Struct.new(
+      nil,
       :db_snapshot,
       keyword_init: true
     )
@@ -19340,6 +19760,7 @@ module Aws::RDS
     #   <p>The EC2 subnet IDs for the DB subnet group.</p>
     #   @return [Array<String>]
     class ModifyDBSubnetGroupMessage < Struct.new(
+      nil,
       :db_subnet_group_name,
       :db_subnet_group_description,
       :subnet_ids,
@@ -19354,6 +19775,7 @@ module Aws::RDS
     #             in the <code>DescribeDBSubnetGroups</code> action.</p>
     #   @return [Types::DBSubnetGroup]
     class ModifyDBSubnetGroupResult < Struct.new(
+      nil,
       :db_subnet_group,
       keyword_init: true
     )
@@ -19382,6 +19804,7 @@ module Aws::RDS
     #   <p>Specifies whether to activate the subscription.</p>
     #   @return [Boolean]
     class ModifyEventSubscriptionMessage < Struct.new(
+      nil,
       :subscription_name,
       :sns_topic_arn,
       :source_type,
@@ -19396,6 +19819,7 @@ module Aws::RDS
     #   <p>Contains the results of a successful invocation of the <code>DescribeEventSubscriptions</code> action.</p>
     #   @return [Types::EventSubscription]
     class ModifyEventSubscriptionResult < Struct.new(
+      nil,
       :event_subscription,
       keyword_init: true
     )
@@ -19455,6 +19879,7 @@ module Aws::RDS
     #           groups after completing the upgrade.</p>
     #   @return [Boolean]
     class ModifyGlobalClusterMessage < Struct.new(
+      nil,
       :global_cluster_identifier,
       :new_global_cluster_identifier,
       :deletion_protection,
@@ -19469,6 +19894,7 @@ module Aws::RDS
     #   <p>A data type representing an Aurora global database.</p>
     #   @return [Types::GlobalCluster]
     class ModifyGlobalClusterResult < Struct.new(
+      nil,
       :global_cluster,
       keyword_init: true
     )
@@ -19490,6 +19916,7 @@ module Aws::RDS
     #   <p>A new description for the integration.</p>
     #   @return [String]
     class ModifyIntegrationMessage < Struct.new(
+      nil,
       :integration_identifier,
       :integration_name,
       :data_filter,
@@ -19547,6 +19974,7 @@ module Aws::RDS
     #   <p>Any errors associated with the integration.</p>
     #   @return [Array<Types::IntegrationError>]
     class ModifyIntegrationOutput < Struct.new(
+      nil,
       :source_arn,
       :target_arn,
       :integration_name,
@@ -19579,6 +20007,7 @@ module Aws::RDS
     #   <p>Specifies whether to apply the change immediately or during the next maintenance window for each instance associated with the option group.</p>
     #   @return [Boolean]
     class ModifyOptionGroupMessage < Struct.new(
+      nil,
       :option_group_name,
       :options_to_include,
       :options_to_remove,
@@ -19592,6 +20021,7 @@ module Aws::RDS
     #   <p></p>
     #   @return [Types::OptionGroup]
     class ModifyOptionGroupResult < Struct.new(
+      nil,
       :option_group,
       keyword_init: true
     )
@@ -19731,6 +20161,7 @@ module Aws::RDS
     #               default KMS key for each Amazon Web Services Region.</p>
     #   @return [String]
     class ModifyTenantDatabaseMessage < Struct.new(
+      nil,
       :db_instance_identifier,
       :tenant_db_name,
       :master_user_password,
@@ -19748,6 +20179,7 @@ module Aws::RDS
     #               the <code>DescribeTenantDatabases</code> action.</p>
     #   @return [Types::TenantDatabase]
     class ModifyTenantDatabaseResult < Struct.new(
+      nil,
       :tenant_database,
       keyword_init: true
     )
@@ -19758,6 +20190,7 @@ module Aws::RDS
     # @!attribute message
     #   @return [String]
     class NetworkTypeNotSupported < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -19793,6 +20226,7 @@ module Aws::RDS
     #   <p>If the option requires access to a port, then this VPC security group allows access to the port.</p>
     #   @return [Array<Types::VpcSecurityGroupMembership>]
     class Option < Struct.new(
+      nil,
       :option_name,
       :option_description,
       :persistent,
@@ -19827,6 +20261,7 @@ module Aws::RDS
     #   <p>The option settings to include in an option group.</p>
     #   @return [Array<Types::OptionSetting>]
     class OptionConfiguration < Struct.new(
+      nil,
       :option_name,
       :port,
       :option_version,
@@ -19879,6 +20314,7 @@ module Aws::RDS
     #   <p>Indicates when the option group was copied.</p>
     #   @return [Time]
     class OptionGroup < Struct.new(
+      nil,
       :option_group_name,
       :option_group_description,
       :engine_name,
@@ -19899,6 +20335,7 @@ module Aws::RDS
     # @!attribute message
     #   @return [String]
     class OptionGroupAlreadyExistsFault < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -19921,6 +20358,7 @@ module Aws::RDS
     #         and <code>failed</code>.</p>
     #   @return [String]
     class OptionGroupMembership < Struct.new(
+      nil,
       :option_group_name,
       :status,
       keyword_init: true
@@ -19932,6 +20370,7 @@ module Aws::RDS
     # @!attribute message
     #   @return [String]
     class OptionGroupNotFoundFault < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -19995,6 +20434,7 @@ module Aws::RDS
     #   <p>Indicates whether the option can be copied across Amazon Web Services accounts.</p>
     #   @return [Boolean]
     class OptionGroupOption < Struct.new(
+      nil,
       :name,
       :description,
       :engine_name,
@@ -20043,6 +20483,7 @@ module Aws::RDS
     #   <p>The minimum DB engine version required for the corresponding allowed value for this option setting.</p>
     #   @return [Array<Types::MinimumEngineVersionPerAllowedValue>]
     class OptionGroupOptionSetting < Struct.new(
+      nil,
       :setting_name,
       :setting_description,
       :default_value,
@@ -20067,6 +20508,7 @@ module Aws::RDS
     #               up to the value specified by <code>MaxRecords</code>.</p>
     #   @return [String]
     class OptionGroupOptionsMessage < Struct.new(
+      nil,
       :option_group_options,
       :marker,
       keyword_init: true
@@ -20078,6 +20520,7 @@ module Aws::RDS
     # @!attribute message
     #   @return [String]
     class OptionGroupQuotaExceededFault < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -20113,6 +20556,7 @@ module Aws::RDS
     #   <p>Indicates whether the option setting is part of a collection.</p>
     #   @return [Boolean]
     class OptionSetting < Struct.new(
+      nil,
       :name,
       :value,
       :default_value,
@@ -20136,6 +20580,7 @@ module Aws::RDS
     #   <p>Indicates whether the version is the default version of the option.</p>
     #   @return [Boolean]
     class OptionVersion < Struct.new(
+      nil,
       :version,
       :is_default,
       keyword_init: true
@@ -20272,6 +20717,7 @@ module Aws::RDS
     #   <p>Indicates whether a DB instance supports HTTP endpoints.</p>
     #   @return [Boolean]
     class OrderableDBInstanceOption < Struct.new(
+      nil,
       :engine,
       :engine_version,
       :db_instance_class,
@@ -20326,6 +20772,7 @@ module Aws::RDS
     #               up to the value specified by <code>MaxRecords</code>.</p>
     #   @return [String]
     class OrderableDBInstanceOptionsMessage < Struct.new(
+      nil,
       :orderable_db_instance_options,
       :marker,
       keyword_init: true
@@ -20341,6 +20788,7 @@ module Aws::RDS
     #   <p>The Amazon Resource Name (ARN) of the Outpost.</p>
     #   @return [String]
     class Outpost < Struct.new(
+      nil,
       :arn,
       keyword_init: true
     )
@@ -20387,6 +20835,7 @@ module Aws::RDS
     #   <p>The valid DB engine modes.</p>
     #   @return [Array<String>]
     class Parameter < Struct.new(
+      nil,
       :parameter_name,
       :parameter_value,
       :description,
@@ -20411,6 +20860,7 @@ module Aws::RDS
     #   <p>Log types that are in the process of being enabled. After they are enabled, these log types are exported to CloudWatch Logs.</p>
     #   @return [Array<String>]
     class PendingCloudwatchLogsExports < Struct.new(
+      nil,
       :log_types_to_enable,
       :log_types_to_disable,
       keyword_init: true
@@ -20480,6 +20930,7 @@ module Aws::RDS
     #   <p>A description providing more detail about the maintenance action.</p>
     #   @return [String]
     class PendingMaintenanceAction < Struct.new(
+      nil,
       :action,
       :auto_applied_after_date,
       :forced_apply_date,
@@ -20503,6 +20954,7 @@ module Aws::RDS
     #               up to a number of records specified by <code>MaxRecords</code>.</p>
     #   @return [String]
     class PendingMaintenanceActionsMessage < Struct.new(
+      nil,
       :pending_maintenance_actions,
       :marker,
       keyword_init: true
@@ -20593,6 +21045,7 @@ module Aws::RDS
     #   <p>The database engine of the DB instance.</p>
     #   @return [String]
     class PendingModifiedValues < Struct.new(
+      nil,
       :db_instance_class,
       :allocated_storage,
       :master_user_password,
@@ -20652,6 +21105,7 @@ module Aws::RDS
     #   <p>The maximum number of items to fetch for this dimension group.</p>
     #   @return [Integer]
     class PerformanceInsightsMetricDimensionGroup < Struct.new(
+      nil,
       :dimensions,
       :group,
       :limit,
@@ -20701,6 +21155,7 @@ module Aws::RDS
     #               <code>db.load.avg</code>. For most use cases, you can query <code>db.load.avg</code> only.</p>
     #   @return [String]
     class PerformanceInsightsMetricQuery < Struct.new(
+      nil,
       :group_by,
       :metric,
       keyword_init: true
@@ -20722,6 +21177,7 @@ module Aws::RDS
     #   <p>The analysis of the performance issue. The information might contain markdown.</p>
     #   @return [String]
     class PerformanceIssueDetails < Struct.new(
+      nil,
       :start_time,
       :end_time,
       :metrics,
@@ -20738,6 +21194,7 @@ module Aws::RDS
     # @!attribute message
     #   @return [String]
     class PointInTimeRestoreNotEnabledFault < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -20822,6 +21279,7 @@ module Aws::RDS
     #   <p>The value of a processor feature.</p>
     #   @return [String]
     class ProcessorFeature < Struct.new(
+      nil,
       :name,
       :value,
       keyword_init: true
@@ -20843,6 +21301,7 @@ module Aws::RDS
     #            </p>
     #   @return [String]
     class PromoteReadReplicaDBClusterMessage < Struct.new(
+      nil,
       :db_cluster_identifier,
       keyword_init: true
     )
@@ -20870,6 +21329,7 @@ module Aws::RDS
     #            </p>
     #   @return [Types::DBCluster]
     class PromoteReadReplicaDBClusterResult < Struct.new(
+      nil,
       :db_cluster,
       keyword_init: true
     )
@@ -20928,6 +21388,7 @@ module Aws::RDS
     #            </ul>
     #   @return [String]
     class PromoteReadReplicaMessage < Struct.new(
+      nil,
       :db_instance_identifier,
       :backup_retention_period,
       :preferred_backup_window,
@@ -20945,6 +21406,7 @@ module Aws::RDS
     #             <code>StartDBInstance</code>, and <code>StopDBInstance</code>.</p>
     #   @return [Types::DBInstance]
     class PromoteReadReplicaResult < Struct.new(
+      nil,
       :db_instance,
       keyword_init: true
     )
@@ -20955,6 +21417,7 @@ module Aws::RDS
     # @!attribute message
     #   @return [String]
     class ProvisionedIopsNotAvailableInAZFault < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -20983,6 +21446,7 @@ module Aws::RDS
     #               </p>
     #   @return [Array<Types::Tag>]
     class PurchaseReservedDBInstancesOfferingMessage < Struct.new(
+      nil,
       :reserved_db_instances_offering_id,
       :reserved_db_instance_id,
       :db_instance_count,
@@ -20998,6 +21462,7 @@ module Aws::RDS
     #               <code>PurchaseReservedDBInstancesOffering</code> actions.</p>
     #   @return [Types::ReservedDBInstance]
     class PurchaseReservedDBInstancesOfferingResult < Struct.new(
+      nil,
       :reserved_db_instance,
       keyword_init: true
     )
@@ -21021,6 +21486,7 @@ module Aws::RDS
     #               The valid values are 5,000, 6,000, 7,000, 8,000...</p>
     #   @return [Integer]
     class Range < Struct.new(
+      nil,
       :from,
       :to,
       :step,
@@ -21040,6 +21506,7 @@ module Aws::RDS
     #   <p>Reserved for future use.</p>
     #   @return [String]
     class RdsCustomClusterConfiguration < Struct.new(
+      nil,
       :interconnect_subnet_id,
       :transit_gateway_multicast_domain_id,
       :replica_mode,
@@ -21058,6 +21525,7 @@ module Aws::RDS
     #            </ul>
     #   @return [String]
     class RebootDBClusterMessage < Struct.new(
+      nil,
       :db_cluster_identifier,
       keyword_init: true
     )
@@ -21085,6 +21553,7 @@ module Aws::RDS
     #            </p>
     #   @return [Types::DBCluster]
     class RebootDBClusterResult < Struct.new(
+      nil,
       :db_cluster,
       keyword_init: true
     )
@@ -21106,6 +21575,7 @@ module Aws::RDS
     #            <p>Constraint: You can't enable force failover if the instance isn't configured for Multi-AZ.</p>
     #   @return [Boolean]
     class RebootDBInstanceMessage < Struct.new(
+      nil,
       :db_instance_identifier,
       :force_failover,
       keyword_init: true
@@ -21122,6 +21592,7 @@ module Aws::RDS
     #             <code>StartDBInstance</code>, and <code>StopDBInstance</code>.</p>
     #   @return [Types::DBInstance]
     class RebootDBInstanceResult < Struct.new(
+      nil,
       :db_instance,
       keyword_init: true
     )
@@ -21132,6 +21603,7 @@ module Aws::RDS
     #   <p>The name of the DB shard group to reboot.</p>
     #   @return [String]
     class RebootDBShardGroupMessage < Struct.new(
+      nil,
       :db_shard_group_identifier,
       keyword_init: true
     )
@@ -21197,6 +21669,7 @@ module Aws::RDS
     #               </p>
     #   @return [Array<Types::Tag>]
     class RebootDBShardGroupOutput < Struct.new(
+      nil,
       :db_shard_group_resource_id,
       :db_shard_group_identifier,
       :db_cluster_identifier,
@@ -21279,6 +21752,7 @@ module Aws::RDS
     #   <p>The supporting attributes to explain the recommended action.</p>
     #   @return [Array<Types::ContextAttribute>]
     class RecommendedAction < Struct.new(
+      nil,
       :action_id,
       :title,
       :description,
@@ -21301,6 +21775,7 @@ module Aws::RDS
     #   <p>The value of the parameter to use with the <code>RecommendedAction</code> API operation.</p>
     #   @return [String]
     class RecommendedActionParameter < Struct.new(
+      nil,
       :key,
       :value,
       keyword_init: true
@@ -21328,6 +21803,7 @@ module Aws::RDS
     #            </ul>
     #   @return [String]
     class RecommendedActionUpdate < Struct.new(
+      nil,
       :action_id,
       :status,
       keyword_init: true
@@ -21344,6 +21820,7 @@ module Aws::RDS
     #   <p>The frequency of the recurring charge.</p>
     #   @return [String]
     class RecurringCharge < Struct.new(
+      nil,
       :recurring_charge_amount,
       :recurring_charge_frequency,
       keyword_init: true
@@ -21356,6 +21833,7 @@ module Aws::RDS
     #   <p>The metric reference details when the reference is a scalar.</p>
     #   @return [Types::ScalarReferenceDetails]
     class ReferenceDetails < Struct.new(
+      nil,
       :scalar_reference_details,
       keyword_init: true
     )
@@ -21375,6 +21853,7 @@ module Aws::RDS
     #   <p>One or more DB cluster identifiers.</p>
     #   @return [Array<String>]
     class RegisterDBProxyTargetsRequest < Struct.new(
+      nil,
       :db_proxy_name,
       :target_group_name,
       :db_instance_identifiers,
@@ -21388,6 +21867,7 @@ module Aws::RDS
     #   <p>One or more <code>DBProxyTarget</code> objects that are created when you register targets with a target group.</p>
     #   @return [Array<Types::DBProxyTarget>]
     class RegisterDBProxyTargetsResponse < Struct.new(
+      nil,
       :db_proxy_targets,
       keyword_init: true
     )
@@ -21401,6 +21881,7 @@ module Aws::RDS
     #   <p>The Amazon Resource Name (ARN) identifying the cluster that was detached from the Aurora global database cluster.</p>
     #   @return [String]
     class RemoveFromGlobalClusterMessage < Struct.new(
+      nil,
       :global_cluster_identifier,
       :db_cluster_identifier,
       keyword_init: true
@@ -21412,6 +21893,7 @@ module Aws::RDS
     #   <p>A data type representing an Aurora global database.</p>
     #   @return [Types::GlobalCluster]
     class RemoveFromGlobalClusterResult < Struct.new(
+      nil,
       :global_cluster,
       keyword_init: true
     )
@@ -21430,6 +21912,7 @@ module Aws::RDS
     #               For information about supported feature names, see <a>DBEngineVersion</a>.</p>
     #   @return [String]
     class RemoveRoleFromDBClusterMessage < Struct.new(
+      nil,
       :db_cluster_identifier,
       :role_arn,
       :feature_name,
@@ -21450,6 +21933,7 @@ module Aws::RDS
     #               For information about supported feature names, see <code>DBEngineVersion</code>.</p>
     #   @return [String]
     class RemoveRoleFromDBInstanceMessage < Struct.new(
+      nil,
       :db_instance_identifier,
       :role_arn,
       :feature_name,
@@ -21467,6 +21951,7 @@ module Aws::RDS
     #               for a DB instance or the name of a security group.</p>
     #   @return [String]
     class RemoveSourceIdentifierFromSubscriptionMessage < Struct.new(
+      nil,
       :subscription_name,
       :source_identifier,
       keyword_init: true
@@ -21478,6 +21963,7 @@ module Aws::RDS
     #   <p>Contains the results of a successful invocation of the <code>DescribeEventSubscriptions</code> action.</p>
     #   @return [Types::EventSubscription]
     class RemoveSourceIdentifierFromSubscriptionResult < Struct.new(
+      nil,
       :event_subscription,
       keyword_init: true
     )
@@ -21496,6 +21982,7 @@ module Aws::RDS
     #   <p>The tag key (name) of the tag to be removed.</p>
     #   @return [Array<String>]
     class RemoveTagsFromResourceMessage < Struct.new(
+      nil,
       :resource_name,
       :tag_keys,
       keyword_init: true
@@ -21558,6 +22045,7 @@ module Aws::RDS
     #            </note>
     #   @return [String]
     class ReservedDBInstance < Struct.new(
+      nil,
       :reserved_db_instance_id,
       :reserved_db_instances_offering_id,
       :db_instance_class,
@@ -21583,6 +22071,7 @@ module Aws::RDS
     # @!attribute message
     #   @return [String]
     class ReservedDBInstanceAlreadyExistsFault < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -21600,6 +22089,7 @@ module Aws::RDS
     #   <p>A list of reserved DB instances.</p>
     #   @return [Array<Types::ReservedDBInstance>]
     class ReservedDBInstanceMessage < Struct.new(
+      nil,
       :marker,
       :reserved_db_instances,
       keyword_init: true
@@ -21611,6 +22101,7 @@ module Aws::RDS
     # @!attribute message
     #   @return [String]
     class ReservedDBInstanceNotFoundFault < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -21621,6 +22112,7 @@ module Aws::RDS
     # @!attribute message
     #   @return [String]
     class ReservedDBInstanceQuotaExceededFault < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -21659,6 +22151,7 @@ module Aws::RDS
     #   <p>The recurring price charged to run this reserved DB instance.</p>
     #   @return [Array<Types::RecurringCharge>]
     class ReservedDBInstancesOffering < Struct.new(
+      nil,
       :reserved_db_instances_offering_id,
       :db_instance_class,
       :duration,
@@ -21685,6 +22178,7 @@ module Aws::RDS
     #   <p>A list of reserved DB instance offerings.</p>
     #   @return [Array<Types::ReservedDBInstancesOffering>]
     class ReservedDBInstancesOfferingMessage < Struct.new(
+      nil,
       :marker,
       :reserved_db_instances_offerings,
       keyword_init: true
@@ -21696,6 +22190,7 @@ module Aws::RDS
     # @!attribute message
     #   @return [String]
     class ReservedDBInstancesOfferingNotFoundFault < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -21716,6 +22211,7 @@ module Aws::RDS
     #           parameter if the <code>ResetAllParameters</code> parameter is enabled.</p>
     #   @return [Array<Types::Parameter>]
     class ResetDBClusterParameterGroupMessage < Struct.new(
+      nil,
       :db_cluster_parameter_group_name,
       :reset_all_parameters,
       :parameters,
@@ -21744,6 +22240,7 @@ module Aws::RDS
     #            </note>
     #   @return [String]
     class ResetDBClusterParameterGroupOutput < Struct.new(
+      nil,
       :db_cluster_parameter_group_name,
       keyword_init: true
     )
@@ -21793,6 +22290,7 @@ module Aws::RDS
     #            </p>
     #   @return [Array<Types::Parameter>]
     class ResetDBParameterGroupMessage < Struct.new(
+      nil,
       :db_parameter_group_name,
       :reset_all_parameters,
       :parameters,
@@ -21807,6 +22305,7 @@ module Aws::RDS
     #   <p>The name of the DB parameter group.</p>
     #   @return [String]
     class ResetDBParameterGroupOutput < Struct.new(
+      nil,
       :db_parameter_group_name,
       keyword_init: true
     )
@@ -21817,6 +22316,7 @@ module Aws::RDS
     # @!attribute message
     #   @return [String]
     class ResourceNotFoundFault < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -21831,6 +22331,7 @@ module Aws::RDS
     #   <p>A list that provides details about the pending maintenance actions for the resource.</p>
     #   @return [Array<Types::PendingMaintenanceAction>]
     class ResourcePendingMaintenanceActions < Struct.new(
+      nil,
       :resource_identifier,
       :pending_maintenance_action_details,
       keyword_init: true
@@ -22171,6 +22672,7 @@ module Aws::RDS
     #            </p>
     #   @return [String]
     class RestoreDBClusterFromS3Message < Struct.new(
+      nil,
       :availability_zones,
       :backup_retention_period,
       :character_set_name,
@@ -22234,6 +22736,7 @@ module Aws::RDS
     #            </p>
     #   @return [Types::DBCluster]
     class RestoreDBClusterFromS3Result < Struct.new(
+      nil,
       :db_cluster,
       keyword_init: true
     )
@@ -22636,6 +23139,7 @@ module Aws::RDS
     #            </p>
     #   @return [String]
     class RestoreDBClusterFromSnapshotMessage < Struct.new(
+      nil,
       :availability_zones,
       :db_cluster_identifier,
       :snapshot_identifier,
@@ -22697,6 +23201,7 @@ module Aws::RDS
     #            </p>
     #   @return [Types::DBCluster]
     class RestoreDBClusterFromSnapshotResult < Struct.new(
+      nil,
       :db_cluster,
       keyword_init: true
     )
@@ -23089,6 +23594,7 @@ module Aws::RDS
     #            </p>
     #   @return [String]
     class RestoreDBClusterToPointInTimeMessage < Struct.new(
+      nil,
       :db_cluster_identifier,
       :restore_type,
       :source_db_cluster_identifier,
@@ -23150,6 +23656,7 @@ module Aws::RDS
     #            </p>
     #   @return [Types::DBCluster]
     class RestoreDBClusterToPointInTimeResult < Struct.new(
+      nil,
       :db_cluster,
       keyword_init: true
     )
@@ -23683,6 +24190,7 @@ module Aws::RDS
     #               has a different default KMS key for each Amazon Web Services Region.</p>
     #   @return [String]
     class RestoreDBInstanceFromDBSnapshotMessage < Struct.new(
+      nil,
       :db_instance_identifier,
       :db_snapshot_identifier,
       :db_instance_class,
@@ -23741,6 +24249,7 @@ module Aws::RDS
     #             <code>StartDBInstance</code>, and <code>StopDBInstance</code>.</p>
     #   @return [Types::DBInstance]
     class RestoreDBInstanceFromDBSnapshotResult < Struct.new(
+      nil,
       :db_instance,
       keyword_init: true
     )
@@ -24212,6 +24721,7 @@ module Aws::RDS
     #            </p>
     #   @return [String]
     class RestoreDBInstanceFromS3Message < Struct.new(
+      nil,
       :db_name,
       :db_instance_identifier,
       :allocated_storage,
@@ -24278,6 +24788,7 @@ module Aws::RDS
     #             <code>StartDBInstance</code>, and <code>StopDBInstance</code>.</p>
     #   @return [Types::DBInstance]
     class RestoreDBInstanceFromS3Result < Struct.new(
+      nil,
       :db_instance,
       keyword_init: true
     )
@@ -24863,6 +25374,7 @@ module Aws::RDS
     #               has a different default KMS key for each Amazon Web Services Region.</p>
     #   @return [String]
     class RestoreDBInstanceToPointInTimeMessage < Struct.new(
+      nil,
       :source_db_instance_identifier,
       :target_db_instance_identifier,
       :restore_time,
@@ -24925,6 +25437,7 @@ module Aws::RDS
     #             <code>StartDBInstance</code>, and <code>StopDBInstance</code>.</p>
     #   @return [Types::DBInstance]
     class RestoreDBInstanceToPointInTimeResult < Struct.new(
+      nil,
       :db_instance,
       keyword_init: true
     )
@@ -24939,6 +25452,7 @@ module Aws::RDS
     #   <p>The latest time you can restore an instance to.</p>
     #   @return [Time]
     class RestoreWindow < Struct.new(
+      nil,
       :earliest_time,
       :latest_time,
       keyword_init: true
@@ -24974,6 +25488,7 @@ module Aws::RDS
     #           Otherwise, EC2SecurityGroupOwnerId and either <code>EC2SecurityGroupName</code> or <code>EC2SecurityGroupId</code> must be provided.</p>
     #   @return [String]
     class RevokeDBSecurityGroupIngressMessage < Struct.new(
+      nil,
       :db_security_group_name,
       :cidrip,
       :ec2_security_group_name,
@@ -24990,6 +25505,7 @@ module Aws::RDS
     #             in the <code>DescribeDBSecurityGroups</code> action.</p>
     #   @return [Types::DBSecurityGroup]
     class RevokeDBSecurityGroupIngressResult < Struct.new(
+      nil,
       :db_security_group,
       keyword_init: true
     )
@@ -25000,6 +25516,7 @@ module Aws::RDS
     # @!attribute message
     #   @return [String]
     class SNSInvalidTopicFault < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -25010,6 +25527,7 @@ module Aws::RDS
     # @!attribute message
     #   @return [String]
     class SNSNoAuthorizationFault < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -25020,6 +25538,7 @@ module Aws::RDS
     # @!attribute message
     #   @return [String]
     class SNSTopicArnNotFoundFault < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -25031,6 +25550,7 @@ module Aws::RDS
     #   <p>The value of a scalar reference.</p>
     #   @return [Float]
     class ScalarReferenceDetails < Struct.new(
+      nil,
       :value,
       keyword_init: true
     )
@@ -25083,6 +25603,7 @@ module Aws::RDS
     #            <p>Specify a value between 60 and 600 seconds.</p>
     #   @return [Integer]
     class ScalingConfiguration < Struct.new(
+      nil,
       :min_capacity,
       :max_capacity,
       :auto_pause,
@@ -25127,6 +25648,7 @@ module Aws::RDS
     #               is determined by the <code>TimeoutAction</code> setting.</p>
     #   @return [Integer]
     class ScalingConfigurationInfo < Struct.new(
+      nil,
       :min_capacity,
       :max_capacity,
       :auto_pause,
@@ -25155,6 +25677,7 @@ module Aws::RDS
     #            </p>
     #   @return [Float]
     class ServerlessV2FeaturesSupport < Struct.new(
+      nil,
       :min_capacity,
       :max_capacity,
       keyword_init: true
@@ -25184,6 +25707,7 @@ module Aws::RDS
     #            <p>Specify a value between 300 seconds (five minutes) and 86,400 seconds (one day). The default is 300 seconds.</p>
     #   @return [Integer]
     class ServerlessV2ScalingConfiguration < Struct.new(
+      nil,
       :min_capacity,
       :max_capacity,
       :seconds_until_auto_pause,
@@ -25219,6 +25743,7 @@ module Aws::RDS
     #            <p>This value ranges between 300 seconds (five minutes) and 86,400 seconds (one day). The default is 300 seconds.</p>
     #   @return [Integer]
     class ServerlessV2ScalingConfigurationInfo < Struct.new(
+      nil,
       :min_capacity,
       :max_capacity,
       :seconds_until_auto_pause,
@@ -25231,6 +25756,7 @@ module Aws::RDS
     # @!attribute message
     #   @return [String]
     class SharedSnapshotQuotaExceededFault < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -25242,6 +25768,7 @@ module Aws::RDS
     # @!attribute message
     #   @return [String]
     class SnapshotQuotaExceededFault < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -25252,6 +25779,7 @@ module Aws::RDS
     # @!attribute message
     #   @return [String]
     class SourceClusterNotSupportedFault < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -25262,6 +25790,7 @@ module Aws::RDS
     # @!attribute message
     #   @return [String]
     class SourceDatabaseNotSupportedFault < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -25272,6 +25801,7 @@ module Aws::RDS
     # @!attribute message
     #   @return [String]
     class SourceNotFoundFault < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -25292,6 +25822,7 @@ module Aws::RDS
     #   <p>Indicates whether the source Amazon Web Services Region supports replicating automated backups to the current Amazon Web Services Region.</p>
     #   @return [Boolean]
     class SourceRegion < Struct.new(
+      nil,
       :region_name,
       :endpoint,
       :status,
@@ -25313,6 +25844,7 @@ module Aws::RDS
     #               current Amazon Web Services Region can get a read replica or a DB snapshot from.</p>
     #   @return [Array<Types::SourceRegion>]
     class SourceRegionMessage < Struct.new(
+      nil,
       :marker,
       :source_regions,
       keyword_init: true
@@ -25342,6 +25874,7 @@ module Aws::RDS
     #           to an Oracle or Microsoft SQL Server DB instance. By default, no engine-native audit fields are included.</p>
     #   @return [Boolean]
     class StartActivityStreamRequest < Struct.new(
+      nil,
       :resource_arn,
       :mode,
       :kms_key_id,
@@ -25372,6 +25905,7 @@ module Aws::RDS
     #               regardless of the maintenance window for the database.</p>
     #   @return [Boolean]
     class StartActivityStreamResponse < Struct.new(
+      nil,
       :kms_key_id,
       :kinesis_stream_name,
       :status,
@@ -25388,6 +25922,7 @@ module Aws::RDS
     #           a lowercase string.</p>
     #   @return [String]
     class StartDBClusterMessage < Struct.new(
+      nil,
       :db_cluster_identifier,
       keyword_init: true
     )
@@ -25415,6 +25950,7 @@ module Aws::RDS
     #            </p>
     #   @return [Types::DBCluster]
     class StartDBClusterResult < Struct.new(
+      nil,
       :db_cluster,
       keyword_init: true
     )
@@ -25458,6 +25994,7 @@ module Aws::RDS
     #   <p>The source region of the snapshot. This is only needed when the shapshot is encrypted and in a different region.</p>
     #   @return [String]
     class StartDBInstanceAutomatedBackupsReplicationMessage < Struct.new(
+      nil,
       :source_db_instance_arn,
       :backup_retention_period,
       :kms_key_id,
@@ -25473,6 +26010,7 @@ module Aws::RDS
     #               existed at the time you deleted the source instance.</p>
     #   @return [Types::DBInstanceAutomatedBackup]
     class StartDBInstanceAutomatedBackupsReplicationResult < Struct.new(
+      nil,
       :db_instance_automated_backup,
       keyword_init: true
     )
@@ -25483,6 +26021,7 @@ module Aws::RDS
     #   <p>The user-supplied instance identifier.</p>
     #   @return [String]
     class StartDBInstanceMessage < Struct.new(
+      nil,
       :db_instance_identifier,
       keyword_init: true
     )
@@ -25498,6 +26037,7 @@ module Aws::RDS
     #             <code>StartDBInstance</code>, and <code>StopDBInstance</code>.</p>
     #   @return [Types::DBInstance]
     class StartDBInstanceResult < Struct.new(
+      nil,
       :db_instance,
       keyword_init: true
     )
@@ -25599,6 +26139,7 @@ module Aws::RDS
     #            </ul>
     #   @return [Array<String>]
     class StartExportTaskMessage < Struct.new(
+      nil,
       :export_task_identifier,
       :source_arn,
       :s3_bucket_name,
@@ -25722,6 +26263,7 @@ module Aws::RDS
     #   <p>The type of source for the export.</p>
     #   @return [String]
     class StartExportTaskOutput < Struct.new(
+      nil,
       :export_task_identifier,
       :source_arn,
       :export_only,
@@ -25752,6 +26294,7 @@ module Aws::RDS
     #               regardless of the maintenance window for the database.</p>
     #   @return [Boolean]
     class StopActivityStreamRequest < Struct.new(
+      nil,
       :resource_arn,
       :apply_immediately,
       keyword_init: true
@@ -25770,6 +26313,7 @@ module Aws::RDS
     #   <p>The status of the database activity stream.</p>
     #   @return [String]
     class StopActivityStreamResponse < Struct.new(
+      nil,
       :kms_key_id,
       :kinesis_stream_name,
       :status,
@@ -25783,6 +26327,7 @@ module Aws::RDS
     #           a lowercase string.</p>
     #   @return [String]
     class StopDBClusterMessage < Struct.new(
+      nil,
       :db_cluster_identifier,
       keyword_init: true
     )
@@ -25810,6 +26355,7 @@ module Aws::RDS
     #            </p>
     #   @return [Types::DBCluster]
     class StopDBClusterResult < Struct.new(
+      nil,
       :db_cluster,
       keyword_init: true
     )
@@ -25822,6 +26368,7 @@ module Aws::RDS
     #                   <code>arn:aws:rds:us-west-2:123456789012:db:mydatabase</code>.</p>
     #   @return [String]
     class StopDBInstanceAutomatedBackupsReplicationMessage < Struct.new(
+      nil,
       :source_db_instance_arn,
       keyword_init: true
     )
@@ -25833,6 +26380,7 @@ module Aws::RDS
     #               existed at the time you deleted the source instance.</p>
     #   @return [Types::DBInstanceAutomatedBackup]
     class StopDBInstanceAutomatedBackupsReplicationResult < Struct.new(
+      nil,
       :db_instance_automated_backup,
       keyword_init: true
     )
@@ -25846,6 +26394,7 @@ module Aws::RDS
     #   <p>The user-supplied instance identifier of the DB Snapshot created immediately before the DB instance is stopped.</p>
     #   @return [String]
     class StopDBInstanceMessage < Struct.new(
+      nil,
       :db_instance_identifier,
       :db_snapshot_identifier,
       keyword_init: true
@@ -25862,6 +26411,7 @@ module Aws::RDS
     #             <code>StartDBInstance</code>, and <code>StopDBInstance</code>.</p>
     #   @return [Types::DBInstance]
     class StopDBInstanceResult < Struct.new(
+      nil,
       :db_instance,
       keyword_init: true
     )
@@ -25873,6 +26423,7 @@ module Aws::RDS
     # @!attribute message
     #   @return [String]
     class StorageQuotaExceededFault < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -25884,6 +26435,7 @@ module Aws::RDS
     # @!attribute message
     #   @return [String]
     class StorageTypeNotAvailableFault < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -25894,6 +26446,7 @@ module Aws::RDS
     # @!attribute message
     #   @return [String]
     class StorageTypeNotSupportedFault < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -25919,6 +26472,7 @@ module Aws::RDS
     #   <p>The status of the subnet.</p>
     #   @return [String]
     class Subnet < Struct.new(
+      nil,
       :subnet_identifier,
       :subnet_availability_zone,
       :subnet_outpost,
@@ -25932,6 +26486,7 @@ module Aws::RDS
     # @!attribute message
     #   @return [String]
     class SubnetAlreadyInUse < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -25942,6 +26497,7 @@ module Aws::RDS
     # @!attribute message
     #   @return [String]
     class SubscriptionAlreadyExistFault < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -25952,6 +26508,7 @@ module Aws::RDS
     # @!attribute message
     #   @return [String]
     class SubscriptionCategoryNotFoundFault < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -25962,6 +26519,7 @@ module Aws::RDS
     # @!attribute message
     #   @return [String]
     class SubscriptionNotFoundFault < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -26003,6 +26561,7 @@ module Aws::RDS
     #   <p>The end date for the type of support returned by <code>LifecycleSupportName</code>.</p>
     #   @return [Time]
     class SupportedEngineLifecycle < Struct.new(
+      nil,
       :lifecycle_support_name,
       :lifecycle_support_start_date,
       :lifecycle_support_end_date,
@@ -26027,6 +26586,7 @@ module Aws::RDS
     #              and no changes are made to the environments.</p>
     #   @return [Integer]
     class SwitchoverBlueGreenDeploymentRequest < Struct.new(
+      nil,
       :blue_green_deployment_identifier,
       :switchover_timeout,
       keyword_init: true
@@ -26043,6 +26603,7 @@ module Aws::RDS
     #                   User Guide</i>.</p>
     #   @return [Types::BlueGreenDeployment]
     class SwitchoverBlueGreenDeploymentResponse < Struct.new(
+      nil,
       :blue_green_deployment,
       keyword_init: true
     )
@@ -26100,6 +26661,7 @@ module Aws::RDS
     #            </ul>
     #   @return [String]
     class SwitchoverDetail < Struct.new(
+      nil,
       :source_member,
       :target_member,
       :status,
@@ -26122,6 +26684,7 @@ module Aws::RDS
     #          Aurora can locate the cluster in its Amazon Web Services Region.</p>
     #   @return [String]
     class SwitchoverGlobalClusterMessage < Struct.new(
+      nil,
       :global_cluster_identifier,
       :target_db_cluster_identifier,
       keyword_init: true
@@ -26133,6 +26696,7 @@ module Aws::RDS
     #   <p>A data type representing an Aurora global database.</p>
     #   @return [Types::GlobalCluster]
     class SwitchoverGlobalClusterResult < Struct.new(
+      nil,
       :global_cluster,
       keyword_init: true
     )
@@ -26149,6 +26713,7 @@ module Aws::RDS
     #            </ul>
     #   @return [String]
     class SwitchoverReadReplicaMessage < Struct.new(
+      nil,
       :db_instance_identifier,
       keyword_init: true
     )
@@ -26164,6 +26729,7 @@ module Aws::RDS
     #             <code>StartDBInstance</code>, and <code>StopDBInstance</code>.</p>
     #   @return [Types::DBInstance]
     class SwitchoverReadReplicaResult < Struct.new(
+      nil,
       :db_instance,
       keyword_init: true
     )
@@ -26182,6 +26748,7 @@ module Aws::RDS
     #   <p>A value is the optional value of the tag. The string value can be from 1 to 256 Unicode characters in length and can't be prefixed with <code>aws:</code> or <code>rds:</code>. The string can only contain only the set of Unicode letters, digits, white-space, '_', '.', ':', '/', '=', '+', '-', '@' (Java regex: "^([\\p{L}\\p{Z}\\p{N}_.:/=+\\-@]*)$").</p>
     #   @return [String]
     class Tag < Struct.new(
+      nil,
       :key,
       :value,
       keyword_init: true
@@ -26194,6 +26761,7 @@ module Aws::RDS
     #   <p>List of tags returned by the <code>ListTagsForResource</code> operation.</p>
     #   @return [Array<Types::Tag>]
     class TagListMessage < Struct.new(
+      nil,
       :tag_list,
       keyword_init: true
     )
@@ -26216,6 +26784,7 @@ module Aws::RDS
     #               If the <code>State</code> is <code>AVAILABLE</code>, a description is not included.</p>
     #   @return [String]
     class TargetHealth < Struct.new(
+      nil,
       :state,
       :reason,
       :description,
@@ -26277,6 +26846,7 @@ module Aws::RDS
     #               </p>
     #   @return [Array<Types::Tag>]
     class TenantDatabase < Struct.new(
+      nil,
       :tenant_database_create_time,
       :db_instance_identifier,
       :tenant_db_name,
@@ -26301,6 +26871,7 @@ module Aws::RDS
     # @!attribute message
     #   @return [String]
     class TenantDatabaseAlreadyExistsFault < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -26311,6 +26882,7 @@ module Aws::RDS
     # @!attribute message
     #   @return [String]
     class TenantDatabaseNotFoundFault < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -26326,6 +26898,7 @@ module Aws::RDS
     #   <p>The name of the tenant database.</p>
     #   @return [String]
     class TenantDatabasePendingModifiedValues < Struct.new(
+      nil,
       :master_user_password,
       :tenant_db_name,
       keyword_init: true
@@ -26338,6 +26911,7 @@ module Aws::RDS
     # @!attribute message
     #   @return [String]
     class TenantDatabaseQuotaExceededFault < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -26355,6 +26929,7 @@ module Aws::RDS
     #               operation.</p>
     #   @return [Array<Types::TenantDatabase>]
     class TenantDatabasesMessage < Struct.new(
+      nil,
       :marker,
       :tenant_databases,
       keyword_init: true
@@ -26374,6 +26949,7 @@ module Aws::RDS
     #   <p>The name of the time zone.</p>
     #   @return [String]
     class Timezone < Struct.new(
+      nil,
       :timezone_name,
       keyword_init: true
     )
@@ -26384,6 +26960,7 @@ module Aws::RDS
     # @!attribute message
     #   @return [String]
     class UnsupportedDBEngineVersionFault < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -26432,6 +27009,7 @@ module Aws::RDS
     #               Amazon Redshift.</p>
     #   @return [Boolean]
     class UpgradeTarget < Struct.new(
+      nil,
       :engine,
       :engine_version,
       :description,
@@ -26485,6 +27063,7 @@ module Aws::RDS
     #            </ul>
     #   @return [String]
     class UserAuthConfig < Struct.new(
+      nil,
       :description,
       :user_name,
       :auth_scheme,
@@ -26517,6 +27096,7 @@ module Aws::RDS
     #   <p>The type of authentication the proxy uses for connections from clients.</p>
     #   @return [String]
     class UserAuthConfigInfo < Struct.new(
+      nil,
       :description,
       :user_name,
       :auth_scheme,
@@ -26543,6 +27123,7 @@ module Aws::RDS
     #   <p>Indicates whether a DB instance supports using a dedicated log volume (DLV).</p>
     #   @return [Boolean]
     class ValidDBInstanceModificationsMessage < Struct.new(
+      nil,
       :storage,
       :valid_processor_features,
       :supports_dedicated_log_volume,
@@ -26583,6 +27164,7 @@ module Aws::RDS
     #   <p>Indicates whether or not Amazon RDS can automatically scale storage for DB instances that use the new instance class.</p>
     #   @return [Boolean]
     class ValidStorageOptions < Struct.new(
+      nil,
       :storage_type,
       :storage_size,
       :provisioned_iops,
@@ -26604,6 +27186,7 @@ module Aws::RDS
     #            <p>Currently, the only valid status is <code>active</code>.</p>
     #   @return [String]
     class VpcSecurityGroupMembership < Struct.new(
+      nil,
       :vpc_security_group_id,
       :status,
       keyword_init: true

@@ -77,6 +77,7 @@ module Aws::MarketplaceAgreement
     #   <p>The AWS account ID of the acceptor.</p>
     #   @return [String]
     class Acceptor < Struct.new(
+      nil,
       :account_id,
       keyword_init: true
     )
@@ -90,6 +91,7 @@ module Aws::MarketplaceAgreement
     # @!attribute message
     #   @return [String]
     class AccessDeniedException < Struct.new(
+      nil,
       :request_id,
       :message,
       keyword_init: true
@@ -132,6 +134,7 @@ module Aws::MarketplaceAgreement
     #   <p>The current status of the agreement. </p>
     #   @return [String]
     class AgreementViewSummary < Struct.new(
+      nil,
       :agreement_id,
       :acceptance_time,
       :start_time,
@@ -153,6 +156,7 @@ module Aws::MarketplaceAgreement
     #   <p>Type of the term being updated.</p>
     #   @return [String]
     class ByolPricingTerm < Struct.new(
+      nil,
       :type,
       keyword_init: true
     )
@@ -174,6 +178,7 @@ module Aws::MarketplaceAgreement
     #   <p>Additional parameters specified by the acceptor while accepting the term.</p>
     #   @return [Types::ConfigurableUpfrontPricingTermConfiguration]
     class ConfigurableUpfrontPricingTerm < Struct.new(
+      nil,
       :type,
       :currency_code,
       :rate_cards,
@@ -194,6 +199,7 @@ module Aws::MarketplaceAgreement
     #            dimensions presented in the rate card.</p>
     #   @return [Array<Types::Dimension>]
     class ConfigurableUpfrontPricingTermConfiguration < Struct.new(
+      nil,
       :selector_value,
       :dimensions,
       keyword_init: true
@@ -212,6 +218,7 @@ module Aws::MarketplaceAgreement
     #   <p>Defines the per unit rates for product dimensions.</p>
     #   @return [Array<Types::RateCardItem>]
     class ConfigurableUpfrontRateCardItem < Struct.new(
+      nil,
       :selector,
       :constraints,
       :rate_card,
@@ -232,6 +239,7 @@ module Aws::MarketplaceAgreement
     #            value is <code>Allowed</code>.</p>
     #   @return [String]
     class Constraints < Struct.new(
+      nil,
       :multiple_dimension_selection,
       :quantity_configuration,
       keyword_init: true
@@ -243,6 +251,7 @@ module Aws::MarketplaceAgreement
     #   <p>The unique identifier of the agreement.</p>
     #   @return [String]
     class DescribeAgreementInput < Struct.new(
+      nil,
       :agreement_id,
       keyword_init: true
     )
@@ -336,6 +345,7 @@ module Aws::MarketplaceAgreement
     #            </ul>
     #   @return [String]
     class DescribeAgreementOutput < Struct.new(
+      nil,
       :agreement_id,
       :acceptor,
       :proposer,
@@ -366,6 +376,7 @@ module Aws::MarketplaceAgreement
     #            </note>
     #   @return [Integer]
     class Dimension < Struct.new(
+      nil,
       :dimension_key,
       :dimension_value,
       keyword_init: true
@@ -415,6 +426,7 @@ module Aws::MarketplaceAgreement
     #   <p>Version of standard contracts provided by AWS Marketplace. Required when Type is <code>StandardEula</code> or <code>StandardDsa</code>. </p>
     #   @return [String]
     class DocumentItem < Struct.new(
+      nil,
       :type,
       :url,
       :version,
@@ -449,6 +461,7 @@ module Aws::MarketplaceAgreement
     #            </note>
     #   @return [String]
     class EstimatedCharges < Struct.new(
+      nil,
       :currency_code,
       :agreement_value,
       keyword_init: true
@@ -466,6 +479,7 @@ module Aws::MarketplaceAgreement
     #   <p>The filter value.</p>
     #   @return [Array<String>]
     class Filter < Struct.new(
+      nil,
       :name,
       :values,
       keyword_init: true
@@ -492,6 +506,7 @@ module Aws::MarketplaceAgreement
     #            execution.</p>
     #   @return [Array<Types::GrantItem>]
     class FixedUpfrontPricingTerm < Struct.new(
+      nil,
       :type,
       :currency_code,
       :duration,
@@ -515,6 +530,7 @@ module Aws::MarketplaceAgreement
     #            execution.</p>
     #   @return [Array<Types::GrantItem>]
     class FreeTrialPricingTerm < Struct.new(
+      nil,
       :type,
       :duration,
       :grants,
@@ -533,6 +549,7 @@ module Aws::MarketplaceAgreement
     #   <p>A token to specify where to start pagination</p>
     #   @return [String]
     class GetAgreementTermsInput < Struct.new(
+      nil,
       :agreement_id,
       :max_results,
       :next_token,
@@ -549,6 +566,7 @@ module Aws::MarketplaceAgreement
     #   <p>A token to specify where to start pagination</p>
     #   @return [String]
     class GetAgreementTermsOutput < Struct.new(
+      nil,
       :accepted_terms,
       :next_token,
       keyword_init: true
@@ -564,6 +582,7 @@ module Aws::MarketplaceAgreement
     #   <p>Maximum amount of capacity that the buyer can be entitled to the given dimension of the product. If <code>MaxQuantity</code> is not provided, the buyer will be able to use an unlimited amount of the given dimension. </p>
     #   @return [Integer]
     class GrantItem < Struct.new(
+      nil,
       :dimension_key,
       :max_quantity,
       keyword_init: true
@@ -583,6 +602,7 @@ module Aws::MarketplaceAgreement
     # @!attribute message
     #   @return [String]
     class InternalServerException < Struct.new(
+      nil,
       :request_id,
       :message,
       keyword_init: true
@@ -600,6 +620,7 @@ module Aws::MarketplaceAgreement
     #            EULA.</p>
     #   @return [Array<Types::DocumentItem>]
     class LegalTerm < Struct.new(
+      nil,
       :type,
       :documents,
       keyword_init: true
@@ -621,6 +642,7 @@ module Aws::MarketplaceAgreement
     #            contains the information necessary for calculating the price.</p>
     #   @return [Array<Types::ScheduleItem>]
     class PaymentScheduleTerm < Struct.new(
+      nil,
       :type,
       :currency_code,
       :schedule,
@@ -637,6 +659,7 @@ module Aws::MarketplaceAgreement
     #   <p>The unique identifier of the offer in AWS Marketplace.</p>
     #   @return [String]
     class ProposalSummary < Struct.new(
+      nil,
       :resources,
       :offer_id,
       keyword_init: true
@@ -650,6 +673,7 @@ module Aws::MarketplaceAgreement
     #   <p>The AWS account ID of the proposer.</p>
     #   @return [String]
     class Proposer < Struct.new(
+      nil,
       :account_id,
       keyword_init: true
     )
@@ -664,6 +688,7 @@ module Aws::MarketplaceAgreement
     #   <p>Per unit price for the product dimension that’s used for calculating the amount to be charged.</p>
     #   @return [String]
     class RateCardItem < Struct.new(
+      nil,
       :dimension_key,
       :price,
       keyword_init: true
@@ -686,6 +711,7 @@ module Aws::MarketplaceAgreement
     #   <p>Amount charged to the buyer every billing period.</p>
     #   @return [String]
     class RecurringPaymentTerm < Struct.new(
+      nil,
       :type,
       :currency_code,
       :billing_period,
@@ -710,6 +736,7 @@ module Aws::MarketplaceAgreement
     #   <p>Additional parameters specified by the acceptor while accepting the term.</p>
     #   @return [Types::RenewalTermConfiguration]
     class RenewalTerm < Struct.new(
+      nil,
       :type,
       :configuration,
       keyword_init: true
@@ -723,6 +750,7 @@ module Aws::MarketplaceAgreement
     #            lifecycle. Can be set to <code>True</code> or <code>False</code>.</p>
     #   @return [Boolean]
     class RenewalTermConfiguration < Struct.new(
+      nil,
       :enable_auto_renew,
       keyword_init: true
     )
@@ -742,6 +770,7 @@ module Aws::MarketplaceAgreement
     #               <code>AmiProduct</code>.</p>
     #   @return [String]
     class Resource < Struct.new(
+      nil,
       :id,
       :type,
       keyword_init: true
@@ -762,6 +791,7 @@ module Aws::MarketplaceAgreement
     #   <p>The type of resource.</p>
     #   @return [String]
     class ResourceNotFoundException < Struct.new(
+      nil,
       :request_id,
       :message,
       :resource_id,
@@ -779,6 +809,7 @@ module Aws::MarketplaceAgreement
     #   <p>The price that the customer would pay on the scheduled date (chargeDate).</p>
     #   @return [String]
     class ScheduleItem < Struct.new(
+      nil,
       :charge_date,
       :charge_amount,
       keyword_init: true
@@ -855,6 +886,7 @@ module Aws::MarketplaceAgreement
     #   <p>A token to specify where to start pagination.</p>
     #   @return [String]
     class SearchAgreementsInput < Struct.new(
+      nil,
       :catalog,
       :filters,
       :sort,
@@ -874,6 +906,7 @@ module Aws::MarketplaceAgreement
     #            results.</p>
     #   @return [String]
     class SearchAgreementsOutput < Struct.new(
+      nil,
       :agreement_view_summaries,
       :next_token,
       keyword_init: true
@@ -890,6 +923,7 @@ module Aws::MarketplaceAgreement
     #   <p>Contract duration. This field supports the ISO 8601 format. </p>
     #   @return [String]
     class Selector < Struct.new(
+      nil,
       :type,
       :value,
       keyword_init: true
@@ -908,6 +942,7 @@ module Aws::MarketplaceAgreement
     #            default value is <code>DESCENDING</code>.</p>
     #   @return [String]
     class Sort < Struct.new(
+      nil,
       :sort_by,
       :sort_order,
       keyword_init: true
@@ -925,6 +960,7 @@ module Aws::MarketplaceAgreement
     #            is on the website and console.</p>
     #   @return [String]
     class SupportTerm < Struct.new(
+      nil,
       :type,
       :refund_policy,
       keyword_init: true
@@ -939,6 +975,7 @@ module Aws::MarketplaceAgreement
     # @!attribute message
     #   @return [String]
     class ThrottlingException < Struct.new(
+      nil,
       :request_id,
       :message,
       keyword_init: true
@@ -958,6 +995,7 @@ module Aws::MarketplaceAgreement
     #   <p>List of rate cards.</p>
     #   @return [Array<Types::UsageBasedRateCardItem>]
     class UsageBasedPricingTerm < Struct.new(
+      nil,
       :type,
       :currency_code,
       :rate_cards,
@@ -971,6 +1009,7 @@ module Aws::MarketplaceAgreement
     #   <p>Defines the per unit rates for product dimensions.</p>
     #   @return [Array<Types::RateCardItem>]
     class UsageBasedRateCardItem < Struct.new(
+      nil,
       :rate_card,
       keyword_init: true
     )
@@ -990,6 +1029,7 @@ module Aws::MarketplaceAgreement
     #   <p>The fields associated with the error.</p>
     #   @return [Array<Types::ValidationExceptionField>]
     class ValidationException < Struct.new(
+      nil,
       :request_id,
       :message,
       :reason,
@@ -1007,6 +1047,7 @@ module Aws::MarketplaceAgreement
     #   <p>See applicable actions.</p>
     #   @return [String]
     class ValidationExceptionField < Struct.new(
+      nil,
       :name,
       :message,
       keyword_init: true
@@ -1034,6 +1075,7 @@ module Aws::MarketplaceAgreement
     #            determined by the validity of individual terms.</p>
     #   @return [Time]
     class ValidityTerm < Struct.new(
+      nil,
       :type,
       :agreement_duration,
       :agreement_start_date,

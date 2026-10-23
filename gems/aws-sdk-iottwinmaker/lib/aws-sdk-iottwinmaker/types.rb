@@ -10,6 +10,7 @@ module Aws::IoTTwinMaker
     # @!attribute message
     #   @return [String]
     class AccessDeniedException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -28,6 +29,7 @@ module Aws::IoTTwinMaker
     #               <code>BatchPutProperty</code> action.</p>
     #   @return [Types::PropertyValueEntry]
     class BatchPutPropertyError < Struct.new(
+      nil,
       :error_code,
       :error_message,
       :entry,
@@ -43,6 +45,7 @@ module Aws::IoTTwinMaker
     #               <code>BatchPutProperty</code> action.</p>
     #   @return [Array<Types::BatchPutPropertyError>]
     class BatchPutPropertyErrorEntry < Struct.new(
+      nil,
       :errors,
       keyword_init: true
     )
@@ -57,6 +60,7 @@ module Aws::IoTTwinMaker
     #            mapping must be unique to this object.</p>
     #   @return [Array<Types::PropertyValueEntry>]
     class BatchPutPropertyValuesInput < Struct.new(
+      nil,
       :workspace_id,
       :entries,
       keyword_init: true
@@ -68,6 +72,7 @@ module Aws::IoTTwinMaker
     #   <p>Entries that caused errors in the batch put operation.</p>
     #   @return [Array<Types::BatchPutPropertyErrorEntry>]
     class BatchPutPropertyValuesOutput < Struct.new(
+      nil,
       :error_entries,
       keyword_init: true
     )
@@ -82,6 +87,7 @@ module Aws::IoTTwinMaker
     #   <p>The pricing tier.</p>
     #   @return [String]
     class BundleInformation < Struct.new(
+      nil,
       :bundle_names,
       :pricing_tier,
       keyword_init: true
@@ -93,6 +99,7 @@ module Aws::IoTTwinMaker
     #   <p>The metadata transfer job Id.</p>
     #   @return [String]
     class CancelMetadataTransferJobRequest < Struct.new(
+      nil,
       :metadata_transfer_job_id,
       keyword_init: true
     )
@@ -115,6 +122,7 @@ module Aws::IoTTwinMaker
     #   <p>The metadata transfer job's progress.</p>
     #   @return [Types::MetadataTransferJobProgress]
     class CancelMetadataTransferJobResponse < Struct.new(
+      nil,
       :metadata_transfer_job_id,
       :arn,
       :update_date_time,
@@ -133,6 +141,7 @@ module Aws::IoTTwinMaker
     #   <p>The type of the column description.</p>
     #   @return [String]
     class ColumnDescription < Struct.new(
+      nil,
       :name,
       :type,
       keyword_init: true
@@ -151,6 +160,7 @@ module Aws::IoTTwinMaker
     #   <p>The update type.</p>
     #   @return [String]
     class ComponentPropertyGroupRequest < Struct.new(
+      nil,
       :group_type,
       :property_names,
       :update_type,
@@ -171,6 +181,7 @@ module Aws::IoTTwinMaker
     #            entity</p>
     #   @return [Boolean]
     class ComponentPropertyGroupResponse < Struct.new(
+      nil,
       :group_type,
       :property_names,
       :is_inherited,
@@ -194,6 +205,7 @@ module Aws::IoTTwinMaker
     #   <p>The property groups.</p>
     #   @return [Hash<String, Types::ComponentPropertyGroupRequest>]
     class ComponentRequest < Struct.new(
+      nil,
       :description,
       :component_type_id,
       :properties,
@@ -242,6 +254,7 @@ module Aws::IoTTwinMaker
     #             response.</p>
     #   @return [Boolean]
     class ComponentResponse < Struct.new(
+      nil,
       :component_name,
       :description,
       :component_type_id,
@@ -284,6 +297,7 @@ module Aws::IoTTwinMaker
     #   <p>This string specifies the path to the composite component, starting from the top-level component.</p>
     #   @return [String]
     class ComponentSummary < Struct.new(
+      nil,
       :component_name,
       :component_type_id,
       :defined_in,
@@ -320,6 +334,7 @@ module Aws::IoTTwinMaker
     #   <p>The component type name.</p>
     #   @return [String]
     class ComponentTypeSummary < Struct.new(
+      nil,
       :arn,
       :component_type_id,
       :creation_date_time,
@@ -350,6 +365,7 @@ module Aws::IoTTwinMaker
     #   <p>The property group updates.</p>
     #   @return [Hash<String, Types::ComponentPropertyGroupRequest>]
     class ComponentUpdateRequest < Struct.new(
+      nil,
       :update_type,
       :description,
       :component_type_id,
@@ -372,6 +388,7 @@ module Aws::IoTTwinMaker
     #   <p>The property groups.</p>
     #   @return [Hash<String, Types::ComponentPropertyGroupRequest>]
     class CompositeComponentRequest < Struct.new(
+      nil,
       :description,
       :properties,
       :property_groups,
@@ -385,6 +402,7 @@ module Aws::IoTTwinMaker
     #   <p>This is the <code>componentTypeId</code> that the <code>compositeComponentType</code> refers to.</p>
     #   @return [String]
     class CompositeComponentTypeRequest < Struct.new(
+      nil,
       :component_type_id,
       keyword_init: true
     )
@@ -399,6 +417,7 @@ module Aws::IoTTwinMaker
     #   <p>This boolean indicates whether this <code>compositeComponentType</code> is inherited from its parent.</p>
     #   @return [Boolean]
     class CompositeComponentTypeResponse < Struct.new(
+      nil,
       :component_type_id,
       :is_inherited,
       keyword_init: true
@@ -420,6 +439,7 @@ module Aws::IoTTwinMaker
     #   <p>The property group updates.</p>
     #   @return [Hash<String, Types::ComponentPropertyGroupRequest>]
     class CompositeComponentUpdateRequest < Struct.new(
+      nil,
       :update_type,
       :description,
       :property_updates,
@@ -433,6 +453,7 @@ module Aws::IoTTwinMaker
     # @!attribute message
     #   @return [String]
     class ConflictException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -443,6 +464,7 @@ module Aws::IoTTwinMaker
     # @!attribute message
     #   @return [String]
     class ConnectorFailureException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -453,6 +475,7 @@ module Aws::IoTTwinMaker
     # @!attribute message
     #   @return [String]
     class ConnectorTimeoutException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -497,6 +520,7 @@ module Aws::IoTTwinMaker
     #             <code>CompositeComponentType</code> is referenced by <code>componentTypeId</code>.</p>
     #   @return [Hash<String, Types::CompositeComponentTypeRequest>]
     class CreateComponentTypeInput < Struct.new(
+      nil,
       :workspace_id,
       :is_singleton,
       :component_type_id,
@@ -523,6 +547,7 @@ module Aws::IoTTwinMaker
     #   <p>The current state of the component type.</p>
     #   @return [String]
     class CreateComponentTypeOutput < Struct.new(
+      nil,
       :arn,
       :creation_date_time,
       :state,
@@ -558,6 +583,7 @@ module Aws::IoTTwinMaker
     #   <p>Metadata that you can use to manage the entity.</p>
     #   @return [Hash<String, String>]
     class CreateEntityInput < Struct.new(
+      nil,
       :workspace_id,
       :entity_id,
       :entity_name,
@@ -584,6 +610,7 @@ module Aws::IoTTwinMaker
     #   <p>The current state of the entity.</p>
     #   @return [String]
     class CreateEntityOutput < Struct.new(
+      nil,
       :entity_id,
       :arn,
       :creation_date_time,
@@ -606,6 +633,7 @@ module Aws::IoTTwinMaker
     #   <p>The metadata transfer job destination.</p>
     #   @return [Types::DestinationConfiguration]
     class CreateMetadataTransferJobRequest < Struct.new(
+      nil,
       :metadata_transfer_job_id,
       :description,
       :sources,
@@ -628,6 +656,7 @@ module Aws::IoTTwinMaker
     #   <p>The metadata transfer job response status.</p>
     #   @return [Types::MetadataTransferJobStatus]
     class CreateMetadataTransferJobResponse < Struct.new(
+      nil,
       :metadata_transfer_job_id,
       :arn,
       :creation_date_time,
@@ -659,6 +688,7 @@ module Aws::IoTTwinMaker
     #   <p>The request metadata.</p>
     #   @return [Hash<String, String>]
     class CreateSceneInput < Struct.new(
+      nil,
       :workspace_id,
       :scene_id,
       :content_location,
@@ -678,6 +708,7 @@ module Aws::IoTTwinMaker
     #   <p>The date and time when the scene was created.</p>
     #   @return [Time]
     class CreateSceneOutput < Struct.new(
+      nil,
       :arn,
       :creation_date_time,
       keyword_init: true
@@ -702,6 +733,7 @@ module Aws::IoTTwinMaker
     #   <p>The SyncJob tags.</p>
     #   @return [Hash<String, String>]
     class CreateSyncJobInput < Struct.new(
+      nil,
       :workspace_id,
       :sync_source,
       :sync_role,
@@ -721,6 +753,7 @@ module Aws::IoTTwinMaker
     #   <p>The SyncJob response state.</p>
     #   @return [String]
     class CreateSyncJobOutput < Struct.new(
+      nil,
       :arn,
       :creation_date_time,
       :state,
@@ -746,6 +779,7 @@ module Aws::IoTTwinMaker
     #   <p>Metadata that you can use to manage the workspace</p>
     #   @return [Hash<String, String>]
     class CreateWorkspaceInput < Struct.new(
+      nil,
       :workspace_id,
       :description,
       :s3_location,
@@ -763,6 +797,7 @@ module Aws::IoTTwinMaker
     #   <p>The date and time when the workspace was created.</p>
     #   @return [Time]
     class CreateWorkspaceOutput < Struct.new(
+      nil,
       :arn,
       :creation_date_time,
       keyword_init: true
@@ -779,6 +814,7 @@ module Aws::IoTTwinMaker
     #            TwinMaker.</p>
     #   @return [Boolean]
     class DataConnector < Struct.new(
+      nil,
       :lambda,
       :is_native,
       keyword_init: true
@@ -803,6 +839,7 @@ module Aws::IoTTwinMaker
     #   <p>A relationship that associates a component with another component.</p>
     #   @return [Types::Relationship]
     class DataType < Struct.new(
+      nil,
       :type,
       :nested_type,
       :allowed_values,
@@ -842,6 +879,7 @@ module Aws::IoTTwinMaker
     #   <p>An expression that produces the value.</p>
     #   @return [String]
     class DataValue < Struct.new(
+      nil,
       :boolean_value,
       :double_value,
       :integer_value,
@@ -863,6 +901,7 @@ module Aws::IoTTwinMaker
     #   <p>The ID of the component type to delete.</p>
     #   @return [String]
     class DeleteComponentTypeInput < Struct.new(
+      nil,
       :workspace_id,
       :component_type_id,
       keyword_init: true
@@ -874,6 +913,7 @@ module Aws::IoTTwinMaker
     #   <p>The current state of the component type to be deleted.</p>
     #   @return [String]
     class DeleteComponentTypeOutput < Struct.new(
+      nil,
       :state,
       keyword_init: true
     )
@@ -890,6 +930,7 @@ module Aws::IoTTwinMaker
     #   <p>A Boolean value that specifies whether the operation deletes child entities.</p>
     #   @return [Boolean]
     class DeleteEntityInput < Struct.new(
+      nil,
       :workspace_id,
       :entity_id,
       :is_recursive,
@@ -902,6 +943,7 @@ module Aws::IoTTwinMaker
     #   <p>The current state of the deleted entity.</p>
     #   @return [String]
     class DeleteEntityOutput < Struct.new(
+      nil,
       :state,
       keyword_init: true
     )
@@ -915,6 +957,7 @@ module Aws::IoTTwinMaker
     #   <p>The ID of the scene to delete.</p>
     #   @return [String]
     class DeleteSceneInput < Struct.new(
+      nil,
       :workspace_id,
       :scene_id,
       keyword_init: true
@@ -923,6 +966,7 @@ module Aws::IoTTwinMaker
     end
 
     class DeleteSceneOutput < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -938,6 +982,7 @@ module Aws::IoTTwinMaker
     #            </note>
     #   @return [String]
     class DeleteSyncJobInput < Struct.new(
+      nil,
       :workspace_id,
       :sync_source,
       keyword_init: true
@@ -949,6 +994,7 @@ module Aws::IoTTwinMaker
     #   <p>The SyncJob response state.</p>
     #   @return [String]
     class DeleteSyncJobOutput < Struct.new(
+      nil,
       :state,
       keyword_init: true
     )
@@ -959,6 +1005,7 @@ module Aws::IoTTwinMaker
     #   <p>The ID of the workspace to delete.</p>
     #   @return [String]
     class DeleteWorkspaceInput < Struct.new(
+      nil,
       :workspace_id,
       keyword_init: true
     )
@@ -969,6 +1016,7 @@ module Aws::IoTTwinMaker
     #   <p>The string that specifies the delete result for the workspace.</p>
     #   @return [String]
     class DeleteWorkspaceOutput < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -986,6 +1034,7 @@ module Aws::IoTTwinMaker
     #   <p>The metadata transfer job Amazon Web Services IoT TwinMaker configuration.</p>
     #   @return [Types::IotTwinMakerDestinationConfiguration]
     class DestinationConfiguration < Struct.new(
+      nil,
       :type,
       :s3_configuration,
       :iot_twin_maker_configuration,
@@ -1012,6 +1061,7 @@ module Aws::IoTTwinMaker
     #   <p>The name of the property.</p>
     #   @return [String]
     class EntityPropertyReference < Struct.new(
+      nil,
       :component_name,
       :component_path,
       :external_id_property,
@@ -1051,6 +1101,7 @@ module Aws::IoTTwinMaker
     #   <p>The last date and time when the entity was updated.</p>
     #   @return [Time]
     class EntitySummary < Struct.new(
+      nil,
       :entity_id,
       :entity_name,
       :arn,
@@ -1073,6 +1124,7 @@ module Aws::IoTTwinMaker
     #   <p>The error message.</p>
     #   @return [String]
     class ErrorDetails < Struct.new(
+      nil,
       :code,
       :message,
       keyword_init: true
@@ -1093,6 +1145,7 @@ module Aws::IoTTwinMaker
     #   <p>The string that specifies the next page of results.</p>
     #   @return [String]
     class ExecuteQueryInput < Struct.new(
+      nil,
       :workspace_id,
       :query_statement,
       :max_results,
@@ -1112,6 +1165,7 @@ module Aws::IoTTwinMaker
     #   <p>The string that specifies the next page of results.</p>
     #   @return [String]
     class ExecuteQueryOutput < Struct.new(
+      nil,
       :column_descriptions,
       :rows,
       :next_token,
@@ -1134,6 +1188,7 @@ module Aws::IoTTwinMaker
     #   <p>Boolean to include the asset model.</p>
     #   @return [Boolean]
     class FilterByAsset < Struct.new(
+      nil,
       :asset_id,
       :asset_external_id,
       :include_offspring,
@@ -1157,6 +1212,7 @@ module Aws::IoTTwinMaker
     #   <p>Bolean to include assets.</p>
     #   @return [Boolean]
     class FilterByAssetModel < Struct.new(
+      nil,
       :asset_model_id,
       :asset_model_external_id,
       :include_offspring,
@@ -1171,6 +1227,7 @@ module Aws::IoTTwinMaker
     #   <p>The component type Id.</p>
     #   @return [String]
     class FilterByComponentType < Struct.new(
+      nil,
       :component_type_id,
       keyword_init: true
     )
@@ -1182,6 +1239,7 @@ module Aws::IoTTwinMaker
     #   <p>The entity Id.</p>
     #   @return [String]
     class FilterByEntity < Struct.new(
+      nil,
       :entity_id,
       keyword_init: true
     )
@@ -1199,6 +1257,7 @@ module Aws::IoTTwinMaker
     #   <p>The data connector.</p>
     #   @return [Types::DataConnector]
     class FunctionRequest < Struct.new(
+      nil,
       :required_properties,
       :scope,
       :implemented_by,
@@ -1221,6 +1280,7 @@ module Aws::IoTTwinMaker
     #   <p>Indicates whether this function is inherited.</p>
     #   @return [Boolean]
     class FunctionResponse < Struct.new(
+      nil,
       :required_properties,
       :scope,
       :implemented_by,
@@ -1237,6 +1297,7 @@ module Aws::IoTTwinMaker
     #   <p>The ID of the component type.</p>
     #   @return [String]
     class GetComponentTypeInput < Struct.new(
+      nil,
       :workspace_id,
       :component_type_id,
       keyword_init: true
@@ -1301,6 +1362,7 @@ module Aws::IoTTwinMaker
     #   <p>This is an object that maps strings to <code>compositeComponentTypes</code> of the <code>componentType</code>. <code>CompositeComponentType</code> is referenced by <code>componentTypeId</code>.</p>
     #   @return [Hash<String, Types::CompositeComponentTypeResponse>]
     class GetComponentTypeOutput < Struct.new(
+      nil,
       :workspace_id,
       :is_singleton,
       :component_type_id,
@@ -1330,6 +1392,7 @@ module Aws::IoTTwinMaker
     #   <p>The ID of the entity.</p>
     #   @return [String]
     class GetEntityInput < Struct.new(
+      nil,
       :workspace_id,
       :entity_id,
       keyword_init: true
@@ -1378,6 +1441,7 @@ module Aws::IoTTwinMaker
     #   <p>This flag notes whether all components are returned in the API response. The maximum number of components returned is 30.</p>
     #   @return [Boolean]
     class GetEntityOutput < Struct.new(
+      nil,
       :entity_id,
       :entity_name,
       :arn,
@@ -1400,6 +1464,7 @@ module Aws::IoTTwinMaker
     #   <p>The metadata transfer job Id.</p>
     #   @return [String]
     class GetMetadataTransferJobRequest < Struct.new(
+      nil,
       :metadata_transfer_job_id,
       keyword_init: true
     )
@@ -1440,6 +1505,7 @@ module Aws::IoTTwinMaker
     #   <p>The metadata transfer job's progress.</p>
     #   @return [Types::MetadataTransferJobProgress]
     class GetMetadataTransferJobResponse < Struct.new(
+      nil,
       :metadata_transfer_job_id,
       :arn,
       :description,
@@ -1457,6 +1523,7 @@ module Aws::IoTTwinMaker
     end
 
     class GetPricingPlanInput < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1469,6 +1536,7 @@ module Aws::IoTTwinMaker
     #   <p>The pending pricing plan.</p>
     #   @return [Types::PricingPlan]
     class GetPricingPlanOutput < Struct.new(
+      nil,
       :current_pricing_plan,
       :pending_pricing_plan,
       keyword_init: true
@@ -1530,6 +1598,7 @@ module Aws::IoTTwinMaker
     #            <p>For more information about the ISO8601 DateTime format, see the data type <a href="https://docs.aws.amazon.com/iot-twinmaker/latest/apireference/API_PropertyValue.html">PropertyValue</a>.</p>
     #   @return [String]
     class GetPropertyValueHistoryInput < Struct.new(
+      nil,
       :workspace_id,
       :entity_id,
       :component_name,
@@ -1558,6 +1627,7 @@ module Aws::IoTTwinMaker
     #   <p>The string that specifies the next page of results.</p>
     #   @return [String]
     class GetPropertyValueHistoryOutput < Struct.new(
+      nil,
       :property_values,
       :next_token,
       keyword_init: true
@@ -1597,6 +1667,7 @@ module Aws::IoTTwinMaker
     #   <p>The tabular conditions.</p>
     #   @return [Types::TabularConditions]
     class GetPropertyValueInput < Struct.new(
+      nil,
       :component_name,
       :component_path,
       :component_type_id,
@@ -1623,6 +1694,7 @@ module Aws::IoTTwinMaker
     #   <p>A table of property values.</p>
     #   @return [Array<Array<Hash<String, Types::DataValue>>>]
     class GetPropertyValueOutput < Struct.new(
+      nil,
       :property_values,
       :next_token,
       :tabular_property_values,
@@ -1638,6 +1710,7 @@ module Aws::IoTTwinMaker
     #   <p>The ID of the scene.</p>
     #   @return [String]
     class GetSceneInput < Struct.new(
+      nil,
       :workspace_id,
       :scene_id,
       keyword_init: true
@@ -1679,6 +1752,7 @@ module Aws::IoTTwinMaker
     #   <p>The SceneResponse error.</p>
     #   @return [Types::SceneError]
     class GetSceneOutput < Struct.new(
+      nil,
       :workspace_id,
       :scene_id,
       :content_location,
@@ -1705,6 +1779,7 @@ module Aws::IoTTwinMaker
     #   <p>The workspace ID.</p>
     #   @return [String]
     class GetSyncJobInput < Struct.new(
+      nil,
       :sync_source,
       :workspace_id,
       keyword_init: true
@@ -1737,6 +1812,7 @@ module Aws::IoTTwinMaker
     #   <p>The update date and time.</p>
     #   @return [Time]
     class GetSyncJobOutput < Struct.new(
+      nil,
       :arn,
       :workspace_id,
       :sync_source,
@@ -1753,6 +1829,7 @@ module Aws::IoTTwinMaker
     #   <p>The ID of the workspace.</p>
     #   @return [String]
     class GetWorkspaceInput < Struct.new(
+      nil,
       :workspace_id,
       keyword_init: true
     )
@@ -1785,6 +1862,7 @@ module Aws::IoTTwinMaker
     #   <p>The date and time when the workspace was last updated.</p>
     #   @return [Time]
     class GetWorkspaceOutput < Struct.new(
+      nil,
       :workspace_id,
       :arn,
       :description,
@@ -1802,6 +1880,7 @@ module Aws::IoTTwinMaker
     # @!attribute message
     #   @return [String]
     class InternalServerException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -1816,6 +1895,7 @@ module Aws::IoTTwinMaker
     #   <p>The interpolation time interval in seconds.</p>
     #   @return [Integer]
     class InterpolationParameters < Struct.new(
+      nil,
       :interpolation_type,
       :interval_in_seconds,
       keyword_init: true
@@ -1828,6 +1908,7 @@ module Aws::IoTTwinMaker
     #   <p>The AWS IoT SiteWise soucre configuration filters.</p>
     #   @return [Array<Types::IotSiteWiseSourceConfigurationFilter>]
     class IotSiteWiseSourceConfiguration < Struct.new(
+      nil,
       :filters,
       keyword_init: true
     )
@@ -1859,6 +1940,7 @@ module Aws::IoTTwinMaker
     #   <p>The IoT TwinMaker workspace.</p>
     #   @return [String]
     class IotTwinMakerDestinationConfiguration < Struct.new(
+      nil,
       :workspace,
       keyword_init: true
     )
@@ -1873,6 +1955,7 @@ module Aws::IoTTwinMaker
     #   <p>The metadata transfer job AWS IoT TwinMaker source configuration filters.</p>
     #   @return [Array<Types::IotTwinMakerSourceConfigurationFilter>]
     class IotTwinMakerSourceConfiguration < Struct.new(
+      nil,
       :workspace,
       :filters,
       keyword_init: true
@@ -1905,6 +1988,7 @@ module Aws::IoTTwinMaker
     #   <p>The ARN of the Lambda function.</p>
     #   @return [String]
     class LambdaFunction < Struct.new(
+      nil,
       :arn,
       keyword_init: true
     )
@@ -1954,6 +2038,7 @@ module Aws::IoTTwinMaker
     #            <p>Valid Range: Minimum value of 1. Maximum value of 250.</p>
     #   @return [Integer]
     class ListComponentTypesInput < Struct.new(
+      nil,
       :workspace_id,
       :filters,
       :next_token,
@@ -1976,6 +2061,7 @@ module Aws::IoTTwinMaker
     #   <p>Specifies the maximum number of results to display.</p>
     #   @return [Integer]
     class ListComponentTypesOutput < Struct.new(
+      nil,
       :workspace_id,
       :component_type_summaries,
       :next_token,
@@ -2001,6 +2087,7 @@ module Aws::IoTTwinMaker
     #   <p>The string that specifies the next page of results.</p>
     #   @return [String]
     class ListComponentsRequest < Struct.new(
+      nil,
       :workspace_id,
       :entity_id,
       :component_path,
@@ -2018,6 +2105,7 @@ module Aws::IoTTwinMaker
     #   <p>The string that specifies the next page of component results.</p>
     #   @return [String]
     class ListComponentsResponse < Struct.new(
+      nil,
       :component_summaries,
       :next_token,
       keyword_init: true
@@ -2068,6 +2156,7 @@ module Aws::IoTTwinMaker
     #   <p>The string that specifies the next page of results.</p>
     #   @return [String]
     class ListEntitiesInput < Struct.new(
+      nil,
       :workspace_id,
       :filters,
       :max_results,
@@ -2084,6 +2173,7 @@ module Aws::IoTTwinMaker
     #   <p>The string that specifies the next page of results.</p>
     #   @return [String]
     class ListEntitiesOutput < Struct.new(
+      nil,
       :entity_summaries,
       :next_token,
       keyword_init: true
@@ -2127,6 +2217,7 @@ module Aws::IoTTwinMaker
     #   <p>The maximum number of results to return at one time.</p>
     #   @return [Integer]
     class ListMetadataTransferJobsRequest < Struct.new(
+      nil,
       :source_type,
       :destination_type,
       :filters,
@@ -2144,6 +2235,7 @@ module Aws::IoTTwinMaker
     #   <p>The string that specifies the next page of results.</p>
     #   @return [String]
     class ListMetadataTransferJobsResponse < Struct.new(
+      nil,
       :metadata_transfer_job_summaries,
       :next_token,
       keyword_init: true
@@ -2170,6 +2262,7 @@ module Aws::IoTTwinMaker
     #   <p>The string that specifies the next page of results.</p>
     #   @return [String]
     class ListPropertiesRequest < Struct.new(
+      nil,
       :workspace_id,
       :component_name,
       :component_path,
@@ -2188,6 +2281,7 @@ module Aws::IoTTwinMaker
     #   <p>The string that specifies the next page of property results.</p>
     #   @return [String]
     class ListPropertiesResponse < Struct.new(
+      nil,
       :property_summaries,
       :next_token,
       keyword_init: true
@@ -2205,6 +2299,7 @@ module Aws::IoTTwinMaker
     #   <p>The string that specifies the next page of results.</p>
     #   @return [String]
     class ListScenesInput < Struct.new(
+      nil,
       :workspace_id,
       :max_results,
       :next_token,
@@ -2220,6 +2315,7 @@ module Aws::IoTTwinMaker
     #   <p>The string that specifies the next page of results.</p>
     #   @return [String]
     class ListScenesOutput < Struct.new(
+      nil,
       :scene_summaries,
       :next_token,
       keyword_init: true
@@ -2238,6 +2334,7 @@ module Aws::IoTTwinMaker
     #   <p>The string that specifies the next page of results.</p>
     #   @return [String]
     class ListSyncJobsInput < Struct.new(
+      nil,
       :workspace_id,
       :max_results,
       :next_token,
@@ -2253,6 +2350,7 @@ module Aws::IoTTwinMaker
     #   <p>The string that specifies the next page of results.</p>
     #   @return [String]
     class ListSyncJobsOutput < Struct.new(
+      nil,
       :sync_job_summaries,
       :next_token,
       keyword_init: true
@@ -2292,6 +2390,7 @@ module Aws::IoTTwinMaker
     #   <p>The string that specifies the next page of results.</p>
     #   @return [String]
     class ListSyncResourcesInput < Struct.new(
+      nil,
       :workspace_id,
       :sync_source,
       :filters,
@@ -2309,6 +2408,7 @@ module Aws::IoTTwinMaker
     #   <p>The string that specifies the next page of results.</p>
     #   @return [String]
     class ListSyncResourcesOutput < Struct.new(
+      nil,
       :sync_resources,
       :next_token,
       keyword_init: true
@@ -2327,6 +2427,7 @@ module Aws::IoTTwinMaker
     #   <p>The string that specifies the next page of results.</p>
     #   @return [String]
     class ListTagsForResourceInput < Struct.new(
+      nil,
       :resource_arn,
       :max_results,
       :next_token,
@@ -2342,6 +2443,7 @@ module Aws::IoTTwinMaker
     #   <p>The string that specifies the next page of results.</p>
     #   @return [String]
     class ListTagsForResourceOutput < Struct.new(
+      nil,
       :tags,
       :next_token,
       keyword_init: true
@@ -2357,6 +2459,7 @@ module Aws::IoTTwinMaker
     #   <p>The string that specifies the next page of results.</p>
     #   @return [String]
     class ListWorkspacesInput < Struct.new(
+      nil,
       :max_results,
       :next_token,
       keyword_init: true
@@ -2371,6 +2474,7 @@ module Aws::IoTTwinMaker
     #   <p>The string that specifies the next page of results.</p>
     #   @return [String]
     class ListWorkspacesOutput < Struct.new(
+      nil,
       :workspace_summaries,
       :next_token,
       keyword_init: true
@@ -2392,6 +2496,7 @@ module Aws::IoTTwinMaker
     #   <p>The failed count.</p>
     #   @return [Integer]
     class MetadataTransferJobProgress < Struct.new(
+      nil,
       :total_count,
       :succeeded_count,
       :skipped_count,
@@ -2412,6 +2517,7 @@ module Aws::IoTTwinMaker
     #   <p>The queued position.</p>
     #   @return [Integer]
     class MetadataTransferJobStatus < Struct.new(
+      nil,
       :state,
       :error,
       :queued_position,
@@ -2440,6 +2546,7 @@ module Aws::IoTTwinMaker
     #   <p>The metadata transfer job summary progess.</p>
     #   @return [Types::MetadataTransferJobProgress]
     class MetadataTransferJobSummary < Struct.new(
+      nil,
       :metadata_transfer_job_id,
       :arn,
       :creation_date_time,
@@ -2460,6 +2567,7 @@ module Aws::IoTTwinMaker
     #   <p>The property name.</p>
     #   @return [String]
     class OrderBy < Struct.new(
+      nil,
       :order,
       :property_name,
       keyword_init: true
@@ -2475,6 +2583,7 @@ module Aws::IoTTwinMaker
     #   <p>The ID of the parent entity.</p>
     #   @return [String]
     class ParentEntityUpdateRequest < Struct.new(
+      nil,
       :update_type,
       :parent_entity_id,
       keyword_init: true
@@ -2502,6 +2611,7 @@ module Aws::IoTTwinMaker
     #   <p>The update reason for changing a pricing plan.</p>
     #   @return [String]
     class PricingPlan < Struct.new(
+      nil,
       :billable_entity_count,
       :bundle_information,
       :effective_date_time,
@@ -2541,6 +2651,7 @@ module Aws::IoTTwinMaker
     #   <p>A friendly name for the property.</p>
     #   @return [String]
     class PropertyDefinitionRequest < Struct.new(
+      nil,
       :data_type,
       :is_required_in_entity,
       :is_external_id,
@@ -2592,6 +2703,7 @@ module Aws::IoTTwinMaker
     #   <p>A friendly name for the property.</p>
     #   @return [String]
     class PropertyDefinitionResponse < Struct.new(
+      nil,
       :data_type,
       :is_time_series,
       :is_required_in_entity,
@@ -2619,6 +2731,7 @@ module Aws::IoTTwinMaker
     #   <p>The value associated with this property filter.</p>
     #   @return [Types::DataValue]
     class PropertyFilter < Struct.new(
+      nil,
       :property_name,
       :operator,
       :value,
@@ -2635,6 +2748,7 @@ module Aws::IoTTwinMaker
     #   <p>The names of properties.</p>
     #   @return [Array<String>]
     class PropertyGroupRequest < Struct.new(
+      nil,
       :group_type,
       :property_names,
       keyword_init: true
@@ -2654,6 +2768,7 @@ module Aws::IoTTwinMaker
     #            entity</p>
     #   @return [Boolean]
     class PropertyGroupResponse < Struct.new(
+      nil,
       :group_type,
       :property_names,
       :is_inherited,
@@ -2670,6 +2785,7 @@ module Aws::IoTTwinMaker
     #   <p>The value of the property.</p>
     #   @return [Types::DataValue]
     class PropertyLatestValue < Struct.new(
+      nil,
       :property_reference,
       :property_value,
       keyword_init: true
@@ -2688,6 +2804,7 @@ module Aws::IoTTwinMaker
     #   <p>The update type of the update property request.</p>
     #   @return [String]
     class PropertyRequest < Struct.new(
+      nil,
       :definition,
       :value,
       :update_type,
@@ -2707,6 +2824,7 @@ module Aws::IoTTwinMaker
     #   <p>This flag notes whether all values of a list or map type property are returned in the API response. The maximum number of values per property returned is 50.</p>
     #   @return [Boolean]
     class PropertyResponse < Struct.new(
+      nil,
       :definition,
       :value,
       :are_all_property_values_returned,
@@ -2730,6 +2848,7 @@ module Aws::IoTTwinMaker
     #             response. The maximum number of values per property returned is 50.</p>
     #   @return [Boolean]
     class PropertySummary < Struct.new(
+      nil,
       :definition,
       :property_name,
       :value,
@@ -2795,6 +2914,7 @@ module Aws::IoTTwinMaker
     #               <i>Required sub-fields</i>: YYYY-MM-DDThh:mm:ss and [Z/±HH:mm]</p>
     #   @return [String]
     class PropertyValue < Struct.new(
+      nil,
       :timestamp,
       :value,
       :time,
@@ -2812,6 +2932,7 @@ module Aws::IoTTwinMaker
     #   <p>A list of objects that specify time series property values.</p>
     #   @return [Array<Types::PropertyValue>]
     class PropertyValueEntry < Struct.new(
+      nil,
       :entity_property_reference,
       :property_values,
       keyword_init: true
@@ -2828,6 +2949,7 @@ module Aws::IoTTwinMaker
     #            series property.</p>
     #   @return [Array<Types::PropertyValue>]
     class PropertyValueHistory < Struct.new(
+      nil,
       :entity_property_reference,
       :values,
       keyword_init: true
@@ -2839,6 +2961,7 @@ module Aws::IoTTwinMaker
     # @!attribute message
     #   @return [String]
     class QueryTimeoutException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -2853,6 +2976,7 @@ module Aws::IoTTwinMaker
     #   <p>The type of the relationship.</p>
     #   @return [String]
     class Relationship < Struct.new(
+      nil,
       :target_component_type_id,
       :relationship_type,
       keyword_init: true
@@ -2868,6 +2992,7 @@ module Aws::IoTTwinMaker
     #   <p>The name of the target component associated with the relationship value.</p>
     #   @return [String]
     class RelationshipValue < Struct.new(
+      nil,
       :target_entity_id,
       :target_component_name,
       keyword_init: true
@@ -2879,6 +3004,7 @@ module Aws::IoTTwinMaker
     # @!attribute message
     #   @return [String]
     class ResourceNotFoundException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -2890,6 +3016,7 @@ module Aws::IoTTwinMaker
     #   <p>The data in a row of query results.</p>
     #   @return [Array<JSON>]
     class Row < Struct.new(
+      nil,
       :row_data,
       keyword_init: true
     )
@@ -2901,6 +3028,7 @@ module Aws::IoTTwinMaker
     #   <p>The S3 destination configuration location.</p>
     #   @return [String]
     class S3DestinationConfiguration < Struct.new(
+      nil,
       :location,
       keyword_init: true
     )
@@ -2912,6 +3040,7 @@ module Aws::IoTTwinMaker
     #   <p>The S3 destination source configuration location.</p>
     #   @return [String]
     class S3SourceConfiguration < Struct.new(
+      nil,
       :location,
       keyword_init: true
     )
@@ -2926,6 +3055,7 @@ module Aws::IoTTwinMaker
     #   <p>The SceneError message.</p>
     #   @return [String]
     class SceneError < Struct.new(
+      nil,
       :code,
       :message,
       keyword_init: true
@@ -2953,6 +3083,7 @@ module Aws::IoTTwinMaker
     #   <p>The scene description.</p>
     #   @return [String]
     class SceneSummary < Struct.new(
+      nil,
       :scene_id,
       :content_location,
       :arn,
@@ -2968,6 +3099,7 @@ module Aws::IoTTwinMaker
     # @!attribute message
     #   @return [String]
     class ServiceQuotaExceededException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -2988,6 +3120,7 @@ module Aws::IoTTwinMaker
     #   <p>The source configuration IoT TwinMaker configuration.</p>
     #   @return [Types::IotTwinMakerSourceConfiguration]
     class SourceConfiguration < Struct.new(
+      nil,
       :type,
       :s3_configuration,
       :iot_site_wise_configuration,
@@ -3006,6 +3139,7 @@ module Aws::IoTTwinMaker
     #   <p>The error message.</p>
     #   @return [Types::ErrorDetails]
     class Status < Struct.new(
+      nil,
       :state,
       :error,
       keyword_init: true
@@ -3021,6 +3155,7 @@ module Aws::IoTTwinMaker
     #   <p>The SyncJob error.</p>
     #   @return [Types::ErrorDetails]
     class SyncJobStatus < Struct.new(
+      nil,
       :state,
       :error,
       keyword_init: true
@@ -3048,6 +3183,7 @@ module Aws::IoTTwinMaker
     #   <p>The update date and time.</p>
     #   @return [Time]
     class SyncJobSummary < Struct.new(
+      nil,
       :arn,
       :workspace_id,
       :sync_source,
@@ -3097,6 +3233,7 @@ module Aws::IoTTwinMaker
     #   <p>The status error.</p>
     #   @return [Types::ErrorDetails]
     class SyncResourceStatus < Struct.new(
+      nil,
       :state,
       :error,
       keyword_init: true
@@ -3121,6 +3258,7 @@ module Aws::IoTTwinMaker
     #   <p>The update date and time.</p>
     #   @return [Time]
     class SyncResourceSummary < Struct.new(
+      nil,
       :resource_type,
       :external_id,
       :resource_id,
@@ -3144,6 +3282,7 @@ module Aws::IoTTwinMaker
     #            </p>
     #   @return [Array<Types::PropertyFilter>]
     class TabularConditions < Struct.new(
+      nil,
       :order_by,
       :property_filters,
       keyword_init: true
@@ -3158,6 +3297,7 @@ module Aws::IoTTwinMaker
     #   <p>Metadata to add to this resource.</p>
     #   @return [Hash<String, String>]
     class TagResourceInput < Struct.new(
+      nil,
       :resource_arn,
       :tags,
       keyword_init: true
@@ -3166,6 +3306,7 @@ module Aws::IoTTwinMaker
     end
 
     class TagResourceOutput < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -3175,6 +3316,7 @@ module Aws::IoTTwinMaker
     # @!attribute message
     #   @return [String]
     class ThrottlingException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -3185,6 +3327,7 @@ module Aws::IoTTwinMaker
     # @!attribute message
     #   @return [String]
     class TooManyTagsException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -3199,6 +3342,7 @@ module Aws::IoTTwinMaker
     #            the key and its associated value are removed.</p>
     #   @return [Array<String>]
     class UntagResourceInput < Struct.new(
+      nil,
       :resource_arn,
       :tag_keys,
       keyword_init: true
@@ -3207,6 +3351,7 @@ module Aws::IoTTwinMaker
     end
 
     class UntagResourceOutput < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -3247,6 +3392,7 @@ module Aws::IoTTwinMaker
     #             <code>CompositeComponentType</code> is referenced by <code>componentTypeId</code>.</p>
     #   @return [Hash<String, Types::CompositeComponentTypeRequest>]
     class UpdateComponentTypeInput < Struct.new(
+      nil,
       :workspace_id,
       :is_singleton,
       :component_type_id,
@@ -3275,6 +3421,7 @@ module Aws::IoTTwinMaker
     #   <p>The current state of the component type.</p>
     #   @return [String]
     class UpdateComponentTypeOutput < Struct.new(
+      nil,
       :workspace_id,
       :arn,
       :component_type_id,
@@ -3308,6 +3455,7 @@ module Aws::IoTTwinMaker
     #   <p>An object that describes the update request for a parent entity.</p>
     #   @return [Types::ParentEntityUpdateRequest]
     class UpdateEntityInput < Struct.new(
+      nil,
       :workspace_id,
       :entity_id,
       :entity_name,
@@ -3327,6 +3475,7 @@ module Aws::IoTTwinMaker
     #   <p>The current state of the entity update.</p>
     #   @return [String]
     class UpdateEntityOutput < Struct.new(
+      nil,
       :update_date_time,
       :state,
       keyword_init: true
@@ -3341,6 +3490,7 @@ module Aws::IoTTwinMaker
     #   <p>The bundle names.</p>
     #   @return [Array<String>]
     class UpdatePricingPlanInput < Struct.new(
+      nil,
       :pricing_mode,
       :bundle_names,
       keyword_init: true
@@ -3355,6 +3505,7 @@ module Aws::IoTTwinMaker
     #   <p>Update the pending pricing plan.</p>
     #   @return [Types::PricingPlan]
     class UpdatePricingPlanOutput < Struct.new(
+      nil,
       :current_pricing_plan,
       :pending_pricing_plan,
       keyword_init: true
@@ -3381,6 +3532,7 @@ module Aws::IoTTwinMaker
     #   <p>The scene metadata.</p>
     #   @return [Hash<String, String>]
     class UpdateSceneInput < Struct.new(
+      nil,
       :workspace_id,
       :scene_id,
       :content_location,
@@ -3396,6 +3548,7 @@ module Aws::IoTTwinMaker
     #   <p>The date and time when the scene was last updated.</p>
     #   @return [Time]
     class UpdateSceneOutput < Struct.new(
+      nil,
       :update_date_time,
       keyword_init: true
     )
@@ -3416,6 +3569,7 @@ module Aws::IoTTwinMaker
     #            stored.</p>
     #   @return [String]
     class UpdateWorkspaceInput < Struct.new(
+      nil,
       :workspace_id,
       :description,
       :role,
@@ -3429,6 +3583,7 @@ module Aws::IoTTwinMaker
     #   <p>The date and time of the current update.</p>
     #   @return [Time]
     class UpdateWorkspaceOutput < Struct.new(
+      nil,
       :update_date_time,
       keyword_init: true
     )
@@ -3439,6 +3594,7 @@ module Aws::IoTTwinMaker
     # @!attribute message
     #   @return [String]
     class ValidationException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -3465,6 +3621,7 @@ module Aws::IoTTwinMaker
     #   <p>The date and time when the workspace was last updated.</p>
     #   @return [Time]
     class WorkspaceSummary < Struct.new(
+      nil,
       :workspace_id,
       :arn,
       :description,

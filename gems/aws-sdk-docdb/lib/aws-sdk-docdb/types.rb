@@ -34,6 +34,7 @@ module Aws::DocDB
     #            </ul>
     #   @return [String]
     class AddSourceIdentifierToSubscriptionMessage < Struct.new(
+      nil,
       :subscription_name,
       :source_identifier,
       keyword_init: true
@@ -45,6 +46,7 @@ module Aws::DocDB
     #   <p>Detailed information about an event to which you have subscribed.</p>
     #   @return [Types::EventSubscription]
     class AddSourceIdentifierToSubscriptionResult < Struct.new(
+      nil,
       :event_subscription,
       keyword_init: true
     )
@@ -61,6 +63,7 @@ module Aws::DocDB
     #   <p>The tags to be assigned to the Amazon DocumentDB resource.</p>
     #   @return [Array<Types::Tag>]
     class AddTagsToResourceMessage < Struct.new(
+      nil,
       :resource_name,
       :tags,
       keyword_init: true
@@ -104,6 +107,7 @@ module Aws::DocDB
     #            </ul>
     #   @return [String]
     class ApplyPendingMaintenanceActionMessage < Struct.new(
+      nil,
       :resource_identifier,
       :apply_action,
       :opt_in_type,
@@ -117,6 +121,7 @@ module Aws::DocDB
     #           </p>
     #   @return [Types::ResourcePendingMaintenanceActions]
     class ApplyPendingMaintenanceActionResult < Struct.new(
+      nil,
       :resource_pending_maintenance_actions,
       keyword_init: true
     )
@@ -128,6 +133,7 @@ module Aws::DocDB
     # @!attribute message
     #   @return [String]
     class AuthorizationNotFoundFault < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -139,6 +145,7 @@ module Aws::DocDB
     #   <p>The name of the Availability Zone.</p>
     #   @return [String]
     class AvailabilityZone < Struct.new(
+      nil,
       :name,
       keyword_init: true
     )
@@ -175,6 +182,7 @@ module Aws::DocDB
     #            </p>
     #   @return [String]
     class Certificate < Struct.new(
+      nil,
       :certificate_identifier,
       :certificate_type,
       :thumbprint,
@@ -199,6 +207,7 @@ module Aws::DocDB
     #   <p>The expiration date of the DB instance’s server certificate.</p>
     #   @return [Time]
     class CertificateDetails < Struct.new(
+      nil,
       :ca_identifier,
       :valid_till,
       keyword_init: true
@@ -213,6 +222,7 @@ module Aws::DocDB
     #   <p>An optional pagination token provided if the number of records retrieved is greater than <code>MaxRecords</code>. If this parameter is specified, the marker specifies the next record in the list. Including the value of <code>Marker</code> in the next call to <code>DescribeCertificates</code> results in the next page of certificates.</p>
     #   @return [String]
     class CertificateMessage < Struct.new(
+      nil,
       :certificates,
       :marker,
       keyword_init: true
@@ -225,6 +235,7 @@ module Aws::DocDB
     # @!attribute message
     #   @return [String]
     class CertificateNotFoundFault < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -243,6 +254,7 @@ module Aws::DocDB
     #   <p>The list of log types to disable.</p>
     #   @return [Array<String>]
     class CloudwatchLogsExportConfiguration < Struct.new(
+      nil,
       :enable_log_types,
       :disable_log_types,
       keyword_init: true
@@ -279,6 +291,7 @@ module Aws::DocDB
     #   <p>The Amazon Web Services KMS key identifier that is used to encrypt the secret.</p>
     #   @return [String]
     class ClusterMasterUserSecret < Struct.new(
+      nil,
       :secret_arn,
       :secret_status,
       :kms_key_id,
@@ -333,6 +346,7 @@ module Aws::DocDB
     #   <p>The tags that are to be assigned to the parameter group.</p>
     #   @return [Array<Types::Tag>]
     class CopyDBClusterParameterGroupMessage < Struct.new(
+      nil,
       :source_db_cluster_parameter_group_identifier,
       :target_db_cluster_parameter_group_identifier,
       :target_db_cluster_parameter_group_description,
@@ -346,6 +360,7 @@ module Aws::DocDB
     #   <p>Detailed information about a cluster parameter group. </p>
     #   @return [Types::DBClusterParameterGroup]
     class CopyDBClusterParameterGroupResult < Struct.new(
+      nil,
       :db_cluster_parameter_group,
       keyword_init: true
     )
@@ -453,6 +468,7 @@ module Aws::DocDB
     #   <p>The source region of the snapshot. This is only needed when the shapshot is encrypted and in a different region.</p>
     #   @return [String]
     class CopyDBClusterSnapshotMessage < Struct.new(
+      nil,
       :source_db_cluster_snapshot_identifier,
       :target_db_cluster_snapshot_identifier,
       :kms_key_id,
@@ -469,6 +485,7 @@ module Aws::DocDB
     #   <p>Detailed information about a cluster snapshot. </p>
     #   @return [Types::DBClusterSnapshot]
     class CopyDBClusterSnapshotResult < Struct.new(
+      nil,
       :db_cluster_snapshot,
       keyword_init: true
     )
@@ -668,6 +685,7 @@ module Aws::DocDB
     #   <p>The source region of the snapshot. This is only needed when the shapshot is encrypted and in a different region.</p>
     #   @return [String]
     class CreateDBClusterMessage < Struct.new(
+      nil,
       :availability_zones,
       :backup_retention_period,
       :db_cluster_identifier,
@@ -722,6 +740,7 @@ module Aws::DocDB
     #   <p>The tags to be assigned to the cluster parameter group.</p>
     #   @return [Array<Types::Tag>]
     class CreateDBClusterParameterGroupMessage < Struct.new(
+      nil,
       :db_cluster_parameter_group_name,
       :db_parameter_group_family,
       :description,
@@ -735,6 +754,7 @@ module Aws::DocDB
     #   <p>Detailed information about a cluster parameter group. </p>
     #   @return [Types::DBClusterParameterGroup]
     class CreateDBClusterParameterGroupResult < Struct.new(
+      nil,
       :db_cluster_parameter_group,
       keyword_init: true
     )
@@ -745,6 +765,7 @@ module Aws::DocDB
     #   <p>Detailed information about a cluster. </p>
     #   @return [Types::DBCluster]
     class CreateDBClusterResult < Struct.new(
+      nil,
       :db_cluster,
       keyword_init: true
     )
@@ -788,6 +809,7 @@ module Aws::DocDB
     #   <p>The tags to be assigned to the cluster snapshot.</p>
     #   @return [Array<Types::Tag>]
     class CreateDBClusterSnapshotMessage < Struct.new(
+      nil,
       :db_cluster_snapshot_identifier,
       :db_cluster_identifier,
       :tags,
@@ -800,6 +822,7 @@ module Aws::DocDB
     #   <p>Detailed information about a cluster snapshot. </p>
     #   @return [Types::DBClusterSnapshot]
     class CreateDBClusterSnapshotResult < Struct.new(
+      nil,
       :db_cluster_snapshot,
       keyword_init: true
     )
@@ -894,6 +917,7 @@ module Aws::DocDB
     #                       Guide</i>.</p>
     #   @return [String]
     class CreateDBInstanceMessage < Struct.new(
+      nil,
       :db_instance_identifier,
       :db_instance_class,
       :engine,
@@ -916,6 +940,7 @@ module Aws::DocDB
     #   <p>Detailed information about an instance. </p>
     #   @return [Types::DBInstance]
     class CreateDBInstanceResult < Struct.new(
+      nil,
       :db_instance,
       keyword_init: true
     )
@@ -940,6 +965,7 @@ module Aws::DocDB
     #   <p>The tags to be assigned to the subnet group.</p>
     #   @return [Array<Types::Tag>]
     class CreateDBSubnetGroupMessage < Struct.new(
+      nil,
       :db_subnet_group_name,
       :db_subnet_group_description,
       :subnet_ids,
@@ -953,6 +979,7 @@ module Aws::DocDB
     #   <p>Detailed information about a subnet group. </p>
     #   @return [Types::DBSubnetGroup]
     class CreateDBSubnetGroupResult < Struct.new(
+      nil,
       :db_subnet_group,
       keyword_init: true
     )
@@ -1011,6 +1038,7 @@ module Aws::DocDB
     #   <p>The tags to be assigned to the event subscription.</p>
     #   @return [Array<Types::Tag>]
     class CreateEventSubscriptionMessage < Struct.new(
+      nil,
       :subscription_name,
       :sns_topic_arn,
       :source_type,
@@ -1027,6 +1055,7 @@ module Aws::DocDB
     #   <p>Detailed information about an event to which you have subscribed.</p>
     #   @return [Types::EventSubscription]
     class CreateEventSubscriptionResult < Struct.new(
+      nil,
       :event_subscription,
       keyword_init: true
     )
@@ -1056,6 +1085,7 @@ module Aws::DocDB
     #   <p>The storage encryption setting for the new global cluster. </p>
     #   @return [Boolean]
     class CreateGlobalClusterMessage < Struct.new(
+      nil,
       :global_cluster_identifier,
       :source_db_cluster_identifier,
       :engine,
@@ -1072,6 +1102,7 @@ module Aws::DocDB
     #   <p>A data type representing an Amazon DocumentDB global cluster.</p>
     #   @return [Types::GlobalCluster]
     class CreateGlobalClusterResult < Struct.new(
+      nil,
       :global_cluster,
       keyword_init: true
     )
@@ -1206,6 +1237,7 @@ module Aws::DocDB
     #   <p>The secret managed by Amazon DocumentDB in Amazon Web Services Secrets Manager for the master user password.</p>
     #   @return [Types::ClusterMasterUserSecret]
     class DBCluster < Struct.new(
+      nil,
       :availability_zones,
       :backup_retention_period,
       :db_cluster_identifier,
@@ -1250,6 +1282,7 @@ module Aws::DocDB
     # @!attribute message
     #   @return [String]
     class DBClusterAlreadyExistsFault < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -1273,6 +1306,7 @@ module Aws::DocDB
     #               primary instance after a failure of the existing primary instance. </p>
     #   @return [Integer]
     class DBClusterMember < Struct.new(
+      nil,
       :db_instance_identifier,
       :is_cluster_writer,
       :db_cluster_parameter_group_status,
@@ -1292,6 +1326,7 @@ module Aws::DocDB
     #   <p>A list of clusters.</p>
     #   @return [Array<Types::DBCluster>]
     class DBClusterMessage < Struct.new(
+      nil,
       :marker,
       :db_clusters,
       keyword_init: true
@@ -1304,6 +1339,7 @@ module Aws::DocDB
     # @!attribute message
     #   @return [String]
     class DBClusterNotFoundFault < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -1326,6 +1362,7 @@ module Aws::DocDB
     #   <p>The Amazon Resource Name (ARN) for the cluster parameter group.</p>
     #   @return [String]
     class DBClusterParameterGroup < Struct.new(
+      nil,
       :db_cluster_parameter_group_name,
       :db_parameter_group_family,
       :description,
@@ -1340,6 +1377,7 @@ module Aws::DocDB
     # @!attribute message
     #   @return [String]
     class DBClusterParameterGroupNotFoundFault < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -1356,6 +1394,7 @@ module Aws::DocDB
     #   <p>A list of cluster parameter groups.</p>
     #   @return [Array<Types::DBClusterParameterGroup>]
     class DBClusterParameterGroupsMessage < Struct.new(
+      nil,
       :marker,
       :db_cluster_parameter_groups,
       keyword_init: true
@@ -1367,6 +1406,7 @@ module Aws::DocDB
     # @!attribute message
     #   @return [String]
     class DBClusterQuotaExceededFault < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -1397,6 +1437,7 @@ module Aws::DocDB
     #            </ul>
     #   @return [String]
     class DBClusterRole < Struct.new(
+      nil,
       :role_arn,
       :status,
       keyword_init: true
@@ -1472,6 +1513,7 @@ module Aws::DocDB
     #            </p>
     #   @return [String]
     class DBClusterSnapshot < Struct.new(
+      nil,
       :availability_zones,
       :db_cluster_snapshot_identifier,
       :db_cluster_identifier,
@@ -1499,6 +1541,7 @@ module Aws::DocDB
     # @!attribute message
     #   @return [String]
     class DBClusterSnapshotAlreadyExistsFault < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -1516,6 +1559,7 @@ module Aws::DocDB
     #            <p>If the <code>AttributeName</code> field is set to <code>restore</code>, then this element returns a list of IDs of the Amazon Web Services accounts that are authorized to copy or restore the manual cluster snapshot. If a value of <code>all</code> is in the list, then the manual cluster snapshot is public and available for any Amazon Web Services account to copy or restore.</p>
     #   @return [Array<String>]
     class DBClusterSnapshotAttribute < Struct.new(
+      nil,
       :attribute_name,
       :attribute_values,
       keyword_init: true
@@ -1532,6 +1576,7 @@ module Aws::DocDB
     #   <p>The list of attributes and values for the cluster snapshot.</p>
     #   @return [Array<Types::DBClusterSnapshotAttribute>]
     class DBClusterSnapshotAttributesResult < Struct.new(
+      nil,
       :db_cluster_snapshot_identifier,
       :db_cluster_snapshot_attributes,
       keyword_init: true
@@ -1549,6 +1594,7 @@ module Aws::DocDB
     #   <p>Provides a list of cluster snapshots.</p>
     #   @return [Array<Types::DBClusterSnapshot>]
     class DBClusterSnapshotMessage < Struct.new(
+      nil,
       :marker,
       :db_cluster_snapshots,
       keyword_init: true
@@ -1561,6 +1607,7 @@ module Aws::DocDB
     # @!attribute message
     #   @return [String]
     class DBClusterSnapshotNotFoundFault < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -1612,6 +1659,7 @@ module Aws::DocDB
     #               You can also retrieve the version of an existing cluster and check whether that version supports certain Amazon DocumentDB Serverless features before you attempt to use those features.</p>
     #   @return [Types::ServerlessV2FeaturesSupport]
     class DBEngineVersion < Struct.new(
+      nil,
       :engine,
       :engine_version,
       :db_parameter_group_family,
@@ -1638,6 +1686,7 @@ module Aws::DocDB
     #   <p>Detailed information about one or more engine versions.</p>
     #   @return [Array<Types::DBEngineVersion>]
     class DBEngineVersionMessage < Struct.new(
+      nil,
       :marker,
       :db_engine_versions,
       keyword_init: true
@@ -1748,6 +1797,7 @@ module Aws::DocDB
     #   <p>The KMS key identifier for encryption of Performance Insights data. The KMS key ID is the Amazon Resource Name (ARN), KMS key identifier, or the KMS key alias for the KMS encryption key.</p>
     #   @return [String]
     class DBInstance < Struct.new(
+      nil,
       :db_instance_identifier,
       :db_instance_class,
       :engine,
@@ -1787,6 +1837,7 @@ module Aws::DocDB
     # @!attribute message
     #   @return [String]
     class DBInstanceAlreadyExistsFault < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -1803,6 +1854,7 @@ module Aws::DocDB
     #   <p>Detailed information about one or more instances. </p>
     #   @return [Array<Types::DBInstance>]
     class DBInstanceMessage < Struct.new(
+      nil,
       :marker,
       :db_instances,
       keyword_init: true
@@ -1815,6 +1867,7 @@ module Aws::DocDB
     # @!attribute message
     #   @return [String]
     class DBInstanceNotFoundFault < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -1839,6 +1892,7 @@ module Aws::DocDB
     #               an error state, this value is blank.</p>
     #   @return [String]
     class DBInstanceStatusInfo < Struct.new(
+      nil,
       :status_type,
       :normal,
       :status,
@@ -1852,6 +1906,7 @@ module Aws::DocDB
     # @!attribute message
     #   @return [String]
     class DBParameterGroupAlreadyExistsFault < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -1863,6 +1918,7 @@ module Aws::DocDB
     # @!attribute message
     #   @return [String]
     class DBParameterGroupNotFoundFault < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -1873,6 +1929,7 @@ module Aws::DocDB
     # @!attribute message
     #   @return [String]
     class DBParameterGroupQuotaExceededFault < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -1884,6 +1941,7 @@ module Aws::DocDB
     # @!attribute message
     #   @return [String]
     class DBSecurityGroupNotFoundFault < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -1895,6 +1953,7 @@ module Aws::DocDB
     # @!attribute message
     #   @return [String]
     class DBSnapshotAlreadyExistsFault < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -1906,6 +1965,7 @@ module Aws::DocDB
     # @!attribute message
     #   @return [String]
     class DBSnapshotNotFoundFault < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -1932,6 +1992,7 @@ module Aws::DocDB
     #   <p>The Amazon Resource Name (ARN) for the DB subnet group.</p>
     #   @return [String]
     class DBSubnetGroup < Struct.new(
+      nil,
       :db_subnet_group_name,
       :db_subnet_group_description,
       :vpc_id,
@@ -1948,6 +2009,7 @@ module Aws::DocDB
     # @!attribute message
     #   @return [String]
     class DBSubnetGroupAlreadyExistsFault < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -1958,6 +2020,7 @@ module Aws::DocDB
     # @!attribute message
     #   @return [String]
     class DBSubnetGroupDoesNotCoverEnoughAZs < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -1974,6 +2037,7 @@ module Aws::DocDB
     #   <p>Detailed information about one or more subnet groups.</p>
     #   @return [Array<Types::DBSubnetGroup>]
     class DBSubnetGroupMessage < Struct.new(
+      nil,
       :marker,
       :db_subnet_groups,
       keyword_init: true
@@ -1986,6 +2050,7 @@ module Aws::DocDB
     # @!attribute message
     #   @return [String]
     class DBSubnetGroupNotFoundFault < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -1996,6 +2061,7 @@ module Aws::DocDB
     # @!attribute message
     #   @return [String]
     class DBSubnetGroupQuotaExceededFault < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -2006,6 +2072,7 @@ module Aws::DocDB
     # @!attribute message
     #   @return [String]
     class DBSubnetQuotaExceededFault < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -2017,6 +2084,7 @@ module Aws::DocDB
     # @!attribute message
     #   @return [String]
     class DBUpgradeDependencyFailureFault < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -2060,6 +2128,7 @@ module Aws::DocDB
     #            </ul>
     #   @return [String]
     class DeleteDBClusterMessage < Struct.new(
+      nil,
       :db_cluster_identifier,
       :skip_final_snapshot,
       :final_db_snapshot_identifier,
@@ -2085,6 +2154,7 @@ module Aws::DocDB
     #            </ul>
     #   @return [String]
     class DeleteDBClusterParameterGroupMessage < Struct.new(
+      nil,
       :db_cluster_parameter_group_name,
       keyword_init: true
     )
@@ -2095,6 +2165,7 @@ module Aws::DocDB
     #   <p>Detailed information about a cluster. </p>
     #   @return [Types::DBCluster]
     class DeleteDBClusterResult < Struct.new(
+      nil,
       :db_cluster,
       keyword_init: true
     )
@@ -2107,6 +2178,7 @@ module Aws::DocDB
     #            <p>Constraints: Must be the name of an existing cluster snapshot in the <code>available</code> state.</p>
     #   @return [String]
     class DeleteDBClusterSnapshotMessage < Struct.new(
+      nil,
       :db_cluster_snapshot_identifier,
       keyword_init: true
     )
@@ -2117,6 +2189,7 @@ module Aws::DocDB
     #   <p>Detailed information about a cluster snapshot. </p>
     #   @return [Types::DBClusterSnapshot]
     class DeleteDBClusterSnapshotResult < Struct.new(
+      nil,
       :db_cluster_snapshot,
       keyword_init: true
     )
@@ -2135,6 +2208,7 @@ module Aws::DocDB
     #            </ul>
     #   @return [String]
     class DeleteDBInstanceMessage < Struct.new(
+      nil,
       :db_instance_identifier,
       keyword_init: true
     )
@@ -2145,6 +2219,7 @@ module Aws::DocDB
     #   <p>Detailed information about an instance. </p>
     #   @return [Types::DBInstance]
     class DeleteDBInstanceResult < Struct.new(
+      nil,
       :db_instance,
       keyword_init: true
     )
@@ -2163,6 +2238,7 @@ module Aws::DocDB
     #            </p>
     #   @return [String]
     class DeleteDBSubnetGroupMessage < Struct.new(
+      nil,
       :db_subnet_group_name,
       keyword_init: true
     )
@@ -2174,6 +2250,7 @@ module Aws::DocDB
     #   <p>The name of the Amazon DocumentDB event notification subscription that you want to delete.</p>
     #   @return [String]
     class DeleteEventSubscriptionMessage < Struct.new(
+      nil,
       :subscription_name,
       keyword_init: true
     )
@@ -2184,6 +2261,7 @@ module Aws::DocDB
     #   <p>Detailed information about an event to which you have subscribed.</p>
     #   @return [Types::EventSubscription]
     class DeleteEventSubscriptionResult < Struct.new(
+      nil,
       :event_subscription,
       keyword_init: true
     )
@@ -2195,6 +2273,7 @@ module Aws::DocDB
     #   <p>The cluster identifier of the global cluster being deleted.</p>
     #   @return [String]
     class DeleteGlobalClusterMessage < Struct.new(
+      nil,
       :global_cluster_identifier,
       keyword_init: true
     )
@@ -2205,6 +2284,7 @@ module Aws::DocDB
     #   <p>A data type representing an Amazon DocumentDB global cluster.</p>
     #   @return [Types::GlobalCluster]
     class DeleteGlobalClusterResult < Struct.new(
+      nil,
       :global_cluster,
       keyword_init: true
     )
@@ -2240,6 +2320,7 @@ module Aws::DocDB
     #   <p>An optional pagination token provided by a previous <code>DescribeCertificates</code> request. If this parameter is specified, the response includes only records beyond the marker, up to the value specified by <code>MaxRecords</code>.</p>
     #   @return [String]
     class DescribeCertificatesMessage < Struct.new(
+      nil,
       :certificate_identifier,
       :filters,
       :max_records,
@@ -2276,6 +2357,7 @@ module Aws::DocDB
     #            <code>MaxRecords</code>.</p>
     #   @return [String]
     class DescribeDBClusterParameterGroupsMessage < Struct.new(
+      nil,
       :db_cluster_parameter_group_name,
       :filters,
       :max_records,
@@ -2315,6 +2397,7 @@ module Aws::DocDB
     #            <code>MaxRecords</code>.</p>
     #   @return [String]
     class DescribeDBClusterParametersMessage < Struct.new(
+      nil,
       :db_cluster_parameter_group_name,
       :source,
       :filters,
@@ -2335,6 +2418,7 @@ module Aws::DocDB
     #            <code>MaxRecords</code>.</p>
     #   @return [String]
     class DescribeDBClusterParametersOutput < Struct.new(
+      nil,
       :parameters,
       :marker,
       keyword_init: true
@@ -2347,6 +2431,7 @@ module Aws::DocDB
     #   <p>The identifier for the cluster snapshot to describe the attributes for.</p>
     #   @return [String]
     class DescribeDBClusterSnapshotAttributesMessage < Struct.new(
+      nil,
       :db_cluster_snapshot_identifier,
       keyword_init: true
     )
@@ -2358,6 +2443,7 @@ module Aws::DocDB
     #               snapshot.</p>
     #   @return [Types::DBClusterSnapshotAttributesResult]
     class DescribeDBClusterSnapshotAttributesResult < Struct.new(
+      nil,
       :db_cluster_snapshot_attributes_result,
       keyword_init: true
     )
@@ -2434,6 +2520,7 @@ module Aws::DocDB
     #   <p>Set to <code>true</code> to include manual cluster snapshots that are public and can be copied or restored by any Amazon Web Services account, and otherwise <code>false</code>. The default is <code>false</code>.</p>
     #   @return [Boolean]
     class DescribeDBClusterSnapshotsMessage < Struct.new(
+      nil,
       :db_cluster_identifier,
       :db_cluster_snapshot_identifier,
       :snapshot_type,
@@ -2480,6 +2567,7 @@ module Aws::DocDB
     #            <code>MaxRecords</code>.</p>
     #   @return [String]
     class DescribeDBClustersMessage < Struct.new(
+      nil,
       :db_cluster_identifier,
       :filters,
       :max_records,
@@ -2534,6 +2622,7 @@ module Aws::DocDB
     #   <p>If this parameter is specified and the requested engine supports the <code>TimeZone</code> parameter for <code>CreateDBInstance</code>, the response includes a list of supported time zones for each engine version. </p>
     #   @return [Boolean]
     class DescribeDBEngineVersionsMessage < Struct.new(
+      nil,
       :engine,
       :engine_version,
       :db_parameter_group_family,
@@ -2586,6 +2675,7 @@ module Aws::DocDB
     #            <code>MaxRecords</code>.</p>
     #   @return [String]
     class DescribeDBInstancesMessage < Struct.new(
+      nil,
       :db_instance_identifier,
       :filters,
       :max_records,
@@ -2615,6 +2705,7 @@ module Aws::DocDB
     #            <code>MaxRecords</code>.</p>
     #   @return [String]
     class DescribeDBSubnetGroupsMessage < Struct.new(
+      nil,
       :db_subnet_group_name,
       :filters,
       :max_records,
@@ -2645,6 +2736,7 @@ module Aws::DocDB
     #            <code>MaxRecords</code>.</p>
     #   @return [String]
     class DescribeEngineDefaultClusterParametersMessage < Struct.new(
+      nil,
       :db_parameter_group_family,
       :filters,
       :max_records,
@@ -2659,6 +2751,7 @@ module Aws::DocDB
     #                   <code>DescribeEngineDefaultClusterParameters</code> operation. </p>
     #   @return [Types::EngineDefaults]
     class DescribeEngineDefaultClusterParametersResult < Struct.new(
+      nil,
       :engine_defaults,
       keyword_init: true
     )
@@ -2675,6 +2768,7 @@ module Aws::DocDB
     #   <p>This parameter is not currently supported.</p>
     #   @return [Array<Types::Filter>]
     class DescribeEventCategoriesMessage < Struct.new(
+      nil,
       :source_type,
       :filters,
       keyword_init: true
@@ -2703,6 +2797,7 @@ module Aws::DocDB
     #            <code>MaxRecords</code>.</p>
     #   @return [String]
     class DescribeEventSubscriptionsMessage < Struct.new(
+      nil,
       :subscription_name,
       :filters,
       :max_records,
@@ -2777,6 +2872,7 @@ module Aws::DocDB
     #            <code>MaxRecords</code>.</p>
     #   @return [String]
     class DescribeEventsMessage < Struct.new(
+      nil,
       :source_identifier,
       :source_type,
       :start_time,
@@ -2805,6 +2901,7 @@ module Aws::DocDB
     #   <p>An optional pagination token provided by a previous <code>DescribeGlobalClusters</code> request. If this parameter is specified, the response includes only records beyond the marker, up to the value specified by <code>MaxRecords</code>.</p>
     #   @return [String]
     class DescribeGlobalClustersMessage < Struct.new(
+      nil,
       :global_cluster_identifier,
       :filters,
       :max_records,
@@ -2850,6 +2947,7 @@ module Aws::DocDB
     #            <code>MaxRecords</code>.</p>
     #   @return [String]
     class DescribeOrderableDBInstanceOptionsMessage < Struct.new(
+      nil,
       :engine,
       :engine_version,
       :db_instance_class,
@@ -2899,6 +2997,7 @@ module Aws::DocDB
     #            <p>Constraints: Minimum 20, maximum 100.</p>
     #   @return [Integer]
     class DescribePendingMaintenanceActionsMessage < Struct.new(
+      nil,
       :resource_identifier,
       :filters,
       :marker,
@@ -2920,6 +3019,7 @@ module Aws::DocDB
     #   <p>Specifies the ID that Amazon Route 53 assigns when you create a hosted zone.</p>
     #   @return [String]
     class Endpoint < Struct.new(
+      nil,
       :address,
       :port,
       :hosted_zone_id,
@@ -2942,6 +3042,7 @@ module Aws::DocDB
     #   <p>The parameters of a particular cluster parameter group family.</p>
     #   @return [Array<Types::Parameter>]
     class EngineDefaults < Struct.new(
+      nil,
       :db_parameter_group_family,
       :marker,
       :parameters,
@@ -2970,6 +3071,7 @@ module Aws::DocDB
     #   <p>The Amazon Resource Name (ARN) for the event.</p>
     #   @return [String]
     class Event < Struct.new(
+      nil,
       :source_identifier,
       :source_type,
       :message,
@@ -2989,6 +3091,7 @@ module Aws::DocDB
     #   <p>The event categories for the specified source type.</p>
     #   @return [Array<String>]
     class EventCategoriesMap < Struct.new(
+      nil,
       :source_type,
       :event_categories,
       keyword_init: true
@@ -3001,6 +3104,7 @@ module Aws::DocDB
     #   <p>A list of event category maps.</p>
     #   @return [Array<Types::EventCategoriesMap>]
     class EventCategoriesMessage < Struct.new(
+      nil,
       :event_categories_map_list,
       keyword_init: true
     )
@@ -3049,6 +3153,7 @@ module Aws::DocDB
     #   <p>The Amazon Resource Name (ARN) for the event subscription.</p>
     #   @return [String]
     class EventSubscription < Struct.new(
+      nil,
       :customer_aws_id,
       :cust_subscription_id,
       :sns_topic_arn,
@@ -3068,6 +3173,7 @@ module Aws::DocDB
     # @!attribute message
     #   @return [String]
     class EventSubscriptionQuotaExceededFault < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -3084,6 +3190,7 @@ module Aws::DocDB
     #   <p>A list of event subscriptions.</p>
     #   @return [Array<Types::EventSubscription>]
     class EventSubscriptionsMessage < Struct.new(
+      nil,
       :marker,
       :event_subscriptions_list,
       keyword_init: true
@@ -3101,6 +3208,7 @@ module Aws::DocDB
     #   <p>Detailed information about one or more events. </p>
     #   @return [Array<Types::Event>]
     class EventsMessage < Struct.new(
+      nil,
       :marker,
       :events,
       keyword_init: true
@@ -3124,6 +3232,7 @@ module Aws::DocDB
     #               example, <code>mydbcluster-replica1</code>.</p>
     #   @return [String]
     class FailoverDBClusterMessage < Struct.new(
+      nil,
       :db_cluster_identifier,
       :target_db_instance_identifier,
       keyword_init: true
@@ -3135,6 +3244,7 @@ module Aws::DocDB
     #   <p>Detailed information about a cluster. </p>
     #   @return [Types::DBCluster]
     class FailoverDBClusterResult < Struct.new(
+      nil,
       :db_cluster,
       keyword_init: true
     )
@@ -3192,6 +3302,7 @@ module Aws::DocDB
     #            </ul>
     #   @return [Boolean]
     class FailoverGlobalClusterMessage < Struct.new(
+      nil,
       :global_cluster_identifier,
       :target_db_cluster_identifier,
       :allow_data_loss,
@@ -3205,6 +3316,7 @@ module Aws::DocDB
     #   <p>A data type representing an Amazon DocumentDB global cluster.</p>
     #   @return [Types::GlobalCluster]
     class FailoverGlobalClusterResult < Struct.new(
+      nil,
       :global_cluster,
       keyword_init: true
     )
@@ -3221,6 +3333,7 @@ module Aws::DocDB
     #   <p>One or more filter values. Filter values are case sensitive.</p>
     #   @return [Array<String>]
     class Filter < Struct.new(
+      nil,
       :name,
       :values,
       keyword_init: true
@@ -3261,6 +3374,7 @@ module Aws::DocDB
     #   <p>The list of cluster IDs for secondary clusters within the global cluster. Currently limited to one item. </p>
     #   @return [Array<Types::GlobalClusterMember>]
     class GlobalCluster < Struct.new(
+      nil,
       :global_cluster_identifier,
       :global_cluster_resource_id,
       :global_cluster_arn,
@@ -3280,6 +3394,7 @@ module Aws::DocDB
     # @!attribute message
     #   @return [String]
     class GlobalClusterAlreadyExistsFault < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -3297,6 +3412,7 @@ module Aws::DocDB
     #   <p> Specifies whether the Amazon DocumentDB cluster is the primary cluster (that is, has read-write capability) for the Amazon DocumentDB global cluster with which it is associated. </p>
     #   @return [Boolean]
     class GlobalClusterMember < Struct.new(
+      nil,
       :db_cluster_arn,
       :readers,
       :is_writer,
@@ -3309,6 +3425,7 @@ module Aws::DocDB
     # @!attribute message
     #   @return [String]
     class GlobalClusterNotFoundFault < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -3319,6 +3436,7 @@ module Aws::DocDB
     # @!attribute message
     #   @return [String]
     class GlobalClusterQuotaExceededFault < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -3332,6 +3450,7 @@ module Aws::DocDB
     #   <p></p>
     #   @return [Array<Types::GlobalCluster>]
     class GlobalClustersMessage < Struct.new(
+      nil,
       :marker,
       :global_clusters,
       keyword_init: true
@@ -3343,6 +3462,7 @@ module Aws::DocDB
     # @!attribute message
     #   @return [String]
     class InstanceQuotaExceededFault < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -3353,6 +3473,7 @@ module Aws::DocDB
     # @!attribute message
     #   @return [String]
     class InsufficientDBClusterCapacityFault < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -3363,6 +3484,7 @@ module Aws::DocDB
     # @!attribute message
     #   @return [String]
     class InsufficientDBInstanceCapacityFault < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -3373,6 +3495,7 @@ module Aws::DocDB
     # @!attribute message
     #   @return [String]
     class InsufficientStorageClusterCapacityFault < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -3383,6 +3506,7 @@ module Aws::DocDB
     # @!attribute message
     #   @return [String]
     class InvalidDBClusterSnapshotStateFault < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -3393,6 +3517,7 @@ module Aws::DocDB
     # @!attribute message
     #   @return [String]
     class InvalidDBClusterStateFault < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -3404,6 +3529,7 @@ module Aws::DocDB
     # @!attribute message
     #   @return [String]
     class InvalidDBInstanceStateFault < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -3414,6 +3540,7 @@ module Aws::DocDB
     # @!attribute message
     #   @return [String]
     class InvalidDBParameterGroupStateFault < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -3424,6 +3551,7 @@ module Aws::DocDB
     # @!attribute message
     #   @return [String]
     class InvalidDBSecurityGroupStateFault < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -3434,6 +3562,7 @@ module Aws::DocDB
     # @!attribute message
     #   @return [String]
     class InvalidDBSnapshotStateFault < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -3444,6 +3573,7 @@ module Aws::DocDB
     # @!attribute message
     #   @return [String]
     class InvalidDBSubnetGroupStateFault < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -3454,6 +3584,7 @@ module Aws::DocDB
     # @!attribute message
     #   @return [String]
     class InvalidDBSubnetStateFault < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -3465,6 +3596,7 @@ module Aws::DocDB
     # @!attribute message
     #   @return [String]
     class InvalidEventSubscriptionStateFault < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -3475,6 +3607,7 @@ module Aws::DocDB
     # @!attribute message
     #   @return [String]
     class InvalidGlobalClusterStateFault < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -3486,6 +3619,7 @@ module Aws::DocDB
     # @!attribute message
     #   @return [String]
     class InvalidRestoreFault < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -3497,6 +3631,7 @@ module Aws::DocDB
     # @!attribute message
     #   @return [String]
     class InvalidSubnet < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -3508,6 +3643,7 @@ module Aws::DocDB
     # @!attribute message
     #   @return [String]
     class InvalidVPCNetworkStateFault < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -3518,6 +3654,7 @@ module Aws::DocDB
     # @!attribute message
     #   @return [String]
     class KMSKeyNotAccessibleFault < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -3533,6 +3670,7 @@ module Aws::DocDB
     #   <p>This parameter is not currently supported.</p>
     #   @return [Array<Types::Filter>]
     class ListTagsForResourceMessage < Struct.new(
+      nil,
       :resource_name,
       :filters,
       keyword_init: true
@@ -3716,6 +3854,7 @@ module Aws::DocDB
     #            <p>Constraint: You must apply the change immediately when rotating the master user password.</p>
     #   @return [Boolean]
     class ModifyDBClusterMessage < Struct.new(
+      nil,
       :db_cluster_identifier,
       :new_db_cluster_identifier,
       :apply_immediately,
@@ -3748,6 +3887,7 @@ module Aws::DocDB
     #   <p>A list of parameters in the cluster parameter group to modify.</p>
     #   @return [Array<Types::Parameter>]
     class ModifyDBClusterParameterGroupMessage < Struct.new(
+      nil,
       :db_cluster_parameter_group_name,
       :parameters,
       keyword_init: true
@@ -3775,6 +3915,7 @@ module Aws::DocDB
     #            </note>
     #   @return [String]
     class ModifyDBClusterParameterGroupOutput < Struct.new(
+      nil,
       :db_cluster_parameter_group_name,
       keyword_init: true
     )
@@ -3785,6 +3926,7 @@ module Aws::DocDB
     #   <p>Detailed information about a cluster. </p>
     #   @return [Types::DBCluster]
     class ModifyDBClusterResult < Struct.new(
+      nil,
       :db_cluster,
       keyword_init: true
     )
@@ -3809,6 +3951,7 @@ module Aws::DocDB
     #            <p>To remove authorization for other Amazon Web Services accounts to copy or restore a manual cluster snapshot, set this list to include one or more Amazon Web Services account identifiers. To remove authorization for any Amazon Web Services account to copy or restore the cluster snapshot, set it to <code>all</code> . If you specify <code>all</code>, an Amazon Web Services account whose account ID is explicitly added to the <code>restore</code> attribute can still copy or restore a manual cluster snapshot.</p>
     #   @return [Array<String>]
     class ModifyDBClusterSnapshotAttributeMessage < Struct.new(
+      nil,
       :db_cluster_snapshot_identifier,
       :attribute_name,
       :values_to_add,
@@ -3823,6 +3966,7 @@ module Aws::DocDB
     #               snapshot.</p>
     #   @return [Types::DBClusterSnapshotAttributesResult]
     class ModifyDBClusterSnapshotAttributeResult < Struct.new(
+      nil,
       :db_cluster_snapshot_attributes_result,
       keyword_init: true
     )
@@ -3932,6 +4076,7 @@ module Aws::DocDB
     #                       Guide</i>.</p>
     #   @return [Boolean]
     class ModifyDBInstanceMessage < Struct.new(
+      nil,
       :db_instance_identifier,
       :db_instance_class,
       :apply_immediately,
@@ -3953,6 +4098,7 @@ module Aws::DocDB
     #   <p>Detailed information about an instance. </p>
     #   @return [Types::DBInstance]
     class ModifyDBInstanceResult < Struct.new(
+      nil,
       :db_instance,
       keyword_init: true
     )
@@ -3973,6 +4119,7 @@ module Aws::DocDB
     #   <p>The Amazon EC2 subnet IDs for the subnet group.</p>
     #   @return [Array<String>]
     class ModifyDBSubnetGroupMessage < Struct.new(
+      nil,
       :db_subnet_group_name,
       :db_subnet_group_description,
       :subnet_ids,
@@ -3985,6 +4132,7 @@ module Aws::DocDB
     #   <p>Detailed information about a subnet group. </p>
     #   @return [Types::DBSubnetGroup]
     class ModifyDBSubnetGroupResult < Struct.new(
+      nil,
       :db_subnet_group,
       keyword_init: true
     )
@@ -4012,6 +4160,7 @@ module Aws::DocDB
     #   <p> A Boolean value; set to <code>true</code> to activate the subscription. </p>
     #   @return [Boolean]
     class ModifyEventSubscriptionMessage < Struct.new(
+      nil,
       :subscription_name,
       :sns_topic_arn,
       :source_type,
@@ -4026,6 +4175,7 @@ module Aws::DocDB
     #   <p>Detailed information about an event to which you have subscribed.</p>
     #   @return [Types::EventSubscription]
     class ModifyEventSubscriptionResult < Struct.new(
+      nil,
       :event_subscription,
       keyword_init: true
     )
@@ -4058,6 +4208,7 @@ module Aws::DocDB
     #   <p>Indicates if the global cluster has deletion protection enabled. The global cluster can't be deleted when deletion protection is enabled. </p>
     #   @return [Boolean]
     class ModifyGlobalClusterMessage < Struct.new(
+      nil,
       :global_cluster_identifier,
       :new_global_cluster_identifier,
       :deletion_protection,
@@ -4070,6 +4221,7 @@ module Aws::DocDB
     #   <p>A data type representing an Amazon DocumentDB global cluster.</p>
     #   @return [Types::GlobalCluster]
     class ModifyGlobalClusterResult < Struct.new(
+      nil,
       :global_cluster,
       keyword_init: true
     )
@@ -4099,6 +4251,7 @@ module Aws::DocDB
     #   <p>The storage type to associate with the DB cluster</p>
     #   @return [String]
     class OrderableDBInstanceOption < Struct.new(
+      nil,
       :engine,
       :engine_version,
       :db_instance_class,
@@ -4121,6 +4274,7 @@ module Aws::DocDB
     #            <code>MaxRecords</code>.</p>
     #   @return [String]
     class OrderableDBInstanceOptionsMessage < Struct.new(
+      nil,
       :orderable_db_instance_options,
       :marker,
       keyword_init: true
@@ -4162,6 +4316,7 @@ module Aws::DocDB
     #   <p>Indicates when to apply parameter updates.</p>
     #   @return [String]
     class Parameter < Struct.new(
+      nil,
       :parameter_name,
       :parameter_value,
       :description,
@@ -4188,6 +4343,7 @@ module Aws::DocDB
     #               types are exported to Amazon CloudWatch Logs.</p>
     #   @return [Array<String>]
     class PendingCloudwatchLogsExports < Struct.new(
+      nil,
       :log_types_to_enable,
       :log_types_to_disable,
       keyword_init: true
@@ -4221,6 +4377,7 @@ module Aws::DocDB
     #   <p>A description providing more detail about the maintenance action.</p>
     #   @return [String]
     class PendingMaintenanceAction < Struct.new(
+      nil,
       :action,
       :auto_applied_after_date,
       :forced_apply_date,
@@ -4242,6 +4399,7 @@ module Aws::DocDB
     #            <code>MaxRecords</code>.</p>
     #   @return [String]
     class PendingMaintenanceActionsMessage < Struct.new(
+      nil,
       :pending_maintenance_actions,
       :marker,
       keyword_init: true
@@ -4304,6 +4462,7 @@ module Aws::DocDB
     #               the process of being activated or deactivated.</p>
     #   @return [Types::PendingCloudwatchLogsExports]
     class PendingModifiedValues < Struct.new(
+      nil,
       :db_instance_class,
       :allocated_storage,
       :master_user_password,
@@ -4339,6 +4498,7 @@ module Aws::DocDB
     #               Multi-AZ.</p>
     #   @return [Boolean]
     class RebootDBInstanceMessage < Struct.new(
+      nil,
       :db_instance_identifier,
       :force_failover,
       keyword_init: true
@@ -4350,6 +4510,7 @@ module Aws::DocDB
     #   <p>Detailed information about an instance. </p>
     #   @return [Types::DBInstance]
     class RebootDBInstanceResult < Struct.new(
+      nil,
       :db_instance,
       keyword_init: true
     )
@@ -4364,6 +4525,7 @@ module Aws::DocDB
     #   <p>The Amazon Resource Name (ARN) identifying the cluster that was detached from the Amazon DocumentDB global cluster. </p>
     #   @return [String]
     class RemoveFromGlobalClusterMessage < Struct.new(
+      nil,
       :global_cluster_identifier,
       :db_cluster_identifier,
       keyword_init: true
@@ -4375,6 +4537,7 @@ module Aws::DocDB
     #   <p>A data type representing an Amazon DocumentDB global cluster.</p>
     #   @return [Types::GlobalCluster]
     class RemoveFromGlobalClusterResult < Struct.new(
+      nil,
       :global_cluster,
       keyword_init: true
     )
@@ -4391,6 +4554,7 @@ module Aws::DocDB
     #               identifier for an instance, or the name of a security group. </p>
     #   @return [String]
     class RemoveSourceIdentifierFromSubscriptionMessage < Struct.new(
+      nil,
       :subscription_name,
       :source_identifier,
       keyword_init: true
@@ -4402,6 +4566,7 @@ module Aws::DocDB
     #   <p>Detailed information about an event to which you have subscribed.</p>
     #   @return [Types::EventSubscription]
     class RemoveSourceIdentifierFromSubscriptionResult < Struct.new(
+      nil,
       :event_subscription,
       keyword_init: true
     )
@@ -4417,6 +4582,7 @@ module Aws::DocDB
     #   <p>The tag key (name) of the tag to be removed.</p>
     #   @return [Array<String>]
     class RemoveTagsFromResourceMessage < Struct.new(
+      nil,
       :resource_name,
       :tag_keys,
       keyword_init: true
@@ -4440,6 +4606,7 @@ module Aws::DocDB
     #               set to <code>true</code>.</p>
     #   @return [Array<Types::Parameter>]
     class ResetDBClusterParameterGroupMessage < Struct.new(
+      nil,
       :db_cluster_parameter_group_name,
       :reset_all_parameters,
       :parameters,
@@ -4468,6 +4635,7 @@ module Aws::DocDB
     #            </note>
     #   @return [String]
     class ResetDBClusterParameterGroupOutput < Struct.new(
+      nil,
       :db_cluster_parameter_group_name,
       keyword_init: true
     )
@@ -4478,6 +4646,7 @@ module Aws::DocDB
     # @!attribute message
     #   @return [String]
     class ResourceNotFoundFault < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -4495,6 +4664,7 @@ module Aws::DocDB
     #               for the resource.</p>
     #   @return [Array<Types::PendingMaintenanceAction>]
     class ResourcePendingMaintenanceActions < Struct.new(
+      nil,
       :resource_identifier,
       :pending_maintenance_action_details,
       keyword_init: true
@@ -4608,6 +4778,7 @@ module Aws::DocDB
     #            </p>
     #   @return [String]
     class RestoreDBClusterFromSnapshotMessage < Struct.new(
+      nil,
       :availability_zones,
       :db_cluster_identifier,
       :snapshot_identifier,
@@ -4632,6 +4803,7 @@ module Aws::DocDB
     #   <p>Detailed information about a cluster. </p>
     #   @return [Types::DBCluster]
     class RestoreDBClusterFromSnapshotResult < Struct.new(
+      nil,
       :db_cluster,
       keyword_init: true
     )
@@ -4764,6 +4936,7 @@ module Aws::DocDB
     #            </p>
     #   @return [String]
     class RestoreDBClusterToPointInTimeMessage < Struct.new(
+      nil,
       :db_cluster_identifier,
       :restore_type,
       :source_db_cluster_identifier,
@@ -4787,6 +4960,7 @@ module Aws::DocDB
     #   <p>Detailed information about a cluster. </p>
     #   @return [Types::DBCluster]
     class RestoreDBClusterToPointInTimeResult < Struct.new(
+      nil,
       :db_cluster,
       keyword_init: true
     )
@@ -4797,6 +4971,7 @@ module Aws::DocDB
     # @!attribute message
     #   @return [String]
     class SNSInvalidTopicFault < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -4807,6 +4982,7 @@ module Aws::DocDB
     # @!attribute message
     #   @return [String]
     class SNSNoAuthorizationFault < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -4817,6 +4993,7 @@ module Aws::DocDB
     # @!attribute message
     #   @return [String]
     class SNSTopicArnNotFoundFault < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -4835,6 +5012,7 @@ module Aws::DocDB
     #               You can specify DCU values in half-step increments, such as 32, 32.5, 33, and so on.</p>
     #   @return [Float]
     class ServerlessV2FeaturesSupport < Struct.new(
+      nil,
       :min_capacity,
       :max_capacity,
       keyword_init: true
@@ -4852,6 +5030,7 @@ module Aws::DocDB
     #               You can specify DCU values in half-step increments, such as 32, 32.5, 33, and so on.</p>
     #   @return [Float]
     class ServerlessV2ScalingConfiguration < Struct.new(
+      nil,
       :min_capacity,
       :max_capacity,
       keyword_init: true
@@ -4869,6 +5048,7 @@ module Aws::DocDB
     #               You can specify DCU values in half-step increments, such as 32, 32.5, 33, and so on. </p>
     #   @return [Float]
     class ServerlessV2ScalingConfigurationInfo < Struct.new(
+      nil,
       :min_capacity,
       :max_capacity,
       keyword_init: true
@@ -4881,6 +5061,7 @@ module Aws::DocDB
     # @!attribute message
     #   @return [String]
     class SharedSnapshotQuotaExceededFault < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -4891,6 +5072,7 @@ module Aws::DocDB
     # @!attribute message
     #   @return [String]
     class SnapshotQuotaExceededFault < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -4901,6 +5083,7 @@ module Aws::DocDB
     # @!attribute message
     #   @return [String]
     class SourceNotFoundFault < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -4913,6 +5096,7 @@ module Aws::DocDB
     #            </p>
     #   @return [String]
     class StartDBClusterMessage < Struct.new(
+      nil,
       :db_cluster_identifier,
       keyword_init: true
     )
@@ -4923,6 +5107,7 @@ module Aws::DocDB
     #   <p>Detailed information about a cluster. </p>
     #   @return [Types::DBCluster]
     class StartDBClusterResult < Struct.new(
+      nil,
       :db_cluster,
       keyword_init: true
     )
@@ -4935,6 +5120,7 @@ module Aws::DocDB
     #            </p>
     #   @return [String]
     class StopDBClusterMessage < Struct.new(
+      nil,
       :db_cluster_identifier,
       keyword_init: true
     )
@@ -4945,6 +5131,7 @@ module Aws::DocDB
     #   <p>Detailed information about a cluster. </p>
     #   @return [Types::DBCluster]
     class StopDBClusterResult < Struct.new(
+      nil,
       :db_cluster,
       keyword_init: true
     )
@@ -4956,6 +5143,7 @@ module Aws::DocDB
     # @!attribute message
     #   @return [String]
     class StorageQuotaExceededFault < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -4967,6 +5155,7 @@ module Aws::DocDB
     # @!attribute message
     #   @return [String]
     class StorageTypeNotSupportedFault < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -4984,6 +5173,7 @@ module Aws::DocDB
     #   <p>Specifies the status of the subnet.</p>
     #   @return [String]
     class Subnet < Struct.new(
+      nil,
       :subnet_identifier,
       :subnet_availability_zone,
       :subnet_status,
@@ -4996,6 +5186,7 @@ module Aws::DocDB
     # @!attribute message
     #   @return [String]
     class SubnetAlreadyInUse < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -5006,6 +5197,7 @@ module Aws::DocDB
     # @!attribute message
     #   @return [String]
     class SubscriptionAlreadyExistFault < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -5016,6 +5208,7 @@ module Aws::DocDB
     # @!attribute message
     #   @return [String]
     class SubscriptionCategoryNotFoundFault < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -5026,6 +5219,7 @@ module Aws::DocDB
     # @!attribute message
     #   @return [String]
     class SubscriptionNotFoundFault < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -5065,6 +5259,7 @@ module Aws::DocDB
     #            </p>
     #   @return [String]
     class SwitchoverGlobalClusterMessage < Struct.new(
+      nil,
       :global_cluster_identifier,
       :target_db_cluster_identifier,
       keyword_init: true
@@ -5076,6 +5271,7 @@ module Aws::DocDB
     #   <p>A data type representing an Amazon DocumentDB global cluster.</p>
     #   @return [Types::GlobalCluster]
     class SwitchoverGlobalClusterResult < Struct.new(
+      nil,
       :global_cluster,
       keyword_init: true
     )
@@ -5090,6 +5286,7 @@ module Aws::DocDB
     #   <p>The optional value of the tag. The string value can be from 1 to 256 Unicode characters in length and can't be prefixed with "<code>aws:</code>" or "<code>rds:</code>". The string can contain only the set of Unicode letters, digits, white space, '_', '.', '/', '=', '+', '-' (Java regex: "^([\\p{L}\\p{Z}\\p{N}_.:/=+\\-]*)$").</p>
     #   @return [String]
     class Tag < Struct.new(
+      nil,
       :key,
       :value,
       keyword_init: true
@@ -5102,6 +5299,7 @@ module Aws::DocDB
     #   <p>A list of one or more tags.</p>
     #   @return [Array<Types::Tag>]
     class TagListMessage < Struct.new(
+      nil,
       :tag_list,
       keyword_init: true
     )
@@ -5126,6 +5324,7 @@ module Aws::DocDB
     #               version.</p>
     #   @return [Boolean]
     class UpgradeTarget < Struct.new(
+      nil,
       :engine,
       :engine_version,
       :description,
@@ -5145,6 +5344,7 @@ module Aws::DocDB
     #   <p>The status of the VPC security group.</p>
     #   @return [String]
     class VpcSecurityGroupMembership < Struct.new(
+      nil,
       :vpc_security_group_id,
       :status,
       keyword_init: true

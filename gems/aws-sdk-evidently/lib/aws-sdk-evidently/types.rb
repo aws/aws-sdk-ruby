@@ -10,6 +10,7 @@ module Aws::Evidently
     # @!attribute message
     #   @return [String]
     class AccessDeniedException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -23,6 +24,7 @@ module Aws::Evidently
     #   <p>An array of structures, where each structure assigns a feature variation to one user session.</p>
     #   @return [Array<Types::EvaluationRequest>]
     class BatchEvaluateFeatureInput < Struct.new(
+      nil,
       :project,
       :requests,
       keyword_init: true
@@ -35,6 +37,7 @@ module Aws::Evidently
     #          assignment to one user session.</p>
     #   @return [Array<Types::EvaluationResult>]
     class BatchEvaluateFeatureOutput < Struct.new(
+      nil,
       :results,
       keyword_init: true
     )
@@ -48,6 +51,7 @@ module Aws::Evidently
     #          events.</p>
     #   @return [String]
     class CloudWatchLogsDestination < Struct.new(
+      nil,
       :log_group,
       keyword_init: true
     )
@@ -61,6 +65,7 @@ module Aws::Evidently
     #          events.</p>
     #   @return [String]
     class CloudWatchLogsDestinationConfig < Struct.new(
+      nil,
       :log_group,
       keyword_init: true
     )
@@ -77,6 +82,7 @@ module Aws::Evidently
     #   <p>The type of the resource that is associated with the error.</p>
     #   @return [String]
     class ConflictException < Struct.new(
+      nil,
       :message,
       :resource_id,
       :resource_type,
@@ -132,6 +138,7 @@ module Aws::Evidently
     #            <p>For more information, see <a href="https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html">Tagging Amazon Web Services resources</a>.</p>
     #   @return [Hash<String, String>]
     class CreateExperimentInput < Struct.new(
+      nil,
       :project,
       :name,
       :description,
@@ -152,6 +159,7 @@ module Aws::Evidently
     #          that you created.</p>
     #   @return [Types::Experiment]
     class CreateExperimentOutput < Struct.new(
+      nil,
       :experiment,
       keyword_init: true
     )
@@ -201,6 +209,7 @@ module Aws::Evidently
     #        per override.</p>
     #   @return [Hash<String, String>]
     class CreateFeatureInput < Struct.new(
+      nil,
       :project,
       :name,
       :evaluation_strategy,
@@ -218,6 +227,7 @@ module Aws::Evidently
     #   <p>A structure that contains information about the new feature.</p>
     #   @return [Types::Feature]
     class CreateFeatureOutput < Struct.new(
+      nil,
       :feature,
       keyword_init: true
     )
@@ -260,6 +270,7 @@ module Aws::Evidently
     #            <p>For more information, see <a href="https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html">Tagging Amazon Web Services resources</a>.</p>
     #   @return [Hash<String, String>]
     class CreateLaunchInput < Struct.new(
+      nil,
       :project,
       :name,
       :description,
@@ -277,6 +288,7 @@ module Aws::Evidently
     #   <p>A structure that contains the configuration of the launch that was created.</p>
     #   @return [Types::Launch]
     class CreateLaunchOutput < Struct.new(
+      nil,
       :launch,
       keyword_init: true
     )
@@ -318,6 +330,7 @@ module Aws::Evidently
     #            <p>For more information, see <a href="https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html">Tagging Amazon Web Services resources</a>.</p>
     #   @return [Hash<String, String>]
     class CreateProjectInput < Struct.new(
+      nil,
       :name,
       :description,
       :data_delivery,
@@ -332,6 +345,7 @@ module Aws::Evidently
     #   <p>A structure that contains information about the created project.</p>
     #   @return [Types::Project]
     class CreateProjectOutput < Struct.new(
+      nil,
       :project,
       keyword_init: true
     )
@@ -359,6 +373,7 @@ module Aws::Evidently
     #            <p>For more information, see <a href="https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html">Tagging Amazon Web Services resources</a>.</p>
     #   @return [Hash<String, String>]
     class CreateSegmentInput < Struct.new(
+      nil,
       :name,
       :pattern,
       :description,
@@ -372,6 +387,7 @@ module Aws::Evidently
     #   <p>A structure that contains the complete information about the segment that was just created.</p>
     #   @return [Types::Segment]
     class CreateSegmentOutput < Struct.new(
+      nil,
       :segment,
       keyword_init: true
     )
@@ -385,6 +401,7 @@ module Aws::Evidently
     #   <p>The name of the experiment to delete.</p>
     #   @return [String]
     class DeleteExperimentInput < Struct.new(
+      nil,
       :project,
       :experiment,
       keyword_init: true
@@ -393,6 +410,7 @@ module Aws::Evidently
     end
 
     class DeleteExperimentOutput < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -405,6 +423,7 @@ module Aws::Evidently
     #   <p>The name of the feature to delete.</p>
     #   @return [String]
     class DeleteFeatureInput < Struct.new(
+      nil,
       :project,
       :feature,
       keyword_init: true
@@ -413,6 +432,7 @@ module Aws::Evidently
     end
 
     class DeleteFeatureOutput < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -425,6 +445,7 @@ module Aws::Evidently
     #   <p>The name of the launch to delete.</p>
     #   @return [String]
     class DeleteLaunchInput < Struct.new(
+      nil,
       :project,
       :launch,
       keyword_init: true
@@ -433,6 +454,7 @@ module Aws::Evidently
     end
 
     class DeleteLaunchOutput < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -442,6 +464,7 @@ module Aws::Evidently
     #   <p>The name or ARN of the project to delete.</p>
     #   @return [String]
     class DeleteProjectInput < Struct.new(
+      nil,
       :project,
       keyword_init: true
     )
@@ -449,6 +472,7 @@ module Aws::Evidently
     end
 
     class DeleteProjectOutput < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -458,6 +482,7 @@ module Aws::Evidently
     #   <p>Specifies the segment to delete.</p>
     #   @return [String]
     class DeleteSegmentInput < Struct.new(
+      nil,
       :segment,
       keyword_init: true
     )
@@ -465,6 +490,7 @@ module Aws::Evidently
     end
 
     class DeleteSegmentOutput < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -490,6 +516,7 @@ module Aws::Evidently
     #            <p>If you include this parameter, the value must be a JSON object. A JSON array is not supported.</p>
     #   @return [String]
     class EvaluateFeatureInput < Struct.new(
+      nil,
       :project,
       :feature,
       :entity_id,
@@ -517,6 +544,7 @@ module Aws::Evidently
     #   <p>If this user was assigned to a launch or experiment, this field lists the launch or experiment name.</p>
     #   @return [String]
     class EvaluateFeatureOutput < Struct.new(
+      nil,
       :variation,
       :value,
       :reason,
@@ -540,6 +568,7 @@ module Aws::Evidently
     #          in the evaluation events sent to Evidently from the user session. </p>
     #   @return [String]
     class EvaluationRequest < Struct.new(
+      nil,
       :feature,
       :entity_id,
       :evaluation_context,
@@ -576,6 +605,7 @@ module Aws::Evidently
     #   <p>If this user was assigned to a launch or experiment, this field lists the launch or experiment name.</p>
     #   @return [String]
     class EvaluationResult < Struct.new(
+      nil,
       :project,
       :feature,
       :variation,
@@ -598,6 +628,7 @@ module Aws::Evidently
     #          <code>aws.evidently.onlineab</code> if this is an evaluation rule for an experiment.</p>
     #   @return [String]
     class EvaluationRule < Struct.new(
+      nil,
       :name,
       :type,
       keyword_init: true
@@ -621,6 +652,7 @@ module Aws::Evidently
     #   <p>The event data.</p>
     #   @return [String]
     class Event < Struct.new(
+      nil,
       :timestamp,
       :type,
       :data,
@@ -695,6 +727,7 @@ module Aws::Evidently
     #   <p>The list of tag keys and values associated with this experiment.</p>
     #   @return [Hash<String, String>]
     class Experiment < Struct.new(
+      nil,
       :arn,
       :name,
       :project,
@@ -731,6 +764,7 @@ module Aws::Evidently
     #   <p>The date and time that the experiment ended.</p>
     #   @return [Time]
     class ExperimentExecution < Struct.new(
+      nil,
       :started_time,
       :ended_time,
       keyword_init: true
@@ -752,6 +786,7 @@ module Aws::Evidently
     #   <p>The content of the report.</p>
     #   @return [String]
     class ExperimentReport < Struct.new(
+      nil,
       :metric_name,
       :treatment_name,
       :report_name,
@@ -776,6 +811,7 @@ module Aws::Evidently
     #   <p>The values for the <code>metricName</code> that were recorded in the experiment.</p>
     #   @return [Array<Float>]
     class ExperimentResultsData < Struct.new(
+      nil,
       :metric_name,
       :treatment_name,
       :result_stat,
@@ -790,6 +826,7 @@ module Aws::Evidently
     #   <p>The time and date that Evidently completed the analysis of the experiment.</p>
     #   @return [Time]
     class ExperimentSchedule < Struct.new(
+      nil,
       :analysis_complete_time,
       keyword_init: true
     )
@@ -854,6 +891,7 @@ module Aws::Evidently
     #         in the <a href="https://docs.aws.amazon.com/cloudwatchevidently/latest/APIReference/API_EvaluateFeature.html">EvaluateFeature</a> operation.</p>
     #   @return [Hash<String, String>]
     class Feature < Struct.new(
+      nil,
       :arn,
       :name,
       :project,
@@ -909,6 +947,7 @@ module Aws::Evidently
     #   <p>The list of tag keys and values associated with this feature.</p>
     #   @return [Hash<String, String>]
     class FeatureSummary < Struct.new(
+      nil,
       :arn,
       :name,
       :project,
@@ -931,6 +970,7 @@ module Aws::Evidently
     #   <p>The name of the experiment that you want to see the details of.</p>
     #   @return [String]
     class GetExperimentInput < Struct.new(
+      nil,
       :project,
       :experiment,
       keyword_init: true
@@ -942,6 +982,7 @@ module Aws::Evidently
     #   <p>A structure containing the configuration details of the experiment.</p>
     #   @return [Types::Experiment]
     class GetExperimentOutput < Struct.new(
+      nil,
       :experiment,
       keyword_init: true
     )
@@ -1010,6 +1051,7 @@ module Aws::Evidently
     #   <p>In seconds, the amount of time to aggregate results together. </p>
     #   @return [Integer]
     class GetExperimentResultsInput < Struct.new(
+      nil,
       :project,
       :experiment,
       :start_time,
@@ -1040,6 +1082,7 @@ module Aws::Evidently
     #         enough events to provide valid results, this field is not returned.</p>
     #   @return [String]
     class GetExperimentResultsOutput < Struct.new(
+      nil,
       :results_data,
       :reports,
       :timestamps,
@@ -1056,6 +1099,7 @@ module Aws::Evidently
     #   <p>The name of the feature that you want to retrieve information for.</p>
     #   @return [String]
     class GetFeatureInput < Struct.new(
+      nil,
       :project,
       :feature,
       keyword_init: true
@@ -1067,6 +1111,7 @@ module Aws::Evidently
     #   <p>A structure containing the configuration details of the feature.</p>
     #   @return [Types::Feature]
     class GetFeatureOutput < Struct.new(
+      nil,
       :feature,
       keyword_init: true
     )
@@ -1080,6 +1125,7 @@ module Aws::Evidently
     #   <p>The name of the launch that you want to see the details of.</p>
     #   @return [String]
     class GetLaunchInput < Struct.new(
+      nil,
       :project,
       :launch,
       keyword_init: true
@@ -1091,6 +1137,7 @@ module Aws::Evidently
     #   <p>A structure containing the configuration details of the launch.</p>
     #   @return [Types::Launch]
     class GetLaunchOutput < Struct.new(
+      nil,
       :launch,
       keyword_init: true
     )
@@ -1101,6 +1148,7 @@ module Aws::Evidently
     #   <p>The name or ARN of the project that you want to see the details of.</p>
     #   @return [String]
     class GetProjectInput < Struct.new(
+      nil,
       :project,
       keyword_init: true
     )
@@ -1111,6 +1159,7 @@ module Aws::Evidently
     #   <p>A structure containing the configuration details of the project.</p>
     #   @return [Types::Project]
     class GetProjectOutput < Struct.new(
+      nil,
       :project,
       keyword_init: true
     )
@@ -1121,6 +1170,7 @@ module Aws::Evidently
     #   <p>The ARN of the segment to return information for.</p>
     #   @return [String]
     class GetSegmentInput < Struct.new(
+      nil,
       :segment,
       keyword_init: true
     )
@@ -1131,6 +1181,7 @@ module Aws::Evidently
     #   <p>A structure that contains the complete information about the segment.</p>
     #   @return [Types::Segment]
     class GetSegmentOutput < Struct.new(
+      nil,
       :segment,
       keyword_init: true
     )
@@ -1141,6 +1192,7 @@ module Aws::Evidently
     # @!attribute message
     #   @return [String]
     class InternalServerException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -1198,6 +1250,7 @@ module Aws::Evidently
     #   <p>The list of tag keys and values associated with this launch.</p>
     #   @return [Hash<String, String>]
     class Launch < Struct.new(
+      nil,
       :arn,
       :name,
       :project,
@@ -1226,6 +1279,7 @@ module Aws::Evidently
     #   <p>The date and time that the launch ended.</p>
     #   @return [Time]
     class LaunchExecution < Struct.new(
+      nil,
       :started_time,
       :ended_time,
       keyword_init: true
@@ -1245,6 +1299,7 @@ module Aws::Evidently
     #   <p>The feature variation for this launch group. This is a key-value pair.</p>
     #   @return [Hash<String, String>]
     class LaunchGroup < Struct.new(
+      nil,
       :name,
       :description,
       :feature_variations,
@@ -1268,6 +1323,7 @@ module Aws::Evidently
     #   <p>The feature variation to use for this launch group.</p>
     #   @return [String]
     class LaunchGroupConfig < Struct.new(
+      nil,
       :name,
       :description,
       :feature,
@@ -1291,6 +1347,7 @@ module Aws::Evidently
     #   <p>Use this optional parameter to limit the returned results to only the experiments with the status that you specify here.</p>
     #   @return [String]
     class ListExperimentsInput < Struct.new(
+      nil,
       :project,
       :max_results,
       :next_token,
@@ -1309,6 +1366,7 @@ module Aws::Evidently
     #          the next set of results.</p>
     #   @return [String]
     class ListExperimentsOutput < Struct.new(
+      nil,
       :experiments,
       :next_token,
       keyword_init: true
@@ -1327,6 +1385,7 @@ module Aws::Evidently
     #          <code>ListFeatures</code> operation.</p>
     #   @return [String]
     class ListFeaturesInput < Struct.new(
+      nil,
       :project,
       :max_results,
       :next_token,
@@ -1344,6 +1403,7 @@ module Aws::Evidently
     #          the next set of results.</p>
     #   @return [String]
     class ListFeaturesOutput < Struct.new(
+      nil,
       :features,
       :next_token,
       keyword_init: true
@@ -1365,6 +1425,7 @@ module Aws::Evidently
     #   <p>Use this optional parameter to limit the returned results to only the launches with the status that you specify here.</p>
     #   @return [String]
     class ListLaunchesInput < Struct.new(
+      nil,
       :project,
       :max_results,
       :next_token,
@@ -1383,6 +1444,7 @@ module Aws::Evidently
     #          the next set of results.</p>
     #   @return [String]
     class ListLaunchesOutput < Struct.new(
+      nil,
       :launches,
       :next_token,
       keyword_init: true
@@ -1398,6 +1460,7 @@ module Aws::Evidently
     #          <code>ListProjects</code> operation.</p>
     #   @return [String]
     class ListProjectsInput < Struct.new(
+      nil,
       :max_results,
       :next_token,
       keyword_init: true
@@ -1413,6 +1476,7 @@ module Aws::Evidently
     #          the next set of results.</p>
     #   @return [String]
     class ListProjectsOutput < Struct.new(
+      nil,
       :projects,
       :next_token,
       keyword_init: true
@@ -1434,6 +1498,7 @@ module Aws::Evidently
     #   <p>Specifies whether to return information about launches or experiments that use this segment.</p>
     #   @return [String]
     class ListSegmentReferencesInput < Struct.new(
+      nil,
       :segment,
       :max_results,
       :next_token,
@@ -1452,6 +1517,7 @@ module Aws::Evidently
     #         the next set of results.</p>
     #   @return [String]
     class ListSegmentReferencesOutput < Struct.new(
+      nil,
       :referenced_by,
       :next_token,
       keyword_init: true
@@ -1467,6 +1533,7 @@ module Aws::Evidently
     #         <code>ListSegments</code> operation.</p>
     #   @return [String]
     class ListSegmentsInput < Struct.new(
+      nil,
       :max_results,
       :next_token,
       keyword_init: true
@@ -1482,6 +1549,7 @@ module Aws::Evidently
     #         the next set of results.</p>
     #   @return [String]
     class ListSegmentsOutput < Struct.new(
+      nil,
       :segments,
       :next_token,
       keyword_init: true
@@ -1493,6 +1561,7 @@ module Aws::Evidently
     #   <p>The ARN of the resource that you want to see the tags of.</p>
     #   @return [String]
     class ListTagsForResourceInput < Struct.new(
+      nil,
       :resource_arn,
       keyword_init: true
     )
@@ -1503,6 +1572,7 @@ module Aws::Evidently
     #   <p>The list of tag keys and values associated with the resource you specified.</p>
     #   @return [Hash<String, String>]
     class ListTagsForResourceOutput < Struct.new(
+      nil,
       :tags,
       keyword_init: true
     )
@@ -1530,6 +1600,7 @@ module Aws::Evidently
     #   <p>The label for the units that the metric is measuring.</p>
     #   @return [String]
     class MetricDefinition < Struct.new(
+      nil,
       :name,
       :entity_id_key,
       :value_key,
@@ -1561,6 +1632,7 @@ module Aws::Evidently
     #   <p>A label for the units that the metric is measuring.</p>
     #   @return [String]
     class MetricDefinitionConfig < Struct.new(
+      nil,
       :name,
       :entity_id_key,
       :value_key,
@@ -1585,6 +1657,7 @@ module Aws::Evidently
     #        better.</p>
     #   @return [String]
     class MetricGoal < Struct.new(
+      nil,
       :metric_definition,
       :desired_change,
       keyword_init: true
@@ -1606,6 +1679,7 @@ module Aws::Evidently
     #          better.</p>
     #   @return [String]
     class MetricGoalConfig < Struct.new(
+      nil,
       :metric_definition,
       :desired_change,
       keyword_init: true
@@ -1618,6 +1692,7 @@ module Aws::Evidently
     #   <p>A structure that defines the metric.</p>
     #   @return [Types::MetricDefinition]
     class MetricMonitor < Struct.new(
+      nil,
       :metric_definition,
       keyword_init: true
     )
@@ -1629,6 +1704,7 @@ module Aws::Evidently
     #   <p>A structure that defines the metric.</p>
     #   @return [Types::MetricDefinitionConfig]
     class MetricMonitorConfig < Struct.new(
+      nil,
       :metric_definition,
       keyword_init: true
     )
@@ -1648,6 +1724,7 @@ module Aws::Evidently
     #         traffic to that variation.</p>
     #   @return [Hash<String, Integer>]
     class OnlineAbConfig < Struct.new(
+      nil,
       :control_treatment_name,
       :treatment_weights,
       keyword_init: true
@@ -1668,6 +1745,7 @@ module Aws::Evidently
     #         traffic to that variation.</p>
     #   @return [Hash<String, Integer>]
     class OnlineAbDefinition < Struct.new(
+      nil,
       :control_treatment_name,
       :treatment_weights,
       keyword_init: true
@@ -1724,6 +1802,7 @@ module Aws::Evidently
     #   <p>The list of tag keys and values associated with this project.</p>
     #   @return [Hash<String, String>]
     class Project < Struct.new(
+      nil,
       :arn,
       :name,
       :status,
@@ -1756,6 +1835,7 @@ module Aws::Evidently
     #   <p>The ID of the AppConfig profile to use for client-side evaluation. </p>
     #   @return [String]
     class ProjectAppConfigResource < Struct.new(
+      nil,
       :application_id,
       :environment_id,
       :configuration_profile_id,
@@ -1779,6 +1859,7 @@ module Aws::Evidently
     #         environment that is within the application that you specify for <code>applicationId</code>.</p>
     #   @return [String]
     class ProjectAppConfigResourceConfig < Struct.new(
+      nil,
       :application_id,
       :environment_id,
       keyword_init: true
@@ -1797,6 +1878,7 @@ module Aws::Evidently
     #         stores the log group name.</p>
     #   @return [Types::CloudWatchLogsDestination]
     class ProjectDataDelivery < Struct.new(
+      nil,
       :s3_destination,
       :cloud_watch_logs,
       keyword_init: true
@@ -1815,6 +1897,7 @@ module Aws::Evidently
     #          stores the log group name.</p>
     #   @return [Types::CloudWatchLogsDestinationConfig]
     class ProjectDataDeliveryConfig < Struct.new(
+      nil,
       :s3_destination,
       :cloud_watch_logs,
       keyword_init: true
@@ -1860,6 +1943,7 @@ module Aws::Evidently
     #   <p>The list of tag keys and values associated with this project.</p>
     #   @return [Hash<String, String>]
     class ProjectSummary < Struct.new(
+      nil,
       :arn,
       :name,
       :status,
@@ -1885,6 +1969,7 @@ module Aws::Evidently
     #         Evidently.</p>
     #   @return [Array<Types::Event>]
     class PutProjectEventsInput < Struct.new(
+      nil,
       :project,
       :events,
       keyword_init: true
@@ -1900,6 +1985,7 @@ module Aws::Evidently
     #         error codes, if any.</p>
     #   @return [Array<Types::PutProjectEventsResultEntry>]
     class PutProjectEventsOutput < Struct.new(
+      nil,
       :failed_event_count,
       :event_results,
       keyword_init: true
@@ -1920,6 +2006,7 @@ module Aws::Evidently
     #         returned here.</p>
     #   @return [String]
     class PutProjectEventsResultEntry < Struct.new(
+      nil,
       :event_id,
       :error_code,
       :error_message,
@@ -1952,6 +2039,7 @@ module Aws::Evidently
     #   <p>The day and time that this experiment or launch was most recently updated.</p>
     #   @return [String]
     class RefResource < Struct.new(
+      nil,
       :name,
       :type,
       :arn,
@@ -1974,6 +2062,7 @@ module Aws::Evidently
     #   <p>The type of the resource that is associated with the error.</p>
     #   @return [String]
     class ResourceNotFoundException < Struct.new(
+      nil,
       :message,
       :resource_id,
       :resource_type,
@@ -1991,6 +2080,7 @@ module Aws::Evidently
     #   <p>The bucket prefix in which Evidently stores evaluation events.</p>
     #   @return [String]
     class S3Destination < Struct.new(
+      nil,
       :bucket,
       :prefix,
       keyword_init: true
@@ -2007,6 +2097,7 @@ module Aws::Evidently
     #   <p>The bucket prefix in which Evidently stores evaluation events.</p>
     #   @return [String]
     class S3DestinationConfig < Struct.new(
+      nil,
       :bucket,
       :prefix,
       keyword_init: true
@@ -2039,6 +2130,7 @@ module Aws::Evidently
     #       that you have already created, and defines the traffic split for that segment.</p>
     #   @return [Array<Types::SegmentOverride>]
     class ScheduledSplit < Struct.new(
+      nil,
       :start_time,
       :group_weights,
       :segment_overrides,
@@ -2072,6 +2164,7 @@ module Aws::Evidently
     #         that you have already created, and defines the traffic split for that segment.</p>
     #   @return [Array<Types::SegmentOverride>]
     class ScheduledSplitConfig < Struct.new(
+      nil,
       :start_time,
       :group_weights,
       :segment_overrides,
@@ -2088,6 +2181,7 @@ module Aws::Evidently
     #         step.</p>
     #   @return [Array<Types::ScheduledSplitConfig>]
     class ScheduledSplitsLaunchConfig < Struct.new(
+      nil,
       :steps,
       keyword_init: true
     )
@@ -2102,6 +2196,7 @@ module Aws::Evidently
     #         step.</p>
     #   @return [Array<Types::ScheduledSplit>]
     class ScheduledSplitsLaunchDefinition < Struct.new(
+      nil,
       :steps,
       keyword_init: true
     )
@@ -2143,6 +2238,7 @@ module Aws::Evidently
     #   <p>The list of tag keys and values associated with this launch.</p>
     #   @return [Hash<String, String>]
     class Segment < Struct.new(
+      nil,
       :arn,
       :name,
       :pattern,
@@ -2173,6 +2269,7 @@ module Aws::Evidently
     #       so a weight of 50000 represents 50% of traffic.</p>
     #   @return [Hash<String, Integer>]
     class SegmentOverride < Struct.new(
+      nil,
       :segment,
       :evaluation_order,
       :weights,
@@ -2197,6 +2294,7 @@ module Aws::Evidently
     #   <p>The ID of the service quota that was exceeded.</p>
     #   @return [String]
     class ServiceQuotaExceededException < Struct.new(
+      nil,
       :message,
       :resource_id,
       :resource_type,
@@ -2211,6 +2309,7 @@ module Aws::Evidently
     # @!attribute message
     #   @return [String]
     class ServiceUnavailableException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -2228,6 +2327,7 @@ module Aws::Evidently
     #         the experiment starts.</p>
     #   @return [Time]
     class StartExperimentInput < Struct.new(
+      nil,
       :project,
       :experiment,
       :analysis_complete_time,
@@ -2240,6 +2340,7 @@ module Aws::Evidently
     #   <p>A timestamp that indicates when the experiment started.</p>
     #   @return [Time]
     class StartExperimentOutput < Struct.new(
+      nil,
       :started_time,
       keyword_init: true
     )
@@ -2253,6 +2354,7 @@ module Aws::Evidently
     #   <p>The name of the launch to start.</p>
     #   @return [String]
     class StartLaunchInput < Struct.new(
+      nil,
       :project,
       :launch,
       keyword_init: true
@@ -2264,6 +2366,7 @@ module Aws::Evidently
     #   <p>A structure that contains information about the launch that was started.</p>
     #   @return [Types::Launch]
     class StartLaunchOutput < Struct.new(
+      nil,
       :launch,
       keyword_init: true
     )
@@ -2284,6 +2387,7 @@ module Aws::Evidently
     #   <p>A string that describes why you are stopping the experiment.</p>
     #   @return [String]
     class StopExperimentInput < Struct.new(
+      nil,
       :project,
       :experiment,
       :desired_state,
@@ -2297,6 +2401,7 @@ module Aws::Evidently
     #   <p>The date and time that the experiment stopped.</p>
     #   @return [Time]
     class StopExperimentOutput < Struct.new(
+      nil,
       :ended_time,
       keyword_init: true
     )
@@ -2317,6 +2422,7 @@ module Aws::Evidently
     #   <p>A string that describes why you are stopping the launch.</p>
     #   @return [String]
     class StopLaunchInput < Struct.new(
+      nil,
       :project,
       :launch,
       :desired_state,
@@ -2330,6 +2436,7 @@ module Aws::Evidently
     #   <p>The date and time that the launch stopped.</p>
     #   @return [Time]
     class StopLaunchOutput < Struct.new(
+      nil,
       :ended_time,
       keyword_init: true
     )
@@ -2343,6 +2450,7 @@ module Aws::Evidently
     #   <p>The list of key-value pairs to associate with the resource.</p>
     #   @return [Hash<String, String>]
     class TagResourceInput < Struct.new(
+      nil,
       :resource_arn,
       :tags,
       keyword_init: true
@@ -2351,6 +2459,7 @@ module Aws::Evidently
     end
 
     class TagResourceOutput < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -2363,6 +2472,7 @@ module Aws::Evidently
     #   <p>A sample <code>evaluationContext</code> JSON block to test against the specified pattern.</p>
     #   @return [String]
     class TestSegmentPatternInput < Struct.new(
+      nil,
       :pattern,
       :payload,
       keyword_init: true
@@ -2374,6 +2484,7 @@ module Aws::Evidently
     #   <p>Returns <code>true</code> if the pattern matches the payload.</p>
     #   @return [Boolean]
     class TestSegmentPatternOutput < Struct.new(
+      nil,
       :match,
       keyword_init: true
     )
@@ -2390,6 +2501,7 @@ module Aws::Evidently
     #   <p>The ID of the service quota that was exceeded.</p>
     #   @return [String]
     class ThrottlingException < Struct.new(
+      nil,
       :message,
       :service_code,
       :quota_code,
@@ -2411,6 +2523,7 @@ module Aws::Evidently
     #         feature name, and the value is the variation name.</p>
     #   @return [Hash<String, String>]
     class Treatment < Struct.new(
+      nil,
       :name,
       :description,
       :feature_variations,
@@ -2434,6 +2547,7 @@ module Aws::Evidently
     #   <p>The name of the variation to use as this treatment in the experiment.</p>
     #   @return [String]
     class TreatmentConfig < Struct.new(
+      nil,
       :name,
       :description,
       :feature,
@@ -2450,6 +2564,7 @@ module Aws::Evidently
     #   <p>The list of tag keys to remove from the resource.</p>
     #   @return [Array<String>]
     class UntagResourceInput < Struct.new(
+      nil,
       :resource_arn,
       :tag_keys,
       keyword_init: true
@@ -2458,6 +2573,7 @@ module Aws::Evidently
     end
 
     class UntagResourceOutput < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -2507,6 +2623,7 @@ module Aws::Evidently
     #         also specifies how much experiment traffic is allocated to each variation.</p>
     #   @return [Types::OnlineAbConfig]
     class UpdateExperimentInput < Struct.new(
+      nil,
       :project,
       :experiment,
       :description,
@@ -2527,6 +2644,7 @@ module Aws::Evidently
     #       that was updated.</p>
     #   @return [Types::Experiment]
     class UpdateExperimentOutput < Struct.new(
+      nil,
       :experiment,
       keyword_init: true
     )
@@ -2573,6 +2691,7 @@ module Aws::Evidently
     #         per override.</p>
     #   @return [Hash<String, String>]
     class UpdateFeatureInput < Struct.new(
+      nil,
       :project,
       :feature,
       :evaluation_strategy,
@@ -2590,6 +2709,7 @@ module Aws::Evidently
     #   <p>A structure that contains information about the updated feature.</p>
     #   @return [Types::Feature]
     class UpdateFeatureOutput < Struct.new(
+      nil,
       :feature,
       keyword_init: true
     )
@@ -2624,6 +2744,7 @@ module Aws::Evidently
     #         variations during each step of the launch.</p>
     #   @return [Types::ScheduledSplitsLaunchConfig]
     class UpdateLaunchInput < Struct.new(
+      nil,
       :project,
       :launch,
       :description,
@@ -2640,6 +2761,7 @@ module Aws::Evidently
     #   <p>A structure that contains the new configuration of the launch that was updated.</p>
     #   @return [Types::Launch]
     class UpdateLaunchOutput < Struct.new(
+      nil,
       :launch,
       keyword_init: true
     )
@@ -2657,6 +2779,7 @@ module Aws::Evidently
     #         events.</p>
     #   @return [Types::CloudWatchLogsDestinationConfig]
     class UpdateProjectDataDeliveryInput < Struct.new(
+      nil,
       :project,
       :s3_destination,
       :cloud_watch_logs,
@@ -2669,6 +2792,7 @@ module Aws::Evidently
     #   <p>A structure containing details about the project that you updated.</p>
     #   @return [Types::Project]
     class UpdateProjectDataDeliveryOutput < Struct.new(
+      nil,
       :project,
       keyword_init: true
     )
@@ -2691,6 +2815,7 @@ module Aws::Evidently
     #   <p>An optional description of the project.</p>
     #   @return [String]
     class UpdateProjectInput < Struct.new(
+      nil,
       :project,
       :app_config_resource,
       :description,
@@ -2703,6 +2828,7 @@ module Aws::Evidently
     #   <p>A structure containing information about the updated project.</p>
     #   @return [Types::Project]
     class UpdateProjectOutput < Struct.new(
+      nil,
       :project,
       keyword_init: true
     )
@@ -2719,6 +2845,7 @@ module Aws::Evidently
     #   <p>The parameter that caused the exception.</p>
     #   @return [Array<Types::ValidationExceptionField>]
     class ValidationException < Struct.new(
+      nil,
       :message,
       :reason,
       :field_list,
@@ -2735,6 +2862,7 @@ module Aws::Evidently
     #   <p>The error message.</p>
     #   @return [String]
     class ValidationExceptionField < Struct.new(
+      nil,
       :name,
       :message,
       keyword_init: true
@@ -2786,6 +2914,7 @@ module Aws::Evidently
     #   <p>The value assigned to this variation.</p>
     #   @return [Types::VariableValue]
     class Variation < Struct.new(
+      nil,
       :name,
       :value,
       keyword_init: true
@@ -2801,6 +2930,7 @@ module Aws::Evidently
     #   <p>The value assigned to this variation.</p>
     #   @return [Types::VariableValue]
     class VariationConfig < Struct.new(
+      nil,
       :name,
       :value,
       keyword_init: true

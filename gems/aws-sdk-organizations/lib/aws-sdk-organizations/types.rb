@@ -11,6 +11,7 @@ module Aws::Organizations
     # @!attribute message
     #   @return [String]
     class AWSOrganizationsNotInUseException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -23,6 +24,7 @@ module Aws::Organizations
     #       followed by from 8 to 32 lowercase letters or digits.</p>
     #   @return [String]
     class AcceptHandshakeRequest < Struct.new(
+      nil,
       :handshake_id,
       keyword_init: true
     )
@@ -33,6 +35,7 @@ module Aws::Organizations
     #   <p>A structure that contains details about the accepted handshake.</p>
     #   @return [Types::Handshake]
     class AcceptHandshakeResponse < Struct.new(
+      nil,
       :handshake,
       keyword_init: true
     )
@@ -46,6 +49,7 @@ module Aws::Organizations
     # @!attribute message
     #   @return [String]
     class AccessDeniedException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -61,6 +65,7 @@ module Aws::Organizations
     # @!attribute reason
     #   @return [String]
     class AccessDeniedForDependencyException < Struct.new(
+      nil,
       :message,
       :reason,
       keyword_init: true
@@ -115,6 +120,7 @@ module Aws::Organizations
     #   <p>The date the account became a part of the organization.</p>
     #   @return [Time]
     class Account < Struct.new(
+      nil,
       :id,
       :arn,
       :email,
@@ -132,6 +138,7 @@ module Aws::Organizations
     # @!attribute message
     #   @return [String]
     class AccountAlreadyClosedException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -143,6 +150,7 @@ module Aws::Organizations
     # @!attribute message
     #   @return [String]
     class AccountAlreadyRegisteredException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -155,6 +163,7 @@ module Aws::Organizations
     # @!attribute message
     #   @return [String]
     class AccountNotFoundException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -165,6 +174,7 @@ module Aws::Organizations
     # @!attribute message
     #   @return [String]
     class AccountNotRegisteredException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -178,6 +188,7 @@ module Aws::Organizations
     # @!attribute message
     #   @return [String]
     class AccountOwnerNotVerifiedException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -189,6 +200,7 @@ module Aws::Organizations
     # @!attribute message
     #   @return [String]
     class AlreadyInOrganizationException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -227,6 +239,7 @@ module Aws::Organizations
     #            </ul>
     #   @return [String]
     class AttachPolicyRequest < Struct.new(
+      nil,
       :policy_id,
       :target_id,
       keyword_init: true
@@ -241,6 +254,7 @@ module Aws::Organizations
     #       followed by from 8 to 32 lowercase letters or digits.</p>
     #   @return [String]
     class CancelHandshakeRequest < Struct.new(
+      nil,
       :handshake_id,
       keyword_init: true
     )
@@ -251,6 +265,7 @@ module Aws::Organizations
     #   <p>A structure that contains details about the handshake that you canceled.</p>
     #   @return [Types::Handshake]
     class CancelHandshakeResponse < Struct.new(
+      nil,
       :handshake,
       keyword_init: true
     )
@@ -280,6 +295,7 @@ module Aws::Organizations
     #   <p>The type of this child entity.</p>
     #   @return [String]
     class Child < Struct.new(
+      nil,
       :id,
       :type,
       keyword_init: true
@@ -292,6 +308,7 @@ module Aws::Organizations
     # @!attribute message
     #   @return [String]
     class ChildNotFoundException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -303,6 +320,7 @@ module Aws::Organizations
     #           </p>
     #   @return [String]
     class CloseAccountRequest < Struct.new(
+      nil,
       :account_id,
       keyword_init: true
     )
@@ -314,6 +332,7 @@ module Aws::Organizations
     # @!attribute message
     #   @return [String]
     class ConcurrentModificationException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -325,6 +344,7 @@ module Aws::Organizations
     # @!attribute message
     #   @return [String]
     class ConflictException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -551,6 +571,7 @@ module Aws::Organizations
     # @!attribute reason
     #   @return [String]
     class ConstraintViolationException < Struct.new(
+      nil,
       :message,
       :reason,
       keyword_init: true
@@ -649,6 +670,7 @@ module Aws::Organizations
     #            </note>
     #   @return [Array<Types::Tag>]
     class CreateAccountRequest < Struct.new(
+      nil,
       :email,
       :account_name,
       :role_name,
@@ -669,6 +691,7 @@ module Aws::Organizations
     #                   <i>Organizations User Guide</i>.</p>
     #   @return [Types::CreateAccountStatus]
     class CreateAccountResponse < Struct.new(
+      nil,
       :create_account_status,
       keyword_init: true
     )
@@ -774,6 +797,7 @@ module Aws::Organizations
     #            </ul>
     #   @return [String]
     class CreateAccountStatus < Struct.new(
+      nil,
       :id,
       :account_name,
       :state,
@@ -792,6 +816,7 @@ module Aws::Organizations
     # @!attribute message
     #   @return [String]
     class CreateAccountStatusNotFoundException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -899,6 +924,7 @@ module Aws::Organizations
     #            </note>
     #   @return [Array<Types::Tag>]
     class CreateGovCloudAccountRequest < Struct.new(
+      nil,
       :email,
       :account_name,
       :role_name,
@@ -914,6 +940,7 @@ module Aws::Organizations
     #               GovCloud (US) account in an organization.</p>
     #   @return [Types::CreateAccountStatus]
     class CreateGovCloudAccountResponse < Struct.new(
+      nil,
       :create_account_status,
       keyword_init: true
     )
@@ -944,6 +971,7 @@ module Aws::Organizations
     #            </ul>
     #   @return [String]
     class CreateOrganizationRequest < Struct.new(
+      nil,
       :feature_set,
       keyword_init: true
     )
@@ -954,6 +982,7 @@ module Aws::Organizations
     #   <p>A structure that contains details about the newly created organization.</p>
     #   @return [Types::Organization]
     class CreateOrganizationResponse < Struct.new(
+      nil,
       :organization,
       keyword_init: true
     )
@@ -994,6 +1023,7 @@ module Aws::Organizations
     #            </note>
     #   @return [Array<Types::Tag>]
     class CreateOrganizationalUnitRequest < Struct.new(
+      nil,
       :parent_id,
       :name,
       :tags,
@@ -1006,6 +1036,7 @@ module Aws::Organizations
     #   <p>A structure that contains details about the newly created OU.</p>
     #   @return [Types::OrganizationalUnit]
     class CreateOrganizationalUnitResponse < Struct.new(
+      nil,
       :organizational_unit,
       keyword_init: true
     )
@@ -1085,6 +1116,7 @@ module Aws::Organizations
     #            </note>
     #   @return [Array<Types::Tag>]
     class CreatePolicyRequest < Struct.new(
+      nil,
       :content,
       :description,
       :name,
@@ -1099,6 +1131,7 @@ module Aws::Organizations
     #   <p>A structure that contains details about the newly created policy.</p>
     #   @return [Types::Policy]
     class CreatePolicyResponse < Struct.new(
+      nil,
       :policy,
       keyword_init: true
     )
@@ -1112,6 +1145,7 @@ module Aws::Organizations
     #       followed by from 8 to 32 lowercase letters or digits.</p>
     #   @return [String]
     class DeclineHandshakeRequest < Struct.new(
+      nil,
       :handshake_id,
       keyword_init: true
     )
@@ -1123,6 +1157,7 @@ module Aws::Organizations
     #               to show the value <code>DECLINED</code>.</p>
     #   @return [Types::Handshake]
     class DeclineHandshakeResponse < Struct.new(
+      nil,
       :handshake,
       keyword_init: true
     )
@@ -1158,6 +1193,7 @@ module Aws::Organizations
     #   <p>The date when the account was made a delegated administrator.</p>
     #   @return [Time]
     class DelegatedAdministrator < Struct.new(
+      nil,
       :id,
       :arn,
       :email,
@@ -1183,6 +1219,7 @@ module Aws::Organizations
     #   <p>The date that the account became a delegated administrator for this service. </p>
     #   @return [Time]
     class DelegatedService < Struct.new(
+      nil,
       :service_principal,
       :delegation_enabled_date,
       keyword_init: true
@@ -1199,6 +1236,7 @@ module Aws::Organizations
     #       or digits.</p>
     #   @return [String]
     class DeleteOrganizationalUnitRequest < Struct.new(
+      nil,
       :organizational_unit_id,
       keyword_init: true
     )
@@ -1213,6 +1251,7 @@ module Aws::Organizations
     #       by from 8 to 128 lowercase or uppercase letters, digits, or the underscore character (_).</p>
     #   @return [String]
     class DeletePolicyRequest < Struct.new(
+      nil,
       :policy_id,
       keyword_init: true
     )
@@ -1232,6 +1271,7 @@ module Aws::Organizations
     #               permissions.</p>
     #   @return [String]
     class DeregisterDelegatedAdministratorRequest < Struct.new(
+      nil,
       :account_id,
       :service_principal,
       keyword_init: true
@@ -1246,6 +1286,7 @@ module Aws::Organizations
     #       digits.</p>
     #   @return [String]
     class DescribeAccountRequest < Struct.new(
+      nil,
       :account_id,
       keyword_init: true
     )
@@ -1263,6 +1304,7 @@ module Aws::Organizations
     #            </important>
     #   @return [Types::Account]
     class DescribeAccountResponse < Struct.new(
+      nil,
       :account,
       keyword_init: true
     )
@@ -1277,6 +1319,7 @@ module Aws::Organizations
     #       requires "car-" followed by from 8 to 32 lowercase letters or digits.</p>
     #   @return [String]
     class DescribeCreateAccountStatusRequest < Struct.new(
+      nil,
       :create_account_request_id,
       keyword_init: true
     )
@@ -1287,6 +1330,7 @@ module Aws::Organizations
     #   <p>A structure that contains the current status of an account creation request.</p>
     #   @return [Types::CreateAccountStatus]
     class DescribeCreateAccountStatusResponse < Struct.new(
+      nil,
       :create_account_status,
       keyword_init: true
     )
@@ -1335,6 +1379,7 @@ module Aws::Organizations
     #               the target is not supported.</p>
     #   @return [String]
     class DescribeEffectivePolicyRequest < Struct.new(
+      nil,
       :policy_type,
       :target_id,
       keyword_init: true
@@ -1346,6 +1391,7 @@ module Aws::Organizations
     #   <p>The contents of the effective policy.</p>
     #   @return [Types::EffectivePolicy]
     class DescribeEffectivePolicyResponse < Struct.new(
+      nil,
       :effective_policy,
       keyword_init: true
     )
@@ -1360,6 +1406,7 @@ module Aws::Organizations
     #       followed by from 8 to 32 lowercase letters or digits.</p>
     #   @return [String]
     class DescribeHandshakeRequest < Struct.new(
+      nil,
       :handshake_id,
       keyword_init: true
     )
@@ -1370,6 +1417,7 @@ module Aws::Organizations
     #   <p>A structure that contains information about the specified handshake.</p>
     #   @return [Types::Handshake]
     class DescribeHandshakeResponse < Struct.new(
+      nil,
       :handshake,
       keyword_init: true
     )
@@ -1388,6 +1436,7 @@ module Aws::Organizations
     #            </important>
     #   @return [Types::Organization]
     class DescribeOrganizationResponse < Struct.new(
+      nil,
       :organization,
       keyword_init: true
     )
@@ -1404,6 +1453,7 @@ module Aws::Organizations
     #       or digits.</p>
     #   @return [String]
     class DescribeOrganizationalUnitRequest < Struct.new(
+      nil,
       :organizational_unit_id,
       keyword_init: true
     )
@@ -1414,6 +1464,7 @@ module Aws::Organizations
     #   <p>A structure that contains details about the specified OU.</p>
     #   @return [Types::OrganizationalUnit]
     class DescribeOrganizationalUnitResponse < Struct.new(
+      nil,
       :organizational_unit,
       keyword_init: true
     )
@@ -1428,6 +1479,7 @@ module Aws::Organizations
     #       by from 8 to 128 lowercase or uppercase letters, digits, or the underscore character (_).</p>
     #   @return [String]
     class DescribePolicyRequest < Struct.new(
+      nil,
       :policy_id,
       keyword_init: true
     )
@@ -1438,6 +1490,7 @@ module Aws::Organizations
     #   <p>A structure that contains details about the specified policy.</p>
     #   @return [Types::Policy]
     class DescribePolicyResponse < Struct.new(
+      nil,
       :policy,
       keyword_init: true
     )
@@ -1448,6 +1501,7 @@ module Aws::Organizations
     #   <p>A structure that contains details about the resource policy.</p>
     #   @return [Types::ResourcePolicy]
     class DescribeResourcePolicyResponse < Struct.new(
+      nil,
       :resource_policy,
       keyword_init: true
     )
@@ -1459,6 +1513,7 @@ module Aws::Organizations
     # @!attribute message
     #   @return [String]
     class DestinationParentNotFoundException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -1497,6 +1552,7 @@ module Aws::Organizations
     #            </ul>
     #   @return [String]
     class DetachPolicyRequest < Struct.new(
+      nil,
       :policy_id,
       :target_id,
       keyword_init: true
@@ -1511,6 +1567,7 @@ module Aws::Organizations
     #                  <i>service-abbreviation</i>.amazonaws.com</code>.</p>
     #   @return [String]
     class DisableAWSServiceAccessRequest < Struct.new(
+      nil,
       :service_principal,
       keyword_init: true
     )
@@ -1570,6 +1627,7 @@ module Aws::Organizations
     #            </ul>
     #   @return [String]
     class DisablePolicyTypeRequest < Struct.new(
+      nil,
       :root_id,
       :policy_type,
       keyword_init: true
@@ -1581,6 +1639,7 @@ module Aws::Organizations
     #   <p>A structure that shows the root with the updated list of enabled policy types.</p>
     #   @return [Types::Root]
     class DisablePolicyTypeResponse < Struct.new(
+      nil,
       :root,
       keyword_init: true
     )
@@ -1591,6 +1650,7 @@ module Aws::Organizations
     # @!attribute message
     #   @return [String]
     class DuplicateAccountException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -1605,6 +1665,7 @@ module Aws::Organizations
     # @!attribute message
     #   @return [String]
     class DuplicateHandshakeException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -1615,6 +1676,7 @@ module Aws::Organizations
     # @!attribute message
     #   @return [String]
     class DuplicateOrganizationalUnitException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -1625,6 +1687,7 @@ module Aws::Organizations
     # @!attribute message
     #   @return [String]
     class DuplicatePolicyAttachmentException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -1635,6 +1698,7 @@ module Aws::Organizations
     # @!attribute message
     #   @return [String]
     class DuplicatePolicyException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -1657,6 +1721,7 @@ module Aws::Organizations
     #   <p>The policy type.</p>
     #   @return [String]
     class EffectivePolicy < Struct.new(
+      nil,
       :policy_content,
       :last_updated_timestamp,
       :target_id,
@@ -1673,6 +1738,7 @@ module Aws::Organizations
     # @!attribute message
     #   @return [String]
     class EffectivePolicyNotFoundException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -1698,6 +1764,7 @@ module Aws::Organizations
     #               the account which contributed to the validation error.</p>
     #   @return [Array<String>]
     class EffectivePolicyValidationError < Struct.new(
+      nil,
       :error_code,
       :error_message,
       :path_to_error,
@@ -1714,6 +1781,7 @@ module Aws::Organizations
     #                  <i>service-abbreviation</i>.amazonaws.com</code>.</p>
     #   @return [String]
     class EnableAWSServiceAccessRequest < Struct.new(
+      nil,
       :service_principal,
       keyword_init: true
     )
@@ -1721,6 +1789,7 @@ module Aws::Organizations
     end
 
     class EnableAllFeaturesRequest < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1731,6 +1800,7 @@ module Aws::Organizations
     #               to enable all features in the organization.</p>
     #   @return [Types::Handshake]
     class EnableAllFeaturesResponse < Struct.new(
+      nil,
       :handshake,
       keyword_init: true
     )
@@ -1790,6 +1860,7 @@ module Aws::Organizations
     #            </ul>
     #   @return [String]
     class EnablePolicyTypeRequest < Struct.new(
+      nil,
       :root_id,
       :policy_type,
       keyword_init: true
@@ -1801,6 +1872,7 @@ module Aws::Organizations
     #   <p>A structure that shows the root with the updated list of enabled policy types.</p>
     #   @return [Types::Root]
     class EnablePolicyTypeResponse < Struct.new(
+      nil,
       :root,
       keyword_init: true
     )
@@ -1818,6 +1890,7 @@ module Aws::Organizations
     #   <p>The date that the service principal was enabled for integration with Organizations.</p>
     #   @return [Time]
     class EnabledServicePrincipal < Struct.new(
+      nil,
       :service_principal,
       :date_enabled,
       keyword_init: true
@@ -1831,6 +1904,7 @@ module Aws::Organizations
     # @!attribute message
     #   @return [String]
     class FinalizingOrganizationException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -1942,6 +2016,7 @@ module Aws::Organizations
     #   <p>Additional information that is needed to process the handshake.</p>
     #   @return [Array<Types::HandshakeResource>]
     class Handshake < Struct.new(
+      nil,
       :id,
       :arn,
       :parties,
@@ -1960,6 +2035,7 @@ module Aws::Organizations
     # @!attribute message
     #   @return [String]
     class HandshakeAlreadyInStateException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -2027,6 +2103,7 @@ module Aws::Organizations
     # @!attribute reason
     #   @return [String]
     class HandshakeConstraintViolationException < Struct.new(
+      nil,
       :message,
       :reason,
       keyword_init: true
@@ -2050,6 +2127,7 @@ module Aws::Organizations
     #       followed by from 8 to 32 lowercase letters or digits.</p>
     #   @return [String]
     class HandshakeFilter < Struct.new(
+      nil,
       :action_type,
       :parent_handshake_id,
       keyword_init: true
@@ -2061,6 +2139,7 @@ module Aws::Organizations
     # @!attribute message
     #   @return [String]
     class HandshakeNotFoundException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -2077,6 +2156,7 @@ module Aws::Organizations
     #   <p>The type of party.</p>
     #   @return [String]
     class HandshakeParty < Struct.new(
+      nil,
       :id,
       :type,
       keyword_init: true
@@ -2128,6 +2208,7 @@ module Aws::Organizations
     #               objects.</p>
     #   @return [Array<Types::HandshakeResource>]
     class HandshakeResource < Struct.new(
+      nil,
       :value,
       :type,
       :resources,
@@ -2142,6 +2223,7 @@ module Aws::Organizations
     # @!attribute message
     #   @return [String]
     class InvalidHandshakeTransitionException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -2262,6 +2344,7 @@ module Aws::Organizations
     # @!attribute reason
     #   @return [String]
     class InvalidInputException < Struct.new(
+      nil,
       :message,
       :reason,
       keyword_init: true
@@ -2317,6 +2400,7 @@ module Aws::Organizations
     #            </note>
     #   @return [Array<Types::Tag>]
     class InviteAccountToOrganizationRequest < Struct.new(
+      nil,
       :target,
       :notes,
       :tags,
@@ -2330,6 +2414,7 @@ module Aws::Organizations
     #               invitation request.</p>
     #   @return [Types::Handshake]
     class InviteAccountToOrganizationResponse < Struct.new(
+      nil,
       :handshake,
       keyword_init: true
     )
@@ -2354,6 +2439,7 @@ module Aws::Organizations
     #       that you receive all of the results.</p>
     #   @return [Integer]
     class ListAWSServiceAccessForOrganizationRequest < Struct.new(
+      nil,
       :next_token,
       :max_results,
       keyword_init: true
@@ -2373,6 +2459,7 @@ module Aws::Organizations
     #       until the <code>NextToken</code> response element comes back as <code>null</code>.</p>
     #   @return [String]
     class ListAWSServiceAccessForOrganizationResponse < Struct.new(
+      nil,
       :enabled_service_principals,
       :next_token,
       keyword_init: true
@@ -2402,6 +2489,7 @@ module Aws::Organizations
     #       that you receive all of the results.</p>
     #   @return [Integer]
     class ListAccountsForParentRequest < Struct.new(
+      nil,
       :parent_id,
       :next_token,
       :max_results,
@@ -2427,6 +2515,7 @@ module Aws::Organizations
     #       until the <code>NextToken</code> response element comes back as <code>null</code>.</p>
     #   @return [String]
     class ListAccountsForParentResponse < Struct.new(
+      nil,
       :accounts,
       :next_token,
       keyword_init: true
@@ -2452,6 +2541,7 @@ module Aws::Organizations
     #       that you receive all of the results.</p>
     #   @return [Integer]
     class ListAccountsRequest < Struct.new(
+      nil,
       :next_token,
       :max_results,
       keyword_init: true
@@ -2476,6 +2566,7 @@ module Aws::Organizations
     #       until the <code>NextToken</code> response element comes back as <code>null</code>.</p>
     #   @return [String]
     class ListAccountsResponse < Struct.new(
+      nil,
       :accounts,
       :next_token,
       keyword_init: true
@@ -2537,6 +2628,7 @@ module Aws::Organizations
     #       that you receive all of the results.</p>
     #   @return [Integer]
     class ListAccountsWithInvalidEffectivePolicyRequest < Struct.new(
+      nil,
       :policy_type,
       :next_token,
       :max_results,
@@ -2591,6 +2683,7 @@ module Aws::Organizations
     #       until the <code>NextToken</code> response element comes back as <code>null</code>.</p>
     #   @return [String]
     class ListAccountsWithInvalidEffectivePolicyResponse < Struct.new(
+      nil,
       :accounts,
       :policy_type,
       :next_token,
@@ -2639,6 +2732,7 @@ module Aws::Organizations
     #       that you receive all of the results.</p>
     #   @return [Integer]
     class ListChildrenRequest < Struct.new(
+      nil,
       :parent_id,
       :child_type,
       :next_token,
@@ -2658,6 +2752,7 @@ module Aws::Organizations
     #       until the <code>NextToken</code> response element comes back as <code>null</code>.</p>
     #   @return [String]
     class ListChildrenResponse < Struct.new(
+      nil,
       :children,
       :next_token,
       keyword_init: true
@@ -2687,6 +2782,7 @@ module Aws::Organizations
     #       that you receive all of the results.</p>
     #   @return [Integer]
     class ListCreateAccountStatusRequest < Struct.new(
+      nil,
       :states,
       :next_token,
       :max_results,
@@ -2707,6 +2803,7 @@ module Aws::Organizations
     #       until the <code>NextToken</code> response element comes back as <code>null</code>.</p>
     #   @return [String]
     class ListCreateAccountStatusResponse < Struct.new(
+      nil,
       :create_account_statuses,
       :next_token,
       keyword_init: true
@@ -2738,6 +2835,7 @@ module Aws::Organizations
     #       that you receive all of the results.</p>
     #   @return [Integer]
     class ListDelegatedAdministratorsRequest < Struct.new(
+      nil,
       :service_principal,
       :next_token,
       :max_results,
@@ -2756,6 +2854,7 @@ module Aws::Organizations
     #       until the <code>NextToken</code> response element comes back as <code>null</code>.</p>
     #   @return [String]
     class ListDelegatedAdministratorsResponse < Struct.new(
+      nil,
       :delegated_administrators,
       :next_token,
       keyword_init: true
@@ -2784,6 +2883,7 @@ module Aws::Organizations
     #       that you receive all of the results.</p>
     #   @return [Integer]
     class ListDelegatedServicesForAccountRequest < Struct.new(
+      nil,
       :account_id,
       :next_token,
       :max_results,
@@ -2802,6 +2902,7 @@ module Aws::Organizations
     #       until the <code>NextToken</code> response element comes back as <code>null</code>.</p>
     #   @return [String]
     class ListDelegatedServicesForAccountResponse < Struct.new(
+      nil,
       :delegated_services,
       :next_token,
       keyword_init: true
@@ -2867,6 +2968,7 @@ module Aws::Organizations
     #       that you receive all of the results.</p>
     #   @return [Integer]
     class ListEffectivePolicyValidationErrorsRequest < Struct.new(
+      nil,
       :account_id,
       :policy_type,
       :next_token,
@@ -2933,6 +3035,7 @@ module Aws::Organizations
     #               as which policies contributed to the error and location of the error.</p>
     #   @return [Array<Types::EffectivePolicyValidationError>]
     class ListEffectivePolicyValidationErrorsResponse < Struct.new(
+      nil,
       :account_id,
       :policy_type,
       :path,
@@ -2971,6 +3074,7 @@ module Aws::Organizations
     #       that you receive all of the results.</p>
     #   @return [Integer]
     class ListHandshakesForAccountRequest < Struct.new(
+      nil,
       :filter,
       :next_token,
       :max_results,
@@ -2990,6 +3094,7 @@ module Aws::Organizations
     #       until the <code>NextToken</code> response element comes back as <code>null</code>.</p>
     #   @return [String]
     class ListHandshakesForAccountResponse < Struct.new(
+      nil,
       :handshakes,
       :next_token,
       keyword_init: true
@@ -3024,6 +3129,7 @@ module Aws::Organizations
     #       that you receive all of the results.</p>
     #   @return [Integer]
     class ListHandshakesForOrganizationRequest < Struct.new(
+      nil,
       :filter,
       :next_token,
       :max_results,
@@ -3043,6 +3149,7 @@ module Aws::Organizations
     #       until the <code>NextToken</code> response element comes back as <code>null</code>.</p>
     #   @return [String]
     class ListHandshakesForOrganizationResponse < Struct.new(
+      nil,
       :handshakes,
       :next_token,
       keyword_init: true
@@ -3086,6 +3193,7 @@ module Aws::Organizations
     #       that you receive all of the results.</p>
     #   @return [Integer]
     class ListOrganizationalUnitsForParentRequest < Struct.new(
+      nil,
       :parent_id,
       :next_token,
       :max_results,
@@ -3104,6 +3212,7 @@ module Aws::Organizations
     #       until the <code>NextToken</code> response element comes back as <code>null</code>.</p>
     #   @return [String]
     class ListOrganizationalUnitsForParentResponse < Struct.new(
+      nil,
       :organizational_units,
       :next_token,
       keyword_init: true
@@ -3148,6 +3257,7 @@ module Aws::Organizations
     #       that you receive all of the results.</p>
     #   @return [Integer]
     class ListParentsRequest < Struct.new(
+      nil,
       :child_id,
       :next_token,
       :max_results,
@@ -3166,6 +3276,7 @@ module Aws::Organizations
     #       until the <code>NextToken</code> response element comes back as <code>null</code>.</p>
     #   @return [String]
     class ListParentsResponse < Struct.new(
+      nil,
       :parents,
       :next_token,
       keyword_init: true
@@ -3260,6 +3371,7 @@ module Aws::Organizations
     #       that you receive all of the results.</p>
     #   @return [Integer]
     class ListPoliciesForTargetRequest < Struct.new(
+      nil,
       :target_id,
       :filter,
       :next_token,
@@ -3279,6 +3391,7 @@ module Aws::Organizations
     #       until the <code>NextToken</code> response element comes back as <code>null</code>.</p>
     #   @return [String]
     class ListPoliciesForTargetResponse < Struct.new(
+      nil,
       :policies,
       :next_token,
       keyword_init: true
@@ -3350,6 +3463,7 @@ module Aws::Organizations
     #       that you receive all of the results.</p>
     #   @return [Integer]
     class ListPoliciesRequest < Struct.new(
+      nil,
       :filter,
       :next_token,
       :max_results,
@@ -3369,6 +3483,7 @@ module Aws::Organizations
     #       until the <code>NextToken</code> response element comes back as <code>null</code>.</p>
     #   @return [String]
     class ListPoliciesResponse < Struct.new(
+      nil,
       :policies,
       :next_token,
       keyword_init: true
@@ -3394,6 +3509,7 @@ module Aws::Organizations
     #       that you receive all of the results.</p>
     #   @return [Integer]
     class ListRootsRequest < Struct.new(
+      nil,
       :next_token,
       :max_results,
       keyword_init: true
@@ -3411,6 +3527,7 @@ module Aws::Organizations
     #       until the <code>NextToken</code> response element comes back as <code>null</code>.</p>
     #   @return [String]
     class ListRootsResponse < Struct.new(
+      nil,
       :roots,
       :next_token,
       keyword_init: true
@@ -3453,6 +3570,7 @@ module Aws::Organizations
     #       from.</p>
     #   @return [String]
     class ListTagsForResourceRequest < Struct.new(
+      nil,
       :resource_id,
       :next_token,
       keyword_init: true
@@ -3470,6 +3588,7 @@ module Aws::Organizations
     #       until the <code>NextToken</code> response element comes back as <code>null</code>.</p>
     #   @return [String]
     class ListTagsForResourceResponse < Struct.new(
+      nil,
       :tags,
       :next_token,
       keyword_init: true
@@ -3500,6 +3619,7 @@ module Aws::Organizations
     #       that you receive all of the results.</p>
     #   @return [Integer]
     class ListTargetsForPolicyRequest < Struct.new(
+      nil,
       :policy_id,
       :next_token,
       :max_results,
@@ -3519,6 +3639,7 @@ module Aws::Organizations
     #       until the <code>NextToken</code> response element comes back as <code>null</code>.</p>
     #   @return [String]
     class ListTargetsForPolicyResponse < Struct.new(
+      nil,
       :targets,
       :next_token,
       keyword_init: true
@@ -3533,6 +3654,7 @@ module Aws::Organizations
     # @!attribute message
     #   @return [String]
     class MalformedPolicyDocumentException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -3545,6 +3667,7 @@ module Aws::Organizations
     # @!attribute message
     #   @return [String]
     class MasterCannotLeaveOrganizationException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -3595,6 +3718,7 @@ module Aws::Organizations
     #            </ul>
     #   @return [String]
     class MoveAccountRequest < Struct.new(
+      nil,
       :account_id,
       :source_parent_id,
       :destination_parent_id,
@@ -3647,6 +3771,7 @@ module Aws::Organizations
     #               use the <a>ListRoots</a> operation instead.</p>
     #   @return [Array<Types::PolicyTypeSummary>]
     class Organization < Struct.new(
+      nil,
       :id,
       :arn,
       :feature_set,
@@ -3664,6 +3789,7 @@ module Aws::Organizations
     # @!attribute message
     #   @return [String]
     class OrganizationNotEmptyException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -3693,6 +3819,7 @@ module Aws::Organizations
     #       character range.</p>
     #   @return [String]
     class OrganizationalUnit < Struct.new(
+      nil,
       :id,
       :arn,
       :name,
@@ -3706,6 +3833,7 @@ module Aws::Organizations
     # @!attribute message
     #   @return [String]
     class OrganizationalUnitNotEmptyException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -3717,6 +3845,7 @@ module Aws::Organizations
     # @!attribute message
     #   @return [String]
     class OrganizationalUnitNotFoundException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -3747,6 +3876,7 @@ module Aws::Organizations
     #   <p>The type of the parent entity.</p>
     #   @return [String]
     class Parent < Struct.new(
+      nil,
       :id,
       :type,
       keyword_init: true
@@ -3758,6 +3888,7 @@ module Aws::Organizations
     # @!attribute message
     #   @return [String]
     class ParentNotFoundException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -3774,6 +3905,7 @@ module Aws::Organizations
     #   <p>The text content of the policy.</p>
     #   @return [String]
     class Policy < Struct.new(
+      nil,
       :policy_summary,
       :content,
       keyword_init: true
@@ -3786,6 +3918,7 @@ module Aws::Organizations
     # @!attribute message
     #   @return [String]
     class PolicyChangesInProgressException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -3797,6 +3930,7 @@ module Aws::Organizations
     # @!attribute message
     #   @return [String]
     class PolicyInUseException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -3807,6 +3941,7 @@ module Aws::Organizations
     # @!attribute message
     #   @return [String]
     class PolicyNotAttachedException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -3817,6 +3952,7 @@ module Aws::Organizations
     # @!attribute message
     #   @return [String]
     class PolicyNotFoundException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -3853,6 +3989,7 @@ module Aws::Organizations
     #               cannot edit it.</p>
     #   @return [Boolean]
     class PolicySummary < Struct.new(
+      nil,
       :id,
       :arn,
       :name,
@@ -3907,6 +4044,7 @@ module Aws::Organizations
     #   <p>The type of the policy target.</p>
     #   @return [String]
     class PolicyTargetSummary < Struct.new(
+      nil,
       :target_id,
       :arn,
       :name,
@@ -3920,6 +4058,7 @@ module Aws::Organizations
     # @!attribute message
     #   @return [String]
     class PolicyTypeAlreadyEnabledException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -3933,6 +4072,7 @@ module Aws::Organizations
     # @!attribute message
     #   @return [String]
     class PolicyTypeNotAvailableForOrganizationException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -3946,6 +4086,7 @@ module Aws::Organizations
     # @!attribute message
     #   @return [String]
     class PolicyTypeNotEnabledException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -3962,6 +4103,7 @@ module Aws::Organizations
     #               available in the organization and enabled for that root.</p>
     #   @return [String]
     class PolicyTypeSummary < Struct.new(
+      nil,
       :type,
       :status,
       keyword_init: true
@@ -3989,6 +4131,7 @@ module Aws::Organizations
     #            </note>
     #   @return [Array<Types::Tag>]
     class PutResourcePolicyRequest < Struct.new(
+      nil,
       :content,
       :tags,
       keyword_init: true
@@ -4000,6 +4143,7 @@ module Aws::Organizations
     #   <p>A structure that contains details about the resource policy.</p>
     #   @return [Types::ResourcePolicy]
     class PutResourcePolicyResponse < Struct.new(
+      nil,
       :resource_policy,
       keyword_init: true
     )
@@ -4015,6 +4159,7 @@ module Aws::Organizations
     #               account a delegated administrator.</p>
     #   @return [String]
     class RegisterDelegatedAdministratorRequest < Struct.new(
+      nil,
       :account_id,
       :service_principal,
       keyword_init: true
@@ -4029,6 +4174,7 @@ module Aws::Organizations
     #       digits.</p>
     #   @return [String]
     class RemoveAccountFromOrganizationRequest < Struct.new(
+      nil,
       :account_id,
       keyword_init: true
     )
@@ -4043,6 +4189,7 @@ module Aws::Organizations
     #   <p>The policy text of the resource policy.</p>
     #   @return [String]
     class ResourcePolicy < Struct.new(
+      nil,
       :resource_policy_summary,
       :content,
       keyword_init: true
@@ -4054,6 +4201,7 @@ module Aws::Organizations
     # @!attribute message
     #   @return [String]
     class ResourcePolicyNotFoundException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -4068,6 +4216,7 @@ module Aws::Organizations
     #   <p>The Amazon Resource Name (ARN) of the resource policy.</p>
     #   @return [String]
     class ResourcePolicySummary < Struct.new(
+      nil,
       :id,
       :arn,
       keyword_init: true
@@ -4106,6 +4255,7 @@ module Aws::Organizations
     #            </note>
     #   @return [Array<Types::PolicyTypeSummary>]
     class Root < Struct.new(
+      nil,
       :id,
       :arn,
       :name,
@@ -4119,6 +4269,7 @@ module Aws::Organizations
     # @!attribute message
     #   @return [String]
     class RootNotFoundException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -4130,6 +4281,7 @@ module Aws::Organizations
     # @!attribute message
     #   @return [String]
     class ServiceException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -4141,6 +4293,7 @@ module Aws::Organizations
     # @!attribute message
     #   @return [String]
     class SourceParentNotFoundException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -4171,6 +4324,7 @@ module Aws::Organizations
     #               tag to an empty string, but you can't set the value of a tag to null.</p>
     #   @return [String]
     class Tag < Struct.new(
+      nil,
       :key,
       :value,
       keyword_init: true
@@ -4215,6 +4369,7 @@ module Aws::Organizations
     #            </note>
     #   @return [Array<Types::Tag>]
     class TagResourceRequest < Struct.new(
+      nil,
       :resource_id,
       :tags,
       keyword_init: true
@@ -4227,6 +4382,7 @@ module Aws::Organizations
     # @!attribute message
     #   @return [String]
     class TargetNotFoundException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -4242,6 +4398,7 @@ module Aws::Organizations
     # @!attribute message
     #   @return [String]
     class TooManyRequestsException < Struct.new(
+      nil,
       :type,
       :message,
       keyword_init: true
@@ -4253,6 +4410,7 @@ module Aws::Organizations
     # @!attribute message
     #   @return [String]
     class UnsupportedAPIEndpointException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -4290,6 +4448,7 @@ module Aws::Organizations
     #   <p>The list of keys for tags to remove from the specified resource.</p>
     #   @return [Array<String>]
     class UntagResourceRequest < Struct.new(
+      nil,
       :resource_id,
       :tag_keys,
       keyword_init: true
@@ -4312,6 +4471,7 @@ module Aws::Organizations
     #       character range.</p>
     #   @return [String]
     class UpdateOrganizationalUnitRequest < Struct.new(
+      nil,
       :organizational_unit_id,
       :name,
       keyword_init: true
@@ -4324,6 +4484,7 @@ module Aws::Organizations
     #               name.</p>
     #   @return [Types::OrganizationalUnit]
     class UpdateOrganizationalUnitResponse < Struct.new(
+      nil,
       :organizational_unit,
       keyword_init: true
     )
@@ -4353,6 +4514,7 @@ module Aws::Organizations
     #               <i>Organizations User Guide</i>.</p>
     #   @return [String]
     class UpdatePolicyRequest < Struct.new(
+      nil,
       :policy_id,
       :name,
       :description,
@@ -4367,6 +4529,7 @@ module Aws::Organizations
     #               changes.</p>
     #   @return [Types::Policy]
     class UpdatePolicyResponse < Struct.new(
+      nil,
       :policy,
       keyword_init: true
     )

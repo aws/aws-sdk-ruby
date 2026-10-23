@@ -14,6 +14,7 @@ module Aws::AutoScalingPlans
     #   <p>A set of tags (up to 50).</p>
     #   @return [Array<Types::TagFilter>]
     class ApplicationSource < Struct.new(
+      nil,
       :cloud_formation_stack_arn,
       :tag_filters,
       keyword_init: true
@@ -26,6 +27,7 @@ module Aws::AutoScalingPlans
     # @!attribute message
     #   @return [String]
     class ConcurrentUpdateException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -46,6 +48,7 @@ module Aws::AutoScalingPlans
     #            <p>For more information, see <a href="https://docs.aws.amazon.com/autoscaling/plans/APIReference/API_ScalingInstruction.html">ScalingInstruction</a> in the <i>AWS Auto Scaling API Reference</i>.</p>
     #   @return [Array<Types::ScalingInstruction>]
     class CreateScalingPlanRequest < Struct.new(
+      nil,
       :scaling_plan_name,
       :application_source,
       :scaling_instructions,
@@ -59,6 +62,7 @@ module Aws::AutoScalingPlans
     #            you cannot have multiple scaling plan versions.</p>
     #   @return [Integer]
     class CreateScalingPlanResponse < Struct.new(
+      nil,
       :scaling_plan_version,
       keyword_init: true
     )
@@ -107,6 +111,7 @@ module Aws::AutoScalingPlans
     #   <p>The unit of the metric.</p>
     #   @return [String]
     class CustomizedLoadMetricSpecification < Struct.new(
+      nil,
       :metric_name,
       :namespace,
       :dimensions,
@@ -154,6 +159,7 @@ module Aws::AutoScalingPlans
     #   <p>The unit of the metric. </p>
     #   @return [String]
     class CustomizedScalingMetricSpecification < Struct.new(
+      nil,
       :metric_name,
       :namespace,
       :dimensions,
@@ -172,6 +178,7 @@ module Aws::AutoScalingPlans
     #   <p>The value of the data point.</p>
     #   @return [Float]
     class Datapoint < Struct.new(
+      nil,
       :timestamp,
       :value,
       keyword_init: true
@@ -187,6 +194,7 @@ module Aws::AutoScalingPlans
     #               <code>1</code>.</p>
     #   @return [Integer]
     class DeleteScalingPlanRequest < Struct.new(
+      nil,
       :scaling_plan_name,
       :scaling_plan_version,
       keyword_init: true
@@ -195,6 +203,7 @@ module Aws::AutoScalingPlans
     end
 
     class DeleteScalingPlanResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -215,6 +224,7 @@ module Aws::AutoScalingPlans
     #   <p>The token for the next set of results.</p>
     #   @return [String]
     class DescribeScalingPlanResourcesRequest < Struct.new(
+      nil,
       :scaling_plan_name,
       :scaling_plan_version,
       :max_results,
@@ -232,6 +242,7 @@ module Aws::AutoScalingPlans
     #            there are no more results to return.</p>
     #   @return [String]
     class DescribeScalingPlanResourcesResponse < Struct.new(
+      nil,
       :scaling_plan_resources,
       :next_token,
       keyword_init: true
@@ -263,6 +274,7 @@ module Aws::AutoScalingPlans
     #   <p>The token for the next set of results.</p>
     #   @return [String]
     class DescribeScalingPlansRequest < Struct.new(
+      nil,
       :scaling_plan_names,
       :scaling_plan_version,
       :application_sources,
@@ -281,6 +293,7 @@ module Aws::AutoScalingPlans
     #            there are no more results to return.</p>
     #   @return [String]
     class DescribeScalingPlansResponse < Struct.new(
+      nil,
       :scaling_plans,
       :next_token,
       keyword_init: true
@@ -345,6 +358,7 @@ module Aws::AutoScalingPlans
     #            periods of two days in advance.</p>
     #   @return [Time]
     class GetScalingPlanResourceForecastDataRequest < Struct.new(
+      nil,
       :scaling_plan_name,
       :scaling_plan_version,
       :service_namespace,
@@ -362,6 +376,7 @@ module Aws::AutoScalingPlans
     #   <p>The data points to return.</p>
     #   @return [Array<Types::Datapoint>]
     class GetScalingPlanResourceForecastDataResponse < Struct.new(
+      nil,
       :datapoints,
       keyword_init: true
     )
@@ -372,6 +387,7 @@ module Aws::AutoScalingPlans
     # @!attribute message
     #   @return [String]
     class InternalServiceException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -382,6 +398,7 @@ module Aws::AutoScalingPlans
     # @!attribute message
     #   @return [String]
     class InvalidNextTokenException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -393,6 +410,7 @@ module Aws::AutoScalingPlans
     # @!attribute message
     #   @return [String]
     class LimitExceededException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -407,6 +425,7 @@ module Aws::AutoScalingPlans
     #   <p>The value of the dimension.</p>
     #   @return [String]
     class MetricDimension < Struct.new(
+      nil,
       :name,
       :value,
       keyword_init: true
@@ -418,6 +437,7 @@ module Aws::AutoScalingPlans
     # @!attribute message
     #   @return [String]
     class ObjectNotFoundException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -457,6 +477,7 @@ module Aws::AutoScalingPlans
     #            the <a href="https://docs.aws.amazon.com/elasticloadbalancing/latest/APIReference/API_DescribeTargetGroups.html">DescribeTargetGroups</a> API operation.</p>
     #   @return [String]
     class PredefinedLoadMetricSpecification < Struct.new(
+      nil,
       :predefined_load_metric_type,
       :resource_label,
       keyword_init: true
@@ -496,6 +517,7 @@ module Aws::AutoScalingPlans
     #            the <a href="https://docs.aws.amazon.com/elasticloadbalancing/latest/APIReference/API_DescribeTargetGroups.html">DescribeTargetGroups</a> API operation.</p>
     #   @return [String]
     class PredefinedScalingMetricSpecification < Struct.new(
+      nil,
       :predefined_scaling_metric_type,
       :resource_label,
       keyword_init: true
@@ -682,6 +704,7 @@ module Aws::AutoScalingPlans
     #            <p>The default is enabled (<code>false</code>). </p>
     #   @return [Boolean]
     class ScalingInstruction < Struct.new(
+      nil,
       :service_namespace,
       :resource_id,
       :scalable_dimension,
@@ -763,6 +786,7 @@ module Aws::AutoScalingPlans
     #   <p>The Unix time stamp when the scaling plan was created.</p>
     #   @return [Time]
     class ScalingPlan < Struct.new(
+      nil,
       :scaling_plan_name,
       :scaling_plan_version,
       :application_source,
@@ -881,6 +905,7 @@ module Aws::AutoScalingPlans
     #   <p>A simple message about the current scaling status of the resource.</p>
     #   @return [String]
     class ScalingPlanResource < Struct.new(
+      nil,
       :scaling_plan_name,
       :scaling_plan_version,
       :service_namespace,
@@ -906,6 +931,7 @@ module Aws::AutoScalingPlans
     #            metrics.</p>
     #   @return [Types::TargetTrackingConfiguration]
     class ScalingPolicy < Struct.new(
+      nil,
       :policy_name,
       :policy_type,
       :target_tracking_configuration,
@@ -922,6 +948,7 @@ module Aws::AutoScalingPlans
     #   <p>The tag values (0 to 20).</p>
     #   @return [Array<String>]
     class TagFilter < Struct.new(
+      nil,
       :key,
       :values,
       keyword_init: true
@@ -975,6 +1002,7 @@ module Aws::AutoScalingPlans
     #            CloudWatch metrics. This value is used only if the resource is an Auto Scaling group.</p>
     #   @return [Integer]
     class TargetTrackingConfiguration < Struct.new(
+      nil,
       :predefined_scaling_metric_specification,
       :customized_scaling_metric_specification,
       :target_value,
@@ -1003,6 +1031,7 @@ module Aws::AutoScalingPlans
     #            <p>For more information, see <a href="https://docs.aws.amazon.com/autoscaling/plans/APIReference/API_ScalingInstruction.html">ScalingInstruction</a> in the <i>AWS Auto Scaling API Reference</i>.</p>
     #   @return [Array<Types::ScalingInstruction>]
     class UpdateScalingPlanRequest < Struct.new(
+      nil,
       :scaling_plan_name,
       :scaling_plan_version,
       :application_source,
@@ -1013,6 +1042,7 @@ module Aws::AutoScalingPlans
     end
 
     class UpdateScalingPlanResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1022,6 +1052,7 @@ module Aws::AutoScalingPlans
     # @!attribute message
     #   @return [String]
     class ValidationException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )

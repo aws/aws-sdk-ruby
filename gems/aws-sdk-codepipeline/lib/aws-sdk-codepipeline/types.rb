@@ -21,6 +21,7 @@ module Aws::CodePipeline
     #   <p>The token for the session.</p>
     #   @return [String]
     class AWSSessionCredentials < Struct.new(
+      nil,
       :access_key_id,
       :secret_access_key,
       :session_token,
@@ -40,6 +41,7 @@ module Aws::CodePipeline
     #                   <a>PollForJobs</a> request that returned this job.</p>
     #   @return [String]
     class AcknowledgeJobInput < Struct.new(
+      nil,
       :job_id,
       :nonce,
       keyword_init: true
@@ -52,6 +54,7 @@ module Aws::CodePipeline
     #   <p>Whether the job worker has received the specified job.</p>
     #   @return [String]
     class AcknowledgeJobOutput < Struct.new(
+      nil,
       :status,
       keyword_init: true
     )
@@ -72,6 +75,7 @@ module Aws::CodePipeline
     #               the calling entity is allowed access to the job and its details.</p>
     #   @return [String]
     class AcknowledgeThirdPartyJobInput < Struct.new(
+      nil,
       :job_id,
       :nonce,
       :client_token,
@@ -85,6 +89,7 @@ module Aws::CodePipeline
     #   <p>The status information for the third party job, if any.</p>
     #   @return [String]
     class AcknowledgeThirdPartyJobOutput < Struct.new(
+      nil,
       :status,
       keyword_init: true
     )
@@ -96,6 +101,7 @@ module Aws::CodePipeline
     #   <p>The configuration data for the action.</p>
     #   @return [Hash<String, String>]
     class ActionConfiguration < Struct.new(
+      nil,
       :configuration,
       keyword_init: true
     )
@@ -136,6 +142,7 @@ module Aws::CodePipeline
     #   <p>The type of the configuration property.</p>
     #   @return [String]
     class ActionConfigurationProperty < Struct.new(
+      nil,
       :name,
       :required,
       :key,
@@ -165,6 +172,7 @@ module Aws::CodePipeline
     #   <p>The system-generated unique ID that corresponds to an action's execution.</p>
     #   @return [String]
     class ActionContext < Struct.new(
+      nil,
       :name,
       :action_execution_id,
       keyword_init: true
@@ -237,6 +245,7 @@ module Aws::CodePipeline
     #   <p>The environment variables for the action.</p>
     #   @return [Array<Types::EnvironmentVariable>]
     class ActionDeclaration < Struct.new(
+      nil,
       :name,
       :action_type_id,
       :run_order,
@@ -300,6 +309,7 @@ module Aws::CodePipeline
     #   <p>The Amazon Resource Name (ARN) of the log stream for the action compute.</p>
     #   @return [String]
     class ActionExecution < Struct.new(
+      nil,
       :action_execution_id,
       :status,
       :summary,
@@ -354,6 +364,7 @@ module Aws::CodePipeline
     #   <p>Output details for the action execution, such as the action execution result.</p>
     #   @return [Types::ActionExecutionOutput]
     class ActionExecutionDetail < Struct.new(
+      nil,
       :pipeline_execution_id,
       :action_execution_id,
       :pipeline_version,
@@ -382,6 +393,7 @@ module Aws::CodePipeline
     #            </note>
     #   @return [Types::LatestInPipelineExecutionFilter]
     class ActionExecutionFilter < Struct.new(
+      nil,
       :pipeline_execution_id,
       :latest_in_pipeline_execution,
       keyword_init: true
@@ -416,6 +428,7 @@ module Aws::CodePipeline
     #               this action fall under this namespace.</p>
     #   @return [String]
     class ActionExecutionInput < Struct.new(
+      nil,
       :action_type_id,
       :configuration,
       :resolved_configuration,
@@ -432,6 +445,7 @@ module Aws::CodePipeline
     # @!attribute message
     #   @return [String]
     class ActionExecutionNotFoundException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -453,6 +467,7 @@ module Aws::CodePipeline
     #               execution.</p>
     #   @return [Hash<String, String>]
     class ActionExecutionOutput < Struct.new(
+      nil,
       :output_artifacts,
       :execution_result,
       :output_variables,
@@ -479,6 +494,7 @@ module Aws::CodePipeline
     #   <p>The Amazon Resource Name (ARN) of the log stream for the action compute.</p>
     #   @return [String]
     class ActionExecutionResult < Struct.new(
+      nil,
       :external_execution_id,
       :external_execution_summary,
       :external_execution_url,
@@ -494,6 +510,7 @@ module Aws::CodePipeline
     #   <p>The message provided to the user in the event of an exception.</p>
     #   @return [String]
     class ActionNotFoundException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -514,6 +531,7 @@ module Aws::CodePipeline
     #               timestamp format.</p>
     #   @return [Time]
     class ActionRevision < Struct.new(
+      nil,
       :revision_id,
       :revision_change_id,
       :created,
@@ -541,6 +559,7 @@ module Aws::CodePipeline
     #               page.</p>
     #   @return [String]
     class ActionState < Struct.new(
+      nil,
       :action_name,
       :current_revision,
       :latest_execution,
@@ -568,6 +587,7 @@ module Aws::CodePipeline
     #   <p>The details of the output artifact of the action, such as its commit ID.</p>
     #   @return [Types::ArtifactDetails]
     class ActionType < Struct.new(
+      nil,
       :id,
       :settings,
       :action_configuration_properties,
@@ -591,6 +611,7 @@ module Aws::CodePipeline
     #               category of <code>source</code>.</p>
     #   @return [Integer]
     class ActionTypeArtifactDetails < Struct.new(
+      nil,
       :minimum_count,
       :maximum_count,
       keyword_init: true
@@ -636,6 +657,7 @@ module Aws::CodePipeline
     #   <p>The links associated with the action type to be updated.</p>
     #   @return [Types::ActionTypeUrls]
     class ActionTypeDeclaration < Struct.new(
+      nil,
       :description,
       :executor,
       :id,
@@ -676,6 +698,7 @@ module Aws::CodePipeline
     #               is the timeout for a single job, not the entire action execution.</p>
     #   @return [Integer]
     class ActionTypeExecutor < Struct.new(
+      nil,
       :configuration,
       :type,
       :policy_statements_template,
@@ -730,6 +753,7 @@ module Aws::CodePipeline
     #   <p>A string that describes the action version.</p>
     #   @return [String]
     class ActionTypeId < Struct.new(
+      nil,
       :category,
       :owner,
       :provider,
@@ -787,6 +811,7 @@ module Aws::CodePipeline
     #   <p>A string that describes the action type version.</p>
     #   @return [String]
     class ActionTypeIdentifier < Struct.new(
+      nil,
       :category,
       :owner,
       :provider,
@@ -801,6 +826,7 @@ module Aws::CodePipeline
     #   <p>The message provided to the user in the event of an exception.</p>
     #   @return [String]
     class ActionTypeNotFoundException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -813,6 +839,7 @@ module Aws::CodePipeline
     #               pipelines.</p>
     #   @return [Array<String>]
     class ActionTypePermissions < Struct.new(
+      nil,
       :allowed_accounts,
       keyword_init: true
     )
@@ -845,6 +872,7 @@ module Aws::CodePipeline
     #   <p>The description of the property that is displayed to users.</p>
     #   @return [String]
     class ActionTypeProperty < Struct.new(
+      nil,
       :name,
       :optional,
       :key,
@@ -886,6 +914,7 @@ module Aws::CodePipeline
     #               where customers can update or change the configuration of the external action.</p>
     #   @return [String]
     class ActionTypeSettings < Struct.new(
+      nil,
       :third_party_configuration_url,
       :entity_url_template,
       :execution_url_template,
@@ -915,6 +944,7 @@ module Aws::CodePipeline
     #               where customers can update or change the configuration of the external action.</p>
     #   @return [String]
     class ActionTypeUrls < Struct.new(
+      nil,
       :configuration_url,
       :entity_url_template,
       :execution_url_template,
@@ -929,6 +959,7 @@ module Aws::CodePipeline
     #   <p>The message provided to the user in the event of an exception.</p>
     #   @return [String]
     class ApprovalAlreadyCompletedException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -944,6 +975,7 @@ module Aws::CodePipeline
     #               request.</p>
     #   @return [String]
     class ApprovalResult < Struct.new(
+      nil,
       :summary,
       :status,
       keyword_init: true
@@ -966,6 +998,7 @@ module Aws::CodePipeline
     #   <p>The location of an artifact.</p>
     #   @return [Types::ArtifactLocation]
     class Artifact < Struct.new(
+      nil,
       :name,
       :revision,
       :location,
@@ -982,6 +1015,7 @@ module Aws::CodePipeline
     #   <p>The Amazon S3 artifact location for the action execution.</p>
     #   @return [Types::S3Location]
     class ArtifactDetail < Struct.new(
+      nil,
       :name,
       :s3location,
       keyword_init: true
@@ -997,6 +1031,7 @@ module Aws::CodePipeline
     #   <p>The maximum number of artifacts allowed for the action type.</p>
     #   @return [Integer]
     class ArtifactDetails < Struct.new(
+      nil,
       :minimum_count,
       :maximum_count,
       keyword_init: true
@@ -1018,6 +1053,7 @@ module Aws::CodePipeline
     #   <p>The S3 bucket that contains the artifact.</p>
     #   @return [Types::S3ArtifactLocation]
     class ArtifactLocation < Struct.new(
+      nil,
       :type,
       :s3_location,
       keyword_init: true
@@ -1052,6 +1088,7 @@ module Aws::CodePipeline
     #               CodeCommit repositories, the commit ID is linked to a commit details page.</p>
     #   @return [String]
     class ArtifactRevision < Struct.new(
+      nil,
       :name,
       :revision_id,
       :revision_change_identifier,
@@ -1086,6 +1123,7 @@ module Aws::CodePipeline
     #               for Amazon S3 is used.</p>
     #   @return [Types::EncryptionKey]
     class ArtifactStore < Struct.new(
+      nil,
       :type,
       :location,
       :encryption_key,
@@ -1102,6 +1140,7 @@ module Aws::CodePipeline
     #   <p>The conditions that are configured as entry conditions.</p>
     #   @return [Array<Types::Condition>]
     class BeforeEntryConditions < Struct.new(
+      nil,
       :conditions,
       keyword_init: true
     )
@@ -1116,6 +1155,7 @@ module Aws::CodePipeline
     #   <p>Reserved for future use.</p>
     #   @return [String]
     class BlockerDeclaration < Struct.new(
+      nil,
       :name,
       :type,
       keyword_init: true
@@ -1127,6 +1167,7 @@ module Aws::CodePipeline
     # @!attribute message
     #   @return [String]
     class ConcurrentModificationException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -1137,6 +1178,7 @@ module Aws::CodePipeline
     # @!attribute message
     #   @return [String]
     class ConcurrentPipelineExecutionsLimitExceededException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -1155,6 +1197,7 @@ module Aws::CodePipeline
     #   <p>The rules that make up the condition.</p>
     #   @return [Array<Types::RuleDeclaration>]
     class Condition < Struct.new(
+      nil,
       :result,
       :rules,
       keyword_init: true
@@ -1173,6 +1216,7 @@ module Aws::CodePipeline
     #   <p>The last status change of the condition.</p>
     #   @return [Time]
     class ConditionExecution < Struct.new(
+      nil,
       :status,
       :summary,
       :last_status_change,
@@ -1185,6 +1229,7 @@ module Aws::CodePipeline
     # @!attribute message
     #   @return [String]
     class ConditionNotOverridableException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -1199,6 +1244,7 @@ module Aws::CodePipeline
     #   <p>The state of the rules for the condition.</p>
     #   @return [Array<Types::RuleState>]
     class ConditionState < Struct.new(
+      nil,
       :latest_execution,
       :rule_states,
       keyword_init: true
@@ -1211,6 +1257,7 @@ module Aws::CodePipeline
     # @!attribute message
     #   @return [String]
     class ConflictException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -1252,6 +1299,7 @@ module Aws::CodePipeline
     #   <p>The tags for the custom action.</p>
     #   @return [Array<Types::Tag>]
     class CreateCustomActionTypeInput < Struct.new(
+      nil,
       :category,
       :provider,
       :version,
@@ -1273,6 +1321,7 @@ module Aws::CodePipeline
     #   <p>Specifies the tags applied to the custom action.</p>
     #   @return [Array<Types::Tag>]
     class CreateCustomActionTypeOutput < Struct.new(
+      nil,
       :action_type,
       :tags,
       keyword_init: true
@@ -1289,6 +1338,7 @@ module Aws::CodePipeline
     #   <p>The tags for the pipeline.</p>
     #   @return [Array<Types::Tag>]
     class CreatePipelineInput < Struct.new(
+      nil,
       :pipeline,
       :tags,
       keyword_init: true
@@ -1305,6 +1355,7 @@ module Aws::CodePipeline
     #   <p>Specifies the tags applied to the pipeline.</p>
     #   @return [Array<Types::Tag>]
     class CreatePipelineOutput < Struct.new(
+      nil,
       :pipeline,
       :tags,
       keyword_init: true
@@ -1327,6 +1378,7 @@ module Aws::CodePipeline
     #   <p>The summary of the most recent revision of the artifact.</p>
     #   @return [String]
     class CurrentRevision < Struct.new(
+      nil,
       :revision,
       :change_identifier,
       :created,
@@ -1350,6 +1402,7 @@ module Aws::CodePipeline
     #   <p>The version of the custom action to delete.</p>
     #   @return [String]
     class DeleteCustomActionTypeInput < Struct.new(
+      nil,
       :category,
       :provider,
       :version,
@@ -1363,6 +1416,7 @@ module Aws::CodePipeline
     #   <p>The name of the pipeline to be deleted.</p>
     #   @return [String]
     class DeletePipelineInput < Struct.new(
+      nil,
       :name,
       keyword_init: true
     )
@@ -1373,6 +1427,7 @@ module Aws::CodePipeline
     #   <p>The name of the webhook you want to delete.</p>
     #   @return [String]
     class DeleteWebhookInput < Struct.new(
+      nil,
       :name,
       keyword_init: true
     )
@@ -1380,6 +1435,7 @@ module Aws::CodePipeline
     end
 
     class DeleteWebhookOutput < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1405,6 +1461,7 @@ module Aws::CodePipeline
     #   <p>The lifecycle events for the deploy action.</p>
     #   @return [Array<Types::DeployTargetEvent>]
     class DeployActionExecutionTarget < Struct.new(
+      nil,
       :target_id,
       :target_type,
       :status,
@@ -1433,6 +1490,7 @@ module Aws::CodePipeline
     #   <p>The context for the event for the deploy action.</p>
     #   @return [Types::DeployTargetEventContext]
     class DeployTargetEvent < Struct.new(
+      nil,
       :name,
       :status,
       :start_time,
@@ -1451,6 +1509,7 @@ module Aws::CodePipeline
     #   <p>The context message for the event for the deploy action.</p>
     #   @return [String]
     class DeployTargetEventContext < Struct.new(
+      nil,
       :ssm_command_id,
       :message,
       keyword_init: true
@@ -1462,6 +1521,7 @@ module Aws::CodePipeline
     #   <p>The name of the webhook you want to deregister.</p>
     #   @return [String]
     class DeregisterWebhookWithThirdPartyInput < Struct.new(
+      nil,
       :webhook_name,
       keyword_init: true
     )
@@ -1469,6 +1529,7 @@ module Aws::CodePipeline
     end
 
     class DeregisterWebhookWithThirdPartyOutput < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1495,6 +1556,7 @@ module Aws::CodePipeline
     #               UI.</p>
     #   @return [String]
     class DisableStageTransitionInput < Struct.new(
+      nil,
       :pipeline_name,
       :stage_name,
       :transition_type,
@@ -1512,6 +1574,7 @@ module Aws::CodePipeline
     # @!attribute message
     #   @return [String]
     class DuplicatedStopRequestException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -1533,6 +1596,7 @@ module Aws::CodePipeline
     #               transition to the next stage (outbound).</p>
     #   @return [String]
     class EnableStageTransitionInput < Struct.new(
+      nil,
       :pipeline_name,
       :stage_name,
       :transition_type,
@@ -1560,6 +1624,7 @@ module Aws::CodePipeline
     #               updating a pipeline, the value must be set to 'KMS'.</p>
     #   @return [String]
     class EncryptionKey < Struct.new(
+      nil,
       :id,
       :type,
       keyword_init: true
@@ -1580,6 +1645,7 @@ module Aws::CodePipeline
     #               reference in the EnvironmentVariable value.</p>
     #   @return [String]
     class EnvironmentVariable < Struct.new(
+      nil,
       :name,
       :value,
       :type,
@@ -1596,6 +1662,7 @@ module Aws::CodePipeline
     #   <p>The text of the error message.</p>
     #   @return [String]
     class ErrorDetails < Struct.new(
+      nil,
       :code,
       :message,
       keyword_init: true
@@ -1617,6 +1684,7 @@ module Aws::CodePipeline
     #               percent.</p>
     #   @return [Integer]
     class ExecutionDetails < Struct.new(
+      nil,
       :summary,
       :external_execution_id,
       :percent_complete,
@@ -1636,6 +1704,7 @@ module Aws::CodePipeline
     #               user-initiated <code>start-pipeline-execution</code> CLI command.</p>
     #   @return [String]
     class ExecutionTrigger < Struct.new(
+      nil,
       :trigger_type,
       :trigger_detail,
       keyword_init: true
@@ -1653,6 +1722,7 @@ module Aws::CodePipeline
     #   <p>Details about the <code>JobWorker</code> executor of the action type.</p>
     #   @return [Types::JobWorkerExecutorConfiguration]
     class ExecutorConfiguration < Struct.new(
+      nil,
       :lambda_executor_configuration,
       :job_worker_executor_configuration,
       keyword_init: true
@@ -1679,6 +1749,7 @@ module Aws::CodePipeline
     #                   stage conditions work?</a>.</p>
     #   @return [Array<Types::Condition>]
     class FailureConditions < Struct.new(
+      nil,
       :result,
       :retry_configuration,
       :conditions,
@@ -1698,6 +1769,7 @@ module Aws::CodePipeline
     #   <p>The external ID of the run of the action that failed.</p>
     #   @return [String]
     class FailureDetails < Struct.new(
+      nil,
       :type,
       :message,
       :external_execution_id,
@@ -1759,6 +1831,7 @@ module Aws::CodePipeline
     #   <p>A string that describes the action type version.</p>
     #   @return [String]
     class GetActionTypeInput < Struct.new(
+      nil,
       :category,
       :owner,
       :provider,
@@ -1773,6 +1846,7 @@ module Aws::CodePipeline
     #               ID.</p>
     #   @return [Types::ActionTypeDeclaration]
     class GetActionTypeOutput < Struct.new(
+      nil,
       :action_type,
       keyword_init: true
     )
@@ -1784,6 +1858,7 @@ module Aws::CodePipeline
     #   <p>The unique system-generated ID for the job.</p>
     #   @return [String]
     class GetJobDetailsInput < Struct.new(
+      nil,
       :job_id,
       keyword_init: true
     )
@@ -1799,6 +1874,7 @@ module Aws::CodePipeline
     #            </note>
     #   @return [Types::JobDetails]
     class GetJobDetailsOutput < Struct.new(
+      nil,
       :job_details,
       keyword_init: true
     )
@@ -1814,6 +1890,7 @@ module Aws::CodePipeline
     #               details.</p>
     #   @return [String]
     class GetPipelineExecutionInput < Struct.new(
+      nil,
       :pipeline_name,
       :pipeline_execution_id,
       keyword_init: true
@@ -1826,6 +1903,7 @@ module Aws::CodePipeline
     #   <p>Represents information about the execution of a pipeline.</p>
     #   @return [Types::PipelineExecution]
     class GetPipelineExecutionOutput < Struct.new(
+      nil,
       :pipeline_execution,
       keyword_init: true
     )
@@ -1842,6 +1920,7 @@ module Aws::CodePipeline
     #               the current version.</p>
     #   @return [Integer]
     class GetPipelineInput < Struct.new(
+      nil,
       :name,
       :version,
       keyword_init: true
@@ -1859,6 +1938,7 @@ module Aws::CodePipeline
     #                   <code>GetPipeline</code> action.</p>
     #   @return [Types::PipelineMetadata]
     class GetPipelineOutput < Struct.new(
+      nil,
       :pipeline,
       :metadata,
       keyword_init: true
@@ -1871,6 +1951,7 @@ module Aws::CodePipeline
     #   <p>The name of the pipeline about which you want to get information.</p>
     #   @return [String]
     class GetPipelineStateInput < Struct.new(
+      nil,
       :name,
       keyword_init: true
     )
@@ -1899,6 +1980,7 @@ module Aws::CodePipeline
     #   <p>The date and time the pipeline was last updated, in timestamp format.</p>
     #   @return [Time]
     class GetPipelineStateOutput < Struct.new(
+      nil,
       :pipeline_name,
       :pipeline_version,
       :stage_states,
@@ -1918,6 +2000,7 @@ module Aws::CodePipeline
     #               the calling entity is allowed access to the job and its details.</p>
     #   @return [String]
     class GetThirdPartyJobDetailsInput < Struct.new(
+      nil,
       :job_id,
       :client_token,
       keyword_init: true
@@ -1931,6 +2014,7 @@ module Aws::CodePipeline
     #               job.</p>
     #   @return [Types::ThirdPartyJobDetails]
     class GetThirdPartyJobDetailsOutput < Struct.new(
+      nil,
       :job_details,
       keyword_init: true
     )
@@ -1948,6 +2032,7 @@ module Aws::CodePipeline
     #               excluded from starting the pipeline.</p>
     #   @return [Array<String>]
     class GitBranchFilterCriteria < Struct.new(
+      nil,
       :includes,
       :excludes,
       keyword_init: true
@@ -1978,6 +2063,7 @@ module Aws::CodePipeline
     #               pull requests.</p>
     #   @return [Array<Types::GitPullRequestFilter>]
     class GitConfiguration < Struct.new(
+      nil,
       :source_action_name,
       :push,
       :pull_request,
@@ -1997,6 +2083,7 @@ module Aws::CodePipeline
     #               are to be excluded from starting the pipeline.</p>
     #   @return [Array<String>]
     class GitFilePathFilterCriteria < Struct.new(
+      nil,
       :includes,
       :excludes,
       keyword_init: true
@@ -2031,6 +2118,7 @@ module Aws::CodePipeline
     #               configuration.</p>
     #   @return [Types::GitFilePathFilterCriteria]
     class GitPullRequestFilter < Struct.new(
+      nil,
       :events,
       :branches,
       :file_paths,
@@ -2055,6 +2143,7 @@ module Aws::CodePipeline
     #               configuration.</p>
     #   @return [Types::GitFilePathFilterCriteria]
     class GitPushFilter < Struct.new(
+      nil,
       :tags,
       :branches,
       :file_paths,
@@ -2074,6 +2163,7 @@ module Aws::CodePipeline
     #               starting the pipeline.</p>
     #   @return [Array<String>]
     class GitTagFilterCriteria < Struct.new(
+      nil,
       :includes,
       :excludes,
       keyword_init: true
@@ -2096,6 +2186,7 @@ module Aws::CodePipeline
     #               actions.</p>
     #   @return [String]
     class InputArtifact < Struct.new(
+      nil,
       :name,
       keyword_init: true
     )
@@ -2107,6 +2198,7 @@ module Aws::CodePipeline
     #   <p>The message provided to the user in the event of an exception.</p>
     #   @return [String]
     class InvalidActionDeclarationException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -2118,6 +2210,7 @@ module Aws::CodePipeline
     #   <p>The message provided to the user in the event of an exception.</p>
     #   @return [String]
     class InvalidApprovalTokenException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -2128,6 +2221,7 @@ module Aws::CodePipeline
     # @!attribute message
     #   @return [String]
     class InvalidArnException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -2139,6 +2233,7 @@ module Aws::CodePipeline
     #   <p>The message provided to the user in the event of an exception.</p>
     #   @return [String]
     class InvalidBlockerDeclarationException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -2150,6 +2245,7 @@ module Aws::CodePipeline
     #   <p>The message provided to the user in the event of an exception.</p>
     #   @return [String]
     class InvalidClientTokenException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -2161,6 +2257,7 @@ module Aws::CodePipeline
     #   <p>The message provided to the user in the event of an exception.</p>
     #   @return [String]
     class InvalidJobException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -2172,6 +2269,7 @@ module Aws::CodePipeline
     #   <p>The message provided to the user in the event of an exception.</p>
     #   @return [String]
     class InvalidJobStateException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -2184,6 +2282,7 @@ module Aws::CodePipeline
     #   <p>The message provided to the user in the event of an exception.</p>
     #   @return [String]
     class InvalidNextTokenException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -2195,6 +2294,7 @@ module Aws::CodePipeline
     #   <p>The message provided to the user in the event of an exception.</p>
     #   @return [String]
     class InvalidNonceException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -2206,6 +2306,7 @@ module Aws::CodePipeline
     #   <p>The message provided to the user in the event of an exception.</p>
     #   @return [String]
     class InvalidStageDeclarationException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -2217,6 +2318,7 @@ module Aws::CodePipeline
     #   <p>The message provided to the user in the event of an exception.</p>
     #   @return [String]
     class InvalidStructureException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -2227,6 +2329,7 @@ module Aws::CodePipeline
     # @!attribute message
     #   @return [String]
     class InvalidTagsException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -2238,6 +2341,7 @@ module Aws::CodePipeline
     #   <p>The message provided to the user in the event of an exception.</p>
     #   @return [String]
     class InvalidWebhookAuthenticationParametersException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -2249,6 +2353,7 @@ module Aws::CodePipeline
     #   <p>The message provided to the user in the event of an exception.</p>
     #   @return [String]
     class InvalidWebhookFilterPatternException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -2270,6 +2375,7 @@ module Aws::CodePipeline
     #   <p>The ID of the Amazon Web Services account to use when performing the job.</p>
     #   @return [String]
     class Job < Struct.new(
+      nil,
       :id,
       :data,
       :nonce,
@@ -2315,6 +2421,7 @@ module Aws::CodePipeline
     #               such as an KMS key. </p>
     #   @return [Types::EncryptionKey]
     class JobData < Struct.new(
+      nil,
       :action_type_id,
       :action_configuration,
       :pipeline_context,
@@ -2340,6 +2447,7 @@ module Aws::CodePipeline
     #   <p>The Amazon Web Services account ID associated with the job.</p>
     #   @return [String]
     class JobDetails < Struct.new(
+      nil,
       :id,
       :data,
       :account_id,
@@ -2353,6 +2461,7 @@ module Aws::CodePipeline
     #   <p>The message provided to the user in the event of an exception.</p>
     #   @return [String]
     class JobNotFoundException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -2370,6 +2479,7 @@ module Aws::CodePipeline
     #               as part of the action execution.</p>
     #   @return [Array<String>]
     class JobWorkerExecutorConfiguration < Struct.new(
+      nil,
       :polling_accounts,
       :polling_service_principals,
       keyword_init: true
@@ -2383,6 +2493,7 @@ module Aws::CodePipeline
     #   <p>The ARN of the Lambda function used by the action engine.</p>
     #   @return [String]
     class LambdaExecutorConfiguration < Struct.new(
+      nil,
       :lambda_function_arn,
       keyword_init: true
     )
@@ -2411,6 +2522,7 @@ module Aws::CodePipeline
     #            </ul>
     #   @return [String]
     class LatestInPipelineExecutionFilter < Struct.new(
+      nil,
       :pipeline_execution_id,
       :start_time_range,
       keyword_init: true
@@ -2424,6 +2536,7 @@ module Aws::CodePipeline
     #   <p>The message provided to the user in the event of an exception.</p>
     #   @return [String]
     class LimitExceededException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -2447,6 +2560,7 @@ module Aws::CodePipeline
     #               which can be used to return the next set of action executions in the list.</p>
     #   @return [String]
     class ListActionExecutionsInput < Struct.new(
+      nil,
       :pipeline_name,
       :filter,
       :max_results,
@@ -2465,6 +2579,7 @@ module Aws::CodePipeline
     #               return the next set of action executions in the list.</p>
     #   @return [String]
     class ListActionExecutionsOutput < Struct.new(
+      nil,
       :action_execution_details,
       :next_token,
       keyword_init: true
@@ -2484,6 +2599,7 @@ module Aws::CodePipeline
     #   <p>The Region to filter on for the list of action types.</p>
     #   @return [String]
     class ListActionTypesInput < Struct.new(
+      nil,
       :action_owner_filter,
       :next_token,
       :region_filter,
@@ -2502,6 +2618,7 @@ module Aws::CodePipeline
     #               of action types in the list.</p>
     #   @return [String]
     class ListActionTypesOutput < Struct.new(
+      nil,
       :action_types,
       :next_token,
       keyword_init: true
@@ -2527,6 +2644,7 @@ module Aws::CodePipeline
     #               used to return the next set of action types in the list.</p>
     #   @return [String]
     class ListDeployActionExecutionTargetsInput < Struct.new(
+      nil,
       :pipeline_name,
       :action_execution_id,
       :filters,
@@ -2545,6 +2663,7 @@ module Aws::CodePipeline
     #               used to return the next set of action types in the list.</p>
     #   @return [String]
     class ListDeployActionExecutionTargetsOutput < Struct.new(
+      nil,
       :targets,
       :next_token,
       keyword_init: true
@@ -2572,6 +2691,7 @@ module Aws::CodePipeline
     #               list.</p>
     #   @return [String]
     class ListPipelineExecutionsInput < Struct.new(
+      nil,
       :pipeline_name,
       :max_results,
       :filter,
@@ -2591,6 +2711,7 @@ module Aws::CodePipeline
     #               until no more nextToken values are returned.</p>
     #   @return [String]
     class ListPipelineExecutionsOutput < Struct.new(
+      nil,
       :pipeline_execution_summaries,
       :next_token,
       keyword_init: true
@@ -2609,6 +2730,7 @@ module Aws::CodePipeline
     #               can specify is 1. The maximum accepted value is 1000.</p>
     #   @return [Integer]
     class ListPipelinesInput < Struct.new(
+      nil,
       :next_token,
       :max_results,
       keyword_init: true
@@ -2626,6 +2748,7 @@ module Aws::CodePipeline
     #               pipelines in the list.</p>
     #   @return [String]
     class ListPipelinesOutput < Struct.new(
+      nil,
       :pipelines,
       :next_token,
       keyword_init: true
@@ -2651,6 +2774,7 @@ module Aws::CodePipeline
     #               which can be used to return the next set of rule executions in the list.</p>
     #   @return [String]
     class ListRuleExecutionsInput < Struct.new(
+      nil,
       :pipeline_name,
       :filter,
       :max_results,
@@ -2669,6 +2793,7 @@ module Aws::CodePipeline
     #               more nextToken values are returned.</p>
     #   @return [String]
     class ListRuleExecutionsOutput < Struct.new(
+      nil,
       :rule_execution_details,
       :next_token,
       keyword_init: true
@@ -2683,6 +2808,7 @@ module Aws::CodePipeline
     #   <p>The rule Region to filter on.</p>
     #   @return [String]
     class ListRuleTypesInput < Struct.new(
+      nil,
       :rule_owner_filter,
       :region_filter,
       keyword_init: true
@@ -2694,6 +2820,7 @@ module Aws::CodePipeline
     #   <p>Lists the rules that are configured for the condition.</p>
     #   @return [Array<Types::RuleType>]
     class ListRuleTypesOutput < Struct.new(
+      nil,
       :rule_types,
       keyword_init: true
     )
@@ -2712,6 +2839,7 @@ module Aws::CodePipeline
     #   <p>The maximum number of results to return in a single call.</p>
     #   @return [Integer]
     class ListTagsForResourceInput < Struct.new(
+      nil,
       :resource_arn,
       :next_token,
       :max_results,
@@ -2730,6 +2858,7 @@ module Aws::CodePipeline
     #               pagination.</p>
     #   @return [String]
     class ListTagsForResourceOutput < Struct.new(
+      nil,
       :tags,
       :next_token,
       keyword_init: true
@@ -2766,6 +2895,7 @@ module Aws::CodePipeline
     #   <p>Specifies the tags applied to the webhook.</p>
     #   @return [Array<Types::Tag>]
     class ListWebhookItem < Struct.new(
+      nil,
       :definition,
       :url,
       :error_message,
@@ -2787,6 +2917,7 @@ module Aws::CodePipeline
     #               results, make another call with the returned nextToken value.</p>
     #   @return [Integer]
     class ListWebhooksInput < Struct.new(
+      nil,
       :next_token,
       :max_results,
       keyword_init: true
@@ -2804,6 +2935,7 @@ module Aws::CodePipeline
     #               webhooks in the list. </p>
     #   @return [String]
     class ListWebhooksOutput < Struct.new(
+      nil,
       :webhooks,
       :next_token,
       keyword_init: true
@@ -2818,6 +2950,7 @@ module Aws::CodePipeline
     #   <p>The message provided to the user in the event of an exception.</p>
     #   @return [String]
     class NotLatestPipelineExecutionException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -2839,6 +2972,7 @@ module Aws::CodePipeline
     #               from the compute action.</p>
     #   @return [Array<String>]
     class OutputArtifact < Struct.new(
+      nil,
       :name,
       :files,
       keyword_init: true
@@ -2850,6 +2984,7 @@ module Aws::CodePipeline
     # @!attribute message
     #   @return [String]
     class OutputVariablesSizeExceededException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -2870,6 +3005,7 @@ module Aws::CodePipeline
     #               conditions, or success conditions.</p>
     #   @return [String]
     class OverrideStageConditionInput < Struct.new(
+      nil,
       :pipeline_name,
       :stage_name,
       :pipeline_execution_id,
@@ -2903,6 +3039,7 @@ module Aws::CodePipeline
     #   <p>The execution ID of the pipeline.</p>
     #   @return [String]
     class PipelineContext < Struct.new(
+      nil,
       :pipeline_name,
       :stage,
       :action,
@@ -2991,6 +3128,7 @@ module Aws::CodePipeline
     #            </note>
     #   @return [Array<Types::PipelineTriggerDeclaration>]
     class PipelineDeclaration < Struct.new(
+      nil,
       :name,
       :role_arn,
       :artifact_store,
@@ -3072,6 +3210,7 @@ module Aws::CodePipeline
     #   <p>The metadata about the execution pertaining to stage rollback.</p>
     #   @return [Types::PipelineRollbackMetadata]
     class PipelineExecution < Struct.new(
+      nil,
       :pipeline_name,
       :pipeline_version,
       :pipeline_execution_id,
@@ -3094,6 +3233,7 @@ module Aws::CodePipeline
     #               version.</p>
     #   @return [Types::SucceededInStageFilter]
     class PipelineExecutionFilter < Struct.new(
+      nil,
       :succeeded_in_stage,
       keyword_init: true
     )
@@ -3106,6 +3246,7 @@ module Aws::CodePipeline
     #   <p>The message provided to the user in the event of an exception.</p>
     #   @return [String]
     class PipelineExecutionNotFoundException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -3117,6 +3258,7 @@ module Aws::CodePipeline
     # @!attribute message
     #   @return [String]
     class PipelineExecutionNotStoppableException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -3128,6 +3270,7 @@ module Aws::CodePipeline
     # @!attribute message
     #   @return [String]
     class PipelineExecutionOutdatedException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -3198,6 +3341,7 @@ module Aws::CodePipeline
     #   <p>The metadata for the stage execution to be rolled back.</p>
     #   @return [Types::PipelineRollbackMetadata]
     class PipelineExecutionSummary < Struct.new(
+      nil,
       :pipeline_execution_id,
       :status,
       :status_summary,
@@ -3239,6 +3383,7 @@ module Aws::CodePipeline
     #                   pipelines to use event-based change detection</a> in the <i>CodePipeline User Guide</i>.</p>
     #   @return [Time]
     class PipelineMetadata < Struct.new(
+      nil,
       :pipeline_arn,
       :created,
       :updated,
@@ -3253,6 +3398,7 @@ module Aws::CodePipeline
     #   <p>The message provided to the user in the event of an exception.</p>
     #   @return [String]
     class PipelineNameInUseException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -3264,6 +3410,7 @@ module Aws::CodePipeline
     #   <p>The message provided to the user in the event of an exception.</p>
     #   @return [String]
     class PipelineNotFoundException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -3275,6 +3422,7 @@ module Aws::CodePipeline
     #   <p>The pipeline execution ID to which the stage will be rolled back.</p>
     #   @return [String]
     class PipelineRollbackMetadata < Struct.new(
+      nil,
       :rollback_target_pipeline_execution_id,
       keyword_init: true
     )
@@ -3323,6 +3471,7 @@ module Aws::CodePipeline
     #               format.</p>
     #   @return [Time]
     class PipelineSummary < Struct.new(
+      nil,
       :name,
       :version,
       :pipeline_type,
@@ -3353,6 +3502,7 @@ module Aws::CodePipeline
     #               starts the pipeline, such as Git tags.</p>
     #   @return [Types::GitConfiguration]
     class PipelineTriggerDeclaration < Struct.new(
+      nil,
       :provider_type,
       :git_configuration,
       keyword_init: true
@@ -3368,6 +3518,7 @@ module Aws::CodePipeline
     #   <p>The value of a pipeline-level variable.</p>
     #   @return [String]
     class PipelineVariable < Struct.new(
+      nil,
       :name,
       :value,
       keyword_init: true
@@ -3387,6 +3538,7 @@ module Aws::CodePipeline
     #               about the variable, and not being used at time when pipeline executes.</p>
     #   @return [String]
     class PipelineVariableDeclaration < Struct.new(
+      nil,
       :name,
       :default_value,
       :description,
@@ -3401,6 +3553,7 @@ module Aws::CodePipeline
     #   <p>The message provided to the user in the event of an exception.</p>
     #   @return [String]
     class PipelineVersionNotFoundException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -3421,6 +3574,7 @@ module Aws::CodePipeline
     #               configuration matches the mapped value are returned.</p>
     #   @return [Hash<String, String>]
     class PollForJobsInput < Struct.new(
+      nil,
       :action_type_id,
       :max_batch_size,
       :query_param,
@@ -3434,6 +3588,7 @@ module Aws::CodePipeline
     #   <p>Information about the jobs to take action on.</p>
     #   @return [Array<Types::Job>]
     class PollForJobsOutput < Struct.new(
+      nil,
       :jobs,
       keyword_init: true
     )
@@ -3448,6 +3603,7 @@ module Aws::CodePipeline
     #   <p>The maximum number of jobs to return in a poll for jobs call.</p>
     #   @return [Integer]
     class PollForThirdPartyJobsInput < Struct.new(
+      nil,
       :action_type_id,
       :max_batch_size,
       keyword_init: true
@@ -3460,6 +3616,7 @@ module Aws::CodePipeline
     #   <p>Information about the jobs to take action on.</p>
     #   @return [Array<Types::ThirdPartyJob>]
     class PollForThirdPartyJobsOutput < Struct.new(
+      nil,
       :jobs,
       keyword_init: true
     )
@@ -3481,6 +3638,7 @@ module Aws::CodePipeline
     #   <p>Represents information about the version (or revision) of an action.</p>
     #   @return [Types::ActionRevision]
     class PutActionRevisionInput < Struct.new(
+      nil,
       :pipeline_name,
       :stage_name,
       :action_name,
@@ -3499,6 +3657,7 @@ module Aws::CodePipeline
     #   <p>The ID of the current workflow state of the pipeline.</p>
     #   @return [String]
     class PutActionRevisionOutput < Struct.new(
+      nil,
       :new_revision,
       :pipeline_execution_id,
       keyword_init: true
@@ -3536,6 +3695,7 @@ module Aws::CodePipeline
     #            </important>
     #   @return [String]
     class PutApprovalResultInput < Struct.new(
+      nil,
       :pipeline_name,
       :stage_name,
       :action_name,
@@ -3551,6 +3711,7 @@ module Aws::CodePipeline
     #   <p>The timestamp showing when the approval or rejection was submitted.</p>
     #   @return [Time]
     class PutApprovalResultOutput < Struct.new(
+      nil,
       :approved_at,
       keyword_init: true
     )
@@ -3566,6 +3727,7 @@ module Aws::CodePipeline
     #   <p>The details about the failure of a job.</p>
     #   @return [Types::FailureDetails]
     class PutJobFailureResultInput < Struct.new(
+      nil,
       :job_id,
       :failure_details,
       keyword_init: true
@@ -3599,6 +3761,7 @@ module Aws::CodePipeline
     #               there is no continuation token on the request.</p>
     #   @return [Hash<String, String>]
     class PutJobSuccessResultInput < Struct.new(
+      nil,
       :job_id,
       :current_revision,
       :continuation_token,
@@ -3623,6 +3786,7 @@ module Aws::CodePipeline
     #   <p>Represents information about failure details.</p>
     #   @return [Types::FailureDetails]
     class PutThirdPartyJobFailureResultInput < Struct.new(
+      nil,
       :job_id,
       :client_token,
       :failure_details,
@@ -3656,6 +3820,7 @@ module Aws::CodePipeline
     #               through stages in the pipeline. </p>
     #   @return [Types::ExecutionDetails]
     class PutThirdPartyJobSuccessResultInput < Struct.new(
+      nil,
       :job_id,
       :client_token,
       :current_revision,
@@ -3676,6 +3841,7 @@ module Aws::CodePipeline
     #   <p>The tags for the webhook.</p>
     #   @return [Array<Types::Tag>]
     class PutWebhookInput < Struct.new(
+      nil,
       :webhook,
       :tags,
       keyword_init: true
@@ -3688,6 +3854,7 @@ module Aws::CodePipeline
     #               URL, and webhook ARN.</p>
     #   @return [Types::ListWebhookItem]
     class PutWebhookOutput < Struct.new(
+      nil,
       :webhook,
       keyword_init: true
     )
@@ -3699,6 +3866,7 @@ module Aws::CodePipeline
     #               supported third party. </p>
     #   @return [String]
     class RegisterWebhookWithThirdPartyInput < Struct.new(
+      nil,
       :webhook_name,
       keyword_init: true
     )
@@ -3706,6 +3874,7 @@ module Aws::CodePipeline
     end
 
     class RegisterWebhookWithThirdPartyOutput < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -3715,6 +3884,7 @@ module Aws::CodePipeline
     # @!attribute message
     #   @return [String]
     class RequestFailedException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -3729,6 +3899,7 @@ module Aws::CodePipeline
     #   <p>The resolved value of a pipeline-level variable.</p>
     #   @return [String]
     class ResolvedPipelineVariable < Struct.new(
+      nil,
       :name,
       :resolved_value,
       keyword_init: true
@@ -3741,6 +3912,7 @@ module Aws::CodePipeline
     #   <p>The message provided to the user in the event of an exception.</p>
     #   @return [String]
     class ResourceNotFoundException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -3754,6 +3926,7 @@ module Aws::CodePipeline
     #               can specify to retry only failed action in the stage or all actions in the stage.</p>
     #   @return [String]
     class RetryConfiguration < Struct.new(
+      nil,
       :retry_mode,
       keyword_init: true
     )
@@ -3775,6 +3948,7 @@ module Aws::CodePipeline
     #   <p>The scope of the retry attempt.</p>
     #   @return [String]
     class RetryStageExecutionInput < Struct.new(
+      nil,
       :pipeline_name,
       :stage_name,
       :pipeline_execution_id,
@@ -3789,6 +3963,7 @@ module Aws::CodePipeline
     #   <p>The ID of the current workflow execution in the failed stage.</p>
     #   @return [String]
     class RetryStageExecutionOutput < Struct.new(
+      nil,
       :pipeline_execution_id,
       keyword_init: true
     )
@@ -3810,6 +3985,7 @@ module Aws::CodePipeline
     #               made upon stage failure.</p>
     #   @return [String]
     class RetryStageMetadata < Struct.new(
+      nil,
       :auto_stage_retry_attempt,
       :manual_stage_retry_attempt,
       :latest_retry_trigger,
@@ -3828,6 +4004,7 @@ module Aws::CodePipeline
     #   <p>The pipeline execution ID for the stage to be rolled back to. </p>
     #   @return [String]
     class RollbackStageInput < Struct.new(
+      nil,
       :pipeline_name,
       :stage_name,
       :target_pipeline_execution_id,
@@ -3841,6 +4018,7 @@ module Aws::CodePipeline
     #               back.</p>
     #   @return [String]
     class RollbackStageOutput < Struct.new(
+      nil,
       :pipeline_execution_id,
       keyword_init: true
     )
@@ -3877,6 +4055,7 @@ module Aws::CodePipeline
     #   <p>The type of the configuration property.</p>
     #   @return [String]
     class RuleConfigurationProperty < Struct.new(
+      nil,
       :name,
       :required,
       :key,
@@ -3936,6 +4115,7 @@ module Aws::CodePipeline
     #   <p>The action timeout for the rule.</p>
     #   @return [Integer]
     class RuleDeclaration < Struct.new(
+      nil,
       :name,
       :rule_type_id,
       :configuration,
@@ -3980,6 +4160,7 @@ module Aws::CodePipeline
     #   <p>Represents information about an error in CodePipeline.</p>
     #   @return [Types::ErrorDetails]
     class RuleExecution < Struct.new(
+      nil,
       :rule_execution_id,
       :status,
       :summary,
@@ -4034,6 +4215,7 @@ module Aws::CodePipeline
     #   <p>Output details for the rule execution, such as the rule execution result.</p>
     #   @return [Types::RuleExecutionOutput]
     class RuleExecutionDetail < Struct.new(
+      nil,
       :pipeline_execution_id,
       :rule_execution_id,
       :pipeline_version,
@@ -4063,6 +4245,7 @@ module Aws::CodePipeline
     #            </note>
     #   @return [Types::LatestInPipelineExecutionFilter]
     class RuleExecutionFilter < Struct.new(
+      nil,
       :pipeline_execution_id,
       :latest_in_pipeline_execution,
       keyword_init: true
@@ -4095,6 +4278,7 @@ module Aws::CodePipeline
     #   <p>Details of input artifacts of the rule that correspond to the rule execution.</p>
     #   @return [Array<Types::ArtifactDetail>]
     class RuleExecutionInput < Struct.new(
+      nil,
       :rule_type_id,
       :configuration,
       :resolved_configuration,
@@ -4111,6 +4295,7 @@ module Aws::CodePipeline
     #   <p>Execution result information listed in the output details for a rule execution.</p>
     #   @return [Types::RuleExecutionResult]
     class RuleExecutionOutput < Struct.new(
+      nil,
       :execution_result,
       keyword_init: true
     )
@@ -4132,6 +4317,7 @@ module Aws::CodePipeline
     #   <p>Represents information about an error in CodePipeline.</p>
     #   @return [Types::ErrorDetails]
     class RuleExecutionResult < Struct.new(
+      nil,
       :external_execution_id,
       :external_execution_summary,
       :external_execution_url,
@@ -4154,6 +4340,7 @@ module Aws::CodePipeline
     #               format.</p>
     #   @return [Time]
     class RuleRevision < Struct.new(
+      nil,
       :revision_id,
       :revision_change_id,
       :created,
@@ -4186,6 +4373,7 @@ module Aws::CodePipeline
     #               page.</p>
     #   @return [String]
     class RuleState < Struct.new(
+      nil,
       :rule_name,
       :current_revision,
       :latest_execution,
@@ -4211,6 +4399,7 @@ module Aws::CodePipeline
     #   <p>Returns information about the details of an artifact.</p>
     #   @return [Types::ArtifactDetails]
     class RuleType < Struct.new(
+      nil,
       :id,
       :settings,
       :rule_configuration_properties,
@@ -4240,6 +4429,7 @@ module Aws::CodePipeline
     #   <p>A string that describes the rule version.</p>
     #   @return [String]
     class RuleTypeId < Struct.new(
+      nil,
       :category,
       :owner,
       :provider,
@@ -4271,6 +4461,7 @@ module Aws::CodePipeline
     #               where customers can update or change the configuration of the external action.</p>
     #   @return [String]
     class RuleTypeSettings < Struct.new(
+      nil,
       :third_party_configuration_url,
       :entity_url_template,
       :execution_url_template,
@@ -4289,6 +4480,7 @@ module Aws::CodePipeline
     #               bucket.</p>
     #   @return [String]
     class S3ArtifactLocation < Struct.new(
+      nil,
       :bucket_name,
       :object_key,
       keyword_init: true
@@ -4304,6 +4496,7 @@ module Aws::CodePipeline
     #   <p>The artifact name.</p>
     #   @return [String]
     class S3Location < Struct.new(
+      nil,
       :bucket,
       :key,
       keyword_init: true
@@ -4332,6 +4525,7 @@ module Aws::CodePipeline
     #               CodeCommit repositories, the commit ID is linked to a commit details page.</p>
     #   @return [String]
     class SourceRevision < Struct.new(
+      nil,
       :action_name,
       :revision_id,
       :revision_summary,
@@ -4361,6 +4555,7 @@ module Aws::CodePipeline
     #               want to run in the pipeline execution.</p>
     #   @return [String]
     class SourceRevisionOverride < Struct.new(
+      nil,
       :action_name,
       :revision_type,
       :revision_value,
@@ -4377,6 +4572,7 @@ module Aws::CodePipeline
     #   <p>The states of the conditions for a run of a condition for a stage.</p>
     #   @return [Array<Types::ConditionState>]
     class StageConditionState < Struct.new(
+      nil,
       :latest_execution,
       :condition_states,
       keyword_init: true
@@ -4392,6 +4588,7 @@ module Aws::CodePipeline
     #   <p>A summary of the run of the condition for a stage.</p>
     #   @return [String]
     class StageConditionsExecution < Struct.new(
+      nil,
       :status,
       :summary,
       keyword_init: true
@@ -4404,6 +4601,7 @@ module Aws::CodePipeline
     #   <p>The name of the stage.</p>
     #   @return [String]
     class StageContext < Struct.new(
+      nil,
       :name,
       keyword_init: true
     )
@@ -4434,6 +4632,7 @@ module Aws::CodePipeline
     #               conditions will allow entry to the stage when the conditions are met.</p>
     #   @return [Types::BeforeEntryConditions]
     class StageDeclaration < Struct.new(
+      nil,
       :name,
       :blockers,
       :actions,
@@ -4462,6 +4661,7 @@ module Aws::CodePipeline
     #               execution.</p>
     #   @return [String]
     class StageExecution < Struct.new(
+      nil,
       :pipeline_execution_id,
       :status,
       :type,
@@ -4475,6 +4675,7 @@ module Aws::CodePipeline
     #   <p>The message provided to the user in the event of an exception.</p>
     #   @return [String]
     class StageNotFoundException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -4488,6 +4689,7 @@ module Aws::CodePipeline
     #   <p>The message provided to the user in the event of an exception.</p>
     #   @return [String]
     class StageNotRetryableException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -4528,6 +4730,7 @@ module Aws::CodePipeline
     #               number and trigger.</p>
     #   @return [Types::RetryStageMetadata]
     class StageState < Struct.new(
+      nil,
       :stage_name,
       :inbound_execution,
       :inbound_executions,
@@ -4562,6 +4765,7 @@ module Aws::CodePipeline
     #               your application code, or source artifact, for the pipeline execution.</p>
     #   @return [Array<Types::SourceRevisionOverride>]
     class StartPipelineExecutionInput < Struct.new(
+      nil,
       :name,
       :variables,
       :client_request_token,
@@ -4577,6 +4781,7 @@ module Aws::CodePipeline
     #               started.</p>
     #   @return [String]
     class StartPipelineExecutionOutput < Struct.new(
+      nil,
       :pipeline_execution_id,
       keyword_init: true
     )
@@ -4588,6 +4793,7 @@ module Aws::CodePipeline
     #   <p>The user-specified reason the pipeline was stopped.</p>
     #   @return [String]
     class StopExecutionTrigger < Struct.new(
+      nil,
       :reason,
       keyword_init: true
     )
@@ -4613,6 +4819,7 @@ module Aws::CodePipeline
     #   <p>Use this option to enter comments, such as the reason the pipeline was stopped.</p>
     #   @return [String]
     class StopPipelineExecutionInput < Struct.new(
+      nil,
       :pipeline_name,
       :pipeline_execution_id,
       :abandon,
@@ -4626,6 +4833,7 @@ module Aws::CodePipeline
     #   <p>The unique system-generated ID of the pipeline execution that was stopped.</p>
     #   @return [String]
     class StopPipelineExecutionOutput < Struct.new(
+      nil,
       :pipeline_execution_id,
       keyword_init: true
     )
@@ -4639,6 +4847,7 @@ module Aws::CodePipeline
     #               successful in the current pipeline version.</p>
     #   @return [String]
     class SucceededInStageFilter < Struct.new(
+      nil,
       :stage_name,
       keyword_init: true
     )
@@ -4653,6 +4862,7 @@ module Aws::CodePipeline
     #   <p>The conditions that are success conditions.</p>
     #   @return [Array<Types::Condition>]
     class SuccessConditions < Struct.new(
+      nil,
       :conditions,
       keyword_init: true
     )
@@ -4667,6 +4877,7 @@ module Aws::CodePipeline
     #   <p>The tag's value.</p>
     #   @return [String]
     class Tag < Struct.new(
+      nil,
       :key,
       :value,
       keyword_init: true
@@ -4681,6 +4892,7 @@ module Aws::CodePipeline
     #   <p>The tags you want to modify or add to the resource.</p>
     #   @return [Array<Types::Tag>]
     class TagResourceInput < Struct.new(
+      nil,
       :resource_arn,
       :tags,
       keyword_init: true
@@ -4689,6 +4901,7 @@ module Aws::CodePipeline
     end
 
     class TagResourceOutput < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -4702,6 +4915,7 @@ module Aws::CodePipeline
     #   <p>The values on which to filter.</p>
     #   @return [Array<String>]
     class TargetFilter < Struct.new(
+      nil,
       :name,
       :values,
       keyword_init: true
@@ -4719,6 +4933,7 @@ module Aws::CodePipeline
     #   <p>The identifier used to identify the job in CodePipeline.</p>
     #   @return [String]
     class ThirdPartyJob < Struct.new(
+      nil,
       :client_id,
       :job_id,
       keyword_init: true
@@ -4767,6 +4982,7 @@ module Aws::CodePipeline
     #               key. This is optional and might not be present.</p>
     #   @return [Types::EncryptionKey]
     class ThirdPartyJobData < Struct.new(
+      nil,
       :action_type_id,
       :action_configuration,
       :pipeline_context,
@@ -4793,6 +5009,7 @@ module Aws::CodePipeline
     #               job is being worked on by only one job worker. Use this number in an <a>AcknowledgeThirdPartyJob</a> request.</p>
     #   @return [String]
     class ThirdPartyJobDetails < Struct.new(
+      nil,
       :id,
       :data,
       :nonce,
@@ -4805,6 +5022,7 @@ module Aws::CodePipeline
     # @!attribute message
     #   @return [String]
     class TooManyTagsException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -4828,6 +5046,7 @@ module Aws::CodePipeline
     #               disabled.</p>
     #   @return [String]
     class TransitionState < Struct.new(
+      nil,
       :enabled,
       :last_changed_by,
       :last_changed_at,
@@ -4848,6 +5067,7 @@ module Aws::CodePipeline
     # @!attribute message
     #   @return [String]
     class UnableToRollbackStageException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -4861,6 +5081,7 @@ module Aws::CodePipeline
     #   <p>The list of keys for the tags to be removed from the resource.</p>
     #   @return [Array<String>]
     class UntagResourceInput < Struct.new(
+      nil,
       :resource_arn,
       :tag_keys,
       keyword_init: true
@@ -4869,6 +5090,7 @@ module Aws::CodePipeline
     end
 
     class UntagResourceOutput < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -4878,6 +5100,7 @@ module Aws::CodePipeline
     #   <p>The action type definition for the action type to be updated.</p>
     #   @return [Types::ActionTypeDeclaration]
     class UpdateActionTypeInput < Struct.new(
+      nil,
       :action_type,
       keyword_init: true
     )
@@ -4889,6 +5112,7 @@ module Aws::CodePipeline
     #   <p>The name of the pipeline to be updated.</p>
     #   @return [Types::PipelineDeclaration]
     class UpdatePipelineInput < Struct.new(
+      nil,
       :pipeline,
       keyword_init: true
     )
@@ -4900,6 +5124,7 @@ module Aws::CodePipeline
     #   <p>The structure of the updated pipeline.</p>
     #   @return [Types::PipelineDeclaration]
     class UpdatePipelineOutput < Struct.new(
+      nil,
       :pipeline,
       keyword_init: true
     )
@@ -4911,6 +5136,7 @@ module Aws::CodePipeline
     #   <p>The message provided to the user in the event of an exception.</p>
     #   @return [String]
     class ValidationException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -4940,6 +5166,7 @@ module Aws::CodePipeline
     #            </note>
     #   @return [String]
     class WebhookAuthConfiguration < Struct.new(
+      nil,
       :allowed_ip_range,
       :secret_token,
       keyword_init: true
@@ -5002,6 +5229,7 @@ module Aws::CodePipeline
     #               UNAUTHENTICATED, no properties can be set.</p>
     #   @return [Types::WebhookAuthConfiguration]
     class WebhookDefinition < Struct.new(
+      nil,
       :name,
       :target_pipeline,
       :target_action,
@@ -5033,6 +5261,7 @@ module Aws::CodePipeline
     #               action configuration properties for built-in action types, see <a href="https://docs.aws.amazon.com/codepipeline/latest/userguide/reference-pipeline-structure.html#action-requirements">Pipeline Structure Reference Action Requirements</a>.</p>
     #   @return [String]
     class WebhookFilterRule < Struct.new(
+      nil,
       :json_path,
       :match_equals,
       keyword_init: true
@@ -5043,6 +5272,7 @@ module Aws::CodePipeline
     # <p>The specified webhook was entered in an invalid format or cannot be
     #             found.</p>
     class WebhookNotFoundException < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure

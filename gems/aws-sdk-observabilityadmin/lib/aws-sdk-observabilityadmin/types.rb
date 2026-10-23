@@ -17,6 +17,7 @@ module Aws::ObservabilityAdmin
     #       </p>
     #   @return [String]
     class AccessDeniedException < Struct.new(
+      nil,
       :message,
       :amzn_error_type,
       keyword_init: true
@@ -32,6 +33,7 @@ module Aws::ObservabilityAdmin
     #   <p>Configuration determining where the telemetry data should be centralized, backed up, as well as encryption configuration for the primary and backup destinations.</p>
     #   @return [Types::CentralizationRuleDestination]
     class CentralizationRule < Struct.new(
+      nil,
       :source,
       :destination,
       keyword_init: true
@@ -50,6 +52,7 @@ module Aws::ObservabilityAdmin
     #   <p>Log specific configuration for centralization destination log groups.</p>
     #   @return [Types::DestinationLogsConfiguration]
     class CentralizationRuleDestination < Struct.new(
+      nil,
       :region,
       :account,
       :destination_logs_configuration,
@@ -69,6 +72,7 @@ module Aws::ObservabilityAdmin
     #   <p>Log specific configuration for centralization source log groups.</p>
     #   @return [Types::SourceLogsConfiguration]
     class CentralizationRuleSource < Struct.new(
+      nil,
       :regions,
       :scope,
       :source_logs_configuration,
@@ -109,6 +113,7 @@ module Aws::ObservabilityAdmin
     #   <p>The primary destination region of the organization centralization rule.</p>
     #   @return [String]
     class CentralizationRuleSummary < Struct.new(
+      nil,
       :rule_name,
       :rule_arn,
       :creator_account_id,
@@ -130,6 +135,7 @@ module Aws::ObservabilityAdmin
     # @!attribute message
     #   @return [String]
     class ConflictException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -146,6 +152,7 @@ module Aws::ObservabilityAdmin
     #   <p>The key-value pairs to associate with the organization telemetry rule resource for categorization and management purposes.</p>
     #   @return [Hash<String, String>]
     class CreateCentralizationRuleForOrganizationInput < Struct.new(
+      nil,
       :rule_name,
       :rule,
       :tags,
@@ -158,6 +165,7 @@ module Aws::ObservabilityAdmin
     #   <p>The Amazon Resource Name (ARN) of the created organization centralization rule.</p>
     #   @return [String]
     class CreateCentralizationRuleForOrganizationOutput < Struct.new(
+      nil,
       :rule_arn,
       keyword_init: true
     )
@@ -180,6 +188,7 @@ module Aws::ObservabilityAdmin
     #       </p>
     #   @return [Hash<String, String>]
     class CreateTelemetryRuleForOrganizationInput < Struct.new(
+      nil,
       :rule_name,
       :rule,
       :tags,
@@ -194,6 +203,7 @@ module Aws::ObservabilityAdmin
     #       </p>
     #   @return [String]
     class CreateTelemetryRuleForOrganizationOutput < Struct.new(
+      nil,
       :rule_arn,
       keyword_init: true
     )
@@ -216,6 +226,7 @@ module Aws::ObservabilityAdmin
     #       </p>
     #   @return [Hash<String, String>]
     class CreateTelemetryRuleInput < Struct.new(
+      nil,
       :rule_name,
       :rule,
       :tags,
@@ -230,6 +241,7 @@ module Aws::ObservabilityAdmin
     #       </p>
     #   @return [String]
     class CreateTelemetryRuleOutput < Struct.new(
+      nil,
       :rule_arn,
       keyword_init: true
     )
@@ -240,6 +252,7 @@ module Aws::ObservabilityAdmin
     #   <p>The identifier (name or ARN) of the organization centralization rule to delete.</p>
     #   @return [String]
     class DeleteCentralizationRuleForOrganizationInput < Struct.new(
+      nil,
       :rule_identifier,
       keyword_init: true
     )
@@ -252,6 +265,7 @@ module Aws::ObservabilityAdmin
     #       </p>
     #   @return [String]
     class DeleteTelemetryRuleForOrganizationInput < Struct.new(
+      nil,
       :rule_identifier,
       keyword_init: true
     )
@@ -264,6 +278,7 @@ module Aws::ObservabilityAdmin
     #       </p>
     #   @return [String]
     class DeleteTelemetryRuleInput < Struct.new(
+      nil,
       :rule_identifier,
       keyword_init: true
     )
@@ -278,6 +293,7 @@ module Aws::ObservabilityAdmin
     #   <p>Configuration defining the backup region and an optional KMS key for the backup destination.</p>
     #   @return [Types::LogsBackupConfiguration]
     class DestinationLogsConfiguration < Struct.new(
+      nil,
       :logs_encryption_configuration,
       :backup_configuration,
       keyword_init: true
@@ -289,6 +305,7 @@ module Aws::ObservabilityAdmin
     #   <p>The identifier (name or ARN) of the organization centralization rule to retrieve.</p>
     #   @return [String]
     class GetCentralizationRuleForOrganizationInput < Struct.new(
+      nil,
       :rule_identifier,
       keyword_init: true
     )
@@ -323,6 +340,7 @@ module Aws::ObservabilityAdmin
     #   <p>The configuration details for the organization centralization rule.</p>
     #   @return [Types::CentralizationRule]
     class GetCentralizationRuleForOrganizationOutput < Struct.new(
+      nil,
       :rule_name,
       :rule_arn,
       :creator_account_id,
@@ -348,6 +366,7 @@ module Aws::ObservabilityAdmin
     #       </p>
     #   @return [String]
     class GetTelemetryEvaluationStatusForOrganizationOutput < Struct.new(
+      nil,
       :status,
       :failure_reason,
       keyword_init: true
@@ -366,6 +385,7 @@ module Aws::ObservabilityAdmin
     #       </p>
     #   @return [String]
     class GetTelemetryEvaluationStatusOutput < Struct.new(
+      nil,
       :status,
       :failure_reason,
       keyword_init: true
@@ -379,6 +399,7 @@ module Aws::ObservabilityAdmin
     #       </p>
     #   @return [String]
     class GetTelemetryRuleForOrganizationInput < Struct.new(
+      nil,
       :rule_identifier,
       keyword_init: true
     )
@@ -411,6 +432,7 @@ module Aws::ObservabilityAdmin
     #       </p>
     #   @return [Types::TelemetryRule]
     class GetTelemetryRuleForOrganizationOutput < Struct.new(
+      nil,
       :rule_name,
       :rule_arn,
       :created_time_stamp,
@@ -427,6 +449,7 @@ module Aws::ObservabilityAdmin
     #       </p>
     #   @return [String]
     class GetTelemetryRuleInput < Struct.new(
+      nil,
       :rule_identifier,
       keyword_init: true
     )
@@ -459,6 +482,7 @@ module Aws::ObservabilityAdmin
     #       </p>
     #   @return [Types::TelemetryRule]
     class GetTelemetryRuleOutput < Struct.new(
+      nil,
       :rule_name,
       :rule_arn,
       :created_time_stamp,
@@ -480,6 +504,7 @@ module Aws::ObservabilityAdmin
     #       </p>
     #   @return [String]
     class InternalServerException < Struct.new(
+      nil,
       :message,
       :amzn_error_type,
       keyword_init: true
@@ -500,6 +525,7 @@ module Aws::ObservabilityAdmin
     #   <p>The token for the next set of results. A previous call generates this token.</p>
     #   @return [String]
     class ListCentralizationRulesForOrganizationInput < Struct.new(
+      nil,
       :rule_name_prefix,
       :all_regions,
       :max_results,
@@ -516,6 +542,7 @@ module Aws::ObservabilityAdmin
     #   <p>A token to resume pagination of results.</p>
     #   @return [String]
     class ListCentralizationRulesForOrganizationOutput < Struct.new(
+      nil,
       :centralization_rule_summaries,
       :next_token,
       keyword_init: true
@@ -559,6 +586,7 @@ module Aws::ObservabilityAdmin
     #       </p>
     #   @return [String]
     class ListResourceTelemetryForOrganizationInput < Struct.new(
+      nil,
       :account_identifiers,
       :resource_identifier_prefix,
       :resource_types,
@@ -582,6 +610,7 @@ module Aws::ObservabilityAdmin
     #       </p>
     #   @return [String]
     class ListResourceTelemetryForOrganizationOutput < Struct.new(
+      nil,
       :telemetry_configurations,
       :next_token,
       keyword_init: true
@@ -620,6 +649,7 @@ module Aws::ObservabilityAdmin
     #       </p>
     #   @return [String]
     class ListResourceTelemetryInput < Struct.new(
+      nil,
       :resource_identifier_prefix,
       :resource_types,
       :telemetry_configuration_state,
@@ -642,6 +672,7 @@ module Aws::ObservabilityAdmin
     #       </p>
     #   @return [String]
     class ListResourceTelemetryOutput < Struct.new(
+      nil,
       :telemetry_configurations,
       :next_token,
       keyword_init: true
@@ -655,6 +686,7 @@ module Aws::ObservabilityAdmin
     #       </p>
     #   @return [String]
     class ListTagsForResourceInput < Struct.new(
+      nil,
       :resource_arn,
       keyword_init: true
     )
@@ -667,6 +699,7 @@ module Aws::ObservabilityAdmin
     #       </p>
     #   @return [Hash<String, String>]
     class ListTagsForResourceOutput < Struct.new(
+      nil,
       :tags,
       keyword_init: true
     )
@@ -699,6 +732,7 @@ module Aws::ObservabilityAdmin
     #       </p>
     #   @return [String]
     class ListTelemetryRulesForOrganizationInput < Struct.new(
+      nil,
       :rule_name_prefix,
       :source_account_ids,
       :source_organization_unit_ids,
@@ -720,6 +754,7 @@ module Aws::ObservabilityAdmin
     #       </p>
     #   @return [String]
     class ListTelemetryRulesForOrganizationOutput < Struct.new(
+      nil,
       :telemetry_rule_summaries,
       :next_token,
       keyword_init: true
@@ -743,6 +778,7 @@ module Aws::ObservabilityAdmin
     #       </p>
     #   @return [String]
     class ListTelemetryRulesInput < Struct.new(
+      nil,
       :rule_name_prefix,
       :max_results,
       :next_token,
@@ -762,6 +798,7 @@ module Aws::ObservabilityAdmin
     #       </p>
     #   @return [String]
     class ListTelemetryRulesOutput < Struct.new(
+      nil,
       :telemetry_rule_summaries,
       :next_token,
       keyword_init: true
@@ -777,6 +814,7 @@ module Aws::ObservabilityAdmin
     #   <p>KMS Key arn belonging to the primary destination account and backup region, to encrypt newly created central log groups in the backup destination.</p>
     #   @return [String]
     class LogsBackupConfiguration < Struct.new(
+      nil,
       :region,
       :kms_key_arn,
       keyword_init: true
@@ -795,6 +833,7 @@ module Aws::ObservabilityAdmin
     #   <p>Conflict resolution strategy for centralization if the encryption strategy is set to CUSTOMER_MANAGED and the destination log group is encrypted with an AWS_OWNED KMS Key. ALLOW lets centralization go through while SKIP prevents centralization into the destination log group.</p>
     #   @return [String]
     class LogsEncryptionConfiguration < Struct.new(
+      nil,
       :encryption_strategy,
       :kms_key_arn,
       :encryption_conflict_resolution_strategy,
@@ -809,6 +848,7 @@ module Aws::ObservabilityAdmin
     # @!attribute message
     #   @return [String]
     class ResourceNotFoundException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -826,6 +866,7 @@ module Aws::ObservabilityAdmin
     #       </p>
     #   @return [String]
     class ServiceQuotaExceededException < Struct.new(
+      nil,
       :message,
       :amzn_error_type,
       keyword_init: true
@@ -841,6 +882,7 @@ module Aws::ObservabilityAdmin
     #   <p>A strategy determining whether to centralize source log groups that are encrypted with customer managed KMS keys (CMK). ALLOW will consider CMK encrypted source log groups for centralization while SKIP will skip CMK encrypted source log groups from centralization.</p>
     #   @return [String]
     class SourceLogsConfiguration < Struct.new(
+      nil,
       :log_group_selection_criteria,
       :encrypted_log_group_strategy,
       keyword_init: true
@@ -859,6 +901,7 @@ module Aws::ObservabilityAdmin
     #       </p>
     #   @return [Hash<String, String>]
     class TagResourceInput < Struct.new(
+      nil,
       :resource_arn,
       :tags,
       keyword_init: true
@@ -900,6 +943,7 @@ module Aws::ObservabilityAdmin
     #       </p>
     #   @return [Integer]
     class TelemetryConfiguration < Struct.new(
+      nil,
       :account_identifier,
       :telemetry_configuration_state,
       :resource_type,
@@ -935,6 +979,7 @@ module Aws::ObservabilityAdmin
     #       </p>
     #   @return [Types::VPCFlowLogParameters]
     class TelemetryDestinationConfiguration < Struct.new(
+      nil,
       :destination_type,
       :destination_pattern,
       :retention_in_days,
@@ -973,6 +1018,7 @@ module Aws::ObservabilityAdmin
     #       </p>
     #   @return [String]
     class TelemetryRule < Struct.new(
+      nil,
       :resource_type,
       :telemetry_type,
       :destination_configuration,
@@ -1017,6 +1063,7 @@ module Aws::ObservabilityAdmin
     #       </p>
     #   @return [String]
     class TelemetryRuleSummary < Struct.new(
+      nil,
       :rule_name,
       :rule_arn,
       :created_time_stamp,
@@ -1034,6 +1081,7 @@ module Aws::ObservabilityAdmin
     # @!attribute message
     #   @return [String]
     class TooManyRequestsException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -1051,6 +1099,7 @@ module Aws::ObservabilityAdmin
     #       </p>
     #   @return [Array<String>]
     class UntagResourceInput < Struct.new(
+      nil,
       :resource_arn,
       :tag_keys,
       keyword_init: true
@@ -1065,6 +1114,7 @@ module Aws::ObservabilityAdmin
     #   <p>The configuration details for the organization-wide centralization rule, including the source configuration and the destination configuration to centralize telemetry data across the organization.</p>
     #   @return [Types::CentralizationRule]
     class UpdateCentralizationRuleForOrganizationInput < Struct.new(
+      nil,
       :rule_identifier,
       :rule,
       keyword_init: true
@@ -1076,6 +1126,7 @@ module Aws::ObservabilityAdmin
     #   <p>The Amazon Resource Name (ARN) of the updated organization centralization rule.</p>
     #   @return [String]
     class UpdateCentralizationRuleForOrganizationOutput < Struct.new(
+      nil,
       :rule_arn,
       keyword_init: true
     )
@@ -1093,6 +1144,7 @@ module Aws::ObservabilityAdmin
     #       </p>
     #   @return [Types::TelemetryRule]
     class UpdateTelemetryRuleForOrganizationInput < Struct.new(
+      nil,
       :rule_identifier,
       :rule,
       keyword_init: true
@@ -1106,6 +1158,7 @@ module Aws::ObservabilityAdmin
     #       </p>
     #   @return [String]
     class UpdateTelemetryRuleForOrganizationOutput < Struct.new(
+      nil,
       :rule_arn,
       keyword_init: true
     )
@@ -1123,6 +1176,7 @@ module Aws::ObservabilityAdmin
     #       </p>
     #   @return [Types::TelemetryRule]
     class UpdateTelemetryRuleInput < Struct.new(
+      nil,
       :rule_identifier,
       :rule,
       keyword_init: true
@@ -1136,6 +1190,7 @@ module Aws::ObservabilityAdmin
     #       </p>
     #   @return [String]
     class UpdateTelemetryRuleOutput < Struct.new(
+      nil,
       :rule_arn,
       keyword_init: true
     )
@@ -1161,6 +1216,7 @@ module Aws::ObservabilityAdmin
     #       </p>
     #   @return [Integer]
     class VPCFlowLogParameters < Struct.new(
+      nil,
       :log_format,
       :traffic_type,
       :max_aggregation_interval,
@@ -1175,6 +1231,7 @@ module Aws::ObservabilityAdmin
     # @!attribute message
     #   @return [String]
     class ValidationException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )

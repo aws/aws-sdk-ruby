@@ -16,6 +16,7 @@ module Aws::QuickSight
     #   <p>The Amazon Web Services request ID for this request.</p>
     #   @return [String]
     class AccessDeniedException < Struct.new(
+      nil,
       :message,
       :request_id,
       keyword_init: true
@@ -31,6 +32,7 @@ module Aws::QuickSight
     #   <p>The default email customization template.</p>
     #   @return [String]
     class AccountCustomization < Struct.new(
+      nil,
       :default_theme,
       :default_email_customization_template,
       keyword_init: true
@@ -79,6 +81,7 @@ module Aws::QuickSight
     #   <p>The Amazon Resource Name (ARN) for the IAM Identity Center instance.</p>
     #   @return [String]
     class AccountInfo < Struct.new(
+      nil,
       :account_name,
       :edition,
       :notification_email,
@@ -113,6 +116,7 @@ module Aws::QuickSight
     #   <p>A boolean value that determines whether or not an QuickSight account can be deleted. A <code>True</code> value doesn't allow the account to be deleted and results in an error message if a user tries to make a <code>DeleteAccountSubsctiption</code> request. A <code>False</code> value will allow the ccount to be deleted. </p>
     #   @return [Boolean]
     class AccountSettings < Struct.new(
+      nil,
       :account_name,
       :edition,
       :default_namespace,
@@ -138,6 +142,7 @@ module Aws::QuickSight
     #   <p>The Amazon Resource Name (ARN) of the resource.</p>
     #   @return [String]
     class ActiveIAMPolicyAssignment < Struct.new(
+      nil,
       :assignment_name,
       :policy_arn,
       keyword_init: true
@@ -150,6 +155,7 @@ module Aws::QuickSight
     #   <p>Availability status.</p>
     #   @return [String]
     class AdHocFilteringOption < Struct.new(
+      nil,
       :availability_status,
       keyword_init: true
     )
@@ -170,6 +176,7 @@ module Aws::QuickSight
     #   <p>The period field for an Agg function.</p>
     #   @return [String]
     class AggFunction < Struct.new(
+      nil,
       :aggregation,
       :aggregation_function_parameters,
       :period,
@@ -222,6 +229,7 @@ module Aws::QuickSight
     #   <p>Aggregation for attributes.</p>
     #   @return [Types::AttributeAggregationFunction]
     class AggregationFunction < Struct.new(
+      nil,
       :numerical_aggregation_function,
       :categorical_aggregation_function,
       :date_aggregation_function,
@@ -239,6 +247,7 @@ module Aws::QuickSight
     #   <p>The <code>TimeGranularity</code> for an <code>AggregationPartitionBy</code>.</p>
     #   @return [String]
     class AggregationPartitionBy < Struct.new(
+      nil,
       :field_name,
       :time_granularity,
       keyword_init: true
@@ -267,6 +276,7 @@ module Aws::QuickSight
     #   <p>The function that aggregates the values in <code>Column</code>.</p>
     #   @return [Types::AggregationFunction]
     class AggregationSortConfiguration < Struct.new(
+      nil,
       :column,
       :sort_direction,
       :aggregation_function,
@@ -278,6 +288,7 @@ module Aws::QuickSight
     # <p>An empty object that represents that the <code>AllSheets</code> option is the chosen value for the <code>FilterScopeConfiguration</code> parameter. This structure applies the filter to all visuals on all sheets of an Analysis, Dashboard, or Template.</p>
     #          <p>This is a union type structure. For this structure to be valid, only one of the attributes can be defined.</p>
     class AllSheetsFilterScopeConfiguration < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -288,6 +299,7 @@ module Aws::QuickSight
     #   <p>The OpenSearch domain.</p>
     #   @return [String]
     class AmazonElasticsearchParameters < Struct.new(
+      nil,
       :domain,
       keyword_init: true
     )
@@ -299,6 +311,7 @@ module Aws::QuickSight
     #   <p>The OpenSearch domain.</p>
     #   @return [String]
     class AmazonOpenSearchParameters < Struct.new(
+      nil,
       :domain,
       keyword_init: true
     )
@@ -319,6 +332,7 @@ module Aws::QuickSight
     #   <p>Adds the data stories feature to an embedded QuickSight console.</p>
     #   @return [Types::DataStoriesConfigurations]
     class AmazonQInQuickSightConsoleConfigurations < Struct.new(
+      nil,
       :data_qn_a,
       :generative_authoring,
       :executive_summary,
@@ -333,6 +347,7 @@ module Aws::QuickSight
     #   <p>A generated executive summary of an embedded QuickSight dashboard.</p>
     #   @return [Types::ExecutiveSummaryConfigurations]
     class AmazonQInQuickSightDashboardConfigurations < Struct.new(
+      nil,
       :executive_summary,
       keyword_init: true
     )
@@ -371,6 +386,7 @@ module Aws::QuickSight
     #   <p>A list of the associated sheets with the unique identifier and name of each sheet.</p>
     #   @return [Array<Types::Sheet>]
     class Analysis < Struct.new(
+      nil,
       :analysis_id,
       :arn,
       :name,
@@ -391,6 +407,7 @@ module Aws::QuickSight
     #   <p>The configuration for default new sheet settings.</p>
     #   @return [Types::DefaultNewSheetConfiguration]
     class AnalysisDefaults < Struct.new(
+      nil,
       :default_new_sheet_configuration,
       keyword_init: true
     )
@@ -437,6 +454,7 @@ module Aws::QuickSight
     #   <p>The static files for the definition.</p>
     #   @return [Array<Types::StaticFile>]
     class AnalysisDefinition < Struct.new(
+      nil,
       :data_set_identifier_declarations,
       :sheets,
       :calculated_fields,
@@ -463,6 +481,7 @@ module Aws::QuickSight
     #   <p>Lists the violated entities that caused the analysis error</p>
     #   @return [Array<Types::Entity>]
     class AnalysisError < Struct.new(
+      nil,
       :type,
       :message,
       :violated_entities,
@@ -514,6 +533,7 @@ module Aws::QuickSight
     #                   <code>"arn:aws:quicksight:us-east-1:1:user/default/UserName1"</code>.</p>
     #   @return [String]
     class AnalysisSearchFilter < Struct.new(
+      nil,
       :operator,
       :name,
       :value,
@@ -527,6 +547,7 @@ module Aws::QuickSight
     #   <p>The source template for the source entity of the analysis.</p>
     #   @return [Types::AnalysisSourceTemplate]
     class AnalysisSourceEntity < Struct.new(
+      nil,
       :source_template,
       keyword_init: true
     )
@@ -541,6 +562,7 @@ module Aws::QuickSight
     #   <p>The Amazon Resource Name (ARN) of the source template of an analysis.</p>
     #   @return [String]
     class AnalysisSourceTemplate < Struct.new(
+      nil,
       :data_set_references,
       :arn,
       keyword_init: true
@@ -569,6 +591,7 @@ module Aws::QuickSight
     #   <p>The time that the analysis was last updated.</p>
     #   @return [Time]
     class AnalysisSummary < Struct.new(
+      nil,
       :arn,
       :analysis_id,
       :name,
@@ -591,6 +614,7 @@ module Aws::QuickSight
     #   <p>The offset of the Anchor.</p>
     #   @return [Integer]
     class Anchor < Struct.new(
+      nil,
       :anchor_type,
       :time_granularity,
       :offset,
@@ -619,6 +643,7 @@ module Aws::QuickSight
     #   <p>The name of the parameter that is used for the anchor date configuration.</p>
     #   @return [String]
     class AnchorDateConfiguration < Struct.new(
+      nil,
       :anchor_option,
       :parameter_name,
       keyword_init: true
@@ -641,6 +666,7 @@ module Aws::QuickSight
     #   <p>The feature configuration for an embedded dashboard.</p>
     #   @return [Types::AnonymousUserDashboardFeatureConfigurations]
     class AnonymousUserDashboardEmbeddingConfiguration < Struct.new(
+      nil,
       :initial_dashboard_id,
       :enabled_features,
       :disabled_features,
@@ -655,6 +681,7 @@ module Aws::QuickSight
     #   <p>The shared view settings of an embedded dashboard.</p>
     #   @return [Types::SharedViewConfigurations]
     class AnonymousUserDashboardFeatureConfigurations < Struct.new(
+      nil,
       :shared_view,
       keyword_init: true
     )
@@ -667,6 +694,7 @@ module Aws::QuickSight
     #            <p>The Amazon Resource Name (ARN) of the dashboard that the visual belongs to must be included in the <code>AuthorizedResourceArns</code> parameter. Otherwise, the request will fail with <code>InvalidParameterValueException</code>.</p>
     #   @return [Types::DashboardVisualId]
     class AnonymousUserDashboardVisualEmbeddingConfiguration < Struct.new(
+      nil,
       :initial_dashboard_visual_id,
       keyword_init: true
     )
@@ -687,6 +715,7 @@ module Aws::QuickSight
     #   <p>The Generative Q&A experience that you want to use for anonymous user embedding.</p>
     #   @return [Types::AnonymousUserGenerativeQnAEmbeddingConfiguration]
     class AnonymousUserEmbeddingExperienceConfiguration < Struct.new(
+      nil,
       :dashboard,
       :dashboard_visual,
       :q_search_bar,
@@ -702,6 +731,7 @@ module Aws::QuickSight
     #            <p>The Amazon Resource Name (ARN) of this Q new reader experience topic must be included in the <code>AuthorizedResourceArns</code> parameter. Otherwise, the request fails with an <code>InvalidParameterValueException</code> error.</p>
     #   @return [String]
     class AnonymousUserGenerativeQnAEmbeddingConfiguration < Struct.new(
+      nil,
       :initial_topic_id,
       keyword_init: true
     )
@@ -714,6 +744,7 @@ module Aws::QuickSight
     #            <p>The Amazon Resource Name (ARN) of this Q legacy topic must be included in the <code>AuthorizedResourceArns</code> parameter. Otherwise, the request fails with an <code>InvalidParameterValueException</code> error.</p>
     #   @return [String]
     class AnonymousUserQSearchBarEmbeddingConfiguration < Struct.new(
+      nil,
       :initial_topic_id,
       keyword_init: true
     )
@@ -726,6 +757,7 @@ module Aws::QuickSight
     #   <p>A list of <code>SnapshotJobResultFileGroup</code> objects that contain information on the files that are requested during a <code>StartDashboardSnapshotJob</code> API call. If the job succeeds, these objects contain the location where the snapshot artifacts are stored. If the job fails, the objects contain information about the error that caused the job to fail.</p>
     #   @return [Array<Types::SnapshotJobResultFileGroup>]
     class AnonymousUserSnapshotJobResult < Struct.new(
+      nil,
       :file_groups,
       keyword_init: true
     )
@@ -740,6 +772,7 @@ module Aws::QuickSight
     #   <p>The element style.</p>
     #   @return [Types::BrandElementStyle]
     class ApplicationTheme < Struct.new(
+      nil,
       :brand_color_palette,
       :brand_element_style,
       keyword_init: true
@@ -755,6 +788,7 @@ module Aws::QuickSight
     #   <p>The reserved range of the arc axis.</p>
     #   @return [Integer]
     class ArcAxisConfiguration < Struct.new(
+      nil,
       :range,
       :reserve_range,
       keyword_init: true
@@ -775,6 +809,7 @@ module Aws::QuickSight
     #   <p>The maximum value of the arc axis range.</p>
     #   @return [Float]
     class ArcAxisDisplayRange < Struct.new(
+      nil,
       :min,
       :max,
       keyword_init: true
@@ -796,6 +831,7 @@ module Aws::QuickSight
     #   <p>The options that determine the arc thickness of a <code>GaugeChartVisual</code>.</p>
     #   @return [String]
     class ArcConfiguration < Struct.new(
+      nil,
       :arc_angle,
       :arc_thickness,
       keyword_init: true
@@ -813,6 +849,7 @@ module Aws::QuickSight
     #   <p>The arc thickness of a <code>GaugeChartVisual</code>.</p>
     #   @return [String]
     class ArcOptions < Struct.new(
+      nil,
       :arc_thickness,
       keyword_init: true
     )
@@ -848,6 +885,7 @@ module Aws::QuickSight
     #   <p>An optional list of structures that controls how <code>Folder</code> resources are parameterized in the returned CloudFormation template.</p>
     #   @return [Array<Types::AssetBundleExportJobFolderOverrideProperties>]
     class AssetBundleCloudFormationOverridePropertyConfiguration < Struct.new(
+      nil,
       :resource_id_override_configuration,
       :vpc_connections,
       :refresh_schedules,
@@ -870,6 +908,7 @@ module Aws::QuickSight
     #   <p>A list of <code>Analysis</code> resource properties to generate variables for in the returned CloudFormation template.</p>
     #   @return [Array<String>]
     class AssetBundleExportJobAnalysisOverrideProperties < Struct.new(
+      nil,
       :arn,
       :properties,
       keyword_init: true
@@ -885,6 +924,7 @@ module Aws::QuickSight
     #   <p>A list of <code>Dashboard</code> resource properties to generate variables for in the returned CloudFormation template.</p>
     #   @return [Array<String>]
     class AssetBundleExportJobDashboardOverrideProperties < Struct.new(
+      nil,
       :arn,
       :properties,
       keyword_init: true
@@ -900,6 +940,7 @@ module Aws::QuickSight
     #   <p>A list of <code>DataSet</code> resource properties to generate variables for in the returned CloudFormation template.</p>
     #   @return [Array<String>]
     class AssetBundleExportJobDataSetOverrideProperties < Struct.new(
+      nil,
       :arn,
       :properties,
       keyword_init: true
@@ -915,6 +956,7 @@ module Aws::QuickSight
     #   <p>A list of <code>DataSource</code> resource properties to generate variables for in the returned CloudFormation template.</p>
     #   @return [Array<String>]
     class AssetBundleExportJobDataSourceOverrideProperties < Struct.new(
+      nil,
       :arn,
       :properties,
       keyword_init: true
@@ -933,6 +975,7 @@ module Aws::QuickSight
     #   <p>A description of the error.</p>
     #   @return [String]
     class AssetBundleExportJobError < Struct.new(
+      nil,
       :arn,
       :type,
       :message,
@@ -949,6 +992,7 @@ module Aws::QuickSight
     #   <p>A list of <code>Folder</code> resource properties to generate variables for in the returned CloudFormation template.</p>
     #   @return [Array<String>]
     class AssetBundleExportJobFolderOverrideProperties < Struct.new(
+      nil,
       :arn,
       :properties,
       keyword_init: true
@@ -964,6 +1008,7 @@ module Aws::QuickSight
     #   <p>A list of <code>RefreshSchedule</code> resource properties to generate variables for in the returned CloudFormation template.</p>
     #   @return [Array<String>]
     class AssetBundleExportJobRefreshScheduleOverrideProperties < Struct.new(
+      nil,
       :arn,
       :properties,
       keyword_init: true
@@ -976,6 +1021,7 @@ module Aws::QuickSight
     #   <p>An option to request a CloudFormation variable for a prefix to be prepended to each resource's ID before import. The prefix is only added to the asset IDs and does not change the name of the asset.</p>
     #   @return [Boolean]
     class AssetBundleExportJobResourceIdOverrideConfiguration < Struct.new(
+      nil,
       :prefix_for_all_resources,
       keyword_init: true
     )
@@ -1013,6 +1059,7 @@ module Aws::QuickSight
     #   <p>The flag that determines the inclusion of tags associated with each resource ARN.</p>
     #   @return [Boolean]
     class AssetBundleExportJobSummary < Struct.new(
+      nil,
       :job_status,
       :arn,
       :created_time,
@@ -1041,6 +1088,7 @@ module Aws::QuickSight
     #   <p>A list of <code>Theme</code> resource properties to generate variables for in the returned CloudFormation template.</p>
     #   @return [Array<String>]
     class AssetBundleExportJobThemeOverrideProperties < Struct.new(
+      nil,
       :arn,
       :properties,
       keyword_init: true
@@ -1056,6 +1104,7 @@ module Aws::QuickSight
     #   <p>A list of <code>VPCConnection</code> resource properties to generate variables for in the returned CloudFormation template.</p>
     #   @return [Array<String>]
     class AssetBundleExportJobVPCConnectionOverrideProperties < Struct.new(
+      nil,
       :arn,
       :properties,
       keyword_init: true
@@ -1068,6 +1117,7 @@ module Aws::QuickSight
     #   <p>A Boolean value that indicates whether to export resources under strict or lenient mode.</p>
     #   @return [Boolean]
     class AssetBundleExportJobValidationStrategy < Struct.new(
+      nil,
       :strict_mode_for_all_resources,
       keyword_init: true
     )
@@ -1087,6 +1137,7 @@ module Aws::QuickSight
     #   <p>A description of the warning.</p>
     #   @return [String]
     class AssetBundleExportJobWarning < Struct.new(
+      nil,
       :arn,
       :message,
       keyword_init: true
@@ -1102,6 +1153,7 @@ module Aws::QuickSight
     #   <p>A new name for the analysis.</p>
     #   @return [String]
     class AssetBundleImportJobAnalysisOverrideParameters < Struct.new(
+      nil,
       :analysis_id,
       :name,
       keyword_init: true
@@ -1117,6 +1169,7 @@ module Aws::QuickSight
     #   <p>A list of permissions for the analyses that you want to apply overrides to.</p>
     #   @return [Types::AssetBundleResourcePermissions]
     class AssetBundleImportJobAnalysisOverridePermissions < Struct.new(
+      nil,
       :analysis_ids,
       :permissions,
       keyword_init: true
@@ -1132,6 +1185,7 @@ module Aws::QuickSight
     #   <p>A list of tags for the analyses that you want to apply overrides to.</p>
     #   @return [Array<Types::Tag>]
     class AssetBundleImportJobAnalysisOverrideTags < Struct.new(
+      nil,
       :analysis_ids,
       :tags,
       keyword_init: true
@@ -1147,6 +1201,7 @@ module Aws::QuickSight
     #   <p>A new name for the dashboard.</p>
     #   @return [String]
     class AssetBundleImportJobDashboardOverrideParameters < Struct.new(
+      nil,
       :dashboard_id,
       :name,
       keyword_init: true
@@ -1165,6 +1220,7 @@ module Aws::QuickSight
     #   <p>A structure that contains the link sharing configurations that you want to apply overrides to.</p>
     #   @return [Types::AssetBundleResourceLinkSharingConfiguration]
     class AssetBundleImportJobDashboardOverridePermissions < Struct.new(
+      nil,
       :dashboard_ids,
       :permissions,
       :link_sharing_configuration,
@@ -1181,6 +1237,7 @@ module Aws::QuickSight
     #   <p>A list of tags for the dashboards that you want to apply overrides to.</p>
     #   @return [Array<Types::Tag>]
     class AssetBundleImportJobDashboardOverrideTags < Struct.new(
+      nil,
       :dashboard_ids,
       :tags,
       keyword_init: true
@@ -1199,6 +1256,7 @@ module Aws::QuickSight
     #   <p>The refresh properties of a dataset.</p>
     #   @return [Types::DataSetRefreshProperties]
     class AssetBundleImportJobDataSetOverrideParameters < Struct.new(
+      nil,
       :data_set_id,
       :name,
       :data_set_refresh_properties,
@@ -1215,6 +1273,7 @@ module Aws::QuickSight
     #   <p>A list of permissions for the datasets that you want to apply overrides to.</p>
     #   @return [Types::AssetBundleResourcePermissions]
     class AssetBundleImportJobDataSetOverridePermissions < Struct.new(
+      nil,
       :data_set_ids,
       :permissions,
       keyword_init: true
@@ -1230,6 +1289,7 @@ module Aws::QuickSight
     #   <p>A list of tags for the datasets that you want to apply overrides to.</p>
     #   @return [Array<Types::Tag>]
     class AssetBundleImportJobDataSetOverrideTags < Struct.new(
+      nil,
       :data_set_ids,
       :tags,
       keyword_init: true
@@ -1246,6 +1306,7 @@ module Aws::QuickSight
     #   <p>The password for the data source connection.</p>
     #   @return [String]
     class AssetBundleImportJobDataSourceCredentialPair < Struct.new(
+      nil,
       :username,
       :password,
       keyword_init: true
@@ -1261,6 +1322,7 @@ module Aws::QuickSight
     #   <p>The ARN of the Secrets Manager secret that's used to create the imported data source. Keep this field blank, unless you are using a secret in place of a credential pair.</p>
     #   @return [String]
     class AssetBundleImportJobDataSourceCredentials < Struct.new(
+      nil,
       :credential_pair,
       :secret_arn,
       keyword_init: true
@@ -1291,6 +1353,7 @@ module Aws::QuickSight
     #   <p>An optional structure that provides the credentials to be used to create the imported data source.</p>
     #   @return [Types::AssetBundleImportJobDataSourceCredentials]
     class AssetBundleImportJobDataSourceOverrideParameters < Struct.new(
+      nil,
       :data_source_id,
       :name,
       :data_source_parameters,
@@ -1310,6 +1373,7 @@ module Aws::QuickSight
     #   <p>A list of permissions for the data source that you want to apply overrides to.</p>
     #   @return [Types::AssetBundleResourcePermissions]
     class AssetBundleImportJobDataSourceOverridePermissions < Struct.new(
+      nil,
       :data_source_ids,
       :permissions,
       keyword_init: true
@@ -1325,6 +1389,7 @@ module Aws::QuickSight
     #   <p>A list of tags for the data source that you want to apply overrides to.</p>
     #   @return [Array<Types::Tag>]
     class AssetBundleImportJobDataSourceOverrideTags < Struct.new(
+      nil,
       :data_source_ids,
       :tags,
       keyword_init: true
@@ -1343,6 +1408,7 @@ module Aws::QuickSight
     #   <p>A description of the error.</p>
     #   @return [String]
     class AssetBundleImportJobError < Struct.new(
+      nil,
       :arn,
       :type,
       :message,
@@ -1362,6 +1428,7 @@ module Aws::QuickSight
     #   <p>A new parent folder arn. This change can only be applied if the import creates a brand new folder. Existing folders cannot be moved.</p>
     #   @return [String]
     class AssetBundleImportJobFolderOverrideParameters < Struct.new(
+      nil,
       :folder_id,
       :name,
       :parent_folder_arn,
@@ -1378,6 +1445,7 @@ module Aws::QuickSight
     #   <p>A structure that contains the permissions for the resource that you want to override in an asset bundle import job.</p>
     #   @return [Types::AssetBundleResourcePermissions]
     class AssetBundleImportJobFolderOverridePermissions < Struct.new(
+      nil,
       :folder_ids,
       :permissions,
       keyword_init: true
@@ -1393,6 +1461,7 @@ module Aws::QuickSight
     #   <p>A list of tags for the folders that you want to apply overrides to.</p>
     #   @return [Array<Types::Tag>]
     class AssetBundleImportJobFolderOverrideTags < Struct.new(
+      nil,
       :folder_ids,
       :tags,
       keyword_init: true
@@ -1429,6 +1498,7 @@ module Aws::QuickSight
     #   <p>A list of overrides for any <code>Folder</code> resources that are present in the asset bundle that is imported.</p>
     #   @return [Array<Types::AssetBundleImportJobFolderOverrideParameters>]
     class AssetBundleImportJobOverrideParameters < Struct.new(
+      nil,
       :resource_id_override_configuration,
       :vpc_connections,
       :refresh_schedules,
@@ -1463,6 +1533,7 @@ module Aws::QuickSight
     #   <p>A list of permissions for the folders that you want to apply overrides to.</p>
     #   @return [Array<Types::AssetBundleImportJobFolderOverridePermissions>]
     class AssetBundleImportJobOverridePermissions < Struct.new(
+      nil,
       :data_sources,
       :data_sets,
       :themes,
@@ -1497,6 +1568,7 @@ module Aws::QuickSight
     #   <p>A list of tag overrides for any <code>Folder</code> resources that are present in the asset bundle that is imported.</p>
     #   @return [Array<Types::AssetBundleImportJobFolderOverrideTags>]
     class AssetBundleImportJobOverrideTags < Struct.new(
+      nil,
       :vpc_connections,
       :data_sources,
       :data_sets,
@@ -1514,6 +1586,7 @@ module Aws::QuickSight
     #   <p>A Boolean value that indicates whether to import all analyses and dashboards under strict or lenient mode.</p>
     #   @return [Boolean]
     class AssetBundleImportJobOverrideValidationStrategy < Struct.new(
+      nil,
       :strict_mode_for_all_resources,
       keyword_init: true
     )
@@ -1538,6 +1611,7 @@ module Aws::QuickSight
     #            place in the future.</p>
     #   @return [Time]
     class AssetBundleImportJobRefreshScheduleOverrideParameters < Struct.new(
+      nil,
       :data_set_id,
       :schedule_id,
       :start_after_date_time,
@@ -1551,6 +1625,7 @@ module Aws::QuickSight
     #   <p>An option to request a CloudFormation variable for a prefix to be prepended to each resource's ID before import. The prefix is only added to the asset IDs and does not change the name of the asset.</p>
     #   @return [String]
     class AssetBundleImportJobResourceIdOverrideConfiguration < Struct.new(
+      nil,
       :prefix_for_all_resources,
       keyword_init: true
     )
@@ -1574,6 +1649,7 @@ module Aws::QuickSight
     #   <p>The failure action for the import job.</p>
     #   @return [String]
     class AssetBundleImportJobSummary < Struct.new(
+      nil,
       :job_status,
       :arn,
       :created_time,
@@ -1592,6 +1668,7 @@ module Aws::QuickSight
     #   <p>A new name for the theme.</p>
     #   @return [String]
     class AssetBundleImportJobThemeOverrideParameters < Struct.new(
+      nil,
       :theme_id,
       :name,
       keyword_init: true
@@ -1607,6 +1684,7 @@ module Aws::QuickSight
     #   <p>A list of permissions for the themes that you want to apply overrides to.</p>
     #   @return [Types::AssetBundleResourcePermissions]
     class AssetBundleImportJobThemeOverridePermissions < Struct.new(
+      nil,
       :theme_ids,
       :permissions,
       keyword_init: true
@@ -1622,6 +1700,7 @@ module Aws::QuickSight
     #   <p>A list of tags for the themes that you want to apply overrides to.</p>
     #   @return [Array<Types::Tag>]
     class AssetBundleImportJobThemeOverrideTags < Struct.new(
+      nil,
       :theme_ids,
       :tags,
       keyword_init: true
@@ -1651,6 +1730,7 @@ module Aws::QuickSight
     #   <p>An optional override of the role ARN to be used by the VPC connection.</p>
     #   @return [String]
     class AssetBundleImportJobVPCConnectionOverrideParameters < Struct.new(
+      nil,
       :vpc_connection_id,
       :name,
       :subnet_ids,
@@ -1670,6 +1750,7 @@ module Aws::QuickSight
     #   <p>A list of tags for the VPC connections that you want to apply overrides to.</p>
     #   @return [Array<Types::Tag>]
     class AssetBundleImportJobVPCConnectionOverrideTags < Struct.new(
+      nil,
       :vpc_connection_ids,
       :tags,
       keyword_init: true
@@ -1685,6 +1766,7 @@ module Aws::QuickSight
     #   <p>A description of the warning that occurred during an Asset Bundle import job.</p>
     #   @return [String]
     class AssetBundleImportJobWarning < Struct.new(
+      nil,
       :arn,
       :message,
       keyword_init: true
@@ -1701,6 +1783,7 @@ module Aws::QuickSight
     #   <p>The Amazon S3 URI for an asset bundle import file that exists in an Amazon S3 bucket that the caller has read access to. The file must be a zip format file and can't exceed 1 GB.</p>
     #   @return [String]
     class AssetBundleImportSource < Struct.new(
+      nil,
       :body,
       :s3_uri,
       keyword_init: true
@@ -1716,6 +1799,7 @@ module Aws::QuickSight
     #   <p>The Amazon S3 URI that you provided at the start of the import job.</p>
     #   @return [String]
     class AssetBundleImportSourceDescription < Struct.new(
+      nil,
       :body,
       :s3_uri,
       keyword_init: true
@@ -1728,6 +1812,7 @@ module Aws::QuickSight
     #   <p>A list of link sharing permissions for the dashboards that you want to apply overrides to.</p>
     #   @return [Types::AssetBundleResourcePermissions]
     class AssetBundleResourceLinkSharingConfiguration < Struct.new(
+      nil,
       :permissions,
       keyword_init: true
     )
@@ -1742,6 +1827,7 @@ module Aws::QuickSight
     #   <p>A list of IAM actions to grant permissions on.</p>
     #   @return [Array<String>]
     class AssetBundleResourcePermissions < Struct.new(
+      nil,
       :principals,
       :actions,
       keyword_init: true
@@ -1766,6 +1852,7 @@ module Aws::QuickSight
     #   <p>A list of visual custom actions for the analysis.</p>
     #   @return [Types::VisualCustomActionDefaults]
     class AssetOptions < Struct.new(
+      nil,
       :timezone,
       :week_start,
       :q_business_insights_status,
@@ -1788,6 +1875,7 @@ module Aws::QuickSight
     #            <p>This parameter can only be specified if your QuickSight account is configured with IAM Identity Center.</p>
     #   @return [Types::IdentityCenterConfiguration]
     class AthenaParameters < Struct.new(
+      nil,
       :work_group,
       :role_arn,
       :identity_center_configuration,
@@ -1810,6 +1898,7 @@ module Aws::QuickSight
     #   <p>Used by the <code>UNIQUE_VALUE</code> aggregation function. If there are multiple values for the field used by the aggregation, the value for this property will be returned instead. Defaults to '*'.</p>
     #   @return [String]
     class AttributeAggregationFunction < Struct.new(
+      nil,
       :simple_attribute_aggregation,
       :value_for_multiple_values,
       keyword_init: true
@@ -1828,6 +1917,7 @@ module Aws::QuickSight
     #   <p>Database.</p>
     #   @return [String]
     class AuroraParameters < Struct.new(
+      nil,
       :host,
       :port,
       :database,
@@ -1847,6 +1937,7 @@ module Aws::QuickSight
     #   <p>The Amazon Aurora PostgreSQL database to connect to.</p>
     #   @return [String]
     class AuroraPostgreSqlParameters < Struct.new(
+      nil,
       :host,
       :port,
       :database,
@@ -1863,6 +1954,7 @@ module Aws::QuickSight
     #   <p>Aist of authorized targets that are represented by IAM Identity Center application ARNs.</p>
     #   @return [Array<String>]
     class AuthorizedTargetsByService < Struct.new(
+      nil,
       :service,
       :authorized_targets,
       keyword_init: true
@@ -1875,6 +1967,7 @@ module Aws::QuickSight
     #   <p>Dataset name.</p>
     #   @return [String]
     class AwsIotAnalyticsParameters < Struct.new(
+      nil,
       :data_set_name,
       keyword_init: true
     )
@@ -1890,6 +1983,7 @@ module Aws::QuickSight
     #   <p>The options for an axis with a date field.</p>
     #   @return [Types::DateAxisOptions]
     class AxisDataOptions < Struct.new(
+      nil,
       :numeric_axis_options,
       :date_axis_options,
       keyword_init: true
@@ -1899,6 +1993,7 @@ module Aws::QuickSight
 
     # <p>The options that are saved for future extension.</p>
     class AxisDisplayDataDrivenRange < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1912,6 +2007,7 @@ module Aws::QuickSight
     #   <p>The maximum setup for an axis display range.</p>
     #   @return [Float]
     class AxisDisplayMinMaxRange < Struct.new(
+      nil,
       :minimum,
       :maximum,
       keyword_init: true
@@ -1945,6 +2041,7 @@ module Aws::QuickSight
     #   <p>The offset value that determines the starting placement of the axis within a visual's bounds.</p>
     #   @return [String]
     class AxisDisplayOptions < Struct.new(
+      nil,
       :tick_label_options,
       :axis_line_visibility,
       :grid_line_visibility,
@@ -1965,6 +2062,7 @@ module Aws::QuickSight
     #   <p>The data-driven setup of an axis display range.</p>
     #   @return [Types::AxisDisplayDataDrivenRange]
     class AxisDisplayRange < Struct.new(
+      nil,
       :min_max,
       :data_driven,
       keyword_init: true
@@ -1983,6 +2081,7 @@ module Aws::QuickSight
     #   <p>The options that indicate which field the label belongs to.</p>
     #   @return [Types::AxisLabelReferenceOptions]
     class AxisLabelOptions < Struct.new(
+      nil,
       :font_configuration,
       :custom_label,
       :apply_to,
@@ -1999,6 +2098,7 @@ module Aws::QuickSight
     #   <p>The column that the axis label is targeted to.</p>
     #   @return [Types::ColumnIdentifier]
     class AxisLabelReferenceOptions < Struct.new(
+      nil,
       :field_id,
       :column,
       keyword_init: true
@@ -2015,6 +2115,7 @@ module Aws::QuickSight
     #   <p>The step size setup of a linear axis.</p>
     #   @return [Float]
     class AxisLinearScale < Struct.new(
+      nil,
       :step_count,
       :step_size,
       keyword_init: true
@@ -2033,6 +2134,7 @@ module Aws::QuickSight
     #   <p>The base setup of a logarithmic axis scale.</p>
     #   @return [Float]
     class AxisLogarithmicScale < Struct.new(
+      nil,
       :base,
       keyword_init: true
     )
@@ -2054,6 +2156,7 @@ module Aws::QuickSight
     #   <p>The logarithmic axis scale setup.</p>
     #   @return [Types::AxisLogarithmicScale]
     class AxisScale < Struct.new(
+      nil,
       :linear,
       :logarithmic,
       keyword_init: true
@@ -2069,6 +2172,7 @@ module Aws::QuickSight
     #   <p>The rotation angle of the axis tick labels.</p>
     #   @return [Float]
     class AxisTickLabelOptions < Struct.new(
+      nil,
       :label_options,
       :rotation_angle,
       keyword_init: true
@@ -2096,6 +2200,7 @@ module Aws::QuickSight
     #   <p>The small multiples field well of a bar chart.</p>
     #   @return [Array<Types::DimensionField>]
     class BarChartAggregatedFieldWells < Struct.new(
+      nil,
       :category,
       :values,
       :colors,
@@ -2168,6 +2273,7 @@ module Aws::QuickSight
     #   <p>The general visual interactions setup for a visual.</p>
     #   @return [Types::VisualInteractionOptions]
     class BarChartConfiguration < Struct.new(
+      nil,
       :field_wells,
       :sort_configuration,
       :orientation,
@@ -2196,6 +2302,7 @@ module Aws::QuickSight
     #   <p>The aggregated field wells of a bar chart.</p>
     #   @return [Types::BarChartAggregatedFieldWells]
     class BarChartFieldWells < Struct.new(
+      nil,
       :bar_chart_aggregated_field_wells,
       keyword_init: true
     )
@@ -2222,6 +2329,7 @@ module Aws::QuickSight
     #   <p>The limit on the number of small multiples panels that are displayed.</p>
     #   @return [Types::ItemsLimitConfiguration]
     class BarChartSortConfiguration < Struct.new(
+      nil,
       :category_sort,
       :category_items_limit,
       :color_sort,
@@ -2278,6 +2386,7 @@ module Aws::QuickSight
     #   <p>The alt text for the visual.</p>
     #   @return [String]
     class BarChartVisual < Struct.new(
+      nil,
       :visual_id,
       :title,
       :subtitle,
@@ -2300,6 +2409,7 @@ module Aws::QuickSight
     #   <p>The definition of the Answers to be created.</p>
     #   @return [Array<Types::CreateTopicReviewedAnswer>]
     class BatchCreateTopicReviewedAnswerRequest < Struct.new(
+      nil,
       :aws_account_id,
       :topic_id,
       :answers,
@@ -2328,6 +2438,7 @@ module Aws::QuickSight
     #   <p>The Amazon Web Services request ID for this operation.</p>
     #   @return [String]
     class BatchCreateTopicReviewedAnswerResponse < Struct.new(
+      nil,
       :topic_id,
       :topic_arn,
       :succeeded_answers,
@@ -2354,6 +2465,7 @@ module Aws::QuickSight
     #   <p>The Answer IDs of the Answers to be deleted.</p>
     #   @return [Array<String>]
     class BatchDeleteTopicReviewedAnswerRequest < Struct.new(
+      nil,
       :aws_account_id,
       :topic_id,
       :answer_ids,
@@ -2381,6 +2493,7 @@ module Aws::QuickSight
     #   <p>The HTTP status of the request.</p>
     #   @return [Integer]
     class BatchDeleteTopicReviewedAnswerResponse < Struct.new(
+      nil,
       :topic_id,
       :topic_arn,
       :succeeded_answers,
@@ -2405,6 +2518,7 @@ module Aws::QuickSight
     #   <p>The storage location where you create a Google BigQuery data source.</p>
     #   @return [String]
     class BigQueryParameters < Struct.new(
+      nil,
       :project_id,
       :data_set_region,
       keyword_init: true
@@ -2417,6 +2531,7 @@ module Aws::QuickSight
     #   <p>The options that determine the bin count value.</p>
     #   @return [Integer]
     class BinCountOptions < Struct.new(
+      nil,
       :value,
       keyword_init: true
     )
@@ -2431,6 +2546,7 @@ module Aws::QuickSight
     #   <p>The options that determine the bin count limit.</p>
     #   @return [Integer]
     class BinWidthOptions < Struct.new(
+      nil,
       :value,
       :bin_count_limit,
       keyword_init: true
@@ -2455,6 +2571,7 @@ module Aws::QuickSight
     #   <p>Describes the configurations that are required to declare a section as repeating.</p>
     #   @return [Types::BodySectionRepeatConfiguration]
     class BodySectionConfiguration < Struct.new(
+      nil,
       :section_id,
       :content,
       :style,
@@ -2470,6 +2587,7 @@ module Aws::QuickSight
     #   <p>The layout configuration of a body section.</p>
     #   @return [Types::SectionLayoutConfiguration]
     class BodySectionContent < Struct.new(
+      nil,
       :layout,
       keyword_init: true
     )
@@ -2487,6 +2605,7 @@ module Aws::QuickSight
     #   <p>Sort criteria on the column values that you use for repetition. </p>
     #   @return [Array<Types::ColumnSort>]
     class BodySectionDynamicCategoryDimensionConfiguration < Struct.new(
+      nil,
       :column,
       :limit,
       :sort_by_metrics,
@@ -2506,6 +2625,7 @@ module Aws::QuickSight
     #   <p>Sort criteria on the column values that you use for repetition. </p>
     #   @return [Array<Types::ColumnSort>]
     class BodySectionDynamicNumericDimensionConfiguration < Struct.new(
+      nil,
       :column,
       :limit,
       :sort_by_metrics,
@@ -2525,6 +2645,7 @@ module Aws::QuickSight
     #   <p>List of visuals to exclude from repetition in repeating sections. The visuals will render identically, and ignore the repeating configurations in all repeating instances.</p>
     #   @return [Array<String>]
     class BodySectionRepeatConfiguration < Struct.new(
+      nil,
       :dimension_configurations,
       :page_break_configuration,
       :non_repeating_visuals,
@@ -2541,6 +2662,7 @@ module Aws::QuickSight
     #   <p>Describes the <b>Numeric</b> dataset column and constraints around the dynamic values used to repeat the  contents of a section.</p>
     #   @return [Types::BodySectionDynamicNumericDimensionConfiguration]
     class BodySectionRepeatDimensionConfiguration < Struct.new(
+      nil,
       :dynamic_category_dimension_configuration,
       :dynamic_numeric_dimension_configuration,
       keyword_init: true
@@ -2553,6 +2675,7 @@ module Aws::QuickSight
     #   <p>The configuration of a page break after a section.</p>
     #   @return [Types::SectionAfterPageBreak]
     class BodySectionRepeatPageBreakConfiguration < Struct.new(
+      nil,
       :after,
       keyword_init: true
     )
@@ -2565,6 +2688,7 @@ module Aws::QuickSight
     #               can bookmark an embedded dashboard.</p>
     #   @return [Boolean]
     class BookmarksConfigurations < Struct.new(
+      nil,
       :enabled,
       keyword_init: true
     )
@@ -2581,6 +2705,7 @@ module Aws::QuickSight
     #   <p>The option to enable display of borders for visuals.</p>
     #   @return [Boolean]
     class BorderStyle < Struct.new(
+      nil,
       :show,
       keyword_init: true
     )
@@ -2600,6 +2725,7 @@ module Aws::QuickSight
     #   <p>The value field well of a box plot chart. Values are aggregated based on group by fields.</p>
     #   @return [Array<Types::MeasureField>]
     class BoxPlotAggregatedFieldWells < Struct.new(
+      nil,
       :group_by,
       :values,
       keyword_init: true
@@ -2645,6 +2771,7 @@ module Aws::QuickSight
     #   <p>The general visual interactions setup for a visual.</p>
     #   @return [Types::VisualInteractionOptions]
     class BoxPlotChartConfiguration < Struct.new(
+      nil,
       :field_wells,
       :sort_configuration,
       :box_plot_options,
@@ -2668,6 +2795,7 @@ module Aws::QuickSight
     #   <p>The aggregated field wells of a box plot.</p>
     #   @return [Types::BoxPlotAggregatedFieldWells]
     class BoxPlotFieldWells < Struct.new(
+      nil,
       :box_plot_aggregated_field_wells,
       keyword_init: true
     )
@@ -2685,6 +2813,7 @@ module Aws::QuickSight
     #   <p>Determines the visibility of all data points of the box plot.</p>
     #   @return [String]
     class BoxPlotOptions < Struct.new(
+      nil,
       :style_options,
       :outlier_visibility,
       :all_data_points_visibility,
@@ -2701,6 +2830,7 @@ module Aws::QuickSight
     #   <p>The pagination configuration of a table visual or box plot.</p>
     #   @return [Types::PaginationConfiguration]
     class BoxPlotSortConfiguration < Struct.new(
+      nil,
       :category_sort,
       :pagination_configuration,
       keyword_init: true
@@ -2713,6 +2843,7 @@ module Aws::QuickSight
     #   <p>The fill styles (solid, transparent) of the box plot.</p>
     #   @return [String]
     class BoxPlotStyleOptions < Struct.new(
+      nil,
       :fill_style,
       keyword_init: true
     )
@@ -2743,6 +2874,7 @@ module Aws::QuickSight
     #   <p>The alt text for the visual.</p>
     #   @return [String]
     class BoxPlotVisual < Struct.new(
+      nil,
       :visual_id,
       :title,
       :subtitle,
@@ -2784,6 +2916,7 @@ module Aws::QuickSight
     #   <p>The color that is used for danger elements.</p>
     #   @return [Types::Palette]
     class BrandColorPalette < Struct.new(
+      nil,
       :primary,
       :secondary,
       :accent,
@@ -2812,6 +2945,7 @@ module Aws::QuickSight
     #   <p>The logo configuration of the brand.</p>
     #   @return [Types::LogoConfiguration]
     class BrandDefinition < Struct.new(
+      nil,
       :brand_name,
       :description,
       :application_theme,
@@ -2850,6 +2984,7 @@ module Aws::QuickSight
     #   <p>The logo details.</p>
     #   @return [Types::Logo]
     class BrandDetail < Struct.new(
+      nil,
       :brand_id,
       :arn,
       :brand_status,
@@ -2869,6 +3004,7 @@ module Aws::QuickSight
     #   <p>The navigation bar style.</p>
     #   @return [Types::NavbarStyle]
     class BrandElementStyle < Struct.new(
+      nil,
       :navbar_style,
       keyword_init: true
     )
@@ -2898,6 +3034,7 @@ module Aws::QuickSight
     #   <p>The time when the brand was last updated.</p>
     #   @return [Time]
     class BrandSummary < Struct.new(
+      nil,
       :arn,
       :brand_id,
       :brand_name,
@@ -2923,6 +3060,7 @@ module Aws::QuickSight
     #   <p>An expression that defines the calculated column.</p>
     #   @return [String]
     class CalculatedColumn < Struct.new(
+      nil,
       :column_name,
       :column_id,
       :expression,
@@ -2942,6 +3080,7 @@ module Aws::QuickSight
     #   <p>The expression of the calculated field.</p>
     #   @return [String]
     class CalculatedField < Struct.new(
+      nil,
       :data_set_identifier,
       :name,
       :expression,
@@ -2958,6 +3097,7 @@ module Aws::QuickSight
     #   <p>The expression in the table calculation.</p>
     #   @return [String]
     class CalculatedMeasureField < Struct.new(
+      nil,
       :field_id,
       :expression,
       keyword_init: true
@@ -2975,6 +3115,7 @@ module Aws::QuickSight
     #   <p>An ID for the ingestion.</p>
     #   @return [String]
     class CancelIngestionRequest < Struct.new(
+      nil,
       :aws_account_id,
       :data_set_id,
       :ingestion_id,
@@ -2996,6 +3137,7 @@ module Aws::QuickSight
     #   <p>The HTTP status of the request.</p>
     #   @return [Integer]
     class CancelIngestionResponse < Struct.new(
+      nil,
       :arn,
       :ingestion_id,
       :request_id,
@@ -3087,6 +3229,7 @@ module Aws::QuickSight
     #   <p>The ability to perform analysis-related actions.</p>
     #   @return [String]
     class Capabilities < Struct.new(
+      nil,
       :export_to_csv,
       :export_to_excel,
       :export_to_pdf,
@@ -3122,6 +3265,7 @@ module Aws::QuickSight
     #   <p>A list of source controls that determine the values that are used in the current control.</p>
     #   @return [Array<Types::CascadingControlSource>]
     class CascadingControlConfiguration < Struct.new(
+      nil,
       :source_controls,
       keyword_init: true
     )
@@ -3136,6 +3280,7 @@ module Aws::QuickSight
     #   <p>The column identifier that determines which column to look up for the source sheet control.</p>
     #   @return [Types::ColumnIdentifier]
     class CascadingControlSource < Struct.new(
+      nil,
       :source_sheet_control_id,
       :column_to_match,
       keyword_init: true
@@ -3158,6 +3303,7 @@ module Aws::QuickSight
     #               format supported by Amazon QuickSight to denote the source data format.</p>
     #   @return [String]
     class CastColumnTypeOperation < Struct.new(
+      nil,
       :column_name,
       :new_column_type,
       :sub_type,
@@ -3181,6 +3327,7 @@ module Aws::QuickSight
     #   <p>The format configuration of the field.</p>
     #   @return [Types::StringFormatConfiguration]
     class CategoricalDimensionField < Struct.new(
+      nil,
       :field_id,
       :column,
       :hierarchy_id,
@@ -3204,6 +3351,7 @@ module Aws::QuickSight
     #   <p>The format configuration of the field.</p>
     #   @return [Types::StringFormatConfiguration]
     class CategoricalMeasureField < Struct.new(
+      nil,
       :field_id,
       :column,
       :aggregation_function,
@@ -3221,6 +3369,7 @@ module Aws::QuickSight
     #   <p>A list of the string inputs that are the values of the category drill down filter.</p>
     #   @return [Array<String>]
     class CategoryDrillDownFilter < Struct.new(
+      nil,
       :column,
       :category_values,
       keyword_init: true
@@ -3243,6 +3392,7 @@ module Aws::QuickSight
     #   <p>The default configurations for the associated controls. This applies only for filters that are scoped to multiple sheets.</p>
     #   @return [Types::DefaultFilterControlConfiguration]
     class CategoryFilter < Struct.new(
+      nil,
       :filter_id,
       :column,
       :configuration,
@@ -3264,6 +3414,7 @@ module Aws::QuickSight
     #   <p>A custom filter that filters based on a single value. This filter can be partially matched.</p>
     #   @return [Types::CustomFilterConfiguration]
     class CategoryFilterConfiguration < Struct.new(
+      nil,
       :filter_list_configuration,
       :custom_filter_list_configuration,
       :custom_filter_configuration,
@@ -3284,6 +3435,7 @@ module Aws::QuickSight
     #   <p>The default configuration for all dependent controls of the filter.</p>
     #   @return [Types::DefaultFilterControlConfiguration]
     class CategoryInnerFilter < Struct.new(
+      nil,
       :column,
       :configuration,
       :default_filter_control_configuration,
@@ -3300,6 +3452,7 @@ module Aws::QuickSight
     #   <p>Other names or aliases for the cell value.</p>
     #   @return [Array<String>]
     class CellValueSynonym < Struct.new(
+      nil,
       :cell_value,
       :synonyms,
       keyword_init: true
@@ -3328,6 +3481,7 @@ module Aws::QuickSight
     #   <p>The label options for a chart axis.</p>
     #   @return [Array<Types::AxisLabelOptions>]
     class ChartAxisLabelOptions < Struct.new(
+      nil,
       :visibility,
       :sort_icon_visibility,
       :axis_label_options,
@@ -3342,6 +3496,7 @@ module Aws::QuickSight
     #   <p>The simple cluster marker of the cluster marker.</p>
     #   @return [Types::SimpleClusterMarker]
     class ClusterMarker < Struct.new(
+      nil,
       :simple_cluster_marker,
       keyword_init: true
     )
@@ -3353,6 +3508,7 @@ module Aws::QuickSight
     #   <p>The cluster marker that is a part of the cluster marker configuration.</p>
     #   @return [Types::ClusterMarker]
     class ClusterMarkerConfiguration < Struct.new(
+      nil,
       :cluster_marker,
       keyword_init: true
     )
@@ -3364,6 +3520,7 @@ module Aws::QuickSight
     #   <p>A list of values for the collective constant.</p>
     #   @return [Array<String>]
     class CollectiveConstant < Struct.new(
+      nil,
       :value_list,
       keyword_init: true
     )
@@ -3378,6 +3535,7 @@ module Aws::QuickSight
     #   <p>The value of a <code>CollectiveConstantEntry</code>.</p>
     #   @return [String]
     class CollectiveConstantEntry < Struct.new(
+      nil,
       :constant_type,
       :value,
       keyword_init: true
@@ -3396,6 +3554,7 @@ module Aws::QuickSight
     #   <p>Determines the color that is applied to null values.</p>
     #   @return [Types::DataColor]
     class ColorScale < Struct.new(
+      nil,
       :colors,
       :color_fill_type,
       :null_value_color,
@@ -3409,6 +3568,7 @@ module Aws::QuickSight
     #   <p>A list of up to 50 custom colors.</p>
     #   @return [Array<Types::CustomColor>]
     class ColorsConfiguration < Struct.new(
+      nil,
       :custom_colors,
       keyword_init: true
     )
@@ -3429,6 +3589,7 @@ module Aws::QuickSight
     #   <p>The color configurations of the column.</p>
     #   @return [Types::ColorsConfiguration]
     class ColumnConfiguration < Struct.new(
+      nil,
       :column,
       :format_configuration,
       :role,
@@ -3443,6 +3604,7 @@ module Aws::QuickSight
     #   <p>The text of a description for a column.</p>
     #   @return [String]
     class ColumnDescription < Struct.new(
+      nil,
       :text,
       keyword_init: true
     )
@@ -3456,6 +3618,7 @@ module Aws::QuickSight
     #   <p>Geospatial column group that denotes a hierarchy.</p>
     #   @return [Types::GeoSpatialColumnGroup]
     class ColumnGroup < Struct.new(
+      nil,
       :geo_spatial_column_group,
       keyword_init: true
     )
@@ -3467,6 +3630,7 @@ module Aws::QuickSight
     #   <p>The name of the column group's column schema.</p>
     #   @return [String]
     class ColumnGroupColumnSchema < Struct.new(
+      nil,
       :name,
       keyword_init: true
     )
@@ -3481,6 +3645,7 @@ module Aws::QuickSight
     #   <p>A structure containing the list of schemas for column group columns.</p>
     #   @return [Array<Types::ColumnGroupColumnSchema>]
     class ColumnGroupSchema < Struct.new(
+      nil,
       :name,
       :column_group_column_schema_list,
       keyword_init: true
@@ -3499,6 +3664,7 @@ module Aws::QuickSight
     #   <p>The option that determines the hierarchy of the fields that are defined during data preparation. These fields are available to use in any analysis that uses the data source.</p>
     #   @return [Types::PredefinedHierarchy]
     class ColumnHierarchy < Struct.new(
+      nil,
       :explicit_hierarchy,
       :date_time_hierarchy,
       :predefined_hierarchy,
@@ -3515,6 +3681,7 @@ module Aws::QuickSight
     #   <p>The name of the column.</p>
     #   @return [String]
     class ColumnIdentifier < Struct.new(
+      nil,
       :data_set_identifier,
       :column_name,
       keyword_init: true
@@ -3535,6 +3702,7 @@ module Aws::QuickSight
     #   <p>An array of column names.</p>
     #   @return [Array<String>]
     class ColumnLevelPermissionRule < Struct.new(
+      nil,
       :principals,
       :column_names,
       keyword_init: true
@@ -3553,6 +3721,7 @@ module Aws::QuickSight
     #   <p>The geographic role of the column schema.</p>
     #   @return [String]
     class ColumnSchema < Struct.new(
+      nil,
       :name,
       :data_type,
       :geographic_role,
@@ -3572,6 +3741,7 @@ module Aws::QuickSight
     #   <p>The aggregation function that is defined in the column sort.</p>
     #   @return [Types::AggregationFunction]
     class ColumnSort < Struct.new(
+      nil,
       :sort_by,
       :direction,
       :aggregation_function,
@@ -3594,6 +3764,7 @@ module Aws::QuickSight
     #   <p>A description for a column.</p>
     #   @return [Types::ColumnDescription]
     class ColumnTag < Struct.new(
+      nil,
       :column_geographic_role,
       :column_description,
       keyword_init: true
@@ -3618,6 +3789,7 @@ module Aws::QuickSight
     #   <p>Determines the target of the column tooltip item in a combo chart visual.</p>
     #   @return [String]
     class ColumnTooltipItem < Struct.new(
+      nil,
       :column,
       :label,
       :visibility,
@@ -3642,6 +3814,7 @@ module Aws::QuickSight
     #   <p>The aggregated <code>LineValues</code> field well of a combo chart.</p>
     #   @return [Array<Types::MeasureField>]
     class ComboChartAggregatedFieldWells < Struct.new(
+      nil,
       :category,
       :bar_values,
       :colors,
@@ -3723,6 +3896,7 @@ module Aws::QuickSight
     #   <p>The general visual interactions setup for a visual.</p>
     #   @return [Types::VisualInteractionOptions]
     class ComboChartConfiguration < Struct.new(
+      nil,
       :field_wells,
       :sort_configuration,
       :bars_arrangement,
@@ -3752,6 +3926,7 @@ module Aws::QuickSight
     #   <p>The aggregated field wells of a combo chart. Combo charts only have aggregated field wells. Columns in a combo chart are aggregated by category.</p>
     #   @return [Types::ComboChartAggregatedFieldWells]
     class ComboChartFieldWells < Struct.new(
+      nil,
       :combo_chart_aggregated_field_wells,
       keyword_init: true
     )
@@ -3772,6 +3947,7 @@ module Aws::QuickSight
     #   <p>The item limit configuration of the color field well in a combo chart.</p>
     #   @return [Types::ItemsLimitConfiguration]
     class ComboChartSortConfiguration < Struct.new(
+      nil,
       :category_sort,
       :category_items_limit,
       :color_sort,
@@ -3806,6 +3982,7 @@ module Aws::QuickSight
     #   <p>The alt text for the visual.</p>
     #   @return [String]
     class ComboChartVisual < Struct.new(
+      nil,
       :visual_id,
       :title,
       :subtitle,
@@ -3829,6 +4006,7 @@ module Aws::QuickSight
     #   <p>The treat of undefined specified values. Valid values for this structure are <code>LEAST</code> and <code>MOST</code>.</p>
     #   @return [String]
     class ComparativeOrder < Struct.new(
+      nil,
       :use_ordering,
       :specifed_order,
       :treat_undefined_specified_values,
@@ -3862,6 +4040,7 @@ module Aws::QuickSight
     #   <p>The format of the comparison.</p>
     #   @return [Types::ComparisonFormatConfiguration]
     class ComparisonConfiguration < Struct.new(
+      nil,
       :comparison_method,
       :comparison_format,
       keyword_init: true
@@ -3878,6 +4057,7 @@ module Aws::QuickSight
     #   <p>The percentage display format.</p>
     #   @return [Types::PercentageDisplayFormatConfiguration]
     class ComparisonFormatConfiguration < Struct.new(
+      nil,
       :number_display_format_configuration,
       :percentage_display_format_configuration,
       keyword_init: true
@@ -3918,6 +4098,7 @@ module Aws::QuickSight
     #   <p>The forecast computation configuration.</p>
     #   @return [Types::ForecastComputation]
     class Computation < Struct.new(
+      nil,
       :top_bottom_ranked,
       :top_bottom_movers,
       :total_aggregation,
@@ -3940,6 +4121,7 @@ module Aws::QuickSight
     # @!attribute request_id
     #   @return [String]
     class ConcurrentUpdatingException < Struct.new(
+      nil,
       :message,
       :request_id,
       keyword_init: true
@@ -3955,6 +4137,7 @@ module Aws::QuickSight
     #   <p>Formatting configuration for gradient color.</p>
     #   @return [Types::ConditionalFormattingGradientColor]
     class ConditionalFormattingColor < Struct.new(
+      nil,
       :solid,
       :gradient,
       keyword_init: true
@@ -3976,6 +4159,7 @@ module Aws::QuickSight
     #   <p>Determines the icon display configuration.</p>
     #   @return [Types::ConditionalFormattingIconDisplayConfiguration]
     class ConditionalFormattingCustomIconCondition < Struct.new(
+      nil,
       :expression,
       :icon_options,
       :color,
@@ -3993,6 +4177,7 @@ module Aws::QuickSight
     #   <p>Determines the Unicode icon type.</p>
     #   @return [String]
     class ConditionalFormattingCustomIconOptions < Struct.new(
+      nil,
       :icon,
       :unicode_icon,
       keyword_init: true
@@ -4008,6 +4193,7 @@ module Aws::QuickSight
     #   <p>Determines the color.</p>
     #   @return [Types::GradientColor]
     class ConditionalFormattingGradientColor < Struct.new(
+      nil,
       :expression,
       :color,
       keyword_init: true
@@ -4023,6 +4209,7 @@ module Aws::QuickSight
     #   <p>Determines the custom condition for an icon set.</p>
     #   @return [Types::ConditionalFormattingCustomIconCondition]
     class ConditionalFormattingIcon < Struct.new(
+      nil,
       :icon_set,
       :custom_condition,
       keyword_init: true
@@ -4035,6 +4222,7 @@ module Aws::QuickSight
     #   <p>Determines the icon display configuration.</p>
     #   @return [String]
     class ConditionalFormattingIconDisplayConfiguration < Struct.new(
+      nil,
       :icon_display_option,
       keyword_init: true
     )
@@ -4049,6 +4237,7 @@ module Aws::QuickSight
     #   <p>Determines the icon set type.</p>
     #   @return [String]
     class ConditionalFormattingIconSet < Struct.new(
+      nil,
       :expression,
       :icon_set_type,
       keyword_init: true
@@ -4064,6 +4253,7 @@ module Aws::QuickSight
     #   <p>Determines the color.</p>
     #   @return [String]
     class ConditionalFormattingSolidColor < Struct.new(
+      nil,
       :expression,
       :color,
       keyword_init: true
@@ -4078,6 +4268,7 @@ module Aws::QuickSight
     #   <p>The Amazon Web Services request ID for this request.</p>
     #   @return [String]
     class ConflictException < Struct.new(
+      nil,
       :message,
       :request_id,
       keyword_init: true
@@ -4090,6 +4281,7 @@ module Aws::QuickSight
     #   <p>The availability status of the context menu options. If the value of this property is set to <code>ENABLED</code>, dashboard readers can interact with the context menu.</p>
     #   @return [String]
     class ContextMenuOption < Struct.new(
+      nil,
       :availability_status,
       keyword_init: true
     )
@@ -4105,6 +4297,7 @@ module Aws::QuickSight
     #               usually a list of <code>ColumnIdentifiers</code>.</p>
     #   @return [Array<Types::ColumnIdentifier>]
     class ContributionAnalysisDefault < Struct.new(
+      nil,
       :measure_field_id,
       :contributor_dimensions,
       keyword_init: true
@@ -4117,6 +4310,7 @@ module Aws::QuickSight
     #   <p>The field name of the <code>ContributionAnalysisFactor</code>.</p>
     #   @return [String]
     class ContributionAnalysisFactor < Struct.new(
+      nil,
       :field_name,
       keyword_init: true
     )
@@ -4131,6 +4325,7 @@ module Aws::QuickSight
     #   <p>The end range for the <code>ContributionAnalysisTimeRanges</code>.</p>
     #   @return [Types::TopicIRFilterOption]
     class ContributionAnalysisTimeRanges < Struct.new(
+      nil,
       :start_range,
       :end_range,
       keyword_init: true
@@ -4158,6 +4353,7 @@ module Aws::QuickSight
     #   <p>A list of the tags that you want to attach to this resource.</p>
     #   @return [Array<Types::Tag>]
     class CreateAccountCustomizationRequest < Struct.new(
+      nil,
       :aws_account_id,
       :namespace,
       :account_customization,
@@ -4186,6 +4382,7 @@ module Aws::QuickSight
     #   <p>The HTTP status of the request.</p>
     #   @return [Integer]
     class CreateAccountCustomizationResponse < Struct.new(
+      nil,
       :arn,
       :aws_account_id,
       :namespace,
@@ -4305,6 +4502,7 @@ module Aws::QuickSight
     #   <p>The Amazon Resource Name (ARN) for the IAM Identity Center instance.</p>
     #   @return [String]
     class CreateAccountSubscriptionRequest < Struct.new(
+      nil,
       :edition,
       :authentication_method,
       :aws_account_id,
@@ -4339,6 +4537,7 @@ module Aws::QuickSight
     #   <p>The Amazon Web Services request ID for this operation.</p>
     #   @return [String]
     class CreateAccountSubscriptionResponse < Struct.new(
+      nil,
       :signup_response,
       :status,
       :request_id,
@@ -4401,6 +4600,7 @@ module Aws::QuickSight
     #   <p>When you create the analysis, QuickSight adds the analysis to these folders.</p>
     #   @return [Array<String>]
     class CreateAnalysisRequest < Struct.new(
+      nil,
       :aws_account_id,
       :analysis_id,
       :name,
@@ -4433,6 +4633,7 @@ module Aws::QuickSight
     #   <p>The Amazon Web Services request ID for this operation.</p>
     #   @return [String]
     class CreateAnalysisResponse < Struct.new(
+      nil,
       :arn,
       :analysis_id,
       :creation_status,
@@ -4461,6 +4662,7 @@ module Aws::QuickSight
     #   <p>A map of the key-value pairs that are assigned to the brand.</p>
     #   @return [Array<Types::Tag>]
     class CreateBrandRequest < Struct.new(
+      nil,
       :aws_account_id,
       :brand_id,
       :brand_definition,
@@ -4480,6 +4682,7 @@ module Aws::QuickSight
     #   <p>The definition of the brand.</p>
     #   @return [Types::BrandDefinition]
     class CreateBrandResponse < Struct.new(
+      nil,
       :request_id,
       :brand_detail,
       :brand_definition,
@@ -4494,6 +4697,7 @@ module Aws::QuickSight
     #   <p>Calculated columns to create.</p>
     #   @return [Array<Types::CalculatedColumn>]
     class CreateColumnsOperation < Struct.new(
+      nil,
       :columns,
       keyword_init: true
     )
@@ -4513,6 +4717,7 @@ module Aws::QuickSight
     #   <p>The tags to associate with the custom permissions profile.</p>
     #   @return [Array<Types::Tag>]
     class CreateCustomPermissionsRequest < Struct.new(
+      nil,
       :aws_account_id,
       :custom_permissions_name,
       :capabilities,
@@ -4532,6 +4737,7 @@ module Aws::QuickSight
     #   <p>The Amazon Web Services request ID for this operation.</p>
     #   @return [String]
     class CreateCustomPermissionsResponse < Struct.new(
+      nil,
       :status,
       :arn,
       :request_id,
@@ -4655,6 +4861,7 @@ module Aws::QuickSight
     #   <p>A list of analysis Amazon Resource Names (ARNs) to be linked to the dashboard.</p>
     #   @return [Array<String>]
     class CreateDashboardRequest < Struct.new(
+      nil,
       :aws_account_id,
       :dashboard_id,
       :name,
@@ -4695,6 +4902,7 @@ module Aws::QuickSight
     #   <p>The Amazon Web Services request ID for this operation.</p>
     #   @return [String]
     class CreateDashboardResponse < Struct.new(
+      nil,
       :arn,
       :version_arn,
       :dashboard_id,
@@ -4768,6 +4976,7 @@ module Aws::QuickSight
     #   <p>The usage of the dataset. <code>RLS_RULES</code> must be specified for RLS permission datasets.</p>
     #   @return [String]
     class CreateDataSetRequest < Struct.new(
+      nil,
       :aws_account_id,
       :data_set_id,
       :name,
@@ -4812,6 +5021,7 @@ module Aws::QuickSight
     #   <p>The HTTP status of the request.</p>
     #   @return [Integer]
     class CreateDataSetResponse < Struct.new(
+      nil,
       :arn,
       :data_set_id,
       :ingestion_arn,
@@ -4866,6 +5076,7 @@ module Aws::QuickSight
     #   <p>When you create the data source, QuickSight adds the data source to these folders.</p>
     #   @return [Array<String>]
     class CreateDataSourceRequest < Struct.new(
+      nil,
       :aws_account_id,
       :data_source_id,
       :name,
@@ -4898,6 +5109,7 @@ module Aws::QuickSight
     #   <p>The HTTP status of the request.</p>
     #   @return [Integer]
     class CreateDataSourceResponse < Struct.new(
+      nil,
       :arn,
       :data_source_id,
       :creation_status,
@@ -4926,6 +5138,7 @@ module Aws::QuickSight
     #   <p>The member type of the asset that you want to add to a folder.</p>
     #   @return [String]
     class CreateFolderMembershipRequest < Struct.new(
+      nil,
       :aws_account_id,
       :folder_id,
       :member_id,
@@ -4945,6 +5158,7 @@ module Aws::QuickSight
     #   <p>The Amazon Web Services request ID for this operation.</p>
     #   @return [String]
     class CreateFolderMembershipResponse < Struct.new(
+      nil,
       :status,
       :folder_member,
       :request_id,
@@ -4986,6 +5200,7 @@ module Aws::QuickSight
     #   <p>An optional parameter that determines the sharing scope of the folder. The default value for this parameter is <code>ACCOUNT</code>.</p>
     #   @return [String]
     class CreateFolderRequest < Struct.new(
+      nil,
       :aws_account_id,
       :folder_id,
       :name,
@@ -5012,6 +5227,7 @@ module Aws::QuickSight
     #   <p>The request ID for the newly created folder.</p>
     #   @return [String]
     class CreateFolderResponse < Struct.new(
+      nil,
       :status,
       :arn,
       :folder_id,
@@ -5040,6 +5256,7 @@ module Aws::QuickSight
     #   <p>The namespace that you want the user to be a part of.</p>
     #   @return [String]
     class CreateGroupMembershipRequest < Struct.new(
+      nil,
       :member_name,
       :group_name,
       :aws_account_id,
@@ -5059,6 +5276,7 @@ module Aws::QuickSight
     #   <p>The HTTP status of the request.</p>
     #   @return [Integer]
     class CreateGroupMembershipResponse < Struct.new(
+      nil,
       :group_member,
       :request_id,
       :status,
@@ -5087,6 +5305,7 @@ module Aws::QuickSight
     #   <p>The namespace that you want the group to be a part of.</p>
     #   @return [String]
     class CreateGroupRequest < Struct.new(
+      nil,
       :group_name,
       :description,
       :aws_account_id,
@@ -5107,6 +5326,7 @@ module Aws::QuickSight
     #   <p>The HTTP status of the request.</p>
     #   @return [Integer]
     class CreateGroupResponse < Struct.new(
+      nil,
       :group,
       :request_id,
       :status,
@@ -5162,6 +5382,7 @@ module Aws::QuickSight
     #   <p>The namespace that contains the assignment.</p>
     #   @return [String]
     class CreateIAMPolicyAssignmentRequest < Struct.new(
+      nil,
       :aws_account_id,
       :assignment_name,
       :assignment_status,
@@ -5216,6 +5437,7 @@ module Aws::QuickSight
     #   <p>The HTTP status of the request.</p>
     #   @return [Integer]
     class CreateIAMPolicyAssignmentResponse < Struct.new(
+      nil,
       :assignment_name,
       :assignment_id,
       :assignment_status,
@@ -5246,6 +5468,7 @@ module Aws::QuickSight
     #   <p>The type of ingestion that you want to create.</p>
     #   @return [String]
     class CreateIngestionRequest < Struct.new(
+      nil,
       :data_set_id,
       :ingestion_id,
       :aws_account_id,
@@ -5271,6 +5494,7 @@ module Aws::QuickSight
     #   <p>The HTTP status of the request.</p>
     #   @return [Integer]
     class CreateIngestionResponse < Struct.new(
+      nil,
       :arn,
       :ingestion_id,
       :ingestion_status,
@@ -5300,6 +5524,7 @@ module Aws::QuickSight
     #   <p>The tags that you want to associate with the namespace that you're creating.</p>
     #   @return [Array<Types::Tag>]
     class CreateNamespaceRequest < Struct.new(
+      nil,
       :aws_account_id,
       :namespace,
       :identity_store,
@@ -5337,6 +5562,7 @@ module Aws::QuickSight
     #   <p>The HTTP status of the request.</p>
     #   @return [Integer]
     class CreateNamespaceResponse < Struct.new(
+      nil,
       :arn,
       :name,
       :capacity_region,
@@ -5364,6 +5590,7 @@ module Aws::QuickSight
     #   <p>The refresh schedule.</p>
     #   @return [Types::RefreshSchedule]
     class CreateRefreshScheduleRequest < Struct.new(
+      nil,
       :data_set_id,
       :aws_account_id,
       :schedule,
@@ -5385,6 +5612,7 @@ module Aws::QuickSight
     #   <p>The Amazon Resource Name (ARN) for the refresh schedule.</p>
     #   @return [String]
     class CreateRefreshScheduleResponse < Struct.new(
+      nil,
       :status,
       :request_id,
       :schedule_id,
@@ -5412,6 +5640,7 @@ module Aws::QuickSight
     #   <p>The role that you want to add a group to.</p>
     #   @return [String]
     class CreateRoleMembershipRequest < Struct.new(
+      nil,
       :member_name,
       :aws_account_id,
       :namespace,
@@ -5428,6 +5657,7 @@ module Aws::QuickSight
     #   <p>The HTTP status of the request.</p>
     #   @return [Integer]
     class CreateRoleMembershipResponse < Struct.new(
+      nil,
       :request_id,
       :status,
       keyword_init: true
@@ -5455,6 +5685,7 @@ module Aws::QuickSight
     #   <p>The version number of the template.</p>
     #   @return [Integer]
     class CreateTemplateAliasRequest < Struct.new(
+      nil,
       :aws_account_id,
       :template_id,
       :alias_name,
@@ -5474,6 +5705,7 @@ module Aws::QuickSight
     #   <p>The Amazon Web Services request ID for this operation.</p>
     #   @return [String]
     class CreateTemplateAliasResponse < Struct.new(
+      nil,
       :template_alias,
       :status,
       :request_id,
@@ -5533,6 +5765,7 @@ module Aws::QuickSight
     #   <p>TThe option to relax the validation needed to create a template with definition objects. This skips the validation step for specific errors.</p>
     #   @return [Types::ValidationStrategy]
     class CreateTemplateRequest < Struct.new(
+      nil,
       :aws_account_id,
       :template_id,
       :name,
@@ -5567,6 +5800,7 @@ module Aws::QuickSight
     #   <p>The Amazon Web Services request ID for this operation.</p>
     #   @return [String]
     class CreateTemplateResponse < Struct.new(
+      nil,
       :arn,
       :version_arn,
       :template_id,
@@ -5598,6 +5832,7 @@ module Aws::QuickSight
     #   <p>The version number of the theme.</p>
     #   @return [Integer]
     class CreateThemeAliasRequest < Struct.new(
+      nil,
       :aws_account_id,
       :theme_id,
       :alias_name,
@@ -5617,6 +5852,7 @@ module Aws::QuickSight
     #   <p>The Amazon Web Services request ID for this operation.</p>
     #   @return [String]
     class CreateThemeAliasResponse < Struct.new(
+      nil,
       :theme_alias,
       :status,
       :request_id,
@@ -5664,6 +5900,7 @@ module Aws::QuickSight
     #   			resource.</p>
     #   @return [Array<Types::Tag>]
     class CreateThemeRequest < Struct.new(
+      nil,
       :aws_account_id,
       :theme_id,
       :name,
@@ -5696,6 +5933,7 @@ module Aws::QuickSight
     #   <p>The Amazon Web Services request ID for this operation.</p>
     #   @return [String]
     class CreateThemeResponse < Struct.new(
+      nil,
       :arn,
       :version_arn,
       :theme_id,
@@ -5729,6 +5967,7 @@ module Aws::QuickSight
     #   <p>The definition of a refresh schedule.</p>
     #   @return [Types::TopicRefreshSchedule]
     class CreateTopicRefreshScheduleRequest < Struct.new(
+      nil,
       :aws_account_id,
       :topic_id,
       :dataset_arn,
@@ -5755,6 +5994,7 @@ module Aws::QuickSight
     #   <p>The Amazon Web Services request ID for this operation.</p>
     #   @return [String]
     class CreateTopicRefreshScheduleResponse < Struct.new(
+      nil,
       :topic_id,
       :topic_arn,
       :dataset_arn,
@@ -5790,6 +6030,7 @@ module Aws::QuickSight
     #   <p>Custom instructions for the topic.</p>
     #   @return [Types::CustomInstructions]
     class CreateTopicRequest < Struct.new(
+      nil,
       :aws_account_id,
       :topic_id,
       :topic,
@@ -5818,6 +6059,7 @@ module Aws::QuickSight
     #   <p>The HTTP status of the request.</p>
     #   @return [Integer]
     class CreateTopicResponse < Struct.new(
+      nil,
       :arn,
       :topic_id,
       :refresh_arn,
@@ -5853,6 +6095,7 @@ module Aws::QuickSight
     #   <p>The template for the <code>CreateTopicReviewedAnswer</code>.</p>
     #   @return [Types::TopicTemplate]
     class CreateTopicReviewedAnswer < Struct.new(
+      nil,
       :answer_id,
       :dataset_arn,
       :question,
@@ -5893,6 +6136,7 @@ module Aws::QuickSight
     #   			connection.</p>
     #   @return [Array<Types::Tag>]
     class CreateVPCConnectionRequest < Struct.new(
+      nil,
       :aws_account_id,
       :vpc_connection_id,
       :name,
@@ -5927,6 +6171,7 @@ module Aws::QuickSight
     #   <p>The HTTP status of the request.</p>
     #   @return [Integer]
     class CreateVPCConnectionResponse < Struct.new(
+      nil,
       :arn,
       :vpc_connection_id,
       :creation_status,
@@ -5962,6 +6207,7 @@ module Aws::QuickSight
     #                   <code>Credentials</code> is automatically allowed.</p>
     #   @return [Array<Types::DataSourceParameters>]
     class CredentialPair < Struct.new(
+      nil,
       :username,
       :password,
       :alternate_data_source_parameters,
@@ -5996,6 +6242,7 @@ module Aws::QuickSight
     #   <p>The options that determine the null value format configuration.</p>
     #   @return [Types::NullValueFormatConfiguration]
     class CurrencyDisplayFormatConfiguration < Struct.new(
+      nil,
       :prefix,
       :suffix,
       :separator_configuration,
@@ -6017,6 +6264,7 @@ module Aws::QuickSight
     #   <p>The configuration that chooses the target visuals to be filtered.</p>
     #   @return [Types::FilterOperationTargetVisualsConfiguration]
     class CustomActionFilterOperation < Struct.new(
+      nil,
       :selected_fields_configuration,
       :target_visuals_configuration,
       keyword_init: true
@@ -6030,6 +6278,7 @@ module Aws::QuickSight
     #   <p>The configuration that chooses the navigation target.</p>
     #   @return [Types::LocalNavigationConfiguration]
     class CustomActionNavigationOperation < Struct.new(
+      nil,
       :local_navigation_configuration,
       keyword_init: true
     )
@@ -6041,6 +6290,7 @@ module Aws::QuickSight
     #   <p>The parameter that determines the value configuration.</p>
     #   @return [Array<Types::SetParameterValueConfiguration>]
     class CustomActionSetParametersOperation < Struct.new(
+      nil,
       :parameter_value_configurations,
       keyword_init: true
     )
@@ -6070,6 +6320,7 @@ module Aws::QuickSight
     #            </ul>
     #   @return [String]
     class CustomActionURLOperation < Struct.new(
+      nil,
       :url_template,
       :url_target,
       keyword_init: true
@@ -6088,6 +6339,7 @@ module Aws::QuickSight
     #   <p>The value of a special data value.</p>
     #   @return [String]
     class CustomColor < Struct.new(
+      nil,
       :field_value,
       :color,
       :special_value,
@@ -6101,6 +6353,7 @@ module Aws::QuickSight
     #   <p>The type of custom connector.</p>
     #   @return [String]
     class CustomConnectionParameters < Struct.new(
+      nil,
       :connection_type,
       keyword_init: true
     )
@@ -6121,6 +6374,7 @@ module Aws::QuickSight
     #   <p>The general visual interactions setup for a visual.</p>
     #   @return [Types::VisualInteractionOptions]
     class CustomContentConfiguration < Struct.new(
+      nil,
       :content_url,
       :content_type,
       :image_scaling,
@@ -6154,6 +6408,7 @@ module Aws::QuickSight
     #   <p>The alt text for the visual.</p>
     #   @return [String]
     class CustomContentVisual < Struct.new(
+      nil,
       :visual_id,
       :title,
       :subtitle,
@@ -6206,6 +6461,7 @@ module Aws::QuickSight
     #            </ul>
     #   @return [String]
     class CustomFilterConfiguration < Struct.new(
+      nil,
       :match_operator,
       :category_value,
       :select_all_options,
@@ -6251,6 +6507,7 @@ module Aws::QuickSight
     #            </ul>
     #   @return [String]
     class CustomFilterListConfiguration < Struct.new(
+      nil,
       :match_operator,
       :category_values,
       :select_all_options,
@@ -6265,6 +6522,7 @@ module Aws::QuickSight
     #   <p>A text field for providing additional guidance or context for response generation.</p>
     #   @return [String]
     class CustomInstructions < Struct.new(
+      nil,
       :custom_instructions_string,
       keyword_init: true
     )
@@ -6276,6 +6534,7 @@ module Aws::QuickSight
     #   <p>The string input of custom narrative.</p>
     #   @return [String]
     class CustomNarrativeOptions < Struct.new(
+      nil,
       :narrative,
       keyword_init: true
     )
@@ -6297,6 +6556,7 @@ module Aws::QuickSight
     #   <p>A list of datetime-type parameter values.</p>
     #   @return [Array<Time>]
     class CustomParameterValues < Struct.new(
+      nil,
       :string_values,
       :integer_values,
       :decimal_values,
@@ -6317,6 +6577,7 @@ module Aws::QuickSight
     #   <p>A set of actions in the custom permissions profile.</p>
     #   @return [Types::Capabilities]
     class CustomPermissions < Struct.new(
+      nil,
       :arn,
       :custom_permissions_name,
       :capabilities,
@@ -6339,6 +6600,7 @@ module Aws::QuickSight
     #   <p>The column schema from the SQL query result set.</p>
     #   @return [Array<Types::InputColumn>]
     class CustomSql < Struct.new(
+      nil,
       :data_source_arn,
       :name,
       :sql_query,
@@ -6357,6 +6619,7 @@ module Aws::QuickSight
     #            <p>This is a union type structure. For this structure to be valid, only one of the attributes can be defined.</p>
     #   @return [Types::CustomParameterValues]
     class CustomValuesConfiguration < Struct.new(
+      nil,
       :include_null_value,
       :custom_values,
       keyword_init: true
@@ -6371,6 +6634,7 @@ module Aws::QuickSight
     #   <p>The Amazon Web Services request ID for this operation.</p>
     #   @return [String]
     class CustomerManagedKeyUnavailableException < Struct.new(
+      nil,
       :message,
       :request_id,
       keyword_init: true
@@ -6404,6 +6668,7 @@ module Aws::QuickSight
     #   <p>A list of analysis Amazon Resource Names (ARNs) to be linked to the dashboard.</p>
     #   @return [Array<String>]
     class Dashboard < Struct.new(
+      nil,
       :dashboard_id,
       :arn,
       :name,
@@ -6428,6 +6693,7 @@ module Aws::QuickSight
     #   <p>Lists the violated entities that caused the dashboard error.</p>
     #   @return [Array<Types::Entity>]
     class DashboardError < Struct.new(
+      nil,
       :type,
       :message,
       :violated_entities,
@@ -6482,6 +6748,7 @@ module Aws::QuickSight
     #   <p>Data stories sharing option.</p>
     #   @return [Types::DataStoriesSharingOption]
     class DashboardPublishOptions < Struct.new(
+      nil,
       :ad_hoc_filtering_option,
       :export_to_csv_option,
       :sheet_controls_option,
@@ -6544,6 +6811,7 @@ module Aws::QuickSight
     #               "arn:aws:quicksight:us-east-1:1:user/default/UserName1"</code>. </p>
     #   @return [String]
     class DashboardSearchFilter < Struct.new(
+      nil,
       :operator,
       :name,
       :value,
@@ -6557,6 +6825,7 @@ module Aws::QuickSight
     #   <p>Source template.</p>
     #   @return [Types::DashboardSourceTemplate]
     class DashboardSourceEntity < Struct.new(
+      nil,
       :source_template,
       keyword_init: true
     )
@@ -6571,6 +6840,7 @@ module Aws::QuickSight
     #   <p>The Amazon Resource Name (ARN) of the resource.</p>
     #   @return [String]
     class DashboardSourceTemplate < Struct.new(
+      nil,
       :data_set_references,
       :arn,
       keyword_init: true
@@ -6601,6 +6871,7 @@ module Aws::QuickSight
     #   <p>The last time that this dashboard was published.</p>
     #   @return [Time]
     class DashboardSummary < Struct.new(
+      nil,
       :arn,
       :dashboard_id,
       :name,
@@ -6646,6 +6917,7 @@ module Aws::QuickSight
     #   <p>A list of the associated sheets with the unique identifier and name of each sheet.</p>
     #   @return [Array<Types::Sheet>]
     class DashboardVersion < Struct.new(
+      nil,
       :created_time,
       :errors,
       :version_number,
@@ -6695,6 +6967,7 @@ module Aws::QuickSight
     #   <p>The static files for the definition.</p>
     #   @return [Array<Types::StaticFile>]
     class DashboardVersionDefinition < Struct.new(
+      nil,
       :data_set_identifier_declarations,
       :sheets,
       :calculated_fields,
@@ -6729,6 +7002,7 @@ module Aws::QuickSight
     #   <p>Description.</p>
     #   @return [String]
     class DashboardVersionSummary < Struct.new(
+      nil,
       :arn,
       :created_time,
       :version_number,
@@ -6763,6 +7037,7 @@ module Aws::QuickSight
     #   <p>The ID of the visual that you want to embed. The <code>VisualID</code> can be found in the <code>IDs for developers</code> section of the <code>Embed visual</code> pane of the visual's on-visual menu of the QuickSight console.</p>
     #   @return [String]
     class DashboardVisualId < Struct.new(
+      nil,
       :dashboard_id,
       :sheet_id,
       :visual_id,
@@ -6776,6 +7051,7 @@ module Aws::QuickSight
     #   <p>Determines if hidden fields are included in an exported dashboard.</p>
     #   @return [Types::ExportHiddenFieldsOption]
     class DashboardVisualPublishOptions < Struct.new(
+      nil,
       :export_hidden_fields_option,
       keyword_init: true
     )
@@ -6808,6 +7084,7 @@ module Aws::QuickSight
     #   <p>The URL of the dashboard.</p>
     #   @return [String]
     class DashboardVisualResult < Struct.new(
+      nil,
       :dashboard_id,
       :dashboard_name,
       :sheet_id,
@@ -6829,6 +7106,7 @@ module Aws::QuickSight
     #   <p>The column name for the default date.</p>
     #   @return [String]
     class DataAggregation < Struct.new(
+      nil,
       :dataset_row_date_granularity,
       :default_date_column_name,
       keyword_init: true
@@ -6847,6 +7125,7 @@ module Aws::QuickSight
     #   <p>The color of the negative data bar.</p>
     #   @return [String]
     class DataBarsOptions < Struct.new(
+      nil,
       :field_id,
       :positive_color,
       :negative_color,
@@ -6863,6 +7142,7 @@ module Aws::QuickSight
     #   <p>The data value that the color is applied to.</p>
     #   @return [Float]
     class DataColor < Struct.new(
+      nil,
       :color,
       :data_value,
       keyword_init: true
@@ -6889,6 +7169,7 @@ module Aws::QuickSight
     #               highlighted.</p>
     #   @return [String]
     class DataColorPalette < Struct.new(
+      nil,
       :colors,
       :min_max_gradient,
       :empty_fill_color,
@@ -6911,6 +7192,7 @@ module Aws::QuickSight
     #   <p>The options that determine the presentation of line series associated to the field.</p>
     #   @return [Types::LineChartSeriesSettings]
     class DataFieldSeriesItem < Struct.new(
+      nil,
       :field_id,
       :field_value,
       :axis_binding,
@@ -6952,6 +7234,7 @@ module Aws::QuickSight
     #   <p>Determines the visibility of the total.</p>
     #   @return [String]
     class DataLabelOptions < Struct.new(
+      nil,
       :visibility,
       :category_label_visibility,
       :measure_label_visibility,
@@ -6985,6 +7268,7 @@ module Aws::QuickSight
     #   <p>Determines the label configuration for the maximum value in a visual.</p>
     #   @return [Types::MaximumLabelType]
     class DataLabelType < Struct.new(
+      nil,
       :field_label_type,
       :data_path_label_type,
       :range_ends_label_type,
@@ -7006,6 +7290,7 @@ module Aws::QuickSight
     #   <p>The time granularity of the field that the color needs to be applied to.</p>
     #   @return [String]
     class DataPathColor < Struct.new(
+      nil,
       :element,
       :color,
       :time_granularity,
@@ -7025,6 +7310,7 @@ module Aws::QuickSight
     #   <p>The visibility of the data label.</p>
     #   @return [String]
     class DataPathLabelType < Struct.new(
+      nil,
       :field_id,
       :field_value,
       :visibility,
@@ -7041,6 +7327,7 @@ module Aws::QuickSight
     #   <p>The list of data paths that need to be sorted.</p>
     #   @return [Array<Types::DataPathValue>]
     class DataPathSort < Struct.new(
+      nil,
       :direction,
       :sort_paths,
       keyword_init: true
@@ -7071,6 +7358,7 @@ module Aws::QuickSight
     #            </ul>
     #   @return [String]
     class DataPathType < Struct.new(
+      nil,
       :pivot_table_data_path_type,
       keyword_init: true
     )
@@ -7088,6 +7376,7 @@ module Aws::QuickSight
     #   <p>The type configuration of the field.</p>
     #   @return [Types::DataPathType]
     class DataPathValue < Struct.new(
+      nil,
       :field_id,
       :field_value,
       :data_path_type,
@@ -7101,6 +7390,7 @@ module Aws::QuickSight
     #   <p>The status of the drill down options of data points.</p>
     #   @return [String]
     class DataPointDrillUpDownOption < Struct.new(
+      nil,
       :availability_status,
       keyword_init: true
     )
@@ -7112,6 +7402,7 @@ module Aws::QuickSight
     #   <p>The status of the data point menu options.</p>
     #   @return [String]
     class DataPointMenuLabelOption < Struct.new(
+      nil,
       :availability_status,
       keyword_init: true
     )
@@ -7123,6 +7414,7 @@ module Aws::QuickSight
     #   <p>The status of the data point tool tip options.</p>
     #   @return [String]
     class DataPointTooltipOption < Struct.new(
+      nil,
       :availability_status,
       keyword_init: true
     )
@@ -7134,6 +7426,7 @@ module Aws::QuickSight
     #   <p>The status of the Data Q&A option on the dashboard.</p>
     #   @return [String]
     class DataQAEnabledOption < Struct.new(
+      nil,
       :availability_status,
       keyword_init: true
     )
@@ -7145,6 +7438,7 @@ module Aws::QuickSight
     #   <p>The generative Q&A settings of an embedded QuickSight console.</p>
     #   @return [Boolean]
     class DataQnAConfigurations < Struct.new(
+      nil,
       :enabled,
       keyword_init: true
     )
@@ -7221,6 +7515,7 @@ module Aws::QuickSight
     #   <p>The usage of the dataset.</p>
     #   @return [String]
     class DataSet < Struct.new(
+      nil,
       :arn,
       :data_set_id,
       :name,
@@ -7261,6 +7556,7 @@ module Aws::QuickSight
     #   <p>A structure containing the list of column group schemas.</p>
     #   @return [Array<Types::ColumnGroupSchema>]
     class DataSetConfiguration < Struct.new(
+      nil,
       :placeholder,
       :data_set_schema,
       :column_group_schema_list,
@@ -7277,6 +7573,7 @@ module Aws::QuickSight
     #   <p>The Amazon Resource Name (ARN) of the data set.</p>
     #   @return [String]
     class DataSetIdentifierDeclaration < Struct.new(
+      nil,
       :identifier,
       :data_set_arn,
       keyword_init: true
@@ -7292,6 +7589,7 @@ module Aws::QuickSight
     #   <p>Dataset Amazon Resource Name (ARN).</p>
     #   @return [String]
     class DataSetReference < Struct.new(
+      nil,
       :data_set_placeholder,
       :data_set_arn,
       keyword_init: true
@@ -7307,6 +7605,7 @@ module Aws::QuickSight
     #   <p>The failure configuration for a dataset.</p>
     #   @return [Types::RefreshFailureConfiguration]
     class DataSetRefreshProperties < Struct.new(
+      nil,
       :refresh_configuration,
       :failure_configuration,
       keyword_init: true
@@ -7319,6 +7618,7 @@ module Aws::QuickSight
     #   <p>A structure containing the list of column schemas.</p>
     #   @return [Array<Types::ColumnSchema>]
     class DataSetSchema < Struct.new(
+      nil,
       :column_schema_list,
       keyword_init: true
     )
@@ -7368,6 +7668,7 @@ module Aws::QuickSight
     #               "arn:aws:quicksight:us-east-1:1:user/default/UserName1"</code>.</p>
     #   @return [String]
     class DataSetSearchFilter < Struct.new(
+      nil,
       :operator,
       :name,
       :value,
@@ -7408,6 +7709,7 @@ module Aws::QuickSight
     #   <p>The usage of the dataset.</p>
     #   @return [String]
     class DataSetSummary < Struct.new(
+      nil,
       :arn,
       :data_set_id,
       :name,
@@ -7437,6 +7739,7 @@ module Aws::QuickSight
     #   <p>An option that controls whether a child dataset that's stored in QuickSight can use this dataset as a source.</p>
     #   @return [Boolean]
     class DataSetUsageConfiguration < Struct.new(
+      nil,
       :disable_use_as_direct_query_source,
       :disable_use_as_imported_source,
       keyword_init: true
@@ -7505,6 +7808,7 @@ module Aws::QuickSight
     #   <p>The Amazon Resource Name (ARN) of the secret associated with the data source in Amazon Secrets Manager.</p>
     #   @return [String]
     class DataSource < Struct.new(
+      nil,
       :arn,
       :data_source_id,
       :name,
@@ -7542,6 +7846,7 @@ module Aws::QuickSight
     #   <p>The Amazon Resource Name (ARN) of the secret associated with the data source in Amazon Secrets Manager.</p>
     #   @return [String]
     class DataSourceCredentials < Struct.new(
+      nil,
       :credential_pair,
       :copy_source_arn,
       :secret_arn,
@@ -7558,6 +7863,7 @@ module Aws::QuickSight
     #   <p>Error message.</p>
     #   @return [String]
     class DataSourceErrorInfo < Struct.new(
+      nil,
       :type,
       :message,
       keyword_init: true
@@ -7752,6 +8058,7 @@ module Aws::QuickSight
     #               "arn:aws:quicksight:us-east-1:1:user/default/UserName1"</code>.</p>
     #   @return [String]
     class DataSourceSearchFilter < Struct.new(
+      nil,
       :operator,
       :name,
       :value,
@@ -7780,6 +8087,7 @@ module Aws::QuickSight
     #   <p>The date and time the data source was last updated. This value is expressed in MM-DD-YYYY HH:MM:SS format.</p>
     #   @return [Time]
     class DataSourceSummary < Struct.new(
+      nil,
       :arn,
       :data_source_id,
       :name,
@@ -7796,6 +8104,7 @@ module Aws::QuickSight
     #   <p>The data story settings of an embedded QuickSight console.</p>
     #   @return [Boolean]
     class DataStoriesConfigurations < Struct.new(
+      nil,
       :enabled,
       keyword_init: true
     )
@@ -7812,6 +8121,7 @@ module Aws::QuickSight
     #   <p>Availability status.</p>
     #   @return [String]
     class DataStoriesSharingOption < Struct.new(
+      nil,
       :availability_status,
       keyword_init: true
     )
@@ -7829,6 +8139,7 @@ module Aws::QuickSight
     #   <p>The HTTP path of the Databricks data source.</p>
     #   @return [String]
     class DatabricksParameters < Struct.new(
+      nil,
       :host,
       :port,
       :sql_endpoint_path,
@@ -7863,6 +8174,7 @@ module Aws::QuickSight
     #   <p>The list of named entities definitions.</p>
     #   @return [Array<Types::TopicNamedEntity>]
     class DatasetMetadata < Struct.new(
+      nil,
       :dataset_arn,
       :dataset_name,
       :dataset_description,
@@ -7890,6 +8202,7 @@ module Aws::QuickSight
     #   <p>A date time parameter that is created in the dataset.</p>
     #   @return [Types::DateTimeDatasetParameter]
     class DatasetParameter < Struct.new(
+      nil,
       :string_dataset_parameter,
       :decimal_dataset_parameter,
       :integer_dataset_parameter,
@@ -7904,6 +8217,7 @@ module Aws::QuickSight
     #   <p>Determines whether or not missing dates are displayed.</p>
     #   @return [String]
     class DateAxisOptions < Struct.new(
+      nil,
       :missing_date_visibility,
       keyword_init: true
     )
@@ -7974,6 +8288,7 @@ module Aws::QuickSight
     #   <p>The format configuration of the field.</p>
     #   @return [Types::DateTimeFormatConfiguration]
     class DateDimensionField < Struct.new(
+      nil,
       :field_id,
       :column,
       :date_granularity,
@@ -7998,6 +8313,7 @@ module Aws::QuickSight
     #   <p>The format configuration of the field.</p>
     #   @return [Types::DateTimeFormatConfiguration]
     class DateMeasureField < Struct.new(
+      nil,
       :field_id,
       :column,
       :aggregation_function,
@@ -8024,6 +8340,7 @@ module Aws::QuickSight
     #   <p>A list of default values for a given date time parameter. This structure only accepts static values.</p>
     #   @return [Types::DateTimeDatasetParameterDefaultValues]
     class DateTimeDatasetParameter < Struct.new(
+      nil,
       :id,
       :name,
       :value_type,
@@ -8039,6 +8356,7 @@ module Aws::QuickSight
     #   <p>A list of static default values for a given date time parameter.</p>
     #   @return [Array<Time>]
     class DateTimeDatasetParameterDefaultValues < Struct.new(
+      nil,
       :static_values,
       keyword_init: true
     )
@@ -8056,6 +8374,7 @@ module Aws::QuickSight
     #   <p>The rolling date of the <code>DataTimeDefaultValues</code>. The date is determined from the dataset based on input expression.</p>
     #   @return [Types::RollingDateConfiguration]
     class DateTimeDefaultValues < Struct.new(
+      nil,
       :dynamic_value,
       :static_values,
       :rolling_date,
@@ -8075,6 +8394,7 @@ module Aws::QuickSight
     #   <p>The formatting configuration for numeric <code>DateTime</code> fields.</p>
     #   @return [Types::NumericFormatConfiguration]
     class DateTimeFormatConfiguration < Struct.new(
+      nil,
       :date_time_format,
       :null_value_format_configuration,
       :numeric_format_configuration,
@@ -8092,6 +8412,7 @@ module Aws::QuickSight
     #                   <code>DateTime</code> hierarchy.</p>
     #   @return [Array<Types::DrillDownFilter>]
     class DateTimeHierarchy < Struct.new(
+      nil,
       :hierarchy_id,
       :drill_down_filters,
       keyword_init: true
@@ -8107,6 +8428,7 @@ module Aws::QuickSight
     #   <p>The values for the date-time parameter.</p>
     #   @return [Array<Time>]
     class DateTimeParameter < Struct.new(
+      nil,
       :name,
       :values,
       keyword_init: true
@@ -8131,6 +8453,7 @@ module Aws::QuickSight
     #   <p>A list of dataset parameters that are mapped to an analysis parameter.</p>
     #   @return [Array<Types::MappedDataSetParameter>]
     class DateTimeParameterDeclaration < Struct.new(
+      nil,
       :name,
       :default_values,
       :time_granularity,
@@ -8158,6 +8481,7 @@ module Aws::QuickSight
     #   <p>The date icon visibility of the <code>DateTimePickerControlDisplayOptions</code>.</p>
     #   @return [String]
     class DateTimePickerControlDisplayOptions < Struct.new(
+      nil,
       :title_options,
       :date_time_format,
       :info_icon_label_options,
@@ -8186,6 +8510,7 @@ module Aws::QuickSight
     #   <p>A custom value that's used when the value of a parameter isn't set.</p>
     #   @return [Time]
     class DateTimeValueWhenUnsetConfiguration < Struct.new(
+      nil,
       :value_when_unset_option,
       :custom_value,
       keyword_init: true
@@ -8207,6 +8532,7 @@ module Aws::QuickSight
     #   <p>A list of default values for a given decimal parameter. This structure only accepts static values.</p>
     #   @return [Types::DecimalDatasetParameterDefaultValues]
     class DecimalDatasetParameter < Struct.new(
+      nil,
       :id,
       :name,
       :value_type,
@@ -8221,6 +8547,7 @@ module Aws::QuickSight
     #   <p>A list of static default values for a given decimal parameter.</p>
     #   @return [Array<Float>]
     class DecimalDatasetParameterDefaultValues < Struct.new(
+      nil,
       :static_values,
       keyword_init: true
     )
@@ -8235,6 +8562,7 @@ module Aws::QuickSight
     #   <p>The static values of the <code>DecimalDefaultValues</code>.</p>
     #   @return [Array<Float>]
     class DecimalDefaultValues < Struct.new(
+      nil,
       :dynamic_value,
       :static_values,
       keyword_init: true
@@ -8250,6 +8578,7 @@ module Aws::QuickSight
     #   <p>The values for the decimal parameter.</p>
     #   @return [Array<Float>]
     class DecimalParameter < Struct.new(
+      nil,
       :name,
       :values,
       keyword_init: true
@@ -8274,6 +8603,7 @@ module Aws::QuickSight
     #   <p>A list of dataset parameters that are mapped to an analysis parameter.</p>
     #   @return [Array<Types::MappedDataSetParameter>]
     class DecimalParameterDeclaration < Struct.new(
+      nil,
       :parameter_value_type,
       :name,
       :default_values,
@@ -8289,6 +8619,7 @@ module Aws::QuickSight
     #   <p>The values of the decimal places.</p>
     #   @return [Integer]
     class DecimalPlacesConfiguration < Struct.new(
+      nil,
       :decimal_places,
       keyword_init: true
     )
@@ -8313,6 +8644,7 @@ module Aws::QuickSight
     #   <p>A custom value that's used when the value of a parameter isn't set.</p>
     #   @return [Float]
     class DecimalValueWhenUnsetConfiguration < Struct.new(
+      nil,
       :value_when_unset_option,
       :custom_value,
       keyword_init: true
@@ -8346,6 +8678,7 @@ module Aws::QuickSight
     #   <p>The visibility configuration of the Apply button on a <code>DateTimePickerControl</code>.</p>
     #   @return [String]
     class DefaultDateTimePickerControlOptions < Struct.new(
+      nil,
       :type,
       :display_options,
       :commit_mode,
@@ -8362,6 +8695,7 @@ module Aws::QuickSight
     #   <p>The control option for the <code>DefaultFilterControlConfiguration</code>.</p>
     #   @return [Types::DefaultFilterControlOptions]
     class DefaultFilterControlConfiguration < Struct.new(
+      nil,
       :title,
       :control_options,
       keyword_init: true
@@ -8392,6 +8726,7 @@ module Aws::QuickSight
     #   <p>The default options that correspond to the <code>RelativeDateTime</code> filter control type.</p>
     #   @return [Types::DefaultRelativeDateTimeControlOptions]
     class DefaultFilterControlOptions < Struct.new(
+      nil,
       :default_date_time_picker_options,
       :default_list_options,
       :default_dropdown_options,
@@ -8428,6 +8763,7 @@ module Aws::QuickSight
     #   <p>The visibility configuration of the Apply button on a <code>FilterDropDownControl</code>.</p>
     #   @return [String]
     class DefaultFilterDropDownControlOptions < Struct.new(
+      nil,
       :display_options,
       :type,
       :selectable_values,
@@ -8458,6 +8794,7 @@ module Aws::QuickSight
     #   <p>A list of selectable values that are used in a control.</p>
     #   @return [Types::FilterSelectableValues]
     class DefaultFilterListControlOptions < Struct.new(
+      nil,
       :display_options,
       :type,
       :selectable_values,
@@ -8476,6 +8813,7 @@ module Aws::QuickSight
     #   <p>The additional options for display formatting.</p>
     #   @return [Types::DisplayFormatOptions]
     class DefaultFormatting < Struct.new(
+      nil,
       :display_format,
       :display_format_options,
       keyword_init: true
@@ -8488,6 +8826,7 @@ module Aws::QuickSight
     #   <p>Determines the screen canvas size options for a free-form layout.</p>
     #   @return [Types::FreeFormLayoutCanvasSizeOptions]
     class DefaultFreeFormLayoutConfiguration < Struct.new(
+      nil,
       :canvas_size_options,
       keyword_init: true
     )
@@ -8499,6 +8838,7 @@ module Aws::QuickSight
     #   <p>Determines the screen canvas size options for a grid layout.</p>
     #   @return [Types::GridLayoutCanvasSizeOptions]
     class DefaultGridLayoutConfiguration < Struct.new(
+      nil,
       :canvas_size_options,
       keyword_init: true
     )
@@ -8513,6 +8853,7 @@ module Aws::QuickSight
     #   <p>The options that determine the default settings of a free-form layout configuration.</p>
     #   @return [Types::DefaultFreeFormLayoutConfiguration]
     class DefaultInteractiveLayoutConfiguration < Struct.new(
+      nil,
       :grid,
       :free_form,
       keyword_init: true
@@ -8531,6 +8872,7 @@ module Aws::QuickSight
     #   <p>The option that determines the sheet content type.</p>
     #   @return [String]
     class DefaultNewSheetConfiguration < Struct.new(
+      nil,
       :interactive_layout_configuration,
       :paginated_layout_configuration,
       :sheet_content_type,
@@ -8544,6 +8886,7 @@ module Aws::QuickSight
     #   <p>The options that determine the default settings for a section-based layout configuration.</p>
     #   @return [Types::DefaultSectionBasedLayoutConfiguration]
     class DefaultPaginatedLayoutConfiguration < Struct.new(
+      nil,
       :section_based,
       keyword_init: true
     )
@@ -8558,6 +8901,7 @@ module Aws::QuickSight
     #   <p>The visibility configuration of the Apply button on a <code>RelativeDateTimeControl</code>.</p>
     #   @return [String]
     class DefaultRelativeDateTimeControlOptions < Struct.new(
+      nil,
       :display_options,
       :commit_mode,
       keyword_init: true
@@ -8570,6 +8914,7 @@ module Aws::QuickSight
     #   <p>Determines the screen canvas size options for a section-based layout.</p>
     #   @return [Types::SectionBasedLayoutCanvasSizeOptions]
     class DefaultSectionBasedLayoutConfiguration < Struct.new(
+      nil,
       :canvas_size_options,
       keyword_init: true
     )
@@ -8603,6 +8948,7 @@ module Aws::QuickSight
     #   <p>The number of increments that the slider bar is divided into.</p>
     #   @return [Float]
     class DefaultSliderControlOptions < Struct.new(
+      nil,
       :display_options,
       :type,
       :maximum_value,
@@ -8628,6 +8974,7 @@ module Aws::QuickSight
     #   <p>The display options of a control.</p>
     #   @return [Types::TextAreaControlDisplayOptions]
     class DefaultTextAreaControlOptions < Struct.new(
+      nil,
       :delimiter,
       :display_options,
       keyword_init: true
@@ -8640,6 +8987,7 @@ module Aws::QuickSight
     #   <p>The display options of a control.</p>
     #   @return [Types::TextFieldControlDisplayOptions]
     class DefaultTextFieldControlOptions < Struct.new(
+      nil,
       :display_options,
       keyword_init: true
     )
@@ -8650,6 +8998,7 @@ module Aws::QuickSight
     #   <p>The ID of the Amazon Web Services account from which you want to unapply the custom permissions profile.</p>
     #   @return [String]
     class DeleteAccountCustomPermissionRequest < Struct.new(
+      nil,
       :aws_account_id,
       keyword_init: true
     )
@@ -8663,6 +9012,7 @@ module Aws::QuickSight
     #   <p>The HTTP status of the request.</p>
     #   @return [Integer]
     class DeleteAccountCustomPermissionResponse < Struct.new(
+      nil,
       :request_id,
       :status,
       keyword_init: true
@@ -8683,6 +9033,7 @@ module Aws::QuickSight
     #   <p>The QuickSight namespace that you're deleting the customizations from.</p>
     #   @return [String]
     class DeleteAccountCustomizationRequest < Struct.new(
+      nil,
       :aws_account_id,
       :namespace,
       keyword_init: true
@@ -8697,6 +9048,7 @@ module Aws::QuickSight
     #   <p>The HTTP status of the request.</p>
     #   @return [Integer]
     class DeleteAccountCustomizationResponse < Struct.new(
+      nil,
       :request_id,
       :status,
       keyword_init: true
@@ -8713,6 +9065,7 @@ module Aws::QuickSight
     #   <p>The Amazon Web Services account ID of the account that you want to delete.</p>
     #   @return [String]
     class DeleteAccountSubscriptionRequest < Struct.new(
+      nil,
       :aws_account_id,
       keyword_init: true
     )
@@ -8726,6 +9079,7 @@ module Aws::QuickSight
     #   <p>The HTTP status of the request.</p>
     #   @return [Integer]
     class DeleteAccountSubscriptionResponse < Struct.new(
+      nil,
       :request_id,
       :status,
       keyword_init: true
@@ -8755,6 +9109,7 @@ module Aws::QuickSight
     #               You can't restore an analysis after it's deleted. </p>
     #   @return [Boolean]
     class DeleteAnalysisRequest < Struct.new(
+      nil,
       :aws_account_id,
       :analysis_id,
       :recovery_window_in_days,
@@ -8780,6 +9135,7 @@ module Aws::QuickSight
     #   <p>The Amazon Web Services request ID for this operation.</p>
     #   @return [String]
     class DeleteAnalysisResponse < Struct.new(
+      nil,
       :status,
       :arn,
       :analysis_id,
@@ -8799,6 +9155,7 @@ module Aws::QuickSight
     #   <p>The ID of the Amazon Web Services account that owns the brand assignment.</p>
     #   @return [String]
     class DeleteBrandAssignmentRequest < Struct.new(
+      nil,
       :aws_account_id,
       keyword_init: true
     )
@@ -8809,6 +9166,7 @@ module Aws::QuickSight
     #   <p>The Amazon Web Services request ID for this operation.</p>
     #   @return [String]
     class DeleteBrandAssignmentResponse < Struct.new(
+      nil,
       :request_id,
       keyword_init: true
     )
@@ -8822,6 +9180,7 @@ module Aws::QuickSight
     #   <p>The ID of the QuickSight brand.</p>
     #   @return [String]
     class DeleteBrandRequest < Struct.new(
+      nil,
       :aws_account_id,
       :brand_id,
       keyword_init: true
@@ -8833,6 +9192,7 @@ module Aws::QuickSight
     #   <p>The Amazon Web Services request ID for this operation.</p>
     #   @return [String]
     class DeleteBrandResponse < Struct.new(
+      nil,
       :request_id,
       keyword_init: true
     )
@@ -8846,6 +9206,7 @@ module Aws::QuickSight
     #   <p>The name of the custom permissions profile that you want to delete.</p>
     #   @return [String]
     class DeleteCustomPermissionsRequest < Struct.new(
+      nil,
       :aws_account_id,
       :custom_permissions_name,
       keyword_init: true
@@ -8863,6 +9224,7 @@ module Aws::QuickSight
     #   <p>The Amazon Web Services request ID for this operation.</p>
     #   @return [String]
     class DeleteCustomPermissionsResponse < Struct.new(
+      nil,
       :status,
       :arn,
       :request_id,
@@ -8888,6 +9250,7 @@ module Aws::QuickSight
     #               the specified version of the dashboard is deleted.</p>
     #   @return [Integer]
     class DeleteDashboardRequest < Struct.new(
+      nil,
       :aws_account_id,
       :dashboard_id,
       :version_number,
@@ -8909,6 +9272,7 @@ module Aws::QuickSight
     #   <p>The Amazon Web Services request ID for this operation.</p>
     #   @return [String]
     class DeleteDashboardResponse < Struct.new(
+      nil,
       :status,
       :arn,
       :dashboard_id,
@@ -8930,6 +9294,7 @@ module Aws::QuickSight
     #   <p>The ID of the dataset.</p>
     #   @return [String]
     class DeleteDataSetRefreshPropertiesRequest < Struct.new(
+      nil,
       :aws_account_id,
       :data_set_id,
       keyword_init: true
@@ -8944,6 +9309,7 @@ module Aws::QuickSight
     #   <p>The HTTP status of the request.</p>
     #   @return [Integer]
     class DeleteDataSetRefreshPropertiesResponse < Struct.new(
+      nil,
       :request_id,
       :status,
       keyword_init: true
@@ -8963,6 +9329,7 @@ module Aws::QuickSight
     #   <p>The ID for the dataset that you want to create. This ID is unique per Amazon Web Services Region for each Amazon Web Services account.</p>
     #   @return [String]
     class DeleteDataSetRequest < Struct.new(
+      nil,
       :aws_account_id,
       :data_set_id,
       keyword_init: true
@@ -8983,6 +9350,7 @@ module Aws::QuickSight
     #   <p>The HTTP status of the request.</p>
     #   @return [Integer]
     class DeleteDataSetResponse < Struct.new(
+      nil,
       :arn,
       :data_set_id,
       :request_id,
@@ -9004,6 +9372,7 @@ module Aws::QuickSight
     #   <p>The ID of the data source. This ID is unique per Amazon Web Services Region for each Amazon Web Services account.</p>
     #   @return [String]
     class DeleteDataSourceRequest < Struct.new(
+      nil,
       :aws_account_id,
       :data_source_id,
       keyword_init: true
@@ -9024,6 +9393,7 @@ module Aws::QuickSight
     #   <p>The HTTP status of the request.</p>
     #   @return [Integer]
     class DeleteDataSourceResponse < Struct.new(
+      nil,
       :arn,
       :data_source_id,
       :request_id,
@@ -9045,6 +9415,7 @@ module Aws::QuickSight
     #   <p>The QuickSight namespace that you want to delete a linked Amazon Q Business application from. If this field is left blank, the Amazon Q Business application is deleted from the default namespace. Currently, the default namespace is the only valid value for this parameter.</p>
     #   @return [String]
     class DeleteDefaultQBusinessApplicationRequest < Struct.new(
+      nil,
       :aws_account_id,
       :namespace,
       keyword_init: true
@@ -9059,6 +9430,7 @@ module Aws::QuickSight
     #   <p>The HTTP status of the request.</p>
     #   @return [Integer]
     class DeleteDefaultQBusinessApplicationResponse < Struct.new(
+      nil,
       :request_id,
       :status,
       keyword_init: true
@@ -9084,6 +9456,7 @@ module Aws::QuickSight
     #   <p>The member type of the asset that you want to delete from a folder.</p>
     #   @return [String]
     class DeleteFolderMembershipRequest < Struct.new(
+      nil,
       :aws_account_id,
       :folder_id,
       :member_id,
@@ -9100,6 +9473,7 @@ module Aws::QuickSight
     #   <p>The Amazon Web Services request ID for this operation.</p>
     #   @return [String]
     class DeleteFolderMembershipResponse < Struct.new(
+      nil,
       :status,
       :request_id,
       keyword_init: true
@@ -9119,6 +9493,7 @@ module Aws::QuickSight
     #   <p>The ID of the folder.</p>
     #   @return [String]
     class DeleteFolderRequest < Struct.new(
+      nil,
       :aws_account_id,
       :folder_id,
       keyword_init: true
@@ -9139,6 +9514,7 @@ module Aws::QuickSight
     #   <p>The Amazon Web Services request ID for this operation.</p>
     #   @return [String]
     class DeleteFolderResponse < Struct.new(
+      nil,
       :status,
       :arn,
       :folder_id,
@@ -9167,6 +9543,7 @@ module Aws::QuickSight
     #   <p>The namespace of the group that you want to remove a user from.</p>
     #   @return [String]
     class DeleteGroupMembershipRequest < Struct.new(
+      nil,
       :member_name,
       :group_name,
       :aws_account_id,
@@ -9183,6 +9560,7 @@ module Aws::QuickSight
     #   <p>The HTTP status of the request.</p>
     #   @return [Integer]
     class DeleteGroupMembershipResponse < Struct.new(
+      nil,
       :request_id,
       :status,
       keyword_init: true
@@ -9206,6 +9584,7 @@ module Aws::QuickSight
     #   <p>The namespace of the group that you want to delete.</p>
     #   @return [String]
     class DeleteGroupRequest < Struct.new(
+      nil,
       :group_name,
       :aws_account_id,
       :namespace,
@@ -9221,6 +9600,7 @@ module Aws::QuickSight
     #   <p>The HTTP status of the request.</p>
     #   @return [Integer]
     class DeleteGroupResponse < Struct.new(
+      nil,
       :request_id,
       :status,
       keyword_init: true
@@ -9244,6 +9624,7 @@ module Aws::QuickSight
     #   <p>The namespace that contains the assignment.</p>
     #   @return [String]
     class DeleteIAMPolicyAssignmentRequest < Struct.new(
+      nil,
       :aws_account_id,
       :assignment_name,
       :namespace,
@@ -9262,6 +9643,7 @@ module Aws::QuickSight
     #   <p>The HTTP status of the request.</p>
     #   @return [Integer]
     class DeleteIAMPolicyAssignmentResponse < Struct.new(
+      nil,
       :assignment_name,
       :request_id,
       :status,
@@ -9282,6 +9664,7 @@ module Aws::QuickSight
     #   <p>The name of the Amazon Web Services service that you want to delete the associated access scopes and authorized targets from.</p>
     #   @return [String]
     class DeleteIdentityPropagationConfigRequest < Struct.new(
+      nil,
       :aws_account_id,
       :service,
       keyword_init: true
@@ -9296,6 +9679,7 @@ module Aws::QuickSight
     #   <p>The HTTP status of the request.</p>
     #   @return [Integer]
     class DeleteIdentityPropagationConfigResponse < Struct.new(
+      nil,
       :request_id,
       :status,
       keyword_init: true
@@ -9315,6 +9699,7 @@ module Aws::QuickSight
     #   <p>The namespace that you want to delete.</p>
     #   @return [String]
     class DeleteNamespaceRequest < Struct.new(
+      nil,
       :aws_account_id,
       :namespace,
       keyword_init: true
@@ -9329,6 +9714,7 @@ module Aws::QuickSight
     #   <p>The HTTP status of the request.</p>
     #   @return [Integer]
     class DeleteNamespaceResponse < Struct.new(
+      nil,
       :request_id,
       :status,
       keyword_init: true
@@ -9351,6 +9737,7 @@ module Aws::QuickSight
     #   <p>The ID of the refresh schedule.</p>
     #   @return [String]
     class DeleteRefreshScheduleRequest < Struct.new(
+      nil,
       :data_set_id,
       :aws_account_id,
       :schedule_id,
@@ -9372,6 +9759,7 @@ module Aws::QuickSight
     #   <p>The Amazon Resource Name (ARN) for the refresh schedule.</p>
     #   @return [String]
     class DeleteRefreshScheduleResponse < Struct.new(
+      nil,
       :status,
       :request_id,
       :schedule_id,
@@ -9397,6 +9785,7 @@ module Aws::QuickSight
     #   <p>The namespace that includes the role.</p>
     #   @return [String]
     class DeleteRoleCustomPermissionRequest < Struct.new(
+      nil,
       :role,
       :aws_account_id,
       :namespace,
@@ -9412,6 +9801,7 @@ module Aws::QuickSight
     #   <p>The HTTP status of the request.</p>
     #   @return [Integer]
     class DeleteRoleCustomPermissionResponse < Struct.new(
+      nil,
       :request_id,
       :status,
       keyword_init: true
@@ -9437,6 +9827,7 @@ module Aws::QuickSight
     #   <p>The namespace that contains the role.</p>
     #   @return [String]
     class DeleteRoleMembershipRequest < Struct.new(
+      nil,
       :member_name,
       :role,
       :aws_account_id,
@@ -9453,6 +9844,7 @@ module Aws::QuickSight
     #   <p>The HTTP status of the request.</p>
     #   @return [Integer]
     class DeleteRoleMembershipResponse < Struct.new(
+      nil,
       :request_id,
       :status,
       keyword_init: true
@@ -9478,6 +9870,7 @@ module Aws::QuickSight
     #   			parameter. </p>
     #   @return [String]
     class DeleteTemplateAliasRequest < Struct.new(
+      nil,
       :aws_account_id,
       :template_id,
       :alias_name,
@@ -9502,6 +9895,7 @@ module Aws::QuickSight
     #   <p>The Amazon Web Services request ID for this operation.</p>
     #   @return [String]
     class DeleteTemplateAliasResponse < Struct.new(
+      nil,
       :status,
       :template_id,
       :alias_name,
@@ -9529,6 +9923,7 @@ module Aws::QuickSight
     #   	 </p>
     #   @return [Integer]
     class DeleteTemplateRequest < Struct.new(
+      nil,
       :aws_account_id,
       :template_id,
       :version_number,
@@ -9550,6 +9945,7 @@ module Aws::QuickSight
     #   <p>The HTTP status of the request.</p>
     #   @return [Integer]
     class DeleteTemplateResponse < Struct.new(
+      nil,
       :request_id,
       :arn,
       :template_id,
@@ -9574,6 +9970,7 @@ module Aws::QuickSight
     #   <p>The unique name for the theme alias to delete.</p>
     #   @return [String]
     class DeleteThemeAliasRequest < Struct.new(
+      nil,
       :aws_account_id,
       :theme_id,
       :alias_name,
@@ -9598,6 +9995,7 @@ module Aws::QuickSight
     #   <p>An ID for the theme associated with the deletion.</p>
     #   @return [String]
     class DeleteThemeAliasResponse < Struct.new(
+      nil,
       :alias_name,
       :arn,
       :request_id,
@@ -9626,6 +10024,7 @@ module Aws::QuickSight
     #   			using this call to <code>DeleteTheme</code> to delete all versions of the theme.</p>
     #   @return [Integer]
     class DeleteThemeRequest < Struct.new(
+      nil,
       :aws_account_id,
       :theme_id,
       :version_number,
@@ -9647,6 +10046,7 @@ module Aws::QuickSight
     #   <p>An ID for the theme.</p>
     #   @return [String]
     class DeleteThemeResponse < Struct.new(
+      nil,
       :arn,
       :request_id,
       :status,
@@ -9671,6 +10071,7 @@ module Aws::QuickSight
     #   <p>The ID of the dataset.</p>
     #   @return [String]
     class DeleteTopicRefreshScheduleRequest < Struct.new(
+      nil,
       :aws_account_id,
       :topic_id,
       :dataset_id,
@@ -9695,6 +10096,7 @@ module Aws::QuickSight
     #   <p>The Amazon Web Services request ID for this operation.</p>
     #   @return [String]
     class DeleteTopicRefreshScheduleResponse < Struct.new(
+      nil,
       :topic_id,
       :topic_arn,
       :dataset_arn,
@@ -9718,6 +10120,7 @@ module Aws::QuickSight
     #   <p>The ID of the topic that you want to delete. This ID is unique per Amazon Web Services Region for each Amazon Web Services account.</p>
     #   @return [String]
     class DeleteTopicRequest < Struct.new(
+      nil,
       :aws_account_id,
       :topic_id,
       keyword_init: true
@@ -9738,6 +10141,7 @@ module Aws::QuickSight
     #   <p>The HTTP status of the request.</p>
     #   @return [Integer]
     class DeleteTopicResponse < Struct.new(
+      nil,
       :arn,
       :topic_id,
       :request_id,
@@ -9764,6 +10168,7 @@ module Aws::QuickSight
     #   <p>The namespace. Currently, you should set this to <code>default</code>.</p>
     #   @return [String]
     class DeleteUserByPrincipalIdRequest < Struct.new(
+      nil,
       :principal_id,
       :aws_account_id,
       :namespace,
@@ -9779,6 +10184,7 @@ module Aws::QuickSight
     #   <p>The HTTP status of the request.</p>
     #   @return [Integer]
     class DeleteUserByPrincipalIdResponse < Struct.new(
+      nil,
       :request_id,
       :status,
       keyword_init: true
@@ -9801,6 +10207,7 @@ module Aws::QuickSight
     #   <p>The namespace that the user belongs to.</p>
     #   @return [String]
     class DeleteUserCustomPermissionRequest < Struct.new(
+      nil,
       :user_name,
       :aws_account_id,
       :namespace,
@@ -9816,6 +10223,7 @@ module Aws::QuickSight
     #   <p>The HTTP status of the request.</p>
     #   @return [Integer]
     class DeleteUserCustomPermissionResponse < Struct.new(
+      nil,
       :request_id,
       :status,
       keyword_init: true
@@ -9839,6 +10247,7 @@ module Aws::QuickSight
     #   <p>The namespace. Currently, you should set this to <code>default</code>.</p>
     #   @return [String]
     class DeleteUserRequest < Struct.new(
+      nil,
       :user_name,
       :aws_account_id,
       :namespace,
@@ -9854,6 +10263,7 @@ module Aws::QuickSight
     #   <p>The HTTP status of the request.</p>
     #   @return [Integer]
     class DeleteUserResponse < Struct.new(
+      nil,
       :request_id,
       :status,
       keyword_init: true
@@ -9875,6 +10285,7 @@ module Aws::QuickSight
     #   				Amazon Web Services account.</p>
     #   @return [String]
     class DeleteVPCConnectionRequest < Struct.new(
+      nil,
       :aws_account_id,
       :vpc_connection_id,
       keyword_init: true
@@ -9903,6 +10314,7 @@ module Aws::QuickSight
     #   <p>The HTTP status of the request.</p>
     #   @return [Integer]
     class DeleteVPCConnectionResponse < Struct.new(
+      nil,
       :arn,
       :vpc_connection_id,
       :deletion_status,
@@ -9923,6 +10335,7 @@ module Aws::QuickSight
     #   <p>The ID of the Amazon Web Services account for which you want to describe the applied custom permissions profile.</p>
     #   @return [String]
     class DescribeAccountCustomPermissionRequest < Struct.new(
+      nil,
       :aws_account_id,
       keyword_init: true
     )
@@ -9939,6 +10352,7 @@ module Aws::QuickSight
     #   <p>The HTTP status of the request.</p>
     #   @return [Integer]
     class DescribeAccountCustomPermissionResponse < Struct.new(
+      nil,
       :custom_permissions_name,
       :request_id,
       :status,
@@ -9968,6 +10382,7 @@ module Aws::QuickSight
     #               that are configured at different levels. </p>
     #   @return [Boolean]
     class DescribeAccountCustomizationRequest < Struct.new(
+      nil,
       :aws_account_id,
       :namespace,
       :resolved,
@@ -9995,6 +10410,7 @@ module Aws::QuickSight
     #   <p>The HTTP status of the request.</p>
     #   @return [Integer]
     class DescribeAccountCustomizationResponse < Struct.new(
+      nil,
       :arn,
       :aws_account_id,
       :namespace,
@@ -10015,6 +10431,7 @@ module Aws::QuickSight
     #   <p>The ID for the Amazon Web Services account that contains the settings that you want to list.</p>
     #   @return [String]
     class DescribeAccountSettingsRequest < Struct.new(
+      nil,
       :aws_account_id,
       keyword_init: true
     )
@@ -10037,6 +10454,7 @@ module Aws::QuickSight
     #   <p>The HTTP status of the request.</p>
     #   @return [Integer]
     class DescribeAccountSettingsResponse < Struct.new(
+      nil,
       :account_settings,
       :request_id,
       :status,
@@ -10054,6 +10472,7 @@ module Aws::QuickSight
     #   <p>The Amazon Web Services account ID associated with your QuickSight account.</p>
     #   @return [String]
     class DescribeAccountSubscriptionRequest < Struct.new(
+      nil,
       :aws_account_id,
       keyword_init: true
     )
@@ -10089,6 +10508,7 @@ module Aws::QuickSight
     #   <p>The Amazon Web Services request ID for this operation.</p>
     #   @return [String]
     class DescribeAccountSubscriptionResponse < Struct.new(
+      nil,
       :account_info,
       :status,
       :request_id,
@@ -10111,6 +10531,7 @@ module Aws::QuickSight
     #               analysis.</p>
     #   @return [String]
     class DescribeAnalysisDefinitionRequest < Struct.new(
+      nil,
       :aws_account_id,
       :analysis_id,
       keyword_init: true
@@ -10181,6 +10602,7 @@ module Aws::QuickSight
     #   <p>The Amazon Web Services request ID for this operation.</p>
     #   @return [String]
     class DescribeAnalysisDefinitionResponse < Struct.new(
+      nil,
       :analysis_id,
       :name,
       :errors,
@@ -10208,6 +10630,7 @@ module Aws::QuickSight
     #               analysis URL.</p>
     #   @return [String]
     class DescribeAnalysisPermissionsRequest < Struct.new(
+      nil,
       :aws_account_id,
       :analysis_id,
       keyword_init: true
@@ -10233,6 +10656,7 @@ module Aws::QuickSight
     #   <p>The Amazon Web Services request ID for this operation.</p>
     #   @return [String]
     class DescribeAnalysisPermissionsResponse < Struct.new(
+      nil,
       :analysis_id,
       :analysis_arn,
       :permissions,
@@ -10257,6 +10681,7 @@ module Aws::QuickSight
     #               analysis.</p>
     #   @return [String]
     class DescribeAnalysisRequest < Struct.new(
+      nil,
       :aws_account_id,
       :analysis_id,
       keyword_init: true
@@ -10275,6 +10700,7 @@ module Aws::QuickSight
     #   <p>The Amazon Web Services request ID for this operation.</p>
     #   @return [String]
     class DescribeAnalysisResponse < Struct.new(
+      nil,
       :analysis,
       :status,
       :request_id,
@@ -10295,6 +10721,7 @@ module Aws::QuickSight
     #   <p>The ID of the job that you want described. The job ID is set when you start a new job with a <code>StartAssetBundleExportJob</code> API call.</p>
     #   @return [String]
     class DescribeAssetBundleExportJobRequest < Struct.new(
+      nil,
       :aws_account_id,
       :asset_bundle_export_job_id,
       keyword_init: true
@@ -10366,6 +10793,7 @@ module Aws::QuickSight
     #   <p>A setting that determines whether folder members are included.</p>
     #   @return [String]
     class DescribeAssetBundleExportJobResponse < Struct.new(
+      nil,
       :job_status,
       :download_url,
       :errors,
@@ -10406,6 +10834,7 @@ module Aws::QuickSight
     #   <p>The ID of the job. The job ID is set when you start a new job with a <code>StartAssetBundleImportJob</code> API call.</p>
     #   @return [String]
     class DescribeAssetBundleImportJobRequest < Struct.new(
+      nil,
       :aws_account_id,
       :asset_bundle_import_job_id,
       keyword_init: true
@@ -10487,6 +10916,7 @@ module Aws::QuickSight
     #   <p>An array of warning records that describe all permitted errors that are encountered during the import job.</p>
     #   @return [Array<Types::AssetBundleImportJobWarning>]
     class DescribeAssetBundleImportJobResponse < Struct.new(
+      nil,
       :job_status,
       :errors,
       :rollback_errors,
@@ -10517,6 +10947,7 @@ module Aws::QuickSight
     #   <p>The ID of the Amazon Web Services account that owns the brand assignment.</p>
     #   @return [String]
     class DescribeBrandAssignmentRequest < Struct.new(
+      nil,
       :aws_account_id,
       keyword_init: true
     )
@@ -10530,6 +10961,7 @@ module Aws::QuickSight
     #   <p>The Amazon Resource Name (ARN) of the brand.</p>
     #   @return [String]
     class DescribeBrandAssignmentResponse < Struct.new(
+      nil,
       :request_id,
       :brand_arn,
       keyword_init: true
@@ -10544,6 +10976,7 @@ module Aws::QuickSight
     #   <p>The ID of the QuickSight brand.</p>
     #   @return [String]
     class DescribeBrandPublishedVersionRequest < Struct.new(
+      nil,
       :aws_account_id,
       :brand_id,
       keyword_init: true
@@ -10561,6 +10994,7 @@ module Aws::QuickSight
     #   <p>The definition of the brand.</p>
     #   @return [Types::BrandDefinition]
     class DescribeBrandPublishedVersionResponse < Struct.new(
+      nil,
       :request_id,
       :brand_detail,
       :brand_definition,
@@ -10579,6 +11013,7 @@ module Aws::QuickSight
     #   <p>The ID of the specific version. The default value is the latest version.</p>
     #   @return [String]
     class DescribeBrandRequest < Struct.new(
+      nil,
       :aws_account_id,
       :brand_id,
       :version_id,
@@ -10597,6 +11032,7 @@ module Aws::QuickSight
     #   <p>The definition of the brand.</p>
     #   @return [Types::BrandDefinition]
     class DescribeBrandResponse < Struct.new(
+      nil,
       :request_id,
       :brand_detail,
       :brand_definition,
@@ -10612,6 +11048,7 @@ module Aws::QuickSight
     #   <p>The name of the custom permissions profile to describe.</p>
     #   @return [String]
     class DescribeCustomPermissionsRequest < Struct.new(
+      nil,
       :aws_account_id,
       :custom_permissions_name,
       keyword_init: true
@@ -10629,6 +11066,7 @@ module Aws::QuickSight
     #   <p>The Amazon Web Services request ID for this operation.</p>
     #   @return [String]
     class DescribeCustomPermissionsResponse < Struct.new(
+      nil,
       :status,
       :custom_permissions,
       :request_id,
@@ -10657,6 +11095,7 @@ module Aws::QuickSight
     #   <p>The alias name.</p>
     #   @return [String]
     class DescribeDashboardDefinitionRequest < Struct.new(
+      nil,
       :aws_account_id,
       :dashboard_id,
       :version_number,
@@ -10769,6 +11208,7 @@ module Aws::QuickSight
     #            </ul>
     #   @return [Types::DashboardPublishOptions]
     class DescribeDashboardDefinitionResponse < Struct.new(
+      nil,
       :dashboard_id,
       :errors,
       :name,
@@ -10796,6 +11236,7 @@ module Aws::QuickSight
     #   <p>The ID for the dashboard, also added to the IAM policy.</p>
     #   @return [String]
     class DescribeDashboardPermissionsRequest < Struct.new(
+      nil,
       :aws_account_id,
       :dashboard_id,
       keyword_init: true
@@ -10825,6 +11266,7 @@ module Aws::QuickSight
     #               see <a href="https://docs.aws.amazon.com/quicksight/latest/user/sharing-a-dashboard.html">Sharing Dashboards</a>.</p>
     #   @return [Types::LinkSharingConfiguration]
     class DescribeDashboardPermissionsResponse < Struct.new(
+      nil,
       :dashboard_id,
       :dashboard_arn,
       :permissions,
@@ -10856,6 +11298,7 @@ module Aws::QuickSight
     #   <p>The alias name.</p>
     #   @return [String]
     class DescribeDashboardRequest < Struct.new(
+      nil,
       :aws_account_id,
       :dashboard_id,
       :version_number,
@@ -10875,6 +11318,7 @@ module Aws::QuickSight
     #   <p>The Amazon Web Services request ID for this operation.</p>
     #   @return [String]
     class DescribeDashboardResponse < Struct.new(
+      nil,
       :dashboard,
       :status,
       :request_id,
@@ -10898,6 +11342,7 @@ module Aws::QuickSight
     #   <p>The ID of the job to be described. The job ID is set when you start a new job with a <code>StartDashboardSnapshotJob</code> API call.</p>
     #   @return [String]
     class DescribeDashboardSnapshotJobRequest < Struct.new(
+      nil,
       :aws_account_id,
       :dashboard_id,
       :snapshot_job_id,
@@ -10966,6 +11411,7 @@ module Aws::QuickSight
     #   <p>The HTTP status of the request</p>
     #   @return [Integer]
     class DescribeDashboardSnapshotJobResponse < Struct.new(
+      nil,
       :aws_account_id,
       :dashboard_id,
       :snapshot_job_id,
@@ -10997,6 +11443,7 @@ module Aws::QuickSight
     #   <p>The ID of the job to be described. The job ID is set when you start a new job with a <code>StartDashboardSnapshotJob</code> API call.</p>
     #   @return [String]
     class DescribeDashboardSnapshotJobResultRequest < Struct.new(
+      nil,
       :aws_account_id,
       :dashboard_id,
       :snapshot_job_id,
@@ -11030,6 +11477,7 @@ module Aws::QuickSight
     #   <p>The HTTP status of the request</p>
     #   @return [Integer]
     class DescribeDashboardSnapshotJobResultResponse < Struct.new(
+      nil,
       :arn,
       :job_status,
       :created_time,
@@ -11052,6 +11500,7 @@ module Aws::QuickSight
     #   <p>The ID of the Amazon Web Services account that contains the dashboard QA configuration that you want described.</p>
     #   @return [String]
     class DescribeDashboardsQAConfigurationRequest < Struct.new(
+      nil,
       :aws_account_id,
       keyword_init: true
     )
@@ -11068,6 +11517,7 @@ module Aws::QuickSight
     #   <p>The HTTP status of the request.</p>
     #   @return [Integer]
     class DescribeDashboardsQAConfigurationResponse < Struct.new(
+      nil,
       :dashboards_qa_status,
       :request_id,
       :status,
@@ -11088,6 +11538,7 @@ module Aws::QuickSight
     #   <p>The ID for the dataset that you want to create. This ID is unique per Amazon Web Services Region for each Amazon Web Services account.</p>
     #   @return [String]
     class DescribeDataSetPermissionsRequest < Struct.new(
+      nil,
       :aws_account_id,
       :data_set_id,
       keyword_init: true
@@ -11111,6 +11562,7 @@ module Aws::QuickSight
     #   <p>The HTTP status of the request.</p>
     #   @return [Integer]
     class DescribeDataSetPermissionsResponse < Struct.new(
+      nil,
       :data_set_arn,
       :data_set_id,
       :permissions,
@@ -11133,6 +11585,7 @@ module Aws::QuickSight
     #   <p>The ID of the dataset.</p>
     #   @return [String]
     class DescribeDataSetRefreshPropertiesRequest < Struct.new(
+      nil,
       :aws_account_id,
       :data_set_id,
       keyword_init: true
@@ -11150,6 +11603,7 @@ module Aws::QuickSight
     #   <p>The dataset refresh properties.</p>
     #   @return [Types::DataSetRefreshProperties]
     class DescribeDataSetRefreshPropertiesResponse < Struct.new(
+      nil,
       :request_id,
       :status,
       :data_set_refresh_properties,
@@ -11170,6 +11624,7 @@ module Aws::QuickSight
     #   <p>The ID for the dataset that you want to create. This ID is unique per Amazon Web Services Region for each Amazon Web Services account.</p>
     #   @return [String]
     class DescribeDataSetRequest < Struct.new(
+      nil,
       :aws_account_id,
       :data_set_id,
       keyword_init: true
@@ -11187,6 +11642,7 @@ module Aws::QuickSight
     #   <p>The HTTP status of the request.</p>
     #   @return [Integer]
     class DescribeDataSetResponse < Struct.new(
+      nil,
       :data_set,
       :request_id,
       :status,
@@ -11207,6 +11663,7 @@ module Aws::QuickSight
     #   <p>The ID of the data source. This ID is unique per Amazon Web Services Region for each Amazon Web Services account.</p>
     #   @return [String]
     class DescribeDataSourcePermissionsRequest < Struct.new(
+      nil,
       :aws_account_id,
       :data_source_id,
       keyword_init: true
@@ -11230,6 +11687,7 @@ module Aws::QuickSight
     #   <p>The HTTP status of the request.</p>
     #   @return [Integer]
     class DescribeDataSourcePermissionsResponse < Struct.new(
+      nil,
       :data_source_arn,
       :data_source_id,
       :permissions,
@@ -11252,6 +11710,7 @@ module Aws::QuickSight
     #   <p>The ID of the data source. This ID is unique per Amazon Web Services Region for each Amazon Web Services account.</p>
     #   @return [String]
     class DescribeDataSourceRequest < Struct.new(
+      nil,
       :aws_account_id,
       :data_source_id,
       keyword_init: true
@@ -11269,6 +11728,7 @@ module Aws::QuickSight
     #   <p>The HTTP status of the request.</p>
     #   @return [Integer]
     class DescribeDataSourceResponse < Struct.new(
+      nil,
       :data_source,
       :request_id,
       :status,
@@ -11289,6 +11749,7 @@ module Aws::QuickSight
     #   <p>The QuickSight namespace that contains the linked Amazon Q Business application. If this field is left blank, the default namespace is used. Currently, the default namespace is the only valid value for this parameter.</p>
     #   @return [String]
     class DescribeDefaultQBusinessApplicationRequest < Struct.new(
+      nil,
       :aws_account_id,
       :namespace,
       keyword_init: true
@@ -11306,6 +11767,7 @@ module Aws::QuickSight
     #   <p>The ID of the Amazon Q Business application that is linked to the QuickSight account.</p>
     #   @return [String]
     class DescribeDefaultQBusinessApplicationResponse < Struct.new(
+      nil,
       :request_id,
       :status,
       :application_id,
@@ -11335,6 +11797,7 @@ module Aws::QuickSight
     #   <p>A pagination token for the next set of results.</p>
     #   @return [String]
     class DescribeFolderPermissionsRequest < Struct.new(
+      nil,
       :aws_account_id,
       :folder_id,
       :namespace,
@@ -11364,6 +11827,7 @@ module Aws::QuickSight
     #   <p>The pagination token for the next set of results, or null if there are no more results.</p>
     #   @return [String]
     class DescribeFolderPermissionsResponse < Struct.new(
+      nil,
       :status,
       :folder_id,
       :arn,
@@ -11387,6 +11851,7 @@ module Aws::QuickSight
     #   <p>The ID of the folder.</p>
     #   @return [String]
     class DescribeFolderRequest < Struct.new(
+      nil,
       :aws_account_id,
       :folder_id,
       keyword_init: true
@@ -11410,6 +11875,7 @@ module Aws::QuickSight
     #   <p>A pagination token for the next set of results.</p>
     #   @return [String]
     class DescribeFolderResolvedPermissionsRequest < Struct.new(
+      nil,
       :aws_account_id,
       :folder_id,
       :namespace,
@@ -11439,6 +11905,7 @@ module Aws::QuickSight
     #   <p>A pagination token for the next set of results, or null if there are no more results.</p>
     #   @return [String]
     class DescribeFolderResolvedPermissionsResponse < Struct.new(
+      nil,
       :status,
       :folder_id,
       :arn,
@@ -11465,6 +11932,7 @@ module Aws::QuickSight
     #   <p>The Amazon Web Services request ID for this operation.</p>
     #   @return [String]
     class DescribeFolderResponse < Struct.new(
+      nil,
       :status,
       :folder,
       :request_id,
@@ -11492,6 +11960,7 @@ module Aws::QuickSight
     #   <p>The namespace that includes the group you are searching within.</p>
     #   @return [String]
     class DescribeGroupMembershipRequest < Struct.new(
+      nil,
       :member_name,
       :group_name,
       :aws_account_id,
@@ -11512,6 +11981,7 @@ module Aws::QuickSight
     #   <p>The HTTP status of the request.</p>
     #   @return [Integer]
     class DescribeGroupMembershipResponse < Struct.new(
+      nil,
       :group_member,
       :request_id,
       :status,
@@ -11536,6 +12006,7 @@ module Aws::QuickSight
     #   <p>The namespace of the group that you want described.</p>
     #   @return [String]
     class DescribeGroupRequest < Struct.new(
+      nil,
       :group_name,
       :aws_account_id,
       :namespace,
@@ -11554,6 +12025,7 @@ module Aws::QuickSight
     #   <p>The HTTP status of the request.</p>
     #   @return [Integer]
     class DescribeGroupResponse < Struct.new(
+      nil,
       :group,
       :request_id,
       :status,
@@ -11578,6 +12050,7 @@ module Aws::QuickSight
     #   <p>The namespace that contains the assignment.</p>
     #   @return [String]
     class DescribeIAMPolicyAssignmentRequest < Struct.new(
+      nil,
       :aws_account_id,
       :assignment_name,
       :namespace,
@@ -11596,6 +12069,7 @@ module Aws::QuickSight
     #   <p>The HTTP status of the request.</p>
     #   @return [Integer]
     class DescribeIAMPolicyAssignmentResponse < Struct.new(
+      nil,
       :iam_policy_assignment,
       :request_id,
       :status,
@@ -11619,6 +12093,7 @@ module Aws::QuickSight
     #   <p>An ID for the ingestion.</p>
     #   @return [String]
     class DescribeIngestionRequest < Struct.new(
+      nil,
       :aws_account_id,
       :data_set_id,
       :ingestion_id,
@@ -11637,6 +12112,7 @@ module Aws::QuickSight
     #   <p>The HTTP status of the request.</p>
     #   @return [Integer]
     class DescribeIngestionResponse < Struct.new(
+      nil,
       :ingestion,
       :request_id,
       :status,
@@ -11654,6 +12130,7 @@ module Aws::QuickSight
     #   <p>The ID of the Amazon Web Services account that contains the IP rules.</p>
     #   @return [String]
     class DescribeIpRestrictionRequest < Struct.new(
+      nil,
       :aws_account_id,
       keyword_init: true
     )
@@ -11683,6 +12160,7 @@ module Aws::QuickSight
     #   			</p>
     #   @return [Integer]
     class DescribeIpRestrictionResponse < Struct.new(
+      nil,
       :aws_account_id,
       :ip_restriction_rule_map,
       :vpc_id_restriction_rule_map,
@@ -11707,6 +12185,7 @@ module Aws::QuickSight
     #   <p>Determines whether the request returns the default key only.</p>
     #   @return [Boolean]
     class DescribeKeyRegistrationRequest < Struct.new(
+      nil,
       :aws_account_id,
       :default_key_only,
       keyword_init: true
@@ -11730,6 +12209,7 @@ module Aws::QuickSight
     #   <p>The HTTP status of the request.</p>
     #   @return [Integer]
     class DescribeKeyRegistrationResponse < Struct.new(
+      nil,
       :aws_account_id,
       :key_registration,
       :q_data_key,
@@ -11752,6 +12232,7 @@ module Aws::QuickSight
     #   <p>The namespace that you want to describe.</p>
     #   @return [String]
     class DescribeNamespaceRequest < Struct.new(
+      nil,
       :aws_account_id,
       :namespace,
       keyword_init: true
@@ -11772,6 +12253,7 @@ module Aws::QuickSight
     #   <p>The HTTP status of the request.</p>
     #   @return [Integer]
     class DescribeNamespaceResponse < Struct.new(
+      nil,
       :namespace,
       :request_id,
       :status,
@@ -11789,6 +12271,7 @@ module Aws::QuickSight
     #   <p>The ID of the Amazon Web Services account that contains the personalization configuration that the user wants described.</p>
     #   @return [String]
     class DescribeQPersonalizationConfigurationRequest < Struct.new(
+      nil,
       :aws_account_id,
       keyword_init: true
     )
@@ -11805,6 +12288,7 @@ module Aws::QuickSight
     #   <p>The HTTP status of the request.</p>
     #   @return [Integer]
     class DescribeQPersonalizationConfigurationResponse < Struct.new(
+      nil,
       :personalization_mode,
       :request_id,
       :status,
@@ -11822,6 +12306,7 @@ module Aws::QuickSight
     #   <p>The ID of the Amazon Web Services account that contains the QuickSight Q Search configuration that the user wants described.</p>
     #   @return [String]
     class DescribeQuickSightQSearchConfigurationRequest < Struct.new(
+      nil,
       :aws_account_id,
       keyword_init: true
     )
@@ -11838,6 +12323,7 @@ module Aws::QuickSight
     #   <p>The HTTP status of the request.</p>
     #   @return [Integer]
     class DescribeQuickSightQSearchConfigurationResponse < Struct.new(
+      nil,
       :q_search_status,
       :request_id,
       :status,
@@ -11861,6 +12347,7 @@ module Aws::QuickSight
     #   <p>The ID of the refresh schedule.</p>
     #   @return [String]
     class DescribeRefreshScheduleRequest < Struct.new(
+      nil,
       :aws_account_id,
       :data_set_id,
       :schedule_id,
@@ -11882,6 +12369,7 @@ module Aws::QuickSight
     #   <p>The Amazon Resource Name (ARN) for the refresh schedule.</p>
     #   @return [String]
     class DescribeRefreshScheduleResponse < Struct.new(
+      nil,
       :refresh_schedule,
       :status,
       :request_id,
@@ -11906,6 +12394,7 @@ module Aws::QuickSight
     #   <p>The namespace that contains the role.</p>
     #   @return [String]
     class DescribeRoleCustomPermissionRequest < Struct.new(
+      nil,
       :role,
       :aws_account_id,
       :namespace,
@@ -11924,6 +12413,7 @@ module Aws::QuickSight
     #   <p>The HTTP status of the request.</p>
     #   @return [Integer]
     class DescribeRoleCustomPermissionResponse < Struct.new(
+      nil,
       :custom_permissions_name,
       :request_id,
       :status,
@@ -11951,6 +12441,7 @@ module Aws::QuickSight
     #   			parameter. The keyword <code>$PUBLISHED</code> doesn't apply to templates.</p>
     #   @return [String]
     class DescribeTemplateAliasRequest < Struct.new(
+      nil,
       :aws_account_id,
       :template_id,
       :alias_name,
@@ -11969,6 +12460,7 @@ module Aws::QuickSight
     #   <p>The Amazon Web Services request ID for this operation.</p>
     #   @return [String]
     class DescribeTemplateAliasResponse < Struct.new(
+      nil,
       :template_alias,
       :status,
       :request_id,
@@ -11999,6 +12491,7 @@ module Aws::QuickSight
     #   			 parameter. The keyword <code>$PUBLISHED</code> doesn't apply to templates.</p>
     #   @return [String]
     class DescribeTemplateDefinitionRequest < Struct.new(
+      nil,
       :aws_account_id,
       :template_id,
       :version_number,
@@ -12071,6 +12564,7 @@ module Aws::QuickSight
     #   <p>The Amazon Web Services request ID for this operation.</p>
     #   @return [String]
     class DescribeTemplateDefinitionResponse < Struct.new(
+      nil,
       :name,
       :template_id,
       :errors,
@@ -12096,6 +12590,7 @@ module Aws::QuickSight
     #   <p>The ID for the template.</p>
     #   @return [String]
     class DescribeTemplatePermissionsRequest < Struct.new(
+      nil,
       :aws_account_id,
       :template_id,
       keyword_init: true
@@ -12119,6 +12614,7 @@ module Aws::QuickSight
     #   <p>The HTTP status of the request.</p>
     #   @return [Integer]
     class DescribeTemplatePermissionsResponse < Struct.new(
+      nil,
       :template_id,
       :template_arn,
       :permissions,
@@ -12151,6 +12647,7 @@ module Aws::QuickSight
     #   			parameter. The keyword <code>$PUBLISHED</code> doesn't apply to templates.</p>
     #   @return [String]
     class DescribeTemplateRequest < Struct.new(
+      nil,
       :aws_account_id,
       :template_id,
       :version_number,
@@ -12170,6 +12667,7 @@ module Aws::QuickSight
     #   <p>The Amazon Web Services request ID for this operation.</p>
     #   @return [String]
     class DescribeTemplateResponse < Struct.new(
+      nil,
       :template,
       :status,
       :request_id,
@@ -12194,6 +12692,7 @@ module Aws::QuickSight
     #   <p>The name of the theme alias that you want to describe.</p>
     #   @return [String]
     class DescribeThemeAliasRequest < Struct.new(
+      nil,
       :aws_account_id,
       :theme_id,
       :alias_name,
@@ -12212,6 +12711,7 @@ module Aws::QuickSight
     #   <p>The Amazon Web Services request ID for this operation.</p>
     #   @return [String]
     class DescribeThemeAliasResponse < Struct.new(
+      nil,
       :theme_alias,
       :status,
       :request_id,
@@ -12232,6 +12732,7 @@ module Aws::QuickSight
     #   <p>The ID for the theme that you want to describe permissions for.</p>
     #   @return [String]
     class DescribeThemePermissionsRequest < Struct.new(
+      nil,
       :aws_account_id,
       :theme_id,
       keyword_init: true
@@ -12255,6 +12756,7 @@ module Aws::QuickSight
     #   <p>The HTTP status of the request.</p>
     #   @return [Integer]
     class DescribeThemePermissionsResponse < Struct.new(
+      nil,
       :theme_id,
       :theme_arn,
       :permissions,
@@ -12287,6 +12789,7 @@ module Aws::QuickSight
     #   			parameter. The keyword <code>$PUBLISHED</code> doesn't apply to themes.</p>
     #   @return [String]
     class DescribeThemeRequest < Struct.new(
+      nil,
       :aws_account_id,
       :theme_id,
       :version_number,
@@ -12306,6 +12809,7 @@ module Aws::QuickSight
     #   <p>The Amazon Web Services request ID for this operation.</p>
     #   @return [String]
     class DescribeThemeResponse < Struct.new(
+      nil,
       :theme,
       :status,
       :request_id,
@@ -12327,6 +12831,7 @@ module Aws::QuickSight
     #   <p>The ID of the topic that you want to describe. This ID is unique per Amazon Web Services Region for each Amazon Web Services account.</p>
     #   @return [String]
     class DescribeTopicPermissionsRequest < Struct.new(
+      nil,
       :aws_account_id,
       :topic_id,
       keyword_init: true
@@ -12350,6 +12855,7 @@ module Aws::QuickSight
     #   <p>The Amazon Web Services request ID for this operation.</p>
     #   @return [String]
     class DescribeTopicPermissionsResponse < Struct.new(
+      nil,
       :topic_id,
       :topic_arn,
       :permissions,
@@ -12376,6 +12882,7 @@ module Aws::QuickSight
     #   <p>The ID of the refresh, which is performed when the topic is created or updated.</p>
     #   @return [String]
     class DescribeTopicRefreshRequest < Struct.new(
+      nil,
       :aws_account_id,
       :topic_id,
       :refresh_id,
@@ -12394,6 +12901,7 @@ module Aws::QuickSight
     #   <p>The HTTP status of the request.</p>
     #   @return [Integer]
     class DescribeTopicRefreshResponse < Struct.new(
+      nil,
       :refresh_details,
       :request_id,
       :status,
@@ -12418,6 +12926,7 @@ module Aws::QuickSight
     #   <p>The ID of the dataset.</p>
     #   @return [String]
     class DescribeTopicRefreshScheduleRequest < Struct.new(
+      nil,
       :aws_account_id,
       :topic_id,
       :dataset_id,
@@ -12446,6 +12955,7 @@ module Aws::QuickSight
     #   <p>The Amazon Web Services request ID for this operation.</p>
     #   @return [String]
     class DescribeTopicRefreshScheduleResponse < Struct.new(
+      nil,
       :topic_id,
       :topic_arn,
       :dataset_arn,
@@ -12469,6 +12979,7 @@ module Aws::QuickSight
     #   <p>The ID of the topic that you want to describe. This ID is unique per Amazon Web Services Region for each Amazon Web Services account.</p>
     #   @return [String]
     class DescribeTopicRequest < Struct.new(
+      nil,
       :aws_account_id,
       :topic_id,
       keyword_init: true
@@ -12495,6 +13006,7 @@ module Aws::QuickSight
     #   <p>Custom instructions for the topic.</p>
     #   @return [Types::CustomInstructions]
     class DescribeTopicResponse < Struct.new(
+      nil,
       :arn,
       :topic_id,
       :topic,
@@ -12522,6 +13034,7 @@ module Aws::QuickSight
     #   <p>The namespace. Currently, you should set this to <code>default</code>.</p>
     #   @return [String]
     class DescribeUserRequest < Struct.new(
+      nil,
       :user_name,
       :aws_account_id,
       :namespace,
@@ -12540,6 +13053,7 @@ module Aws::QuickSight
     #   <p>The HTTP status of the request.</p>
     #   @return [Integer]
     class DescribeUserResponse < Struct.new(
+      nil,
       :user,
       :request_id,
       :status,
@@ -12562,6 +13076,7 @@ module Aws::QuickSight
     #   			you're creating. This ID is a unique identifier for each Amazon Web Services Region in an Amazon Web Services account.</p>
     #   @return [String]
     class DescribeVPCConnectionRequest < Struct.new(
+      nil,
       :aws_account_id,
       :vpc_connection_id,
       keyword_init: true
@@ -12579,6 +13094,7 @@ module Aws::QuickSight
     #   <p>The HTTP status of the request.</p>
     #   @return [Integer]
     class DescribeVPCConnectionResponse < Struct.new(
+      nil,
       :vpc_connection,
       :request_id,
       :status,
@@ -12610,6 +13126,7 @@ module Aws::QuickSight
     #   <p>A column of a data set.</p>
     #   @return [Types::ColumnIdentifier]
     class DestinationParameterValueConfiguration < Struct.new(
+      nil,
       :custom_values_configuration,
       :select_all_value_options,
       :source_parameter_name,
@@ -12631,6 +13148,7 @@ module Aws::QuickSight
     #   <p>The dimension type field with date type columns.</p>
     #   @return [Types::DateDimensionField]
     class DimensionField < Struct.new(
+      nil,
       :numerical_dimension_field,
       :categorical_dimension_field,
       :date_dimension_field,
@@ -12680,6 +13198,7 @@ module Aws::QuickSight
     #   <p>The currency symbol, such as <code>USD</code>.</p>
     #   @return [String]
     class DisplayFormatOptions < Struct.new(
+      nil,
       :use_blank_cell_format,
       :blank_cell_format,
       :date_format,
@@ -12712,6 +13231,7 @@ module Aws::QuickSight
     #   <p>The Amazon Web Services request ID for this request.</p>
     #   @return [String]
     class DomainNotWhitelistedException < Struct.new(
+      nil,
       :message,
       :request_id,
       keyword_init: true
@@ -12724,6 +13244,7 @@ module Aws::QuickSight
     #   <p>Determines the visibility of the label in a donut chart. In the QuickSight console, this option is called <code>'Show total'</code>.</p>
     #   @return [String]
     class DonutCenterOptions < Struct.new(
+      nil,
       :label_visibility,
       keyword_init: true
     )
@@ -12756,6 +13277,7 @@ module Aws::QuickSight
     #   <p>The label options of the label that is displayed in the center of a donut chart. This option isn't available for pie charts.</p>
     #   @return [Types::DonutCenterOptions]
     class DonutOptions < Struct.new(
+      nil,
       :arc_options,
       :donut_center_options,
       keyword_init: true
@@ -12775,6 +13297,7 @@ module Aws::QuickSight
     #   <p>The time range drill down filter. This filter is used for date time columns.</p>
     #   @return [Types::TimeRangeDrillDownFilter]
     class DrillDownFilter < Struct.new(
+      nil,
       :numeric_equality_filter,
       :category_filter,
       :time_range_filter,
@@ -12795,6 +13318,7 @@ module Aws::QuickSight
     #   <p>The configuration of info icon label options.</p>
     #   @return [Types::SheetControlInfoIconLabelOptions]
     class DropDownControlDisplayOptions < Struct.new(
+      nil,
       :select_all_options,
       :title_options,
       :info_icon_label_options,
@@ -12814,6 +13338,7 @@ module Aws::QuickSight
     #   <p>The column that contains the default value of each user or group.</p>
     #   @return [Types::ColumnIdentifier]
     class DynamicDefaultValue < Struct.new(
+      nil,
       :user_name_column,
       :group_name_column,
       :default_value_column,
@@ -12834,6 +13359,7 @@ module Aws::QuickSight
     #   <p>The list of custom actions that are configured for a visual.</p>
     #   @return [Array<Types::VisualCustomAction>]
     class EmptyVisual < Struct.new(
+      nil,
       :visual_id,
       :data_set_identifier,
       :actions,
@@ -12847,6 +13373,7 @@ module Aws::QuickSight
     #   <p>The hierarchical path of the entity within the analysis, template, or dashboard definition tree.</p>
     #   @return [String]
     class Entity < Struct.new(
+      nil,
       :path,
       keyword_init: true
     )
@@ -12861,6 +13388,7 @@ module Aws::QuickSight
     #   <p>Error message.</p>
     #   @return [String]
     class ErrorInfo < Struct.new(
+      nil,
       :type,
       :message,
       keyword_init: true
@@ -12876,6 +13404,7 @@ module Aws::QuickSight
     #   <p>The port for the Exasol data source.</p>
     #   @return [Integer]
     class ExasolParameters < Struct.new(
+      nil,
       :host,
       :port,
       keyword_init: true
@@ -12906,6 +13435,7 @@ module Aws::QuickSight
     #            </ul>
     #   @return [String]
     class ExcludePeriodConfiguration < Struct.new(
+      nil,
       :amount,
       :granularity,
       :status,
@@ -12924,6 +13454,7 @@ module Aws::QuickSight
     #   <p>The executive summary settings of an embedded QuickSight console or dashboard.</p>
     #   @return [Boolean]
     class ExecutiveSummaryConfigurations < Struct.new(
+      nil,
       :enabled,
       keyword_init: true
     )
@@ -12940,6 +13471,7 @@ module Aws::QuickSight
     #   <p>Availability status.</p>
     #   @return [String]
     class ExecutiveSummaryOption < Struct.new(
+      nil,
       :availability_status,
       keyword_init: true
     )
@@ -12957,6 +13489,7 @@ module Aws::QuickSight
     #   <p>The option that determines the drill down filters for the explicit hierarchy.</p>
     #   @return [Array<Types::DrillDownFilter>]
     class ExplicitHierarchy < Struct.new(
+      nil,
       :hierarchy_id,
       :columns,
       :drill_down_filters,
@@ -12970,6 +13503,7 @@ module Aws::QuickSight
     #   <p>The status of the export hidden fields options of a dashbaord.</p>
     #   @return [String]
     class ExportHiddenFieldsOption < Struct.new(
+      nil,
       :availability_status,
       keyword_init: true
     )
@@ -12981,6 +13515,7 @@ module Aws::QuickSight
     #   <p>Availability status.</p>
     #   @return [String]
     class ExportToCSVOption < Struct.new(
+      nil,
       :availability_status,
       keyword_init: true
     )
@@ -12992,6 +13527,7 @@ module Aws::QuickSight
     #   <p>The status of the export with hidden fields options.</p>
     #   @return [String]
     class ExportWithHiddenFieldsOption < Struct.new(
+      nil,
       :availability_status,
       keyword_init: true
     )
@@ -13013,6 +13549,7 @@ module Aws::QuickSight
     #               <code>SenderFault</code> value, contact Amazon Web Services Support.</p>
     #   @return [Boolean]
     class FailedKeyRegistrationEntry < Struct.new(
+      nil,
       :key_arn,
       :message,
       :status_code,
@@ -13050,6 +13587,7 @@ module Aws::QuickSight
     #               tooltip.</p>
     #   @return [Array<Types::TooltipItem>]
     class FieldBasedTooltip < Struct.new(
+      nil,
       :aggregation_visibility,
       :tooltip_title_type,
       :tooltip_fields,
@@ -13066,6 +13604,7 @@ module Aws::QuickSight
     #   <p>A folder has a list of columns. A column can only be in one folder.</p>
     #   @return [Array<String>]
     class FieldFolder < Struct.new(
+      nil,
       :description,
       :columns,
       keyword_init: true
@@ -13082,6 +13621,7 @@ module Aws::QuickSight
     #   <p>The visibility of the field label.</p>
     #   @return [String]
     class FieldLabelType < Struct.new(
+      nil,
       :field_id,
       :visibility,
       keyword_init: true
@@ -13100,6 +13640,7 @@ module Aws::QuickSight
     #   <p>The options that determine the presentation of line series associated to the field.</p>
     #   @return [Types::LineChartSeriesSettings]
     class FieldSeriesItem < Struct.new(
+      nil,
       :field_id,
       :axis_binding,
       :settings,
@@ -13128,6 +13669,7 @@ module Aws::QuickSight
     #            </ul>
     #   @return [String]
     class FieldSort < Struct.new(
+      nil,
       :field_id,
       :direction,
       keyword_init: true
@@ -13143,6 +13685,7 @@ module Aws::QuickSight
     #   <p>The sort configuration for a column that is not used in a field well.</p>
     #   @return [Types::ColumnSort]
     class FieldSortOptions < Struct.new(
+      nil,
       :field_sort,
       :column_sort,
       keyword_init: true
@@ -13164,6 +13707,7 @@ module Aws::QuickSight
     #   <p>Determines the target of the field tooltip item in a combo chart visual.</p>
     #   @return [String]
     class FieldTooltipItem < Struct.new(
+      nil,
       :field_id,
       :label,
       :visibility,
@@ -13181,6 +13725,7 @@ module Aws::QuickSight
     #   <p>The aggregated color field well of a filled map. Values are aggregated based on location fields.</p>
     #   @return [Array<Types::MeasureField>]
     class FilledMapAggregatedFieldWells < Struct.new(
+      nil,
       :geospatial,
       :values,
       keyword_init: true
@@ -13193,6 +13738,7 @@ module Aws::QuickSight
     #   <p>Conditional formatting options of a <code>FilledMapVisual</code>.</p>
     #   @return [Array<Types::FilledMapConditionalFormattingOption>]
     class FilledMapConditionalFormatting < Struct.new(
+      nil,
       :conditional_formatting_options,
       keyword_init: true
     )
@@ -13204,6 +13750,7 @@ module Aws::QuickSight
     #   <p>The conditional formatting that determines the shape of the filled map.</p>
     #   @return [Types::FilledMapShapeConditionalFormatting]
     class FilledMapConditionalFormattingOption < Struct.new(
+      nil,
       :shape,
       keyword_init: true
     )
@@ -13233,6 +13780,7 @@ module Aws::QuickSight
     #   <p>The general visual interactions setup for a visual.</p>
     #   @return [Types::VisualInteractionOptions]
     class FilledMapConfiguration < Struct.new(
+      nil,
       :field_wells,
       :sort_configuration,
       :legend,
@@ -13251,6 +13799,7 @@ module Aws::QuickSight
     #   <p>The aggregated field well of the filled map.</p>
     #   @return [Types::FilledMapAggregatedFieldWells]
     class FilledMapFieldWells < Struct.new(
+      nil,
       :filled_map_aggregated_field_wells,
       keyword_init: true
     )
@@ -13265,6 +13814,7 @@ module Aws::QuickSight
     #   <p>The conditional formatting that determines the background color of a filled map's shape.</p>
     #   @return [Types::ShapeConditionalFormat]
     class FilledMapShapeConditionalFormatting < Struct.new(
+      nil,
       :field_id,
       :format,
       keyword_init: true
@@ -13277,6 +13827,7 @@ module Aws::QuickSight
     #   <p>The sort configuration of the location fields.</p>
     #   @return [Array<Types::FieldSortOptions>]
     class FilledMapSortConfiguration < Struct.new(
+      nil,
       :category_sort,
       keyword_init: true
     )
@@ -13310,6 +13861,7 @@ module Aws::QuickSight
     #   <p>The alt text for the visual.</p>
     #   @return [String]
     class FilledMapVisual < Struct.new(
+      nil,
       :visual_id,
       :title,
       :subtitle,
@@ -13352,6 +13904,7 @@ module Aws::QuickSight
     #   <p>A <code>NestedFilter</code> filters data with a subset of data that is defined by the nested inner filter.</p>
     #   @return [Types::NestedFilter]
     class Filter < Struct.new(
+      nil,
       :category_filter,
       :numeric_range_filter,
       :numeric_equality_filter,
@@ -13376,6 +13929,7 @@ module Aws::QuickSight
     #   <p>The sort direction for <code>FilterAggMetrics</code>.</p>
     #   @return [String]
     class FilterAggMetrics < Struct.new(
+      nil,
       :metric_operand,
       :function,
       :sort_direction,
@@ -13411,6 +13965,7 @@ module Aws::QuickSight
     #   <p>A control from a filter that is scoped across more than one sheet. This represents your filter control on a sheet</p>
     #   @return [Types::FilterCrossSheetControl]
     class FilterControl < Struct.new(
+      nil,
       :date_time_picker,
       :list,
       :dropdown,
@@ -13435,6 +13990,7 @@ module Aws::QuickSight
     #   <p>The values that are displayed in a control can be configured to only show values that are valid based on what's selected in other controls.</p>
     #   @return [Types::CascadingControlConfiguration]
     class FilterCrossSheetControl < Struct.new(
+      nil,
       :filter_control_id,
       :source_filter_id,
       :cascading_control_configuration,
@@ -13473,6 +14029,7 @@ module Aws::QuickSight
     #   <p>The visibility configurationof the Apply button on a <code>DateTimePickerControl</code>.</p>
     #   @return [String]
     class FilterDateTimePickerControl < Struct.new(
+      nil,
       :filter_control_id,
       :title,
       :source_filter_id,
@@ -13520,6 +14077,7 @@ module Aws::QuickSight
     #   <p>The visibility configuration of the Apply button on a <code>FilterDropDownControl</code>.</p>
     #   @return [String]
     class FilterDropDownControl < Struct.new(
+      nil,
       :filter_control_id,
       :title,
       :source_filter_id,
@@ -13564,6 +14122,7 @@ module Aws::QuickSight
     #            </ul>
     #   @return [String]
     class FilterGroup < Struct.new(
+      nil,
       :filter_group_id,
       :filters,
       :scope_configuration,
@@ -13609,6 +14168,7 @@ module Aws::QuickSight
     #            </ul>
     #   @return [String]
     class FilterListConfiguration < Struct.new(
+      nil,
       :match_operator,
       :category_values,
       :select_all_options,
@@ -13651,6 +14211,7 @@ module Aws::QuickSight
     #   <p>The values that are displayed in a control can be configured to only show values that are valid based on what's selected in other controls.</p>
     #   @return [Types::CascadingControlConfiguration]
     class FilterListControl < Struct.new(
+      nil,
       :filter_control_id,
       :title,
       :source_filter_id,
@@ -13669,6 +14230,7 @@ module Aws::QuickSight
     #               evaluates to true are kept in the dataset.</p>
     #   @return [String]
     class FilterOperation < Struct.new(
+      nil,
       :condition_expression,
       keyword_init: true
     )
@@ -13694,6 +14256,7 @@ module Aws::QuickSight
     #   <p>The selected columns of a dataset.</p>
     #   @return [Array<Types::ColumnIdentifier>]
     class FilterOperationSelectedFieldsConfiguration < Struct.new(
+      nil,
       :selected_fields,
       :selected_field_options,
       :selected_columns,
@@ -13708,6 +14271,7 @@ module Aws::QuickSight
     #   <p>The configuration of the same-sheet target visuals that you want to be filtered.</p>
     #   @return [Types::SameSheetTargetVisualConfiguration]
     class FilterOperationTargetVisualsConfiguration < Struct.new(
+      nil,
       :same_sheet_target_visual_configuration,
       keyword_init: true
     )
@@ -13731,6 +14295,7 @@ module Aws::QuickSight
     #   <p>The visibility configuration of the Apply button on a <code>FilterRelativeDateTimeControl</code>.</p>
     #   @return [String]
     class FilterRelativeDateTimeControl < Struct.new(
+      nil,
       :filter_control_id,
       :title,
       :source_filter_id,
@@ -13750,6 +14315,7 @@ module Aws::QuickSight
     #   <p>The configuration that applies a filter to all sheets. When you choose <code>AllSheets</code> as the value for a <code>FilterScopeConfiguration</code>, this filter is applied to all visuals of all sheets in an Analysis, Dashboard, or Template. The <code>AllSheetsFilterScopeConfiguration</code> is chosen.</p>
     #   @return [Types::AllSheetsFilterScopeConfiguration]
     class FilterScopeConfiguration < Struct.new(
+      nil,
       :selected_sheets,
       :all_sheets,
       keyword_init: true
@@ -13762,6 +14328,7 @@ module Aws::QuickSight
     #   <p>The values that are used in the <code>FilterSelectableValues</code>.</p>
     #   @return [Array<String>]
     class FilterSelectableValues < Struct.new(
+      nil,
       :values,
       keyword_init: true
     )
@@ -13804,6 +14371,7 @@ module Aws::QuickSight
     #   <p>The number of increments that the slider bar is divided into.</p>
     #   @return [Float]
     class FilterSliderControl < Struct.new(
+      nil,
       :filter_control_id,
       :title,
       :source_filter_id,
@@ -13841,6 +14409,7 @@ module Aws::QuickSight
     #   <p>The display options of a control.</p>
     #   @return [Types::TextAreaControlDisplayOptions]
     class FilterTextAreaControl < Struct.new(
+      nil,
       :filter_control_id,
       :title,
       :source_filter_id,
@@ -13865,6 +14434,7 @@ module Aws::QuickSight
     #   <p>The display options of a control.</p>
     #   @return [Types::TextFieldControlDisplayOptions]
     class FilterTextFieldControl < Struct.new(
+      nil,
       :filter_control_id,
       :title,
       :source_filter_id,
@@ -13900,6 +14470,7 @@ module Aws::QuickSight
     #   <p>The sharing scope of the folder.</p>
     #   @return [String]
     class Folder < Struct.new(
+      nil,
       :folder_id,
       :arn,
       :name,
@@ -13921,6 +14492,7 @@ module Aws::QuickSight
     #   <p>The type of asset that it is.</p>
     #   @return [String]
     class FolderMember < Struct.new(
+      nil,
       :member_id,
       :member_type,
       keyword_init: true
@@ -13972,6 +14544,7 @@ module Aws::QuickSight
     #   <p>The value of the named item (in this example, <code>PARENT_FOLDER_ARN</code>), that you want to use as a filter. For example, <code>"Value": "arn:aws:quicksight:us-east-1:1:folder/folderId"</code>.</p>
     #   @return [String]
     class FolderSearchFilter < Struct.new(
+      nil,
       :operator,
       :name,
       :value,
@@ -14003,6 +14576,7 @@ module Aws::QuickSight
     #   <p>The sharing scope of the folder.</p>
     #   @return [String]
     class FolderSummary < Struct.new(
+      nil,
       :arn,
       :folder_id,
       :name,
@@ -14020,6 +14594,7 @@ module Aws::QuickSight
     #   <p>Determines the font family settings.</p>
     #   @return [String]
     class Font < Struct.new(
+      nil,
       :font_family,
       keyword_init: true
     )
@@ -14046,6 +14621,7 @@ module Aws::QuickSight
     #   <p>The font family that you want to use.</p>
     #   @return [String]
     class FontConfiguration < Struct.new(
+      nil,
       :font_size,
       :font_decoration,
       :font_color,
@@ -14065,6 +14641,7 @@ module Aws::QuickSight
     #   <p>The font size that you want to use in px.</p>
     #   @return [String]
     class FontSize < Struct.new(
+      nil,
       :relative,
       :absolute,
       keyword_init: true
@@ -14077,6 +14654,7 @@ module Aws::QuickSight
     #   <p>The lexical name for the level of boldness of the text display.</p>
     #   @return [String]
     class FontWeight < Struct.new(
+      nil,
       :name,
       keyword_init: true
     )
@@ -14129,6 +14707,7 @@ module Aws::QuickSight
     #   <p>The custom seasonality value setup of a forecast computation.</p>
     #   @return [Integer]
     class ForecastComputation < Struct.new(
+      nil,
       :computation_id,
       :name,
       :time,
@@ -14160,6 +14739,7 @@ module Aws::QuickSight
     #   <p>The forecast scenario of a forecast in the line chart.</p>
     #   @return [Types::ForecastScenario]
     class ForecastConfiguration < Struct.new(
+      nil,
       :forecast_properties,
       :scenario,
       keyword_init: true
@@ -14175,6 +14755,7 @@ module Aws::QuickSight
     #   <p>The what-if analysis forecast setup with the date range.</p>
     #   @return [Types::WhatIfRangeScenario]
     class ForecastScenario < Struct.new(
+      nil,
       :what_if_point_scenario,
       :what_if_range_scenario,
       keyword_init: true
@@ -14193,6 +14774,7 @@ module Aws::QuickSight
     #   <p>Formatting configuration for <code>DateTime</code> fields.</p>
     #   @return [Types::DateTimeFormatConfiguration]
     class FormatConfiguration < Struct.new(
+      nil,
       :string_format_configuration,
       :number_format_configuration,
       :date_time_format_configuration,
@@ -14206,6 +14788,7 @@ module Aws::QuickSight
     #   <p>The options that determine the sizing of the canvas used in a free-form layout.</p>
     #   @return [Types::FreeFormLayoutScreenCanvasSizeOptions]
     class FreeFormLayoutCanvasSizeOptions < Struct.new(
+      nil,
       :screen_canvas_size_options,
       keyword_init: true
     )
@@ -14220,6 +14803,7 @@ module Aws::QuickSight
     #   <p>Configuration options for the canvas of a free-form layout.</p>
     #   @return [Types::FreeFormLayoutCanvasSizeOptions]
     class FreeFormLayoutConfiguration < Struct.new(
+      nil,
       :elements,
       :canvas_size_options,
       keyword_init: true
@@ -14265,6 +14849,7 @@ module Aws::QuickSight
     #   <p>The loading animation configuration of a free-form layout element.</p>
     #   @return [Types::LoadingAnimation]
     class FreeFormLayoutElement < Struct.new(
+      nil,
       :element_id,
       :element_type,
       :x_axis_location,
@@ -14290,6 +14875,7 @@ module Aws::QuickSight
     #   <p>The background color of a free-form layout element.</p>
     #   @return [String]
     class FreeFormLayoutElementBackgroundStyle < Struct.new(
+      nil,
       :visibility,
       :color,
       keyword_init: true
@@ -14305,6 +14891,7 @@ module Aws::QuickSight
     #   <p>The border color of a free-form layout element.</p>
     #   @return [String]
     class FreeFormLayoutElementBorderStyle < Struct.new(
+      nil,
       :visibility,
       :color,
       keyword_init: true
@@ -14317,6 +14904,7 @@ module Aws::QuickSight
     #   <p>The width that the view port will be optimized for when the layout renders.</p>
     #   @return [String]
     class FreeFormLayoutScreenCanvasSizeOptions < Struct.new(
+      nil,
       :optimized_view_port_width,
       keyword_init: true
     )
@@ -14328,6 +14916,7 @@ module Aws::QuickSight
     #   <p>The elements that are included in the free-form layout.</p>
     #   @return [Array<Types::FreeFormLayoutElement>]
     class FreeFormSectionLayoutConfiguration < Struct.new(
+      nil,
       :elements,
       keyword_init: true
     )
@@ -14342,6 +14931,7 @@ module Aws::QuickSight
     #   <p>The value field wells of a funnel chart. Values are aggregated based on categories.</p>
     #   @return [Array<Types::MeasureField>]
     class FunnelChartAggregatedFieldWells < Struct.new(
+      nil,
       :category,
       :values,
       keyword_init: true
@@ -14375,6 +14965,7 @@ module Aws::QuickSight
     #   <p>The general visual interactions setup for a visual.</p>
     #   @return [Types::VisualInteractionOptions]
     class FunnelChartConfiguration < Struct.new(
+      nil,
       :field_wells,
       :sort_configuration,
       :category_label_options,
@@ -14412,6 +15003,7 @@ module Aws::QuickSight
     #   <p>Determines the style of the metric labels.</p>
     #   @return [String]
     class FunnelChartDataLabelOptions < Struct.new(
+      nil,
       :visibility,
       :category_label_visibility,
       :measure_label_visibility,
@@ -14430,6 +15022,7 @@ module Aws::QuickSight
     #   <p>The field well configuration of a <code>FunnelChartVisual</code>.</p>
     #   @return [Types::FunnelChartAggregatedFieldWells]
     class FunnelChartFieldWells < Struct.new(
+      nil,
       :funnel_chart_aggregated_field_wells,
       keyword_init: true
     )
@@ -14444,6 +15037,7 @@ module Aws::QuickSight
     #   <p>The limit on the number of categories displayed.</p>
     #   @return [Types::ItemsLimitConfiguration]
     class FunnelChartSortConfiguration < Struct.new(
+      nil,
       :category_sort,
       :category_items_limit,
       keyword_init: true
@@ -14475,6 +15069,7 @@ module Aws::QuickSight
     #   <p>The alt text for the visual.</p>
     #   @return [String]
     class FunnelChartVisual < Struct.new(
+      nil,
       :visual_id,
       :title,
       :subtitle,
@@ -14492,6 +15087,7 @@ module Aws::QuickSight
     #   <p>The conditional formatting of the arc foreground color.</p>
     #   @return [Types::ConditionalFormattingColor]
     class GaugeChartArcConditionalFormatting < Struct.new(
+      nil,
       :foreground_color,
       keyword_init: true
     )
@@ -14506,6 +15102,7 @@ module Aws::QuickSight
     #   <p>The background color configuration of a <code>GaugeChartVisual</code>.</p>
     #   @return [String]
     class GaugeChartColorConfiguration < Struct.new(
+      nil,
       :foreground_color,
       :background_color,
       keyword_init: true
@@ -14518,6 +15115,7 @@ module Aws::QuickSight
     #   <p>Conditional formatting options of a <code>GaugeChartVisual</code>.</p>
     #   @return [Array<Types::GaugeChartConditionalFormattingOption>]
     class GaugeChartConditionalFormatting < Struct.new(
+      nil,
       :conditional_formatting_options,
       keyword_init: true
     )
@@ -14532,6 +15130,7 @@ module Aws::QuickSight
     #   <p>The options that determine the presentation of the arc of a <code>GaugeChartVisual</code>.</p>
     #   @return [Types::GaugeChartArcConditionalFormatting]
     class GaugeChartConditionalFormattingOption < Struct.new(
+      nil,
       :primary_value,
       :arc,
       keyword_init: true
@@ -14562,6 +15161,7 @@ module Aws::QuickSight
     #   <p>The general visual interactions setup for a visual.</p>
     #   @return [Types::VisualInteractionOptions]
     class GaugeChartConfiguration < Struct.new(
+      nil,
       :field_wells,
       :gauge_chart_options,
       :data_labels,
@@ -14582,6 +15182,7 @@ module Aws::QuickSight
     #   <p>The target value field wells of a <code>GaugeChartVisual</code>.</p>
     #   @return [Array<Types::MeasureField>]
     class GaugeChartFieldWells < Struct.new(
+      nil,
       :values,
       :target_values,
       keyword_init: true
@@ -14606,6 +15207,7 @@ module Aws::QuickSight
     #   <p>The options that determine the primary value font configuration.</p>
     #   @return [Types::FontConfiguration]
     class GaugeChartOptions < Struct.new(
+      nil,
       :primary_value_display_type,
       :comparison,
       :arc_axis,
@@ -14624,6 +15226,7 @@ module Aws::QuickSight
     #   <p>The conditional formatting of the primary value icon.</p>
     #   @return [Types::ConditionalFormattingIcon]
     class GaugeChartPrimaryValueConditionalFormatting < Struct.new(
+      nil,
       :text_color,
       :icon,
       keyword_init: true
@@ -14655,6 +15258,7 @@ module Aws::QuickSight
     #   <p>The alt text for the visual.</p>
     #   @return [String]
     class GaugeChartVisual < Struct.new(
+      nil,
       :visual_id,
       :title,
       :subtitle,
@@ -14702,6 +15306,7 @@ module Aws::QuickSight
     #               <code>https://sapp.amazon.com</code>.</p>
     #   @return [Array<String>]
     class GenerateEmbedUrlForAnonymousUserRequest < Struct.new(
+      nil,
       :aws_account_id,
       :session_lifetime_in_minutes,
       :namespace,
@@ -14727,6 +15332,7 @@ module Aws::QuickSight
     #   <p>The Amazon Resource Name (ARN) to use for the anonymous Amazon QuickSight user.</p>
     #   @return [String]
     class GenerateEmbedUrlForAnonymousUserResponse < Struct.new(
+      nil,
       :embed_url,
       :status,
       :request_id,
@@ -14764,6 +15370,7 @@ module Aws::QuickSight
     #               <code>https://sapp.amazon.com</code>.</p>
     #   @return [Array<String>]
     class GenerateEmbedUrlForRegisteredUserRequest < Struct.new(
+      nil,
       :aws_account_id,
       :session_lifetime_in_minutes,
       :user_arn,
@@ -14784,6 +15391,7 @@ module Aws::QuickSight
     #   <p>The Amazon Web Services request ID for this operation.</p>
     #   @return [String]
     class GenerateEmbedUrlForRegisteredUserResponse < Struct.new(
+      nil,
       :embed_url,
       :status,
       :request_id,
@@ -14815,6 +15423,7 @@ module Aws::QuickSight
     #   <p>A list of domains to be allowed to generate the embed URL.</p>
     #   @return [Array<String>]
     class GenerateEmbedUrlForRegisteredUserWithIdentityRequest < Struct.new(
+      nil,
       :aws_account_id,
       :session_lifetime_in_minutes,
       :experience_configuration,
@@ -14834,6 +15443,7 @@ module Aws::QuickSight
     #   <p>The Amazon Web Services request ID for this operation.</p>
     #   @return [String]
     class GenerateEmbedUrlForRegisteredUserWithIdentityResponse < Struct.new(
+      nil,
       :embed_url,
       :status,
       :request_id,
@@ -14873,6 +15483,7 @@ module Aws::QuickSight
     #   <p>The URL of the question.</p>
     #   @return [String]
     class GeneratedAnswerResult < Struct.new(
+      nil,
       :question_text,
       :answer_status,
       :topic_id,
@@ -14891,6 +15502,7 @@ module Aws::QuickSight
     #   <p>The generative BI authoring settings of an embedded QuickSight console.</p>
     #   @return [Boolean]
     class GenerativeAuthoringConfigurations < Struct.new(
+      nil,
       :enabled,
       keyword_init: true
     )
@@ -14913,6 +15525,7 @@ module Aws::QuickSight
     #   <p>Columns in this hierarchy.</p>
     #   @return [Array<String>]
     class GeoSpatialColumnGroup < Struct.new(
+      nil,
       :name,
       :country_code,
       :columns,
@@ -14935,6 +15548,7 @@ module Aws::QuickSight
     #   <p>The default opacity of a categorical color.</p>
     #   @return [Float]
     class GeospatialCategoricalColor < Struct.new(
+      nil,
       :category_data_colors,
       :null_data_visibility,
       :null_data_settings,
@@ -14952,6 +15566,7 @@ module Aws::QuickSight
     #   <p>The data value for the category data color.</p>
     #   @return [String]
     class GeospatialCategoricalDataColor < Struct.new(
+      nil,
       :color,
       :data_value,
       keyword_init: true
@@ -14964,6 +15579,7 @@ module Aws::QuickSight
     #   <p>The positive value for the radius of a circle.</p>
     #   @return [Float]
     class GeospatialCircleRadius < Struct.new(
+      nil,
       :radius,
       keyword_init: true
     )
@@ -14984,6 +15600,7 @@ module Aws::QuickSight
     #   <p>The radius of the circle.</p>
     #   @return [Types::GeospatialCircleRadius]
     class GeospatialCircleSymbolStyle < Struct.new(
+      nil,
       :fill_color,
       :stroke_color,
       :stroke_width,
@@ -15004,6 +15621,7 @@ module Aws::QuickSight
     #   <p>The visualization properties for the categorical color.</p>
     #   @return [Types::GeospatialCategoricalColor]
     class GeospatialColor < Struct.new(
+      nil,
       :solid,
       :gradient,
       :categorical,
@@ -15027,6 +15645,7 @@ module Aws::QuickSight
     #   <p>The longitude of the east bound of the geospatial coordinate bounds.</p>
     #   @return [Float]
     class GeospatialCoordinateBounds < Struct.new(
+      nil,
       :north,
       :south,
       :west,
@@ -15041,6 +15660,7 @@ module Aws::QuickSight
     #   <p>The static file data source properties for the geospatial data.</p>
     #   @return [Types::GeospatialStaticFileSource]
     class GeospatialDataSourceItem < Struct.new(
+      nil,
       :static_file_data_source,
       keyword_init: true
     )
@@ -15061,6 +15681,7 @@ module Aws::QuickSight
     #   <p>The default opacity for the gradient color.</p>
     #   @return [Float]
     class GeospatialGradientColor < Struct.new(
+      nil,
       :step_colors,
       :null_data_visibility,
       :null_data_settings,
@@ -15078,6 +15699,7 @@ module Aws::QuickSight
     #   <p>The data value for the gradient step color.</p>
     #   @return [Float]
     class GeospatialGradientStepColor < Struct.new(
+      nil,
       :color,
       :data_value,
       keyword_init: true
@@ -15095,6 +15717,7 @@ module Aws::QuickSight
     #   <p>The list of colors to be used in heatmap point style.</p>
     #   @return [Array<Types::GeospatialHeatmapDataColor>]
     class GeospatialHeatmapColorScale < Struct.new(
+      nil,
       :colors,
       keyword_init: true
     )
@@ -15106,6 +15729,7 @@ module Aws::QuickSight
     #   <p>The color scale specification for the heatmap point style.</p>
     #   @return [Types::GeospatialHeatmapColorScale]
     class GeospatialHeatmapConfiguration < Struct.new(
+      nil,
       :heatmap_color,
       keyword_init: true
     )
@@ -15117,6 +15741,7 @@ module Aws::QuickSight
     #   <p>The hex color to be used in the heatmap point style.</p>
     #   @return [String]
     class GeospatialHeatmapDataColor < Struct.new(
+      nil,
       :color,
       keyword_init: true
     )
@@ -15131,6 +15756,7 @@ module Aws::QuickSight
     #   <p>A list of color measure fields.</p>
     #   @return [Array<Types::MeasureField>]
     class GeospatialLayerColorField < Struct.new(
+      nil,
       :color_dimensions_fields,
       :color_values_fields,
       keyword_init: true
@@ -15149,6 +15775,7 @@ module Aws::QuickSight
     #   <p>The definition for a polygon layer.</p>
     #   @return [Types::GeospatialPolygonLayer]
     class GeospatialLayerDefinition < Struct.new(
+      nil,
       :point_layer,
       :line_layer,
       :polygon_layer,
@@ -15186,6 +15813,7 @@ module Aws::QuickSight
     #   <p>A list of custom actions for a layer.</p>
     #   @return [Array<Types::LayerCustomAction>]
     class GeospatialLayerItem < Struct.new(
+      nil,
       :layer_id,
       :layer_type,
       :data_source,
@@ -15211,6 +15839,7 @@ module Aws::QuickSight
     #   <p>The geospatial color field for the join definition.</p>
     #   @return [Types::GeospatialLayerColorField]
     class GeospatialLayerJoinDefinition < Struct.new(
+      nil,
       :shape_key_field,
       :dataset_key_field,
       :color_field,
@@ -15236,6 +15865,7 @@ module Aws::QuickSight
     #   <p>The general visual interactions setup for visual publish options</p>
     #   @return [Types::VisualInteractionOptions]
     class GeospatialLayerMapConfiguration < Struct.new(
+      nil,
       :legend,
       :map_layers,
       :map_state,
@@ -15251,6 +15881,7 @@ module Aws::QuickSight
     #   <p>The visualization style for a line layer.</p>
     #   @return [Types::GeospatialLineStyle]
     class GeospatialLineLayer < Struct.new(
+      nil,
       :style,
       keyword_init: true
     )
@@ -15262,6 +15893,7 @@ module Aws::QuickSight
     #   <p>The symbol style for a line style.</p>
     #   @return [Types::GeospatialLineSymbolStyle]
     class GeospatialLineStyle < Struct.new(
+      nil,
       :line_symbol_style,
       keyword_init: true
     )
@@ -15276,6 +15908,7 @@ module Aws::QuickSight
     #   <p>The width value for a line.</p>
     #   @return [Types::GeospatialLineWidth]
     class GeospatialLineSymbolStyle < Struct.new(
+      nil,
       :fill_color,
       :line_width,
       keyword_init: true
@@ -15288,6 +15921,7 @@ module Aws::QuickSight
     #   <p>The positive value for the width of a line.</p>
     #   @return [Float]
     class GeospatialLineWidth < Struct.new(
+      nil,
       :line_width,
       keyword_init: true
     )
@@ -15305,6 +15939,7 @@ module Aws::QuickSight
     #   <p>The color field wells of a geospatial map.</p>
     #   @return [Array<Types::DimensionField>]
     class GeospatialMapAggregatedFieldWells < Struct.new(
+      nil,
       :geospatial,
       :values,
       :colors,
@@ -15339,6 +15974,7 @@ module Aws::QuickSight
     #   <p>The general visual interactions setup for a visual.</p>
     #   @return [Types::VisualInteractionOptions]
     class GeospatialMapConfiguration < Struct.new(
+      nil,
       :field_wells,
       :legend,
       :tooltip,
@@ -15358,6 +15994,7 @@ module Aws::QuickSight
     #   <p>The aggregated field well for a geospatial map.</p>
     #   @return [Types::GeospatialMapAggregatedFieldWells]
     class GeospatialMapFieldWells < Struct.new(
+      nil,
       :geospatial_map_aggregated_field_wells,
       keyword_init: true
     )
@@ -15373,6 +16010,7 @@ module Aws::QuickSight
     #   <p>Enables or disables map navigation for a map.</p>
     #   @return [String]
     class GeospatialMapState < Struct.new(
+      nil,
       :bounds,
       :map_navigation,
       keyword_init: true
@@ -15391,6 +16029,7 @@ module Aws::QuickSight
     #   <p>The state of visibility for the base map.</p>
     #   @return [String]
     class GeospatialMapStyle < Struct.new(
+      nil,
       :base_map_style,
       :background_color,
       :base_map_visibility,
@@ -15404,6 +16043,7 @@ module Aws::QuickSight
     #   <p>The base map style of the geospatial map.</p>
     #   @return [String]
     class GeospatialMapStyleOptions < Struct.new(
+      nil,
       :base_map_style,
       keyword_init: true
     )
@@ -15434,6 +16074,7 @@ module Aws::QuickSight
     #   <p>The alt text for the visual.</p>
     #   @return [String]
     class GeospatialMapVisual < Struct.new(
+      nil,
       :visual_id,
       :title,
       :subtitle,
@@ -15451,6 +16092,7 @@ module Aws::QuickSight
     #   <p>The symbol style for null data.</p>
     #   @return [Types::GeospatialNullSymbolStyle]
     class GeospatialNullDataSettings < Struct.new(
+      nil,
       :symbol_style,
       keyword_init: true
     )
@@ -15468,6 +16110,7 @@ module Aws::QuickSight
     #   <p>The width of the border stroke.</p>
     #   @return [Float]
     class GeospatialNullSymbolStyle < Struct.new(
+      nil,
       :fill_color,
       :stroke_color,
       :stroke_width,
@@ -15481,6 +16124,7 @@ module Aws::QuickSight
     #   <p>The visualization style for a point layer.</p>
     #   @return [Types::GeospatialPointStyle]
     class GeospatialPointLayer < Struct.new(
+      nil,
       :style,
       keyword_init: true
     )
@@ -15492,6 +16136,7 @@ module Aws::QuickSight
     #   <p>The circle symbol style for a point layer.</p>
     #   @return [Types::GeospatialCircleSymbolStyle]
     class GeospatialPointStyle < Struct.new(
+      nil,
       :circle_symbol_style,
       keyword_init: true
     )
@@ -15509,6 +16154,7 @@ module Aws::QuickSight
     #   <p>The heatmap configuration of the geospatial point style.</p>
     #   @return [Types::GeospatialHeatmapConfiguration]
     class GeospatialPointStyleOptions < Struct.new(
+      nil,
       :selected_point_style,
       :cluster_marker_configuration,
       :heatmap_configuration,
@@ -15522,6 +16168,7 @@ module Aws::QuickSight
     #   <p>The visualization style for a polygon layer.</p>
     #   @return [Types::GeospatialPolygonStyle]
     class GeospatialPolygonLayer < Struct.new(
+      nil,
       :style,
       keyword_init: true
     )
@@ -15533,6 +16180,7 @@ module Aws::QuickSight
     #   <p>The polygon symbol style for a polygon layer.</p>
     #   @return [Types::GeospatialPolygonSymbolStyle]
     class GeospatialPolygonStyle < Struct.new(
+      nil,
       :polygon_symbol_style,
       keyword_init: true
     )
@@ -15550,6 +16198,7 @@ module Aws::QuickSight
     #   <p>The width of the border stroke.</p>
     #   @return [Types::GeospatialLineWidth]
     class GeospatialPolygonSymbolStyle < Struct.new(
+      nil,
       :fill_color,
       :stroke_color,
       :stroke_width,
@@ -15566,6 +16215,7 @@ module Aws::QuickSight
     #   <p>Enables and disables the view state of the color.</p>
     #   @return [String]
     class GeospatialSolidColor < Struct.new(
+      nil,
       :color,
       :state,
       keyword_init: true
@@ -15578,6 +16228,7 @@ module Aws::QuickSight
     #   <p>The ID of the static file.</p>
     #   @return [String]
     class GeospatialStaticFileSource < Struct.new(
+      nil,
       :static_file_id,
       keyword_init: true
     )
@@ -15592,6 +16243,7 @@ module Aws::QuickSight
     #   <p>The map zoom modes (manual, auto) of the geospatial window options.</p>
     #   @return [String]
     class GeospatialWindowOptions < Struct.new(
+      nil,
       :bounds,
       :map_zoom_mode,
       keyword_init: true
@@ -15656,6 +16308,7 @@ module Aws::QuickSight
     #   <p>A list of one or more dashboard IDs that you want anonymous users to have tempporary access to. Currently, the <code>IdentityType</code> parameter must be set to <code>ANONYMOUS</code> because other identity types authenticate as QuickSight or IAM users. For example, if you set "<code>--dashboard-id dash_id1 --dashboard-id dash_id2 dash_id3 identity-type ANONYMOUS</code>", the session can access all three dashboards.</p>
     #   @return [Array<String>]
     class GetDashboardEmbedUrlRequest < Struct.new(
+      nil,
       :aws_account_id,
       :dashboard_id,
       :identity_type,
@@ -15685,6 +16338,7 @@ module Aws::QuickSight
     #   <p>The Amazon Web Services request ID for this operation.</p>
     #   @return [String]
     class GetDashboardEmbedUrlResponse < Struct.new(
+      nil,
       :embed_url,
       :status,
       :request_id,
@@ -15761,6 +16415,7 @@ module Aws::QuickSight
     #               sessions.</p>
     #   @return [String]
     class GetSessionEmbedUrlRequest < Struct.new(
+      nil,
       :aws_account_id,
       :entry_point,
       :session_lifetime_in_minutes,
@@ -15783,6 +16438,7 @@ module Aws::QuickSight
     #   <p>The Amazon Web Services request ID for this operation.</p>
     #   @return [String]
     class GetSessionEmbedUrlResponse < Struct.new(
+      nil,
       :embed_url,
       :status,
       :request_id,
@@ -15804,6 +16460,7 @@ module Aws::QuickSight
     #   <p>Determines the options for side specific border.</p>
     #   @return [Types::TableSideBorderOptions]
     class GlobalTableBorderOptions < Struct.new(
+      nil,
       :uniform_border,
       :side_specific_border,
       keyword_init: true
@@ -15816,6 +16473,7 @@ module Aws::QuickSight
     #   <p>The list of gradient color stops.</p>
     #   @return [Array<Types::GradientStop>]
     class GradientColor < Struct.new(
+      nil,
       :stops,
       keyword_init: true
     )
@@ -15833,6 +16491,7 @@ module Aws::QuickSight
     #   <p>Determines the color.</p>
     #   @return [String]
     class GradientStop < Struct.new(
+      nil,
       :gradient_offset,
       :data_value,
       :color,
@@ -15852,6 +16511,7 @@ module Aws::QuickSight
     #   <p>The options that determine the sizing of the canvas used in a grid layout.</p>
     #   @return [Types::GridLayoutScreenCanvasSizeOptions]
     class GridLayoutCanvasSizeOptions < Struct.new(
+      nil,
       :screen_canvas_size_options,
       keyword_init: true
     )
@@ -15867,6 +16527,7 @@ module Aws::QuickSight
     #   <p>Configuration options for the canvas of a grid layout.</p>
     #   @return [Types::GridLayoutCanvasSizeOptions]
     class GridLayoutConfiguration < Struct.new(
+      nil,
       :elements,
       :canvas_size_options,
       keyword_init: true
@@ -15894,6 +16555,7 @@ module Aws::QuickSight
     #   <p>The height of a grid element expressed as a number of grid rows.</p>
     #   @return [Integer]
     class GridLayoutElement < Struct.new(
+      nil,
       :element_id,
       :element_type,
       :column_index,
@@ -15925,6 +16587,7 @@ module Aws::QuickSight
     #   <p>The width that the view port will be optimized for when the layout renders.</p>
     #   @return [String]
     class GridLayoutScreenCanvasSizeOptions < Struct.new(
+      nil,
       :resize_option,
       :optimized_view_port_width,
       keyword_init: true
@@ -15947,6 +16610,7 @@ module Aws::QuickSight
     #   <p>The principal ID of the group.</p>
     #   @return [String]
     class Group < Struct.new(
+      nil,
       :arn,
       :group_name,
       :description,
@@ -15965,6 +16629,7 @@ module Aws::QuickSight
     #   <p>The name of the group member (user).</p>
     #   @return [String]
     class GroupMember < Struct.new(
+      nil,
       :arn,
       :member_name,
       keyword_init: true
@@ -15987,6 +16652,7 @@ module Aws::QuickSight
     #   <p>The value of the named item, in this case <code>GROUP_NAME</code>, that you want to use as a filter.</p>
     #   @return [String]
     class GroupSearchFilter < Struct.new(
+      nil,
       :operator,
       :name,
       :value,
@@ -16012,6 +16678,7 @@ module Aws::QuickSight
     #   <p>The period size setup of a growth rate computation.</p>
     #   @return [Integer]
     class GrowthRateComputation < Struct.new(
+      nil,
       :computation_id,
       :name,
       :time,
@@ -16028,6 +16695,7 @@ module Aws::QuickSight
     #           </p>
     #   @return [Boolean]
     class GutterStyle < Struct.new(
+      nil,
       :show,
       keyword_init: true
     )
@@ -16050,6 +16718,7 @@ module Aws::QuickSight
     #   <p>The style options of a header or footer section.</p>
     #   @return [Types::SectionStyle]
     class HeaderFooterSectionConfiguration < Struct.new(
+      nil,
       :section_id,
       :layout,
       :style,
@@ -16069,6 +16738,7 @@ module Aws::QuickSight
     #   <p>The values field well of a heat map.</p>
     #   @return [Array<Types::MeasureField>]
     class HeatMapAggregatedFieldWells < Struct.new(
+      nil,
       :rows,
       :columns,
       :values,
@@ -16112,6 +16782,7 @@ module Aws::QuickSight
     #   <p>The general visual interactions setup for a visual.</p>
     #   @return [Types::VisualInteractionOptions]
     class HeatMapConfiguration < Struct.new(
+      nil,
       :field_wells,
       :sort_configuration,
       :row_axis_display_options,
@@ -16134,6 +16805,7 @@ module Aws::QuickSight
     #   <p>The aggregated field wells of a heat map.</p>
     #   @return [Types::HeatMapAggregatedFieldWells]
     class HeatMapFieldWells < Struct.new(
+      nil,
       :heat_map_aggregated_field_wells,
       keyword_init: true
     )
@@ -16154,6 +16826,7 @@ module Aws::QuickSight
     #   <p>The limit on the number of columns that are displayed in a heat map.</p>
     #   @return [Types::ItemsLimitConfiguration]
     class HeatMapSortConfiguration < Struct.new(
+      nil,
       :heat_map_row_sort,
       :heat_map_column_sort,
       :heat_map_row_items_limit_configuration,
@@ -16187,6 +16860,7 @@ module Aws::QuickSight
     #   <p>The alt text for the visual.</p>
     #   @return [String]
     class HeatMapVisual < Struct.new(
+      nil,
       :visual_id,
       :title,
       :subtitle,
@@ -16204,6 +16878,7 @@ module Aws::QuickSight
     #   <p>The value field wells of a histogram. Values are aggregated by <code>COUNT</code> or <code>DISTINCT_COUNT</code>.</p>
     #   @return [Array<Types::MeasureField>]
     class HistogramAggregatedFieldWells < Struct.new(
+      nil,
       :values,
       keyword_init: true
     )
@@ -16224,6 +16899,7 @@ module Aws::QuickSight
     #   <p>The options that determine the bin start value.</p>
     #   @return [Float]
     class HistogramBinOptions < Struct.new(
+      nil,
       :selected_bin_type,
       :bin_count,
       :bin_width,
@@ -16267,6 +16943,7 @@ module Aws::QuickSight
     #   <p>The general visual interactions setup for a visual.</p>
     #   @return [Types::VisualInteractionOptions]
     class HistogramConfiguration < Struct.new(
+      nil,
       :field_wells,
       :x_axis_display_options,
       :x_axis_label_options,
@@ -16286,6 +16963,7 @@ module Aws::QuickSight
     #   <p>The field well configuration of a histogram.</p>
     #   @return [Types::HistogramAggregatedFieldWells]
     class HistogramFieldWells < Struct.new(
+      nil,
       :histogram_aggregated_field_wells,
       keyword_init: true
     )
@@ -16313,6 +16991,7 @@ module Aws::QuickSight
     #   <p>The alt text for the visual.</p>
     #   @return [String]
     class HistogramVisual < Struct.new(
+      nil,
       :visual_id,
       :title,
       :subtitle,
@@ -16344,6 +17023,7 @@ module Aws::QuickSight
     #   <p>Assignment status.</p>
     #   @return [String]
     class IAMPolicyAssignment < Struct.new(
+      nil,
       :aws_account_id,
       :assignment_id,
       :assignment_name,
@@ -16363,6 +17043,7 @@ module Aws::QuickSight
     #   <p>Assignment status.</p>
     #   @return [String]
     class IAMPolicyAssignmentSummary < Struct.new(
+      nil,
       :assignment_name,
       :assignment_status,
       keyword_init: true
@@ -16375,6 +17056,7 @@ module Aws::QuickSight
     #   <p>The identity of the identifier.</p>
     #   @return [String]
     class Identifier < Struct.new(
+      nil,
       :identity,
       keyword_init: true
     )
@@ -16386,6 +17068,7 @@ module Aws::QuickSight
     #   <p>A Boolean option that controls whether Trusted Identity Propagation should be used.</p>
     #   @return [Boolean]
     class IdentityCenterConfiguration < Struct.new(
+      nil,
       :enable_identity_propagation,
       keyword_init: true
     )
@@ -16405,6 +17088,7 @@ module Aws::QuickSight
     #   <p>The Amazon Web Services request ID for this request.</p>
     #   @return [String]
     class IdentityTypeNotSupportedException < Struct.new(
+      nil,
       :message,
       :request_id,
       keyword_init: true
@@ -16420,6 +17104,7 @@ module Aws::QuickSight
     #   <p>The URL that points to the generated logo image.</p>
     #   @return [String]
     class Image < Struct.new(
+      nil,
       :source,
       :generated_image_url,
       keyword_init: true
@@ -16432,6 +17117,7 @@ module Aws::QuickSight
     #   <p>The source of the image.</p>
     #   @return [Types::ImageSource]
     class ImageConfiguration < Struct.new(
+      nil,
       :source,
       keyword_init: true
     )
@@ -16467,6 +17153,7 @@ module Aws::QuickSight
     #            <p>This is a union type structure. For this structure to be valid, only one of the attributes can be defined.</p>
     #   @return [Array<Types::ImageCustomActionOperation>]
     class ImageCustomAction < Struct.new(
+      nil,
       :custom_action_id,
       :name,
       :status,
@@ -16490,6 +17177,7 @@ module Aws::QuickSight
     #   <p>The set parameter operation that sets parameters in custom action.</p>
     #   @return [Types::CustomActionSetParametersOperation]
     class ImageCustomActionOperation < Struct.new(
+      nil,
       :navigation_operation,
       :url_operation,
       :set_parameters_operation,
@@ -16503,6 +17191,7 @@ module Aws::QuickSight
     #   <p>The menu options for the image.</p>
     #   @return [Types::ImageMenuOption]
     class ImageInteractionOptions < Struct.new(
+      nil,
       :image_menu_option,
       keyword_init: true
     )
@@ -16514,6 +17203,7 @@ module Aws::QuickSight
     #   <p>The availability status of the image menu. If the value of this property is set to <code>ENABLED</code>, dashboard readers can interact with the image menu.</p>
     #   @return [String]
     class ImageMenuOption < Struct.new(
+      nil,
       :availability_status,
       keyword_init: true
     )
@@ -16531,6 +17221,7 @@ module Aws::QuickSight
     #   <p>The image with the height set to 32 pixels.</p>
     #   @return [Types::Image]
     class ImageSet < Struct.new(
+      nil,
       :original,
       :height64,
       :height32,
@@ -16544,6 +17235,7 @@ module Aws::QuickSight
     #   <p>The original image.</p>
     #   @return [Types::ImageConfiguration]
     class ImageSetConfiguration < Struct.new(
+      nil,
       :original,
       keyword_init: true
     )
@@ -16578,6 +17270,7 @@ module Aws::QuickSight
     #   <p>The source of the image static file.</p>
     #   @return [Types::StaticFileSource]
     class ImageStaticFile < Struct.new(
+      nil,
       :static_file_id,
       :source,
       keyword_init: true
@@ -16599,6 +17292,7 @@ module Aws::QuickSight
     #   <p>The HTTP path of the Impala data source.</p>
     #   @return [String]
     class ImpalaParameters < Struct.new(
+      nil,
       :host,
       :port,
       :database,
@@ -16613,6 +17307,7 @@ module Aws::QuickSight
     #   <p>The lookback window setup for an incremental refresh configuration.</p>
     #   @return [Types::LookbackWindow]
     class IncrementalRefresh < Struct.new(
+      nil,
       :lookback_window,
       keyword_init: true
     )
@@ -16654,6 +17349,7 @@ module Aws::QuickSight
     #   <p>Type of this ingestion.</p>
     #   @return [String]
     class Ingestion < Struct.new(
+      nil,
       :arn,
       :ingestion_id,
       :ingestion_status,
@@ -16681,6 +17377,7 @@ module Aws::QuickSight
     #   <p>A <code>CategoryInnerFilter</code> filters text values for the <code>NestedFilter</code>.</p>
     #   @return [Types::CategoryInnerFilter]
     class InnerFilter < Struct.new(
+      nil,
       :category_inner_filter,
       keyword_init: true
     )
@@ -16698,6 +17395,7 @@ module Aws::QuickSight
     #   <p>The sub data type of the column. Sub types are only available for decimal columns that are part of a SPICE dataset.</p>
     #   @return [String]
     class InputColumn < Struct.new(
+      nil,
       :name,
       :type,
       :sub_type,
@@ -16717,6 +17415,7 @@ module Aws::QuickSight
     #   <p>The general visual interactions setup for a visual.</p>
     #   @return [Types::VisualInteractionOptions]
     class InsightConfiguration < Struct.new(
+      nil,
       :computations,
       :custom_narrative,
       :interactions,
@@ -16749,6 +17448,7 @@ module Aws::QuickSight
     #   <p>The alt text for the visual.</p>
     #   @return [String]
     class InsightVisual < Struct.new(
+      nil,
       :visual_id,
       :title,
       :subtitle,
@@ -16775,6 +17475,7 @@ module Aws::QuickSight
     #   <p>A list of default values for a given integer parameter. This structure only accepts static values.</p>
     #   @return [Types::IntegerDatasetParameterDefaultValues]
     class IntegerDatasetParameter < Struct.new(
+      nil,
       :id,
       :name,
       :value_type,
@@ -16789,6 +17490,7 @@ module Aws::QuickSight
     #   <p>A list of static default values for a given integer parameter.</p>
     #   @return [Array<Integer>]
     class IntegerDatasetParameterDefaultValues < Struct.new(
+      nil,
       :static_values,
       keyword_init: true
     )
@@ -16803,6 +17505,7 @@ module Aws::QuickSight
     #   <p>The static values of the <code>IntegerDefaultValues</code>.</p>
     #   @return [Array<Integer>]
     class IntegerDefaultValues < Struct.new(
+      nil,
       :dynamic_value,
       :static_values,
       keyword_init: true
@@ -16818,6 +17521,7 @@ module Aws::QuickSight
     #   <p>The values for the integer parameter.</p>
     #   @return [Array<Integer>]
     class IntegerParameter < Struct.new(
+      nil,
       :name,
       :values,
       keyword_init: true
@@ -16842,6 +17546,7 @@ module Aws::QuickSight
     #   <p>A list of dataset parameters that are mapped to an analysis parameter.</p>
     #   @return [Array<Types::MappedDataSetParameter>]
     class IntegerParameterDeclaration < Struct.new(
+      nil,
       :parameter_value_type,
       :name,
       :default_values,
@@ -16871,6 +17576,7 @@ module Aws::QuickSight
     #   <p>A custom value that's used when the value of a parameter isn't set.</p>
     #   @return [Integer]
     class IntegerValueWhenUnsetConfiguration < Struct.new(
+      nil,
       :value_when_unset_option,
       :custom_value,
       keyword_init: true
@@ -16890,6 +17596,7 @@ module Aws::QuickSight
     #   <p>The Amazon Web Services request ID for this request.</p>
     #   @return [String]
     class InternalFailureException < Struct.new(
+      nil,
       :message,
       :request_id,
       keyword_init: true
@@ -16901,6 +17608,7 @@ module Aws::QuickSight
     # @!attribute message
     #   @return [String]
     class InternalServerException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -16914,6 +17622,7 @@ module Aws::QuickSight
     #   <p>The Amazon Web Services request ID for this request.</p>
     #   @return [String]
     class InvalidNextTokenException < Struct.new(
+      nil,
       :message,
       :request_id,
       keyword_init: true
@@ -16928,6 +17637,7 @@ module Aws::QuickSight
     #   <p>The Amazon Web Services request ID for this request.</p>
     #   @return [String]
     class InvalidParameterValueException < Struct.new(
+      nil,
       :message,
       :request_id,
       keyword_init: true
@@ -16942,6 +17652,7 @@ module Aws::QuickSight
     #   <p>The Amazon Web Services request ID for this request.</p>
     #   @return [String]
     class InvalidRequestException < Struct.new(
+      nil,
       :message,
       :request_id,
       keyword_init: true
@@ -16957,6 +17668,7 @@ module Aws::QuickSight
     #   <p>The error that is returned for the <code>InvalidTopicReviewedAnswer</code>.</p>
     #   @return [String]
     class InvalidTopicReviewedAnswer < Struct.new(
+      nil,
       :answer_id,
       :error,
       keyword_init: true
@@ -16986,6 +17698,7 @@ module Aws::QuickSight
     #            </ul>
     #   @return [String]
     class ItemsLimitConfiguration < Struct.new(
+      nil,
       :items_limit,
       :other_categories,
       keyword_init: true
@@ -17003,6 +17716,7 @@ module Aws::QuickSight
     #   <p>The base URL of the Jira site.</p>
     #   @return [String]
     class JiraParameters < Struct.new(
+      nil,
       :site_base_url,
       keyword_init: true
     )
@@ -17029,6 +17743,7 @@ module Aws::QuickSight
     #   <p>The join instructions provided in the <code>ON</code> clause of a join.</p>
     #   @return [String]
     class JoinInstruction < Struct.new(
+      nil,
       :left_operand,
       :right_operand,
       :left_join_key_properties,
@@ -17046,6 +17761,7 @@ module Aws::QuickSight
     #               a join key. This is used by QuickSight to optimize query performance.</p>
     #   @return [Boolean]
     class JoinKeyProperties < Struct.new(
+      nil,
       :unique_key,
       keyword_init: true
     )
@@ -17065,6 +17781,7 @@ module Aws::QuickSight
     #   <p>The conditional formatting of the actual value's icon.</p>
     #   @return [Types::ConditionalFormattingIcon]
     class KPIActualValueConditionalFormatting < Struct.new(
+      nil,
       :text_color,
       :icon,
       keyword_init: true
@@ -17080,6 +17797,7 @@ module Aws::QuickSight
     #   <p>The conditional formatting of the comparison value's icon.</p>
     #   @return [Types::ConditionalFormattingIcon]
     class KPIComparisonValueConditionalFormatting < Struct.new(
+      nil,
       :text_color,
       :icon,
       keyword_init: true
@@ -17092,6 +17810,7 @@ module Aws::QuickSight
     #   <p>The conditional formatting options of a KPI visual.</p>
     #   @return [Array<Types::KPIConditionalFormattingOption>]
     class KPIConditionalFormatting < Struct.new(
+      nil,
       :conditional_formatting_options,
       keyword_init: true
     )
@@ -17112,6 +17831,7 @@ module Aws::QuickSight
     #   <p>The conditional formatting for the comparison value of a KPI visual.</p>
     #   @return [Types::KPIComparisonValueConditionalFormatting]
     class KPIConditionalFormattingOption < Struct.new(
+      nil,
       :primary_value,
       :progress_bar,
       :actual_value,
@@ -17135,6 +17855,7 @@ module Aws::QuickSight
     #   <p>The general visual interactions setup for a visual.</p>
     #   @return [Types::VisualInteractionOptions]
     class KPIConfiguration < Struct.new(
+      nil,
       :field_wells,
       :sort_configuration,
       :kpi_options,
@@ -17155,6 +17876,7 @@ module Aws::QuickSight
     #   <p>The trend group field wells of a KPI visual.</p>
     #   @return [Array<Types::DimensionField>]
     class KPIFieldWells < Struct.new(
+      nil,
       :values,
       :target_values,
       :trend_groups,
@@ -17192,6 +17914,7 @@ module Aws::QuickSight
     #   <p>The options that determine the layout a KPI visual.</p>
     #   @return [Types::KPIVisualLayoutOptions]
     class KPIOptions < Struct.new(
+      nil,
       :progress_bar,
       :trend_arrows,
       :secondary_value,
@@ -17214,6 +17937,7 @@ module Aws::QuickSight
     #   <p>The conditional formatting of the primary value's icon.</p>
     #   @return [Types::ConditionalFormattingIcon]
     class KPIPrimaryValueConditionalFormatting < Struct.new(
+      nil,
       :text_color,
       :icon,
       keyword_init: true
@@ -17226,6 +17950,7 @@ module Aws::QuickSight
     #   <p>The conditional formatting of the progress bar's foreground color.</p>
     #   @return [Types::ConditionalFormattingColor]
     class KPIProgressBarConditionalFormatting < Struct.new(
+      nil,
       :foreground_color,
       keyword_init: true
     )
@@ -17237,6 +17962,7 @@ module Aws::QuickSight
     #   <p>The sort configuration of the trend group fields.</p>
     #   @return [Array<Types::FieldSortOptions>]
     class KPISortConfiguration < Struct.new(
+      nil,
       :trend_group_sort,
       keyword_init: true
     )
@@ -17257,6 +17983,7 @@ module Aws::QuickSight
     #   <p>The tooltip visibility of the sparkline.</p>
     #   @return [String]
     class KPISparklineOptions < Struct.new(
+      nil,
       :visibility,
       :type,
       :color,
@@ -17293,6 +18020,7 @@ module Aws::QuickSight
     #   <p>The alt text for the visual.</p>
     #   @return [String]
     class KPIVisual < Struct.new(
+      nil,
       :visual_id,
       :title,
       :subtitle,
@@ -17311,6 +18039,7 @@ module Aws::QuickSight
     #   <p>The standard layout of the KPI visual.</p>
     #   @return [Types::KPIVisualStandardLayout]
     class KPIVisualLayoutOptions < Struct.new(
+      nil,
       :standard_layout,
       keyword_init: true
     )
@@ -17322,6 +18051,7 @@ module Aws::QuickSight
     #   <p>The standard layout type.</p>
     #   @return [String]
     class KPIVisualStandardLayout < Struct.new(
+      nil,
       :type,
       keyword_init: true
     )
@@ -17339,6 +18069,7 @@ module Aws::QuickSight
     #   <p>The text for the label.</p>
     #   @return [String]
     class LabelOptions < Struct.new(
+      nil,
       :visibility,
       :font_configuration,
       :custom_label,
@@ -17376,6 +18107,7 @@ module Aws::QuickSight
     #            <p>This is a union type structure. For this structure to be valid, only one of the attributes can be defined.</p>
     #   @return [Array<Types::LayerCustomActionOperation>]
     class LayerCustomAction < Struct.new(
+      nil,
       :custom_action_id,
       :name,
       :status,
@@ -17402,6 +18134,7 @@ module Aws::QuickSight
     #   <p>The set parameter operation that sets parameters in custom action.</p>
     #   @return [Types::CustomActionSetParametersOperation]
     class LayerCustomActionOperation < Struct.new(
+      nil,
       :filter_operation,
       :navigation_operation,
       :url_operation,
@@ -17431,6 +18164,7 @@ module Aws::QuickSight
     #   <p>The alt text for the visual.</p>
     #   @return [String]
     class LayerMapVisual < Struct.new(
+      nil,
       :visual_id,
       :title,
       :subtitle,
@@ -17449,6 +18183,7 @@ module Aws::QuickSight
     #   <p>The configuration that determines what the type of layout for a sheet.</p>
     #   @return [Types::LayoutConfiguration]
     class Layout < Struct.new(
+      nil,
       :configuration,
       keyword_init: true
     )
@@ -17467,6 +18202,7 @@ module Aws::QuickSight
     #   <p>A section based layout organizes visuals into multiple sections and has customized header, footer and page break.</p>
     #   @return [Types::SectionBasedLayoutConfiguration]
     class LayoutConfiguration < Struct.new(
+      nil,
       :grid_layout,
       :free_form_layout,
       :section_based_layout,
@@ -17519,6 +18255,7 @@ module Aws::QuickSight
     #   <p>Configures the display properties of the given text.</p>
     #   @return [Types::FontConfiguration]
     class LegendOptions < Struct.new(
+      nil,
       :visibility,
       :title,
       :position,
@@ -17540,6 +18277,7 @@ module Aws::QuickSight
     #   <p>The Amazon Web Services request ID for this request.</p>
     #   @return [String]
     class LimitExceededException < Struct.new(
+      nil,
       :message,
       :resource_type,
       :request_id,
@@ -17562,6 +18300,7 @@ module Aws::QuickSight
     #   <p>The small multiples field well of a line chart.</p>
     #   @return [Array<Types::DimensionField>]
     class LineChartAggregatedFieldWells < Struct.new(
+      nil,
       :category,
       :values,
       :colors,
@@ -17636,6 +18375,7 @@ module Aws::QuickSight
     #   <p>The general visual interactions setup for a visual.</p>
     #   @return [Types::VisualInteractionOptions]
     class LineChartConfiguration < Struct.new(
+      nil,
       :field_wells,
       :sort_configuration,
       :forecast_configurations,
@@ -17673,6 +18413,7 @@ module Aws::QuickSight
     #   <p>Marker styles options for all line series in the visual.</p>
     #   @return [Types::LineChartMarkerStyleSettings]
     class LineChartDefaultSeriesSettings < Struct.new(
+      nil,
       :axis_binding,
       :line_style_settings,
       :marker_style_settings,
@@ -17686,6 +18427,7 @@ module Aws::QuickSight
     #   <p>The field well configuration of a line chart.</p>
     #   @return [Types::LineChartAggregatedFieldWells]
     class LineChartFieldWells < Struct.new(
+      nil,
       :line_chart_aggregated_field_wells,
       keyword_init: true
     )
@@ -17734,6 +18476,7 @@ module Aws::QuickSight
     #   <p>Width that determines the line thickness.</p>
     #   @return [String]
     class LineChartLineStyleSettings < Struct.new(
+      nil,
       :line_visibility,
       :line_interpolation,
       :line_style,
@@ -17779,6 +18522,7 @@ module Aws::QuickSight
     #   <p>Color of marker in the series.</p>
     #   @return [String]
     class LineChartMarkerStyleSettings < Struct.new(
+      nil,
       :marker_visibility,
       :marker_shape,
       :marker_size,
@@ -17796,6 +18540,7 @@ module Aws::QuickSight
     #   <p>Marker styles options for a line series in <code>LineChartVisual</code>.</p>
     #   @return [Types::LineChartMarkerStyleSettings]
     class LineChartSeriesSettings < Struct.new(
+      nil,
       :line_style_settings,
       :marker_style_settings,
       keyword_init: true
@@ -17820,6 +18565,7 @@ module Aws::QuickSight
     #   <p>The limit on the number of small multiples panels that are displayed.</p>
     #   @return [Types::ItemsLimitConfiguration]
     class LineChartSortConfiguration < Struct.new(
+      nil,
       :category_sort,
       :category_items_limit_configuration,
       :color_items_limit_configuration,
@@ -17854,6 +18600,7 @@ module Aws::QuickSight
     #   <p>The alt text for the visual.</p>
     #   @return [String]
     class LineChartVisual < Struct.new(
+      nil,
       :visual_id,
       :title,
       :subtitle,
@@ -17874,6 +18621,7 @@ module Aws::QuickSight
     #   <p>The configuration options that determine how missing data is treated during the rendering of a line chart.</p>
     #   @return [Array<Types::MissingDataConfiguration>]
     class LineSeriesAxisDisplayOptions < Struct.new(
+      nil,
       :axis_options,
       :missing_data_configurations,
       keyword_init: true
@@ -17886,6 +18634,7 @@ module Aws::QuickSight
     #   <p>A structure that contains the permissions of a shareable link.</p>
     #   @return [Array<Types::ResourcePermission>]
     class LinkSharingConfiguration < Struct.new(
+      nil,
       :permissions,
       keyword_init: true
     )
@@ -17902,6 +18651,7 @@ module Aws::QuickSight
     #   <p>The maximum number of results to return.</p>
     #   @return [Integer]
     class ListAnalysesRequest < Struct.new(
+      nil,
       :aws_account_id,
       :next_token,
       :max_results,
@@ -17923,6 +18673,7 @@ module Aws::QuickSight
     #   <p>The Amazon Web Services request ID for this operation.</p>
     #   @return [String]
     class ListAnalysesResponse < Struct.new(
+      nil,
       :analysis_summary_list,
       :next_token,
       :status,
@@ -17947,6 +18698,7 @@ module Aws::QuickSight
     #   <p>The maximum number of results to be returned per request.</p>
     #   @return [Integer]
     class ListAssetBundleExportJobsRequest < Struct.new(
+      nil,
       :aws_account_id,
       :next_token,
       :max_results,
@@ -17968,6 +18720,7 @@ module Aws::QuickSight
     #   <p>The HTTP status of the request.</p>
     #   @return [Integer]
     class ListAssetBundleExportJobsResponse < Struct.new(
+      nil,
       :asset_bundle_export_job_summary_list,
       :next_token,
       :request_id,
@@ -17992,6 +18745,7 @@ module Aws::QuickSight
     #   <p>The maximum number of results to be returned per request.</p>
     #   @return [Integer]
     class ListAssetBundleImportJobsRequest < Struct.new(
+      nil,
       :aws_account_id,
       :next_token,
       :max_results,
@@ -18013,6 +18767,7 @@ module Aws::QuickSight
     #   <p>The HTTP status of the response.</p>
     #   @return [Integer]
     class ListAssetBundleImportJobsResponse < Struct.new(
+      nil,
       :asset_bundle_import_job_summary_list,
       :next_token,
       :request_id,
@@ -18037,6 +18792,7 @@ module Aws::QuickSight
     #   <p>The token for the next set of results, or null if there are no more results.</p>
     #   @return [String]
     class ListBrandsRequest < Struct.new(
+      nil,
       :aws_account_id,
       :max_results,
       :next_token,
@@ -18053,6 +18809,7 @@ module Aws::QuickSight
     #   	          information about each brand.</p>
     #   @return [Array<Types::BrandSummary>]
     class ListBrandsResponse < Struct.new(
+      nil,
       :next_token,
       :brands,
       keyword_init: true
@@ -18074,6 +18831,7 @@ module Aws::QuickSight
     #   <p>The configuration of info icon label options.</p>
     #   @return [Types::SheetControlInfoIconLabelOptions]
     class ListControlDisplayOptions < Struct.new(
+      nil,
       :search_options,
       :select_all_options,
       :title_options,
@@ -18088,6 +18846,7 @@ module Aws::QuickSight
     #   <p>The visibility configuration of the search options in a list control.</p>
     #   @return [String]
     class ListControlSearchOptions < Struct.new(
+      nil,
       :visibility,
       keyword_init: true
     )
@@ -18099,6 +18858,7 @@ module Aws::QuickSight
     #   <p>The visibility configuration of the <code>Select all</code> options in a list control.</p>
     #   @return [String]
     class ListControlSelectAllOptions < Struct.new(
+      nil,
       :visibility,
       keyword_init: true
     )
@@ -18115,6 +18875,7 @@ module Aws::QuickSight
     #   <p>The token for the next set of results, or null if there are no more results.</p>
     #   @return [String]
     class ListCustomPermissionsRequest < Struct.new(
+      nil,
       :aws_account_id,
       :max_results,
       :next_token,
@@ -18136,6 +18897,7 @@ module Aws::QuickSight
     #   <p>The Amazon Web Services request ID for this operation.</p>
     #   @return [String]
     class ListCustomPermissionsResponse < Struct.new(
+      nil,
       :status,
       :custom_permissions_list,
       :next_token,
@@ -18164,6 +18926,7 @@ module Aws::QuickSight
     #   <p>The maximum number of results to be returned per request.</p>
     #   @return [Integer]
     class ListDashboardVersionsRequest < Struct.new(
+      nil,
       :aws_account_id,
       :dashboard_id,
       :next_token,
@@ -18186,6 +18949,7 @@ module Aws::QuickSight
     #   <p>The Amazon Web Services request ID for this operation.</p>
     #   @return [String]
     class ListDashboardVersionsResponse < Struct.new(
+      nil,
       :dashboard_version_summary_list,
       :next_token,
       :status,
@@ -18211,6 +18975,7 @@ module Aws::QuickSight
     #   <p>The maximum number of results to be returned per request.</p>
     #   @return [Integer]
     class ListDashboardsRequest < Struct.new(
+      nil,
       :aws_account_id,
       :next_token,
       :max_results,
@@ -18233,6 +18998,7 @@ module Aws::QuickSight
     #   <p>The Amazon Web Services request ID for this operation.</p>
     #   @return [String]
     class ListDashboardsResponse < Struct.new(
+      nil,
       :dashboard_summary_list,
       :next_token,
       :status,
@@ -18257,6 +19023,7 @@ module Aws::QuickSight
     #   <p>The maximum number of results to be returned per request.</p>
     #   @return [Integer]
     class ListDataSetsRequest < Struct.new(
+      nil,
       :aws_account_id,
       :next_token,
       :max_results,
@@ -18278,6 +19045,7 @@ module Aws::QuickSight
     #   <p>The HTTP status of the request.</p>
     #   @return [Integer]
     class ListDataSetsResponse < Struct.new(
+      nil,
       :data_set_summaries,
       :next_token,
       :request_id,
@@ -18302,6 +19070,7 @@ module Aws::QuickSight
     #   <p>The maximum number of results to be returned per request.</p>
     #   @return [Integer]
     class ListDataSourcesRequest < Struct.new(
+      nil,
       :aws_account_id,
       :next_token,
       :max_results,
@@ -18323,6 +19092,7 @@ module Aws::QuickSight
     #   <p>The HTTP status of the request.</p>
     #   @return [Integer]
     class ListDataSourcesResponse < Struct.new(
+      nil,
       :data_sources,
       :next_token,
       :request_id,
@@ -18350,6 +19120,7 @@ module Aws::QuickSight
     #   <p>The maximum number of results to be returned per request.</p>
     #   @return [Integer]
     class ListFolderMembersRequest < Struct.new(
+      nil,
       :aws_account_id,
       :folder_id,
       :next_token,
@@ -18372,6 +19143,7 @@ module Aws::QuickSight
     #   <p>The Amazon Web Services request ID for this operation.</p>
     #   @return [String]
     class ListFolderMembersResponse < Struct.new(
+      nil,
       :status,
       :folder_member_list,
       :next_token,
@@ -18399,6 +19171,7 @@ module Aws::QuickSight
     #   <p>The maximum number of results to be returned per request.</p>
     #   @return [Integer]
     class ListFoldersForResourceRequest < Struct.new(
+      nil,
       :aws_account_id,
       :resource_arn,
       :next_token,
@@ -18421,6 +19194,7 @@ module Aws::QuickSight
     #   <p>The Amazon Web Services request ID for this operation.</p>
     #   @return [String]
     class ListFoldersForResourceResponse < Struct.new(
+      nil,
       :status,
       :folders,
       :next_token,
@@ -18445,6 +19219,7 @@ module Aws::QuickSight
     #   <p>The maximum number of results to be returned per request.</p>
     #   @return [Integer]
     class ListFoldersRequest < Struct.new(
+      nil,
       :aws_account_id,
       :next_token,
       :max_results,
@@ -18466,6 +19241,7 @@ module Aws::QuickSight
     #   <p>The Amazon Web Services request ID for this operation.</p>
     #   @return [String]
     class ListFoldersResponse < Struct.new(
+      nil,
       :status,
       :folder_summary_list,
       :next_token,
@@ -18497,6 +19273,7 @@ module Aws::QuickSight
     #   <p>The namespace of the group that you want a list of users from.</p>
     #   @return [String]
     class ListGroupMembershipsRequest < Struct.new(
+      nil,
       :group_name,
       :next_token,
       :max_results,
@@ -18520,6 +19297,7 @@ module Aws::QuickSight
     #   <p>The HTTP status of the request.</p>
     #   @return [Integer]
     class ListGroupMembershipsResponse < Struct.new(
+      nil,
       :group_member_list,
       :next_token,
       :request_id,
@@ -18548,6 +19326,7 @@ module Aws::QuickSight
     #   <p>The namespace that you want a list of groups from.</p>
     #   @return [String]
     class ListGroupsRequest < Struct.new(
+      nil,
       :aws_account_id,
       :next_token,
       :max_results,
@@ -18570,6 +19349,7 @@ module Aws::QuickSight
     #   <p>The HTTP status of the request.</p>
     #   @return [Integer]
     class ListGroupsResponse < Struct.new(
+      nil,
       :group_list,
       :next_token,
       :request_id,
@@ -18600,6 +19380,7 @@ module Aws::QuickSight
     #   <p>The namespace of the assignment.</p>
     #   @return [String]
     class ListIAMPolicyAssignmentsForUserRequest < Struct.new(
+      nil,
       :aws_account_id,
       :user_name,
       :next_token,
@@ -18623,6 +19404,7 @@ module Aws::QuickSight
     #   <p>The HTTP status of the request.</p>
     #   @return [Integer]
     class ListIAMPolicyAssignmentsForUserResponse < Struct.new(
+      nil,
       :active_assignments,
       :request_id,
       :next_token,
@@ -18654,6 +19436,7 @@ module Aws::QuickSight
     #   <p>The maximum number of results to be returned per request.</p>
     #   @return [Integer]
     class ListIAMPolicyAssignmentsRequest < Struct.new(
+      nil,
       :aws_account_id,
       :assignment_status,
       :namespace,
@@ -18677,6 +19460,7 @@ module Aws::QuickSight
     #   <p>The HTTP status of the request.</p>
     #   @return [Integer]
     class ListIAMPolicyAssignmentsResponse < Struct.new(
+      nil,
       :iam_policy_assignments,
       :next_token,
       :request_id,
@@ -18701,6 +19485,7 @@ module Aws::QuickSight
     #   <p>The token for the next set of results, or null if there are no more results.</p>
     #   @return [String]
     class ListIdentityPropagationConfigsRequest < Struct.new(
+      nil,
       :aws_account_id,
       :max_results,
       :next_token,
@@ -18722,6 +19507,7 @@ module Aws::QuickSight
     #   <p>The Amazon Web Services request ID for this operation.</p>
     #   @return [String]
     class ListIdentityPropagationConfigsResponse < Struct.new(
+      nil,
       :services,
       :next_token,
       :status,
@@ -18749,6 +19535,7 @@ module Aws::QuickSight
     #   <p>The maximum number of results to be returned per request.</p>
     #   @return [Integer]
     class ListIngestionsRequest < Struct.new(
+      nil,
       :data_set_id,
       :next_token,
       :aws_account_id,
@@ -18771,6 +19558,7 @@ module Aws::QuickSight
     #   <p>The HTTP status of the request.</p>
     #   @return [Integer]
     class ListIngestionsResponse < Struct.new(
+      nil,
       :ingestions,
       :next_token,
       :request_id,
@@ -18795,6 +19583,7 @@ module Aws::QuickSight
     #   <p>The maximum number of results to return.</p>
     #   @return [Integer]
     class ListNamespacesRequest < Struct.new(
+      nil,
       :aws_account_id,
       :next_token,
       :max_results,
@@ -18818,6 +19607,7 @@ module Aws::QuickSight
     #   <p>The HTTP status of the request.</p>
     #   @return [Integer]
     class ListNamespacesResponse < Struct.new(
+      nil,
       :namespaces,
       :next_token,
       :request_id,
@@ -18839,6 +19629,7 @@ module Aws::QuickSight
     #   <p>The ID of the dataset.</p>
     #   @return [String]
     class ListRefreshSchedulesRequest < Struct.new(
+      nil,
       :aws_account_id,
       :data_set_id,
       keyword_init: true
@@ -18856,6 +19647,7 @@ module Aws::QuickSight
     #   <p>The Amazon Web Services request ID for this operation.</p>
     #   @return [String]
     class ListRefreshSchedulesResponse < Struct.new(
+      nil,
       :refresh_schedules,
       :status,
       :request_id,
@@ -18885,6 +19677,7 @@ module Aws::QuickSight
     #   <p>The namespace that includes the role.</p>
     #   @return [String]
     class ListRoleMembershipsRequest < Struct.new(
+      nil,
       :role,
       :next_token,
       :max_results,
@@ -18908,6 +19701,7 @@ module Aws::QuickSight
     #   <p>The HTTP status of the request.</p>
     #   @return [Integer]
     class ListRoleMembershipsResponse < Struct.new(
+      nil,
       :members_list,
       :next_token,
       :request_id,
@@ -18926,6 +19720,7 @@ module Aws::QuickSight
     #   <p>The Amazon Resource Name (ARN) of the resource that you want a list of tags for.</p>
     #   @return [String]
     class ListTagsForResourceRequest < Struct.new(
+      nil,
       :resource_arn,
       keyword_init: true
     )
@@ -18943,6 +19738,7 @@ module Aws::QuickSight
     #   <p>The HTTP status of the request.</p>
     #   @return [Integer]
     class ListTagsForResourceResponse < Struct.new(
+      nil,
       :tags,
       :request_id,
       :status,
@@ -18969,6 +19765,7 @@ module Aws::QuickSight
     #   <p>The maximum number of results to be returned per request.</p>
     #   @return [Integer]
     class ListTemplateAliasesRequest < Struct.new(
+      nil,
       :aws_account_id,
       :template_id,
       :next_token,
@@ -18991,6 +19788,7 @@ module Aws::QuickSight
     #   <p>The token for the next set of results, or null if there are no more results.</p>
     #   @return [String]
     class ListTemplateAliasesResponse < Struct.new(
+      nil,
       :template_alias_list,
       :status,
       :request_id,
@@ -19018,6 +19816,7 @@ module Aws::QuickSight
     #   <p>The maximum number of results to be returned per request.</p>
     #   @return [Integer]
     class ListTemplateVersionsRequest < Struct.new(
+      nil,
       :aws_account_id,
       :template_id,
       :next_token,
@@ -19040,6 +19839,7 @@ module Aws::QuickSight
     #   <p>The Amazon Web Services request ID for this operation.</p>
     #   @return [String]
     class ListTemplateVersionsResponse < Struct.new(
+      nil,
       :template_version_summary_list,
       :next_token,
       :status,
@@ -19064,6 +19864,7 @@ module Aws::QuickSight
     #   <p>The maximum number of results to be returned per request.</p>
     #   @return [Integer]
     class ListTemplatesRequest < Struct.new(
+      nil,
       :aws_account_id,
       :next_token,
       :max_results,
@@ -19085,6 +19886,7 @@ module Aws::QuickSight
     #   <p>The Amazon Web Services request ID for this operation.</p>
     #   @return [String]
     class ListTemplatesResponse < Struct.new(
+      nil,
       :template_summary_list,
       :next_token,
       :status,
@@ -19112,6 +19914,7 @@ module Aws::QuickSight
     #   <p>The maximum number of results to be returned per request.</p>
     #   @return [Integer]
     class ListThemeAliasesRequest < Struct.new(
+      nil,
       :aws_account_id,
       :theme_id,
       :next_token,
@@ -19134,6 +19937,7 @@ module Aws::QuickSight
     #   <p>The token for the next set of results, or null if there are no more results.</p>
     #   @return [String]
     class ListThemeAliasesResponse < Struct.new(
+      nil,
       :theme_alias_list,
       :status,
       :request_id,
@@ -19161,6 +19965,7 @@ module Aws::QuickSight
     #   <p>The maximum number of results to be returned per request.</p>
     #   @return [Integer]
     class ListThemeVersionsRequest < Struct.new(
+      nil,
       :aws_account_id,
       :theme_id,
       :next_token,
@@ -19183,6 +19988,7 @@ module Aws::QuickSight
     #   <p>The Amazon Web Services request ID for this operation.</p>
     #   @return [String]
     class ListThemeVersionsResponse < Struct.new(
+      nil,
       :theme_version_summary_list,
       :next_token,
       :status,
@@ -19224,6 +20030,7 @@ module Aws::QuickSight
     #            </ul>
     #   @return [String]
     class ListThemesRequest < Struct.new(
+      nil,
       :aws_account_id,
       :next_token,
       :max_results,
@@ -19246,6 +20053,7 @@ module Aws::QuickSight
     #   <p>The Amazon Web Services request ID for this operation.</p>
     #   @return [String]
     class ListThemesResponse < Struct.new(
+      nil,
       :theme_summary_list,
       :next_token,
       :status,
@@ -19268,6 +20076,7 @@ module Aws::QuickSight
     #   <p>The ID for the topic that you want to describe. This ID is unique per Amazon Web Services Region for each Amazon Web Services account.</p>
     #   @return [String]
     class ListTopicRefreshSchedulesRequest < Struct.new(
+      nil,
       :aws_account_id,
       :topic_id,
       keyword_init: true
@@ -19291,6 +20100,7 @@ module Aws::QuickSight
     #   <p>The Amazon Web Services request ID for this operation.</p>
     #   @return [String]
     class ListTopicRefreshSchedulesResponse < Struct.new(
+      nil,
       :topic_id,
       :topic_arn,
       :refresh_schedules,
@@ -19313,6 +20123,7 @@ module Aws::QuickSight
     #   <p>The ID for the topic that contains the reviewed answer that you want to list. This ID is unique per Amazon Web Services Region for each Amazon Web Services account.</p>
     #   @return [String]
     class ListTopicReviewedAnswersRequest < Struct.new(
+      nil,
       :aws_account_id,
       :topic_id,
       keyword_init: true
@@ -19336,6 +20147,7 @@ module Aws::QuickSight
     #   <p>The Amazon Web Services request ID for this operation.</p>
     #   @return [String]
     class ListTopicReviewedAnswersResponse < Struct.new(
+      nil,
       :topic_id,
       :topic_arn,
       :answers,
@@ -19362,6 +20174,7 @@ module Aws::QuickSight
     #   <p>The maximum number of results to be returned per request.</p>
     #   @return [Integer]
     class ListTopicsRequest < Struct.new(
+      nil,
       :aws_account_id,
       :next_token,
       :max_results,
@@ -19383,6 +20196,7 @@ module Aws::QuickSight
     #   <p>The HTTP status of the request.</p>
     #   @return [Integer]
     class ListTopicsResponse < Struct.new(
+      nil,
       :topics_summaries,
       :next_token,
       :request_id,
@@ -19414,6 +20228,7 @@ module Aws::QuickSight
     #   <p>The maximum number of results to return from this request.</p>
     #   @return [Integer]
     class ListUserGroupsRequest < Struct.new(
+      nil,
       :user_name,
       :aws_account_id,
       :namespace,
@@ -19437,6 +20252,7 @@ module Aws::QuickSight
     #   <p>The HTTP status of the request.</p>
     #   @return [Integer]
     class ListUserGroupsResponse < Struct.new(
+      nil,
       :group_list,
       :next_token,
       :request_id,
@@ -19465,6 +20281,7 @@ module Aws::QuickSight
     #   <p>The namespace. Currently, you should set this to <code>default</code>.</p>
     #   @return [String]
     class ListUsersRequest < Struct.new(
+      nil,
       :aws_account_id,
       :next_token,
       :max_results,
@@ -19487,6 +20304,7 @@ module Aws::QuickSight
     #   <p>The HTTP status of the request.</p>
     #   @return [Integer]
     class ListUsersResponse < Struct.new(
+      nil,
       :user_list,
       :next_token,
       :request_id,
@@ -19512,6 +20330,7 @@ module Aws::QuickSight
     #   <p>The maximum number of results to be returned per request.</p>
     #   @return [Integer]
     class ListVPCConnectionsRequest < Struct.new(
+      nil,
       :aws_account_id,
       :next_token,
       :max_results,
@@ -19535,6 +20354,7 @@ module Aws::QuickSight
     #   <p>The HTTP status of the request.</p>
     #   @return [Integer]
     class ListVPCConnectionsResponse < Struct.new(
+      nil,
       :vpc_connection_summaries,
       :next_token,
       :request_id,
@@ -19554,6 +20374,7 @@ module Aws::QuickSight
     #   <p>The visibility configuration of <code>LoadingAnimation</code>.</p>
     #   @return [String]
     class LoadingAnimation < Struct.new(
+      nil,
       :visibility,
       keyword_init: true
     )
@@ -19565,6 +20386,7 @@ module Aws::QuickSight
     #   <p>The sheet that is targeted for navigation in the same analysis.</p>
     #   @return [String]
     class LocalNavigationConfiguration < Struct.new(
+      nil,
       :target_sheet_id,
       keyword_init: true
     )
@@ -19585,6 +20407,7 @@ module Aws::QuickSight
     #   <p>Source of this logical table.</p>
     #   @return [Types::LogicalTableSource]
     class LogicalTable < Struct.new(
+      nil,
       :alias,
       :data_transforms,
       :source,
@@ -19605,6 +20428,7 @@ module Aws::QuickSight
     #   <p>The Amazon Resource Number (ARN) of the parent dataset.</p>
     #   @return [String]
     class LogicalTableSource < Struct.new(
+      nil,
       :join_instruction,
       :physical_table_id,
       :data_set_arn,
@@ -19621,6 +20445,7 @@ module Aws::QuickSight
     #   <p>A set of configured logos.</p>
     #   @return [Types::LogoSet]
     class Logo < Struct.new(
+      nil,
       :alt_text,
       :logo_set,
       keyword_init: true
@@ -19636,6 +20461,7 @@ module Aws::QuickSight
     #   <p>A set of configured logos.</p>
     #   @return [Types::LogoSetConfiguration]
     class LogoConfiguration < Struct.new(
+      nil,
       :alt_text,
       :logo_set,
       keyword_init: true
@@ -19651,6 +20477,7 @@ module Aws::QuickSight
     #   <p>The favicon logo.</p>
     #   @return [Types::ImageSet]
     class LogoSet < Struct.new(
+      nil,
       :primary,
       :favicon,
       keyword_init: true
@@ -19666,6 +20493,7 @@ module Aws::QuickSight
     #   <p>The favicon logo.</p>
     #   @return [Types::ImageSetConfiguration]
     class LogoSetConfiguration < Struct.new(
+      nil,
       :primary,
       :favicon,
       keyword_init: true
@@ -19682,6 +20510,7 @@ module Aws::QuickSight
     #   <p>Rich text. Examples of rich text include bold, underline, and italics.</p>
     #   @return [String]
     class LongFormatText < Struct.new(
+      nil,
       :plain_text,
       :rich_text,
       keyword_init: true
@@ -19700,6 +20529,7 @@ module Aws::QuickSight
     #   <p>The size unit that is used for the lookback window column. Valid values for this structure are <code>HOUR</code>, <code>DAY</code>, and <code>WEEK</code>.</p>
     #   @return [String]
     class LookbackWindow < Struct.new(
+      nil,
       :column_name,
       :size,
       :size_unit,
@@ -19716,6 +20546,7 @@ module Aws::QuickSight
     #   <p>Amazon S3 key that identifies an object.</p>
     #   @return [String]
     class ManifestFileLocation < Struct.new(
+      nil,
       :bucket,
       :key,
       keyword_init: true
@@ -19731,6 +20562,7 @@ module Aws::QuickSight
     #   <p>The name of the dataset parameter.</p>
     #   @return [String]
     class MappedDataSetParameter < Struct.new(
+      nil,
       :data_set_identifier,
       :data_set_parameter_name,
       keyword_init: true
@@ -19743,6 +20575,7 @@ module Aws::QuickSight
     #   <p>This Boolean value controls whether to display sheet margins.</p>
     #   @return [Boolean]
     class MarginStyle < Struct.new(
+      nil,
       :show,
       keyword_init: true
     )
@@ -19765,6 +20598,7 @@ module Aws::QuickSight
     #   <p>Database.</p>
     #   @return [String]
     class MariaDbParameters < Struct.new(
+      nil,
       :host,
       :port,
       :database,
@@ -19778,6 +20612,7 @@ module Aws::QuickSight
     #   <p>The visibility of the maximum label.</p>
     #   @return [String]
     class MaximumLabelType < Struct.new(
+      nil,
       :visibility,
       keyword_init: true
     )
@@ -19809,6 +20644,7 @@ module Aws::QuickSight
     #            </ul>
     #   @return [String]
     class MaximumMinimumComputation < Struct.new(
+      nil,
       :computation_id,
       :name,
       :time,
@@ -19833,6 +20669,7 @@ module Aws::QuickSight
     #   <p>The calculated measure field only used in pivot tables.</p>
     #   @return [Types::CalculatedMeasureField]
     class MeasureField < Struct.new(
+      nil,
       :numerical_measure_field,
       :categorical_measure_field,
       :date_measure_field,
@@ -19850,6 +20687,7 @@ module Aws::QuickSight
     #   <p>The Amazon Resource Name (ARN) of the member.</p>
     #   @return [String]
     class MemberIdArnPair < Struct.new(
+      nil,
       :member_id,
       :member_arn,
       keyword_init: true
@@ -19874,6 +20712,7 @@ module Aws::QuickSight
     #   <p>The field that is used in a metric comparison to value setup.</p>
     #   @return [Types::MeasureField]
     class MetricComparisonComputation < Struct.new(
+      nil,
       :computation_id,
       :name,
       :time,
@@ -19889,6 +20728,7 @@ module Aws::QuickSight
     #   <p>The visibility of the minimum label.</p>
     #   @return [String]
     class MinimumLabelType < Struct.new(
+      nil,
       :visibility,
       keyword_init: true
     )
@@ -19915,6 +20755,7 @@ module Aws::QuickSight
     #            </ul>
     #   @return [String]
     class MissingDataConfiguration < Struct.new(
+      nil,
       :treatment_option,
       keyword_init: true
     )
@@ -19932,6 +20773,7 @@ module Aws::QuickSight
     #   <p>Database.</p>
     #   @return [String]
     class MySqlParameters < Struct.new(
+      nil,
       :host,
       :port,
       :database,
@@ -19959,6 +20801,7 @@ module Aws::QuickSight
     #   <p>The definition of a metric.</p>
     #   @return [Types::NamedEntityDefinitionMetric]
     class NamedEntityDefinition < Struct.new(
+      nil,
       :field_name,
       :property_name,
       :property_role,
@@ -19982,6 +20825,7 @@ module Aws::QuickSight
     #   <p>The additional parameters for an aggregation function.</p>
     #   @return [Hash<String, String>]
     class NamedEntityDefinitionMetric < Struct.new(
+      nil,
       :aggregation,
       :aggregation_function_parameters,
       keyword_init: true
@@ -19994,6 +20838,7 @@ module Aws::QuickSight
     #   <p>The <code>NamedEntityName</code> for the <code>NamedEntityRef</code>.</p>
     #   @return [String]
     class NamedEntityRef < Struct.new(
+      nil,
       :named_entity_name,
       keyword_init: true
     )
@@ -20008,6 +20853,7 @@ module Aws::QuickSight
     #   <p>The message for the error.</p>
     #   @return [String]
     class NamespaceError < Struct.new(
+      nil,
       :type,
       :message,
       keyword_init: true
@@ -20041,6 +20887,7 @@ module Aws::QuickSight
     #   <p>The Amazon Resource Name (ARN) for the IAM Identity Center instance.</p>
     #   @return [String]
     class NamespaceInfoV2 < Struct.new(
+      nil,
       :name,
       :arn,
       :capacity_region,
@@ -20062,6 +20909,7 @@ module Aws::QuickSight
     #   <p>The contextual navigation bar style.</p>
     #   @return [Types::Palette]
     class NavbarStyle < Struct.new(
+      nil,
       :global_navbar,
       :contextual_navbar,
       keyword_init: true
@@ -20077,6 +20925,7 @@ module Aws::QuickSight
     #   <p>The suffix for a negative format.</p>
     #   @return [String]
     class NegativeFormat < Struct.new(
+      nil,
       :prefix,
       :suffix,
       keyword_init: true
@@ -20089,6 +20938,7 @@ module Aws::QuickSight
     #   <p>Determines the display mode of the negative value configuration.</p>
     #   @return [String]
     class NegativeValueConfiguration < Struct.new(
+      nil,
       :display_mode,
       keyword_init: true
     )
@@ -20109,6 +20959,7 @@ module Aws::QuickSight
     #   <p>The <code>InnerFilter</code> defines the subset of data to be used with the <code>NestedFilter</code>.</p>
     #   @return [Types::InnerFilter]
     class NestedFilter < Struct.new(
+      nil,
       :filter_id,
       :column,
       :include_inner_set,
@@ -20140,6 +20991,7 @@ module Aws::QuickSight
     #   <p>The network interface ID.</p>
     #   @return [String]
     class NetworkInterface < Struct.new(
+      nil,
       :subnet_id,
       :availability_zone,
       :error_message,
@@ -20164,6 +21016,7 @@ module Aws::QuickSight
     #   <p>A list of static default values for a given integer parameter.</p>
     #   @return [Array<Integer>]
     class NewDefaultValues < Struct.new(
+      nil,
       :string_static_values,
       :decimal_static_values,
       :date_time_static_values,
@@ -20178,6 +21031,7 @@ module Aws::QuickSight
     #   <p>Determines the null string of null values.</p>
     #   @return [String]
     class NullValueFormatConfiguration < Struct.new(
+      nil,
       :null_string,
       keyword_init: true
     )
@@ -20207,6 +21061,7 @@ module Aws::QuickSight
     #   <p>The options that determine the null value format configuration.</p>
     #   @return [Types::NullValueFormatConfiguration]
     class NumberDisplayFormatConfiguration < Struct.new(
+      nil,
       :prefix,
       :suffix,
       :separator_configuration,
@@ -20224,6 +21079,7 @@ module Aws::QuickSight
     #   <p>The options that determine the numeric format configuration.</p>
     #   @return [Types::NumericFormatConfiguration]
     class NumberFormatConfiguration < Struct.new(
+      nil,
       :format_configuration,
       keyword_init: true
     )
@@ -20238,6 +21094,7 @@ module Aws::QuickSight
     #   <p>The range setup of a numeric axis.</p>
     #   @return [Types::AxisDisplayRange]
     class NumericAxisOptions < Struct.new(
+      nil,
       :scale,
       :range,
       keyword_init: true
@@ -20253,6 +21110,7 @@ module Aws::QuickSight
     #   <p>The value of the double input numeric drill down filter.</p>
     #   @return [Float]
     class NumericEqualityDrillDownFilter < Struct.new(
+      nil,
       :column,
       :value,
       keyword_init: true
@@ -20315,6 +21173,7 @@ module Aws::QuickSight
     #   <p>The default configurations for the associated controls. This applies only for filters that are scoped to multiple sheets.</p>
     #   @return [Types::DefaultFilterControlConfiguration]
     class NumericEqualityFilter < Struct.new(
+      nil,
       :filter_id,
       :column,
       :value,
@@ -20346,6 +21205,7 @@ module Aws::QuickSight
     #   <p>The options that determine the percentage display format configuration.</p>
     #   @return [Types::PercentageDisplayFormatConfiguration]
     class NumericFormatConfiguration < Struct.new(
+      nil,
       :number_display_format_configuration,
       :currency_display_format_configuration,
       :percentage_display_format_configuration,
@@ -20407,6 +21267,7 @@ module Aws::QuickSight
     #   <p>The default configurations for the associated controls. This applies only for filters that are scoped to multiple sheets.</p>
     #   @return [Types::DefaultFilterControlConfiguration]
     class NumericRangeFilter < Struct.new(
+      nil,
       :filter_id,
       :column,
       :include_minimum,
@@ -20436,6 +21297,7 @@ module Aws::QuickSight
     #   <p>The parameter that is used in the numeric range.</p>
     #   @return [String]
     class NumericRangeFilterValue < Struct.new(
+      nil,
       :static_value,
       :parameter,
       keyword_init: true
@@ -20456,6 +21318,7 @@ module Aws::QuickSight
     #   <p>The options that determine the thousands separator configuration.</p>
     #   @return [Types::ThousandSeparatorOptions]
     class NumericSeparatorConfiguration < Struct.new(
+      nil,
       :decimal_separator,
       :thousands_separator,
       keyword_init: true
@@ -20517,6 +21380,7 @@ module Aws::QuickSight
     #   <p>An aggregation based on the percentile of values in a dimension or measure.</p>
     #   @return [Types::PercentileAggregation]
     class NumericalAggregationFunction < Struct.new(
+      nil,
       :simple_numerical_aggregation,
       :percentile_aggregation,
       keyword_init: true
@@ -20538,6 +21402,7 @@ module Aws::QuickSight
     #   <p>The format configuration of the field.</p>
     #   @return [Types::NumberFormatConfiguration]
     class NumericalDimensionField < Struct.new(
+      nil,
       :field_id,
       :column,
       :hierarchy_id,
@@ -20561,6 +21426,7 @@ module Aws::QuickSight
     #   <p>The format configuration of the field.</p>
     #   @return [Types::NumberFormatConfiguration]
     class NumericalMeasureField < Struct.new(
+      nil,
       :field_id,
       :column,
       :aggregation_function,
@@ -20584,6 +21450,7 @@ module Aws::QuickSight
     #   <p>The resource uri of the identity provider.</p>
     #   @return [String]
     class OAuthParameters < Struct.new(
+      nil,
       :token_provider_url,
       :o_auth_scope,
       :identity_provider_vpc_connection_properties,
@@ -20607,6 +21474,7 @@ module Aws::QuickSight
     #   <p>A Boolean value that indicates whether the <code>Database</code> uses a service name or an SID. If this value is left blank, the default value is <code>SID</code>. If this value is set to <code>false</code>, the value is <code>SID</code>.</p>
     #   @return [Boolean]
     class OracleParameters < Struct.new(
+      nil,
       :host,
       :port,
       :database,
@@ -20635,6 +21503,7 @@ module Aws::QuickSight
     #   <p>The sub data type of the column.</p>
     #   @return [String]
     class OutputColumn < Struct.new(
+      nil,
       :name,
       :description,
       :type,
@@ -20655,6 +21524,7 @@ module Aws::QuickSight
     #   <p>The new default values for the parameter.</p>
     #   @return [Types::NewDefaultValues]
     class OverrideDatasetParameterOperation < Struct.new(
+      nil,
       :parameter_name,
       :new_parameter_name,
       :new_default_values,
@@ -20671,6 +21541,7 @@ module Aws::QuickSight
     #   <p>Indicates the page number.</p>
     #   @return [Integer]
     class PaginationConfiguration < Struct.new(
+      nil,
       :page_size,
       :page_number,
       keyword_init: true
@@ -20691,6 +21562,7 @@ module Aws::QuickSight
     #   <p>The background color.</p>
     #   @return [String]
     class Palette < Struct.new(
+      nil,
       :foreground,
       :background,
       keyword_init: true
@@ -20727,6 +21599,7 @@ module Aws::QuickSight
     #   <p>Sets the background color for each panel.</p>
     #   @return [String]
     class PanelConfiguration < Struct.new(
+      nil,
       :title,
       :border_visibility,
       :border_thickness,
@@ -20753,6 +21626,7 @@ module Aws::QuickSight
     #   <p>Sets the horizontal text alignment of the title within each panel.</p>
     #   @return [String]
     class PanelTitleOptions < Struct.new(
+      nil,
       :visibility,
       :font_configuration,
       :horizontal_text_alignment,
@@ -20782,6 +21656,7 @@ module Aws::QuickSight
     #   <p>A control to display a horizontal toggle bar. This is used to change a value by sliding the toggle.</p>
     #   @return [Types::ParameterSliderControl]
     class ParameterControl < Struct.new(
+      nil,
       :date_time_picker,
       :list,
       :dropdown,
@@ -20807,6 +21682,7 @@ module Aws::QuickSight
     #   <p>The display options of a control.</p>
     #   @return [Types::DateTimePickerControlDisplayOptions]
     class ParameterDateTimePickerControl < Struct.new(
+      nil,
       :parameter_control_id,
       :title,
       :source_parameter_name,
@@ -20832,6 +21708,7 @@ module Aws::QuickSight
     #   <p>A parameter declaration for the <code>DateTime</code> data type.</p>
     #   @return [Types::DateTimeParameterDeclaration]
     class ParameterDeclaration < Struct.new(
+      nil,
       :string_parameter_declaration,
       :decimal_parameter_declaration,
       :integer_parameter_declaration,
@@ -20867,6 +21744,7 @@ module Aws::QuickSight
     #   <p>The visibility configuration of the Apply button on a <code>ParameterDropDownControl</code>.</p>
     #   @return [String]
     class ParameterDropDownControl < Struct.new(
+      nil,
       :parameter_control_id,
       :title,
       :source_parameter_name,
@@ -20903,6 +21781,7 @@ module Aws::QuickSight
     #   <p>The values that are displayed in a control can be configured to only show values that are valid based on what's selected in other controls.</p>
     #   @return [Types::CascadingControlConfiguration]
     class ParameterListControl < Struct.new(
+      nil,
       :parameter_control_id,
       :title,
       :source_parameter_name,
@@ -20923,6 +21802,7 @@ module Aws::QuickSight
     #   <p>The column identifier that fetches values from the data set.</p>
     #   @return [Types::ColumnIdentifier]
     class ParameterSelectableValues < Struct.new(
+      nil,
       :values,
       :link_to_data_set_column,
       keyword_init: true
@@ -20953,6 +21833,7 @@ module Aws::QuickSight
     #   <p>The number of increments that the slider bar is divided into.</p>
     #   @return [Float]
     class ParameterSliderControl < Struct.new(
+      nil,
       :parameter_control_id,
       :title,
       :source_parameter_name,
@@ -20989,6 +21870,7 @@ module Aws::QuickSight
     #   <p>The display options of a control.</p>
     #   @return [Types::TextAreaControlDisplayOptions]
     class ParameterTextAreaControl < Struct.new(
+      nil,
       :parameter_control_id,
       :title,
       :source_parameter_name,
@@ -21013,6 +21895,7 @@ module Aws::QuickSight
     #   <p>The display options of a control.</p>
     #   @return [Types::TextFieldControlDisplayOptions]
     class ParameterTextFieldControl < Struct.new(
+      nil,
       :parameter_control_id,
       :title,
       :source_parameter_name,
@@ -21036,6 +21919,7 @@ module Aws::QuickSight
     #   <p>The parameters that have a data type of date-time.</p>
     #   @return [Array<Types::DateTimeParameter>]
     class Parameters < Struct.new(
+      nil,
       :string_parameters,
       :integer_parameters,
       :decimal_parameters,
@@ -21053,6 +21937,7 @@ module Aws::QuickSight
     #   <p>The top bound of the range.</p>
     #   @return [Float]
     class PercentVisibleRange < Struct.new(
+      nil,
       :from,
       :to,
       keyword_init: true
@@ -21086,6 +21971,7 @@ module Aws::QuickSight
     #   <p>The options that determine the null value format configuration.</p>
     #   @return [Types::NullValueFormatConfiguration]
     class PercentageDisplayFormatConfiguration < Struct.new(
+      nil,
       :prefix,
       :suffix,
       :separator_configuration,
@@ -21102,6 +21988,7 @@ module Aws::QuickSight
     #   <p>The percentile value. This value can be any numeric constant 0–100. A percentile value of 50 computes the median value of the measure.</p>
     #   @return [Float]
     class PercentileAggregation < Struct.new(
+      nil,
       :percentile_value,
       keyword_init: true
     )
@@ -21113,6 +22000,7 @@ module Aws::QuickSight
     #   <p>A <code>UniqueKey</code> configuration.</p>
     #   @return [Array<Types::UniqueKey>]
     class PerformanceConfiguration < Struct.new(
+      nil,
       :unique_keys,
       keyword_init: true
     )
@@ -21133,6 +22021,7 @@ module Aws::QuickSight
     #   <p>The value field that is used in a computation.</p>
     #   @return [Types::MeasureField]
     class PeriodOverPeriodComputation < Struct.new(
+      nil,
       :computation_id,
       :name,
       :time,
@@ -21167,6 +22056,7 @@ module Aws::QuickSight
     #            </ul>
     #   @return [String]
     class PeriodToDateComputation < Struct.new(
+      nil,
       :computation_id,
       :name,
       :time,
@@ -21215,6 +22105,7 @@ module Aws::QuickSight
     #   <p>The small multiples field well of a pie chart.</p>
     #   @return [Array<Types::DimensionField>]
     class PieChartAggregatedFieldWells < Struct.new(
+      nil,
       :category,
       :values,
       :small_multiples,
@@ -21261,6 +22152,7 @@ module Aws::QuickSight
     #   <p>The general visual interactions setup for a visual.</p>
     #   @return [Types::VisualInteractionOptions]
     class PieChartConfiguration < Struct.new(
+      nil,
       :field_wells,
       :sort_configuration,
       :donut_options,
@@ -21284,6 +22176,7 @@ module Aws::QuickSight
     #   <p>The field well configuration of a pie chart.</p>
     #   @return [Types::PieChartAggregatedFieldWells]
     class PieChartFieldWells < Struct.new(
+      nil,
       :pie_chart_aggregated_field_wells,
       keyword_init: true
     )
@@ -21304,6 +22197,7 @@ module Aws::QuickSight
     #   <p>The limit on the number of small multiples panels that are displayed.</p>
     #   @return [Types::ItemsLimitConfiguration]
     class PieChartSortConfiguration < Struct.new(
+      nil,
       :category_sort,
       :category_items_limit,
       :small_multiples_sort,
@@ -21348,6 +22242,7 @@ module Aws::QuickSight
     #   <p>The alt text for the visual.</p>
     #   @return [String]
     class PieChartVisual < Struct.new(
+      nil,
       :visual_id,
       :title,
       :subtitle,
@@ -21368,6 +22263,7 @@ module Aws::QuickSight
     #   <p>The sort by field for the field sort options.</p>
     #   @return [Types::PivotTableSortBy]
     class PivotFieldSortOptions < Struct.new(
+      nil,
       :field_id,
       :sort_by,
       keyword_init: true
@@ -21386,6 +22282,7 @@ module Aws::QuickSight
     #   <p>The values field well for a pivot table. Values are aggregated based on rows and columns fields.</p>
     #   @return [Array<Types::MeasureField>]
     class PivotTableAggregatedFieldWells < Struct.new(
+      nil,
       :rows,
       :columns,
       :values,
@@ -21408,6 +22305,7 @@ module Aws::QuickSight
     #   <p>A list of cell scopes for conditional formatting.</p>
     #   @return [Array<Types::PivotTableConditionalFormattingScope>]
     class PivotTableCellConditionalFormatting < Struct.new(
+      nil,
       :field_id,
       :text_format,
       :scope,
@@ -21422,6 +22320,7 @@ module Aws::QuickSight
     #   <p>Conditional formatting options for a <code>PivotTableVisual</code>.</p>
     #   @return [Array<Types::PivotTableConditionalFormattingOption>]
     class PivotTableConditionalFormatting < Struct.new(
+      nil,
       :conditional_formatting_options,
       keyword_init: true
     )
@@ -21433,6 +22332,7 @@ module Aws::QuickSight
     #   <p>The cell conditional formatting option for a pivot table.</p>
     #   @return [Types::PivotTableCellConditionalFormatting]
     class PivotTableConditionalFormattingOption < Struct.new(
+      nil,
       :cell,
       keyword_init: true
     )
@@ -21444,6 +22344,7 @@ module Aws::QuickSight
     #   <p>The role (field, field total, grand total) of the cell for conditional formatting.</p>
     #   @return [String]
     class PivotTableConditionalFormattingScope < Struct.new(
+      nil,
       :role,
       keyword_init: true
     )
@@ -21473,6 +22374,7 @@ module Aws::QuickSight
     #   <p>The general visual interactions setup for a visual.</p>
     #   @return [Types::VisualInteractionOptions]
     class PivotTableConfiguration < Struct.new(
+      nil,
       :field_wells,
       :sort_configuration,
       :table_options,
@@ -21493,6 +22395,7 @@ module Aws::QuickSight
     #   <p>The width of the data path option.</p>
     #   @return [String]
     class PivotTableDataPathOption < Struct.new(
+      nil,
       :data_path_list,
       :width,
       keyword_init: true
@@ -21520,6 +22423,7 @@ module Aws::QuickSight
     #            </ul>
     #   @return [String]
     class PivotTableFieldCollapseStateOption < Struct.new(
+      nil,
       :target,
       :state,
       keyword_init: true
@@ -21535,6 +22439,7 @@ module Aws::QuickSight
     #   <p>The data path of the pivot table's header. Used to set the collapse state.</p>
     #   @return [Array<Types::DataPathValue>]
     class PivotTableFieldCollapseStateTarget < Struct.new(
+      nil,
       :field_id,
       :field_data_path_values,
       keyword_init: true
@@ -21553,6 +22458,7 @@ module Aws::QuickSight
     #   <p>The visibility of the pivot table field.</p>
     #   @return [String]
     class PivotTableFieldOption < Struct.new(
+      nil,
       :field_id,
       :custom_label,
       :visibility,
@@ -21572,6 +22478,7 @@ module Aws::QuickSight
     #   <p>The collapse state options for the pivot table field options.</p>
     #   @return [Array<Types::PivotTableFieldCollapseStateOption>]
     class PivotTableFieldOptions < Struct.new(
+      nil,
       :selected_field_options,
       :data_path_options,
       :collapse_state_options,
@@ -21585,6 +22492,7 @@ module Aws::QuickSight
     #   <p>The field ID of the subtotal options.</p>
     #   @return [String]
     class PivotTableFieldSubtotalOptions < Struct.new(
+      nil,
       :field_id,
       keyword_init: true
     )
@@ -21597,6 +22505,7 @@ module Aws::QuickSight
     #   <p>The aggregated field well for the pivot table.</p>
     #   @return [Types::PivotTableAggregatedFieldWells]
     class PivotTableFieldWells < Struct.new(
+      nil,
       :pivot_table_aggregated_field_wells,
       keyword_init: true
     )
@@ -21654,6 +22563,7 @@ module Aws::QuickSight
     #   <p>The default cell width of the pivot table.</p>
     #   @return [String]
     class PivotTableOptions < Struct.new(
+      nil,
       :metric_placement,
       :single_metric_visibility,
       :column_names_visibility,
@@ -21680,6 +22590,7 @@ module Aws::QuickSight
     #   <p>The visibility of the repeating header rows on each page.</p>
     #   @return [String]
     class PivotTablePaginatedReportOptions < Struct.new(
+      nil,
       :vertical_overflow_visibility,
       :overflow_column_header_visibility,
       keyword_init: true
@@ -21695,6 +22606,7 @@ module Aws::QuickSight
     #   <p>The custom label string for the rows label.</p>
     #   @return [String]
     class PivotTableRowsLabelOptions < Struct.new(
+      nil,
       :visibility,
       :custom_label,
       keyword_init: true
@@ -21713,6 +22625,7 @@ module Aws::QuickSight
     #   <p>The data path sort (data path value, direction) for the pivot table sort by options.</p>
     #   @return [Types::DataPathSort]
     class PivotTableSortBy < Struct.new(
+      nil,
       :field,
       :column,
       :data_path,
@@ -21726,6 +22639,7 @@ module Aws::QuickSight
     #   <p>The field sort options for a pivot table sort configuration.</p>
     #   @return [Array<Types::PivotFieldSortOptions>]
     class PivotTableSortConfiguration < Struct.new(
+      nil,
       :field_sort_options,
       keyword_init: true
     )
@@ -21746,6 +22660,7 @@ module Aws::QuickSight
     #   <p>The column total options.</p>
     #   @return [Types::PivotTotalOptions]
     class PivotTableTotalOptions < Struct.new(
+      nil,
       :row_subtotal_options,
       :column_subtotal_options,
       :row_total_options,
@@ -21779,6 +22694,7 @@ module Aws::QuickSight
     #   <p>The alt text for the visual.</p>
     #   @return [String]
     class PivotTableVisual < Struct.new(
+      nil,
       :visual_id,
       :title,
       :subtitle,
@@ -21817,6 +22733,7 @@ module Aws::QuickSight
     #   <p>The total aggregation options for each value field.</p>
     #   @return [Array<Types::TotalAggregationOption>]
     class PivotTotalOptions < Struct.new(
+      nil,
       :totals_visibility,
       :placement,
       :scroll_status,
@@ -21856,6 +22773,7 @@ module Aws::QuickSight
     #   <p>The alt text for the visual.</p>
     #   @return [String]
     class PluginVisual < Struct.new(
+      nil,
       :visual_id,
       :plugin_arn,
       :title,
@@ -21879,6 +22797,7 @@ module Aws::QuickSight
     #   <p>The sort configuration of the plugin visual.</p>
     #   @return [Types::PluginVisualSortConfiguration]
     class PluginVisualConfiguration < Struct.new(
+      nil,
       :field_wells,
       :visual_options,
       :sort_configuration,
@@ -21901,6 +22820,7 @@ module Aws::QuickSight
     #   <p>A list of unaggregated fields that exist in the field well.</p>
     #   @return [Array<Types::UnaggregatedField>]
     class PluginVisualFieldWell < Struct.new(
+      nil,
       :axis_name,
       :dimensions,
       :measures,
@@ -21915,6 +22835,7 @@ module Aws::QuickSight
     #   <p>Determines how many values are be fetched at once.</p>
     #   @return [Integer]
     class PluginVisualItemsLimitConfiguration < Struct.new(
+      nil,
       :items_limit,
       keyword_init: true
     )
@@ -21931,6 +22852,7 @@ module Aws::QuickSight
     #   <p>The persisted properties and their values.</p>
     #   @return [Array<Types::PluginVisualProperty>]
     class PluginVisualOptions < Struct.new(
+      nil,
       :visual_properties,
       keyword_init: true
     )
@@ -21945,6 +22867,7 @@ module Aws::QuickSight
     #   <p>The value of the plugin visual property.</p>
     #   @return [String]
     class PluginVisualProperty < Struct.new(
+      nil,
       :name,
       :value,
       keyword_init: true
@@ -21957,6 +22880,7 @@ module Aws::QuickSight
     #   <p>The table query sorting options for the plugin visual.</p>
     #   @return [Types::PluginVisualTableQuerySort]
     class PluginVisualSortConfiguration < Struct.new(
+      nil,
       :plugin_visual_table_query_sort,
       keyword_init: true
     )
@@ -21971,6 +22895,7 @@ module Aws::QuickSight
     #   <p>The maximum amount of data to be returned by a query.</p>
     #   @return [Types::PluginVisualItemsLimitConfiguration]
     class PluginVisualTableQuerySort < Struct.new(
+      nil,
       :row_sort,
       :items_limit_configuration,
       keyword_init: true
@@ -21989,6 +22914,7 @@ module Aws::QuickSight
     #   <p>Database.</p>
     #   @return [String]
     class PostgreSqlParameters < Struct.new(
+      nil,
       :host,
       :port,
       :database,
@@ -22004,6 +22930,7 @@ module Aws::QuickSight
     #   <p>The Amazon Web Services request ID for this request.</p>
     #   @return [String]
     class PreconditionNotMetException < Struct.new(
+      nil,
       :message,
       :request_id,
       keyword_init: true
@@ -22022,6 +22949,7 @@ module Aws::QuickSight
     #   <p>The option that determines the drill down filters for the predefined hierarchy.</p>
     #   @return [Array<Types::DrillDownFilter>]
     class PredefinedHierarchy < Struct.new(
+      nil,
       :hierarchy_id,
       :columns,
       :drill_down_filters,
@@ -22046,6 +22974,7 @@ module Aws::QuickSight
     #   <p>The number of maximum topics to be considered to predict QA results.</p>
     #   @return [Integer]
     class PredictQAResultsRequest < Struct.new(
+      nil,
       :aws_account_id,
       :query_text,
       :include_quick_sight_q_index,
@@ -22069,6 +22998,7 @@ module Aws::QuickSight
     #   <p>The HTTP status of the request.</p>
     #   @return [Integer]
     class PredictQAResultsResponse < Struct.new(
+      nil,
       :primary_result,
       :additional_results,
       :request_id,
@@ -22094,6 +23024,7 @@ module Aws::QuickSight
     #   <p>Catalog.</p>
     #   @return [String]
     class PrestoParameters < Struct.new(
+      nil,
       :host,
       :port,
       :catalog,
@@ -22107,6 +23038,7 @@ module Aws::QuickSight
     #   <p>The visibility of the progress bar.</p>
     #   @return [String]
     class ProgressBarOptions < Struct.new(
+      nil,
       :visibility,
       keyword_init: true
     )
@@ -22119,6 +23051,7 @@ module Aws::QuickSight
     #   <p>Projected columns.</p>
     #   @return [Array<String>]
     class ProjectOperation < Struct.new(
+      nil,
       :projected_columns,
       keyword_init: true
     )
@@ -22135,6 +23068,7 @@ module Aws::QuickSight
     #   <p>The dataset refresh properties.</p>
     #   @return [Types::DataSetRefreshProperties]
     class PutDataSetRefreshPropertiesRequest < Struct.new(
+      nil,
       :aws_account_id,
       :data_set_id,
       :data_set_refresh_properties,
@@ -22150,6 +23084,7 @@ module Aws::QuickSight
     #   <p>The HTTP status of the request.</p>
     #   @return [Integer]
     class PutDataSetRefreshPropertiesResponse < Struct.new(
+      nil,
       :request_id,
       :status,
       keyword_init: true
@@ -22173,6 +23108,7 @@ module Aws::QuickSight
     #   <p>The representation of a generated answer result.</p>
     #   @return [Types::GeneratedAnswerResult]
     class QAResult < Struct.new(
+      nil,
       :result_type,
       :dashboard_visual,
       :generated_answer,
@@ -22189,6 +23125,7 @@ module Aws::QuickSight
     #   <p>The type of <code>QDataKey</code>.</p>
     #   @return [String]
     class QDataKey < Struct.new(
+      nil,
       :q_data_key_arn,
       :q_data_key_type,
       keyword_init: true
@@ -22201,6 +23138,7 @@ module Aws::QuickSight
     #   <p>A structure that describes the query execution mode.</p>
     #   @return [String]
     class QueryExecutionOptions < Struct.new(
+      nil,
       :query_execution_mode,
       keyword_init: true
     )
@@ -22216,6 +23154,7 @@ module Aws::QuickSight
     #               ingestion to complete.</p>
     #   @return [String]
     class QueueInfo < Struct.new(
+      nil,
       :waiting_on_ingestion,
       :queued_ingestion,
       keyword_init: true
@@ -22232,6 +23171,7 @@ module Aws::QuickSight
     #   <p>The Amazon Web Services request ID for this request.</p>
     #   @return [String]
     class QuickSightUserNotFoundException < Struct.new(
+      nil,
       :message,
       :request_id,
       keyword_init: true
@@ -22250,6 +23190,7 @@ module Aws::QuickSight
     #   <p>The values that are assigned to the aggregated field wells of a radar chart.</p>
     #   @return [Array<Types::MeasureField>]
     class RadarChartAggregatedFieldWells < Struct.new(
+      nil,
       :category,
       :color,
       :values,
@@ -22263,6 +23204,7 @@ module Aws::QuickSight
     #   <p>The visibility settings of a radar chart.</p>
     #   @return [String]
     class RadarChartAreaStyleSettings < Struct.new(
+      nil,
       :visibility,
       keyword_init: true
     )
@@ -22319,6 +23261,7 @@ module Aws::QuickSight
     #   <p>The general visual interactions setup for a visual.</p>
     #   @return [Types::VisualInteractionOptions]
     class RadarChartConfiguration < Struct.new(
+      nil,
       :field_wells,
       :sort_configuration,
       :shape,
@@ -22345,6 +23288,7 @@ module Aws::QuickSight
     #   <p>The aggregated field wells of a radar chart visual.</p>
     #   @return [Types::RadarChartAggregatedFieldWells]
     class RadarChartFieldWells < Struct.new(
+      nil,
       :radar_chart_aggregated_field_wells,
       keyword_init: true
     )
@@ -22356,6 +23300,7 @@ module Aws::QuickSight
     #   <p>The area style settings of a radar chart.</p>
     #   @return [Types::RadarChartAreaStyleSettings]
     class RadarChartSeriesSettings < Struct.new(
+      nil,
       :area_style_settings,
       keyword_init: true
     )
@@ -22376,6 +23321,7 @@ module Aws::QuickSight
     #   <p>The color items limit of a radar chart.</p>
     #   @return [Types::ItemsLimitConfiguration]
     class RadarChartSortConfiguration < Struct.new(
+      nil,
       :category_sort,
       :category_items_limit,
       :color_sort,
@@ -22408,6 +23354,7 @@ module Aws::QuickSight
     #   <p>The alt text for the visual.</p>
     #   @return [String]
     class RadarChartVisual < Struct.new(
+      nil,
       :visual_id,
       :title,
       :subtitle,
@@ -22428,6 +23375,7 @@ module Aws::QuickSight
     #   <p>The maximum value for a range constant.</p>
     #   @return [String]
     class RangeConstant < Struct.new(
+      nil,
       :minimum,
       :maximum,
       keyword_init: true
@@ -22440,6 +23388,7 @@ module Aws::QuickSight
     #   <p>The visibility of the range ends label.</p>
     #   @return [String]
     class RangeEndsLabelType < Struct.new(
+      nil,
       :visibility,
       keyword_init: true
     )
@@ -22454,6 +23403,7 @@ module Aws::QuickSight
     #   <p>Database.</p>
     #   @return [String]
     class RdsParameters < Struct.new(
+      nil,
       :instance_id,
       :database,
       keyword_init: true
@@ -22466,6 +23416,7 @@ module Aws::QuickSight
     #   <p>The recent snapshots configuration for an embedded QuickSight dashboard.</p>
     #   @return [Boolean]
     class RecentSnapshotsConfigurations < Struct.new(
+      nil,
       :enabled,
       keyword_init: true
     )
@@ -22493,6 +23444,7 @@ module Aws::QuickSight
     #   <p>Automatically creates a database user. If your database doesn't have a <code>DatabaseUser</code>, set this parameter to <code>True</code>. If there is no <code>DatabaseUser</code>, Amazon QuickSight can't connect to your cluster. The <code>RoleArn</code> that you use for this operation must grant access to <code>redshift:CreateClusterUser</code> to successfully create the user.</p>
     #   @return [Boolean]
     class RedshiftIAMParameters < Struct.new(
+      nil,
       :role_arn,
       :database_user,
       :database_groups,
@@ -22530,6 +23482,7 @@ module Aws::QuickSight
     #            <p>This parameter can only be specified if your QuickSight account is configured with IAM Identity Center.</p>
     #   @return [Types::IdentityCenterConfiguration]
     class RedshiftParameters < Struct.new(
+      nil,
       :host,
       :port,
       :database,
@@ -22572,6 +23525,7 @@ module Aws::QuickSight
     #   <p>The label configuration of the reference line.</p>
     #   @return [Types::ReferenceLineLabelConfiguration]
     class ReferenceLine < Struct.new(
+      nil,
       :status,
       :data_configuration,
       :style_configuration,
@@ -22586,6 +23540,7 @@ module Aws::QuickSight
     #   <p>The string text of the custom label.</p>
     #   @return [String]
     class ReferenceLineCustomLabelConfiguration < Struct.new(
+      nil,
       :custom_label,
       keyword_init: true
     )
@@ -22630,6 +23585,7 @@ module Aws::QuickSight
     #            </ul>
     #   @return [String]
     class ReferenceLineDataConfiguration < Struct.new(
+      nil,
       :static_configuration,
       :dynamic_configuration,
       :axis_binding,
@@ -22650,6 +23606,7 @@ module Aws::QuickSight
     #   <p>The calculation that is used in the dynamic data.</p>
     #   @return [Types::NumericalAggregationFunction]
     class ReferenceLineDynamicDataConfiguration < Struct.new(
+      nil,
       :column,
       :measure_aggregation_function,
       :calculation,
@@ -22708,6 +23665,7 @@ module Aws::QuickSight
     #            </ul>
     #   @return [String]
     class ReferenceLineLabelConfiguration < Struct.new(
+      nil,
       :value_label_configuration,
       :custom_label_configuration,
       :font_configuration,
@@ -22724,6 +23682,7 @@ module Aws::QuickSight
     #   <p>The double input of the static data.</p>
     #   @return [Float]
     class ReferenceLineStaticDataConfiguration < Struct.new(
+      nil,
       :value,
       keyword_init: true
     )
@@ -22761,6 +23720,7 @@ module Aws::QuickSight
     #   <p>The hex color of the reference line.</p>
     #   @return [String]
     class ReferenceLineStyleConfiguration < Struct.new(
+      nil,
       :pattern,
       :color,
       keyword_init: true
@@ -22788,6 +23748,7 @@ module Aws::QuickSight
     #   <p>The format configuration of the value label.</p>
     #   @return [Types::NumericFormatConfiguration]
     class ReferenceLineValueLabelConfiguration < Struct.new(
+      nil,
       :relative_position,
       :format_configuration,
       keyword_init: true
@@ -22800,6 +23761,7 @@ module Aws::QuickSight
     #   <p>The incremental refresh for the dataset.</p>
     #   @return [Types::IncrementalRefresh]
     class RefreshConfiguration < Struct.new(
+      nil,
       :incremental_refresh,
       keyword_init: true
     )
@@ -22811,6 +23773,7 @@ module Aws::QuickSight
     #   <p>The email alert configuration for a dataset refresh failure.</p>
     #   @return [Types::RefreshFailureEmailAlert]
     class RefreshFailureConfiguration < Struct.new(
+      nil,
       :email_alert,
       keyword_init: true
     )
@@ -22822,6 +23785,7 @@ module Aws::QuickSight
     #   <p>The status value that determines if email alerts are sent.</p>
     #   @return [String]
     class RefreshFailureEmailAlert < Struct.new(
+      nil,
       :alert_status,
       keyword_init: true
     )
@@ -22868,6 +23832,7 @@ module Aws::QuickSight
     #   <p>The time of day that you want the datset to refresh. This value is expressed in HH:MM format. This field is not required for schedules that refresh hourly.</p>
     #   @return [String]
     class RefreshFrequency < Struct.new(
+      nil,
       :interval,
       :refresh_on_day,
       :timezone,
@@ -22905,6 +23870,7 @@ module Aws::QuickSight
     #   <p>The Amazon Resource Name (ARN) for the refresh schedule.</p>
     #   @return [String]
     class RefreshSchedule < Struct.new(
+      nil,
       :schedule_id,
       :schedule_frequency,
       :start_after_date_time,
@@ -23042,6 +24008,7 @@ module Aws::QuickSight
     #   <p>The tags to associate with the user.</p>
     #   @return [Array<Types::Tag>]
     class RegisterUserRequest < Struct.new(
+      nil,
       :identity_type,
       :email,
       :user_role,
@@ -23074,6 +24041,7 @@ module Aws::QuickSight
     #   <p>The HTTP status of the request.</p>
     #   @return [Integer]
     class RegisterUserResponse < Struct.new(
+      nil,
       :user,
       :user_invitation_url,
       :request_id,
@@ -23106,6 +24074,7 @@ module Aws::QuickSight
     #   <p>Indicates whether a <code>RegisteredCustomerManagedKey</code> is set as the default key for encryption and decryption use.</p>
     #   @return [Boolean]
     class RegisteredCustomerManagedKey < Struct.new(
+      nil,
       :key_arn,
       :default_key,
       keyword_init: true
@@ -23138,6 +24107,7 @@ module Aws::QuickSight
     #   <p>The threshold alerts configuration for an embedded QuickSight dashboard.</p>
     #   @return [Types::ThresholdAlertsConfigurations]
     class RegisteredUserConsoleFeatureConfigurations < Struct.new(
+      nil,
       :state_persistence,
       :shared_view,
       :amazon_q_in_quick_sight,
@@ -23158,6 +24128,7 @@ module Aws::QuickSight
     #   <p>The feature configurations of an embbedded QuickSight dashboard.</p>
     #   @return [Types::RegisteredUserDashboardFeatureConfigurations]
     class RegisteredUserDashboardEmbeddingConfiguration < Struct.new(
+      nil,
       :initial_dashboard_id,
       :feature_configurations,
       keyword_init: true
@@ -23188,6 +24159,7 @@ module Aws::QuickSight
     #   <p>The threshold alerts configuration for an QuickSight embedded dashboard.</p>
     #   @return [Types::ThresholdAlertsConfigurations]
     class RegisteredUserDashboardFeatureConfigurations < Struct.new(
+      nil,
       :state_persistence,
       :shared_view,
       :bookmarks,
@@ -23206,6 +24178,7 @@ module Aws::QuickSight
     #            <p>The Amazon Resource Name (ARN) of the dashboard that the visual belongs to must be included in the <code>AuthorizedResourceArns</code> parameter. Otherwise, the request will fail with <code>InvalidParameterValueException</code>.</p>
     #   @return [Types::DashboardVisualId]
     class RegisteredUserDashboardVisualEmbeddingConfiguration < Struct.new(
+      nil,
       :initial_dashboard_visual_id,
       keyword_init: true
     )
@@ -23267,6 +24240,7 @@ module Aws::QuickSight
     #                   the <i>QuickSight User Guide</i>.</p>
     #   @return [Types::RegisteredUserGenerativeQnAEmbeddingConfiguration]
     class RegisteredUserEmbeddingExperienceConfiguration < Struct.new(
+      nil,
       :dashboard,
       :quick_sight_console,
       :q_search_bar,
@@ -23285,6 +24259,7 @@ module Aws::QuickSight
     #            <p>If you don't specify an initial topic or you specify a legacy topic, a list of all shared new reader experience topics is shown in the Generative Q&A experience for your readers. When you select an initial new reader experience topic, you can specify whether or not readers are allowed to select other new reader experience topics from the available ones in the list.</p>
     #   @return [String]
     class RegisteredUserGenerativeQnAEmbeddingConfiguration < Struct.new(
+      nil,
       :initial_topic_id,
       keyword_init: true
     )
@@ -23298,6 +24273,7 @@ module Aws::QuickSight
     #            <p>If you don't specify an initial topic or if you specify a new reader experience topic, a list of all shared legacy topics is shown in the Q bar. </p>
     #   @return [String]
     class RegisteredUserQSearchBarEmbeddingConfiguration < Struct.new(
+      nil,
       :initial_topic_id,
       keyword_init: true
     )
@@ -23343,6 +24319,7 @@ module Aws::QuickSight
     #   <p>The embedding configuration of an embedded QuickSight console.</p>
     #   @return [Types::RegisteredUserConsoleFeatureConfigurations]
     class RegisteredUserQuickSightConsoleEmbeddingConfiguration < Struct.new(
+      nil,
       :initial_path,
       :feature_configurations,
       keyword_init: true
@@ -23367,6 +24344,7 @@ module Aws::QuickSight
     #   <p>The column schema of the table.</p>
     #   @return [Array<Types::InputColumn>]
     class RelationalTable < Struct.new(
+      nil,
       :data_source_arn,
       :catalog,
       :schema,
@@ -23388,6 +24366,7 @@ module Aws::QuickSight
     #   <p>The configuration of info icon label options.</p>
     #   @return [Types::SheetControlInfoIconLabelOptions]
     class RelativeDateTimeControlDisplayOptions < Struct.new(
+      nil,
       :title_options,
       :date_time_format,
       :info_icon_label_options,
@@ -23472,6 +24451,7 @@ module Aws::QuickSight
     #   <p>The default configurations for the associated controls. This applies only for filters that are scoped to multiple sheets.</p>
     #   @return [Types::DefaultFilterControlConfiguration]
     class RelativeDatesFilter < Struct.new(
+      nil,
       :filter_id,
       :column,
       :anchor_date_configuration,
@@ -23501,6 +24481,7 @@ module Aws::QuickSight
     #   <p>The new name for the column.</p>
     #   @return [String]
     class RenameColumnOperation < Struct.new(
+      nil,
       :column_name,
       :new_column_name,
       keyword_init: true
@@ -23518,6 +24499,7 @@ module Aws::QuickSight
     #   <p>The Amazon Web Services request ID for this request.</p>
     #   @return [String]
     class ResourceExistsException < Struct.new(
+      nil,
       :message,
       :resource_type,
       :request_id,
@@ -23536,6 +24518,7 @@ module Aws::QuickSight
     #   <p>The Amazon Web Services request ID for this request.</p>
     #   @return [String]
     class ResourceNotFoundException < Struct.new(
+      nil,
       :message,
       :resource_type,
       :request_id,
@@ -23566,6 +24549,7 @@ module Aws::QuickSight
     #   <p>The IAM action to grant or revoke permissions on.</p>
     #   @return [Array<String>]
     class ResourcePermission < Struct.new(
+      nil,
       :principal,
       :actions,
       keyword_init: true
@@ -23583,6 +24567,7 @@ module Aws::QuickSight
     #   <p>The Amazon Web Services request ID for this request.</p>
     #   @return [String]
     class ResourceUnavailableException < Struct.new(
+      nil,
       :message,
       :resource_type,
       :request_id,
@@ -23601,6 +24586,7 @@ module Aws::QuickSight
     #   <p>A boolean value that determines if the analysis will be restored to folders that it previously resided in. A <code>True</code> value restores analysis back to all folders that it previously resided in. A <code>False</code> value restores the analysis but does not restore the analysis back to all previously resided folders. Restoring a restricted analysis requires this parameter to be set to <code>True</code>.</p>
     #   @return [Boolean]
     class RestoreAnalysisRequest < Struct.new(
+      nil,
       :aws_account_id,
       :analysis_id,
       :restore_to_folders,
@@ -23626,6 +24612,7 @@ module Aws::QuickSight
     #   <p>A list of folder arns thatthe analysis failed to be restored to.</p>
     #   @return [Array<String>]
     class RestoreAnalysisResponse < Struct.new(
+      nil,
       :status,
       :arn,
       :analysis_id,
@@ -23649,6 +24636,7 @@ module Aws::QuickSight
     #   <p>The expression of the rolling date configuration.</p>
     #   @return [String]
     class RollingDateConfiguration < Struct.new(
+      nil,
       :data_set_identifier,
       :expression,
       keyword_init: true
@@ -23667,6 +24655,7 @@ module Aws::QuickSight
     #   <p>The primary background color options for alternate rows.</p>
     #   @return [String]
     class RowAlternateColorOptions < Struct.new(
+      nil,
       :status,
       :row_alternate_colors,
       :use_primary_background_color,
@@ -23686,6 +24675,7 @@ module Aws::QuickSight
     #   <p>The total number of rows in the dataset.</p>
     #   @return [Integer]
     class RowInfo < Struct.new(
+      nil,
       :rows_ingested,
       :rows_dropped,
       :total_rows_in_dataset,
@@ -23725,6 +24715,7 @@ module Aws::QuickSight
     #   <p>The status of the row-level security permission dataset. If enabled, the status is <code>ENABLED</code>. If disabled, the status is <code>DISABLED</code>.</p>
     #   @return [String]
     class RowLevelPermissionDataSet < Struct.new(
+      nil,
       :namespace,
       :arn,
       :permission_policy,
@@ -23746,6 +24737,7 @@ module Aws::QuickSight
     #   <p>A list of tag configuration rules to apply to a dataset. All tag configurations have the OR condition. Tags within each tile will be joined (AND). At least one rule in this structure must have all tag values assigned to it to apply Row-level security (RLS) to the dataset.</p>
     #   @return [Array<Array<String>>]
     class RowLevelPermissionTagConfiguration < Struct.new(
+      nil,
       :status,
       :tag_rules,
       :tag_rule_configurations,
@@ -23768,6 +24760,7 @@ module Aws::QuickSight
     #   <p>A string that you want to use to filter by all the values in a column in the dataset and don’t want to list the values one by one. For example, you can use an asterisk as your match all value.</p>
     #   @return [String]
     class RowLevelPermissionTagRule < Struct.new(
+      nil,
       :tag_key,
       :column_name,
       :tag_multi_value_delimiter,
@@ -23788,6 +24781,7 @@ module Aws::QuickSight
     #   <p>The region that the Amazon S3 bucket is located in. The bucket must be located in the same region that the <code>StartDashboardSnapshotJob</code> API call is made.</p>
     #   @return [String]
     class S3BucketConfiguration < Struct.new(
+      nil,
       :bucket_name,
       :bucket_prefix,
       :bucket_region,
@@ -23805,6 +24799,7 @@ module Aws::QuickSight
     #   <p>Use the <code>RoleArn</code> structure to override an account-wide role for a specific S3 data source. For example, say an account administrator has turned off all S3 access with an account-wide role. The administrator can then use <code>RoleArn</code> to bypass the account-wide role and allow S3 access for the single S3 data source that is specified in the structure, even if the account-wide role forbidding S3 access is still active.</p>
     #   @return [String]
     class S3Parameters < Struct.new(
+      nil,
       :manifest_file_location,
       :role_arn,
       keyword_init: true
@@ -23826,6 +24821,7 @@ module Aws::QuickSight
     #            </note>
     #   @return [Array<Types::InputColumn>]
     class S3Source < Struct.new(
+      nil,
       :data_source_arn,
       :upload_settings,
       :input_columns,
@@ -23850,6 +24846,7 @@ module Aws::QuickSight
     #            </ul>
     #   @return [String]
     class SameSheetTargetVisualConfiguration < Struct.new(
+      nil,
       :target_visuals,
       :target_visual_options,
       keyword_init: true
@@ -23868,6 +24865,7 @@ module Aws::QuickSight
     #   <p>The weight field wells of a sankey diagram.</p>
     #   @return [Array<Types::MeasureField>]
     class SankeyDiagramAggregatedFieldWells < Struct.new(
+      nil,
       :source,
       :destination,
       :weight,
@@ -23890,6 +24888,7 @@ module Aws::QuickSight
     #   <p>The general visual interactions setup for a visual.</p>
     #   @return [Types::VisualInteractionOptions]
     class SankeyDiagramChartConfiguration < Struct.new(
+      nil,
       :field_wells,
       :sort_configuration,
       :data_labels,
@@ -23904,6 +24903,7 @@ module Aws::QuickSight
     #   <p>The field well configuration of a sankey diagram.</p>
     #   @return [Types::SankeyDiagramAggregatedFieldWells]
     class SankeyDiagramFieldWells < Struct.new(
+      nil,
       :sankey_diagram_aggregated_field_wells,
       keyword_init: true
     )
@@ -23921,6 +24921,7 @@ module Aws::QuickSight
     #   <p>The limit on the number of destination nodes that are displayed in a sankey diagram.</p>
     #   @return [Types::ItemsLimitConfiguration]
     class SankeyDiagramSortConfiguration < Struct.new(
+      nil,
       :weight_sort,
       :source_items_limit,
       :destination_items_limit,
@@ -23950,6 +24951,7 @@ module Aws::QuickSight
     #   <p>The alt text for the visual.</p>
     #   @return [String]
     class SankeyDiagramVisual < Struct.new(
+      nil,
       :visual_id,
       :title,
       :subtitle,
@@ -23980,6 +24982,7 @@ module Aws::QuickSight
     #   <p>The label field well of a scatter plot.</p>
     #   @return [Array<Types::DimensionField>]
     class ScatterPlotCategoricallyAggregatedFieldWells < Struct.new(
+      nil,
       :x_axis,
       :y_axis,
       :category,
@@ -24025,6 +25028,7 @@ module Aws::QuickSight
     #   <p>The general visual interactions setup for a visual.</p>
     #   @return [Types::VisualInteractionOptions]
     class ScatterPlotConfiguration < Struct.new(
+      nil,
       :field_wells,
       :sort_configuration,
       :x_axis_label_options,
@@ -24051,6 +25055,7 @@ module Aws::QuickSight
     #               unaggregated.</p>
     #   @return [Types::ScatterPlotUnaggregatedFieldWells]
     class ScatterPlotFieldWells < Struct.new(
+      nil,
       :scatter_plot_categorically_aggregated_field_wells,
       :scatter_plot_unaggregated_field_wells,
       keyword_init: true
@@ -24063,6 +25068,7 @@ module Aws::QuickSight
     #   <p>The limit configuration of the visual display for an axis.</p>
     #   @return [Types::ItemsLimitConfiguration]
     class ScatterPlotSortConfiguration < Struct.new(
+      nil,
       :scatter_plot_limit_configuration,
       keyword_init: true
     )
@@ -24088,6 +25094,7 @@ module Aws::QuickSight
     #   <p>The label field well of a scatter plot.</p>
     #   @return [Array<Types::DimensionField>]
     class ScatterPlotUnaggregatedFieldWells < Struct.new(
+      nil,
       :x_axis,
       :y_axis,
       :size,
@@ -24122,6 +25129,7 @@ module Aws::QuickSight
     #   <p>The alt text for the visual.</p>
     #   @return [String]
     class ScatterPlotVisual < Struct.new(
+      nil,
       :visual_id,
       :title,
       :subtitle,
@@ -24142,6 +25150,7 @@ module Aws::QuickSight
     #   <p>The day of the month that you want to schedule refresh on.</p>
     #   @return [String]
     class ScheduleRefreshOnEntity < Struct.new(
+      nil,
       :day_of_week,
       :day_of_month,
       keyword_init: true
@@ -24154,6 +25163,7 @@ module Aws::QuickSight
     #   <p>The schedules configuration for an embedded QuickSight dashboard.</p>
     #   @return [Boolean]
     class SchedulesConfigurations < Struct.new(
+      nil,
       :enabled,
       keyword_init: true
     )
@@ -24173,6 +25183,7 @@ module Aws::QuickSight
     #   <p>The visibility range for the data zoom scroll bar.</p>
     #   @return [Types::VisibleRangeOptions]
     class ScrollBarOptions < Struct.new(
+      nil,
       :visibility,
       :visible_range,
       keyword_init: true
@@ -24194,6 +25205,7 @@ module Aws::QuickSight
     #   <p>The maximum number of results to return.</p>
     #   @return [Integer]
     class SearchAnalysesRequest < Struct.new(
+      nil,
       :aws_account_id,
       :filters,
       :next_token,
@@ -24217,6 +25229,7 @@ module Aws::QuickSight
     #   <p>The Amazon Web Services request ID for this operation.</p>
     #   @return [String]
     class SearchAnalysesResponse < Struct.new(
+      nil,
       :analysis_summary_list,
       :next_token,
       :status,
@@ -24248,6 +25261,7 @@ module Aws::QuickSight
     #   <p>The maximum number of results to be returned per request.</p>
     #   @return [Integer]
     class SearchDashboardsRequest < Struct.new(
+      nil,
       :aws_account_id,
       :filters,
       :next_token,
@@ -24271,6 +25285,7 @@ module Aws::QuickSight
     #   <p>The Amazon Web Services request ID for this operation.</p>
     #   @return [String]
     class SearchDashboardsResponse < Struct.new(
+      nil,
       :dashboard_summary_list,
       :next_token,
       :status,
@@ -24298,6 +25313,7 @@ module Aws::QuickSight
     #   <p>The maximum number of results to be returned per request.</p>
     #   @return [Integer]
     class SearchDataSetsRequest < Struct.new(
+      nil,
       :aws_account_id,
       :filters,
       :next_token,
@@ -24320,6 +25336,7 @@ module Aws::QuickSight
     #   <p>The Amazon Web Services request ID for this operation.</p>
     #   @return [String]
     class SearchDataSetsResponse < Struct.new(
+      nil,
       :data_set_summaries,
       :next_token,
       :status,
@@ -24347,6 +25364,7 @@ module Aws::QuickSight
     #   <p>The maximum number of results to be returned per request.</p>
     #   @return [Integer]
     class SearchDataSourcesRequest < Struct.new(
+      nil,
       :aws_account_id,
       :filters,
       :next_token,
@@ -24369,6 +25387,7 @@ module Aws::QuickSight
     #   <p>The Amazon Web Services request ID for this operation.</p>
     #   @return [String]
     class SearchDataSourcesResponse < Struct.new(
+      nil,
       :data_source_summaries,
       :next_token,
       :status,
@@ -24396,6 +25415,7 @@ module Aws::QuickSight
     #   <p>The maximum number of results to be returned per request.</p>
     #   @return [Integer]
     class SearchFoldersRequest < Struct.new(
+      nil,
       :aws_account_id,
       :filters,
       :next_token,
@@ -24418,6 +25438,7 @@ module Aws::QuickSight
     #   <p>The Amazon Web Services request ID for this operation.</p>
     #   @return [String]
     class SearchFoldersResponse < Struct.new(
+      nil,
       :status,
       :folder_summary_list,
       :next_token,
@@ -24449,6 +25470,7 @@ module Aws::QuickSight
     #   <p>The structure for the search filters that you want to apply to your search.</p>
     #   @return [Array<Types::GroupSearchFilter>]
     class SearchGroupsRequest < Struct.new(
+      nil,
       :aws_account_id,
       :next_token,
       :max_results,
@@ -24472,6 +25494,7 @@ module Aws::QuickSight
     #   <p>The HTTP status of the request.</p>
     #   @return [Integer]
     class SearchGroupsResponse < Struct.new(
+      nil,
       :group_list,
       :next_token,
       :request_id,
@@ -24499,6 +25522,7 @@ module Aws::QuickSight
     #   <p>The maximum number of results to be returned per request.</p>
     #   @return [Integer]
     class SearchTopicsRequest < Struct.new(
+      nil,
       :aws_account_id,
       :filters,
       :next_token,
@@ -24521,6 +25545,7 @@ module Aws::QuickSight
     #   <p>The Amazon Web Services request ID for this operation.</p>
     #   @return [String]
     class SearchTopicsResponse < Struct.new(
+      nil,
       :topic_summary_list,
       :next_token,
       :status,
@@ -24540,6 +25565,7 @@ module Aws::QuickSight
     #   <p>Determines the visibility of the secondary value.</p>
     #   @return [String]
     class SecondaryValueOptions < Struct.new(
+      nil,
       :visibility,
       keyword_init: true
     )
@@ -24551,6 +25577,7 @@ module Aws::QuickSight
     #   <p>The option that enables or disables a page break at the end of a section.</p>
     #   @return [String]
     class SectionAfterPageBreak < Struct.new(
+      nil,
       :status,
       keyword_init: true
     )
@@ -24562,6 +25589,7 @@ module Aws::QuickSight
     #   <p>The options for a paper canvas of a section-based layout.</p>
     #   @return [Types::SectionBasedLayoutPaperCanvasSizeOptions]
     class SectionBasedLayoutCanvasSizeOptions < Struct.new(
+      nil,
       :paper_canvas_size_options,
       keyword_init: true
     )
@@ -24583,6 +25611,7 @@ module Aws::QuickSight
     #   <p>The options for the canvas of a section-based layout.</p>
     #   @return [Types::SectionBasedLayoutCanvasSizeOptions]
     class SectionBasedLayoutConfiguration < Struct.new(
+      nil,
       :header_sections,
       :body_sections,
       :footer_sections,
@@ -24613,6 +25642,7 @@ module Aws::QuickSight
     #   <p>Defines the spacing between the canvas content and the top, bottom, left, and right edges.</p>
     #   @return [Types::Spacing]
     class SectionBasedLayoutPaperCanvasSizeOptions < Struct.new(
+      nil,
       :paper_size,
       :paper_orientation,
       :paper_margin,
@@ -24626,6 +25656,7 @@ module Aws::QuickSight
     #   <p>The free-form layout configuration of a section.</p>
     #   @return [Types::FreeFormSectionLayoutConfiguration]
     class SectionLayoutConfiguration < Struct.new(
+      nil,
       :free_form_layout,
       keyword_init: true
     )
@@ -24637,6 +25668,7 @@ module Aws::QuickSight
     #   <p>The configuration of a page break after a section.</p>
     #   @return [Types::SectionAfterPageBreak]
     class SectionPageBreakConfiguration < Struct.new(
+      nil,
       :after,
       keyword_init: true
     )
@@ -24653,6 +25685,7 @@ module Aws::QuickSight
     #            <p>There is no padding by default.</p>
     #   @return [Types::Spacing]
     class SectionStyle < Struct.new(
+      nil,
       :height,
       :padding,
       keyword_init: true
@@ -24666,6 +25699,7 @@ module Aws::QuickSight
     #   <p>The sheet ID and visual IDs of the sheet and visuals that the filter is applied to.</p>
     #   @return [Array<Types::SheetVisualScopingConfiguration>]
     class SelectedSheetsFilterScopeConfiguration < Struct.new(
+      nil,
       :sheet_visual_scoping_configurations,
       keyword_init: true
     )
@@ -24683,6 +25717,7 @@ module Aws::QuickSight
     #   <p>The semantic entity type parameters.</p>
     #   @return [Hash<String, String>]
     class SemanticEntityType < Struct.new(
+      nil,
       :type_name,
       :sub_type_name,
       :type_parameters,
@@ -24714,6 +25749,7 @@ module Aws::QuickSight
     #   <p>The other names or aliases for the false cell value.</p>
     #   @return [Array<String>]
     class SemanticType < Struct.new(
+      nil,
       :type_name,
       :sub_type_name,
       :type_parameters,
@@ -24735,6 +25771,7 @@ module Aws::QuickSight
     #   <p>The data field series item configuration of a line chart.</p>
     #   @return [Types::DataFieldSeriesItem]
     class SeriesItem < Struct.new(
+      nil,
       :field_series_item,
       :data_field_series_item,
       keyword_init: true
@@ -24747,6 +25784,7 @@ module Aws::QuickSight
     #   <p>URL of the base site.</p>
     #   @return [String]
     class ServiceNowParameters < Struct.new(
+      nil,
       :site_base_url,
       keyword_init: true
     )
@@ -24761,6 +25799,7 @@ module Aws::QuickSight
     #   <p>The Amazon Web Services request ID for this request.</p>
     #   @return [String]
     class SessionLifetimeInMinutesInvalidException < Struct.new(
+      nil,
       :message,
       :request_id,
       keyword_init: true
@@ -24776,6 +25815,7 @@ module Aws::QuickSight
     #   <p>The value that you want to assign the tag.</p>
     #   @return [String]
     class SessionTag < Struct.new(
+      nil,
       :key,
       :value,
       keyword_init: true
@@ -24792,6 +25832,7 @@ module Aws::QuickSight
     #            <p>This is a union type structure. For this structure to be valid, only one of the attributes can be defined.</p>
     #   @return [Types::DestinationParameterValueConfiguration]
     class SetParameterValueConfiguration < Struct.new(
+      nil,
       :destination_parameter_name,
       :value,
       keyword_init: true
@@ -24804,6 +25845,7 @@ module Aws::QuickSight
     #   <p>The conditional formatting for the shape background color of a filled map visual.</p>
     #   @return [Types::ConditionalFormattingColor]
     class ShapeConditionalFormat < Struct.new(
+      nil,
       :background_color,
       keyword_init: true
     )
@@ -24815,6 +25857,7 @@ module Aws::QuickSight
     #   <p>The shared view settings of an embedded dashboard.</p>
     #   @return [Boolean]
     class SharedViewConfigurations < Struct.new(
+      nil,
       :enabled,
       keyword_init: true
     )
@@ -24842,6 +25885,7 @@ module Aws::QuickSight
     #   <p>A list of images on a sheet.</p>
     #   @return [Array<Types::SheetImage>]
     class Sheet < Struct.new(
+      nil,
       :sheet_id,
       :name,
       :images,
@@ -24858,6 +25902,7 @@ module Aws::QuickSight
     #   <p> The text content of info icon.</p>
     #   @return [String]
     class SheetControlInfoIconLabelOptions < Struct.new(
+      nil,
       :visibility,
       :info_icon_text,
       keyword_init: true
@@ -24870,6 +25915,7 @@ module Aws::QuickSight
     #   <p>The configuration that determines the elements and canvas size options of sheet control.</p>
     #   @return [Types::SheetControlLayoutConfiguration]
     class SheetControlLayout < Struct.new(
+      nil,
       :configuration,
       keyword_init: true
     )
@@ -24881,6 +25927,7 @@ module Aws::QuickSight
     #   <p>The configuration that determines the elements and canvas size options of sheet control.</p>
     #   @return [Types::GridLayoutConfiguration]
     class SheetControlLayoutConfiguration < Struct.new(
+      nil,
       :grid_layout,
       keyword_init: true
     )
@@ -24892,6 +25939,7 @@ module Aws::QuickSight
     #   <p>Visibility state.</p>
     #   @return [String]
     class SheetControlsOption < Struct.new(
+      nil,
       :visibility_state,
       keyword_init: true
     )
@@ -24954,6 +26002,7 @@ module Aws::QuickSight
     #   <p>A list of visual custom actions for the sheet.</p>
     #   @return [Types::VisualCustomActionDefaults]
     class SheetDefinition < Struct.new(
+      nil,
       :sheet_id,
       :title,
       :description,
@@ -24989,6 +26038,7 @@ module Aws::QuickSight
     #            </ul>
     #   @return [String]
     class SheetElementConfigurationOverrides < Struct.new(
+      nil,
       :visibility,
       keyword_init: true
     )
@@ -25003,6 +26053,7 @@ module Aws::QuickSight
     #   <p>The override configuration of the rendering rules of a sheet.</p>
     #   @return [Types::SheetElementConfigurationOverrides]
     class SheetElementRenderingRule < Struct.new(
+      nil,
       :expression,
       :configuration_overrides,
       keyword_init: true
@@ -25033,6 +26084,7 @@ module Aws::QuickSight
     #   <p>A list of custom actions that are configured for an image.</p>
     #   @return [Array<Types::ImageCustomAction>]
     class SheetImage < Struct.new(
+      nil,
       :sheet_image_id,
       :source,
       :scaling,
@@ -25069,6 +26121,7 @@ module Aws::QuickSight
     #            </ul>
     #   @return [String]
     class SheetImageScalingConfiguration < Struct.new(
+      nil,
       :scaling_type,
       keyword_init: true
     )
@@ -25080,6 +26133,7 @@ module Aws::QuickSight
     #   <p>The source of the static file that contains the image.</p>
     #   @return [Types::SheetImageStaticFileSource]
     class SheetImageSource < Struct.new(
+      nil,
       :sheet_image_static_file_source,
       keyword_init: true
     )
@@ -25091,6 +26145,7 @@ module Aws::QuickSight
     #   <p>The ID of the static file that contains the image.</p>
     #   @return [String]
     class SheetImageStaticFileSource < Struct.new(
+      nil,
       :static_file_id,
       keyword_init: true
     )
@@ -25105,6 +26160,7 @@ module Aws::QuickSight
     #   <p>The visibility of the tooltip.</p>
     #   @return [String]
     class SheetImageTooltipConfiguration < Struct.new(
+      nil,
       :tooltip_text,
       :visibility,
       keyword_init: true
@@ -25117,6 +26173,7 @@ module Aws::QuickSight
     #   <p>The plain text format.</p>
     #   @return [String]
     class SheetImageTooltipText < Struct.new(
+      nil,
       :plain_text,
       keyword_init: true
     )
@@ -25128,6 +26185,7 @@ module Aws::QuickSight
     #   <p>The status of the sheet layout maximization options of a dashbaord.</p>
     #   @return [String]
     class SheetLayoutElementMaximizationOption < Struct.new(
+      nil,
       :availability_status,
       keyword_init: true
     )
@@ -25142,6 +26200,7 @@ module Aws::QuickSight
     #   <p>The layout options for tiles.</p>
     #   @return [Types::TileLayoutStyle]
     class SheetStyle < Struct.new(
+      nil,
       :tile,
       :tile_layout,
       keyword_init: true
@@ -25160,6 +26219,7 @@ module Aws::QuickSight
     #   <p>The general textbox interactions setup for a textbox.</p>
     #   @return [Types::TextBoxInteractionOptions]
     class SheetTextBox < Struct.new(
+      nil,
       :sheet_text_box_id,
       :content,
       :interactions,
@@ -25191,6 +26251,7 @@ module Aws::QuickSight
     #   <p>The selected visuals that the filter is applied to.</p>
     #   @return [Array<String>]
     class SheetVisualScopingConfiguration < Struct.new(
+      nil,
       :sheet_id,
       :scope,
       :visual_ids,
@@ -25208,6 +26269,7 @@ module Aws::QuickSight
     #   <p>Rich text. Examples of rich text include bold, underline, and italics.</p>
     #   @return [String]
     class ShortFormatText < Struct.new(
+      nil,
       :plain_text,
       :rich_text,
       keyword_init: true
@@ -25232,6 +26294,7 @@ module Aws::QuickSight
     #                   <code>MICROSOFT_AD</code>.</p>
     #   @return [String]
     class SignupResponse < Struct.new(
+      nil,
       :iam_user,
       :user_login_name,
       :account_name,
@@ -25251,6 +26314,7 @@ module Aws::QuickSight
     #   <p>The color of the simple cluster marker.</p>
     #   @return [String]
     class SimpleClusterMarker < Struct.new(
+      nil,
       :color,
       keyword_init: true
     )
@@ -25262,6 +26326,7 @@ module Aws::QuickSight
     #   <p>The Y axis options of a single axis configuration.</p>
     #   @return [Types::YAxisOptions]
     class SingleAxisOptions < Struct.new(
+      nil,
       :y_axis_options,
       keyword_init: true
     )
@@ -25276,6 +26341,7 @@ module Aws::QuickSight
     #   <p>The configuration of info icon label options.</p>
     #   @return [Types::SheetControlInfoIconLabelOptions]
     class SliderControlDisplayOptions < Struct.new(
+      nil,
       :title_options,
       :info_icon_label_options,
       keyword_init: true
@@ -25291,6 +26357,7 @@ module Aws::QuickSight
     #   <p>The visual ID for the slot.</p>
     #   @return [String]
     class Slot < Struct.new(
+      nil,
       :slot_id,
       :visual_id,
       keyword_init: true
@@ -25306,6 +26373,7 @@ module Aws::QuickSight
     #   <p>Defines the placement of the axis. By default, axes are rendered <code>OUTSIDE</code> of the panels. Axes with <code>INDEPENDENT</code> scale are rendered <code>INSIDE</code> the panels.</p>
     #   @return [String]
     class SmallMultiplesAxisProperties < Struct.new(
+      nil,
       :scale,
       :placement,
       keyword_init: true
@@ -25334,6 +26402,7 @@ module Aws::QuickSight
     #   <p>The properties of a small multiples Y axis.</p>
     #   @return [Types::SmallMultiplesAxisProperties]
     class SmallMultiplesOptions < Struct.new(
+      nil,
       :max_visible_rows,
       :max_visible_columns,
       :panel_configuration,
@@ -25350,6 +26419,7 @@ module Aws::QuickSight
     #            <p>These are not the tags that are used for Amazon Web Services resource tagging. For more information on row level security in QuickSight, see <a href="https://docs.aws.amazon.com/quicksight/latest/user/quicksight-dev-rls-tags.html">Using Row-Level Security (RLS) with Tags</a>in the <i>Amazon QuickSight User Guide</i>.</p>
     #   @return [Array<Types::SessionTag>]
     class SnapshotAnonymousUser < Struct.new(
+      nil,
       :row_level_permission_tags,
       keyword_init: true
     )
@@ -25361,6 +26431,7 @@ module Aws::QuickSight
     #   <p>The tag keys for the <code>RowLevelPermissionTags</code>.</p>
     #   @return [Array<String>]
     class SnapshotAnonymousUserRedacted < Struct.new(
+      nil,
       :row_level_permission_tag_keys,
       keyword_init: true
     )
@@ -25378,6 +26449,7 @@ module Aws::QuickSight
     #   <p>A list of QuickSight parameters and the list's override values.</p>
     #   @return [Types::Parameters]
     class SnapshotConfiguration < Struct.new(
+      nil,
       :file_groups,
       :destination_configuration,
       :parameters,
@@ -25393,6 +26465,7 @@ module Aws::QuickSight
     #           </p>
     #   @return [Array<Types::SnapshotS3DestinationConfiguration>]
     class SnapshotDestinationConfiguration < Struct.new(
+      nil,
       :s3_destinations,
       keyword_init: true
     )
@@ -25407,6 +26480,7 @@ module Aws::QuickSight
     #   <p>The format of the snapshot file to be generated. You can choose between <code>CSV</code>, <code>Excel</code>, or <code>PDF</code>.</p>
     #   @return [String]
     class SnapshotFile < Struct.new(
+      nil,
       :sheet_selections,
       :format_type,
       keyword_init: true
@@ -25419,6 +26493,7 @@ module Aws::QuickSight
     #   <p>A list of <code>SnapshotFile</code> objects that contain the information on the snapshot files that need to be generated. This structure can hold 1 configuration at a time.</p>
     #   @return [Array<Types::SnapshotFile>]
     class SnapshotFileGroup < Struct.new(
+      nil,
       :files,
       keyword_init: true
     )
@@ -25448,6 +26523,7 @@ module Aws::QuickSight
     #           </p>
     #   @return [Array<String>]
     class SnapshotFileSheetSelection < Struct.new(
+      nil,
       :sheet_id,
       :selection_scope,
       :visual_ids,
@@ -25464,6 +26540,7 @@ module Aws::QuickSight
     #   <p>The error type.</p>
     #   @return [String]
     class SnapshotJobErrorInfo < Struct.new(
+      nil,
       :error_message,
       :error_type,
       keyword_init: true
@@ -25476,6 +26553,7 @@ module Aws::QuickSight
     #   <p> A list of <code>AnonymousUserSnapshotJobResult</code> objects that contain information on anonymous users and their user configurations. This data provided by you when you make a <code>StartDashboardSnapshotJob</code> API call.</p>
     #   @return [Array<Types::AnonymousUserSnapshotJobResult>]
     class SnapshotJobResult < Struct.new(
+      nil,
       :anonymous_users,
       keyword_init: true
     )
@@ -25490,6 +26568,7 @@ module Aws::QuickSight
     #   <p>The error type.</p>
     #   @return [String]
     class SnapshotJobResultErrorInfo < Struct.new(
+      nil,
       :error_message,
       :error_type,
       keyword_init: true
@@ -25505,6 +26584,7 @@ module Aws::QuickSight
     #   <p> A list of <code>SnapshotJobS3Result</code> objects.</p>
     #   @return [Array<Types::SnapshotJobS3Result>]
     class SnapshotJobResultFileGroup < Struct.new(
+      nil,
       :files,
       :s3_results,
       keyword_init: true
@@ -25524,6 +26604,7 @@ module Aws::QuickSight
     #   <p>An array of error records that describe any failures that occur while the dashboard snapshot job runs.</p>
     #   @return [Array<Types::SnapshotJobResultErrorInfo>]
     class SnapshotJobS3Result < Struct.new(
+      nil,
       :s3_destination_configuration,
       :s3_uri,
       :error_info,
@@ -25537,6 +26618,7 @@ module Aws::QuickSight
     #   <p>A structure that contains details about the Amazon S3 bucket that the generated dashboard snapshot is saved in.</p>
     #   @return [Types::S3BucketConfiguration]
     class SnapshotS3DestinationConfiguration < Struct.new(
+      nil,
       :bucket_configuration,
       keyword_init: true
     )
@@ -25548,6 +26630,7 @@ module Aws::QuickSight
     #   <p>An array of records that describe the anonymous users that the dashboard snapshot is generated for.</p>
     #   @return [Array<Types::SnapshotAnonymousUser>]
     class SnapshotUserConfiguration < Struct.new(
+      nil,
       :anonymous_users,
       keyword_init: true
     )
@@ -25562,6 +26645,7 @@ module Aws::QuickSight
     #           </p>
     #   @return [Array<Types::SnapshotAnonymousUserRedacted>]
     class SnapshotUserConfigurationRedacted < Struct.new(
+      nil,
       :anonymous_users,
       keyword_init: true
     )
@@ -25588,6 +26672,7 @@ module Aws::QuickSight
     #   <p>An object that contains information needed to create a data source connection between an QuickSight account and Snowflake.</p>
     #   @return [Types::OAuthParameters]
     class SnowflakeParameters < Struct.new(
+      nil,
       :host,
       :database,
       :warehouse,
@@ -25613,6 +26698,7 @@ module Aws::QuickSight
     #   <p>Define the right spacing.</p>
     #   @return [String]
     class Spacing < Struct.new(
+      nil,
       :top,
       :bottom,
       :left,
@@ -25630,6 +26716,7 @@ module Aws::QuickSight
     #   <p>Port.</p>
     #   @return [Integer]
     class SparkParameters < Struct.new(
+      nil,
       :host,
       :port,
       keyword_init: true
@@ -25645,6 +26732,7 @@ module Aws::QuickSight
     #   <p>The source of the spatial static file.</p>
     #   @return [Types::StaticFileSource]
     class SpatialStaticFile < Struct.new(
+      nil,
       :static_file_id,
       :source,
       keyword_init: true
@@ -25663,6 +26751,7 @@ module Aws::QuickSight
     #   <p>Database.</p>
     #   @return [String]
     class SqlServerParameters < Struct.new(
+      nil,
       :host,
       :port,
       :database,
@@ -25677,6 +26766,7 @@ module Aws::QuickSight
     #   <p>A Boolean option to control whether SSL should be disabled.</p>
     #   @return [Boolean]
     class SslProperties < Struct.new(
+      nil,
       :disable_ssl,
       keyword_init: true
     )
@@ -25711,6 +26801,7 @@ module Aws::QuickSight
     #   <p>An object that contains information needed to create a data source connection between an QuickSight account and Starburst.</p>
     #   @return [Types::OAuthParameters]
     class StarburstParameters < Struct.new(
+      nil,
       :host,
       :port,
       :catalog,
@@ -25801,6 +26892,7 @@ module Aws::QuickSight
     #   <p>A setting that indicates whether you want to include folder assets. You can also use this setting to recusrsively include all subfolders of an exported folder.</p>
     #   @return [String]
     class StartAssetBundleExportJobRequest < Struct.new(
+      nil,
       :aws_account_id,
       :asset_bundle_export_job_id,
       :resource_arns,
@@ -25830,6 +26922,7 @@ module Aws::QuickSight
     #   <p>The HTTP status of the response.</p>
     #   @return [Integer]
     class StartAssetBundleExportJobResponse < Struct.new(
+      nil,
       :arn,
       :asset_bundle_export_job_id,
       :request_id,
@@ -25873,6 +26966,7 @@ module Aws::QuickSight
     #   <p>An optional validation strategy override for all analyses and dashboards that is applied to the resource configuration before import. </p>
     #   @return [Types::AssetBundleImportJobOverrideValidationStrategy]
     class StartAssetBundleImportJobRequest < Struct.new(
+      nil,
       :aws_account_id,
       :asset_bundle_import_job_id,
       :asset_bundle_import_source,
@@ -25899,6 +26993,7 @@ module Aws::QuickSight
     #   <p>The HTTP status of the response.</p>
     #   @return [Integer]
     class StartAssetBundleImportJobResponse < Struct.new(
+      nil,
       :arn,
       :asset_bundle_import_job_id,
       :request_id,
@@ -25931,6 +27026,7 @@ module Aws::QuickSight
     #   <p>A structure that describes the configuration of the dashboard snapshot.</p>
     #   @return [Types::SnapshotConfiguration]
     class StartDashboardSnapshotJobRequest < Struct.new(
+      nil,
       :aws_account_id,
       :dashboard_id,
       :snapshot_job_id,
@@ -25956,6 +27052,7 @@ module Aws::QuickSight
     #   <p>The HTTP status of the request</p>
     #   @return [Integer]
     class StartDashboardSnapshotJobResponse < Struct.new(
+      nil,
       :arn,
       :snapshot_job_id,
       :request_id,
@@ -25981,6 +27078,7 @@ module Aws::QuickSight
     #   <p>The ID of the schedule that you want to start a snapshot job schedule for. The schedule ID can be found in the QuickSight console in the <b>Schedules</b> pane of the dashboard that the schedule is configured for.</p>
     #   @return [String]
     class StartDashboardSnapshotJobScheduleRequest < Struct.new(
+      nil,
       :aws_account_id,
       :dashboard_id,
       :schedule_id,
@@ -25998,6 +27096,7 @@ module Aws::QuickSight
     #   <p>The HTTP status of the request</p>
     #   @return [Integer]
     class StartDashboardSnapshotJobScheduleResponse < Struct.new(
+      nil,
       :request_id,
       :status,
       keyword_init: true
@@ -26015,6 +27114,7 @@ module Aws::QuickSight
     #   <p>Determines if a QuickSight dashboard's state persistence settings are turned on or off.</p>
     #   @return [Boolean]
     class StatePersistenceConfigurations < Struct.new(
+      nil,
       :enabled,
       keyword_init: true
     )
@@ -26034,6 +27134,7 @@ module Aws::QuickSight
     #   <p>The spacial static file.</p>
     #   @return [Types::SpatialStaticFile]
     class StaticFile < Struct.new(
+      nil,
       :image_static_file,
       :spatial_static_file,
       keyword_init: true
@@ -26052,6 +27153,7 @@ module Aws::QuickSight
     #   <p>The Region of the Amazon S3 account that contains the bucket.</p>
     #   @return [String]
     class StaticFileS3SourceOptions < Struct.new(
+      nil,
       :bucket_name,
       :object_key,
       :region,
@@ -26068,6 +27170,7 @@ module Aws::QuickSight
     #   <p>The structure that contains the Amazon S3 location to download the static file from.</p>
     #   @return [Types::StaticFileS3SourceOptions]
     class StaticFileSource < Struct.new(
+      nil,
       :url_options,
       :s3_options,
       keyword_init: true
@@ -26080,6 +27183,7 @@ module Aws::QuickSight
     #   <p>The URL to download the static file from.</p>
     #   @return [String]
     class StaticFileUrlSourceOptions < Struct.new(
+      nil,
       :url,
       keyword_init: true
     )
@@ -26100,6 +27204,7 @@ module Aws::QuickSight
     #   <p>A list of default values for a given string dataset parameter type. This structure only accepts static values.</p>
     #   @return [Types::StringDatasetParameterDefaultValues]
     class StringDatasetParameter < Struct.new(
+      nil,
       :id,
       :name,
       :value_type,
@@ -26114,6 +27219,7 @@ module Aws::QuickSight
     #   <p>A list of static default values for a given string parameter.</p>
     #   @return [Array<String>]
     class StringDatasetParameterDefaultValues < Struct.new(
+      nil,
       :static_values,
       keyword_init: true
     )
@@ -26128,6 +27234,7 @@ module Aws::QuickSight
     #   <p>The static values of the <code>DecimalDefaultValues</code>.</p>
     #   @return [Array<String>]
     class StringDefaultValues < Struct.new(
+      nil,
       :dynamic_value,
       :static_values,
       keyword_init: true
@@ -26143,6 +27250,7 @@ module Aws::QuickSight
     #   <p>The formatting configuration for numeric strings.</p>
     #   @return [Types::NumericFormatConfiguration]
     class StringFormatConfiguration < Struct.new(
+      nil,
       :null_value_format_configuration,
       :numeric_format_configuration,
       keyword_init: true
@@ -26158,6 +27266,7 @@ module Aws::QuickSight
     #   <p>The values of a string parameter.</p>
     #   @return [Array<String>]
     class StringParameter < Struct.new(
+      nil,
       :name,
       :values,
       keyword_init: true
@@ -26182,6 +27291,7 @@ module Aws::QuickSight
     #   <p>A list of dataset parameters that are mapped to an analysis parameter.</p>
     #   @return [Array<Types::MappedDataSetParameter>]
     class StringParameterDeclaration < Struct.new(
+      nil,
       :parameter_value_type,
       :name,
       :default_values,
@@ -26210,6 +27320,7 @@ module Aws::QuickSight
     #   <p>A custom value that's used when the value of a parameter isn't set.</p>
     #   @return [String]
     class StringValueWhenUnsetConfiguration < Struct.new(
+      nil,
       :value_when_unset_option,
       :custom_value,
       keyword_init: true
@@ -26243,6 +27354,7 @@ module Aws::QuickSight
     #   <p>The style targets options for subtotals.</p>
     #   @return [Array<Types::TableStyleTarget>]
     class SubtotalOptions < Struct.new(
+      nil,
       :totals_visibility,
       :custom_label,
       :field_level,
@@ -26261,6 +27373,7 @@ module Aws::QuickSight
     #   <p>The answer ID for the <code>SucceededTopicReviewedAnswer</code>.</p>
     #   @return [String]
     class SucceededTopicReviewedAnswer < Struct.new(
+      nil,
       :answer_id,
       keyword_init: true
     )
@@ -26275,6 +27388,7 @@ module Aws::QuickSight
     #   <p>The HTTP status of a <code>SuccessfulKeyRegistrationEntry</code> entry.</p>
     #   @return [Integer]
     class SuccessfulKeyRegistrationEntry < Struct.new(
+      nil,
       :key_arn,
       :status_code,
       keyword_init: true
@@ -26295,6 +27409,7 @@ module Aws::QuickSight
     #   <p>The values field well for a pivot table. Values are aggregated based on group by fields.</p>
     #   @return [Array<Types::MeasureField>]
     class TableAggregatedFieldWells < Struct.new(
+      nil,
       :group_by,
       :values,
       keyword_init: true
@@ -26313,6 +27428,7 @@ module Aws::QuickSight
     #   <p>The style (none, solid) of a table border.</p>
     #   @return [String]
     class TableBorderOptions < Struct.new(
+      nil,
       :color,
       :thickness,
       :style,
@@ -26329,6 +27445,7 @@ module Aws::QuickSight
     #   <p>The text format of the cell for conditional formatting.</p>
     #   @return [Types::TextConditionalFormat]
     class TableCellConditionalFormatting < Struct.new(
+      nil,
       :field_id,
       :text_format,
       keyword_init: true
@@ -26341,6 +27458,7 @@ module Aws::QuickSight
     #   <p>The cell scaling configuration of the sizing options for the table image configuration.</p>
     #   @return [String]
     class TableCellImageSizingConfiguration < Struct.new(
+      nil,
       :table_cell_image_scaling_configuration,
       keyword_init: true
     )
@@ -26373,6 +27491,7 @@ module Aws::QuickSight
     #   <p>The borders for the table cells.</p>
     #   @return [Types::GlobalTableBorderOptions]
     class TableCellStyle < Struct.new(
+      nil,
       :visibility,
       :font_configuration,
       :text_wrap,
@@ -26391,6 +27510,7 @@ module Aws::QuickSight
     #   <p>Conditional formatting options for a <code>PivotTableVisual</code>.</p>
     #   @return [Array<Types::TableConditionalFormattingOption>]
     class TableConditionalFormatting < Struct.new(
+      nil,
       :conditional_formatting_options,
       keyword_init: true
     )
@@ -26405,6 +27525,7 @@ module Aws::QuickSight
     #   <p>The row conditional formatting option for a table.</p>
     #   @return [Types::TableRowConditionalFormatting]
     class TableConditionalFormattingOption < Struct.new(
+      nil,
       :cell,
       :row,
       keyword_init: true
@@ -26438,6 +27559,7 @@ module Aws::QuickSight
     #   <p>The general visual interactions setup for a visual.</p>
     #   @return [Types::VisualInteractionOptions]
     class TableConfiguration < Struct.new(
+      nil,
       :field_wells,
       :sort_configuration,
       :table_options,
@@ -26456,6 +27578,7 @@ module Aws::QuickSight
     #   <p>The icon set type (link) of the custom icon content for table URL link content.</p>
     #   @return [String]
     class TableFieldCustomIconContent < Struct.new(
+      nil,
       :icon,
       keyword_init: true
     )
@@ -26470,6 +27593,7 @@ module Aws::QuickSight
     #   <p>The font configuration of the custom text content for the table URL link content.</p>
     #   @return [Types::FontConfiguration]
     class TableFieldCustomTextContent < Struct.new(
+      nil,
       :value,
       :font_configuration,
       keyword_init: true
@@ -26482,6 +27606,7 @@ module Aws::QuickSight
     #   <p>The sizing options for the table image configuration.</p>
     #   @return [Types::TableCellImageSizingConfiguration]
     class TableFieldImageConfiguration < Struct.new(
+      nil,
       :sizing_options,
       keyword_init: true
     )
@@ -26496,6 +27621,7 @@ module Aws::QuickSight
     #   <p>The URL content (text, icon) for the table link configuration.</p>
     #   @return [Types::TableFieldLinkContentConfiguration]
     class TableFieldLinkConfiguration < Struct.new(
+      nil,
       :target,
       :content,
       keyword_init: true
@@ -26511,6 +27637,7 @@ module Aws::QuickSight
     #   <p>The custom icon content for the table link content configuration.</p>
     #   @return [Types::TableFieldCustomIconContent]
     class TableFieldLinkContentConfiguration < Struct.new(
+      nil,
       :custom_text_content,
       :custom_icon_content,
       keyword_init: true
@@ -26535,6 +27662,7 @@ module Aws::QuickSight
     #   <p>The URL configuration for a table field.</p>
     #   @return [Types::TableFieldURLConfiguration]
     class TableFieldOption < Struct.new(
+      nil,
       :field_id,
       :width,
       :custom_label,
@@ -26559,6 +27687,7 @@ module Aws::QuickSight
     #   <p>The <code>TableOptions</code> of a transposed table.</p>
     #   @return [Array<Types::TransposedTableOption>]
     class TableFieldOptions < Struct.new(
+      nil,
       :selected_field_options,
       :order,
       :pinned_field_options,
@@ -26576,6 +27705,7 @@ module Aws::QuickSight
     #   <p>The image configuration of a table field URL.</p>
     #   @return [Types::TableFieldImageConfiguration]
     class TableFieldURLConfiguration < Struct.new(
+      nil,
       :link_configuration,
       :image_configuration,
       keyword_init: true
@@ -26592,6 +27722,7 @@ module Aws::QuickSight
     #   <p>The unaggregated field well for the table.</p>
     #   @return [Types::TableUnaggregatedFieldWells]
     class TableFieldWells < Struct.new(
+      nil,
       :table_aggregated_field_wells,
       :table_unaggregated_field_wells,
       keyword_init: true
@@ -26604,6 +27735,7 @@ module Aws::QuickSight
     #   <p>The configuration of the inline visualization of the data bars within a chart.</p>
     #   @return [Types::DataBarsOptions]
     class TableInlineVisualization < Struct.new(
+      nil,
       :data_bars,
       keyword_init: true
     )
@@ -26624,6 +27756,7 @@ module Aws::QuickSight
     #   <p>The row alternate color options (widget status, row alternate colors) for a table.</p>
     #   @return [Types::RowAlternateColorOptions]
     class TableOptions < Struct.new(
+      nil,
       :orientation,
       :header_style,
       :cell_style,
@@ -26641,6 +27774,7 @@ module Aws::QuickSight
     #   <p>The visibility of repeating header rows on each page.</p>
     #   @return [String]
     class TablePaginatedReportOptions < Struct.new(
+      nil,
       :vertical_overflow_visibility,
       :overflow_column_header_visibility,
       keyword_init: true
@@ -26653,6 +27787,7 @@ module Aws::QuickSight
     #   <p>A list of columns to be pinned to the left of a table visual.</p>
     #   @return [Array<String>]
     class TablePinnedFieldOptions < Struct.new(
+      nil,
       :pinned_left_fields,
       keyword_init: true
     )
@@ -26667,6 +27802,7 @@ module Aws::QuickSight
     #   <p>The conditional formatting color (solid, gradient) of the text for a table row.</p>
     #   @return [Types::ConditionalFormattingColor]
     class TableRowConditionalFormatting < Struct.new(
+      nil,
       :background_color,
       :text_color,
       keyword_init: true
@@ -26694,6 +27830,7 @@ module Aws::QuickSight
     #   <p>The table border options of the bottom border.</p>
     #   @return [Types::TableBorderOptions]
     class TableSideBorderOptions < Struct.new(
+      nil,
       :inner_vertical,
       :inner_horizontal,
       :left,
@@ -26713,6 +27850,7 @@ module Aws::QuickSight
     #   <p>The pagination configuration (page size, page number) for the table.</p>
     #   @return [Types::PaginationConfiguration]
     class TableSortConfiguration < Struct.new(
+      nil,
       :row_sort,
       :pagination_configuration,
       keyword_init: true
@@ -26725,6 +27863,7 @@ module Aws::QuickSight
     #   <p>The cell type of the table style target.</p>
     #   @return [String]
     class TableStyleTarget < Struct.new(
+      nil,
       :cell_type,
       keyword_init: true
     )
@@ -26736,6 +27875,7 @@ module Aws::QuickSight
     #   <p>The values field well for a pivot table. Values are unaggregated for an unaggregated table.</p>
     #   @return [Array<Types::UnaggregatedField>]
     class TableUnaggregatedFieldWells < Struct.new(
+      nil,
       :values,
       keyword_init: true
     )
@@ -26766,6 +27906,7 @@ module Aws::QuickSight
     #   <p>The alt text for the visual.</p>
     #   @return [String]
     class TableVisual < Struct.new(
+      nil,
       :visual_id,
       :title,
       :subtitle,
@@ -26787,6 +27928,7 @@ module Aws::QuickSight
     #   <p>Tag value.</p>
     #   @return [String]
     class Tag < Struct.new(
+      nil,
       :key,
       :value,
       keyword_init: true
@@ -26805,6 +27947,7 @@ module Aws::QuickSight
     #            </note>
     #   @return [Array<Types::ColumnTag>]
     class TagColumnOperation < Struct.new(
+      nil,
       :column_name,
       :tags,
       keyword_init: true
@@ -26819,6 +27962,7 @@ module Aws::QuickSight
     #   <p>Contains a map of the key-value pairs for the resource tag or tags assigned to the resource.</p>
     #   @return [Array<Types::Tag>]
     class TagResourceRequest < Struct.new(
+      nil,
       :resource_arn,
       :tags,
       keyword_init: true
@@ -26833,6 +27977,7 @@ module Aws::QuickSight
     #   <p>The HTTP status of the request.</p>
     #   @return [Integer]
     class TagResourceResponse < Struct.new(
+      nil,
       :request_id,
       :status,
       keyword_init: true
@@ -26872,6 +28017,7 @@ module Aws::QuickSight
     #   <p>Time when this was created.</p>
     #   @return [Time]
     class Template < Struct.new(
+      nil,
       :arn,
       :name,
       :version,
@@ -26894,6 +28040,7 @@ module Aws::QuickSight
     #   <p>The version number of the template alias.</p>
     #   @return [Integer]
     class TemplateAlias < Struct.new(
+      nil,
       :alias_name,
       :arn,
       :template_version_number,
@@ -26913,6 +28060,7 @@ module Aws::QuickSight
     #   <p>An error path that shows which entities caused the template error.</p>
     #   @return [Array<Types::Entity>]
     class TemplateError < Struct.new(
+      nil,
       :type,
       :message,
       :violated_entities,
@@ -26930,6 +28078,7 @@ module Aws::QuickSight
     #               in the template.</p>
     #   @return [Array<Types::DataSetReference>]
     class TemplateSourceAnalysis < Struct.new(
+      nil,
       :arn,
       :data_set_references,
       keyword_init: true
@@ -26945,6 +28094,7 @@ module Aws::QuickSight
     #   <p>The source template, if it is based on an template.</p>
     #   @return [Types::TemplateSourceTemplate]
     class TemplateSourceEntity < Struct.new(
+      nil,
       :source_analysis,
       :source_template,
       keyword_init: true
@@ -26957,6 +28107,7 @@ module Aws::QuickSight
     #   <p>The Amazon Resource Name (ARN) of the resource.</p>
     #   @return [String]
     class TemplateSourceTemplate < Struct.new(
+      nil,
       :arn,
       keyword_init: true
     )
@@ -26983,6 +28134,7 @@ module Aws::QuickSight
     #   <p>The last time that this template was updated.</p>
     #   @return [Time]
     class TemplateSummary < Struct.new(
+      nil,
       :arn,
       :template_id,
       :name,
@@ -27063,6 +28215,7 @@ module Aws::QuickSight
     #   <p>A list of the associated sheets with the unique identifier and name of each sheet.</p>
     #   @return [Array<Types::Sheet>]
     class TemplateVersion < Struct.new(
+      nil,
       :created_time,
       :errors,
       :version_number,
@@ -27117,6 +28270,7 @@ module Aws::QuickSight
     #   <p>The static files for the definition.</p>
     #   @return [Array<Types::StaticFile>]
     class TemplateVersionDefinition < Struct.new(
+      nil,
       :data_set_configurations,
       :sheets,
       :calculated_fields,
@@ -27149,6 +28303,7 @@ module Aws::QuickSight
     #   <p>The description of the template version.</p>
     #   @return [String]
     class TemplateVersionSummary < Struct.new(
+      nil,
       :arn,
       :version_number,
       :created_time,
@@ -27170,6 +28325,7 @@ module Aws::QuickSight
     #   <p>Database.</p>
     #   @return [String]
     class TeradataParameters < Struct.new(
+      nil,
       :host,
       :port,
       :database,
@@ -27189,6 +28345,7 @@ module Aws::QuickSight
     #   <p>The configuration of info icon label options.</p>
     #   @return [Types::SheetControlInfoIconLabelOptions]
     class TextAreaControlDisplayOptions < Struct.new(
+      nil,
       :title_options,
       :placeholder_options,
       :info_icon_label_options,
@@ -27202,6 +28359,7 @@ module Aws::QuickSight
     #   <p>The menu options for the textbox.</p>
     #   @return [Types::TextBoxMenuOption]
     class TextBoxInteractionOptions < Struct.new(
+      nil,
       :text_box_menu_option,
       keyword_init: true
     )
@@ -27213,6 +28371,7 @@ module Aws::QuickSight
     #   <p>The availability status of the textbox menu. If the value of this property is set to <code>ENABLED</code>, dashboard readers can interact with the textbox menu.</p>
     #   @return [String]
     class TextBoxMenuOption < Struct.new(
+      nil,
       :availability_status,
       keyword_init: true
     )
@@ -27230,6 +28389,7 @@ module Aws::QuickSight
     #   <p>The conditional formatting for the icon.</p>
     #   @return [Types::ConditionalFormattingIcon]
     class TextConditionalFormat < Struct.new(
+      nil,
       :background_color,
       :text_color,
       :icon,
@@ -27243,6 +28403,7 @@ module Aws::QuickSight
     #   <p>The visibility configuration of the placeholder options in a text control.</p>
     #   @return [String]
     class TextControlPlaceholderOptions < Struct.new(
+      nil,
       :visibility,
       keyword_init: true
     )
@@ -27260,6 +28421,7 @@ module Aws::QuickSight
     #   <p>The configuration of info icon label options.</p>
     #   @return [Types::SheetControlInfoIconLabelOptions]
     class TextFieldControlDisplayOptions < Struct.new(
+      nil,
       :title_options,
       :placeholder_options,
       :info_icon_label_options,
@@ -27292,6 +28454,7 @@ module Aws::QuickSight
     #               <code>QUICKSIGHT</code> and <code>CUSTOM</code>.</p>
     #   @return [String]
     class Theme < Struct.new(
+      nil,
       :arn,
       :name,
       :theme_id,
@@ -27315,6 +28478,7 @@ module Aws::QuickSight
     #   <p>The version number of the theme alias.</p>
     #   @return [Integer]
     class ThemeAlias < Struct.new(
+      nil,
       :arn,
       :alias_name,
       :theme_version_number,
@@ -27339,6 +28503,7 @@ module Aws::QuickSight
     #   <p>Determines the typography options.</p>
     #   @return [Types::Typography]
     class ThemeConfiguration < Struct.new(
+      nil,
       :data_color_palette,
       :ui_color_palette,
       :sheet,
@@ -27356,6 +28521,7 @@ module Aws::QuickSight
     #   <p>The error message.</p>
     #   @return [String]
     class ThemeError < Struct.new(
+      nil,
       :type,
       :message,
       keyword_init: true
@@ -27383,6 +28549,7 @@ module Aws::QuickSight
     #   <p>The last date and time that this theme was updated.</p>
     #   @return [Time]
     class ThemeSummary < Struct.new(
+      nil,
       :arn,
       :name,
       :theme_id,
@@ -27421,6 +28588,7 @@ module Aws::QuickSight
     #   <p>The status of the theme version.</p>
     #   @return [String]
     class ThemeVersion < Struct.new(
+      nil,
       :version_number,
       :arn,
       :description,
@@ -27451,6 +28619,7 @@ module Aws::QuickSight
     #   <p>The status of the theme version.</p>
     #   @return [String]
     class ThemeVersionSummary < Struct.new(
+      nil,
       :version_number,
       :arn,
       :description,
@@ -27472,6 +28641,7 @@ module Aws::QuickSight
     #   <p>Determines the way numbers are styled to accommodate different readability standards. The <code>DEFAULT</code> value uses the standard international grouping system and groups numbers by the thousands. The <code>LAKHS</code> value uses the Indian numbering system and groups numbers by lakhs and crores.</p>
     #   @return [String]
     class ThousandSeparatorOptions < Struct.new(
+      nil,
       :symbol,
       :visibility,
       :grouping_style,
@@ -27485,6 +28655,7 @@ module Aws::QuickSight
     #   <p>The threshold alerts configuration for an embedded QuickSight dashboard.</p>
     #   @return [Boolean]
     class ThresholdAlertsConfigurations < Struct.new(
+      nil,
       :enabled,
       keyword_init: true
     )
@@ -27503,6 +28674,7 @@ module Aws::QuickSight
     #   <p>The Amazon Web Services request ID for this request.</p>
     #   @return [String]
     class ThrottlingException < Struct.new(
+      nil,
       :message,
       :request_id,
       keyword_init: true
@@ -27518,6 +28690,7 @@ module Aws::QuickSight
     #   <p>The margin settings that apply around the outside edge of sheets.</p>
     #   @return [Types::MarginStyle]
     class TileLayoutStyle < Struct.new(
+      nil,
       :gutter,
       :margin,
       keyword_init: true
@@ -27530,6 +28703,7 @@ module Aws::QuickSight
     #   <p>The border around a tile.</p>
     #   @return [Types::BorderStyle]
     class TileStyle < Struct.new(
+      nil,
       :border,
       keyword_init: true
     )
@@ -27566,6 +28740,7 @@ module Aws::QuickSight
     #            </ul>
     #   @return [Integer]
     class TimeBasedForecastProperties < Struct.new(
+      nil,
       :periods_forward,
       :periods_backward,
       :upper_boundary,
@@ -27609,6 +28784,7 @@ module Aws::QuickSight
     #   <p>The default configurations for the associated controls. This applies only for filters that are scoped to multiple sheets.</p>
     #   @return [Types::DefaultFilterControlConfiguration]
     class TimeEqualityFilter < Struct.new(
+      nil,
       :filter_id,
       :column,
       :value,
@@ -27635,6 +28811,7 @@ module Aws::QuickSight
     #   <p>The level of time precision that is used to aggregate <code>DateTime</code> values.</p>
     #   @return [String]
     class TimeRangeDrillDownFilter < Struct.new(
+      nil,
       :column,
       :range_minimum,
       :range_maximum,
@@ -27690,6 +28867,7 @@ module Aws::QuickSight
     #   <p>The default configurations for the associated controls. This applies only for filters that are scoped to multiple sheets.</p>
     #   @return [Types::DefaultFilterControlConfiguration]
     class TimeRangeFilter < Struct.new(
+      nil,
       :filter_id,
       :column,
       :include_minimum,
@@ -27723,6 +28901,7 @@ module Aws::QuickSight
     #   <p>The parameter type input value.</p>
     #   @return [String]
     class TimeRangeFilterValue < Struct.new(
+      nil,
       :static_value,
       :rolling_date,
       :parameter,
@@ -27740,6 +28919,7 @@ module Aws::QuickSight
     #   <p>The tooltip item for the columns that are not part of a field well.</p>
     #   @return [Types::ColumnTooltipItem]
     class TooltipItem < Struct.new(
+      nil,
       :field_tooltip_item,
       :column_tooltip_item,
       keyword_init: true
@@ -27768,6 +28948,7 @@ module Aws::QuickSight
     #   <p>The setup for the detailed tooltip. The tooltip setup is always saved. The display type is decided based on the tooltip type.</p>
     #   @return [Types::FieldBasedTooltip]
     class TooltipOptions < Struct.new(
+      nil,
       :tooltip_visibility,
       :selected_tooltip_type,
       :field_based_tooltip,
@@ -27799,6 +28980,7 @@ module Aws::QuickSight
     #   <p>The default configurations for the associated controls. This applies only for filters that are scoped to multiple sheets.</p>
     #   @return [Types::DefaultFilterControlConfiguration]
     class TopBottomFilter < Struct.new(
+      nil,
       :filter_id,
       :column,
       :limit,
@@ -27850,6 +29032,7 @@ module Aws::QuickSight
     #            </ul>
     #   @return [String]
     class TopBottomMoversComputation < Struct.new(
+      nil,
       :computation_id,
       :name,
       :time,
@@ -27891,6 +29074,7 @@ module Aws::QuickSight
     #            </ul>
     #   @return [String]
     class TopBottomRankedComputation < Struct.new(
+      nil,
       :computation_id,
       :name,
       :category,
@@ -27968,6 +29152,7 @@ module Aws::QuickSight
     #   <p>The non additive for the table style target.</p>
     #   @return [Boolean]
     class TopicCalculatedField < Struct.new(
+      nil,
       :calculated_field_name,
       :calculated_field_description,
       :expression,
@@ -28010,6 +29195,7 @@ module Aws::QuickSight
     #   <p>A Boolean value that indicates if the filter is inverse.</p>
     #   @return [Boolean]
     class TopicCategoryFilter < Struct.new(
+      nil,
       :category_filter_function,
       :category_filter_type,
       :constant,
@@ -28036,6 +29222,7 @@ module Aws::QuickSight
     #   <p>A collective constant used in a category filter. This element is used to specify a list of values for the constant.</p>
     #   @return [Types::CollectiveConstant]
     class TopicCategoryFilterConstant < Struct.new(
+      nil,
       :constant_type,
       :singular_constant,
       :collective_constant,
@@ -28111,6 +29298,7 @@ module Aws::QuickSight
     #   <p>The non additive value for the column.</p>
     #   @return [Boolean]
     class TopicColumn < Struct.new(
+      nil,
       :column_name,
       :column_friendly_name,
       :column_description,
@@ -28144,6 +29332,7 @@ module Aws::QuickSight
     #   <p>Enables Amazon Q Business Insights for a <code>Topic</code>.</p>
     #   @return [Boolean]
     class TopicConfigOptions < Struct.new(
+      nil,
       :q_business_insights_enabled,
       keyword_init: true
     )
@@ -28167,6 +29356,7 @@ module Aws::QuickSight
     #   <p>The value list of the <code>TopicConstantValue</code>.</p>
     #   @return [Array<Types::CollectiveConstantEntry>]
     class TopicConstantValue < Struct.new(
+      nil,
       :constant_type,
       :value,
       :minimum,
@@ -28187,6 +29377,7 @@ module Aws::QuickSight
     #   <p>The constant used in a date range filter.</p>
     #   @return [Types::TopicRangeFilterConstant]
     class TopicDateRangeFilter < Struct.new(
+      nil,
       :inclusive,
       :constant,
       keyword_init: true
@@ -28216,6 +29407,7 @@ module Aws::QuickSight
     #   <p>Configuration options for a <code>Topic</code>.</p>
     #   @return [Types::TopicConfigOptions]
     class TopicDetails < Struct.new(
+      nil,
       :name,
       :description,
       :user_experience_version,
@@ -28271,6 +29463,7 @@ module Aws::QuickSight
     #   <p>The null filter.</p>
     #   @return [Types::TopicNullFilter]
     class TopicFilter < Struct.new(
+      nil,
       :filter_description,
       :filter_class,
       :filter_name,
@@ -28308,6 +29501,7 @@ module Aws::QuickSight
     #   <p>The visual for the <code>TopicIR</code>.</p>
     #   @return [Types::VisualOptions]
     class TopicIR < Struct.new(
+      nil,
       :metrics,
       :group_by_list,
       :filters,
@@ -28330,6 +29524,7 @@ module Aws::QuickSight
     #   <p>The window size for the <code>TopicIRComparisonMethod</code>.</p>
     #   @return [Integer]
     class TopicIRComparisonMethod < Struct.new(
+      nil,
       :type,
       :period,
       :window_size,
@@ -28357,6 +29552,7 @@ module Aws::QuickSight
     #   <p>The sort type for the <code>TopicIRContributionAnalysis</code>.</p>
     #   @return [String]
     class TopicIRContributionAnalysis < Struct.new(
+      nil,
       :factors,
       :time_ranges,
       :direction,
@@ -28422,6 +29618,7 @@ module Aws::QuickSight
     #   <p>The anchor for the <code>TopicIRFilterOption</code>.</p>
     #   @return [Types::Anchor]
     class TopicIRFilterOption < Struct.new(
+      nil,
       :filter_type,
       :filter_class,
       :operand_field,
@@ -28471,6 +29668,7 @@ module Aws::QuickSight
     #   <p>The named entity for the <code>TopicIRGroupBy</code>.</p>
     #   @return [Types::NamedEntityRef]
     class TopicIRGroupBy < Struct.new(
+      nil,
       :field_name,
       :time_granularity,
       :sort,
@@ -28511,6 +29709,7 @@ module Aws::QuickSight
     #   <p>The named entity for the <code>TopicIRMetric</code>.</p>
     #   @return [Types::NamedEntityRef]
     class TopicIRMetric < Struct.new(
+      nil,
       :metric_id,
       :function,
       :operands,
@@ -28543,6 +29742,7 @@ module Aws::QuickSight
     #   <p>The definition of a named entity.</p>
     #   @return [Array<Types::NamedEntityDefinition>]
     class TopicNamedEntity < Struct.new(
+      nil,
       :entity_name,
       :entity_description,
       :entity_synonyms,
@@ -28564,6 +29764,7 @@ module Aws::QuickSight
     #   <p>A Boolean value that indicates if the filter is inverse.</p>
     #   @return [Boolean]
     class TopicNullFilter < Struct.new(
+      nil,
       :null_filter_type,
       :constant,
       :inverse,
@@ -28590,6 +29791,7 @@ module Aws::QuickSight
     #            and <code>VARP</code>.</p>
     #   @return [String]
     class TopicNumericEqualityFilter < Struct.new(
+      nil,
       :constant,
       :aggregation,
       keyword_init: true
@@ -28617,6 +29819,7 @@ module Aws::QuickSight
     #            and <code>VARP</code>.</p>
     #   @return [String]
     class TopicNumericRangeFilter < Struct.new(
+      nil,
       :inclusive,
       :constant,
       :aggregation,
@@ -28639,6 +29842,7 @@ module Aws::QuickSight
     #   <p>The value of the constant that is used to specify the endpoints of a range filter.</p>
     #   @return [Types::RangeConstant]
     class TopicRangeFilterConstant < Struct.new(
+      nil,
       :constant_type,
       :range_constant,
       keyword_init: true
@@ -28657,6 +29861,7 @@ module Aws::QuickSight
     #   <p>The status of the refresh job that indicates whether the job is still running, completed successfully, or failed.</p>
     #   @return [String]
     class TopicRefreshDetails < Struct.new(
+      nil,
       :refresh_arn,
       :refresh_id,
       :refresh_status,
@@ -28690,6 +29895,7 @@ module Aws::QuickSight
     #            and <code>MONTHLY</code>.</p>
     #   @return [String]
     class TopicRefreshSchedule < Struct.new(
+      nil,
       :is_enabled,
       :based_on_spice_schedule,
       :starting_at,
@@ -28720,6 +29926,7 @@ module Aws::QuickSight
     #   <p>The definition of a refresh schedule.</p>
     #   @return [Types::TopicRefreshSchedule]
     class TopicRefreshScheduleSummary < Struct.new(
+      nil,
       :dataset_id,
       :dataset_arn,
       :dataset_name,
@@ -28741,6 +29948,7 @@ module Aws::QuickSight
     #            relative date filter.</p>
     #   @return [Types::TopicSingularFilterConstant]
     class TopicRelativeDateFilter < Struct.new(
+      nil,
       :time_granularity,
       :relative_date_filter_function,
       :constant,
@@ -28772,6 +29980,7 @@ module Aws::QuickSight
     #   <p>The template for the <code>TopicReviewedAnswer</code>.</p>
     #   @return [Types::TopicTemplate]
     class TopicReviewedAnswer < Struct.new(
+      nil,
       :arn,
       :answer_id,
       :dataset_arn,
@@ -28795,6 +30004,7 @@ module Aws::QuickSight
     #   <p>The value of the topic search filter.</p>
     #   @return [String]
     class TopicSearchFilter < Struct.new(
+      nil,
       :operator,
       :name,
       :value,
@@ -28812,6 +30022,7 @@ module Aws::QuickSight
     #   <p>The value of the singular filter constant.</p>
     #   @return [String]
     class TopicSingularFilterConstant < Struct.new(
+      nil,
       :constant_type,
       :singular_constant,
       keyword_init: true
@@ -28827,6 +30038,7 @@ module Aws::QuickSight
     #   <p>The sort direction for the <code>TopicSortClause</code>.</p>
     #   @return [String]
     class TopicSortClause < Struct.new(
+      nil,
       :operand,
       :sort_direction,
       keyword_init: true
@@ -28848,6 +30060,7 @@ module Aws::QuickSight
     #   <p>The user experience version of the topic.</p>
     #   @return [String]
     class TopicSummary < Struct.new(
+      nil,
       :arn,
       :topic_id,
       :name,
@@ -28865,6 +30078,7 @@ module Aws::QuickSight
     #   <p>The slots for the <code>TopicTemplate</code>.</p>
     #   @return [Array<Types::Slot>]
     class TopicTemplate < Struct.new(
+      nil,
       :template_type,
       :slots,
       keyword_init: true
@@ -28886,6 +30100,7 @@ module Aws::QuickSight
     #   <p>The supporting visuals for the <code>TopicVisual</code>.</p>
     #   @return [Array<Types::TopicVisual>]
     class TopicVisual < Struct.new(
+      nil,
       :visual_id,
       :role,
       :ir,
@@ -28906,6 +30121,7 @@ module Aws::QuickSight
     #   <p>The value field that is used in a computation.</p>
     #   @return [Types::MeasureField]
     class TotalAggregationComputation < Struct.new(
+      nil,
       :computation_id,
       :name,
       :value,
@@ -28919,6 +30135,7 @@ module Aws::QuickSight
     #   <p>A built in aggregation function for total values.</p>
     #   @return [String]
     class TotalAggregationFunction < Struct.new(
+      nil,
       :simple_total_aggregation_function,
       keyword_init: true
     )
@@ -28933,6 +30150,7 @@ module Aws::QuickSight
     #   <p>The total aggregation function that you want to set for a specified field id.</p>
     #   @return [Types::TotalAggregationFunction]
     class TotalAggregationOption < Struct.new(
+      nil,
       :field_id,
       :total_aggregation_function,
       keyword_init: true
@@ -28960,6 +30178,7 @@ module Aws::QuickSight
     #   <p>The total aggregation settings for each value field.</p>
     #   @return [Array<Types::TotalAggregationOption>]
     class TotalOptions < Struct.new(
+      nil,
       :totals_visibility,
       :placement,
       :scroll_status,
@@ -29045,6 +30264,7 @@ module Aws::QuickSight
     #            </ul>
     #   @return [String]
     class TransposedTableOption < Struct.new(
+      nil,
       :column_index,
       :column_width,
       :column_type,
@@ -29064,6 +30284,7 @@ module Aws::QuickSight
     #   <p>The color field well of a tree map. Values are grouped by aggregations based on group by fields.</p>
     #   @return [Array<Types::MeasureField>]
     class TreeMapAggregatedFieldWells < Struct.new(
+      nil,
       :groups,
       :sizes,
       :colors,
@@ -29104,6 +30325,7 @@ module Aws::QuickSight
     #   <p>The general visual interactions setup for a visual.</p>
     #   @return [Types::VisualInteractionOptions]
     class TreeMapConfiguration < Struct.new(
+      nil,
       :field_wells,
       :sort_configuration,
       :group_label_options,
@@ -29125,6 +30347,7 @@ module Aws::QuickSight
     #   <p>The aggregated field wells of a tree map.</p>
     #   @return [Types::TreeMapAggregatedFieldWells]
     class TreeMapFieldWells < Struct.new(
+      nil,
       :tree_map_aggregated_field_wells,
       keyword_init: true
     )
@@ -29139,6 +30362,7 @@ module Aws::QuickSight
     #   <p>The limit on the number of groups that are displayed.</p>
     #   @return [Types::ItemsLimitConfiguration]
     class TreeMapSortConfiguration < Struct.new(
+      nil,
       :tree_map_sort,
       :tree_map_group_items_limit_configuration,
       keyword_init: true
@@ -29170,6 +30394,7 @@ module Aws::QuickSight
     #   <p>The alt text for the visual.</p>
     #   @return [String]
     class TreeMapVisual < Struct.new(
+      nil,
       :visual_id,
       :title,
       :subtitle,
@@ -29187,6 +30412,7 @@ module Aws::QuickSight
     #   <p>The visibility of the trend arrows.</p>
     #   @return [String]
     class TrendArrowOptions < Struct.new(
+      nil,
       :visibility,
       keyword_init: true
     )
@@ -29204,6 +30430,7 @@ module Aws::QuickSight
     #   <p>The catalog name for the Trino data source.</p>
     #   @return [String]
     class TrinoParameters < Struct.new(
+      nil,
       :host,
       :port,
       :catalog,
@@ -29220,6 +30447,7 @@ module Aws::QuickSight
     #   <p>Maximum number of rows to query Twitter.</p>
     #   @return [Integer]
     class TwitterParameters < Struct.new(
+      nil,
       :query,
       :max_rows,
       keyword_init: true
@@ -29232,6 +30460,7 @@ module Aws::QuickSight
     #   <p>Determines the list of font families.</p>
     #   @return [Array<Types::Font>]
     class Typography < Struct.new(
+      nil,
       :font_families,
       keyword_init: true
     )
@@ -29302,6 +30531,7 @@ module Aws::QuickSight
     #               measure color.</p>
     #   @return [String]
     class UIColorPalette < Struct.new(
+      nil,
       :primary_foreground,
       :primary_background,
       :secondary_foreground,
@@ -29334,6 +30564,7 @@ module Aws::QuickSight
     #   <p>The format configuration of the field.</p>
     #   @return [Types::FormatConfiguration]
     class UnaggregatedField < Struct.new(
+      nil,
       :field_id,
       :column,
       :format_configuration,
@@ -29347,6 +30578,7 @@ module Aws::QuickSight
     #   <p>The name of the column that is referenced in the <code>UniqueKey</code> configuration.</p>
     #   @return [Array<String>]
     class UniqueKey < Struct.new(
+      nil,
       :column_names,
       keyword_init: true
     )
@@ -29364,6 +30596,7 @@ module Aws::QuickSight
     #   <p>The category field that is used in a computation.</p>
     #   @return [Types::DimensionField]
     class UniqueValuesComputation < Struct.new(
+      nil,
       :computation_id,
       :name,
       :category,
@@ -29387,6 +30620,7 @@ module Aws::QuickSight
     #   <p>The Amazon Web Services request ID for this request.</p>
     #   @return [String]
     class UnsupportedPricingPlanException < Struct.new(
+      nil,
       :message,
       :request_id,
       keyword_init: true
@@ -29404,6 +30638,7 @@ module Aws::QuickSight
     #   <p>The Amazon Web Services request ID for this request.</p>
     #   @return [String]
     class UnsupportedUserEditionException < Struct.new(
+      nil,
       :message,
       :request_id,
       keyword_init: true
@@ -29419,6 +30654,7 @@ module Aws::QuickSight
     #   <p>The column tags to remove from this column.</p>
     #   @return [Array<String>]
     class UntagColumnOperation < Struct.new(
+      nil,
       :column_name,
       :tag_names,
       keyword_init: true
@@ -29433,6 +30669,7 @@ module Aws::QuickSight
     #   <p>The keys of the key-value pairs for the resource tag or tags assigned to the resource.</p>
     #   @return [Array<String>]
     class UntagResourceRequest < Struct.new(
+      nil,
       :resource_arn,
       :tag_keys,
       keyword_init: true
@@ -29447,6 +30684,7 @@ module Aws::QuickSight
     #   <p>The HTTP status of the request.</p>
     #   @return [Integer]
     class UntagResourceResponse < Struct.new(
+      nil,
       :request_id,
       :status,
       keyword_init: true
@@ -29466,6 +30704,7 @@ module Aws::QuickSight
     #   <p>The ID of the Amazon Web Services account for which you want to apply a custom permissions profile.</p>
     #   @return [String]
     class UpdateAccountCustomPermissionRequest < Struct.new(
+      nil,
       :custom_permissions_name,
       :aws_account_id,
       keyword_init: true
@@ -29480,6 +30719,7 @@ module Aws::QuickSight
     #   <p>The HTTP status of the request.</p>
     #   @return [Integer]
     class UpdateAccountCustomPermissionResponse < Struct.new(
+      nil,
       :request_id,
       :status,
       keyword_init: true
@@ -29503,6 +30743,7 @@ module Aws::QuickSight
     #   <p>The QuickSight customizations you're updating in the current Amazon Web Services Region. </p>
     #   @return [Types::AccountCustomization]
     class UpdateAccountCustomizationRequest < Struct.new(
+      nil,
       :aws_account_id,
       :namespace,
       :account_customization,
@@ -29531,6 +30772,7 @@ module Aws::QuickSight
     #   <p>The HTTP status of the request.</p>
     #   @return [Integer]
     class UpdateAccountCustomizationResponse < Struct.new(
+      nil,
       :arn,
       :aws_account_id,
       :namespace,
@@ -29566,6 +30808,7 @@ module Aws::QuickSight
     #   <p>A boolean value that determines whether or not an QuickSight account can be deleted. A <code>True</code> value doesn't allow the account to be deleted and results in an error message if a user tries to make a <code>DeleteAccountSubscription</code> request. A <code>False</code> value will allow the account to be deleted.</p>
     #   @return [Boolean]
     class UpdateAccountSettingsRequest < Struct.new(
+      nil,
       :aws_account_id,
       :default_namespace,
       :notification_email,
@@ -29582,6 +30825,7 @@ module Aws::QuickSight
     #   <p>The HTTP status of the request.</p>
     #   @return [Integer]
     class UpdateAccountSettingsResponse < Struct.new(
+      nil,
       :request_id,
       :status,
       keyword_init: true
@@ -29611,6 +30855,7 @@ module Aws::QuickSight
     #               from.</p>
     #   @return [Array<Types::ResourcePermission>]
     class UpdateAnalysisPermissionsRequest < Struct.new(
+      nil,
       :aws_account_id,
       :analysis_id,
       :grant_permissions,
@@ -29637,6 +30882,7 @@ module Aws::QuickSight
     #   <p>The HTTP status of the request.</p>
     #   @return [Integer]
     class UpdateAnalysisPermissionsResponse < Struct.new(
+      nil,
       :analysis_arn,
       :analysis_id,
       :permissions,
@@ -29684,6 +30930,7 @@ module Aws::QuickSight
     #   <p>The option to relax the validation needed to update an analysis with definition objects. This skips the validation step for specific errors.</p>
     #   @return [Types::ValidationStrategy]
     class UpdateAnalysisRequest < Struct.new(
+      nil,
       :aws_account_id,
       :analysis_id,
       :name,
@@ -29713,6 +30960,7 @@ module Aws::QuickSight
     #   <p>The Amazon Web Services request ID for this operation.</p>
     #   @return [String]
     class UpdateAnalysisResponse < Struct.new(
+      nil,
       :arn,
       :analysis_id,
       :update_status,
@@ -29735,6 +30983,7 @@ module Aws::QuickSight
     #   <p>The namespace of the QuickSight application.</p>
     #   @return [String]
     class UpdateApplicationWithTokenExchangeGrantRequest < Struct.new(
+      nil,
       :aws_account_id,
       :namespace,
       keyword_init: true
@@ -29749,6 +30998,7 @@ module Aws::QuickSight
     #   <p>The Amazon Web Services request ID for this operation.</p>
     #   @return [String]
     class UpdateApplicationWithTokenExchangeGrantResponse < Struct.new(
+      nil,
       :status,
       :request_id,
       keyword_init: true
@@ -29768,6 +31018,7 @@ module Aws::QuickSight
     #   <p>The Amazon Resource Name (ARN) of the brand.</p>
     #   @return [String]
     class UpdateBrandAssignmentRequest < Struct.new(
+      nil,
       :aws_account_id,
       :brand_arn,
       keyword_init: true
@@ -29782,6 +31033,7 @@ module Aws::QuickSight
     #   <p>The Amazon Resource Name (ARN) of the brand.</p>
     #   @return [String]
     class UpdateBrandAssignmentResponse < Struct.new(
+      nil,
       :request_id,
       :brand_arn,
       keyword_init: true
@@ -29799,6 +31051,7 @@ module Aws::QuickSight
     #   <p>The ID of the published version.</p>
     #   @return [String]
     class UpdateBrandPublishedVersionRequest < Struct.new(
+      nil,
       :aws_account_id,
       :brand_id,
       :version_id,
@@ -29814,6 +31067,7 @@ module Aws::QuickSight
     #   <p>The ID of the published version.</p>
     #   @return [String]
     class UpdateBrandPublishedVersionResponse < Struct.new(
+      nil,
       :request_id,
       :version_id,
       keyword_init: true
@@ -29831,6 +31085,7 @@ module Aws::QuickSight
     #   <p>The definition of the brand.</p>
     #   @return [Types::BrandDefinition]
     class UpdateBrandRequest < Struct.new(
+      nil,
       :aws_account_id,
       :brand_id,
       :brand_definition,
@@ -29849,6 +31104,7 @@ module Aws::QuickSight
     #   <p>The definition of the brand.</p>
     #   @return [Types::BrandDefinition]
     class UpdateBrandResponse < Struct.new(
+      nil,
       :request_id,
       :brand_detail,
       :brand_definition,
@@ -29867,6 +31123,7 @@ module Aws::QuickSight
     #   <p>A set of actions to include in the custom permissions profile.</p>
     #   @return [Types::Capabilities]
     class UpdateCustomPermissionsRequest < Struct.new(
+      nil,
       :aws_account_id,
       :custom_permissions_name,
       :capabilities,
@@ -29885,6 +31142,7 @@ module Aws::QuickSight
     #   <p>The Amazon Web Services request ID for this operation.</p>
     #   @return [String]
     class UpdateCustomPermissionsResponse < Struct.new(
+      nil,
       :status,
       :arn,
       :request_id,
@@ -29908,6 +31166,7 @@ module Aws::QuickSight
     #   <p> list of analysis Amazon Resource Names (ARNs) to be linked to the dashboard.</p>
     #   @return [Array<String>]
     class UpdateDashboardLinksRequest < Struct.new(
+      nil,
       :aws_account_id,
       :dashboard_id,
       :link_entities,
@@ -29929,6 +31188,7 @@ module Aws::QuickSight
     #   <p>A list of analysis Amazon Resource Names (ARNs) to be linked to the dashboard.</p>
     #   @return [Array<String>]
     class UpdateDashboardLinksResponse < Struct.new(
+      nil,
       :request_id,
       :status,
       :dashboard_arn,
@@ -29963,6 +31223,7 @@ module Aws::QuickSight
     #   <p>Revokes link permissions from all users in a defined namespace.</p>
     #   @return [Array<Types::ResourcePermission>]
     class UpdateDashboardPermissionsRequest < Struct.new(
+      nil,
       :aws_account_id,
       :dashboard_id,
       :grant_permissions,
@@ -29993,6 +31254,7 @@ module Aws::QuickSight
     #   <p>Updates the permissions of a shared link to an QuickSight dashboard.</p>
     #   @return [Types::LinkSharingConfiguration]
     class UpdateDashboardPermissionsResponse < Struct.new(
+      nil,
       :dashboard_arn,
       :dashboard_id,
       :permissions,
@@ -30020,6 +31282,7 @@ module Aws::QuickSight
     #   <p>The version number of the dashboard.</p>
     #   @return [Integer]
     class UpdateDashboardPublishedVersionRequest < Struct.new(
+      nil,
       :aws_account_id,
       :dashboard_id,
       :version_number,
@@ -30041,6 +31304,7 @@ module Aws::QuickSight
     #   <p>The Amazon Web Services request ID for this operation.</p>
     #   @return [String]
     class UpdateDashboardPublishedVersionResponse < Struct.new(
+      nil,
       :dashboard_id,
       :dashboard_arn,
       :status,
@@ -30142,6 +31406,7 @@ module Aws::QuickSight
     #   <p>The option to relax the validation needed to update a dashboard with definition objects. This skips the validation step for specific errors.</p>
     #   @return [Types::ValidationStrategy]
     class UpdateDashboardRequest < Struct.new(
+      nil,
       :aws_account_id,
       :dashboard_id,
       :name,
@@ -30176,6 +31441,7 @@ module Aws::QuickSight
     #   <p>The Amazon Web Services request ID for this operation.</p>
     #   @return [String]
     class UpdateDashboardResponse < Struct.new(
+      nil,
       :arn,
       :version_arn,
       :dashboard_id,
@@ -30199,6 +31465,7 @@ module Aws::QuickSight
     #   <p>The status of dashboards QA configuration that you want to update.</p>
     #   @return [String]
     class UpdateDashboardsQAConfigurationRequest < Struct.new(
+      nil,
       :aws_account_id,
       :dashboards_qa_status,
       keyword_init: true
@@ -30216,6 +31483,7 @@ module Aws::QuickSight
     #   <p>The HTTP status of the request.</p>
     #   @return [Integer]
     class UpdateDashboardsQAConfigurationResponse < Struct.new(
+      nil,
       :dashboards_qa_status,
       :request_id,
       :status,
@@ -30243,6 +31511,7 @@ module Aws::QuickSight
     #   <p>The resource permissions that you want to revoke from the dataset.</p>
     #   @return [Array<Types::ResourcePermission>]
     class UpdateDataSetPermissionsRequest < Struct.new(
+      nil,
       :aws_account_id,
       :data_set_id,
       :grant_permissions,
@@ -30266,6 +31535,7 @@ module Aws::QuickSight
     #   <p>The HTTP status of the request.</p>
     #   @return [Integer]
     class UpdateDataSetPermissionsResponse < Struct.new(
+      nil,
       :data_set_arn,
       :data_set_id,
       :request_id,
@@ -30326,6 +31596,7 @@ module Aws::QuickSight
     #   <p>The configuration for the performance optimization of the dataset that contains a <code>UniqueKey</code> configuration.</p>
     #   @return [Types::PerformanceConfiguration]
     class UpdateDataSetRequest < Struct.new(
+      nil,
       :aws_account_id,
       :data_set_id,
       :name,
@@ -30366,6 +31637,7 @@ module Aws::QuickSight
     #   <p>The HTTP status of the request.</p>
     #   @return [Integer]
     class UpdateDataSetResponse < Struct.new(
+      nil,
       :arn,
       :data_set_id,
       :ingestion_arn,
@@ -30395,6 +31667,7 @@ module Aws::QuickSight
     #   <p>A list of resource permissions that you want to revoke on the data source.</p>
     #   @return [Array<Types::ResourcePermission>]
     class UpdateDataSourcePermissionsRequest < Struct.new(
+      nil,
       :aws_account_id,
       :data_source_id,
       :grant_permissions,
@@ -30417,6 +31690,7 @@ module Aws::QuickSight
     #   <p>The HTTP status of the request.</p>
     #   @return [Integer]
     class UpdateDataSourcePermissionsResponse < Struct.new(
+      nil,
       :data_source_arn,
       :data_source_id,
       :request_id,
@@ -30456,6 +31730,7 @@ module Aws::QuickSight
     #   			source.</p>
     #   @return [Types::SslProperties]
     class UpdateDataSourceRequest < Struct.new(
+      nil,
       :aws_account_id,
       :data_source_id,
       :name,
@@ -30484,6 +31759,7 @@ module Aws::QuickSight
     #   <p>The HTTP status of the request.</p>
     #   @return [Integer]
     class UpdateDataSourceResponse < Struct.new(
+      nil,
       :arn,
       :data_source_id,
       :update_status,
@@ -30509,6 +31785,7 @@ module Aws::QuickSight
     #   <p>The ID of the Amazon Q Business application that you want to update.</p>
     #   @return [String]
     class UpdateDefaultQBusinessApplicationRequest < Struct.new(
+      nil,
       :aws_account_id,
       :namespace,
       :application_id,
@@ -30524,6 +31801,7 @@ module Aws::QuickSight
     #   <p>The HTTP status of the request.</p>
     #   @return [Integer]
     class UpdateDefaultQBusinessApplicationResponse < Struct.new(
+      nil,
       :request_id,
       :status,
       keyword_init: true
@@ -30549,6 +31827,7 @@ module Aws::QuickSight
     #   <p>The permissions that you want to revoke from a resource.  Namespace ARNs are not supported <code>Principal</code> values for folder permissions.</p>
     #   @return [Array<Types::ResourcePermission>]
     class UpdateFolderPermissionsRequest < Struct.new(
+      nil,
       :aws_account_id,
       :folder_id,
       :grant_permissions,
@@ -30574,6 +31853,7 @@ module Aws::QuickSight
     #   <p>The Amazon Web Services request ID for this operation.</p>
     #   @return [String]
     class UpdateFolderPermissionsResponse < Struct.new(
+      nil,
       :status,
       :arn,
       :folder_id,
@@ -30599,6 +31879,7 @@ module Aws::QuickSight
     #   <p>The name of the folder.</p>
     #   @return [String]
     class UpdateFolderRequest < Struct.new(
+      nil,
       :aws_account_id,
       :folder_id,
       :name,
@@ -30620,6 +31901,7 @@ module Aws::QuickSight
     #   <p>The Amazon Web Services request ID for this operation.</p>
     #   @return [String]
     class UpdateFolderResponse < Struct.new(
+      nil,
       :status,
       :arn,
       :folder_id,
@@ -30648,6 +31930,7 @@ module Aws::QuickSight
     #   <p>The namespace of the group that you want to update.</p>
     #   @return [String]
     class UpdateGroupRequest < Struct.new(
+      nil,
       :group_name,
       :description,
       :aws_account_id,
@@ -30667,6 +31950,7 @@ module Aws::QuickSight
     #   <p>The HTTP status of the request.</p>
     #   @return [Integer]
     class UpdateGroupResponse < Struct.new(
+      nil,
       :group,
       :request_id,
       :status,
@@ -30722,6 +32006,7 @@ module Aws::QuickSight
     #   			to.</p>
     #   @return [Hash<String, Array<String>>]
     class UpdateIAMPolicyAssignmentRequest < Struct.new(
+      nil,
       :aws_account_id,
       :assignment_name,
       :namespace,
@@ -30774,6 +32059,7 @@ module Aws::QuickSight
     #   <p>The HTTP status of the request.</p>
     #   @return [Integer]
     class UpdateIAMPolicyAssignmentResponse < Struct.new(
+      nil,
       :assignment_name,
       :assignment_id,
       :policy_arn,
@@ -30801,6 +32087,7 @@ module Aws::QuickSight
     #   <p>Specifies a list of application ARNs that represent the authorized targets for a service.</p>
     #   @return [Array<String>]
     class UpdateIdentityPropagationConfigRequest < Struct.new(
+      nil,
       :aws_account_id,
       :service,
       :authorized_targets,
@@ -30816,6 +32103,7 @@ module Aws::QuickSight
     #   <p>The HTTP status of the request.</p>
     #   @return [Integer]
     class UpdateIdentityPropagationConfigResponse < Struct.new(
+      nil,
       :request_id,
       :status,
       keyword_init: true
@@ -30844,6 +32132,7 @@ module Aws::QuickSight
     #   <p>A value that specifies whether IP rules are turned on.</p>
     #   @return [Boolean]
     class UpdateIpRestrictionRequest < Struct.new(
+      nil,
       :aws_account_id,
       :ip_restriction_rule_map,
       :vpc_id_restriction_rule_map,
@@ -30864,6 +32153,7 @@ module Aws::QuickSight
     #   <p>The HTTP status of the request. </p>
     #   @return [Integer]
     class UpdateIpRestrictionResponse < Struct.new(
+      nil,
       :aws_account_id,
       :request_id,
       :status,
@@ -30884,6 +32174,7 @@ module Aws::QuickSight
     #   <p>A list of <code>RegisteredCustomerManagedKey</code> objects to be updated to the QuickSight account.</p>
     #   @return [Array<Types::RegisteredCustomerManagedKey>]
     class UpdateKeyRegistrationRequest < Struct.new(
+      nil,
       :aws_account_id,
       :key_registration,
       keyword_init: true
@@ -30901,6 +32192,7 @@ module Aws::QuickSight
     #   <p>The Amazon Web Services request ID for this operation.</p>
     #   @return [String]
     class UpdateKeyRegistrationResponse < Struct.new(
+      nil,
       :failed_key_registration,
       :successful_key_registration,
       :request_id,
@@ -30916,6 +32208,7 @@ module Aws::QuickSight
     #   <p>A Boolean value that indicates whether public sharing is turned on for an QuickSight account.</p>
     #   @return [Boolean]
     class UpdatePublicSharingSettingsRequest < Struct.new(
+      nil,
       :aws_account_id,
       :public_sharing_enabled,
       keyword_init: true
@@ -30930,6 +32223,7 @@ module Aws::QuickSight
     #   <p>The HTTP status of the request.</p>
     #   @return [Integer]
     class UpdatePublicSharingSettingsResponse < Struct.new(
+      nil,
       :request_id,
       :status,
       keyword_init: true
@@ -30949,6 +32243,7 @@ module Aws::QuickSight
     #   <p>An option to allow QuickSight to customize data stories with user specific metadata, specifically location and job information, in your IAM Identity Center instance.</p>
     #   @return [String]
     class UpdateQPersonalizationConfigurationRequest < Struct.new(
+      nil,
       :aws_account_id,
       :personalization_mode,
       keyword_init: true
@@ -30966,6 +32261,7 @@ module Aws::QuickSight
     #   <p>The HTTP status of the request.</p>
     #   @return [Integer]
     class UpdateQPersonalizationConfigurationResponse < Struct.new(
+      nil,
       :personalization_mode,
       :request_id,
       :status,
@@ -30986,6 +32282,7 @@ module Aws::QuickSight
     #   <p>The status of the QuickSight Q Search configuration that the user wants to update.</p>
     #   @return [String]
     class UpdateQuickSightQSearchConfigurationRequest < Struct.new(
+      nil,
       :aws_account_id,
       :q_search_status,
       keyword_init: true
@@ -31003,6 +32300,7 @@ module Aws::QuickSight
     #   <p>The HTTP status of the request.</p>
     #   @return [Integer]
     class UpdateQuickSightQSearchConfigurationResponse < Struct.new(
+      nil,
       :q_search_status,
       :request_id,
       :status,
@@ -31026,6 +32324,7 @@ module Aws::QuickSight
     #   <p>The refresh schedule.</p>
     #   @return [Types::RefreshSchedule]
     class UpdateRefreshScheduleRequest < Struct.new(
+      nil,
       :data_set_id,
       :aws_account_id,
       :schedule,
@@ -31047,6 +32346,7 @@ module Aws::QuickSight
     #   <p>The Amazon Resource Name (ARN) for the refresh schedule.</p>
     #   @return [String]
     class UpdateRefreshScheduleResponse < Struct.new(
+      nil,
       :status,
       :request_id,
       :schedule_id,
@@ -31074,6 +32374,7 @@ module Aws::QuickSight
     #   <p>The namespace that contains the role that you want to update.</p>
     #   @return [String]
     class UpdateRoleCustomPermissionRequest < Struct.new(
+      nil,
       :custom_permissions_name,
       :role,
       :aws_account_id,
@@ -31090,6 +32391,7 @@ module Aws::QuickSight
     #   <p>The HTTP status of the request.</p>
     #   @return [Integer]
     class UpdateRoleCustomPermissionResponse < Struct.new(
+      nil,
       :request_id,
       :status,
       keyword_init: true
@@ -31119,6 +32421,7 @@ module Aws::QuickSight
     #            </ul>
     #   @return [String]
     class UpdateSPICECapacityConfigurationRequest < Struct.new(
+      nil,
       :aws_account_id,
       :purchase_mode,
       keyword_init: true
@@ -31133,6 +32436,7 @@ module Aws::QuickSight
     #   <p>The HTTP status of the request.</p>
     #   @return [Integer]
     class UpdateSPICECapacityConfigurationResponse < Struct.new(
+      nil,
       :request_id,
       :status,
       keyword_init: true
@@ -31161,6 +32465,7 @@ module Aws::QuickSight
     #   <p>The version number of the template.</p>
     #   @return [Integer]
     class UpdateTemplateAliasRequest < Struct.new(
+      nil,
       :aws_account_id,
       :template_id,
       :alias_name,
@@ -31180,6 +32485,7 @@ module Aws::QuickSight
     #   <p>The Amazon Web Services request ID for this operation.</p>
     #   @return [String]
     class UpdateTemplateAliasResponse < Struct.new(
+      nil,
       :template_alias,
       :status,
       :request_id,
@@ -31206,6 +32512,7 @@ module Aws::QuickSight
     #   <p>A list of resource permissions to be revoked from the template. </p>
     #   @return [Array<Types::ResourcePermission>]
     class UpdateTemplatePermissionsRequest < Struct.new(
+      nil,
       :aws_account_id,
       :template_id,
       :grant_permissions,
@@ -31231,6 +32538,7 @@ module Aws::QuickSight
     #   <p>The HTTP status of the request.</p>
     #   @return [Integer]
     class UpdateTemplatePermissionsResponse < Struct.new(
+      nil,
       :template_id,
       :template_arn,
       :permissions,
@@ -31281,6 +32589,7 @@ module Aws::QuickSight
     #   <p>The option to relax the validation needed to update a template with definition objects. This skips the validation step for specific errors.</p>
     #   @return [Types::ValidationStrategy]
     class UpdateTemplateRequest < Struct.new(
+      nil,
       :aws_account_id,
       :template_id,
       :source_entity,
@@ -31312,6 +32621,7 @@ module Aws::QuickSight
     #   <p>The Amazon Web Services request ID for this operation.</p>
     #   @return [String]
     class UpdateTemplateResponse < Struct.new(
+      nil,
       :template_id,
       :arn,
       :version_arn,
@@ -31341,6 +32651,7 @@ module Aws::QuickSight
     #   <p>The version number of the theme that the alias should reference.</p>
     #   @return [Integer]
     class UpdateThemeAliasRequest < Struct.new(
+      nil,
       :aws_account_id,
       :theme_id,
       :alias_name,
@@ -31360,6 +32671,7 @@ module Aws::QuickSight
     #   <p>The Amazon Web Services request ID for this operation.</p>
     #   @return [String]
     class UpdateThemeAliasResponse < Struct.new(
+      nil,
       :theme_alias,
       :status,
       :request_id,
@@ -31386,6 +32698,7 @@ module Aws::QuickSight
     #   <p>A list of resource permissions to be revoked from the theme.</p>
     #   @return [Array<Types::ResourcePermission>]
     class UpdateThemePermissionsRequest < Struct.new(
+      nil,
       :aws_account_id,
       :theme_id,
       :grant_permissions,
@@ -31411,6 +32724,7 @@ module Aws::QuickSight
     #   <p>The HTTP status of the request.</p>
     #   @return [Integer]
     class UpdateThemePermissionsResponse < Struct.new(
+      nil,
       :theme_id,
       :theme_arn,
       :permissions,
@@ -31448,6 +32762,7 @@ module Aws::QuickSight
     #   <p>The theme configuration, which contains the theme display properties.</p>
     #   @return [Types::ThemeConfiguration]
     class UpdateThemeRequest < Struct.new(
+      nil,
       :aws_account_id,
       :theme_id,
       :name,
@@ -31478,6 +32793,7 @@ module Aws::QuickSight
     #   <p>The Amazon Web Services request ID for this operation.</p>
     #   @return [String]
     class UpdateThemeResponse < Struct.new(
+      nil,
       :theme_id,
       :arn,
       :version_arn,
@@ -31508,6 +32824,7 @@ module Aws::QuickSight
     #   <p>The resource permissions that you want to revoke from the topic.</p>
     #   @return [Array<Types::ResourcePermission>]
     class UpdateTopicPermissionsRequest < Struct.new(
+      nil,
       :aws_account_id,
       :topic_id,
       :grant_permissions,
@@ -31533,6 +32850,7 @@ module Aws::QuickSight
     #   <p>The Amazon Web Services request ID for this operation.</p>
     #   @return [String]
     class UpdateTopicPermissionsResponse < Struct.new(
+      nil,
       :topic_id,
       :topic_arn,
       :permissions,
@@ -31562,6 +32880,7 @@ module Aws::QuickSight
     #   <p>The definition of a refresh schedule.</p>
     #   @return [Types::TopicRefreshSchedule]
     class UpdateTopicRefreshScheduleRequest < Struct.new(
+      nil,
       :aws_account_id,
       :topic_id,
       :dataset_id,
@@ -31587,6 +32906,7 @@ module Aws::QuickSight
     #   <p>The Amazon Web Services request ID for this operation.</p>
     #   @return [String]
     class UpdateTopicRefreshScheduleResponse < Struct.new(
+      nil,
       :topic_id,
       :topic_arn,
       :dataset_arn,
@@ -31616,6 +32936,7 @@ module Aws::QuickSight
     #   <p>Custom instructions for the topic.</p>
     #   @return [Types::CustomInstructions]
     class UpdateTopicRequest < Struct.new(
+      nil,
       :aws_account_id,
       :topic_id,
       :topic,
@@ -31641,6 +32962,7 @@ module Aws::QuickSight
     #   <p>The HTTP status of the request.</p>
     #   @return [Integer]
     class UpdateTopicResponse < Struct.new(
+      nil,
       :topic_id,
       :arn,
       :refresh_arn,
@@ -31669,6 +32991,7 @@ module Aws::QuickSight
     #   <p>The name of the custom permissions that you want to update.</p>
     #   @return [String]
     class UpdateUserCustomPermissionRequest < Struct.new(
+      nil,
       :user_name,
       :aws_account_id,
       :namespace,
@@ -31685,6 +33008,7 @@ module Aws::QuickSight
     #   <p>The HTTP status of the request.</p>
     #   @return [Integer]
     class UpdateUserCustomPermissionResponse < Struct.new(
+      nil,
       :request_id,
       :status,
       keyword_init: true
@@ -31807,6 +33131,7 @@ module Aws::QuickSight
     #   <p>The identity ID for a user in the external login provider.</p>
     #   @return [String]
     class UpdateUserRequest < Struct.new(
+      nil,
       :user_name,
       :aws_account_id,
       :namespace,
@@ -31832,6 +33157,7 @@ module Aws::QuickSight
     #   <p>The HTTP status of the request.</p>
     #   @return [Integer]
     class UpdateUserResponse < Struct.new(
+      nil,
       :user,
       :request_id,
       :status,
@@ -31870,6 +33196,7 @@ module Aws::QuickSight
     #   <p>An IAM role associated with the VPC connection.</p>
     #   @return [String]
     class UpdateVPCConnectionRequest < Struct.new(
+      nil,
       :aws_account_id,
       :vpc_connection_id,
       :name,
@@ -31901,6 +33228,7 @@ module Aws::QuickSight
     #   <p>The HTTP status of the request.</p>
     #   @return [Integer]
     class UpdateVPCConnectionResponse < Struct.new(
+      nil,
       :arn,
       :vpc_connection_id,
       :update_status,
@@ -31934,6 +33262,7 @@ module Aws::QuickSight
     #   <p>The delimiter between values in the file.</p>
     #   @return [String]
     class UploadSettings < Struct.new(
+      nil,
       :format,
       :start_from_row,
       :contains_header,
@@ -32037,6 +33366,7 @@ module Aws::QuickSight
     #   <p>The identity ID for the user in the external login provider.</p>
     #   @return [String]
     class User < Struct.new(
+      nil,
       :arn,
       :user_name,
       :email,
@@ -32099,6 +33429,7 @@ module Aws::QuickSight
     #   <p>The time that the VPC connection was last updated.</p>
     #   @return [Time]
     class VPCConnection < Struct.new(
+      nil,
       :vpc_connection_id,
       :arn,
       :name,
@@ -32158,6 +33489,7 @@ module Aws::QuickSight
     #   <p>The time that the VPC connection was last updated.</p>
     #   @return [Time]
     class VPCConnectionSummary < Struct.new(
+      nil,
       :vpc_connection_id,
       :arn,
       :name,
@@ -32180,6 +33512,7 @@ module Aws::QuickSight
     #   <p>The mode of validation for the asset to be created or updated. When you set this value to <code>STRICT</code>, strict validation for every error is enforced. When you set this value to <code>LENIENT</code>, validation is skipped for specific UI errors.</p>
     #   @return [String]
     class ValidationStrategy < Struct.new(
+      nil,
       :mode,
       keyword_init: true
     )
@@ -32191,6 +33524,7 @@ module Aws::QuickSight
     #   <p>The percent range in the visible range.</p>
     #   @return [Types::PercentVisibleRange]
     class VisibleRangeOptions < Struct.new(
+      nil,
       :percent_range,
       keyword_init: true
     )
@@ -32297,6 +33631,7 @@ module Aws::QuickSight
     #   <p>The custom plugin visual type.</p>
     #   @return [Types::PluginVisual]
     class Visual < Struct.new(
+      nil,
       :table_visual,
       :pivot_table_visual,
       :bar_chart_visual,
@@ -32332,6 +33667,7 @@ module Aws::QuickSight
     #   <p>The availaiblity status of a visual's axis sort options.</p>
     #   @return [String]
     class VisualAxisSortOption < Struct.new(
+      nil,
       :availability_status,
       keyword_init: true
     )
@@ -32367,6 +33703,7 @@ module Aws::QuickSight
     #            <p>This is a union type structure. For this structure to be valid, only one of the attributes can be defined.</p>
     #   @return [Array<Types::VisualCustomActionOperation>]
     class VisualCustomAction < Struct.new(
+      nil,
       :custom_action_id,
       :name,
       :status,
@@ -32382,6 +33719,7 @@ module Aws::QuickSight
     #   <p>A list of highlight operations available for visuals in an analysis or sheet.</p>
     #   @return [Types::VisualHighlightOperation]
     class VisualCustomActionDefaults < Struct.new(
+      nil,
       :highlight_operation,
       keyword_init: true
     )
@@ -32403,6 +33741,7 @@ module Aws::QuickSight
     #   <p>The set parameter operation that sets parameters in custom action.</p>
     #   @return [Types::CustomActionSetParametersOperation]
     class VisualCustomActionOperation < Struct.new(
+      nil,
       :filter_operation,
       :navigation_operation,
       :url_operation,
@@ -32417,6 +33756,7 @@ module Aws::QuickSight
     #   <p>Specifies whether a highlight operation is initiated by a click or hover, or whether it's disabled.</p>
     #   @return [String]
     class VisualHighlightOperation < Struct.new(
+      nil,
       :trigger,
       keyword_init: true
     )
@@ -32431,6 +33771,7 @@ module Aws::QuickSight
     #   <p>The context menu options for a visual.</p>
     #   @return [Types::ContextMenuOption]
     class VisualInteractionOptions < Struct.new(
+      nil,
       :visual_menu_option,
       :context_menu_option,
       keyword_init: true
@@ -32443,6 +33784,7 @@ module Aws::QuickSight
     #   <p>The availaiblity status of a visual's menu options.</p>
     #   @return [String]
     class VisualMenuOption < Struct.new(
+      nil,
       :availability_status,
       keyword_init: true
     )
@@ -32454,6 +33796,7 @@ module Aws::QuickSight
     #   <p>The type for a <code>VisualOptions</code>.</p>
     #   @return [String]
     class VisualOptions < Struct.new(
+      nil,
       :type,
       keyword_init: true
     )
@@ -32468,6 +33811,7 @@ module Aws::QuickSight
     #   <p>The color map options for the visual palette.</p>
     #   @return [Array<Types::DataPathColor>]
     class VisualPalette < Struct.new(
+      nil,
       :chart_color,
       :color_map,
       keyword_init: true
@@ -32483,6 +33827,7 @@ module Aws::QuickSight
     #   <p>The long text format of the subtitle label, such as plain text or rich text.</p>
     #   @return [Types::LongFormatText]
     class VisualSubtitleLabelOptions < Struct.new(
+      nil,
       :visibility,
       :format_text,
       keyword_init: true
@@ -32498,6 +33843,7 @@ module Aws::QuickSight
     #   <p>The short text format of the title label, such as plain text or rich text.</p>
     #   @return [Types::ShortFormatText]
     class VisualTitleLabelOptions < Struct.new(
+      nil,
       :visibility,
       :format_text,
       keyword_init: true
@@ -32510,6 +33856,7 @@ module Aws::QuickSight
     #   <p>The Amazon Resource Name (ARN) for the VPC connection.</p>
     #   @return [String]
     class VpcConnectionProperties < Struct.new(
+      nil,
       :vpc_connection_arn,
       keyword_init: true
     )
@@ -32527,6 +33874,7 @@ module Aws::QuickSight
     #   <p>The breakdown field wells of a waterfall visual.</p>
     #   @return [Array<Types::DimensionField>]
     class WaterfallChartAggregatedFieldWells < Struct.new(
+      nil,
       :categories,
       :values,
       :breakdowns,
@@ -32540,6 +33888,7 @@ module Aws::QuickSight
     #   <p>The color configuration for individual groups within a waterfall visual.</p>
     #   @return [Types::WaterfallChartGroupColorConfiguration]
     class WaterfallChartColorConfiguration < Struct.new(
+      nil,
       :group_color_configuration,
       keyword_init: true
     )
@@ -32584,6 +33933,7 @@ module Aws::QuickSight
     #   <p>The general visual interactions setup for a visual.</p>
     #   @return [Types::VisualInteractionOptions]
     class WaterfallChartConfiguration < Struct.new(
+      nil,
       :field_wells,
       :sort_configuration,
       :waterfall_chart_options,
@@ -32606,6 +33956,7 @@ module Aws::QuickSight
     #   <p>The field well configuration of a waterfall visual.</p>
     #   @return [Types::WaterfallChartAggregatedFieldWells]
     class WaterfallChartFieldWells < Struct.new(
+      nil,
       :waterfall_chart_aggregated_field_wells,
       keyword_init: true
     )
@@ -32623,6 +33974,7 @@ module Aws::QuickSight
     #   <p>Defines the color for the total bars of a waterfall chart.</p>
     #   @return [String]
     class WaterfallChartGroupColorConfiguration < Struct.new(
+      nil,
       :positive_bar_color,
       :negative_bar_color,
       :total_bar_color,
@@ -32636,6 +33988,7 @@ module Aws::QuickSight
     #   <p>This option determines the total bar label of a waterfall visual.</p>
     #   @return [String]
     class WaterfallChartOptions < Struct.new(
+      nil,
       :total_bar_label,
       keyword_init: true
     )
@@ -32650,6 +34003,7 @@ module Aws::QuickSight
     #   <p>The limit on the number of bar groups that are displayed.</p>
     #   @return [Types::ItemsLimitConfiguration]
     class WaterfallChartSortConfiguration < Struct.new(
+      nil,
       :category_sort,
       :breakdown_items_limit,
       keyword_init: true
@@ -32681,6 +34035,7 @@ module Aws::QuickSight
     #   <p>The alt text for the visual.</p>
     #   @return [String]
     class WaterfallVisual < Struct.new(
+      nil,
       :visual_id,
       :title,
       :subtitle,
@@ -32701,6 +34056,7 @@ module Aws::QuickSight
     #   <p>The target value that you want to meet for the provided date.</p>
     #   @return [Float]
     class WhatIfPointScenario < Struct.new(
+      nil,
       :date,
       :value,
       keyword_init: true
@@ -32724,6 +34080,7 @@ module Aws::QuickSight
     #   <p>The target value that you want to meet for the provided date range.</p>
     #   @return [Float]
     class WhatIfRangeScenario < Struct.new(
+      nil,
       :start_date,
       :end_date,
       :value,
@@ -32745,6 +34102,7 @@ module Aws::QuickSight
     #   <p>The size field well of a word cloud. Values are aggregated based on group by fields.</p>
     #   @return [Array<Types::MeasureField>]
     class WordCloudAggregatedFieldWells < Struct.new(
+      nil,
       :group_by,
       :size,
       keyword_init: true
@@ -32769,6 +34127,7 @@ module Aws::QuickSight
     #   <p>The general visual interactions setup for a visual.</p>
     #   @return [Types::VisualInteractionOptions]
     class WordCloudChartConfiguration < Struct.new(
+      nil,
       :field_wells,
       :sort_configuration,
       :category_label_options,
@@ -32785,6 +34144,7 @@ module Aws::QuickSight
     #   <p>The aggregated field wells of a word cloud.</p>
     #   @return [Types::WordCloudAggregatedFieldWells]
     class WordCloudFieldWells < Struct.new(
+      nil,
       :word_cloud_aggregated_field_wells,
       keyword_init: true
     )
@@ -32811,6 +34171,7 @@ module Aws::QuickSight
     #   <p>The length limit of each word from 1-100.</p>
     #   @return [Integer]
     class WordCloudOptions < Struct.new(
+      nil,
       :word_orientation,
       :word_scaling,
       :cloud_layout,
@@ -32830,6 +34191,7 @@ module Aws::QuickSight
     #   <p>The sort configuration of group by fields.</p>
     #   @return [Array<Types::FieldSortOptions>]
     class WordCloudSortConfiguration < Struct.new(
+      nil,
       :category_items_limit,
       :category_sort,
       keyword_init: true
@@ -32861,6 +34223,7 @@ module Aws::QuickSight
     #   <p>The alt text for the visual.</p>
     #   @return [String]
     class WordCloudVisual < Struct.new(
+      nil,
       :visual_id,
       :title,
       :subtitle,
@@ -32879,6 +34242,7 @@ module Aws::QuickSight
     #            <p>If you choose <code>PRIMARY_Y_AXIS</code>, the primary Y Axis is located on the leftmost vertical axis of the chart.</p>
     #   @return [String]
     class YAxisOptions < Struct.new(
+      nil,
       :y_axis,
       keyword_init: true
     )

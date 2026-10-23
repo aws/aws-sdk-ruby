@@ -14,6 +14,7 @@ module Aws::ECS
     #   <p>The maximum number of accelerators. Instance types with more accelerators are excluded from selection.</p>
     #   @return [Integer]
     class AcceleratorCountRequest < Struct.new(
+      nil,
       :min,
       :max,
       keyword_init: true
@@ -29,6 +30,7 @@ module Aws::ECS
     #   <p>The maximum total accelerator memory in MiB. Instance types with more accelerator memory are excluded from selection.</p>
     #   @return [Integer]
     class AcceleratorTotalMemoryMiBRequest < Struct.new(
+      nil,
       :min,
       :max,
       keyword_init: true
@@ -41,6 +43,7 @@ module Aws::ECS
     #   <p> Message that describes the cause of the exception.</p>
     #   @return [String]
     class AccessDeniedException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -66,6 +69,7 @@ module Aws::ECS
     #   <p>The Amazon Resource Name (ARN) of the IAM role that grants Amazon ECS permission to call the Elastic Load Balancing APIs for you.</p>
     #   @return [String]
     class AdvancedConfiguration < Struct.new(
+      nil,
       :alternate_target_group_arn,
       :production_listener_rule,
       :test_listener_rule,
@@ -102,6 +106,7 @@ module Aws::ECS
     #   			attach).</p>
     #   @return [Array<Types::KeyValuePair>]
     class Attachment < Struct.new(
+      nil,
       :id,
       :type,
       :status,
@@ -119,6 +124,7 @@ module Aws::ECS
     #   <p>The status of the attachment.</p>
     #   @return [String]
     class AttachmentStateChange < Struct.new(
+      nil,
       :attachment_arn,
       :status,
       keyword_init: true
@@ -149,6 +155,7 @@ module Aws::ECS
     #   			Amazon Resource Name (ARN).</p>
     #   @return [String]
     class Attribute < Struct.new(
+      nil,
       :name,
       :value,
       :target_type,
@@ -165,6 +172,7 @@ module Aws::ECS
     #   <p> Message that describes the cause of the exception.</p>
     #   @return [String]
     class AttributeLimitExceededException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -198,6 +206,7 @@ module Aws::ECS
     #   <p>The managed draining option for the Auto Scaling group capacity provider. When you enable this, Amazon ECS manages and gracefully drains the EC2 container instances that are in the Auto Scaling group capacity provider.</p>
     #   @return [String]
     class AutoScalingGroupProvider < Struct.new(
+      nil,
       :auto_scaling_group_arn,
       :managed_scaling,
       :managed_termination_protection,
@@ -230,6 +239,7 @@ module Aws::ECS
     #   <p>The managed draining option for the Auto Scaling group capacity provider. When you enable this, Amazon ECS manages and gracefully drains the EC2 container instances that are in the Auto Scaling group capacity provider.</p>
     #   @return [String]
     class AutoScalingGroupProviderUpdate < Struct.new(
+      nil,
       :managed_scaling,
       :managed_termination_protection,
       :managed_draining,
@@ -270,6 +280,7 @@ module Aws::ECS
     #            </ul>
     #   @return [String]
     class AwsVpcConfiguration < Struct.new(
+      nil,
       :subnets,
       :security_groups,
       :assign_public_ip,
@@ -286,6 +297,7 @@ module Aws::ECS
     #   <p>The maximum baseline Amazon EBS bandwidth in Mbps. Instance types with higher Amazon EBS bandwidth are excluded from selection.</p>
     #   @return [Integer]
     class BaselineEbsBandwidthMbpsRequest < Struct.new(
+      nil,
       :min,
       :max,
       keyword_init: true
@@ -299,6 +311,7 @@ module Aws::ECS
     #   <p> Message that describes the cause of the exception.</p>
     #   @return [String]
     class BlockedException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -389,6 +402,7 @@ module Aws::ECS
     #   <p>The type of capacity provider. For Amazon ECS Managed Instances, this value is <code>MANAGED_INSTANCES</code>, indicating that Amazon ECS manages the underlying Amazon EC2 instances on your behalf.</p>
     #   @return [String]
     class CapacityProvider < Struct.new(
+      nil,
       :capacity_provider_arn,
       :name,
       :cluster,
@@ -494,6 +508,7 @@ module Aws::ECS
     #            </ul>
     #   @return [Integer]
     class CapacityProviderStrategyItem < Struct.new(
+      nil,
       :capacity_provider,
       :weight,
       :base,
@@ -515,6 +530,7 @@ module Aws::ECS
     #   <p> Message that describes the cause of the exception.</p>
     #   @return [String]
     class ClientException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -697,6 +713,7 @@ module Aws::ECS
     #   	For more information, see <a href="https://docs.aws.amazon.com/AmazonECS/latest/developerguide/service-connect.html">Service Connect</a> in the <i>Amazon Elastic Container Service Developer Guide</i>.</p>
     #   @return [Types::ClusterServiceConnectDefaults]
     class Cluster < Struct.new(
+      nil,
       :cluster_arn,
       :cluster_name,
       :configuration,
@@ -734,6 +751,7 @@ module Aws::ECS
     #   <p>The details of the managed storage configuration.</p>
     #   @return [Types::ManagedStorageConfiguration]
     class ClusterConfiguration < Struct.new(
+      nil,
       :execute_command_configuration,
       :managed_storage_configuration,
       keyword_init: true
@@ -746,6 +764,7 @@ module Aws::ECS
     #   <p> Message that describes the cause of the exception.</p>
     #   @return [String]
     class ClusterContainsCapacityProviderException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -759,6 +778,7 @@ module Aws::ECS
     #   <p> Message that describes the cause of the exception.</p>
     #   @return [String]
     class ClusterContainsContainerInstancesException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -773,6 +793,7 @@ module Aws::ECS
     #   <p> Message that describes the cause of the exception.</p>
     #   @return [String]
     class ClusterContainsServicesException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -784,6 +805,7 @@ module Aws::ECS
     #   <p> Message that describes the cause of the exception.</p>
     #   @return [String]
     class ClusterContainsTasksException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -795,6 +817,7 @@ module Aws::ECS
     #   <p> Message that describes the cause of the exception.</p>
     #   @return [String]
     class ClusterNotFoundException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -818,6 +841,7 @@ module Aws::ECS
     #   			Service Connect configuration, this namespace is used.</p>
     #   @return [String]
     class ClusterServiceConnectDefaults < Struct.new(
+      nil,
       :namespace,
       keyword_init: true
     )
@@ -855,6 +879,7 @@ module Aws::ECS
     #   			in the <i>Cloud Map Developer Guide</i>.</p>
     #   @return [String]
     class ClusterServiceConnectDefaultsRequest < Struct.new(
+      nil,
       :namespace,
       keyword_init: true
     )
@@ -888,6 +913,7 @@ module Aws::ECS
     #   			value set with <a href="https://docs.aws.amazon.com/AmazonECS/latest/APIReference/API_PutAccountSetting.html">PutAccountSetting</a> or <a href="https://docs.aws.amazon.com/AmazonECS/latest/APIReference/API_PutAccountSettingDefault.html">PutAccountSettingDefault</a>.</p>
     #   @return [String]
     class ClusterSetting < Struct.new(
+      nil,
       :name,
       :value,
       keyword_init: true
@@ -904,6 +930,7 @@ module Aws::ECS
     #   <p> Message that describes the cause of the exception.</p>
     #   @return [String]
     class ConflictException < Struct.new(
+      nil,
       :resource_ids,
       :message,
       keyword_init: true
@@ -969,6 +996,7 @@ module Aws::ECS
     #   <p>The IDs of each GPU assigned to the container.</p>
     #   @return [Array<String>]
     class Container < Struct.new(
+      nil,
       :container_arn,
       :task_arn,
       :name,
@@ -1614,6 +1642,7 @@ module Aws::ECS
     #   				Containers</a>.</p>
     #   @return [Array<String>]
     class ContainerDefinition < Struct.new(
+      nil,
       :name,
       :image,
       :repository_credentials,
@@ -1729,6 +1758,7 @@ module Aws::ECS
     #            </ul>
     #   @return [String]
     class ContainerDependency < Struct.new(
+      nil,
       :container_name,
       :condition,
       keyword_init: true
@@ -1754,6 +1784,7 @@ module Aws::ECS
     #   <p>The container image. </p>
     #   @return [String]
     class ContainerImage < Struct.new(
+      nil,
       :container_name,
       :image_digest,
       :image,
@@ -1894,6 +1925,7 @@ module Aws::ECS
     #   <p>An object representing the health status of the container instance.</p>
     #   @return [Types::ContainerInstanceHealthStatus]
     class ContainerInstance < Struct.new(
+      nil,
       :container_instance_arn,
       :ec2_instance_id,
       :capacity_provider_name,
@@ -1935,6 +1967,7 @@ module Aws::ECS
     #   			status.</p>
     #   @return [Array<Types::InstanceHealthCheckResult>]
     class ContainerInstanceHealthStatus < Struct.new(
+      nil,
       :overall_status,
       :details,
       keyword_init: true
@@ -1985,6 +2018,7 @@ module Aws::ECS
     #   			value from the task definition. The only supported resource is a GPU.</p>
     #   @return [Array<Types::ResourceRequirement>]
     class ContainerOverride < Struct.new(
+      nil,
       :name,
       :command,
       :environment,
@@ -2022,6 +2056,7 @@ module Aws::ECS
     #   			for 300 seconds before it can be restarted.</p>
     #   @return [Integer]
     class ContainerRestartPolicy < Struct.new(
+      nil,
       :enabled,
       :ignored_exit_codes,
       :restart_attempt_period,
@@ -2054,6 +2089,7 @@ module Aws::ECS
     #   <p>The status of the container.</p>
     #   @return [String]
     class ContainerStateChange < Struct.new(
+      nil,
       :container_name,
       :image_digest,
       :runtime_id,
@@ -2118,6 +2154,7 @@ module Aws::ECS
     #            </ul>
     #   @return [Array<Types::Tag>]
     class CreateCapacityProviderRequest < Struct.new(
+      nil,
       :name,
       :cluster,
       :auto_scaling_group_provider,
@@ -2132,6 +2169,7 @@ module Aws::ECS
     #   <p>The full description of the new capacity provider.</p>
     #   @return [Types::CapacityProvider]
     class CreateCapacityProviderResponse < Struct.new(
+      nil,
       :capacity_provider,
       keyword_init: true
     )
@@ -2224,6 +2262,7 @@ module Aws::ECS
     #   	For more information, see <a href="https://docs.aws.amazon.com/AmazonECS/latest/developerguide/service-connect.html">Service Connect</a> in the <i>Amazon Elastic Container Service Developer Guide</i>.</p>
     #   @return [Types::ClusterServiceConnectDefaultsRequest]
     class CreateClusterRequest < Struct.new(
+      nil,
       :cluster_name,
       :tags,
       :settings,
@@ -2240,6 +2279,7 @@ module Aws::ECS
     #   <p>The full description of your new cluster.</p>
     #   @return [Types::Cluster]
     class CreateClusterResponse < Struct.new(
+      nil,
       :cluster,
       keyword_init: true
     )
@@ -2260,6 +2300,7 @@ module Aws::ECS
     #   <p>Specifies whether to propagate tags from the capacity provider to the Amazon ECS Managed Instances. When enabled, tags applied to the capacity provider are automatically applied to all instances launched by this provider.</p>
     #   @return [String]
     class CreateManagedInstancesProviderConfiguration < Struct.new(
+      nil,
       :infrastructure_role_arn,
       :instance_launch_template,
       :propagate_tags,
@@ -2548,6 +2589,7 @@ module Aws::ECS
     #   <p>The VPC Lattice configuration for the service being created.</p>
     #   @return [Array<Types::VpcLatticeConfiguration>]
     class CreateServiceRequest < Struct.new(
+      nil,
       :cluster,
       :service_name,
       :task_definition,
@@ -2593,6 +2635,7 @@ module Aws::ECS
     #   				<code>deployments</code> parameter will be an empty list.</p>
     #   @return [Types::Service]
     class CreateServiceResponse < Struct.new(
+      nil,
       :service,
       keyword_init: true
     )
@@ -2705,6 +2748,7 @@ module Aws::ECS
     #            </ul>
     #   @return [Array<Types::Tag>]
     class CreateTaskSetRequest < Struct.new(
+      nil,
       :service,
       :cluster,
       :external_id,
@@ -2730,6 +2774,7 @@ module Aws::ECS
     #   			traffic.</p>
     #   @return [Types::TaskSet]
     class CreateTaskSetResponse < Struct.new(
+      nil,
       :task_set,
       keyword_init: true
     )
@@ -2748,6 +2793,7 @@ module Aws::ECS
     #   			format is yyyy-MM-dd HH:mm:ss.SSSSSS.</p>
     #   @return [Time]
     class CreatedAt < Struct.new(
+      nil,
       :before,
       :after,
       keyword_init: true
@@ -2772,6 +2818,7 @@ module Aws::ECS
     #            <p>In order to use this parameter, you must be the root user, or the principal.</p>
     #   @return [String]
     class DeleteAccountSettingRequest < Struct.new(
+      nil,
       :name,
       :principal_arn,
       keyword_init: true
@@ -2783,6 +2830,7 @@ module Aws::ECS
     #   <p>The account setting for the specified principal ARN.</p>
     #   @return [Types::Setting]
     class DeleteAccountSettingResponse < Struct.new(
+      nil,
       :setting,
       keyword_init: true
     )
@@ -2800,6 +2848,7 @@ module Aws::ECS
     #   			specify the target type.</p>
     #   @return [Array<Types::Attribute>]
     class DeleteAttributesRequest < Struct.new(
+      nil,
       :cluster,
       :attributes,
       keyword_init: true
@@ -2811,6 +2860,7 @@ module Aws::ECS
     #   <p>A list of attribute objects that were successfully deleted from your resource.</p>
     #   @return [Array<Types::Attribute>]
     class DeleteAttributesResponse < Struct.new(
+      nil,
       :attributes,
       keyword_init: true
     )
@@ -2824,6 +2874,7 @@ module Aws::ECS
     #   <p>The name of the cluster that contains the capacity provider to delete. Managed instances capacity providers are cluster-scoped and can only be deleted from their associated cluster.</p>
     #   @return [String]
     class DeleteCapacityProviderRequest < Struct.new(
+      nil,
       :capacity_provider,
       :cluster,
       keyword_init: true
@@ -2835,6 +2886,7 @@ module Aws::ECS
     #   <p>The details of the capacity provider.</p>
     #   @return [Types::CapacityProvider]
     class DeleteCapacityProviderResponse < Struct.new(
+      nil,
       :capacity_provider,
       keyword_init: true
     )
@@ -2845,6 +2897,7 @@ module Aws::ECS
     #   <p>The short name or full Amazon Resource Name (ARN) of the cluster to delete.</p>
     #   @return [String]
     class DeleteClusterRequest < Struct.new(
+      nil,
       :cluster,
       keyword_init: true
     )
@@ -2855,6 +2908,7 @@ module Aws::ECS
     #   <p>The full description of the deleted cluster.</p>
     #   @return [Types::Cluster]
     class DeleteClusterResponse < Struct.new(
+      nil,
       :cluster,
       keyword_init: true
     )
@@ -2874,6 +2928,7 @@ module Aws::ECS
     #   			scheduling strategy.</p>
     #   @return [Boolean]
     class DeleteServiceRequest < Struct.new(
+      nil,
       :cluster,
       :service,
       :force,
@@ -2886,6 +2941,7 @@ module Aws::ECS
     #   <p>The full description of the deleted service.</p>
     #   @return [Types::Service]
     class DeleteServiceResponse < Struct.new(
+      nil,
       :service,
       keyword_init: true
     )
@@ -2899,6 +2955,7 @@ module Aws::ECS
     #            <p>You can specify up to 10 task definitions as a comma separated list.</p>
     #   @return [Array<String>]
     class DeleteTaskDefinitionsRequest < Struct.new(
+      nil,
       :task_definitions,
       keyword_init: true
     )
@@ -2912,6 +2969,7 @@ module Aws::ECS
     #   <p>Any failures associated with the call.</p>
     #   @return [Array<Types::Failure>]
     class DeleteTaskDefinitionsResponse < Struct.new(
+      nil,
       :task_definitions,
       :failures,
       keyword_init: true
@@ -2935,6 +2993,7 @@ module Aws::ECS
     #   			zero.</p>
     #   @return [Boolean]
     class DeleteTaskSetRequest < Struct.new(
+      nil,
       :cluster,
       :service,
       :task_set,
@@ -2948,6 +3007,7 @@ module Aws::ECS
     #   <p>Details about the task set.</p>
     #   @return [Types::TaskSet]
     class DeleteTaskSetResponse < Struct.new(
+      nil,
       :task_set,
       keyword_init: true
     )
@@ -3077,6 +3137,7 @@ module Aws::ECS
     #   <p>The VPC Lattice configuration for the service deployment.</p>
     #   @return [Array<Types::VpcLatticeConfiguration>]
     class Deployment < Struct.new(
+      nil,
       :id,
       :status,
       :task_definition,
@@ -3136,6 +3197,7 @@ module Aws::ECS
     #   			process.</p>
     #   @return [Boolean]
     class DeploymentAlarms < Struct.new(
+      nil,
       :alarm_names,
       :rollback,
       :enable,
@@ -3171,6 +3233,7 @@ module Aws::ECS
     #   			the last deployment that completed successfully.</p>
     #   @return [Boolean]
     class DeploymentCircuitBreaker < Struct.new(
+      nil,
       :enable,
       :rollback,
       keyword_init: true
@@ -3344,6 +3407,7 @@ module Aws::ECS
     #   <p>An array of deployment lifecycle hook objects to run custom logic at specific stages of the deployment lifecycle.</p>
     #   @return [Array<Types::DeploymentLifecycleHook>]
     class DeploymentConfiguration < Struct.new(
+      nil,
       :deployment_circuit_breaker,
       :maximum_percent,
       :minimum_healthy_percent,
@@ -3466,6 +3530,7 @@ module Aws::ECS
     #            </ul>
     #   @return [String]
     class DeploymentController < Struct.new(
+      nil,
       :type,
       keyword_init: true
     )
@@ -3478,6 +3543,7 @@ module Aws::ECS
     #   			deployment.</p>
     #   @return [String]
     class DeploymentEphemeralStorage < Struct.new(
+      nil,
       :kms_key_id,
       keyword_init: true
     )
@@ -3542,6 +3608,7 @@ module Aws::ECS
     #   <p>Use this field to specify custom parameters that Amazon ECS will pass to your hook target invocations (such as a Lambda function).</p>
     #   @return [JSON]
     class DeploymentLifecycleHook < Struct.new(
+      nil,
       :hook_target_arn,
       :role_arn,
       :lifecycle_stages,
@@ -3572,6 +3639,7 @@ module Aws::ECS
     #   			on the load balancer or target group.</p>
     #   @return [Boolean]
     class DeregisterContainerInstanceRequest < Struct.new(
+      nil,
       :cluster,
       :container_instance,
       :force,
@@ -3584,6 +3652,7 @@ module Aws::ECS
     #   <p>The container instance that was deregistered.</p>
     #   @return [Types::ContainerInstance]
     class DeregisterContainerInstanceResponse < Struct.new(
+      nil,
       :container_instance,
       keyword_init: true
     )
@@ -3596,6 +3665,7 @@ module Aws::ECS
     #   				<code>revision</code>.</p>
     #   @return [String]
     class DeregisterTaskDefinitionRequest < Struct.new(
+      nil,
       :task_definition,
       keyword_init: true
     )
@@ -3606,6 +3676,7 @@ module Aws::ECS
     #   <p>The full description of the deregistered task.</p>
     #   @return [Types::TaskDefinition]
     class DeregisterTaskDefinitionResponse < Struct.new(
+      nil,
       :task_definition,
       keyword_init: true
     )
@@ -3648,6 +3719,7 @@ module Aws::ECS
     #            </note>
     #   @return [String]
     class DescribeCapacityProvidersRequest < Struct.new(
+      nil,
       :capacity_providers,
       :cluster,
       :include,
@@ -3672,6 +3744,7 @@ module Aws::ECS
     #   			when there are no more results to return.</p>
     #   @return [String]
     class DescribeCapacityProvidersResponse < Struct.new(
+      nil,
       :capacity_providers,
       :failures,
       :next_token,
@@ -3699,6 +3772,7 @@ module Aws::ECS
     #   			included.</p>
     #   @return [Array<String>]
     class DescribeClustersRequest < Struct.new(
+      nil,
       :clusters,
       :include,
       keyword_init: true
@@ -3713,6 +3787,7 @@ module Aws::ECS
     #   <p>Any failures associated with the call.</p>
     #   @return [Array<Types::Failure>]
     class DescribeClustersResponse < Struct.new(
+      nil,
       :clusters,
       :failures,
       keyword_init: true
@@ -3737,6 +3812,7 @@ module Aws::ECS
     #   			health status aren't included in the response.</p>
     #   @return [Array<String>]
     class DescribeContainerInstancesRequest < Struct.new(
+      nil,
       :cluster,
       :container_instances,
       :include,
@@ -3752,6 +3828,7 @@ module Aws::ECS
     #   <p>Any failures associated with the call.</p>
     #   @return [Array<Types::Failure>]
     class DescribeContainerInstancesResponse < Struct.new(
+      nil,
       :container_instances,
       :failures,
       keyword_init: true
@@ -3764,6 +3841,7 @@ module Aws::ECS
     #            <p>You can specify a maximum of 20 ARNs.</p>
     #   @return [Array<String>]
     class DescribeServiceDeploymentsRequest < Struct.new(
+      nil,
       :service_deployment_arns,
       keyword_init: true
     )
@@ -3780,6 +3858,7 @@ module Aws::ECS
     #   				<code>MISSING</code>.</p>
     #   @return [Array<Types::Failure>]
     class DescribeServiceDeploymentsResponse < Struct.new(
+      nil,
       :service_deployments,
       :failures,
       keyword_init: true
@@ -3793,6 +3872,7 @@ module Aws::ECS
     #            <p>You can call <a href="https://docs.aws.amazon.com/AmazonECS/latest/APIReference/API_ListServiceDeployments.html">ListServiceDeployments</a> to get the ARNs.</p>
     #   @return [Array<String>]
     class DescribeServiceRevisionsRequest < Struct.new(
+      nil,
       :service_revision_arns,
       keyword_init: true
     )
@@ -3806,6 +3886,7 @@ module Aws::ECS
     #   <p>Any failures associated with the call.</p>
     #   @return [Array<Types::Failure>]
     class DescribeServiceRevisionsResponse < Struct.new(
+      nil,
       :service_revisions,
       :failures,
       keyword_init: true
@@ -3828,6 +3909,7 @@ module Aws::ECS
     #   			is omitted, tags aren't included in the response.</p>
     #   @return [Array<String>]
     class DescribeServicesRequest < Struct.new(
+      nil,
       :cluster,
       :services,
       :include,
@@ -3843,6 +3925,7 @@ module Aws::ECS
     #   <p>Any failures associated with the call.</p>
     #   @return [Array<Types::Failure>]
     class DescribeServicesResponse < Struct.new(
+      nil,
       :services,
       :failures,
       keyword_init: true
@@ -3862,6 +3945,7 @@ module Aws::ECS
     #   			is omitted, tags aren't included in the response.</p>
     #   @return [Array<String>]
     class DescribeTaskDefinitionRequest < Struct.new(
+      nil,
       :task_definition,
       :include,
       keyword_init: true
@@ -3908,6 +3992,7 @@ module Aws::ECS
     #            </ul>
     #   @return [Array<Types::Tag>]
     class DescribeTaskDefinitionResponse < Struct.new(
+      nil,
       :task_definition,
       :tags,
       keyword_init: true
@@ -3932,6 +4017,7 @@ module Aws::ECS
     #   			included in the response.</p>
     #   @return [Array<String>]
     class DescribeTaskSetsRequest < Struct.new(
+      nil,
       :cluster,
       :service,
       :task_sets,
@@ -3948,6 +4034,7 @@ module Aws::ECS
     #   <p>Any failures associated with the call.</p>
     #   @return [Array<Types::Failure>]
     class DescribeTaskSetsResponse < Struct.new(
+      nil,
       :task_sets,
       :failures,
       keyword_init: true
@@ -3968,6 +4055,7 @@ module Aws::ECS
     #   			aren't included in the response.</p>
     #   @return [Array<String>]
     class DescribeTasksRequest < Struct.new(
+      nil,
       :cluster,
       :tasks,
       :include,
@@ -3983,6 +4071,7 @@ module Aws::ECS
     #   <p>Any failures associated with the call.</p>
     #   @return [Array<Types::Failure>]
     class DescribeTasksResponse < Struct.new(
+      nil,
       :tasks,
       :failures,
       keyword_init: true
@@ -4003,6 +4092,7 @@ module Aws::ECS
     #   				<code>mknod</code> for the device.</p>
     #   @return [Array<String>]
     class Device < Struct.new(
+      nil,
       :host_path,
       :container_path,
       :permissions,
@@ -4020,6 +4110,7 @@ module Aws::ECS
     #   			to.</p>
     #   @return [String]
     class DiscoverPollEndpointRequest < Struct.new(
+      nil,
       :container_instance,
       :cluster,
       keyword_init: true
@@ -4038,6 +4129,7 @@ module Aws::ECS
     #   			For more information, see <a href="https://docs.aws.amazon.com/AmazonECS/latest/developerguide/service-connect.html">Service Connect</a> in the <i>Amazon Elastic Container Service Developer Guide</i>.</p>
     #   @return [String]
     class DiscoverPollEndpointResponse < Struct.new(
+      nil,
       :endpoint,
       :telemetry_endpoint,
       :service_connect_endpoint,
@@ -4083,6 +4175,7 @@ module Aws::ECS
     #   				<code>xxlabel</code> option to docker volume create.</p>
     #   @return [Hash<String, String>]
     class DockerVolumeConfiguration < Struct.new(
+      nil,
       :scope,
       :autoprovision,
       :driver,
@@ -4108,6 +4201,7 @@ module Aws::ECS
     #   			 propagated.</p>
     #   @return [String]
     class EBSTagSpecification < Struct.new(
+      nil,
       :resource_type,
       :tags,
       :propagate_tags,
@@ -4133,6 +4227,7 @@ module Aws::ECS
     #   				Amazon EFS access points</a> in the <i>Amazon Elastic Container Service Developer Guide</i>.</p>
     #   @return [String]
     class EFSAuthorizationConfig < Struct.new(
+      nil,
       :access_point_id,
       :iam,
       keyword_init: true
@@ -4173,6 +4268,7 @@ module Aws::ECS
     #   <p>The authorization configuration details for the Amazon EFS file system.</p>
     #   @return [Types::EFSAuthorizationConfig]
     class EFSVolumeConfiguration < Struct.new(
+      nil,
       :file_system_id,
       :root_directory,
       :transit_encryption,
@@ -4226,6 +4322,7 @@ module Aws::ECS
     #   			is <code>s3</code>.</p>
     #   @return [String]
     class EnvironmentFile < Struct.new(
+      nil,
       :value,
       :type,
       keyword_init: true
@@ -4255,6 +4352,7 @@ module Aws::ECS
     #   				<code>200</code> GiB.</p>
     #   @return [Integer]
     class EphemeralStorage < Struct.new(
+      nil,
       :size_in_gi_b,
       keyword_init: true
     )
@@ -4300,6 +4398,7 @@ module Aws::ECS
     #   			specified, a <code>logConfiguration</code> must be provided.</p>
     #   @return [Types::ExecuteCommandLogConfiguration]
     class ExecuteCommandConfiguration < Struct.new(
+      nil,
       :kms_key_id,
       :logging,
       :log_configuration,
@@ -4334,6 +4433,7 @@ module Aws::ECS
     #   <p>An optional folder in the S3 bucket to place logs in.</p>
     #   @return [String]
     class ExecuteCommandLogConfiguration < Struct.new(
+      nil,
       :cloud_watch_log_group_name,
       :cloud_watch_encryption_enabled,
       :s3_bucket_name,
@@ -4368,6 +4468,7 @@ module Aws::ECS
     #   <p>The Amazon Resource Name (ARN) or ID of the task the container is part of.</p>
     #   @return [String]
     class ExecuteCommandRequest < Struct.new(
+      nil,
       :cluster,
       :container,
       :command,
@@ -4400,6 +4501,7 @@ module Aws::ECS
     #   <p>The Amazon Resource Name (ARN) of the task.</p>
     #   @return [String]
     class ExecuteCommandResponse < Struct.new(
+      nil,
       :cluster_arn,
       :container_arn,
       :container_name,
@@ -4430,6 +4532,7 @@ module Aws::ECS
     #   			Amazon EC2.</p>
     #   @return [String]
     class FSxWindowsFileServerAuthorizationConfig < Struct.new(
+      nil,
       :credentials_parameter,
       :domain,
       keyword_init: true
@@ -4452,6 +4555,7 @@ module Aws::ECS
     #   <p>The authorization configuration details for the Amazon FSx for Windows File Server file system.</p>
     #   @return [Types::FSxWindowsFileServerAuthorizationConfig]
     class FSxWindowsFileServerVolumeConfiguration < Struct.new(
+      nil,
       :file_system_id,
       :root_directory,
       :authorization_config,
@@ -4472,6 +4576,7 @@ module Aws::ECS
     #   <p>The details of the failure.</p>
     #   @return [String]
     class Failure < Struct.new(
+      nil,
       :arn,
       :reason,
       :detail,
@@ -4502,6 +4607,7 @@ module Aws::ECS
     #            </note>
     #   @return [Hash<String, String>]
     class FirelensConfiguration < Struct.new(
+      nil,
       :type,
       :options,
       keyword_init: true
@@ -4517,6 +4623,7 @@ module Aws::ECS
     #   <p>A list of up to 100 task IDs or full ARN entries.</p>
     #   @return [Array<String>]
     class GetTaskProtectionRequest < Struct.new(
+      nil,
       :cluster,
       :tasks,
       keyword_init: true
@@ -4548,6 +4655,7 @@ module Aws::ECS
     #   <p>Any failures associated with the call.</p>
     #   @return [Array<Types::Failure>]
     class GetTaskProtectionResponse < Struct.new(
+      nil,
       :protected_tasks,
       :failures,
       keyword_init: true
@@ -4798,6 +4906,7 @@ module Aws::ECS
     #            </note>
     #   @return [Integer]
     class HealthCheck < Struct.new(
+      nil,
       :command,
       :interval,
       :timeout,
@@ -4817,6 +4926,7 @@ module Aws::ECS
     #   <p>The IP address to use in the <code>/etc/hosts</code> entry.</p>
     #   @return [String]
     class HostEntry < Struct.new(
+      nil,
       :hostname,
       :ip_address,
       keyword_init: true
@@ -4838,6 +4948,7 @@ module Aws::ECS
     #   			parameter is not supported.</p>
     #   @return [String]
     class HostVolumeProperties < Struct.new(
+      nil,
       :source_path,
       keyword_init: true
     )
@@ -4854,6 +4965,7 @@ module Aws::ECS
     #   <p>The Elastic Inference accelerator type to use.</p>
     #   @return [String]
     class InferenceAccelerator < Struct.new(
+      nil,
       :device_name,
       :device_type,
       keyword_init: true
@@ -4873,6 +4985,7 @@ module Aws::ECS
     #   <p>The Elastic Inference accelerator type to use.</p>
     #   @return [String]
     class InferenceAcceleratorOverride < Struct.new(
+      nil,
       :device_name,
       :device_type,
       keyword_init: true
@@ -4895,6 +5008,7 @@ module Aws::ECS
     #   <p>The Unix timestamp for when the container instance health status last changed.</p>
     #   @return [Time]
     class InstanceHealthCheckResult < Struct.new(
+      nil,
       :type,
       :status,
       :last_updated,
@@ -4932,6 +5046,7 @@ module Aws::ECS
     #            <p>Amazon ECS automatically selects the instances that match the specified criteria.</p>
     #   @return [Types::InstanceRequirementsRequest]
     class InstanceLaunchTemplate < Struct.new(
+      nil,
       :ec2_instance_profile_arn,
       :network_configuration,
       :storage_configuration,
@@ -4962,6 +5077,7 @@ module Aws::ECS
     #   <p>The updated instance requirements for attribute-based instance type selection. Changes to instance requirements affect which instance types Amazon ECS selects for new instances.</p>
     #   @return [Types::InstanceRequirementsRequest]
     class InstanceLaunchTemplateUpdate < Struct.new(
+      nil,
       :ec2_instance_profile_arn,
       :network_configuration,
       :storage_configuration,
@@ -5046,6 +5162,7 @@ module Aws::ECS
     #   <p>The maximum price for Spot instances as a percentage of the optimal On-Demand price. This provides more precise cost control for Spot instance selection.</p>
     #   @return [Integer]
     class InstanceRequirementsRequest < Struct.new(
+      nil,
       :v_cpu_count,
       :memory_mi_b,
       :cpu_manufacturers,
@@ -5083,6 +5200,7 @@ module Aws::ECS
     #   <p> Message that describes the cause of the exception.</p>
     #   @return [String]
     class InvalidParameterException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -5159,6 +5277,7 @@ module Aws::ECS
     #            </p>
     #   @return [Array<String>]
     class KernelCapabilities < Struct.new(
+      nil,
       :add,
       :drop,
       keyword_init: true
@@ -5176,6 +5295,7 @@ module Aws::ECS
     #   			environment variable.</p>
     #   @return [String]
     class KeyValuePair < Struct.new(
+      nil,
       :name,
       :value,
       keyword_init: true
@@ -5188,6 +5308,7 @@ module Aws::ECS
     #   <p> Message that describes the cause of the exception.</p>
     #   @return [String]
     class LimitExceededException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -5269,6 +5390,7 @@ module Aws::ECS
     #            </note>
     #   @return [Integer]
     class LinuxParameters < Struct.new(
+      nil,
       :capabilities,
       :devices,
       :init_process_enabled,
@@ -5326,6 +5448,7 @@ module Aws::ECS
     #   			if applicable.</p>
     #   @return [Integer]
     class ListAccountSettingsRequest < Struct.new(
+      nil,
       :name,
       :value,
       :principal_arn,
@@ -5348,6 +5471,7 @@ module Aws::ECS
     #   			there are no more results to return.</p>
     #   @return [String]
     class ListAccountSettingsResponse < Struct.new(
+      nil,
       :settings,
       :next_token,
       keyword_init: true
@@ -5390,6 +5514,7 @@ module Aws::ECS
     #   			100 results and a <code>nextToken</code> value if applicable.</p>
     #   @return [Integer]
     class ListAttributesRequest < Struct.new(
+      nil,
       :cluster,
       :target_type,
       :attribute_name,
@@ -5412,6 +5537,7 @@ module Aws::ECS
     #   			return.</p>
     #   @return [String]
     class ListAttributesResponse < Struct.new(
+      nil,
       :attributes,
       :next_token,
       keyword_init: true
@@ -5440,6 +5566,7 @@ module Aws::ECS
     #   			results and a <code>nextToken</code> value if applicable.</p>
     #   @return [Integer]
     class ListClustersRequest < Struct.new(
+      nil,
       :next_token,
       :max_results,
       keyword_init: true
@@ -5459,6 +5586,7 @@ module Aws::ECS
     #   			return.</p>
     #   @return [String]
     class ListClustersResponse < Struct.new(
+      nil,
       :cluster_arns,
       :next_token,
       keyword_init: true
@@ -5504,6 +5632,7 @@ module Aws::ECS
     #   				<code>INACTIVE</code>.</p>
     #   @return [String]
     class ListContainerInstancesRequest < Struct.new(
+      nil,
       :cluster,
       :filter,
       :next_token,
@@ -5526,6 +5655,7 @@ module Aws::ECS
     #   			when there are no more results to return.</p>
     #   @return [String]
     class ListContainerInstancesResponse < Struct.new(
+      nil,
       :container_instance_arns,
       :next_token,
       keyword_init: true
@@ -5570,6 +5700,7 @@ module Aws::ECS
     #   				<code>nextToken</code> value if applicable.</p>
     #   @return [Integer]
     class ListServiceDeploymentsRequest < Struct.new(
+      nil,
       :service,
       :cluster,
       :status,
@@ -5619,6 +5750,7 @@ module Aws::ECS
     #   			are no more results to return.</p>
     #   @return [String]
     class ListServiceDeploymentsResponse < Struct.new(
+      nil,
       :service_deployments,
       :next_token,
       keyword_init: true
@@ -5656,6 +5788,7 @@ module Aws::ECS
     #   			value if applicable.</p>
     #   @return [Integer]
     class ListServicesByNamespaceRequest < Struct.new(
+      nil,
       :namespace,
       :next_token,
       :max_results,
@@ -5676,6 +5809,7 @@ module Aws::ECS
     #   			to return, this value is <code>null</code>.</p>
     #   @return [String]
     class ListServicesByNamespaceResponse < Struct.new(
+      nil,
       :service_arns,
       :next_token,
       keyword_init: true
@@ -5716,6 +5850,7 @@ module Aws::ECS
     #   			results.</p>
     #   @return [String]
     class ListServicesRequest < Struct.new(
+      nil,
       :cluster,
       :next_token,
       :max_results,
@@ -5738,6 +5873,7 @@ module Aws::ECS
     #   			return.</p>
     #   @return [String]
     class ListServicesResponse < Struct.new(
+      nil,
       :service_arns,
       :next_token,
       keyword_init: true
@@ -5751,6 +5887,7 @@ module Aws::ECS
     #   			instances.</p>
     #   @return [String]
     class ListTagsForResourceRequest < Struct.new(
+      nil,
       :resource_arn,
       keyword_init: true
     )
@@ -5761,6 +5898,7 @@ module Aws::ECS
     #   <p>The tags for the resource.</p>
     #   @return [Array<Types::Tag>]
     class ListTagsForResourceResponse < Struct.new(
+      nil,
       :tags,
       keyword_init: true
     )
@@ -5808,6 +5946,7 @@ module Aws::ECS
     #   			and a <code>nextToken</code> value if applicable.</p>
     #   @return [Integer]
     class ListTaskDefinitionFamiliesRequest < Struct.new(
+      nil,
       :family_prefix,
       :status,
       :next_token,
@@ -5829,6 +5968,7 @@ module Aws::ECS
     #   			when there are no more results to return.</p>
     #   @return [String]
     class ListTaskDefinitionFamiliesResponse < Struct.new(
+      nil,
       :families,
       :next_token,
       keyword_init: true
@@ -5879,6 +6019,7 @@ module Aws::ECS
     #   				<code>nextToken</code> value if applicable.</p>
     #   @return [Integer]
     class ListTaskDefinitionsRequest < Struct.new(
+      nil,
       :family_prefix,
       :status,
       :sort,
@@ -5901,6 +6042,7 @@ module Aws::ECS
     #   			there are no more results to return.</p>
     #   @return [String]
     class ListTaskDefinitionsResponse < Struct.new(
+      nil,
       :task_definition_arns,
       :next_token,
       keyword_init: true
@@ -5973,6 +6115,7 @@ module Aws::ECS
     #   <p>The launch type to use when filtering the <code>ListTasks</code> results.</p>
     #   @return [String]
     class ListTasksRequest < Struct.new(
+      nil,
       :cluster,
       :container_instance,
       :family,
@@ -5998,6 +6141,7 @@ module Aws::ECS
     #   			return.</p>
     #   @return [String]
     class ListTasksResponse < Struct.new(
+      nil,
       :task_arns,
       :next_token,
       keyword_init: true
@@ -6055,6 +6199,7 @@ module Aws::ECS
     #   <p>The advanced settings for the load balancer used in blue/green deployments. Specify the alternate target group, listener rules, and IAM role required for traffic shifting during blue/green deployments.</p>
     #   @return [Types::AdvancedConfiguration]
     class LoadBalancer < Struct.new(
+      nil,
       :target_group_arn,
       :load_balancer_name,
       :container_name,
@@ -6299,6 +6444,7 @@ module Aws::ECS
     #   				sensitive data</a> in the <i>Amazon Elastic Container Service Developer Guide</i>.</p>
     #   @return [Array<Types::Secret>]
     class LogConfiguration < Struct.new(
+      nil,
       :log_driver,
       :options,
       :secret_options,
@@ -6322,6 +6468,7 @@ module Aws::ECS
     #   <p>The last known status of the managed agent.</p>
     #   @return [String]
     class ManagedAgent < Struct.new(
+      nil,
       :last_started_at,
       :name,
       :reason,
@@ -6345,6 +6492,7 @@ module Aws::ECS
     #   <p>The reason for the status of the managed agent.</p>
     #   @return [String]
     class ManagedAgentStateChange < Struct.new(
+      nil,
       :container_name,
       :managed_agent_name,
       :status,
@@ -6362,6 +6510,7 @@ module Aws::ECS
     #   <p>The list of security group IDs to apply to Amazon ECS Managed Instances. These security groups control the network traffic allowed to and from the instances.</p>
     #   @return [Array<String>]
     class ManagedInstancesNetworkConfiguration < Struct.new(
+      nil,
       :subnets,
       :security_groups,
       keyword_init: true
@@ -6382,6 +6531,7 @@ module Aws::ECS
     #   <p>Determines whether tags from the capacity provider are automatically applied to Amazon ECS Managed Instances. This helps with cost allocation and resource management by ensuring consistent tagging across your infrastructure.</p>
     #   @return [String]
     class ManagedInstancesProvider < Struct.new(
+      nil,
       :infrastructure_role_arn,
       :instance_launch_template,
       :propagate_tags,
@@ -6395,6 +6545,7 @@ module Aws::ECS
     #   <p>The size of the tasks volume.</p>
     #   @return [Integer]
     class ManagedInstancesStorageConfiguration < Struct.new(
+      nil,
       :storage_size_gi_b,
       keyword_init: true
     )
@@ -6437,6 +6588,7 @@ module Aws::ECS
     #   			of <code>300</code> seconds is used.</p>
     #   @return [Integer]
     class ManagedScaling < Struct.new(
+      nil,
       :status,
       :target_capacity,
       :minimum_scaling_step_size,
@@ -6466,6 +6618,7 @@ module Aws::ECS
     #            <p>The key must be a single Region key.</p>
     #   @return [String]
     class ManagedStorageConfiguration < Struct.new(
+      nil,
       :kms_key_id,
       :fargate_ephemeral_storage_kms_key_id,
       keyword_init: true
@@ -6481,6 +6634,7 @@ module Aws::ECS
     #   <p>The maximum amount of memory per vCPU in GiB. Instance types with a higher memory-to-vCPU ratio are excluded from selection.</p>
     #   @return [Float]
     class MemoryGiBPerVCpuRequest < Struct.new(
+      nil,
       :min,
       :max,
       keyword_init: true
@@ -6496,6 +6650,7 @@ module Aws::ECS
     #   <p>The maximum amount of memory in MiB. Instance types with more memory than this value are excluded from selection.</p>
     #   @return [Integer]
     class MemoryMiBRequest < Struct.new(
+      nil,
       :min,
       :max,
       keyword_init: true
@@ -6511,6 +6666,7 @@ module Aws::ECS
     #   <p> Message that describes the cause of the exception.</p>
     #   @return [String]
     class MissingVersionException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -6531,6 +6687,7 @@ module Aws::ECS
     #   			default value is <code>false</code>.</p>
     #   @return [Boolean]
     class MountPoint < Struct.new(
+      nil,
       :source_volume,
       :container_path,
       :read_only,
@@ -6544,6 +6701,7 @@ module Aws::ECS
     #   <p> Message that describes the cause of the exception.</p>
     #   @return [String]
     class NamespaceNotFoundException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -6558,6 +6716,7 @@ module Aws::ECS
     #   <p>The maximum network bandwidth in Gbps. Instance types with higher network bandwidth are excluded from selection.</p>
     #   @return [Float]
     class NetworkBandwidthGbpsRequest < Struct.new(
+      nil,
       :min,
       :max,
       keyword_init: true
@@ -6648,6 +6807,7 @@ module Aws::ECS
     #   			assigned is assigned by Docker and delivered by the Amazon ECS agent.</p>
     #   @return [String]
     class NetworkBinding < Struct.new(
+      nil,
       :bind_ip,
       :container_port,
       :host_port,
@@ -6667,6 +6827,7 @@ module Aws::ECS
     #            </note>
     #   @return [Types::AwsVpcConfiguration]
     class NetworkConfiguration < Struct.new(
+      nil,
       :awsvpc_configuration,
       keyword_init: true
     )
@@ -6685,6 +6846,7 @@ module Aws::ECS
     #   <p>The private IPv6 address for the network interface.</p>
     #   @return [String]
     class NetworkInterface < Struct.new(
+      nil,
       :attachment_id,
       :private_ipv4_address,
       :ipv6_address,
@@ -6701,6 +6863,7 @@ module Aws::ECS
     #   <p>The maximum number of network interfaces. Instance types that support more network interfaces are excluded from selection.</p>
     #   @return [Integer]
     class NetworkInterfaceCountRequest < Struct.new(
+      nil,
       :min,
       :max,
       keyword_init: true
@@ -6715,6 +6878,7 @@ module Aws::ECS
     #   <p> Message that describes the cause of the exception.</p>
     #   @return [String]
     class NoUpdateAvailableException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -6740,6 +6904,7 @@ module Aws::ECS
     #   			constraint type is <code>distinctInstance</code>. For more information, see <a href="https://docs.aws.amazon.com/AmazonECS/latest/developerguide/cluster-query-language.html">Cluster query language</a> in the <i>Amazon Elastic Container Service Developer Guide</i>.</p>
     #   @return [String]
     class PlacementConstraint < Struct.new(
+      nil,
       :type,
       :expression,
       keyword_init: true
@@ -6768,6 +6933,7 @@ module Aws::ECS
     #   			not used.</p>
     #   @return [String]
     class PlacementStrategy < Struct.new(
+      nil,
       :type,
       :field,
       keyword_init: true
@@ -6787,6 +6953,7 @@ module Aws::ECS
     #   			value is <code>GPU</code>.</p>
     #   @return [String]
     class PlatformDevice < Struct.new(
+      nil,
       :id,
       :type,
       keyword_init: true
@@ -6800,6 +6967,7 @@ module Aws::ECS
     #   <p> Message that describes the cause of the exception.</p>
     #   @return [String]
     class PlatformTaskDefinitionIncompatibilityException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -6811,6 +6979,7 @@ module Aws::ECS
     #   <p> Message that describes the cause of the exception.</p>
     #   @return [String]
     class PlatformUnknownException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -6980,6 +7149,7 @@ module Aws::ECS
     #   			are the host ports that are bound to the container ports.</p>
     #   @return [String]
     class PortMapping < Struct.new(
+      nil,
       :container_port,
       :host_port,
       :protocol,
@@ -7004,6 +7174,7 @@ module Aws::ECS
     #   <p>The epoch time when protection for the task will expire.</p>
     #   @return [Time]
     class ProtectedTask < Struct.new(
+      nil,
       :task_arn,
       :protection_enabled,
       :expiration_date,
@@ -7080,6 +7251,7 @@ module Aws::ECS
     #            </ul>
     #   @return [Array<Types::KeyValuePair>]
     class ProxyConfiguration < Struct.new(
+      nil,
       :type,
       :container_name,
       :properties,
@@ -7239,6 +7411,7 @@ module Aws::ECS
     #            </ul>
     #   @return [String]
     class PutAccountSettingDefaultRequest < Struct.new(
+      nil,
       :name,
       :value,
       keyword_init: true
@@ -7250,6 +7423,7 @@ module Aws::ECS
     #   <p>The current setting for a resource.</p>
     #   @return [Types::Setting]
     class PutAccountSettingDefaultResponse < Struct.new(
+      nil,
       :setting,
       keyword_init: true
     )
@@ -7416,6 +7590,7 @@ module Aws::ECS
     #            </note>
     #   @return [String]
     class PutAccountSettingRequest < Struct.new(
+      nil,
       :name,
       :value,
       :principal_arn,
@@ -7428,6 +7603,7 @@ module Aws::ECS
     #   <p>The current account setting for a resource.</p>
     #   @return [Types::Setting]
     class PutAccountSettingResponse < Struct.new(
+      nil,
       :setting,
       keyword_init: true
     )
@@ -7443,6 +7619,7 @@ module Aws::ECS
     #   			for each resource. You can specify up to 10 attributes in a single call.</p>
     #   @return [Array<Types::Attribute>]
     class PutAttributesRequest < Struct.new(
+      nil,
       :cluster,
       :attributes,
       keyword_init: true
@@ -7454,6 +7631,7 @@ module Aws::ECS
     #   <p>The attributes applied to your resource.</p>
     #   @return [Array<Types::Attribute>]
     class PutAttributesResponse < Struct.new(
+      nil,
       :attributes,
       keyword_init: true
     )
@@ -7492,6 +7670,7 @@ module Aws::ECS
     #   			used.</p>
     #   @return [Array<Types::CapacityProviderStrategyItem>]
     class PutClusterCapacityProvidersRequest < Struct.new(
+      nil,
       :cluster,
       :capacity_providers,
       :default_capacity_provider_strategy,
@@ -7504,6 +7683,7 @@ module Aws::ECS
     #   <p>Details about the cluster.</p>
     #   @return [Types::Cluster]
     class PutClusterCapacityProvidersResponse < Struct.new(
+      nil,
       :cluster,
       keyword_init: true
     )
@@ -7579,6 +7759,7 @@ module Aws::ECS
     #            </ul>
     #   @return [Array<Types::Tag>]
     class RegisterContainerInstanceRequest < Struct.new(
+      nil,
       :cluster,
       :instance_identity_document,
       :instance_identity_document_signature,
@@ -7597,6 +7778,7 @@ module Aws::ECS
     #   <p>The container instance that was registered.</p>
     #   @return [Types::ContainerInstance]
     class RegisterContainerInstanceResponse < Struct.new(
+      nil,
       :container_instance,
       keyword_init: true
     )
@@ -7857,6 +8039,7 @@ module Aws::ECS
     #   				<code>false</code>.</p>
     #   @return [Boolean]
     class RegisterTaskDefinitionRequest < Struct.new(
+      nil,
       :family,
       :task_role_arn,
       :execution_role_arn,
@@ -7887,6 +8070,7 @@ module Aws::ECS
     #   <p>The list of tags associated with the task definition.</p>
     #   @return [Array<Types::Tag>]
     class RegisterTaskDefinitionResponse < Struct.new(
+      nil,
       :task_definition,
       :tags,
       keyword_init: true
@@ -7906,6 +8090,7 @@ module Aws::ECS
     #            </note>
     #   @return [String]
     class RepositoryCredentials < Struct.new(
+      nil,
       :credentials_parameter,
       keyword_init: true
     )
@@ -7917,6 +8102,7 @@ module Aws::ECS
     #   <p>The resolved load balancer configuration for the service revision. This includes information about which target groups serve traffic and which listener rules direct traffic to them.</p>
     #   @return [Array<Types::ServiceRevisionLoadBalancer>]
     class ResolvedConfiguration < Struct.new(
+      nil,
       :load_balancers,
       keyword_init: true
     )
@@ -7949,6 +8135,7 @@ module Aws::ECS
     #   			string type.</p>
     #   @return [Array<String>]
     class Resource < Struct.new(
+      nil,
       :name,
       :type,
       :double_value,
@@ -7972,6 +8159,7 @@ module Aws::ECS
     #   <p> Message that describes the cause of the exception.</p>
     #   @return [String]
     class ResourceInUseException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -7983,6 +8171,7 @@ module Aws::ECS
     #   <p> Message that describes the cause of the exception.</p>
     #   @return [String]
     class ResourceNotFoundException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -8007,6 +8196,7 @@ module Aws::ECS
     #   <p>The type of resource to assign to a container. </p>
     #   @return [String]
     class ResourceRequirement < Struct.new(
+      nil,
       :value,
       :type,
       keyword_init: true
@@ -8026,6 +8216,7 @@ module Aws::ECS
     #   <p>The ARN of the service revision deployed as part of the rollback.</p>
     #   @return [String]
     class Rollback < Struct.new(
+      nil,
       :reason,
       :started_at,
       :service_revision_arn,
@@ -8206,6 +8397,7 @@ module Aws::ECS
     #   			match the <code>name</code> from the task definition.</p>
     #   @return [Array<Types::TaskVolumeConfiguration>]
     class RunTaskRequest < Struct.new(
+      nil,
       :capacity_provider_strategy,
       :cluster,
       :count,
@@ -8240,6 +8432,7 @@ module Aws::ECS
     #   				reasons</a> in the <i>Amazon Elastic Container Service Developer Guide</i>.</p>
     #   @return [Array<Types::Failure>]
     class RunTaskResponse < Struct.new(
+      nil,
       :tasks,
       :failures,
       keyword_init: true
@@ -8259,6 +8452,7 @@ module Aws::ECS
     #   <p>The operating system.</p>
     #   @return [String]
     class RuntimePlatform < Struct.new(
+      nil,
       :cpu_architecture,
       :operating_system_family,
       keyword_init: true
@@ -8276,6 +8470,7 @@ module Aws::ECS
     #   <p>The unit of measure for the scale value.</p>
     #   @return [String]
     class Scale < Struct.new(
+      nil,
       :value,
       :unit,
       keyword_init: true
@@ -8320,6 +8515,7 @@ module Aws::ECS
     #            </note>
     #   @return [String]
     class Secret < Struct.new(
+      nil,
       :name,
       :value_from,
       keyword_init: true
@@ -8332,6 +8528,7 @@ module Aws::ECS
     #   <p> Message that describes the cause of the exception.</p>
     #   @return [String]
     class ServerException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -8538,6 +8735,7 @@ module Aws::ECS
     #            </ul>
     #   @return [String]
     class Service < Struct.new(
+      nil,
       :service_arn,
       :service_name,
       :cluster_arn,
@@ -8615,6 +8813,7 @@ module Aws::ECS
     #   <p>The configuration for test traffic routing rules used during blue/green deployments with Amazon ECS Service Connect. This allows you to route a portion of traffic to the new service revision of your service for testing before shifting all production traffic.</p>
     #   @return [Types::ServiceConnectTestTrafficRules]
     class ServiceConnectClientAlias < Struct.new(
+      nil,
       :port,
       :dns_name,
       :test_traffic_rules,
@@ -8695,6 +8894,7 @@ module Aws::ECS
     #            </ul>
     #   @return [Types::LogConfiguration]
     class ServiceConnectConfiguration < Struct.new(
+      nil,
       :enabled,
       :namespace,
       :services,
@@ -8750,6 +8950,7 @@ module Aws::ECS
     #   			configuration.</p>
     #   @return [Types::ServiceConnectTlsConfiguration]
     class ServiceConnectService < Struct.new(
+      nil,
       :port_name,
       :discovery_name,
       :client_aliases,
@@ -8781,6 +8982,7 @@ module Aws::ECS
     #   			However, Service Connect can't ensure connectivity outside of Amazon ECS.</p>
     #   @return [String]
     class ServiceConnectServiceResource < Struct.new(
+      nil,
       :discovery_name,
       :discovery_arn,
       keyword_init: true
@@ -8795,6 +8997,7 @@ module Aws::ECS
     #   <p>The exact value that the HTTP header must match for the test traffic routing rule to apply. This provides precise control over which requests are routed to the new service revision during blue/green deployments.</p>
     #   @return [String]
     class ServiceConnectTestTrafficHeaderMatchRules < Struct.new(
+      nil,
       :exact,
       keyword_init: true
     )
@@ -8813,6 +9016,7 @@ module Aws::ECS
     #   <p>The header value matching configuration that determines how the HTTP header value is evaluated for test traffic routing decisions.</p>
     #   @return [Types::ServiceConnectTestTrafficHeaderMatchRules]
     class ServiceConnectTestTrafficHeaderRules < Struct.new(
+      nil,
       :name,
       :value,
       keyword_init: true
@@ -8830,6 +9034,7 @@ module Aws::ECS
     #   <p>The HTTP header-based routing rules that determine which requests should be routed to the new service version during blue/green deployment testing. These rules provide fine-grained control over test traffic routing based on request headers.</p>
     #   @return [Types::ServiceConnectTestTrafficHeaderRules]
     class ServiceConnectTestTrafficRules < Struct.new(
+      nil,
       :header,
       keyword_init: true
     )
@@ -8841,6 +9046,7 @@ module Aws::ECS
     #   <p>The ARN of the Amazon Web Services Private Certificate Authority certificate.</p>
     #   @return [String]
     class ServiceConnectTlsCertificateAuthority < Struct.new(
+      nil,
       :aws_pca_authority_arn,
       keyword_init: true
     )
@@ -8858,6 +9064,7 @@ module Aws::ECS
     #   <p>The Amazon Resource Name (ARN) of the IAM role that's associated with the Service Connect TLS.</p>
     #   @return [String]
     class ServiceConnectTlsConfiguration < Struct.new(
+      nil,
       :issuer_certificate_authority,
       :kms_key,
       :role_arn,
@@ -8983,6 +9190,7 @@ module Aws::ECS
     #   <p>The CloudWatch alarms that determine when a service deployment fails.</p>
     #   @return [Types::ServiceDeploymentAlarms]
     class ServiceDeployment < Struct.new(
+      nil,
       :service_deployment_arn,
       :service_arn,
       :cluster_arn,
@@ -9023,6 +9231,7 @@ module Aws::ECS
     #   			deployment. A "," separates the alarm names.</p>
     #   @return [Array<String>]
     class ServiceDeploymentAlarms < Struct.new(
+      nil,
       :status,
       :alarm_names,
       :triggered_alarm_names,
@@ -9066,6 +9275,7 @@ module Aws::ECS
     #   			the circuit breaker detected a deployment failure.</p>
     #   @return [String]
     class ServiceDeploymentBrief < Struct.new(
+      nil,
       :service_deployment_arn,
       :service_arn,
       :cluster_arn,
@@ -9106,6 +9316,7 @@ module Aws::ECS
     #            </p>
     #   @return [Integer]
     class ServiceDeploymentCircuitBreaker < Struct.new(
+      nil,
       :status,
       :failure_count,
       :threshold,
@@ -9125,6 +9336,7 @@ module Aws::ECS
     #   <p> Message that describes the cause of the exception.</p>
     #   @return [String]
     class ServiceDeploymentNotFoundException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -9142,6 +9354,7 @@ module Aws::ECS
     #   <p>The event message.</p>
     #   @return [String]
     class ServiceEvent < Struct.new(
+      nil,
       :id,
       :created_at,
       :message,
@@ -9304,6 +9517,7 @@ module Aws::ECS
     #            <p>The available Windows filesystem types are <code>NTFS</code>.</p>
     #   @return [String]
     class ServiceManagedEBSVolumeConfiguration < Struct.new(
+      nil,
       :encrypted,
       :kms_key_id,
       :volume_type,
@@ -9326,6 +9540,7 @@ module Aws::ECS
     #   <p> Message that describes the cause of the exception.</p>
     #   @return [String]
     class ServiceNotActiveException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -9338,6 +9553,7 @@ module Aws::ECS
     #   <p> Message that describes the cause of the exception.</p>
     #   @return [String]
     class ServiceNotFoundException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -9380,6 +9596,7 @@ module Aws::ECS
     #   				<code>port</code> value. However, you can't specify both.</p>
     #   @return [Integer]
     class ServiceRegistry < Struct.new(
+      nil,
       :registry_arn,
       :port,
       :container_name,
@@ -9464,6 +9681,7 @@ module Aws::ECS
     #   <p>The resolved configuration for the service revision which contains the actual resources your service revision uses, such as which target groups serve traffic.</p>
     #   @return [Types::ResolvedConfiguration]
     class ServiceRevision < Struct.new(
+      nil,
       :service_revision_arn,
       :service_arn,
       :cluster_arn,
@@ -9501,6 +9719,7 @@ module Aws::ECS
     #   <p>The Amazon Resource Name (ARN) of the production listener rule or listener that directs traffic to the target group associated with the service revision.</p>
     #   @return [String]
     class ServiceRevisionLoadBalancer < Struct.new(
+      nil,
       :target_group_arn,
       :production_listener_rule,
       keyword_init: true
@@ -9523,6 +9742,7 @@ module Aws::ECS
     #   <p>The number of pending tasks for the service revision.</p>
     #   @return [Integer]
     class ServiceRevisionSummary < Struct.new(
+      nil,
       :arn,
       :requested_task_count,
       :running_task_count,
@@ -9553,6 +9773,7 @@ module Aws::ECS
     #   			once they are created.</p>
     #   @return [Types::ServiceManagedEBSVolumeConfiguration]
     class ServiceVolumeConfiguration < Struct.new(
+      nil,
       :name,
       :managed_ebs_volume,
       keyword_init: true
@@ -9573,6 +9794,7 @@ module Aws::ECS
     #   			authenticate the connection to the container.</p>
     #   @return [String]
     class Session < Struct.new(
+      nil,
       :session_id,
       :stream_url,
       :token_value,
@@ -9600,6 +9822,7 @@ module Aws::ECS
     #   			only one Amazon Web Services manages.</p>
     #   @return [String]
     class Setting < Struct.new(
+      nil,
       :name,
       :value,
       :principal_arn,
@@ -9710,6 +9933,7 @@ module Aws::ECS
     #   			match the <code>name</code> from the task definition.</p>
     #   @return [Array<Types::TaskVolumeConfiguration>]
     class StartTaskRequest < Struct.new(
+      nil,
       :cluster,
       :container_instances,
       :enable_ecs_managed_tags,
@@ -9736,6 +9960,7 @@ module Aws::ECS
     #   <p>Any failures associated with the call.</p>
     #   @return [Array<Types::Failure>]
     class StartTaskResponse < Struct.new(
+      nil,
       :tasks,
       :failures,
       keyword_init: true
@@ -9751,6 +9976,7 @@ module Aws::ECS
     #            <p>The valid values are <code>ROLLBACK</code>.</p>
     #   @return [String]
     class StopServiceDeploymentRequest < Struct.new(
+      nil,
       :service_deployment_arn,
       :stop_type,
       keyword_init: true
@@ -9762,6 +9988,7 @@ module Aws::ECS
     #   <p>The ARN of the stopped service deployment.</p>
     #   @return [String]
     class StopServiceDeploymentResponse < Struct.new(
+      nil,
       :service_deployment_arn,
       keyword_init: true
     )
@@ -9782,6 +10009,7 @@ module Aws::ECS
     #   			API operations on this task.</p>
     #   @return [String]
     class StopTaskRequest < Struct.new(
+      nil,
       :cluster,
       :task,
       :reason,
@@ -9794,6 +10022,7 @@ module Aws::ECS
     #   <p>The task that was stopped.</p>
     #   @return [Types::Task]
     class StopTaskResponse < Struct.new(
+      nil,
       :task,
       keyword_init: true
     )
@@ -9808,6 +10037,7 @@ module Aws::ECS
     #   <p>Any attachments associated with the state change request.</p>
     #   @return [Array<Types::AttachmentStateChange>]
     class SubmitAttachmentStateChangesRequest < Struct.new(
+      nil,
       :cluster,
       :attachments,
       keyword_init: true
@@ -9819,6 +10049,7 @@ module Aws::ECS
     #   <p>Acknowledgement of the state change.</p>
     #   @return [String]
     class SubmitAttachmentStateChangesResponse < Struct.new(
+      nil,
       :acknowledgment,
       keyword_init: true
     )
@@ -9850,6 +10081,7 @@ module Aws::ECS
     #   <p>The network bindings of the container.</p>
     #   @return [Array<Types::NetworkBinding>]
     class SubmitContainerStateChangeRequest < Struct.new(
+      nil,
       :cluster,
       :task,
       :container_name,
@@ -9867,6 +10099,7 @@ module Aws::ECS
     #   <p>Acknowledgement of the state change.</p>
     #   @return [String]
     class SubmitContainerStateChangeResponse < Struct.new(
+      nil,
       :acknowledgment,
       keyword_init: true
     )
@@ -9904,6 +10137,7 @@ module Aws::ECS
     #   <p>The Unix timestamp for the time when the task execution stopped.</p>
     #   @return [Time]
     class SubmitTaskStateChangeRequest < Struct.new(
+      nil,
       :cluster,
       :task,
       :status,
@@ -9923,6 +10157,7 @@ module Aws::ECS
     #   <p>Acknowledgement of the state change.</p>
     #   @return [String]
     class SubmitTaskStateChangeResponse < Struct.new(
+      nil,
       :acknowledgment,
       keyword_init: true
     )
@@ -9989,6 +10224,7 @@ module Aws::ECS
     #            <p>All of these values are supported by Fargate.</p>
     #   @return [String]
     class SystemControl < Struct.new(
+      nil,
       :namespace,
       :value,
       keyword_init: true
@@ -10038,6 +10274,7 @@ module Aws::ECS
     #   			a descriptor within a tag category (key).</p>
     #   @return [String]
     class Tag < Struct.new(
+      nil,
       :key,
       :value,
       keyword_init: true
@@ -10097,6 +10334,7 @@ module Aws::ECS
     #            </ul>
     #   @return [Array<Types::Tag>]
     class TagResourceRequest < Struct.new(
+      nil,
       :resource_arn,
       :tags,
       keyword_init: true
@@ -10105,6 +10343,7 @@ module Aws::ECS
     end
 
     class TagResourceResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -10130,6 +10369,7 @@ module Aws::ECS
     #   <p> Message that describes the cause of the exception.</p>
     #   @return [String]
     class TargetNotConnectedException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -10143,6 +10383,7 @@ module Aws::ECS
     #   <p> Message that describes the cause of the exception.</p>
     #   @return [String]
     class TargetNotFoundException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -10380,6 +10621,7 @@ module Aws::ECS
     #   <p>The Fargate ephemeral storage settings for the task.</p>
     #   @return [Types::TaskEphemeralStorage]
     class Task < Struct.new(
+      nil,
       :attachments,
       :attributes,
       :availability_zone,
@@ -10672,6 +10914,7 @@ module Aws::ECS
     #   			the task's containers. The default value is <code>false</code>.</p>
     #   @return [Boolean]
     class TaskDefinition < Struct.new(
+      nil,
       :task_definition_arn,
       :container_definitions,
       :family,
@@ -10722,6 +10965,7 @@ module Aws::ECS
     #   			see <a href="https://docs.aws.amazon.com/AmazonECS/latest/developerguide/cluster-query-language.html">Cluster query language</a> in the <i>Amazon Elastic Container Service Developer Guide</i>.</p>
     #   @return [String]
     class TaskDefinitionPlacementConstraint < Struct.new(
+      nil,
       :type,
       :expression,
       keyword_init: true
@@ -10740,6 +10984,7 @@ module Aws::ECS
     #   			task.</p>
     #   @return [String]
     class TaskEphemeralStorage < Struct.new(
+      nil,
       :size_in_gi_b,
       :kms_key_id,
       keyword_init: true
@@ -10903,6 +11148,7 @@ module Aws::ECS
     #   			used by default.</p>
     #   @return [String]
     class TaskManagedEBSVolumeConfiguration < Struct.new(
+      nil,
       :encrypted,
       :kms_key_id,
       :volume_type,
@@ -10930,6 +11176,7 @@ module Aws::ECS
     #   			leaves the volume in your  account.</p>
     #   @return [Boolean]
     class TaskManagedEBSVolumeTerminationPolicy < Struct.new(
+      nil,
       :delete_on_termination,
       keyword_init: true
     )
@@ -10976,6 +11223,7 @@ module Aws::ECS
     #            </note>
     #   @return [Types::EphemeralStorage]
     class TaskOverride < Struct.new(
+      nil,
       :container_overrides,
       :cpu,
       :inference_accelerator_overrides,
@@ -11160,6 +11408,7 @@ module Aws::ECS
     #   <p>The Fargate ephemeral storage settings for the task set.</p>
     #   @return [Types::DeploymentEphemeralStorage]
     class TaskSet < Struct.new(
+      nil,
       :id,
       :task_set_arn,
       :service_arn,
@@ -11203,6 +11452,7 @@ module Aws::ECS
     #   <p> Message that describes the cause of the exception.</p>
     #   @return [String]
     class TaskSetNotFoundException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -11222,6 +11472,7 @@ module Aws::ECS
     #   			created.</p>
     #   @return [Types::TaskManagedEBSVolumeConfiguration]
     class TaskVolumeConfiguration < Struct.new(
+      nil,
       :name,
       :managed_ebs_volume,
       keyword_init: true
@@ -11252,6 +11503,7 @@ module Aws::ECS
     #               <code>appProtocol</code>.</p>
     #   @return [Integer]
     class TimeoutConfiguration < Struct.new(
+      nil,
       :idle_timeout_seconds,
       :per_request_timeout_seconds,
       keyword_init: true
@@ -11277,6 +11529,7 @@ module Aws::ECS
     #            </p>
     #   @return [Array<String>]
     class Tmpfs < Struct.new(
+      nil,
       :container_path,
       :size,
       :mount_options,
@@ -11298,6 +11551,7 @@ module Aws::ECS
     #   <p>The maximum total local storage in GB. Instance types with more local storage are excluded from selection.</p>
     #   @return [Float]
     class TotalLocalStorageGBRequest < Struct.new(
+      nil,
       :min,
       :max,
       keyword_init: true
@@ -11329,6 +11583,7 @@ module Aws::ECS
     #   			<code>ulimit</code>.</p>
     #   @return [Integer]
     class Ulimit < Struct.new(
+      nil,
       :name,
       :soft_limit,
       :hard_limit,
@@ -11348,6 +11603,7 @@ module Aws::ECS
     #   <p> Message that describes the cause of the exception.</p>
     #   @return [String]
     class UnsupportedFeatureException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -11363,6 +11619,7 @@ module Aws::ECS
     #   <p>The keys of the tags to be removed.</p>
     #   @return [Array<String>]
     class UntagResourceRequest < Struct.new(
+      nil,
       :resource_arn,
       :tag_keys,
       keyword_init: true
@@ -11371,6 +11628,7 @@ module Aws::ECS
     end
 
     class UntagResourceResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -11390,6 +11648,7 @@ module Aws::ECS
     #   <p>The updated configuration for the Amazon ECS Managed Instances provider. You can modify the infrastructure role, instance launch template, and tag propagation settings. Changes take effect for new instances launched after the update.</p>
     #   @return [Types::UpdateManagedInstancesProviderConfiguration]
     class UpdateCapacityProviderRequest < Struct.new(
+      nil,
       :name,
       :cluster,
       :auto_scaling_group_provider,
@@ -11403,6 +11662,7 @@ module Aws::ECS
     #   <p>Details about the capacity provider.</p>
     #   @return [Types::CapacityProvider]
     class UpdateCapacityProviderResponse < Struct.new(
+      nil,
       :capacity_provider,
       keyword_init: true
     )
@@ -11433,6 +11693,7 @@ module Aws::ECS
     #   	For more information, see <a href="https://docs.aws.amazon.com/AmazonECS/latest/developerguide/service-connect.html">Service Connect</a> in the <i>Amazon Elastic Container Service Developer Guide</i>.</p>
     #   @return [Types::ClusterServiceConnectDefaultsRequest]
     class UpdateClusterRequest < Struct.new(
+      nil,
       :cluster,
       :settings,
       :configuration,
@@ -11446,6 +11707,7 @@ module Aws::ECS
     #   <p>Details about the cluster.</p>
     #   @return [Types::Cluster]
     class UpdateClusterResponse < Struct.new(
+      nil,
       :cluster,
       keyword_init: true
     )
@@ -11468,6 +11730,7 @@ module Aws::ECS
     #            </important>
     #   @return [Array<Types::ClusterSetting>]
     class UpdateClusterSettingsRequest < Struct.new(
+      nil,
       :cluster,
       :settings,
       keyword_init: true
@@ -11479,6 +11742,7 @@ module Aws::ECS
     #   <p>Details about the cluster</p>
     #   @return [Types::Cluster]
     class UpdateClusterSettingsResponse < Struct.new(
+      nil,
       :cluster,
       keyword_init: true
     )
@@ -11494,6 +11758,7 @@ module Aws::ECS
     #   			would like to update the Amazon ECS container agent.</p>
     #   @return [String]
     class UpdateContainerAgentRequest < Struct.new(
+      nil,
       :cluster,
       :container_instance,
       keyword_init: true
@@ -11505,6 +11770,7 @@ module Aws::ECS
     #   <p>The container instance that the container agent was updated for.</p>
     #   @return [Types::ContainerInstance]
     class UpdateContainerAgentResponse < Struct.new(
+      nil,
       :container_instance,
       keyword_init: true
     )
@@ -11527,6 +11793,7 @@ module Aws::ECS
     #   			describe the container instance but can't update the container instance state.</p>
     #   @return [String]
     class UpdateContainerInstancesStateRequest < Struct.new(
+      nil,
       :cluster,
       :container_instances,
       :status,
@@ -11542,6 +11809,7 @@ module Aws::ECS
     #   <p>Any failures associated with the call.</p>
     #   @return [Array<Types::Failure>]
     class UpdateContainerInstancesStateResponse < Struct.new(
+      nil,
       :container_instances,
       :failures,
       keyword_init: true
@@ -11558,6 +11826,7 @@ module Aws::ECS
     #   <p> Message that describes the cause of the exception.</p>
     #   @return [String]
     class UpdateInProgressException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -11576,6 +11845,7 @@ module Aws::ECS
     #   <p>The updated tag propagation setting. When changed, this affects only new instances launched after the update.</p>
     #   @return [String]
     class UpdateManagedInstancesProviderConfiguration < Struct.new(
+      nil,
       :infrastructure_role_arn,
       :instance_launch_template,
       :propagate_tags,
@@ -11596,6 +11866,7 @@ module Aws::ECS
     #   			deployment.</p>
     #   @return [String]
     class UpdateServicePrimaryTaskSetRequest < Struct.new(
+      nil,
       :cluster,
       :service,
       :primary_task_set,
@@ -11608,6 +11879,7 @@ module Aws::ECS
     #   <p>The details about the task set.</p>
     #   @return [Types::TaskSet]
     class UpdateServicePrimaryTaskSetResponse < Struct.new(
+      nil,
       :task_set,
       keyword_init: true
     )
@@ -11835,6 +12107,7 @@ module Aws::ECS
     #            <p>This parameter triggers a new service deployment.</p>
     #   @return [Array<Types::VpcLatticeConfiguration>]
     class UpdateServiceRequest < Struct.new(
+      nil,
       :cluster,
       :service,
       :desired_count,
@@ -11866,6 +12139,7 @@ module Aws::ECS
     #   <p>The full description of your service following the update call.</p>
     #   @return [Types::Service]
     class UpdateServiceResponse < Struct.new(
+      nil,
       :service,
       keyword_init: true
     )
@@ -11893,6 +12167,7 @@ module Aws::ECS
     #   			minutes (2 hours).</p>
     #   @return [Integer]
     class UpdateTaskProtectionRequest < Struct.new(
+      nil,
       :cluster,
       :tasks,
       :protection_enabled,
@@ -11926,6 +12201,7 @@ module Aws::ECS
     #   <p>Any failures associated with the call.</p>
     #   @return [Array<Types::Failure>]
     class UpdateTaskProtectionResponse < Struct.new(
+      nil,
       :protected_tasks,
       :failures,
       keyword_init: true
@@ -11948,6 +12224,7 @@ module Aws::ECS
     #   			in the task set.</p>
     #   @return [Types::Scale]
     class UpdateTaskSetRequest < Struct.new(
+      nil,
       :cluster,
       :service,
       :task_set,
@@ -11961,6 +12238,7 @@ module Aws::ECS
     #   <p>Details about the task set.</p>
     #   @return [Types::TaskSet]
     class UpdateTaskSetResponse < Struct.new(
+      nil,
       :task_set,
       keyword_init: true
     )
@@ -11975,6 +12253,7 @@ module Aws::ECS
     #   <p>The maximum number of vCPUs. Instance types with more vCPUs than this value are excluded from selection.</p>
     #   @return [Integer]
     class VCpuCountRangeRequest < Struct.new(
+      nil,
       :min,
       :max,
       keyword_init: true
@@ -11995,6 +12274,7 @@ module Aws::ECS
     #   <p>The Docker version that's running on the container instance.</p>
     #   @return [String]
     class VersionInfo < Struct.new(
+      nil,
       :agent_version,
       :agent_hash,
       :docker_version,
@@ -12065,6 +12345,7 @@ module Aws::ECS
     #   				<code>StartTask</code> APIs.</p>
     #   @return [Boolean]
     class Volume < Struct.new(
+      nil,
       :name,
       :host,
       :docker_volume_configuration,
@@ -12087,6 +12368,7 @@ module Aws::ECS
     #   			default value is <code>false</code>.</p>
     #   @return [Boolean]
     class VolumeFrom < Struct.new(
+      nil,
       :source_container,
       :read_only,
       keyword_init: true
@@ -12110,6 +12392,7 @@ module Aws::ECS
     #   			of the <code>portMapping</code> you defined in your task definition.</p>
     #   @return [String]
     class VpcLatticeConfiguration < Struct.new(
+      nil,
       :role_arn,
       :target_group_arn,
       :port_name,

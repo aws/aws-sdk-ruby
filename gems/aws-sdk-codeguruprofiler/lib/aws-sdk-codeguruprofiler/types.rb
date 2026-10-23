@@ -14,6 +14,7 @@ module Aws::CodeGuruProfiler
     #   <p>One or 2 channels to report to when anomalies are detected.</p>
     #   @return [Array<Types::Channel>]
     class AddNotificationChannelsInput < Struct.new(
+      nil,
       :profiling_group_name,
       :channels,
       keyword_init: true
@@ -26,6 +27,7 @@ module Aws::CodeGuruProfiler
     #   <p>The new notification configuration for this profiling group.</p>
     #   @return [Types::NotificationConfiguration]
     class AddNotificationChannelsOutput < Struct.new(
+      nil,
       :notification_configuration,
       keyword_init: true
     )
@@ -96,6 +98,7 @@ module Aws::CodeGuruProfiler
     #            </ul>
     #   @return [Hash<String, String>]
     class AgentConfiguration < Struct.new(
+      nil,
       :should_profile,
       :period_in_seconds,
       :agent_parameters,
@@ -118,6 +121,7 @@ module Aws::CodeGuruProfiler
     #         </p>
     #   @return [Boolean]
     class AgentOrchestrationConfig < Struct.new(
+      nil,
       :profiling_enabled,
       keyword_init: true
     )
@@ -167,6 +171,7 @@ module Aws::CodeGuruProfiler
     #            </ul>
     #   @return [String]
     class AggregatedProfileTime < Struct.new(
+      nil,
       :start,
       :period,
       keyword_init: true
@@ -194,6 +199,7 @@ module Aws::CodeGuruProfiler
     #           </p>
     #   @return [Array<Types::AnomalyInstance>]
     class Anomaly < Struct.new(
+      nil,
       :metric,
       :reason,
       :instances,
@@ -228,6 +234,7 @@ module Aws::CodeGuruProfiler
     #   <p>Feedback type on a specific instance of anomaly submitted by the user.</p>
     #   @return [Types::UserFeedback]
     class AnomalyInstance < Struct.new(
+      nil,
       :id,
       :start_time,
       :end_time,
@@ -298,6 +305,7 @@ module Aws::CodeGuruProfiler
     #            frame, and the thread states to use to get the count for the metric value of the frame.</p>
     #   @return [Array<Types::FrameMetric>]
     class BatchGetFrameMetricDataInput < Struct.new(
+      nil,
       :profiling_group_name,
       :start_time,
       :end_time,
@@ -365,6 +373,7 @@ module Aws::CodeGuruProfiler
     #            and the thread states to use to get the count for the metric value of the frame.</p>
     #   @return [Array<Types::FrameMetricDatum>]
     class BatchGetFrameMetricDataOutput < Struct.new(
+      nil,
       :start_time,
       :end_time,
       :resolution,
@@ -387,6 +396,7 @@ module Aws::CodeGuruProfiler
     #   <p>List of publishers for different type of events that may be detected in an application from the profile. Anomaly detection is the only event publisher in Profiler.</p>
     #   @return [Array<String>]
     class Channel < Struct.new(
+      nil,
       :id,
       :uri,
       :event_publishers,
@@ -458,6 +468,7 @@ module Aws::CodeGuruProfiler
     #            </ul>
     #   @return [Hash<String, String>]
     class ConfigureAgentInput < Struct.new(
+      nil,
       :profiling_group_name,
       :fleet_instance_id,
       :metadata,
@@ -476,6 +487,7 @@ module Aws::CodeGuruProfiler
     #         </p>
     #   @return [Types::AgentConfiguration]
     class ConfigureAgentOutput < Struct.new(
+      nil,
       :configuration,
       keyword_init: true
     )
@@ -489,6 +501,7 @@ module Aws::CodeGuruProfiler
     # @!attribute message
     #   @return [String]
     class ConflictException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -522,6 +535,7 @@ module Aws::CodeGuruProfiler
     #         </p>
     #   @return [Hash<String, String>]
     class CreateProfilingGroupInput < Struct.new(
+      nil,
       :profiling_group_name,
       :compute_platform,
       :client_token,
@@ -540,6 +554,7 @@ module Aws::CodeGuruProfiler
     #            about the created profiling group. </p>
     #   @return [Types::ProfilingGroupDescription]
     class CreateProfilingGroupOutput < Struct.new(
+      nil,
       :profiling_group,
       keyword_init: true
     )
@@ -551,6 +566,7 @@ module Aws::CodeGuruProfiler
     #   <p>The name of the profiling group to delete.</p>
     #   @return [String]
     class DeleteProfilingGroupInput < Struct.new(
+      nil,
       :profiling_group_name,
       keyword_init: true
     )
@@ -559,6 +575,7 @@ module Aws::CodeGuruProfiler
 
     # <p>The structure representing the deleteProfilingGroupResponse.</p>
     class DeleteProfilingGroupOutput < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -571,6 +588,7 @@ module Aws::CodeGuruProfiler
     #         </p>
     #   @return [String]
     class DescribeProfilingGroupInput < Struct.new(
+      nil,
       :profiling_group_name,
       keyword_init: true
     )
@@ -587,6 +605,7 @@ module Aws::CodeGuruProfiler
     #         </p>
     #   @return [Types::ProfilingGroupDescription]
     class DescribeProfilingGroupOutput < Struct.new(
+      nil,
       :profiling_group,
       keyword_init: true
     )
@@ -621,6 +640,7 @@ module Aws::CodeGuruProfiler
     #   <p>The total number of different recommendations that were found by the analysis.</p>
     #   @return [Integer]
     class FindingsReportSummary < Struct.new(
+      nil,
       :id,
       :profiling_group_name,
       :profile_start_time,
@@ -647,6 +667,7 @@ module Aws::CodeGuruProfiler
     #   <p>List of application runtime thread states used to get the counts for a frame a derive a metric value.</p>
     #   @return [Array<String>]
     class FrameMetric < Struct.new(
+      nil,
       :frame_name,
       :type,
       :thread_states,
@@ -669,6 +690,7 @@ module Aws::CodeGuruProfiler
     #         </p>
     #   @return [Array<Float>]
     class FrameMetricDatum < Struct.new(
+      nil,
       :frame_metric,
       :values,
       keyword_init: true
@@ -700,6 +722,7 @@ module Aws::CodeGuruProfiler
     #               analysis data is returned from smaller time windows (for example, one hour).</p>
     #   @return [Boolean]
     class GetFindingsReportAccountSummaryInput < Struct.new(
+      nil,
       :next_token,
       :max_results,
       :daily_reports_only,
@@ -723,6 +746,7 @@ module Aws::CodeGuruProfiler
     #            results to return.</p>
     #   @return [String]
     class GetFindingsReportAccountSummaryOutput < Struct.new(
+      nil,
       :report_summaries,
       :next_token,
       keyword_init: true
@@ -735,6 +759,7 @@ module Aws::CodeGuruProfiler
     #   <p>The name of the profiling group we want to get the notification configuration for.</p>
     #   @return [String]
     class GetNotificationConfigurationInput < Struct.new(
+      nil,
       :profiling_group_name,
       keyword_init: true
     )
@@ -746,6 +771,7 @@ module Aws::CodeGuruProfiler
     #   <p>The current notification configuration for this profiling group.</p>
     #   @return [Types::NotificationConfiguration]
     class GetNotificationConfigurationOutput < Struct.new(
+      nil,
       :notification_configuration,
       keyword_init: true
     )
@@ -759,6 +785,7 @@ module Aws::CodeGuruProfiler
     #   <p>The name of the profiling group.</p>
     #   @return [String]
     class GetPolicyInput < Struct.new(
+      nil,
       :profiling_group_name,
       keyword_init: true
     )
@@ -773,6 +800,7 @@ module Aws::CodeGuruProfiler
     #   <p>A unique identifier for the current revision of the returned policy.</p>
     #   @return [String]
     class GetPolicyOutput < Struct.new(
+      nil,
       :policy,
       :revision_id,
       keyword_init: true
@@ -849,6 +877,7 @@ module Aws::CodeGuruProfiler
     #            </ul>
     #   @return [String]
     class GetProfileInput < Struct.new(
+      nil,
       :profiling_group_name,
       :start_time,
       :period,
@@ -873,6 +902,7 @@ module Aws::CodeGuruProfiler
     #   <p>The content encoding of the profile.</p>
     #   @return [String]
     class GetProfileOutput < Struct.new(
+      nil,
       :profile,
       :content_type,
       :content_encoding,
@@ -967,6 +997,7 @@ module Aws::CodeGuruProfiler
     #            </ul>
     #   @return [String]
     class GetRecommendationsInput < Struct.new(
+      nil,
       :profiling_group_name,
       :start_time,
       :end_time,
@@ -1003,6 +1034,7 @@ module Aws::CodeGuruProfiler
     #           </p>
     #   @return [Array<Types::Anomaly>]
     class GetRecommendationsOutput < Struct.new(
+      nil,
       :profiling_group_name,
       :profile_start_time,
       :profile_end_time,
@@ -1017,6 +1049,7 @@ module Aws::CodeGuruProfiler
     # @!attribute message
     #   @return [String]
     class InternalServerException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -1067,6 +1100,7 @@ module Aws::CodeGuruProfiler
     #           analysis data is returned from smaller time windows (for example, one hour).</p>
     #   @return [Boolean]
     class ListFindingsReportsInput < Struct.new(
+      nil,
       :profiling_group_name,
       :start_time,
       :end_time,
@@ -1089,6 +1123,7 @@ module Aws::CodeGuruProfiler
     #            results to return.</p>
     #   @return [String]
     class ListFindingsReportsOutput < Struct.new(
+      nil,
       :findings_report_summaries,
       :next_token,
       keyword_init: true
@@ -1155,6 +1190,7 @@ module Aws::CodeGuruProfiler
     #            </note>
     #   @return [String]
     class ListProfileTimesInput < Struct.new(
+      nil,
       :profiling_group_name,
       :start_time,
       :end_time,
@@ -1180,6 +1216,7 @@ module Aws::CodeGuruProfiler
     #            results to return. </p>
     #   @return [String]
     class ListProfileTimesOutput < Struct.new(
+      nil,
       :profile_times,
       :next_token,
       keyword_init: true
@@ -1218,6 +1255,7 @@ module Aws::CodeGuruProfiler
     #         a list of profiling group names is returned.</p>
     #   @return [Boolean]
     class ListProfilingGroupsInput < Struct.new(
+      nil,
       :next_token,
       :max_results,
       :include_description,
@@ -1257,6 +1295,7 @@ module Aws::CodeGuruProfiler
     #            results to return. </p>
     #   @return [String]
     class ListProfilingGroupsOutput < Struct.new(
+      nil,
       :profiling_group_names,
       :profiling_groups,
       :next_token,
@@ -1271,6 +1310,7 @@ module Aws::CodeGuruProfiler
     #         </p>
     #   @return [String]
     class ListTagsForResourceInput < Struct.new(
+      nil,
       :resource_arn,
       keyword_init: true
     )
@@ -1284,6 +1324,7 @@ module Aws::CodeGuruProfiler
     #         </p>
     #   @return [Hash<String, String>]
     class ListTagsForResourceOutput < Struct.new(
+      nil,
       :tags,
       keyword_init: true
     )
@@ -1301,6 +1342,7 @@ module Aws::CodeGuruProfiler
     #   <p>The value in the profile data that exceeded the recommendation threshold.</p>
     #   @return [Float]
     class Match < Struct.new(
+      nil,
       :target_frames_index,
       :frame_address,
       :threshold_breach_value,
@@ -1334,6 +1376,7 @@ module Aws::CodeGuruProfiler
     #           </p>
     #   @return [Array<String>]
     class Metric < Struct.new(
+      nil,
       :frame_name,
       :type,
       :thread_states,
@@ -1349,6 +1392,7 @@ module Aws::CodeGuruProfiler
     #            the application profile.</p>
     #   @return [Array<Types::Channel>]
     class NotificationConfiguration < Struct.new(
+      nil,
       :channels,
       keyword_init: true
     )
@@ -1390,6 +1434,7 @@ module Aws::CodeGuruProfiler
     #           </p>
     #   @return [Array<String>]
     class Pattern < Struct.new(
+      nil,
       :id,
       :name,
       :description,
@@ -1446,6 +1491,7 @@ module Aws::CodeGuruProfiler
     #            </ul>
     #   @return [String]
     class PostAgentProfileInput < Struct.new(
+      nil,
       :profiling_group_name,
       :agent_profile,
       :profile_token,
@@ -1457,6 +1503,7 @@ module Aws::CodeGuruProfiler
 
     # <p>The structure representing the postAgentProfileResponse.</p>
     class PostAgentProfileOutput < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1471,6 +1518,7 @@ module Aws::CodeGuruProfiler
     #            2020-06-01T13:15:02.001Z  represents 1 millisecond past June 1, 2020 1:15:02 PM UTC.</p>
     #   @return [Time]
     class ProfileTime < Struct.new(
+      nil,
       :start,
       keyword_init: true
     )
@@ -1531,6 +1579,7 @@ module Aws::CodeGuruProfiler
     #         </p>
     #   @return [Hash<String, String>]
     class ProfilingGroupDescription < Struct.new(
+      nil,
       :name,
       :agent_orchestration_config,
       :arn,
@@ -1568,6 +1617,7 @@ module Aws::CodeGuruProfiler
     #            2020-06-01T13:15:02.001Z  represents 1 millisecond past June 1, 2020 1:15:02 PM UTC.</p>
     #   @return [Time]
     class ProfilingStatus < Struct.new(
+      nil,
       :latest_agent_profile_reported_at,
       :latest_aggregated_profile,
       :latest_agent_orchestrated_at,
@@ -1603,6 +1653,7 @@ module Aws::CodeGuruProfiler
     #           </p>
     #   @return [String]
     class PutPermissionInput < Struct.new(
+      nil,
       :profiling_group_name,
       :action_group,
       :principals,
@@ -1625,6 +1676,7 @@ module Aws::CodeGuruProfiler
     #                   <code>policy</code> element of the response. </p>
     #   @return [String]
     class PutPermissionOutput < Struct.new(
+      nil,
       :policy,
       :revision_id,
       keyword_init: true
@@ -1658,6 +1710,7 @@ module Aws::CodeGuruProfiler
     #               millisecond past June 1, 2020 1:15:02 PM UTC.</p>
     #   @return [Time]
     class Recommendation < Struct.new(
+      nil,
       :all_matches_count,
       :all_matches_sum,
       :pattern,
@@ -1677,6 +1730,7 @@ module Aws::CodeGuruProfiler
     #   <p>The id of the channel that we want to stop receiving notifications.</p>
     #   @return [String]
     class RemoveNotificationChannelInput < Struct.new(
+      nil,
       :profiling_group_name,
       :channel_id,
       keyword_init: true
@@ -1689,6 +1743,7 @@ module Aws::CodeGuruProfiler
     #   <p>The new notification configuration for this profiling group.</p>
     #   @return [Types::NotificationConfiguration]
     class RemoveNotificationChannelOutput < Struct.new(
+      nil,
       :notification_configuration,
       keyword_init: true
     )
@@ -1715,6 +1770,7 @@ module Aws::CodeGuruProfiler
     #           </p>
     #   @return [String]
     class RemovePermissionInput < Struct.new(
+      nil,
       :profiling_group_name,
       :action_group,
       :revision_id,
@@ -1736,6 +1792,7 @@ module Aws::CodeGuruProfiler
     #                   <code>policy</code> element of the response. </p>
     #   @return [String]
     class RemovePermissionOutput < Struct.new(
+      nil,
       :policy,
       :revision_id,
       keyword_init: true
@@ -1747,6 +1804,7 @@ module Aws::CodeGuruProfiler
     # @!attribute message
     #   @return [String]
     class ResourceNotFoundException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -1760,6 +1818,7 @@ module Aws::CodeGuruProfiler
     # @!attribute message
     #   @return [String]
     class ServiceQuotaExceededException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -1786,6 +1845,7 @@ module Aws::CodeGuruProfiler
     #   <p>Optional feedback about this anomaly.</p>
     #   @return [String]
     class SubmitFeedbackInput < Struct.new(
+      nil,
       :profiling_group_name,
       :anomaly_instance_id,
       :type,
@@ -1797,6 +1857,7 @@ module Aws::CodeGuruProfiler
 
     # <p>The structure representing the SubmitFeedbackResponse.</p>
     class SubmitFeedbackOutput < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1813,6 +1874,7 @@ module Aws::CodeGuruProfiler
     #         </p>
     #   @return [Hash<String, String>]
     class TagResourceInput < Struct.new(
+      nil,
       :resource_arn,
       :tags,
       keyword_init: true
@@ -1821,6 +1883,7 @@ module Aws::CodeGuruProfiler
     end
 
     class TagResourceOutput < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1830,6 +1893,7 @@ module Aws::CodeGuruProfiler
     # @!attribute message
     #   @return [String]
     class ThrottlingException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -1849,6 +1913,7 @@ module Aws::CodeGuruProfiler
     #         </p>
     #   @return [Time]
     class TimestampStructure < Struct.new(
+      nil,
       :value,
       keyword_init: true
     )
@@ -1867,6 +1932,7 @@ module Aws::CodeGuruProfiler
     #         </p>
     #   @return [Array<String>]
     class UntagResourceInput < Struct.new(
+      nil,
       :resource_arn,
       :tag_keys,
       keyword_init: true
@@ -1875,6 +1941,7 @@ module Aws::CodeGuruProfiler
     end
 
     class UntagResourceOutput < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1890,6 +1957,7 @@ module Aws::CodeGuruProfiler
     #         </p>
     #   @return [Types::AgentOrchestrationConfig]
     class UpdateProfilingGroupInput < Struct.new(
+      nil,
       :profiling_group_name,
       :agent_orchestration_config,
       keyword_init: true
@@ -1907,6 +1975,7 @@ module Aws::CodeGuruProfiler
     #         </p>
     #   @return [Types::ProfilingGroupDescription]
     class UpdateProfilingGroupOutput < Struct.new(
+      nil,
       :profiling_group,
       keyword_init: true
     )
@@ -1920,6 +1989,7 @@ module Aws::CodeGuruProfiler
     #               the user about whether the recommendation is useful or not.</p>
     #   @return [String]
     class UserFeedback < Struct.new(
+      nil,
       :type,
       keyword_init: true
     )
@@ -1930,6 +2000,7 @@ module Aws::CodeGuruProfiler
     # @!attribute message
     #   @return [String]
     class ValidationException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )

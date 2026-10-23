@@ -13,6 +13,7 @@ module Aws::ConnectCampaignsV2
     #   A header that defines the error encountered while processing the request.
     #   @return [String]
     class AccessDeniedException < Struct.new(
+      nil,
       :message,
       :x_amz_error_type,
       keyword_init: true
@@ -22,6 +23,7 @@ module Aws::ConnectCampaignsV2
 
     # Agentless config
     class AgentlessConfig < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -35,6 +37,7 @@ module Aws::ConnectCampaignsV2
     #   Enable or disable await answer machine prompt
     #   @return [Boolean]
     class AnswerMachineDetectionConfig < Struct.new(
+      nil,
       :enable_answer_machine_detection,
       :await_answer_machine_prompt,
       keyword_init: true
@@ -82,6 +85,7 @@ module Aws::ConnectCampaignsV2
     #   Tag map with key and value.
     #   @return [Hash<String, String>]
     class Campaign < Struct.new(
+      nil,
       :id,
       :arn,
       :name,
@@ -103,6 +107,7 @@ module Aws::ConnectCampaignsV2
     #   Connect instance identifier filter
     #   @return [Types::InstanceIdFilter]
     class CampaignFilters < Struct.new(
+      nil,
       :instance_id_filter,
       keyword_init: true
     )
@@ -132,6 +137,7 @@ module Aws::ConnectCampaignsV2
     #   Amazon Resource Names(ARN)
     #   @return [String]
     class CampaignSummary < Struct.new(
+      nil,
       :id,
       :arn,
       :name,
@@ -155,6 +161,7 @@ module Aws::ConnectCampaignsV2
     #   Email Channel Subtype config
     #   @return [Types::EmailChannelSubtypeConfig]
     class ChannelSubtypeConfig < Struct.new(
+      nil,
       :telephony,
       :sms,
       :email,
@@ -199,6 +206,7 @@ module Aws::ConnectCampaignsV2
     #   The communication limit time unit.
     #   @return [String]
     class CommunicationLimit < Struct.new(
+      nil,
       :max_count_per_recipient,
       :frequency,
       :unit,
@@ -230,6 +238,7 @@ module Aws::ConnectCampaignsV2
     #   Instance limits handling
     #   @return [String]
     class CommunicationLimitsConfig < Struct.new(
+      nil,
       :all_channel_subtypes,
       :instance_limits_handling,
       keyword_init: true
@@ -251,6 +260,7 @@ module Aws::ConnectCampaignsV2
     #   Time window config
     #   @return [Types::TimeWindow]
     class CommunicationTimeConfig < Struct.new(
+      nil,
       :local_time_zone_config,
       :telephony,
       :sms,
@@ -267,6 +277,7 @@ module Aws::ConnectCampaignsV2
     #   A header that defines the error encountered while processing the request.
     #   @return [String]
     class ConflictException < Struct.new(
+      nil,
       :message,
       :x_amz_error_type,
       keyword_init: true
@@ -303,6 +314,7 @@ module Aws::ConnectCampaignsV2
     #   Tag map with key and value.
     #   @return [Hash<String, String>]
     class CreateCampaignRequest < Struct.new(
+      nil,
       :name,
       :connect_instance_id,
       :channel_subtype_config,
@@ -328,6 +340,7 @@ module Aws::ConnectCampaignsV2
     #   Tag map with key and value.
     #   @return [Hash<String, String>]
     class CreateCampaignResponse < Struct.new(
+      nil,
       :id,
       :arn,
       :tags,
@@ -344,6 +357,7 @@ module Aws::ConnectCampaignsV2
     #   Object type names map.
     #   @return [Hash<String, String>]
     class CustomerProfilesIntegrationConfig < Struct.new(
+      nil,
       :domain_arn,
       :object_type_names,
       keyword_init: true
@@ -356,6 +370,7 @@ module Aws::ConnectCampaignsV2
     #   Amazon Resource Names(ARN)
     #   @return [String]
     class CustomerProfilesIntegrationIdentifier < Struct.new(
+      nil,
       :domain_arn,
       keyword_init: true
     )
@@ -370,6 +385,7 @@ module Aws::ConnectCampaignsV2
     #   Object type names map.
     #   @return [Hash<String, String>]
     class CustomerProfilesIntegrationSummary < Struct.new(
+      nil,
       :domain_arn,
       :object_type_names,
       keyword_init: true
@@ -385,6 +401,7 @@ module Aws::ConnectCampaignsV2
     #   The type of campaign channel subtype.
     #   @return [String]
     class DeleteCampaignChannelSubtypeConfigRequest < Struct.new(
+      nil,
       :id,
       :channel_subtype,
       keyword_init: true
@@ -400,6 +417,7 @@ module Aws::ConnectCampaignsV2
     #   The type of campaign communication limits config.
     #   @return [String]
     class DeleteCampaignCommunicationLimitsRequest < Struct.new(
+      nil,
       :id,
       :config,
       keyword_init: true
@@ -415,6 +433,7 @@ module Aws::ConnectCampaignsV2
     #   The type of campaign communication time config
     #   @return [String]
     class DeleteCampaignCommunicationTimeRequest < Struct.new(
+      nil,
       :id,
       :config,
       keyword_init: true
@@ -427,6 +446,7 @@ module Aws::ConnectCampaignsV2
     #   Identifier representing a Campaign
     #   @return [String]
     class DeleteCampaignRequest < Struct.new(
+      nil,
       :id,
       keyword_init: true
     )
@@ -441,6 +461,7 @@ module Aws::ConnectCampaignsV2
     #   Enumeration of the policies to enact on existing campaigns during instance config deletion
     #   @return [String]
     class DeleteConnectInstanceConfigRequest < Struct.new(
+      nil,
       :connect_instance_id,
       :campaign_deletion_policy,
       keyword_init: true
@@ -456,6 +477,7 @@ module Aws::ConnectCampaignsV2
     #   Integration identifier for Connect instance
     #   @return [Types::IntegrationIdentifier]
     class DeleteConnectInstanceIntegrationRequest < Struct.new(
+      nil,
       :connect_instance_id,
       :integration_identifier,
       keyword_init: true
@@ -468,6 +490,7 @@ module Aws::ConnectCampaignsV2
     #   Amazon Connect Instance Id
     #   @return [String]
     class DeleteInstanceOnboardingJobRequest < Struct.new(
+      nil,
       :connect_instance_id,
       keyword_init: true
     )
@@ -479,6 +502,7 @@ module Aws::ConnectCampaignsV2
     #   Identifier representing a Campaign
     #   @return [String]
     class DescribeCampaignRequest < Struct.new(
+      nil,
       :id,
       keyword_init: true
     )
@@ -490,6 +514,7 @@ module Aws::ConnectCampaignsV2
     #   An Amazon Connect campaign.
     #   @return [Types::Campaign]
     class DescribeCampaignResponse < Struct.new(
+      nil,
       :campaign,
       keyword_init: true
     )
@@ -507,6 +532,7 @@ module Aws::ConnectCampaignsV2
     #   Default Email Outbound config
     #   @return [Types::EmailOutboundConfig]
     class EmailChannelSubtypeConfig < Struct.new(
+      nil,
       :capacity,
       :outbound_mode,
       :default_outbound_config,
@@ -529,6 +555,7 @@ module Aws::ConnectCampaignsV2
     #   A custom key-value pair using an attribute map. The attributes are standard Amazon Connect attributes, and can be accessed in contact flows just like any other contact attributes.
     #   @return [Hash<String, String>]
     class EmailChannelSubtypeParameters < Struct.new(
+      nil,
       :destination_email_address,
       :connect_source_email_address,
       :template_arn,
@@ -549,6 +576,7 @@ module Aws::ConnectCampaignsV2
     #   Amazon Resource Names(ARN)
     #   @return [String]
     class EmailOutboundConfig < Struct.new(
+      nil,
       :connect_source_email_address,
       :source_email_address_display_name,
       :wisdom_template_arn,
@@ -586,6 +614,7 @@ module Aws::ConnectCampaignsV2
     #   KMS key id/arn for encryption config.
     #   @return [String]
     class EncryptionConfig < Struct.new(
+      nil,
       :enabled,
       :encryption_type,
       :key_arn,
@@ -604,6 +633,7 @@ module Aws::ConnectCampaignsV2
     #   Amazon Resource Names(ARN)
     #   @return [String]
     class EventTrigger < Struct.new(
+      nil,
       :customer_profiles_domain_arn,
       keyword_init: true
     )
@@ -618,6 +648,7 @@ module Aws::ConnectCampaignsV2
     #   A predefined code indicating the error that caused the failure in getting state of campaigns
     #   @return [String]
     class FailedCampaignStateResponse < Struct.new(
+      nil,
       :campaign_id,
       :failure_code,
       keyword_init: true
@@ -636,6 +667,7 @@ module Aws::ConnectCampaignsV2
     #   Predefined code indicating the error that caused the failure
     #   @return [String]
     class FailedProfileOutboundRequest < Struct.new(
+      nil,
       :client_token,
       :id,
       :failure_code,
@@ -655,6 +687,7 @@ module Aws::ConnectCampaignsV2
     #   A predefined code indicating the error that caused the failure.
     #   @return [String]
     class FailedRequest < Struct.new(
+      nil,
       :client_token,
       :id,
       :failure_code,
@@ -668,6 +701,7 @@ module Aws::ConnectCampaignsV2
     #   List of CampaignId
     #   @return [Array<String>]
     class GetCampaignStateBatchRequest < Struct.new(
+      nil,
       :campaign_ids,
       keyword_init: true
     )
@@ -682,6 +716,7 @@ module Aws::ConnectCampaignsV2
     #   List of failed requests of campaign state
     #   @return [Array<Types::FailedCampaignStateResponse>]
     class GetCampaignStateBatchResponse < Struct.new(
+      nil,
       :successful_requests,
       :failed_requests,
       keyword_init: true
@@ -694,6 +729,7 @@ module Aws::ConnectCampaignsV2
     #   Identifier representing a Campaign
     #   @return [String]
     class GetCampaignStateRequest < Struct.new(
+      nil,
       :id,
       keyword_init: true
     )
@@ -705,6 +741,7 @@ module Aws::ConnectCampaignsV2
     #   State of a campaign
     #   @return [String]
     class GetCampaignStateResponse < Struct.new(
+      nil,
       :state,
       keyword_init: true
     )
@@ -716,6 +753,7 @@ module Aws::ConnectCampaignsV2
     #   Amazon Connect Instance Id
     #   @return [String]
     class GetConnectInstanceConfigRequest < Struct.new(
+      nil,
       :connect_instance_id,
       keyword_init: true
     )
@@ -727,6 +765,7 @@ module Aws::ConnectCampaignsV2
     #   Instance config object
     #   @return [Types::InstanceConfig]
     class GetConnectInstanceConfigResponse < Struct.new(
+      nil,
       :connect_instance_config,
       keyword_init: true
     )
@@ -738,6 +777,7 @@ module Aws::ConnectCampaignsV2
     #   Amazon Connect Instance Id
     #   @return [String]
     class GetInstanceCommunicationLimitsRequest < Struct.new(
+      nil,
       :connect_instance_id,
       keyword_init: true
     )
@@ -749,6 +789,7 @@ module Aws::ConnectCampaignsV2
     #   Instance Communication limits config
     #   @return [Types::InstanceCommunicationLimitsConfig]
     class GetInstanceCommunicationLimitsResponse < Struct.new(
+      nil,
       :communication_limits_config,
       keyword_init: true
     )
@@ -760,6 +801,7 @@ module Aws::ConnectCampaignsV2
     #   Amazon Connect Instance Id
     #   @return [String]
     class GetInstanceOnboardingJobStatusRequest < Struct.new(
+      nil,
       :connect_instance_id,
       keyword_init: true
     )
@@ -771,6 +813,7 @@ module Aws::ConnectCampaignsV2
     #   Instance onboarding job status object
     #   @return [Types::InstanceOnboardingJobStatus]
     class GetInstanceOnboardingJobStatusResponse < Struct.new(
+      nil,
       :connect_instance_onboarding_job_status,
       keyword_init: true
     )
@@ -782,6 +825,7 @@ module Aws::ConnectCampaignsV2
     #   Communication limits
     #   @return [Types::CommunicationLimits]
     class InstanceCommunicationLimitsConfig < Struct.new(
+      nil,
       :all_channel_subtypes,
       keyword_init: true
     )
@@ -802,6 +846,7 @@ module Aws::ConnectCampaignsV2
     #   KMS is only type supported
     #   @return [Types::EncryptionConfig]
     class InstanceConfig < Struct.new(
+      nil,
       :connect_instance_id,
       :service_linked_role_arn,
       :encryption_config,
@@ -818,6 +863,7 @@ module Aws::ConnectCampaignsV2
     #   Operators for Connect instance identifier filter
     #   @return [String]
     class InstanceIdFilter < Struct.new(
+      nil,
       :value,
       :operator,
       keyword_init: true
@@ -836,6 +882,7 @@ module Aws::ConnectCampaignsV2
     #   Enumeration of the possible failure codes for instance onboarding job
     #   @return [String]
     class InstanceOnboardingJobStatus < Struct.new(
+      nil,
       :connect_instance_id,
       :status,
       :failure_code,
@@ -911,6 +958,7 @@ module Aws::ConnectCampaignsV2
     #   A header that defines the error encountered while processing the request.
     #   @return [String]
     class InternalServerException < Struct.new(
+      nil,
       :message,
       :x_amz_error_type,
       keyword_init: true
@@ -928,6 +976,7 @@ module Aws::ConnectCampaignsV2
     #   A header that defines the error encountered while processing the request.
     #   @return [String]
     class InvalidCampaignStateException < Struct.new(
+      nil,
       :state,
       :message,
       :x_amz_error_type,
@@ -943,6 +992,7 @@ module Aws::ConnectCampaignsV2
     #   A header that defines the error encountered while processing the request.
     #   @return [String]
     class InvalidStateException < Struct.new(
+      nil,
       :message,
       :x_amz_error_type,
       keyword_init: true
@@ -961,6 +1011,7 @@ module Aws::ConnectCampaignsV2
     #   Filter model by type
     #   @return [Types::CampaignFilters]
     class ListCampaignsRequest < Struct.new(
+      nil,
       :max_results,
       :next_token,
       :filters,
@@ -977,6 +1028,7 @@ module Aws::ConnectCampaignsV2
     #   A list of Amazon Connect campaigns.
     #   @return [Array<Types::CampaignSummary>]
     class ListCampaignsResponse < Struct.new(
+      nil,
       :next_token,
       :campaign_summary_list,
       keyword_init: true
@@ -995,6 +1047,7 @@ module Aws::ConnectCampaignsV2
     #   The token for the next set of results.
     #   @return [String]
     class ListConnectInstanceIntegrationsRequest < Struct.new(
+      nil,
       :connect_instance_id,
       :max_results,
       :next_token,
@@ -1011,6 +1064,7 @@ module Aws::ConnectCampaignsV2
     #   A list of Amazon Connect Instance Integrations.
     #   @return [Array<Types::IntegrationSummary>]
     class ListConnectInstanceIntegrationsResponse < Struct.new(
+      nil,
       :next_token,
       :integration_summary_list,
       keyword_init: true
@@ -1023,6 +1077,7 @@ module Aws::ConnectCampaignsV2
     #   Amazon Resource Names(ARN)
     #   @return [String]
     class ListTagsForResourceRequest < Struct.new(
+      nil,
       :arn,
       keyword_init: true
     )
@@ -1034,6 +1089,7 @@ module Aws::ConnectCampaignsV2
     #   Tag map with key and value.
     #   @return [Hash<String, String>]
     class ListTagsForResourceResponse < Struct.new(
+      nil,
       :tags,
       keyword_init: true
     )
@@ -1048,6 +1104,7 @@ module Aws::ConnectCampaignsV2
     #   Local TimeZone Detection method list
     #   @return [Array<String>]
     class LocalTimeZoneConfig < Struct.new(
+      nil,
       :default_time_zone,
       :local_time_zone_detection,
       keyword_init: true
@@ -1081,6 +1138,7 @@ module Aws::ConnectCampaignsV2
     #   ChannelSubtypeParameters for an outbound request
     #   @return [Types::ChannelSubtypeParameters]
     class OutboundRequest < Struct.new(
+      nil,
       :client_token,
       :expiration_time,
       :channel_subtype_parameters,
@@ -1094,6 +1152,7 @@ module Aws::ConnectCampaignsV2
     #   Identifier representing a Campaign
     #   @return [String]
     class PauseCampaignRequest < Struct.new(
+      nil,
       :id,
       keyword_init: true
     )
@@ -1105,6 +1164,7 @@ module Aws::ConnectCampaignsV2
     #   The bandwidth allocation of a queue resource.
     #   @return [Float]
     class PredictiveConfig < Struct.new(
+      nil,
       :bandwidth_allocation,
       keyword_init: true
     )
@@ -1122,6 +1182,7 @@ module Aws::ConnectCampaignsV2
     #   Timestamp with no UTC offset or timezone
     #   @return [Time]
     class ProfileOutboundRequest < Struct.new(
+      nil,
       :client_token,
       :profile_id,
       :expiration_time,
@@ -1135,6 +1196,7 @@ module Aws::ConnectCampaignsV2
     #   The bandwidth allocation of a queue resource.
     #   @return [Float]
     class ProgressiveConfig < Struct.new(
+      nil,
       :bandwidth_allocation,
       keyword_init: true
     )
@@ -1149,6 +1211,7 @@ module Aws::ConnectCampaignsV2
     #   Integration config for Connect Instance
     #   @return [Types::IntegrationConfig]
     class PutConnectInstanceIntegrationRequest < Struct.new(
+      nil,
       :connect_instance_id,
       :integration_config,
       keyword_init: true
@@ -1164,6 +1227,7 @@ module Aws::ConnectCampaignsV2
     #   Instance Communication limits config
     #   @return [Types::InstanceCommunicationLimitsConfig]
     class PutInstanceCommunicationLimitsRequest < Struct.new(
+      nil,
       :connect_instance_id,
       :communication_limits_config,
       keyword_init: true
@@ -1179,6 +1243,7 @@ module Aws::ConnectCampaignsV2
     #   A list of outbound requests.
     #   @return [Array<Types::OutboundRequest>]
     class PutOutboundRequestBatchRequest < Struct.new(
+      nil,
       :id,
       :outbound_requests,
       keyword_init: true
@@ -1194,6 +1259,7 @@ module Aws::ConnectCampaignsV2
     #   A list of failed requests.
     #   @return [Array<Types::FailedRequest>]
     class PutOutboundRequestBatchResponse < Struct.new(
+      nil,
       :successful_requests,
       :failed_requests,
       keyword_init: true
@@ -1209,6 +1275,7 @@ module Aws::ConnectCampaignsV2
     #   List of profile outbound requests
     #   @return [Array<Types::ProfileOutboundRequest>]
     class PutProfileOutboundRequestBatchRequest < Struct.new(
+      nil,
       :id,
       :profile_outbound_requests,
       keyword_init: true
@@ -1224,6 +1291,7 @@ module Aws::ConnectCampaignsV2
     #   List of failed profile outbound requests
     #   @return [Array<Types::FailedProfileOutboundRequest>]
     class PutProfileOutboundRequestBatchResponse < Struct.new(
+      nil,
       :successful_requests,
       :failed_requests,
       keyword_init: true
@@ -1236,6 +1304,7 @@ module Aws::ConnectCampaignsV2
     #   Amazon Resource Names(ARN)
     #   @return [String]
     class QConnectIntegrationConfig < Struct.new(
+      nil,
       :knowledge_base_arn,
       keyword_init: true
     )
@@ -1247,6 +1316,7 @@ module Aws::ConnectCampaignsV2
     #   Amazon Resource Names(ARN)
     #   @return [String]
     class QConnectIntegrationIdentifier < Struct.new(
+      nil,
       :knowledge_base_arn,
       keyword_init: true
     )
@@ -1258,6 +1328,7 @@ module Aws::ConnectCampaignsV2
     #   Amazon Resource Names(ARN)
     #   @return [String]
     class QConnectIntegrationSummary < Struct.new(
+      nil,
       :knowledge_base_arn,
       keyword_init: true
     )
@@ -1271,6 +1342,7 @@ module Aws::ConnectCampaignsV2
     #   A header that defines the error encountered while processing the request.
     #   @return [String]
     class ResourceNotFoundException < Struct.new(
+      nil,
       :message,
       :x_amz_error_type,
       keyword_init: true
@@ -1289,6 +1361,7 @@ module Aws::ConnectCampaignsV2
     #   Date in ISO 8601 format, e.g. 2024-01-01
     #   @return [String]
     class RestrictedPeriod < Struct.new(
+      nil,
       :name,
       :start_date,
       :end_date,
@@ -1317,6 +1390,7 @@ module Aws::ConnectCampaignsV2
     #   Identifier representing a Campaign
     #   @return [String]
     class ResumeCampaignRequest < Struct.new(
+      nil,
       :id,
       keyword_init: true
     )
@@ -1334,6 +1408,7 @@ module Aws::ConnectCampaignsV2
     #   Time duration in ISO 8601 format
     #   @return [String]
     class Schedule < Struct.new(
+      nil,
       :start_time,
       :end_time,
       :refresh_frequency,
@@ -1349,6 +1424,7 @@ module Aws::ConnectCampaignsV2
     #   A header that defines the error encountered while processing the request.
     #   @return [String]
     class ServiceQuotaExceededException < Struct.new(
+      nil,
       :message,
       :x_amz_error_type,
       keyword_init: true
@@ -1367,6 +1443,7 @@ module Aws::ConnectCampaignsV2
     #   Default SMS Outbound config
     #   @return [Types::SmsOutboundConfig]
     class SmsChannelSubtypeConfig < Struct.new(
+      nil,
       :capacity,
       :outbound_mode,
       :default_outbound_config,
@@ -1389,6 +1466,7 @@ module Aws::ConnectCampaignsV2
     #   A custom key-value pair using an attribute map. The attributes are standard Amazon Connect attributes, and can be accessed in contact flows just like any other contact attributes.
     #   @return [Hash<String, String>]
     class SmsChannelSubtypeParameters < Struct.new(
+      nil,
       :destination_phone_number,
       :connect_source_phone_number_arn,
       :template_arn,
@@ -1406,6 +1484,7 @@ module Aws::ConnectCampaignsV2
     #   Amazon Resource Names(ARN)
     #   @return [String]
     class SmsOutboundConfig < Struct.new(
+      nil,
       :connect_source_phone_number_arn,
       :wisdom_template_arn,
       keyword_init: true
@@ -1453,6 +1532,7 @@ module Aws::ConnectCampaignsV2
     #   Identifier representing a Campaign
     #   @return [String]
     class StartCampaignRequest < Struct.new(
+      nil,
       :id,
       keyword_init: true
     )
@@ -1470,6 +1550,7 @@ module Aws::ConnectCampaignsV2
     #   KMS is only type supported
     #   @return [Types::EncryptionConfig]
     class StartInstanceOnboardingJobRequest < Struct.new(
+      nil,
       :connect_instance_id,
       :encryption_config,
       keyword_init: true
@@ -1482,6 +1563,7 @@ module Aws::ConnectCampaignsV2
     #   Instance onboarding job status object
     #   @return [Types::InstanceOnboardingJobStatus]
     class StartInstanceOnboardingJobResponse < Struct.new(
+      nil,
       :connect_instance_onboarding_job_status,
       keyword_init: true
     )
@@ -1493,6 +1575,7 @@ module Aws::ConnectCampaignsV2
     #   Identifier representing a Campaign
     #   @return [String]
     class StopCampaignRequest < Struct.new(
+      nil,
       :id,
       keyword_init: true
     )
@@ -1507,6 +1590,7 @@ module Aws::ConnectCampaignsV2
     #   State of a campaign
     #   @return [String]
     class SuccessfulCampaignStateResponse < Struct.new(
+      nil,
       :campaign_id,
       :state,
       keyword_init: true
@@ -1522,6 +1606,7 @@ module Aws::ConnectCampaignsV2
     #   Identifier of the profile outbound request
     #   @return [String]
     class SuccessfulProfileOutboundRequest < Struct.new(
+      nil,
       :client_token,
       :id,
       keyword_init: true
@@ -1537,6 +1622,7 @@ module Aws::ConnectCampaignsV2
     #   Identifier representing a Dial request
     #   @return [String]
     class SuccessfulRequest < Struct.new(
+      nil,
       :client_token,
       :id,
       keyword_init: true
@@ -1552,6 +1638,7 @@ module Aws::ConnectCampaignsV2
     #   Tag map with key and value.
     #   @return [Hash<String, String>]
     class TagResourceRequest < Struct.new(
+      nil,
       :arn,
       :tags,
       keyword_init: true
@@ -1573,6 +1660,7 @@ module Aws::ConnectCampaignsV2
     #   Default Telephony Outbound config
     #   @return [Types::TelephonyOutboundConfig]
     class TelephonyChannelSubtypeConfig < Struct.new(
+      nil,
       :capacity,
       :connect_queue_id,
       :outbound_mode,
@@ -1596,6 +1684,7 @@ module Aws::ConnectCampaignsV2
     #   Answering Machine Detection config
     #   @return [Types::AnswerMachineDetectionConfig]
     class TelephonyChannelSubtypeParameters < Struct.new(
+      nil,
       :destination_phone_number,
       :attributes,
       :connect_source_phone_number,
@@ -1616,6 +1705,7 @@ module Aws::ConnectCampaignsV2
     #   Answering Machine Detection config
     #   @return [Types::AnswerMachineDetectionConfig]
     class TelephonyOutboundConfig < Struct.new(
+      nil,
       :connect_contact_flow_id,
       :connect_source_phone_number,
       :answer_machine_detection_config,
@@ -1656,6 +1746,7 @@ module Aws::ConnectCampaignsV2
     #   A header that defines the error encountered while processing the request.
     #   @return [String]
     class ThrottlingException < Struct.new(
+      nil,
       :message,
       :x_amz_error_type,
       keyword_init: true
@@ -1671,6 +1762,7 @@ module Aws::ConnectCampaignsV2
     #   Time in ISO 8601 format, e.g. T23:11
     #   @return [String]
     class TimeRange < Struct.new(
+      nil,
       :start_time,
       :end_time,
       keyword_init: true
@@ -1686,6 +1778,7 @@ module Aws::ConnectCampaignsV2
     #   Restricted period config
     #   @return [Types::RestrictedPeriods]
     class TimeWindow < Struct.new(
+      nil,
       :open_hours,
       :restricted_periods,
       keyword_init: true
@@ -1701,6 +1794,7 @@ module Aws::ConnectCampaignsV2
     #   List of tag keys.
     #   @return [Array<String>]
     class UntagResourceRequest < Struct.new(
+      nil,
       :arn,
       :tag_keys,
       keyword_init: true
@@ -1716,6 +1810,7 @@ module Aws::ConnectCampaignsV2
     #   Campaign Channel Subtype config
     #   @return [Types::ChannelSubtypeConfig]
     class UpdateCampaignChannelSubtypeConfigRequest < Struct.new(
+      nil,
       :id,
       :channel_subtype_config,
       keyword_init: true
@@ -1731,6 +1826,7 @@ module Aws::ConnectCampaignsV2
     #   Communication limits config
     #   @return [Types::CommunicationLimitsConfig]
     class UpdateCampaignCommunicationLimitsRequest < Struct.new(
+      nil,
       :id,
       :communication_limits_override,
       keyword_init: true
@@ -1746,6 +1842,7 @@ module Aws::ConnectCampaignsV2
     #   Campaign communication time config
     #   @return [Types::CommunicationTimeConfig]
     class UpdateCampaignCommunicationTimeRequest < Struct.new(
+      nil,
       :id,
       :communication_time_config,
       keyword_init: true
@@ -1761,6 +1858,7 @@ module Aws::ConnectCampaignsV2
     #   Amazon Resource Names(ARN)
     #   @return [String]
     class UpdateCampaignFlowAssociationRequest < Struct.new(
+      nil,
       :id,
       :connect_campaign_flow_arn,
       keyword_init: true
@@ -1776,6 +1874,7 @@ module Aws::ConnectCampaignsV2
     #   The name of an Amazon Connect Campaign name.
     #   @return [String]
     class UpdateCampaignNameRequest < Struct.new(
+      nil,
       :id,
       :name,
       keyword_init: true
@@ -1791,6 +1890,7 @@ module Aws::ConnectCampaignsV2
     #   Campaign schedule
     #   @return [Types::Schedule]
     class UpdateCampaignScheduleRequest < Struct.new(
+      nil,
       :id,
       :schedule,
       keyword_init: true
@@ -1806,6 +1906,7 @@ module Aws::ConnectCampaignsV2
     #   Source of the campaign
     #   @return [Types::Source]
     class UpdateCampaignSourceRequest < Struct.new(
+      nil,
       :id,
       :source,
       keyword_init: true
@@ -1820,6 +1921,7 @@ module Aws::ConnectCampaignsV2
     #   A header that defines the error encountered while processing the request.
     #   @return [String]
     class ValidationException < Struct.new(
+      nil,
       :message,
       :x_amz_error_type,
       keyword_init: true

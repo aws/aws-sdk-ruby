@@ -10,6 +10,7 @@ module Aws::BCMDashboards
     # @!attribute message
     #   @return [String]
     class AccessDeniedException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -33,6 +34,7 @@ module Aws::BCMDashboards
     #   <p>The filter expression to be applied to the cost and usage data.</p>
     #   @return [Types::Expression]
     class CostAndUsageQuery < Struct.new(
+      nil,
       :metrics,
       :time_range,
       :granularity,
@@ -54,6 +56,7 @@ module Aws::BCMDashboards
     #   <p>The match options for cost category values, such as <code>EQUALS</code>, <code>CONTAINS</code>, <code>STARTS_WITH</code>, or <code>ENDS_WITH</code>.</p>
     #   @return [Array<String>]
     class CostCategoryValues < Struct.new(
+      nil,
       :key,
       :values,
       :match_options,
@@ -75,6 +78,7 @@ module Aws::BCMDashboards
     #   <p>The tags to apply to the dashboard resource for organization and management.</p>
     #   @return [Array<Types::ResourceTag>]
     class CreateDashboardRequest < Struct.new(
+      nil,
       :name,
       :description,
       :widgets,
@@ -88,6 +92,7 @@ module Aws::BCMDashboards
     #   <p>The ARN of the newly created dashboard.</p>
     #   @return [String]
     class CreateDashboardResponse < Struct.new(
+      nil,
       :arn,
       keyword_init: true
     )
@@ -114,6 +119,7 @@ module Aws::BCMDashboards
     #   <p>The timestamp when the dashboard was last modified.</p>
     #   @return [Time]
     class DashboardReference < Struct.new(
+      nil,
       :arn,
       :name,
       :description,
@@ -133,6 +139,7 @@ module Aws::BCMDashboards
     #   <p>The end time of the date range for querying data.</p>
     #   @return [Types::DateTimeValue]
     class DateTimeRange < Struct.new(
+      nil,
       :start_time,
       :end_time,
       keyword_init: true
@@ -148,6 +155,7 @@ module Aws::BCMDashboards
     #   <p>The actual date/time value.</p>
     #   @return [String]
     class DateTimeValue < Struct.new(
+      nil,
       :type,
       :value,
       keyword_init: true
@@ -159,6 +167,7 @@ module Aws::BCMDashboards
     #   <p>The ARN of the dashboard to be deleted.</p>
     #   @return [String]
     class DeleteDashboardRequest < Struct.new(
+      nil,
       :arn,
       keyword_init: true
     )
@@ -169,6 +178,7 @@ module Aws::BCMDashboards
     #   <p>The ARN of the dashboard that was deleted.</p>
     #   @return [String]
     class DeleteDashboardResponse < Struct.new(
+      nil,
       :arn,
       keyword_init: true
     )
@@ -186,6 +196,7 @@ module Aws::BCMDashboards
     #   <p>The match options for dimension values, such as <code>EQUALS</code>, <code>CONTAINS</code>, <code>STARTS_WITH</code>, or <code>ENDS_WITH</code>.</p>
     #   @return [Array<String>]
     class DimensionValues < Struct.new(
+      nil,
       :key,
       :values,
       :match_options,
@@ -234,6 +245,7 @@ module Aws::BCMDashboards
     #   <p>The cost category values to include in the filter expression.</p>
     #   @return [Types::CostCategoryValues]
     class Expression < Struct.new(
+      nil,
       :or,
       :and,
       :not,
@@ -249,6 +261,7 @@ module Aws::BCMDashboards
     #   <p>The ARN of the dashboard to retrieve. This is required to uniquely identify the dashboard.</p>
     #   @return [String]
     class GetDashboardRequest < Struct.new(
+      nil,
       :arn,
       keyword_init: true
     )
@@ -277,6 +290,7 @@ module Aws::BCMDashboards
     #   <p>The timestamp when the dashboard was last modified.</p>
     #   @return [Time]
     class GetDashboardResponse < Struct.new(
+      nil,
       :arn,
       :name,
       :description,
@@ -293,6 +307,7 @@ module Aws::BCMDashboards
     #   <p>The ARN of the dashboard whose resource-based policy you want to retrieve.</p>
     #   @return [String]
     class GetResourcePolicyRequest < Struct.new(
+      nil,
       :resource_arn,
       keyword_init: true
     )
@@ -306,6 +321,7 @@ module Aws::BCMDashboards
     #   <p>The JSON policy document that represents the dashboard's resource-based policy.</p>
     #   @return [String]
     class GetResourcePolicyResponse < Struct.new(
+      nil,
       :resource_arn,
       :policy_document,
       keyword_init: true
@@ -318,6 +334,7 @@ module Aws::BCMDashboards
     #   <p>The type of visualization to use for the data.</p>
     #   @return [String]
     class GraphDisplayConfig < Struct.new(
+      nil,
       :visual_type,
       keyword_init: true
     )
@@ -332,6 +349,7 @@ module Aws::BCMDashboards
     #   <p>The type of grouping to apply.</p>
     #   @return [String]
     class GroupDefinition < Struct.new(
+      nil,
       :key,
       :type,
       keyword_init: true
@@ -348,6 +366,7 @@ module Aws::BCMDashboards
     # @!attribute message
     #   @return [String]
     class InternalServerException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -361,6 +380,7 @@ module Aws::BCMDashboards
     #   <p>The token for the next page of results. Use the value returned in the previous response.</p>
     #   @return [String]
     class ListDashboardsRequest < Struct.new(
+      nil,
       :max_results,
       :next_token,
       keyword_init: true
@@ -375,6 +395,7 @@ module Aws::BCMDashboards
     #   <p>The token to use to retrieve the next page of results. Not returned if there are no more results to retrieve.</p>
     #   @return [String]
     class ListDashboardsResponse < Struct.new(
+      nil,
       :dashboards,
       :next_token,
       keyword_init: true
@@ -386,6 +407,7 @@ module Aws::BCMDashboards
     #   <p>The unique identifier for the resource.</p>
     #   @return [String]
     class ListTagsForResourceRequest < Struct.new(
+      nil,
       :resource_arn,
       keyword_init: true
     )
@@ -396,6 +418,7 @@ module Aws::BCMDashboards
     #   <p>The list of tags associated with the specified dashboard resource.</p>
     #   @return [Array<Types::ResourceTag>]
     class ListTagsForResourceResponse < Struct.new(
+      nil,
       :resource_tags,
       keyword_init: true
     )
@@ -454,6 +477,7 @@ module Aws::BCMDashboards
     #   <p>The coverage metrics to include in the results.</p> <note> <p>Valid values for ReservationCoverageQuery metrics are <code>Hour</code>, <code>Unit</code>, and <code>Cost</code>.</p> </note>
     #   @return [Array<String>]
     class ReservationCoverageQuery < Struct.new(
+      nil,
       :time_range,
       :group_by,
       :granularity,
@@ -478,6 +502,7 @@ module Aws::BCMDashboards
     #   <p>Defines complex filtering conditions using logical operators (<code>AND</code>, <code>OR</code>, <code>NOT</code>) and various filter types.</p>
     #   @return [Types::Expression]
     class ReservationUtilizationQuery < Struct.new(
+      nil,
       :time_range,
       :group_by,
       :granularity,
@@ -491,6 +516,7 @@ module Aws::BCMDashboards
     # @!attribute message
     #   @return [String]
     class ResourceNotFoundException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -505,6 +531,7 @@ module Aws::BCMDashboards
     #   <p>The value of the tag to be attached to the dashboard resource.</p>
     #   @return [String]
     class ResourceTag < Struct.new(
+      nil,
       :key,
       :value,
       keyword_init: true
@@ -529,6 +556,7 @@ module Aws::BCMDashboards
     #   <p>Defines complex filtering conditions using logical operators (<code>AND</code>, <code>OR</code>, <code>NOT</code>) and various filter types.</p>
     #   @return [Types::Expression]
     class SavingsPlansCoverageQuery < Struct.new(
+      nil,
       :time_range,
       :metrics,
       :granularity,
@@ -550,6 +578,7 @@ module Aws::BCMDashboards
     #   <p>Defines complex filtering conditions using logical operators (<code>AND</code>, <code>OR</code>, <code>NOT</code>) and various filter types.</p>
     #   @return [Types::Expression]
     class SavingsPlansUtilizationQuery < Struct.new(
+      nil,
       :time_range,
       :granularity,
       :filter,
@@ -562,6 +591,7 @@ module Aws::BCMDashboards
     # @!attribute message
     #   @return [String]
     class ServiceQuotaExceededException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -570,6 +600,7 @@ module Aws::BCMDashboards
 
     # <p>Configuration structure for customizing the tabular display of widget data.</p>
     class TableDisplayConfigStruct < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -582,6 +613,7 @@ module Aws::BCMDashboards
     #   <p>The tags to add to the dashboard resource.</p>
     #   @return [Array<Types::ResourceTag>]
     class TagResourceRequest < Struct.new(
+      nil,
       :resource_arn,
       :resource_tags,
       keyword_init: true
@@ -590,6 +622,7 @@ module Aws::BCMDashboards
     end
 
     class TagResourceResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -606,6 +639,7 @@ module Aws::BCMDashboards
     #   <p>The match options for tag values, such as <code>EQUALS</code>, <code>CONTAINS</code>, <code>STARTS_WITH</code>, or <code>ENDS_WITH</code>.</p>
     #   @return [Array<String>]
     class TagValues < Struct.new(
+      nil,
       :key,
       :values,
       :match_options,
@@ -618,6 +652,7 @@ module Aws::BCMDashboards
     # @!attribute message
     #   @return [String]
     class ThrottlingException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -631,6 +666,7 @@ module Aws::BCMDashboards
     #   <p>The keys of the tags to remove from the dashboard resource.</p>
     #   @return [Array<String>]
     class UntagResourceRequest < Struct.new(
+      nil,
       :resource_arn,
       :resource_tag_keys,
       keyword_init: true
@@ -639,6 +675,7 @@ module Aws::BCMDashboards
     end
 
     class UntagResourceResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -657,6 +694,7 @@ module Aws::BCMDashboards
     #   <p>The updated array of widget configurations for the dashboard. Replaces all existing widgets.</p>
     #   @return [Array<Types::Widget>]
     class UpdateDashboardRequest < Struct.new(
+      nil,
       :arn,
       :name,
       :description,
@@ -670,6 +708,7 @@ module Aws::BCMDashboards
     #   <p>The ARN of the updated dashboard.</p>
     #   @return [String]
     class UpdateDashboardResponse < Struct.new(
+      nil,
       :arn,
       keyword_init: true
     )
@@ -680,6 +719,7 @@ module Aws::BCMDashboards
     # @!attribute message
     #   @return [String]
     class ValidationException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -706,6 +746,7 @@ module Aws::BCMDashboards
     #   <p>An array of configurations that define the data queries and display settings for the widget.</p>
     #   @return [Array<Types::WidgetConfig>]
     class Widget < Struct.new(
+      nil,
       :title,
       :description,
       :width,
@@ -732,6 +773,7 @@ module Aws::BCMDashboards
     #   <p>The configuration that determines how the retrieved data should be visualized in the widget.</p>
     #   @return [Types::DisplayConfig]
     class WidgetConfig < Struct.new(
+      nil,
       :query_parameters,
       :display_config,
       keyword_init: true

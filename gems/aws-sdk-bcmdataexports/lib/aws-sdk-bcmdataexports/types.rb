@@ -18,6 +18,7 @@ module Aws::BCMDataExports
     #   <p>The description for a column.</p>
     #   @return [String]
     class Column < Struct.new(
+      nil,
       :name,
       :type,
       :description,
@@ -35,6 +36,7 @@ module Aws::BCMDataExports
     #         key and a value, and each key must be unique for the resource.</p>
     #   @return [Array<Types::ResourceTag>]
     class CreateExportRequest < Struct.new(
+      nil,
       :export,
       :resource_tags,
       keyword_init: true
@@ -46,6 +48,7 @@ module Aws::BCMDataExports
     #   <p>The Amazon Resource Name (ARN) for this export.</p>
     #   @return [String]
     class CreateExportResponse < Struct.new(
+      nil,
       :export_arn,
       keyword_init: true
     )
@@ -60,6 +63,7 @@ module Aws::BCMDataExports
     #   <p>The table configuration.</p>
     #   @return [Hash<String, Hash<String, String>>]
     class DataQuery < Struct.new(
+      nil,
       :query_statement,
       :table_configurations,
       keyword_init: true
@@ -71,6 +75,7 @@ module Aws::BCMDataExports
     #   <p>The Amazon Resource Name (ARN) for this export.</p>
     #   @return [String]
     class DeleteExportRequest < Struct.new(
+      nil,
       :export_arn,
       keyword_init: true
     )
@@ -81,6 +86,7 @@ module Aws::BCMDataExports
     #   <p>The Amazon Resource Name (ARN) for this export.</p>
     #   @return [String]
     class DeleteExportResponse < Struct.new(
+      nil,
       :export_arn,
       keyword_init: true
     )
@@ -92,6 +98,7 @@ module Aws::BCMDataExports
     #   <p>An object that describes the destination of the data exports file.</p>
     #   @return [Types::S3Destination]
     class DestinationConfigurations < Struct.new(
+      nil,
       :s3_destination,
       keyword_init: true
     )
@@ -106,6 +113,7 @@ module Aws::BCMDataExports
     #   <p>The status of this specific execution.</p>
     #   @return [Types::ExecutionStatus]
     class ExecutionReference < Struct.new(
+      nil,
       :execution_id,
       :execution_status,
       keyword_init: true
@@ -130,6 +138,7 @@ module Aws::BCMDataExports
     #   <p>The time when the execution was last updated.</p>
     #   @return [Time]
     class ExecutionStatus < Struct.new(
+      nil,
       :status_code,
       :status_reason,
       :created_at,
@@ -160,6 +169,7 @@ module Aws::BCMDataExports
     #   <p>The cadence for Amazon Web Services to update the export in your S3 bucket.</p>
     #   @return [Types::RefreshCadence]
     class Export < Struct.new(
+      nil,
       :export_arn,
       :name,
       :description,
@@ -182,6 +192,7 @@ module Aws::BCMDataExports
     #   <p>The status of this specific data export.</p>
     #   @return [Types::ExportStatus]
     class ExportReference < Struct.new(
+      nil,
       :export_arn,
       :export_name,
       :export_status,
@@ -207,6 +218,7 @@ module Aws::BCMDataExports
     #   <p>The timestamp of when the export was last generated.</p>
     #   @return [Time]
     class ExportStatus < Struct.new(
+      nil,
       :status_code,
       :status_reason,
       :created_at,
@@ -225,6 +237,7 @@ module Aws::BCMDataExports
     #   <p>The ID for this specific execution.</p>
     #   @return [String]
     class GetExecutionRequest < Struct.new(
+      nil,
       :export_arn,
       :execution_id,
       keyword_init: true
@@ -244,6 +257,7 @@ module Aws::BCMDataExports
     #   <p>The status of this specific execution.</p>
     #   @return [Types::ExecutionStatus]
     class GetExecutionResponse < Struct.new(
+      nil,
       :execution_id,
       :export,
       :execution_status,
@@ -256,6 +270,7 @@ module Aws::BCMDataExports
     #   <p>The Amazon Resource Name (ARN) for this export.</p>
     #   @return [String]
     class GetExportRequest < Struct.new(
+      nil,
       :export_arn,
       keyword_init: true
     )
@@ -269,6 +284,7 @@ module Aws::BCMDataExports
     #   <p>The status of this specific export.</p>
     #   @return [Types::ExportStatus]
     class GetExportResponse < Struct.new(
+      nil,
       :export,
       :export_status,
       keyword_init: true
@@ -286,6 +302,7 @@ module Aws::BCMDataExports
     #         specified.</p>
     #   @return [Hash<String, String>]
     class GetTableRequest < Struct.new(
+      nil,
       :table_name,
       :table_properties,
       keyword_init: true
@@ -309,6 +326,7 @@ module Aws::BCMDataExports
     #   <p>The schema of the table.</p>
     #   @return [Array<Types::Column>]
     class GetTableResponse < Struct.new(
+      nil,
       :table_name,
       :description,
       :table_properties,
@@ -323,6 +341,7 @@ module Aws::BCMDataExports
     # @!attribute message
     #   @return [String]
     class InternalServerException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -339,6 +358,7 @@ module Aws::BCMDataExports
     #   <p>The token to retrieve the next set of results.</p>
     #   @return [String]
     class ListExecutionsRequest < Struct.new(
+      nil,
       :export_arn,
       :max_results,
       :next_token,
@@ -354,6 +374,7 @@ module Aws::BCMDataExports
     #   <p>The token to retrieve the next set of results.</p>
     #   @return [String]
     class ListExecutionsResponse < Struct.new(
+      nil,
       :executions,
       :next_token,
       keyword_init: true
@@ -368,6 +389,7 @@ module Aws::BCMDataExports
     #   <p>The token to retrieve the next set of results.</p>
     #   @return [String]
     class ListExportsRequest < Struct.new(
+      nil,
       :max_results,
       :next_token,
       keyword_init: true
@@ -382,6 +404,7 @@ module Aws::BCMDataExports
     #   <p>The token to retrieve the next set of results.</p>
     #   @return [String]
     class ListExportsResponse < Struct.new(
+      nil,
       :exports,
       :next_token,
       keyword_init: true
@@ -396,6 +419,7 @@ module Aws::BCMDataExports
     #   <p>The maximum number of objects that are returned for the request.</p>
     #   @return [Integer]
     class ListTablesRequest < Struct.new(
+      nil,
       :next_token,
       :max_results,
       keyword_init: true
@@ -410,6 +434,7 @@ module Aws::BCMDataExports
     #   <p>The token to retrieve the next set of results.</p>
     #   @return [String]
     class ListTablesResponse < Struct.new(
+      nil,
       :tables,
       :next_token,
       keyword_init: true
@@ -427,6 +452,7 @@ module Aws::BCMDataExports
     #   <p>The token to retrieve the next set of results.</p>
     #   @return [String]
     class ListTagsForResourceRequest < Struct.new(
+      nil,
       :resource_arn,
       :max_results,
       :next_token,
@@ -443,6 +469,7 @@ module Aws::BCMDataExports
     #   <p>The token to retrieve the next set of results.</p>
     #   @return [String]
     class ListTagsForResourceResponse < Struct.new(
+      nil,
       :resource_tags,
       :next_token,
       keyword_init: true
@@ -456,6 +483,7 @@ module Aws::BCMDataExports
     #         data updates, up to three times daily.</p>
     #   @return [String]
     class RefreshCadence < Struct.new(
+      nil,
       :frequency,
       keyword_init: true
     )
@@ -472,6 +500,7 @@ module Aws::BCMDataExports
     #   <p>The type of the resource that was not found.</p>
     #   @return [String]
     class ResourceNotFoundException < Struct.new(
+      nil,
       :message,
       :resource_id,
       :resource_type,
@@ -488,6 +517,7 @@ module Aws::BCMDataExports
     #   <p>The value that's associated with the tag.</p>
     #   @return [String]
     class ResourceTag < Struct.new(
+      nil,
       :key,
       :value,
       keyword_init: true
@@ -510,6 +540,7 @@ module Aws::BCMDataExports
     #   <p>The output configuration for the data export.</p>
     #   @return [Types::S3OutputConfigurations]
     class S3Destination < Struct.new(
+      nil,
       :s3_bucket,
       :s3_prefix,
       :s3_region,
@@ -536,6 +567,7 @@ module Aws::BCMDataExports
     #         you to track the changes in cost and usage data over time.</p>
     #   @return [String]
     class S3OutputConfigurations < Struct.new(
+      nil,
       :output_type,
       :format,
       :compression,
@@ -563,6 +595,7 @@ module Aws::BCMDataExports
     #         “AWSBillingAndCostManagementDataExports”.</p>
     #   @return [String]
     class ServiceQuotaExceededException < Struct.new(
+      nil,
       :message,
       :resource_id,
       :resource_type,
@@ -584,6 +617,7 @@ module Aws::BCMDataExports
     #   <p>The properties for the table.</p>
     #   @return [Array<Types::TablePropertyDescription>]
     class Table < Struct.new(
+      nil,
       :table_name,
       :description,
       :table_properties,
@@ -606,6 +640,7 @@ module Aws::BCMDataExports
     #   <p>The description for the table.</p>
     #   @return [String]
     class TablePropertyDescription < Struct.new(
+      nil,
       :name,
       :valid_values,
       :default_value,
@@ -623,6 +658,7 @@ module Aws::BCMDataExports
     #         key must be unique for the resource.</p>
     #   @return [Array<Types::ResourceTag>]
     class TagResourceRequest < Struct.new(
+      nil,
       :resource_arn,
       :resource_tags,
       keyword_init: true
@@ -631,6 +667,7 @@ module Aws::BCMDataExports
     end
 
     class TagResourceResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -647,6 +684,7 @@ module Aws::BCMDataExports
     #         “AWSBillingAndCostManagementDataExports”.</p>
     #   @return [String]
     class ThrottlingException < Struct.new(
+      nil,
       :message,
       :quota_code,
       :service_code,
@@ -662,6 +700,7 @@ module Aws::BCMDataExports
     #   <p>The tag keys that are associated with the resource ARN.</p>
     #   @return [Array<String>]
     class UntagResourceRequest < Struct.new(
+      nil,
       :resource_arn,
       :resource_tag_keys,
       keyword_init: true
@@ -670,6 +709,7 @@ module Aws::BCMDataExports
     end
 
     class UntagResourceResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -682,6 +722,7 @@ module Aws::BCMDataExports
     #   <p>The name and query details for the export.</p>
     #   @return [Types::Export]
     class UpdateExportRequest < Struct.new(
+      nil,
       :export_arn,
       :export,
       keyword_init: true
@@ -693,6 +734,7 @@ module Aws::BCMDataExports
     #   <p>The Amazon Resource Name (ARN) for this export.</p>
     #   @return [String]
     class UpdateExportResponse < Struct.new(
+      nil,
       :export_arn,
       keyword_init: true
     )
@@ -710,6 +752,7 @@ module Aws::BCMDataExports
     #   <p>The list of fields that are invalid.</p>
     #   @return [Array<Types::ValidationExceptionField>]
     class ValidationException < Struct.new(
+      nil,
       :message,
       :reason,
       :fields,
@@ -727,6 +770,7 @@ module Aws::BCMDataExports
     #   <p>A message with the reason for the validation exception error.</p>
     #   @return [String]
     class ValidationExceptionField < Struct.new(
+      nil,
       :name,
       :message,
       keyword_init: true

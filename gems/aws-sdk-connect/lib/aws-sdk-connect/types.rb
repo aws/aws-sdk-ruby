@@ -10,6 +10,7 @@ module Aws::Connect
     # @!attribute message
     #   @return [String]
     class AccessDeniedException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -21,6 +22,7 @@ module Aws::Connect
     #   <p>The action type.</p>
     #   @return [String]
     class ActionSummary < Struct.new(
+      nil,
       :action_type,
       keyword_init: true
     )
@@ -38,6 +40,7 @@ module Aws::Connect
     #      latest version of the evaluation form is activated.</p>
     #   @return [Integer]
     class ActivateEvaluationFormRequest < Struct.new(
+      nil,
       :instance_id,
       :evaluation_form_id,
       :evaluation_form_version,
@@ -56,6 +59,7 @@ module Aws::Connect
     #   <p>A version of the evaluation form.</p>
     #   @return [Integer]
     class ActivateEvaluationFormResponse < Struct.new(
+      nil,
       :evaluation_form_id,
       :evaluation_form_arn,
       :evaluation_form_version,
@@ -77,6 +81,7 @@ module Aws::Connect
     #   <p>List of additional CC email recipients for an email contact.</p>
     #   @return [Array<Types::EmailRecipient>]
     class AdditionalEmailRecipients < Struct.new(
+      nil,
       :to_list,
       :cc_list,
       keyword_init: true
@@ -89,6 +94,7 @@ module Aws::Connect
     #   <p>Information about traffic distributions.</p>
     #   @return [Array<Types::Distribution>]
     class AgentConfig < Struct.new(
+      nil,
       :distributions,
       keyword_init: true
     )
@@ -124,6 +130,7 @@ module Aws::Connect
     #   <p>Contains information about a queue resource for which metrics are returned.</p>
     #   @return [Types::QueueReference]
     class AgentContactReference < Struct.new(
+      nil,
       :contact_id,
       :channel,
       :initiation_method,
@@ -141,6 +148,7 @@ module Aws::Connect
     #   <p>The Amazon Resource Name (ARN) of the group.</p>
     #   @return [String]
     class AgentHierarchyGroup < Struct.new(
+      nil,
       :arn,
       keyword_init: true
     )
@@ -166,6 +174,7 @@ module Aws::Connect
     #   <p>The identifiers for level 5 hierarchy groups.</p>
     #   @return [Array<String>]
     class AgentHierarchyGroups < Struct.new(
+      nil,
       :l1_ids,
       :l2_ids,
       :l3_ids,
@@ -219,6 +228,7 @@ module Aws::Connect
     #   <p>List of <code>StateTransition</code> for a supervisor.</p>
     #   @return [Array<Types::StateTransition>]
     class AgentInfo < Struct.new(
+      nil,
       :id,
       :connected_to_agent_timestamp,
       :agent_pause_duration_in_seconds,
@@ -240,6 +250,7 @@ module Aws::Connect
     #   <p>Information about the audio quality of the Agent</p>
     #   @return [Types::AudioQualityMetricsInfo]
     class AgentQualityMetrics < Struct.new(
+      nil,
       :audio,
       keyword_init: true
     )
@@ -278,6 +289,7 @@ module Aws::Connect
     #   <p>The Amazon Web Services Region where this resource was last modified.</p>
     #   @return [String]
     class AgentStatus < Struct.new(
+      nil,
       :agent_status_arn,
       :agent_status_id,
       :name,
@@ -301,6 +313,7 @@ module Aws::Connect
     #   <p>The identifier of the agent status.</p>
     #   @return [String]
     class AgentStatusIdentifier < Struct.new(
+      nil,
       :arn,
       :id,
       keyword_init: true
@@ -319,6 +332,7 @@ module Aws::Connect
     #   <p>The name of the agent status.</p>
     #   @return [String]
     class AgentStatusReference < Struct.new(
+      nil,
       :status_start_timestamp,
       :status_arn,
       :status_name,
@@ -349,6 +363,7 @@ module Aws::Connect
     #            </note>
     #   @return [Types::StringCondition]
     class AgentStatusSearchCriteria < Struct.new(
+      nil,
       :or_conditions,
       :and_conditions,
       :string_condition,
@@ -373,6 +388,7 @@ module Aws::Connect
     #            </ul>
     #   @return [Types::ControlPlaneAttributeFilter]
     class AgentStatusSearchFilter < Struct.new(
+      nil,
       :attribute_filter,
       keyword_init: true
     )
@@ -399,6 +415,7 @@ module Aws::Connect
     #   <p>The Amazon Web Services Region where this resource was last modified.</p>
     #   @return [String]
     class AgentStatusSummary < Struct.new(
+      nil,
       :id,
       :arn,
       :name,
@@ -417,6 +434,7 @@ module Aws::Connect
     #   <p>An object to specify a list of agents, by user ID.</p>
     #   @return [Array<String>]
     class AgentsCriteria < Struct.new(
+      nil,
       :agent_ids,
       keyword_init: true
     )
@@ -431,6 +449,7 @@ module Aws::Connect
     #   <p>Information about the agent's video sharing capabilities.</p>
     #   @return [Types::ParticipantCapabilities]
     class AllowedCapabilities < Struct.new(
+      nil,
       :customer,
       :agent,
       keyword_init: true
@@ -458,6 +477,7 @@ module Aws::Connect
     #   <p>The Amazon Web Services Resource Access Manager status of association.</p>
     #   @return [String]
     class AnalyticsDataAssociationResult < Struct.new(
+      nil,
       :data_set_id,
       :target_account_id,
       :resource_share_id,
@@ -477,6 +497,7 @@ module Aws::Connect
     #   <p>The name of the dataset.</p>
     #   @return [String]
     class AnalyticsDataSetsResult < Struct.new(
+      nil,
       :data_set_id,
       :data_set_name,
       keyword_init: true
@@ -494,6 +515,7 @@ module Aws::Connect
     #   <p>Wait for the answering machine prompt.</p>
     #   @return [Boolean]
     class AnswerMachineDetectionConfig < Struct.new(
+      nil,
       :enable_answer_machine_detection,
       :await_answer_machine_prompt,
       keyword_init: true
@@ -517,6 +539,7 @@ module Aws::Connect
     #      permission is supported.</p>
     #   @return [Array<String>]
     class Application < Struct.new(
+      nil,
       :namespace,
       :application_permissions,
       keyword_init: true
@@ -531,6 +554,7 @@ module Aws::Connect
     #          <p>
     #             <code>RuleName</code> is used as <code>ContactCategory</code>.</p>
     class AssignContactCategoryActionDefinition < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -544,6 +568,7 @@ module Aws::Connect
     #   <p>The SLA configuration for Case SLA Assignment.</p>
     #   @return [Types::CaseSlaConfiguration]
     class AssignSlaActionDefinition < Struct.new(
+      nil,
       :sla_assignment_type,
       :case_sla_configuration,
       keyword_init: true
@@ -562,6 +587,7 @@ module Aws::Connect
     #      the Amazon Connect instance. If not specified, by default this value is the Amazon Web Services account that has the Amazon Connect instance.</p>
     #   @return [String]
     class AssociateAnalyticsDataSetRequest < Struct.new(
+      nil,
       :instance_id,
       :data_set_id,
       :target_account_id,
@@ -583,6 +609,7 @@ module Aws::Connect
     #   <p>The Amazon Resource Name (ARN) of the Resource Access Manager share. </p>
     #   @return [String]
     class AssociateAnalyticsDataSetResponse < Struct.new(
+      nil,
       :data_set_id,
       :target_account_id,
       :resource_share_id,
@@ -605,6 +632,7 @@ module Aws::Connect
     #               <a href="https://aws.amazon.com/builders-library/making-retries-safe-with-idempotent-APIs/">Making retries safe with idempotent APIs</a>.</p>
     #   @return [String]
     class AssociateApprovedOriginRequest < Struct.new(
+      nil,
       :instance_id,
       :origin,
       :client_token,
@@ -629,6 +657,7 @@ module Aws::Connect
     #               <a href="https://aws.amazon.com/builders-library/making-retries-safe-with-idempotent-APIs/">Making retries safe with idempotent APIs</a>.</p>
     #   @return [String]
     class AssociateBotRequest < Struct.new(
+      nil,
       :instance_id,
       :lex_bot,
       :lex_v2_bot,
@@ -648,6 +677,7 @@ module Aws::Connect
     #   <p>The identifier for the user. This can be the ID or the ARN of the user.</p>
     #   @return [String]
     class AssociateContactWithUserRequest < Struct.new(
+      nil,
       :instance_id,
       :contact_id,
       :user_id,
@@ -657,6 +687,7 @@ module Aws::Connect
     end
 
     class AssociateContactWithUserResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -674,6 +705,7 @@ module Aws::Connect
     #   <p>The identifier of the custom vocabulary. If this is empty, the default is set to none.</p>
     #   @return [String]
     class AssociateDefaultVocabularyRequest < Struct.new(
+      nil,
       :instance_id,
       :language_code,
       :vocabulary_id,
@@ -683,6 +715,7 @@ module Aws::Connect
     end
 
     class AssociateDefaultVocabularyResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -713,6 +746,7 @@ module Aws::Connect
     #   <p>A valid resource type.</p>
     #   @return [String]
     class AssociateFlowRequest < Struct.new(
+      nil,
       :instance_id,
       :resource_id,
       :flow_id,
@@ -723,6 +757,7 @@ module Aws::Connect
     end
 
     class AssociateFlowResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -763,6 +798,7 @@ module Aws::Connect
     #               <a href="https://aws.amazon.com/builders-library/making-retries-safe-with-idempotent-APIs/">Making retries safe with idempotent APIs</a>.</p>
     #   @return [String]
     class AssociateInstanceStorageConfigRequest < Struct.new(
+      nil,
       :instance_id,
       :resource_type,
       :storage_config,
@@ -776,6 +812,7 @@ module Aws::Connect
     #   <p>The existing association identifier that uniquely identifies the resource type and storage config for the given instance ID.</p>
     #   @return [String]
     class AssociateInstanceStorageConfigResponse < Struct.new(
+      nil,
       :association_id,
       keyword_init: true
     )
@@ -796,6 +833,7 @@ module Aws::Connect
     #               <a href="https://aws.amazon.com/builders-library/making-retries-safe-with-idempotent-APIs/">Making retries safe with idempotent APIs</a>.</p>
     #   @return [String]
     class AssociateLambdaFunctionRequest < Struct.new(
+      nil,
       :instance_id,
       :function_arn,
       :client_token,
@@ -817,6 +855,7 @@ module Aws::Connect
     #               <a href="https://aws.amazon.com/builders-library/making-retries-safe-with-idempotent-APIs/">Making retries safe with idempotent APIs</a>.</p>
     #   @return [String]
     class AssociateLexBotRequest < Struct.new(
+      nil,
       :instance_id,
       :lex_bot,
       :client_token,
@@ -835,6 +874,7 @@ module Aws::Connect
     #   <p>The identifier of the flow.</p>
     #   @return [String]
     class AssociatePhoneNumberContactFlowRequest < Struct.new(
+      nil,
       :phone_number_id,
       :instance_id,
       :contact_flow_id,
@@ -853,6 +893,7 @@ module Aws::Connect
     #   <p>The quick connects to associate with this queue.</p>
     #   @return [Array<String>]
     class AssociateQueueQuickConnectsRequest < Struct.new(
+      nil,
       :instance_id,
       :queue_id,
       :quick_connect_ids,
@@ -874,6 +915,7 @@ module Aws::Connect
     #   <p>The manual assignment queues to associate with this routing profile.</p>
     #   @return [Array<Types::RoutingProfileManualAssignmentQueueConfig>]
     class AssociateRoutingProfileQueuesRequest < Struct.new(
+      nil,
       :instance_id,
       :routing_profile_id,
       :queue_configs,
@@ -896,6 +938,7 @@ module Aws::Connect
     #               <a href="https://aws.amazon.com/builders-library/making-retries-safe-with-idempotent-APIs/">Making retries safe with idempotent APIs</a>.</p>
     #   @return [String]
     class AssociateSecurityKeyRequest < Struct.new(
+      nil,
       :instance_id,
       :key,
       :client_token,
@@ -908,6 +951,7 @@ module Aws::Connect
     #   <p>The existing association identifier that uniquely identifies the resource type and storage config for the given instance ID.</p>
     #   @return [String]
     class AssociateSecurityKeyResponse < Struct.new(
+      nil,
       :association_id,
       keyword_init: true
     )
@@ -925,6 +969,7 @@ module Aws::Connect
     #   <p>The identifier of the Amazon Connect instance. You can <a href="https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html">find the instance ID</a> in the Amazon Resource Name (ARN) of the instance.</p>
     #   @return [String]
     class AssociateTrafficDistributionGroupUserRequest < Struct.new(
+      nil,
       :traffic_distribution_group_id,
       :user_id,
       :instance_id,
@@ -934,6 +979,7 @@ module Aws::Connect
     end
 
     class AssociateTrafficDistributionGroupUserResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -950,6 +996,7 @@ module Aws::Connect
     #   <p>The proficiencies to associate with the user.</p>
     #   @return [Array<Types::UserProficiency>]
     class AssociateUserProficienciesRequest < Struct.new(
+      nil,
       :instance_id,
       :user_id,
       :user_proficiencies,
@@ -989,6 +1036,7 @@ module Aws::Connect
     #   <p>How the contact reached your contact center.</p>
     #   @return [String]
     class AssociatedContactSummary < Struct.new(
+      nil,
       :contact_id,
       :contact_arn,
       :initiation_timestamp,
@@ -1042,6 +1090,7 @@ module Aws::Connect
     #       "Tags": {"key1":"value1", "key2":"value2"} }</code>.</p>
     #   @return [Hash<String, String>]
     class AttachedFile < Struct.new(
+      nil,
       :creation_time,
       :file_arn,
       :file_id,
@@ -1069,6 +1118,7 @@ module Aws::Connect
     #   <p>The unique identifier of the attached file resource.</p>
     #   @return [String]
     class AttachedFileError < Struct.new(
+      nil,
       :error_code,
       :error_message,
       :file_id,
@@ -1092,6 +1142,7 @@ module Aws::Connect
     #   <p>The Amazon Resource Name (ARN) of the attachment reference.</p>
     #   @return [String]
     class AttachmentReference < Struct.new(
+      nil,
       :name,
       :value,
       :status,
@@ -1109,6 +1160,7 @@ module Aws::Connect
     #   <p>The join token used by the Amazon Chime SDK attendee.</p>
     #   @return [String]
     class Attendee < Struct.new(
+      nil,
       :attendee_id,
       :join_token,
       keyword_init: true
@@ -1124,6 +1176,7 @@ module Aws::Connect
     #   <p>The value of the attribute.</p>
     #   @return [String]
     class Attribute < Struct.new(
+      nil,
       :attribute_type,
       :value,
       keyword_init: true
@@ -1140,6 +1193,7 @@ module Aws::Connect
     #   <p>A leaf node condition which can be used to specify a hierarchy group condition.</p>
     #   @return [Types::HierarchyGroupCondition]
     class AttributeAndCondition < Struct.new(
+      nil,
       :tag_conditions,
       :hierarchy_group_condition,
       keyword_init: true
@@ -1167,6 +1221,7 @@ module Aws::Connect
     #   <p>The operator of the condition.</p>
     #   @return [String]
     class AttributeCondition < Struct.new(
+      nil,
       :name,
       :value,
       :proficiency_level,
@@ -1183,6 +1238,7 @@ module Aws::Connect
     #   <p>Makes echo reduction available to clients who connect to the meeting.</p>
     #   @return [String]
     class AudioFeatures < Struct.new(
+      nil,
       :echo_reduction,
       keyword_init: true
     )
@@ -1201,6 +1257,7 @@ module Aws::Connect
     #            </p>
     #   @return [Array<String>]
     class AudioQualityMetricsInfo < Struct.new(
+      nil,
       :quality_score,
       :potential_quality_issues,
       keyword_init: true
@@ -1270,6 +1327,7 @@ module Aws::Connect
     #       Guide</i>.</p>
     #   @return [Integer]
     class AuthenticationProfile < Struct.new(
+      nil,
       :id,
       :arn,
       :name,
@@ -1317,6 +1375,7 @@ module Aws::Connect
     #      modified.</p>
     #   @return [String]
     class AuthenticationProfileSummary < Struct.new(
+      nil,
       :id,
       :arn,
       :name,
@@ -1344,6 +1403,7 @@ module Aws::Connect
     #   <p>The type of phone number.</p>
     #   @return [String]
     class AvailableNumberSummary < Struct.new(
+      nil,
       :phone_number,
       :phone_number_country_code,
       :phone_number_type,
@@ -1363,6 +1423,7 @@ module Aws::Connect
     #      the Amazon Connect instance. If not specified, by default this value is the Amazon Web Services account that has the Amazon Connect instance.</p>
     #   @return [String]
     class BatchAssociateAnalyticsDataSetRequest < Struct.new(
+      nil,
       :instance_id,
       :data_set_ids,
       :target_account_id,
@@ -1381,6 +1442,7 @@ module Aws::Connect
     #      account.</p>
     #   @return [Array<Types::ErrorResult>]
     class BatchAssociateAnalyticsDataSetResponse < Struct.new(
+      nil,
       :created,
       :errors,
       keyword_init: true
@@ -1399,6 +1461,7 @@ module Aws::Connect
     #      the Amazon Connect instance. If not specified, by default this value is the Amazon Web Services account that has the Amazon Connect instance.</p>
     #   @return [String]
     class BatchDisassociateAnalyticsDataSetRequest < Struct.new(
+      nil,
       :instance_id,
       :data_set_ids,
       :target_account_id,
@@ -1414,6 +1477,7 @@ module Aws::Connect
     #   <p>A list of errors for any datasets not successfully removed.</p>
     #   @return [Array<Types::ErrorResult>]
     class BatchDisassociateAnalyticsDataSetResponse < Struct.new(
+      nil,
       :deleted,
       :errors,
       keyword_init: true
@@ -1435,6 +1499,7 @@ module Aws::Connect
     #            </note>
     #   @return [String]
     class BatchGetAttachedFileMetadataRequest < Struct.new(
+      nil,
       :file_ids,
       :instance_id,
       :associated_resource_arn,
@@ -1450,6 +1515,7 @@ module Aws::Connect
     #   <p>List of errors of attached files that could not be retrieved. </p>
     #   @return [Array<Types::AttachedFileError>]
     class BatchGetAttachedFileMetadataResponse < Struct.new(
+      nil,
       :files,
       :errors,
       keyword_init: true
@@ -1479,6 +1545,7 @@ module Aws::Connect
     #   <p>The type of resource association.</p>
     #   @return [String]
     class BatchGetFlowAssociationRequest < Struct.new(
+      nil,
       :instance_id,
       :resource_ids,
       :resource_type,
@@ -1491,6 +1558,7 @@ module Aws::Connect
     #   <p>Information about flow associations.</p>
     #   @return [Array<Types::FlowAssociationSummary>]
     class BatchGetFlowAssociationResponse < Struct.new(
+      nil,
       :flow_association_summary_list,
       keyword_init: true
     )
@@ -1510,6 +1578,7 @@ module Aws::Connect
     #   <p>List of individual contact requests.</p>
     #   @return [Array<Types::ContactDataRequest>]
     class BatchPutContactRequest < Struct.new(
+      nil,
       :client_token,
       :instance_id,
       :contact_data_request_list,
@@ -1525,6 +1594,7 @@ module Aws::Connect
     #   <p>List of requests for which contact creation failed.</p>
     #   @return [Array<Types::FailedRequest>]
     class BatchPutContactResponse < Struct.new(
+      nil,
       :successful_request_list,
       :failed_request_list,
       keyword_init: true
@@ -1537,6 +1607,7 @@ module Aws::Connect
     #   <p>A unique identifier for a campaign.</p>
     #   @return [String]
     class Campaign < Struct.new(
+      nil,
       :campaign_id,
       keyword_init: true
     )
@@ -1562,6 +1633,7 @@ module Aws::Connect
     #   <p>Target duration in minutes within which an SLA should be completed.</p>
     #   @return [Integer]
     class CaseSlaConfiguration < Struct.new(
+      nil,
       :name,
       :type,
       :field_id,
@@ -1600,6 +1672,7 @@ module Aws::Connect
     #   <p>The time for an agent to respond after obtaining a chat contact.</p>
     #   @return [Integer]
     class ChatContactMetrics < Struct.new(
+      nil,
       :multi_party,
       :total_messages,
       :total_bot_messages,
@@ -1659,6 +1732,7 @@ module Aws::Connect
     #            </ul>
     #   @return [String]
     class ChatEvent < Struct.new(
+      nil,
       :type,
       :content_type,
       :content,
@@ -1691,6 +1765,7 @@ module Aws::Connect
     #            </ul>
     #   @return [String]
     class ChatMessage < Struct.new(
+      nil,
       :content_type,
       :content,
       keyword_init: true
@@ -1709,6 +1784,7 @@ module Aws::Connect
     #   <p>Information about customer interactions in a contact.</p>
     #   @return [Types::ParticipantMetrics]
     class ChatMetrics < Struct.new(
+      nil,
       :chat_contact_metrics,
       :agent_metrics,
       :customer_metrics,
@@ -1723,6 +1799,7 @@ module Aws::Connect
     #      Duplicate entries error out the request with a 400.</p>
     #   @return [Array<Types::ParticipantTimerConfiguration>]
     class ChatParticipantRoleConfig < Struct.new(
+      nil,
       :participant_timer_config_list,
       keyword_init: true
     )
@@ -1735,6 +1812,7 @@ module Aws::Connect
     #      to publish real-time message streaming for chat conversations.</p>
     #   @return [String]
     class ChatStreamingConfiguration < Struct.new(
+      nil,
       :streaming_endpoint_arn,
       keyword_init: true
     )
@@ -1768,6 +1846,7 @@ module Aws::Connect
     #            </p>
     #   @return [String]
     class ClaimPhoneNumberRequest < Struct.new(
+      nil,
       :target_arn,
       :instance_id,
       :phone_number,
@@ -1786,6 +1865,7 @@ module Aws::Connect
     #   <p>The Amazon Resource Name (ARN) of the phone number.</p>
     #   @return [String]
     class ClaimPhoneNumberResponse < Struct.new(
+      nil,
       :phone_number_id,
       :phone_number_arn,
       keyword_init: true
@@ -1859,6 +1939,7 @@ module Aws::Connect
     #      Messaging.</p>
     #   @return [String]
     class ClaimedPhoneNumberSummary < Struct.new(
+      nil,
       :phone_number_id,
       :phone_number_arn,
       :phone_number,
@@ -1881,6 +1962,7 @@ module Aws::Connect
     #   <p>A leaf node condition which can be used to specify a tag condition.</p>
     #   @return [Array<Types::TagCondition>]
     class CommonAttributeAndCondition < Struct.new(
+      nil,
       :tag_conditions,
       keyword_init: true
     )
@@ -1902,6 +1984,7 @@ module Aws::Connect
     #            </note>
     #   @return [String]
     class CompleteAttachedFileUploadRequest < Struct.new(
+      nil,
       :instance_id,
       :file_id,
       :associated_resource_arn,
@@ -1912,6 +1995,7 @@ module Aws::Connect
 
     # Response from CompleteAttachedFileUpload API
     class CompleteAttachedFileUploadResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1930,6 +2014,7 @@ module Aws::Connect
     #   <p>A leaf node condition which can be used to specify a numeric condition.</p>
     #   @return [Types::NumberCondition]
     class Condition < Struct.new(
+      nil,
       :string_condition,
       :number_condition,
       keyword_init: true
@@ -1941,6 +2026,7 @@ module Aws::Connect
     # @!attribute message
     #   @return [String]
     class ConditionalOperationFailedException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -1952,6 +2038,7 @@ module Aws::Connect
     # @!attribute message
     #   @return [String]
     class ConflictException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -1966,6 +2053,7 @@ module Aws::Connect
     #   <p>A meeting created using the Amazon Chime SDK.</p>
     #   @return [Types::Meeting]
     class ConnectionData < Struct.new(
+      nil,
       :attendee,
       :meeting,
       keyword_init: true
@@ -2134,6 +2222,7 @@ module Aws::Connect
     #   <p>The attributes of the contact.</p>
     #   @return [Hash<String, String>]
     class Contact < Struct.new(
+      nil,
       :arn,
       :id,
       :initial_contact_id,
@@ -2187,6 +2276,7 @@ module Aws::Connect
     #   <p>Search criteria based on transcript analyzed by Amazon Connect Contact Lens.</p>
     #   @return [Types::Transcript]
     class ContactAnalysis < Struct.new(
+      nil,
       :transcript,
       keyword_init: true
     )
@@ -2209,6 +2299,7 @@ module Aws::Connect
     #       <code>False</code>.</p>
     #   @return [Boolean]
     class ContactConfiguration < Struct.new(
+      nil,
       :contact_id,
       :participant_role,
       :include_raw_message,
@@ -2244,6 +2335,7 @@ module Aws::Connect
     #   <p>Structure to store information associated with a campaign.</p>
     #   @return [Types::Campaign]
     class ContactDataRequest < Struct.new(
+      nil,
       :system_endpoint,
       :customer_endpoint,
       :request_identifier,
@@ -2264,6 +2356,7 @@ module Aws::Connect
     #   <p>Teh description of the contact details.</p>
     #   @return [String]
     class ContactDetails < Struct.new(
+      nil,
       :name,
       :description,
       keyword_init: true
@@ -2295,6 +2388,7 @@ module Aws::Connect
     #   <p>The path where evaluation was exported.</p>
     #   @return [String]
     class ContactEvaluation < Struct.new(
+      nil,
       :form_id,
       :evaluation_arn,
       :status,
@@ -2313,6 +2407,7 @@ module Aws::Connect
     #   <p>A list of up to 9 <a href="https://docs.aws.amazon.com/connect/latest/adminguide/about-contact-states.html">contact states</a>.</p>
     #   @return [Array<String>]
     class ContactFilter < Struct.new(
+      nil,
       :contact_states,
       keyword_init: true
     )
@@ -2366,6 +2461,7 @@ module Aws::Connect
     #   <p>The region in which the flow was last modified</p>
     #   @return [String]
     class ContactFlow < Struct.new(
+      nil,
       :arn,
       :id,
       :name,
@@ -2412,6 +2508,7 @@ module Aws::Connect
     #   <p>The tags used to organize, track, or control access for this resource. For example, { "Tags": {"key1":"value1", "key2":"value2"} }.</p>
     #   @return [Hash<String, String>]
     class ContactFlowModule < Struct.new(
+      nil,
       :arn,
       :id,
       :name,
@@ -2444,6 +2541,7 @@ module Aws::Connect
     #   <p>The status of the flow.</p>
     #   @return [String]
     class ContactFlowModuleSearchCriteria < Struct.new(
+      nil,
       :or_conditions,
       :and_conditions,
       :string_condition,
@@ -2470,6 +2568,7 @@ module Aws::Connect
     #            </ul>
     #   @return [Types::ControlPlaneTagFilter]
     class ContactFlowModuleSearchFilter < Struct.new(
+      nil,
       :tag_filter,
       keyword_init: true
     )
@@ -2490,6 +2589,7 @@ module Aws::Connect
     #   <p>The type of flow module.</p>
     #   @return [String]
     class ContactFlowModuleSummary < Struct.new(
+      nil,
       :id,
       :arn,
       :name,
@@ -2503,6 +2603,7 @@ module Aws::Connect
     # @!attribute message
     #   @return [String]
     class ContactFlowNotPublishedException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -2531,6 +2632,7 @@ module Aws::Connect
     #   <p>The status of the flow.</p>
     #   @return [String]
     class ContactFlowSearchCriteria < Struct.new(
+      nil,
       :or_conditions,
       :and_conditions,
       :string_condition,
@@ -2558,6 +2660,7 @@ module Aws::Connect
     #            </ul>
     #   @return [Types::ControlPlaneTagFilter]
     class ContactFlowSearchFilter < Struct.new(
+      nil,
       :tag_filter,
       keyword_init: true
     )
@@ -2586,6 +2689,7 @@ module Aws::Connect
     #   <p>The status of the flow.</p>
     #   @return [String]
     class ContactFlowSummary < Struct.new(
+      nil,
       :id,
       :arn,
       :name,
@@ -2608,6 +2712,7 @@ module Aws::Connect
     #   <p>The identifier of the flow version.</p>
     #   @return [Integer]
     class ContactFlowVersionSummary < Struct.new(
+      nil,
       :arn,
       :version_description,
       :version,
@@ -2621,6 +2726,7 @@ module Aws::Connect
     #   <p>The name of the metric being retrieved in type String.</p>
     #   @return [String]
     class ContactMetricInfo < Struct.new(
+      nil,
       :name,
       keyword_init: true
     )
@@ -2635,6 +2741,7 @@ module Aws::Connect
     #   <p>Object result associated with the metric received.</p>
     #   @return [Types::ContactMetricValue]
     class ContactMetricResult < Struct.new(
+      nil,
       :name,
       :value,
       keyword_init: true
@@ -2662,6 +2769,7 @@ module Aws::Connect
     #   <p>The message.</p>
     #   @return [String]
     class ContactNotFoundException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -2718,6 +2826,7 @@ module Aws::Connect
     #   <p>Latest routing criteria on the contact.</p>
     #   @return [Types::RoutingCriteria]
     class ContactSearchSummary < Struct.new(
+      nil,
       :arn,
       :id,
       :initial_contact_id,
@@ -2745,6 +2854,7 @@ module Aws::Connect
     #   <p>The timestamp when the contact was connected to the agent.</p>
     #   @return [Time]
     class ContactSearchSummaryAgentInfo < Struct.new(
+      nil,
       :id,
       :connected_to_agent_timestamp,
       keyword_init: true
@@ -2760,6 +2870,7 @@ module Aws::Connect
     #   <p>The timestamp when the contact was added to the queue.</p>
     #   @return [Time]
     class ContactSearchSummaryQueueInfo < Struct.new(
+      nil,
       :id,
       :enqueue_timestamp,
       keyword_init: true
@@ -2777,6 +2888,7 @@ module Aws::Connect
     #   <p>The key and value of a segment attribute.</p>
     #   @return [Hash<String, Types::SegmentAttributeValue>]
     class ContactSearchSummarySegmentAttributeValue < Struct.new(
+      nil,
       :value_string,
       :value_map,
       keyword_init: true
@@ -2809,6 +2921,7 @@ module Aws::Connect
     #       BPO = 123</code>. </p>
     #   @return [Types::TagCondition]
     class ControlPlaneAttributeFilter < Struct.new(
+      nil,
       :or_conditions,
       :and_condition,
       :tag_condition,
@@ -2841,6 +2954,7 @@ module Aws::Connect
     #   <p>A leaf node condition which can be used to specify a tag condition. </p>
     #   @return [Types::TagCondition]
     class ControlPlaneTagFilter < Struct.new(
+      nil,
       :or_conditions,
       :and_conditions,
       :tag_condition,
@@ -2882,6 +2996,7 @@ module Aws::Connect
     #   <p>A leaf node condition which can be used to specify a hierarchy group condition.</p>
     #   @return [Types::HierarchyGroupCondition]
     class ControlPlaneUserAttributeFilter < Struct.new(
+      nil,
       :or_conditions,
       :and_condition,
       :tag_condition,
@@ -2910,6 +3025,7 @@ module Aws::Connect
     #   <p>The tags used to organize, track, or control access for this resource. For example, { "Tags": {"key1":"value1", "key2":"value2"} }.</p>
     #   @return [Hash<String, String>]
     class CreateAgentStatusRequest < Struct.new(
+      nil,
       :instance_id,
       :name,
       :description,
@@ -2928,6 +3044,7 @@ module Aws::Connect
     #   <p>The identifier of the agent status.</p>
     #   @return [String]
     class CreateAgentStatusResponse < Struct.new(
+      nil,
       :agent_status_arn,
       :agent_status_id,
       keyword_init: true
@@ -2943,6 +3060,7 @@ module Aws::Connect
     #   <p>A unique identifier of a template.</p>
     #   @return [String]
     class CreateCaseActionDefinition < Struct.new(
+      nil,
       :fields,
       :template_id,
       keyword_init: true
@@ -2973,6 +3091,7 @@ module Aws::Connect
     #               <a href="https://aws.amazon.com/builders-library/making-retries-safe-with-idempotent-APIs/">Making retries safe with idempotent APIs</a>.</p>
     #   @return [String]
     class CreateContactFlowModuleRequest < Struct.new(
+      nil,
       :instance_id,
       :name,
       :description,
@@ -2991,6 +3110,7 @@ module Aws::Connect
     #   <p>The Amazon Resource Name (ARN) of the flow module.</p>
     #   @return [String]
     class CreateContactFlowModuleResponse < Struct.new(
+      nil,
       :id,
       :arn,
       keyword_init: true
@@ -3026,6 +3146,7 @@ module Aws::Connect
     #   <p>The tags used to organize, track, or control access for this resource. For example, { "Tags": {"key1":"value1", "key2":"value2"} }.</p>
     #   @return [Hash<String, String>]
     class CreateContactFlowRequest < Struct.new(
+      nil,
       :instance_id,
       :name,
       :type,
@@ -3048,6 +3169,7 @@ module Aws::Connect
     #   <p>Indicates the checksum value of the latest published flow content.</p>
     #   @return [String]
     class CreateContactFlowResponse < Struct.new(
+      nil,
       :contact_flow_id,
       :contact_flow_arn,
       :flow_content_sha256,
@@ -3078,6 +3200,7 @@ module Aws::Connect
     #   <p>The Amazon Web Services Region where this resource was last modified.</p>
     #   @return [String]
     class CreateContactFlowVersionRequest < Struct.new(
+      nil,
       :instance_id,
       :description,
       :contact_flow_id,
@@ -3097,6 +3220,7 @@ module Aws::Connect
     #   <p>The identifier of the flow version.</p>
     #   @return [Integer]
     class CreateContactFlowVersionResponse < Struct.new(
+      nil,
       :contact_flow_arn,
       :version,
       keyword_init: true
@@ -3195,6 +3319,7 @@ module Aws::Connect
     #       Guide</i>.</p>
     #   @return [String]
     class CreateContactRequest < Struct.new(
+      nil,
       :instance_id,
       :client_token,
       :related_contact_id,
@@ -3221,6 +3346,7 @@ module Aws::Connect
     #   <p>The Amazon Resource Name (ARN) of the created contact.</p>
     #   @return [String]
     class CreateContactResponse < Struct.new(
+      nil,
       :contact_id,
       :contact_arn,
       keyword_init: true
@@ -3250,6 +3376,7 @@ module Aws::Connect
     #               <a href="https://aws.amazon.com/builders-library/making-retries-safe-with-idempotent-APIs/">Making retries safe with idempotent APIs</a>.</p>
     #   @return [String]
     class CreateEmailAddressRequest < Struct.new(
+      nil,
       :description,
       :instance_id,
       :email_address,
@@ -3268,6 +3395,7 @@ module Aws::Connect
     #   <p>The Amazon Resource Name (ARN) of the email address.</p>
     #   @return [String]
     class CreateEmailAddressResponse < Struct.new(
+      nil,
       :email_address_id,
       :email_address_arn,
       keyword_init: true
@@ -3297,6 +3425,7 @@ module Aws::Connect
     #               <a href="https://aws.amazon.com/builders-library/making-retries-safe-with-idempotent-APIs/">Making retries safe with idempotent APIs</a>.</p>
     #   @return [String]
     class CreateEvaluationFormRequest < Struct.new(
+      nil,
       :instance_id,
       :title,
       :description,
@@ -3315,6 +3444,7 @@ module Aws::Connect
     #   <p>The Amazon Resource Name (ARN) for the evaluation form resource.</p>
     #   @return [String]
     class CreateEvaluationFormResponse < Struct.new(
+      nil,
       :evaluation_form_id,
       :evaluation_form_arn,
       keyword_init: true
@@ -3345,6 +3475,7 @@ module Aws::Connect
     #   <p>The date until when the hours of operation override is effective.</p>
     #   @return [String]
     class CreateHoursOfOperationOverrideRequest < Struct.new(
+      nil,
       :instance_id,
       :hours_of_operation_id,
       :name,
@@ -3361,6 +3492,7 @@ module Aws::Connect
     #   <p>The identifier for the hours of operation override.</p>
     #   @return [String]
     class CreateHoursOfOperationOverrideResponse < Struct.new(
+      nil,
       :hours_of_operation_override_id,
       keyword_init: true
     )
@@ -3386,6 +3518,7 @@ module Aws::Connect
     #   <p>The tags used to organize, track, or control access for this resource. For example, { "Tags": {"key1":"value1", "key2":"value2"} }.</p>
     #   @return [Hash<String, String>]
     class CreateHoursOfOperationRequest < Struct.new(
+      nil,
       :instance_id,
       :name,
       :description,
@@ -3404,6 +3537,7 @@ module Aws::Connect
     #   <p>The Amazon Resource Name (ARN) for the hours of operation.</p>
     #   @return [String]
     class CreateHoursOfOperationResponse < Struct.new(
+      nil,
       :hours_of_operation_id,
       :hours_of_operation_arn,
       keyword_init: true
@@ -3434,6 +3568,7 @@ module Aws::Connect
     #       "tags": {"key1":"value1", "key2":"value2"} }</code>.</p>
     #   @return [Hash<String, String>]
     class CreateInstanceRequest < Struct.new(
+      nil,
       :client_token,
       :identity_management_type,
       :instance_alias,
@@ -3453,6 +3588,7 @@ module Aws::Connect
     #   <p>The Amazon Resource Name (ARN) of the instance.</p>
     #   @return [String]
     class CreateInstanceResponse < Struct.new(
+      nil,
       :id,
       :arn,
       keyword_init: true
@@ -3486,6 +3622,7 @@ module Aws::Connect
     #   <p>The tags used to organize, track, or control access for this resource. For example, { "Tags": {"key1":"value1", "key2":"value2"} }.</p>
     #   @return [Hash<String, String>]
     class CreateIntegrationAssociationRequest < Struct.new(
+      nil,
       :instance_id,
       :integration_type,
       :integration_arn,
@@ -3505,6 +3642,7 @@ module Aws::Connect
     #   <p>The Amazon Resource Name (ARN) for the association.</p>
     #   @return [String]
     class CreateIntegrationAssociationResponse < Struct.new(
+      nil,
       :integration_association_id,
       :integration_association_arn,
       keyword_init: true
@@ -3534,6 +3672,7 @@ module Aws::Connect
     #            </important>
     #   @return [Types::ParticipantDetailsToAdd]
     class CreateParticipantRequest < Struct.new(
+      nil,
       :instance_id,
       :contact_id,
       :client_token,
@@ -3552,6 +3691,7 @@ module Aws::Connect
     #      throughout the chat lifecycle.</p>
     #   @return [String]
     class CreateParticipantResponse < Struct.new(
+      nil,
       :participant_credentials,
       :participant_id,
       keyword_init: true
@@ -3671,6 +3811,7 @@ module Aws::Connect
     #               <a href="https://aws.amazon.com/builders-library/making-retries-safe-with-idempotent-APIs/">Making retries safe with idempotent APIs</a>.</p>
     #   @return [String]
     class CreatePersistentContactAssociationRequest < Struct.new(
+      nil,
       :instance_id,
       :initial_contact_id,
       :rehydration_type,
@@ -3686,6 +3827,7 @@ module Aws::Connect
     #      for persistent chat.</p>
     #   @return [String]
     class CreatePersistentContactAssociationResponse < Struct.new(
+      nil,
       :continued_from_contact_id,
       keyword_init: true
     )
@@ -3711,6 +3853,7 @@ module Aws::Connect
     #   how a predefined attribute should be displayed in the Amazon Connect admin website.</p>
     #   @return [Types::InputPredefinedAttributeConfiguration]
     class CreatePredefinedAttributeRequest < Struct.new(
+      nil,
       :instance_id,
       :name,
       :values,
@@ -3739,6 +3882,7 @@ module Aws::Connect
     #   <p>The tags used to organize, track, or control access for this resource. For example, { "Tags": {"key1":"value1", "key2":"value2"} }.</p>
     #   @return [Hash<String, String>]
     class CreatePromptRequest < Struct.new(
+      nil,
       :instance_id,
       :name,
       :description,
@@ -3756,6 +3900,7 @@ module Aws::Connect
     #   <p>A unique identifier for the prompt.</p>
     #   @return [String]
     class CreatePromptResponse < Struct.new(
+      nil,
       :prompt_arn,
       :prompt_id,
       keyword_init: true
@@ -3786,6 +3931,7 @@ module Aws::Connect
     #   <p>The contact configuration for push notification registration.</p>
     #   @return [Types::ContactConfiguration]
     class CreatePushNotificationRegistrationRequest < Struct.new(
+      nil,
       :instance_id,
       :client_token,
       :pinpoint_app_arn,
@@ -3801,6 +3947,7 @@ module Aws::Connect
     #   <p>The identifier for the registration.</p>
     #   @return [String]
     class CreatePushNotificationRegistrationResponse < Struct.new(
+      nil,
       :registration_id,
       keyword_init: true
     )
@@ -3835,6 +3982,7 @@ module Aws::Connect
     #   <p>The tags used to organize, track, or control access for this resource. For example, { "Tags": {"key1":"value1", "key2":"value2"} }.</p>
     #   @return [Hash<String, String>]
     class CreateQueueRequest < Struct.new(
+      nil,
       :instance_id,
       :name,
       :description,
@@ -3856,6 +4004,7 @@ module Aws::Connect
     #   <p>The identifier for the queue.</p>
     #   @return [String]
     class CreateQueueResponse < Struct.new(
+      nil,
       :queue_arn,
       :queue_id,
       keyword_init: true
@@ -3879,6 +4028,7 @@ module Aws::Connect
     #   <p>The tags used to organize, track, or control access for this resource. For example, { "Tags": {"key1":"value1", "key2":"value2"} }.</p>
     #   @return [Hash<String, String>]
     class CreateQuickConnectRequest < Struct.new(
+      nil,
       :instance_id,
       :name,
       :description,
@@ -3896,6 +4046,7 @@ module Aws::Connect
     #   <p>The identifier for the quick connect. </p>
     #   @return [String]
     class CreateQuickConnectResponse < Struct.new(
+      nil,
       :quick_connect_arn,
       :quick_connect_id,
       keyword_init: true
@@ -3945,6 +4096,7 @@ module Aws::Connect
     #       contact</i>. </p>
     #   @return [String]
     class CreateRoutingProfileRequest < Struct.new(
+      nil,
       :instance_id,
       :name,
       :description,
@@ -3966,6 +4118,7 @@ module Aws::Connect
     #   <p>The identifier of the routing profile.</p>
     #   @return [String]
     class CreateRoutingProfileResponse < Struct.new(
+      nil,
       :routing_profile_arn,
       :routing_profile_id,
       keyword_init: true
@@ -3998,6 +4151,7 @@ module Aws::Connect
     #               <a href="https://aws.amazon.com/builders-library/making-retries-safe-with-idempotent-APIs/">Making retries safe with idempotent APIs</a>.</p>
     #   @return [String]
     class CreateRuleRequest < Struct.new(
+      nil,
       :instance_id,
       :name,
       :trigger_event_source,
@@ -4017,6 +4171,7 @@ module Aws::Connect
     #   <p>A unique identifier for the rule.</p>
     #   @return [String]
     class CreateRuleResponse < Struct.new(
+      nil,
       :rule_arn,
       :rule_id,
       keyword_init: true
@@ -4060,6 +4215,7 @@ module Aws::Connect
     #      resources in Amazon Connect.</p>
     #   @return [String]
     class CreateSecurityProfileRequest < Struct.new(
+      nil,
       :security_profile_name,
       :description,
       :permissions,
@@ -4082,6 +4238,7 @@ module Aws::Connect
     #   <p>The Amazon Resource Name (ARN) for the security profile.</p>
     #   @return [String]
     class CreateSecurityProfileResponse < Struct.new(
+      nil,
       :security_profile_id,
       :security_profile_arn,
       keyword_init: true
@@ -4126,6 +4283,7 @@ module Aws::Connect
     #               <a href="https://aws.amazon.com/builders-library/making-retries-safe-with-idempotent-APIs/">Making retries safe with idempotent APIs</a>.</p>
     #   @return [String]
     class CreateTaskTemplateRequest < Struct.new(
+      nil,
       :instance_id,
       :name,
       :description,
@@ -4148,6 +4306,7 @@ module Aws::Connect
     #   <p>The Amazon Resource Name (ARN) for the task template resource.</p>
     #   @return [String]
     class CreateTaskTemplateResponse < Struct.new(
+      nil,
       :id,
       :arn,
       keyword_init: true
@@ -4175,6 +4334,7 @@ module Aws::Connect
     #   <p>The tags used to organize, track, or control access for this resource. For example, { "Tags": {"key1":"value1", "key2":"value2"} }.</p>
     #   @return [Hash<String, String>]
     class CreateTrafficDistributionGroupRequest < Struct.new(
+      nil,
       :name,
       :description,
       :instance_id,
@@ -4193,6 +4353,7 @@ module Aws::Connect
     #   <p>The Amazon Resource Name (ARN) of the traffic distribution group.</p>
     #   @return [String]
     class CreateTrafficDistributionGroupResponse < Struct.new(
+      nil,
       :id,
       :arn,
       keyword_init: true
@@ -4214,6 +4375,7 @@ module Aws::Connect
     #   <p>The tags used to organize, track, or control access for this resource. For example, { "Tags": {"key1":"value1", "key2":"value2"} }.</p>
     #   @return [Hash<String, String>]
     class CreateUseCaseRequest < Struct.new(
+      nil,
       :instance_id,
       :integration_association_id,
       :use_case_type,
@@ -4230,6 +4392,7 @@ module Aws::Connect
     #   <p>The Amazon Resource Name (ARN) for the use case.</p>
     #   @return [String]
     class CreateUseCaseResponse < Struct.new(
+      nil,
       :use_case_id,
       :use_case_arn,
       keyword_init: true
@@ -4251,6 +4414,7 @@ module Aws::Connect
     #   <p>The tags used to organize, track, or control access for this resource. For example, { "Tags": {"key1":"value1", "key2":"value2"} }.</p>
     #   @return [Hash<String, String>]
     class CreateUserHierarchyGroupRequest < Struct.new(
+      nil,
       :name,
       :parent_group_id,
       :instance_id,
@@ -4267,6 +4431,7 @@ module Aws::Connect
     #   <p>The Amazon Resource Name (ARN) of the hierarchy group. </p>
     #   @return [String]
     class CreateUserHierarchyGroupResponse < Struct.new(
+      nil,
       :hierarchy_group_id,
       :hierarchy_group_arn,
       keyword_init: true
@@ -4325,6 +4490,7 @@ module Aws::Connect
     #   <p>The tags used to organize, track, or control access for this resource. For example, { "Tags": {"key1":"value1", "key2":"value2"} }.</p>
     #   @return [Hash<String, String>]
     class CreateUserRequest < Struct.new(
+      nil,
       :username,
       :password,
       :identity_info,
@@ -4347,6 +4513,7 @@ module Aws::Connect
     #   <p>The Amazon Resource Name (ARN) of the user account.</p>
     #   @return [String]
     class CreateUserResponse < Struct.new(
+      nil,
       :user_id,
       :user_arn,
       keyword_init: true
@@ -4383,6 +4550,7 @@ module Aws::Connect
     #      {"key1":"value1", "key2":"value2"} }.</p>
     #   @return [Hash<String, String>]
     class CreateViewRequest < Struct.new(
+      nil,
       :instance_id,
       :client_token,
       :status,
@@ -4399,6 +4567,7 @@ module Aws::Connect
     #   <p>A view resource object. Contains metadata and content necessary to render the view.</p>
     #   @return [Types::View]
     class CreateViewResponse < Struct.new(
+      nil,
       :view,
       keyword_init: true
     )
@@ -4420,6 +4589,7 @@ module Aws::Connect
     #   <p>Indicates the checksum value of the latest published view content.</p>
     #   @return [String]
     class CreateViewVersionRequest < Struct.new(
+      nil,
       :instance_id,
       :view_id,
       :version_description,
@@ -4433,6 +4603,7 @@ module Aws::Connect
     #   <p>All view data is contained within the View object.</p>
     #   @return [Types::View]
     class CreateViewVersionResponse < Struct.new(
+      nil,
       :view,
       keyword_init: true
     )
@@ -4468,6 +4639,7 @@ module Aws::Connect
     #   <p>The tags used to organize, track, or control access for this resource. For example, { "Tags": {"key1":"value1", "key2":"value2"} }.</p>
     #   @return [Hash<String, String>]
     class CreateVocabularyRequest < Struct.new(
+      nil,
       :client_token,
       :instance_id,
       :vocabulary_name,
@@ -4489,6 +4661,7 @@ module Aws::Connect
     #   <p>The current state of the custom vocabulary.</p>
     #   @return [String]
     class CreateVocabularyResponse < Struct.new(
+      nil,
       :vocabulary_arn,
       :vocabulary_id,
       :state,
@@ -4533,6 +4706,7 @@ module Aws::Connect
     #   <p>Renews the expiration timer for a generated token.</p>
     #   @return [Time]
     class Credentials < Struct.new(
+      nil,
       :access_token,
       :access_token_expiration,
       :refresh_token,
@@ -4549,6 +4723,7 @@ module Aws::Connect
     #      channel.</p>
     #   @return [String]
     class CrossChannelBehavior < Struct.new(
+      nil,
       :behavior_type,
       keyword_init: true
     )
@@ -4564,6 +4739,7 @@ module Aws::Connect
     #   <p>The unit for the metric.</p>
     #   @return [String]
     class CurrentMetric < Struct.new(
+      nil,
       :name,
       :unit,
       keyword_init: true
@@ -4579,6 +4755,7 @@ module Aws::Connect
     #   <p>The value of the metric.</p>
     #   @return [Float]
     class CurrentMetricData < Struct.new(
+      nil,
       :metric,
       :value,
       keyword_init: true
@@ -4594,6 +4771,7 @@ module Aws::Connect
     #   <p>The set of metrics.</p>
     #   @return [Array<Types::CurrentMetricData>]
     class CurrentMetricResult < Struct.new(
+      nil,
       :dimensions,
       :collections,
       keyword_init: true
@@ -4611,6 +4789,7 @@ module Aws::Connect
     #   <p>The way to sort.</p>
     #   @return [String]
     class CurrentMetricSortCriteria < Struct.new(
+      nil,
       :sort_by_metric,
       :sort_order,
       keyword_init: true
@@ -4628,6 +4807,7 @@ module Aws::Connect
     #       sharing capabilities</a> in the <i>Amazon Connect Administrator Guide</i>.</p>
     #   @return [Types::ParticipantCapabilities]
     class Customer < Struct.new(
+      nil,
       :device_info,
       :capabilities,
       keyword_init: true
@@ -4640,6 +4820,7 @@ module Aws::Connect
     #   <p>Information about the audio quality of the Customer</p>
     #   @return [Types::AudioQualityMetricsInfo]
     class CustomerQualityMetrics < Struct.new(
+      nil,
       :audio,
       keyword_init: true
     )
@@ -4655,6 +4836,7 @@ module Aws::Connect
     #   <p>Timestamp that measures the end of the customer greeting from an outbound voice call.</p>
     #   @return [Time]
     class CustomerVoiceActivity < Struct.new(
+      nil,
       :greeting_start_timestamp,
       :greeting_end_timestamp,
       keyword_init: true
@@ -4674,6 +4856,7 @@ module Aws::Connect
     #       <code>comparisonType</code>.</p>
     #   @return [String]
     class DateCondition < Struct.new(
+      nil,
       :field_name,
       :value,
       :comparison_type,
@@ -4691,6 +4874,7 @@ module Aws::Connect
     #   <p>A valid date.</p>
     #   @return [String]
     class DateReference < Struct.new(
+      nil,
       :name,
       :value,
       keyword_init: true
@@ -4709,6 +4893,7 @@ module Aws::Connect
     #      evaluation form is deactivated.</p>
     #   @return [Integer]
     class DeactivateEvaluationFormRequest < Struct.new(
+      nil,
       :instance_id,
       :evaluation_form_id,
       :evaluation_form_version,
@@ -4727,6 +4912,7 @@ module Aws::Connect
     #   <p>The version of the deactivated evaluation form resource.</p>
     #   @return [Integer]
     class DeactivateEvaluationFormResponse < Struct.new(
+      nil,
       :evaluation_form_id,
       :evaluation_form_arn,
       :evaluation_form_version,
@@ -4756,6 +4942,7 @@ module Aws::Connect
     #   <p>A unique name of the custom vocabulary.</p>
     #   @return [String]
     class DefaultVocabulary < Struct.new(
+      nil,
       :instance_id,
       :language_code,
       :vocabulary_id,
@@ -4780,6 +4967,7 @@ module Aws::Connect
     #            </note>
     #   @return [String]
     class DeleteAttachedFileRequest < Struct.new(
+      nil,
       :instance_id,
       :file_id,
       :associated_resource_arn,
@@ -4790,6 +4978,7 @@ module Aws::Connect
 
     # Response from DeleteAttachedFile API
     class DeleteAttachedFileResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -4802,6 +4991,7 @@ module Aws::Connect
     #   <p>A unique identifier for the contact evaluation.</p>
     #   @return [String]
     class DeleteContactEvaluationRequest < Struct.new(
+      nil,
       :instance_id,
       :evaluation_id,
       keyword_init: true
@@ -4816,6 +5006,7 @@ module Aws::Connect
     #   <p>The identifier of the flow module.</p>
     #   @return [String]
     class DeleteContactFlowModuleRequest < Struct.new(
+      nil,
       :instance_id,
       :contact_flow_module_id,
       keyword_init: true
@@ -4824,6 +5015,7 @@ module Aws::Connect
     end
 
     class DeleteContactFlowModuleResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -4836,6 +5028,7 @@ module Aws::Connect
     #   <p>The identifier of the flow.</p>
     #   @return [String]
     class DeleteContactFlowRequest < Struct.new(
+      nil,
       :instance_id,
       :contact_flow_id,
       keyword_init: true
@@ -4844,6 +5037,7 @@ module Aws::Connect
     end
 
     class DeleteContactFlowResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -4859,6 +5053,7 @@ module Aws::Connect
     #   <p>The identifier of the flow version.</p>
     #   @return [Integer]
     class DeleteContactFlowVersionRequest < Struct.new(
+      nil,
       :instance_id,
       :contact_flow_id,
       :contact_flow_version,
@@ -4868,6 +5063,7 @@ module Aws::Connect
     end
 
     class DeleteContactFlowVersionResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -4880,6 +5076,7 @@ module Aws::Connect
     #   <p>The identifier of the email address.</p>
     #   @return [String]
     class DeleteEmailAddressRequest < Struct.new(
+      nil,
       :instance_id,
       :email_address_id,
       keyword_init: true
@@ -4888,6 +5085,7 @@ module Aws::Connect
     end
 
     class DeleteEmailAddressResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -4903,6 +5101,7 @@ module Aws::Connect
     #   <p>The unique identifier for the evaluation form.</p>
     #   @return [Integer]
     class DeleteEvaluationFormRequest < Struct.new(
+      nil,
       :instance_id,
       :evaluation_form_id,
       :evaluation_form_version,
@@ -4921,6 +5120,7 @@ module Aws::Connect
     #   <p>The identifier for the hours of operation override.</p>
     #   @return [String]
     class DeleteHoursOfOperationOverrideRequest < Struct.new(
+      nil,
       :instance_id,
       :hours_of_operation_id,
       :hours_of_operation_override_id,
@@ -4936,6 +5136,7 @@ module Aws::Connect
     #   <p>The identifier for the hours of operation.</p>
     #   @return [String]
     class DeleteHoursOfOperationRequest < Struct.new(
+      nil,
       :instance_id,
       :hours_of_operation_id,
       keyword_init: true
@@ -4953,6 +5154,7 @@ module Aws::Connect
     #               <a href="https://aws.amazon.com/builders-library/making-retries-safe-with-idempotent-APIs/">Making retries safe with idempotent APIs</a>.</p>
     #   @return [String]
     class DeleteInstanceRequest < Struct.new(
+      nil,
       :instance_id,
       :client_token,
       keyword_init: true
@@ -4967,6 +5169,7 @@ module Aws::Connect
     #   <p>The identifier for the integration association.</p>
     #   @return [String]
     class DeleteIntegrationAssociationRequest < Struct.new(
+      nil,
       :instance_id,
       :integration_association_id,
       keyword_init: true
@@ -4982,6 +5185,7 @@ module Aws::Connect
     #   <p> The name of the predefined attribute.</p>
     #   @return [String]
     class DeletePredefinedAttributeRequest < Struct.new(
+      nil,
       :instance_id,
       :name,
       keyword_init: true
@@ -4996,6 +5200,7 @@ module Aws::Connect
     #   <p>A unique identifier for the prompt.</p>
     #   @return [String]
     class DeletePromptRequest < Struct.new(
+      nil,
       :instance_id,
       :prompt_id,
       keyword_init: true
@@ -5014,6 +5219,7 @@ module Aws::Connect
     #   <p>The identifier of the contact within the Amazon Connect instance.</p>
     #   @return [String]
     class DeletePushNotificationRegistrationRequest < Struct.new(
+      nil,
       :instance_id,
       :registration_id,
       :contact_id,
@@ -5023,6 +5229,7 @@ module Aws::Connect
     end
 
     class DeletePushNotificationRegistrationResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -5035,6 +5242,7 @@ module Aws::Connect
     #   <p>The identifier for the queue.</p>
     #   @return [String]
     class DeleteQueueRequest < Struct.new(
+      nil,
       :instance_id,
       :queue_id,
       keyword_init: true
@@ -5049,6 +5257,7 @@ module Aws::Connect
     #   <p>The identifier for the quick connect.</p>
     #   @return [String]
     class DeleteQuickConnectRequest < Struct.new(
+      nil,
       :instance_id,
       :quick_connect_id,
       keyword_init: true
@@ -5063,6 +5272,7 @@ module Aws::Connect
     #   <p>The identifier of the routing profile.</p>
     #   @return [String]
     class DeleteRoutingProfileRequest < Struct.new(
+      nil,
       :instance_id,
       :routing_profile_id,
       keyword_init: true
@@ -5077,6 +5287,7 @@ module Aws::Connect
     #   <p>A unique identifier for the rule.</p>
     #   @return [String]
     class DeleteRuleRequest < Struct.new(
+      nil,
       :instance_id,
       :rule_id,
       keyword_init: true
@@ -5091,6 +5302,7 @@ module Aws::Connect
     #   <p>The identifier for the security profle.</p>
     #   @return [String]
     class DeleteSecurityProfileRequest < Struct.new(
+      nil,
       :instance_id,
       :security_profile_id,
       keyword_init: true
@@ -5105,6 +5317,7 @@ module Aws::Connect
     #   <p>A unique identifier for the task template.</p>
     #   @return [String]
     class DeleteTaskTemplateRequest < Struct.new(
+      nil,
       :instance_id,
       :task_template_id,
       keyword_init: true
@@ -5113,6 +5326,7 @@ module Aws::Connect
     end
 
     class DeleteTaskTemplateResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -5123,6 +5337,7 @@ module Aws::Connect
     #   This can be the ID or the ARN of the traffic distribution group.</p>
     #   @return [String]
     class DeleteTrafficDistributionGroupRequest < Struct.new(
+      nil,
       :traffic_distribution_group_id,
       keyword_init: true
     )
@@ -5130,6 +5345,7 @@ module Aws::Connect
     end
 
     class DeleteTrafficDistributionGroupResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -5145,6 +5361,7 @@ module Aws::Connect
     #   <p>The identifier for the use case.</p>
     #   @return [String]
     class DeleteUseCaseRequest < Struct.new(
+      nil,
       :instance_id,
       :integration_association_id,
       :use_case_id,
@@ -5160,6 +5377,7 @@ module Aws::Connect
     #   <p>The identifier of the Amazon Connect instance. You can <a href="https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html">find the instance ID</a> in the Amazon Resource Name (ARN) of the instance.</p>
     #   @return [String]
     class DeleteUserHierarchyGroupRequest < Struct.new(
+      nil,
       :hierarchy_group_id,
       :instance_id,
       keyword_init: true
@@ -5174,6 +5392,7 @@ module Aws::Connect
     #   <p>The identifier of the user.</p>
     #   @return [String]
     class DeleteUserRequest < Struct.new(
+      nil,
       :instance_id,
       :user_id,
       keyword_init: true
@@ -5190,6 +5409,7 @@ module Aws::Connect
     #      used.</p>
     #   @return [String]
     class DeleteViewRequest < Struct.new(
+      nil,
       :instance_id,
       :view_id,
       keyword_init: true
@@ -5198,6 +5418,7 @@ module Aws::Connect
     end
 
     class DeleteViewResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -5215,6 +5436,7 @@ module Aws::Connect
     #   <p>The version number of the view.</p>
     #   @return [Integer]
     class DeleteViewVersionRequest < Struct.new(
+      nil,
       :instance_id,
       :view_id,
       :view_version,
@@ -5224,6 +5446,7 @@ module Aws::Connect
     end
 
     class DeleteViewVersionResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -5236,6 +5459,7 @@ module Aws::Connect
     #   <p>The identifier of the custom vocabulary.</p>
     #   @return [String]
     class DeleteVocabularyRequest < Struct.new(
+      nil,
       :instance_id,
       :vocabulary_id,
       keyword_init: true
@@ -5253,6 +5477,7 @@ module Aws::Connect
     #   <p>The current state of the custom vocabulary.</p>
     #   @return [String]
     class DeleteVocabularyResponse < Struct.new(
+      nil,
       :vocabulary_arn,
       :vocabulary_id,
       :state,
@@ -5268,6 +5493,7 @@ module Aws::Connect
     #   <p>The identifier for the agent status.</p>
     #   @return [String]
     class DescribeAgentStatusRequest < Struct.new(
+      nil,
       :instance_id,
       :agent_status_id,
       keyword_init: true
@@ -5279,6 +5505,7 @@ module Aws::Connect
     #   <p>The agent status.</p>
     #   @return [Types::AgentStatus]
     class DescribeAgentStatusResponse < Struct.new(
+      nil,
       :agent_status,
       keyword_init: true
     )
@@ -5292,6 +5519,7 @@ module Aws::Connect
     #   <p>The identifier of the Amazon Connect instance. You can <a href="https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html">find the instance ID</a> in the Amazon Resource Name (ARN) of the instance.</p>
     #   @return [String]
     class DescribeAuthenticationProfileRequest < Struct.new(
+      nil,
       :authentication_profile_id,
       :instance_id,
       keyword_init: true
@@ -5303,6 +5531,7 @@ module Aws::Connect
     #   <p>The authentication profile object being described.</p>
     #   @return [Types::AuthenticationProfile]
     class DescribeAuthenticationProfileResponse < Struct.new(
+      nil,
       :authentication_profile,
       keyword_init: true
     )
@@ -5316,6 +5545,7 @@ module Aws::Connect
     #   <p>A unique identifier for the contact evaluation.</p>
     #   @return [String]
     class DescribeContactEvaluationRequest < Struct.new(
+      nil,
       :instance_id,
       :evaluation_id,
       keyword_init: true
@@ -5330,6 +5560,7 @@ module Aws::Connect
     #   <p>Information about the evaluation form.</p>
     #   @return [Types::EvaluationFormContent]
     class DescribeContactEvaluationResponse < Struct.new(
+      nil,
       :evaluation,
       :evaluation_form,
       keyword_init: true
@@ -5344,6 +5575,7 @@ module Aws::Connect
     #   <p>The identifier of the flow module.</p>
     #   @return [String]
     class DescribeContactFlowModuleRequest < Struct.new(
+      nil,
       :instance_id,
       :contact_flow_module_id,
       keyword_init: true
@@ -5355,6 +5587,7 @@ module Aws::Connect
     #   <p>Information about the flow module.</p>
     #   @return [Types::ContactFlowModule]
     class DescribeContactFlowModuleResponse < Struct.new(
+      nil,
       :contact_flow_module,
       keyword_init: true
     )
@@ -5368,6 +5601,7 @@ module Aws::Connect
     #   <p>The identifier of the flow.</p>
     #   @return [String]
     class DescribeContactFlowRequest < Struct.new(
+      nil,
       :instance_id,
       :contact_flow_id,
       keyword_init: true
@@ -5379,6 +5613,7 @@ module Aws::Connect
     #   <p>Information about the flow.</p>
     #   @return [Types::ContactFlow]
     class DescribeContactFlowResponse < Struct.new(
+      nil,
       :contact_flow,
       keyword_init: true
     )
@@ -5392,6 +5627,7 @@ module Aws::Connect
     #   <p>The identifier of the contact.</p>
     #   @return [String]
     class DescribeContactRequest < Struct.new(
+      nil,
       :instance_id,
       :contact_id,
       keyword_init: true
@@ -5403,6 +5639,7 @@ module Aws::Connect
     #   <p>Information about the contact.</p>
     #   @return [Types::Contact]
     class DescribeContactResponse < Struct.new(
+      nil,
       :contact,
       keyword_init: true
     )
@@ -5416,6 +5653,7 @@ module Aws::Connect
     #   <p>The identifier of the email address.</p>
     #   @return [String]
     class DescribeEmailAddressRequest < Struct.new(
+      nil,
       :instance_id,
       :email_address_id,
       keyword_init: true
@@ -5448,6 +5686,7 @@ module Aws::Connect
     #   <p>The tags used to organize, track, or control access for this resource. For example, { "Tags": {"key1":"value1", "key2":"value2"} }.</p>
     #   @return [Hash<String, String>]
     class DescribeEmailAddressResponse < Struct.new(
+      nil,
       :email_address_id,
       :email_address_arn,
       :email_address,
@@ -5471,6 +5710,7 @@ module Aws::Connect
     #   <p>A version of the evaluation form.</p>
     #   @return [Integer]
     class DescribeEvaluationFormRequest < Struct.new(
+      nil,
       :instance_id,
       :evaluation_form_id,
       :evaluation_form_version,
@@ -5483,6 +5723,7 @@ module Aws::Connect
     #   <p>Information about the evaluation form.</p>
     #   @return [Types::EvaluationForm]
     class DescribeEvaluationFormResponse < Struct.new(
+      nil,
       :evaluation_form,
       keyword_init: true
     )
@@ -5499,6 +5740,7 @@ module Aws::Connect
     #   <p>The identifier for the hours of operation override.</p>
     #   @return [String]
     class DescribeHoursOfOperationOverrideRequest < Struct.new(
+      nil,
       :instance_id,
       :hours_of_operation_id,
       :hours_of_operation_override_id,
@@ -5511,6 +5753,7 @@ module Aws::Connect
     #   <p>Information about the hours of operations override. </p>
     #   @return [Types::HoursOfOperationOverride]
     class DescribeHoursOfOperationOverrideResponse < Struct.new(
+      nil,
       :hours_of_operation_override,
       keyword_init: true
     )
@@ -5524,6 +5767,7 @@ module Aws::Connect
     #   <p>The identifier for the hours of operation.</p>
     #   @return [String]
     class DescribeHoursOfOperationRequest < Struct.new(
+      nil,
       :instance_id,
       :hours_of_operation_id,
       keyword_init: true
@@ -5535,6 +5779,7 @@ module Aws::Connect
     #   <p>The hours of operation.</p>
     #   @return [Types::HoursOfOperation]
     class DescribeHoursOfOperationResponse < Struct.new(
+      nil,
       :hours_of_operation,
       keyword_init: true
     )
@@ -5548,6 +5793,7 @@ module Aws::Connect
     #   <p>The type of attribute.</p>
     #   @return [String]
     class DescribeInstanceAttributeRequest < Struct.new(
+      nil,
       :instance_id,
       :attribute_type,
       keyword_init: true
@@ -5561,6 +5807,7 @@ module Aws::Connect
     #      of attribute.</p>
     #   @return [Types::Attribute]
     class DescribeInstanceAttributeResponse < Struct.new(
+      nil,
       :attribute,
       keyword_init: true
     )
@@ -5571,6 +5818,7 @@ module Aws::Connect
     #   <p>The identifier of the Amazon Connect instance. You can <a href="https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html">find the instance ID</a> in the Amazon Resource Name (ARN) of the instance.</p>
     #   @return [String]
     class DescribeInstanceRequest < Struct.new(
+      nil,
       :instance_id,
       keyword_init: true
     )
@@ -5589,6 +5837,7 @@ module Aws::Connect
     #       Guide</i>.</p>
     #   @return [Types::ReplicationConfiguration]
     class DescribeInstanceResponse < Struct.new(
+      nil,
       :instance,
       :replication_configuration,
       keyword_init: true
@@ -5606,6 +5855,7 @@ module Aws::Connect
     #   <p>A valid resource type.</p>
     #   @return [String]
     class DescribeInstanceStorageConfigRequest < Struct.new(
+      nil,
       :instance_id,
       :association_id,
       :resource_type,
@@ -5618,6 +5868,7 @@ module Aws::Connect
     #   <p>A valid storage type.</p>
     #   @return [Types::InstanceStorageConfig]
     class DescribeInstanceStorageConfigResponse < Struct.new(
+      nil,
       :storage_config,
       keyword_init: true
     )
@@ -5628,6 +5879,7 @@ module Aws::Connect
     #   <p>A unique identifier for the phone number.</p>
     #   @return [String]
     class DescribePhoneNumberRequest < Struct.new(
+      nil,
       :phone_number_id,
       keyword_init: true
     )
@@ -5639,6 +5891,7 @@ module Aws::Connect
     #      traffic distribution group.</p>
     #   @return [Types::ClaimedPhoneNumberSummary]
     class DescribePhoneNumberResponse < Struct.new(
+      nil,
       :claimed_phone_number_summary,
       keyword_init: true
     )
@@ -5653,6 +5906,7 @@ module Aws::Connect
     #   <p>The name of the predefined attribute.</p>
     #   @return [String]
     class DescribePredefinedAttributeRequest < Struct.new(
+      nil,
       :instance_id,
       :name,
       keyword_init: true
@@ -5664,6 +5918,7 @@ module Aws::Connect
     #   <p>Information about the predefined attribute.</p>
     #   @return [Types::PredefinedAttribute]
     class DescribePredefinedAttributeResponse < Struct.new(
+      nil,
       :predefined_attribute,
       keyword_init: true
     )
@@ -5677,6 +5932,7 @@ module Aws::Connect
     #   <p>A unique identifier for the prompt.</p>
     #   @return [String]
     class DescribePromptRequest < Struct.new(
+      nil,
       :instance_id,
       :prompt_id,
       keyword_init: true
@@ -5688,6 +5944,7 @@ module Aws::Connect
     #   <p>Information about the prompt.</p>
     #   @return [Types::Prompt]
     class DescribePromptResponse < Struct.new(
+      nil,
       :prompt,
       keyword_init: true
     )
@@ -5701,6 +5958,7 @@ module Aws::Connect
     #   <p>The identifier for the queue.</p>
     #   @return [String]
     class DescribeQueueRequest < Struct.new(
+      nil,
       :instance_id,
       :queue_id,
       keyword_init: true
@@ -5712,6 +5970,7 @@ module Aws::Connect
     #   <p>The name of the queue.</p>
     #   @return [Types::Queue]
     class DescribeQueueResponse < Struct.new(
+      nil,
       :queue,
       keyword_init: true
     )
@@ -5725,6 +5984,7 @@ module Aws::Connect
     #   <p>The identifier for the quick connect.</p>
     #   @return [String]
     class DescribeQuickConnectRequest < Struct.new(
+      nil,
       :instance_id,
       :quick_connect_id,
       keyword_init: true
@@ -5736,6 +5996,7 @@ module Aws::Connect
     #   <p>Information about the quick connect.</p>
     #   @return [Types::QuickConnect]
     class DescribeQuickConnectResponse < Struct.new(
+      nil,
       :quick_connect,
       keyword_init: true
     )
@@ -5749,6 +6010,7 @@ module Aws::Connect
     #   <p>The identifier of the routing profile.</p>
     #   @return [String]
     class DescribeRoutingProfileRequest < Struct.new(
+      nil,
       :instance_id,
       :routing_profile_id,
       keyword_init: true
@@ -5760,6 +6022,7 @@ module Aws::Connect
     #   <p>The routing profile.</p>
     #   @return [Types::RoutingProfile]
     class DescribeRoutingProfileResponse < Struct.new(
+      nil,
       :routing_profile,
       keyword_init: true
     )
@@ -5773,6 +6036,7 @@ module Aws::Connect
     #   <p>A unique identifier for the rule.</p>
     #   @return [String]
     class DescribeRuleRequest < Struct.new(
+      nil,
       :instance_id,
       :rule_id,
       keyword_init: true
@@ -5784,6 +6048,7 @@ module Aws::Connect
     #   <p>Information about the rule.</p>
     #   @return [Types::Rule]
     class DescribeRuleResponse < Struct.new(
+      nil,
       :rule,
       keyword_init: true
     )
@@ -5797,6 +6062,7 @@ module Aws::Connect
     #   <p>The identifier of the Amazon Connect instance. You can <a href="https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html">find the instance ID</a> in the Amazon Resource Name (ARN) of the instance.</p>
     #   @return [String]
     class DescribeSecurityProfileRequest < Struct.new(
+      nil,
       :security_profile_id,
       :instance_id,
       keyword_init: true
@@ -5808,6 +6074,7 @@ module Aws::Connect
     #   <p>The security profile.</p>
     #   @return [Types::SecurityProfile]
     class DescribeSecurityProfileResponse < Struct.new(
+      nil,
       :security_profile,
       keyword_init: true
     )
@@ -5820,6 +6087,7 @@ module Aws::Connect
     #   The ARN must be provided if the call is from the replicated Region.</p>
     #   @return [String]
     class DescribeTrafficDistributionGroupRequest < Struct.new(
+      nil,
       :traffic_distribution_group_id,
       keyword_init: true
     )
@@ -5830,6 +6098,7 @@ module Aws::Connect
     #   <p>Information about the traffic distribution group.</p>
     #   @return [Types::TrafficDistributionGroup]
     class DescribeTrafficDistributionGroupResponse < Struct.new(
+      nil,
       :traffic_distribution_group,
       keyword_init: true
     )
@@ -5843,6 +6112,7 @@ module Aws::Connect
     #   <p>The identifier of the Amazon Connect instance. You can <a href="https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html">find the instance ID</a> in the Amazon Resource Name (ARN) of the instance.</p>
     #   @return [String]
     class DescribeUserHierarchyGroupRequest < Struct.new(
+      nil,
       :hierarchy_group_id,
       :instance_id,
       keyword_init: true
@@ -5854,6 +6124,7 @@ module Aws::Connect
     #   <p>Information about the hierarchy group.</p>
     #   @return [Types::HierarchyGroup]
     class DescribeUserHierarchyGroupResponse < Struct.new(
+      nil,
       :hierarchy_group,
       keyword_init: true
     )
@@ -5864,6 +6135,7 @@ module Aws::Connect
     #   <p>The identifier of the Amazon Connect instance. You can <a href="https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html">find the instance ID</a> in the Amazon Resource Name (ARN) of the instance.</p>
     #   @return [String]
     class DescribeUserHierarchyStructureRequest < Struct.new(
+      nil,
       :instance_id,
       keyword_init: true
     )
@@ -5874,6 +6146,7 @@ module Aws::Connect
     #   <p>Information about the hierarchy structure.</p>
     #   @return [Types::HierarchyStructure]
     class DescribeUserHierarchyStructureResponse < Struct.new(
+      nil,
       :hierarchy_structure,
       keyword_init: true
     )
@@ -5887,6 +6160,7 @@ module Aws::Connect
     #   <p>The identifier of the Amazon Connect instance. You can <a href="https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html">find the instance ID</a> in the Amazon Resource Name (ARN) of the instance.</p>
     #   @return [String]
     class DescribeUserRequest < Struct.new(
+      nil,
       :user_id,
       :instance_id,
       keyword_init: true
@@ -5898,6 +6172,7 @@ module Aws::Connect
     #   <p>Information about the user account and configuration settings.</p>
     #   @return [Types::User]
     class DescribeUserResponse < Struct.new(
+      nil,
       :user,
       keyword_init: true
     )
@@ -5912,6 +6187,7 @@ module Aws::Connect
     #   <p>The ViewId of the view. This must be an ARN for Amazon Web Services managed views.</p>
     #   @return [String]
     class DescribeViewRequest < Struct.new(
+      nil,
       :instance_id,
       :view_id,
       keyword_init: true
@@ -5923,6 +6199,7 @@ module Aws::Connect
     #   <p>All view data is contained within the View object.</p>
     #   @return [Types::View]
     class DescribeViewResponse < Struct.new(
+      nil,
       :view,
       keyword_init: true
     )
@@ -5936,6 +6213,7 @@ module Aws::Connect
     #   <p>The identifier of the custom vocabulary.</p>
     #   @return [String]
     class DescribeVocabularyRequest < Struct.new(
+      nil,
       :instance_id,
       :vocabulary_id,
       keyword_init: true
@@ -5949,6 +6227,7 @@ module Aws::Connect
     #      nouns.</p>
     #   @return [Types::Vocabulary]
     class DescribeVocabularyResponse < Struct.new(
+      nil,
       :vocabulary,
       keyword_init: true
     )
@@ -5960,6 +6239,7 @@ module Aws::Connect
     #   <p>The message about the outbound calls.</p>
     #   @return [String]
     class DestinationNotAllowedException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -5977,6 +6257,7 @@ module Aws::Connect
     #   <p>Operating system that the participant used for the call.</p>
     #   @return [String]
     class DeviceInfo < Struct.new(
+      nil,
       :platform_name,
       :platform_version,
       :operating_system,
@@ -6002,6 +6283,7 @@ module Aws::Connect
     #   <p>Information about the agent status assigned to the user.</p>
     #   @return [Types::AgentStatusIdentifier]
     class Dimensions < Struct.new(
+      nil,
       :queue,
       :channel,
       :routing_profile,
@@ -6023,6 +6305,7 @@ module Aws::Connect
     #      the Amazon Connect instance. If not specified, by default this value is the Amazon Web Services account that has the Amazon Connect instance.</p>
     #   @return [String]
     class DisassociateAnalyticsDataSetRequest < Struct.new(
+      nil,
       :instance_id,
       :data_set_id,
       :target_account_id,
@@ -6044,6 +6327,7 @@ module Aws::Connect
     #               <a href="https://aws.amazon.com/builders-library/making-retries-safe-with-idempotent-APIs/">Making retries safe with idempotent APIs</a>.</p>
     #   @return [String]
     class DisassociateApprovedOriginRequest < Struct.new(
+      nil,
       :instance_id,
       :origin,
       :client_token,
@@ -6068,6 +6352,7 @@ module Aws::Connect
     #               <a href="https://aws.amazon.com/builders-library/making-retries-safe-with-idempotent-APIs/">Making retries safe with idempotent APIs</a>.</p>
     #   @return [String]
     class DisassociateBotRequest < Struct.new(
+      nil,
       :instance_id,
       :lex_bot,
       :lex_v2_bot,
@@ -6099,6 +6384,7 @@ module Aws::Connect
     #   <p>A valid resource type.</p>
     #   @return [String]
     class DisassociateFlowRequest < Struct.new(
+      nil,
       :instance_id,
       :resource_id,
       :resource_type,
@@ -6108,6 +6394,7 @@ module Aws::Connect
     end
 
     class DisassociateFlowResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -6129,6 +6416,7 @@ module Aws::Connect
     #               <a href="https://aws.amazon.com/builders-library/making-retries-safe-with-idempotent-APIs/">Making retries safe with idempotent APIs</a>.</p>
     #   @return [String]
     class DisassociateInstanceStorageConfigRequest < Struct.new(
+      nil,
       :instance_id,
       :association_id,
       :resource_type,
@@ -6151,6 +6439,7 @@ module Aws::Connect
     #               <a href="https://aws.amazon.com/builders-library/making-retries-safe-with-idempotent-APIs/">Making retries safe with idempotent APIs</a>.</p>
     #   @return [String]
     class DisassociateLambdaFunctionRequest < Struct.new(
+      nil,
       :instance_id,
       :function_arn,
       :client_token,
@@ -6175,6 +6464,7 @@ module Aws::Connect
     #               <a href="https://aws.amazon.com/builders-library/making-retries-safe-with-idempotent-APIs/">Making retries safe with idempotent APIs</a>.</p>
     #   @return [String]
     class DisassociateLexBotRequest < Struct.new(
+      nil,
       :instance_id,
       :bot_name,
       :lex_region,
@@ -6191,6 +6481,7 @@ module Aws::Connect
     #   <p>The identifier of the Amazon Connect instance. You can <a href="https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html">find the instance ID</a> in the Amazon Resource Name (ARN) of the instance.</p>
     #   @return [String]
     class DisassociatePhoneNumberContactFlowRequest < Struct.new(
+      nil,
       :phone_number_id,
       :instance_id,
       keyword_init: true
@@ -6208,6 +6499,7 @@ module Aws::Connect
     #   <p>The quick connects to disassociate from the queue.</p>
     #   @return [Array<String>]
     class DisassociateQueueQuickConnectsRequest < Struct.new(
+      nil,
       :instance_id,
       :queue_id,
       :quick_connect_ids,
@@ -6229,6 +6521,7 @@ module Aws::Connect
     #   <p>The manual assignment queues to disassociate with this routing profile.</p>
     #   @return [Array<Types::RoutingProfileQueueReference>]
     class DisassociateRoutingProfileQueuesRequest < Struct.new(
+      nil,
       :instance_id,
       :routing_profile_id,
       :queue_references,
@@ -6251,6 +6544,7 @@ module Aws::Connect
     #               <a href="https://aws.amazon.com/builders-library/making-retries-safe-with-idempotent-APIs/">Making retries safe with idempotent APIs</a>.</p>
     #   @return [String]
     class DisassociateSecurityKeyRequest < Struct.new(
+      nil,
       :instance_id,
       :association_id,
       :client_token,
@@ -6270,6 +6564,7 @@ module Aws::Connect
     #   <p>The identifier of the Amazon Connect instance. You can <a href="https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html">find the instance ID</a> in the Amazon Resource Name (ARN) of the instance.</p>
     #   @return [String]
     class DisassociateTrafficDistributionGroupUserRequest < Struct.new(
+      nil,
       :traffic_distribution_group_id,
       :user_id,
       :instance_id,
@@ -6279,6 +6574,7 @@ module Aws::Connect
     end
 
     class DisassociateTrafficDistributionGroupUserResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -6295,6 +6591,7 @@ module Aws::Connect
     #   <p>The proficiencies to disassociate from the user.</p>
     #   @return [Array<Types::UserProficiencyDisassociate>]
     class DisassociateUserProficienciesRequest < Struct.new(
+      nil,
       :instance_id,
       :user_id,
       :user_proficiencies,
@@ -6309,6 +6606,7 @@ module Aws::Connect
     #      service does not detect potential issues.</p>
     #   @return [String]
     class DisconnectDetails < Struct.new(
+      nil,
       :potential_disconnect_issue,
       keyword_init: true
     )
@@ -6321,6 +6619,7 @@ module Aws::Connect
     #   <p>A code that indicates how the contact was terminated.</p>
     #   @return [String]
     class DisconnectReason < Struct.new(
+      nil,
       :code,
       keyword_init: true
     )
@@ -6338,6 +6637,7 @@ module Aws::Connect
     #   <p>The identifier of the contact.</p>
     #   @return [String]
     class DismissUserContactRequest < Struct.new(
+      nil,
       :user_id,
       :instance_id,
       :contact_id,
@@ -6347,6 +6647,7 @@ module Aws::Connect
     end
 
     class DismissUserContactResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -6360,6 +6661,7 @@ module Aws::Connect
     #   <p>The percentage of the traffic that is distributed, in increments of 10.</p>
     #   @return [Integer]
     class Distribution < Struct.new(
+      nil,
       :region,
       :percentage,
       keyword_init: true
@@ -6381,6 +6683,7 @@ module Aws::Connect
     #      yyyy-MM-ddThh:mm:ss.SSSZ. For example, 2019-11-08T02:41:28.172Z.</p>
     #   @return [String]
     class DownloadUrlMetadata < Struct.new(
+      nil,
       :url,
       :url_expiry,
       keyword_init: true
@@ -6392,6 +6695,7 @@ module Aws::Connect
     # @!attribute message
     #   @return [String]
     class DuplicateResourceException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -6406,6 +6710,7 @@ module Aws::Connect
     #   <p>Information about the hours of operations with the effective override applied.</p>
     #   @return [Array<Types::OperationalHour>]
     class EffectiveHoursOfOperations < Struct.new(
+      nil,
       :date,
       :operational_hours,
       keyword_init: true
@@ -6421,6 +6726,7 @@ module Aws::Connect
     #   <p>The display name of email address.</p>
     #   @return [String]
     class EmailAddressInfo < Struct.new(
+      nil,
       :email_address,
       :display_name,
       keyword_init: true
@@ -6445,6 +6751,7 @@ module Aws::Connect
     #   <p>The display name of email address.</p>
     #   @return [String]
     class EmailAddressMetadata < Struct.new(
+      nil,
       :email_address_id,
       :email_address_arn,
       :email_address,
@@ -6466,6 +6773,7 @@ module Aws::Connect
     #   <p>A leaf node condition which can be used to specify a string condition.</p>
     #   @return [Types::StringCondition]
     class EmailAddressSearchCriteria < Struct.new(
+      nil,
       :or_conditions,
       :and_conditions,
       :string_condition,
@@ -6490,6 +6798,7 @@ module Aws::Connect
     #            </ul>
     #   @return [Types::ControlPlaneTagFilter]
     class EmailAddressSearchFilter < Struct.new(
+      nil,
       :tag_filter,
       keyword_init: true
     )
@@ -6504,6 +6813,7 @@ module Aws::Connect
     #   <p>The pre-signed URLs for the S3 bucket where the email attachment is stored.</p>
     #   @return [String]
     class EmailAttachment < Struct.new(
+      nil,
       :file_name,
       :s3_url,
       keyword_init: true
@@ -6520,6 +6830,7 @@ module Aws::Connect
     #   <p>The Amazon Resource Name (ARN) of the email message reference</p>
     #   @return [String]
     class EmailMessageReference < Struct.new(
+      nil,
       :name,
       :arn,
       keyword_init: true
@@ -6535,6 +6846,7 @@ module Aws::Connect
     #   <p>Display name of the email recipient.</p>
     #   @return [String]
     class EmailRecipient < Struct.new(
+      nil,
       :address,
       :display_name,
       keyword_init: true
@@ -6551,6 +6863,7 @@ module Aws::Connect
     #   <p>A valid email address.</p>
     #   @return [String]
     class EmailReference < Struct.new(
+      nil,
       :name,
       :value,
       keyword_init: true
@@ -6560,6 +6873,7 @@ module Aws::Connect
 
     # <p>An empty value.</p>
     class EmptyFieldValue < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -6580,6 +6894,7 @@ module Aws::Connect
     #            </note>
     #   @return [String]
     class EncryptionConfig < Struct.new(
+      nil,
       :encryption_type,
       :key_id,
       keyword_init: true
@@ -6589,6 +6904,7 @@ module Aws::Connect
 
     # <p>End associated tasks related to a case.</p>
     class EndAssociatedTasksActionDefinition < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -6602,6 +6918,7 @@ module Aws::Connect
     #   <p>Address of the endpoint.</p>
     #   @return [String]
     class Endpoint < Struct.new(
+      nil,
       :type,
       :address,
       keyword_init: true
@@ -6620,6 +6937,7 @@ module Aws::Connect
     #   <p>Display name of the endpoint.</p>
     #   @return [String]
     class EndpointInfo < Struct.new(
+      nil,
       :type,
       :address,
       :display_name,
@@ -6637,6 +6955,7 @@ module Aws::Connect
     #   <p>The corresponding error message for the error code.</p>
     #   @return [String]
     class ErrorResult < Struct.new(
+      nil,
       :error_code,
       :error_message,
       keyword_init: true
@@ -6676,6 +6995,7 @@ module Aws::Connect
     #   <p>The tags used to organize, track, or control access for this resource. For example, { "Tags": {"key1":"value1", "key2":"value2"} }.</p>
     #   @return [Hash<String, String>]
     class Evaluation < Struct.new(
+      nil,
       :evaluation_id,
       :evaluation_arn,
       :metadata,
@@ -6722,6 +7042,7 @@ module Aws::Connect
     #   <p>The value for an answer in a contact evaluation.</p>
     #   @return [Types::EvaluationAnswerData]
     class EvaluationAnswerInput < Struct.new(
+      nil,
       :value,
       keyword_init: true
     )
@@ -6736,6 +7057,7 @@ module Aws::Connect
     #   <p>The system suggested value for an answer in a contact evaluation.</p>
     #   @return [Types::EvaluationAnswerData]
     class EvaluationAnswerOutput < Struct.new(
+      nil,
       :value,
       :system_suggested_value,
       keyword_init: true
@@ -6787,6 +7109,7 @@ module Aws::Connect
     #   <p>The tags used to organize, track, or control access for this resource. For example, { "Tags": {"key1":"value1", "key2":"value2"} }.</p>
     #   @return [Hash<String, String>]
     class EvaluationForm < Struct.new(
+      nil,
       :evaluation_form_id,
       :evaluation_form_version,
       :locked,
@@ -6835,6 +7158,7 @@ module Aws::Connect
     #   <p>A scoring strategy of the evaluation form.</p>
     #   @return [Types::EvaluationFormScoringStrategy]
     class EvaluationFormContent < Struct.new(
+      nil,
       :evaluation_form_version,
       :evaluation_form_id,
       :evaluation_form_arn,
@@ -6903,6 +7227,7 @@ module Aws::Connect
     #      overall evaluation gets a score of 0.</p>
     #   @return [Boolean]
     class EvaluationFormNumericQuestionOption < Struct.new(
+      nil,
       :min_value,
       :max_value,
       :score,
@@ -6934,6 +7259,7 @@ module Aws::Connect
     #   <p>The automation properties of the numeric question.</p>
     #   @return [Types::EvaluationFormNumericQuestionAutomation]
     class EvaluationFormNumericQuestionProperties < Struct.new(
+      nil,
       :min_value,
       :max_value,
       :options,
@@ -6974,6 +7300,7 @@ module Aws::Connect
     #   <p>The scoring weight of the section.</p>
     #   @return [Float]
     class EvaluationFormQuestion < Struct.new(
+      nil,
       :title,
       :instructions,
       :ref_id,
@@ -7021,6 +7348,7 @@ module Aws::Connect
     #   <p>The scoring status of the evaluation form.</p>
     #   @return [String]
     class EvaluationFormScoringStrategy < Struct.new(
+      nil,
       :mode,
       :status,
       keyword_init: true
@@ -7047,6 +7375,7 @@ module Aws::Connect
     #   <p>The scoring weight of the section.</p>
     #   @return [Float]
     class EvaluationFormSection < Struct.new(
+      nil,
       :title,
       :ref_id,
       :instructions,
@@ -7073,6 +7402,7 @@ module Aws::Connect
     #      criteria.</p>
     #   @return [String]
     class EvaluationFormSingleSelectQuestionAutomation < Struct.new(
+      nil,
       :options,
       :default_option_ref_id,
       keyword_init: true
@@ -7111,6 +7441,7 @@ module Aws::Connect
     #      overall evaluation gets a score of 0.</p>
     #   @return [Boolean]
     class EvaluationFormSingleSelectQuestionOption < Struct.new(
+      nil,
       :ref_id,
       :text,
       :score,
@@ -7137,6 +7468,7 @@ module Aws::Connect
     #   <p>The display mode of the single select question.</p>
     #   @return [Types::EvaluationFormSingleSelectQuestionAutomation]
     class EvaluationFormSingleSelectQuestionProperties < Struct.new(
+      nil,
       :options,
       :display_as,
       :automation,
@@ -7180,6 +7512,7 @@ module Aws::Connect
     #   <p>The version of the active evaluation form version.</p>
     #   @return [Integer]
     class EvaluationFormSummary < Struct.new(
+      nil,
       :evaluation_form_id,
       :evaluation_form_arn,
       :title,
@@ -7231,6 +7564,7 @@ module Aws::Connect
     #   <p>The Amazon Resource Name (ARN) of the user who last updated the evaluation form.</p>
     #   @return [String]
     class EvaluationFormVersionSummary < Struct.new(
+      nil,
       :evaluation_form_arn,
       :evaluation_form_id,
       :evaluation_form_version,
@@ -7265,6 +7599,7 @@ module Aws::Connect
     #   <p>The overall score of the contact evaluation.</p>
     #   @return [Types::EvaluationScore]
     class EvaluationMetadata < Struct.new(
+      nil,
       :contact_id,
       :evaluator_arn,
       :contact_agent_id,
@@ -7285,6 +7620,7 @@ module Aws::Connect
     #            </note>
     #   @return [String]
     class EvaluationNote < Struct.new(
+      nil,
       :value,
       keyword_init: true
     )
@@ -7303,6 +7639,7 @@ module Aws::Connect
     #      automatic fail answer, this flag will be true.</p>
     #   @return [Boolean]
     class EvaluationScore < Struct.new(
+      nil,
       :percentage,
       :not_applicable,
       :automatic_fail,
@@ -7347,6 +7684,7 @@ module Aws::Connect
     #   <p>The timestamp for when the evaluation was last updated.</p>
     #   @return [Time]
     class EvaluationSummary < Struct.new(
+      nil,
       :evaluation_id,
       :evaluation_arn,
       :evaluation_form_title,
@@ -7366,6 +7704,7 @@ module Aws::Connect
     #   <p>The name.</p>
     #   @return [String]
     class EventBridgeActionDefinition < Struct.new(
+      nil,
       :name,
       keyword_init: true
     )
@@ -7380,6 +7719,7 @@ module Aws::Connect
     #   <p>The timestamp indicating when the routing step expires.</p>
     #   @return [Time]
     class Expiry < Struct.new(
+      nil,
       :duration_in_seconds,
       :expiry_timestamp,
       keyword_init: true
@@ -7401,6 +7741,7 @@ module Aws::Connect
     #   <p>An object to specify the predefined attribute condition.</p>
     #   @return [Types::AttributeCondition]
     class Expression < Struct.new(
+      nil,
       :attribute_condition,
       :and_expression,
       :or_expression,
@@ -7422,6 +7763,7 @@ module Aws::Connect
     #   <p>Why the request to create a contact failed.</p>
     #   @return [String]
     class FailedRequest < Struct.new(
+      nil,
       :request_identifier,
       :failure_reason_code,
       :failure_reason_message,
@@ -7438,6 +7780,7 @@ module Aws::Connect
     #   <p>Union of potential field value types.</p>
     #   @return [Types::FieldValueUnion]
     class FieldValue < Struct.new(
+      nil,
       :id,
       :value,
       keyword_init: true
@@ -7459,6 +7802,7 @@ module Aws::Connect
     #   <p>String value type.</p>
     #   @return [String]
     class FieldValueUnion < Struct.new(
+      nil,
       :boolean_value,
       :double_value,
       :empty_value,
@@ -7486,6 +7830,7 @@ module Aws::Connect
     #       <code>QUEUE</code>, you would add queue IDs or ARNs in <code>FilterValues</code>. </p>
     #   @return [Array<String>]
     class FilterV2 < Struct.new(
+      nil,
       :filter_key,
       :filter_values,
       keyword_init: true
@@ -7513,6 +7858,7 @@ module Aws::Connect
     #   <p>A list of up to 50 agent status IDs or ARNs.</p>
     #   @return [Array<String>]
     class Filters < Struct.new(
+      nil,
       :queues,
       :channels,
       :routing_profiles,
@@ -7534,6 +7880,7 @@ module Aws::Connect
     #   <p>The type of resource association.</p>
     #   @return [String]
     class FlowAssociationSummary < Struct.new(
+      nil,
       :resource_id,
       :flow_id,
       :resource_type,
@@ -7561,6 +7908,7 @@ module Aws::Connect
     #            </note>
     #   @return [String]
     class GetAttachedFileRequest < Struct.new(
+      nil,
       :instance_id,
       :file_id,
       :url_expiry_in_seconds,
@@ -7609,6 +7957,7 @@ module Aws::Connect
     #       "Tags": {"key1":"value1", "key2":"value2"} }</code>.</p>
     #   @return [Hash<String, String>]
     class GetAttachedFileResponse < Struct.new(
+      nil,
       :file_arn,
       :file_id,
       :creation_time,
@@ -7632,6 +7981,7 @@ module Aws::Connect
     #   <p>The identifier of the initial contact.</p>
     #   @return [String]
     class GetContactAttributesRequest < Struct.new(
+      nil,
       :instance_id,
       :initial_contact_id,
       keyword_init: true
@@ -7643,6 +7993,7 @@ module Aws::Connect
     #   <p>Information about the attributes.</p>
     #   @return [Hash<String, String>]
     class GetContactAttributesResponse < Struct.new(
+      nil,
       :attributes,
       keyword_init: true
     )
@@ -7659,6 +8010,7 @@ module Aws::Connect
     #   <p>A list of contact-level metrics to retrieve.</p>
     #   @return [Array<Types::ContactMetricInfo>]
     class GetContactMetricsRequest < Struct.new(
+      nil,
       :instance_id,
       :contact_id,
       :metrics,
@@ -7678,6 +8030,7 @@ module Aws::Connect
     #   <p>The ARN of the contact for which metrics were retrieved.</p>
     #   @return [String]
     class GetContactMetricsResponse < Struct.new(
+      nil,
       :metric_results,
       :id,
       :arn,
@@ -7872,6 +8225,7 @@ module Aws::Connect
     #            </ul>
     #   @return [Array<Types::CurrentMetricSortCriteria>]
     class GetCurrentMetricDataRequest < Struct.new(
+      nil,
       :instance_id,
       :filters,
       :groupings,
@@ -7899,6 +8253,7 @@ module Aws::Connect
     #   <p>The total count of the result, regardless of the current page size. </p>
     #   @return [Integer]
     class GetCurrentMetricDataResponse < Struct.new(
+      nil,
       :next_token,
       :metric_results,
       :data_snapshot_time,
@@ -7943,6 +8298,7 @@ module Aws::Connect
     #   <p>The maximum number of results to return per page.</p>
     #   @return [Integer]
     class GetCurrentUserDataRequest < Struct.new(
+      nil,
       :instance_id,
       :filters,
       :next_token,
@@ -7962,6 +8318,7 @@ module Aws::Connect
     #   <p>The total count of the result, regardless of the current page size.</p>
     #   @return [Integer]
     class GetCurrentUserDataResponse < Struct.new(
+      nil,
       :next_token,
       :user_data_list,
       :approximate_total_count,
@@ -7983,6 +8340,7 @@ module Aws::Connect
     #   <p>The date until when the hours of operation are listed.</p>
     #   @return [String]
     class GetEffectiveHoursOfOperationsRequest < Struct.new(
+      nil,
       :instance_id,
       :hours_of_operation_id,
       :from_date,
@@ -7999,6 +8357,7 @@ module Aws::Connect
     #   <p>The time zone for the hours of operation.</p>
     #   @return [String]
     class GetEffectiveHoursOfOperationsResponse < Struct.new(
+      nil,
       :effective_hours_of_operation_list,
       :time_zone,
       keyword_init: true
@@ -8010,6 +8369,7 @@ module Aws::Connect
     #   <p>The identifier of the Amazon Connect instance. You can <a href="https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html">find the instance ID</a> in the Amazon Resource Name (ARN) of the instance.</p>
     #   @return [String]
     class GetFederationTokenRequest < Struct.new(
+      nil,
       :instance_id,
       keyword_init: true
     )
@@ -8029,6 +8389,7 @@ module Aws::Connect
     #   <p>The identifier for the user. This can be the ID or the ARN of the user.</p>
     #   @return [String]
     class GetFederationTokenResponse < Struct.new(
+      nil,
       :credentials,
       :sign_in_url,
       :user_arn,
@@ -8060,6 +8421,7 @@ module Aws::Connect
     #   <p>A valid resource type.</p>
     #   @return [String]
     class GetFlowAssociationRequest < Struct.new(
+      nil,
       :instance_id,
       :resource_id,
       :resource_type,
@@ -8078,6 +8440,7 @@ module Aws::Connect
     #   <p>A valid resource type.</p>
     #   @return [String]
     class GetFlowAssociationResponse < Struct.new(
+      nil,
       :resource_id,
       :flow_id,
       :resource_type,
@@ -8337,6 +8700,7 @@ module Aws::Connect
     #   <p>The maximum number of results to return per page.</p>
     #   @return [Integer]
     class GetMetricDataRequest < Struct.new(
+      nil,
       :instance_id,
       :start_time,
       :end_time,
@@ -8360,6 +8724,7 @@ module Aws::Connect
     #            <p>If no grouping is specified, a summary of metric data is returned.</p>
     #   @return [Array<Types::HistoricalMetricResult>]
     class GetMetricDataResponse < Struct.new(
+      nil,
       :next_token,
       :metric_results,
       keyword_init: true
@@ -9811,6 +10176,7 @@ module Aws::Connect
     #   <p>The maximum number of results to return per page.</p>
     #   @return [Integer]
     class GetMetricDataV2Request < Struct.new(
+      nil,
       :resource_arn,
       :start_time,
       :end_time,
@@ -9833,6 +10199,7 @@ module Aws::Connect
     #      summary of metric data is returned. </p>
     #   @return [Array<Types::MetricResultV2>]
     class GetMetricDataV2Response < Struct.new(
+      nil,
       :next_token,
       :metric_results,
       keyword_init: true
@@ -9847,6 +10214,7 @@ module Aws::Connect
     #   <p>A unique identifier for the prompt.</p>
     #   @return [String]
     class GetPromptFileRequest < Struct.new(
+      nil,
       :instance_id,
       :prompt_id,
       keyword_init: true
@@ -9865,6 +10233,7 @@ module Aws::Connect
     #   <p>The Amazon Web Services Region where this resource was last modified.</p>
     #   @return [String]
     class GetPromptFileResponse < Struct.new(
+      nil,
       :prompt_presigned_url,
       :last_modified_time,
       :last_modified_region,
@@ -9884,6 +10253,7 @@ module Aws::Connect
     #      task is created.</p>
     #   @return [String]
     class GetTaskTemplateRequest < Struct.new(
+      nil,
       :instance_id,
       :task_template_id,
       :snapshot_version,
@@ -9938,6 +10308,7 @@ module Aws::Connect
     #   <p>The tags used to organize, track, or control access for this resource. For example, { "Tags": {"key1":"value1", "key2":"value2"} }.</p>
     #   @return [Hash<String, String>]
     class GetTaskTemplateResponse < Struct.new(
+      nil,
       :instance_id,
       :id,
       :arn,
@@ -9963,6 +10334,7 @@ module Aws::Connect
     #   The ARN must be provided if the call is from the replicated Region.</p>
     #   @return [String]
     class GetTrafficDistributionRequest < Struct.new(
+      nil,
       :id,
       keyword_init: true
     )
@@ -9988,6 +10360,7 @@ module Aws::Connect
     #   <p>The distribution of agents between the instance and its replica(s).</p>
     #   @return [Types::AgentConfig]
     class GetTrafficDistributionResponse < Struct.new(
+      nil,
       :telephony_config,
       :id,
       :arn,
@@ -10024,6 +10397,7 @@ module Aws::Connect
     #   <p>The Amazon Web Services Region where this resource was last modified.</p>
     #   @return [String]
     class HierarchyGroup < Struct.new(
+      nil,
       :id,
       :arn,
       :name,
@@ -10045,6 +10419,7 @@ module Aws::Connect
     #   <p>The type of hierarchy group match.</p>
     #   @return [String]
     class HierarchyGroupCondition < Struct.new(
+      nil,
       :value,
       :hierarchy_group_match_type,
       keyword_init: true
@@ -10069,6 +10444,7 @@ module Aws::Connect
     #   <p>The Amazon Web Services Region where this resource was last modified.</p>
     #   @return [String]
     class HierarchyGroupSummary < Struct.new(
+      nil,
       :id,
       :arn,
       :name,
@@ -10087,6 +10463,7 @@ module Aws::Connect
     #   <p>The Amazon Resource Name (ARN) for the hierarchy group. </p>
     #   @return [String]
     class HierarchyGroupSummaryReference < Struct.new(
+      nil,
       :id,
       :arn,
       keyword_init: true
@@ -10112,6 +10489,7 @@ module Aws::Connect
     #   <p>The group at level five of the agent hierarchy.</p>
     #   @return [Types::AgentHierarchyGroup]
     class HierarchyGroups < Struct.new(
+      nil,
       :level1,
       :level2,
       :level3,
@@ -10139,6 +10517,7 @@ module Aws::Connect
     #   <p>The Amazon Web Services Region where this resource was last modified.</p>
     #   @return [String]
     class HierarchyLevel < Struct.new(
+      nil,
       :id,
       :arn,
       :name,
@@ -10154,6 +10533,7 @@ module Aws::Connect
     #   <p>The name of the user hierarchy level. Must not be more than 50 characters.</p>
     #   @return [String]
     class HierarchyLevelUpdate < Struct.new(
+      nil,
       :name,
       keyword_init: true
     )
@@ -10177,6 +10557,7 @@ module Aws::Connect
     #   <p>Information about level five.</p>
     #   @return [Types::HierarchyGroupSummary]
     class HierarchyPath < Struct.new(
+      nil,
       :level_one,
       :level_two,
       :level_three,
@@ -10204,6 +10585,7 @@ module Aws::Connect
     #   <p>Information about level five.</p>
     #   @return [Types::HierarchyGroupSummaryReference]
     class HierarchyPathReference < Struct.new(
+      nil,
       :level_one,
       :level_two,
       :level_three,
@@ -10231,6 +10613,7 @@ module Aws::Connect
     #   <p>Information about level five.</p>
     #   @return [Types::HierarchyLevel]
     class HierarchyStructure < Struct.new(
+      nil,
       :level_one,
       :level_two,
       :level_three,
@@ -10260,6 +10643,7 @@ module Aws::Connect
     #   <p>The update for level five.</p>
     #   @return [Types::HierarchyLevelUpdate]
     class HierarchyStructureUpdate < Struct.new(
+      nil,
       :level_one,
       :level_two,
       :level_three,
@@ -10485,6 +10869,7 @@ module Aws::Connect
     #   <p>The unit for the metric.</p>
     #   @return [String]
     class HistoricalMetric < Struct.new(
+      nil,
       :name,
       :threshold,
       :statistic,
@@ -10502,6 +10887,7 @@ module Aws::Connect
     #   <p>The value of the metric.</p>
     #   @return [Float]
     class HistoricalMetricData < Struct.new(
+      nil,
       :metric,
       :value,
       keyword_init: true
@@ -10517,6 +10903,7 @@ module Aws::Connect
     #   <p>The set of metrics.</p>
     #   @return [Array<Types::HistoricalMetricData>]
     class HistoricalMetricResult < Struct.new(
+      nil,
       :dimensions,
       :collections,
       keyword_init: true
@@ -10553,6 +10940,7 @@ module Aws::Connect
     #   <p>The Amazon Web Services Region where this resource was last modified.</p>
     #   @return [String]
     class HoursOfOperation < Struct.new(
+      nil,
       :hours_of_operation_id,
       :hours_of_operation_arn,
       :name,
@@ -10578,6 +10966,7 @@ module Aws::Connect
     #   <p>The end time that your contact center closes.</p>
     #   @return [Types::HoursOfOperationTimeSlice]
     class HoursOfOperationConfig < Struct.new(
+      nil,
       :day,
       :start_time,
       :end_time,
@@ -10613,6 +11002,7 @@ module Aws::Connect
     #   <p>The date until the hours of operation override is effective.</p>
     #   @return [String]
     class HoursOfOperationOverride < Struct.new(
+      nil,
       :hours_of_operation_override_id,
       :hours_of_operation_id,
       :hours_of_operation_arn,
@@ -10638,6 +11028,7 @@ module Aws::Connect
     #   <p>The end time that your contact center closes if overrides are applied.</p>
     #   @return [Types::OverrideTimeSlice]
     class HoursOfOperationOverrideConfig < Struct.new(
+      nil,
       :day,
       :start_time,
       :end_time,
@@ -10660,6 +11051,7 @@ module Aws::Connect
     #   <p>A leaf node condition which can be used to specify a date condition.</p>
     #   @return [Types::DateCondition]
     class HoursOfOperationOverrideSearchCriteria < Struct.new(
+      nil,
       :or_conditions,
       :and_conditions,
       :string_condition,
@@ -10684,6 +11076,7 @@ module Aws::Connect
     #            </note>
     #   @return [Types::StringCondition]
     class HoursOfOperationSearchCriteria < Struct.new(
+      nil,
       :or_conditions,
       :and_conditions,
       :string_condition,
@@ -10708,6 +11101,7 @@ module Aws::Connect
     #            </ul>
     #   @return [Types::ControlPlaneTagFilter]
     class HoursOfOperationSearchFilter < Struct.new(
+      nil,
       :tag_filter,
       keyword_init: true
     )
@@ -10731,6 +11125,7 @@ module Aws::Connect
     #   <p>The Amazon Web Services Region where this resource was last modified.</p>
     #   @return [String]
     class HoursOfOperationSummary < Struct.new(
+      nil,
       :id,
       :arn,
       :name,
@@ -10749,6 +11144,7 @@ module Aws::Connect
     #   <p>The minutes.</p>
     #   @return [Integer]
     class HoursOfOperationTimeSlice < Struct.new(
+      nil,
       :hours,
       :minutes,
       keyword_init: true
@@ -10766,6 +11162,7 @@ module Aws::Connect
     # @!attribute message
     #   @return [String]
     class IdempotencyException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -10792,6 +11189,7 @@ module Aws::Connect
     #               <a href="https://aws.amazon.com/builders-library/making-retries-safe-with-idempotent-APIs/">Making retries safe with idempotent APIs</a>.</p>
     #   @return [String]
     class ImportPhoneNumberRequest < Struct.new(
+      nil,
       :instance_id,
       :source_phone_number_arn,
       :phone_number_description,
@@ -10809,6 +11207,7 @@ module Aws::Connect
     #   <p>The Amazon Resource Name (ARN) of the phone number.</p>
     #   @return [String]
     class ImportPhoneNumberResponse < Struct.new(
+      nil,
       :phone_number_id,
       :phone_number_arn,
       keyword_init: true
@@ -10836,6 +11235,7 @@ module Aws::Connect
     #      for a total of 50 recipients.</p>
     #   @return [Array<Types::EmailAddressInfo>]
     class InboundAdditionalRecipients < Struct.new(
+      nil,
       :to_addresses,
       :cc_addresses,
       keyword_init: true
@@ -10851,6 +11251,7 @@ module Aws::Connect
     #   <p>The raw email body content.</p>
     #   @return [Types::InboundRawMessage]
     class InboundEmailContent < Struct.new(
+      nil,
       :message_source_type,
       :raw_message,
       keyword_init: true
@@ -10872,6 +11273,7 @@ module Aws::Connect
     #   <p>Headers present in inbound email.</p>
     #   @return [Hash<String, String>]
     class InboundRawMessage < Struct.new(
+      nil,
       :subject,
       :body,
       :content_type,
@@ -10889,6 +11291,7 @@ module Aws::Connect
     #      and predefined values for the predefined attribute key.</p>
     #   @return [Boolean]
     class InputPredefinedAttributeConfiguration < Struct.new(
+      nil,
       :enable_value_validation_on_association,
       keyword_init: true
     )
@@ -10939,6 +11342,7 @@ module Aws::Connect
     #   <p>The tags of an instance.</p>
     #   @return [Hash<String, String>]
     class Instance < Struct.new(
+      nil,
       :id,
       :arn,
       :identity_management_type,
@@ -10962,6 +11366,7 @@ module Aws::Connect
     #   <p>The message.</p>
     #   @return [String]
     class InstanceStatusReason < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -10989,6 +11394,7 @@ module Aws::Connect
     #   <p>The configuration of the Kinesis Firehose delivery stream.</p>
     #   @return [Types::KinesisFirehoseConfig]
     class InstanceStorageConfig < Struct.new(
+      nil,
       :association_id,
       :storage_type,
       :s3_config,
@@ -11032,6 +11438,7 @@ module Aws::Connect
     #   <p>This URL allows contact center users to access the Amazon Connect admin website.</p>
     #   @return [String]
     class InstanceSummary < Struct.new(
+      nil,
       :id,
       :arn,
       :identity_management_type,
@@ -11073,6 +11480,7 @@ module Aws::Connect
     #   <p>The name of the source.</p>
     #   @return [String]
     class IntegrationAssociationSummary < Struct.new(
+      nil,
       :integration_association_id,
       :integration_association_arn,
       :instance_id,
@@ -11091,6 +11499,7 @@ module Aws::Connect
     #   <p>The message.</p>
     #   @return [String]
     class InternalServiceException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -11146,6 +11555,7 @@ module Aws::Connect
     #            </ul>
     #   @return [String]
     class IntervalDetails < Struct.new(
+      nil,
       :time_zone,
       :interval_period,
       keyword_init: true
@@ -11158,6 +11568,7 @@ module Aws::Connect
     #   <p>The problems with the flow. Please fix before trying again.</p>
     #   @return [Array<Types::ProblemDetail>]
     class InvalidContactFlowException < Struct.new(
+      nil,
       :problems,
       keyword_init: true
     )
@@ -11168,6 +11579,7 @@ module Aws::Connect
     # @!attribute problems
     #   @return [Array<Types::ProblemDetail>]
     class InvalidContactFlowModuleException < Struct.new(
+      nil,
       :problems,
       keyword_init: true
     )
@@ -11179,6 +11591,7 @@ module Aws::Connect
     #   <p>The message about the parameters.</p>
     #   @return [String]
     class InvalidParameterException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -11193,6 +11606,7 @@ module Aws::Connect
     #   <p>Reason why the request was invalid.</p>
     #   @return [Types::InvalidRequestExceptionReason]
     class InvalidRequestException < Struct.new(
+      nil,
       :message,
       :reason,
       keyword_init: true
@@ -11220,6 +11634,7 @@ module Aws::Connect
     #   <p>Identifier of the invisible field.</p>
     #   @return [Types::TaskTemplateFieldIdentifier]
     class InvisibleFieldInfo < Struct.new(
+      nil,
       :id,
       keyword_init: true
     )
@@ -11231,6 +11646,7 @@ module Aws::Connect
     #   <p>The Amazon Resource Name (ARN) of the delivery stream.</p>
     #   @return [String]
     class KinesisFirehoseConfig < Struct.new(
+      nil,
       :firehose_arn,
       keyword_init: true
     )
@@ -11242,6 +11658,7 @@ module Aws::Connect
     #   <p>The Amazon Resource Name (ARN) of the data stream.</p>
     #   @return [String]
     class KinesisStreamConfig < Struct.new(
+      nil,
       :stream_arn,
       keyword_init: true
     )
@@ -11261,6 +11678,7 @@ module Aws::Connect
     #   <p>The encryption configuration.</p>
     #   @return [Types::EncryptionConfig]
     class KinesisVideoStreamConfig < Struct.new(
+      nil,
       :prefix,
       :retention_period_hours,
       :encryption_config,
@@ -11282,6 +11700,7 @@ module Aws::Connect
     #   <p>The Amazon Web Services Region where the Amazon Lex bot was created.</p>
     #   @return [String]
     class LexBot < Struct.new(
+      nil,
       :name,
       :lex_region,
       keyword_init: true
@@ -11297,6 +11716,7 @@ module Aws::Connect
     #   <p>Configuration information of an Amazon Lex V2 bot.</p>
     #   @return [Types::LexV2Bot]
     class LexBotConfig < Struct.new(
+      nil,
       :lex_bot,
       :lex_v2_bot,
       keyword_init: true
@@ -11309,6 +11729,7 @@ module Aws::Connect
     #   <p>The Amazon Resource Name (ARN) of the Amazon Lex V2 bot.</p>
     #   @return [String]
     class LexV2Bot < Struct.new(
+      nil,
       :alias_arn,
       keyword_init: true
     )
@@ -11320,6 +11741,7 @@ module Aws::Connect
     #   <p>The message about the limit.</p>
     #   @return [String]
     class LimitExceededException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -11340,6 +11762,7 @@ module Aws::Connect
     #   <p>Available agent status types.</p>
     #   @return [Array<String>]
     class ListAgentStatusRequest < Struct.new(
+      nil,
       :instance_id,
       :next_token,
       :max_results,
@@ -11356,6 +11779,7 @@ module Aws::Connect
     #   <p>A summary of agent statuses.</p>
     #   @return [Array<Types::AgentStatusSummary>]
     class ListAgentStatusResponse < Struct.new(
+      nil,
       :next_token,
       :agent_status_summary_list,
       keyword_init: true
@@ -11377,6 +11801,7 @@ module Aws::Connect
     #   <p>The maximum number of results to return per page.</p>
     #   @return [Integer]
     class ListAnalyticsDataAssociationsRequest < Struct.new(
+      nil,
       :instance_id,
       :data_set_id,
       :next_token,
@@ -11395,6 +11820,7 @@ module Aws::Connect
     #   <p>If there are additional results, this is the token for the next set of results.</p>
     #   @return [String]
     class ListAnalyticsDataAssociationsResponse < Struct.new(
+      nil,
       :results,
       :next_token,
       keyword_init: true
@@ -11413,6 +11839,7 @@ module Aws::Connect
     #   <p>The maximum number of results to return per page.</p>
     #   @return [Integer]
     class ListAnalyticsDataLakeDataSetsRequest < Struct.new(
+      nil,
       :instance_id,
       :next_token,
       :max_results,
@@ -11430,6 +11857,7 @@ module Aws::Connect
     #   <p>If there are additional results, this is the token for the next set of results.</p>
     #   @return [String]
     class ListAnalyticsDataLakeDataSetsResponse < Struct.new(
+      nil,
       :results,
       :next_token,
       keyword_init: true
@@ -11448,6 +11876,7 @@ module Aws::Connect
     #   <p>The maximum number of results to return per page.</p>
     #   @return [Integer]
     class ListApprovedOriginsRequest < Struct.new(
+      nil,
       :instance_id,
       :next_token,
       :max_results,
@@ -11463,6 +11892,7 @@ module Aws::Connect
     #   <p>If there are additional results, this is the token for the next set of results.</p>
     #   @return [String]
     class ListApprovedOriginsResponse < Struct.new(
+      nil,
       :origins,
       :next_token,
       keyword_init: true
@@ -11484,6 +11914,7 @@ module Aws::Connect
     #   response in the next request to retrieve the next set of results.</p>
     #   @return [String]
     class ListAssociatedContactsRequest < Struct.new(
+      nil,
       :instance_id,
       :contact_id,
       :max_results,
@@ -11501,6 +11932,7 @@ module Aws::Connect
     #   <p>If there are additional results, this is the token for the next set of results.</p>
     #   @return [String]
     class ListAssociatedContactsResponse < Struct.new(
+      nil,
       :contact_summary_list,
       :next_token,
       keyword_init: true
@@ -11519,6 +11951,7 @@ module Aws::Connect
     #   response in the next request to retrieve the next set of results.</p>
     #   @return [String]
     class ListAuthenticationProfilesRequest < Struct.new(
+      nil,
       :instance_id,
       :max_results,
       :next_token,
@@ -11534,6 +11967,7 @@ module Aws::Connect
     #   <p>If there are additional results, this is the token for the next set of results.</p>
     #   @return [String]
     class ListAuthenticationProfilesResponse < Struct.new(
+      nil,
       :authentication_profile_summary_list,
       :next_token,
       keyword_init: true
@@ -11555,6 +11989,7 @@ module Aws::Connect
     #   <p>The version of Amazon Lex or Amazon Lex V2.</p>
     #   @return [String]
     class ListBotsRequest < Struct.new(
+      nil,
       :instance_id,
       :next_token,
       :max_results,
@@ -11572,6 +12007,7 @@ module Aws::Connect
     #   <p>If there are additional results, this is the token for the next set of results.</p>
     #   @return [String]
     class ListBotsResponse < Struct.new(
+      nil,
       :lex_bots,
       :next_token,
       keyword_init: true
@@ -11588,6 +12024,7 @@ module Aws::Connect
     #   <p>A list of Condition objects which would be applied together with an AND condition.</p>
     #   @return [Array<Types::Condition>]
     class ListCondition < Struct.new(
+      nil,
       :target_list_type,
       :conditions,
       keyword_init: true
@@ -11610,6 +12047,7 @@ module Aws::Connect
     #            </important>
     #   @return [String]
     class ListContactEvaluationsRequest < Struct.new(
+      nil,
       :instance_id,
       :contact_id,
       :next_token,
@@ -11628,6 +12066,7 @@ module Aws::Connect
     #            </important>
     #   @return [String]
     class ListContactEvaluationsResponse < Struct.new(
+      nil,
       :evaluation_summary_list,
       :next_token,
       keyword_init: true
@@ -11649,6 +12088,7 @@ module Aws::Connect
     #   <p>The state of the flow module.</p>
     #   @return [String]
     class ListContactFlowModulesRequest < Struct.new(
+      nil,
       :instance_id,
       :next_token,
       :max_results,
@@ -11665,6 +12105,7 @@ module Aws::Connect
     #   <p>If there are additional results, this is the token for the next set of results.</p>
     #   @return [String]
     class ListContactFlowModulesResponse < Struct.new(
+      nil,
       :contact_flow_modules_summary_list,
       :next_token,
       keyword_init: true
@@ -11686,6 +12127,7 @@ module Aws::Connect
     #   <p>The maximum number of results to return per page. The default MaxResult size is 100.</p>
     #   @return [Integer]
     class ListContactFlowVersionsRequest < Struct.new(
+      nil,
       :instance_id,
       :contact_flow_id,
       :next_token,
@@ -11702,6 +12144,7 @@ module Aws::Connect
     #   <p>If there are additional results, this is the token for the next set of results.</p>
     #   @return [String]
     class ListContactFlowVersionsResponse < Struct.new(
+      nil,
       :contact_flow_version_summary_list,
       :next_token,
       keyword_init: true
@@ -11723,6 +12166,7 @@ module Aws::Connect
     #   <p>The maximum number of results to return per page. The default MaxResult size is 100.</p>
     #   @return [Integer]
     class ListContactFlowsRequest < Struct.new(
+      nil,
       :instance_id,
       :contact_flow_types,
       :next_token,
@@ -11739,6 +12183,7 @@ module Aws::Connect
     #   <p>If there are additional results, this is the token for the next set of results.</p>
     #   @return [String]
     class ListContactFlowsResponse < Struct.new(
+      nil,
       :contact_flow_summary_list,
       :next_token,
       keyword_init: true
@@ -11764,6 +12209,7 @@ module Aws::Connect
     #            </important>
     #   @return [String]
     class ListContactReferencesRequest < Struct.new(
+      nil,
       :instance_id,
       :contact_id,
       :reference_types,
@@ -11783,6 +12229,7 @@ module Aws::Connect
     #            </important>
     #   @return [String]
     class ListContactReferencesResponse < Struct.new(
+      nil,
       :reference_summary_list,
       :next_token,
       keyword_init: true
@@ -11806,6 +12253,7 @@ module Aws::Connect
     #   response in the next request to retrieve the next set of results.</p>
     #   @return [String]
     class ListDefaultVocabulariesRequest < Struct.new(
+      nil,
       :instance_id,
       :language_code,
       :max_results,
@@ -11822,6 +12270,7 @@ module Aws::Connect
     #   <p>If there are additional results, this is the token for the next set of results.</p>
     #   @return [String]
     class ListDefaultVocabulariesResponse < Struct.new(
+      nil,
       :default_vocabulary_list,
       :next_token,
       keyword_init: true
@@ -11843,6 +12292,7 @@ module Aws::Connect
     #   response in the next request to retrieve the next set of results.</p>
     #   @return [String]
     class ListEvaluationFormVersionsRequest < Struct.new(
+      nil,
       :instance_id,
       :evaluation_form_id,
       :max_results,
@@ -11859,6 +12309,7 @@ module Aws::Connect
     #   <p>If there are additional results, this is the token for the next set of results.</p>
     #   @return [String]
     class ListEvaluationFormVersionsResponse < Struct.new(
+      nil,
       :evaluation_form_version_summary_list,
       :next_token,
       keyword_init: true
@@ -11877,6 +12328,7 @@ module Aws::Connect
     #   response in the next request to retrieve the next set of results.</p>
     #   @return [String]
     class ListEvaluationFormsRequest < Struct.new(
+      nil,
       :instance_id,
       :max_results,
       :next_token,
@@ -11892,6 +12344,7 @@ module Aws::Connect
     #   <p>If there are additional results, this is the token for the next set of results.</p>
     #   @return [String]
     class ListEvaluationFormsResponse < Struct.new(
+      nil,
       :evaluation_form_summary_list,
       :next_token,
       keyword_init: true
@@ -11913,6 +12366,7 @@ module Aws::Connect
     #   <p>The maximum number of results to return per page.</p>
     #   @return [Integer]
     class ListFlowAssociationsRequest < Struct.new(
+      nil,
       :instance_id,
       :resource_type,
       :next_token,
@@ -11929,6 +12383,7 @@ module Aws::Connect
     #   <p>If there are additional results, this is the token for the next set of results.</p>
     #   @return [String]
     class ListFlowAssociationsResponse < Struct.new(
+      nil,
       :flow_association_summary_list,
       :next_token,
       keyword_init: true
@@ -11950,6 +12405,7 @@ module Aws::Connect
     #   <p>The maximum number of results to return per page.</p>
     #   @return [Integer]
     class ListHoursOfOperationOverridesRequest < Struct.new(
+      nil,
       :instance_id,
       :hours_of_operation_id,
       :next_token,
@@ -11973,6 +12429,7 @@ module Aws::Connect
     #   <p>The timestamp when this resource was last modified.</p>
     #   @return [Time]
     class ListHoursOfOperationOverridesResponse < Struct.new(
+      nil,
       :next_token,
       :hours_of_operation_override_list,
       :last_modified_region,
@@ -11993,6 +12450,7 @@ module Aws::Connect
     #   <p>The maximum number of results to return per page. The default MaxResult size is 100.</p>
     #   @return [Integer]
     class ListHoursOfOperationsRequest < Struct.new(
+      nil,
       :instance_id,
       :next_token,
       :max_results,
@@ -12008,6 +12466,7 @@ module Aws::Connect
     #   <p>If there are additional results, this is the token for the next set of results.</p>
     #   @return [String]
     class ListHoursOfOperationsResponse < Struct.new(
+      nil,
       :hours_of_operation_summary_list,
       :next_token,
       keyword_init: true
@@ -12026,6 +12485,7 @@ module Aws::Connect
     #   <p>The maximum number of results to return per page.</p>
     #   @return [Integer]
     class ListInstanceAttributesRequest < Struct.new(
+      nil,
       :instance_id,
       :next_token,
       :max_results,
@@ -12041,6 +12501,7 @@ module Aws::Connect
     #   <p>If there are additional results, this is the token for the next set of results.</p>
     #   @return [String]
     class ListInstanceAttributesResponse < Struct.new(
+      nil,
       :attributes,
       :next_token,
       keyword_init: true
@@ -12062,6 +12523,7 @@ module Aws::Connect
     #   <p>The maximum number of results to return per page.</p>
     #   @return [Integer]
     class ListInstanceStorageConfigsRequest < Struct.new(
+      nil,
       :instance_id,
       :resource_type,
       :next_token,
@@ -12078,6 +12540,7 @@ module Aws::Connect
     #   <p>If there are additional results, this is the token for the next set of results.</p>
     #   @return [String]
     class ListInstanceStorageConfigsResponse < Struct.new(
+      nil,
       :storage_configs,
       :next_token,
       keyword_init: true
@@ -12093,6 +12556,7 @@ module Aws::Connect
     #   <p>The maximum number of results to return per page.</p>
     #   @return [Integer]
     class ListInstancesRequest < Struct.new(
+      nil,
       :next_token,
       :max_results,
       keyword_init: true
@@ -12107,6 +12571,7 @@ module Aws::Connect
     #   <p>If there are additional results, this is the token for the next set of results.</p>
     #   @return [String]
     class ListInstancesResponse < Struct.new(
+      nil,
       :instance_summary_list,
       :next_token,
       keyword_init: true
@@ -12131,6 +12596,7 @@ module Aws::Connect
     #   <p>The Amazon Resource Name (ARN) of the integration.</p>
     #   @return [String]
     class ListIntegrationAssociationsRequest < Struct.new(
+      nil,
       :instance_id,
       :integration_type,
       :next_token,
@@ -12148,6 +12614,7 @@ module Aws::Connect
     #   <p>If there are additional results, this is the token for the next set of results.</p>
     #   @return [String]
     class ListIntegrationAssociationsResponse < Struct.new(
+      nil,
       :integration_association_summary_list,
       :next_token,
       keyword_init: true
@@ -12166,6 +12633,7 @@ module Aws::Connect
     #   <p>The maximum number of results to return per page.</p>
     #   @return [Integer]
     class ListLambdaFunctionsRequest < Struct.new(
+      nil,
       :instance_id,
       :next_token,
       :max_results,
@@ -12181,6 +12649,7 @@ module Aws::Connect
     #   <p>If there are additional results, this is the token for the next set of results.</p>
     #   @return [String]
     class ListLambdaFunctionsResponse < Struct.new(
+      nil,
       :lambda_functions,
       :next_token,
       keyword_init: true
@@ -12200,6 +12669,7 @@ module Aws::Connect
     #      </p>
     #   @return [Integer]
     class ListLexBotsRequest < Struct.new(
+      nil,
       :instance_id,
       :next_token,
       :max_results,
@@ -12216,6 +12686,7 @@ module Aws::Connect
     #   <p>If there are additional results, this is the token for the next set of results.</p>
     #   @return [String]
     class ListLexBotsResponse < Struct.new(
+      nil,
       :lex_bots,
       :next_token,
       keyword_init: true
@@ -12246,6 +12717,7 @@ module Aws::Connect
     #   <p>The maximum number of results to return per page. The default MaxResult size is 100.</p>
     #   @return [Integer]
     class ListPhoneNumbersRequest < Struct.new(
+      nil,
       :instance_id,
       :phone_number_types,
       :phone_number_country_codes,
@@ -12263,6 +12735,7 @@ module Aws::Connect
     #   <p>If there are additional results, this is the token for the next set of results.</p>
     #   @return [String]
     class ListPhoneNumbersResponse < Struct.new(
+      nil,
       :phone_number_summary_list,
       :next_token,
       keyword_init: true
@@ -12305,6 +12778,7 @@ module Aws::Connect
     #      Messaging.</p>
     #   @return [String]
     class ListPhoneNumbersSummary < Struct.new(
+      nil,
       :phone_number_id,
       :phone_number_arn,
       :phone_number,
@@ -12348,6 +12822,7 @@ module Aws::Connect
     #   <p>The prefix of the phone number. If provided, it must contain <code>+</code> as part of the country code.</p>
     #   @return [String]
     class ListPhoneNumbersV2Request < Struct.new(
+      nil,
       :target_arn,
       :instance_id,
       :max_results,
@@ -12368,6 +12843,7 @@ module Aws::Connect
     #      or traffic distribution groups.</p>
     #   @return [Array<Types::ListPhoneNumbersSummary>]
     class ListPhoneNumbersV2Response < Struct.new(
+      nil,
       :next_token,
       :list_phone_numbers_summary_list,
       keyword_init: true
@@ -12387,6 +12863,7 @@ module Aws::Connect
     #   <p>The maximum number of results to return per page.</p>
     #   @return [Integer]
     class ListPredefinedAttributesRequest < Struct.new(
+      nil,
       :instance_id,
       :next_token,
       :max_results,
@@ -12402,6 +12879,7 @@ module Aws::Connect
     #   <p>Summary of the predefined attributes.</p>
     #   @return [Array<Types::PredefinedAttributeSummary>]
     class ListPredefinedAttributesResponse < Struct.new(
+      nil,
       :next_token,
       :predefined_attribute_summary_list,
       keyword_init: true
@@ -12420,6 +12898,7 @@ module Aws::Connect
     #   <p>The maximum number of results to return per page. The default MaxResult size is 100.</p>
     #   @return [Integer]
     class ListPromptsRequest < Struct.new(
+      nil,
       :instance_id,
       :next_token,
       :max_results,
@@ -12435,6 +12914,7 @@ module Aws::Connect
     #   <p>If there are additional results, this is the token for the next set of results.</p>
     #   @return [String]
     class ListPromptsResponse < Struct.new(
+      nil,
       :prompt_summary_list,
       :next_token,
       keyword_init: true
@@ -12456,6 +12936,7 @@ module Aws::Connect
     #   <p>The maximum number of results to return per page. The default MaxResult size is 100.</p>
     #   @return [Integer]
     class ListQueueQuickConnectsRequest < Struct.new(
+      nil,
       :instance_id,
       :queue_id,
       :next_token,
@@ -12478,6 +12959,7 @@ module Aws::Connect
     #   <p>The Amazon Web Services Region where this resource was last modified.</p>
     #   @return [String]
     class ListQueueQuickConnectsResponse < Struct.new(
+      nil,
       :next_token,
       :quick_connect_summary_list,
       :last_modified_time,
@@ -12501,6 +12983,7 @@ module Aws::Connect
     #   <p>The maximum number of results to return per page. The default MaxResult size is 100.</p>
     #   @return [Integer]
     class ListQueuesRequest < Struct.new(
+      nil,
       :instance_id,
       :queue_types,
       :next_token,
@@ -12517,6 +13000,7 @@ module Aws::Connect
     #   <p>If there are additional results, this is the token for the next set of results.</p>
     #   @return [String]
     class ListQueuesResponse < Struct.new(
+      nil,
       :queue_summary_list,
       :next_token,
       keyword_init: true
@@ -12539,6 +13023,7 @@ module Aws::Connect
     #      prompted to assign one of the following types: Agent (USER), External (PHONE_NUMBER), or Queue (QUEUE).</p>
     #   @return [Array<String>]
     class ListQuickConnectsRequest < Struct.new(
+      nil,
       :instance_id,
       :next_token,
       :max_results,
@@ -12555,6 +13040,7 @@ module Aws::Connect
     #   <p>If there are additional results, this is the token for the next set of results.</p>
     #   @return [String]
     class ListQuickConnectsResponse < Struct.new(
+      nil,
       :quick_connect_summary_list,
       :next_token,
       keyword_init: true
@@ -12584,6 +13070,7 @@ module Aws::Connect
     #      sets of supported segment types.</p>
     #   @return [Array<String>]
     class ListRealtimeContactAnalysisSegmentsV2Request < Struct.new(
+      nil,
       :instance_id,
       :contact_id,
       :max_results,
@@ -12613,6 +13100,7 @@ module Aws::Connect
     #   <p>If there are additional results, this is the token for the next set of results.</p>
     #   @return [String]
     class ListRealtimeContactAnalysisSegmentsV2Response < Struct.new(
+      nil,
       :channel,
       :status,
       :segments,
@@ -12636,6 +13124,7 @@ module Aws::Connect
     #   <p>The maximum number of results to return per page.</p>
     #   @return [Integer]
     class ListRoutingProfileManualAssignmentQueuesRequest < Struct.new(
+      nil,
       :instance_id,
       :routing_profile_id,
       :next_token,
@@ -12658,6 +13147,7 @@ module Aws::Connect
     #   <p>The Amazon Web Services Region where this resource was last modified.</p>
     #   @return [String]
     class ListRoutingProfileManualAssignmentQueuesResponse < Struct.new(
+      nil,
       :next_token,
       :routing_profile_manual_assignment_queue_config_summary_list,
       :last_modified_time,
@@ -12681,6 +13171,7 @@ module Aws::Connect
     #   <p>The maximum number of results to return per page. The default MaxResult size is 100.</p>
     #   @return [Integer]
     class ListRoutingProfileQueuesRequest < Struct.new(
+      nil,
       :instance_id,
       :routing_profile_id,
       :next_token,
@@ -12703,6 +13194,7 @@ module Aws::Connect
     #   <p>The Amazon Web Services Region where this resource was last modified.</p>
     #   @return [String]
     class ListRoutingProfileQueuesResponse < Struct.new(
+      nil,
       :next_token,
       :routing_profile_queue_config_summary_list,
       :last_modified_time,
@@ -12723,6 +13215,7 @@ module Aws::Connect
     #   <p>The maximum number of results to return per page. The default MaxResult size is 100.</p>
     #   @return [Integer]
     class ListRoutingProfilesRequest < Struct.new(
+      nil,
       :instance_id,
       :next_token,
       :max_results,
@@ -12738,6 +13231,7 @@ module Aws::Connect
     #   <p>If there are additional results, this is the token for the next set of results.</p>
     #   @return [String]
     class ListRoutingProfilesResponse < Struct.new(
+      nil,
       :routing_profile_summary_list,
       :next_token,
       keyword_init: true
@@ -12762,6 +13256,7 @@ module Aws::Connect
     #   response in the next request to retrieve the next set of results.</p>
     #   @return [String]
     class ListRulesRequest < Struct.new(
+      nil,
       :instance_id,
       :publish_status,
       :event_source_name,
@@ -12779,6 +13274,7 @@ module Aws::Connect
     #   <p>If there are additional results, this is the token for the next set of results.</p>
     #   @return [String]
     class ListRulesResponse < Struct.new(
+      nil,
       :rule_summary_list,
       :next_token,
       keyword_init: true
@@ -12797,6 +13293,7 @@ module Aws::Connect
     #   <p>The maximum number of results to return per page.</p>
     #   @return [Integer]
     class ListSecurityKeysRequest < Struct.new(
+      nil,
       :instance_id,
       :next_token,
       :max_results,
@@ -12812,6 +13309,7 @@ module Aws::Connect
     #   <p>If there are additional results, this is the token for the next set of results.</p>
     #   @return [String]
     class ListSecurityKeysResponse < Struct.new(
+      nil,
       :security_keys,
       :next_token,
       keyword_init: true
@@ -12833,6 +13331,7 @@ module Aws::Connect
     #   <p>The maximum number of results to return per page.</p>
     #   @return [Integer]
     class ListSecurityProfileApplicationsRequest < Struct.new(
+      nil,
       :security_profile_id,
       :instance_id,
       :next_token,
@@ -12855,6 +13354,7 @@ module Aws::Connect
     #   <p>The Amazon Web Services Region where this resource was last modified.</p>
     #   @return [String]
     class ListSecurityProfileApplicationsResponse < Struct.new(
+      nil,
       :applications,
       :next_token,
       :last_modified_time,
@@ -12878,6 +13378,7 @@ module Aws::Connect
     #   <p>The maximum number of results to return per page.</p>
     #   @return [Integer]
     class ListSecurityProfilePermissionsRequest < Struct.new(
+      nil,
       :security_profile_id,
       :instance_id,
       :next_token,
@@ -12902,6 +13403,7 @@ module Aws::Connect
     #   <p>The Amazon Web Services Region where this resource was last modified.</p>
     #   @return [String]
     class ListSecurityProfilePermissionsResponse < Struct.new(
+      nil,
       :permissions,
       :next_token,
       :last_modified_time,
@@ -12922,6 +13424,7 @@ module Aws::Connect
     #   <p>The maximum number of results to return per page. The default MaxResult size is 100.</p>
     #   @return [Integer]
     class ListSecurityProfilesRequest < Struct.new(
+      nil,
       :instance_id,
       :next_token,
       :max_results,
@@ -12937,6 +13440,7 @@ module Aws::Connect
     #   <p>If there are additional results, this is the token for the next set of results.</p>
     #   @return [String]
     class ListSecurityProfilesResponse < Struct.new(
+      nil,
       :security_profile_summary_list,
       :next_token,
       keyword_init: true
@@ -12949,6 +13453,7 @@ module Aws::Connect
     #      profiles, etc) have an ARN. To locate the ARN for an instance, for example, see <a href="https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html">Find your Amazon Connect instance ID/ARN</a>. </p>
     #   @return [String]
     class ListTagsForResourceRequest < Struct.new(
+      nil,
       :resource_arn,
       keyword_init: true
     )
@@ -12959,6 +13464,7 @@ module Aws::Connect
     #   <p>Information about the tags.</p>
     #   @return [Hash<String, String>]
     class ListTagsForResourceResponse < Struct.new(
+      nil,
       :tags,
       keyword_init: true
     )
@@ -12991,6 +13497,7 @@ module Aws::Connect
     #   <p>The name of the task template.</p>
     #   @return [String]
     class ListTaskTemplatesRequest < Struct.new(
+      nil,
       :instance_id,
       :next_token,
       :max_results,
@@ -13011,6 +13518,7 @@ module Aws::Connect
     #            </important>
     #   @return [String]
     class ListTaskTemplatesResponse < Struct.new(
+      nil,
       :task_templates,
       :next_token,
       keyword_init: true
@@ -13031,6 +13539,7 @@ module Aws::Connect
     #   response in the next request to retrieve the next set of results.</p>
     #   @return [String]
     class ListTrafficDistributionGroupUsersRequest < Struct.new(
+      nil,
       :traffic_distribution_group_id,
       :max_results,
       :next_token,
@@ -13046,6 +13555,7 @@ module Aws::Connect
     #   <p>A list of traffic distribution group users.</p>
     #   @return [Array<Types::TrafficDistributionGroupUserSummary>]
     class ListTrafficDistributionGroupUsersResponse < Struct.new(
+      nil,
       :next_token,
       :traffic_distribution_group_user_summary_list,
       keyword_init: true
@@ -13064,6 +13574,7 @@ module Aws::Connect
     #   <p>The identifier of the Amazon Connect instance. You can <a href="https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html">find the instance ID</a> in the Amazon Resource Name (ARN) of the instance.</p>
     #   @return [String]
     class ListTrafficDistributionGroupsRequest < Struct.new(
+      nil,
       :max_results,
       :next_token,
       :instance_id,
@@ -13079,6 +13590,7 @@ module Aws::Connect
     #   <p>A list of traffic distribution groups.</p>
     #   @return [Array<Types::TrafficDistributionGroupSummary>]
     class ListTrafficDistributionGroupsResponse < Struct.new(
+      nil,
       :next_token,
       :traffic_distribution_group_summary_list,
       keyword_init: true
@@ -13102,6 +13614,7 @@ module Aws::Connect
     #   <p>The maximum number of results to return per page.</p>
     #   @return [Integer]
     class ListUseCasesRequest < Struct.new(
+      nil,
       :instance_id,
       :integration_association_id,
       :next_token,
@@ -13118,6 +13631,7 @@ module Aws::Connect
     #   <p>If there are additional results, this is the token for the next set of results.</p>
     #   @return [String]
     class ListUseCasesResponse < Struct.new(
+      nil,
       :use_case_summary_list,
       :next_token,
       keyword_init: true
@@ -13136,6 +13650,7 @@ module Aws::Connect
     #   <p>The maximum number of results to return per page. The default MaxResult size is 100.</p>
     #   @return [Integer]
     class ListUserHierarchyGroupsRequest < Struct.new(
+      nil,
       :instance_id,
       :next_token,
       :max_results,
@@ -13151,6 +13666,7 @@ module Aws::Connect
     #   <p>If there are additional results, this is the token for the next set of results.</p>
     #   @return [String]
     class ListUserHierarchyGroupsResponse < Struct.new(
+      nil,
       :user_hierarchy_group_summary_list,
       :next_token,
       keyword_init: true
@@ -13173,6 +13689,7 @@ module Aws::Connect
     #   <p>The maximum number of results to return per page.</p>
     #   @return [Integer]
     class ListUserProficienciesRequest < Struct.new(
+      nil,
       :instance_id,
       :user_id,
       :next_token,
@@ -13195,6 +13712,7 @@ module Aws::Connect
     #   <p>The region in which a user's proficiencies were last modified.</p>
     #   @return [String]
     class ListUserProficienciesResponse < Struct.new(
+      nil,
       :next_token,
       :user_proficiency_list,
       :last_modified_time,
@@ -13215,6 +13733,7 @@ module Aws::Connect
     #   <p>The maximum number of results to return per page. The default MaxResult size is 100.</p>
     #   @return [Integer]
     class ListUsersRequest < Struct.new(
+      nil,
       :instance_id,
       :next_token,
       :max_results,
@@ -13230,6 +13749,7 @@ module Aws::Connect
     #   <p>If there are additional results, this is the token for the next set of results.</p>
     #   @return [String]
     class ListUsersResponse < Struct.new(
+      nil,
       :user_summary_list,
       :next_token,
       keyword_init: true
@@ -13253,6 +13773,7 @@ module Aws::Connect
     #   <p>The maximum number of results to return per page. The default MaxResult size is 100.</p>
     #   @return [Integer]
     class ListViewVersionsRequest < Struct.new(
+      nil,
       :instance_id,
       :view_id,
       :next_token,
@@ -13270,6 +13791,7 @@ module Aws::Connect
     #      the next request to retrieve the next set of results.</p>
     #   @return [String]
     class ListViewVersionsResponse < Struct.new(
+      nil,
       :view_version_summary_list,
       :next_token,
       keyword_init: true
@@ -13292,6 +13814,7 @@ module Aws::Connect
     #   <p>The maximum number of results to return per page. The default MaxResult size is 100.</p>
     #   @return [Integer]
     class ListViewsRequest < Struct.new(
+      nil,
       :instance_id,
       :type,
       :next_token,
@@ -13309,6 +13832,7 @@ module Aws::Connect
     #      the next request to retrieve the next set of results.</p>
     #   @return [String]
     class ListViewsResponse < Struct.new(
+      nil,
       :views_summary_list,
       :next_token,
       keyword_init: true
@@ -13321,6 +13845,7 @@ module Aws::Connect
     #   <p>An object to define agentIds.</p>
     #   @return [Types::AgentsCriteria]
     class MatchCriteria < Struct.new(
+      nil,
       :agents_criteria,
       keyword_init: true
     )
@@ -13332,6 +13857,7 @@ module Aws::Connect
     # @!attribute message
     #   @return [String]
     class MaximumResultReturnedException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -13355,6 +13881,7 @@ module Aws::Connect
     #      when they are currently working with a contact from a Voice channel.</p>
     #   @return [Types::CrossChannelBehavior]
     class MediaConcurrency < Struct.new(
+      nil,
       :channel,
       :concurrency,
       :cross_channel_behavior,
@@ -13380,6 +13907,7 @@ module Aws::Connect
     #   <p>The event ingestion URL to which you send client meeting events.</p>
     #   @return [String]
     class MediaPlacement < Struct.new(
+      nil,
       :audio_host_url,
       :audio_fallback_url,
       :signaling_url,
@@ -13404,6 +13932,7 @@ module Aws::Connect
     #   <p>The Amazon Chime SDK meeting ID.</p>
     #   @return [String]
     class Meeting < Struct.new(
+      nil,
       :media_region,
       :media_placement,
       :meeting_features,
@@ -13418,6 +13947,7 @@ module Aws::Connect
     #   <p>The configuration settings for the audio features available to a meeting.</p>
     #   @return [Types::AudioFeatures]
     class MeetingFeaturesConfiguration < Struct.new(
+      nil,
       :audio,
       keyword_init: true
     )
@@ -13432,6 +13962,7 @@ module Aws::Connect
     #   <p>The corresponding value of the metric returned in the response.</p>
     #   @return [Float]
     class MetricDataV2 < Struct.new(
+      nil,
       :metric,
       :value,
       keyword_init: true
@@ -13496,6 +14027,7 @@ module Aws::Connect
     #       <code>false</code>. </p>
     #   @return [Boolean]
     class MetricFilterV2 < Struct.new(
+      nil,
       :metric_filter_key,
       :metric_filter_values,
       :negate,
@@ -13525,6 +14057,7 @@ module Aws::Connect
     #      each <code>StartTime</code> and <code>EndTime</code> differing by 30 minutes. </p>
     #   @return [Time]
     class MetricInterval < Struct.new(
+      nil,
       :interval,
       :start_time,
       :end_time,
@@ -13544,6 +14077,7 @@ module Aws::Connect
     #   <p>The set of metrics.</p>
     #   @return [Array<Types::MetricDataV2>]
     class MetricResultV2 < Struct.new(
+      nil,
       :dimensions,
       :metric_interval,
       :collections,
@@ -13566,6 +14100,7 @@ module Aws::Connect
     #   <p>Contains the filters to be used when returning data.</p>
     #   @return [Array<Types::MetricFilterV2>]
     class MetricV2 < Struct.new(
+      nil,
       :name,
       :threshold,
       :metric_filters,
@@ -13596,6 +14131,7 @@ module Aws::Connect
     #               <a href="https://aws.amazon.com/builders-library/making-retries-safe-with-idempotent-APIs/">Making retries safe with idempotent APIs</a>.</p>
     #   @return [String]
     class MonitorContactRequest < Struct.new(
+      nil,
       :instance_id,
       :contact_id,
       :user_id,
@@ -13613,6 +14149,7 @@ module Aws::Connect
     #   <p>The ARN of the contact.</p>
     #   @return [String]
     class MonitorContactResponse < Struct.new(
+      nil,
       :contact_id,
       :contact_arn,
       keyword_init: true
@@ -13629,6 +14166,7 @@ module Aws::Connect
     #      criteria.</p>
     #   @return [String]
     class NameCriteria < Struct.new(
+      nil,
       :search_text,
       :match_type,
       keyword_init: true
@@ -13660,6 +14198,7 @@ module Aws::Connect
     #   <p>The streaming configuration, such as the Amazon SNS streaming endpoint.</p>
     #   @return [Types::ChatStreamingConfiguration]
     class NewSessionDetails < Struct.new(
+      nil,
       :supported_messaging_content_types,
       :participant_details,
       :attributes,
@@ -13679,6 +14218,7 @@ module Aws::Connect
     #       <code>OnContactEvaluationSubmit</code> event source. </p>
     #   @return [Array<String>]
     class NotificationRecipientType < Struct.new(
+      nil,
       :user_tags,
       :user_ids,
       keyword_init: true
@@ -13703,6 +14243,7 @@ module Aws::Connect
     #   <p>The type of comparison to be made when evaluating the number condition.</p>
     #   @return [String]
     class NumberCondition < Struct.new(
+      nil,
       :field_name,
       :min_value,
       :max_value,
@@ -13721,6 +14262,7 @@ module Aws::Connect
     #   <p>A valid number.</p>
     #   @return [String]
     class NumberReference < Struct.new(
+      nil,
       :name,
       :value,
       keyword_init: true
@@ -13752,6 +14294,7 @@ module Aws::Connect
     #   <p>The property label of the automation.</p>
     #   @return [String]
     class NumericQuestionPropertyValueAutomation < Struct.new(
+      nil,
       :label,
       keyword_init: true
     )
@@ -13766,6 +14309,7 @@ module Aws::Connect
     #   <p>The end time that your contact center closes.</p>
     #   @return [Types::OverrideTimeSlice]
     class OperationalHour < Struct.new(
+      nil,
       :start,
       :end,
       keyword_init: true
@@ -13781,6 +14325,7 @@ module Aws::Connect
     #      field.</p>
     #   @return [Array<Types::EmailAddressInfo>]
     class OutboundAdditionalRecipients < Struct.new(
+      nil,
       :cc_email_addresses,
       keyword_init: true
     )
@@ -13798,6 +14343,7 @@ module Aws::Connect
     #   <p>The outbound whisper flow to be used during an outbound call.</p>
     #   @return [String]
     class OutboundCallerConfig < Struct.new(
+      nil,
       :outbound_caller_id_name,
       :outbound_caller_id_number_id,
       :outbound_flow_id,
@@ -13811,6 +14357,7 @@ module Aws::Connect
     #   <p>The message about the contact.</p>
     #   @return [String]
     class OutboundContactNotPermittedException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -13822,6 +14369,7 @@ module Aws::Connect
     #   <p>The identifier of the email address.</p>
     #   @return [String]
     class OutboundEmailConfig < Struct.new(
+      nil,
       :outbound_email_address_id,
       keyword_init: true
     )
@@ -13839,6 +14387,7 @@ module Aws::Connect
     #   <p>The raw email body content.</p>
     #   @return [Types::OutboundRawMessage]
     class OutboundEmailContent < Struct.new(
+      nil,
       :message_source_type,
       :templated_message_config,
       :raw_message,
@@ -13858,6 +14407,7 @@ module Aws::Connect
     #   <p>Type of content, that is, <code>text/plain</code> or <code>text/html</code>.</p>
     #   @return [String]
     class OutboundRawMessage < Struct.new(
+      nil,
       :subject,
       :body,
       :content_type,
@@ -13872,6 +14422,7 @@ module Aws::Connect
     # @!attribute message
     #   @return [String]
     class OutputTypeNotFoundException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -13886,6 +14437,7 @@ module Aws::Connect
     #   <p>The minutes.</p>
     #   @return [Integer]
     class OverrideTimeSlice < Struct.new(
+      nil,
       :hours,
       :minutes,
       keyword_init: true
@@ -13911,6 +14463,7 @@ module Aws::Connect
     #      indicates the participant can share their screen.</p>
     #   @return [String]
     class ParticipantCapabilities < Struct.new(
+      nil,
       :video,
       :screen_share,
       keyword_init: true
@@ -13923,6 +14476,7 @@ module Aws::Connect
     #   <p>Display name of the participant.</p>
     #   @return [String]
     class ParticipantDetails < Struct.new(
+      nil,
       :display_name,
       keyword_init: true
     )
@@ -13942,6 +14496,7 @@ module Aws::Connect
     #       sharing capabilities</a> in the <i>Amazon Connect Administrator Guide</i>.</p>
     #   @return [Types::ParticipantCapabilities]
     class ParticipantDetailsToAdd < Struct.new(
+      nil,
       :participant_role,
       :display_name,
       :participant_capabilities,
@@ -13981,6 +14536,7 @@ module Aws::Connect
     #   <p>Timestamp of last chat message by Participant.</p>
     #   @return [Time]
     class ParticipantMetrics < Struct.new(
+      nil,
       :participant_id,
       :participant_type,
       :conversation_abandon,
@@ -14013,6 +14569,7 @@ module Aws::Connect
     #      of the timer in minutes. Only one value can be set.</p>
     #   @return [Types::ParticipantTimerValue]
     class ParticipantTimerConfiguration < Struct.new(
+      nil,
       :participant_role,
       :timer_type,
       :timer_value,
@@ -14055,6 +14612,7 @@ module Aws::Connect
     #      For example, 2019-11-08T02:41:28.172Z.</p>
     #   @return [String]
     class ParticipantTokenCredentials < Struct.new(
+      nil,
       :participant_token,
       :expiry,
       keyword_init: true
@@ -14073,6 +14631,7 @@ module Aws::Connect
     #   <p>The identifier of the flow.</p>
     #   @return [String]
     class PauseContactRequest < Struct.new(
+      nil,
       :contact_id,
       :instance_id,
       :contact_flow_id,
@@ -14082,6 +14641,7 @@ module Aws::Connect
     end
 
     class PauseContactResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -14114,6 +14674,7 @@ module Aws::Connect
     #   <p>The contactId from which a persistent chat session must be started.</p>
     #   @return [String]
     class PersistentChat < Struct.new(
+      nil,
       :rehydration_type,
       :source_contact_id,
       keyword_init: true
@@ -14126,6 +14687,7 @@ module Aws::Connect
     #   <p>The phone number in E.164 format.</p>
     #   @return [String]
     class PhoneNumberQuickConnectConfig < Struct.new(
+      nil,
       :phone_number,
       keyword_init: true
     )
@@ -14161,6 +14723,7 @@ module Aws::Connect
     #   <p>The status message.</p>
     #   @return [String]
     class PhoneNumberStatus < Struct.new(
+      nil,
       :status,
       :message,
       keyword_init: true
@@ -14185,6 +14748,7 @@ module Aws::Connect
     #   <p>The ISO country code.</p>
     #   @return [String]
     class PhoneNumberSummary < Struct.new(
+      nil,
       :id,
       :arn,
       :phone_number,
@@ -14217,6 +14781,7 @@ module Aws::Connect
     #   <p>Last modified region.</p>
     #   @return [String]
     class PredefinedAttribute < Struct.new(
+      nil,
       :name,
       :values,
       :purposes,
@@ -14240,6 +14805,7 @@ module Aws::Connect
     #      Amazon Connect admin website.</p>
     #   @return [Boolean]
     class PredefinedAttributeConfiguration < Struct.new(
+      nil,
       :enable_value_validation_on_association,
       :is_read_only,
       keyword_init: true
@@ -14266,6 +14832,7 @@ module Aws::Connect
     #   <p>A leaf node condition which can be used to specify a string condition.</p>
     #   @return [Types::StringCondition]
     class PredefinedAttributeSearchCriteria < Struct.new(
+      nil,
       :or_conditions,
       :and_conditions,
       :string_condition,
@@ -14285,6 +14852,7 @@ module Aws::Connect
     #   <p>Last modified region.</p>
     #   @return [String]
     class PredefinedAttributeSummary < Struct.new(
+      nil,
       :name,
       :last_modified_time,
       :last_modified_region,
@@ -14313,6 +14881,7 @@ module Aws::Connect
     #   <p>The problem detail's message.</p>
     #   @return [String]
     class ProblemDetail < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -14342,6 +14911,7 @@ module Aws::Connect
     #   <p>The Amazon Web Services Region where this resource was last modified.</p>
     #   @return [String]
     class Prompt < Struct.new(
+      nil,
       :prompt_arn,
       :prompt_id,
       :name,
@@ -14369,6 +14939,7 @@ module Aws::Connect
     #            </note>
     #   @return [Types::StringCondition]
     class PromptSearchCriteria < Struct.new(
+      nil,
       :or_conditions,
       :and_conditions,
       :string_condition,
@@ -14393,6 +14964,7 @@ module Aws::Connect
     #            </ul>
     #   @return [Types::ControlPlaneTagFilter]
     class PromptSearchFilter < Struct.new(
+      nil,
       :tag_filter,
       keyword_init: true
     )
@@ -14416,6 +14988,7 @@ module Aws::Connect
     #   <p>The Amazon Web Services Region where this resource was last modified.</p>
     #   @return [String]
     class PromptSummary < Struct.new(
+      nil,
       :id,
       :arn,
       :name,
@@ -14432,6 +15005,7 @@ module Aws::Connect
     # @!attribute property_list
     #   @return [Array<Types::PropertyValidationExceptionProperty>]
     class PropertyValidationException < Struct.new(
+      nil,
       :message,
       :property_list,
       keyword_init: true
@@ -14450,6 +15024,7 @@ module Aws::Connect
     #   <p>A message describing why the property is not valid.</p>
     #   @return [String]
     class PropertyValidationExceptionProperty < Struct.new(
+      nil,
       :property_path,
       :reason,
       :message,
@@ -14468,6 +15043,7 @@ module Aws::Connect
     #   <p>The identifier of the agent status.</p>
     #   @return [String]
     class PutUserStatusRequest < Struct.new(
+      nil,
       :user_id,
       :instance_id,
       :agent_status_id,
@@ -14477,6 +15053,7 @@ module Aws::Connect
     end
 
     class PutUserStatusResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -14490,6 +15067,7 @@ module Aws::Connect
     #   <p>Information about the quality of Customer media connection.</p>
     #   @return [Types::CustomerQualityMetrics]
     class QualityMetrics < Struct.new(
+      nil,
       :agent,
       :customer,
       keyword_init: true
@@ -14535,6 +15113,7 @@ module Aws::Connect
     #   <p>The Amazon Web Services Region where this resource was last modified.</p>
     #   @return [String]
     class Queue < Struct.new(
+      nil,
       :name,
       :queue_arn,
       :queue_id,
@@ -14565,6 +15144,7 @@ module Aws::Connect
     #   <p>The timestamp when the contact was added to the queue.</p>
     #   @return [Time]
     class QueueInfo < Struct.new(
+      nil,
       :id,
       :enqueue_timestamp,
       keyword_init: true
@@ -14577,6 +15157,7 @@ module Aws::Connect
     #   <p>The identifier of the queue.</p>
     #   @return [String]
     class QueueInfoInput < Struct.new(
+      nil,
       :id,
       keyword_init: true
     )
@@ -14592,6 +15173,7 @@ module Aws::Connect
     #   <p>The identifier of the flow.</p>
     #   @return [String]
     class QueueQuickConnectConfig < Struct.new(
+      nil,
       :queue_id,
       :contact_flow_id,
       keyword_init: true
@@ -14607,6 +15189,7 @@ module Aws::Connect
     #   <p>The Amazon Resource Name (ARN) of the queue.</p>
     #   @return [String]
     class QueueReference < Struct.new(
+      nil,
       :id,
       :arn,
       keyword_init: true
@@ -14637,6 +15220,7 @@ module Aws::Connect
     #   <p>The type of queue.</p>
     #   @return [String]
     class QueueSearchCriteria < Struct.new(
+      nil,
       :or_conditions,
       :and_conditions,
       :string_condition,
@@ -14662,6 +15246,7 @@ module Aws::Connect
     #            </ul>
     #   @return [Types::ControlPlaneTagFilter]
     class QueueSearchFilter < Struct.new(
+      nil,
       :tag_filter,
       keyword_init: true
     )
@@ -14688,6 +15273,7 @@ module Aws::Connect
     #   <p>The Amazon Web Services Region where this resource was last modified.</p>
     #   @return [String]
     class QueueSummary < Struct.new(
+      nil,
       :id,
       :arn,
       :name,
@@ -14725,6 +15311,7 @@ module Aws::Connect
     #   <p>The Amazon Web Services Region where this resource was last modified.</p>
     #   @return [String]
     class QuickConnect < Struct.new(
+      nil,
       :quick_connect_arn,
       :quick_connect_id,
       :name,
@@ -14753,6 +15340,7 @@ module Aws::Connect
     #   <p>The phone configuration. This is required only if QuickConnectType is PHONE_NUMBER.</p>
     #   @return [Types::PhoneNumberQuickConnectConfig]
     class QuickConnectConfig < Struct.new(
+      nil,
       :quick_connect_type,
       :user_config,
       :queue_config,
@@ -14777,6 +15365,7 @@ module Aws::Connect
     #            </note>
     #   @return [Types::StringCondition]
     class QuickConnectSearchCriteria < Struct.new(
+      nil,
       :or_conditions,
       :and_conditions,
       :string_condition,
@@ -14801,6 +15390,7 @@ module Aws::Connect
     #            </ul>
     #   @return [Types::ControlPlaneTagFilter]
     class QuickConnectSearchFilter < Struct.new(
+      nil,
       :tag_filter,
       keyword_init: true
     )
@@ -14828,6 +15418,7 @@ module Aws::Connect
     #   <p>The Amazon Web Services Region where this resource was last modified.</p>
     #   @return [String]
     class QuickConnectSummary < Struct.new(
+      nil,
       :id,
       :arn,
       :name,
@@ -14847,6 +15438,7 @@ module Aws::Connect
     #   <p>The maximum proficiency level of the range.</p>
     #   @return [Float]
     class Range < Struct.new(
+      nil,
       :min_proficiency_level,
       :max_proficiency_level,
       keyword_init: true
@@ -14859,6 +15451,7 @@ module Aws::Connect
     #   <p>Identifier of the read-only field.</p>
     #   @return [Types::TaskTemplateFieldIdentifier]
     class ReadOnlyFieldInfo < Struct.new(
+      nil,
       :id,
       keyword_init: true
     )
@@ -14882,6 +15475,7 @@ module Aws::Connect
     #   <p>Status of the attachment.</p>
     #   @return [String]
     class RealTimeContactAnalysisAttachment < Struct.new(
+      nil,
       :attachment_name,
       :content_type,
       :attachment_id,
@@ -14896,6 +15490,7 @@ module Aws::Connect
     #   <p>List of PointOfInterest - objects describing a single match of a rule.</p>
     #   @return [Array<Types::RealTimeContactAnalysisPointOfInterest>]
     class RealTimeContactAnalysisCategoryDetails < Struct.new(
+      nil,
       :points_of_interest,
       keyword_init: true
     )
@@ -14910,6 +15505,7 @@ module Aws::Connect
     #   <p>The end of the character interval.</p>
     #   @return [Integer]
     class RealTimeContactAnalysisCharacterInterval < Struct.new(
+      nil,
       :begin_offset_char,
       :end_offset_char,
       keyword_init: true
@@ -14929,6 +15525,7 @@ module Aws::Connect
     #   <p>List of the transcript items (segments) that are associated with a given issue.</p>
     #   @return [Array<Types::RealTimeContactAnalysisTranscriptItemWithContent>]
     class RealTimeContactAnalysisIssueDetected < Struct.new(
+      nil,
       :transcript_items,
       keyword_init: true
     )
@@ -14941,6 +15538,7 @@ module Aws::Connect
     #     </p>
     #   @return [Array<Types::RealTimeContactAnalysisTranscriptItemWithCharacterOffsets>]
     class RealTimeContactAnalysisPointOfInterest < Struct.new(
+      nil,
       :transcript_items,
       keyword_init: true
     )
@@ -14967,6 +15565,7 @@ module Aws::Connect
     #   <p>Field describing the time of the event. It can have different representations of time.</p>
     #   @return [Types::RealTimeContactAnalysisTimeData]
     class RealTimeContactAnalysisSegmentAttachments < Struct.new(
+      nil,
       :id,
       :participant_id,
       :participant_role,
@@ -14983,6 +15582,7 @@ module Aws::Connect
     #   <p>Map between the name of the matched rule and RealTimeContactAnalysisCategoryDetails.</p>
     #   @return [Hash<String, Types::RealTimeContactAnalysisCategoryDetails>]
     class RealTimeContactAnalysisSegmentCategories < Struct.new(
+      nil,
       :matched_details,
       keyword_init: true
     )
@@ -15010,6 +15610,7 @@ module Aws::Connect
     #   <p>Field describing the time of the event. It can have different representations of time.</p>
     #   @return [Types::RealTimeContactAnalysisTimeData]
     class RealTimeContactAnalysisSegmentEvent < Struct.new(
+      nil,
       :id,
       :participant_id,
       :participant_role,
@@ -15026,6 +15627,7 @@ module Aws::Connect
     #   <p>List of the issues detected.</p>
     #   @return [Array<Types::RealTimeContactAnalysisIssueDetected>]
     class RealTimeContactAnalysisSegmentIssues < Struct.new(
+      nil,
       :issues_detected,
       keyword_init: true
     )
@@ -15070,6 +15672,7 @@ module Aws::Connect
     #            </ul>
     #   @return [String]
     class RealTimeContactAnalysisSegmentPostContactSummary < Struct.new(
+      nil,
       :content,
       :status,
       :failure_code,
@@ -15108,6 +15711,7 @@ module Aws::Connect
     #   <p>The sentiment detected for this piece of transcript.</p>
     #   @return [String]
     class RealTimeContactAnalysisSegmentTranscript < Struct.new(
+      nil,
       :id,
       :participant_id,
       :participant_role,
@@ -15146,6 +15750,7 @@ module Aws::Connect
     #      For <code> OutputType.Redacted</code>, part of the string with redaction tag.</p>
     #   @return [Array<Types::RealTimeContactAnalysisCharacterInterval>]
     class RealTimeContactAnalysisTranscriptItemRedaction < Struct.new(
+      nil,
       :character_offsets,
       keyword_init: true
     )
@@ -15163,6 +15768,7 @@ module Aws::Connect
     #   <p>List of character intervals within transcript content/text.</p>
     #   @return [Types::RealTimeContactAnalysisCharacterInterval]
     class RealTimeContactAnalysisTranscriptItemWithCharacterOffsets < Struct.new(
+      nil,
       :id,
       :character_offsets,
       keyword_init: true
@@ -15184,6 +15790,7 @@ module Aws::Connect
     #   <p>Begin and end offsets for a part of text.</p>
     #   @return [Types::RealTimeContactAnalysisCharacterInterval]
     class RealTimeContactAnalysisTranscriptItemWithContent < Struct.new(
+      nil,
       :content,
       :id,
       :character_offsets,
@@ -15287,6 +15894,7 @@ module Aws::Connect
     #   <p>If the recording/transcript was deleted, this is the reason entered for the deletion.</p>
     #   @return [String]
     class RecordingInfo < Struct.new(
+      nil,
       :storage_type,
       :location,
       :media_stream_type,
@@ -15322,6 +15930,7 @@ module Aws::Connect
     #   <p>Relevant details why the reference was not successfully created.</p>
     #   @return [String]
     class Reference < Struct.new(
+      nil,
       :value,
       :type,
       :status,
@@ -15400,6 +16009,7 @@ module Aws::Connect
     #               <a href="https://aws.amazon.com/builders-library/making-retries-safe-with-idempotent-APIs/">Making retries safe with idempotent APIs</a>.</p>
     #   @return [String]
     class ReleasePhoneNumberRequest < Struct.new(
+      nil,
       :phone_number_id,
       :client_token,
       keyword_init: true
@@ -15423,6 +16033,7 @@ module Aws::Connect
     #   <p>The alias for the replicated instance. The <code>ReplicaAlias</code> must be unique.</p>
     #   @return [String]
     class ReplicateInstanceRequest < Struct.new(
+      nil,
       :instance_id,
       :replica_region,
       :client_token,
@@ -15441,6 +16052,7 @@ module Aws::Connect
     #   <p>The Amazon Resource Name (ARN) of the replicated instance.</p>
     #   @return [String]
     class ReplicateInstanceResponse < Struct.new(
+      nil,
       :id,
       :arn,
       keyword_init: true
@@ -15471,6 +16083,7 @@ module Aws::Connect
     #        <i>Amazon Connect Administrator Guide</i>. </p>
     #   @return [String]
     class ReplicationConfiguration < Struct.new(
+      nil,
       :replication_status_summary_list,
       :source_region,
       :global_sign_in_endpoint,
@@ -15496,6 +16109,7 @@ module Aws::Connect
     #      Region.</p>
     #   @return [String]
     class ReplicationStatusSummary < Struct.new(
+      nil,
       :region,
       :replication_status,
       :replication_status_reason,
@@ -15509,6 +16123,7 @@ module Aws::Connect
     #   <p>The unique identifier for the field.</p>
     #   @return [Types::TaskTemplateFieldIdentifier]
     class RequiredFieldInfo < Struct.new(
+      nil,
       :id,
       keyword_init: true
     )
@@ -15519,6 +16134,7 @@ module Aws::Connect
     # @!attribute message
     #   @return [String]
     class ResourceConflictException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -15538,6 +16154,7 @@ module Aws::Connect
     #   <p>The identifier for the resource.</p>
     #   @return [String]
     class ResourceInUseException < Struct.new(
+      nil,
       :message,
       :resource_type,
       :resource_id,
@@ -15551,6 +16168,7 @@ module Aws::Connect
     #   <p>The message about the resource.</p>
     #   @return [String]
     class ResourceNotFoundException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -15561,6 +16179,7 @@ module Aws::Connect
     # @!attribute message
     #   @return [String]
     class ResourceNotReadyException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -15572,6 +16191,7 @@ module Aws::Connect
     #   <p>The search criteria to be used to return tags.</p>
     #   @return [Types::TagSearchCondition]
     class ResourceTagsSearchCriteria < Struct.new(
+      nil,
       :tag_search_condition,
       keyword_init: true
     )
@@ -15592,6 +16212,7 @@ module Aws::Connect
     #   <p>The type of recording being operated on.</p>
     #   @return [String]
     class ResumeContactRecordingRequest < Struct.new(
+      nil,
       :instance_id,
       :contact_id,
       :initial_contact_id,
@@ -15602,6 +16223,7 @@ module Aws::Connect
     end
 
     class ResumeContactRecordingResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -15618,6 +16240,7 @@ module Aws::Connect
     #   <p>The identifier of the flow.</p>
     #   @return [String]
     class ResumeContactRequest < Struct.new(
+      nil,
       :contact_id,
       :instance_id,
       :contact_flow_id,
@@ -15627,6 +16250,7 @@ module Aws::Connect
     end
 
     class ResumeContactResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -15649,6 +16273,7 @@ module Aws::Connect
     #   <p>Information about the index of the routing criteria.</p>
     #   @return [Integer]
     class RoutingCriteria < Struct.new(
+      nil,
       :steps,
       :activation_timestamp,
       :index,
@@ -15665,6 +16290,7 @@ module Aws::Connect
     #      any agent in the queue.</p>
     #   @return [Array<Types::RoutingCriteriaInputStep>]
     class RoutingCriteriaInput < Struct.new(
+      nil,
       :steps,
       keyword_init: true
     )
@@ -15680,6 +16306,7 @@ module Aws::Connect
     #   <p>A tagged union to specify expression for a routing step.</p>
     #   @return [Types::Expression]
     class RoutingCriteriaInputStep < Struct.new(
+      nil,
       :expiry,
       :expression,
       keyword_init: true
@@ -15694,6 +16321,7 @@ module Aws::Connect
     #      step, if expiry was configured for this routing step.</p>
     #   @return [Integer]
     class RoutingCriteriaInputStepExpiry < Struct.new(
+      nil,
       :duration_in_seconds,
       keyword_init: true
     )
@@ -15756,6 +16384,7 @@ module Aws::Connect
     #   <p>The IDs of the associated manual assignment queues.</p>
     #   @return [Array<String>]
     class RoutingProfile < Struct.new(
+      nil,
       :instance_id,
       :name,
       :routing_profile_arn,
@@ -15789,6 +16418,7 @@ module Aws::Connect
     #   <p>Contains the channel and queue identifier for a routing profile.</p>
     #   @return [Types::RoutingProfileQueueReference]
     class RoutingProfileManualAssignmentQueueConfig < Struct.new(
+      nil,
       :queue_reference,
       keyword_init: true
     )
@@ -15809,6 +16439,7 @@ module Aws::Connect
     #   <p>The channels this queue supports. Valid Values: CHAT | TASK | EMAIL </p>
     #   @return [String]
     class RoutingProfileManualAssignmentQueueConfigSummary < Struct.new(
+      nil,
       :queue_id,
       :queue_arn,
       :queue_name,
@@ -15834,6 +16465,7 @@ module Aws::Connect
     #       delay</a> in the <i>Amazon Connect Administrator Guide</i>.</p>
     #   @return [Integer]
     class RoutingProfileQueueConfig < Struct.new(
+      nil,
       :queue_reference,
       :priority,
       :delay,
@@ -15871,6 +16503,7 @@ module Aws::Connect
     #   <p>The channels this queue supports.</p>
     #   @return [String]
     class RoutingProfileQueueConfigSummary < Struct.new(
+      nil,
       :queue_id,
       :queue_arn,
       :queue_name,
@@ -15896,6 +16529,7 @@ module Aws::Connect
     #      profile.</p>
     #   @return [String]
     class RoutingProfileQueueReference < Struct.new(
+      nil,
       :queue_id,
       :channel,
       keyword_init: true
@@ -15911,6 +16545,7 @@ module Aws::Connect
     #   <p>The Amazon Resource Name (ARN) of the routing profile.</p>
     #   @return [String]
     class RoutingProfileReference < Struct.new(
+      nil,
       :id,
       :arn,
       keyword_init: true
@@ -15939,6 +16574,7 @@ module Aws::Connect
     #            </note>
     #   @return [Types::StringCondition]
     class RoutingProfileSearchCriteria < Struct.new(
+      nil,
       :or_conditions,
       :and_conditions,
       :string_condition,
@@ -15963,6 +16599,7 @@ module Aws::Connect
     #            </ul>
     #   @return [Types::ControlPlaneTagFilter]
     class RoutingProfileSearchFilter < Struct.new(
+      nil,
       :tag_filter,
       keyword_init: true
     )
@@ -15986,6 +16623,7 @@ module Aws::Connect
     #   <p>The Amazon Web Services Region where this resource was last modified.</p>
     #   @return [String]
     class RoutingProfileSummary < Struct.new(
+      nil,
       :id,
       :arn,
       :name,
@@ -16031,6 +16669,7 @@ module Aws::Connect
     #   <p>The tags used to organize, track, or control access for this resource. For example, { "Tags": {"key1":"value1", "key2":"value2"} }.</p>
     #   @return [Hash<String, String>]
     class Rule < Struct.new(
+      nil,
       :name,
       :rule_id,
       :rule_arn,
@@ -16103,6 +16742,7 @@ module Aws::Connect
     #   <p>Information about the submit automated evaluation action.</p>
     #   @return [Types::SubmitAutoEvaluationActionDefinition]
     class RuleAction < Struct.new(
+      nil,
       :action_type,
       :task_action,
       :event_bridge_action,
@@ -16144,6 +16784,7 @@ module Aws::Connect
     #   <p>The timestamp for when the rule was last updated.</p>
     #   @return [Time]
     class RuleSummary < Struct.new(
+      nil,
       :name,
       :rule_id,
       :rule_arn,
@@ -16168,6 +16809,7 @@ module Aws::Connect
     #   <p>The identifier for the integration association.</p>
     #   @return [String]
     class RuleTriggerEventSource < Struct.new(
+      nil,
       :event_source_name,
       :integration_association_id,
       keyword_init: true
@@ -16186,6 +16828,7 @@ module Aws::Connect
     #   <p>The Amazon S3 encryption configuration.</p>
     #   @return [Types::EncryptionConfig]
     class S3Config < Struct.new(
+      nil,
       :bucket_name,
       :bucket_prefix,
       :encryption_config,
@@ -16212,6 +16855,7 @@ module Aws::Connect
     #   <p>The search criteria to be used to return agent statuses.</p>
     #   @return [Types::AgentStatusSearchCriteria]
     class SearchAgentStatusesRequest < Struct.new(
+      nil,
       :instance_id,
       :next_token,
       :max_results,
@@ -16232,6 +16876,7 @@ module Aws::Connect
     #   <p>The total number of agent statuses which matched your search query.</p>
     #   @return [Integer]
     class SearchAgentStatusesResponse < Struct.new(
+      nil,
       :agent_statuses,
       :next_token,
       :approximate_total_count,
@@ -16265,6 +16910,7 @@ module Aws::Connect
     #   response in the next request to retrieve the next set of results.</p>
     #   @return [String]
     class SearchAvailablePhoneNumbersRequest < Struct.new(
+      nil,
       :target_arn,
       :instance_id,
       :phone_number_country_code,
@@ -16284,6 +16930,7 @@ module Aws::Connect
     #   <p>A list of available phone numbers that you can claim to your Amazon Connect instance or traffic distribution group.</p>
     #   @return [Array<Types::AvailableNumberSummary>]
     class SearchAvailablePhoneNumbersResponse < Struct.new(
+      nil,
       :next_token,
       :available_numbers_list,
       keyword_init: true
@@ -16314,6 +16961,7 @@ module Aws::Connect
     #            </note>
     #   @return [Types::ContactFlowModuleSearchCriteria]
     class SearchContactFlowModulesRequest < Struct.new(
+      nil,
       :instance_id,
       :next_token,
       :max_results,
@@ -16334,6 +16982,7 @@ module Aws::Connect
     #   <p>The total number of flows which matched your search query.</p>
     #   @return [Integer]
     class SearchContactFlowModulesResponse < Struct.new(
+      nil,
       :contact_flow_modules,
       :next_token,
       :approximate_total_count,
@@ -16365,6 +17014,7 @@ module Aws::Connect
     #            </note>
     #   @return [Types::ContactFlowSearchCriteria]
     class SearchContactFlowsRequest < Struct.new(
+      nil,
       :instance_id,
       :next_token,
       :max_results,
@@ -16385,6 +17035,7 @@ module Aws::Connect
     #   <p>The total number of flows which matched your search query.</p>
     #   @return [Integer]
     class SearchContactFlowsResponse < Struct.new(
+      nil,
       :contact_flows,
       :next_token,
       :approximate_total_count,
@@ -16401,6 +17052,7 @@ module Aws::Connect
     #   <p>The match type combining multiple time range filters.</p>
     #   @return [String]
     class SearchContactsAdditionalTimeRange < Struct.new(
+      nil,
       :criteria,
       :match_type,
       keyword_init: true
@@ -16416,6 +17068,7 @@ module Aws::Connect
     #   <p>List of the timestamp conditions.</p>
     #   @return [Types::SearchContactsTimestampCondition]
     class SearchContactsAdditionalTimeRangeCriteria < Struct.new(
+      nil,
       :time_range,
       :timestamp_condition,
       keyword_init: true
@@ -16444,6 +17097,7 @@ module Aws::Connect
     #   <p>Specifies a field to sort by and a sort order.</p>
     #   @return [Types::Sort]
     class SearchContactsRequest < Struct.new(
+      nil,
       :instance_id,
       :time_range,
       :search_criteria,
@@ -16465,6 +17119,7 @@ module Aws::Connect
     #   <p>The total number of contacts which matched your search query.</p>
     #   @return [Integer]
     class SearchContactsResponse < Struct.new(
+      nil,
       :contacts,
       :next_token,
       :total_count,
@@ -16484,6 +17139,7 @@ module Aws::Connect
     #   <p>The end time of the time range.</p>
     #   @return [Time]
     class SearchContactsTimeRange < Struct.new(
+      nil,
       :type,
       :start_time,
       :end_time,
@@ -16501,6 +17157,7 @@ module Aws::Connect
     #   <p>Condition of the timestamp on the contact.</p>
     #   @return [String]
     class SearchContactsTimestampCondition < Struct.new(
+      nil,
       :type,
       :condition_type,
       keyword_init: true
@@ -16550,6 +17207,7 @@ module Aws::Connect
     #   <p>The search criteria based on searchable segment attributes of a contact.</p>
     #   @return [Types::SearchableSegmentAttributes]
     class SearchCriteria < Struct.new(
+      nil,
       :name,
       :agent_ids,
       :agent_hierarchy_groups,
@@ -16583,6 +17241,7 @@ module Aws::Connect
     #   <p>Filters to be applied to search results.</p>
     #   @return [Types::EmailAddressSearchFilter]
     class SearchEmailAddressesRequest < Struct.new(
+      nil,
       :instance_id,
       :max_results,
       :next_token,
@@ -16603,6 +17262,7 @@ module Aws::Connect
     #   <p>The total number of email addresses which matched your search query.</p>
     #   @return [Integer]
     class SearchEmailAddressesResponse < Struct.new(
+      nil,
       :next_token,
       :email_addresses,
       :approximate_total_count,
@@ -16628,6 +17288,7 @@ module Aws::Connect
     #   <p>The search criteria to be used to return hours of operations overrides.</p>
     #   @return [Types::HoursOfOperationOverrideSearchCriteria]
     class SearchHoursOfOperationOverridesRequest < Struct.new(
+      nil,
       :instance_id,
       :next_token,
       :max_results,
@@ -16649,6 +17310,7 @@ module Aws::Connect
     #   <p>The total number of hours of operations which matched your search query.</p>
     #   @return [Integer]
     class SearchHoursOfOperationOverridesResponse < Struct.new(
+      nil,
       :hours_of_operation_overrides,
       :next_token,
       :approximate_total_count,
@@ -16674,6 +17336,7 @@ module Aws::Connect
     #   <p>The search criteria to be used to return hours of operations.</p>
     #   @return [Types::HoursOfOperationSearchCriteria]
     class SearchHoursOfOperationsRequest < Struct.new(
+      nil,
       :instance_id,
       :next_token,
       :max_results,
@@ -16694,6 +17357,7 @@ module Aws::Connect
     #   <p>The total number of hours of operations which matched your search query.</p>
     #   @return [Integer]
     class SearchHoursOfOperationsResponse < Struct.new(
+      nil,
       :hours_of_operations,
       :next_token,
       :approximate_total_count,
@@ -16717,6 +17381,7 @@ module Aws::Connect
     #   <p>The search criteria to be used to return predefined attributes.</p>
     #   @return [Types::PredefinedAttributeSearchCriteria]
     class SearchPredefinedAttributesRequest < Struct.new(
+      nil,
       :instance_id,
       :next_token,
       :max_results,
@@ -16737,6 +17402,7 @@ module Aws::Connect
     #   <p>The approximate number of predefined attributes which matched your search query.</p>
     #   @return [Integer]
     class SearchPredefinedAttributesResponse < Struct.new(
+      nil,
       :predefined_attributes,
       :next_token,
       :approximate_total_count,
@@ -16762,6 +17428,7 @@ module Aws::Connect
     #   <p>The search criteria to be used to return prompts.</p>
     #   @return [Types::PromptSearchCriteria]
     class SearchPromptsRequest < Struct.new(
+      nil,
       :instance_id,
       :next_token,
       :max_results,
@@ -16782,6 +17449,7 @@ module Aws::Connect
     #   <p>The total number of quick connects which matched your search query.</p>
     #   @return [Integer]
     class SearchPromptsResponse < Struct.new(
+      nil,
       :prompts,
       :next_token,
       :approximate_total_count,
@@ -16812,6 +17480,7 @@ module Aws::Connect
     #            </note>
     #   @return [Types::QueueSearchCriteria]
     class SearchQueuesRequest < Struct.new(
+      nil,
       :instance_id,
       :next_token,
       :max_results,
@@ -16832,6 +17501,7 @@ module Aws::Connect
     #   <p>The total number of queues which matched your search query.</p>
     #   @return [Integer]
     class SearchQueuesResponse < Struct.new(
+      nil,
       :queues,
       :next_token,
       :approximate_total_count,
@@ -16857,6 +17527,7 @@ module Aws::Connect
     #   <p>The search criteria to be used to return quick connects.</p>
     #   @return [Types::QuickConnectSearchCriteria]
     class SearchQuickConnectsRequest < Struct.new(
+      nil,
       :instance_id,
       :next_token,
       :max_results,
@@ -16877,6 +17548,7 @@ module Aws::Connect
     #   <p>The total number of quick connects which matched your search query.</p>
     #   @return [Integer]
     class SearchQuickConnectsResponse < Struct.new(
+      nil,
       :quick_connects,
       :next_token,
       :approximate_total_count,
@@ -16940,6 +17612,7 @@ module Aws::Connect
     #   <p>The search criteria to be used to return tags.</p>
     #   @return [Types::ResourceTagsSearchCriteria]
     class SearchResourceTagsRequest < Struct.new(
+      nil,
       :instance_id,
       :resource_types,
       :next_token,
@@ -16957,6 +17630,7 @@ module Aws::Connect
     #   <p>If there are additional results, this is the token for the next set of results.</p>
     #   @return [String]
     class SearchResourceTagsResponse < Struct.new(
+      nil,
       :tags,
       :next_token,
       keyword_init: true
@@ -16986,6 +17660,7 @@ module Aws::Connect
     #            </note>
     #   @return [Types::RoutingProfileSearchCriteria]
     class SearchRoutingProfilesRequest < Struct.new(
+      nil,
       :instance_id,
       :next_token,
       :max_results,
@@ -17006,6 +17681,7 @@ module Aws::Connect
     #   <p>The total number of routing profiles which matched your search query.</p>
     #   @return [Integer]
     class SearchRoutingProfilesResponse < Struct.new(
+      nil,
       :routing_profiles,
       :next_token,
       :approximate_total_count,
@@ -17040,6 +17716,7 @@ module Aws::Connect
     #   <p>Filters to be applied to search results.</p>
     #   @return [Types::SecurityProfilesSearchFilter]
     class SearchSecurityProfilesRequest < Struct.new(
+      nil,
       :instance_id,
       :next_token,
       :max_results,
@@ -17060,6 +17737,7 @@ module Aws::Connect
     #   <p>The total number of security profiles which matched your search query.</p>
     #   @return [Integer]
     class SearchSecurityProfilesResponse < Struct.new(
+      nil,
       :security_profiles,
       :next_token,
       :approximate_total_count,
@@ -17086,6 +17764,7 @@ module Aws::Connect
     #   <p>The search criteria to be used to return UserHierarchyGroups.</p>
     #   @return [Types::UserHierarchyGroupSearchCriteria]
     class SearchUserHierarchyGroupsRequest < Struct.new(
+      nil,
       :instance_id,
       :next_token,
       :max_results,
@@ -17106,6 +17785,7 @@ module Aws::Connect
     #   <p>The total number of userHierarchyGroups which matched your search query.</p>
     #   @return [Integer]
     class SearchUserHierarchyGroupsResponse < Struct.new(
+      nil,
       :user_hierarchy_groups,
       :next_token,
       :approximate_total_count,
@@ -17136,6 +17816,7 @@ module Aws::Connect
     #            </note>
     #   @return [Types::UserSearchCriteria]
     class SearchUsersRequest < Struct.new(
+      nil,
       :instance_id,
       :next_token,
       :max_results,
@@ -17156,6 +17837,7 @@ module Aws::Connect
     #   <p>The total number of users who matched your search query.</p>
     #   @return [Integer]
     class SearchUsersResponse < Struct.new(
+      nil,
       :users,
       :next_token,
       :approximate_total_count,
@@ -17186,6 +17868,7 @@ module Aws::Connect
     #            </p>
     #   @return [String]
     class SearchVocabulariesRequest < Struct.new(
+      nil,
       :instance_id,
       :max_results,
       :next_token,
@@ -17204,6 +17887,7 @@ module Aws::Connect
     #   <p>If there are additional results, this is the token for the next set of results.</p>
     #   @return [String]
     class SearchVocabulariesResponse < Struct.new(
+      nil,
       :vocabulary_summary_list,
       :next_token,
       keyword_init: true
@@ -17219,6 +17903,7 @@ module Aws::Connect
     #   <p>The match type combining multiple agent criteria steps.</p>
     #   @return [String]
     class SearchableAgentCriteriaStep < Struct.new(
+      nil,
       :agent_ids,
       :match_type,
       keyword_init: true
@@ -17237,6 +17922,7 @@ module Aws::Connect
     #      attributes.</p>
     #   @return [String]
     class SearchableContactAttributes < Struct.new(
+      nil,
       :criteria,
       :match_type,
       keyword_init: true
@@ -17253,6 +17939,7 @@ module Aws::Connect
     #   <p>The list of values to search for within a user-defined contact attribute.</p>
     #   @return [Array<String>]
     class SearchableContactAttributesCriteria < Struct.new(
+      nil,
       :key,
       :values,
       keyword_init: true
@@ -17265,6 +17952,7 @@ module Aws::Connect
     #   <p>The list of Routing criteria steps of the contact routing.</p>
     #   @return [Array<Types::SearchableRoutingCriteriaStep>]
     class SearchableRoutingCriteria < Struct.new(
+      nil,
       :steps,
       keyword_init: true
     )
@@ -17276,6 +17964,7 @@ module Aws::Connect
     #   <p>Agent matching the routing step of the routing criteria</p>
     #   @return [Types::SearchableAgentCriteriaStep]
     class SearchableRoutingCriteriaStep < Struct.new(
+      nil,
       :agent_criteria,
       keyword_init: true
     )
@@ -17291,6 +17980,7 @@ module Aws::Connect
     #      attributes.</p>
     #   @return [String]
     class SearchableSegmentAttributes < Struct.new(
+      nil,
       :criteria,
       :match_type,
       keyword_init: true
@@ -17307,6 +17997,7 @@ module Aws::Connect
     #   <p>The list of values to search for within a searchable segment attribute.</p>
     #   @return [Array<String>]
     class SearchableSegmentAttributesCriteria < Struct.new(
+      nil,
       :key,
       :values,
       keyword_init: true
@@ -17325,6 +18016,7 @@ module Aws::Connect
     #   <p>When the security key was created.</p>
     #   @return [Time]
     class SecurityKey < Struct.new(
+      nil,
       :association_id,
       :key,
       :creation_time,
@@ -17372,6 +18064,7 @@ module Aws::Connect
     #      resources in Amazon Connect.</p>
     #   @return [String]
     class SecurityProfile < Struct.new(
+      nil,
       :id,
       :organization_resource_id,
       :arn,
@@ -17405,6 +18098,7 @@ module Aws::Connect
     #   <p>A leaf node condition which can be used to specify a string condition.</p>
     #   @return [Types::StringCondition]
     class SecurityProfileSearchCriteria < Struct.new(
+      nil,
       :or_conditions,
       :and_conditions,
       :string_condition,
@@ -17433,6 +18127,7 @@ module Aws::Connect
     #   <p>The tags used to organize, track, or control access for this resource. For example, { "Tags": {"key1":"value1", "key2":"value2"} }.</p>
     #   @return [Hash<String, String>]
     class SecurityProfileSearchSummary < Struct.new(
+      nil,
       :id,
       :organization_resource_id,
       :arn,
@@ -17461,6 +18156,7 @@ module Aws::Connect
     #   <p>The Amazon Web Services Region where this resource was last modified.</p>
     #   @return [String]
     class SecurityProfileSummary < Struct.new(
+      nil,
       :id,
       :arn,
       :name,
@@ -17487,6 +18183,7 @@ module Aws::Connect
     #            </ul>
     #   @return [Types::ControlPlaneTagFilter]
     class SecurityProfilesSearchFilter < Struct.new(
+      nil,
       :tag_filter,
       keyword_init: true
     )
@@ -17513,6 +18210,7 @@ module Aws::Connect
     #      system-defined attributes, not for user-defined attributes.</p>
     #   @return [String]
     class SegmentAttributeValue < Struct.new(
+      nil,
       :value_string,
       :value_map,
       :value_integer,
@@ -17545,6 +18243,7 @@ module Aws::Connect
     #      with an existing chat, this is ignored.</p>
     #   @return [Types::NewSessionDetails]
     class SendChatIntegrationEventRequest < Struct.new(
+      nil,
       :source_id,
       :destination_id,
       :subtype,
@@ -17564,6 +18263,7 @@ module Aws::Connect
     #      chat.</p>
     #   @return [Boolean]
     class SendChatIntegrationEventResponse < Struct.new(
+      nil,
       :initial_contact_id,
       :new_chat_created,
       keyword_init: true
@@ -17593,6 +18293,7 @@ module Aws::Connect
     #   <p>Notification recipient.</p>
     #   @return [Types::NotificationRecipientType]
     class SendNotificationActionDefinition < Struct.new(
+      nil,
       :delivery_method,
       :subject,
       :content,
@@ -17634,6 +18335,7 @@ module Aws::Connect
     #               <a href="https://aws.amazon.com/builders-library/making-retries-safe-with-idempotent-APIs/">Making retries safe with idempotent APIs</a>.</p>
     #   @return [String]
     class SendOutboundEmailRequest < Struct.new(
+      nil,
       :instance_id,
       :from_email_address,
       :destination_email_address,
@@ -17648,6 +18350,7 @@ module Aws::Connect
     end
 
     class SendOutboundEmailResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -17660,6 +18363,7 @@ module Aws::Connect
     #   <p>The reason for the exception.</p>
     #   @return [Types::ServiceQuotaExceededExceptionReason]
     class ServiceQuotaExceededException < Struct.new(
+      nil,
       :message,
       :reason,
       keyword_init: true
@@ -17688,6 +18392,7 @@ module Aws::Connect
     #   <p>Information about traffic distributions.</p>
     #   @return [Array<Types::SignInDistribution>]
     class SignInConfig < Struct.new(
+      nil,
       :distributions,
       keyword_init: true
     )
@@ -17702,6 +18407,7 @@ module Aws::Connect
     #   <p>Whether sign in distribution is enabled.</p>
     #   @return [Boolean]
     class SignInDistribution < Struct.new(
+      nil,
       :region,
       :enabled,
       keyword_init: true
@@ -17729,6 +18435,7 @@ module Aws::Connect
     #   <p>The identifier of the answer option.</p>
     #   @return [String]
     class SingleSelectQuestionRuleCategoryAutomation < Struct.new(
+      nil,
       :category,
       :condition,
       :option_ref_id,
@@ -17745,6 +18452,7 @@ module Aws::Connect
     #   <p>An ascending or descending sort.</p>
     #   @return [String]
     class Sort < Struct.new(
+      nil,
       :field_name,
       :order,
       keyword_init: true
@@ -17760,6 +18468,7 @@ module Aws::Connect
     #   <p>A unique identifier for a each request part of same campaign.</p>
     #   @return [String]
     class SourceCampaign < Struct.new(
+      nil,
       :campaign_id,
       :outbound_request_id,
       keyword_init: true
@@ -17807,6 +18516,7 @@ module Aws::Connect
     #       "Tags": {"key1":"value1", "key2":"value2"} }</code>.</p>
     #   @return [Hash<String, String>]
     class StartAttachedFileUploadRequest < Struct.new(
+      nil,
       :client_token,
       :instance_id,
       :file_name,
@@ -17843,6 +18553,7 @@ module Aws::Connect
     #   <p>The headers to be provided while uploading the file to the URL.</p>
     #   @return [Types::UploadUrlMetadata]
     class StartAttachedFileUploadResponse < Struct.new(
+      nil,
       :file_arn,
       :file_id,
       :creation_time,
@@ -17934,6 +18645,7 @@ module Aws::Connect
     #      customer number from your CRM.</p>
     #   @return [String]
     class StartChatContactRequest < Struct.new(
+      nil,
       :instance_id,
       :contact_flow_id,
       :attributes,
@@ -17967,6 +18679,7 @@ module Aws::Connect
     #      for persistent chats.</p>
     #   @return [String]
     class StartChatContactResponse < Struct.new(
+      nil,
       :contact_id,
       :participant_id,
       :participant_token,
@@ -17992,6 +18705,7 @@ module Aws::Connect
     #               <a href="https://aws.amazon.com/builders-library/making-retries-safe-with-idempotent-APIs/">Making retries safe with idempotent APIs</a>.</p>
     #   @return [String]
     class StartContactEvaluationRequest < Struct.new(
+      nil,
       :instance_id,
       :contact_id,
       :evaluation_form_id,
@@ -18008,6 +18722,7 @@ module Aws::Connect
     #   <p>The Amazon Resource Name (ARN) for the contact evaluation resource.</p>
     #   @return [String]
     class StartContactEvaluationResponse < Struct.new(
+      nil,
       :evaluation_id,
       :evaluation_arn,
       keyword_init: true
@@ -18029,6 +18744,7 @@ module Aws::Connect
     #   <p>The person being recorded.</p>
     #   @return [Types::VoiceRecordingConfiguration]
     class StartContactRecordingRequest < Struct.new(
+      nil,
       :instance_id,
       :contact_id,
       :initial_contact_id,
@@ -18039,6 +18755,7 @@ module Aws::Connect
     end
 
     class StartContactRecordingResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -18061,6 +18778,7 @@ module Aws::Connect
     #               <a href="https://aws.amazon.com/builders-library/making-retries-safe-with-idempotent-APIs/">Making retries safe with idempotent APIs</a>.</p>
     #   @return [String]
     class StartContactStreamingRequest < Struct.new(
+      nil,
       :instance_id,
       :contact_id,
       :chat_streaming_configuration,
@@ -18074,6 +18792,7 @@ module Aws::Connect
     #   <p>The identifier of the streaming configuration enabled. </p>
     #   @return [String]
     class StartContactStreamingResponse < Struct.new(
+      nil,
       :streaming_id,
       keyword_init: true
     )
@@ -18151,6 +18870,7 @@ module Aws::Connect
     #               <a href="https://aws.amazon.com/builders-library/making-retries-safe-with-idempotent-APIs/">Making retries safe with idempotent APIs</a>.</p>
     #   @return [String]
     class StartEmailContactRequest < Struct.new(
+      nil,
       :instance_id,
       :from_email_address,
       :destination_email_address,
@@ -18174,6 +18894,7 @@ module Aws::Connect
     #   <p>The identifier of this contact within the Amazon Connect instance.</p>
     #   @return [String]
     class StartEmailContactResponse < Struct.new(
+      nil,
       :contact_id,
       keyword_init: true
     )
@@ -18290,6 +19011,7 @@ module Aws::Connect
     #      contact is already started, the contact ID is returned.</p>
     #   @return [String]
     class StartOutboundChatContactRequest < Struct.new(
+      nil,
       :source_endpoint,
       :destination_endpoint,
       :instance_id,
@@ -18311,6 +19033,7 @@ module Aws::Connect
     #   <p>The identifier of this contact within the Amazon Connect instance.</p>
     #   @return [String]
     class StartOutboundChatContactResponse < Struct.new(
+      nil,
       :contact_id,
       keyword_init: true
     )
@@ -18342,6 +19065,7 @@ module Aws::Connect
     #               <a href="https://aws.amazon.com/builders-library/making-retries-safe-with-idempotent-APIs/">Making retries safe with idempotent APIs</a>.</p>
     #   @return [String]
     class StartOutboundEmailContactRequest < Struct.new(
+      nil,
       :instance_id,
       :contact_id,
       :from_email_address,
@@ -18358,6 +19082,7 @@ module Aws::Connect
     #   <p>The identifier of the contact in this instance of Amazon Connect. </p>
     #   @return [String]
     class StartOutboundEmailContactResponse < Struct.new(
+      nil,
       :contact_id,
       keyword_init: true
     )
@@ -18437,6 +19162,7 @@ module Aws::Connect
     #       <code>GENERAL</code>. </p>
     #   @return [String]
     class StartOutboundVoiceContactRequest < Struct.new(
+      nil,
       :name,
       :description,
       :references,
@@ -18460,6 +19186,7 @@ module Aws::Connect
     #   <p>The identifier of this contact within the Amazon Connect instance.</p>
     #   @return [String]
     class StartOutboundVoiceContactResponse < Struct.new(
+      nil,
       :contact_id,
       keyword_init: true
     )
@@ -18479,6 +19206,7 @@ module Aws::Connect
     #   <p>The identifier of the contact in this instance of Amazon Connect. </p>
     #   @return [String]
     class StartScreenSharingRequest < Struct.new(
+      nil,
       :client_token,
       :instance_id,
       :contact_id,
@@ -18488,6 +19216,7 @@ module Aws::Connect
     end
 
     class StartScreenSharingResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -18573,6 +19302,7 @@ module Aws::Connect
     #            </note>
     #   @return [Hash<String, Types::SegmentAttributeValue>]
     class StartTaskContactRequest < Struct.new(
+      nil,
       :instance_id,
       :previous_contact_id,
       :contact_flow_id,
@@ -18595,6 +19325,7 @@ module Aws::Connect
     #   <p>The identifier of this contact within the Amazon Connect instance.</p>
     #   @return [String]
     class StartTaskContactResponse < Struct.new(
+      nil,
       :contact_id,
       keyword_init: true
     )
@@ -18647,6 +19378,7 @@ module Aws::Connect
     #      (CCP).</p>
     #   @return [String]
     class StartWebRTCContactRequest < Struct.new(
+      nil,
       :attributes,
       :client_token,
       :contact_flow_id,
@@ -18677,6 +19409,7 @@ module Aws::Connect
     #      contact participant.</p>
     #   @return [String]
     class StartWebRTCContactResponse < Struct.new(
+      nil,
       :connection_data,
       :contact_id,
       :participant_id,
@@ -18697,6 +19430,7 @@ module Aws::Connect
     #   <p>The date and time when the state ended in UTC time.</p>
     #   @return [Time]
     class StateTransition < Struct.new(
+      nil,
       :state,
       :state_start_timestamp,
       :state_end_timestamp,
@@ -18716,6 +19450,7 @@ module Aws::Connect
     #   <p>Represents status of the Routing step.</p>
     #   @return [String]
     class Step < Struct.new(
+      nil,
       :expiry,
       :expression,
       :status,
@@ -18738,6 +19473,7 @@ module Aws::Connect
     #   <p>The type of recording being operated on.</p>
     #   @return [String]
     class StopContactRecordingRequest < Struct.new(
+      nil,
       :instance_id,
       :contact_id,
       :initial_contact_id,
@@ -18748,6 +19484,7 @@ module Aws::Connect
     end
 
     class StopContactRecordingResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -18764,6 +19501,7 @@ module Aws::Connect
     #      provide this field.</p>
     #   @return [Types::DisconnectReason]
     class StopContactRequest < Struct.new(
+      nil,
       :contact_id,
       :instance_id,
       :disconnect_reason,
@@ -18773,6 +19511,7 @@ module Aws::Connect
     end
 
     class StopContactResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -18789,6 +19528,7 @@ module Aws::Connect
     #   <p>The identifier of the streaming configuration enabled. </p>
     #   @return [String]
     class StopContactStreamingRequest < Struct.new(
+      nil,
       :instance_id,
       :contact_id,
       :streaming_id,
@@ -18798,6 +19538,7 @@ module Aws::Connect
     end
 
     class StopContactStreamingResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -18814,6 +19555,7 @@ module Aws::Connect
     #   <p>The type of comparison to be made when evaluating the string condition.</p>
     #   @return [String]
     class StringCondition < Struct.new(
+      nil,
       :field_name,
       :value,
       :comparison_type,
@@ -18831,6 +19573,7 @@ module Aws::Connect
     #   <p>A valid string.</p>
     #   @return [String]
     class StringReference < Struct.new(
+      nil,
       :name,
       :value,
       keyword_init: true
@@ -18843,6 +19586,7 @@ module Aws::Connect
     #   <p>The identifier of the auto-evaluation enabled form.</p>
     #   @return [String]
     class SubmitAutoEvaluationActionDefinition < Struct.new(
+      nil,
       :evaluation_form_id,
       keyword_init: true
     )
@@ -18862,6 +19606,7 @@ module Aws::Connect
     #   <p>A map of question identifiers to note value.</p>
     #   @return [Hash<String, Types::EvaluationNote>]
     class SubmitContactEvaluationRequest < Struct.new(
+      nil,
       :instance_id,
       :evaluation_id,
       :answers,
@@ -18878,6 +19623,7 @@ module Aws::Connect
     #   <p>The Amazon Resource Name (ARN) for the contact evaluation resource.</p>
     #   @return [String]
     class SubmitContactEvaluationResponse < Struct.new(
+      nil,
       :evaluation_id,
       :evaluation_arn,
       keyword_init: true
@@ -18894,6 +19640,7 @@ module Aws::Connect
     #   <p>The contactId of the contact that was created successfully.</p>
     #   @return [String]
     class SuccessfulRequest < Struct.new(
+      nil,
       :request_identifier,
       :contact_id,
       keyword_init: true
@@ -18915,6 +19662,7 @@ module Aws::Connect
     #   <p>The type of recording being operated on.</p>
     #   @return [String]
     class SuspendContactRecordingRequest < Struct.new(
+      nil,
       :instance_id,
       :contact_id,
       :initial_contact_id,
@@ -18925,6 +19673,7 @@ module Aws::Connect
     end
 
     class SuspendContactRecordingResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -18939,6 +19688,7 @@ module Aws::Connect
     #   <p>The tag value in the tag condition.</p>
     #   @return [String]
     class TagCondition < Struct.new(
+      nil,
       :tag_key,
       :tag_value,
       keyword_init: true
@@ -18960,6 +19710,7 @@ module Aws::Connect
     #            </note>
     #   @return [Hash<String, String>]
     class TagContactRequest < Struct.new(
+      nil,
       :contact_id,
       :instance_id,
       :tags,
@@ -18969,6 +19720,7 @@ module Aws::Connect
     end
 
     class TagContactResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -18981,6 +19733,7 @@ module Aws::Connect
     #   <p>The tags used to organize, track, or control access for this resource. For example, { "Tags": {"key1":"value1", "key2":"value2"} }.</p>
     #   @return [Hash<String, String>]
     class TagResourceRequest < Struct.new(
+      nil,
       :resource_arn,
       :tags,
       keyword_init: true
@@ -19004,6 +19757,7 @@ module Aws::Connect
     #      condition.</p>
     #   @return [String]
     class TagSearchCondition < Struct.new(
+      nil,
       :tag_key,
       :tag_value,
       :tag_key_comparison_type,
@@ -19021,6 +19775,7 @@ module Aws::Connect
     #   <p>The tag value in the tagSet.</p>
     #   @return [String]
     class TagSet < Struct.new(
+      nil,
       :key,
       :value,
       keyword_init: true
@@ -19047,6 +19802,7 @@ module Aws::Connect
     #      Otherwise, null. (Supports variable injection in the <code>Value</code> field.)</p>
     #   @return [Hash<String, Types::Reference>]
     class TaskActionDefinition < Struct.new(
+      nil,
       :name,
       :description,
       :contact_flow_id,
@@ -19067,6 +19823,7 @@ module Aws::Connect
     #   <p>Lists the fields that are invisible to agents.</p>
     #   @return [Array<Types::InvisibleFieldInfo>]
     class TaskTemplateConstraints < Struct.new(
+      nil,
       :required_fields,
       :read_only_fields,
       :invisible_fields,
@@ -19083,6 +19840,7 @@ module Aws::Connect
     #   <p>Default value for the field.</p>
     #   @return [String]
     class TaskTemplateDefaultFieldValue < Struct.new(
+      nil,
       :id,
       :default_value,
       keyword_init: true
@@ -19095,6 +19853,7 @@ module Aws::Connect
     #   <p>Default value for the field.</p>
     #   @return [Array<Types::TaskTemplateDefaultFieldValue>]
     class TaskTemplateDefaults < Struct.new(
+      nil,
       :default_field_values,
       keyword_init: true
     )
@@ -19115,6 +19874,7 @@ module Aws::Connect
     #   <p>A list of options for a single select field.</p>
     #   @return [Array<String>]
     class TaskTemplateField < Struct.new(
+      nil,
       :id,
       :description,
       :type,
@@ -19129,6 +19889,7 @@ module Aws::Connect
     #   <p>The name of the task template field.</p>
     #   @return [String]
     class TaskTemplateFieldIdentifier < Struct.new(
+      nil,
       :name,
       keyword_init: true
     )
@@ -19160,6 +19921,7 @@ module Aws::Connect
     #   <p>The timestamp when the task template was created.</p>
     #   @return [Time]
     class TaskTemplateMetadata < Struct.new(
+      nil,
       :id,
       :arn,
       :name,
@@ -19177,6 +19939,7 @@ module Aws::Connect
     #   <p>Information about traffic distributions.</p>
     #   @return [Array<Types::Distribution>]
     class TelephonyConfig < Struct.new(
+      nil,
       :distributions,
       keyword_init: true
     )
@@ -19195,6 +19958,7 @@ module Aws::Connect
     #      a variable or placeholder in the message template. </p>
     #   @return [String]
     class TemplateAttributes < Struct.new(
+      nil,
       :custom_attributes,
       :customer_profile_attributes,
       keyword_init: true
@@ -19215,6 +19979,7 @@ module Aws::Connect
     #      CustomerProfileAttributes.</p>
     #   @return [Types::TemplateAttributes]
     class TemplatedMessageConfig < Struct.new(
+      nil,
       :knowledge_base_id,
       :message_template_id,
       :template_attributes,
@@ -19231,6 +19996,7 @@ module Aws::Connect
     #   <p>The threshold value to compare.</p>
     #   @return [Float]
     class Threshold < Struct.new(
+      nil,
       :comparison,
       :threshold_value,
       keyword_init: true
@@ -19247,6 +20013,7 @@ module Aws::Connect
     #   <p>The threshold value to compare.</p>
     #   @return [Float]
     class ThresholdV2 < Struct.new(
+      nil,
       :comparison,
       :threshold_value,
       keyword_init: true
@@ -19258,6 +20025,7 @@ module Aws::Connect
     # @!attribute message
     #   @return [String]
     class ThrottlingException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -19268,6 +20036,7 @@ module Aws::Connect
     # @!attribute message
     #   @return [String]
     class TooManyRequestsException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -19342,6 +20111,7 @@ module Aws::Connect
     #            </note>
     #   @return [Boolean]
     class TrafficDistributionGroup < Struct.new(
+      nil,
       :id,
       :arn,
       :name,
@@ -19414,6 +20184,7 @@ module Aws::Connect
     #      part of the process for deleting a replica.</p>
     #   @return [Boolean]
     class TrafficDistributionGroupSummary < Struct.new(
+      nil,
       :id,
       :arn,
       :name,
@@ -19435,6 +20206,7 @@ module Aws::Connect
     #   <p>The identifier for the user. This can be the ID or the ARN of the user.</p>
     #   @return [String]
     class TrafficDistributionGroupUserSummary < Struct.new(
+      nil,
       :user_id,
       keyword_init: true
     )
@@ -19451,6 +20223,7 @@ module Aws::Connect
     #   <p>The match type combining search criteria using multiple transcript criteria.</p>
     #   @return [String]
     class Transcript < Struct.new(
+      nil,
       :criteria,
       :match_type,
       keyword_init: true
@@ -19471,6 +20244,7 @@ module Aws::Connect
     #      criteria.</p>
     #   @return [String]
     class TranscriptCriteria < Struct.new(
+      nil,
       :participant_role,
       :search_text,
       :match_type,
@@ -19501,6 +20275,7 @@ module Aws::Connect
     #               <a href="https://aws.amazon.com/builders-library/making-retries-safe-with-idempotent-APIs/">Making retries safe with idempotent APIs</a>.</p>
     #   @return [String]
     class TransferContactRequest < Struct.new(
+      nil,
       :instance_id,
       :contact_id,
       :queue_id,
@@ -19519,6 +20294,7 @@ module Aws::Connect
     #   <p>The Amazon Resource Name (ARN) of the contact.</p>
     #   @return [String]
     class TransferContactResponse < Struct.new(
+      nil,
       :contact_id,
       :contact_arn,
       keyword_init: true
@@ -19537,6 +20313,7 @@ module Aws::Connect
     #      removed.</p>
     #   @return [Array<String>]
     class UntagContactRequest < Struct.new(
+      nil,
       :contact_id,
       :instance_id,
       :tag_keys,
@@ -19546,6 +20323,7 @@ module Aws::Connect
     end
 
     class UntagContactResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -19558,6 +20336,7 @@ module Aws::Connect
     #   <p>The tag keys.</p>
     #   @return [Array<String>]
     class UntagResourceRequest < Struct.new(
+      nil,
       :resource_arn,
       :tag_keys,
       keyword_init: true
@@ -19587,6 +20366,7 @@ module Aws::Connect
     #   <p>A number indicating the reset order of the agent status.</p>
     #   @return [Boolean]
     class UpdateAgentStatusRequest < Struct.new(
+      nil,
       :instance_id,
       :agent_status_id,
       :name,
@@ -19630,6 +20410,7 @@ module Aws::Connect
     #       Guide</i>. </p>
     #   @return [Integer]
     class UpdateAuthenticationProfileRequest < Struct.new(
+      nil,
       :authentication_profile_id,
       :instance_id,
       :name,
@@ -19647,6 +20428,7 @@ module Aws::Connect
     #   <p>An array of objects with <code>Field ID</code> and Value data.</p>
     #   @return [Array<Types::FieldValue>]
     class UpdateCaseActionDefinition < Struct.new(
+      nil,
       :fields,
       keyword_init: true
     )
@@ -19682,6 +20464,7 @@ module Aws::Connect
     #            </ul>
     #   @return [Hash<String, String>]
     class UpdateContactAttributesRequest < Struct.new(
+      nil,
       :initial_contact_id,
       :instance_id,
       :attributes,
@@ -19691,6 +20474,7 @@ module Aws::Connect
     end
 
     class UpdateContactAttributesResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -19709,6 +20493,7 @@ module Aws::Connect
     #   <p>A map of question identifiers to note value.</p>
     #   @return [Hash<String, Types::EvaluationNote>]
     class UpdateContactEvaluationRequest < Struct.new(
+      nil,
       :instance_id,
       :evaluation_id,
       :answers,
@@ -19725,6 +20510,7 @@ module Aws::Connect
     #   <p>The Amazon Resource Name (ARN) for the contact evaluation resource.</p>
     #   @return [String]
     class UpdateContactEvaluationResponse < Struct.new(
+      nil,
       :evaluation_id,
       :evaluation_arn,
       keyword_init: true
@@ -19744,6 +20530,7 @@ module Aws::Connect
     #            <p>Length Constraints: Minimum length of 1. Maximum length of 256000.</p>
     #   @return [String]
     class UpdateContactFlowContentRequest < Struct.new(
+      nil,
       :instance_id,
       :contact_flow_id,
       :content,
@@ -19753,6 +20540,7 @@ module Aws::Connect
     end
 
     class UpdateContactFlowContentResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -19774,6 +20562,7 @@ module Aws::Connect
     #   <p>The state of flow.</p>
     #   @return [String]
     class UpdateContactFlowMetadataRequest < Struct.new(
+      nil,
       :instance_id,
       :contact_flow_id,
       :name,
@@ -19785,6 +20574,7 @@ module Aws::Connect
     end
 
     class UpdateContactFlowMetadataResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -19801,6 +20591,7 @@ module Aws::Connect
     #       flow in Amazon Connect Flow language</a>. </p>
     #   @return [String]
     class UpdateContactFlowModuleContentRequest < Struct.new(
+      nil,
       :instance_id,
       :contact_flow_module_id,
       :content,
@@ -19810,6 +20601,7 @@ module Aws::Connect
     end
 
     class UpdateContactFlowModuleContentResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -19831,6 +20623,7 @@ module Aws::Connect
     #   <p>The state of flow module.</p>
     #   @return [String]
     class UpdateContactFlowModuleMetadataRequest < Struct.new(
+      nil,
       :instance_id,
       :contact_flow_module_id,
       :name,
@@ -19842,6 +20635,7 @@ module Aws::Connect
     end
 
     class UpdateContactFlowModuleMetadataResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -19860,6 +20654,7 @@ module Aws::Connect
     #   <p>The description of the flow.</p>
     #   @return [String]
     class UpdateContactFlowNameRequest < Struct.new(
+      nil,
       :instance_id,
       :contact_flow_id,
       :name,
@@ -19870,6 +20665,7 @@ module Aws::Connect
     end
 
     class UpdateContactFlowNameResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -19927,6 +20723,7 @@ module Aws::Connect
     #       integration</a> in the <i>Amazon Connect Administrator Guide</i>.</p>
     #   @return [Types::Endpoint]
     class UpdateContactRequest < Struct.new(
+      nil,
       :instance_id,
       :contact_id,
       :name,
@@ -19943,6 +20740,7 @@ module Aws::Connect
     end
 
     class UpdateContactResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -19969,6 +20767,7 @@ module Aws::Connect
     #      contact is routed within the queue.</p>
     #   @return [Types::RoutingCriteriaInput]
     class UpdateContactRoutingDataRequest < Struct.new(
+      nil,
       :instance_id,
       :contact_id,
       :queue_time_adjustment_seconds,
@@ -19980,6 +20779,7 @@ module Aws::Connect
     end
 
     class UpdateContactRoutingDataResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -19995,6 +20795,7 @@ module Aws::Connect
     #   <p>The timestamp, in Unix Epoch seconds format, at which to start running the inbound flow. The scheduled time cannot be in the past. It must be within up to 6 days in future. </p>
     #   @return [Time]
     class UpdateContactScheduleRequest < Struct.new(
+      nil,
       :instance_id,
       :contact_id,
       :scheduled_time,
@@ -20004,6 +20805,7 @@ module Aws::Connect
     end
 
     class UpdateContactScheduleResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -20028,6 +20830,7 @@ module Aws::Connect
     #               <a href="https://aws.amazon.com/builders-library/making-retries-safe-with-idempotent-APIs/">Making retries safe with idempotent APIs</a>.</p>
     #   @return [String]
     class UpdateEmailAddressMetadataRequest < Struct.new(
+      nil,
       :instance_id,
       :email_address_id,
       :description,
@@ -20045,6 +20848,7 @@ module Aws::Connect
     #   <p>The Amazon Resource Name (ARN) of the email address.</p>
     #   @return [String]
     class UpdateEmailAddressMetadataResponse < Struct.new(
+      nil,
       :email_address_id,
       :email_address_arn,
       keyword_init: true
@@ -20083,6 +20887,7 @@ module Aws::Connect
     #               <a href="https://aws.amazon.com/builders-library/making-retries-safe-with-idempotent-APIs/">Making retries safe with idempotent APIs</a>.</p>
     #   @return [String]
     class UpdateEvaluationFormRequest < Struct.new(
+      nil,
       :instance_id,
       :evaluation_form_id,
       :evaluation_form_version,
@@ -20107,6 +20912,7 @@ module Aws::Connect
     #   <p>The version of the updated evaluation form resource.</p>
     #   @return [Integer]
     class UpdateEvaluationFormResponse < Struct.new(
+      nil,
       :evaluation_form_id,
       :evaluation_form_arn,
       :evaluation_form_version,
@@ -20146,6 +20952,7 @@ module Aws::Connect
     #   <p>The date until the hours of operation override is effective.</p>
     #   @return [String]
     class UpdateHoursOfOperationOverrideRequest < Struct.new(
+      nil,
       :instance_id,
       :hours_of_operation_id,
       :hours_of_operation_override_id,
@@ -20178,6 +20985,7 @@ module Aws::Connect
     #   <p>Configuration information of the hours of operation.</p>
     #   @return [Array<Types::HoursOfOperationConfig>]
     class UpdateHoursOfOperationRequest < Struct.new(
+      nil,
       :instance_id,
       :hours_of_operation_id,
       :name,
@@ -20209,6 +21017,7 @@ module Aws::Connect
     #               <a href="https://aws.amazon.com/builders-library/making-retries-safe-with-idempotent-APIs/">Making retries safe with idempotent APIs</a>.</p>
     #   @return [String]
     class UpdateInstanceAttributeRequest < Struct.new(
+      nil,
       :instance_id,
       :attribute_type,
       :value,
@@ -20237,6 +21046,7 @@ module Aws::Connect
     #               <a href="https://aws.amazon.com/builders-library/making-retries-safe-with-idempotent-APIs/">Making retries safe with idempotent APIs</a>.</p>
     #   @return [String]
     class UpdateInstanceStorageConfigRequest < Struct.new(
+      nil,
       :instance_id,
       :association_id,
       :resource_type,
@@ -20269,6 +21079,7 @@ module Aws::Connect
     #       <code>redirectUri</code>.</p>
     #   @return [String]
     class UpdateParticipantAuthenticationRequest < Struct.new(
+      nil,
       :state,
       :instance_id,
       :code,
@@ -20280,6 +21091,7 @@ module Aws::Connect
     end
 
     class UpdateParticipantAuthenticationResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -20310,6 +21122,7 @@ module Aws::Connect
     #   <p>The Amazon Connect channel you want to configure.</p>
     #   @return [Types::UpdateParticipantRoleConfigChannelInfo]
     class UpdateParticipantRoleConfigRequest < Struct.new(
+      nil,
       :instance_id,
       :contact_id,
       :channel_configuration,
@@ -20319,6 +21132,7 @@ module Aws::Connect
     end
 
     class UpdateParticipantRoleConfigResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -20337,6 +21151,7 @@ module Aws::Connect
     #               <a href="https://aws.amazon.com/builders-library/making-retries-safe-with-idempotent-APIs/">Making retries safe with idempotent APIs</a>.</p>
     #   @return [String]
     class UpdatePhoneNumberMetadataRequest < Struct.new(
+      nil,
       :phone_number_id,
       :phone_number_description,
       :client_token,
@@ -20363,6 +21178,7 @@ module Aws::Connect
     #               <a href="https://aws.amazon.com/builders-library/making-retries-safe-with-idempotent-APIs/">Making retries safe with idempotent APIs</a>.</p>
     #   @return [String]
     class UpdatePhoneNumberRequest < Struct.new(
+      nil,
       :phone_number_id,
       :target_arn,
       :instance_id,
@@ -20379,6 +21195,7 @@ module Aws::Connect
     #   <p>The Amazon Resource Name (ARN) of the phone number.</p>
     #   @return [String]
     class UpdatePhoneNumberResponse < Struct.new(
+      nil,
       :phone_number_id,
       :phone_number_arn,
       keyword_init: true
@@ -20405,6 +21222,7 @@ module Aws::Connect
     #   how a predefined attribute should be displayed in the Amazon Connect admin website.</p>
     #   @return [Types::InputPredefinedAttributeConfiguration]
     class UpdatePredefinedAttributeRequest < Struct.new(
+      nil,
       :instance_id,
       :name,
       :values,
@@ -20433,6 +21251,7 @@ module Aws::Connect
     #    API instead of providing S3 URIs.</p>
     #   @return [String]
     class UpdatePromptRequest < Struct.new(
+      nil,
       :instance_id,
       :prompt_id,
       :name,
@@ -20450,6 +21269,7 @@ module Aws::Connect
     #   <p>A unique identifier for the prompt.</p>
     #   @return [String]
     class UpdatePromptResponse < Struct.new(
+      nil,
       :prompt_arn,
       :prompt_id,
       keyword_init: true
@@ -20467,6 +21287,7 @@ module Aws::Connect
     #   <p>The identifier for the hours of operation.</p>
     #   @return [String]
     class UpdateQueueHoursOfOperationRequest < Struct.new(
+      nil,
       :instance_id,
       :queue_id,
       :hours_of_operation_id,
@@ -20485,6 +21306,7 @@ module Aws::Connect
     #   <p>The maximum number of contacts that can be in the queue before it is considered full.</p>
     #   @return [Integer]
     class UpdateQueueMaxContactsRequest < Struct.new(
+      nil,
       :instance_id,
       :queue_id,
       :max_contacts,
@@ -20506,6 +21328,7 @@ module Aws::Connect
     #   <p>The description of the queue.</p>
     #   @return [String]
     class UpdateQueueNameRequest < Struct.new(
+      nil,
       :instance_id,
       :queue_id,
       :name,
@@ -20525,6 +21348,7 @@ module Aws::Connect
     #   <p>The outbound caller ID name, number, and outbound whisper flow.</p>
     #   @return [Types::OutboundCallerConfig]
     class UpdateQueueOutboundCallerConfigRequest < Struct.new(
+      nil,
       :instance_id,
       :queue_id,
       :outbound_caller_config,
@@ -20543,6 +21367,7 @@ module Aws::Connect
     #   <p>The outbound email address ID for a specified queue.</p>
     #   @return [Types::OutboundEmailConfig]
     class UpdateQueueOutboundEmailConfigRequest < Struct.new(
+      nil,
       :instance_id,
       :queue_id,
       :outbound_email_config,
@@ -20561,6 +21386,7 @@ module Aws::Connect
     #   <p>The status of the queue.</p>
     #   @return [String]
     class UpdateQueueStatusRequest < Struct.new(
+      nil,
       :instance_id,
       :queue_id,
       :status,
@@ -20579,6 +21405,7 @@ module Aws::Connect
     #   <p>Information about the configuration settings for the quick connect.</p>
     #   @return [Types::QuickConnectConfig]
     class UpdateQuickConnectConfigRequest < Struct.new(
+      nil,
       :instance_id,
       :quick_connect_id,
       :quick_connect_config,
@@ -20600,6 +21427,7 @@ module Aws::Connect
     #   <p>The description of the quick connect.</p>
     #   @return [String]
     class UpdateQuickConnectNameRequest < Struct.new(
+      nil,
       :instance_id,
       :quick_connect_id,
       :name,
@@ -20621,6 +21449,7 @@ module Aws::Connect
     #       time</i>. </p>
     #   @return [String]
     class UpdateRoutingProfileAgentAvailabilityTimerRequest < Struct.new(
+      nil,
       :instance_id,
       :routing_profile_id,
       :agent_availability_timer,
@@ -20639,6 +21468,7 @@ module Aws::Connect
     #   <p>The channels that agents can handle in the Contact Control Panel (CCP).</p>
     #   @return [Array<Types::MediaConcurrency>]
     class UpdateRoutingProfileConcurrencyRequest < Struct.new(
+      nil,
       :instance_id,
       :routing_profile_id,
       :media_concurrencies,
@@ -20657,6 +21487,7 @@ module Aws::Connect
     #   <p>The identifier for the default outbound queue.</p>
     #   @return [String]
     class UpdateRoutingProfileDefaultOutboundQueueRequest < Struct.new(
+      nil,
       :instance_id,
       :routing_profile_id,
       :default_outbound_queue_id,
@@ -20678,6 +21509,7 @@ module Aws::Connect
     #   <p>The description of the routing profile. Must not be more than 250 characters.</p>
     #   @return [String]
     class UpdateRoutingProfileNameRequest < Struct.new(
+      nil,
       :instance_id,
       :routing_profile_id,
       :name,
@@ -20699,6 +21531,7 @@ module Aws::Connect
     #      profile. You can do this using AssociateRoutingProfileQueues.</p>
     #   @return [Array<Types::RoutingProfileQueueConfig>]
     class UpdateRoutingProfileQueuesRequest < Struct.new(
+      nil,
       :instance_id,
       :routing_profile_id,
       :queue_configs,
@@ -20729,6 +21562,7 @@ module Aws::Connect
     #   <p>The publish status of the rule.</p>
     #   @return [String]
     class UpdateRuleRequest < Struct.new(
+      nil,
       :rule_id,
       :instance_id,
       :name,
@@ -20770,6 +21604,7 @@ module Aws::Connect
     #      resources in Amazon Connect.</p>
     #   @return [String]
     class UpdateSecurityProfileRequest < Struct.new(
+      nil,
       :description,
       :permissions,
       :security_profile_id,
@@ -20818,6 +21653,7 @@ module Aws::Connect
     #   <p>Fields that are part of the template.</p>
     #   @return [Array<Types::TaskTemplateField>]
     class UpdateTaskTemplateRequest < Struct.new(
+      nil,
       :task_template_id,
       :instance_id,
       :name,
@@ -20876,6 +21712,7 @@ module Aws::Connect
     #   <p>The timestamp when the task template was created.</p>
     #   @return [Time]
     class UpdateTaskTemplateResponse < Struct.new(
+      nil,
       :instance_id,
       :id,
       :arn,
@@ -20910,6 +21747,7 @@ module Aws::Connect
     #   <p>The distribution of agents between the instance and its replica(s).</p>
     #   @return [Types::AgentConfig]
     class UpdateTrafficDistributionRequest < Struct.new(
+      nil,
       :id,
       :telephony_config,
       :sign_in_config,
@@ -20920,6 +21758,7 @@ module Aws::Connect
     end
 
     class UpdateTrafficDistributionResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -20935,6 +21774,7 @@ module Aws::Connect
     #   <p>The identifier of the Amazon Connect instance. You can <a href="https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html">find the instance ID</a> in the Amazon Resource Name (ARN) of the instance.</p>
     #   @return [String]
     class UpdateUserHierarchyGroupNameRequest < Struct.new(
+      nil,
       :name,
       :hierarchy_group_id,
       :instance_id,
@@ -20953,6 +21793,7 @@ module Aws::Connect
     #   <p>The identifier of the Amazon Connect instance. You can <a href="https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html">find the instance ID</a> in the Amazon Resource Name (ARN) of the instance.</p>
     #   @return [String]
     class UpdateUserHierarchyRequest < Struct.new(
+      nil,
       :hierarchy_group_id,
       :user_id,
       :instance_id,
@@ -20968,6 +21809,7 @@ module Aws::Connect
     #   <p>The identifier of the Amazon Connect instance. You can <a href="https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html">find the instance ID</a> in the Amazon Resource Name (ARN) of the instance.</p>
     #   @return [String]
     class UpdateUserHierarchyStructureRequest < Struct.new(
+      nil,
       :hierarchy_structure,
       :instance_id,
       keyword_init: true
@@ -20985,6 +21827,7 @@ module Aws::Connect
     #   <p>The identifier of the Amazon Connect instance. You can <a href="https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html">find the instance ID</a> in the Amazon Resource Name (ARN) of the instance.</p>
     #   @return [String]
     class UpdateUserIdentityInfoRequest < Struct.new(
+      nil,
       :identity_info,
       :user_id,
       :instance_id,
@@ -21003,6 +21846,7 @@ module Aws::Connect
     #   <p>The identifier of the Amazon Connect instance. You can <a href="https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html">find the instance ID</a> in the Amazon Resource Name (ARN) of the instance.</p>
     #   @return [String]
     class UpdateUserPhoneConfigRequest < Struct.new(
+      nil,
       :phone_config,
       :user_id,
       :instance_id,
@@ -21023,6 +21867,7 @@ module Aws::Connect
     #      user. You can do this using AssociateUserProficiencies API.</p>
     #   @return [Array<Types::UserProficiency>]
     class UpdateUserProficienciesRequest < Struct.new(
+      nil,
       :instance_id,
       :user_id,
       :user_proficiencies,
@@ -21041,6 +21886,7 @@ module Aws::Connect
     #   <p>The identifier of the Amazon Connect instance. You can <a href="https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html">find the instance ID</a> in the Amazon Resource Name (ARN) of the instance.</p>
     #   @return [String]
     class UpdateUserRoutingProfileRequest < Struct.new(
+      nil,
       :routing_profile_id,
       :user_id,
       :instance_id,
@@ -21059,6 +21905,7 @@ module Aws::Connect
     #   <p>The identifier of the Amazon Connect instance. You can <a href="https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html">find the instance ID</a> in the Amazon Resource Name (ARN) of the instance.</p>
     #   @return [String]
     class UpdateUserSecurityProfilesRequest < Struct.new(
+      nil,
       :security_profile_ids,
       :user_id,
       :instance_id,
@@ -21085,6 +21932,7 @@ module Aws::Connect
     #            <p>The total uncompressed content has a maximum file size of 400kB.</p>
     #   @return [Types::ViewInputContent]
     class UpdateViewContentRequest < Struct.new(
+      nil,
       :instance_id,
       :view_id,
       :status,
@@ -21098,6 +21946,7 @@ module Aws::Connect
     #   <p>A view resource object. Contains metadata and content necessary to render the view.</p>
     #   @return [Types::View]
     class UpdateViewContentResponse < Struct.new(
+      nil,
       :view,
       keyword_init: true
     )
@@ -21119,6 +21968,7 @@ module Aws::Connect
     #   <p>The description of the view.</p>
     #   @return [String]
     class UpdateViewMetadataRequest < Struct.new(
+      nil,
       :instance_id,
       :view_id,
       :name,
@@ -21129,6 +21979,7 @@ module Aws::Connect
     end
 
     class UpdateViewMetadataResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -21147,6 +21998,7 @@ module Aws::Connect
     #   <p>A map of headers that should be provided when uploading the attached file. </p>
     #   @return [Hash<String, String>]
     class UploadUrlMetadata < Struct.new(
+      nil,
       :url,
       :url_expiry,
       :headers_to_include,
@@ -21163,6 +22015,7 @@ module Aws::Connect
     #   <p>A valid URL.</p>
     #   @return [String]
     class UrlReference < Struct.new(
+      nil,
       :name,
       :value,
       keyword_init: true
@@ -21184,6 +22037,7 @@ module Aws::Connect
     #      association can have only one of each use case type.</p>
     #   @return [String]
     class UseCase < Struct.new(
+      nil,
       :use_case_id,
       :use_case_arn,
       :use_case_type,
@@ -21231,6 +22085,7 @@ module Aws::Connect
     #   <p>The Amazon Web Services Region where this resource was last modified.</p>
     #   @return [String]
     class User < Struct.new(
+      nil,
       :id,
       :arn,
       :username,
@@ -21283,6 +22138,7 @@ module Aws::Connect
     #   <p>The Next status of the agent.</p>
     #   @return [String]
     class UserData < Struct.new(
+      nil,
       :user,
       :routing_profile,
       :hierarchy_path,
@@ -21315,6 +22171,7 @@ module Aws::Connect
     #   <p>A UserHierarchyGroup ID or ARN.</p>
     #   @return [Array<String>]
     class UserDataFilters < Struct.new(
+      nil,
       :queues,
       :contact_filter,
       :routing_profiles,
@@ -21340,6 +22197,7 @@ module Aws::Connect
     #            </note>
     #   @return [Types::StringCondition]
     class UserHierarchyGroupSearchCriteria < Struct.new(
+      nil,
       :or_conditions,
       :and_conditions,
       :string_condition,
@@ -21364,6 +22222,7 @@ module Aws::Connect
     #            </ul>
     #   @return [Types::ControlPlaneAttributeFilter]
     class UserHierarchyGroupSearchFilter < Struct.new(
+      nil,
       :attribute_filter,
       keyword_init: true
     )
@@ -21408,6 +22267,7 @@ module Aws::Connect
     #   <p>The user's mobile number.</p>
     #   @return [String]
     class UserIdentityInfo < Struct.new(
+      nil,
       :first_name,
       :last_name,
       :email,
@@ -21426,6 +22286,7 @@ module Aws::Connect
     #   <p>The user's last name.</p>
     #   @return [String]
     class UserIdentityInfoLite < Struct.new(
+      nil,
       :first_name,
       :last_name,
       keyword_init: true
@@ -21438,6 +22299,7 @@ module Aws::Connect
     #   <p>The user identifier for the contact.</p>
     #   @return [String]
     class UserInfo < Struct.new(
+      nil,
       :user_id,
       keyword_init: true
     )
@@ -21448,6 +22310,7 @@ module Aws::Connect
     # @!attribute message
     #   @return [String]
     class UserNotFoundException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -21478,6 +22341,7 @@ module Aws::Connect
     #   <p>The persistent connection setting for the user.</p>
     #   @return [Boolean]
     class UserPhoneConfig < Struct.new(
+      nil,
       :phone_type,
       :auto_accept,
       :after_contact_work_time_limit,
@@ -21508,6 +22372,7 @@ module Aws::Connect
     #   <p>The level of the proficiency. The valid values are 1, 2, 3, 4 and 5.</p>
     #   @return [Float]
     class UserProficiency < Struct.new(
+      nil,
       :attribute_name,
       :attribute_value,
       :level,
@@ -21529,6 +22394,7 @@ module Aws::Connect
     #   <p>The value of user's proficiency.</p>
     #   @return [String]
     class UserProficiencyDisassociate < Struct.new(
+      nil,
       :attribute_name,
       :attribute_value,
       keyword_init: true
@@ -21545,6 +22411,7 @@ module Aws::Connect
     #   <p>The identifier of the flow.</p>
     #   @return [String]
     class UserQuickConnectConfig < Struct.new(
+      nil,
       :user_id,
       :contact_flow_id,
       keyword_init: true
@@ -21560,6 +22427,7 @@ module Aws::Connect
     #   <p>The Amazon Resource Name (ARN) for the user.</p>
     #   @return [String]
     class UserReference < Struct.new(
+      nil,
       :id,
       :arn,
       keyword_init: true
@@ -21595,6 +22463,7 @@ module Aws::Connect
     #   <p>A leaf node condition which can be used to specify a hierarchy group condition.</p>
     #   @return [Types::HierarchyGroupCondition]
     class UserSearchCriteria < Struct.new(
+      nil,
       :or_conditions,
       :and_conditions,
       :string_condition,
@@ -21641,6 +22510,7 @@ module Aws::Connect
     #            </note>
     #   @return [Types::ControlPlaneUserAttributeFilter]
     class UserSearchFilter < Struct.new(
+      nil,
       :tag_filter,
       :user_attribute_filter,
       keyword_init: true
@@ -21680,6 +22550,7 @@ module Aws::Connect
     #   <p>The name of the user.</p>
     #   @return [String]
     class UserSearchSummary < Struct.new(
+      nil,
       :arn,
       :directory_user_id,
       :hierarchy_group_id,
@@ -21712,6 +22583,7 @@ module Aws::Connect
     #   <p>The Amazon Web Services Region where this resource was last modified.</p>
     #   @return [String]
     class UserSummary < Struct.new(
+      nil,
       :id,
       :arn,
       :username,
@@ -21766,6 +22638,7 @@ module Aws::Connect
     #   <p>Indicates the checksum value of the latest published view content.</p>
     #   @return [String]
     class View < Struct.new(
+      nil,
       :id,
       :arn,
       :name,
@@ -21801,6 +22674,7 @@ module Aws::Connect
     #   <p>A list of possible actions from the view.</p>
     #   @return [Array<String>]
     class ViewContent < Struct.new(
+      nil,
       :input_schema,
       :template,
       :actions,
@@ -21818,6 +22692,7 @@ module Aws::Connect
     #   <p>A list of possible actions from the view.</p>
     #   @return [Array<String>]
     class ViewInputContent < Struct.new(
+      nil,
       :template,
       :actions,
       keyword_init: true
@@ -21846,6 +22721,7 @@ module Aws::Connect
     #   <p>The description of the view.</p>
     #   @return [String]
     class ViewSummary < Struct.new(
+      nil,
       :id,
       :arn,
       :name,
@@ -21880,6 +22756,7 @@ module Aws::Connect
     #   <p>The description of the view version.</p>
     #   @return [String]
     class ViewVersionSummary < Struct.new(
+      nil,
       :id,
       :arn,
       :description,
@@ -21932,6 +22809,7 @@ module Aws::Connect
     #   <p>The tags used to organize, track, or control access for this resource. For example, { "Tags": {"key1":"value1", "key2":"value2"} }.</p>
     #   @return [Hash<String, String>]
     class Vocabulary < Struct.new(
+      nil,
       :name,
       :id,
       :arn,
@@ -21971,6 +22849,7 @@ module Aws::Connect
     #   <p>The reason why the custom vocabulary was not created.</p>
     #   @return [String]
     class VocabularySummary < Struct.new(
+      nil,
       :name,
       :id,
       :arn,
@@ -21992,6 +22871,7 @@ module Aws::Connect
     #            <p>One and only one of the track configurations should be presented in the request.</p>
     #   @return [String]
     class VoiceRecordingConfiguration < Struct.new(
+      nil,
       :voice_recording_track,
       :ivr_recording_track,
       keyword_init: true
@@ -22004,6 +22884,7 @@ module Aws::Connect
     #   <p>The Amazon Resource Name (ARN) of the Wisdom session.</p>
     #   @return [String]
     class WisdomInfo < Struct.new(
+      nil,
       :session_arn,
       keyword_init: true
     )

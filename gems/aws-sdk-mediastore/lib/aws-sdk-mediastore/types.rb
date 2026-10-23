@@ -36,6 +36,7 @@ module Aws::MediaStore
     #   <p>The state of access logging on the container. This value is <code>false</code> by default, indicating that AWS Elemental MediaStore does not send access logs to Amazon CloudWatch Logs. When you enable access logging on the container, MediaStore changes this value to <code>true</code>, indicating that the service delivers access logs for objects stored in that container to CloudWatch Logs.</p>
     #   @return [Boolean]
     class Container < Struct.new(
+      nil,
       :endpoint,
       :creation_time,
       :arn,
@@ -52,6 +53,7 @@ module Aws::MediaStore
     # @!attribute message
     #   @return [String]
     class ContainerInUseException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -62,6 +64,7 @@ module Aws::MediaStore
     # @!attribute message
     #   @return [String]
     class ContainerNotFoundException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -72,6 +75,7 @@ module Aws::MediaStore
     # @!attribute message
     #   @return [String]
     class CorsPolicyNotFoundException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -113,6 +117,7 @@ module Aws::MediaStore
     #            <p>This element is optional for each rule.</p>
     #   @return [Array<String>]
     class CorsRule < Struct.new(
+      nil,
       :allowed_origins,
       :allowed_methods,
       :allowed_headers,
@@ -140,6 +145,7 @@ module Aws::MediaStore
     #              tags to each container. For more information about tagging, including naming and usage conventions, see <a href="https://docs.aws.amazon.com/mediastore/latest/ug/tagging.html">Tagging Resources in MediaStore</a>.</p>
     #   @return [Array<Types::Tag>]
     class CreateContainerInput < Struct.new(
+      nil,
       :container_name,
       :tags,
       keyword_init: true
@@ -162,6 +168,7 @@ module Aws::MediaStore
     #            requests, you must obtain this value by using <a>DescribeContainer</a> or <a>ListContainers</a>.</p>
     #   @return [Types::Container]
     class CreateContainerOutput < Struct.new(
+      nil,
       :container,
       keyword_init: true
     )
@@ -172,6 +179,7 @@ module Aws::MediaStore
     #   <p>The name of the container to delete. </p>
     #   @return [String]
     class DeleteContainerInput < Struct.new(
+      nil,
       :container_name,
       keyword_init: true
     )
@@ -179,6 +187,7 @@ module Aws::MediaStore
     end
 
     class DeleteContainerOutput < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -188,6 +197,7 @@ module Aws::MediaStore
     #   <p>The name of the container that holds the policy.</p>
     #   @return [String]
     class DeleteContainerPolicyInput < Struct.new(
+      nil,
       :container_name,
       keyword_init: true
     )
@@ -195,6 +205,7 @@ module Aws::MediaStore
     end
 
     class DeleteContainerPolicyOutput < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -204,6 +215,7 @@ module Aws::MediaStore
     #   <p>The name of the container to remove the policy from.</p>
     #   @return [String]
     class DeleteCorsPolicyInput < Struct.new(
+      nil,
       :container_name,
       keyword_init: true
     )
@@ -211,6 +223,7 @@ module Aws::MediaStore
     end
 
     class DeleteCorsPolicyOutput < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -220,6 +233,7 @@ module Aws::MediaStore
     #   <p>The name of the container that holds the object lifecycle policy.</p>
     #   @return [String]
     class DeleteLifecyclePolicyInput < Struct.new(
+      nil,
       :container_name,
       keyword_init: true
     )
@@ -227,6 +241,7 @@ module Aws::MediaStore
     end
 
     class DeleteLifecyclePolicyOutput < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -236,6 +251,7 @@ module Aws::MediaStore
     #   <p>The name of the container that is associated with the metric policy that you want to delete.</p>
     #   @return [String]
     class DeleteMetricPolicyInput < Struct.new(
+      nil,
       :container_name,
       keyword_init: true
     )
@@ -243,6 +259,7 @@ module Aws::MediaStore
     end
 
     class DeleteMetricPolicyOutput < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -252,6 +269,7 @@ module Aws::MediaStore
     #   <p>The name of the container to query.</p>
     #   @return [String]
     class DescribeContainerInput < Struct.new(
+      nil,
       :container_name,
       keyword_init: true
     )
@@ -262,6 +280,7 @@ module Aws::MediaStore
     #   <p>The name of the queried container.</p>
     #   @return [Types::Container]
     class DescribeContainerOutput < Struct.new(
+      nil,
       :container,
       keyword_init: true
     )
@@ -272,6 +291,7 @@ module Aws::MediaStore
     #   <p>The name of the container. </p>
     #   @return [String]
     class GetContainerPolicyInput < Struct.new(
+      nil,
       :container_name,
       keyword_init: true
     )
@@ -282,6 +302,7 @@ module Aws::MediaStore
     #   <p>The contents of the access policy.</p>
     #   @return [String]
     class GetContainerPolicyOutput < Struct.new(
+      nil,
       :policy,
       keyword_init: true
     )
@@ -292,6 +313,7 @@ module Aws::MediaStore
     #   <p>The name of the container that the policy is assigned to.</p>
     #   @return [String]
     class GetCorsPolicyInput < Struct.new(
+      nil,
       :container_name,
       keyword_init: true
     )
@@ -302,6 +324,7 @@ module Aws::MediaStore
     #   <p>The CORS policy assigned to the container.</p>
     #   @return [Array<Types::CorsRule>]
     class GetCorsPolicyOutput < Struct.new(
+      nil,
       :cors_policy,
       keyword_init: true
     )
@@ -312,6 +335,7 @@ module Aws::MediaStore
     #   <p>The name of the container that the object lifecycle policy is assigned to.</p>
     #   @return [String]
     class GetLifecyclePolicyInput < Struct.new(
+      nil,
       :container_name,
       keyword_init: true
     )
@@ -322,6 +346,7 @@ module Aws::MediaStore
     #   <p>The object lifecycle policy that is assigned to the container.</p>
     #   @return [String]
     class GetLifecyclePolicyOutput < Struct.new(
+      nil,
       :lifecycle_policy,
       keyword_init: true
     )
@@ -332,6 +357,7 @@ module Aws::MediaStore
     #   <p>The name of the container that is associated with the metric policy.</p>
     #   @return [String]
     class GetMetricPolicyInput < Struct.new(
+      nil,
       :container_name,
       keyword_init: true
     )
@@ -342,6 +368,7 @@ module Aws::MediaStore
     #   <p>The metric policy that is associated with the specific container.</p>
     #   @return [Types::MetricPolicy]
     class GetMetricPolicyOutput < Struct.new(
+      nil,
       :metric_policy,
       keyword_init: true
     )
@@ -352,6 +379,7 @@ module Aws::MediaStore
     # @!attribute message
     #   @return [String]
     class InternalServerError < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -362,6 +390,7 @@ module Aws::MediaStore
     # @!attribute message
     #   @return [String]
     class LimitExceededException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -378,6 +407,7 @@ module Aws::MediaStore
     #         </p>
     #   @return [Integer]
     class ListContainersInput < Struct.new(
+      nil,
       :next_token,
       :max_results,
       keyword_init: true
@@ -395,6 +425,7 @@ module Aws::MediaStore
     #            command, and only if there are still containers to return. </p>
     #   @return [String]
     class ListContainersOutput < Struct.new(
+      nil,
       :containers,
       :next_token,
       keyword_init: true
@@ -406,6 +437,7 @@ module Aws::MediaStore
     #   <p>The Amazon Resource Name (ARN) for the container.</p>
     #   @return [String]
     class ListTagsForResourceInput < Struct.new(
+      nil,
       :resource,
       keyword_init: true
     )
@@ -416,6 +448,7 @@ module Aws::MediaStore
     #   <p>An array of key:value pairs that are assigned to the container.</p>
     #   @return [Array<Types::Tag>]
     class ListTagsForResourceOutput < Struct.new(
+      nil,
       :tags,
       keyword_init: true
     )
@@ -431,6 +464,7 @@ module Aws::MediaStore
     #   <p>A parameter that holds an array of rules that enable metrics at the object level. This parameter is optional, but if you choose to include it, you must also include at least one rule. By default, you can include up to five rules. You can also <a href="https://console.aws.amazon.com/servicequotas/home?region=us-east-1#!/services/mediastore/quotas">request a quota increase</a> to allow up to 300 rules per policy.</p>
     #   @return [Array<Types::MetricPolicyRule>]
     class MetricPolicy < Struct.new(
+      nil,
       :container_level_metrics,
       :metric_policy_rules,
       keyword_init: true
@@ -446,6 +480,7 @@ module Aws::MediaStore
     #   <p>A name that allows you to refer to the object group.</p>
     #   @return [String]
     class MetricPolicyRule < Struct.new(
+      nil,
       :object_group,
       :object_group_name,
       keyword_init: true
@@ -457,6 +492,7 @@ module Aws::MediaStore
     # @!attribute message
     #   @return [String]
     class PolicyNotFoundException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -479,6 +515,7 @@ module Aws::MediaStore
     #            </ul>
     #   @return [String]
     class PutContainerPolicyInput < Struct.new(
+      nil,
       :container_name,
       :policy,
       keyword_init: true
@@ -487,6 +524,7 @@ module Aws::MediaStore
     end
 
     class PutContainerPolicyOutput < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -499,6 +537,7 @@ module Aws::MediaStore
     #   <p>The CORS policy to apply to the container.  </p>
     #   @return [Array<Types::CorsRule>]
     class PutCorsPolicyInput < Struct.new(
+      nil,
       :container_name,
       :cors_policy,
       keyword_init: true
@@ -507,6 +546,7 @@ module Aws::MediaStore
     end
 
     class PutCorsPolicyOutput < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -519,6 +559,7 @@ module Aws::MediaStore
     #   <p>The object lifecycle policy to apply to the container.</p>
     #   @return [String]
     class PutLifecyclePolicyInput < Struct.new(
+      nil,
       :container_name,
       :lifecycle_policy,
       keyword_init: true
@@ -527,6 +568,7 @@ module Aws::MediaStore
     end
 
     class PutLifecyclePolicyOutput < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -547,6 +589,7 @@ module Aws::MediaStore
     #            </ul>
     #   @return [Types::MetricPolicy]
     class PutMetricPolicyInput < Struct.new(
+      nil,
       :container_name,
       :metric_policy,
       keyword_init: true
@@ -555,6 +598,7 @@ module Aws::MediaStore
     end
 
     class PutMetricPolicyOutput < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -564,6 +608,7 @@ module Aws::MediaStore
     #   <p>The name of the container that you want to start access logging on.</p>
     #   @return [String]
     class StartAccessLoggingInput < Struct.new(
+      nil,
       :container_name,
       keyword_init: true
     )
@@ -571,6 +616,7 @@ module Aws::MediaStore
     end
 
     class StartAccessLoggingOutput < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -580,6 +626,7 @@ module Aws::MediaStore
     #   <p>The name of the container that you want to stop access logging on.</p>
     #   @return [String]
     class StopAccessLoggingInput < Struct.new(
+      nil,
       :container_name,
       keyword_init: true
     )
@@ -587,6 +634,7 @@ module Aws::MediaStore
     end
 
     class StopAccessLoggingOutput < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -605,6 +653,7 @@ module Aws::MediaStore
     #               "companyB." Tag values are case-sensitive.</p>
     #   @return [String]
     class Tag < Struct.new(
+      nil,
       :key,
       :value,
       keyword_init: true
@@ -622,6 +671,7 @@ module Aws::MediaStore
     #               customer:CompanyA, priority:Medium, and type:Contract.</p>
     #   @return [Array<Types::Tag>]
     class TagResourceInput < Struct.new(
+      nil,
       :resource,
       :tags,
       keyword_init: true
@@ -630,6 +680,7 @@ module Aws::MediaStore
     end
 
     class TagResourceOutput < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -644,6 +695,7 @@ module Aws::MediaStore
     #               (priority).</p>
     #   @return [Array<String>]
     class UntagResourceInput < Struct.new(
+      nil,
       :resource,
       :tag_keys,
       keyword_init: true
@@ -652,6 +704,7 @@ module Aws::MediaStore
     end
 
     class UntagResourceOutput < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure

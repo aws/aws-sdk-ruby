@@ -6,7 +6,7 @@ $LOAD_PATH.unshift(File.expand_path('../../aws-sdk-sso/lib', __dir__))
 $LOAD_PATH.unshift(File.expand_path('../../aws-sdk-ssooidc/lib', __dir__))
 $LOAD_PATH.unshift(File.expand_path('../../aws-sdk-sts/lib', __dir__))
 
-require 'byebug'
+require 'byebug' if RUBY_ENGINE == 'ruby'
 require 'rspec'
 require 'webmock/rspec'
 

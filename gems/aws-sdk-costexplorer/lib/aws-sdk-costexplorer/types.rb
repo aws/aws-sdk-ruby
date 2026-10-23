@@ -11,6 +11,7 @@ module Aws::CostExplorer
     #   <p>Details about the Savings Plans purchase analysis.</p>
     #   @return [Types::SavingsPlansPurchaseAnalysisDetails]
     class AnalysisDetails < Struct.new(
+      nil,
       :savings_plans_purchase_analysis_details,
       keyword_init: true
     )
@@ -21,6 +22,7 @@ module Aws::CostExplorer
     # @!attribute message
     #   @return [String]
     class AnalysisNotFoundException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -50,6 +52,7 @@ module Aws::CostExplorer
     #   <p>The configuration for the commitment purchase analysis.</p>
     #   @return [Types::CommitmentPurchaseAnalysisConfiguration]
     class AnalysisSummary < Struct.new(
+      nil,
       :estimated_completion_time,
       :analysis_completion_time,
       :analysis_started_time,
@@ -94,6 +97,7 @@ module Aws::CostExplorer
     #   <p>The feedback value. </p>
     #   @return [String]
     class Anomaly < Struct.new(
+      nil,
       :anomaly_id,
       :anomaly_start_date,
       :anomaly_end_date,
@@ -116,6 +120,7 @@ module Aws::CostExplorer
     #   <p>The last date an anomaly was observed. </p>
     #   @return [String]
     class AnomalyDateInterval < Struct.new(
+      nil,
       :start_date,
       :end_date,
       keyword_init: true
@@ -275,6 +280,7 @@ module Aws::CostExplorer
     #   <p>The value for evaluated dimensions. </p>
     #   @return [Integer]
     class AnomalyMonitor < Struct.new(
+      nil,
       :monitor_arn,
       :monitor_name,
       :creation_date,
@@ -302,6 +308,7 @@ module Aws::CostExplorer
     #   <p>The last observed score. </p>
     #   @return [Float]
     class AnomalyScore < Struct.new(
+      nil,
       :max_score,
       :current_score,
       keyword_init: true
@@ -411,6 +418,7 @@ module Aws::CostExplorer
     #            </ul>
     #   @return [Types::Expression]
     class AnomalySubscription < Struct.new(
+      nil,
       :subscription_arn,
       :account_id,
       :monitor_arn_list,
@@ -430,6 +438,7 @@ module Aws::CostExplorer
     # @!attribute message
     #   @return [String]
     class BackfillLimitExceededException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -440,6 +449,7 @@ module Aws::CostExplorer
     # @!attribute message
     #   @return [String]
     class BillExpirationException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -452,6 +462,7 @@ module Aws::CostExplorer
     # @!attribute message
     #   @return [String]
     class BillingViewHealthStatusException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -463,6 +474,7 @@ module Aws::CostExplorer
     #   <p>The configuration for the Savings Plans purchase analysis.</p>
     #   @return [Types::SavingsPlansPurchaseAnalysisConfiguration]
     class CommitmentPurchaseAnalysisConfiguration < Struct.new(
+      nil,
       :savings_plans_purchase_analysis_configuration,
       keyword_init: true
     )
@@ -486,6 +498,7 @@ module Aws::CostExplorer
     #   <p>The unit of measurement applicable to all numeric values in this comparison.</p>
     #   @return [String]
     class ComparisonMetricValue < Struct.new(
+      nil,
       :baseline_time_period_amount,
       :comparison_time_period_amount,
       :difference,
@@ -517,6 +530,7 @@ module Aws::CostExplorer
     #   <p>The last month that the tag was used on an Amazon Web Services resource.</p>
     #   @return [String]
     class CostAllocationTag < Struct.new(
+      nil,
       :tag_key,
       :type,
       :status,
@@ -555,6 +569,7 @@ module Aws::CostExplorer
     #           </p>
     #   @return [String]
     class CostAllocationTagBackfillRequest < Struct.new(
+      nil,
       :backfill_from,
       :requested_at,
       :completed_at,
@@ -574,6 +589,7 @@ module Aws::CostExplorer
     #   <p>The status of a cost allocation tag. </p>
     #   @return [String]
     class CostAllocationTagStatusEntry < Struct.new(
+      nil,
       :tag_key,
       :status,
       keyword_init: true
@@ -710,6 +726,7 @@ module Aws::CostExplorer
     #   <p>A mapping of metric names to their comparison values.</p>
     #   @return [Hash<String, Types::ComparisonMetricValue>]
     class CostAndUsageComparison < Struct.new(
+      nil,
       :cost_and_usage_selector,
       :metrics,
       keyword_init: true
@@ -752,6 +769,7 @@ module Aws::CostExplorer
     #               default value for the cost category.</p>
     #   @return [String]
     class CostCategory < Struct.new(
+      nil,
       :cost_category_arn,
       :effective_start,
       :effective_end,
@@ -784,6 +802,7 @@ module Aws::CostExplorer
     #   <p>The key to extract cost category values.</p>
     #   @return [String]
     class CostCategoryInheritedValueDimension < Struct.new(
+      nil,
       :dimension_name,
       :dimension_key,
       keyword_init: true
@@ -800,6 +819,7 @@ module Aws::CostExplorer
     #   <p>The process status for a specific cost category. </p>
     #   @return [String]
     class CostCategoryProcessingStatus < Struct.new(
+      nil,
       :component,
       :status,
       keyword_init: true
@@ -838,6 +858,7 @@ module Aws::CostExplorer
     #               default value for the cost category.</p>
     #   @return [String]
     class CostCategoryReference < Struct.new(
+      nil,
       :cost_category_arn,
       :name,
       :effective_start,
@@ -890,6 +911,7 @@ module Aws::CostExplorer
     #               specify the tag key to use.</p>
     #   @return [String]
     class CostCategoryRule < Struct.new(
+      nil,
       :value,
       :rule,
       :inherited_value,
@@ -925,6 +947,7 @@ module Aws::CostExplorer
     #                   <code>FIXED</code> method. </p>
     #   @return [Array<Types::CostCategorySplitChargeRuleParameter>]
     class CostCategorySplitChargeRule < Struct.new(
+      nil,
       :source,
       :targets,
       :method,
@@ -942,6 +965,7 @@ module Aws::CostExplorer
     #   <p>The parameter values. </p>
     #   @return [Array<String>]
     class CostCategorySplitChargeRuleParameter < Struct.new(
+      nil,
       :type,
       :values,
       keyword_init: true
@@ -970,6 +994,7 @@ module Aws::CostExplorer
     #           </p>
     #   @return [Array<String>]
     class CostCategoryValues < Struct.new(
+      nil,
       :key,
       :values,
       :match_options,
@@ -1114,6 +1139,7 @@ module Aws::CostExplorer
     #               change.</p>
     #   @return [Array<Types::CostDriver>]
     class CostComparisonDriver < Struct.new(
+      nil,
       :cost_selector,
       :metrics,
       :cost_drivers,
@@ -1140,6 +1166,7 @@ module Aws::CostExplorer
     #               cost driver.</p>
     #   @return [Hash<String, Types::ComparisonMetricValue>]
     class CostDriver < Struct.new(
+      nil,
       :type,
       :name,
       :metrics,
@@ -1159,6 +1186,7 @@ module Aws::CostExplorer
     #   <p>The amount of cost that the reservation covered.</p>
     #   @return [Types::CoverageCost]
     class Coverage < Struct.new(
+      nil,
       :coverage_hours,
       :coverage_normalized_units,
       :coverage_cost,
@@ -1178,6 +1206,7 @@ module Aws::CostExplorer
     #   <p>The total reservation coverage, in hours.</p>
     #   @return [Types::Coverage]
     class CoverageByTime < Struct.new(
+      nil,
       :time_period,
       :groups,
       :total,
@@ -1191,6 +1220,7 @@ module Aws::CostExplorer
     #   <p>How much an On-Demand Instance costs.</p>
     #   @return [String]
     class CoverageCost < Struct.new(
+      nil,
       :on_demand_cost,
       keyword_init: true
     )
@@ -1211,6 +1241,7 @@ module Aws::CostExplorer
     #   <p>The percentage of instance hours that a reservation covered.</p>
     #   @return [String]
     class CoverageHours < Struct.new(
+      nil,
       :on_demand_hours,
       :reserved_hours,
       :total_running_hours,
@@ -1245,6 +1276,7 @@ module Aws::CostExplorer
     #               covers.</p>
     #   @return [String]
     class CoverageNormalizedUnits < Struct.new(
+      nil,
       :on_demand_normalized_units,
       :reserved_normalized_units,
       :total_running_normalized_units,
@@ -1293,6 +1325,7 @@ module Aws::CostExplorer
     #            </ul>
     #   @return [Array<Types::ResourceTag>]
     class CreateAnomalyMonitorRequest < Struct.new(
+      nil,
       :anomaly_monitor,
       :resource_tags,
       keyword_init: true
@@ -1304,6 +1337,7 @@ module Aws::CostExplorer
     #   <p>The unique identifier of your newly created cost anomaly detection monitor.</p>
     #   @return [String]
     class CreateAnomalyMonitorResponse < Struct.new(
+      nil,
       :monitor_arn,
       keyword_init: true
     )
@@ -1349,6 +1383,7 @@ module Aws::CostExplorer
     #            </ul>
     #   @return [Array<Types::ResourceTag>]
     class CreateAnomalySubscriptionRequest < Struct.new(
+      nil,
       :anomaly_subscription,
       :resource_tags,
       keyword_init: true
@@ -1360,6 +1395,7 @@ module Aws::CostExplorer
     #   <p>The unique identifier of your newly created cost anomaly subscription. </p>
     #   @return [String]
     class CreateAnomalySubscriptionResponse < Struct.new(
+      nil,
       :subscription_arn,
       keyword_init: true
     )
@@ -1422,6 +1458,7 @@ module Aws::CostExplorer
     #            </ul>
     #   @return [Array<Types::ResourceTag>]
     class CreateCostCategoryDefinitionRequest < Struct.new(
+      nil,
       :name,
       :effective_start,
       :rule_version,
@@ -1441,6 +1478,7 @@ module Aws::CostExplorer
     #   <p>The Cost Category's effective start date. It can only be a billing start date (first day of the month).</p>
     #   @return [String]
     class CreateCostCategoryDefinitionResponse < Struct.new(
+      nil,
       :cost_category_arn,
       :effective_start,
       keyword_init: true
@@ -1486,6 +1524,7 @@ module Aws::CostExplorer
     #               instance.</p>
     #   @return [String]
     class CurrentInstance < Struct.new(
+      nil,
       :resource_id,
       :instance_name,
       :tags,
@@ -1506,6 +1545,7 @@ module Aws::CostExplorer
     # @!attribute message
     #   @return [String]
     class DataUnavailableException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -1525,6 +1565,7 @@ module Aws::CostExplorer
     #               usage data from the start date up to, but not including, <code>2017-05-01</code>.</p>
     #   @return [String]
     class DateInterval < Struct.new(
+      nil,
       :start,
       :end,
       keyword_init: true
@@ -1536,6 +1577,7 @@ module Aws::CostExplorer
     #   <p>The unique identifier of the cost anomaly monitor that you want to delete. </p>
     #   @return [String]
     class DeleteAnomalyMonitorRequest < Struct.new(
+      nil,
       :monitor_arn,
       keyword_init: true
     )
@@ -1543,6 +1585,7 @@ module Aws::CostExplorer
     end
 
     class DeleteAnomalyMonitorResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1552,6 +1595,7 @@ module Aws::CostExplorer
     #   <p>The unique identifier of the cost anomaly subscription that you want to delete. </p>
     #   @return [String]
     class DeleteAnomalySubscriptionRequest < Struct.new(
+      nil,
       :subscription_arn,
       keyword_init: true
     )
@@ -1559,6 +1603,7 @@ module Aws::CostExplorer
     end
 
     class DeleteAnomalySubscriptionResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1568,6 +1613,7 @@ module Aws::CostExplorer
     #   <p>The unique identifier for your Cost Category. </p>
     #   @return [String]
     class DeleteCostCategoryDefinitionRequest < Struct.new(
+      nil,
       :cost_category_arn,
       keyword_init: true
     )
@@ -1582,6 +1628,7 @@ module Aws::CostExplorer
     #         this date is categorized by the deleted Cost Category. </p>
     #   @return [String]
     class DeleteCostCategoryDefinitionResponse < Struct.new(
+      nil,
       :cost_category_arn,
       :effective_end,
       keyword_init: true
@@ -1596,6 +1643,7 @@ module Aws::CostExplorer
     #   <p>The date when the Cost Category was effective. </p>
     #   @return [String]
     class DescribeCostCategoryDefinitionRequest < Struct.new(
+      nil,
       :cost_category_arn,
       :effective_on,
       keyword_init: true
@@ -1608,6 +1656,7 @@ module Aws::CostExplorer
     #               for the <code>CostCategory</code> object.</p>
     #   @return [Types::CostCategory]
     class DescribeCostCategoryDefinitionResponse < Struct.new(
+      nil,
       :cost_category,
       keyword_init: true
     )
@@ -1642,6 +1691,7 @@ module Aws::CostExplorer
     #                   <code>CASE_SENSITIVE</code>.</p>
     #   @return [Array<String>]
     class DimensionValues < Struct.new(
+      nil,
       :key,
       :values,
       :match_options,
@@ -1659,6 +1709,7 @@ module Aws::CostExplorer
     #   <p>The attribute that applies to a specific <code>Dimension</code>.</p>
     #   @return [Hash<String, String>]
     class DimensionValuesWithAttributes < Struct.new(
+      nil,
       :value,
       :attributes,
       keyword_init: true
@@ -1681,6 +1732,7 @@ module Aws::CostExplorer
     #   <p>The maximum write throughput operations per second. </p>
     #   @return [String]
     class DiskResourceUtilization < Struct.new(
+      nil,
       :disk_read_ops_per_second,
       :disk_write_ops_per_second,
       :disk_read_bytes_per_second,
@@ -1698,6 +1750,7 @@ module Aws::CostExplorer
     #   <p>The Amazon Web Services Region of the recommended reservation.</p>
     #   @return [String]
     class DynamoDBCapacityDetails < Struct.new(
+      nil,
       :capacity_units,
       :region,
       keyword_init: true
@@ -1720,6 +1773,7 @@ module Aws::CostExplorer
     #   <p>The maximum size of write operations per second. </p>
     #   @return [String]
     class EBSResourceUtilization < Struct.new(
+      nil,
       :ebs_read_ops_per_second,
       :ebs_write_ops_per_second,
       :ebs_read_bytes_per_second,
@@ -1757,6 +1811,7 @@ module Aws::CostExplorer
     #   <p>Determines whether the recommended reservation is size flexible.</p>
     #   @return [Boolean]
     class EC2InstanceDetails < Struct.new(
+      nil,
       :family,
       :instance_type,
       :region,
@@ -1807,6 +1862,7 @@ module Aws::CostExplorer
     #   <p>The number of VCPU cores in the Amazon Web Services instance type.</p>
     #   @return [String]
     class EC2ResourceDetails < Struct.new(
+      nil,
       :hourly_on_demand_rate,
       :instance_type,
       :platform,
@@ -1845,6 +1901,7 @@ module Aws::CostExplorer
     #               current instance. </p>
     #   @return [Types::NetworkResourceUtilization]
     class EC2ResourceUtilization < Struct.new(
+      nil,
       :max_cpu_utilization_percentage,
       :max_memory_utilization_percentage,
       :max_storage_utilization_percentage,
@@ -1863,6 +1920,7 @@ module Aws::CostExplorer
     #               reservations.</p>
     #   @return [String]
     class EC2Specification < Struct.new(
+      nil,
       :offering_class,
       keyword_init: true
     )
@@ -1887,6 +1945,7 @@ module Aws::CostExplorer
     #   <p>Determines whether the recommended reservation is size flexible.</p>
     #   @return [Boolean]
     class ESInstanceDetails < Struct.new(
+      nil,
       :instance_class,
       :instance_size,
       :region,
@@ -1924,6 +1983,7 @@ module Aws::CostExplorer
     #   <p>Determines whether the recommended reservation is size flexible.</p>
     #   @return [Boolean]
     class ElastiCacheInstanceDetails < Struct.new(
+      nil,
       :family,
       :node_type,
       :region,
@@ -2082,6 +2142,7 @@ module Aws::CostExplorer
     #   <p>The filter that's based on <code>CostCategory</code> values.</p>
     #   @return [Types::CostCategoryValues]
     class Expression < Struct.new(
+      nil,
       :or,
       :and,
       :not,
@@ -2107,6 +2168,7 @@ module Aws::CostExplorer
     #   <p>The upper limit for the prediction interval. </p>
     #   @return [String]
     class ForecastResult < Struct.new(
+      nil,
       :time_period,
       :mean_value,
       :prediction_interval_lower_bound,
@@ -2120,6 +2182,7 @@ module Aws::CostExplorer
     # @!attribute message
     #   @return [String]
     class GenerationExistsException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -2145,6 +2208,7 @@ module Aws::CostExplorer
     #               complete.</p>
     #   @return [String]
     class GenerationSummary < Struct.new(
+      nil,
       :recommendation_id,
       :generation_status,
       :generation_started_time,
@@ -2179,6 +2243,7 @@ module Aws::CostExplorer
     #   <p>The number of entries a paginated response contains. </p>
     #   @return [Integer]
     class GetAnomaliesRequest < Struct.new(
+      nil,
       :monitor_arn,
       :date_interval,
       :feedback,
@@ -2198,6 +2263,7 @@ module Aws::CostExplorer
     #         the response from a previous call has more results than the maximum page size. </p>
     #   @return [String]
     class GetAnomaliesResponse < Struct.new(
+      nil,
       :anomalies,
       :next_page_token,
       keyword_init: true
@@ -2216,6 +2282,7 @@ module Aws::CostExplorer
     #   <p>The number of entries that a paginated response contains. </p>
     #   @return [Integer]
     class GetAnomalyMonitorsRequest < Struct.new(
+      nil,
       :monitor_arn_list,
       :next_page_token,
       :max_results,
@@ -2233,6 +2300,7 @@ module Aws::CostExplorer
     #         the response from a previous call has more results than the maximum page size. </p>
     #   @return [String]
     class GetAnomalyMonitorsResponse < Struct.new(
+      nil,
       :anomaly_monitors,
       :next_page_token,
       keyword_init: true
@@ -2254,6 +2322,7 @@ module Aws::CostExplorer
     #   <p>The number of entries a paginated response contains. </p>
     #   @return [Integer]
     class GetAnomalySubscriptionsRequest < Struct.new(
+      nil,
       :subscription_arn_list,
       :monitor_arn,
       :next_page_token,
@@ -2272,6 +2341,7 @@ module Aws::CostExplorer
     #         the response from a previous call has more results than the maximum page size. </p>
     #   @return [String]
     class GetAnomalySubscriptionsResponse < Struct.new(
+      nil,
       :anomaly_subscriptions,
       :next_page_token,
       keyword_init: true
@@ -2292,6 +2362,7 @@ module Aws::CostExplorer
     #         granularity, or hourly granularity with or without resource-level data.</p>
     #   @return [String]
     class GetApproximateUsageRecordsRequest < Struct.new(
+      nil,
       :granularity,
       :services,
       :approximation_dimension,
@@ -2310,6 +2381,7 @@ module Aws::CostExplorer
     #   <p>The lookback period that's used for the estimation.</p>
     #   @return [Types::DateInterval]
     class GetApproximateUsageRecordsResponse < Struct.new(
+      nil,
       :services,
       :total_records,
       :lookback_period,
@@ -2327,6 +2399,7 @@ module Aws::CostExplorer
     #   <p>The analysis ID that's associated with the commitment purchase analysis.</p>
     #   @return [String]
     class GetCommitmentPurchaseAnalysisRequest < Struct.new(
+      nil,
       :analysis_id,
       keyword_init: true
     )
@@ -2358,6 +2431,7 @@ module Aws::CostExplorer
     #   <p>The configuration for the commitment purchase analysis.</p>
     #   @return [Types::CommitmentPurchaseAnalysisConfiguration]
     class GetCommitmentPurchaseAnalysisResponse < Struct.new(
+      nil,
       :estimated_completion_time,
       :analysis_completion_time,
       :analysis_started_time,
@@ -2529,6 +2603,7 @@ module Aws::CostExplorer
     #   <p>The token to retrieve the next set of paginated results.</p>
     #   @return [String]
     class GetCostAndUsageComparisonsRequest < Struct.new(
+      nil,
       :billing_view_arn,
       :baseline_time_period,
       :comparison_time_period,
@@ -2556,6 +2631,7 @@ module Aws::CostExplorer
     #   <p>The token to retrieve the next set of paginated results.</p>
     #   @return [String]
     class GetCostAndUsageComparisonsResponse < Struct.new(
+      nil,
       :cost_and_usage_comparisons,
       :total_cost_and_usage,
       :next_page_token,
@@ -2631,6 +2707,7 @@ module Aws::CostExplorer
     #         when the response from a previous call has more results than the maximum page size.</p>
     #   @return [String]
     class GetCostAndUsageRequest < Struct.new(
+      nil,
       :time_period,
       :granularity,
       :filter,
@@ -2659,6 +2736,7 @@ module Aws::CostExplorer
     #         linked account, the attribute is that account name.</p>
     #   @return [Array<Types::DimensionValuesWithAttributes>]
     class GetCostAndUsageResponse < Struct.new(
+      nil,
       :next_page_token,
       :group_definitions,
       :results_by_time,
@@ -2730,6 +2808,7 @@ module Aws::CostExplorer
     #         when the response from a previous call has more results than the maximum page size.</p>
     #   @return [String]
     class GetCostAndUsageWithResourcesRequest < Struct.new(
+      nil,
       :time_period,
       :granularity,
       :filter,
@@ -2758,6 +2837,7 @@ module Aws::CostExplorer
     #         linked account, the attribute is that account name.</p>
     #   @return [Array<Types::DimensionValuesWithAttributes>]
     class GetCostAndUsageWithResourcesResponse < Struct.new(
+      nil,
       :next_page_token,
       :group_definitions,
       :results_by_time,
@@ -2969,6 +3049,7 @@ module Aws::CostExplorer
     #         objects, provide the NextPageToken from the previous call in your next request.</p>
     #   @return [String]
     class GetCostCategoriesRequest < Struct.new(
+      nil,
       :search_string,
       :time_period,
       :cost_category_name,
@@ -3001,6 +3082,7 @@ module Aws::CostExplorer
     #   <p>The total number of objects.</p>
     #   @return [Integer]
     class GetCostCategoriesResponse < Struct.new(
+      nil,
       :next_page_token,
       :cost_category_names,
       :cost_category_values,
@@ -3170,6 +3252,7 @@ module Aws::CostExplorer
     #   <p>The token to retrieve the next set of paginated results.</p>
     #   @return [String]
     class GetCostComparisonDriversRequest < Struct.new(
+      nil,
       :billing_view_arn,
       :baseline_time_period,
       :comparison_time_period,
@@ -3191,6 +3274,7 @@ module Aws::CostExplorer
     #   <p>The token to retrieve the next set of paginated results.</p>
     #   @return [String]
     class GetCostComparisonDriversResponse < Struct.new(
+      nil,
       :cost_comparison_drivers,
       :next_page_token,
       keyword_init: true
@@ -3361,6 +3445,7 @@ module Aws::CostExplorer
     #         prediction interval. Higher confidence levels result in wider prediction intervals.</p>
     #   @return [Integer]
     class GetCostForecastRequest < Struct.new(
+      nil,
       :time_period,
       :metric,
       :granularity,
@@ -3380,6 +3465,7 @@ module Aws::CostExplorer
     #         of days. For <code>MONTHLY</code> forecasts, this is a list of months.</p>
     #   @return [Array<Types::ForecastResult>]
     class GetCostForecastResponse < Struct.new(
+      nil,
       :total,
       :forecast_results_by_time,
       keyword_init: true
@@ -3769,6 +3855,7 @@ module Aws::CostExplorer
     #         when the response from a previous call has more results than the maximum page size.</p>
     #   @return [String]
     class GetDimensionValuesRequest < Struct.new(
+      nil,
       :search_string,
       :time_period,
       :dimension,
@@ -3926,6 +4013,7 @@ module Aws::CostExplorer
     #         when the response from a previous call has more results than the maximum page size.</p>
     #   @return [String]
     class GetDimensionValuesResponse < Struct.new(
+      nil,
       :dimension_values,
       :return_size,
       :total_size,
@@ -4116,6 +4204,7 @@ module Aws::CostExplorer
     #         in a subsequent call to get the next batch of objects.</p>
     #   @return [Integer]
     class GetReservationCoverageRequest < Struct.new(
+      nil,
       :time_period,
       :group_by,
       :granularity,
@@ -4140,6 +4229,7 @@ module Aws::CostExplorer
     #         when the response from a previous call has more results than the maximum page size.</p>
     #   @return [String]
     class GetReservationCoverageResponse < Struct.new(
+      nil,
       :coverages_by_time,
       :total,
       :next_page_token,
@@ -4307,6 +4397,7 @@ module Aws::CostExplorer
     #         retrieve.</p>
     #   @return [String]
     class GetReservationPurchaseRecommendationRequest < Struct.new(
+      nil,
       :account_id,
       :service,
       :filter,
@@ -4333,6 +4424,7 @@ module Aws::CostExplorer
     #   <p>The pagination token for the next set of retrievable results.</p>
     #   @return [String]
     class GetReservationPurchaseRecommendationResponse < Struct.new(
+      nil,
       :metadata,
       :recommendations,
       :next_page_token,
@@ -4514,6 +4606,7 @@ module Aws::CostExplorer
     #         in a subsequent call to get the next batch of objects.</p>
     #   @return [Integer]
     class GetReservationUtilizationRequest < Struct.new(
+      nil,
       :time_period,
       :group_by,
       :granularity,
@@ -4537,6 +4630,7 @@ module Aws::CostExplorer
     #         when the response from a previous call has more results than the maximum page size.</p>
     #   @return [String]
     class GetReservationUtilizationResponse < Struct.new(
+      nil,
       :utilizations_by_time,
       :total,
       :next_page_token,
@@ -4688,6 +4782,7 @@ module Aws::CostExplorer
     #         retrieve.</p>
     #   @return [String]
     class GetRightsizingRecommendationRequest < Struct.new(
+      nil,
       :filter,
       :configuration,
       :service,
@@ -4718,6 +4813,7 @@ module Aws::CostExplorer
     #         or neither. </p>
     #   @return [Types::RightsizingRecommendationConfiguration]
     class GetRightsizingRecommendationResponse < Struct.new(
+      nil,
       :metadata,
       :summary,
       :rightsizing_recommendations,
@@ -4732,6 +4828,7 @@ module Aws::CostExplorer
     #   <p>The ID that is associated with the Savings Plan recommendation.</p>
     #   @return [String]
     class GetSavingsPlanPurchaseRecommendationDetailsRequest < Struct.new(
+      nil,
       :recommendation_detail_id,
       keyword_init: true
     )
@@ -4745,6 +4842,7 @@ module Aws::CostExplorer
     #   <p>Contains detailed information about a specific Savings Plan recommendation.</p>
     #   @return [Types::RecommendationDetailData]
     class GetSavingsPlanPurchaseRecommendationDetailsResponse < Struct.new(
+      nil,
       :recommendation_detail_id,
       :recommendation_detail_data,
       keyword_init: true
@@ -4854,6 +4952,7 @@ module Aws::CostExplorer
     #           <code>DESCENDING</code>.</p>
     #   @return [Types::SortDefinition]
     class GetSavingsPlansCoverageRequest < Struct.new(
+      nil,
       :time_period,
       :group_by,
       :granularity,
@@ -4875,6 +4974,7 @@ module Aws::CostExplorer
     #         the response from a previous call has more results than the maximum page size.</p>
     #   @return [String]
     class GetSavingsPlansCoverageResponse < Struct.new(
+      nil,
       :savings_plans_coverages,
       :next_token,
       keyword_init: true
@@ -4920,6 +5020,7 @@ module Aws::CostExplorer
     #           <code>OR</code> operators are not supported.</p>
     #   @return [Types::Expression]
     class GetSavingsPlansPurchaseRecommendationRequest < Struct.new(
+      nil,
       :savings_plans_type,
       :term_in_years,
       :payment_option,
@@ -4945,6 +5046,7 @@ module Aws::CostExplorer
     #         when the response from a previous call has more results than the maximum page size.</p>
     #   @return [String]
     class GetSavingsPlansPurchaseRecommendationResponse < Struct.new(
+      nil,
       :metadata,
       :savings_plans_purchase_recommendation,
       :next_page_token,
@@ -5047,6 +5149,7 @@ module Aws::CostExplorer
     #           <code>DESCENDING</code>.</p>
     #   @return [Types::SortDefinition]
     class GetSavingsPlansUtilizationDetailsRequest < Struct.new(
+      nil,
       :time_period,
       :filter,
       :data_type,
@@ -5073,6 +5176,7 @@ module Aws::CostExplorer
     #         the response from a previous call has more results than the maximum page size.</p>
     #   @return [String]
     class GetSavingsPlansUtilizationDetailsResponse < Struct.new(
+      nil,
       :savings_plans_utilization_details,
       :total,
       :time_period,
@@ -5166,6 +5270,7 @@ module Aws::CostExplorer
     #           <code>DESCENDING</code>.</p>
     #   @return [Types::SortDefinition]
     class GetSavingsPlansUtilizationRequest < Struct.new(
+      nil,
       :time_period,
       :granularity,
       :filter,
@@ -5184,6 +5289,7 @@ module Aws::CostExplorer
     #         ranges.</p>
     #   @return [Types::SavingsPlansUtilizationAggregates]
     class GetSavingsPlansUtilizationResponse < Struct.new(
+      nil,
       :savings_plans_utilizations_by_time,
       :total,
       keyword_init: true
@@ -5391,6 +5497,7 @@ module Aws::CostExplorer
     #         when the response from a previous call has more results than the maximum page size.</p>
     #   @return [String]
     class GetTagsRequest < Struct.new(
+      nil,
       :search_string,
       :time_period,
       :tag_key,
@@ -5418,6 +5525,7 @@ module Aws::CostExplorer
     #   <p>The total number of query results.</p>
     #   @return [Integer]
     class GetTagsResponse < Struct.new(
+      nil,
       :next_page_token,
       :tags,
       :return_size,
@@ -5590,6 +5698,7 @@ module Aws::CostExplorer
     #         intervals.</p>
     #   @return [Integer]
     class GetUsageForecastRequest < Struct.new(
+      nil,
       :time_period,
       :metric,
       :granularity,
@@ -5609,6 +5718,7 @@ module Aws::CostExplorer
     #         list of days. For <code>MONTHLY</code> forecasts, this is a list of months.</p>
     #   @return [Array<Types::ForecastResult>]
     class GetUsageForecastResponse < Struct.new(
+      nil,
       :total,
       :forecast_results_by_time,
       keyword_init: true
@@ -5624,6 +5734,7 @@ module Aws::CostExplorer
     #   <p>The metrics that are included in this group.</p>
     #   @return [Hash<String, Types::MetricValue>]
     class Group < Struct.new(
+      nil,
       :keys,
       :metrics,
       keyword_init: true
@@ -5640,6 +5751,7 @@ module Aws::CostExplorer
     #   <p>The string that represents a key for a specified group.</p>
     #   @return [String]
     class GroupDefinition < Struct.new(
+      nil,
       :type,
       :key,
       keyword_init: true
@@ -5670,6 +5782,7 @@ module Aws::CostExplorer
     #               be zero in situations such as when you start to use a service for the first time.</p>
     #   @return [Float]
     class Impact < Struct.new(
+      nil,
       :max_impact,
       :total_impact,
       :total_actual_spend,
@@ -5712,6 +5825,7 @@ module Aws::CostExplorer
     #   <p>The MemoryDB reservations that Amazon Web Services recommends that you purchase.</p>
     #   @return [Types::MemoryDBInstanceDetails]
     class InstanceDetails < Struct.new(
+      nil,
       :ec2_instance_details,
       :rds_instance_details,
       :redshift_instance_details,
@@ -5727,6 +5841,7 @@ module Aws::CostExplorer
     # @!attribute message
     #   @return [String]
     class InvalidNextTokenException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -5737,6 +5852,7 @@ module Aws::CostExplorer
     # @!attribute message
     #   @return [String]
     class LimitExceededException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -5756,6 +5872,7 @@ module Aws::CostExplorer
     #   <p>The analysis IDs associated with the commitment purchase analyses.</p>
     #   @return [Array<String>]
     class ListCommitmentPurchaseAnalysesRequest < Struct.new(
+      nil,
       :analysis_status,
       :next_page_token,
       :page_size,
@@ -5772,6 +5889,7 @@ module Aws::CostExplorer
     #   <p>The token to retrieve the next set of results.</p>
     #   @return [String]
     class ListCommitmentPurchaseAnalysesResponse < Struct.new(
+      nil,
       :analysis_summary_list,
       :next_page_token,
       keyword_init: true
@@ -5790,6 +5908,7 @@ module Aws::CostExplorer
     #       </p>
     #   @return [Integer]
     class ListCostAllocationTagBackfillHistoryRequest < Struct.new(
+      nil,
       :next_token,
       :max_results,
       keyword_init: true
@@ -5808,6 +5927,7 @@ module Aws::CostExplorer
     #       </p>
     #   @return [String]
     class ListCostAllocationTagBackfillHistoryResponse < Struct.new(
+      nil,
       :backfill_requests,
       :next_token,
       keyword_init: true
@@ -5837,6 +5957,7 @@ module Aws::CostExplorer
     #         returns 100 results. </p>
     #   @return [Integer]
     class ListCostAllocationTagsRequest < Struct.new(
+      nil,
       :status,
       :tag_keys,
       :type,
@@ -5855,6 +5976,7 @@ module Aws::CostExplorer
     #         the response from a previous call has more results than the maximum page size. </p>
     #   @return [String]
     class ListCostAllocationTagsResponse < Struct.new(
+      nil,
       :cost_allocation_tags,
       :next_token,
       keyword_init: true
@@ -5873,6 +5995,7 @@ module Aws::CostExplorer
     #   <p>The number of entries a paginated response contains. </p>
     #   @return [Integer]
     class ListCostCategoryDefinitionsRequest < Struct.new(
+      nil,
       :effective_on,
       :next_token,
       :max_results,
@@ -5890,6 +6013,7 @@ module Aws::CostExplorer
     #         the response from a previous call has more results than the maximum page size. </p>
     #   @return [String]
     class ListCostCategoryDefinitionsResponse < Struct.new(
+      nil,
       :cost_category_references,
       :next_token,
       keyword_init: true
@@ -5910,6 +6034,7 @@ module Aws::CostExplorer
     #   <p>The token to retrieve the next set of results.</p>
     #   @return [String]
     class ListSavingsPlansPurchaseRecommendationGenerationRequest < Struct.new(
+      nil,
       :generation_status,
       :recommendation_ids,
       :page_size,
@@ -5926,6 +6051,7 @@ module Aws::CostExplorer
     #   <p>The token to retrieve the next set of results.</p>
     #   @return [String]
     class ListSavingsPlansPurchaseRecommendationGenerationResponse < Struct.new(
+      nil,
       :generation_summary_list,
       :next_page_token,
       keyword_init: true
@@ -5938,6 +6064,7 @@ module Aws::CostExplorer
     #           <a href="https://docs.aws.amazon.com/aws-cost-management/latest/APIReference/API_ResourceTag.html">ResourceTag</a>.</p>
     #   @return [String]
     class ListTagsForResourceRequest < Struct.new(
+      nil,
       :resource_arn,
       keyword_init: true
     )
@@ -5948,6 +6075,7 @@ module Aws::CostExplorer
     #   <p>A list of tag key value pairs that are associated with the resource. </p>
     #   @return [Array<Types::ResourceTag>]
     class ListTagsForResourceResponse < Struct.new(
+      nil,
       :resource_tags,
       keyword_init: true
     )
@@ -5972,6 +6100,7 @@ module Aws::CostExplorer
     #   <p>Determines whether the recommended reservation is size flexible.</p>
     #   @return [Boolean]
     class MemoryDBInstanceDetails < Struct.new(
+      nil,
       :family,
       :node_type,
       :region,
@@ -5996,6 +6125,7 @@ module Aws::CostExplorer
     #   <p>The unit that the metric is given in.</p>
     #   @return [String]
     class MetricValue < Struct.new(
+      nil,
       :amount,
       :unit,
       keyword_init: true
@@ -6009,6 +6139,7 @@ module Aws::CostExplorer
     #               recommendation.</p>
     #   @return [Array<Types::TargetInstance>]
     class ModifyRecommendationDetail < Struct.new(
+      nil,
       :target_instances,
       keyword_init: true
     )
@@ -6031,6 +6162,7 @@ module Aws::CostExplorer
     #   <p>The network outbound packets that are measured in packets per second. </p>
     #   @return [String]
     class NetworkResourceUtilization < Struct.new(
+      nil,
       :network_in_bytes_per_second,
       :network_out_bytes_per_second,
       :network_packets_in_per_second,
@@ -6048,6 +6180,7 @@ module Aws::CostExplorer
     #       </p>
     #   @return [String]
     class ProvideAnomalyFeedbackRequest < Struct.new(
+      nil,
       :anomaly_id,
       :feedback,
       keyword_init: true
@@ -6059,6 +6192,7 @@ module Aws::CostExplorer
     #   <p>The ID of the modified cost anomaly. </p>
     #   @return [String]
     class ProvideAnomalyFeedbackResponse < Struct.new(
+      nil,
       :anomaly_id,
       keyword_init: true
     )
@@ -6096,6 +6230,7 @@ module Aws::CostExplorer
     #   <p>Determines whether the recommended reservation is size flexible.</p>
     #   @return [Boolean]
     class RDSInstanceDetails < Struct.new(
+      nil,
       :family,
       :instance_type,
       :region,
@@ -6222,6 +6357,7 @@ module Aws::CostExplorer
     #               period.</p>
     #   @return [Array<Types::RecommendationDetailHourlyMetrics>]
     class RecommendationDetailData < Struct.new(
+      nil,
       :account_scope,
       :lookback_period_in_days,
       :savings_plans_type,
@@ -6276,6 +6412,7 @@ module Aws::CostExplorer
     #   <p>The estimated utilization for the recommended Savings Plan.</p>
     #   @return [String]
     class RecommendationDetailHourlyMetrics < Struct.new(
+      nil,
       :start_time,
       :estimated_on_demand_cost,
       :current_coverage,
@@ -6304,6 +6441,7 @@ module Aws::CostExplorer
     #   <p>Determines whether the recommended reservation is size flexible.</p>
     #   @return [Boolean]
     class RedshiftInstanceDetails < Struct.new(
+      nil,
       :family,
       :node_type,
       :region,
@@ -6325,6 +6463,7 @@ module Aws::CostExplorer
     # @!attribute message
     #   @return [String]
     class RequestChangedException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -6396,6 +6535,7 @@ module Aws::CostExplorer
     #   <p>The unrealized savings because of purchasing and using a reservation.</p>
     #   @return [String]
     class ReservationAggregates < Struct.new(
+      nil,
       :utilization_percentage,
       :utilization_percentage_in_units,
       :purchased_hours,
@@ -6426,6 +6566,7 @@ module Aws::CostExplorer
     #   <p>How much instance usage this group of reservations covered.</p>
     #   @return [Types::Coverage]
     class ReservationCoverageGroup < Struct.new(
+      nil,
       :attributes,
       :coverage,
       keyword_init: true
@@ -6460,6 +6601,7 @@ module Aws::CostExplorer
     #   <p>A summary about the recommended purchase.</p>
     #   @return [Types::ReservationPurchaseRecommendationSummary]
     class ReservationPurchaseRecommendation < Struct.new(
+      nil,
       :account_scope,
       :lookback_period_in_days,
       :term_in_years,
@@ -6583,6 +6725,7 @@ module Aws::CostExplorer
     #               reservation purchases.</p>
     #   @return [String]
     class ReservationPurchaseRecommendationDetail < Struct.new(
+      nil,
       :account_id,
       :instance_details,
       :recommended_number_of_instances_to_purchase,
@@ -6624,6 +6767,7 @@ module Aws::CostExplorer
     #   <p>Additional metadata that might be applicable to the recommendation.</p>
     #   @return [String]
     class ReservationPurchaseRecommendationMetadata < Struct.new(
+      nil,
       :recommendation_id,
       :generation_timestamp,
       :additional_metadata,
@@ -6647,6 +6791,7 @@ module Aws::CostExplorer
     #   <p>The currency code used for this recommendation.</p>
     #   @return [String]
     class ReservationPurchaseRecommendationSummary < Struct.new(
+      nil,
       :total_estimated_monthly_savings_amount,
       :total_estimated_monthly_savings_percentage,
       :currency_code,
@@ -6669,6 +6814,7 @@ module Aws::CostExplorer
     #   <p>How much you used this group of reservations.</p>
     #   @return [Types::ReservationAggregates]
     class ReservationUtilizationGroup < Struct.new(
+      nil,
       :key,
       :value,
       :attributes,
@@ -6685,6 +6831,7 @@ module Aws::CostExplorer
     #   <p>The DynamoDB reservations that Amazon Web Services recommends that you purchase.</p>
     #   @return [Types::DynamoDBCapacityDetails]
     class ReservedCapacityDetails < Struct.new(
+      nil,
       :dynamo_db_capacity_details,
       keyword_init: true
     )
@@ -6696,6 +6843,7 @@ module Aws::CostExplorer
     #   <p>Details for the Amazon EC2 resource.</p>
     #   @return [Types::EC2ResourceDetails]
     class ResourceDetails < Struct.new(
+      nil,
       :ec2_resource_details,
       keyword_init: true
     )
@@ -6708,6 +6856,7 @@ module Aws::CostExplorer
     # @!attribute resource_name
     #   @return [String]
     class ResourceNotFoundException < Struct.new(
+      nil,
       :message,
       :resource_name,
       keyword_init: true
@@ -6733,6 +6882,7 @@ module Aws::CostExplorer
     #   <p>The value that's associated with the tag. </p>
     #   @return [String]
     class ResourceTag < Struct.new(
+      nil,
       :key,
       :value,
       keyword_init: true
@@ -6745,6 +6895,7 @@ module Aws::CostExplorer
     #   <p>The utilization of current Amazon EC2 instance. </p>
     #   @return [Types::EC2ResourceUtilization]
     class ResourceUtilization < Struct.new(
+      nil,
       :ec2_resource_utilization,
       keyword_init: true
     )
@@ -6765,6 +6916,7 @@ module Aws::CostExplorer
     #   <p>Determines whether the result is estimated.</p>
     #   @return [Boolean]
     class ResultByTime < Struct.new(
+      nil,
       :time_period,
       :total,
       :groups,
@@ -6801,6 +6953,7 @@ module Aws::CostExplorer
     #               over-utilization of specific metrics (for example, CPU, Memory, Network). </p>
     #   @return [Array<String>]
     class RightsizingRecommendation < Struct.new(
+      nil,
       :account_id,
       :current_instance,
       :rightsizing_type,
@@ -6828,6 +6981,7 @@ module Aws::CostExplorer
     #               calculation. The default value is <code>TRUE</code>. </p>
     #   @return [Boolean]
     class RightsizingRecommendationConfiguration < Struct.new(
+      nil,
       :recommendation_target,
       :benefits_considered,
       keyword_init: true
@@ -6855,6 +7009,7 @@ module Aws::CostExplorer
     #   <p>Additional metadata that might be applicable to the recommendation.</p>
     #   @return [String]
     class RightsizingRecommendationMetadata < Struct.new(
+      nil,
       :recommendation_id,
       :generation_timestamp,
       :lookback_period_in_days,
@@ -6879,6 +7034,7 @@ module Aws::CostExplorer
     #               total On-Demand costs that are associated with these instances.</p>
     #   @return [String]
     class RightsizingRecommendationSummary < Struct.new(
+      nil,
       :total_recommendation_count,
       :estimated_total_monthly_savings_amount,
       :savings_currency_code,
@@ -6911,6 +7067,7 @@ module Aws::CostExplorer
     #   <p>The dollar impact for the root cause.</p>
     #   @return [Types::RootCauseImpact]
     class RootCause < Struct.new(
+      nil,
       :service,
       :region,
       :linked_account,
@@ -6928,6 +7085,7 @@ module Aws::CostExplorer
     #               TotalImpact.</p>
     #   @return [Float]
     class RootCauseImpact < Struct.new(
+      nil,
       :contribution,
       keyword_init: true
     )
@@ -6963,6 +7121,7 @@ module Aws::CostExplorer
     #               another.</p>
     #   @return [String]
     class SavingsPlans < Struct.new(
+      nil,
       :payment_option,
       :savings_plans_type,
       :region,
@@ -6990,6 +7149,7 @@ module Aws::CostExplorer
     #               Savings Plans purchase method. </p>
     #   @return [String]
     class SavingsPlansAmortizedCommitment < Struct.new(
+      nil,
       :amortized_recurring_commitment,
       :amortized_upfront_commitment,
       :total_amortized_commitment,
@@ -7010,6 +7170,7 @@ module Aws::CostExplorer
     #   <p>The time period of the request. </p>
     #   @return [Types::DateInterval]
     class SavingsPlansCoverage < Struct.new(
+      nil,
       :attributes,
       :coverage,
       :time_period,
@@ -7035,6 +7196,7 @@ module Aws::CostExplorer
     #               eligible Savings Plans usage in an account (or set of accounts).</p>
     #   @return [String]
     class SavingsPlansCoverageData < Struct.new(
+      nil,
       :spend_covered_by_savings_plans,
       :on_demand_cost,
       :total_cost,
@@ -7055,6 +7217,7 @@ module Aws::CostExplorer
     #   <p>The unique ID that's used to distinguish Savings Plans from one another.</p>
     #   @return [String]
     class SavingsPlansDetails < Struct.new(
+      nil,
       :region,
       :instance_family,
       :offering_id,
@@ -7083,6 +7246,7 @@ module Aws::CostExplorer
     #   <p>The time period associated with the analysis.</p>
     #   @return [Types::DateInterval]
     class SavingsPlansPurchaseAnalysisConfiguration < Struct.new(
+      nil,
       :account_scope,
       :account_id,
       :analysis_type,
@@ -7168,6 +7332,7 @@ module Aws::CostExplorer
     #               period.</p>
     #   @return [Array<Types::RecommendationDetailHourlyMetrics>]
     class SavingsPlansPurchaseAnalysisDetails < Struct.new(
+      nil,
       :currency_code,
       :lookback_period_in_hours,
       :current_average_coverage,
@@ -7224,6 +7389,7 @@ module Aws::CostExplorer
     #   <p>Summary metrics for your Savings Plans Recommendations. </p>
     #   @return [Types::SavingsPlansPurchaseRecommendationSummary]
     class SavingsPlansPurchaseRecommendation < Struct.new(
+      nil,
       :account_scope,
       :savings_plans_type,
       :term_in_years,
@@ -7302,6 +7468,7 @@ module Aws::CostExplorer
     #   <p>Contains detailed information about a specific Savings Plan recommendation.</p>
     #   @return [String]
     class SavingsPlansPurchaseRecommendationDetail < Struct.new(
+      nil,
       :savings_plans_details,
       :account_id,
       :upfront_cost,
@@ -7335,6 +7502,7 @@ module Aws::CostExplorer
     #   <p>Additional metadata that might be applicable to the recommendation.</p>
     #   @return [String]
     class SavingsPlansPurchaseRecommendationMetadata < Struct.new(
+      nil,
       :recommendation_id,
       :generation_timestamp,
       :additional_metadata,
@@ -7390,6 +7558,7 @@ module Aws::CostExplorer
     #               your usage of the selected time period and the Savings Plans you own. </p>
     #   @return [String]
     class SavingsPlansPurchaseRecommendationSummary < Struct.new(
+      nil,
       :estimated_roi,
       :currency_code,
       :estimated_total_cost,
@@ -7417,6 +7586,7 @@ module Aws::CostExplorer
     #               rate.</p>
     #   @return [String]
     class SavingsPlansSavings < Struct.new(
+      nil,
       :net_savings,
       :on_demand_cost_equivalent,
       keyword_init: true
@@ -7442,6 +7612,7 @@ module Aws::CostExplorer
     #               for your Savings Plans.</p>
     #   @return [String]
     class SavingsPlansUtilization < Struct.new(
+      nil,
       :total_commitment,
       :used_commitment,
       :unused_commitment,
@@ -7466,6 +7637,7 @@ module Aws::CostExplorer
     #               upfront and recurring Savings Plans fees.</p>
     #   @return [Types::SavingsPlansAmortizedCommitment]
     class SavingsPlansUtilizationAggregates < Struct.new(
+      nil,
       :utilization,
       :savings,
       :amortized_commitment,
@@ -7492,6 +7664,7 @@ module Aws::CostExplorer
     #               upfront and recurring Savings Plans fees.</p>
     #   @return [Types::SavingsPlansAmortizedCommitment]
     class SavingsPlansUtilizationByTime < Struct.new(
+      nil,
       :time_period,
       :utilization,
       :savings,
@@ -7524,6 +7697,7 @@ module Aws::CostExplorer
     #               and recurring Savings Plans fees.</p>
     #   @return [Types::SavingsPlansAmortizedCommitment]
     class SavingsPlansUtilizationDetail < Struct.new(
+      nil,
       :savings_plan_arn,
       :attributes,
       :utilization,
@@ -7539,6 +7713,7 @@ module Aws::CostExplorer
     # @!attribute message
     #   @return [String]
     class ServiceQuotaExceededException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -7551,6 +7726,7 @@ module Aws::CostExplorer
     #               recommendations for.</p>
     #   @return [Types::EC2Specification]
     class ServiceSpecification < Struct.new(
+      nil,
       :ec2_specification,
       keyword_init: true
     )
@@ -7565,6 +7741,7 @@ module Aws::CostExplorer
     #   <p>The order that's used to sort the data.</p>
     #   @return [String]
     class SortDefinition < Struct.new(
+      nil,
       :key,
       :sort_order,
       keyword_init: true
@@ -7576,6 +7753,7 @@ module Aws::CostExplorer
     #   <p>The configuration for the commitment purchase analysis.</p>
     #   @return [Types::CommitmentPurchaseAnalysisConfiguration]
     class StartCommitmentPurchaseAnalysisRequest < Struct.new(
+      nil,
       :commitment_purchase_analysis_configuration,
       keyword_init: true
     )
@@ -7592,6 +7770,7 @@ module Aws::CostExplorer
     #   <p>The estimated time for when the analysis will complete.</p>
     #   @return [String]
     class StartCommitmentPurchaseAnalysisResponse < Struct.new(
+      nil,
       :analysis_id,
       :analysis_started_time,
       :estimated_completion_time,
@@ -7605,6 +7784,7 @@ module Aws::CostExplorer
     #         The date you want the backfill to start from. The date can only be a first day of the month (a billing start date). Dates can't precede the previous twelve months, or in the future.</p>
     #   @return [String]
     class StartCostAllocationTagBackfillRequest < Struct.new(
+      nil,
       :backfill_from,
       keyword_init: true
     )
@@ -7617,6 +7797,7 @@ module Aws::CostExplorer
     #       </p>
     #   @return [Types::CostAllocationTagBackfillRequest]
     class StartCostAllocationTagBackfillResponse < Struct.new(
+      nil,
       :backfill_request,
       keyword_init: true
     )
@@ -7624,6 +7805,7 @@ module Aws::CostExplorer
     end
 
     class StartSavingsPlansPurchaseRecommendationGenerationRequest < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -7639,6 +7821,7 @@ module Aws::CostExplorer
     #   <p>The estimated time for when the recommendation generation will complete.</p>
     #   @return [String]
     class StartSavingsPlansPurchaseRecommendationGenerationResponse < Struct.new(
+      nil,
       :recommendation_id,
       :generation_started_time,
       :estimated_completion_time,
@@ -7659,6 +7842,7 @@ module Aws::CostExplorer
     #   <p>Indicates if the subscriber accepts the notifications. </p>
     #   @return [String]
     class Subscriber < Struct.new(
+      nil,
       :address,
       :type,
       :status,
@@ -7705,6 +7889,7 @@ module Aws::CostExplorer
     #            </ul>
     #   @return [Array<Types::ResourceTag>]
     class TagResourceRequest < Struct.new(
+      nil,
       :resource_arn,
       :resource_tags,
       keyword_init: true
@@ -7713,6 +7898,7 @@ module Aws::CostExplorer
     end
 
     class TagResourceResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -7739,6 +7925,7 @@ module Aws::CostExplorer
     #               <code>CASE_SENSITIVE</code>.</p>
     #   @return [Array<String>]
     class TagValues < Struct.new(
+      nil,
       :key,
       :values,
       :match_options,
@@ -7773,6 +7960,7 @@ module Aws::CostExplorer
     #               workloads from the current instance type to the recommended instance type. </p>
     #   @return [Array<String>]
     class TargetInstance < Struct.new(
+      nil,
       :estimated_monthly_cost,
       :estimated_monthly_savings,
       :currency_code,
@@ -7799,6 +7987,7 @@ module Aws::CostExplorer
     #               instance.</p>
     #   @return [String]
     class TerminateRecommendationDetail < Struct.new(
+      nil,
       :estimated_monthly_savings,
       :currency_code,
       keyword_init: true
@@ -7813,6 +8002,7 @@ module Aws::CostExplorer
     # @!attribute resource_name
     #   @return [String]
     class TooManyTagsException < Struct.new(
+      nil,
       :message,
       :resource_name,
       keyword_init: true
@@ -7831,6 +8021,7 @@ module Aws::CostExplorer
     #   <p>The upper bound dollar value that's used in the filter. </p>
     #   @return [Float]
     class TotalImpactFilter < Struct.new(
+      nil,
       :numeric_operator,
       :start_value,
       :end_value,
@@ -7849,6 +8040,7 @@ module Aws::CostExplorer
     # @!attribute message
     #   @return [String]
     class UnknownMonitorException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -7859,6 +8051,7 @@ module Aws::CostExplorer
     # @!attribute message
     #   @return [String]
     class UnknownSubscriptionException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -7871,6 +8064,7 @@ module Aws::CostExplorer
     # @!attribute message
     #   @return [String]
     class UnresolvableUsageUnitException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -7889,6 +8083,7 @@ module Aws::CostExplorer
     #       </p>
     #   @return [Array<String>]
     class UntagResourceRequest < Struct.new(
+      nil,
       :resource_arn,
       :resource_tag_keys,
       keyword_init: true
@@ -7897,6 +8092,7 @@ module Aws::CostExplorer
     end
 
     class UntagResourceResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -7909,6 +8105,7 @@ module Aws::CostExplorer
     #   <p>The new name for the cost anomaly monitor. </p>
     #   @return [String]
     class UpdateAnomalyMonitorRequest < Struct.new(
+      nil,
       :monitor_arn,
       :monitor_name,
       keyword_init: true
@@ -7920,6 +8117,7 @@ module Aws::CostExplorer
     #   <p>A cost anomaly monitor ARN. </p>
     #   @return [String]
     class UpdateAnomalyMonitorResponse < Struct.new(
+      nil,
       :monitor_arn,
       keyword_init: true
     )
@@ -7991,6 +8189,7 @@ module Aws::CostExplorer
     #            </ul>
     #   @return [Types::Expression]
     class UpdateAnomalySubscriptionRequest < Struct.new(
+      nil,
       :subscription_arn,
       :threshold,
       :frequency,
@@ -8007,6 +8206,7 @@ module Aws::CostExplorer
     #   <p>A cost anomaly subscription ARN. </p>
     #   @return [String]
     class UpdateAnomalySubscriptionResponse < Struct.new(
+      nil,
       :subscription_arn,
       keyword_init: true
     )
@@ -8025,6 +8225,7 @@ module Aws::CostExplorer
     #   <p>A message explaining why the action failed on this entry. </p>
     #   @return [String]
     class UpdateCostAllocationTagsStatusError < Struct.new(
+      nil,
       :tag_key,
       :code,
       :message,
@@ -8038,6 +8239,7 @@ module Aws::CostExplorer
     #         allocation tags status for this request. </p>
     #   @return [Array<Types::CostAllocationTagStatusEntry>]
     class UpdateCostAllocationTagsStatusRequest < Struct.new(
+      nil,
       :cost_allocation_tags_status,
       keyword_init: true
     )
@@ -8050,6 +8252,7 @@ module Aws::CostExplorer
     #         returns. </p>
     #   @return [Array<Types::UpdateCostAllocationTagsStatusError>]
     class UpdateCostAllocationTagsStatusResponse < Struct.new(
+      nil,
       :errors,
       keyword_init: true
     )
@@ -8079,6 +8282,7 @@ module Aws::CostExplorer
     #       </p>
     #   @return [Array<Types::CostCategorySplitChargeRule>]
     class UpdateCostCategoryDefinitionRequest < Struct.new(
+      nil,
       :cost_category_arn,
       :effective_start,
       :rule_version,
@@ -8097,6 +8301,7 @@ module Aws::CostExplorer
     #   <p>The Cost Category's effective start date. It can only be a billing start date (first day of the month).</p>
     #   @return [String]
     class UpdateCostCategoryDefinitionResponse < Struct.new(
+      nil,
       :cost_category_arn,
       :effective_start,
       keyword_init: true
@@ -8115,6 +8320,7 @@ module Aws::CostExplorer
     #   <p>The total number of reservation hours that were used.</p>
     #   @return [Types::ReservationAggregates]
     class UtilizationByTime < Struct.new(
+      nil,
       :time_period,
       :groups,
       :total,

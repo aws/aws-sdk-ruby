@@ -10,6 +10,7 @@ module Aws::Synthetics
     # @!attribute message
     #   @return [String]
     class AccessDeniedException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -27,6 +28,7 @@ module Aws::Synthetics
     #            </p>
     #   @return [Types::S3EncryptionConfig]
     class ArtifactConfigInput < Struct.new(
+      nil,
       :s3_encryption,
       keyword_init: true
     )
@@ -39,6 +41,7 @@ module Aws::Synthetics
     #   <p>A structure that contains the configuration of encryption settings for canary artifacts that are stored in Amazon S3. </p>
     #   @return [Types::S3EncryptionConfig]
     class ArtifactConfigOutput < Struct.new(
+      nil,
       :s3_encryption,
       keyword_init: true
     )
@@ -53,6 +56,7 @@ module Aws::Synthetics
     #   <p>The ARN of the canary that you want to associate with the specified group.</p>
     #   @return [String]
     class AssociateResourceRequest < Struct.new(
+      nil,
       :group_identifier,
       :resource_arn,
       keyword_init: true
@@ -61,6 +65,7 @@ module Aws::Synthetics
     end
 
     class AssociateResourceResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -70,6 +75,7 @@ module Aws::Synthetics
     # @!attribute message
     #   @return [String]
     class BadRequestException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -90,6 +96,7 @@ module Aws::Synthetics
     #            </p>
     #   @return [Array<String>]
     class BaseScreenshot < Struct.new(
+      nil,
       :screenshot_name,
       :ignore_coordinates,
       keyword_init: true
@@ -102,6 +109,7 @@ module Aws::Synthetics
     #   <p>The browser type associated with this browser configuration.</p>
     #   @return [String]
     class BrowserConfig < Struct.new(
+      nil,
       :browser_type,
       keyword_init: true
     )
@@ -210,6 +218,7 @@ module Aws::Synthetics
     #   <p>Returns the dry run configurations for a canary.</p>
     #   @return [Types::DryRunConfigOutput]
     class Canary < Struct.new(
+      nil,
       :id,
       :name,
       :code,
@@ -303,6 +312,7 @@ module Aws::Synthetics
     #   <p>A list of dependencies that should be used for running this canary. Specify the dependencies as a key-value pair, where the key is the type of dependency and the value is the dependency reference.</p>
     #   @return [Array<Types::Dependency>]
     class CanaryCodeInput < Struct.new(
+      nil,
       :s3_bucket,
       :s3_key,
       :s3_version,
@@ -340,6 +350,7 @@ module Aws::Synthetics
     #   <p>A list of dependencies that are used for running this canary. The dependencies are specified as a key-value pair, where the key is the type of dependency and the value is the dependency reference.</p>
     #   @return [Array<Types::Dependency>]
     class CanaryCodeOutput < Struct.new(
+      nil,
       :source_location_arn,
       :handler,
       :blueprint_types,
@@ -354,6 +365,7 @@ module Aws::Synthetics
     #   <p>The DryRunId associated with an existing canary’s dry run. You can use this DryRunId to retrieve information about the dry run.</p>
     #   @return [String]
     class CanaryDryRunConfigOutput < Struct.new(
+      nil,
       :dry_run_id,
       keyword_init: true
     )
@@ -368,6 +380,7 @@ module Aws::Synthetics
     #   <p>The results from this canary's most recent run.</p>
     #   @return [Types::CanaryRun]
     class CanaryLastRun < Struct.new(
+      nil,
       :canary_name,
       :last_run,
       keyword_init: true
@@ -405,6 +418,7 @@ module Aws::Synthetics
     #   <p>The browser type associated with this canary run.</p>
     #   @return [String]
     class CanaryRun < Struct.new(
+      nil,
       :id,
       :scheduled_run_id,
       :retry_attempt,
@@ -458,6 +472,7 @@ module Aws::Synthetics
     #   <p>Specifies the amount of ephemeral storage (in MB) to allocate for the canary run during execution. This temporary storage is used for storing canary run artifacts (which are uploaded to an Amazon S3 bucket at the end of the run), and any canary browser operations. This temporary storage is cleared after the run is completed. Default storage value is 1024 MB.</p>
     #   @return [Integer]
     class CanaryRunConfigInput < Struct.new(
+      nil,
       :timeout_in_seconds,
       :memory_in_mb,
       :active_tracing,
@@ -483,6 +498,7 @@ module Aws::Synthetics
     #   <p>Specifies the amount of ephemeral storage (in MB) to allocate for the canary run during execution. This temporary storage is used for storing canary run artifacts (which are uploaded to an Amazon S3 bucket at the end of the run), and any canary browser operations. This temporary storage is cleared after the run is completed. Default storage value is 1024 MB.</p>
     #   @return [Integer]
     class CanaryRunConfigOutput < Struct.new(
+      nil,
       :timeout_in_seconds,
       :memory_in_mb,
       :active_tracing,
@@ -510,6 +526,7 @@ module Aws::Synthetics
     #            For the overall status of canary run, see <a href="https://docs.aws.amazon.com/AmazonSynthetics/latest/APIReference/API_CanaryRunStatus.html">State</a>.</p>
     #   @return [String]
     class CanaryRunStatus < Struct.new(
+      nil,
       :state,
       :state_reason,
       :state_reason_code,
@@ -530,6 +547,7 @@ module Aws::Synthetics
     #   <p>The time at which the metrics will be generated for this run or retries.</p>
     #   @return [Time]
     class CanaryRunTimeline < Struct.new(
+      nil,
       :started,
       :completed,
       :metric_timestamp_for_run_and_retries,
@@ -565,6 +583,7 @@ module Aws::Synthetics
     #   <p>A structure that contains the retry configuration for a canary</p>
     #   @return [Types::RetryConfigInput]
     class CanaryScheduleInput < Struct.new(
+      nil,
       :expression,
       :duration_in_seconds,
       :retry_config,
@@ -600,6 +619,7 @@ module Aws::Synthetics
     #   <p>A structure that contains the retry configuration for a canary</p>
     #   @return [Types::RetryConfigOutput]
     class CanaryScheduleOutput < Struct.new(
+      nil,
       :expression,
       :duration_in_seconds,
       :retry_config,
@@ -619,6 +639,7 @@ module Aws::Synthetics
     #   <p>If the canary creation or update failed, this field displays the reason code.</p>
     #   @return [String]
     class CanaryStatus < Struct.new(
+      nil,
       :state,
       :state_reason,
       :state_reason_code,
@@ -641,6 +662,7 @@ module Aws::Synthetics
     #   <p>The date and time that the canary's most recent run ended.</p>
     #   @return [Time]
     class CanaryTimeline < Struct.new(
+      nil,
       :created,
       :last_modified,
       :last_started,
@@ -654,6 +676,7 @@ module Aws::Synthetics
     # @!attribute message
     #   @return [String]
     class ConflictException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -796,6 +819,7 @@ module Aws::Synthetics
     #            the encryption-at-rest settings for artifacts that the canary uploads to Amazon S3.</p>
     #   @return [Types::ArtifactConfigInput]
     class CreateCanaryRequest < Struct.new(
+      nil,
       :name,
       :code,
       :artifact_s3_location,
@@ -820,6 +844,7 @@ module Aws::Synthetics
     #   <p>The full details about the canary you have created.</p>
     #   @return [Types::Canary]
     class CreateCanaryResponse < Struct.new(
+      nil,
       :canary,
       keyword_init: true
     )
@@ -839,6 +864,7 @@ module Aws::Synthetics
     #            certain tag values.</p>
     #   @return [Hash<String, String>]
     class CreateGroupRequest < Struct.new(
+      nil,
       :name,
       :tags,
       keyword_init: true
@@ -850,6 +876,7 @@ module Aws::Synthetics
     #   <p>A structure that contains information about the group that was just created.</p>
     #   @return [Types::Group]
     class CreateGroupResponse < Struct.new(
+      nil,
       :group,
       keyword_init: true
     )
@@ -868,6 +895,7 @@ module Aws::Synthetics
     #            <p>Type: Boolean</p>
     #   @return [Boolean]
     class DeleteCanaryRequest < Struct.new(
+      nil,
       :name,
       :delete_lambda,
       keyword_init: true
@@ -876,6 +904,7 @@ module Aws::Synthetics
     end
 
     class DeleteCanaryResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -886,6 +915,7 @@ module Aws::Synthetics
     #         group ID as the <code>GroupIdentifier</code>.</p>
     #   @return [String]
     class DeleteGroupRequest < Struct.new(
+      nil,
       :group_identifier,
       keyword_init: true
     )
@@ -893,6 +923,7 @@ module Aws::Synthetics
     end
 
     class DeleteGroupResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -907,6 +938,7 @@ module Aws::Synthetics
     #            about Lambda ARN format, see <a href="https://docs.aws.amazon.com/lambda/latest/api/API_Layer.html">Lambda</a>.</p>
     #   @return [String]
     class Dependency < Struct.new(
+      nil,
       :type,
       :reference,
       keyword_init: true
@@ -938,6 +970,7 @@ module Aws::Synthetics
     #   <p>The type of browser to use for the canary run.</p>
     #   @return [String]
     class DescribeCanariesLastRunRequest < Struct.new(
+      nil,
       :next_token,
       :max_results,
       :names,
@@ -957,6 +990,7 @@ module Aws::Synthetics
     #            set of results.</p>
     #   @return [String]
     class DescribeCanariesLastRunResponse < Struct.new(
+      nil,
       :canaries_last_run,
       :next_token,
       keyword_init: true
@@ -985,6 +1019,7 @@ module Aws::Synthetics
     #               Limiting a user to viewing specific canaries</a>.</p>
     #   @return [Array<String>]
     class DescribeCanariesRequest < Struct.new(
+      nil,
       :next_token,
       :max_results,
       :names,
@@ -1003,6 +1038,7 @@ module Aws::Synthetics
     #            set of results.</p>
     #   @return [String]
     class DescribeCanariesResponse < Struct.new(
+      nil,
       :canaries,
       :next_token,
       keyword_init: true
@@ -1020,6 +1056,7 @@ module Aws::Synthetics
     #            the <code>DescribeRuntimeVersions</code> operation. If you omit this parameter, the default of 100 is used.</p>
     #   @return [Integer]
     class DescribeRuntimeVersionsRequest < Struct.new(
+      nil,
       :next_token,
       :max_results,
       keyword_init: true
@@ -1037,6 +1074,7 @@ module Aws::Synthetics
     #            set of results.</p>
     #   @return [String]
     class DescribeRuntimeVersionsResponse < Struct.new(
+      nil,
       :runtime_versions,
       :next_token,
       keyword_init: true
@@ -1052,6 +1090,7 @@ module Aws::Synthetics
     #   <p>The ARN of the canary that you want to remove from the specified group.</p>
     #   @return [String]
     class DisassociateResourceRequest < Struct.new(
+      nil,
       :group_identifier,
       :resource_arn,
       keyword_init: true
@@ -1060,6 +1099,7 @@ module Aws::Synthetics
     end
 
     class DisassociateResourceResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1073,6 +1113,7 @@ module Aws::Synthetics
     #   <p>Returns the last execution status for a canary's dry run.</p>
     #   @return [String]
     class DryRunConfigOutput < Struct.new(
+      nil,
       :dry_run_id,
       :last_dry_run_execution_status,
       keyword_init: true
@@ -1089,6 +1130,7 @@ module Aws::Synthetics
     #   <p>The browser type associated with this engine configuration.</p>
     #   @return [String]
     class EngineConfig < Struct.new(
+      nil,
       :engine_arn,
       :browser_type,
       keyword_init: true
@@ -1103,6 +1145,7 @@ module Aws::Synthetics
     #   <p>The DryRunId associated with an existing canary’s dry run. You can use this DryRunId to retrieve information about the dry run.</p>
     #   @return [String]
     class GetCanaryRequest < Struct.new(
+      nil,
       :name,
       :dry_run_id,
       keyword_init: true
@@ -1114,6 +1157,7 @@ module Aws::Synthetics
     #   <p>A structure that contains the full information about the canary.</p>
     #   @return [Types::Canary]
     class GetCanaryResponse < Struct.new(
+      nil,
       :canary,
       keyword_init: true
     )
@@ -1159,6 +1203,7 @@ module Aws::Synthetics
     #            </ul>
     #   @return [String]
     class GetCanaryRunsRequest < Struct.new(
+      nil,
       :name,
       :next_token,
       :max_results,
@@ -1180,6 +1225,7 @@ module Aws::Synthetics
     #            set of results.</p>
     #   @return [String]
     class GetCanaryRunsResponse < Struct.new(
+      nil,
       :canary_runs,
       :next_token,
       keyword_init: true
@@ -1192,6 +1238,7 @@ module Aws::Synthetics
     #            group ID as the <code>GroupIdentifier</code>.</p>
     #   @return [String]
     class GetGroupRequest < Struct.new(
+      nil,
       :group_identifier,
       keyword_init: true
     )
@@ -1202,6 +1249,7 @@ module Aws::Synthetics
     #   <p>A structure that contains information about the group.</p>
     #   @return [Types::Group]
     class GetGroupResponse < Struct.new(
+      nil,
       :group,
       keyword_init: true
     )
@@ -1228,6 +1276,7 @@ module Aws::Synthetics
     #   <p>The date and time that the group was most recently updated.</p>
     #   @return [Time]
     class Group < Struct.new(
+      nil,
       :id,
       :name,
       :arn,
@@ -1250,6 +1299,7 @@ module Aws::Synthetics
     #   <p>The ARN of the group.</p>
     #   @return [String]
     class GroupSummary < Struct.new(
+      nil,
       :id,
       :name,
       :arn,
@@ -1262,6 +1312,7 @@ module Aws::Synthetics
     # @!attribute message
     #   @return [String]
     class InternalFailureException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -1272,6 +1323,7 @@ module Aws::Synthetics
     # @!attribute message
     #   @return [String]
     class InternalServerException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -1291,6 +1343,7 @@ module Aws::Synthetics
     #   <p>The ARN of the canary that you want to view groups for.</p>
     #   @return [String]
     class ListAssociatedGroupsRequest < Struct.new(
+      nil,
       :next_token,
       :max_results,
       :resource_arn,
@@ -1308,6 +1361,7 @@ module Aws::Synthetics
     #            set of results.</p>
     #   @return [String]
     class ListAssociatedGroupsResponse < Struct.new(
+      nil,
       :groups,
       :next_token,
       keyword_init: true
@@ -1329,6 +1383,7 @@ module Aws::Synthetics
     #            group ID as the <code>GroupIdentifier</code>.</p>
     #   @return [String]
     class ListGroupResourcesRequest < Struct.new(
+      nil,
       :next_token,
       :max_results,
       :group_identifier,
@@ -1346,6 +1401,7 @@ module Aws::Synthetics
     #            set of results.</p>
     #   @return [String]
     class ListGroupResourcesResponse < Struct.new(
+      nil,
       :resources,
       :next_token,
       keyword_init: true
@@ -1363,6 +1419,7 @@ module Aws::Synthetics
     #            the <code>ListGroups</code> operation. If you omit this parameter, the default of 20 is used.</p>
     #   @return [Integer]
     class ListGroupsRequest < Struct.new(
+      nil,
       :next_token,
       :max_results,
       keyword_init: true
@@ -1379,6 +1436,7 @@ module Aws::Synthetics
     #            set of results.</p>
     #   @return [String]
     class ListGroupsResponse < Struct.new(
+      nil,
       :groups,
       :next_token,
       keyword_init: true
@@ -1397,6 +1455,7 @@ module Aws::Synthetics
     #            </p>
     #   @return [String]
     class ListTagsForResourceRequest < Struct.new(
+      nil,
       :resource_arn,
       keyword_init: true
     )
@@ -1407,6 +1466,7 @@ module Aws::Synthetics
     #   <p>The list of tag keys and values associated with the resource that you specified.</p>
     #   @return [Hash<String, String>]
     class ListTagsForResourceResponse < Struct.new(
+      nil,
       :tags,
       keyword_init: true
     )
@@ -1417,6 +1477,7 @@ module Aws::Synthetics
     # @!attribute message
     #   @return [String]
     class NotFoundException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -1427,6 +1488,7 @@ module Aws::Synthetics
     # @!attribute message
     #   @return [String]
     class RequestEntityTooLargeException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -1437,6 +1499,7 @@ module Aws::Synthetics
     # @!attribute message
     #   @return [String]
     class ResourceNotFoundException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -1455,6 +1518,7 @@ module Aws::Synthetics
     #   <p>The maximum number of retries. The value must be less than or equal to 2.</p>
     #   @return [Integer]
     class RetryConfigInput < Struct.new(
+      nil,
       :max_retries,
       keyword_init: true
     )
@@ -1466,6 +1530,7 @@ module Aws::Synthetics
     #   <p>The maximum number of retries. The value must be less than or equal to 2.</p>
     #   @return [Integer]
     class RetryConfigOutput < Struct.new(
+      nil,
       :max_retries,
       keyword_init: true
     )
@@ -1490,6 +1555,7 @@ module Aws::Synthetics
     #   <p>If this runtime version is deprecated, this value is the date of deprecation.</p>
     #   @return [Time]
     class RuntimeVersion < Struct.new(
+      nil,
       :version_name,
       :description,
       :release_date,
@@ -1518,6 +1584,7 @@ module Aws::Synthetics
     #            </p>
     #   @return [String]
     class S3EncryptionConfig < Struct.new(
+      nil,
       :encryption_mode,
       :kms_key_arn,
       keyword_init: true
@@ -1529,6 +1596,7 @@ module Aws::Synthetics
     # @!attribute message
     #   @return [String]
     class ServiceQuotaExceededException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -1639,6 +1707,7 @@ module Aws::Synthetics
     #            for consistency and future compatibility.</p>
     #   @return [Array<Types::VisualReferenceInput>]
     class StartCanaryDryRunRequest < Struct.new(
+      nil,
       :name,
       :code,
       :runtime_version,
@@ -1662,6 +1731,7 @@ module Aws::Synthetics
     #   <p>Returns the dry run configurations for a canary.</p>
     #   @return [Types::DryRunConfigOutput]
     class StartCanaryDryRunResponse < Struct.new(
+      nil,
       :dry_run_config,
       keyword_init: true
     )
@@ -1673,6 +1743,7 @@ module Aws::Synthetics
     #            canary names, use <a href="https://docs.aws.amazon.com/AmazonSynthetics/latest/APIReference/API_DescribeCanaries.html">DescribeCanaries</a>.</p>
     #   @return [String]
     class StartCanaryRequest < Struct.new(
+      nil,
       :name,
       keyword_init: true
     )
@@ -1680,6 +1751,7 @@ module Aws::Synthetics
     end
 
     class StartCanaryResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1690,6 +1762,7 @@ module Aws::Synthetics
     #            canaries, use <a href="https://docs.aws.amazon.com/AmazonSynthetics/latest/APIReference/API_DescribeCanaries.html">ListCanaries</a>.</p>
     #   @return [String]
     class StopCanaryRequest < Struct.new(
+      nil,
       :name,
       keyword_init: true
     )
@@ -1697,6 +1770,7 @@ module Aws::Synthetics
     end
 
     class StopCanaryResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1716,6 +1790,7 @@ module Aws::Synthetics
     #   <p>The list of key-value pairs to associate with the resource.</p>
     #   @return [Hash<String, String>]
     class TagResourceRequest < Struct.new(
+      nil,
       :resource_arn,
       :tags,
       keyword_init: true
@@ -1724,6 +1799,7 @@ module Aws::Synthetics
     end
 
     class TagResourceResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1733,6 +1809,7 @@ module Aws::Synthetics
     # @!attribute message
     #   @return [String]
     class TooManyRequestsException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -1753,6 +1830,7 @@ module Aws::Synthetics
     #   <p>The list of tag keys to remove from the resource.</p>
     #   @return [Array<String>]
     class UntagResourceRequest < Struct.new(
+      nil,
       :resource_arn,
       :tag_keys,
       keyword_init: true
@@ -1761,6 +1839,7 @@ module Aws::Synthetics
     end
 
     class UntagResourceResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1906,6 +1985,7 @@ module Aws::Synthetics
     #            </note>
     #   @return [Array<Types::BrowserConfig>]
     class UpdateCanaryRequest < Struct.new(
+      nil,
       :name,
       :code,
       :execution_role_arn,
@@ -1928,6 +2008,7 @@ module Aws::Synthetics
     end
 
     class UpdateCanaryResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1937,6 +2018,7 @@ module Aws::Synthetics
     # @!attribute message
     #   @return [String]
     class ValidationException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -1965,6 +2047,7 @@ module Aws::Synthetics
     #   <p>The browser type associated with this visual reference.</p>
     #   @return [String]
     class VisualReferenceInput < Struct.new(
+      nil,
       :base_screenshots,
       :base_canary_run_id,
       :browser_type,
@@ -1987,6 +2070,7 @@ module Aws::Synthetics
     #   <p>The browser type associated with this visual reference.</p>
     #   @return [String]
     class VisualReferenceOutput < Struct.new(
+      nil,
       :base_screenshots,
       :base_canary_run_id,
       :browser_type,
@@ -2010,6 +2094,7 @@ module Aws::Synthetics
     #            </p>
     #   @return [Boolean]
     class VpcConfigInput < Struct.new(
+      nil,
       :subnet_ids,
       :security_group_ids,
       :ipv6_allowed_for_dual_stack,
@@ -2035,6 +2120,7 @@ module Aws::Synthetics
     #   <p>Indicates whether this canary allows outbound IPv6 traffic if it is connected to dual-stack subnets.</p>
     #   @return [Boolean]
     class VpcConfigOutput < Struct.new(
+      nil,
       :vpc_id,
       :subnet_ids,
       :security_group_ids,

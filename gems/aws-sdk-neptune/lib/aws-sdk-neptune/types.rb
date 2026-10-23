@@ -18,6 +18,7 @@ module Aws::Neptune
     #         For the list of supported feature names, see <a>DBEngineVersion</a>.</p>
     #   @return [String]
     class AddRoleToDBClusterMessage < Struct.new(
+      nil,
       :db_cluster_identifier,
       :role_arn,
       :feature_name,
@@ -53,6 +54,7 @@ module Aws::Neptune
     #            </ul>
     #   @return [String]
     class AddSourceIdentifierToSubscriptionMessage < Struct.new(
+      nil,
       :subscription_name,
       :source_identifier,
       keyword_init: true
@@ -64,6 +66,7 @@ module Aws::Neptune
     #   <p>Contains the results of a successful invocation of the <a>DescribeEventSubscriptions</a> action.</p>
     #   @return [Types::EventSubscription]
     class AddSourceIdentifierToSubscriptionResult < Struct.new(
+      nil,
       :event_subscription,
       keyword_init: true
     )
@@ -79,6 +82,7 @@ module Aws::Neptune
     #   <p>The tags to be assigned to the Amazon Neptune resource.</p>
     #   @return [Array<Types::Tag>]
     class AddTagsToResourceMessage < Struct.new(
+      nil,
       :resource_name,
       :tags,
       keyword_init: true
@@ -118,6 +122,7 @@ module Aws::Neptune
     #            </ul>
     #   @return [String]
     class ApplyPendingMaintenanceActionMessage < Struct.new(
+      nil,
       :resource_identifier,
       :apply_action,
       :opt_in_type,
@@ -130,6 +135,7 @@ module Aws::Neptune
     #   <p>Describes the pending maintenance actions for a resource.</p>
     #   @return [Types::ResourcePendingMaintenanceActions]
     class ApplyPendingMaintenanceActionResult < Struct.new(
+      nil,
       :resource_pending_maintenance_actions,
       keyword_init: true
     )
@@ -142,6 +148,7 @@ module Aws::Neptune
     #   <p>A message describing the details of the problem.</p>
     #   @return [String]
     class AuthorizationNotFoundFault < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -153,6 +160,7 @@ module Aws::Neptune
     #   <p>The name of the availability zone.</p>
     #   @return [String]
     class AvailabilityZone < Struct.new(
+      nil,
       :name,
       keyword_init: true
     )
@@ -165,6 +173,7 @@ module Aws::Neptune
     #   <p>A message describing the details of the problem.</p>
     #   @return [String]
     class CertificateNotFoundFault < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -179,6 +188,7 @@ module Aws::Neptune
     #   <p>The description of the character set.</p>
     #   @return [String]
     class CharacterSet < Struct.new(
+      nil,
       :character_set_name,
       :character_set_description,
       keyword_init: true
@@ -200,6 +210,7 @@ module Aws::Neptune
     #   <p>The list of log types to disable.</p>
     #   @return [Array<String>]
     class CloudwatchLogsExportConfiguration < Struct.new(
+      nil,
       :enable_log_types,
       :disable_log_types,
       keyword_init: true
@@ -257,6 +268,7 @@ module Aws::Neptune
     #   <p>The Provisioned IOPS (I/O operations per second) value. This setting is only for Multi-AZ DB clusters.</p>
     #   @return [Integer]
     class ClusterPendingModifiedValues < Struct.new(
+      nil,
       :pending_cloudwatch_logs_exports,
       :db_cluster_identifier,
       :iam_database_authentication_enabled,
@@ -318,6 +330,7 @@ module Aws::Neptune
     #   <p>The tags to be assigned to the copied DB cluster parameter group.</p>
     #   @return [Array<Types::Tag>]
     class CopyDBClusterParameterGroupMessage < Struct.new(
+      nil,
       :source_db_cluster_parameter_group_identifier,
       :target_db_cluster_parameter_group_identifier,
       :target_db_cluster_parameter_group_description,
@@ -332,6 +345,7 @@ module Aws::Neptune
     #            <p>This data type is used as a response element in the <a>DescribeDBClusterParameterGroups</a> action.</p>
     #   @return [Types::DBClusterParameterGroup]
     class CopyDBClusterParameterGroupResult < Struct.new(
+      nil,
       :db_cluster_parameter_group,
       keyword_init: true
     )
@@ -401,6 +415,7 @@ module Aws::Neptune
     #   <p>The source region of the snapshot. This is only needed when the shapshot is encrypted and in a different region.</p>
     #   @return [String]
     class CopyDBClusterSnapshotMessage < Struct.new(
+      nil,
       :source_db_cluster_snapshot_identifier,
       :target_db_cluster_snapshot_identifier,
       :kms_key_id,
@@ -418,6 +433,7 @@ module Aws::Neptune
     #            <p>This data type is used as a response element in the <a>DescribeDBClusterSnapshots</a> action.</p>
     #   @return [Types::DBClusterSnapshot]
     class CopyDBClusterSnapshotResult < Struct.new(
+      nil,
       :db_cluster_snapshot,
       keyword_init: true
     )
@@ -466,6 +482,7 @@ module Aws::Neptune
     #   <p>The tags to be assigned to the copied DB parameter group.</p>
     #   @return [Array<Types::Tag>]
     class CopyDBParameterGroupMessage < Struct.new(
+      nil,
       :source_db_parameter_group_identifier,
       :target_db_parameter_group_identifier,
       :target_db_parameter_group_description,
@@ -480,6 +497,7 @@ module Aws::Neptune
     #            <p>This data type is used as a response element in the <a>DescribeDBParameterGroups</a> action.</p>
     #   @return [Types::DBParameterGroup]
     class CopyDBParameterGroupResult < Struct.new(
+      nil,
       :db_parameter_group,
       keyword_init: true
     )
@@ -508,6 +526,7 @@ module Aws::Neptune
     #   <p>The tags to be assigned to the Amazon Neptune resource.</p>
     #   @return [Array<Types::Tag>]
     class CreateDBClusterEndpointMessage < Struct.new(
+      nil,
       :db_cluster_identifier,
       :db_cluster_endpoint_identifier,
       :endpoint_type,
@@ -581,6 +600,7 @@ module Aws::Neptune
     #   <p>The Amazon Resource Name (ARN) for the endpoint.</p>
     #   @return [String]
     class CreateDBClusterEndpointOutput < Struct.new(
+      nil,
       :db_cluster_endpoint_identifier,
       :db_cluster_identifier,
       :db_cluster_endpoint_resource_identifier,
@@ -816,6 +836,7 @@ module Aws::Neptune
     #   <p>The source region of the snapshot. This is only needed when the shapshot is encrypted and in a different region.</p>
     #   @return [String]
     class CreateDBClusterMessage < Struct.new(
+      nil,
       :availability_zones,
       :backup_retention_period,
       :character_set_name,
@@ -875,6 +896,7 @@ module Aws::Neptune
     #   <p>The tags to be assigned to the new DB cluster parameter group.</p>
     #   @return [Array<Types::Tag>]
     class CreateDBClusterParameterGroupMessage < Struct.new(
+      nil,
       :db_cluster_parameter_group_name,
       :db_parameter_group_family,
       :description,
@@ -889,6 +911,7 @@ module Aws::Neptune
     #            <p>This data type is used as a response element in the <a>DescribeDBClusterParameterGroups</a> action.</p>
     #   @return [Types::DBClusterParameterGroup]
     class CreateDBClusterParameterGroupResult < Struct.new(
+      nil,
       :db_cluster_parameter_group,
       keyword_init: true
     )
@@ -900,6 +923,7 @@ module Aws::Neptune
     #            <p>This data type is used as a response element in the <a>DescribeDBClusters</a>.</p>
     #   @return [Types::DBCluster]
     class CreateDBClusterResult < Struct.new(
+      nil,
       :db_cluster,
       keyword_init: true
     )
@@ -940,6 +964,7 @@ module Aws::Neptune
     #   <p>The tags to be assigned to the DB cluster snapshot.</p>
     #   @return [Array<Types::Tag>]
     class CreateDBClusterSnapshotMessage < Struct.new(
+      nil,
       :db_cluster_snapshot_identifier,
       :db_cluster_identifier,
       :tags,
@@ -953,6 +978,7 @@ module Aws::Neptune
     #            <p>This data type is used as a response element in the <a>DescribeDBClusterSnapshots</a> action.</p>
     #   @return [Types::DBClusterSnapshot]
     class CreateDBClusterSnapshotResult < Struct.new(
+      nil,
       :db_cluster_snapshot,
       keyword_init: true
     )
@@ -1216,6 +1242,7 @@ module Aws::Neptune
     #         protection is enabled in their parent DB cluster.</p>
     #   @return [Boolean]
     class CreateDBInstanceMessage < Struct.new(
+      nil,
       :db_name,
       :db_instance_identifier,
       :allocated_storage,
@@ -1269,6 +1296,7 @@ module Aws::Neptune
     #            <p>This data type is used as a response element in the <a>DescribeDBInstances</a> action.</p>
     #   @return [Types::DBInstance]
     class CreateDBInstanceResult < Struct.new(
+      nil,
       :db_instance,
       keyword_init: true
     )
@@ -1305,6 +1333,7 @@ module Aws::Neptune
     #   <p>The tags to be assigned to the new DB parameter group.</p>
     #   @return [Array<Types::Tag>]
     class CreateDBParameterGroupMessage < Struct.new(
+      nil,
       :db_parameter_group_name,
       :db_parameter_group_family,
       :description,
@@ -1319,6 +1348,7 @@ module Aws::Neptune
     #            <p>This data type is used as a response element in the <a>DescribeDBParameterGroups</a> action.</p>
     #   @return [Types::DBParameterGroup]
     class CreateDBParameterGroupResult < Struct.new(
+      nil,
       :db_parameter_group,
       keyword_init: true
     )
@@ -1342,6 +1372,7 @@ module Aws::Neptune
     #   <p>The tags to be assigned to the new DB subnet group.</p>
     #   @return [Array<Types::Tag>]
     class CreateDBSubnetGroupMessage < Struct.new(
+      nil,
       :db_subnet_group_name,
       :db_subnet_group_description,
       :subnet_ids,
@@ -1356,6 +1387,7 @@ module Aws::Neptune
     #            <p>This data type is used as a response element in the <a>DescribeDBSubnetGroups</a> action.</p>
     #   @return [Types::DBSubnetGroup]
     class CreateDBSubnetGroupResult < Struct.new(
+      nil,
       :db_subnet_group,
       keyword_init: true
     )
@@ -1421,6 +1453,7 @@ module Aws::Neptune
     #   <p>The tags to be applied to the new event subscription.</p>
     #   @return [Array<Types::Tag>]
     class CreateEventSubscriptionMessage < Struct.new(
+      nil,
       :subscription_name,
       :sns_topic_arn,
       :source_type,
@@ -1437,6 +1470,7 @@ module Aws::Neptune
     #   <p>Contains the results of a successful invocation of the <a>DescribeEventSubscriptions</a> action.</p>
     #   @return [Types::EventSubscription]
     class CreateEventSubscriptionResult < Struct.new(
+      nil,
       :event_subscription,
       keyword_init: true
     )
@@ -1470,6 +1504,7 @@ module Aws::Neptune
     #         cluster.</p>
     #   @return [Boolean]
     class CreateGlobalClusterMessage < Struct.new(
+      nil,
       :global_cluster_identifier,
       :source_db_cluster_identifier,
       :engine,
@@ -1492,6 +1527,7 @@ module Aws::Neptune
     #         <a>RemoveFromGlobalCluster</a> actions.</p>
     #   @return [Types::GlobalCluster]
     class CreateGlobalClusterResult < Struct.new(
+      nil,
       :global_cluster,
       keyword_init: true
     )
@@ -1693,6 +1729,7 @@ module Aws::Neptune
     #            </ul>
     #   @return [String]
     class DBCluster < Struct.new(
+      nil,
       :allocated_storage,
       :availability_zones,
       :backup_retention_period,
@@ -1748,6 +1785,7 @@ module Aws::Neptune
     #   <p>A message describing the details of the problem.</p>
     #   @return [String]
     class DBClusterAlreadyExistsFault < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -1816,6 +1854,7 @@ module Aws::Neptune
     #   <p>The Amazon Resource Name (ARN) for the endpoint.</p>
     #   @return [String]
     class DBClusterEndpoint < Struct.new(
+      nil,
       :db_cluster_endpoint_identifier,
       :db_cluster_identifier,
       :db_cluster_endpoint_resource_identifier,
@@ -1836,6 +1875,7 @@ module Aws::Neptune
     #   <p>A message describing the details of the problem.</p>
     #   @return [String]
     class DBClusterEndpointAlreadyExistsFault < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -1854,6 +1894,7 @@ module Aws::Neptune
     #         and matching any filter conditions.</p>
     #   @return [Array<Types::DBClusterEndpoint>]
     class DBClusterEndpointMessage < Struct.new(
+      nil,
       :marker,
       :db_cluster_endpoints,
       keyword_init: true
@@ -1866,6 +1907,7 @@ module Aws::Neptune
     #   <p>A message describing the details of the problem.</p>
     #   @return [String]
     class DBClusterEndpointNotFoundFault < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -1877,6 +1919,7 @@ module Aws::Neptune
     #   <p>A message describing the details of the problem.</p>
     #   @return [String]
     class DBClusterEndpointQuotaExceededFault < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -1900,6 +1943,7 @@ module Aws::Neptune
     #         instance after a failure of the existing primary instance.</p>
     #   @return [Integer]
     class DBClusterMember < Struct.new(
+      nil,
       :db_instance_identifier,
       :is_cluster_writer,
       :db_cluster_parameter_group_status,
@@ -1916,6 +1960,7 @@ module Aws::Neptune
     #   <p>Contains a list of DB clusters for the user.</p>
     #   @return [Array<Types::DBCluster>]
     class DBClusterMessage < Struct.new(
+      nil,
       :marker,
       :db_clusters,
       keyword_init: true
@@ -1929,6 +1974,7 @@ module Aws::Neptune
     #   <p>A message describing the details of the problem.</p>
     #   @return [String]
     class DBClusterNotFoundFault < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -1943,6 +1989,7 @@ module Aws::Neptune
     #   <p>Not supported by Neptune.</p>
     #   @return [String]
     class DBClusterOptionGroupStatus < Struct.new(
+      nil,
       :db_cluster_option_group_name,
       :status,
       keyword_init: true
@@ -1966,6 +2013,7 @@ module Aws::Neptune
     #   <p>The Amazon Resource Name (ARN) for the DB cluster parameter group.</p>
     #   @return [String]
     class DBClusterParameterGroup < Struct.new(
+      nil,
       :db_cluster_parameter_group_name,
       :db_parameter_group_family,
       :description,
@@ -1982,6 +2030,7 @@ module Aws::Neptune
     #   <p>A message describing the details of the problem.</p>
     #   @return [String]
     class DBClusterParameterGroupNotFoundFault < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -1998,6 +2047,7 @@ module Aws::Neptune
     #   <p>A list of DB cluster parameter groups.</p>
     #   @return [Array<Types::DBClusterParameterGroup>]
     class DBClusterParameterGroupsMessage < Struct.new(
+      nil,
       :marker,
       :db_cluster_parameter_groups,
       keyword_init: true
@@ -2010,6 +2060,7 @@ module Aws::Neptune
     #   <p>A message describing the details of the problem.</p>
     #   @return [String]
     class DBClusterQuotaExceededFault < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -2050,6 +2101,7 @@ module Aws::Neptune
     #       </p>
     #   @return [String]
     class DBClusterRole < Struct.new(
+      nil,
       :role_arn,
       :status,
       :feature_name,
@@ -2063,6 +2115,7 @@ module Aws::Neptune
     #   <p>A message describing the details of the problem.</p>
     #   @return [String]
     class DBClusterRoleAlreadyExistsFault < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -2074,6 +2127,7 @@ module Aws::Neptune
     #   <p>A message describing the details of the problem.</p>
     #   @return [String]
     class DBClusterRoleNotFoundFault < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -2085,6 +2139,7 @@ module Aws::Neptune
     #   <p>A message describing the details of the problem.</p>
     #   @return [String]
     class DBClusterRoleQuotaExceededFault < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -2175,6 +2230,7 @@ module Aws::Neptune
     #   <p>The storage type associated with the DB cluster snapshot.</p>
     #   @return [String]
     class DBClusterSnapshot < Struct.new(
+      nil,
       :availability_zones,
       :db_cluster_snapshot_identifier,
       :db_cluster_identifier,
@@ -2206,6 +2262,7 @@ module Aws::Neptune
     #   <p>A message describing the details of the problem.</p>
     #   @return [String]
     class DBClusterSnapshotAlreadyExistsFault < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -2229,6 +2286,7 @@ module Aws::Neptune
     #         snapshot is public and available for any Amazon account to copy or restore.</p>
     #   @return [Array<String>]
     class DBClusterSnapshotAttribute < Struct.new(
+      nil,
       :attribute_name,
       :attribute_values,
       keyword_init: true
@@ -2246,6 +2304,7 @@ module Aws::Neptune
     #   <p>The list of attributes and values for the manual DB cluster snapshot.</p>
     #   @return [Array<Types::DBClusterSnapshotAttribute>]
     class DBClusterSnapshotAttributesResult < Struct.new(
+      nil,
       :db_cluster_snapshot_identifier,
       :db_cluster_snapshot_attributes,
       keyword_init: true
@@ -2262,6 +2321,7 @@ module Aws::Neptune
     #   <p>Provides a list of DB cluster snapshots for the user.</p>
     #   @return [Array<Types::DBClusterSnapshot>]
     class DBClusterSnapshotMessage < Struct.new(
+      nil,
       :marker,
       :db_cluster_snapshots,
       keyword_init: true
@@ -2276,6 +2336,7 @@ module Aws::Neptune
     #   <p>A message describing the details of the problem.</p>
     #   @return [String]
     class DBClusterSnapshotNotFoundFault < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -2330,6 +2391,7 @@ module Aws::Neptune
     #   <p>A value that indicates whether you can use Aurora global databases with a specific DB engine version.</p>
     #   @return [Boolean]
     class DBEngineVersion < Struct.new(
+      nil,
       :engine,
       :engine_version,
       :db_parameter_group_family,
@@ -2357,6 +2419,7 @@ module Aws::Neptune
     #   <p> A list of <code>DBEngineVersion</code> elements.</p>
     #   @return [Array<Types::DBEngineVersion>]
     class DBEngineVersionMessage < Struct.new(
+      nil,
       :marker,
       :db_engine_versions,
       keyword_init: true
@@ -2566,6 +2629,7 @@ module Aws::Neptune
     #         a DB Instance</a>.</p>
     #   @return [Boolean]
     class DBInstance < Struct.new(
+      nil,
       :db_instance_identifier,
       :db_instance_class,
       :engine,
@@ -2629,6 +2693,7 @@ module Aws::Neptune
     #   <p>A message describing the details of the problem.</p>
     #   @return [String]
     class DBInstanceAlreadyExistsFault < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -2644,6 +2709,7 @@ module Aws::Neptune
     #   <p> A list of <a>DBInstance</a> instances.</p>
     #   @return [Array<Types::DBInstance>]
     class DBInstanceMessage < Struct.new(
+      nil,
       :marker,
       :db_instances,
       keyword_init: true
@@ -2657,6 +2723,7 @@ module Aws::Neptune
     #   <p>A message describing the details of the problem.</p>
     #   @return [String]
     class DBInstanceNotFoundFault < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -2680,6 +2747,7 @@ module Aws::Neptune
     #         error state, this value is blank.</p>
     #   @return [String]
     class DBInstanceStatusInfo < Struct.new(
+      nil,
       :status_type,
       :normal,
       :status,
@@ -2705,6 +2773,7 @@ module Aws::Neptune
     #   <p>The Amazon Resource Name (ARN) for the DB parameter group.</p>
     #   @return [String]
     class DBParameterGroup < Struct.new(
+      nil,
       :db_parameter_group_name,
       :db_parameter_group_family,
       :description,
@@ -2719,6 +2788,7 @@ module Aws::Neptune
     #   <p>A message describing the details of the problem.</p>
     #   @return [String]
     class DBParameterGroupAlreadyExistsFault < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -2732,6 +2802,7 @@ module Aws::Neptune
     #   <p>A message describing the details of the problem.</p>
     #   @return [String]
     class DBParameterGroupNotFoundFault < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -2743,6 +2814,7 @@ module Aws::Neptune
     #   <p>A message describing the details of the problem.</p>
     #   @return [String]
     class DBParameterGroupQuotaExceededFault < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -2780,6 +2852,7 @@ module Aws::Neptune
     #   <p>The status of parameter updates.</p>
     #   @return [String]
     class DBParameterGroupStatus < Struct.new(
+      nil,
       :db_parameter_group_name,
       :parameter_apply_status,
       keyword_init: true
@@ -2796,6 +2869,7 @@ module Aws::Neptune
     #   <p>A list of <a>DBParameterGroup</a> instances.</p>
     #   @return [Array<Types::DBParameterGroup>]
     class DBParameterGroupsMessage < Struct.new(
+      nil,
       :marker,
       :db_parameter_groups,
       keyword_init: true
@@ -2811,6 +2885,7 @@ module Aws::Neptune
     #   <p>The status of the DB security group.</p>
     #   @return [String]
     class DBSecurityGroupMembership < Struct.new(
+      nil,
       :db_security_group_name,
       :status,
       keyword_init: true
@@ -2825,6 +2900,7 @@ module Aws::Neptune
     #   <p>A message describing the details of the problem.</p>
     #   @return [String]
     class DBSecurityGroupNotFoundFault < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -2837,6 +2913,7 @@ module Aws::Neptune
     #   <p>A message describing the details of the problem.</p>
     #   @return [String]
     class DBSnapshotAlreadyExistsFault < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -2849,6 +2926,7 @@ module Aws::Neptune
     #   <p>A message describing the details of the problem.</p>
     #   @return [String]
     class DBSnapshotNotFoundFault < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -2876,6 +2954,7 @@ module Aws::Neptune
     #   <p>The Amazon Resource Name (ARN) for the DB subnet group.</p>
     #   @return [String]
     class DBSubnetGroup < Struct.new(
+      nil,
       :db_subnet_group_name,
       :db_subnet_group_description,
       :vpc_id,
@@ -2893,6 +2972,7 @@ module Aws::Neptune
     #   <p>A message describing the details of the problem.</p>
     #   @return [String]
     class DBSubnetGroupAlreadyExistsFault < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -2905,6 +2985,7 @@ module Aws::Neptune
     #   <p>A message describing the details of the problem.</p>
     #   @return [String]
     class DBSubnetGroupDoesNotCoverEnoughAZs < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -2920,6 +3001,7 @@ module Aws::Neptune
     #   <p> A list of <a>DBSubnetGroup</a> instances.</p>
     #   @return [Array<Types::DBSubnetGroup>]
     class DBSubnetGroupMessage < Struct.new(
+      nil,
       :marker,
       :db_subnet_groups,
       keyword_init: true
@@ -2934,6 +3016,7 @@ module Aws::Neptune
     #   <p>A message describing the details of the problem.</p>
     #   @return [String]
     class DBSubnetGroupNotFoundFault < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -2945,6 +3028,7 @@ module Aws::Neptune
     #   <p>A message describing the details of the problem.</p>
     #   @return [String]
     class DBSubnetGroupQuotaExceededFault < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -2956,6 +3040,7 @@ module Aws::Neptune
     #   <p>A message describing the details of the problem.</p>
     #   @return [String]
     class DBSubnetQuotaExceededFault < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -2967,6 +3052,7 @@ module Aws::Neptune
     #   <p>A message describing the details of the problem.</p>
     #   @return [String]
     class DBUpgradeDependencyFailureFault < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -2977,6 +3063,7 @@ module Aws::Neptune
     #   <p>The identifier associated with the custom endpoint. This parameter is stored as a lowercase string.</p>
     #   @return [String]
     class DeleteDBClusterEndpointMessage < Struct.new(
+      nil,
       :db_cluster_endpoint_identifier,
       keyword_init: true
     )
@@ -3045,6 +3132,7 @@ module Aws::Neptune
     #   <p>The Amazon Resource Name (ARN) for the endpoint.</p>
     #   @return [String]
     class DeleteDBClusterEndpointOutput < Struct.new(
+      nil,
       :db_cluster_endpoint_identifier,
       :db_cluster_identifier,
       :db_cluster_endpoint_resource_identifier,
@@ -3103,6 +3191,7 @@ module Aws::Neptune
     #            </ul>
     #   @return [String]
     class DeleteDBClusterMessage < Struct.new(
+      nil,
       :db_cluster_identifier,
       :skip_final_snapshot,
       :final_db_snapshot_identifier,
@@ -3127,6 +3216,7 @@ module Aws::Neptune
     #            </ul>
     #   @return [String]
     class DeleteDBClusterParameterGroupMessage < Struct.new(
+      nil,
       :db_cluster_parameter_group_name,
       keyword_init: true
     )
@@ -3138,6 +3228,7 @@ module Aws::Neptune
     #            <p>This data type is used as a response element in the <a>DescribeDBClusters</a>.</p>
     #   @return [Types::DBCluster]
     class DeleteDBClusterResult < Struct.new(
+      nil,
       :db_cluster,
       keyword_init: true
     )
@@ -3150,6 +3241,7 @@ module Aws::Neptune
     #         <code>available</code> state.</p>
     #   @return [String]
     class DeleteDBClusterSnapshotMessage < Struct.new(
+      nil,
       :db_cluster_snapshot_identifier,
       keyword_init: true
     )
@@ -3161,6 +3253,7 @@ module Aws::Neptune
     #            <p>This data type is used as a response element in the <a>DescribeDBClusterSnapshots</a> action.</p>
     #   @return [Types::DBClusterSnapshot]
     class DeleteDBClusterSnapshotResult < Struct.new(
+      nil,
       :db_cluster_snapshot,
       keyword_init: true
     )
@@ -3216,6 +3309,7 @@ module Aws::Neptune
     #            </ul>
     #   @return [String]
     class DeleteDBInstanceMessage < Struct.new(
+      nil,
       :db_instance_identifier,
       :skip_final_snapshot,
       :final_db_snapshot_identifier,
@@ -3229,6 +3323,7 @@ module Aws::Neptune
     #            <p>This data type is used as a response element in the <a>DescribeDBInstances</a> action.</p>
     #   @return [Types::DBInstance]
     class DeleteDBInstanceResult < Struct.new(
+      nil,
       :db_instance,
       keyword_init: true
     )
@@ -3251,6 +3346,7 @@ module Aws::Neptune
     #            </ul>
     #   @return [String]
     class DeleteDBParameterGroupMessage < Struct.new(
+      nil,
       :db_parameter_group_name,
       keyword_init: true
     )
@@ -3268,6 +3364,7 @@ module Aws::Neptune
     #            </p>
     #   @return [String]
     class DeleteDBSubnetGroupMessage < Struct.new(
+      nil,
       :db_subnet_group_name,
       keyword_init: true
     )
@@ -3278,6 +3375,7 @@ module Aws::Neptune
     #   <p>The name of the event notification subscription you want to delete.</p>
     #   @return [String]
     class DeleteEventSubscriptionMessage < Struct.new(
+      nil,
       :subscription_name,
       keyword_init: true
     )
@@ -3288,6 +3386,7 @@ module Aws::Neptune
     #   <p>Contains the results of a successful invocation of the <a>DescribeEventSubscriptions</a> action.</p>
     #   @return [Types::EventSubscription]
     class DeleteEventSubscriptionResult < Struct.new(
+      nil,
       :event_subscription,
       keyword_init: true
     )
@@ -3298,6 +3397,7 @@ module Aws::Neptune
     #   <p>The cluster identifier of the global database cluster being deleted.</p>
     #   @return [String]
     class DeleteGlobalClusterMessage < Struct.new(
+      nil,
       :global_cluster_identifier,
       keyword_init: true
     )
@@ -3315,6 +3415,7 @@ module Aws::Neptune
     #         <a>RemoveFromGlobalCluster</a> actions.</p>
     #   @return [Types::GlobalCluster]
     class DeleteGlobalClusterResult < Struct.new(
+      nil,
       :global_cluster,
       keyword_init: true
     )
@@ -3354,6 +3455,7 @@ module Aws::Neptune
     #         up to the value specified by <code>MaxRecords</code>.</p>
     #   @return [String]
     class DescribeDBClusterEndpointsMessage < Struct.new(
+      nil,
       :db_cluster_identifier,
       :db_cluster_endpoint_identifier,
       :filters,
@@ -3390,6 +3492,7 @@ module Aws::Neptune
     #         <code>MaxRecords</code>.</p>
     #   @return [String]
     class DescribeDBClusterParameterGroupsMessage < Struct.new(
+      nil,
       :db_cluster_parameter_group_name,
       :filters,
       :max_records,
@@ -3429,6 +3532,7 @@ module Aws::Neptune
     #      </p>
     #   @return [String]
     class DescribeDBClusterParametersMessage < Struct.new(
+      nil,
       :db_cluster_parameter_group_name,
       :source,
       :filters,
@@ -3448,6 +3552,7 @@ module Aws::Neptune
     #         the value specified by <code>MaxRecords</code> .</p>
     #   @return [String]
     class DescribeDBClusterParametersOutput < Struct.new(
+      nil,
       :parameters,
       :marker,
       keyword_init: true
@@ -3459,6 +3564,7 @@ module Aws::Neptune
     #   <p>The identifier for the DB cluster snapshot to describe the attributes for.</p>
     #   @return [String]
     class DescribeDBClusterSnapshotAttributesMessage < Struct.new(
+      nil,
       :db_cluster_snapshot_identifier,
       keyword_init: true
     )
@@ -3471,6 +3577,7 @@ module Aws::Neptune
     #         restore a manual DB cluster snapshot. For more information, see the <a>ModifyDBClusterSnapshotAttribute</a> API action.</p>
     #   @return [Types::DBClusterSnapshotAttributesResult]
     class DescribeDBClusterSnapshotAttributesResult < Struct.new(
+      nil,
       :db_cluster_snapshot_attributes_result,
       keyword_init: true
     )
@@ -3570,6 +3677,7 @@ module Aws::Neptune
     #            <p>You can share a manual DB cluster snapshot as public by using the <a>ModifyDBClusterSnapshotAttribute</a> API action.</p>
     #   @return [Boolean]
     class DescribeDBClusterSnapshotsMessage < Struct.new(
+      nil,
       :db_cluster_identifier,
       :db_cluster_snapshot_identifier,
       :snapshot_type,
@@ -3625,6 +3733,7 @@ module Aws::Neptune
     #         up to the value specified by <code>MaxRecords</code>.</p>
     #   @return [String]
     class DescribeDBClustersMessage < Struct.new(
+      nil,
       :db_cluster_identifier,
       :filters,
       :max_records,
@@ -3681,6 +3790,7 @@ module Aws::Neptune
     #         zones for each engine version.</p>
     #   @return [Boolean]
     class DescribeDBEngineVersionsMessage < Struct.new(
+      nil,
       :engine,
       :engine_version,
       :db_parameter_group_family,
@@ -3737,6 +3847,7 @@ module Aws::Neptune
     #         up to the value specified by <code>MaxRecords</code>.</p>
     #   @return [String]
     class DescribeDBInstancesMessage < Struct.new(
+      nil,
       :db_instance_identifier,
       :filters,
       :max_records,
@@ -3771,6 +3882,7 @@ module Aws::Neptune
     #         includes only records beyond the marker, up to the value specified by <code>MaxRecords</code>.</p>
     #   @return [String]
     class DescribeDBParameterGroupsMessage < Struct.new(
+      nil,
       :db_parameter_group_name,
       :filters,
       :max_records,
@@ -3811,6 +3923,7 @@ module Aws::Neptune
     #         up to the value specified by <code>MaxRecords</code>.</p>
     #   @return [String]
     class DescribeDBParametersMessage < Struct.new(
+      nil,
       :db_parameter_group_name,
       :source,
       :filters,
@@ -3830,6 +3943,7 @@ module Aws::Neptune
     #         <code>MaxRecords</code>.</p>
     #   @return [String]
     class DescribeDBParametersOutput < Struct.new(
+      nil,
       :parameters,
       :marker,
       keyword_init: true
@@ -3856,6 +3970,7 @@ module Aws::Neptune
     #         value specified by <code>MaxRecords</code>.</p>
     #   @return [String]
     class DescribeDBSubnetGroupsMessage < Struct.new(
+      nil,
       :db_subnet_group_name,
       :filters,
       :max_records,
@@ -3886,6 +4001,7 @@ module Aws::Neptune
     #         <code>MaxRecords</code>.</p>
     #   @return [String]
     class DescribeEngineDefaultClusterParametersMessage < Struct.new(
+      nil,
       :db_parameter_group_family,
       :filters,
       :max_records,
@@ -3899,6 +4015,7 @@ module Aws::Neptune
     #   <p> Contains the result of a successful invocation of the <a>DescribeEngineDefaultParameters</a> action.</p>
     #   @return [Types::EngineDefaults]
     class DescribeEngineDefaultClusterParametersResult < Struct.new(
+      nil,
       :engine_defaults,
       keyword_init: true
     )
@@ -3925,6 +4042,7 @@ module Aws::Neptune
     #         <code>MaxRecords</code>.</p>
     #   @return [String]
     class DescribeEngineDefaultParametersMessage < Struct.new(
+      nil,
       :db_parameter_group_family,
       :filters,
       :max_records,
@@ -3938,6 +4056,7 @@ module Aws::Neptune
     #   <p> Contains the result of a successful invocation of the <a>DescribeEngineDefaultParameters</a> action.</p>
     #   @return [Types::EngineDefaults]
     class DescribeEngineDefaultParametersResult < Struct.new(
+      nil,
       :engine_defaults,
       keyword_init: true
     )
@@ -3952,6 +4071,7 @@ module Aws::Neptune
     #   <p>This parameter is not currently supported.</p>
     #   @return [Array<Types::Filter>]
     class DescribeEventCategoriesMessage < Struct.new(
+      nil,
       :source_type,
       :filters,
       keyword_init: true
@@ -3978,6 +4098,7 @@ module Aws::Neptune
     #         up to the value specified by <code>MaxRecords</code> .</p>
     #   @return [String]
     class DescribeEventSubscriptionsMessage < Struct.new(
+      nil,
       :subscription_name,
       :filters,
       :max_records,
@@ -4056,6 +4177,7 @@ module Aws::Neptune
     #         specified by <code>MaxRecords</code>.</p>
     #   @return [String]
     class DescribeEventsMessage < Struct.new(
+      nil,
       :source_identifier,
       :source_type,
       :start_time,
@@ -4091,6 +4213,7 @@ module Aws::Neptune
     #         specified by <code>MaxRecords</code>.</p>
     #   @return [String]
     class DescribeGlobalClustersMessage < Struct.new(
+      nil,
       :global_cluster_identifier,
       :max_records,
       :marker,
@@ -4134,6 +4257,7 @@ module Aws::Neptune
     #         up to the value specified by <code>MaxRecords</code> .</p>
     #   @return [String]
     class DescribeOrderableDBInstanceOptionsMessage < Struct.new(
+      nil,
       :engine,
       :engine_version,
       :db_instance_class,
@@ -4183,6 +4307,7 @@ module Aws::Neptune
     #            <p>Constraints: Minimum 20, maximum 100.</p>
     #   @return [Integer]
     class DescribePendingMaintenanceActionsMessage < Struct.new(
+      nil,
       :resource_identifier,
       :filters,
       :marker,
@@ -4196,6 +4321,7 @@ module Aws::Neptune
     #   <p>The customer identifier or the ARN of your DB instance.</p>
     #   @return [String]
     class DescribeValidDBInstanceModificationsMessage < Struct.new(
+      nil,
       :db_instance_identifier,
       keyword_init: true
     )
@@ -4209,6 +4335,7 @@ module Aws::Neptune
     #      </p>
     #   @return [Types::ValidDBInstanceModificationsMessage]
     class DescribeValidDBInstanceModificationsResult < Struct.new(
+      nil,
       :valid_db_instance_modifications_message,
       keyword_init: true
     )
@@ -4230,6 +4357,7 @@ module Aws::Neptune
     #   <p>The name of the IAM role to be used when making API calls to the Directory Service.</p>
     #   @return [String]
     class DomainMembership < Struct.new(
+      nil,
       :domain,
       :status,
       :fqdn,
@@ -4245,6 +4373,7 @@ module Aws::Neptune
     #   <p>A message describing the details of the problem.</p>
     #   @return [String]
     class DomainNotFoundFault < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -4259,6 +4388,7 @@ module Aws::Neptune
     #   <p>The maximum value in the range.</p>
     #   @return [Float]
     class DoubleRange < Struct.new(
+      nil,
       :from,
       :to,
       keyword_init: true
@@ -4279,6 +4409,7 @@ module Aws::Neptune
     #   <p>Specifies the ID that Amazon Route 53 assigns when you create a hosted zone.</p>
     #   @return [String]
     class Endpoint < Struct.new(
+      nil,
       :address,
       :port,
       :hosted_zone_id,
@@ -4301,6 +4432,7 @@ module Aws::Neptune
     #   <p>Contains a list of engine default parameters.</p>
     #   @return [Array<Types::Parameter>]
     class EngineDefaults < Struct.new(
+      nil,
       :db_parameter_group_family,
       :marker,
       :parameters,
@@ -4330,6 +4462,7 @@ module Aws::Neptune
     #   <p>The Amazon Resource Name (ARN) for the event.</p>
     #   @return [String]
     class Event < Struct.new(
+      nil,
       :source_identifier,
       :source_type,
       :message,
@@ -4349,6 +4482,7 @@ module Aws::Neptune
     #   <p>The event categories for the specified source type</p>
     #   @return [Array<String>]
     class EventCategoriesMap < Struct.new(
+      nil,
       :source_type,
       :event_categories,
       keyword_init: true
@@ -4360,6 +4494,7 @@ module Aws::Neptune
     #   <p>A list of EventCategoriesMap data types.</p>
     #   @return [Array<Types::EventCategoriesMap>]
     class EventCategoriesMessage < Struct.new(
+      nil,
       :event_categories_map_list,
       keyword_init: true
     )
@@ -4405,6 +4540,7 @@ module Aws::Neptune
     #   <p>The Amazon Resource Name (ARN) for the event subscription.</p>
     #   @return [String]
     class EventSubscription < Struct.new(
+      nil,
       :customer_aws_id,
       :cust_subscription_id,
       :sns_topic_arn,
@@ -4425,6 +4561,7 @@ module Aws::Neptune
     #   <p>A message describing the details of the problem.</p>
     #   @return [String]
     class EventSubscriptionQuotaExceededFault < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -4440,6 +4577,7 @@ module Aws::Neptune
     #   <p>A list of EventSubscriptions data types.</p>
     #   @return [Array<Types::EventSubscription>]
     class EventSubscriptionsMessage < Struct.new(
+      nil,
       :marker,
       :event_subscriptions_list,
       keyword_init: true
@@ -4456,6 +4594,7 @@ module Aws::Neptune
     #   <p> A list of <a>Event</a> instances.</p>
     #   @return [Array<Types::Event>]
     class EventsMessage < Struct.new(
+      nil,
       :marker,
       :events,
       keyword_init: true
@@ -4479,6 +4618,7 @@ module Aws::Neptune
     #         example, <code>mydbcluster-replica1</code>.</p>
     #   @return [String]
     class FailoverDBClusterMessage < Struct.new(
+      nil,
       :db_cluster_identifier,
       :target_db_instance_identifier,
       keyword_init: true
@@ -4491,6 +4631,7 @@ module Aws::Neptune
     #            <p>This data type is used as a response element in the <a>DescribeDBClusters</a>.</p>
     #   @return [Types::DBCluster]
     class FailoverDBClusterResult < Struct.new(
+      nil,
       :db_cluster,
       keyword_init: true
     )
@@ -4521,6 +4662,7 @@ module Aws::Neptune
     #            <p>Constraints:Can't be specified together with the <code>AllowDataLoss</code> parameter.</p>
     #   @return [Boolean]
     class FailoverGlobalClusterMessage < Struct.new(
+      nil,
       :global_cluster_identifier,
       :target_db_cluster_identifier,
       :allow_data_loss,
@@ -4541,6 +4683,7 @@ module Aws::Neptune
     #         <a>RemoveFromGlobalCluster</a> actions.</p>
     #   @return [Types::GlobalCluster]
     class FailoverGlobalClusterResult < Struct.new(
+      nil,
       :global_cluster,
       keyword_init: true
     )
@@ -4584,6 +4727,7 @@ module Aws::Neptune
     #         Otherwise, it's a switchover.</p>
     #   @return [Boolean]
     class FailoverState < Struct.new(
+      nil,
       :status,
       :from_db_cluster_arn,
       :to_db_cluster_arn,
@@ -4601,6 +4745,7 @@ module Aws::Neptune
     #   <p>This parameter is not currently supported.</p>
     #   @return [Array<String>]
     class Filter < Struct.new(
+      nil,
       :name,
       :values,
       keyword_init: true
@@ -4653,6 +4798,7 @@ module Aws::Neptune
     #         This object is empty unless the <code>SwitchoverGlobalCluster</code> or <code>FailoverGlobalCluster</code> operation was called on this global cluster.</p>
     #   @return [Types::FailoverState]
     class GlobalCluster < Struct.new(
+      nil,
       :global_cluster_identifier,
       :global_cluster_resource_id,
       :global_cluster_arn,
@@ -4673,6 +4819,7 @@ module Aws::Neptune
     #   <p>A message describing the details of the problem.</p>
     #   @return [String]
     class GlobalClusterAlreadyExistsFault < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -4702,6 +4849,7 @@ module Aws::Neptune
     #     </p>
     #   @return [Boolean]
     class GlobalClusterMember < Struct.new(
+      nil,
       :db_cluster_arn,
       :readers,
       :is_writer,
@@ -4715,6 +4863,7 @@ module Aws::Neptune
     #   <p>A message describing the details of the problem.</p>
     #   @return [String]
     class GlobalClusterNotFoundFault < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -4726,6 +4875,7 @@ module Aws::Neptune
     #   <p>A message describing the details of the problem.</p>
     #   @return [String]
     class GlobalClusterQuotaExceededFault < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -4741,6 +4891,7 @@ module Aws::Neptune
     #   <p>The list of global clusters and instances returned by this request.</p>
     #   @return [Array<Types::GlobalCluster>]
     class GlobalClustersMessage < Struct.new(
+      nil,
       :marker,
       :global_clusters,
       keyword_init: true
@@ -4753,6 +4904,7 @@ module Aws::Neptune
     #   <p>A message describing the details of the problem.</p>
     #   @return [String]
     class InstanceQuotaExceededFault < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -4764,6 +4916,7 @@ module Aws::Neptune
     #   <p>A message describing the details of the problem.</p>
     #   @return [String]
     class InsufficientDBClusterCapacityFault < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -4775,6 +4928,7 @@ module Aws::Neptune
     #   <p>A message describing the details of the problem.</p>
     #   @return [String]
     class InsufficientDBInstanceCapacityFault < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -4788,6 +4942,7 @@ module Aws::Neptune
     #   <p>A message describing the details of the problem.</p>
     #   @return [String]
     class InsufficientStorageClusterCapacityFault < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -4799,6 +4954,7 @@ module Aws::Neptune
     #   <p>A message describing the details of the problem.</p>
     #   @return [String]
     class InvalidDBClusterEndpointStateFault < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -4810,6 +4966,7 @@ module Aws::Neptune
     #   <p>A message describing the details of the problem.</p>
     #   @return [String]
     class InvalidDBClusterSnapshotStateFault < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -4821,6 +4978,7 @@ module Aws::Neptune
     #   <p>A message describing the details of the problem.</p>
     #   @return [String]
     class InvalidDBClusterStateFault < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -4832,6 +4990,7 @@ module Aws::Neptune
     #   <p>A message describing the details of the problem.</p>
     #   @return [String]
     class InvalidDBInstanceStateFault < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -4844,6 +5003,7 @@ module Aws::Neptune
     #   <p>A message describing the details of the problem.</p>
     #   @return [String]
     class InvalidDBParameterGroupStateFault < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -4855,6 +5015,7 @@ module Aws::Neptune
     #   <p>A message describing the details of the problem.</p>
     #   @return [String]
     class InvalidDBSecurityGroupStateFault < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -4866,6 +5027,7 @@ module Aws::Neptune
     #   <p>A message describing the details of the problem.</p>
     #   @return [String]
     class InvalidDBSnapshotStateFault < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -4877,6 +5039,7 @@ module Aws::Neptune
     #   <p>A message describing the details of the problem.</p>
     #   @return [String]
     class InvalidDBSubnetGroupStateFault < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -4888,6 +5051,7 @@ module Aws::Neptune
     #   <p>A message describing the details of the problem.</p>
     #   @return [String]
     class InvalidDBSubnetStateFault < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -4899,6 +5063,7 @@ module Aws::Neptune
     #   <p>A message describing the details of the problem.</p>
     #   @return [String]
     class InvalidEventSubscriptionStateFault < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -4910,6 +5075,7 @@ module Aws::Neptune
     #   <p>A message describing the details of the problem.</p>
     #   @return [String]
     class InvalidGlobalClusterStateFault < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -4921,6 +5087,7 @@ module Aws::Neptune
     #   <p>A message describing the details of the problem.</p>
     #   @return [String]
     class InvalidRestoreFault < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -4933,6 +5100,7 @@ module Aws::Neptune
     #   <p>A message describing the details of the problem.</p>
     #   @return [String]
     class InvalidSubnet < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -4945,6 +5113,7 @@ module Aws::Neptune
     #   <p>A message describing the details of the problem.</p>
     #   @return [String]
     class InvalidVPCNetworkStateFault < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -4956,6 +5125,7 @@ module Aws::Neptune
     #   <p>A message describing the details of the problem.</p>
     #   @return [String]
     class KMSKeyNotAccessibleFault < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -4971,6 +5141,7 @@ module Aws::Neptune
     #   <p>This parameter is not currently supported.</p>
     #   @return [Array<Types::Filter>]
     class ListTagsForResourceMessage < Struct.new(
+      nil,
       :resource_name,
       :filters,
       keyword_init: true
@@ -4993,6 +5164,7 @@ module Aws::Neptune
     #         Only relevant if the list of static members is empty.</p>
     #   @return [Array<String>]
     class ModifyDBClusterEndpointMessage < Struct.new(
+      nil,
       :db_cluster_endpoint_identifier,
       :endpoint_type,
       :static_members,
@@ -5064,6 +5236,7 @@ module Aws::Neptune
     #   <p>The Amazon Resource Name (ARN) for the endpoint.</p>
     #   @return [String]
     class ModifyDBClusterEndpointOutput < Struct.new(
+      nil,
       :db_cluster_endpoint_identifier,
       :db_cluster_identifier,
       :db_cluster_endpoint_resource_identifier,
@@ -5269,6 +5442,7 @@ module Aws::Neptune
     #            </ul>
     #   @return [String]
     class ModifyDBClusterMessage < Struct.new(
+      nil,
       :db_cluster_identifier,
       :new_db_cluster_identifier,
       :apply_immediately,
@@ -5301,6 +5475,7 @@ module Aws::Neptune
     #   <p>A list of parameters in the DB cluster parameter group to modify.</p>
     #   @return [Array<Types::Parameter>]
     class ModifyDBClusterParameterGroupMessage < Struct.new(
+      nil,
       :db_cluster_parameter_group_name,
       :parameters,
       keyword_init: true
@@ -5327,6 +5502,7 @@ module Aws::Neptune
     #            </note>
     #   @return [String]
     class ModifyDBClusterParameterGroupOutput < Struct.new(
+      nil,
       :db_cluster_parameter_group_name,
       keyword_init: true
     )
@@ -5338,6 +5514,7 @@ module Aws::Neptune
     #            <p>This data type is used as a response element in the <a>DescribeDBClusters</a>.</p>
     #   @return [Types::DBCluster]
     class ModifyDBClusterResult < Struct.new(
+      nil,
       :db_cluster,
       keyword_init: true
     )
@@ -5371,6 +5548,7 @@ module Aws::Neptune
     #         <code>restore</code> attribute can still copy or restore a manual DB cluster snapshot.</p>
     #   @return [Array<String>]
     class ModifyDBClusterSnapshotAttributeMessage < Struct.new(
+      nil,
       :db_cluster_snapshot_identifier,
       :attribute_name,
       :values_to_add,
@@ -5386,6 +5564,7 @@ module Aws::Neptune
     #         restore a manual DB cluster snapshot. For more information, see the <a>ModifyDBClusterSnapshotAttribute</a> API action.</p>
     #   @return [Types::DBClusterSnapshotAttributesResult]
     class ModifyDBClusterSnapshotAttributeResult < Struct.new(
+      nil,
       :db_cluster_snapshot_attributes_result,
       keyword_init: true
     )
@@ -5658,6 +5837,7 @@ module Aws::Neptune
     #         a DB Instance</a>.</p>
     #   @return [Boolean]
     class ModifyDBInstanceMessage < Struct.new(
+      nil,
       :db_instance_identifier,
       :allocated_storage,
       :db_instance_class,
@@ -5705,6 +5885,7 @@ module Aws::Neptune
     #            <p>This data type is used as a response element in the <a>DescribeDBInstances</a> action.</p>
     #   @return [Types::DBInstance]
     class ModifyDBInstanceResult < Struct.new(
+      nil,
       :db_instance,
       keyword_init: true
     )
@@ -5733,6 +5914,7 @@ module Aws::Neptune
     #            </note>
     #   @return [Array<Types::Parameter>]
     class ModifyDBParameterGroupMessage < Struct.new(
+      nil,
       :db_parameter_group_name,
       :parameters,
       keyword_init: true
@@ -5744,6 +5926,7 @@ module Aws::Neptune
     #   <p>Provides the name of the DB parameter group.</p>
     #   @return [String]
     class ModifyDBParameterGroupOutput < Struct.new(
+      nil,
       :db_parameter_group_name,
       keyword_init: true
     )
@@ -5764,6 +5947,7 @@ module Aws::Neptune
     #   <p>The EC2 subnet IDs for the DB subnet group.</p>
     #   @return [Array<String>]
     class ModifyDBSubnetGroupMessage < Struct.new(
+      nil,
       :db_subnet_group_name,
       :db_subnet_group_description,
       :subnet_ids,
@@ -5777,6 +5961,7 @@ module Aws::Neptune
     #            <p>This data type is used as a response element in the <a>DescribeDBSubnetGroups</a> action.</p>
     #   @return [Types::DBSubnetGroup]
     class ModifyDBSubnetGroupResult < Struct.new(
+      nil,
       :db_subnet_group,
       keyword_init: true
     )
@@ -5807,6 +5992,7 @@ module Aws::Neptune
     #         subscription.</p>
     #   @return [Boolean]
     class ModifyEventSubscriptionMessage < Struct.new(
+      nil,
       :subscription_name,
       :sns_topic_arn,
       :source_type,
@@ -5821,6 +6007,7 @@ module Aws::Neptune
     #   <p>Contains the results of a successful invocation of the <a>DescribeEventSubscriptions</a> action.</p>
     #   @return [Types::EventSubscription]
     class ModifyEventSubscriptionResult < Struct.new(
+      nil,
       :event_subscription,
       keyword_init: true
     )
@@ -5871,6 +6058,7 @@ module Aws::Neptune
     #         completing the upgrade.</p>
     #   @return [Boolean]
     class ModifyGlobalClusterMessage < Struct.new(
+      nil,
       :global_cluster_identifier,
       :new_global_cluster_identifier,
       :deletion_protection,
@@ -5892,6 +6080,7 @@ module Aws::Neptune
     #         <a>RemoveFromGlobalCluster</a> actions.</p>
     #   @return [Types::GlobalCluster]
     class ModifyGlobalClusterResult < Struct.new(
+      nil,
       :global_cluster,
       keyword_init: true
     )
@@ -5906,6 +6095,7 @@ module Aws::Neptune
     #   <p>Not supported by Neptune.</p>
     #   @return [String]
     class OptionGroupMembership < Struct.new(
+      nil,
       :option_group_name,
       :status,
       keyword_init: true
@@ -5918,6 +6108,7 @@ module Aws::Neptune
     #   <p>A message describing the details of the problem.</p>
     #   @return [String]
     class OptionGroupNotFoundFault < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -5993,6 +6184,7 @@ module Aws::Neptune
     #   <p>A value that indicates whether you can use Neptune global databases with a specific combination of other DB engine attributes.</p>
     #   @return [Boolean]
     class OrderableDBInstanceOption < Struct.new(
+      nil,
       :engine,
       :engine_version,
       :db_instance_class,
@@ -6029,6 +6221,7 @@ module Aws::Neptune
     #         the value specified by <code>MaxRecords</code> .</p>
     #   @return [String]
     class OrderableDBInstanceOptionsMessage < Struct.new(
+      nil,
       :orderable_db_instance_options,
       :marker,
       keyword_init: true
@@ -6070,6 +6263,7 @@ module Aws::Neptune
     #   <p>Indicates when to apply parameter updates.</p>
     #   @return [String]
     class Parameter < Struct.new(
+      nil,
       :parameter_name,
       :parameter_value,
       :description,
@@ -6099,6 +6293,7 @@ module Aws::Neptune
     #         enabled, these log types are exported to CloudWatch Logs.</p>
     #   @return [Array<String>]
     class PendingCloudwatchLogsExports < Struct.new(
+      nil,
       :log_types_to_enable,
       :log_types_to_disable,
       keyword_init: true
@@ -6134,6 +6329,7 @@ module Aws::Neptune
     #   <p>A description providing more detail about the maintenance action.</p>
     #   @return [String]
     class PendingMaintenanceAction < Struct.new(
+      nil,
       :action,
       :auto_applied_after_date,
       :forced_apply_date,
@@ -6155,6 +6351,7 @@ module Aws::Neptune
     #         <code>MaxRecords</code>.</p>
     #   @return [String]
     class PendingMaintenanceActionsMessage < Struct.new(
+      nil,
       :pending_maintenance_actions,
       :marker,
       keyword_init: true
@@ -6212,6 +6409,7 @@ module Aws::Neptune
     #         pending changes to which CloudWatch logs are enabled and which are disabled.</p>
     #   @return [Types::PendingCloudwatchLogsExports]
     class PendingModifiedValues < Struct.new(
+      nil,
       :db_instance_class,
       :allocated_storage,
       :master_user_password,
@@ -6235,6 +6433,7 @@ module Aws::Neptune
     #   <p>Not supported.</p>
     #   @return [String]
     class PromoteReadReplicaDBClusterMessage < Struct.new(
+      nil,
       :db_cluster_identifier,
       keyword_init: true
     )
@@ -6246,6 +6445,7 @@ module Aws::Neptune
     #            <p>This data type is used as a response element in the <a>DescribeDBClusters</a>.</p>
     #   @return [Types::DBCluster]
     class PromoteReadReplicaDBClusterResult < Struct.new(
+      nil,
       :db_cluster,
       keyword_init: true
     )
@@ -6257,6 +6457,7 @@ module Aws::Neptune
     #   <p>A message describing the details of the problem.</p>
     #   @return [String]
     class ProvisionedIopsNotAvailableInAZFault < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -6277,6 +6478,7 @@ module Aws::Neptune
     #         7,000, 8,000...</p>
     #   @return [Integer]
     class Range < Struct.new(
+      nil,
       :from,
       :to,
       :step,
@@ -6300,6 +6502,7 @@ module Aws::Neptune
     #         MultiAZ.</p>
     #   @return [Boolean]
     class RebootDBInstanceMessage < Struct.new(
+      nil,
       :db_instance_identifier,
       :force_failover,
       keyword_init: true
@@ -6312,6 +6515,7 @@ module Aws::Neptune
     #            <p>This data type is used as a response element in the <a>DescribeDBInstances</a> action.</p>
     #   @return [Types::DBInstance]
     class RebootDBInstanceResult < Struct.new(
+      nil,
       :db_instance,
       keyword_init: true
     )
@@ -6327,6 +6531,7 @@ module Aws::Neptune
     #         from the Neptune global database cluster.</p>
     #   @return [String]
     class RemoveFromGlobalClusterMessage < Struct.new(
+      nil,
       :global_cluster_identifier,
       :db_cluster_identifier,
       keyword_init: true
@@ -6345,6 +6550,7 @@ module Aws::Neptune
     #         <a>RemoveFromGlobalCluster</a> actions.</p>
     #   @return [Types::GlobalCluster]
     class RemoveFromGlobalClusterResult < Struct.new(
+      nil,
       :global_cluster,
       keyword_init: true
     )
@@ -6363,6 +6569,7 @@ module Aws::Neptune
     #         For the list of supported feature names, see <a>DescribeDBEngineVersions</a>.</p>
     #   @return [String]
     class RemoveRoleFromDBClusterMessage < Struct.new(
+      nil,
       :db_cluster_identifier,
       :role_arn,
       :feature_name,
@@ -6380,6 +6587,7 @@ module Aws::Neptune
     #         group.</p>
     #   @return [String]
     class RemoveSourceIdentifierFromSubscriptionMessage < Struct.new(
+      nil,
       :subscription_name,
       :source_identifier,
       keyword_init: true
@@ -6391,6 +6599,7 @@ module Aws::Neptune
     #   <p>Contains the results of a successful invocation of the <a>DescribeEventSubscriptions</a> action.</p>
     #   @return [Types::EventSubscription]
     class RemoveSourceIdentifierFromSubscriptionResult < Struct.new(
+      nil,
       :event_subscription,
       keyword_init: true
     )
@@ -6406,6 +6615,7 @@ module Aws::Neptune
     #   <p>The tag key (name) of the tag to be removed.</p>
     #   @return [Array<String>]
     class RemoveTagsFromResourceMessage < Struct.new(
+      nil,
       :resource_name,
       :tag_keys,
       keyword_init: true
@@ -6428,6 +6638,7 @@ module Aws::Neptune
     #         to <code>true</code>.</p>
     #   @return [Array<Types::Parameter>]
     class ResetDBClusterParameterGroupMessage < Struct.new(
+      nil,
       :db_cluster_parameter_group_name,
       :reset_all_parameters,
       :parameters,
@@ -6455,6 +6666,7 @@ module Aws::Neptune
     #            </note>
     #   @return [String]
     class ResetDBClusterParameterGroupOutput < Struct.new(
+      nil,
       :db_cluster_parameter_group_name,
       keyword_init: true
     )
@@ -6485,6 +6697,7 @@ module Aws::Neptune
     #            </p>
     #   @return [Array<Types::Parameter>]
     class ResetDBParameterGroupMessage < Struct.new(
+      nil,
       :db_parameter_group_name,
       :reset_all_parameters,
       :parameters,
@@ -6497,6 +6710,7 @@ module Aws::Neptune
     #   <p>Provides the name of the DB parameter group.</p>
     #   @return [String]
     class ResetDBParameterGroupOutput < Struct.new(
+      nil,
       :db_parameter_group_name,
       keyword_init: true
     )
@@ -6508,6 +6722,7 @@ module Aws::Neptune
     #   <p>A message describing the details of the problem.</p>
     #   @return [String]
     class ResourceNotFoundFault < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -6523,6 +6738,7 @@ module Aws::Neptune
     #         resource.</p>
     #   @return [Array<Types::PendingMaintenanceAction>]
     class ResourcePendingMaintenanceActions < Struct.new(
+      nil,
       :resource_identifier,
       :pending_maintenance_action_details,
       keyword_init: true
@@ -6661,6 +6877,7 @@ module Aws::Neptune
     #            </p>
     #   @return [String]
     class RestoreDBClusterFromSnapshotMessage < Struct.new(
+      nil,
       :availability_zones,
       :db_cluster_identifier,
       :snapshot_identifier,
@@ -6690,6 +6907,7 @@ module Aws::Neptune
     #            <p>This data type is used as a response element in the <a>DescribeDBClusters</a>.</p>
     #   @return [Types::DBCluster]
     class RestoreDBClusterFromSnapshotResult < Struct.new(
+      nil,
       :db_cluster,
       keyword_init: true
     )
@@ -6854,6 +7072,7 @@ module Aws::Neptune
     #            </p>
     #   @return [String]
     class RestoreDBClusterToPointInTimeMessage < Struct.new(
+      nil,
       :db_cluster_identifier,
       :restore_type,
       :source_db_cluster_identifier,
@@ -6881,6 +7100,7 @@ module Aws::Neptune
     #            <p>This data type is used as a response element in the <a>DescribeDBClusters</a>.</p>
     #   @return [Types::DBCluster]
     class RestoreDBClusterToPointInTimeResult < Struct.new(
+      nil,
       :db_cluster,
       keyword_init: true
     )
@@ -6892,6 +7112,7 @@ module Aws::Neptune
     #   <p>A message describing the details of the problem.</p>
     #   @return [String]
     class SNSInvalidTopicFault < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -6903,6 +7124,7 @@ module Aws::Neptune
     #   <p>A message describing the details of the problem.</p>
     #   @return [String]
     class SNSNoAuthorizationFault < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -6914,6 +7136,7 @@ module Aws::Neptune
     #   <p>A message describing the details of the problem.</p>
     #   @return [String]
     class SNSTopicArnNotFoundFault < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -6932,6 +7155,7 @@ module Aws::Neptune
     #         You can specify NCU values in half-step increments, such as 40, 40.5, 41, and so on.</p>
     #   @return [Float]
     class ServerlessV2ScalingConfiguration < Struct.new(
+      nil,
       :min_capacity,
       :max_capacity,
       keyword_init: true
@@ -6951,6 +7175,7 @@ module Aws::Neptune
     #         You can specify NCU values in half-step increments, such as 40, 40.5, 41, and so on.</p>
     #   @return [Float]
     class ServerlessV2ScalingConfigurationInfo < Struct.new(
+      nil,
       :min_capacity,
       :max_capacity,
       keyword_init: true
@@ -6963,6 +7188,7 @@ module Aws::Neptune
     #   <p>A message describing the details of the problem.</p>
     #   @return [String]
     class SharedSnapshotQuotaExceededFault < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -6974,6 +7200,7 @@ module Aws::Neptune
     #   <p>A message describing the details of the problem.</p>
     #   @return [String]
     class SnapshotQuotaExceededFault < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -6985,6 +7212,7 @@ module Aws::Neptune
     #   <p>A message describing the details of the problem.</p>
     #   @return [String]
     class SourceNotFoundFault < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -6996,6 +7224,7 @@ module Aws::Neptune
     #         This parameter is stored as a lowercase string.</p>
     #   @return [String]
     class StartDBClusterMessage < Struct.new(
+      nil,
       :db_cluster_identifier,
       keyword_init: true
     )
@@ -7007,6 +7236,7 @@ module Aws::Neptune
     #            <p>This data type is used as a response element in the <a>DescribeDBClusters</a>.</p>
     #   @return [Types::DBCluster]
     class StartDBClusterResult < Struct.new(
+      nil,
       :db_cluster,
       keyword_init: true
     )
@@ -7018,6 +7248,7 @@ module Aws::Neptune
     #         This parameter is stored as a lowercase string.</p>
     #   @return [String]
     class StopDBClusterMessage < Struct.new(
+      nil,
       :db_cluster_identifier,
       keyword_init: true
     )
@@ -7029,6 +7260,7 @@ module Aws::Neptune
     #            <p>This data type is used as a response element in the <a>DescribeDBClusters</a>.</p>
     #   @return [Types::DBCluster]
     class StopDBClusterResult < Struct.new(
+      nil,
       :db_cluster,
       keyword_init: true
     )
@@ -7040,6 +7272,7 @@ module Aws::Neptune
     #   <p>A message describing the details of the problem.</p>
     #   @return [String]
     class StorageQuotaExceededFault < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -7052,6 +7285,7 @@ module Aws::Neptune
     #   <p>A message describing the details of the problem.</p>
     #   @return [String]
     class StorageTypeNotSupportedFault < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -7070,6 +7304,7 @@ module Aws::Neptune
     #   <p>Specifies the status of the subnet.</p>
     #   @return [String]
     class Subnet < Struct.new(
+      nil,
       :subnet_identifier,
       :subnet_availability_zone,
       :subnet_status,
@@ -7083,6 +7318,7 @@ module Aws::Neptune
     #   <p>A message describing the details of the problem.</p>
     #   @return [String]
     class SubnetAlreadyInUse < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -7094,6 +7330,7 @@ module Aws::Neptune
     #   <p>A message describing the details of the problem.</p>
     #   @return [String]
     class SubscriptionAlreadyExistFault < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -7105,6 +7342,7 @@ module Aws::Neptune
     #   <p>A message describing the details of the problem.</p>
     #   @return [String]
     class SubscriptionCategoryNotFoundFault < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -7116,6 +7354,7 @@ module Aws::Neptune
     #   <p>A message describing the details of the problem.</p>
     #   @return [String]
     class SubscriptionNotFoundFault < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -7131,6 +7370,7 @@ module Aws::Neptune
     #         the global database.</p>
     #   @return [String]
     class SwitchoverGlobalClusterMessage < Struct.new(
+      nil,
       :global_cluster_identifier,
       :target_db_cluster_identifier,
       keyword_init: true
@@ -7149,6 +7389,7 @@ module Aws::Neptune
     #         <a>RemoveFromGlobalCluster</a> actions.</p>
     #   @return [Types::GlobalCluster]
     class SwitchoverGlobalClusterResult < Struct.new(
+      nil,
       :global_cluster,
       keyword_init: true
     )
@@ -7169,6 +7410,7 @@ module Aws::Neptune
     #         '_', '.', '/', '=', '+', '-' (Java regex: "^([\\p{L}\\p{Z}\\p{N}_.:/=+\\-]*)$").</p>
     #   @return [String]
     class Tag < Struct.new(
+      nil,
       :key,
       :value,
       keyword_init: true
@@ -7180,6 +7422,7 @@ module Aws::Neptune
     #   <p>List of tags returned by the ListTagsForResource operation.</p>
     #   @return [Array<Types::Tag>]
     class TagListMessage < Struct.new(
+      nil,
       :tag_list,
       keyword_init: true
     )
@@ -7191,6 +7434,7 @@ module Aws::Neptune
     #   <p>The name of the time zone.</p>
     #   @return [String]
     class Timezone < Struct.new(
+      nil,
       :timezone_name,
       keyword_init: true
     )
@@ -7218,6 +7462,7 @@ module Aws::Neptune
     #   <p>A value that indicates whether you can use Neptune global databases with the target engine version.</p>
     #   @return [Boolean]
     class UpgradeTarget < Struct.new(
+      nil,
       :engine,
       :engine_version,
       :description,
@@ -7237,6 +7482,7 @@ module Aws::Neptune
     #   <p>Valid storage options for your DB instance.</p>
     #   @return [Array<Types::ValidStorageOptions>]
     class ValidDBInstanceModificationsMessage < Struct.new(
+      nil,
       :storage,
       keyword_init: true
     )
@@ -7257,6 +7503,7 @@ module Aws::Neptune
     #   <p>Not applicable. In Neptune the storage type is managed at the DB Cluster level.</p>
     #   @return [Array<Types::DoubleRange>]
     class ValidStorageOptions < Struct.new(
+      nil,
       :storage_type,
       :storage_size,
       :provisioned_iops,
@@ -7275,6 +7522,7 @@ module Aws::Neptune
     #   <p>The status of the VPC security group.</p>
     #   @return [String]
     class VpcSecurityGroupMembership < Struct.new(
+      nil,
       :vpc_security_group_id,
       :status,
       keyword_init: true

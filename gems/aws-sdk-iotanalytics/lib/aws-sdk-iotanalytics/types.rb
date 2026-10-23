@@ -22,6 +22,7 @@ module Aws::IoTAnalytics
     #   <p>The next activity in the pipeline.</p>
     #   @return [String]
     class AddAttributesActivity < Struct.new(
+      nil,
       :name,
       :attributes,
       :next,
@@ -42,6 +43,7 @@ module Aws::IoTAnalytics
     #   <p>The message associated with the error.</p>
     #   @return [String]
     class BatchPutMessageErrorEntry < Struct.new(
+      nil,
       :message_id,
       :error_code,
       :error_message,
@@ -84,6 +86,7 @@ module Aws::IoTAnalytics
     #    {"01_temp": 29} or {"__temp_01": 29} are invalid in message payloads.  </p>
     #   @return [Array<Types::Message>]
     class BatchPutMessageRequest < Struct.new(
+      nil,
       :channel_name,
       :messages,
       keyword_init: true
@@ -95,6 +98,7 @@ module Aws::IoTAnalytics
     #   <p>A list of any errors encountered when sending the messages to the channel.</p>
     #   @return [Array<Types::BatchPutMessageErrorEntry>]
     class BatchPutMessageResponse < Struct.new(
+      nil,
       :batch_put_message_error_entries,
       keyword_init: true
     )
@@ -109,6 +113,7 @@ module Aws::IoTAnalytics
     #         <code>StartPipelineReprocessing</code>).</p>
     #   @return [String]
     class CancelPipelineReprocessingRequest < Struct.new(
+      nil,
       :pipeline_name,
       :reprocessing_id,
       keyword_init: true
@@ -117,6 +122,7 @@ module Aws::IoTAnalytics
     end
 
     class CancelPipelineReprocessingResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -154,6 +160,7 @@ module Aws::IoTAnalytics
     #            <p>This feature only applies to messages that arrived in the data store after October 23, 2020. </p>
     #   @return [Time]
     class Channel < Struct.new(
+      nil,
       :name,
       :storage,
       :arn,
@@ -178,6 +185,7 @@ module Aws::IoTAnalytics
     #   <p>The next activity in the pipeline.</p>
     #   @return [String]
     class ChannelActivity < Struct.new(
+      nil,
       :name,
       :channel_name,
       :next,
@@ -196,6 +204,7 @@ module Aws::IoTAnalytics
     #            </p>
     #   @return [Array<String>]
     class ChannelMessages < Struct.new(
+      nil,
       :s3_paths,
       keyword_init: true
     )
@@ -207,6 +216,7 @@ module Aws::IoTAnalytics
     #   <p>The estimated size of the channel.</p>
     #   @return [Types::EstimatedResourceSize]
     class ChannelStatistics < Struct.new(
+      nil,
       :size,
       keyword_init: true
     )
@@ -226,6 +236,7 @@ module Aws::IoTAnalytics
     #         of S3 storage after the data store is created.</p>
     #   @return [Types::CustomerManagedChannelS3Storage]
     class ChannelStorage < Struct.new(
+      nil,
       :service_managed_s3,
       :customer_managed_s3,
       keyword_init: true
@@ -241,6 +252,7 @@ module Aws::IoTAnalytics
     #   <p>Used to store channel data in an S3 bucket that you manage.</p>
     #   @return [Types::CustomerManagedChannelS3StorageSummary]
     class ChannelStorageSummary < Struct.new(
+      nil,
       :service_managed_s3,
       :customer_managed_s3,
       keyword_init: true
@@ -270,6 +282,7 @@ module Aws::IoTAnalytics
     #            <p>This feature only applies to messages that arrived in the data store after October 23, 2020. </p>
     #   @return [Time]
     class ChannelSummary < Struct.new(
+      nil,
       :channel_name,
       :channel_storage,
       :status,
@@ -290,6 +303,7 @@ module Aws::IoTAnalytics
     #         in the <i>Glue Developer Guide</i>.</p>
     #   @return [String]
     class Column < Struct.new(
+      nil,
       :name,
       :type,
       keyword_init: true
@@ -318,6 +332,7 @@ module Aws::IoTAnalytics
     #         or <code>outputFileUriValue</code>.</p>
     #   @return [Array<Types::Variable>]
     class ContainerDatasetAction < Struct.new(
+      nil,
       :image,
       :execution_role_arn,
       :resource_configuration,
@@ -344,6 +359,7 @@ module Aws::IoTAnalytics
     #   <p>Metadata which can be used to manage the channel.</p>
     #   @return [Array<Types::Tag>]
     class CreateChannelRequest < Struct.new(
+      nil,
       :channel_name,
       :channel_storage,
       :retention_period,
@@ -363,6 +379,7 @@ module Aws::IoTAnalytics
     #   <p>How long, in days, message data is kept for the channel.</p>
     #   @return [Types::RetentionPeriod]
     class CreateChannelResponse < Struct.new(
+      nil,
       :channel_name,
       :channel_arn,
       :retention_period,
@@ -379,6 +396,7 @@ module Aws::IoTAnalytics
     #         content, the dataset must use a <a href="https://docs.aws.amazon.com/iotanalytics/latest/APIReference/API_DeltaTime.html">DeltaTimer</a> filter.</p>
     #   @return [String]
     class CreateDatasetContentRequest < Struct.new(
+      nil,
       :dataset_name,
       :version_id,
       keyword_init: true
@@ -390,6 +408,7 @@ module Aws::IoTAnalytics
     #   <p>The version ID of the dataset contents that are being created.</p>
     #   @return [String]
     class CreateDatasetContentResponse < Struct.new(
+      nil,
       :version_id,
       keyword_init: true
     )
@@ -433,6 +452,7 @@ module Aws::IoTAnalytics
     #   <p>A list of data rules that send notifications to CloudWatch, when data arrives late. To specify <code>lateDataRules</code>, the dataset must use a <a href="https://docs.aws.amazon.com/iotanalytics/latest/APIReference/API_DeltaTime.html">DeltaTimer</a> filter.</p>
     #   @return [Array<Types::LateDataRule>]
     class CreateDatasetRequest < Struct.new(
+      nil,
       :dataset_name,
       :actions,
       :triggers,
@@ -456,6 +476,7 @@ module Aws::IoTAnalytics
     #   <p>How long, in days, dataset contents are kept for the dataset.</p>
     #   @return [Types::RetentionPeriod]
     class CreateDatasetResponse < Struct.new(
+      nil,
       :dataset_name,
       :dataset_arn,
       :retention_period,
@@ -486,6 +507,7 @@ module Aws::IoTAnalytics
     #   <p> Contains information about the partition dimensions in a data store. </p>
     #   @return [Types::DatastorePartitions]
     class CreateDatastoreRequest < Struct.new(
+      nil,
       :datastore_name,
       :datastore_storage,
       :retention_period,
@@ -507,6 +529,7 @@ module Aws::IoTAnalytics
     #   <p>How long, in days, message data is kept for the data store.</p>
     #   @return [Types::RetentionPeriod]
     class CreateDatastoreResponse < Struct.new(
+      nil,
       :datastore_name,
       :datastore_arn,
       :retention_period,
@@ -535,6 +558,7 @@ module Aws::IoTAnalytics
     #   <p>Metadata which can be used to manage the pipeline.</p>
     #   @return [Array<Types::Tag>]
     class CreatePipelineRequest < Struct.new(
+      nil,
       :pipeline_name,
       :pipeline_activities,
       :tags,
@@ -550,6 +574,7 @@ module Aws::IoTAnalytics
     #   <p>The ARN of the pipeline.</p>
     #   @return [String]
     class CreatePipelineResponse < Struct.new(
+      nil,
       :pipeline_name,
       :pipeline_arn,
       keyword_init: true
@@ -573,6 +598,7 @@ module Aws::IoTAnalytics
     #         resources.</p>
     #   @return [String]
     class CustomerManagedChannelS3Storage < Struct.new(
+      nil,
       :bucket,
       :key_prefix,
       :role_arn,
@@ -595,6 +621,7 @@ module Aws::IoTAnalytics
     #         resources.</p>
     #   @return [String]
     class CustomerManagedChannelS3StorageSummary < Struct.new(
+      nil,
       :bucket,
       :key_prefix,
       :role_arn,
@@ -614,6 +641,7 @@ module Aws::IoTAnalytics
     #   <p>The ARN of the role that grants IoT Analytics permission to interact with your Amazon S3 resources.</p>
     #   @return [String]
     class CustomerManagedDatastoreS3Storage < Struct.new(
+      nil,
       :bucket,
       :key_prefix,
       :role_arn,
@@ -633,6 +661,7 @@ module Aws::IoTAnalytics
     #   <p>The ARN of the role that grants IoT Analytics permission to interact with your Amazon S3 resources.</p>
     #   @return [String]
     class CustomerManagedDatastoreS3StorageSummary < Struct.new(
+      nil,
       :bucket,
       :key_prefix,
       :role_arn,
@@ -684,6 +713,7 @@ module Aws::IoTAnalytics
     #   <p>A list of data rules that send notifications to CloudWatch, when data arrives late. To specify <code>lateDataRules</code>, the dataset must use a <a href="https://docs.aws.amazon.com/iotanalytics/latest/APIReference/API_DeltaTime.html">DeltaTimer</a> filter.</p>
     #   @return [Array<Types::LateDataRule>]
     class Dataset < Struct.new(
+      nil,
       :name,
       :arn,
       :actions,
@@ -715,6 +745,7 @@ module Aws::IoTAnalytics
     #         support libraries.</p>
     #   @return [Types::ContainerDatasetAction]
     class DatasetAction < Struct.new(
+      nil,
       :action_name,
       :query_action,
       :container_action,
@@ -731,6 +762,7 @@ module Aws::IoTAnalytics
     #   <p>The type of action by which the dataset's contents are automatically created.</p>
     #   @return [String]
     class DatasetActionSummary < Struct.new(
+      nil,
       :action_name,
       :action_type,
       keyword_init: true
@@ -746,6 +778,7 @@ module Aws::IoTAnalytics
     #   <p>Configuration information for delivery of dataset contents to Amazon S3.</p>
     #   @return [Types::S3DestinationConfiguration]
     class DatasetContentDeliveryDestination < Struct.new(
+      nil,
       :iot_events_destination_configuration,
       :s3_destination_configuration,
       keyword_init: true
@@ -762,6 +795,7 @@ module Aws::IoTAnalytics
     #   <p>The destination to which dataset contents are delivered.</p>
     #   @return [Types::DatasetContentDeliveryDestination]
     class DatasetContentDeliveryRule < Struct.new(
+      nil,
       :entry_name,
       :destination,
       keyword_init: true
@@ -778,6 +812,7 @@ module Aws::IoTAnalytics
     #   <p>The reason the dataset contents are in this state.</p>
     #   @return [String]
     class DatasetContentStatus < Struct.new(
+      nil,
       :state,
       :reason,
       keyword_init: true
@@ -802,6 +837,7 @@ module Aws::IoTAnalytics
     #   <p>The time the dataset content status was updated to SUCCEEDED or FAILED.</p>
     #   @return [Time]
     class DatasetContentSummary < Struct.new(
+      nil,
       :version,
       :status,
       :creation_time,
@@ -818,6 +854,7 @@ module Aws::IoTAnalytics
     #         application.</p>
     #   @return [String]
     class DatasetContentVersionValue < Struct.new(
+      nil,
       :dataset_name,
       keyword_init: true
     )
@@ -832,6 +869,7 @@ module Aws::IoTAnalytics
     #   <p>The presigned URI of the dataset item.</p>
     #   @return [String]
     class DatasetEntry < Struct.new(
+      nil,
       :entry_name,
       :data_uri,
       keyword_init: true
@@ -861,6 +899,7 @@ module Aws::IoTAnalytics
     #   <p>A list of <code>DataActionSummary</code> objects.</p>
     #   @return [Array<Types::DatasetActionSummary>]
     class DatasetSummary < Struct.new(
+      nil,
       :dataset_name,
       :status,
       :creation_time,
@@ -882,6 +921,7 @@ module Aws::IoTAnalytics
     #         contents.</p>
     #   @return [Types::TriggeringDataset]
     class DatasetTrigger < Struct.new(
+      nil,
       :schedule,
       :dataset,
       keyword_init: true
@@ -940,6 +980,7 @@ module Aws::IoTAnalytics
     #   <p> Contains information about the partition dimensions in a data store. </p>
     #   @return [Types::DatastorePartitions]
     class Datastore < Struct.new(
+      nil,
       :name,
       :storage,
       :arn,
@@ -963,6 +1004,7 @@ module Aws::IoTAnalytics
     #   <p>The name of the data store where processed messages are stored.</p>
     #   @return [String]
     class DatastoreActivity < Struct.new(
+      nil,
       :name,
       :datastore_name,
       keyword_init: true
@@ -975,6 +1017,7 @@ module Aws::IoTAnalytics
     #   <p> Used to store data used by IoT SiteWise in an Amazon S3 bucket that you manage. </p>
     #   @return [Types::IotSiteWiseCustomerManagedDatastoreS3Storage]
     class DatastoreIotSiteWiseMultiLayerStorage < Struct.new(
+      nil,
       :customer_managed_s3_storage,
       keyword_init: true
     )
@@ -986,6 +1029,7 @@ module Aws::IoTAnalytics
     #   <p>Used to store data used by IoT SiteWise in an Amazon S3 bucket that you manage.</p>
     #   @return [Types::IotSiteWiseCustomerManagedDatastoreS3StorageSummary]
     class DatastoreIotSiteWiseMultiLayerStorageSummary < Struct.new(
+      nil,
       :customer_managed_s3_storage,
       keyword_init: true
     )
@@ -1001,6 +1045,7 @@ module Aws::IoTAnalytics
     #   <p> A partition dimension defined by a timestamp attribute. </p>
     #   @return [Types::TimestampPartition]
     class DatastorePartition < Struct.new(
+      nil,
       :attribute_partition,
       :timestamp_partition,
       keyword_init: true
@@ -1013,6 +1058,7 @@ module Aws::IoTAnalytics
     #   <p> A list of partition dimensions in a data store. </p>
     #   @return [Array<Types::DatastorePartition>]
     class DatastorePartitions < Struct.new(
+      nil,
       :partitions,
       keyword_init: true
     )
@@ -1024,6 +1070,7 @@ module Aws::IoTAnalytics
     #   <p>The estimated size of the data store.</p>
     #   @return [Types::EstimatedResourceSize]
     class DatastoreStatistics < Struct.new(
+      nil,
       :size,
       keyword_init: true
     )
@@ -1066,6 +1113,7 @@ module Aws::IoTAnalytics
     #   <p> Used to store data used by IoT SiteWise in an Amazon S3 bucket that you manage. </p>
     #   @return [Types::DatastoreIotSiteWiseMultiLayerStorageSummary]
     class DatastoreStorageSummary < Struct.new(
+      nil,
       :service_managed_s3,
       :customer_managed_s3,
       :iot_site_wise_multi_layer_storage,
@@ -1102,6 +1150,7 @@ module Aws::IoTAnalytics
     #   <p> Contains information about the partition dimensions in a data store. </p>
     #   @return [Types::DatastorePartitions]
     class DatastoreSummary < Struct.new(
+      nil,
       :datastore_name,
       :datastore_storage,
       :status,
@@ -1119,6 +1168,7 @@ module Aws::IoTAnalytics
     #   <p>The name of the channel to delete.</p>
     #   @return [String]
     class DeleteChannelRequest < Struct.new(
+      nil,
       :channel_name,
       keyword_init: true
     )
@@ -1134,6 +1184,7 @@ module Aws::IoTAnalytics
     #         set. If not specified, "$LATEST_SUCCEEDED" is the default.</p>
     #   @return [String]
     class DeleteDatasetContentRequest < Struct.new(
+      nil,
       :dataset_name,
       :version_id,
       keyword_init: true
@@ -1145,6 +1196,7 @@ module Aws::IoTAnalytics
     #   <p>The name of the dataset to delete.</p>
     #   @return [String]
     class DeleteDatasetRequest < Struct.new(
+      nil,
       :dataset_name,
       keyword_init: true
     )
@@ -1155,6 +1207,7 @@ module Aws::IoTAnalytics
     #   <p>The name of the data store to delete.</p>
     #   @return [String]
     class DeleteDatastoreRequest < Struct.new(
+      nil,
       :datastore_name,
       keyword_init: true
     )
@@ -1165,6 +1218,7 @@ module Aws::IoTAnalytics
     #   <p>The name of the pipeline to delete.</p>
     #   @return [String]
     class DeletePipelineRequest < Struct.new(
+      nil,
       :pipeline_name,
       keyword_init: true
     )
@@ -1188,6 +1242,7 @@ module Aws::IoTAnalytics
     #         was generated.</p>
     #   @return [String]
     class DeltaTime < Struct.new(
+      nil,
       :offset_seconds,
       :time_expression,
       keyword_init: true
@@ -1213,6 +1268,7 @@ module Aws::IoTAnalytics
     #           Operators</a>, in the <i>Presto 0.172 Documentation</i>.</p>
     #   @return [Integer]
     class DeltaTimeSessionWindowConfiguration < Struct.new(
+      nil,
       :timeout_in_minutes,
       keyword_init: true
     )
@@ -1227,6 +1283,7 @@ module Aws::IoTAnalytics
     #         This feature can't be used with a channel whose S3 storage is customer-managed.</p>
     #   @return [Boolean]
     class DescribeChannelRequest < Struct.new(
+      nil,
       :channel_name,
       :include_statistics,
       keyword_init: true
@@ -1242,6 +1299,7 @@ module Aws::IoTAnalytics
     #         set to <code>true</code> in the request.</p>
     #   @return [Types::ChannelStatistics]
     class DescribeChannelResponse < Struct.new(
+      nil,
       :channel,
       :statistics,
       keyword_init: true
@@ -1253,6 +1311,7 @@ module Aws::IoTAnalytics
     #   <p>The name of the dataset whose information is retrieved.</p>
     #   @return [String]
     class DescribeDatasetRequest < Struct.new(
+      nil,
       :dataset_name,
       keyword_init: true
     )
@@ -1263,6 +1322,7 @@ module Aws::IoTAnalytics
     #   <p>An object that contains information about the dataset.</p>
     #   @return [Types::Dataset]
     class DescribeDatasetResponse < Struct.new(
+      nil,
       :dataset,
       keyword_init: true
     )
@@ -1278,6 +1338,7 @@ module Aws::IoTAnalytics
     #         customer-managed.</p>
     #   @return [Boolean]
     class DescribeDatastoreRequest < Struct.new(
+      nil,
       :datastore_name,
       :include_statistics,
       keyword_init: true
@@ -1293,6 +1354,7 @@ module Aws::IoTAnalytics
     #           <code>includeStatistics</code> parameter is set to <code>true</code> in the request.</p>
     #   @return [Types::DatastoreStatistics]
     class DescribeDatastoreResponse < Struct.new(
+      nil,
       :datastore,
       :statistics,
       keyword_init: true
@@ -1301,6 +1363,7 @@ module Aws::IoTAnalytics
     end
 
     class DescribeLoggingOptionsRequest < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1310,6 +1373,7 @@ module Aws::IoTAnalytics
     #   <p>The current settings of the IoT Analytics logging options.</p>
     #   @return [Types::LoggingOptions]
     class DescribeLoggingOptionsResponse < Struct.new(
+      nil,
       :logging_options,
       keyword_init: true
     )
@@ -1320,6 +1384,7 @@ module Aws::IoTAnalytics
     #   <p>The name of the pipeline whose information is retrieved.</p>
     #   @return [String]
     class DescribePipelineRequest < Struct.new(
+      nil,
       :pipeline_name,
       keyword_init: true
     )
@@ -1330,6 +1395,7 @@ module Aws::IoTAnalytics
     #   <p>A <code>Pipeline</code> object that contains information about the pipeline.</p>
     #   @return [Types::Pipeline]
     class DescribePipelineResponse < Struct.new(
+      nil,
       :pipeline,
       keyword_init: true
     )
@@ -1353,6 +1419,7 @@ module Aws::IoTAnalytics
     #   <p>The next activity in the pipeline.</p>
     #   @return [String]
     class DeviceRegistryEnrichActivity < Struct.new(
+      nil,
       :name,
       :attribute,
       :thing_name,
@@ -1381,6 +1448,7 @@ module Aws::IoTAnalytics
     #   <p>The next activity in the pipeline.</p>
     #   @return [String]
     class DeviceShadowEnrichActivity < Struct.new(
+      nil,
       :name,
       :attribute,
       :thing_name,
@@ -1399,6 +1467,7 @@ module Aws::IoTAnalytics
     #   <p>The time when the estimate of the size of the resource was made.</p>
     #   @return [Time]
     class EstimatedResourceSize < Struct.new(
+      nil,
       :estimated_size_in_bytes,
       :estimated_on,
       keyword_init: true
@@ -1416,6 +1485,7 @@ module Aws::IoTAnalytics
     #   <p>Contains the configuration information of the Parquet format.</p>
     #   @return [Types::ParquetConfiguration]
     class FileFormatConfiguration < Struct.new(
+      nil,
       :json_configuration,
       :parquet_configuration,
       keyword_init: true
@@ -1435,6 +1505,7 @@ module Aws::IoTAnalytics
     #   <p>The next activity in the pipeline.</p>
     #   @return [String]
     class FilterActivity < Struct.new(
+      nil,
       :name,
       :filter,
       :next,
@@ -1452,6 +1523,7 @@ module Aws::IoTAnalytics
     #         completed dataset. If not specified, "$LATEST_SUCCEEDED" is the default.</p>
     #   @return [String]
     class GetDatasetContentRequest < Struct.new(
+      nil,
       :dataset_name,
       :version_id,
       keyword_init: true
@@ -1469,6 +1541,7 @@ module Aws::IoTAnalytics
     #   <p>The status of the dataset content.</p>
     #   @return [Types::DatasetContentStatus]
     class GetDatasetContentResponse < Struct.new(
+      nil,
       :entries,
       :timestamp,
       :status,
@@ -1489,6 +1562,7 @@ module Aws::IoTAnalytics
     #         Glue Data Catalog database contains metadata tables.</p>
     #   @return [String]
     class GlueConfiguration < Struct.new(
+      nil,
       :table_name,
       :database_name,
       keyword_init: true
@@ -1500,6 +1574,7 @@ module Aws::IoTAnalytics
     # @!attribute message
     #   @return [String]
     class InternalFailureException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -1510,6 +1585,7 @@ module Aws::IoTAnalytics
     # @!attribute message
     #   @return [String]
     class InvalidRequestException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -1525,6 +1601,7 @@ module Aws::IoTAnalytics
     #         input.</p>
     #   @return [String]
     class IotEventsDestinationConfiguration < Struct.new(
+      nil,
       :input_name,
       :role_arn,
       keyword_init: true
@@ -1540,6 +1617,7 @@ module Aws::IoTAnalytics
     #   <p> (Optional) The prefix used to create the keys of the data store data objects. Each object in an Amazon S3 bucket has a key that is its unique identifier in the bucket. Each object in a bucket has exactly one key. The prefix must end with a forward slash (/). </p>
     #   @return [String]
     class IotSiteWiseCustomerManagedDatastoreS3Storage < Struct.new(
+      nil,
       :bucket,
       :key_prefix,
       keyword_init: true
@@ -1555,6 +1633,7 @@ module Aws::IoTAnalytics
     #   <p> (Optional) The prefix used to create the keys of the data store data objects. Each object in an Amazon S3 bucket has a key that is its unique identifier in the bucket. Each object in a bucket has exactly one key. The prefix must end with a forward slash (/). </p>
     #   @return [String]
     class IotSiteWiseCustomerManagedDatastoreS3StorageSummary < Struct.new(
+      nil,
       :bucket,
       :key_prefix,
       keyword_init: true
@@ -1564,6 +1643,7 @@ module Aws::IoTAnalytics
 
     # <p>Contains the configuration information of the JSON format.</p>
     class JsonConfiguration < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1585,6 +1665,7 @@ module Aws::IoTAnalytics
     #   <p>The next activity in the pipeline.</p>
     #   @return [String]
     class LambdaActivity < Struct.new(
+      nil,
       :name,
       :lambda_name,
       :batch_size,
@@ -1603,6 +1684,7 @@ module Aws::IoTAnalytics
     #   <p>The information needed to configure the late data rule.</p>
     #   @return [Types::LateDataRuleConfiguration]
     class LateDataRule < Struct.new(
+      nil,
       :rule_name,
       :rule_configuration,
       keyword_init: true
@@ -1615,6 +1697,7 @@ module Aws::IoTAnalytics
     #   <p>The information needed to configure a delta time session window.</p>
     #   @return [Types::DeltaTimeSessionWindowConfiguration]
     class LateDataRuleConfiguration < Struct.new(
+      nil,
       :delta_time_session_window_configuration,
       keyword_init: true
     )
@@ -1625,6 +1708,7 @@ module Aws::IoTAnalytics
     # @!attribute message
     #   @return [String]
     class LimitExceededException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -1639,6 +1723,7 @@ module Aws::IoTAnalytics
     #            <p>The default value is 100.</p>
     #   @return [Integer]
     class ListChannelsRequest < Struct.new(
+      nil,
       :next_token,
       :max_results,
       keyword_init: true
@@ -1654,6 +1739,7 @@ module Aws::IoTAnalytics
     #         results.</p>
     #   @return [String]
     class ListChannelsResponse < Struct.new(
+      nil,
       :channel_summaries,
       :next_token,
       keyword_init: true
@@ -1681,6 +1767,7 @@ module Aws::IoTAnalytics
     #         request. (timestamp)</p>
     #   @return [Time]
     class ListDatasetContentsRequest < Struct.new(
+      nil,
       :dataset_name,
       :next_token,
       :max_results,
@@ -1699,6 +1786,7 @@ module Aws::IoTAnalytics
     #         results.</p>
     #   @return [String]
     class ListDatasetContentsResponse < Struct.new(
+      nil,
       :dataset_content_summaries,
       :next_token,
       keyword_init: true
@@ -1714,6 +1802,7 @@ module Aws::IoTAnalytics
     #            <p>The default value is 100.</p>
     #   @return [Integer]
     class ListDatasetsRequest < Struct.new(
+      nil,
       :next_token,
       :max_results,
       keyword_init: true
@@ -1729,6 +1818,7 @@ module Aws::IoTAnalytics
     #         results.</p>
     #   @return [String]
     class ListDatasetsResponse < Struct.new(
+      nil,
       :dataset_summaries,
       :next_token,
       keyword_init: true
@@ -1744,6 +1834,7 @@ module Aws::IoTAnalytics
     #            <p>The default value is 100.</p>
     #   @return [Integer]
     class ListDatastoresRequest < Struct.new(
+      nil,
       :next_token,
       :max_results,
       keyword_init: true
@@ -1759,6 +1850,7 @@ module Aws::IoTAnalytics
     #         results.</p>
     #   @return [String]
     class ListDatastoresResponse < Struct.new(
+      nil,
       :datastore_summaries,
       :next_token,
       keyword_init: true
@@ -1774,6 +1866,7 @@ module Aws::IoTAnalytics
     #            <p>The default value is 100.</p>
     #   @return [Integer]
     class ListPipelinesRequest < Struct.new(
+      nil,
       :next_token,
       :max_results,
       keyword_init: true
@@ -1789,6 +1882,7 @@ module Aws::IoTAnalytics
     #         results.</p>
     #   @return [String]
     class ListPipelinesResponse < Struct.new(
+      nil,
       :pipeline_summaries,
       :next_token,
       keyword_init: true
@@ -1800,6 +1894,7 @@ module Aws::IoTAnalytics
     #   <p>The ARN of the resource whose tags you want to list.</p>
     #   @return [String]
     class ListTagsForResourceRequest < Struct.new(
+      nil,
       :resource_arn,
       keyword_init: true
     )
@@ -1810,6 +1905,7 @@ module Aws::IoTAnalytics
     #   <p>The tags (metadata) that you have assigned to the resource.</p>
     #   @return [Array<Types::Tag>]
     class ListTagsForResourceResponse < Struct.new(
+      nil,
       :tags,
       keyword_init: true
     )
@@ -1827,6 +1923,7 @@ module Aws::IoTAnalytics
     #   <p>If true, logging is enabled for IoT Analytics.</p>
     #   @return [Boolean]
     class LoggingOptions < Struct.new(
+      nil,
       :role_arn,
       :level,
       :enabled,
@@ -1855,6 +1952,7 @@ module Aws::IoTAnalytics
     #   <p>The next activity in the pipeline.</p>
     #   @return [String]
     class MathActivity < Struct.new(
+      nil,
       :name,
       :attribute,
       :math,
@@ -1875,6 +1973,7 @@ module Aws::IoTAnalytics
     #            activity.</p>
     #   @return [String]
     class Message < Struct.new(
+      nil,
       :message_id,
       :payload,
       keyword_init: true
@@ -1888,6 +1987,7 @@ module Aws::IoTAnalytics
     #         S3 bucket.</p>
     #   @return [String]
     class OutputFileUriValue < Struct.new(
+      nil,
       :file_name,
       keyword_init: true
     )
@@ -1899,6 +1999,7 @@ module Aws::IoTAnalytics
     #   <p>Information needed to define a schema.</p>
     #   @return [Types::SchemaDefinition]
     class ParquetConfiguration < Struct.new(
+      nil,
       :schema_definition,
       keyword_init: true
     )
@@ -1910,6 +2011,7 @@ module Aws::IoTAnalytics
     #   <p> The name of the attribute that defines a partition dimension. </p>
     #   @return [String]
     class Partition < Struct.new(
+      nil,
       :attribute_name,
       keyword_init: true
     )
@@ -1936,6 +2038,7 @@ module Aws::IoTAnalytics
     #   <p>The last time the pipeline was updated.</p>
     #   @return [Time]
     class Pipeline < Struct.new(
+      nil,
       :name,
       :arn,
       :activities,
@@ -1981,6 +2084,7 @@ module Aws::IoTAnalytics
     #   <p>Adds information from the IoT Device Shadow service to a message.</p>
     #   @return [Types::DeviceShadowEnrichActivity]
     class PipelineActivity < Struct.new(
+      nil,
       :channel,
       :lambda,
       :datastore,
@@ -2010,6 +2114,7 @@ module Aws::IoTAnalytics
     #   <p>When the pipeline was last updated.</p>
     #   @return [Time]
     class PipelineSummary < Struct.new(
+      nil,
       :pipeline_name,
       :reprocessing_summaries,
       :creation_time,
@@ -2023,6 +2128,7 @@ module Aws::IoTAnalytics
     #   <p>The new values of the IoT Analytics logging options.</p>
     #   @return [Types::LoggingOptions]
     class PutLoggingOptionsRequest < Struct.new(
+      nil,
       :logging_options,
       keyword_init: true
     )
@@ -2036,6 +2142,7 @@ module Aws::IoTAnalytics
     #         action.</p>
     #   @return [Types::DeltaTime]
     class QueryFilter < Struct.new(
+      nil,
       :delta_time,
       keyword_init: true
     )
@@ -2053,6 +2160,7 @@ module Aws::IoTAnalytics
     #   <p>The next activity in the pipeline.</p>
     #   @return [String]
     class RemoveAttributesActivity < Struct.new(
+      nil,
       :name,
       :attributes,
       :next,
@@ -2072,6 +2180,7 @@ module Aws::IoTAnalytics
     #   <p>The time the pipeline reprocessing was created.</p>
     #   @return [Time]
     class ReprocessingSummary < Struct.new(
+      nil,
       :id,
       :status,
       :creation_time,
@@ -2090,6 +2199,7 @@ module Aws::IoTAnalytics
     #   <p>The ARN of the resource.</p>
     #   @return [String]
     class ResourceAlreadyExistsException < Struct.new(
+      nil,
       :message,
       :resource_id,
       :resource_arn,
@@ -2109,6 +2219,7 @@ module Aws::IoTAnalytics
     #         execute the <code>containerAction</code> (min: 1, max: 50).</p>
     #   @return [Integer]
     class ResourceConfiguration < Struct.new(
+      nil,
       :compute_type,
       :volume_size_in_gb,
       keyword_init: true
@@ -2120,6 +2231,7 @@ module Aws::IoTAnalytics
     # @!attribute message
     #   @return [String]
     class ResourceNotFoundException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -2135,6 +2247,7 @@ module Aws::IoTAnalytics
     #         false.</p>
     #   @return [Integer]
     class RetentionPeriod < Struct.new(
+      nil,
       :unlimited,
       :number_of_days,
       keyword_init: true
@@ -2158,6 +2271,7 @@ module Aws::IoTAnalytics
     #   <p>The sample message payloads on which the pipeline activity is run.</p>
     #   @return [Array<String>]
     class RunPipelineActivityRequest < Struct.new(
+      nil,
       :pipeline_activity,
       :payloads,
       keyword_init: true
@@ -2174,6 +2288,7 @@ module Aws::IoTAnalytics
     #   <p>In case the pipeline activity fails, the log message that is generated.</p>
     #   @return [String]
     class RunPipelineActivityResponse < Struct.new(
+      nil,
       :payloads,
       :log_result,
       keyword_init: true
@@ -2222,6 +2337,7 @@ module Aws::IoTAnalytics
     #         resources.</p>
     #   @return [String]
     class S3DestinationConfiguration < Struct.new(
+      nil,
       :bucket,
       :key,
       :glue_configuration,
@@ -2245,6 +2361,7 @@ module Aws::IoTAnalytics
     #   <p>The end of the time window from which sample messages are retrieved.</p>
     #   @return [Time]
     class SampleChannelDataRequest < Struct.new(
+      nil,
       :channel_name,
       :max_messages,
       :start_time,
@@ -2259,6 +2376,7 @@ module Aws::IoTAnalytics
     #         string.</p>
     #   @return [Array<String>]
     class SampleChannelDataResponse < Struct.new(
+      nil,
       :payloads,
       keyword_init: true
     )
@@ -2272,6 +2390,7 @@ module Aws::IoTAnalytics
     #           Guide</i>.</p>
     #   @return [String]
     class Schedule < Struct.new(
+      nil,
       :expression,
       keyword_init: true
     )
@@ -2285,6 +2404,7 @@ module Aws::IoTAnalytics
     #         types.</p>
     #   @return [Array<Types::Column>]
     class SchemaDefinition < Struct.new(
+      nil,
       :columns,
       keyword_init: true
     )
@@ -2303,6 +2423,7 @@ module Aws::IoTAnalytics
     #   <p>The next activity in the pipeline.</p>
     #   @return [String]
     class SelectAttributesActivity < Struct.new(
+      nil,
       :name,
       :attributes,
       :next,
@@ -2314,6 +2435,7 @@ module Aws::IoTAnalytics
     # <p>Used to store channel data in an S3 bucket managed by IoT Analytics. You can't change the choice
     #       of S3 storage after the data store is created.</p>
     class ServiceManagedChannelS3Storage < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -2321,6 +2443,7 @@ module Aws::IoTAnalytics
 
     # <p>Used to store channel data in an S3 bucket managed by IoT Analytics.</p>
     class ServiceManagedChannelS3StorageSummary < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -2328,6 +2451,7 @@ module Aws::IoTAnalytics
 
     # <p>Used to store data in an Amazon S3 bucket managed by IoT Analytics. You can't change the choice of Amazon S3 storage after your data store is created.  </p>
     class ServiceManagedDatastoreS3Storage < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -2335,6 +2459,7 @@ module Aws::IoTAnalytics
 
     # <p>Contains information about the data store that is managed by IoT Analytics.</p>
     class ServiceManagedDatastoreS3StorageSummary < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -2344,6 +2469,7 @@ module Aws::IoTAnalytics
     # @!attribute message
     #   @return [String]
     class ServiceUnavailableException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -2358,6 +2484,7 @@ module Aws::IoTAnalytics
     #   <p>Prefilters applied to message data.</p>
     #   @return [Array<Types::QueryFilter>]
     class SqlQueryDatasetAction < Struct.new(
+      nil,
       :sql_query,
       :filters,
       keyword_init: true
@@ -2384,6 +2511,7 @@ module Aws::IoTAnalytics
     #           <code>startTime</code> and <code>endTime</code>.</p>
     #   @return [Types::ChannelMessages]
     class StartPipelineReprocessingRequest < Struct.new(
+      nil,
       :pipeline_name,
       :start_time,
       :end_time,
@@ -2397,6 +2525,7 @@ module Aws::IoTAnalytics
     #   <p>The ID of the pipeline reprocessing activity that was started.</p>
     #   @return [String]
     class StartPipelineReprocessingResponse < Struct.new(
+      nil,
       :reprocessing_id,
       keyword_init: true
     )
@@ -2411,6 +2540,7 @@ module Aws::IoTAnalytics
     #   <p>The tag's value.</p>
     #   @return [String]
     class Tag < Struct.new(
+      nil,
       :key,
       :value,
       keyword_init: true
@@ -2425,6 +2555,7 @@ module Aws::IoTAnalytics
     #   <p>The new or modified tags for the resource.</p>
     #   @return [Array<Types::Tag>]
     class TagResourceRequest < Struct.new(
+      nil,
       :resource_arn,
       :tags,
       keyword_init: true
@@ -2433,6 +2564,7 @@ module Aws::IoTAnalytics
     end
 
     class TagResourceResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -2442,6 +2574,7 @@ module Aws::IoTAnalytics
     # @!attribute message
     #   @return [String]
     class ThrottlingException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -2457,6 +2590,7 @@ module Aws::IoTAnalytics
     #         since epoch (January 1, 1970 at midnight UTC time). </p>
     #   @return [String]
     class TimestampPartition < Struct.new(
+      nil,
       :attribute_name,
       :timestamp_format,
       keyword_init: true
@@ -2471,6 +2605,7 @@ module Aws::IoTAnalytics
     #         generation.</p>
     #   @return [String]
     class TriggeringDataset < Struct.new(
+      nil,
       :name,
       keyword_init: true
     )
@@ -2484,6 +2619,7 @@ module Aws::IoTAnalytics
     #   <p>The keys of those tags which you want to remove.</p>
     #   @return [Array<String>]
     class UntagResourceRequest < Struct.new(
+      nil,
       :resource_arn,
       :tag_keys,
       keyword_init: true
@@ -2492,6 +2628,7 @@ module Aws::IoTAnalytics
     end
 
     class UntagResourceResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -2511,6 +2648,7 @@ module Aws::IoTAnalytics
     #         updated if the channel's Amazon S3 storage is customer-managed.</p>
     #   @return [Types::RetentionPeriod]
     class UpdateChannelRequest < Struct.new(
+      nil,
       :channel_name,
       :channel_storage,
       :retention_period,
@@ -2547,6 +2685,7 @@ module Aws::IoTAnalytics
     #   <p>A list of data rules that send notifications to CloudWatch, when data arrives late. To specify <code>lateDataRules</code>, the dataset must use a <a href="https://docs.aws.amazon.com/iotanalytics/latest/APIReference/API_DeltaTime.html">DeltaTimer</a> filter.</p>
     #   @return [Array<Types::LateDataRule>]
     class UpdateDatasetRequest < Struct.new(
+      nil,
       :dataset_name,
       :actions,
       :triggers,
@@ -2575,6 +2714,7 @@ module Aws::IoTAnalytics
     #            <p>You can't change the file format after you create the data store.</p>
     #   @return [Types::FileFormatConfiguration]
     class UpdateDatastoreRequest < Struct.new(
+      nil,
       :datastore_name,
       :retention_period,
       :datastore_storage,
@@ -2601,6 +2741,7 @@ module Aws::IoTAnalytics
     #            </p>
     #   @return [Array<Types::PipelineActivity>]
     class UpdatePipelineRequest < Struct.new(
+      nil,
       :pipeline_name,
       :pipeline_activities,
       keyword_init: true
@@ -2627,6 +2768,7 @@ module Aws::IoTAnalytics
     #   <p>The value of the variable as a structure that specifies an output file URI.</p>
     #   @return [Types::OutputFileUriValue]
     class Variable < Struct.new(
+      nil,
       :name,
       :string_value,
       :double_value,
@@ -2651,6 +2793,7 @@ module Aws::IoTAnalytics
     #         be <code>false</code>.</p>
     #   @return [Integer]
     class VersioningConfiguration < Struct.new(
+      nil,
       :unlimited,
       :max_versions,
       keyword_init: true

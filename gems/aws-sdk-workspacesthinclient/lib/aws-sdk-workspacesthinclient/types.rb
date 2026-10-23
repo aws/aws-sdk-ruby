@@ -10,6 +10,7 @@ module Aws::WorkSpacesThinClient
     # @!attribute message
     #   @return [String]
     class AccessDeniedException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -26,6 +27,7 @@ module Aws::WorkSpacesThinClient
     #   <p>The type of the resource associated with the request.</p>
     #   @return [String]
     class ConflictException < Struct.new(
+      nil,
       :message,
       :resource_id,
       :resource_type,
@@ -68,6 +70,7 @@ module Aws::WorkSpacesThinClient
     #   <p>A map of the key-value pairs of the tag or tags to assign to the newly created devices for this environment.</p>
     #   @return [Hash<String, String>]
     class CreateEnvironmentRequest < Struct.new(
+      nil,
       :name,
       :desktop_arn,
       :desktop_endpoint,
@@ -88,6 +91,7 @@ module Aws::WorkSpacesThinClient
     #   <p>Describes an environment.</p>
     #   @return [Types::EnvironmentSummary]
     class CreateEnvironmentResponse < Struct.new(
+      nil,
       :environment,
       keyword_init: true
     )
@@ -101,6 +105,7 @@ module Aws::WorkSpacesThinClient
     #   <p>Specifies a unique, case-sensitive identifier that you provide to ensure the idempotency of the request. This lets you safely retry the request without accidentally performing the same operation a second time. Passing the same value to a later call to an operation requires that you also pass the same value for all other parameters. We recommend that you use a <a href="https://wikipedia.org/wiki/Universally_unique_identifier">UUID type of value</a>.</p> <p>If you don't provide this value, then Amazon Web Services generates a random one for you.</p> <p>If you retry the operation with the same <code>ClientToken</code>, but with different parameters, the retry fails with an <code>IdempotentParameterMismatch</code> error.</p>
     #   @return [String]
     class DeleteDeviceRequest < Struct.new(
+      nil,
       :id,
       :client_token,
       keyword_init: true
@@ -109,6 +114,7 @@ module Aws::WorkSpacesThinClient
     end
 
     class DeleteDeviceResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -121,6 +127,7 @@ module Aws::WorkSpacesThinClient
     #   <p>Specifies a unique, case-sensitive identifier that you provide to ensure the idempotency of the request. This lets you safely retry the request without accidentally performing the same operation a second time. Passing the same value to a later call to an operation requires that you also pass the same value for all other parameters. We recommend that you use a <a href="https://wikipedia.org/wiki/Universally_unique_identifier">UUID type of value</a>.</p> <p>If you don't provide this value, then Amazon Web Services generates a random one for you.</p> <p>If you retry the operation with the same <code>ClientToken</code>, but with different parameters, the retry fails with an <code>IdempotentParameterMismatch</code> error.</p>
     #   @return [String]
     class DeleteEnvironmentRequest < Struct.new(
+      nil,
       :id,
       :client_token,
       keyword_init: true
@@ -129,6 +136,7 @@ module Aws::WorkSpacesThinClient
     end
 
     class DeleteEnvironmentResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -144,6 +152,7 @@ module Aws::WorkSpacesThinClient
     #   <p>Specifies a unique, case-sensitive identifier that you provide to ensure the idempotency of the request. This lets you safely retry the request without accidentally performing the same operation a second time. Passing the same value to a later call to an operation requires that you also pass the same value for all other parameters. We recommend that you use a <a href="https://wikipedia.org/wiki/Universally_unique_identifier">UUID type of value</a>.</p> <p>If you don't provide this value, then Amazon Web Services generates a random one for you.</p> <p>If you retry the operation with the same <code>ClientToken</code>, but with different parameters, the retry fails with an <code>IdempotentParameterMismatch</code> error.</p>
     #   @return [String]
     class DeregisterDeviceRequest < Struct.new(
+      nil,
       :id,
       :target_device_status,
       :client_token,
@@ -153,6 +162,7 @@ module Aws::WorkSpacesThinClient
     end
 
     class DeregisterDeviceResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -223,6 +233,7 @@ module Aws::WorkSpacesThinClient
     #   <p>The user ID of the most recent session on the device.</p>
     #   @return [String]
     class Device < Struct.new(
+      nil,
       :id,
       :serial_number,
       :name,
@@ -299,6 +310,7 @@ module Aws::WorkSpacesThinClient
     #   <p>The user ID of the most recent session on the device.</p>
     #   @return [String]
     class DeviceSummary < Struct.new(
+      nil,
       :id,
       :serial_number,
       :name,
@@ -379,6 +391,7 @@ module Aws::WorkSpacesThinClient
     #   <p>The tag keys and optional values for the newly created devices for this environment.</p>
     #   @return [Hash<String, String>]
     class Environment < Struct.new(
+      nil,
       :id,
       :name,
       :desktop_arn,
@@ -447,6 +460,7 @@ module Aws::WorkSpacesThinClient
     #   <p>The Amazon Resource Name (ARN) of the environment.</p>
     #   @return [String]
     class EnvironmentSummary < Struct.new(
+      nil,
       :id,
       :name,
       :desktop_arn,
@@ -470,6 +484,7 @@ module Aws::WorkSpacesThinClient
     #   <p>The ID of the device for which to return information.</p>
     #   @return [String]
     class GetDeviceRequest < Struct.new(
+      nil,
       :id,
       keyword_init: true
     )
@@ -480,6 +495,7 @@ module Aws::WorkSpacesThinClient
     #   <p>Describes an device.</p>
     #   @return [Types::Device]
     class GetDeviceResponse < Struct.new(
+      nil,
       :device,
       keyword_init: true
     )
@@ -490,6 +506,7 @@ module Aws::WorkSpacesThinClient
     #   <p>The ID of the environment for which to return information.</p>
     #   @return [String]
     class GetEnvironmentRequest < Struct.new(
+      nil,
       :id,
       keyword_init: true
     )
@@ -500,6 +517,7 @@ module Aws::WorkSpacesThinClient
     #   <p>Describes an environment.</p>
     #   @return [Types::Environment]
     class GetEnvironmentResponse < Struct.new(
+      nil,
       :environment,
       keyword_init: true
     )
@@ -510,6 +528,7 @@ module Aws::WorkSpacesThinClient
     #   <p>The ID of the software set for which to return information.</p>
     #   @return [String]
     class GetSoftwareSetRequest < Struct.new(
+      nil,
       :id,
       keyword_init: true
     )
@@ -520,6 +539,7 @@ module Aws::WorkSpacesThinClient
     #   <p>Describes a software set.</p>
     #   @return [Types::SoftwareSet]
     class GetSoftwareSetResponse < Struct.new(
+      nil,
       :software_set,
       keyword_init: true
     )
@@ -533,6 +553,7 @@ module Aws::WorkSpacesThinClient
     #   <p>The number of seconds to wait before retrying the next request.</p>
     #   @return [Integer]
     class InternalServerException < Struct.new(
+      nil,
       :message,
       :retry_after_seconds,
       keyword_init: true
@@ -547,6 +568,7 @@ module Aws::WorkSpacesThinClient
     #   <p>The maximum number of results that are returned per call. You can use <code>nextToken</code> to obtain further pages of results.</p> <p>This is only an upper limit. The actual number of results returned per call might be fewer than the specified maximum.</p>
     #   @return [Integer]
     class ListDevicesRequest < Struct.new(
+      nil,
       :next_token,
       :max_results,
       keyword_init: true
@@ -561,6 +583,7 @@ module Aws::WorkSpacesThinClient
     #   <p>If <code>nextToken</code> is returned, there are more results available. The value of <code>nextToken</code> is a unique pagination token for each page. Make the call again using the returned token to retrieve the next page. Keep all other arguments unchanged. Each pagination token expires after 24 hours. Using an expired pagination token will return an <i>HTTP 400 InvalidToken error</i>.</p>
     #   @return [String]
     class ListDevicesResponse < Struct.new(
+      nil,
       :devices,
       :next_token,
       keyword_init: true
@@ -575,6 +598,7 @@ module Aws::WorkSpacesThinClient
     #   <p>The maximum number of results that are returned per call. You can use <code>nextToken</code> to obtain further pages of results.</p> <p>This is only an upper limit. The actual number of results returned per call might be fewer than the specified maximum.</p>
     #   @return [Integer]
     class ListEnvironmentsRequest < Struct.new(
+      nil,
       :next_token,
       :max_results,
       keyword_init: true
@@ -589,6 +613,7 @@ module Aws::WorkSpacesThinClient
     #   <p>If <code>nextToken</code> is returned, there are more results available. The value of <code>nextToken</code> is a unique pagination token for each page. Make the call again using the returned token to retrieve the next page. Keep all other arguments unchanged. Each pagination token expires after 24 hours. Using an expired pagination token will return an <i>HTTP 400 InvalidToken error</i>.</p>
     #   @return [String]
     class ListEnvironmentsResponse < Struct.new(
+      nil,
       :environments,
       :next_token,
       keyword_init: true
@@ -603,6 +628,7 @@ module Aws::WorkSpacesThinClient
     #   <p>The maximum number of results that are returned per call. You can use <code>nextToken</code> to obtain further pages of results.</p> <p>This is only an upper limit. The actual number of results returned per call might be fewer than the specified maximum.</p>
     #   @return [Integer]
     class ListSoftwareSetsRequest < Struct.new(
+      nil,
       :next_token,
       :max_results,
       keyword_init: true
@@ -617,6 +643,7 @@ module Aws::WorkSpacesThinClient
     #   <p>If <code>nextToken</code> is returned, there are more results available. The value of <code>nextToken</code> is a unique pagination token for each page. Make the call again using the returned token to retrieve the next page. Keep all other arguments unchanged. Each pagination token expires after 24 hours. Using an expired pagination token will return an <i>HTTP 400 InvalidToken error</i>.</p>
     #   @return [String]
     class ListSoftwareSetsResponse < Struct.new(
+      nil,
       :software_sets,
       :next_token,
       keyword_init: true
@@ -628,6 +655,7 @@ module Aws::WorkSpacesThinClient
     #   <p>The Amazon Resource Name (ARN) of the resource for which you want to retrieve tags.</p>
     #   @return [String]
     class ListTagsForResourceRequest < Struct.new(
+      nil,
       :resource_arn,
       keyword_init: true
     )
@@ -638,6 +666,7 @@ module Aws::WorkSpacesThinClient
     #   <p>A map of the key-value pairs for the tag or tags assigned to the specified resource.</p>
     #   @return [Hash<String, String>]
     class ListTagsForResourceResponse < Struct.new(
+      nil,
       :tags,
       keyword_init: true
     )
@@ -667,6 +696,7 @@ module Aws::WorkSpacesThinClient
     #   <p>The option to set the maintenance window during the device local time or Universal Coordinated Time (UTC).</p>
     #   @return [String]
     class MaintenanceWindow < Struct.new(
+      nil,
       :type,
       :start_time_hour,
       :start_time_minute,
@@ -689,6 +719,7 @@ module Aws::WorkSpacesThinClient
     #   <p>The type of the resource associated with the request.</p>
     #   @return [String]
     class ResourceNotFoundException < Struct.new(
+      nil,
       :message,
       :resource_id,
       :resource_type,
@@ -713,6 +744,7 @@ module Aws::WorkSpacesThinClient
     #   <p>The code for the quota in <a href="https://docs.aws.amazon.com/servicequotas/latest/userguide/intro.html">Service Quotas</a>.</p>
     #   @return [String]
     class ServiceQuotaExceededException < Struct.new(
+      nil,
       :message,
       :resource_id,
       :resource_type,
@@ -731,6 +763,7 @@ module Aws::WorkSpacesThinClient
     #   <p>The version of the software component.</p>
     #   @return [String]
     class Software < Struct.new(
+      nil,
       :name,
       :version,
       keyword_init: true
@@ -761,6 +794,7 @@ module Aws::WorkSpacesThinClient
     #   <p>The Amazon Resource Name (ARN) of the software set.</p>
     #   @return [String]
     class SoftwareSet < Struct.new(
+      nil,
       :id,
       :version,
       :released_at,
@@ -793,6 +827,7 @@ module Aws::WorkSpacesThinClient
     #   <p>The Amazon Resource Name (ARN) of the software set.</p>
     #   @return [String]
     class SoftwareSetSummary < Struct.new(
+      nil,
       :id,
       :version,
       :released_at,
@@ -811,6 +846,7 @@ module Aws::WorkSpacesThinClient
     #   <p>A map of the key-value pairs of the tag or tags to assign to the resource.</p>
     #   @return [Hash<String, String>]
     class TagResourceRequest < Struct.new(
+      nil,
       :resource_arn,
       :tags,
       keyword_init: true
@@ -819,6 +855,7 @@ module Aws::WorkSpacesThinClient
     end
 
     class TagResourceResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -837,6 +874,7 @@ module Aws::WorkSpacesThinClient
     #   <p>The number of seconds to wait before retrying the next request.</p>
     #   @return [Integer]
     class ThrottlingException < Struct.new(
+      nil,
       :message,
       :service_code,
       :quota_code,
@@ -853,6 +891,7 @@ module Aws::WorkSpacesThinClient
     #   <p>The keys of the key-value pairs for the tag or tags you want to remove from the specified resource.</p>
     #   @return [Array<String>]
     class UntagResourceRequest < Struct.new(
+      nil,
       :resource_arn,
       :tag_keys,
       keyword_init: true
@@ -861,6 +900,7 @@ module Aws::WorkSpacesThinClient
     end
 
     class UntagResourceResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -879,6 +919,7 @@ module Aws::WorkSpacesThinClient
     #   <p>An option to define if software updates should be applied within a maintenance window.</p>
     #   @return [String]
     class UpdateDeviceRequest < Struct.new(
+      nil,
       :id,
       :name,
       :desired_software_set_id,
@@ -892,6 +933,7 @@ module Aws::WorkSpacesThinClient
     #   <p>Describes a device.</p>
     #   @return [Types::DeviceSummary]
     class UpdateDeviceResponse < Struct.new(
+      nil,
       :device,
       keyword_init: true
     )
@@ -926,6 +968,7 @@ module Aws::WorkSpacesThinClient
     #   <p>A map of the key-value pairs of the tag or tags to assign to the newly created devices for this environment.</p>
     #   @return [Hash<String, String>]
     class UpdateEnvironmentRequest < Struct.new(
+      nil,
       :id,
       :name,
       :desktop_arn,
@@ -944,6 +987,7 @@ module Aws::WorkSpacesThinClient
     #   <p>Describes an environment.</p>
     #   @return [Types::EnvironmentSummary]
     class UpdateEnvironmentResponse < Struct.new(
+      nil,
       :environment,
       keyword_init: true
     )
@@ -957,6 +1001,7 @@ module Aws::WorkSpacesThinClient
     #   <p>An option to define if the software set has been validated.</p>
     #   @return [String]
     class UpdateSoftwareSetRequest < Struct.new(
+      nil,
       :id,
       :validation_status,
       keyword_init: true
@@ -965,6 +1010,7 @@ module Aws::WorkSpacesThinClient
     end
 
     class UpdateSoftwareSetResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -980,6 +1026,7 @@ module Aws::WorkSpacesThinClient
     #   <p>A list of fields that didn't validate.</p>
     #   @return [Array<Types::ValidationExceptionField>]
     class ValidationException < Struct.new(
+      nil,
       :message,
       :reason,
       :field_list,
@@ -996,6 +1043,7 @@ module Aws::WorkSpacesThinClient
     #   <p>A message that describes the reason for the exception.</p>
     #   @return [String]
     class ValidationExceptionField < Struct.new(
+      nil,
       :name,
       :message,
       keyword_init: true

@@ -17,6 +17,7 @@ module Aws::DataZone
     #   <p>The edit of the prediction.</p>
     #   @return [String]
     class AcceptChoice < Struct.new(
+      nil,
       :prediction_target,
       :prediction_choice,
       :edited_value,
@@ -44,6 +45,7 @@ module Aws::DataZone
     #   <p>A unique, case-sensitive identifier to ensure idempotency of the request. This field is automatically populated if not provided.</p>
     #   @return [String]
     class AcceptPredictionsInput < Struct.new(
+      nil,
       :domain_identifier,
       :identifier,
       :revision,
@@ -65,6 +67,7 @@ module Aws::DataZone
     #   <p>The revision that is to be made to the asset.</p>
     #   @return [String]
     class AcceptPredictionsOutput < Struct.new(
+      nil,
       :domain_id,
       :asset_id,
       :revision,
@@ -81,6 +84,7 @@ module Aws::DataZone
     #   <p>The confidence score that specifies the condition at which a prediction can be accepted.</p>
     #   @return [Float]
     class AcceptRule < Struct.new(
+      nil,
       :rule,
       :threshold,
       keyword_init: true
@@ -101,6 +105,7 @@ module Aws::DataZone
     #   <p>The asset scopes of the accept subscription request.</p>
     #   @return [Array<Types::AcceptedAssetScope>]
     class AcceptSubscriptionRequestInput < Struct.new(
+      nil,
       :domain_identifier,
       :identifier,
       :decision_comment,
@@ -153,6 +158,7 @@ module Aws::DataZone
     #   <p>The metadata form in the subscription request.</p>
     #   @return [Array<Types::FormOutput>]
     class AcceptSubscriptionRequestOutput < Struct.new(
+      nil,
       :id,
       :created_by,
       :updated_by,
@@ -180,6 +186,7 @@ module Aws::DataZone
     #   <p>The filter IDs of the accepted asset scope.</p>
     #   @return [Array<String>]
     class AcceptedAssetScope < Struct.new(
+      nil,
       :asset_id,
       :filter_ids,
       keyword_init: true
@@ -191,6 +198,7 @@ module Aws::DataZone
     # @!attribute message
     #   @return [String]
     class AccessDeniedException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -208,6 +216,7 @@ module Aws::DataZone
     #   <p>The account name.</p>
     #   @return [String]
     class AccountInfo < Struct.new(
+      nil,
       :aws_account_id,
       :supported_regions,
       :aws_account_name,
@@ -239,6 +248,7 @@ module Aws::DataZone
     #   <p>The user who updated the account pool.</p>
     #   @return [String]
     class AccountPoolSummary < Struct.new(
+      nil,
       :domain_id,
       :id,
       :name,
@@ -302,6 +312,7 @@ module Aws::DataZone
     #   <p>A unique, case-sensitive identifier that is provided to ensure the idempotency of the request.</p>
     #   @return [String]
     class AddEntityOwnerInput < Struct.new(
+      nil,
       :domain_identifier,
       :entity_type,
       :entity_identifier,
@@ -313,6 +324,7 @@ module Aws::DataZone
     end
 
     class AddEntityOwnerOutput < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -340,6 +352,7 @@ module Aws::DataZone
     #   <p>A unique, case-sensitive identifier that is provided to ensure the idempotency of the request.</p>
     #   @return [String]
     class AddPolicyGrantInput < Struct.new(
+      nil,
       :domain_identifier,
       :entity_type,
       :entity_identifier,
@@ -356,6 +369,7 @@ module Aws::DataZone
     #   <p>The ID of the policy grant that was added to a specified entity.</p>
     #   @return [String]
     class AddPolicyGrantOutput < Struct.new(
+      nil,
       :grant_id,
       keyword_init: true
     )
@@ -367,6 +381,7 @@ module Aws::DataZone
     #   <p>Specifies whether the policy grant is applied to child domain units.</p>
     #   @return [Boolean]
     class AddToProjectMemberPoolPolicyGrantDetail < Struct.new(
+      nil,
       :include_child_domain_units,
       keyword_init: true
     )
@@ -381,6 +396,7 @@ module Aws::DataZone
     #   <p>The display value of the aggregation list item. Supported values include <code>value</code> and <code>glossaryTerm.name</code>.</p>
     #   @return [String]
     class AggregationListItem < Struct.new(
+      nil,
       :attribute,
       :display_value,
       keyword_init: true
@@ -399,6 +415,7 @@ module Aws::DataZone
     #   <p>A list of aggregation output items.</p>
     #   @return [Array<Types::AggregationOutputItem>]
     class AggregationOutput < Struct.new(
+      nil,
       :attribute,
       :display_value,
       :items,
@@ -418,6 +435,7 @@ module Aws::DataZone
     #   <p>The display value of the aggregation. If the attribute being aggregated corresponds to the id of a public resource, the service automatically resolves the id to the provided display value.</p>
     #   @return [String]
     class AggregationOutputItem < Struct.new(
+      nil,
       :value,
       :count,
       :display_value,
@@ -428,6 +446,7 @@ module Aws::DataZone
 
     # <p>The grant filter for all domain units.</p>
     class AllDomainUnitsGrantFilter < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -435,6 +454,7 @@ module Aws::DataZone
 
     # <p>The all users grant filter.</p>
     class AllUsersGrantFilter < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -492,6 +512,7 @@ module Aws::DataZone
     #   <p>The error message that is displayed if the action does not succeed.</p>
     #   @return [String]
     class AssetFilterSummary < Struct.new(
+      nil,
       :id,
       :domain_id,
       :asset_id,
@@ -518,6 +539,7 @@ module Aws::DataZone
     #   <p>The entity type of the listing of the asset in a data product.</p>
     #   @return [String]
     class AssetInDataProductListingItem < Struct.new(
+      nil,
       :entity_id,
       :entity_revision,
       :entity_type,
@@ -573,6 +595,7 @@ module Aws::DataZone
     #   <p>The restricted glossary terms accociated with an asset.</p>
     #   @return [Array<String>]
     class AssetItem < Struct.new(
+      nil,
       :domain_id,
       :identifier,
       :name,
@@ -607,6 +630,7 @@ module Aws::DataZone
     #   <p>List of rationales indicating why this item was matched by search.</p>
     #   @return [Array<Types::MatchRationaleItem>]
     class AssetItemAdditionalAttributes < Struct.new(
+      nil,
       :forms_output,
       :read_only_forms_output,
       :latest_time_series_data_point_forms_output,
@@ -645,6 +669,7 @@ module Aws::DataZone
     #   <p>The identifier of the project where an asset published in an Amazon DataZone catalog exists. </p>
     #   @return [String]
     class AssetListing < Struct.new(
+      nil,
       :asset_id,
       :asset_revision,
       :asset_type,
@@ -667,6 +692,7 @@ module Aws::DataZone
     #   <p>The status of an asset published in an Amazon DataZone catalog. </p>
     #   @return [String]
     class AssetListingDetails < Struct.new(
+      nil,
       :listing_id,
       :listing_status,
       keyword_init: true
@@ -718,6 +744,7 @@ module Aws::DataZone
     #   <p>The additional attributes of an asset published in an Amazon DataZone catalog.</p>
     #   @return [Types::AssetListingItemAdditionalAttributes]
     class AssetListingItem < Struct.new(
+      nil,
       :listing_id,
       :listing_revision,
       :name,
@@ -748,6 +775,7 @@ module Aws::DataZone
     #   <p>The latest time series data points forms included in the additional attributes of an asset.</p>
     #   @return [Array<Types::TimeSeriesDataPointSummaryFormOutput>]
     class AssetListingItemAdditionalAttributes < Struct.new(
+      nil,
       :forms,
       :match_rationale,
       :latest_time_series_data_point_forms,
@@ -773,6 +801,7 @@ module Aws::DataZone
     #   <p>The timestamp of when an inventory asset revison was created.</p>
     #   @return [Time]
     class AssetRevision < Struct.new(
+      nil,
       :domain_id,
       :id,
       :revision,
@@ -797,6 +826,7 @@ module Aws::DataZone
     #   <p>The error message of the asset scope.</p>
     #   @return [String]
     class AssetScope < Struct.new(
+      nil,
       :asset_id,
       :filter_ids,
       :status,
@@ -814,6 +844,7 @@ module Aws::DataZone
     #   <p>The target name in the asset target name map.</p>
     #   @return [String]
     class AssetTargetNameMap < Struct.new(
+      nil,
       :asset_id,
       :target_name,
       keyword_init: true
@@ -859,6 +890,7 @@ module Aws::DataZone
     #   <p>The Amazon DataZone user who updated the asset type.</p>
     #   @return [String]
     class AssetTypeItem < Struct.new(
+      nil,
       :domain_id,
       :name,
       :revision,
@@ -884,6 +916,7 @@ module Aws::DataZone
     #   <p>The specific asset types that are included in the rule.</p>
     #   @return [Array<String>]
     class AssetTypesForRule < Struct.new(
+      nil,
       :selection_mode,
       :specific_asset_types,
       keyword_init: true
@@ -901,6 +934,7 @@ module Aws::DataZone
     #   <p>The ARN of the environment role.</p>
     #   @return [String]
     class AssociateEnvironmentRoleInput < Struct.new(
+      nil,
       :domain_identifier,
       :environment_identifier,
       :environment_role_arn,
@@ -910,6 +944,7 @@ module Aws::DataZone
     end
 
     class AssociateEnvironmentRoleOutput < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -928,6 +963,7 @@ module Aws::DataZone
     #   <p>The glossary terms in a restricted glossary.</p>
     #   @return [Array<String>]
     class AssociateGovernedTermsInput < Struct.new(
+      nil,
       :domain_identifier,
       :entity_identifier,
       :entity_type,
@@ -938,6 +974,7 @@ module Aws::DataZone
     end
 
     class AssociateGovernedTermsOutput < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -948,6 +985,7 @@ module Aws::DataZone
     #   <p>The Amazon Athena workgroup name of a connection.</p>
     #   @return [String]
     class AthenaPropertiesInput < Struct.new(
+      nil,
       :workgroup_name,
       keyword_init: true
     )
@@ -959,6 +997,7 @@ module Aws::DataZone
     #   <p>The Amazon Athena workgroup name of a connection.</p>
     #   @return [String]
     class AthenaPropertiesOutput < Struct.new(
+      nil,
       :workgroup_name,
       keyword_init: true
     )
@@ -970,6 +1009,7 @@ module Aws::DataZone
     #   <p>The Amazon Athena workgroup name of a connection.</p>
     #   @return [String]
     class AthenaPropertiesPatch < Struct.new(
+      nil,
       :workgroup_name,
       keyword_init: true
     )
@@ -987,6 +1027,7 @@ module Aws::DataZone
     #   <p>The oAuth2 properties of a connection.</p>
     #   @return [Types::OAuth2Properties]
     class AuthenticationConfiguration < Struct.new(
+      nil,
       :authentication_type,
       :secret_arn,
       :o_auth2_properties,
@@ -1015,6 +1056,7 @@ module Aws::DataZone
     #   <p>The custom authentication credentials of a connection.</p>
     #   @return [Hash<String, String>]
     class AuthenticationConfigurationInput < Struct.new(
+      nil,
       :authentication_type,
       :o_auth2_properties,
       :secret_arn,
@@ -1034,6 +1076,7 @@ module Aws::DataZone
     #   <p>The basic authentication credentials of a connection.</p>
     #   @return [Types::BasicAuthenticationCredentials]
     class AuthenticationConfigurationPatch < Struct.new(
+      nil,
       :secret_arn,
       :basic_authentication_credentials,
       keyword_init: true
@@ -1049,6 +1092,7 @@ module Aws::DataZone
     #   <p>The redirect URI of a connection.</p>
     #   @return [String]
     class AuthorizationCodeProperties < Struct.new(
+      nil,
       :authorization_code,
       :redirect_uri,
       keyword_init: true
@@ -1081,6 +1125,7 @@ module Aws::DataZone
     #   <p>The URI of the console link specified as part of the environment action.</p>
     #   @return [String]
     class AwsConsoleLinkParameters < Struct.new(
+      nil,
       :uri,
       keyword_init: true
     )
@@ -1101,6 +1146,7 @@ module Aws::DataZone
     #   <p>The IAM connection ID of a connection.</p>
     #   @return [String]
     class AwsLocation < Struct.new(
+      nil,
       :access_role,
       :aws_account_id,
       :aws_region,
@@ -1119,6 +1165,7 @@ module Aws::DataZone
     #   <p>The password for a connection.</p>
     #   @return [String]
     class BasicAuthenticationCredentials < Struct.new(
+      nil,
       :user_name,
       :password,
       keyword_init: true
@@ -1131,6 +1178,7 @@ module Aws::DataZone
     #   <p>Specifies whether the business name generation is enabled.</p>
     #   @return [Boolean]
     class BusinessNameGenerationConfiguration < Struct.new(
+      nil,
       :enabled,
       keyword_init: true
     )
@@ -1144,6 +1192,7 @@ module Aws::DataZone
     #   <p>The ID of the metadata generation run.</p>
     #   @return [String]
     class CancelMetadataGenerationRunInput < Struct.new(
+      nil,
       :domain_identifier,
       :identifier,
       keyword_init: true
@@ -1152,6 +1201,7 @@ module Aws::DataZone
     end
 
     class CancelMetadataGenerationRunOutput < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1164,6 +1214,7 @@ module Aws::DataZone
     #   <p>The unique identifier of the subscription that is being cancelled.</p>
     #   @return [String]
     class CancelSubscriptionInput < Struct.new(
+      nil,
       :domain_identifier,
       :identifier,
       keyword_init: true
@@ -1205,6 +1256,7 @@ module Aws::DataZone
     #   <p>Specifies whether the permissions to the asset are retained after the subscription is cancelled.</p>
     #   @return [Boolean]
     class CancelSubscriptionOutput < Struct.new(
+      nil,
       :id,
       :created_by,
       :updated_by,
@@ -1226,6 +1278,7 @@ module Aws::DataZone
     #   <p>The template URL of the cloud formation provisioning properties of the environment blueprint.</p>
     #   @return [String]
     class CloudFormationProperties < Struct.new(
+      nil,
       :template_url,
       keyword_init: true
     )
@@ -1237,6 +1290,7 @@ module Aws::DataZone
     #   <p>Specifies whether to include column names.</p>
     #   @return [Array<String>]
     class ColumnFilterConfiguration < Struct.new(
+      nil,
       :included_column_names,
       keyword_init: true
     )
@@ -1251,6 +1305,7 @@ module Aws::DataZone
     #   <p>The value of the configurable action parameter.</p>
     #   @return [String]
     class ConfigurableActionParameter < Struct.new(
+      nil,
       :key,
       :value,
       keyword_init: true
@@ -1269,6 +1324,7 @@ module Aws::DataZone
     #   <p>The parameters of a configurable action in a Amazon DataZone environment.</p>
     #   @return [Array<Types::ConfigurableActionParameter>]
     class ConfigurableEnvironmentAction < Struct.new(
+      nil,
       :type,
       :auth,
       :parameters,
@@ -1281,6 +1337,7 @@ module Aws::DataZone
     # @!attribute message
     #   @return [String]
     class ConflictException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -1302,6 +1359,7 @@ module Aws::DataZone
     #   <p>The expiration of the connection credentials.</p>
     #   @return [Time]
     class ConnectionCredentials < Struct.new(
+      nil,
       :access_key_id,
       :secret_access_key,
       :session_token,
@@ -1480,6 +1538,7 @@ module Aws::DataZone
     #   <p>The connection type.</p>
     #   @return [String]
     class ConnectionSummary < Struct.new(
+      nil,
       :connection_id,
       :domain_id,
       :domain_unit_id,
@@ -1510,6 +1569,7 @@ module Aws::DataZone
     #   <p>The source of accounts for the account pool. In the current release, it's either a static list of accounts provided by the customer or a custom Amazon Web Services Lambda handler. </p>
     #   @return [Types::AccountSource]
     class CreateAccountPoolInput < Struct.new(
+      nil,
       :domain_identifier,
       :name,
       :description,
@@ -1554,6 +1614,7 @@ module Aws::DataZone
     #   <p>The ID of the domain where the account pool is created.</p>
     #   @return [String]
     class CreateAccountPoolOutput < Struct.new(
+      nil,
       :domain_id,
       :name,
       :id,
@@ -1589,6 +1650,7 @@ module Aws::DataZone
     #   <p>A unique, case-sensitive identifier that is provided to ensure the idempotency of the request.</p>
     #   @return [String]
     class CreateAssetFilterInput < Struct.new(
+      nil,
       :domain_identifier,
       :asset_identifier,
       :name,
@@ -1634,6 +1696,7 @@ module Aws::DataZone
     #   <p>The row filter in the asset filter.</p>
     #   @return [String]
     class CreateAssetFilterOutput < Struct.new(
+      nil,
       :id,
       :domain_id,
       :asset_id,
@@ -1684,6 +1747,7 @@ module Aws::DataZone
     #   <p>A unique, case-sensitive identifier that is provided to ensure the idempotency of the request.</p>
     #   @return [String]
     class CreateAssetInput < Struct.new(
+      nil,
       :name,
       :domain_identifier,
       :external_identifier,
@@ -1761,6 +1825,7 @@ module Aws::DataZone
     #   <p>The configuration of the automatically generated business-friendly metadata for the asset.</p>
     #   @return [Types::PredictionConfiguration]
     class CreateAssetOutput < Struct.new(
+      nil,
       :id,
       :name,
       :type_identifier,
@@ -1814,6 +1879,7 @@ module Aws::DataZone
     #   <p>A unique, case-sensitive identifier that is provided to ensure the idempotency of the request.</p>
     #   @return [String]
     class CreateAssetRevisionInput < Struct.new(
+      nil,
       :name,
       :domain_identifier,
       :identifier,
@@ -1889,6 +1955,7 @@ module Aws::DataZone
     #   <p>The configuration of the automatically generated business-friendly metadata for the asset.</p>
     #   @return [Types::PredictionConfiguration]
     class CreateAssetRevisionOutput < Struct.new(
+      nil,
       :id,
       :name,
       :type_identifier,
@@ -1930,6 +1997,7 @@ module Aws::DataZone
     #   <p>The identifier of the Amazon DataZone project that is to own the custom asset type.</p>
     #   @return [String]
     class CreateAssetTypeInput < Struct.new(
+      nil,
       :domain_identifier,
       :name,
       :description,
@@ -1977,6 +2045,7 @@ module Aws::DataZone
     #   <p>The Amazon DataZone user that created the custom asset type.</p>
     #   @return [String]
     class CreateAssetTypeOutput < Struct.new(
+      nil,
       :domain_id,
       :name,
       :revision,
@@ -1999,6 +2068,7 @@ module Aws::DataZone
     #   <p>Specifies whether the policy grant is applied to child domain units.</p>
     #   @return [Boolean]
     class CreateAssetTypePolicyGrantDetail < Struct.new(
+      nil,
       :include_child_domain_units,
       keyword_init: true
     )
@@ -2027,6 +2097,7 @@ module Aws::DataZone
     #   <p>The connection props.</p>
     #   @return [Types::ConnectionPropertiesInput]
     class CreateConnectionInput < Struct.new(
+      nil,
       :aws_location,
       :client_token,
       :description,
@@ -2070,6 +2141,7 @@ module Aws::DataZone
     #   <p>The connection type.</p>
     #   @return [String]
     class CreateConnectionOutput < Struct.new(
+      nil,
       :connection_id,
       :description,
       :domain_id,
@@ -2110,6 +2182,7 @@ module Aws::DataZone
     #   <p>A unique, case-sensitive identifier that is provided to ensure the idempotency of the request.</p>
     #   @return [String]
     class CreateDataProductInput < Struct.new(
+      nil,
       :domain_identifier,
       :name,
       :owning_project_identifier,
@@ -2166,6 +2239,7 @@ module Aws::DataZone
     #   <p>The user who created the first revision of the data product.</p>
     #   @return [String]
     class CreateDataProductOutput < Struct.new(
+      nil,
       :domain_id,
       :id,
       :revision,
@@ -2215,6 +2289,7 @@ module Aws::DataZone
     #   <p>A unique, case-sensitive identifier that is provided to ensure the idempotency of the request.</p>
     #   @return [String]
     class CreateDataProductRevisionInput < Struct.new(
+      nil,
       :domain_identifier,
       :identifier,
       :name,
@@ -2271,6 +2346,7 @@ module Aws::DataZone
     #   <p>The user who created the first revision of the data product.</p>
     #   @return [String]
     class CreateDataProductRevisionOutput < Struct.new(
+      nil,
       :domain_id,
       :id,
       :revision,
@@ -2338,6 +2414,7 @@ module Aws::DataZone
     #   <p>A unique, case-sensitive identifier that is provided to ensure the idempotency of the request.</p>
     #   @return [String]
     class CreateDataSourceInput < Struct.new(
+      nil,
       :name,
       :description,
       :domain_identifier,
@@ -2421,6 +2498,7 @@ module Aws::DataZone
     #   <p>The timestamp of when the data source was updated.</p>
     #   @return [Time]
     class CreateDataSourceOutput < Struct.new(
+      nil,
       :id,
       :status,
       :type,
@@ -2475,6 +2553,7 @@ module Aws::DataZone
     #   <p>A unique, case-sensitive identifier that is provided to ensure the idempotency of the request.</p>
     #   @return [String]
     class CreateDomainInput < Struct.new(
+      nil,
       :name,
       :description,
       :single_sign_on,
@@ -2529,6 +2608,7 @@ module Aws::DataZone
     #   <p>Te service role of the domain that is created.</p>
     #   @return [String]
     class CreateDomainOutput < Struct.new(
+      nil,
       :id,
       :root_domain_unit_id,
       :name,
@@ -2563,6 +2643,7 @@ module Aws::DataZone
     #   <p>A unique, case-sensitive identifier that is provided to ensure the idempotency of the request.</p>
     #   @return [String]
     class CreateDomainUnitInput < Struct.new(
+      nil,
       :domain_identifier,
       :name,
       :parent_domain_unit_identifier,
@@ -2601,6 +2682,7 @@ module Aws::DataZone
     #   <p>The user who created the domain unit.</p>
     #   @return [String]
     class CreateDomainUnitOutput < Struct.new(
+      nil,
       :id,
       :domain_id,
       :name,
@@ -2620,6 +2702,7 @@ module Aws::DataZone
     #   <p>Specifies whether the policy grant is applied to child domain units.</p>
     #   @return [Boolean]
     class CreateDomainUnitPolicyGrantDetail < Struct.new(
+      nil,
       :include_child_domain_units,
       keyword_init: true
     )
@@ -2642,6 +2725,7 @@ module Aws::DataZone
     #   <p>The description of the environment action that is being created in the environment.</p>
     #   @return [String]
     class CreateEnvironmentActionInput < Struct.new(
+      nil,
       :domain_identifier,
       :environment_identifier,
       :name,
@@ -2671,6 +2755,7 @@ module Aws::DataZone
     #   <p>The description of the environment action.</p>
     #   @return [String]
     class CreateEnvironmentActionOutput < Struct.new(
+      nil,
       :domain_id,
       :environment_id,
       :id,
@@ -2698,6 +2783,7 @@ module Aws::DataZone
     #   <p>The user parameters of this Amazon DataZone blueprint.</p>
     #   @return [Array<Types::CustomParameter>]
     class CreateEnvironmentBlueprintInput < Struct.new(
+      nil,
       :domain_identifier,
       :name,
       :description,
@@ -2739,6 +2825,7 @@ module Aws::DataZone
     #   <p>The timestamp of when this blueprint was updated.</p>
     #   @return [Time]
     class CreateEnvironmentBlueprintOutput < Struct.new(
+      nil,
       :id,
       :name,
       :description,
@@ -2791,6 +2878,7 @@ module Aws::DataZone
     #   <p>The configuration ID of the environment.</p>
     #   @return [String]
     class CreateEnvironmentInput < Struct.new(
+      nil,
       :project_identifier,
       :domain_identifier,
       :description,
@@ -2875,6 +2963,7 @@ module Aws::DataZone
     #   <p>The configuration ID of the environment.</p>
     #   @return [String]
     class CreateEnvironmentOutput < Struct.new(
+      nil,
       :project_id,
       :id,
       :domain_id,
@@ -2932,6 +3021,7 @@ module Aws::DataZone
     #   <p>The Amazon Web Services region in which this environment profile is created.</p>
     #   @return [String]
     class CreateEnvironmentProfileInput < Struct.new(
+      nil,
       :domain_identifier,
       :name,
       :description,
@@ -2982,6 +3072,7 @@ module Aws::DataZone
     #   <p>The user parameters of this Amazon DataZone environment profile.</p>
     #   @return [Array<Types::CustomParameter>]
     class CreateEnvironmentProfileOutput < Struct.new(
+      nil,
       :id,
       :domain_id,
       :aws_account_id,
@@ -3004,6 +3095,7 @@ module Aws::DataZone
     #   <p>The ID of the domain unit.</p>
     #   @return [String]
     class CreateEnvironmentProfilePolicyGrantDetail < Struct.new(
+      nil,
       :domain_unit_id,
       keyword_init: true
     )
@@ -3029,6 +3121,7 @@ module Aws::DataZone
     #   <p>The description of this Amazon DataZone metadata form type.</p>
     #   @return [String]
     class CreateFormTypeInput < Struct.new(
+      nil,
       :domain_identifier,
       :name,
       :model,
@@ -3062,6 +3155,7 @@ module Aws::DataZone
     #   <p>The ID of the project in which this Amazon DataZone metadata form type was originally created.</p>
     #   @return [String]
     class CreateFormTypeOutput < Struct.new(
+      nil,
       :domain_id,
       :name,
       :revision,
@@ -3079,6 +3173,7 @@ module Aws::DataZone
     #   <p>Specifies whether the policy grant is applied to child domain units.</p>
     #   @return [Boolean]
     class CreateFormTypePolicyGrantDetail < Struct.new(
+      nil,
       :include_child_domain_units,
       keyword_init: true
     )
@@ -3107,6 +3202,7 @@ module Aws::DataZone
     #   <p>A unique, case-sensitive identifier that is provided to ensure the idempotency of the request.</p>
     #   @return [String]
     class CreateGlossaryInput < Struct.new(
+      nil,
       :domain_identifier,
       :name,
       :owning_project_identifier,
@@ -3141,6 +3237,7 @@ module Aws::DataZone
     #   <p>The usage restriction of the restricted glossary.</p>
     #   @return [Array<String>]
     class CreateGlossaryOutput < Struct.new(
+      nil,
       :domain_id,
       :id,
       :name,
@@ -3158,6 +3255,7 @@ module Aws::DataZone
     #   <p>Specifies whether the policy grant is applied to child domain units.</p>
     #   @return [Boolean]
     class CreateGlossaryPolicyGrantDetail < Struct.new(
+      nil,
       :include_child_domain_units,
       keyword_init: true
     )
@@ -3189,6 +3287,7 @@ module Aws::DataZone
     #   <p>A unique, case-sensitive identifier that is provided to ensure the idempotency of the request.</p>
     #   @return [String]
     class CreateGlossaryTermInput < Struct.new(
+      nil,
       :domain_identifier,
       :glossary_identifier,
       :name,
@@ -3230,6 +3329,7 @@ module Aws::DataZone
     #   <p>The usage restriction of the restricted glossary.</p>
     #   @return [Array<String>]
     class CreateGlossaryTermOutput < Struct.new(
+      nil,
       :id,
       :domain_id,
       :glossary_id,
@@ -3254,6 +3354,7 @@ module Aws::DataZone
     #   <p> A unique, case-sensitive identifier that is provided to ensure the idempotency of the request.</p>
     #   @return [String]
     class CreateGroupProfileInput < Struct.new(
+      nil,
       :domain_identifier,
       :group_identifier,
       :client_token,
@@ -3275,6 +3376,7 @@ module Aws::DataZone
     #   <p>The name of the group for which group profile is created.</p>
     #   @return [String]
     class CreateGroupProfileOutput < Struct.new(
+      nil,
       :domain_id,
       :id,
       :status,
@@ -3303,6 +3405,7 @@ module Aws::DataZone
     #   <p>A unique, case-sensitive identifier that is provided to ensure the idempotency of the request.</p>
     #   @return [String]
     class CreateListingChangeSetInput < Struct.new(
+      nil,
       :domain_identifier,
       :entity_identifier,
       :entity_type,
@@ -3324,6 +3427,7 @@ module Aws::DataZone
     #   <p>Specifies the status of the listing.</p>
     #   @return [String]
     class CreateListingChangeSetOutput < Struct.new(
+      nil,
       :listing_id,
       :listing_revision,
       :status,
@@ -3340,6 +3444,7 @@ module Aws::DataZone
     #   <p>Specifies project profiles when creating a project from project profile policy grant details</p>
     #   @return [Array<String>]
     class CreateProjectFromProjectProfilePolicyGrantDetail < Struct.new(
+      nil,
       :include_child_domain_units,
       :project_profiles,
       keyword_init: true
@@ -3369,6 +3474,7 @@ module Aws::DataZone
     #   <p>The user parameters of the project.</p>
     #   @return [Array<Types::EnvironmentConfigurationUserParameter>]
     class CreateProjectInput < Struct.new(
+      nil,
       :domain_identifier,
       :name,
       :description,
@@ -3394,6 +3500,7 @@ module Aws::DataZone
     #   <p>The designation of the project membership.</p>
     #   @return [String]
     class CreateProjectMembershipInput < Struct.new(
+      nil,
       :domain_identifier,
       :project_identifier,
       :member,
@@ -3404,6 +3511,7 @@ module Aws::DataZone
     end
 
     class CreateProjectMembershipOutput < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -3452,6 +3560,7 @@ module Aws::DataZone
     #   <p>The environment deployment details.</p>
     #   @return [Types::EnvironmentDeploymentDetails]
     class CreateProjectOutput < Struct.new(
+      nil,
       :domain_id,
       :id,
       :name,
@@ -3476,6 +3585,7 @@ module Aws::DataZone
     #   <p>Specifies whether the policy grant is applied to child domain units.</p>
     #   @return [Boolean]
     class CreateProjectPolicyGrantDetail < Struct.new(
+      nil,
       :include_child_domain_units,
       keyword_init: true
     )
@@ -3501,6 +3611,7 @@ module Aws::DataZone
     #   <p>A domain unit ID of the project profile.</p>
     #   @return [String]
     class CreateProjectProfileInput < Struct.new(
+      nil,
       :domain_identifier,
       :name,
       :description,
@@ -3543,6 +3654,7 @@ module Aws::DataZone
     #   <p>The ID of the domain unit where a project profile is created.</p>
     #   @return [String]
     class CreateProjectProfileOutput < Struct.new(
+      nil,
       :domain_id,
       :id,
       :name,
@@ -3583,6 +3695,7 @@ module Aws::DataZone
     #   <p>A unique, case-sensitive identifier that is provided to ensure the idempotency of the request.</p>
     #   @return [String]
     class CreateRuleInput < Struct.new(
+      nil,
       :domain_identifier,
       :name,
       :target,
@@ -3630,6 +3743,7 @@ module Aws::DataZone
     #   <p>The user who creates the rule.</p>
     #   @return [String]
     class CreateRuleOutput < Struct.new(
+      nil,
       :identifier,
       :name,
       :rule_type,
@@ -3665,6 +3779,7 @@ module Aws::DataZone
     #   <p>A unique, case-sensitive identifier that is provided to ensure the idempotency of the request.</p>
     #   @return [String]
     class CreateSubscriptionGrantInput < Struct.new(
+      nil,
       :domain_identifier,
       :environment_identifier,
       :subscription_target_identifier,
@@ -3712,6 +3827,7 @@ module Aws::DataZone
     #     Multiple subscriptions can exist for a single grant
     #   @return [String]
     class CreateSubscriptionGrantOutput < Struct.new(
+      nil,
       :id,
       :created_by,
       :updated_by,
@@ -3747,6 +3863,7 @@ module Aws::DataZone
     #   <p>The metadata form included in the subscription request.</p>
     #   @return [Array<Types::FormInput>]
     class CreateSubscriptionRequestInput < Struct.new(
+      nil,
       :domain_identifier,
       :subscribed_principals,
       :subscribed_listings,
@@ -3801,6 +3918,7 @@ module Aws::DataZone
     #   <p>The metadata form included in the subscription request.</p>
     #   @return [Array<Types::FormOutput>]
     class CreateSubscriptionRequestOutput < Struct.new(
+      nil,
       :id,
       :created_by,
       :updated_by,
@@ -3851,6 +3969,7 @@ module Aws::DataZone
     #   <p>A unique, case-sensitive identifier that is provided to ensure the idempotency of the request.</p>
     #   @return [String]
     class CreateSubscriptionTargetInput < Struct.new(
+      nil,
       :domain_identifier,
       :environment_identifier,
       :name,
@@ -3912,6 +4031,7 @@ module Aws::DataZone
     #   <p>The provider of the subscription target.</p>
     #   @return [String]
     class CreateSubscriptionTargetOutput < Struct.new(
+      nil,
       :id,
       :authorized_principals,
       :domain_id,
@@ -3945,6 +4065,7 @@ module Aws::DataZone
     #   <p>A unique, case-sensitive identifier that is provided to ensure the idempotency of the request.</p>
     #   @return [String]
     class CreateUserProfileInput < Struct.new(
+      nil,
       :domain_identifier,
       :user_identifier,
       :user_type,
@@ -3970,6 +4091,7 @@ module Aws::DataZone
     #   <p>The details of the user profile in Amazon DataZone.</p>
     #   @return [Types::UserProfileDetails]
     class CreateUserProfileOutput < Struct.new(
+      nil,
       :domain_id,
       :id,
       :type,
@@ -3988,6 +4110,7 @@ module Aws::DataZone
     #   <p>The ARN of the IAM role that enables Amazon SageMaker Unified Studio to invoke the Amazon Web Services Lambda funtion if the account source is the custom account pool handler.</p>
     #   @return [String]
     class CustomAccountPoolHandler < Struct.new(
+      nil,
       :lambda_function_arn,
       :lambda_execution_role_arn,
       keyword_init: true
@@ -4018,6 +4141,7 @@ module Aws::DataZone
     #   <p>Specifies whether a parameter value can be updated after creation. </p>
     #   @return [Boolean]
     class CustomParameter < Struct.new(
+      nil,
       :key_name,
       :description,
       :field_type,
@@ -4044,6 +4168,7 @@ module Aws::DataZone
     #   <p>The glossary terms of the data product.</p>
     #   @return [Array<String>]
     class DataProductItem < Struct.new(
+      nil,
       :item_type,
       :identifier,
       :revision,
@@ -4058,6 +4183,7 @@ module Aws::DataZone
     #   <p>List of rationales indicating why this item was matched by search.</p>
     #   @return [Array<Types::MatchRationaleItem>]
     class DataProductItemAdditionalAttributes < Struct.new(
+      nil,
       :match_rationale,
       keyword_init: true
     )
@@ -4087,6 +4213,7 @@ module Aws::DataZone
     #   <p>The data assets of the data product listing.</p>
     #   @return [Array<Types::ListingSummary>]
     class DataProductListing < Struct.new(
+      nil,
       :data_product_id,
       :data_product_revision,
       :created_at,
@@ -4140,6 +4267,7 @@ module Aws::DataZone
     #   <p>The data of the asset of the data product. </p>
     #   @return [Array<Types::ListingSummaryItem>]
     class DataProductListingItem < Struct.new(
+      nil,
       :listing_id,
       :listing_revision,
       :name,
@@ -4166,6 +4294,7 @@ module Aws::DataZone
     #   <p>List of rationales indicating why this item was matched by search.</p>
     #   @return [Array<Types::MatchRationaleItem>]
     class DataProductListingItemAdditionalAttributes < Struct.new(
+      nil,
       :forms,
       :match_rationale,
       keyword_init: true
@@ -4208,6 +4337,7 @@ module Aws::DataZone
     #   <p>The additional attributes of an Amazon DataZone data product.</p>
     #   @return [Types::DataProductItemAdditionalAttributes]
     class DataProductResultItem < Struct.new(
+      nil,
       :domain_id,
       :id,
       :name,
@@ -4241,6 +4371,7 @@ module Aws::DataZone
     #   <p>The user who created the data product revision.</p>
     #   @return [String]
     class DataProductRevision < Struct.new(
+      nil,
       :domain_id,
       :id,
       :revision,
@@ -4309,6 +4440,7 @@ module Aws::DataZone
     #   <p>The details of the error message that is returned if the operation cannot be successfully completed.</p>
     #   @return [String]
     class DataSourceErrorMessage < Struct.new(
+      nil,
       :error_type,
       :error_detail,
       keyword_init: true
@@ -4351,6 +4483,7 @@ module Aws::DataZone
     #   <p>The timestamp of when data source run activity was updated.</p>
     #   @return [Time]
     class DataSourceRunActivity < Struct.new(
+      nil,
       :database,
       :data_source_run_id,
       :technical_name,
@@ -4372,6 +4505,7 @@ module Aws::DataZone
     #   <p>The import status that's part of the run lineage summary of a data source.</p>
     #   @return [String]
     class DataSourceRunLineageSummary < Struct.new(
+      nil,
       :import_status,
       keyword_init: true
     )
@@ -4416,6 +4550,7 @@ module Aws::DataZone
     #   <p>The run lineage summary of a data source.</p>
     #   @return [Types::DataSourceRunLineageSummary]
     class DataSourceRunSummary < Struct.new(
+      nil,
       :id,
       :data_source_id,
       :type,
@@ -4483,6 +4618,7 @@ module Aws::DataZone
     #   <p>The data source description.</p>
     #   @return [String]
     class DataSourceSummary < Struct.new(
+      nil,
       :domain_id,
       :environment_id,
       :connection_id,
@@ -4511,6 +4647,7 @@ module Aws::DataZone
     #   <p>The ID of the account pool to be deleted.</p>
     #   @return [String]
     class DeleteAccountPoolInput < Struct.new(
+      nil,
       :domain_identifier,
       :identifier,
       keyword_init: true
@@ -4519,6 +4656,7 @@ module Aws::DataZone
     end
 
     class DeleteAccountPoolOutput < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -4534,6 +4672,7 @@ module Aws::DataZone
     #   <p>The ID of the asset filter that you want to delete.</p>
     #   @return [String]
     class DeleteAssetFilterInput < Struct.new(
+      nil,
       :domain_identifier,
       :asset_identifier,
       :identifier,
@@ -4549,6 +4688,7 @@ module Aws::DataZone
     #   <p>The identifier of the asset that is deleted.</p>
     #   @return [String]
     class DeleteAssetInput < Struct.new(
+      nil,
       :domain_identifier,
       :identifier,
       keyword_init: true
@@ -4557,6 +4697,7 @@ module Aws::DataZone
     end
 
     class DeleteAssetOutput < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -4569,6 +4710,7 @@ module Aws::DataZone
     #   <p>The identifier of the asset type that is deleted.</p>
     #   @return [String]
     class DeleteAssetTypeInput < Struct.new(
+      nil,
       :domain_identifier,
       :identifier,
       keyword_init: true
@@ -4577,6 +4719,7 @@ module Aws::DataZone
     end
 
     class DeleteAssetTypeOutput < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -4589,6 +4732,7 @@ module Aws::DataZone
     #   <p>The ID of the connection that is deleted.</p>
     #   @return [String]
     class DeleteConnectionInput < Struct.new(
+      nil,
       :domain_identifier,
       :identifier,
       keyword_init: true
@@ -4600,6 +4744,7 @@ module Aws::DataZone
     #   <p>The status of the action.</p>
     #   @return [String]
     class DeleteConnectionOutput < Struct.new(
+      nil,
       :status,
       keyword_init: true
     )
@@ -4613,6 +4758,7 @@ module Aws::DataZone
     #   <p>The identifier of the data product that is deleted.</p>
     #   @return [String]
     class DeleteDataProductInput < Struct.new(
+      nil,
       :domain_identifier,
       :identifier,
       keyword_init: true
@@ -4621,6 +4767,7 @@ module Aws::DataZone
     end
 
     class DeleteDataProductOutput < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -4642,6 +4789,7 @@ module Aws::DataZone
     #   <p>Specifies that the granted permissions are retained in case of a self-subscribe functionality failure for a data source.</p>
     #   @return [Boolean]
     class DeleteDataSourceInput < Struct.new(
+      nil,
       :domain_identifier,
       :identifier,
       :client_token,
@@ -4718,6 +4866,7 @@ module Aws::DataZone
     #   <p>Specifies that the granted permissions are retained in case of a self-subscribe functionality failure for a data source.</p>
     #   @return [Boolean]
     class DeleteDataSourceOutput < Struct.new(
+      nil,
       :id,
       :status,
       :type,
@@ -4755,6 +4904,7 @@ module Aws::DataZone
     #   <p>Specifies the optional flag to delete all child entities within the domain.</p>
     #   @return [Boolean]
     class DeleteDomainInput < Struct.new(
+      nil,
       :identifier,
       :client_token,
       :skip_deletion_check,
@@ -4767,6 +4917,7 @@ module Aws::DataZone
     #   <p>The status of the domain.</p>
     #   @return [String]
     class DeleteDomainOutput < Struct.new(
+      nil,
       :status,
       keyword_init: true
     )
@@ -4780,6 +4931,7 @@ module Aws::DataZone
     #   <p>The ID of the domain unit that you want to delete.</p>
     #   @return [String]
     class DeleteDomainUnitInput < Struct.new(
+      nil,
       :domain_identifier,
       :identifier,
       keyword_init: true
@@ -4788,6 +4940,7 @@ module Aws::DataZone
     end
 
     class DeleteDomainUnitOutput < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -4803,6 +4956,7 @@ module Aws::DataZone
     #   <p>The ID of the environment action that is deleted.</p>
     #   @return [String]
     class DeleteEnvironmentActionInput < Struct.new(
+      nil,
       :domain_identifier,
       :environment_identifier,
       :identifier,
@@ -4818,6 +4972,7 @@ module Aws::DataZone
     #   <p>The ID of the blueprint the configuration of which is deleted.</p>
     #   @return [String]
     class DeleteEnvironmentBlueprintConfigurationInput < Struct.new(
+      nil,
       :domain_identifier,
       :environment_blueprint_identifier,
       keyword_init: true
@@ -4826,6 +4981,7 @@ module Aws::DataZone
     end
 
     class DeleteEnvironmentBlueprintConfigurationOutput < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -4838,6 +4994,7 @@ module Aws::DataZone
     #   <p>The ID of the blueprint that is deleted.</p>
     #   @return [String]
     class DeleteEnvironmentBlueprintInput < Struct.new(
+      nil,
       :domain_identifier,
       :identifier,
       keyword_init: true
@@ -4852,6 +5009,7 @@ module Aws::DataZone
     #   <p>The identifier of the environment that is to be deleted.</p>
     #   @return [String]
     class DeleteEnvironmentInput < Struct.new(
+      nil,
       :domain_identifier,
       :identifier,
       keyword_init: true
@@ -4866,6 +5024,7 @@ module Aws::DataZone
     #   <p>The ID of the environment profile that is deleted.</p>
     #   @return [String]
     class DeleteEnvironmentProfileInput < Struct.new(
+      nil,
       :domain_identifier,
       :identifier,
       keyword_init: true
@@ -4880,6 +5039,7 @@ module Aws::DataZone
     #   <p>The ID of the metadata form type that is deleted.</p>
     #   @return [String]
     class DeleteFormTypeInput < Struct.new(
+      nil,
       :domain_identifier,
       :form_type_identifier,
       keyword_init: true
@@ -4888,6 +5048,7 @@ module Aws::DataZone
     end
 
     class DeleteFormTypeOutput < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -4900,6 +5061,7 @@ module Aws::DataZone
     #   <p>The ID of the business glossary that is deleted.</p>
     #   @return [String]
     class DeleteGlossaryInput < Struct.new(
+      nil,
       :domain_identifier,
       :identifier,
       keyword_init: true
@@ -4908,6 +5070,7 @@ module Aws::DataZone
     end
 
     class DeleteGlossaryOutput < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -4920,6 +5083,7 @@ module Aws::DataZone
     #   <p>The ID of the business glossary term that is deleted.</p>
     #   @return [String]
     class DeleteGlossaryTermInput < Struct.new(
+      nil,
       :domain_identifier,
       :identifier,
       keyword_init: true
@@ -4928,6 +5092,7 @@ module Aws::DataZone
     end
 
     class DeleteGlossaryTermOutput < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -4940,6 +5105,7 @@ module Aws::DataZone
     #   <p>The ID of the listing to be deleted.</p>
     #   @return [String]
     class DeleteListingInput < Struct.new(
+      nil,
       :domain_identifier,
       :identifier,
       keyword_init: true
@@ -4948,6 +5114,7 @@ module Aws::DataZone
     end
 
     class DeleteListingOutput < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -4963,6 +5130,7 @@ module Aws::DataZone
     #   <p>Specifies the optional flag to delete all child entities within the project.</p>
     #   @return [Boolean]
     class DeleteProjectInput < Struct.new(
+      nil,
       :domain_identifier,
       :identifier,
       :skip_deletion_check,
@@ -4981,6 +5149,7 @@ module Aws::DataZone
     #   <p>The project member whose project membership is deleted.</p>
     #   @return [Types::Member]
     class DeleteProjectMembershipInput < Struct.new(
+      nil,
       :domain_identifier,
       :project_identifier,
       :member,
@@ -4990,12 +5159,14 @@ module Aws::DataZone
     end
 
     class DeleteProjectMembershipOutput < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
     end
 
     class DeleteProjectOutput < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -5008,6 +5179,7 @@ module Aws::DataZone
     #   <p>The ID of the project profile that is deleted.</p>
     #   @return [String]
     class DeleteProjectProfileInput < Struct.new(
+      nil,
       :domain_identifier,
       :identifier,
       keyword_init: true
@@ -5016,6 +5188,7 @@ module Aws::DataZone
     end
 
     class DeleteProjectProfileOutput < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -5028,6 +5201,7 @@ module Aws::DataZone
     #   <p>The ID of the rule that is to be deleted.</p>
     #   @return [String]
     class DeleteRuleInput < Struct.new(
+      nil,
       :domain_identifier,
       :identifier,
       keyword_init: true
@@ -5036,6 +5210,7 @@ module Aws::DataZone
     end
 
     class DeleteRuleOutput < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -5048,6 +5223,7 @@ module Aws::DataZone
     #   <p>The ID of the subscription grant that is deleted.</p>
     #   @return [String]
     class DeleteSubscriptionGrantInput < Struct.new(
+      nil,
       :domain_identifier,
       :identifier,
       keyword_init: true
@@ -5091,6 +5267,7 @@ module Aws::DataZone
     #     Multiple subscriptions can exist for a single grant
     #   @return [String]
     class DeleteSubscriptionGrantOutput < Struct.new(
+      nil,
       :id,
       :created_by,
       :updated_by,
@@ -5114,6 +5291,7 @@ module Aws::DataZone
     #   <p>The ID of the subscription request that is deleted.</p>
     #   @return [String]
     class DeleteSubscriptionRequestInput < Struct.new(
+      nil,
       :domain_identifier,
       :identifier,
       keyword_init: true
@@ -5131,6 +5309,7 @@ module Aws::DataZone
     #   <p>The ID of the subscription target that is deleted.</p>
     #   @return [String]
     class DeleteSubscriptionTargetInput < Struct.new(
+      nil,
       :domain_identifier,
       :environment_identifier,
       :identifier,
@@ -5155,6 +5334,7 @@ module Aws::DataZone
     #   <p>A unique, case-sensitive identifier to ensure idempotency of the request. This field is automatically populated if not provided.</p>
     #   @return [String]
     class DeleteTimeSeriesDataPointsInput < Struct.new(
+      nil,
       :domain_identifier,
       :entity_identifier,
       :entity_type,
@@ -5166,6 +5346,7 @@ module Aws::DataZone
     end
 
     class DeleteTimeSeriesDataPointsOutput < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -5191,6 +5372,7 @@ module Aws::DataZone
     #   <p>Specifies whether the last deployment of the environment is complete.</p>
     #   @return [Boolean]
     class Deployment < Struct.new(
+      nil,
       :deployment_id,
       :deployment_type,
       :deployment_status,
@@ -5210,6 +5392,7 @@ module Aws::DataZone
     #   <p>The end timeout of the environment blueprint deployment.</p>
     #   @return [Integer]
     class DeploymentProperties < Struct.new(
+      nil,
       :start_timeout_minutes,
       :end_timeout_minutes,
       keyword_init: true
@@ -5225,6 +5408,7 @@ module Aws::DataZone
     #   <p>The shoft description of a glossary term attached to the inventory asset.</p>
     #   @return [String]
     class DetailedGlossaryTerm < Struct.new(
+      nil,
       :name,
       :short_description,
       keyword_init: true
@@ -5242,6 +5426,7 @@ module Aws::DataZone
     #   <p>The ARN of the environment role.</p>
     #   @return [String]
     class DisassociateEnvironmentRoleInput < Struct.new(
+      nil,
       :domain_identifier,
       :environment_identifier,
       :environment_role_arn,
@@ -5251,6 +5436,7 @@ module Aws::DataZone
     end
 
     class DisassociateEnvironmentRoleOutput < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -5269,6 +5455,7 @@ module Aws::DataZone
     #   <p>The restricted glossary terms that you want to disassociate from an asset.</p>
     #   @return [Array<String>]
     class DisassociateGovernedTermsInput < Struct.new(
+      nil,
       :domain_identifier,
       :entity_identifier,
       :entity_type,
@@ -5279,6 +5466,7 @@ module Aws::DataZone
     end
 
     class DisassociateGovernedTermsOutput < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -5316,6 +5504,7 @@ module Aws::DataZone
     #   <p>The domain version.</p>
     #   @return [String]
     class DomainSummary < Struct.new(
+      nil,
       :id,
       :name,
       :description,
@@ -5339,6 +5528,7 @@ module Aws::DataZone
     #   <p>Specifies whether to include child domain units.</p>
     #   @return [Boolean]
     class DomainUnitFilterForProject < Struct.new(
+      nil,
       :domain_unit,
       :include_child_domain_units,
       keyword_init: true
@@ -5371,6 +5561,7 @@ module Aws::DataZone
     #   <p>The ID of the domain unit group.</p>
     #   @return [String]
     class DomainUnitGroupProperties < Struct.new(
+      nil,
       :group_id,
       keyword_init: true
     )
@@ -5408,6 +5599,7 @@ module Aws::DataZone
     #   <p>The grant filter for the domain unit.</p>
     #   @return [Types::DomainUnitGrantFilter]
     class DomainUnitPolicyGrantPrincipal < Struct.new(
+      nil,
       :domain_unit_designation,
       :domain_unit_identifier,
       :domain_unit_grant_filter,
@@ -5424,6 +5616,7 @@ module Aws::DataZone
     #   <p>The ID of the domain unit summary.</p>
     #   @return [String]
     class DomainUnitSummary < Struct.new(
+      nil,
       :name,
       :id,
       keyword_init: true
@@ -5439,6 +5632,7 @@ module Aws::DataZone
     #   <p>Specifies whether to apply a rule to the child domain units.</p>
     #   @return [Boolean]
     class DomainUnitTarget < Struct.new(
+      nil,
       :domain_unit_id,
       :include_child_domain_units,
       keyword_init: true
@@ -5451,6 +5645,7 @@ module Aws::DataZone
     #   <p>The ID of teh domain unit user.</p>
     #   @return [String]
     class DomainUnitUserProperties < Struct.new(
+      nil,
       :user_id,
       keyword_init: true
     )
@@ -5477,6 +5672,7 @@ module Aws::DataZone
     #   <p>The environment action description.</p>
     #   @return [String]
     class EnvironmentActionSummary < Struct.new(
+      nil,
       :domain_id,
       :environment_id,
       :id,
@@ -5520,6 +5716,7 @@ module Aws::DataZone
     #   <p>The provisioning configuration of a blueprint.</p>
     #   @return [Array<Types::ProvisioningConfiguration>]
     class EnvironmentBlueprintConfigurationItem < Struct.new(
+      nil,
       :domain_id,
       :environment_blueprint_id,
       :provisioning_role_arn,
@@ -5558,6 +5755,7 @@ module Aws::DataZone
     #   <p>The timestamp of when the blueprint was enabled.</p>
     #   @return [Time]
     class EnvironmentBlueprintSummary < Struct.new(
+      nil,
       :id,
       :name,
       :description,
@@ -5602,6 +5800,7 @@ module Aws::DataZone
     #   <p>The deployment order of the environment.</p>
     #   @return [Integer]
     class EnvironmentConfiguration < Struct.new(
+      nil,
       :name,
       :id,
       :environment_blueprint_id,
@@ -5628,6 +5827,7 @@ module Aws::DataZone
     #   <p>Specifies whether the environment parameter is editable.</p>
     #   @return [Boolean]
     class EnvironmentConfigurationParameter < Struct.new(
+      nil,
       :name,
       :value,
       :is_editable,
@@ -5647,6 +5847,7 @@ module Aws::DataZone
     #   <p>The resolved environment configuration parameters.</p>
     #   @return [Array<Types::EnvironmentConfigurationParameter>]
     class EnvironmentConfigurationParametersDetails < Struct.new(
+      nil,
       :ssm_path,
       :parameter_overrides,
       :resolved_parameters,
@@ -5669,6 +5870,7 @@ module Aws::DataZone
     #   <p>The environment parameters.</p>
     #   @return [Array<Types::EnvironmentParameter>]
     class EnvironmentConfigurationUserParameter < Struct.new(
+      nil,
       :environment_id,
       :environment_resolved_account,
       :environment_configuration_name,
@@ -5686,6 +5888,7 @@ module Aws::DataZone
     #   <p>Environment failure reasons.</p>
     #   @return [Hash<String, Array<Types::EnvironmentError>>]
     class EnvironmentDeploymentDetails < Struct.new(
+      nil,
       :overall_deployment_status,
       :environment_failure_reasons,
       keyword_init: true
@@ -5701,6 +5904,7 @@ module Aws::DataZone
     #   <p>The error message for the failure reason for the environment deployment.</p>
     #   @return [String]
     class EnvironmentError < Struct.new(
+      nil,
       :code,
       :message,
       keyword_init: true
@@ -5716,6 +5920,7 @@ module Aws::DataZone
     #   <p>The value of an environment profile parameter.</p>
     #   @return [String]
     class EnvironmentParameter < Struct.new(
+      nil,
       :name,
       :value,
       keyword_init: true
@@ -5758,6 +5963,7 @@ module Aws::DataZone
     #   <p>The identifier of a project in which an environment profile exists.</p>
     #   @return [String]
     class EnvironmentProfileSummary < Struct.new(
+      nil,
       :id,
       :domain_id,
       :aws_account_id,
@@ -5785,6 +5991,7 @@ module Aws::DataZone
     #   <p>The ID of the account pool.</p>
     #   @return [String]
     class EnvironmentResolvedAccount < Struct.new(
+      nil,
       :aws_account_id,
       :region_name,
       :source_account_pool_id,
@@ -5837,6 +6044,7 @@ module Aws::DataZone
     #   <p>The configuration ID with which the environment is created.</p>
     #   @return [String]
     class EnvironmentSummary < Struct.new(
+      nil,
       :project_id,
       :id,
       :domain_id,
@@ -5869,6 +6077,7 @@ module Aws::DataZone
     #   <p>The value that might be equal to an expression.</p>
     #   @return [String]
     class EqualToExpression < Struct.new(
+      nil,
       :column_name,
       :value,
       keyword_init: true
@@ -5896,6 +6105,7 @@ module Aws::DataZone
     #   <p>The description of the error message.</p>
     #   @return [String]
     class FailureCause < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -5910,6 +6120,7 @@ module Aws::DataZone
     #   <p>A search filter value in Amazon DataZone.</p>
     #   @return [String]
     class Filter < Struct.new(
+      nil,
       :attribute,
       :value,
       keyword_init: true
@@ -5950,6 +6161,7 @@ module Aws::DataZone
     #   <p>The search filter expression.</p>
     #   @return [String]
     class FilterExpression < Struct.new(
+      nil,
       :type,
       :expression,
       keyword_init: true
@@ -5968,6 +6180,7 @@ module Aws::DataZone
     #   <p>Specifies whether a form entry is required.</p>
     #   @return [Boolean]
     class FormEntryInput < Struct.new(
+      nil,
       :type_identifier,
       :type_revision,
       :required,
@@ -5987,6 +6200,7 @@ module Aws::DataZone
     #   <p>Specifies whether a form entry is required.</p>
     #   @return [Boolean]
     class FormEntryOutput < Struct.new(
+      nil,
       :type_name,
       :type_revision,
       :required,
@@ -6010,6 +6224,7 @@ module Aws::DataZone
     #   <p>The content of the metadata form.</p>
     #   @return [String]
     class FormInput < Struct.new(
+      nil,
       :form_name,
       :type_identifier,
       :type_revision,
@@ -6033,6 +6248,7 @@ module Aws::DataZone
     #   <p>The content of the metadata form.</p>
     #   @return [String]
     class FormOutput < Struct.new(
+      nil,
       :form_name,
       :type_name,
       :type_revision,
@@ -6080,6 +6296,7 @@ module Aws::DataZone
     #   <p>The imports specified in the form type.</p>
     #   @return [Array<Types::Import>]
     class FormTypeData < Struct.new(
+      nil,
       :domain_id,
       :name,
       :revision,
@@ -6104,6 +6321,7 @@ module Aws::DataZone
     #   <p>The ID of the account pool whose details are to be displayed.</p>
     #   @return [String]
     class GetAccountPoolInput < Struct.new(
+      nil,
       :domain_identifier,
       :identifier,
       keyword_init: true
@@ -6145,6 +6363,7 @@ module Aws::DataZone
     #   <p>The domain unit ID of the account pool.</p>
     #   @return [String]
     class GetAccountPoolOutput < Struct.new(
+      nil,
       :domain_id,
       :name,
       :id,
@@ -6171,6 +6390,7 @@ module Aws::DataZone
     #   <p>The ID of the asset filter.</p>
     #   @return [String]
     class GetAssetFilterInput < Struct.new(
+      nil,
       :domain_identifier,
       :asset_identifier,
       :identifier,
@@ -6213,6 +6433,7 @@ module Aws::DataZone
     #   <p>The row filter of the asset filter.</p>
     #   @return [String]
     class GetAssetFilterOutput < Struct.new(
+      nil,
       :id,
       :domain_id,
       :asset_id,
@@ -6239,6 +6460,7 @@ module Aws::DataZone
     #   <p>The revision of the Amazon DataZone asset.</p>
     #   @return [String]
     class GetAssetInput < Struct.new(
+      nil,
       :domain_identifier,
       :identifier,
       :revision,
@@ -6305,6 +6527,7 @@ module Aws::DataZone
     #   <p>The latest data point that was imported into the time series form for the asset. </p>
     #   @return [Array<Types::TimeSeriesDataPointSummaryFormOutput>]
     class GetAssetOutput < Struct.new(
+      nil,
       :id,
       :name,
       :type_identifier,
@@ -6339,6 +6562,7 @@ module Aws::DataZone
     #   <p>The revision of the asset type.</p>
     #   @return [String]
     class GetAssetTypeInput < Struct.new(
+      nil,
       :domain_identifier,
       :identifier,
       :revision,
@@ -6384,6 +6608,7 @@ module Aws::DataZone
     #   <p>The Amazon DataZone user that updated the asset type.</p>
     #   @return [String]
     class GetAssetTypeOutput < Struct.new(
+      nil,
       :domain_id,
       :name,
       :revision,
@@ -6411,6 +6636,7 @@ module Aws::DataZone
     #   <p>Specifies whether a connection has a secret.</p>
     #   @return [Boolean]
     class GetConnectionInput < Struct.new(
+      nil,
       :domain_identifier,
       :identifier,
       :with_secret,
@@ -6456,6 +6682,7 @@ module Aws::DataZone
     #   <p>The type of the connection.</p>
     #   @return [String]
     class GetConnectionOutput < Struct.new(
+      nil,
       :connection_credentials,
       :connection_id,
       :description,
@@ -6483,6 +6710,7 @@ module Aws::DataZone
     #   <p>The revision of the data product.</p>
     #   @return [String]
     class GetDataProductInput < Struct.new(
+      nil,
       :domain_identifier,
       :identifier,
       :revision,
@@ -6534,6 +6762,7 @@ module Aws::DataZone
     #   <p>The user who created the first revision of the data product.</p>
     #   @return [String]
     class GetDataProductOutput < Struct.new(
+      nil,
       :domain_id,
       :id,
       :revision,
@@ -6565,6 +6794,7 @@ module Aws::DataZone
     #   <p>The ID of the Amazon DataZone data source.</p>
     #   @return [String]
     class GetDataSourceInput < Struct.new(
+      nil,
       :domain_identifier,
       :identifier,
       keyword_init: true
@@ -6642,6 +6872,7 @@ module Aws::DataZone
     #   <p>Specifies the status of the self-granting functionality.</p>
     #   @return [Types::SelfGrantStatusOutput]
     class GetDataSourceOutput < Struct.new(
+      nil,
       :id,
       :status,
       :type,
@@ -6677,6 +6908,7 @@ module Aws::DataZone
     #   <p>The ID of the data source run.</p>
     #   @return [String]
     class GetDataSourceRunInput < Struct.new(
+      nil,
       :domain_identifier,
       :identifier,
       keyword_init: true
@@ -6727,6 +6959,7 @@ module Aws::DataZone
     #   <p>The timestamp of when this data source run stopped.</p>
     #   @return [Time]
     class GetDataSourceRunOutput < Struct.new(
+      nil,
       :domain_id,
       :data_source_id,
       :id,
@@ -6750,6 +6983,7 @@ module Aws::DataZone
     #   <p>The identifier of the specified Amazon DataZone domain.</p>
     #   @return [String]
     class GetDomainInput < Struct.new(
+      nil,
       :identifier,
       keyword_init: true
     )
@@ -6802,6 +7036,7 @@ module Aws::DataZone
     #   <p>The service role of the domain.</p>
     #   @return [String]
     class GetDomainOutput < Struct.new(
+      nil,
       :id,
       :root_domain_unit_id,
       :name,
@@ -6829,6 +7064,7 @@ module Aws::DataZone
     #   <p>The identifier of the domain unit that you want to get.</p>
     #   @return [String]
     class GetDomainUnitInput < Struct.new(
+      nil,
       :domain_identifier,
       :identifier,
       keyword_init: true
@@ -6867,6 +7103,7 @@ module Aws::DataZone
     #   <p>The user who last updated the domain unit.</p>
     #   @return [String]
     class GetDomainUnitOutput < Struct.new(
+      nil,
       :id,
       :domain_id,
       :name,
@@ -6892,6 +7129,7 @@ module Aws::DataZone
     #   <p>The ID of the environment action</p>
     #   @return [String]
     class GetEnvironmentActionInput < Struct.new(
+      nil,
       :domain_identifier,
       :environment_identifier,
       :identifier,
@@ -6919,6 +7157,7 @@ module Aws::DataZone
     #   <p>The description of the environment action.</p>
     #   @return [String]
     class GetEnvironmentActionOutput < Struct.new(
+      nil,
       :domain_id,
       :environment_id,
       :id,
@@ -6937,6 +7176,7 @@ module Aws::DataZone
     #   <p>He ID of the blueprint.</p>
     #   @return [String]
     class GetEnvironmentBlueprintConfigurationInput < Struct.new(
+      nil,
       :domain_identifier,
       :environment_blueprint_identifier,
       keyword_init: true
@@ -6975,6 +7215,7 @@ module Aws::DataZone
     #   <p>The provisioning configuration of a blueprint.</p>
     #   @return [Array<Types::ProvisioningConfiguration>]
     class GetEnvironmentBlueprintConfigurationOutput < Struct.new(
+      nil,
       :domain_id,
       :environment_blueprint_id,
       :provisioning_role_arn,
@@ -6997,6 +7238,7 @@ module Aws::DataZone
     #   <p>The ID of this Amazon DataZone blueprint.</p>
     #   @return [String]
     class GetEnvironmentBlueprintInput < Struct.new(
+      nil,
       :domain_identifier,
       :identifier,
       keyword_init: true
@@ -7035,6 +7277,7 @@ module Aws::DataZone
     #   <p>The timestamp of when this blueprint was updated.</p>
     #   @return [Time]
     class GetEnvironmentBlueprintOutput < Struct.new(
+      nil,
       :id,
       :name,
       :description,
@@ -7057,6 +7300,7 @@ module Aws::DataZone
     #   <p>The ID of the environment whose credentials this operation gets.</p>
     #   @return [String]
     class GetEnvironmentCredentialsInput < Struct.new(
+      nil,
       :domain_identifier,
       :environment_identifier,
       keyword_init: true
@@ -7078,6 +7322,7 @@ module Aws::DataZone
     #   <p>The expiration timestamp of the environment credentials.</p>
     #   @return [Time]
     class GetEnvironmentCredentialsOutput < Struct.new(
+      nil,
       :access_key_id,
       :secret_access_key,
       :session_token,
@@ -7094,6 +7339,7 @@ module Aws::DataZone
     #   <p>The ID of the Amazon DataZone environment.</p>
     #   @return [String]
     class GetEnvironmentInput < Struct.new(
+      nil,
       :domain_identifier,
       :identifier,
       keyword_init: true
@@ -7168,6 +7414,7 @@ module Aws::DataZone
     #   <p>The configuration ID that is used to create the environment.</p>
     #   @return [String]
     class GetEnvironmentOutput < Struct.new(
+      nil,
       :project_id,
       :id,
       :domain_id,
@@ -7207,6 +7454,7 @@ module Aws::DataZone
     #   <p>The ID of the environment profile.</p>
     #   @return [String]
     class GetEnvironmentProfileInput < Struct.new(
+      nil,
       :domain_identifier,
       :identifier,
       keyword_init: true
@@ -7251,6 +7499,7 @@ module Aws::DataZone
     #   <p>The user parameters of the environment profile.</p>
     #   @return [Array<Types::CustomParameter>]
     class GetEnvironmentProfileOutput < Struct.new(
+      nil,
       :id,
       :domain_id,
       :aws_account_id,
@@ -7278,6 +7527,7 @@ module Aws::DataZone
     #   <p>The revision of this metadata form type.</p>
     #   @return [String]
     class GetFormTypeInput < Struct.new(
+      nil,
       :domain_identifier,
       :form_type_identifier,
       :revision,
@@ -7323,6 +7573,7 @@ module Aws::DataZone
     #   <p>The imports of the metadata form type.</p>
     #   @return [Array<Types::Import>]
     class GetFormTypeOutput < Struct.new(
+      nil,
       :domain_id,
       :name,
       :revision,
@@ -7347,6 +7598,7 @@ module Aws::DataZone
     #   <p>The ID of the business glossary.</p>
     #   @return [String]
     class GetGlossaryInput < Struct.new(
+      nil,
       :domain_identifier,
       :identifier,
       keyword_init: true
@@ -7388,6 +7640,7 @@ module Aws::DataZone
     #   <p>The usage restriction of the restricted glossary.</p>
     #   @return [Array<String>]
     class GetGlossaryOutput < Struct.new(
+      nil,
       :domain_id,
       :id,
       :owning_project_id,
@@ -7411,6 +7664,7 @@ module Aws::DataZone
     #   <p>The ID of the business glossary term.</p>
     #   @return [String]
     class GetGlossaryTermInput < Struct.new(
+      nil,
       :domain_identifier,
       :identifier,
       keyword_init: true
@@ -7458,6 +7712,7 @@ module Aws::DataZone
     #   <p>The usage restriction of a term within a restricted glossary.</p>
     #   @return [Array<String>]
     class GetGlossaryTermOutput < Struct.new(
+      nil,
       :domain_id,
       :glossary_id,
       :id,
@@ -7483,6 +7738,7 @@ module Aws::DataZone
     #   <p>The identifier of the group profile.</p>
     #   @return [String]
     class GetGroupProfileInput < Struct.new(
+      nil,
       :domain_identifier,
       :group_identifier,
       keyword_init: true
@@ -7503,6 +7759,7 @@ module Aws::DataZone
     #   <p>The name of the group for which the specified group profile exists.</p>
     #   @return [String]
     class GetGroupProfileOutput < Struct.new(
+      nil,
       :domain_id,
       :id,
       :status,
@@ -7516,6 +7773,7 @@ module Aws::DataZone
     #   <p>the ID of the Amazon DataZone domain the data portal of which you want to get.</p>
     #   @return [String]
     class GetIamPortalLoginUrlInput < Struct.new(
+      nil,
       :domain_identifier,
       keyword_init: true
     )
@@ -7529,6 +7787,7 @@ module Aws::DataZone
     #   <p>The ID of the user profile.</p>
     #   @return [String]
     class GetIamPortalLoginUrlOutput < Struct.new(
+      nil,
       :auth_code_url,
       :user_profile_id,
       keyword_init: true
@@ -7543,6 +7802,7 @@ module Aws::DataZone
     #   <p>The ID of the job run.</p>
     #   @return [String]
     class GetJobRunInput < Struct.new(
+      nil,
       :domain_identifier,
       :identifier,
       keyword_init: true
@@ -7587,6 +7847,7 @@ module Aws::DataZone
     #   <p>The timestamp of when the job run ended.</p>
     #   @return [Time]
     class GetJobRunOutput < Struct.new(
+      nil,
       :domain_id,
       :id,
       :job_id,
@@ -7611,6 +7872,7 @@ module Aws::DataZone
     #   <p>The ID of the lineage event.</p>
     #   @return [String]
     class GetLineageEventInput < Struct.new(
+      nil,
       :domain_identifier,
       :identifier,
       keyword_init: true
@@ -7640,6 +7902,7 @@ module Aws::DataZone
     #   <p>The timestamp of when the lineage event was created.</p>
     #   @return [Time]
     class GetLineageEventOutput < Struct.new(
+      nil,
       :domain_id,
       :id,
       :event,
@@ -7662,6 +7925,7 @@ module Aws::DataZone
     #   <p>The event time stamp for which you want to get the data lineage node.</p>
     #   @return [Time]
     class GetLineageNodeInput < Struct.new(
+      nil,
       :domain_identifier,
       :identifier,
       :event_timestamp,
@@ -7716,6 +7980,7 @@ module Aws::DataZone
     #   <p>The downsteam nodes of the specified data lineage node.</p>
     #   @return [Array<Types::LineageNodeReference>]
     class GetLineageNodeOutput < Struct.new(
+      nil,
       :domain_id,
       :name,
       :description,
@@ -7746,6 +8011,7 @@ module Aws::DataZone
     #   <p>The revision of the listing.</p>
     #   @return [String]
     class GetListingInput < Struct.new(
+      nil,
       :domain_identifier,
       :identifier,
       :listing_revision,
@@ -7788,6 +8054,7 @@ module Aws::DataZone
     #   <p>The status of the listing.</p>
     #   @return [String]
     class GetListingOutput < Struct.new(
+      nil,
       :domain_id,
       :id,
       :listing_revision,
@@ -7811,6 +8078,7 @@ module Aws::DataZone
     #   <p>The identifier of the metadata generation run.</p>
     #   @return [String]
     class GetMetadataGenerationRunInput < Struct.new(
+      nil,
       :domain_identifier,
       :identifier,
       keyword_init: true
@@ -7843,6 +8111,7 @@ module Aws::DataZone
     #   <p>The ID of the project that owns the assets for which you're running metadata generation.</p>
     #   @return [String]
     class GetMetadataGenerationRunOutput < Struct.new(
+      nil,
       :domain_id,
       :id,
       :target,
@@ -7863,6 +8132,7 @@ module Aws::DataZone
     #   <p>The ID of the project.</p>
     #   @return [String]
     class GetProjectInput < Struct.new(
+      nil,
       :domain_identifier,
       :identifier,
       keyword_init: true
@@ -7913,6 +8183,7 @@ module Aws::DataZone
     #   <p>The environment deployment status of a project.</p>
     #   @return [Types::EnvironmentDeploymentDetails]
     class GetProjectOutput < Struct.new(
+      nil,
       :domain_id,
       :id,
       :name,
@@ -7939,6 +8210,7 @@ module Aws::DataZone
     #   <p>The ID of the project profile.</p>
     #   @return [String]
     class GetProjectProfileInput < Struct.new(
+      nil,
       :domain_identifier,
       :identifier,
       keyword_init: true
@@ -7977,6 +8249,7 @@ module Aws::DataZone
     #   <p>The ID of the domain unit of the project profile.</p>
     #   @return [String]
     class GetProjectProfileOutput < Struct.new(
+      nil,
       :domain_id,
       :id,
       :name,
@@ -8002,6 +8275,7 @@ module Aws::DataZone
     #   <p>The revision of the rule.</p>
     #   @return [String]
     class GetRuleInput < Struct.new(
+      nil,
       :domain_identifier,
       :identifier,
       :revision,
@@ -8053,6 +8327,7 @@ module Aws::DataZone
     #   <p>The timestamp at which the rule was last updated.</p>
     #   @return [String]
     class GetRuleOutput < Struct.new(
+      nil,
       :identifier,
       :revision,
       :name,
@@ -8079,6 +8354,7 @@ module Aws::DataZone
     #   <p>The ID of the subscription grant.</p>
     #   @return [String]
     class GetSubscriptionGrantInput < Struct.new(
+      nil,
       :domain_identifier,
       :identifier,
       keyword_init: true
@@ -8122,6 +8398,7 @@ module Aws::DataZone
     #     Multiple subscriptions can exist for a single grant
     #   @return [String]
     class GetSubscriptionGrantOutput < Struct.new(
+      nil,
       :id,
       :created_by,
       :updated_by,
@@ -8145,6 +8422,7 @@ module Aws::DataZone
     #   <p>The ID of the subscription.</p>
     #   @return [String]
     class GetSubscriptionInput < Struct.new(
+      nil,
       :domain_identifier,
       :identifier,
       keyword_init: true
@@ -8186,6 +8464,7 @@ module Aws::DataZone
     #   <p>The retain permissions of the subscription.</p>
     #   @return [Boolean]
     class GetSubscriptionOutput < Struct.new(
+      nil,
       :id,
       :created_by,
       :updated_by,
@@ -8209,6 +8488,7 @@ module Aws::DataZone
     #   <p>The identifier of the subscription request the details of which to get.</p>
     #   @return [String]
     class GetSubscriptionRequestDetailsInput < Struct.new(
+      nil,
       :domain_identifier,
       :identifier,
       keyword_init: true
@@ -8259,6 +8539,7 @@ module Aws::DataZone
     #   <p>The metadata forms included in the subscription request.</p>
     #   @return [Array<Types::FormOutput>]
     class GetSubscriptionRequestDetailsOutput < Struct.new(
+      nil,
       :id,
       :created_by,
       :updated_by,
@@ -8288,6 +8569,7 @@ module Aws::DataZone
     #   <p>The ID of the subscription target.</p>
     #   @return [String]
     class GetSubscriptionTargetInput < Struct.new(
+      nil,
       :domain_identifier,
       :environment_identifier,
       :identifier,
@@ -8342,6 +8624,7 @@ module Aws::DataZone
     #   <p>The provider of the subscription target.</p>
     #   @return [String]
     class GetSubscriptionTargetOutput < Struct.new(
+      nil,
       :id,
       :authorized_principals,
       :domain_id,
@@ -8378,6 +8661,7 @@ module Aws::DataZone
     #   <p>The name of the time series form that houses the data point that you want to get.</p>
     #   @return [String]
     class GetTimeSeriesDataPointInput < Struct.new(
+      nil,
       :domain_identifier,
       :entity_identifier,
       :entity_type,
@@ -8404,6 +8688,7 @@ module Aws::DataZone
     #   <p>The time series form that houses the data point that you want to get.</p>
     #   @return [Types::TimeSeriesDataPointFormOutput]
     class GetTimeSeriesDataPointOutput < Struct.new(
+      nil,
       :domain_id,
       :entity_id,
       :entity_type,
@@ -8424,6 +8709,7 @@ module Aws::DataZone
     #   <p>The type of the user profile.</p>
     #   @return [String]
     class GetUserProfileInput < Struct.new(
+      nil,
       :domain_identifier,
       :user_identifier,
       :type,
@@ -8448,6 +8734,7 @@ module Aws::DataZone
     #   <p>The details of the user profile in Amazon DataZone.</p>
     #   @return [Types::UserProfileDetails]
     class GetUserProfileOutput < Struct.new(
+      nil,
       :domain_id,
       :id,
       :type,
@@ -8496,6 +8783,7 @@ module Aws::DataZone
     #   <p>The additional attributes of an Amazon DataZone glossary.</p>
     #   @return [Types::GlossaryItemAdditionalAttributes]
     class GlossaryItem < Struct.new(
+      nil,
       :domain_id,
       :id,
       :name,
@@ -8518,6 +8806,7 @@ module Aws::DataZone
     #   <p>List of rationales indicating why this item was matched by search.</p>
     #   @return [Array<Types::MatchRationaleItem>]
     class GlossaryItemAdditionalAttributes < Struct.new(
+      nil,
       :match_rationale,
       keyword_init: true
     )
@@ -8568,6 +8857,7 @@ module Aws::DataZone
     #   <p>The additional attributes of an Amazon DataZone glossary term.</p>
     #   @return [Types::GlossaryTermItemAdditionalAttributes]
     class GlossaryTermItem < Struct.new(
+      nil,
       :domain_id,
       :glossary_id,
       :id,
@@ -8592,6 +8882,7 @@ module Aws::DataZone
     #   <p>List of rationales indicating why this item was matched by search.</p>
     #   @return [Array<Types::MatchRationaleItem>]
     class GlossaryTermItemAdditionalAttributes < Struct.new(
+      nil,
       :match_rationale,
       keyword_init: true
     )
@@ -8654,6 +8945,7 @@ module Aws::DataZone
     #   <p>The compatible compute environments of the Amazon Web Services Glue connection.</p>
     #   @return [Array<String>]
     class GlueConnection < Struct.new(
+      nil,
       :name,
       :description,
       :connection_type,
@@ -8715,6 +9007,7 @@ module Aws::DataZone
     #   <p>The authentication configuration of the Amazon Web Services Glue connection.</p>
     #   @return [Types::AuthenticationConfigurationInput]
     class GlueConnectionInput < Struct.new(
+      nil,
       :connection_properties,
       :physical_connection_requirements,
       :name,
@@ -8743,6 +9036,7 @@ module Aws::DataZone
     #   <p>The authentication configuration of the Amazon Web Services Glue connection patch.</p>
     #   @return [Types::AuthenticationConfigurationPatch]
     class GlueConnectionPatch < Struct.new(
+      nil,
       :description,
       :connection_properties,
       :authentication_configuration,
@@ -8766,6 +9060,7 @@ module Aws::DataZone
     #   <p>The jwt token of the connection.</p>
     #   @return [String]
     class GlueOAuth2Credentials < Struct.new(
+      nil,
       :user_managed_client_application_client_secret,
       :access_token,
       :refresh_token,
@@ -8780,6 +9075,7 @@ module Aws::DataZone
     #   <p>The Amazon Web Services Glue connection.</p>
     #   @return [Types::GlueConnectionInput]
     class GluePropertiesInput < Struct.new(
+      nil,
       :glue_connection_input,
       keyword_init: true
     )
@@ -8794,6 +9090,7 @@ module Aws::DataZone
     #   <p>The error message generated if the action is not completed successfully.</p>
     #   @return [String]
     class GluePropertiesOutput < Struct.new(
+      nil,
       :status,
       :error_message,
       keyword_init: true
@@ -8806,6 +9103,7 @@ module Aws::DataZone
     #   <p>The Amazon Web Services Glue properties patch of a connection.</p>
     #   @return [Types::GlueConnectionPatch]
     class GluePropertiesPatch < Struct.new(
+      nil,
       :glue_connection_input,
       keyword_init: true
     )
@@ -8826,6 +9124,7 @@ module Aws::DataZone
     #   <p>The catalog name in the Amazon Web Services Glue run configuration.</p>
     #   @return [String]
     class GlueRunConfigurationInput < Struct.new(
+      nil,
       :data_access_role,
       :relational_filter_configurations,
       :auto_import_data_quality_result,
@@ -8855,6 +9154,7 @@ module Aws::DataZone
     #   <p>The catalog name in the Amazon Web Services Glue run configuration.</p>
     #   @return [String]
     class GlueRunConfigurationOutput < Struct.new(
+      nil,
       :account_id,
       :region,
       :data_access_role,
@@ -8871,6 +9171,7 @@ module Aws::DataZone
     #   <p>The details for the self granting status for a Glue data source.</p>
     #   @return [Array<Types::SelfGrantStatusDetail>]
     class GlueSelfGrantStatusOutput < Struct.new(
+      nil,
       :self_grant_status_details,
       keyword_init: true
     )
@@ -8915,6 +9216,7 @@ module Aws::DataZone
     #   <p>The value that might be greater than an expression.</p>
     #   @return [String]
     class GreaterThanExpression < Struct.new(
+      nil,
       :column_name,
       :value,
       keyword_init: true
@@ -8930,6 +9232,7 @@ module Aws::DataZone
     #   <p>The value that might be greater than or equal to an expression.</p>
     #   @return [String]
     class GreaterThanOrEqualToExpression < Struct.new(
+      nil,
       :column_name,
       :value,
       keyword_init: true
@@ -8942,6 +9245,7 @@ module Aws::DataZone
     #   <p>The identifier of the group in Amazon DataZone.</p>
     #   @return [String]
     class GroupDetails < Struct.new(
+      nil,
       :group_id,
       keyword_init: true
     )
@@ -8977,6 +9281,7 @@ module Aws::DataZone
     #   <p>The group name of a group profile.</p>
     #   @return [String]
     class GroupProfileSummary < Struct.new(
+      nil,
       :domain_id,
       :id,
       :status,
@@ -8991,6 +9296,7 @@ module Aws::DataZone
     #   <p>The cluster name the hyper pod properties.</p>
     #   @return [String]
     class HyperPodPropertiesInput < Struct.new(
+      nil,
       :cluster_name,
       keyword_init: true
     )
@@ -9008,6 +9314,7 @@ module Aws::DataZone
     #   <p>The orchestrator of the hyper pod properties.</p>
     #   @return [String]
     class HyperPodPropertiesOutput < Struct.new(
+      nil,
       :cluster_name,
       :cluster_arn,
       :orchestrator,
@@ -9021,6 +9328,7 @@ module Aws::DataZone
     #   <p>Specifies whether Amazon Web Services Glue lineage sync is enabled for a connection.</p>
     #   @return [Boolean]
     class IamPropertiesInput < Struct.new(
+      nil,
       :glue_lineage_sync_enabled,
       keyword_init: true
     )
@@ -9035,6 +9343,7 @@ module Aws::DataZone
     #   <p>Specifies whether Amazon Web Services Glue lineage sync is enabled for a connection.</p>
     #   @return [Boolean]
     class IamPropertiesOutput < Struct.new(
+      nil,
       :environment_id,
       :glue_lineage_sync_enabled,
       keyword_init: true
@@ -9047,6 +9356,7 @@ module Aws::DataZone
     #   <p>Specifies whether Amazon Web Services Glue lineage sync is enabled for a connection.</p>
     #   @return [Boolean]
     class IamPropertiesPatch < Struct.new(
+      nil,
       :glue_lineage_sync_enabled,
       keyword_init: true
     )
@@ -9061,6 +9371,7 @@ module Aws::DataZone
     #   <p>Principal ID of the IAM user.</p>
     #   @return [String]
     class IamUserProfileDetails < Struct.new(
+      nil,
       :arn,
       :principal_id,
       keyword_init: true
@@ -9076,6 +9387,7 @@ module Aws::DataZone
     #   <p>The revision of the import.</p>
     #   @return [String]
     class Import < Struct.new(
+      nil,
       :name,
       :revision,
       keyword_init: true
@@ -9091,6 +9403,7 @@ module Aws::DataZone
     #   <p>The values that might be in the expression.</p>
     #   @return [Array<String>]
     class InExpression < Struct.new(
+      nil,
       :column_name,
       :values,
       keyword_init: true
@@ -9102,6 +9415,7 @@ module Aws::DataZone
     # @!attribute message
     #   @return [String]
     class InternalServerException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -9113,6 +9427,7 @@ module Aws::DataZone
     #   <p>The name of the column.</p>
     #   @return [String]
     class IsNotNullExpression < Struct.new(
+      nil,
       :column_name,
       keyword_init: true
     )
@@ -9124,6 +9439,7 @@ module Aws::DataZone
     #   <p>The name of the column.</p>
     #   @return [String]
     class IsNullExpression < Struct.new(
+      nil,
       :column_name,
       keyword_init: true
     )
@@ -9150,6 +9466,7 @@ module Aws::DataZone
     #   <p>The job run error message.</p>
     #   @return [String]
     class JobRunError < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -9191,6 +9508,7 @@ module Aws::DataZone
     #   <p>The end time of a job run.</p>
     #   @return [Time]
     class JobRunSummary < Struct.new(
+      nil,
       :domain_id,
       :job_id,
       :job_type,
@@ -9215,6 +9533,7 @@ module Aws::DataZone
     #   <p>Specifies certain Amazon S3 locations if you do not want Amazon DataZone to automatically register them in hybrid mode. </p>
     #   @return [Array<String>]
     class LakeFormationConfiguration < Struct.new(
+      nil,
       :location_registration_role,
       :location_registration_exclude_s3_locations,
       keyword_init: true
@@ -9230,6 +9549,7 @@ module Aws::DataZone
     #   <p>The value that might be less than the expression.</p>
     #   @return [String]
     class LessThanExpression < Struct.new(
+      nil,
       :column_name,
       :value,
       keyword_init: true
@@ -9245,6 +9565,7 @@ module Aws::DataZone
     #   <p>The value that might be less than or equal to an expression.</p>
     #   @return [String]
     class LessThanOrEqualToExpression < Struct.new(
+      nil,
       :column_name,
       :value,
       keyword_init: true
@@ -9260,6 +9581,7 @@ module Aws::DataZone
     #   <p>The value that might be like the expression.</p>
     #   @return [String]
     class LikeExpression < Struct.new(
+      nil,
       :column_name,
       :value,
       keyword_init: true
@@ -9290,6 +9612,7 @@ module Aws::DataZone
     #   <p>The timestamp at which data lineage event was created.</p>
     #   @return [Time]
     class LineageEventSummary < Struct.new(
+      nil,
       :id,
       :domain_id,
       :processing_status,
@@ -9313,6 +9636,7 @@ module Aws::DataZone
     #   <p>The data lineage error message.</p>
     #   @return [String]
     class LineageInfo < Struct.new(
+      nil,
       :event_id,
       :event_status,
       :error_message,
@@ -9329,6 +9653,7 @@ module Aws::DataZone
     #   <p>The event timestamp of the data lineage node.</p>
     #   @return [Time]
     class LineageNodeReference < Struct.new(
+      nil,
       :id,
       :event_timestamp,
       keyword_init: true
@@ -9374,6 +9699,7 @@ module Aws::DataZone
     #   <p>The event timestamp of the data lineage node.</p>
     #   @return [Time]
     class LineageNodeSummary < Struct.new(
+      nil,
       :domain_id,
       :name,
       :description,
@@ -9420,6 +9746,7 @@ module Aws::DataZone
     #   <p>The forms output of the data lineage node type.</p>
     #   @return [Hash<String, Types::FormEntryOutput>]
     class LineageNodeTypeItem < Struct.new(
+      nil,
       :domain_id,
       :name,
       :description,
@@ -9439,6 +9766,7 @@ module Aws::DataZone
     #   <p>The SQL query run details of a data lineage run.</p>
     #   @return [Types::LineageSqlQueryRunDetails]
     class LineageRunDetails < Struct.new(
+      nil,
       :sql_query_run_details,
       keyword_init: true
     )
@@ -9462,6 +9790,7 @@ module Aws::DataZone
     #   <p>The error message of the SQL query run details of a data lineage run.</p>
     #   @return [Array<String>]
     class LineageSqlQueryRunDetails < Struct.new(
+      nil,
       :query_start_time,
       :query_end_time,
       :total_queries_processed,
@@ -9477,6 +9806,7 @@ module Aws::DataZone
     #   <p>The lineage sync schedule.</p>
     #   @return [String]
     class LineageSyncSchedule < Struct.new(
+      nil,
       :schedule,
       keyword_init: true
     )
@@ -9502,6 +9832,7 @@ module Aws::DataZone
     #   <p>The maximum number of account pools to return in a single call to ListAccountPools. When the number of account pools to be listed is greater than the value of MaxResults, the response contains a NextToken value that you can use in a subsequent call to ListAccountPools to list the next set of account pools.</p>
     #   @return [Integer]
     class ListAccountPoolsInput < Struct.new(
+      nil,
       :domain_identifier,
       :name,
       :sort_by,
@@ -9520,6 +9851,7 @@ module Aws::DataZone
     #   <p>When the number of account pools is greater than the default value for the MaxResults parameter, or if you explicitly specify a value for MaxResults that is less than the number of account pools, the response includes a pagination token named NextToken. You can specify this NextToken value in a subsequent call to ListAccountPools to list the next set of account pools.</p>
     #   @return [String]
     class ListAccountPoolsOutput < Struct.new(
+      nil,
       :items,
       :next_token,
       keyword_init: true
@@ -9540,6 +9872,7 @@ module Aws::DataZone
     #   <p>The maximum number of accounts to return in a single call to ListAccountsInAccountPool. When the number of accounts to be listed is greater than the value of MaxResults, the response contains a NextToken value that you can use in a subsequent call to ListAccountsInAccountPool to list the next set of accounts.</p>
     #   @return [Integer]
     class ListAccountsInAccountPoolInput < Struct.new(
+      nil,
       :domain_identifier,
       :identifier,
       :next_token,
@@ -9556,6 +9889,7 @@ module Aws::DataZone
     #   <p>When the number of accounts is greater than the default value for the MaxResults parameter, or if you explicitly specify a value for MaxResults that is less than the number of accounts, the response includes a pagination token named NextToken. You can specify this NextToken value in a subsequent call to ListAccountsInAccountPool to list the next set of accounts.</p>
     #   @return [String]
     class ListAccountsInAccountPoolOutput < Struct.new(
+      nil,
       :items,
       :next_token,
       keyword_init: true
@@ -9579,6 +9913,7 @@ module Aws::DataZone
     #   <p>The maximum number of asset filters to return in a single call to <code>ListAssetFilters</code>. When the number of asset filters to be listed is greater than the value of <code>MaxResults</code>, the response contains a <code>NextToken</code> value that you can use in a subsequent call to <code>ListAssetFilters</code> to list the next set of asset filters.</p>
     #   @return [Integer]
     class ListAssetFiltersInput < Struct.new(
+      nil,
       :domain_identifier,
       :asset_identifier,
       :status,
@@ -9596,6 +9931,7 @@ module Aws::DataZone
     #   <p>When the number of asset filters is greater than the default value for the <code>MaxResults</code> parameter, or if you explicitly specify a value for <code>MaxResults</code> that is less than the number of asset filters, the response includes a pagination token named <code>NextToken</code>. You can specify this <code>NextToken</code> value in a subsequent call to <code>ListAssetFilters</code> to list the next set of asset filters.</p>
     #   @return [String]
     class ListAssetFiltersOutput < Struct.new(
+      nil,
       :items,
       :next_token,
       keyword_init: true
@@ -9616,6 +9952,7 @@ module Aws::DataZone
     #   <p>The maximum number of revisions to return in a single call to <code>ListAssetRevisions</code>. When the number of revisions to be listed is greater than the value of <code>MaxResults</code>, the response contains a <code>NextToken</code> value that you can use in a subsequent call to <code>ListAssetRevisions</code> to list the next set of revisions.</p>
     #   @return [Integer]
     class ListAssetRevisionsInput < Struct.new(
+      nil,
       :domain_identifier,
       :identifier,
       :next_token,
@@ -9632,6 +9969,7 @@ module Aws::DataZone
     #   <p>When the number of revisions is greater than the default value for the <code>MaxResults</code> parameter, or if you explicitly specify a value for <code>MaxResults</code> that is less than the number of revisions, the response includes a pagination token named <code>NextToken</code>. You can specify this <code>NextToken</code> value in a subsequent call to <code>ListAssetRevisions</code> to list the next set of revisions.</p>
     #   @return [String]
     class ListAssetRevisionsOutput < Struct.new(
+      nil,
       :items,
       :next_token,
       keyword_init: true
@@ -9667,6 +10005,7 @@ module Aws::DataZone
     #   <p>The type of connection.</p>
     #   @return [String]
     class ListConnectionsInput < Struct.new(
+      nil,
       :domain_identifier,
       :max_results,
       :next_token,
@@ -9688,6 +10027,7 @@ module Aws::DataZone
     #   <p>When the number of connections is greater than the default value for the MaxResults parameter, or if you explicitly specify a value for MaxResults that is less than the number of connections, the response includes a pagination token named NextToken. You can specify this NextToken value in a subsequent call to ListConnections to list the next set of connections.</p>
     #   @return [String]
     class ListConnectionsOutput < Struct.new(
+      nil,
       :items,
       :next_token,
       keyword_init: true
@@ -9708,6 +10048,7 @@ module Aws::DataZone
     #   <p>When the number of data product revisions is greater than the default value for the <code>MaxResults</code> parameter, or if you explicitly specify a value for <code>MaxResults</code> that is less than the number of data product revisions, the response includes a pagination token named <code>NextToken</code>. You can specify this <code>NextToken</code> value in a subsequent call to <code>ListDataProductRevisions</code> to list the next set of data product revisions.</p>
     #   @return [String]
     class ListDataProductRevisionsInput < Struct.new(
+      nil,
       :domain_identifier,
       :identifier,
       :max_results,
@@ -9724,6 +10065,7 @@ module Aws::DataZone
     #   <p>When the number of data product revisions is greater than the default value for the <code>MaxResults</code> parameter, or if you explicitly specify a value for <code>MaxResults</code> that is less than the number of data product revisions, the response includes a pagination token named <code>NextToken</code>. You can specify this <code>NextToken</code> value in a subsequent call to <code>ListDataProductRevisions</code> to list the next set of data product revisions.</p>
     #   @return [String]
     class ListDataProductRevisionsOutput < Struct.new(
+      nil,
       :items,
       :next_token,
       keyword_init: true
@@ -9747,6 +10089,7 @@ module Aws::DataZone
     #   <p>The maximum number of activities to return in a single call to <code>ListDataSourceRunActivities</code>. When the number of activities to be listed is greater than the value of <code>MaxResults</code>, the response contains a <code>NextToken</code> value that you can use in a subsequent call to <code>ListDataSourceRunActivities</code> to list the next set of activities.</p>
     #   @return [Integer]
     class ListDataSourceRunActivitiesInput < Struct.new(
+      nil,
       :domain_identifier,
       :identifier,
       :status,
@@ -9764,6 +10107,7 @@ module Aws::DataZone
     #   <p>When the number of activities is greater than the default value for the <code>MaxResults</code> parameter, or if you explicitly specify a value for <code>MaxResults</code> that is less than the number of activities, the response includes a pagination token named <code>NextToken</code>. You can specify this <code>NextToken</code> value in a subsequent call to <code>ListDataSourceRunActivities</code> to list the next set of activities.</p>
     #   @return [String]
     class ListDataSourceRunActivitiesOutput < Struct.new(
+      nil,
       :items,
       :next_token,
       keyword_init: true
@@ -9787,6 +10131,7 @@ module Aws::DataZone
     #   <p>The maximum number of runs to return in a single call to <code>ListDataSourceRuns</code>. When the number of runs to be listed is greater than the value of <code>MaxResults</code>, the response contains a <code>NextToken</code> value that you can use in a subsequent call to <code>ListDataSourceRuns</code> to list the next set of runs.</p>
     #   @return [Integer]
     class ListDataSourceRunsInput < Struct.new(
+      nil,
       :domain_identifier,
       :data_source_identifier,
       :status,
@@ -9804,6 +10149,7 @@ module Aws::DataZone
     #   <p>When the number of runs is greater than the default value for the <code>MaxResults</code> parameter, or if you explicitly specify a value for <code>MaxResults</code> that is less than the number of runs, the response includes a pagination token named <code>NextToken</code>. You can specify this <code>NextToken</code> value in a subsequent call to <code>ListDataSourceRuns</code> to list the next set of runs.</p>
     #   @return [String]
     class ListDataSourceRunsOutput < Struct.new(
+      nil,
       :items,
       :next_token,
       keyword_init: true
@@ -9839,6 +10185,7 @@ module Aws::DataZone
     #   <p>The maximum number of data sources to return in a single call to <code>ListDataSources</code>. When the number of data sources to be listed is greater than the value of <code>MaxResults</code>, the response contains a <code>NextToken</code> value that you can use in a subsequent call to <code>ListDataSources</code> to list the next set of data sources.</p>
     #   @return [Integer]
     class ListDataSourcesInput < Struct.new(
+      nil,
       :domain_identifier,
       :project_identifier,
       :environment_identifier,
@@ -9860,6 +10207,7 @@ module Aws::DataZone
     #   <p>When the number of data sources is greater than the default value for the <code>MaxResults</code> parameter, or if you explicitly specify a value for <code>MaxResults</code> that is less than the number of data sources, the response includes a pagination token named <code>NextToken</code>. You can specify this <code>NextToken</code> value in a subsequent call to <code>ListDataSources</code> to list the next set of data sources.</p>
     #   @return [String]
     class ListDataSourcesOutput < Struct.new(
+      nil,
       :items,
       :next_token,
       keyword_init: true
@@ -9880,6 +10228,7 @@ module Aws::DataZone
     #   <p>When the number of domain units is greater than the default value for the MaxResults parameter, or if you explicitly specify a value for MaxResults that is less than the number of domain units, the response includes a pagination token named NextToken. You can specify this NextToken value in a subsequent call to ListDomainUnitsForParent to list the next set of domain units.</p>
     #   @return [String]
     class ListDomainUnitsForParentInput < Struct.new(
+      nil,
       :domain_identifier,
       :parent_domain_unit_identifier,
       :max_results,
@@ -9896,6 +10245,7 @@ module Aws::DataZone
     #   <p>When the number of domain units is greater than the default value for the MaxResults parameter, or if you explicitly specify a value for MaxResults that is less than the number of domain units, the response includes a pagination token named NextToken. You can specify this NextToken value in a subsequent call to ListDomainUnitsForParent to list the next set of domain units.</p>
     #   @return [String]
     class ListDomainUnitsForParentOutput < Struct.new(
+      nil,
       :items,
       :next_token,
       keyword_init: true
@@ -9913,6 +10263,7 @@ module Aws::DataZone
     #   <p>When the number of domains is greater than the default value for the <code>MaxResults</code> parameter, or if you explicitly specify a value for <code>MaxResults</code> that is less than the number of domains, the response includes a pagination token named <code>NextToken</code>. You can specify this <code>NextToken</code> value in a subsequent call to <code>ListDomains</code> to list the next set of domains.</p>
     #   @return [String]
     class ListDomainsInput < Struct.new(
+      nil,
       :status,
       :max_results,
       :next_token,
@@ -9928,6 +10279,7 @@ module Aws::DataZone
     #   <p>When the number of domains is greater than the default value for the <code>MaxResults</code> parameter, or if you explicitly specify a value for <code>MaxResults</code> that is less than the number of domains, the response includes a pagination token named <code>NextToken</code>. You can specify this <code>NextToken</code> value in a subsequent call to <code>ListDomains</code> to list the next set of domains.</p>
     #   @return [String]
     class ListDomainsOutput < Struct.new(
+      nil,
       :items,
       :next_token,
       keyword_init: true
@@ -9951,6 +10303,7 @@ module Aws::DataZone
     #   <p>When the number of entities is greater than the default value for the <code>MaxResults</code> parameter, or if you explicitly specify a value for <code>MaxResults</code> that is less than the number of entities, the response includes a pagination token named <code>NextToken</code>. You can specify this <code>NextToken</code> value in a subsequent call to <code>ListEntityOwners</code> to list the next set of entities.</p>
     #   @return [String]
     class ListEntityOwnersInput < Struct.new(
+      nil,
       :domain_identifier,
       :entity_type,
       :entity_identifier,
@@ -9968,6 +10321,7 @@ module Aws::DataZone
     #   <p>When the number of entities is greater than the default value for the <code>MaxResults</code> parameter, or if you explicitly specify a value for <code>MaxResults</code> that is less than the number of entities, the response includes a pagination token named <code>NextToken</code>. You can specify this <code>NextToken</code> value in a subsequent call to <code>ListEntityOwners</code> to list the next set of entities.</p>
     #   @return [String]
     class ListEntityOwnersOutput < Struct.new(
+      nil,
       :owners,
       :next_token,
       keyword_init: true
@@ -9988,6 +10342,7 @@ module Aws::DataZone
     #   <p>The maximum number of environment actions to return in a single call to <code>ListEnvironmentActions</code>. When the number of environment actions to be listed is greater than the value of <code>MaxResults</code>, the response contains a <code>NextToken</code> value that you can use in a subsequent call to <code>ListEnvironmentActions</code> to list the next set of environment actions.</p>
     #   @return [Integer]
     class ListEnvironmentActionsInput < Struct.new(
+      nil,
       :domain_identifier,
       :environment_identifier,
       :next_token,
@@ -10004,6 +10359,7 @@ module Aws::DataZone
     #   <p>When the number of environment actions is greater than the default value for the <code>MaxResults</code> parameter, or if you explicitly specify a value for <code>MaxResults</code> that is less than the number of environment actions, the response includes a pagination token named <code>NextToken</code>. You can specify this <code>NextToken</code> value in a subsequent call to <code>ListEnvironmentActions</code> to list the next set of environment actions.</p>
     #   @return [String]
     class ListEnvironmentActionsOutput < Struct.new(
+      nil,
       :items,
       :next_token,
       keyword_init: true
@@ -10021,6 +10377,7 @@ module Aws::DataZone
     #   <p>When the number of blueprint configurations is greater than the default value for the <code>MaxResults</code> parameter, or if you explicitly specify a value for <code>MaxResults</code> that is less than the number of configurations, the response includes a pagination token named <code>NextToken</code>. You can specify this <code>NextToken</code> value in a subsequent call to <code>ListEnvironmentBlueprintConfigurations</code> to list the next set of configurations.</p>
     #   @return [String]
     class ListEnvironmentBlueprintConfigurationsInput < Struct.new(
+      nil,
       :domain_identifier,
       :max_results,
       :next_token,
@@ -10036,6 +10393,7 @@ module Aws::DataZone
     #   <p>When the number of blueprint configurations is greater than the default value for the <code>MaxResults</code> parameter, or if you explicitly specify a value for <code>MaxResults</code> that is less than the number of configurations, the response includes a pagination token named <code>NextToken</code>. You can specify this <code>NextToken</code> value in a subsequent call to <code>ListEnvironmentBlueprintConfigurations</code> to list the next set of configurations.</p>
     #   @return [String]
     class ListEnvironmentBlueprintConfigurationsOutput < Struct.new(
+      nil,
       :items,
       :next_token,
       keyword_init: true
@@ -10059,6 +10417,7 @@ module Aws::DataZone
     #   <p>Specifies whether the environment blueprint is managed by Amazon DataZone.</p>
     #   @return [Boolean]
     class ListEnvironmentBlueprintsInput < Struct.new(
+      nil,
       :domain_identifier,
       :max_results,
       :next_token,
@@ -10076,6 +10435,7 @@ module Aws::DataZone
     #   <p>When the number of blueprints in the environment is greater than the default value for the <code>MaxResults</code> parameter, or if you explicitly specify a value for <code>MaxResults</code> that is less than the number of blueprints in the environment, the response includes a pagination token named <code>NextToken</code>. You can specify this <code>NextToken</code> value in a subsequent call to <code>ListEnvironmentBlueprints</code>to list the next set of blueprints.</p>
     #   @return [String]
     class ListEnvironmentBlueprintsOutput < Struct.new(
+      nil,
       :items,
       :next_token,
       keyword_init: true
@@ -10108,6 +10468,7 @@ module Aws::DataZone
     #   <p>The maximum number of environment profiles to return in a single call to <code>ListEnvironmentProfiles</code>. When the number of environment profiles to be listed is greater than the value of <code>MaxResults</code>, the response contains a <code>NextToken</code> value that you can use in a subsequent call to <code>ListEnvironmentProfiles</code> to list the next set of environment profiles.</p>
     #   @return [Integer]
     class ListEnvironmentProfilesInput < Struct.new(
+      nil,
       :domain_identifier,
       :aws_account_id,
       :aws_account_region,
@@ -10128,6 +10489,7 @@ module Aws::DataZone
     #   <p>When the number of environment profiles is greater than the default value for the <code>MaxResults</code> parameter, or if you explicitly specify a value for <code>MaxResults</code> that is less than the number of environment profiles, the response includes a pagination token named <code>NextToken</code>. You can specify this <code>NextToken</code> value in a subsequent call to <code>ListEnvironmentProfiles</code> to list the next set of environment profiles.</p>
     #   @return [String]
     class ListEnvironmentProfilesOutput < Struct.new(
+      nil,
       :items,
       :next_token,
       keyword_init: true
@@ -10169,6 +10531,7 @@ module Aws::DataZone
     #   <p>When the number of environments is greater than the default value for the <code>MaxResults</code> parameter, or if you explicitly specify a value for <code>MaxResults</code> that is less than the number of environments, the response includes a pagination token named <code>NextToken</code>. You can specify this <code>NextToken</code> value in a subsequent call to <code>ListEnvironments</code> to list the next set of environments.</p>
     #   @return [String]
     class ListEnvironmentsInput < Struct.new(
+      nil,
       :domain_identifier,
       :aws_account_id,
       :status,
@@ -10192,6 +10555,7 @@ module Aws::DataZone
     #   <p>When the number of environments is greater than the default value for the <code>MaxResults</code> parameter, or if you explicitly specify a value for <code>MaxResults</code> that is less than the number of environments, the response includes a pagination token named <code>NextToken</code>. You can specify this <code>NextToken</code> value in a subsequent call to <code>ListEnvironments</code> to list the next set of environments.</p>
     #   @return [String]
     class ListEnvironmentsOutput < Struct.new(
+      nil,
       :items,
       :next_token,
       keyword_init: true
@@ -10218,6 +10582,7 @@ module Aws::DataZone
     #   <p>The maximum number of job runs to return in a single call to ListJobRuns. When the number of job runs to be listed is greater than the value of MaxResults, the response contains a NextToken value that you can use in a subsequent call to ListJobRuns to list the next set of job runs.</p>
     #   @return [Integer]
     class ListJobRunsInput < Struct.new(
+      nil,
       :domain_identifier,
       :job_identifier,
       :status,
@@ -10236,6 +10601,7 @@ module Aws::DataZone
     #   <p>When the number of job runs is greater than the default value for the MaxResults parameter, or if you explicitly specify a value for MaxResults that is less than the number of job runs, the response includes a pagination token named NextToken. You can specify this NextToken value in a subsequent call to ListJobRuns to list the next set of job runs.</p>
     #   @return [String]
     class ListJobRunsOutput < Struct.new(
+      nil,
       :items,
       :next_token,
       keyword_init: true
@@ -10265,6 +10631,7 @@ module Aws::DataZone
     #   <p>When the number of lineage events is greater than the default value for the MaxResults parameter, or if you explicitly specify a value for MaxResults that is less than the number of lineage events, the response includes a pagination token named NextToken. You can specify this NextToken value in a subsequent call to ListLineageEvents to list the next set of lineage events.</p>
     #   @return [String]
     class ListLineageEventsInput < Struct.new(
+      nil,
       :domain_identifier,
       :max_results,
       :timestamp_after,
@@ -10284,6 +10651,7 @@ module Aws::DataZone
     #   <p>When the number of lineage events is greater than the default value for the MaxResults parameter, or if you explicitly specify a value for MaxResults that is less than the number of lineage events, the response includes a pagination token named NextToken. You can specify this NextToken value in a subsequent call to ListLineageEvents to list the next set of lineage events.</p>
     #   @return [String]
     class ListLineageEventsOutput < Struct.new(
+      nil,
       :items,
       :next_token,
       keyword_init: true
@@ -10316,6 +10684,7 @@ module Aws::DataZone
     #   <p>The order by which you want data lineage node history to be sorted.</p>
     #   @return [String]
     class ListLineageNodeHistoryInput < Struct.new(
+      nil,
       :domain_identifier,
       :max_results,
       :next_token,
@@ -10336,6 +10705,7 @@ module Aws::DataZone
     #   <p>When the number of history items is greater than the default value for the MaxResults parameter, or if you explicitly specify a value for MaxResults that is less than the number of items, the response includes a pagination token named NextToken. You can specify this NextToken value in a subsequent call to ListLineageNodeHistory to list the next set of items.</p>
     #   @return [String]
     class ListLineageNodeHistoryOutput < Struct.new(
+      nil,
       :nodes,
       :next_token,
       keyword_init: true
@@ -10359,6 +10729,7 @@ module Aws::DataZone
     #   <p>The maximum number of metadata generation runs to return in a single call to ListMetadataGenerationRuns. When the number of metadata generation runs to be listed is greater than the value of MaxResults, the response contains a NextToken value that you can use in a subsequent call to ListMetadataGenerationRuns to list the next set of revisions.</p>
     #   @return [Integer]
     class ListMetadataGenerationRunsInput < Struct.new(
+      nil,
       :domain_identifier,
       :status,
       :type,
@@ -10376,6 +10747,7 @@ module Aws::DataZone
     #   <p>When the number of metadata generation runs is greater than the default value for the MaxResults parameter, or if you explicitly specify a value for MaxResults that is less than the number of metadata generation runs, the response includes a pagination token named NextToken. You can specify this NextToken value in a subsequent call to ListMetadataGenerationRuns to list the next set of revisions.</p>
     #   @return [String]
     class ListMetadataGenerationRunsOutput < Struct.new(
+      nil,
       :items,
       :next_token,
       keyword_init: true
@@ -10408,6 +10780,7 @@ module Aws::DataZone
     #   <p>When the number of notifications is greater than the default value for the <code>MaxResults</code> parameter, or if you explicitly specify a value for <code>MaxResults</code> that is less than the number of notifications, the response includes a pagination token named <code>NextToken</code>. You can specify this <code>NextToken</code> value in a subsequent call to <code>ListNotifications</code> to list the next set of notifications.</p>
     #   @return [String]
     class ListNotificationsInput < Struct.new(
+      nil,
       :domain_identifier,
       :type,
       :after_timestamp,
@@ -10428,6 +10801,7 @@ module Aws::DataZone
     #   <p>When the number of notifications is greater than the default value for the <code>MaxResults</code> parameter, or if you explicitly specify a value for <code>MaxResults</code> that is less than the number of notifications, the response includes a pagination token named <code>NextToken</code>. You can specify this <code>NextToken</code> value in a subsequent call to <code>ListNotifications</code> to list the next set of notifications.</p>
     #   @return [String]
     class ListNotificationsOutput < Struct.new(
+      nil,
       :notifications,
       :next_token,
       keyword_init: true
@@ -10454,6 +10828,7 @@ module Aws::DataZone
     #   <p>When the number of grants is greater than the default value for the <code>MaxResults</code> parameter, or if you explicitly specify a value for <code>MaxResults</code> that is less than the number of grants, the response includes a pagination token named <code>NextToken</code>. You can specify this <code>NextToken</code> value in a subsequent call to <code>ListPolicyGrants</code> to list the next set of grants.</p>
     #   @return [String]
     class ListPolicyGrantsInput < Struct.new(
+      nil,
       :domain_identifier,
       :entity_type,
       :entity_identifier,
@@ -10472,6 +10847,7 @@ module Aws::DataZone
     #   <p>When the number of grants is greater than the default value for the <code>MaxResults</code> parameter, or if you explicitly specify a value for <code>MaxResults</code> that is less than the number of grants, the response includes a pagination token named <code>NextToken</code>. You can specify this <code>NextToken</code> value in a subsequent call to <code>ListPolicyGrants</code> to list the next set of grants.</p>
     #   @return [String]
     class ListPolicyGrantsOutput < Struct.new(
+      nil,
       :grant_list,
       :next_token,
       keyword_init: true
@@ -10498,6 +10874,7 @@ module Aws::DataZone
     #   <p>The maximum number of memberships to return in a single call to <code>ListProjectMemberships</code>. When the number of memberships to be listed is greater than the value of <code>MaxResults</code>, the response contains a <code>NextToken</code> value that you can use in a subsequent call to <code>ListProjectMemberships</code> to list the next set of memberships.</p>
     #   @return [Integer]
     class ListProjectMembershipsInput < Struct.new(
+      nil,
       :domain_identifier,
       :project_identifier,
       :sort_by,
@@ -10516,6 +10893,7 @@ module Aws::DataZone
     #   <p>When the number of memberships is greater than the default value for the <code>MaxResults</code> parameter, or if you explicitly specify a value for <code>MaxResults</code> that is less than the number of memberships, the response includes a pagination token named <code>NextToken</code>. You can specify this <code>NextToken</code> value in a subsequent call to <code>ListProjectMemberships</code> to list the next set of memberships.</p>
     #   @return [String]
     class ListProjectMembershipsOutput < Struct.new(
+      nil,
       :members,
       :next_token,
       keyword_init: true
@@ -10542,6 +10920,7 @@ module Aws::DataZone
     #   <p>The maximum number of project profiles to return in a single call to ListProjectProfiles. When the number of project profiles to be listed is greater than the value of MaxResults, the response contains a NextToken value that you can use in a subsequent call to ListProjectProfiles to list the next set of project profiles.</p>
     #   @return [Integer]
     class ListProjectProfilesInput < Struct.new(
+      nil,
       :domain_identifier,
       :name,
       :sort_by,
@@ -10560,6 +10939,7 @@ module Aws::DataZone
     #   <p>When the number of project profiles is greater than the default value for the MaxResults parameter, or if you explicitly specify a value for MaxResults that is less than the number of project profiles, the response includes a pagination token named NextToken. You can specify this NextToken value in a subsequent call to ListProjectProfiles to list the next set of project profiles.</p>
     #   @return [String]
     class ListProjectProfilesOutput < Struct.new(
+      nil,
       :items,
       :next_token,
       keyword_init: true
@@ -10586,6 +10966,7 @@ module Aws::DataZone
     #   <p>The maximum number of projects to return in a single call to <code>ListProjects</code>. When the number of projects to be listed is greater than the value of <code>MaxResults</code>, the response contains a <code>NextToken</code> value that you can use in a subsequent call to <code>ListProjects</code> to list the next set of projects.</p>
     #   @return [Integer]
     class ListProjectsInput < Struct.new(
+      nil,
       :domain_identifier,
       :user_identifier,
       :group_identifier,
@@ -10604,6 +10985,7 @@ module Aws::DataZone
     #   <p>When the number of projects is greater than the default value for the <code>MaxResults</code> parameter, or if you explicitly specify a value for <code>MaxResults</code> that is less than the number of projects, the response includes a pagination token named <code>NextToken</code>. You can specify this <code>NextToken</code> value in a subsequent call to <code>ListProjects</code> to list the next set of projects.</p>
     #   @return [String]
     class ListProjectsOutput < Struct.new(
+      nil,
       :items,
       :next_token,
       keyword_init: true
@@ -10645,6 +11027,7 @@ module Aws::DataZone
     #   <p>When the number of rules is greater than the default value for the <code>MaxResults</code> parameter, or if you explicitly specify a value for <code>MaxResults</code> that is less than the number of rules, the response includes a pagination token named <code>NextToken</code>. You can specify this <code>NextToken</code> value in a subsequent call to <code>ListRules</code> to list the next set of rules.</p>
     #   @return [String]
     class ListRulesInput < Struct.new(
+      nil,
       :domain_identifier,
       :target_type,
       :target_identifier,
@@ -10668,6 +11051,7 @@ module Aws::DataZone
     #   <p>When the number of rules is greater than the default value for the <code>MaxResults</code> parameter, or if you explicitly specify a value for <code>MaxResults</code> that is less than the number of rules, the response includes a pagination token named <code>NextToken</code>. You can specify this <code>NextToken</code> value in a subsequent call to <code>ListRules</code> to list the next set of rules.</p>
     #   @return [String]
     class ListRulesOutput < Struct.new(
+      nil,
       :items,
       :next_token,
       keyword_init: true
@@ -10706,6 +11090,7 @@ module Aws::DataZone
     #   <p>When the number of subscription grants is greater than the default value for the <code>MaxResults</code> parameter, or if you explicitly specify a value for <code>MaxResults</code> that is less than the number of subscription grants, the response includes a pagination token named <code>NextToken</code>. You can specify this <code>NextToken</code> value in a subsequent call to <code>ListSubscriptionGrants</code> to list the next set of subscription grants.</p>
     #   @return [String]
     class ListSubscriptionGrantsInput < Struct.new(
+      nil,
       :domain_identifier,
       :environment_id,
       :subscription_target_id,
@@ -10728,6 +11113,7 @@ module Aws::DataZone
     #   <p>When the number of subscription grants is greater than the default value for the <code>MaxResults</code> parameter, or if you explicitly specify a value for <code>MaxResults</code> that is less than the number of subscription grants, the response includes a pagination token named <code>NextToken</code>. You can specify this <code>NextToken</code> value in a subsequent call to <code>ListSubscriptionGrants</code> to list the next set of subscription grants.</p>
     #   @return [String]
     class ListSubscriptionGrantsOutput < Struct.new(
+      nil,
       :items,
       :next_token,
       keyword_init: true
@@ -10763,6 +11149,7 @@ module Aws::DataZone
     #   <p>When the number of subscription requests is greater than the default value for the <code>MaxResults</code> parameter, or if you explicitly specify a value for <code>MaxResults</code> that is less than the number of subscription requests, the response includes a pagination token named <code>NextToken</code>. You can specify this <code>NextToken</code> value in a subsequent call to <code>ListSubscriptionRequests</code> to list the next set of subscription requests.</p>
     #   @return [String]
     class ListSubscriptionRequestsInput < Struct.new(
+      nil,
       :domain_identifier,
       :status,
       :subscribed_listing_id,
@@ -10784,6 +11171,7 @@ module Aws::DataZone
     #   <p>When the number of subscription requests is greater than the default value for the <code>MaxResults</code> parameter, or if you explicitly specify a value for <code>MaxResults</code> that is less than the number of subscription requests, the response includes a pagination token named <code>NextToken</code>. You can specify this <code>NextToken</code> value in a subsequent call to <code>ListSubscriptionRequests</code> to list the next set of subscription requests.</p>
     #   @return [String]
     class ListSubscriptionRequestsOutput < Struct.new(
+      nil,
       :items,
       :next_token,
       keyword_init: true
@@ -10810,6 +11198,7 @@ module Aws::DataZone
     #   <p>When the number of subscription targets is greater than the default value for the <code>MaxResults</code> parameter, or if you explicitly specify a value for <code>MaxResults</code> that is less than the number of subscription targets, the response includes a pagination token named <code>NextToken</code>. You can specify this <code>NextToken</code> value in a subsequent call to <code>ListSubscriptionTargets</code> to list the next set of subscription targets.</p>
     #   @return [String]
     class ListSubscriptionTargetsInput < Struct.new(
+      nil,
       :domain_identifier,
       :environment_identifier,
       :sort_by,
@@ -10828,6 +11217,7 @@ module Aws::DataZone
     #   <p>When the number of subscription targets is greater than the default value for the <code>MaxResults</code> parameter, or if you explicitly specify a value for <code>MaxResults</code> that is less than the number of subscription targets, the response includes a pagination token named <code>NextToken</code>. You can specify this <code>NextToken</code> value in a subsequent call to <code>ListSubscriptionTargets</code> to list the next set of subscription targets.</p>
     #   @return [String]
     class ListSubscriptionTargetsOutput < Struct.new(
+      nil,
       :items,
       :next_token,
       keyword_init: true
@@ -10866,6 +11256,7 @@ module Aws::DataZone
     #   <p>When the number of subscriptions is greater than the default value for the <code>MaxResults</code> parameter, or if you explicitly specify a value for <code>MaxResults</code> that is less than the number of subscriptions, the response includes a pagination token named <code>NextToken</code>. You can specify this <code>NextToken</code> value in a subsequent call to <code>ListSubscriptions</code> to list the next set of subscriptions.</p>
     #   @return [String]
     class ListSubscriptionsInput < Struct.new(
+      nil,
       :domain_identifier,
       :subscription_request_identifier,
       :status,
@@ -10888,6 +11279,7 @@ module Aws::DataZone
     #   <p>When the number of subscriptions is greater than the default value for the <code>MaxResults</code> parameter, or if you explicitly specify a value for <code>MaxResults</code> that is less than the number of subscriptions, the response includes a pagination token named <code>NextToken</code>. You can specify this <code>NextToken</code> value in a subsequent call to <code>ListSubscriptions</code> to list the next set of subscriptions.</p>
     #   @return [String]
     class ListSubscriptionsOutput < Struct.new(
+      nil,
       :items,
       :next_token,
       keyword_init: true
@@ -10899,6 +11291,7 @@ module Aws::DataZone
     #   <p>The ARN of the resource whose tags you want to list.</p>
     #   @return [String]
     class ListTagsForResourceRequest < Struct.new(
+      nil,
       :resource_arn,
       keyword_init: true
     )
@@ -10909,6 +11302,7 @@ module Aws::DataZone
     #   <p>The tags of the specified resource.</p>
     #   @return [Hash<String, String>]
     class ListTagsForResourceResponse < Struct.new(
+      nil,
       :tags,
       keyword_init: true
     )
@@ -10940,6 +11334,7 @@ module Aws::DataZone
     #   <p>The maximum number of data points to return in a single call to ListTimeSeriesDataPoints. When the number of data points to be listed is greater than the value of MaxResults, the response contains a NextToken value that you can use in a subsequent call to ListTimeSeriesDataPoints to list the next set of data points.</p>
     #   @return [Integer]
     class ListTimeSeriesDataPointsInput < Struct.new(
+      nil,
       :domain_identifier,
       :entity_identifier,
       :entity_type,
@@ -10960,6 +11355,7 @@ module Aws::DataZone
     #   <p>When the number of data points is greater than the default value for the MaxResults parameter, or if you explicitly specify a value for MaxResults that is less than the number of data points, the response includes a pagination token named NextToken. You can specify this NextToken value in a subsequent call to ListTimeSeriesDataPoints to list the next set of data points.</p>
     #   @return [String]
     class ListTimeSeriesDataPointsOutput < Struct.new(
+      nil,
       :items,
       :next_token,
       keyword_init: true
@@ -10995,6 +11391,7 @@ module Aws::DataZone
     #   <p>The details of a revision of an asset published in a Amazon DataZone catalog.</p>
     #   @return [String]
     class ListingRevision < Struct.new(
+      nil,
       :id,
       :revision,
       keyword_init: true
@@ -11010,6 +11407,7 @@ module Aws::DataZone
     #   <p>The details of a revision to be made to an asset published in a Amazon DataZone catalog.</p>
     #   @return [String]
     class ListingRevisionInput < Struct.new(
+      nil,
       :identifier,
       :revision,
       keyword_init: true
@@ -11028,6 +11426,7 @@ module Aws::DataZone
     #   <p>The glossary terms of the data product.</p>
     #   @return [Array<Types::DetailedGlossaryTerm>]
     class ListingSummary < Struct.new(
+      nil,
       :listing_id,
       :listing_revision,
       :glossary_terms,
@@ -11047,6 +11446,7 @@ module Aws::DataZone
     #   <p>The glossary terms of the data product listing.</p>
     #   @return [Array<Types::DetailedGlossaryTerm>]
     class ListingSummaryItem < Struct.new(
+      nil,
       :listing_id,
       :listing_revision,
       :glossary_terms,
@@ -11064,6 +11464,7 @@ module Aws::DataZone
     #   <p>The ARN of the managed endpoint credentials.</p>
     #   @return [String]
     class ManagedEndpointCredentials < Struct.new(
+      nil,
       :id,
       :token,
       keyword_init: true
@@ -11079,6 +11480,7 @@ module Aws::DataZone
     #   <p>The 0-indexed number indicating the end position (exclusive) of a matched term.</p>
     #   @return [Integer]
     class MatchOffset < Struct.new(
+      nil,
       :start_offset,
       :end_offset,
       keyword_init: true
@@ -11146,6 +11548,7 @@ module Aws::DataZone
     #   <p>The required metadata forms.</p>
     #   @return [Array<Types::MetadataFormReference>]
     class MetadataFormEnforcementDetail < Struct.new(
+      nil,
       :required_metadata_forms,
       keyword_init: true
     )
@@ -11160,6 +11563,7 @@ module Aws::DataZone
     #   <p>The type revision of the metadata form reference.</p>
     #   @return [String]
     class MetadataFormReference < Struct.new(
+      nil,
       :type_identifier,
       :type_revision,
       keyword_init: true
@@ -11178,6 +11582,7 @@ module Aws::DataZone
     #   <p>The type revision of the metadata form.</p>
     #   @return [String]
     class MetadataFormSummary < Struct.new(
+      nil,
       :form_name,
       :type_name,
       :type_revision,
@@ -11212,6 +11617,7 @@ module Aws::DataZone
     #   <p>The ID of the project that owns the asset for which the metadata generation was ran.</p>
     #   @return [String]
     class MetadataGenerationRunItem < Struct.new(
+      nil,
       :domain_id,
       :id,
       :target,
@@ -11236,6 +11642,7 @@ module Aws::DataZone
     #   <p>The revision of the asset for which metadata was generated.</p>
     #   @return [String]
     class MetadataGenerationRunTarget < Struct.new(
+      nil,
       :type,
       :identifier,
       :revision,
@@ -11268,6 +11675,7 @@ module Aws::DataZone
     #   <p>The namespace in the name identifier.</p>
     #   @return [String]
     class NameIdentifier < Struct.new(
+      nil,
       :name,
       :namespace,
       keyword_init: true
@@ -11283,6 +11691,7 @@ module Aws::DataZone
     #   <p>The value that might not be equal to the expression.</p>
     #   @return [String]
     class NotEqualToExpression < Struct.new(
+      nil,
       :column_name,
       :value,
       keyword_init: true
@@ -11298,6 +11707,7 @@ module Aws::DataZone
     #   <p>The value that might not be in the expression.</p>
     #   @return [Array<String>]
     class NotInExpression < Struct.new(
+      nil,
       :column_name,
       :values,
       keyword_init: true
@@ -11313,6 +11723,7 @@ module Aws::DataZone
     #   <p>The value that might not be like the expression.</p>
     #   @return [String]
     class NotLikeExpression < Struct.new(
+      nil,
       :column_name,
       :value,
       keyword_init: true
@@ -11355,6 +11766,7 @@ module Aws::DataZone
     #   <p>The metadata included in the notification.</p>
     #   @return [Hash<String, String>]
     class NotificationOutput < Struct.new(
+      nil,
       :identifier,
       :domain_identifier,
       :type,
@@ -11382,6 +11794,7 @@ module Aws::DataZone
     #   <p>The name of the resource mentioned in a notification.</p>
     #   @return [String]
     class NotificationResource < Struct.new(
+      nil,
       :type,
       :id,
       :name,
@@ -11398,6 +11811,7 @@ module Aws::DataZone
     #   <p>The Amazon Web Services managed client application reference in the OAuth2Client application.</p>
     #   @return [String]
     class OAuth2ClientApplication < Struct.new(
+      nil,
       :user_managed_client_application_client_id,
       :a_ws_managed_client_application_reference,
       keyword_init: true
@@ -11425,6 +11839,7 @@ module Aws::DataZone
     #   <p>The OAuth2 credentials of the OAuth2 properties.</p>
     #   @return [Types::GlueOAuth2Credentials]
     class OAuth2Properties < Struct.new(
+      nil,
       :o_auth2_grant_type,
       :o_auth2_client_application,
       :token_url,
@@ -11453,6 +11868,7 @@ module Aws::DataZone
     #   <p>The outputs of the open lineage run event summary.</p>
     #   @return [Array<Types::NameIdentifier>]
     class OpenLineageRunEventSummary < Struct.new(
+      nil,
       :event_type,
       :run_id,
       :job,
@@ -11468,6 +11884,7 @@ module Aws::DataZone
     #   <p>Specifies whether the policy is inherited by child domain units.</p>
     #   @return [Boolean]
     class OverrideDomainUnitOwnersPolicyGrantDetail < Struct.new(
+      nil,
       :include_child_domain_units,
       keyword_init: true
     )
@@ -11479,6 +11896,7 @@ module Aws::DataZone
     #   <p>Specifies whether the policy is inherited by child domain units.</p>
     #   @return [Boolean]
     class OverrideProjectOwnersPolicyGrantDetail < Struct.new(
+      nil,
       :include_child_domain_units,
       keyword_init: true
     )
@@ -11490,6 +11908,7 @@ module Aws::DataZone
     #   <p>The ID of the domain unit owners group.</p>
     #   @return [String]
     class OwnerGroupProperties < Struct.new(
+      nil,
       :group_identifier,
       keyword_init: true
     )
@@ -11501,6 +11920,7 @@ module Aws::DataZone
     #   <p>The ID of the domain unit owners group.</p>
     #   @return [String]
     class OwnerGroupPropertiesOutput < Struct.new(
+      nil,
       :group_id,
       keyword_init: true
     )
@@ -11552,6 +11972,7 @@ module Aws::DataZone
     #   <p>The ID of the owner user.</p>
     #   @return [String]
     class OwnerUserProperties < Struct.new(
+      nil,
       :user_identifier,
       keyword_init: true
     )
@@ -11563,6 +11984,7 @@ module Aws::DataZone
     #   <p>The ID of the owner user.</p>
     #   @return [String]
     class OwnerUserPropertiesOutput < Struct.new(
+      nil,
       :user_id,
       keyword_init: true
     )
@@ -11583,6 +12005,7 @@ module Aws::DataZone
     #   <p>The availability zone of the physical connection requirements of a connection. </p>
     #   @return [String]
     class PhysicalConnectionRequirements < Struct.new(
+      nil,
       :subnet_id,
       :subnet_id_list,
       :security_group_id_list,
@@ -11615,6 +12038,7 @@ module Aws::DataZone
     #   <p>The stage in the physical endpoints of a connection.</p>
     #   @return [String]
     class PhysicalEndpoint < Struct.new(
+      nil,
       :aws_location,
       :glue_connection_name,
       :glue_connection,
@@ -11724,6 +12148,7 @@ module Aws::DataZone
     #   <p>The ID of the policy grant.</p>
     #   @return [String]
     class PolicyGrantMember < Struct.new(
+      nil,
       :principal,
       :detail,
       :created_at,
@@ -11774,6 +12199,7 @@ module Aws::DataZone
     #   <p>A unique, case-sensitive identifier that is provided to ensure the idempotency of the request.</p>
     #   @return [String]
     class PostLineageEventInput < Struct.new(
+      nil,
       :domain_identifier,
       :event,
       :client_token,
@@ -11789,6 +12215,7 @@ module Aws::DataZone
     #   <p>The ID of the domain.</p>
     #   @return [String]
     class PostLineageEventOutput < Struct.new(
+      nil,
       :id,
       :domain_id,
       keyword_init: true
@@ -11812,6 +12239,7 @@ module Aws::DataZone
     #   <p>A unique, case-sensitive identifier that is provided to ensure the idempotency of the request.</p>
     #   @return [String]
     class PostTimeSeriesDataPointsInput < Struct.new(
+      nil,
       :domain_identifier,
       :entity_identifier,
       :entity_type,
@@ -11835,6 +12263,7 @@ module Aws::DataZone
     #   <p>The forms that contain the data points that you have posted.</p>
     #   @return [Array<Types::TimeSeriesDataPointFormOutput>]
     class PostTimeSeriesDataPointsOutput < Struct.new(
+      nil,
       :domain_id,
       :entity_id,
       :entity_type,
@@ -11849,6 +12278,7 @@ module Aws::DataZone
     #   <p>The business name generation mechanism.</p>
     #   @return [Types::BusinessNameGenerationConfiguration]
     class PredictionConfiguration < Struct.new(
+      nil,
       :business_name_generation,
       keyword_init: true
     )
@@ -11863,6 +12293,7 @@ module Aws::DataZone
     #   <p>The message of the project deletion error.</p>
     #   @return [String]
     class ProjectDeletionError < Struct.new(
+      nil,
       :code,
       :message,
       keyword_init: true
@@ -11893,6 +12324,7 @@ module Aws::DataZone
     #   <p>The designated role of a project member.</p>
     #   @return [String]
     class ProjectMember < Struct.new(
+      nil,
       :member_details,
       :designation,
       keyword_init: true
@@ -11911,6 +12343,7 @@ module Aws::DataZone
     #   <p>The project grant filter of the project policy grant principal.</p>
     #   @return [Types::ProjectGrantFilter]
     class ProjectPolicyGrantPrincipal < Struct.new(
+      nil,
       :project_designation,
       :project_identifier,
       :project_grant_filter,
@@ -11948,6 +12381,7 @@ module Aws::DataZone
     #   <p>The domain unit ID of the project profile.</p>
     #   @return [String]
     class ProjectProfileSummary < Struct.new(
+      nil,
       :domain_id,
       :id,
       :name,
@@ -11994,6 +12428,7 @@ module Aws::DataZone
     #   <p>The ID of the domain unit.</p>
     #   @return [String]
     class ProjectSummary < Struct.new(
+      nil,
       :domain_id,
       :id,
       :name,
@@ -12017,6 +12452,7 @@ module Aws::DataZone
     #   <p>The specific projects in which the rule is created.</p>
     #   @return [Array<String>]
     class ProjectsForRule < Struct.new(
+      nil,
       :selection_mode,
       :specific_projects,
       keyword_init: true
@@ -12082,6 +12518,7 @@ module Aws::DataZone
     #   <p>The provisioning configuration of a blueprint.</p>
     #   @return [Array<Types::ProvisioningConfiguration>]
     class PutEnvironmentBlueprintConfigurationInput < Struct.new(
+      nil,
       :domain_identifier,
       :environment_blueprint_identifier,
       :provisioning_role_arn,
@@ -12127,6 +12564,7 @@ module Aws::DataZone
     #   <p>The provisioning configuration of a blueprint.</p>
     #   @return [Array<Types::ProvisioningConfiguration>]
     class PutEnvironmentBlueprintConfigurationOutput < Struct.new(
+      nil,
       :domain_id,
       :environment_blueprint_id,
       :provisioning_role_arn,
@@ -12147,6 +12585,7 @@ module Aws::DataZone
     #   <p>Specifies whether automatic business name generation is to be enabled or not as part of the recommendation configuration.</p>
     #   @return [Boolean]
     class RecommendationConfiguration < Struct.new(
+      nil,
       :enable_business_name_generation,
       keyword_init: true
     )
@@ -12158,6 +12597,7 @@ module Aws::DataZone
     #   <p>The name of an Amazon Redshift cluster.</p>
     #   @return [String]
     class RedshiftClusterStorage < Struct.new(
+      nil,
       :cluster_name,
       keyword_init: true
     )
@@ -12169,6 +12609,7 @@ module Aws::DataZone
     #   <p>The ARN of a secret manager for an Amazon Redshift cluster.</p>
     #   @return [String]
     class RedshiftCredentialConfiguration < Struct.new(
+      nil,
       :secret_manager_arn,
       keyword_init: true
     )
@@ -12204,6 +12645,7 @@ module Aws::DataZone
     #   <p>The schedule of the Amaon Redshift lineage sync configuration.</p>
     #   @return [Types::LineageSyncSchedule]
     class RedshiftLineageSyncConfigurationInput < Struct.new(
+      nil,
       :enabled,
       :schedule,
       keyword_init: true
@@ -12222,6 +12664,7 @@ module Aws::DataZone
     #   <p>The schedule of teh Amaon Redshift lineage sync configuration.</p>
     #   @return [Types::LineageSyncSchedule]
     class RedshiftLineageSyncConfigurationOutput < Struct.new(
+      nil,
       :lineage_job_id,
       :enabled,
       :schedule,
@@ -12250,6 +12693,7 @@ module Aws::DataZone
     #   <p>The lineage sync of the Amazon Redshift.</p>
     #   @return [Types::RedshiftLineageSyncConfigurationInput]
     class RedshiftPropertiesInput < Struct.new(
+      nil,
       :storage,
       :database_name,
       :host,
@@ -12290,6 +12734,7 @@ module Aws::DataZone
     #   <p>The Amazon Redshift database name.</p>
     #   @return [String]
     class RedshiftPropertiesOutput < Struct.new(
+      nil,
       :storage,
       :credentials,
       :is_provisioned_secret,
@@ -12324,6 +12769,7 @@ module Aws::DataZone
     #   <p>The lineage sync in the Amazon Redshift properties patch.</p>
     #   @return [Types::RedshiftLineageSyncConfigurationInput]
     class RedshiftPropertiesPatch < Struct.new(
+      nil,
       :storage,
       :database_name,
       :host,
@@ -12349,6 +12795,7 @@ module Aws::DataZone
     #   <p>The details of the Amazon Redshift storage as part of the configuration of an Amazon Redshift data source run.</p>
     #   @return [Types::RedshiftStorage]
     class RedshiftRunConfigurationInput < Struct.new(
+      nil,
       :data_access_role,
       :relational_filter_configurations,
       :redshift_credential_configuration,
@@ -12378,6 +12825,7 @@ module Aws::DataZone
     #   <p>The details of the Amazon Redshift storage as part of the configuration of an Amazon Redshift data source run.</p>
     #   @return [Types::RedshiftStorage]
     class RedshiftRunConfigurationOutput < Struct.new(
+      nil,
       :account_id,
       :region,
       :data_access_role,
@@ -12394,6 +12842,7 @@ module Aws::DataZone
     #   <p>The details for the self granting status for an Amazon Redshift data source.</p>
     #   @return [Array<Types::SelfGrantStatusDetail>]
     class RedshiftSelfGrantStatusOutput < Struct.new(
+      nil,
       :self_grant_status_details,
       keyword_init: true
     )
@@ -12405,6 +12854,7 @@ module Aws::DataZone
     #   <p>The name of the Amazon Redshift Serverless workgroup.</p>
     #   @return [String]
     class RedshiftServerlessStorage < Struct.new(
+      nil,
       :workgroup_name,
       keyword_init: true
     )
@@ -12479,6 +12929,7 @@ module Aws::DataZone
     #   <p>Specifies the the automatically generated business metadata that can be rejected.</p>
     #   @return [Array<Integer>]
     class RejectChoice < Struct.new(
+      nil,
       :prediction_target,
       :prediction_choices,
       keyword_init: true
@@ -12505,6 +12956,7 @@ module Aws::DataZone
     #   <p>A unique, case-sensitive identifier that is provided to ensure the idempotency of the request.</p>
     #   @return [String]
     class RejectPredictionsInput < Struct.new(
+      nil,
       :domain_identifier,
       :identifier,
       :revision,
@@ -12526,6 +12978,7 @@ module Aws::DataZone
     #   <p>The revision that is to be made to the asset.</p>
     #   @return [String]
     class RejectPredictionsOutput < Struct.new(
+      nil,
       :domain_id,
       :asset_id,
       :asset_revision,
@@ -12542,6 +12995,7 @@ module Aws::DataZone
     #   <p>The confidence score that specifies the condition at which a prediction can be rejected.</p>
     #   @return [Float]
     class RejectRule < Struct.new(
+      nil,
       :rule,
       :threshold,
       keyword_init: true
@@ -12559,6 +13013,7 @@ module Aws::DataZone
     #   <p>The decision comment of the rejected subscription request.</p>
     #   @return [String]
     class RejectSubscriptionRequestInput < Struct.new(
+      nil,
       :domain_identifier,
       :identifier,
       :decision_comment,
@@ -12610,6 +13065,7 @@ module Aws::DataZone
     #   <p>Metadata forms included in the subscription request.</p>
     #   @return [Array<Types::FormOutput>]
     class RejectSubscriptionRequestOutput < Struct.new(
+      nil,
       :id,
       :created_by,
       :updated_by,
@@ -12640,6 +13096,7 @@ module Aws::DataZone
     #   <p>The filter expressions specified in the relational filter configuration for the data source.</p>
     #   @return [Array<Types::FilterExpression>]
     class RelationalFilterConfiguration < Struct.new(
+      nil,
       :database_name,
       :schema_name,
       :filter_expressions,
@@ -12664,6 +13121,7 @@ module Aws::DataZone
     #   <p>A unique, case-sensitive identifier that is provided to ensure the idempotency of the request.</p>
     #   @return [String]
     class RemoveEntityOwnerInput < Struct.new(
+      nil,
       :domain_identifier,
       :entity_type,
       :entity_identifier,
@@ -12675,6 +13133,7 @@ module Aws::DataZone
     end
 
     class RemoveEntityOwnerOutput < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -12702,6 +13161,7 @@ module Aws::DataZone
     #   <p>A unique, case-sensitive identifier that is provided to ensure the idempotency of the request.</p>
     #   @return [String]
     class RemovePolicyGrantInput < Struct.new(
+      nil,
       :domain_identifier,
       :entity_type,
       :entity_identifier,
@@ -12715,6 +13175,7 @@ module Aws::DataZone
     end
 
     class RemovePolicyGrantOutput < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -12734,6 +13195,7 @@ module Aws::DataZone
     #   <p>The type of a provisioned resource of this Amazon DataZone environment.</p>
     #   @return [String]
     class Resource < Struct.new(
+      nil,
       :provider,
       :name,
       :value,
@@ -12747,6 +13209,7 @@ module Aws::DataZone
     # @!attribute message
     #   @return [String]
     class ResourceNotFoundException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -12763,6 +13226,7 @@ module Aws::DataZone
     #   <p>Specifies whether permissions are retained when the subscription is revoked.</p>
     #   @return [Boolean]
     class RevokeSubscriptionInput < Struct.new(
+      nil,
       :domain_identifier,
       :identifier,
       :retain_permissions,
@@ -12805,6 +13269,7 @@ module Aws::DataZone
     #   <p>Specifies whether permissions are retained when the subscription is revoked.</p>
     #   @return [Boolean]
     class RevokeSubscriptionOutput < Struct.new(
+      nil,
       :id,
       :created_by,
       :updated_by,
@@ -12854,6 +13319,7 @@ module Aws::DataZone
     #   <p>Specifies whether the row filter is sensitive.</p>
     #   @return [Boolean]
     class RowFilterConfiguration < Struct.new(
+      nil,
       :row_filter,
       :sensitive,
       keyword_init: true
@@ -12962,6 +13428,7 @@ module Aws::DataZone
     #   <p>The project included in the rule scope.</p>
     #   @return [Types::ProjectsForRule]
     class RuleScope < Struct.new(
+      nil,
       :asset_type,
       :data_product,
       :project,
@@ -13002,6 +13469,7 @@ module Aws::DataZone
     #   <p>The timestamp at which the rule was last updated.</p>
     #   @return [String]
     class RuleSummary < Struct.new(
+      nil,
       :identifier,
       :revision,
       :rule_type,
@@ -13049,6 +13517,7 @@ module Aws::DataZone
     #   <p>The <code>failed</code> statistic for the data source run.</p>
     #   @return [Integer]
     class RunStatisticsForAssets < Struct.new(
+      nil,
       :added,
       :updated,
       :unchanged,
@@ -13067,6 +13536,7 @@ module Aws::DataZone
     #   <p>The Amazon S3 Access Grant location ID that's part of the Amazon S3 properties of a connection.</p>
     #   @return [String]
     class S3PropertiesInput < Struct.new(
+      nil,
       :s3_uri,
       :s3_access_grant_location_id,
       keyword_init: true
@@ -13088,6 +13558,7 @@ module Aws::DataZone
     #   <p>The error message that gets displayed.</p>
     #   @return [String]
     class S3PropertiesOutput < Struct.new(
+      nil,
       :s3_uri,
       :s3_access_grant_location_id,
       :status,
@@ -13105,6 +13576,7 @@ module Aws::DataZone
     #   <p>The Amazon S3 Access Grant location ID that's part of the Amazon S3 properties patch of a connection.</p>
     #   @return [String]
     class S3PropertiesPatch < Struct.new(
+      nil,
       :s3_uri,
       :s3_access_grant_location_id,
       keyword_init: true
@@ -13117,6 +13589,7 @@ module Aws::DataZone
     #   <p>The tracking assets of the Amazon SageMaker run.</p>
     #   @return [Hash<String, Array<String>>]
     class SageMakerRunConfigurationInput < Struct.new(
+      nil,
       :tracking_assets,
       keyword_init: true
     )
@@ -13134,6 +13607,7 @@ module Aws::DataZone
     #   <p>The tracking assets of the Amazon SageMaker.</p>
     #   @return [Hash<String, Array<String>>]
     class SageMakerRunConfigurationOutput < Struct.new(
+      nil,
       :account_id,
       :region,
       :tracking_assets,
@@ -13151,6 +13625,7 @@ module Aws::DataZone
     #   <p>The schedule of the data source runs.</p>
     #   @return [String]
     class ScheduleConfiguration < Struct.new(
+      nil,
       :timezone,
       :schedule,
       keyword_init: true
@@ -13174,6 +13649,7 @@ module Aws::DataZone
     #   <p>When the number of results is greater than the default value for the <code>MaxResults</code> parameter, or if you explicitly specify a value for <code>MaxResults</code> that is less than the number of results, the response includes a pagination token named <code>NextToken</code>. You can specify this <code>NextToken</code> value in a subsequent call to <code>SearchGroupProfiles</code> to list the next set of results.</p>
     #   @return [String]
     class SearchGroupProfilesInput < Struct.new(
+      nil,
       :domain_identifier,
       :group_type,
       :search_text,
@@ -13191,6 +13667,7 @@ module Aws::DataZone
     #   <p>When the number of results is greater than the default value for the <code>MaxResults</code> parameter, or if you explicitly specify a value for <code>MaxResults</code> that is less than the number of results, the response includes a pagination token named <code>NextToken</code>. You can specify this <code>NextToken</code> value in a subsequent call to <code>SearchGroupProfiles</code> to list the next set of results.</p>
     #   @return [String]
     class SearchGroupProfilesOutput < Struct.new(
+      nil,
       :items,
       :next_token,
       keyword_init: true
@@ -13203,6 +13680,7 @@ module Aws::DataZone
     #   <p>The search attribute.</p>
     #   @return [String]
     class SearchInItem < Struct.new(
+      nil,
       :attribute,
       keyword_init: true
     )
@@ -13240,6 +13718,7 @@ module Aws::DataZone
     #   <p>Specifies additional attributes for the <code>Search</code> action.</p>
     #   @return [Array<String>]
     class SearchInput < Struct.new(
+      nil,
       :domain_identifier,
       :owning_project_identifier,
       :max_results,
@@ -13313,6 +13792,7 @@ module Aws::DataZone
     #   <p>Specifies additional attributes for the search.</p>
     #   @return [Array<String>]
     class SearchListingsInput < Struct.new(
+      nil,
       :domain_identifier,
       :search_text,
       :search_in,
@@ -13340,6 +13820,7 @@ module Aws::DataZone
     #   <p>Contains computed counts grouped by field values based on the requested aggregation attributes for the matching listings.</p>
     #   @return [Array<Types::AggregationOutput>]
     class SearchListingsOutput < Struct.new(
+      nil,
       :items,
       :next_token,
       :total_match_count,
@@ -13359,6 +13840,7 @@ module Aws::DataZone
     #   <p>Total number of search results.</p>
     #   @return [Integer]
     class SearchOutput < Struct.new(
+      nil,
       :items,
       :next_token,
       :total_match_count,
@@ -13395,6 +13877,7 @@ module Aws::DataZone
     #   <p>The order detail of the wya to sort search results.</p>
     #   @return [String]
     class SearchSort < Struct.new(
+      nil,
       :attribute,
       :order,
       keyword_init: true
@@ -13430,6 +13913,7 @@ module Aws::DataZone
     #   <p>Specifies whether the search is managed.</p>
     #   @return [Boolean]
     class SearchTypesInput < Struct.new(
+      nil,
       :domain_identifier,
       :max_results,
       :next_token,
@@ -13454,6 +13938,7 @@ module Aws::DataZone
     #   <p>Total number of search results.</p>
     #   @return [Integer]
     class SearchTypesOutput < Struct.new(
+      nil,
       :items,
       :next_token,
       :total_match_count,
@@ -13503,6 +13988,7 @@ module Aws::DataZone
     #   <p>When the number of results is greater than the default value for the <code>MaxResults</code> parameter, or if you explicitly specify a value for <code>MaxResults</code> that is less than the number of results, the response includes a pagination token named <code>NextToken</code>. You can specify this <code>NextToken</code> value in a subsequent call to <code>SearchUserProfiles</code> to list the next set of results.</p>
     #   @return [String]
     class SearchUserProfilesInput < Struct.new(
+      nil,
       :domain_identifier,
       :user_type,
       :search_text,
@@ -13520,6 +14006,7 @@ module Aws::DataZone
     #   <p>When the number of results is greater than the default value for the <code>MaxResults</code> parameter, or if you explicitly specify a value for <code>MaxResults</code> that is less than the number of results, the response includes a pagination token named <code>NextToken</code>. You can specify this <code>NextToken</code> value in a subsequent call to <code>SearchUserProfiles</code> to list the next set of results.</p>
     #   @return [String]
     class SearchUserProfilesOutput < Struct.new(
+      nil,
       :items,
       :next_token,
       keyword_init: true
@@ -13541,6 +14028,7 @@ module Aws::DataZone
     #   <p>The reason for why the operation failed.</p>
     #   @return [String]
     class SelfGrantStatusDetail < Struct.new(
+      nil,
       :database_name,
       :schema_name,
       :status,
@@ -13574,6 +14062,7 @@ module Aws::DataZone
     # @!attribute message
     #   @return [String]
     class ServiceQuotaExceededException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -13591,6 +14080,7 @@ module Aws::DataZone
     #   <p>The ARN of the IDC instance.</p>
     #   @return [String]
     class SingleSignOn < Struct.new(
+      nil,
       :type,
       :user_assignment,
       :idc_instance_arn,
@@ -13625,6 +14115,7 @@ module Aws::DataZone
     #   <p>The managed endpoint ARN of the EMR on EKS cluster.</p>
     #   @return [String]
     class SparkEmrPropertiesInput < Struct.new(
+      nil,
       :compute_arn,
       :instance_profile_arn,
       :java_virtual_env,
@@ -13682,6 +14173,7 @@ module Aws::DataZone
     #   <p>The managed endpoint credentials of the EMR on EKS cluster.</p>
     #   @return [Types::ManagedEndpointCredentials]
     class SparkEmrPropertiesOutput < Struct.new(
+      nil,
       :compute_arn,
       :credentials,
       :credentials_expiration,
@@ -13727,6 +14219,7 @@ module Aws::DataZone
     #   <p>The managed endpoint ARN of the EMR on EKS cluster.</p>
     #   @return [String]
     class SparkEmrPropertiesPatch < Struct.new(
+      nil,
       :compute_arn,
       :instance_profile_arn,
       :java_virtual_env,
@@ -13745,6 +14238,7 @@ module Aws::DataZone
     #   <p>The connection in the Spark Amazon Web Services Glue args.</p>
     #   @return [String]
     class SparkGlueArgs < Struct.new(
+      nil,
       :connection,
       keyword_init: true
     )
@@ -13777,6 +14271,7 @@ module Aws::DataZone
     #   <p>The worker type in the Spark Amazon Web Services Glue properties. </p>
     #   @return [String]
     class SparkGluePropertiesInput < Struct.new(
+      nil,
       :additional_args,
       :glue_connection_name,
       :glue_version,
@@ -13816,6 +14311,7 @@ module Aws::DataZone
     #   <p>The worker type in the Spark Amazon Web Services Glue properties. </p>
     #   @return [String]
     class SparkGluePropertiesOutput < Struct.new(
+      nil,
       :additional_args,
       :glue_connection_name,
       :glue_version,
@@ -13840,6 +14336,7 @@ module Aws::DataZone
     #   <p>The last name included in the single sign-on details of the user profile.</p>
     #   @return [String]
     class SsoUserProfileDetails < Struct.new(
+      nil,
       :username,
       :first_name,
       :last_name,
@@ -13858,6 +14355,7 @@ module Aws::DataZone
     #   <p>A unique, case-sensitive identifier that is provided to ensure the idempotency of the request.</p>
     #   @return [String]
     class StartDataSourceRunInput < Struct.new(
+      nil,
       :domain_identifier,
       :data_source_identifier,
       :client_token,
@@ -13906,6 +14404,7 @@ module Aws::DataZone
     #   <p>The timestamp of when the data source run was stopped.</p>
     #   @return [Time]
     class StartDataSourceRunOutput < Struct.new(
+      nil,
       :domain_id,
       :data_source_id,
       :id,
@@ -13940,6 +14439,7 @@ module Aws::DataZone
     #   <p>The ID of the project that owns the asset for which you want to start a metadata generation run.</p>
     #   @return [String]
     class StartMetadataGenerationRunInput < Struct.new(
+      nil,
       :domain_identifier,
       :type,
       :target,
@@ -13972,6 +14472,7 @@ module Aws::DataZone
     #   <p>The ID of the project that owns the asset for which the metadata generation run was started.</p>
     #   @return [String]
     class StartMetadataGenerationRunOutput < Struct.new(
+      nil,
       :domain_id,
       :id,
       :status,
@@ -14010,6 +14511,7 @@ module Aws::DataZone
     #   <p>The asset scope of the subscribed asset.</p>
     #   @return [Types::AssetScope]
     class SubscribedAsset < Struct.new(
+      nil,
       :asset_id,
       :asset_revision,
       :status,
@@ -14043,6 +14545,7 @@ module Aws::DataZone
     #   <p>The asset scope of the subscribed asset listing.</p>
     #   @return [Types::AssetScope]
     class SubscribedAssetListing < Struct.new(
+      nil,
       :entity_id,
       :entity_revision,
       :entity_type,
@@ -14077,6 +14580,7 @@ module Aws::DataZone
     #   <p>The name of the project that owns the published asset for which the subscription grant is created.</p>
     #   @return [String]
     class SubscribedListing < Struct.new(
+      nil,
       :id,
       :revision,
       :name,
@@ -14094,6 +14598,7 @@ module Aws::DataZone
     #   <p>The identifier of the published asset for which the subscription grant is to be created.</p>
     #   @return [String]
     class SubscribedListingInput < Struct.new(
+      nil,
       :identifier,
       keyword_init: true
     )
@@ -14170,6 +14675,7 @@ module Aws::DataZone
     #   <p>The data assets of the data product listing.</p>
     #   @return [Array<Types::AssetInDataProductListingItem>]
     class SubscribedProductListing < Struct.new(
+      nil,
       :entity_id,
       :entity_revision,
       :glossary_terms,
@@ -14189,6 +14695,7 @@ module Aws::DataZone
     #   <p>The name of the project that has the subscription grant.</p>
     #   @return [String]
     class SubscribedProject < Struct.new(
+      nil,
       :id,
       :name,
       keyword_init: true
@@ -14201,6 +14708,7 @@ module Aws::DataZone
     #   <p>The identifier of the project that is to be given a subscription grant.</p>
     #   @return [String]
     class SubscribedProjectInput < Struct.new(
+      nil,
       :identifier,
       keyword_init: true
     )
@@ -14244,6 +14752,7 @@ module Aws::DataZone
     #     Multiple subscriptions can exist for a single grant
     #   @return [String]
     class SubscriptionGrantSummary < Struct.new(
+      nil,
       :id,
       :created_by,
       :updated_by,
@@ -14304,6 +14813,7 @@ module Aws::DataZone
     #   <p>The summary of the metadata forms.</p>
     #   @return [Array<Types::MetadataFormSummary>]
     class SubscriptionRequestSummary < Struct.new(
+      nil,
       :id,
       :created_by,
       :updated_by,
@@ -14358,6 +14868,7 @@ module Aws::DataZone
     #   <p>The retain permissions included in the subscription.</p>
     #   @return [Boolean]
     class SubscriptionSummary < Struct.new(
+      nil,
       :id,
       :created_by,
       :updated_by,
@@ -14382,6 +14893,7 @@ module Aws::DataZone
     #   <p>The content of the subscription target configuration.</p>
     #   @return [String]
     class SubscriptionTargetForm < Struct.new(
+      nil,
       :form_name,
       :content,
       keyword_init: true
@@ -14436,6 +14948,7 @@ module Aws::DataZone
     #   <p>The provider of the subscription target.</p>
     #   @return [String]
     class SubscriptionTargetSummary < Struct.new(
+      nil,
       :id,
       :authorized_principals,
       :domain_id,
@@ -14463,6 +14976,7 @@ module Aws::DataZone
     #   <p>Specifies the tags for the <code>TagResource</code> action.</p>
     #   @return [Hash<String, String>]
     class TagResourceRequest < Struct.new(
+      nil,
       :resource_arn,
       :tags,
       keyword_init: true
@@ -14471,6 +14985,7 @@ module Aws::DataZone
     end
 
     class TagResourceResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -14484,6 +14999,7 @@ module Aws::DataZone
     #   <p>The classifies of the term relations.</p>
     #   @return [Array<String>]
     class TermRelations < Struct.new(
+      nil,
       :is_a,
       :classifies,
       keyword_init: true
@@ -14502,6 +15018,7 @@ module Aws::DataZone
     #   <p>List of offsets indicating matching terms in the TextMatchItem text.</p>
     #   @return [Array<Types::MatchOffset>]
     class TextMatchItem < Struct.new(
+      nil,
       :attribute,
       :text,
       :match_offsets,
@@ -14514,6 +15031,7 @@ module Aws::DataZone
     # @!attribute message
     #   @return [String]
     class ThrottlingException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -14537,6 +15055,7 @@ module Aws::DataZone
     #   <p>The content of the time series data points form.</p>
     #   @return [String]
     class TimeSeriesDataPointFormInput < Struct.new(
+      nil,
       :form_name,
       :type_identifier,
       :type_revision,
@@ -14567,6 +15086,7 @@ module Aws::DataZone
     #   <p>The ID of the time series data points form.</p>
     #   @return [String]
     class TimeSeriesDataPointFormOutput < Struct.new(
+      nil,
       :form_name,
       :type_identifier,
       :type_revision,
@@ -14598,6 +15118,7 @@ module Aws::DataZone
     #   <p>The ID of the time series data points summary form.</p>
     #   @return [String]
     class TimeSeriesDataPointSummaryFormOutput < Struct.new(
+      nil,
       :form_name,
       :type_identifier,
       :type_revision,
@@ -14620,6 +15141,7 @@ module Aws::DataZone
     #   <p>The role of the resource mentioned in a notification.</p>
     #   @return [String]
     class Topic < Struct.new(
+      nil,
       :subject,
       :resource,
       :role,
@@ -14632,6 +15154,7 @@ module Aws::DataZone
     # @!attribute message
     #   @return [String]
     class UnauthorizedException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -14640,6 +15163,7 @@ module Aws::DataZone
 
     # <p>The details of the policy of creating an environment.</p>
     class Unit < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -14652,6 +15176,7 @@ module Aws::DataZone
     #   <p>Specifies the tag keys for the <code>UntagResource</code> action.</p>
     #   @return [Array<String>]
     class UntagResourceRequest < Struct.new(
+      nil,
       :resource_arn,
       :tag_keys,
       keyword_init: true
@@ -14660,6 +15185,7 @@ module Aws::DataZone
     end
 
     class UntagResourceResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -14684,6 +15210,7 @@ module Aws::DataZone
     #   <p>The source of accounts for the account pool. In the current release, it's either a static list of accounts provided by the customer or a custom Amazon Web Services Lambda handler. </p>
     #   @return [Types::AccountSource]
     class UpdateAccountPoolInput < Struct.new(
+      nil,
       :domain_identifier,
       :identifier,
       :name,
@@ -14729,6 +15256,7 @@ module Aws::DataZone
     #   <p>The domain ID in which the account pool that is to be updated lives.</p>
     #   @return [String]
     class UpdateAccountPoolOutput < Struct.new(
+      nil,
       :domain_id,
       :name,
       :id,
@@ -14764,6 +15292,7 @@ module Aws::DataZone
     #   <p>The configuration of the asset filter.</p>
     #   @return [Types::AssetFilterConfiguration]
     class UpdateAssetFilterInput < Struct.new(
+      nil,
       :domain_identifier,
       :asset_identifier,
       :identifier,
@@ -14809,6 +15338,7 @@ module Aws::DataZone
     #   <p>The row filter of the asset filter.</p>
     #   @return [String]
     class UpdateAssetFilterOutput < Struct.new(
+      nil,
       :id,
       :domain_id,
       :asset_id,
@@ -14841,6 +15371,7 @@ module Aws::DataZone
     #   <p>The connection props.</p>
     #   @return [Types::ConnectionPropertiesPatch]
     class UpdateConnectionInput < Struct.new(
+      nil,
       :domain_identifier,
       :identifier,
       :description,
@@ -14882,6 +15413,7 @@ module Aws::DataZone
     #   <p>The connection type.</p>
     #   @return [String]
     class UpdateConnectionOutput < Struct.new(
+      nil,
       :connection_id,
       :description,
       :domain_id,
@@ -14931,6 +15463,7 @@ module Aws::DataZone
     #   <p>Specifies that the granted permissions are retained in case of a self-subscribe functionality failure for a data source.</p>
     #   @return [Boolean]
     class UpdateDataSourceInput < Struct.new(
+      nil,
       :domain_identifier,
       :identifier,
       :name,
@@ -15017,6 +15550,7 @@ module Aws::DataZone
     #   <p>Specifies that the granted permissions are retained in case of a self-subscribe functionality failure for a data source.</p>
     #   @return [Boolean]
     class UpdateDataSourceOutput < Struct.new(
+      nil,
       :id,
       :status,
       :type,
@@ -15067,6 +15601,7 @@ module Aws::DataZone
     #   <p>A unique, case-sensitive identifier that is provided to ensure the idempotency of the request.</p>
     #   @return [String]
     class UpdateDomainInput < Struct.new(
+      nil,
       :identifier,
       :description,
       :single_sign_on,
@@ -15104,6 +15639,7 @@ module Aws::DataZone
     #   <p>Specifies the timestamp of when the domain was last updated.</p>
     #   @return [Time]
     class UpdateDomainOutput < Struct.new(
+      nil,
       :id,
       :root_domain_unit_id,
       :description,
@@ -15130,6 +15666,7 @@ module Aws::DataZone
     #   <p>The name of the domain unit that you want to update.</p>
     #   @return [String]
     class UpdateDomainUnitInput < Struct.new(
+      nil,
       :domain_identifier,
       :identifier,
       :description,
@@ -15170,6 +15707,7 @@ module Aws::DataZone
     #   <p>The user who last updated the domain unit.</p>
     #   @return [String]
     class UpdateDomainUnitOutput < Struct.new(
+      nil,
       :id,
       :domain_id,
       :name,
@@ -15204,6 +15742,7 @@ module Aws::DataZone
     #   <p>The description of the environment action.</p>
     #   @return [String]
     class UpdateEnvironmentActionInput < Struct.new(
+      nil,
       :domain_identifier,
       :environment_identifier,
       :identifier,
@@ -15234,6 +15773,7 @@ module Aws::DataZone
     #   <p>The description of the environment action.</p>
     #   @return [String]
     class UpdateEnvironmentActionOutput < Struct.new(
+      nil,
       :domain_id,
       :environment_id,
       :id,
@@ -15261,6 +15801,7 @@ module Aws::DataZone
     #   <p>The user parameters to be updated as part of the <code>UpdateEnvironmentBlueprint</code> action.</p>
     #   @return [Array<Types::CustomParameter>]
     class UpdateEnvironmentBlueprintInput < Struct.new(
+      nil,
       :domain_identifier,
       :identifier,
       :description,
@@ -15302,6 +15843,7 @@ module Aws::DataZone
     #   <p>The timestamp of when the blueprint was updated.</p>
     #   @return [Time]
     class UpdateEnvironmentBlueprintOutput < Struct.new(
+      nil,
       :id,
       :name,
       :description,
@@ -15339,6 +15881,7 @@ module Aws::DataZone
     #   <p>The user parameters of the environment.</p>
     #   @return [Array<Types::EnvironmentParameter>]
     class UpdateEnvironmentInput < Struct.new(
+      nil,
       :domain_identifier,
       :identifier,
       :name,
@@ -15418,6 +15961,7 @@ module Aws::DataZone
     #   <p>The configuration ID of the environment.</p>
     #   @return [String]
     class UpdateEnvironmentOutput < Struct.new(
+      nil,
       :project_id,
       :id,
       :domain_id,
@@ -15472,6 +16016,7 @@ module Aws::DataZone
     #   <p>The Amazon Web Services Region in which a specified environment profile is to be updated.</p>
     #   @return [String]
     class UpdateEnvironmentProfileInput < Struct.new(
+      nil,
       :domain_identifier,
       :identifier,
       :name,
@@ -15521,6 +16066,7 @@ module Aws::DataZone
     #   <p>The user parameters to be updated as part of the <code>UpdateEnvironmentProfile</code> action.</p>
     #   @return [Array<Types::CustomParameter>]
     class UpdateEnvironmentProfileOutput < Struct.new(
+      nil,
       :id,
       :domain_id,
       :aws_account_id,
@@ -15557,6 +16103,7 @@ module Aws::DataZone
     #   <p>A unique, case-sensitive identifier that is provided to ensure the idempotency of the request.</p>
     #   @return [String]
     class UpdateGlossaryInput < Struct.new(
+      nil,
       :domain_identifier,
       :identifier,
       :name,
@@ -15590,6 +16137,7 @@ module Aws::DataZone
     #   <p>The usage restriction of the restricted glossary.</p>
     #   @return [Array<String>]
     class UpdateGlossaryOutput < Struct.new(
+      nil,
       :domain_id,
       :id,
       :name,
@@ -15627,6 +16175,7 @@ module Aws::DataZone
     #   <p>The status to be updated as part of the <code>UpdateGlossaryTerm</code> action.</p>
     #   @return [String]
     class UpdateGlossaryTermInput < Struct.new(
+      nil,
       :domain_identifier,
       :glossary_identifier,
       :identifier,
@@ -15668,6 +16217,7 @@ module Aws::DataZone
     #   <p>The usage restriction of a term within a restricted glossary.</p>
     #   @return [Array<String>]
     class UpdateGlossaryTermOutput < Struct.new(
+      nil,
       :id,
       :domain_id,
       :glossary_id,
@@ -15692,6 +16242,7 @@ module Aws::DataZone
     #   <p>The status of the group profile that is updated.</p>
     #   @return [String]
     class UpdateGroupProfileInput < Struct.new(
+      nil,
       :domain_identifier,
       :group_identifier,
       :status,
@@ -15713,6 +16264,7 @@ module Aws::DataZone
     #   <p>The name of the group profile that is updated.</p>
     #   @return [String]
     class UpdateGroupProfileOutput < Struct.new(
+      nil,
       :domain_id,
       :id,
       :status,
@@ -15750,6 +16302,7 @@ module Aws::DataZone
     #   <p>The project profile version to which the project should be updated. You can only specify the following string for this parameter: <code>latest</code>.</p>
     #   @return [String]
     class UpdateProjectInput < Struct.new(
+      nil,
       :domain_identifier,
       :identifier,
       :name,
@@ -15807,6 +16360,7 @@ module Aws::DataZone
     #   <p>The environment deployment details of the project.</p>
     #   @return [Types::EnvironmentDeploymentDetails]
     class UpdateProjectOutput < Struct.new(
+      nil,
       :domain_id,
       :id,
       :name,
@@ -15848,6 +16402,7 @@ module Aws::DataZone
     #   <p>The ID of the domain unit where a project profile is to be updated.</p>
     #   @return [String]
     class UpdateProjectProfileInput < Struct.new(
+      nil,
       :domain_identifier,
       :identifier,
       :name,
@@ -15891,6 +16446,7 @@ module Aws::DataZone
     #   <p>The domain unit ID of the project profile to be updated.</p>
     #   @return [String]
     class UpdateProjectProfileOutput < Struct.new(
+      nil,
       :domain_id,
       :id,
       :name,
@@ -15928,6 +16484,7 @@ module Aws::DataZone
     #   <p>Specifies whether to update this rule in the child domain units.</p>
     #   @return [Boolean]
     class UpdateRuleInput < Struct.new(
+      nil,
       :domain_identifier,
       :identifier,
       :name,
@@ -15980,6 +16537,7 @@ module Aws::DataZone
     #   <p>The timestamp at which the rule was last updated.</p>
     #   @return [String]
     class UpdateRuleOutput < Struct.new(
+      nil,
       :identifier,
       :revision,
       :name,
@@ -16017,6 +16575,7 @@ module Aws::DataZone
     #   <p>The target name to be updated as part of the <code>UpdateSubscriptionGrantStatus</code> action.</p>
     #   @return [String]
     class UpdateSubscriptionGrantStatusInput < Struct.new(
+      nil,
       :domain_identifier,
       :identifier,
       :asset_identifier,
@@ -16064,6 +16623,7 @@ module Aws::DataZone
     #     Multiple subscriptions can exist for a single grant
     #   @return [String]
     class UpdateSubscriptionGrantStatusOutput < Struct.new(
+      nil,
       :id,
       :created_by,
       :updated_by,
@@ -16090,6 +16650,7 @@ module Aws::DataZone
     #   <p>The reason for the <code>UpdateSubscriptionRequest</code> action.</p>
     #   @return [String]
     class UpdateSubscriptionRequestInput < Struct.new(
+      nil,
       :domain_identifier,
       :identifier,
       :request_reason,
@@ -16141,6 +16702,7 @@ module Aws::DataZone
     #   <p>Metadata forms included in the subscription request.</p>
     #   @return [Array<Types::FormOutput>]
     class UpdateSubscriptionRequestOutput < Struct.new(
+      nil,
       :id,
       :created_by,
       :updated_by,
@@ -16188,6 +16750,7 @@ module Aws::DataZone
     #   <p>The provider to be updated as part of the <code>UpdateSubscriptionTarget</code> action.</p>
     #   @return [String]
     class UpdateSubscriptionTargetInput < Struct.new(
+      nil,
       :domain_identifier,
       :environment_identifier,
       :identifier,
@@ -16248,6 +16811,7 @@ module Aws::DataZone
     #   <p>The provider to be updated as part of the <code>UpdateSubscriptionTarget</code> action.</p>
     #   @return [String]
     class UpdateSubscriptionTargetOutput < Struct.new(
+      nil,
       :id,
       :authorized_principals,
       :domain_id,
@@ -16281,6 +16845,7 @@ module Aws::DataZone
     #   <p>The status of the user profile that are to be updated.</p>
     #   @return [String]
     class UpdateUserProfileInput < Struct.new(
+      nil,
       :domain_identifier,
       :user_identifier,
       :type,
@@ -16306,6 +16871,7 @@ module Aws::DataZone
     #   <p>The details of the user profile in Amazon DataZone.</p>
     #   @return [Types::UserProfileDetails]
     class UpdateUserProfileOutput < Struct.new(
+      nil,
       :domain_id,
       :id,
       :type,
@@ -16321,6 +16887,7 @@ module Aws::DataZone
     #   <p>The ID of the domain unit.</p>
     #   @return [String]
     class UseAssetTypePolicyGrantDetail < Struct.new(
+      nil,
       :domain_unit_id,
       keyword_init: true
     )
@@ -16332,6 +16899,7 @@ module Aws::DataZone
     #   <p>The identifier of the Amazon DataZone user.</p>
     #   @return [String]
     class UserDetails < Struct.new(
+      nil,
       :user_id,
       keyword_init: true
     )
@@ -16395,6 +16963,7 @@ module Aws::DataZone
     #   <p>The details of the user profile.</p>
     #   @return [Types::UserProfileDetails]
     class UserProfileSummary < Struct.new(
+      nil,
       :domain_id,
       :id,
       :type,
@@ -16414,6 +16983,7 @@ module Aws::DataZone
     #   <p>The username of a connection.</p>
     #   @return [String]
     class UsernamePassword < Struct.new(
+      nil,
       :password,
       :username,
       keyword_init: true
@@ -16425,6 +16995,7 @@ module Aws::DataZone
     # @!attribute message
     #   @return [String]
     class ValidationException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )

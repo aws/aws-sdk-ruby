@@ -27,6 +27,7 @@ module Aws::Fis
     #   <p>The tags for the action.</p>
     #   @return [Hash<String, String>]
     class Action < Struct.new(
+      nil,
       :id,
       :arn,
       :description,
@@ -46,6 +47,7 @@ module Aws::Fis
     #   <p>Indicates whether the parameter is required.</p>
     #   @return [Boolean]
     class ActionParameter < Struct.new(
+      nil,
       :description,
       :required,
       keyword_init: true
@@ -75,6 +77,7 @@ module Aws::Fis
     #   <p>The tags for the action.</p>
     #   @return [Hash<String, String>]
     class ActionSummary < Struct.new(
+      nil,
       :id,
       :arn,
       :description,
@@ -90,6 +93,7 @@ module Aws::Fis
     #   <p>The resource type of the target.</p>
     #   @return [String]
     class ActionTarget < Struct.new(
+      nil,
       :resource_type,
       keyword_init: true
     )
@@ -100,6 +104,7 @@ module Aws::Fis
     # @!attribute message
     #   @return [String]
     class ConflictException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -125,6 +130,7 @@ module Aws::Fis
     #   <p>The name of the action that must be completed before the current action starts. Omit this parameter to run the action at the start of the experiment.</p>
     #   @return [Array<String>]
     class CreateExperimentTemplateActionInput < Struct.new(
+      nil,
       :action_id,
       :description,
       :parameters,
@@ -143,6 +149,7 @@ module Aws::Fis
     #   <p>Specifies the empty target resolution mode for experiment options.</p>
     #   @return [String]
     class CreateExperimentTemplateExperimentOptionsInput < Struct.new(
+      nil,
       :account_targeting,
       :empty_target_resolution_mode,
       keyword_init: true
@@ -161,6 +168,7 @@ module Aws::Fis
     #   <p>The schema version.</p>
     #   @return [Integer]
     class CreateExperimentTemplateLogConfigurationInput < Struct.new(
+      nil,
       :cloud_watch_logs_configuration,
       :s3_configuration,
       :log_schema_version,
@@ -183,6 +191,7 @@ module Aws::Fis
     #   <p>The duration after the experiment end time for the data sources to include in the report. </p>
     #   @return [String]
     class CreateExperimentTemplateReportConfigurationInput < Struct.new(
+      nil,
       :outputs,
       :data_sources,
       :pre_experiment_duration,
@@ -223,6 +232,7 @@ module Aws::Fis
     #   <p>The experiment report configuration for the experiment template.</p>
     #   @return [Types::CreateExperimentTemplateReportConfigurationInput]
     class CreateExperimentTemplateRequest < Struct.new(
+      nil,
       :client_token,
       :description,
       :stop_conditions,
@@ -242,6 +252,7 @@ module Aws::Fis
     #   <p>Information about the experiment template.</p>
     #   @return [Types::ExperimentTemplate]
     class CreateExperimentTemplateResponse < Struct.new(
+      nil,
       :experiment_template,
       keyword_init: true
     )
@@ -259,6 +270,7 @@ module Aws::Fis
     #            a CloudWatch alarm.</p>
     #   @return [String]
     class CreateExperimentTemplateStopConditionInput < Struct.new(
+      nil,
       :source,
       :value,
       keyword_init: true
@@ -302,6 +314,7 @@ module Aws::Fis
     #   <p>The resource type parameters.</p>
     #   @return [Hash<String, String>]
     class CreateExperimentTemplateTargetInput < Struct.new(
+      nil,
       :resource_type,
       :resource_arns,
       :resource_tags,
@@ -329,6 +342,7 @@ module Aws::Fis
     #   <p>The description of the target account.</p>
     #   @return [String]
     class CreateTargetAccountConfigurationRequest < Struct.new(
+      nil,
       :client_token,
       :experiment_template_id,
       :account_id,
@@ -343,6 +357,7 @@ module Aws::Fis
     #   <p>Information about the target account configuration.</p>
     #   @return [Types::TargetAccountConfiguration]
     class CreateTargetAccountConfigurationResponse < Struct.new(
+      nil,
       :target_account_configuration,
       keyword_init: true
     )
@@ -353,6 +368,7 @@ module Aws::Fis
     #   <p>The ID of the experiment template.</p>
     #   @return [String]
     class DeleteExperimentTemplateRequest < Struct.new(
+      nil,
       :id,
       keyword_init: true
     )
@@ -363,6 +379,7 @@ module Aws::Fis
     #   <p>Information about the experiment template.</p>
     #   @return [Types::ExperimentTemplate]
     class DeleteExperimentTemplateResponse < Struct.new(
+      nil,
       :experiment_template,
       keyword_init: true
     )
@@ -376,6 +393,7 @@ module Aws::Fis
     #   <p>The Amazon Web Services account ID of the target account.</p>
     #   @return [String]
     class DeleteTargetAccountConfigurationRequest < Struct.new(
+      nil,
       :experiment_template_id,
       :account_id,
       keyword_init: true
@@ -387,6 +405,7 @@ module Aws::Fis
     #   <p>Information about the target account configuration.</p>
     #   @return [Types::TargetAccountConfiguration]
     class DeleteTargetAccountConfigurationResponse < Struct.new(
+      nil,
       :target_account_configuration,
       keyword_init: true
     )
@@ -446,6 +465,7 @@ module Aws::Fis
     #   <p>The experiment report for the experiment.</p>
     #   @return [Types::ExperimentReport]
     class Experiment < Struct.new(
+      nil,
       :id,
       :arn,
       :experiment_template_id,
@@ -494,6 +514,7 @@ module Aws::Fis
     #   <p>The time that the action ended.</p>
     #   @return [Time]
     class ExperimentAction < Struct.new(
+      nil,
       :action_id,
       :description,
       :parameters,
@@ -515,6 +536,7 @@ module Aws::Fis
     #   <p>The reason for the state.</p>
     #   @return [String]
     class ExperimentActionState < Struct.new(
+      nil,
       :status,
       :reason,
       keyword_init: true
@@ -527,6 +549,7 @@ module Aws::Fis
     #   <p>The Amazon Resource Name (ARN) of the destination Amazon CloudWatch Logs log group.</p>
     #   @return [String]
     class ExperimentCloudWatchLogsLogConfiguration < Struct.new(
+      nil,
       :log_group_arn,
       keyword_init: true
     )
@@ -544,6 +567,7 @@ module Aws::Fis
     #   <p>Context for the section of the experiment template that failed.</p>
     #   @return [String]
     class ExperimentError < Struct.new(
+      nil,
       :account_id,
       :code,
       :location,
@@ -563,6 +587,7 @@ module Aws::Fis
     #   <p>The schema version.</p>
     #   @return [Integer]
     class ExperimentLogConfiguration < Struct.new(
+      nil,
       :cloud_watch_logs_configuration,
       :s3_configuration,
       :log_schema_version,
@@ -582,6 +607,7 @@ module Aws::Fis
     #   <p>The actions mode of the experiment that is set from the StartExperiment API command.</p>
     #   @return [String]
     class ExperimentOptions < Struct.new(
+      nil,
       :account_targeting,
       :empty_target_resolution_mode,
       :actions_mode,
@@ -598,6 +624,7 @@ module Aws::Fis
     #   <p>The S3 destination of the experiment report.</p>
     #   @return [Array<Types::ExperimentReportS3Report>]
     class ExperimentReport < Struct.new(
+      nil,
       :state,
       :s3_reports,
       keyword_init: true
@@ -619,6 +646,7 @@ module Aws::Fis
     #   <p>The duration after the experiment end time for the data sources to include in the report.</p>
     #   @return [String]
     class ExperimentReportConfiguration < Struct.new(
+      nil,
       :outputs,
       :data_sources,
       :pre_experiment_duration,
@@ -633,6 +661,7 @@ module Aws::Fis
     #   <p>The Amazon Resource Name (ARN) of the CloudWatch dashboard to include in the experiment report.</p>
     #   @return [String]
     class ExperimentReportConfigurationCloudWatchDashboard < Struct.new(
+      nil,
       :dashboard_identifier,
       keyword_init: true
     )
@@ -644,6 +673,7 @@ module Aws::Fis
     #   <p>The CloudWatch dashboards to include as data sources in the experiment report.</p>
     #   @return [Array<Types::ExperimentReportConfigurationCloudWatchDashboard>]
     class ExperimentReportConfigurationDataSources < Struct.new(
+      nil,
       :cloud_watch_dashboards,
       keyword_init: true
     )
@@ -655,6 +685,7 @@ module Aws::Fis
     #   <p>The S3 destination for the experiment report.</p>
     #   @return [Types::ExperimentReportConfigurationOutputsS3Configuration]
     class ExperimentReportConfigurationOutputs < Struct.new(
+      nil,
       :s3_configuration,
       keyword_init: true
     )
@@ -669,6 +700,7 @@ module Aws::Fis
     #   <p>The prefix of the S3 bucket where the experiment report will be stored.</p>
     #   @return [String]
     class ExperimentReportConfigurationOutputsS3Configuration < Struct.new(
+      nil,
       :bucket_name,
       :prefix,
       keyword_init: true
@@ -681,6 +713,7 @@ module Aws::Fis
     #   <p>The error code for the failed experiment report generation.</p>
     #   @return [String]
     class ExperimentReportError < Struct.new(
+      nil,
       :code,
       keyword_init: true
     )
@@ -695,6 +728,7 @@ module Aws::Fis
     #   <p>The report type for the experiment report.</p>
     #   @return [String]
     class ExperimentReportS3Report < Struct.new(
+      nil,
       :arn,
       :report_type,
       keyword_init: true
@@ -713,6 +747,7 @@ module Aws::Fis
     #   <p>The error information of the experiment when the experiment report generation has failed.</p>
     #   @return [Types::ExperimentReportError]
     class ExperimentReportState < Struct.new(
+      nil,
       :status,
       :reason,
       :error,
@@ -729,6 +764,7 @@ module Aws::Fis
     #   <p>The bucket prefix.</p>
     #   @return [String]
     class ExperimentS3LogConfiguration < Struct.new(
+      nil,
       :bucket_name,
       :prefix,
       keyword_init: true
@@ -747,6 +783,7 @@ module Aws::Fis
     #   <p>The error information of the experiment when the action has <code>failed</code>.</p>
     #   @return [Types::ExperimentError]
     class ExperimentState < Struct.new(
+      nil,
       :status,
       :reason,
       :error,
@@ -763,6 +800,7 @@ module Aws::Fis
     #   <p>The Amazon Resource Name (ARN) of the CloudWatch alarm, if applicable.</p>
     #   @return [String]
     class ExperimentStopCondition < Struct.new(
+      nil,
       :source,
       :value,
       keyword_init: true
@@ -793,6 +831,7 @@ module Aws::Fis
     #   <p>The experiment options for the experiment.</p>
     #   @return [Types::ExperimentOptions]
     class ExperimentSummary < Struct.new(
+      nil,
       :id,
       :arn,
       :experiment_template_id,
@@ -825,6 +864,7 @@ module Aws::Fis
     #   <p>The resource type parameters.</p>
     #   @return [Hash<String, String>]
     class ExperimentTarget < Struct.new(
+      nil,
       :resource_type,
       :resource_arns,
       :resource_tags,
@@ -847,6 +887,7 @@ module Aws::Fis
     #   <p>The description of the target account.</p>
     #   @return [String]
     class ExperimentTargetAccountConfiguration < Struct.new(
+      nil,
       :role_arn,
       :account_id,
       :description,
@@ -866,6 +907,7 @@ module Aws::Fis
     #   <p>The description of the target account.</p>
     #   @return [String]
     class ExperimentTargetAccountConfigurationSummary < Struct.new(
+      nil,
       :role_arn,
       :account_id,
       :description,
@@ -882,6 +924,7 @@ module Aws::Fis
     #   <p>The attribute values for the filter.</p>
     #   @return [Array<String>]
     class ExperimentTargetFilter < Struct.new(
+      nil,
       :path,
       :values,
       keyword_init: true
@@ -933,6 +976,7 @@ module Aws::Fis
     #   <p>Describes the report configuration for the experiment template.</p>
     #   @return [Types::ExperimentTemplateReportConfiguration]
     class ExperimentTemplate < Struct.new(
+      nil,
       :id,
       :arn,
       :description,
@@ -969,6 +1013,7 @@ module Aws::Fis
     #   <p>The name of the action that must be completed before the current action starts.</p>
     #   @return [Array<String>]
     class ExperimentTemplateAction < Struct.new(
+      nil,
       :action_id,
       :description,
       :parameters,
@@ -984,6 +1029,7 @@ module Aws::Fis
     #   <p>The Amazon Resource Name (ARN) of the destination Amazon CloudWatch Logs log group.</p>
     #   @return [String]
     class ExperimentTemplateCloudWatchLogsLogConfiguration < Struct.new(
+      nil,
       :log_group_arn,
       keyword_init: true
     )
@@ -995,6 +1041,7 @@ module Aws::Fis
     #   <p>The Amazon Resource Name (ARN) of the destination Amazon CloudWatch Logs log group.</p>
     #   @return [String]
     class ExperimentTemplateCloudWatchLogsLogConfigurationInput < Struct.new(
+      nil,
       :log_group_arn,
       keyword_init: true
     )
@@ -1009,6 +1056,7 @@ module Aws::Fis
     #   <p>The empty target resolution mode for an experiment template.</p>
     #   @return [String]
     class ExperimentTemplateExperimentOptions < Struct.new(
+      nil,
       :account_targeting,
       :empty_target_resolution_mode,
       keyword_init: true
@@ -1027,6 +1075,7 @@ module Aws::Fis
     #   <p>The schema version.</p>
     #   @return [Integer]
     class ExperimentTemplateLogConfiguration < Struct.new(
+      nil,
       :cloud_watch_logs_configuration,
       :s3_configuration,
       :log_schema_version,
@@ -1049,6 +1098,7 @@ module Aws::Fis
     #   <p>The duration after the experiment end time for the data sources to include in the report.</p>
     #   @return [String]
     class ExperimentTemplateReportConfiguration < Struct.new(
+      nil,
       :outputs,
       :data_sources,
       :pre_experiment_duration,
@@ -1063,6 +1113,7 @@ module Aws::Fis
     #   <p>The Amazon Resource Name (ARN) of the CloudWatch dashboard to include in the experiment report.</p>
     #   @return [String]
     class ExperimentTemplateReportConfigurationCloudWatchDashboard < Struct.new(
+      nil,
       :dashboard_identifier,
       keyword_init: true
     )
@@ -1074,6 +1125,7 @@ module Aws::Fis
     #   <p>The CloudWatch dashboards to include as data sources in the experiment report.</p>
     #   @return [Array<Types::ExperimentTemplateReportConfigurationCloudWatchDashboard>]
     class ExperimentTemplateReportConfigurationDataSources < Struct.new(
+      nil,
       :cloud_watch_dashboards,
       keyword_init: true
     )
@@ -1085,6 +1137,7 @@ module Aws::Fis
     #   <p>The CloudWatch dashboards to include as data sources in the experiment report.</p>
     #   @return [Array<Types::ReportConfigurationCloudWatchDashboardInput>]
     class ExperimentTemplateReportConfigurationDataSourcesInput < Struct.new(
+      nil,
       :cloud_watch_dashboards,
       keyword_init: true
     )
@@ -1096,6 +1149,7 @@ module Aws::Fis
     #   <p>The S3 destination for the experiment report.</p>
     #   @return [Types::ReportConfigurationS3Output]
     class ExperimentTemplateReportConfigurationOutputs < Struct.new(
+      nil,
       :s3_configuration,
       keyword_init: true
     )
@@ -1107,6 +1161,7 @@ module Aws::Fis
     #   <p>The S3 destination for the experiment report.</p>
     #   @return [Types::ReportConfigurationS3OutputInput]
     class ExperimentTemplateReportConfigurationOutputsInput < Struct.new(
+      nil,
       :s3_configuration,
       keyword_init: true
     )
@@ -1121,6 +1176,7 @@ module Aws::Fis
     #   <p>The bucket prefix.</p>
     #   @return [String]
     class ExperimentTemplateS3LogConfiguration < Struct.new(
+      nil,
       :bucket_name,
       :prefix,
       keyword_init: true
@@ -1136,6 +1192,7 @@ module Aws::Fis
     #   <p>The bucket prefix.</p>
     #   @return [String]
     class ExperimentTemplateS3LogConfigurationInput < Struct.new(
+      nil,
       :bucket_name,
       :prefix,
       keyword_init: true
@@ -1151,6 +1208,7 @@ module Aws::Fis
     #   <p>The Amazon Resource Name (ARN) of the CloudWatch alarm, if applicable.</p>
     #   @return [String]
     class ExperimentTemplateStopCondition < Struct.new(
+      nil,
       :source,
       :value,
       keyword_init: true
@@ -1178,6 +1236,7 @@ module Aws::Fis
     #   <p>The tags for the experiment template.</p>
     #   @return [Hash<String, String>]
     class ExperimentTemplateSummary < Struct.new(
+      nil,
       :id,
       :arn,
       :description,
@@ -1209,6 +1268,7 @@ module Aws::Fis
     #   <p>The resource type parameters.</p>
     #   @return [Hash<String, String>]
     class ExperimentTemplateTarget < Struct.new(
+      nil,
       :resource_type,
       :resource_arns,
       :resource_tags,
@@ -1228,6 +1288,7 @@ module Aws::Fis
     #   <p>The attribute values for the filter.</p>
     #   @return [Array<String>]
     class ExperimentTemplateTargetFilter < Struct.new(
+      nil,
       :path,
       :values,
       keyword_init: true
@@ -1245,6 +1306,7 @@ module Aws::Fis
     #   <p>The attribute values for the filter.</p>
     #   @return [Array<String>]
     class ExperimentTemplateTargetInputFilter < Struct.new(
+      nil,
       :path,
       :values,
       keyword_init: true
@@ -1256,6 +1318,7 @@ module Aws::Fis
     #   <p>The ID of the action.</p>
     #   @return [String]
     class GetActionRequest < Struct.new(
+      nil,
       :id,
       keyword_init: true
     )
@@ -1266,6 +1329,7 @@ module Aws::Fis
     #   <p>Information about the action.</p>
     #   @return [Types::Action]
     class GetActionResponse < Struct.new(
+      nil,
       :action,
       keyword_init: true
     )
@@ -1276,6 +1340,7 @@ module Aws::Fis
     #   <p>The ID of the experiment.</p>
     #   @return [String]
     class GetExperimentRequest < Struct.new(
+      nil,
       :id,
       keyword_init: true
     )
@@ -1286,6 +1351,7 @@ module Aws::Fis
     #   <p>Information about the experiment.</p>
     #   @return [Types::Experiment]
     class GetExperimentResponse < Struct.new(
+      nil,
       :experiment,
       keyword_init: true
     )
@@ -1299,6 +1365,7 @@ module Aws::Fis
     #   <p>The Amazon Web Services account ID of the target account.</p>
     #   @return [String]
     class GetExperimentTargetAccountConfigurationRequest < Struct.new(
+      nil,
       :experiment_id,
       :account_id,
       keyword_init: true
@@ -1310,6 +1377,7 @@ module Aws::Fis
     #   <p>Information about the target account configuration.</p>
     #   @return [Types::ExperimentTargetAccountConfiguration]
     class GetExperimentTargetAccountConfigurationResponse < Struct.new(
+      nil,
       :target_account_configuration,
       keyword_init: true
     )
@@ -1320,6 +1388,7 @@ module Aws::Fis
     #   <p>The ID of the experiment template.</p>
     #   @return [String]
     class GetExperimentTemplateRequest < Struct.new(
+      nil,
       :id,
       keyword_init: true
     )
@@ -1330,6 +1399,7 @@ module Aws::Fis
     #   <p>Information about the experiment template.</p>
     #   @return [Types::ExperimentTemplate]
     class GetExperimentTemplateResponse < Struct.new(
+      nil,
       :experiment_template,
       keyword_init: true
     )
@@ -1342,6 +1412,7 @@ module Aws::Fis
     #         </p>
     #   @return [String]
     class GetSafetyLeverRequest < Struct.new(
+      nil,
       :id,
       keyword_init: true
     )
@@ -1354,6 +1425,7 @@ module Aws::Fis
     #         </p>
     #   @return [Types::SafetyLever]
     class GetSafetyLeverResponse < Struct.new(
+      nil,
       :safety_lever,
       keyword_init: true
     )
@@ -1367,6 +1439,7 @@ module Aws::Fis
     #   <p>The Amazon Web Services account ID of the target account.</p>
     #   @return [String]
     class GetTargetAccountConfigurationRequest < Struct.new(
+      nil,
       :experiment_template_id,
       :account_id,
       keyword_init: true
@@ -1378,6 +1451,7 @@ module Aws::Fis
     #   <p>Information about the target account configuration.</p>
     #   @return [Types::TargetAccountConfiguration]
     class GetTargetAccountConfigurationResponse < Struct.new(
+      nil,
       :target_account_configuration,
       keyword_init: true
     )
@@ -1388,6 +1462,7 @@ module Aws::Fis
     #   <p>The resource type.</p>
     #   @return [String]
     class GetTargetResourceTypeRequest < Struct.new(
+      nil,
       :resource_type,
       keyword_init: true
     )
@@ -1398,6 +1473,7 @@ module Aws::Fis
     #   <p>Information about the resource type.</p>
     #   @return [Types::TargetResourceType]
     class GetTargetResourceTypeResponse < Struct.new(
+      nil,
       :target_resource_type,
       keyword_init: true
     )
@@ -1411,6 +1487,7 @@ module Aws::Fis
     #   <p>The token for the next page of results.</p>
     #   @return [String]
     class ListActionsRequest < Struct.new(
+      nil,
       :max_results,
       :next_token,
       keyword_init: true
@@ -1425,6 +1502,7 @@ module Aws::Fis
     #   <p>The token to use to retrieve the next page of results. This value is <code>null</code> when there are no more results to return.</p>
     #   @return [String]
     class ListActionsResponse < Struct.new(
+      nil,
       :actions,
       :next_token,
       keyword_init: true
@@ -1446,6 +1524,7 @@ module Aws::Fis
     #   <p>The name of the target.</p>
     #   @return [String]
     class ListExperimentResolvedTargetsRequest < Struct.new(
+      nil,
       :experiment_id,
       :max_results,
       :next_token,
@@ -1463,6 +1542,7 @@ module Aws::Fis
     #         This value is null when there are no more results to return.</p>
     #   @return [String]
     class ListExperimentResolvedTargetsResponse < Struct.new(
+      nil,
       :resolved_targets,
       :next_token,
       keyword_init: true
@@ -1477,6 +1557,7 @@ module Aws::Fis
     #   <p>The token for the next page of results.</p>
     #   @return [String]
     class ListExperimentTargetAccountConfigurationsRequest < Struct.new(
+      nil,
       :experiment_id,
       :next_token,
       keyword_init: true
@@ -1492,6 +1573,7 @@ module Aws::Fis
     #         This value is null when there are no more results to return.</p>
     #   @return [String]
     class ListExperimentTargetAccountConfigurationsResponse < Struct.new(
+      nil,
       :target_account_configurations,
       :next_token,
       keyword_init: true
@@ -1506,6 +1588,7 @@ module Aws::Fis
     #   <p>The token for the next page of results.</p>
     #   @return [String]
     class ListExperimentTemplatesRequest < Struct.new(
+      nil,
       :max_results,
       :next_token,
       keyword_init: true
@@ -1520,6 +1603,7 @@ module Aws::Fis
     #   <p>The token to use to retrieve the next page of results. This value is <code>null</code> when there are no more results to return.</p>
     #   @return [String]
     class ListExperimentTemplatesResponse < Struct.new(
+      nil,
       :experiment_templates,
       :next_token,
       keyword_init: true
@@ -1537,6 +1621,7 @@ module Aws::Fis
     #   <p>The ID of the experiment template.</p>
     #   @return [String]
     class ListExperimentsRequest < Struct.new(
+      nil,
       :max_results,
       :next_token,
       :experiment_template_id,
@@ -1552,6 +1637,7 @@ module Aws::Fis
     #   <p>The token to use to retrieve the next page of results. This value is <code>null</code> when there are no more results to return.</p>
     #   @return [String]
     class ListExperimentsResponse < Struct.new(
+      nil,
       :experiments,
       :next_token,
       keyword_init: true
@@ -1563,6 +1649,7 @@ module Aws::Fis
     #   <p>The Amazon Resource Name (ARN) of the resource.</p>
     #   @return [String]
     class ListTagsForResourceRequest < Struct.new(
+      nil,
       :resource_arn,
       keyword_init: true
     )
@@ -1573,6 +1660,7 @@ module Aws::Fis
     #   <p>The tags for the resource.</p>
     #   @return [Hash<String, String>]
     class ListTagsForResourceResponse < Struct.new(
+      nil,
       :tags,
       keyword_init: true
     )
@@ -1590,6 +1678,7 @@ module Aws::Fis
     #   <p>The token for the next page of results.</p>
     #   @return [String]
     class ListTargetAccountConfigurationsRequest < Struct.new(
+      nil,
       :experiment_template_id,
       :max_results,
       :next_token,
@@ -1606,6 +1695,7 @@ module Aws::Fis
     #         This value is null when there are no more results to return.</p>
     #   @return [String]
     class ListTargetAccountConfigurationsResponse < Struct.new(
+      nil,
       :target_account_configurations,
       :next_token,
       keyword_init: true
@@ -1620,6 +1710,7 @@ module Aws::Fis
     #   <p>The token for the next page of results.</p>
     #   @return [String]
     class ListTargetResourceTypesRequest < Struct.new(
+      nil,
       :max_results,
       :next_token,
       keyword_init: true
@@ -1634,6 +1725,7 @@ module Aws::Fis
     #   <p>The token to use to retrieve the next page of results. This value is <code>null</code> when there are no more results to return.</p>
     #   @return [String]
     class ListTargetResourceTypesResponse < Struct.new(
+      nil,
       :target_resource_types,
       :next_token,
       keyword_init: true
@@ -1646,6 +1738,7 @@ module Aws::Fis
     #   <p>The Amazon Resource Name (ARN) of the CloudWatch dashboard to include in the experiment report.</p>
     #   @return [String]
     class ReportConfigurationCloudWatchDashboardInput < Struct.new(
+      nil,
       :dashboard_identifier,
       keyword_init: true
     )
@@ -1660,6 +1753,7 @@ module Aws::Fis
     #   <p>The prefix of the S3 bucket where the experiment report will be stored.</p>
     #   @return [String]
     class ReportConfigurationS3Output < Struct.new(
+      nil,
       :bucket_name,
       :prefix,
       keyword_init: true
@@ -1675,6 +1769,7 @@ module Aws::Fis
     #   <p>The prefix of the S3 bucket where the experiment report will be stored.</p>
     #   @return [String]
     class ReportConfigurationS3OutputInput < Struct.new(
+      nil,
       :bucket_name,
       :prefix,
       keyword_init: true
@@ -1693,6 +1788,7 @@ module Aws::Fis
     #   <p>Information about the target.</p>
     #   @return [Hash<String, String>]
     class ResolvedTarget < Struct.new(
+      nil,
       :resource_type,
       :target_name,
       :target_information,
@@ -1705,6 +1801,7 @@ module Aws::Fis
     # @!attribute message
     #   @return [String]
     class ResourceNotFoundException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -1730,6 +1827,7 @@ module Aws::Fis
     #         </p>
     #   @return [Types::SafetyLeverState]
     class SafetyLever < Struct.new(
+      nil,
       :id,
       :arn,
       :state,
@@ -1752,6 +1850,7 @@ module Aws::Fis
     #         </p>
     #   @return [String]
     class SafetyLeverState < Struct.new(
+      nil,
       :status,
       :reason,
       keyword_init: true
@@ -1763,6 +1862,7 @@ module Aws::Fis
     # @!attribute message
     #   @return [String]
     class ServiceQuotaExceededException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -1774,6 +1874,7 @@ module Aws::Fis
     #   <p>Specifies the actions mode for experiment options.</p>
     #   @return [String]
     class StartExperimentExperimentOptionsInput < Struct.new(
+      nil,
       :actions_mode,
       keyword_init: true
     )
@@ -1793,6 +1894,7 @@ module Aws::Fis
     #   <p>The tags to apply to the experiment.</p>
     #   @return [Hash<String, String>]
     class StartExperimentRequest < Struct.new(
+      nil,
       :client_token,
       :experiment_template_id,
       :experiment_options,
@@ -1806,6 +1908,7 @@ module Aws::Fis
     #   <p>Information about the experiment.</p>
     #   @return [Types::Experiment]
     class StartExperimentResponse < Struct.new(
+      nil,
       :experiment,
       keyword_init: true
     )
@@ -1816,6 +1919,7 @@ module Aws::Fis
     #   <p>The ID of the experiment.</p>
     #   @return [String]
     class StopExperimentRequest < Struct.new(
+      nil,
       :id,
       keyword_init: true
     )
@@ -1826,6 +1930,7 @@ module Aws::Fis
     #   <p>Information about the experiment.</p>
     #   @return [Types::Experiment]
     class StopExperimentResponse < Struct.new(
+      nil,
       :experiment,
       keyword_init: true
     )
@@ -1839,6 +1944,7 @@ module Aws::Fis
     #   <p>The tags for the resource.</p>
     #   @return [Hash<String, String>]
     class TagResourceRequest < Struct.new(
+      nil,
       :resource_arn,
       :tags,
       keyword_init: true
@@ -1847,6 +1953,7 @@ module Aws::Fis
     end
 
     class TagResourceResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1863,6 +1970,7 @@ module Aws::Fis
     #   <p>The description of the target account.</p>
     #   @return [String]
     class TargetAccountConfiguration < Struct.new(
+      nil,
       :role_arn,
       :account_id,
       :description,
@@ -1882,6 +1990,7 @@ module Aws::Fis
     #   <p>The description of the target account.</p>
     #   @return [String]
     class TargetAccountConfigurationSummary < Struct.new(
+      nil,
       :role_arn,
       :account_id,
       :description,
@@ -1901,6 +2010,7 @@ module Aws::Fis
     #   <p>The parameters for the resource type.</p>
     #   @return [Hash<String, Types::TargetResourceTypeParameter>]
     class TargetResourceType < Struct.new(
+      nil,
       :resource_type,
       :description,
       :parameters,
@@ -1918,6 +2028,7 @@ module Aws::Fis
     #   <p>Indicates whether the parameter is required.</p>
     #   @return [Boolean]
     class TargetResourceTypeParameter < Struct.new(
+      nil,
       :description,
       :required,
       keyword_init: true
@@ -1938,6 +2049,7 @@ module Aws::Fis
     #   <p>A description of the resource type.</p>
     #   @return [String]
     class TargetResourceTypeSummary < Struct.new(
+      nil,
       :resource_type,
       :description,
       keyword_init: true
@@ -1952,6 +2064,7 @@ module Aws::Fis
     #   <p>The tag keys to remove.</p>
     #   @return [Array<String>]
     class UntagResourceRequest < Struct.new(
+      nil,
       :resource_arn,
       :tag_keys,
       keyword_init: true
@@ -1960,6 +2073,7 @@ module Aws::Fis
     end
 
     class UntagResourceResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1982,6 +2096,7 @@ module Aws::Fis
     #   <p>The name of the action that must be completed before the current action starts. Omit this parameter to run the action at the start of the experiment.</p>
     #   @return [Array<String>]
     class UpdateExperimentTemplateActionInputItem < Struct.new(
+      nil,
       :action_id,
       :description,
       :parameters,
@@ -1997,6 +2112,7 @@ module Aws::Fis
     #   <p>The empty target resolution mode of the experiment template.</p>
     #   @return [String]
     class UpdateExperimentTemplateExperimentOptionsInput < Struct.new(
+      nil,
       :empty_target_resolution_mode,
       keyword_init: true
     )
@@ -2014,6 +2130,7 @@ module Aws::Fis
     #   <p>The schema version.</p>
     #   @return [Integer]
     class UpdateExperimentTemplateLogConfigurationInput < Struct.new(
+      nil,
       :cloud_watch_logs_configuration,
       :s3_configuration,
       :log_schema_version,
@@ -2037,6 +2154,7 @@ module Aws::Fis
     #   <p>The duration after the experiment end time for the data sources to include in the report. </p>
     #   @return [String]
     class UpdateExperimentTemplateReportConfigurationInput < Struct.new(
+      nil,
       :outputs,
       :data_sources,
       :pre_experiment_duration,
@@ -2074,6 +2192,7 @@ module Aws::Fis
     #   <p>The experiment report configuration for the experiment template.</p>
     #   @return [Types::UpdateExperimentTemplateReportConfigurationInput]
     class UpdateExperimentTemplateRequest < Struct.new(
+      nil,
       :id,
       :description,
       :stop_conditions,
@@ -2092,6 +2211,7 @@ module Aws::Fis
     #   <p>Information about the experiment template.</p>
     #   @return [Types::ExperimentTemplate]
     class UpdateExperimentTemplateResponse < Struct.new(
+      nil,
       :experiment_template,
       keyword_init: true
     )
@@ -2108,6 +2228,7 @@ module Aws::Fis
     #   <p>The Amazon Resource Name (ARN) of the CloudWatch alarm.</p>
     #   @return [String]
     class UpdateExperimentTemplateStopConditionInput < Struct.new(
+      nil,
       :source,
       :value,
       keyword_init: true
@@ -2135,6 +2256,7 @@ module Aws::Fis
     #   <p>The resource type parameters.</p>
     #   @return [Hash<String, String>]
     class UpdateExperimentTemplateTargetInput < Struct.new(
+      nil,
       :resource_type,
       :resource_arns,
       :resource_tags,
@@ -2160,6 +2282,7 @@ module Aws::Fis
     #         </p>
     #   @return [String]
     class UpdateSafetyLeverStateInput < Struct.new(
+      nil,
       :status,
       :reason,
       keyword_init: true
@@ -2178,6 +2301,7 @@ module Aws::Fis
     #         </p>
     #   @return [Types::UpdateSafetyLeverStateInput]
     class UpdateSafetyLeverStateRequest < Struct.new(
+      nil,
       :id,
       :state,
       keyword_init: true
@@ -2191,6 +2315,7 @@ module Aws::Fis
     #         </p>
     #   @return [Types::SafetyLever]
     class UpdateSafetyLeverStateResponse < Struct.new(
+      nil,
       :safety_lever,
       keyword_init: true
     )
@@ -2210,6 +2335,7 @@ module Aws::Fis
     #   <p>The description of the target account.</p>
     #   @return [String]
     class UpdateTargetAccountConfigurationRequest < Struct.new(
+      nil,
       :experiment_template_id,
       :account_id,
       :role_arn,
@@ -2223,6 +2349,7 @@ module Aws::Fis
     #   <p>Information about the target account configuration.</p>
     #   @return [Types::TargetAccountConfiguration]
     class UpdateTargetAccountConfigurationResponse < Struct.new(
+      nil,
       :target_account_configuration,
       keyword_init: true
     )
@@ -2233,6 +2360,7 @@ module Aws::Fis
     # @!attribute message
     #   @return [String]
     class ValidationException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )

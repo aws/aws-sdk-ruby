@@ -12,6 +12,7 @@ module Aws::Kendra
     #   <p>The identifier of the access control configuration.</p>
     #   @return [String]
     class AccessControlConfigurationSummary < Struct.new(
+      nil,
       :id,
       keyword_init: true
     )
@@ -25,6 +26,7 @@ module Aws::Kendra
     #   <p>Path to the Amazon S3 bucket that contains the ACL files.</p>
     #   @return [String]
     class AccessControlListConfiguration < Struct.new(
+      nil,
       :key_path,
       keyword_init: true
     )
@@ -36,6 +38,7 @@ module Aws::Kendra
     # @!attribute message
     #   @return [String]
     class AccessDeniedException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -50,6 +53,7 @@ module Aws::Kendra
     #               specified in the <code>UserContext</code> field of the <code>Query</code> API.</p>
     #   @return [String]
     class AclConfiguration < Struct.new(
+      nil,
       :allowed_groups_column_name,
       keyword_init: true
     )
@@ -67,6 +71,7 @@ module Aws::Kendra
     #   <p>An object that contains the attribute value.</p>
     #   @return [Types::AdditionalResultAttributeValue]
     class AdditionalResultAttribute < Struct.new(
+      nil,
       :key,
       :value_type,
       :value,
@@ -81,6 +86,7 @@ module Aws::Kendra
     #               the text.</p>
     #   @return [Types::TextWithHighlights]
     class AdditionalResultAttributeValue < Struct.new(
+      nil,
       :text_with_highlights_value,
       keyword_init: true
     )
@@ -174,6 +180,7 @@ module Aws::Kendra
     #               For more information, see <a href="https://docs.aws.amazon.com/kendra/latest/dg/vpc-configuration.html">Configuring a VPC</a>.</p>
     #   @return [Types::DataSourceVpcConfiguration]
     class AlfrescoConfiguration < Struct.new(
+      nil,
       :site_url,
       :site_id,
       :secret_arn,
@@ -208,6 +215,7 @@ module Aws::Kendra
     #   <p>Lists users or groups in your IAM Identity Center identity source.</p>
     #   @return [Array<Types::EntityConfiguration>]
     class AssociateEntitiesToExperienceRequest < Struct.new(
+      nil,
       :id,
       :index_id,
       :entity_list,
@@ -221,6 +229,7 @@ module Aws::Kendra
     #               failed to properly configure with your Amazon Kendra experience.</p>
     #   @return [Array<Types::FailedEntity>]
     class AssociateEntitiesToExperienceResponse < Struct.new(
+      nil,
       :failed_entity_list,
       keyword_init: true
     )
@@ -241,6 +250,7 @@ module Aws::Kendra
     #                   access to your search page</a>.</p>
     #   @return [Array<Types::EntityPersonaConfiguration>]
     class AssociatePersonasToEntitiesRequest < Struct.new(
+      nil,
       :id,
       :index_id,
       :personas,
@@ -254,6 +264,7 @@ module Aws::Kendra
     #               failed to properly configure with your Amazon Kendra experience.</p>
     #   @return [Array<Types::FailedEntity>]
     class AssociatePersonasToEntitiesResponse < Struct.new(
+      nil,
       :failed_entity_list,
       keyword_init: true
     )
@@ -346,6 +357,7 @@ module Aws::Kendra
     #               <code>Date</code> or <code>Long</code>.</p>
     #   @return [Types::DocumentAttribute]
     class AttributeFilter < Struct.new(
+      nil,
       :and_all_filters,
       :or_all_filters,
       :not_filter,
@@ -374,6 +386,7 @@ module Aws::Kendra
     #               then Amazon Kendra uses the query history.</p>
     #   @return [String]
     class AttributeSuggestionsDescribeConfig < Struct.new(
+      nil,
       :suggestable_config_list,
       :attribute_suggestions_mode,
       keyword_init: true
@@ -401,6 +414,7 @@ module Aws::Kendra
     #               documents see these document in their search results.</p>
     #   @return [Types::UserContext]
     class AttributeSuggestionsGetConfig < Struct.new(
+      nil,
       :suggestion_attributes,
       :additional_response_attributes,
       :attribute_filter,
@@ -432,6 +446,7 @@ module Aws::Kendra
     #               Amazon Kendra uses the query history.</p>
     #   @return [String]
     class AttributeSuggestionsUpdateConfig < Struct.new(
+      nil,
       :suggestable_config_list,
       :attribute_suggestions_mode,
       keyword_init: true
@@ -447,6 +462,7 @@ module Aws::Kendra
     #            <p>The list includes the name and port number of the website host.</p>
     #   @return [Array<Types::BasicAuthenticationConfiguration>]
     class AuthenticationConfiguration < Struct.new(
+      nil,
       :basic_authentication,
       keyword_init: true
     )
@@ -475,6 +491,7 @@ module Aws::Kendra
     #               website. The secret stores your credentials of user name and password.</p>
     #   @return [String]
     class BasicAuthenticationConfiguration < Struct.new(
+      nil,
       :host,
       :port,
       :credentials,
@@ -493,6 +510,7 @@ module Aws::Kendra
     #   <p>Maps a particular data source sync job to a particular data source.</p>
     #   @return [Types::DataSourceSyncJobMetricTarget]
     class BatchDeleteDocumentRequest < Struct.new(
+      nil,
       :index_id,
       :document_id_list,
       :data_source_sync_job_metric_target,
@@ -506,6 +524,7 @@ module Aws::Kendra
     #               error message that indicates why the document couldn't be removed from the index.</p>
     #   @return [Array<Types::BatchDeleteDocumentResponseFailedDocument>]
     class BatchDeleteDocumentResponse < Struct.new(
+      nil,
       :failed_documents,
       keyword_init: true
     )
@@ -527,6 +546,7 @@ module Aws::Kendra
     #   <p>An explanation for why the document couldn't be removed from the index.</p>
     #   @return [String]
     class BatchDeleteDocumentResponseFailedDocument < Struct.new(
+      nil,
       :id,
       :data_source_id,
       :error_code,
@@ -551,6 +571,7 @@ module Aws::Kendra
     #               from the index.</p>
     #   @return [String]
     class BatchDeleteFeaturedResultsSetError < Struct.new(
+      nil,
       :id,
       :error_code,
       :error_message,
@@ -566,6 +587,7 @@ module Aws::Kendra
     #   <p>The identifiers of the featured results sets that you want to delete.</p>
     #   @return [Array<String>]
     class BatchDeleteFeaturedResultsSetRequest < Struct.new(
+      nil,
       :index_id,
       :featured_results_set_ids,
       keyword_init: true
@@ -578,6 +600,7 @@ module Aws::Kendra
     #               couldn't be removed from the index.</p>
     #   @return [Array<Types::BatchDeleteFeaturedResultsSetError>]
     class BatchDeleteFeaturedResultsSetResponse < Struct.new(
+      nil,
       :errors,
       keyword_init: true
     )
@@ -595,6 +618,7 @@ module Aws::Kendra
     #               attributes.</p>
     #   @return [Array<Types::DocumentInfo>]
     class BatchGetDocumentStatusRequest < Struct.new(
+      nil,
       :index_id,
       :document_info_list,
       keyword_init: true
@@ -612,6 +636,7 @@ module Aws::Kendra
     #               document failed indexing, the status provides the reason why.</p>
     #   @return [Array<Types::Status>]
     class BatchGetDocumentStatusResponse < Struct.new(
+      nil,
       :errors,
       :document_status_list,
       keyword_init: true
@@ -635,6 +660,7 @@ module Aws::Kendra
     #               request is not valid or there is a system error.</p>
     #   @return [String]
     class BatchGetDocumentStatusResponseError < Struct.new(
+      nil,
       :document_id,
       :data_source_id,
       :error_code,
@@ -672,6 +698,7 @@ module Aws::Kendra
     #               other content alterations when you ingest documents into Amazon Kendra, see <a href="https://docs.aws.amazon.com/kendra/latest/dg/custom-document-enrichment.html">Customizing document metadata during the ingestion process</a>.</p>
     #   @return [Types::CustomDocumentEnrichmentConfiguration]
     class BatchPutDocumentRequest < Struct.new(
+      nil,
       :index_id,
       :role_arn,
       :documents,
@@ -689,6 +716,7 @@ module Aws::Kendra
     #                   Amazon Web Services CloudWatch log. For more information, see <a href="https://docs.aws.amazon.com/kendra/latest/dg/cloudwatch-logs.html">Monitoring Amazon Kendra with Amazon CloudWatch logs</a>.</p>
     #   @return [Array<Types::BatchPutDocumentResponseFailedDocument>]
     class BatchPutDocumentResponse < Struct.new(
+      nil,
       :failed_documents,
       keyword_init: true
     )
@@ -710,6 +738,7 @@ module Aws::Kendra
     #   <p>A description of the reason why the document could not be indexed.</p>
     #   @return [String]
     class BatchPutDocumentResponseFailedDocument < Struct.new(
+      nil,
       :id,
       :data_source_id,
       :error_code,
@@ -820,6 +849,7 @@ module Aws::Kendra
     #               more information, see <a href="https://docs.aws.amazon.com/kendra/latest/dg/vpc-configuration.html">Configuring a VPC</a>.</p>
     #   @return [Types::DataSourceVpcConfiguration]
     class BoxConfiguration < Struct.new(
+      nil,
       :enterprise_id,
       :secret_arn,
       :use_change_log,
@@ -867,6 +897,7 @@ module Aws::Kendra
     #         2.5 calls per second (higher than five times 0.2 queries per second).</p>
     #   @return [Integer]
     class CapacityUnitsConfiguration < Struct.new(
+      nil,
       :storage_capacity_units,
       :query_capacity_units,
       keyword_init: true
@@ -878,6 +909,7 @@ module Aws::Kendra
     #   <p>The identifier of the index you want to clear query suggestions from.</p>
     #   @return [String]
     class ClearQuerySuggestionsRequest < Struct.new(
+      nil,
       :index_id,
       keyword_init: true
     )
@@ -894,6 +926,7 @@ module Aws::Kendra
     #   <p>The Unix timestamp when the result was clicked.</p>
     #   @return [Time]
     class ClickFeedback < Struct.new(
+      nil,
       :result_id,
       :click_time,
       keyword_init: true
@@ -940,6 +973,7 @@ module Aws::Kendra
     #               group.</p>
     #   @return [Types::ExpandConfiguration]
     class CollapseConfiguration < Struct.new(
+      nil,
       :document_attribute_key,
       :sorting_configurations,
       :missing_attribute_key_strategy,
@@ -963,6 +997,7 @@ module Aws::Kendra
     #   <p>A list of results in the collapsed group.</p>
     #   @return [Array<Types::ExpandedResultItem>]
     class CollapsedResultDetail < Struct.new(
+      nil,
       :document_attribute,
       :expanded_results,
       keyword_init: true
@@ -990,6 +1025,7 @@ module Aws::Kendra
     #   <p>One to five columns that indicate when a document in the database has changed.</p>
     #   @return [Array<String>]
     class ColumnConfiguration < Struct.new(
+      nil,
       :document_id_column_name,
       :document_data_column_name,
       :document_title_column_name,
@@ -1005,6 +1041,7 @@ module Aws::Kendra
     # @!attribute message
     #   @return [String]
     class ConflictException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -1026,6 +1063,7 @@ module Aws::Kendra
     #               query belongs to.</p>
     #   @return [String]
     class ConflictingItem < Struct.new(
+      nil,
       :query_text,
       :set_name,
       :set_id,
@@ -1050,6 +1088,7 @@ module Aws::Kendra
     #               least one field mapping.</p>
     #   @return [Array<Types::ConfluenceAttachmentToIndexFieldMapping>]
     class ConfluenceAttachmentConfiguration < Struct.new(
+      nil,
       :crawl_attachments,
       :attachment_field_mappings,
       keyword_init: true
@@ -1080,6 +1119,7 @@ module Aws::Kendra
     #               field type must match the Confluence field type.</p>
     #   @return [String]
     class ConfluenceAttachmentToIndexFieldMapping < Struct.new(
+      nil,
       :data_source_field_name,
       :date_field_format,
       :index_field_name,
@@ -1101,6 +1141,7 @@ module Aws::Kendra
     #               one field mapping.</p>
     #   @return [Array<Types::ConfluenceBlogToIndexFieldMapping>]
     class ConfluenceBlogConfiguration < Struct.new(
+      nil,
       :blog_field_mappings,
       keyword_init: true
     )
@@ -1124,6 +1165,7 @@ module Aws::Kendra
     #               field type must match the Confluence field type.</p>
     #   @return [String]
     class ConfluenceBlogToIndexFieldMapping < Struct.new(
+      nil,
       :data_source_field_name,
       :date_field_format,
       :index_field_name,
@@ -1203,6 +1245,7 @@ module Aws::Kendra
     #               Server.</p>
     #   @return [String]
     class ConfluenceConfiguration < Struct.new(
+      nil,
       :server_url,
       :secret_arn,
       :version,
@@ -1230,6 +1273,7 @@ module Aws::Kendra
     #               one field mapping.</p>
     #   @return [Array<Types::ConfluencePageToIndexFieldMapping>]
     class ConfluencePageConfiguration < Struct.new(
+      nil,
       :page_field_mappings,
       keyword_init: true
     )
@@ -1253,6 +1297,7 @@ module Aws::Kendra
     #               field type must match the Confluence field type.</p>
     #   @return [String]
     class ConfluencePageToIndexFieldMapping < Struct.new(
+      nil,
       :data_source_field_name,
       :date_field_format,
       :index_field_name,
@@ -1297,6 +1342,7 @@ module Aws::Kendra
     #               least one field mapping.</p>
     #   @return [Array<Types::ConfluenceSpaceToIndexFieldMapping>]
     class ConfluenceSpaceConfiguration < Struct.new(
+      nil,
       :crawl_personal_spaces,
       :crawl_archived_spaces,
       :include_spaces,
@@ -1330,6 +1376,7 @@ module Aws::Kendra
     #               field type must match the Confluence field type.</p>
     #   @return [String]
     class ConfluenceSpaceToIndexFieldMapping < Struct.new(
+      nil,
       :data_source_field_name,
       :date_field_format,
       :index_field_name,
@@ -1362,6 +1409,7 @@ module Aws::Kendra
     #               user guide.</p>
     #   @return [String]
     class ConnectionConfiguration < Struct.new(
+      nil,
       :database_host,
       :database_port,
       :database_name,
@@ -1386,6 +1434,7 @@ module Aws::Kendra
     #                   <code>BatchPutDocument</code> API.</p>
     #   @return [Boolean]
     class ContentSourceConfiguration < Struct.new(
+      nil,
       :data_source_ids,
       :faq_ids,
       :direct_put_content,
@@ -1415,6 +1464,7 @@ module Aws::Kendra
     #   <p>The string or text of a corrected misspelled word in a query.</p>
     #   @return [String]
     class Correction < Struct.new(
+      nil,
       :begin_offset,
       :end_offset,
       :term,
@@ -1449,6 +1499,7 @@ module Aws::Kendra
     #               with the same client token will create only one access control configuration.</p>
     #   @return [String]
     class CreateAccessControlConfigurationRequest < Struct.new(
+      nil,
       :index_id,
       :name,
       :description,
@@ -1465,6 +1516,7 @@ module Aws::Kendra
     #               index.</p>
     #   @return [String]
     class CreateAccessControlConfigurationResponse < Struct.new(
+      nil,
       :id,
       keyword_init: true
     )
@@ -1538,6 +1590,7 @@ module Aws::Kendra
     #               other content alterations when you ingest documents into Amazon Kendra, see <a href="https://docs.aws.amazon.com/kendra/latest/dg/custom-document-enrichment.html">Customizing document metadata during the ingestion process</a>.</p>
     #   @return [Types::CustomDocumentEnrichmentConfiguration]
     class CreateDataSourceRequest < Struct.new(
+      nil,
       :name,
       :index_id,
       :type,
@@ -1559,6 +1612,7 @@ module Aws::Kendra
     #   <p>The identifier of the data source connector.</p>
     #   @return [String]
     class CreateDataSourceResponse < Struct.new(
+      nil,
       :id,
       keyword_init: true
     )
@@ -1592,6 +1646,7 @@ module Aws::Kendra
     #               token creates only one Amazon Kendra experience.</p>
     #   @return [String]
     class CreateExperienceRequest < Struct.new(
+      nil,
       :name,
       :index_id,
       :role_arn,
@@ -1607,6 +1662,7 @@ module Aws::Kendra
     #   <p>The identifier of your Amazon Kendra experience.</p>
     #   @return [String]
     class CreateExperienceResponse < Struct.new(
+      nil,
       :id,
       keyword_init: true
     )
@@ -1657,6 +1713,7 @@ module Aws::Kendra
     #                   documents in languages other than English</a>.</p>
     #   @return [String]
     class CreateFaqRequest < Struct.new(
+      nil,
       :index_id,
       :name,
       :description,
@@ -1675,6 +1732,7 @@ module Aws::Kendra
     #   <p>The identifier of the FAQ.</p>
     #   @return [String]
     class CreateFaqResponse < Struct.new(
+      nil,
       :id,
       keyword_init: true
     )
@@ -1720,6 +1778,7 @@ module Aws::Kendra
     #               symbols:_ . : / = + - @.</p>
     #   @return [Array<Types::Tag>]
     class CreateFeaturedResultsSetRequest < Struct.new(
+      nil,
       :index_id,
       :featured_results_set_name,
       :description,
@@ -1739,6 +1798,7 @@ module Aws::Kendra
     #               when the featured results set was created, and more.</p>
     #   @return [Types::FeaturedResultsSet]
     class CreateFeaturedResultsSetResponse < Struct.new(
+      nil,
       :featured_results_set,
       keyword_init: true
     )
@@ -1824,6 +1884,7 @@ module Aws::Kendra
     #            </important>
     #   @return [Types::UserGroupResolutionConfiguration]
     class CreateIndexRequest < Struct.new(
+      nil,
       :name,
       :edition,
       :role_arn,
@@ -1844,6 +1905,7 @@ module Aws::Kendra
     #         source, or index a document.</p>
     #   @return [String]
     class CreateIndexResponse < Struct.new(
+      nil,
       :id,
       keyword_init: true
     )
@@ -1887,6 +1949,7 @@ module Aws::Kendra
     #               and any of the following symbols: _ . : / = + - @.</p>
     #   @return [Array<Types::Tag>]
     class CreateQuerySuggestionsBlockListRequest < Struct.new(
+      nil,
       :index_id,
       :name,
       :description,
@@ -1903,6 +1966,7 @@ module Aws::Kendra
     #   <p>The identifier of the block list.</p>
     #   @return [String]
     class CreateQuerySuggestionsBlockListResponse < Struct.new(
+      nil,
       :id,
       keyword_init: true
     )
@@ -1940,6 +2004,7 @@ module Aws::Kendra
     #         </p>
     #   @return [String]
     class CreateThesaurusRequest < Struct.new(
+      nil,
       :index_id,
       :name,
       :description,
@@ -1957,6 +2022,7 @@ module Aws::Kendra
     #         </p>
     #   @return [String]
     class CreateThesaurusResponse < Struct.new(
+      nil,
       :id,
       keyword_init: true
     )
@@ -1990,6 +2056,7 @@ module Aws::Kendra
     #               content during the document ingestion process. For more information, see <a href="https://docs.aws.amazon.com/kendra/latest/dg/iam-roles.html">an IAM roles for Amazon Kendra</a>.</p>
     #   @return [String]
     class CustomDocumentEnrichmentConfiguration < Struct.new(
+      nil,
       :inline_configurations,
       :pre_extraction_hook_configuration,
       :post_extraction_hook_configuration,
@@ -2117,6 +2184,7 @@ module Aws::Kendra
     #         source.</p>
     #   @return [Types::TemplateConfiguration]
     class DataSourceConfiguration < Struct.new(
+      nil,
       :s3_configuration,
       :share_point_configuration,
       :database_configuration,
@@ -2151,6 +2219,7 @@ module Aws::Kendra
     #            that data source.</p>
     #   @return [String]
     class DataSourceGroup < Struct.new(
+      nil,
       :group_id,
       :data_source_id,
       keyword_init: true
@@ -2186,6 +2255,7 @@ module Aws::Kendra
     #                   documents in languages other than English</a>.</p>
     #   @return [String]
     class DataSourceSummary < Struct.new(
+      nil,
       :name,
       :id,
       :type,
@@ -2232,6 +2302,7 @@ module Aws::Kendra
     #         and should only be supplied when documents are deleted by a data source connector.</p>
     #   @return [Types::DataSourceSyncJobMetrics]
     class DataSourceSyncJob < Struct.new(
+      nil,
       :execution_id,
       :start_time,
       :end_time,
@@ -2258,6 +2329,7 @@ module Aws::Kendra
     #         included.</p>
     #   @return [String]
     class DataSourceSyncJobMetricTarget < Struct.new(
+      nil,
       :data_source_id,
       :data_source_sync_job_id,
       keyword_init: true
@@ -2287,6 +2359,7 @@ module Aws::Kendra
     #   <p>The current number of documents crawled by the current sync job in the data source.</p>
     #   @return [String]
     class DataSourceSyncJobMetrics < Struct.new(
+      nil,
       :documents_added,
       :documents_modified,
       :documents_deleted,
@@ -2317,6 +2390,7 @@ module Aws::Kendra
     #         must match the data source field type.</p>
     #   @return [String]
     class DataSourceToIndexFieldMapping < Struct.new(
+      nil,
       :data_source_field_name,
       :date_field_format,
       :index_field_name,
@@ -2336,6 +2410,7 @@ module Aws::Kendra
     #         should enable Amazon Kendra to connect to the data source.</p>
     #   @return [Array<String>]
     class DataSourceVpcConfiguration < Struct.new(
+      nil,
       :subnet_ids,
       :security_group_ids,
       keyword_init: true
@@ -2367,6 +2442,7 @@ module Aws::Kendra
     #               identifiers when querying a database data source.</p>
     #   @return [Types::SqlConfiguration]
     class DatabaseConfiguration < Struct.new(
+      nil,
       :database_engine_type,
       :connection_configuration,
       :vpc_configuration,
@@ -2385,6 +2461,7 @@ module Aws::Kendra
     #   <p>The identifier of the access control configuration you want to delete.</p>
     #   @return [String]
     class DeleteAccessControlConfigurationRequest < Struct.new(
+      nil,
       :index_id,
       :id,
       keyword_init: true
@@ -2393,6 +2470,7 @@ module Aws::Kendra
     end
 
     class DeleteAccessControlConfigurationResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -2405,6 +2483,7 @@ module Aws::Kendra
     #   <p>The identifier of the index used with the data source connector.</p>
     #   @return [String]
     class DeleteDataSourceRequest < Struct.new(
+      nil,
       :id,
       :index_id,
       keyword_init: true
@@ -2419,6 +2498,7 @@ module Aws::Kendra
     #   <p>The identifier of the index for your Amazon Kendra experience.</p>
     #   @return [String]
     class DeleteExperienceRequest < Struct.new(
+      nil,
       :id,
       :index_id,
       keyword_init: true
@@ -2427,6 +2507,7 @@ module Aws::Kendra
     end
 
     class DeleteExperienceResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -2439,6 +2520,7 @@ module Aws::Kendra
     #   <p>The identifier of the index for the FAQ.</p>
     #   @return [String]
     class DeleteFaqRequest < Struct.new(
+      nil,
       :id,
       :index_id,
       keyword_init: true
@@ -2450,6 +2532,7 @@ module Aws::Kendra
     #   <p>The identifier of the index you want to delete.</p>
     #   @return [String]
     class DeleteIndexRequest < Struct.new(
+      nil,
       :id,
       keyword_init: true
     )
@@ -2487,6 +2570,7 @@ module Aws::Kendra
     #               received by Amazon Kendra. </p>
     #   @return [Integer]
     class DeletePrincipalMappingRequest < Struct.new(
+      nil,
       :index_id,
       :data_source_id,
       :group_id,
@@ -2503,6 +2587,7 @@ module Aws::Kendra
     #   <p>The identifier of the block list you want to delete.</p>
     #   @return [String]
     class DeleteQuerySuggestionsBlockListRequest < Struct.new(
+      nil,
       :index_id,
       :id,
       keyword_init: true
@@ -2517,6 +2602,7 @@ module Aws::Kendra
     #   <p>The identifier of the index for the thesaurus.</p>
     #   @return [String]
     class DeleteThesaurusRequest < Struct.new(
+      nil,
       :id,
       :index_id,
       keyword_init: true
@@ -2532,6 +2618,7 @@ module Aws::Kendra
     #               on.</p>
     #   @return [String]
     class DescribeAccessControlConfigurationRequest < Struct.new(
+      nil,
       :index_id,
       :id,
       keyword_init: true
@@ -2559,6 +2646,7 @@ module Aws::Kendra
     #               have access to.</p>
     #   @return [Array<Types::HierarchicalPrincipal>]
     class DescribeAccessControlConfigurationResponse < Struct.new(
+      nil,
       :name,
       :description,
       :error_message,
@@ -2576,6 +2664,7 @@ module Aws::Kendra
     #   <p>The identifier of the index used with the data source connector.</p>
     #   @return [String]
     class DescribeDataSourceRequest < Struct.new(
+      nil,
       :id,
       :index_id,
       keyword_init: true
@@ -2644,6 +2733,7 @@ module Aws::Kendra
     #               other content alterations when you ingest documents into Amazon Kendra, see <a href="https://docs.aws.amazon.com/kendra/latest/dg/custom-document-enrichment.html">Customizing document metadata during the ingestion process</a>.</p>
     #   @return [Types::CustomDocumentEnrichmentConfiguration]
     class DescribeDataSourceResponse < Struct.new(
+      nil,
       :id,
       :index_id,
       :name,
@@ -2671,6 +2761,7 @@ module Aws::Kendra
     #   <p>The identifier of the index for your Amazon Kendra experience.</p>
     #   @return [String]
     class DescribeExperienceRequest < Struct.new(
+      nil,
       :id,
       :index_id,
       keyword_init: true
@@ -2722,6 +2813,7 @@ module Aws::Kendra
     #   <p>The reason your Amazon Kendra experience could not properly process.</p>
     #   @return [String]
     class DescribeExperienceResponse < Struct.new(
+      nil,
       :id,
       :index_id,
       :name,
@@ -2745,6 +2837,7 @@ module Aws::Kendra
     #   <p>The identifier of the index for the FAQ.</p>
     #   @return [String]
     class DescribeFaqRequest < Struct.new(
+      nil,
       :id,
       :index_id,
       keyword_init: true
@@ -2796,6 +2889,7 @@ module Aws::Kendra
     #                   documents in languages other than English</a>.</p>
     #   @return [String]
     class DescribeFaqResponse < Struct.new(
+      nil,
       :id,
       :index_id,
       :name,
@@ -2821,6 +2915,7 @@ module Aws::Kendra
     #               information on.</p>
     #   @return [String]
     class DescribeFeaturedResultsSetRequest < Struct.new(
+      nil,
       :index_id,
       :featured_results_set_id,
       keyword_init: true
@@ -2868,6 +2963,7 @@ module Aws::Kendra
     #   <p>The Unix timestamp when the set of the featured results was created.</p>
     #   @return [Integer]
     class DescribeFeaturedResultsSetResponse < Struct.new(
+      nil,
       :featured_results_set_id,
       :featured_results_set_name,
       :description,
@@ -2886,6 +2982,7 @@ module Aws::Kendra
     #   <p>The identifier of the index you want to get information on.</p>
     #   @return [String]
     class DescribeIndexRequest < Struct.new(
+      nil,
       :id,
       keyword_init: true
     )
@@ -2955,6 +3052,7 @@ module Aws::Kendra
     #            on the user or their group access to documents.</p>
     #   @return [Types::UserGroupResolutionConfiguration]
     class DescribeIndexResponse < Struct.new(
+      nil,
       :name,
       :id,
       :edition,
@@ -2989,6 +3087,7 @@ module Aws::Kendra
     #                   <code>DELETE</code> actions for mapping users to their groups.</p>
     #   @return [String]
     class DescribePrincipalMappingRequest < Struct.new(
+      nil,
       :index_id,
       :data_source_id,
       :group_id,
@@ -3038,6 +3137,7 @@ module Aws::Kendra
     #            </ul>
     #   @return [Array<Types::GroupOrderingIdSummary>]
     class DescribePrincipalMappingResponse < Struct.new(
+      nil,
       :index_id,
       :data_source_id,
       :group_id,
@@ -3054,6 +3154,7 @@ module Aws::Kendra
     #   <p>The identifier of the block list you want to get information on.</p>
     #   @return [String]
     class DescribeQuerySuggestionsBlockListRequest < Struct.new(
+      nil,
       :index_id,
       :id,
       keyword_init: true
@@ -3109,6 +3210,7 @@ module Aws::Kendra
     #               Amazon Kendra.</p>
     #   @return [String]
     class DescribeQuerySuggestionsBlockListResponse < Struct.new(
+      nil,
       :index_id,
       :id,
       :name,
@@ -3131,6 +3233,7 @@ module Aws::Kendra
     #               information on.</p>
     #   @return [String]
     class DescribeQuerySuggestionsConfigRequest < Struct.new(
+      nil,
       :index_id,
       keyword_init: true
     )
@@ -3194,6 +3297,7 @@ module Aws::Kendra
     #               suggestions on.</p>
     #   @return [Types::AttributeSuggestionsDescribeConfig]
     class DescribeQuerySuggestionsConfigResponse < Struct.new(
+      nil,
       :mode,
       :status,
       :query_log_look_back_window_in_days,
@@ -3216,6 +3320,7 @@ module Aws::Kendra
     #   <p>The identifier of the index for the thesaurus.</p>
     #   @return [String]
     class DescribeThesaurusRequest < Struct.new(
+      nil,
       :id,
       :index_id,
       keyword_init: true
@@ -3278,6 +3383,7 @@ module Aws::Kendra
     #   <p>The number of synonym rules in the thesaurus file.</p>
     #   @return [Integer]
     class DescribeThesaurusResponse < Struct.new(
+      nil,
       :id,
       :index_id,
       :name,
@@ -3306,6 +3412,7 @@ module Aws::Kendra
     #   <p>Lists users or groups in your IAM Identity Center identity source.</p>
     #   @return [Array<Types::EntityConfiguration>]
     class DisassociateEntitiesFromExperienceRequest < Struct.new(
+      nil,
       :id,
       :index_id,
       :entity_list,
@@ -3319,6 +3426,7 @@ module Aws::Kendra
     #               failed to properly remove access to your Amazon Kendra experience.</p>
     #   @return [Array<Types::FailedEntity>]
     class DisassociateEntitiesFromExperienceResponse < Struct.new(
+      nil,
       :failed_entity_list,
       keyword_init: true
     )
@@ -3336,6 +3444,7 @@ module Aws::Kendra
     #               source. For example, user IDs could be user emails.</p>
     #   @return [Array<String>]
     class DisassociatePersonasFromEntitiesRequest < Struct.new(
+      nil,
       :id,
       :index_id,
       :entity_ids,
@@ -3349,6 +3458,7 @@ module Aws::Kendra
     #               failed to properly remove access to your Amazon Kendra experience.</p>
     #   @return [Array<Types::FailedEntity>]
     class DisassociatePersonasFromEntitiesResponse < Struct.new(
+      nil,
       :failed_entity_list,
       keyword_init: true
     )
@@ -3406,6 +3516,7 @@ module Aws::Kendra
     #               document.</p>
     #   @return [String]
     class Document < Struct.new(
+      nil,
       :id,
       :title,
       :blob,
@@ -3430,6 +3541,7 @@ module Aws::Kendra
     #   <p>The value of the attribute.</p>
     #   @return [Types::DocumentAttributeValue]
     class DocumentAttribute < Struct.new(
+      nil,
       :key,
       :value,
       keyword_init: true
@@ -3466,6 +3578,7 @@ module Aws::Kendra
     #               field that partially match or contain this value.</p>
     #   @return [Types::DocumentAttributeValue]
     class DocumentAttributeCondition < Struct.new(
+      nil,
       :condition_document_attribute_key,
       :operator,
       :condition_on_value,
@@ -3504,6 +3617,7 @@ module Aws::Kendra
     #               'Department'.</p>
     #   @return [Types::DocumentAttributeValue]
     class DocumentAttributeTarget < Struct.new(
+      nil,
       :target_document_attribute_key,
       :target_document_attribute_value_deletion,
       :target_document_attribute_value,
@@ -3535,6 +3649,7 @@ module Aws::Kendra
     #               at 12:30PM (plus 10 seconds) in Central European Time.</p>
     #   @return [Time]
     class DocumentAttributeValue < Struct.new(
+      nil,
       :string_value,
       :string_list_value,
       :long_value,
@@ -3567,6 +3682,7 @@ module Aws::Kendra
     #            <p></p>
     #   @return [Array<Types::FacetResult>]
     class DocumentAttributeValueCountPair < Struct.new(
+      nil,
       :document_attribute_value,
       :count,
       :facet_results,
@@ -3612,6 +3728,7 @@ module Aws::Kendra
     #            </ul>
     #   @return [Array<Types::DocumentAttribute>]
     class DocumentInfo < Struct.new(
+      nil,
       :document_id,
       :attributes,
       keyword_init: true
@@ -3635,6 +3752,7 @@ module Aws::Kendra
     #   <p>Provides information about how the field is used during a search.</p>
     #   @return [Types::Search]
     class DocumentMetadataConfiguration < Struct.new(
+      nil,
       :name,
       :type,
       :relevance,
@@ -3654,6 +3772,7 @@ module Aws::Kendra
     #            these tuning parameters.</p>
     #   @return [Types::Relevance]
     class DocumentRelevanceConfiguration < Struct.new(
+      nil,
       :name,
       :relevance,
       keyword_init: true
@@ -3670,6 +3789,7 @@ module Aws::Kendra
     #               to include only the desired metadata files.</p>
     #   @return [String]
     class DocumentsMetadataConfiguration < Struct.new(
+      nil,
       :s3_prefix,
       keyword_init: true
     )
@@ -3688,6 +3808,7 @@ module Aws::Kendra
     #               <code>Group</code>.</p>
     #   @return [String]
     class EntityConfiguration < Struct.new(
+      nil,
       :entity_id,
       :entity_type,
       keyword_init: true
@@ -3712,6 +3833,7 @@ module Aws::Kendra
     #   <p>The last name of the user.</p>
     #   @return [String]
     class EntityDisplayData < Struct.new(
+      nil,
       :user_name,
       :group_name,
       :identified_user_name,
@@ -3738,6 +3860,7 @@ module Aws::Kendra
     #                   access to your search page</a>.</p>
     #   @return [String]
     class EntityPersonaConfiguration < Struct.new(
+      nil,
       :entity_id,
       :persona,
       keyword_init: true
@@ -3758,6 +3881,7 @@ module Aws::Kendra
     #               displayed.</p>
     #   @return [Integer]
     class ExpandConfiguration < Struct.new(
+      nil,
       :max_result_items_to_expand,
       :max_expanded_results_per_item,
       keyword_init: true
@@ -3791,6 +3915,7 @@ module Aws::Kendra
     #               document.</p>
     #   @return [Array<Types::DocumentAttribute>]
     class ExpandedResultItem < Struct.new(
+      nil,
       :id,
       :document_id,
       :document_title,
@@ -3815,6 +3940,7 @@ module Aws::Kendra
     #               such as their emails.</p>
     #   @return [Types::UserIdentityConfiguration]
     class ExperienceConfiguration < Struct.new(
+      nil,
       :content_source_configuration,
       :user_identity_configuration,
       keyword_init: true
@@ -3833,6 +3959,7 @@ module Aws::Kendra
     #   <p>The endpoint of your Amazon Kendra experience.</p>
     #   @return [String]
     class ExperienceEndpoint < Struct.new(
+      nil,
       :endpoint_type,
       :endpoint,
       keyword_init: true
@@ -3856,6 +3983,7 @@ module Aws::Kendra
     #   <p>Information about the user entity.</p>
     #   @return [Types::EntityDisplayData]
     class ExperienceEntitiesSummary < Struct.new(
+      nil,
       :entity_id,
       :entity_type,
       :display_data,
@@ -3885,6 +4013,7 @@ module Aws::Kendra
     #               and fully hosted by Amazon Web Services.</p>
     #   @return [Array<Types::ExperienceEndpoint>]
     class ExperiencesSummary < Struct.new(
+      nil,
       :name,
       :id,
       :created_at,
@@ -3922,6 +4051,7 @@ module Aws::Kendra
     #               <a href="http://aws.amazon.com/contact-us/">Support</a>.</p>
     #   @return [Integer]
     class Facet < Struct.new(
+      nil,
       :document_attribute_key,
       :facets,
       :max_results,
@@ -3949,6 +4079,7 @@ module Aws::Kendra
     #            is the number of documents that share the key value.</p>
     #   @return [Array<Types::DocumentAttributeValueCountPair>]
     class FacetResult < Struct.new(
+      nil,
       :document_attribute_key,
       :document_attribute_value_type,
       :document_attribute_value_count_pairs,
@@ -3968,6 +4099,7 @@ module Aws::Kendra
     #               failed to properly configure with your Amazon Kendra experience.</p>
     #   @return [String]
     class FailedEntity < Struct.new(
+      nil,
       :entity_id,
       :error_message,
       keyword_init: true
@@ -3981,6 +4113,7 @@ module Aws::Kendra
     #   <p>The total number of FAQ questions and answers for an index.</p>
     #   @return [Integer]
     class FaqStatistics < Struct.new(
+      nil,
       :indexed_question_answers_count,
       keyword_init: true
     )
@@ -4021,6 +4154,7 @@ module Aws::Kendra
     #                   documents in languages other than English</a>.</p>
     #   @return [String]
     class FaqSummary < Struct.new(
+      nil,
       :id,
       :name,
       :status,
@@ -4043,6 +4177,7 @@ module Aws::Kendra
     #               or you can use the console.</p>
     #   @return [String]
     class FeaturedDocument < Struct.new(
+      nil,
       :id,
       keyword_init: true
     )
@@ -4059,6 +4194,7 @@ module Aws::Kendra
     #               as a featured document.</p>
     #   @return [String]
     class FeaturedDocumentMissing < Struct.new(
+      nil,
       :id,
       keyword_init: true
     )
@@ -4082,6 +4218,7 @@ module Aws::Kendra
     #   <p>The source URI location of the featured document.</p>
     #   @return [String]
     class FeaturedDocumentWithMetadata < Struct.new(
+      nil,
       :id,
       :title,
       :uri,
@@ -4102,6 +4239,7 @@ module Aws::Kendra
     #               the featured results set, and the identifier of the featured results set.</p>
     #   @return [Array<Types::ConflictingItem>]
     class FeaturedResultsConflictException < Struct.new(
+      nil,
       :message,
       :conflicting_items,
       keyword_init: true
@@ -4147,6 +4285,7 @@ module Aws::Kendra
     #               For more information, see <a href="https://docs.aws.amazon.com/kendra/latest/dg/submitting-feedback.html">Submitting feedback</a>.</p>
     #   @return [String]
     class FeaturedResultsItem < Struct.new(
+      nil,
       :id,
       :type,
       :additional_attributes,
@@ -4215,6 +4354,7 @@ module Aws::Kendra
     #   <p>The Unix timestamp when the set of featured results was created.</p>
     #   @return [Integer]
     class FeaturedResultsSet < Struct.new(
+      nil,
       :featured_results_set_id,
       :featured_results_set_name,
       :description,
@@ -4253,6 +4393,7 @@ module Aws::Kendra
     #   <p>The Unix timestamp when the set of featured results was created.</p>
     #   @return [Integer]
     class FeaturedResultsSetSummary < Struct.new(
+      nil,
       :featured_results_set_id,
       :featured_results_set_name,
       :status,
@@ -4326,6 +4467,7 @@ module Aws::Kendra
     #               custom metadata.</p>
     #   @return [Array<Types::DataSourceToIndexFieldMapping>]
     class FsxConfiguration < Struct.new(
+      nil,
       :file_system_id,
       :file_system_type,
       :vpc_configuration,
@@ -4370,6 +4512,7 @@ module Aws::Kendra
     #               want to base query suggestions on.</p>
     #   @return [Types::AttributeSuggestionsGetConfig]
     class GetQuerySuggestionsRequest < Struct.new(
+      nil,
       :index_id,
       :query_text,
       :max_suggestions_count,
@@ -4387,6 +4530,7 @@ module Aws::Kendra
     #   <p>A list of query suggestions for an index.</p>
     #   @return [Array<Types::Suggestion>]
     class GetQuerySuggestionsResponse < Struct.new(
+      nil,
       :query_suggestions_id,
       :suggestions,
       keyword_init: true
@@ -4447,6 +4591,7 @@ module Aws::Kendra
     #   <p>The maximum number of returned data for the metric.</p>
     #   @return [Integer]
     class GetSnapshotsRequest < Struct.new(
+      nil,
       :index_id,
       :interval,
       :metric_type,
@@ -4473,6 +4618,7 @@ module Aws::Kendra
     #               in a later request to retrieve the next set of search metrics data.</p>
     #   @return [String]
     class GetSnapshotsResponse < Struct.new(
+      nil,
       :snap_shot_time_filter,
       :snapshots_data_header,
       :snapshots_data,
@@ -4636,6 +4782,7 @@ module Aws::Kendra
     #               GitHub data source field names must exist in your GitHub custom metadata.</p>
     #   @return [Array<Types::DataSourceToIndexFieldMapping>]
     class GitHubConfiguration < Struct.new(
+      nil,
       :saa_s_configuration,
       :on_premise_configuration,
       :type,
@@ -4700,6 +4847,7 @@ module Aws::Kendra
     #               <code>TRUE</code> to include all comment attachments for pull requests.</p>
     #   @return [Boolean]
     class GitHubDocumentCrawlProperties < Struct.new(
+      nil,
       :crawl_repository_documents,
       :crawl_issue,
       :crawl_issue_comment,
@@ -4767,6 +4915,7 @@ module Aws::Kendra
     #               folders stored on the shared drive are excluded.</p>
     #   @return [Array<String>]
     class GoogleDriveConfiguration < Struct.new(
+      nil,
       :secret_arn,
       :inclusion_patterns,
       :exclusion_patterns,
@@ -4802,6 +4951,7 @@ module Aws::Kendra
     #               always <code>GROUP</code> and for a user it is always <code>USER</code>.</p>
     #   @return [Types::S3Path]
     class GroupMembers < Struct.new(
+      nil,
       :member_groups,
       :member_users,
       :s3_pathfor_group_members,
@@ -4835,6 +4985,7 @@ module Aws::Kendra
     #                   <code>DELETE</code> action for mapping users to their groups.</p>
     #   @return [String]
     class GroupOrderingIdSummary < Struct.new(
+      nil,
       :status,
       :last_updated_at,
       :received_at,
@@ -4854,6 +5005,7 @@ module Aws::Kendra
     #               action.</p>
     #   @return [Integer]
     class GroupSummary < Struct.new(
+      nil,
       :group_id,
       :ordering_id,
       keyword_init: true
@@ -4869,6 +5021,7 @@ module Aws::Kendra
     #               access for each document.</p>
     #   @return [Array<Types::Principal>]
     class HierarchicalPrincipal < Struct.new(
+      nil,
       :principal_list,
       keyword_init: true
     )
@@ -4891,6 +5044,7 @@ module Aws::Kendra
     #   <p>The highlight type. </p>
     #   @return [String]
     class Highlight < Struct.new(
+      nil,
       :begin_offset,
       :end_offset,
       :top_answer,
@@ -4927,6 +5081,7 @@ module Aws::Kendra
     #               after altering them. For more information, see <a href="https://docs.aws.amazon.com/kendra/latest/dg/custom-document-enrichment.html#cde-data-contracts-lambda">Data contracts for Lambda functions</a>.</p>
     #   @return [String]
     class HookConfiguration < Struct.new(
+      nil,
       :invocation_condition,
       :lambda_arn,
       :s3_bucket,
@@ -4959,6 +5114,7 @@ module Aws::Kendra
     #         ready to search.</p>
     #   @return [String]
     class IndexConfigurationSummary < Struct.new(
+      nil,
       :name,
       :id,
       :edition,
@@ -4979,6 +5135,7 @@ module Aws::Kendra
     #   <p>The number of text documents indexed.</p>
     #   @return [Types::TextDocumentStatistics]
     class IndexStatistics < Struct.new(
+      nil,
       :faq_statistics,
       :text_document_statistics,
       keyword_init: true
@@ -5005,6 +5162,7 @@ module Aws::Kendra
     #               met.</p>
     #   @return [Boolean]
     class InlineCustomDocumentEnrichmentConfiguration < Struct.new(
+      nil,
       :condition,
       :target,
       :document_content_deletion,
@@ -5023,6 +5181,7 @@ module Aws::Kendra
     # @!attribute message
     #   @return [String]
     class InternalServerException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -5034,6 +5193,7 @@ module Aws::Kendra
     # @!attribute message
     #   @return [String]
     class InvalidRequestException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -5140,6 +5300,7 @@ module Aws::Kendra
     #               more information, see <a href="https://docs.aws.amazon.com/kendra/latest/dg/vpc-configuration.html">Configuring a VPC</a>.</p>
     #   @return [Types::DataSourceVpcConfiguration]
     class JiraConfiguration < Struct.new(
+      nil,
       :jira_account_url,
       :secret_arn,
       :use_change_log,
@@ -5173,6 +5334,7 @@ module Aws::Kendra
     #   <p>The group attribute field.</p>
     #   @return [String]
     class JsonTokenTypeConfiguration < Struct.new(
+      nil,
       :user_name_attribute_field,
       :group_attribute_field,
       keyword_init: true
@@ -5203,6 +5365,7 @@ module Aws::Kendra
     #   <p>The regular expression that identifies the claim.</p>
     #   @return [String]
     class JwtTokenTypeConfiguration < Struct.new(
+      nil,
       :key_location,
       :url,
       :secret_manager_arn,
@@ -5227,6 +5390,7 @@ module Aws::Kendra
     #   <p>The maximum number of access control configurations to return.</p>
     #   @return [Integer]
     class ListAccessControlConfigurationsRequest < Struct.new(
+      nil,
       :index_id,
       :next_token,
       :max_results,
@@ -5244,6 +5408,7 @@ module Aws::Kendra
     #   <p>The details of your access control configurations.</p>
     #   @return [Array<Types::AccessControlConfigurationSummary>]
     class ListAccessControlConfigurationsResponse < Struct.new(
+      nil,
       :next_token,
       :access_control_configurations,
       keyword_init: true
@@ -5274,6 +5439,7 @@ module Aws::Kendra
     #         specified status.</p>
     #   @return [String]
     class ListDataSourceSyncJobsRequest < Struct.new(
+      nil,
       :id,
       :index_id,
       :next_token,
@@ -5293,6 +5459,7 @@ module Aws::Kendra
     #         the subsequent request to retrieve the next set of jobs.</p>
     #   @return [String]
     class ListDataSourceSyncJobsResponse < Struct.new(
+      nil,
       :history,
       :next_token,
       keyword_init: true
@@ -5311,6 +5478,7 @@ module Aws::Kendra
     #   <p>The maximum number of data source connectors to return.</p>
     #   @return [Integer]
     class ListDataSourcesRequest < Struct.new(
+      nil,
       :index_id,
       :next_token,
       :max_results,
@@ -5327,6 +5495,7 @@ module Aws::Kendra
     #         the subsequent request to retrieve the next set of data source connectors.</p>
     #   @return [String]
     class ListDataSourcesResponse < Struct.new(
+      nil,
       :summary_items,
       :next_token,
       keyword_init: true
@@ -5349,6 +5518,7 @@ module Aws::Kendra
     #   <p>The maximum number of returned users or groups.</p>
     #   @return [Integer]
     class ListEntityPersonasRequest < Struct.new(
+      nil,
       :id,
       :index_id,
       :next_token,
@@ -5366,6 +5536,7 @@ module Aws::Kendra
     #               a later request to retrieve the next set of users or groups.</p>
     #   @return [String]
     class ListEntityPersonasResponse < Struct.new(
+      nil,
       :summary_items,
       :next_token,
       keyword_init: true
@@ -5385,6 +5556,7 @@ module Aws::Kendra
     #               token to retrieve the next set of users or groups.</p>
     #   @return [String]
     class ListExperienceEntitiesRequest < Struct.new(
+      nil,
       :id,
       :index_id,
       :next_token,
@@ -5401,6 +5573,7 @@ module Aws::Kendra
     #               a later request to retrieve the next set of users or groups.</p>
     #   @return [String]
     class ListExperienceEntitiesResponse < Struct.new(
+      nil,
       :summary_items,
       :next_token,
       keyword_init: true
@@ -5420,6 +5593,7 @@ module Aws::Kendra
     #   <p>The maximum number of returned Amazon Kendra experiences.</p>
     #   @return [Integer]
     class ListExperiencesRequest < Struct.new(
+      nil,
       :index_id,
       :next_token,
       :max_results,
@@ -5436,6 +5610,7 @@ module Aws::Kendra
     #               in a later request to retrieve the next set of Amazon Kendra experiences.</p>
     #   @return [String]
     class ListExperiencesResponse < Struct.new(
+      nil,
       :summary_items,
       :next_token,
       keyword_init: true
@@ -5456,6 +5631,7 @@ module Aws::Kendra
     #               the list, this response contains only the actual results.</p>
     #   @return [Integer]
     class ListFaqsRequest < Struct.new(
+      nil,
       :index_id,
       :next_token,
       :max_results,
@@ -5472,6 +5648,7 @@ module Aws::Kendra
     #   <p>Summary information about the FAQs for a specified index.</p>
     #   @return [Array<Types::FaqSummary>]
     class ListFaqsResponse < Struct.new(
+      nil,
       :next_token,
       :faq_summary_items,
       keyword_init: true
@@ -5491,6 +5668,7 @@ module Aws::Kendra
     #   <p>The maximum number of featured results sets to return.</p>
     #   @return [Integer]
     class ListFeaturedResultsSetsRequest < Struct.new(
+      nil,
       :index_id,
       :next_token,
       :max_results,
@@ -5507,6 +5685,7 @@ module Aws::Kendra
     #               in the response.</p>
     #   @return [String]
     class ListFeaturedResultsSetsResponse < Struct.new(
+      nil,
       :featured_results_set_summary_items,
       :next_token,
       keyword_init: true
@@ -5537,6 +5716,7 @@ module Aws::Kendra
     #               ordering or timestamp identifier. </p>
     #   @return [Integer]
     class ListGroupsOlderThanOrderingIdRequest < Struct.new(
+      nil,
       :index_id,
       :data_source_id,
       :ordering_id,
@@ -5557,6 +5737,7 @@ module Aws::Kendra
     #               before a given ordering or timestamp identifier. </p>
     #   @return [String]
     class ListGroupsOlderThanOrderingIdResponse < Struct.new(
+      nil,
       :groups_summaries,
       :next_token,
       keyword_init: true
@@ -5572,6 +5753,7 @@ module Aws::Kendra
     #   <p>The maximum number of indices to return.</p>
     #   @return [Integer]
     class ListIndicesRequest < Struct.new(
+      nil,
       :next_token,
       :max_results,
       keyword_init: true
@@ -5587,6 +5769,7 @@ module Aws::Kendra
     #         the subsequent request to retrieve the next set of indexes.</p>
     #   @return [String]
     class ListIndicesResponse < Struct.new(
+      nil,
       :index_configuration_summary_items,
       :next_token,
       keyword_init: true
@@ -5610,6 +5793,7 @@ module Aws::Kendra
     #   <p>The maximum number of block lists to return.</p>
     #   @return [Integer]
     class ListQuerySuggestionsBlockListsRequest < Struct.new(
+      nil,
       :index_id,
       :next_token,
       :max_results,
@@ -5632,6 +5816,7 @@ module Aws::Kendra
     #               in the subsequent request to retrieve the next set of block lists.</p>
     #   @return [String]
     class ListQuerySuggestionsBlockListsResponse < Struct.new(
+      nil,
       :block_list_summary_items,
       :next_token,
       keyword_init: true
@@ -5648,6 +5833,7 @@ module Aws::Kendra
     #           types</a>.</p>
     #   @return [String]
     class ListTagsForResourceRequest < Struct.new(
+      nil,
       :resource_arn,
       keyword_init: true
     )
@@ -5658,6 +5844,7 @@ module Aws::Kendra
     #   <p>A list of tags associated with the index, FAQ, data source, or other resource.</p>
     #   @return [Array<Types::Tag>]
     class ListTagsForResourceResponse < Struct.new(
+      nil,
       :tags,
       keyword_init: true
     )
@@ -5677,6 +5864,7 @@ module Aws::Kendra
     #   <p>The maximum number of thesauri to return.</p>
     #   @return [Integer]
     class ListThesauriRequest < Struct.new(
+      nil,
       :index_id,
       :next_token,
       :max_results,
@@ -5695,6 +5883,7 @@ module Aws::Kendra
     #   <p>An array of summary information for a thesaurus or multiple thesauri.</p>
     #   @return [Array<Types::ThesaurusSummary>]
     class ListThesauriResponse < Struct.new(
+      nil,
       :next_token,
       :thesaurus_summary_items,
       keyword_init: true
@@ -5710,6 +5899,7 @@ module Aws::Kendra
     #   <p>The identifier of the data source for the sub group you want to map to a group.</p>
     #   @return [String]
     class MemberGroup < Struct.new(
+      nil,
       :group_id,
       :data_source_id,
       keyword_init: true
@@ -5722,6 +5912,7 @@ module Aws::Kendra
     #   <p>The identifier of the user you want to map to a group.</p>
     #   @return [String]
     class MemberUser < Struct.new(
+      nil,
       :user_id,
       keyword_init: true
     )
@@ -5748,6 +5939,7 @@ module Aws::Kendra
     #               For an example of using OpenSSL to create an X509 certificate, see <a href="https://docs.aws.amazon.com/elasticbeanstalk/latest/dg/configuring-https-ssl.html">Create and sign an X509 certificate</a>.</p>
     #   @return [Types::S3Path]
     class OnPremiseConfiguration < Struct.new(
+      nil,
       :host_url,
       :organization_name,
       :ssl_certificate_s3_path,
@@ -5798,6 +5990,7 @@ module Aws::Kendra
     #               <code>TRUE</code> to disable local groups information.</p>
     #   @return [Boolean]
     class OneDriveConfiguration < Struct.new(
+      nil,
       :tenant_domain,
       :secret_arn,
       :one_drive_users,
@@ -5827,6 +6020,7 @@ module Aws::Kendra
     #               indexed.</p>
     #   @return [Types::S3Path]
     class OneDriveUsers < Struct.new(
+      nil,
       :one_drive_user_list,
       :one_drive_user_s3_path,
       keyword_init: true
@@ -5858,6 +6052,7 @@ module Aws::Kendra
     #   <p>The Unix timestamp when the summary information was last updated.</p>
     #   @return [Time]
     class PersonasSummary < Struct.new(
+      nil,
       :entity_id,
       :persona,
       :created_at,
@@ -5882,6 +6077,7 @@ module Aws::Kendra
     #   <p>The identifier of the data source the principal should access documents from.</p>
     #   @return [String]
     class Principal < Struct.new(
+      nil,
       :name,
       :type,
       :access,
@@ -5912,6 +6108,7 @@ module Aws::Kendra
     #               to connect to a web proxy server. The secret stores your credentials.</p>
     #   @return [String]
     class ProxyConfiguration < Struct.new(
+      nil,
       :host,
       :port,
       :credentials,
@@ -5965,6 +6162,7 @@ module Aws::Kendra
     #               Amazon Kendra</a>.</p>
     #   @return [String]
     class PutPrincipalMappingRequest < Struct.new(
+      nil,
       :index_id,
       :data_source_id,
       :group_id,
@@ -6066,6 +6264,7 @@ module Aws::Kendra
     #            each group.</p>
     #   @return [Types::CollapseConfiguration]
     class QueryRequest < Struct.new(
+      nil,
       :index_id,
       :query_text,
       :attribute_filter,
@@ -6118,6 +6317,7 @@ module Aws::Kendra
     #            exact match of a query, then certain documents are featured in the search results.</p>
     #   @return [Array<Types::FeaturedResultsItem>]
     class QueryResult < Struct.new(
+      nil,
       :query_id,
       :result_items,
       :facet_results,
@@ -6193,6 +6393,7 @@ module Aws::Kendra
     #   <p>Provides details about a collapsed group of search results.</p>
     #   @return [Types::CollapsedResultDetail]
     class QueryResultItem < Struct.new(
+      nil,
       :id,
       :type,
       :format,
@@ -6237,6 +6438,7 @@ module Aws::Kendra
     #   <p>The number of items in the block list file.</p>
     #   @return [Integer]
     class QuerySuggestionsBlockListSummary < Struct.new(
+      nil,
       :id,
       :name,
       :status,
@@ -6323,6 +6525,7 @@ module Aws::Kendra
     #               For more information, see <a href="https://docs.aws.amazon.com/kendra/latest/dg/vpc-configuration.html">Configuring a VPC</a>.</p>
     #   @return [Types::DataSourceVpcConfiguration]
     class QuipConfiguration < Struct.new(
+      nil,
       :domain,
       :secret_arn,
       :crawl_file_comments,
@@ -6389,6 +6592,7 @@ module Aws::Kendra
     #               importance instead of the regular importance for the boost.</p>
     #   @return [Hash<String, Integer>]
     class Relevance < Struct.new(
+      nil,
       :freshness,
       :importance,
       :duration,
@@ -6409,6 +6613,7 @@ module Aws::Kendra
     #   <p>Whether the document was relevant or not relevant to the search.</p>
     #   @return [String]
     class RelevanceFeedback < Struct.new(
+      nil,
       :result_id,
       :relevance_value,
       keyword_init: true
@@ -6421,6 +6626,7 @@ module Aws::Kendra
     # @!attribute message
     #   @return [String]
     class ResourceAlreadyExistException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -6432,6 +6638,7 @@ module Aws::Kendra
     # @!attribute message
     #   @return [String]
     class ResourceInUseException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -6443,6 +6650,7 @@ module Aws::Kendra
     # @!attribute message
     #   @return [String]
     class ResourceNotFoundException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -6454,6 +6662,7 @@ module Aws::Kendra
     # @!attribute message
     #   @return [String]
     class ResourceUnavailableException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -6512,6 +6721,7 @@ module Aws::Kendra
     #   <p>The user context token or user and group information.</p>
     #   @return [Types::UserContext]
     class RetrieveRequest < Struct.new(
+      nil,
       :index_id,
       :query_text,
       :attribute_filter,
@@ -6534,6 +6744,7 @@ module Aws::Kendra
     #   <p>The results of the retrieved relevant passages for the search.</p>
     #   @return [Array<Types::RetrieveResultItem>]
     class RetrieveResult < Struct.new(
+      nil,
       :query_id,
       :result_items,
       keyword_init: true
@@ -6568,6 +6779,7 @@ module Aws::Kendra
     #               response is relevant to the query.</p>
     #   @return [Types::ScoreAttributes]
     class RetrieveResultItem < Struct.new(
+      nil,
       :id,
       :document_id,
       :document_title,
@@ -6707,6 +6919,7 @@ module Aws::Kendra
     #               sources</a>.</p>
     #   @return [Types::AccessControlListConfiguration]
     class S3DataSourceConfiguration < Struct.new(
+      nil,
       :bucket_name,
       :inclusion_prefixes,
       :inclusion_patterns,
@@ -6726,6 +6939,7 @@ module Aws::Kendra
     #   <p>The name of the file.</p>
     #   @return [String]
     class S3Path < Struct.new(
+      nil,
       :bucket,
       :key,
       keyword_init: true
@@ -6746,6 +6960,7 @@ module Aws::Kendra
     #                   <i>https://api.github.com</i>.</p>
     #   @return [String]
     class SaaSConfiguration < Struct.new(
+      nil,
       :organization_name,
       :host_url,
       keyword_init: true
@@ -6774,6 +6989,7 @@ module Aws::Kendra
     #               standard users are documented. You can specify both.</p>
     #   @return [Array<String>]
     class SalesforceChatterFeedConfiguration < Struct.new(
+      nil,
       :document_data_field_name,
       :document_title_field_name,
       :field_mappings,
@@ -6857,6 +7073,7 @@ module Aws::Kendra
     #            <p>The pattern is applied to the name of the attached file.</p>
     #   @return [Array<String>]
     class SalesforceConfiguration < Struct.new(
+      nil,
       :server_url,
       :secret_arn,
       :standard_object_configurations,
@@ -6895,6 +7112,7 @@ module Aws::Kendra
     #               Salesforce data source field names must exist in your Salesforce custom metadata.</p>
     #   @return [Array<Types::DataSourceToIndexFieldMapping>]
     class SalesforceCustomKnowledgeArticleTypeConfiguration < Struct.new(
+      nil,
       :name,
       :document_data_field_name,
       :document_title_field_name,
@@ -6918,6 +7136,7 @@ module Aws::Kendra
     #   <p>Configuration information for custom Salesforce knowledge articles.</p>
     #   @return [Array<Types::SalesforceCustomKnowledgeArticleTypeConfiguration>]
     class SalesforceKnowledgeArticleConfiguration < Struct.new(
+      nil,
       :included_states,
       :standard_knowledge_article_type_configuration,
       :custom_knowledge_article_type_configurations,
@@ -6941,6 +7160,7 @@ module Aws::Kendra
     #               Salesforce data source field names must exist in your Salesforce custom metadata.</p>
     #   @return [Array<Types::DataSourceToIndexFieldMapping>]
     class SalesforceStandardKnowledgeArticleTypeConfiguration < Struct.new(
+      nil,
       :document_data_field_name,
       :document_title_field_name,
       :field_mappings,
@@ -6959,6 +7179,7 @@ module Aws::Kendra
     #               fields.</p>
     #   @return [Array<Types::DataSourceToIndexFieldMapping>]
     class SalesforceStandardObjectAttachmentConfiguration < Struct.new(
+      nil,
       :document_title_field_name,
       :field_mappings,
       keyword_init: true
@@ -6985,6 +7206,7 @@ module Aws::Kendra
     #               Salesforce data source field names must exist in your Salesforce custom metadata.</p>
     #   @return [Array<Types::DataSourceToIndexFieldMapping>]
     class SalesforceStandardObjectConfiguration < Struct.new(
+      nil,
       :name,
       :document_data_field_name,
       :document_title_field_name,
@@ -7000,6 +7222,7 @@ module Aws::Kendra
     #   <p>A relative ranking for how relevant the response is to the query.</p>
     #   @return [String]
     class ScoreAttributes < Struct.new(
+      nil,
       :score_confidence,
       keyword_init: true
     )
@@ -7027,6 +7250,7 @@ module Aws::Kendra
     #               <code>false</code>.</p>
     #   @return [Boolean]
     class Search < Struct.new(
+      nil,
       :facetable,
       :searchable,
       :displayable,
@@ -7080,6 +7304,7 @@ module Aws::Kendra
     #            <p>The default mode is set to <code>HOST_ONLY</code>.</p>
     #   @return [String]
     class SeedUrlConfiguration < Struct.new(
+      nil,
       :seed_urls,
       :web_crawler_mode,
       keyword_init: true
@@ -7095,6 +7320,7 @@ module Aws::Kendra
     #               asymmetric keys.</p>
     #   @return [String]
     class ServerSideEncryptionConfiguration < Struct.new(
+      nil,
       :kms_key_id,
       keyword_init: true
     )
@@ -7137,6 +7363,7 @@ module Aws::Kendra
     #                   ServiceNow data source</a>.</p>
     #   @return [String]
     class ServiceNowConfiguration < Struct.new(
+      nil,
       :host_url,
       :secret_arn,
       :service_now_build_version,
@@ -7190,6 +7417,7 @@ module Aws::Kendra
     #                   query</a>. </p>
     #   @return [String]
     class ServiceNowKnowledgeArticleConfiguration < Struct.new(
+      nil,
       :crawl_attachments,
       :include_attachment_file_patterns,
       :exclude_attachment_file_patterns,
@@ -7244,6 +7472,7 @@ module Aws::Kendra
     #               ServiceNow data source field names must exist in your ServiceNow custom metadata.</p>
     #   @return [Array<Types::DataSourceToIndexFieldMapping>]
     class ServiceNowServiceCatalogConfiguration < Struct.new(
+      nil,
       :crawl_attachments,
       :include_attachment_file_patterns,
       :exclude_attachment_file_patterns,
@@ -7267,6 +7496,7 @@ module Aws::Kendra
     # @!attribute message
     #   @return [String]
     class ServiceQuotaExceededException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -7362,6 +7592,7 @@ module Aws::Kendra
     #               requirements.</p>
     #   @return [Types::ProxyConfiguration]
     class SharePointConfiguration < Struct.new(
+      nil,
       :share_point_version,
       :urls,
       :secret_arn,
@@ -7400,6 +7631,7 @@ module Aws::Kendra
     #            <p>The list can include a maximum of three sitemap URLs.</p>
     #   @return [Array<String>]
     class SiteMapsConfiguration < Struct.new(
+      nil,
       :site_maps,
       keyword_init: true
     )
@@ -7504,6 +7736,7 @@ module Aws::Kendra
     #               Slack data source field names must exist in your Slack custom metadata.</p>
     #   @return [Array<Types::DataSourceToIndexFieldMapping>]
     class SlackConfiguration < Struct.new(
+      nil,
       :team_id,
       :secret_arn,
       :vpc_configuration,
@@ -7579,6 +7812,7 @@ module Aws::Kendra
     #               assigned to the result by Amazon Kendra is used as the tie-breaker.</p>
     #   @return [String]
     class SortingConfiguration < Struct.new(
+      nil,
       :document_attribute_key,
       :sort_order,
       keyword_init: true
@@ -7600,6 +7834,7 @@ module Aws::Kendra
     #               to based suggestions on.</p>
     #   @return [Array<Types::DocumentAttribute>]
     class SourceDocument < Struct.new(
+      nil,
       :document_id,
       :suggestion_attributes,
       :additional_attributes,
@@ -7616,6 +7851,7 @@ module Aws::Kendra
     #   <p>The corrected misspelled word or words in a query.</p>
     #   @return [Array<Types::Correction>]
     class SpellCorrectedQuery < Struct.new(
+      nil,
       :suggested_query_text,
       :corrections,
       keyword_init: true
@@ -7635,6 +7871,7 @@ module Aws::Kendra
     #               <code>TRUE</code> to suggest spell corrections for queries.</p>
     #   @return [Boolean]
     class SpellCorrectionConfiguration < Struct.new(
+      nil,
       :include_query_spell_check_suggestions,
       keyword_init: true
     )
@@ -7660,6 +7897,7 @@ module Aws::Kendra
     #               this field to <code>DOUBLE_QUOTES</code>.</p>
     #   @return [String]
     class SqlConfiguration < Struct.new(
+      nil,
       :query_identifiers_enclosing_option,
       keyword_init: true
     )
@@ -7673,6 +7911,7 @@ module Aws::Kendra
     #   <p>The identifier of the index used with the data source connector.</p>
     #   @return [String]
     class StartDataSourceSyncJobRequest < Struct.new(
+      nil,
       :id,
       :index_id,
       keyword_init: true
@@ -7684,6 +7923,7 @@ module Aws::Kendra
     #   <p>Identifies a particular synchronization job.</p>
     #   @return [String]
     class StartDataSourceSyncJobResponse < Struct.new(
+      nil,
       :execution_id,
       keyword_init: true
     )
@@ -7707,6 +7947,7 @@ module Aws::Kendra
     #               information to correct the error before you resubmit the document for indexing.</p>
     #   @return [String]
     class Status < Struct.new(
+      nil,
       :document_id,
       :document_status,
       :failure_code,
@@ -7724,6 +7965,7 @@ module Aws::Kendra
     #   <p>The identifier of the index used with the data source connector.</p>
     #   @return [String]
     class StopDataSourceSyncJobRequest < Struct.new(
+      nil,
       :id,
       :index_id,
       keyword_init: true
@@ -7748,6 +7990,7 @@ module Aws::Kendra
     #               whether a particular item was relevant to the search.</p>
     #   @return [Array<Types::RelevanceFeedback>]
     class SubmitFeedbackRequest < Struct.new(
+      nil,
       :index_id,
       :query_id,
       :click_feedback_items,
@@ -7768,6 +8011,7 @@ module Aws::Kendra
     #               field can be used for query suggestions.</p>
     #   @return [Boolean]
     class SuggestableConfig < Struct.new(
+      nil,
       :attribute_name,
       :suggestable,
       keyword_init: true
@@ -7790,6 +8034,7 @@ module Aws::Kendra
     #               single query suggestion, if document fields set to use for query suggestions.</p>
     #   @return [Array<Types::SourceDocument>]
     class Suggestion < Struct.new(
+      nil,
       :id,
       :value,
       :source_documents,
@@ -7806,6 +8051,7 @@ module Aws::Kendra
     #   <p>The zero-based location in the response string where the highlight ends.</p>
     #   @return [Integer]
     class SuggestionHighlight < Struct.new(
+      nil,
       :begin_offset,
       :end_offset,
       keyword_init: true
@@ -7821,6 +8067,7 @@ module Aws::Kendra
     #   <p>The beginning and end of the query suggestion text that should be highlighted.</p>
     #   @return [Array<Types::SuggestionHighlight>]
     class SuggestionTextWithHighlights < Struct.new(
+      nil,
       :text,
       :highlights,
       keyword_init: true
@@ -7834,6 +8081,7 @@ module Aws::Kendra
     #               the query suggestion text and highlights.</p>
     #   @return [Types::SuggestionTextWithHighlights]
     class SuggestionValue < Struct.new(
+      nil,
       :text,
       keyword_init: true
     )
@@ -7861,6 +8109,7 @@ module Aws::Kendra
     #               <code>TRUE</code> means that the table cell should be treated as a header.</p>
     #   @return [Boolean]
     class TableCell < Struct.new(
+      nil,
       :value,
       :top_answer,
       :highlighted,
@@ -7888,6 +8137,7 @@ module Aws::Kendra
     #   <p>A count of the number of rows in the original table within the document.</p>
     #   @return [Integer]
     class TableExcerpt < Struct.new(
+      nil,
       :rows,
       :total_number_of_rows,
       keyword_init: true
@@ -7900,6 +8150,7 @@ module Aws::Kendra
     #   <p>A list of table cells in a row.</p>
     #   @return [Array<Types::TableCell>]
     class TableRow < Struct.new(
+      nil,
       :cells,
       keyword_init: true
     )
@@ -7918,6 +8169,7 @@ module Aws::Kendra
     #         null.</p>
     #   @return [String]
     class Tag < Struct.new(
+      nil,
       :key,
       :value,
       keyword_init: true
@@ -7938,6 +8190,7 @@ module Aws::Kendra
     #         exists, the existing value is replaced with the new value.</p>
     #   @return [Array<Types::Tag>]
     class TagResourceRequest < Struct.new(
+      nil,
       :resource_arn,
       :tags,
       keyword_init: true
@@ -7946,6 +8199,7 @@ module Aws::Kendra
     end
 
     class TagResourceResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -7960,6 +8214,7 @@ module Aws::Kendra
     #           template schemas</a>.</p>
     #   @return [JSON]
     class TemplateConfiguration < Struct.new(
+      nil,
       :template,
       keyword_init: true
     )
@@ -7974,6 +8229,7 @@ module Aws::Kendra
     #   <p>The total size, in bytes, of the indexed documents.</p>
     #   @return [Integer]
     class TextDocumentStatistics < Struct.new(
+      nil,
       :indexed_text_documents_count,
       :indexed_text_bytes,
       keyword_init: true
@@ -7995,6 +8251,7 @@ module Aws::Kendra
     #   <p>The beginning and end of the text that should be highlighted.</p>
     #   @return [Array<Types::Highlight>]
     class TextWithHighlights < Struct.new(
+      nil,
       :text,
       :highlights,
       keyword_init: true
@@ -8019,6 +8276,7 @@ module Aws::Kendra
     #   <p>The Unix timestamp when the thesaurus was last updated.</p>
     #   @return [Time]
     class ThesaurusSummary < Struct.new(
+      nil,
       :id,
       :name,
       :status,
@@ -8034,6 +8292,7 @@ module Aws::Kendra
     # @!attribute message
     #   @return [String]
     class ThrottlingException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -8048,6 +8307,7 @@ module Aws::Kendra
     #   <p>The Unix timestamp for the end of the time range.</p>
     #   @return [Time]
     class TimeRange < Struct.new(
+      nil,
       :start_time,
       :end_time,
       keyword_init: true
@@ -8068,6 +8328,7 @@ module Aws::Kendra
     #         key doesn't exist for the resource, it is ignored.</p>
     #   @return [Array<String>]
     class UntagResourceRequest < Struct.new(
+      nil,
       :resource_arn,
       :tag_keys,
       keyword_init: true
@@ -8076,6 +8337,7 @@ module Aws::Kendra
     end
 
     class UntagResourceResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -8103,6 +8365,7 @@ module Aws::Kendra
     #               hierarchy for which documents users should have access to.</p>
     #   @return [Array<Types::HierarchicalPrincipal>]
     class UpdateAccessControlConfigurationRequest < Struct.new(
+      nil,
       :index_id,
       :id,
       :name,
@@ -8115,6 +8378,7 @@ module Aws::Kendra
     end
 
     class UpdateAccessControlConfigurationResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -8161,6 +8425,7 @@ module Aws::Kendra
     #               other content alterations when you ingest documents into Amazon Kendra, see <a href="https://docs.aws.amazon.com/kendra/latest/dg/custom-document-enrichment.html">Customizing document metadata during the ingestion process</a>.</p>
     #   @return [Types::CustomDocumentEnrichmentConfiguration]
     class UpdateDataSourceRequest < Struct.new(
+      nil,
       :id,
       :name,
       :index_id,
@@ -8198,6 +8463,7 @@ module Aws::Kendra
     #   <p>A new description for your Amazon Kendra experience.</p>
     #   @return [String]
     class UpdateExperienceRequest < Struct.new(
+      nil,
       :id,
       :name,
       :index_id,
@@ -8239,6 +8505,7 @@ module Aws::Kendra
     #               featured documents, see <a href="https://docs.aws.amazon.com/kendra/latest/dg/API_FeaturedResultsSet.html">FeaturedResultsSet</a>.</p>
     #   @return [Array<Types::FeaturedDocument>]
     class UpdateFeaturedResultsSetRequest < Struct.new(
+      nil,
       :index_id,
       :featured_results_set_id,
       :featured_results_set_name,
@@ -8257,6 +8524,7 @@ module Aws::Kendra
     #               or inactive, when the featured results set was last updated, and more.</p>
     #   @return [Types::FeaturedResultsSet]
     class UpdateFeaturedResultsSetResponse < Struct.new(
+      nil,
       :featured_results_set,
       keyword_init: true
     )
@@ -8317,6 +8585,7 @@ module Aws::Kendra
     #            </important>
     #   @return [Types::UserGroupResolutionConfiguration]
     class UpdateIndexRequest < Struct.new(
+      nil,
       :id,
       :name,
       :role_arn,
@@ -8359,6 +8628,7 @@ module Aws::Kendra
     #               block list text file in S3.</p>
     #   @return [String]
     class UpdateQuerySuggestionsBlockListRequest < Struct.new(
+      nil,
       :index_id,
       :id,
       :name,
@@ -8421,6 +8691,7 @@ module Aws::Kendra
     #               query suggestions on.</p>
     #   @return [Types::AttributeSuggestionsUpdateConfig]
     class UpdateQuerySuggestionsConfigRequest < Struct.new(
+      nil,
       :index_id,
       :mode,
       :query_log_look_back_window_in_days,
@@ -8453,6 +8724,7 @@ module Aws::Kendra
     #   <p>Information required to find a specific file in an Amazon S3 bucket.</p>
     #   @return [Types::S3Path]
     class UpdateThesaurusRequest < Struct.new(
+      nil,
       :id,
       :name,
       :index_id,
@@ -8488,6 +8760,7 @@ module Aws::Kendra
     #               three sitemap URLs.</p>
     #   @return [Types::SiteMapsConfiguration]
     class Urls < Struct.new(
+      nil,
       :seed_url_configuration,
       :site_maps_configuration,
       keyword_init: true
@@ -8539,6 +8812,7 @@ module Aws::Kendra
     #            to documents in that data source.</p>
     #   @return [Array<Types::DataSourceGroup>]
     class UserContext < Struct.new(
+      nil,
       :token,
       :user_id,
       :groups,
@@ -8568,6 +8842,7 @@ module Aws::Kendra
     #            an IAM Identity Center identity source in order to use this mode.</p>
     #   @return [String]
     class UserGroupResolutionConfiguration < Struct.new(
+      nil,
       :user_group_resolution_mode,
       keyword_init: true
     )
@@ -8585,6 +8860,7 @@ module Aws::Kendra
     #                   started with an IAM Identity Center identity source</a>.</p>
     #   @return [String]
     class UserIdentityConfiguration < Struct.new(
+      nil,
       :identity_attribute_name,
       keyword_init: true
     )
@@ -8604,6 +8880,7 @@ module Aws::Kendra
     #   <p>Information about the JSON token type configuration.</p>
     #   @return [Types::JsonTokenTypeConfiguration]
     class UserTokenConfiguration < Struct.new(
+      nil,
       :jwt_token_type_configuration,
       :json_token_type_configuration,
       keyword_init: true
@@ -8616,6 +8893,7 @@ module Aws::Kendra
     # @!attribute message
     #   @return [String]
     class ValidationException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -8630,6 +8908,7 @@ module Aws::Kendra
     #   <p>The code used to show the type of warning for the query.</p>
     #   @return [String]
     class Warning < Struct.new(
+      nil,
       :message,
       :code,
       keyword_init: true
@@ -8707,6 +8986,7 @@ module Aws::Kendra
     #               port for HTTPS.</p>
     #   @return [Types::AuthenticationConfiguration]
     class WebCrawlerConfiguration < Struct.new(
+      nil,
       :urls,
       :crawl_depth,
       :max_links_per_page,
@@ -8776,6 +9056,7 @@ module Aws::Kendra
     #               must exist in your Amazon WorkDocs custom metadata.</p>
     #   @return [Array<Types::DataSourceToIndexFieldMapping>]
     class WorkDocsConfiguration < Struct.new(
+      nil,
       :organization_id,
       :crawl_comments,
       :use_change_log,

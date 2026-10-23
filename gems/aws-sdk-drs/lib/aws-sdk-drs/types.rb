@@ -12,6 +12,7 @@ module Aws::Drs
     # @!attribute code
     #   @return [String]
     class AccessDeniedException < Struct.new(
+      nil,
       :message,
       :code,
       keyword_init: true
@@ -24,6 +25,7 @@ module Aws::Drs
     #   <p>Account ID of AWS account.</p>
     #   @return [String]
     class Account < Struct.new(
+      nil,
       :account_id,
       keyword_init: true
     )
@@ -37,6 +39,7 @@ module Aws::Drs
     #   <p>CloudFormation template to associate with a Source Network.</p>
     #   @return [String]
     class AssociateSourceNetworkStackRequest < Struct.new(
+      nil,
       :source_network_id,
       :cfn_stack_name,
       keyword_init: true
@@ -48,6 +51,7 @@ module Aws::Drs
     #   <p>The Source Network association Job.</p>
     #   @return [Types::Job]
     class AssociateSourceNetworkStackResponse < Struct.new(
+      nil,
       :job,
       keyword_init: true
     )
@@ -62,6 +66,7 @@ module Aws::Drs
     #   <p>The model name of the CPU.</p>
     #   @return [String]
     class CPU < Struct.new(
+      nil,
       :cores,
       :model_name,
       keyword_init: true
@@ -86,6 +91,7 @@ module Aws::Drs
     #   <p>The type of the resource.</p>
     #   @return [String]
     class ConflictException < Struct.new(
+      nil,
       :message,
       :code,
       :resource_id,
@@ -115,6 +121,7 @@ module Aws::Drs
     #   <p>A mapping between the volumes being converted and the product codes associated with them</p>
     #   @return [Hash<String, Array<Types::ProductCode>>]
     class ConversionProperties < Struct.new(
+      nil,
       :volume_to_conversion_map,
       :root_volume_name,
       :force_uefi,
@@ -133,6 +140,7 @@ module Aws::Drs
     #   <p>A list of tags associated with the extended source server.</p>
     #   @return [Hash<String, String>]
     class CreateExtendedSourceServerInput < Struct.new(
+      nil,
       :source_server_arn,
       :tags,
       keyword_init: true
@@ -144,6 +152,7 @@ module Aws::Drs
     #   <p>Created extended source server.</p>
     #   @return [Types::SourceServer]
     class CreateExtendedSourceServerOutput < Struct.new(
+      nil,
       :source_server,
       keyword_init: true
     )
@@ -178,6 +187,7 @@ module Aws::Drs
     #   <p>DRS will set the 'launch into instance ID' of any source server when performing a drill, recovery or failback to the previous region or availability zone, using the instance ID of the source instance.</p>
     #   @return [Boolean]
     class CreateLaunchConfigurationTemplateInput < Struct.new(
+      nil,
       :tags,
       :launch_disposition,
       :target_instance_type_right_sizing_method,
@@ -196,6 +206,7 @@ module Aws::Drs
     #   <p>Created Launch Configuration Template.</p>
     #   @return [Types::LaunchConfigurationTemplate]
     class CreateLaunchConfigurationTemplateOutput < Struct.new(
+      nil,
       :launch_configuration_template,
       keyword_init: true
     )
@@ -248,6 +259,7 @@ module Aws::Drs
     #   <p>Whether to allow the AWS replication agent to automatically replicate newly added disks.</p>
     #   @return [Boolean]
     class CreateReplicationConfigurationTemplateInput < Struct.new(
+      nil,
       :staging_area_subnet_id,
       :associate_default_security_group,
       :replication_servers_security_groups_i_ds,
@@ -320,6 +332,7 @@ module Aws::Drs
     #   <p>Whether to allow the AWS replication agent to automatically replicate newly added disks.</p>
     #   @return [Boolean]
     class CreateReplicationConfigurationTemplateOutput < Struct.new(
+      nil,
       :replication_configuration_template_id,
       :arn,
       :staging_area_subnet_id,
@@ -360,6 +373,7 @@ module Aws::Drs
     #   <p>A set of tags to be associated with the Source Network resource.</p>
     #   @return [Hash<String, String>]
     class CreateSourceNetworkRequest < Struct.new(
+      nil,
       :vpc_id,
       :origin_account_id,
       :origin_region,
@@ -373,6 +387,7 @@ module Aws::Drs
     #   <p>ID of the created Source Network.</p>
     #   @return [String]
     class CreateSourceNetworkResponse < Struct.new(
+      nil,
       :source_network_id,
       keyword_init: true
     )
@@ -387,6 +402,7 @@ module Aws::Drs
     #   <p>Error in data replication.</p>
     #   @return [String]
     class DataReplicationError < Struct.new(
+      nil,
       :error,
       :raw_error,
       keyword_init: true
@@ -420,6 +436,7 @@ module Aws::Drs
     #   <p>The ARN of the staging Outpost</p>
     #   @return [String]
     class DataReplicationInfo < Struct.new(
+      nil,
       :lag_duration,
       :eta_date_time,
       :replicated_disks,
@@ -453,6 +470,7 @@ module Aws::Drs
     #   <p>The status of the volume.</p>
     #   @return [String]
     class DataReplicationInfoReplicatedDisk < Struct.new(
+      nil,
       :device_name,
       :total_storage_bytes,
       :replicated_storage_bytes,
@@ -483,6 +501,7 @@ module Aws::Drs
     #   <p>The steps of the current attempt to initiate data replication.</p>
     #   @return [Array<Types::DataReplicationInitiationStep>]
     class DataReplicationInitiation < Struct.new(
+      nil,
       :start_date_time,
       :next_attempt_date_time,
       :steps,
@@ -499,6 +518,7 @@ module Aws::Drs
     #   <p>The status of the step.</p>
     #   @return [String]
     class DataReplicationInitiationStep < Struct.new(
+      nil,
       :name,
       :status,
       keyword_init: true
@@ -510,6 +530,7 @@ module Aws::Drs
     #   <p>The ID of the Job to be deleted.</p>
     #   @return [String]
     class DeleteJobInput < Struct.new(
+      nil,
       :job_id,
       keyword_init: true
     )
@@ -517,6 +538,7 @@ module Aws::Drs
     end
 
     class DeleteJobOutput < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -529,6 +551,7 @@ module Aws::Drs
     #   <p>Launch action Id.</p>
     #   @return [String]
     class DeleteLaunchActionRequest < Struct.new(
+      nil,
       :resource_id,
       :action_id,
       keyword_init: true
@@ -537,6 +560,7 @@ module Aws::Drs
     end
 
     class DeleteLaunchActionResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -546,6 +570,7 @@ module Aws::Drs
     #   <p>The ID of the Launch Configuration Template to be deleted.</p>
     #   @return [String]
     class DeleteLaunchConfigurationTemplateInput < Struct.new(
+      nil,
       :launch_configuration_template_id,
       keyword_init: true
     )
@@ -553,6 +578,7 @@ module Aws::Drs
     end
 
     class DeleteLaunchConfigurationTemplateOutput < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -562,6 +588,7 @@ module Aws::Drs
     #   <p>The ID of the Recovery Instance to be deleted.</p>
     #   @return [String]
     class DeleteRecoveryInstanceInput < Struct.new(
+      nil,
       :recovery_instance_id,
       keyword_init: true
     )
@@ -572,6 +599,7 @@ module Aws::Drs
     #   <p>The ID of the Replication Configuration Template to be deleted.</p>
     #   @return [String]
     class DeleteReplicationConfigurationTemplateInput < Struct.new(
+      nil,
       :replication_configuration_template_id,
       keyword_init: true
     )
@@ -579,6 +607,7 @@ module Aws::Drs
     end
 
     class DeleteReplicationConfigurationTemplateOutput < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -588,6 +617,7 @@ module Aws::Drs
     #   <p>ID of the Source Network to delete.</p>
     #   @return [String]
     class DeleteSourceNetworkRequest < Struct.new(
+      nil,
       :source_network_id,
       keyword_init: true
     )
@@ -595,6 +625,7 @@ module Aws::Drs
     end
 
     class DeleteSourceNetworkResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -604,6 +635,7 @@ module Aws::Drs
     #   <p>The ID of the Source Server to be deleted.</p>
     #   @return [String]
     class DeleteSourceServerInput < Struct.new(
+      nil,
       :source_server_id,
       keyword_init: true
     )
@@ -611,6 +643,7 @@ module Aws::Drs
     end
 
     class DeleteSourceServerOutput < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -626,6 +659,7 @@ module Aws::Drs
     #   <p>The token of the next Job log items to retrieve.</p>
     #   @return [String]
     class DescribeJobLogItemsInput < Struct.new(
+      nil,
       :job_id,
       :max_results,
       :next_token,
@@ -641,6 +675,7 @@ module Aws::Drs
     #   <p>The token of the next Job log items to retrieve.</p>
     #   @return [String]
     class DescribeJobLogItemsOutput < Struct.new(
+      nil,
       :items,
       :next_token,
       keyword_init: true
@@ -658,6 +693,7 @@ module Aws::Drs
     #   <p>The token of the next Job to retrieve.</p>
     #   @return [String]
     class DescribeJobsInput < Struct.new(
+      nil,
       :filters,
       :max_results,
       :next_token,
@@ -673,6 +709,7 @@ module Aws::Drs
     #   <p>The token of the next Job to retrieve.</p>
     #   @return [String]
     class DescribeJobsOutput < Struct.new(
+      nil,
       :items,
       :next_token,
       keyword_init: true
@@ -691,6 +728,7 @@ module Aws::Drs
     #   <p>The end date in a date range query.</p>
     #   @return [String]
     class DescribeJobsRequestFilters < Struct.new(
+      nil,
       :job_i_ds,
       :from_date,
       :to_date,
@@ -709,6 +747,7 @@ module Aws::Drs
     #   <p>The token of the next Launch Configuration Template to retrieve.</p>
     #   @return [String]
     class DescribeLaunchConfigurationTemplatesInput < Struct.new(
+      nil,
       :launch_configuration_template_i_ds,
       :max_results,
       :next_token,
@@ -724,6 +763,7 @@ module Aws::Drs
     #   <p>The token of the next Launch Configuration Template to retrieve.</p>
     #   @return [String]
     class DescribeLaunchConfigurationTemplatesOutput < Struct.new(
+      nil,
       :items,
       :next_token,
       keyword_init: true
@@ -741,6 +781,7 @@ module Aws::Drs
     #   <p>The token of the next Recovery Instance to retrieve.</p>
     #   @return [String]
     class DescribeRecoveryInstancesInput < Struct.new(
+      nil,
       :filters,
       :max_results,
       :next_token,
@@ -756,6 +797,7 @@ module Aws::Drs
     #   <p>An array of Recovery Instances.</p>
     #   @return [Array<Types::RecoveryInstance>]
     class DescribeRecoveryInstancesOutput < Struct.new(
+      nil,
       :next_token,
       :items,
       keyword_init: true
@@ -771,6 +813,7 @@ module Aws::Drs
     #   <p>An array of Source Server IDs for which associated Recovery Instances should be returned.</p>
     #   @return [Array<String>]
     class DescribeRecoveryInstancesRequestFilters < Struct.new(
+      nil,
       :recovery_instance_i_ds,
       :source_server_i_ds,
       keyword_init: true
@@ -794,6 +837,7 @@ module Aws::Drs
     #   <p>The token of the next Recovery Snapshot to retrieve.</p>
     #   @return [String]
     class DescribeRecoverySnapshotsInput < Struct.new(
+      nil,
       :source_server_id,
       :filters,
       :order,
@@ -811,6 +855,7 @@ module Aws::Drs
     #   <p>The token of the next Recovery Snapshot to retrieve.</p>
     #   @return [String]
     class DescribeRecoverySnapshotsOutput < Struct.new(
+      nil,
       :items,
       :next_token,
       keyword_init: true
@@ -826,6 +871,7 @@ module Aws::Drs
     #   <p>The end date in a date range query.</p>
     #   @return [String]
     class DescribeRecoverySnapshotsRequestFilters < Struct.new(
+      nil,
       :from_date_time,
       :to_date_time,
       keyword_init: true
@@ -843,6 +889,7 @@ module Aws::Drs
     #   <p>The token of the next Replication Configuration Template to retrieve.</p>
     #   @return [String]
     class DescribeReplicationConfigurationTemplatesInput < Struct.new(
+      nil,
       :replication_configuration_template_i_ds,
       :max_results,
       :next_token,
@@ -858,6 +905,7 @@ module Aws::Drs
     #   <p>The token of the next Replication Configuration Template to retrieve.</p>
     #   @return [String]
     class DescribeReplicationConfigurationTemplatesOutput < Struct.new(
+      nil,
       :items,
       :next_token,
       keyword_init: true
@@ -875,6 +923,7 @@ module Aws::Drs
     #   <p>The token of the next Source Networks to retrieve.</p>
     #   @return [String]
     class DescribeSourceNetworksRequest < Struct.new(
+      nil,
       :filters,
       :max_results,
       :next_token,
@@ -894,6 +943,7 @@ module Aws::Drs
     #   <p>Filter Source Networks by the region containing the protected VPCs.</p>
     #   @return [String]
     class DescribeSourceNetworksRequestFilters < Struct.new(
+      nil,
       :source_network_i_ds,
       :origin_account_id,
       :origin_region,
@@ -909,6 +959,7 @@ module Aws::Drs
     #   <p>The token of the next Source Networks to retrieve.</p>
     #   @return [String]
     class DescribeSourceNetworksResponse < Struct.new(
+      nil,
       :items,
       :next_token,
       keyword_init: true
@@ -926,6 +977,7 @@ module Aws::Drs
     #   <p>The token of the next Source Server to retrieve.</p>
     #   @return [String]
     class DescribeSourceServersInput < Struct.new(
+      nil,
       :filters,
       :max_results,
       :next_token,
@@ -941,6 +993,7 @@ module Aws::Drs
     #   <p>The token of the next Source Server to retrieve.</p>
     #   @return [String]
     class DescribeSourceServersOutput < Struct.new(
+      nil,
       :items,
       :next_token,
       keyword_init: true
@@ -959,6 +1012,7 @@ module Aws::Drs
     #   <p>An array of staging account IDs that extended source servers belong to. An empty array means all source servers will be shown.</p>
     #   @return [Array<String>]
     class DescribeSourceServersRequestFilters < Struct.new(
+      nil,
       :source_server_i_ds,
       :hardware_id,
       :staging_account_i_ds,
@@ -971,6 +1025,7 @@ module Aws::Drs
     #   <p>The ID of the Recovery Instance to disconnect.</p>
     #   @return [String]
     class DisconnectRecoveryInstanceInput < Struct.new(
+      nil,
       :recovery_instance_id,
       keyword_init: true
     )
@@ -981,6 +1036,7 @@ module Aws::Drs
     #   <p>The ID of the Source Server to disconnect.</p>
     #   @return [String]
     class DisconnectSourceServerInput < Struct.new(
+      nil,
       :source_server_id,
       keyword_init: true
     )
@@ -1030,6 +1086,7 @@ module Aws::Drs
     #   <p>The version of the DRS agent installed on the source server</p>
     #   @return [String]
     class DisconnectSourceServerOutput < Struct.new(
+      nil,
       :source_server_id,
       :arn,
       :tags,
@@ -1057,6 +1114,7 @@ module Aws::Drs
     #   <p>The amount of storage on the disk in bytes.</p>
     #   @return [Integer]
     class Disk < Struct.new(
+      nil,
       :device_name,
       :bytes,
       keyword_init: true
@@ -1088,6 +1146,7 @@ module Aws::Drs
     #   <p>The Source Network ID to export its CloudFormation template to an S3 bucket.</p>
     #   @return [String]
     class ExportSourceNetworkCfnTemplateRequest < Struct.new(
+      nil,
       :source_network_id,
       keyword_init: true
     )
@@ -1098,6 +1157,7 @@ module Aws::Drs
     #   <p>S3 bucket URL where the Source Network CloudFormation template was exported to.</p>
     #   @return [String]
     class ExportSourceNetworkCfnTemplateResponse < Struct.new(
+      nil,
       :s3_destination_url,
       keyword_init: true
     )
@@ -1108,6 +1168,7 @@ module Aws::Drs
     #   <p>The ID of the Recovery Instance whose failback replication configuration should be returned.</p>
     #   @return [String]
     class GetFailbackReplicationConfigurationInput < Struct.new(
+      nil,
       :recovery_instance_id,
       keyword_init: true
     )
@@ -1127,6 +1188,7 @@ module Aws::Drs
     #   <p>Whether to use Private IP for the failback replication of the Recovery Instance.</p>
     #   @return [Boolean]
     class GetFailbackReplicationConfigurationOutput < Struct.new(
+      nil,
       :recovery_instance_id,
       :name,
       :bandwidth_throttling,
@@ -1145,6 +1207,7 @@ module Aws::Drs
     #   <p>The ID of the Source Server that we want to retrieve a Launch Configuration for.</p>
     #   @return [String]
     class GetLaunchConfigurationInput < Struct.new(
+      nil,
       :source_server_id,
       keyword_init: true
     )
@@ -1182,6 +1245,7 @@ module Aws::Drs
     #   <p>Launch into existing instance properties.</p>
     #   @return [Types::LaunchIntoInstanceProperties]
     class GetLaunchConfigurationOutput < Struct.new(
+      nil,
       :source_server_id,
       :name,
       :ec2_launch_template_id,
@@ -1201,6 +1265,7 @@ module Aws::Drs
     #   <p>The ID of the Source Serve for this Replication Configuration.r</p>
     #   @return [String]
     class GetReplicationConfigurationInput < Struct.new(
+      nil,
       :source_server_id,
       keyword_init: true
     )
@@ -1259,6 +1324,7 @@ module Aws::Drs
     #   <p>Whether to allow the AWS replication agent to automatically replicate newly added disks.</p>
     #   @return [Boolean]
     class GetReplicationConfigurationOutput < Struct.new(
+      nil,
       :source_server_id,
       :name,
       :staging_area_subnet_id,
@@ -1300,6 +1366,7 @@ module Aws::Drs
     #   <p>AWS Instance ID identification hint.</p>
     #   @return [String]
     class IdentificationHints < Struct.new(
+      nil,
       :fqdn,
       :hostname,
       :vm_ware_uuid,
@@ -1310,12 +1377,14 @@ module Aws::Drs
     end
 
     class InitializeServiceInput < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
     end
 
     class InitializeServiceOutput < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1328,6 +1397,7 @@ module Aws::Drs
     #   <p>The number of seconds after which the request should be safe to retry.</p>
     #   @return [Integer]
     class InternalServerException < Struct.new(
+      nil,
       :message,
       :retry_after_seconds,
       keyword_init: true
@@ -1372,6 +1442,7 @@ module Aws::Drs
     #   <p>A list of resources that the Job is acting upon.</p>
     #   @return [Array<Types::ParticipatingResource>]
     class Job < Struct.new(
+      nil,
       :job_id,
       :arn,
       :type,
@@ -1398,6 +1469,7 @@ module Aws::Drs
     #   <p>Metadata associated with a Job log.</p>
     #   @return [Types::JobLogEventData]
     class JobLog < Struct.new(
+      nil,
       :log_date_time,
       :event,
       :event_data,
@@ -1426,6 +1498,7 @@ module Aws::Drs
     #   <p>Properties of resource related to a job event.</p>
     #   @return [Types::EventResourceData]
     class JobLogEventData < Struct.new(
+      nil,
       :source_server_id,
       :conversion_server_id,
       :target_instance_id,
@@ -1472,6 +1545,7 @@ module Aws::Drs
     #   <p>Launch action category.</p>
     #   @return [String]
     class LaunchAction < Struct.new(
+      nil,
       :action_id,
       :action_code,
       :type,
@@ -1496,6 +1570,7 @@ module Aws::Drs
     #   <p>Type.</p>
     #   @return [String]
     class LaunchActionParameter < Struct.new(
+      nil,
       :value,
       :type,
       keyword_init: true
@@ -1517,6 +1592,7 @@ module Aws::Drs
     #   <p>Failure reason.</p>
     #   @return [String]
     class LaunchActionRun < Struct.new(
+      nil,
       :action,
       :run_id,
       :status,
@@ -1531,6 +1607,7 @@ module Aws::Drs
     #   <p>Launch actions Ids.</p>
     #   @return [Array<String>]
     class LaunchActionsRequestFilters < Struct.new(
+      nil,
       :action_ids,
       keyword_init: true
     )
@@ -1545,6 +1622,7 @@ module Aws::Drs
     #   <p>List of post launch action status.</p>
     #   @return [Array<Types::LaunchActionRun>]
     class LaunchActionsStatus < Struct.new(
+      nil,
       :ssm_agent_discovery_datetime,
       :runs,
       keyword_init: true
@@ -1587,6 +1665,7 @@ module Aws::Drs
     #   <p>DRS will set the 'launch into instance ID' of any source server when performing a drill, recovery or failback to the previous region or availability zone, using the instance ID of the source instance.</p>
     #   @return [Boolean]
     class LaunchConfigurationTemplate < Struct.new(
+      nil,
       :launch_configuration_template_id,
       :arn,
       :tags,
@@ -1608,6 +1687,7 @@ module Aws::Drs
     #   <p>Optionally holds EC2 instance ID of an instance to launch into, instead of launching a new instance during drill, recovery or failback.</p>
     #   @return [String]
     class LaunchIntoInstanceProperties < Struct.new(
+      nil,
       :launch_into_ec2_instance_id,
       keyword_init: true
     )
@@ -1619,6 +1699,7 @@ module Aws::Drs
     #   <p>Whether to enable "Bring your own license" or not.</p>
     #   @return [Boolean]
     class Licensing < Struct.new(
+      nil,
       :os_byol,
       keyword_init: true
     )
@@ -1642,6 +1723,7 @@ module Aws::Drs
     #   <p>An object containing information regarding the last launch of the Source Server.</p>
     #   @return [Types::LifeCycleLastLaunch]
     class LifeCycle < Struct.new(
+      nil,
       :added_to_service_date_time,
       :first_byte_date_time,
       :elapsed_replication_duration,
@@ -1660,6 +1742,7 @@ module Aws::Drs
     #   <p>Status of Source Server's last launch.</p>
     #   @return [String]
     class LifeCycleLastLaunch < Struct.new(
+      nil,
       :initiated,
       :status,
       keyword_init: true
@@ -1678,6 +1761,7 @@ module Aws::Drs
     #   <p>The Job type that was used to last launch the Source Server.</p>
     #   @return [String]
     class LifeCycleLastLaunchInitiated < Struct.new(
+      nil,
       :api_call_date_time,
       :job_id,
       :type,
@@ -1696,6 +1780,7 @@ module Aws::Drs
     #   <p>The token of the next extensible source server to retrieve.</p>
     #   @return [String]
     class ListExtensibleSourceServersInput < Struct.new(
+      nil,
       :staging_account_id,
       :max_results,
       :next_token,
@@ -1711,6 +1796,7 @@ module Aws::Drs
     #   <p>The token of the next extensible source server to retrieve.</p>
     #   @return [String]
     class ListExtensibleSourceServersOutput < Struct.new(
+      nil,
       :items,
       :next_token,
       keyword_init: true
@@ -1731,6 +1817,7 @@ module Aws::Drs
     #   <p>Next token to use when listing resource launch actions.</p>
     #   @return [String]
     class ListLaunchActionsRequest < Struct.new(
+      nil,
       :resource_id,
       :filters,
       :max_results,
@@ -1747,6 +1834,7 @@ module Aws::Drs
     #   <p>Next token returned when listing resource launch actions.</p>
     #   @return [String]
     class ListLaunchActionsResponse < Struct.new(
+      nil,
       :items,
       :next_token,
       keyword_init: true
@@ -1761,6 +1849,7 @@ module Aws::Drs
     #   <p>The token of the next staging Account to retrieve.</p>
     #   @return [String]
     class ListStagingAccountsInput < Struct.new(
+      nil,
       :max_results,
       :next_token,
       keyword_init: true
@@ -1775,6 +1864,7 @@ module Aws::Drs
     #   <p>The token of the next staging Account to retrieve.</p>
     #   @return [String]
     class ListStagingAccountsOutput < Struct.new(
+      nil,
       :accounts,
       :next_token,
       keyword_init: true
@@ -1786,6 +1876,7 @@ module Aws::Drs
     #   <p>The ARN of the resource whose tags should be returned.</p>
     #   @return [String]
     class ListTagsForResourceInput < Struct.new(
+      nil,
       :resource_arn,
       keyword_init: true
     )
@@ -1796,6 +1887,7 @@ module Aws::Drs
     #   <p>The tags of the requested resource.</p>
     #   @return [Hash<String, String>]
     class ListTagsForResourceOutput < Struct.new(
+      nil,
       :tags,
       keyword_init: true
     )
@@ -1813,6 +1905,7 @@ module Aws::Drs
     #   <p>Whether this is the primary network interface.</p>
     #   @return [Boolean]
     class NetworkInterface < Struct.new(
+      nil,
       :mac_address,
       :ips,
       :is_primary,
@@ -1826,6 +1919,7 @@ module Aws::Drs
     #   <p>The long name of the Operating System.</p>
     #   @return [String]
     class OS < Struct.new(
+      nil,
       :full_string,
       keyword_init: true
     )
@@ -1849,6 +1943,7 @@ module Aws::Drs
     #   <p>Whether this rule is enabled or not.</p>
     #   @return [Boolean]
     class PITPolicyRule < Struct.new(
+      nil,
       :rule_id,
       :units,
       :interval,
@@ -1872,6 +1967,7 @@ module Aws::Drs
     #   <p>The launch status of a participating resource.</p>
     #   @return [String]
     class ParticipatingResource < Struct.new(
+      nil,
       :participating_resource_id,
       :launch_status,
       keyword_init: true
@@ -1908,6 +2004,7 @@ module Aws::Drs
     #   <p>The post-launch action runs of a participating server.</p>
     #   @return [Types::LaunchActionsStatus]
     class ParticipatingServer < Struct.new(
+      nil,
       :source_server_id,
       :recovery_instance_id,
       :launch_status,
@@ -1925,6 +2022,7 @@ module Aws::Drs
     #   <p>Mode of a product code associated with a volume.</p>
     #   @return [String]
     class ProductCode < Struct.new(
+      nil,
       :product_code_id,
       :product_code_mode,
       keyword_init: true
@@ -1966,6 +2064,7 @@ module Aws::Drs
     #   <p>Launch action description.</p>
     #   @return [String]
     class PutLaunchActionRequest < Struct.new(
+      nil,
       :resource_id,
       :action_code,
       :order,
@@ -2019,6 +2118,7 @@ module Aws::Drs
     #   <p>Launch action category.</p>
     #   @return [String]
     class PutLaunchActionResponse < Struct.new(
+      nil,
       :resource_id,
       :action_id,
       :action_code,
@@ -2086,6 +2186,7 @@ module Aws::Drs
     #   <p>The ARN of the source Outpost</p>
     #   @return [String]
     class RecoveryInstance < Struct.new(
+      nil,
       :ec2_instance_id,
       :ec2_instance_state,
       :job_id,
@@ -2115,6 +2216,7 @@ module Aws::Drs
     #   <p>Error in data replication.</p>
     #   @return [String]
     class RecoveryInstanceDataReplicationError < Struct.new(
+      nil,
       :error,
       :raw_error,
       keyword_init: true
@@ -2148,6 +2250,7 @@ module Aws::Drs
     #   <p>The ARN of the staging Outpost</p>
     #   @return [String]
     class RecoveryInstanceDataReplicationInfo < Struct.new(
+      nil,
       :lag_duration,
       :eta_date_time,
       :replicated_disks,
@@ -2178,6 +2281,7 @@ module Aws::Drs
     #   <p>The size of the replication backlog in bytes.</p>
     #   @return [Integer]
     class RecoveryInstanceDataReplicationInfoReplicatedDisk < Struct.new(
+      nil,
       :device_name,
       :total_storage_bytes,
       :replicated_storage_bytes,
@@ -2204,6 +2308,7 @@ module Aws::Drs
     #   <p>The steps of the current attempt to initiate data replication.</p>
     #   @return [Array<Types::RecoveryInstanceDataReplicationInitiationStep>]
     class RecoveryInstanceDataReplicationInitiation < Struct.new(
+      nil,
       :start_date_time,
       :steps,
       keyword_init: true
@@ -2219,6 +2324,7 @@ module Aws::Drs
     #   <p>The status of the step.</p>
     #   @return [String]
     class RecoveryInstanceDataReplicationInitiationStep < Struct.new(
+      nil,
       :name,
       :status,
       keyword_init: true
@@ -2237,6 +2343,7 @@ module Aws::Drs
     #   <p>The EBS Volume ID of this disk.</p>
     #   @return [String]
     class RecoveryInstanceDisk < Struct.new(
+      nil,
       :internal_device_name,
       :bytes,
       :ebs_volume_id,
@@ -2282,6 +2389,7 @@ module Aws::Drs
     #   <p>The launch type (Recovery / Drill) of the last launch for the failback replication of this recovery instance.</p>
     #   @return [String]
     class RecoveryInstanceFailback < Struct.new(
+      nil,
       :failback_client_id,
       :failback_job_id,
       :failback_initiation_time,
@@ -2320,6 +2428,7 @@ module Aws::Drs
     #   <p>Operating system.</p>
     #   @return [Types::OS]
     class RecoveryInstanceProperties < Struct.new(
+      nil,
       :last_updated_date_time,
       :identification_hints,
       :network_interfaces,
@@ -2348,6 +2457,7 @@ module Aws::Drs
     #   <p>The status of the last recovery status of this Source Network.</p>
     #   @return [String]
     class RecoveryLifeCycle < Struct.new(
+      nil,
       :api_call_date_time,
       :job_id,
       :last_recovery_result,
@@ -2373,6 +2483,7 @@ module Aws::Drs
     #   <p>A list of EBS snapshots.</p>
     #   @return [Array<String>]
     class RecoverySnapshot < Struct.new(
+      nil,
       :snapshot_id,
       :source_server_id,
       :expected_timestamp,
@@ -2403,6 +2514,7 @@ module Aws::Drs
     #   <p>The Staging Disk EBS volume type to be used during replication when <code>stagingDiskType</code> is set to Auto. This is a read-only field.</p>
     #   @return [String]
     class ReplicationConfigurationReplicatedDisk < Struct.new(
+      nil,
       :device_name,
       :is_boot_disk,
       :staging_disk_type,
@@ -2472,6 +2584,7 @@ module Aws::Drs
     #   <p>Whether to allow the AWS replication agent to automatically replicate newly added disks.</p>
     #   @return [Boolean]
     class ReplicationConfigurationTemplate < Struct.new(
+      nil,
       :replication_configuration_template_id,
       :arn,
       :staging_area_subnet_id,
@@ -2511,6 +2624,7 @@ module Aws::Drs
     #   <p>The type of the resource.</p>
     #   @return [String]
     class ResourceNotFoundException < Struct.new(
+      nil,
       :message,
       :code,
       :resource_id,
@@ -2526,6 +2640,7 @@ module Aws::Drs
     #   <p>The ID of the Source Server whose data replication should be retried.</p>
     #   @return [String]
     class RetryDataReplicationInput < Struct.new(
+      nil,
       :source_server_id,
       keyword_init: true
     )
@@ -2575,6 +2690,7 @@ module Aws::Drs
     #   <p>The version of the DRS agent installed on the source server</p>
     #   @return [String]
     class RetryDataReplicationOutput < Struct.new(
+      nil,
       :source_server_id,
       :arn,
       :tags,
@@ -2598,6 +2714,7 @@ module Aws::Drs
     #   <p>The ID of the Recovery Instance that we want to reverse the replication for.</p>
     #   @return [String]
     class ReverseReplicationInput < Struct.new(
+      nil,
       :recovery_instance_id,
       keyword_init: true
     )
@@ -2608,6 +2725,7 @@ module Aws::Drs
     #   <p>ARN of created SourceServer.</p>
     #   @return [String]
     class ReverseReplicationOutput < Struct.new(
+      nil,
       :reversed_direction_source_server_arn,
       keyword_init: true
     )
@@ -2632,6 +2750,7 @@ module Aws::Drs
     #   <p>Quota code.</p>
     #   @return [String]
     class ServiceQuotaExceededException < Struct.new(
+      nil,
       :message,
       :code,
       :resource_id,
@@ -2657,6 +2776,7 @@ module Aws::Drs
     #   <p>The ARN of the source Outpost</p>
     #   @return [String]
     class SourceCloudProperties < Struct.new(
+      nil,
       :origin_account_id,
       :origin_region,
       :origin_availability_zone,
@@ -2705,6 +2825,7 @@ module Aws::Drs
     #   <p>ID of the recovered VPC following Source Network recovery.</p>
     #   @return [String]
     class SourceNetwork < Struct.new(
+      nil,
       :source_network_id,
       :source_vpc_id,
       :arn,
@@ -2735,6 +2856,7 @@ module Aws::Drs
     #   <p>CloudFormation stack name that was deployed for recovering the Source Network.</p>
     #   @return [String]
     class SourceNetworkData < Struct.new(
+      nil,
       :source_network_id,
       :source_vpc,
       :target_vpc,
@@ -2773,6 +2895,7 @@ module Aws::Drs
     #   <p>Are EC2 nitro instance types supported when recovering the Source Server.</p>
     #   @return [Boolean]
     class SourceProperties < Struct.new(
+      nil,
       :last_updated_date_time,
       :recommended_instance_type,
       :identification_hints,
@@ -2835,6 +2958,7 @@ module Aws::Drs
     #   <p>The version of the DRS agent installed on the source server</p>
     #   @return [String]
     class SourceServer < Struct.new(
+      nil,
       :source_server_id,
       :arn,
       :tags,
@@ -2871,6 +2995,7 @@ module Aws::Drs
     #   <p>Shows an error message that occurred when DRS tried to access the staging source server. In this case StagingArea$status will have value EXTENSION_ERROR</p>
     #   @return [String]
     class StagingArea < Struct.new(
+      nil,
       :status,
       :staging_account_id,
       :staging_source_server_arn,
@@ -2891,6 +3016,7 @@ module Aws::Drs
     #   <p>A list of tags associated with the staging source server.</p>
     #   @return [Hash<String, String>]
     class StagingSourceServer < Struct.new(
+      nil,
       :hostname,
       :arn,
       :tags,
@@ -2906,6 +3032,7 @@ module Aws::Drs
     #   <p>The tags to be associated with the failback launch Job.</p>
     #   @return [Hash<String, String>]
     class StartFailbackLaunchInput < Struct.new(
+      nil,
       :recovery_instance_i_ds,
       :tags,
       keyword_init: true
@@ -2917,6 +3044,7 @@ module Aws::Drs
     #   <p>The failback launch Job.</p>
     #   @return [Types::Job]
     class StartFailbackLaunchOutput < Struct.new(
+      nil,
       :job,
       keyword_init: true
     )
@@ -2933,6 +3061,7 @@ module Aws::Drs
     #   <p>The tags to be associated with the Recovery Job.</p>
     #   @return [Hash<String, String>]
     class StartRecoveryInput < Struct.new(
+      nil,
       :source_servers,
       :is_drill,
       :tags,
@@ -2945,6 +3074,7 @@ module Aws::Drs
     #   <p>The Recovery Job.</p>
     #   @return [Types::Job]
     class StartRecoveryOutput < Struct.new(
+      nil,
       :job,
       keyword_init: true
     )
@@ -2959,6 +3089,7 @@ module Aws::Drs
     #   <p>The ID of a Recovery Snapshot we want to recover from. Omit this field to launch from the latest data by taking an on-demand snapshot.</p>
     #   @return [String]
     class StartRecoveryRequestSourceServer < Struct.new(
+      nil,
       :source_server_id,
       :recovery_snapshot_id,
       keyword_init: true
@@ -2970,6 +3101,7 @@ module Aws::Drs
     #   <p>The ID of the Source Server to start replication for.</p>
     #   @return [String]
     class StartReplicationInput < Struct.new(
+      nil,
       :source_server_id,
       keyword_init: true
     )
@@ -2980,6 +3112,7 @@ module Aws::Drs
     #   <p>The Source Server that this action was targeted on.</p>
     #   @return [Types::SourceServer]
     class StartReplicationOutput < Struct.new(
+      nil,
       :source_server,
       keyword_init: true
     )
@@ -2996,6 +3129,7 @@ module Aws::Drs
     #   <p>The tags to be associated with the Source Network recovery Job.</p>
     #   @return [Hash<String, String>]
     class StartSourceNetworkRecoveryRequest < Struct.new(
+      nil,
       :source_networks,
       :deploy_as_new,
       :tags,
@@ -3012,6 +3146,7 @@ module Aws::Drs
     #   <p>CloudFormation stack name to be used for recovering the network.</p>
     #   @return [String]
     class StartSourceNetworkRecoveryRequestNetworkEntry < Struct.new(
+      nil,
       :source_network_id,
       :cfn_stack_name,
       keyword_init: true
@@ -3023,6 +3158,7 @@ module Aws::Drs
     #   <p>The Source Network recovery Job.</p>
     #   @return [Types::Job]
     class StartSourceNetworkRecoveryResponse < Struct.new(
+      nil,
       :job,
       keyword_init: true
     )
@@ -3033,6 +3169,7 @@ module Aws::Drs
     #   <p>ID of the Source Network to replicate.</p>
     #   @return [String]
     class StartSourceNetworkReplicationRequest < Struct.new(
+      nil,
       :source_network_id,
       keyword_init: true
     )
@@ -3043,6 +3180,7 @@ module Aws::Drs
     #   <p>Source Network which was requested for replication.</p>
     #   @return [Types::SourceNetwork]
     class StartSourceNetworkReplicationResponse < Struct.new(
+      nil,
       :source_network,
       keyword_init: true
     )
@@ -3053,6 +3191,7 @@ module Aws::Drs
     #   <p>The ID of the Recovery Instance we want to stop failback for.</p>
     #   @return [String]
     class StopFailbackInput < Struct.new(
+      nil,
       :recovery_instance_id,
       keyword_init: true
     )
@@ -3063,6 +3202,7 @@ module Aws::Drs
     #   <p>The ID of the Source Server to stop replication for.</p>
     #   @return [String]
     class StopReplicationInput < Struct.new(
+      nil,
       :source_server_id,
       keyword_init: true
     )
@@ -3073,6 +3213,7 @@ module Aws::Drs
     #   <p>The Source Server that this action was targeted on.</p>
     #   @return [Types::SourceServer]
     class StopReplicationOutput < Struct.new(
+      nil,
       :source_server,
       keyword_init: true
     )
@@ -3083,6 +3224,7 @@ module Aws::Drs
     #   <p>ID of the Source Network to stop replication.</p>
     #   @return [String]
     class StopSourceNetworkReplicationRequest < Struct.new(
+      nil,
       :source_network_id,
       keyword_init: true
     )
@@ -3093,6 +3235,7 @@ module Aws::Drs
     #   <p>Source Network which was requested to stop replication.</p>
     #   @return [Types::SourceNetwork]
     class StopSourceNetworkReplicationResponse < Struct.new(
+      nil,
       :source_network,
       keyword_init: true
     )
@@ -3106,6 +3249,7 @@ module Aws::Drs
     #   <p>Array of tags to be added or updated.</p>
     #   @return [Hash<String, String>]
     class TagResourceInput < Struct.new(
+      nil,
       :resource_arn,
       :tags,
       keyword_init: true
@@ -3117,6 +3261,7 @@ module Aws::Drs
     #   <p>The IDs of the Recovery Instances that should be terminated.</p>
     #   @return [Array<String>]
     class TerminateRecoveryInstancesInput < Struct.new(
+      nil,
       :recovery_instance_i_ds,
       keyword_init: true
     )
@@ -3127,6 +3272,7 @@ module Aws::Drs
     #   <p>The Job for terminating the Recovery Instances.</p>
     #   @return [Types::Job]
     class TerminateRecoveryInstancesOutput < Struct.new(
+      nil,
       :job,
       keyword_init: true
     )
@@ -3146,6 +3292,7 @@ module Aws::Drs
     #   <p>The number of seconds after which the request should be safe to retry.</p>
     #   @return [String]
     class ThrottlingException < Struct.new(
+      nil,
       :message,
       :service_code,
       :quota_code,
@@ -3161,6 +3308,7 @@ module Aws::Drs
     # @!attribute code
     #   @return [String]
     class UninitializedAccountException < Struct.new(
+      nil,
       :message,
       :code,
       keyword_init: true
@@ -3175,6 +3323,7 @@ module Aws::Drs
     #   <p>Array of tags to be removed.</p>
     #   @return [Array<String>]
     class UntagResourceInput < Struct.new(
+      nil,
       :resource_arn,
       :tag_keys,
       keyword_init: true
@@ -3195,6 +3344,7 @@ module Aws::Drs
     #   <p>Whether to use Private IP for the failback replication of the Recovery Instance.</p>
     #   @return [Boolean]
     class UpdateFailbackReplicationConfigurationInput < Struct.new(
+      nil,
       :recovery_instance_id,
       :name,
       :bandwidth_throttling,
@@ -3232,6 +3382,7 @@ module Aws::Drs
     #   <p>Launch into existing instance properties.</p>
     #   @return [Types::LaunchIntoInstanceProperties]
     class UpdateLaunchConfigurationInput < Struct.new(
+      nil,
       :source_server_id,
       :name,
       :launch_disposition,
@@ -3277,6 +3428,7 @@ module Aws::Drs
     #   <p>Launch into existing instance properties.</p>
     #   @return [Types::LaunchIntoInstanceProperties]
     class UpdateLaunchConfigurationOutput < Struct.new(
+      nil,
       :source_server_id,
       :name,
       :ec2_launch_template_id,
@@ -3320,6 +3472,7 @@ module Aws::Drs
     #   <p>DRS will set the 'launch into instance ID' of any source server when performing a drill, recovery or failback to the previous region or availability zone, using the instance ID of the source instance.</p>
     #   @return [Boolean]
     class UpdateLaunchConfigurationTemplateInput < Struct.new(
+      nil,
       :launch_configuration_template_id,
       :launch_disposition,
       :target_instance_type_right_sizing_method,
@@ -3338,6 +3491,7 @@ module Aws::Drs
     #   <p>Updated Launch Configuration Template.</p>
     #   @return [Types::LaunchConfigurationTemplate]
     class UpdateLaunchConfigurationTemplateOutput < Struct.new(
+      nil,
       :launch_configuration_template,
       keyword_init: true
     )
@@ -3396,6 +3550,7 @@ module Aws::Drs
     #   <p>Whether to allow the AWS replication agent to automatically replicate newly added disks.</p>
     #   @return [Boolean]
     class UpdateReplicationConfigurationInput < Struct.new(
+      nil,
       :source_server_id,
       :name,
       :staging_area_subnet_id,
@@ -3470,6 +3625,7 @@ module Aws::Drs
     #   <p>Whether to allow the AWS replication agent to automatically replicate newly added disks.</p>
     #   @return [Boolean]
     class UpdateReplicationConfigurationOutput < Struct.new(
+      nil,
       :source_server_id,
       :name,
       :staging_area_subnet_id,
@@ -3546,6 +3702,7 @@ module Aws::Drs
     #   <p>Whether to allow the AWS replication agent to automatically replicate newly added disks.</p>
     #   @return [Boolean]
     class UpdateReplicationConfigurationTemplateInput < Struct.new(
+      nil,
       :replication_configuration_template_id,
       :arn,
       :staging_area_subnet_id,
@@ -3619,6 +3776,7 @@ module Aws::Drs
     #   <p>Whether to allow the AWS replication agent to automatically replicate newly added disks.</p>
     #   @return [Boolean]
     class UpdateReplicationConfigurationTemplateOutput < Struct.new(
+      nil,
       :replication_configuration_template_id,
       :arn,
       :staging_area_subnet_id,
@@ -3658,6 +3816,7 @@ module Aws::Drs
     #   <p>A list of fields that failed validation.</p>
     #   @return [Array<Types::ValidationExceptionField>]
     class ValidationException < Struct.new(
+      nil,
       :message,
       :code,
       :reason,
@@ -3675,6 +3834,7 @@ module Aws::Drs
     #   <p>Validate exception field message.</p>
     #   @return [String]
     class ValidationExceptionField < Struct.new(
+      nil,
       :name,
       :message,
       keyword_init: true

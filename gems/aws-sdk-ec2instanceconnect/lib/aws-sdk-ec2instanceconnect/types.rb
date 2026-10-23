@@ -10,6 +10,7 @@ module Aws::EC2InstanceConnect
     # @!attribute message
     #   @return [String]
     class AuthException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -20,6 +21,7 @@ module Aws::EC2InstanceConnect
     # @!attribute message
     #   @return [String]
     class EC2InstanceNotFoundException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -32,6 +34,7 @@ module Aws::EC2InstanceConnect
     # @!attribute message
     #   @return [String]
     class EC2InstanceStateInvalidException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -43,6 +46,7 @@ module Aws::EC2InstanceConnect
     # @!attribute message
     #   @return [String]
     class EC2InstanceTypeInvalidException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -53,6 +57,7 @@ module Aws::EC2InstanceConnect
     # @!attribute message
     #   @return [String]
     class EC2InstanceUnavailableException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -63,6 +68,7 @@ module Aws::EC2InstanceConnect
     # @!attribute message
     #   @return [String]
     class InvalidArgsException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -82,6 +88,7 @@ module Aws::EC2InstanceConnect
     #   <p>The Availability Zone in which the EC2 instance was launched.</p>
     #   @return [String]
     class SendSSHPublicKeyRequest < Struct.new(
+      nil,
       :instance_id,
       :instance_os_user,
       :ssh_public_key,
@@ -98,6 +105,7 @@ module Aws::EC2InstanceConnect
     #   <p>Is true if the request succeeds and an error otherwise.</p>
     #   @return [Boolean]
     class SendSSHPublicKeyResponse < Struct.new(
+      nil,
       :request_id,
       :success,
       keyword_init: true
@@ -123,6 +131,7 @@ module Aws::EC2InstanceConnect
     #               Guide</i>.</p>
     #   @return [String]
     class SendSerialConsoleSSHPublicKeyRequest < Struct.new(
+      nil,
       :instance_id,
       :serial_port,
       :ssh_public_key,
@@ -138,6 +147,7 @@ module Aws::EC2InstanceConnect
     #   <p>Is true if the request succeeds and an error otherwise.</p>
     #   @return [Boolean]
     class SendSerialConsoleSSHPublicKeyResponse < Struct.new(
+      nil,
       :request_id,
       :success,
       keyword_init: true
@@ -156,6 +166,7 @@ module Aws::EC2InstanceConnect
     # @!attribute message
     #   @return [String]
     class SerialConsoleAccessDisabledException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -166,6 +177,7 @@ module Aws::EC2InstanceConnect
     # @!attribute message
     #   @return [String]
     class SerialConsoleSessionLimitExceededException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -176,6 +188,7 @@ module Aws::EC2InstanceConnect
     # @!attribute message
     #   @return [String]
     class SerialConsoleSessionUnavailableException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -186,6 +199,7 @@ module Aws::EC2InstanceConnect
     # @!attribute message
     #   @return [String]
     class SerialConsoleSessionUnsupportedException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -196,6 +210,7 @@ module Aws::EC2InstanceConnect
     # @!attribute message
     #   @return [String]
     class ServiceException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -207,6 +222,7 @@ module Aws::EC2InstanceConnect
     # @!attribute message
     #   @return [String]
     class ThrottlingException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )

@@ -11,6 +11,7 @@ module Aws::NeptuneGraph
     #   <p>A message describing the problem.</p>
     #   @return [String]
     class AccessDeniedException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -21,6 +22,7 @@ module Aws::NeptuneGraph
     #   <p>The unique identifier of the export task.</p>
     #   @return [String]
     class CancelExportTaskInput < Struct.new(
+      nil,
       :task_identifier,
       keyword_init: true
     )
@@ -55,6 +57,7 @@ module Aws::NeptuneGraph
     #   <p>The reason that the export task has this status value.</p>
     #   @return [String]
     class CancelExportTaskOutput < Struct.new(
+      nil,
       :graph_id,
       :role_arn,
       :task_id,
@@ -73,6 +76,7 @@ module Aws::NeptuneGraph
     #   <p>The unique identifier of the import task.</p>
     #   @return [String]
     class CancelImportTaskInput < Struct.new(
+      nil,
       :task_identifier,
       keyword_init: true
     )
@@ -101,6 +105,7 @@ module Aws::NeptuneGraph
     #   <p>Current status of the task. Status is CANCELLING when the import task is cancelled.</p>
     #   @return [String]
     class CancelImportTaskOutput < Struct.new(
+      nil,
       :graph_id,
       :task_id,
       :source,
@@ -120,6 +125,7 @@ module Aws::NeptuneGraph
     #   <p>The unique identifier of the query to cancel.</p>
     #   @return [String]
     class CancelQueryInput < Struct.new(
+      nil,
       :graph_identifier,
       :query_id,
       keyword_init: true
@@ -135,6 +141,7 @@ module Aws::NeptuneGraph
     #   <p>The reason for the conflict exception.</p>
     #   @return [String]
     class ConflictException < Struct.new(
+      nil,
       :message,
       :reason,
       keyword_init: true
@@ -167,6 +174,7 @@ module Aws::NeptuneGraph
     #   <p>The provisioned memory-optimized Neptune Capacity Units (m-NCUs) to use for the graph. Min = 16</p>
     #   @return [Integer]
     class CreateGraphInput < Struct.new(
+      nil,
       :graph_name,
       :tags,
       :public_connectivity,
@@ -226,6 +234,7 @@ module Aws::NeptuneGraph
     #   <p>The build number of the graph software.</p>
     #   @return [String]
     class CreateGraphOutput < Struct.new(
+      nil,
       :id,
       :name,
       :arn,
@@ -256,6 +265,7 @@ module Aws::NeptuneGraph
     #   <p>Adds metadata tags to the new graph. These tags can also be used with cost allocation reporting, or used in a Condition statement in an IAM policy.</p>
     #   @return [Hash<String, String>]
     class CreateGraphSnapshotInput < Struct.new(
+      nil,
       :graph_identifier,
       :snapshot_name,
       :tags,
@@ -286,6 +296,7 @@ module Aws::NeptuneGraph
     #   <p>The ID of the KMS key used to encrypt and decrypt graph data.</p>
     #   @return [String]
     class CreateGraphSnapshotOutput < Struct.new(
+      nil,
       :id,
       :name,
       :arn,
@@ -347,6 +358,7 @@ module Aws::NeptuneGraph
     #   <p>The ARN of the IAM role that will allow access to the data that is to be imported.</p>
     #   @return [String]
     class CreateGraphUsingImportTaskInput < Struct.new(
+      nil,
       :graph_name,
       :tags,
       :public_connectivity,
@@ -393,6 +405,7 @@ module Aws::NeptuneGraph
     #   <p>Contains options for controlling the import process. For example, if the <code>failOnError</code> key is set to <code>false</code>, the import skips problem data and attempts to continue (whereas if set to <code>true</code>, the default, or if omitted, the import operation halts immediately when an error is encountered.</p>
     #   @return [Types::ImportOptions]
     class CreateGraphUsingImportTaskOutput < Struct.new(
+      nil,
       :graph_id,
       :task_id,
       :source,
@@ -419,6 +432,7 @@ module Aws::NeptuneGraph
     #   <p>Security groups to be attached to the private graph endpoint..</p>
     #   @return [Array<String>]
     class CreatePrivateGraphEndpointInput < Struct.new(
+      nil,
       :graph_identifier,
       :vpc_id,
       :subnet_ids,
@@ -441,6 +455,7 @@ module Aws::NeptuneGraph
     #   <p>Endpoint ID of the prviate grpah endpoint.</p>
     #   @return [String]
     class CreatePrivateGraphEndpointOutput < Struct.new(
+      nil,
       :vpc_id,
       :subnet_ids,
       :status,
@@ -457,6 +472,7 @@ module Aws::NeptuneGraph
     #   <p>Determines whether a final graph snapshot is created before the graph is deleted. If <code>true</code> is specified, no graph snapshot is created. If <code>false</code> is specified, a graph snapshot is created before the graph is deleted.</p>
     #   @return [Boolean]
     class DeleteGraphInput < Struct.new(
+      nil,
       :graph_identifier,
       :skip_snapshot,
       keyword_init: true
@@ -510,6 +526,7 @@ module Aws::NeptuneGraph
     #   <p>The build number associated with the graph.</p>
     #   @return [String]
     class DeleteGraphOutput < Struct.new(
+      nil,
       :id,
       :name,
       :arn,
@@ -534,6 +551,7 @@ module Aws::NeptuneGraph
     #   <p>ID of the graph snapshot to be deleted.</p>
     #   @return [String]
     class DeleteGraphSnapshotInput < Struct.new(
+      nil,
       :snapshot_identifier,
       keyword_init: true
     )
@@ -562,6 +580,7 @@ module Aws::NeptuneGraph
     #   <p>The ID of the KMS key used to encrypt and decrypt the snapshot.</p>
     #   @return [String]
     class DeleteGraphSnapshotOutput < Struct.new(
+      nil,
       :id,
       :name,
       :arn,
@@ -581,6 +600,7 @@ module Aws::NeptuneGraph
     #   <p>The ID of the VPC where the private endpoint is located.</p>
     #   @return [String]
     class DeletePrivateGraphEndpointInput < Struct.new(
+      nil,
       :graph_identifier,
       :vpc_id,
       keyword_init: true
@@ -601,6 +621,7 @@ module Aws::NeptuneGraph
     #   <p>The ID of the VPC endpoint that was deleted.</p>
     #   @return [String]
     class DeletePrivateGraphEndpointOutput < Struct.new(
+      nil,
       :vpc_id,
       :subnet_ids,
       :status,
@@ -618,6 +639,7 @@ module Aws::NeptuneGraph
     #   <p>A list of the properties associated with the edge.</p>
     #   @return [Array<String>]
     class EdgeStructure < Struct.new(
+      nil,
       :count,
       :edge_properties,
       keyword_init: true
@@ -647,6 +669,7 @@ module Aws::NeptuneGraph
     #   <p>Specifies the query timeout duration, in milliseconds. (optional)</p>
     #   @return [Integer]
     class ExecuteQueryInput < Struct.new(
+      nil,
       :graph_identifier,
       :query_string,
       :language,
@@ -663,6 +686,7 @@ module Aws::NeptuneGraph
     #   <p>The query results.</p>
     #   @return [String]
     class ExecuteQueryOutput < Struct.new(
+      nil,
       :payload,
       keyword_init: true
     )
@@ -677,6 +701,7 @@ module Aws::NeptuneGraph
     #   <p>Used to specify filters on a per-label basis for edges. This allows you to control which edge labels and properties are included in the export.</p>
     #   @return [Hash<String, Types::ExportFilterElement>]
     class ExportFilter < Struct.new(
+      nil,
       :vertex_filter,
       :edge_filter,
       keyword_init: true
@@ -689,6 +714,7 @@ module Aws::NeptuneGraph
     #   <p>Each property is defined by a key-value pair, where the key is the desired output property name (e.g. "name"), and the value is an object.</p>
     #   @return [Hash<String, Types::ExportFilterPropertyAttributes>]
     class ExportFilterElement < Struct.new(
+      nil,
       :properties,
       keyword_init: true
     )
@@ -706,6 +732,7 @@ module Aws::NeptuneGraph
     #   <p>Specifies how to handle properties that have multiple values. Can be either <code>TO_LIST</code> to export all values as a list, or <code>PICK_FIRST</code> to export the first value encountered. If not specified, the default value is <code>PICK_FIRST</code>.</p>
     #   @return [String]
     class ExportFilterPropertyAttributes < Struct.new(
+      nil,
       :output_type,
       :source_property_name,
       :multi_value_handling,
@@ -736,6 +763,7 @@ module Aws::NeptuneGraph
     #   <p>The number of exported edges.</p>
     #   @return [Integer]
     class ExportTaskDetails < Struct.new(
+      nil,
       :start_time,
       :time_elapsed_seconds,
       :progress_percentage,
@@ -775,6 +803,7 @@ module Aws::NeptuneGraph
     #   <p>The reason that the export task has this status value.</p>
     #   @return [String]
     class ExportTaskSummary < Struct.new(
+      nil,
       :graph_id,
       :role_arn,
       :task_id,
@@ -793,6 +822,7 @@ module Aws::NeptuneGraph
     #   <p>The unique identifier of the export task.</p>
     #   @return [String]
     class GetExportTaskInput < Struct.new(
+      nil,
       :task_identifier,
       keyword_init: true
     )
@@ -833,6 +863,7 @@ module Aws::NeptuneGraph
     #   <p>The export filter of the export task.</p>
     #   @return [Types::ExportFilter]
     class GetExportTaskOutput < Struct.new(
+      nil,
       :graph_id,
       :role_arn,
       :task_id,
@@ -853,6 +884,7 @@ module Aws::NeptuneGraph
     #   <p>The unique identifier of the Neptune Analytics graph.</p>
     #   @return [String]
     class GetGraphInput < Struct.new(
+      nil,
       :graph_identifier,
       keyword_init: true
     )
@@ -905,6 +937,7 @@ module Aws::NeptuneGraph
     #   <p>The build number of the graph.</p>
     #   @return [String]
     class GetGraphOutput < Struct.new(
+      nil,
       :id,
       :name,
       :arn,
@@ -929,6 +962,7 @@ module Aws::NeptuneGraph
     #   <p>The ID of the snapshot to retrieve.</p>
     #   @return [String]
     class GetGraphSnapshotInput < Struct.new(
+      nil,
       :snapshot_identifier,
       keyword_init: true
     )
@@ -957,6 +991,7 @@ module Aws::NeptuneGraph
     #   <p>The ID of the KMS key used to encrypt and decrypt the snapshot.</p>
     #   @return [String]
     class GetGraphSnapshotOutput < Struct.new(
+      nil,
       :id,
       :name,
       :arn,
@@ -976,6 +1011,7 @@ module Aws::NeptuneGraph
     #   <p>The summary mode can take one of two values: <code>basic</code> (the default), and <code>detailed</code>.</p>
     #   @return [String]
     class GetGraphSummaryInput < Struct.new(
+      nil,
       :graph_identifier,
       :mode,
       keyword_init: true
@@ -993,6 +1029,7 @@ module Aws::NeptuneGraph
     #   <p>The graph summary.</p>
     #   @return [Types::GraphDataSummary]
     class GetGraphSummaryOutput < Struct.new(
+      nil,
       :version,
       :last_statistics_computation_time,
       :graph_summary,
@@ -1005,6 +1042,7 @@ module Aws::NeptuneGraph
     #   <p>The unique identifier of the import task.</p>
     #   @return [String]
     class GetImportTaskInput < Struct.new(
+      nil,
       :task_identifier,
       keyword_init: true
     )
@@ -1045,6 +1083,7 @@ module Aws::NeptuneGraph
     #   <p>The reason that the import task has this status value.</p>
     #   @return [String]
     class GetImportTaskOutput < Struct.new(
+      nil,
       :graph_id,
       :task_id,
       :source,
@@ -1068,6 +1107,7 @@ module Aws::NeptuneGraph
     #   <p>The ID of the VPC where the private endpoint is located.</p>
     #   @return [String]
     class GetPrivateGraphEndpointInput < Struct.new(
+      nil,
       :graph_identifier,
       :vpc_id,
       keyword_init: true
@@ -1088,6 +1128,7 @@ module Aws::NeptuneGraph
     #   <p>The ID of the private endpoint.</p>
     #   @return [String]
     class GetPrivateGraphEndpointOutput < Struct.new(
+      nil,
       :vpc_id,
       :subnet_ids,
       :status,
@@ -1104,6 +1145,7 @@ module Aws::NeptuneGraph
     #   <p>The ID of the query in question.</p>
     #   @return [String]
     class GetQueryInput < Struct.new(
+      nil,
       :graph_identifier,
       :query_id,
       keyword_init: true
@@ -1127,6 +1169,7 @@ module Aws::NeptuneGraph
     #   <p>State of the query.</p>
     #   @return [String]
     class GetQueryOutput < Struct.new(
+      nil,
       :id,
       :query_string,
       :waited,
@@ -1181,6 +1224,7 @@ module Aws::NeptuneGraph
     #   <p>This field is only present when the requested mode is DETAILED. It contains a list of edge structures.</p>
     #   @return [Array<Types::EdgeStructure>]
     class GraphDataSummary < Struct.new(
+      nil,
       :num_nodes,
       :num_edges,
       :num_node_labels,
@@ -1223,6 +1267,7 @@ module Aws::NeptuneGraph
     #   <p>The ID of the KMS key used to encrypt and decrypt the snapshot.</p>
     #   @return [String]
     class GraphSnapshotSummary < Struct.new(
+      nil,
       :id,
       :name,
       :arn,
@@ -1267,6 +1312,7 @@ module Aws::NeptuneGraph
     #   <p>If <code>true</code>, deletion protection is enabled for the graph.</p>
     #   @return [Boolean]
     class GraphSummary < Struct.new(
+      nil,
       :id,
       :name,
       :arn,
@@ -1323,6 +1369,7 @@ module Aws::NeptuneGraph
     #   <p>The number of dictionary entries in the import task.</p>
     #   @return [Integer]
     class ImportTaskDetails < Struct.new(
+      nil,
       :status,
       :start_time,
       :time_elapsed_seconds,
@@ -1359,6 +1406,7 @@ module Aws::NeptuneGraph
     #   <p>Status of the import task.</p>
     #   @return [String]
     class ImportTaskSummary < Struct.new(
+      nil,
       :graph_id,
       :task_id,
       :source,
@@ -1376,6 +1424,7 @@ module Aws::NeptuneGraph
     #   <p>A message describing the problem.</p>
     #   @return [String]
     class InternalServerException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -1392,6 +1441,7 @@ module Aws::NeptuneGraph
     #   <p>The maximum number of export tasks to return.</p>
     #   @return [Integer]
     class ListExportTasksInput < Struct.new(
+      nil,
       :graph_identifier,
       :next_token,
       :max_results,
@@ -1407,6 +1457,7 @@ module Aws::NeptuneGraph
     #   <p>Pagination token used to paginate output.</p>
     #   @return [String]
     class ListExportTasksOutput < Struct.new(
+      nil,
       :tasks,
       :next_token,
       keyword_init: true
@@ -1424,6 +1475,7 @@ module Aws::NeptuneGraph
     #   <p>The total number of records to return in the command's output.</p> <p>If the total number of records available is more than the value specified, <code>nextToken</code> is provided in the command's output. To resume pagination, provide the <code>nextToken</code> output value in the <code>nextToken</code> argument of a subsequent command. Do not use the <code>nextToken</code> response element directly outside of the Amazon CLI.</p>
     #   @return [Integer]
     class ListGraphSnapshotsInput < Struct.new(
+      nil,
       :graph_identifier,
       :next_token,
       :max_results,
@@ -1439,6 +1491,7 @@ module Aws::NeptuneGraph
     #   <p>Pagination token used to paginate output.</p> <p>When this value is provided as input, the service returns results from where the previous response left off. When this value is present in output, it indicates that there are more results to retrieve.</p>
     #   @return [String]
     class ListGraphSnapshotsOutput < Struct.new(
+      nil,
       :graph_snapshots,
       :next_token,
       keyword_init: true
@@ -1453,6 +1506,7 @@ module Aws::NeptuneGraph
     #   <p>The total number of records to return in the command's output.</p> <p>If the total number of records available is more than the value specified, <code>nextToken</code> is provided in the command's output. To resume pagination, provide the <code>nextToken</code> output value in the <code>nextToken</code> argument of a subsequent command. Do not use the <code>nextToken</code> response element directly outside of the Amazon CLI.</p>
     #   @return [Integer]
     class ListGraphsInput < Struct.new(
+      nil,
       :next_token,
       :max_results,
       keyword_init: true
@@ -1467,6 +1521,7 @@ module Aws::NeptuneGraph
     #   <p>Pagination token used to paginate output.</p> <p>When this value is provided as input, the service returns results from where the previous response left off. When this value is present in output, it indicates that there are more results to retrieve.</p>
     #   @return [String]
     class ListGraphsOutput < Struct.new(
+      nil,
       :graphs,
       :next_token,
       keyword_init: true
@@ -1481,6 +1536,7 @@ module Aws::NeptuneGraph
     #   <p>The total number of records to return in the command's output.</p> <p>If the total number of records available is more than the value specified, <code>nextToken</code> is provided in the command's output. To resume pagination, provide the <code>nextToken</code> output value in the <code>nextToken</code> argument of a subsequent command. Do not use the <code>nextToken</code> response element directly outside of the Amazon CLI.</p>
     #   @return [Integer]
     class ListImportTasksInput < Struct.new(
+      nil,
       :next_token,
       :max_results,
       keyword_init: true
@@ -1495,6 +1551,7 @@ module Aws::NeptuneGraph
     #   <p>Pagination token used to paginate output.</p> <p>When this value is provided as input, the service returns results from where the previous response left off. When this value is present in output, it indicates that there are more results to retrieve.</p>
     #   @return [String]
     class ListImportTasksOutput < Struct.new(
+      nil,
       :tasks,
       :next_token,
       keyword_init: true
@@ -1512,6 +1569,7 @@ module Aws::NeptuneGraph
     #   <p>The total number of records to return in the command's output.</p> <p>If the total number of records available is more than the value specified, <code>nextToken</code> is provided in the command's output. To resume pagination, provide the <code>nextToken</code> output value in the <code>nextToken</code> argument of a subsequent command. Do not use the <code>nextToken</code> response element directly outside of the Amazon CLI.</p>
     #   @return [Integer]
     class ListPrivateGraphEndpointsInput < Struct.new(
+      nil,
       :graph_identifier,
       :next_token,
       :max_results,
@@ -1527,6 +1585,7 @@ module Aws::NeptuneGraph
     #   <p>Pagination token used to paginate output.</p> <p>When this value is provided as input, the service returns results from where the previous response left off. When this value is present in output, it indicates that there are more results to retrieve.</p>
     #   @return [String]
     class ListPrivateGraphEndpointsOutput < Struct.new(
+      nil,
       :private_graph_endpoints,
       :next_token,
       keyword_init: true
@@ -1544,6 +1603,7 @@ module Aws::NeptuneGraph
     #   <p>Filtered list of queries based on state.</p>
     #   @return [String]
     class ListQueriesInput < Struct.new(
+      nil,
       :graph_identifier,
       :max_results,
       :state,
@@ -1556,6 +1616,7 @@ module Aws::NeptuneGraph
     #   <p>A list of current openCypher queries.</p>
     #   @return [Array<Types::QuerySummary>]
     class ListQueriesOutput < Struct.new(
+      nil,
       :queries,
       keyword_init: true
     )
@@ -1566,6 +1627,7 @@ module Aws::NeptuneGraph
     #   <p>The ARN of the resource.</p>
     #   @return [String]
     class ListTagsForResourceInput < Struct.new(
+      nil,
       :resource_arn,
       keyword_init: true
     )
@@ -1576,6 +1638,7 @@ module Aws::NeptuneGraph
     #   <p>The list of metadata tags associated with the resource.</p>
     #   @return [Hash<String, String>]
     class ListTagsForResourceOutput < Struct.new(
+      nil,
       :tags,
       keyword_init: true
     )
@@ -1596,6 +1659,7 @@ module Aws::NeptuneGraph
     #   <p>Neptune Analytics currently does not support user defined edge ids. The edge ids are not imported by default. They are imported if <i>preserveEdgeIds</i> is set to true, and ids are stored as properties on the relationships with the property name <i>neptuneEdgeId</i>.</p>
     #   @return [Boolean]
     class NeptuneImportOptions < Struct.new(
+      nil,
       :s3_export_path,
       :s3_export_kms_key_id,
       :preserve_default_vertex_labels,
@@ -1616,6 +1680,7 @@ module Aws::NeptuneGraph
     #   <p>The outgoing edge labels associated with this node.</p>
     #   @return [Array<String>]
     class NodeStructure < Struct.new(
+      nil,
       :count,
       :node_properties,
       :distinct_outgoing_edge_labels,
@@ -1638,6 +1703,7 @@ module Aws::NeptuneGraph
     #   <p>The ID of the VPC endpoint.</p>
     #   @return [String]
     class PrivateGraphEndpointSummary < Struct.new(
+      nil,
       :vpc_id,
       :subnet_ids,
       :status,
@@ -1664,6 +1730,7 @@ module Aws::NeptuneGraph
     #   <p>State of the query.</p>
     #   @return [String]
     class QuerySummary < Struct.new(
+      nil,
       :id,
       :query_string,
       :waited,
@@ -1681,6 +1748,7 @@ module Aws::NeptuneGraph
     #   <p>Determines whether a final graph snapshot is created before the graph data is deleted. If set to <code>true</code>, no graph snapshot is created. If set to <code>false</code>, a graph snapshot is created before the data is deleted.</p>
     #   @return [Boolean]
     class ResetGraphInput < Struct.new(
+      nil,
       :graph_identifier,
       :skip_snapshot,
       keyword_init: true
@@ -1734,6 +1802,7 @@ module Aws::NeptuneGraph
     #   <p>The build number of the graph.</p>
     #   @return [String]
     class ResetGraphOutput < Struct.new(
+      nil,
       :id,
       :name,
       :arn,
@@ -1759,6 +1828,7 @@ module Aws::NeptuneGraph
     #   <p>A message describing the problem.</p>
     #   @return [String]
     class ResourceNotFoundException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -1787,6 +1857,7 @@ module Aws::NeptuneGraph
     #   <p>Specifies whether or not the graph can be reachable over the internet. All access to graphs is IAM authenticated. (<code>true</code> to enable, or <code>false</code> to disable).</p>
     #   @return [Boolean]
     class RestoreGraphFromSnapshotInput < Struct.new(
+      nil,
       :snapshot_identifier,
       :graph_name,
       :provisioned_memory,
@@ -1845,6 +1916,7 @@ module Aws::NeptuneGraph
     #   <p>The build number of the graph.</p>
     #   @return [String]
     class RestoreGraphFromSnapshotOutput < Struct.new(
+      nil,
       :id,
       :name,
       :arn,
@@ -1881,6 +1953,7 @@ module Aws::NeptuneGraph
     #   <p>Service quota code of the resource for which quota was exceeded.</p>
     #   @return [String]
     class ServiceQuotaExceededException < Struct.new(
+      nil,
       :message,
       :resource_id,
       :resource_type,
@@ -1916,6 +1989,7 @@ module Aws::NeptuneGraph
     #   <p>Tags to be applied to the export task.</p>
     #   @return [Hash<String, String>]
     class StartExportTaskInput < Struct.new(
+      nil,
       :graph_identifier,
       :role_arn,
       :format,
@@ -1960,6 +2034,7 @@ module Aws::NeptuneGraph
     #   <p>The export filter of the export task.</p>
     #   @return [Types::ExportFilter]
     class StartExportTaskOutput < Struct.new(
+      nil,
       :graph_id,
       :role_arn,
       :task_id,
@@ -1979,6 +2054,7 @@ module Aws::NeptuneGraph
     #   <p>The unique identifier of the Neptune Analytics graph.</p>
     #   @return [String]
     class StartGraphInput < Struct.new(
+      nil,
       :graph_identifier,
       keyword_init: true
     )
@@ -2031,6 +2107,7 @@ module Aws::NeptuneGraph
     #   <p>The build number of the graph.</p>
     #   @return [String]
     class StartGraphOutput < Struct.new(
+      nil,
       :id,
       :name,
       :arn,
@@ -2076,6 +2153,7 @@ module Aws::NeptuneGraph
     #   <p>The ARN of the IAM role that will allow access to the data that is to be imported.</p>
     #   @return [String]
     class StartImportTaskInput < Struct.new(
+      nil,
       :import_options,
       :fail_on_error,
       :source,
@@ -2114,6 +2192,7 @@ module Aws::NeptuneGraph
     #   <p>Options for how to perform an import.</p>
     #   @return [Types::ImportOptions]
     class StartImportTaskOutput < Struct.new(
+      nil,
       :graph_id,
       :task_id,
       :source,
@@ -2131,6 +2210,7 @@ module Aws::NeptuneGraph
     #   <p>The unique identifier of the Neptune Analytics graph.</p>
     #   @return [String]
     class StopGraphInput < Struct.new(
+      nil,
       :graph_identifier,
       keyword_init: true
     )
@@ -2183,6 +2263,7 @@ module Aws::NeptuneGraph
     #   <p>The build number of the graph.</p>
     #   @return [String]
     class StopGraphOutput < Struct.new(
+      nil,
       :id,
       :name,
       :arn,
@@ -2210,6 +2291,7 @@ module Aws::NeptuneGraph
     #   <p>The tags to be assigned to the Neptune Analytics resource.</p> <p>The tags are metadata that are specified as a list of key-value pairs:</p> <p> <b>Key</b> (string)   –   A key is the required name of the tag. The string value can be from 1 to 128 Unicode characters in length. It can't be prefixed with <code>aws:</code> and can only contain the set of Unicode characters specified by this Java regular expression: <code>"^([\p{L}\p{Z}\p{N}_.:/=+\-]*)$")</code>.</p> <p> <b>Value</b> (string)   –   A value is the optional value of the tag. The string value can be from 1 to 256 Unicode characters in length. It can't be prefixed with <code>aws:</code> and can only contain the set of Unicode characters specified by this Java regular expression: <code>"^([\p{L}\p{Z}\p{N}_.:/=+\-]*)$")</code>.</p>
     #   @return [Hash<String, String>]
     class TagResourceInput < Struct.new(
+      nil,
       :resource_arn,
       :tags,
       keyword_init: true
@@ -2218,6 +2300,7 @@ module Aws::NeptuneGraph
     end
 
     class TagResourceOutput < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -2228,6 +2311,7 @@ module Aws::NeptuneGraph
     #   <p>A message describing the problem.</p>
     #   @return [String]
     class ThrottlingException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -2241,6 +2325,7 @@ module Aws::NeptuneGraph
     #   <p>The reason for the unprocessable exception.</p>
     #   @return [String]
     class UnprocessableException < Struct.new(
+      nil,
       :message,
       :reason,
       keyword_init: true
@@ -2255,6 +2340,7 @@ module Aws::NeptuneGraph
     #   <p>Tag keys for the tags to be removed.</p>
     #   @return [Array<String>]
     class UntagResourceInput < Struct.new(
+      nil,
       :resource_arn,
       :tag_keys,
       keyword_init: true
@@ -2263,6 +2349,7 @@ module Aws::NeptuneGraph
     end
 
     class UntagResourceOutput < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -2281,6 +2368,7 @@ module Aws::NeptuneGraph
     #   <p>A value that indicates whether the graph has deletion protection enabled. The graph can't be deleted when deletion protection is enabled.</p>
     #   @return [Boolean]
     class UpdateGraphInput < Struct.new(
+      nil,
       :graph_identifier,
       :public_connectivity,
       :provisioned_memory,
@@ -2336,6 +2424,7 @@ module Aws::NeptuneGraph
     #   <p>The build number of the graph.</p>
     #   @return [String]
     class UpdateGraphOutput < Struct.new(
+      nil,
       :id,
       :name,
       :arn,
@@ -2364,6 +2453,7 @@ module Aws::NeptuneGraph
     #   <p>The reason that the resource could not be validated.</p>
     #   @return [String]
     class ValidationException < Struct.new(
+      nil,
       :message,
       :reason,
       keyword_init: true
@@ -2376,6 +2466,7 @@ module Aws::NeptuneGraph
     #   <p>The number of dimensions.</p>
     #   @return [Integer]
     class VectorSearchConfiguration < Struct.new(
+      nil,
       :dimension,
       keyword_init: true
     )

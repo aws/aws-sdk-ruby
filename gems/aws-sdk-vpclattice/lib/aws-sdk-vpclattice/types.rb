@@ -10,6 +10,7 @@ module Aws::VPCLattice
     # @!attribute message
     #   @return [String]
     class AccessDeniedException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -42,6 +43,7 @@ module Aws::VPCLattice
     #   <p>The date and time that the access log subscription was last updated, in ISO-8601 format.</p>
     #   @return [Time]
     class AccessLogSubscriptionSummary < Struct.new(
+      nil,
       :id,
       :arn,
       :resource_id,
@@ -60,6 +62,7 @@ module Aws::VPCLattice
     #   <p>The Amazon Resource Name (ARN) of the resource.</p>
     #   @return [String]
     class ArnResource < Struct.new(
+      nil,
       :arn,
       keyword_init: true
     )
@@ -76,6 +79,7 @@ module Aws::VPCLattice
     #   <p>The rules for the specified listener.</p>
     #   @return [Array<Types::RuleUpdate>]
     class BatchUpdateRuleInput < Struct.new(
+      nil,
       :service_identifier,
       :listener_identifier,
       :rules,
@@ -91,6 +95,7 @@ module Aws::VPCLattice
     #   <p>The rules that the operation couldn't update.</p>
     #   @return [Array<Types::RuleUpdateFailure>]
     class BatchUpdateRuleOutput < Struct.new(
+      nil,
       :successful,
       :unsuccessful,
       keyword_init: true
@@ -108,6 +113,7 @@ module Aws::VPCLattice
     #   <p>The resource type.</p>
     #   @return [String]
     class ConflictException < Struct.new(
+      nil,
       :message,
       :resource_id,
       :resource_type,
@@ -132,6 +138,7 @@ module Aws::VPCLattice
     #   <p>The tags for the access log subscription.</p>
     #   @return [Hash<String, String>]
     class CreateAccessLogSubscriptionInput < Struct.new(
+      nil,
       :client_token,
       :resource_identifier,
       :destination_arn,
@@ -161,6 +168,7 @@ module Aws::VPCLattice
     #   <p>The Amazon Resource Name (ARN) of the log destination.</p>
     #   @return [String]
     class CreateAccessLogSubscriptionOutput < Struct.new(
+      nil,
       :id,
       :arn,
       :resource_id,
@@ -194,6 +202,7 @@ module Aws::VPCLattice
     #   <p>The tags for the listener.</p>
     #   @return [Hash<String, String>]
     class CreateListenerInput < Struct.new(
+      nil,
       :service_identifier,
       :name,
       :protocol,
@@ -231,6 +240,7 @@ module Aws::VPCLattice
     #   <p>The action for the default rule.</p>
     #   @return [Types::RuleAction]
     class CreateListenerOutput < Struct.new(
+      nil,
       :arn,
       :id,
       :name,
@@ -275,6 +285,7 @@ module Aws::VPCLattice
     #   <p>The tags for the resource configuration.</p>
     #   @return [Hash<String, String>]
     class CreateResourceConfigurationRequest < Struct.new(
+      nil,
       :name,
       :type,
       :port_ranges,
@@ -330,6 +341,7 @@ module Aws::VPCLattice
     #   <p>The reason that the request failed.</p>
     #   @return [String]
     class CreateResourceConfigurationResponse < Struct.new(
+      nil,
       :id,
       :name,
       :arn,
@@ -373,6 +385,7 @@ module Aws::VPCLattice
     #   <p>The tags for the resource gateway.</p>
     #   @return [Hash<String, String>]
     class CreateResourceGatewayRequest < Struct.new(
+      nil,
       :client_token,
       :name,
       :vpc_identifier,
@@ -414,6 +427,7 @@ module Aws::VPCLattice
     #   <p>The number of IPv4 addresses in each ENI for the resource gateway.</p>
     #   @return [Integer]
     class CreateResourceGatewayResponse < Struct.new(
+      nil,
       :name,
       :id,
       :arn,
@@ -453,6 +467,7 @@ module Aws::VPCLattice
     #   <p>The tags for the rule.</p>
     #   @return [Hash<String, String>]
     class CreateRuleInput < Struct.new(
+      nil,
       :service_identifier,
       :listener_identifier,
       :name,
@@ -485,6 +500,7 @@ module Aws::VPCLattice
     #   <p>The rule action.</p>
     #   @return [Types::RuleAction]
     class CreateRuleOutput < Struct.new(
+      nil,
       :arn,
       :id,
       :name,
@@ -515,6 +531,7 @@ module Aws::VPCLattice
     #   <p>The type of IAM policy.</p> <ul> <li> <p> <code>NONE</code>: The resource does not use an IAM policy. This is the default.</p> </li> <li> <p> <code>AWS_IAM</code>: The resource uses an IAM policy. When this type is used, auth is enabled and an auth policy is required.</p> </li> </ul>
     #   @return [String]
     class CreateServiceInput < Struct.new(
+      nil,
       :client_token,
       :name,
       :tags,
@@ -542,6 +559,7 @@ module Aws::VPCLattice
     #   <p>Specify if the service network should be enabled for sharing.</p>
     #   @return [Types::SharingConfig]
     class CreateServiceNetworkInput < Struct.new(
+      nil,
       :client_token,
       :name,
       :auth_type,
@@ -568,6 +586,7 @@ module Aws::VPCLattice
     #   <p>The type of IAM policy.</p>
     #   @return [String]
     class CreateServiceNetworkOutput < Struct.new(
+      nil,
       :id,
       :name,
       :arn,
@@ -591,6 +610,7 @@ module Aws::VPCLattice
     #   <p>A key-value pair to associate with a resource.</p>
     #   @return [Hash<String, String>]
     class CreateServiceNetworkResourceAssociationRequest < Struct.new(
+      nil,
       :client_token,
       :resource_configuration_identifier,
       :service_network_identifier,
@@ -613,6 +633,7 @@ module Aws::VPCLattice
     #   <p>The ID of the account that created the association.</p>
     #   @return [String]
     class CreateServiceNetworkResourceAssociationResponse < Struct.new(
+      nil,
       :id,
       :arn,
       :status,
@@ -635,6 +656,7 @@ module Aws::VPCLattice
     #   <p>The tags for the association.</p>
     #   @return [Hash<String, String>]
     class CreateServiceNetworkServiceAssociationInput < Struct.new(
+      nil,
       :client_token,
       :service_identifier,
       :service_network_identifier,
@@ -663,6 +685,7 @@ module Aws::VPCLattice
     #   <p>The DNS name of the service.</p>
     #   @return [Types::DnsEntry]
     class CreateServiceNetworkServiceAssociationOutput < Struct.new(
+      nil,
       :id,
       :status,
       :arn,
@@ -690,6 +713,7 @@ module Aws::VPCLattice
     #   <p>The tags for the association.</p>
     #   @return [Hash<String, String>]
     class CreateServiceNetworkVpcAssociationInput < Struct.new(
+      nil,
       :client_token,
       :service_network_identifier,
       :vpc_identifier,
@@ -716,6 +740,7 @@ module Aws::VPCLattice
     #   <p>The IDs of the security groups.</p>
     #   @return [Array<String>]
     class CreateServiceNetworkVpcAssociationOutput < Struct.new(
+      nil,
       :id,
       :status,
       :arn,
@@ -751,6 +776,7 @@ module Aws::VPCLattice
     #   <p>The public DNS name of the service.</p>
     #   @return [Types::DnsEntry]
     class CreateServiceOutput < Struct.new(
+      nil,
       :id,
       :arn,
       :name,
@@ -780,6 +806,7 @@ module Aws::VPCLattice
     #   <p>The tags for the target group.</p>
     #   @return [Hash<String, String>]
     class CreateTargetGroupInput < Struct.new(
+      nil,
       :name,
       :type,
       :config,
@@ -809,6 +836,7 @@ module Aws::VPCLattice
     #   <p>The status. You can retry the operation if the status is <code>CREATE_FAILED</code>. However, if you retry it while the status is <code>CREATE_IN_PROGRESS</code>, there is no change in the status.</p>
     #   @return [String]
     class CreateTargetGroupOutput < Struct.new(
+      nil,
       :id,
       :arn,
       :name,
@@ -824,6 +852,7 @@ module Aws::VPCLattice
     #   <p>The ID or ARN of the access log subscription.</p>
     #   @return [String]
     class DeleteAccessLogSubscriptionInput < Struct.new(
+      nil,
       :access_log_subscription_identifier,
       keyword_init: true
     )
@@ -831,6 +860,7 @@ module Aws::VPCLattice
     end
 
     class DeleteAccessLogSubscriptionOutput < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -840,6 +870,7 @@ module Aws::VPCLattice
     #   <p>The ID or ARN of the resource.</p>
     #   @return [String]
     class DeleteAuthPolicyInput < Struct.new(
+      nil,
       :resource_identifier,
       keyword_init: true
     )
@@ -847,6 +878,7 @@ module Aws::VPCLattice
     end
 
     class DeleteAuthPolicyOutput < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -859,6 +891,7 @@ module Aws::VPCLattice
     #   <p>The ID or ARN of the listener.</p>
     #   @return [String]
     class DeleteListenerInput < Struct.new(
+      nil,
       :service_identifier,
       :listener_identifier,
       keyword_init: true
@@ -867,6 +900,7 @@ module Aws::VPCLattice
     end
 
     class DeleteListenerOutput < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -876,6 +910,7 @@ module Aws::VPCLattice
     #   <p>The ID or ARN of the resource configuration.</p>
     #   @return [String]
     class DeleteResourceConfigurationRequest < Struct.new(
+      nil,
       :resource_configuration_identifier,
       keyword_init: true
     )
@@ -883,6 +918,7 @@ module Aws::VPCLattice
     end
 
     class DeleteResourceConfigurationResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -892,6 +928,7 @@ module Aws::VPCLattice
     #   <p>The ID or ARN of the association.</p>
     #   @return [String]
     class DeleteResourceEndpointAssociationRequest < Struct.new(
+      nil,
       :resource_endpoint_association_identifier,
       keyword_init: true
     )
@@ -914,6 +951,7 @@ module Aws::VPCLattice
     #   <p>The ID of the resource VPC endpoint that is associated with the resource configuration.</p>
     #   @return [String]
     class DeleteResourceEndpointAssociationResponse < Struct.new(
+      nil,
       :id,
       :arn,
       :resource_configuration_id,
@@ -928,6 +966,7 @@ module Aws::VPCLattice
     #   <p>The ID or ARN of the resource gateway.</p>
     #   @return [String]
     class DeleteResourceGatewayRequest < Struct.new(
+      nil,
       :resource_gateway_identifier,
       keyword_init: true
     )
@@ -947,6 +986,7 @@ module Aws::VPCLattice
     #   <p>The status of the resource gateway.</p>
     #   @return [String]
     class DeleteResourceGatewayResponse < Struct.new(
+      nil,
       :id,
       :arn,
       :name,
@@ -960,6 +1000,7 @@ module Aws::VPCLattice
     #   <p>The Amazon Resource Name (ARN) of the resource.</p>
     #   @return [String]
     class DeleteResourcePolicyInput < Struct.new(
+      nil,
       :resource_arn,
       keyword_init: true
     )
@@ -967,6 +1008,7 @@ module Aws::VPCLattice
     end
 
     class DeleteResourcePolicyOutput < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -982,6 +1024,7 @@ module Aws::VPCLattice
     #   <p>The ID or ARN of the rule.</p>
     #   @return [String]
     class DeleteRuleInput < Struct.new(
+      nil,
       :service_identifier,
       :listener_identifier,
       :rule_identifier,
@@ -991,6 +1034,7 @@ module Aws::VPCLattice
     end
 
     class DeleteRuleOutput < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1000,6 +1044,7 @@ module Aws::VPCLattice
     #   <p>The ID or ARN of the service.</p>
     #   @return [String]
     class DeleteServiceInput < Struct.new(
+      nil,
       :service_identifier,
       keyword_init: true
     )
@@ -1010,6 +1055,7 @@ module Aws::VPCLattice
     #   <p>The ID or ARN of the service network.</p>
     #   @return [String]
     class DeleteServiceNetworkInput < Struct.new(
+      nil,
       :service_network_identifier,
       keyword_init: true
     )
@@ -1017,6 +1063,7 @@ module Aws::VPCLattice
     end
 
     class DeleteServiceNetworkOutput < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1026,6 +1073,7 @@ module Aws::VPCLattice
     #   <p>The ID of the association.</p>
     #   @return [String]
     class DeleteServiceNetworkResourceAssociationRequest < Struct.new(
+      nil,
       :service_network_resource_association_identifier,
       keyword_init: true
     )
@@ -1042,6 +1090,7 @@ module Aws::VPCLattice
     #   <p>The status of the association.</p>
     #   @return [String]
     class DeleteServiceNetworkResourceAssociationResponse < Struct.new(
+      nil,
       :id,
       :arn,
       :status,
@@ -1054,6 +1103,7 @@ module Aws::VPCLattice
     #   <p>The ID or ARN of the association.</p>
     #   @return [String]
     class DeleteServiceNetworkServiceAssociationInput < Struct.new(
+      nil,
       :service_network_service_association_identifier,
       keyword_init: true
     )
@@ -1070,6 +1120,7 @@ module Aws::VPCLattice
     #   <p>The Amazon Resource Name (ARN) of the association.</p>
     #   @return [String]
     class DeleteServiceNetworkServiceAssociationOutput < Struct.new(
+      nil,
       :id,
       :status,
       :arn,
@@ -1082,6 +1133,7 @@ module Aws::VPCLattice
     #   <p>The ID or ARN of the association.</p>
     #   @return [String]
     class DeleteServiceNetworkVpcAssociationInput < Struct.new(
+      nil,
       :service_network_vpc_association_identifier,
       keyword_init: true
     )
@@ -1098,6 +1150,7 @@ module Aws::VPCLattice
     #   <p>The Amazon Resource Name (ARN) of the association.</p>
     #   @return [String]
     class DeleteServiceNetworkVpcAssociationOutput < Struct.new(
+      nil,
       :id,
       :status,
       :arn,
@@ -1119,6 +1172,7 @@ module Aws::VPCLattice
     #   <p>The status. You can retry the operation if the status is <code>DELETE_FAILED</code>. However, if you retry it while the status is <code>DELETE_IN_PROGRESS</code>, the status doesn't change.</p>
     #   @return [String]
     class DeleteServiceOutput < Struct.new(
+      nil,
       :id,
       :arn,
       :name,
@@ -1132,6 +1186,7 @@ module Aws::VPCLattice
     #   <p>The ID or ARN of the target group.</p>
     #   @return [String]
     class DeleteTargetGroupInput < Struct.new(
+      nil,
       :target_group_identifier,
       keyword_init: true
     )
@@ -1148,6 +1203,7 @@ module Aws::VPCLattice
     #   <p>The status. You can retry the operation if the status is <code>DELETE_FAILED</code>. However, if you retry it while the status is <code>DELETE_IN_PROGRESS</code>, the status doesn't change.</p>
     #   @return [String]
     class DeleteTargetGroupOutput < Struct.new(
+      nil,
       :id,
       :arn,
       :status,
@@ -1163,6 +1219,7 @@ module Aws::VPCLattice
     #   <p>The targets to deregister.</p>
     #   @return [Array<Types::Target>]
     class DeregisterTargetsInput < Struct.new(
+      nil,
       :target_group_identifier,
       :targets,
       keyword_init: true
@@ -1177,6 +1234,7 @@ module Aws::VPCLattice
     #   <p>The targets that the operation couldn't deregister.</p>
     #   @return [Array<Types::TargetFailure>]
     class DeregisterTargetsOutput < Struct.new(
+      nil,
       :successful,
       :unsuccessful,
       keyword_init: true
@@ -1192,6 +1250,7 @@ module Aws::VPCLattice
     #   <p>The ID of the hosted zone.</p>
     #   @return [String]
     class DnsEntry < Struct.new(
+      nil,
       :domain_name,
       :hosted_zone_id,
       keyword_init: true
@@ -1207,6 +1266,7 @@ module Aws::VPCLattice
     #   <p>The type of IP address. Dualstack is currently not supported.</p>
     #   @return [String]
     class DnsResource < Struct.new(
+      nil,
       :domain_name,
       :ip_address_type,
       keyword_init: true
@@ -1219,6 +1279,7 @@ module Aws::VPCLattice
     #   <p>The HTTP response code. Only <code>404</code> and <code>500</code> status codes are supported.</p>
     #   @return [Integer]
     class FixedResponseAction < Struct.new(
+      nil,
       :status_code,
       keyword_init: true
     )
@@ -1230,6 +1291,7 @@ module Aws::VPCLattice
     #   <p>The target groups. Traffic matching the rule is forwarded to the specified target groups. With forward actions, you can assign a weight that controls the prioritization and selection of each target group. This means that requests are distributed to individual target groups based on their weights. For example, if two target groups have the same weight, each target group receives half of the traffic.</p> <p>The default value is 1. This means that if only one target group is provided, there is no need to set the weight; 100% of the traffic goes to that target group.</p>
     #   @return [Array<Types::WeightedTargetGroup>]
     class ForwardAction < Struct.new(
+      nil,
       :target_groups,
       keyword_init: true
     )
@@ -1240,6 +1302,7 @@ module Aws::VPCLattice
     #   <p>The ID or ARN of the access log subscription.</p>
     #   @return [String]
     class GetAccessLogSubscriptionInput < Struct.new(
+      nil,
       :access_log_subscription_identifier,
       keyword_init: true
     )
@@ -1271,6 +1334,7 @@ module Aws::VPCLattice
     #   <p>The date and time that the access log subscription was last updated, in ISO-8601 format.</p>
     #   @return [Time]
     class GetAccessLogSubscriptionOutput < Struct.new(
+      nil,
       :id,
       :arn,
       :resource_id,
@@ -1288,6 +1352,7 @@ module Aws::VPCLattice
     #   <p>The ID or ARN of the service network or service.</p>
     #   @return [String]
     class GetAuthPolicyInput < Struct.new(
+      nil,
       :resource_identifier,
       keyword_init: true
     )
@@ -1307,6 +1372,7 @@ module Aws::VPCLattice
     #   <p>The date and time that the auth policy was last updated, in ISO-8601 format.</p>
     #   @return [Time]
     class GetAuthPolicyOutput < Struct.new(
+      nil,
       :policy,
       :state,
       :created_at,
@@ -1323,6 +1389,7 @@ module Aws::VPCLattice
     #   <p>The ID or ARN of the listener.</p>
     #   @return [String]
     class GetListenerInput < Struct.new(
+      nil,
       :service_identifier,
       :listener_identifier,
       keyword_init: true
@@ -1361,6 +1428,7 @@ module Aws::VPCLattice
     #   <p>The date and time that the listener was last updated, in ISO-8601 format.</p>
     #   @return [Time]
     class GetListenerOutput < Struct.new(
+      nil,
       :arn,
       :id,
       :name,
@@ -1380,6 +1448,7 @@ module Aws::VPCLattice
     #   <p>The ID of the resource configuration.</p>
     #   @return [String]
     class GetResourceConfigurationRequest < Struct.new(
+      nil,
       :resource_configuration_identifier,
       keyword_init: true
     )
@@ -1435,6 +1504,7 @@ module Aws::VPCLattice
     #   <p>The most recent date and time that the resource configuration was updated, in ISO-8601 format.</p>
     #   @return [Time]
     class GetResourceConfigurationResponse < Struct.new(
+      nil,
       :id,
       :name,
       :arn,
@@ -1460,6 +1530,7 @@ module Aws::VPCLattice
     #   <p>The ID of the resource gateway.</p>
     #   @return [String]
     class GetResourceGatewayRequest < Struct.new(
+      nil,
       :resource_gateway_identifier,
       keyword_init: true
     )
@@ -1500,6 +1571,7 @@ module Aws::VPCLattice
     #   <p>The date and time that the resource gateway was last updated, in ISO-8601 format.</p>
     #   @return [Time]
     class GetResourceGatewayResponse < Struct.new(
+      nil,
       :name,
       :id,
       :arn,
@@ -1520,6 +1592,7 @@ module Aws::VPCLattice
     #   <p>The Amazon Resource Name (ARN) of the service network or service.</p>
     #   @return [String]
     class GetResourcePolicyInput < Struct.new(
+      nil,
       :resource_arn,
       keyword_init: true
     )
@@ -1530,6 +1603,7 @@ module Aws::VPCLattice
     #   <p>An IAM policy.</p>
     #   @return [String]
     class GetResourcePolicyOutput < Struct.new(
+      nil,
       :policy,
       keyword_init: true
     )
@@ -1546,6 +1620,7 @@ module Aws::VPCLattice
     #   <p>The ID or ARN of the listener rule.</p>
     #   @return [String]
     class GetRuleInput < Struct.new(
+      nil,
       :service_identifier,
       :listener_identifier,
       :rule_identifier,
@@ -1582,6 +1657,7 @@ module Aws::VPCLattice
     #   <p>The date and time that the listener rule was last updated, in ISO-8601 format.</p>
     #   @return [Time]
     class GetRuleOutput < Struct.new(
+      nil,
       :arn,
       :id,
       :name,
@@ -1600,6 +1676,7 @@ module Aws::VPCLattice
     #   <p>The ID or ARN of the service.</p>
     #   @return [String]
     class GetServiceInput < Struct.new(
+      nil,
       :service_identifier,
       keyword_init: true
     )
@@ -1610,6 +1687,7 @@ module Aws::VPCLattice
     #   <p>The ID or ARN of the service network.</p>
     #   @return [String]
     class GetServiceNetworkInput < Struct.new(
+      nil,
       :service_network_identifier,
       keyword_init: true
     )
@@ -1644,6 +1722,7 @@ module Aws::VPCLattice
     #   <p>The number of services associated with the service network.</p>
     #   @return [Integer]
     class GetServiceNetworkOutput < Struct.new(
+      nil,
       :id,
       :name,
       :created_at,
@@ -1662,6 +1741,7 @@ module Aws::VPCLattice
     #   <p>The ID of the association.</p>
     #   @return [String]
     class GetServiceNetworkResourceAssociationRequest < Struct.new(
+      nil,
       :service_network_resource_association_identifier,
       keyword_init: true
     )
@@ -1720,6 +1800,7 @@ module Aws::VPCLattice
     #   <p>Indicates whether the association is managed by Amazon.</p>
     #   @return [Boolean]
     class GetServiceNetworkResourceAssociationResponse < Struct.new(
+      nil,
       :id,
       :arn,
       :status,
@@ -1746,6 +1827,7 @@ module Aws::VPCLattice
     #   <p>The ID or ARN of the association.</p>
     #   @return [String]
     class GetServiceNetworkServiceAssociationInput < Struct.new(
+      nil,
       :service_network_service_association_identifier,
       keyword_init: true
     )
@@ -1798,6 +1880,7 @@ module Aws::VPCLattice
     #   <p>The failure code.</p>
     #   @return [String]
     class GetServiceNetworkServiceAssociationOutput < Struct.new(
+      nil,
       :id,
       :status,
       :arn,
@@ -1822,6 +1905,7 @@ module Aws::VPCLattice
     #   <p>The ID or ARN of the association.</p>
     #   @return [String]
     class GetServiceNetworkVpcAssociationInput < Struct.new(
+      nil,
       :service_network_vpc_association_identifier,
       keyword_init: true
     )
@@ -1868,6 +1952,7 @@ module Aws::VPCLattice
     #   <p>The date and time that the association was last updated, in ISO-8601 format.</p>
     #   @return [Time]
     class GetServiceNetworkVpcAssociationOutput < Struct.new(
+      nil,
       :id,
       :status,
       :arn,
@@ -1923,6 +2008,7 @@ module Aws::VPCLattice
     #   <p>The failure message.</p>
     #   @return [String]
     class GetServiceOutput < Struct.new(
+      nil,
       :id,
       :name,
       :arn,
@@ -1944,6 +2030,7 @@ module Aws::VPCLattice
     #   <p>The ID or ARN of the target group.</p>
     #   @return [String]
     class GetTargetGroupInput < Struct.new(
+      nil,
       :target_group_identifier,
       keyword_init: true
     )
@@ -1984,6 +2071,7 @@ module Aws::VPCLattice
     #   <p>The failure code.</p>
     #   @return [String]
     class GetTargetGroupOutput < Struct.new(
+      nil,
       :id,
       :arn,
       :name,
@@ -2011,6 +2099,7 @@ module Aws::VPCLattice
     #   <p>Indicates whether the match is case sensitive.</p>
     #   @return [Boolean]
     class HeaderMatch < Struct.new(
+      nil,
       :name,
       :match,
       :case_sensitive,
@@ -2076,6 +2165,7 @@ module Aws::VPCLattice
     #   <p>The codes to use when checking for a successful response from a target.</p>
     #   @return [Types::Matcher]
     class HealthCheckConfig < Struct.new(
+      nil,
       :enabled,
       :protocol,
       :protocol_version,
@@ -2102,6 +2192,7 @@ module Aws::VPCLattice
     #   <p>The header matches. Matches incoming requests with rule based on request header value before applying rule action.</p>
     #   @return [Array<Types::HeaderMatch>]
     class HttpMatch < Struct.new(
+      nil,
       :method,
       :path_match,
       :header_matches,
@@ -2117,6 +2208,7 @@ module Aws::VPCLattice
     #   <p>The number of seconds to wait before retrying.</p>
     #   @return [Integer]
     class InternalServerException < Struct.new(
+      nil,
       :message,
       :retry_after_seconds,
       keyword_init: true
@@ -2129,6 +2221,7 @@ module Aws::VPCLattice
     #   <p>The IP address of the IP resource.</p>
     #   @return [String]
     class IpResource < Struct.new(
+      nil,
       :ip_address,
       keyword_init: true
     )
@@ -2145,6 +2238,7 @@ module Aws::VPCLattice
     #   <p>A pagination token for the next page of results.</p>
     #   @return [String]
     class ListAccessLogSubscriptionsInput < Struct.new(
+      nil,
       :resource_identifier,
       :max_results,
       :next_token,
@@ -2160,6 +2254,7 @@ module Aws::VPCLattice
     #   <p>A pagination token for the next page of results.</p>
     #   @return [String]
     class ListAccessLogSubscriptionsOutput < Struct.new(
+      nil,
       :items,
       :next_token,
       keyword_init: true
@@ -2177,6 +2272,7 @@ module Aws::VPCLattice
     #   <p>A pagination token for the next page of results.</p>
     #   @return [String]
     class ListListenersInput < Struct.new(
+      nil,
       :service_identifier,
       :max_results,
       :next_token,
@@ -2192,6 +2288,7 @@ module Aws::VPCLattice
     #   <p>If there are additional results, a pagination token for the next page of results.</p>
     #   @return [String]
     class ListListenersOutput < Struct.new(
+      nil,
       :items,
       :next_token,
       keyword_init: true
@@ -2212,6 +2309,7 @@ module Aws::VPCLattice
     #   <p>A pagination token for the next page of results.</p>
     #   @return [String]
     class ListResourceConfigurationsRequest < Struct.new(
+      nil,
       :resource_gateway_identifier,
       :resource_configuration_group_identifier,
       :max_results,
@@ -2228,6 +2326,7 @@ module Aws::VPCLattice
     #   <p>If there are additional results, a pagination token for the next page of results.</p>
     #   @return [String]
     class ListResourceConfigurationsResponse < Struct.new(
+      nil,
       :items,
       :next_token,
       keyword_init: true
@@ -2254,6 +2353,7 @@ module Aws::VPCLattice
     #   <p>A pagination token for the next page of results.</p>
     #   @return [String]
     class ListResourceEndpointAssociationsRequest < Struct.new(
+      nil,
       :resource_configuration_identifier,
       :resource_endpoint_association_identifier,
       :vpc_endpoint_id,
@@ -2272,6 +2372,7 @@ module Aws::VPCLattice
     #   <p>If there are additional results, a pagination token for the next page of results.</p>
     #   @return [String]
     class ListResourceEndpointAssociationsResponse < Struct.new(
+      nil,
       :items,
       :next_token,
       keyword_init: true
@@ -2286,6 +2387,7 @@ module Aws::VPCLattice
     #   <p>If there are additional results, a pagination token for the next page of results.</p>
     #   @return [String]
     class ListResourceGatewaysRequest < Struct.new(
+      nil,
       :max_results,
       :next_token,
       keyword_init: true
@@ -2300,6 +2402,7 @@ module Aws::VPCLattice
     #   <p>If there are additional results, a pagination token for the next page of results.</p>
     #   @return [String]
     class ListResourceGatewaysResponse < Struct.new(
+      nil,
       :items,
       :next_token,
       keyword_init: true
@@ -2320,6 +2423,7 @@ module Aws::VPCLattice
     #   <p>A pagination token for the next page of results.</p>
     #   @return [String]
     class ListRulesInput < Struct.new(
+      nil,
       :service_identifier,
       :listener_identifier,
       :max_results,
@@ -2336,6 +2440,7 @@ module Aws::VPCLattice
     #   <p>If there are additional results, a pagination token for the next page of results.</p>
     #   @return [String]
     class ListRulesOutput < Struct.new(
+      nil,
       :items,
       :next_token,
       keyword_init: true
@@ -2359,6 +2464,7 @@ module Aws::VPCLattice
     #   <p>Include service network resource associations of the child resource configuration with the grouped resource configuration.</p> <p>The type is boolean and the default value is false.</p>
     #   @return [Boolean]
     class ListServiceNetworkResourceAssociationsRequest < Struct.new(
+      nil,
       :service_network_identifier,
       :resource_configuration_identifier,
       :max_results,
@@ -2376,6 +2482,7 @@ module Aws::VPCLattice
     #   <p>If there are additional results, a pagination token for the next page of results.</p>
     #   @return [String]
     class ListServiceNetworkResourceAssociationsResponse < Struct.new(
+      nil,
       :items,
       :next_token,
       keyword_init: true
@@ -2396,6 +2503,7 @@ module Aws::VPCLattice
     #   <p>A pagination token for the next page of results.</p>
     #   @return [String]
     class ListServiceNetworkServiceAssociationsInput < Struct.new(
+      nil,
       :service_network_identifier,
       :service_identifier,
       :max_results,
@@ -2412,6 +2520,7 @@ module Aws::VPCLattice
     #   <p>If there are additional results, a pagination token for the next page of results.</p>
     #   @return [String]
     class ListServiceNetworkServiceAssociationsOutput < Struct.new(
+      nil,
       :items,
       :next_token,
       keyword_init: true
@@ -2432,6 +2541,7 @@ module Aws::VPCLattice
     #   <p>A pagination token for the next page of results.</p>
     #   @return [String]
     class ListServiceNetworkVpcAssociationsInput < Struct.new(
+      nil,
       :service_network_identifier,
       :vpc_identifier,
       :max_results,
@@ -2448,6 +2558,7 @@ module Aws::VPCLattice
     #   <p>If there are additional results, a pagination token for the next page of results.</p>
     #   @return [String]
     class ListServiceNetworkVpcAssociationsOutput < Struct.new(
+      nil,
       :items,
       :next_token,
       keyword_init: true
@@ -2465,6 +2576,7 @@ module Aws::VPCLattice
     #   <p>If there are additional results, a pagination token for the next page of results.</p>
     #   @return [String]
     class ListServiceNetworkVpcEndpointAssociationsRequest < Struct.new(
+      nil,
       :service_network_identifier,
       :max_results,
       :next_token,
@@ -2480,6 +2592,7 @@ module Aws::VPCLattice
     #   <p>If there are additional results, a pagination token for the next page of results.</p>
     #   @return [String]
     class ListServiceNetworkVpcEndpointAssociationsResponse < Struct.new(
+      nil,
       :items,
       :next_token,
       keyword_init: true
@@ -2494,6 +2607,7 @@ module Aws::VPCLattice
     #   <p>A pagination token for the next page of results.</p>
     #   @return [String]
     class ListServiceNetworksInput < Struct.new(
+      nil,
       :max_results,
       :next_token,
       keyword_init: true
@@ -2508,6 +2622,7 @@ module Aws::VPCLattice
     #   <p>If there are additional results, a pagination token for the next page of results.</p>
     #   @return [String]
     class ListServiceNetworksOutput < Struct.new(
+      nil,
       :items,
       :next_token,
       keyword_init: true
@@ -2522,6 +2637,7 @@ module Aws::VPCLattice
     #   <p>A pagination token for the next page of results.</p>
     #   @return [String]
     class ListServicesInput < Struct.new(
+      nil,
       :max_results,
       :next_token,
       keyword_init: true
@@ -2536,6 +2652,7 @@ module Aws::VPCLattice
     #   <p>If there are additional results, a pagination token for the next page of results.</p>
     #   @return [String]
     class ListServicesOutput < Struct.new(
+      nil,
       :items,
       :next_token,
       keyword_init: true
@@ -2547,6 +2664,7 @@ module Aws::VPCLattice
     #   <p>The Amazon Resource Name (ARN) of the resource.</p>
     #   @return [String]
     class ListTagsForResourceInput < Struct.new(
+      nil,
       :resource_arn,
       keyword_init: true
     )
@@ -2557,6 +2675,7 @@ module Aws::VPCLattice
     #   <p>Information about the tags.</p>
     #   @return [Hash<String, String>]
     class ListTagsForResourceOutput < Struct.new(
+      nil,
       :tags,
       keyword_init: true
     )
@@ -2576,6 +2695,7 @@ module Aws::VPCLattice
     #   <p>The target group type.</p>
     #   @return [String]
     class ListTargetGroupsInput < Struct.new(
+      nil,
       :max_results,
       :next_token,
       :vpc_identifier,
@@ -2592,6 +2712,7 @@ module Aws::VPCLattice
     #   <p>If there are additional results, a pagination token for the next page of results.</p>
     #   @return [String]
     class ListTargetGroupsOutput < Struct.new(
+      nil,
       :items,
       :next_token,
       keyword_init: true
@@ -2612,6 +2733,7 @@ module Aws::VPCLattice
     #   <p>The targets.</p>
     #   @return [Array<Types::Target>]
     class ListTargetsInput < Struct.new(
+      nil,
       :target_group_identifier,
       :max_results,
       :next_token,
@@ -2628,6 +2750,7 @@ module Aws::VPCLattice
     #   <p>If there are additional results, a pagination token for the next page of results.</p>
     #   @return [String]
     class ListTargetsOutput < Struct.new(
+      nil,
       :items,
       :next_token,
       keyword_init: true
@@ -2658,6 +2781,7 @@ module Aws::VPCLattice
     #   <p>The date and time that the listener was last updated, in ISO-8601 format.</p>
     #   @return [Time]
     class ListenerSummary < Struct.new(
+      nil,
       :arn,
       :id,
       :name,
@@ -2693,6 +2817,7 @@ module Aws::VPCLattice
     #   <p>Indicates whether the match is case sensitive.</p>
     #   @return [Boolean]
     class PathMatch < Struct.new(
+      nil,
       :match,
       :case_sensitive,
       keyword_init: true
@@ -2727,6 +2852,7 @@ module Aws::VPCLattice
     #   <p>The auth policy. The policy string in JSON must not contain newlines or blank lines.</p>
     #   @return [String]
     class PutAuthPolicyInput < Struct.new(
+      nil,
       :resource_identifier,
       :policy,
       keyword_init: true
@@ -2741,6 +2867,7 @@ module Aws::VPCLattice
     #   <p>The state of the auth policy. The auth policy is only active when the auth type is set to <code>AWS_IAM</code>. If you provide a policy, then authentication and authorization decisions are made based on this policy and the client's IAM policy. If the Auth type is <code>NONE</code>, then, any auth policy that you provide remains inactive. For more information, see <a href="https://docs.aws.amazon.com/vpc-lattice/latest/ug/service-networks.html#create-service-network">Create a service network</a> in the <i>Amazon VPC Lattice User Guide</i>.</p>
     #   @return [String]
     class PutAuthPolicyOutput < Struct.new(
+      nil,
       :policy,
       :state,
       keyword_init: true
@@ -2755,6 +2882,7 @@ module Aws::VPCLattice
     #   <p>An IAM policy. The policy string in JSON must not contain newlines or blank lines.</p>
     #   @return [String]
     class PutResourcePolicyInput < Struct.new(
+      nil,
       :resource_arn,
       :policy,
       keyword_init: true
@@ -2763,6 +2891,7 @@ module Aws::VPCLattice
     end
 
     class PutResourcePolicyOutput < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -2775,6 +2904,7 @@ module Aws::VPCLattice
     #   <p>The targets.</p>
     #   @return [Array<Types::Target>]
     class RegisterTargetsInput < Struct.new(
+      nil,
       :target_group_identifier,
       :targets,
       keyword_init: true
@@ -2789,6 +2919,7 @@ module Aws::VPCLattice
     #   <p>The targets that were not registered.</p>
     #   @return [Array<Types::TargetFailure>]
     class RegisterTargetsOutput < Struct.new(
+      nil,
       :successful,
       :unsuccessful,
       keyword_init: true
@@ -2853,6 +2984,7 @@ module Aws::VPCLattice
     #   <p>The most recent date and time that the resource configuration was updated, in ISO-8601 format.</p>
     #   @return [Time]
     class ResourceConfigurationSummary < Struct.new(
+      nil,
       :id,
       :name,
       :arn,
@@ -2897,6 +3029,7 @@ module Aws::VPCLattice
     #   <p>The date and time that the VPC endpoint association was created, in ISO-8601 format.</p>
     #   @return [Time]
     class ResourceEndpointAssociationSummary < Struct.new(
+      nil,
       :id,
       :arn,
       :resource_configuration_id,
@@ -2946,6 +3079,7 @@ module Aws::VPCLattice
     #   <p>The most recent date and time that the resource gateway was updated, in ISO-8601 format.</p>
     #   @return [Time]
     class ResourceGatewaySummary < Struct.new(
+      nil,
       :name,
       :id,
       :arn,
@@ -2972,6 +3106,7 @@ module Aws::VPCLattice
     #   <p>The resource type.</p>
     #   @return [String]
     class ResourceNotFoundException < Struct.new(
+      nil,
       :message,
       :resource_id,
       :resource_type,
@@ -3038,6 +3173,7 @@ module Aws::VPCLattice
     #   <p>The date and time that the listener rule was last updated, in ISO-8601 format.</p>
     #   @return [Time]
     class RuleSummary < Struct.new(
+      nil,
       :arn,
       :id,
       :name,
@@ -3064,6 +3200,7 @@ module Aws::VPCLattice
     #   <p>The rule action.</p>
     #   @return [Types::RuleAction]
     class RuleUpdate < Struct.new(
+      nil,
       :rule_identifier,
       :match,
       :priority,
@@ -3084,6 +3221,7 @@ module Aws::VPCLattice
     #   <p>The failure message.</p>
     #   @return [String]
     class RuleUpdateFailure < Struct.new(
+      nil,
       :rule_identifier,
       :failure_code,
       :failure_message,
@@ -3115,6 +3253,7 @@ module Aws::VPCLattice
     #   <p>The action for the rule.</p>
     #   @return [Types::RuleAction]
     class RuleUpdateSuccess < Struct.new(
+      nil,
       :arn,
       :id,
       :name,
@@ -3150,6 +3289,7 @@ module Aws::VPCLattice
     #   <p>The date and time that the association was created, in ISO-8601 format.</p>
     #   @return [Time]
     class ServiceNetworkEndpointAssociation < Struct.new(
+      nil,
       :vpc_endpoint_id,
       :vpc_id,
       :vpc_endpoint_owner_id,
@@ -3209,6 +3349,7 @@ module Aws::VPCLattice
     #   <p>The failure code.</p>
     #   @return [String]
     class ServiceNetworkResourceAssociationSummary < Struct.new(
+      nil,
       :id,
       :arn,
       :status,
@@ -3270,6 +3411,7 @@ module Aws::VPCLattice
     #   <p>The custom domain name of the service.</p>
     #   @return [String]
     class ServiceNetworkServiceAssociationSummary < Struct.new(
+      nil,
       :id,
       :status,
       :arn,
@@ -3314,6 +3456,7 @@ module Aws::VPCLattice
     #   <p>The number of resource configurations associated with a service network.</p>
     #   @return [Integer]
     class ServiceNetworkSummary < Struct.new(
+      nil,
       :id,
       :name,
       :arn,
@@ -3359,6 +3502,7 @@ module Aws::VPCLattice
     #   <p>The date and time that the association was last updated, in ISO-8601 format.</p>
     #   @return [Time]
     class ServiceNetworkVpcAssociationSummary < Struct.new(
+      nil,
       :id,
       :arn,
       :status,
@@ -3390,6 +3534,7 @@ module Aws::VPCLattice
     #   <p>The ID of the service quota that was exceeded.</p>
     #   @return [String]
     class ServiceQuotaExceededException < Struct.new(
+      nil,
       :message,
       :resource_id,
       :resource_type,
@@ -3426,6 +3571,7 @@ module Aws::VPCLattice
     #   <p>The status.</p>
     #   @return [String]
     class ServiceSummary < Struct.new(
+      nil,
       :id,
       :name,
       :arn,
@@ -3444,6 +3590,7 @@ module Aws::VPCLattice
     #   <p>Specifies if the service network is enabled for sharing.</p>
     #   @return [Boolean]
     class SharingConfig < Struct.new(
+      nil,
       :enabled,
       keyword_init: true
     )
@@ -3457,6 +3604,7 @@ module Aws::VPCLattice
     #   <p>The tags for the resource.</p>
     #   @return [Hash<String, String>]
     class TagResourceInput < Struct.new(
+      nil,
       :resource_arn,
       :tags,
       keyword_init: true
@@ -3465,6 +3613,7 @@ module Aws::VPCLattice
     end
 
     class TagResourceOutput < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -3478,6 +3627,7 @@ module Aws::VPCLattice
     #   <p>The port on which the target is listening. For HTTP, the default is 80. For HTTPS, the default is 443.</p>
     #   @return [Integer]
     class Target < Struct.new(
+      nil,
       :id,
       :port,
       keyword_init: true
@@ -3499,6 +3649,7 @@ module Aws::VPCLattice
     #   <p>The failure message.</p>
     #   @return [String]
     class TargetFailure < Struct.new(
+      nil,
       :id,
       :port,
       :failure_code,
@@ -3531,6 +3682,7 @@ module Aws::VPCLattice
     #   <p>The version of the event structure that your Lambda function receives. Supported only if the target group type is <code>LAMBDA</code>. The default is <code>V1</code>.</p>
     #   @return [String]
     class TargetGroupConfig < Struct.new(
+      nil,
       :port,
       :protocol,
       :protocol_version,
@@ -3584,6 +3736,7 @@ module Aws::VPCLattice
     #   <p>The version of the event structure that your Lambda function receives. Supported only if the target group type is <code>LAMBDA</code>.</p>
     #   @return [String]
     class TargetGroupSummary < Struct.new(
+      nil,
       :id,
       :arn,
       :name,
@@ -3616,6 +3769,7 @@ module Aws::VPCLattice
     #   <p>The code for why the target status is what it is.</p>
     #   @return [String]
     class TargetSummary < Struct.new(
+      nil,
       :id,
       :port,
       :status,
@@ -3638,6 +3792,7 @@ module Aws::VPCLattice
     #   <p>The number of seconds to wait before retrying.</p>
     #   @return [Integer]
     class ThrottlingException < Struct.new(
+      nil,
       :message,
       :service_code,
       :quota_code,
@@ -3654,6 +3809,7 @@ module Aws::VPCLattice
     #   <p>The tag keys of the tags to remove.</p>
     #   @return [Array<String>]
     class UntagResourceInput < Struct.new(
+      nil,
       :resource_arn,
       :tag_keys,
       keyword_init: true
@@ -3662,6 +3818,7 @@ module Aws::VPCLattice
     end
 
     class UntagResourceOutput < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -3674,6 +3831,7 @@ module Aws::VPCLattice
     #   <p>The Amazon Resource Name (ARN) of the access log destination.</p>
     #   @return [String]
     class UpdateAccessLogSubscriptionInput < Struct.new(
+      nil,
       :access_log_subscription_identifier,
       :destination_arn,
       keyword_init: true
@@ -3697,6 +3855,7 @@ module Aws::VPCLattice
     #   <p>The Amazon Resource Name (ARN) of the access log destination.</p>
     #   @return [String]
     class UpdateAccessLogSubscriptionOutput < Struct.new(
+      nil,
       :id,
       :arn,
       :resource_id,
@@ -3717,6 +3876,7 @@ module Aws::VPCLattice
     #   <p>The action for the default rule.</p>
     #   @return [Types::RuleAction]
     class UpdateListenerInput < Struct.new(
+      nil,
       :service_identifier,
       :listener_identifier,
       :default_action,
@@ -3750,6 +3910,7 @@ module Aws::VPCLattice
     #   <p>The action for the default rule.</p>
     #   @return [Types::RuleAction]
     class UpdateListenerOutput < Struct.new(
+      nil,
       :arn,
       :id,
       :name,
@@ -3776,6 +3937,7 @@ module Aws::VPCLattice
     #   <p>The TCP port ranges that a consumer can use to access a resource configuration. You can separate port ranges with a comma. Example: 1-65535 or 1,2,22-30</p>
     #   @return [Array<String>]
     class UpdateResourceConfigurationRequest < Struct.new(
+      nil,
       :resource_configuration_identifier,
       :resource_configuration_definition,
       :allow_association_to_shareable_service_network,
@@ -3819,6 +3981,7 @@ module Aws::VPCLattice
     #   <p>The resource configuration.</p>
     #   @return [Types::ResourceConfigurationDefinition]
     class UpdateResourceConfigurationResponse < Struct.new(
+      nil,
       :id,
       :name,
       :arn,
@@ -3842,6 +4005,7 @@ module Aws::VPCLattice
     #   <p>The IDs of the security groups associated with the resource gateway.</p>
     #   @return [Array<String>]
     class UpdateResourceGatewayRequest < Struct.new(
+      nil,
       :resource_gateway_identifier,
       :security_group_ids,
       keyword_init: true
@@ -3874,6 +4038,7 @@ module Aws::VPCLattice
     #   <p>The type of IP address used by the resource gateway.</p>
     #   @return [String]
     class UpdateResourceGatewayResponse < Struct.new(
+      nil,
       :name,
       :id,
       :arn,
@@ -3906,6 +4071,7 @@ module Aws::VPCLattice
     #   <p>Information about the action for the specified listener rule.</p>
     #   @return [Types::RuleAction]
     class UpdateRuleInput < Struct.new(
+      nil,
       :service_identifier,
       :listener_identifier,
       :rule_identifier,
@@ -3939,6 +4105,7 @@ module Aws::VPCLattice
     #   <p>Information about the action for the specified listener rule.</p>
     #   @return [Types::RuleAction]
     class UpdateRuleOutput < Struct.new(
+      nil,
       :arn,
       :id,
       :name,
@@ -3961,6 +4128,7 @@ module Aws::VPCLattice
     #   <p>The type of IAM policy.</p> <ul> <li> <p> <code>NONE</code>: The resource does not use an IAM policy. This is the default.</p> </li> <li> <p> <code>AWS_IAM</code>: The resource uses an IAM policy. When this type is used, auth is enabled and an auth policy is required.</p> </li> </ul>
     #   @return [String]
     class UpdateServiceInput < Struct.new(
+      nil,
       :service_identifier,
       :certificate_arn,
       :auth_type,
@@ -3976,6 +4144,7 @@ module Aws::VPCLattice
     #   <p>The type of IAM policy.</p> <ul> <li> <p> <code>NONE</code>: The resource does not use an IAM policy. This is the default.</p> </li> <li> <p> <code>AWS_IAM</code>: The resource uses an IAM policy. When this type is used, auth is enabled and an auth policy is required.</p> </li> </ul>
     #   @return [String]
     class UpdateServiceNetworkInput < Struct.new(
+      nil,
       :service_network_identifier,
       :auth_type,
       keyword_init: true
@@ -3996,6 +4165,7 @@ module Aws::VPCLattice
     #   <p>The type of IAM policy.</p>
     #   @return [String]
     class UpdateServiceNetworkOutput < Struct.new(
+      nil,
       :id,
       :name,
       :arn,
@@ -4012,6 +4182,7 @@ module Aws::VPCLattice
     #   <p>The IDs of the security groups.</p>
     #   @return [Array<String>]
     class UpdateServiceNetworkVpcAssociationInput < Struct.new(
+      nil,
       :service_network_vpc_association_identifier,
       :security_group_ids,
       keyword_init: true
@@ -4035,6 +4206,7 @@ module Aws::VPCLattice
     #   <p>The IDs of the security groups.</p>
     #   @return [Array<String>]
     class UpdateServiceNetworkVpcAssociationOutput < Struct.new(
+      nil,
       :id,
       :arn,
       :status,
@@ -4064,6 +4236,7 @@ module Aws::VPCLattice
     #   <p>The type of IAM policy.</p>
     #   @return [String]
     class UpdateServiceOutput < Struct.new(
+      nil,
       :id,
       :arn,
       :name,
@@ -4082,6 +4255,7 @@ module Aws::VPCLattice
     #   <p>The health check configuration.</p>
     #   @return [Types::HealthCheckConfig]
     class UpdateTargetGroupInput < Struct.new(
+      nil,
       :target_group_identifier,
       :health_check,
       keyword_init: true
@@ -4108,6 +4282,7 @@ module Aws::VPCLattice
     #   <p>The status.</p>
     #   @return [String]
     class UpdateTargetGroupOutput < Struct.new(
+      nil,
       :id,
       :arn,
       :name,
@@ -4129,6 +4304,7 @@ module Aws::VPCLattice
     #   <p>The fields that failed validation.</p>
     #   @return [Array<Types::ValidationExceptionField>]
     class ValidationException < Struct.new(
+      nil,
       :message,
       :reason,
       :field_list,
@@ -4145,6 +4321,7 @@ module Aws::VPCLattice
     #   <p>Additional information about why the validation failed.</p>
     #   @return [String]
     class ValidationExceptionField < Struct.new(
+      nil,
       :name,
       :message,
       keyword_init: true
@@ -4160,6 +4337,7 @@ module Aws::VPCLattice
     #   <p>Only required if you specify multiple target groups for a forward action. The weight determines how requests are distributed to the target group. For example, if you specify two target groups, each with a weight of 10, each target group receives half the requests. If you specify two target groups, one with a weight of 10 and the other with a weight of 20, the target group with a weight of 20 receives twice as many requests as the other target group. If there's only one target group specified, then the default value is 100.</p>
     #   @return [Integer]
     class WeightedTargetGroup < Struct.new(
+      nil,
       :target_group_identifier,
       :weight,
       keyword_init: true

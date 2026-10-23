@@ -44,6 +44,7 @@ module Aws::MediaConvert
     #   Specify the quality of your variable bitrate (VBR) AAC audio. For a list of approximate VBR bitrates, see: https://docs.aws.amazon.com/mediaconvert/latest/ug/aac-support.html#aac_vbr
     #   @return [String]
     class AacSettings < Struct.new(
+      nil,
       :audio_description_broadcaster_mix,
       :bitrate,
       :codec_profile,
@@ -93,6 +94,7 @@ module Aws::MediaConvert
     #   This value is always 48000. It represents the sample rate in Hz.
     #   @return [Integer]
     class Ac3Settings < Struct.new(
+      nil,
       :bitrate,
       :bitstream_mode,
       :coding_mode,
@@ -113,6 +115,7 @@ module Aws::MediaConvert
     #   Specify the conditions when the service will run your job with accelerated transcoding.
     #   @return [String]
     class AccelerationSettings < Struct.new(
+      nil,
       :mode,
       keyword_init: true
     )
@@ -127,6 +130,7 @@ module Aws::MediaConvert
     #   Optionally specify the amount of sharpening to apply when you use the Advanced input filter. Sharpening adds contrast to the edges of your video content and can reduce softness. To apply no sharpening: Keep the default value, Off. To apply a minimal amount of sharpening choose Low, or for the maximum choose High.
     #   @return [String]
     class AdvancedInputFilterSettings < Struct.new(
+      nil,
       :add_texture,
       :sharpening,
       keyword_init: true
@@ -145,6 +149,7 @@ module Aws::MediaConvert
     #   Sample rate in Hz.
     #   @return [Integer]
     class AiffSettings < Struct.new(
+      nil,
       :bit_depth,
       :channels,
       :sample_rate,
@@ -164,6 +169,7 @@ module Aws::MediaConvert
     #   Use Width to define the video resolution width, in pixels, for this rule.
     #   @return [Integer]
     class AllowedRenditionSize < Struct.new(
+      nil,
       :height,
       :required,
       :width,
@@ -183,6 +189,7 @@ module Aws::MediaConvert
     #   By default, the service terminates any unterminated captions at the end of each input. If you want the caption to continue onto your next input, disable this setting.
     #   @return [String]
     class AncillarySourceSettings < Struct.new(
+      nil,
       :convert608_to708,
       :source_ancillary_channel_number,
       :terminate_captions,
@@ -195,6 +202,7 @@ module Aws::MediaConvert
     #   The ARN of the ACM certificate that you want to associate with your MediaConvert resource.
     #   @return [String]
     class AssociateCertificateRequest < Struct.new(
+      nil,
       :arn,
       keyword_init: true
     )
@@ -202,6 +210,7 @@ module Aws::MediaConvert
     end
 
     class AssociateCertificateResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -215,6 +224,7 @@ module Aws::MediaConvert
     #   Specify the QuickTime audio channel layout tags for the audio channels in this audio track. Enter channel layout tags in the same order as your output's audio channel order. For example, if your output audio track has a left and a right channel, enter Left (L) for the first channel and Right (R) for the second. If your output has multiple single-channel audio tracks, enter a single channel layout tag for each track.
     #   @return [Array<String>]
     class AudioChannelTaggingSettings < Struct.new(
+      nil,
       :channel_tag,
       :channel_tags,
       keyword_init: true
@@ -260,6 +270,7 @@ module Aws::MediaConvert
     #   Required when you set Codec to the value WAV.
     #   @return [Types::WavSettings]
     class AudioCodecSettings < Struct.new(
+      nil,
       :aac_settings,
       :ac3_settings,
       :aiff_settings,
@@ -312,6 +323,7 @@ module Aws::MediaConvert
     #   Specify a label for this output audio stream. For example, "English", "Director commentary", or "track_2". For streaming outputs, MediaConvert passes this information into destination manifests for display on the end-viewer's player device. For outputs in other output groups, the service ignores this setting.
     #   @return [String]
     class AudioDescription < Struct.new(
+      nil,
       :audio_channel_tagging_settings,
       :audio_normalization_settings,
       :audio_source_name,
@@ -351,6 +363,7 @@ module Aws::MediaConvert
     #   Specify the True-peak limiter threshold in decibels relative to full scale (dBFS). The peak inter-audio sample loudness in your output will be limited to the value that you specify, without affecting the overall target LKFS. Enter a value from 0 to -8. Leave blank to use the default value 0.
     #   @return [Float]
     class AudioNormalizationSettings < Struct.new(
+      nil,
       :algorithm,
       :algorithm_control,
       :correction_gate_level,
@@ -383,6 +396,7 @@ module Aws::MediaConvert
     #   The sample rate of the audio track.
     #   @return [Integer]
     class AudioProperties < Struct.new(
+      nil,
       :bit_depth,
       :bit_rate,
       :channels,
@@ -434,6 +448,7 @@ module Aws::MediaConvert
     #   Identify a track from the input audio to include in this selector by entering the track index number. To include several tracks in a single audio selector, specify multiple tracks as follows. Using the console, enter a comma-separated list. For example, type "1,2,3" to include tracks 1 through 3.
     #   @return [Array<Integer>]
     class AudioSelector < Struct.new(
+      nil,
       :audio_duration_correction,
       :custom_language_code,
       :default_selection,
@@ -456,6 +471,7 @@ module Aws::MediaConvert
     #   Name of an Audio Selector within the same input to include in the group. Audio selector names are standardized, based on their order within the input (e.g., "Audio Selector 1"). The audio selector name parameter can be repeated to add any number of audio selectors to the group.
     #   @return [Array<String>]
     class AudioSelectorGroup < Struct.new(
+      nil,
       :audio_selector_names,
       keyword_init: true
     )
@@ -479,6 +495,7 @@ module Aws::MediaConvert
     #   Use Min top rendition size to specify a minimum size for the highest resolution in your ABR stack. * The highest resolution in your ABR stack will be equal to or greater than the value that you enter. For example: If you specify 1280x720 the highest resolution in your ABR stack will be equal to or greater than 1280x720. * If you specify a value for Max resolution, the value that you specify for Min top rendition size must be less than, or equal to, Max resolution. Use Min bottom rendition size to specify a minimum size for the lowest resolution in your ABR stack. * The lowest resolution in your ABR stack will be equal to or greater than the value that you enter. For example: If you specify 640x360 the lowest resolution in your ABR stack will be equal to or greater than to 640x360. * If you specify a Min top rendition size rule, the value that you specify for Min bottom rendition size must be less than, or equal to, Min top rendition size. Use Force include renditions to specify one or more resolutions to include your ABR stack. * (Recommended) To optimize automated ABR, specify as few resolutions as possible. * (Required) The number of resolutions that you specify must be equal to, or less than, the Max renditions setting. * If you specify a Min top rendition size rule, specify at least one resolution that is equal to, or greater than, Min top rendition size. * If you specify a Min bottom rendition size rule, only specify resolutions that are equal to, or greater than, Min bottom rendition size. * If you specify a Force include renditions rule, do not specify a separate rule for Allowed renditions. * Note: The ABR stack may include other resolutions that you do not specify here, depending on the Max renditions setting. Use Allowed renditions to specify a list of possible resolutions in your ABR stack. * (Required) The number of resolutions that you specify must be equal to, or greater than, the Max renditions setting. * MediaConvert will create an ABR stack exclusively from the list of resolutions that you specify. * Some resolutions in the Allowed renditions list may not be included, however you can force a resolution to be included by setting Required to ENABLED. * You must specify at least one resolution that is greater than or equal to any resolutions that you specify in Min top rendition size or Min bottom rendition size. * If you specify Allowed renditions, you must not specify a separate rule for Force include renditions.
     #   @return [String]
     class AutomatedAbrRule < Struct.new(
+      nil,
       :allowed_renditions,
       :force_include_renditions,
       :min_bottom_rendition_size,
@@ -506,6 +523,7 @@ module Aws::MediaConvert
     #   Optional. Use Automated ABR rules to specify restrictions for the rendition sizes MediaConvert will create in your ABR stack. You can use these rules if your ABR workflow has specific rendition size requirements, but you still want MediaConvert to optimize for video quality and overall file size.
     #   @return [Array<Types::AutomatedAbrRule>]
     class AutomatedAbrSettings < Struct.new(
+      nil,
       :max_abr_bitrate,
       :max_quality_level,
       :max_renditions,
@@ -521,6 +539,7 @@ module Aws::MediaConvert
     #   Use automated ABR to have MediaConvert set up the renditions in your ABR package for you automatically, based on characteristics of your input video. This feature optimizes video quality while minimizing the overall size of your ABR package.
     #   @return [Types::AutomatedAbrSettings]
     class AutomatedEncodingSettings < Struct.new(
+      nil,
       :abr_settings,
       keyword_init: true
     )
@@ -535,6 +554,7 @@ module Aws::MediaConvert
     #   Optional. Specify a value here to set the QVBR quality to a level that is between whole numbers. For example, if you want your QVBR quality level to be 7.33, set qvbrQualityLevel to 7 and set qvbrQualityLevelFineTune to .33. MediaConvert rounds your QVBR quality level to the nearest third of a whole number. For example, if you set qvbrQualityLevel to 7 and you set qvbrQualityLevelFineTune to .25, your actual QVBR quality level is 7.33.
     #   @return [Float]
     class Av1QvbrSettings < Struct.new(
+      nil,
       :qvbr_quality_level,
       :qvbr_quality_level_fine_tune,
       keyword_init: true
@@ -589,6 +609,7 @@ module Aws::MediaConvert
     #   Keep the default value, Enabled, to adjust quantization within each frame based on spatial variation of content complexity. When you enable this feature, the encoder uses fewer bits on areas that can sustain more distortion with no noticeable visual degradation and uses more bits on areas where any small distortion will be noticeable. For example, complex textured blocks are encoded with fewer bits and smooth textured blocks are encoded with more bits. Enabling this feature will almost always improve your video quality. Note, though, that this feature doesn't take into account where the viewer's attention is likely to be. If viewers are likely to be focusing their attention on a part of the screen with a lot of complex texture, you might choose to disable this feature. Related setting: When you enable spatial adaptive quantization, set the value for Adaptive quantization depending on your content. For homogeneous content, such as cartoons and video games, set it to Low. For content with a wider variety of textures, set it to High or Higher.
     #   @return [String]
     class Av1Settings < Struct.new(
+      nil,
       :adaptive_quantization,
       :bit_depth,
       :film_grain_synthesis,
@@ -614,6 +635,7 @@ module Aws::MediaConvert
     #   Blanking image to be used. Leave empty for solid black. Only bmp and png images are supported.
     #   @return [String]
     class AvailBlanking < Struct.new(
+      nil,
       :avail_blanking_image,
       keyword_init: true
     )
@@ -655,6 +677,7 @@ module Aws::MediaConvert
     #   When you do frame rate conversion from 23.976 frames per second (fps) to 29.97 fps, and your output scan type is interlaced, you can optionally enable hard telecine to create a smoother picture. When you keep the default value, None, MediaConvert does a standard frame rate conversion to 29.97 without doing anything with the field polarity to create a smoother picture.
     #   @return [String]
     class AvcIntraSettings < Struct.new(
+      nil,
       :avc_intra_class,
       :avc_intra_uhd_settings,
       :framerate_control,
@@ -676,6 +699,7 @@ module Aws::MediaConvert
     #   Optional. Use Quality tuning level to choose how many transcoding passes MediaConvert does with your video. When you choose Multi-pass, your video quality is better and your output bitrate is more accurate. That is, the actual bitrate of your output is closer to the target bitrate defined in the specification. When you choose Single-pass, your encoding time is faster. The default behavior is Single-pass.
     #   @return [String]
     class AvcIntraUhdSettings < Struct.new(
+      nil,
       :quality_tuning_level,
       keyword_init: true
     )
@@ -686,6 +710,7 @@ module Aws::MediaConvert
     # @!attribute message
     #   @return [String]
     class BadRequestException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -700,6 +725,7 @@ module Aws::MediaConvert
     #   Specify the strength of the Bandwidth reduction filter. For most workflows, we recommend that you choose Auto to reduce the bandwidth of your output with little to no perceptual decrease in video quality. For high quality and high bitrate outputs, choose Low. For the most bandwidth reduction, choose High. We recommend that you choose High for low bitrate outputs. Note that High may incur a slight increase in the softness of your output.
     #   @return [String]
     class BandwidthReductionFilter < Struct.new(
+      nil,
       :sharpening,
       :strength,
       keyword_init: true
@@ -789,6 +815,7 @@ module Aws::MediaConvert
     #   Specify the vertical position of the captions, relative to the top of the output in pixels. A value of 10 would result in the captions starting 10 pixels from the top of the output. If no explicit y_position is provided, the caption will be positioned towards the bottom of the output.
     #   @return [Integer]
     class BurninDestinationSettings < Struct.new(
+      nil,
       :alignment,
       :apply_font_color,
       :background_color,
@@ -824,6 +851,7 @@ module Aws::MediaConvert
     #   The Job ID of the job to be cancelled.
     #   @return [String]
     class CancelJobRequest < Struct.new(
+      nil,
       :id,
       keyword_init: true
     )
@@ -831,6 +859,7 @@ module Aws::MediaConvert
     end
 
     class CancelJobResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -853,6 +882,7 @@ module Aws::MediaConvert
     #   Specify a label for this set of output captions. For example, "English", "Director commentary", or "track_2". For streaming outputs, MediaConvert passes this information into destination manifests for display on the end-viewer's player device. For outputs in other output groups, the service ignores this setting.
     #   @return [String]
     class CaptionDescription < Struct.new(
+      nil,
       :caption_selector_name,
       :custom_language_code,
       :destination_settings,
@@ -877,6 +907,7 @@ module Aws::MediaConvert
     #   Specify a label for this set of output captions. For example, "English", "Director commentary", or "track_2". For streaming outputs, MediaConvert passes this information into destination manifests for display on the end-viewer's player device. For outputs in other output groups, the service ignores this setting.
     #   @return [String]
     class CaptionDescriptionPreset < Struct.new(
+      nil,
       :custom_language_code,
       :destination_settings,
       :language_code,
@@ -918,6 +949,7 @@ module Aws::MediaConvert
     #   Settings related to WebVTT captions. WebVTT is a sidecar format that holds captions in a file that is separate from the video container. Set up sidecar captions in the same output group, but different output from your video. For more information, see https://docs.aws.amazon.com/mediaconvert/latest/ug/ttml-and-webvtt-output-captions.html.
     #   @return [Types::WebvttDestinationSettings]
     class CaptionDestinationSettings < Struct.new(
+      nil,
       :burnin_destination_settings,
       :destination_type,
       :dvb_sub_destination_settings,
@@ -944,6 +976,7 @@ module Aws::MediaConvert
     #   If your input captions are SCC, TTML, STL, SMI, SRT, or IMSC in an xml file, specify the URI of the input captions source file. If your input captions are IMSC in an IMF package, use TrackSourceSettings instead of FileSoureSettings.
     #   @return [Types::CaptionSourceSettings]
     class CaptionSelector < Struct.new(
+      nil,
       :custom_language_code,
       :language_code,
       :source_settings,
@@ -960,6 +993,7 @@ module Aws::MediaConvert
     #   Specify the numerator of the fraction that represents the frame rate for the setting Caption source frame rate. Use this setting along with the setting Framerate denominator.
     #   @return [Integer]
     class CaptionSourceFramerate < Struct.new(
+      nil,
       :framerate_denominator,
       :framerate_numerator,
       keyword_init: true
@@ -993,6 +1027,7 @@ module Aws::MediaConvert
     #   Settings specific to WebVTT sources in HLS alternative rendition group. Specify the properties (renditionGroupId, renditionName or renditionLanguageCode) to identify the unique subtitle track among the alternative rendition groups present in the HLS manifest. If no unique track is found, or multiple tracks match the specified properties, the job fails. If there is only one subtitle track in the rendition group, the settings can be left empty and the default subtitle track will be chosen. If your caption source is a sidecar file, use FileSourceSettings instead of WebvttHlsSourceSettings.
     #   @return [Types::WebvttHlsSourceSettings]
     class CaptionSourceSettings < Struct.new(
+      nil,
       :ancillary_source_settings,
       :dvb_sub_source_settings,
       :embedded_source_settings,
@@ -1011,6 +1046,7 @@ module Aws::MediaConvert
     #   In your JSON job specification, include one child of OutputChannels for each audio channel that you want in your output. Each child should contain one instance of InputChannels or InputChannelsFineTune.
     #   @return [Array<Types::OutputChannelMapping>]
     class ChannelMapping < Struct.new(
+      nil,
       :output_channels,
       keyword_init: true
     )
@@ -1031,6 +1067,7 @@ module Aws::MediaConvert
     #   Specify the Minimum YUV color sample limit. MediaConvert conforms any pixels in your input below the value that you specify to typical limited range bounds. Enter an integer from 0 to 128. Leave blank to use the default value 64. The value that you enter applies to 10-bit ranges. For 8-bit ranges, MediaConvert automatically scales this value down. When you specify a value for Minumum YUV, you must set Sample range conversion to Limited range clip.
     #   @return [Integer]
     class ClipLimits < Struct.new(
+      nil,
       :maximum_rgb_tolerance,
       :maximum_yuv,
       :minimum_rgb_tolerance,
@@ -1048,6 +1085,7 @@ module Aws::MediaConvert
     #   Specify the outputs that you want this additional top-level manifest to reference.
     #   @return [Array<String>]
     class CmafAdditionalManifest < Struct.new(
+      nil,
       :manifest_name_modifier,
       :selected_outputs,
       keyword_init: true
@@ -1075,6 +1113,7 @@ module Aws::MediaConvert
     #   Specify whether your DRM encryption key is static or from a key provider that follows the SPEKE standard. For more information about SPEKE, see https://docs.aws.amazon.com/speke/latest/documentation/what-is-speke.html.
     #   @return [String]
     class CmafEncryptionSettings < Struct.new(
+      nil,
       :constant_initialization_vector,
       :encryption_method,
       :initialization_vector_in_manifest,
@@ -1172,6 +1211,7 @@ module Aws::MediaConvert
     #   When you enable Precise segment duration in DASH manifests, your DASH manifest shows precise segment durations. The segment duration information appears inside the SegmentTimeline element, inside SegmentTemplate at the Representation level. When this feature isn't enabled, the segment durations in your DASH manifest are approximate. The segment duration information appears in the duration attribute of the SegmentTemplate element.
     #   @return [String]
     class CmafGroupSettings < Struct.new(
+      nil,
       :additional_manifests,
       :base_url,
       :client_cache,
@@ -1225,6 +1265,7 @@ module Aws::MediaConvert
     #   Number of thumbnails in each row of a tile image. Set a value between 1 and 512.
     #   @return [Integer]
     class CmafImageBasedTrickPlaySettings < Struct.new(
+      nil,
       :interval_cadence,
       :thumbnail_height,
       :thumbnail_interval,
@@ -1283,6 +1324,7 @@ module Aws::MediaConvert
     #   Specify the event message box (eMSG) value for ID3 timed metadata in your output. For more information, see ISO/IEC 23009-1:2022 section 5.10.3.3.4 Semantics. When you specify a value for ID3 Metadata Value, you must also set ID3 metadata to Passthrough.
     #   @return [String]
     class CmfcSettings < Struct.new(
+      nil,
       :audio_duration,
       :audio_group_id,
       :audio_rendition_sets,
@@ -1319,6 +1361,7 @@ module Aws::MediaConvert
     #   Specify which outputs use this 3D LUT, according to their luminance. To apply this 3D LUT to HDR10 or P3D65 (HDR) outputs with a specific luminance: Enter an integer from 0 to 2147483647, corresponding to the output's luminance. To apply this 3D LUT to any output regardless of its luminance: Leave blank, or enter 0.
     #   @return [Integer]
     class ColorConversion3DLUTSetting < Struct.new(
+      nil,
       :file_input,
       :input_color_space,
       :input_mastering_luminance,
@@ -1369,6 +1412,7 @@ module Aws::MediaConvert
     #   Specify the reference white level, in nits, for all of your SDR inputs. Use to correct brightness levels within HDR10 outputs. The following color metadata must be present in your SDR input: color primaries, transfer characteristics, and matrix coefficients. If your SDR input has missing color metadata, or if you want to correct input color metadata, manually specify a color space in the input video selector. For 1,000 nit peak brightness displays, we recommend that you set SDR reference white level to 203 (according to ITU-R BT.2408). Leave blank to use the default value of 100, or specify an integer from 100 to 1000.
     #   @return [Integer]
     class ColorCorrector < Struct.new(
+      nil,
       :brightness,
       :clip_limits,
       :color_space_conversion,
@@ -1389,6 +1433,7 @@ module Aws::MediaConvert
     # @!attribute message
     #   @return [String]
     class ConflictException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -1406,6 +1451,7 @@ module Aws::MediaConvert
     #   Details about each track (video, audio, or data) in the media file.
     #   @return [Array<Types::Track>]
     class Container < Struct.new(
+      nil,
       :duration,
       :format,
       :tracks,
@@ -1443,6 +1489,7 @@ module Aws::MediaConvert
     #   These settings relate to your MXF output container.
     #   @return [Types::MxfSettings]
     class ContainerSettings < Struct.new(
+      nil,
       :cmfc_settings,
       :container,
       :f4v_settings,
@@ -1500,6 +1547,7 @@ module Aws::MediaConvert
     #   Optional. User-defined metadata that you want to associate with an MediaConvert job. You specify metadata in key/value pairs.  Use only for existing integrations or workflows that rely on job metadata tags. Otherwise, we recommend that you use standard AWS tags.
     #   @return [Hash<String, String>]
     class CreateJobRequest < Struct.new(
+      nil,
       :acceleration_settings,
       :billing_tags_source,
       :client_request_token,
@@ -1523,6 +1571,7 @@ module Aws::MediaConvert
     #   Each job converts an input file into an output file or files. For more information, see the User Guide at https://docs.aws.amazon.com/mediaconvert/latest/ug/what-is.html
     #   @return [Types::Job]
     class CreateJobResponse < Struct.new(
+      nil,
       :job,
       keyword_init: true
     )
@@ -1560,6 +1609,7 @@ module Aws::MediaConvert
     #   The tags that you want to add to the resource. You can tag resources with a key-value pair or with only a key.
     #   @return [Hash<String, String>]
     class CreateJobTemplateRequest < Struct.new(
+      nil,
       :acceleration_settings,
       :category,
       :description,
@@ -1579,6 +1629,7 @@ module Aws::MediaConvert
     #   A job template is a pre-made set of encoding instructions that you can use to quickly create a job.
     #   @return [Types::JobTemplate]
     class CreateJobTemplateResponse < Struct.new(
+      nil,
       :job_template,
       keyword_init: true
     )
@@ -1601,6 +1652,7 @@ module Aws::MediaConvert
     #   The tags that you want to add to the resource. You can tag resources with a key-value pair or with only a key.
     #   @return [Hash<String, String>]
     class CreatePresetRequest < Struct.new(
+      nil,
       :category,
       :description,
       :name,
@@ -1615,6 +1667,7 @@ module Aws::MediaConvert
     #   A preset is a collection of preconfigured media conversion settings that you want MediaConvert to apply to the output during the conversion process.
     #   @return [Types::Preset]
     class CreatePresetResponse < Struct.new(
+      nil,
       :preset,
       keyword_init: true
     )
@@ -1643,6 +1696,7 @@ module Aws::MediaConvert
     #   The tags that you want to add to the resource. You can tag resources with a key-value pair or with only a key.
     #   @return [Hash<String, String>]
     class CreateQueueRequest < Struct.new(
+      nil,
       :concurrent_jobs,
       :description,
       :name,
@@ -1659,6 +1713,7 @@ module Aws::MediaConvert
     #   You can use queues to manage the resources that are available to your AWS account for running multiple transcoding jobs at the same time. If you don't specify a queue, the service sends all jobs through the default queue. For more information, see https://docs.aws.amazon.com/mediaconvert/latest/ug/working-with-queues.html.
     #   @return [Types::Queue]
     class CreateQueueResponse < Struct.new(
+      nil,
       :queue,
       keyword_init: true
     )
@@ -1672,6 +1727,7 @@ module Aws::MediaConvert
     #   AWS Support case identifier
     #   @return [String]
     class CreateResourceShareRequest < Struct.new(
+      nil,
       :job_id,
       :support_case_id,
       keyword_init: true
@@ -1680,6 +1736,7 @@ module Aws::MediaConvert
     end
 
     class CreateResourceShareResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1693,6 +1750,7 @@ module Aws::MediaConvert
     #   Specify the outputs that you want this additional top-level manifest to reference.
     #   @return [Array<String>]
     class DashAdditionalManifest < Struct.new(
+      nil,
       :manifest_name_modifier,
       :selected_outputs,
       keyword_init: true
@@ -1708,6 +1766,7 @@ module Aws::MediaConvert
     #   If your output group type is HLS, DASH, or Microsoft Smooth, use these settings when doing DRM encryption with a SPEKE-compliant key provider. If your output group type is CMAF, use the SpekeKeyProviderCmaf settings instead.
     #   @return [Types::SpekeKeyProvider]
     class DashIsoEncryptionSettings < Struct.new(
+      nil,
       :playback_device_compatibility,
       :speke_key_provider,
       keyword_init: true
@@ -1783,6 +1842,7 @@ module Aws::MediaConvert
     #   If you get an HTTP error in the 400 range when you play back your DASH output, enable this setting and run your transcoding job again. When you enable this setting, the service writes precise segment durations in the DASH manifest. The segment duration information appears inside the SegmentTimeline element, inside SegmentTemplate at the Representation level. When you don't enable this setting, the service writes approximate segment durations in your DASH manifest.
     #   @return [String]
     class DashIsoGroupSettings < Struct.new(
+      nil,
       :additional_manifests,
       :audio_channel_config_scheme_id_uri,
       :base_url,
@@ -1830,6 +1890,7 @@ module Aws::MediaConvert
     #   Number of thumbnails in each row of a tile image. Set a value between 1 and 512.
     #   @return [Integer]
     class DashIsoImageBasedTrickPlaySettings < Struct.new(
+      nil,
       :interval_cadence,
       :thumbnail_height,
       :thumbnail_interval,
@@ -1846,6 +1907,7 @@ module Aws::MediaConvert
     #   The language code of the data track, in three character ISO 639-3 format.
     #   @return [String]
     class DataProperties < Struct.new(
+      nil,
       :language_code,
       keyword_init: true
     )
@@ -1866,6 +1928,7 @@ module Aws::MediaConvert
     #   - Adaptive auto-detects and converts to progressive.
     #   @return [String]
     class Deinterlacer < Struct.new(
+      nil,
       :algorithm,
       :control,
       :mode,
@@ -1878,6 +1941,7 @@ module Aws::MediaConvert
     #   The name of the job template to be deleted.
     #   @return [String]
     class DeleteJobTemplateRequest < Struct.new(
+      nil,
       :name,
       keyword_init: true
     )
@@ -1885,18 +1949,21 @@ module Aws::MediaConvert
     end
 
     class DeleteJobTemplateResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
     end
 
     class DeletePolicyRequest < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
     end
 
     class DeletePolicyResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1906,6 +1973,7 @@ module Aws::MediaConvert
     #   The name of the preset to be deleted.
     #   @return [String]
     class DeletePresetRequest < Struct.new(
+      nil,
       :name,
       keyword_init: true
     )
@@ -1913,6 +1981,7 @@ module Aws::MediaConvert
     end
 
     class DeletePresetResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1922,6 +1991,7 @@ module Aws::MediaConvert
     #   The name of the queue that you want to delete.
     #   @return [String]
     class DeleteQueueRequest < Struct.new(
+      nil,
       :name,
       keyword_init: true
     )
@@ -1929,6 +1999,7 @@ module Aws::MediaConvert
     end
 
     class DeleteQueueResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1946,6 +2017,7 @@ module Aws::MediaConvert
     #   Use this string, provided with the response to a previous request, to request the next batch of endpoints.
     #   @return [String]
     class DescribeEndpointsRequest < Struct.new(
+      nil,
       :max_results,
       :mode,
       :next_token,
@@ -1963,6 +2035,7 @@ module Aws::MediaConvert
     #   Use this string to request the next batch of endpoints.
     #   @return [String]
     class DescribeEndpointsResponse < Struct.new(
+      nil,
       :endpoints,
       :next_token,
       keyword_init: true
@@ -1975,6 +2048,7 @@ module Aws::MediaConvert
     #   Settings associated with S3 destination
     #   @return [Types::S3DestinationSettings]
     class DestinationSettings < Struct.new(
+      nil,
       :s3_settings,
       keyword_init: true
     )
@@ -1985,6 +2059,7 @@ module Aws::MediaConvert
     #   The ARN of the ACM certificate that you want to disassociate from your MediaConvert resource.
     #   @return [String]
     class DisassociateCertificateRequest < Struct.new(
+      nil,
       :arn,
       keyword_init: true
     )
@@ -1992,6 +2067,7 @@ module Aws::MediaConvert
     end
 
     class DisassociateCertificateResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -2011,6 +2087,7 @@ module Aws::MediaConvert
     #   Required when you enable Dolby Vision. Use Profile 5 to include frame-interleaved Dolby Vision metadata in your output. Your input must include Dolby Vision metadata or an HDR10 YUV color space. Use Profile 8.1 to include frame-interleaved Dolby Vision metadata and HDR10 metadata in your output. Your input must include Dolby Vision metadata.
     #   @return [String]
     class DolbyVision < Struct.new(
+      nil,
       :l6_metadata,
       :l6_mode,
       :mapping,
@@ -2028,6 +2105,7 @@ module Aws::MediaConvert
     #   Maximum Frame-Average Light Level. Static HDR metadata that corresponds to the highest frame-average brightness in the entire stream. Measured in nits.
     #   @return [Integer]
     class DolbyVisionLevel6Metadata < Struct.new(
+      nil,
       :max_cll,
       :max_fall,
       keyword_init: true
@@ -2046,6 +2124,7 @@ module Aws::MediaConvert
     #   The number of milliseconds between instances of this table in the output transport stream.
     #   @return [Integer]
     class DvbNitSettings < Struct.new(
+      nil,
       :network_id,
       :network_name,
       :nit_interval,
@@ -2068,6 +2147,7 @@ module Aws::MediaConvert
     #   The service provider name placed in the service_descriptor in the Service Description Table. Maximum length is 256 characters.
     #   @return [String]
     class DvbSdtSettings < Struct.new(
+      nil,
       :output_sdt,
       :sdt_interval,
       :service_name,
@@ -2176,6 +2256,7 @@ module Aws::MediaConvert
     #   Specify the vertical position of the captions, relative to the top of the output in pixels. A value of 10 would result in the captions starting 10 pixels from the top of the output. If no explicit y_position is provided, the caption will be positioned towards the bottom of the output. Within your job settings, all of your DVB-Sub settings must be identical.
     #   @return [Integer]
     class DvbSubDestinationSettings < Struct.new(
+      nil,
       :alignment,
       :apply_font_color,
       :background_color,
@@ -2217,6 +2298,7 @@ module Aws::MediaConvert
     #   When using DVB-Sub with Burn-in, use this PID for the source content. Unused for DVB-Sub passthrough. All DVB-Sub content is passed through, regardless of selectors.
     #   @return [Integer]
     class DvbSubSourceSettings < Struct.new(
+      nil,
       :pid,
       keyword_init: true
     )
@@ -2228,6 +2310,7 @@ module Aws::MediaConvert
     #   The number of milliseconds between instances of this table in the output transport stream.
     #   @return [Integer]
     class DvbTdtSettings < Struct.new(
+      nil,
       :tdt_interval,
       keyword_init: true
     )
@@ -2253,6 +2336,7 @@ module Aws::MediaConvert
     #   Specify which audio tracks to dynamically select from your source. To select all audio tracks: Keep the default value, All tracks. To select all audio tracks with a specific language code: Choose Language code. When you do, you must also specify a language code under the Language code setting. If there is no matching Language code in your source, then no track will be selected.
     #   @return [String]
     class DynamicAudioSelector < Struct.new(
+      nil,
       :audio_duration_correction,
       :external_audio_file_input,
       :language_code,
@@ -2316,6 +2400,7 @@ module Aws::MediaConvert
     #   Specify whether your input audio has an additional center rear surround channel matrix encoded into your left and right surround channels.
     #   @return [String]
     class Eac3AtmosSettings < Struct.new(
+      nil,
       :bitrate,
       :bitstream_mode,
       :coding_mode,
@@ -2403,6 +2488,7 @@ module Aws::MediaConvert
     #   When encoding 2/0 audio, sets whether Dolby Surround is matrix encoded into the two channels.
     #   @return [String]
     class Eac3Settings < Struct.new(
+      nil,
       :attenuation_control,
       :bitrate,
       :bitstream_mode,
@@ -2437,6 +2523,7 @@ module Aws::MediaConvert
     #   Ignore this setting unless your input captions are SCC format and you want both 608 and 708 captions embedded in your output stream. Optionally, specify the 708 service number for each output captions channel. Choose a different number for each channel. To use this setting, also set Force 608 to 708 upconvert to Upconvert in your input captions selector settings. If you choose to upconvert but don't specify a 708 service number, MediaConvert uses the number that you specify for CC channel number for the 708 service number. For more information, see https://docs.aws.amazon.com/console/mediaconvert/dual-scc-to-embedded.
     #   @return [Integer]
     class EmbeddedDestinationSettings < Struct.new(
+      nil,
       :destination608_channel_number,
       :destination708_service_number,
       keyword_init: true
@@ -2458,6 +2545,7 @@ module Aws::MediaConvert
     #   By default, the service terminates any unterminated captions at the end of each input. If you want the caption to continue onto your next input, disable this setting.
     #   @return [String]
     class EmbeddedSourceSettings < Struct.new(
+      nil,
       :convert608_to708,
       :source608_channel_number,
       :source608_track_number,
@@ -2475,6 +2563,7 @@ module Aws::MediaConvert
     #   Specify which SPEKE version 2.0 video preset MediaConvert uses to request content keys from your SPEKE server. For more information, see: https://docs.aws.amazon.com/mediaconvert/latest/ug/drm-content-speke-v2-presets.html To encrypt to your video outputs, choose from the following: Video preset 1, Video preset 2, Video preset 3, Video preset 4, Video preset 5, Video preset 6, Video preset 7, or Video preset 8. To encrypt your video outputs, using the same content key for both your video and audio outputs: Choose Shared. When you do, you must also set SPEKE v2.0 audio preset to Shared. To not encrypt your video outputs: Choose Unencrypted. When you do, to encrypt your audio outputs, you must also specify a SPEKE v2.0 audio preset (other than Shared or Unencrypted).
     #   @return [String]
     class EncryptionContractConfiguration < Struct.new(
+      nil,
       :speke_audio_preset,
       :speke_video_preset,
       keyword_init: true
@@ -2487,6 +2576,7 @@ module Aws::MediaConvert
     #   URL of endpoint
     #   @return [String]
     class Endpoint < Struct.new(
+      nil,
       :url,
       keyword_init: true
     )
@@ -2498,6 +2588,7 @@ module Aws::MediaConvert
     #   Provide your ESAM ManifestConfirmConditionNotification XML document inside your JSON job settings. Form the XML document as per OC-SP-ESAM-API-I03-131025. The transcoder will use the Manifest Conditioning instructions in the message that you supply.
     #   @return [String]
     class EsamManifestConfirmConditionNotification < Struct.new(
+      nil,
       :mcc_xml,
       keyword_init: true
     )
@@ -2515,6 +2606,7 @@ module Aws::MediaConvert
     #   Specifies an ESAM SignalProcessingNotification XML as per OC-SP-ESAM-API-I03-131025. The transcoder uses the signal processing instructions that you provide in the setting SCC XML.
     #   @return [Types::EsamSignalProcessingNotification]
     class EsamSettings < Struct.new(
+      nil,
       :manifest_confirm_condition_notification,
       :response_signal_preroll,
       :signal_processing_notification,
@@ -2528,6 +2620,7 @@ module Aws::MediaConvert
     #   Provide your ESAM SignalProcessingNotification XML document inside your JSON job settings. Form the XML document as per OC-SP-ESAM-API-I03-131025. The transcoder will use the signal processing instructions in the message that you supply. For your MPEG2-TS file outputs, if you want the service to place SCTE-35 markers at the insertion points you specify in the XML document, you must also enable SCTE-35 ESAM. Note that you can either specify an ESAM XML document or enable SCTE-35 passthrough. You can't do both.
     #   @return [String]
     class EsamSignalProcessingNotification < Struct.new(
+      nil,
       :scc_xml,
       keyword_init: true
     )
@@ -2542,6 +2635,7 @@ module Aws::MediaConvert
     #   The action to take on content advisory XDS packets. If you select PASSTHROUGH, packets will not be changed. If you select STRIP, any packets will be removed in output captions.
     #   @return [String]
     class ExtendedDataServices < Struct.new(
+      nil,
       :copy_protection_action,
       :vchip_action,
       keyword_init: true
@@ -2554,6 +2648,7 @@ module Aws::MediaConvert
     #   To place the MOOV atom at the beginning of your output, which is useful for progressive downloading: Leave blank or choose Progressive download. To place the MOOV at the end of your output: Choose Normal.
     #   @return [String]
     class F4vSettings < Struct.new(
+      nil,
       :moov_placement,
       keyword_init: true
     )
@@ -2568,6 +2663,7 @@ module Aws::MediaConvert
     #   Settings associated with the destination. Will vary based on the type of destination
     #   @return [Types::DestinationSettings]
     class FileGroupSettings < Struct.new(
+      nil,
       :destination,
       :destination_settings,
       keyword_init: true
@@ -2601,6 +2697,7 @@ module Aws::MediaConvert
     #   Specify whether this set of input captions appears in your outputs in both STL and Teletext format. If you choose Upconvert, MediaConvert includes the captions data in two ways: it passes the STL data through using the Teletext compatibility bytes fields of the Teletext wrapper, and it also translates the STL data into Teletext.
     #   @return [String]
     class FileSourceSettings < Struct.new(
+      nil,
       :byte_rate_limit,
       :convert608_to708,
       :convert_paint_to_pop,
@@ -2625,6 +2722,7 @@ module Aws::MediaConvert
     #   Sample rate in Hz.
     #   @return [Integer]
     class FlacSettings < Struct.new(
+      nil,
       :bit_depth,
       :channels,
       :sample_rate,
@@ -2637,6 +2735,7 @@ module Aws::MediaConvert
     # @!attribute message
     #   @return [String]
     class ForbiddenException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -2651,6 +2750,7 @@ module Aws::MediaConvert
     #   Use Width to define the video resolution width, in pixels, for this rule.
     #   @return [Integer]
     class ForceIncludeRenditionSize < Struct.new(
+      nil,
       :height,
       :width,
       keyword_init: true
@@ -2672,6 +2772,7 @@ module Aws::MediaConvert
     #   JPEG Quality - a higher value equals higher quality.
     #   @return [Integer]
     class FrameCaptureSettings < Struct.new(
+      nil,
       :framerate_denominator,
       :framerate_numerator,
       :max_captures,
@@ -2689,6 +2790,7 @@ module Aws::MediaConvert
     #   The numerator, or top number, in the fractional frame rate. For example, if your frame rate is 24000 / 1001 (23.976 frames per second), then the numerator would be 24000.
     #   @return [Integer]
     class FrameRate < Struct.new(
+      nil,
       :denominator,
       :numerator,
       keyword_init: true
@@ -2700,6 +2802,7 @@ module Aws::MediaConvert
     #   the job ID of the job.
     #   @return [String]
     class GetJobRequest < Struct.new(
+      nil,
       :id,
       keyword_init: true
     )
@@ -2710,6 +2813,7 @@ module Aws::MediaConvert
     #   Each job converts an input file into an output file or files. For more information, see the User Guide at https://docs.aws.amazon.com/mediaconvert/latest/ug/what-is.html
     #   @return [Types::Job]
     class GetJobResponse < Struct.new(
+      nil,
       :job,
       keyword_init: true
     )
@@ -2720,6 +2824,7 @@ module Aws::MediaConvert
     #   The name of the job template.
     #   @return [String]
     class GetJobTemplateRequest < Struct.new(
+      nil,
       :name,
       keyword_init: true
     )
@@ -2730,6 +2835,7 @@ module Aws::MediaConvert
     #   A job template is a pre-made set of encoding instructions that you can use to quickly create a job.
     #   @return [Types::JobTemplate]
     class GetJobTemplateResponse < Struct.new(
+      nil,
       :job_template,
       keyword_init: true
     )
@@ -2737,6 +2843,7 @@ module Aws::MediaConvert
     end
 
     class GetPolicyRequest < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -2746,6 +2853,7 @@ module Aws::MediaConvert
     #   A policy configures behavior that you allow or disallow for your account. For information about MediaConvert policies, see the user guide at http://docs.aws.amazon.com/mediaconvert/latest/ug/what-is.html
     #   @return [Types::Policy]
     class GetPolicyResponse < Struct.new(
+      nil,
       :policy,
       keyword_init: true
     )
@@ -2756,6 +2864,7 @@ module Aws::MediaConvert
     #   The name of the preset.
     #   @return [String]
     class GetPresetRequest < Struct.new(
+      nil,
       :name,
       keyword_init: true
     )
@@ -2766,6 +2875,7 @@ module Aws::MediaConvert
     #   A preset is a collection of preconfigured media conversion settings that you want MediaConvert to apply to the output during the conversion process.
     #   @return [Types::Preset]
     class GetPresetResponse < Struct.new(
+      nil,
       :preset,
       keyword_init: true
     )
@@ -2776,6 +2886,7 @@ module Aws::MediaConvert
     #   The name of the queue that you want information about.
     #   @return [String]
     class GetQueueRequest < Struct.new(
+      nil,
       :name,
       keyword_init: true
     )
@@ -2786,6 +2897,7 @@ module Aws::MediaConvert
     #   You can use queues to manage the resources that are available to your AWS account for running multiple transcoding jobs at the same time. If you don't specify a queue, the service sends all jobs through the default queue. For more information, see https://docs.aws.amazon.com/mediaconvert/latest/ug/working-with-queues.html.
     #   @return [Types::Queue]
     class GetQueueResponse < Struct.new(
+      nil,
       :queue,
       keyword_init: true
     )
@@ -2806,6 +2918,7 @@ module Aws::MediaConvert
     #   When you use the API for transcode jobs that use frame rate conversion, specify the frame rate as a fraction. For example,  24000 / 1001 = 23.976 fps. Use FramerateNumerator to specify the numerator of this fraction. In this example, use 24000 for the value of FramerateNumerator. When you use the console for transcode jobs that use frame rate conversion, provide the value as a decimal number for Framerate. In this example, specify 23.976.
     #   @return [Integer]
     class GifSettings < Struct.new(
+      nil,
       :framerate_control,
       :framerate_conversion_algorithm,
       :framerate_denominator,
@@ -2826,6 +2939,7 @@ module Aws::MediaConvert
     #   Optional. Specify a value here to set the QVBR quality to a level that is between whole numbers. For example, if you want your QVBR quality level to be 7.33, set qvbrQualityLevel to 7 and set qvbrQualityLevelFineTune to .33. MediaConvert rounds your QVBR quality level to the nearest third of a whole number. For example, if you set qvbrQualityLevel to 7 and you set qvbrQualityLevelFineTune to .25, your actual QVBR quality level is 7.33.
     #   @return [Float]
     class H264QvbrSettings < Struct.new(
+      nil,
       :max_average_bitrate,
       :qvbr_quality_level,
       :qvbr_quality_level_fine_tune,
@@ -2974,6 +3088,7 @@ module Aws::MediaConvert
     #   Specify how SPS and PPS NAL units are written in your output MP4 container, according to ISO/IEC 14496-15. If the location of these parameters doesn't matter in your workflow: Keep the default value, AVC1. MediaConvert writes SPS and PPS NAL units in the sample description ('stsd') box (but not into samples directly). To write SPS and PPS NAL units directly into samples (but not in the 'stsd' box): Choose AVC3. When you do, note that your output might not play properly with some downstream systems or players.
     #   @return [String]
     class H264Settings < Struct.new(
+      nil,
       :adaptive_quantization,
       :bandwidth_reduction_filter,
       :bitrate,
@@ -3036,6 +3151,7 @@ module Aws::MediaConvert
     #   Optional. Specify a value here to set the QVBR quality to a level that is between whole numbers. For example, if you want your QVBR quality level to be 7.33, set qvbrQualityLevel to 7 and set qvbrQualityLevelFineTune to .33. MediaConvert rounds your QVBR quality level to the nearest third of a whole number. For example, if you set qvbrQualityLevel to 7 and you set qvbrQualityLevelFineTune to .25, your actual QVBR quality level is 7.33.
     #   @return [Float]
     class H265QvbrSettings < Struct.new(
+      nil,
       :max_average_bitrate,
       :qvbr_quality_level,
       :qvbr_quality_level_fine_tune,
@@ -3181,6 +3297,7 @@ module Aws::MediaConvert
     #   If the location of parameter set NAL units doesn't matter in your workflow, ignore this setting. Use this setting only with CMAF or DASH outputs, or with standalone file outputs in an MPEG-4 container (MP4 outputs). Choose HVC1 to mark your output as HVC1. This makes your output compliant with the following specification: ISO IECJTC1 SC29 N13798 Text ISO/IEC FDIS 14496-15 3rd Edition. For these outputs, the service stores parameter set NAL units in the sample headers but not in the samples directly. For MP4 outputs, when you choose HVC1, your output video might not work properly with some downstream systems and video players. The service defaults to marking your output as HEV1. For these outputs, the service writes parameter set NAL units directly into the samples.
     #   @return [String]
     class H265Settings < Struct.new(
+      nil,
       :adaptive_quantization,
       :alternate_transfer_function_sei,
       :bandwidth_reduction_filter,
@@ -3269,6 +3386,7 @@ module Aws::MediaConvert
     #   HDR Master Display Information must be provided by a color grader, using color grading tools. Range is 0 to 50,000, each increment represents 0.00002 in CIE1931 color coordinate. Note that this setting is not for color correction.
     #   @return [Integer]
     class Hdr10Metadata < Struct.new(
+      nil,
       :blue_primary_x,
       :blue_primary_y,
       :green_primary_x,
@@ -3294,6 +3412,7 @@ module Aws::MediaConvert
     #   Specify the HDR10+ target display nominal peak luminance, in nits. This is the nominal maximum luminance of the target display as defined by ST 2094-40.
     #   @return [Integer]
     class Hdr10Plus < Struct.new(
+      nil,
       :mastering_monitor_nits,
       :target_monitor_nits,
       keyword_init: true
@@ -3309,6 +3428,7 @@ module Aws::MediaConvert
     #   Specify the outputs that you want this additional top-level manifest to reference.
     #   @return [Array<String>]
     class HlsAdditionalManifest < Struct.new(
+      nil,
       :manifest_name_modifier,
       :selected_outputs,
       keyword_init: true
@@ -3330,6 +3450,7 @@ module Aws::MediaConvert
     #   Caption language description.
     #   @return [String]
     class HlsCaptionLanguageMapping < Struct.new(
+      nil,
       :caption_channel,
       :custom_language_code,
       :language_code,
@@ -3362,6 +3483,7 @@ module Aws::MediaConvert
     #   Specify whether your DRM encryption key is static or from a key provider that follows the SPEKE standard. For more information about SPEKE, see https://docs.aws.amazon.com/speke/latest/documentation/what-is-speke.html.
     #   @return [String]
     class HlsEncryptionSettings < Struct.new(
+      nil,
       :constant_initialization_vector,
       :encryption_method,
       :initialization_vector_in_manifest,
@@ -3472,6 +3594,7 @@ module Aws::MediaConvert
     #   Provides an extra millisecond delta offset to fine tune the timestamps.
     #   @return [Integer]
     class HlsGroupSettings < Struct.new(
+      nil,
       :ad_markers,
       :additional_manifests,
       :audio_only_header,
@@ -3529,6 +3652,7 @@ module Aws::MediaConvert
     #   Number of thumbnails in each row of a tile image. Set a value between 1 and 512.
     #   @return [Integer]
     class HlsImageBasedTrickPlaySettings < Struct.new(
+      nil,
       :interval_cadence,
       :thumbnail_height,
       :thumbnail_interval,
@@ -3551,6 +3675,7 @@ module Aws::MediaConvert
     #   Optional. Specify media name
     #   @return [String]
     class HlsRenditionGroupSettings < Struct.new(
+      nil,
       :rendition_group_id,
       :rendition_language_code,
       :rendition_name,
@@ -3582,6 +3707,7 @@ module Aws::MediaConvert
     #   Use this setting to add an identifying string to the filename of each segment. The service adds this string between the name modifier and segment index number. You can use format identifiers in the string. For more information, see https://docs.aws.amazon.com/mediaconvert/latest/ug/using-variables-in-your-job-settings.html
     #   @return [String]
     class HlsSettings < Struct.new(
+      nil,
       :audio_group_id,
       :audio_only_container,
       :audio_rendition_sets,
@@ -3605,6 +3731,7 @@ module Aws::MediaConvert
     #   Required for setting up a job to use queue hopping. Minimum wait time in minutes until the job can hop to the destination queue. Valid range is 1 to 4320 minutes, inclusive.
     #   @return [Integer]
     class HopDestination < Struct.new(
+      nil,
       :priority,
       :queue,
       :wait_minutes,
@@ -3621,6 +3748,7 @@ module Aws::MediaConvert
     #   Provide a Timecode in HH:MM:SS:FF or HH:MM:SS;FF format.
     #   @return [String]
     class Id3Insertion < Struct.new(
+      nil,
       :id3,
       :timecode,
       keyword_init: true
@@ -3636,6 +3764,7 @@ module Aws::MediaConvert
     #   Specify the reference white level, in nits, for all of your image inserter images. Use to correct brightness levels within HDR10 outputs. For 1,000 nit peak brightness displays, we recommend that you set SDR reference white level to 203 (according to ITU-R BT.2408). Leave blank to use the default value of 100, or specify an integer from 100 to 1000.
     #   @return [Integer]
     class ImageInserter < Struct.new(
+      nil,
       :insertable_images,
       :sdr_reference_white_level,
       keyword_init: true
@@ -3651,6 +3780,7 @@ module Aws::MediaConvert
     #   Keep this setting enabled to have MediaConvert use the font style and position information from the captions source in the output. This option is available only when your input captions are IMSC, SMPTE-TT, or TTML. Disable this setting for simplified output captions.
     #   @return [String]
     class ImscDestinationSettings < Struct.new(
+      nil,
       :accessibility,
       :style_passthrough,
       keyword_init: true
@@ -3743,6 +3873,7 @@ module Aws::MediaConvert
     #   Input video selectors contain the video settings for the input. Each of your inputs can have up to one video selector.
     #   @return [Types::VideoSelector]
     class Input < Struct.new(
+      nil,
       :advanced_input_filter,
       :advanced_input_filter_settings,
       :audio_selector_groups,
@@ -3783,6 +3914,7 @@ module Aws::MediaConvert
     #   Set Start timecode to the beginning of the portion of the input you are clipping. The frame corresponding to the Start timecode value is included in the clip. Start timecode or End timecode may be left blank, but not both. Use the format HH:MM:SS:FF or HH:MM:SS;FF, where HH is the hour, MM is the minute, SS is the second, and FF is the frame number. When choosing this value, take into account your setting for Input timecode source. For example, if you have embedded timecodes that start at 01:00:00:00 and you want your clip to begin five minutes into the video, use 01:05:00:00.
     #   @return [String]
     class InputClipping < Struct.new(
+      nil,
       :end_timecode,
       :start_timecode,
       keyword_init: true
@@ -3804,6 +3936,7 @@ module Aws::MediaConvert
     #   Specify the AWS Region for AWS Key Management Service (KMS) that you used to encrypt your data key, if that Region is different from the one you are using for AWS Elemental MediaConvert.
     #   @return [String]
     class InputDecryptionSettings < Struct.new(
+      nil,
       :decryption_mode,
       :encrypted_decryption_key,
       :initialization_vector,
@@ -3827,6 +3960,7 @@ module Aws::MediaConvert
     #   Specify the time range of media segments to retrieve from your TAMS server. MediaConvert fetches only the segments that fall within this range. Use the format specified by your TAMS server implementation. This must be two timestamp values with the format {sign?}{seconds}:{nanoseconds}, separated by an underscore, surrounded by either parentheses or square brackets.  Example: [15:0_35:0) This setting is required when you include TAMS settings in your job.
     #   @return [String]
     class InputTamsSettings < Struct.new(
+      nil,
       :auth_connection_arn,
       :gap_handling,
       :source_id,
@@ -3906,6 +4040,7 @@ module Aws::MediaConvert
     #   Input video selectors contain the video settings for the input. Each of your inputs can have up to one video selector.
     #   @return [Types::VideoSelector]
     class InputTemplate < Struct.new(
+      nil,
       :advanced_input_filter,
       :advanced_input_filter_settings,
       :audio_selector_groups,
@@ -3952,6 +4087,7 @@ module Aws::MediaConvert
     #   Enter an integer from 32000 to 48000.
     #   @return [Integer]
     class InputVideoGenerator < Struct.new(
+      nil,
       :channels,
       :duration,
       :framerate_denominator,
@@ -3997,6 +4133,7 @@ module Aws::MediaConvert
     #   Specify the width of the inserted image in pixels. If you specify a value that's larger than the video resolution width, the service will crop your overlaid image to fit. To use the native width of the image, keep this setting blank.
     #   @return [Integer]
     class InsertableImage < Struct.new(
+      nil,
       :duration,
       :fade_in,
       :fade_out,
@@ -4017,6 +4154,7 @@ module Aws::MediaConvert
     # @!attribute message
     #   @return [String]
     class InternalServerErrorException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -4118,6 +4256,7 @@ module Aws::MediaConvert
     #   Contains any warning messages for the job. Use to help identify potential issues with your input, output, or job. For more information, see https://docs.aws.amazon.com/mediaconvert/latest/ug/warning_codes.html
     #   @return [Array<Types::WarningGroup>]
     class Job < Struct.new(
+      nil,
       :acceleration_settings,
       :acceleration_status,
       :arn,
@@ -4162,6 +4301,7 @@ module Aws::MediaConvert
     #   Use Job engine versions to run jobs for your production workflow on one version, while you test and validate the latest version. Job engine versions are in a YYYY-MM-DD format.
     #   @return [String]
     class JobEngineVersion < Struct.new(
+      nil,
       :expiration_date,
       :version,
       keyword_init: true
@@ -4177,6 +4317,7 @@ module Aws::MediaConvert
     #   List of messages that warn about conditions that might cause your job not to run or to fail.
     #   @return [Array<String>]
     class JobMessages < Struct.new(
+      nil,
       :info,
       :warning,
       keyword_init: true
@@ -4228,6 +4369,7 @@ module Aws::MediaConvert
     #   Insert user-defined custom ID3 metadata at timecodes that you specify. In each output that you want to include this metadata, you must set ID3 metadata to Passthrough.
     #   @return [Types::TimedMetadataInsertion]
     class JobSettings < Struct.new(
+      nil,
       :ad_avail_offset,
       :avail_blanking,
       :color_conversion3_dlut_settings,
@@ -4288,6 +4430,7 @@ module Aws::MediaConvert
     #   A job template can be of two types: system or custom. System or built-in job templates can't be modified or deleted by the user.
     #   @return [String]
     class JobTemplate < Struct.new(
+      nil,
       :acceleration_settings,
       :arn,
       :category,
@@ -4350,6 +4493,7 @@ module Aws::MediaConvert
     #   Insert user-defined custom ID3 metadata at timecodes that you specify. In each output that you want to include this metadata, you must set ID3 metadata to Passthrough.
     #   @return [Types::TimedMetadataInsertion]
     class JobTemplateSettings < Struct.new(
+      nil,
       :ad_avail_offset,
       :avail_blanking,
       :color_conversion3_dlut_settings,
@@ -4410,6 +4554,7 @@ module Aws::MediaConvert
     #   Additional metadata that MediaConvert sends to Kantar. Maximum length is 50 characters.
     #   @return [String]
     class KantarWatermarkSettings < Struct.new(
+      nil,
       :channel_name,
       :content_reference,
       :credentials_secret_name,
@@ -4444,6 +4589,7 @@ module Aws::MediaConvert
     #   Optional. When you request lists of resources, you can specify whether they are sorted in ASCENDING or DESCENDING order. Default varies by resource.
     #   @return [String]
     class ListJobTemplatesRequest < Struct.new(
+      nil,
       :category,
       :list_by,
       :max_results,
@@ -4461,6 +4607,7 @@ module Aws::MediaConvert
     #   Use this string to request the next batch of job templates.
     #   @return [String]
     class ListJobTemplatesResponse < Struct.new(
+      nil,
       :job_templates,
       :next_token,
       keyword_init: true
@@ -4484,6 +4631,7 @@ module Aws::MediaConvert
     #   Optional. A job's status can be SUBMITTED, PROGRESSING, COMPLETE, CANCELED, or ERROR.
     #   @return [String]
     class ListJobsRequest < Struct.new(
+      nil,
       :max_results,
       :next_token,
       :order,
@@ -4501,6 +4649,7 @@ module Aws::MediaConvert
     #   Use this string to request the next batch of jobs.
     #   @return [String]
     class ListJobsResponse < Struct.new(
+      nil,
       :jobs,
       :next_token,
       keyword_init: true
@@ -4524,6 +4673,7 @@ module Aws::MediaConvert
     #   Optional. When you request lists of resources, you can specify whether they are sorted in ASCENDING or DESCENDING order. Default varies by resource.
     #   @return [String]
     class ListPresetsRequest < Struct.new(
+      nil,
       :category,
       :list_by,
       :max_results,
@@ -4541,6 +4691,7 @@ module Aws::MediaConvert
     #   List of presets
     #   @return [Array<Types::Preset>]
     class ListPresetsResponse < Struct.new(
+      nil,
       :next_token,
       :presets,
       keyword_init: true
@@ -4561,6 +4712,7 @@ module Aws::MediaConvert
     #   Optional. When you request lists of resources, you can specify whether they are sorted in ASCENDING or DESCENDING order. Default varies by resource.
     #   @return [String]
     class ListQueuesRequest < Struct.new(
+      nil,
       :list_by,
       :max_results,
       :next_token,
@@ -4583,6 +4735,7 @@ module Aws::MediaConvert
     #   The remaining number of concurrent jobs that are not associated with a queue and are available to allocate to a queue. You can allocate these jobs when you create or update a queue.
     #   @return [Integer]
     class ListQueuesResponse < Struct.new(
+      nil,
       :next_token,
       :queues,
       :total_concurrent_jobs,
@@ -4596,6 +4749,7 @@ module Aws::MediaConvert
     #   The Amazon Resource Name (ARN) of the resource that you want to list tags for. To get the ARN, send a GET request with the resource name.
     #   @return [String]
     class ListTagsForResourceRequest < Struct.new(
+      nil,
       :arn,
       keyword_init: true
     )
@@ -4606,6 +4760,7 @@ module Aws::MediaConvert
     #   The Amazon Resource Name (ARN) and tags for an AWS Elemental MediaConvert resource.
     #   @return [Types::ResourceTags]
     class ListTagsForResourceResponse < Struct.new(
+      nil,
       :resource_tags,
       keyword_init: true
     )
@@ -4619,6 +4774,7 @@ module Aws::MediaConvert
     #   Optional. Use this string, provided with the response to a previous request, to request the next batch of Job engine versions.
     #   @return [String]
     class ListVersionsRequest < Struct.new(
+      nil,
       :max_results,
       :next_token,
       keyword_init: true
@@ -4633,6 +4789,7 @@ module Aws::MediaConvert
     #   Retrieve a JSON array of all available Job engine versions and the date they expire.
     #   @return [Array<Types::JobEngineVersion>]
     class ListVersionsResponse < Struct.new(
+      nil,
       :next_token,
       :versions,
       keyword_init: true
@@ -4645,6 +4802,7 @@ module Aws::MediaConvert
     #   Packet Identifier (PID) of the SCTE-35 stream in the transport stream generated by ESAM.
     #   @return [Integer]
     class M2tsScte35Esam < Struct.new(
+      nil,
       :scte35_esam_pid,
       keyword_init: true
     )
@@ -4782,6 +4940,7 @@ module Aws::MediaConvert
     #   Specify the packet identifier (PID) of the elementary video stream in the transport stream.
     #   @return [Integer]
     class M2tsSettings < Struct.new(
+      nil,
       :audio_buffer_model,
       :audio_duration,
       :audio_frames_per_pes,
@@ -4898,6 +5057,7 @@ module Aws::MediaConvert
     #   Packet Identifier (PID) of the elementary video stream in the transport stream.
     #   @return [Integer]
     class M3u8Settings < Struct.new(
+      nil,
       :audio_duration,
       :audio_frames_per_pes,
       :audio_pids,
@@ -4939,6 +5099,7 @@ module Aws::MediaConvert
     #   The MIME type of the media file.
     #   @return [String]
     class Metadata < Struct.new(
+      nil,
       :e_tag,
       :file_size,
       :last_modified,
@@ -4956,6 +5117,7 @@ module Aws::MediaConvert
     #   Use Width to define the video resolution width, in pixels, for this rule.
     #   @return [Integer]
     class MinBottomRenditionSize < Struct.new(
+      nil,
       :height,
       :width,
       keyword_init: true
@@ -4971,6 +5133,7 @@ module Aws::MediaConvert
     #   Use Width to define the video resolution width, in pixels, for this rule.
     #   @return [Integer]
     class MinTopRenditionSize < Struct.new(
+      nil,
       :height,
       :width,
       keyword_init: true
@@ -4998,6 +5161,7 @@ module Aws::MediaConvert
     #   Specify when the motion overlay begins. Use timecode format (HH:MM:SS:FF or HH:MM:SS;FF). Make sure that the timecode you provide here takes into account how you have set up your timecode configuration under both job settings and input settings. The simplest way to do that is to set both to start at 0. If you need to set up your job to follow timecodes embedded in your source that don't start at zero, make sure that you specify a start time that is after the first embedded timecode. For more information, see https://docs.aws.amazon.com/mediaconvert/latest/ug/setting-up-timecode.html
     #   @return [String]
     class MotionImageInserter < Struct.new(
+      nil,
       :framerate,
       :input,
       :insertion_mode,
@@ -5017,6 +5181,7 @@ module Aws::MediaConvert
     #   The top of the fraction that expresses your overlay frame rate. For example, if your frame rate is 24 fps, set this value to 24.
     #   @return [Integer]
     class MotionImageInsertionFramerate < Struct.new(
+      nil,
       :framerate_denominator,
       :framerate_numerator,
       keyword_init: true
@@ -5032,6 +5197,7 @@ module Aws::MediaConvert
     #   Set the distance, in pixels, between the overlay and the top edge of the video frame.
     #   @return [Integer]
     class MotionImageInsertionOffset < Struct.new(
+      nil,
       :image_x,
       :image_y,
       keyword_init: true
@@ -5056,6 +5222,7 @@ module Aws::MediaConvert
     #   Always keep the default value (SELF_CONTAINED) for this setting.
     #   @return [String]
     class MovSettings < Struct.new(
+      nil,
       :clap_atom,
       :cslg_atom,
       :mpeg2_four_cc_control,
@@ -5080,6 +5247,7 @@ module Aws::MediaConvert
     #   Sample rate in Hz.
     #   @return [Integer]
     class Mp2Settings < Struct.new(
+      nil,
       :audio_description_mix,
       :bitrate,
       :channels,
@@ -5106,6 +5274,7 @@ module Aws::MediaConvert
     #   Required when you set Bitrate control mode to VBR. Specify the audio quality of this MP3 output from 0 (highest quality) to 9 (lowest quality).
     #   @return [Integer]
     class Mp3Settings < Struct.new(
+      nil,
       :bitrate,
       :channels,
       :rate_control_mode,
@@ -5145,6 +5314,7 @@ module Aws::MediaConvert
     #   Specify the ID or ARN of the AWS KMS key used to sign the C2PA manifest in your MP4 output. Provide a valid KMS key ARN. Note that your MediaConvert service role must allow access to this key.
     #   @return [String]
     class Mp4Settings < Struct.new(
+      nil,
       :audio_duration,
       :c2pa_manifest,
       :certificate_secret,
@@ -5197,6 +5367,7 @@ module Aws::MediaConvert
     #   Specify the event message box (eMSG) value for ID3 timed metadata in your output. For more information, see ISO/IEC 23009-1:2022 section 5.10.3.3.4 Semantics. When you specify a value for ID3 Metadata Value, you must also set ID3 metadata to Passthrough.
     #   @return [String]
     class MpdSettings < Struct.new(
+      nil,
       :accessibility_caption_hints,
       :audio_duration,
       :caption_container_type,
@@ -5317,6 +5488,7 @@ module Aws::MediaConvert
     #   Keep the default value, Enabled, to adjust quantization within each frame based on temporal variation of content complexity. When you enable this feature, the encoder uses fewer bits on areas of the frame that aren't moving and uses more bits on complex objects with sharp edges that move a lot. For example, this feature improves the readability of text tickers on newscasts and scoreboards on sports matches. Enabling this feature will almost always improve your video quality. Note, though, that this feature doesn't take into account where the viewer's attention is likely to be. If viewers are likely to be focusing their attention on a part of the screen that doesn't have moving objects with sharp edges, such as sports athletes' faces, you might choose to disable this feature. Related setting: When you enable temporal quantization, adjust the strength of the filter with the setting Adaptive quantization.
     #   @return [String]
     class Mpeg2Settings < Struct.new(
+      nil,
       :adaptive_quantization,
       :bitrate,
       :codec_level,
@@ -5364,6 +5536,7 @@ module Aws::MediaConvert
     #   Specify the outputs that you want this additional top-level manifest to reference.
     #   @return [Array<String>]
     class MsSmoothAdditionalManifest < Struct.new(
+      nil,
       :manifest_name_modifier,
       :selected_outputs,
       keyword_init: true
@@ -5376,6 +5549,7 @@ module Aws::MediaConvert
     #   If your output group type is HLS, DASH, or Microsoft Smooth, use these settings when doing DRM encryption with a SPEKE-compliant key provider. If your output group type is CMAF, use the SpekeKeyProviderCmaf settings instead.
     #   @return [Types::SpekeKeyProvider]
     class MsSmoothEncryptionSettings < Struct.new(
+      nil,
       :speke_key_provider,
       keyword_init: true
     )
@@ -5408,6 +5582,7 @@ module Aws::MediaConvert
     #   Use Manifest encoding to specify the encoding format for the server and client manifest. Valid options are utf8 and utf16.
     #   @return [String]
     class MsSmoothGroupSettings < Struct.new(
+      nil,
       :additional_manifests,
       :audio_deduplication,
       :destination,
@@ -5432,6 +5607,7 @@ module Aws::MediaConvert
     #   Specify the XAVC profile settings for MXF outputs when you set your MXF profile to XAVC.
     #   @return [Types::MxfXavcProfileSettings]
     class MxfSettings < Struct.new(
+      nil,
       :afd_signaling,
       :profile,
       :xavc_profile_settings,
@@ -5448,6 +5624,7 @@ module Aws::MediaConvert
     #   Specify a value for this setting only for outputs that you set up with one of these two XAVC profiles: XAVC HD Intra CBG or XAVC 4K Intra CBG. Specify the amount of space in each frame that the service reserves for ancillary data, such as teletext captions. The default value for this setting is 1492 bytes per frame. This should be sufficient to prevent overflow unless you have multiple pages of teletext captions data. If you have a large amount of teletext data, specify a larger number.
     #   @return [Integer]
     class MxfXavcProfileSettings < Struct.new(
+      nil,
       :duration_mode,
       :max_anc_data_size,
       keyword_init: true
@@ -5469,6 +5646,7 @@ module Aws::MediaConvert
     #   Optional. Ignore this setting unless Nagra support directs you to specify a value. When you don't specify a value here, the Nagra NexGuard library uses its default value.
     #   @return [String]
     class NexGuardFileMarkerSettings < Struct.new(
+      nil,
       :license,
       :payload,
       :preset,
@@ -5486,6 +5664,7 @@ module Aws::MediaConvert
     #   Use Distributor ID to specify the distributor ID that is assigned to your organization by Nielsen.
     #   @return [String]
     class NielsenConfiguration < Struct.new(
+      nil,
       :breakout_code,
       :distributor_id,
       keyword_init: true
@@ -5528,6 +5707,7 @@ module Aws::MediaConvert
     #   To create assets that have the same TIC values in each audio track, keep the default value Share TICs. To create assets that have unique TIC values for each audio track, choose Use unique TICs.
     #   @return [String]
     class NielsenNonLinearWatermarkSettings < Struct.new(
+      nil,
       :active_watermark_process,
       :adi_filename,
       :asset_id,
@@ -5558,6 +5738,7 @@ module Aws::MediaConvert
     #   Noise reducer filter settings for temporal filter.
     #   @return [Types::NoiseReducerTemporalFilterSettings]
     class NoiseReducer < Struct.new(
+      nil,
       :filter,
       :filter_settings,
       :spatial_filter_settings,
@@ -5572,6 +5753,7 @@ module Aws::MediaConvert
     #   Relative strength of noise reducing filter. Higher values produce stronger filtering.
     #   @return [Integer]
     class NoiseReducerFilterSettings < Struct.new(
+      nil,
       :strength,
       keyword_init: true
     )
@@ -5589,6 +5771,7 @@ module Aws::MediaConvert
     #   Relative strength of noise reducing filter. Higher values produce stronger filtering.
     #   @return [Integer]
     class NoiseReducerSpatialFilterSettings < Struct.new(
+      nil,
       :post_filter_sharpen_strength,
       :speed,
       :strength,
@@ -5614,6 +5797,7 @@ module Aws::MediaConvert
     #   Specify the strength of the noise reducing filter on this output. Higher values produce stronger filtering. We recommend the following value ranges, depending on the result that you want: * 0-2 for complexity reduction with minimal sharpness loss * 2-8 for complexity reduction with image preservation * 8-16 for a high level of complexity reduction
     #   @return [Integer]
     class NoiseReducerTemporalFilterSettings < Struct.new(
+      nil,
       :aggressive_mode,
       :post_temporal_sharpening,
       :post_temporal_sharpening_strength,
@@ -5628,6 +5812,7 @@ module Aws::MediaConvert
     # @!attribute message
     #   @return [String]
     class NotFoundException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -5645,6 +5830,7 @@ module Aws::MediaConvert
     #   Optional. Sample rate in Hz. Valid values are 16000, 24000, and 48000. The default value is 48000.
     #   @return [Integer]
     class OpusSettings < Struct.new(
+      nil,
       :bitrate,
       :channels,
       :sample_rate,
@@ -5679,6 +5865,7 @@ module Aws::MediaConvert
     #   VideoDescription contains a group of video encoding settings. The specific video settings depend on the video codec that you choose for the property codec. Include one instance of VideoDescription per output.
     #   @return [Types::VideoDescription]
     class Output < Struct.new(
+      nil,
       :audio_descriptions,
       :caption_descriptions,
       :container_settings,
@@ -5700,6 +5887,7 @@ module Aws::MediaConvert
     #   Use this setting to specify your remix values when they have a decimal component, such as -10.312, 0.08, or 4.9. MediaConvert rounds your remixing values to the nearest thousandth.
     #   @return [Array<Float>]
     class OutputChannelMapping < Struct.new(
+      nil,
       :input_channels,
       :input_channels_fine_tune,
       keyword_init: true
@@ -5715,6 +5903,7 @@ module Aws::MediaConvert
     #   Contains details about the output's video stream
     #   @return [Types::VideoDetail]
     class OutputDetail < Struct.new(
+      nil,
       :duration_in_ms,
       :video_details,
       keyword_init: true
@@ -5739,6 +5928,7 @@ module Aws::MediaConvert
     #   This object holds groups of encoding settings, one group of settings per output.
     #   @return [Array<Types::Output>]
     class OutputGroup < Struct.new(
+      nil,
       :automated_encoding_settings,
       :custom_name,
       :name,
@@ -5754,6 +5944,7 @@ module Aws::MediaConvert
     #   Details about the output
     #   @return [Array<Types::OutputDetail>]
     class OutputGroupDetail < Struct.new(
+      nil,
       :output_details,
       keyword_init: true
     )
@@ -5783,6 +5974,7 @@ module Aws::MediaConvert
     #   Type of output group (File group, Apple HLS, DASH ISO, Microsoft Smooth Streaming, CMAF)
     #   @return [String]
     class OutputGroupSettings < Struct.new(
+      nil,
       :cmaf_group_settings,
       :dash_iso_group_settings,
       :file_group_settings,
@@ -5800,6 +5992,7 @@ module Aws::MediaConvert
     #   Settings for HLS output groups
     #   @return [Types::HlsSettings]
     class OutputSettings < Struct.new(
+      nil,
       :hls_settings,
       keyword_init: true
     )
@@ -5811,6 +6004,7 @@ module Aws::MediaConvert
     #   For forensic video watermarking, MediaConvert supports Nagra NexGuard File Marker watermarking. MediaConvert supports both PreRelease Content (NGPR/G2) and OTT Streaming workflows.
     #   @return [Types::NexGuardFileMarkerSettings]
     class PartnerWatermarking < Struct.new(
+      nil,
       :nexguard_file_marker_settings,
       keyword_init: true
     )
@@ -5828,6 +6022,7 @@ module Aws::MediaConvert
     #   Allow or disallow jobs that specify Amazon S3 inputs.
     #   @return [String]
     class Policy < Struct.new(
+      nil,
       :http_inputs,
       :https_inputs,
       :s3_inputs,
@@ -5862,6 +6057,7 @@ module Aws::MediaConvert
     #   A preset can be of two types: system or custom. System or built-in preset can't be modified or deleted by the user.
     #   @return [String]
     class Preset < Struct.new(
+      nil,
       :arn,
       :category,
       :created_at,
@@ -5889,6 +6085,7 @@ module Aws::MediaConvert
     #   VideoDescription contains a group of video encoding settings. The specific video settings depend on the video codec that you choose for the property codec. Include one instance of VideoDescription per output.
     #   @return [Types::VideoDescription]
     class PresetSettings < Struct.new(
+      nil,
       :audio_descriptions,
       :caption_descriptions,
       :container_settings,
@@ -5903,6 +6100,7 @@ module Aws::MediaConvert
     #   Specify the S3, HTTP, or HTTPS URL for your media file.
     #   @return [String]
     class ProbeInputFile < Struct.new(
+      nil,
       :file_url,
       keyword_init: true
     )
@@ -5913,6 +6111,7 @@ module Aws::MediaConvert
     #   Specify a media file to probe.
     #   @return [Array<Types::ProbeInputFile>]
     class ProbeRequest < Struct.new(
+      nil,
       :input_files,
       keyword_init: true
     )
@@ -5923,6 +6122,7 @@ module Aws::MediaConvert
     #   Probe results for your media file.
     #   @return [Array<Types::ProbeResult>]
     class ProbeResponse < Struct.new(
+      nil,
       :probe_results,
       keyword_init: true
     )
@@ -5940,6 +6140,7 @@ module Aws::MediaConvert
     #   An array containing track mapping information.
     #   @return [Array<Types::TrackMapping>]
     class ProbeResult < Struct.new(
+      nil,
       :container,
       :metadata,
       :track_mappings,
@@ -5992,6 +6193,7 @@ module Aws::MediaConvert
     #   When you do frame rate conversion from 23.976 frames per second (fps) to 29.97 fps, and your output scan type is interlaced, you can optionally enable hard telecine to create a smoother picture. When you keep the default value, None, MediaConvert does a standard frame rate conversion to 29.97 without doing anything with the field polarity to create a smoother picture.
     #   @return [String]
     class ProresSettings < Struct.new(
+      nil,
       :chroma_sampling,
       :codec_profile,
       :framerate_control,
@@ -6015,6 +6217,7 @@ module Aws::MediaConvert
     #   A policy configures behavior that you allow or disallow for your account. For information about MediaConvert policies, see the user guide at http://docs.aws.amazon.com/mediaconvert/latest/ug/what-is.html
     #   @return [Types::Policy]
     class PutPolicyRequest < Struct.new(
+      nil,
       :policy,
       keyword_init: true
     )
@@ -6025,6 +6228,7 @@ module Aws::MediaConvert
     #   A policy configures behavior that you allow or disallow for your account. For information about MediaConvert policies, see the user guide at http://docs.aws.amazon.com/mediaconvert/latest/ug/what-is.html
     #   @return [Types::Policy]
     class PutPolicyResponse < Struct.new(
+      nil,
       :policy,
       keyword_init: true
     )
@@ -6072,6 +6276,7 @@ module Aws::MediaConvert
     #   Specifies whether this on-demand queue is system or custom. System queues are built in. You can't modify or delete system queues. You can create and modify custom queues.
     #   @return [String]
     class Queue < Struct.new(
+      nil,
       :arn,
       :concurrent_jobs,
       :created_at,
@@ -6101,6 +6306,7 @@ module Aws::MediaConvert
     #   The time, in Unix epoch format, that the job moved from the source queue to the destination queue.
     #   @return [Time]
     class QueueTransition < Struct.new(
+      nil,
       :destination_queue,
       :source_queue,
       :timestamp,
@@ -6123,6 +6329,7 @@ module Aws::MediaConvert
     #   The distance, in pixels, between the rectangle and the top edge of the video frame. Specify only even numbers.
     #   @return [Integer]
     class Rectangle < Struct.new(
+      nil,
       :height,
       :width,
       :x,
@@ -6149,6 +6356,7 @@ module Aws::MediaConvert
     #   Specify the number of channels in this output after remixing. Valid values: 1, 2, 4, 6, 8... 64. (1 and even numbers to 64.) If you are doing both input channel mapping and output channel mapping, the number of output channels in your input mapping must be the same as the number of input channels in your output mapping.
     #   @return [Integer]
     class RemixSettings < Struct.new(
+      nil,
       :audio_description_audio_channel,
       :audio_description_data_channel,
       :channel_mapping,
@@ -6179,6 +6387,7 @@ module Aws::MediaConvert
     #   Specifies whether the pricing plan for your reserved queue is ACTIVE or EXPIRED.
     #   @return [String]
     class ReservationPlan < Struct.new(
+      nil,
       :commitment,
       :expires_at,
       :purchased_at,
@@ -6201,6 +6410,7 @@ module Aws::MediaConvert
     #   Specifies the number of reserved transcode slots (RTS) for this queue. The number of RTS determines how many jobs the queue can process in parallel; each RTS can process one job at a time. You can't decrease the number of RTS in your reserved queue. You can increase the number of RTS by extending your existing commitment with a new 12-month commitment for the larger number. The new commitment begins when you purchase the additional capacity. You can't cancel your commitment or revert to your original commitment after you increase the capacity.
     #   @return [Integer]
     class ReservationPlanSettings < Struct.new(
+      nil,
       :commitment,
       :renewal_type,
       :reserved_slots,
@@ -6217,6 +6427,7 @@ module Aws::MediaConvert
     #   The tags for the resource.
     #   @return [Hash<String, String>]
     class ResourceTags < Struct.new(
+      nil,
       :arn,
       :tags,
       keyword_init: true
@@ -6229,6 +6440,7 @@ module Aws::MediaConvert
     #   Choose an Amazon S3 canned ACL for MediaConvert to apply to this output.
     #   @return [String]
     class S3DestinationAccessControl < Struct.new(
+      nil,
       :canned_acl,
       keyword_init: true
     )
@@ -6246,6 +6458,7 @@ module Aws::MediaConvert
     #   Specify the S3 storage class to use for this output. To use your destination's default storage class: Keep the default value, Not set. For more information about S3 storage classes, see https://docs.aws.amazon.com/AmazonS3/latest/userguide/storage-class-intro.html
     #   @return [String]
     class S3DestinationSettings < Struct.new(
+      nil,
       :access_control,
       :encryption,
       :storage_class,
@@ -6265,6 +6478,7 @@ module Aws::MediaConvert
     #   Optionally, specify the customer master key (CMK) that you want to use to encrypt the data key that AWS uses to encrypt your output content. Enter the Amazon Resource Name (ARN) of the CMK. To use this setting, you must also set Server-side encryption to AWS KMS. If you set Server-side encryption to AWS KMS but don't specify a CMK here, AWS uses the AWS managed CMK associated with Amazon S3.
     #   @return [String]
     class S3EncryptionSettings < Struct.new(
+      nil,
       :encryption_type,
       :kms_encryption_context,
       :kms_key_arn,
@@ -6278,6 +6492,7 @@ module Aws::MediaConvert
     #   Set Framerate to make sure that the captions and the video are synchronized in the output. Specify a frame rate that matches the frame rate of the associated video. If the video frame rate is 29.97, choose 29.97 dropframe only if the video has video_insertion=true and drop_frame_timecode=true; otherwise, choose 29.97 non-dropframe.
     #   @return [String]
     class SccDestinationSettings < Struct.new(
+      nil,
       :framerate,
       keyword_init: true
     )
@@ -6303,6 +6518,7 @@ module Aws::MediaConvert
     #   Optional. A job's status can be SUBMITTED, PROGRESSING, COMPLETE, CANCELED, or ERROR.
     #   @return [String]
     class SearchJobsRequest < Struct.new(
+      nil,
       :input_file,
       :max_results,
       :next_token,
@@ -6321,6 +6537,7 @@ module Aws::MediaConvert
     #   Use this string to request the next batch of jobs.
     #   @return [String]
     class SearchJobsResponse < Struct.new(
+      nil,
       :jobs,
       :next_token,
       keyword_init: true
@@ -6342,6 +6559,7 @@ module Aws::MediaConvert
     #   The value of the setting that you configured, prior to any overrides that MediaConvert has applied.
     #   @return [String]
     class ServiceOverride < Struct.new(
+      nil,
       :message,
       :name,
       :override_value,
@@ -6368,6 +6586,7 @@ module Aws::MediaConvert
     #   Specify the URL to the key server that your SPEKE-compliant DRM key provider uses to provide keys for encrypting your content.
     #   @return [String]
     class SpekeKeyProvider < Struct.new(
+      nil,
       :certificate_arn,
       :encryption_contract_configuration,
       :resource_id,
@@ -6398,6 +6617,7 @@ module Aws::MediaConvert
     #   Specify the URL to the key server that your SPEKE-compliant DRM key provider uses to provide keys for encrypting your content.
     #   @return [String]
     class SpekeKeyProviderCmaf < Struct.new(
+      nil,
       :certificate_arn,
       :dash_signaled_system_ids,
       :encryption_contract_configuration,
@@ -6414,6 +6634,7 @@ module Aws::MediaConvert
     #   Set Style passthrough to ENABLED to use the available style, color, and position information from your input captions. MediaConvert uses default settings for any missing style and position information in your input captions. Set Style passthrough to DISABLED, or leave blank, to ignore the style and position information from your input captions and use simplified output captions.
     #   @return [String]
     class SrtDestinationSettings < Struct.new(
+      nil,
       :style_passthrough,
       keyword_init: true
     )
@@ -6434,6 +6655,7 @@ module Aws::MediaConvert
     #   Relates to DRM implementation. The location of the license server used for protecting content.
     #   @return [String]
     class StaticKeyProvider < Struct.new(
+      nil,
       :key_format,
       :key_format_versions,
       :static_key_value,
@@ -6450,6 +6672,7 @@ module Aws::MediaConvert
     #   The tags that you want to add to the resource. You can tag resources with a key-value pair or with only a key.
     #   @return [Hash<String, String>]
     class TagResourceRequest < Struct.new(
+      nil,
       :arn,
       :tags,
       keyword_init: true
@@ -6458,6 +6681,7 @@ module Aws::MediaConvert
     end
 
     class TagResourceResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -6471,6 +6695,7 @@ module Aws::MediaConvert
     #   Specify the page types for this Teletext page. If you don't specify a value here, the service sets the page type to the default value Subtitle. If you pass through the entire set of Teletext data, don't use this field. When you pass through a set of Teletext pages, your output has the same page types as your input.
     #   @return [Array<String>]
     class TeletextDestinationSettings < Struct.new(
+      nil,
       :page_number,
       :page_types,
       keyword_init: true
@@ -6483,6 +6708,7 @@ module Aws::MediaConvert
     #   Use Page Number to specify the three-digit hexadecimal page number that will be used for Teletext captions. Do not use this setting if you are passing through teletext from the input source to output.
     #   @return [String]
     class TeletextSourceSettings < Struct.new(
+      nil,
       :page_number,
       keyword_init: true
     )
@@ -6500,6 +6726,7 @@ module Aws::MediaConvert
     #   Use Prefix to place ASCII characters before any burned-in timecode. For example, a prefix of "EZ-" will result in the timecode "EZ-00:00:00:00". Provide either the characters themselves or the ASCII code equivalents. The supported range of characters is 0x20 through 0x7e. This includes letters, numbers, and all special characters represented on a standard English keyboard.
     #   @return [String]
     class TimecodeBurnin < Struct.new(
+      nil,
       :font_size,
       :position,
       :prefix,
@@ -6522,6 +6749,7 @@ module Aws::MediaConvert
     #   Only applies to outputs that support program-date-time stamp. Use Timestamp offset to overwrite the timecode date without affecting the time and frame number. Provide the new date as a string in the format "yyyy-mm-dd". To use Timestamp offset, you must also enable Insert program-date-time in the output settings. For example, if the date part of your timecodes is 2002-1-25 and you want to change it to one year later, set Timestamp offset to 2003-1-25.
     #   @return [String]
     class TimecodeConfig < Struct.new(
+      nil,
       :anchor,
       :source,
       :start,
@@ -6536,6 +6764,7 @@ module Aws::MediaConvert
     #   Id3Insertions contains the array of Id3Insertion instances.
     #   @return [Array<Types::Id3Insertion>]
     class TimedMetadataInsertion < Struct.new(
+      nil,
       :id3_insertions,
       keyword_init: true
     )
@@ -6553,6 +6782,7 @@ module Aws::MediaConvert
     #   The time, in Unix epoch format, that you submitted the job.
     #   @return [Time]
     class Timing < Struct.new(
+      nil,
       :finish_time,
       :start_time,
       :submit_time,
@@ -6565,6 +6795,7 @@ module Aws::MediaConvert
     # @!attribute message
     #   @return [String]
     class TooManyRequestsException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -6594,6 +6825,7 @@ module Aws::MediaConvert
     #   Details about the media file's video track.
     #   @return [Types::VideoProperties]
     class Track < Struct.new(
+      nil,
       :audio_properties,
       :codec,
       :data_properties,
@@ -6617,6 +6849,7 @@ module Aws::MediaConvert
     #   The index numbers of the video tracks in your media file.
     #   @return [Array<Integer>]
     class TrackMapping < Struct.new(
+      nil,
       :audio_track_indexes,
       :data_track_indexes,
       :video_track_indexes,
@@ -6630,6 +6863,7 @@ module Aws::MediaConvert
     #   Use this setting to select a single captions track from a source. Track numbers correspond to the order in the captions source file. For IMF sources, track numbering is based on the order that the captions appear in the CPL. For example, use 1 to select the captions asset that is listed first in the CPL. To include more than one captions track in your job outputs, create multiple input captions selectors. Specify one track per selector.
     #   @return [Integer]
     class TrackSourceSettings < Struct.new(
+      nil,
       :track_number,
       keyword_init: true
     )
@@ -6641,6 +6875,7 @@ module Aws::MediaConvert
     #   Pass through style and position information from a TTML-like input source (TTML, IMSC, SMPTE-TT) to the TTML output.
     #   @return [String]
     class TtmlDestinationSettings < Struct.new(
+      nil,
       :style_passthrough,
       keyword_init: true
     )
@@ -6676,6 +6911,7 @@ module Aws::MediaConvert
     #   When you do frame rate conversion from 23.976 frames per second (fps) to 29.97 fps, and your output scan type is interlaced, you can optionally enable hard telecine to create a smoother picture. When you keep the default value, None, MediaConvert does a standard frame rate conversion to 29.97 without doing anything with the field polarity to create a smoother picture.
     #   @return [String]
     class UncompressedSettings < Struct.new(
+      nil,
       :fourcc,
       :framerate_control,
       :framerate_conversion_algorithm,
@@ -6697,6 +6933,7 @@ module Aws::MediaConvert
     #   The keys of the tags that you want to remove from the resource.
     #   @return [Array<String>]
     class UntagResourceRequest < Struct.new(
+      nil,
       :arn,
       :tag_keys,
       keyword_init: true
@@ -6705,6 +6942,7 @@ module Aws::MediaConvert
     end
 
     class UntagResourceResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -6738,6 +6976,7 @@ module Aws::MediaConvert
     #   Specify how often MediaConvert sends STATUS_UPDATE events to Amazon CloudWatch Events. Set the interval, in seconds, between status updates. MediaConvert sends an update at this interval from the time the service begins processing your job to the time it completes the transcode or encounters an error.
     #   @return [String]
     class UpdateJobTemplateRequest < Struct.new(
+      nil,
       :acceleration_settings,
       :category,
       :description,
@@ -6756,6 +6995,7 @@ module Aws::MediaConvert
     #   A job template is a pre-made set of encoding instructions that you can use to quickly create a job.
     #   @return [Types::JobTemplate]
     class UpdateJobTemplateResponse < Struct.new(
+      nil,
       :job_template,
       keyword_init: true
     )
@@ -6775,6 +7015,7 @@ module Aws::MediaConvert
     #   Settings for preset
     #   @return [Types::PresetSettings]
     class UpdatePresetRequest < Struct.new(
+      nil,
       :category,
       :description,
       :name,
@@ -6788,6 +7029,7 @@ module Aws::MediaConvert
     #   A preset is a collection of preconfigured media conversion settings that you want MediaConvert to apply to the output during the conversion process.
     #   @return [Types::Preset]
     class UpdatePresetResponse < Struct.new(
+      nil,
       :preset,
       keyword_init: true
     )
@@ -6810,6 +7052,7 @@ module Aws::MediaConvert
     #   Pause or activate a queue by changing its status between ACTIVE and PAUSED. If you pause a queue, jobs in that queue won't begin. Jobs that are running when you pause the queue continue to run until they finish or result in an error.
     #   @return [String]
     class UpdateQueueRequest < Struct.new(
+      nil,
       :concurrent_jobs,
       :description,
       :name,
@@ -6824,6 +7067,7 @@ module Aws::MediaConvert
     #   You can use queues to manage the resources that are available to your AWS account for running multiple transcoding jobs at the same time. If you don't specify a queue, the service sends all jobs through the default queue. For more information, see https://docs.aws.amazon.com/mediaconvert/latest/ug/working-with-queues.html.
     #   @return [Types::Queue]
     class UpdateQueueResponse < Struct.new(
+      nil,
       :queue,
       keyword_init: true
     )
@@ -6859,6 +7103,7 @@ module Aws::MediaConvert
     #   Specify the VC3 class to choose the quality characteristics for this output. VC3 class, together with the settings Framerate (framerateNumerator and framerateDenominator) and Resolution (height and width), determine your output bitrate. For example, say that your video resolution is 1920x1080 and your framerate is 29.97. Then Class 145 gives you an output with a bitrate of approximately 145 Mbps and Class 220 gives you and output with a bitrate of approximately 220 Mbps. VC3 class also specifies the color bit depth of your output.
     #   @return [String]
     class Vc3Settings < Struct.new(
+      nil,
       :framerate_control,
       :framerate_conversion_algorithm,
       :framerate_denominator,
@@ -6917,6 +7162,7 @@ module Aws::MediaConvert
     #   Required when you set Codec to the value XAVC.
     #   @return [Types::XavcSettings]
     class VideoCodecSettings < Struct.new(
+      nil,
       :av1_settings,
       :avc_intra_settings,
       :codec,
@@ -6989,6 +7235,7 @@ module Aws::MediaConvert
     #   Use Width to define the video resolution width, in pixels, for this output. To use the same resolution as your input: Leave both Width and Height blank. To evenly scale from your input resolution: Leave Width blank and enter a value for Height. For example, if your input is 1920x1080 and you set Height to 720, your output will be 1280x720.
     #   @return [Integer]
     class VideoDescription < Struct.new(
+      nil,
       :afd_signaling,
       :anti_alias,
       :chroma_position_mode,
@@ -7019,6 +7266,7 @@ module Aws::MediaConvert
     #   Width in pixels for the output
     #   @return [Integer]
     class VideoDetail < Struct.new(
+      nil,
       :height_in_px,
       :width_in_px,
       keyword_init: true
@@ -7049,6 +7297,7 @@ module Aws::MediaConvert
     #   Specify one or more transitions for your video overlay. Use Transitions to reposition or resize your overlay over time. To use the same position and size for the duration of your video overlay: Leave blank. To specify a Transition: Enter a value for Start timecode, End Timecode, X Position, Y Position, Width, or Height.
     #   @return [Array<Types::VideoOverlayTransition>]
     class VideoOverlay < Struct.new(
+      nil,
       :crop,
       :end_timecode,
       :initial_position,
@@ -7078,6 +7327,7 @@ module Aws::MediaConvert
     #   Specify the distance between the cropping rectangle and the top edge of your overlay video's frame. To position the cropping rectangle along the top edge: Keep blank, or enter 0. To position the cropping rectangle down, relative to the top edge of your overlay video's frame: Enter an integer representing the Unit type that you choose, either Pixels or Percentage. For example, when you enter 10 and choose Pixels, the cropping rectangle will be positioned 10 pixels from the top edge of the overlay video's frame. When you enter 10, choose Percentage, and your overlay input video is 1920x1080, the cropping rectangle will be positioned 108 pixels from the top edge of the overlay video's frame.
     #   @return [Integer]
     class VideoOverlayCrop < Struct.new(
+      nil,
       :height,
       :unit,
       :width,
@@ -7103,6 +7353,7 @@ module Aws::MediaConvert
     #   Specify the starting timecode for this video overlay. To use this setting, you must set Timecode source to Specified start.
     #   @return [String]
     class VideoOverlayInput < Struct.new(
+      nil,
       :file_input,
       :input_clippings,
       :timecode_source,
@@ -7120,6 +7371,7 @@ module Aws::MediaConvert
     #   Specify the timecode of the first frame to include in your video overlay's clip. Use the format HH:MM:SS:FF or HH:MM:SS;FF, where HH is the hour, MM is the minute, SS is the second, and FF is the frame number. When entering this value, take into account your choice for Timecode source.
     #   @return [String]
     class VideoOverlayInputClipping < Struct.new(
+      nil,
       :end_timecode,
       :start_timecode,
       keyword_init: true
@@ -7144,6 +7396,7 @@ module Aws::MediaConvert
     #   To position the top edge of your video overlay along the top edge of the base input video's frame: Keep blank, or enter 0. To position the top edge of your video overlay down, relative to the top edge of the base input video's frame: Enter an integer representing the Unit type that you choose, either Pixels or Percentage. For example, when you enter 10 and choose Pixels, your video overlay will be positioned 10 pixels from the top edge of the base input video's frame. When you enter 10, choose Percentage, and your underlying video is 1920x1080, your video overlay will be positioned 108 pixels from the top edge of the base input video's frame.
     #   @return [Integer]
     class VideoOverlayPosition < Struct.new(
+      nil,
       :height,
       :unit,
       :width,
@@ -7165,6 +7418,7 @@ module Aws::MediaConvert
     #   Specify the timecode for when this transition begins. Use the format HH:MM:SS:FF or HH:MM:SS;FF, where HH is the hour, MM is the minute, SS is the second, and FF is the frame number. When entering this value, take into account your choice for Timecode source.
     #   @return [String]
     class VideoOverlayTransition < Struct.new(
+      nil,
       :end_position,
       :end_timecode,
       :start_timecode,
@@ -7199,6 +7453,7 @@ module Aws::MediaConvert
     #   Settings for burning the output timecode and specified prefix into the output.
     #   @return [Types::TimecodeBurnin]
     class VideoPreprocessor < Struct.new(
+      nil,
       :color_corrector,
       :deinterlacer,
       :dolby_vision,
@@ -7238,6 +7493,7 @@ module Aws::MediaConvert
     #   The width of the video track, in pixels.
     #   @return [Integer]
     class VideoProperties < Struct.new(
+      nil,
       :bit_depth,
       :bit_rate,
       :color_primaries,
@@ -7297,6 +7553,7 @@ module Aws::MediaConvert
     #   Specify a stream for MediaConvert to use from your HLS input. Enter an integer corresponding to the stream order in your HLS manifest.
     #   @return [Array<Integer>]
     class VideoSelector < Struct.new(
+      nil,
       :alpha_behavior,
       :color_space,
       :color_space_usage,
@@ -7326,6 +7583,7 @@ module Aws::MediaConvert
     #   Optional. Specify the variable audio quality of this Vorbis output from -1 (lowest quality, ~45 kbit/s) to 10 (highest quality, ~500 kbit/s). The default value is 4 (~128 kbit/s). Values 5 and 6 are approximately 160 and 192 kbit/s, respectively.
     #   @return [Integer]
     class VorbisSettings < Struct.new(
+      nil,
       :channels,
       :sample_rate,
       :vbr_quality,
@@ -7375,6 +7633,7 @@ module Aws::MediaConvert
     #   With the VP8 codec, you can use only the variable bitrate (VBR) rate control mode.
     #   @return [String]
     class Vp8Settings < Struct.new(
+      nil,
       :bitrate,
       :framerate_control,
       :framerate_conversion_algorithm,
@@ -7434,6 +7693,7 @@ module Aws::MediaConvert
     #   With the VP9 codec, you can use only the variable bitrate (VBR) rate control mode.
     #   @return [String]
     class Vp9Settings < Struct.new(
+      nil,
       :bitrate,
       :framerate_control,
       :framerate_conversion_algorithm,
@@ -7460,6 +7720,7 @@ module Aws::MediaConvert
     #   The number of times this warning occurred in the job.
     #   @return [Integer]
     class WarningGroup < Struct.new(
+      nil,
       :code,
       :count,
       keyword_init: true
@@ -7481,6 +7742,7 @@ module Aws::MediaConvert
     #   Sample rate in Hz.
     #   @return [Integer]
     class WavSettings < Struct.new(
+      nil,
       :bit_depth,
       :channels,
       :format,
@@ -7498,6 +7760,7 @@ module Aws::MediaConvert
     #   Specify how MediaConvert writes style information in your output WebVTT captions. To use the available style, color, and position information from your input captions: Choose Enabled. MediaConvert uses default settings when style and position information is missing from your input captions. To recreate the input captions exactly: Choose Strict. MediaConvert automatically applies timing adjustments, including adjustments for frame rate conversion, ad avails, and input clipping. Your input captions format must be WebVTT. To ignore the style and position information from your input captions and use simplified output captions: Keep the default value, Disabled. Or leave blank. To use the available style, color, and position information from your input captions, while merging cues with identical time ranges: Choose merge. This setting can help prevent positioning overlaps for certain players that expect a single single cue for any given time range.
     #   @return [String]
     class WebvttDestinationSettings < Struct.new(
+      nil,
       :accessibility,
       :style_passthrough,
       keyword_init: true
@@ -7516,6 +7779,7 @@ module Aws::MediaConvert
     #   Optional. Specify media name
     #   @return [String]
     class WebvttHlsSourceSettings < Struct.new(
+      nil,
       :rendition_group_id,
       :rendition_language_code,
       :rendition_name,
@@ -7529,6 +7793,7 @@ module Aws::MediaConvert
     #   Specify the XAVC Intra 4k (CBG) Class to set the bitrate of your output. Outputs of the same class have similar image quality over the operating points that are valid for that class.
     #   @return [String]
     class Xavc4kIntraCbgProfileSettings < Struct.new(
+      nil,
       :xavc_class,
       keyword_init: true
     )
@@ -7540,6 +7805,7 @@ module Aws::MediaConvert
     #   Specify the XAVC Intra 4k (VBR) Class to set the bitrate of your output. Outputs of the same class have similar image quality over the operating points that are valid for that class.
     #   @return [String]
     class Xavc4kIntraVbrProfileSettings < Struct.new(
+      nil,
       :xavc_class,
       keyword_init: true
     )
@@ -7572,6 +7838,7 @@ module Aws::MediaConvert
     #   Number of slices per picture. Must be less than or equal to the number of macroblock rows for progressive pictures, and less than or equal to half the number of macroblock rows for interlaced pictures.
     #   @return [Integer]
     class Xavc4kProfileSettings < Struct.new(
+      nil,
       :bitrate_class,
       :codec_profile,
       :flicker_adaptive_quantization,
@@ -7590,6 +7857,7 @@ module Aws::MediaConvert
     #   Specify the XAVC Intra HD (CBG) Class to set the bitrate of your output. Outputs of the same class have similar image quality over the operating points that are valid for that class.
     #   @return [String]
     class XavcHdIntraCbgProfileSettings < Struct.new(
+      nil,
       :xavc_class,
       keyword_init: true
     )
@@ -7625,6 +7893,7 @@ module Aws::MediaConvert
     #   Ignore this setting unless you set Frame rate (framerateNumerator divided by framerateDenominator) to 29.970. If your input framerate is 23.976, choose Hard. Otherwise, keep the default value None. For more information, see https://docs.aws.amazon.com/mediaconvert/latest/ug/working-with-telecine-and-inverse-telecine.html.
     #   @return [String]
     class XavcHdProfileSettings < Struct.new(
+      nil,
       :bitrate_class,
       :flicker_adaptive_quantization,
       :gop_b_reference,
@@ -7692,6 +7961,7 @@ module Aws::MediaConvert
     #   Required when you set Profile to the value XAVC_HD.
     #   @return [Types::XavcHdProfileSettings]
     class XavcSettings < Struct.new(
+      nil,
       :adaptive_quantization,
       :entropy_encoding,
       :framerate_control,

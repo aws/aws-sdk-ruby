@@ -30,6 +30,7 @@ module Aws::BedrockAgentRuntime
     # @!attribute message
     #   @return [String]
     class AccessDeniedException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -82,6 +83,7 @@ module Aws::BedrockAgentRuntime
     #   <p>The unique identifier of the invocation. Only returned if the <code>executionType</code> is <code>RETURN_CONTROL</code>.</p>
     #   @return [String]
     class ActionGroupInvocationInput < Struct.new(
+      nil,
       :action_group_name,
       :verb,
       :api_path,
@@ -103,6 +105,7 @@ module Aws::BedrockAgentRuntime
     #   <p>Contains information about the action group output.</p>
     #   @return [Types::Metadata]
     class ActionGroupInvocationOutput < Struct.new(
+      nil,
       :text,
       :metadata,
       keyword_init: true
@@ -133,6 +136,7 @@ module Aws::BedrockAgentRuntime
     #   <p> The configuration settings for a computer use action. </p> <important> <p>Computer use is a new Anthropic Claude model capability (in beta) available with Claude 3.7 Sonnet and Claude 3.5 Sonnet v2 only. For more information, see <a href="https://docs.aws.amazon.com/bedrock/latest/userguide/agent-computer-use.html">Configure an Amazon Bedrock Agent to complete tasks with computer use tools</a>.</p> </important>
     #   @return [Hash<String, String>]
     class AgentActionGroup < Struct.new(
+      nil,
       :action_group_name,
       :description,
       :parent_action_group_signature,
@@ -156,6 +160,7 @@ module Aws::BedrockAgentRuntime
     #   <p>An action invocation result.</p>
     #   @return [Types::ReturnControlResults]
     class AgentCollaboratorInputPayload < Struct.new(
+      nil,
       :type,
       :text,
       :return_control_results,
@@ -175,6 +180,7 @@ module Aws::BedrockAgentRuntime
     #   <p>Text or action invocation result input for the collaborator.</p>
     #   @return [Types::AgentCollaboratorInputPayload]
     class AgentCollaboratorInvocationInput < Struct.new(
+      nil,
       :agent_collaborator_name,
       :agent_collaborator_alias_arn,
       :input,
@@ -197,6 +203,7 @@ module Aws::BedrockAgentRuntime
     #   <p>Contains information about the output from the agent collaborator.</p>
     #   @return [Types::Metadata]
     class AgentCollaboratorInvocationOutput < Struct.new(
+      nil,
       :agent_collaborator_name,
       :agent_collaborator_alias_arn,
       :output,
@@ -217,6 +224,7 @@ module Aws::BedrockAgentRuntime
     #   <p>An action invocation result.</p>
     #   @return [Types::ReturnControlPayload]
     class AgentCollaboratorOutputPayload < Struct.new(
+      nil,
       :type,
       :text,
       :return_control_payload,
@@ -231,6 +239,7 @@ module Aws::BedrockAgentRuntime
     #   <p>A message describing the analysis of the prompt.</p>
     #   @return [String]
     class AnalyzePromptEvent < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -263,6 +272,7 @@ module Aws::BedrockAgentRuntime
     #   <p>The agent collaborator's name.</p>
     #   @return [String]
     class ApiInvocationInput < Struct.new(
+      nil,
       :action_group,
       :http_method,
       :api_path,
@@ -287,6 +297,7 @@ module Aws::BedrockAgentRuntime
     #   <p>The value of the parameter.</p>
     #   @return [String]
     class ApiParameter < Struct.new(
+      nil,
       :name,
       :type,
       :value,
@@ -300,6 +311,7 @@ module Aws::BedrockAgentRuntime
     #   <p>The content of the request body. The key of the object in this field is a media type defining the format of the request body.</p>
     #   @return [Hash<String, Types::PropertyParameters>]
     class ApiRequestBody < Struct.new(
+      nil,
       :content,
       keyword_init: true
     )
@@ -332,6 +344,7 @@ module Aws::BedrockAgentRuntime
     #   <p>The agent's ID.</p>
     #   @return [String]
     class ApiResult < Struct.new(
+      nil,
       :action_group,
       :http_method,
       :api_path,
@@ -350,6 +363,7 @@ module Aws::BedrockAgentRuntime
     #   <p>A list of citations and related information for a part of an agent response.</p>
     #   @return [Array<Types::Citation>]
     class Attribution < Struct.new(
+      nil,
       :citations,
       keyword_init: true
     )
@@ -363,6 +377,7 @@ module Aws::BedrockAgentRuntime
     #   <p>The name of the dependency that caused the issue, such as Amazon Bedrock, Lambda, or STS.</p>
     #   @return [String]
     class BadGatewayException < Struct.new(
+      nil,
       :message,
       :resource_name,
       keyword_init: true
@@ -375,6 +390,7 @@ module Aws::BedrockAgentRuntime
     #   <p>The performance configuration for the model.</p>
     #   @return [Types::PerformanceConfiguration]
     class BedrockModelConfigurations < Struct.new(
+      nil,
       :performance_config,
       keyword_init: true
     )
@@ -389,6 +405,7 @@ module Aws::BedrockAgentRuntime
     #   <p>Contains configurations for a reranker model.</p>
     #   @return [Types::BedrockRerankingModelConfiguration]
     class BedrockRerankingConfiguration < Struct.new(
+      nil,
       :number_of_results,
       :model_configuration,
       keyword_init: true
@@ -404,6 +421,7 @@ module Aws::BedrockAgentRuntime
     #   <p>A JSON object whose keys are request fields for the model and whose values are values for those fields.</p>
     #   @return [Hash<String, JSON>]
     class BedrockRerankingModelConfiguration < Struct.new(
+      nil,
       :model_arn,
       :additional_model_request_fields,
       keyword_init: true
@@ -443,6 +461,7 @@ module Aws::BedrockAgentRuntime
     #   <p>The byte value of the file to upload, encoded as a Base-64 string.</p>
     #   @return [String]
     class ByteContentDoc < Struct.new(
+      nil,
       :identifier,
       :content_type,
       :data,
@@ -459,6 +478,7 @@ module Aws::BedrockAgentRuntime
     #   <p>The raw bytes of the file to attach. The maximum size of all files that is attached is 10MB. You can attach a maximum of 5 files. </p>
     #   @return [String]
     class ByteContentFile < Struct.new(
+      nil,
       :media_type,
       :data,
       keyword_init: true
@@ -489,6 +509,7 @@ module Aws::BedrockAgentRuntime
     #   <p>Contains metadata about the sources cited for the generated response.</p>
     #   @return [Array<Types::RetrievedReference>]
     class Citation < Struct.new(
+      nil,
       :generated_response_part,
       :retrieved_references,
       keyword_init: true
@@ -510,6 +531,7 @@ module Aws::BedrockAgentRuntime
     #   <p>The retrieved references of the citation event.</p>
     #   @return [Array<Types::RetrievedReference>]
     class CitationEvent < Struct.new(
+      nil,
       :citation,
       :generated_response_part,
       :retrieved_references,
@@ -526,6 +548,7 @@ module Aws::BedrockAgentRuntime
     #   <p>Files that are uploaded for code interpreter to use.</p>
     #   @return [Array<String>]
     class CodeInterpreterInvocationInput < Struct.new(
+      nil,
       :code,
       :files,
       keyword_init: true
@@ -550,6 +573,7 @@ module Aws::BedrockAgentRuntime
     #   <p>Contains information about the output from the code interpreter.</p>
     #   @return [Types::Metadata]
     class CodeInterpreterInvocationOutput < Struct.new(
+      nil,
       :execution_output,
       :execution_error,
       :files,
@@ -595,6 +619,7 @@ module Aws::BedrockAgentRuntime
     #   <p> Name of the inline collaborator agent which must be the same name as specified for <code>collaboratorName</code>. </p>
     #   @return [String]
     class Collaborator < Struct.new(
+      nil,
       :customer_encryption_key_arn,
       :foundation_model,
       :instruction,
@@ -625,6 +650,7 @@ module Aws::BedrockAgentRuntime
     #   <p> A relay conversation history for the inline collaborator agent. </p>
     #   @return [String]
     class CollaboratorConfiguration < Struct.new(
+      nil,
       :collaborator_name,
       :collaborator_instruction,
       :agent_alias_arn,
@@ -646,6 +672,7 @@ module Aws::BedrockAgentRuntime
     #   <p>A list of conditions that were satisfied during the evaluation.</p>
     #   @return [Array<Types::SatisfiedCondition>]
     class ConditionResultEvent < Struct.new(
+      nil,
       :node_name,
       :timestamp,
       :satisfied_conditions,
@@ -658,6 +685,7 @@ module Aws::BedrockAgentRuntime
     # @!attribute message
     #   @return [String]
     class ConflictException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -688,6 +716,7 @@ module Aws::BedrockAgentRuntime
     #   <p>Lists details, including format and source, for the image in the response from the function call. You can specify only one image and the function in the <code>returnControlInvocationResults</code> must be a computer use action. For more information, see <a href="https://docs.aws.amazon.com/bedrock/latest/userguide/agent-computer-use.html">Configure an Amazon Bedrock Agent to complete tasks with computer use tools</a>. </p>
     #   @return [Array<Types::ImageInput>]
     class ContentBody < Struct.new(
+      nil,
       :body,
       :images,
       keyword_init: true
@@ -700,6 +729,7 @@ module Aws::BedrockAgentRuntime
     #   <p>The conversation's messages.</p>
     #   @return [Array<Types::Message>]
     class ConversationHistory < Struct.new(
+      nil,
       :messages,
       keyword_init: true
     )
@@ -716,6 +746,7 @@ module Aws::BedrockAgentRuntime
     #   <p>The unique identifier for the associated session for the invocation. You can specify either the session's <code>sessionId</code> or its Amazon Resource Name (ARN). </p>
     #   @return [String]
     class CreateInvocationRequest < Struct.new(
+      nil,
       :invocation_id,
       :description,
       :session_identifier,
@@ -734,6 +765,7 @@ module Aws::BedrockAgentRuntime
     #   <p>The timestamp for when the invocation was created.</p>
     #   @return [Time]
     class CreateInvocationResponse < Struct.new(
+      nil,
       :session_id,
       :invocation_id,
       :created_at,
@@ -752,6 +784,7 @@ module Aws::BedrockAgentRuntime
     #   <p>Specify the key-value pairs for the tags that you want to attach to the session.</p>
     #   @return [Hash<String, String>]
     class CreateSessionRequest < Struct.new(
+      nil,
       :session_metadata,
       :encryption_key_arn,
       :tags,
@@ -773,6 +806,7 @@ module Aws::BedrockAgentRuntime
     #   <p>The timestamp for when the session was created.</p>
     #   @return [Time]
     class CreateSessionResponse < Struct.new(
+      nil,
       :session_id,
       :session_arn,
       :session_status,
@@ -787,6 +821,7 @@ module Aws::BedrockAgentRuntime
     #   <p>The structure of the executor invoking the actions in custom orchestration. </p>
     #   @return [Types::OrchestrationExecutor]
     class CustomOrchestration < Struct.new(
+      nil,
       :executor,
       keyword_init: true
     )
@@ -802,6 +837,7 @@ module Aws::BedrockAgentRuntime
     #   <p> The event details used with the custom orchestration. </p>
     #   @return [Types::CustomOrchestrationTraceEvent]
     class CustomOrchestrationTrace < Struct.new(
+      nil,
       :trace_id,
       :event,
       keyword_init: true
@@ -815,6 +851,7 @@ module Aws::BedrockAgentRuntime
     #   <p> The text that prompted the event at this step. </p>
     #   @return [String]
     class CustomOrchestrationTraceEvent < Struct.new(
+      nil,
       :text,
       keyword_init: true
     )
@@ -834,6 +871,7 @@ module Aws::BedrockAgentRuntime
     #   <p>The unique session identifier of the memory.</p>
     #   @return [String]
     class DeleteAgentMemoryRequest < Struct.new(
+      nil,
       :agent_id,
       :agent_alias_id,
       :memory_id,
@@ -844,6 +882,7 @@ module Aws::BedrockAgentRuntime
     end
 
     class DeleteAgentMemoryResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -853,6 +892,7 @@ module Aws::BedrockAgentRuntime
     #   <p>The unique identifier for the session to be deleted. You can specify either the session's <code>sessionId</code> or its Amazon Resource Name (ARN).</p>
     #   @return [String]
     class DeleteSessionRequest < Struct.new(
+      nil,
       :session_identifier,
       keyword_init: true
     )
@@ -860,6 +900,7 @@ module Aws::BedrockAgentRuntime
     end
 
     class DeleteSessionResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -872,6 +913,7 @@ module Aws::BedrockAgentRuntime
     #   <p>The name of the dependency that caused the issue, such as Amazon Bedrock, Lambda, or STS.</p>
     #   @return [String]
     class DependencyFailedException < Struct.new(
+      nil,
       :message,
       :resource_name,
       keyword_init: true
@@ -883,6 +925,7 @@ module Aws::BedrockAgentRuntime
     #   <p>The unique identifier for the session to end. You can specify either the session's <code>sessionId</code> or its Amazon Resource Name (ARN).</p>
     #   @return [String]
     class EndSessionRequest < Struct.new(
+      nil,
       :session_identifier,
       keyword_init: true
     )
@@ -899,6 +942,7 @@ module Aws::BedrockAgentRuntime
     #   <p>The current status of the session you ended.</p>
     #   @return [String]
     class EndSessionResponse < Struct.new(
+      nil,
       :session_id,
       :session_arn,
       :session_status,
@@ -918,6 +962,7 @@ module Aws::BedrockAgentRuntime
     #   <p>The identifier, contentType, and data of the external source wrapper object.</p>
     #   @return [Types::ByteContentDoc]
     class ExternalSource < Struct.new(
+      nil,
       :source_type,
       :s3_location,
       :byte_content,
@@ -943,6 +988,7 @@ module Aws::BedrockAgentRuntime
     #   <p>The latency configuration for the model.</p>
     #   @return [Types::PerformanceConfiguration]
     class ExternalSourcesGenerationConfiguration < Struct.new(
+      nil,
       :prompt_template,
       :guardrail_configuration,
       :inference_config,
@@ -964,6 +1010,7 @@ module Aws::BedrockAgentRuntime
     #   <p>The prompt used with the external source wrapper object with the <code>retrieveAndGenerate</code> function.</p>
     #   @return [Types::ExternalSourcesGenerationConfiguration]
     class ExternalSourcesRetrieveAndGenerateConfiguration < Struct.new(
+      nil,
       :model_arn,
       :sources,
       :generation_configuration,
@@ -987,6 +1034,7 @@ module Aws::BedrockAgentRuntime
     #   <p>Information about the failure that occurred.</p>
     #   @return [Types::Metadata]
     class FailureTrace < Struct.new(
+      nil,
       :trace_id,
       :failure_reason,
       :failure_code,
@@ -1001,6 +1049,7 @@ module Aws::BedrockAgentRuntime
     #   <p>The name of a metadata field to include in or exclude from consideration when reranking.</p>
     #   @return [String]
     class FieldForReranking < Struct.new(
+      nil,
       :field_name,
       keyword_init: true
     )
@@ -1012,6 +1061,7 @@ module Aws::BedrockAgentRuntime
     #   <p>Files containing intermediate response for the user.</p>
     #   @return [Array<Types::OutputFile>]
     class FilePart < Struct.new(
+      nil,
       :files,
       keyword_init: true
     )
@@ -1029,6 +1079,7 @@ module Aws::BedrockAgentRuntime
     #   <p>The data and the text of the attached files.</p>
     #   @return [Types::ByteContentFile]
     class FileSource < Struct.new(
+      nil,
       :source_type,
       :s3_location,
       :byte_content,
@@ -1045,6 +1096,7 @@ module Aws::BedrockAgentRuntime
     #   <p>The value to whcih to compare the value of the metadata attribute.</p>
     #   @return [JSON]
     class FilterAttribute < Struct.new(
+      nil,
       :key,
       :value,
       keyword_init: true
@@ -1060,6 +1112,7 @@ module Aws::BedrockAgentRuntime
     #   <p>Contains information about the invoke agent operation.</p>
     #   @return [Types::Metadata]
     class FinalResponse < Struct.new(
+      nil,
       :text,
       :metadata,
       keyword_init: true
@@ -1073,6 +1126,7 @@ module Aws::BedrockAgentRuntime
     #   <p>The reason that the flow completed.</p>
     #   @return [String]
     class FlowCompletionEvent < Struct.new(
+      nil,
       :completion_reason,
       keyword_init: true
     )
@@ -1106,6 +1160,7 @@ module Aws::BedrockAgentRuntime
     #   <p>A descriptive message that provides details about the error.</p>
     #   @return [String]
     class FlowExecutionError < Struct.new(
+      nil,
       :node_name,
       :error,
       :message,
@@ -1181,6 +1236,7 @@ module Aws::BedrockAgentRuntime
     #   <p>A list of input fields provided to the flow.</p>
     #   @return [Array<Types::FlowInputField>]
     class FlowExecutionInputEvent < Struct.new(
+      nil,
       :node_name,
       :timestamp,
       :fields,
@@ -1201,6 +1257,7 @@ module Aws::BedrockAgentRuntime
     #   <p>A list of output fields produced by the flow.</p>
     #   @return [Array<Types::FlowOutputField>]
     class FlowExecutionOutputEvent < Struct.new(
+      nil,
       :node_name,
       :timestamp,
       :fields,
@@ -1232,6 +1289,7 @@ module Aws::BedrockAgentRuntime
     #   <p>The timestamp when the flow execution ended. This field is only populated when the execution has completed, failed, timed out, or been aborted.</p>
     #   @return [Time]
     class FlowExecutionSummary < Struct.new(
+      nil,
       :execution_arn,
       :flow_alias_identifier,
       :flow_identifier,
@@ -1256,6 +1314,7 @@ module Aws::BedrockAgentRuntime
     #   <p>A descriptive message that provides details about the failure.</p>
     #   @return [String]
     class FlowFailureEvent < Struct.new(
+      nil,
       :timestamp,
       :error_code,
       :error_message,
@@ -1278,6 +1337,7 @@ module Aws::BedrockAgentRuntime
     #   <p>The name of the input from the flow input node.</p>
     #   @return [String]
     class FlowInput < Struct.new(
+      nil,
       :node_name,
       :node_output_name,
       :content,
@@ -1312,6 +1372,7 @@ module Aws::BedrockAgentRuntime
     #   <p>The content of the input field, which can contain text or structured data.</p>
     #   @return [Types::FlowExecutionContent]
     class FlowInputField < Struct.new(
+      nil,
       :name,
       :content,
       keyword_init: true
@@ -1346,6 +1407,7 @@ module Aws::BedrockAgentRuntime
     #   <p>The content payload containing the input request details for the multi-turn interaction.</p>
     #   @return [Types::FlowMultiTurnInputContent]
     class FlowMultiTurnInputRequestEvent < Struct.new(
+      nil,
       :node_name,
       :node_type,
       :content,
@@ -1381,6 +1443,7 @@ module Aws::BedrockAgentRuntime
     #   <p>The content in the output.</p>
     #   @return [Types::FlowOutputContent]
     class FlowOutputEvent < Struct.new(
+      nil,
       :node_name,
       :node_type,
       :content,
@@ -1398,6 +1461,7 @@ module Aws::BedrockAgentRuntime
     #   <p>The content of the output field, which can contain text or structured data.</p>
     #   @return [Types::FlowExecutionContent]
     class FlowOutputField < Struct.new(
+      nil,
       :name,
       :content,
       keyword_init: true
@@ -1522,6 +1586,7 @@ module Aws::BedrockAgentRuntime
     #   <p>The name of the condition.</p>
     #   @return [String]
     class FlowTraceCondition < Struct.new(
+      nil,
       :condition_name,
       keyword_init: true
     )
@@ -1540,6 +1605,7 @@ module Aws::BedrockAgentRuntime
     #   <p>An array of objects containing information about the conditions that were satisfied.</p>
     #   @return [Array<Types::FlowTraceCondition>]
     class FlowTraceConditionNodeResultEvent < Struct.new(
+      nil,
       :node_name,
       :timestamp,
       :satisfied_conditions,
@@ -1560,6 +1626,7 @@ module Aws::BedrockAgentRuntime
     #   <p>The trace elements containing detailed information about the dependency.</p>
     #   @return [Types::TraceElements]
     class FlowTraceDependencyEvent < Struct.new(
+      nil,
       :node_name,
       :timestamp,
       :trace_elements,
@@ -1573,6 +1640,7 @@ module Aws::BedrockAgentRuntime
     #   <p>The trace object containing information about an input or output for a node in the flow.</p>
     #   @return [Types::FlowTrace]
     class FlowTraceEvent < Struct.new(
+      nil,
       :trace,
       keyword_init: true
     )
@@ -1603,6 +1671,7 @@ module Aws::BedrockAgentRuntime
     #   <p>The response payload received from the downstream service.</p>
     #   @return [JSON]
     class FlowTraceNodeActionEvent < Struct.new(
+      nil,
       :node_name,
       :timestamp,
       :request_id,
@@ -1643,6 +1712,7 @@ module Aws::BedrockAgentRuntime
     #   <p>An array of objects containing information about each field in the input.</p>
     #   @return [Array<Types::FlowTraceNodeInputField>]
     class FlowTraceNodeInputEvent < Struct.new(
+      nil,
       :node_name,
       :timestamp,
       :fields,
@@ -1663,6 +1733,7 @@ module Aws::BedrockAgentRuntime
     #   <p>The type of execution chain item. Supported values are Iterator and Loop.</p>
     #   @return [String]
     class FlowTraceNodeInputExecutionChainItem < Struct.new(
+      nil,
       :node_name,
       :index,
       :type,
@@ -1692,6 +1763,7 @@ module Aws::BedrockAgentRuntime
     #   <p>The execution path through nested nodes like iterators and loops.</p>
     #   @return [Array<Types::FlowTraceNodeInputExecutionChainItem>]
     class FlowTraceNodeInputField < Struct.new(
+      nil,
       :node_input_name,
       :content,
       :source,
@@ -1715,6 +1787,7 @@ module Aws::BedrockAgentRuntime
     #   <p>The expression used to extract data from the source.</p>
     #   @return [String]
     class FlowTraceNodeInputSource < Struct.new(
+      nil,
       :node_name,
       :output_field_name,
       :expression,
@@ -1750,6 +1823,7 @@ module Aws::BedrockAgentRuntime
     #   <p>An array of objects containing information about each field in the output.</p>
     #   @return [Array<Types::FlowTraceNodeOutputField>]
     class FlowTraceNodeOutputEvent < Struct.new(
+      nil,
       :node_name,
       :timestamp,
       :fields,
@@ -1773,6 +1847,7 @@ module Aws::BedrockAgentRuntime
     #   <p>The data type of the output field for compatibility validation.</p>
     #   @return [String]
     class FlowTraceNodeOutputField < Struct.new(
+      nil,
       :node_output_name,
       :content,
       :next,
@@ -1791,6 +1866,7 @@ module Aws::BedrockAgentRuntime
     #   <p>The name of the input field in the next node that receives the data.</p>
     #   @return [String]
     class FlowTraceNodeOutputNext < Struct.new(
+      nil,
       :node_name,
       :input_field_name,
       keyword_init: true
@@ -1812,6 +1888,7 @@ module Aws::BedrockAgentRuntime
     #   <p> Contains information if user confirmation is required to invoke the function. </p>
     #   @return [String]
     class FunctionDefinition < Struct.new(
+      nil,
       :name,
       :description,
       :parameters,
@@ -1841,6 +1918,7 @@ module Aws::BedrockAgentRuntime
     #   <p>The collaborator's name.</p>
     #   @return [String]
     class FunctionInvocationInput < Struct.new(
+      nil,
       :action_group,
       :parameters,
       :function,
@@ -1863,6 +1941,7 @@ module Aws::BedrockAgentRuntime
     #   <p>The value of the parameter.</p>
     #   @return [String]
     class FunctionParameter < Struct.new(
+      nil,
       :name,
       :type,
       :value,
@@ -1891,6 +1970,7 @@ module Aws::BedrockAgentRuntime
     #   <p>The agent's ID.</p>
     #   @return [String]
     class FunctionResult < Struct.new(
+      nil,
       :action_group,
       :confirmation_state,
       :function,
@@ -1924,6 +2004,7 @@ module Aws::BedrockAgentRuntime
     #   <p>Specifies configurations for transforming the natural language query into SQL.</p>
     #   @return [Types::TransformationConfiguration]
     class GenerateQueryRequest < Struct.new(
+      nil,
       :query_generation_input,
       :transformation_configuration,
       keyword_init: true
@@ -1935,6 +2016,7 @@ module Aws::BedrockAgentRuntime
     #   <p>A list of objects, each of which defines a generated query that can correspond to the natural language queries.</p>
     #   @return [Array<Types::GeneratedQuery>]
     class GenerateQueryResponse < Struct.new(
+      nil,
       :queries,
       keyword_init: true
     )
@@ -1950,6 +2032,7 @@ module Aws::BedrockAgentRuntime
     #   <p>An SQL query that corresponds to the natural language query.</p>
     #   @return [String]
     class GeneratedQuery < Struct.new(
+      nil,
       :type,
       :sql,
       keyword_init: true
@@ -1962,6 +2045,7 @@ module Aws::BedrockAgentRuntime
     #   <p>Contains metadata about a textual part of the generated response that is accompanied by a citation.</p>
     #   @return [Types::TextResponsePart]
     class GeneratedResponsePart < Struct.new(
+      nil,
       :text_response_part,
       keyword_init: true
     )
@@ -1985,6 +2069,7 @@ module Aws::BedrockAgentRuntime
     #   <p>The latency configuration for the model.</p>
     #   @return [Types::PerformanceConfiguration]
     class GenerationConfiguration < Struct.new(
+      nil,
       :prompt_template,
       :guardrail_configuration,
       :inference_config,
@@ -2014,6 +2099,7 @@ module Aws::BedrockAgentRuntime
     #   <p>The unique identifier of the memory. </p>
     #   @return [String]
     class GetAgentMemoryRequest < Struct.new(
+      nil,
       :next_token,
       :max_items,
       :agent_id,
@@ -2032,6 +2118,7 @@ module Aws::BedrockAgentRuntime
     #   <p>Contains details of the sessions stored in the memory</p>
     #   @return [Array<Types::Memory>]
     class GetAgentMemoryResponse < Struct.new(
+      nil,
       :next_token,
       :memory_contents,
       keyword_init: true
@@ -2049,6 +2136,7 @@ module Aws::BedrockAgentRuntime
     #   <p>The unique identifier of the flow execution.</p>
     #   @return [String]
     class GetExecutionFlowSnapshotRequest < Struct.new(
+      nil,
       :flow_identifier,
       :flow_alias_identifier,
       :execution_identifier,
@@ -2076,6 +2164,7 @@ module Aws::BedrockAgentRuntime
     #   <p>The Amazon Resource Name (ARN) of the customer managed KMS key that's used to encrypt the flow snapshot.</p>
     #   @return [String]
     class GetExecutionFlowSnapshotResponse < Struct.new(
+      nil,
       :flow_identifier,
       :flow_alias_identifier,
       :flow_version,
@@ -2097,6 +2186,7 @@ module Aws::BedrockAgentRuntime
     #   <p>The unique identifier of the flow execution to retrieve.</p>
     #   @return [String]
     class GetFlowExecutionRequest < Struct.new(
+      nil,
       :flow_identifier,
       :flow_alias_identifier,
       :execution_identifier,
@@ -2130,6 +2220,7 @@ module Aws::BedrockAgentRuntime
     #   <p>The version of the flow used for the execution.</p>
     #   @return [String]
     class GetFlowExecutionResponse < Struct.new(
+      nil,
       :execution_arn,
       :status,
       :started_at,
@@ -2153,6 +2244,7 @@ module Aws::BedrockAgentRuntime
     #   <p>The unique identifier for the invocation step's associated session. You can specify either the session's <code>sessionId</code> or its Amazon Resource Name (ARN).</p>
     #   @return [String]
     class GetInvocationStepRequest < Struct.new(
+      nil,
       :invocation_identifier,
       :invocation_step_id,
       :session_identifier,
@@ -2165,6 +2257,7 @@ module Aws::BedrockAgentRuntime
     #   <p>The complete details of the requested invocation step.</p>
     #   @return [Types::InvocationStep]
     class GetInvocationStepResponse < Struct.new(
+      nil,
       :invocation_step,
       keyword_init: true
     )
@@ -2175,6 +2268,7 @@ module Aws::BedrockAgentRuntime
     #   <p>A unique identifier for the session to retrieve. You can specify either the session's <code>sessionId</code> or its Amazon Resource Name (ARN).</p>
     #   @return [String]
     class GetSessionRequest < Struct.new(
+      nil,
       :session_identifier,
       keyword_init: true
     )
@@ -2203,6 +2297,7 @@ module Aws::BedrockAgentRuntime
     #   <p>The Amazon Resource Name (ARN) of the Key Management Service key used to encrypt the session data. For more information, see <a href="https://docs.aws.amazon.com/bedrock/latest/userguide/session-encryption.html">Amazon Bedrock session encryption</a>.</p>
     #   @return [String]
     class GetSessionResponse < Struct.new(
+      nil,
       :session_id,
       :session_arn,
       :session_status,
@@ -2230,6 +2325,7 @@ module Aws::BedrockAgentRuntime
     #   <p>Sensitive Information policy details of Guardrail.</p>
     #   @return [Types::GuardrailSensitiveInformationPolicyAssessment]
     class GuardrailAssessment < Struct.new(
+      nil,
       :topic_policy,
       :content_policy,
       :word_policy,
@@ -2247,6 +2343,7 @@ module Aws::BedrockAgentRuntime
     #   <p>The version of the guardrail.</p>
     #   @return [String]
     class GuardrailConfiguration < Struct.new(
+      nil,
       :guardrail_id,
       :guardrail_version,
       keyword_init: true
@@ -2262,6 +2359,7 @@ module Aws::BedrockAgentRuntime
     #   <p> The version of the guardrail. </p>
     #   @return [String]
     class GuardrailConfigurationWithArn < Struct.new(
+      nil,
       :guardrail_identifier,
       :guardrail_version,
       keyword_init: true
@@ -2281,6 +2379,7 @@ module Aws::BedrockAgentRuntime
     #   <p>The action placed on the content by the Guardrail filter.</p>
     #   @return [String]
     class GuardrailContentFilter < Struct.new(
+      nil,
       :type,
       :confidence,
       :action,
@@ -2295,6 +2394,7 @@ module Aws::BedrockAgentRuntime
     #   <p>The filter details of the policy assessment used in the Guardrails filter.</p>
     #   @return [Array<Types::GuardrailContentFilter>]
     class GuardrailContentPolicyAssessment < Struct.new(
+      nil,
       :filters,
       keyword_init: true
     )
@@ -2310,6 +2410,7 @@ module Aws::BedrockAgentRuntime
     #   <p>The action details for the custom word filter in the Guardrail.</p>
     #   @return [String]
     class GuardrailCustomWord < Struct.new(
+      nil,
       :match,
       :action,
       keyword_init: true
@@ -2322,6 +2423,7 @@ module Aws::BedrockAgentRuntime
     #   <p>The guardrail action.</p>
     #   @return [String]
     class GuardrailEvent < Struct.new(
+      nil,
       :action,
       keyword_init: true
     )
@@ -2340,6 +2442,7 @@ module Aws::BedrockAgentRuntime
     #   <p>The action details for the managed word filter in the Guardrail.</p>
     #   @return [String]
     class GuardrailManagedWord < Struct.new(
+      nil,
       :match,
       :type,
       :action,
@@ -2360,6 +2463,7 @@ module Aws::BedrockAgentRuntime
     #   <p>The action of the Guardrail filter to identify and remove PII.</p>
     #   @return [String]
     class GuardrailPiiEntityFilter < Struct.new(
+      nil,
       :type,
       :match,
       :action,
@@ -2383,6 +2487,7 @@ module Aws::BedrockAgentRuntime
     #   <p>The action details for the regex filter used in the Guardrail.</p>
     #   @return [String]
     class GuardrailRegexFilter < Struct.new(
+      nil,
       :name,
       :regex,
       :match,
@@ -2401,6 +2506,7 @@ module Aws::BedrockAgentRuntime
     #   <p>The details of the regexes used in the sensitive policy assessment for the Guardrail.</p>
     #   @return [Array<Types::GuardrailRegexFilter>]
     class GuardrailSensitiveInformationPolicyAssessment < Struct.new(
+      nil,
       :pii_entities,
       :regexes,
       keyword_init: true
@@ -2420,6 +2526,7 @@ module Aws::BedrockAgentRuntime
     #   <p>The action details on a specific topic in the Guardrail.</p>
     #   @return [String]
     class GuardrailTopic < Struct.new(
+      nil,
       :name,
       :type,
       :action,
@@ -2434,6 +2541,7 @@ module Aws::BedrockAgentRuntime
     #   <p>The topic details of the policy assessment used in the Guardrail.</p>
     #   @return [Array<Types::GuardrailTopic>]
     class GuardrailTopicPolicyAssessment < Struct.new(
+      nil,
       :topics,
       keyword_init: true
     )
@@ -2458,6 +2566,7 @@ module Aws::BedrockAgentRuntime
     #   <p>Contains information about the Guardrail output.</p>
     #   @return [Types::Metadata]
     class GuardrailTrace < Struct.new(
+      nil,
       :action,
       :trace_id,
       :input_assessments,
@@ -2477,6 +2586,7 @@ module Aws::BedrockAgentRuntime
     #   <p>The managed word lists for words defined in the Guardrail filter.</p>
     #   @return [Array<Types::GuardrailManagedWord>]
     class GuardrailWordPolicyAssessment < Struct.new(
+      nil,
       :custom_words,
       :managed_word_lists,
       keyword_init: true
@@ -2492,6 +2602,7 @@ module Aws::BedrockAgentRuntime
     #   <p>The source for the image.</p>
     #   @return [Types::ImageSource]
     class ImageBlock < Struct.new(
+      nil,
       :format,
       :source,
       keyword_init: true
@@ -2507,6 +2618,7 @@ module Aws::BedrockAgentRuntime
     #   <p>The source of the image in the result.</p>
     #   @return [Types::ImageInputSource]
     class ImageInput < Struct.new(
+      nil,
       :format,
       :source,
       keyword_init: true
@@ -2557,6 +2669,7 @@ module Aws::BedrockAgentRuntime
     #   <p>The model that generates the filter.</p>
     #   @return [String]
     class ImplicitFilterConfiguration < Struct.new(
+      nil,
       :metadata_attributes,
       :model_arn,
       keyword_init: true
@@ -2569,6 +2682,7 @@ module Aws::BedrockAgentRuntime
     #   <p> Configuration settings specific to text generation while generating responses using RetrieveAndGenerate. </p>
     #   @return [Types::TextInferenceConfig]
     class InferenceConfig < Struct.new(
+      nil,
       :text_inference_config,
       keyword_init: true
     )
@@ -2592,6 +2706,7 @@ module Aws::BedrockAgentRuntime
     #   <p>A list of stop sequences. A stop sequence is a sequence of characters that causes the model to stop generating the response.</p>
     #   @return [Array<String>]
     class InferenceConfiguration < Struct.new(
+      nil,
       :temperature,
       :top_p,
       :top_k,
@@ -2607,6 +2722,7 @@ module Aws::BedrockAgentRuntime
     #   <p>Files containing intermediate response for the user.</p>
     #   @return [Array<Types::OutputFile>]
     class InlineAgentFilePart < Struct.new(
+      nil,
       :files,
       keyword_init: true
     )
@@ -2622,6 +2738,7 @@ module Aws::BedrockAgentRuntime
     #   <p>Contains citations for a part of an agent response.</p>
     #   @return [Types::Attribution]
     class InlineAgentPayloadPart < Struct.new(
+      nil,
       :bytes,
       :attribution,
       keyword_init: true
@@ -2713,6 +2830,7 @@ module Aws::BedrockAgentRuntime
     #   <p>The identifier of the action group invocation. </p>
     #   @return [String]
     class InlineAgentReturnControlPayload < Struct.new(
+      nil,
       :invocation_inputs,
       :invocation_id,
       keyword_init: true
@@ -2738,6 +2856,7 @@ module Aws::BedrockAgentRuntime
     #   <p>The collaborator name for the trace part.</p>
     #   @return [String]
     class InlineAgentTracePart < Struct.new(
+      nil,
       :session_id,
       :trace,
       :caller_chain,
@@ -2753,6 +2872,7 @@ module Aws::BedrockAgentRuntime
     #   <p>The latency configuration for the model.</p>
     #   @return [Types::PerformanceConfiguration]
     class InlineBedrockModelConfigurations < Struct.new(
+      nil,
       :performance_config,
       keyword_init: true
     )
@@ -2779,6 +2899,7 @@ module Aws::BedrockAgentRuntime
     #   <p> Contains the conversation history that persist across sessions. </p>
     #   @return [Types::ConversationHistory]
     class InlineSessionState < Struct.new(
+      nil,
       :session_attributes,
       :prompt_session_attributes,
       :return_control_invocation_results,
@@ -2801,6 +2922,7 @@ module Aws::BedrockAgentRuntime
     #   <p>Specifies how the source files will be used by the code interpreter.</p>
     #   @return [String]
     class InputFile < Struct.new(
+      nil,
       :name,
       :source,
       :use_case,
@@ -2831,6 +2953,7 @@ module Aws::BedrockAgentRuntime
     #   <p>The reason for the exception. If the reason is <code>BEDROCK_MODEL_INVOCATION_SERVICE_UNAVAILABLE</code>, the model invocation service is unavailable. Retry your request.</p>
     #   @return [String]
     class InternalServerException < Struct.new(
+      nil,
       :message,
       :reason,
       keyword_init: true
@@ -2859,6 +2982,7 @@ module Aws::BedrockAgentRuntime
     #   <p>The collaborator's invocation input.</p>
     #   @return [Types::AgentCollaboratorInvocationInput]
     class InvocationInput < Struct.new(
+      nil,
       :trace_id,
       :invocation_type,
       :action_group_invocation_input,
@@ -2927,6 +3051,7 @@ module Aws::BedrockAgentRuntime
     #   <p>Payload content, such as text and images, for the invocation step.</p>
     #   @return [Types::InvocationStepPayload]
     class InvocationStep < Struct.new(
+      nil,
       :session_id,
       :invocation_id,
       :invocation_step_id,
@@ -2966,6 +3091,7 @@ module Aws::BedrockAgentRuntime
     #   <p>The timestamp for when the invocation step was created.</p>
     #   @return [Time]
     class InvocationStepSummary < Struct.new(
+      nil,
       :session_id,
       :invocation_id,
       :invocation_step_id,
@@ -2986,6 +3112,7 @@ module Aws::BedrockAgentRuntime
     #   <p>The timestamp for when the invocation was created.</p>
     #   @return [Time]
     class InvocationSummary < Struct.new(
+      nil,
       :session_id,
       :invocation_id,
       :created_at,
@@ -3031,6 +3158,7 @@ module Aws::BedrockAgentRuntime
     #   <p>The ARN of the resource making the request.</p>
     #   @return [String]
     class InvokeAgentRequest < Struct.new(
+      nil,
       :session_state,
       :agent_id,
       :agent_alias_id,
@@ -3061,6 +3189,7 @@ module Aws::BedrockAgentRuntime
     #   <p>The unique identifier of the agent memory.</p>
     #   @return [String]
     class InvokeAgentResponse < Struct.new(
+      nil,
       :completion,
       :content_type,
       :session_id,
@@ -3089,6 +3218,7 @@ module Aws::BedrockAgentRuntime
     #   <p>The unique identifier for the current flow execution. If you don't provide a value, Amazon Bedrock creates the identifier for you. </p>
     #   @return [String]
     class InvokeFlowRequest < Struct.new(
+      nil,
       :flow_identifier,
       :flow_alias_identifier,
       :inputs,
@@ -3107,6 +3237,7 @@ module Aws::BedrockAgentRuntime
     #   <p>The unique identifier for the current flow execution.</p>
     #   @return [String]
     class InvokeFlowResponse < Struct.new(
+      nil,
       :response_stream,
       :execution_id,
       keyword_init: true
@@ -3181,6 +3312,7 @@ module Aws::BedrockAgentRuntime
     #   <p>Contains details of the custom orchestration configured for the agent. </p>
     #   @return [Types::CustomOrchestration]
     class InvokeInlineAgentRequest < Struct.new(
+      nil,
       :customer_encryption_key_arn,
       :foundation_model,
       :instruction,
@@ -3218,6 +3350,7 @@ module Aws::BedrockAgentRuntime
     #   <p> The unique identifier of the session with the agent. </p>
     #   @return [String]
     class InvokeInlineAgentResponse < Struct.new(
+      nil,
       :completion,
       :content_type,
       :session_id,
@@ -3237,6 +3370,7 @@ module Aws::BedrockAgentRuntime
     #   <p> The configurations to apply to the knowledge base during query. For more information, see <a href="https://docs.aws.amazon.com/bedrock/latest/userguide/kb-test-config.html">Query configurations</a>. </p>
     #   @return [Types::KnowledgeBaseRetrievalConfiguration]
     class KnowledgeBase < Struct.new(
+      nil,
       :knowledge_base_id,
       :description,
       :retrieval_configuration,
@@ -3253,6 +3387,7 @@ module Aws::BedrockAgentRuntime
     #   <p>The configurations to apply to the knowledge base during query. For more information, see <a href="https://docs.aws.amazon.com/bedrock/latest/userguide/kb-test-config.html">Query configurations</a>.</p>
     #   @return [Types::KnowledgeBaseRetrievalConfiguration]
     class KnowledgeBaseConfiguration < Struct.new(
+      nil,
       :knowledge_base_id,
       :retrieval_configuration,
       keyword_init: true
@@ -3268,6 +3403,7 @@ module Aws::BedrockAgentRuntime
     #   <p>The unique identifier of the knowledge base to look up.</p>
     #   @return [String]
     class KnowledgeBaseLookupInput < Struct.new(
+      nil,
       :text,
       :knowledge_base_id,
       keyword_init: true
@@ -3283,6 +3419,7 @@ module Aws::BedrockAgentRuntime
     #   <p>Contains information about the knowledge base output.</p>
     #   @return [Types::Metadata]
     class KnowledgeBaseLookupOutput < Struct.new(
+      nil,
       :retrieved_references,
       :metadata,
       keyword_init: true
@@ -3296,6 +3433,7 @@ module Aws::BedrockAgentRuntime
     #   <p>The text of the query made to the knowledge base.</p>
     #   @return [String]
     class KnowledgeBaseQuery < Struct.new(
+      nil,
       :text,
       keyword_init: true
     )
@@ -3307,6 +3445,7 @@ module Aws::BedrockAgentRuntime
     #   <p>Contains details about how the results from the vector search should be returned. For more information, see <a href="https://docs.aws.amazon.com/bedrock/latest/userguide/kb-test-config.html">Query configurations</a>.</p>
     #   @return [Types::KnowledgeBaseVectorSearchConfiguration]
     class KnowledgeBaseRetrievalConfiguration < Struct.new(
+      nil,
       :vector_search_configuration,
       keyword_init: true
     )
@@ -3327,6 +3466,7 @@ module Aws::BedrockAgentRuntime
     #   <p>Contains metadata attributes and their values for the file in the data source. For more information, see <a href="https://docs.aws.amazon.com/bedrock/latest/userguide/knowledge-base-ds.html#kb-ds-metadata">Metadata and filtering</a>.</p>
     #   @return [Hash<String, JSON>]
     class KnowledgeBaseRetrievalResult < Struct.new(
+      nil,
       :content,
       :location,
       :score,
@@ -3353,6 +3493,7 @@ module Aws::BedrockAgentRuntime
     #   <p>Settings for how the model processes the prompt prior to retrieval and generation.</p>
     #   @return [Types::OrchestrationConfiguration]
     class KnowledgeBaseRetrieveAndGenerateConfiguration < Struct.new(
+      nil,
       :knowledge_base_id,
       :model_arn,
       :retrieval_configuration,
@@ -3380,6 +3521,7 @@ module Aws::BedrockAgentRuntime
     #   <p>Settings for implicit filtering.</p>
     #   @return [Types::ImplicitFilterConfiguration]
     class KnowledgeBaseVectorSearchConfiguration < Struct.new(
+      nil,
       :number_of_results,
       :override_search_type,
       :filter,
@@ -3414,6 +3556,7 @@ module Aws::BedrockAgentRuntime
     #   <p>The type of events to retrieve. Specify <code>Node</code> for node-level events or <code>Flow</code> for flow-level events.</p>
     #   @return [String]
     class ListFlowExecutionEventsRequest < Struct.new(
+      nil,
       :flow_identifier,
       :flow_alias_identifier,
       :execution_identifier,
@@ -3432,6 +3575,7 @@ module Aws::BedrockAgentRuntime
     #   <p>A token to retrieve the next set of results. This value is returned if more results are available.</p>
     #   @return [String]
     class ListFlowExecutionEventsResponse < Struct.new(
+      nil,
       :flow_execution_events,
       :next_token,
       keyword_init: true
@@ -3452,6 +3596,7 @@ module Aws::BedrockAgentRuntime
     #   <p>A token to retrieve the next set of results. This value is returned in the response if more results are available.</p>
     #   @return [String]
     class ListFlowExecutionsRequest < Struct.new(
+      nil,
       :flow_identifier,
       :flow_alias_identifier,
       :max_results,
@@ -3468,6 +3613,7 @@ module Aws::BedrockAgentRuntime
     #   <p>A token to retrieve the next set of results. This value is returned if more results are available.</p>
     #   @return [String]
     class ListFlowExecutionsResponse < Struct.new(
+      nil,
       :flow_execution_summaries,
       :next_token,
       keyword_init: true
@@ -3488,6 +3634,7 @@ module Aws::BedrockAgentRuntime
     #   <p>The unique identifier for the session associated with the invocation steps. You can specify either the session's <code>sessionId</code> or its Amazon Resource Name (ARN).</p>
     #   @return [String]
     class ListInvocationStepsRequest < Struct.new(
+      nil,
       :invocation_identifier,
       :next_token,
       :max_results,
@@ -3504,6 +3651,7 @@ module Aws::BedrockAgentRuntime
     #   <p>If the total number of results is greater than the <code>maxResults</code> value provided in the request, use this token when making another request in the <code>nextToken</code> field to return the next batch of results.</p>
     #   @return [String]
     class ListInvocationStepsResponse < Struct.new(
+      nil,
       :invocation_step_summaries,
       :next_token,
       keyword_init: true
@@ -3521,6 +3669,7 @@ module Aws::BedrockAgentRuntime
     #   <p>The unique identifier for the session to list invocations for. You can specify either the session's <code>sessionId</code> or its Amazon Resource Name (ARN).</p>
     #   @return [String]
     class ListInvocationsRequest < Struct.new(
+      nil,
       :next_token,
       :max_results,
       :session_identifier,
@@ -3536,6 +3685,7 @@ module Aws::BedrockAgentRuntime
     #   <p>If the total number of results is greater than the <code>maxResults</code> value provided in the request, use this token when making another request in the <code>nextToken</code> field to return the next batch of results.</p>
     #   @return [String]
     class ListInvocationsResponse < Struct.new(
+      nil,
       :invocation_summaries,
       :next_token,
       keyword_init: true
@@ -3550,6 +3700,7 @@ module Aws::BedrockAgentRuntime
     #   <p>If the total number of results is greater than the <code>maxResults</code> value provided in the request, enter the token returned in the <code>nextToken</code> field in the response in this field to return the next batch of results. </p>
     #   @return [String]
     class ListSessionsRequest < Struct.new(
+      nil,
       :max_results,
       :next_token,
       keyword_init: true
@@ -3564,6 +3715,7 @@ module Aws::BedrockAgentRuntime
     #   <p>If the total number of results is greater than the <code>maxResults</code> value provided in the request, use this token when making another request in the <code>nextToken</code> field to return the next batch of results.</p>
     #   @return [String]
     class ListSessionsResponse < Struct.new(
+      nil,
       :session_summaries,
       :next_token,
       keyword_init: true
@@ -3575,6 +3727,7 @@ module Aws::BedrockAgentRuntime
     #   <p>The Amazon Resource Name (ARN) of the resource for which to list tags.</p>
     #   @return [String]
     class ListTagsForResourceRequest < Struct.new(
+      nil,
       :resource_arn,
       keyword_init: true
     )
@@ -3585,6 +3738,7 @@ module Aws::BedrockAgentRuntime
     #   <p>The key-value pairs for the tags associated with the resource.</p>
     #   @return [Hash<String, String>]
     class ListTagsForResourceResponse < Struct.new(
+      nil,
       :tags,
       keyword_init: true
     )
@@ -3623,6 +3777,7 @@ module Aws::BedrockAgentRuntime
     #   <p>The summarized text for this session.</p>
     #   @return [String]
     class MemorySessionSummary < Struct.new(
+      nil,
       :memory_id,
       :session_id,
       :session_start_time,
@@ -3641,6 +3796,7 @@ module Aws::BedrockAgentRuntime
     #   <p>The message's content.</p>
     #   @return [Array<Types::ContentBlock>]
     class Message < Struct.new(
+      nil,
       :role,
       :content,
       keyword_init: true
@@ -3669,6 +3825,7 @@ module Aws::BedrockAgentRuntime
     #   <p>Specific to model invocation and contains details about the usage of a foundation model.</p>
     #   @return [Types::Usage]
     class Metadata < Struct.new(
+      nil,
       :start_time,
       :end_time,
       :total_time_ms,
@@ -3692,6 +3849,7 @@ module Aws::BedrockAgentRuntime
     #   <p>The attribute's description.</p>
     #   @return [String]
     class MetadataAttributeSchema < Struct.new(
+      nil,
       :key,
       :type,
       :description,
@@ -3708,6 +3866,7 @@ module Aws::BedrockAgentRuntime
     #   <p>Contains configurations for the metadata fields to include or exclude when considering reranking.</p>
     #   @return [Types::RerankingMetadataSelectiveModeConfiguration]
     class MetadataConfigurationForReranking < Struct.new(
+      nil,
       :selection_mode,
       :selective_mode_configuration,
       keyword_init: true
@@ -3742,6 +3901,7 @@ module Aws::BedrockAgentRuntime
     #   <p>The identifier of a foundation model.</p>
     #   @return [String]
     class ModelInvocationInput < Struct.new(
+      nil,
       :trace_id,
       :text,
       :type,
@@ -3759,6 +3919,7 @@ module Aws::BedrockAgentRuntime
     # @!attribute message
     #   @return [String]
     class ModelNotReadyException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -3770,6 +3931,7 @@ module Aws::BedrockAgentRuntime
     #   <p>The latency configuration for the model.</p>
     #   @return [Types::PerformanceConfiguration]
     class ModelPerformanceConfiguration < Struct.new(
+      nil,
       :performance_config,
       keyword_init: true
     )
@@ -3800,6 +3962,7 @@ module Aws::BedrockAgentRuntime
     #   <p>The response payload received from the downstream service.</p>
     #   @return [JSON]
     class NodeActionEvent < Struct.new(
+      nil,
       :node_name,
       :timestamp,
       :request_id,
@@ -3824,6 +3987,7 @@ module Aws::BedrockAgentRuntime
     #   <p>The trace elements containing detailed information about the node execution.</p>
     #   @return [Types::NodeTraceElements]
     class NodeDependencyEvent < Struct.new(
+      nil,
       :node_name,
       :timestamp,
       :trace_elements,
@@ -3863,6 +4027,7 @@ module Aws::BedrockAgentRuntime
     #   <p>A descriptive message that provides details about the node failure.</p>
     #   @return [String]
     class NodeFailureEvent < Struct.new(
+      nil,
       :node_name,
       :timestamp,
       :error_code,
@@ -3884,6 +4049,7 @@ module Aws::BedrockAgentRuntime
     #   <p>A list of input fields provided to the node.</p>
     #   @return [Array<Types::NodeInputField>]
     class NodeInputEvent < Struct.new(
+      nil,
       :node_name,
       :timestamp,
       :fields,
@@ -3903,6 +4069,7 @@ module Aws::BedrockAgentRuntime
     #   <p>The type of execution chain item. Supported values are Iterator and Loop.</p>
     #   @return [String]
     class NodeInputExecutionChainItem < Struct.new(
+      nil,
       :node_name,
       :index,
       :type,
@@ -3932,6 +4099,7 @@ module Aws::BedrockAgentRuntime
     #   <p>The execution path through nested nodes like iterators and loops.</p>
     #   @return [Array<Types::NodeInputExecutionChainItem>]
     class NodeInputField < Struct.new(
+      nil,
       :name,
       :content,
       :source,
@@ -3954,6 +4122,7 @@ module Aws::BedrockAgentRuntime
     #   <p>The expression used to extract data from the source.</p>
     #   @return [String]
     class NodeInputSource < Struct.new(
+      nil,
       :node_name,
       :output_field_name,
       :expression,
@@ -3974,6 +4143,7 @@ module Aws::BedrockAgentRuntime
     #   <p>A list of output fields produced by the node.</p>
     #   @return [Array<Types::NodeOutputField>]
     class NodeOutputEvent < Struct.new(
+      nil,
       :node_name,
       :timestamp,
       :fields,
@@ -3997,6 +4167,7 @@ module Aws::BedrockAgentRuntime
     #   <p>The data type of the output field for compatibility validation.</p>
     #   @return [String]
     class NodeOutputField < Struct.new(
+      nil,
       :name,
       :content,
       :next,
@@ -4015,6 +4186,7 @@ module Aws::BedrockAgentRuntime
     #   <p>The name of the input field in the next node that receives the data.</p>
     #   @return [String]
     class NodeOutputNext < Struct.new(
+      nil,
       :node_name,
       :input_field_name,
       keyword_init: true
@@ -4065,6 +4237,7 @@ module Aws::BedrockAgentRuntime
     #   <p>Contains the JSON-formatted string returned by the API invoked by the code interpreter.</p>
     #   @return [Types::CodeInterpreterInvocationOutput]
     class Observation < Struct.new(
+      nil,
       :trace_id,
       :type,
       :action_group_invocation_output,
@@ -4085,6 +4258,7 @@ module Aws::BedrockAgentRuntime
     #   <p>The unique identifier of the model that you want to optimize the prompt for.</p>
     #   @return [String]
     class OptimizePromptRequest < Struct.new(
+      nil,
       :input,
       :target_model_id,
       keyword_init: true
@@ -4096,6 +4270,7 @@ module Aws::BedrockAgentRuntime
     #   <p>The prompt after being optimized for the task.</p>
     #   @return [Types::OptimizedPromptStream]
     class OptimizePromptResponse < Struct.new(
+      nil,
       :optimized_prompt,
       keyword_init: true
     )
@@ -4123,6 +4298,7 @@ module Aws::BedrockAgentRuntime
     #   <p>Contains information about the optimized prompt.</p>
     #   @return [Types::OptimizedPrompt]
     class OptimizedPromptEvent < Struct.new(
+      nil,
       :optimized_prompt,
       keyword_init: true
     )
@@ -4196,6 +4372,7 @@ module Aws::BedrockAgentRuntime
     #   <p>The latency configuration for the model.</p>
     #   @return [Types::PerformanceConfiguration]
     class OrchestrationConfiguration < Struct.new(
+      nil,
       :prompt_template,
       :inference_config,
       :additional_model_request_fields,
@@ -4236,6 +4413,7 @@ module Aws::BedrockAgentRuntime
     #   <p>Contains content about the reasoning that the model made during the orchestration step. </p>
     #   @return [Types::ReasoningContentBlock]
     class OrchestrationModelInvocationOutput < Struct.new(
+      nil,
       :trace_id,
       :raw_response,
       :metadata,
@@ -4293,6 +4471,7 @@ module Aws::BedrockAgentRuntime
     #   <p>The byte count of files that contains response from code interpreter.</p>
     #   @return [String]
     class OutputFile < Struct.new(
+      nil,
       :name,
       :type,
       :bytes,
@@ -4312,6 +4491,7 @@ module Aws::BedrockAgentRuntime
     #   <p>The value of the parameter.</p>
     #   @return [String]
     class Parameter < Struct.new(
+      nil,
       :name,
       :type,
       :value,
@@ -4331,6 +4511,7 @@ module Aws::BedrockAgentRuntime
     #   <p> Whether the parameter is required for the agent to complete the function for action group invocation. </p>
     #   @return [Boolean]
     class ParameterDetail < Struct.new(
+      nil,
       :description,
       :type,
       :required,
@@ -4348,6 +4529,7 @@ module Aws::BedrockAgentRuntime
     #   <p>Contains citations for a part of an agent response.</p>
     #   @return [Types::Attribution]
     class PayloadPart < Struct.new(
+      nil,
       :bytes,
       :attribution,
       keyword_init: true
@@ -4360,6 +4542,7 @@ module Aws::BedrockAgentRuntime
     #   <p>To use a latency-optimized version of the model, set to <code>optimized</code>.</p>
     #   @return [String]
     class PerformanceConfiguration < Struct.new(
+      nil,
       :latency,
       keyword_init: true
     )
@@ -4389,6 +4572,7 @@ module Aws::BedrockAgentRuntime
     #   <p>Contains content about the reasoning that the model made during the post-processing step.</p>
     #   @return [Types::ReasoningContentBlock]
     class PostProcessingModelInvocationOutput < Struct.new(
+      nil,
       :trace_id,
       :parsed_response,
       :raw_response,
@@ -4405,6 +4589,7 @@ module Aws::BedrockAgentRuntime
     #   <p>The text returned by the parser.</p>
     #   @return [String]
     class PostProcessingParsedResponse < Struct.new(
+      nil,
       :text,
       keyword_init: true
     )
@@ -4450,6 +4635,7 @@ module Aws::BedrockAgentRuntime
     #   <p>Contains content about the reasoning that the model made during the pre-processing step. </p>
     #   @return [Types::ReasoningContentBlock]
     class PreProcessingModelInvocationOutput < Struct.new(
+      nil,
       :trace_id,
       :parsed_response,
       :raw_response,
@@ -4469,6 +4655,7 @@ module Aws::BedrockAgentRuntime
     #   <p>Whether the user input is valid or not. If <code>false</code>, the agent doesn't proceed to orchestration.</p>
     #   @return [Boolean]
     class PreProcessingParsedResponse < Struct.new(
+      nil,
       :rationale,
       :is_valid,
       keyword_init: true
@@ -4523,6 +4710,7 @@ module Aws::BedrockAgentRuntime
     #   <p>If the Converse or ConverseStream operations support the model, <code>additionalModelRequestFields</code> contains additional inference parameters, beyond the base set of inference parameters in the <code>inferenceConfiguration</code> field. </p> <p>For more information, see <i>Inference request parameters and response fields for foundation models</i> in the Amazon Bedrock user guide.</p>
     #   @return [JSON]
     class PromptConfiguration < Struct.new(
+      nil,
       :prompt_type,
       :prompt_creation_mode,
       :prompt_state,
@@ -4544,6 +4732,7 @@ module Aws::BedrockAgentRuntime
     #   <p>If <code>true</code>, the service removes any content between <code>&lt;thinking&gt;</code> tags from previous conversations in an agent session. The service will only remove content from already processed turns. This helps you remove content which might not be useful for current and subsequent invocations. This can reduce the input token count and potentially save costs. The default value is <code>false</code>.</p>
     #   @return [Boolean]
     class PromptCreationConfigurations < Struct.new(
+      nil,
       :previous_conversation_turns_to_include,
       :exclude_previous_thinking_steps,
       keyword_init: true
@@ -4565,6 +4754,7 @@ module Aws::BedrockAgentRuntime
     #   <p>The ARN of the Lambda function to use when parsing the raw foundation model output in parts of the agent sequence. If you specify this field, at least one of the <code>promptConfigurations</code> must contain a <code>parserMode</code> value that is set to <code>OVERRIDDEN</code>. For more information, see <a href="https://docs.aws.amazon.com/bedrock/latest/userguide/lambda-parser.html">Parser Lambda function in Amazon Bedrock Agents</a>. </p>
     #   @return [String]
     class PromptOverrideConfiguration < Struct.new(
+      nil,
       :prompt_configurations,
       :override_lambda,
       keyword_init: true
@@ -4577,6 +4767,7 @@ module Aws::BedrockAgentRuntime
     #   <p>The template for the prompt that's sent to the model for response generation. You can include prompt placeholders, which become replaced before the prompt is sent to the model to provide instructions and context to the model. In addition, you can include XML tags to delineate meaningful sections of the prompt template.</p> <p>For more information, see the following resources:</p> <ul> <li> <p> <a href="https://docs.aws.amazon.com/bedrock/latest/userguide/kb-test-config.html#kb-test-config-sysprompt">Knowledge base prompt templates</a> </p> </li> <li> <p> <a href="https://docs.anthropic.com/claude/docs/use-xml-tags">Use XML tags with Anthropic Claude models</a> </p> </li> </ul>
     #   @return [String]
     class PromptTemplate < Struct.new(
+      nil,
       :text_prompt_template,
       keyword_init: true
     )
@@ -4588,6 +4779,7 @@ module Aws::BedrockAgentRuntime
     #   <p>A list of parameters in the request body.</p>
     #   @return [Array<Types::Parameter>]
     class PropertyParameters < Struct.new(
+      nil,
       :properties,
       keyword_init: true
     )
@@ -4610,6 +4802,7 @@ module Aws::BedrockAgentRuntime
     #   <p>The unique identifier of the invocation step in UUID format.</p>
     #   @return [String]
     class PutInvocationStepRequest < Struct.new(
+      nil,
       :session_identifier,
       :invocation_identifier,
       :invocation_step_time,
@@ -4624,6 +4817,7 @@ module Aws::BedrockAgentRuntime
     #   <p>The unique identifier of the invocation step in UUID format.</p>
     #   @return [String]
     class PutInvocationStepResponse < Struct.new(
+      nil,
       :invocation_step_id,
       keyword_init: true
     )
@@ -4639,6 +4833,7 @@ module Aws::BedrockAgentRuntime
     #   <p>The text of the query.</p>
     #   @return [String]
     class QueryGenerationInput < Struct.new(
+      nil,
       :type,
       :text,
       keyword_init: true
@@ -4651,6 +4846,7 @@ module Aws::BedrockAgentRuntime
     #   <p>The type of transformation to apply to the prompt.</p>
     #   @return [String]
     class QueryTransformationConfiguration < Struct.new(
+      nil,
       :type,
       keyword_init: true
     )
@@ -4666,6 +4862,7 @@ module Aws::BedrockAgentRuntime
     #   <p>The reasoning or thought process of the agent, based on the input.</p>
     #   @return [String]
     class Rationale < Struct.new(
+      nil,
       :trace_id,
       :text,
       keyword_init: true
@@ -4679,6 +4876,7 @@ module Aws::BedrockAgentRuntime
     #   <p>The foundation model's raw output content.</p>
     #   @return [String]
     class RawResponse < Struct.new(
+      nil,
       :content,
       keyword_init: true
     )
@@ -4715,6 +4913,7 @@ module Aws::BedrockAgentRuntime
     #   <p>A hash of all the messages in the conversation to ensure that the content in the reasoning text block isn't tampered with. You must submit the signature in subsequent <code>Converse</code> requests, in addition to the previous messages. If the previous messages are tampered with, the response throws an error.</p>
     #   @return [String]
     class ReasoningTextBlock < Struct.new(
+      nil,
       :text,
       :signature,
       keyword_init: true
@@ -4731,6 +4930,7 @@ module Aws::BedrockAgentRuntime
     #   <p>Specifies what output is prompting the agent to reprompt the input.</p>
     #   @return [String]
     class RepromptResponse < Struct.new(
+      nil,
       :text,
       :source,
       keyword_init: true
@@ -4743,6 +4943,7 @@ module Aws::BedrockAgentRuntime
     #   <p>The content in the request body.</p>
     #   @return [Hash<String, Array<Types::Parameter>>]
     class RequestBody < Struct.new(
+      nil,
       :content,
       keyword_init: true
     )
@@ -4761,6 +4962,7 @@ module Aws::BedrockAgentRuntime
     #   <p>Contains a JSON document to rerank.</p>
     #   @return [JSON]
     class RerankDocument < Struct.new(
+      nil,
       :type,
       :text_document,
       :json_document,
@@ -4778,6 +4980,7 @@ module Aws::BedrockAgentRuntime
     #   <p>Contains information about a text query.</p>
     #   @return [Types::RerankTextDocument]
     class RerankQuery < Struct.new(
+      nil,
       :type,
       :text_query,
       keyword_init: true
@@ -4798,6 +5001,7 @@ module Aws::BedrockAgentRuntime
     #   <p>If the total number of results was greater than could fit in a response, a token is returned in the <code>nextToken</code> field. You can enter that token in this field to return the next batch of results.</p>
     #   @return [String]
     class RerankRequest < Struct.new(
+      nil,
       :queries,
       :sources,
       :reranking_configuration,
@@ -4814,6 +5018,7 @@ module Aws::BedrockAgentRuntime
     #   <p>If the total number of results is greater than can fit in the response, use this token in the <code>nextToken</code> field when making another request to return the next batch of results.</p>
     #   @return [String]
     class RerankResponse < Struct.new(
+      nil,
       :results,
       :next_token,
       keyword_init: true
@@ -4832,6 +5037,7 @@ module Aws::BedrockAgentRuntime
     #   <p>Contains information about the document.</p>
     #   @return [Types::RerankDocument]
     class RerankResult < Struct.new(
+      nil,
       :index,
       :relevance_score,
       :document,
@@ -4849,6 +5055,7 @@ module Aws::BedrockAgentRuntime
     #   <p>Contains an inline definition of a source for reranking.</p>
     #   @return [Types::RerankDocument]
     class RerankSource < Struct.new(
+      nil,
       :type,
       :inline_document_source,
       keyword_init: true
@@ -4862,6 +5069,7 @@ module Aws::BedrockAgentRuntime
     #   <p>The text of the document.</p>
     #   @return [String]
     class RerankTextDocument < Struct.new(
+      nil,
       :text,
       keyword_init: true
     )
@@ -4876,6 +5084,7 @@ module Aws::BedrockAgentRuntime
     #   <p>Contains configurations for an Amazon Bedrock reranker.</p>
     #   @return [Types::BedrockRerankingConfiguration]
     class RerankingConfiguration < Struct.new(
+      nil,
       :type,
       :bedrock_reranking_configuration,
       keyword_init: true
@@ -4907,6 +5116,7 @@ module Aws::BedrockAgentRuntime
     # @!attribute message
     #   @return [String]
     class ResourceNotFoundException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -5074,6 +5284,7 @@ module Aws::BedrockAgentRuntime
     #   <p>The Confluence host URL for the data source location.</p>
     #   @return [String]
     class RetrievalResultConfluenceLocation < Struct.new(
+      nil,
       :url,
       keyword_init: true
     )
@@ -5095,6 +5306,7 @@ module Aws::BedrockAgentRuntime
     #   <p>Specifies information about the rows with the cells to return in retrieval.</p>
     #   @return [Array<Types::RetrievalResultContentColumn>]
     class RetrievalResultContent < Struct.new(
+      nil,
       :type,
       :text,
       :byte_content,
@@ -5121,6 +5333,7 @@ module Aws::BedrockAgentRuntime
     #   <p>The data type of the value.</p>
     #   @return [String]
     class RetrievalResultContentColumn < Struct.new(
+      nil,
       :column_name,
       :column_value,
       :type,
@@ -5134,6 +5347,7 @@ module Aws::BedrockAgentRuntime
     #   <p>The ID of the document.</p>
     #   @return [String]
     class RetrievalResultCustomDocumentLocation < Struct.new(
+      nil,
       :id,
       keyword_init: true
     )
@@ -5145,6 +5359,7 @@ module Aws::BedrockAgentRuntime
     #   <p>The document's uri.</p>
     #   @return [String]
     class RetrievalResultKendraDocumentLocation < Struct.new(
+      nil,
       :uri,
       keyword_init: true
     )
@@ -5181,6 +5396,7 @@ module Aws::BedrockAgentRuntime
     #   <p>Specifies information about the SQL query used to retrieve the result.</p>
     #   @return [Types::RetrievalResultSqlLocation]
     class RetrievalResultLocation < Struct.new(
+      nil,
       :type,
       :s3_location,
       :web_location,
@@ -5200,6 +5416,7 @@ module Aws::BedrockAgentRuntime
     #   <p>The S3 URI for the data source location.</p>
     #   @return [String]
     class RetrievalResultS3Location < Struct.new(
+      nil,
       :uri,
       keyword_init: true
     )
@@ -5211,6 +5428,7 @@ module Aws::BedrockAgentRuntime
     #   <p>The Salesforce host URL for the data source location.</p>
     #   @return [String]
     class RetrievalResultSalesforceLocation < Struct.new(
+      nil,
       :url,
       keyword_init: true
     )
@@ -5222,6 +5440,7 @@ module Aws::BedrockAgentRuntime
     #   <p>The SharePoint site URL for the data source location.</p>
     #   @return [String]
     class RetrievalResultSharePointLocation < Struct.new(
+      nil,
       :url,
       keyword_init: true
     )
@@ -5233,6 +5452,7 @@ module Aws::BedrockAgentRuntime
     #   <p>The SQL query used to retrieve the result.</p>
     #   @return [String]
     class RetrievalResultSqlLocation < Struct.new(
+      nil,
       :query,
       keyword_init: true
     )
@@ -5244,6 +5464,7 @@ module Aws::BedrockAgentRuntime
     #   <p>The web URL/URLs for the data source location.</p>
     #   @return [String]
     class RetrievalResultWebLocation < Struct.new(
+      nil,
       :url,
       keyword_init: true
     )
@@ -5261,6 +5482,7 @@ module Aws::BedrockAgentRuntime
     #   <p>The configuration for the external source wrapper object in the <code>retrieveAndGenerate</code> function.</p>
     #   @return [Types::ExternalSourcesRetrieveAndGenerateConfiguration]
     class RetrieveAndGenerateConfiguration < Struct.new(
+      nil,
       :type,
       :knowledge_base_configuration,
       :external_sources_configuration,
@@ -5275,6 +5497,7 @@ module Aws::BedrockAgentRuntime
     #   <p>The query made to the knowledge base.</p>
     #   @return [String]
     class RetrieveAndGenerateInput < Struct.new(
+      nil,
       :text,
       keyword_init: true
     )
@@ -5287,6 +5510,7 @@ module Aws::BedrockAgentRuntime
     #   <p>The response generated from querying the knowledge base.</p>
     #   @return [String]
     class RetrieveAndGenerateOutput < Struct.new(
+      nil,
       :text,
       keyword_init: true
     )
@@ -5299,6 +5523,7 @@ module Aws::BedrockAgentRuntime
     #   <p>A text response.</p>
     #   @return [String]
     class RetrieveAndGenerateOutputEvent < Struct.new(
+      nil,
       :text,
       keyword_init: true
     )
@@ -5318,6 +5543,7 @@ module Aws::BedrockAgentRuntime
     #   <p>Contains details about the session with the knowledge base.</p>
     #   @return [Types::RetrieveAndGenerateSessionConfiguration]
     class RetrieveAndGenerateRequest < Struct.new(
+      nil,
       :session_id,
       :input,
       :retrieve_and_generate_configuration,
@@ -5340,6 +5566,7 @@ module Aws::BedrockAgentRuntime
     #   <p>Specifies if there is a guardrail intervention in the response.</p>
     #   @return [String]
     class RetrieveAndGenerateResponse < Struct.new(
+      nil,
       :session_id,
       :output,
       :citations,
@@ -5354,6 +5581,7 @@ module Aws::BedrockAgentRuntime
     #   <p>The ARN of the KMS key encrypting the session.</p>
     #   @return [String]
     class RetrieveAndGenerateSessionConfiguration < Struct.new(
+      nil,
       :kms_key_arn,
       keyword_init: true
     )
@@ -5373,6 +5601,7 @@ module Aws::BedrockAgentRuntime
     #   <p>Contains details about the session with the knowledge base.</p>
     #   @return [Types::RetrieveAndGenerateSessionConfiguration]
     class RetrieveAndGenerateStreamRequest < Struct.new(
+      nil,
       :session_id,
       :input,
       :retrieve_and_generate_configuration,
@@ -5389,6 +5618,7 @@ module Aws::BedrockAgentRuntime
     #   <p>The session ID.</p>
     #   @return [String]
     class RetrieveAndGenerateStreamResponse < Struct.new(
+      nil,
       :stream,
       :session_id,
       keyword_init: true
@@ -5482,6 +5712,7 @@ module Aws::BedrockAgentRuntime
     #   <p>If there are more results than can fit in the response, the response returns a <code>nextToken</code>. Use this token in the <code>nextToken</code> field of another request to retrieve the next batch of results.</p>
     #   @return [String]
     class RetrieveRequest < Struct.new(
+      nil,
       :knowledge_base_id,
       :retrieval_query,
       :retrieval_configuration,
@@ -5502,6 +5733,7 @@ module Aws::BedrockAgentRuntime
     #   <p>If there are more results than can fit in the response, the response returns a <code>nextToken</code>. Use this token in the <code>nextToken</code> field of another request to retrieve the next batch of results.</p>
     #   @return [String]
     class RetrieveResponse < Struct.new(
+      nil,
       :retrieval_results,
       :guardrail_action,
       :next_token,
@@ -5521,6 +5753,7 @@ module Aws::BedrockAgentRuntime
     #   <p>Contains metadata attributes and their values for the file in the data source. For more information, see <a href="https://docs.aws.amazon.com/bedrock/latest/userguide/knowledge-base-ds.html#kb-ds-metadata">Metadata and filtering</a>.</p>
     #   @return [Hash<String, JSON>]
     class RetrievedReference < Struct.new(
+      nil,
       :content,
       :location,
       :metadata,
@@ -5538,6 +5771,7 @@ module Aws::BedrockAgentRuntime
     #   <p>The identifier of the action group invocation.</p>
     #   @return [String]
     class ReturnControlPayload < Struct.new(
+      nil,
       :invocation_inputs,
       :invocation_id,
       keyword_init: true
@@ -5553,6 +5787,7 @@ module Aws::BedrockAgentRuntime
     #   <p>The action invocation result.</p>
     #   @return [Array<Types::InvocationResultMember>]
     class ReturnControlResults < Struct.new(
+      nil,
       :invocation_id,
       :return_control_invocation_results,
       keyword_init: true
@@ -5572,6 +5807,7 @@ module Aws::BedrockAgentRuntime
     #   <p>The invocation's metadata.</p>
     #   @return [Types::Metadata]
     class RoutingClassifierModelInvocationOutput < Struct.new(
+      nil,
       :trace_id,
       :raw_response,
       :metadata,
@@ -5619,6 +5855,7 @@ module Aws::BedrockAgentRuntime
     #   <p> The S3 object key for the S3 resource. </p>
     #   @return [String]
     class S3Identifier < Struct.new(
+      nil,
       :s3_bucket_name,
       :s3_object_key,
       keyword_init: true
@@ -5631,6 +5868,7 @@ module Aws::BedrockAgentRuntime
     #   <p>The path to the Amazon S3 bucket where the image is stored.</p>
     #   @return [String]
     class S3Location < Struct.new(
+      nil,
       :uri,
       keyword_init: true
     )
@@ -5642,6 +5880,7 @@ module Aws::BedrockAgentRuntime
     #   <p>The file location of the S3 wrapper object.</p>
     #   @return [String]
     class S3ObjectDoc < Struct.new(
+      nil,
       :uri,
       keyword_init: true
     )
@@ -5653,6 +5892,7 @@ module Aws::BedrockAgentRuntime
     #   <p>The uri of the s3 object.</p>
     #   @return [String]
     class S3ObjectFile < Struct.new(
+      nil,
       :uri,
       keyword_init: true
     )
@@ -5665,6 +5905,7 @@ module Aws::BedrockAgentRuntime
     #   <p>The name of the condition that was satisfied.</p>
     #   @return [String]
     class SatisfiedCondition < Struct.new(
+      nil,
       :condition_name,
       keyword_init: true
     )
@@ -5675,6 +5916,7 @@ module Aws::BedrockAgentRuntime
     # @!attribute message
     #   @return [String]
     class ServiceQuotaExceededException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -5704,6 +5946,7 @@ module Aws::BedrockAgentRuntime
     #   <p>The state's conversation history.</p>
     #   @return [Types::ConversationHistory]
     class SessionState < Struct.new(
+      nil,
       :session_attributes,
       :prompt_session_attributes,
       :return_control_invocation_results,
@@ -5733,6 +5976,7 @@ module Aws::BedrockAgentRuntime
     #   <p>The timestamp for when the session was last modified.</p>
     #   @return [Time]
     class SessionSummary < Struct.new(
+      nil,
       :session_id,
       :session_arn,
       :session_status,
@@ -5751,6 +5995,7 @@ module Aws::BedrockAgentRuntime
     #   <p>Where the text with a citation ends in the generated output.</p>
     #   @return [Integer]
     class Span < Struct.new(
+      nil,
       :start,
       :end,
       keyword_init: true
@@ -5774,6 +6019,7 @@ module Aws::BedrockAgentRuntime
     #   <p>The performance settings for the foundation model used in the flow execution.</p>
     #   @return [Types::ModelPerformanceConfiguration]
     class StartFlowExecutionRequest < Struct.new(
+      nil,
       :flow_identifier,
       :flow_alias_identifier,
       :flow_execution_name,
@@ -5788,6 +6034,7 @@ module Aws::BedrockAgentRuntime
     #   <p>The Amazon Resource Name (ARN) that uniquely identifies the flow execution.</p>
     #   @return [String]
     class StartFlowExecutionResponse < Struct.new(
+      nil,
       :execution_arn,
       keyword_init: true
     )
@@ -5804,6 +6051,7 @@ module Aws::BedrockAgentRuntime
     #   <p>The unique identifier of the flow execution to stop.</p>
     #   @return [String]
     class StopFlowExecutionRequest < Struct.new(
+      nil,
       :flow_identifier,
       :flow_alias_identifier,
       :execution_identifier,
@@ -5819,6 +6067,7 @@ module Aws::BedrockAgentRuntime
     #   <p>The updated status of the flow execution after the stop request. This will typically be ABORTED if the execution was successfully stopped.</p>
     #   @return [String]
     class StopFlowExecutionResponse < Struct.new(
+      nil,
       :execution_arn,
       :status,
       keyword_init: true
@@ -5834,6 +6083,7 @@ module Aws::BedrockAgentRuntime
     #   <p> The guardrail interval to apply as response is generated. By default, the guardrail interval is set to 50 characters. If a larger interval is specified, the response will be generated in larger chunks with fewer <code>ApplyGuardrail</code> calls. The following examples show the response generated for <i>Hello, I am an agent</i> input string.</p> <p> <b>Example response in chunks: Interval set to 3 characters</b> </p> <p> <code>'Hel', 'lo, ','I am', ' an', ' Age', 'nt'</code> </p> <p>Each chunk has at least 3 characters except for the last chunk</p> <p> <b>Example response in chunks: Interval set to 20 or more characters</b> </p> <p> <code>Hello, I am an Agent</code> </p>
     #   @return [Integer]
     class StreamingConfigurations < Struct.new(
+      nil,
       :stream_final_response,
       :apply_guardrail_interval,
       keyword_init: true
@@ -5853,6 +6103,7 @@ module Aws::BedrockAgentRuntime
     #   <p>An object containing key-value pairs that define the tags to attach to the resource.</p>
     #   @return [Hash<String, String>]
     class TagResourceRequest < Struct.new(
+      nil,
       :resource_arn,
       :tags,
       keyword_init: true
@@ -5861,6 +6112,7 @@ module Aws::BedrockAgentRuntime
     end
 
     class TagResourceResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -5880,6 +6132,7 @@ module Aws::BedrockAgentRuntime
     #   <p>A list of sequences of characters that, if generated, will cause the model to stop generating further tokens. Do not use a minimum length of 1 or a maximum length of 1000. The limit values described here are arbitary values, for actual values consult the limits defined by your specific model.</p>
     #   @return [Array<String>]
     class TextInferenceConfig < Struct.new(
+      nil,
       :temperature,
       :top_p,
       :max_tokens,
@@ -5895,6 +6148,7 @@ module Aws::BedrockAgentRuntime
     #   <p>The text in the text prompt to optimize.</p>
     #   @return [String]
     class TextPrompt < Struct.new(
+      nil,
       :text,
       keyword_init: true
     )
@@ -5910,6 +6164,7 @@ module Aws::BedrockAgentRuntime
     #   <p>Contains information about where the text with a citation begins and ends in the generated output.</p>
     #   @return [Types::Span]
     class TextResponsePart < Struct.new(
+      nil,
       :text,
       :span,
       keyword_init: true
@@ -5925,6 +6180,7 @@ module Aws::BedrockAgentRuntime
     #   <p>Specifies configurations for a knowledge base to use in transformation.</p>
     #   @return [Types::TextToSqlKnowledgeBaseConfiguration]
     class TextToSqlConfiguration < Struct.new(
+      nil,
       :type,
       :knowledge_base_configuration,
       keyword_init: true
@@ -5937,6 +6193,7 @@ module Aws::BedrockAgentRuntime
     #   <p>The ARN of the knowledge base</p>
     #   @return [String]
     class TextToSqlKnowledgeBaseConfiguration < Struct.new(
+      nil,
       :knowledge_base_arn,
       keyword_init: true
     )
@@ -5947,6 +6204,7 @@ module Aws::BedrockAgentRuntime
     # @!attribute message
     #   @return [String]
     class ThrottlingException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -6042,6 +6300,7 @@ module Aws::BedrockAgentRuntime
     #   <p>The version of the agent.</p>
     #   @return [String]
     class TracePart < Struct.new(
+      nil,
       :session_id,
       :trace,
       :caller_chain,
@@ -6063,6 +6322,7 @@ module Aws::BedrockAgentRuntime
     #   <p>Specifies configurations for transforming text to SQL.</p>
     #   @return [Types::TextToSqlConfiguration]
     class TransformationConfiguration < Struct.new(
+      nil,
       :mode,
       :text_to_sql_configuration,
       keyword_init: true
@@ -6077,6 +6337,7 @@ module Aws::BedrockAgentRuntime
     #   <p>A list of keys of the tags to remove from the resource.</p>
     #   @return [Array<String>]
     class UntagResourceRequest < Struct.new(
+      nil,
       :resource_arn,
       :tag_keys,
       keyword_init: true
@@ -6085,6 +6346,7 @@ module Aws::BedrockAgentRuntime
     end
 
     class UntagResourceResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -6097,6 +6359,7 @@ module Aws::BedrockAgentRuntime
     #   <p>The unique identifier of the session to modify. You can specify either the session's <code>sessionId</code> or its Amazon Resource Name (ARN).</p>
     #   @return [String]
     class UpdateSessionRequest < Struct.new(
+      nil,
       :session_metadata,
       :session_identifier,
       keyword_init: true
@@ -6120,6 +6383,7 @@ module Aws::BedrockAgentRuntime
     #   <p>The timestamp for when the session was last modified.</p>
     #   @return [Time]
     class UpdateSessionResponse < Struct.new(
+      nil,
       :session_id,
       :session_arn,
       :session_status,
@@ -6139,6 +6403,7 @@ module Aws::BedrockAgentRuntime
     #   <p>Contains information about the output tokens from the foundation model usage.</p>
     #   @return [Integer]
     class Usage < Struct.new(
+      nil,
       :input_tokens,
       :output_tokens,
       keyword_init: true
@@ -6150,6 +6415,7 @@ module Aws::BedrockAgentRuntime
     # @!attribute message
     #   @return [String]
     class ValidationException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -6167,6 +6433,7 @@ module Aws::BedrockAgentRuntime
     #   <p>Contains configurations for the metadata to use in reranking.</p>
     #   @return [Types::MetadataConfigurationForReranking]
     class VectorSearchBedrockRerankingConfiguration < Struct.new(
+      nil,
       :model_configuration,
       :number_of_reranked_results,
       :metadata_configuration,
@@ -6183,6 +6450,7 @@ module Aws::BedrockAgentRuntime
     #   <p>A JSON object whose keys are request fields for the model and whose values are values for those fields.</p>
     #   @return [Hash<String, JSON>]
     class VectorSearchBedrockRerankingModelConfiguration < Struct.new(
+      nil,
       :model_arn,
       :additional_model_request_fields,
       keyword_init: true
@@ -6198,6 +6466,7 @@ module Aws::BedrockAgentRuntime
     #   <p>Contains configurations for an Amazon Bedrock reranker model.</p>
     #   @return [Types::VectorSearchBedrockRerankingConfiguration]
     class VectorSearchRerankingConfiguration < Struct.new(
+      nil,
       :type,
       :bedrock_reranking_configuration,
       keyword_init: true

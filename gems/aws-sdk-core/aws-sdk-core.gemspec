@@ -17,5 +17,5 @@ Gem::Specification.new do |spec|
   spec.add_dependency('aws-partitions', '2.0.0.pre0')
   spec.add_dependency('smithy-client', '1.0.0.pre1')
 
-  spec.required_ruby_version = '>= 3.3'
+  spec.required_ruby_version = '>= 3.1'
 end

@@ -14,6 +14,7 @@ module Aws::IoTManagedIntegrations
   #   The AWS region used to dispatch the request.
   #   @return [String]
   EndpointParameters = Struct.new(
+    nil,
     :use_fips,
     :endpoint,
     :region,

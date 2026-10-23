@@ -12,6 +12,7 @@ module Aws::Inspector2
     # @!attribute message
     #   @return [String]
     class AccessDeniedException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -29,6 +30,7 @@ module Aws::Inspector2
     #   <p>Details of the status of Amazon Inspector scans by resource type.</p>
     #   @return [Types::ResourceStatus]
     class Account < Struct.new(
+      nil,
       :account_id,
       :status,
       :resource_status,
@@ -52,6 +54,7 @@ module Aws::Inspector2
     #   <p>The value to sort by.</p>
     #   @return [String]
     class AccountAggregation < Struct.new(
+      nil,
       :finding_type,
       :resource_type,
       :sort_order,
@@ -75,6 +78,7 @@ module Aws::Inspector2
     #   <p> Details about the number of fixes. </p>
     #   @return [Integer]
     class AccountAggregationResponse < Struct.new(
+      nil,
       :account_id,
       :severity_counts,
       :exploit_available_count,
@@ -96,6 +100,7 @@ module Aws::Inspector2
     #   <p>An object detailing which resources Amazon Inspector is enabled to scan for the account.</p>
     #   @return [Types::ResourceState]
     class AccountState < Struct.new(
+      nil,
       :account_id,
       :state,
       :resource_state,
@@ -275,6 +280,7 @@ module Aws::Inspector2
     #   <p>The value to sort results by.</p>
     #   @return [String]
     class AmiAggregation < Struct.new(
+      nil,
       :amis,
       :sort_order,
       :sort_by,
@@ -297,6 +303,7 @@ module Aws::Inspector2
     #   <p>The IDs of Amazon EC2 instances using this AMI.</p>
     #   @return [Integer]
     class AmiAggregationResponse < Struct.new(
+      nil,
       :ami,
       :account_id,
       :severity_counts,
@@ -315,6 +322,7 @@ module Aws::Inspector2
     #   <p>Identifies a specific resource in a code repository that will be scanned.</p>
     #   @return [Types::CodeSecurityResource]
     class AssociateConfigurationRequest < Struct.new(
+      nil,
       :scan_configuration_arn,
       :resource,
       keyword_init: true
@@ -326,6 +334,7 @@ module Aws::Inspector2
     #   <p>The Amazon Web Services account ID of the member account to be associated.</p>
     #   @return [String]
     class AssociateMemberInput < Struct.new(
+      nil,
       :account_id,
       keyword_init: true
     )
@@ -336,6 +345,7 @@ module Aws::Inspector2
     #   <p>The Amazon Web Services account ID of the successfully associated member account.</p>
     #   @return [String]
     class AssociateMemberOutput < Struct.new(
+      nil,
       :account_id,
       keyword_init: true
     )
@@ -358,6 +368,7 @@ module Aws::Inspector2
     #            and procedures (TTPs) associated with vulnerability.</p>
     #   @return [Array<String>]
     class AtigData < Struct.new(
+      nil,
       :first_seen,
       :last_seen,
       :targets,
@@ -390,6 +401,7 @@ module Aws::Inspector2
     #            your Amazon Inspector organization.</p>
     #   @return [Boolean]
     class AutoEnable < Struct.new(
+      nil,
       :ec2,
       :ecr,
       :lambda,
@@ -432,6 +444,7 @@ module Aws::Inspector2
     #   <p>The platform of the Amazon EC2 instance.</p>
     #   @return [String]
     class AwsEc2InstanceDetails < Struct.new(
+      nil,
       :type,
       :image_id,
       :ip_v4_addresses,
@@ -477,6 +490,7 @@ module Aws::Inspector2
     #   <p>The number of Amazon ECS tasks or Amazon EKS pods where the Amazon ECR container image is in use.</p>
     #   @return [Array<Types::NumberFilter>]
     class AwsEcrContainerAggregation < Struct.new(
+      nil,
       :resource_ids,
       :image_shas,
       :repositories,
@@ -521,6 +535,7 @@ module Aws::Inspector2
     #   <p>The number of Amazon ECS tasks or Amazon EKS pods where the Amazon ECR container image is in use.</p>
     #   @return [Integer]
     class AwsEcrContainerAggregationResponse < Struct.new(
+      nil,
       :resource_id,
       :image_sha,
       :repository,
@@ -568,6 +583,7 @@ module Aws::Inspector2
     #   <p>The number of Amazon ECS tasks or Amazon EKS pods where the Amazon ECR container image is in use.</p>
     #   @return [Integer]
     class AwsEcrContainerImageDetails < Struct.new(
+      nil,
       :repository_name,
       :image_tags,
       :pushed_at,
@@ -591,6 +607,7 @@ module Aws::Inspector2
     #   <p>The task definition ARN.</p>
     #   @return [String]
     class AwsEcsMetadataDetails < Struct.new(
+      nil,
       :details_group,
       :task_definition_arn,
       keyword_init: true
@@ -607,6 +624,7 @@ module Aws::Inspector2
     #   <p>The list of workloads.</p>
     #   @return [Array<Types::AwsEksWorkloadInfo>]
     class AwsEksMetadataDetails < Struct.new(
+      nil,
       :namespace,
       :workload_info_list,
       keyword_init: true
@@ -622,6 +640,7 @@ module Aws::Inspector2
     #   <p>The workload type.</p>
     #   @return [String]
     class AwsEksWorkloadInfo < Struct.new(
+      nil,
       :name,
       :type,
       keyword_init: true
@@ -667,6 +686,7 @@ module Aws::Inspector2
     #            </p>
     #   @return [Time]
     class AwsLambdaFunctionDetails < Struct.new(
+      nil,
       :function_name,
       :runtime,
       :code_sha256,
@@ -686,6 +706,7 @@ module Aws::Inspector2
     # @!attribute message
     #   @return [String]
     class BadRequestException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -696,6 +717,7 @@ module Aws::Inspector2
     #   <p>A list of code repositories to associate with the specified scan configuration.</p>
     #   @return [Array<Types::AssociateConfigurationRequest>]
     class BatchAssociateCodeSecurityScanConfigurationRequest < Struct.new(
+      nil,
       :associate_configuration_requests,
       keyword_init: true
     )
@@ -711,6 +733,7 @@ module Aws::Inspector2
     #            configuration.</p>
     #   @return [Array<Types::SuccessfulAssociationResult>]
     class BatchAssociateCodeSecurityScanConfigurationResponse < Struct.new(
+      nil,
       :failed_associations,
       :successful_associations,
       keyword_init: true
@@ -723,6 +746,7 @@ module Aws::Inspector2
     #            configuration.</p>
     #   @return [Array<Types::DisassociateConfigurationRequest>]
     class BatchDisassociateCodeSecurityScanConfigurationRequest < Struct.new(
+      nil,
       :disassociate_configuration_requests,
       keyword_init: true
     )
@@ -738,6 +762,7 @@ module Aws::Inspector2
     #            configuration.</p>
     #   @return [Array<Types::SuccessfulAssociationResult>]
     class BatchDisassociateCodeSecurityScanConfigurationResponse < Struct.new(
+      nil,
       :failed_associations,
       :successful_associations,
       keyword_init: true
@@ -749,6 +774,7 @@ module Aws::Inspector2
     #   <p>The 12-digit Amazon Web Services account IDs of the accounts to retrieve Amazon Inspector status for.</p>
     #   @return [Array<String>]
     class BatchGetAccountStatusInput < Struct.new(
+      nil,
       :account_ids,
       keyword_init: true
     )
@@ -763,6 +789,7 @@ module Aws::Inspector2
     #   <p>An array of objects detailing any accounts that failed to enable Amazon Inspector and why.</p>
     #   @return [Array<Types::FailedAccount>]
     class BatchGetAccountStatusOutput < Struct.new(
+      nil,
       :accounts,
       :failed_accounts,
       keyword_init: true
@@ -775,6 +802,7 @@ module Aws::Inspector2
     #            from.</p>
     #   @return [Array<String>]
     class BatchGetCodeSnippetRequest < Struct.new(
+      nil,
       :finding_arns,
       keyword_init: true
     )
@@ -789,6 +817,7 @@ module Aws::Inspector2
     #            snippets.</p>
     #   @return [Array<Types::CodeSnippetError>]
     class BatchGetCodeSnippetResponse < Struct.new(
+      nil,
       :code_snippet_results,
       :errors,
       keyword_init: true
@@ -800,6 +829,7 @@ module Aws::Inspector2
     #   <p>A list of finding ARNs.</p>
     #   @return [Array<String>]
     class BatchGetFindingDetailsRequest < Struct.new(
+      nil,
       :finding_arns,
       keyword_init: true
     )
@@ -813,6 +843,7 @@ module Aws::Inspector2
     #   <p>Error information for findings that details could not be returned for.</p>
     #   @return [Array<Types::FindingDetailsError>]
     class BatchGetFindingDetailsResponse < Struct.new(
+      nil,
       :finding_details,
       :errors,
       keyword_init: true
@@ -824,6 +855,7 @@ module Aws::Inspector2
     #   <p>The account IDs to get free trial status for.</p>
     #   @return [Array<String>]
     class BatchGetFreeTrialInfoInput < Struct.new(
+      nil,
       :account_ids,
       keyword_init: true
     )
@@ -839,6 +871,7 @@ module Aws::Inspector2
     #            for.</p>
     #   @return [Array<Types::FreeTrialInfoError>]
     class BatchGetFreeTrialInfoOutput < Struct.new(
+      nil,
       :accounts,
       :failed_accounts,
       keyword_init: true
@@ -851,6 +884,7 @@ module Aws::Inspector2
     #            activation status for. </p>
     #   @return [Array<String>]
     class BatchGetMemberEc2DeepInspectionStatusRequest < Struct.new(
+      nil,
       :account_ids,
       keyword_init: true
     )
@@ -866,6 +900,7 @@ module Aws::Inspector2
     #            deep inspection and why. </p>
     #   @return [Array<Types::FailedMemberAccountEc2DeepInspectionStatusState>]
     class BatchGetMemberEc2DeepInspectionStatusResponse < Struct.new(
+      nil,
       :account_ids,
       :failed_account_ids,
       keyword_init: true
@@ -878,6 +913,7 @@ module Aws::Inspector2
     #            for.</p>
     #   @return [Array<Types::MemberAccountEc2DeepInspectionStatus>]
     class BatchUpdateMemberEc2DeepInspectionStatusRequest < Struct.new(
+      nil,
       :account_ids,
       keyword_init: true
     )
@@ -893,6 +929,7 @@ module Aws::Inspector2
     #            inspection status could not be successfully changed for. </p>
     #   @return [Array<Types::FailedMemberAccountEc2DeepInspectionStatusState>]
     class BatchUpdateMemberEc2DeepInspectionStatusResponse < Struct.new(
+      nil,
       :account_ids,
       :failed_account_ids,
       keyword_init: true
@@ -904,6 +941,7 @@ module Aws::Inspector2
     #   <p>The ID of the report to be canceled.</p>
     #   @return [String]
     class CancelFindingsReportInput < Struct.new(
+      nil,
       :report_id,
       keyword_init: true
     )
@@ -914,6 +952,7 @@ module Aws::Inspector2
     #   <p>The ID of the canceled report.</p>
     #   @return [String]
     class CancelFindingsReportOutput < Struct.new(
+      nil,
       :report_id,
       keyword_init: true
     )
@@ -924,6 +963,7 @@ module Aws::Inspector2
     #   <p>The report ID of the SBOM export to cancel.</p>
     #   @return [String]
     class CancelSbomExportRequest < Struct.new(
+      nil,
       :report_id,
       keyword_init: true
     )
@@ -934,6 +974,7 @@ module Aws::Inspector2
     #   <p>The report ID of the canceled SBOM export.</p>
     #   @return [String]
     class CancelSbomExportResponse < Struct.new(
+      nil,
       :report_id,
       keyword_init: true
     )
@@ -966,6 +1007,7 @@ module Aws::Inspector2
     #   <p>The CIS check platform.</p>
     #   @return [String]
     class CisCheckAggregation < Struct.new(
+      nil,
       :scan_arn,
       :check_id,
       :title,
@@ -987,6 +1029,7 @@ module Aws::Inspector2
     #   <p>The CIS date filter's latest scan start time.</p>
     #   @return [Time]
     class CisDateFilter < Struct.new(
+      nil,
       :earliest_scan_start_time,
       :latest_scan_start_time,
       keyword_init: true
@@ -1002,6 +1045,7 @@ module Aws::Inspector2
     #   <p>The value of the CIS finding status filter.</p>
     #   @return [String]
     class CisFindingStatusFilter < Struct.new(
+      nil,
       :comparison,
       :value,
       keyword_init: true
@@ -1017,6 +1061,7 @@ module Aws::Inspector2
     #   <p>The CIS number filter's lower inclusive.</p>
     #   @return [Integer]
     class CisNumberFilter < Struct.new(
+      nil,
       :upper_inclusive,
       :lower_inclusive,
       keyword_init: true
@@ -1032,6 +1077,7 @@ module Aws::Inspector2
     #   <p>The value of the CIS result status filter.</p>
     #   @return [String]
     class CisResultStatusFilter < Struct.new(
+      nil,
       :comparison,
       :value,
       keyword_init: true
@@ -1072,6 +1118,7 @@ module Aws::Inspector2
     #            CIS assigns to a profile. </p>
     #   @return [String]
     class CisScan < Struct.new(
+      nil,
       :scan_arn,
       :scan_configuration_arn,
       :status,
@@ -1110,6 +1157,7 @@ module Aws::Inspector2
     #   <p>The CIS scan configuration's tags.</p>
     #   @return [Hash<String, String>]
     class CisScanConfiguration < Struct.new(
+      nil,
       :scan_configuration_arn,
       :owner_id,
       :scan_name,
@@ -1160,6 +1208,7 @@ module Aws::Inspector2
     #   <p>The CIS scan result details' finding ARN.</p>
     #   @return [String]
     class CisScanResultDetails < Struct.new(
+      nil,
       :scan_arn,
       :account_id,
       :target_resource_id,
@@ -1195,6 +1244,7 @@ module Aws::Inspector2
     #   <p>The criteria's finding ARN filters.</p>
     #   @return [Array<Types::CisStringFilter>]
     class CisScanResultDetailsFilterCriteria < Struct.new(
+      nil,
       :finding_status_filters,
       :check_id_filters,
       :title_filters,
@@ -1225,6 +1275,7 @@ module Aws::Inspector2
     #   <p>The criteria's security level filters.</p>
     #   @return [Array<Types::CisSecurityLevelFilter>]
     class CisScanResultsAggregatedByChecksFilterCriteria < Struct.new(
+      nil,
       :account_id_filters,
       :check_id_filters,
       :title_filters,
@@ -1265,6 +1316,7 @@ module Aws::Inspector2
     #   <p>The criteria's failed checks filters.</p>
     #   @return [Array<Types::CisNumberFilter>]
     class CisScanResultsAggregatedByTargetResourceFilterCriteria < Struct.new(
+      nil,
       :account_id_filters,
       :status_filters,
       :check_id_filters,
@@ -1287,6 +1339,7 @@ module Aws::Inspector2
     #   <p>The filter value.</p>
     #   @return [String]
     class CisScanStatusFilter < Struct.new(
+      nil,
       :comparison,
       :value,
       keyword_init: true
@@ -1303,6 +1356,7 @@ module Aws::Inspector2
     #   <p>The CIS security filter value.</p>
     #   @return [String]
     class CisSecurityLevelFilter < Struct.new(
+      nil,
       :comparison,
       :value,
       keyword_init: true
@@ -1321,6 +1375,7 @@ module Aws::Inspector2
     #   <p>The CIS rule details for the CIS session message.</p>
     #   @return [String]
     class CisSessionMessage < Struct.new(
+      nil,
       :rule_id,
       :status,
       :cis_rule_details,
@@ -1337,6 +1392,7 @@ module Aws::Inspector2
     #   <p>The value of the CIS string filter.</p>
     #   @return [String]
     class CisStringFilter < Struct.new(
+      nil,
       :comparison,
       :value,
       keyword_init: true
@@ -1370,6 +1426,7 @@ module Aws::Inspector2
     #   <p>The reason for the target resource.</p>
     #   @return [String]
     class CisTargetResourceAggregation < Struct.new(
+      nil,
       :scan_arn,
       :target_resource_id,
       :account_id,
@@ -1391,6 +1448,7 @@ module Aws::Inspector2
     #   <p>The value of the CIS target status filter.</p>
     #   @return [String]
     class CisTargetStatusFilter < Struct.new(
+      nil,
       :comparison,
       :value,
       keyword_init: true
@@ -1406,6 +1464,7 @@ module Aws::Inspector2
     #   <p>The value of the CIS target status reason filter.</p>
     #   @return [String]
     class CisTargetStatusReasonFilter < Struct.new(
+      nil,
       :comparison,
       :value,
       keyword_init: true
@@ -1421,6 +1480,7 @@ module Aws::Inspector2
     #   <p>The CIS target resource tags.</p>
     #   @return [Hash<String, Array<String>>]
     class CisTargets < Struct.new(
+      nil,
       :account_ids,
       :target_resource_tags,
       keyword_init: true
@@ -1440,6 +1500,7 @@ module Aws::Inspector2
     #   <p>The remediation action recommended by CISA for this vulnerability.</p>
     #   @return [String]
     class CisaData < Struct.new(
+      nil,
       :date_added,
       :date_due,
       :action,
@@ -1464,6 +1525,7 @@ module Aws::Inspector2
     #   <p>The metadata for a cluster.</p>
     #   @return [Types::ClusterMetadata]
     class ClusterDetails < Struct.new(
+      nil,
       :last_in_use,
       :running_unit_count,
       :stopped_unit_count,
@@ -1478,6 +1540,7 @@ module Aws::Inspector2
     #   <p>The resource Id to be used in the filter criteria.</p>
     #   @return [String]
     class ClusterForImageFilterCriteria < Struct.new(
+      nil,
       :resource_id,
       keyword_init: true
     )
@@ -1492,6 +1555,7 @@ module Aws::Inspector2
     #   <p>Details about the cluster.</p>
     #   @return [Array<Types::ClusterDetails>]
     class ClusterInformation < Struct.new(
+      nil,
       :cluster_arn,
       :cluster_details,
       keyword_init: true
@@ -1534,6 +1598,7 @@ module Aws::Inspector2
     #   <p>The line number of the last line of code that a vulnerability was found in.</p>
     #   @return [Integer]
     class CodeFilePath < Struct.new(
+      nil,
       :file_name,
       :file_path,
       :start_line,
@@ -1557,6 +1622,7 @@ module Aws::Inspector2
     #   <p>The line number that a section of code is located at.</p>
     #   @return [Integer]
     class CodeLine < Struct.new(
+      nil,
       :content,
       :line_number,
       keyword_init: true
@@ -1582,6 +1648,7 @@ module Aws::Inspector2
     #   <p>The resource IDs to include in the aggregation results.</p>
     #   @return [Array<Types::StringFilter>]
     class CodeRepositoryAggregation < Struct.new(
+      nil,
       :project_names,
       :provider_types,
       :sort_order,
@@ -1616,6 +1683,7 @@ module Aws::Inspector2
     #   <p>The resource ID of the code repository.</p>
     #   @return [String]
     class CodeRepositoryAggregationResponse < Struct.new(
+      nil,
       :project_names,
       :provider_type,
       :severity_counts,
@@ -1640,6 +1708,7 @@ module Aws::Inspector2
     #   <p>The type of repository provider (such as GitHub, GitLab, etc.).</p>
     #   @return [String]
     class CodeRepositoryDetails < Struct.new(
+      nil,
       :project_name,
       :integration_arn,
       :provider_type,
@@ -1673,6 +1742,7 @@ module Aws::Inspector2
     #   <p>Information about on-demand scans performed on the repository.</p>
     #   @return [Types::CodeRepositoryOnDemandScan]
     class CodeRepositoryMetadata < Struct.new(
+      nil,
       :project_name,
       :integration_arn,
       :provider_type,
@@ -1696,6 +1766,7 @@ module Aws::Inspector2
     #   <p>The status of the scan.</p>
     #   @return [Types::ScanStatus]
     class CodeRepositoryOnDemandScan < Struct.new(
+      nil,
       :last_scanned_commit_id,
       :last_scan_at,
       :scan_status,
@@ -1730,6 +1801,7 @@ module Aws::Inspector2
     #   <p>The tags associated with the code security integration.</p>
     #   @return [Hash<String, String>]
     class CodeSecurityIntegrationSummary < Struct.new(
+      nil,
       :integration_arn,
       :name,
       :type,
@@ -1770,6 +1842,7 @@ module Aws::Inspector2
     #   <p>The categories of security rules to be applied during the scan.</p>
     #   @return [Array<String>]
     class CodeSecurityScanConfiguration < Struct.new(
+      nil,
       :periodic_scan_configuration,
       :continuous_integration_scan_configuration,
       :rule_set_categories,
@@ -1783,6 +1856,7 @@ module Aws::Inspector2
     #   <p>Identifies a specific resource in a code repository that will be scanned.</p>
     #   @return [Types::CodeSecurityResource]
     class CodeSecurityScanConfigurationAssociationSummary < Struct.new(
+      nil,
       :resource,
       keyword_init: true
     )
@@ -1820,6 +1894,7 @@ module Aws::Inspector2
     #   <p>The tags associated with the scan configuration.</p>
     #   @return [Hash<String, String>]
     class CodeSecurityScanConfigurationSummary < Struct.new(
+      nil,
       :scan_configuration_arn,
       :name,
       :owner_account_id,
@@ -1846,6 +1921,7 @@ module Aws::Inspector2
     #   <p>The error message received when Amazon Inspector failed to retrieve a code snippet.</p>
     #   @return [String]
     class CodeSnippetError < Struct.new(
+      nil,
       :finding_arn,
       :error_code,
       :error_message,
@@ -1872,6 +1948,7 @@ module Aws::Inspector2
     #   <p>Details of a suggested code fix.</p>
     #   @return [Array<Types::SuggestedFix>]
     class CodeSnippetResult < Struct.new(
+      nil,
       :finding_arn,
       :start_line,
       :end_line,
@@ -1917,6 +1994,7 @@ module Aws::Inspector2
     #            vulnerability.</p>
     #   @return [Array<String>]
     class CodeVulnerabilityDetails < Struct.new(
+      nil,
       :file_path,
       :detector_tags,
       :reference_urls,
@@ -1941,6 +2019,7 @@ module Aws::Inspector2
     #   <p>The compute platform version.</p>
     #   @return [String]
     class ComputePlatform < Struct.new(
+      nil,
       :vendor,
       :product,
       :version,
@@ -1960,6 +2039,7 @@ module Aws::Inspector2
     #   The type of the conflicting resource.
     #   @return [String]
     class ConflictException < Struct.new(
+      nil,
       :message,
       :resource_id,
       :resource_type,
@@ -1975,6 +2055,7 @@ module Aws::Inspector2
     #            or commits.</p>
     #   @return [Array<String>]
     class ContinuousIntegrationScanConfiguration < Struct.new(
+      nil,
       :supported_events,
       keyword_init: true
     )
@@ -1989,6 +2070,7 @@ module Aws::Inspector2
     #   <p>The key associated with this group</p>
     #   @return [String]
     class Counts < Struct.new(
+      nil,
       :count,
       :group_key,
       keyword_init: true
@@ -2009,6 +2091,7 @@ module Aws::Inspector2
     #   <p>A timestamp representing the end of the time period to filter results by.</p>
     #   @return [Time]
     class CoverageDateFilter < Struct.new(
+      nil,
       :start_inclusive,
       :end_inclusive,
       keyword_init: true
@@ -2094,6 +2177,7 @@ module Aws::Inspector2
     #   <p>Filter criteria for code repositories based on the ID of the last scanned commit.</p>
     #   @return [Array<Types::CoverageStringFilter>]
     class CoverageFilterCriteria < Struct.new(
+      nil,
       :scan_status_code,
       :scan_status_reason,
       :account_id,
@@ -2131,6 +2215,7 @@ module Aws::Inspector2
     #   <p>The tag value associated with the coverage map filter.</p>
     #   @return [String]
     class CoverageMapFilter < Struct.new(
+      nil,
       :comparison,
       :key,
       :value,
@@ -2147,6 +2232,7 @@ module Aws::Inspector2
     #   <p>The lower inclusive for the coverage number.</p>
     #   @return [Integer]
     class CoverageNumberFilter < Struct.new(
+      nil,
       :upper_inclusive,
       :lower_inclusive,
       keyword_init: true
@@ -2162,6 +2248,7 @@ module Aws::Inspector2
     #   <p>The value to compare strings on.</p>
     #   @return [String]
     class CoverageStringFilter < Struct.new(
+      nil,
       :comparison,
       :value,
       keyword_init: true
@@ -2195,6 +2282,7 @@ module Aws::Inspector2
     #   <p>The scan method that is applied to the instance.</p>
     #   @return [String]
     class CoveredResource < Struct.new(
+      nil,
       :resource_type,
       :resource_id,
       :account_id,
@@ -2225,6 +2313,7 @@ module Aws::Inspector2
     #   <p>The tags for the CIS scan configuration.</p>
     #   @return [Hash<String, String>]
     class CreateCisScanConfigurationRequest < Struct.new(
+      nil,
       :scan_name,
       :security_level,
       :schedule,
@@ -2239,6 +2328,7 @@ module Aws::Inspector2
     #   <p>The scan configuration ARN for the CIS scan configuration.</p>
     #   @return [String]
     class CreateCisScanConfigurationResponse < Struct.new(
+      nil,
       :scan_configuration_arn,
       keyword_init: true
     )
@@ -2253,6 +2343,7 @@ module Aws::Inspector2
     #   <p>The CIS target resource tags.</p>
     #   @return [Hash<String, Array<String>>]
     class CreateCisTargets < Struct.new(
+      nil,
       :account_ids,
       :target_resource_tags,
       keyword_init: true
@@ -2273,6 +2364,7 @@ module Aws::Inspector2
     #   <p>The tags to apply to the code security integration.</p>
     #   @return [Hash<String, String>]
     class CreateCodeSecurityIntegrationRequest < Struct.new(
+      nil,
       :name,
       :type,
       :details,
@@ -2292,6 +2384,7 @@ module Aws::Inspector2
     #   <p>The URL used to authorize the integration with the repository provider.</p>
     #   @return [String]
     class CreateCodeSecurityIntegrationResponse < Struct.new(
+      nil,
       :integration_arn,
       :status,
       :authorization_url,
@@ -2321,6 +2414,7 @@ module Aws::Inspector2
     #   <p>The tags to apply to the scan configuration.</p>
     #   @return [Hash<String, String>]
     class CreateCodeSecurityScanConfigurationRequest < Struct.new(
+      nil,
       :name,
       :level,
       :configuration,
@@ -2335,6 +2429,7 @@ module Aws::Inspector2
     #   <p>The Amazon Resource Name (ARN) of the created scan configuration.</p>
     #   @return [String]
     class CreateCodeSecurityScanConfigurationResponse < Struct.new(
+      nil,
       :scan_configuration_arn,
       keyword_init: true
     )
@@ -2362,6 +2457,7 @@ module Aws::Inspector2
     #   <p>The reason for creating the filter.</p>
     #   @return [String]
     class CreateFilterInput < Struct.new(
+      nil,
       :action,
       :description,
       :filter_criteria,
@@ -2377,6 +2473,7 @@ module Aws::Inspector2
     #   <p>The Amazon Resource Number (ARN) of the successfully created filter.</p>
     #   @return [String]
     class CreateFilterOutput < Struct.new(
+      nil,
       :arn,
       keyword_init: true
     )
@@ -2393,6 +2490,7 @@ module Aws::Inspector2
     #   <p>The Amazon S3 export destination for the report.</p>
     #   @return [Types::Destination]
     class CreateFindingsReportInput < Struct.new(
+      nil,
       :filter_criteria,
       :report_format,
       :s3_destination,
@@ -2405,6 +2503,7 @@ module Aws::Inspector2
     #   <p>The ID of the report.</p>
     #   @return [String]
     class CreateFindingsReportOutput < Struct.new(
+      nil,
       :report_id,
       keyword_init: true
     )
@@ -2421,6 +2520,7 @@ module Aws::Inspector2
     #            instance.</p>
     #   @return [String]
     class CreateGitLabSelfManagedIntegrationDetail < Struct.new(
+      nil,
       :instance_url,
       :access_token,
       keyword_init: true
@@ -2454,6 +2554,7 @@ module Aws::Inspector2
     #   <p>Contains details of the Amazon S3 bucket and KMS key used to export findings.</p>
     #   @return [Types::Destination]
     class CreateSbomExportRequest < Struct.new(
+      nil,
       :resource_filter_criteria,
       :report_format,
       :s3_destination,
@@ -2466,6 +2567,7 @@ module Aws::Inspector2
     #   <p>The report ID for the software bill of materials (SBOM) report.</p>
     #   @return [String]
     class CreateSbomExportResponse < Struct.new(
+      nil,
       :report_id,
       keyword_init: true
     )
@@ -2481,6 +2583,7 @@ module Aws::Inspector2
     #   <p>The scoring vector associated with the CVSS v2 score.</p>
     #   @return [String]
     class Cvss2 < Struct.new(
+      nil,
       :base_score,
       :scoring_vector,
       keyword_init: true
@@ -2502,6 +2605,7 @@ module Aws::Inspector2
     #   <p>The scoring vector associated with the CVSS v3 score.</p>
     #   @return [String]
     class Cvss3 < Struct.new(
+      nil,
       :base_score,
       :scoring_vector,
       keyword_init: true
@@ -2522,6 +2626,7 @@ module Aws::Inspector2
     #   <p>The CVSS v4 scoring vector, which contains the metrics and measurements that were used to calculate the base score.</p>
     #   @return [String]
     class Cvss4 < Struct.new(
+      nil,
       :base_score,
       :scoring_vector,
       keyword_init: true
@@ -2548,6 +2653,7 @@ module Aws::Inspector2
     #   <p>The source of the CVSS score.</p>
     #   @return [String]
     class CvssScore < Struct.new(
+      nil,
       :base_score,
       :scoring_vector,
       :version,
@@ -2565,6 +2671,7 @@ module Aws::Inspector2
     #   <p>The reason the CVSS score has been adjustment.</p>
     #   @return [String]
     class CvssScoreAdjustment < Struct.new(
+      nil,
       :metric,
       :reason,
       keyword_init: true
@@ -2592,6 +2699,7 @@ module Aws::Inspector2
     #   <p>An object that contains details about adjustment Amazon Inspector made to the CVSS score.</p>
     #   @return [Array<Types::CvssScoreAdjustment>]
     class CvssScoreDetails < Struct.new(
+      nil,
       :score_source,
       :cvss_source,
       :version,
@@ -2608,6 +2716,7 @@ module Aws::Inspector2
     #   <p>The schedule start time.</p>
     #   @return [Types::Time]
     class DailySchedule < Struct.new(
+      nil,
       :start_time,
       keyword_init: true
     )
@@ -2622,6 +2731,7 @@ module Aws::Inspector2
     #   <p>A timestamp representing the end of the time period filtered on.</p>
     #   @return [Time]
     class DateFilter < Struct.new(
+      nil,
       :start_inclusive,
       :end_inclusive,
       keyword_init: true
@@ -2637,6 +2747,7 @@ module Aws::Inspector2
     #   <p>The status of the Amazon Inspector delegated administrator.</p>
     #   @return [String]
     class DelegatedAdmin < Struct.new(
+      nil,
       :account_id,
       :relationship_status,
       keyword_init: true
@@ -2652,6 +2763,7 @@ module Aws::Inspector2
     #   <p>The status of the Amazon Inspector delegated administrator.</p>
     #   @return [String]
     class DelegatedAdminAccount < Struct.new(
+      nil,
       :account_id,
       :status,
       keyword_init: true
@@ -2663,6 +2775,7 @@ module Aws::Inspector2
     #   <p>The ARN of the CIS scan configuration.</p>
     #   @return [String]
     class DeleteCisScanConfigurationRequest < Struct.new(
+      nil,
       :scan_configuration_arn,
       keyword_init: true
     )
@@ -2673,6 +2786,7 @@ module Aws::Inspector2
     #   <p>The ARN of the CIS scan configuration.</p>
     #   @return [String]
     class DeleteCisScanConfigurationResponse < Struct.new(
+      nil,
       :scan_configuration_arn,
       keyword_init: true
     )
@@ -2683,6 +2797,7 @@ module Aws::Inspector2
     #   <p>The Amazon Resource Name (ARN) of the code security integration to delete.</p>
     #   @return [String]
     class DeleteCodeSecurityIntegrationRequest < Struct.new(
+      nil,
       :integration_arn,
       keyword_init: true
     )
@@ -2693,6 +2808,7 @@ module Aws::Inspector2
     #   <p>The Amazon Resource Name (ARN) of the deleted code security integration.</p>
     #   @return [String]
     class DeleteCodeSecurityIntegrationResponse < Struct.new(
+      nil,
       :integration_arn,
       keyword_init: true
     )
@@ -2703,6 +2819,7 @@ module Aws::Inspector2
     #   <p>The Amazon Resource Name (ARN) of the scan configuration to delete.</p>
     #   @return [String]
     class DeleteCodeSecurityScanConfigurationRequest < Struct.new(
+      nil,
       :scan_configuration_arn,
       keyword_init: true
     )
@@ -2713,6 +2830,7 @@ module Aws::Inspector2
     #   <p>The Amazon Resource Name (ARN) of the deleted scan configuration.</p>
     #   @return [String]
     class DeleteCodeSecurityScanConfigurationResponse < Struct.new(
+      nil,
       :scan_configuration_arn,
       keyword_init: true
     )
@@ -2723,6 +2841,7 @@ module Aws::Inspector2
     #   <p>The Amazon Resource Number (ARN) of the filter to be deleted.</p>
     #   @return [String]
     class DeleteFilterInput < Struct.new(
+      nil,
       :arn,
       keyword_init: true
     )
@@ -2733,6 +2852,7 @@ module Aws::Inspector2
     #   <p>The Amazon Resource Number (ARN) of the filter that has been deleted.</p>
     #   @return [String]
     class DeleteFilterOutput < Struct.new(
+      nil,
       :arn,
       keyword_init: true
     )
@@ -2740,6 +2860,7 @@ module Aws::Inspector2
     end
 
     class DescribeOrganizationConfigurationInput < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -2753,6 +2874,7 @@ module Aws::Inspector2
     #            Amazon Inspector.</p>
     #   @return [Boolean]
     class DescribeOrganizationConfigurationOutput < Struct.new(
+      nil,
       :auto_enable,
       :max_account_limit_reached,
       keyword_init: true
@@ -2771,6 +2893,7 @@ module Aws::Inspector2
     #   <p>The ARN of the KMS key used to encrypt data when exporting findings.</p>
     #   @return [String]
     class Destination < Struct.new(
+      nil,
       :bucket_name,
       :key_prefix,
       :kms_key_arn,
@@ -2783,6 +2906,7 @@ module Aws::Inspector2
     #   <p>The Amazon Web Services account ID of the current Amazon Inspector delegated administrator.</p>
     #   @return [String]
     class DisableDelegatedAdminAccountInput < Struct.new(
+      nil,
       :delegated_admin_account_id,
       keyword_init: true
     )
@@ -2793,6 +2917,7 @@ module Aws::Inspector2
     #   <p>The Amazon Web Services account ID of the successfully disabled delegated administrator.</p>
     #   @return [String]
     class DisableDelegatedAdminAccountOutput < Struct.new(
+      nil,
       :delegated_admin_account_id,
       keyword_init: true
     )
@@ -2806,6 +2931,7 @@ module Aws::Inspector2
     #   <p>The resource scan types you want to disable.</p>
     #   @return [Array<String>]
     class DisableInput < Struct.new(
+      nil,
       :account_ids,
       :resource_types,
       keyword_init: true
@@ -2822,6 +2948,7 @@ module Aws::Inspector2
     #            provided for each account.</p>
     #   @return [Array<Types::FailedAccount>]
     class DisableOutput < Struct.new(
+      nil,
       :accounts,
       :failed_accounts,
       keyword_init: true
@@ -2839,6 +2966,7 @@ module Aws::Inspector2
     #   <p>Identifies a specific resource in a code repository that will be scanned.</p>
     #   @return [Types::CodeSecurityResource]
     class DisassociateConfigurationRequest < Struct.new(
+      nil,
       :scan_configuration_arn,
       :resource,
       keyword_init: true
@@ -2850,6 +2978,7 @@ module Aws::Inspector2
     #   <p>The Amazon Web Services account ID of the member account to disassociate.</p>
     #   @return [String]
     class DisassociateMemberInput < Struct.new(
+      nil,
       :account_id,
       keyword_init: true
     )
@@ -2860,6 +2989,7 @@ module Aws::Inspector2
     #   <p>The Amazon Web Services account ID of the successfully disassociated member.</p>
     #   @return [String]
     class DisassociateMemberOutput < Struct.new(
+      nil,
       :account_id,
       keyword_init: true
     )
@@ -2871,6 +3001,7 @@ module Aws::Inspector2
     #   <p>The scan method that is applied to the instance.</p>
     #   @return [String]
     class Ec2Configuration < Struct.new(
+      nil,
       :scan_mode,
       keyword_init: true
     )
@@ -2882,6 +3013,7 @@ module Aws::Inspector2
     #   <p>An object that contains details about the state of the Amazon EC2 scan mode.</p>
     #   @return [Types::Ec2ScanModeState]
     class Ec2ConfigurationState < Struct.new(
+      nil,
       :scan_mode_state,
       keyword_init: true
     )
@@ -2910,6 +3042,7 @@ module Aws::Inspector2
     #   <p>The value to sort results by.</p>
     #   @return [String]
     class Ec2InstanceAggregation < Struct.new(
+      nil,
       :amis,
       :operating_systems,
       :instance_ids,
@@ -2944,6 +3077,7 @@ module Aws::Inspector2
     #   <p>The number of network findings for the Amazon EC2 instance.</p>
     #   @return [Integer]
     class Ec2InstanceAggregationResponse < Struct.new(
+      nil,
       :instance_id,
       :ami,
       :operating_system,
@@ -2967,6 +3101,7 @@ module Aws::Inspector2
     #   <p>The platform of the instance.</p>
     #   @return [String]
     class Ec2Metadata < Struct.new(
+      nil,
       :tags,
       :ami_id,
       :platform,
@@ -2983,6 +3118,7 @@ module Aws::Inspector2
     #   <p>The status of the Amazon EC2 scan mode setting.</p>
     #   @return [String]
     class Ec2ScanModeState < Struct.new(
+      nil,
       :scan_mode,
       :scan_mode_status,
       keyword_init: true
@@ -3001,6 +3137,7 @@ module Aws::Inspector2
     #   <p>The pull date for the re-scan mode.</p>
     #   @return [String]
     class EcrConfiguration < Struct.new(
+      nil,
       :rescan_duration,
       :pull_date_rescan_duration,
       :pull_date_rescan_mode,
@@ -3014,6 +3151,7 @@ module Aws::Inspector2
     #   <p>An object that contains details about the state of the ECR re-scan settings.</p>
     #   @return [Types::EcrRescanDurationState]
     class EcrConfigurationState < Struct.new(
+      nil,
       :rescan_duration_state,
       keyword_init: true
     )
@@ -3035,6 +3173,7 @@ module Aws::Inspector2
     #   <p>The number of Amazon ECS tasks or Amazon EKS pods where the Amazon ECR container image is in use.</p>
     #   @return [Integer]
     class EcrContainerImageMetadata < Struct.new(
+      nil,
       :tags,
       :image_pulled_at,
       :last_in_use_at,
@@ -3052,6 +3191,7 @@ module Aws::Inspector2
     #   <p>The frequency of scans.</p>
     #   @return [String]
     class EcrRepositoryMetadata < Struct.new(
+      nil,
       :name,
       :scan_frequency,
       keyword_init: true
@@ -3081,6 +3221,7 @@ module Aws::Inspector2
     #   <p>The pull date for the re-scan mode.</p>
     #   @return [String]
     class EcrRescanDurationState < Struct.new(
+      nil,
       :rescan_duration,
       :status,
       :updated_at,
@@ -3098,6 +3239,7 @@ module Aws::Inspector2
     #   <p>The idempotency token for the request.</p>
     #   @return [String]
     class EnableDelegatedAdminAccountInput < Struct.new(
+      nil,
       :delegated_admin_account_id,
       :client_token,
       keyword_init: true
@@ -3109,6 +3251,7 @@ module Aws::Inspector2
     #   <p>The Amazon Web Services account ID of the successfully Amazon Inspector delegated administrator.</p>
     #   @return [String]
     class EnableDelegatedAdminAccountOutput < Struct.new(
+      nil,
       :delegated_admin_account_id,
       keyword_init: true
     )
@@ -3125,6 +3268,7 @@ module Aws::Inspector2
     #   <p>The idempotency token for the request.</p>
     #   @return [String]
     class EnableInput < Struct.new(
+      nil,
       :account_ids,
       :resource_types,
       :client_token,
@@ -3142,6 +3286,7 @@ module Aws::Inspector2
     #            provided for each account.</p>
     #   @return [Array<Types::FailedAccount>]
     class EnableOutput < Struct.new(
+      nil,
       :accounts,
       :failed_accounts,
       keyword_init: true
@@ -3154,6 +3299,7 @@ module Aws::Inspector2
     #   <p>The Exploit Prediction Scoring System (EPSS) score.</p>
     #   @return [Float]
     class Epss < Struct.new(
+      nil,
       :score,
       keyword_init: true
     )
@@ -3170,6 +3316,7 @@ module Aws::Inspector2
     #   <p>The EPSS score.</p>
     #   @return [Float]
     class EpssDetails < Struct.new(
+      nil,
       :score,
       keyword_init: true
     )
@@ -3192,6 +3339,7 @@ module Aws::Inspector2
     #   <p>The evidence severity.</p>
     #   @return [String]
     class Evidence < Struct.new(
+      nil,
       :evidence_rule,
       :evidence_detail,
       :severity,
@@ -3208,6 +3356,7 @@ module Aws::Inspector2
     #   <p>The date an time when the exploit was first seen.</p>
     #   @return [Time]
     class ExploitObserved < Struct.new(
+      nil,
       :last_seen,
       :first_seen,
       keyword_init: true
@@ -3221,6 +3370,7 @@ module Aws::Inspector2
     #            environment.</p>
     #   @return [Time]
     class ExploitabilityDetails < Struct.new(
+      nil,
       :last_known_exploit_at,
       keyword_init: true
     )
@@ -3244,6 +3394,7 @@ module Aws::Inspector2
     #   <p>The error message received when the account failed to enable Amazon Inspector.</p>
     #   @return [String]
     class FailedAccount < Struct.new(
+      nil,
       :account_id,
       :status,
       :resource_status,
@@ -3270,6 +3421,7 @@ module Aws::Inspector2
     #   <p>A message explaining why the association or disassociation failed.</p>
     #   @return [String]
     class FailedAssociationResult < Struct.new(
+      nil,
       :scan_configuration_arn,
       :resource,
       :status_code,
@@ -3294,6 +3446,7 @@ module Aws::Inspector2
     #            inspection.</p>
     #   @return [String]
     class FailedMemberAccountEc2DeepInspectionStatusState < Struct.new(
+      nil,
       :account_id,
       :ec2_scan_status,
       :error_message,
@@ -3334,6 +3487,7 @@ module Aws::Inspector2
     #   <p>The tags attached to the filter.</p>
     #   @return [Hash<String, String>]
     class Filter < Struct.new(
+      nil,
       :arn,
       :owner_id,
       :name,
@@ -3507,6 +3661,7 @@ module Aws::Inspector2
     #            GitLab, etc.).</p>
     #   @return [Array<Types::StringFilter>]
     class FilterCriteria < Struct.new(
+      nil,
       :finding_arn,
       :aws_account_id,
       :finding_type,
@@ -3635,6 +3790,7 @@ module Aws::Inspector2
     #   <p>The finding's EPSS score.</p>
     #   @return [Types::EpssDetails]
     class Finding < Struct.new(
+      nil,
       :finding_arn,
       :aws_account_id,
       :type,
@@ -3695,6 +3851,7 @@ module Aws::Inspector2
     #   <p>The Exploit Prediction Scoring System (EPSS) score of the vulnerability.</p>
     #   @return [Float]
     class FindingDetail < Struct.new(
+      nil,
       :finding_arn,
       :cisa_data,
       :risk_score,
@@ -3722,6 +3879,7 @@ module Aws::Inspector2
     #   <p>The error message.</p>
     #   @return [String]
     class FindingDetailsError < Struct.new(
+      nil,
       :finding_arn,
       :error_code,
       :error_message,
@@ -3744,6 +3902,7 @@ module Aws::Inspector2
     #   <p>The value to sort results by.</p>
     #   @return [String]
     class FindingTypeAggregation < Struct.new(
+      nil,
       :finding_type,
       :resource_type,
       :sort_order,
@@ -3767,6 +3926,7 @@ module Aws::Inspector2
     #   <p> Details about the number of fixes. </p>
     #   @return [Integer]
     class FindingTypeAggregationResponse < Struct.new(
+      nil,
       :account_id,
       :severity_counts,
       :exploit_available_count,
@@ -3784,6 +3944,7 @@ module Aws::Inspector2
     #   <p>Contains information about the Amazon Inspector free trial for an account.</p>
     #   @return [Array<Types::FreeTrialInfo>]
     class FreeTrialAccountInfo < Struct.new(
+      nil,
       :account_id,
       :free_trial_info,
       keyword_init: true
@@ -3805,6 +3966,7 @@ module Aws::Inspector2
     #   <p>The order to sort results by.</p>
     #   @return [String]
     class FreeTrialInfo < Struct.new(
+      nil,
       :type,
       :start,
       :end,
@@ -3826,6 +3988,7 @@ module Aws::Inspector2
     #   <p>The error message returned.</p>
     #   @return [String]
     class FreeTrialInfoError < Struct.new(
+      nil,
       :account_id,
       :code,
       :message,
@@ -3845,6 +4008,7 @@ module Aws::Inspector2
     #            value is specified, the report format defaults to <code>PDF</code>. </p>
     #   @return [String]
     class GetCisScanReportRequest < Struct.new(
+      nil,
       :scan_arn,
       :target_accounts,
       :report_format,
@@ -3860,6 +4024,7 @@ module Aws::Inspector2
     #   <p>The status.</p>
     #   @return [String]
     class GetCisScanReportResponse < Struct.new(
+      nil,
       :url,
       :status,
       keyword_init: true
@@ -3894,6 +4059,7 @@ module Aws::Inspector2
     #            results.</p>
     #   @return [Integer]
     class GetCisScanResultDetailsRequest < Struct.new(
+      nil,
       :scan_arn,
       :target_resource_id,
       :account_id,
@@ -3915,6 +4081,7 @@ module Aws::Inspector2
     #            results.</p>
     #   @return [String]
     class GetCisScanResultDetailsResponse < Struct.new(
+      nil,
       :scan_result_details,
       :next_token,
       keyword_init: true
@@ -3933,6 +4100,7 @@ module Aws::Inspector2
     #            results.</p>
     #   @return [String]
     class GetClustersForImageRequest < Struct.new(
+      nil,
       :filter,
       :max_results,
       :next_token,
@@ -3949,6 +4117,7 @@ module Aws::Inspector2
     #            results.</p>
     #   @return [String]
     class GetClustersForImageResponse < Struct.new(
+      nil,
       :cluster,
       :next_token,
       keyword_init: true
@@ -3963,6 +4132,7 @@ module Aws::Inspector2
     #   <p>The tags associated with the code security integration.</p>
     #   @return [Hash<String, String>]
     class GetCodeSecurityIntegrationRequest < Struct.new(
+      nil,
       :integration_arn,
       :tags,
       keyword_init: true
@@ -4000,6 +4170,7 @@ module Aws::Inspector2
     #            null.</p>
     #   @return [String]
     class GetCodeSecurityIntegrationResponse < Struct.new(
+      nil,
       :integration_arn,
       :name,
       :type,
@@ -4018,6 +4189,7 @@ module Aws::Inspector2
     #   <p>The Amazon Resource Name (ARN) of the scan configuration to retrieve.</p>
     #   @return [String]
     class GetCodeSecurityScanConfigurationRequest < Struct.new(
+      nil,
       :scan_configuration_arn,
       keyword_init: true
     )
@@ -4051,6 +4223,7 @@ module Aws::Inspector2
     #   <p>The tags associated with the scan configuration.</p>
     #   @return [Hash<String, String>]
     class GetCodeSecurityScanConfigurationResponse < Struct.new(
+      nil,
       :scan_configuration_arn,
       :name,
       :configuration,
@@ -4071,6 +4244,7 @@ module Aws::Inspector2
     #   <p>The unique identifier of the scan to retrieve.</p>
     #   @return [String]
     class GetCodeSecurityScanRequest < Struct.new(
+      nil,
       :resource,
       :scan_id,
       keyword_init: true
@@ -4104,6 +4278,7 @@ module Aws::Inspector2
     #            was successful or skipped.</p>
     #   @return [String]
     class GetCodeSecurityScanResponse < Struct.new(
+      nil,
       :scan_id,
       :resource,
       :account_id,
@@ -4118,6 +4293,7 @@ module Aws::Inspector2
     end
 
     class GetConfigurationInput < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -4132,6 +4308,7 @@ module Aws::Inspector2
     #            environment.</p>
     #   @return [Types::Ec2ConfigurationState]
     class GetConfigurationOutput < Struct.new(
+      nil,
       :ecr_configuration,
       :ec2_configuration,
       keyword_init: true
@@ -4140,6 +4317,7 @@ module Aws::Inspector2
     end
 
     class GetDelegatedAdminAccountInput < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -4149,6 +4327,7 @@ module Aws::Inspector2
     #   <p>The Amazon Web Services account ID of the Amazon Inspector delegated administrator.</p>
     #   @return [Types::DelegatedAdmin]
     class GetDelegatedAdminAccountOutput < Struct.new(
+      nil,
       :delegated_admin,
       keyword_init: true
     )
@@ -4156,6 +4335,7 @@ module Aws::Inspector2
     end
 
     class GetEc2DeepInspectionConfigurationRequest < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -4175,6 +4355,7 @@ module Aws::Inspector2
     #            retrieved for your account.</p>
     #   @return [String]
     class GetEc2DeepInspectionConfigurationResponse < Struct.new(
+      nil,
       :package_paths,
       :org_package_paths,
       :status,
@@ -4191,6 +4372,7 @@ module Aws::Inspector2
     #   <p>The resource type the key encrypts.</p>
     #   @return [String]
     class GetEncryptionKeyRequest < Struct.new(
+      nil,
       :scan_type,
       :resource_type,
       keyword_init: true
@@ -4202,6 +4384,7 @@ module Aws::Inspector2
     #   <p>A kms key ID.</p>
     #   @return [String]
     class GetEncryptionKeyResponse < Struct.new(
+      nil,
       :kms_key_id,
       keyword_init: true
     )
@@ -4212,6 +4395,7 @@ module Aws::Inspector2
     #   <p>The ID of the report to retrieve the status of.</p>
     #   @return [String]
     class GetFindingsReportStatusInput < Struct.new(
+      nil,
       :report_id,
       keyword_init: true
     )
@@ -4237,6 +4421,7 @@ module Aws::Inspector2
     #   <p>The filter criteria associated with the report.</p>
     #   @return [Types::FilterCriteria]
     class GetFindingsReportStatusOutput < Struct.new(
+      nil,
       :report_id,
       :status,
       :error_code,
@@ -4252,6 +4437,7 @@ module Aws::Inspector2
     #   <p>The Amazon Web Services account ID of the member account to retrieve information on.</p>
     #   @return [String]
     class GetMemberInput < Struct.new(
+      nil,
       :account_id,
       keyword_init: true
     )
@@ -4262,6 +4448,7 @@ module Aws::Inspector2
     #   <p>Details of the retrieved member account.</p>
     #   @return [Types::Member]
     class GetMemberOutput < Struct.new(
+      nil,
       :member,
       keyword_init: true
     )
@@ -4272,6 +4459,7 @@ module Aws::Inspector2
     #   <p>The report ID of the SBOM export to get details for.</p>
     #   @return [String]
     class GetSbomExportRequest < Struct.new(
+      nil,
       :report_id,
       keyword_init: true
     )
@@ -4301,6 +4489,7 @@ module Aws::Inspector2
     #            materials (SBOM) report.</p>
     #   @return [Types::ResourceFilterCriteria]
     class GetSbomExportResponse < Struct.new(
+      nil,
       :report_id,
       :format,
       :status,
@@ -4330,6 +4519,7 @@ module Aws::Inspector2
     #   <p>The value to sort results by.</p>
     #   @return [String]
     class ImageLayerAggregation < Struct.new(
+      nil,
       :repositories,
       :resource_ids,
       :layer_hashes,
@@ -4358,6 +4548,7 @@ module Aws::Inspector2
     #   <p>An object that represents the count of matched findings per severity.</p>
     #   @return [Types::SeverityCounts]
     class ImageLayerAggregationResponse < Struct.new(
+      nil,
       :repository,
       :resource_id,
       :layer_hash,
@@ -4373,6 +4564,7 @@ module Aws::Inspector2
     #   <p>An object that contains details about the CVSS score given to a finding.</p>
     #   @return [Types::CvssScoreDetails]
     class InspectorScoreDetails < Struct.new(
+      nil,
       :adjusted_cvss,
       keyword_init: true
     )
@@ -4386,6 +4578,7 @@ module Aws::Inspector2
     #   <p>The number of seconds to wait before retrying the request.</p>
     #   @return [Integer]
     class InternalServerException < Struct.new(
+      nil,
       :message,
       :retry_after_seconds,
       keyword_init: true
@@ -4416,6 +4609,7 @@ module Aws::Inspector2
     #   <p>The finding severity to use for sorting the results.</p>
     #   @return [String]
     class LambdaFunctionAggregation < Struct.new(
+      nil,
       :resource_ids,
       :function_names,
       :runtimes,
@@ -4453,6 +4647,7 @@ module Aws::Inspector2
     #            was last changed.</p>
     #   @return [Time]
     class LambdaFunctionAggregationResponse < Struct.new(
+      nil,
       :resource_id,
       :function_name,
       :runtime,
@@ -4480,6 +4675,7 @@ module Aws::Inspector2
     #   <p>An Amazon Web Services Lambda function's runtime.</p>
     #   @return [String]
     class LambdaFunctionMetadata < Struct.new(
+      nil,
       :function_tags,
       :layers,
       :function_name,
@@ -4507,6 +4703,7 @@ module Aws::Inspector2
     #   <p>The finding severity to use for sorting the results.</p>
     #   @return [String]
     class LambdaLayerAggregation < Struct.new(
+      nil,
       :function_names,
       :resource_ids,
       :layer_arns,
@@ -4535,6 +4732,7 @@ module Aws::Inspector2
     #   <p>An object that contains the counts of aggregated finding per severity.</p>
     #   @return [Types::SeverityCounts]
     class LambdaLayerAggregationResponse < Struct.new(
+      nil,
       :function_name,
       :resource_id,
       :layer_arn,
@@ -4558,6 +4756,7 @@ module Aws::Inspector2
     #   <p>The ID of the VPC.</p>
     #   @return [String]
     class LambdaVpcConfig < Struct.new(
+      nil,
       :subnet_ids,
       :security_group_ids,
       :vpc_id,
@@ -4582,6 +4781,7 @@ module Aws::Inspector2
     #            from the previous request to continue listing results after the first page.</p>
     #   @return [String]
     class ListAccountPermissionsInput < Struct.new(
+      nil,
       :service,
       :max_results,
       :next_token,
@@ -4600,6 +4800,7 @@ module Aws::Inspector2
     #            results after the first page.</p>
     #   @return [String]
     class ListAccountPermissionsOutput < Struct.new(
+      nil,
       :permissions,
       :next_token,
       keyword_init: true
@@ -4618,6 +4819,7 @@ module Aws::Inspector2
     #   <p>The list of scan configuration ARN filters.</p>
     #   @return [Array<Types::CisStringFilter>]
     class ListCisScanConfigurationsFilterCriteria < Struct.new(
+      nil,
       :scan_name_filters,
       :target_resource_tag_filters,
       :scan_configuration_arn_filters,
@@ -4644,6 +4846,7 @@ module Aws::Inspector2
     #            results.</p>
     #   @return [Integer]
     class ListCisScanConfigurationsRequest < Struct.new(
+      nil,
       :filter_criteria,
       :sort_by,
       :sort_order,
@@ -4662,6 +4865,7 @@ module Aws::Inspector2
     #            results.</p>
     #   @return [String]
     class ListCisScanConfigurationsResponse < Struct.new(
+      nil,
       :scan_configurations,
       :next_token,
       keyword_init: true
@@ -4690,6 +4894,7 @@ module Aws::Inspector2
     #            of results.</p>
     #   @return [Integer]
     class ListCisScanResultsAggregatedByChecksRequest < Struct.new(
+      nil,
       :scan_arn,
       :filter_criteria,
       :sort_by,
@@ -4709,6 +4914,7 @@ module Aws::Inspector2
     #            results.</p>
     #   @return [String]
     class ListCisScanResultsAggregatedByChecksResponse < Struct.new(
+      nil,
       :check_aggregations,
       :next_token,
       keyword_init: true
@@ -4737,6 +4943,7 @@ module Aws::Inspector2
     #            single page of results.</p>
     #   @return [Integer]
     class ListCisScanResultsAggregatedByTargetResourceRequest < Struct.new(
+      nil,
       :scan_arn,
       :filter_criteria,
       :sort_by,
@@ -4756,6 +4963,7 @@ module Aws::Inspector2
     #            results.</p>
     #   @return [String]
     class ListCisScanResultsAggregatedByTargetResourceResponse < Struct.new(
+      nil,
       :target_resource_aggregations,
       :next_token,
       keyword_init: true
@@ -4795,6 +5003,7 @@ module Aws::Inspector2
     #   <p>The list of target account ID filters.</p>
     #   @return [Array<Types::CisStringFilter>]
     class ListCisScansFilterCriteria < Struct.new(
+      nil,
       :scan_name_filters,
       :target_resource_tag_filters,
       :target_resource_id_filters,
@@ -4830,6 +5039,7 @@ module Aws::Inspector2
     #   <p>The maximum number of results to be returned.</p>
     #   @return [Integer]
     class ListCisScansRequest < Struct.new(
+      nil,
       :filter_criteria,
       :detail_level,
       :sort_by,
@@ -4849,6 +5059,7 @@ module Aws::Inspector2
     #            results.</p>
     #   @return [String]
     class ListCisScansResponse < Struct.new(
+      nil,
       :scans,
       :next_token,
       keyword_init: true
@@ -4866,6 +5077,7 @@ module Aws::Inspector2
     #   <p>The maximum number of results to return in a single call.</p>
     #   @return [Integer]
     class ListCodeSecurityIntegrationsRequest < Struct.new(
+      nil,
       :next_token,
       :max_results,
       keyword_init: true
@@ -4883,6 +5095,7 @@ module Aws::Inspector2
     #            page.</p>
     #   @return [String]
     class ListCodeSecurityIntegrationsResponse < Struct.new(
+      nil,
       :integrations,
       :next_token,
       keyword_init: true
@@ -4906,6 +5119,7 @@ module Aws::Inspector2
     #            value when you call the action again to get the remaining results.</p>
     #   @return [Integer]
     class ListCodeSecurityScanConfigurationAssociationsRequest < Struct.new(
+      nil,
       :scan_configuration_arn,
       :next_token,
       :max_results,
@@ -4924,6 +5138,7 @@ module Aws::Inspector2
     #            results after the first page.</p>
     #   @return [String]
     class ListCodeSecurityScanConfigurationAssociationsResponse < Struct.new(
+      nil,
       :associations,
       :next_token,
       keyword_init: true
@@ -4941,6 +5156,7 @@ module Aws::Inspector2
     #   <p>The maximum number of results to return in a single call.</p>
     #   @return [Integer]
     class ListCodeSecurityScanConfigurationsRequest < Struct.new(
+      nil,
       :next_token,
       :max_results,
       keyword_init: true
@@ -4958,6 +5174,7 @@ module Aws::Inspector2
     #            page.</p>
     #   @return [String]
     class ListCodeSecurityScanConfigurationsResponse < Struct.new(
+      nil,
       :configurations,
       :next_token,
       keyword_init: true
@@ -4982,6 +5199,7 @@ module Aws::Inspector2
     #            environment.</p>
     #   @return [Types::CoverageFilterCriteria]
     class ListCoverageInput < Struct.new(
+      nil,
       :max_results,
       :next_token,
       :filter_criteria,
@@ -5000,6 +5218,7 @@ module Aws::Inspector2
     #   <p>An object that contains details on the covered resources in your environment.</p>
     #   @return [Array<Types::CoveredResource>]
     class ListCoverageOutput < Struct.new(
+      nil,
       :next_token,
       :covered_resources,
       keyword_init: true
@@ -5021,6 +5240,7 @@ module Aws::Inspector2
     #            results after the first page.</p>
     #   @return [String]
     class ListCoverageStatisticsInput < Struct.new(
+      nil,
       :filter_criteria,
       :group_by,
       :next_token,
@@ -5042,6 +5262,7 @@ module Aws::Inspector2
     #            results after the first page.</p>
     #   @return [String]
     class ListCoverageStatisticsOutput < Struct.new(
+      nil,
       :counts_by_group,
       :total_counts,
       :next_token,
@@ -5063,6 +5284,7 @@ module Aws::Inspector2
     #            returned from the previous request to continue listing results after the first page.</p>
     #   @return [String]
     class ListDelegatedAdminAccountsInput < Struct.new(
+      nil,
       :max_results,
       :next_token,
       keyword_init: true
@@ -5080,6 +5302,7 @@ module Aws::Inspector2
     #            results after the first page.</p>
     #   @return [String]
     class ListDelegatedAdminAccountsOutput < Struct.new(
+      nil,
       :delegated_admin_accounts,
       :next_token,
       keyword_init: true
@@ -5106,6 +5329,7 @@ module Aws::Inspector2
     #            when you call the action again to get the remaining results.</p>
     #   @return [Integer]
     class ListFiltersInput < Struct.new(
+      nil,
       :arns,
       :action,
       :next_token,
@@ -5125,6 +5349,7 @@ module Aws::Inspector2
     #            results after the first page.</p>
     #   @return [String]
     class ListFiltersOutput < Struct.new(
+      nil,
       :filters,
       :next_token,
       keyword_init: true
@@ -5155,6 +5380,7 @@ module Aws::Inspector2
     #            results.</p>
     #   @return [Types::AggregationRequest]
     class ListFindingAggregationsInput < Struct.new(
+      nil,
       :aggregation_type,
       :next_token,
       :max_results,
@@ -5178,6 +5404,7 @@ module Aws::Inspector2
     #            results after the first page.</p>
     #   @return [String]
     class ListFindingAggregationsOutput < Struct.new(
+      nil,
       :aggregation_type,
       :responses,
       :next_token,
@@ -5205,6 +5432,7 @@ module Aws::Inspector2
     #   <p>Details on the sort criteria to apply to your finding results.</p>
     #   @return [Types::SortCriteria]
     class ListFindingsInput < Struct.new(
+      nil,
       :max_results,
       :next_token,
       :filter_criteria,
@@ -5224,6 +5452,7 @@ module Aws::Inspector2
     #   <p>Contains details on the findings in your environment.</p>
     #   @return [Array<Types::Finding>]
     class ListFindingsOutput < Struct.new(
+      nil,
       :next_token,
       :findings,
       keyword_init: true
@@ -5248,6 +5477,7 @@ module Aws::Inspector2
     #            returned from the previous request to continue listing results after the first page.</p>
     #   @return [String]
     class ListMembersInput < Struct.new(
+      nil,
       :only_associated,
       :max_results,
       :next_token,
@@ -5264,6 +5494,7 @@ module Aws::Inspector2
     #            items.</p>
     #   @return [String]
     class ListMembersOutput < Struct.new(
+      nil,
       :members,
       :next_token,
       keyword_init: true
@@ -5275,6 +5506,7 @@ module Aws::Inspector2
     #   <p>The Amazon resource number (ARN) of the resource to list tags of.</p>
     #   @return [String]
     class ListTagsForResourceInput < Struct.new(
+      nil,
       :resource_arn,
       keyword_init: true
     )
@@ -5285,6 +5517,7 @@ module Aws::Inspector2
     #   <p>The tags associated with the resource.</p>
     #   @return [Hash<String, String>]
     class ListTagsForResourceOutput < Struct.new(
+      nil,
       :tags,
       keyword_init: true
     )
@@ -5307,6 +5540,7 @@ module Aws::Inspector2
     #   <p>The Amazon Web Services account IDs to retrieve usage totals for.</p>
     #   @return [Array<String>]
     class ListUsageTotalsInput < Struct.new(
+      nil,
       :max_results,
       :next_token,
       :account_ids,
@@ -5323,6 +5557,7 @@ module Aws::Inspector2
     #   <p>An object with details on the total usage for the requested account.</p>
     #   @return [Array<Types::UsageTotal>]
     class ListUsageTotalsOutput < Struct.new(
+      nil,
       :next_token,
       :totals,
       keyword_init: true
@@ -5341,6 +5576,7 @@ module Aws::Inspector2
     #   <p>The tag value used in the filter.</p>
     #   @return [String]
     class MapFilter < Struct.new(
+      nil,
       :comparison,
       :key,
       :value,
@@ -5364,6 +5600,7 @@ module Aws::Inspector2
     #   <p>A timestamp showing when the status of this member was last updated.</p>
     #   @return [Time]
     class Member < Struct.new(
+      nil,
       :account_id,
       :relationship_status,
       :delegated_admin_account_id,
@@ -5383,6 +5620,7 @@ module Aws::Inspector2
     #            inspection is active, if <code>FALSE</code> it is not active.</p>
     #   @return [Boolean]
     class MemberAccountEc2DeepInspectionStatus < Struct.new(
+      nil,
       :account_id,
       :activate_deep_inspection,
       keyword_init: true
@@ -5403,6 +5641,7 @@ module Aws::Inspector2
     #            inspection.</p>
     #   @return [String]
     class MemberAccountEc2DeepInspectionStatusState < Struct.new(
+      nil,
       :account_id,
       :status,
       :error_message,
@@ -5419,6 +5658,7 @@ module Aws::Inspector2
     #   <p>The monthly schedule's day.</p>
     #   @return [String]
     class MonthlySchedule < Struct.new(
+      nil,
       :start_time,
       :day,
       keyword_init: true
@@ -5431,6 +5671,7 @@ module Aws::Inspector2
     #   <p>The details on the steps in the network path.</p>
     #   @return [Array<Types::Step>]
     class NetworkPath < Struct.new(
+      nil,
       :steps,
       keyword_init: true
     )
@@ -5449,6 +5690,7 @@ module Aws::Inspector2
     #   <p>An object that contains details about a network path associated with a finding.</p>
     #   @return [Types::NetworkPath]
     class NetworkReachabilityDetails < Struct.new(
+      nil,
       :open_port_range,
       :protocol,
       :network_path,
@@ -5465,6 +5707,7 @@ module Aws::Inspector2
     #   <p>The lowest number to be included in the filter.</p>
     #   @return [Float]
     class NumberFilter < Struct.new(
+      nil,
       :upper_inclusive,
       :lower_inclusive,
       keyword_init: true
@@ -5474,6 +5717,7 @@ module Aws::Inspector2
 
     # <p>A one time schedule.</p>
     class OneTimeSchedule < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -5490,6 +5734,7 @@ module Aws::Inspector2
     #   <p>The value to sort results by.</p>
     #   @return [String]
     class PackageAggregation < Struct.new(
+      nil,
       :package_names,
       :sort_order,
       :sort_by,
@@ -5509,6 +5754,7 @@ module Aws::Inspector2
     #   <p>An object that contains the count of matched findings per severity.</p>
     #   @return [Types::SeverityCounts]
     class PackageAggregationResponse < Struct.new(
+      nil,
       :package_name,
       :account_id,
       :severity_counts,
@@ -5543,6 +5789,7 @@ module Aws::Inspector2
     #   <p>An object that contains details on the package file path to filter on.</p>
     #   @return [Types::StringFilter]
     class PackageFilter < Struct.new(
+      nil,
       :name,
       :version,
       :epoch,
@@ -5589,6 +5836,7 @@ module Aws::Inspector2
     #   <p>One or more URLs that contain details about this vulnerability type.</p>
     #   @return [Array<String>]
     class PackageVulnerabilityDetails < Struct.new(
+      nil,
       :vulnerability_id,
       :vulnerable_packages,
       :source,
@@ -5615,6 +5863,7 @@ module Aws::Inspector2
     #   <p>The schedule expression for periodic scans, in cron format.</p>
     #   @return [String]
     class PeriodicScanConfiguration < Struct.new(
+      nil,
       :frequency,
       :frequency_expression,
       keyword_init: true
@@ -5631,6 +5880,7 @@ module Aws::Inspector2
     #   <p>The operations that can be performed with the given permissions.</p>
     #   @return [String]
     class Permission < Struct.new(
+      nil,
       :service,
       :operation,
       keyword_init: true
@@ -5646,6 +5896,7 @@ module Aws::Inspector2
     #   <p>The ending port in a port range.</p>
     #   @return [Integer]
     class PortRange < Struct.new(
+      nil,
       :begin,
       :end,
       keyword_init: true
@@ -5661,6 +5912,7 @@ module Aws::Inspector2
     #   <p>The port number the port range ends at.</p>
     #   @return [Integer]
     class PortRangeFilter < Struct.new(
+      nil,
       :begin_inclusive,
       :end_inclusive,
       keyword_init: true
@@ -5677,6 +5929,7 @@ module Aws::Inspector2
     #   <p>The continuous integration scan configurations applied to the project.</p>
     #   @return [Array<Types::ProjectContinuousIntegrationScanConfiguration>]
     class ProjectCodeSecurityScanConfiguration < Struct.new(
+      nil,
       :periodic_scan_configurations,
       :continuous_integration_scan_configurations,
       keyword_init: true
@@ -5694,6 +5947,7 @@ module Aws::Inspector2
     #            project.</p>
     #   @return [Array<String>]
     class ProjectContinuousIntegrationScanConfiguration < Struct.new(
+      nil,
       :supported_event,
       :rule_set_categories,
       keyword_init: true
@@ -5710,6 +5964,7 @@ module Aws::Inspector2
     #   <p>The categories of security rules applied during periodic scans for the project.</p>
     #   @return [Array<String>]
     class ProjectPeriodicScanConfiguration < Struct.new(
+      nil,
       :frequency_expression,
       :rule_set_categories,
       keyword_init: true
@@ -5725,6 +5980,7 @@ module Aws::Inspector2
     #   <p>The URL address to the CVE remediation recommendations.</p>
     #   @return [String]
     class Recommendation < Struct.new(
+      nil,
       :text,
       :url,
       keyword_init: true
@@ -5738,6 +5994,7 @@ module Aws::Inspector2
     #            the finding.</p>
     #   @return [Types::Recommendation]
     class Remediation < Struct.new(
+      nil,
       :recommendation,
       keyword_init: true
     )
@@ -5755,6 +6012,7 @@ module Aws::Inspector2
     #   <p>The value to sort results by.</p>
     #   @return [String]
     class RepositoryAggregation < Struct.new(
+      nil,
       :repositories,
       :sort_order,
       :sort_by,
@@ -5778,6 +6036,7 @@ module Aws::Inspector2
     #   <p>The number of container images impacted by the findings.</p>
     #   @return [Integer]
     class RepositoryAggregationResponse < Struct.new(
+      nil,
       :repository,
       :account_id,
       :severity_counts,
@@ -5794,6 +6053,7 @@ module Aws::Inspector2
     #   <p>The resource type the key encrypts.</p>
     #   @return [String]
     class ResetEncryptionKeyRequest < Struct.new(
+      nil,
       :scan_type,
       :resource_type,
       keyword_init: true
@@ -5802,6 +6062,7 @@ module Aws::Inspector2
     end
 
     class ResetEncryptionKeyResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -5827,6 +6088,7 @@ module Aws::Inspector2
     #   <p>An object that contains details about the resource involved in a finding.</p>
     #   @return [Types::ResourceDetails]
     class Resource < Struct.new(
+      nil,
       :type,
       :id,
       :partition,
@@ -5854,6 +6116,7 @@ module Aws::Inspector2
     #   <p>Contains details about a code repository resource associated with a finding.</p>
     #   @return [Types::CodeRepositoryDetails]
     class ResourceDetails < Struct.new(
+      nil,
       :aws_ec2_instance,
       :aws_ecr_container_image,
       :aws_lambda_function,
@@ -5889,6 +6152,7 @@ module Aws::Inspector2
     #   <p>The Amazon Web Services Lambda function tags used as resource filter criteria.</p>
     #   @return [Array<Types::ResourceMapFilter>]
     class ResourceFilterCriteria < Struct.new(
+      nil,
       :account_id,
       :resource_id,
       :resource_type,
@@ -5913,6 +6177,7 @@ module Aws::Inspector2
     #   <p>The filter's value.</p>
     #   @return [String]
     class ResourceMapFilter < Struct.new(
+      nil,
       :comparison,
       :key,
       :value,
@@ -5926,6 +6191,7 @@ module Aws::Inspector2
     # @!attribute message
     #   @return [String]
     class ResourceNotFoundException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -5950,6 +6216,7 @@ module Aws::Inspector2
     #   <p>Contains metadata about scan coverage for a code repository resource.</p>
     #   @return [Types::CodeRepositoryMetadata]
     class ResourceScanMetadata < Struct.new(
+      nil,
       :ecr_repository,
       :ecr_image,
       :ec2,
@@ -5977,6 +6244,7 @@ module Aws::Inspector2
     #   <p>An object that described the state of Amazon Inspector scans for an account.</p>
     #   @return [Types::State]
     class ResourceState < Struct.new(
+      nil,
       :ec2,
       :ecr,
       :lambda,
@@ -6005,6 +6273,7 @@ module Aws::Inspector2
     #   <p>The status of Amazon Inspector scanning for code repositories.</p>
     #   @return [String]
     class ResourceStatus < Struct.new(
+      nil,
       :ec2,
       :ecr,
       :lambda,
@@ -6023,6 +6292,7 @@ module Aws::Inspector2
     #   <p>The filter's value.</p>
     #   @return [String]
     class ResourceStringFilter < Struct.new(
+      nil,
       :comparison,
       :value,
       keyword_init: true
@@ -6137,6 +6407,7 @@ module Aws::Inspector2
     #            unsupported runtime. To see a complete list of supported runtimes see: <a href=" https://docs.aws.amazon.com/inspector/latest/user/supported.html">https://docs.aws.amazon.com/inspector/latest/user/supported.html</a>.</p>
     #   @return [String]
     class ScanStatus < Struct.new(
+      nil,
       :status_code,
       :reason,
       keyword_init: true
@@ -6181,6 +6452,7 @@ module Aws::Inspector2
     #            projects imported into Amazon Inspector.</p>
     #   @return [String]
     class ScopeSettings < Struct.new(
+      nil,
       :project_selection_scope,
       keyword_init: true
     )
@@ -6192,6 +6464,7 @@ module Aws::Inspector2
     #   <p>The IDs for specific vulnerabilities.</p>
     #   @return [Array<String>]
     class SearchVulnerabilitiesFilterCriteria < Struct.new(
+      nil,
       :vulnerability_ids,
       keyword_init: true
     )
@@ -6208,6 +6481,7 @@ module Aws::Inspector2
     #            results after the first page.</p>
     #   @return [String]
     class SearchVulnerabilitiesRequest < Struct.new(
+      nil,
       :filter_criteria,
       :next_token,
       keyword_init: true
@@ -6223,6 +6497,7 @@ module Aws::Inspector2
     #            items.</p>
     #   @return [String]
     class SearchVulnerabilitiesResponse < Struct.new(
+      nil,
       :vulnerabilities,
       :next_token,
       keyword_init: true
@@ -6237,6 +6512,7 @@ module Aws::Inspector2
     #   <p>The unique token that identifies the CIS session.</p>
     #   @return [String]
     class SendCisSessionHealthRequest < Struct.new(
+      nil,
       :scan_job_id,
       :session_token,
       keyword_init: true
@@ -6245,6 +6521,7 @@ module Aws::Inspector2
     end
 
     class SendCisSessionHealthResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -6260,6 +6537,7 @@ module Aws::Inspector2
     #   <p>The CIS session telemetry messages.</p>
     #   @return [Array<Types::CisSessionMessage>]
     class SendCisSessionTelemetryRequest < Struct.new(
+      nil,
       :scan_job_id,
       :session_token,
       :messages,
@@ -6269,6 +6547,7 @@ module Aws::Inspector2
     end
 
     class SendCisSessionTelemetryResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -6282,6 +6561,7 @@ module Aws::Inspector2
     #   <p>The ID of the resource that exceeds a service quota.</p>
     #   @return [String]
     class ServiceQuotaExceededException < Struct.new(
+      nil,
       :message,
       :resource_id,
       keyword_init: true
@@ -6303,6 +6583,7 @@ module Aws::Inspector2
     #   <p>The total count of critical severity findings.</p>
     #   @return [Integer]
     class SeverityCounts < Struct.new(
+      nil,
       :all,
       :medium,
       :high,
@@ -6320,6 +6601,7 @@ module Aws::Inspector2
     #   <p>The order by which findings are sorted.</p>
     #   @return [String]
     class SortCriteria < Struct.new(
+      nil,
       :field,
       :sort_order,
       keyword_init: true
@@ -6332,6 +6614,7 @@ module Aws::Inspector2
     #   <p>The unique token that identifies the CIS session.</p>
     #   @return [String]
     class StartCisSessionMessage < Struct.new(
+      nil,
       :session_token,
       keyword_init: true
     )
@@ -6345,6 +6628,7 @@ module Aws::Inspector2
     #   <p>The start CIS session message.</p>
     #   @return [Types::StartCisSessionMessage]
     class StartCisSessionRequest < Struct.new(
+      nil,
       :scan_job_id,
       :message,
       keyword_init: true
@@ -6353,6 +6637,7 @@ module Aws::Inspector2
     end
 
     class StartCisSessionResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -6366,6 +6651,7 @@ module Aws::Inspector2
     #   <p>The resource identifier for the code repository to scan.</p>
     #   @return [Types::CodeSecurityResource]
     class StartCodeSecurityScanRequest < Struct.new(
+      nil,
       :client_token,
       :resource,
       keyword_init: true
@@ -6380,6 +6666,7 @@ module Aws::Inspector2
     #   <p>The current status of the initiated scan.</p>
     #   @return [String]
     class StartCodeSecurityScanResponse < Struct.new(
+      nil,
       :scan_id,
       :status,
       keyword_init: true
@@ -6398,6 +6685,7 @@ module Aws::Inspector2
     #   <p>The error message received when the account failed to enable Amazon Inspector.</p>
     #   @return [String]
     class State < Struct.new(
+      nil,
       :status,
       :error_code,
       :error_message,
@@ -6417,6 +6705,7 @@ module Aws::Inspector2
     #   <p>The number of checks that passed.</p>
     #   @return [Integer]
     class StatusCounts < Struct.new(
+      nil,
       :failed,
       :skipped,
       :passed,
@@ -6437,6 +6726,7 @@ module Aws::Inspector2
     #            console.</p>
     #   @return [String]
     class Step < Struct.new(
+      nil,
       :component_id,
       :component_type,
       :component_arn,
@@ -6471,6 +6761,7 @@ module Aws::Inspector2
     #   <p>The progress' error checks.</p>
     #   @return [Integer]
     class StopCisMessageProgress < Struct.new(
+      nil,
       :total_checks,
       :successful_checks,
       :failed_checks,
@@ -6516,6 +6807,7 @@ module Aws::Inspector2
     #   <p>The message benchmark profile.</p>
     #   @return [String]
     class StopCisSessionMessage < Struct.new(
+      nil,
       :status,
       :reason,
       :progress,
@@ -6537,6 +6829,7 @@ module Aws::Inspector2
     #   <p>The stop CIS session message.</p>
     #   @return [Types::StopCisSessionMessage]
     class StopCisSessionRequest < Struct.new(
+      nil,
       :scan_job_id,
       :session_token,
       :message,
@@ -6546,6 +6839,7 @@ module Aws::Inspector2
     end
 
     class StopCisSessionResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -6559,6 +6853,7 @@ module Aws::Inspector2
     #   <p>The value to filter on.</p>
     #   @return [String]
     class StringFilter < Struct.new(
+      nil,
       :comparison,
       :value,
       keyword_init: true
@@ -6576,6 +6871,7 @@ module Aws::Inspector2
     #   <p>Identifies a specific resource in a code repository that will be scanned.</p>
     #   @return [Types::CodeSecurityResource]
     class SuccessfulAssociationResult < Struct.new(
+      nil,
       :scan_configuration_arn,
       :resource,
       keyword_init: true
@@ -6591,6 +6887,7 @@ module Aws::Inspector2
     #   <p>The fix's code.</p>
     #   @return [String]
     class SuggestedFix < Struct.new(
+      nil,
       :description,
       :code,
       keyword_init: true
@@ -6609,6 +6906,7 @@ module Aws::Inspector2
     #   <p>The tag filter value.</p>
     #   @return [String]
     class TagFilter < Struct.new(
+      nil,
       :comparison,
       :key,
       :value,
@@ -6624,6 +6922,7 @@ module Aws::Inspector2
     #   <p>The tags to be added to a resource.</p>
     #   @return [Hash<String, String>]
     class TagResourceInput < Struct.new(
+      nil,
       :resource_arn,
       :tags,
       keyword_init: true
@@ -6632,6 +6931,7 @@ module Aws::Inspector2
     end
 
     class TagResourceOutput < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -6644,6 +6944,7 @@ module Aws::Inspector2
     #   <p>The number of seconds to wait before retrying the request.</p>
     #   @return [Integer]
     class ThrottlingException < Struct.new(
+      nil,
       :message,
       :retry_after_seconds,
       keyword_init: true
@@ -6659,6 +6960,7 @@ module Aws::Inspector2
     #   <p>The timezone.</p>
     #   @return [String]
     class Time < Struct.new(
+      nil,
       :time_of_day,
       :timezone,
       keyword_init: true
@@ -6686,6 +6988,7 @@ module Aws::Inspector2
     #   <p>The type of finding to aggregate on.</p>
     #   @return [String]
     class TitleAggregation < Struct.new(
+      nil,
       :titles,
       :vulnerability_ids,
       :resource_type,
@@ -6712,6 +7015,7 @@ module Aws::Inspector2
     #   <p>An object that represent the count of matched findings per severity.</p>
     #   @return [Types::SeverityCounts]
     class TitleAggregationResponse < Struct.new(
+      nil,
       :title,
       :vulnerability_id,
       :account_id,
@@ -6728,6 +7032,7 @@ module Aws::Inspector2
     #   <p>The tag keys to remove from the resource.</p>
     #   @return [Array<String>]
     class UntagResourceInput < Struct.new(
+      nil,
       :resource_arn,
       :tag_keys,
       keyword_init: true
@@ -6736,6 +7041,7 @@ module Aws::Inspector2
     end
 
     class UntagResourceOutput < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -6758,6 +7064,7 @@ module Aws::Inspector2
     #   <p>The targets for the CIS scan configuration.</p>
     #   @return [Types::UpdateCisTargets]
     class UpdateCisScanConfigurationRequest < Struct.new(
+      nil,
       :scan_configuration_arn,
       :scan_name,
       :security_level,
@@ -6772,6 +7079,7 @@ module Aws::Inspector2
     #   <p>The CIS scan configuration ARN.</p>
     #   @return [String]
     class UpdateCisScanConfigurationResponse < Struct.new(
+      nil,
       :scan_configuration_arn,
       keyword_init: true
     )
@@ -6786,6 +7094,7 @@ module Aws::Inspector2
     #   <p>The target resource tags.</p>
     #   @return [Hash<String, Array<String>>]
     class UpdateCisTargets < Struct.new(
+      nil,
       :account_ids,
       :target_resource_tags,
       keyword_init: true
@@ -6800,6 +7109,7 @@ module Aws::Inspector2
     #   <p>The updated integration details specific to the repository provider type.</p>
     #   @return [Types::UpdateIntegrationDetails]
     class UpdateCodeSecurityIntegrationRequest < Struct.new(
+      nil,
       :integration_arn,
       :details,
       keyword_init: true
@@ -6814,6 +7124,7 @@ module Aws::Inspector2
     #   <p>The current status of the updated code security integration.</p>
     #   @return [String]
     class UpdateCodeSecurityIntegrationResponse < Struct.new(
+      nil,
       :integration_arn,
       :status,
       keyword_init: true
@@ -6828,6 +7139,7 @@ module Aws::Inspector2
     #   <p>The updated configuration settings for the code security scan.</p>
     #   @return [Types::CodeSecurityScanConfiguration]
     class UpdateCodeSecurityScanConfigurationRequest < Struct.new(
+      nil,
       :scan_configuration_arn,
       :configuration,
       keyword_init: true
@@ -6839,6 +7151,7 @@ module Aws::Inspector2
     #   <p>The Amazon Resource Name (ARN) of the updated scan configuration.</p>
     #   @return [String]
     class UpdateCodeSecurityScanConfigurationResponse < Struct.new(
+      nil,
       :scan_configuration_arn,
       keyword_init: true
     )
@@ -6852,6 +7165,7 @@ module Aws::Inspector2
     #   <p>Specifies how the Amazon EC2 automated scan will be updated for your environment.</p>
     #   @return [Types::Ec2Configuration]
     class UpdateConfigurationInput < Struct.new(
+      nil,
       :ecr_configuration,
       :ec2_configuration,
       keyword_init: true
@@ -6860,6 +7174,7 @@ module Aws::Inspector2
     end
 
     class UpdateConfigurationOutput < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -6875,6 +7190,7 @@ module Aws::Inspector2
     #   <p>The Amazon Inspector deep inspection custom paths you are adding for your account.</p>
     #   @return [Array<String>]
     class UpdateEc2DeepInspectionConfigurationRequest < Struct.new(
+      nil,
       :activate_deep_inspection,
       :package_paths,
       keyword_init: true
@@ -6896,6 +7212,7 @@ module Aws::Inspector2
     #            added.</p>
     #   @return [String]
     class UpdateEc2DeepInspectionConfigurationResponse < Struct.new(
+      nil,
       :package_paths,
       :org_package_paths,
       :status,
@@ -6915,6 +7232,7 @@ module Aws::Inspector2
     #   <p>The resource type for the encryption key.</p>
     #   @return [String]
     class UpdateEncryptionKeyRequest < Struct.new(
+      nil,
       :kms_key_id,
       :scan_type,
       :resource_type,
@@ -6924,6 +7242,7 @@ module Aws::Inspector2
     end
 
     class UpdateEncryptionKeyResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -6948,6 +7267,7 @@ module Aws::Inspector2
     #   <p>The reason the filter was updated.</p>
     #   @return [String]
     class UpdateFilterInput < Struct.new(
+      nil,
       :action,
       :description,
       :filter_criteria,
@@ -6963,6 +7283,7 @@ module Aws::Inspector2
     #   <p>The Amazon Resource Number (ARN) of the successfully updated filter.</p>
     #   @return [String]
     class UpdateFilterOutput < Struct.new(
+      nil,
       :arn,
       keyword_init: true
     )
@@ -6977,6 +7298,7 @@ module Aws::Inspector2
     #   <p>The installation ID of the GitHub App associated with the integration.</p>
     #   @return [String]
     class UpdateGitHubIntegrationDetail < Struct.new(
+      nil,
       :code,
       :installation_id,
       keyword_init: true
@@ -6991,6 +7313,7 @@ module Aws::Inspector2
     #            integration.</p>
     #   @return [String]
     class UpdateGitLabSelfManagedIntegrationDetail < Struct.new(
+      nil,
       :auth_code,
       keyword_init: true
     )
@@ -7022,6 +7345,7 @@ module Aws::Inspector2
     #   <p>The Amazon Inspector deep inspection custom paths you are adding for your organization.</p>
     #   @return [Array<String>]
     class UpdateOrgEc2DeepInspectionConfigurationRequest < Struct.new(
+      nil,
       :org_package_paths,
       keyword_init: true
     )
@@ -7029,6 +7353,7 @@ module Aws::Inspector2
     end
 
     class UpdateOrgEc2DeepInspectionConfigurationResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -7039,6 +7364,7 @@ module Aws::Inspector2
     #            organization.</p>
     #   @return [Types::AutoEnable]
     class UpdateOrganizationConfigurationInput < Struct.new(
+      nil,
       :auto_enable,
       keyword_init: true
     )
@@ -7050,6 +7376,7 @@ module Aws::Inspector2
     #            organization.</p>
     #   @return [Types::AutoEnable]
     class UpdateOrganizationConfigurationOutput < Struct.new(
+      nil,
       :auto_enable,
       keyword_init: true
     )
@@ -7070,6 +7397,7 @@ module Aws::Inspector2
     #   <p>The currency type used when calculating usage data.</p>
     #   @return [String]
     class Usage < Struct.new(
+      nil,
       :type,
       :total,
       :estimated_monthly_cost,
@@ -7093,6 +7421,7 @@ module Aws::Inspector2
     #   <p>An object representing the total usage for an account.</p>
     #   @return [Array<Types::Usage>]
     class UsageTotal < Struct.new(
+      nil,
       :account_id,
       :usage,
       keyword_init: true
@@ -7111,6 +7440,7 @@ module Aws::Inspector2
     #   <p>The fields that failed validation.</p>
     #   @return [Array<Types::ValidationExceptionField>]
     class ValidationException < Struct.new(
+      nil,
       :message,
       :reason,
       :fields,
@@ -7127,6 +7457,7 @@ module Aws::Inspector2
     #   <p>The validation exception message.</p>
     #   @return [String]
     class ValidationExceptionField < Struct.new(
+      nil,
       :name,
       :message,
       keyword_init: true
@@ -7196,6 +7527,7 @@ module Aws::Inspector2
     #            vulnerability.</p>
     #   @return [Types::Epss]
     class Vulnerability < Struct.new(
+      nil,
       :id,
       :cwes,
       :cisa_data,
@@ -7255,6 +7587,7 @@ module Aws::Inspector2
     #            finding.</p>
     #   @return [String]
     class VulnerablePackage < Struct.new(
+      nil,
       :name,
       :version,
       :source_layer_hash,
@@ -7284,6 +7617,7 @@ module Aws::Inspector2
     #   <p>The weekly schedule's days.</p>
     #   @return [Array<String>]
     class WeeklySchedule < Struct.new(
+      nil,
       :start_time,
       :days,
       keyword_init: true

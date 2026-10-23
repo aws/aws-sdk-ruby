@@ -10,6 +10,7 @@ module Aws::AppTest
     # @!attribute message
     #   @return [String]
     class AccessDeniedException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -27,6 +28,7 @@ module Aws::AppTest
     #   <p>The export data set names of the batch.</p>
     #   @return [Array<String>]
     class Batch < Struct.new(
+      nil,
       :batch_job_name,
       :batch_job_parameters,
       :export_data_set_names,
@@ -52,6 +54,7 @@ module Aws::AppTest
     #   <p>The properties of the batch step input.</p>
     #   @return [Types::MainframeActionProperties]
     class BatchStepInput < Struct.new(
+      nil,
       :resource,
       :batch_job_name,
       :batch_job_parameters,
@@ -73,6 +76,7 @@ module Aws::AppTest
     #   <p>The data set details of the batch step output.</p>
     #   @return [Array<Types::DataSet>]
     class BatchStepOutput < Struct.new(
+      nil,
       :data_set_export_location,
       :dms_output_location,
       :data_set_details,
@@ -89,6 +93,7 @@ module Aws::AppTest
     #   <p>The step output of the batch summary.</p>
     #   @return [Types::BatchStepOutput]
     class BatchSummary < Struct.new(
+      nil,
       :step_input,
       :step_output,
       keyword_init: true
@@ -104,6 +109,7 @@ module Aws::AppTest
     #   <p>The CloudFormation properties in the CloudFormation template.</p>
     #   @return [Hash<String, String>]
     class CloudFormation < Struct.new(
+      nil,
       :template_location,
       :parameters,
       keyword_init: true
@@ -119,6 +125,7 @@ module Aws::AppTest
     #   <p>The action type of the CloudFormation action.</p>
     #   @return [String]
     class CloudFormationAction < Struct.new(
+      nil,
       :resource,
       :action_type,
       keyword_init: true
@@ -154,6 +161,7 @@ module Aws::AppTest
     #   <p>The output of the compare action.</p>
     #   @return [Types::Output]
     class CompareAction < Struct.new(
+      nil,
       :input,
       :output,
       keyword_init: true
@@ -166,6 +174,7 @@ module Aws::AppTest
     #   <p>The type of the compare action summary.</p>
     #   @return [Types::File]
     class CompareActionSummary < Struct.new(
+      nil,
       :type,
       keyword_init: true
     )
@@ -186,6 +195,7 @@ module Aws::AppTest
     #   <p>The target data sets of the compare data sets step input location.</p>
     #   @return [Array<Types::DataSet>]
     class CompareDataSetsStepInput < Struct.new(
+      nil,
       :source_location,
       :target_location,
       :source_data_sets,
@@ -203,6 +213,7 @@ module Aws::AppTest
     #   <p>The comparison status of the compare data sets step output.</p>
     #   @return [String]
     class CompareDataSetsStepOutput < Struct.new(
+      nil,
       :comparison_output_location,
       :comparison_status,
       keyword_init: true
@@ -218,6 +229,7 @@ module Aws::AppTest
     #   <p>The step output of the compare data sets summary.</p>
     #   @return [Types::CompareDataSetsStepOutput]
     class CompareDataSetsSummary < Struct.new(
+      nil,
       :step_input,
       :step_output,
       keyword_init: true
@@ -242,6 +254,7 @@ module Aws::AppTest
     #   <p>The target metadata location of the compare database CDC step input.</p>
     #   @return [Types::TargetDatabaseMetadata]
     class CompareDatabaseCDCStepInput < Struct.new(
+      nil,
       :source_location,
       :target_location,
       :output_location,
@@ -260,6 +273,7 @@ module Aws::AppTest
     #   <p>The comparison status of the compare database CDC step output.</p>
     #   @return [String]
     class CompareDatabaseCDCStepOutput < Struct.new(
+      nil,
       :comparison_output_location,
       :comparison_status,
       keyword_init: true
@@ -275,6 +289,7 @@ module Aws::AppTest
     #   <p>The step output of the compare database CDC summary.</p>
     #   @return [Types::CompareDatabaseCDCStepOutput]
     class CompareDatabaseCDCSummary < Struct.new(
+      nil,
       :step_input,
       :step_output,
       keyword_init: true
@@ -312,6 +327,7 @@ module Aws::AppTest
     #   <p>The resource type of the conflicts with existing resources.</p>
     #   @return [String]
     class ConflictException < Struct.new(
+      nil,
       :message,
       :resource_id,
       :resource_type,
@@ -328,6 +344,7 @@ module Aws::AppTest
     #   <p>The CloudFormation properties of the CloudFormation step input.</p>
     #   @return [Hash<String, String>]
     class CreateCloudFormationStepInput < Struct.new(
+      nil,
       :template_location,
       :parameters,
       keyword_init: true
@@ -343,6 +360,7 @@ module Aws::AppTest
     #   <p>The exports of the CloudFormation step output.</p>
     #   @return [Hash<String, String>]
     class CreateCloudFormationStepOutput < Struct.new(
+      nil,
       :stack_id,
       :exports,
       keyword_init: true
@@ -358,6 +376,7 @@ module Aws::AppTest
     #   <p>The step output of the CloudFormation summary.</p>
     #   @return [Types::CreateCloudFormationStepOutput]
     class CreateCloudFormationSummary < Struct.new(
+      nil,
       :step_input,
       :step_output,
       keyword_init: true
@@ -381,6 +400,7 @@ module Aws::AppTest
     #   <p>The specified tags of the test case.</p>
     #   @return [Hash<String, String>]
     class CreateTestCaseRequest < Struct.new(
+      nil,
       :name,
       :description,
       :steps,
@@ -398,6 +418,7 @@ module Aws::AppTest
     #   <p>The test case version of the test case.</p>
     #   @return [Integer]
     class CreateTestCaseResponse < Struct.new(
+      nil,
       :test_case_id,
       :test_case_version,
       keyword_init: true
@@ -427,6 +448,7 @@ module Aws::AppTest
     #   <p>The service settings of the test configuration.</p>
     #   @return [Types::ServiceSettings]
     class CreateTestConfigurationRequest < Struct.new(
+      nil,
       :name,
       :description,
       :resources,
@@ -446,6 +468,7 @@ module Aws::AppTest
     #   <p>The test configuration version.</p>
     #   @return [Integer]
     class CreateTestConfigurationResponse < Struct.new(
+      nil,
       :test_configuration_id,
       :test_configuration_version,
       keyword_init: true
@@ -475,6 +498,7 @@ module Aws::AppTest
     #   <p>The tags of the test suite.</p>
     #   @return [Hash<String, String>]
     class CreateTestSuiteRequest < Struct.new(
+      nil,
       :name,
       :description,
       :before_steps,
@@ -494,6 +518,7 @@ module Aws::AppTest
     #   <p>The suite version of the test suite.</p>
     #   @return [Integer]
     class CreateTestSuiteResponse < Struct.new(
+      nil,
       :test_suite_id,
       :test_suite_version,
       keyword_init: true
@@ -518,6 +543,7 @@ module Aws::AppTest
     #   <p>The length of the data set.</p>
     #   @return [Integer]
     class DataSet < Struct.new(
+      nil,
       :type,
       :name,
       :ccsid,
@@ -536,6 +562,7 @@ module Aws::AppTest
     #   <p>The target metadata of the database CDC.</p>
     #   @return [Types::TargetDatabaseMetadata]
     class DatabaseCDC < Struct.new(
+      nil,
       :source_metadata,
       :target_metadata,
       keyword_init: true
@@ -548,6 +575,7 @@ module Aws::AppTest
     #   <p>The stack ID of the deleted CloudFormation step input.</p>
     #   @return [String]
     class DeleteCloudFormationStepInput < Struct.new(
+      nil,
       :stack_id,
       keyword_init: true
     )
@@ -556,6 +584,7 @@ module Aws::AppTest
 
     # <p>Deletes the CloudFormation summary step output.</p>
     class DeleteCloudFormationStepOutput < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -569,6 +598,7 @@ module Aws::AppTest
     #   <p>The step output of the deleted CloudFormation summary.</p>
     #   @return [Types::DeleteCloudFormationStepOutput]
     class DeleteCloudFormationSummary < Struct.new(
+      nil,
       :step_input,
       :step_output,
       keyword_init: true
@@ -580,6 +610,7 @@ module Aws::AppTest
     #   <p>The test case ID of the test case.</p>
     #   @return [String]
     class DeleteTestCaseRequest < Struct.new(
+      nil,
       :test_case_id,
       keyword_init: true
     )
@@ -587,6 +618,7 @@ module Aws::AppTest
     end
 
     class DeleteTestCaseResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -596,6 +628,7 @@ module Aws::AppTest
     #   <p>The test ID of the test configuration.</p>
     #   @return [String]
     class DeleteTestConfigurationRequest < Struct.new(
+      nil,
       :test_configuration_id,
       keyword_init: true
     )
@@ -603,6 +636,7 @@ module Aws::AppTest
     end
 
     class DeleteTestConfigurationResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -612,6 +646,7 @@ module Aws::AppTest
     #   <p>The run ID of the test run.</p>
     #   @return [String]
     class DeleteTestRunRequest < Struct.new(
+      nil,
       :test_run_id,
       keyword_init: true
     )
@@ -619,6 +654,7 @@ module Aws::AppTest
     end
 
     class DeleteTestRunResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -628,6 +664,7 @@ module Aws::AppTest
     #   <p>The test ID of the test suite.</p>
     #   @return [String]
     class DeleteTestSuiteRequest < Struct.new(
+      nil,
       :test_suite_id,
       keyword_init: true
     )
@@ -635,6 +672,7 @@ module Aws::AppTest
     end
 
     class DeleteTestSuiteResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -682,6 +720,7 @@ module Aws::AppTest
     #   <p>The test case version of the test case.</p>
     #   @return [Integer]
     class GetTestCaseRequest < Struct.new(
+      nil,
       :test_case_id,
       :test_case_version,
       keyword_init: true
@@ -726,6 +765,7 @@ module Aws::AppTest
     #   <p>The tags of the test case.</p>
     #   @return [Hash<String, String>]
     class GetTestCaseResponse < Struct.new(
+      nil,
       :test_case_id,
       :test_case_arn,
       :name,
@@ -750,6 +790,7 @@ module Aws::AppTest
     #   <p>The test configuration version.</p>
     #   @return [Integer]
     class GetTestConfigurationRequest < Struct.new(
+      nil,
       :test_configuration_id,
       :test_configuration_version,
       keyword_init: true
@@ -800,6 +841,7 @@ module Aws::AppTest
     #   <p>The service settings of the test configuration.</p>
     #   @return [Types::ServiceSettings]
     class GetTestConfigurationResponse < Struct.new(
+      nil,
       :test_configuration_id,
       :name,
       :test_configuration_arn,
@@ -832,6 +874,7 @@ module Aws::AppTest
     #   <p>The test suite ID of a test run step.</p>
     #   @return [String]
     class GetTestRunStepRequest < Struct.new(
+      nil,
       :test_run_id,
       :step_name,
       :test_case_id,
@@ -881,6 +924,7 @@ module Aws::AppTest
     #   <p>The step run summary of the test run step.</p>
     #   @return [Types::StepRunSummary]
     class GetTestRunStepResponse < Struct.new(
+      nil,
       :step_name,
       :test_run_id,
       :test_case_id,
@@ -906,6 +950,7 @@ module Aws::AppTest
     #   <p>The version of the test suite.</p>
     #   @return [Integer]
     class GetTestSuiteRequest < Struct.new(
+      nil,
       :test_suite_id,
       :test_suite_version,
       keyword_init: true
@@ -956,6 +1001,7 @@ module Aws::AppTest
     #   <p>The tags of the test suite.</p>
     #   @return [Hash<String, String>]
     class GetTestSuiteResponse < Struct.new(
+      nil,
       :test_suite_id,
       :name,
       :latest_version,
@@ -1001,6 +1047,7 @@ module Aws::AppTest
     #   <p>The file metadata of the input file.</p>
     #   @return [Types::FileMetadata]
     class InputFile < Struct.new(
+      nil,
       :source_location,
       :target_location,
       :file_metadata,
@@ -1016,6 +1063,7 @@ module Aws::AppTest
     #   <p>The number of seconds to retry the query.</p>
     #   @return [Integer]
     class InternalServerException < Struct.new(
+      nil,
       :message,
       :retry_after_seconds,
       keyword_init: true
@@ -1027,6 +1075,7 @@ module Aws::AppTest
     #   <p>The Amazon Resource Name (ARN) of the resource.</p>
     #   @return [String]
     class ListTagsForResourceRequest < Struct.new(
+      nil,
       :resource_arn,
       keyword_init: true
     )
@@ -1037,6 +1086,7 @@ module Aws::AppTest
     #   <p>The tags of the resource.</p>
     #   @return [Hash<String, String>]
     class ListTagsForResourceResponse < Struct.new(
+      nil,
       :tags,
       keyword_init: true
     )
@@ -1053,6 +1103,7 @@ module Aws::AppTest
     #   <p>The maximum results of the test case.</p>
     #   @return [Integer]
     class ListTestCasesRequest < Struct.new(
+      nil,
       :test_case_ids,
       :next_token,
       :max_results,
@@ -1068,6 +1119,7 @@ module Aws::AppTest
     #   <p>The next token in test cases.</p>
     #   @return [String]
     class ListTestCasesResponse < Struct.new(
+      nil,
       :test_cases,
       :next_token,
       keyword_init: true
@@ -1085,6 +1137,7 @@ module Aws::AppTest
     #   <p>The maximum results of the test configuration.</p>
     #   @return [Integer]
     class ListTestConfigurationsRequest < Struct.new(
+      nil,
       :test_configuration_ids,
       :next_token,
       :max_results,
@@ -1100,6 +1153,7 @@ module Aws::AppTest
     #   <p>The next token in the test configurations.</p>
     #   @return [String]
     class ListTestConfigurationsResponse < Struct.new(
+      nil,
       :test_configurations,
       :next_token,
       keyword_init: true
@@ -1123,6 +1177,7 @@ module Aws::AppTest
     #   <p>The maximum number of test run steps to return in one page of results.</p>
     #   @return [Integer]
     class ListTestRunStepsRequest < Struct.new(
+      nil,
       :test_run_id,
       :test_case_id,
       :test_suite_id,
@@ -1140,6 +1195,7 @@ module Aws::AppTest
     #   <p>The token from a previous request to retrieve the next page of results.</p>
     #   @return [String]
     class ListTestRunStepsResponse < Struct.new(
+      nil,
       :test_run_steps,
       :next_token,
       keyword_init: true
@@ -1157,6 +1213,7 @@ module Aws::AppTest
     #   <p>The maximum number of test run test cases to return in one page of results.</p>
     #   @return [Integer]
     class ListTestRunTestCasesRequest < Struct.new(
+      nil,
       :test_run_id,
       :next_token,
       :max_results,
@@ -1172,6 +1229,7 @@ module Aws::AppTest
     #   <p>The token from a previous request to retrieve the next page of results.</p>
     #   @return [String]
     class ListTestRunTestCasesResponse < Struct.new(
+      nil,
       :test_run_test_cases,
       :next_token,
       keyword_init: true
@@ -1192,6 +1250,7 @@ module Aws::AppTest
     #   <p>The maximum number of test runs to return in one page of results.</p>
     #   @return [Integer]
     class ListTestRunsRequest < Struct.new(
+      nil,
       :test_suite_id,
       :test_run_ids,
       :next_token,
@@ -1208,6 +1267,7 @@ module Aws::AppTest
     #   <p>The token from the previous request to retrieve the next page of results.</p>
     #   @return [String]
     class ListTestRunsResponse < Struct.new(
+      nil,
       :test_runs,
       :next_token,
       keyword_init: true
@@ -1225,6 +1285,7 @@ module Aws::AppTest
     #   <p>The maximum number of test suites to return in one page of results.</p>
     #   @return [Integer]
     class ListTestSuitesRequest < Struct.new(
+      nil,
       :test_suite_ids,
       :next_token,
       :max_results,
@@ -1240,6 +1301,7 @@ module Aws::AppTest
     #   <p>The token from a previous request to retrieve the next page of test suites results.</p>
     #   @return [String]
     class ListTestSuitesResponse < Struct.new(
+      nil,
       :test_suites,
       :next_token,
       keyword_init: true
@@ -1255,6 +1317,7 @@ module Aws::AppTest
     #   <p>The import data set location of the AWS Mainframe Modernization managed action properties.</p>
     #   @return [String]
     class M2ManagedActionProperties < Struct.new(
+      nil,
       :force_stop,
       :import_data_set_location,
       keyword_init: true
@@ -1276,6 +1339,7 @@ module Aws::AppTest
     #   <p>The listener port of the AWS Mainframe Modernization managed application.</p>
     #   @return [String]
     class M2ManagedApplication < Struct.new(
+      nil,
       :application_id,
       :runtime,
       :vpc_endpoint_service_name,
@@ -1296,6 +1360,7 @@ module Aws::AppTest
     #   <p>The properties of the AWS Mainframe Modernization managed application action.</p>
     #   @return [Types::M2ManagedActionProperties]
     class M2ManagedApplicationAction < Struct.new(
+      nil,
       :resource,
       :action_type,
       :properties,
@@ -1324,6 +1389,7 @@ module Aws::AppTest
     #   <p>The properties of the AWS Mainframe Modernization managed application step input.</p>
     #   @return [Types::M2ManagedActionProperties]
     class M2ManagedApplicationStepInput < Struct.new(
+      nil,
       :application_id,
       :runtime,
       :vpc_endpoint_service_name,
@@ -1340,6 +1406,7 @@ module Aws::AppTest
     #   <p>The import data set summary of the AWS Mainframe Modernization managed application step output.</p>
     #   @return [Hash<String, String>]
     class M2ManagedApplicationStepOutput < Struct.new(
+      nil,
       :import_data_set_summary,
       keyword_init: true
     )
@@ -1354,6 +1421,7 @@ module Aws::AppTest
     #   <p>The step output of the AWS Mainframe Modernization managed application step summary.</p>
     #   @return [Types::M2ManagedApplicationStepOutput]
     class M2ManagedApplicationStepSummary < Struct.new(
+      nil,
       :step_input,
       :step_output,
       keyword_init: true
@@ -1372,6 +1440,7 @@ module Aws::AppTest
     #   <p>The listener port of the AWS Mainframe Modernization managed application summary.</p>
     #   @return [Integer]
     class M2ManagedApplicationSummary < Struct.new(
+      nil,
       :application_id,
       :runtime,
       :listener_port,
@@ -1394,6 +1463,7 @@ module Aws::AppTest
     #   <p>The web application name of the AWS Mainframe Modernization non-managed application.</p>
     #   @return [String]
     class M2NonManagedApplication < Struct.new(
+      nil,
       :vpc_endpoint_service_name,
       :listener_port,
       :runtime,
@@ -1411,6 +1481,7 @@ module Aws::AppTest
     #   <p>The action type of the AWS Mainframe Modernization non-managed application action.</p>
     #   @return [String]
     class M2NonManagedApplicationAction < Struct.new(
+      nil,
       :resource,
       :action_type,
       keyword_init: true
@@ -1435,6 +1506,7 @@ module Aws::AppTest
     #   <p>The action type of the AWS Mainframe Modernization non-managed application step input.</p>
     #   @return [String]
     class M2NonManagedApplicationStepInput < Struct.new(
+      nil,
       :vpc_endpoint_service_name,
       :listener_port,
       :runtime,
@@ -1447,6 +1519,7 @@ module Aws::AppTest
 
     # <p>Specifies the AWS Mainframe Modernization non-managed application step output.</p>
     class M2NonManagedApplicationStepOutput < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1460,6 +1533,7 @@ module Aws::AppTest
     #   <p>The step output of the AWS Mainframe Modernization non-managed application step summary.</p>
     #   @return [Types::M2NonManagedApplicationStepOutput]
     class M2NonManagedApplicationStepSummary < Struct.new(
+      nil,
       :step_input,
       :step_output,
       keyword_init: true
@@ -1481,6 +1555,7 @@ module Aws::AppTest
     #   <p>The web application name of the AWS Mainframe Modernization non-managed application summary.</p>
     #   @return [String]
     class M2NonManagedApplicationSummary < Struct.new(
+      nil,
       :vpc_endpoint_service_name,
       :listener_port,
       :runtime,
@@ -1501,6 +1576,7 @@ module Aws::AppTest
     #   <p>The properties of the mainframe action.</p>
     #   @return [Types::MainframeActionProperties]
     class MainframeAction < Struct.new(
+      nil,
       :resource,
       :action_type,
       :properties,
@@ -1514,6 +1590,7 @@ module Aws::AppTest
     #   <p>The DMS task ARN of the mainframe action properties.</p>
     #   @return [String]
     class MainframeActionProperties < Struct.new(
+      nil,
       :dms_task_arn,
       keyword_init: true
     )
@@ -1600,6 +1677,7 @@ module Aws::AppTest
     #   <p>The file location of the output file.</p>
     #   @return [String]
     class OutputFile < Struct.new(
+      nil,
       :file_location,
       keyword_init: true
     )
@@ -1614,6 +1692,7 @@ module Aws::AppTest
     #   <p>The type of the resource.</p>
     #   @return [Types::ResourceType]
     class Resource < Struct.new(
+      nil,
       :name,
       :type,
       keyword_init: true
@@ -1681,6 +1760,7 @@ module Aws::AppTest
     #   <p>The resource type of the resource not found.</p>
     #   @return [String]
     class ResourceNotFoundException < Struct.new(
+      nil,
       :message,
       :resource_id,
       :resource_type,
@@ -1722,6 +1802,7 @@ module Aws::AppTest
     #   <p>The type of the scripts.</p>
     #   @return [String]
     class Script < Struct.new(
+      nil,
       :script_location,
       :type,
       keyword_init: true
@@ -1737,6 +1818,7 @@ module Aws::AppTest
     #   <p>The type of the script summary.</p>
     #   @return [String]
     class ScriptSummary < Struct.new(
+      nil,
       :script_location,
       :type,
       keyword_init: true
@@ -1760,6 +1842,7 @@ module Aws::AppTest
     #   <p>The quote codes of AWS Application Testing that exceeded the limit.</p>
     #   @return [String]
     class ServiceQuotaExceededException < Struct.new(
+      nil,
       :message,
       :resource_id,
       :resource_type,
@@ -1775,6 +1858,7 @@ module Aws::AppTest
     #   <p>The KMS key ID of the service settings.</p>
     #   @return [String]
     class ServiceSettings < Struct.new(
+      nil,
       :kms_key_id,
       keyword_init: true
     )
@@ -1789,6 +1873,7 @@ module Aws::AppTest
     #   <p>The capture tool of the source database metadata.</p>
     #   @return [String]
     class SourceDatabaseMetadata < Struct.new(
+      nil,
       :type,
       :capture_tool,
       keyword_init: true
@@ -1809,6 +1894,7 @@ module Aws::AppTest
     #   <p>The tags of the test run.</p>
     #   @return [Hash<String, String>]
     class StartTestRunRequest < Struct.new(
+      nil,
       :test_suite_id,
       :test_configuration_id,
       :client_token,
@@ -1825,6 +1911,7 @@ module Aws::AppTest
     #   <p>The test run status of the test run.</p>
     #   @return [String]
     class StartTestRunResponse < Struct.new(
+      nil,
       :test_run_id,
       :test_run_status,
       keyword_init: true
@@ -1843,6 +1930,7 @@ module Aws::AppTest
     #   <p>The action of the step.</p>
     #   @return [Types::StepAction]
     class Step < Struct.new(
+      nil,
       :name,
       :description,
       :action,
@@ -1909,6 +1997,7 @@ module Aws::AppTest
     #   <p>The data set names of the TN3270 protocol.</p>
     #   @return [Array<String>]
     class TN3270 < Struct.new(
+      nil,
       :script,
       :export_data_set_names,
       keyword_init: true
@@ -1930,6 +2019,7 @@ module Aws::AppTest
     #   <p>The properties of the TN3270 step input.</p>
     #   @return [Types::MainframeActionProperties]
     class TN3270StepInput < Struct.new(
+      nil,
       :resource,
       :script,
       :export_data_set_names,
@@ -1953,6 +2043,7 @@ module Aws::AppTest
     #   <p>The script output location of the TN3270 step output.</p>
     #   @return [String]
     class TN3270StepOutput < Struct.new(
+      nil,
       :data_set_export_location,
       :dms_output_location,
       :data_set_details,
@@ -1970,6 +2061,7 @@ module Aws::AppTest
     #   <p>The step output of the TN3270 summary.</p>
     #   @return [Types::TN3270StepOutput]
     class TN3270Summary < Struct.new(
+      nil,
       :step_input,
       :step_output,
       keyword_init: true
@@ -1984,6 +2076,7 @@ module Aws::AppTest
     #   <p>The tags of the resource.</p>
     #   @return [Hash<String, String>]
     class TagResourceRequest < Struct.new(
+      nil,
       :resource_arn,
       :tags,
       keyword_init: true
@@ -1992,6 +2085,7 @@ module Aws::AppTest
     end
 
     class TagResourceResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -2005,6 +2099,7 @@ module Aws::AppTest
     #   <p>The capture tool of the target database metadata.</p>
     #   @return [String]
     class TargetDatabaseMetadata < Struct.new(
+      nil,
       :type,
       :capture_tool,
       keyword_init: true
@@ -2023,6 +2118,7 @@ module Aws::AppTest
     #   <p>The status reason of the test case latest version.</p>
     #   @return [String]
     class TestCaseLatestVersion < Struct.new(
+      nil,
       :version,
       :status,
       :status_reason,
@@ -2054,6 +2150,7 @@ module Aws::AppTest
     #   <p>The run end time of the test case run summary.</p>
     #   @return [Time]
     class TestCaseRunSummary < Struct.new(
+      nil,
       :test_case_id,
       :test_case_version,
       :test_run_id,
@@ -2092,6 +2189,7 @@ module Aws::AppTest
     #   <p>The last update time of the test case summary.</p>
     #   @return [Time]
     class TestCaseSummary < Struct.new(
+      nil,
       :test_case_id,
       :test_case_arn,
       :name,
@@ -2131,6 +2229,7 @@ module Aws::AppTest
     #   <p>The status reason of the test configuration latest version.</p>
     #   @return [String]
     class TestConfigurationLatestVersion < Struct.new(
+      nil,
       :version,
       :status,
       :status_reason,
@@ -2165,6 +2264,7 @@ module Aws::AppTest
     #   <p>The last update time of the test configuration summary.</p>
     #   @return [Time]
     class TestConfigurationSummary < Struct.new(
+      nil,
       :test_configuration_id,
       :name,
       :status_reason,
@@ -2216,6 +2316,7 @@ module Aws::AppTest
     #   <p>The run end time of the test run step summary.</p>
     #   @return [Time]
     class TestRunStepSummary < Struct.new(
+      nil,
       :step_name,
       :test_run_id,
       :test_case_id,
@@ -2265,6 +2366,7 @@ module Aws::AppTest
     #   <p>The run end time of the test run summary.</p>
     #   @return [Time]
     class TestRunSummary < Struct.new(
+      nil,
       :test_run_id,
       :test_run_arn,
       :test_suite_id,
@@ -2291,6 +2393,7 @@ module Aws::AppTest
     #   <p>The status reason of the test suite latest version.</p>
     #   @return [String]
     class TestSuiteLatestVersion < Struct.new(
+      nil,
       :version,
       :status,
       :status_reason,
@@ -2325,6 +2428,7 @@ module Aws::AppTest
     #   <p>The last update time of the test suite summary.</p>
     #   @return [Time]
     class TestSuiteSummary < Struct.new(
+      nil,
       :test_suite_id,
       :name,
       :status_reason,
@@ -2351,6 +2455,7 @@ module Aws::AppTest
     #   <p>The number of seconds to retry after for requests that exceed the limit.</p>
     #   @return [Integer]
     class ThrottlingException < Struct.new(
+      nil,
       :message,
       :service_code,
       :quota_code,
@@ -2367,6 +2472,7 @@ module Aws::AppTest
     #   <p>The tag keys of the resource.</p>
     #   @return [Array<String>]
     class UntagResourceRequest < Struct.new(
+      nil,
       :resource_arn,
       :tag_keys,
       keyword_init: true
@@ -2375,6 +2481,7 @@ module Aws::AppTest
     end
 
     class UntagResourceResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -2390,6 +2497,7 @@ module Aws::AppTest
     #   <p>The steps of the test case.</p>
     #   @return [Array<Types::Step>]
     class UpdateTestCaseRequest < Struct.new(
+      nil,
       :test_case_id,
       :description,
       :steps,
@@ -2405,6 +2513,7 @@ module Aws::AppTest
     #   <p>The test case version of the test case.</p>
     #   @return [Integer]
     class UpdateTestCaseResponse < Struct.new(
+      nil,
       :test_case_id,
       :test_case_version,
       keyword_init: true
@@ -2428,6 +2537,7 @@ module Aws::AppTest
     #   <p>The service settings of the test configuration.</p>
     #   @return [Types::ServiceSettings]
     class UpdateTestConfigurationRequest < Struct.new(
+      nil,
       :test_configuration_id,
       :description,
       :resources,
@@ -2445,6 +2555,7 @@ module Aws::AppTest
     #   <p>The configuration version of the test configuration.</p>
     #   @return [Integer]
     class UpdateTestConfigurationResponse < Struct.new(
+      nil,
       :test_configuration_id,
       :test_configuration_version,
       keyword_init: true
@@ -2468,6 +2579,7 @@ module Aws::AppTest
     #   <p>The test cases in the test suite.</p>
     #   @return [Types::TestCases]
     class UpdateTestSuiteRequest < Struct.new(
+      nil,
       :test_suite_id,
       :description,
       :before_steps,
@@ -2485,6 +2597,7 @@ module Aws::AppTest
     #   <p>The test suite version of the test suite.</p>
     #   @return [Integer]
     class UpdateTestSuiteResponse < Struct.new(
+      nil,
       :test_suite_id,
       :test_suite_version,
       keyword_init: true
@@ -2502,6 +2615,7 @@ module Aws::AppTest
     #   <p>The field list of the validation exception.</p>
     #   @return [Array<Types::ValidationExceptionField>]
     class ValidationException < Struct.new(
+      nil,
       :message,
       :reason,
       :field_list,
@@ -2518,6 +2632,7 @@ module Aws::AppTest
     #   <p>The message stating reason for why service validation failed.</p>
     #   @return [String]
     class ValidationExceptionField < Struct.new(
+      nil,
       :name,
       :message,
       keyword_init: true

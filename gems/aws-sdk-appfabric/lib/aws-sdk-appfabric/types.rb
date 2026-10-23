@@ -10,6 +10,7 @@ module Aws::AppFabric
     # @!attribute message
     #   @return [String]
     class AccessDeniedException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -21,6 +22,7 @@ module Aws::AppFabric
     #   <p>An API key for an application.</p>
     #   @return [String]
     class ApiKeyCredential < Struct.new(
+      nil,
       :api_key,
       keyword_init: true
     )
@@ -87,6 +89,7 @@ module Aws::AppFabric
     #   <p>The application URL for the OAuth flow.</p>
     #   @return [String]
     class AppAuthorization < Struct.new(
+      nil,
       :app_authorization_arn,
       :app_bundle_arn,
       :app,
@@ -149,6 +152,7 @@ module Aws::AppFabric
     #   <p>Timestamp for when the app authorization was last updated.</p>
     #   @return [Time]
     class AppAuthorizationSummary < Struct.new(
+      nil,
       :app_authorization_arn,
       :app_bundle_arn,
       :app,
@@ -169,6 +173,7 @@ module Aws::AppFabric
     #            used to encrypt the application data.</p>
     #   @return [String]
     class AppBundle < Struct.new(
+      nil,
       :arn,
       :customer_managed_key_arn,
       keyword_init: true
@@ -181,6 +186,7 @@ module Aws::AppFabric
     #   <p>The Amazon Resource Name (ARN) of the app bundle.</p>
     #   @return [String]
     class AppBundleSummary < Struct.new(
+      nil,
       :arn,
       keyword_init: true
     )
@@ -192,6 +198,7 @@ module Aws::AppFabric
     #   <p>Contains information about an audit log destination.</p>
     #   @return [Types::Destination]
     class AuditLogDestinationConfiguration < Struct.new(
+      nil,
       :destination,
       keyword_init: true
     )
@@ -206,6 +213,7 @@ module Aws::AppFabric
     #   <p>The format in which the audit logs need to be formatted.</p>
     #   @return [String]
     class AuditLogProcessingConfiguration < Struct.new(
+      nil,
       :schema,
       :format,
       keyword_init: true
@@ -223,6 +231,7 @@ module Aws::AppFabric
     #            application OAuth page (after clicking on the AuthURL).</p>
     #   @return [String]
     class AuthRequest < Struct.new(
+      nil,
       :redirect_uri,
       :code,
       keyword_init: true
@@ -238,6 +247,7 @@ module Aws::AppFabric
     #   <p>The tasks IDs to use for the request.</p>
     #   @return [Array<String>]
     class BatchGetUserAccessTasksRequest < Struct.new(
+      nil,
       :app_bundle_identifier,
       :task_id_list,
       keyword_init: true
@@ -249,6 +259,7 @@ module Aws::AppFabric
     #   <p>Contains a list of user access results.</p>
     #   @return [Array<Types::UserAccessResultItem>]
     class BatchGetUserAccessTasksResponse < Struct.new(
+      nil,
       :user_access_results_list,
       keyword_init: true
     )
@@ -265,6 +276,7 @@ module Aws::AppFabric
     #   <p>The resource type.</p>
     #   @return [String]
     class ConflictException < Struct.new(
+      nil,
       :message,
       :resource_id,
       :resource_type,
@@ -287,6 +299,7 @@ module Aws::AppFabric
     #               (<code>oauth2</code>) authorization type.</p>
     #   @return [Types::AuthRequest]
     class ConnectAppAuthorizationRequest < Struct.new(
+      nil,
       :app_bundle_identifier,
       :app_authorization_identifier,
       :auth_request,
@@ -299,6 +312,7 @@ module Aws::AppFabric
     #   <p>Contains a summary of the app authorization.</p>
     #   @return [Types::AppAuthorizationSummary]
     class ConnectAppAuthorizationResponse < Struct.new(
+      nil,
       :app_authorization_summary,
       keyword_init: true
     )
@@ -405,6 +419,7 @@ module Aws::AppFabric
     #   <p>A map of the key-value pairs of the tag or tags to assign to the resource.</p>
     #   @return [Array<Types::Tag>]
     class CreateAppAuthorizationRequest < Struct.new(
+      nil,
       :app_bundle_identifier,
       :app,
       :credential,
@@ -421,6 +436,7 @@ module Aws::AppFabric
     #   <p>Contains information about an app authorization.</p>
     #   @return [Types::AppAuthorization]
     class CreateAppAuthorizationResponse < Struct.new(
+      nil,
       :app_authorization,
       keyword_init: true
     )
@@ -447,6 +463,7 @@ module Aws::AppFabric
     #   <p>A map of the key-value pairs of the tag or tags to assign to the resource.</p>
     #   @return [Array<Types::Tag>]
     class CreateAppBundleRequest < Struct.new(
+      nil,
       :client_token,
       :customer_managed_key_identifier,
       :tags,
@@ -459,6 +476,7 @@ module Aws::AppFabric
     #   <p>Contains information about an app bundle.</p>
     #   @return [Types::AppBundle]
     class CreateAppBundleResponse < Struct.new(
+      nil,
       :app_bundle,
       keyword_init: true
     )
@@ -495,6 +513,7 @@ module Aws::AppFabric
     #   <p>A map of the key-value pairs of the tag or tags to assign to the resource.</p>
     #   @return [Array<Types::Tag>]
     class CreateIngestionDestinationRequest < Struct.new(
+      nil,
       :app_bundle_identifier,
       :ingestion_identifier,
       :processing_configuration,
@@ -510,6 +529,7 @@ module Aws::AppFabric
     #   <p>Contains information about an ingestion destination.</p>
     #   @return [Types::IngestionDestination]
     class CreateIngestionDestinationResponse < Struct.new(
+      nil,
       :ingestion_destination,
       keyword_init: true
     )
@@ -608,6 +628,7 @@ module Aws::AppFabric
     #   <p>A map of the key-value pairs of the tag or tags to assign to the resource.</p>
     #   @return [Array<Types::Tag>]
     class CreateIngestionRequest < Struct.new(
+      nil,
       :app_bundle_identifier,
       :app,
       :tenant_id,
@@ -623,6 +644,7 @@ module Aws::AppFabric
     #   <p>Contains information about an ingestion.</p>
     #   @return [Types::Ingestion]
     class CreateIngestionResponse < Struct.new(
+      nil,
       :ingestion,
       keyword_init: true
     )
@@ -658,6 +680,7 @@ module Aws::AppFabric
     #            authorization to use for the request.</p>
     #   @return [String]
     class DeleteAppAuthorizationRequest < Struct.new(
+      nil,
       :app_bundle_identifier,
       :app_authorization_identifier,
       keyword_init: true
@@ -666,6 +689,7 @@ module Aws::AppFabric
     end
 
     class DeleteAppAuthorizationResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -675,6 +699,7 @@ module Aws::AppFabric
     #   <p>The ID or Amazon Resource Name (ARN) of the app bundle that needs to be deleted.</p>
     #   @return [String]
     class DeleteAppBundleRequest < Struct.new(
+      nil,
       :app_bundle_identifier,
       keyword_init: true
     )
@@ -682,6 +707,7 @@ module Aws::AppFabric
     end
 
     class DeleteAppBundleResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -700,6 +726,7 @@ module Aws::AppFabric
     #            destination to use for the request.</p>
     #   @return [String]
     class DeleteIngestionDestinationRequest < Struct.new(
+      nil,
       :app_bundle_identifier,
       :ingestion_identifier,
       :ingestion_destination_identifier,
@@ -709,6 +736,7 @@ module Aws::AppFabric
     end
 
     class DeleteIngestionDestinationResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -723,6 +751,7 @@ module Aws::AppFabric
     #            use for the request.</p>
     #   @return [String]
     class DeleteIngestionRequest < Struct.new(
+      nil,
       :app_bundle_identifier,
       :ingestion_identifier,
       keyword_init: true
@@ -731,6 +760,7 @@ module Aws::AppFabric
     end
 
     class DeleteIngestionResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -776,6 +806,7 @@ module Aws::AppFabric
     #   <p>The name of the Amazon Kinesis Data Firehose delivery stream.</p>
     #   @return [String]
     class FirehoseStream < Struct.new(
+      nil,
       :stream_name,
       keyword_init: true
     )
@@ -791,6 +822,7 @@ module Aws::AppFabric
     #            authorization to use for the request.</p>
     #   @return [String]
     class GetAppAuthorizationRequest < Struct.new(
+      nil,
       :app_bundle_identifier,
       :app_authorization_identifier,
       keyword_init: true
@@ -802,6 +834,7 @@ module Aws::AppFabric
     #   <p>Contains information about an app authorization.</p>
     #   @return [Types::AppAuthorization]
     class GetAppAuthorizationResponse < Struct.new(
+      nil,
       :app_authorization,
       keyword_init: true
     )
@@ -813,6 +846,7 @@ module Aws::AppFabric
     #            to use for the request.</p>
     #   @return [String]
     class GetAppBundleRequest < Struct.new(
+      nil,
       :app_bundle_identifier,
       keyword_init: true
     )
@@ -823,6 +857,7 @@ module Aws::AppFabric
     #   <p>Contains information about an app bundle.</p>
     #   @return [Types::AppBundle]
     class GetAppBundleResponse < Struct.new(
+      nil,
       :app_bundle,
       keyword_init: true
     )
@@ -842,6 +877,7 @@ module Aws::AppFabric
     #            destination to use for the request.</p>
     #   @return [String]
     class GetIngestionDestinationRequest < Struct.new(
+      nil,
       :app_bundle_identifier,
       :ingestion_identifier,
       :ingestion_destination_identifier,
@@ -854,6 +890,7 @@ module Aws::AppFabric
     #   <p>Contains information about an ingestion destination.</p>
     #   @return [Types::IngestionDestination]
     class GetIngestionDestinationResponse < Struct.new(
+      nil,
       :ingestion_destination,
       keyword_init: true
     )
@@ -869,6 +906,7 @@ module Aws::AppFabric
     #            use for the request.</p>
     #   @return [String]
     class GetIngestionRequest < Struct.new(
+      nil,
       :app_bundle_identifier,
       :ingestion_identifier,
       keyword_init: true
@@ -880,6 +918,7 @@ module Aws::AppFabric
     #   <p>Contains information about an ingestion.</p>
     #   @return [Types::Ingestion]
     class GetIngestionResponse < Struct.new(
+      nil,
       :ingestion,
       keyword_init: true
     )
@@ -912,6 +951,7 @@ module Aws::AppFabric
     #   <p>The type of the ingestion.</p>
     #   @return [String]
     class Ingestion < Struct.new(
+      nil,
       :arn,
       :app_bundle_arn,
       :app,
@@ -967,6 +1007,7 @@ module Aws::AppFabric
     #   <p>The timestamp of when the ingestion destination was last updated.</p>
     #   @return [Time]
     class IngestionDestination < Struct.new(
+      nil,
       :arn,
       :ingestion_arn,
       :processing_configuration,
@@ -985,6 +1026,7 @@ module Aws::AppFabric
     #   <p>The Amazon Resource Name (ARN) of the ingestion destination.</p>
     #   @return [String]
     class IngestionDestinationSummary < Struct.new(
+      nil,
       :arn,
       keyword_init: true
     )
@@ -1005,6 +1047,7 @@ module Aws::AppFabric
     #   <p>The status of the ingestion.</p>
     #   @return [String]
     class IngestionSummary < Struct.new(
+      nil,
       :arn,
       :app,
       :tenant_id,
@@ -1022,6 +1065,7 @@ module Aws::AppFabric
     #   <p>The period of time after which you should retry your request.</p>
     #   @return [Integer]
     class InternalServerException < Struct.new(
+      nil,
       :message,
       :retry_after_seconds,
       keyword_init: true
@@ -1047,6 +1091,7 @@ module Aws::AppFabric
     #            an <i>HTTP 400 InvalidToken error</i>.</p>
     #   @return [String]
     class ListAppAuthorizationsRequest < Struct.new(
+      nil,
       :app_bundle_identifier,
       :max_results,
       :next_token,
@@ -1066,6 +1111,7 @@ module Aws::AppFabric
     #            an <i>HTTP 400 InvalidToken error</i>.</p>
     #   @return [String]
     class ListAppAuthorizationsResponse < Struct.new(
+      nil,
       :app_authorization_summary_list,
       :next_token,
       keyword_init: true
@@ -1087,6 +1133,7 @@ module Aws::AppFabric
     #            an <i>HTTP 400 InvalidToken error</i>.</p>
     #   @return [String]
     class ListAppBundlesRequest < Struct.new(
+      nil,
       :max_results,
       :next_token,
       keyword_init: true
@@ -1105,6 +1152,7 @@ module Aws::AppFabric
     #            an <i>HTTP 400 InvalidToken error</i>.</p>
     #   @return [String]
     class ListAppBundlesResponse < Struct.new(
+      nil,
       :app_bundle_summary_list,
       :next_token,
       keyword_init: true
@@ -1134,6 +1182,7 @@ module Aws::AppFabric
     #            an <i>HTTP 400 InvalidToken error</i>.</p>
     #   @return [String]
     class ListIngestionDestinationsRequest < Struct.new(
+      nil,
       :app_bundle_identifier,
       :ingestion_identifier,
       :max_results,
@@ -1154,6 +1203,7 @@ module Aws::AppFabric
     #            an <i>HTTP 400 InvalidToken error</i>.</p>
     #   @return [String]
     class ListIngestionDestinationsResponse < Struct.new(
+      nil,
       :ingestion_destinations,
       :next_token,
       keyword_init: true
@@ -1179,6 +1229,7 @@ module Aws::AppFabric
     #            an <i>HTTP 400 InvalidToken error</i>.</p>
     #   @return [String]
     class ListIngestionsRequest < Struct.new(
+      nil,
       :app_bundle_identifier,
       :max_results,
       :next_token,
@@ -1198,6 +1249,7 @@ module Aws::AppFabric
     #            an <i>HTTP 400 InvalidToken error</i>.</p>
     #   @return [String]
     class ListIngestionsResponse < Struct.new(
+      nil,
       :ingestions,
       :next_token,
       keyword_init: true
@@ -1210,6 +1262,7 @@ module Aws::AppFabric
     #            tags.</p>
     #   @return [String]
     class ListTagsForResourceRequest < Struct.new(
+      nil,
       :resource_arn,
       keyword_init: true
     )
@@ -1220,6 +1273,7 @@ module Aws::AppFabric
     #   <p>A map of the key-value pairs for the tag or tags assigned to the specified resource.</p>
     #   @return [Array<Types::Tag>]
     class ListTagsForResourceResponse < Struct.new(
+      nil,
       :tags,
       keyword_init: true
     )
@@ -1234,6 +1288,7 @@ module Aws::AppFabric
     #   <p>The client secret of the client application.</p>
     #   @return [String]
     class Oauth2Credential < Struct.new(
+      nil,
       :client_id,
       :client_secret,
       keyword_init: true
@@ -1266,6 +1321,7 @@ module Aws::AppFabric
     #   <p>The resource type.</p>
     #   @return [String]
     class ResourceNotFoundException < Struct.new(
+      nil,
       :message,
       :resource_id,
       :resource_type,
@@ -1282,6 +1338,7 @@ module Aws::AppFabric
     #   <p>The object key to use.</p>
     #   @return [String]
     class S3Bucket < Struct.new(
+      nil,
       :bucket_name,
       :prefix,
       keyword_init: true
@@ -1305,6 +1362,7 @@ module Aws::AppFabric
     #   <p>The code for the quota exceeded.</p>
     #   @return [String]
     class ServiceQuotaExceededException < Struct.new(
+      nil,
       :message,
       :resource_id,
       :resource_type,
@@ -1324,6 +1382,7 @@ module Aws::AppFabric
     #            to use for the request.</p>
     #   @return [String]
     class StartIngestionRequest < Struct.new(
+      nil,
       :ingestion_identifier,
       :app_bundle_identifier,
       keyword_init: true
@@ -1332,6 +1391,7 @@ module Aws::AppFabric
     end
 
     class StartIngestionResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1345,6 +1405,7 @@ module Aws::AppFabric
     #   <p>The email address of the target user.</p>
     #   @return [String]
     class StartUserAccessTasksRequest < Struct.new(
+      nil,
       :app_bundle_identifier,
       :email,
       keyword_init: true
@@ -1356,6 +1417,7 @@ module Aws::AppFabric
     #   <p>Contains a list of user access task information.</p>
     #   @return [Array<Types::UserAccessTaskItem>]
     class StartUserAccessTasksResponse < Struct.new(
+      nil,
       :user_access_tasks_list,
       keyword_init: true
     )
@@ -1371,6 +1433,7 @@ module Aws::AppFabric
     #            to use for the request.</p>
     #   @return [String]
     class StopIngestionRequest < Struct.new(
+      nil,
       :ingestion_identifier,
       :app_bundle_identifier,
       keyword_init: true
@@ -1379,6 +1442,7 @@ module Aws::AppFabric
     end
 
     class StopIngestionResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1393,6 +1457,7 @@ module Aws::AppFabric
     #   <p>Tag value.</p>
     #   @return [String]
     class Tag < Struct.new(
+      nil,
       :key,
       :value,
       keyword_init: true
@@ -1407,6 +1472,7 @@ module Aws::AppFabric
     #   <p>A map of the key-value pairs of the tag or tags to assign to the resource.</p>
     #   @return [Array<Types::Tag>]
     class TagResourceRequest < Struct.new(
+      nil,
       :resource_arn,
       :tags,
       keyword_init: true
@@ -1415,6 +1481,7 @@ module Aws::AppFabric
     end
 
     class TagResourceResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1428,6 +1495,7 @@ module Aws::AppFabric
     #   <p>The message of the error.</p>
     #   @return [String]
     class TaskError < Struct.new(
+      nil,
       :error_code,
       :error_message,
       keyword_init: true
@@ -1443,6 +1511,7 @@ module Aws::AppFabric
     #   <p>The display name of the tenant.</p>
     #   @return [String]
     class Tenant < Struct.new(
+      nil,
       :tenant_identifier,
       :tenant_display_name,
       keyword_init: true
@@ -1463,6 +1532,7 @@ module Aws::AppFabric
     #   <p>The period of time after which you should retry your request.</p>
     #   @return [Integer]
     class ThrottlingException < Struct.new(
+      nil,
       :message,
       :service_code,
       :quota_code,
@@ -1480,6 +1550,7 @@ module Aws::AppFabric
     #            specified resource.</p>
     #   @return [Array<String>]
     class UntagResourceRequest < Struct.new(
+      nil,
       :resource_arn,
       :tag_keys,
       keyword_init: true
@@ -1488,6 +1559,7 @@ module Aws::AppFabric
     end
 
     class UntagResourceResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1513,6 +1585,7 @@ module Aws::AppFabric
     #            and identifier.</p>
     #   @return [Types::Tenant]
     class UpdateAppAuthorizationRequest < Struct.new(
+      nil,
       :app_bundle_identifier,
       :app_authorization_identifier,
       :credential,
@@ -1526,6 +1599,7 @@ module Aws::AppFabric
     #   <p>Contains information about an app authorization.</p>
     #   @return [Types::AppAuthorization]
     class UpdateAppAuthorizationResponse < Struct.new(
+      nil,
       :app_authorization,
       keyword_init: true
     )
@@ -1548,6 +1622,7 @@ module Aws::AppFabric
     #   <p>Contains information about the destination of ingested data.</p>
     #   @return [Types::DestinationConfiguration]
     class UpdateIngestionDestinationRequest < Struct.new(
+      nil,
       :app_bundle_identifier,
       :ingestion_identifier,
       :ingestion_destination_identifier,
@@ -1561,6 +1636,7 @@ module Aws::AppFabric
     #   <p>Contains information about an ingestion destination.</p>
     #   @return [Types::IngestionDestination]
     class UpdateIngestionDestinationResponse < Struct.new(
+      nil,
       :ingestion_destination,
       keyword_init: true
     )
@@ -1624,6 +1700,7 @@ module Aws::AppFabric
     #   <p>Contains information about an error returned from a user access task.</p>
     #   @return [Types::TaskError]
     class UserAccessResultItem < Struct.new(
+      nil,
       :app,
       :tenant_id,
       :tenant_display_name,
@@ -1655,6 +1732,7 @@ module Aws::AppFabric
     #   <p>Error from the task, if any.</p>
     #   @return [Types::TaskError]
     class UserAccessTaskItem < Struct.new(
+      nil,
       :app,
       :tenant_id,
       :task_id,
@@ -1674,6 +1752,7 @@ module Aws::AppFabric
     #   <p>The field list.</p>
     #   @return [Array<Types::ValidationExceptionField>]
     class ValidationException < Struct.new(
+      nil,
       :message,
       :reason,
       :field_list,
@@ -1691,6 +1770,7 @@ module Aws::AppFabric
     #   <p>A message about the validation exception.</p>
     #   @return [String]
     class ValidationExceptionField < Struct.new(
+      nil,
       :name,
       :message,
       keyword_init: true

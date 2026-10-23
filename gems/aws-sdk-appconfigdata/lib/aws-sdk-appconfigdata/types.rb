@@ -32,6 +32,7 @@ module Aws::AppConfigData
     #   <p>Details describing why the request was invalid.</p>
     #   @return [Types::BadRequestDetails]
     class BadRequestException < Struct.new(
+      nil,
       :message,
       :reason,
       :details,
@@ -54,6 +55,7 @@ module Aws::AppConfigData
     #            </important>
     #   @return [String]
     class GetLatestConfigurationInput < Struct.new(
+      nil,
       :configuration_token,
       keyword_init: true
     )
@@ -88,6 +90,7 @@ module Aws::AppConfigData
     #   <p>The user-defined label for the AppConfig hosted configuration version. This attribute doesn't apply if the configuration is not from an AppConfig hosted configuration version. If the client already has the latest version of the configuration data, this value is empty.</p>
     #   @return [String]
     class GetLatestConfigurationOutput < Struct.new(
+      nil,
       :next_poll_configuration_token,
       :next_poll_interval_in_seconds,
       :content_type,
@@ -107,6 +110,7 @@ module Aws::AppConfigData
     # @!attribute message
     #   @return [String]
     class InternalServerException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -118,6 +122,7 @@ module Aws::AppConfigData
     #   <p>The reason the parameter is invalid.</p>
     #   @return [String]
     class InvalidParameterDetail < Struct.new(
+      nil,
       :problem,
       keyword_init: true
     )
@@ -135,6 +140,7 @@ module Aws::AppConfigData
     #            found.</p>
     #   @return [Hash<String, String>]
     class ResourceNotFoundException < Struct.new(
+      nil,
       :message,
       :resource_type,
       :referenced_by,
@@ -158,6 +164,7 @@ module Aws::AppConfigData
     #            more frequently than every 60 seconds.</p>
     #   @return [Integer]
     class StartConfigurationSessionInput < Struct.new(
+      nil,
       :application_identifier,
       :environment_identifier,
       :configuration_profile_identifier,
@@ -184,6 +191,7 @@ module Aws::AppConfigData
     #            </important>
     #   @return [String]
     class StartConfigurationSessionOutput < Struct.new(
+      nil,
       :initial_configuration_token,
       keyword_init: true
     )
@@ -194,6 +202,7 @@ module Aws::AppConfigData
     # @!attribute message
     #   @return [String]
     class ThrottlingException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )

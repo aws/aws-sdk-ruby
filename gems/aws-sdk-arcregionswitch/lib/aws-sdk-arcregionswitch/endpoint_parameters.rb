@@ -17,6 +17,7 @@ module Aws::ARCRegionswitch
   #   Whether the operation is a control plane operation. Control plane operations are routed to a centralized endpoint in the partition leader.
   #   @return [Boolean]
   EndpointParameters = Struct.new(
+    nil,
     :use_fips,
     :endpoint,
     :region,

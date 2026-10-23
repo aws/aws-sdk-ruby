@@ -12,6 +12,7 @@ module Aws::S3Control
     #            the Outposts bucket.</p>
     #   @return [Integer]
     class AbortIncompleteMultipartUpload < Struct.new(
+      nil,
       :days_after_initiation,
       keyword_init: true
     )
@@ -31,6 +32,7 @@ module Aws::S3Control
     #   <p>Specifies the replica ownership.</p>
     #   @return [String]
     class AccessControlTranslation < Struct.new(
+      nil,
       :owner,
       keyword_init: true
     )
@@ -56,6 +58,7 @@ module Aws::S3Control
     #            names in the bucket that start with that prefix. </p>
     #   @return [String]
     class AccessGrantsLocationConfiguration < Struct.new(
+      nil,
       :s3_sub_prefix,
       keyword_init: true
     )
@@ -100,6 +103,7 @@ module Aws::S3Control
     #   <p>The type of the data source that the access point is attached to.</p>
     #   @return [String]
     class AccessPoint < Struct.new(
+      nil,
       :name,
       :network_origin,
       :vpc_configuration,
@@ -137,6 +141,7 @@ module Aws::S3Control
     #   </p>
     #   @return [Types::StorageLensGroupLevel]
     class AccountLevel < Struct.new(
+      nil,
       :activity_metrics,
       :bucket_level,
       :advanced_cost_optimization_metrics,
@@ -156,6 +161,7 @@ module Aws::S3Control
     #   <p>A container that indicates whether activity metrics are enabled.</p>
     #   @return [Boolean]
     class ActivityMetrics < Struct.new(
+      nil,
       :is_enabled,
       keyword_init: true
     )
@@ -177,6 +183,7 @@ module Aws::S3Control
     #            enabled.</p>
     #   @return [Boolean]
     class AdvancedCostOptimizationMetrics < Struct.new(
+      nil,
       :is_enabled,
       keyword_init: true
     )
@@ -196,6 +203,7 @@ module Aws::S3Control
     #   <p>A container that indicates whether advanced data-protection metrics are enabled.</p>
     #   @return [Boolean]
     class AdvancedDataProtectionMetrics < Struct.new(
+      nil,
       :is_enabled,
       keyword_init: true
     )
@@ -217,6 +225,7 @@ module Aws::S3Control
     #            instances and their ARNs.</p>
     #   @return [String]
     class AssociateAccessGrantsIdentityCenterRequest < Struct.new(
+      nil,
       :account_id,
       :identity_center_arn,
       keyword_init: true
@@ -238,6 +247,7 @@ module Aws::S3Control
     #   <p>The ID of the request associated with the error.</p>
     #   @return [String]
     class AsyncErrorDetails < Struct.new(
+      nil,
       :code,
       :message,
       :resource,
@@ -267,6 +277,7 @@ module Aws::S3Control
     #   <p>The details of the response.</p>
     #   @return [Types::AsyncResponseDetails]
     class AsyncOperation < Struct.new(
+      nil,
       :creation_time,
       :operation,
       :request_token_arn,
@@ -289,6 +300,7 @@ module Aws::S3Control
     #   <p>A container of the parameters for a <a href="https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_PutMultiRegionAccessPoint.html">PutMultiRegionAccessPoint</a> request.</p>
     #   @return [Types::PutMultiRegionAccessPointPolicyInput]
     class AsyncRequestParameters < Struct.new(
+      nil,
       :create_multi_region_access_point_request,
       :delete_multi_region_access_point_request,
       :put_multi_region_access_point_policy_request,
@@ -306,6 +318,7 @@ module Aws::S3Control
     #   <p>Error details for an asynchronous request.</p>
     #   @return [Types::AsyncErrorDetails]
     class AsyncResponseDetails < Struct.new(
+      nil,
       :multi_region_access_point_details,
       :error_details,
       keyword_init: true
@@ -322,6 +335,7 @@ module Aws::S3Control
     #            objects.</p>
     #   @return [String]
     class AwsLambdaTransformation < Struct.new(
+      nil,
       :function_arn,
       :function_payload,
       keyword_init: true
@@ -333,6 +347,7 @@ module Aws::S3Control
     # @!attribute message
     #   @return [String]
     class BadRequestException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -343,6 +358,7 @@ module Aws::S3Control
     #          all users of the Outposts in this Region. Select a different name and try
     #          again.</p>
     class BucketAlreadyExists < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -350,6 +366,7 @@ module Aws::S3Control
 
     # <p>The Outposts bucket you tried to create already exists, and you own it. </p>
     class BucketAlreadyOwnedByYou < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -373,6 +390,7 @@ module Aws::S3Control
     #   <p>A container for bucket-level detailed status code metrics for S3 Storage Lens.</p>
     #   @return [Types::DetailedStatusCodesMetrics]
     class BucketLevel < Struct.new(
+      nil,
       :activity_metrics,
       :prefix_level,
       :advanced_cost_optimization_metrics,
@@ -392,6 +410,7 @@ module Aws::S3Control
     #            enabled.</p>
     #   @return [Boolean]
     class CloudWatchMetrics < Struct.new(
+      nil,
       :is_enabled,
       keyword_init: true
     )
@@ -462,6 +481,7 @@ module Aws::S3Control
     #            search for, and filter resources. </p>
     #   @return [Array<Types::Tag>]
     class CreateAccessGrantRequest < Struct.new(
+      nil,
       :account_id,
       :access_grants_location_id,
       :access_grants_location_configuration,
@@ -529,6 +549,7 @@ module Aws::S3Control
     #            the <code>Subprefix</code> to the location scope. </p>
     #   @return [String]
     class CreateAccessGrantResult < Struct.new(
+      nil,
       :created_at,
       :access_grant_id,
       :access_grant_arn,
@@ -560,6 +581,7 @@ module Aws::S3Control
     #            search for, and filter resources. </p>
     #   @return [Array<Types::Tag>]
     class CreateAccessGrantsInstanceRequest < Struct.new(
+      nil,
       :account_id,
       :identity_center_arn,
       :tags,
@@ -602,6 +624,7 @@ module Aws::S3Control
     #            Identity Center application for the specific S3 Access Grants instance. </p>
     #   @return [String]
     class CreateAccessGrantsInstanceResult < Struct.new(
+      nil,
       :created_at,
       :access_grants_instance_id,
       :access_grants_instance_arn,
@@ -636,6 +659,7 @@ module Aws::S3Control
     #            search for, and filter resources.</p>
     #   @return [Array<Types::Tag>]
     class CreateAccessGrantsLocationRequest < Struct.new(
+      nil,
       :account_id,
       :location_scope,
       :iam_role_arn,
@@ -670,6 +694,7 @@ module Aws::S3Control
     #            assumes this role to manage access to the registered location. </p>
     #   @return [String]
     class CreateAccessGrantsLocationResult < Struct.new(
+      nil,
       :created_at,
       :access_grants_location_id,
       :access_grants_location_arn,
@@ -690,6 +715,7 @@ module Aws::S3Control
     #   <p>Object Lambda Access Point configuration as a JSON document.</p>
     #   @return [Types::ObjectLambdaConfiguration]
     class CreateAccessPointForObjectLambdaRequest < Struct.new(
+      nil,
       :account_id,
       :name,
       :configuration,
@@ -705,6 +731,7 @@ module Aws::S3Control
     #   <p>The alias of the Object Lambda Access Point.</p>
     #   @return [Types::ObjectLambdaAccessPointAlias]
     class CreateAccessPointForObjectLambdaResult < Struct.new(
+      nil,
       :object_lambda_access_point_arn,
       :alias,
       keyword_init: true
@@ -766,6 +793,7 @@ module Aws::S3Control
     #            </note>
     #   @return [Array<Types::Tag>]
     class CreateAccessPointRequest < Struct.new(
+      nil,
       :account_id,
       :name,
       :bucket,
@@ -789,6 +817,7 @@ module Aws::S3Control
     #   <p>The name or alias of the access point.</p>
     #   @return [String]
     class CreateAccessPointResult < Struct.new(
+      nil,
       :access_point_arn,
       :alias,
       keyword_init: true
@@ -808,6 +837,7 @@ module Aws::S3Control
     #            </note>
     #   @return [String]
     class CreateBucketConfiguration < Struct.new(
+      nil,
       :location_constraint,
       keyword_init: true
     )
@@ -873,6 +903,7 @@ module Aws::S3Control
     #            </note>
     #   @return [String]
     class CreateBucketRequest < Struct.new(
+      nil,
       :acl,
       :bucket,
       :create_bucket_configuration,
@@ -897,6 +928,7 @@ module Aws::S3Control
     #            <p>For using this parameter with S3 on Outposts with the Amazon Web Services SDK and CLI, you must  specify the ARN of the bucket accessed in the format <code>arn:aws:s3-outposts:<Region>:<account-id>:outpost/<outpost-id>/bucket/<my-bucket-name></code>. For example, to access the bucket <code>reports</code> through Outpost <code>my-outpost</code> owned by account <code>123456789012</code> in Region <code>us-west-2</code>, use the URL encoding of <code>arn:aws:s3-outposts:us-west-2:123456789012:outpost/my-outpost/bucket/reports</code>. The value must be URL encoded.  </p>
     #   @return [String]
     class CreateBucketResult < Struct.new(
+      nil,
       :location,
       :bucket_arn,
       keyword_init: true
@@ -946,6 +978,7 @@ module Aws::S3Control
     #            either a manifest file or a ManifestGenerator, but not both.</p>
     #   @return [Types::JobManifestGenerator]
     class CreateJobRequest < Struct.new(
+      nil,
       :account_id,
       :confirmation_required,
       :operation,
@@ -967,6 +1000,7 @@ module Aws::S3Control
     #            successful <code>Create Job</code> request.</p>
     #   @return [String]
     class CreateJobResult < Struct.new(
+      nil,
       :job_id,
       keyword_init: true
     )
@@ -987,6 +1021,7 @@ module Aws::S3Control
     #   <p>The buckets in different Regions that are associated with the Multi-Region Access Point.</p>
     #   @return [Array<Types::Region>]
     class CreateMultiRegionAccessPointInput < Struct.new(
+      nil,
       :name,
       :public_access_block,
       :regions,
@@ -1007,6 +1042,7 @@ module Aws::S3Control
     #   <p>A container element containing details about the Multi-Region Access Point.</p>
     #   @return [Types::CreateMultiRegionAccessPointInput]
     class CreateMultiRegionAccessPointRequest < Struct.new(
+      nil,
       :account_id,
       :client_token,
       :details,
@@ -1020,6 +1056,7 @@ module Aws::S3Control
     #            requests.</p>
     #   @return [String]
     class CreateMultiRegionAccessPointResult < Struct.new(
+      nil,
       :request_token_arn,
       keyword_init: true
     )
@@ -1042,6 +1079,7 @@ module Aws::S3Control
     #   </p>
     #   @return [Array<Types::Tag>]
     class CreateStorageLensGroupRequest < Struct.new(
+      nil,
       :account_id,
       :storage_lens_group,
       :tags,
@@ -1070,6 +1108,7 @@ module Aws::S3Control
     #            and client applications. </p>
     #   @return [Time]
     class Credentials < Struct.new(
+      nil,
       :access_key_id,
       :secret_access_key,
       :session_token,
@@ -1094,6 +1133,7 @@ module Aws::S3Control
     #            </note>
     #   @return [String]
     class DSSEKMSFilter < Struct.new(
+      nil,
       :kms_key_arn,
       keyword_init: true
     )
@@ -1108,6 +1148,7 @@ module Aws::S3Control
     #            grant.</p>
     #   @return [String]
     class DeleteAccessGrantRequest < Struct.new(
+      nil,
       :account_id,
       :access_grant_id,
       keyword_init: true
@@ -1119,6 +1160,7 @@ module Aws::S3Control
     #   <p>The Amazon Web Services account ID of the S3 Access Grants instance.</p>
     #   @return [String]
     class DeleteAccessGrantsInstanceRequest < Struct.new(
+      nil,
       :account_id,
       keyword_init: true
     )
@@ -1129,6 +1171,7 @@ module Aws::S3Control
     #   <p>The Amazon Web Services account ID of the S3 Access Grants instance.</p>
     #   @return [String]
     class DeleteAccessGrantsInstanceResourcePolicyRequest < Struct.new(
+      nil,
       :account_id,
       keyword_init: true
     )
@@ -1145,6 +1188,7 @@ module Aws::S3Control
     #            auto-generated ID to other locations that you register. </p>
     #   @return [String]
     class DeleteAccessGrantsLocationRequest < Struct.new(
+      nil,
       :account_id,
       :access_grants_location_id,
       keyword_init: true
@@ -1159,6 +1203,7 @@ module Aws::S3Control
     #   <p>The name of the access point you want to delete.</p>
     #   @return [String]
     class DeleteAccessPointForObjectLambdaRequest < Struct.new(
+      nil,
       :account_id,
       :name,
       keyword_init: true
@@ -1173,6 +1218,7 @@ module Aws::S3Control
     #   <p>The name of the Object Lambda Access Point you want to delete the policy for.</p>
     #   @return [String]
     class DeleteAccessPointPolicyForObjectLambdaRequest < Struct.new(
+      nil,
       :account_id,
       :name,
       keyword_init: true
@@ -1189,6 +1235,7 @@ module Aws::S3Control
     #            <p>For using this parameter with S3 on Outposts with the Amazon Web Services SDK and CLI, you must  specify the ARN of the access point accessed in the format <code>arn:aws:s3-outposts:<Region>:<account-id>:outpost/<outpost-id>/accesspoint/<my-accesspoint-name></code>. For example, to access the access point <code>reports-ap</code> through Outpost <code>my-outpost</code> owned by account <code>123456789012</code> in Region <code>us-west-2</code>, use the URL encoding of <code>arn:aws:s3-outposts:us-west-2:123456789012:outpost/my-outpost/accesspoint/reports-ap</code>. The value must be URL encoded. </p>
     #   @return [String]
     class DeleteAccessPointPolicyRequest < Struct.new(
+      nil,
       :account_id,
       :name,
       keyword_init: true
@@ -1205,6 +1252,7 @@ module Aws::S3Control
     #            <p>For using this parameter with S3 on Outposts with the Amazon Web Services SDK and CLI, you must  specify the ARN of the access point accessed in the format <code>arn:aws:s3-outposts:<Region>:<account-id>:outpost/<outpost-id>/accesspoint/<my-accesspoint-name></code>. For example, to access the access point <code>reports-ap</code> through Outpost <code>my-outpost</code> owned by account <code>123456789012</code> in Region <code>us-west-2</code>, use the URL encoding of <code>arn:aws:s3-outposts:us-west-2:123456789012:outpost/my-outpost/accesspoint/reports-ap</code>. The value must be URL encoded. </p>
     #   @return [String]
     class DeleteAccessPointRequest < Struct.new(
+      nil,
       :account_id,
       :name,
       keyword_init: true
@@ -1219,6 +1267,7 @@ module Aws::S3Control
     #   <p> The name of the access point with the scope that you want to delete. </p>
     #   @return [String]
     class DeleteAccessPointScopeRequest < Struct.new(
+      nil,
       :account_id,
       :name,
       keyword_init: true
@@ -1235,6 +1284,7 @@ module Aws::S3Control
     #            <p>For using this parameter with S3 on Outposts with the Amazon Web Services SDK and CLI, you must  specify the ARN of the bucket accessed in the format <code>arn:aws:s3-outposts:<Region>:<account-id>:outpost/<outpost-id>/bucket/<my-bucket-name></code>. For example, to access the bucket <code>reports</code> through Outpost <code>my-outpost</code> owned by account <code>123456789012</code> in Region <code>us-west-2</code>, use the URL encoding of <code>arn:aws:s3-outposts:us-west-2:123456789012:outpost/my-outpost/bucket/reports</code>. The value must be URL encoded.  </p>
     #   @return [String]
     class DeleteBucketLifecycleConfigurationRequest < Struct.new(
+      nil,
       :account_id,
       :bucket,
       keyword_init: true
@@ -1251,6 +1301,7 @@ module Aws::S3Control
     #            <p>For using this parameter with S3 on Outposts with the Amazon Web Services SDK and CLI, you must  specify the ARN of the bucket accessed in the format <code>arn:aws:s3-outposts:<Region>:<account-id>:outpost/<outpost-id>/bucket/<my-bucket-name></code>. For example, to access the bucket <code>reports</code> through Outpost <code>my-outpost</code> owned by account <code>123456789012</code> in Region <code>us-west-2</code>, use the URL encoding of <code>arn:aws:s3-outposts:us-west-2:123456789012:outpost/my-outpost/bucket/reports</code>. The value must be URL encoded.  </p>
     #   @return [String]
     class DeleteBucketPolicyRequest < Struct.new(
+      nil,
       :account_id,
       :bucket,
       keyword_init: true
@@ -1268,6 +1319,7 @@ module Aws::S3Control
     #            <p>For using this parameter with S3 on Outposts with the Amazon Web Services SDK and CLI, you must  specify the ARN of the bucket accessed in the format <code>arn:aws:s3-outposts:<Region>:<account-id>:outpost/<outpost-id>/bucket/<my-bucket-name></code>. For example, to access the bucket <code>reports</code> through Outpost <code>my-outpost</code> owned by account <code>123456789012</code> in Region <code>us-west-2</code>, use the URL encoding of <code>arn:aws:s3-outposts:us-west-2:123456789012:outpost/my-outpost/bucket/reports</code>. The value must be URL encoded.  </p>
     #   @return [String]
     class DeleteBucketReplicationRequest < Struct.new(
+      nil,
       :account_id,
       :bucket,
       keyword_init: true
@@ -1284,6 +1336,7 @@ module Aws::S3Control
     #            <p>For using this parameter with S3 on Outposts with the Amazon Web Services SDK and CLI, you must  specify the ARN of the bucket accessed in the format <code>arn:aws:s3-outposts:<Region>:<account-id>:outpost/<outpost-id>/bucket/<my-bucket-name></code>. For example, to access the bucket <code>reports</code> through Outpost <code>my-outpost</code> owned by account <code>123456789012</code> in Region <code>us-west-2</code>, use the URL encoding of <code>arn:aws:s3-outposts:us-west-2:123456789012:outpost/my-outpost/bucket/reports</code>. The value must be URL encoded.  </p>
     #   @return [String]
     class DeleteBucketRequest < Struct.new(
+      nil,
       :account_id,
       :bucket,
       keyword_init: true
@@ -1300,6 +1353,7 @@ module Aws::S3Control
     #            <p>For using this parameter with S3 on Outposts with the Amazon Web Services SDK and CLI, you must  specify the ARN of the bucket accessed in the format <code>arn:aws:s3-outposts:<Region>:<account-id>:outpost/<outpost-id>/bucket/<my-bucket-name></code>. For example, to access the bucket <code>reports</code> through Outpost <code>my-outpost</code> owned by account <code>123456789012</code> in Region <code>us-west-2</code>, use the URL encoding of <code>arn:aws:s3-outposts:us-west-2:123456789012:outpost/my-outpost/bucket/reports</code>. The value must be URL encoded.  </p>
     #   @return [String]
     class DeleteBucketTaggingRequest < Struct.new(
+      nil,
       :account_id,
       :bucket,
       keyword_init: true
@@ -1314,6 +1368,7 @@ module Aws::S3Control
     #   <p>The ID for the S3 Batch Operations job whose tags you want to delete.</p>
     #   @return [String]
     class DeleteJobTaggingRequest < Struct.new(
+      nil,
       :account_id,
       :job_id,
       keyword_init: true
@@ -1322,6 +1377,7 @@ module Aws::S3Control
     end
 
     class DeleteJobTaggingResult < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1339,6 +1395,7 @@ module Aws::S3Control
     #   <p>Indicates whether to replicate delete markers.</p>
     #   @return [String]
     class DeleteMarkerReplication < Struct.new(
+      nil,
       :status,
       keyword_init: true
     )
@@ -1350,6 +1407,7 @@ module Aws::S3Control
     #   <p>The name of the Multi-Region Access Point associated with this request.</p>
     #   @return [String]
     class DeleteMultiRegionAccessPointInput < Struct.new(
+      nil,
       :name,
       keyword_init: true
     )
@@ -1367,6 +1425,7 @@ module Aws::S3Control
     #   <p>A container element containing details about the Multi-Region Access Point.</p>
     #   @return [Types::DeleteMultiRegionAccessPointInput]
     class DeleteMultiRegionAccessPointRequest < Struct.new(
+      nil,
       :account_id,
       :client_token,
       :details,
@@ -1380,6 +1439,7 @@ module Aws::S3Control
     #            requests.</p>
     #   @return [String]
     class DeleteMultiRegionAccessPointResult < Struct.new(
+      nil,
       :request_token_arn,
       keyword_init: true
     )
@@ -1391,6 +1451,7 @@ module Aws::S3Control
     #            you want to remove.</p>
     #   @return [String]
     class DeletePublicAccessBlockRequest < Struct.new(
+      nil,
       :account_id,
       keyword_init: true
     )
@@ -1404,6 +1465,7 @@ module Aws::S3Control
     #   <p>The account ID of the requester.</p>
     #   @return [String]
     class DeleteStorageLensConfigurationRequest < Struct.new(
+      nil,
       :config_id,
       :account_id,
       keyword_init: true
@@ -1418,6 +1480,7 @@ module Aws::S3Control
     #   <p>The account ID of the requester.</p>
     #   @return [String]
     class DeleteStorageLensConfigurationTaggingRequest < Struct.new(
+      nil,
       :config_id,
       :account_id,
       keyword_init: true
@@ -1426,6 +1489,7 @@ module Aws::S3Control
     end
 
     class DeleteStorageLensConfigurationTaggingResult < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1442,6 +1506,7 @@ module Aws::S3Control
     #   </p>
     #   @return [String]
     class DeleteStorageLensGroupRequest < Struct.new(
+      nil,
       :name,
       :account_id,
       keyword_init: true
@@ -1456,6 +1521,7 @@ module Aws::S3Control
     #   <p>The ID for the job whose information you want to retrieve.</p>
     #   @return [String]
     class DescribeJobRequest < Struct.new(
+      nil,
       :account_id,
       :job_id,
       keyword_init: true
@@ -1468,6 +1534,7 @@ module Aws::S3Control
     #               <code>Describe Job</code> request.</p>
     #   @return [Types::JobDescriptor]
     class DescribeJobResult < Struct.new(
+      nil,
       :job,
       keyword_init: true
     )
@@ -1483,6 +1550,7 @@ module Aws::S3Control
     #            token to query about the status of the asynchronous action.</p>
     #   @return [String]
     class DescribeMultiRegionAccessPointOperationRequest < Struct.new(
+      nil,
       :account_id,
       :request_token_arn,
       keyword_init: true
@@ -1494,6 +1562,7 @@ module Aws::S3Control
     #   <p>A container element containing the details of the asynchronous operation.</p>
     #   @return [Types::AsyncOperation]
     class DescribeMultiRegionAccessPointOperationResult < Struct.new(
+      nil,
       :async_operation,
       keyword_init: true
     )
@@ -1546,6 +1615,7 @@ module Aws::S3Control
     #            </note>
     #   @return [String]
     class Destination < Struct.new(
+      nil,
       :account,
       :bucket,
       :replication_time,
@@ -1566,6 +1636,7 @@ module Aws::S3Control
     #   <p>A container that indicates whether detailed status code metrics are enabled.</p>
     #   @return [Boolean]
     class DetailedStatusCodesMetrics < Struct.new(
+      nil,
       :is_enabled,
       keyword_init: true
     )
@@ -1581,6 +1652,7 @@ module Aws::S3Control
     #   <p>The Amazon Web Services account ID of the S3 Access Grants instance.</p>
     #   @return [String]
     class DissociateAccessGrantsIdentityCenterRequest < Struct.new(
+      nil,
       :account_id,
       keyword_init: true
     )
@@ -1605,6 +1677,7 @@ module Aws::S3Control
     #               Guide</i>.</p>
     #   @return [String]
     class EncryptionConfiguration < Struct.new(
+      nil,
       :replica_kms_key_id,
       keyword_init: true
     )
@@ -1620,6 +1693,7 @@ module Aws::S3Control
     #   <p>The details of the last established policy.</p>
     #   @return [String]
     class EstablishedMultiRegionAccessPointPolicy < Struct.new(
+      nil,
       :policy,
       keyword_init: true
     )
@@ -1634,6 +1708,7 @@ module Aws::S3Control
     #   <p>A container for the S3 Storage Lens Region excludes.</p>
     #   @return [Array<String>]
     class Exclude < Struct.new(
+      nil,
       :buckets,
       :regions,
       keyword_init: true
@@ -1649,6 +1724,7 @@ module Aws::S3Control
     #   <p>Specifies whether Amazon S3 replicates existing source bucket objects. </p>
     #   @return [String]
     class ExistingObjectReplication < Struct.new(
+      nil,
       :status,
       keyword_init: true
     )
@@ -1664,6 +1740,7 @@ module Aws::S3Control
     #            objects.</p>
     #   @return [Types::SSEKMSEncryption]
     class GeneratedManifestEncryption < Struct.new(
+      nil,
       :sses3,
       :ssekms,
       keyword_init: true
@@ -1679,6 +1756,7 @@ module Aws::S3Control
     #            grant.</p>
     #   @return [String]
     class GetAccessGrantRequest < Struct.new(
+      nil,
       :account_id,
       :access_grant_id,
       keyword_init: true
@@ -1740,6 +1818,7 @@ module Aws::S3Control
     #            can only access the S3 data through this application. </p>
     #   @return [String]
     class GetAccessGrantResult < Struct.new(
+      nil,
       :created_at,
       :access_grant_id,
       :access_grant_arn,
@@ -1761,6 +1840,7 @@ module Aws::S3Control
     #   <p>The S3 prefix of the access grants that you would like to retrieve.</p>
     #   @return [String]
     class GetAccessGrantsInstanceForPrefixRequest < Struct.new(
+      nil,
       :account_id,
       :s3_prefix,
       keyword_init: true
@@ -1776,6 +1856,7 @@ module Aws::S3Control
     #            instance per Region per account. </p>
     #   @return [String]
     class GetAccessGrantsInstanceForPrefixResult < Struct.new(
+      nil,
       :access_grants_instance_arn,
       :access_grants_instance_id,
       keyword_init: true
@@ -1787,6 +1868,7 @@ module Aws::S3Control
     #   <p>The Amazon Web Services account ID of the S3 Access Grants instance.</p>
     #   @return [String]
     class GetAccessGrantsInstanceRequest < Struct.new(
+      nil,
       :account_id,
       keyword_init: true
     )
@@ -1797,6 +1879,7 @@ module Aws::S3Control
     #   <p>The Amazon Web Services account ID of the S3 Access Grants instance.</p>
     #   @return [String]
     class GetAccessGrantsInstanceResourcePolicyRequest < Struct.new(
+      nil,
       :account_id,
       keyword_init: true
     )
@@ -1813,6 +1896,7 @@ module Aws::S3Control
     #   <p>The date and time when you created the S3 Access Grants instance resource policy. </p>
     #   @return [Time]
     class GetAccessGrantsInstanceResourcePolicyResult < Struct.new(
+      nil,
       :policy,
       :organization,
       :created_at,
@@ -1852,6 +1936,7 @@ module Aws::S3Control
     #   <p>The date and time when you created the S3 Access Grants instance. </p>
     #   @return [Time]
     class GetAccessGrantsInstanceResult < Struct.new(
+      nil,
       :access_grants_instance_arn,
       :access_grants_instance_id,
       :identity_center_arn,
@@ -1873,6 +1958,7 @@ module Aws::S3Control
     #            register. </p>
     #   @return [String]
     class GetAccessGrantsLocationRequest < Struct.new(
+      nil,
       :account_id,
       :access_grants_location_id,
       keyword_init: true
@@ -1905,6 +1991,7 @@ module Aws::S3Control
     #            assumes this role to manage access to the registered location. </p>
     #   @return [String]
     class GetAccessGrantsLocationResult < Struct.new(
+      nil,
       :created_at,
       :access_grants_location_id,
       :access_grants_location_arn,
@@ -1922,6 +2009,7 @@ module Aws::S3Control
     #   <p>The name of the Object Lambda Access Point you want to return the configuration for.</p>
     #   @return [String]
     class GetAccessPointConfigurationForObjectLambdaRequest < Struct.new(
+      nil,
       :account_id,
       :name,
       keyword_init: true
@@ -1933,6 +2021,7 @@ module Aws::S3Control
     #   <p>Object Lambda Access Point configuration document.</p>
     #   @return [Types::ObjectLambdaConfiguration]
     class GetAccessPointConfigurationForObjectLambdaResult < Struct.new(
+      nil,
       :configuration,
       keyword_init: true
     )
@@ -1946,6 +2035,7 @@ module Aws::S3Control
     #   <p>The name of the Object Lambda Access Point.</p>
     #   @return [String]
     class GetAccessPointForObjectLambdaRequest < Struct.new(
+      nil,
       :account_id,
       :name,
       keyword_init: true
@@ -1967,6 +2057,7 @@ module Aws::S3Control
     #   <p>The alias of the Object Lambda Access Point.</p>
     #   @return [Types::ObjectLambdaAccessPointAlias]
     class GetAccessPointForObjectLambdaResult < Struct.new(
+      nil,
       :name,
       :public_access_block_configuration,
       :creation_date,
@@ -1983,6 +2074,7 @@ module Aws::S3Control
     #   <p>The name of the Object Lambda Access Point.</p>
     #   @return [String]
     class GetAccessPointPolicyForObjectLambdaRequest < Struct.new(
+      nil,
       :account_id,
       :name,
       keyword_init: true
@@ -1994,6 +2086,7 @@ module Aws::S3Control
     #   <p>Object Lambda Access Point resource policy document.</p>
     #   @return [String]
     class GetAccessPointPolicyForObjectLambdaResult < Struct.new(
+      nil,
       :policy,
       keyword_init: true
     )
@@ -2009,6 +2102,7 @@ module Aws::S3Control
     #            <p>For using this parameter with S3 on Outposts with the Amazon Web Services SDK and CLI, you must  specify the ARN of the access point accessed in the format <code>arn:aws:s3-outposts:<Region>:<account-id>:outpost/<outpost-id>/accesspoint/<my-accesspoint-name></code>. For example, to access the access point <code>reports-ap</code> through Outpost <code>my-outpost</code> owned by account <code>123456789012</code> in Region <code>us-west-2</code>, use the URL encoding of <code>arn:aws:s3-outposts:us-west-2:123456789012:outpost/my-outpost/accesspoint/reports-ap</code>. The value must be URL encoded. </p>
     #   @return [String]
     class GetAccessPointPolicyRequest < Struct.new(
+      nil,
       :account_id,
       :name,
       keyword_init: true
@@ -2020,6 +2114,7 @@ module Aws::S3Control
     #   <p>The access point policy associated with the specified access point.</p>
     #   @return [String]
     class GetAccessPointPolicyResult < Struct.new(
+      nil,
       :policy,
       keyword_init: true
     )
@@ -2033,6 +2128,7 @@ module Aws::S3Control
     #   <p>The name of the Object Lambda Access Point.</p>
     #   @return [String]
     class GetAccessPointPolicyStatusForObjectLambdaRequest < Struct.new(
+      nil,
       :account_id,
       :name,
       keyword_init: true
@@ -2045,6 +2141,7 @@ module Aws::S3Control
     #            evaluates policies to determine whether they are public, see <a href="https://docs.aws.amazon.com/AmazonS3/latest/dev/access-control-block-public-access.html#access-control-block-public-access-policy-status">The Meaning of "Public"</a> in the <i>Amazon S3 User Guide</i>. </p>
     #   @return [Types::PolicyStatus]
     class GetAccessPointPolicyStatusForObjectLambdaResult < Struct.new(
+      nil,
       :policy_status,
       keyword_init: true
     )
@@ -2058,6 +2155,7 @@ module Aws::S3Control
     #   <p>The name of the access point whose policy status you want to retrieve.</p>
     #   @return [String]
     class GetAccessPointPolicyStatusRequest < Struct.new(
+      nil,
       :account_id,
       :name,
       keyword_init: true
@@ -2069,6 +2167,7 @@ module Aws::S3Control
     #   <p>Indicates the current policy status of the specified access point.</p>
     #   @return [Types::PolicyStatus]
     class GetAccessPointPolicyStatusResult < Struct.new(
+      nil,
       :policy_status,
       keyword_init: true
     )
@@ -2084,6 +2183,7 @@ module Aws::S3Control
     #            <p>For using this parameter with S3 on Outposts with the Amazon Web Services SDK and CLI, you must  specify the ARN of the access point accessed in the format <code>arn:aws:s3-outposts:<Region>:<account-id>:outpost/<outpost-id>/accesspoint/<my-accesspoint-name></code>. For example, to access the access point <code>reports-ap</code> through Outpost <code>my-outpost</code> owned by account <code>123456789012</code> in Region <code>us-west-2</code>, use the URL encoding of <code>arn:aws:s3-outposts:us-west-2:123456789012:outpost/my-outpost/accesspoint/reports-ap</code>. The value must be URL encoded. </p>
     #   @return [String]
     class GetAccessPointRequest < Struct.new(
+      nil,
       :account_id,
       :name,
       keyword_init: true
@@ -2141,6 +2241,7 @@ module Aws::S3Control
     #   <p>The type of the data source that the access point is attached to.</p>
     #   @return [String]
     class GetAccessPointResult < Struct.new(
+      nil,
       :name,
       :bucket,
       :network_origin,
@@ -2166,6 +2267,7 @@ module Aws::S3Control
     #   <p>The name of the access point with the scope you want to retrieve.</p>
     #   @return [String]
     class GetAccessPointScopeRequest < Struct.new(
+      nil,
       :account_id,
       :name,
       keyword_init: true
@@ -2177,6 +2279,7 @@ module Aws::S3Control
     #   <p>The contents of the access point scope.</p>
     #   @return [Types::Scope]
     class GetAccessPointScopeResult < Struct.new(
+      nil,
       :scope,
       keyword_init: true
     )
@@ -2192,6 +2295,7 @@ module Aws::S3Control
     #            <p>For using this parameter with S3 on Outposts with the Amazon Web Services SDK and CLI, you must  specify the ARN of the bucket accessed in the format <code>arn:aws:s3-outposts:<Region>:<account-id>:outpost/<outpost-id>/bucket/<my-bucket-name></code>. For example, to access the bucket <code>reports</code> through Outpost <code>my-outpost</code> owned by account <code>123456789012</code> in Region <code>us-west-2</code>, use the URL encoding of <code>arn:aws:s3-outposts:us-west-2:123456789012:outpost/my-outpost/bucket/reports</code>. The value must be URL encoded.  </p>
     #   @return [String]
     class GetBucketLifecycleConfigurationRequest < Struct.new(
+      nil,
       :account_id,
       :bucket,
       keyword_init: true
@@ -2203,6 +2307,7 @@ module Aws::S3Control
     #   <p>Container for the lifecycle rule of the Outposts bucket.</p>
     #   @return [Array<Types::LifecycleRule>]
     class GetBucketLifecycleConfigurationResult < Struct.new(
+      nil,
       :rules,
       keyword_init: true
     )
@@ -2218,6 +2323,7 @@ module Aws::S3Control
     #            <p>For using this parameter with S3 on Outposts with the Amazon Web Services SDK and CLI, you must  specify the ARN of the bucket accessed in the format <code>arn:aws:s3-outposts:<Region>:<account-id>:outpost/<outpost-id>/bucket/<my-bucket-name></code>. For example, to access the bucket <code>reports</code> through Outpost <code>my-outpost</code> owned by account <code>123456789012</code> in Region <code>us-west-2</code>, use the URL encoding of <code>arn:aws:s3-outposts:us-west-2:123456789012:outpost/my-outpost/bucket/reports</code>. The value must be URL encoded.  </p>
     #   @return [String]
     class GetBucketPolicyRequest < Struct.new(
+      nil,
       :account_id,
       :bucket,
       keyword_init: true
@@ -2229,6 +2335,7 @@ module Aws::S3Control
     #   <p>The policy of the Outposts bucket.</p>
     #   @return [String]
     class GetBucketPolicyResult < Struct.new(
+      nil,
       :policy,
       keyword_init: true
     )
@@ -2244,6 +2351,7 @@ module Aws::S3Control
     #            <p>For using this parameter with S3 on Outposts with the Amazon Web Services SDK and CLI, you must  specify the ARN of the bucket accessed in the format <code>arn:aws:s3-outposts:<Region>:<account-id>:outpost/<outpost-id>/bucket/<my-bucket-name></code>. For example, to access the bucket <code>reports</code> through Outpost <code>my-outpost</code> owned by account <code>123456789012</code> in Region <code>us-west-2</code>, use the URL encoding of <code>arn:aws:s3-outposts:us-west-2:123456789012:outpost/my-outpost/bucket/reports</code>. The value must be URL encoded.  </p>
     #   @return [String]
     class GetBucketReplicationRequest < Struct.new(
+      nil,
       :account_id,
       :bucket,
       keyword_init: true
@@ -2257,6 +2365,7 @@ module Aws::S3Control
     #            configuration is 128 KB.</p>
     #   @return [Types::ReplicationConfiguration]
     class GetBucketReplicationResult < Struct.new(
+      nil,
       :replication_configuration,
       keyword_init: true
     )
@@ -2272,6 +2381,7 @@ module Aws::S3Control
     #            <p>For using this parameter with S3 on Outposts with the Amazon Web Services SDK and CLI, you must  specify the ARN of the bucket accessed in the format <code>arn:aws:s3-outposts:<Region>:<account-id>:outpost/<outpost-id>/bucket/<my-bucket-name></code>. For example, to access the bucket <code>reports</code> through Outpost <code>my-outpost</code> owned by account <code>123456789012</code> in Region <code>us-west-2</code>, use the URL encoding of <code>arn:aws:s3-outposts:us-west-2:123456789012:outpost/my-outpost/bucket/reports</code>. The value must be URL encoded.  </p>
     #   @return [String]
     class GetBucketRequest < Struct.new(
+      nil,
       :account_id,
       :bucket,
       keyword_init: true
@@ -2289,6 +2399,7 @@ module Aws::S3Control
     #   <p>The creation date of the Outposts bucket.</p>
     #   @return [Time]
     class GetBucketResult < Struct.new(
+      nil,
       :bucket,
       :public_access_block_enabled,
       :creation_date,
@@ -2311,6 +2422,7 @@ module Aws::S3Control
     #            <p>For using this parameter with S3 on Outposts with the Amazon Web Services SDK and CLI, you must  specify the ARN of the bucket accessed in the format <code>arn:aws:s3-outposts:<Region>:<account-id>:outpost/<outpost-id>/bucket/<my-bucket-name></code>. For example, to access the bucket <code>reports</code> through Outpost <code>my-outpost</code> owned by account <code>123456789012</code> in Region <code>us-west-2</code>, use the URL encoding of <code>arn:aws:s3-outposts:us-west-2:123456789012:outpost/my-outpost/bucket/reports</code>. The value must be URL encoded.  </p>
     #   @return [String]
     class GetBucketTaggingRequest < Struct.new(
+      nil,
       :account_id,
       :bucket,
       keyword_init: true
@@ -2322,6 +2434,7 @@ module Aws::S3Control
     #   <p>The tags set of the Outposts bucket.</p>
     #   @return [Array<Types::S3Tag>]
     class GetBucketTaggingResult < Struct.new(
+      nil,
       :tag_set,
       keyword_init: true
     )
@@ -2335,6 +2448,7 @@ module Aws::S3Control
     #   <p>The S3 on Outposts bucket to return the versioning state for.</p>
     #   @return [String]
     class GetBucketVersioningRequest < Struct.new(
+      nil,
       :account_id,
       :bucket,
       keyword_init: true
@@ -2351,6 +2465,7 @@ module Aws::S3Control
     #            has never been configured for the bucket, this element is not returned.</p>
     #   @return [String]
     class GetBucketVersioningResult < Struct.new(
+      nil,
       :status,
       :mfa_delete,
       keyword_init: true
@@ -2413,6 +2528,7 @@ module Aws::S3Control
     #            pass this value if the target data is a bucket or a bucket and a prefix. </p>
     #   @return [String]
     class GetDataAccessRequest < Struct.new(
+      nil,
       :account_id,
       :target,
       :permission,
@@ -2437,6 +2553,7 @@ module Aws::S3Control
     #            request. For more information on identity-aware sessions, see <a href="https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_temp_control-access_sts-setcontext.html">Granting permissions to use identity-aware console sessions</a>. </p>
     #   @return [Types::Grantee]
     class GetDataAccessResult < Struct.new(
+      nil,
       :credentials,
       :matched_grant_target,
       :grantee,
@@ -2452,6 +2569,7 @@ module Aws::S3Control
     #   <p>The ID for the S3 Batch Operations job whose tags you want to retrieve.</p>
     #   @return [String]
     class GetJobTaggingRequest < Struct.new(
+      nil,
       :account_id,
       :job_id,
       keyword_init: true
@@ -2463,6 +2581,7 @@ module Aws::S3Control
     #   <p>The set of tags associated with the S3 Batch Operations job.</p>
     #   @return [Array<Types::S3Tag>]
     class GetJobTaggingResult < Struct.new(
+      nil,
       :tags,
       keyword_init: true
     )
@@ -2478,6 +2597,7 @@ module Aws::S3Control
     #            <i>Amazon S3 User Guide</i>.</p>
     #   @return [String]
     class GetMultiRegionAccessPointPolicyRequest < Struct.new(
+      nil,
       :account_id,
       :name,
       keyword_init: true
@@ -2489,6 +2609,7 @@ module Aws::S3Control
     #   <p>The policy associated with the specified Multi-Region Access Point.</p>
     #   @return [Types::MultiRegionAccessPointPolicyDocument]
     class GetMultiRegionAccessPointPolicyResult < Struct.new(
+      nil,
       :policy,
       keyword_init: true
     )
@@ -2504,6 +2625,7 @@ module Aws::S3Control
     #            <i>Amazon S3 User Guide</i>.</p>
     #   @return [String]
     class GetMultiRegionAccessPointPolicyStatusRequest < Struct.new(
+      nil,
       :account_id,
       :name,
       keyword_init: true
@@ -2516,6 +2638,7 @@ module Aws::S3Control
     #            evaluates policies to determine whether they are public, see <a href="https://docs.aws.amazon.com/AmazonS3/latest/dev/access-control-block-public-access.html#access-control-block-public-access-policy-status">The Meaning of "Public"</a> in the <i>Amazon S3 User Guide</i>. </p>
     #   @return [Types::PolicyStatus]
     class GetMultiRegionAccessPointPolicyStatusResult < Struct.new(
+      nil,
       :established,
       keyword_init: true
     )
@@ -2532,6 +2655,7 @@ module Aws::S3Control
     #            <i>Amazon S3 User Guide</i>.</p>
     #   @return [String]
     class GetMultiRegionAccessPointRequest < Struct.new(
+      nil,
       :account_id,
       :name,
       keyword_init: true
@@ -2543,6 +2667,7 @@ module Aws::S3Control
     #   <p>A container element containing the details of the requested Multi-Region Access Point.</p>
     #   @return [Types::MultiRegionAccessPointReport]
     class GetMultiRegionAccessPointResult < Struct.new(
+      nil,
       :access_point,
       keyword_init: true
     )
@@ -2556,6 +2681,7 @@ module Aws::S3Control
     #   <p>The Multi-Region Access Point ARN.</p>
     #   @return [String]
     class GetMultiRegionAccessPointRoutesRequest < Struct.new(
+      nil,
       :account_id,
       :mrap,
       keyword_init: true
@@ -2571,6 +2697,7 @@ module Aws::S3Control
     #            of <code>100</code>, and passive routes return a value of <code>0</code>.</p>
     #   @return [Array<Types::MultiRegionAccessPointRoute>]
     class GetMultiRegionAccessPointRoutesResult < Struct.new(
+      nil,
       :mrap,
       :routes,
       keyword_init: true
@@ -2583,6 +2710,7 @@ module Aws::S3Control
     #            Amazon Web Services account.</p>
     #   @return [Types::PublicAccessBlockConfiguration]
     class GetPublicAccessBlockOutput < Struct.new(
+      nil,
       :public_access_block_configuration,
       keyword_init: true
     )
@@ -2594,6 +2722,7 @@ module Aws::S3Control
     #            you want to retrieve.</p>
     #   @return [String]
     class GetPublicAccessBlockRequest < Struct.new(
+      nil,
       :account_id,
       keyword_init: true
     )
@@ -2607,6 +2736,7 @@ module Aws::S3Control
     #   <p>The account ID of the requester.</p>
     #   @return [String]
     class GetStorageLensConfigurationRequest < Struct.new(
+      nil,
       :config_id,
       :account_id,
       keyword_init: true
@@ -2618,6 +2748,7 @@ module Aws::S3Control
     #   <p>The S3 Storage Lens configuration requested.</p>
     #   @return [Types::StorageLensConfiguration]
     class GetStorageLensConfigurationResult < Struct.new(
+      nil,
       :storage_lens_configuration,
       keyword_init: true
     )
@@ -2631,6 +2762,7 @@ module Aws::S3Control
     #   <p>The account ID of the requester.</p>
     #   @return [String]
     class GetStorageLensConfigurationTaggingRequest < Struct.new(
+      nil,
       :config_id,
       :account_id,
       keyword_init: true
@@ -2642,6 +2774,7 @@ module Aws::S3Control
     #   <p>The tags of S3 Storage Lens configuration requested.</p>
     #   @return [Array<Types::StorageLensTag>]
     class GetStorageLensConfigurationTaggingResult < Struct.new(
+      nil,
       :tags,
       keyword_init: true
     )
@@ -2659,6 +2792,7 @@ module Aws::S3Control
     #   </p>
     #   @return [String]
     class GetStorageLensGroupRequest < Struct.new(
+      nil,
       :name,
       :account_id,
       keyword_init: true
@@ -2672,6 +2806,7 @@ module Aws::S3Control
     #   </p>
     #   @return [Types::StorageLensGroup]
     class GetStorageLensGroupResult < Struct.new(
+      nil,
       :storage_lens_group,
       keyword_init: true
     )
@@ -2715,6 +2850,7 @@ module Aws::S3Control
     #            Amazon Web Services IAM Identity Center instance.</p>
     #   @return [String]
     class Grantee < Struct.new(
+      nil,
       :grantee_type,
       :grantee_identifier,
       keyword_init: true
@@ -2726,6 +2862,7 @@ module Aws::S3Control
     # @!attribute message
     #   @return [String]
     class IdempotencyException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -2740,6 +2877,7 @@ module Aws::S3Control
     #   <p>A container for the S3 Storage Lens Region includes.</p>
     #   @return [Array<String>]
     class Include < Struct.new(
+      nil,
       :buckets,
       :regions,
       keyword_init: true
@@ -2751,6 +2889,7 @@ module Aws::S3Control
     # @!attribute message
     #   @return [String]
     class InternalServiceException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -2761,6 +2900,7 @@ module Aws::S3Control
     # @!attribute message
     #   @return [String]
     class InvalidNextTokenException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -2771,6 +2911,7 @@ module Aws::S3Control
     # @!attribute message
     #   @return [String]
     class InvalidRequestException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -2849,6 +2990,7 @@ module Aws::S3Control
     #            manifest.</p>
     #   @return [Types::S3GeneratedManifestDescriptor]
     class JobDescriptor < Struct.new(
+      nil,
       :job_id,
       :confirmation_required,
       :description,
@@ -2887,6 +3029,7 @@ module Aws::S3Control
     #   <p>The failure reason, if any, for the specified job.</p>
     #   @return [String]
     class JobFailure < Struct.new(
+      nil,
       :failure_code,
       :failure_reason,
       keyword_init: true
@@ -2925,6 +3068,7 @@ module Aws::S3Control
     #            that succeeded, and the number of tasks that failed.</p>
     #   @return [Types::JobProgressSummary]
     class JobListDescriptor < Struct.new(
+      nil,
       :job_id,
       :description,
       :operation,
@@ -2953,6 +3097,7 @@ module Aws::S3Control
     #            can't be imported from directory buckets. For more information, see <a href="https://docs.aws.amazon.com/AmazonS3/latest/userguide/directory-buckets-overview.html">Directory buckets</a>.</p>
     #   @return [Types::JobManifestLocation]
     class JobManifest < Struct.new(
+      nil,
       :spec,
       :location,
       keyword_init: true
@@ -3016,6 +3161,7 @@ module Aws::S3Control
     #            If you select SSE-KMS, you can also optionally further filter your results by Bucket Key enabled status.</p>
     #   @return [Array<Types::ObjectEncryptionFilter>]
     class JobManifestGeneratorFilter < Struct.new(
+      nil,
       :eligible_for_replication,
       :created_after,
       :created_before,
@@ -3056,6 +3202,7 @@ module Aws::S3Control
     #   <p>The ETag for the specified manifest object.</p>
     #   @return [String]
     class JobManifestLocation < Struct.new(
+      nil,
       :object_arn,
       :object_version_id,
       :e_tag,
@@ -3074,6 +3221,7 @@ module Aws::S3Control
     #            format, this element describes which columns contain the required data.</p>
     #   @return [Array<String>]
     class JobManifestSpec < Struct.new(
+      nil,
       :format,
       :fields,
       keyword_init: true
@@ -3156,6 +3304,7 @@ module Aws::S3Control
     #            manifest.</p>
     #   @return [Types::S3ComputeObjectChecksumOperation]
     class JobOperation < Struct.new(
+      nil,
       :lambda_invoke,
       :s3_put_object_copy,
       :s3_put_object_acl,
@@ -3186,6 +3335,7 @@ module Aws::S3Control
     #   <p>The JobTimers attribute of a job's progress summary.</p>
     #   @return [Types::JobTimers]
     class JobProgressSummary < Struct.new(
+      nil,
       :total_number_of_tasks,
       :number_of_tasks_succeeded,
       :number_of_tasks_failed,
@@ -3231,6 +3381,7 @@ module Aws::S3Control
     #   <p>Lists the Amazon Web Services account ID that owns the target bucket, where the completion report is received.</p>
     #   @return [String]
     class JobReport < Struct.new(
+      nil,
       :bucket,
       :format,
       :enabled,
@@ -3251,6 +3402,7 @@ module Aws::S3Control
     # @!attribute message
     #   @return [String]
     class JobStatusException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -3262,6 +3414,7 @@ module Aws::S3Control
     #   <p>Indicates the elapsed time in seconds the job has been in the Active job state.</p>
     #   @return [Integer]
     class JobTimers < Struct.new(
+      nil,
       :elapsed_time_in_active_seconds,
       keyword_init: true
     )
@@ -3292,6 +3445,7 @@ module Aws::S3Control
     #            strings with a length of 1 string.</p>
     #   @return [Array<String>]
     class KeyNameConstraint < Struct.new(
+      nil,
       :match_any_prefix,
       :match_any_suffix,
       :match_any_substring,
@@ -3333,6 +3487,7 @@ module Aws::S3Control
     #               Lambda</a> in the <i>Amazon Web Services Storage Blog</i>.</p>
     #   @return [Hash<String, String>]
     class LambdaInvokeOperation < Struct.new(
+      nil,
       :function_arn,
       :invocation_schema_version,
       :user_arguments,
@@ -3346,6 +3501,7 @@ module Aws::S3Control
     #   <p>A lifecycle rule for individual objects in an Outposts bucket. </p>
     #   @return [Array<Types::LifecycleRule>]
     class LifecycleConfiguration < Struct.new(
+      nil,
       :rules,
       keyword_init: true
     )
@@ -3369,6 +3525,7 @@ module Aws::S3Control
     #            markers</a>.</p>
     #   @return [Boolean]
     class LifecycleExpiration < Struct.new(
+      nil,
       :date,
       :days,
       :expired_object_delete_marker,
@@ -3424,6 +3581,7 @@ module Aws::S3Control
     #            the <i>Amazon S3 User Guide</i>.</p>
     #   @return [Types::AbortIncompleteMultipartUpload]
     class LifecycleRule < Struct.new(
+      nil,
       :expiration,
       :id,
       :filter,
@@ -3454,6 +3612,7 @@ module Aws::S3Control
     #            77 means the rule applies to objects with a size that is less than 77. </p>
     #   @return [Integer]
     class LifecycleRuleAndOperator < Struct.new(
+      nil,
       :prefix,
       :tags,
       :object_size_greater_than,
@@ -3492,6 +3651,7 @@ module Aws::S3Control
     #   <p>Maximum object size to which the rule applies.</p>
     #   @return [Integer]
     class LifecycleRuleFilter < Struct.new(
+      nil,
       :prefix,
       :tag,
       :and,
@@ -3563,6 +3723,7 @@ module Aws::S3Control
     #            can only access the S3 data through this application. </p>
     #   @return [String]
     class ListAccessGrantEntry < Struct.new(
+      nil,
       :created_at,
       :access_grant_id,
       :access_grant_arn,
@@ -3609,6 +3770,7 @@ module Aws::S3Control
     #            Identity Center application for the specific S3 Access Grants instance. </p>
     #   @return [String]
     class ListAccessGrantsInstanceEntry < Struct.new(
+      nil,
       :access_grants_instance_id,
       :access_grants_instance_arn,
       :created_at,
@@ -3635,6 +3797,7 @@ module Aws::S3Control
     #            if there are more results.</p>
     #   @return [Integer]
     class ListAccessGrantsInstancesRequest < Struct.new(
+      nil,
       :account_id,
       :next_token,
       :max_results,
@@ -3652,6 +3815,7 @@ module Aws::S3Control
     #   <p>A container for a list of S3 Access Grants instances.</p>
     #   @return [Array<Types::ListAccessGrantsInstanceEntry>]
     class ListAccessGrantsInstancesResult < Struct.new(
+      nil,
       :next_token,
       :access_grants_instances_list,
       keyword_init: true
@@ -3687,6 +3851,7 @@ module Aws::S3Control
     #            assumes this role to manage access to the registered location. </p>
     #   @return [String]
     class ListAccessGrantsLocationsEntry < Struct.new(
+      nil,
       :created_at,
       :access_grants_location_id,
       :access_grants_location_arn,
@@ -3722,6 +3887,7 @@ module Aws::S3Control
     #               <code>marketing/campaigns/</code> prefix.</p>
     #   @return [String]
     class ListAccessGrantsLocationsRequest < Struct.new(
+      nil,
       :account_id,
       :next_token,
       :max_results,
@@ -3740,6 +3906,7 @@ module Aws::S3Control
     #   <p>A container for a list of registered locations in an S3 Access Grants instance.</p>
     #   @return [Array<Types::ListAccessGrantsLocationsEntry>]
     class ListAccessGrantsLocationsResult < Struct.new(
+      nil,
       :next_token,
       :access_grants_locations_list,
       keyword_init: true
@@ -3821,6 +3988,7 @@ module Aws::S3Control
     #            can only access the S3 data through this application. </p>
     #   @return [String]
     class ListAccessGrantsRequest < Struct.new(
+      nil,
       :account_id,
       :next_token,
       :max_results,
@@ -3843,6 +4011,7 @@ module Aws::S3Control
     #   <p>A container for a list of grants in an S3 Access Grants instance.</p>
     #   @return [Array<Types::ListAccessGrantEntry>]
     class ListAccessGrantsResult < Struct.new(
+      nil,
       :next_token,
       :access_grants_list,
       keyword_init: true
@@ -3871,6 +4040,7 @@ module Aws::S3Control
     #            more results.</p>
     #   @return [Integer]
     class ListAccessPointsForDirectoryBucketsRequest < Struct.new(
+      nil,
       :account_id,
       :directory_bucket,
       :next_token,
@@ -3892,6 +4062,7 @@ module Aws::S3Control
     #            hours. </p>
     #   @return [String]
     class ListAccessPointsForDirectoryBucketsResult < Struct.new(
+      nil,
       :access_point_list,
       :next_token,
       keyword_init: true
@@ -3914,6 +4085,7 @@ module Aws::S3Control
     #            field that you can use to retrieve the next page of access points.</p>
     #   @return [Integer]
     class ListAccessPointsForObjectLambdaRequest < Struct.new(
+      nil,
       :account_id,
       :next_token,
       :max_results,
@@ -3931,6 +4103,7 @@ module Aws::S3Control
     #            retrieve additional access points.</p>
     #   @return [String]
     class ListAccessPointsForObjectLambdaResult < Struct.new(
+      nil,
       :object_lambda_access_point_list,
       :next_token,
       keyword_init: true
@@ -3966,6 +4139,7 @@ module Aws::S3Control
     #               <code>ALL</code>.</p>
     #   @return [String]
     class ListAccessPointsRequest < Struct.new(
+      nil,
       :account_id,
       :bucket,
       :next_token,
@@ -3987,6 +4161,7 @@ module Aws::S3Control
     #            API to retrieve additional access points.</p>
     #   @return [String]
     class ListAccessPointsResult < Struct.new(
+      nil,
       :access_point_list,
       :next_token,
       keyword_init: true
@@ -4024,6 +4199,7 @@ module Aws::S3Control
     #            can only access the S3 data through this application. </p>
     #   @return [String]
     class ListCallerAccessGrantsEntry < Struct.new(
+      nil,
       :permission,
       :grant_scope,
       :application_arn,
@@ -4057,6 +4233,7 @@ module Aws::S3Control
     #            application or for any other applications (<code>ALL</code>).</p>
     #   @return [Boolean]
     class ListCallerAccessGrantsRequest < Struct.new(
+      nil,
       :account_id,
       :grant_scope,
       :next_token,
@@ -4078,6 +4255,7 @@ module Aws::S3Control
     #         </p>
     #   @return [Array<Types::ListCallerAccessGrantsEntry>]
     class ListCallerAccessGrantsResult < Struct.new(
+      nil,
       :next_token,
       :caller_access_grants_list,
       keyword_init: true
@@ -4104,6 +4282,7 @@ module Aws::S3Control
     #            results.</p>
     #   @return [Integer]
     class ListJobsRequest < Struct.new(
+      nil,
       :account_id,
       :job_statuses,
       :next_token,
@@ -4122,6 +4301,7 @@ module Aws::S3Control
     #   <p>The list of current jobs and jobs that have ended within the last 30 days.</p>
     #   @return [Array<Types::JobListDescriptor>]
     class ListJobsResult < Struct.new(
+      nil,
       :next_token,
       :jobs,
       keyword_init: true
@@ -4139,6 +4319,7 @@ module Aws::S3Control
     #   <p>Not currently used. Do not use this parameter.</p>
     #   @return [Integer]
     class ListMultiRegionAccessPointsRequest < Struct.new(
+      nil,
       :account_id,
       :next_token,
       :max_results,
@@ -4156,6 +4337,7 @@ module Aws::S3Control
     #            calls to this action to retrieve additional Multi-Region Access Points.</p>
     #   @return [String]
     class ListMultiRegionAccessPointsResult < Struct.new(
+      nil,
       :access_points,
       :next_token,
       keyword_init: true
@@ -4179,6 +4361,7 @@ module Aws::S3Control
     #            </note>
     #   @return [String]
     class ListRegionalBucketsRequest < Struct.new(
+      nil,
       :account_id,
       :next_token,
       :max_results,
@@ -4199,6 +4382,7 @@ module Aws::S3Control
     #            key.</p>
     #   @return [String]
     class ListRegionalBucketsResult < Struct.new(
+      nil,
       :regional_bucket_list,
       :next_token,
       keyword_init: true
@@ -4224,6 +4408,7 @@ module Aws::S3Control
     #            required.</p>
     #   @return [Boolean]
     class ListStorageLensConfigurationEntry < Struct.new(
+      nil,
       :id,
       :storage_lens_arn,
       :home_region,
@@ -4245,6 +4430,7 @@ module Aws::S3Control
     #   <p>A pagination token to request the next page of results.</p>
     #   @return [String]
     class ListStorageLensConfigurationsRequest < Struct.new(
+      nil,
       :account_id,
       :next_token,
       keyword_init: true
@@ -4261,6 +4447,7 @@ module Aws::S3Control
     #   <p>A list of S3 Storage Lens configurations.</p>
     #   @return [Array<Types::ListStorageLensConfigurationEntry>]
     class ListStorageLensConfigurationsResult < Struct.new(
+      nil,
       :next_token,
       :storage_lens_configuration_list,
       keyword_init: true
@@ -4287,6 +4474,7 @@ module Aws::S3Control
     #   </p>
     #   @return [String]
     class ListStorageLensGroupEntry < Struct.new(
+      nil,
       :name,
       :storage_lens_group_arn,
       :home_region,
@@ -4305,6 +4493,7 @@ module Aws::S3Control
     #      </p>
     #   @return [String]
     class ListStorageLensGroupsRequest < Struct.new(
+      nil,
       :account_id,
       :next_token,
       keyword_init: true
@@ -4326,6 +4515,7 @@ module Aws::S3Control
     #   </p>
     #   @return [Array<Types::ListStorageLensGroupEntry>]
     class ListStorageLensGroupsResult < Struct.new(
+      nil,
       :next_token,
       :storage_lens_group_list,
       keyword_init: true
@@ -4342,6 +4532,7 @@ module Aws::S3Control
     #            registered location, or grant. </p>
     #   @return [String]
     class ListTagsForResourceRequest < Struct.new(
+      nil,
       :account_id,
       :resource_arn,
       keyword_init: true
@@ -4353,6 +4544,7 @@ module Aws::S3Control
     #   <p> The Amazon Web Services resource tags that are associated with the resource. </p>
     #   @return [Array<Types::Tag>]
     class ListTagsForResourceResult < Struct.new(
+      nil,
       :tags,
       keyword_init: true
     )
@@ -4373,6 +4565,7 @@ module Aws::S3Control
     #   </p>
     #   @return [Integer]
     class MatchObjectAge < Struct.new(
+      nil,
       :days_greater_than,
       :days_less_than,
       keyword_init: true
@@ -4400,6 +4593,7 @@ module Aws::S3Control
     #   </p>
     #   @return [Integer]
     class MatchObjectSize < Struct.new(
+      nil,
       :bytes_greater_than,
       :bytes_less_than,
       keyword_init: true
@@ -4425,6 +4619,7 @@ module Aws::S3Control
     #            </note>
     #   @return [Types::ReplicationTimeValue]
     class Metrics < Struct.new(
+      nil,
       :status,
       :event_threshold,
       keyword_init: true
@@ -4444,6 +4639,7 @@ module Aws::S3Control
     #   <p>The proposed policy for the Multi-Region Access Point.</p>
     #   @return [Types::ProposedMultiRegionAccessPointPolicy]
     class MultiRegionAccessPointPolicyDocument < Struct.new(
+      nil,
       :established,
       :proposed,
       keyword_init: true
@@ -4459,6 +4655,7 @@ module Aws::S3Control
     #   <p>The current status of the Multi-Region Access Point in this Region.</p>
     #   @return [String]
     class MultiRegionAccessPointRegionalResponse < Struct.new(
+      nil,
       :name,
       :request_status,
       keyword_init: true
@@ -4496,6 +4693,7 @@ module Aws::S3Control
     #   <p>A collection of the Regions and buckets associated with the Multi-Region Access Point.</p>
     #   @return [Array<Types::RegionReport>]
     class MultiRegionAccessPointReport < Struct.new(
+      nil,
       :name,
       :alias,
       :created_at,
@@ -4537,6 +4735,7 @@ module Aws::S3Control
     #               <code>InvalidRequest</code> error.</p>
     #   @return [Integer]
     class MultiRegionAccessPointRoute < Struct.new(
+      nil,
       :bucket,
       :region,
       :traffic_dial_percentage,
@@ -4551,6 +4750,7 @@ module Aws::S3Control
     #            supports.</p>
     #   @return [Array<Types::MultiRegionAccessPointRegionalResponse>]
     class MultiRegionAccessPointsAsyncResponse < Struct.new(
+      nil,
       :regions,
       keyword_init: true
     )
@@ -4563,6 +4763,7 @@ module Aws::S3Control
     # @!attribute message
     #   @return [String]
     class NoSuchPublicAccessBlockConfiguration < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -4583,6 +4784,7 @@ module Aws::S3Control
     #               elements</a> in the <i>Amazon S3 User Guide</i>.</p>
     #   @return [Integer]
     class NoncurrentVersionExpiration < Struct.new(
+      nil,
       :noncurrent_days,
       :newer_noncurrent_versions,
       keyword_init: true
@@ -4607,6 +4809,7 @@ module Aws::S3Control
     #   <p>The class of storage used to store the object.</p>
     #   @return [String]
     class NoncurrentVersionTransition < Struct.new(
+      nil,
       :noncurrent_days,
       :storage_class,
       keyword_init: true
@@ -4623,6 +4826,7 @@ module Aws::S3Control
     # @!attribute message
     #   @return [String]
     class NotFoundException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -4631,6 +4835,7 @@ module Aws::S3Control
 
     # <p>A filter that returns objects that aren't server-side encrypted.</p>
     class NotSSEFilter < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -4687,6 +4892,7 @@ module Aws::S3Control
     #   <p>The alias of the Object Lambda Access Point.</p>
     #   @return [Types::ObjectLambdaAccessPointAlias]
     class ObjectLambdaAccessPoint < Struct.new(
+      nil,
       :name,
       :object_lambda_access_point_arn,
       :alias,
@@ -4707,6 +4913,7 @@ module Aws::S3Control
     #            use.</p>
     #   @return [String]
     class ObjectLambdaAccessPointAlias < Struct.new(
+      nil,
       :value,
       :status,
       keyword_init: true
@@ -4730,6 +4937,7 @@ module Aws::S3Control
     #   <p>A container for transformation configurations for an Object Lambda Access Point.</p>
     #   @return [Array<Types::ObjectLambdaTransformationConfiguration>]
     class ObjectLambdaConfiguration < Struct.new(
+      nil,
       :supporting_access_point,
       :cloud_watch_metrics_enabled,
       :allowed_features,
@@ -4769,6 +4977,7 @@ module Aws::S3Control
     #   <p>A container for the content transformation of an Object Lambda Access Point configuration.</p>
     #   @return [Types::ObjectLambdaContentTransformation]
     class ObjectLambdaTransformationConfiguration < Struct.new(
+      nil,
       :actions,
       :content_transformation,
       keyword_init: true
@@ -4782,6 +4991,7 @@ module Aws::S3Control
     #   <p></p>
     #   @return [Boolean]
     class PolicyStatus < Struct.new(
+      nil,
       :is_public,
       keyword_init: true
     )
@@ -4798,6 +5008,7 @@ module Aws::S3Control
     #   <p>A container for the prefix-level storage metrics for S3 Storage Lens.</p>
     #   @return [Types::PrefixLevelStorageMetrics]
     class PrefixLevel < Struct.new(
+      nil,
       :storage_metrics,
       keyword_init: true
     )
@@ -4812,6 +5023,7 @@ module Aws::S3Control
     #   <p></p>
     #   @return [Types::SelectionCriteria]
     class PrefixLevelStorageMetrics < Struct.new(
+      nil,
       :is_enabled,
       :selection_criteria,
       keyword_init: true
@@ -4833,6 +5045,7 @@ module Aws::S3Control
     #   <p>The details of the proposed policy.</p>
     #   @return [String]
     class ProposedMultiRegionAccessPointPolicy < Struct.new(
+      nil,
       :policy,
       keyword_init: true
     )
@@ -4889,6 +5102,7 @@ module Aws::S3Control
     #            <p>This property is not supported for Amazon S3 on Outposts.</p>
     #   @return [Boolean]
     class PublicAccessBlockConfiguration < Struct.new(
+      nil,
       :block_public_acls,
       :ignore_public_acls,
       :block_public_policy,
@@ -4916,6 +5130,7 @@ module Aws::S3Control
     #   <p>The Organization of the resource policy of the S3 Access Grants instance.</p>
     #   @return [String]
     class PutAccessGrantsInstanceResourcePolicyRequest < Struct.new(
+      nil,
       :account_id,
       :policy,
       :organization,
@@ -4934,6 +5149,7 @@ module Aws::S3Control
     #   <p>The date and time when you created the S3 Access Grants instance resource policy. </p>
     #   @return [Time]
     class PutAccessGrantsInstanceResourcePolicyResult < Struct.new(
+      nil,
       :policy,
       :organization,
       :created_at,
@@ -4952,6 +5168,7 @@ module Aws::S3Control
     #   <p>Object Lambda Access Point configuration document.</p>
     #   @return [Types::ObjectLambdaConfiguration]
     class PutAccessPointConfigurationForObjectLambdaRequest < Struct.new(
+      nil,
       :account_id,
       :name,
       :configuration,
@@ -4970,6 +5187,7 @@ module Aws::S3Control
     #   <p>Object Lambda Access Point resource policy document.</p>
     #   @return [String]
     class PutAccessPointPolicyForObjectLambdaRequest < Struct.new(
+      nil,
       :account_id,
       :name,
       :policy,
@@ -4994,6 +5212,7 @@ module Aws::S3Control
     #               <i>Amazon S3 User Guide</i>.</p>
     #   @return [String]
     class PutAccessPointPolicyRequest < Struct.new(
+      nil,
       :account_id,
       :name,
       :policy,
@@ -5013,6 +5232,7 @@ module Aws::S3Control
     #   <p>Object prefixes, API operations, or a combination of both.</p>
     #   @return [Types::Scope]
     class PutAccessPointScopeRequest < Struct.new(
+      nil,
       :account_id,
       :name,
       :scope,
@@ -5031,6 +5251,7 @@ module Aws::S3Control
     #   <p>Container for lifecycle rules. You can add as many as 1,000 rules.</p>
     #   @return [Types::LifecycleConfiguration]
     class PutBucketLifecycleConfigurationRequest < Struct.new(
+      nil,
       :account_id,
       :bucket,
       :lifecycle_configuration,
@@ -5058,6 +5279,7 @@ module Aws::S3Control
     #   <p>The bucket policy as a JSON document.</p>
     #   @return [String]
     class PutBucketPolicyRequest < Struct.new(
+      nil,
       :account_id,
       :bucket,
       :confirm_remove_self_bucket_access,
@@ -5079,6 +5301,7 @@ module Aws::S3Control
     #   <p></p>
     #   @return [Types::ReplicationConfiguration]
     class PutBucketReplicationRequest < Struct.new(
+      nil,
       :account_id,
       :bucket,
       :replication_configuration,
@@ -5099,6 +5322,7 @@ module Aws::S3Control
     #   <p></p>
     #   @return [Types::Tagging]
     class PutBucketTaggingRequest < Struct.new(
+      nil,
       :account_id,
       :bucket,
       :tagging,
@@ -5121,6 +5345,7 @@ module Aws::S3Control
     #   <p>The root-level tag for the <code>VersioningConfiguration</code> parameters.</p>
     #   @return [Types::VersioningConfiguration]
     class PutBucketVersioningRequest < Struct.new(
+      nil,
       :account_id,
       :bucket,
       :mfa,
@@ -5140,6 +5365,7 @@ module Aws::S3Control
     #   <p>The set of tags to associate with the S3 Batch Operations job.</p>
     #   @return [Array<Types::S3Tag>]
     class PutJobTaggingRequest < Struct.new(
+      nil,
       :account_id,
       :job_id,
       :tags,
@@ -5149,6 +5375,7 @@ module Aws::S3Control
     end
 
     class PutJobTaggingResult < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -5162,6 +5389,7 @@ module Aws::S3Control
     #   <p>The policy details for the <code>PutMultiRegionAccessPoint</code> request.</p>
     #   @return [String]
     class PutMultiRegionAccessPointPolicyInput < Struct.new(
+      nil,
       :name,
       :policy,
       keyword_init: true
@@ -5180,6 +5408,7 @@ module Aws::S3Control
     #   <p>A container element containing the details of the policy for the Multi-Region Access Point.</p>
     #   @return [Types::PutMultiRegionAccessPointPolicyInput]
     class PutMultiRegionAccessPointPolicyRequest < Struct.new(
+      nil,
       :account_id,
       :client_token,
       :details,
@@ -5193,6 +5422,7 @@ module Aws::S3Control
     #            requests.</p>
     #   @return [String]
     class PutMultiRegionAccessPointPolicyResult < Struct.new(
+      nil,
       :request_token_arn,
       keyword_init: true
     )
@@ -5208,6 +5438,7 @@ module Aws::S3Control
     #            you want to set.</p>
     #   @return [String]
     class PutPublicAccessBlockRequest < Struct.new(
+      nil,
       :public_access_block_configuration,
       :account_id,
       keyword_init: true
@@ -5231,6 +5462,7 @@ module Aws::S3Control
     #            </note>
     #   @return [Array<Types::StorageLensTag>]
     class PutStorageLensConfigurationRequest < Struct.new(
+      nil,
       :config_id,
       :account_id,
       :storage_lens_configuration,
@@ -5253,6 +5485,7 @@ module Aws::S3Control
     #            </note>
     #   @return [Array<Types::StorageLensTag>]
     class PutStorageLensConfigurationTaggingRequest < Struct.new(
+      nil,
       :config_id,
       :account_id,
       :tags,
@@ -5262,6 +5495,7 @@ module Aws::S3Control
     end
 
     class PutStorageLensConfigurationTaggingResult < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -5276,6 +5510,7 @@ module Aws::S3Control
     #            Multi-Region Access Point.</p>
     #   @return [String]
     class Region < Struct.new(
+      nil,
       :bucket,
       :bucket_account_id,
       keyword_init: true
@@ -5295,6 +5530,7 @@ module Aws::S3Control
     #            Multi-Region Access Point.</p>
     #   @return [String]
     class RegionReport < Struct.new(
+      nil,
       :bucket,
       :region,
       :bucket_account_id,
@@ -5320,6 +5556,7 @@ module Aws::S3Control
     #   <p>The Outposts ID of the regional bucket.</p>
     #   @return [String]
     class RegionalBucket < Struct.new(
+      nil,
       :bucket,
       :bucket_arn,
       :public_access_block_enabled,
@@ -5352,6 +5589,7 @@ module Aws::S3Control
     #            replicas.</p>
     #   @return [String]
     class ReplicaModifications < Struct.new(
+      nil,
       :status,
       keyword_init: true
     )
@@ -5372,6 +5610,7 @@ module Aws::S3Control
     #            least one rule and can contain an array of 100 rules at the most. </p>
     #   @return [Array<Types::ReplicationRule>]
     class ReplicationConfiguration < Struct.new(
+      nil,
       :role,
       :rules,
       keyword_init: true
@@ -5444,6 +5683,7 @@ module Aws::S3Control
     #            S3 on Outposts to replicate the objects from.</p>
     #   @return [String]
     class ReplicationRule < Struct.new(
+      nil,
       :id,
       :priority,
       :prefix,
@@ -5485,6 +5725,7 @@ module Aws::S3Control
     #   <p>An array of tags that contain key and value pairs.</p>
     #   @return [Array<Types::S3Tag>]
     class ReplicationRuleAndOperator < Struct.new(
+      nil,
       :prefix,
       :tags,
       keyword_init: true
@@ -5524,6 +5765,7 @@ module Aws::S3Control
     #            </ul>
     #   @return [Types::ReplicationRuleAndOperator]
     class ReplicationRuleFilter < Struct.new(
+      nil,
       :prefix,
       :tag,
       :and,
@@ -5546,6 +5788,7 @@ module Aws::S3Control
     #            objects and operations on objects. </p>
     #   @return [Types::ReplicationTimeValue]
     class ReplicationTime < Struct.new(
+      nil,
       :status,
       :time,
       keyword_init: true
@@ -5563,6 +5806,7 @@ module Aws::S3Control
     #            <p>Valid value: 15</p>
     #   @return [Integer]
     class ReplicationTimeValue < Struct.new(
+      nil,
       :minutes,
       keyword_init: true
     )
@@ -5582,6 +5826,7 @@ module Aws::S3Control
     #   <p></p>
     #   @return [Array<Types::S3Grant>]
     class S3AccessControlList < Struct.new(
+      nil,
       :owner,
       :grants,
       keyword_init: true
@@ -5597,6 +5842,7 @@ module Aws::S3Control
     #   <p></p>
     #   @return [String]
     class S3AccessControlPolicy < Struct.new(
+      nil,
       :access_control_list,
       :canned_access_control_list,
       keyword_init: true
@@ -5629,6 +5875,7 @@ module Aws::S3Control
     #   <p>The container for the type encryption of the metrics exports in this bucket.</p>
     #   @return [Types::StorageLensDataExportEncryption]
     class S3BucketDestination < Struct.new(
+      nil,
       :format,
       :output_schema_version,
       :account_id,
@@ -5652,6 +5899,7 @@ module Aws::S3Control
     #               integrity</a> in the <i>Amazon S3 User Guide</i>.</p>
     #   @return [String]
     class S3ComputeObjectChecksumOperation < Struct.new(
+      nil,
       :checksum_algorithm,
       :checksum_type,
       keyword_init: true
@@ -5824,6 +6072,7 @@ module Aws::S3Control
     #               integrity</a> in the <i>Amazon S3 User Guide</i>.</p>
     #   @return [String]
     class S3CopyObjectOperation < Struct.new(
+      nil,
       :target_resource,
       :canned_access_control_list,
       :access_control_grants,
@@ -5862,6 +6111,7 @@ module Aws::S3Control
     #          the bucket name and key name as parameters, which are defined in the
     #          job's manifest.</p>
     class S3DeleteObjectTaggingOperation < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -5879,6 +6129,7 @@ module Aws::S3Control
     #               buckets</a>.</p>
     #   @return [Types::JobManifestLocation]
     class S3GeneratedManifestDescriptor < Struct.new(
+      nil,
       :format,
       :location,
       keyword_init: true
@@ -5894,6 +6145,7 @@ module Aws::S3Control
     #   <p></p>
     #   @return [String]
     class S3Grant < Struct.new(
+      nil,
       :grantee,
       :permission,
       keyword_init: true
@@ -5912,6 +6164,7 @@ module Aws::S3Control
     #   <p></p>
     #   @return [String]
     class S3Grantee < Struct.new(
+      nil,
       :type_identifier,
       :identifier,
       :display_name,
@@ -5947,6 +6200,7 @@ module Aws::S3Control
     #            not the <code>EXPEDITED</code> retrieval tier.</p>
     #   @return [String]
     class S3InitiateRestoreObjectOperation < Struct.new(
+      nil,
       :expiration_in_days,
       :glacier_job_tier,
       keyword_init: true
@@ -5987,6 +6241,7 @@ module Aws::S3Control
     #   <p>Determines whether or not to write the job's generated manifest to a bucket.</p>
     #   @return [Boolean]
     class S3JobManifestGenerator < Struct.new(
+      nil,
       :expected_bucket_owner,
       :source_bucket,
       :manifest_output_location,
@@ -6025,6 +6280,7 @@ module Aws::S3Control
     #   <p>The format of the generated manifest.</p>
     #   @return [String]
     class S3ManifestOutputLocation < Struct.new(
+      nil,
       :expected_manifest_bucket_owner,
       :bucket,
       :manifest_prefix,
@@ -6042,6 +6298,7 @@ module Aws::S3Control
     #            job.</p>
     #   @return [String]
     class S3ObjectLockLegalHold < Struct.new(
+      nil,
       :status,
       keyword_init: true
     )
@@ -6097,6 +6354,7 @@ module Aws::S3Control
     #            For <a href="https://docs.aws.amazon.com/AmazonS3/latest/userguide/directory-buckets-objects-Batch-Ops">the Copy operation in Batch Operations</a>, see <a href="https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_S3CopyObjectOperation.html">S3CopyObjectOperation</a>.</p>
     #   @return [String]
     class S3ObjectMetadata < Struct.new(
+      nil,
       :cache_control,
       :content_disposition,
       :content_encoding,
@@ -6127,6 +6385,7 @@ module Aws::S3Control
     #   <p></p>
     #   @return [String]
     class S3ObjectOwner < Struct.new(
+      nil,
       :id,
       :display_name,
       keyword_init: true
@@ -6137,6 +6396,7 @@ module Aws::S3Control
     # <p>Directs the specified job to invoke <code>ReplicateObject</code> on every object in the
     #          job's manifest.</p>
     class S3ReplicateObjectOperation < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -6156,6 +6416,7 @@ module Aws::S3Control
     #            job.</p>
     #   @return [String]
     class S3Retention < Struct.new(
+      nil,
       :retain_until_date,
       :mode,
       keyword_init: true
@@ -6174,6 +6435,7 @@ module Aws::S3Control
     #   <p></p>
     #   @return [Types::S3AccessControlPolicy]
     class S3SetObjectAclOperation < Struct.new(
+      nil,
       :access_control_policy,
       keyword_init: true
     )
@@ -6196,6 +6458,7 @@ module Aws::S3Control
     #            Batch Operations job.</p>
     #   @return [Types::S3ObjectLockLegalHold]
     class S3SetObjectLegalHoldOperation < Struct.new(
+      nil,
       :legal_hold,
       keyword_init: true
     )
@@ -6221,6 +6484,7 @@ module Aws::S3Control
     #               with S3 Batch Operations</a> in the <i>Amazon S3 User Guide</i>.</p>
     #   @return [Types::S3Retention]
     class S3SetObjectRetentionOperation < Struct.new(
+      nil,
       :bypass_governance_retention,
       :retention,
       keyword_init: true
@@ -6244,6 +6508,7 @@ module Aws::S3Control
     #   <p></p>
     #   @return [Array<Types::S3Tag>]
     class S3SetObjectTaggingOperation < Struct.new(
+      nil,
       :tag_set,
       keyword_init: true
     )
@@ -6258,6 +6523,7 @@ module Aws::S3Control
     #   <p>Value of the tag</p>
     #   @return [String]
     class S3Tag < Struct.new(
+      nil,
       :key,
       :value,
       keyword_init: true
@@ -6267,6 +6533,7 @@ module Aws::S3Control
 
     # <p>A filter that returns objects that are encrypted by server-side encryption with customer-provided keys (SSE-C).</p>
     class SSECFilter < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -6281,6 +6548,7 @@ module Aws::S3Control
     #            </p>
     #   @return [String]
     class SSEKMS < Struct.new(
+      nil,
       :key_id,
       keyword_init: true
     )
@@ -6293,6 +6561,7 @@ module Aws::S3Control
     #            customer managed key to use for encrypting generated manifest objects.</p>
     #   @return [String]
     class SSEKMSEncryption < Struct.new(
+      nil,
       :key_id,
       keyword_init: true
     )
@@ -6318,6 +6587,7 @@ module Aws::S3Control
     #               in the <i>Amazon S3 User Guide</i>.</p>
     #   @return [Boolean]
     class SSEKMSFilter < Struct.new(
+      nil,
       :kms_key_arn,
       :bucket_key_enabled,
       keyword_init: true
@@ -6332,6 +6602,7 @@ module Aws::S3Control
 
     # <p></p>
     class SSES3 < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -6339,6 +6610,7 @@ module Aws::S3Control
 
     # <p>Configuration for the use of SSE-S3 to encrypt generated manifest objects.</p>
     class SSES3Encryption < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -6346,6 +6618,7 @@ module Aws::S3Control
 
     # <p>A filter that returns objects that are encrypted by server-side encryption with Amazon S3 managed keys (SSE-S3).</p>
     class SSES3Filter < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -6363,6 +6636,7 @@ module Aws::S3Control
     #   <p>You can include one or more API operations as permissions.</p>
     #   @return [Array<String>]
     class Scope < Struct.new(
+      nil,
       :prefixes,
       :permissions,
       keyword_init: true
@@ -6384,6 +6658,7 @@ module Aws::S3Control
     #            </note>
     #   @return [Float]
     class SelectionCriteria < Struct.new(
+      nil,
       :delimiter,
       :max_depth,
       :min_storage_bytes_percentage,
@@ -6419,6 +6694,7 @@ module Aws::S3Control
     #            </note>
     #   @return [Types::ReplicaModifications]
     class SourceSelectionCriteria < Struct.new(
+      nil,
       :sse_kms_encrypted_objects,
       :replica_modifications,
       keyword_init: true
@@ -6436,6 +6712,7 @@ module Aws::S3Control
     #            by using an KMS key stored in Key Management Service.</p>
     #   @return [String]
     class SseKmsEncryptedObjects < Struct.new(
+      nil,
       :status,
       keyword_init: true
     )
@@ -6451,6 +6728,7 @@ module Aws::S3Control
     #            </p>
     #   @return [String]
     class StorageLensAwsOrg < Struct.new(
+      nil,
       :arn,
       keyword_init: true
     )
@@ -6491,6 +6769,7 @@ module Aws::S3Control
     #            </p>
     #   @return [String]
     class StorageLensConfiguration < Struct.new(
+      nil,
       :id,
       :account_level,
       :include,
@@ -6522,6 +6801,7 @@ module Aws::S3Control
     #   <p>A container for enabling Amazon CloudWatch publishing for S3 Storage Lens metrics.</p>
     #   @return [Types::CloudWatchMetrics]
     class StorageLensDataExport < Struct.new(
+      nil,
       :s3_bucket_destination,
       :cloud_watch_metrics,
       keyword_init: true
@@ -6537,6 +6817,7 @@ module Aws::S3Control
     #   <p></p>
     #   @return [Types::SSEKMS]
     class StorageLensDataExportEncryption < Struct.new(
+      nil,
       :sses3,
       :ssekms,
       keyword_init: true
@@ -6560,6 +6841,7 @@ module Aws::S3Control
     #            read-only. </p>
     #   @return [String]
     class StorageLensGroup < Struct.new(
+      nil,
       :name,
       :filter,
       :storage_lens_group_arn,
@@ -6591,6 +6873,7 @@ module Aws::S3Control
     #            object size range (minimum and maximum number of Bytes). </p>
     #   @return [Types::MatchObjectSize]
     class StorageLensGroupAndOperator < Struct.new(
+      nil,
       :match_any_prefix,
       :match_any_suffix,
       :match_any_tag,
@@ -6636,6 +6919,7 @@ module Aws::S3Control
     #            logical operator. Only one of each filter condition is allowed. </p>
     #   @return [Types::StorageLensGroupOrOperator]
     class StorageLensGroupFilter < Struct.new(
+      nil,
       :match_any_prefix,
       :match_any_suffix,
       :match_any_tag,
@@ -6655,6 +6939,7 @@ module Aws::S3Control
     #            aggregation. If this value is left null, then all Storage Lens groups are selected. </p>
     #   @return [Types::StorageLensGroupLevelSelectionCriteria]
     class StorageLensGroupLevel < Struct.new(
+      nil,
       :selection_criteria,
       keyword_init: true
     )
@@ -6674,6 +6959,7 @@ module Aws::S3Control
     #            aggregation. </p>
     #   @return [Array<String>]
     class StorageLensGroupLevelSelectionCriteria < Struct.new(
+      nil,
       :include,
       :exclude,
       keyword_init: true
@@ -6701,6 +6987,7 @@ module Aws::S3Control
     #   <p> Filters objects that match the specified object size range. </p>
     #   @return [Types::MatchObjectSize]
     class StorageLensGroupOrOperator < Struct.new(
+      nil,
       :match_any_prefix,
       :match_any_suffix,
       :match_any_tag,
@@ -6719,6 +7006,7 @@ module Aws::S3Control
     #   <p></p>
     #   @return [String]
     class StorageLensTag < Struct.new(
+      nil,
       :key,
       :value,
       keyword_init: true
@@ -6737,6 +7025,7 @@ module Aws::S3Control
     #            value of <code>100</code>, and passive routes return a value of <code>0</code>.</p>
     #   @return [Array<Types::MultiRegionAccessPointRoute>]
     class SubmitMultiRegionAccessPointRoutesRequest < Struct.new(
+      nil,
       :account_id,
       :mrap,
       :route_updates,
@@ -6746,6 +7035,7 @@ module Aws::S3Control
     end
 
     class SubmitMultiRegionAccessPointRoutesResult < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -6764,6 +7054,7 @@ module Aws::S3Control
     #            be up to 256 Unicode characters in length and is case-sensitive. </p>
     #   @return [String]
     class Tag < Struct.new(
+      nil,
       :key,
       :value,
       keyword_init: true
@@ -6785,6 +7076,7 @@ module Aws::S3Control
     #   <p> The Amazon Web Services resource tags that you want to add to the specified S3 resource. </p>
     #   @return [Array<Types::Tag>]
     class TagResourceRequest < Struct.new(
+      nil,
       :account_id,
       :resource_arn,
       :tags,
@@ -6794,6 +7086,7 @@ module Aws::S3Control
     end
 
     class TagResourceResult < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -6804,6 +7097,7 @@ module Aws::S3Control
     #   <p>A collection for a set of tags.</p>
     #   @return [Array<Types::S3Tag>]
     class Tagging < Struct.new(
+      nil,
       :tag_set,
       keyword_init: true
     )
@@ -6814,6 +7108,7 @@ module Aws::S3Control
     # @!attribute message
     #   @return [String]
     class TooManyRequestsException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -6824,6 +7119,7 @@ module Aws::S3Control
     # @!attribute message
     #   @return [String]
     class TooManyTagsException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -6846,6 +7142,7 @@ module Aws::S3Control
     #   <p>The storage class to which you want the object to transition.</p>
     #   @return [String]
     class Transition < Struct.new(
+      nil,
       :date,
       :days,
       :storage_class,
@@ -6873,6 +7170,7 @@ module Aws::S3Control
     #         </p>
     #   @return [Array<String>]
     class UntagResourceRequest < Struct.new(
+      nil,
       :account_id,
       :resource_arn,
       :tag_keys,
@@ -6882,6 +7180,7 @@ module Aws::S3Control
     end
 
     class UntagResourceResult < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -6908,6 +7207,7 @@ module Aws::S3Control
     #            assumes this role to manage access to the registered location. </p>
     #   @return [String]
     class UpdateAccessGrantsLocationRequest < Struct.new(
+      nil,
       :account_id,
       :access_grants_location_id,
       :iam_role_arn,
@@ -6939,6 +7239,7 @@ module Aws::S3Control
     #            assumes this role to manage access to the registered location. </p>
     #   @return [String]
     class UpdateAccessGrantsLocationResult < Struct.new(
+      nil,
       :created_at,
       :access_grants_location_id,
       :access_grants_location_arn,
@@ -6959,6 +7260,7 @@ module Aws::S3Control
     #   <p>The priority you want to assign to this job.</p>
     #   @return [Integer]
     class UpdateJobPriorityRequest < Struct.new(
+      nil,
       :account_id,
       :job_id,
       :priority,
@@ -6974,6 +7276,7 @@ module Aws::S3Control
     #   <p>The new priority assigned to the specified job.</p>
     #   @return [Integer]
     class UpdateJobPriorityResult < Struct.new(
+      nil,
       :job_id,
       :priority,
       keyword_init: true
@@ -7000,6 +7303,7 @@ module Aws::S3Control
     #            field can be any string up to the maximum length.</p>
     #   @return [String]
     class UpdateJobStatusRequest < Struct.new(
+      nil,
       :account_id,
       :job_id,
       :requested_job_status,
@@ -7019,6 +7323,7 @@ module Aws::S3Control
     #   <p>The reason that the specified job's status was updated.</p>
     #   @return [String]
     class UpdateJobStatusResult < Struct.new(
+      nil,
       :job_id,
       :status,
       :status_update_reason,
@@ -7043,6 +7348,7 @@ module Aws::S3Control
     #   </p>
     #   @return [Types::StorageLensGroup]
     class UpdateStorageLensGroupRequest < Struct.new(
+      nil,
       :name,
       :account_id,
       :storage_lens_group,
@@ -7061,6 +7367,7 @@ module Aws::S3Control
     #   <p>Sets the versioning state of the S3 on Outposts bucket.</p>
     #   @return [String]
     class VersioningConfiguration < Struct.new(
+      nil,
       :mfa_delete,
       :status,
       keyword_init: true
@@ -7074,6 +7381,7 @@ module Aws::S3Control
     #            ID.</p>
     #   @return [String]
     class VpcConfiguration < Struct.new(
+      nil,
       :vpc_id,
       keyword_init: true
     )

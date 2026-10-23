@@ -58,6 +58,7 @@ module Aws::GlobalAccelerator
     #   <p>A history of changes that you make to an accelerator in Global Accelerator.</p>
     #   @return [Array<Types::AcceleratorEvent>]
     class Accelerator < Struct.new(
+      nil,
       :accelerator_arn,
       :name,
       :ip_address_type,
@@ -93,6 +94,7 @@ module Aws::GlobalAccelerator
     #            <p>s3-bucket_name//AWSLogs/aws_account_id</p>
     #   @return [String]
     class AcceleratorAttributes < Struct.new(
+      nil,
       :flow_logs_enabled,
       :flow_logs_s3_bucket,
       :flow_logs_s3_prefix,
@@ -113,6 +115,7 @@ module Aws::GlobalAccelerator
     #   <p>A timestamp for when you update an accelerator in Global Accelerator from IPv4 to dual-stack, or dual-stack to IPv4.</p>
     #   @return [Time]
     class AcceleratorEvent < Struct.new(
+      nil,
       :message,
       :timestamp,
       keyword_init: true
@@ -124,6 +127,7 @@ module Aws::GlobalAccelerator
     # @!attribute message
     #   @return [String]
     class AcceleratorNotDisabledException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -134,6 +138,7 @@ module Aws::GlobalAccelerator
     # @!attribute message
     #   @return [String]
     class AcceleratorNotFoundException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -144,6 +149,7 @@ module Aws::GlobalAccelerator
     # @!attribute message
     #   @return [String]
     class AccessDeniedException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -157,6 +163,7 @@ module Aws::GlobalAccelerator
     #   <p>The Amazon Resource Name (ARN) of the endpoint group for the custom routing endpoint.</p>
     #   @return [String]
     class AddCustomRoutingEndpointsRequest < Struct.new(
+      nil,
       :endpoint_configurations,
       :endpoint_group_arn,
       keyword_init: true
@@ -171,6 +178,7 @@ module Aws::GlobalAccelerator
     #   <p>The Amazon Resource Name (ARN) of the endpoint group for the custom routing endpoint.</p>
     #   @return [String]
     class AddCustomRoutingEndpointsResponse < Struct.new(
+      nil,
       :endpoint_descriptions,
       :endpoint_group_arn,
       keyword_init: true
@@ -185,6 +193,7 @@ module Aws::GlobalAccelerator
     #   <p>The Amazon Resource Name (ARN) of the endpoint group.</p>
     #   @return [String]
     class AddEndpointsRequest < Struct.new(
+      nil,
       :endpoint_configurations,
       :endpoint_group_arn,
       keyword_init: true
@@ -199,6 +208,7 @@ module Aws::GlobalAccelerator
     #   <p>The Amazon Resource Name (ARN) of the endpoint group.</p>
     #   @return [String]
     class AddEndpointsResponse < Struct.new(
+      nil,
       :endpoint_descriptions,
       :endpoint_group_arn,
       keyword_init: true
@@ -214,6 +224,7 @@ module Aws::GlobalAccelerator
     #   			the Global Accelerator Developer Guide.</p>
     #   @return [String]
     class AdvertiseByoipCidrRequest < Struct.new(
+      nil,
       :cidr,
       keyword_init: true
     )
@@ -224,6 +235,7 @@ module Aws::GlobalAccelerator
     #   <p>Information about the address range.</p>
     #   @return [Types::ByoipCidr]
     class AdvertiseByoipCidrResponse < Struct.new(
+      nil,
       :byoip_cidr,
       keyword_init: true
     )
@@ -257,6 +269,7 @@ module Aws::GlobalAccelerator
     #            <p>The default value is FALSE.</p>
     #   @return [Boolean]
     class AllowCustomRoutingTrafficRequest < Struct.new(
+      nil,
       :endpoint_group_arn,
       :endpoint_id,
       :destination_addresses,
@@ -272,6 +285,7 @@ module Aws::GlobalAccelerator
     # @!attribute message
     #   @return [String]
     class AssociatedEndpointGroupFoundException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -283,6 +297,7 @@ module Aws::GlobalAccelerator
     # @!attribute message
     #   @return [String]
     class AssociatedListenerFoundException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -311,6 +326,7 @@ module Aws::GlobalAccelerator
     #   <p>The date and time that the cross-account attachment was created.</p>
     #   @return [Time]
     class Attachment < Struct.new(
+      nil,
       :attachment_arn,
       :name,
       :principals,
@@ -326,6 +342,7 @@ module Aws::GlobalAccelerator
     # @!attribute message
     #   @return [String]
     class AttachmentNotFoundException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -416,6 +433,7 @@ module Aws::GlobalAccelerator
     #   			through bring your own IP address (BYOIP).</p>
     #   @return [Array<Types::ByoipCidrEvent>]
     class ByoipCidr < Struct.new(
+      nil,
       :cidr,
       :state,
       :events,
@@ -436,6 +454,7 @@ module Aws::GlobalAccelerator
     #   			bring your own IP address (BYOIP).</p>
     #   @return [Time]
     class ByoipCidrEvent < Struct.new(
+      nil,
       :message,
       :timestamp,
       keyword_init: true
@@ -447,6 +466,7 @@ module Aws::GlobalAccelerator
     # @!attribute message
     #   @return [String]
     class ByoipCidrNotFoundException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -464,6 +484,7 @@ module Aws::GlobalAccelerator
     #   <p>The signed authorization message for the prefix and account.</p>
     #   @return [String]
     class CidrAuthorizationContext < Struct.new(
+      nil,
       :message,
       :signature,
       keyword_init: true
@@ -475,6 +496,7 @@ module Aws::GlobalAccelerator
     # @!attribute message
     #   @return [String]
     class ConflictException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -516,6 +538,7 @@ module Aws::GlobalAccelerator
     #   		    in Global Accelerator</a> in the <i>Global Accelerator Developer Guide</i>.</p>
     #   @return [Array<Types::Tag>]
     class CreateAcceleratorRequest < Struct.new(
+      nil,
       :name,
       :ip_address_type,
       :ip_addresses,
@@ -531,6 +554,7 @@ module Aws::GlobalAccelerator
     #   <p>The accelerator that is created by specifying a listener and the supported IP address types.</p>
     #   @return [Types::Accelerator]
     class CreateAcceleratorResponse < Struct.new(
+      nil,
       :accelerator,
       keyword_init: true
     )
@@ -559,6 +583,7 @@ module Aws::GlobalAccelerator
     #   			in Global Accelerator</a> in the <i>Global Accelerator Developer Guide</i>.</p>
     #   @return [Array<Types::Tag>]
     class CreateCrossAccountAttachmentRequest < Struct.new(
+      nil,
       :name,
       :principals,
       :resources,
@@ -573,6 +598,7 @@ module Aws::GlobalAccelerator
     #   <p>Information about the cross-account attachment.</p>
     #   @return [Types::Attachment]
     class CreateCrossAccountAttachmentResponse < Struct.new(
+      nil,
       :cross_account_attachment,
       keyword_init: true
     )
@@ -614,6 +640,7 @@ module Aws::GlobalAccelerator
     #   	    in Global Accelerator</a> in the <i>Global Accelerator Developer Guide</i>.</p>
     #   @return [Array<Types::Tag>]
     class CreateCustomRoutingAcceleratorRequest < Struct.new(
+      nil,
       :name,
       :ip_address_type,
       :ip_addresses,
@@ -629,6 +656,7 @@ module Aws::GlobalAccelerator
     #   <p>The accelerator that is created.</p>
     #   @return [Types::CustomRoutingAccelerator]
     class CreateCustomRoutingAcceleratorResponse < Struct.new(
+      nil,
       :accelerator,
       keyword_init: true
     )
@@ -651,6 +679,7 @@ module Aws::GlobalAccelerator
     #   		uniqueness—of the request.</p>
     #   @return [String]
     class CreateCustomRoutingEndpointGroupRequest < Struct.new(
+      nil,
       :listener_arn,
       :endpoint_group_region,
       :destination_configurations,
@@ -664,6 +693,7 @@ module Aws::GlobalAccelerator
     #   <p>The information about the endpoint group created for a custom routing accelerator.</p>
     #   @return [Types::CustomRoutingEndpointGroup]
     class CreateCustomRoutingEndpointGroupResponse < Struct.new(
+      nil,
       :endpoint_group,
       keyword_init: true
     )
@@ -683,6 +713,7 @@ module Aws::GlobalAccelerator
     #   		uniqueness—of the request.</p>
     #   @return [String]
     class CreateCustomRoutingListenerRequest < Struct.new(
+      nil,
       :accelerator_arn,
       :port_ranges,
       :idempotency_token,
@@ -695,6 +726,7 @@ module Aws::GlobalAccelerator
     #   <p>The listener that you've created for a custom routing accelerator.</p>
     #   @return [Types::CustomRoutingListener]
     class CreateCustomRoutingListenerResponse < Struct.new(
+      nil,
       :listener,
       keyword_init: true
     )
@@ -751,6 +783,7 @@ module Aws::GlobalAccelerator
     #   			Overriding listener ports</a> in the <i>Global Accelerator Developer Guide</i>.</p>
     #   @return [Array<Types::PortOverride>]
     class CreateEndpointGroupRequest < Struct.new(
+      nil,
       :listener_arn,
       :endpoint_group_region,
       :endpoint_configurations,
@@ -771,6 +804,7 @@ module Aws::GlobalAccelerator
     #   <p>The information about the endpoint group that was created.</p>
     #   @return [Types::EndpointGroup]
     class CreateEndpointGroupResponse < Struct.new(
+      nil,
       :endpoint_group,
       keyword_init: true
     )
@@ -805,6 +839,7 @@ module Aws::GlobalAccelerator
     #   			uniqueness—of the request.</p>
     #   @return [String]
     class CreateListenerRequest < Struct.new(
+      nil,
       :accelerator_arn,
       :port_ranges,
       :protocol,
@@ -819,6 +854,7 @@ module Aws::GlobalAccelerator
     #   <p>The listener that you've created.</p>
     #   @return [Types::Listener]
     class CreateListenerResponse < Struct.new(
+      nil,
       :listener,
       keyword_init: true
     )
@@ -848,6 +884,7 @@ module Aws::GlobalAccelerator
     #   			CIDR range) that can be added to accelerators and principals that have permission to add them.</p>
     #   @return [String]
     class CrossAccountResource < Struct.new(
+      nil,
       :endpoint_id,
       :cidr,
       :attachment_arn,
@@ -894,6 +931,7 @@ module Aws::GlobalAccelerator
     #   <p>The date and time that the accelerator was last modified.</p>
     #   @return [Time]
     class CustomRoutingAccelerator < Struct.new(
+      nil,
       :accelerator_arn,
       :name,
       :ip_address_type,
@@ -928,6 +966,7 @@ module Aws::GlobalAccelerator
     #            <p>DOC-EXAMPLE-BUCKET//AWSLogs/aws_account_id</p>
     #   @return [String]
     class CustomRoutingAcceleratorAttributes < Struct.new(
+      nil,
       :flow_logs_enabled,
       :flow_logs_s3_bucket,
       :flow_logs_s3_prefix,
@@ -948,6 +987,7 @@ module Aws::GlobalAccelerator
     #   <p>The protocol for the endpoint group that is associated with a custom routing accelerator. The protocol can be either TCP or UDP.</p>
     #   @return [Array<String>]
     class CustomRoutingDestinationConfiguration < Struct.new(
+      nil,
       :from_port,
       :to_port,
       :protocols,
@@ -968,6 +1008,7 @@ module Aws::GlobalAccelerator
     #   <p>The protocol for the endpoint group that is associated with a custom routing accelerator. The protocol can be either TCP or UDP.</p>
     #   @return [Array<String>]
     class CustomRoutingDestinationDescription < Struct.new(
+      nil,
       :from_port,
       :to_port,
       :protocols,
@@ -986,6 +1027,7 @@ module Aws::GlobalAccelerator
     #   			that can be added to accelerators and principals that have permission to add the endpoints.</p>
     #   @return [String]
     class CustomRoutingEndpointConfiguration < Struct.new(
+      nil,
       :endpoint_id,
       :attachment_arn,
       keyword_init: true
@@ -1000,6 +1042,7 @@ module Aws::GlobalAccelerator
     #   			subnet ID. </p>
     #   @return [String]
     class CustomRoutingEndpointDescription < Struct.new(
+      nil,
       :endpoint_id,
       keyword_init: true
     )
@@ -1023,6 +1066,7 @@ module Aws::GlobalAccelerator
     #   			endpoint group to accept client traffic on.</p>
     #   @return [Array<Types::CustomRoutingEndpointDescription>]
     class CustomRoutingEndpointGroup < Struct.new(
+      nil,
       :endpoint_group_arn,
       :endpoint_group_region,
       :destination_descriptions,
@@ -1042,6 +1086,7 @@ module Aws::GlobalAccelerator
     #   				endpoints for custom routing accelerators</a>.</p>
     #   @return [Array<Types::PortRange>]
     class CustomRoutingListener < Struct.new(
+      nil,
       :listener_arn,
       :port_ranges,
       keyword_init: true
@@ -1053,6 +1098,7 @@ module Aws::GlobalAccelerator
     #   <p>The Amazon Resource Name (ARN) of an accelerator.</p>
     #   @return [String]
     class DeleteAcceleratorRequest < Struct.new(
+      nil,
       :accelerator_arn,
       keyword_init: true
     )
@@ -1063,6 +1109,7 @@ module Aws::GlobalAccelerator
     #   <p>The Amazon Resource Name (ARN) for the cross-account attachment to delete.</p>
     #   @return [String]
     class DeleteCrossAccountAttachmentRequest < Struct.new(
+      nil,
       :attachment_arn,
       keyword_init: true
     )
@@ -1073,6 +1120,7 @@ module Aws::GlobalAccelerator
     #   <p>The Amazon Resource Name (ARN) of the custom routing accelerator to delete.</p>
     #   @return [String]
     class DeleteCustomRoutingAcceleratorRequest < Struct.new(
+      nil,
       :accelerator_arn,
       keyword_init: true
     )
@@ -1083,6 +1131,7 @@ module Aws::GlobalAccelerator
     #   <p>The Amazon Resource Name (ARN) of the endpoint group to delete.</p>
     #   @return [String]
     class DeleteCustomRoutingEndpointGroupRequest < Struct.new(
+      nil,
       :endpoint_group_arn,
       keyword_init: true
     )
@@ -1093,6 +1142,7 @@ module Aws::GlobalAccelerator
     #   <p>The Amazon Resource Name (ARN) of the listener to delete.</p>
     #   @return [String]
     class DeleteCustomRoutingListenerRequest < Struct.new(
+      nil,
       :listener_arn,
       keyword_init: true
     )
@@ -1103,6 +1153,7 @@ module Aws::GlobalAccelerator
     #   <p>The Amazon Resource Name (ARN) of the endpoint group to delete.</p>
     #   @return [String]
     class DeleteEndpointGroupRequest < Struct.new(
+      nil,
       :endpoint_group_arn,
       keyword_init: true
     )
@@ -1113,6 +1164,7 @@ module Aws::GlobalAccelerator
     #   <p>The Amazon Resource Name (ARN) of the listener.</p>
     #   @return [String]
     class DeleteListenerRequest < Struct.new(
+      nil,
       :listener_arn,
       keyword_init: true
     )
@@ -1145,6 +1197,7 @@ module Aws::GlobalAccelerator
     #            <p>The default value is FALSE.</p>
     #   @return [Boolean]
     class DenyCustomRoutingTrafficRequest < Struct.new(
+      nil,
       :endpoint_group_arn,
       :endpoint_id,
       :destination_addresses,
@@ -1163,6 +1216,7 @@ module Aws::GlobalAccelerator
     #   			the Global Accelerator Developer Guide.</p>
     #   @return [String]
     class DeprovisionByoipCidrRequest < Struct.new(
+      nil,
       :cidr,
       keyword_init: true
     )
@@ -1173,6 +1227,7 @@ module Aws::GlobalAccelerator
     #   <p>Information about the address range.</p>
     #   @return [Types::ByoipCidr]
     class DeprovisionByoipCidrResponse < Struct.new(
+      nil,
       :byoip_cidr,
       keyword_init: true
     )
@@ -1183,6 +1238,7 @@ module Aws::GlobalAccelerator
     #   <p>The Amazon Resource Name (ARN) of the accelerator with the attributes that you want to describe.</p>
     #   @return [String]
     class DescribeAcceleratorAttributesRequest < Struct.new(
+      nil,
       :accelerator_arn,
       keyword_init: true
     )
@@ -1193,6 +1249,7 @@ module Aws::GlobalAccelerator
     #   <p>The attributes of the accelerator.</p>
     #   @return [Types::AcceleratorAttributes]
     class DescribeAcceleratorAttributesResponse < Struct.new(
+      nil,
       :accelerator_attributes,
       keyword_init: true
     )
@@ -1203,6 +1260,7 @@ module Aws::GlobalAccelerator
     #   <p>The Amazon Resource Name (ARN) of the accelerator to describe.</p>
     #   @return [String]
     class DescribeAcceleratorRequest < Struct.new(
+      nil,
       :accelerator_arn,
       keyword_init: true
     )
@@ -1213,6 +1271,7 @@ module Aws::GlobalAccelerator
     #   <p>The description of the accelerator.</p>
     #   @return [Types::Accelerator]
     class DescribeAcceleratorResponse < Struct.new(
+      nil,
       :accelerator,
       keyword_init: true
     )
@@ -1223,6 +1282,7 @@ module Aws::GlobalAccelerator
     #   <p>The Amazon Resource Name (ARN) for the cross-account attachment to describe.</p>
     #   @return [String]
     class DescribeCrossAccountAttachmentRequest < Struct.new(
+      nil,
       :attachment_arn,
       keyword_init: true
     )
@@ -1233,6 +1293,7 @@ module Aws::GlobalAccelerator
     #   <p>Information about the cross-account attachment.</p>
     #   @return [Types::Attachment]
     class DescribeCrossAccountAttachmentResponse < Struct.new(
+      nil,
       :cross_account_attachment,
       keyword_init: true
     )
@@ -1243,6 +1304,7 @@ module Aws::GlobalAccelerator
     #   <p>The Amazon Resource Name (ARN) of the custom routing accelerator to describe the attributes for.</p>
     #   @return [String]
     class DescribeCustomRoutingAcceleratorAttributesRequest < Struct.new(
+      nil,
       :accelerator_arn,
       keyword_init: true
     )
@@ -1253,6 +1315,7 @@ module Aws::GlobalAccelerator
     #   <p>The attributes of the custom routing accelerator.</p>
     #   @return [Types::CustomRoutingAcceleratorAttributes]
     class DescribeCustomRoutingAcceleratorAttributesResponse < Struct.new(
+      nil,
       :accelerator_attributes,
       keyword_init: true
     )
@@ -1263,6 +1326,7 @@ module Aws::GlobalAccelerator
     #   <p>The Amazon Resource Name (ARN) of the accelerator to describe.</p>
     #   @return [String]
     class DescribeCustomRoutingAcceleratorRequest < Struct.new(
+      nil,
       :accelerator_arn,
       keyword_init: true
     )
@@ -1273,6 +1337,7 @@ module Aws::GlobalAccelerator
     #   <p>The description of the custom routing accelerator.</p>
     #   @return [Types::CustomRoutingAccelerator]
     class DescribeCustomRoutingAcceleratorResponse < Struct.new(
+      nil,
       :accelerator,
       keyword_init: true
     )
@@ -1283,6 +1348,7 @@ module Aws::GlobalAccelerator
     #   <p>The Amazon Resource Name (ARN) of the endpoint group to describe.</p>
     #   @return [String]
     class DescribeCustomRoutingEndpointGroupRequest < Struct.new(
+      nil,
       :endpoint_group_arn,
       keyword_init: true
     )
@@ -1293,6 +1359,7 @@ module Aws::GlobalAccelerator
     #   <p>The description of an endpoint group for a custom routing accelerator.</p>
     #   @return [Types::CustomRoutingEndpointGroup]
     class DescribeCustomRoutingEndpointGroupResponse < Struct.new(
+      nil,
       :endpoint_group,
       keyword_init: true
     )
@@ -1303,6 +1370,7 @@ module Aws::GlobalAccelerator
     #   <p>The Amazon Resource Name (ARN) of the listener to describe.</p>
     #   @return [String]
     class DescribeCustomRoutingListenerRequest < Struct.new(
+      nil,
       :listener_arn,
       keyword_init: true
     )
@@ -1313,6 +1381,7 @@ module Aws::GlobalAccelerator
     #   <p>The description of a listener for a custom routing accelerator.</p>
     #   @return [Types::CustomRoutingListener]
     class DescribeCustomRoutingListenerResponse < Struct.new(
+      nil,
       :listener,
       keyword_init: true
     )
@@ -1323,6 +1392,7 @@ module Aws::GlobalAccelerator
     #   <p>The Amazon Resource Name (ARN) of the endpoint group to describe.</p>
     #   @return [String]
     class DescribeEndpointGroupRequest < Struct.new(
+      nil,
       :endpoint_group_arn,
       keyword_init: true
     )
@@ -1333,6 +1403,7 @@ module Aws::GlobalAccelerator
     #   <p>The description of an endpoint group.</p>
     #   @return [Types::EndpointGroup]
     class DescribeEndpointGroupResponse < Struct.new(
+      nil,
       :endpoint_group,
       keyword_init: true
     )
@@ -1343,6 +1414,7 @@ module Aws::GlobalAccelerator
     #   <p>The Amazon Resource Name (ARN) of the listener to describe.</p>
     #   @return [String]
     class DescribeListenerRequest < Struct.new(
+      nil,
       :listener_arn,
       keyword_init: true
     )
@@ -1353,6 +1425,7 @@ module Aws::GlobalAccelerator
     #   <p>The description of a listener.</p>
     #   @return [Types::Listener]
     class DescribeListenerResponse < Struct.new(
+      nil,
       :listener,
       keyword_init: true
     )
@@ -1388,6 +1461,7 @@ module Aws::GlobalAccelerator
     #   			traffic is allowed to the destination, or DENY, if traffic is not allowed to the destination.</p>
     #   @return [String]
     class DestinationPortMapping < Struct.new(
+      nil,
       :accelerator_arn,
       :accelerator_socket_addresses,
       :endpoint_group_arn,
@@ -1405,6 +1479,7 @@ module Aws::GlobalAccelerator
     # @!attribute message
     #   @return [String]
     class EndpointAlreadyExistsException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -1442,6 +1517,7 @@ module Aws::GlobalAccelerator
     #   			that can be added to accelerators and principals that have permission to add the endpoints.</p>
     #   @return [String]
     class EndpointConfiguration < Struct.new(
+      nil,
       :endpoint_id,
       :weight,
       :client_ip_preservation_enabled,
@@ -1484,6 +1560,7 @@ module Aws::GlobalAccelerator
     #   			Preserve client IP addresses in Global Accelerator</a> in the <i>Global Accelerator Developer Guide</i>.</p>
     #   @return [Boolean]
     class EndpointDescription < Struct.new(
+      nil,
       :endpoint_id,
       :weight,
       :health_state,
@@ -1539,6 +1616,7 @@ module Aws::GlobalAccelerator
     #   			endpoint to receive traffic on. </p>
     #   @return [Array<Types::PortOverride>]
     class EndpointGroup < Struct.new(
+      nil,
       :endpoint_group_arn,
       :endpoint_group_region,
       :endpoint_descriptions,
@@ -1558,6 +1636,7 @@ module Aws::GlobalAccelerator
     # @!attribute message
     #   @return [String]
     class EndpointGroupAlreadyExistsException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -1568,6 +1647,7 @@ module Aws::GlobalAccelerator
     # @!attribute message
     #   @return [String]
     class EndpointGroupNotFoundException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -1587,6 +1667,7 @@ module Aws::GlobalAccelerator
     #   			traffic travels to applications on the endpoint fronted by the accelerator.</p>
     #   @return [Boolean]
     class EndpointIdentifier < Struct.new(
+      nil,
       :endpoint_id,
       :client_ip_preservation_enabled,
       keyword_init: true
@@ -1598,6 +1679,7 @@ module Aws::GlobalAccelerator
     # @!attribute message
     #   @return [String]
     class EndpointNotFoundException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -1609,6 +1691,7 @@ module Aws::GlobalAccelerator
     # @!attribute message
     #   @return [String]
     class IncorrectCidrStateException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -1619,6 +1702,7 @@ module Aws::GlobalAccelerator
     # @!attribute message
     #   @return [String]
     class InternalServiceErrorException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -1629,6 +1713,7 @@ module Aws::GlobalAccelerator
     # @!attribute message
     #   @return [String]
     class InvalidArgumentException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -1639,6 +1724,7 @@ module Aws::GlobalAccelerator
     # @!attribute message
     #   @return [String]
     class InvalidNextTokenException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -1649,6 +1735,7 @@ module Aws::GlobalAccelerator
     # @!attribute message
     #   @return [String]
     class InvalidPortRangeException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -1668,6 +1755,7 @@ module Aws::GlobalAccelerator
     #   <p>The types of IP addresses included in this IP set. </p>
     #   @return [String]
     class IpSet < Struct.new(
+      nil,
       :ip_family,
       :ip_addresses,
       :ip_address_family,
@@ -1680,6 +1768,7 @@ module Aws::GlobalAccelerator
     # @!attribute message
     #   @return [String]
     class LimitExceededException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -1693,6 +1782,7 @@ module Aws::GlobalAccelerator
     #   <p>The token for the next set of results. You receive this token from a previous call.</p>
     #   @return [String]
     class ListAcceleratorsRequest < Struct.new(
+      nil,
       :max_results,
       :next_token,
       keyword_init: true
@@ -1707,6 +1797,7 @@ module Aws::GlobalAccelerator
     #   <p>The token for the next set of results. You receive this token from a previous call.</p>
     #   @return [String]
     class ListAcceleratorsResponse < Struct.new(
+      nil,
       :accelerators,
       :next_token,
       keyword_init: true
@@ -1722,6 +1813,7 @@ module Aws::GlobalAccelerator
     #   <p>The token for the next page of results.</p>
     #   @return [String]
     class ListByoipCidrsRequest < Struct.new(
+      nil,
       :max_results,
       :next_token,
       keyword_init: true
@@ -1736,6 +1828,7 @@ module Aws::GlobalAccelerator
     #   <p>The token for the next page of results.</p>
     #   @return [String]
     class ListByoipCidrsResponse < Struct.new(
+      nil,
       :byoip_cidrs,
       :next_token,
       keyword_init: true
@@ -1750,6 +1843,7 @@ module Aws::GlobalAccelerator
     #   <p>The token for the next set of results. You receive this token from a previous call.</p>
     #   @return [String]
     class ListCrossAccountAttachmentsRequest < Struct.new(
+      nil,
       :max_results,
       :next_token,
       keyword_init: true
@@ -1764,6 +1858,7 @@ module Aws::GlobalAccelerator
     #   <p>The token for the next set of results. You receive this token from a previous call.</p>
     #   @return [String]
     class ListCrossAccountAttachmentsResponse < Struct.new(
+      nil,
       :cross_account_attachments,
       :next_token,
       keyword_init: true
@@ -1772,6 +1867,7 @@ module Aws::GlobalAccelerator
     end
 
     class ListCrossAccountResourceAccountsRequest < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1782,6 +1878,7 @@ module Aws::GlobalAccelerator
     #   			with resources listed in the same attachment.</p>
     #   @return [Array<String>]
     class ListCrossAccountResourceAccountsResponse < Struct.new(
+      nil,
       :resource_owner_aws_account_ids,
       keyword_init: true
     )
@@ -1801,6 +1898,7 @@ module Aws::GlobalAccelerator
     #   <p>The token for the next set of results. You receive this token from a previous call.</p>
     #   @return [String]
     class ListCrossAccountResourcesRequest < Struct.new(
+      nil,
       :accelerator_arn,
       :resource_owner_aws_account_id,
       :max_results,
@@ -1817,6 +1915,7 @@ module Aws::GlobalAccelerator
     #   <p>The token for the next set of results. You receive this token from a previous call.</p>
     #   @return [String]
     class ListCrossAccountResourcesResponse < Struct.new(
+      nil,
       :cross_account_resources,
       :next_token,
       keyword_init: true
@@ -1831,6 +1930,7 @@ module Aws::GlobalAccelerator
     #   <p>The token for the next set of results. You receive this token from a previous call.</p>
     #   @return [String]
     class ListCustomRoutingAcceleratorsRequest < Struct.new(
+      nil,
       :max_results,
       :next_token,
       keyword_init: true
@@ -1845,6 +1945,7 @@ module Aws::GlobalAccelerator
     #   <p>The token for the next set of results. You receive this token from a previous call.</p>
     #   @return [String]
     class ListCustomRoutingAcceleratorsResponse < Struct.new(
+      nil,
       :accelerators,
       :next_token,
       keyword_init: true
@@ -1862,6 +1963,7 @@ module Aws::GlobalAccelerator
     #   <p>The token for the next set of results. You receive this token from a previous call.</p>
     #   @return [String]
     class ListCustomRoutingEndpointGroupsRequest < Struct.new(
+      nil,
       :listener_arn,
       :max_results,
       :next_token,
@@ -1877,6 +1979,7 @@ module Aws::GlobalAccelerator
     #   <p>The token for the next set of results. You receive this token from a previous call.</p>
     #   @return [String]
     class ListCustomRoutingEndpointGroupsResponse < Struct.new(
+      nil,
       :endpoint_groups,
       :next_token,
       keyword_init: true
@@ -1894,6 +1997,7 @@ module Aws::GlobalAccelerator
     #   <p>The token for the next set of results. You receive this token from a previous call.</p>
     #   @return [String]
     class ListCustomRoutingListenersRequest < Struct.new(
+      nil,
       :accelerator_arn,
       :max_results,
       :next_token,
@@ -1909,6 +2013,7 @@ module Aws::GlobalAccelerator
     #   <p>The token for the next set of results. You receive this token from a previous call.</p>
     #   @return [String]
     class ListCustomRoutingListenersResponse < Struct.new(
+      nil,
       :listeners,
       :next_token,
       keyword_init: true
@@ -1930,6 +2035,7 @@ module Aws::GlobalAccelerator
     #   <p>The token for the next set of results. You receive this token from a previous call.</p>
     #   @return [String]
     class ListCustomRoutingPortMappingsByDestinationRequest < Struct.new(
+      nil,
       :endpoint_id,
       :destination_address,
       :max_results,
@@ -1946,6 +2052,7 @@ module Aws::GlobalAccelerator
     #   <p>The token for the next set of results. You receive this token from a previous call.</p>
     #   @return [String]
     class ListCustomRoutingPortMappingsByDestinationResponse < Struct.new(
+      nil,
       :destination_port_mappings,
       :next_token,
       keyword_init: true
@@ -1966,6 +2073,7 @@ module Aws::GlobalAccelerator
     #   <p>The token for the next set of results. You receive this token from a previous call.</p>
     #   @return [String]
     class ListCustomRoutingPortMappingsRequest < Struct.new(
+      nil,
       :accelerator_arn,
       :endpoint_group_arn,
       :max_results,
@@ -1982,6 +2090,7 @@ module Aws::GlobalAccelerator
     #   <p>The token for the next set of results. You receive this token from a previous call.</p>
     #   @return [String]
     class ListCustomRoutingPortMappingsResponse < Struct.new(
+      nil,
       :port_mappings,
       :next_token,
       keyword_init: true
@@ -1999,6 +2108,7 @@ module Aws::GlobalAccelerator
     #   <p>The token for the next set of results. You receive this token from a previous call.</p>
     #   @return [String]
     class ListEndpointGroupsRequest < Struct.new(
+      nil,
       :listener_arn,
       :max_results,
       :next_token,
@@ -2014,6 +2124,7 @@ module Aws::GlobalAccelerator
     #   <p>The token for the next set of results. You receive this token from a previous call.</p>
     #   @return [String]
     class ListEndpointGroupsResponse < Struct.new(
+      nil,
       :endpoint_groups,
       :next_token,
       keyword_init: true
@@ -2031,6 +2142,7 @@ module Aws::GlobalAccelerator
     #   <p>The token for the next set of results. You receive this token from a previous call.</p>
     #   @return [String]
     class ListListenersRequest < Struct.new(
+      nil,
       :accelerator_arn,
       :max_results,
       :next_token,
@@ -2046,6 +2158,7 @@ module Aws::GlobalAccelerator
     #   <p>The token for the next set of results. You receive this token from a previous call.</p>
     #   @return [String]
     class ListListenersResponse < Struct.new(
+      nil,
       :listeners,
       :next_token,
       keyword_init: true
@@ -2057,6 +2170,7 @@ module Aws::GlobalAccelerator
     #   <p>The Amazon Resource Name (ARN) of the accelerator to list tags for. An ARN uniquely identifies an accelerator.</p>
     #   @return [String]
     class ListTagsForResourceRequest < Struct.new(
+      nil,
       :resource_arn,
       keyword_init: true
     )
@@ -2067,6 +2181,7 @@ module Aws::GlobalAccelerator
     #   <p>Root level tag for the Tags parameters.</p>
     #   @return [Array<Types::Tag>]
     class ListTagsForResourceResponse < Struct.new(
+      nil,
       :tags,
       keyword_init: true
     )
@@ -2098,6 +2213,7 @@ module Aws::GlobalAccelerator
     #            <p>The default value is <code>NONE</code>.</p>
     #   @return [String]
     class Listener < Struct.new(
+      nil,
       :listener_arn,
       :port_ranges,
       :protocol,
@@ -2111,6 +2227,7 @@ module Aws::GlobalAccelerator
     # @!attribute message
     #   @return [String]
     class ListenerNotFoundException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -2141,6 +2258,7 @@ module Aws::GlobalAccelerator
     #   			traffic is allowed to the destination, or DENY, if traffic is not allowed to the destination.</p>
     #   @return [String]
     class PortMapping < Struct.new(
+      nil,
       :accelerator_port,
       :endpoint_group_arn,
       :endpoint_id,
@@ -2167,6 +2285,7 @@ module Aws::GlobalAccelerator
     #   		    such as the Application Load Balancer or Amazon EC2 instance.</p>
     #   @return [Integer]
     class PortOverride < Struct.new(
+      nil,
       :listener_port,
       :endpoint_port,
       keyword_init: true
@@ -2182,6 +2301,7 @@ module Aws::GlobalAccelerator
     #   <p>The last port in the range of ports, inclusive.</p>
     #   @return [Integer]
     class PortRange < Struct.new(
+      nil,
       :from_port,
       :to_port,
       keyword_init: true
@@ -2203,6 +2323,7 @@ module Aws::GlobalAccelerator
     #   		</p>
     #   @return [Types::CidrAuthorizationContext]
     class ProvisionByoipCidrRequest < Struct.new(
+      nil,
       :cidr,
       :cidr_authorization_context,
       keyword_init: true
@@ -2214,6 +2335,7 @@ module Aws::GlobalAccelerator
     #   <p>Information about the address range.</p>
     #   @return [Types::ByoipCidr]
     class ProvisionByoipCidrResponse < Struct.new(
+      nil,
       :byoip_cidr,
       keyword_init: true
     )
@@ -2228,6 +2350,7 @@ module Aws::GlobalAccelerator
     #   <p>The Amazon Resource Name (ARN) of the endpoint group to remove endpoints from.</p>
     #   @return [String]
     class RemoveCustomRoutingEndpointsRequest < Struct.new(
+      nil,
       :endpoint_ids,
       :endpoint_group_arn,
       keyword_init: true
@@ -2242,6 +2365,7 @@ module Aws::GlobalAccelerator
     #   <p>The Amazon Resource Name (ARN) of the endpoint group.</p>
     #   @return [String]
     class RemoveEndpointsRequest < Struct.new(
+      nil,
       :endpoint_identifiers,
       :endpoint_group_arn,
       keyword_init: true
@@ -2268,6 +2392,7 @@ module Aws::GlobalAccelerator
     #   <p>The Amazon Web Services Region where a shared endpoint resource is located.</p>
     #   @return [String]
     class Resource < Struct.new(
+      nil,
       :endpoint_id,
       :cidr,
       :region,
@@ -2289,6 +2414,7 @@ module Aws::GlobalAccelerator
     #   <p>The port for the socket address.</p>
     #   @return [Integer]
     class SocketAddress < Struct.new(
+      nil,
       :ip_address,
       :port,
       keyword_init: true
@@ -2304,6 +2430,7 @@ module Aws::GlobalAccelerator
     #   <p>A string that contains a <code>Tag</code> value.</p>
     #   @return [String]
     class Tag < Struct.new(
+      nil,
       :key,
       :value,
       keyword_init: true
@@ -2318,6 +2445,7 @@ module Aws::GlobalAccelerator
     #   <p>The tags to add to a resource. A tag consists of a key and a value that you define.</p>
     #   @return [Array<Types::Tag>]
     class TagResourceRequest < Struct.new(
+      nil,
       :resource_arn,
       :tags,
       keyword_init: true
@@ -2326,6 +2454,7 @@ module Aws::GlobalAccelerator
     end
 
     class TagResourceResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -2335,6 +2464,7 @@ module Aws::GlobalAccelerator
     # @!attribute message
     #   @return [String]
     class TransactionInProgressException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -2348,6 +2478,7 @@ module Aws::GlobalAccelerator
     #   <p>The tag key pairs that you want to remove from the specified resources.</p>
     #   @return [Array<String>]
     class UntagResourceRequest < Struct.new(
+      nil,
       :resource_arn,
       :tag_keys,
       keyword_init: true
@@ -2356,6 +2487,7 @@ module Aws::GlobalAccelerator
     end
 
     class UntagResourceResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -2383,6 +2515,7 @@ module Aws::GlobalAccelerator
     #            <p>s3-bucket_name//AWSLogs/aws_account_id</p>
     #   @return [String]
     class UpdateAcceleratorAttributesRequest < Struct.new(
+      nil,
       :accelerator_arn,
       :flow_logs_enabled,
       :flow_logs_s3_bucket,
@@ -2396,6 +2529,7 @@ module Aws::GlobalAccelerator
     #   <p>Updated attributes for the accelerator.</p>
     #   @return [Types::AcceleratorAttributes]
     class UpdateAcceleratorAttributesResponse < Struct.new(
+      nil,
       :accelerator_attributes,
       keyword_init: true
     )
@@ -2420,6 +2554,7 @@ module Aws::GlobalAccelerator
     #            <p>If the value is set to true, the accelerator cannot be deleted. If set to false, the accelerator can be deleted.</p>
     #   @return [Boolean]
     class UpdateAcceleratorRequest < Struct.new(
+      nil,
       :accelerator_arn,
       :name,
       :ip_address_type,
@@ -2434,6 +2569,7 @@ module Aws::GlobalAccelerator
     #   <p>Information about the updated accelerator.</p>
     #   @return [Types::Accelerator]
     class UpdateAcceleratorResponse < Struct.new(
+      nil,
       :accelerator,
       keyword_init: true
     )
@@ -2469,6 +2605,7 @@ module Aws::GlobalAccelerator
     #            <p>To remove more than one resource, separate the resource ARNs with commas.</p>
     #   @return [Array<Types::Resource>]
     class UpdateCrossAccountAttachmentRequest < Struct.new(
+      nil,
       :attachment_arn,
       :name,
       :add_principals,
@@ -2484,6 +2621,7 @@ module Aws::GlobalAccelerator
     #   <p>Information about the updated cross-account attachment.</p>
     #   @return [Types::Attachment]
     class UpdateCrossAccountAttachmentResponse < Struct.new(
+      nil,
       :cross_account_attachment,
       keyword_init: true
     )
@@ -2512,6 +2650,7 @@ module Aws::GlobalAccelerator
     #            <p>DOC-EXAMPLE-BUCKET//AWSLogs/aws_account_id</p>
     #   @return [String]
     class UpdateCustomRoutingAcceleratorAttributesRequest < Struct.new(
+      nil,
       :accelerator_arn,
       :flow_logs_enabled,
       :flow_logs_s3_bucket,
@@ -2525,6 +2664,7 @@ module Aws::GlobalAccelerator
     #   <p>Updated custom routing accelerator.</p>
     #   @return [Types::CustomRoutingAcceleratorAttributes]
     class UpdateCustomRoutingAcceleratorAttributesResponse < Struct.new(
+      nil,
       :accelerator_attributes,
       keyword_init: true
     )
@@ -2549,6 +2689,7 @@ module Aws::GlobalAccelerator
     #            <p>If the value is set to true, the accelerator cannot be deleted. If set to false, the accelerator can be deleted.</p>
     #   @return [Boolean]
     class UpdateCustomRoutingAcceleratorRequest < Struct.new(
+      nil,
       :accelerator_arn,
       :name,
       :ip_address_type,
@@ -2563,6 +2704,7 @@ module Aws::GlobalAccelerator
     #   <p>Information about the updated custom routing accelerator.</p>
     #   @return [Types::CustomRoutingAccelerator]
     class UpdateCustomRoutingAcceleratorResponse < Struct.new(
+      nil,
       :accelerator,
       keyword_init: true
     )
@@ -2579,6 +2721,7 @@ module Aws::GlobalAccelerator
     #   		endpoints for custom routing accelerators</a>.</p>
     #   @return [Array<Types::PortRange>]
     class UpdateCustomRoutingListenerRequest < Struct.new(
+      nil,
       :listener_arn,
       :port_ranges,
       keyword_init: true
@@ -2590,6 +2733,7 @@ module Aws::GlobalAccelerator
     #   <p>Information for the updated listener for a custom routing accelerator.</p>
     #   @return [Types::CustomRoutingListener]
     class UpdateCustomRoutingListenerResponse < Struct.new(
+      nil,
       :listener,
       keyword_init: true
     )
@@ -2638,6 +2782,7 @@ module Aws::GlobalAccelerator
     #   			Overriding listener ports</a> in the <i>Global Accelerator Developer Guide</i>.</p>
     #   @return [Array<Types::PortOverride>]
     class UpdateEndpointGroupRequest < Struct.new(
+      nil,
       :endpoint_group_arn,
       :endpoint_configurations,
       :traffic_dial_percentage,
@@ -2656,6 +2801,7 @@ module Aws::GlobalAccelerator
     #   <p>The information about the endpoint group that was updated.</p>
     #   @return [Types::EndpointGroup]
     class UpdateEndpointGroupResponse < Struct.new(
+      nil,
       :endpoint_group,
       keyword_init: true
     )
@@ -2686,6 +2832,7 @@ module Aws::GlobalAccelerator
     #            <p>The default value is <code>NONE</code>.</p>
     #   @return [String]
     class UpdateListenerRequest < Struct.new(
+      nil,
       :listener_arn,
       :port_ranges,
       :protocol,
@@ -2699,6 +2846,7 @@ module Aws::GlobalAccelerator
     #   <p>Information for the updated listener.</p>
     #   @return [Types::Listener]
     class UpdateListenerResponse < Struct.new(
+      nil,
       :listener,
       keyword_init: true
     )
@@ -2712,6 +2860,7 @@ module Aws::GlobalAccelerator
     #   			the Global Accelerator Developer Guide.</p>
     #   @return [String]
     class WithdrawByoipCidrRequest < Struct.new(
+      nil,
       :cidr,
       keyword_init: true
     )
@@ -2722,6 +2871,7 @@ module Aws::GlobalAccelerator
     #   <p>Information about the BYOIP address pool.</p>
     #   @return [Types::ByoipCidr]
     class WithdrawByoipCidrResponse < Struct.new(
+      nil,
       :byoip_cidr,
       keyword_init: true
     )

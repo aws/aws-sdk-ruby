@@ -10,6 +10,7 @@ module Aws::PaymentCryptography
     # @!attribute message
     #   @return [String]
     class AccessDeniedException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -24,6 +25,7 @@ module Aws::PaymentCryptography
     #   <p>The list of Amazon Web Services Regions to add to the key's replication configuration.</p> <p>Each region must be a valid Amazon Web Services Region where Amazon Web Services Payment Cryptography is available. The key will be replicated to these regions, allowing cryptographic operations to be performed closer to your applications.</p>
     #   @return [Array<String>]
     class AddKeyReplicationRegionsInput < Struct.new(
+      nil,
       :key_identifier,
       :replication_regions,
       keyword_init: true
@@ -36,6 +38,7 @@ module Aws::PaymentCryptography
     #   <p>The updated key metadata after adding the replication regions.</p> <p>This includes the current state of the key and its replication configuration.</p>
     #   @return [Types::Key]
     class AddKeyReplicationRegionsOutput < Struct.new(
+      nil,
       :key,
       keyword_init: true
     )
@@ -50,6 +53,7 @@ module Aws::PaymentCryptography
     #   <p>The <code>KeyARN</code> of the key associated with the alias.</p>
     #   @return [String]
     class Alias < Struct.new(
+      nil,
       :alias_name,
       :key_arn,
       keyword_init: true
@@ -80,6 +84,7 @@ module Aws::PaymentCryptography
     #   Email to be used in the certificate signing request
     #   @return [String]
     class CertificateSubjectType < Struct.new(
+      nil,
       :common_name,
       :organization_unit,
       :organization,
@@ -96,6 +101,7 @@ module Aws::PaymentCryptography
     # @!attribute message
     #   @return [String]
     class ConflictException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -109,6 +115,7 @@ module Aws::PaymentCryptography
     #   <p>The <code>KeyARN</code> of the key to associate with the alias.</p>
     #   @return [String]
     class CreateAliasInput < Struct.new(
+      nil,
       :alias_name,
       :key_arn,
       keyword_init: true
@@ -120,6 +127,7 @@ module Aws::PaymentCryptography
     #   <p>The alias for the key.</p>
     #   @return [Types::Alias]
     class CreateAliasOutput < Struct.new(
+      nil,
       :alias,
       keyword_init: true
     )
@@ -148,6 +156,7 @@ module Aws::PaymentCryptography
     #   <p>A list of Amazon Web Services Regions for key replication operations.</p> <p>Each region in the list must be a valid Amazon Web Services Region identifier where Amazon Web Services Payment Cryptography is available. This list is used to specify which regions should be added to or removed from a key's replication configuration.</p>
     #   @return [Array<String>]
     class CreateKeyInput < Struct.new(
+      nil,
       :key_attributes,
       :key_check_value_algorithm,
       :exportable,
@@ -164,6 +173,7 @@ module Aws::PaymentCryptography
     #   <p>The key material that contains all the key attributes.</p>
     #   @return [Types::Key]
     class CreateKeyOutput < Struct.new(
+      nil,
       :key,
       keyword_init: true
     )
@@ -174,6 +184,7 @@ module Aws::PaymentCryptography
     #   <p>A friendly name that you can use to refer Amazon Web Services Payment Cryptography key. This value must begin with <code>alias/</code> followed by a name, such as <code>alias/ExampleAlias</code>.</p>
     #   @return [String]
     class DeleteAliasInput < Struct.new(
+      nil,
       :alias_name,
       keyword_init: true
     )
@@ -181,6 +192,7 @@ module Aws::PaymentCryptography
     end
 
     class DeleteAliasOutput < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -193,6 +205,7 @@ module Aws::PaymentCryptography
     #   <p>The waiting period for key deletion. The default value is seven days.</p>
     #   @return [Integer]
     class DeleteKeyInput < Struct.new(
+      nil,
       :key_identifier,
       :delete_key_in_days,
       keyword_init: true
@@ -204,6 +217,7 @@ module Aws::PaymentCryptography
     #   <p>The <code>KeyARN</code> of the key that is scheduled for deletion.</p>
     #   @return [Types::Key]
     class DeleteKeyOutput < Struct.new(
+      nil,
       :key,
       keyword_init: true
     )
@@ -230,6 +244,7 @@ module Aws::PaymentCryptography
     #   <p>The list of Amazon Web Services Regions to remove from the account's default replication regions.</p> <p>New keys created after this operation will not automatically be replicated to these regions, though existing keys with replication to these regions will be unaffected.</p>
     #   @return [Array<String>]
     class DisableDefaultKeyReplicationRegionsInput < Struct.new(
+      nil,
       :replication_regions,
       keyword_init: true
     )
@@ -241,6 +256,7 @@ module Aws::PaymentCryptography
     #   <p>The remaining list of regions where default key replication is still enabled for the account.</p> <p>This reflects the account's default replication configuration after removing the specified regions.</p>
     #   @return [Array<String>]
     class DisableDefaultKeyReplicationRegionsOutput < Struct.new(
+      nil,
       :enabled_replication_regions,
       keyword_init: true
     )
@@ -252,6 +268,7 @@ module Aws::PaymentCryptography
     #   <p>The list of Amazon Web Services Regions to enable as default replication regions for the account.</p> <p>New keys created in this account will automatically be replicated to these regions unless explicitly overridden during key creation.</p>
     #   @return [Array<String>]
     class EnableDefaultKeyReplicationRegionsInput < Struct.new(
+      nil,
       :replication_regions,
       keyword_init: true
     )
@@ -263,6 +280,7 @@ module Aws::PaymentCryptography
     #   <p>The complete list of regions where default key replication is now enabled for the account.</p> <p>This includes both previously enabled regions and the newly added regions from this operation.</p>
     #   @return [Array<String>]
     class EnableDefaultKeyReplicationRegionsOutput < Struct.new(
+      nil,
       :enabled_replication_regions,
       keyword_init: true
     )
@@ -277,6 +295,7 @@ module Aws::PaymentCryptography
     #   <p>The algorithm that Amazon Web Services Payment Cryptography uses to calculate the key check value (KCV). It is used to validate the key integrity. Specify KCV for IPEK export only.</p> <p>For TDES keys, the KCV is computed by encrypting 8 bytes, each with value of zero, with the key to be checked and retaining the 3 highest order bytes of the encrypted result. For AES keys, the KCV is computed using a CMAC algorithm where the input data is 16 bytes of zero and retaining the 3 highest order bytes of the encrypted result.</p>
     #   @return [String]
     class ExportAttributes < Struct.new(
+      nil,
       :export_dukpt_initial_key,
       :key_check_value_algorithm,
       keyword_init: true
@@ -310,6 +329,7 @@ module Aws::PaymentCryptography
     #   <p>Optional metadata for export associated with the key material. This data is signed but transmitted in clear text.</p>
     #   @return [Types::KeyBlockHeaders]
     class ExportDiffieHellmanTr31KeyBlock < Struct.new(
+      nil,
       :private_key_identifier,
       :certificate_authority_public_key_identifier,
       :public_key_certificate,
@@ -328,6 +348,7 @@ module Aws::PaymentCryptography
     #   <p>The KSN for IPEK generation using DUKPT. </p> <p>KSN must be padded before sending to Amazon Web Services Payment Cryptography. KSN hex length should be 20 for a TDES_2KEY key or 24 for an AES key.</p>
     #   @return [String]
     class ExportDukptInitialKey < Struct.new(
+      nil,
       :key_serial_number,
       keyword_init: true
     )
@@ -345,6 +366,7 @@ module Aws::PaymentCryptography
     #   <p>The wrapping spec for the key under export.</p>
     #   @return [String]
     class ExportKeyCryptogram < Struct.new(
+      nil,
       :certificate_authority_public_key_identifier,
       :wrapping_key_certificate,
       :wrapping_spec,
@@ -363,6 +385,7 @@ module Aws::PaymentCryptography
     #   <p>The attributes for IPEK generation during export.</p>
     #   @return [Types::ExportAttributes]
     class ExportKeyInput < Struct.new(
+      nil,
       :key_material,
       :export_key_identifier,
       :export_attributes,
@@ -405,6 +428,7 @@ module Aws::PaymentCryptography
     #   <p>The key material under export as a TR-34 WrappedKeyBlock or a TR-31 WrappedKeyBlock. or a RSA WrappedKeyCryptogram.</p>
     #   @return [Types::WrappedKey]
     class ExportKeyOutput < Struct.new(
+      nil,
       :wrapped_key,
       keyword_init: true
     )
@@ -419,6 +443,7 @@ module Aws::PaymentCryptography
     #   <p>Optional metadata for export associated with the key material. This data is signed but transmitted in clear text.</p>
     #   @return [Types::KeyBlockHeaders]
     class ExportTr31KeyBlock < Struct.new(
+      nil,
       :wrapping_key_identifier,
       :key_block_headers,
       keyword_init: true
@@ -452,6 +477,7 @@ module Aws::PaymentCryptography
     #   <p>Optional metadata for export associated with the key material. This data is signed but transmitted in clear text.</p>
     #   @return [Types::KeyBlockHeaders]
     class ExportTr34KeyBlock < Struct.new(
+      nil,
       :certificate_authority_public_key_identifier,
       :wrapping_key_certificate,
       :export_token,
@@ -474,6 +500,7 @@ module Aws::PaymentCryptography
     #   <p>The alias of the Amazon Web Services Payment Cryptography key.</p>
     #   @return [String]
     class GetAliasInput < Struct.new(
+      nil,
       :alias_name,
       keyword_init: true
     )
@@ -484,6 +511,7 @@ module Aws::PaymentCryptography
     #   <p>The alias of the Amazon Web Services Payment Cryptography key.</p>
     #   @return [Types::Alias]
     class GetAliasOutput < Struct.new(
+      nil,
       :alias,
       keyword_init: true
     )
@@ -500,6 +528,7 @@ module Aws::PaymentCryptography
     #   Certificate subject data
     #   @return [Types::CertificateSubjectType]
     class GetCertificateSigningRequestInput < Struct.new(
+      nil,
       :key_identifier,
       :signing_algorithm,
       :certificate_subject,
@@ -512,6 +541,7 @@ module Aws::PaymentCryptography
     #   Certificate signing request
     #   @return [String]
     class GetCertificateSigningRequestOutput < Struct.new(
+      nil,
       :certificate_signing_request,
       keyword_init: true
     )
@@ -520,6 +550,7 @@ module Aws::PaymentCryptography
 
     # <p>Input parameters for retrieving the account's default key replication regions. This operation requires no input parameters.</p>
     class GetDefaultKeyReplicationRegionsInput < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -530,6 +561,7 @@ module Aws::PaymentCryptography
     #   <p>The list of regions where default key replication is currently enabled for the account.</p> <p>New keys created in this account will automatically be replicated to these regions unless explicitly configured otherwise during key creation.</p>
     #   @return [Array<String>]
     class GetDefaultKeyReplicationRegionsOutput < Struct.new(
+      nil,
       :enabled_replication_regions,
       keyword_init: true
     )
@@ -540,6 +572,7 @@ module Aws::PaymentCryptography
     #   <p>The <code>KeyARN</code> of the Amazon Web Services Payment Cryptography key.</p>
     #   @return [String]
     class GetKeyInput < Struct.new(
+      nil,
       :key_identifier,
       keyword_init: true
     )
@@ -550,6 +583,7 @@ module Aws::PaymentCryptography
     #   <p>Contains the key metadata, including both immutable and mutable attributes for the key, but does not include actual cryptographic key material.</p>
     #   @return [Types::Key]
     class GetKeyOutput < Struct.new(
+      nil,
       :key,
       keyword_init: true
     )
@@ -563,6 +597,7 @@ module Aws::PaymentCryptography
     #   <p>The signing key algorithm to generate a signing key certificate. This certificate signs the wrapped key under export within the TR-34 key block. <code>RSA_2048</code> is the only signing key algorithm allowed.</p>
     #   @return [String]
     class GetParametersForExportInput < Struct.new(
+      nil,
       :key_material_type,
       :signing_key_algorithm,
       keyword_init: true
@@ -586,6 +621,7 @@ module Aws::PaymentCryptography
     #   <p>The validity period of the export token.</p>
     #   @return [Time]
     class GetParametersForExportOutput < Struct.new(
+      nil,
       :signing_key_certificate,
       :signing_key_certificate_chain,
       :signing_key_algorithm,
@@ -603,6 +639,7 @@ module Aws::PaymentCryptography
     #   <p>The wrapping key algorithm to generate a wrapping key certificate. This certificate wraps the key under import.</p> <p>At this time, <code>RSA_2048</code> is the allowed algorithm for TR-34 WrappedKeyBlock import. Additionally, <code>RSA_2048</code>, <code>RSA_3072</code>, <code>RSA_4096</code> are the allowed algorithms for RSA WrappedKeyCryptogram import.</p>
     #   @return [String]
     class GetParametersForImportInput < Struct.new(
+      nil,
       :key_material_type,
       :wrapping_key_algorithm,
       keyword_init: true
@@ -626,6 +663,7 @@ module Aws::PaymentCryptography
     #   <p>The validity period of the import token.</p>
     #   @return [Time]
     class GetParametersForImportOutput < Struct.new(
+      nil,
       :wrapping_key_certificate,
       :wrapping_key_certificate_chain,
       :wrapping_key_algorithm,
@@ -640,6 +678,7 @@ module Aws::PaymentCryptography
     #   <p>The <code>KeyARN</code> of the asymmetric key pair.</p>
     #   @return [String]
     class GetPublicKeyCertificateInput < Struct.new(
+      nil,
       :key_identifier,
       keyword_init: true
     )
@@ -653,6 +692,7 @@ module Aws::PaymentCryptography
     #   <p>The root certificate authority (CA) that signed the public key certificate in PEM format (base64 encoded) of the asymmetric key pair.</p>
     #   @return [String]
     class GetPublicKeyCertificateOutput < Struct.new(
+      nil,
       :key_certificate,
       :key_certificate_chain,
       keyword_init: true
@@ -686,6 +726,7 @@ module Aws::PaymentCryptography
     #   <p>The ECDH wrapped key block to import.</p>
     #   @return [String]
     class ImportDiffieHellmanTr31KeyBlock < Struct.new(
+      nil,
       :private_key_identifier,
       :certificate_authority_public_key_identifier,
       :public_key_certificate,
@@ -716,6 +757,7 @@ module Aws::PaymentCryptography
     #   <p>The wrapping spec for the wrapped key cryptogram.</p>
     #   @return [String]
     class ImportKeyCryptogram < Struct.new(
+      nil,
       :key_attributes,
       :exportable,
       :wrapped_key_cryptogram,
@@ -742,6 +784,7 @@ module Aws::PaymentCryptography
     #   <p>A list of Amazon Web Services Regions for key replication operations.</p> <p>Each region in the list must be a valid Amazon Web Services Region identifier where Amazon Web Services Payment Cryptography is available. This list is used to specify which regions should be added to or removed from a key's replication configuration.</p>
     #   @return [Array<String>]
     class ImportKeyInput < Struct.new(
+      nil,
       :key_material,
       :key_check_value_algorithm,
       :enabled,
@@ -796,6 +839,7 @@ module Aws::PaymentCryptography
     #   <p>The <code>KeyARN</code> of the key material imported within Amazon Web Services Payment Cryptography.</p>
     #   @return [Types::Key]
     class ImportKeyOutput < Struct.new(
+      nil,
       :key,
       keyword_init: true
     )
@@ -810,6 +854,7 @@ module Aws::PaymentCryptography
     #   <p>The TR-31 wrapped key block to import.</p>
     #   @return [String]
     class ImportTr31KeyBlock < Struct.new(
+      nil,
       :wrapping_key_identifier,
       :wrapped_key_block,
       keyword_init: true
@@ -843,6 +888,7 @@ module Aws::PaymentCryptography
     #   <p>A random number value that is unique to the TR-34 key block generated using 2 pass. The operation will fail, if a random nonce value is not provided for a TR-34 key block generated using 2 pass.</p>
     #   @return [String]
     class ImportTr34KeyBlock < Struct.new(
+      nil,
       :certificate_authority_public_key_identifier,
       :signing_key_certificate,
       :import_token,
@@ -865,6 +911,7 @@ module Aws::PaymentCryptography
     # @!attribute message
     #   @return [String]
     class InternalServerException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -927,6 +974,7 @@ module Aws::PaymentCryptography
     #   <p>Indicates whether this key is using the account's default replication regions configuration.</p> <p>When set to <code>true</code>, the key automatically replicates to the regions specified in the account's default replication settings. When set to <code>false</code>, the key has a custom replication configuration that overrides the account defaults.</p>
     #   @return [Boolean]
     class Key < Struct.new(
+      nil,
       :key_arn,
       :key_attributes,
       :key_check_value,
@@ -964,6 +1012,7 @@ module Aws::PaymentCryptography
     #   <p>The list of cryptographic operations that you can perform using the key.</p>
     #   @return [Types::KeyModesOfUse]
     class KeyAttributes < Struct.new(
+      nil,
       :key_usage,
       :key_class,
       :key_algorithm,
@@ -987,6 +1036,7 @@ module Aws::PaymentCryptography
     #   <p>Parameter used to indicate the type of optional data in key block headers. Refer to <a href="https://webstore.ansi.org/standards/ascx9/ansix91432022">ANSI X9.143-2022</a> for information on allowed data type for optional blocks.</p> <p>Optional block character limit is 112 characters. For each optional block, 2 characters are reserved for optional block ID and 2 characters reserved for optional block length. More than one optional blocks can be included as long as the combined length does not increase 112 characters.</p>
     #   @return [Hash<String, String>]
     class KeyBlockHeaders < Struct.new(
+      nil,
       :key_modes_of_use,
       :key_exportability,
       :key_version,
@@ -1025,6 +1075,7 @@ module Aws::PaymentCryptography
     #   <p>Speciﬁes whether an Amazon Web Services Payment Cryptography key has no special restrictions other than the restrictions implied by <code>KeyUsage</code>.</p>
     #   @return [Boolean]
     class KeyModesOfUse < Struct.new(
+      nil,
       :encrypt,
       :decrypt,
       :wrap,
@@ -1078,6 +1129,7 @@ module Aws::PaymentCryptography
     #   <p>An Amazon Web Services Region identifier in the standard format (e.g., <code>us-east-1</code>, <code>eu-west-1</code>).</p> <p>Used to specify regions for key replication operations. The region must be a valid Amazon Web Services Region where Amazon Web Services Payment Cryptography is available.</p>
     #   @return [String]
     class KeySummary < Struct.new(
+      nil,
       :key_arn,
       :key_state,
       :key_attributes,
@@ -1101,6 +1153,7 @@ module Aws::PaymentCryptography
     #   <p>Use this parameter to specify the maximum number of items to return. When this value is present, Amazon Web Services Payment Cryptography does not return more than the specified number of items, but it might return fewer.</p> <p>This value is optional. If you include a value, it must be between 1 and 100, inclusive. If you do not include a value, it defaults to 50.</p>
     #   @return [Integer]
     class ListAliasesInput < Struct.new(
+      nil,
       :key_arn,
       :next_token,
       :max_results,
@@ -1116,6 +1169,7 @@ module Aws::PaymentCryptography
     #   <p>The token for the next set of results, or an empty or null value if there are no more results.</p>
     #   @return [String]
     class ListAliasesOutput < Struct.new(
+      nil,
       :aliases,
       :next_token,
       keyword_init: true
@@ -1133,6 +1187,7 @@ module Aws::PaymentCryptography
     #   <p>Use this parameter to specify the maximum number of items to return. When this value is present, Amazon Web Services Payment Cryptography does not return more than the specified number of items, but it might return fewer.</p> <p>This value is optional. If you include a value, it must be between 1 and 100, inclusive. If you do not include a value, it defaults to 50.</p>
     #   @return [Integer]
     class ListKeysInput < Struct.new(
+      nil,
       :key_state,
       :next_token,
       :max_results,
@@ -1148,6 +1203,7 @@ module Aws::PaymentCryptography
     #   <p>The token for the next set of results, or an empty or null value if there are no more results.</p>
     #   @return [String]
     class ListKeysOutput < Struct.new(
+      nil,
       :keys,
       :next_token,
       keyword_init: true
@@ -1165,6 +1221,7 @@ module Aws::PaymentCryptography
     #   <p>Use this parameter to specify the maximum number of items to return. When this value is present, Amazon Web Services Payment Cryptography does not return more than the specified number of items, but it might return fewer.</p> <p>This value is optional. If you include a value, it must be between 1 and 100, inclusive. If you do not include a value, it defaults to 50.</p>
     #   @return [Integer]
     class ListTagsForResourceInput < Struct.new(
+      nil,
       :resource_arn,
       :next_token,
       :max_results,
@@ -1180,6 +1237,7 @@ module Aws::PaymentCryptography
     #   <p>The token for the next set of results, or an empty or null value if there are no more results.</p>
     #   @return [String]
     class ListTagsForResourceOutput < Struct.new(
+      nil,
       :tags,
       :next_token,
       keyword_init: true
@@ -1195,6 +1253,7 @@ module Aws::PaymentCryptography
     #   <p>The list of Amazon Web Services Regions to remove from the key's replication configuration.</p> <p>The key will no longer be available for cryptographic operations in these regions after removal. Ensure no active operations depend on the key in these regions before removal.</p>
     #   @return [Array<String>]
     class RemoveKeyReplicationRegionsInput < Struct.new(
+      nil,
       :key_identifier,
       :replication_regions,
       keyword_init: true
@@ -1207,6 +1266,7 @@ module Aws::PaymentCryptography
     #   <p>The updated key metadata after removing the replication regions.</p> <p>This reflects the current state of the key and its updated replication configuration.</p>
     #   @return [Types::Key]
     class RemoveKeyReplicationRegionsOutput < Struct.new(
+      nil,
       :key,
       keyword_init: true
     )
@@ -1221,6 +1281,7 @@ module Aws::PaymentCryptography
     #   <p>A message that provides additional information about the current replication status of the key.</p> <p>This field contains details about any issues or progress updates related to key replication operations. It may include information about replication failures, synchronization status, or other operational details.</p>
     #   @return [String]
     class ReplicationStatusType < Struct.new(
+      nil,
       :status,
       :status_message,
       keyword_init: true
@@ -1233,6 +1294,7 @@ module Aws::PaymentCryptography
     #   <p>The identifier of the resource that was not found.</p> <p>This field contains the specific resource identifier (such as a key ARN or alias name) that could not be located.</p>
     #   @return [String]
     class ResourceNotFoundException < Struct.new(
+      nil,
       :resource_id,
       keyword_init: true
     )
@@ -1243,6 +1305,7 @@ module Aws::PaymentCryptography
     #   <p>The <code>KeyARN</code> of the key to be restored within Amazon Web Services Payment Cryptography.</p>
     #   @return [String]
     class RestoreKeyInput < Struct.new(
+      nil,
       :key_identifier,
       keyword_init: true
     )
@@ -1253,6 +1316,7 @@ module Aws::PaymentCryptography
     #   <p>The key material of the restored key. The <code>KeyState</code> will change to <code>CREATE_COMPLETE</code> and value for <code>DeletePendingTimestamp</code> gets removed. </p>
     #   @return [Types::Key]
     class RestoreKeyOutput < Struct.new(
+      nil,
       :key,
       keyword_init: true
     )
@@ -1267,6 +1331,7 @@ module Aws::PaymentCryptography
     #   <p>Parameter information for root public key certificate import.</p>
     #   @return [String]
     class RootCertificatePublicKey < Struct.new(
+      nil,
       :key_attributes,
       :public_key_certificate,
       keyword_init: true
@@ -1278,6 +1343,7 @@ module Aws::PaymentCryptography
     # @!attribute message
     #   @return [String]
     class ServiceQuotaExceededException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -1288,6 +1354,7 @@ module Aws::PaymentCryptography
     # @!attribute message
     #   @return [String]
     class ServiceUnavailableException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -1298,6 +1365,7 @@ module Aws::PaymentCryptography
     #   <p>The <code>KeyArn</code> of the key.</p>
     #   @return [String]
     class StartKeyUsageInput < Struct.new(
+      nil,
       :key_identifier,
       keyword_init: true
     )
@@ -1308,6 +1376,7 @@ module Aws::PaymentCryptography
     #   <p>The <code>KeyARN</code> of the Amazon Web Services Payment Cryptography key activated for use.</p>
     #   @return [Types::Key]
     class StartKeyUsageOutput < Struct.new(
+      nil,
       :key,
       keyword_init: true
     )
@@ -1318,6 +1387,7 @@ module Aws::PaymentCryptography
     #   <p>The <code>KeyArn</code> of the key.</p>
     #   @return [String]
     class StopKeyUsageInput < Struct.new(
+      nil,
       :key_identifier,
       keyword_init: true
     )
@@ -1328,6 +1398,7 @@ module Aws::PaymentCryptography
     #   <p>The <code>KeyARN</code> of the key.</p>
     #   @return [Types::Key]
     class StopKeyUsageOutput < Struct.new(
+      nil,
       :key,
       keyword_init: true
     )
@@ -1342,6 +1413,7 @@ module Aws::PaymentCryptography
     #   <p>The value of the tag.</p>
     #   @return [String]
     class Tag < Struct.new(
+      nil,
       :key,
       :value,
       keyword_init: true
@@ -1356,6 +1428,7 @@ module Aws::PaymentCryptography
     #   <p>One or more tags. Each tag consists of a tag key and a tag value. The tag value can be an empty (null) string. You can't have more than one tag on an Amazon Web Services Payment Cryptography key with the same tag key. If you specify an existing tag key with a different tag value, Amazon Web Services Payment Cryptography replaces the current tag value with the new one.</p> <important> <p>Don't include personal, confidential or sensitive information in this field. This field may be displayed in plaintext in CloudTrail logs and other output.</p> </important> <p>To use this parameter, you must have <a href="https://docs.aws.amazon.com/payment-cryptography/latest/APIReference/API_TagResource.html">TagResource</a> permission in an IAM policy.</p> <important> <p>Don't include personal, confidential or sensitive information in this field. This field may be displayed in plaintext in CloudTrail logs and other output.</p> </important>
     #   @return [Array<Types::Tag>]
     class TagResourceInput < Struct.new(
+      nil,
       :resource_arn,
       :tags,
       keyword_init: true
@@ -1364,6 +1437,7 @@ module Aws::PaymentCryptography
     end
 
     class TagResourceOutput < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1373,6 +1447,7 @@ module Aws::PaymentCryptography
     # @!attribute message
     #   @return [String]
     class ThrottlingException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -1390,6 +1465,7 @@ module Aws::PaymentCryptography
     #   <p>The <code>KeyARN</code> of the root public key certificate or certificate chain that signs the trusted public key certificate import.</p>
     #   @return [String]
     class TrustedCertificatePublicKey < Struct.new(
+      nil,
       :key_attributes,
       :public_key_certificate,
       :certificate_authority_public_key_identifier,
@@ -1405,6 +1481,7 @@ module Aws::PaymentCryptography
     #   <p>One or more tag keys. Don't include the tag values.</p> <p>If the Amazon Web Services Payment Cryptography key doesn't have the specified tag key, Amazon Web Services Payment Cryptography doesn't throw an exception or return a response. To confirm that the operation succeeded, use the <a href="https://docs.aws.amazon.com/payment-cryptography/latest/APIReference/API_ListTagsForResource.html">ListTagsForResource</a> operation.</p>
     #   @return [Array<String>]
     class UntagResourceInput < Struct.new(
+      nil,
       :resource_arn,
       :tag_keys,
       keyword_init: true
@@ -1413,6 +1490,7 @@ module Aws::PaymentCryptography
     end
 
     class UntagResourceOutput < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1425,6 +1503,7 @@ module Aws::PaymentCryptography
     #   <p>The <code>KeyARN</code> for the key that you are updating or removing from the alias.</p>
     #   @return [String]
     class UpdateAliasInput < Struct.new(
+      nil,
       :alias_name,
       :key_arn,
       keyword_init: true
@@ -1436,6 +1515,7 @@ module Aws::PaymentCryptography
     #   <p>The alias name.</p>
     #   @return [Types::Alias]
     class UpdateAliasOutput < Struct.new(
+      nil,
       :alias,
       keyword_init: true
     )
@@ -1446,6 +1526,7 @@ module Aws::PaymentCryptography
     # @!attribute message
     #   @return [String]
     class ValidationException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -1469,6 +1550,7 @@ module Aws::PaymentCryptography
     #   <p>The algorithm that Amazon Web Services Payment Cryptography uses to calculate the key check value (KCV). It is used to validate the key integrity.</p> <p>For TDES keys, the KCV is computed by encrypting 8 bytes, each with value of zero, with the key to be checked and retaining the 3 highest order bytes of the encrypted result. For AES keys, the KCV is computed using a CMAC algorithm where the input data is 16 bytes of zero and retaining the 3 highest order bytes of the encrypted result.</p>
     #   @return [String]
     class WrappedKey < Struct.new(
+      nil,
       :wrapping_key_arn,
       :wrapped_key_material_format,
       :key_material,

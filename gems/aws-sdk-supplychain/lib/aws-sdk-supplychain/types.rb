@@ -10,6 +10,7 @@ module Aws::SupplyChain
     # @!attribute message
     #   @return [String]
     class AccessDeniedException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -33,6 +34,7 @@ module Aws::SupplyChain
     #   <p>When the BillOfMaterialsImportJob has reached a terminal state, there will be a message.</p>
     #   @return [String]
     class BillOfMaterialsImportJob < Struct.new(
+      nil,
       :instance_id,
       :job_id,
       :status,
@@ -47,6 +49,7 @@ module Aws::SupplyChain
     # @!attribute message
     #   @return [String]
     class ConflictException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -64,6 +67,7 @@ module Aws::SupplyChain
     #   <p>An idempotency token ensures the API request is only completed no more than once. This way, retrying the request will not trigger the operation multiple times. A client token is a unique, case-sensitive string of 33 to 128 ASCII characters. To make an idempotent API request, specify a client token in the request. You should not reuse the same client token for other requests. If you retry a successful request with the same client token, the request will succeed with no further actions being taken, and you will receive the same API response as the original successful request.</p>
     #   @return [String]
     class CreateBillOfMaterialsImportJobRequest < Struct.new(
+      nil,
       :instance_id,
       :s3uri,
       :client_token,
@@ -77,6 +81,7 @@ module Aws::SupplyChain
     #   <p>The new BillOfMaterialsImportJob identifier.</p>
     #   @return [String]
     class CreateBillOfMaterialsImportJobResponse < Struct.new(
+      nil,
       :job_id,
       keyword_init: true
     )
@@ -103,6 +108,7 @@ module Aws::SupplyChain
     #   <p>The tags of the DataIntegrationFlow to be created</p>
     #   @return [Hash<String, String>]
     class CreateDataIntegrationFlowRequest < Struct.new(
+      nil,
       :instance_id,
       :name,
       :sources,
@@ -122,6 +128,7 @@ module Aws::SupplyChain
     #   <p>The name of the DataIntegrationFlow created.</p>
     #   @return [String]
     class CreateDataIntegrationFlowResponse < Struct.new(
+      nil,
       :instance_id,
       :name,
       keyword_init: true
@@ -162,6 +169,7 @@ module Aws::SupplyChain
     #   <p>The tags of the dataset.</p>
     #   @return [Hash<String, String>]
     class CreateDataLakeDatasetRequest < Struct.new(
+      nil,
       :instance_id,
       :namespace,
       :name,
@@ -179,6 +187,7 @@ module Aws::SupplyChain
     #   <p>The detail of created dataset.</p>
     #   @return [Types::DataLakeDataset]
     class CreateDataLakeDatasetResponse < Struct.new(
+      nil,
       :dataset,
       keyword_init: true
     )
@@ -200,6 +209,7 @@ module Aws::SupplyChain
     #   <p>The tags of the namespace.</p>
     #   @return [Hash<String, String>]
     class CreateDataLakeNamespaceRequest < Struct.new(
+      nil,
       :instance_id,
       :name,
       :description,
@@ -214,6 +224,7 @@ module Aws::SupplyChain
     #   <p>The detail of created namespace.</p>
     #   @return [Types::DataLakeNamespace]
     class CreateDataLakeNamespaceResponse < Struct.new(
+      nil,
       :namespace,
       keyword_init: true
     )
@@ -240,6 +251,7 @@ module Aws::SupplyChain
     #   <p>The client token for idempotency.</p>
     #   @return [String]
     class CreateInstanceRequest < Struct.new(
+      nil,
       :instance_name,
       :instance_description,
       :kms_key_arn,
@@ -256,6 +268,7 @@ module Aws::SupplyChain
     #   <p>The AWS Supply Chain instance resource data details.</p>
     #   @return [Types::Instance]
     class CreateInstanceResponse < Struct.new(
+      nil,
       :instance,
       keyword_init: true
     )
@@ -282,6 +295,7 @@ module Aws::SupplyChain
     #   <p>The target dataset details for a DATASET event type.</p>
     #   @return [Types::DataIntegrationEventDatasetTargetDetails]
     class DataIntegrationEvent < Struct.new(
+      nil,
       :instance_id,
       :event_id,
       :event_type,
@@ -301,6 +315,7 @@ module Aws::SupplyChain
     #   <p>The failure message (if any) of failed event load execution to dataset.</p>
     #   @return [String]
     class DataIntegrationEventDatasetLoadExecutionDetails < Struct.new(
+      nil,
       :status,
       :message,
       keyword_init: true
@@ -316,6 +331,7 @@ module Aws::SupplyChain
     #   <p>The target dataset load operation type.</p>
     #   @return [String]
     class DataIntegrationEventDatasetTargetConfiguration < Struct.new(
+      nil,
       :dataset_identifier,
       :operation_type,
       keyword_init: true
@@ -348,6 +364,7 @@ module Aws::SupplyChain
     #   <p>The target dataset load execution.</p>
     #   @return [Types::DataIntegrationEventDatasetLoadExecutionDetails]
     class DataIntegrationEventDatasetTargetDetails < Struct.new(
+      nil,
       :dataset_identifier,
       :operation_type,
       :dataset_load_execution,
@@ -379,6 +396,7 @@ module Aws::SupplyChain
     #   <p>The DataIntegrationFlow last modified timestamp.</p>
     #   @return [Time]
     class DataIntegrationFlow < Struct.new(
+      nil,
       :instance_id,
       :name,
       :sources,
@@ -413,6 +431,7 @@ module Aws::SupplyChain
     #   <p>The deduplication strategy to dedupe the data records sharing same primary key values of the target dataset. This strategy only applies to target dataset with primary keys and with dedupeRecords option enabled. If transformed data still got duplicates after the dedupeStrategy evaluation, a random data record is chosen to be retained.</p>
     #   @return [Types::DataIntegrationFlowDedupeStrategy]
     class DataIntegrationFlowDatasetOptions < Struct.new(
+      nil,
       :load_type,
       :dedupe_records,
       :dedupe_strategy,
@@ -426,6 +445,7 @@ module Aws::SupplyChain
     #   <p>The ARN of the dataset source.</p>
     #   @return [String]
     class DataIntegrationFlowDatasetSource < Struct.new(
+      nil,
       :dataset_identifier,
       keyword_init: true
     )
@@ -440,6 +460,7 @@ module Aws::SupplyChain
     #   <p>The dataset DataIntegrationFlow source options.</p>
     #   @return [Types::DataIntegrationFlowDatasetOptions]
     class DataIntegrationFlowDatasetSourceConfiguration < Struct.new(
+      nil,
       :dataset_identifier,
       :options,
       keyword_init: true
@@ -455,6 +476,7 @@ module Aws::SupplyChain
     #   <p>The dataset DataIntegrationFlow target options.</p>
     #   @return [Types::DataIntegrationFlowDatasetOptions]
     class DataIntegrationFlowDatasetTargetConfiguration < Struct.new(
+      nil,
       :dataset_identifier,
       :options,
       keyword_init: true
@@ -476,6 +498,7 @@ module Aws::SupplyChain
     #   <p>The field priority deduplication strategy.</p>
     #   @return [Types::DataIntegrationFlowFieldPriorityDedupeStrategyConfiguration]
     class DataIntegrationFlowDedupeStrategy < Struct.new(
+      nil,
       :type,
       :field_priority,
       keyword_init: true
@@ -512,6 +535,7 @@ module Aws::SupplyChain
     #   <p>The flow execution output metadata.</p>
     #   @return [Types::DataIntegrationFlowExecutionOutputMetadata]
     class DataIntegrationFlowExecution < Struct.new(
+      nil,
       :instance_id,
       :flow_name,
       :execution_id,
@@ -531,6 +555,7 @@ module Aws::SupplyChain
     #   <p>The S3 URI under which all diagnostic files (such as deduped records if any) are stored.</p>
     #   @return [String]
     class DataIntegrationFlowExecutionOutputMetadata < Struct.new(
+      nil,
       :diagnostic_reports_root_s3_uri,
       keyword_init: true
     )
@@ -548,6 +573,7 @@ module Aws::SupplyChain
     #   <p>The source details of a flow execution with dataset source.</p>
     #   @return [Types::DataIntegrationFlowDatasetSource]
     class DataIntegrationFlowExecutionSourceInfo < Struct.new(
+      nil,
       :source_type,
       :s3_source,
       :dataset_source,
@@ -564,6 +590,7 @@ module Aws::SupplyChain
     #   <p>The sort order for the deduplication field.</p>
     #   @return [String]
     class DataIntegrationFlowFieldPriorityDedupeField < Struct.new(
+      nil,
       :name,
       :sort_order,
       keyword_init: true
@@ -576,6 +603,7 @@ module Aws::SupplyChain
     #   <p>The list of field names and their sort order for deduplication, arranged in descending priority from highest to lowest.</p>
     #   @return [Array<Types::DataIntegrationFlowFieldPriorityDedupeField>]
     class DataIntegrationFlowFieldPriorityDedupeStrategyConfiguration < Struct.new(
+      nil,
       :fields,
       keyword_init: true
     )
@@ -587,6 +615,7 @@ module Aws::SupplyChain
     #   <p>The Amazon S3 file type in S3 options.</p>
     #   @return [String]
     class DataIntegrationFlowS3Options < Struct.new(
+      nil,
       :file_type,
       keyword_init: true
     )
@@ -601,6 +630,7 @@ module Aws::SupplyChain
     #   <p>The S3 object key of the S3 source.</p>
     #   @return [String]
     class DataIntegrationFlowS3Source < Struct.new(
+      nil,
       :bucket_name,
       :key,
       keyword_init: true
@@ -619,6 +649,7 @@ module Aws::SupplyChain
     #   <p>The other options of the S3 DataIntegrationFlow source.</p>
     #   @return [Types::DataIntegrationFlowS3Options]
     class DataIntegrationFlowS3SourceConfiguration < Struct.new(
+      nil,
       :bucket_name,
       :prefix,
       :options,
@@ -638,6 +669,7 @@ module Aws::SupplyChain
     #   <p>The S3 DataIntegrationFlow target options.</p>
     #   @return [Types::DataIntegrationFlowS3Options]
     class DataIntegrationFlowS3TargetConfiguration < Struct.new(
+      nil,
       :bucket_name,
       :prefix,
       :options,
@@ -651,6 +683,7 @@ module Aws::SupplyChain
     #   <p>The transformation SQL query body based on SparkSQL.</p>
     #   @return [String]
     class DataIntegrationFlowSQLTransformationConfiguration < Struct.new(
+      nil,
       :query,
       keyword_init: true
     )
@@ -671,6 +704,7 @@ module Aws::SupplyChain
     #   <p>The dataset DataIntegrationFlow source.</p>
     #   @return [Types::DataIntegrationFlowDatasetSourceConfiguration]
     class DataIntegrationFlowSource < Struct.new(
+      nil,
       :source_type,
       :source_name,
       :s3_source,
@@ -691,6 +725,7 @@ module Aws::SupplyChain
     #   <p>The dataset DataIntegrationFlow target. Note that for AWS Supply Chain dataset under <b>asc</b> namespace, it has a connection_id internal field that is not allowed to be provided by client directly, they will be auto populated.</p>
     #   @return [Types::DataIntegrationFlowDatasetTargetConfiguration]
     class DataIntegrationFlowTarget < Struct.new(
+      nil,
       :target_type,
       :s3_target,
       :dataset_target,
@@ -707,6 +742,7 @@ module Aws::SupplyChain
     #   <p>The SQL DataIntegrationFlow transformation configuration.</p>
     #   @return [Types::DataIntegrationFlowSQLTransformationConfiguration]
     class DataIntegrationFlowTransformation < Struct.new(
+      nil,
       :transformation_type,
       :sql_transformation,
       keyword_init: true
@@ -753,6 +789,7 @@ module Aws::SupplyChain
     #   <p>The last modified time of the dataset.</p>
     #   @return [Time]
     class DataLakeDataset < Struct.new(
+      nil,
       :instance_id,
       :namespace,
       :name,
@@ -775,6 +812,7 @@ module Aws::SupplyChain
     #   <p>The transformation of the partition field. A transformation specifies how to partition on a given field. For example, with timestamp you can specify that you'd like to partition fields by day, e.g. data record with value 2025-01-03T00:00:00Z in partition field is in 2025-01-03 partition. Also noted that data record without any value in optional partition field is in NULL partition.</p>
     #   @return [Types::DataLakeDatasetPartitionFieldTransform]
     class DataLakeDatasetPartitionField < Struct.new(
+      nil,
       :name,
       :transform,
       keyword_init: true
@@ -809,6 +847,7 @@ module Aws::SupplyChain
     #            </ul>
     #   @return [String]
     class DataLakeDatasetPartitionFieldTransform < Struct.new(
+      nil,
       :type,
       keyword_init: true
     )
@@ -820,6 +859,7 @@ module Aws::SupplyChain
     #   <p>The fields on which to partition a dataset. The partitions will be applied hierarchically based on the order of this list.</p>
     #   @return [Array<Types::DataLakeDatasetPartitionField>]
     class DataLakeDatasetPartitionSpec < Struct.new(
+      nil,
       :fields,
       keyword_init: true
     )
@@ -831,6 +871,7 @@ module Aws::SupplyChain
     #   <p>The name of the primary key field.</p>
     #   @return [String]
     class DataLakeDatasetPrimaryKeyField < Struct.new(
+      nil,
       :name,
       keyword_init: true
     )
@@ -849,6 +890,7 @@ module Aws::SupplyChain
     #            <p>Note that defining primary keys does not necessarily mean the dataset cannot have duplicate records, duplicate records can still be ingested if CreateDataIntegrationFlow's dedupe disabled or through SendDataIntegrationEvent's APPEND operation.</p>
     #   @return [Array<Types::DataLakeDatasetPrimaryKeyField>]
     class DataLakeDatasetSchema < Struct.new(
+      nil,
       :name,
       :fields,
       :primary_keys,
@@ -868,6 +910,7 @@ module Aws::SupplyChain
     #   <p>Indicate if the field is required or not.</p>
     #   @return [Boolean]
     class DataLakeDatasetSchemaField < Struct.new(
+      nil,
       :name,
       :type,
       :is_required,
@@ -896,6 +939,7 @@ module Aws::SupplyChain
     #   <p>The last modified time of the namespace.</p>
     #   @return [Time]
     class DataLakeNamespace < Struct.new(
+      nil,
       :instance_id,
       :name,
       :arn,
@@ -915,6 +959,7 @@ module Aws::SupplyChain
     #   <p>The name of the DataIntegrationFlow to be deleted.</p>
     #   @return [String]
     class DeleteDataIntegrationFlowRequest < Struct.new(
+      nil,
       :instance_id,
       :name,
       keyword_init: true
@@ -930,6 +975,7 @@ module Aws::SupplyChain
     #   <p>The name of the DataIntegrationFlow deleted.</p>
     #   @return [String]
     class DeleteDataIntegrationFlowResponse < Struct.new(
+      nil,
       :instance_id,
       :name,
       keyword_init: true
@@ -958,6 +1004,7 @@ module Aws::SupplyChain
     #   <p>The name of the dataset. For <b>asc</b> namespace, the name must be one of the supported data entities under <a href="https://docs.aws.amazon.com/aws-supply-chain/latest/userguide/data-model-asc.html">https://docs.aws.amazon.com/aws-supply-chain/latest/userguide/data-model-asc.html</a>.</p>
     #   @return [String]
     class DeleteDataLakeDatasetRequest < Struct.new(
+      nil,
       :instance_id,
       :namespace,
       :name,
@@ -977,6 +1024,7 @@ module Aws::SupplyChain
     #   <p>The name of deleted dataset.</p>
     #   @return [String]
     class DeleteDataLakeDatasetResponse < Struct.new(
+      nil,
       :instance_id,
       :namespace,
       :name,
@@ -993,6 +1041,7 @@ module Aws::SupplyChain
     #   <p>The name of the namespace. Noted you cannot delete pre-defined namespace like <b>asc</b>, <b>default</b> which are only deleted through instance deletion.</p>
     #   @return [String]
     class DeleteDataLakeNamespaceRequest < Struct.new(
+      nil,
       :instance_id,
       :name,
       keyword_init: true
@@ -1008,6 +1057,7 @@ module Aws::SupplyChain
     #   <p>The name of deleted namespace.</p>
     #   @return [String]
     class DeleteDataLakeNamespaceResponse < Struct.new(
+      nil,
       :instance_id,
       :name,
       keyword_init: true
@@ -1020,6 +1070,7 @@ module Aws::SupplyChain
     #   <p>The AWS Supply Chain instance identifier.</p>
     #   @return [String]
     class DeleteInstanceRequest < Struct.new(
+      nil,
       :instance_id,
       keyword_init: true
     )
@@ -1031,6 +1082,7 @@ module Aws::SupplyChain
     #   <p>The AWS Supply Chain instance resource data details.</p>
     #   @return [Types::Instance]
     class DeleteInstanceResponse < Struct.new(
+      nil,
       :instance,
       keyword_init: true
     )
@@ -1045,6 +1097,7 @@ module Aws::SupplyChain
     #   <p>The BillOfMaterialsImportJob identifier.</p>
     #   @return [String]
     class GetBillOfMaterialsImportJobRequest < Struct.new(
+      nil,
       :instance_id,
       :job_id,
       keyword_init: true
@@ -1057,6 +1110,7 @@ module Aws::SupplyChain
     #   <p>The BillOfMaterialsImportJob.</p>
     #   @return [Types::BillOfMaterialsImportJob]
     class GetBillOfMaterialsImportJobResponse < Struct.new(
+      nil,
       :job,
       keyword_init: true
     )
@@ -1071,6 +1125,7 @@ module Aws::SupplyChain
     #   <p>The unique event identifier.</p>
     #   @return [String]
     class GetDataIntegrationEventRequest < Struct.new(
+      nil,
       :instance_id,
       :event_id,
       keyword_init: true
@@ -1083,6 +1138,7 @@ module Aws::SupplyChain
     #   <p>The details of the DataIntegrationEvent returned.</p>
     #   @return [Types::DataIntegrationEvent]
     class GetDataIntegrationEventResponse < Struct.new(
+      nil,
       :event,
       keyword_init: true
     )
@@ -1100,6 +1156,7 @@ module Aws::SupplyChain
     #   <p>The flow execution identifier.</p>
     #   @return [String]
     class GetDataIntegrationFlowExecutionRequest < Struct.new(
+      nil,
       :instance_id,
       :flow_name,
       :execution_id,
@@ -1113,6 +1170,7 @@ module Aws::SupplyChain
     #   <p>The flow execution details.</p>
     #   @return [Types::DataIntegrationFlowExecution]
     class GetDataIntegrationFlowExecutionResponse < Struct.new(
+      nil,
       :flow_execution,
       keyword_init: true
     )
@@ -1127,6 +1185,7 @@ module Aws::SupplyChain
     #   <p>The name of the DataIntegrationFlow created.</p>
     #   @return [String]
     class GetDataIntegrationFlowRequest < Struct.new(
+      nil,
       :instance_id,
       :name,
       keyword_init: true
@@ -1139,6 +1198,7 @@ module Aws::SupplyChain
     #   <p>The details of the DataIntegrationFlow returned.</p>
     #   @return [Types::DataIntegrationFlow]
     class GetDataIntegrationFlowResponse < Struct.new(
+      nil,
       :flow,
       keyword_init: true
     )
@@ -1166,6 +1226,7 @@ module Aws::SupplyChain
     #   <p>The name of the dataset. For <b>asc</b> namespace, the name must be one of the supported data entities under <a href="https://docs.aws.amazon.com/aws-supply-chain/latest/userguide/data-model-asc.html">https://docs.aws.amazon.com/aws-supply-chain/latest/userguide/data-model-asc.html</a>.</p>
     #   @return [String]
     class GetDataLakeDatasetRequest < Struct.new(
+      nil,
       :instance_id,
       :namespace,
       :name,
@@ -1179,6 +1240,7 @@ module Aws::SupplyChain
     #   <p>The fetched dataset details.</p>
     #   @return [Types::DataLakeDataset]
     class GetDataLakeDatasetResponse < Struct.new(
+      nil,
       :dataset,
       keyword_init: true
     )
@@ -1203,6 +1265,7 @@ module Aws::SupplyChain
     #            </ul>
     #   @return [String]
     class GetDataLakeNamespaceRequest < Struct.new(
+      nil,
       :instance_id,
       :name,
       keyword_init: true
@@ -1215,6 +1278,7 @@ module Aws::SupplyChain
     #   <p>The fetched namespace details.</p>
     #   @return [Types::DataLakeNamespace]
     class GetDataLakeNamespaceResponse < Struct.new(
+      nil,
       :namespace,
       keyword_init: true
     )
@@ -1226,6 +1290,7 @@ module Aws::SupplyChain
     #   <p>The AWS Supply Chain instance identifier</p>
     #   @return [String]
     class GetInstanceRequest < Struct.new(
+      nil,
       :instance_id,
       keyword_init: true
     )
@@ -1237,6 +1302,7 @@ module Aws::SupplyChain
     #   <p>The instance resource data details.</p>
     #   @return [Types::Instance]
     class GetInstanceResponse < Struct.new(
+      nil,
       :instance,
       keyword_init: true
     )
@@ -1278,6 +1344,7 @@ module Aws::SupplyChain
     #   <p>The version number of the instance.</p>
     #   @return [Float]
     class Instance < Struct.new(
+      nil,
       :instance_id,
       :aws_account_id,
       :state,
@@ -1298,6 +1365,7 @@ module Aws::SupplyChain
     # @!attribute message
     #   @return [String]
     class InternalServerException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -1318,6 +1386,7 @@ module Aws::SupplyChain
     #   <p>Specify the maximum number of data integration events to fetch in one paginated request.</p>
     #   @return [Integer]
     class ListDataIntegrationEventsRequest < Struct.new(
+      nil,
       :instance_id,
       :event_type,
       :next_token,
@@ -1335,6 +1404,7 @@ module Aws::SupplyChain
     #   <p>The pagination token to fetch the next page of the ListDataIntegrationEvents.</p>
     #   @return [String]
     class ListDataIntegrationEventsResponse < Struct.new(
+      nil,
       :events,
       :next_token,
       keyword_init: true
@@ -1356,6 +1426,7 @@ module Aws::SupplyChain
     #   <p>The number to specify the max number of flow executions to fetch in this paginated request.</p>
     #   @return [Integer]
     class ListDataIntegrationFlowExecutionsRequest < Struct.new(
+      nil,
       :instance_id,
       :flow_name,
       :next_token,
@@ -1373,6 +1444,7 @@ module Aws::SupplyChain
     #   <p>The pagination token to fetch next page of flow executions.</p>
     #   @return [String]
     class ListDataIntegrationFlowExecutionsResponse < Struct.new(
+      nil,
       :flow_executions,
       :next_token,
       keyword_init: true
@@ -1391,6 +1463,7 @@ module Aws::SupplyChain
     #   <p>Specify the maximum number of DataIntegrationFlows to fetch in one paginated request.</p>
     #   @return [Integer]
     class ListDataIntegrationFlowsRequest < Struct.new(
+      nil,
       :instance_id,
       :next_token,
       :max_results,
@@ -1407,6 +1480,7 @@ module Aws::SupplyChain
     #   <p>The pagination token to fetch the next page of the DataIntegrationFlows.</p>
     #   @return [String]
     class ListDataIntegrationFlowsResponse < Struct.new(
+      nil,
       :flows,
       :next_token,
       keyword_init: true
@@ -1438,6 +1512,7 @@ module Aws::SupplyChain
     #   <p>The max number of datasets to fetch in this paginated request.</p>
     #   @return [Integer]
     class ListDataLakeDatasetsRequest < Struct.new(
+      nil,
       :instance_id,
       :namespace,
       :next_token,
@@ -1455,6 +1530,7 @@ module Aws::SupplyChain
     #   <p>The pagination token to fetch next page of datasets.</p>
     #   @return [String]
     class ListDataLakeDatasetsResponse < Struct.new(
+      nil,
       :datasets,
       :next_token,
       keyword_init: true
@@ -1473,6 +1549,7 @@ module Aws::SupplyChain
     #   <p>The max number of namespaces to fetch in this paginated request.</p>
     #   @return [Integer]
     class ListDataLakeNamespacesRequest < Struct.new(
+      nil,
       :instance_id,
       :next_token,
       :max_results,
@@ -1489,6 +1566,7 @@ module Aws::SupplyChain
     #   <p>The pagination token to fetch next page of namespaces.</p>
     #   @return [String]
     class ListDataLakeNamespacesResponse < Struct.new(
+      nil,
       :namespaces,
       :next_token,
       keyword_init: true
@@ -1510,6 +1588,7 @@ module Aws::SupplyChain
     #   <p>The filter to ListInstances based on their state.</p>
     #   @return [Array<String>]
     class ListInstancesRequest < Struct.new(
+      nil,
       :next_token,
       :max_results,
       :instance_name_filter,
@@ -1527,6 +1606,7 @@ module Aws::SupplyChain
     #   <p>The pagination token to fetch the next page of instances.</p>
     #   @return [String]
     class ListInstancesResponse < Struct.new(
+      nil,
       :instances,
       :next_token,
       keyword_init: true
@@ -1539,6 +1619,7 @@ module Aws::SupplyChain
     #   <p>The Amazon Web Services Supply chain resource ARN that needs tags to be listed.</p>
     #   @return [String]
     class ListTagsForResourceRequest < Struct.new(
+      nil,
       :resource_arn,
       keyword_init: true
     )
@@ -1550,6 +1631,7 @@ module Aws::SupplyChain
     #   <p>The tags added to an Amazon Web Services Supply Chain resource.</p>
     #   @return [Hash<String, String>]
     class ListTagsForResourceResponse < Struct.new(
+      nil,
       :tags,
       keyword_init: true
     )
@@ -1560,6 +1642,7 @@ module Aws::SupplyChain
     # @!attribute message
     #   @return [String]
     class ResourceNotFoundException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -1656,6 +1739,7 @@ module Aws::SupplyChain
     #   <p>The target dataset configuration for <b>scn.data.dataset</b> event type.</p>
     #   @return [Types::DataIntegrationEventDatasetTargetConfiguration]
     class SendDataIntegrationEventRequest < Struct.new(
+      nil,
       :instance_id,
       :event_type,
       :data,
@@ -1673,6 +1757,7 @@ module Aws::SupplyChain
     #   <p>The unique event identifier.</p>
     #   @return [String]
     class SendDataIntegrationEventResponse < Struct.new(
+      nil,
       :event_id,
       keyword_init: true
     )
@@ -1683,6 +1768,7 @@ module Aws::SupplyChain
     # @!attribute message
     #   @return [String]
     class ServiceQuotaExceededException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -1697,6 +1783,7 @@ module Aws::SupplyChain
     #   <p>The tags of the Amazon Web Services Supply chain resource to be created.</p>
     #   @return [Hash<String, String>]
     class TagResourceRequest < Struct.new(
+      nil,
       :resource_arn,
       :tags,
       keyword_init: true
@@ -1706,6 +1793,7 @@ module Aws::SupplyChain
 
     # <p>The response parameters for TagResource.</p>
     class TagResourceResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1715,6 +1803,7 @@ module Aws::SupplyChain
     # @!attribute message
     #   @return [String]
     class ThrottlingException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -1729,6 +1818,7 @@ module Aws::SupplyChain
     #   <p>The list of tag keys to be deleted for an Amazon Web Services Supply Chain resource.</p>
     #   @return [Array<String>]
     class UntagResourceRequest < Struct.new(
+      nil,
       :resource_arn,
       :tag_keys,
       keyword_init: true
@@ -1738,6 +1828,7 @@ module Aws::SupplyChain
 
     # <p>The response parameters of UntagResource.</p>
     class UntagResourceResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1760,6 +1851,7 @@ module Aws::SupplyChain
     #   <p>The new target configurations for the DataIntegrationFlow.</p>
     #   @return [Types::DataIntegrationFlowTarget]
     class UpdateDataIntegrationFlowRequest < Struct.new(
+      nil,
       :instance_id,
       :name,
       :sources,
@@ -1775,6 +1867,7 @@ module Aws::SupplyChain
     #   <p>The details of the updated DataIntegrationFlow.</p>
     #   @return [Types::DataIntegrationFlow]
     class UpdateDataIntegrationFlowResponse < Struct.new(
+      nil,
       :flow,
       keyword_init: true
     )
@@ -1805,6 +1898,7 @@ module Aws::SupplyChain
     #   <p>The updated description of the data lake dataset.</p>
     #   @return [String]
     class UpdateDataLakeDatasetRequest < Struct.new(
+      nil,
       :instance_id,
       :namespace,
       :name,
@@ -1819,6 +1913,7 @@ module Aws::SupplyChain
     #   <p>The updated dataset details.</p>
     #   @return [Types::DataLakeDataset]
     class UpdateDataLakeDatasetResponse < Struct.new(
+      nil,
       :dataset,
       keyword_init: true
     )
@@ -1837,6 +1932,7 @@ module Aws::SupplyChain
     #   <p>The updated description of the data lake namespace.</p>
     #   @return [String]
     class UpdateDataLakeNamespaceRequest < Struct.new(
+      nil,
       :instance_id,
       :name,
       :description,
@@ -1850,6 +1946,7 @@ module Aws::SupplyChain
     #   <p>The updated namespace details.</p>
     #   @return [Types::DataLakeNamespace]
     class UpdateDataLakeNamespaceResponse < Struct.new(
+      nil,
       :namespace,
       keyword_init: true
     )
@@ -1867,6 +1964,7 @@ module Aws::SupplyChain
     #   <p>The AWS Supply Chain instance description.</p>
     #   @return [String]
     class UpdateInstanceRequest < Struct.new(
+      nil,
       :instance_id,
       :instance_name,
       :instance_description,
@@ -1880,6 +1978,7 @@ module Aws::SupplyChain
     #   <p>The instance resource data details.</p>
     #   @return [Types::Instance]
     class UpdateInstanceResponse < Struct.new(
+      nil,
       :instance,
       keyword_init: true
     )
@@ -1890,6 +1989,7 @@ module Aws::SupplyChain
     # @!attribute message
     #   @return [String]
     class ValidationException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )

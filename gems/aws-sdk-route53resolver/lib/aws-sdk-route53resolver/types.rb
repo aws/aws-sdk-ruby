@@ -12,6 +12,7 @@ module Aws::Route53Resolver
     # @!attribute message
     #   @return [String]
     class AccessDeniedException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -49,6 +50,7 @@ module Aws::Route53Resolver
     #   <p>A list of the tag keys and values that you want to associate with the rule group association. </p>
     #   @return [Array<Types::Tag>]
     class AssociateFirewallRuleGroupRequest < Struct.new(
+      nil,
       :creator_request_id,
       :firewall_rule_group_id,
       :vpc_id,
@@ -66,6 +68,7 @@ module Aws::Route53Resolver
     #   			identify it in other requests, like update and delete.</p>
     #   @return [Types::FirewallRuleGroupAssociation]
     class AssociateFirewallRuleGroupResponse < Struct.new(
+      nil,
       :firewall_rule_group_association,
       keyword_init: true
     )
@@ -80,6 +83,7 @@ module Aws::Route53Resolver
     #   			Resolver chooses an IP address for you from the available IPs in the specified subnet.</p>
     #   @return [Types::IpAddressUpdate]
     class AssociateResolverEndpointIpAddressRequest < Struct.new(
+      nil,
       :resolver_endpoint_id,
       :ip_address,
       keyword_init: true
@@ -91,6 +95,7 @@ module Aws::Route53Resolver
     #   <p>The response to an <code>AssociateResolverEndpointIpAddress</code> request.</p>
     #   @return [Types::ResolverEndpoint]
     class AssociateResolverEndpointIpAddressResponse < Struct.new(
+      nil,
       :resolver_endpoint,
       keyword_init: true
     )
@@ -107,6 +112,7 @@ module Aws::Route53Resolver
     #            </note>
     #   @return [String]
     class AssociateResolverQueryLogConfigRequest < Struct.new(
+      nil,
       :resolver_query_log_config_id,
       :resource_id,
       keyword_init: true
@@ -118,6 +124,7 @@ module Aws::Route53Resolver
     #   <p>A complex type that contains settings for a specified association between an Amazon VPC and a query logging configuration.</p>
     #   @return [Types::ResolverQueryLogConfigAssociation]
     class AssociateResolverQueryLogConfigResponse < Struct.new(
+      nil,
       :resolver_query_log_config_association,
       keyword_init: true
     )
@@ -135,6 +142,7 @@ module Aws::Route53Resolver
     #   <p>The ID of the VPC that you want to associate the Resolver rule with.</p>
     #   @return [String]
     class AssociateResolverRuleRequest < Struct.new(
+      nil,
       :resolver_rule_id,
       :name,
       :vpc_id,
@@ -147,6 +155,7 @@ module Aws::Route53Resolver
     #   <p>Information about the <code>AssociateResolverRule</code> request, including the status of the request.</p>
     #   @return [Types::ResolverRuleAssociation]
     class AssociateResolverRuleResponse < Struct.new(
+      nil,
       :resolver_rule_association,
       keyword_init: true
     )
@@ -159,6 +168,7 @@ module Aws::Route53Resolver
     # @!attribute message
     #   @return [String]
     class ConflictException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -177,6 +187,7 @@ module Aws::Route53Resolver
     #   <p>A list of the tag keys and values that you want to associate with the domain list. </p>
     #   @return [Array<Types::Tag>]
     class CreateFirewallDomainListRequest < Struct.new(
+      nil,
       :creator_request_id,
       :name,
       :tags,
@@ -189,6 +200,7 @@ module Aws::Route53Resolver
     #   <p>The domain list that you just created.</p>
     #   @return [Types::FirewallDomainList]
     class CreateFirewallDomainListResponse < Struct.new(
+      nil,
       :firewall_domain_list,
       keyword_init: true
     )
@@ -207,6 +219,7 @@ module Aws::Route53Resolver
     #   <p>A list of the tag keys and values that you want to associate with the rule group. </p>
     #   @return [Array<Types::Tag>]
     class CreateFirewallRuleGroupRequest < Struct.new(
+      nil,
       :creator_request_id,
       :name,
       :tags,
@@ -219,6 +232,7 @@ module Aws::Route53Resolver
     #   <p>A collection of rules used to filter DNS network traffic. </p>
     #   @return [Types::FirewallRuleGroup]
     class CreateFirewallRuleGroupResponse < Struct.new(
+      nil,
       :firewall_rule_group,
       keyword_init: true
     )
@@ -385,6 +399,7 @@ module Aws::Route53Resolver
     #            </ul>
     #   @return [String]
     class CreateFirewallRuleRequest < Struct.new(
+      nil,
       :creator_request_id,
       :firewall_rule_group_id,
       :firewall_domain_list_id,
@@ -409,6 +424,7 @@ module Aws::Route53Resolver
     #   			firewall rule that you just created. </p>
     #   @return [Types::FirewallRule]
     class CreateFirewallRuleResponse < Struct.new(
+      nil,
       :firewall_rule,
       keyword_init: true
     )
@@ -444,6 +460,7 @@ module Aws::Route53Resolver
     #   		</p>
     #   @return [Array<Types::Tag>]
     class CreateOutpostResolverRequest < Struct.new(
+      nil,
       :creator_request_id,
       :name,
       :instance_count,
@@ -460,6 +477,7 @@ module Aws::Route53Resolver
     #   		request, including the status of the request.</p>
     #   @return [Types::OutpostResolver]
     class CreateOutpostResolverResponse < Struct.new(
+      nil,
       :outpost_resolver,
       keyword_init: true
     )
@@ -568,6 +586,7 @@ module Aws::Route53Resolver
     #            </ul>
     #   @return [Array<String>]
     class CreateResolverEndpointRequest < Struct.new(
+      nil,
       :creator_request_id,
       :name,
       :security_group_ids,
@@ -587,6 +606,7 @@ module Aws::Route53Resolver
     #   <p>Information about the <code>CreateResolverEndpoint</code> request, including the status of the request.</p>
     #   @return [Types::ResolverEndpoint]
     class CreateResolverEndpointResponse < Struct.new(
+      nil,
       :resolver_endpoint,
       keyword_init: true
     )
@@ -636,6 +656,7 @@ module Aws::Route53Resolver
     #   <p>A list of the tag keys and values that you want to associate with the query logging configuration.</p>
     #   @return [Array<Types::Tag>]
     class CreateResolverQueryLogConfigRequest < Struct.new(
+      nil,
       :name,
       :destination_arn,
       :creator_request_id,
@@ -649,6 +670,7 @@ module Aws::Route53Resolver
     #   <p>Information about the <code>CreateResolverQueryLogConfig</code> request, including the status of the request.</p>
     #   @return [Types::ResolverQueryLogConfig]
     class CreateResolverQueryLogConfigResponse < Struct.new(
+      nil,
       :resolver_query_log_config,
       keyword_init: true
     )
@@ -696,6 +718,7 @@ module Aws::Route53Resolver
     #   		</p>
     #   @return [String]
     class CreateResolverRuleRequest < Struct.new(
+      nil,
       :creator_request_id,
       :name,
       :rule_type,
@@ -713,6 +736,7 @@ module Aws::Route53Resolver
     #   <p>Information about the <code>CreateResolverRule</code> request, including the status of the request.</p>
     #   @return [Types::ResolverRule]
     class CreateResolverRuleResponse < Struct.new(
+      nil,
       :resolver_rule,
       keyword_init: true
     )
@@ -723,6 +747,7 @@ module Aws::Route53Resolver
     #   <p>The ID of the domain list that you want to delete. </p>
     #   @return [String]
     class DeleteFirewallDomainListRequest < Struct.new(
+      nil,
       :firewall_domain_list_id,
       keyword_init: true
     )
@@ -733,6 +758,7 @@ module Aws::Route53Resolver
     #   <p>The domain list that you just deleted. </p>
     #   @return [Types::FirewallDomainList]
     class DeleteFirewallDomainListResponse < Struct.new(
+      nil,
       :firewall_domain_list,
       keyword_init: true
     )
@@ -743,6 +769,7 @@ module Aws::Route53Resolver
     #   <p>The unique identifier of the firewall rule group that you want to delete. </p>
     #   @return [String]
     class DeleteFirewallRuleGroupRequest < Struct.new(
+      nil,
       :firewall_rule_group_id,
       keyword_init: true
     )
@@ -753,6 +780,7 @@ module Aws::Route53Resolver
     #   <p>A collection of rules used to filter DNS network traffic. </p>
     #   @return [Types::FirewallRuleGroup]
     class DeleteFirewallRuleGroupResponse < Struct.new(
+      nil,
       :firewall_rule_group,
       keyword_init: true
     )
@@ -825,6 +853,7 @@ module Aws::Route53Resolver
     #            </ul>
     #   @return [String]
     class DeleteFirewallRuleRequest < Struct.new(
+      nil,
       :firewall_rule_group_id,
       :firewall_domain_list_id,
       :firewall_threat_protection_id,
@@ -838,6 +867,7 @@ module Aws::Route53Resolver
     #   <p>The specification for the firewall rule that you just deleted.</p>
     #   @return [Types::FirewallRule]
     class DeleteFirewallRuleResponse < Struct.new(
+      nil,
       :firewall_rule,
       keyword_init: true
     )
@@ -848,6 +878,7 @@ module Aws::Route53Resolver
     #   <p>A unique string that identifies the Resolver on the Outpost.</p>
     #   @return [String]
     class DeleteOutpostResolverRequest < Struct.new(
+      nil,
       :id,
       keyword_init: true
     )
@@ -859,6 +890,7 @@ module Aws::Route53Resolver
     #   		request, including the status of the request.</p>
     #   @return [Types::OutpostResolver]
     class DeleteOutpostResolverResponse < Struct.new(
+      nil,
       :outpost_resolver,
       keyword_init: true
     )
@@ -869,6 +901,7 @@ module Aws::Route53Resolver
     #   <p>The ID of the Resolver endpoint that you want to delete.</p>
     #   @return [String]
     class DeleteResolverEndpointRequest < Struct.new(
+      nil,
       :resolver_endpoint_id,
       keyword_init: true
     )
@@ -879,6 +912,7 @@ module Aws::Route53Resolver
     #   <p>Information about the <code>DeleteResolverEndpoint</code> request, including the status of the request.</p>
     #   @return [Types::ResolverEndpoint]
     class DeleteResolverEndpointResponse < Struct.new(
+      nil,
       :resolver_endpoint,
       keyword_init: true
     )
@@ -889,6 +923,7 @@ module Aws::Route53Resolver
     #   <p>The ID of the query logging configuration that you want to delete.</p>
     #   @return [String]
     class DeleteResolverQueryLogConfigRequest < Struct.new(
+      nil,
       :resolver_query_log_config_id,
       keyword_init: true
     )
@@ -899,6 +934,7 @@ module Aws::Route53Resolver
     #   <p>Information about the query logging configuration that you deleted, including the status of the request.</p>
     #   @return [Types::ResolverQueryLogConfig]
     class DeleteResolverQueryLogConfigResponse < Struct.new(
+      nil,
       :resolver_query_log_config,
       keyword_init: true
     )
@@ -909,6 +945,7 @@ module Aws::Route53Resolver
     #   <p>The ID of the Resolver rule that you want to delete.</p>
     #   @return [String]
     class DeleteResolverRuleRequest < Struct.new(
+      nil,
       :resolver_rule_id,
       keyword_init: true
     )
@@ -919,6 +956,7 @@ module Aws::Route53Resolver
     #   <p>Information about the <code>DeleteResolverRule</code> request, including the status of the request.</p>
     #   @return [Types::ResolverRule]
     class DeleteResolverRuleResponse < Struct.new(
+      nil,
       :resolver_rule,
       keyword_init: true
     )
@@ -929,6 +967,7 @@ module Aws::Route53Resolver
     #   <p>The identifier of the <a>FirewallRuleGroupAssociation</a>. </p>
     #   @return [String]
     class DisassociateFirewallRuleGroupRequest < Struct.new(
+      nil,
       :firewall_rule_group_association_id,
       keyword_init: true
     )
@@ -939,6 +978,7 @@ module Aws::Route53Resolver
     #   <p>The firewall rule group association that you just removed. </p>
     #   @return [Types::FirewallRuleGroupAssociation]
     class DisassociateFirewallRuleGroupResponse < Struct.new(
+      nil,
       :firewall_rule_group_association,
       keyword_init: true
     )
@@ -952,6 +992,7 @@ module Aws::Route53Resolver
     #   <p>The IPv4 address that you want to remove from a Resolver endpoint.</p>
     #   @return [Types::IpAddressUpdate]
     class DisassociateResolverEndpointIpAddressRequest < Struct.new(
+      nil,
       :resolver_endpoint_id,
       :ip_address,
       keyword_init: true
@@ -963,6 +1004,7 @@ module Aws::Route53Resolver
     #   <p>The response to an <code>DisassociateResolverEndpointIpAddress</code> request.</p>
     #   @return [Types::ResolverEndpoint]
     class DisassociateResolverEndpointIpAddressResponse < Struct.new(
+      nil,
       :resolver_endpoint,
       keyword_init: true
     )
@@ -976,6 +1018,7 @@ module Aws::Route53Resolver
     #   <p>The ID of the Amazon VPC that you want to disassociate from a specified query logging configuration.</p>
     #   @return [String]
     class DisassociateResolverQueryLogConfigRequest < Struct.new(
+      nil,
       :resolver_query_log_config_id,
       :resource_id,
       keyword_init: true
@@ -987,6 +1030,7 @@ module Aws::Route53Resolver
     #   <p>A complex type that contains settings for the association that you deleted between an Amazon VPC and a query logging configuration.</p>
     #   @return [Types::ResolverQueryLogConfigAssociation]
     class DisassociateResolverQueryLogConfigResponse < Struct.new(
+      nil,
       :resolver_query_log_config_association,
       keyword_init: true
     )
@@ -1000,6 +1044,7 @@ module Aws::Route53Resolver
     #   <p>The ID of the Resolver rule that you want to disassociate from the specified VPC.</p>
     #   @return [String]
     class DisassociateResolverRuleRequest < Struct.new(
+      nil,
       :vpc_id,
       :resolver_rule_id,
       keyword_init: true
@@ -1011,6 +1056,7 @@ module Aws::Route53Resolver
     #   <p>Information about the <code>DisassociateResolverRule</code> request, including the status of the request.</p>
     #   @return [Types::ResolverRuleAssociation]
     class DisassociateResolverRuleResponse < Struct.new(
+      nil,
       :resolver_rule_association,
       keyword_init: true
     )
@@ -1270,6 +1316,7 @@ module Aws::Route53Resolver
     #   			<code>Name</code> and specify <code>INBOUND</code> for <code>Values</code>.</p>
     #   @return [Array<String>]
     class Filter < Struct.new(
+      nil,
       :name,
       :values,
       keyword_init: true
@@ -1303,6 +1350,7 @@ module Aws::Route53Resolver
     #            <p>This behavior is only enforced for VPCs that have at least one DNS Firewall rule group association. </p>
     #   @return [String]
     class FirewallConfig < Struct.new(
+      nil,
       :id,
       :resource_id,
       :owner_id,
@@ -1347,6 +1395,7 @@ module Aws::Route53Resolver
     #   <p>The date and time that the domain list was last modified, in Unix time format and Coordinated Universal Time (UTC). </p>
     #   @return [String]
     class FirewallDomainList < Struct.new(
+      nil,
       :id,
       :arn,
       :name,
@@ -1382,6 +1431,7 @@ module Aws::Route53Resolver
     #   <p>The owner of the list, used only for lists that are not managed by you. For example, the managed domain list <code>AWSManagedDomainsMalwareDomainList</code> has the managed owner name <code>Route 53 Resolver DNS Firewall</code>.</p>
     #   @return [String]
     class FirewallDomainListMetadata < Struct.new(
+      nil,
       :id,
       :arn,
       :name,
@@ -1566,6 +1616,7 @@ module Aws::Route53Resolver
     #            </ul>
     #   @return [String]
     class FirewallRule < Struct.new(
+      nil,
       :firewall_rule_group_id,
       :firewall_domain_list_id,
       :firewall_threat_protection_id,
@@ -1627,6 +1678,7 @@ module Aws::Route53Resolver
     #   <p>The date and time that the rule group was last modified, in Unix time format and Coordinated Universal Time (UTC).</p>
     #   @return [String]
     class FirewallRuleGroup < Struct.new(
+      nil,
       :id,
       :arn,
       :name,
@@ -1689,6 +1741,7 @@ module Aws::Route53Resolver
     #   <p>The date and time that the association was last modified, in Unix time format and Coordinated Universal Time (UTC).</p>
     #   @return [String]
     class FirewallRuleGroupAssociation < Struct.new(
+      nil,
       :id,
       :arn,
       :firewall_rule_group_id,
@@ -1732,6 +1785,7 @@ module Aws::Route53Resolver
     #                 Amazon Web Services account. Sharing is configured through Resource Access Manager (RAM).</p>
     #   @return [String]
     class FirewallRuleGroupMetadata < Struct.new(
+      nil,
       :id,
       :arn,
       :name,
@@ -1747,6 +1801,7 @@ module Aws::Route53Resolver
     #   <p>The ID of the VPC from Amazon VPC that the configuration is for.</p>
     #   @return [String]
     class GetFirewallConfigRequest < Struct.new(
+      nil,
       :resource_id,
       keyword_init: true
     )
@@ -1758,6 +1813,7 @@ module Aws::Route53Resolver
     #   			AmazonVPC. </p>
     #   @return [Types::FirewallConfig]
     class GetFirewallConfigResponse < Struct.new(
+      nil,
       :firewall_config,
       keyword_init: true
     )
@@ -1768,6 +1824,7 @@ module Aws::Route53Resolver
     #   <p>The ID of the domain list.  </p>
     #   @return [String]
     class GetFirewallDomainListRequest < Struct.new(
+      nil,
       :firewall_domain_list_id,
       keyword_init: true
     )
@@ -1778,6 +1835,7 @@ module Aws::Route53Resolver
     #   <p>The domain list that you requested.  </p>
     #   @return [Types::FirewallDomainList]
     class GetFirewallDomainListResponse < Struct.new(
+      nil,
       :firewall_domain_list,
       keyword_init: true
     )
@@ -1788,6 +1846,7 @@ module Aws::Route53Resolver
     #   <p>The identifier of the <a>FirewallRuleGroupAssociation</a>. </p>
     #   @return [String]
     class GetFirewallRuleGroupAssociationRequest < Struct.new(
+      nil,
       :firewall_rule_group_association_id,
       keyword_init: true
     )
@@ -1798,6 +1857,7 @@ module Aws::Route53Resolver
     #   <p>The association that you requested. </p>
     #   @return [Types::FirewallRuleGroupAssociation]
     class GetFirewallRuleGroupAssociationResponse < Struct.new(
+      nil,
       :firewall_rule_group_association,
       keyword_init: true
     )
@@ -1808,6 +1868,7 @@ module Aws::Route53Resolver
     #   <p>The ARN (Amazon Resource Name) for the rule group.</p>
     #   @return [String]
     class GetFirewallRuleGroupPolicyRequest < Struct.new(
+      nil,
       :arn,
       keyword_init: true
     )
@@ -1820,6 +1881,7 @@ module Aws::Route53Resolver
     #   			(RAM). </p>
     #   @return [String]
     class GetFirewallRuleGroupPolicyResponse < Struct.new(
+      nil,
       :firewall_rule_group_policy,
       keyword_init: true
     )
@@ -1830,6 +1892,7 @@ module Aws::Route53Resolver
     #   <p>The unique identifier of the firewall rule group. </p>
     #   @return [String]
     class GetFirewallRuleGroupRequest < Struct.new(
+      nil,
       :firewall_rule_group_id,
       keyword_init: true
     )
@@ -1840,6 +1903,7 @@ module Aws::Route53Resolver
     #   <p>A collection of rules used to filter DNS network traffic. </p>
     #   @return [Types::FirewallRuleGroup]
     class GetFirewallRuleGroupResponse < Struct.new(
+      nil,
       :firewall_rule_group,
       keyword_init: true
     )
@@ -1850,6 +1914,7 @@ module Aws::Route53Resolver
     #   <p>The ID of the Resolver on the Outpost.</p>
     #   @return [String]
     class GetOutpostResolverRequest < Struct.new(
+      nil,
       :id,
       keyword_init: true
     )
@@ -1861,6 +1926,7 @@ module Aws::Route53Resolver
     #   		request, including the status of the request.</p>
     #   @return [Types::OutpostResolver]
     class GetOutpostResolverResponse < Struct.new(
+      nil,
       :outpost_resolver,
       keyword_init: true
     )
@@ -1871,6 +1937,7 @@ module Aws::Route53Resolver
     #   <p>Resource ID of the Amazon VPC that you want to get information about.</p>
     #   @return [String]
     class GetResolverConfigRequest < Struct.new(
+      nil,
       :resource_id,
       keyword_init: true
     )
@@ -1882,6 +1949,7 @@ module Aws::Route53Resolver
     #   			specified in the <code>GetResolverConfig</code> request.</p>
     #   @return [Types::ResolverConfig]
     class GetResolverConfigResponse < Struct.new(
+      nil,
       :resolver_config,
       keyword_init: true
     )
@@ -1892,6 +1960,7 @@ module Aws::Route53Resolver
     #   <p>The ID of the virtual private cloud (VPC) for the DNSSEC validation status.</p>
     #   @return [String]
     class GetResolverDnssecConfigRequest < Struct.new(
+      nil,
       :resource_id,
       keyword_init: true
     )
@@ -1902,6 +1971,7 @@ module Aws::Route53Resolver
     #   <p>The information about a configuration for DNSSEC validation.</p>
     #   @return [Types::ResolverDnssecConfig]
     class GetResolverDnssecConfigResponse < Struct.new(
+      nil,
       :resolver_dnssec_config,
       keyword_init: true
     )
@@ -1912,6 +1982,7 @@ module Aws::Route53Resolver
     #   <p>The ID of the Resolver endpoint that you want to get information about.</p>
     #   @return [String]
     class GetResolverEndpointRequest < Struct.new(
+      nil,
       :resolver_endpoint_id,
       keyword_init: true
     )
@@ -1922,6 +1993,7 @@ module Aws::Route53Resolver
     #   <p>Information about the Resolver endpoint that you specified in a <code>GetResolverEndpoint</code> request.</p>
     #   @return [Types::ResolverEndpoint]
     class GetResolverEndpointResponse < Struct.new(
+      nil,
       :resolver_endpoint,
       keyword_init: true
     )
@@ -1932,6 +2004,7 @@ module Aws::Route53Resolver
     #   <p>The ID of the Resolver query logging configuration association that you want to get information about.</p>
     #   @return [String]
     class GetResolverQueryLogConfigAssociationRequest < Struct.new(
+      nil,
       :resolver_query_log_config_association_id,
       keyword_init: true
     )
@@ -1942,6 +2015,7 @@ module Aws::Route53Resolver
     #   <p>Information about the Resolver query logging configuration association that you specified in a <code>GetQueryLogConfigAssociation</code> request.</p>
     #   @return [Types::ResolverQueryLogConfigAssociation]
     class GetResolverQueryLogConfigAssociationResponse < Struct.new(
+      nil,
       :resolver_query_log_config_association,
       keyword_init: true
     )
@@ -1952,6 +2026,7 @@ module Aws::Route53Resolver
     #   <p>The ARN of the query logging configuration that you want to get the query logging policy for.</p>
     #   @return [String]
     class GetResolverQueryLogConfigPolicyRequest < Struct.new(
+      nil,
       :arn,
       keyword_init: true
     )
@@ -1963,6 +2038,7 @@ module Aws::Route53Resolver
     #   			<code>GetResolverQueryLogConfigPolicy</code> request.</p>
     #   @return [String]
     class GetResolverQueryLogConfigPolicyResponse < Struct.new(
+      nil,
       :resolver_query_log_config_policy,
       keyword_init: true
     )
@@ -1973,6 +2049,7 @@ module Aws::Route53Resolver
     #   <p>The ID of the Resolver query logging configuration that you want to get information about.</p>
     #   @return [String]
     class GetResolverQueryLogConfigRequest < Struct.new(
+      nil,
       :resolver_query_log_config_id,
       keyword_init: true
     )
@@ -1983,6 +2060,7 @@ module Aws::Route53Resolver
     #   <p>Information about the Resolver query logging configuration that you specified in a <code>GetQueryLogConfig</code> request.</p>
     #   @return [Types::ResolverQueryLogConfig]
     class GetResolverQueryLogConfigResponse < Struct.new(
+      nil,
       :resolver_query_log_config,
       keyword_init: true
     )
@@ -1993,6 +2071,7 @@ module Aws::Route53Resolver
     #   <p>The ID of the Resolver rule association that you want to get information about.</p>
     #   @return [String]
     class GetResolverRuleAssociationRequest < Struct.new(
+      nil,
       :resolver_rule_association_id,
       keyword_init: true
     )
@@ -2003,6 +2082,7 @@ module Aws::Route53Resolver
     #   <p>Information about the Resolver rule association that you specified in a <code>GetResolverRuleAssociation</code> request.</p>
     #   @return [Types::ResolverRuleAssociation]
     class GetResolverRuleAssociationResponse < Struct.new(
+      nil,
       :resolver_rule_association,
       keyword_init: true
     )
@@ -2013,6 +2093,7 @@ module Aws::Route53Resolver
     #   <p>The ID of the Resolver rule that you want to get the Resolver rule policy for.</p>
     #   @return [String]
     class GetResolverRulePolicyRequest < Struct.new(
+      nil,
       :arn,
       keyword_init: true
     )
@@ -2023,6 +2104,7 @@ module Aws::Route53Resolver
     #   <p>The Resolver rule policy for the rule that you specified in a <code>GetResolverRulePolicy</code> request.</p>
     #   @return [String]
     class GetResolverRulePolicyResponse < Struct.new(
+      nil,
       :resolver_rule_policy,
       keyword_init: true
     )
@@ -2033,6 +2115,7 @@ module Aws::Route53Resolver
     #   <p>The ID of the Resolver rule that you want to get information about.</p>
     #   @return [String]
     class GetResolverRuleRequest < Struct.new(
+      nil,
       :resolver_rule_id,
       keyword_init: true
     )
@@ -2043,6 +2126,7 @@ module Aws::Route53Resolver
     #   <p>Information about the Resolver rule that you specified in a <code>GetResolverRule</code> request.</p>
     #   @return [Types::ResolverRule]
     class GetResolverRuleResponse < Struct.new(
+      nil,
       :resolver_rule,
       keyword_init: true
     )
@@ -2062,6 +2146,7 @@ module Aws::Route53Resolver
     #          as your DNS Firewall. The file must be a text file and must contain a single domain per line.</p>
     #   @return [String]
     class ImportFirewallDomainsRequest < Struct.new(
+      nil,
       :firewall_domain_list_id,
       :operation,
       :domain_file_url,
@@ -2083,6 +2168,7 @@ module Aws::Route53Resolver
     #   <p>Additional information about the status of the list, if available.</p>
     #   @return [String]
     class ImportFirewallDomainsResponse < Struct.new(
+      nil,
       :id,
       :name,
       :status,
@@ -2096,6 +2182,7 @@ module Aws::Route53Resolver
     # @!attribute message
     #   @return [String]
     class InternalServiceErrorException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -2106,6 +2193,7 @@ module Aws::Route53Resolver
     # @!attribute message
     #   @return [String]
     class InvalidNextTokenException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -2119,6 +2207,7 @@ module Aws::Route53Resolver
     #   <p>For an <code>InvalidParameterException</code> error, the name of the parameter that's invalid.</p>
     #   @return [String]
     class InvalidParameterException < Struct.new(
+      nil,
       :message,
       :field_name,
       keyword_init: true
@@ -2130,6 +2219,7 @@ module Aws::Route53Resolver
     # @!attribute message
     #   @return [String]
     class InvalidPolicyDocument < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -2140,6 +2230,7 @@ module Aws::Route53Resolver
     # @!attribute message
     #   @return [String]
     class InvalidRequestException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -2150,6 +2241,7 @@ module Aws::Route53Resolver
     # @!attribute message
     #   @return [String]
     class InvalidTagException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -2172,6 +2264,7 @@ module Aws::Route53Resolver
     #   		</p>
     #   @return [String]
     class IpAddressRequest < Struct.new(
+      nil,
       :subnet_id,
       :ip,
       :ipv6,
@@ -2210,6 +2303,7 @@ module Aws::Route53Resolver
     #   <p>The date and time that the IP address was last modified, in Unix time format and Coordinated Universal Time (UTC).</p>
     #   @return [String]
     class IpAddressResponse < Struct.new(
+      nil,
       :ip_id,
       :subnet_id,
       :ip,
@@ -2245,6 +2339,7 @@ module Aws::Route53Resolver
     #   		</p>
     #   @return [String]
     class IpAddressUpdate < Struct.new(
+      nil,
       :ip_id,
       :subnet_id,
       :ip,
@@ -2261,6 +2356,7 @@ module Aws::Route53Resolver
     #   <p>For a <code>LimitExceededException</code> error, the type of resource that exceeded the current limit.</p>
     #   @return [String]
     class LimitExceededException < Struct.new(
+      nil,
       :message,
       :resource_type,
       keyword_init: true
@@ -2282,6 +2378,7 @@ module Aws::Route53Resolver
     #                  batch of objects, use the token that was returned for the prior request in your next request.</p>
     #   @return [String]
     class ListFirewallConfigsRequest < Struct.new(
+      nil,
       :max_results,
       :next_token,
       keyword_init: true
@@ -2298,6 +2395,7 @@ module Aws::Route53Resolver
     #   			Amazon Virtual Private Cloud (Amazon VPC). </p>
     #   @return [Array<Types::FirewallConfig>]
     class ListFirewallConfigsResponse < Struct.new(
+      nil,
       :next_token,
       :firewall_configs,
       keyword_init: true
@@ -2319,6 +2417,7 @@ module Aws::Route53Resolver
     #                  batch of objects, use the token that was returned for the prior request in your next request.</p>
     #   @return [String]
     class ListFirewallDomainListsRequest < Struct.new(
+      nil,
       :max_results,
       :next_token,
       keyword_init: true
@@ -2336,6 +2435,7 @@ module Aws::Route53Resolver
     #   			see <code>MaxResults</code>. </p>
     #   @return [Array<Types::FirewallDomainListMetadata>]
     class ListFirewallDomainListsResponse < Struct.new(
+      nil,
       :next_token,
       :firewall_domain_lists,
       keyword_init: true
@@ -2360,6 +2460,7 @@ module Aws::Route53Resolver
     #                  batch of objects, use the token that was returned for the prior request in your next request.</p>
     #   @return [String]
     class ListFirewallDomainsRequest < Struct.new(
+      nil,
       :firewall_domain_list_id,
       :max_results,
       :next_token,
@@ -2378,6 +2479,7 @@ module Aws::Route53Resolver
     #   			information, see <code>MaxResults</code>. </p>
     #   @return [Array<String>]
     class ListFirewallDomainsResponse < Struct.new(
+      nil,
       :next_token,
       :domains,
       keyword_init: true
@@ -2415,6 +2517,7 @@ module Aws::Route53Resolver
     #                  batch of objects, use the token that was returned for the prior request in your next request.</p>
     #   @return [String]
     class ListFirewallRuleGroupAssociationsRequest < Struct.new(
+      nil,
       :firewall_rule_group_id,
       :vpc_id,
       :priority,
@@ -2435,6 +2538,7 @@ module Aws::Route53Resolver
     #            <p>This might be a partial list of the associations that you have defined. For information, see <code>MaxResults</code>. </p>
     #   @return [Array<Types::FirewallRuleGroupAssociation>]
     class ListFirewallRuleGroupAssociationsResponse < Struct.new(
+      nil,
       :next_token,
       :firewall_rule_group_associations,
       keyword_init: true
@@ -2456,6 +2560,7 @@ module Aws::Route53Resolver
     #                  batch of objects, use the token that was returned for the prior request in your next request.</p>
     #   @return [String]
     class ListFirewallRuleGroupsRequest < Struct.new(
+      nil,
       :max_results,
       :next_token,
       keyword_init: true
@@ -2472,6 +2577,7 @@ module Aws::Route53Resolver
     #            <p>This might be a partial list of the rule groups that you have defined. For information, see <code>MaxResults</code>. </p>
     #   @return [Array<Types::FirewallRuleGroupMetadata>]
     class ListFirewallRuleGroupsResponse < Struct.new(
+      nil,
       :next_token,
       :firewall_rule_groups,
       keyword_init: true
@@ -2519,6 +2625,7 @@ module Aws::Route53Resolver
     #                  batch of objects, use the token that was returned for the prior request in your next request.</p>
     #   @return [String]
     class ListFirewallRulesRequest < Struct.new(
+      nil,
       :firewall_rule_group_id,
       :priority,
       :action,
@@ -2539,6 +2646,7 @@ module Aws::Route53Resolver
     #   			see <code>MaxResults</code>. </p>
     #   @return [Array<Types::FirewallRule>]
     class ListFirewallRulesResponse < Struct.new(
+      nil,
       :next_token,
       :firewall_rules,
       keyword_init: true
@@ -2559,6 +2667,7 @@ module Aws::Route53Resolver
     #            <p></p>
     #   @return [String]
     class ListOutpostResolversRequest < Struct.new(
+      nil,
       :outpost_arn,
       :max_results,
       :next_token,
@@ -2576,6 +2685,7 @@ module Aws::Route53Resolver
     #   		<code>ListOutpostResolver</code> request to get the next group of results. In the next request, specify the value of <code>NextToken</code> from the previous response.</p>
     #   @return [String]
     class ListOutpostResolversResponse < Struct.new(
+      nil,
       :outpost_resolvers,
       :next_token,
       keyword_init: true
@@ -2596,6 +2706,7 @@ module Aws::Route53Resolver
     #   			specify that value for <code>NextToken</code> in the request.</p>
     #   @return [String]
     class ListResolverConfigsRequest < Struct.new(
+      nil,
       :max_results,
       :next_token,
       keyword_init: true
@@ -2616,6 +2727,7 @@ module Aws::Route53Resolver
     #   			with the current Amazon Web Services account.</p>
     #   @return [Array<Types::ResolverConfig>]
     class ListResolverConfigsResponse < Struct.new(
+      nil,
       :next_token,
       :resolver_configs,
       keyword_init: true
@@ -2639,6 +2751,7 @@ module Aws::Route53Resolver
     #   <p>An optional specification to return a subset of objects.</p>
     #   @return [Array<Types::Filter>]
     class ListResolverDnssecConfigsRequest < Struct.new(
+      nil,
       :max_results,
       :next_token,
       :filters,
@@ -2662,6 +2775,7 @@ module Aws::Route53Resolver
     #   			 It doesn't contain disabled DNSSEC configurations for the resource.</p>
     #   @return [Array<Types::ResolverDnssecConfig>]
     class ListResolverDnssecConfigsResponse < Struct.new(
+      nil,
       :next_token,
       :resolver_dnssec_configs,
       keyword_init: true
@@ -2683,6 +2797,7 @@ module Aws::Route53Resolver
     #   			<code>NextToken</code> from the previous response. </p>
     #   @return [String]
     class ListResolverEndpointIpAddressesRequest < Struct.new(
+      nil,
       :resolver_endpoint_id,
       :max_results,
       :next_token,
@@ -2704,6 +2819,7 @@ module Aws::Route53Resolver
     #   			DNS queries to (for inbound endpoints).</p>
     #   @return [Array<Types::IpAddressResponse>]
     class ListResolverEndpointIpAddressesResponse < Struct.new(
+      nil,
       :next_token,
       :max_results,
       :ip_addresses,
@@ -2729,6 +2845,7 @@ module Aws::Route53Resolver
     #            </note>
     #   @return [Array<Types::Filter>]
     class ListResolverEndpointsRequest < Struct.new(
+      nil,
       :max_results,
       :next_token,
       :filters,
@@ -2748,6 +2865,7 @@ module Aws::Route53Resolver
     #   <p>The Resolver endpoints that were created by using the current Amazon Web Services account, and that match the specified filters, if any.</p>
     #   @return [Array<Types::ResolverEndpoint>]
     class ListResolverEndpointsResponse < Struct.new(
+      nil,
       :next_token,
       :max_results,
       :resolver_endpoints,
@@ -2856,6 +2974,7 @@ module Aws::Route53Resolver
     #            </note>
     #   @return [String]
     class ListResolverQueryLogConfigAssociationsRequest < Struct.new(
+      nil,
       :max_results,
       :next_token,
       :filters,
@@ -2885,6 +3004,7 @@ module Aws::Route53Resolver
     #   			values that you specified for <code>Filter</code>.</p>
     #   @return [Array<Types::ResolverQueryLogConfigAssociation>]
     class ListResolverQueryLogConfigAssociationsResponse < Struct.new(
+      nil,
       :next_token,
       :total_count,
       :total_filtered_count,
@@ -3005,6 +3125,7 @@ module Aws::Route53Resolver
     #            </note>
     #   @return [String]
     class ListResolverQueryLogConfigsRequest < Struct.new(
+      nil,
       :max_results,
       :next_token,
       :filters,
@@ -3034,6 +3155,7 @@ module Aws::Route53Resolver
     #   			values that you specified for <code>Filter</code>.</p>
     #   @return [Array<Types::ResolverQueryLogConfig>]
     class ListResolverQueryLogConfigsResponse < Struct.new(
+      nil,
       :next_token,
       :total_count,
       :total_filtered_count,
@@ -3066,6 +3188,7 @@ module Aws::Route53Resolver
     #            </note>
     #   @return [Array<Types::Filter>]
     class ListResolverRuleAssociationsRequest < Struct.new(
+      nil,
       :max_results,
       :next_token,
       :filters,
@@ -3087,6 +3210,7 @@ module Aws::Route53Resolver
     #   			specified filters, if any.</p>
     #   @return [Array<Types::ResolverRuleAssociation>]
     class ListResolverRuleAssociationsResponse < Struct.new(
+      nil,
       :next_token,
       :max_results,
       :resolver_rule_associations,
@@ -3112,6 +3236,7 @@ module Aws::Route53Resolver
     #            </note>
     #   @return [Array<Types::Filter>]
     class ListResolverRulesRequest < Struct.new(
+      nil,
       :max_results,
       :next_token,
       :filters,
@@ -3132,6 +3257,7 @@ module Aws::Route53Resolver
     #   <p>The Resolver rules that were created using the current Amazon Web Services account and that match the specified filters, if any.</p>
     #   @return [Array<Types::ResolverRule>]
     class ListResolverRulesResponse < Struct.new(
+      nil,
       :next_token,
       :max_results,
       :resolver_rules,
@@ -3153,6 +3279,7 @@ module Aws::Route53Resolver
     #   			to get the next group of tags for the resource. In the next request, specify the value of <code>NextToken</code> from the previous response. </p>
     #   @return [String]
     class ListTagsForResourceRequest < Struct.new(
+      nil,
       :resource_arn,
       :max_results,
       :next_token,
@@ -3170,6 +3297,7 @@ module Aws::Route53Resolver
     #   			<code>NextToken</code> from the previous response. </p>
     #   @return [String]
     class ListTagsForResourceResponse < Struct.new(
+      nil,
       :tags,
       :next_token,
       keyword_init: true
@@ -3215,6 +3343,7 @@ module Aws::Route53Resolver
     #   <p>The ARN (Amazon Resource Name) for the Outpost.</p>
     #   @return [String]
     class OutpostResolver < Struct.new(
+      nil,
       :arn,
       :creation_time,
       :modification_time,
@@ -3238,6 +3367,7 @@ module Aws::Route53Resolver
     #   <p>The Identity and Access Management (Amazon Web Services IAM) policy to attach to the rule group.</p>
     #   @return [String]
     class PutFirewallRuleGroupPolicyRequest < Struct.new(
+      nil,
       :arn,
       :firewall_rule_group_policy,
       keyword_init: true
@@ -3249,6 +3379,7 @@ module Aws::Route53Resolver
     #   <p></p>
     #   @return [Boolean]
     class PutFirewallRuleGroupPolicyResponse < Struct.new(
+      nil,
       :return_value,
       keyword_init: true
     )
@@ -3288,6 +3419,7 @@ module Aws::Route53Resolver
     #   			with the account that you specified in <code>Arn</code>. </p>
     #   @return [String]
     class PutResolverQueryLogConfigPolicyRequest < Struct.new(
+      nil,
       :arn,
       :resolver_query_log_config_policy,
       keyword_init: true
@@ -3300,6 +3432,7 @@ module Aws::Route53Resolver
     #   <p>Whether the <code>PutResolverQueryLogConfigPolicy</code> request was successful.</p>
     #   @return [Boolean]
     class PutResolverQueryLogConfigPolicyResponse < Struct.new(
+      nil,
       :return_value,
       keyword_init: true
     )
@@ -3348,6 +3481,7 @@ module Aws::Route53Resolver
     #   			that you specified in <code>Arn</code>.</p>
     #   @return [String]
     class PutResolverRulePolicyRequest < Struct.new(
+      nil,
       :arn,
       :resolver_rule_policy,
       keyword_init: true
@@ -3360,6 +3494,7 @@ module Aws::Route53Resolver
     #   <p>Whether the <code>PutResolverRulePolicy</code> request was successful.</p>
     #   @return [Boolean]
     class PutResolverRulePolicyResponse < Struct.new(
+      nil,
       :return_value,
       keyword_init: true
     )
@@ -3408,6 +3543,7 @@ module Aws::Route53Resolver
     #            </ul>
     #   @return [String]
     class ResolverConfig < Struct.new(
+      nil,
       :id,
       :resource_id,
       :owner_id,
@@ -3449,6 +3585,7 @@ module Aws::Route53Resolver
     #            </ul>
     #   @return [String]
     class ResolverDnssecConfig < Struct.new(
+      nil,
       :id,
       :owner_id,
       :resource_id,
@@ -3621,6 +3758,7 @@ module Aws::Route53Resolver
     #            </ul>
     #   @return [Array<String>]
     class ResolverEndpoint < Struct.new(
+      nil,
       :id,
       :creator_request_id,
       :arn,
@@ -3712,6 +3850,7 @@ module Aws::Route53Resolver
     #   <p>The date and time that the query logging configuration was created, in Unix time format and Coordinated Universal Time (UTC).</p>
     #   @return [String]
     class ResolverQueryLogConfig < Struct.new(
+      nil,
       :id,
       :owner_id,
       :status,
@@ -3791,6 +3930,7 @@ module Aws::Route53Resolver
     #   <p>The date and time that the VPC was associated with the query logging configuration, in Unix time format and Coordinated Universal Time (UTC).</p>
     #   @return [String]
     class ResolverQueryLogConfigAssociation < Struct.new(
+      nil,
       :id,
       :resolver_query_log_config_id,
       :resource_id,
@@ -3873,6 +4013,7 @@ module Aws::Route53Resolver
     #   		</p>
     #   @return [String]
     class ResolverRule < Struct.new(
+      nil,
       :id,
       :creator_request_id,
       :arn,
@@ -3921,6 +4062,7 @@ module Aws::Route53Resolver
     #   <p>A detailed description of the status of the association between a Resolver rule and a VPC.</p>
     #   @return [String]
     class ResolverRuleAssociation < Struct.new(
+      nil,
       :id,
       :resolver_rule_id,
       :name,
@@ -3946,6 +4088,7 @@ module Aws::Route53Resolver
     #   			<code>TargetIps</code>.</p>
     #   @return [String]
     class ResolverRuleConfig < Struct.new(
+      nil,
       :name,
       :target_ips,
       :resolver_endpoint_id,
@@ -3961,6 +4104,7 @@ module Aws::Route53Resolver
     #   <p>For a <code>ResourceExistsException</code> error, the type of resource that the error applies to.</p>
     #   @return [String]
     class ResourceExistsException < Struct.new(
+      nil,
       :message,
       :resource_type,
       keyword_init: true
@@ -3975,6 +4119,7 @@ module Aws::Route53Resolver
     #   <p>For a <code>ResourceInUseException</code> error, the type of resource that is currently in use.</p>
     #   @return [String]
     class ResourceInUseException < Struct.new(
+      nil,
       :message,
       :resource_type,
       keyword_init: true
@@ -3989,6 +4134,7 @@ module Aws::Route53Resolver
     #   <p>For a <code>ResourceNotFoundException</code> error, the type of resource that doesn't exist.</p>
     #   @return [String]
     class ResourceNotFoundException < Struct.new(
+      nil,
       :message,
       :resource_type,
       keyword_init: true
@@ -4003,6 +4149,7 @@ module Aws::Route53Resolver
     #   <p>For a <code>ResourceUnavailableException</code> error, the type of resource that isn't available.</p>
     #   @return [String]
     class ResourceUnavailableException < Struct.new(
+      nil,
       :message,
       :resource_type,
       keyword_init: true
@@ -4014,6 +4161,7 @@ module Aws::Route53Resolver
     # @!attribute message
     #   @return [String]
     class ServiceQuotaExceededException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -4030,6 +4178,7 @@ module Aws::Route53Resolver
     #   			customer account that you're creating the resource for.</p>
     #   @return [String]
     class Tag < Struct.new(
+      nil,
       :key,
       :value,
       keyword_init: true
@@ -4077,6 +4226,7 @@ module Aws::Route53Resolver
     #   <p>The tags that you want to add to the specified resource.</p>
     #   @return [Array<Types::Tag>]
     class TagResourceRequest < Struct.new(
+      nil,
       :resource_arn,
       :tags,
       keyword_init: true
@@ -4085,6 +4235,7 @@ module Aws::Route53Resolver
     end
 
     class TagResourceResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -4115,6 +4266,7 @@ module Aws::Route53Resolver
     #   		</p>
     #   @return [String]
     class TargetAddress < Struct.new(
+      nil,
       :ip,
       :port,
       :ipv6,
@@ -4129,6 +4281,7 @@ module Aws::Route53Resolver
     # @!attribute message
     #   @return [String]
     class ThrottlingException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -4139,6 +4292,7 @@ module Aws::Route53Resolver
     # @!attribute message
     #   @return [String]
     class UnknownResourceException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -4185,6 +4339,7 @@ module Aws::Route53Resolver
     #   <p>The tags that you want to remove to the specified resource.</p>
     #   @return [Array<String>]
     class UntagResourceRequest < Struct.new(
+      nil,
       :resource_arn,
       :tag_keys,
       keyword_init: true
@@ -4193,6 +4348,7 @@ module Aws::Route53Resolver
     end
 
     class UntagResourceResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -4216,6 +4372,7 @@ module Aws::Route53Resolver
     #            <p>This behavior is only enforced for VPCs that have at least one DNS Firewall rule group association. </p>
     #   @return [String]
     class UpdateFirewallConfigRequest < Struct.new(
+      nil,
       :resource_id,
       :firewall_fail_open,
       keyword_init: true
@@ -4227,6 +4384,7 @@ module Aws::Route53Resolver
     #   <p>Configuration of the firewall behavior provided by DNS Firewall for a single VPC. </p>
     #   @return [Types::FirewallConfig]
     class UpdateFirewallConfigResponse < Struct.new(
+      nil,
       :firewall_config,
       keyword_init: true
     )
@@ -4275,6 +4433,7 @@ module Aws::Route53Resolver
     #            </ul>
     #   @return [Array<String>]
     class UpdateFirewallDomainsRequest < Struct.new(
+      nil,
       :firewall_domain_list_id,
       :operation,
       :domains,
@@ -4296,6 +4455,7 @@ module Aws::Route53Resolver
     #   <p>Additional information about the status of the list, if available.</p>
     #   @return [String]
     class UpdateFirewallDomainsResponse < Struct.new(
+      nil,
       :id,
       :name,
       :status,
@@ -4323,6 +4483,7 @@ module Aws::Route53Resolver
     #   <p>The name of the rule group association.</p>
     #   @return [String]
     class UpdateFirewallRuleGroupAssociationRequest < Struct.new(
+      nil,
       :firewall_rule_group_association_id,
       :priority,
       :mutation_protection,
@@ -4336,6 +4497,7 @@ module Aws::Route53Resolver
     #   <p>The association that you just updated. </p>
     #   @return [Types::FirewallRuleGroupAssociation]
     class UpdateFirewallRuleGroupAssociationResponse < Struct.new(
+      nil,
       :firewall_rule_group_association,
       keyword_init: true
     )
@@ -4513,6 +4675,7 @@ module Aws::Route53Resolver
     #            </ul>
     #   @return [String]
     class UpdateFirewallRuleRequest < Struct.new(
+      nil,
       :firewall_rule_group_id,
       :firewall_domain_list_id,
       :firewall_threat_protection_id,
@@ -4536,6 +4699,7 @@ module Aws::Route53Resolver
     #   <p>The firewall rule that you just updated. </p>
     #   @return [Types::FirewallRule]
     class UpdateFirewallRuleResponse < Struct.new(
+      nil,
       :firewall_rule,
       keyword_init: true
     )
@@ -4554,6 +4718,7 @@ module Aws::Route53Resolver
     #   		</p>
     #   @return [String]
     class UpdateIpAddress < Struct.new(
+      nil,
       :ip_id,
       :ipv6,
       keyword_init: true
@@ -4576,6 +4741,7 @@ module Aws::Route53Resolver
     #   		</p>
     #   @return [String]
     class UpdateOutpostResolverRequest < Struct.new(
+      nil,
       :id,
       :name,
       :instance_count,
@@ -4589,6 +4755,7 @@ module Aws::Route53Resolver
     #   <p>The response to an <code>UpdateOutpostResolver</code> request.</p>
     #   @return [Types::OutpostResolver]
     class UpdateOutpostResolverResponse < Struct.new(
+      nil,
       :outpost_resolver,
       keyword_init: true
     )
@@ -4613,6 +4780,7 @@ module Aws::Route53Resolver
     #            <p></p>
     #   @return [String]
     class UpdateResolverConfigRequest < Struct.new(
+      nil,
       :resource_id,
       :autodefined_reverse_flag,
       keyword_init: true
@@ -4624,6 +4792,7 @@ module Aws::Route53Resolver
     #   <p>An array that contains settings for the specified Resolver configuration.</p>
     #   @return [Types::ResolverConfig]
     class UpdateResolverConfigResponse < Struct.new(
+      nil,
       :resolver_config,
       keyword_init: true
     )
@@ -4638,6 +4807,7 @@ module Aws::Route53Resolver
     #   			or <code>DISABLE</code>. Be aware that it can take time for a validation status change to be completed.</p>
     #   @return [String]
     class UpdateResolverDnssecConfigRequest < Struct.new(
+      nil,
       :resource_id,
       :validation,
       keyword_init: true
@@ -4649,6 +4819,7 @@ module Aws::Route53Resolver
     #   <p>A complex type that contains settings for the specified DNSSEC configuration.</p>
     #   @return [Types::ResolverDnssecConfig]
     class UpdateResolverDnssecConfigResponse < Struct.new(
+      nil,
       :resolver_dnssec_config,
       keyword_init: true
     )
@@ -4724,6 +4895,7 @@ module Aws::Route53Resolver
     #            </important>
     #   @return [Array<String>]
     class UpdateResolverEndpointRequest < Struct.new(
+      nil,
       :resolver_endpoint_id,
       :name,
       :resolver_endpoint_type,
@@ -4738,6 +4910,7 @@ module Aws::Route53Resolver
     #   <p>The response to an <code>UpdateResolverEndpoint</code> request.</p>
     #   @return [Types::ResolverEndpoint]
     class UpdateResolverEndpointResponse < Struct.new(
+      nil,
       :resolver_endpoint,
       keyword_init: true
     )
@@ -4751,6 +4924,7 @@ module Aws::Route53Resolver
     #   <p>The new settings for the Resolver rule.</p>
     #   @return [Types::ResolverRuleConfig]
     class UpdateResolverRuleRequest < Struct.new(
+      nil,
       :resolver_rule_id,
       :config,
       keyword_init: true
@@ -4762,6 +4936,7 @@ module Aws::Route53Resolver
     #   <p>The response to an <code>UpdateResolverRule</code> request.</p>
     #   @return [Types::ResolverRule]
     class UpdateResolverRuleResponse < Struct.new(
+      nil,
       :resolver_rule,
       keyword_init: true
     )
@@ -4773,6 +4948,7 @@ module Aws::Route53Resolver
     # @!attribute message
     #   @return [String]
     class ValidationException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )

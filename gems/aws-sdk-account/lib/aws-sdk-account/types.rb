@@ -16,6 +16,7 @@ module Aws::Account
     #   <p>The OTP code sent to the <code>PrimaryEmail</code> specified on the <code>StartPrimaryEmailUpdate</code> API call.</p>
     #   @return [String]
     class AcceptPrimaryEmailUpdateRequest < Struct.new(
+      nil,
       :account_id,
       :primary_email,
       :otp,
@@ -28,6 +29,7 @@ module Aws::Account
     #   <p>Retrieves the status of the accepted primary email update request.</p>
     #   @return [String]
     class AcceptPrimaryEmailUpdateResponse < Struct.new(
+      nil,
       :status,
       keyword_init: true
     )
@@ -41,6 +43,7 @@ module Aws::Account
     #   <p>The value populated to the <code>x-amzn-ErrorType</code> response header by API Gateway.</p>
     #   @return [String]
     class AccessDeniedException < Struct.new(
+      nil,
       :message,
       :error_type,
       keyword_init: true
@@ -65,6 +68,7 @@ module Aws::Account
     #   <p>The type of alternate contact.</p>
     #   @return [String]
     class AlternateContact < Struct.new(
+      nil,
       :name,
       :title,
       :email_address,
@@ -82,6 +86,7 @@ module Aws::Account
     #   <p>The value populated to the <code>x-amzn-ErrorType</code> response header by API Gateway.</p>
     #   @return [String]
     class ConflictException < Struct.new(
+      nil,
       :message,
       :error_type,
       keyword_init: true
@@ -127,6 +132,7 @@ module Aws::Account
     #   <p>The URL of the website associated with the primary contact information, if any.</p>
     #   @return [String]
     class ContactInformation < Struct.new(
+      nil,
       :full_name,
       :address_line1,
       :address_line2,
@@ -151,6 +157,7 @@ module Aws::Account
     #   <p>Specifies the 12 digit account ID number of the Amazon Web Services account that you want to access or modify with this operation.</p> <p>If you do not specify this parameter, it defaults to the Amazon Web Services account of the identity used to call the operation.</p> <p>To use this parameter, the caller must be an identity in the <a href="https://docs.aws.amazon.com/organizations/latest/userguide/orgs_getting-started_concepts.html#account">organization's management account</a> or a delegated administrator account, and the specified account ID must be a member account in the same organization. The organization must have <a href="https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_org_support-all-features.html">all features enabled</a>, and the organization must have <a href="https://docs.aws.amazon.com/organizations/latest/userguide/using-orgs-trusted-access.html">trusted access</a> enabled for the Account Management service, and optionally a <a href="https://docs.aws.amazon.com/organizations/latest/userguide/using-orgs-delegated-admin.html">delegated admin</a> account assigned.</p> <note> <p>The management account can't specify its own <code>AccountId</code>; it must call the operation in standalone context by not including the <code>AccountId</code> parameter.</p> </note> <p>To call this operation on an account that is not a member of an organization, then don't specify this parameter, and call the operation using an identity belonging to the account whose contacts you wish to retrieve or modify.</p>
     #   @return [String]
     class DeleteAlternateContactRequest < Struct.new(
+      nil,
       :alternate_contact_type,
       :account_id,
       keyword_init: true
@@ -165,6 +172,7 @@ module Aws::Account
     #   <p>Specifies the Region-code for a given Region name (for example, <code>af-south-1</code>). When you disable a Region, Amazon Web Services performs actions to deactivate that Region in your account, such as destroying IAM resources in the Region. This process takes a few minutes for most accounts, but this can take several hours. You cannot enable the Region until the disabling process is fully completed.</p>
     #   @return [String]
     class DisableRegionRequest < Struct.new(
+      nil,
       :account_id,
       :region_name,
       keyword_init: true
@@ -179,6 +187,7 @@ module Aws::Account
     #   <p>Specifies the Region-code for a given Region name (for example, <code>af-south-1</code>). When you enable a Region, Amazon Web Services performs actions to prepare your account in that Region, such as distributing your IAM resources to the Region. This process takes a few minutes for most accounts, but it can take several hours. You cannot use the Region until this process is complete. Furthermore, you cannot disable the Region until the enabling process is fully completed.</p>
     #   @return [String]
     class EnableRegionRequest < Struct.new(
+      nil,
       :account_id,
       :region_name,
       keyword_init: true
@@ -190,6 +199,7 @@ module Aws::Account
     #   <p>Specifies the 12 digit account ID number of the Amazon Web Services account that you want to access or modify with this operation.</p> <p>If you do not specify this parameter, it defaults to the Amazon Web Services account of the identity used to call the operation.</p> <p>To use this parameter, the caller must be an identity in the <a href="https://docs.aws.amazon.com/organizations/latest/userguide/orgs_getting-started_concepts.html#account">organization's management account</a> or a delegated administrator account, and the specified account ID must be a member account in the same organization. The organization must have <a href="https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_org_support-all-features.html">all features enabled</a>, and the organization must have <a href="https://docs.aws.amazon.com/organizations/latest/userguide/using-orgs-trusted-access.html">trusted access</a> enabled for the Account Management service, and optionally a <a href="https://docs.aws.amazon.com/organizations/latest/userguide/using-orgs-delegated-admin.html">delegated admin</a> account assigned.</p> <note> <p>The management account can't specify its own <code>AccountId</code>; it must call the operation in standalone context by not including the <code>AccountId</code> parameter.</p> </note> <p>To call this operation on an account that is not a member of an organization, then don't specify this parameter, and call the operation using an identity belonging to the account whose contacts you wish to retrieve or modify.</p>
     #   @return [String]
     class GetAccountInformationRequest < Struct.new(
+      nil,
       :account_id,
       keyword_init: true
     )
@@ -206,6 +216,7 @@ module Aws::Account
     #   <p>The date and time the account was created.</p>
     #   @return [Time]
     class GetAccountInformationResponse < Struct.new(
+      nil,
       :account_id,
       :account_name,
       :account_created_date,
@@ -221,6 +232,7 @@ module Aws::Account
     #   <p>Specifies the 12 digit account ID number of the Amazon Web Services account that you want to access or modify with this operation.</p> <p>If you do not specify this parameter, it defaults to the Amazon Web Services account of the identity used to call the operation.</p> <p>To use this parameter, the caller must be an identity in the <a href="https://docs.aws.amazon.com/organizations/latest/userguide/orgs_getting-started_concepts.html#account">organization's management account</a> or a delegated administrator account, and the specified account ID must be a member account in the same organization. The organization must have <a href="https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_org_support-all-features.html">all features enabled</a>, and the organization must have <a href="https://docs.aws.amazon.com/organizations/latest/userguide/using-orgs-trusted-access.html">trusted access</a> enabled for the Account Management service, and optionally a <a href="https://docs.aws.amazon.com/organizations/latest/userguide/using-orgs-delegated-admin.html">delegated admin</a> account assigned.</p> <note> <p>The management account can't specify its own <code>AccountId</code>; it must call the operation in standalone context by not including the <code>AccountId</code> parameter.</p> </note> <p>To call this operation on an account that is not a member of an organization, then don't specify this parameter, and call the operation using an identity belonging to the account whose contacts you wish to retrieve or modify.</p>
     #   @return [String]
     class GetAlternateContactRequest < Struct.new(
+      nil,
       :alternate_contact_type,
       :account_id,
       keyword_init: true
@@ -232,6 +244,7 @@ module Aws::Account
     #   <p>A structure that contains the details for the specified alternate contact.</p>
     #   @return [Types::AlternateContact]
     class GetAlternateContactResponse < Struct.new(
+      nil,
       :alternate_contact,
       keyword_init: true
     )
@@ -242,6 +255,7 @@ module Aws::Account
     #   <p>Specifies the 12-digit account ID number of the Amazon Web Services account that you want to access or modify with this operation. If you don't specify this parameter, it defaults to the Amazon Web Services account of the identity used to call the operation. To use this parameter, the caller must be an identity in the <a href="https://docs.aws.amazon.com/organizations/latest/userguide/orgs_getting-started_concepts.html#account">organization's management account</a> or a delegated administrator account. The specified account ID must be a member account in the same organization. The organization must have <a href="https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_org_support-all-features.html">all features enabled</a>, and the organization must have <a href="https://docs.aws.amazon.com/organizations/latest/userguide/orgs_integrate_services.html">trusted access</a> enabled for the Account Management service, and optionally a <a href="https://docs.aws.amazon.com/organizations/latest/userguide/orgs_getting-started_concepts.html#delegated-admin">delegated admin</a> account assigned.</p> <note> <p>The management account can't specify its own <code>AccountId</code>. It must call the operation in standalone context by not including the <code>AccountId</code> parameter.</p> </note> <p>To call this operation on an account that is not a member of an organization, don't specify this parameter. Instead, call the operation using an identity belonging to the account whose contacts you wish to retrieve or modify.</p>
     #   @return [String]
     class GetContactInformationRequest < Struct.new(
+      nil,
       :account_id,
       keyword_init: true
     )
@@ -252,6 +266,7 @@ module Aws::Account
     #   <p>Contains the details of the primary contact information associated with an Amazon Web Services account.</p>
     #   @return [Types::ContactInformation]
     class GetContactInformationResponse < Struct.new(
+      nil,
       :contact_information,
       keyword_init: true
     )
@@ -262,6 +277,7 @@ module Aws::Account
     #   <p>Specifies the 12-digit account ID number of the Amazon Web Services account that you want to access or modify with this operation. To use this parameter, the caller must be an identity in the <a href="https://docs.aws.amazon.com/organizations/latest/userguide/orgs_getting-started_concepts.html#account">organization's management account</a> or a delegated administrator account. The specified account ID must be a member account in the same organization. The organization must have <a href="https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_org_support-all-features.html">all features enabled</a>, and the organization must have <a href="https://docs.aws.amazon.com/organizations/latest/userguide/orgs_integrate_services.html">trusted access</a> enabled for the Account Management service, and optionally a <a href="https://docs.aws.amazon.com/organizations/latest/userguide/orgs_getting-started_concepts.html#delegated-admin">delegated admin</a> account assigned.</p> <p>This operation can only be called from the management account or the delegated administrator account of an organization for a member account.</p> <note> <p>The management account can't specify its own <code>AccountId</code>.</p> </note>
     #   @return [String]
     class GetPrimaryEmailRequest < Struct.new(
+      nil,
       :account_id,
       keyword_init: true
     )
@@ -272,6 +288,7 @@ module Aws::Account
     #   <p>Retrieves the primary email address associated with the specified account.</p>
     #   @return [String]
     class GetPrimaryEmailResponse < Struct.new(
+      nil,
       :primary_email,
       keyword_init: true
     )
@@ -285,6 +302,7 @@ module Aws::Account
     #   <p>Specifies the Region-code for a given Region name (for example, <code>af-south-1</code>). This function will return the status of whatever Region you pass into this parameter. </p>
     #   @return [String]
     class GetRegionOptStatusRequest < Struct.new(
+      nil,
       :account_id,
       :region_name,
       keyword_init: true
@@ -299,6 +317,7 @@ module Aws::Account
     #   <p>One of the potential statuses a Region can undergo (Enabled, Enabling, Disabled, Disabling, Enabled_By_Default).</p>
     #   @return [String]
     class GetRegionOptStatusResponse < Struct.new(
+      nil,
       :region_name,
       :region_opt_status,
       keyword_init: true
@@ -313,6 +332,7 @@ module Aws::Account
     #   <p>The value populated to the <code>x-amzn-ErrorType</code> response header by API Gateway.</p>
     #   @return [String]
     class InternalServerException < Struct.new(
+      nil,
       :message,
       :error_type,
       keyword_init: true
@@ -333,6 +353,7 @@ module Aws::Account
     #   <p>A list of Region statuses (Enabling, Enabled, Disabling, Disabled, Enabled_by_default) to use to filter the list of Regions for a given account. For example, passing in a value of ENABLING will only return a list of Regions with a Region status of ENABLING.</p>
     #   @return [Array<String>]
     class ListRegionsRequest < Struct.new(
+      nil,
       :account_id,
       :max_results,
       :next_token,
@@ -349,6 +370,7 @@ module Aws::Account
     #   <p>This is a list of Regions for a given account, or if the filtered parameter was used, a list of Regions that match the filter criteria set in the <code>filter</code> parameter.</p>
     #   @return [Array<Types::Region>]
     class ListRegionsResponse < Struct.new(
+      nil,
       :next_token,
       :regions,
       keyword_init: true
@@ -363,6 +385,7 @@ module Aws::Account
     #   <p>Specifies the 12 digit account ID number of the Amazon Web Services account that you want to access or modify with this operation.</p> <p>If you do not specify this parameter, it defaults to the Amazon Web Services account of the identity used to call the operation.</p> <p>To use this parameter, the caller must be an identity in the <a href="https://docs.aws.amazon.com/organizations/latest/userguide/orgs_getting-started_concepts.html#account">organization's management account</a> or a delegated administrator account, and the specified account ID must be a member account in the same organization. The organization must have <a href="https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_org_support-all-features.html">all features enabled</a>, and the organization must have <a href="https://docs.aws.amazon.com/organizations/latest/userguide/using-orgs-trusted-access.html">trusted access</a> enabled for the Account Management service, and optionally a <a href="https://docs.aws.amazon.com/organizations/latest/userguide/using-orgs-delegated-admin.html">delegated admin</a> account assigned.</p> <note> <p>The management account can't specify its own <code>AccountId</code>; it must call the operation in standalone context by not including the <code>AccountId</code> parameter.</p> </note> <p>To call this operation on an account that is not a member of an organization, then don't specify this parameter, and call the operation using an identity belonging to the account whose contacts you wish to retrieve or modify.</p>
     #   @return [String]
     class PutAccountNameRequest < Struct.new(
+      nil,
       :account_name,
       :account_id,
       keyword_init: true
@@ -389,6 +412,7 @@ module Aws::Account
     #   <p>Specifies the 12 digit account ID number of the Amazon Web Services account that you want to access or modify with this operation.</p> <p>If you do not specify this parameter, it defaults to the Amazon Web Services account of the identity used to call the operation.</p> <p>To use this parameter, the caller must be an identity in the <a href="https://docs.aws.amazon.com/organizations/latest/userguide/orgs_getting-started_concepts.html#account">organization's management account</a> or a delegated administrator account, and the specified account ID must be a member account in the same organization. The organization must have <a href="https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_org_support-all-features.html">all features enabled</a>, and the organization must have <a href="https://docs.aws.amazon.com/organizations/latest/userguide/using-orgs-trusted-access.html">trusted access</a> enabled for the Account Management service, and optionally a <a href="https://docs.aws.amazon.com/organizations/latest/userguide/using-orgs-delegated-admin.html">delegated admin</a> account assigned.</p> <note> <p>The management account can't specify its own <code>AccountId</code>; it must call the operation in standalone context by not including the <code>AccountId</code> parameter.</p> </note> <p>To call this operation on an account that is not a member of an organization, then don't specify this parameter, and call the operation using an identity belonging to the account whose contacts you wish to retrieve or modify.</p>
     #   @return [String]
     class PutAlternateContactRequest < Struct.new(
+      nil,
       :name,
       :title,
       :email_address,
@@ -407,6 +431,7 @@ module Aws::Account
     #   <p>Specifies the 12-digit account ID number of the Amazon Web Services account that you want to access or modify with this operation. If you don't specify this parameter, it defaults to the Amazon Web Services account of the identity used to call the operation. To use this parameter, the caller must be an identity in the <a href="https://docs.aws.amazon.com/organizations/latest/userguide/orgs_getting-started_concepts.html#account">organization's management account</a> or a delegated administrator account. The specified account ID must be a member account in the same organization. The organization must have <a href="https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_org_support-all-features.html">all features enabled</a>, and the organization must have <a href="https://docs.aws.amazon.com/organizations/latest/userguide/orgs_integrate_services.html">trusted access</a> enabled for the Account Management service, and optionally a <a href="https://docs.aws.amazon.com/organizations/latest/userguide/orgs_getting-started_concepts.html#delegated-admin">delegated admin</a> account assigned.</p> <note> <p>The management account can't specify its own <code>AccountId</code>. It must call the operation in standalone context by not including the <code>AccountId</code> parameter.</p> </note> <p>To call this operation on an account that is not a member of an organization, don't specify this parameter. Instead, call the operation using an identity belonging to the account whose contacts you wish to retrieve or modify.</p>
     #   @return [String]
     class PutContactInformationRequest < Struct.new(
+      nil,
       :contact_information,
       :account_id,
       keyword_init: true
@@ -422,6 +447,7 @@ module Aws::Account
     #   <p>One of potential statuses a Region can undergo (Enabled, Enabling, Disabled, Disabling, Enabled_By_Default).</p>
     #   @return [String]
     class Region < Struct.new(
+      nil,
       :region_name,
       :region_opt_status,
       keyword_init: true
@@ -436,6 +462,7 @@ module Aws::Account
     #   <p>The value populated to the <code>x-amzn-ErrorType</code> response header by API Gateway.</p>
     #   @return [String]
     class ResourceNotFoundException < Struct.new(
+      nil,
       :message,
       :error_type,
       keyword_init: true
@@ -450,6 +477,7 @@ module Aws::Account
     #   <p>The new primary email address (also known as the root user email address) to use in the specified account.</p>
     #   @return [String]
     class StartPrimaryEmailUpdateRequest < Struct.new(
+      nil,
       :account_id,
       :primary_email,
       keyword_init: true
@@ -461,6 +489,7 @@ module Aws::Account
     #   <p>The status of the primary email update request.</p>
     #   @return [String]
     class StartPrimaryEmailUpdateResponse < Struct.new(
+      nil,
       :status,
       keyword_init: true
     )
@@ -474,6 +503,7 @@ module Aws::Account
     #   <p>The value populated to the <code>x-amzn-ErrorType</code> response header by API Gateway.</p>
     #   @return [String]
     class TooManyRequestsException < Struct.new(
+      nil,
       :message,
       :error_type,
       keyword_init: true
@@ -492,6 +522,7 @@ module Aws::Account
     #   <p>The field where the invalid entry was detected.</p>
     #   @return [Array<Types::ValidationExceptionField>]
     class ValidationException < Struct.new(
+      nil,
       :message,
       :reason,
       :field_list,
@@ -508,6 +539,7 @@ module Aws::Account
     #   <p>A message about the validation exception.</p>
     #   @return [String]
     class ValidationExceptionField < Struct.new(
+      nil,
       :name,
       :message,
       keyword_init: true

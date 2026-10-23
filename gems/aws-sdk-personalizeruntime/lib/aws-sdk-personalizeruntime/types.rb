@@ -33,6 +33,7 @@ module Aws::PersonalizeRuntime
     #         <a href="https://docs.aws.amazon.com/personalize/latest/dg/filter.html">Filtering recommendations and user segments</a>.</p>
     #   @return [Hash<String, String>]
     class GetActionRecommendationsRequest < Struct.new(
+      nil,
       :campaign_arn,
       :user_id,
       :num_results,
@@ -52,6 +53,7 @@ module Aws::PersonalizeRuntime
     #   <p>The ID of the recommendation.</p>
     #   @return [String]
     class GetActionRecommendationsResponse < Struct.new(
+      nil,
       :action_list,
       :recommendation_id,
       keyword_init: true
@@ -103,6 +105,7 @@ module Aws::PersonalizeRuntime
     #       </p>
     #   @return [Hash<String, Array<String>>]
     class GetPersonalizedRankingRequest < Struct.new(
+      nil,
       :campaign_arn,
       :input_list,
       :user_id,
@@ -122,6 +125,7 @@ module Aws::PersonalizeRuntime
     #   <p>The ID of the recommendation.</p>
     #   @return [String]
     class GetPersonalizedRankingResponse < Struct.new(
+      nil,
       :personalized_ranking,
       :recommendation_id,
       keyword_init: true
@@ -184,6 +188,7 @@ module Aws::PersonalizeRuntime
     #       </p>
     #   @return [Hash<String, Array<String>>]
     class GetRecommendationsRequest < Struct.new(
+      nil,
       :campaign_arn,
       :item_id,
       :user_id,
@@ -207,6 +212,7 @@ module Aws::PersonalizeRuntime
     #   <p>The ID of the recommendation.</p>
     #   @return [String]
     class GetRecommendationsResponse < Struct.new(
+      nil,
       :item_list,
       :recommendation_id,
       keyword_init: true
@@ -218,6 +224,7 @@ module Aws::PersonalizeRuntime
     # @!attribute message
     #   @return [String]
     class InvalidInputException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -234,6 +241,7 @@ module Aws::PersonalizeRuntime
     #   <p>The score of the recommended action. For information about action scores, see <a href="https://docs.aws.amazon.com/personalize/latest/dg/how-action-recommendation-scoring-works.html">How action recommendation scoring works</a>.</p>
     #   @return [Float]
     class PredictedAction < Struct.new(
+      nil,
       :action_id,
       :score,
       keyword_init: true
@@ -281,6 +289,7 @@ module Aws::PersonalizeRuntime
     #            </ul>
     #   @return [Array<String>]
     class PredictedItem < Struct.new(
+      nil,
       :item_id,
       :score,
       :promotion_name,
@@ -315,6 +324,7 @@ module Aws::PersonalizeRuntime
     #         <a href="https://docs.aws.amazon.com/personalize/latest/dg/filter.html">Filtering recommendations and user segments</a>.</p>
     #   @return [Hash<String, String>]
     class Promotion < Struct.new(
+      nil,
       :name,
       :percent_promoted_items,
       :filter_arn,
@@ -328,6 +338,7 @@ module Aws::PersonalizeRuntime
     # @!attribute message
     #   @return [String]
     class ResourceNotFoundException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )

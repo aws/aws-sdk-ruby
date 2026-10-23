@@ -11,6 +11,7 @@ module Aws::Budgets
     #   <p>The error message the exception carries.</p>
     #   @return [String]
     class AccessDeniedException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -52,6 +53,7 @@ module Aws::Budgets
     #   <p> A list of subscribers.</p>
     #   @return [Array<Types::Subscriber>]
     class Action < Struct.new(
+      nil,
       :action_id,
       :budget_name,
       :notification_type,
@@ -82,6 +84,7 @@ module Aws::Budgets
     #   <p>The description of the details for the event. </p>
     #   @return [Types::ActionHistoryDetails]
     class ActionHistory < Struct.new(
+      nil,
       :timestamp,
       :status,
       :event_type,
@@ -99,6 +102,7 @@ module Aws::Budgets
     #   <p>The budget action resource. </p>
     #   @return [Types::Action]
     class ActionHistoryDetails < Struct.new(
+      nil,
       :message,
       :action,
       keyword_init: true
@@ -114,6 +118,7 @@ module Aws::Budgets
     #   <p> The type of threshold for a notification.</p>
     #   @return [String]
     class ActionThreshold < Struct.new(
+      nil,
       :action_threshold_value,
       :action_threshold_type,
       keyword_init: true
@@ -139,6 +144,7 @@ module Aws::Budgets
     #   <p>The last time that your budget was auto-adjusted.</p>
     #   @return [Time]
     class AutoAdjustData < Struct.new(
+      nil,
       :auto_adjust_type,
       :historical_options,
       :last_auto_adjust_time,
@@ -154,6 +160,7 @@ module Aws::Budgets
     #   <p>The error message the exception carries.</p>
     #   @return [String]
     class BillingViewHealthStatusException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -297,6 +304,7 @@ module Aws::Budgets
     #   <p>The current operational state of a Billing View derived resource.</p>
     #   @return [Types::HealthStatus]
     class Budget < Struct.new(
+      nil,
       :budget_name,
       :budget_limit,
       :planned_budget_limits,
@@ -328,6 +336,7 @@ module Aws::Budgets
     #   			"/action/" substring, aren't allowed.</p>
     #   @return [String]
     class BudgetNotificationsForAccount < Struct.new(
+      nil,
       :notifications,
       :budget_name,
       keyword_init: true
@@ -369,6 +378,7 @@ module Aws::Budgets
     #   			your actual costs or usage.</p>
     #   @return [Array<Types::BudgetedAndActualAmounts>]
     class BudgetPerformanceHistory < Struct.new(
+      nil,
       :budget_name,
       :budget_type,
       :cost_filters,
@@ -393,6 +403,7 @@ module Aws::Budgets
     #   <p>The time period that's covered by this budget comparison.</p>
     #   @return [Types::TimePeriod]
     class BudgetedAndActualAmounts < Struct.new(
+      nil,
       :budgeted_amount,
       :actual_amount,
       :time_period,
@@ -416,6 +427,7 @@ module Aws::Budgets
     #   			use.</p>
     #   @return [Types::Spend]
     class CalculatedSpend < Struct.new(
+      nil,
       :actual_spend,
       :forecasted_spend,
       keyword_init: true
@@ -434,6 +446,7 @@ module Aws::Budgets
     #   <p>The match options that you can use to filter your results. </p>
     #   @return [Array<String>]
     class CostCategoryValues < Struct.new(
+      nil,
       :key,
       :values,
       :match_options,
@@ -493,6 +506,7 @@ module Aws::Budgets
     #            <p>The default value is <code>false</code>.</p>
     #   @return [Boolean]
     class CostTypes < Struct.new(
+      nil,
       :include_tax,
       :include_subscription,
       :use_blended,
@@ -548,6 +562,7 @@ module Aws::Budgets
     #            key and a value, and each key must be unique for the resource.</p>
     #   @return [Array<Types::ResourceTag>]
     class CreateBudgetActionRequest < Struct.new(
+      nil,
       :account_id,
       :budget_name,
       :notification_type,
@@ -576,6 +591,7 @@ module Aws::Budgets
     #         </p>
     #   @return [String]
     class CreateBudgetActionResponse < Struct.new(
+      nil,
       :account_id,
       :budget_name,
       :action_id,
@@ -599,6 +615,7 @@ module Aws::Budgets
     #            key and a value, and each key must be unique for the resource.</p>
     #   @return [Array<Types::ResourceTag>]
     class CreateBudgetRequest < Struct.new(
+      nil,
       :account_id,
       :budget,
       :notifications_with_subscribers,
@@ -610,6 +627,7 @@ module Aws::Budgets
 
     # <p> Response of CreateBudget </p>
     class CreateBudgetResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -629,6 +647,7 @@ module Aws::Budgets
     #   <p>A list of subscribers that you want to associate with the notification. Each notification can have one SNS subscriber and up to 10 email subscribers.</p>
     #   @return [Array<Types::Subscriber>]
     class CreateNotificationRequest < Struct.new(
+      nil,
       :account_id,
       :budget_name,
       :notification,
@@ -640,6 +659,7 @@ module Aws::Budgets
 
     # <p> Response of CreateNotification </p>
     class CreateNotificationResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -659,6 +679,7 @@ module Aws::Budgets
     #   <p>The subscriber that you want to associate with a budget notification.</p>
     #   @return [Types::Subscriber]
     class CreateSubscriberRequest < Struct.new(
+      nil,
       :account_id,
       :budget_name,
       :notification,
@@ -670,6 +691,7 @@ module Aws::Budgets
 
     # <p> Response of CreateSubscriber </p>
     class CreateSubscriberResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -680,6 +702,7 @@ module Aws::Budgets
     #   <p>The error message the exception carries.</p>
     #   @return [String]
     class CreationLimitExceededException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -697,6 +720,7 @@ module Aws::Budgets
     #   <p>The Amazon Web Services Systems Manager (SSM) action definition details. </p>
     #   @return [Types::SsmActionDefinition]
     class Definition < Struct.new(
+      nil,
       :iam_action_definition,
       :scp_action_definition,
       :ssm_action_definition,
@@ -718,6 +742,7 @@ module Aws::Budgets
     #         </p>
     #   @return [String]
     class DeleteBudgetActionRequest < Struct.new(
+      nil,
       :account_id,
       :budget_name,
       :action_id,
@@ -737,6 +762,7 @@ module Aws::Budgets
     #   <p>A budget action resource. </p>
     #   @return [Types::Action]
     class DeleteBudgetActionResponse < Struct.new(
+      nil,
       :account_id,
       :budget_name,
       :action,
@@ -753,6 +779,7 @@ module Aws::Budgets
     #   <p>The name of the budget that you want to delete.</p>
     #   @return [String]
     class DeleteBudgetRequest < Struct.new(
+      nil,
       :account_id,
       :budget_name,
       keyword_init: true
@@ -762,6 +789,7 @@ module Aws::Budgets
 
     # <p> Response of DeleteBudget </p>
     class DeleteBudgetResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -778,6 +806,7 @@ module Aws::Budgets
     #   <p>The notification that you want to delete.</p>
     #   @return [Types::Notification]
     class DeleteNotificationRequest < Struct.new(
+      nil,
       :account_id,
       :budget_name,
       :notification,
@@ -788,6 +817,7 @@ module Aws::Budgets
 
     # <p> Response of DeleteNotification </p>
     class DeleteNotificationResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -807,6 +837,7 @@ module Aws::Budgets
     #   <p>The subscriber that you want to delete.</p>
     #   @return [Types::Subscriber]
     class DeleteSubscriberRequest < Struct.new(
+      nil,
       :account_id,
       :budget_name,
       :notification,
@@ -818,6 +849,7 @@ module Aws::Budgets
 
     # <p> Response of DeleteSubscriber </p>
     class DeleteSubscriberResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -848,6 +880,7 @@ module Aws::Budgets
     #   <p> A generic string.</p>
     #   @return [String]
     class DescribeBudgetActionHistoriesRequest < Struct.new(
+      nil,
       :account_id,
       :budget_name,
       :action_id,
@@ -868,6 +901,7 @@ module Aws::Budgets
     #   <p> A generic string.</p>
     #   @return [String]
     class DescribeBudgetActionHistoriesResponse < Struct.new(
+      nil,
       :action_histories,
       :next_token,
       keyword_init: true
@@ -888,6 +922,7 @@ module Aws::Budgets
     #         </p>
     #   @return [String]
     class DescribeBudgetActionRequest < Struct.new(
+      nil,
       :account_id,
       :budget_name,
       :action_id,
@@ -909,6 +944,7 @@ module Aws::Budgets
     #         </p>
     #   @return [Types::Action]
     class DescribeBudgetActionResponse < Struct.new(
+      nil,
       :account_id,
       :budget_name,
       :action,
@@ -928,6 +964,7 @@ module Aws::Budgets
     #   <p> A generic string.</p>
     #   @return [String]
     class DescribeBudgetActionsForAccountRequest < Struct.new(
+      nil,
       :account_id,
       :max_results,
       :next_token,
@@ -945,6 +982,7 @@ module Aws::Budgets
     #   <p> A generic string.</p>
     #   @return [String]
     class DescribeBudgetActionsForAccountResponse < Struct.new(
+      nil,
       :actions,
       :next_token,
       keyword_init: true
@@ -967,6 +1005,7 @@ module Aws::Budgets
     #   <p> A generic string.</p>
     #   @return [String]
     class DescribeBudgetActionsForBudgetRequest < Struct.new(
+      nil,
       :account_id,
       :budget_name,
       :max_results,
@@ -985,6 +1024,7 @@ module Aws::Budgets
     #   <p> A generic string.</p>
     #   @return [String]
     class DescribeBudgetActionsForBudgetResponse < Struct.new(
+      nil,
       :actions,
       :next_token,
       keyword_init: true
@@ -1003,6 +1043,7 @@ module Aws::Budgets
     #   <p> A generic string.</p>
     #   @return [String]
     class DescribeBudgetNotificationsForAccountRequest < Struct.new(
+      nil,
       :account_id,
       :max_results,
       :next_token,
@@ -1018,6 +1059,7 @@ module Aws::Budgets
     #   <p> A generic string.</p>
     #   @return [String]
     class DescribeBudgetNotificationsForAccountResponse < Struct.new(
+      nil,
       :budget_notifications_for_account,
       :next_token,
       keyword_init: true
@@ -1043,6 +1085,7 @@ module Aws::Budgets
     #   <p> A generic string.</p>
     #   @return [String]
     class DescribeBudgetPerformanceHistoryRequest < Struct.new(
+      nil,
       :account_id,
       :budget_name,
       :time_period,
@@ -1061,6 +1104,7 @@ module Aws::Budgets
     #   <p> A generic string.</p>
     #   @return [String]
     class DescribeBudgetPerformanceHistoryResponse < Struct.new(
+      nil,
       :budget_performance_history,
       :next_token,
       keyword_init: true
@@ -1081,6 +1125,7 @@ module Aws::Budgets
     #            the budget, such as Amazon Web Services services or tags that are being tracked.</p>
     #   @return [Boolean]
     class DescribeBudgetRequest < Struct.new(
+      nil,
       :account_id,
       :budget_name,
       :show_filter_expression,
@@ -1094,6 +1139,7 @@ module Aws::Budgets
     #   <p>The description of the budget.</p>
     #   @return [Types::Budget]
     class DescribeBudgetResponse < Struct.new(
+      nil,
       :budget,
       keyword_init: true
     )
@@ -1118,6 +1164,7 @@ module Aws::Budgets
     #            the budgets, such as Amazon Web Services services or tags that are being tracked.</p>
     #   @return [Boolean]
     class DescribeBudgetsRequest < Struct.new(
+      nil,
       :account_id,
       :max_results,
       :next_token,
@@ -1135,6 +1182,7 @@ module Aws::Budgets
     #   <p>The pagination token in the service response that indicates the next set of results that you can retrieve.</p>
     #   @return [String]
     class DescribeBudgetsResponse < Struct.new(
+      nil,
       :budgets,
       :next_token,
       keyword_init: true
@@ -1157,6 +1205,7 @@ module Aws::Budgets
     #   <p>The pagination token that you include in your request to indicate the next set of results that you want to retrieve.</p>
     #   @return [String]
     class DescribeNotificationsForBudgetRequest < Struct.new(
+      nil,
       :account_id,
       :budget_name,
       :max_results,
@@ -1174,6 +1223,7 @@ module Aws::Budgets
     #   <p>The pagination token in the service response that indicates the next set of results that you can retrieve.</p>
     #   @return [String]
     class DescribeNotificationsForBudgetResponse < Struct.new(
+      nil,
       :notifications,
       :next_token,
       keyword_init: true
@@ -1198,6 +1248,7 @@ module Aws::Budgets
     #   <p>The pagination token that you include in your request to indicate the next set of results that you want to retrieve.</p>
     #   @return [String]
     class DescribeSubscribersForNotificationRequest < Struct.new(
+      nil,
       :account_id,
       :budget_name,
       :notification,
@@ -1216,6 +1267,7 @@ module Aws::Budgets
     #   <p>The pagination token in the service response that indicates the next set of results that you can retrieve.</p>
     #   @return [String]
     class DescribeSubscribersForNotificationResponse < Struct.new(
+      nil,
       :subscribers,
       :next_token,
       keyword_init: true
@@ -1228,6 +1280,7 @@ module Aws::Budgets
     #   <p>The error message the exception carries.</p>
     #   @return [String]
     class DuplicateRecordException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -1252,6 +1305,7 @@ module Aws::Budgets
     #         </p>
     #   @return [String]
     class ExecuteBudgetActionRequest < Struct.new(
+      nil,
       :account_id,
       :budget_name,
       :action_id,
@@ -1279,6 +1333,7 @@ module Aws::Budgets
     #         </p>
     #   @return [String]
     class ExecuteBudgetActionResponse < Struct.new(
+      nil,
       :account_id,
       :budget_name,
       :action_id,
@@ -1293,6 +1348,7 @@ module Aws::Budgets
     #   <p>The error message the exception carries.</p>
     #   @return [String]
     class ExpiredNextTokenException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -1319,6 +1375,7 @@ module Aws::Budgets
     #   <p>The filter that's based on CostCategoryValues.</p>
     #   @return [Types::CostCategoryValues]
     class Expression < Struct.new(
+      nil,
       :or,
       :and,
       :not,
@@ -1343,6 +1400,7 @@ module Aws::Budgets
     #   			values in the array.</p>
     #   @return [Array<String>]
     class ExpressionDimensionValues < Struct.new(
+      nil,
       :key,
       :values,
       :match_options,
@@ -1384,6 +1442,7 @@ module Aws::Budgets
     #   <p> A generic time stamp. In Java, it's transformed to a <code>Date</code> object.</p>
     #   @return [Time]
     class HealthStatus < Struct.new(
+      nil,
       :status,
       :status_reason,
       :last_updated_time,
@@ -1432,6 +1491,7 @@ module Aws::Budgets
     #   			historical cost data.</p>
     #   @return [Integer]
     class HistoricalOptions < Struct.new(
+      nil,
       :budget_adjustment_period,
       :look_back_available_periods,
       keyword_init: true
@@ -1453,6 +1513,7 @@ module Aws::Budgets
     #   <p>A list of users to be attached. There must be at least one user. </p>
     #   @return [Array<String>]
     class IamActionDefinition < Struct.new(
+      nil,
       :policy_arn,
       :roles,
       :groups,
@@ -1467,6 +1528,7 @@ module Aws::Budgets
     #   <p>The error message the exception carries.</p>
     #   @return [String]
     class InternalErrorException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -1478,6 +1540,7 @@ module Aws::Budgets
     #   <p>The error message the exception carries.</p>
     #   @return [String]
     class InvalidNextTokenException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -1489,6 +1552,7 @@ module Aws::Budgets
     #   <p>The error message the exception carries.</p>
     #   @return [String]
     class InvalidParameterException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -1499,6 +1563,7 @@ module Aws::Budgets
     #   <p>The unique identifier for the resource.</p>
     #   @return [String]
     class ListTagsForResourceRequest < Struct.new(
+      nil,
       :resource_arn,
       keyword_init: true
     )
@@ -1509,6 +1574,7 @@ module Aws::Budgets
     #   <p>The tags associated with the resource.</p>
     #   @return [Array<Types::ResourceTag>]
     class ListTagsForResourceResponse < Struct.new(
+      nil,
       :resource_tags,
       keyword_init: true
     )
@@ -1520,6 +1586,7 @@ module Aws::Budgets
     #   <p>The error message the exception carries.</p>
     #   @return [String]
     class NotFoundException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -1578,6 +1645,7 @@ module Aws::Budgets
     #   				<code>ALARM</code> state, you passed the set threshold for the budget.</p>
     #   @return [String]
     class Notification < Struct.new(
+      nil,
       :notification_type,
       :comparison_operator,
       :threshold,
@@ -1602,6 +1670,7 @@ module Aws::Budgets
     #   <p>A list of subscribers who are subscribed to this notification.</p>
     #   @return [Array<Types::Subscriber>]
     class NotificationWithSubscribers < Struct.new(
+      nil,
       :notification,
       :subscribers,
       keyword_init: true
@@ -1615,6 +1684,7 @@ module Aws::Budgets
     #   <p>The error message the exception carries.</p>
     #   @return [String]
     class ResourceLockedException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -1629,6 +1699,7 @@ module Aws::Budgets
     #   <p>The value that's associated with the tag.</p>
     #   @return [String]
     class ResourceTag < Struct.new(
+      nil,
       :key,
       :value,
       keyword_init: true
@@ -1644,6 +1715,7 @@ module Aws::Budgets
     #   <p>A list of target IDs. </p>
     #   @return [Array<String>]
     class ScpActionDefinition < Struct.new(
+      nil,
       :policy_id,
       :target_ids,
       keyword_init: true
@@ -1656,6 +1728,7 @@ module Aws::Budgets
     #   <p>The error message the exception carries.</p>
     #   @return [String]
     class ServiceQuotaExceededException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -1698,6 +1771,7 @@ module Aws::Budgets
     #   			threshold.</p>
     #   @return [String]
     class Spend < Struct.new(
+      nil,
       :amount,
       :unit,
       keyword_init: true
@@ -1716,6 +1790,7 @@ module Aws::Budgets
     #   <p>The EC2 and RDS instance IDs. </p>
     #   @return [Array<String>]
     class SsmActionDefinition < Struct.new(
+      nil,
       :action_sub_type,
       :region,
       :instance_ids,
@@ -1747,6 +1822,7 @@ module Aws::Budgets
     #   			breaks.</p>
     #   @return [String]
     class Subscriber < Struct.new(
+      nil,
       :subscription_type,
       :address,
       keyword_init: true
@@ -1761,6 +1837,7 @@ module Aws::Budgets
     #   <p>The tags associated with the resource.</p>
     #   @return [Array<Types::ResourceTag>]
     class TagResourceRequest < Struct.new(
+      nil,
       :resource_arn,
       :resource_tags,
       keyword_init: true
@@ -1769,6 +1846,7 @@ module Aws::Budgets
     end
 
     class TagResourceResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1785,6 +1863,7 @@ module Aws::Budgets
     #   <p>The match options that you can use to filter your results.</p>
     #   @return [Array<String>]
     class TagValues < Struct.new(
+      nil,
       :key,
       :values,
       :match_options,
@@ -1799,6 +1878,7 @@ module Aws::Budgets
     #   <p>The error message the exception carries.</p>
     #   @return [String]
     class ThrottlingException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -1827,6 +1907,7 @@ module Aws::Budgets
     #   				<code>UpdateBudget</code> operation.</p>
     #   @return [Time]
     class TimePeriod < Struct.new(
+      nil,
       :start,
       :end,
       keyword_init: true
@@ -1841,6 +1922,7 @@ module Aws::Budgets
     #   <p>The key that's associated with the tag.</p>
     #   @return [Array<String>]
     class UntagResourceRequest < Struct.new(
+      nil,
       :resource_arn,
       :resource_tag_keys,
       keyword_init: true
@@ -1849,6 +1931,7 @@ module Aws::Budgets
     end
 
     class UntagResourceResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1889,6 +1972,7 @@ module Aws::Budgets
     #   <p> A list of subscribers.</p>
     #   @return [Array<Types::Subscriber>]
     class UpdateBudgetActionRequest < Struct.new(
+      nil,
       :account_id,
       :budget_name,
       :action_id,
@@ -1921,6 +2005,7 @@ module Aws::Budgets
     #         </p>
     #   @return [Types::Action]
     class UpdateBudgetActionResponse < Struct.new(
+      nil,
       :account_id,
       :budget_name,
       :old_action,
@@ -1938,6 +2023,7 @@ module Aws::Budgets
     #   <p>The budget that you want to update your budget to.</p>
     #   @return [Types::Budget]
     class UpdateBudgetRequest < Struct.new(
+      nil,
       :account_id,
       :new_budget,
       keyword_init: true
@@ -1947,6 +2033,7 @@ module Aws::Budgets
 
     # <p> Response of UpdateBudget </p>
     class UpdateBudgetResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1966,6 +2053,7 @@ module Aws::Budgets
     #   <p>The updated notification to be associated with a budget.</p>
     #   @return [Types::Notification]
     class UpdateNotificationRequest < Struct.new(
+      nil,
       :account_id,
       :budget_name,
       :old_notification,
@@ -1977,6 +2065,7 @@ module Aws::Budgets
 
     # <p> Response of UpdateNotification </p>
     class UpdateNotificationResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1999,6 +2088,7 @@ module Aws::Budgets
     #   <p>The updated subscriber that is associated with a budget notification.</p>
     #   @return [Types::Subscriber]
     class UpdateSubscriberRequest < Struct.new(
+      nil,
       :account_id,
       :budget_name,
       :notification,
@@ -2011,6 +2101,7 @@ module Aws::Budgets
 
     # <p> Response of UpdateSubscriber </p>
     class UpdateSubscriberResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure

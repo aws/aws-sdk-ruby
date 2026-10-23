@@ -11,6 +11,7 @@ module Aws::SageMakerA2IRuntime
     # @!attribute message
     #   @return [String]
     class ConflictException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -21,6 +22,7 @@ module Aws::SageMakerA2IRuntime
     #   <p>The name of the human loop that you want to delete.</p>
     #   @return [String]
     class DeleteHumanLoopRequest < Struct.new(
+      nil,
       :human_loop_name,
       keyword_init: true
     )
@@ -28,6 +30,7 @@ module Aws::SageMakerA2IRuntime
     end
 
     class DeleteHumanLoopResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -37,6 +40,7 @@ module Aws::SageMakerA2IRuntime
     #   <p>The name of the human loop that you want information about.</p>
     #   @return [String]
     class DescribeHumanLoopRequest < Struct.new(
+      nil,
       :human_loop_name,
       keyword_init: true
     )
@@ -73,6 +77,7 @@ module Aws::SageMakerA2IRuntime
     #   <p>An object that contains information about the output of the human loop.</p>
     #   @return [Types::HumanLoopOutput]
     class DescribeHumanLoopResponse < Struct.new(
+      nil,
       :creation_time,
       :failure_reason,
       :failure_code,
@@ -92,6 +97,7 @@ module Aws::SageMakerA2IRuntime
     #            <p>Amazon SageMaker can restrict the Amazon Mechanical Turk workers who can view your task based on this information.</p>
     #   @return [Array<String>]
     class HumanLoopDataAttributes < Struct.new(
+      nil,
       :content_classifiers,
       keyword_init: true
     )
@@ -103,6 +109,7 @@ module Aws::SageMakerA2IRuntime
     #   <p>Serialized input from the human loop. The input must be a string representation of a file in JSON format.</p>
     #   @return [String]
     class HumanLoopInput < Struct.new(
+      nil,
       :input_content,
       keyword_init: true
     )
@@ -114,6 +121,7 @@ module Aws::SageMakerA2IRuntime
     #   <p>The location of the Amazon S3 object where Amazon Augmented AI stores your human loop output.</p>
     #   @return [String]
     class HumanLoopOutput < Struct.new(
+      nil,
       :output_s3_uri,
       keyword_init: true
     )
@@ -139,6 +147,7 @@ module Aws::SageMakerA2IRuntime
     #         loop.</p>
     #   @return [String]
     class HumanLoopSummary < Struct.new(
+      nil,
       :human_loop_name,
       :human_loop_status,
       :creation_time,
@@ -154,6 +163,7 @@ module Aws::SageMakerA2IRuntime
     # @!attribute message
     #   @return [String]
     class InternalServerException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -182,6 +192,7 @@ module Aws::SageMakerA2IRuntime
     #         the output. You can use this token to display the next page of results. </p>
     #   @return [Integer]
     class ListHumanLoopsRequest < Struct.new(
+      nil,
       :creation_time_after,
       :creation_time_before,
       :flow_definition_arn,
@@ -200,6 +211,7 @@ module Aws::SageMakerA2IRuntime
     #   <p>A token to display the next page of results.</p>
     #   @return [String]
     class ListHumanLoopsResponse < Struct.new(
+      nil,
       :human_loop_summaries,
       :next_token,
       keyword_init: true
@@ -212,6 +224,7 @@ module Aws::SageMakerA2IRuntime
     # @!attribute message
     #   @return [String]
     class ResourceNotFoundException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -227,6 +240,7 @@ module Aws::SageMakerA2IRuntime
     # @!attribute message
     #   @return [String]
     class ServiceQuotaExceededException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -248,6 +262,7 @@ module Aws::SageMakerA2IRuntime
     #         is free of personally identifiable information and/or free of adult content.</p>
     #   @return [Types::HumanLoopDataAttributes]
     class StartHumanLoopRequest < Struct.new(
+      nil,
       :human_loop_name,
       :flow_definition_arn,
       :human_loop_input,
@@ -261,6 +276,7 @@ module Aws::SageMakerA2IRuntime
     #   <p>The Amazon Resource Name (ARN) of the human loop.</p>
     #   @return [String]
     class StartHumanLoopResponse < Struct.new(
+      nil,
       :human_loop_arn,
       keyword_init: true
     )
@@ -271,6 +287,7 @@ module Aws::SageMakerA2IRuntime
     #   <p>The name of the human loop that you want to stop.</p>
     #   @return [String]
     class StopHumanLoopRequest < Struct.new(
+      nil,
       :human_loop_name,
       keyword_init: true
     )
@@ -278,6 +295,7 @@ module Aws::SageMakerA2IRuntime
     end
 
     class StopHumanLoopResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -289,6 +307,7 @@ module Aws::SageMakerA2IRuntime
     # @!attribute message
     #   @return [String]
     class ThrottlingException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -300,6 +319,7 @@ module Aws::SageMakerA2IRuntime
     # @!attribute message
     #   @return [String]
     class ValidationException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )

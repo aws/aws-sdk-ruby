@@ -10,6 +10,7 @@ module Aws::Outposts
     # @!attribute message
     #   @return [String]
     class AccessDeniedException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -51,6 +52,7 @@ module Aws::Outposts
     #   <p>The municipality for the address.</p>
     #   @return [String]
     class Address < Struct.new(
+      nil,
       :contact_name,
       :contact_phone_number,
       :address_line1,
@@ -85,6 +87,7 @@ module Aws::Outposts
     #   <p> The position of an asset in a rack. </p>
     #   @return [Types::AssetLocation]
     class AssetInfo < Struct.new(
+      nil,
       :asset_id,
       :rack_id,
       :asset_type,
@@ -113,6 +116,7 @@ module Aws::Outposts
     #   <p>The Amazon Web Services service name of the instance.</p>
     #   @return [String]
     class AssetInstance < Struct.new(
+      nil,
       :instance_id,
       :instance_type,
       :asset_id,
@@ -131,6 +135,7 @@ module Aws::Outposts
     #   <p>The number of each instance type.</p>
     #   @return [Integer]
     class AssetInstanceTypeCapacity < Struct.new(
+      nil,
       :instance_type,
       :count,
       keyword_init: true
@@ -148,6 +153,7 @@ module Aws::Outposts
     #   <p> The position of an asset in a rack measured in rack units. </p>
     #   @return [Float]
     class AssetLocation < Struct.new(
+      nil,
       :rack_elevation,
       keyword_init: true
     )
@@ -166,6 +172,7 @@ module Aws::Outposts
     #   <p>The Amazon Web Services service name that owns the specified blocking instance.</p>
     #   @return [String]
     class BlockingInstance < Struct.new(
+      nil,
       :instance_id,
       :account_id,
       :aws_service_name,
@@ -181,6 +188,7 @@ module Aws::Outposts
     #   <p>ID or ARN of the Outpost associated with the capacity task that you want to cancel.</p>
     #   @return [String]
     class CancelCapacityTaskInput < Struct.new(
+      nil,
       :capacity_task_id,
       :outpost_identifier,
       keyword_init: true
@@ -189,6 +197,7 @@ module Aws::Outposts
     end
 
     class CancelCapacityTaskOutput < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -198,6 +207,7 @@ module Aws::Outposts
     #   <p> The ID of the order. </p>
     #   @return [String]
     class CancelOrderInput < Struct.new(
+      nil,
       :order_id,
       keyword_init: true
     )
@@ -205,6 +215,7 @@ module Aws::Outposts
     end
 
     class CancelOrderOutput < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -218,6 +229,7 @@ module Aws::Outposts
     #   <p>The type of failure.</p>
     #   @return [String]
     class CapacityTaskFailure < Struct.new(
+      nil,
       :reason,
       :type,
       keyword_init: true
@@ -252,6 +264,7 @@ module Aws::Outposts
     #   <p>The date that the specified capacity was last modified.</p>
     #   @return [Time]
     class CapacityTaskSummary < Struct.new(
+      nil,
       :capacity_task_id,
       :outpost_id,
       :order_id,
@@ -288,6 +301,7 @@ module Aws::Outposts
     #   <p> The supported storage options for the catalog item. </p>
     #   @return [Array<String>]
     class CatalogItem < Struct.new(
+      nil,
       :catalog_item_id,
       :item_status,
       :ec2_capacities,
@@ -334,6 +348,7 @@ module Aws::Outposts
     #   <p>The maximum number of vCPUs possible for the specified asset.</p>
     #   @return [Integer]
     class ComputeAttributes < Struct.new(
+      nil,
       :host_id,
       :state,
       :instance_families,
@@ -354,6 +369,7 @@ module Aws::Outposts
     #   <p>The type of the resource causing the conflict.</p>
     #   @return [String]
     class ConflictException < Struct.new(
+      nil,
       :message,
       :resource_id,
       :resource_type,
@@ -382,6 +398,7 @@ module Aws::Outposts
     #   <p> The allowed IP addresses. </p>
     #   @return [Array<String>]
     class ConnectionDetails < Struct.new(
+      nil,
       :client_public_key,
       :server_public_key,
       :server_endpoint,
@@ -406,6 +423,7 @@ module Aws::Outposts
     #   <p>The payment terms.</p>
     #   @return [String]
     class CreateOrderInput < Struct.new(
+      nil,
       :outpost_identifier,
       :line_items,
       :payment_option,
@@ -419,6 +437,7 @@ module Aws::Outposts
     #   <p>Information about this order.</p>
     #   @return [Types::Order]
     class CreateOrderOutput < Struct.new(
+      nil,
       :order,
       keyword_init: true
     )
@@ -447,6 +466,7 @@ module Aws::Outposts
     #   <p> The type of hardware for this Outpost. </p>
     #   @return [String]
     class CreateOutpostInput < Struct.new(
+      nil,
       :name,
       :description,
       :site_id,
@@ -463,6 +483,7 @@ module Aws::Outposts
     #   <p>Information about an Outpost.</p>
     #   @return [Types::Outpost]
     class CreateOutpostOutput < Struct.new(
+      nil,
       :outpost,
       keyword_init: true
     )
@@ -499,6 +520,7 @@ module Aws::Outposts
     #           </p>
     #   @return [Types::RackPhysicalProperties]
     class CreateSiteInput < Struct.new(
+      nil,
       :name,
       :description,
       :notes,
@@ -515,6 +537,7 @@ module Aws::Outposts
     #   <p>Information about a site.</p>
     #   @return [Types::Site]
     class CreateSiteOutput < Struct.new(
+      nil,
       :site,
       keyword_init: true
     )
@@ -525,6 +548,7 @@ module Aws::Outposts
     #   <p> The ID or ARN of the Outpost. </p>
     #   @return [String]
     class DeleteOutpostInput < Struct.new(
+      nil,
       :outpost_id,
       keyword_init: true
     )
@@ -532,6 +556,7 @@ module Aws::Outposts
     end
 
     class DeleteOutpostOutput < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -541,6 +566,7 @@ module Aws::Outposts
     #   <p> The ID or the Amazon Resource Name (ARN) of the site. </p>
     #   @return [String]
     class DeleteSiteInput < Struct.new(
+      nil,
       :site_id,
       keyword_init: true
     )
@@ -548,6 +574,7 @@ module Aws::Outposts
     end
 
     class DeleteSiteOutput < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -564,6 +591,7 @@ module Aws::Outposts
     #   <p> The quantity of the EC2 capacity. </p>
     #   @return [String]
     class EC2Capacity < Struct.new(
+      nil,
       :family,
       :max_size,
       :quantity,
@@ -579,6 +607,7 @@ module Aws::Outposts
     #   <p>ID or ARN of the Outpost associated with the specified capacity task.</p>
     #   @return [String]
     class GetCapacityTaskInput < Struct.new(
+      nil,
       :capacity_task_id,
       :outpost_identifier,
       keyword_init: true
@@ -676,6 +705,7 @@ module Aws::Outposts
     #            </ul>
     #   @return [String]
     class GetCapacityTaskOutput < Struct.new(
+      nil,
       :capacity_task_id,
       :outpost_id,
       :order_id,
@@ -703,6 +733,7 @@ module Aws::Outposts
     #   <p>The ID of the catalog item.</p>
     #   @return [String]
     class GetCatalogItemInput < Struct.new(
+      nil,
       :catalog_item_id,
       keyword_init: true
     )
@@ -713,6 +744,7 @@ module Aws::Outposts
     #   <p>Information about this catalog item.</p>
     #   @return [Types::CatalogItem]
     class GetCatalogItemOutput < Struct.new(
+      nil,
       :catalog_item,
       keyword_init: true
     )
@@ -723,6 +755,7 @@ module Aws::Outposts
     #   <p> The ID of the connection. </p>
     #   @return [String]
     class GetConnectionRequest < Struct.new(
+      nil,
       :connection_id,
       keyword_init: true
     )
@@ -736,6 +769,7 @@ module Aws::Outposts
     #   <p> Information about the connection. </p>
     #   @return [Types::ConnectionDetails]
     class GetConnectionResponse < Struct.new(
+      nil,
       :connection_id,
       :connection_details,
       keyword_init: true
@@ -747,6 +781,7 @@ module Aws::Outposts
     #   <p>The ID of the order.</p>
     #   @return [String]
     class GetOrderInput < Struct.new(
+      nil,
       :order_id,
       keyword_init: true
     )
@@ -757,6 +792,7 @@ module Aws::Outposts
     #   <p>Information about an order.</p>
     #   @return [Types::Order]
     class GetOrderOutput < Struct.new(
+      nil,
       :order,
       keyword_init: true
     )
@@ -773,6 +809,7 @@ module Aws::Outposts
     #   <p>The ID or ARN of the Outpost.</p>
     #   @return [String]
     class GetOutpostBillingInformationInput < Struct.new(
+      nil,
       :next_token,
       :max_results,
       :outpost_identifier,
@@ -794,6 +831,7 @@ module Aws::Outposts
     #         current term ends might result in unanticipated charges.</p>
     #   @return [String]
     class GetOutpostBillingInformationOutput < Struct.new(
+      nil,
       :next_token,
       :subscriptions,
       :contract_end_date,
@@ -806,6 +844,7 @@ module Aws::Outposts
     #   <p>The ID or ARN of the Outpost.</p>
     #   @return [String]
     class GetOutpostInput < Struct.new(
+      nil,
       :outpost_id,
       keyword_init: true
     )
@@ -822,6 +861,7 @@ module Aws::Outposts
     #   <p>The maximum page size.</p>
     #   @return [Integer]
     class GetOutpostInstanceTypesInput < Struct.new(
+      nil,
       :outpost_id,
       :next_token,
       :max_results,
@@ -843,6 +883,7 @@ module Aws::Outposts
     #   <p>The Amazon Resource Name (ARN) of the Outpost.</p>
     #   @return [String]
     class GetOutpostInstanceTypesOutput < Struct.new(
+      nil,
       :instance_types,
       :next_token,
       :outpost_id,
@@ -856,6 +897,7 @@ module Aws::Outposts
     #   <p>Information about an Outpost.</p>
     #   @return [Types::Outpost]
     class GetOutpostOutput < Struct.new(
+      nil,
       :outpost,
       keyword_init: true
     )
@@ -879,6 +921,7 @@ module Aws::Outposts
     #   <p>The pagination token.</p>
     #   @return [String]
     class GetOutpostSupportedInstanceTypesInput < Struct.new(
+      nil,
       :outpost_identifier,
       :order_id,
       :asset_id,
@@ -896,6 +939,7 @@ module Aws::Outposts
     #   <p>The pagination token.</p>
     #   @return [String]
     class GetOutpostSupportedInstanceTypesOutput < Struct.new(
+      nil,
       :instance_types,
       :next_token,
       keyword_init: true
@@ -910,6 +954,7 @@ module Aws::Outposts
     #   <p>The type of the address you request. </p>
     #   @return [String]
     class GetSiteAddressInput < Struct.new(
+      nil,
       :site_id,
       :address_type,
       keyword_init: true
@@ -927,6 +972,7 @@ module Aws::Outposts
     #   <p> Information about the address. </p>
     #   @return [Types::Address]
     class GetSiteAddressOutput < Struct.new(
+      nil,
       :site_id,
       :address_type,
       :address,
@@ -939,6 +985,7 @@ module Aws::Outposts
     #   <p> The ID or the Amazon Resource Name (ARN) of the site. </p>
     #   @return [String]
     class GetSiteInput < Struct.new(
+      nil,
       :site_id,
       keyword_init: true
     )
@@ -949,6 +996,7 @@ module Aws::Outposts
     #   <p>Information about a site.</p>
     #   @return [Types::Site]
     class GetSiteOutput < Struct.new(
+      nil,
       :site,
       keyword_init: true
     )
@@ -964,6 +1012,7 @@ module Aws::Outposts
     #   <p>The number of instances for the specified instance type.</p>
     #   @return [Integer]
     class InstanceTypeCapacity < Struct.new(
+      nil,
       :instance_type,
       :count,
       keyword_init: true
@@ -984,6 +1033,7 @@ module Aws::Outposts
     #   <p>The number of default VCPUs in an instance type.</p>
     #   @return [Integer]
     class InstanceTypeItem < Struct.new(
+      nil,
       :instance_type,
       :vcp_us,
       keyword_init: true
@@ -1004,6 +1054,7 @@ module Aws::Outposts
     #         the capacity needed to run the capacity task.</p>
     #   @return [Array<String>]
     class InstancesToExclude < Struct.new(
+      nil,
       :instances,
       :account_ids,
       :services,
@@ -1016,6 +1067,7 @@ module Aws::Outposts
     # @!attribute message
     #   @return [String]
     class InternalServerException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -1048,6 +1100,7 @@ module Aws::Outposts
     #   <p>The ID of the previous order.</p>
     #   @return [String]
     class LineItem < Struct.new(
+      nil,
       :catalog_item_id,
       :line_item_id,
       :quantity,
@@ -1070,6 +1123,7 @@ module Aws::Outposts
     #   <p> The MAC addresses of the asset. </p>
     #   @return [Array<String>]
     class LineItemAssetInformation < Struct.new(
+      nil,
       :asset_id,
       :mac_address_list,
       keyword_init: true
@@ -1085,6 +1139,7 @@ module Aws::Outposts
     #   <p>The quantity of a line item request.</p>
     #   @return [Integer]
     class LineItemRequest < Struct.new(
+      nil,
       :catalog_item_id,
       :quantity,
       keyword_init: true
@@ -1114,6 +1169,7 @@ module Aws::Outposts
     #   <p>The pagination token.</p>
     #   @return [String]
     class ListAssetInstancesInput < Struct.new(
+      nil,
       :outpost_identifier,
       :asset_id_filter,
       :instance_type_filter,
@@ -1134,6 +1190,7 @@ module Aws::Outposts
     #   <p>The pagination token.</p>
     #   @return [String]
     class ListAssetInstancesOutput < Struct.new(
+      nil,
       :asset_instances,
       :next_token,
       keyword_init: true
@@ -1157,6 +1214,7 @@ module Aws::Outposts
     #   <p>Filters the results by state.</p>
     #   @return [Array<String>]
     class ListAssetsInput < Struct.new(
+      nil,
       :outpost_identifier,
       :host_id_filter,
       :max_results,
@@ -1174,6 +1232,7 @@ module Aws::Outposts
     #   <p>The pagination token.</p>
     #   @return [String]
     class ListAssetsOutput < Struct.new(
+      nil,
       :assets,
       :next_token,
       keyword_init: true
@@ -1194,6 +1253,7 @@ module Aws::Outposts
     #   <p>The pagination token.</p>
     #   @return [String]
     class ListBlockingInstancesForCapacityTaskInput < Struct.new(
+      nil,
       :outpost_identifier,
       :capacity_task_id,
       :max_results,
@@ -1211,6 +1271,7 @@ module Aws::Outposts
     #   <p>The pagination token.</p>
     #   @return [String]
     class ListBlockingInstancesForCapacityTaskOutput < Struct.new(
+      nil,
       :blocking_instances,
       :next_token,
       keyword_init: true
@@ -1232,6 +1293,7 @@ module Aws::Outposts
     #           <code>WAITING_FOR_EVACUATION</code>.</p>
     #   @return [Array<String>]
     class ListCapacityTasksInput < Struct.new(
+      nil,
       :outpost_identifier_filter,
       :max_results,
       :next_token,
@@ -1248,6 +1310,7 @@ module Aws::Outposts
     #   <p>The pagination token.</p>
     #   @return [String]
     class ListCapacityTasksOutput < Struct.new(
+      nil,
       :capacity_tasks,
       :next_token,
       keyword_init: true
@@ -1271,6 +1334,7 @@ module Aws::Outposts
     #   <p>Filters the results by EC2 family (for example, M5).</p>
     #   @return [Array<String>]
     class ListCatalogItemsInput < Struct.new(
+      nil,
       :next_token,
       :max_results,
       :item_class_filter,
@@ -1288,6 +1352,7 @@ module Aws::Outposts
     #   <p>The pagination token.</p>
     #   @return [String]
     class ListCatalogItemsOutput < Struct.new(
+      nil,
       :catalog_items,
       :next_token,
       keyword_init: true
@@ -1305,6 +1370,7 @@ module Aws::Outposts
     #   <p>The maximum page size.</p>
     #   @return [Integer]
     class ListOrdersInput < Struct.new(
+      nil,
       :outpost_identifier_filter,
       :next_token,
       :max_results,
@@ -1320,6 +1386,7 @@ module Aws::Outposts
     #   <p>The pagination token.</p>
     #   @return [String]
     class ListOrdersOutput < Struct.new(
+      nil,
       :orders,
       :next_token,
       keyword_init: true
@@ -1343,6 +1410,7 @@ module Aws::Outposts
     #   <p>Filters the results by AZ ID (for example, <code>use1-az1</code>).</p>
     #   @return [Array<String>]
     class ListOutpostsInput < Struct.new(
+      nil,
       :next_token,
       :max_results,
       :life_cycle_status_filter,
@@ -1360,6 +1428,7 @@ module Aws::Outposts
     #   <p>The pagination token.</p>
     #   @return [String]
     class ListOutpostsOutput < Struct.new(
+      nil,
       :outposts,
       :next_token,
       keyword_init: true
@@ -1383,6 +1452,7 @@ module Aws::Outposts
     #   <p>Filters the results by city.</p>
     #   @return [Array<String>]
     class ListSitesInput < Struct.new(
+      nil,
       :next_token,
       :max_results,
       :operating_address_country_code_filter,
@@ -1400,6 +1470,7 @@ module Aws::Outposts
     #   <p>The pagination token.</p>
     #   @return [String]
     class ListSitesOutput < Struct.new(
+      nil,
       :sites,
       :next_token,
       keyword_init: true
@@ -1411,6 +1482,7 @@ module Aws::Outposts
     #   <p>The Amazon Resource Name (ARN) of the resource.</p>
     #   @return [String]
     class ListTagsForResourceRequest < Struct.new(
+      nil,
       :resource_arn,
       keyword_init: true
     )
@@ -1421,6 +1493,7 @@ module Aws::Outposts
     #   <p>The resource tags.</p>
     #   @return [Hash<String, String>]
     class ListTagsForResourceResponse < Struct.new(
+      nil,
       :tags,
       keyword_init: true
     )
@@ -1431,6 +1504,7 @@ module Aws::Outposts
     # @!attribute message
     #   @return [String]
     class NotFoundException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -1497,6 +1571,7 @@ module Aws::Outposts
     #   <p>The type of order.</p>
     #   @return [String]
     class Order < Struct.new(
+      nil,
       :outpost_id,
       :order_id,
       :status,
@@ -1561,6 +1636,7 @@ module Aws::Outposts
     #   <p> The fulfilment date for the order. </p>
     #   @return [Time]
     class OrderSummary < Struct.new(
+      nil,
       :outpost_id,
       :order_id,
       :order_type,
@@ -1611,6 +1687,7 @@ module Aws::Outposts
     #   <p> The hardware type. </p>
     #   @return [String]
     class Outpost < Struct.new(
+      nil,
       :outpost_id,
       :owner_id,
       :outpost_arn,
@@ -1667,6 +1744,7 @@ module Aws::Outposts
     #         (907 kg). </p>
     #   @return [String]
     class RackPhysicalProperties < Struct.new(
+      nil,
       :power_draw_kva,
       :power_phase,
       :power_connector,
@@ -1685,6 +1763,7 @@ module Aws::Outposts
     # @!attribute message
     #   @return [String]
     class ServiceQuotaExceededException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -1699,6 +1778,7 @@ module Aws::Outposts
     #   <p> The carrier of the shipment. </p>
     #   @return [String]
     class ShipmentInformation < Struct.new(
+      nil,
       :shipment_tracking_number,
       :shipment_carrier,
       keyword_init: true
@@ -1742,6 +1822,7 @@ module Aws::Outposts
     #   <p> Information about the physical and logistical details for a rack at the site. </p>
     #   @return [Types::RackPhysicalProperties]
     class Site < Struct.new(
+      nil,
       :site_id,
       :account_id,
       :name,
@@ -1796,6 +1877,7 @@ module Aws::Outposts
     #            </ul>
     #   @return [String]
     class StartCapacityTaskInput < Struct.new(
+      nil,
       :outpost_identifier,
       :order_id,
       :asset_id,
@@ -1863,6 +1945,7 @@ module Aws::Outposts
     #            </ul>
     #   @return [String]
     class StartCapacityTaskOutput < Struct.new(
+      nil,
       :capacity_task_id,
       :outpost_id,
       :order_id,
@@ -1899,6 +1982,7 @@ module Aws::Outposts
     #   <p> The device index of the network interface on the Outpost server. </p>
     #   @return [Integer]
     class StartConnectionRequest < Struct.new(
+      nil,
       :device_serial_number,
       :asset_id,
       :client_public_key,
@@ -1915,6 +1999,7 @@ module Aws::Outposts
     #   <p> The underlay IP address. </p>
     #   @return [String]
     class StartConnectionResponse < Struct.new(
+      nil,
       :connection_id,
       :underlay_ip_address,
       keyword_init: true
@@ -1980,6 +2065,7 @@ module Aws::Outposts
     #   <p>The amount billed when the subscription is created. This is a one-time charge.</p>
     #   @return [Float]
     class Subscription < Struct.new(
+      nil,
       :subscription_id,
       :subscription_type,
       :subscription_status,
@@ -2000,6 +2086,7 @@ module Aws::Outposts
     #   <p>The tags to add to the resource.</p>
     #   @return [Hash<String, String>]
     class TagResourceRequest < Struct.new(
+      nil,
       :resource_arn,
       :tags,
       keyword_init: true
@@ -2008,6 +2095,7 @@ module Aws::Outposts
     end
 
     class TagResourceResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -2020,6 +2108,7 @@ module Aws::Outposts
     #   <p>The tag keys.</p>
     #   @return [Array<String>]
     class UntagResourceRequest < Struct.new(
+      nil,
       :resource_arn,
       :tag_keys,
       keyword_init: true
@@ -2028,6 +2117,7 @@ module Aws::Outposts
     end
 
     class UntagResourceResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -2046,6 +2136,7 @@ module Aws::Outposts
     #   <p> The type of hardware for this Outpost. </p>
     #   @return [String]
     class UpdateOutpostInput < Struct.new(
+      nil,
       :outpost_id,
       :name,
       :description,
@@ -2059,6 +2150,7 @@ module Aws::Outposts
     #   <p>Information about an Outpost.</p>
     #   @return [Types::Outpost]
     class UpdateOutpostOutput < Struct.new(
+      nil,
       :outpost,
       keyword_init: true
     )
@@ -2075,6 +2167,7 @@ module Aws::Outposts
     #   <p> The address for the site. </p>
     #   @return [Types::Address]
     class UpdateSiteAddressInput < Struct.new(
+      nil,
       :site_id,
       :address_type,
       :address,
@@ -2090,6 +2183,7 @@ module Aws::Outposts
     #   <p> Information about an address. </p>
     #   @return [Types::Address]
     class UpdateSiteAddressOutput < Struct.new(
+      nil,
       :address_type,
       :address,
       keyword_init: true
@@ -2110,6 +2204,7 @@ module Aws::Outposts
     #   <p>Notes about a site.</p>
     #   @return [String]
     class UpdateSiteInput < Struct.new(
+      nil,
       :site_id,
       :name,
       :description,
@@ -2123,6 +2218,7 @@ module Aws::Outposts
     #   <p>Information about a site.</p>
     #   @return [Types::Site]
     class UpdateSiteOutput < Struct.new(
+      nil,
       :site,
       keyword_init: true
     )
@@ -2279,6 +2375,7 @@ module Aws::Outposts
     #       </p>
     #   @return [String]
     class UpdateSiteRackPhysicalPropertiesInput < Struct.new(
+      nil,
       :site_id,
       :power_draw_kva,
       :power_phase,
@@ -2298,6 +2395,7 @@ module Aws::Outposts
     #   <p>Information about a site.</p>
     #   @return [Types::Site]
     class UpdateSiteRackPhysicalPropertiesOutput < Struct.new(
+      nil,
       :site,
       keyword_init: true
     )
@@ -2308,6 +2406,7 @@ module Aws::Outposts
     # @!attribute message
     #   @return [String]
     class ValidationException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )

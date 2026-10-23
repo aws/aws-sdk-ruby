@@ -14,6 +14,7 @@ module Aws::QLDB
     #            canceled.</p>
     #   @return [String]
     class CancelJournalKinesisStreamRequest < Struct.new(
+      nil,
       :ledger_name,
       :stream_id,
       keyword_init: true
@@ -25,6 +26,7 @@ module Aws::QLDB
     #   <p>The UUID (Base62-encoded text) of the canceled QLDB journal stream.</p>
     #   @return [String]
     class CancelJournalKinesisStreamResponse < Struct.new(
+      nil,
       :stream_id,
       keyword_init: true
     )
@@ -133,6 +135,7 @@ module Aws::QLDB
     #            the <i>Key Management Service Developer Guide</i>.</p>
     #   @return [String]
     class CreateLedgerRequest < Struct.new(
+      nil,
       :name,
       :tags,
       :permissions_mode,
@@ -170,6 +173,7 @@ module Aws::QLDB
     #            this parameter is undefined, the ledger uses an Amazon Web Services owned KMS key for encryption.</p>
     #   @return [String]
     class CreateLedgerResponse < Struct.new(
+      nil,
       :name,
       :arn,
       :state,
@@ -186,6 +190,7 @@ module Aws::QLDB
     #   <p>The name of the ledger that you want to delete.</p>
     #   @return [String]
     class DeleteLedgerRequest < Struct.new(
+      nil,
       :name,
       keyword_init: true
     )
@@ -200,6 +205,7 @@ module Aws::QLDB
     #            describe.</p>
     #   @return [String]
     class DescribeJournalKinesisStreamRequest < Struct.new(
+      nil,
       :ledger_name,
       :stream_id,
       keyword_init: true
@@ -212,6 +218,7 @@ module Aws::QLDB
     #               <code>DescribeJournalS3Export</code> request.</p>
     #   @return [Types::JournalKinesisStreamDescription]
     class DescribeJournalKinesisStreamResponse < Struct.new(
+      nil,
       :stream,
       keyword_init: true
     )
@@ -226,6 +233,7 @@ module Aws::QLDB
     #            describe.</p>
     #   @return [String]
     class DescribeJournalS3ExportRequest < Struct.new(
+      nil,
       :name,
       :export_id,
       keyword_init: true
@@ -238,6 +246,7 @@ module Aws::QLDB
     #               <code>DescribeJournalS3Export</code> request.</p>
     #   @return [Types::JournalS3ExportDescription]
     class DescribeJournalS3ExportResponse < Struct.new(
+      nil,
       :export_description,
       keyword_init: true
     )
@@ -248,6 +257,7 @@ module Aws::QLDB
     #   <p>The name of the ledger that you want to describe.</p>
     #   @return [String]
     class DescribeLedgerRequest < Struct.new(
+      nil,
       :name,
       keyword_init: true
     )
@@ -282,6 +292,7 @@ module Aws::QLDB
     #            error). If this parameter is undefined, the ledger uses an Amazon Web Services owned KMS key for encryption.</p>
     #   @return [Types::LedgerEncryptionDescription]
     class DescribeLedgerResponse < Struct.new(
+      nil,
       :name,
       :arn,
       :state,
@@ -346,6 +357,7 @@ module Aws::QLDB
     #            because these services can parse newline-delimited JSON automatically.</p>
     #   @return [String]
     class ExportJournalToS3Request < Struct.new(
+      nil,
       :name,
       :inclusive_start_time,
       :exclusive_end_time,
@@ -364,6 +376,7 @@ module Aws::QLDB
     #               <code>ExportId</code> to call <code>DescribeJournalS3Export</code>.</p>
     #   @return [String]
     class ExportJournalToS3Response < Struct.new(
+      nil,
       :export_id,
       keyword_init: true
     )
@@ -385,6 +398,7 @@ module Aws::QLDB
     #            <p>For example: <code>{strandId:"BlFTjlSXze9BIh1KOszcE3",sequenceNo:49}</code>.</p>
     #   @return [Types::ValueHolder]
     class GetBlockRequest < Struct.new(
+      nil,
       :name,
       :block_address,
       :digest_tip_address,
@@ -402,6 +416,7 @@ module Aws::QLDB
     #            Merkle tree, starting with the specified block.</p>
     #   @return [Types::ValueHolder]
     class GetBlockResponse < Struct.new(
+      nil,
       :block,
       :proof,
       keyword_init: true
@@ -413,6 +428,7 @@ module Aws::QLDB
     #   <p>The name of the ledger.</p>
     #   @return [String]
     class GetDigestRequest < Struct.new(
+      nil,
       :name,
       keyword_init: true
     )
@@ -429,6 +445,7 @@ module Aws::QLDB
     #            <code>sequenceNo</code>.</p>
     #   @return [Types::ValueHolder]
     class GetDigestResponse < Struct.new(
+      nil,
       :digest,
       :digest_tip_address,
       keyword_init: true
@@ -454,6 +471,7 @@ module Aws::QLDB
     #            <p>For example: <code>{strandId:"BlFTjlSXze9BIh1KOszcE3",sequenceNo:49}</code>.</p>
     #   @return [Types::ValueHolder]
     class GetRevisionRequest < Struct.new(
+      nil,
       :name,
       :block_address,
       :document_id,
@@ -472,6 +490,7 @@ module Aws::QLDB
     #   <p>The document revision data object in Amazon Ion format.</p>
     #   @return [Types::ValueHolder]
     class GetRevisionResponse < Struct.new(
+      nil,
       :proof,
       :revision,
       keyword_init: true
@@ -486,6 +505,7 @@ module Aws::QLDB
     #   <p>The name of the invalid parameter.</p>
     #   @return [String]
     class InvalidParameterException < Struct.new(
+      nil,
       :message,
       :parameter_name,
       keyword_init: true
@@ -537,6 +557,7 @@ module Aws::QLDB
     #   <p>The user-defined name of the QLDB journal stream.</p>
     #   @return [String]
     class JournalKinesisStreamDescription < Struct.new(
+      nil,
       :ledger_name,
       :creation_time,
       :inclusive_start_time,
@@ -597,6 +618,7 @@ module Aws::QLDB
     #   <p>The output format of the exported journal data.</p>
     #   @return [String]
     class JournalS3ExportDescription < Struct.new(
+      nil,
       :ledger_name,
       :export_id,
       :export_creation_time,
@@ -629,6 +651,7 @@ module Aws::QLDB
     #            </important>
     #   @return [Boolean]
     class KinesisConfiguration < Struct.new(
+      nil,
       :stream_arn,
       :aggregation_enabled,
       keyword_init: true
@@ -683,6 +706,7 @@ module Aws::QLDB
     #            <p>This parameter is undefined if the KMS key is accessible.</p>
     #   @return [Time]
     class LedgerEncryptionDescription < Struct.new(
+      nil,
       :kms_key_arn,
       :encryption_status,
       :inaccessible_kms_key_date_time,
@@ -703,6 +727,7 @@ module Aws::QLDB
     #            is the number of seconds elapsed since 12:00:00 AM January 1, 1970 UTC.)</p>
     #   @return [Time]
     class LedgerSummary < Struct.new(
+      nil,
       :name,
       :state,
       :creation_date_time,
@@ -718,6 +743,7 @@ module Aws::QLDB
     #   <p>The type of resource.</p>
     #   @return [String]
     class LimitExceededException < Struct.new(
+      nil,
       :message,
       :resource_type,
       keyword_init: true
@@ -740,6 +766,7 @@ module Aws::QLDB
     #            here.</p>
     #   @return [String]
     class ListJournalKinesisStreamsForLedgerRequest < Struct.new(
+      nil,
       :ledger_name,
       :max_results,
       :next_token,
@@ -766,6 +793,7 @@ module Aws::QLDB
     #            </ul>
     #   @return [String]
     class ListJournalKinesisStreamsForLedgerResponse < Struct.new(
+      nil,
       :streams,
       :next_token,
       keyword_init: true
@@ -788,6 +816,7 @@ module Aws::QLDB
     #            here.</p>
     #   @return [String]
     class ListJournalS3ExportsForLedgerRequest < Struct.new(
+      nil,
       :name,
       :max_results,
       :next_token,
@@ -814,6 +843,7 @@ module Aws::QLDB
     #            </ul>
     #   @return [String]
     class ListJournalS3ExportsForLedgerResponse < Struct.new(
+      nil,
       :journal_s3_exports,
       :next_token,
       keyword_init: true
@@ -832,6 +862,7 @@ module Aws::QLDB
     #            here.</p>
     #   @return [String]
     class ListJournalS3ExportsRequest < Struct.new(
+      nil,
       :max_results,
       :next_token,
       keyword_init: true
@@ -858,6 +889,7 @@ module Aws::QLDB
     #            </ul>
     #   @return [String]
     class ListJournalS3ExportsResponse < Struct.new(
+      nil,
       :journal_s3_exports,
       :next_token,
       keyword_init: true
@@ -875,6 +907,7 @@ module Aws::QLDB
     #               <code>ListLedgers</code> call, then you should use that value as input here.</p>
     #   @return [String]
     class ListLedgersRequest < Struct.new(
+      nil,
       :max_results,
       :next_token,
       keyword_init: true
@@ -900,6 +933,7 @@ module Aws::QLDB
     #            </ul>
     #   @return [String]
     class ListLedgersResponse < Struct.new(
+      nil,
       :ledgers,
       :next_token,
       keyword_init: true
@@ -914,6 +948,7 @@ module Aws::QLDB
     #            </p>
     #   @return [String]
     class ListTagsForResourceRequest < Struct.new(
+      nil,
       :resource_arn,
       keyword_init: true
     )
@@ -924,6 +959,7 @@ module Aws::QLDB
     #   <p>The tags that are currently associated with the specified Amazon QLDB resource.</p>
     #   @return [Hash<String, String>]
     class ListTagsForResourceResponse < Struct.new(
+      nil,
       :tags,
       keyword_init: true
     )
@@ -940,6 +976,7 @@ module Aws::QLDB
     #   <p>The name of the resource.</p>
     #   @return [String]
     class ResourceAlreadyExistsException < Struct.new(
+      nil,
       :message,
       :resource_type,
       :resource_name,
@@ -958,6 +995,7 @@ module Aws::QLDB
     #   <p>The name of the resource.</p>
     #   @return [String]
     class ResourceInUseException < Struct.new(
+      nil,
       :message,
       :resource_type,
       :resource_name,
@@ -976,6 +1014,7 @@ module Aws::QLDB
     #   <p>The name of the resource.</p>
     #   @return [String]
     class ResourceNotFoundException < Struct.new(
+      nil,
       :message,
       :resource_type,
       :resource_name,
@@ -994,6 +1033,7 @@ module Aws::QLDB
     #   <p>The name of the resource.</p>
     #   @return [String]
     class ResourcePreconditionNotMetException < Struct.new(
+      nil,
       :message,
       :resource_type,
       :resource_name,
@@ -1020,6 +1060,7 @@ module Aws::QLDB
     #               <code>ObjectEncryptionType</code>.</p>
     #   @return [String]
     class S3EncryptionConfiguration < Struct.new(
+      nil,
       :object_encryption_type,
       :kms_key_arn,
       keyword_init: true
@@ -1065,6 +1106,7 @@ module Aws::QLDB
     #            bucket.</p>
     #   @return [Types::S3EncryptionConfiguration]
     class S3ExportConfiguration < Struct.new(
+      nil,
       :bucket,
       :prefix,
       :encryption_configuration,
@@ -1116,6 +1158,7 @@ module Aws::QLDB
     #            Guide</i>.</p>
     #   @return [String]
     class StreamJournalToKinesisRequest < Struct.new(
+      nil,
       :ledger_name,
       :role_arn,
       :tags,
@@ -1133,6 +1176,7 @@ module Aws::QLDB
     #            stream.</p>
     #   @return [String]
     class StreamJournalToKinesisResponse < Struct.new(
+      nil,
       :stream_id,
       keyword_init: true
     )
@@ -1151,6 +1195,7 @@ module Aws::QLDB
     #            and returns an error. Tag values are case sensitive and can be null.</p>
     #   @return [Hash<String, String>]
     class TagResourceRequest < Struct.new(
+      nil,
       :resource_arn,
       :tags,
       keyword_init: true
@@ -1159,6 +1204,7 @@ module Aws::QLDB
     end
 
     class TagResourceResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1174,6 +1220,7 @@ module Aws::QLDB
     #   <p>The list of tag keys to remove.</p>
     #   @return [Array<String>]
     class UntagResourceRequest < Struct.new(
+      nil,
       :resource_arn,
       :tag_keys,
       keyword_init: true
@@ -1182,6 +1229,7 @@ module Aws::QLDB
     end
 
     class UntagResourceResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1223,6 +1271,7 @@ module Aws::QLDB
     #            </note>
     #   @return [String]
     class UpdateLedgerPermissionsModeRequest < Struct.new(
+      nil,
       :name,
       :permissions_mode,
       keyword_init: true
@@ -1240,6 +1289,7 @@ module Aws::QLDB
     #   <p>The current permissions mode of the ledger.</p>
     #   @return [String]
     class UpdateLedgerPermissionsModeResponse < Struct.new(
+      nil,
       :name,
       :arn,
       :permissions_mode,
@@ -1311,6 +1361,7 @@ module Aws::QLDB
     #            the <i>Key Management Service Developer Guide</i>.</p>
     #   @return [String]
     class UpdateLedgerRequest < Struct.new(
+      nil,
       :name,
       :deletion_protection,
       :kms_key,
@@ -1344,6 +1395,7 @@ module Aws::QLDB
     #            error).</p>
     #   @return [Types::LedgerEncryptionDescription]
     class UpdateLedgerResponse < Struct.new(
+      nil,
       :name,
       :arn,
       :state,
@@ -1361,6 +1413,7 @@ module Aws::QLDB
     #   <p>An Amazon Ion plaintext value contained in a <code>ValueHolder</code> structure.</p>
     #   @return [String]
     class ValueHolder < Struct.new(
+      nil,
       :ion_text,
       keyword_init: true
     )

@@ -22,6 +22,7 @@ module Aws::DirectoryService
     #   <p>The Amazon Web Services request identifier.</p>
     #   @return [String]
     class ADAssessmentLimitExceededException < Struct.new(
+      nil,
       :message,
       :request_id,
       keyword_init: true
@@ -34,6 +35,7 @@ module Aws::DirectoryService
     #         different for each directory owner account. </p>
     #   @return [String]
     class AcceptSharedDirectoryRequest < Struct.new(
+      nil,
       :shared_directory_id,
       keyword_init: true
     )
@@ -44,6 +46,7 @@ module Aws::DirectoryService
     #   <p>The shared directory in the directory consumer account.</p>
     #   @return [Types::SharedDirectory]
     class AcceptSharedDirectoryResult < Struct.new(
+      nil,
       :shared_directory,
       keyword_init: true
     )
@@ -58,6 +61,7 @@ module Aws::DirectoryService
     #   <p>The Amazon Web Services request identifier.</p>
     #   @return [String]
     class AccessDeniedException < Struct.new(
+      nil,
       :message,
       :request_id,
       keyword_init: true
@@ -157,6 +161,7 @@ module Aws::DirectoryService
     #            publicly.</p>
     #   @return [Boolean]
     class AddIpRoutesRequest < Struct.new(
+      nil,
       :directory_id,
       :ip_routes,
       :update_security_group_for_directory_controllers,
@@ -166,6 +171,7 @@ module Aws::DirectoryService
     end
 
     class AddIpRoutesResult < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -182,6 +188,7 @@ module Aws::DirectoryService
     #   <p>Contains VPC information for the <a>CreateDirectory</a>, <a>CreateMicrosoftAD</a>, or <a>CreateHybridAD</a> operation.</p>
     #   @return [Types::DirectoryVpcSettings]
     class AddRegionRequest < Struct.new(
+      nil,
       :directory_id,
       :region_name,
       :vpc_settings,
@@ -191,6 +198,7 @@ module Aws::DirectoryService
     end
 
     class AddRegionResult < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -203,6 +211,7 @@ module Aws::DirectoryService
     #   <p>The tags to be assigned to the directory.</p>
     #   @return [Array<Types::Tag>]
     class AddTagsToResourceRequest < Struct.new(
+      nil,
       :resource_id,
       :tags,
       keyword_init: true
@@ -211,6 +220,7 @@ module Aws::DirectoryService
     end
 
     class AddTagsToResourceResult < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -273,6 +283,7 @@ module Aws::DirectoryService
     #               environment.</p>
     #   @return [String]
     class Assessment < Struct.new(
+      nil,
       :assessment_id,
       :directory_id,
       :dns_name,
@@ -315,6 +326,7 @@ module Aws::DirectoryService
     #               Amazon VPC. </p>
     #   @return [Array<String>]
     class AssessmentConfiguration < Struct.new(
+      nil,
       :customer_dns_ips,
       :dns_name,
       :vpc_settings,
@@ -335,6 +347,7 @@ module Aws::DirectoryService
     #               domain controller.</p>
     #   @return [Array<Types::AssessmentValidation>]
     class AssessmentReport < Struct.new(
+      nil,
       :domain_controller_ip,
       :validations,
       keyword_init: true
@@ -373,6 +386,7 @@ module Aws::DirectoryService
     #               and <code>SYSTEM</code>.</p>
     #   @return [String]
     class AssessmentSummary < Struct.new(
+      nil,
       :assessment_id,
       :directory_id,
       :dns_name,
@@ -413,6 +427,7 @@ module Aws::DirectoryService
     #   <p>The date and time when the validation test was completed or last updated.</p>
     #   @return [Time]
     class AssessmentValidation < Struct.new(
+      nil,
       :category,
       :name,
       :status,
@@ -433,6 +448,7 @@ module Aws::DirectoryService
     #   <p>The value of the attribute.</p>
     #   @return [String]
     class Attribute < Struct.new(
+      nil,
       :name,
       :value,
       keyword_init: true
@@ -448,6 +464,7 @@ module Aws::DirectoryService
     #   <p>The identifier of the request that caused the exception.</p>
     #   @return [String]
     class AuthenticationFailedException < Struct.new(
+      nil,
       :message,
       :request_id,
       keyword_init: true
@@ -462,6 +479,7 @@ module Aws::DirectoryService
     #   <p>The identifier of the schema extension that will be canceled.</p>
     #   @return [String]
     class CancelSchemaExtensionRequest < Struct.new(
+      nil,
       :directory_id,
       :schema_extension_id,
       keyword_init: true
@@ -470,6 +488,7 @@ module Aws::DirectoryService
     end
 
     class CancelSchemaExtensionResult < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -504,6 +523,7 @@ module Aws::DirectoryService
     #         authentication settings.</p>
     #   @return [Types::ClientCertAuthSettings]
     class Certificate < Struct.new(
+      nil,
       :certificate_id,
       :state,
       :state_reason,
@@ -525,6 +545,7 @@ module Aws::DirectoryService
     #   <p>The Amazon Web Services request identifier.</p>
     #   @return [String]
     class CertificateAlreadyExistsException < Struct.new(
+      nil,
       :message,
       :request_id,
       keyword_init: true
@@ -540,6 +561,7 @@ module Aws::DirectoryService
     #   <p>The Amazon Web Services request identifier.</p>
     #   @return [String]
     class CertificateDoesNotExistException < Struct.new(
+      nil,
       :message,
       :request_id,
       keyword_init: true
@@ -556,6 +578,7 @@ module Aws::DirectoryService
     #   <p>The Amazon Web Services request identifier.</p>
     #   @return [String]
     class CertificateInUseException < Struct.new(
+      nil,
       :message,
       :request_id,
       keyword_init: true
@@ -582,6 +605,7 @@ module Aws::DirectoryService
     #           <code>ClientLDAPS</code>.</p>
     #   @return [String]
     class CertificateInfo < Struct.new(
+      nil,
       :certificate_id,
       :common_name,
       :state,
@@ -600,6 +624,7 @@ module Aws::DirectoryService
     #   <p>The Amazon Web Services request identifier.</p>
     #   @return [String]
     class CertificateLimitExceededException < Struct.new(
+      nil,
       :message,
       :request_id,
       keyword_init: true
@@ -622,6 +647,7 @@ module Aws::DirectoryService
     #         updated.</p>
     #   @return [Time]
     class ClientAuthenticationSettingInfo < Struct.new(
+      nil,
       :type,
       :status,
       :last_updated_date_time,
@@ -637,6 +663,7 @@ module Aws::DirectoryService
     #         secondary value to any OCSP address found in the AIA extension of the user certificate.</p>
     #   @return [String]
     class ClientCertAuthSettings < Struct.new(
+      nil,
       :ocsp_url,
       keyword_init: true
     )
@@ -651,6 +678,7 @@ module Aws::DirectoryService
     #   <p>The Amazon Web Services request identifier.</p>
     #   @return [String]
     class ClientException < Struct.new(
+      nil,
       :message,
       :request_id,
       keyword_init: true
@@ -670,6 +698,7 @@ module Aws::DirectoryService
     #               computer account.</p>
     #   @return [Array<Types::Attribute>]
     class Computer < Struct.new(
+      nil,
       :computer_id,
       :computer_name,
       :computer_attributes,
@@ -699,6 +728,7 @@ module Aws::DirectoryService
     #         controllers for your Amazon Web Services directory.</p>
     #   @return [String]
     class ConditionalForwarder < Struct.new(
+      nil,
       :remote_domain_name,
       :dns_ip_addrs,
       :dns_ipv6_addrs,
@@ -737,6 +767,7 @@ module Aws::DirectoryService
     #           <code>IPv6</code> based on the provided subnet capabilities.</p>
     #   @return [String]
     class ConnectDirectoryRequest < Struct.new(
+      nil,
       :name,
       :short_name,
       :password,
@@ -755,6 +786,7 @@ module Aws::DirectoryService
     #   <p>The identifier of the new directory.</p>
     #   @return [String]
     class ConnectDirectoryResult < Struct.new(
+      nil,
       :directory_id,
       keyword_init: true
     )
@@ -771,6 +803,7 @@ module Aws::DirectoryService
     #               <code>EntityAlreadyExistsException</code> error if the alias already exists.</p>
     #   @return [String]
     class CreateAliasRequest < Struct.new(
+      nil,
       :directory_id,
       :alias,
       keyword_init: true
@@ -786,6 +819,7 @@ module Aws::DirectoryService
     #   <p>The alias for the directory.</p>
     #   @return [String]
     class CreateAliasResult < Struct.new(
+      nil,
       :directory_id,
       :alias,
       keyword_init: true
@@ -811,6 +845,7 @@ module Aws::DirectoryService
     #               computer account.</p>
     #   @return [Array<Types::Attribute>]
     class CreateComputerRequest < Struct.new(
+      nil,
       :directory_id,
       :computer_name,
       :password,
@@ -826,6 +861,7 @@ module Aws::DirectoryService
     #   <p>A <a>Computer</a> object that represents the computer account.</p>
     #   @return [Types::Computer]
     class CreateComputerResult < Struct.new(
+      nil,
       :computer,
       keyword_init: true
     )
@@ -850,6 +886,7 @@ module Aws::DirectoryService
     #   <p>The IPv6 addresses of the remote DNS server associated with RemoteDomainName.</p>
     #   @return [Array<String>]
     class CreateConditionalForwarderRequest < Struct.new(
+      nil,
       :directory_id,
       :remote_domain_name,
       :dns_ip_addrs,
@@ -861,6 +898,7 @@ module Aws::DirectoryService
 
     # <p>The result of a CreateConditinalForwarder request.</p>
     class CreateConditionalForwarderResult < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -921,6 +959,7 @@ module Aws::DirectoryService
     #   <p>The network type for your directory. Simple AD supports IPv4 and Dual-stack only.</p>
     #   @return [String]
     class CreateDirectoryRequest < Struct.new(
+      nil,
       :name,
       :short_name,
       :password,
@@ -939,6 +978,7 @@ module Aws::DirectoryService
     #   <p>The identifier of the directory that was created.</p>
     #   @return [String]
     class CreateDirectoryResult < Struct.new(
+      nil,
       :directory_id,
       keyword_init: true
     )
@@ -964,6 +1004,7 @@ module Aws::DirectoryService
     #               You can specify multiple tags as a list.</p>
     #   @return [Array<Types::Tag>]
     class CreateHybridADRequest < Struct.new(
+      nil,
       :secret_arn,
       :assessment_id,
       :tags,
@@ -976,6 +1017,7 @@ module Aws::DirectoryService
     #   <p>The unique identifier of the newly created hybrid directory.</p>
     #   @return [String]
     class CreateHybridADResult < Struct.new(
+      nil,
       :directory_id,
       keyword_init: true
     )
@@ -991,6 +1033,7 @@ module Aws::DirectoryService
     #         forwarded.</p>
     #   @return [String]
     class CreateLogSubscriptionRequest < Struct.new(
+      nil,
       :directory_id,
       :log_group_name,
       keyword_init: true
@@ -999,6 +1042,7 @@ module Aws::DirectoryService
     end
 
     class CreateLogSubscriptionResult < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1039,6 +1083,7 @@ module Aws::DirectoryService
     #         based on the provided subnet capabilities.</p>
     #   @return [String]
     class CreateMicrosoftADRequest < Struct.new(
+      nil,
       :name,
       :short_name,
       :password,
@@ -1057,6 +1102,7 @@ module Aws::DirectoryService
     #   <p>The identifier of the directory that was created.</p>
     #   @return [String]
     class CreateMicrosoftADResult < Struct.new(
+      nil,
       :directory_id,
       keyword_init: true
     )
@@ -1071,6 +1117,7 @@ module Aws::DirectoryService
     #   <p>The descriptive name to apply to the snapshot.</p>
     #   @return [String]
     class CreateSnapshotRequest < Struct.new(
+      nil,
       :directory_id,
       :name,
       keyword_init: true
@@ -1083,6 +1130,7 @@ module Aws::DirectoryService
     #   <p>The identifier of the snapshot that was created.</p>
     #   @return [String]
     class CreateSnapshotResult < Struct.new(
+      nil,
       :snapshot_id,
       keyword_init: true
     )
@@ -1123,6 +1171,7 @@ module Aws::DirectoryService
     #   <p>Optional parameter to enable selective authentication for the trust.</p>
     #   @return [String]
     class CreateTrustRequest < Struct.new(
+      nil,
       :directory_id,
       :remote_domain_name,
       :trust_password,
@@ -1141,6 +1190,7 @@ module Aws::DirectoryService
     #   <p>A unique identifier for the trust relationship that was created.</p>
     #   @return [String]
     class CreateTrustResult < Struct.new(
+      nil,
       :trust_id,
       keyword_init: true
     )
@@ -1151,6 +1201,7 @@ module Aws::DirectoryService
     #   <p>The unique identifier of the directory assessment to delete.</p>
     #   @return [String]
     class DeleteADAssessmentRequest < Struct.new(
+      nil,
       :assessment_id,
       keyword_init: true
     )
@@ -1161,6 +1212,7 @@ module Aws::DirectoryService
     #   <p>The unique identifier of the deleted directory assessment.</p>
     #   @return [String]
     class DeleteADAssessmentResult < Struct.new(
+      nil,
       :assessment_id,
       keyword_init: true
     )
@@ -1176,6 +1228,7 @@ module Aws::DirectoryService
     #         the conditional forwarder.</p>
     #   @return [String]
     class DeleteConditionalForwarderRequest < Struct.new(
+      nil,
       :directory_id,
       :remote_domain_name,
       keyword_init: true
@@ -1185,6 +1238,7 @@ module Aws::DirectoryService
 
     # <p>The result of a DeleteConditionalForwarder request.</p>
     class DeleteConditionalForwarderResult < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1195,6 +1249,7 @@ module Aws::DirectoryService
     #   <p>The identifier of the directory to delete.</p>
     #   @return [String]
     class DeleteDirectoryRequest < Struct.new(
+      nil,
       :directory_id,
       keyword_init: true
     )
@@ -1206,6 +1261,7 @@ module Aws::DirectoryService
     #   <p>The directory identifier.</p>
     #   @return [String]
     class DeleteDirectoryResult < Struct.new(
+      nil,
       :directory_id,
       keyword_init: true
     )
@@ -1216,6 +1272,7 @@ module Aws::DirectoryService
     #   <p>Identifier of the directory whose log subscription you want to delete.</p>
     #   @return [String]
     class DeleteLogSubscriptionRequest < Struct.new(
+      nil,
       :directory_id,
       keyword_init: true
     )
@@ -1223,6 +1280,7 @@ module Aws::DirectoryService
     end
 
     class DeleteLogSubscriptionResult < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1233,6 +1291,7 @@ module Aws::DirectoryService
     #   <p>The identifier of the directory snapshot to be deleted.</p>
     #   @return [String]
     class DeleteSnapshotRequest < Struct.new(
+      nil,
       :snapshot_id,
       keyword_init: true
     )
@@ -1244,6 +1303,7 @@ module Aws::DirectoryService
     #   <p>The identifier of the directory snapshot that was deleted.</p>
     #   @return [String]
     class DeleteSnapshotResult < Struct.new(
+      nil,
       :snapshot_id,
       keyword_init: true
     )
@@ -1259,6 +1319,7 @@ module Aws::DirectoryService
     #   <p>Delete a conditional forwarder as part of a DeleteTrustRequest.</p>
     #   @return [Boolean]
     class DeleteTrustRequest < Struct.new(
+      nil,
       :trust_id,
       :delete_associated_conditional_forwarder,
       keyword_init: true
@@ -1271,6 +1332,7 @@ module Aws::DirectoryService
     #   <p>The Trust ID of the trust relationship that was deleted.</p>
     #   @return [String]
     class DeleteTrustResult < Struct.new(
+      nil,
       :trust_id,
       keyword_init: true
     )
@@ -1284,6 +1346,7 @@ module Aws::DirectoryService
     #   <p>The identifier of the certificate.</p>
     #   @return [String]
     class DeregisterCertificateRequest < Struct.new(
+      nil,
       :directory_id,
       :certificate_id,
       keyword_init: true
@@ -1292,6 +1355,7 @@ module Aws::DirectoryService
     end
 
     class DeregisterCertificateResult < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1307,6 +1371,7 @@ module Aws::DirectoryService
     #         publisher.</p>
     #   @return [String]
     class DeregisterEventTopicRequest < Struct.new(
+      nil,
       :directory_id,
       :topic_name,
       keyword_init: true
@@ -1316,6 +1381,7 @@ module Aws::DirectoryService
 
     # <p>The result of a DeregisterEventTopic request.</p>
     class DeregisterEventTopicResult < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1325,6 +1391,7 @@ module Aws::DirectoryService
     #   <p>The identifier of the directory assessment to describe.</p>
     #   @return [String]
     class DescribeADAssessmentRequest < Struct.new(
+      nil,
       :assessment_id,
       keyword_init: true
     )
@@ -1340,6 +1407,7 @@ module Aws::DirectoryService
     #               and test category. Each report includes specific validation details and outcomes.</p>
     #   @return [Array<Types::AssessmentReport>]
     class DescribeADAssessmentResult < Struct.new(
+      nil,
       :assessment,
       :assessment_reports,
       keyword_init: true
@@ -1353,6 +1421,7 @@ module Aws::DirectoryService
     #         information.</p>
     #   @return [String]
     class DescribeCAEnrollmentPolicyRequest < Struct.new(
+      nil,
       :directory_id,
       keyword_init: true
     )
@@ -1408,6 +1477,7 @@ module Aws::DirectoryService
     #         particularly useful when the policy is in an error or transitional state.</p>
     #   @return [String]
     class DescribeCAEnrollmentPolicyResult < Struct.new(
+      nil,
       :directory_id,
       :pca_connector_arn,
       :ca_enrollment_policy_status,
@@ -1425,6 +1495,7 @@ module Aws::DirectoryService
     #   <p>The identifier of the certificate.</p>
     #   @return [String]
     class DescribeCertificateRequest < Struct.new(
+      nil,
       :directory_id,
       :certificate_id,
       keyword_init: true
@@ -1437,6 +1508,7 @@ module Aws::DirectoryService
     #         reason for the state, expiration date time, and certificate common name.</p>
     #   @return [Types::Certificate]
     class DescribeCertificateResult < Struct.new(
+      nil,
       :certificate,
       keyword_init: true
     )
@@ -1461,6 +1533,7 @@ module Aws::DirectoryService
     #         is specified by the limitations of the operation. </p>
     #   @return [Integer]
     class DescribeClientAuthenticationSettingsRequest < Struct.new(
+      nil,
       :directory_id,
       :type,
       :next_token,
@@ -1481,6 +1554,7 @@ module Aws::DirectoryService
     #         setting types exceeds page limit and there is another page.</p>
     #   @return [String]
     class DescribeClientAuthenticationSettingsResult < Struct.new(
+      nil,
       :client_authentication_settings_info,
       :next_token,
       keyword_init: true
@@ -1499,6 +1573,7 @@ module Aws::DirectoryService
     #         returned.</p>
     #   @return [Array<String>]
     class DescribeConditionalForwardersRequest < Struct.new(
+      nil,
       :directory_id,
       :remote_domain_names,
       keyword_init: true
@@ -1511,6 +1586,7 @@ module Aws::DirectoryService
     #   <p>The list of conditional forwarders that have been created.</p>
     #   @return [Array<Types::ConditionalForwarder>]
     class DescribeConditionalForwardersResult < Struct.new(
+      nil,
       :conditional_forwarders,
       keyword_init: true
     )
@@ -1531,6 +1607,7 @@ module Aws::DirectoryService
     #         is specified by the limitations of the operation.</p>
     #   @return [Integer]
     class DescribeDirectoriesRequest < Struct.new(
+      nil,
       :directory_ids,
       :next_token,
       :limit,
@@ -1554,6 +1631,7 @@ module Aws::DirectoryService
     #         set of items.</p>
     #   @return [String]
     class DescribeDirectoriesResult < Struct.new(
+      nil,
       :directory_descriptions,
       :next_token,
       keyword_init: true
@@ -1565,6 +1643,7 @@ module Aws::DirectoryService
     #   <p>The directory identifier.</p>
     #   @return [String]
     class DescribeDirectoryDataAccessRequest < Struct.new(
+      nil,
       :directory_id,
       keyword_init: true
     )
@@ -1575,6 +1654,7 @@ module Aws::DirectoryService
     #   <p>The current status of data access through the Directory Service Data API.</p>
     #   @return [String]
     class DescribeDirectoryDataAccessResult < Struct.new(
+      nil,
       :data_access_status,
       keyword_init: true
     )
@@ -1598,6 +1678,7 @@ module Aws::DirectoryService
     #   <p>The maximum number of items to return.</p>
     #   @return [Integer]
     class DescribeDomainControllersRequest < Struct.new(
+      nil,
       :directory_id,
       :domain_controller_ids,
       :next_token,
@@ -1616,6 +1697,7 @@ module Aws::DirectoryService
     #         next set of items.</p>
     #   @return [String]
     class DescribeDomainControllersResult < Struct.new(
+      nil,
       :domain_controllers,
       :next_token,
       keyword_init: true
@@ -1635,6 +1717,7 @@ module Aws::DirectoryService
     #         thrown.</p>
     #   @return [Array<String>]
     class DescribeEventTopicsRequest < Struct.new(
+      nil,
       :directory_id,
       :topic_names,
       keyword_init: true
@@ -1648,6 +1731,7 @@ module Aws::DirectoryService
     #         ID.</p>
     #   @return [Array<Types::EventTopic>]
     class DescribeEventTopicsResult < Struct.new(
+      nil,
       :event_topics,
       keyword_init: true
     )
@@ -1667,6 +1751,7 @@ module Aws::DirectoryService
     #   <p>The pagination token from a previous request to <a>DescribeHybridADUpdate</a>. Pass null if this is the first request.</p>
     #   @return [String]
     class DescribeHybridADUpdateRequest < Struct.new(
+      nil,
       :directory_id,
       :update_type,
       :next_token,
@@ -1685,6 +1770,7 @@ module Aws::DirectoryService
     #               items.</p>
     #   @return [String]
     class DescribeHybridADUpdateResult < Struct.new(
+      nil,
       :update_activities,
       :next_token,
       keyword_init: true
@@ -1706,6 +1792,7 @@ module Aws::DirectoryService
     #   <p>Specifies the number of items that should be displayed on one page.</p>
     #   @return [Integer]
     class DescribeLDAPSSettingsRequest < Struct.new(
+      nil,
       :directory_id,
       :type,
       :next_token,
@@ -1724,6 +1811,7 @@ module Aws::DirectoryService
     #         page limit and there is another page.</p>
     #   @return [String]
     class DescribeLDAPSSettingsResult < Struct.new(
+      nil,
       :ldaps_settings_info,
       :next_token,
       keyword_init: true
@@ -1741,6 +1829,7 @@ module Aws::DirectoryService
     #   <p>The <code>DescribeRegionsResult.NextToken</code> value from a previous call to <a>DescribeRegions</a>. Pass null if this is the first call.</p>
     #   @return [String]
     class DescribeRegionsRequest < Struct.new(
+      nil,
       :directory_id,
       :region_name,
       :next_token,
@@ -1758,6 +1847,7 @@ module Aws::DirectoryService
     #         of items.</p>
     #   @return [String]
     class DescribeRegionsResult < Struct.new(
+      nil,
       :regions_description,
       :next_token,
       keyword_init: true
@@ -1775,6 +1865,7 @@ module Aws::DirectoryService
     #   <p>The <code>DescribeSettingsResult.NextToken</code> value from a previous call to <a>DescribeSettings</a>. Pass null if this is the first call.</p>
     #   @return [String]
     class DescribeSettingsRequest < Struct.new(
+      nil,
       :directory_id,
       :status,
       :next_token,
@@ -1799,6 +1890,7 @@ module Aws::DirectoryService
     #         retrieve the next set of items. </p>
     #   @return [String]
     class DescribeSettingsResult < Struct.new(
+      nil,
       :directory_id,
       :setting_entries,
       :next_token,
@@ -1821,6 +1913,7 @@ module Aws::DirectoryService
     #   <p>The number of shared directories to return in the response object.</p>
     #   @return [Integer]
     class DescribeSharedDirectoriesRequest < Struct.new(
+      nil,
       :owner_directory_id,
       :shared_directory_ids,
       :next_token,
@@ -1838,6 +1931,7 @@ module Aws::DirectoryService
     #           <code>NextToken</code> parameter in a subsequent call to <a>DescribeSharedDirectories</a> to retrieve the next set of items.</p>
     #   @return [String]
     class DescribeSharedDirectoriesResult < Struct.new(
+      nil,
       :shared_directories,
       :next_token,
       keyword_init: true
@@ -1862,6 +1956,7 @@ module Aws::DirectoryService
     #   <p>The maximum number of objects to return.</p>
     #   @return [Integer]
     class DescribeSnapshotsRequest < Struct.new(
+      nil,
       :directory_id,
       :snapshot_ids,
       :next_token,
@@ -1884,6 +1979,7 @@ module Aws::DirectoryService
     #            a subsequent call to <a>DescribeSnapshots</a>.</p>
     #   @return [String]
     class DescribeSnapshotsResult < Struct.new(
+      nil,
       :snapshots,
       :next_token,
       keyword_init: true
@@ -1912,6 +2008,7 @@ module Aws::DirectoryService
     #   <p>The maximum number of objects to return.</p>
     #   @return [Integer]
     class DescribeTrustsRequest < Struct.new(
+      nil,
       :directory_id,
       :trust_ids,
       :next_token,
@@ -1934,6 +2031,7 @@ module Aws::DirectoryService
     #           <i>NextToken</i> parameter in a subsequent call to <a>DescribeTrusts</a> to retrieve the next set of items.</p>
     #   @return [String]
     class DescribeTrustsResult < Struct.new(
+      nil,
       :trusts,
       :next_token,
       keyword_init: true
@@ -1955,6 +2053,7 @@ module Aws::DirectoryService
     #           <a>DescribeUpdateDirectory</a>. Pass null if this is the first call. </p>
     #   @return [String]
     class DescribeUpdateDirectoryRequest < Struct.new(
+      nil,
       :directory_id,
       :update_type,
       :region_name,
@@ -1972,6 +2071,7 @@ module Aws::DirectoryService
     #         parameter. </p>
     #   @return [String]
     class DescribeUpdateDirectoryResult < Struct.new(
+      nil,
       :update_activities,
       :next_token,
       keyword_init: true
@@ -1988,6 +2088,7 @@ module Aws::DirectoryService
     #   <p>The Amazon Web Services request identifier.</p>
     #   @return [String]
     class DirectoryAlreadyInRegionException < Struct.new(
+      nil,
       :message,
       :request_id,
       keyword_init: true
@@ -2003,6 +2104,7 @@ module Aws::DirectoryService
     #   <p>The Amazon Web Services request identifier.</p>
     #   @return [String]
     class DirectoryAlreadySharedException < Struct.new(
+      nil,
       :message,
       :request_id,
       keyword_init: true
@@ -2042,6 +2144,7 @@ module Aws::DirectoryService
     #            </ul>
     #   @return [String]
     class DirectoryConnectSettings < Struct.new(
+      nil,
       :vpc_id,
       :subnet_ids,
       :customer_dns_ips,
@@ -2080,6 +2183,7 @@ module Aws::DirectoryService
     #   <p>The IPv6 addresses of the AD Connector servers.</p>
     #   @return [Array<String>]
     class DirectoryConnectSettingsDescription < Struct.new(
+      nil,
       :vpc_id,
       :subnet_ids,
       :customer_user_name,
@@ -2204,6 +2308,7 @@ module Aws::DirectoryService
     #   <p>The network type of the directory.</p>
     #   @return [String]
     class DirectoryDescription < Struct.new(
+      nil,
       :directory_id,
       :name,
       :short_name,
@@ -2251,6 +2356,7 @@ module Aws::DirectoryService
     #   <p>The Amazon Web Services request identifier.</p>
     #   @return [String]
     class DirectoryDoesNotExistException < Struct.new(
+      nil,
       :message,
       :request_id,
       keyword_init: true
@@ -2266,6 +2372,7 @@ module Aws::DirectoryService
     #   <p>The Amazon Web Services request identifier.</p>
     #   @return [String]
     class DirectoryInDesiredStateException < Struct.new(
+      nil,
       :message,
       :request_id,
       keyword_init: true
@@ -2283,6 +2390,7 @@ module Aws::DirectoryService
     #   <p>The Amazon Web Services request identifier.</p>
     #   @return [String]
     class DirectoryLimitExceededException < Struct.new(
+      nil,
       :message,
       :request_id,
       keyword_init: true
@@ -2319,6 +2427,7 @@ module Aws::DirectoryService
     #   <p>Indicates if the connected directory limit has been reached.</p>
     #   @return [Boolean]
     class DirectoryLimits < Struct.new(
+      nil,
       :cloud_only_directories_limit,
       :cloud_only_directories_current_count,
       :cloud_only_directories_limit_reached,
@@ -2348,6 +2457,7 @@ module Aws::DirectoryService
     #   <p>The Amazon Web Services request identifier.</p>
     #   @return [String]
     class DirectoryNotSharedException < Struct.new(
+      nil,
       :message,
       :request_id,
       keyword_init: true
@@ -2360,6 +2470,7 @@ module Aws::DirectoryService
     #   <p>The target directory size for the update operation.</p>
     #   @return [String]
     class DirectorySizeUpdateSettings < Struct.new(
+      nil,
       :directory_size,
       keyword_init: true
     )
@@ -2374,6 +2485,7 @@ module Aws::DirectoryService
     #   <p>The Amazon Web Services request identifier.</p>
     #   @return [String]
     class DirectoryUnavailableException < Struct.new(
+      nil,
       :message,
       :request_id,
       keyword_init: true
@@ -2391,6 +2503,7 @@ module Aws::DirectoryService
     #         these subnets.</p>
     #   @return [Array<String>]
     class DirectoryVpcSettings < Struct.new(
+      nil,
       :vpc_id,
       :subnet_ids,
       keyword_init: true
@@ -2412,6 +2525,7 @@ module Aws::DirectoryService
     #   <p>The list of Availability Zones that the directory is in.</p>
     #   @return [Array<String>]
     class DirectoryVpcSettingsDescription < Struct.new(
+      nil,
       :vpc_id,
       :subnet_ids,
       :security_group_id,
@@ -2429,6 +2543,7 @@ module Aws::DirectoryService
     #   <p>The Amazon Web Services request identifier.</p>
     #   @return [String]
     class DisableAlreadyInProgressException < Struct.new(
+      nil,
       :message,
       :request_id,
       keyword_init: true
@@ -2441,6 +2556,7 @@ module Aws::DirectoryService
     #   <p>The identifier of the directory for which to disable the CA enrollment policy.</p>
     #   @return [String]
     class DisableCAEnrollmentPolicyRequest < Struct.new(
+      nil,
       :directory_id,
       keyword_init: true
     )
@@ -2449,6 +2565,7 @@ module Aws::DirectoryService
 
     # <p>Contains the results of the <a>DisableCAEnrollmentPolicy</a> operation.</p>
     class DisableCAEnrollmentPolicyResult < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -2462,6 +2579,7 @@ module Aws::DirectoryService
     #           <code>"SmartCard"</code> is supported.</p>
     #   @return [String]
     class DisableClientAuthenticationRequest < Struct.new(
+      nil,
       :directory_id,
       :type,
       keyword_init: true
@@ -2470,6 +2588,7 @@ module Aws::DirectoryService
     end
 
     class DisableClientAuthenticationResult < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -2479,6 +2598,7 @@ module Aws::DirectoryService
     #   <p>The directory identifier.</p>
     #   @return [String]
     class DisableDirectoryDataAccessRequest < Struct.new(
+      nil,
       :directory_id,
       keyword_init: true
     )
@@ -2486,6 +2606,7 @@ module Aws::DirectoryService
     end
 
     class DisableDirectoryDataAccessResult < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -2499,6 +2620,7 @@ module Aws::DirectoryService
     #         supported.</p>
     #   @return [String]
     class DisableLDAPSRequest < Struct.new(
+      nil,
       :directory_id,
       :type,
       keyword_init: true
@@ -2507,6 +2629,7 @@ module Aws::DirectoryService
     end
 
     class DisableLDAPSResult < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -2517,6 +2640,7 @@ module Aws::DirectoryService
     #   <p>The identifier of the directory for which to disable MFA.</p>
     #   @return [String]
     class DisableRadiusRequest < Struct.new(
+      nil,
       :directory_id,
       keyword_init: true
     )
@@ -2525,6 +2649,7 @@ module Aws::DirectoryService
 
     # <p>Contains the results of the <a>DisableRadius</a> operation.</p>
     class DisableRadiusResult < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -2550,6 +2675,7 @@ module Aws::DirectoryService
     #         parameter.</p>
     #   @return [String]
     class DisableSsoRequest < Struct.new(
+      nil,
       :directory_id,
       :user_name,
       :password,
@@ -2560,6 +2686,7 @@ module Aws::DirectoryService
 
     # <p>Contains the results of the <a>DisableSso</a> operation.</p>
     class DisableSsoResult < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -2600,6 +2727,7 @@ module Aws::DirectoryService
     #   <p>The date and time that the status was last updated.</p>
     #   @return [Time]
     class DomainController < Struct.new(
+      nil,
       :directory_id,
       :domain_controller_id,
       :dns_ip_addr,
@@ -2625,6 +2753,7 @@ module Aws::DirectoryService
     #   <p>The Amazon Web Services request identifier.</p>
     #   @return [String]
     class DomainControllerLimitExceededException < Struct.new(
+      nil,
       :message,
       :request_id,
       keyword_init: true
@@ -2640,6 +2769,7 @@ module Aws::DirectoryService
     #   <p>The Amazon Web Services request identifier.</p>
     #   @return [String]
     class EnableAlreadyInProgressException < Struct.new(
+      nil,
       :message,
       :request_id,
       keyword_init: true
@@ -2661,6 +2791,7 @@ module Aws::DirectoryService
     #            </p>
     #   @return [String]
     class EnableCAEnrollmentPolicyRequest < Struct.new(
+      nil,
       :directory_id,
       :pca_connector_arn,
       keyword_init: true
@@ -2670,6 +2801,7 @@ module Aws::DirectoryService
 
     # <p>Contains the results of the <a>EnableCAEnrollmentPolicy</a> operation.</p>
     class EnableCAEnrollmentPolicyResult < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -2685,6 +2817,7 @@ module Aws::DirectoryService
     #         your self-managed AD. </p>
     #   @return [String]
     class EnableClientAuthenticationRequest < Struct.new(
+      nil,
       :directory_id,
       :type,
       keyword_init: true
@@ -2693,6 +2826,7 @@ module Aws::DirectoryService
     end
 
     class EnableClientAuthenticationResult < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -2702,6 +2836,7 @@ module Aws::DirectoryService
     #   <p>The directory identifier.</p>
     #   @return [String]
     class EnableDirectoryDataAccessRequest < Struct.new(
+      nil,
       :directory_id,
       keyword_init: true
     )
@@ -2709,6 +2844,7 @@ module Aws::DirectoryService
     end
 
     class EnableDirectoryDataAccessResult < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -2722,6 +2858,7 @@ module Aws::DirectoryService
     #         supported.</p>
     #   @return [String]
     class EnableLDAPSRequest < Struct.new(
+      nil,
       :directory_id,
       :type,
       keyword_init: true
@@ -2730,6 +2867,7 @@ module Aws::DirectoryService
     end
 
     class EnableLDAPSResult < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -2744,6 +2882,7 @@ module Aws::DirectoryService
     #            server.</p>
     #   @return [Types::RadiusSettings]
     class EnableRadiusRequest < Struct.new(
+      nil,
       :directory_id,
       :radius_settings,
       keyword_init: true
@@ -2753,6 +2892,7 @@ module Aws::DirectoryService
 
     # <p>Contains the results of the <a>EnableRadius</a> operation.</p>
     class EnableRadiusResult < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -2778,6 +2918,7 @@ module Aws::DirectoryService
     #         parameter.</p>
     #   @return [String]
     class EnableSsoRequest < Struct.new(
+      nil,
       :directory_id,
       :user_name,
       :password,
@@ -2788,6 +2929,7 @@ module Aws::DirectoryService
 
     # <p>Contains the results of the <a>EnableSso</a> operation.</p>
     class EnableSsoResult < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -2801,6 +2943,7 @@ module Aws::DirectoryService
     #   <p>The Amazon Web Services request identifier.</p>
     #   @return [String]
     class EntityAlreadyExistsException < Struct.new(
+      nil,
       :message,
       :request_id,
       keyword_init: true
@@ -2816,6 +2959,7 @@ module Aws::DirectoryService
     #   <p>The Amazon Web Services request identifier.</p>
     #   @return [String]
     class EntityDoesNotExistException < Struct.new(
+      nil,
       :message,
       :request_id,
       keyword_init: true
@@ -2841,6 +2985,7 @@ module Aws::DirectoryService
     #   <p>The topic registration status.</p>
     #   @return [String]
     class EventTopic < Struct.new(
+      nil,
       :directory_id,
       :topic_name,
       :topic_arn,
@@ -2853,6 +2998,7 @@ module Aws::DirectoryService
 
     # <p>Contains the inputs for the <a>GetDirectoryLimits</a> operation.</p>
     class GetDirectoryLimitsRequest < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -2864,6 +3010,7 @@ module Aws::DirectoryService
     #         current Region.</p>
     #   @return [Types::DirectoryLimits]
     class GetDirectoryLimitsResult < Struct.new(
+      nil,
       :directory_limits,
       keyword_init: true
     )
@@ -2875,6 +3022,7 @@ module Aws::DirectoryService
     #   <p>Contains the identifier of the directory to obtain the limits for.</p>
     #   @return [String]
     class GetSnapshotLimitsRequest < Struct.new(
+      nil,
       :directory_id,
       keyword_init: true
     )
@@ -2887,6 +3035,7 @@ module Aws::DirectoryService
     #            directory.</p>
     #   @return [Types::SnapshotLimits]
     class GetSnapshotLimitsResult < Struct.new(
+      nil,
       :snapshot_limits,
       keyword_init: true
     )
@@ -2905,6 +3054,7 @@ module Aws::DirectoryService
     #            </p>
     #   @return [String]
     class HybridAdministratorAccountUpdate < Struct.new(
+      nil,
       :secret_arn,
       keyword_init: true
     )
@@ -2922,6 +3072,7 @@ module Aws::DirectoryService
     #               directory.</p>
     #   @return [Array<String>]
     class HybridCustomerInstancesSettings < Struct.new(
+      nil,
       :customer_dns_ips,
       :instance_ids,
       keyword_init: true
@@ -2938,6 +3089,7 @@ module Aws::DirectoryService
     #               operations.</p>
     #   @return [Array<String>]
     class HybridSettingsDescription < Struct.new(
+      nil,
       :self_managed_dns_ip_addrs,
       :self_managed_instance_ids,
       keyword_init: true
@@ -2956,6 +3108,7 @@ module Aws::DirectoryService
     #               changes.</p>
     #   @return [Array<Types::HybridUpdateInfoEntry>]
     class HybridUpdateActivities < Struct.new(
+      nil,
       :self_managed_instances,
       :hybrid_administrator_account,
       keyword_init: true
@@ -2993,6 +3146,7 @@ module Aws::DirectoryService
     #               configuration.</p>
     #   @return [String]
     class HybridUpdateInfoEntry < Struct.new(
+      nil,
       :status,
       :status_reason,
       :initiated_by,
@@ -3017,6 +3171,7 @@ module Aws::DirectoryService
     #               configuration.</p>
     #   @return [Array<String>]
     class HybridUpdateValue < Struct.new(
+      nil,
       :instance_ids,
       :dns_ips,
       keyword_init: true
@@ -3032,6 +3187,7 @@ module Aws::DirectoryService
     #   <p>The Amazon Web Services request identifier.</p>
     #   @return [String]
     class IncompatibleSettingsException < Struct.new(
+      nil,
       :message,
       :request_id,
       keyword_init: true
@@ -3047,6 +3203,7 @@ module Aws::DirectoryService
     #   <p>The Amazon Web Services request identifier.</p>
     #   @return [String]
     class InsufficientPermissionsException < Struct.new(
+      nil,
       :message,
       :request_id,
       keyword_init: true
@@ -3062,6 +3219,7 @@ module Aws::DirectoryService
     #   <p>The Amazon Web Services request identifier.</p>
     #   @return [String]
     class InvalidCertificateException < Struct.new(
+      nil,
       :message,
       :request_id,
       keyword_init: true
@@ -3077,6 +3235,7 @@ module Aws::DirectoryService
     #   <p>The Amazon Web Services request identifier.</p>
     #   @return [String]
     class InvalidClientAuthStatusException < Struct.new(
+      nil,
       :message,
       :request_id,
       keyword_init: true
@@ -3093,6 +3252,7 @@ module Aws::DirectoryService
     #   <p>The Amazon Web Services request identifier.</p>
     #   @return [String]
     class InvalidLDAPSStatusException < Struct.new(
+      nil,
       :message,
       :request_id,
       keyword_init: true
@@ -3108,6 +3268,7 @@ module Aws::DirectoryService
     #   <p>The Amazon Web Services request identifier.</p>
     #   @return [String]
     class InvalidNextTokenException < Struct.new(
+      nil,
       :message,
       :request_id,
       keyword_init: true
@@ -3123,6 +3284,7 @@ module Aws::DirectoryService
     #   <p>The Amazon Web Services request identifier.</p>
     #   @return [String]
     class InvalidParameterException < Struct.new(
+      nil,
       :message,
       :request_id,
       keyword_init: true
@@ -3139,6 +3301,7 @@ module Aws::DirectoryService
     #   <p>The Amazon Web Services request identifier.</p>
     #   @return [String]
     class InvalidPasswordException < Struct.new(
+      nil,
       :message,
       :request_id,
       keyword_init: true
@@ -3154,6 +3317,7 @@ module Aws::DirectoryService
     #   <p>The Amazon Web Services request identifier.</p>
     #   @return [String]
     class InvalidTargetException < Struct.new(
+      nil,
       :message,
       :request_id,
       keyword_init: true
@@ -3177,6 +3341,7 @@ module Aws::DirectoryService
     #   <p>Description of the address block.</p>
     #   @return [String]
     class IpRoute < Struct.new(
+      nil,
       :cidr_ip,
       :cidr_ipv6,
       :description,
@@ -3208,6 +3373,7 @@ module Aws::DirectoryService
     #   <p>Description of the <a>IpRouteInfo</a>.</p>
     #   @return [String]
     class IpRouteInfo < Struct.new(
+      nil,
       :directory_id,
       :cidr_ip,
       :cidr_ipv6,
@@ -3229,6 +3395,7 @@ module Aws::DirectoryService
     #   <p>The Amazon Web Services request identifier.</p>
     #   @return [String]
     class IpRouteLimitExceededException < Struct.new(
+      nil,
       :message,
       :request_id,
       keyword_init: true
@@ -3247,6 +3414,7 @@ module Aws::DirectoryService
     #   <p>The date and time when the LDAPS settings were last updated.</p>
     #   @return [Time]
     class LDAPSSettingInfo < Struct.new(
+      nil,
       :ldaps_status,
       :ldaps_status_reason,
       :last_updated_date_time,
@@ -3267,6 +3435,7 @@ module Aws::DirectoryService
     #   <p>The maximum number of assessment summaries to return.</p>
     #   @return [Integer]
     class ListADAssessmentsRequest < Struct.new(
+      nil,
       :directory_id,
       :next_token,
       :limit,
@@ -3285,6 +3454,7 @@ module Aws::DirectoryService
     #               items.</p>
     #   @return [String]
     class ListADAssessmentsResult < Struct.new(
+      nil,
       :assessments,
       :next_token,
       keyword_init: true
@@ -3305,6 +3475,7 @@ module Aws::DirectoryService
     #   <p>The number of items that should show up on one page</p>
     #   @return [Integer]
     class ListCertificatesRequest < Struct.new(
+      nil,
       :directory_id,
       :next_token,
       :limit,
@@ -3322,6 +3493,7 @@ module Aws::DirectoryService
     #         name, certificate state.</p>
     #   @return [Array<Types::CertificateInfo>]
     class ListCertificatesResult < Struct.new(
+      nil,
       :next_token,
       :certificates_info,
       keyword_init: true
@@ -3340,6 +3512,7 @@ module Aws::DirectoryService
     #            specified by the limitations of the operation.</p>
     #   @return [Integer]
     class ListIpRoutesRequest < Struct.new(
+      nil,
       :directory_id,
       :next_token,
       :limit,
@@ -3356,6 +3529,7 @@ module Aws::DirectoryService
     #               <i>NextToken</i> parameter in a subsequent call to <a>ListIpRoutes</a> to retrieve the next set of items.</p>
     #   @return [String]
     class ListIpRoutesResult < Struct.new(
+      nil,
       :ip_routes_info,
       :next_token,
       keyword_init: true
@@ -3376,6 +3550,7 @@ module Aws::DirectoryService
     #   <p>The maximum number of items returned.</p>
     #   @return [Integer]
     class ListLogSubscriptionsRequest < Struct.new(
+      nil,
       :directory_id,
       :next_token,
       :limit,
@@ -3392,6 +3567,7 @@ module Aws::DirectoryService
     #   <p>The token for the next set of items to return.</p>
     #   @return [String]
     class ListLogSubscriptionsResult < Struct.new(
+      nil,
       :log_subscriptions,
       :next_token,
       keyword_init: true
@@ -3411,6 +3587,7 @@ module Aws::DirectoryService
     #   <p>The maximum number of items to return.</p>
     #   @return [Integer]
     class ListSchemaExtensionsRequest < Struct.new(
+      nil,
       :directory_id,
       :next_token,
       :limit,
@@ -3428,6 +3605,7 @@ module Aws::DirectoryService
     #         of items.</p>
     #   @return [String]
     class ListSchemaExtensionsResult < Struct.new(
+      nil,
       :schema_extensions_info,
       :next_token,
       keyword_init: true
@@ -3445,6 +3623,7 @@ module Aws::DirectoryService
     #   <p>Reserved for future use.</p>
     #   @return [Integer]
     class ListTagsForResourceRequest < Struct.new(
+      nil,
       :resource_id,
       :next_token,
       :limit,
@@ -3460,6 +3639,7 @@ module Aws::DirectoryService
     #   <p>Reserved for future use.</p>
     #   @return [String]
     class ListTagsForResourceResult < Struct.new(
+      nil,
       :tags,
       :next_token,
       keyword_init: true
@@ -3480,6 +3660,7 @@ module Aws::DirectoryService
     #   <p>The date and time that the log subscription was created.</p>
     #   @return [Time]
     class LogSubscription < Struct.new(
+      nil,
       :directory_id,
       :log_group_name,
       :subscription_created_date_time,
@@ -3497,6 +3678,7 @@ module Aws::DirectoryService
     #         Required only when updating an AD Connector directory.</p>
     #   @return [Array<String>]
     class NetworkUpdateSettings < Struct.new(
+      nil,
       :network_type,
       :customer_dns_ips_v6,
       keyword_init: true
@@ -3513,6 +3695,7 @@ module Aws::DirectoryService
     #   <p>The Amazon Web Services request identifier.</p>
     #   @return [String]
     class NoAvailableCertificateException < Struct.new(
+      nil,
       :message,
       :request_id,
       keyword_init: true
@@ -3525,6 +3708,7 @@ module Aws::DirectoryService
     #   <p>OS version that the directory needs to be updated to.</p>
     #   @return [String]
     class OSUpdateSettings < Struct.new(
+      nil,
       :os_version,
       keyword_init: true
     )
@@ -3539,6 +3723,7 @@ module Aws::DirectoryService
     #   <p>The Amazon Web Services request identifier.</p>
     #   @return [String]
     class OrganizationsException < Struct.new(
+      nil,
       :message,
       :request_id,
       keyword_init: true
@@ -3573,6 +3758,7 @@ module Aws::DirectoryService
     #   <p>Network type of the directory in the directory owner account.</p>
     #   @return [String]
     class OwnerDirectoryDescription < Struct.new(
+      nil,
       :directory_id,
       :account_id,
       :dns_ip_addrs,
@@ -3620,6 +3806,7 @@ module Aws::DirectoryService
     #   <p>Not currently used.</p>
     #   @return [Boolean]
     class RadiusSettings < Struct.new(
+      nil,
       :radius_servers,
       :radius_servers_ipv6,
       :radius_port,
@@ -3670,6 +3857,7 @@ module Aws::DirectoryService
     #   <p>The date and time that the Region description was last updated.</p>
     #   @return [Time]
     class RegionDescription < Struct.new(
+      nil,
       :directory_id,
       :region_name,
       :region_type,
@@ -3693,6 +3881,7 @@ module Aws::DirectoryService
     #   <p>The Amazon Web Services request identifier.</p>
     #   @return [String]
     class RegionLimitExceededException < Struct.new(
+      nil,
       :message,
       :request_id,
       keyword_init: true
@@ -3710,6 +3899,7 @@ module Aws::DirectoryService
     #         Region.</p>
     #   @return [Array<String>]
     class RegionsInfo < Struct.new(
+      nil,
       :primary_region,
       :additional_regions,
       keyword_init: true
@@ -3733,6 +3923,7 @@ module Aws::DirectoryService
     #         authentication settings.</p>
     #   @return [Types::ClientCertAuthSettings]
     class RegisterCertificateRequest < Struct.new(
+      nil,
       :directory_id,
       :certificate_data,
       :type,
@@ -3746,6 +3937,7 @@ module Aws::DirectoryService
     #   <p>The identifier of the certificate.</p>
     #   @return [String]
     class RegisterCertificateResult < Struct.new(
+      nil,
       :certificate_id,
       keyword_init: true
     )
@@ -3761,6 +3953,7 @@ module Aws::DirectoryService
     #         topic must be in the same region as the specified Directory ID.</p>
     #   @return [String]
     class RegisterEventTopicRequest < Struct.new(
+      nil,
       :directory_id,
       :topic_name,
       keyword_init: true
@@ -3770,6 +3963,7 @@ module Aws::DirectoryService
 
     # <p>The result of a RegisterEventTopic request.</p>
     class RegisterEventTopicResult < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -3780,6 +3974,7 @@ module Aws::DirectoryService
     #         different for each directory owner account.</p>
     #   @return [String]
     class RejectSharedDirectoryRequest < Struct.new(
+      nil,
       :shared_directory_id,
       keyword_init: true
     )
@@ -3790,6 +3985,7 @@ module Aws::DirectoryService
     #   <p>Identifier of the shared directory in the directory consumer account.</p>
     #   @return [String]
     class RejectSharedDirectoryResult < Struct.new(
+      nil,
       :shared_directory_id,
       keyword_init: true
     )
@@ -3806,6 +4002,7 @@ module Aws::DirectoryService
     #   <p>IPv6 address blocks that you want to remove.</p>
     #   @return [Array<String>]
     class RemoveIpRoutesRequest < Struct.new(
+      nil,
       :directory_id,
       :cidr_ips,
       :cidr_ipv6s,
@@ -3815,6 +4012,7 @@ module Aws::DirectoryService
     end
 
     class RemoveIpRoutesResult < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -3824,6 +4022,7 @@ module Aws::DirectoryService
     #   <p>The identifier of the directory for which you want to remove Region replication.</p>
     #   @return [String]
     class RemoveRegionRequest < Struct.new(
+      nil,
       :directory_id,
       keyword_init: true
     )
@@ -3831,6 +4030,7 @@ module Aws::DirectoryService
     end
 
     class RemoveRegionResult < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -3843,6 +4043,7 @@ module Aws::DirectoryService
     #   <p>The tag key (name) of the tag to be removed.</p>
     #   @return [Array<String>]
     class RemoveTagsFromResourceRequest < Struct.new(
+      nil,
       :resource_id,
       :tag_keys,
       keyword_init: true
@@ -3851,6 +4052,7 @@ module Aws::DirectoryService
     end
 
     class RemoveTagsFromResourceResult < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -3866,6 +4068,7 @@ module Aws::DirectoryService
     #   <p>The new password that will be reset.</p>
     #   @return [String]
     class ResetUserPasswordRequest < Struct.new(
+      nil,
       :directory_id,
       :user_name,
       :new_password,
@@ -3875,6 +4078,7 @@ module Aws::DirectoryService
     end
 
     class ResetUserPasswordResult < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -3885,6 +4089,7 @@ module Aws::DirectoryService
     #   <p>The identifier of the snapshot to restore from.</p>
     #   @return [String]
     class RestoreFromSnapshotRequest < Struct.new(
+      nil,
       :snapshot_id,
       keyword_init: true
     )
@@ -3893,6 +4098,7 @@ module Aws::DirectoryService
 
     # <p>Contains the results of the <a>RestoreFromSnapshot</a> operation.</p>
     class RestoreFromSnapshotResult < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -3922,6 +4128,7 @@ module Aws::DirectoryService
     #   <p>The date and time that the schema extension was completed.</p>
     #   @return [Time]
     class SchemaExtensionInfo < Struct.new(
+      nil,
       :directory_id,
       :schema_extension_id,
       :description,
@@ -3942,6 +4149,7 @@ module Aws::DirectoryService
     #   <p>The Amazon Web Services request identifier.</p>
     #   @return [String]
     class ServiceException < Struct.new(
+      nil,
       :message,
       :request_id,
       keyword_init: true
@@ -3962,6 +4170,7 @@ module Aws::DirectoryService
     #         <code>Disable</code>.</p>
     #   @return [String]
     class Setting < Struct.new(
+      nil,
       :name,
       :value,
       keyword_init: true
@@ -4017,6 +4226,7 @@ module Aws::DirectoryService
     #         <code>Boolean</code>, <code>DurationInSeconds</code>, or <code>Enum</code>.</p>
     #   @return [String]
     class SettingEntry < Struct.new(
+      nil,
       :type,
       :name,
       :allowed_values,
@@ -4052,6 +4262,7 @@ module Aws::DirectoryService
     #         by sending a directory sharing request (<code>HANDSHAKE</code>).</p>
     #   @return [String]
     class ShareDirectoryRequest < Struct.new(
+      nil,
       :directory_id,
       :share_notes,
       :share_target,
@@ -4066,6 +4277,7 @@ module Aws::DirectoryService
     #         shared from the specified directory (<code>DirectoryId</code>).</p>
     #   @return [String]
     class ShareDirectoryResult < Struct.new(
+      nil,
       :shared_directory_id,
       keyword_init: true
     )
@@ -4081,6 +4293,7 @@ module Aws::DirectoryService
     #   <p>The Amazon Web Services request identifier.</p>
     #   @return [String]
     class ShareLimitExceededException < Struct.new(
+      nil,
       :message,
       :request_id,
       keyword_init: true
@@ -4096,6 +4309,7 @@ module Aws::DirectoryService
     #   <p>Type of identifier to be used in the <code>Id</code> field.</p>
     #   @return [String]
     class ShareTarget < Struct.new(
+      nil,
       :id,
       :type,
       keyword_init: true
@@ -4140,6 +4354,7 @@ module Aws::DirectoryService
     #   <p>The date and time that the shared directory was last updated.</p>
     #   @return [Time]
     class SharedDirectory < Struct.new(
+      nil,
       :owner_account_id,
       :owner_directory_id,
       :share_method,
@@ -4174,6 +4389,7 @@ module Aws::DirectoryService
     #   <p>The date and time that the snapshot was taken.</p>
     #   @return [Time]
     class Snapshot < Struct.new(
+      nil,
       :directory_id,
       :snapshot_id,
       :type,
@@ -4195,6 +4411,7 @@ module Aws::DirectoryService
     #   <p>The Amazon Web Services request identifier.</p>
     #   @return [String]
     class SnapshotLimitExceededException < Struct.new(
+      nil,
       :message,
       :request_id,
       keyword_init: true
@@ -4213,6 +4430,7 @@ module Aws::DirectoryService
     #   <p>Indicates if the manual snapshot limit has been reached.</p>
     #   @return [Boolean]
     class SnapshotLimits < Struct.new(
+      nil,
       :manual_snapshots_limit,
       :manual_snapshots_current_count,
       :manual_snapshots_limit_reached,
@@ -4237,6 +4455,7 @@ module Aws::DirectoryService
     #               should be omitted.</p>
     #   @return [String]
     class StartADAssessmentRequest < Struct.new(
+      nil,
       :assessment_configuration,
       :directory_id,
       keyword_init: true
@@ -4249,6 +4468,7 @@ module Aws::DirectoryService
     #               to monitor assessment progress and retrieve results.</p>
     #   @return [String]
     class StartADAssessmentResult < Struct.new(
+      nil,
       :assessment_id,
       keyword_init: true
     )
@@ -4272,6 +4492,7 @@ module Aws::DirectoryService
     #   <p>A description of the schema extension.</p>
     #   @return [String]
     class StartSchemaExtensionRequest < Struct.new(
+      nil,
       :directory_id,
       :create_snapshot_before_schema_extension,
       :ldif_content,
@@ -4285,6 +4506,7 @@ module Aws::DirectoryService
     #   <p>The identifier of the schema extension that will be applied.</p>
     #   @return [String]
     class StartSchemaExtensionResult < Struct.new(
+      nil,
       :schema_extension_id,
       keyword_init: true
     )
@@ -4304,6 +4526,7 @@ module Aws::DirectoryService
     #         (Java regex: "^([\\p{L}\\p{Z}\\p{N}_.:/=+\\-]*)$").</p>
     #   @return [String]
     class Tag < Struct.new(
+      nil,
       :key,
       :value,
       keyword_init: true
@@ -4319,6 +4542,7 @@ module Aws::DirectoryService
     #   <p>The Amazon Web Services request identifier.</p>
     #   @return [String]
     class TagLimitExceededException < Struct.new(
+      nil,
       :message,
       :request_id,
       keyword_init: true
@@ -4363,6 +4587,7 @@ module Aws::DirectoryService
     #   <p>Current state of selective authentication for the trust.</p>
     #   @return [String]
     class Trust < Struct.new(
+      nil,
       :directory_id,
       :trust_id,
       :remote_domain_name,
@@ -4387,6 +4612,7 @@ module Aws::DirectoryService
     #         unshared.</p>
     #   @return [Types::UnshareTarget]
     class UnshareDirectoryRequest < Struct.new(
+      nil,
       :directory_id,
       :unshare_target,
       keyword_init: true
@@ -4399,6 +4625,7 @@ module Aws::DirectoryService
     #         unshared from the specified directory (<code>DirectoryId</code>).</p>
     #   @return [String]
     class UnshareDirectoryResult < Struct.new(
+      nil,
       :shared_directory_id,
       keyword_init: true
     )
@@ -4414,6 +4641,7 @@ module Aws::DirectoryService
     #   <p>Type of identifier to be used in the <i>Id</i> field.</p>
     #   @return [String]
     class UnshareTarget < Struct.new(
+      nil,
       :id,
       :type,
       keyword_init: true
@@ -4429,6 +4657,7 @@ module Aws::DirectoryService
     #   <p>The Amazon Web Services request identifier.</p>
     #   @return [String]
     class UnsupportedOperationException < Struct.new(
+      nil,
       :message,
       :request_id,
       keyword_init: true
@@ -4444,6 +4673,7 @@ module Aws::DirectoryService
     #   <p>The Amazon Web Services request identifier.</p>
     #   @return [String]
     class UnsupportedSettingsException < Struct.new(
+      nil,
       :message,
       :request_id,
       keyword_init: true
@@ -4469,6 +4699,7 @@ module Aws::DirectoryService
     #         forwarder.</p>
     #   @return [Array<String>]
     class UpdateConditionalForwarderRequest < Struct.new(
+      nil,
       :directory_id,
       :remote_domain_name,
       :dns_ip_addrs,
@@ -4480,6 +4711,7 @@ module Aws::DirectoryService
 
     # <p>The result of an UpdateConditionalForwarder request.</p>
     class UpdateConditionalForwarderResult < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -4504,6 +4736,7 @@ module Aws::DirectoryService
     #   <p>Specifies whether to create a directory snapshot before performing the update.</p>
     #   @return [Boolean]
     class UpdateDirectorySetupRequest < Struct.new(
+      nil,
       :directory_id,
       :update_type,
       :os_update_settings,
@@ -4516,6 +4749,7 @@ module Aws::DirectoryService
     end
 
     class UpdateDirectorySetupResult < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -4540,6 +4774,7 @@ module Aws::DirectoryService
     #               Amazon Web Services System Manager managed node identifiers.</p>
     #   @return [Types::HybridCustomerInstancesSettings]
     class UpdateHybridADRequest < Struct.new(
+      nil,
       :directory_id,
       :hybrid_administrator_account_update,
       :self_managed_instances_settings,
@@ -4556,6 +4791,7 @@ module Aws::DirectoryService
     #               assessment ensures the updated settings are compatible with your environment.</p>
     #   @return [String]
     class UpdateHybridADResult < Struct.new(
+      nil,
       :directory_id,
       :assessment_id,
       keyword_init: true
@@ -4590,6 +4826,7 @@ module Aws::DirectoryService
     #   <p> The last updated date and time of a particular directory setting. </p>
     #   @return [Time]
     class UpdateInfoEntry < Struct.new(
+      nil,
       :region,
       :status,
       :status_reason,
@@ -4611,6 +4848,7 @@ module Aws::DirectoryService
     #   <p>The number of domain controllers desired in the directory.</p>
     #   @return [Integer]
     class UpdateNumberOfDomainControllersRequest < Struct.new(
+      nil,
       :directory_id,
       :desired_number,
       keyword_init: true
@@ -4619,6 +4857,7 @@ module Aws::DirectoryService
     end
 
     class UpdateNumberOfDomainControllersResult < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -4634,6 +4873,7 @@ module Aws::DirectoryService
     #            server.</p>
     #   @return [Types::RadiusSettings]
     class UpdateRadiusRequest < Struct.new(
+      nil,
       :directory_id,
       :radius_settings,
       keyword_init: true
@@ -4643,6 +4883,7 @@ module Aws::DirectoryService
 
     # <p>Contains the results of the <a>UpdateRadius</a> operation.</p>
     class UpdateRadiusResult < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -4655,6 +4896,7 @@ module Aws::DirectoryService
     #   <p>The list of <a>Setting</a> objects.</p>
     #   @return [Array<Types::Setting>]
     class UpdateSettingsRequest < Struct.new(
+      nil,
       :directory_id,
       :settings,
       keyword_init: true
@@ -4666,6 +4908,7 @@ module Aws::DirectoryService
     #   <p>The identifier of the directory.</p>
     #   @return [String]
     class UpdateSettingsResult < Struct.new(
+      nil,
       :directory_id,
       keyword_init: true
     )
@@ -4679,6 +4922,7 @@ module Aws::DirectoryService
     #   <p>Updates selective authentication for the trust.</p>
     #   @return [String]
     class UpdateTrustRequest < Struct.new(
+      nil,
       :trust_id,
       :selective_auth,
       keyword_init: true
@@ -4693,6 +4937,7 @@ module Aws::DirectoryService
     #   <p>Identifier of the trust relationship.</p>
     #   @return [String]
     class UpdateTrustResult < Struct.new(
+      nil,
       :request_id,
       :trust_id,
       keyword_init: true
@@ -4705,6 +4950,7 @@ module Aws::DirectoryService
     #   <p> The OS update related settings. </p>
     #   @return [Types::OSUpdateSettings]
     class UpdateValue < Struct.new(
+      nil,
       :os_update_settings,
       keyword_init: true
     )
@@ -4719,6 +4965,7 @@ module Aws::DirectoryService
     #   <p>The Amazon Web Services request identifier.</p>
     #   @return [String]
     class UserDoesNotExistException < Struct.new(
+      nil,
       :message,
       :request_id,
       keyword_init: true
@@ -4732,6 +4979,7 @@ module Aws::DirectoryService
     #   <p>The unique Trust ID of the trust relationship to verify.</p>
     #   @return [String]
     class VerifyTrustRequest < Struct.new(
+      nil,
       :trust_id,
       keyword_init: true
     )
@@ -4743,6 +4991,7 @@ module Aws::DirectoryService
     #   <p>The unique Trust ID of the trust relationship that was verified.</p>
     #   @return [String]
     class VerifyTrustResult < Struct.new(
+      nil,
       :trust_id,
       keyword_init: true
     )

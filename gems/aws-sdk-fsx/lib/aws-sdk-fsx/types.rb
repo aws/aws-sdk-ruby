@@ -14,6 +14,7 @@ module Aws::FSx
     #   <p>A detailed error message.</p>
     #   @return [String]
     class AccessPointAlreadyOwnedByYou < Struct.new(
+      nil,
       :error_code,
       :message,
       keyword_init: true
@@ -36,6 +37,7 @@ module Aws::FSx
     #               the <i>Amazon Web Services General Reference</i>.</p>
     #   @return [String]
     class ActiveDirectoryBackupAttributes < Struct.new(
+      nil,
       :domain_name,
       :active_directory_id,
       :resource_arn,
@@ -55,6 +57,7 @@ module Aws::FSx
     #   <p>A detailed error message.</p>
     #   @return [String]
     class ActiveDirectoryError < Struct.new(
+      nil,
       :active_directory_id,
       :type,
       :message,
@@ -277,6 +280,7 @@ module Aws::FSx
     #   <p>A detailed error message.</p>
     #   @return [String]
     class AdministrativeAction < Struct.new(
+      nil,
       :administrative_action_type,
       :progress_percent,
       :request_time,
@@ -298,6 +302,7 @@ module Aws::FSx
     #   <p>Error message providing details about the failed administrative action.</p>
     #   @return [String]
     class AdministrativeActionFailureDetails < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -324,6 +329,7 @@ module Aws::FSx
     #   <p>The total number of constituents this FlexGroup volume has. Not applicable for FlexVols.</p>
     #   @return [Integer]
     class AggregateConfiguration < Struct.new(
+      nil,
       :aggregates,
       :total_constituents,
       keyword_init: true
@@ -376,6 +382,7 @@ module Aws::FSx
     #            </ul>
     #   @return [String]
     class Alias < Struct.new(
+      nil,
       :name,
       :lifecycle,
       keyword_init: true
@@ -416,6 +423,7 @@ module Aws::FSx
     #               as uppercase letters, lowercase letters, or the corresponding letters in escape codes.</p>
     #   @return [Array<String>]
     class AssociateFileSystemAliasesRequest < Struct.new(
+      nil,
       :client_request_token,
       :file_system_id,
       :aliases,
@@ -434,6 +442,7 @@ module Aws::FSx
     #   <p>An array of the DNS aliases that Amazon FSx is associating with the file system.</p>
     #   @return [Array<Types::Alias>]
     class AssociateFileSystemAliasesResponse < Struct.new(
+      nil,
       :aliases,
       keyword_init: true
     )
@@ -470,6 +479,7 @@ module Aws::FSx
     #            <p>You can define any combination of event types for your <code>AutoExportPolicy</code>.</p>
     #   @return [Array<String>]
     class AutoExportPolicy < Struct.new(
+      nil,
       :events,
       keyword_init: true
     )
@@ -506,6 +516,7 @@ module Aws::FSx
     #            <p>You can define any combination of event types for your <code>AutoImportPolicy</code>.</p>
     #   @return [Array<String>]
     class AutoImportPolicy < Struct.new(
+      nil,
       :events,
       keyword_init: true
     )
@@ -549,6 +560,7 @@ module Aws::FSx
     #            </ul>
     #   @return [Integer]
     class AutocommitPeriod < Struct.new(
+      nil,
       :type,
       :value,
       keyword_init: true
@@ -649,6 +661,7 @@ module Aws::FSx
     #           </p>
     #   @return [Integer]
     class Backup < Struct.new(
+      nil,
       :backup_id,
       :lifecycle,
       :failure_details,
@@ -679,6 +692,7 @@ module Aws::FSx
     #   <p>The ID of the source backup. Specifies the backup that you are copying.</p>
     #   @return [String]
     class BackupBeingCopied < Struct.new(
+      nil,
       :message,
       :backup_id,
       keyword_init: true
@@ -692,6 +706,7 @@ module Aws::FSx
     #   <p>A message describing the backup-creation failure.</p>
     #   @return [String]
     class BackupFailureDetails < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -704,6 +719,7 @@ module Aws::FSx
     #   <p>A detailed error message.</p>
     #   @return [String]
     class BackupInProgress < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -715,6 +731,7 @@ module Aws::FSx
     #   <p>A detailed error message.</p>
     #   @return [String]
     class BackupNotFound < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -730,6 +747,7 @@ module Aws::FSx
     #   <p>The ID of a file system being restored from the backup.</p>
     #   @return [String]
     class BackupRestoring < Struct.new(
+      nil,
       :message,
       :file_system_id,
       keyword_init: true
@@ -742,6 +760,7 @@ module Aws::FSx
     #   <p>A detailed error message.</p>
     #   @return [String]
     class BadRequest < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -753,6 +772,7 @@ module Aws::FSx
     #   <p>Specifies the data repository task to cancel.</p>
     #   @return [String]
     class CancelDataRepositoryTaskRequest < Struct.new(
+      nil,
       :task_id,
       keyword_init: true
     )
@@ -793,6 +813,7 @@ module Aws::FSx
     #   <p>The ID of the task being canceled.</p>
     #   @return [String]
     class CancelDataRepositoryTaskResponse < Struct.new(
+      nil,
       :lifecycle,
       :task_id,
       keyword_init: true
@@ -828,6 +849,7 @@ module Aws::FSx
     #               When <code>Scope</code> is set to <code>FAILED_FILES_ONLY</code>, the <code>CompletionReport</code> only contains information about files that the data repository task failed to process.</p>
     #   @return [String]
     class CompletionReport < Struct.new(
+      nil,
       :enabled,
       :path,
       :format,
@@ -889,6 +911,7 @@ module Aws::FSx
     #   <p>A list of <code>Tag</code> values, with a maximum of 50 elements.</p>
     #   @return [Array<Types::Tag>]
     class CopyBackupRequest < Struct.new(
+      nil,
       :client_request_token,
       :source_backup_id,
       :source_region,
@@ -906,6 +929,7 @@ module Aws::FSx
     #               for OpenZFS file system.</p>
     #   @return [Types::Backup]
     class CopyBackupResponse < Struct.new(
+      nil,
       :backup,
       keyword_init: true
     )
@@ -973,6 +997,7 @@ module Aws::FSx
     #            </ul>
     #   @return [Array<String>]
     class CopySnapshotAndUpdateVolumeRequest < Struct.new(
+      nil,
       :client_request_token,
       :volume_id,
       :source_snapshot_arn,
@@ -995,6 +1020,7 @@ module Aws::FSx
     #               system.</p>
     #   @return [Array<Types::AdministrativeAction>]
     class CopySnapshotAndUpdateVolumeResponse < Struct.new(
+      nil,
       :volume_id,
       :lifecycle,
       :administrative_actions,
@@ -1011,6 +1037,7 @@ module Aws::FSx
     #   <p>Used to explicitly set the number of constituents within the FlexGroup per storage aggregate. This field is optional when creating a FlexGroup volume. If unspecified, the default value will be 8. This field cannot be provided when creating a FlexVol volume.</p>
     #   @return [Integer]
     class CreateAggregateConfiguration < Struct.new(
+      nil,
       :aggregates,
       :constituents_per_aggregate,
       keyword_init: true
@@ -1026,6 +1053,7 @@ module Aws::FSx
     #   <p>Specifies the file system user identity to use for authorizing file read and write requests that are made using this S3 access point.</p>
     #   @return [Types::OpenZFSFileSystemIdentity]
     class CreateAndAttachS3AccessPointOpenZFSConfiguration < Struct.new(
+      nil,
       :volume_id,
       :file_system_identity,
       keyword_init: true
@@ -1052,6 +1080,7 @@ module Aws::FSx
     #            For more information, see <a href="https://docs.aws.amazon.com/fsx/latest/OpenZFSGuide/access-points-vpc.html">Creating access points restricted to a virtual private cloud</a>.</p>
     #   @return [Types::CreateAndAttachS3AccessPointS3Configuration]
     class CreateAndAttachS3AccessPointRequest < Struct.new(
+      nil,
       :client_request_token,
       :name,
       :type,
@@ -1066,6 +1095,7 @@ module Aws::FSx
     #   <p>Describes the configuration of the S3 access point created.</p>
     #   @return [Types::S3AccessPointAttachment]
     class CreateAndAttachS3AccessPointResponse < Struct.new(
+      nil,
       :s3_access_point_attachment,
       keyword_init: true
     )
@@ -1082,6 +1112,7 @@ module Aws::FSx
     #         in the Amazon Simple Storage Service User Guide.</p>
     #   @return [String]
     class CreateAndAttachS3AccessPointS3Configuration < Struct.new(
+      nil,
       :vpc_configuration,
       :policy,
       keyword_init: true
@@ -1109,6 +1140,7 @@ module Aws::FSx
     #   <p>(Optional) The ID of the FSx for ONTAP volume to back up.</p>
     #   @return [String]
     class CreateBackupRequest < Struct.new(
+      nil,
       :file_system_id,
       :client_request_token,
       :tags,
@@ -1123,6 +1155,7 @@ module Aws::FSx
     #   <p>A description of the backup.</p>
     #   @return [Types::Backup]
     class CreateBackupResponse < Struct.new(
+      nil,
       :backup,
       keyword_init: true
     )
@@ -1187,6 +1220,7 @@ module Aws::FSx
     #   <p>A list of <code>Tag</code> values, with a maximum of 50 elements.</p>
     #   @return [Array<Types::Tag>]
     class CreateDataRepositoryAssociationRequest < Struct.new(
+      nil,
       :file_system_id,
       :file_system_path,
       :data_repository_path,
@@ -1204,6 +1238,7 @@ module Aws::FSx
     #   <p>The response object returned after the data repository association is created.</p>
     #   @return [Types::DataRepositoryAssociation]
     class CreateDataRepositoryAssociationResponse < Struct.new(
+      nil,
       :association,
       keyword_init: true
     )
@@ -1297,6 +1332,7 @@ module Aws::FSx
     #               that will be released from an Amazon FSx for Lustre file system.</p>
     #   @return [Types::ReleaseConfiguration]
     class CreateDataRepositoryTaskRequest < Struct.new(
+      nil,
       :type,
       :paths,
       :file_system_id,
@@ -1314,6 +1350,7 @@ module Aws::FSx
     #   <p>The description of the data repository task that you just created.</p>
     #   @return [Types::DataRepositoryTask]
     class CreateDataRepositoryTaskResponse < Struct.new(
+      nil,
       :data_repository_task,
       keyword_init: true
     )
@@ -1338,6 +1375,7 @@ module Aws::FSx
     #   <p>The configuration for a Lustre MDT (Metadata Target) storage volume.</p>
     #   @return [Types::FileCacheLustreMetadataConfiguration]
     class CreateFileCacheLustreConfiguration < Struct.new(
+      nil,
       :per_unit_storage_throughput,
       :deployment_type,
       :weekly_maintenance_start_time,
@@ -1415,6 +1453,7 @@ module Aws::FSx
     #            <p>DRA automatic import and automatic export is not supported.</p>
     #   @return [Array<Types::FileCacheDataRepositoryAssociation>]
     class CreateFileCacheRequest < Struct.new(
+      nil,
       :client_request_token,
       :file_cache_type,
       :file_cache_type_version,
@@ -1435,6 +1474,7 @@ module Aws::FSx
     #   <p>A description of the cache that was created.</p>
     #   @return [Types::FileCacheCreating]
     class CreateFileCacheResponse < Struct.new(
+      nil,
       :file_cache,
       keyword_init: true
     )
@@ -1580,6 +1620,7 @@ module Aws::FSx
     #               that you're creating from a backup.</p>
     #   @return [String]
     class CreateFileSystemFromBackupRequest < Struct.new(
+      nil,
       :backup_id,
       :client_request_token,
       :subnet_ids,
@@ -1604,6 +1645,7 @@ module Aws::FSx
     #   <p>A description of the file system.</p>
     #   @return [Types::FileSystem]
     class CreateFileSystemFromBackupResponse < Struct.new(
+      nil,
       :file_system,
       keyword_init: true
     )
@@ -1856,6 +1898,7 @@ module Aws::FSx
     #               to <code>INTELLIGENT_TIERING</code>.</p>
     #   @return [Types::LustreReadCacheConfiguration]
     class CreateFileSystemLustreConfiguration < Struct.new(
+      nil,
       :weekly_maintenance_start_time,
       :import_path,
       :export_path,
@@ -1928,6 +1971,7 @@ module Aws::FSx
     #            </ul>
     #   @return [String]
     class CreateFileSystemLustreMetadataConfiguration < Struct.new(
+      nil,
       :iops,
       :mode,
       keyword_init: true
@@ -2082,6 +2126,7 @@ module Aws::FSx
     #               don't overlap with any subnet.</p>
     #   @return [String]
     class CreateFileSystemOntapConfiguration < Struct.new(
+      nil,
       :automatic_backup_retention_days,
       :daily_automatic_backup_start_time,
       :deployment_type,
@@ -2215,6 +2260,7 @@ module Aws::FSx
     #           </p>
     #   @return [Types::OpenZFSReadCacheConfiguration]
     class CreateFileSystemOpenZFSConfiguration < Struct.new(
+      nil,
       :automatic_backup_retention_days,
       :copy_tags_to_backups,
       :copy_tags_to_volumes,
@@ -2445,6 +2491,7 @@ module Aws::FSx
     #               file systems.</p>
     #   @return [String]
     class CreateFileSystemRequest < Struct.new(
+      nil,
       :client_request_token,
       :file_system_type,
       :storage_capacity,
@@ -2469,6 +2516,7 @@ module Aws::FSx
     #   <p>The configuration of the file system that was created.</p>
     #   @return [Types::FileSystem]
     class CreateFileSystemResponse < Struct.new(
+      nil,
       :file_system,
       keyword_init: true
     )
@@ -2583,6 +2631,7 @@ module Aws::FSx
     #           IOPS per GiB of storage, up to the maximum limit associated with your chosen throughput capacity.</p>
     #   @return [Types::DiskIopsConfiguration]
     class CreateFileSystemWindowsConfiguration < Struct.new(
+      nil,
       :active_directory_id,
       :self_managed_active_directory_configuration,
       :deployment_type,
@@ -2740,6 +2789,7 @@ module Aws::FSx
     #   <p>Specifies the configured size of the volume, in bytes.</p>
     #   @return [Integer]
     class CreateOntapVolumeConfiguration < Struct.new(
+      nil,
       :junction_path,
       :security_style,
       :size_in_megabytes,
@@ -2790,6 +2840,7 @@ module Aws::FSx
     #            </note>
     #   @return [String]
     class CreateOpenZFSOriginSnapshotConfiguration < Struct.new(
+      nil,
       :snapshot_arn,
       :copy_strategy,
       keyword_init: true
@@ -2876,6 +2927,7 @@ module Aws::FSx
     #   <p>Configures how much storage users and groups can use on the volume.</p>
     #   @return [Array<Types::OpenZFSUserOrGroupQuota>]
     class CreateOpenZFSVolumeConfiguration < Struct.new(
+      nil,
       :parent_volume_id,
       :storage_capacity_reservation_gi_b,
       :storage_capacity_quota_gi_b,
@@ -2943,6 +2995,7 @@ module Aws::FSx
     #            <p>For more information, see <a href="https://docs.aws.amazon.com/fsx/latest/ONTAPGuide/worm-state.html#worm-state-append">Volume-append mode</a>. </p>
     #   @return [Boolean]
     class CreateSnaplockConfiguration < Struct.new(
+      nil,
       :audit_log_volume,
       :autocommit_period,
       :privileged_delete,
@@ -2969,6 +3022,7 @@ module Aws::FSx
     #   <p>A list of <code>Tag</code> values, with a maximum of 50 elements.</p>
     #   @return [Array<Types::Tag>]
     class CreateSnapshotRequest < Struct.new(
+      nil,
       :client_request_token,
       :name,
       :volume_id,
@@ -2982,6 +3036,7 @@ module Aws::FSx
     #   <p>A description of the snapshot.</p>
     #   @return [Types::Snapshot]
     class CreateSnapshotResponse < Struct.new(
+      nil,
       :snapshot,
       keyword_init: true
     )
@@ -3037,6 +3092,7 @@ module Aws::FSx
     #            <p></p>
     #   @return [String]
     class CreateStorageVirtualMachineRequest < Struct.new(
+      nil,
       :active_directory_configuration,
       :client_request_token,
       :file_system_id,
@@ -3053,6 +3109,7 @@ module Aws::FSx
     #   <p>Returned after a successful <code>CreateStorageVirtualMachine</code> operation; describes the SVM just created.</p>
     #   @return [Types::StorageVirtualMachine]
     class CreateStorageVirtualMachineResponse < Struct.new(
+      nil,
       :storage_virtual_machine,
       keyword_init: true
     )
@@ -3073,6 +3130,7 @@ module Aws::FSx
     #               <a href="https://docs.aws.amazon.com/fsx/latest/ONTAPGuide/managing-svms.html">Managing FSx for ONTAP SVMs</a>.</p>
     #   @return [Types::SelfManagedActiveDirectoryConfiguration]
     class CreateSvmActiveDirectoryConfiguration < Struct.new(
+      nil,
       :net_bios_name,
       :self_managed_active_directory_configuration,
       keyword_init: true
@@ -3098,6 +3156,7 @@ module Aws::FSx
     #   <p>A list of <code>Tag</code> values, with a maximum of 50 elements.</p>
     #   @return [Array<Types::Tag>]
     class CreateVolumeFromBackupRequest < Struct.new(
+      nil,
       :backup_id,
       :client_request_token,
       :name,
@@ -3113,6 +3172,7 @@ module Aws::FSx
     #               describing the volume just created.</p>
     #   @return [Types::Volume]
     class CreateVolumeFromBackupResponse < Struct.new(
+      nil,
       :volume,
       keyword_init: true
     )
@@ -3141,6 +3201,7 @@ module Aws::FSx
     #   <p>Specifies the configuration to use when creating the OpenZFS volume.</p>
     #   @return [Types::CreateOpenZFSVolumeConfiguration]
     class CreateVolumeRequest < Struct.new(
+      nil,
       :client_request_token,
       :volume_type,
       :name,
@@ -3156,6 +3217,7 @@ module Aws::FSx
     #   <p>Returned after a successful <code>CreateVolume</code> API operation, describing the volume just created.</p>
     #   @return [Types::Volume]
     class CreateVolumeResponse < Struct.new(
+      nil,
       :volume,
       keyword_init: true
     )
@@ -3360,6 +3422,7 @@ module Aws::FSx
     #               Amazon File Cache resource with a data repository association.</p>
     #   @return [Types::NFSDataRepositoryConfiguration]
     class DataRepositoryAssociation < Struct.new(
+      nil,
       :association_id,
       :resource_arn,
       :file_system_id,
@@ -3386,6 +3449,7 @@ module Aws::FSx
     #   <p>A detailed error message.</p>
     #   @return [String]
     class DataRepositoryAssociationNotFound < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -3487,6 +3551,7 @@ module Aws::FSx
     #               set to <code>MISCONFIGURED</code> or <code>FAILED</code>.</p>
     #   @return [Types::DataRepositoryFailureDetails]
     class DataRepositoryConfiguration < Struct.new(
+      nil,
       :lifecycle,
       :import_path,
       :export_path,
@@ -3504,6 +3569,7 @@ module Aws::FSx
     #   <p>A detailed error message.</p>
     #   @return [String]
     class DataRepositoryFailureDetails < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -3646,6 +3712,7 @@ module Aws::FSx
     #               that will be released from an Amazon FSx for Lustre file system.</p>
     #   @return [Types::ReleaseConfiguration]
     class DataRepositoryTask < Struct.new(
+      nil,
       :task_id,
       :lifecycle,
       :type,
@@ -3672,6 +3739,7 @@ module Aws::FSx
     #   <p>A detailed error message.</p>
     #   @return [String]
     class DataRepositoryTaskEnded < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -3684,6 +3752,7 @@ module Aws::FSx
     #   <p>A detailed error message.</p>
     #   @return [String]
     class DataRepositoryTaskExecuting < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -3695,6 +3764,7 @@ module Aws::FSx
     #   <p>A detailed error message.</p>
     #   @return [String]
     class DataRepositoryTaskFailureDetails < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -3721,6 +3791,7 @@ module Aws::FSx
     #               lifecycle states for the filters you are using.</p>
     #   @return [Array<String>]
     class DataRepositoryTaskFilter < Struct.new(
+      nil,
       :name,
       :values,
       keyword_init: true
@@ -3733,6 +3804,7 @@ module Aws::FSx
     #   <p>A detailed error message.</p>
     #   @return [String]
     class DataRepositoryTaskNotFound < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -3760,6 +3832,7 @@ module Aws::FSx
     #               AUTO_RELEASE_DATA task that automatically releases files from the cache.</p>
     #   @return [Integer]
     class DataRepositoryTaskStatus < Struct.new(
+      nil,
       :total_count,
       :succeeded_count,
       :failed_count,
@@ -3780,6 +3853,7 @@ module Aws::FSx
     #               the CLI or SDK.</p>
     #   @return [String]
     class DeleteBackupRequest < Struct.new(
+      nil,
       :backup_id,
       :client_request_token,
       keyword_init: true
@@ -3796,6 +3870,7 @@ module Aws::FSx
     #               successful, the status is <code>DELETED</code>.</p>
     #   @return [String]
     class DeleteBackupResponse < Struct.new(
+      nil,
       :backup_id,
       :lifecycle,
       keyword_init: true
@@ -3816,6 +3891,7 @@ module Aws::FSx
     #               to the data repository association.</p>
     #   @return [Boolean]
     class DeleteDataRepositoryAssociationRequest < Struct.new(
+      nil,
       :association_id,
       :client_request_token,
       :delete_data_in_file_system,
@@ -3835,6 +3911,7 @@ module Aws::FSx
     #               repository association is being deleted. Default is <code>false</code>.</p>
     #   @return [Boolean]
     class DeleteDataRepositoryAssociationResponse < Struct.new(
+      nil,
       :association_id,
       :lifecycle,
       :delete_data_in_file_system,
@@ -3852,6 +3929,7 @@ module Aws::FSx
     #               Command Line Interface (CLI) or an Amazon Web Services SDK.</p>
     #   @return [String]
     class DeleteFileCacheRequest < Struct.new(
+      nil,
       :file_cache_id,
       :client_request_token,
       keyword_init: true
@@ -3868,6 +3946,7 @@ module Aws::FSx
     #               <code>DELETING</code>.</p>
     #   @return [String]
     class DeleteFileCacheResponse < Struct.new(
+      nil,
       :file_cache_id,
       :lifecycle,
       keyword_init: true
@@ -3892,6 +3971,7 @@ module Aws::FSx
     #               you specify one or more <code>FinalBackupTags</code> when deleting a file system, Amazon FSx will not copy any existing file system tags to the backup.</p>
     #   @return [Array<Types::Tag>]
     class DeleteFileSystemLustreConfiguration < Struct.new(
+      nil,
       :skip_final_backup,
       :final_backup_tags,
       keyword_init: true
@@ -3908,6 +3988,7 @@ module Aws::FSx
     #   <p>The set of tags applied to the final backup.</p>
     #   @return [Array<Types::Tag>]
     class DeleteFileSystemLustreResponse < Struct.new(
+      nil,
       :final_backup_id,
       :final_backup_tags,
       keyword_init: true
@@ -3932,6 +4013,7 @@ module Aws::FSx
     #               has child volumes and you don't use this option, the delete request will fail.</p>
     #   @return [Array<String>]
     class DeleteFileSystemOpenZFSConfiguration < Struct.new(
+      nil,
       :skip_final_backup,
       :final_backup_tags,
       :options,
@@ -3949,6 +4031,7 @@ module Aws::FSx
     #   <p>A list of <code>Tag</code> values, with a maximum of 50 elements.</p>
     #   @return [Array<Types::Tag>]
     class DeleteFileSystemOpenZFSResponse < Struct.new(
+      nil,
       :final_backup_id,
       :final_backup_tags,
       keyword_init: true
@@ -3978,6 +4061,7 @@ module Aws::FSx
     #                   <code>DeleteFileSystem</code> operation.</p>
     #   @return [Types::DeleteFileSystemOpenZFSConfiguration]
     class DeleteFileSystemRequest < Struct.new(
+      nil,
       :file_system_id,
       :client_request_token,
       :windows_configuration,
@@ -4010,6 +4094,7 @@ module Aws::FSx
     #                   <code>DeleteFileSystem</code> operation.</p>
     #   @return [Types::DeleteFileSystemOpenZFSResponse]
     class DeleteFileSystemResponse < Struct.new(
+      nil,
       :file_system_id,
       :lifecycle,
       :windows_response,
@@ -4032,6 +4117,7 @@ module Aws::FSx
     #   <p>A set of tags for your final backup.</p>
     #   @return [Array<Types::Tag>]
     class DeleteFileSystemWindowsConfiguration < Struct.new(
+      nil,
       :skip_final_backup,
       :final_backup_tags,
       keyword_init: true
@@ -4048,6 +4134,7 @@ module Aws::FSx
     #   <p>The set of tags applied to the final backup.</p>
     #   @return [Array<Types::Tag>]
     class DeleteFileSystemWindowsResponse < Struct.new(
+      nil,
       :final_backup_id,
       :final_backup_tags,
       keyword_init: true
@@ -4064,6 +4151,7 @@ module Aws::FSx
     #   <p>The ID of the snapshot that you want to delete.</p>
     #   @return [String]
     class DeleteSnapshotRequest < Struct.new(
+      nil,
       :client_request_token,
       :snapshot_id,
       keyword_init: true
@@ -4079,6 +4167,7 @@ module Aws::FSx
     #               successful, this status is <code>DELETING</code>.</p>
     #   @return [String]
     class DeleteSnapshotResponse < Struct.new(
+      nil,
       :snapshot_id,
       :lifecycle,
       keyword_init: true
@@ -4095,6 +4184,7 @@ module Aws::FSx
     #   <p>The ID of the SVM that you want to delete.</p>
     #   @return [String]
     class DeleteStorageVirtualMachineRequest < Struct.new(
+      nil,
       :client_request_token,
       :storage_virtual_machine_id,
       keyword_init: true
@@ -4109,6 +4199,7 @@ module Aws::FSx
     #   <p>Describes the lifecycle state of the SVM being deleted.</p>
     #   @return [String]
     class DeleteStorageVirtualMachineResponse < Struct.new(
+      nil,
       :storage_virtual_machine_id,
       :lifecycle,
       keyword_init: true
@@ -4135,6 +4226,7 @@ module Aws::FSx
     #                   Deleting a SnapLock volume</a>. </p>
     #   @return [Boolean]
     class DeleteVolumeOntapConfiguration < Struct.new(
+      nil,
       :skip_final_backup,
       :final_backup_tags,
       :bypass_snaplock_enterprise_retention,
@@ -4152,6 +4244,7 @@ module Aws::FSx
     #   <p>A list of <code>Tag</code> values, with a maximum of 50 elements.</p>
     #   @return [Array<Types::Tag>]
     class DeleteVolumeOntapResponse < Struct.new(
+      nil,
       :final_backup_id,
       :final_backup_tags,
       keyword_init: true
@@ -4165,6 +4258,7 @@ module Aws::FSx
     #                 <code>DELETE_CHILD_VOLUMES_AND_SNAPSHOTS</code>.</p>
     #   @return [Array<String>]
     class DeleteVolumeOpenZFSConfiguration < Struct.new(
+      nil,
       :options,
       keyword_init: true
     )
@@ -4189,6 +4283,7 @@ module Aws::FSx
     #               volumes and snapshots.</p>
     #   @return [Types::DeleteVolumeOpenZFSConfiguration]
     class DeleteVolumeRequest < Struct.new(
+      nil,
       :client_request_token,
       :volume_id,
       :ontap_configuration,
@@ -4210,6 +4305,7 @@ module Aws::FSx
     #               request.</p>
     #   @return [Types::DeleteVolumeOntapResponse]
     class DeleteVolumeResponse < Struct.new(
+      nil,
       :volume_id,
       :lifecycle,
       :ontap_response,
@@ -4240,6 +4336,7 @@ module Aws::FSx
     #               returning call left off.</p>
     #   @return [String]
     class DescribeBackupsRequest < Struct.new(
+      nil,
       :backup_ids,
       :filters,
       :max_results,
@@ -4259,6 +4356,7 @@ module Aws::FSx
     #               fetch the backups. </p>
     #   @return [String]
     class DescribeBackupsResponse < Struct.new(
+      nil,
       :backups,
       :next_token,
       keyword_init: true
@@ -4283,6 +4381,7 @@ module Aws::FSx
     #               the previous <code>NextToken</code> value left off.</p>
     #   @return [String]
     class DescribeDataRepositoryAssociationsRequest < Struct.new(
+      nil,
       :association_ids,
       :filters,
       :max_results,
@@ -4301,6 +4400,7 @@ module Aws::FSx
     #               the previous <code>NextToken</code> value left off.</p>
     #   @return [String]
     class DescribeDataRepositoryAssociationsResponse < Struct.new(
+      nil,
       :associations,
       :next_token,
       keyword_init: true
@@ -4326,6 +4426,7 @@ module Aws::FSx
     #               the previous <code>NextToken</code> value left off.</p>
     #   @return [String]
     class DescribeDataRepositoryTasksRequest < Struct.new(
+      nil,
       :task_ids,
       :filters,
       :max_results,
@@ -4344,6 +4445,7 @@ module Aws::FSx
     #               the previous <code>NextToken</code> value left off.</p>
     #   @return [String]
     class DescribeDataRepositoryTasksResponse < Struct.new(
+      nil,
       :data_repository_tasks,
       :next_token,
       keyword_init: true
@@ -4364,6 +4466,7 @@ module Aws::FSx
     #               the previous <code>NextToken</code> value left off.</p>
     #   @return [String]
     class DescribeFileCachesRequest < Struct.new(
+      nil,
       :file_cache_ids,
       :max_results,
       :next_token,
@@ -4381,6 +4484,7 @@ module Aws::FSx
     #               the previous <code>NextToken</code> value left off.</p>
     #   @return [String]
     class DescribeFileCachesResponse < Struct.new(
+      nil,
       :file_caches,
       :next_token,
       keyword_init: true
@@ -4410,6 +4514,7 @@ module Aws::FSx
     #               continues the list from where the previous returning call left off.</p>
     #   @return [String]
     class DescribeFileSystemAliasesRequest < Struct.new(
+      nil,
       :client_request_token,
       :file_system_id,
       :max_results,
@@ -4429,6 +4534,7 @@ module Aws::FSx
     #               descriptions. </p>
     #   @return [String]
     class DescribeFileSystemAliasesResponse < Struct.new(
+      nil,
       :aliases,
       :next_token,
       keyword_init: true
@@ -4453,6 +4559,7 @@ module Aws::FSx
     #               returning call left off.</p>
     #   @return [String]
     class DescribeFileSystemsRequest < Struct.new(
+      nil,
       :file_system_ids,
       :max_results,
       :next_token,
@@ -4471,6 +4578,7 @@ module Aws::FSx
     #               descriptions. </p>
     #   @return [String]
     class DescribeFileSystemsResponse < Struct.new(
+      nil,
       :file_systems,
       :next_token,
       keyword_init: true
@@ -4494,6 +4602,7 @@ module Aws::FSx
     #               the previous <code>NextToken</code> value left off.</p>
     #   @return [String]
     class DescribeS3AccessPointAttachmentsRequest < Struct.new(
+      nil,
       :names,
       :filters,
       :max_results,
@@ -4512,6 +4621,7 @@ module Aws::FSx
     #               the previous <code>NextToken</code> value left off.</p>
     #   @return [String]
     class DescribeS3AccessPointAttachmentsResponse < Struct.new(
+      nil,
       :s3_access_point_attachments,
       :next_token,
       keyword_init: true
@@ -4520,6 +4630,7 @@ module Aws::FSx
     end
 
     class DescribeSharedVpcConfigurationRequest < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -4529,6 +4640,7 @@ module Aws::FSx
     #   <p>Indicates whether participant accounts can create FSx for ONTAP Multi-AZ file systems in shared subnets.</p>
     #   @return [String]
     class DescribeSharedVpcConfigurationResponse < Struct.new(
+      nil,
       :enable_fsx_route_table_updates_from_participant_accounts,
       keyword_init: true
     )
@@ -4558,6 +4670,7 @@ module Aws::FSx
     #               snapshots in your account and the ones shared with you from another account.</p>
     #   @return [Boolean]
     class DescribeSnapshotsRequest < Struct.new(
+      nil,
       :snapshot_ids,
       :filters,
       :max_results,
@@ -4577,6 +4690,7 @@ module Aws::FSx
     #               the previous <code>NextToken</code> value left off.</p>
     #   @return [String]
     class DescribeSnapshotsResponse < Struct.new(
+      nil,
       :snapshots,
       :next_token,
       keyword_init: true
@@ -4600,6 +4714,7 @@ module Aws::FSx
     #               the previous <code>NextToken</code> value left off.</p>
     #   @return [String]
     class DescribeStorageVirtualMachinesRequest < Struct.new(
+      nil,
       :storage_virtual_machine_ids,
       :filters,
       :max_results,
@@ -4618,6 +4733,7 @@ module Aws::FSx
     #               the previous <code>NextToken</code> value left off.</p>
     #   @return [String]
     class DescribeStorageVirtualMachinesResponse < Struct.new(
+      nil,
       :storage_virtual_machines,
       :next_token,
       keyword_init: true
@@ -4642,6 +4758,7 @@ module Aws::FSx
     #               the previous <code>NextToken</code> value left off.</p>
     #   @return [String]
     class DescribeVolumesRequest < Struct.new(
+      nil,
       :volume_ids,
       :filters,
       :max_results,
@@ -4660,6 +4777,7 @@ module Aws::FSx
     #               the previous <code>NextToken</code> value left off.</p>
     #   @return [String]
     class DescribeVolumesResponse < Struct.new(
+      nil,
       :volumes,
       :next_token,
       keyword_init: true
@@ -4676,6 +4794,7 @@ module Aws::FSx
     #   <p>The name of the S3 access point attachment that you want to delete.</p>
     #   @return [String]
     class DetachAndDeleteS3AccessPointRequest < Struct.new(
+      nil,
       :client_request_token,
       :name,
       keyword_init: true
@@ -4690,6 +4809,7 @@ module Aws::FSx
     #   <p>The name of the S3 access point attachment being deleted.</p>
     #   @return [String]
     class DetachAndDeleteS3AccessPointResponse < Struct.new(
+      nil,
       :lifecycle,
       :name,
       keyword_init: true
@@ -4710,6 +4830,7 @@ module Aws::FSx
     #   <p>An array of one or more DNS alias names to disassociate, or remove, from the file system.</p>
     #   @return [Array<String>]
     class DisassociateFileSystemAliasesRequest < Struct.new(
+      nil,
       :client_request_token,
       :file_system_id,
       :aliases,
@@ -4724,6 +4845,7 @@ module Aws::FSx
     #   <p>An array of one or more DNS aliases that Amazon FSx is attempting to disassociate from the file system.</p>
     #   @return [Array<Types::Alias>]
     class DisassociateFileSystemAliasesResponse < Struct.new(
+      nil,
       :aliases,
       keyword_init: true
     )
@@ -4745,6 +4867,7 @@ module Aws::FSx
     #            <p>Amazon FSx responds with an HTTP status code 400 (Bad Request) if the value of <code>Iops</code> is outside of the minimum or maximum values.</p>
     #   @return [Integer]
     class DiskIopsConfiguration < Struct.new(
+      nil,
       :mode,
       :iops,
       keyword_init: true
@@ -4778,6 +4901,7 @@ module Aws::FSx
     #            </note>
     #   @return [Integer]
     class DurationSinceLastAccess < Struct.new(
+      nil,
       :unit,
       :value,
       keyword_init: true
@@ -4871,6 +4995,7 @@ module Aws::FSx
     #   <p>A list of IDs of data repository associations that are associated with this cache.</p>
     #   @return [Array<String>]
     class FileCache < Struct.new(
+      nil,
       :owner_id,
       :creation_time,
       :file_cache_id,
@@ -4985,6 +5110,7 @@ module Aws::FSx
     #   <p>A list of IDs of data repository associations that are associated with this cache.</p>
     #   @return [Array<String>]
     class FileCacheCreating < Struct.new(
+      nil,
       :owner_id,
       :creation_time,
       :file_cache_id,
@@ -5077,6 +5203,7 @@ module Aws::FSx
     #               links an Amazon File Cache resource to an NFS data repository.</p>
     #   @return [Types::FileCacheNFSConfiguration]
     class FileCacheDataRepositoryAssociation < Struct.new(
+      nil,
       :file_cache_path,
       :data_repository_path,
       :data_repository_subdirectories,
@@ -5091,6 +5218,7 @@ module Aws::FSx
     #   <p>A message describing any failures that occurred.</p>
     #   @return [String]
     class FileCacheFailureDetails < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -5126,6 +5254,7 @@ module Aws::FSx
     #               logging events for your Amazon File Cache resource to Amazon CloudWatch Logs.</p>
     #   @return [Types::LustreLogConfiguration]
     class FileCacheLustreConfiguration < Struct.new(
+      nil,
       :per_unit_storage_throughput,
       :deployment_type,
       :mount_name,
@@ -5145,6 +5274,7 @@ module Aws::FSx
     #               volume in gibibytes (GiB). The only supported value is <code>2400</code> GiB.</p>
     #   @return [Integer]
     class FileCacheLustreMetadataConfiguration < Struct.new(
+      nil,
       :storage_capacity,
       keyword_init: true
     )
@@ -5166,6 +5296,7 @@ module Aws::FSx
     #               on-premises DNS servers.</p>
     #   @return [Array<String>]
     class FileCacheNFSConfiguration < Struct.new(
+      nil,
       :version,
       :dns_ips,
       keyword_init: true
@@ -5178,6 +5309,7 @@ module Aws::FSx
     #   <p>A detailed error message.</p>
     #   @return [String]
     class FileCacheNotFound < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -5340,6 +5472,7 @@ module Aws::FSx
     #   <p>The network type of the file system.</p>
     #   @return [String]
     class FileSystem < Struct.new(
+      nil,
       :owner_id,
       :creation_time,
       :file_system_id,
@@ -5382,6 +5515,7 @@ module Aws::FSx
     #   <p>The IPv6 addresses of the file system endpoint.</p>
     #   @return [Array<String>]
     class FileSystemEndpoint < Struct.new(
+      nil,
       :dns_name,
       :ip_addresses,
       :ipv6_addresses,
@@ -5402,6 +5536,7 @@ module Aws::FSx
     #               and NetApp ONTAP API.</p>
     #   @return [Types::FileSystemEndpoint]
     class FileSystemEndpoints < Struct.new(
+      nil,
       :intercluster,
       :management,
       keyword_init: true
@@ -5414,6 +5549,7 @@ module Aws::FSx
     #   <p>A message describing any failures that occurred.</p>
     #   @return [String]
     class FileSystemFailureDetails < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -5454,6 +5590,7 @@ module Aws::FSx
     #            </ul>
     #   @return [String]
     class FileSystemLustreMetadataConfiguration < Struct.new(
+      nil,
       :iops,
       :mode,
       keyword_init: true
@@ -5466,6 +5603,7 @@ module Aws::FSx
     #   <p>A detailed error message.</p>
     #   @return [String]
     class FileSystemNotFound < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -5482,6 +5620,7 @@ module Aws::FSx
     #               filters.</p>
     #   @return [Array<String>]
     class Filter < Struct.new(
+      nil,
       :name,
       :values,
       keyword_init: true
@@ -5499,6 +5638,7 @@ module Aws::FSx
     #   <p>A detailed error message.</p>
     #   @return [String]
     class IncompatibleParameterError < Struct.new(
+      nil,
       :parameter,
       :message,
       keyword_init: true
@@ -5512,6 +5652,7 @@ module Aws::FSx
     #   <p>A detailed error message.</p>
     #   @return [String]
     class IncompatibleRegionForMultiAZ < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -5523,6 +5664,7 @@ module Aws::FSx
     #   <p>A detailed error message.</p>
     #   @return [String]
     class InternalServerError < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -5537,6 +5679,7 @@ module Aws::FSx
     #   <p>A detailed error message.</p>
     #   @return [String]
     class InvalidAccessPoint < Struct.new(
+      nil,
       :error_code,
       :message,
       keyword_init: true
@@ -5549,6 +5692,7 @@ module Aws::FSx
     #   <p>A detailed error message.</p>
     #   @return [String]
     class InvalidDataRepositoryType < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -5561,6 +5705,7 @@ module Aws::FSx
     #   <p>A detailed error message.</p>
     #   @return [String]
     class InvalidDestinationKmsKey < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -5572,6 +5717,7 @@ module Aws::FSx
     #   <p>A detailed error message.</p>
     #   @return [String]
     class InvalidExportPath < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -5583,6 +5729,7 @@ module Aws::FSx
     #   <p>A detailed error message.</p>
     #   @return [String]
     class InvalidImportPath < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -5603,6 +5750,7 @@ module Aws::FSx
     #   <p>The route table ID is either invalid or not part of the VPC specified.</p>
     #   @return [String]
     class InvalidNetworkSettings < Struct.new(
+      nil,
       :message,
       :invalid_subnet_id,
       :invalid_security_group_id,
@@ -5617,6 +5765,7 @@ module Aws::FSx
     #   <p>A detailed error message.</p>
     #   @return [String]
     class InvalidPerUnitStorageThroughput < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -5629,6 +5778,7 @@ module Aws::FSx
     #   <p>A detailed error message.</p>
     #   @return [String]
     class InvalidRegion < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -5643,6 +5793,7 @@ module Aws::FSx
     #   <p>A detailed error message.</p>
     #   @return [String]
     class InvalidRequest < Struct.new(
+      nil,
       :error_code,
       :message,
       keyword_init: true
@@ -5656,6 +5807,7 @@ module Aws::FSx
     #   <p>A detailed error message.</p>
     #   @return [String]
     class InvalidSourceKmsKey < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -5667,6 +5819,7 @@ module Aws::FSx
     #   <p>A detailed error message.</p>
     #   @return [String]
     class LifecycleTransitionReason < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -5689,6 +5842,7 @@ module Aws::FSx
     #               continues the list from where the returning call left off.</p>
     #   @return [String]
     class ListTagsForResourceRequest < Struct.new(
+      nil,
       :resource_arn,
       :max_results,
       :next_token,
@@ -5707,6 +5861,7 @@ module Aws::FSx
     #           </p>
     #   @return [String]
     class ListTagsForResourceResponse < Struct.new(
+      nil,
       :tags,
       :next_token,
       keyword_init: true
@@ -5839,6 +5994,7 @@ module Aws::FSx
     #               Specifies the optional provisioned SSD read cache.</p>
     #   @return [Types::LustreReadCacheConfiguration]
     class LustreFileSystemConfiguration < Struct.new(
+      nil,
       :weekly_maintenance_start_time,
       :data_repository_configuration,
       :deployment_type,
@@ -5895,6 +6051,7 @@ module Aws::FSx
     #               and Amazon Web Services account as your Amazon FSx file system.</p>
     #   @return [String]
     class LustreLogConfiguration < Struct.new(
+      nil,
       :level,
       :destination,
       keyword_init: true
@@ -5961,6 +6118,7 @@ module Aws::FSx
     #            </ul>
     #   @return [String]
     class LustreLogCreateConfiguration < Struct.new(
+      nil,
       :level,
       :destination,
       keyword_init: true
@@ -5999,6 +6157,7 @@ module Aws::FSx
     #               capacity provisioned.</p>
     #   @return [Integer]
     class LustreReadCacheConfiguration < Struct.new(
+      nil,
       :sizing_mode,
       :size_gi_b,
       keyword_init: true
@@ -6049,6 +6208,7 @@ module Aws::FSx
     #            </ul>
     #   @return [Array<String>]
     class LustreRootSquashConfiguration < Struct.new(
+      nil,
       :root_squash,
       :no_squash_nids,
       keyword_init: true
@@ -6061,6 +6221,7 @@ module Aws::FSx
     #   <p>A detailed error message.</p>
     #   @return [String]
     class MissingFileCacheConfiguration < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -6072,6 +6233,7 @@ module Aws::FSx
     #   <p>A detailed error message.</p>
     #   @return [String]
     class MissingFileSystemConfiguration < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -6083,6 +6245,7 @@ module Aws::FSx
     #   <p>A detailed error message.</p>
     #   @return [String]
     class MissingVolumeConfiguration < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -6108,6 +6271,7 @@ module Aws::FSx
     #   <p>This parameter is not supported for Amazon File Cache.</p>
     #   @return [Types::AutoExportPolicy]
     class NFSDataRepositoryConfiguration < Struct.new(
+      nil,
       :version,
       :dns_ips,
       :auto_export_policy,
@@ -6125,6 +6289,7 @@ module Aws::FSx
     #   <p>A detailed error message.</p>
     #   @return [String]
     class NotServiceResourceError < Struct.new(
+      nil,
       :resource_arn,
       :message,
       keyword_init: true
@@ -6263,6 +6428,7 @@ module Aws::FSx
     #               don't overlap with any subnet.</p>
     #   @return [String]
     class OntapFileSystemConfiguration < Struct.new(
+      nil,
       :automatic_backup_retention_days,
       :daily_automatic_backup_start_time,
       :deployment_type,
@@ -6404,6 +6570,7 @@ module Aws::FSx
     #   <p>The configured size of the volume, in bytes.</p>
     #   @return [Integer]
     class OntapVolumeConfiguration < Struct.new(
+      nil,
       :flex_cache_endpoint_type,
       :junction_path,
       :security_style,
@@ -6454,6 +6621,7 @@ module Aws::FSx
     #            </ul>
     #   @return [Array<String>]
     class OpenZFSClientConfiguration < Struct.new(
+      nil,
       :clients,
       :options,
       keyword_init: true
@@ -6514,6 +6682,7 @@ module Aws::FSx
     #               longer want changes to occur. </p>
     #   @return [Boolean]
     class OpenZFSCreateRootVolumeConfiguration < Struct.new(
+      nil,
       :record_size_ki_b,
       :data_compression_type,
       :nfs_exports,
@@ -6608,6 +6777,7 @@ module Aws::FSx
     #               Required when <code>StorageType</code> is set to <code>INTELLIGENT_TIERING</code>. Specifies the optional provisioned SSD read cache. </p>
     #   @return [Types::OpenZFSReadCacheConfiguration]
     class OpenZFSFileSystemConfiguration < Struct.new(
+      nil,
       :automatic_backup_retention_days,
       :copy_tags_to_backups,
       :copy_tags_to_volumes,
@@ -6637,6 +6807,7 @@ module Aws::FSx
     #   <p>Specifies the UID and GIDs of the file system POSIX user.</p>
     #   @return [Types::OpenZFSPosixFileSystemUser]
     class OpenZFSFileSystemIdentity < Struct.new(
+      nil,
       :type,
       :posix_user,
       keyword_init: true
@@ -6651,6 +6822,7 @@ module Aws::FSx
     #               OpenZFS file system. </p>
     #   @return [Array<Types::OpenZFSClientConfiguration>]
     class OpenZFSNfsExport < Struct.new(
+      nil,
       :client_configurations,
       keyword_init: true
     )
@@ -6688,6 +6860,7 @@ module Aws::FSx
     #            </note>
     #   @return [String]
     class OpenZFSOriginSnapshotConfiguration < Struct.new(
+      nil,
       :snapshot_arn,
       :copy_strategy,
       keyword_init: true
@@ -6706,6 +6879,7 @@ module Aws::FSx
     #   <p>The list of secondary GIDs for the file system user. </p>
     #   @return [Array<Integer>]
     class OpenZFSPosixFileSystemUser < Struct.new(
+      nil,
       :uid,
       :gid,
       :secondary_gids,
@@ -6739,6 +6913,7 @@ module Aws::FSx
     #           </p>
     #   @return [Integer]
     class OpenZFSReadCacheConfiguration < Struct.new(
+      nil,
       :sizing_mode,
       :size_gi_b,
       keyword_init: true
@@ -6761,6 +6936,7 @@ module Aws::FSx
     #   <p>The user or group's storage quota, in gibibytes (GiB).</p>
     #   @return [Integer]
     class OpenZFSUserOrGroupQuota < Struct.new(
+      nil,
       :type,
       :id,
       :storage_capacity_quota_gi_b,
@@ -6887,6 +7063,7 @@ module Aws::FSx
     #            </note>
     #   @return [String]
     class OpenZFSVolumeConfiguration < Struct.new(
+      nil,
       :parent_volume_id,
       :volume_path,
       :storage_capacity_reservation_gi_b,
@@ -6937,6 +7114,7 @@ module Aws::FSx
     #               the file system.</p>
     #   @return [Types::DurationSinceLastAccess]
     class ReleaseConfiguration < Struct.new(
+      nil,
       :duration_since_last_access,
       keyword_init: true
     )
@@ -6952,6 +7130,7 @@ module Aws::FSx
     #               Command Line Interface (CLI) or an Amazon Web Services SDK.</p>
     #   @return [String]
     class ReleaseFileSystemNfsV3LocksRequest < Struct.new(
+      nil,
       :file_system_id,
       :client_request_token,
       keyword_init: true
@@ -6963,6 +7142,7 @@ module Aws::FSx
     #   <p>A description of a specific Amazon FSx file system.</p>
     #   @return [Types::FileSystem]
     class ReleaseFileSystemNfsV3LocksResponse < Struct.new(
+      nil,
       :file_system,
       keyword_init: true
     )
@@ -6978,6 +7158,7 @@ module Aws::FSx
     #   <p>A detailed error message.</p>
     #   @return [String]
     class ResourceDoesNotSupportTagging < Struct.new(
+      nil,
       :resource_arn,
       :message,
       keyword_init: true
@@ -6993,6 +7174,7 @@ module Aws::FSx
     #   <p>A detailed error message.</p>
     #   @return [String]
     class ResourceNotFound < Struct.new(
+      nil,
       :resource_arn,
       :message,
       keyword_init: true
@@ -7030,6 +7212,7 @@ module Aws::FSx
     #            </ul>
     #   @return [Array<String>]
     class RestoreVolumeFromSnapshotRequest < Struct.new(
+      nil,
       :client_request_token,
       :volume_id,
       :snapshot_id,
@@ -7051,6 +7234,7 @@ module Aws::FSx
     #               system.</p>
     #   @return [Array<Types::AdministrativeAction>]
     class RestoreVolumeFromSnapshotResponse < Struct.new(
+      nil,
       :volume_id,
       :lifecycle,
       :administrative_actions,
@@ -7103,6 +7287,7 @@ module Aws::FSx
     #            </ul>
     #   @return [Integer]
     class RetentionPeriod < Struct.new(
+      nil,
       :type,
       :value,
       keyword_init: true
@@ -7121,6 +7306,7 @@ module Aws::FSx
     #   <p>The S3 access point's virtual private cloud (VPC) configuration.</p>
     #   @return [Types::S3AccessPointVpcConfiguration]
     class S3AccessPoint < Struct.new(
+      nil,
       :resource_arn,
       :alias,
       :vpc_configuration,
@@ -7171,6 +7357,7 @@ module Aws::FSx
     #   <p>The S3 access point configuration of the S3 access point attachment.</p>
     #   @return [Types::S3AccessPoint]
     class S3AccessPointAttachment < Struct.new(
+      nil,
       :lifecycle,
       :lifecycle_transition_reason,
       :creation_time,
@@ -7188,6 +7375,7 @@ module Aws::FSx
     #   <p>A detailed error message.</p>
     #   @return [String]
     class S3AccessPointAttachmentNotFound < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -7202,6 +7390,7 @@ module Aws::FSx
     #   <p>The values of the filter.</p>
     #   @return [Array<String>]
     class S3AccessPointAttachmentsFilter < Struct.new(
+      nil,
       :name,
       :values,
       keyword_init: true
@@ -7217,6 +7406,7 @@ module Aws::FSx
     #   <p>The file system identity used to authorize file access requests made using the S3 access point.</p>
     #   @return [Types::OpenZFSFileSystemIdentity]
     class S3AccessPointOpenZFSConfiguration < Struct.new(
+      nil,
       :volume_id,
       :file_system_identity,
       keyword_init: true
@@ -7229,6 +7419,7 @@ module Aws::FSx
     #   <p>Specifies the virtual private cloud (VPC) for the S3 access point VPC configuration, if one exists.</p>
     #   @return [String]
     class S3AccessPointVpcConfiguration < Struct.new(
+      nil,
       :vpc_id,
       keyword_init: true
     )
@@ -7259,6 +7450,7 @@ module Aws::FSx
     #               the linked S3 bucket.</p>
     #   @return [Types::AutoExportPolicy]
     class S3DataRepositoryConfiguration < Struct.new(
+      nil,
       :auto_import_policy,
       :auto_export_policy,
       keyword_init: true
@@ -7288,6 +7480,7 @@ module Aws::FSx
     #               self-managed AD directory.</p>
     #   @return [Array<String>]
     class SelfManagedActiveDirectoryAttributes < Struct.new(
+      nil,
       :domain_name,
       :organizational_unit_distinguished_name,
       :file_system_administrators_group,
@@ -7343,6 +7536,7 @@ module Aws::FSx
     #               self-managed AD directory. </p>
     #   @return [Array<String>]
     class SelfManagedActiveDirectoryConfiguration < Struct.new(
+      nil,
       :domain_name,
       :organizational_unit_distinguished_name,
       :file_system_administrators_group,
@@ -7382,6 +7576,7 @@ module Aws::FSx
     #               for the Amazon FSx resource.</p>
     #   @return [String]
     class SelfManagedActiveDirectoryConfigurationUpdates < Struct.new(
+      nil,
       :user_name,
       :password,
       :dns_ips,
@@ -7402,6 +7597,7 @@ module Aws::FSx
     #   <p>A detailed error message.</p>
     #   @return [String]
     class ServiceLimitExceeded < Struct.new(
+      nil,
       :limit,
       :message,
       keyword_init: true
@@ -7461,6 +7657,7 @@ module Aws::FSx
     #            <p>For more information, see <a href="https://docs.aws.amazon.com/fsx/latest/ONTAPGuide/worm-state.html#worm-state-append">Volume-append mode</a>. </p>
     #   @return [Boolean]
     class SnaplockConfiguration < Struct.new(
+      nil,
       :audit_log_volume,
       :autocommit_period,
       :privileged_delete,
@@ -7489,6 +7686,7 @@ module Aws::FSx
     #               an FSx for ONTAP SnapLock volume. </p>
     #   @return [Types::RetentionPeriod]
     class SnaplockRetentionPeriod < Struct.new(
+      nil,
       :default_retention,
       :minimum_retention,
       :maximum_retention,
@@ -7551,6 +7749,7 @@ module Aws::FSx
     #               system.</p>
     #   @return [Array<Types::AdministrativeAction>]
     class Snapshot < Struct.new(
+      nil,
       :resource_arn,
       :snapshot_id,
       :name,
@@ -7576,6 +7775,7 @@ module Aws::FSx
     #               for.</p>
     #   @return [Array<String>]
     class SnapshotFilter < Struct.new(
+      nil,
       :name,
       :values,
       keyword_init: true
@@ -7588,6 +7788,7 @@ module Aws::FSx
     #   <p>A detailed error message.</p>
     #   @return [String]
     class SnapshotNotFound < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -7603,6 +7804,7 @@ module Aws::FSx
     #   <p>The ID of the source backup. Specifies the backup that you are copying.</p>
     #   @return [String]
     class SourceBackupUnavailable < Struct.new(
+      nil,
       :message,
       :backup_id,
       keyword_init: true
@@ -7619,6 +7821,7 @@ module Aws::FSx
     #   <p>The globally unique ID of the file system, assigned by Amazon FSx.</p>
     #   @return [String]
     class StartMisconfiguredStateRecoveryRequest < Struct.new(
+      nil,
       :client_request_token,
       :file_system_id,
       keyword_init: true
@@ -7630,6 +7833,7 @@ module Aws::FSx
     #   <p>A description of a specific Amazon FSx file system.</p>
     #   @return [Types::FileSystem]
     class StartMisconfiguredStateRecoveryResponse < Struct.new(
+      nil,
       :file_system,
       keyword_init: true
     )
@@ -7710,6 +7914,7 @@ module Aws::FSx
     #   <p>The security style of the root volume of the SVM.</p>
     #   @return [String]
     class StorageVirtualMachine < Struct.new(
+      nil,
       :active_directory_configuration,
       :creation_time,
       :endpoints,
@@ -7739,6 +7944,7 @@ module Aws::FSx
     #               filters.</p>
     #   @return [Array<String>]
     class StorageVirtualMachineFilter < Struct.new(
+      nil,
       :name,
       :values,
       keyword_init: true
@@ -7751,6 +7957,7 @@ module Aws::FSx
     #   <p>A detailed error message.</p>
     #   @return [String]
     class StorageVirtualMachineNotFound < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -7767,6 +7974,7 @@ module Aws::FSx
     #               which the Windows File Server or ONTAP storage virtual machine (SVM) instance is joined.</p>
     #   @return [Types::SelfManagedActiveDirectoryAttributes]
     class SvmActiveDirectoryConfiguration < Struct.new(
+      nil,
       :net_bios_name,
       :self_managed_active_directory_configuration,
       keyword_init: true
@@ -7790,6 +7998,7 @@ module Aws::FSx
     #   <p>The SVM endpoint's IPv6 addresses.</p>
     #   @return [Array<String>]
     class SvmEndpoint < Struct.new(
+      nil,
       :dns_name,
       :ip_addresses,
       :ipv6_addresses,
@@ -7814,6 +8023,7 @@ module Aws::FSx
     #   <p>An endpoint for connecting using the Server Message Block (SMB) protocol.</p>
     #   @return [Types::SvmEndpoint]
     class SvmEndpoints < Struct.new(
+      nil,
       :iscsi,
       :management,
       :nfs,
@@ -7835,6 +8045,7 @@ module Aws::FSx
     #               and also of <code>payroll : April</code>.</p>
     #   @return [String]
     class Tag < Struct.new(
+      nil,
       :key,
       :value,
       keyword_init: true
@@ -7852,6 +8063,7 @@ module Aws::FSx
     #               value is replaced by the one specified in this parameter.</p>
     #   @return [Array<Types::Tag>]
     class TagResourceRequest < Struct.new(
+      nil,
       :resource_arn,
       :tags,
       keyword_init: true
@@ -7861,6 +8073,7 @@ module Aws::FSx
 
     # <p>The response object for the <code>TagResource</code> operation.</p>
     class TagResourceResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -7925,6 +8138,7 @@ module Aws::FSx
     #            </ul>
     #   @return [String]
     class TieringPolicy < Struct.new(
+      nil,
       :cooling_period,
       :name,
       keyword_init: true
@@ -7941,6 +8155,7 @@ module Aws::FSx
     #   <p>A detailed error message.</p>
     #   @return [String]
     class TooManyAccessPoints < Struct.new(
+      nil,
       :error_code,
       :message,
       keyword_init: true
@@ -7953,6 +8168,7 @@ module Aws::FSx
     #   <p>A detailed error message.</p>
     #   @return [String]
     class UnsupportedOperation < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -7968,6 +8184,7 @@ module Aws::FSx
     #               the call will still succeed to be idempotent.</p>
     #   @return [Array<String>]
     class UntagResourceRequest < Struct.new(
+      nil,
       :resource_arn,
       :tag_keys,
       keyword_init: true
@@ -7977,6 +8194,7 @@ module Aws::FSx
 
     # <p>The response object for <code>UntagResource</code> action.</p>
     class UntagResourceResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -8007,6 +8225,7 @@ module Aws::FSx
     #               exported from the file system to the data repository.</p>
     #   @return [Types::S3DataRepositoryConfiguration]
     class UpdateDataRepositoryAssociationRequest < Struct.new(
+      nil,
       :association_id,
       :client_request_token,
       :imported_file_chunk_size,
@@ -8020,6 +8239,7 @@ module Aws::FSx
     #   <p>The response object returned after the data repository association is updated.</p>
     #   @return [Types::DataRepositoryAssociation]
     class UpdateDataRepositoryAssociationResponse < Struct.new(
+      nil,
       :association,
       keyword_init: true
     )
@@ -8033,6 +8253,7 @@ module Aws::FSx
     #            <p>For example, <code>1:05:00</code> specifies maintenance at 5 AM Monday.</p>
     #   @return [String]
     class UpdateFileCacheLustreConfiguration < Struct.new(
+      nil,
       :weekly_maintenance_start_time,
       keyword_init: true
     )
@@ -8051,6 +8272,7 @@ module Aws::FSx
     #   <p>The configuration updates for an Amazon File Cache resource.</p>
     #   @return [Types::UpdateFileCacheLustreConfiguration]
     class UpdateFileCacheRequest < Struct.new(
+      nil,
       :file_cache_id,
       :client_request_token,
       :lustre_configuration,
@@ -8063,6 +8285,7 @@ module Aws::FSx
     #   <p>A description of the cache that was updated.</p>
     #   @return [Types::FileCache]
     class UpdateFileCacheResponse < Struct.new(
+      nil,
       :file_cache,
       keyword_init: true
     )
@@ -8183,6 +8406,7 @@ module Aws::FSx
     #                   use the Intelligent-Tiering storage class.</p>
     #   @return [Types::LustreReadCacheConfiguration]
     class UpdateFileSystemLustreConfiguration < Struct.new(
+      nil,
       :weekly_maintenance_start_time,
       :daily_automatic_backup_start_time,
       :automatic_backup_retention_days,
@@ -8255,6 +8479,7 @@ module Aws::FSx
     #            </ul>
     #   @return [String]
     class UpdateFileSystemLustreMetadataConfiguration < Struct.new(
+      nil,
       :iops,
       :mode,
       keyword_init: true
@@ -8361,6 +8586,7 @@ module Aws::FSx
     #               don't overlap with any subnet.</p>
     #   @return [String]
     class UpdateFileSystemOntapConfiguration < Struct.new(
+      nil,
       :automatic_backup_retention_days,
       :daily_automatic_backup_start_time,
       :fsx_admin_password,
@@ -8450,6 +8676,7 @@ module Aws::FSx
     #               as long as they don't overlap with any subnet.</p>
     #   @return [String]
     class UpdateFileSystemOpenZFSConfiguration < Struct.new(
+      nil,
       :automatic_backup_retention_days,
       :copy_tags_to_backups,
       :copy_tags_to_volumes,
@@ -8540,6 +8767,7 @@ module Aws::FSx
     #   <p>Changes the network type of an FSx for OpenZFS file system.</p>
     #   @return [String]
     class UpdateFileSystemRequest < Struct.new(
+      nil,
       :file_system_id,
       :client_request_token,
       :storage_capacity,
@@ -8560,6 +8788,7 @@ module Aws::FSx
     #   <p>A description of the file system that was updated.</p>
     #   @return [Types::FileSystem]
     class UpdateFileSystemResponse < Struct.new(
+      nil,
       :file_system,
       keyword_init: true
     )
@@ -8603,6 +8832,7 @@ module Aws::FSx
     #               IOPS per GiB of storage, up to the maximum limit associated with your chosen throughput capacity.</p>
     #   @return [Types::DiskIopsConfiguration]
     class UpdateFileSystemWindowsConfiguration < Struct.new(
+      nil,
       :weekly_maintenance_start_time,
       :daily_automatic_backup_start_time,
       :automatic_backup_retention_days,
@@ -8672,6 +8902,7 @@ module Aws::FSx
     #   <p>The configured size of the volume, in bytes.</p>
     #   @return [Integer]
     class UpdateOntapVolumeConfiguration < Struct.new(
+      nil,
       :junction_path,
       :security_style,
       :size_in_megabytes,
@@ -8740,6 +8971,7 @@ module Aws::FSx
     #   <p>A Boolean value indicating whether the volume is read-only.</p>
     #   @return [Boolean]
     class UpdateOpenZFSVolumeConfiguration < Struct.new(
+      nil,
       :storage_capacity_reservation_gi_b,
       :storage_capacity_quota_gi_b,
       :record_size_ki_b,
@@ -8763,6 +8995,7 @@ module Aws::FSx
     #               Command Line Interface (CLI) or an Amazon Web Services SDK.</p>
     #   @return [String]
     class UpdateSharedVpcConfigurationRequest < Struct.new(
+      nil,
       :enable_fsx_route_table_updates_from_participant_accounts,
       :client_request_token,
       keyword_init: true
@@ -8774,6 +9007,7 @@ module Aws::FSx
     #   <p>Indicates whether participant accounts can create FSx for ONTAP Multi-AZ file systems in shared subnets.</p>
     #   @return [String]
     class UpdateSharedVpcConfigurationResponse < Struct.new(
+      nil,
       :enable_fsx_route_table_updates_from_participant_accounts,
       keyword_init: true
     )
@@ -8812,6 +9046,7 @@ module Aws::FSx
     #            <p>For more information, see <a href="https://docs.aws.amazon.com/fsx/latest/ONTAPGuide/worm-state.html#worm-state-append">Volume-append mode</a>. </p>
     #   @return [Boolean]
     class UpdateSnaplockConfiguration < Struct.new(
+      nil,
       :audit_log_volume,
       :autocommit_period,
       :privileged_delete,
@@ -8835,6 +9070,7 @@ module Aws::FSx
     #                   <code>fsvolsnap-0123456789abcdef0</code>.</p>
     #   @return [String]
     class UpdateSnapshotRequest < Struct.new(
+      nil,
       :client_request_token,
       :name,
       :snapshot_id,
@@ -8848,6 +9084,7 @@ module Aws::FSx
     #               snapshot that you updated.</p>
     #   @return [Types::Snapshot]
     class UpdateSnapshotResponse < Struct.new(
+      nil,
       :snapshot,
       keyword_init: true
     )
@@ -8869,6 +9106,7 @@ module Aws::FSx
     #   <p>Specifies a new SvmAdminPassword.</p>
     #   @return [String]
     class UpdateStorageVirtualMachineRequest < Struct.new(
+      nil,
       :active_directory_configuration,
       :client_request_token,
       :storage_virtual_machine_id,
@@ -8882,6 +9120,7 @@ module Aws::FSx
     #   <p>Describes the Amazon FSx for NetApp ONTAP storage virtual machine (SVM) configuration.</p>
     #   @return [Types::StorageVirtualMachine]
     class UpdateStorageVirtualMachineResponse < Struct.new(
+      nil,
       :storage_virtual_machine,
       keyword_init: true
     )
@@ -8898,6 +9137,7 @@ module Aws::FSx
     #   <p>Specifies an updated NetBIOS name of the AD computer object <code>NetBiosName</code> to which an SVM is joined.</p>
     #   @return [String]
     class UpdateSvmActiveDirectoryConfiguration < Struct.new(
+      nil,
       :self_managed_active_directory_configuration,
       :net_bios_name,
       keyword_init: true
@@ -8926,6 +9166,7 @@ module Aws::FSx
     #   <p>The configuration of the OpenZFS volume that you are updating.</p>
     #   @return [Types::UpdateOpenZFSVolumeConfiguration]
     class UpdateVolumeRequest < Struct.new(
+      nil,
       :client_request_token,
       :volume_id,
       :ontap_configuration,
@@ -8941,6 +9182,7 @@ module Aws::FSx
     #                   <code>UpdateVolume</code> API operation.</p>
     #   @return [Types::Volume]
     class UpdateVolumeResponse < Struct.new(
+      nil,
       :volume,
       keyword_init: true
     )
@@ -9026,6 +9268,7 @@ module Aws::FSx
     #   <p>The configuration of an Amazon FSx for OpenZFS volume.</p>
     #   @return [Types::OpenZFSVolumeConfiguration]
     class Volume < Struct.new(
+      nil,
       :creation_time,
       :file_system_id,
       :lifecycle,
@@ -9054,6 +9297,7 @@ module Aws::FSx
     #               filters.</p>
     #   @return [Array<String>]
     class VolumeFilter < Struct.new(
+      nil,
       :name,
       :values,
       keyword_init: true
@@ -9066,6 +9310,7 @@ module Aws::FSx
     #   <p>A detailed error message.</p>
     #   @return [String]
     class VolumeNotFound < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -9137,6 +9382,7 @@ module Aws::FSx
     #               Amazon Web Services Region, and Amazon Web Services account as your Amazon FSx file system.</p>
     #   @return [String]
     class WindowsAuditLogConfiguration < Struct.new(
+      nil,
       :file_access_audit_log_level,
       :file_share_access_audit_log_level,
       :audit_log_destination,
@@ -9227,6 +9473,7 @@ module Aws::FSx
     #            </ul>
     #   @return [String]
     class WindowsAuditLogCreateConfiguration < Struct.new(
+      nil,
       :file_access_audit_log_level,
       :file_share_access_audit_log_level,
       :audit_log_destination,
@@ -9345,6 +9592,7 @@ module Aws::FSx
     #               file system's DNSName instead.</p>
     #   @return [String]
     class WindowsFileSystemConfiguration < Struct.new(
+      nil,
       :active_directory_id,
       :self_managed_active_directory_configuration,
       :deployment_type,

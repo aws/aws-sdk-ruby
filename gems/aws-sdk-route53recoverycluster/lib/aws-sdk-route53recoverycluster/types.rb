@@ -10,6 +10,7 @@ module Aws::Route53RecoveryCluster
     # @!attribute message
     #   @return [String]
     class AccessDeniedException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -27,6 +28,7 @@ module Aws::Route53RecoveryCluster
     #   Type of the resource in use
     #   @return [String]
     class ConflictException < Struct.new(
+      nil,
       :message,
       :resource_id,
       :resource_type,
@@ -39,6 +41,7 @@ module Aws::Route53RecoveryCluster
     # @!attribute message
     #   @return [String]
     class EndpointTemporarilyUnavailableException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -49,6 +52,7 @@ module Aws::Route53RecoveryCluster
     #   <p>The Amazon Resource Name (ARN) for the routing control that you want to get the state for.</p>
     #   @return [String]
     class GetRoutingControlStateRequest < Struct.new(
+      nil,
       :routing_control_arn,
       keyword_init: true
     )
@@ -65,6 +69,7 @@ module Aws::Route53RecoveryCluster
     #   <p>The routing control name.</p>
     #   @return [String]
     class GetRoutingControlStateResponse < Struct.new(
+      nil,
       :routing_control_arn,
       :routing_control_state,
       :routing_control_name,
@@ -80,6 +85,7 @@ module Aws::Route53RecoveryCluster
     #   Advice to clients on when the call can be safely retried
     #   @return [Integer]
     class InternalServerException < Struct.new(
+      nil,
       :message,
       :retry_after_seconds,
       keyword_init: true
@@ -102,6 +108,7 @@ module Aws::Route53RecoveryCluster
     #   <p>The number of routing controls objects that you want to return with this call. The default value is 500.</p>
     #   @return [Integer]
     class ListRoutingControlsRequest < Struct.new(
+      nil,
       :control_panel_arn,
       :next_token,
       :max_results,
@@ -117,6 +124,7 @@ module Aws::Route53RecoveryCluster
     #   <p>The token for the next set of results. You receive this token from a previous call.</p>
     #   @return [String]
     class ListRoutingControlsResponse < Struct.new(
+      nil,
       :routing_controls,
       :next_token,
       keyword_init: true
@@ -134,6 +142,7 @@ module Aws::Route53RecoveryCluster
     #   Hypothetical resource type that was not found
     #   @return [String]
     class ResourceNotFoundException < Struct.new(
+      nil,
       :message,
       :resource_id,
       :resource_type,
@@ -166,6 +175,7 @@ module Aws::Route53RecoveryCluster
     #   <p>The Amazon Web Services account ID of the routing control owner.</p>
     #   @return [String]
     class RoutingControl < Struct.new(
+      nil,
       :control_panel_arn,
       :control_panel_name,
       :routing_control_arn,
@@ -193,6 +203,7 @@ module Aws::Route53RecoveryCluster
     #   <p>The service code of the limit that was exceeded.</p>
     #   @return [String]
     class ServiceLimitExceededException < Struct.new(
+      nil,
       :message,
       :resource_id,
       :resource_type,
@@ -210,6 +221,7 @@ module Aws::Route53RecoveryCluster
     #   Advice to clients on when the call can be safely retried
     #   @return [Integer]
     class ThrottlingException < Struct.new(
+      nil,
       :message,
       :retry_after_seconds,
       keyword_init: true
@@ -230,6 +242,7 @@ module Aws::Route53RecoveryCluster
     #   <p>The routing control state in a set of routing control state entries.</p>
     #   @return [String]
     class UpdateRoutingControlStateEntry < Struct.new(
+      nil,
       :routing_control_arn,
       :routing_control_state,
       keyword_init: true
@@ -251,6 +264,7 @@ module Aws::Route53RecoveryCluster
     #   			Override safety rules to reroute traffic</a> in the Amazon Route 53 Application Recovery Controller Developer Guide.</p>
     #   @return [Array<String>]
     class UpdateRoutingControlStateRequest < Struct.new(
+      nil,
       :routing_control_arn,
       :routing_control_state,
       :safety_rules_to_override,
@@ -260,6 +274,7 @@ module Aws::Route53RecoveryCluster
     end
 
     class UpdateRoutingControlStateResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -276,6 +291,7 @@ module Aws::Route53RecoveryCluster
     #   			Override safety rules to reroute traffic</a> in the Amazon Route 53 Application Recovery Controller Developer Guide.</p>
     #   @return [Array<String>]
     class UpdateRoutingControlStatesRequest < Struct.new(
+      nil,
       :update_routing_control_state_entries,
       :safety_rules_to_override,
       keyword_init: true
@@ -284,6 +300,7 @@ module Aws::Route53RecoveryCluster
     end
 
     class UpdateRoutingControlStatesResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -299,6 +316,7 @@ module Aws::Route53RecoveryCluster
     #   The fields that caused the error, if applicable
     #   @return [Array<Types::ValidationExceptionField>]
     class ValidationException < Struct.new(
+      nil,
       :message,
       :reason,
       :fields,
@@ -315,6 +333,7 @@ module Aws::Route53RecoveryCluster
     #   <p>Information about the validation exception.</p>
     #   @return [String]
     class ValidationExceptionField < Struct.new(
+      nil,
       :name,
       :message,
       keyword_init: true

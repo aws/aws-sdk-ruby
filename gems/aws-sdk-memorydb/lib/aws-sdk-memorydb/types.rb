@@ -31,6 +31,7 @@ module Aws::MemoryDB
     #   <p>The Amazon Resource Name (ARN) of the ACL</p>
     #   @return [String]
     class ACL < Struct.new(
+      nil,
       :name,
       :status,
       :user_names,
@@ -47,6 +48,7 @@ module Aws::MemoryDB
     # @!attribute message
     #   @return [String]
     class ACLAlreadyExistsFault < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -57,6 +59,7 @@ module Aws::MemoryDB
     # @!attribute message
     #   @return [String]
     class ACLNotFoundFault < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -71,6 +74,7 @@ module Aws::MemoryDB
     #   <p>A list of users being added to the ACL</p>
     #   @return [Array<String>]
     class ACLPendingChanges < Struct.new(
+      nil,
       :user_names_to_remove,
       :user_names_to_add,
       keyword_init: true
@@ -82,6 +86,7 @@ module Aws::MemoryDB
     # @!attribute message
     #   @return [String]
     class ACLQuotaExceededFault < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -93,6 +98,7 @@ module Aws::MemoryDB
     #   <p>A list of ACLs pending to be applied.</p>
     #   @return [String]
     class ACLsUpdateStatus < Struct.new(
+      nil,
       :acl_to_apply,
       keyword_init: true
     )
@@ -103,6 +109,7 @@ module Aws::MemoryDB
     # @!attribute message
     #   @return [String]
     class APICallRateForCustomerExceededFault < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -117,6 +124,7 @@ module Aws::MemoryDB
     #   <p>The number of passwords belonging to the user. The maximum is two.</p>
     #   @return [Integer]
     class Authentication < Struct.new(
+      nil,
       :type,
       :password_count,
       keyword_init: true
@@ -132,6 +140,7 @@ module Aws::MemoryDB
     #   <p>The password(s) used for authentication</p>
     #   @return [Array<String>]
     class AuthenticationMode < Struct.new(
+      nil,
       :type,
       :passwords,
       keyword_init: true
@@ -144,6 +153,7 @@ module Aws::MemoryDB
     #   <p>The name of the Availability Zone.</p>
     #   @return [String]
     class AvailabilityZone < Struct.new(
+      nil,
       :name,
       keyword_init: true
     )
@@ -157,6 +167,7 @@ module Aws::MemoryDB
     #   <p>The unique ID of the service update</p>
     #   @return [Types::ServiceUpdateRequest]
     class BatchUpdateClusterRequest < Struct.new(
+      nil,
       :cluster_names,
       :service_update,
       keyword_init: true
@@ -171,6 +182,7 @@ module Aws::MemoryDB
     #   <p>The list of clusters where updates have not been applied.</p>
     #   @return [Array<Types::UnprocessedCluster>]
     class BatchUpdateClusterResponse < Struct.new(
+      nil,
       :processed_clusters,
       :unprocessed_clusters,
       keyword_init: true
@@ -275,6 +287,7 @@ module Aws::MemoryDB
     #   <p>The mechanism that the cluster uses to discover IP addresses. Returns 'ipv4' when DNS endpoints resolve to IPv4 addresses, or 'ipv6' when DNS endpoints resolve to IPv6 addresses.</p>
     #   @return [String]
     class Cluster < Struct.new(
+      nil,
       :name,
       :description,
       :status,
@@ -314,6 +327,7 @@ module Aws::MemoryDB
     # @!attribute message
     #   @return [String]
     class ClusterAlreadyExistsFault < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -373,6 +387,7 @@ module Aws::MemoryDB
     #   <p>The name for the multi-Region cluster associated with the cluster configuration.</p>
     #   @return [String]
     class ClusterConfiguration < Struct.new(
+      nil,
       :name,
       :description,
       :node_type,
@@ -399,6 +414,7 @@ module Aws::MemoryDB
     # @!attribute message
     #   @return [String]
     class ClusterNotFoundFault < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -416,6 +432,7 @@ module Aws::MemoryDB
     #   <p>A list of service updates being applied to the cluster</p>
     #   @return [Array<Types::PendingModifiedServiceUpdate>]
     class ClusterPendingUpdates < Struct.new(
+      nil,
       :resharding,
       :ac_ls,
       :service_updates,
@@ -428,6 +445,7 @@ module Aws::MemoryDB
     # @!attribute message
     #   @return [String]
     class ClusterQuotaForCustomerExceededFault < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -456,6 +474,7 @@ module Aws::MemoryDB
     #   <p>A list of tags to be added to this resource. A tag is a key-value pair. A tag key must be accompanied by a tag value, although null is accepted.</p>
     #   @return [Array<Types::Tag>]
     class CopySnapshotRequest < Struct.new(
+      nil,
       :source_snapshot_name,
       :target_snapshot_name,
       :target_bucket,
@@ -470,6 +489,7 @@ module Aws::MemoryDB
     #   <p>Represents a copy of an entire cluster as of the time when the snapshot was taken.</p>
     #   @return [Types::Snapshot]
     class CopySnapshotResponse < Struct.new(
+      nil,
       :snapshot,
       keyword_init: true
     )
@@ -486,6 +506,7 @@ module Aws::MemoryDB
     #   <p>A list of tags to be added to this resource. A tag is a key-value pair. A tag key must be accompanied by a tag value, although null is accepted.</p>
     #   @return [Array<Types::Tag>]
     class CreateACLRequest < Struct.new(
+      nil,
       :acl_name,
       :user_names,
       :tags,
@@ -498,6 +519,7 @@ module Aws::MemoryDB
     #   <p>The newly-created Access Control List.</p>
     #   @return [Types::ACL]
     class CreateACLResponse < Struct.new(
+      nil,
       :acl,
       keyword_init: true
     )
@@ -629,6 +651,7 @@ module Aws::MemoryDB
     #   <p>The mechanism for discovering IP addresses for the cluster discovery protocol. Valid values are 'ipv4' or 'ipv6'. When set to 'ipv4', cluster discovery functions such as cluster slots, cluster shards, and cluster nodes return IPv4 addresses for cluster nodes. When set to 'ipv6', the cluster discovery functions return IPv6 addresses for cluster nodes. The value must be compatible with the NetworkType parameter. If not specified, the default is 'ipv4'.</p>
     #   @return [String]
     class CreateClusterRequest < Struct.new(
+      nil,
       :cluster_name,
       :node_type,
       :multi_region_cluster_name,
@@ -664,6 +687,7 @@ module Aws::MemoryDB
     #   <p>The newly-created cluster.</p>
     #   @return [Types::Cluster]
     class CreateClusterResponse < Struct.new(
+      nil,
       :cluster,
       keyword_init: true
     )
@@ -698,6 +722,7 @@ module Aws::MemoryDB
     #   <p>A list of tags to be applied to the multi-Region cluster.</p>
     #   @return [Array<Types::Tag>]
     class CreateMultiRegionClusterRequest < Struct.new(
+      nil,
       :multi_region_cluster_name_suffix,
       :description,
       :engine,
@@ -716,6 +741,7 @@ module Aws::MemoryDB
     #   <p>Details about the newly created multi-Region cluster.</p>
     #   @return [Types::MultiRegionCluster]
     class CreateMultiRegionClusterResponse < Struct.new(
+      nil,
       :multi_region_cluster,
       keyword_init: true
     )
@@ -735,6 +761,7 @@ module Aws::MemoryDB
     #   <p>A list of tags to be added to this resource. A tag is a key-value pair. A tag key must be accompanied by a tag value, although null is accepted.</p>
     #   @return [Array<Types::Tag>]
     class CreateParameterGroupRequest < Struct.new(
+      nil,
       :parameter_group_name,
       :family,
       :description,
@@ -748,6 +775,7 @@ module Aws::MemoryDB
     #   <p>The newly-created parameter group.</p>
     #   @return [Types::ParameterGroup]
     class CreateParameterGroupResponse < Struct.new(
+      nil,
       :parameter_group,
       keyword_init: true
     )
@@ -767,6 +795,7 @@ module Aws::MemoryDB
     #   <p>A list of tags to be added to this resource. A tag is a key-value pair. A tag key must be accompanied by a tag value, although null is accepted.</p>
     #   @return [Array<Types::Tag>]
     class CreateSnapshotRequest < Struct.new(
+      nil,
       :cluster_name,
       :snapshot_name,
       :kms_key_id,
@@ -780,6 +809,7 @@ module Aws::MemoryDB
     #   <p>The newly-created snapshot.</p>
     #   @return [Types::Snapshot]
     class CreateSnapshotResponse < Struct.new(
+      nil,
       :snapshot,
       keyword_init: true
     )
@@ -799,6 +829,7 @@ module Aws::MemoryDB
     #   <p>A list of tags to be added to this resource. A tag is a key-value pair. A tag key must be accompanied by a tag value, although null is accepted.</p>
     #   @return [Array<Types::Tag>]
     class CreateSubnetGroupRequest < Struct.new(
+      nil,
       :subnet_group_name,
       :description,
       :subnet_ids,
@@ -812,6 +843,7 @@ module Aws::MemoryDB
     #   <p>The newly-created subnet group.</p>
     #   @return [Types::SubnetGroup]
     class CreateSubnetGroupResponse < Struct.new(
+      nil,
       :subnet_group,
       keyword_init: true
     )
@@ -831,6 +863,7 @@ module Aws::MemoryDB
     #   <p>A list of tags to be added to this resource. A tag is a key-value pair. A tag key must be accompanied by a tag value, although null is accepted.</p>
     #   @return [Array<Types::Tag>]
     class CreateUserRequest < Struct.new(
+      nil,
       :user_name,
       :authentication_mode,
       :access_string,
@@ -844,6 +877,7 @@ module Aws::MemoryDB
     #   <p>The newly-created user.</p>
     #   @return [Types::User]
     class CreateUserResponse < Struct.new(
+      nil,
       :user,
       keyword_init: true
     )
@@ -854,6 +888,7 @@ module Aws::MemoryDB
     # @!attribute message
     #   @return [String]
     class DefaultUserRequired < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -864,6 +899,7 @@ module Aws::MemoryDB
     #   <p>The name of the Access Control List to delete.</p>
     #   @return [String]
     class DeleteACLRequest < Struct.new(
+      nil,
       :acl_name,
       keyword_init: true
     )
@@ -874,6 +910,7 @@ module Aws::MemoryDB
     #   <p>The Access Control List object that has been deleted.</p>
     #   @return [Types::ACL]
     class DeleteACLResponse < Struct.new(
+      nil,
       :acl,
       keyword_init: true
     )
@@ -890,6 +927,7 @@ module Aws::MemoryDB
     #   <p>The user-supplied name of a final cluster snapshot. This is the unique name that identifies the snapshot. MemoryDB creates the snapshot, and then deletes the cluster immediately afterward.</p>
     #   @return [String]
     class DeleteClusterRequest < Struct.new(
+      nil,
       :cluster_name,
       :multi_region_cluster_name,
       :final_snapshot_name,
@@ -902,6 +940,7 @@ module Aws::MemoryDB
     #   <p>The cluster object that has been deleted.</p>
     #   @return [Types::Cluster]
     class DeleteClusterResponse < Struct.new(
+      nil,
       :cluster,
       keyword_init: true
     )
@@ -912,6 +951,7 @@ module Aws::MemoryDB
     #   <p>The name of the multi-Region cluster to be deleted.</p>
     #   @return [String]
     class DeleteMultiRegionClusterRequest < Struct.new(
+      nil,
       :multi_region_cluster_name,
       keyword_init: true
     )
@@ -922,6 +962,7 @@ module Aws::MemoryDB
     #   <p>Details about the deleted multi-Region cluster.</p>
     #   @return [Types::MultiRegionCluster]
     class DeleteMultiRegionClusterResponse < Struct.new(
+      nil,
       :multi_region_cluster,
       keyword_init: true
     )
@@ -932,6 +973,7 @@ module Aws::MemoryDB
     #   <p>The name of the parameter group to delete.</p>
     #   @return [String]
     class DeleteParameterGroupRequest < Struct.new(
+      nil,
       :parameter_group_name,
       keyword_init: true
     )
@@ -942,6 +984,7 @@ module Aws::MemoryDB
     #   <p>The parameter group that has been deleted.</p>
     #   @return [Types::ParameterGroup]
     class DeleteParameterGroupResponse < Struct.new(
+      nil,
       :parameter_group,
       keyword_init: true
     )
@@ -952,6 +995,7 @@ module Aws::MemoryDB
     #   <p>The name of the snapshot to delete.</p>
     #   @return [String]
     class DeleteSnapshotRequest < Struct.new(
+      nil,
       :snapshot_name,
       keyword_init: true
     )
@@ -962,6 +1006,7 @@ module Aws::MemoryDB
     #   <p>The snapshot object that has been deleted.</p>
     #   @return [Types::Snapshot]
     class DeleteSnapshotResponse < Struct.new(
+      nil,
       :snapshot,
       keyword_init: true
     )
@@ -972,6 +1017,7 @@ module Aws::MemoryDB
     #   <p>The name of the subnet group to delete.</p>
     #   @return [String]
     class DeleteSubnetGroupRequest < Struct.new(
+      nil,
       :subnet_group_name,
       keyword_init: true
     )
@@ -982,6 +1028,7 @@ module Aws::MemoryDB
     #   <p>The subnet group object that has been deleted.</p>
     #   @return [Types::SubnetGroup]
     class DeleteSubnetGroupResponse < Struct.new(
+      nil,
       :subnet_group,
       keyword_init: true
     )
@@ -992,6 +1039,7 @@ module Aws::MemoryDB
     #   <p>The name of the user to delete</p>
     #   @return [String]
     class DeleteUserRequest < Struct.new(
+      nil,
       :user_name,
       keyword_init: true
     )
@@ -1002,6 +1050,7 @@ module Aws::MemoryDB
     #   <p>The user object that has been deleted.</p>
     #   @return [Types::User]
     class DeleteUserResponse < Struct.new(
+      nil,
       :user,
       keyword_init: true
     )
@@ -1018,6 +1067,7 @@ module Aws::MemoryDB
     #   <p>An optional argument to pass in case the total number of records exceeds the value of MaxResults. If nextToken is returned, there are more results available. The value of nextToken is a unique pagination token for each page. Make the call again using the returned token to retrieve the next page. Keep all other arguments unchanged. </p>
     #   @return [String]
     class DescribeACLsRequest < Struct.new(
+      nil,
       :acl_name,
       :max_results,
       :next_token,
@@ -1033,6 +1083,7 @@ module Aws::MemoryDB
     #   <p>If nextToken is returned, there are more results available. The value of nextToken is a unique pagination token for each page. Make the call again using the returned token to retrieve the next page. Keep all other arguments unchanged. </p>
     #   @return [String]
     class DescribeACLsResponse < Struct.new(
+      nil,
       :ac_ls,
       :next_token,
       keyword_init: true
@@ -1053,6 +1104,7 @@ module Aws::MemoryDB
     #   <p>An optional flag that can be included in the request to retrieve information about the individual shard(s).</p>
     #   @return [Boolean]
     class DescribeClustersRequest < Struct.new(
+      nil,
       :cluster_name,
       :max_results,
       :next_token,
@@ -1069,6 +1121,7 @@ module Aws::MemoryDB
     #   <p>A list of clusters</p>
     #   @return [Array<Types::Cluster>]
     class DescribeClustersResponse < Struct.new(
+      nil,
       :next_token,
       :clusters,
       keyword_init: true
@@ -1095,6 +1148,7 @@ module Aws::MemoryDB
     #   <p>If true, specifies that only the default version of the specified engine or engine and major version combination is to be returned.</p>
     #   @return [Boolean]
     class DescribeEngineVersionsRequest < Struct.new(
+      nil,
       :engine,
       :engine_version,
       :parameter_group_family,
@@ -1113,6 +1167,7 @@ module Aws::MemoryDB
     #   <p>A list of engine version details. Each element in the list contains detailed information about one engine version.</p>
     #   @return [Array<Types::EngineVersionInfo>]
     class DescribeEngineVersionsResponse < Struct.new(
+      nil,
       :next_token,
       :engine_versions,
       keyword_init: true
@@ -1146,6 +1201,7 @@ module Aws::MemoryDB
     #   <p>An optional argument to pass in case the total number of records exceeds the value of MaxResults. If nextToken is returned, there are more results available. The value of nextToken is a unique pagination token for each page. Make the call again using the returned token to retrieve the next page. Keep all other arguments unchanged. </p>
     #   @return [String]
     class DescribeEventsRequest < Struct.new(
+      nil,
       :source_name,
       :source_type,
       :start_time,
@@ -1165,6 +1221,7 @@ module Aws::MemoryDB
     #   <p>A list of events. Each element in the list contains detailed information about one event.</p>
     #   @return [Array<Types::Event>]
     class DescribeEventsResponse < Struct.new(
+      nil,
       :next_token,
       :events,
       keyword_init: true
@@ -1185,6 +1242,7 @@ module Aws::MemoryDB
     #   <p>Details about the multi-Region cluster.</p>
     #   @return [Boolean]
     class DescribeMultiRegionClustersRequest < Struct.new(
+      nil,
       :multi_region_cluster_name,
       :max_results,
       :next_token,
@@ -1201,6 +1259,7 @@ module Aws::MemoryDB
     #   <p>A list of multi-Region clusters.</p>
     #   @return [Array<Types::MultiRegionCluster>]
     class DescribeMultiRegionClustersResponse < Struct.new(
+      nil,
       :next_token,
       :multi_region_clusters,
       keyword_init: true
@@ -1218,6 +1277,7 @@ module Aws::MemoryDB
     #   <p>An optional argument to pass in case the total number of records exceeds the value of MaxResults. If nextToken is returned, there are more results available. The value of nextToken is a unique pagination token for each page. Make the call again using the returned token to retrieve the next page. Keep all other arguments unchanged. </p>
     #   @return [String]
     class DescribeParameterGroupsRequest < Struct.new(
+      nil,
       :parameter_group_name,
       :max_results,
       :next_token,
@@ -1233,6 +1293,7 @@ module Aws::MemoryDB
     #   <p>A list of parameter groups. Each element in the list contains detailed information about one parameter group.</p>
     #   @return [Array<Types::ParameterGroup>]
     class DescribeParameterGroupsResponse < Struct.new(
+      nil,
       :next_token,
       :parameter_groups,
       keyword_init: true
@@ -1250,6 +1311,7 @@ module Aws::MemoryDB
     #   <p>An optional argument to pass in case the total number of records exceeds the value of MaxResults. If nextToken is returned, there are more results available. The value of nextToken is a unique pagination token for each page. Make the call again using the returned token to retrieve the next page. Keep all other arguments unchanged. </p>
     #   @return [String]
     class DescribeParametersRequest < Struct.new(
+      nil,
       :parameter_group_name,
       :max_results,
       :next_token,
@@ -1265,6 +1327,7 @@ module Aws::MemoryDB
     #   <p>A list of parameters specific to a particular parameter group. Each element in the list contains detailed information about one parameter.</p>
     #   @return [Array<Types::Parameter>]
     class DescribeParametersResponse < Struct.new(
+      nil,
       :next_token,
       :parameters,
       keyword_init: true
@@ -1292,6 +1355,7 @@ module Aws::MemoryDB
     #   <p>An optional marker returned from a prior request. Use this marker for pagination of results from this operation. If this parameter is specified, the response includes only records beyond the marker, up to the value specified by MaxRecords.</p>
     #   @return [String]
     class DescribeReservedNodesOfferingsRequest < Struct.new(
+      nil,
       :reserved_nodes_offering_id,
       :node_type,
       :duration,
@@ -1310,6 +1374,7 @@ module Aws::MemoryDB
     #   <p>Lists available reserved node offerings.</p>
     #   @return [Array<Types::ReservedNodesOffering>]
     class DescribeReservedNodesOfferingsResponse < Struct.new(
+      nil,
       :next_token,
       :reserved_nodes_offerings,
       keyword_init: true
@@ -1340,6 +1405,7 @@ module Aws::MemoryDB
     #   <p>An optional marker returned from a prior request. Use this marker for pagination of results from this operation. If this parameter is specified, the response includes only records beyond the marker, up to the value specified by MaxRecords.</p>
     #   @return [String]
     class DescribeReservedNodesRequest < Struct.new(
+      nil,
       :reservation_id,
       :reserved_nodes_offering_id,
       :node_type,
@@ -1359,6 +1425,7 @@ module Aws::MemoryDB
     #   <p>Returns information about reserved nodes for this account, or about a specified reserved node.</p>
     #   @return [Array<Types::ReservedNode>]
     class DescribeReservedNodesResponse < Struct.new(
+      nil,
       :next_token,
       :reserved_nodes,
       keyword_init: true
@@ -1382,6 +1449,7 @@ module Aws::MemoryDB
     #   <p>An optional argument to pass in case the total number of records exceeds the value of MaxResults. If nextToken is returned, there are more results available. The value of nextToken is a unique pagination token for each page. Make the call again using the returned token to retrieve the next page. Keep all other arguments unchanged. </p>
     #   @return [String]
     class DescribeServiceUpdatesRequest < Struct.new(
+      nil,
       :service_update_name,
       :cluster_names,
       :status,
@@ -1399,6 +1467,7 @@ module Aws::MemoryDB
     #   <p>A list of service updates</p>
     #   @return [Array<Types::ServiceUpdate>]
     class DescribeServiceUpdatesResponse < Struct.new(
+      nil,
       :next_token,
       :service_updates,
       keyword_init: true
@@ -1425,6 +1494,7 @@ module Aws::MemoryDB
     #   <p>A Boolean value which if true, the shard configuration is included in the snapshot description.</p>
     #   @return [Boolean]
     class DescribeSnapshotsRequest < Struct.new(
+      nil,
       :cluster_name,
       :snapshot_name,
       :source,
@@ -1443,6 +1513,7 @@ module Aws::MemoryDB
     #   <p>A list of snapshots. Each item in the list contains detailed information about one snapshot.</p>
     #   @return [Array<Types::Snapshot>]
     class DescribeSnapshotsResponse < Struct.new(
+      nil,
       :next_token,
       :snapshots,
       keyword_init: true
@@ -1460,6 +1531,7 @@ module Aws::MemoryDB
     #   <p>An optional argument to pass in case the total number of records exceeds the value of MaxResults. If nextToken is returned, there are more results available. The value of nextToken is a unique pagination token for each page. Make the call again using the returned token to retrieve the next page. Keep all other arguments unchanged. </p>
     #   @return [String]
     class DescribeSubnetGroupsRequest < Struct.new(
+      nil,
       :subnet_group_name,
       :max_results,
       :next_token,
@@ -1475,6 +1547,7 @@ module Aws::MemoryDB
     #   <p>A list of subnet groups. Each element in the list contains detailed information about one group.</p>
     #   @return [Array<Types::SubnetGroup>]
     class DescribeSubnetGroupsResponse < Struct.new(
+      nil,
       :next_token,
       :subnet_groups,
       keyword_init: true
@@ -1495,6 +1568,7 @@ module Aws::MemoryDB
     #   <p>An optional argument to pass in case the total number of records exceeds the value of MaxResults. If nextToken is returned, there are more results available. The value of nextToken is a unique pagination token for each page. Make the call again using the returned token to retrieve the next page. Keep all other arguments unchanged. </p>
     #   @return [String]
     class DescribeUsersRequest < Struct.new(
+      nil,
       :user_name,
       :filters,
       :max_results,
@@ -1511,6 +1585,7 @@ module Aws::MemoryDB
     #   <p>An optional argument to pass in case the total number of records exceeds the value of MaxResults. If nextToken is returned, there are more results available. The value of nextToken is a unique pagination token for each page. Make the call again using the returned token to retrieve the next page. Keep all other arguments unchanged. </p>
     #   @return [String]
     class DescribeUsersResponse < Struct.new(
+      nil,
       :users,
       :next_token,
       keyword_init: true
@@ -1522,6 +1597,7 @@ module Aws::MemoryDB
     # @!attribute message
     #   @return [String]
     class DuplicateUserNameFault < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -1536,6 +1612,7 @@ module Aws::MemoryDB
     #   <p>The port number that the engine is listening on.</p>
     #   @return [Integer]
     class Endpoint < Struct.new(
+      nil,
       :address,
       :port,
       keyword_init: true
@@ -1562,6 +1639,7 @@ module Aws::MemoryDB
     #   <p>Specifies the name of the parameter group family to which the engine default parameters apply.</p>
     #   @return [String]
     class EngineVersionInfo < Struct.new(
+      nil,
       :engine,
       :engine_version,
       :engine_patch_version,
@@ -1586,6 +1664,7 @@ module Aws::MemoryDB
     #   <p>The date and time when the event occurred.</p>
     #   @return [Time]
     class Event < Struct.new(
+      nil,
       :source_name,
       :source_type,
       :message,
@@ -1602,6 +1681,7 @@ module Aws::MemoryDB
     #   <p>The name of the shard.</p>
     #   @return [String]
     class FailoverShardRequest < Struct.new(
+      nil,
       :cluster_name,
       :shard_name,
       keyword_init: true
@@ -1613,6 +1693,7 @@ module Aws::MemoryDB
     #   <p>The cluster being failed over.</p>
     #   @return [Types::Cluster]
     class FailoverShardResponse < Struct.new(
+      nil,
       :cluster,
       keyword_init: true
     )
@@ -1627,6 +1708,7 @@ module Aws::MemoryDB
     #   <p>The property values to filter on. For example, "user-123".</p>
     #   @return [Array<String>]
     class Filter < Struct.new(
+      nil,
       :name,
       :values,
       keyword_init: true
@@ -1638,6 +1720,7 @@ module Aws::MemoryDB
     # @!attribute message
     #   @return [String]
     class InsufficientClusterCapacityFault < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -1648,6 +1731,7 @@ module Aws::MemoryDB
     # @!attribute message
     #   @return [String]
     class InvalidACLStateFault < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -1658,6 +1742,7 @@ module Aws::MemoryDB
     # @!attribute message
     #   @return [String]
     class InvalidARNFault < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -1668,6 +1753,7 @@ module Aws::MemoryDB
     # @!attribute message
     #   @return [String]
     class InvalidClusterStateFault < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -1678,6 +1764,7 @@ module Aws::MemoryDB
     # @!attribute message
     #   @return [String]
     class InvalidCredentialsException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -1688,6 +1775,7 @@ module Aws::MemoryDB
     # @!attribute message
     #   @return [String]
     class InvalidKMSKeyFault < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -1698,6 +1786,7 @@ module Aws::MemoryDB
     # @!attribute message
     #   @return [String]
     class InvalidMultiRegionClusterStateFault < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -1708,6 +1797,7 @@ module Aws::MemoryDB
     # @!attribute message
     #   @return [String]
     class InvalidNodeStateFault < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -1718,6 +1808,7 @@ module Aws::MemoryDB
     # @!attribute message
     #   @return [String]
     class InvalidParameterCombinationException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -1728,6 +1819,7 @@ module Aws::MemoryDB
     # @!attribute message
     #   @return [String]
     class InvalidParameterGroupStateFault < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -1738,6 +1830,7 @@ module Aws::MemoryDB
     # @!attribute message
     #   @return [String]
     class InvalidParameterValueException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -1748,6 +1841,7 @@ module Aws::MemoryDB
     # @!attribute message
     #   @return [String]
     class InvalidSnapshotStateFault < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -1758,6 +1852,7 @@ module Aws::MemoryDB
     # @!attribute message
     #   @return [String]
     class InvalidSubnet < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -1768,6 +1863,7 @@ module Aws::MemoryDB
     # @!attribute message
     #   @return [String]
     class InvalidUserStateFault < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -1778,6 +1874,7 @@ module Aws::MemoryDB
     # @!attribute message
     #   @return [String]
     class InvalidVPCNetworkStateFault < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -1788,6 +1885,7 @@ module Aws::MemoryDB
     #   <p>The name of the multi-Region cluster.</p>
     #   @return [String]
     class ListAllowedMultiRegionClusterUpdatesRequest < Struct.new(
+      nil,
       :multi_region_cluster_name,
       keyword_init: true
     )
@@ -1801,6 +1899,7 @@ module Aws::MemoryDB
     #   <p>The node types that the cluster can be scaled down to.</p>
     #   @return [Array<String>]
     class ListAllowedMultiRegionClusterUpdatesResponse < Struct.new(
+      nil,
       :scale_up_node_types,
       :scale_down_node_types,
       keyword_init: true
@@ -1813,6 +1912,7 @@ module Aws::MemoryDB
     #            you can scale up to.</p>
     #   @return [String]
     class ListAllowedNodeTypeUpdatesRequest < Struct.new(
+      nil,
       :cluster_name,
       keyword_init: true
     )
@@ -1826,6 +1926,7 @@ module Aws::MemoryDB
     #   <p>A list node types which you can use to scale down your cluster.</p>
     #   @return [Array<String>]
     class ListAllowedNodeTypeUpdatesResponse < Struct.new(
+      nil,
       :scale_up_node_types,
       :scale_down_node_types,
       keyword_init: true
@@ -1837,6 +1938,7 @@ module Aws::MemoryDB
     #   <p>The Amazon Resource Name (ARN) of the resource for which you want the list of tags.</p>
     #   @return [String]
     class ListTagsRequest < Struct.new(
+      nil,
       :resource_arn,
       keyword_init: true
     )
@@ -1847,6 +1949,7 @@ module Aws::MemoryDB
     #   <p>A list of tags as key-value pairs.</p>
     #   @return [Array<Types::Tag>]
     class ListTagsResponse < Struct.new(
+      nil,
       :tag_list,
       keyword_init: true
     )
@@ -1888,6 +1991,7 @@ module Aws::MemoryDB
     #   <p>The Amazon Resource Name (ARN) of the multi-Region cluster.</p>
     #   @return [String]
     class MultiRegionCluster < Struct.new(
+      nil,
       :multi_region_cluster_name,
       :description,
       :status,
@@ -1908,6 +2012,7 @@ module Aws::MemoryDB
     # @!attribute message
     #   @return [String]
     class MultiRegionClusterAlreadyExistsFault < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -1918,6 +2023,7 @@ module Aws::MemoryDB
     # @!attribute message
     #   @return [String]
     class MultiRegionClusterNotFoundFault < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -1928,6 +2034,7 @@ module Aws::MemoryDB
     # @!attribute message
     #   @return [String]
     class MultiRegionParameterGroupNotFoundFault < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -1938,6 +2045,7 @@ module Aws::MemoryDB
     # @!attribute message
     #   @return [String]
     class NoOperationFault < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -1961,6 +2069,7 @@ module Aws::MemoryDB
     #   <p>The hostname for connecting to this node.</p>
     #   @return [Types::Endpoint]
     class Node < Struct.new(
+      nil,
       :name,
       :status,
       :availability_zone,
@@ -1975,6 +2084,7 @@ module Aws::MemoryDB
     # @!attribute message
     #   @return [String]
     class NodeQuotaForClusterExceededFault < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -1985,6 +2095,7 @@ module Aws::MemoryDB
     # @!attribute message
     #   @return [String]
     class NodeQuotaForCustomerExceededFault < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -2011,6 +2122,7 @@ module Aws::MemoryDB
     #   <p>The earliest engine version to which the parameter can apply.</p>
     #   @return [String]
     class Parameter < Struct.new(
+      nil,
       :name,
       :value,
       :description,
@@ -2036,6 +2148,7 @@ module Aws::MemoryDB
     #   <p>The Amazon Resource Name (ARN) of the parameter group</p>
     #   @return [String]
     class ParameterGroup < Struct.new(
+      nil,
       :name,
       :family,
       :description,
@@ -2049,6 +2162,7 @@ module Aws::MemoryDB
     # @!attribute message
     #   @return [String]
     class ParameterGroupAlreadyExistsFault < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -2059,6 +2173,7 @@ module Aws::MemoryDB
     # @!attribute message
     #   @return [String]
     class ParameterGroupNotFoundFault < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -2069,6 +2184,7 @@ module Aws::MemoryDB
     # @!attribute message
     #   @return [String]
     class ParameterGroupQuotaExceededFault < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -2083,6 +2199,7 @@ module Aws::MemoryDB
     #   <p>The value of the parameter</p>
     #   @return [String]
     class ParameterNameValue < Struct.new(
+      nil,
       :parameter_name,
       :parameter_value,
       keyword_init: true
@@ -2098,6 +2215,7 @@ module Aws::MemoryDB
     #   <p>The status of the service update</p>
     #   @return [String]
     class PendingModifiedServiceUpdate < Struct.new(
+      nil,
       :service_update_name,
       :status,
       keyword_init: true
@@ -2118,6 +2236,7 @@ module Aws::MemoryDB
     #   <p>A list of tags to be added to this resource. A tag is a key-value pair. A tag key must be accompanied by a tag value, although null is accepted.</p>
     #   @return [Array<Types::Tag>]
     class PurchaseReservedNodesOfferingRequest < Struct.new(
+      nil,
       :reserved_nodes_offering_id,
       :reservation_id,
       :node_count,
@@ -2131,6 +2250,7 @@ module Aws::MemoryDB
     #   <p>Represents the output of a <code>PurchaseReservedNodesOffering</code> operation.</p>
     #   @return [Types::ReservedNode]
     class PurchaseReservedNodesOfferingResponse < Struct.new(
+      nil,
       :reserved_node,
       keyword_init: true
     )
@@ -2145,6 +2265,7 @@ module Aws::MemoryDB
     #   <p>The frequency of the recurring price charged to run this reserved node.</p>
     #   @return [String]
     class RecurringCharge < Struct.new(
+      nil,
       :recurring_charge_amount,
       :recurring_charge_frequency,
       keyword_init: true
@@ -2171,6 +2292,7 @@ module Aws::MemoryDB
     #   <p>The Amazon Resource Name (ARN) the Regional cluster</p>
     #   @return [String]
     class RegionalCluster < Struct.new(
+      nil,
       :cluster_name,
       :region,
       :status,
@@ -2185,6 +2307,7 @@ module Aws::MemoryDB
     #   <p>The number of replicas to scale up or down to</p>
     #   @return [Integer]
     class ReplicaConfigurationRequest < Struct.new(
+      nil,
       :replica_count,
       keyword_init: true
     )
@@ -2231,6 +2354,7 @@ module Aws::MemoryDB
     #   <p>The Amazon Resource Name (ARN) of the reserved node.</p>
     #   @return [String]
     class ReservedNode < Struct.new(
+      nil,
       :reservation_id,
       :reserved_nodes_offering_id,
       :node_type,
@@ -2258,6 +2382,7 @@ module Aws::MemoryDB
     # @!attribute message
     #   @return [String]
     class ReservedNodeAlreadyExistsFault < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -2268,6 +2393,7 @@ module Aws::MemoryDB
     # @!attribute message
     #   @return [String]
     class ReservedNodeNotFoundFault < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -2278,6 +2404,7 @@ module Aws::MemoryDB
     # @!attribute message
     #   @return [String]
     class ReservedNodeQuotaExceededFault < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -2304,6 +2431,7 @@ module Aws::MemoryDB
     #   <p>The recurring price charged to run this reserved node.</p>
     #   @return [Array<Types::RecurringCharge>]
     class ReservedNodesOffering < Struct.new(
+      nil,
       :reserved_nodes_offering_id,
       :node_type,
       :duration,
@@ -2327,6 +2455,7 @@ module Aws::MemoryDB
     # @!attribute message
     #   @return [String]
     class ReservedNodesOfferingNotFoundFault < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -2343,6 +2472,7 @@ module Aws::MemoryDB
     #   <p>An array of parameter names to reset to their default values. If AllParameters is true, do not use ParameterNames. If AllParameters is false, you must specify the name of at least one parameter to reset.</p>
     #   @return [Array<String>]
     class ResetParameterGroupRequest < Struct.new(
+      nil,
       :parameter_group_name,
       :all_parameters,
       :parameter_names,
@@ -2355,6 +2485,7 @@ module Aws::MemoryDB
     #   <p>The parameter group being reset.</p>
     #   @return [Types::ParameterGroup]
     class ResetParameterGroupResponse < Struct.new(
+      nil,
       :parameter_group,
       keyword_init: true
     )
@@ -2366,6 +2497,7 @@ module Aws::MemoryDB
     #   <p>The status of the online resharding slot migration</p>
     #   @return [Types::SlotMigration]
     class ReshardingStatus < Struct.new(
+      nil,
       :slot_migration,
       keyword_init: true
     )
@@ -2380,6 +2512,7 @@ module Aws::MemoryDB
     #   <p>The status of the security group membership. The status changes whenever a security group is modified, or when the security groups assigned to a cluster are modified.</p>
     #   @return [String]
     class SecurityGroupMembership < Struct.new(
+      nil,
       :security_group_id,
       :status,
       keyword_init: true
@@ -2391,6 +2524,7 @@ module Aws::MemoryDB
     # @!attribute message
     #   @return [String]
     class ServiceLinkedRoleNotFoundFault < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -2426,6 +2560,7 @@ module Aws::MemoryDB
     #   <p>The date at which the service update will be automatically applied</p>
     #   @return [Time]
     class ServiceUpdate < Struct.new(
+      nil,
       :cluster_name,
       :service_update_name,
       :release_date,
@@ -2444,6 +2579,7 @@ module Aws::MemoryDB
     # @!attribute message
     #   @return [String]
     class ServiceUpdateNotFoundFault < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -2455,6 +2591,7 @@ module Aws::MemoryDB
     #   <p>The unique ID of the service update</p>
     #   @return [String]
     class ServiceUpdateRequest < Struct.new(
+      nil,
       :service_update_name_to_apply,
       keyword_init: true
     )
@@ -2478,6 +2615,7 @@ module Aws::MemoryDB
     #   <p>The number of nodes in the shard</p>
     #   @return [Integer]
     class Shard < Struct.new(
+      nil,
       :name,
       :status,
       :slots,
@@ -2496,6 +2634,7 @@ module Aws::MemoryDB
     #   <p>The number of read replica nodes in this shard.</p>
     #   @return [Integer]
     class ShardConfiguration < Struct.new(
+      nil,
       :slots,
       :replica_count,
       keyword_init: true
@@ -2508,6 +2647,7 @@ module Aws::MemoryDB
     #   <p>The number of shards in the cluster</p>
     #   @return [Integer]
     class ShardConfigurationRequest < Struct.new(
+      nil,
       :shard_count,
       keyword_init: true
     )
@@ -2533,6 +2673,7 @@ module Aws::MemoryDB
     #   <p>The date and time that the shard's snapshot was created</p>
     #   @return [Time]
     class ShardDetail < Struct.new(
+      nil,
       :name,
       :configuration,
       :size,
@@ -2546,6 +2687,7 @@ module Aws::MemoryDB
     # @!attribute message
     #   @return [String]
     class ShardNotFoundFault < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -2556,6 +2698,7 @@ module Aws::MemoryDB
     # @!attribute message
     #   @return [String]
     class ShardsPerClusterQuotaExceededFault < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -2567,6 +2710,7 @@ module Aws::MemoryDB
     #   <p>The percentage of the slot migration that is complete.</p>
     #   @return [Float]
     class SlotMigration < Struct.new(
+      nil,
       :progress_percentage,
       keyword_init: true
     )
@@ -2602,6 +2746,7 @@ module Aws::MemoryDB
     #               This parameter must be set when using r6gd nodes. For more information, see <a href="https://docs.aws.amazon.com/memorydb/latest/devguide/data-tiering.html">Data tiering</a>.</p>
     #   @return [String]
     class Snapshot < Struct.new(
+      nil,
       :name,
       :status,
       :source,
@@ -2618,6 +2763,7 @@ module Aws::MemoryDB
     # @!attribute message
     #   @return [String]
     class SnapshotAlreadyExistsFault < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -2628,6 +2774,7 @@ module Aws::MemoryDB
     # @!attribute message
     #   @return [String]
     class SnapshotNotFoundFault < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -2638,6 +2785,7 @@ module Aws::MemoryDB
     # @!attribute message
     #   @return [String]
     class SnapshotQuotaExceededFault < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -2655,6 +2803,7 @@ module Aws::MemoryDB
     #   <p>The network types supported by this subnet. Returns an array of strings that can include 'ipv4', 'ipv6', or both, indicating whether the subnet supports IPv4 only, IPv6 only, or dual-stack deployments.</p>
     #   @return [Array<String>]
     class Subnet < Struct.new(
+      nil,
       :identifier,
       :availability_zone,
       :supported_network_types,
@@ -2692,6 +2841,7 @@ module Aws::MemoryDB
     #   <p>The network types supported by this subnet group. Returns an array of strings that can include 'ipv4', 'ipv6', or both, indicating the IP address types that can be used for clusters deployed in this subnet group.</p>
     #   @return [Array<String>]
     class SubnetGroup < Struct.new(
+      nil,
       :name,
       :description,
       :vpc_id,
@@ -2707,6 +2857,7 @@ module Aws::MemoryDB
     # @!attribute message
     #   @return [String]
     class SubnetGroupAlreadyExistsFault < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -2717,6 +2868,7 @@ module Aws::MemoryDB
     # @!attribute message
     #   @return [String]
     class SubnetGroupInUseFault < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -2727,6 +2879,7 @@ module Aws::MemoryDB
     # @!attribute message
     #   @return [String]
     class SubnetGroupNotFoundFault < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -2737,6 +2890,7 @@ module Aws::MemoryDB
     # @!attribute message
     #   @return [String]
     class SubnetGroupQuotaExceededFault < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -2747,6 +2901,7 @@ module Aws::MemoryDB
     # @!attribute message
     #   @return [String]
     class SubnetInUse < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -2757,6 +2912,7 @@ module Aws::MemoryDB
     # @!attribute message
     #   @return [String]
     class SubnetNotAllowedFault < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -2767,6 +2923,7 @@ module Aws::MemoryDB
     # @!attribute message
     #   @return [String]
     class SubnetQuotaExceededFault < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -2784,6 +2941,7 @@ module Aws::MemoryDB
     #   <p>The tag's value. May be null.</p>
     #   @return [String]
     class Tag < Struct.new(
+      nil,
       :key,
       :value,
       keyword_init: true
@@ -2795,6 +2953,7 @@ module Aws::MemoryDB
     # @!attribute message
     #   @return [String]
     class TagNotFoundFault < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -2805,6 +2964,7 @@ module Aws::MemoryDB
     # @!attribute message
     #   @return [String]
     class TagQuotaPerResourceExceeded < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -2818,6 +2978,7 @@ module Aws::MemoryDB
     #   <p>A list of tags to be added to this resource. A tag is a key-value pair. A tag key must be accompanied by a tag value, although null is accepted.</p>
     #   @return [Array<Types::Tag>]
     class TagResourceRequest < Struct.new(
+      nil,
       :resource_arn,
       :tags,
       keyword_init: true
@@ -2829,6 +2990,7 @@ module Aws::MemoryDB
     #   <p>A list of tags as key-value pairs.</p>
     #   @return [Array<Types::Tag>]
     class TagResourceResponse < Struct.new(
+      nil,
       :tag_list,
       keyword_init: true
     )
@@ -2839,6 +3001,7 @@ module Aws::MemoryDB
     # @!attribute message
     #   @return [String]
     class TestFailoverNotAvailableFault < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -2856,6 +3019,7 @@ module Aws::MemoryDB
     #   <p>The error message associated with the update failure</p>
     #   @return [String]
     class UnprocessedCluster < Struct.new(
+      nil,
       :cluster_name,
       :error_type,
       :error_message,
@@ -2871,6 +3035,7 @@ module Aws::MemoryDB
     #   <p>The list of keys of the tags that are to be removed.</p>
     #   @return [Array<String>]
     class UntagResourceRequest < Struct.new(
+      nil,
       :resource_arn,
       :tag_keys,
       keyword_init: true
@@ -2882,6 +3047,7 @@ module Aws::MemoryDB
     #   <p>The list of tags removed.</p>
     #   @return [Array<Types::Tag>]
     class UntagResourceResponse < Struct.new(
+      nil,
       :tag_list,
       keyword_init: true
     )
@@ -2898,6 +3064,7 @@ module Aws::MemoryDB
     #   <p>The list of users to remove from the Access Control List.</p>
     #   @return [Array<String>]
     class UpdateACLRequest < Struct.new(
+      nil,
       :acl_name,
       :user_names_to_add,
       :user_names_to_remove,
@@ -2910,6 +3077,7 @@ module Aws::MemoryDB
     #   <p>The updated Access Control List.</p>
     #   @return [Types::ACL]
     class UpdateACLResponse < Struct.new(
+      nil,
       :acl,
       keyword_init: true
     )
@@ -3008,6 +3176,7 @@ module Aws::MemoryDB
     #   <p>The mechanism for discovering IP addresses for the cluster discovery protocol. Valid values are 'ipv4' or 'ipv6'. When set to 'ipv4', cluster discovery functions such as cluster slots, cluster shards, and cluster nodes will return IPv4 addresses for cluster nodes. When set to 'ipv6', the cluster discovery functions return IPv6 addresses for cluster nodes. The value must be compatible with the NetworkType parameter. If not specified, the default is 'ipv4'.</p>
     #   @return [String]
     class UpdateClusterRequest < Struct.new(
+      nil,
       :cluster_name,
       :description,
       :security_group_ids,
@@ -3033,6 +3202,7 @@ module Aws::MemoryDB
     #   <p>The updated cluster.</p>
     #   @return [Types::Cluster]
     class UpdateClusterResponse < Struct.new(
+      nil,
       :cluster,
       keyword_init: true
     )
@@ -3061,6 +3231,7 @@ module Aws::MemoryDB
     #   <p>The strategy to use for the update operation. Supported values are "coordinated" or "uncoordinated".</p>
     #   @return [String]
     class UpdateMultiRegionClusterRequest < Struct.new(
+      nil,
       :multi_region_cluster_name,
       :node_type,
       :description,
@@ -3077,6 +3248,7 @@ module Aws::MemoryDB
     #   <p>The status of updating the multi-Region cluster.</p>
     #   @return [Types::MultiRegionCluster]
     class UpdateMultiRegionClusterResponse < Struct.new(
+      nil,
       :multi_region_cluster,
       keyword_init: true
     )
@@ -3090,6 +3262,7 @@ module Aws::MemoryDB
     #   <p>An array of parameter names and values for the parameter update. You must supply at least one parameter name and value; subsequent arguments are optional. A maximum of 20 parameters may be updated per request.</p>
     #   @return [Array<Types::ParameterNameValue>]
     class UpdateParameterGroupRequest < Struct.new(
+      nil,
       :parameter_group_name,
       :parameter_name_values,
       keyword_init: true
@@ -3101,6 +3274,7 @@ module Aws::MemoryDB
     #   <p>The updated parameter group</p>
     #   @return [Types::ParameterGroup]
     class UpdateParameterGroupResponse < Struct.new(
+      nil,
       :parameter_group,
       keyword_init: true
     )
@@ -3117,6 +3291,7 @@ module Aws::MemoryDB
     #   <p>The EC2 subnet IDs for the subnet group.</p>
     #   @return [Array<String>]
     class UpdateSubnetGroupRequest < Struct.new(
+      nil,
       :subnet_group_name,
       :description,
       :subnet_ids,
@@ -3129,6 +3304,7 @@ module Aws::MemoryDB
     #   <p>The updated subnet group</p>
     #   @return [Types::SubnetGroup]
     class UpdateSubnetGroupResponse < Struct.new(
+      nil,
       :subnet_group,
       keyword_init: true
     )
@@ -3145,6 +3321,7 @@ module Aws::MemoryDB
     #   <p>Access permissions string used for this user.</p>
     #   @return [String]
     class UpdateUserRequest < Struct.new(
+      nil,
       :user_name,
       :authentication_mode,
       :access_string,
@@ -3157,6 +3334,7 @@ module Aws::MemoryDB
     #   <p>The updated user</p>
     #   @return [Types::User]
     class UpdateUserResponse < Struct.new(
+      nil,
       :user,
       keyword_init: true
     )
@@ -3188,6 +3366,7 @@ module Aws::MemoryDB
     #         </p>
     #   @return [String]
     class User < Struct.new(
+      nil,
       :name,
       :status,
       :access_string,
@@ -3204,6 +3383,7 @@ module Aws::MemoryDB
     # @!attribute message
     #   @return [String]
     class UserAlreadyExistsFault < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -3214,6 +3394,7 @@ module Aws::MemoryDB
     # @!attribute message
     #   @return [String]
     class UserNotFoundFault < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -3224,6 +3405,7 @@ module Aws::MemoryDB
     # @!attribute message
     #   @return [String]
     class UserQuotaExceededFault < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )

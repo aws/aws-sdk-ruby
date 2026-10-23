@@ -10,6 +10,7 @@ module Aws::MarketplaceDeployment
     # @!attribute message
     #   @return [String]
     class AccessDeniedException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -23,6 +24,7 @@ module Aws::MarketplaceDeployment
     #   <p>The unique identifier for the resource associated with the error.</p>
     #   @return [String]
     class ConflictException < Struct.new(
+      nil,
       :message,
       :resource_id,
       keyword_init: true
@@ -43,6 +45,7 @@ module Aws::MarketplaceDeployment
     #   <p>The text to encrypt and store in the secret.</p>
     #   @return [String]
     class DeploymentParameterInput < Struct.new(
+      nil,
       :name,
       :secret_string,
       keyword_init: true
@@ -54,6 +57,7 @@ module Aws::MarketplaceDeployment
     # @!attribute message
     #   @return [String]
     class InternalServerException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -64,6 +68,7 @@ module Aws::MarketplaceDeployment
     #   <p>The Amazon Resource Name (ARN) associated with the deployment parameter resource you want to list tags on.</p>
     #   @return [String]
     class ListTagsForResourceRequest < Struct.new(
+      nil,
       :resource_arn,
       keyword_init: true
     )
@@ -74,6 +79,7 @@ module Aws::MarketplaceDeployment
     #   <p>A map of key-value pairs, where each pair represents a tag present on the resource.</p>
     #   @return [Hash<String, String>]
     class ListTagsForResourceResponse < Struct.new(
+      nil,
       :tags,
       keyword_init: true
     )
@@ -107,6 +113,7 @@ module Aws::MarketplaceDeployment
     #            </note>
     #   @return [String]
     class PutDeploymentParameterRequest < Struct.new(
+      nil,
       :catalog,
       :product_id,
       :agreement_id,
@@ -132,6 +139,7 @@ module Aws::MarketplaceDeployment
     #   <p>A map of key-value pairs, where each pair represents a tag saved to the resource. Tags will only be applied for create operations, and they'll be ignored if the resource already exists.</p>
     #   @return [Hash<String, String>]
     class PutDeploymentParameterResponse < Struct.new(
+      nil,
       :resource_arn,
       :agreement_id,
       :deployment_parameter_id,
@@ -145,6 +153,7 @@ module Aws::MarketplaceDeployment
     # @!attribute message
     #   @return [String]
     class ResourceNotFoundException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -155,6 +164,7 @@ module Aws::MarketplaceDeployment
     # @!attribute message
     #   @return [String]
     class ServiceQuotaExceededException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -168,6 +178,7 @@ module Aws::MarketplaceDeployment
     #   <p>A map of key-value pairs, where each pair represents a tag present on the resource.</p>
     #   @return [Hash<String, String>]
     class TagResourceRequest < Struct.new(
+      nil,
       :resource_arn,
       :tags,
       keyword_init: true
@@ -176,6 +187,7 @@ module Aws::MarketplaceDeployment
     end
 
     class TagResourceResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -185,6 +197,7 @@ module Aws::MarketplaceDeployment
     # @!attribute message
     #   @return [String]
     class ThrottlingException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -198,6 +211,7 @@ module Aws::MarketplaceDeployment
     #   <p>A list of key names of tags to be removed.</p>
     #   @return [Array<String>]
     class UntagResourceRequest < Struct.new(
+      nil,
       :resource_arn,
       :tag_keys,
       keyword_init: true
@@ -206,6 +220,7 @@ module Aws::MarketplaceDeployment
     end
 
     class UntagResourceResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -218,6 +233,7 @@ module Aws::MarketplaceDeployment
     #   <p>The field name associated with the error.</p>
     #   @return [String]
     class ValidationException < Struct.new(
+      nil,
       :message,
       :field_name,
       keyword_init: true

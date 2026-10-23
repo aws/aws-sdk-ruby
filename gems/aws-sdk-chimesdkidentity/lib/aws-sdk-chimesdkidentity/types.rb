@@ -24,6 +24,7 @@ module Aws::ChimeSDKIdentity
     #   <p>The metadata of an <code>AppInstance</code>.</p>
     #   @return [String]
     class AppInstance < Struct.new(
+      nil,
       :app_instance_arn,
       :name,
       :created_timestamp,
@@ -45,6 +46,7 @@ module Aws::ChimeSDKIdentity
     #   <p>The time at which an administrator was created.</p>
     #   @return [Time]
     class AppInstanceAdmin < Struct.new(
+      nil,
       :admin,
       :app_instance_arn,
       :created_timestamp,
@@ -58,6 +60,7 @@ module Aws::ChimeSDKIdentity
     #   <p>The details of the <code>AppInstanceAdmin</code>.</p>
     #   @return [Types::Identity]
     class AppInstanceAdminSummary < Struct.new(
+      nil,
       :admin,
       keyword_init: true
     )
@@ -84,6 +87,7 @@ module Aws::ChimeSDKIdentity
     #   <p>The metadata for an AppInstanceBot.</p>
     #   @return [String]
     class AppInstanceBot < Struct.new(
+      nil,
       :app_instance_bot_arn,
       :name,
       :configuration,
@@ -106,6 +110,7 @@ module Aws::ChimeSDKIdentity
     #   <p>The metadata of the AppInstanceBot.</p>
     #   @return [String]
     class AppInstanceBotSummary < Struct.new(
+      nil,
       :app_instance_bot_arn,
       :name,
       :metadata,
@@ -119,6 +124,7 @@ module Aws::ChimeSDKIdentity
     #   <p>The length of time in days to retain the messages in a channel.</p>
     #   @return [Types::ChannelRetentionSettings]
     class AppInstanceRetentionSettings < Struct.new(
+      nil,
       :channel_retention_settings,
       keyword_init: true
     )
@@ -136,6 +142,7 @@ module Aws::ChimeSDKIdentity
     #   <p>The metadata of the <code>AppInstance</code>.</p>
     #   @return [String]
     class AppInstanceSummary < Struct.new(
+      nil,
       :app_instance_arn,
       :name,
       :metadata,
@@ -164,6 +171,7 @@ module Aws::ChimeSDKIdentity
     #   <p>The interval after which an <code>AppInstanceUser</code> is automatically deleted.</p>
     #   @return [Types::ExpirationSettings]
     class AppInstanceUser < Struct.new(
+      nil,
       :app_instance_user_arn,
       :name,
       :metadata,
@@ -228,6 +236,7 @@ module Aws::ChimeSDKIdentity
     #            </ul>
     #   @return [Types::EndpointState]
     class AppInstanceUserEndpoint < Struct.new(
+      nil,
       :app_instance_user_arn,
       :endpoint_id,
       :name,
@@ -264,6 +273,7 @@ module Aws::ChimeSDKIdentity
     #   <p>A read-only field that represent the state of an <code>AppInstanceUserEndpoint</code>.</p>
     #   @return [Types::EndpointState]
     class AppInstanceUserEndpointSummary < Struct.new(
+      nil,
       :app_instance_user_arn,
       :endpoint_id,
       :name,
@@ -286,6 +296,7 @@ module Aws::ChimeSDKIdentity
     #   <p>The metadata of the <code>AppInstanceUser</code>.</p>
     #   @return [String]
     class AppInstanceUserSummary < Struct.new(
+      nil,
       :app_instance_user_arn,
       :name,
       :metadata,
@@ -300,6 +311,7 @@ module Aws::ChimeSDKIdentity
     # @!attribute message
     #   @return [String]
     class BadRequestException < Struct.new(
+      nil,
       :code,
       :message,
       keyword_init: true
@@ -312,6 +324,7 @@ module Aws::ChimeSDKIdentity
     #   <p>The time in days to retain the messages in a channel.</p>
     #   @return [Integer]
     class ChannelRetentionSettings < Struct.new(
+      nil,
       :retention_days,
       keyword_init: true
     )
@@ -323,6 +336,7 @@ module Aws::ChimeSDKIdentity
     #   <p>The configuration for an Amazon Lex V2 bot.</p>
     #   @return [Types::LexConfiguration]
     class Configuration < Struct.new(
+      nil,
       :lex,
       keyword_init: true
     )
@@ -336,6 +350,7 @@ module Aws::ChimeSDKIdentity
     # @!attribute message
     #   @return [String]
     class ConflictException < Struct.new(
+      nil,
       :code,
       :message,
       keyword_init: true
@@ -350,6 +365,7 @@ module Aws::ChimeSDKIdentity
     #   <p>The ARN of the <code>AppInstance</code>.</p>
     #   @return [String]
     class CreateAppInstanceAdminRequest < Struct.new(
+      nil,
       :app_instance_admin_arn,
       :app_instance_arn,
       keyword_init: true
@@ -365,6 +381,7 @@ module Aws::ChimeSDKIdentity
     #   <p>The ARN of the of the admin for the <code>AppInstance</code>.</p>
     #   @return [String]
     class CreateAppInstanceAdminResponse < Struct.new(
+      nil,
       :app_instance_admin,
       :app_instance_arn,
       keyword_init: true
@@ -391,6 +408,7 @@ module Aws::ChimeSDKIdentity
     #   <p>Configuration information about the Amazon Lex V2 V2 bot.</p>
     #   @return [Types::Configuration]
     class CreateAppInstanceBotRequest < Struct.new(
+      nil,
       :app_instance_arn,
       :name,
       :metadata,
@@ -406,6 +424,7 @@ module Aws::ChimeSDKIdentity
     #   <p>The ARN of the <code>AppinstanceBot</code>.</p>
     #   @return [String]
     class CreateAppInstanceBotResponse < Struct.new(
+      nil,
       :app_instance_bot_arn,
       keyword_init: true
     )
@@ -425,6 +444,7 @@ module Aws::ChimeSDKIdentity
     #   <p>Tags assigned to the <code>AppInstance</code>.</p>
     #   @return [Array<Types::Tag>]
     class CreateAppInstanceRequest < Struct.new(
+      nil,
       :name,
       :metadata,
       :client_request_token,
@@ -438,6 +458,7 @@ module Aws::ChimeSDKIdentity
     #   <p>The Amazon Resource Number (ARN) of the <code>AppInstance</code>.</p>
     #   @return [String]
     class CreateAppInstanceResponse < Struct.new(
+      nil,
       :app_instance_arn,
       keyword_init: true
     )
@@ -466,6 +487,7 @@ module Aws::ChimeSDKIdentity
     #   <p>Settings that control the interval after which the <code>AppInstanceUser</code> is automatically deleted.</p>
     #   @return [Types::ExpirationSettings]
     class CreateAppInstanceUserRequest < Struct.new(
+      nil,
       :app_instance_arn,
       :app_instance_user_id,
       :name,
@@ -482,6 +504,7 @@ module Aws::ChimeSDKIdentity
     #   <p>The user's ARN.</p>
     #   @return [String]
     class CreateAppInstanceUserResponse < Struct.new(
+      nil,
       :app_instance_user_arn,
       keyword_init: true
     )
@@ -495,6 +518,7 @@ module Aws::ChimeSDKIdentity
     #   <p>The ARN of the <code>AppInstance</code>.</p>
     #   @return [String]
     class DeleteAppInstanceAdminRequest < Struct.new(
+      nil,
       :app_instance_admin_arn,
       :app_instance_arn,
       keyword_init: true
@@ -506,6 +530,7 @@ module Aws::ChimeSDKIdentity
     #   <p>The ARN of the <code>AppInstanceBot</code> being deleted.</p>
     #   @return [String]
     class DeleteAppInstanceBotRequest < Struct.new(
+      nil,
       :app_instance_bot_arn,
       keyword_init: true
     )
@@ -516,6 +541,7 @@ module Aws::ChimeSDKIdentity
     #   <p>The ARN of the <code>AppInstance</code>.</p>
     #   @return [String]
     class DeleteAppInstanceRequest < Struct.new(
+      nil,
       :app_instance_arn,
       keyword_init: true
     )
@@ -526,6 +552,7 @@ module Aws::ChimeSDKIdentity
     #   <p>The ARN of the user request being deleted.</p>
     #   @return [String]
     class DeleteAppInstanceUserRequest < Struct.new(
+      nil,
       :app_instance_user_arn,
       keyword_init: true
     )
@@ -539,6 +566,7 @@ module Aws::ChimeSDKIdentity
     #   <p>The unique identifier of the <code>AppInstanceUserEndpoint</code>.</p>
     #   @return [String]
     class DeregisterAppInstanceUserEndpointRequest < Struct.new(
+      nil,
       :app_instance_user_arn,
       :endpoint_id,
       keyword_init: true
@@ -553,6 +581,7 @@ module Aws::ChimeSDKIdentity
     #   <p>The ARN of the <code>AppInstance</code>.</p>
     #   @return [String]
     class DescribeAppInstanceAdminRequest < Struct.new(
+      nil,
       :app_instance_admin_arn,
       :app_instance_arn,
       keyword_init: true
@@ -566,6 +595,7 @@ module Aws::ChimeSDKIdentity
     #            use epoch milliseconds.</p>
     #   @return [Types::AppInstanceAdmin]
     class DescribeAppInstanceAdminResponse < Struct.new(
+      nil,
       :app_instance_admin,
       keyword_init: true
     )
@@ -576,6 +606,7 @@ module Aws::ChimeSDKIdentity
     #   <p>The ARN of the <code>AppInstanceBot</code>.</p>
     #   @return [String]
     class DescribeAppInstanceBotRequest < Struct.new(
+      nil,
       :app_instance_bot_arn,
       keyword_init: true
     )
@@ -586,6 +617,7 @@ module Aws::ChimeSDKIdentity
     #   <p>The detials of the <code>AppInstanceBot</code>.</p>
     #   @return [Types::AppInstanceBot]
     class DescribeAppInstanceBotResponse < Struct.new(
+      nil,
       :app_instance_bot,
       keyword_init: true
     )
@@ -596,6 +628,7 @@ module Aws::ChimeSDKIdentity
     #   <p>The ARN of the <code>AppInstance</code>.</p>
     #   @return [String]
     class DescribeAppInstanceRequest < Struct.new(
+      nil,
       :app_instance_arn,
       keyword_init: true
     )
@@ -607,6 +640,7 @@ module Aws::ChimeSDKIdentity
     #               <code>AppInstance</code>. All timestamps use epoch milliseconds.</p>
     #   @return [Types::AppInstance]
     class DescribeAppInstanceResponse < Struct.new(
+      nil,
       :app_instance,
       keyword_init: true
     )
@@ -620,6 +654,7 @@ module Aws::ChimeSDKIdentity
     #   <p>The unique identifier of the <code>AppInstanceUserEndpoint</code>.</p>
     #   @return [String]
     class DescribeAppInstanceUserEndpointRequest < Struct.new(
+      nil,
       :app_instance_user_arn,
       :endpoint_id,
       keyword_init: true
@@ -632,6 +667,7 @@ module Aws::ChimeSDKIdentity
     #            allow messages, state, and created and last updated timestamps. All timestamps use epoch milliseconds.</p>
     #   @return [Types::AppInstanceUserEndpoint]
     class DescribeAppInstanceUserEndpointResponse < Struct.new(
+      nil,
       :app_instance_user_endpoint,
       keyword_init: true
     )
@@ -642,6 +678,7 @@ module Aws::ChimeSDKIdentity
     #   <p>The ARN of the <code>AppInstanceUser</code>.</p>
     #   @return [String]
     class DescribeAppInstanceUserRequest < Struct.new(
+      nil,
       :app_instance_user_arn,
       keyword_init: true
     )
@@ -652,6 +689,7 @@ module Aws::ChimeSDKIdentity
     #   <p>The name of the <code>AppInstanceUser</code>.</p>
     #   @return [Types::AppInstanceUser]
     class DescribeAppInstanceUserResponse < Struct.new(
+      nil,
       :app_instance_user,
       keyword_init: true
     )
@@ -666,6 +704,7 @@ module Aws::ChimeSDKIdentity
     #   <p>The VOIP device token for the APNS and APNS_SANDBOX endpoint types.</p>
     #   @return [String]
     class EndpointAttributes < Struct.new(
+      nil,
       :device_token,
       :voip_device_token,
       keyword_init: true
@@ -701,6 +740,7 @@ module Aws::ChimeSDKIdentity
     #   <p>The reason for the <code>EndpointStatus</code>.</p>
     #   @return [String]
     class EndpointState < Struct.new(
+      nil,
       :status,
       :status_reason,
       keyword_init: true
@@ -716,6 +756,7 @@ module Aws::ChimeSDKIdentity
     #   <p>Specifies the conditions under which an <code>AppInstanceUser</code> will expire.</p>
     #   @return [String]
     class ExpirationSettings < Struct.new(
+      nil,
       :expiration_days,
       :expiration_criterion,
       keyword_init: true
@@ -729,6 +770,7 @@ module Aws::ChimeSDKIdentity
     # @!attribute message
     #   @return [String]
     class ForbiddenException < Struct.new(
+      nil,
       :code,
       :message,
       keyword_init: true
@@ -740,6 +782,7 @@ module Aws::ChimeSDKIdentity
     #   <p>The ARN of the <code>AppInstance</code>.</p>
     #   @return [String]
     class GetAppInstanceRetentionSettingsRequest < Struct.new(
+      nil,
       :app_instance_arn,
       keyword_init: true
     )
@@ -754,6 +797,7 @@ module Aws::ChimeSDKIdentity
     #            Seconds.</p>
     #   @return [Time]
     class GetAppInstanceRetentionSettingsResponse < Struct.new(
+      nil,
       :app_instance_retention_settings,
       :initiate_deletion_timestamp,
       keyword_init: true
@@ -769,6 +813,7 @@ module Aws::ChimeSDKIdentity
     #   <p>The name in an Identity.</p>
     #   @return [String]
     class Identity < Struct.new(
+      nil,
       :arn,
       :name,
       keyword_init: true
@@ -815,6 +860,7 @@ module Aws::ChimeSDKIdentity
     #            </ul>
     #   @return [String]
     class InvokedBy < Struct.new(
+      nil,
       :standard_messages,
       :targeted_messages,
       keyword_init: true
@@ -847,6 +893,7 @@ module Aws::ChimeSDKIdentity
     #   <p>The name of the welcome intent configured in the Amazon Lex V2 bot.</p>
     #   @return [String]
     class LexConfiguration < Struct.new(
+      nil,
       :responds_to,
       :invoked_by,
       :lex_bot_alias_arn,
@@ -868,6 +915,7 @@ module Aws::ChimeSDKIdentity
     #            reached.</p>
     #   @return [String]
     class ListAppInstanceAdminsRequest < Struct.new(
+      nil,
       :app_instance_arn,
       :max_results,
       :next_token,
@@ -887,6 +935,7 @@ module Aws::ChimeSDKIdentity
     #            reached.</p>
     #   @return [String]
     class ListAppInstanceAdminsResponse < Struct.new(
+      nil,
       :app_instance_arn,
       :app_instance_admins,
       :next_token,
@@ -905,6 +954,7 @@ module Aws::ChimeSDKIdentity
     #   <p>The token passed by previous API calls until all requested bots are returned.</p>
     #   @return [String]
     class ListAppInstanceBotsRequest < Struct.new(
+      nil,
       :app_instance_arn,
       :max_results,
       :next_token,
@@ -923,6 +973,7 @@ module Aws::ChimeSDKIdentity
     #   <p>The token passed by previous API calls until all requested bots are returned.</p>
     #   @return [String]
     class ListAppInstanceBotsResponse < Struct.new(
+      nil,
       :app_instance_arn,
       :app_instance_bots,
       :next_token,
@@ -941,6 +992,7 @@ module Aws::ChimeSDKIdentity
     #   <p>The token passed by previous API calls until all requested endpoints are returned.</p>
     #   @return [String]
     class ListAppInstanceUserEndpointsRequest < Struct.new(
+      nil,
       :app_instance_user_arn,
       :max_results,
       :next_token,
@@ -956,6 +1008,7 @@ module Aws::ChimeSDKIdentity
     #   <p>The token passed by previous API calls until all requested endpoints are returned.</p>
     #   @return [String]
     class ListAppInstanceUserEndpointsResponse < Struct.new(
+      nil,
       :app_instance_user_endpoints,
       :next_token,
       keyword_init: true
@@ -973,6 +1026,7 @@ module Aws::ChimeSDKIdentity
     #   <p>The token passed by previous API calls until all requested users are returned.</p>
     #   @return [String]
     class ListAppInstanceUsersRequest < Struct.new(
+      nil,
       :app_instance_arn,
       :max_results,
       :next_token,
@@ -991,6 +1045,7 @@ module Aws::ChimeSDKIdentity
     #   <p>The token passed by previous API calls until all requested users are returned.</p>
     #   @return [String]
     class ListAppInstanceUsersResponse < Struct.new(
+      nil,
       :app_instance_arn,
       :app_instance_users,
       :next_token,
@@ -1007,6 +1062,7 @@ module Aws::ChimeSDKIdentity
     #               <code>AppInstances</code>.</p>
     #   @return [String]
     class ListAppInstancesRequest < Struct.new(
+      nil,
       :max_results,
       :next_token,
       keyword_init: true
@@ -1022,6 +1078,7 @@ module Aws::ChimeSDKIdentity
     #               <code>AppInstance</code>s is reached.</p>
     #   @return [String]
     class ListAppInstancesResponse < Struct.new(
+      nil,
       :app_instances,
       :next_token,
       keyword_init: true
@@ -1033,6 +1090,7 @@ module Aws::ChimeSDKIdentity
     #   <p>The ARN of the resource.</p>
     #   @return [String]
     class ListTagsForResourceRequest < Struct.new(
+      nil,
       :resource_arn,
       keyword_init: true
     )
@@ -1043,6 +1101,7 @@ module Aws::ChimeSDKIdentity
     #   <p>The tag key-value pairs.</p>
     #   @return [Array<Types::Tag>]
     class ListTagsForResourceResponse < Struct.new(
+      nil,
       :tags,
       keyword_init: true
     )
@@ -1055,6 +1114,7 @@ module Aws::ChimeSDKIdentity
     # @!attribute message
     #   @return [String]
     class NotFoundException < Struct.new(
+      nil,
       :code,
       :message,
       keyword_init: true
@@ -1069,6 +1129,7 @@ module Aws::ChimeSDKIdentity
     #   <p>The time in days to retain data. Data type: number.</p>
     #   @return [Types::AppInstanceRetentionSettings]
     class PutAppInstanceRetentionSettingsRequest < Struct.new(
+      nil,
       :app_instance_arn,
       :app_instance_retention_settings,
       keyword_init: true
@@ -1083,6 +1144,7 @@ module Aws::ChimeSDKIdentity
     #   <p>The time at which the API deletes data.</p>
     #   @return [Time]
     class PutAppInstanceRetentionSettingsResponse < Struct.new(
+      nil,
       :app_instance_retention_settings,
       :initiate_deletion_timestamp,
       keyword_init: true
@@ -1097,6 +1159,7 @@ module Aws::ChimeSDKIdentity
     #   <p>Settings that control the interval after which an <code>AppInstanceUser</code> is automatically deleted.</p>
     #   @return [Types::ExpirationSettings]
     class PutAppInstanceUserExpirationSettingsRequest < Struct.new(
+      nil,
       :app_instance_user_arn,
       :expiration_settings,
       keyword_init: true
@@ -1111,6 +1174,7 @@ module Aws::ChimeSDKIdentity
     #   <p>Settings that control the interval after which an <code>AppInstanceUser</code> is automatically deleted.</p>
     #   @return [Types::ExpirationSettings]
     class PutAppInstanceUserExpirationSettingsResponse < Struct.new(
+      nil,
       :app_instance_user_arn,
       :expiration_settings,
       keyword_init: true
@@ -1156,6 +1220,7 @@ module Aws::ChimeSDKIdentity
     #            <code>NONE</code> indicates the endpoint receives no messages.</p>
     #   @return [String]
     class RegisterAppInstanceUserEndpointRequest < Struct.new(
+      nil,
       :app_instance_user_arn,
       :name,
       :type,
@@ -1175,6 +1240,7 @@ module Aws::ChimeSDKIdentity
     #   <p>The unique identifier of the <code>AppInstanceUserEndpoint</code>.</p>
     #   @return [String]
     class RegisterAppInstanceUserEndpointResponse < Struct.new(
+      nil,
       :app_instance_user_arn,
       :endpoint_id,
       keyword_init: true
@@ -1188,6 +1254,7 @@ module Aws::ChimeSDKIdentity
     # @!attribute message
     #   @return [String]
     class ResourceLimitExceededException < Struct.new(
+      nil,
       :code,
       :message,
       keyword_init: true
@@ -1201,6 +1268,7 @@ module Aws::ChimeSDKIdentity
     # @!attribute message
     #   @return [String]
     class ServiceFailureException < Struct.new(
+      nil,
       :code,
       :message,
       keyword_init: true
@@ -1214,6 +1282,7 @@ module Aws::ChimeSDKIdentity
     # @!attribute message
     #   @return [String]
     class ServiceUnavailableException < Struct.new(
+      nil,
       :code,
       :message,
       keyword_init: true
@@ -1229,6 +1298,7 @@ module Aws::ChimeSDKIdentity
     #   <p>The value in a tag.</p>
     #   @return [String]
     class Tag < Struct.new(
+      nil,
       :key,
       :value,
       keyword_init: true
@@ -1243,6 +1313,7 @@ module Aws::ChimeSDKIdentity
     #   <p>The tag key-value pairs.</p>
     #   @return [Array<Types::Tag>]
     class TagResourceRequest < Struct.new(
+      nil,
       :resource_arn,
       :tags,
       keyword_init: true
@@ -1256,6 +1327,7 @@ module Aws::ChimeSDKIdentity
     # @!attribute message
     #   @return [String]
     class ThrottledClientException < Struct.new(
+      nil,
       :code,
       :message,
       keyword_init: true
@@ -1269,6 +1341,7 @@ module Aws::ChimeSDKIdentity
     # @!attribute message
     #   @return [String]
     class UnauthorizedClientException < Struct.new(
+      nil,
       :code,
       :message,
       keyword_init: true
@@ -1283,6 +1356,7 @@ module Aws::ChimeSDKIdentity
     #   <p>The tag keys.</p>
     #   @return [Array<String>]
     class UntagResourceRequest < Struct.new(
+      nil,
       :resource_arn,
       :tag_keys,
       keyword_init: true
@@ -1303,6 +1377,7 @@ module Aws::ChimeSDKIdentity
     #   <p>The configuration for the bot update.</p>
     #   @return [Types::Configuration]
     class UpdateAppInstanceBotRequest < Struct.new(
+      nil,
       :app_instance_bot_arn,
       :name,
       :metadata,
@@ -1316,6 +1391,7 @@ module Aws::ChimeSDKIdentity
     #   <p>The ARN of the <code>AppInstanceBot</code>.</p>
     #   @return [String]
     class UpdateAppInstanceBotResponse < Struct.new(
+      nil,
       :app_instance_bot_arn,
       keyword_init: true
     )
@@ -1332,6 +1408,7 @@ module Aws::ChimeSDKIdentity
     #   <p>The metadata that you want to change.</p>
     #   @return [String]
     class UpdateAppInstanceRequest < Struct.new(
+      nil,
       :app_instance_arn,
       :name,
       :metadata,
@@ -1344,6 +1421,7 @@ module Aws::ChimeSDKIdentity
     #   <p>The ARN of the <code>AppInstance</code>.</p>
     #   @return [String]
     class UpdateAppInstanceResponse < Struct.new(
+      nil,
       :app_instance_arn,
       keyword_init: true
     )
@@ -1364,6 +1442,7 @@ module Aws::ChimeSDKIdentity
     #            <code>NONE</code> indicates the endpoint will receive no messages.</p>
     #   @return [String]
     class UpdateAppInstanceUserEndpointRequest < Struct.new(
+      nil,
       :app_instance_user_arn,
       :endpoint_id,
       :name,
@@ -1380,6 +1459,7 @@ module Aws::ChimeSDKIdentity
     #   <p>The unique identifier of the <code>AppInstanceUserEndpoint</code>.</p>
     #   @return [String]
     class UpdateAppInstanceUserEndpointResponse < Struct.new(
+      nil,
       :app_instance_user_arn,
       :endpoint_id,
       keyword_init: true
@@ -1397,6 +1477,7 @@ module Aws::ChimeSDKIdentity
     #   <p>The metadata of the <code>AppInstanceUser</code>.</p>
     #   @return [String]
     class UpdateAppInstanceUserRequest < Struct.new(
+      nil,
       :app_instance_user_arn,
       :name,
       :metadata,
@@ -1409,6 +1490,7 @@ module Aws::ChimeSDKIdentity
     #   <p>The ARN of the <code>AppInstanceUser</code>.</p>
     #   @return [String]
     class UpdateAppInstanceUserResponse < Struct.new(
+      nil,
       :app_instance_user_arn,
       keyword_init: true
     )

@@ -10,6 +10,7 @@ module Aws::ConnectCases
     # @!attribute message
     #   @return [String]
     class AccessDeniedException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -36,6 +37,7 @@ module Aws::ConnectCases
     #   <p>Information of the user which performed the audit.</p>
     #   @return [Types::AuditEventPerformedBy]
     class AuditEvent < Struct.new(
+      nil,
       :event_id,
       :type,
       :related_item_type,
@@ -58,6 +60,7 @@ module Aws::ConnectCases
     #   <p>Union of potential field value types.</p>
     #   @return [Types::AuditEventFieldValueUnion]
     class AuditEventField < Struct.new(
+      nil,
       :event_field_id,
       :old_value,
       :new_value,
@@ -109,6 +112,7 @@ module Aws::ConnectCases
     #   <p>Unique identifier of an IAM role.</p>
     #   @return [String]
     class AuditEventPerformedBy < Struct.new(
+      nil,
       :user,
       :iam_principal_arn,
       keyword_init: true
@@ -124,6 +128,7 @@ module Aws::ConnectCases
     #   <p>This represents sections in a tab of the page layout.</p>
     #   @return [Types::LayoutSections]
     class BasicLayout < Struct.new(
+      nil,
       :top_panel,
       :more_info,
       keyword_init: true
@@ -138,6 +143,7 @@ module Aws::ConnectCases
     #   <p>List of case rule identifiers.</p>
     #   @return [Array<Types::CaseRuleIdentifier>]
     class BatchGetCaseRuleRequest < Struct.new(
+      nil,
       :domain_id,
       :case_rules,
       keyword_init: true
@@ -152,6 +158,7 @@ module Aws::ConnectCases
     #   <p>List of case rule errors.</p>
     #   @return [Array<Types::CaseRuleError>]
     class BatchGetCaseRuleResponse < Struct.new(
+      nil,
       :case_rules,
       :errors,
       keyword_init: true
@@ -166,6 +173,7 @@ module Aws::ConnectCases
     #   <p>A list of unique field identifiers. </p>
     #   @return [Array<Types::FieldIdentifier>]
     class BatchGetFieldInput < Struct.new(
+      nil,
       :domain_id,
       :fields,
       keyword_init: true
@@ -180,6 +188,7 @@ module Aws::ConnectCases
     #   <p>A list of field errors. </p>
     #   @return [Array<Types::FieldError>]
     class BatchGetFieldOutput < Struct.new(
+      nil,
       :fields,
       :errors,
       keyword_init: true
@@ -197,6 +206,7 @@ module Aws::ConnectCases
     #   <p>A list of <code>FieldOption</code> objects.</p>
     #   @return [Array<Types::FieldOption>]
     class BatchPutFieldOptionsInput < Struct.new(
+      nil,
       :domain_id,
       :field_id,
       :options,
@@ -209,6 +219,7 @@ module Aws::ConnectCases
     #   <p>A list of field errors. </p>
     #   @return [Array<Types::FieldOptionError>]
     class BatchPutFieldOptionsOutput < Struct.new(
+      nil,
       :errors,
       keyword_init: true
     )
@@ -246,6 +257,7 @@ module Aws::ConnectCases
     #   <p>The value of the outer rule if the condition evaluates to true.</p>
     #   @return [Boolean]
     class BooleanOperands < Struct.new(
+      nil,
       :operand_one,
       :operand_two,
       :result,
@@ -259,6 +271,7 @@ module Aws::ConnectCases
     #   <p>List of field identifiers.</p>
     #   @return [Array<Types::FieldIdentifier>]
     class CaseEventIncludedData < Struct.new(
+      nil,
       :fields,
       keyword_init: true
     )
@@ -321,6 +334,7 @@ module Aws::ConnectCases
     #   <p>Error message from getting a case rule.</p>
     #   @return [String]
     class CaseRuleError < Struct.new(
+      nil,
       :id,
       :error_code,
       :message,
@@ -334,6 +348,7 @@ module Aws::ConnectCases
     #   <p>Unique identifier of a case rule.</p>
     #   @return [String]
     class CaseRuleIdentifier < Struct.new(
+      nil,
       :id,
       keyword_init: true
     )
@@ -357,6 +372,7 @@ module Aws::ConnectCases
     #   <p>Description of a case rule.</p>
     #   @return [String]
     class CaseRuleSummary < Struct.new(
+      nil,
       :case_rule_id,
       :name,
       :case_rule_arn,
@@ -375,6 +391,7 @@ module Aws::ConnectCases
     #   <p>A unique identifier of a template.</p>
     #   @return [String]
     class CaseSummary < Struct.new(
+      nil,
       :case_id,
       :template_id,
       keyword_init: true
@@ -390,6 +407,7 @@ module Aws::ConnectCases
     #   <p>Type of the text in the box of a <code>Comment</code> on a case.</p>
     #   @return [String]
     class CommentContent < Struct.new(
+      nil,
       :body,
       :content_type,
       keyword_init: true
@@ -399,6 +417,7 @@ module Aws::ConnectCases
 
     # <p>A filter for related items of type <code>Comment</code>.</p>
     class CommentFilter < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -408,6 +427,7 @@ module Aws::ConnectCases
     # @!attribute message
     #   @return [String]
     class ConflictException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -419,6 +439,7 @@ module Aws::ConnectCases
     #   <p>A unique identifier of the case.</p>
     #   @return [String]
     class ConnectCaseContent < Struct.new(
+      nil,
       :case_id,
       keyword_init: true
     )
@@ -430,6 +451,7 @@ module Aws::ConnectCases
     #   <p>A unique identifier of the case.</p>
     #   @return [String]
     class ConnectCaseFilter < Struct.new(
+      nil,
       :case_id,
       keyword_init: true
     )
@@ -441,6 +463,7 @@ module Aws::ConnectCases
     #   <p>A unique identifier of the case.</p>
     #   @return [String]
     class ConnectCaseInputContent < Struct.new(
+      nil,
       :case_id,
       keyword_init: true
     )
@@ -452,6 +475,7 @@ module Aws::ConnectCases
     #   <p>A unique identifier of a contact in Amazon Connect.</p>
     #   @return [String]
     class Contact < Struct.new(
+      nil,
       :contact_arn,
       keyword_init: true
     )
@@ -469,6 +493,7 @@ module Aws::ConnectCases
     #   <p>The difference between the <code>InitiationTimestamp</code> and the <code>DisconnectTimestamp</code> of the contact.</p>
     #   @return [Time]
     class ContactContent < Struct.new(
+      nil,
       :contact_arn,
       :channel,
       :connected_to_system_time,
@@ -485,6 +510,7 @@ module Aws::ConnectCases
     #   <p>A unique identifier of a contact in Amazon Connect.</p>
     #   @return [String]
     class ContactFilter < Struct.new(
+      nil,
       :channel,
       :contact_arn,
       keyword_init: true
@@ -508,6 +534,7 @@ module Aws::ConnectCases
     #   <p>Represents the entity that performed the action.</p>
     #   @return [Types::UserUnion]
     class CreateCaseInput < Struct.new(
+      nil,
       :domain_id,
       :template_id,
       :fields,
@@ -525,6 +552,7 @@ module Aws::ConnectCases
     #   <p>The Amazon Resource Name (ARN) of the case.</p>
     #   @return [String]
     class CreateCaseOutput < Struct.new(
+      nil,
       :case_id,
       :case_arn,
       keyword_init: true
@@ -545,6 +573,7 @@ module Aws::ConnectCases
     #   <p>Represents what rule type should take place, under what conditions.</p>
     #   @return [Types::CaseRuleDetails]
     class CreateCaseRuleRequest < Struct.new(
+      nil,
       :domain_id,
       :name,
       :description,
@@ -561,6 +590,7 @@ module Aws::ConnectCases
     #   <p>The Amazon Resource Name (ARN) of a case rule.</p>
     #   @return [String]
     class CreateCaseRuleResponse < Struct.new(
+      nil,
       :case_rule_id,
       :case_rule_arn,
       keyword_init: true
@@ -572,6 +602,7 @@ module Aws::ConnectCases
     #   <p>The name for your Cases domain. It must be unique for your Amazon Web Services account.</p>
     #   @return [String]
     class CreateDomainInput < Struct.new(
+      nil,
       :name,
       keyword_init: true
     )
@@ -588,6 +619,7 @@ module Aws::ConnectCases
     #   <p>The status of the domain.</p>
     #   @return [String]
     class CreateDomainOutput < Struct.new(
+      nil,
       :domain_id,
       :domain_arn,
       :domain_status,
@@ -609,6 +641,7 @@ module Aws::ConnectCases
     #   <p>The description of the field.</p>
     #   @return [String]
     class CreateFieldInput < Struct.new(
+      nil,
       :domain_id,
       :name,
       :type,
@@ -625,6 +658,7 @@ module Aws::ConnectCases
     #   <p>The Amazon Resource Name (ARN) of the field.</p>
     #   @return [String]
     class CreateFieldOutput < Struct.new(
+      nil,
       :field_id,
       :field_arn,
       keyword_init: true
@@ -642,6 +676,7 @@ module Aws::ConnectCases
     #   <p>Information about which fields will be present in the layout, and information about the order of the fields.</p>
     #   @return [Types::LayoutContent]
     class CreateLayoutInput < Struct.new(
+      nil,
       :domain_id,
       :name,
       :content,
@@ -657,6 +692,7 @@ module Aws::ConnectCases
     #   <p>The Amazon Resource Name (ARN) of the newly created layout.</p>
     #   @return [String]
     class CreateLayoutOutput < Struct.new(
+      nil,
       :layout_id,
       :layout_arn,
       keyword_init: true
@@ -680,6 +716,7 @@ module Aws::ConnectCases
     #   <p>Represents the creator of the related item.</p>
     #   @return [Types::UserUnion]
     class CreateRelatedItemInput < Struct.new(
+      nil,
       :domain_id,
       :case_id,
       :type,
@@ -697,6 +734,7 @@ module Aws::ConnectCases
     #   <p>The Amazon Resource Name (ARN) of the related item.</p>
     #   @return [String]
     class CreateRelatedItemOutput < Struct.new(
+      nil,
       :related_item_id,
       :related_item_arn,
       keyword_init: true
@@ -726,6 +764,7 @@ module Aws::ConnectCases
     #   <p>A list of case rules (also known as <a href="https://docs.aws.amazon.com/connect/latest/adminguide/case-field-conditions.html">case field conditions</a>) on a template. </p>
     #   @return [Array<Types::TemplateRule>]
     class CreateTemplateInput < Struct.new(
+      nil,
       :domain_id,
       :name,
       :description,
@@ -745,6 +784,7 @@ module Aws::ConnectCases
     #   <p>The Amazon Resource Name (ARN) of the newly created template.</p>
     #   @return [String]
     class CreateTemplateOutput < Struct.new(
+      nil,
       :template_id,
       :template_arn,
       keyword_init: true
@@ -757,6 +797,7 @@ module Aws::ConnectCases
     #   <p>List of field values for the <code>Custom</code> related item.</p>
     #   @return [Array<Types::FieldValue>]
     class CustomContent < Struct.new(
+      nil,
       :fields,
       keyword_init: true
     )
@@ -798,6 +839,7 @@ module Aws::ConnectCases
     #   <p>Filter conditions for custom fields.</p>
     #   @return [Types::CustomFieldsFilter]
     class CustomFilter < Struct.new(
+      nil,
       :fields,
       keyword_init: true
     )
@@ -809,6 +851,7 @@ module Aws::ConnectCases
     #   <p>List of field values for the <code>Custom</code> related item.</p>
     #   @return [Array<Types::FieldValue>]
     class CustomInputContent < Struct.new(
+      nil,
       :fields,
       keyword_init: true
     )
@@ -822,6 +865,7 @@ module Aws::ConnectCases
     #   <p>A unique identifier of the case.</p>
     #   @return [String]
     class DeleteCaseRequest < Struct.new(
+      nil,
       :domain_id,
       :case_id,
       keyword_init: true
@@ -830,6 +874,7 @@ module Aws::ConnectCases
     end
 
     class DeleteCaseResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -842,6 +887,7 @@ module Aws::ConnectCases
     #   <p>Unique identifier of a case rule.</p>
     #   @return [String]
     class DeleteCaseRuleRequest < Struct.new(
+      nil,
       :domain_id,
       :case_rule_id,
       keyword_init: true
@@ -850,6 +896,7 @@ module Aws::ConnectCases
     end
 
     class DeleteCaseRuleResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -859,6 +906,7 @@ module Aws::ConnectCases
     #   <p>The unique identifier of the Cases domain. </p>
     #   @return [String]
     class DeleteDomainInput < Struct.new(
+      nil,
       :domain_id,
       keyword_init: true
     )
@@ -866,6 +914,7 @@ module Aws::ConnectCases
     end
 
     class DeleteDomainOutput < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -878,6 +927,7 @@ module Aws::ConnectCases
     #   <p>Unique identifier of the field.</p>
     #   @return [String]
     class DeleteFieldRequest < Struct.new(
+      nil,
       :domain_id,
       :field_id,
       keyword_init: true
@@ -886,6 +936,7 @@ module Aws::ConnectCases
     end
 
     class DeleteFieldResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -898,6 +949,7 @@ module Aws::ConnectCases
     #   <p>The unique identifier of the layout.</p>
     #   @return [String]
     class DeleteLayoutRequest < Struct.new(
+      nil,
       :domain_id,
       :layout_id,
       keyword_init: true
@@ -906,6 +958,7 @@ module Aws::ConnectCases
     end
 
     class DeleteLayoutResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -921,6 +974,7 @@ module Aws::ConnectCases
     #   <p>A unique identifier of a related item.</p>
     #   @return [String]
     class DeleteRelatedItemRequest < Struct.new(
+      nil,
       :domain_id,
       :case_id,
       :related_item_id,
@@ -930,6 +984,7 @@ module Aws::ConnectCases
     end
 
     class DeleteRelatedItemResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -942,6 +997,7 @@ module Aws::ConnectCases
     #   <p>A unique identifier of a template.</p>
     #   @return [String]
     class DeleteTemplateRequest < Struct.new(
+      nil,
       :domain_id,
       :template_id,
       keyword_init: true
@@ -950,6 +1006,7 @@ module Aws::ConnectCases
     end
 
     class DeleteTemplateResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -966,6 +1023,7 @@ module Aws::ConnectCases
     #   <p>The name of the domain.</p>
     #   @return [String]
     class DomainSummary < Struct.new(
+      nil,
       :domain_id,
       :domain_arn,
       :name,
@@ -976,6 +1034,7 @@ module Aws::ConnectCases
 
     # <p>An empty value. You cannot set <code>EmptyFieldValue</code> on a field that is required on a case template.</p> <p>This structure will never have any data members. It signifies an empty value on a case field.</p>
     class EmptyFieldValue < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -983,6 +1042,7 @@ module Aws::ConnectCases
 
     # <p>Represents an empty operand value. In the Amazon Connect admin website, case rules are known as <i>case field conditions</i>. For more information about case field conditions, see <a href="https://docs.aws.amazon.com/connect/latest/adminguide/case-field-conditions.html">Add case field conditions to a case template</a>.</p>
     class EmptyOperandValue < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -996,6 +1056,7 @@ module Aws::ConnectCases
     #   <p>Details of what case and related item data is published through the case event stream.</p>
     #   @return [Types::EventIncludedData]
     class EventBridgeConfiguration < Struct.new(
+      nil,
       :enabled,
       :included_data,
       keyword_init: true
@@ -1011,6 +1072,7 @@ module Aws::ConnectCases
     #   <p>Details of what related item data is published through the case event stream.</p>
     #   @return [Types::RelatedItemEventIncludedData]
     class EventIncludedData < Struct.new(
+      nil,
       :case_data,
       :related_item_data,
       keyword_init: true
@@ -1029,6 +1091,7 @@ module Aws::ConnectCases
     #   <p>The error message from getting a field.</p>
     #   @return [String]
     class FieldError < Struct.new(
+      nil,
       :id,
       :error_code,
       :message,
@@ -1085,6 +1148,7 @@ module Aws::ConnectCases
     #   <p>Represents an ordered list containing field related information.</p>
     #   @return [Array<Types::FieldItem>]
     class FieldGroup < Struct.new(
+      nil,
       :name,
       :fields,
       keyword_init: true
@@ -1097,6 +1161,7 @@ module Aws::ConnectCases
     #   <p>Unique identifier of a field.</p>
     #   @return [String]
     class FieldIdentifier < Struct.new(
+      nil,
       :id,
       keyword_init: true
     )
@@ -1108,6 +1173,7 @@ module Aws::ConnectCases
     #   <p>Unique identifier of a field.</p>
     #   @return [String]
     class FieldItem < Struct.new(
+      nil,
       :id,
       keyword_init: true
     )
@@ -1125,6 +1191,7 @@ module Aws::ConnectCases
     #   <p>Describes whether the <code>FieldOption</code> is active (displayed) or inactive.</p>
     #   @return [Boolean]
     class FieldOption < Struct.new(
+      nil,
       :name,
       :value,
       :active,
@@ -1144,6 +1211,7 @@ module Aws::ConnectCases
     #   <p>The field option value that caused the error.</p>
     #   @return [String]
     class FieldOptionError < Struct.new(
+      nil,
       :message,
       :error_code,
       :value,
@@ -1169,6 +1237,7 @@ module Aws::ConnectCases
     #   <p>The namespace of a field.</p>
     #   @return [String]
     class FieldSummary < Struct.new(
+      nil,
       :field_id,
       :field_arn,
       :name,
@@ -1187,6 +1256,7 @@ module Aws::ConnectCases
     #   <p>Union of potential field value types.</p>
     #   @return [Types::FieldValueUnion]
     class FieldValue < Struct.new(
+      nil,
       :id,
       :value,
       keyword_init: true
@@ -1234,6 +1304,7 @@ module Aws::ConnectCases
     #   <p>The Amazon Resource Name (ARN) of a File in Amazon Connect.</p>
     #   @return [String]
     class FileContent < Struct.new(
+      nil,
       :file_arn,
       keyword_init: true
     )
@@ -1245,6 +1316,7 @@ module Aws::ConnectCases
     #   <p>The Amazon Resource Name (ARN) of the file.</p>
     #   @return [String]
     class FileFilter < Struct.new(
+      nil,
       :file_arn,
       keyword_init: true
     )
@@ -1264,6 +1336,7 @@ module Aws::ConnectCases
     #   <p>The token for the next set of results. Use the value returned in the previous response in the next request to retrieve the next set of results.</p>
     #   @return [String]
     class GetCaseAuditEventsRequest < Struct.new(
+      nil,
       :case_id,
       :domain_id,
       :max_results,
@@ -1280,6 +1353,7 @@ module Aws::ConnectCases
     #   <p>A list of case audits where each represents a particular edit of the case.</p>
     #   @return [Array<Types::AuditEvent>]
     class GetCaseAuditEventsResponse < Struct.new(
+      nil,
       :next_token,
       :audit_events,
       keyword_init: true
@@ -1291,6 +1365,7 @@ module Aws::ConnectCases
     #   <p>The unique identifier of the Cases domain. </p>
     #   @return [String]
     class GetCaseEventConfigurationInput < Struct.new(
+      nil,
       :domain_id,
       keyword_init: true
     )
@@ -1301,6 +1376,7 @@ module Aws::ConnectCases
     #   <p>Configuration to enable EventBridge case event delivery and determine what data is delivered.</p>
     #   @return [Types::EventBridgeConfiguration]
     class GetCaseEventConfigurationOutput < Struct.new(
+      nil,
       :event_bridge,
       keyword_init: true
     )
@@ -1320,6 +1396,7 @@ module Aws::ConnectCases
     #   <p>The token for the next set of results. Use the value returned in the previous response in the next request to retrieve the next set of results.</p>
     #   @return [String]
     class GetCaseInput < Struct.new(
+      nil,
       :case_id,
       :domain_id,
       :fields,
@@ -1342,6 +1419,7 @@ module Aws::ConnectCases
     #   <p>A map of of key-value pairs that represent tags on a resource. Tags are used to organize, track, or control access for this resource.</p>
     #   @return [Hash<String, String>]
     class GetCaseOutput < Struct.new(
+      nil,
       :fields,
       :template_id,
       :next_token,
@@ -1380,6 +1458,7 @@ module Aws::ConnectCases
     #   <p>A map of of key-value pairs that represent tags on a resource. Tags are used to organize, track, or control access for this resource.</p>
     #   @return [Hash<String, String>]
     class GetCaseRuleResponse < Struct.new(
+      nil,
       :case_rule_id,
       :name,
       :case_rule_arn,
@@ -1403,6 +1482,7 @@ module Aws::ConnectCases
     #   <p>The unique identifier of the Cases domain. </p>
     #   @return [String]
     class GetDomainInput < Struct.new(
+      nil,
       :domain_id,
       keyword_init: true
     )
@@ -1428,6 +1508,7 @@ module Aws::ConnectCases
     #   <p>A map of of key-value pairs that represent tags on a resource. Tags are used to organize, track, or control access for this resource.</p>
     #   @return [Hash<String, String>]
     class GetDomainOutput < Struct.new(
+      nil,
       :domain_id,
       :domain_arn,
       :name,
@@ -1471,6 +1552,7 @@ module Aws::ConnectCases
     #   <p>Timestamp at which the resource was created or last modified.</p>
     #   @return [Time]
     class GetFieldResponse < Struct.new(
+      nil,
       :field_id,
       :name,
       :field_arn,
@@ -1498,6 +1580,7 @@ module Aws::ConnectCases
     #   <p>The unique identifier of the layout.</p>
     #   @return [String]
     class GetLayoutInput < Struct.new(
+      nil,
       :domain_id,
       :layout_id,
       keyword_init: true
@@ -1530,6 +1613,7 @@ module Aws::ConnectCases
     #   <p>Timestamp at which the resource was created or last modified.</p>
     #   @return [Time]
     class GetLayoutOutput < Struct.new(
+      nil,
       :layout_id,
       :layout_arn,
       :name,
@@ -1555,6 +1639,7 @@ module Aws::ConnectCases
     #   <p>A unique identifier of a template.</p>
     #   @return [String]
     class GetTemplateInput < Struct.new(
+      nil,
       :domain_id,
       :template_id,
       keyword_init: true
@@ -1599,6 +1684,7 @@ module Aws::ConnectCases
     #   <p>A list of case rules (also known as <a href="https://docs.aws.amazon.com/connect/latest/adminguide/case-field-conditions.html">case field conditions</a>) on a template. </p>
     #   @return [Array<Types::TemplateRule>]
     class GetTemplateOutput < Struct.new(
+      nil,
       :template_id,
       :template_arn,
       :name,
@@ -1628,6 +1714,7 @@ module Aws::ConnectCases
     #   <p>Advice to clients on when the call can be safely retried.</p>
     #   @return [Integer]
     class InternalServerException < Struct.new(
+      nil,
       :message,
       :retry_after_seconds,
       keyword_init: true
@@ -1640,6 +1727,7 @@ module Aws::ConnectCases
     #   <p> Unique identifier of a layout. </p>
     #   @return [String]
     class LayoutConfiguration < Struct.new(
+      nil,
       :default_layout,
       keyword_init: true
     )
@@ -1666,6 +1754,7 @@ module Aws::ConnectCases
     #   <p>Ordered list containing different kinds of sections that can be added.</p>
     #   @return [Array<Types::Section>]
     class LayoutSections < Struct.new(
+      nil,
       :sections,
       keyword_init: true
     )
@@ -1683,6 +1772,7 @@ module Aws::ConnectCases
     #   <p>The name of the layout.</p>
     #   @return [String]
     class LayoutSummary < Struct.new(
+      nil,
       :layout_id,
       :layout_arn,
       :name,
@@ -1701,6 +1791,7 @@ module Aws::ConnectCases
     #   <p>The token for the next set of results. Use the value returned in the previous response in the next request to retrieve the next set of results.</p>
     #   @return [String]
     class ListCaseRulesRequest < Struct.new(
+      nil,
       :domain_id,
       :max_results,
       :next_token,
@@ -1716,6 +1807,7 @@ module Aws::ConnectCases
     #   <p>The token for the next set of results. This is null if there are no more results to return.</p>
     #   @return [String]
     class ListCaseRulesResponse < Struct.new(
+      nil,
       :case_rules,
       :next_token,
       keyword_init: true
@@ -1736,6 +1828,7 @@ module Aws::ConnectCases
     #   <p>The token for the next set of results. Use the value returned in the previous response in the next request to retrieve the next set of results.</p>
     #   @return [String]
     class ListCasesForContactInput < Struct.new(
+      nil,
       :domain_id,
       :contact_arn,
       :max_results,
@@ -1752,6 +1845,7 @@ module Aws::ConnectCases
     #   <p>The token for the next set of results. This is null if there are no more results to return.</p>
     #   @return [String]
     class ListCasesForContactOutput < Struct.new(
+      nil,
       :cases,
       :next_token,
       keyword_init: true
@@ -1766,6 +1860,7 @@ module Aws::ConnectCases
     #   <p>The token for the next set of results. Use the value returned in the previous response in the next request to retrieve the next set of results.</p>
     #   @return [String]
     class ListDomainsInput < Struct.new(
+      nil,
       :max_results,
       :next_token,
       keyword_init: true
@@ -1780,6 +1875,7 @@ module Aws::ConnectCases
     #   <p>The token for the next set of results. This is null if there are no more results to return.</p>
     #   @return [String]
     class ListDomainsOutput < Struct.new(
+      nil,
       :domains,
       :next_token,
       keyword_init: true
@@ -1803,6 +1899,7 @@ module Aws::ConnectCases
     #   <p>A list of <code>FieldOption</code> values to filter on for <code>ListFieldOptions</code>.</p>
     #   @return [Array<String>]
     class ListFieldOptionsInput < Struct.new(
+      nil,
       :domain_id,
       :field_id,
       :max_results,
@@ -1820,6 +1917,7 @@ module Aws::ConnectCases
     #   <p>The token for the next set of results. This is null if there are no more results to return.</p>
     #   @return [String]
     class ListFieldOptionsOutput < Struct.new(
+      nil,
       :options,
       :next_token,
       keyword_init: true
@@ -1837,6 +1935,7 @@ module Aws::ConnectCases
     #   <p>The token for the next set of results. Use the value returned in the previous response in the next request to retrieve the next set of results.</p>
     #   @return [String]
     class ListFieldsInput < Struct.new(
+      nil,
       :domain_id,
       :max_results,
       :next_token,
@@ -1852,6 +1951,7 @@ module Aws::ConnectCases
     #   <p>The token for the next set of results. This is null if there are no more results to return.</p>
     #   @return [String]
     class ListFieldsOutput < Struct.new(
+      nil,
       :fields,
       :next_token,
       keyword_init: true
@@ -1869,6 +1969,7 @@ module Aws::ConnectCases
     #   <p>The token for the next set of results. Use the value returned in the previous response in the next request to retrieve the next set of results.</p>
     #   @return [String]
     class ListLayoutsInput < Struct.new(
+      nil,
       :domain_id,
       :max_results,
       :next_token,
@@ -1884,6 +1985,7 @@ module Aws::ConnectCases
     #   <p>The token for the next set of results. This is null if there are no more results to return.</p>
     #   @return [String]
     class ListLayoutsOutput < Struct.new(
+      nil,
       :layouts,
       :next_token,
       keyword_init: true
@@ -1895,6 +1997,7 @@ module Aws::ConnectCases
     #   <p>The Amazon Resource Name (ARN)</p>
     #   @return [String]
     class ListTagsForResourceInput < Struct.new(
+      nil,
       :arn,
       keyword_init: true
     )
@@ -1905,6 +2008,7 @@ module Aws::ConnectCases
     #   <p>A map of of key-value pairs that represent tags on a resource. Tags are used to organize, track, or control access for this resource.</p>
     #   @return [Hash<String, String>]
     class ListTagsForResourceOutput < Struct.new(
+      nil,
       :tags,
       keyword_init: true
     )
@@ -1924,6 +2028,7 @@ module Aws::ConnectCases
     #   <p>A list of status values to filter on.</p>
     #   @return [Array<String>]
     class ListTemplatesInput < Struct.new(
+      nil,
       :domain_id,
       :max_results,
       :next_token,
@@ -1940,6 +2045,7 @@ module Aws::ConnectCases
     #   <p>The token for the next set of results. This is null if there are no more results to return.</p>
     #   @return [String]
     class ListTemplatesOutput < Struct.new(
+      nil,
       :templates,
       :next_token,
       keyword_init: true
@@ -1999,6 +2105,7 @@ module Aws::ConnectCases
     #   <p>Configuration to enable EventBridge case event delivery and determine what data is delivered.</p>
     #   @return [Types::EventBridgeConfiguration]
     class PutCaseEventConfigurationInput < Struct.new(
+      nil,
       :domain_id,
       :event_bridge,
       keyword_init: true
@@ -2007,6 +2114,7 @@ module Aws::ConnectCases
     end
 
     class PutCaseEventConfigurationOutput < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -2057,6 +2165,7 @@ module Aws::ConnectCases
     #   <p>Details of what related item data is published through the case event stream.</p>
     #   @return [Boolean]
     class RelatedItemEventIncludedData < Struct.new(
+      nil,
       :include_content,
       keyword_init: true
     )
@@ -2151,6 +2260,7 @@ module Aws::ConnectCases
     #   <p>List of conditions for the required rule; the first condition to evaluate to true dictates the value of the rule.</p>
     #   @return [Array<Types::BooleanCondition>]
     class RequiredCaseRule < Struct.new(
+      nil,
       :default_value,
       :conditions,
       keyword_init: true
@@ -2163,6 +2273,7 @@ module Aws::ConnectCases
     #   <p>Unique identifier of a field.</p>
     #   @return [String]
     class RequiredField < Struct.new(
+      nil,
       :field_id,
       keyword_init: true
     )
@@ -2179,6 +2290,7 @@ module Aws::ConnectCases
     #   <p>Type of the resource affected.</p>
     #   @return [String]
     class ResourceNotFoundException < Struct.new(
+      nil,
       :message,
       :resource_id,
       :resource_type,
@@ -2203,6 +2315,7 @@ module Aws::ConnectCases
     #   <p>A structured set of sort terms to specify the order in which related items should be returned. Supports sorting by association time or case ID. The sorts work in the order specified: first sort term takes precedence over subsequent terms.</p>
     #   @return [Array<Types::SearchAllRelatedItemsSort>]
     class SearchAllRelatedItemsRequest < Struct.new(
+      nil,
       :domain_id,
       :max_results,
       :next_token,
@@ -2220,6 +2333,7 @@ module Aws::ConnectCases
     #   <p>A list of items related to a case.</p>
     #   @return [Array<Types::SearchAllRelatedItemsResponseItem>]
     class SearchAllRelatedItemsResponse < Struct.new(
+      nil,
       :next_token,
       :related_items,
       keyword_init: true
@@ -2250,6 +2364,7 @@ module Aws::ConnectCases
     #   <p>A map of of key-value pairs that represent tags on a resource. Tags are used to organize, track, or control access for this resource.</p>
     #   @return [Hash<String, String>]
     class SearchAllRelatedItemsResponseItem < Struct.new(
+      nil,
       :related_item_id,
       :case_id,
       :type,
@@ -2270,6 +2385,7 @@ module Aws::ConnectCases
     #   <p>Whether related items should be sorted by association time or case ID. </p>
     #   @return [String]
     class SearchAllRelatedItemsSort < Struct.new(
+      nil,
       :sort_property,
       :sort_order,
       keyword_init: true
@@ -2299,6 +2415,7 @@ module Aws::ConnectCases
     #   <p>The list of field identifiers to be returned as part of the response.</p>
     #   @return [Array<Types::FieldIdentifier>]
     class SearchCasesInput < Struct.new(
+      nil,
       :domain_id,
       :max_results,
       :next_token,
@@ -2318,6 +2435,7 @@ module Aws::ConnectCases
     #   <p>A list of case documents where each case contains the properties <code>CaseId</code> and <code>Fields</code> where each field is a complex union structure. </p>
     #   @return [Array<Types::SearchCasesResponseItem>]
     class SearchCasesOutput < Struct.new(
+      nil,
       :next_token,
       :cases,
       keyword_init: true
@@ -2339,6 +2457,7 @@ module Aws::ConnectCases
     #   <p>A map of of key-value pairs that represent tags on a resource. Tags are used to organize, track, or control access for this resource.</p>
     #   @return [Hash<String, String>]
     class SearchCasesResponseItem < Struct.new(
+      nil,
       :case_id,
       :template_id,
       :fields,
@@ -2364,6 +2483,7 @@ module Aws::ConnectCases
     #   <p>The list of types of related items and their parameters to use for filtering.</p>
     #   @return [Array<Types::RelatedItemTypeFilter>]
     class SearchRelatedItemsInput < Struct.new(
+      nil,
       :domain_id,
       :case_id,
       :max_results,
@@ -2381,6 +2501,7 @@ module Aws::ConnectCases
     #   <p>A list of items related to a case. </p>
     #   @return [Array<Types::SearchRelatedItemsResponseItem>]
     class SearchRelatedItemsOutput < Struct.new(
+      nil,
       :next_token,
       :related_items,
       keyword_init: true
@@ -2408,6 +2529,7 @@ module Aws::ConnectCases
     #   <p>Represents the creator of the related item.</p>
     #   @return [Types::UserUnion]
     class SearchRelatedItemsResponseItem < Struct.new(
+      nil,
       :related_item_id,
       :type,
       :association_time,
@@ -2438,6 +2560,7 @@ module Aws::ConnectCases
     # @!attribute message
     #   @return [String]
     class ServiceQuotaExceededException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -2467,6 +2590,7 @@ module Aws::ConnectCases
     #   <p>Time at which an SLA was completed.</p>
     #   @return [Time]
     class SlaConfiguration < Struct.new(
+      nil,
       :name,
       :type,
       :status,
@@ -2484,6 +2608,7 @@ module Aws::ConnectCases
     #   <p>Represents an SLA configuration.</p>
     #   @return [Types::SlaConfiguration]
     class SlaContent < Struct.new(
+      nil,
       :sla_configuration,
       keyword_init: true
     )
@@ -2498,6 +2623,7 @@ module Aws::ConnectCases
     #   <p>Status of an SLA.</p>
     #   @return [String]
     class SlaFilter < Struct.new(
+      nil,
       :name,
       :status,
       keyword_init: true
@@ -2522,6 +2648,7 @@ module Aws::ConnectCases
     #   <p>Target duration in minutes within which an SLA should be completed.</p>
     #   @return [Integer]
     class SlaInputConfiguration < Struct.new(
+      nil,
       :name,
       :type,
       :field_id,
@@ -2555,6 +2682,7 @@ module Aws::ConnectCases
     #   <p>A structured set of sort terms</p>
     #   @return [String]
     class Sort < Struct.new(
+      nil,
       :field_id,
       :sort_order,
       keyword_init: true
@@ -2569,6 +2697,7 @@ module Aws::ConnectCases
     #   <p>A map of of key-value pairs that represent tags on a resource. Tags are used to organize, track, or control access for this resource.</p>
     #   @return [Hash<String, String>]
     class TagResourceInput < Struct.new(
+      nil,
       :arn,
       :tags,
       keyword_init: true
@@ -2584,6 +2713,7 @@ module Aws::ConnectCases
     #   <p>Unique identifier of a field.</p>
     #   @return [String]
     class TemplateRule < Struct.new(
+      nil,
       :case_rule_id,
       :field_id,
       keyword_init: true
@@ -2605,6 +2735,7 @@ module Aws::ConnectCases
     #   <p>The status of the template.</p>
     #   @return [String]
     class TemplateSummary < Struct.new(
+      nil,
       :template_id,
       :template_arn,
       :name,
@@ -2618,6 +2749,7 @@ module Aws::ConnectCases
     # @!attribute message
     #   @return [String]
     class ThrottlingException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -2631,6 +2763,7 @@ module Aws::ConnectCases
     #   <p>List of tag keys.</p>
     #   @return [Array<String>]
     class UntagResourceInput < Struct.new(
+      nil,
       :arn,
       :tag_keys,
       keyword_init: true
@@ -2651,6 +2784,7 @@ module Aws::ConnectCases
     #   <p>Represents the entity that performed the action.</p>
     #   @return [Types::UserUnion]
     class UpdateCaseInput < Struct.new(
+      nil,
       :domain_id,
       :case_id,
       :fields,
@@ -2661,6 +2795,7 @@ module Aws::ConnectCases
     end
 
     class UpdateCaseOutput < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -2682,6 +2817,7 @@ module Aws::ConnectCases
     #   <p>Represents what rule type should take place, under what conditions.</p>
     #   @return [Types::CaseRuleDetails]
     class UpdateCaseRuleRequest < Struct.new(
+      nil,
       :domain_id,
       :case_rule_id,
       :name,
@@ -2693,6 +2829,7 @@ module Aws::ConnectCases
     end
 
     class UpdateCaseRuleResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -2711,6 +2848,7 @@ module Aws::ConnectCases
     #   <p>The description of a field.</p>
     #   @return [String]
     class UpdateFieldInput < Struct.new(
+      nil,
       :domain_id,
       :field_id,
       :name,
@@ -2721,6 +2859,7 @@ module Aws::ConnectCases
     end
 
     class UpdateFieldOutput < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -2739,6 +2878,7 @@ module Aws::ConnectCases
     #   <p>Information about which fields will be present in the layout, the order of the fields.</p>
     #   @return [Types::LayoutContent]
     class UpdateLayoutInput < Struct.new(
+      nil,
       :domain_id,
       :layout_id,
       :name,
@@ -2749,6 +2889,7 @@ module Aws::ConnectCases
     end
 
     class UpdateLayoutOutput < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -2779,6 +2920,7 @@ module Aws::ConnectCases
     #   <p>A list of case rules (also known as <a href="https://docs.aws.amazon.com/connect/latest/adminguide/case-field-conditions.html">case field conditions</a>) on a template.</p>
     #   @return [Array<Types::TemplateRule>]
     class UpdateTemplateInput < Struct.new(
+      nil,
       :domain_id,
       :template_id,
       :name,
@@ -2793,6 +2935,7 @@ module Aws::ConnectCases
     end
 
     class UpdateTemplateOutput < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -2822,6 +2965,7 @@ module Aws::ConnectCases
     # @!attribute message
     #   @return [String]
     class ValidationException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )

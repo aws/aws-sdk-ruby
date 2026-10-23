@@ -11,6 +11,7 @@ module Aws::LexModelBuildingService
     # @!attribute message
     #   @return [String]
     class AccessDeniedException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -23,6 +24,7 @@ module Aws::LexModelBuildingService
     # @!attribute message
     #   @return [String]
     class BadRequestException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -57,6 +59,7 @@ module Aws::LexModelBuildingService
     #         alias.</p>
     #   @return [Types::ConversationLogsResponse]
     class BotAliasMetadata < Struct.new(
+      nil,
       :name,
       :description,
       :bot_version,
@@ -129,6 +132,7 @@ module Aws::LexModelBuildingService
     #         reason that it failed to create the association.</p>
     #   @return [String]
     class BotChannelAssociation < Struct.new(
+      nil,
       :name,
       :description,
       :bot_alias,
@@ -165,6 +169,7 @@ module Aws::LexModelBuildingService
     #           <code>$LATEST</code>.</p>
     #   @return [String]
     class BotMetadata < Struct.new(
+      nil,
       :name,
       :description,
       :status,
@@ -187,6 +192,7 @@ module Aws::LexModelBuildingService
     #         supports.</p>
     #   @return [Array<String>]
     class BuiltinIntentMetadata < Struct.new(
+      nil,
       :signature,
       :supported_locales,
       keyword_init: true
@@ -200,6 +206,7 @@ module Aws::LexModelBuildingService
     #   <p>A list of the slots defined for the intent.</p>
     #   @return [String]
     class BuiltinIntentSlot < Struct.new(
+      nil,
       :name,
       keyword_init: true
     )
@@ -216,6 +223,7 @@ module Aws::LexModelBuildingService
     #   <p>A list of target locales for the slot. </p>
     #   @return [Array<String>]
     class BuiltinSlotTypeMetadata < Struct.new(
+      nil,
       :signature,
       :supported_locales,
       keyword_init: true
@@ -233,6 +241,7 @@ module Aws::LexModelBuildingService
     #         invoke your Lambda function. For more information, see <a>using-lambda</a>.</p>
     #   @return [String]
     class CodeHook < Struct.new(
+      nil,
       :uri,
       :message_version,
       keyword_init: true
@@ -245,6 +254,7 @@ module Aws::LexModelBuildingService
     # @!attribute message
     #   @return [String]
     class ConflictException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -265,6 +275,7 @@ module Aws::LexModelBuildingService
     #           IAM Role and Policy for Conversation Logs</a>.</p>
     #   @return [String]
     class ConversationLogsRequest < Struct.new(
+      nil,
       :log_settings,
       :iam_role_arn,
       keyword_init: true
@@ -282,6 +293,7 @@ module Aws::LexModelBuildingService
     #         to CloudWatch Logs or an S3 bucket.</p>
     #   @return [String]
     class ConversationLogsResponse < Struct.new(
+      nil,
       :log_settings,
       :iam_role_arn,
       keyword_init: true
@@ -302,6 +314,7 @@ module Aws::LexModelBuildingService
     #         publishes the <code>$LATEST</code> version.</p>
     #   @return [String]
     class CreateBotVersionRequest < Struct.new(
+      nil,
       :name,
       :checksum,
       keyword_init: true
@@ -402,6 +415,7 @@ module Aws::LexModelBuildingService
     #         Amazon Comprehend for sentiment analysis.</p>
     #   @return [Boolean]
     class CreateBotVersionResponse < Struct.new(
+      nil,
       :name,
       :description,
       :intents,
@@ -437,6 +451,7 @@ module Aws::LexModelBuildingService
     #         publishes the <code>$LATEST</code> version.</p>
     #   @return [String]
     class CreateIntentVersionRequest < Struct.new(
+      nil,
       :name,
       :checksum,
       keyword_init: true
@@ -512,6 +527,7 @@ module Aws::LexModelBuildingService
     #         that the intent activates when the intent is fulfilled.</p>
     #   @return [Array<Types::OutputContext>]
     class CreateIntentVersionResponse < Struct.new(
+      nil,
       :name,
       :description,
       :slots,
@@ -548,6 +564,7 @@ module Aws::LexModelBuildingService
     #         publishes the <code>$LATEST</code> version.</p>
     #   @return [String]
     class CreateSlotTypeVersionRequest < Struct.new(
+      nil,
       :name,
       :checksum,
       keyword_init: true
@@ -591,6 +608,7 @@ module Aws::LexModelBuildingService
     #         type.</p>
     #   @return [Array<Types::SlotTypeConfiguration>]
     class CreateSlotTypeVersionResponse < Struct.new(
+      nil,
       :name,
       :description,
       :enumeration_values,
@@ -614,6 +632,7 @@ module Aws::LexModelBuildingService
     #   <p>The name of the bot that the alias points to.</p>
     #   @return [String]
     class DeleteBotAliasRequest < Struct.new(
+      nil,
       :name,
       :bot_name,
       keyword_init: true
@@ -632,6 +651,7 @@ module Aws::LexModelBuildingService
     #         which this association is being made.</p>
     #   @return [String]
     class DeleteBotChannelAssociationRequest < Struct.new(
+      nil,
       :name,
       :bot_name,
       :bot_alias,
@@ -644,6 +664,7 @@ module Aws::LexModelBuildingService
     #   <p>The name of the bot. The name is case sensitive. </p>
     #   @return [String]
     class DeleteBotRequest < Struct.new(
+      nil,
       :name,
       keyword_init: true
     )
@@ -660,6 +681,7 @@ module Aws::LexModelBuildingService
     #         operation.</p>
     #   @return [String]
     class DeleteBotVersionRequest < Struct.new(
+      nil,
       :name,
       :version,
       keyword_init: true
@@ -671,6 +693,7 @@ module Aws::LexModelBuildingService
     #   <p>The name of the intent. The name is case sensitive. </p>
     #   @return [String]
     class DeleteIntentRequest < Struct.new(
+      nil,
       :name,
       keyword_init: true
     )
@@ -687,6 +710,7 @@ module Aws::LexModelBuildingService
     #         operation.</p>
     #   @return [String]
     class DeleteIntentVersionRequest < Struct.new(
+      nil,
       :name,
       :version,
       keyword_init: true
@@ -698,6 +722,7 @@ module Aws::LexModelBuildingService
     #   <p>The name of the slot type. The name is case sensitive. </p>
     #   @return [String]
     class DeleteSlotTypeRequest < Struct.new(
+      nil,
       :name,
       keyword_init: true
     )
@@ -714,6 +739,7 @@ module Aws::LexModelBuildingService
     #         operation.</p>
     #   @return [String]
     class DeleteSlotTypeVersionRequest < Struct.new(
+      nil,
       :name,
       :version,
       keyword_init: true
@@ -730,6 +756,7 @@ module Aws::LexModelBuildingService
     #         utterance.</p>
     #   @return [String]
     class DeleteUtterancesRequest < Struct.new(
+      nil,
       :bot_name,
       :user_id,
       keyword_init: true
@@ -760,6 +787,7 @@ module Aws::LexModelBuildingService
     #   <p>Additional values related to the slot type value.</p>
     #   @return [Array<String>]
     class EnumerationValue < Struct.new(
+      nil,
       :value,
       :synonyms,
       keyword_init: true
@@ -780,6 +808,7 @@ module Aws::LexModelBuildingService
     #         acknowledge that the intent was canceled. </p>
     #   @return [Types::Statement]
     class FollowUpPrompt < Struct.new(
+      nil,
       :prompt,
       :rejection_statement,
       keyword_init: true
@@ -819,6 +848,7 @@ module Aws::LexModelBuildingService
     #         intent. </p>
     #   @return [Types::CodeHook]
     class FulfillmentActivity < Struct.new(
+      nil,
       :type,
       :code_hook,
       keyword_init: true
@@ -833,6 +863,7 @@ module Aws::LexModelBuildingService
     #   <p>The name of the bot.</p>
     #   @return [String]
     class GetBotAliasRequest < Struct.new(
+      nil,
       :name,
       :bot_name,
       keyword_init: true
@@ -868,6 +899,7 @@ module Aws::LexModelBuildingService
     #         alias.</p>
     #   @return [Types::ConversationLogsResponse]
     class GetBotAliasResponse < Struct.new(
+      nil,
       :name,
       :description,
       :bot_version,
@@ -900,6 +932,7 @@ module Aws::LexModelBuildingService
     #         both "xyzabc" and "abcxyz."</p>
     #   @return [String]
     class GetBotAliasesRequest < Struct.new(
+      nil,
       :bot_name,
       :next_token,
       :max_results,
@@ -920,6 +953,7 @@ module Aws::LexModelBuildingService
     #         token in the next request. </p>
     #   @return [String]
     class GetBotAliasesResponse < Struct.new(
+      nil,
       :bot_aliases,
       :next_token,
       keyword_init: true
@@ -939,6 +973,7 @@ module Aws::LexModelBuildingService
     #         this association is being made.</p>
     #   @return [String]
     class GetBotChannelAssociationRequest < Struct.new(
+      nil,
       :name,
       :bot_name,
       :bot_alias,
@@ -999,6 +1034,7 @@ module Aws::LexModelBuildingService
     #         reason that it failed to create the association.</p>
     #   @return [String]
     class GetBotChannelAssociationResponse < Struct.new(
+      nil,
       :name,
       :description,
       :bot_alias,
@@ -1038,6 +1074,7 @@ module Aws::LexModelBuildingService
     #         parameter.</p>
     #   @return [String]
     class GetBotChannelAssociationsRequest < Struct.new(
+      nil,
       :bot_name,
       :bot_alias,
       :next_token,
@@ -1060,6 +1097,7 @@ module Aws::LexModelBuildingService
     #         pagination token in the next request. </p>
     #   @return [String]
     class GetBotChannelAssociationsResponse < Struct.new(
+      nil,
       :bot_channel_associations,
       :next_token,
       keyword_init: true
@@ -1074,6 +1112,7 @@ module Aws::LexModelBuildingService
     #   <p>The version or alias of the bot.</p>
     #   @return [String]
     class GetBotRequest < Struct.new(
+      nil,
       :name,
       :version_or_alias,
       keyword_init: true
@@ -1192,6 +1231,7 @@ module Aws::LexModelBuildingService
     #         for sentiment analysis.</p>
     #   @return [Boolean]
     class GetBotResponse < Struct.new(
+      nil,
       :name,
       :description,
       :intents,
@@ -1230,6 +1270,7 @@ module Aws::LexModelBuildingService
     #         default is 10.</p>
     #   @return [Integer]
     class GetBotVersionsRequest < Struct.new(
+      nil,
       :name,
       :next_token,
       :max_results,
@@ -1250,6 +1291,7 @@ module Aws::LexModelBuildingService
     #         pagination token in the next request. </p>
     #   @return [String]
     class GetBotVersionsResponse < Struct.new(
+      nil,
       :bots,
       :next_token,
       keyword_init: true
@@ -1273,6 +1315,7 @@ module Aws::LexModelBuildingService
     #         "xyzabc" and "abcxyz."</p>
     #   @return [String]
     class GetBotsRequest < Struct.new(
+      nil,
       :next_token,
       :max_results,
       :name_contains,
@@ -1291,6 +1334,7 @@ module Aws::LexModelBuildingService
     #       </p>
     #   @return [String]
     class GetBotsResponse < Struct.new(
+      nil,
       :bots,
       :next_token,
       keyword_init: true
@@ -1304,6 +1348,7 @@ module Aws::LexModelBuildingService
     #           Kit</i>.</p>
     #   @return [String]
     class GetBuiltinIntentRequest < Struct.new(
+      nil,
       :signature,
       keyword_init: true
     )
@@ -1321,6 +1366,7 @@ module Aws::LexModelBuildingService
     #         each slot type in the intent.</p>
     #   @return [Array<Types::BuiltinIntentSlot>]
     class GetBuiltinIntentResponse < Struct.new(
+      nil,
       :signature,
       :supported_locales,
       :slots,
@@ -1350,6 +1396,7 @@ module Aws::LexModelBuildingService
     #         default is 10.</p>
     #   @return [Integer]
     class GetBuiltinIntentsRequest < Struct.new(
+      nil,
       :locale,
       :signature_contains,
       :next_token,
@@ -1370,6 +1417,7 @@ module Aws::LexModelBuildingService
     #         token in the next request.</p>
     #   @return [String]
     class GetBuiltinIntentsResponse < Struct.new(
+      nil,
       :intents,
       :next_token,
       keyword_init: true
@@ -1396,6 +1444,7 @@ module Aws::LexModelBuildingService
     #         default is 10.</p>
     #   @return [Integer]
     class GetBuiltinSlotTypesRequest < Struct.new(
+      nil,
       :locale,
       :signature_contains,
       :next_token,
@@ -1415,6 +1464,7 @@ module Aws::LexModelBuildingService
     #         types.</p>
     #   @return [String]
     class GetBuiltinSlotTypesResponse < Struct.new(
+      nil,
       :slot_types,
       :next_token,
       keyword_init: true
@@ -1435,6 +1485,7 @@ module Aws::LexModelBuildingService
     #   <p>The format of the exported data.</p>
     #   @return [String]
     class GetExportRequest < Struct.new(
+      nil,
       :name,
       :version,
       :resource_type,
@@ -1485,6 +1536,7 @@ module Aws::LexModelBuildingService
     #         Your code should not rely on the archive structure.</p>
     #   @return [String]
     class GetExportResponse < Struct.new(
+      nil,
       :name,
       :version,
       :resource_type,
@@ -1501,6 +1553,7 @@ module Aws::LexModelBuildingService
     #   <p>The identifier of the import job information to return.</p>
     #   @return [String]
     class GetImportRequest < Struct.new(
+      nil,
       :import_id,
       keyword_init: true
     )
@@ -1534,6 +1587,7 @@ module Aws::LexModelBuildingService
     #         created.</p>
     #   @return [Time]
     class GetImportResponse < Struct.new(
+      nil,
       :name,
       :resource_type,
       :merge_strategy,
@@ -1553,6 +1607,7 @@ module Aws::LexModelBuildingService
     #   <p>The version of the intent.</p>
     #   @return [String]
     class GetIntentRequest < Struct.new(
+      nil,
       :name,
       :version,
       keyword_init: true
@@ -1629,6 +1684,7 @@ module Aws::LexModelBuildingService
     #         that the intent activates when the intent is fulfilled.</p>
     #   @return [Array<Types::OutputContext>]
     class GetIntentResponse < Struct.new(
+      nil,
       :name,
       :description,
       :slots,
@@ -1667,6 +1723,7 @@ module Aws::LexModelBuildingService
     #         The default is 10.</p>
     #   @return [Integer]
     class GetIntentVersionsRequest < Struct.new(
+      nil,
       :name,
       :next_token,
       :max_results,
@@ -1687,6 +1744,7 @@ module Aws::LexModelBuildingService
     #         pagination token in the next request. </p>
     #   @return [String]
     class GetIntentVersionsResponse < Struct.new(
+      nil,
       :intents,
       :next_token,
       keyword_init: true
@@ -1710,6 +1768,7 @@ module Aws::LexModelBuildingService
     #         both "xyzabc" and "abcxyz."</p>
     #   @return [String]
     class GetIntentsRequest < Struct.new(
+      nil,
       :next_token,
       :max_results,
       :name_contains,
@@ -1728,6 +1787,7 @@ module Aws::LexModelBuildingService
     #         intents. </p>
     #   @return [String]
     class GetIntentsResponse < Struct.new(
+      nil,
       :intents,
       :next_token,
       keyword_init: true
@@ -1740,6 +1800,7 @@ module Aws::LexModelBuildingService
     #           <code>migrationID</code> is returned by the  operation.</p>
     #   @return [String]
     class GetMigrationRequest < Struct.new(
+      nil,
       :migration_id,
       keyword_init: true
     )
@@ -1801,6 +1862,7 @@ module Aws::LexModelBuildingService
     #           developer guide</i>.</p>
     #   @return [Array<Types::MigrationAlert>]
     class GetMigrationResponse < Struct.new(
+      nil,
       :migration_id,
       :v1_bot_name,
       :v1_bot_version,
@@ -1842,6 +1904,7 @@ module Aws::LexModelBuildingService
     #         pagination token in the request.</p>
     #   @return [String]
     class GetMigrationsRequest < Struct.new(
+      nil,
       :sort_by_attribute,
       :sort_by_order,
       :v1_bot_name_contains,
@@ -1865,6 +1928,7 @@ module Aws::LexModelBuildingService
     #         migrations.</p>
     #   @return [String]
     class GetMigrationsResponse < Struct.new(
+      nil,
       :migration_summaries,
       :next_token,
       keyword_init: true
@@ -1879,6 +1943,7 @@ module Aws::LexModelBuildingService
     #   <p>The version of the slot type. </p>
     #   @return [String]
     class GetSlotTypeRequest < Struct.new(
+      nil,
       :name,
       :version,
       keyword_init: true
@@ -1922,6 +1987,7 @@ module Aws::LexModelBuildingService
     #         type.</p>
     #   @return [Array<Types::SlotTypeConfiguration>]
     class GetSlotTypeResponse < Struct.new(
+      nil,
       :name,
       :description,
       :enumeration_values,
@@ -1952,6 +2018,7 @@ module Aws::LexModelBuildingService
     #         The default is 10.</p>
     #   @return [Integer]
     class GetSlotTypeVersionsRequest < Struct.new(
+      nil,
       :name,
       :next_token,
       :max_results,
@@ -1972,6 +2039,7 @@ module Aws::LexModelBuildingService
     #         specify the pagination token in the next request. </p>
     #   @return [String]
     class GetSlotTypeVersionsResponse < Struct.new(
+      nil,
       :slot_types,
       :next_token,
       keyword_init: true
@@ -1995,6 +2063,7 @@ module Aws::LexModelBuildingService
     #         both "xyzabc" and "abcxyz."</p>
     #   @return [String]
     class GetSlotTypesRequest < Struct.new(
+      nil,
       :next_token,
       :max_results,
       :name_contains,
@@ -2014,6 +2083,7 @@ module Aws::LexModelBuildingService
     #         types.</p>
     #   @return [String]
     class GetSlotTypesResponse < Struct.new(
+      nil,
       :slot_types,
       :next_token,
       keyword_init: true
@@ -2035,6 +2105,7 @@ module Aws::LexModelBuildingService
     #         use <code>Missed</code>.</p>
     #   @return [String]
     class GetUtterancesViewRequest < Struct.new(
+      nil,
       :bot_name,
       :bot_versions,
       :status_type,
@@ -2056,6 +2127,7 @@ module Aws::LexModelBuildingService
     #         days.</p>
     #   @return [Array<Types::UtteranceList>]
     class GetUtterancesViewResponse < Struct.new(
+      nil,
       :bot_name,
       :utterances,
       keyword_init: true
@@ -2069,6 +2141,7 @@ module Aws::LexModelBuildingService
     #   <p>The name of the context.</p>
     #   @return [String]
     class InputContext < Struct.new(
+      nil,
       :name,
       keyword_init: true
     )
@@ -2083,6 +2156,7 @@ module Aws::LexModelBuildingService
     #   <p>The version of the intent.</p>
     #   @return [String]
     class Intent < Struct.new(
+      nil,
       :intent_name,
       :intent_version,
       keyword_init: true
@@ -2108,6 +2182,7 @@ module Aws::LexModelBuildingService
     #   <p>The version of the intent.</p>
     #   @return [String]
     class IntentMetadata < Struct.new(
+      nil,
       :name,
       :description,
       :last_updated_date,
@@ -2122,6 +2197,7 @@ module Aws::LexModelBuildingService
     # @!attribute message
     #   @return [String]
     class InternalFailureException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -2155,6 +2231,7 @@ module Aws::LexModelBuildingService
     #         when you call the <code>PutIntent</code> operation.</p>
     #   @return [String]
     class KendraConfiguration < Struct.new(
+      nil,
       :kendra_index,
       :query_filter_string,
       :role,
@@ -2169,6 +2246,7 @@ module Aws::LexModelBuildingService
     # @!attribute message
     #   @return [String]
     class LimitExceededException < Struct.new(
+      nil,
       :retry_after_seconds,
       :message,
       keyword_init: true
@@ -2181,6 +2259,7 @@ module Aws::LexModelBuildingService
     #         for.</p>
     #   @return [String]
     class ListTagsForResourceRequest < Struct.new(
+      nil,
       :resource_arn,
       keyword_init: true
     )
@@ -2191,6 +2270,7 @@ module Aws::LexModelBuildingService
     #   <p>The tags associated with a resource.</p>
     #   @return [Array<Types::Tag>]
     class ListTagsForResourceResponse < Struct.new(
+      nil,
       :tags,
       keyword_init: true
     )
@@ -2218,6 +2298,7 @@ module Aws::LexModelBuildingService
     #         bucket where the logs should be delivered.</p>
     #   @return [String]
     class LogSettingsRequest < Struct.new(
+      nil,
       :log_type,
       :destination,
       :kms_key_arn,
@@ -2249,6 +2330,7 @@ module Aws::LexModelBuildingService
     #         specified. </p>
     #   @return [String]
     class LogSettingsResponse < Struct.new(
+      nil,
       :log_type,
       :destination,
       :kms_key_arn,
@@ -2273,6 +2355,7 @@ module Aws::LexModelBuildingService
     #         response.</p>
     #   @return [Integer]
     class Message < Struct.new(
+      nil,
       :content_type,
       :content,
       :group_number,
@@ -2311,6 +2394,7 @@ module Aws::LexModelBuildingService
     #       the alert.</p>
     #   @return [Array<String>]
     class MigrationAlert < Struct.new(
+      nil,
       :type,
       :message,
       :details,
@@ -2351,6 +2435,7 @@ module Aws::LexModelBuildingService
     #   <p>The date and time that the migration started.</p>
     #   @return [Time]
     class MigrationSummary < Struct.new(
+      nil,
       :migration_id,
       :v1_bot_name,
       :v1_bot_version,
@@ -2370,6 +2455,7 @@ module Aws::LexModelBuildingService
     # @!attribute message
     #   @return [String]
     class NotFoundException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -2393,6 +2479,7 @@ module Aws::LexModelBuildingService
     #         request and the corresponding response from Amazon Lex.</p>
     #   @return [Integer]
     class OutputContext < Struct.new(
+      nil,
       :name,
       :time_to_live_in_seconds,
       :turns_to_live,
@@ -2407,6 +2494,7 @@ module Aws::LexModelBuildingService
     # @!attribute message
     #   @return [String]
     class PreconditionFailedException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -2432,6 +2520,7 @@ module Aws::LexModelBuildingService
     #         information, see <a>ex-resp-card</a>. </p>
     #   @return [String]
     class Prompt < Struct.new(
+      nil,
       :messages,
       :max_attempts,
       :response_card,
@@ -2476,6 +2565,7 @@ module Aws::LexModelBuildingService
     #           <code>TagResource</code> operation.</p>
     #   @return [Array<Types::Tag>]
     class PutBotAliasRequest < Struct.new(
+      nil,
       :name,
       :description,
       :bot_version,
@@ -2519,6 +2609,7 @@ module Aws::LexModelBuildingService
     #   <p>A list of tags associated with a bot.</p>
     #   @return [Array<Types::Tag>]
     class PutBotAliasResponse < Struct.new(
+      nil,
       :name,
       :description,
       :bot_version,
@@ -2777,6 +2868,7 @@ module Aws::LexModelBuildingService
     #         operation.</p>
     #   @return [Array<Types::Tag>]
     class PutBotRequest < Struct.new(
+      nil,
       :name,
       :description,
       :intents,
@@ -2923,6 +3015,7 @@ module Aws::LexModelBuildingService
     #   <p>A list of tags associated with the bot.</p>
     #   @return [Array<Types::Tag>]
     class PutBotResponse < Struct.new(
+      nil,
       :name,
       :description,
       :intents,
@@ -3096,6 +3189,7 @@ module Aws::LexModelBuildingService
     #         that the intent activates when the intent is fulfilled.</p>
     #   @return [Array<Types::OutputContext>]
     class PutIntentRequest < Struct.new(
+      nil,
       :name,
       :description,
       :slots,
@@ -3199,6 +3293,7 @@ module Aws::LexModelBuildingService
     #         that the intent activates when the intent is fulfilled.</p>
     #   @return [Array<Types::OutputContext>]
     class PutIntentResponse < Struct.new(
+      nil,
       :name,
       :description,
       :slots,
@@ -3303,6 +3398,7 @@ module Aws::LexModelBuildingService
     #         type.</p>
     #   @return [Array<Types::SlotTypeConfiguration>]
     class PutSlotTypeRequest < Struct.new(
+      nil,
       :name,
       :description,
       :enumeration_values,
@@ -3360,6 +3456,7 @@ module Aws::LexModelBuildingService
     #         type.</p>
     #   @return [Array<Types::SlotTypeConfiguration>]
     class PutSlotTypeResponse < Struct.new(
+      nil,
       :name,
       :description,
       :enumeration_values,
@@ -3400,6 +3497,7 @@ module Aws::LexModelBuildingService
     #           <code>ResourceInUseException</code> exception. </p>
     #   @return [Types::ResourceReference]
     class ResourceInUseException < Struct.new(
+      nil,
       :reference_type,
       :example_reference,
       keyword_init: true
@@ -3419,6 +3517,7 @@ module Aws::LexModelBuildingService
     #         trying to delete.</p>
     #   @return [String]
     class ResourceReference < Struct.new(
+      nil,
       :name,
       :version,
       keyword_init: true
@@ -3479,6 +3578,7 @@ module Aws::LexModelBuildingService
     #         from context variables, session attributes, and defined values.</p>
     #   @return [Types::SlotDefaultValueSpec]
     class Slot < Struct.new(
+      nil,
       :name,
       :description,
       :slot_constraint,
@@ -3517,6 +3617,7 @@ module Aws::LexModelBuildingService
     #            </ul>
     #   @return [String]
     class SlotDefaultValue < Struct.new(
+      nil,
       :default_value,
       keyword_init: true
     )
@@ -3535,6 +3636,7 @@ module Aws::LexModelBuildingService
     #         available, else it uses the fixed value.</p>
     #   @return [Array<Types::SlotDefaultValue>]
     class SlotDefaultValueSpec < Struct.new(
+      nil,
       :default_value_list,
       keyword_init: true
     )
@@ -3546,6 +3648,7 @@ module Aws::LexModelBuildingService
     #   <p>A regular expression used to validate the value of a slot.</p>
     #   @return [Types::SlotTypeRegexConfiguration]
     class SlotTypeConfiguration < Struct.new(
+      nil,
       :regex_configuration,
       keyword_init: true
     )
@@ -3570,6 +3673,7 @@ module Aws::LexModelBuildingService
     #   <p>The version of the slot type.</p>
     #   @return [String]
     class SlotTypeMetadata < Struct.new(
+      nil,
       :name,
       :description,
       :last_updated_date,
@@ -3610,6 +3714,7 @@ module Aws::LexModelBuildingService
     #            </ul>
     #   @return [String]
     class SlotTypeRegexConfiguration < Struct.new(
+      nil,
       :pattern,
       keyword_init: true
     )
@@ -3656,6 +3761,7 @@ module Aws::LexModelBuildingService
     #         you import a bot, you can't add tags to an intent or slot type.</p>
     #   @return [Array<Types::Tag>]
     class StartImportRequest < Struct.new(
+      nil,
       :payload,
       :resource_type,
       :merge_strategy,
@@ -3690,6 +3796,7 @@ module Aws::LexModelBuildingService
     #         requested.</p>
     #   @return [Time]
     class StartImportResponse < Struct.new(
+      nil,
       :name,
       :resource_type,
       :merge_strategy,
@@ -3744,6 +3851,7 @@ module Aws::LexModelBuildingService
     #            </ul>
     #   @return [String]
     class StartMigrationRequest < Struct.new(
+      nil,
       :v1_bot_name,
       :v1_bot_version,
       :v2_bot_name,
@@ -3779,6 +3887,7 @@ module Aws::LexModelBuildingService
     #   <p>The date and time that the migration started.</p>
     #   @return [Time]
     class StartMigrationResponse < Struct.new(
+      nil,
       :v1_bot_name,
       :v1_bot_version,
       :v1_bot_locale,
@@ -3803,6 +3912,7 @@ module Aws::LexModelBuildingService
     #         placeholders in the response card. </p>
     #   @return [String]
     class Statement < Struct.new(
+      nil,
       :messages,
       :response_card,
       keyword_init: true
@@ -3822,6 +3932,7 @@ module Aws::LexModelBuildingService
     #         it can't be null.</p>
     #   @return [String]
     class Tag < Struct.new(
+      nil,
       :key,
       :value,
       keyword_init: true
@@ -3838,6 +3949,7 @@ module Aws::LexModelBuildingService
     #         exists, the existing value is replaced with the new value.</p>
     #   @return [Array<Types::Tag>]
     class TagResourceRequest < Struct.new(
+      nil,
       :resource_arn,
       :tags,
       keyword_init: true
@@ -3846,6 +3958,7 @@ module Aws::LexModelBuildingService
     end
 
     class TagResourceResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -3860,6 +3973,7 @@ module Aws::LexModelBuildingService
     #         exist on the resource, it is ignored.</p>
     #   @return [Array<String>]
     class UntagResourceRequest < Struct.new(
+      nil,
       :resource_arn,
       :tag_keys,
       keyword_init: true
@@ -3868,6 +3982,7 @@ module Aws::LexModelBuildingService
     end
 
     class UntagResourceResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -3892,6 +4007,7 @@ module Aws::LexModelBuildingService
     #   <p>The date that the utterance was last recorded.</p>
     #   @return [Time]
     class UtteranceData < Struct.new(
+      nil,
       :utterance_string,
       :count,
       :distinct_users,
@@ -3914,6 +4030,7 @@ module Aws::LexModelBuildingService
     #         number of object is 100.</p>
     #   @return [Array<Types::UtteranceData>]
     class UtteranceList < Struct.new(
+      nil,
       :bot_version,
       :utterances,
       keyword_init: true

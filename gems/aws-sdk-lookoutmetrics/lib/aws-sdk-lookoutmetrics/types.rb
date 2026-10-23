@@ -10,6 +10,7 @@ module Aws::LookoutMetrics
     # @!attribute message
     #   @return [String]
     class AccessDeniedException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -24,6 +25,7 @@ module Aws::LookoutMetrics
     #   <p>A configuration for an AWS Lambda channel.</p>
     #   @return [Types::LambdaConfiguration]
     class Action < Struct.new(
+      nil,
       :sns_configuration,
       :lambda_configuration,
       keyword_init: true
@@ -35,6 +37,7 @@ module Aws::LookoutMetrics
     #   <p>The ARN of the anomaly detector.</p>
     #   @return [String]
     class ActivateAnomalyDetectorRequest < Struct.new(
+      nil,
       :anomaly_detector_arn,
       keyword_init: true
     )
@@ -42,6 +45,7 @@ module Aws::LookoutMetrics
     end
 
     class ActivateAnomalyDetectorResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -82,6 +86,7 @@ module Aws::LookoutMetrics
     #   <p>The configuration of the alert filters, containing MetricList and DimensionFilter.</p>
     #   @return [Types::AlertFilters]
     class Alert < Struct.new(
+      nil,
       :action,
       :alert_description,
       :alert_arn,
@@ -111,6 +116,7 @@ module Aws::LookoutMetrics
     #   <p>The list of DimensionFilter objects that are used for dimension-based filtering.</p>
     #   @return [Array<Types::DimensionFilter>]
     class AlertFilters < Struct.new(
+      nil,
       :metric_list,
       :dimension_filter_list,
       keyword_init: true
@@ -147,6 +153,7 @@ module Aws::LookoutMetrics
     #   <p>The alert's <a href="https://docs.aws.amazon.com/lookoutmetrics/latest/dev/detectors-tags.html">tags</a>.</p>
     #   @return [Hash<String, String>]
     class AlertSummary < Struct.new(
+      nil,
       :alert_arn,
       :anomaly_detector_arn,
       :alert_name,
@@ -171,6 +178,7 @@ module Aws::LookoutMetrics
     #   <p>The frequency at which the detector analyzes its source data.</p>
     #   @return [String]
     class AnomalyDetectorConfig < Struct.new(
+      nil,
       :anomaly_detector_frequency,
       keyword_init: true
     )
@@ -182,6 +190,7 @@ module Aws::LookoutMetrics
     #   <p>The interval at which the detector analyzes its source data.</p>
     #   @return [String]
     class AnomalyDetectorConfigSummary < Struct.new(
+      nil,
       :anomaly_detector_frequency,
       keyword_init: true
     )
@@ -196,6 +205,7 @@ module Aws::LookoutMetrics
     #   <p>An array of <code>DataQualityMetricList</code> objects. Each object in the array contains information about a data quality metric.</p>
     #   @return [Array<Types::MetricSetDataQualityMetric>]
     class AnomalyDetectorDataQualityMetric < Struct.new(
+      nil,
       :start_timestamp,
       :metric_set_data_quality_metric_list,
       keyword_init: true
@@ -226,6 +236,7 @@ module Aws::LookoutMetrics
     #   <p>The detector's <a href="https://docs.aws.amazon.com/lookoutmetrics/latest/dev/detectors-tags.html">tags</a>.</p>
     #   @return [Hash<String, String>]
     class AnomalyDetectorSummary < Struct.new(
+      nil,
       :anomaly_detector_arn,
       :anomaly_detector_name,
       :anomaly_detector_description,
@@ -258,6 +269,7 @@ module Aws::LookoutMetrics
     #   <p>A list of measures affected by the anomaly.</p>
     #   @return [Array<Types::MetricLevelImpact>]
     class AnomalyGroup < Struct.new(
+      nil,
       :start_time,
       :end_time,
       :anomaly_group_id,
@@ -280,6 +292,7 @@ module Aws::LookoutMetrics
     #   <p>Statistics for individual metrics within the group.</p>
     #   @return [Array<Types::ItemizedMetricStats>]
     class AnomalyGroupStatistics < Struct.new(
+      nil,
       :evaluation_start_date,
       :total_count,
       :itemized_metric_stats_list,
@@ -310,6 +323,7 @@ module Aws::LookoutMetrics
     #   <p>The name of the primary affected measure for the group.</p>
     #   @return [String]
     class AnomalyGroupSummary < Struct.new(
+      nil,
       :start_time,
       :end_time,
       :anomaly_group_id,
@@ -328,6 +342,7 @@ module Aws::LookoutMetrics
     #   <p>The ID of the metric.</p>
     #   @return [String]
     class AnomalyGroupTimeSeries < Struct.new(
+      nil,
       :anomaly_group_id,
       :time_series_id,
       keyword_init: true
@@ -346,6 +361,7 @@ module Aws::LookoutMetrics
     #   <p>Feedback on whether the metric is a legitimate anomaly.</p>
     #   @return [Boolean]
     class AnomalyGroupTimeSeriesFeedback < Struct.new(
+      nil,
       :anomaly_group_id,
       :time_series_id,
       :is_anomaly,
@@ -362,6 +378,7 @@ module Aws::LookoutMetrics
     #   <p> name of the flow.</p>
     #   @return [String]
     class AppFlowConfig < Struct.new(
+      nil,
       :role_arn,
       :flow_name,
       keyword_init: true
@@ -392,6 +409,7 @@ module Aws::LookoutMetrics
     #   <p>Settings for backtest mode.</p>
     #   @return [Types::BackTestConfiguration]
     class AthenaSourceConfig < Struct.new(
+      nil,
       :role_arn,
       :database_name,
       :data_catalog,
@@ -424,6 +442,7 @@ module Aws::LookoutMetrics
     #   <p>A list of binary values.</p>
     #   @return [Array<String>]
     class AttributeValue < Struct.new(
+      nil,
       :s,
       :n,
       :b,
@@ -440,6 +459,7 @@ module Aws::LookoutMetrics
     #   <p>The source's source config.</p>
     #   @return [Types::AutoDetectionS3SourceConfig]
     class AutoDetectionMetricSource < Struct.new(
+      nil,
       :s3_source_config,
       keyword_init: true
     )
@@ -454,6 +474,7 @@ module Aws::LookoutMetrics
     #   <p>The config's historical data path list.</p>
     #   @return [Array<String>]
     class AutoDetectionS3SourceConfig < Struct.new(
+      nil,
       :templated_path_list,
       :historical_data_path_list,
       keyword_init: true
@@ -465,6 +486,7 @@ module Aws::LookoutMetrics
     #   <p>The Amazon Resource Name (ARN) of the anomaly detector.</p>
     #   @return [String]
     class BackTestAnomalyDetectorRequest < Struct.new(
+      nil,
       :anomaly_detector_arn,
       keyword_init: true
     )
@@ -472,6 +494,7 @@ module Aws::LookoutMetrics
     end
 
     class BackTestAnomalyDetectorResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -482,6 +505,7 @@ module Aws::LookoutMetrics
     #   <p>Run a backtest instead of monitoring new data.</p>
     #   @return [Boolean]
     class BackTestConfiguration < Struct.new(
+      nil,
       :run_back_test_mode,
       keyword_init: true
     )
@@ -496,6 +520,7 @@ module Aws::LookoutMetrics
     #   <p>Settings for backtest mode.</p>
     #   @return [Types::BackTestConfiguration]
     class CloudWatchConfig < Struct.new(
+      nil,
       :role_arn,
       :back_test_configuration,
       keyword_init: true
@@ -513,6 +538,7 @@ module Aws::LookoutMetrics
     #   <p>The type of the resource.</p>
     #   @return [String]
     class ConflictException < Struct.new(
+      nil,
       :message,
       :resource_id,
       :resource_type,
@@ -526,6 +552,7 @@ module Aws::LookoutMetrics
     #   <p>A list of contributing dimensions.</p>
     #   @return [Array<Types::DimensionContribution>]
     class ContributionMatrix < Struct.new(
+      nil,
       :dimension_contribution_list,
       keyword_init: true
     )
@@ -554,6 +581,7 @@ module Aws::LookoutMetrics
     #   <p>The configuration of the alert filters, containing MetricList and DimensionFilterList.</p>
     #   @return [Types::AlertFilters]
     class CreateAlertRequest < Struct.new(
+      nil,
       :alert_name,
       :alert_sensitivity_threshold,
       :alert_description,
@@ -570,6 +598,7 @@ module Aws::LookoutMetrics
     #   <p>The ARN of the alert.</p>
     #   @return [String]
     class CreateAlertResponse < Struct.new(
+      nil,
       :alert_arn,
       keyword_init: true
     )
@@ -592,6 +621,7 @@ module Aws::LookoutMetrics
     #   <p>A list of <a href="https://docs.aws.amazon.com/lookoutmetrics/latest/dev/detectors-tags.html">tags</a> to apply to the anomaly detector.</p>
     #   @return [Hash<String, String>]
     class CreateAnomalyDetectorRequest < Struct.new(
+      nil,
       :anomaly_detector_name,
       :anomaly_detector_description,
       :anomaly_detector_config,
@@ -606,6 +636,7 @@ module Aws::LookoutMetrics
     #   <p>The ARN of the detector.</p>
     #   @return [String]
     class CreateAnomalyDetectorResponse < Struct.new(
+      nil,
       :anomaly_detector_arn,
       keyword_init: true
     )
@@ -649,6 +680,7 @@ module Aws::LookoutMetrics
     #   <p>A list of filters that specify which data is kept for anomaly detection.</p>
     #   @return [Array<Types::MetricSetDimensionFilter>]
     class CreateMetricSetRequest < Struct.new(
+      nil,
       :anomaly_detector_arn,
       :metric_set_name,
       :metric_set_description,
@@ -670,6 +702,7 @@ module Aws::LookoutMetrics
     #   <p>The ARN of the dataset.</p>
     #   @return [String]
     class CreateMetricSetResponse < Struct.new(
+      nil,
       :metric_set_arn,
       keyword_init: true
     )
@@ -696,6 +729,7 @@ module Aws::LookoutMetrics
     #   <p>The character used as a quote character.</p>
     #   @return [String]
     class CsvFormatDescriptor < Struct.new(
+      nil,
       :file_compression,
       :charset,
       :contains_header,
@@ -721,6 +755,7 @@ module Aws::LookoutMetrics
     #   <p>The value of the data quality metric.</p>
     #   @return [Float]
     class DataQualityMetric < Struct.new(
+      nil,
       :metric_type,
       :metric_description,
       :related_column_name,
@@ -734,6 +769,7 @@ module Aws::LookoutMetrics
     #   <p>The Amazon Resource Name (ARN) of the anomaly detector.</p>
     #   @return [String]
     class DeactivateAnomalyDetectorRequest < Struct.new(
+      nil,
       :anomaly_detector_arn,
       keyword_init: true
     )
@@ -741,6 +777,7 @@ module Aws::LookoutMetrics
     end
 
     class DeactivateAnomalyDetectorResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -750,6 +787,7 @@ module Aws::LookoutMetrics
     #   <p>The ARN of the alert to delete.</p>
     #   @return [String]
     class DeleteAlertRequest < Struct.new(
+      nil,
       :alert_arn,
       keyword_init: true
     )
@@ -757,6 +795,7 @@ module Aws::LookoutMetrics
     end
 
     class DeleteAlertResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -766,6 +805,7 @@ module Aws::LookoutMetrics
     #   <p>The ARN of the detector to delete.</p>
     #   @return [String]
     class DeleteAnomalyDetectorRequest < Struct.new(
+      nil,
       :anomaly_detector_arn,
       keyword_init: true
     )
@@ -773,6 +813,7 @@ module Aws::LookoutMetrics
     end
 
     class DeleteAnomalyDetectorResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -782,6 +823,7 @@ module Aws::LookoutMetrics
     #   <p>The ARN of the alert to describe.</p>
     #   @return [String]
     class DescribeAlertRequest < Struct.new(
+      nil,
       :alert_arn,
       keyword_init: true
     )
@@ -792,6 +834,7 @@ module Aws::LookoutMetrics
     #   <p>Contains information about an alert.</p>
     #   @return [Types::Alert]
     class DescribeAlertResponse < Struct.new(
+      nil,
       :alert,
       keyword_init: true
     )
@@ -811,6 +854,7 @@ module Aws::LookoutMetrics
     #   <p>Specify the pagination token that's returned by a previous request to retrieve the next page of results.</p>
     #   @return [String]
     class DescribeAnomalyDetectionExecutionsRequest < Struct.new(
+      nil,
       :anomaly_detector_arn,
       :timestamp,
       :max_results,
@@ -827,6 +871,7 @@ module Aws::LookoutMetrics
     #   <p>The pagination token that's included if more results are available.</p>
     #   @return [String]
     class DescribeAnomalyDetectionExecutionsResponse < Struct.new(
+      nil,
       :execution_list,
       :next_token,
       keyword_init: true
@@ -838,6 +883,7 @@ module Aws::LookoutMetrics
     #   <p>The ARN of the detector to describe.</p>
     #   @return [String]
     class DescribeAnomalyDetectorRequest < Struct.new(
+      nil,
       :anomaly_detector_arn,
       keyword_init: true
     )
@@ -875,6 +921,7 @@ module Aws::LookoutMetrics
     #   <p>The process that caused the detector to fail.</p>
     #   @return [String]
     class DescribeAnomalyDetectorResponse < Struct.new(
+      nil,
       :anomaly_detector_arn,
       :anomaly_detector_name,
       :anomaly_detector_description,
@@ -894,6 +941,7 @@ module Aws::LookoutMetrics
     #   <p>The ARN of the dataset.</p>
     #   @return [String]
     class DescribeMetricSetRequest < Struct.new(
+      nil,
       :metric_set_arn,
       keyword_init: true
     )
@@ -943,6 +991,7 @@ module Aws::LookoutMetrics
     #   <p>The dimensions and their values that were used to filter the dataset.</p>
     #   @return [Array<Types::MetricSetDimensionFilter>]
     class DescribeMetricSetResponse < Struct.new(
+      nil,
       :metric_set_arn,
       :anomaly_detector_arn,
       :metric_set_name,
@@ -974,6 +1023,7 @@ module Aws::LookoutMetrics
     #   <p>A data source.</p>
     #   @return [Types::AutoDetectionMetricSource]
     class DetectMetricSetConfigRequest < Struct.new(
+      nil,
       :anomaly_detector_arn,
       :auto_detection_metric_source,
       keyword_init: true
@@ -985,6 +1035,7 @@ module Aws::LookoutMetrics
     #   <p>The inferred dataset configuration for the datasource.</p>
     #   @return [Types::DetectedMetricSetConfig]
     class DetectMetricSetConfigResponse < Struct.new(
+      nil,
       :detected_metric_set_config,
       keyword_init: true
     )
@@ -1011,6 +1062,7 @@ module Aws::LookoutMetrics
     #   <p>The format's quote symbol.</p>
     #   @return [Types::DetectedField]
     class DetectedCsvFormatDescriptor < Struct.new(
+      nil,
       :file_compression,
       :charset,
       :contains_header,
@@ -1033,6 +1085,7 @@ module Aws::LookoutMetrics
     #   <p>The field's message.</p>
     #   @return [String]
     class DetectedField < Struct.new(
+      nil,
       :value,
       :confidence,
       :message,
@@ -1049,6 +1102,7 @@ module Aws::LookoutMetrics
     #   <p>Details about a JSON format.</p>
     #   @return [Types::DetectedJsonFormatDescriptor]
     class DetectedFileFormatDescriptor < Struct.new(
+      nil,
       :csv_format_descriptor,
       :json_format_descriptor,
       keyword_init: true
@@ -1064,6 +1118,7 @@ module Aws::LookoutMetrics
     #   <p>The format's character set.</p>
     #   @return [Types::DetectedField]
     class DetectedJsonFormatDescriptor < Struct.new(
+      nil,
       :file_compression,
       :charset,
       keyword_init: true
@@ -1082,6 +1137,7 @@ module Aws::LookoutMetrics
     #   <p>The dataset's data source.</p>
     #   @return [Types::DetectedMetricSource]
     class DetectedMetricSetConfig < Struct.new(
+      nil,
       :offset,
       :metric_set_frequency,
       :metric_source,
@@ -1095,6 +1151,7 @@ module Aws::LookoutMetrics
     #   <p>The data source's source configuration.</p>
     #   @return [Types::DetectedS3SourceConfig]
     class DetectedMetricSource < Struct.new(
+      nil,
       :s3_source_config,
       keyword_init: true
     )
@@ -1106,6 +1163,7 @@ module Aws::LookoutMetrics
     #   <p>The source's file format descriptor.</p>
     #   @return [Types::DetectedFileFormatDescriptor]
     class DetectedS3SourceConfig < Struct.new(
+      nil,
       :file_format_descriptor,
       keyword_init: true
     )
@@ -1120,6 +1178,7 @@ module Aws::LookoutMetrics
     #   <p>A list of dimension values that contributed to the anomaly.</p>
     #   @return [Array<Types::DimensionValueContribution>]
     class DimensionContribution < Struct.new(
+      nil,
       :dimension_name,
       :dimension_value_contribution_list,
       keyword_init: true
@@ -1135,6 +1194,7 @@ module Aws::LookoutMetrics
     #   <p>The list of values for the dimension specified in DimensionName that you want to filter on.</p>
     #   @return [Array<String>]
     class DimensionFilter < Struct.new(
+      nil,
       :dimension_name,
       :dimension_value_list,
       keyword_init: true
@@ -1150,6 +1210,7 @@ module Aws::LookoutMetrics
     #   <p>The value of the dimension.</p>
     #   @return [String]
     class DimensionNameValue < Struct.new(
+      nil,
       :dimension_name,
       :dimension_value,
       keyword_init: true
@@ -1165,6 +1226,7 @@ module Aws::LookoutMetrics
     #   <p>The severity score of the value.</p>
     #   @return [Float]
     class DimensionValueContribution < Struct.new(
+      nil,
       :dimension_value,
       :contribution_score,
       keyword_init: true
@@ -1183,6 +1245,7 @@ module Aws::LookoutMetrics
     #   <p>The reason that the run failed, if applicable.</p>
     #   @return [String]
     class ExecutionStatus < Struct.new(
+      nil,
       :timestamp,
       :status,
       :failure_reason,
@@ -1199,6 +1262,7 @@ module Aws::LookoutMetrics
     #   <p>Contains information about how a source JSON data file should be analyzed.</p>
     #   @return [Types::JsonFormatDescriptor]
     class FileFormatDescriptor < Struct.new(
+      nil,
       :csv_format_descriptor,
       :json_format_descriptor,
       keyword_init: true
@@ -1214,6 +1278,7 @@ module Aws::LookoutMetrics
     #   <p>The condition to apply.</p>
     #   @return [String]
     class Filter < Struct.new(
+      nil,
       :dimension_value,
       :filter_operation,
       keyword_init: true
@@ -1228,6 +1293,7 @@ module Aws::LookoutMetrics
     #   <p>The Amazon Resource Name (ARN) of the anomaly detector.</p>
     #   @return [String]
     class GetAnomalyGroupRequest < Struct.new(
+      nil,
       :anomaly_group_id,
       :anomaly_detector_arn,
       keyword_init: true
@@ -1239,6 +1305,7 @@ module Aws::LookoutMetrics
     #   <p>Details about the anomaly group.</p>
     #   @return [Types::AnomalyGroup]
     class GetAnomalyGroupResponse < Struct.new(
+      nil,
       :anomaly_group,
       keyword_init: true
     )
@@ -1252,6 +1319,7 @@ module Aws::LookoutMetrics
     #   <p>The Amazon Resource Name (ARN) of a specific data quality metric set.</p>
     #   @return [String]
     class GetDataQualityMetricsRequest < Struct.new(
+      nil,
       :anomaly_detector_arn,
       :metric_set_arn,
       keyword_init: true
@@ -1263,6 +1331,7 @@ module Aws::LookoutMetrics
     #   <p>A list of the data quality metrics for the <code>AnomalyDetectorArn</code> that you requested.</p>
     #   @return [Array<Types::AnomalyDetectorDataQualityMetric>]
     class GetDataQualityMetricsResponse < Struct.new(
+      nil,
       :anomaly_detector_data_quality_metric_list,
       keyword_init: true
     )
@@ -1282,6 +1351,7 @@ module Aws::LookoutMetrics
     #   <p>Specify the pagination token that's returned by a previous request to retrieve the next page of results.</p>
     #   @return [String]
     class GetFeedbackRequest < Struct.new(
+      nil,
       :anomaly_detector_arn,
       :anomaly_group_time_series_feedback,
       :max_results,
@@ -1298,6 +1368,7 @@ module Aws::LookoutMetrics
     #   <p>The pagination token that's included if more results are available.</p>
     #   @return [String]
     class GetFeedbackResponse < Struct.new(
+      nil,
       :anomaly_group_time_series_feedback,
       :next_token,
       keyword_init: true
@@ -1309,6 +1380,7 @@ module Aws::LookoutMetrics
     #   <p>A datasource bucket in Amazon S3.</p>
     #   @return [Types::SampleDataS3SourceConfig]
     class GetSampleDataRequest < Struct.new(
+      nil,
       :s3_source_config,
       keyword_init: true
     )
@@ -1322,6 +1394,7 @@ module Aws::LookoutMetrics
     #   <p>A list of records.</p>
     #   @return [Array<Array<String>>]
     class GetSampleDataResponse < Struct.new(
+      nil,
       :header_values,
       :sample_rows,
       keyword_init: true
@@ -1348,6 +1421,7 @@ module Aws::LookoutMetrics
     #               contribution the measure has in causing the anomalies.</p>
     #   @return [Float]
     class InterMetricImpactDetails < Struct.new(
+      nil,
       :metric_name,
       :anomaly_group_id,
       :relationship_type,
@@ -1361,6 +1435,7 @@ module Aws::LookoutMetrics
     # @!attribute message
     #   @return [String]
     class InternalServerException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -1375,6 +1450,7 @@ module Aws::LookoutMetrics
     #   <p>The number of times that the measure appears.</p>
     #   @return [Integer]
     class ItemizedMetricStats < Struct.new(
+      nil,
       :metric_name,
       :occurrence_count,
       keyword_init: true
@@ -1395,6 +1471,7 @@ module Aws::LookoutMetrics
     #   <p>The character set in which the source JSON file is written.</p>
     #   @return [String]
     class JsonFormatDescriptor < Struct.new(
+      nil,
       :file_compression,
       :charset,
       keyword_init: true
@@ -1410,6 +1487,7 @@ module Aws::LookoutMetrics
     #   <p>The ARN of the Lambda function.</p>
     #   @return [String]
     class LambdaConfiguration < Struct.new(
+      nil,
       :role_arn,
       :lambda_arn,
       keyword_init: true
@@ -1428,6 +1506,7 @@ module Aws::LookoutMetrics
     #   <p>The maximum number of results that will be displayed by the request.</p>
     #   @return [Integer]
     class ListAlertsRequest < Struct.new(
+      nil,
       :anomaly_detector_arn,
       :next_token,
       :max_results,
@@ -1444,6 +1523,7 @@ module Aws::LookoutMetrics
     #         token in the next request.</p>
     #   @return [String]
     class ListAlertsResponse < Struct.new(
+      nil,
       :alert_summary_list,
       :next_token,
       keyword_init: true
@@ -1459,6 +1539,7 @@ module Aws::LookoutMetrics
     #         retrieve the next set of results, use the token in the next request. Tokens expire after 24 hours.</p>
     #   @return [String]
     class ListAnomalyDetectorsRequest < Struct.new(
+      nil,
       :max_results,
       :next_token,
       keyword_init: true
@@ -1474,6 +1555,7 @@ module Aws::LookoutMetrics
     #         token in the next request.</p>
     #   @return [String]
     class ListAnomalyDetectorsResponse < Struct.new(
+      nil,
       :anomaly_detector_summary_list,
       :next_token,
       keyword_init: true
@@ -1499,6 +1581,7 @@ module Aws::LookoutMetrics
     #               page of results.</p>
     #   @return [String]
     class ListAnomalyGroupRelatedMetricsRequest < Struct.new(
+      nil,
       :anomaly_detector_arn,
       :anomaly_group_id,
       :relationship_type_filter,
@@ -1517,6 +1600,7 @@ module Aws::LookoutMetrics
     #   <p>The pagination token that's included if more results are available.</p>
     #   @return [String]
     class ListAnomalyGroupRelatedMetricsResponse < Struct.new(
+      nil,
       :inter_metric_impact_list,
       :next_token,
       keyword_init: true
@@ -1537,6 +1621,7 @@ module Aws::LookoutMetrics
     #   <p>Specify the pagination token that's returned by a previous request to retrieve the next page of results.</p>
     #   @return [String]
     class ListAnomalyGroupSummariesRequest < Struct.new(
+      nil,
       :anomaly_detector_arn,
       :sensitivity_threshold,
       :max_results,
@@ -1556,6 +1641,7 @@ module Aws::LookoutMetrics
     #   <p>The pagination token that's included if more results are available.</p>
     #   @return [String]
     class ListAnomalyGroupSummariesResponse < Struct.new(
+      nil,
       :anomaly_group_summary_list,
       :anomaly_group_statistics,
       :next_token,
@@ -1580,6 +1666,7 @@ module Aws::LookoutMetrics
     #   <p>Specify the pagination token that's returned by a previous request to retrieve the next page of results.</p>
     #   @return [String]
     class ListAnomalyGroupTimeSeriesRequest < Struct.new(
+      nil,
       :anomaly_detector_arn,
       :anomaly_group_id,
       :metric_name,
@@ -1606,6 +1693,7 @@ module Aws::LookoutMetrics
     #   <p>A list of anomalous metrics.</p>
     #   @return [Array<Types::TimeSeries>]
     class ListAnomalyGroupTimeSeriesResponse < Struct.new(
+      nil,
       :anomaly_group_id,
       :metric_name,
       :timestamp_list,
@@ -1628,6 +1716,7 @@ module Aws::LookoutMetrics
     #         request. Tokens expire after 24 hours.</p>
     #   @return [String]
     class ListMetricSetsRequest < Struct.new(
+      nil,
       :anomaly_detector_arn,
       :max_results,
       :next_token,
@@ -1644,6 +1733,7 @@ module Aws::LookoutMetrics
     #         of results, use the token in the next list request. </p>
     #   @return [String]
     class ListMetricSetsResponse < Struct.new(
+      nil,
       :metric_set_summary_list,
       :next_token,
       keyword_init: true
@@ -1655,6 +1745,7 @@ module Aws::LookoutMetrics
     #   <p>The resource's Amazon Resource Name (ARN).</p>
     #   @return [String]
     class ListTagsForResourceRequest < Struct.new(
+      nil,
       :resource_arn,
       keyword_init: true
     )
@@ -1665,6 +1756,7 @@ module Aws::LookoutMetrics
     #   <p>The resource's tags.</p>
     #   @return [Hash<String, String>]
     class ListTagsForResourceResponse < Struct.new(
+      nil,
       :tags,
       keyword_init: true
     )
@@ -1682,6 +1774,7 @@ module Aws::LookoutMetrics
     #   <p>The namespace for the metric.</p>
     #   @return [String]
     class Metric < Struct.new(
+      nil,
       :metric_name,
       :aggregation_function,
       :namespace,
@@ -1701,6 +1794,7 @@ module Aws::LookoutMetrics
     #   <p>Details about the dimensions that contributed to the anomaly.</p>
     #   @return [Types::ContributionMatrix]
     class MetricLevelImpact < Struct.new(
+      nil,
       :metric_name,
       :num_time_series,
       :contribution_matrix,
@@ -1722,6 +1816,7 @@ module Aws::LookoutMetrics
     #   <p>The array of data quality metrics contained in the data quality metric set.</p>
     #   @return [Array<Types::DataQualityMetric>]
     class MetricSetDataQualityMetric < Struct.new(
+      nil,
       :metric_set_arn,
       :data_quality_metric_list,
       keyword_init: true
@@ -1737,6 +1832,7 @@ module Aws::LookoutMetrics
     #   <p>The list of filters that you are applying.</p>
     #   @return [Array<Types::Filter>]
     class MetricSetDimensionFilter < Struct.new(
+      nil,
       :name,
       :filter_list,
       keyword_init: true
@@ -1767,6 +1863,7 @@ module Aws::LookoutMetrics
     #   <p>The dataset's <a href="https://docs.aws.amazon.com/lookoutmetrics/latest/dev/detectors-tags.html">tags</a>.</p>
     #   @return [Hash<String, String>]
     class MetricSetSummary < Struct.new(
+      nil,
       :metric_set_arn,
       :anomaly_detector_arn,
       :metric_set_description,
@@ -1799,6 +1896,7 @@ module Aws::LookoutMetrics
     #   <p>Details about an Amazon Athena datasource.</p>
     #   @return [Types::AthenaSourceConfig]
     class MetricSource < Struct.new(
+      nil,
       :s3_source_config,
       :app_flow_config,
       :cloud_watch_config,
@@ -1817,6 +1915,7 @@ module Aws::LookoutMetrics
     #   <p>Feedback for an anomalous metric.</p>
     #   @return [Types::AnomalyGroupTimeSeriesFeedback]
     class PutFeedbackRequest < Struct.new(
+      nil,
       :anomaly_detector_arn,
       :anomaly_group_time_series_feedback,
       keyword_init: true
@@ -1825,6 +1924,7 @@ module Aws::LookoutMetrics
     end
 
     class PutFeedbackResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1856,6 +1956,7 @@ module Aws::LookoutMetrics
     #   <p>An object containing information about the Amazon Virtual Private Cloud (VPC) configuration.</p>
     #   @return [Types::VpcConfiguration]
     class RDSSourceConfig < Struct.new(
+      nil,
       :db_instance_identifier,
       :database_host,
       :database_port,
@@ -1895,6 +1996,7 @@ module Aws::LookoutMetrics
     #   <p>Contains information about the Amazon Virtual Private Cloud (VPC) configuration.</p>
     #   @return [Types::VpcConfiguration]
     class RedshiftSourceConfig < Struct.new(
+      nil,
       :cluster_identifier,
       :database_host,
       :database_port,
@@ -1918,6 +2020,7 @@ module Aws::LookoutMetrics
     #   <p>The type of the resource.</p>
     #   @return [String]
     class ResourceNotFoundException < Struct.new(
+      nil,
       :message,
       :resource_id,
       :resource_type,
@@ -1940,6 +2043,7 @@ module Aws::LookoutMetrics
     #   <p>Contains information about a source file's formatting.</p>
     #   @return [Types::FileFormatDescriptor]
     class S3SourceConfig < Struct.new(
+      nil,
       :role_arn,
       :templated_path_list,
       :historical_data_path_list,
@@ -1975,6 +2079,7 @@ module Aws::LookoutMetrics
     #            </ul>
     #   @return [String]
     class SNSConfiguration < Struct.new(
+      nil,
       :role_arn,
       :sns_topic_arn,
       :sns_format,
@@ -1997,6 +2102,7 @@ module Aws::LookoutMetrics
     #   <p>Contains information about a source file's formatting.</p>
     #   @return [Types::FileFormatDescriptor]
     class SampleDataS3SourceConfig < Struct.new(
+      nil,
       :role_arn,
       :templated_path_list,
       :historical_data_path_list,
@@ -2022,6 +2128,7 @@ module Aws::LookoutMetrics
     #   <p>The service code.</p>
     #   @return [String]
     class ServiceQuotaExceededException < Struct.new(
+      nil,
       :message,
       :resource_id,
       :resource_type,
@@ -2041,6 +2148,7 @@ module Aws::LookoutMetrics
     #            </p>
     #   @return [Hash<String, String>]
     class TagResourceRequest < Struct.new(
+      nil,
       :resource_arn,
       :tags,
       keyword_init: true
@@ -2049,6 +2157,7 @@ module Aws::LookoutMetrics
     end
 
     class TagResourceResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -2066,6 +2175,7 @@ module Aws::LookoutMetrics
     #   <p>The values for the metric.</p>
     #   @return [Array<Float>]
     class TimeSeries < Struct.new(
+      nil,
       :time_series_id,
       :dimension_list,
       :metric_value_list,
@@ -2082,6 +2192,7 @@ module Aws::LookoutMetrics
     #   <p>Feedback on whether the metric is a legitimate anomaly.</p>
     #   @return [Boolean]
     class TimeSeriesFeedback < Struct.new(
+      nil,
       :time_series_id,
       :is_anomaly,
       keyword_init: true
@@ -2097,6 +2208,7 @@ module Aws::LookoutMetrics
     #   <p>The format of the timestamp column.</p>
     #   @return [String]
     class TimestampColumn < Struct.new(
+      nil,
       :column_name,
       :column_format,
       keyword_init: true
@@ -2108,6 +2220,7 @@ module Aws::LookoutMetrics
     # @!attribute message
     #   @return [String]
     class TooManyRequestsException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -2121,6 +2234,7 @@ module Aws::LookoutMetrics
     #   <p>Keys to remove from the resource's tags.</p>
     #   @return [Array<String>]
     class UntagResourceRequest < Struct.new(
+      nil,
       :resource_arn,
       :tag_keys,
       keyword_init: true
@@ -2129,6 +2243,7 @@ module Aws::LookoutMetrics
     end
 
     class UntagResourceResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -2150,6 +2265,7 @@ module Aws::LookoutMetrics
     #   <p>The configuration of the alert filters, containing MetricList and DimensionFilterList.</p>
     #   @return [Types::AlertFilters]
     class UpdateAlertRequest < Struct.new(
+      nil,
       :alert_arn,
       :alert_description,
       :alert_sensitivity_threshold,
@@ -2164,6 +2280,7 @@ module Aws::LookoutMetrics
     #   <p>The ARN of the updated alert.</p>
     #   @return [String]
     class UpdateAlertResponse < Struct.new(
+      nil,
       :alert_arn,
       keyword_init: true
     )
@@ -2183,6 +2300,7 @@ module Aws::LookoutMetrics
     #   <p>Contains information about the configuration to which the detector will be updated.</p>
     #   @return [Types::AnomalyDetectorConfig]
     class UpdateAnomalyDetectorRequest < Struct.new(
+      nil,
       :anomaly_detector_arn,
       :kms_key_arn,
       :anomaly_detector_description,
@@ -2196,6 +2314,7 @@ module Aws::LookoutMetrics
     #   <p>The ARN of the updated detector.</p>
     #   @return [String]
     class UpdateAnomalyDetectorResponse < Struct.new(
+      nil,
       :anomaly_detector_arn,
       keyword_init: true
     )
@@ -2233,6 +2352,7 @@ module Aws::LookoutMetrics
     #         and the values are joined with an OR operation.</p>
     #   @return [Array<Types::MetricSetDimensionFilter>]
     class UpdateMetricSetRequest < Struct.new(
+      nil,
       :metric_set_arn,
       :metric_set_description,
       :metric_list,
@@ -2251,6 +2371,7 @@ module Aws::LookoutMetrics
     #   <p>The ARN of the dataset.</p>
     #   @return [String]
     class UpdateMetricSetResponse < Struct.new(
+      nil,
       :metric_set_arn,
       keyword_init: true
     )
@@ -2268,6 +2389,7 @@ module Aws::LookoutMetrics
     #   <p>Fields that failed validation.</p>
     #   @return [Array<Types::ValidationExceptionField>]
     class ValidationException < Struct.new(
+      nil,
       :message,
       :reason,
       :fields,
@@ -2284,6 +2406,7 @@ module Aws::LookoutMetrics
     #   <p>The message with more information about the validation exception.</p>
     #   @return [String]
     class ValidationExceptionField < Struct.new(
+      nil,
       :name,
       :message,
       keyword_init: true
@@ -2299,6 +2422,7 @@ module Aws::LookoutMetrics
     #   <p>An array of strings containing the list of security groups.</p>
     #   @return [Array<String>]
     class VpcConfiguration < Struct.new(
+      nil,
       :subnet_id_list,
       :security_group_id_list,
       keyword_init: true

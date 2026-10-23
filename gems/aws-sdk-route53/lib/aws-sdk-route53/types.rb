@@ -45,6 +45,7 @@ module Aws::Route53
     #   <p>The current value for the limit that is specified by <a href="https://docs.aws.amazon.com/Route53/latest/APIReference/API_AccountLimit.html#Route53-Type-AccountLimit-Type">Type</a>.</p>
     #   @return [Integer]
     class AccountLimit < Struct.new(
+      nil,
       :type,
       :value,
       keyword_init: true
@@ -61,6 +62,7 @@ module Aws::Route53
     #   			key-signing key in the same hosted zone.</p>
     #   @return [String]
     class ActivateKeySigningKeyRequest < Struct.new(
+      nil,
       :hosted_zone_id,
       :name,
       keyword_init: true
@@ -73,6 +75,7 @@ module Aws::Route53
     #   			zone.</p>
     #   @return [Types::ChangeInfo]
     class ActivateKeySigningKeyResponse < Struct.new(
+      nil,
       :change_info,
       keyword_init: true
     )
@@ -108,6 +111,7 @@ module Aws::Route53
     #            </note>
     #   @return [String]
     class AlarmIdentifier < Struct.new(
+      nil,
       :region,
       :name,
       keyword_init: true
@@ -533,6 +537,7 @@ module Aws::Route53
     #   			Guide</i>.</p>
     #   @return [Boolean]
     class AliasTarget < Struct.new(
+      nil,
       :hosted_zone_id,
       :dns_name,
       :evaluate_target_health,
@@ -563,6 +568,7 @@ module Aws::Route53
     #               <i>Optional:</i> A comment about the association request.</p>
     #   @return [String]
     class AssociateVPCWithHostedZoneRequest < Struct.new(
+      nil,
       :hosted_zone_id,
       :vpc,
       :comment,
@@ -577,6 +583,7 @@ module Aws::Route53
     #   <p>A complex type that describes the changes made to your hosted zone.</p>
     #   @return [Types::ChangeInfo]
     class AssociateVPCWithHostedZoneResponse < Struct.new(
+      nil,
       :change_info,
       keyword_init: true
     )
@@ -616,6 +623,7 @@ module Aws::Route53
     #   <p>Information about the resource record set to create, delete, or update.</p>
     #   @return [Types::ResourceRecordSet]
     class Change < Struct.new(
+      nil,
       :action,
       :resource_record_set,
       keyword_init: true
@@ -633,6 +641,7 @@ module Aws::Route53
     #   <p>Information about the changes to make to the record sets.</p>
     #   @return [Array<Types::Change>]
     class ChangeBatch < Struct.new(
+      nil,
       :comment,
       :changes,
       keyword_init: true
@@ -668,6 +677,7 @@ module Aws::Route53
     #   <p> Information about changes to a CIDR collection.</p>
     #   @return [Array<Types::CidrCollectionChange>]
     class ChangeCidrCollectionRequest < Struct.new(
+      nil,
       :id,
       :collection_version,
       :changes,
@@ -682,6 +692,7 @@ module Aws::Route53
     #   			not.</p>
     #   @return [String]
     class ChangeCidrCollectionResponse < Struct.new(
+      nil,
       :id,
       keyword_init: true
     )
@@ -707,6 +718,7 @@ module Aws::Route53
     #   <p>A comment you can provide.</p>
     #   @return [String]
     class ChangeInfo < Struct.new(
+      nil,
       :id,
       :status,
       :submitted_at,
@@ -726,6 +738,7 @@ module Aws::Route53
     #   			element.</p>
     #   @return [Types::ChangeBatch]
     class ChangeResourceRecordSetsRequest < Struct.new(
+      nil,
       :hosted_zone_id,
       :change_batch,
       keyword_init: true
@@ -741,6 +754,7 @@ module Aws::Route53
     #   			detailed information about the change.</p>
     #   @return [Types::ChangeInfo]
     class ChangeResourceRecordSetsResponse < Struct.new(
+      nil,
       :change_info,
       keyword_init: true
     )
@@ -774,6 +788,7 @@ module Aws::Route53
     #   			specified health check or hosted zone. You can specify up to 10 keys.</p>
     #   @return [Array<String>]
     class ChangeTagsForResourceRequest < Struct.new(
+      nil,
       :resource_type,
       :resource_id,
       :add_tags,
@@ -785,6 +800,7 @@ module Aws::Route53
 
     # <p>Empty response for the request.</p>
     class ChangeTagsForResourceResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -794,6 +810,7 @@ module Aws::Route53
     # @!attribute message
     #   @return [String]
     class CidrBlockInUseException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -808,6 +825,7 @@ module Aws::Route53
     #   <p>The location name of the CIDR block.</p>
     #   @return [String]
     class CidrBlockSummary < Struct.new(
+      nil,
       :cidr_block,
       :location_name,
       keyword_init: true
@@ -834,6 +852,7 @@ module Aws::Route53
     #   			collection.</p>
     #   @return [Integer]
     class CidrCollection < Struct.new(
+      nil,
       :arn,
       :id,
       :name,
@@ -847,6 +866,7 @@ module Aws::Route53
     # @!attribute message
     #   @return [String]
     class CidrCollectionAlreadyExistsException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -864,6 +884,7 @@ module Aws::Route53
     #   <p>List of CIDR blocks.</p>
     #   @return [Array<String>]
     class CidrCollectionChange < Struct.new(
+      nil,
       :location_name,
       :action,
       :cidr_list,
@@ -876,6 +897,7 @@ module Aws::Route53
     # @!attribute message
     #   @return [String]
     class CidrCollectionInUseException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -887,6 +909,7 @@ module Aws::Route53
     # @!attribute message
     #   @return [String]
     class CidrCollectionVersionMismatchException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -904,6 +927,7 @@ module Aws::Route53
     #   <p>The CIDR collection location name.</p>
     #   @return [String]
     class CidrRoutingConfig < Struct.new(
+      nil,
       :collection_id,
       :location_name,
       keyword_init: true
@@ -949,6 +973,7 @@ module Aws::Route53
     #   				<i>Amazon CloudWatch User Guide</i>.</p>
     #   @return [Array<Types::Dimension>]
     class CloudWatchAlarmConfiguration < Struct.new(
+      nil,
       :evaluation_periods,
       :threshold,
       :comparison_operator,
@@ -980,6 +1005,7 @@ module Aws::Route53
     #   			collection.</p>
     #   @return [Integer]
     class CollectionSummary < Struct.new(
+      nil,
       :arn,
       :id,
       :name,
@@ -995,6 +1021,7 @@ module Aws::Route53
     #   <p></p>
     #   @return [String]
     class ConcurrentModification < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -1029,6 +1056,7 @@ module Aws::Route53
     # @!attribute message
     #   @return [String]
     class ConflictingDomainExists < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -1043,6 +1071,7 @@ module Aws::Route53
     #   <p></p>
     #   @return [String]
     class ConflictingTypes < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -1061,6 +1090,7 @@ module Aws::Route53
     #   			the Earth (-180 - 180). </p>
     #   @return [String]
     class Coordinates < Struct.new(
+      nil,
       :latitude,
       :longitude,
       keyword_init: true
@@ -1078,6 +1108,7 @@ module Aws::Route53
     #   			no additional edge cases to handle.</p>
     #   @return [String]
     class CreateCidrCollectionRequest < Struct.new(
+      nil,
       :name,
       :caller_reference,
       keyword_init: true
@@ -1092,6 +1123,7 @@ module Aws::Route53
     #   <p>A unique URL that represents the location for the CIDR collection.</p>
     #   @return [String]
     class CreateCidrCollectionResponse < Struct.new(
+      nil,
       :collection,
       :location,
       keyword_init: true
@@ -1135,6 +1167,7 @@ module Aws::Route53
     #   <p>A complex type that contains settings for a new health check.</p>
     #   @return [Types::HealthCheckConfig]
     class CreateHealthCheckRequest < Struct.new(
+      nil,
       :caller_reference,
       :health_check_config,
       keyword_init: true
@@ -1150,6 +1183,7 @@ module Aws::Route53
     #   <p>The unique URL representing the new health check.</p>
     #   @return [String]
     class CreateHealthCheckResponse < Struct.new(
+      nil,
       :health_check,
       :location,
       keyword_init: true
@@ -1209,6 +1243,7 @@ module Aws::Route53
     #   				<code>ConflictingDomainsExist</code> error.</p>
     #   @return [String]
     class CreateHostedZoneRequest < Struct.new(
+      nil,
       :name,
       :vpc,
       :caller_reference,
@@ -1238,6 +1273,7 @@ module Aws::Route53
     #   <p>The unique URL representing the new hosted zone.</p>
     #   @return [String]
     class CreateHostedZoneResponse < Struct.new(
+      nil,
       :hosted_zone,
       :change_info,
       :delegation_set,
@@ -1311,6 +1347,7 @@ module Aws::Route53
     #   			value to <code>ACTIVE</code> or <code>INACTIVE</code>.</p>
     #   @return [String]
     class CreateKeySigningKeyRequest < Struct.new(
+      nil,
       :caller_reference,
       :hosted_zone_id,
       :key_management_service_arn,
@@ -1332,6 +1369,7 @@ module Aws::Route53
     #   <p>The unique URL representing the new key-signing key (KSK).</p>
     #   @return [String]
     class CreateKeySigningKeyResponse < Struct.new(
+      nil,
       :change_info,
       :key_signing_key,
       :location,
@@ -1353,6 +1391,7 @@ module Aws::Route53
     #   			command, or the applicable command in one of the Amazon Web Services SDKs.</p>
     #   @return [String]
     class CreateQueryLoggingConfigRequest < Struct.new(
+      nil,
       :hosted_zone_id,
       :cloud_watch_logs_log_group_arn,
       keyword_init: true
@@ -1369,6 +1408,7 @@ module Aws::Route53
     #   <p>The unique URL representing the new query logging configuration.</p>
     #   @return [String]
     class CreateQueryLoggingConfigResponse < Struct.new(
+      nil,
       :query_logging_config,
       :location,
       keyword_init: true
@@ -1389,6 +1429,7 @@ module Aws::Route53
     #   			for that hosted zone.</p>
     #   @return [String]
     class CreateReusableDelegationSetRequest < Struct.new(
+      nil,
       :caller_reference,
       :hosted_zone_id,
       keyword_init: true
@@ -1403,6 +1444,7 @@ module Aws::Route53
     #   <p>The unique URL representing the new reusable delegation set.</p>
     #   @return [String]
     class CreateReusableDelegationSetResponse < Struct.new(
+      nil,
       :delegation_set,
       :location,
       keyword_init: true
@@ -1434,6 +1476,7 @@ module Aws::Route53
     #   			in the specified hosted zone.</p>
     #   @return [Integer]
     class CreateTrafficPolicyInstanceRequest < Struct.new(
+      nil,
       :hosted_zone_id,
       :name,
       :ttl,
@@ -1453,6 +1496,7 @@ module Aws::Route53
     #   <p>A unique URL that represents a new traffic policy instance.</p>
     #   @return [String]
     class CreateTrafficPolicyInstanceResponse < Struct.new(
+      nil,
       :traffic_policy_instance,
       :location,
       keyword_init: true
@@ -1472,6 +1516,7 @@ module Aws::Route53
     #   <p>(Optional) Any comments that you want to include about the traffic policy.</p>
     #   @return [String]
     class CreateTrafficPolicyRequest < Struct.new(
+      nil,
       :name,
       :document,
       :comment,
@@ -1489,6 +1534,7 @@ module Aws::Route53
     #   <p>A unique URL that represents a new traffic policy.</p>
     #   @return [String]
     class CreateTrafficPolicyResponse < Struct.new(
+      nil,
       :traffic_policy,
       :location,
       keyword_init: true
@@ -1511,6 +1557,7 @@ module Aws::Route53
     #   			if any.</p>
     #   @return [String]
     class CreateTrafficPolicyVersionRequest < Struct.new(
+      nil,
       :id,
       :document,
       :comment,
@@ -1529,6 +1576,7 @@ module Aws::Route53
     #   <p>A unique URL that represents a new traffic policy version.</p>
     #   @return [String]
     class CreateTrafficPolicyVersionResponse < Struct.new(
+      nil,
       :traffic_policy,
       :location,
       keyword_init: true
@@ -1548,6 +1596,7 @@ module Aws::Route53
     #   			authorize associating with your hosted zone.</p>
     #   @return [Types::VPC]
     class CreateVPCAssociationAuthorizationRequest < Struct.new(
+      nil,
       :hosted_zone_id,
       :vpc,
       keyword_init: true
@@ -1564,6 +1613,7 @@ module Aws::Route53
     #   <p>The VPC that you authorized associating with a hosted zone.</p>
     #   @return [Types::VPC]
     class CreateVPCAssociationAuthorizationResponse < Struct.new(
+      nil,
       :hosted_zone_id,
       :vpc,
       keyword_init: true
@@ -1575,6 +1625,7 @@ module Aws::Route53
     # @!attribute message
     #   @return [String]
     class DNSSECNotFound < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -1620,6 +1671,7 @@ module Aws::Route53
     #   			the problem might be and steps that you can take to correct the issue.</p>
     #   @return [String]
     class DNSSECStatus < Struct.new(
+      nil,
       :serve_signature,
       :status_message,
       keyword_init: true
@@ -1634,6 +1686,7 @@ module Aws::Route53
     #   <p>A string used to identify a key-signing key (KSK).</p>
     #   @return [String]
     class DeactivateKeySigningKeyRequest < Struct.new(
+      nil,
       :hosted_zone_id,
       :name,
       keyword_init: true
@@ -1646,6 +1699,7 @@ module Aws::Route53
     #   			zone.</p>
     #   @return [Types::ChangeInfo]
     class DeactivateKeySigningKeyResponse < Struct.new(
+      nil,
       :change_info,
       keyword_init: true
     )
@@ -1666,6 +1720,7 @@ module Aws::Route53
     #   			zone or for a reusable delegation set.</p>
     #   @return [Array<String>]
     class DelegationSet < Struct.new(
+      nil,
       :id,
       :caller_reference,
       :name_servers,
@@ -1680,6 +1735,7 @@ module Aws::Route53
     #   <p></p>
     #   @return [String]
     class DelegationSetAlreadyCreated < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -1691,6 +1747,7 @@ module Aws::Route53
     #   <p></p>
     #   @return [String]
     class DelegationSetAlreadyReusable < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -1703,6 +1760,7 @@ module Aws::Route53
     #   <p></p>
     #   @return [String]
     class DelegationSetInUse < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -1717,6 +1775,7 @@ module Aws::Route53
     #   <p></p>
     #   @return [String]
     class DelegationSetNotAvailable < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -1728,6 +1787,7 @@ module Aws::Route53
     #   <p></p>
     #   @return [String]
     class DelegationSetNotReusable < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -1738,6 +1798,7 @@ module Aws::Route53
     #   <p>The UUID of the collection to delete.</p>
     #   @return [String]
     class DeleteCidrCollectionRequest < Struct.new(
+      nil,
       :id,
       keyword_init: true
     )
@@ -1745,6 +1806,7 @@ module Aws::Route53
     end
 
     class DeleteCidrCollectionResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1755,6 +1817,7 @@ module Aws::Route53
     #   <p>The ID of the health check that you want to delete.</p>
     #   @return [String]
     class DeleteHealthCheckRequest < Struct.new(
+      nil,
       :health_check_id,
       keyword_init: true
     )
@@ -1763,6 +1826,7 @@ module Aws::Route53
 
     # <p>An empty element.</p>
     class DeleteHealthCheckResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1773,6 +1837,7 @@ module Aws::Route53
     #   <p>The ID of the hosted zone you want to delete.</p>
     #   @return [String]
     class DeleteHostedZoneRequest < Struct.new(
+      nil,
       :id,
       keyword_init: true
     )
@@ -1786,6 +1851,7 @@ module Aws::Route53
     #   			delete a hosted zone.</p>
     #   @return [Types::ChangeInfo]
     class DeleteHostedZoneResponse < Struct.new(
+      nil,
       :change_info,
       keyword_init: true
     )
@@ -1799,6 +1865,7 @@ module Aws::Route53
     #   <p>A string used to identify a key-signing key (KSK).</p>
     #   @return [String]
     class DeleteKeySigningKeyRequest < Struct.new(
+      nil,
       :hosted_zone_id,
       :name,
       keyword_init: true
@@ -1811,6 +1878,7 @@ module Aws::Route53
     #   			zone.</p>
     #   @return [Types::ChangeInfo]
     class DeleteKeySigningKeyResponse < Struct.new(
+      nil,
       :change_info,
       keyword_init: true
     )
@@ -1821,6 +1889,7 @@ module Aws::Route53
     #   <p>The ID of the configuration that you want to delete. </p>
     #   @return [String]
     class DeleteQueryLoggingConfigRequest < Struct.new(
+      nil,
       :id,
       keyword_init: true
     )
@@ -1828,6 +1897,7 @@ module Aws::Route53
     end
 
     class DeleteQueryLoggingConfigResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1838,6 +1908,7 @@ module Aws::Route53
     #   <p>The ID of the reusable delegation set that you want to delete.</p>
     #   @return [String]
     class DeleteReusableDelegationSetRequest < Struct.new(
+      nil,
       :id,
       keyword_init: true
     )
@@ -1846,6 +1917,7 @@ module Aws::Route53
 
     # <p>An empty element.</p>
     class DeleteReusableDelegationSetResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1861,6 +1933,7 @@ module Aws::Route53
     #            </important>
     #   @return [String]
     class DeleteTrafficPolicyInstanceRequest < Struct.new(
+      nil,
       :id,
       keyword_init: true
     )
@@ -1869,6 +1942,7 @@ module Aws::Route53
 
     # <p>An empty element.</p>
     class DeleteTrafficPolicyInstanceResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1882,6 +1956,7 @@ module Aws::Route53
     #   <p>The version number of the traffic policy that you want to delete.</p>
     #   @return [Integer]
     class DeleteTrafficPolicyRequest < Struct.new(
+      nil,
       :id,
       :version,
       keyword_init: true
@@ -1891,6 +1966,7 @@ module Aws::Route53
 
     # <p>An empty element.</p>
     class DeleteTrafficPolicyResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1907,6 +1983,7 @@ module Aws::Route53
     #   			VPC.</p>
     #   @return [Types::VPC]
     class DeleteVPCAssociationAuthorizationRequest < Struct.new(
+      nil,
       :hosted_zone_id,
       :vpc,
       keyword_init: true
@@ -1916,6 +1993,7 @@ module Aws::Route53
 
     # <p>Empty response for the request.</p>
     class DeleteVPCAssociationAuthorizationResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1932,6 +2010,7 @@ module Aws::Route53
     #   			dimension.</p>
     #   @return [String]
     class Dimension < Struct.new(
+      nil,
       :name,
       :value,
       keyword_init: true
@@ -1943,6 +2022,7 @@ module Aws::Route53
     #   <p>A unique string used to identify a hosted zone.</p>
     #   @return [String]
     class DisableHostedZoneDNSSECRequest < Struct.new(
+      nil,
       :hosted_zone_id,
       keyword_init: true
     )
@@ -1954,6 +2034,7 @@ module Aws::Route53
     #   			zone.</p>
     #   @return [Types::ChangeInfo]
     class DisableHostedZoneDNSSECResponse < Struct.new(
+      nil,
       :change_info,
       keyword_init: true
     )
@@ -1974,6 +2055,7 @@ module Aws::Route53
     #               <i>Optional:</i> A comment about the disassociation request.</p>
     #   @return [String]
     class DisassociateVPCFromHostedZoneRequest < Struct.new(
+      nil,
       :hosted_zone_id,
       :vpc,
       :comment,
@@ -1989,6 +2071,7 @@ module Aws::Route53
     #   			zone.</p>
     #   @return [Types::ChangeInfo]
     class DisassociateVPCFromHostedZoneResponse < Struct.new(
+      nil,
       :change_info,
       keyword_init: true
     )
@@ -1999,6 +2082,7 @@ module Aws::Route53
     #   <p>A unique string used to identify a hosted zone.</p>
     #   @return [String]
     class EnableHostedZoneDNSSECRequest < Struct.new(
+      nil,
       :hosted_zone_id,
       keyword_init: true
     )
@@ -2010,6 +2094,7 @@ module Aws::Route53
     #   			zone.</p>
     #   @return [Types::ChangeInfo]
     class EnableHostedZoneDNSSECResponse < Struct.new(
+      nil,
       :change_info,
       keyword_init: true
     )
@@ -2069,6 +2154,7 @@ module Aws::Route53
     #   				<code>CountryCode</code>. </p>
     #   @return [String]
     class GeoLocation < Struct.new(
+      nil,
       :continent_code,
       :country_code,
       :subdivision_code,
@@ -2103,6 +2189,7 @@ module Aws::Route53
     #   			United States.</p>
     #   @return [String]
     class GeoLocationDetails < Struct.new(
+      nil,
       :continent_code,
       :continent_name,
       :country_code,
@@ -2153,6 +2240,7 @@ module Aws::Route53
     #            </ul>
     #   @return [Integer]
     class GeoProximityLocation < Struct.new(
+      nil,
       :aws_region,
       :local_zone_group,
       :coordinates,
@@ -2198,6 +2286,7 @@ module Aws::Route53
     #            </ul>
     #   @return [String]
     class GetAccountLimitRequest < Struct.new(
+      nil,
       :type,
       keyword_init: true
     )
@@ -2218,6 +2307,7 @@ module Aws::Route53
     #   			number of health checks that you have created using the current account.</p>
     #   @return [Integer]
     class GetAccountLimitResponse < Struct.new(
+      nil,
       :limit,
       :count,
       keyword_init: true
@@ -2237,6 +2327,7 @@ module Aws::Route53
     #   			you submitted the request.</p>
     #   @return [String]
     class GetChangeRequest < Struct.new(
+      nil,
       :id,
       keyword_init: true
     )
@@ -2248,6 +2339,7 @@ module Aws::Route53
     #   <p>A complex type that contains information about the specified change batch.</p>
     #   @return [Types::ChangeInfo]
     class GetChangeResponse < Struct.new(
+      nil,
       :change_info,
       keyword_init: true
     )
@@ -2256,6 +2348,7 @@ module Aws::Route53
 
     # <p>Empty request.</p>
     class GetCheckerIpRangesRequest < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -2267,6 +2360,7 @@ module Aws::Route53
     #   			53 health checkers.</p>
     #   @return [Array<String>]
     class GetCheckerIpRangesResponse < Struct.new(
+      nil,
       :checker_ip_ranges,
       keyword_init: true
     )
@@ -2277,6 +2371,7 @@ module Aws::Route53
     #   <p>A unique string used to identify a hosted zone.</p>
     #   @return [String]
     class GetDNSSECRequest < Struct.new(
+      nil,
       :hosted_zone_id,
       keyword_init: true
     )
@@ -2290,6 +2385,7 @@ module Aws::Route53
     #   <p>The key-signing keys (KSKs) in your account.</p>
     #   @return [Array<Types::KeySigningKey>]
     class GetDNSSECResponse < Struct.new(
+      nil,
       :status,
       :key_signing_keys,
       keyword_init: true
@@ -2347,6 +2443,7 @@ module Aws::Route53
     #   			API.</p>
     #   @return [String]
     class GetGeoLocationRequest < Struct.new(
+      nil,
       :continent_code,
       :country_code,
       :subdivision_code,
@@ -2362,6 +2459,7 @@ module Aws::Route53
     #   			names for the specified geolocation code.</p>
     #   @return [Types::GeoLocationDetails]
     class GetGeoLocationResponse < Struct.new(
+      nil,
       :geo_location_details,
       keyword_init: true
     )
@@ -2370,6 +2468,7 @@ module Aws::Route53
 
     # <p>A request for the number of health checks that are associated with the current Amazon Web Services account.</p>
     class GetHealthCheckCountRequest < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -2381,6 +2480,7 @@ module Aws::Route53
     #   <p>The number of health checks associated with the current Amazon Web Services account.</p>
     #   @return [Integer]
     class GetHealthCheckCountResponse < Struct.new(
+      nil,
       :health_check_count,
       keyword_init: true
     )
@@ -2400,6 +2500,7 @@ module Aws::Route53
     #            </note>
     #   @return [String]
     class GetHealthCheckLastFailureReasonRequest < Struct.new(
+      nil,
       :health_check_id,
       keyword_init: true
     )
@@ -2413,6 +2514,7 @@ module Aws::Route53
     #   			health checker that is reporting a last failure reason. </p>
     #   @return [Array<Types::HealthCheckObservation>]
     class GetHealthCheckLastFailureReasonResponse < Struct.new(
+      nil,
       :health_check_observations,
       keyword_init: true
     )
@@ -2426,6 +2528,7 @@ module Aws::Route53
     #   			check to use. The value can be up to 64 characters long.</p>
     #   @return [String]
     class GetHealthCheckRequest < Struct.new(
+      nil,
       :health_check_id,
       keyword_init: true
     )
@@ -2439,6 +2542,7 @@ module Aws::Route53
     #   			with the current Amazon Web Services account.</p>
     #   @return [Types::HealthCheck]
     class GetHealthCheckResponse < Struct.new(
+      nil,
       :health_check,
       keyword_init: true
     )
@@ -2458,6 +2562,7 @@ module Aws::Route53
     #            </note>
     #   @return [String]
     class GetHealthCheckStatusRequest < Struct.new(
+      nil,
       :health_check_id,
       keyword_init: true
     )
@@ -2472,6 +2577,7 @@ module Aws::Route53
     #   			endpoint.</p>
     #   @return [Array<Types::HealthCheckObservation>]
     class GetHealthCheckStatusResponse < Struct.new(
+      nil,
       :health_check_observations,
       keyword_init: true
     )
@@ -2481,6 +2587,7 @@ module Aws::Route53
     # <p>A request to retrieve a count of all the hosted zones that are associated with the
     # 			current Amazon Web Services account.</p>
     class GetHostedZoneCountRequest < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -2493,6 +2600,7 @@ module Aws::Route53
     #   			current Amazon Web Services account.</p>
     #   @return [Integer]
     class GetHostedZoneCountResponse < Struct.new(
+      nil,
       :hosted_zone_count,
       keyword_init: true
     )
@@ -2521,6 +2629,7 @@ module Aws::Route53
     #   <p>The ID of the hosted zone that you want to get a limit for.</p>
     #   @return [String]
     class GetHostedZoneLimitRequest < Struct.new(
+      nil,
       :type,
       :hosted_zone_id,
       keyword_init: true
@@ -2542,6 +2651,7 @@ module Aws::Route53
     #   			number of records that you have created in the specified hosted zone.</p>
     #   @return [Integer]
     class GetHostedZoneLimitResponse < Struct.new(
+      nil,
       :limit,
       :count,
       keyword_init: true
@@ -2559,6 +2669,7 @@ module Aws::Route53
     #   <p>The ID of the hosted zone that you want to get information about.</p>
     #   @return [String]
     class GetHostedZoneRequest < Struct.new(
+      nil,
       :id,
       keyword_init: true
     )
@@ -2580,6 +2691,7 @@ module Aws::Route53
     #   			specified hosted zone.</p>
     #   @return [Array<Types::VPC>]
     class GetHostedZoneResponse < Struct.new(
+      nil,
       :hosted_zone,
       :delegation_set,
       :vp_cs,
@@ -2593,6 +2705,7 @@ module Aws::Route53
     #   			about.</p>
     #   @return [String]
     class GetQueryLoggingConfigRequest < Struct.new(
+      nil,
       :id,
       keyword_init: true
     )
@@ -2604,6 +2717,7 @@ module Aws::Route53
     #   			you specified in a <a href="https://docs.aws.amazon.com/Route53/latest/APIReference/API_GetQueryLoggingConfig.html">GetQueryLoggingConfig</a> request.</p>
     #   @return [Types::QueryLoggingConfig]
     class GetQueryLoggingConfigResponse < Struct.new(
+      nil,
       :query_logging_config,
       keyword_init: true
     )
@@ -2620,6 +2734,7 @@ module Aws::Route53
     #   <p>The ID of the delegation set that you want to get the limit for.</p>
     #   @return [String]
     class GetReusableDelegationSetLimitRequest < Struct.new(
+      nil,
       :type,
       :delegation_set_id,
       keyword_init: true
@@ -2637,6 +2752,7 @@ module Aws::Route53
     #   			delegation set.</p>
     #   @return [Integer]
     class GetReusableDelegationSetLimitResponse < Struct.new(
+      nil,
       :limit,
       :count,
       keyword_init: true
@@ -2655,6 +2771,7 @@ module Aws::Route53
     #   			for.</p>
     #   @return [String]
     class GetReusableDelegationSetRequest < Struct.new(
+      nil,
       :id,
       keyword_init: true
     )
@@ -2667,6 +2784,7 @@ module Aws::Route53
     #   <p>A complex type that contains information about the reusable delegation set.</p>
     #   @return [Types::DelegationSet]
     class GetReusableDelegationSetResponse < Struct.new(
+      nil,
       :delegation_set,
       keyword_init: true
     )
@@ -2676,6 +2794,7 @@ module Aws::Route53
     # <p>Request to get the number of traffic policy instances that are associated with the
     # 			current Amazon Web Services account.</p>
     class GetTrafficPolicyInstanceCountRequest < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -2687,6 +2806,7 @@ module Aws::Route53
     #   <p>The number of traffic policy instances that are associated with the current Amazon Web Services account.</p>
     #   @return [Integer]
     class GetTrafficPolicyInstanceCountResponse < Struct.new(
+      nil,
       :traffic_policy_instance_count,
       keyword_init: true
     )
@@ -2698,6 +2818,7 @@ module Aws::Route53
     #   <p>The ID of the traffic policy instance that you want to get information about.</p>
     #   @return [String]
     class GetTrafficPolicyInstanceRequest < Struct.new(
+      nil,
       :id,
       keyword_init: true
     )
@@ -2710,6 +2831,7 @@ module Aws::Route53
     #   <p>A complex type that contains settings for the traffic policy instance.</p>
     #   @return [Types::TrafficPolicyInstance]
     class GetTrafficPolicyInstanceResponse < Struct.new(
+      nil,
       :traffic_policy_instance,
       keyword_init: true
     )
@@ -2725,6 +2847,7 @@ module Aws::Route53
     #   			about.</p>
     #   @return [Integer]
     class GetTrafficPolicyRequest < Struct.new(
+      nil,
       :id,
       :version,
       keyword_init: true
@@ -2737,6 +2860,7 @@ module Aws::Route53
     #   <p>A complex type that contains settings for the specified traffic policy.</p>
     #   @return [Types::TrafficPolicy]
     class GetTrafficPolicyResponse < Struct.new(
+      nil,
       :traffic_policy,
       keyword_init: true
     )
@@ -2771,6 +2895,7 @@ module Aws::Route53
     #   			53 is monitoring for this health check.</p>
     #   @return [Types::CloudWatchAlarmConfiguration]
     class HealthCheck < Struct.new(
+      nil,
       :id,
       :caller_reference,
       :linked_service,
@@ -2800,6 +2925,7 @@ module Aws::Route53
     #   <p></p>
     #   @return [String]
     class HealthCheckAlreadyExists < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -3179,6 +3305,7 @@ module Aws::Route53
     #            <p>For more information about Route 53 Application Recovery Controller, see <a href="https://docs.aws.amazon.com/r53recovery/latest/dg/what-is-route-53-recovery.html">Route 53 Application Recovery Controller Developer Guide.</a>.</p>
     #   @return [String]
     class HealthCheckConfig < Struct.new(
+      nil,
       :ip_address,
       :port,
       :type,
@@ -3208,6 +3335,7 @@ module Aws::Route53
     #   <p></p>
     #   @return [String]
     class HealthCheckInUse < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -3229,6 +3357,7 @@ module Aws::Route53
     #   			53 health checker and the time of the failed health check.</p>
     #   @return [Types::StatusReport]
     class HealthCheckObservation < Struct.new(
+      nil,
       :region,
       :ip_address,
       :status_report,
@@ -3242,6 +3371,7 @@ module Aws::Route53
     # @!attribute message
     #   @return [String]
     class HealthCheckVersionMismatch < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -3278,6 +3408,7 @@ module Aws::Route53
     #   			using Route 53. </p>
     #   @return [Types::LinkedService]
     class HostedZone < Struct.new(
+      nil,
       :id,
       :name,
       :caller_reference,
@@ -3296,6 +3427,7 @@ module Aws::Route53
     #   <p></p>
     #   @return [String]
     class HostedZoneAlreadyExists < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -3312,6 +3444,7 @@ module Aws::Route53
     #   <p>A value that indicates whether this is a private hosted zone.</p>
     #   @return [Boolean]
     class HostedZoneConfig < Struct.new(
+      nil,
       :comment,
       :private_zone,
       keyword_init: true
@@ -3346,6 +3479,7 @@ module Aws::Route53
     #   <p>The current value for the limit that is specified by <code>Type</code>.</p>
     #   @return [Integer]
     class HostedZoneLimit < Struct.new(
+      nil,
       :type,
       :value,
       keyword_init: true
@@ -3358,6 +3492,7 @@ module Aws::Route53
     #   <p></p>
     #   @return [String]
     class HostedZoneNotEmpty < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -3369,6 +3504,7 @@ module Aws::Route53
     #   <p></p>
     #   @return [String]
     class HostedZoneNotFound < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -3380,6 +3516,7 @@ module Aws::Route53
     #   <p></p>
     #   @return [String]
     class HostedZoneNotPrivate < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -3405,6 +3542,7 @@ module Aws::Route53
     #   			of <code>OwningService</code> is <code>efs.amazonaws.com</code>.</p>
     #   @return [String]
     class HostedZoneOwner < Struct.new(
+      nil,
       :owning_account,
       :owning_service,
       keyword_init: true
@@ -3417,6 +3555,7 @@ module Aws::Route53
     # @!attribute message
     #   @return [String]
     class HostedZonePartiallyDelegated < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -3441,6 +3580,7 @@ module Aws::Route53
     #   			service.</p>
     #   @return [Types::HostedZoneOwner]
     class HostedZoneSummary < Struct.new(
+      nil,
       :hosted_zone_id,
       :name,
       :owner,
@@ -3454,6 +3594,7 @@ module Aws::Route53
     # @!attribute message
     #   @return [String]
     class IncompatibleVersion < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -3488,6 +3629,7 @@ module Aws::Route53
     # @!attribute message
     #   @return [String]
     class InsufficientCloudWatchLogsResourcePolicy < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -3499,6 +3641,7 @@ module Aws::Route53
     #   <p></p>
     #   @return [String]
     class InvalidArgument < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -3513,6 +3656,7 @@ module Aws::Route53
     # @!attribute message
     #   @return [String]
     class InvalidChangeBatch < Struct.new(
+      nil,
       :messages,
       :message,
       keyword_init: true
@@ -3525,6 +3669,7 @@ module Aws::Route53
     #   <p></p>
     #   @return [String]
     class InvalidDomainName < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -3536,6 +3681,7 @@ module Aws::Route53
     #   <p></p>
     #   @return [String]
     class InvalidInput < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -3547,6 +3693,7 @@ module Aws::Route53
     # @!attribute message
     #   @return [String]
     class InvalidKMSArn < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -3557,6 +3704,7 @@ module Aws::Route53
     # @!attribute message
     #   @return [String]
     class InvalidKeySigningKeyName < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -3568,6 +3716,7 @@ module Aws::Route53
     # @!attribute message
     #   @return [String]
     class InvalidKeySigningKeyStatus < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -3579,6 +3728,7 @@ module Aws::Route53
     # @!attribute message
     #   @return [String]
     class InvalidPaginationToken < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -3590,6 +3740,7 @@ module Aws::Route53
     # @!attribute message
     #   @return [String]
     class InvalidSigningStatus < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -3602,6 +3753,7 @@ module Aws::Route53
     #   <p></p>
     #   @return [String]
     class InvalidTrafficPolicyDocument < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -3614,6 +3766,7 @@ module Aws::Route53
     #   <p></p>
     #   @return [String]
     class InvalidVPCId < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -3759,6 +3912,7 @@ module Aws::Route53
     #   <p>The last time that the key-signing key (KSK) was changed.</p>
     #   @return [Time]
     class KeySigningKey < Struct.new(
+      nil,
       :name,
       :kms_arn,
       :flag,
@@ -3792,6 +3946,7 @@ module Aws::Route53
     # @!attribute message
     #   @return [String]
     class KeySigningKeyAlreadyExists < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -3802,6 +3957,7 @@ module Aws::Route53
     # @!attribute message
     #   @return [String]
     class KeySigningKeyInParentDSRecord < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -3814,6 +3970,7 @@ module Aws::Route53
     # @!attribute message
     #   @return [String]
     class KeySigningKeyInUse < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -3824,6 +3981,7 @@ module Aws::Route53
     # @!attribute message
     #   @return [String]
     class KeySigningKeyWithActiveStatusNotFound < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -3837,6 +3995,7 @@ module Aws::Route53
     #   <p></p>
     #   @return [String]
     class LastVPCAssociation < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -3850,6 +4009,7 @@ module Aws::Route53
     #   <p></p>
     #   @return [String]
     class LimitsExceeded < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -3871,6 +4031,7 @@ module Aws::Route53
     #   			another service, you can't edit or delete it using Amazon Route 53. </p>
     #   @return [String]
     class LinkedService < Struct.new(
+      nil,
       :service_principal,
       :description,
       keyword_init: true
@@ -3892,6 +4053,7 @@ module Aws::Route53
     #   <p>Maximum number of results you want returned.</p>
     #   @return [Integer]
     class ListCidrBlocksRequest < Struct.new(
+      nil,
       :collection_id,
       :location_name,
       :next_token,
@@ -3910,6 +4072,7 @@ module Aws::Route53
     #   <p>A complex type that contains information about the CIDR blocks.</p>
     #   @return [Array<Types::CidrBlockSummary>]
     class ListCidrBlocksResponse < Struct.new(
+      nil,
       :next_token,
       :cidr_blocks,
       keyword_init: true
@@ -3926,6 +4089,7 @@ module Aws::Route53
     #   <p>The maximum number of CIDR collections to return in the response.</p>
     #   @return [Integer]
     class ListCidrCollectionsRequest < Struct.new(
+      nil,
       :next_token,
       :max_results,
       keyword_init: true
@@ -3942,6 +4106,7 @@ module Aws::Route53
     #   <p>A complex type with information about the CIDR collection.</p>
     #   @return [Array<Types::CollectionSummary>]
     class ListCidrCollectionsResponse < Struct.new(
+      nil,
       :next_token,
       :cidr_collections,
       keyword_init: true
@@ -3961,6 +4126,7 @@ module Aws::Route53
     #   <p>The maximum number of CIDR collection locations to return in the response.</p>
     #   @return [Integer]
     class ListCidrLocationsRequest < Struct.new(
+      nil,
       :collection_id,
       :next_token,
       :max_results,
@@ -3978,6 +4144,7 @@ module Aws::Route53
     #   <p>A complex type that contains information about the list of CIDR locations.</p>
     #   @return [Array<Types::LocationSummary>]
     class ListCidrLocationsResponse < Struct.new(
+      nil,
       :next_token,
       :cidr_locations,
       keyword_init: true
@@ -4021,6 +4188,7 @@ module Aws::Route53
     #   			<code>true</code>.</p>
     #   @return [Integer]
     class ListGeoLocationsRequest < Struct.new(
+      nil,
       :start_continent_code,
       :start_country_code,
       :start_subdivision_code,
@@ -4066,6 +4234,7 @@ module Aws::Route53
     #   <p>The value that you specified for <code>MaxItems</code> in the request.</p>
     #   @return [Integer]
     class ListGeoLocationsResponse < Struct.new(
+      nil,
       :geo_location_details_list,
       :is_truncated,
       :next_continent_code,
@@ -4101,6 +4270,7 @@ module Aws::Route53
     #   			only the first 1000 health checks. </p>
     #   @return [Integer]
     class ListHealthChecksRequest < Struct.new(
+      nil,
       :marker,
       :max_items,
       keyword_init: true
@@ -4136,6 +4306,7 @@ module Aws::Route53
     #   				<code>ListHealthChecks</code> that produced the current response.</p>
     #   @return [Integer]
     class ListHealthChecksResponse < Struct.new(
+      nil,
       :health_checks,
       :marker,
       :is_truncated,
@@ -4181,6 +4352,7 @@ module Aws::Route53
     #   			zone in the next group of <code>maxitems</code> hosted zones. </p>
     #   @return [Integer]
     class ListHostedZonesByNameRequest < Struct.new(
+      nil,
       :dns_name,
       :hosted_zone_id,
       :max_items,
@@ -4229,6 +4401,7 @@ module Aws::Route53
     #   				<code>ListHostedZonesByName</code> that produced the current response.</p>
     #   @return [Integer]
     class ListHostedZonesByNameResponse < Struct.new(
+      nil,
       :hosted_zones,
       :dns_name,
       :hosted_zone_id,
@@ -4272,6 +4445,7 @@ module Aws::Route53
     #   			more hosted zones to get.</p>
     #   @return [String]
     class ListHostedZonesByVPCRequest < Struct.new(
+      nil,
       :vpc_id,
       :vpc_region,
       :max_items,
@@ -4296,6 +4470,7 @@ module Aws::Route53
     #   				<code>ListHostedZonesByVPC</code> request.</p>
     #   @return [String]
     class ListHostedZonesByVPCResponse < Struct.new(
+      nil,
       :hosted_zone_summaries,
       :max_items,
       :next_token,
@@ -4334,6 +4509,7 @@ module Aws::Route53
     #   		</p>
     #   @return [String]
     class ListHostedZonesRequest < Struct.new(
+      nil,
       :marker,
       :max_items,
       :delegation_set_id,
@@ -4370,6 +4546,7 @@ module Aws::Route53
     #   				<code>ListHostedZones</code> that produced the current response.</p>
     #   @return [Integer]
     class ListHostedZonesResponse < Struct.new(
+      nil,
       :hosted_zones,
       :marker,
       :is_truncated,
@@ -4408,6 +4585,7 @@ module Aws::Route53
     #   			configurations.</p>
     #   @return [Integer]
     class ListQueryLoggingConfigsRequest < Struct.new(
+      nil,
       :hosted_zone_id,
       :next_token,
       :max_results,
@@ -4430,6 +4608,7 @@ module Aws::Route53
     #   				<code>NextToken</code> in the next request.</p>
     #   @return [String]
     class ListQueryLoggingConfigsResponse < Struct.new(
+      nil,
       :query_logging_configs,
       :next_token,
       keyword_init: true
@@ -4515,6 +4694,7 @@ module Aws::Route53
     #   			record set in the next group of <code>maxitems</code> resource record sets.</p>
     #   @return [Integer]
     class ListResourceRecordSetsRequest < Struct.new(
+      nil,
       :hosted_zone_id,
       :start_record_name,
       :start_record_type,
@@ -4555,6 +4735,7 @@ module Aws::Route53
     #   <p>The maximum number of records you requested.</p>
     #   @return [Integer]
     class ListResourceRecordSetsResponse < Struct.new(
+      nil,
       :resource_record_sets,
       :is_truncated,
       :next_record_name,
@@ -4589,6 +4770,7 @@ module Aws::Route53
     #   			the first 100 reusable delegation sets.</p>
     #   @return [Integer]
     class ListReusableDelegationSetsRequest < Struct.new(
+      nil,
       :marker,
       :max_items,
       keyword_init: true
@@ -4622,6 +4804,7 @@ module Aws::Route53
     #   				<code>ListReusableDelegationSets</code> that produced the current response.</p>
     #   @return [Integer]
     class ListReusableDelegationSetsResponse < Struct.new(
+      nil,
       :delegation_sets,
       :marker,
       :is_truncated,
@@ -4654,6 +4837,7 @@ module Aws::Route53
     #   <p>The ID of the resource for which you want to retrieve tags.</p>
     #   @return [String]
     class ListTagsForResourceRequest < Struct.new(
+      nil,
       :resource_type,
       :resource_id,
       keyword_init: true
@@ -4668,6 +4852,7 @@ module Aws::Route53
     #   			resource.</p>
     #   @return [Types::ResourceTagSet]
     class ListTagsForResourceResponse < Struct.new(
+      nil,
       :resource_tag_set,
       keyword_init: true
     )
@@ -4692,6 +4877,7 @@ module Aws::Route53
     #   			want to get a list of tags.</p>
     #   @return [Array<String>]
     class ListTagsForResourcesRequest < Struct.new(
+      nil,
       :resource_type,
       :resource_ids,
       keyword_init: true
@@ -4705,6 +4891,7 @@ module Aws::Route53
     #   			resources.</p>
     #   @return [Array<Types::ResourceTagSet>]
     class ListTagsForResourcesResponse < Struct.new(
+      nil,
       :resource_tag_sets,
       keyword_init: true
     )
@@ -4732,6 +4919,7 @@ module Aws::Route53
     #   			policy that Route 53 will return if you submit another request.</p>
     #   @return [Integer]
     class ListTrafficPoliciesRequest < Struct.new(
+      nil,
       :traffic_policy_id_marker,
       :max_items,
       keyword_init: true
@@ -4761,6 +4949,7 @@ module Aws::Route53
     #   				<code>ListTrafficPolicies</code> request that produced the current response.</p>
     #   @return [Integer]
     class ListTrafficPoliciesResponse < Struct.new(
+      nil,
       :traffic_policy_summaries,
       :is_truncated,
       :traffic_policy_id_marker,
@@ -4812,6 +5001,7 @@ module Aws::Route53
     #   			instance that Amazon Route 53 will return if you submit another request.</p>
     #   @return [Integer]
     class ListTrafficPolicyInstancesByHostedZoneRequest < Struct.new(
+      nil,
       :hosted_zone_id,
       :traffic_policy_instance_name_marker,
       :traffic_policy_instance_type_marker,
@@ -4851,6 +5041,7 @@ module Aws::Route53
     #   			current response.</p>
     #   @return [Integer]
     class ListTrafficPolicyInstancesByHostedZoneResponse < Struct.new(
+      nil,
       :traffic_policy_instances,
       :traffic_policy_instance_name_marker,
       :traffic_policy_instance_type_marker,
@@ -4923,6 +5114,7 @@ module Aws::Route53
     #   			instance that Amazon Route 53 will return if you submit another request.</p>
     #   @return [Integer]
     class ListTrafficPolicyInstancesByPolicyRequest < Struct.new(
+      nil,
       :traffic_policy_id,
       :traffic_policy_version,
       :hosted_zone_id_marker,
@@ -4969,6 +5161,7 @@ module Aws::Route53
     #   			response.</p>
     #   @return [Integer]
     class ListTrafficPolicyInstancesByPolicyResponse < Struct.new(
+      nil,
       :traffic_policy_instances,
       :hosted_zone_id_marker,
       :traffic_policy_instance_name_marker,
@@ -5030,6 +5223,7 @@ module Aws::Route53
     #   			instance in the next group of <code>MaxItems</code> traffic policy instances.</p>
     #   @return [Integer]
     class ListTrafficPolicyInstancesRequest < Struct.new(
+      nil,
       :hosted_zone_id_marker,
       :traffic_policy_instance_name_marker,
       :traffic_policy_instance_type_marker,
@@ -5075,6 +5269,7 @@ module Aws::Route53
     #   				<code>ListTrafficPolicyInstances</code> that produced the current response.</p>
     #   @return [Integer]
     class ListTrafficPolicyInstancesResponse < Struct.new(
+      nil,
       :traffic_policy_instances,
       :hosted_zone_id_marker,
       :traffic_policy_instance_name_marker,
@@ -5116,6 +5311,7 @@ module Aws::Route53
     #   			Route 53 will return if you submit another request.</p>
     #   @return [Integer]
     class ListTrafficPolicyVersionsRequest < Struct.new(
+      nil,
       :id,
       :traffic_policy_version_marker,
       :max_items,
@@ -5150,6 +5346,7 @@ module Aws::Route53
     #   			response.</p>
     #   @return [Integer]
     class ListTrafficPolicyVersionsResponse < Struct.new(
+      nil,
       :traffic_policies,
       :is_truncated,
       :traffic_policy_version_marker,
@@ -5185,6 +5382,7 @@ module Aws::Route53
     #   				<code>MaxResults</code>, Route 53 returns up to 50 VPCs per page.</p>
     #   @return [Integer]
     class ListVPCAssociationAuthorizationsRequest < Struct.new(
+      nil,
       :hosted_zone_id,
       :next_token,
       :max_results,
@@ -5209,6 +5407,7 @@ module Aws::Route53
     #   			zone.</p>
     #   @return [Array<Types::VPC>]
     class ListVPCAssociationAuthorizationsResponse < Struct.new(
+      nil,
       :hosted_zone_id,
       :next_token,
       :vp_cs,
@@ -5222,6 +5421,7 @@ module Aws::Route53
     #   <p>A string that specifies a location name.</p>
     #   @return [String]
     class LocationSummary < Struct.new(
+      nil,
       :location_name,
       keyword_init: true
     )
@@ -5232,6 +5432,7 @@ module Aws::Route53
     # @!attribute message
     #   @return [String]
     class NoSuchChange < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -5242,6 +5443,7 @@ module Aws::Route53
     # @!attribute message
     #   @return [String]
     class NoSuchCidrCollectionException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -5252,6 +5454,7 @@ module Aws::Route53
     # @!attribute message
     #   @return [String]
     class NoSuchCidrLocationException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -5262,6 +5465,7 @@ module Aws::Route53
     # @!attribute message
     #   @return [String]
     class NoSuchCloudWatchLogsLogGroup < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -5273,6 +5477,7 @@ module Aws::Route53
     #   <p></p>
     #   @return [String]
     class NoSuchDelegationSet < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -5286,6 +5491,7 @@ module Aws::Route53
     #   <p></p>
     #   @return [String]
     class NoSuchGeoLocation < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -5297,6 +5503,7 @@ module Aws::Route53
     #   <p></p>
     #   @return [String]
     class NoSuchHealthCheck < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -5308,6 +5515,7 @@ module Aws::Route53
     #   <p></p>
     #   @return [String]
     class NoSuchHostedZone < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -5318,6 +5526,7 @@ module Aws::Route53
     # @!attribute message
     #   @return [String]
     class NoSuchKeySigningKey < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -5328,6 +5537,7 @@ module Aws::Route53
     # @!attribute message
     #   @return [String]
     class NoSuchQueryLoggingConfig < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -5339,6 +5549,7 @@ module Aws::Route53
     #   <p></p>
     #   @return [String]
     class NoSuchTrafficPolicy < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -5350,6 +5561,7 @@ module Aws::Route53
     #   <p></p>
     #   @return [String]
     class NoSuchTrafficPolicyInstance < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -5362,6 +5574,7 @@ module Aws::Route53
     #   <p></p>
     #   @return [String]
     class NotAuthorizedException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -5376,6 +5589,7 @@ module Aws::Route53
     # @!attribute message
     #   @return [String]
     class PriorRequestNotComplete < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -5388,6 +5602,7 @@ module Aws::Route53
     #   <p></p>
     #   @return [String]
     class PublicZoneVPCAssociation < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -5407,6 +5622,7 @@ module Aws::Route53
     #   			is publishing logs to.</p>
     #   @return [String]
     class QueryLoggingConfig < Struct.new(
+      nil,
       :id,
       :hosted_zone_id,
       :cloud_watch_logs_log_group_arn,
@@ -5420,6 +5636,7 @@ module Aws::Route53
     # @!attribute message
     #   @return [String]
     class QueryLoggingConfigAlreadyExists < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -5445,6 +5662,7 @@ module Aws::Route53
     #            </note>
     #   @return [String]
     class ResourceRecord < Struct.new(
+      nil,
       :value,
       keyword_init: true
     )
@@ -6025,6 +6243,7 @@ module Aws::Route53
     #   			query and your resources. </p>
     #   @return [Types::GeoProximityLocation]
     class ResourceRecordSet < Struct.new(
+      nil,
       :name,
       :type,
       :set_identifier,
@@ -6064,6 +6283,7 @@ module Aws::Route53
     #   <p>The tags associated with the specified resource.</p>
     #   @return [Array<Types::Tag>]
     class ResourceTagSet < Struct.new(
+      nil,
       :resource_type,
       :resource_id,
       :tags,
@@ -6084,6 +6304,7 @@ module Aws::Route53
     #   			limit.</p>
     #   @return [Integer]
     class ReusableDelegationSetLimit < Struct.new(
+      nil,
       :type,
       :value,
       keyword_init: true
@@ -6103,6 +6324,7 @@ module Aws::Route53
     #   			represents March 27, 2017 at 17:48:16.751 UTC.</p>
     #   @return [Time]
     class StatusReport < Struct.new(
+      nil,
       :status,
       :checked_time,
       keyword_init: true
@@ -6157,6 +6379,7 @@ module Aws::Route53
     #            </ul>
     #   @return [String]
     class Tag < Struct.new(
+      nil,
       :key,
       :value,
       keyword_init: true
@@ -6212,6 +6435,7 @@ module Aws::Route53
     #            </ul>
     #   @return [String]
     class TestDNSAnswerRequest < Struct.new(
+      nil,
       :hosted_zone_id,
       :record_name,
       :record_type,
@@ -6249,6 +6473,7 @@ module Aws::Route53
     #   				<code>UDP</code> or <code>TCP</code>. </p>
     #   @return [String]
     class TestDNSAnswerResponse < Struct.new(
+      nil,
       :nameserver,
       :record_name,
       :record_type,
@@ -6264,6 +6489,7 @@ module Aws::Route53
     # @!attribute message
     #   @return [String]
     class ThrottlingException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -6281,6 +6507,7 @@ module Aws::Route53
     # @!attribute message
     #   @return [String]
     class TooManyHealthChecks < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -6301,6 +6528,7 @@ module Aws::Route53
     #   <p></p>
     #   @return [String]
     class TooManyHostedZones < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -6312,6 +6540,7 @@ module Aws::Route53
     # @!attribute message
     #   @return [String]
     class TooManyKeySigningKeys < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -6329,6 +6558,7 @@ module Aws::Route53
     #   <p></p>
     #   @return [String]
     class TooManyTrafficPolicies < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -6346,6 +6576,7 @@ module Aws::Route53
     #   <p></p>
     #   @return [String]
     class TooManyTrafficPolicyInstances < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -6362,6 +6593,7 @@ module Aws::Route53
     #   <p></p>
     #   @return [String]
     class TooManyTrafficPolicyVersionsForCurrentPolicy < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -6377,6 +6609,7 @@ module Aws::Route53
     #   <p></p>
     #   @return [String]
     class TooManyVPCAssociationAuthorizations < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -6408,6 +6641,7 @@ module Aws::Route53
     #   			any.</p>
     #   @return [String]
     class TrafficPolicy < Struct.new(
+      nil,
       :id,
       :version,
       :name,
@@ -6424,6 +6658,7 @@ module Aws::Route53
     #   <p></p>
     #   @return [String]
     class TrafficPolicyAlreadyExists < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -6436,6 +6671,7 @@ module Aws::Route53
     #   <p></p>
     #   @return [String]
     class TrafficPolicyInUse < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -6499,6 +6735,7 @@ module Aws::Route53
     #   			created for this traffic policy instance. </p>
     #   @return [String]
     class TrafficPolicyInstance < Struct.new(
+      nil,
       :id,
       :hosted_zone_id,
       :name,
@@ -6518,6 +6755,7 @@ module Aws::Route53
     #   <p></p>
     #   @return [String]
     class TrafficPolicyInstanceAlreadyExists < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -6543,6 +6781,7 @@ module Aws::Route53
     #   <p>The number of traffic policies that are associated with the current Amazon Web Services account.</p>
     #   @return [Integer]
     class TrafficPolicySummary < Struct.new(
+      nil,
       :id,
       :name,
       :type,
@@ -6897,6 +7136,7 @@ module Aws::Route53
     #            </ul>
     #   @return [Array<String>]
     class UpdateHealthCheckRequest < Struct.new(
+      nil,
       :health_check_id,
       :health_check_version,
       :ip_address,
@@ -6926,6 +7166,7 @@ module Aws::Route53
     #   			request.</p>
     #   @return [Types::HealthCheck]
     class UpdateHealthCheckResponse < Struct.new(
+      nil,
       :health_check,
       keyword_init: true
     )
@@ -6942,6 +7183,7 @@ module Aws::Route53
     #   				<code>Comment</code> element, if any.</p>
     #   @return [String]
     class UpdateHostedZoneCommentRequest < Struct.new(
+      nil,
       :id,
       :comment,
       keyword_init: true
@@ -6956,6 +7198,7 @@ module Aws::Route53
     #   			request.</p>
     #   @return [Types::HostedZone]
     class UpdateHostedZoneCommentResponse < Struct.new(
+      nil,
       :hosted_zone,
       keyword_init: true
     )
@@ -6976,6 +7219,7 @@ module Aws::Route53
     #   <p>The new comment for the specified traffic policy and version.</p>
     #   @return [String]
     class UpdateTrafficPolicyCommentRequest < Struct.new(
+      nil,
       :id,
       :version,
       :comment,
@@ -6989,6 +7233,7 @@ module Aws::Route53
     #   <p>A complex type that contains settings for the specified traffic policy.</p>
     #   @return [Types::TrafficPolicy]
     class UpdateTrafficPolicyCommentResponse < Struct.new(
+      nil,
       :traffic_policy,
       keyword_init: true
     )
@@ -7013,6 +7258,7 @@ module Aws::Route53
     #   			resource record sets for the specified traffic policy instance.</p>
     #   @return [Integer]
     class UpdateTrafficPolicyInstanceRequest < Struct.new(
+      nil,
       :id,
       :ttl,
       :traffic_policy_id,
@@ -7028,6 +7274,7 @@ module Aws::Route53
     #   <p>A complex type that contains settings for the updated traffic policy instance.</p>
     #   @return [Types::TrafficPolicyInstance]
     class UpdateTrafficPolicyInstanceResponse < Struct.new(
+      nil,
       :traffic_policy_instance,
       keyword_init: true
     )
@@ -7046,6 +7293,7 @@ module Aws::Route53
     #   <p>(Private hosted zones only) The ID of an Amazon VPC. </p>
     #   @return [String]
     class VPC < Struct.new(
+      nil,
       :vpc_region,
       :vpc_id,
       keyword_init: true
@@ -7059,6 +7307,7 @@ module Aws::Route53
     #   <p></p>
     #   @return [String]
     class VPCAssociationAuthorizationNotFound < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -7070,6 +7319,7 @@ module Aws::Route53
     #   <p>The specified VPC or hosted zone weren't found.</p>
     #   @return [String]
     class VPCAssociationNotFound < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )

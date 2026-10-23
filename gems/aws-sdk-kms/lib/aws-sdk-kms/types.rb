@@ -25,6 +25,7 @@ module Aws::KMS
     #         and Region. Formatted as Unix time.</p>
     #   @return [Time]
     class AliasListEntry < Struct.new(
+      nil,
       :alias_name,
       :alias_arn,
       :target_key_id,
@@ -40,6 +41,7 @@ module Aws::KMS
     # @!attribute message
     #   @return [String]
     class AlreadyExistsException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -63,6 +65,7 @@ module Aws::KMS
     #            <p>To get the key ID and key ARN for a KMS key, use <a>ListKeys</a> or <a>DescribeKey</a>.</p>
     #   @return [String]
     class CancelKeyDeletionRequest < Struct.new(
+      nil,
       :key_id,
       keyword_init: true
     )
@@ -73,6 +76,7 @@ module Aws::KMS
     #   <p>The Amazon Resource Name (<a href="https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#key-id-key-ARN">key ARN</a>) of the KMS key whose deletion is canceled.</p>
     #   @return [String]
     class CancelKeyDeletionResponse < Struct.new(
+      nil,
       :key_id,
       keyword_init: true
     )
@@ -88,6 +92,7 @@ module Aws::KMS
     # @!attribute message
     #   @return [String]
     class CloudHsmClusterInUseException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -129,6 +134,7 @@ module Aws::KMS
     # @!attribute message
     #   @return [String]
     class CloudHsmClusterInvalidConfigurationException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -142,6 +148,7 @@ module Aws::KMS
     # @!attribute message
     #   @return [String]
     class CloudHsmClusterNotActiveException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -153,6 +160,7 @@ module Aws::KMS
     # @!attribute message
     #   @return [String]
     class CloudHsmClusterNotFoundException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -170,6 +178,7 @@ module Aws::KMS
     # @!attribute message
     #   @return [String]
     class CloudHsmClusterNotRelatedException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -181,6 +190,7 @@ module Aws::KMS
     # @!attribute message
     #   @return [String]
     class ConflictException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -192,6 +202,7 @@ module Aws::KMS
     #         To find the ID of a custom key store, use the <a>DescribeCustomKeyStores</a> operation.</p>
     #   @return [String]
     class ConnectCustomKeyStoreRequest < Struct.new(
+      nil,
       :custom_key_store_id,
       keyword_init: true
     )
@@ -199,6 +210,7 @@ module Aws::KMS
     end
 
     class ConnectCustomKeyStoreResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -240,6 +252,7 @@ module Aws::KMS
     #            <p>To get the key ID and key ARN for a KMS key, use <a>ListKeys</a> or <a>DescribeKey</a>.</p>
     #   @return [String]
     class CreateAliasRequest < Struct.new(
+      nil,
       :alias_name,
       :target_key_id,
       keyword_init: true
@@ -395,6 +408,7 @@ module Aws::KMS
     #         your corporate data center.</p>
     #   @return [String]
     class CreateCustomKeyStoreRequest < Struct.new(
+      nil,
       :custom_key_store_name,
       :cloud_hsm_cluster_id,
       :trust_anchor_certificate,
@@ -414,6 +428,7 @@ module Aws::KMS
     #   <p>A unique identifier for the new custom key store.</p>
     #   @return [String]
     class CreateCustomKeyStoreResponse < Struct.new(
+      nil,
       :custom_key_store_id,
       keyword_init: true
     )
@@ -523,6 +538,7 @@ module Aws::KMS
     #            <p>To learn more about how to use this parameter, see <a href="https://docs.aws.amazon.com/kms/latest/developerguide/testing-permissions.html">Testing your permissions</a> in the <i>Key Management Service Developer Guide</i>.</p>
     #   @return [Boolean]
     class CreateGrantRequest < Struct.new(
+      nil,
       :key_id,
       :grantee_principal,
       :retiring_principal,
@@ -546,6 +562,7 @@ module Aws::KMS
     #            <p>You can use the <code>GrantId</code> in a <a>ListGrants</a>, <a>RetireGrant</a>, or <a>RevokeGrant</a> operation.</p>
     #   @return [String]
     class CreateGrantResponse < Struct.new(
+      nil,
       :grant_token,
       :grant_id,
       keyword_init: true
@@ -887,6 +904,7 @@ module Aws::KMS
     #           encryption</a> in the <i>Key Management Service Developer Guide</i>.</p>
     #   @return [String]
     class CreateKeyRequest < Struct.new(
+      nil,
       :policy,
       :description,
       :key_usage,
@@ -907,6 +925,7 @@ module Aws::KMS
     #   <p>Metadata associated with the KMS key.</p>
     #   @return [Types::KeyMetadata]
     class CreateKeyResponse < Struct.new(
+      nil,
       :key_metadata,
       keyword_init: true
     )
@@ -920,6 +939,7 @@ module Aws::KMS
     # @!attribute message
     #   @return [String]
     class CustomKeyStoreHasCMKsException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -963,6 +983,7 @@ module Aws::KMS
     # @!attribute message
     #   @return [String]
     class CustomKeyStoreInvalidStateException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -975,6 +996,7 @@ module Aws::KMS
     # @!attribute message
     #   @return [String]
     class CustomKeyStoreNameInUseException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -986,6 +1008,7 @@ module Aws::KMS
     # @!attribute message
     #   @return [String]
     class CustomKeyStoreNotFoundException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -1234,6 +1257,7 @@ module Aws::KMS
     #           <code>EXTERNAL_KEY_STORE</code>.</p>
     #   @return [Types::XksProxyConfigurationType]
     class CustomKeyStoresListEntry < Struct.new(
+      nil,
       :custom_key_store_id,
       :custom_key_store_name,
       :cloud_hsm_cluster_id,
@@ -1323,6 +1347,7 @@ module Aws::KMS
     #            <p>To learn more about how to use this parameter, see <a href="https://docs.aws.amazon.com/kms/latest/developerguide/testing-permissions.html">Testing your permissions</a> in the <i>Key Management Service Developer Guide</i>.</p>
     #   @return [Boolean]
     class DecryptRequest < Struct.new(
+      nil,
       :ciphertext_blob,
       :encryption_context,
       :grant_tokens,
@@ -1359,6 +1384,7 @@ module Aws::KMS
     #         request includes the <code>Recipient</code> parameter.</p>
     #   @return [String]
     class DecryptResponse < Struct.new(
+      nil,
       :key_id,
       :plaintext,
       :encryption_algorithm,
@@ -1374,6 +1400,7 @@ module Aws::KMS
     #         the alias name, such as <code>alias/ExampleAlias</code>.</p>
     #   @return [String]
     class DeleteAliasRequest < Struct.new(
+      nil,
       :alias_name,
       keyword_init: true
     )
@@ -1384,6 +1411,7 @@ module Aws::KMS
     #   <p>Enter the ID of the custom key store you want to delete. To find the ID of a custom key store, use the <a>DescribeCustomKeyStores</a> operation.</p>
     #   @return [String]
     class DeleteCustomKeyStoreRequest < Struct.new(
+      nil,
       :custom_key_store_id,
       keyword_init: true
     )
@@ -1391,6 +1419,7 @@ module Aws::KMS
     end
 
     class DeleteCustomKeyStoreResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1421,6 +1450,7 @@ module Aws::KMS
     #            <p>To get the list of key material IDs associated with a KMS key, use <a>ListKeyRotations</a>.</p>
     #   @return [String]
     class DeleteImportedKeyMaterialRequest < Struct.new(
+      nil,
       :key_id,
       :key_material_id,
       keyword_init: true
@@ -1435,6 +1465,7 @@ module Aws::KMS
     #   <p>Identifies the deleted key material.</p>
     #   @return [String]
     class DeleteImportedKeyMaterialResponse < Struct.new(
+      nil,
       :key_id,
       :key_material_id,
       keyword_init: true
@@ -1447,6 +1478,7 @@ module Aws::KMS
     # @!attribute message
     #   @return [String]
     class DependencyTimeoutException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -1528,6 +1560,7 @@ module Aws::KMS
     #            <p>For information about the interaction between KMS and Amazon Web Services Nitro Enclaves or Amazon Web Services NitroTPM, see <a href="https://docs.aws.amazon.com/kms/latest/developerguide/cryptographic-attestation.html">Cryptographic attestation support in KMS</a> in the <i>Key Management Service Developer Guide</i>.</p>
     #   @return [Types::RecipientInfo]
     class DeriveSharedSecretRequest < Struct.new(
+      nil,
       :key_id,
       :key_agreement_algorithm,
       :public_key,
@@ -1569,6 +1602,7 @@ module Aws::KMS
     #         <code>EXTERNAL_KEY_STORE</code>.</p>
     #   @return [String]
     class DeriveSharedSecretResponse < Struct.new(
+      nil,
       :key_id,
       :shared_secret,
       :ciphertext_for_recipient,
@@ -1605,6 +1639,7 @@ module Aws::KMS
     #       you just received.</p>
     #   @return [String]
     class DescribeCustomKeyStoresRequest < Struct.new(
+      nil,
       :custom_key_store_id,
       :custom_key_store_name,
       :limit,
@@ -1628,6 +1663,7 @@ module Aws::KMS
     #       subsequent request.</p>
     #   @return [Boolean]
     class DescribeCustomKeyStoresResponse < Struct.new(
+      nil,
       :custom_key_stores,
       :next_marker,
       :truncated,
@@ -1674,6 +1710,7 @@ module Aws::KMS
     #       <i>Key Management Service Developer Guide</i>.</p>
     #   @return [Array<String>]
     class DescribeKeyRequest < Struct.new(
+      nil,
       :key_id,
       :grant_tokens,
       keyword_init: true
@@ -1685,6 +1722,7 @@ module Aws::KMS
     #   <p>Metadata associated with the key.</p>
     #   @return [Types::KeyMetadata]
     class DescribeKeyResponse < Struct.new(
+      nil,
       :key_metadata,
       keyword_init: true
     )
@@ -1708,6 +1746,7 @@ module Aws::KMS
     #            <p>To get the key ID and key ARN for a KMS key, use <a>ListKeys</a> or <a>DescribeKey</a>.</p>
     #   @return [String]
     class DisableKeyRequest < Struct.new(
+      nil,
       :key_id,
       keyword_init: true
     )
@@ -1734,6 +1773,7 @@ module Aws::KMS
     #            <p>To get the key ID and key ARN for a KMS key, use <a>ListKeys</a> or <a>DescribeKey</a>.</p>
     #   @return [String]
     class DisableKeyRotationRequest < Struct.new(
+      nil,
       :key_id,
       keyword_init: true
     )
@@ -1744,6 +1784,7 @@ module Aws::KMS
     # @!attribute message
     #   @return [String]
     class DisabledException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -1754,6 +1795,7 @@ module Aws::KMS
     #   <p>Enter the ID of the custom key store you want to disconnect. To find the ID of a custom key store, use the <a>DescribeCustomKeyStores</a> operation.</p>
     #   @return [String]
     class DisconnectCustomKeyStoreRequest < Struct.new(
+      nil,
       :custom_key_store_id,
       keyword_init: true
     )
@@ -1761,6 +1803,7 @@ module Aws::KMS
     end
 
     class DisconnectCustomKeyStoreResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1770,6 +1813,7 @@ module Aws::KMS
     # @!attribute message
     #   @return [String]
     class DryRunOperationException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -1793,6 +1837,7 @@ module Aws::KMS
     #            <p>To get the key ID and key ARN for a KMS key, use <a>ListKeys</a> or <a>DescribeKey</a>.</p>
     #   @return [String]
     class EnableKeyRequest < Struct.new(
+      nil,
       :key_id,
       keyword_init: true
     )
@@ -1828,6 +1873,7 @@ module Aws::KMS
     #            <p> </p>
     #   @return [Integer]
     class EnableKeyRotationRequest < Struct.new(
+      nil,
       :key_id,
       :rotation_period_in_days,
       keyword_init: true
@@ -1894,6 +1940,7 @@ module Aws::KMS
     #            <p>To learn more about how to use this parameter, see <a href="https://docs.aws.amazon.com/kms/latest/developerguide/testing-permissions.html">Testing your permissions</a> in the <i>Key Management Service Developer Guide</i>.</p>
     #   @return [Boolean]
     class EncryptRequest < Struct.new(
+      nil,
       :key_id,
       :plaintext,
       :encryption_context,
@@ -1915,6 +1962,7 @@ module Aws::KMS
     #   <p>The encryption algorithm that was used to encrypt the plaintext.</p>
     #   @return [String]
     class EncryptResponse < Struct.new(
+      nil,
       :ciphertext_blob,
       :key_id,
       :encryption_algorithm,
@@ -1928,6 +1976,7 @@ module Aws::KMS
     # @!attribute message
     #   @return [String]
     class ExpiredImportTokenException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -2003,6 +2052,7 @@ module Aws::KMS
     #            <p>To learn more about how to use this parameter, see <a href="https://docs.aws.amazon.com/kms/latest/developerguide/testing-permissions.html">Testing your permissions</a> in the <i>Key Management Service Developer Guide</i>.</p>
     #   @return [Boolean]
     class GenerateDataKeyPairRequest < Struct.new(
+      nil,
       :encryption_context,
       :key_id,
       :key_pair_spec,
@@ -2042,6 +2092,7 @@ module Aws::KMS
     #   <p>The identifier of the key material used to encrypt the private key.</p>
     #   @return [String]
     class GenerateDataKeyPairResponse < Struct.new(
+      nil,
       :private_key_ciphertext_blob,
       :private_key_plaintext,
       :public_key,
@@ -2106,6 +2157,7 @@ module Aws::KMS
     #            <p>To learn more about how to use this parameter, see <a href="https://docs.aws.amazon.com/kms/latest/developerguide/testing-permissions.html">Testing your permissions</a> in the <i>Key Management Service Developer Guide</i>.</p>
     #   @return [Boolean]
     class GenerateDataKeyPairWithoutPlaintextRequest < Struct.new(
+      nil,
       :encryption_context,
       :key_id,
       :key_pair_spec,
@@ -2132,6 +2184,7 @@ module Aws::KMS
     #   <p>The identifier of the key material used to encrypt the private key.</p>
     #   @return [String]
     class GenerateDataKeyPairWithoutPlaintextResponse < Struct.new(
+      nil,
       :private_key_ciphertext_blob,
       :public_key,
       :key_id,
@@ -2218,6 +2271,7 @@ module Aws::KMS
     #            <p>To learn more about how to use this parameter, see <a href="https://docs.aws.amazon.com/kms/latest/developerguide/testing-permissions.html">Testing your permissions</a> in the <i>Key Management Service Developer Guide</i>.</p>
     #   @return [Boolean]
     class GenerateDataKeyRequest < Struct.new(
+      nil,
       :key_id,
       :encryption_context,
       :number_of_bytes,
@@ -2254,6 +2308,7 @@ module Aws::KMS
     #         the request includes the <code>Recipient</code> parameter.</p>
     #   @return [String]
     class GenerateDataKeyResponse < Struct.new(
+      nil,
       :ciphertext_blob,
       :plaintext,
       :key_id,
@@ -2320,6 +2375,7 @@ module Aws::KMS
     #            <p>To learn more about how to use this parameter, see <a href="https://docs.aws.amazon.com/kms/latest/developerguide/testing-permissions.html">Testing your permissions</a> in the <i>Key Management Service Developer Guide</i>.</p>
     #   @return [Boolean]
     class GenerateDataKeyWithoutPlaintextRequest < Struct.new(
+      nil,
       :key_id,
       :encryption_context,
       :key_spec,
@@ -2341,6 +2397,7 @@ module Aws::KMS
     #   <p>The identifier of the key material used to encrypt the data key.</p>
     #   @return [String]
     class GenerateDataKeyWithoutPlaintextResponse < Struct.new(
+      nil,
       :ciphertext_blob,
       :key_id,
       :key_material_id,
@@ -2378,6 +2435,7 @@ module Aws::KMS
     #            <p>To learn more about how to use this parameter, see <a href="https://docs.aws.amazon.com/kms/latest/developerguide/testing-permissions.html">Testing your permissions</a> in the <i>Key Management Service Developer Guide</i>.</p>
     #   @return [Boolean]
     class GenerateMacRequest < Struct.new(
+      nil,
       :message,
       :key_id,
       :mac_algorithm,
@@ -2400,6 +2458,7 @@ module Aws::KMS
     #   <p>The HMAC KMS key used in the operation.</p>
     #   @return [String]
     class GenerateMacResponse < Struct.new(
+      nil,
       :mac,
       :mac_algorithm,
       :key_id,
@@ -2433,6 +2492,7 @@ module Aws::KMS
     #            <p>For information about the interaction between KMS and Amazon Web Services Nitro Enclaves or Amazon Web Services NitroTPM, see <a href="https://docs.aws.amazon.com/kms/latest/developerguide/cryptographic-attestation.html">Cryptographic attestation support in KMS</a> in the <i>Key Management Service Developer Guide</i>.</p>
     #   @return [Types::RecipientInfo]
     class GenerateRandomRequest < Struct.new(
+      nil,
       :number_of_bytes,
       :custom_key_store_id,
       :recipient,
@@ -2454,6 +2514,7 @@ module Aws::KMS
     #         For information about the interaction between KMS and Amazon Web Services Nitro Enclaves or Amazon Web Services NitroTPM, see <a href="https://docs.aws.amazon.com/kms/latest/developerguide/cryptographic-attestation.html">Cryptographic attestation support in KMS</a> in the <i>Key Management Service Developer Guide</i>.</p>
     #   @return [String]
     class GenerateRandomResponse < Struct.new(
+      nil,
       :plaintext,
       :ciphertext_for_recipient,
       keyword_init: true
@@ -2483,6 +2544,7 @@ module Aws::KMS
     #         policies, use <a>ListKeyPolicies</a>.</p>
     #   @return [String]
     class GetKeyPolicyRequest < Struct.new(
+      nil,
       :key_id,
       :policy_name,
       keyword_init: true
@@ -2497,6 +2559,7 @@ module Aws::KMS
     #   <p>The name of the key policy. The only valid value is <code>default</code>.</p>
     #   @return [String]
     class GetKeyPolicyResponse < Struct.new(
+      nil,
       :policy,
       :policy_name,
       keyword_init: true
@@ -2522,6 +2585,7 @@ module Aws::KMS
     #            <p>To get the key ID and key ARN for a KMS key, use <a>ListKeys</a> or <a>DescribeKey</a>.</p>
     #   @return [String]
     class GetKeyRotationStatusRequest < Struct.new(
+      nil,
       :key_id,
       keyword_init: true
     )
@@ -2547,6 +2611,7 @@ module Aws::KMS
     #         on-demand rotation is complete, KMS removes this field from the response. You can use <a>ListKeyRotations</a> to view the details of the completed on-demand rotation.</p>
     #   @return [Time]
     class GetKeyRotationStatusResponse < Struct.new(
+      nil,
       :key_rotation_enabled,
       :key_id,
       :rotation_period_in_days,
@@ -2629,6 +2694,7 @@ module Aws::KMS
     #         Instead, use an RSA_AES wrapping algorithm or choose a longer RSA public key.</p>
     #   @return [String]
     class GetParametersForImportRequest < Struct.new(
+      nil,
       :key_id,
       :wrapping_algorithm,
       :wrapping_key_spec,
@@ -2654,6 +2720,7 @@ module Aws::KMS
     #         another <code>GetParametersForImport</code> request to get new ones.</p>
     #   @return [Time]
     class GetParametersForImportResponse < Struct.new(
+      nil,
       :key_id,
       :import_token,
       :public_key,
@@ -2693,6 +2760,7 @@ module Aws::KMS
     #       <i>Key Management Service Developer Guide</i>.</p>
     #   @return [Array<String>]
     class GetPublicKeyRequest < Struct.new(
+      nil,
       :key_id,
       :grant_tokens,
       keyword_init: true
@@ -2745,6 +2813,7 @@ module Aws::KMS
     #         when the KMS key has a <code>KeyUsage</code> value of <code>KEY_AGREEMENT</code>.</p>
     #   @return [Array<String>]
     class GetPublicKeyResponse < Struct.new(
+      nil,
       :key_id,
       :public_key,
       :customer_master_key_spec,
@@ -2790,6 +2859,7 @@ module Aws::KMS
     #         same as the encryption context specified in this constraint.</p>
     #   @return [Hash<String, String>]
     class GrantConstraints < Struct.new(
+      nil,
       :encryption_context_subset,
       :encryption_context_equals,
       keyword_init: true
@@ -2832,6 +2902,7 @@ module Aws::KMS
     #         subsequent operations that the grant allows.</p>
     #   @return [Types::GrantConstraints]
     class GrantListEntry < Struct.new(
+      nil,
       :key_id,
       :grant_id,
       :name,
@@ -2938,6 +3009,7 @@ module Aws::KMS
     #            <p>To get the list of key material IDs associated with a KMS key, use <a>ListKeyRotations</a>.</p>
     #   @return [String]
     class ImportKeyMaterialRequest < Struct.new(
+      nil,
       :key_id,
       :import_token,
       :encrypted_key_material,
@@ -2958,6 +3030,7 @@ module Aws::KMS
     #   <p>Identifies the imported key material.</p>
     #   @return [String]
     class ImportKeyMaterialResponse < Struct.new(
+      nil,
       :key_id,
       :key_material_id,
       keyword_init: true
@@ -2972,6 +3045,7 @@ module Aws::KMS
     # @!attribute message
     #   @return [String]
     class IncorrectKeyException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -2985,6 +3059,7 @@ module Aws::KMS
     # @!attribute message
     #   @return [String]
     class IncorrectKeyMaterialException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -2998,6 +3073,7 @@ module Aws::KMS
     # @!attribute message
     #   @return [String]
     class IncorrectTrustAnchorException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -3008,6 +3084,7 @@ module Aws::KMS
     # @!attribute message
     #   @return [String]
     class InvalidAliasNameException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -3019,6 +3096,7 @@ module Aws::KMS
     # @!attribute message
     #   @return [String]
     class InvalidArnException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -3034,6 +3112,7 @@ module Aws::KMS
     # @!attribute message
     #   @return [String]
     class InvalidCiphertextException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -3044,6 +3123,7 @@ module Aws::KMS
     # @!attribute message
     #   @return [String]
     class InvalidGrantIdException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -3054,6 +3134,7 @@ module Aws::KMS
     # @!attribute message
     #   @return [String]
     class InvalidGrantTokenException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -3065,6 +3146,7 @@ module Aws::KMS
     # @!attribute message
     #   @return [String]
     class InvalidImportTokenException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -3094,6 +3176,7 @@ module Aws::KMS
     # @!attribute message
     #   @return [String]
     class InvalidKeyUsageException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -3105,6 +3188,7 @@ module Aws::KMS
     # @!attribute message
     #   @return [String]
     class InvalidMarkerException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -3116,6 +3200,7 @@ module Aws::KMS
     # @!attribute message
     #   @return [String]
     class KMSInternalException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -3128,6 +3213,7 @@ module Aws::KMS
     # @!attribute message
     #   @return [String]
     class KMSInvalidMacException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -3140,6 +3226,7 @@ module Aws::KMS
     # @!attribute message
     #   @return [String]
     class KMSInvalidSignatureException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -3167,6 +3254,7 @@ module Aws::KMS
     # @!attribute message
     #   @return [String]
     class KMSInvalidStateException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -3181,6 +3269,7 @@ module Aws::KMS
     #   <p>ARN of the key.</p>
     #   @return [String]
     class KeyListEntry < Struct.new(
+      nil,
       :key_id,
       :key_arn,
       keyword_init: true
@@ -3347,6 +3436,7 @@ module Aws::KMS
     #         only.</p>
     #   @return [String]
     class KeyMetadata < Struct.new(
+      nil,
       :aws_account_id,
       :key_id,
       :arn,
@@ -3388,6 +3478,7 @@ module Aws::KMS
     # @!attribute message
     #   @return [String]
     class KeyUnavailableException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -3400,6 +3491,7 @@ module Aws::KMS
     # @!attribute message
     #   @return [String]
     class LimitExceededException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -3438,6 +3530,7 @@ module Aws::KMS
     #       you just received.</p>
     #   @return [String]
     class ListAliasesRequest < Struct.new(
+      nil,
       :key_id,
       :limit,
       :marker,
@@ -3460,6 +3553,7 @@ module Aws::KMS
     #       subsequent request.</p>
     #   @return [Boolean]
     class ListAliasesResponse < Struct.new(
+      nil,
       :aliases,
       :next_marker,
       :truncated,
@@ -3487,6 +3581,7 @@ module Aws::KMS
     #       subsequent request.</p>
     #   @return [Boolean]
     class ListGrantsOutput < Struct.new(
+      nil,
       :grants,
       :next_marker,
       :truncated,
@@ -3538,6 +3633,7 @@ module Aws::KMS
     #         grant.</p>
     #   @return [String]
     class ListGrantsRequest < Struct.new(
+      nil,
       :limit,
       :marker,
       :key_id,
@@ -3578,6 +3674,7 @@ module Aws::KMS
     #       you just received.</p>
     #   @return [String]
     class ListKeyPoliciesRequest < Struct.new(
+      nil,
       :key_id,
       :limit,
       :marker,
@@ -3600,6 +3697,7 @@ module Aws::KMS
     #       subsequent request.</p>
     #   @return [Boolean]
     class ListKeyPoliciesResponse < Struct.new(
+      nil,
       :policy_names,
       :next_marker,
       :truncated,
@@ -3651,6 +3749,7 @@ module Aws::KMS
     #       you just received.</p>
     #   @return [String]
     class ListKeyRotationsRequest < Struct.new(
+      nil,
       :key_id,
       :include_key_material,
       :limit,
@@ -3677,6 +3776,7 @@ module Aws::KMS
     #       subsequent request.</p>
     #   @return [Boolean]
     class ListKeyRotationsResponse < Struct.new(
+      nil,
       :rotations,
       :next_marker,
       :truncated,
@@ -3703,6 +3803,7 @@ module Aws::KMS
     #       you just received.</p>
     #   @return [String]
     class ListKeysRequest < Struct.new(
+      nil,
       :limit,
       :marker,
       keyword_init: true
@@ -3724,6 +3825,7 @@ module Aws::KMS
     #       subsequent request.</p>
     #   @return [Boolean]
     class ListKeysResponse < Struct.new(
+      nil,
       :keys,
       :next_marker,
       :truncated,
@@ -3768,6 +3870,7 @@ module Aws::KMS
     #         the truncated response you just received.</p>
     #   @return [String]
     class ListResourceTagsRequest < Struct.new(
+      nil,
       :key_id,
       :limit,
       :marker,
@@ -3794,6 +3897,7 @@ module Aws::KMS
     #       subsequent request.</p>
     #   @return [Boolean]
     class ListResourceTagsResponse < Struct.new(
+      nil,
       :tags,
       :next_marker,
       :truncated,
@@ -3821,6 +3925,7 @@ module Aws::KMS
     #       subsequent request.</p>
     #   @return [Boolean]
     class ListRetirableGrantsOutput < Struct.new(
+      nil,
       :grants,
       :next_marker,
       :truncated,
@@ -3857,6 +3962,7 @@ module Aws::KMS
     #               </i>.</p>
     #   @return [String]
     class ListRetirableGrantsRequest < Struct.new(
+      nil,
       :limit,
       :marker,
       :retiring_principal,
@@ -3870,6 +3976,7 @@ module Aws::KMS
     # @!attribute message
     #   @return [String]
     class MalformedPolicyDocumentException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -3893,6 +4000,7 @@ module Aws::KMS
     #         key if it is a replica key.</p>
     #   @return [Array<Types::MultiRegionKey>]
     class MultiRegionConfiguration < Struct.new(
+      nil,
       :multi_region_key_type,
       :primary_key,
       :replica_keys,
@@ -3909,6 +4017,7 @@ module Aws::KMS
     #   <p>Displays the Amazon Web Services Region of a primary or replica key in a multi-Region key.</p>
     #   @return [String]
     class MultiRegionKey < Struct.new(
+      nil,
       :arn,
       :region,
       keyword_init: true
@@ -3921,6 +4030,7 @@ module Aws::KMS
     # @!attribute message
     #   @return [String]
     class NotFoundException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -4008,6 +4118,7 @@ module Aws::KMS
     #         request on the KMS key.</p>
     #   @return [Boolean]
     class PutKeyPolicyRequest < Struct.new(
+      nil,
       :key_id,
       :policy_name,
       :policy,
@@ -4128,6 +4239,7 @@ module Aws::KMS
     #            <p>To learn more about how to use this parameter, see <a href="https://docs.aws.amazon.com/kms/latest/developerguide/testing-permissions.html">Testing your permissions</a> in the <i>Key Management Service Developer Guide</i>.</p>
     #   @return [Boolean]
     class ReEncryptRequest < Struct.new(
+      nil,
       :ciphertext_blob,
       :source_encryption_context,
       :source_key_id,
@@ -4167,6 +4279,7 @@ module Aws::KMS
     #         when data is reencrypted using a symmetric encryption KMS key.</p>
     #   @return [String]
     class ReEncryptResponse < Struct.new(
+      nil,
       :ciphertext_blob,
       :source_key_id,
       :key_id,
@@ -4193,6 +4306,7 @@ module Aws::KMS
     #         public key.</p>
     #   @return [String]
     class RecipientInfo < Struct.new(
+      nil,
       :key_encryption_algorithm,
       :attestation_document,
       keyword_init: true
@@ -4315,6 +4429,7 @@ module Aws::KMS
     #                 see <a href="https://docs.aws.amazon.com/kms/latest/developerguide/tagging-keys.html">Tags in KMS</a>.</p>
     #   @return [Array<Types::Tag>]
     class ReplicateKeyRequest < Struct.new(
+      nil,
       :key_id,
       :replica_region,
       :policy,
@@ -4340,6 +4455,7 @@ module Aws::KMS
     #         pairs.</p>
     #   @return [Array<Types::Tag>]
     class ReplicateKeyResponse < Struct.new(
+      nil,
       :replica_key_metadata,
       :replica_policy,
       :replica_tags,
@@ -4375,6 +4491,7 @@ module Aws::KMS
     #            <p>To learn more about how to use this parameter, see <a href="https://docs.aws.amazon.com/kms/latest/developerguide/testing-permissions.html">Testing your permissions</a> in the <i>Key Management Service Developer Guide</i>.</p>
     #   @return [Boolean]
     class RetireGrantRequest < Struct.new(
+      nil,
       :grant_token,
       :key_id,
       :grant_id,
@@ -4411,6 +4528,7 @@ module Aws::KMS
     #            <p>To learn more about how to use this parameter, see <a href="https://docs.aws.amazon.com/kms/latest/developerguide/testing-permissions.html">Testing your permissions</a> in the <i>Key Management Service Developer Guide</i>.</p>
     #   @return [Boolean]
     class RevokeGrantRequest < Struct.new(
+      nil,
       :key_id,
       :grant_id,
       :dry_run,
@@ -4440,6 +4558,7 @@ module Aws::KMS
     #            <p>To get the key ID and key ARN for a KMS key, use <a>ListKeys</a> or <a>DescribeKey</a>.</p>
     #   @return [String]
     class RotateKeyOnDemandRequest < Struct.new(
+      nil,
       :key_id,
       keyword_init: true
     )
@@ -4451,6 +4570,7 @@ module Aws::KMS
     #         on.</p>
     #   @return [String]
     class RotateKeyOnDemandResponse < Struct.new(
+      nil,
       :key_id,
       keyword_init: true
     )
@@ -4509,6 +4629,7 @@ module Aws::KMS
     #         material in <code>PENDING_ROTATION</code> state.</p>
     #   @return [String]
     class RotationsListEntry < Struct.new(
+      nil,
       :key_id,
       :key_material_id,
       :key_material_description,
@@ -4553,6 +4674,7 @@ module Aws::KMS
     #         parameter.</p>
     #   @return [Integer]
     class ScheduleKeyDeletionRequest < Struct.new(
+      nil,
       :key_id,
       :pending_window_in_days,
       keyword_init: true
@@ -4581,6 +4703,7 @@ module Aws::KMS
     #         immediately.</p>
     #   @return [Integer]
     class ScheduleKeyDeletionResponse < Struct.new(
+      nil,
       :key_id,
       :deletion_date,
       :key_state,
@@ -4684,6 +4807,7 @@ module Aws::KMS
     #            <p>To learn more about how to use this parameter, see <a href="https://docs.aws.amazon.com/kms/latest/developerguide/testing-permissions.html">Testing your permissions</a> in the <i>Key Management Service Developer Guide</i>.</p>
     #   @return [Boolean]
     class SignRequest < Struct.new(
+      nil,
       :key_id,
       :message,
       :message_type,
@@ -4720,6 +4844,7 @@ module Aws::KMS
     #   <p>The signing algorithm that was used to sign the message.</p>
     #   @return [String]
     class SignResponse < Struct.new(
+      nil,
       :key_id,
       :signature,
       :signing_algorithm,
@@ -4742,6 +4867,7 @@ module Aws::KMS
     #   <p>The value of the tag.</p>
     #   @return [String]
     class Tag < Struct.new(
+      nil,
       :tag_key,
       :tag_value,
       keyword_init: true
@@ -4753,6 +4879,7 @@ module Aws::KMS
     # @!attribute message
     #   @return [String]
     class TagException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -4786,6 +4913,7 @@ module Aws::KMS
     #         specified one.</p>
     #   @return [Array<Types::Tag>]
     class TagResourceRequest < Struct.new(
+      nil,
       :key_id,
       :tags,
       keyword_init: true
@@ -4798,6 +4926,7 @@ module Aws::KMS
     # @!attribute message
     #   @return [String]
     class UnsupportedOperationException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -4824,6 +4953,7 @@ module Aws::KMS
     #   <p>One or more tag keys. Specify only the tag keys, not the tag values.</p>
     #   @return [Array<String>]
     class UntagResourceRequest < Struct.new(
+      nil,
       :key_id,
       :tag_keys,
       keyword_init: true
@@ -4862,6 +4992,7 @@ module Aws::KMS
     #            <p>To verify that the alias is mapped to the correct KMS key, use <a>ListAliases</a>.</p>
     #   @return [String]
     class UpdateAliasRequest < Struct.new(
+      nil,
       :alias_name,
       :target_key_id,
       keyword_init: true
@@ -4961,6 +5092,7 @@ module Aws::KMS
     #            <p>To change this value, the external key store must be disconnected.</p>
     #   @return [String]
     class UpdateCustomKeyStoreRequest < Struct.new(
+      nil,
       :custom_key_store_id,
       :new_custom_key_store_name,
       :key_store_password,
@@ -4976,6 +5108,7 @@ module Aws::KMS
     end
 
     class UpdateCustomKeyStoreResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -5004,6 +5137,7 @@ module Aws::KMS
     #            </important>
     #   @return [String]
     class UpdateKeyDescriptionRequest < Struct.new(
+      nil,
       :key_id,
       :description,
       keyword_init: true
@@ -5036,6 +5170,7 @@ module Aws::KMS
     #         key.</p>
     #   @return [String]
     class UpdatePrimaryRegionRequest < Struct.new(
+      nil,
       :key_id,
       :primary_region,
       keyword_init: true
@@ -5076,6 +5211,7 @@ module Aws::KMS
     #            <p>To learn more about how to use this parameter, see <a href="https://docs.aws.amazon.com/kms/latest/developerguide/testing-permissions.html">Testing your permissions</a> in the <i>Key Management Service Developer Guide</i>.</p>
     #   @return [Boolean]
     class VerifyMacRequest < Struct.new(
+      nil,
       :message,
       :key_id,
       :mac_algorithm,
@@ -5103,6 +5239,7 @@ module Aws::KMS
     #   <p>The MAC algorithm used in the verification.</p>
     #   @return [String]
     class VerifyMacResponse < Struct.new(
+      nil,
       :key_id,
       :mac_valid,
       :mac_algorithm,
@@ -5214,6 +5351,7 @@ module Aws::KMS
     #            <p>To learn more about how to use this parameter, see <a href="https://docs.aws.amazon.com/kms/latest/developerguide/testing-permissions.html">Testing your permissions</a> in the <i>Key Management Service Developer Guide</i>.</p>
     #   @return [Boolean]
     class VerifyRequest < Struct.new(
+      nil,
       :key_id,
       :message,
       :message_type,
@@ -5240,6 +5378,7 @@ module Aws::KMS
     #   <p>The signing algorithm that was used to verify the signature.</p>
     #   @return [String]
     class VerifyResponse < Struct.new(
+      nil,
       :key_id,
       :signature_valid,
       :signing_algorithm,
@@ -5259,6 +5398,7 @@ module Aws::KMS
     # @!attribute message
     #   @return [String]
     class XksKeyAlreadyInUseException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -5279,6 +5419,7 @@ module Aws::KMS
     #         key store proxy uses to identify the external key.</p>
     #   @return [String]
     class XksKeyConfigurationType < Struct.new(
+      nil,
       :id,
       keyword_init: true
     )
@@ -5292,6 +5433,7 @@ module Aws::KMS
     # @!attribute message
     #   @return [String]
     class XksKeyInvalidConfigurationException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -5308,6 +5450,7 @@ module Aws::KMS
     # @!attribute message
     #   @return [String]
     class XksKeyNotFoundException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -5326,6 +5469,7 @@ module Aws::KMS
     #         =.</p>
     #   @return [String]
     class XksProxyAuthenticationCredentialType < Struct.new(
+      nil,
       :access_key_id,
       :raw_secret_access_key,
       keyword_init: true
@@ -5360,6 +5504,7 @@ module Aws::KMS
     #         communicate with KMS.</p>
     #   @return [String]
     class XksProxyConfigurationType < Struct.new(
+      nil,
       :connectivity,
       :access_key_id,
       :uri_endpoint,
@@ -5377,6 +5522,7 @@ module Aws::KMS
     # @!attribute message
     #   @return [String]
     class XksProxyIncorrectAuthenticationCredentialException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -5388,6 +5534,7 @@ module Aws::KMS
     # @!attribute message
     #   @return [String]
     class XksProxyInvalidConfigurationException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -5401,6 +5548,7 @@ module Aws::KMS
     # @!attribute message
     #   @return [String]
     class XksProxyInvalidResponseException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -5413,6 +5561,7 @@ module Aws::KMS
     # @!attribute message
     #   @return [String]
     class XksProxyUriEndpointInUseException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -5426,6 +5575,7 @@ module Aws::KMS
     # @!attribute message
     #   @return [String]
     class XksProxyUriInUseException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -5440,6 +5590,7 @@ module Aws::KMS
     # @!attribute message
     #   @return [String]
     class XksProxyUriUnreachableException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -5452,6 +5603,7 @@ module Aws::KMS
     # @!attribute message
     #   @return [String]
     class XksProxyVpcEndpointServiceInUseException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -5466,6 +5618,7 @@ module Aws::KMS
     # @!attribute message
     #   @return [String]
     class XksProxyVpcEndpointServiceInvalidConfigurationException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -5480,6 +5633,7 @@ module Aws::KMS
     # @!attribute message
     #   @return [String]
     class XksProxyVpcEndpointServiceNotFoundException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )

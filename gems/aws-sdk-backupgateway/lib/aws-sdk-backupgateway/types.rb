@@ -13,6 +13,7 @@ module Aws::BackupGateway
     # @!attribute message
     #   @return [String]
     class AccessDeniedException < Struct.new(
+      nil,
       :error_code,
       :message,
       keyword_init: true
@@ -28,6 +29,7 @@ module Aws::BackupGateway
     #   <p>The Amazon Resource Name (ARN) of the server that hosts your virtual machines.</p>
     #   @return [String]
     class AssociateGatewayToServerOperationInput < Struct.new(
+      nil,
       :gateway_arn,
       :server_arn,
       keyword_init: true
@@ -39,6 +41,7 @@ module Aws::BackupGateway
     #   <p>The Amazon Resource Name (ARN) of a gateway.</p>
     #   @return [String]
     class AssociateGatewayToServerOperationOutput < Struct.new(
+      nil,
       :gateway_arn,
       keyword_init: true
     )
@@ -82,6 +85,7 @@ module Aws::BackupGateway
     #         Saturday.</p>
     #   @return [Array<Integer>]
     class BandwidthRateLimitInterval < Struct.new(
+      nil,
       :average_upload_rate_limit_in_bits_per_sec,
       :start_hour_of_day,
       :end_hour_of_day,
@@ -100,6 +104,7 @@ module Aws::BackupGateway
     # @!attribute message
     #   @return [String]
     class ConflictException < Struct.new(
+      nil,
       :error_code,
       :message,
       keyword_init: true
@@ -120,6 +125,7 @@ module Aws::BackupGateway
     #   <p>A list of up to 50 tags to assign to the gateway. Each tag is a key-value pair.</p>
     #   @return [Array<Types::Tag>]
     class CreateGatewayOperationInput < Struct.new(
+      nil,
       :activation_key,
       :gateway_display_name,
       :gateway_type,
@@ -133,6 +139,7 @@ module Aws::BackupGateway
     #   <p>The Amazon Resource Name (ARN) of the gateway you create.</p>
     #   @return [String]
     class CreateGatewayOperationOutput < Struct.new(
+      nil,
       :gateway_arn,
       keyword_init: true
     )
@@ -143,6 +150,7 @@ module Aws::BackupGateway
     #   <p>The Amazon Resource Name (ARN) of the gateway to delete.</p>
     #   @return [String]
     class DeleteGatewayOperationInput < Struct.new(
+      nil,
       :gateway_arn,
       keyword_init: true
     )
@@ -153,6 +161,7 @@ module Aws::BackupGateway
     #   <p>The Amazon Resource Name (ARN) of the gateway you deleted.</p>
     #   @return [String]
     class DeleteGatewayOperationOutput < Struct.new(
+      nil,
       :gateway_arn,
       keyword_init: true
     )
@@ -163,6 +172,7 @@ module Aws::BackupGateway
     #   <p>The Amazon Resource Name (ARN) of the hypervisor to delete.</p>
     #   @return [String]
     class DeleteHypervisorOperationInput < Struct.new(
+      nil,
       :hypervisor_arn,
       keyword_init: true
     )
@@ -173,6 +183,7 @@ module Aws::BackupGateway
     #   <p>The Amazon Resource Name (ARN) of the hypervisor you deleted.</p>
     #   @return [String]
     class DeleteHypervisorOperationOutput < Struct.new(
+      nil,
       :hypervisor_arn,
       keyword_init: true
     )
@@ -183,6 +194,7 @@ module Aws::BackupGateway
     #   <p>The Amazon Resource Name (ARN) of the gateway to disassociate.</p>
     #   @return [String]
     class DisassociateGatewayFromServerOperationInput < Struct.new(
+      nil,
       :gateway_arn,
       keyword_init: true
     )
@@ -193,6 +205,7 @@ module Aws::BackupGateway
     #   <p>The Amazon Resource Name (ARN) of the gateway you disassociated.</p>
     #   @return [String]
     class DisassociateGatewayFromServerOperationOutput < Struct.new(
+      nil,
       :gateway_arn,
       keyword_init: true
     )
@@ -219,6 +232,7 @@ module Aws::BackupGateway
     #         UTC time.</p>
     #   @return [Time]
     class Gateway < Struct.new(
+      nil,
       :gateway_arn,
       :gateway_display_name,
       :gateway_type,
@@ -262,6 +276,7 @@ module Aws::BackupGateway
     #         uses to connect to the cloud for backup gateway.</p>
     #   @return [String]
     class GatewayDetails < Struct.new(
+      nil,
       :gateway_arn,
       :gateway_display_name,
       :gateway_type,
@@ -283,6 +298,7 @@ module Aws::BackupGateway
     #         for your account and Amazon Web Services Region.</p>
     #   @return [String]
     class GetBandwidthRateLimitScheduleOperationInput < Struct.new(
+      nil,
       :gateway_arn,
       keyword_init: true
     )
@@ -301,6 +317,7 @@ module Aws::BackupGateway
     #         When no bandwidth rate limit intervals have been scheduled, the array is empty.</p>
     #   @return [Array<Types::BandwidthRateLimitInterval>]
     class GetBandwidthRateLimitScheduleOperationOutput < Struct.new(
+      nil,
       :gateway_arn,
       :bandwidth_rate_limit_intervals,
       keyword_init: true
@@ -312,6 +329,7 @@ module Aws::BackupGateway
     #   <p>The Amazon Resource Name (ARN) of the gateway.</p>
     #   @return [String]
     class GetGatewayOperationInput < Struct.new(
+      nil,
       :gateway_arn,
       keyword_init: true
     )
@@ -323,6 +341,7 @@ module Aws::BackupGateway
     #         API returns the gateway.</p>
     #   @return [Types::GatewayDetails]
     class GetGatewayOperationOutput < Struct.new(
+      nil,
       :gateway,
       keyword_init: true
     )
@@ -333,6 +352,7 @@ module Aws::BackupGateway
     #   <p>The Amazon Resource Name (ARN) of the hypervisor.</p>
     #   @return [String]
     class GetHypervisorOperationInput < Struct.new(
+      nil,
       :hypervisor_arn,
       keyword_init: true
     )
@@ -343,6 +363,7 @@ module Aws::BackupGateway
     #   <p>Details about the requested hypervisor.</p>
     #   @return [Types::HypervisorDetails]
     class GetHypervisorOperationOutput < Struct.new(
+      nil,
       :hypervisor,
       keyword_init: true
     )
@@ -353,6 +374,7 @@ module Aws::BackupGateway
     #   <p>The Amazon Resource Name (ARN) of the hypervisor.</p>
     #   @return [String]
     class GetHypervisorPropertyMappingsOperationInput < Struct.new(
+      nil,
       :hypervisor_arn,
       keyword_init: true
     )
@@ -370,6 +392,7 @@ module Aws::BackupGateway
     #   <p>The Amazon Resource Name (ARN) of the IAM role.</p>
     #   @return [String]
     class GetHypervisorPropertyMappingsOperationOutput < Struct.new(
+      nil,
       :hypervisor_arn,
       :vmware_to_aws_tag_mappings,
       :iam_role_arn,
@@ -382,6 +405,7 @@ module Aws::BackupGateway
     #   <p>The Amazon Resource Name (ARN) of the virtual machine.</p>
     #   @return [String]
     class GetVirtualMachineOperationInput < Struct.new(
+      nil,
       :resource_arn,
       keyword_init: true
     )
@@ -394,6 +418,7 @@ module Aws::BackupGateway
     #            </p>
     #   @return [Types::VirtualMachineDetails]
     class GetVirtualMachineOperationOutput < Struct.new(
+      nil,
       :virtual_machine,
       keyword_init: true
     )
@@ -421,6 +446,7 @@ module Aws::BackupGateway
     #   <p>The state of the hypervisor.</p>
     #   @return [String]
     class Hypervisor < Struct.new(
+      nil,
       :host,
       :hypervisor_arn,
       :kms_key_arn,
@@ -468,6 +494,7 @@ module Aws::BackupGateway
     #   <p>This is the most recent status for the indicated metadata sync.</p>
     #   @return [String]
     class HypervisorDetails < Struct.new(
+      nil,
       :host,
       :hypervisor_arn,
       :kms_key_arn,
@@ -502,6 +529,7 @@ module Aws::BackupGateway
     #   <p>The tags of the hypervisor configuration to import.</p>
     #   @return [Array<Types::Tag>]
     class ImportHypervisorConfigurationOperationInput < Struct.new(
+      nil,
       :name,
       :host,
       :username,
@@ -517,6 +545,7 @@ module Aws::BackupGateway
     #   <p>The Amazon Resource Name (ARN) of the hypervisor you disassociated.</p>
     #   @return [String]
     class ImportHypervisorConfigurationOperationOutput < Struct.new(
+      nil,
       :hypervisor_arn,
       keyword_init: true
     )
@@ -530,6 +559,7 @@ module Aws::BackupGateway
     # @!attribute message
     #   @return [String]
     class InternalServerException < Struct.new(
+      nil,
       :error_code,
       :message,
       keyword_init: true
@@ -547,6 +577,7 @@ module Aws::BackupGateway
     #         token.</p>
     #   @return [String]
     class ListGatewaysOperationInput < Struct.new(
+      nil,
       :max_results,
       :next_token,
       keyword_init: true
@@ -564,6 +595,7 @@ module Aws::BackupGateway
     #         token.</p>
     #   @return [String]
     class ListGatewaysOperationOutput < Struct.new(
+      nil,
       :gateways,
       :next_token,
       keyword_init: true
@@ -581,6 +613,7 @@ module Aws::BackupGateway
     #         token.</p>
     #   @return [String]
     class ListHypervisorsOperationInput < Struct.new(
+      nil,
       :max_results,
       :next_token,
       keyword_init: true
@@ -599,6 +632,7 @@ module Aws::BackupGateway
     #         token.</p>
     #   @return [String]
     class ListHypervisorsOperationOutput < Struct.new(
+      nil,
       :hypervisors,
       :next_token,
       keyword_init: true
@@ -610,6 +644,7 @@ module Aws::BackupGateway
     #   <p>The Amazon Resource Name (ARN) of the resource's tags to list.</p>
     #   @return [String]
     class ListTagsForResourceOperationInput < Struct.new(
+      nil,
       :resource_arn,
       keyword_init: true
     )
@@ -623,6 +658,7 @@ module Aws::BackupGateway
     #   <p>A list of the resource's tags.</p>
     #   @return [Array<Types::Tag>]
     class ListTagsForResourceOperationOutput < Struct.new(
+      nil,
       :resource_arn,
       :tags,
       keyword_init: true
@@ -643,6 +679,7 @@ module Aws::BackupGateway
     #         token.</p>
     #   @return [String]
     class ListVirtualMachinesOperationInput < Struct.new(
+      nil,
       :hypervisor_arn,
       :max_results,
       :next_token,
@@ -662,6 +699,7 @@ module Aws::BackupGateway
     #         token.</p>
     #   @return [String]
     class ListVirtualMachinesOperationOutput < Struct.new(
+      nil,
       :virtual_machines,
       :next_token,
       keyword_init: true
@@ -688,6 +726,7 @@ module Aws::BackupGateway
     #         <i>mm</i> is the minute (0 to 59). The minute of the hour is in the time zone of the gateway.</p>
     #   @return [Integer]
     class MaintenanceStartTime < Struct.new(
+      nil,
       :day_of_month,
       :day_of_week,
       :hour_of_day,
@@ -709,6 +748,7 @@ module Aws::BackupGateway
     #         When no bandwidth rate limit intervals have been scheduled, the array is empty.</p>
     #   @return [Array<Types::BandwidthRateLimitInterval>]
     class PutBandwidthRateLimitScheduleOperationInput < Struct.new(
+      nil,
       :gateway_arn,
       :bandwidth_rate_limit_intervals,
       keyword_init: true
@@ -724,6 +764,7 @@ module Aws::BackupGateway
     #         for your account and Amazon Web Services Region.</p>
     #   @return [String]
     class PutBandwidthRateLimitScheduleOperationOutput < Struct.new(
+      nil,
       :gateway_arn,
       keyword_init: true
     )
@@ -741,6 +782,7 @@ module Aws::BackupGateway
     #   <p>The Amazon Resource Name (ARN) of the IAM role.</p>
     #   @return [String]
     class PutHypervisorPropertyMappingsOperationInput < Struct.new(
+      nil,
       :hypervisor_arn,
       :vmware_to_aws_tag_mappings,
       :iam_role_arn,
@@ -753,6 +795,7 @@ module Aws::BackupGateway
     #   <p>The Amazon Resource Name (ARN) of the hypervisor.</p>
     #   @return [String]
     class PutHypervisorPropertyMappingsOperationOutput < Struct.new(
+      nil,
       :hypervisor_arn,
       keyword_init: true
     )
@@ -777,6 +820,7 @@ module Aws::BackupGateway
     #            <p>Valid values range from <code>Sunday</code> to <code>Saturday</code>.</p>
     #   @return [Integer]
     class PutMaintenanceStartTimeOperationInput < Struct.new(
+      nil,
       :gateway_arn,
       :hour_of_day,
       :minute_of_hour,
@@ -792,6 +836,7 @@ module Aws::BackupGateway
     #         time.</p>
     #   @return [String]
     class PutMaintenanceStartTimeOperationOutput < Struct.new(
+      nil,
       :gateway_arn,
       keyword_init: true
     )
@@ -805,6 +850,7 @@ module Aws::BackupGateway
     # @!attribute message
     #   @return [String]
     class ResourceNotFoundException < Struct.new(
+      nil,
       :error_code,
       :message,
       keyword_init: true
@@ -816,6 +862,7 @@ module Aws::BackupGateway
     #   <p>The Amazon Resource Name (ARN) of the hypervisor.</p>
     #   @return [String]
     class StartVirtualMachinesMetadataSyncOperationInput < Struct.new(
+      nil,
       :hypervisor_arn,
       keyword_init: true
     )
@@ -826,6 +873,7 @@ module Aws::BackupGateway
     #   <p>The Amazon Resource Name (ARN) of the hypervisor.</p>
     #   @return [String]
     class StartVirtualMachinesMetadataSyncOperationOutput < Struct.new(
+      nil,
       :hypervisor_arn,
       keyword_init: true
     )
@@ -842,6 +890,7 @@ module Aws::BackupGateway
     #   <p>The value part of a tag's key-value pair.</p>
     #   @return [String]
     class Tag < Struct.new(
+      nil,
       :key,
       :value,
       keyword_init: true
@@ -856,6 +905,7 @@ module Aws::BackupGateway
     #   <p>A list of tags to assign to the resource.</p>
     #   @return [Array<Types::Tag>]
     class TagResourceOperationInput < Struct.new(
+      nil,
       :resource_arn,
       :tags,
       keyword_init: true
@@ -867,6 +917,7 @@ module Aws::BackupGateway
     #   <p>The Amazon Resource Name (ARN) of the resource you tagged.</p>
     #   @return [String]
     class TagResourceOperationOutput < Struct.new(
+      nil,
       :resource_arn,
       keyword_init: true
     )
@@ -887,6 +938,7 @@ module Aws::BackupGateway
     #   <p>The password for the hypervisor.</p>
     #   @return [String]
     class TestHypervisorConfigurationOperationInput < Struct.new(
+      nil,
       :gateway_arn,
       :host,
       :username,
@@ -897,6 +949,7 @@ module Aws::BackupGateway
     end
 
     class TestHypervisorConfigurationOperationOutput < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -911,6 +964,7 @@ module Aws::BackupGateway
     # @!attribute message
     #   @return [String]
     class ThrottlingException < Struct.new(
+      nil,
       :error_code,
       :message,
       keyword_init: true
@@ -925,6 +979,7 @@ module Aws::BackupGateway
     #   <p>The list of tag keys specifying which tags to remove.</p>
     #   @return [Array<String>]
     class UntagResourceOperationInput < Struct.new(
+      nil,
       :resource_arn,
       :tag_keys,
       keyword_init: true
@@ -936,6 +991,7 @@ module Aws::BackupGateway
     #   <p>The Amazon Resource Name (ARN) of the resource from which you removed tags.</p>
     #   @return [String]
     class UntagResourceOperationOutput < Struct.new(
+      nil,
       :resource_arn,
       keyword_init: true
     )
@@ -949,6 +1005,7 @@ module Aws::BackupGateway
     #   <p>The updated display name of the gateway.</p>
     #   @return [String]
     class UpdateGatewayInformationOperationInput < Struct.new(
+      nil,
       :gateway_arn,
       :gateway_display_name,
       keyword_init: true
@@ -960,6 +1017,7 @@ module Aws::BackupGateway
     #   <p>The Amazon Resource Name (ARN) of the gateway you updated.</p>
     #   @return [String]
     class UpdateGatewayInformationOperationOutput < Struct.new(
+      nil,
       :gateway_arn,
       keyword_init: true
     )
@@ -971,6 +1029,7 @@ module Aws::BackupGateway
     #         to be updated.</p>
     #   @return [String]
     class UpdateGatewaySoftwareNowOperationInput < Struct.new(
+      nil,
       :gateway_arn,
       keyword_init: true
     )
@@ -982,6 +1041,7 @@ module Aws::BackupGateway
     #         you updated.</p>
     #   @return [String]
     class UpdateGatewaySoftwareNowOperationOutput < Struct.new(
+      nil,
       :gateway_arn,
       keyword_init: true
     )
@@ -1008,6 +1068,7 @@ module Aws::BackupGateway
     #   <p>The Amazon Resource Name (ARN) of the group of gateways within the requested log.</p>
     #   @return [String]
     class UpdateHypervisorOperationInput < Struct.new(
+      nil,
       :hypervisor_arn,
       :host,
       :username,
@@ -1023,6 +1084,7 @@ module Aws::BackupGateway
     #   <p>The Amazon Resource Name (ARN) of the hypervisor you updated.</p>
     #   @return [String]
     class UpdateHypervisorOperationOutput < Struct.new(
+      nil,
       :hypervisor_arn,
       keyword_init: true
     )
@@ -1036,6 +1098,7 @@ module Aws::BackupGateway
     # @!attribute message
     #   @return [String]
     class ValidationException < Struct.new(
+      nil,
       :error_code,
       :message,
       keyword_init: true
@@ -1064,6 +1127,7 @@ module Aws::BackupGateway
     #   <p>The most recent date a virtual machine was backed up, in Unix format and UTC time.</p>
     #   @return [Time]
     class VirtualMachine < Struct.new(
+      nil,
       :host_name,
       :hypervisor_id,
       :name,
@@ -1100,6 +1164,7 @@ module Aws::BackupGateway
     #         virtual machine.</p>
     #   @return [Array<Types::VmwareTag>]
     class VirtualMachineDetails < Struct.new(
+      nil,
       :host_name,
       :hypervisor_id,
       :name,
@@ -1126,6 +1191,7 @@ module Aws::BackupGateway
     #   <p>This is a user-defined description of a VMware tag.</p>
     #   @return [String]
     class VmwareTag < Struct.new(
+      nil,
       :vmware_category,
       :vmware_tag_name,
       :vmware_tag_description,
@@ -1149,6 +1215,7 @@ module Aws::BackupGateway
     #   <p>The value part of the Amazon Web Services tag's key-value pair.</p>
     #   @return [String]
     class VmwareToAwsTagMapping < Struct.new(
+      nil,
       :vmware_category,
       :vmware_tag_name,
       :aws_tag_key,

@@ -13,6 +13,7 @@ module Aws::Invoicing
     #   <p>You don't have sufficient access to perform this action. </p>
     #   @return [String]
     class AccessDeniedException < Struct.new(
+      nil,
       :message,
       :resource_name,
       keyword_init: true
@@ -34,6 +35,7 @@ module Aws::Invoicing
     #   <p> The fee amount. </p>
     #   @return [Types::FeesBreakdown]
     class AmountBreakdown < Struct.new(
+      nil,
       :sub_total_amount,
       :discounts,
       :taxes,
@@ -47,6 +49,7 @@ module Aws::Invoicing
     #   <p>Retrieves the corresponding invoice profile data for these account IDs. </p>
     #   @return [Array<String>]
     class BatchGetInvoiceProfileRequest < Struct.new(
+      nil,
       :account_ids,
       keyword_init: true
     )
@@ -57,6 +60,7 @@ module Aws::Invoicing
     #   <p> A list of invoice profiles corresponding to the requested accounts. </p>
     #   @return [Array<Types::InvoiceProfile>]
     class BatchGetInvoiceProfileResponse < Struct.new(
+      nil,
       :profiles,
       keyword_init: true
     )
@@ -71,6 +75,7 @@ module Aws::Invoicing
     #   <p> The billing period year. </p>
     #   @return [Integer]
     class BillingPeriod < Struct.new(
+      nil,
       :month,
       :year,
       keyword_init: true
@@ -97,6 +102,7 @@ module Aws::Invoicing
     #   <p> The tag structure that contains a tag key and value. </p>
     #   @return [Array<Types::ResourceTag>]
     class CreateInvoiceUnitRequest < Struct.new(
+      nil,
       :name,
       :invoice_receiver,
       :description,
@@ -112,6 +118,7 @@ module Aws::Invoicing
     #   <p> The ARN to identify an invoice unit. This information can't be modified or deleted. </p>
     #   @return [String]
     class CreateInvoiceUnitResponse < Struct.new(
+      nil,
       :invoice_unit_arn,
       keyword_init: true
     )
@@ -129,6 +136,7 @@ module Aws::Invoicing
     #   <p>The currency exchange rate. </p>
     #   @return [String]
     class CurrencyExchangeDetails < Struct.new(
+      nil,
       :source_currency_code,
       :target_currency_code,
       :rate,
@@ -145,6 +153,7 @@ module Aws::Invoicing
     #   <p> The end of the time period that you want invoice-related documents for. The end date is exclusive. For example, if <code>end</code> is <code>2019-01-10</code>, Amazon Web Services retrieves invoice-related documents from the start date up to, but not including, <code>2018-01-10</code>. </p>
     #   @return [Time]
     class DateInterval < Struct.new(
+      nil,
       :start_date,
       :end_date,
       keyword_init: true
@@ -156,6 +165,7 @@ module Aws::Invoicing
     #   <p> The ARN to identify an invoice unit. This information can't be modified or deleted. </p>
     #   @return [String]
     class DeleteInvoiceUnitRequest < Struct.new(
+      nil,
       :invoice_unit_arn,
       keyword_init: true
     )
@@ -166,6 +176,7 @@ module Aws::Invoicing
     #   <p> The ARN to identify an invoice unit. This information can't be modified or deleted. </p>
     #   @return [String]
     class DeleteInvoiceUnitResponse < Struct.new(
+      nil,
       :invoice_unit_arn,
       keyword_init: true
     )
@@ -180,6 +191,7 @@ module Aws::Invoicing
     #   <p> The discount's total amount. </p>
     #   @return [String]
     class DiscountsBreakdown < Struct.new(
+      nil,
       :breakdown,
       :total_amount,
       keyword_init: true
@@ -198,6 +210,7 @@ module Aws::Invoicing
     #   <p> The details for the discount rate.. </p>
     #   @return [String]
     class DiscountsBreakdownAmount < Struct.new(
+      nil,
       :description,
       :amount,
       :rate,
@@ -211,6 +224,7 @@ module Aws::Invoicing
     #   <p>The name of the entity that issues the Amazon Web Services invoice.</p>
     #   @return [String]
     class Entity < Struct.new(
+      nil,
       :invoicing_entity,
       keyword_init: true
     )
@@ -225,6 +239,7 @@ module Aws::Invoicing
     #   <p> The total amount of fees. </p>
     #   @return [String]
     class FeesBreakdown < Struct.new(
+      nil,
       :breakdown,
       :total_amount,
       keyword_init: true
@@ -243,6 +258,7 @@ module Aws::Invoicing
     #   <p> Details about the rate amount. </p>
     #   @return [String]
     class FeesBreakdownAmount < Struct.new(
+      nil,
       :description,
       :amount,
       :rate,
@@ -262,6 +278,7 @@ module Aws::Invoicing
     #   <p> You can specify a list of Amazon Web Services account IDs inside filters to return invoice units that match only the specified accounts. If multiple accounts are provided, the result is an <code>OR</code> condition (match any) of the specified accounts. The specified account IDs are matched with either the receiver or the linked accounts in the rules. </p>
     #   @return [Array<String>]
     class Filters < Struct.new(
+      nil,
       :names,
       :invoice_receivers,
       :accounts,
@@ -277,6 +294,7 @@ module Aws::Invoicing
     #   <p> The state of an invoice unit at a specified time. You can see legacy invoice units that are currently deleted if the <code>AsOf</code> time is set to before it was deleted. If an <code>AsOf</code> is not provided, the default value is the current time. </p>
     #   @return [Time]
     class GetInvoiceUnitRequest < Struct.new(
+      nil,
       :invoice_unit_arn,
       :as_of,
       keyword_init: true
@@ -306,6 +324,7 @@ module Aws::Invoicing
     #   <p> The most recent date the invoice unit response was updated. </p>
     #   @return [Time]
     class GetInvoiceUnitResponse < Struct.new(
+      nil,
       :invoice_unit_arn,
       :invoice_receiver,
       :name,
@@ -330,6 +349,7 @@ module Aws::Invoicing
     # @!attribute message
     #   @return [String]
     class InternalServerException < Struct.new(
+      nil,
       :retry_after_seconds,
       :message,
       keyword_init: true
@@ -354,6 +374,7 @@ module Aws::Invoicing
     #   <p> The details of currency exchange. </p>
     #   @return [Types::CurrencyExchangeDetails]
     class InvoiceCurrencyAmount < Struct.new(
+      nil,
       :total_amount,
       :total_amount_before_tax,
       :currency_code,
@@ -384,6 +405,7 @@ module Aws::Invoicing
     #   <p> Your Tax Registration Number (TRN) information. </p>
     #   @return [String]
     class InvoiceProfile < Struct.new(
+      nil,
       :account_id,
       :receiver_name,
       :receiver_address,
@@ -406,6 +428,7 @@ module Aws::Invoicing
     #   <p>The name of the entity that issues the Amazon Web Services invoice.</p>
     #   @return [String]
     class InvoiceSummariesFilter < Struct.new(
+      nil,
       :time_interval,
       :billing_period,
       :invoicing_entity,
@@ -422,6 +445,7 @@ module Aws::Invoicing
     #   <p>The value of the query identifier.</p>
     #   @return [String]
     class InvoiceSummariesSelector < Struct.new(
+      nil,
       :resource_type,
       :value,
       keyword_init: true
@@ -467,6 +491,7 @@ module Aws::Invoicing
     #   <p> The summary with the customer configured currency. </p>
     #   @return [Types::InvoiceCurrencyAmount]
     class InvoiceSummary < Struct.new(
+      nil,
       :account_id,
       :invoice_id,
       :issued_date,
@@ -507,6 +532,7 @@ module Aws::Invoicing
     #   <p> The last time the invoice unit was updated. This is important to determine the version of invoice unit configuration used to create the invoices. Any invoice created after this modified time will use this invoice unit configuration. </p>
     #   @return [Time]
     class InvoiceUnit < Struct.new(
+      nil,
       :invoice_unit_arn,
       :invoice_receiver,
       :name,
@@ -529,6 +555,7 @@ module Aws::Invoicing
     #   <p>The list of <code>LINKED_ACCOUNT</code> IDs where charges are included within the invoice unit. </p>
     #   @return [Array<String>]
     class InvoiceUnitRule < Struct.new(
+      nil,
       :linked_accounts,
       keyword_init: true
     )
@@ -548,6 +575,7 @@ module Aws::Invoicing
     #   <p>The maximum number of invoice summaries a paginated response can contain.</p>
     #   @return [Integer]
     class ListInvoiceSummariesRequest < Struct.new(
+      nil,
       :selector,
       :filter,
       :next_token,
@@ -564,6 +592,7 @@ module Aws::Invoicing
     #   <p>The token to retrieve the next set of results. Amazon Web Services provides the token when the response from a previous call has more results than the maximum page size.</p>
     #   @return [String]
     class ListInvoiceSummariesResponse < Struct.new(
+      nil,
       :invoice_summaries,
       :next_token,
       keyword_init: true
@@ -584,6 +613,7 @@ module Aws::Invoicing
     #   <p> The state of an invoice unit at a specified time. You can see legacy invoice units that are currently deleted if the <code>AsOf</code> time is set to before it was deleted. If an <code>AsOf</code> is not provided, the default value is the current time. </p>
     #   @return [Time]
     class ListInvoiceUnitsRequest < Struct.new(
+      nil,
       :filters,
       :next_token,
       :max_results,
@@ -600,6 +630,7 @@ module Aws::Invoicing
     #   <p>The next token used to indicate where the returned list should start from. </p>
     #   @return [String]
     class ListInvoiceUnitsResponse < Struct.new(
+      nil,
       :invoice_units,
       :next_token,
       keyword_init: true
@@ -611,6 +642,7 @@ module Aws::Invoicing
     #   <p>The Amazon Resource Name (ARN) of tags to list. </p>
     #   @return [String]
     class ListTagsForResourceRequest < Struct.new(
+      nil,
       :resource_arn,
       keyword_init: true
     )
@@ -621,6 +653,7 @@ module Aws::Invoicing
     #   <p> Adds a tag to a resource. </p>
     #   @return [Array<Types::ResourceTag>]
     class ListTagsForResourceResponse < Struct.new(
+      nil,
       :resource_tags,
       keyword_init: true
     )
@@ -657,6 +690,7 @@ module Aws::Invoicing
     #   <p> The postal code associated with the address. </p>
     #   @return [String]
     class ReceiverAddress < Struct.new(
+      nil,
       :address_line1,
       :address_line2,
       :address_line3,
@@ -678,6 +712,7 @@ module Aws::Invoicing
     #   <p>The resource could not be found.</p>
     #   @return [String]
     class ResourceNotFoundException < Struct.new(
+      nil,
       :message,
       :resource_name,
       keyword_init: true
@@ -693,6 +728,7 @@ module Aws::Invoicing
     #   <p> The specific value of the resource tag. </p>
     #   @return [String]
     class ResourceTag < Struct.new(
+      nil,
       :key,
       :value,
       keyword_init: true
@@ -704,6 +740,7 @@ module Aws::Invoicing
     # @!attribute message
     #   @return [String]
     class ServiceQuotaExceededException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -717,6 +754,7 @@ module Aws::Invoicing
     #   <p> Adds a tag to a resource. </p>
     #   @return [Array<Types::ResourceTag>]
     class TagResourceRequest < Struct.new(
+      nil,
       :resource_arn,
       :resource_tags,
       keyword_init: true
@@ -725,6 +763,7 @@ module Aws::Invoicing
     end
 
     class TagResourceResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -738,6 +777,7 @@ module Aws::Invoicing
     #   <p> The total amount for your taxes. </p>
     #   @return [String]
     class TaxesBreakdown < Struct.new(
+      nil,
       :breakdown,
       :total_amount,
       keyword_init: true
@@ -756,6 +796,7 @@ module Aws::Invoicing
     #   <p> The details of the tax rate. </p>
     #   @return [String]
     class TaxesBreakdownAmount < Struct.new(
+      nil,
       :description,
       :amount,
       :rate,
@@ -768,6 +809,7 @@ module Aws::Invoicing
     # @!attribute message
     #   @return [String]
     class ThrottlingException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -781,6 +823,7 @@ module Aws::Invoicing
     #   <p> Keys for the tags to be removed. </p>
     #   @return [Array<String>]
     class UntagResourceRequest < Struct.new(
+      nil,
       :resource_arn,
       :resource_tag_keys,
       keyword_init: true
@@ -789,6 +832,7 @@ module Aws::Invoicing
     end
 
     class UntagResourceResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -807,6 +851,7 @@ module Aws::Invoicing
     #   <p>The <code>InvoiceUnitRule</code> object used to update invoice units. </p>
     #   @return [Types::InvoiceUnitRule]
     class UpdateInvoiceUnitRequest < Struct.new(
+      nil,
       :invoice_unit_arn,
       :description,
       :tax_inheritance_disabled,
@@ -820,6 +865,7 @@ module Aws::Invoicing
     #   <p> The ARN to identify an invoice unit. This information can't be modified or deleted. </p>
     #   @return [String]
     class UpdateInvoiceUnitResponse < Struct.new(
+      nil,
       :invoice_unit_arn,
       keyword_init: true
     )
@@ -839,6 +885,7 @@ module Aws::Invoicing
     #   <p> The input fails to satisfy the constraints specified by an Amazon Web Services service. </p>
     #   @return [Array<Types::ValidationExceptionField>]
     class ValidationException < Struct.new(
+      nil,
       :message,
       :resource_name,
       :reason,
@@ -856,6 +903,7 @@ module Aws::Invoicing
     #   <p> The input fails to satisfy the constraints specified by an Amazon Web Services service. </p>
     #   @return [String]
     class ValidationExceptionField < Struct.new(
+      nil,
       :name,
       :message,
       keyword_init: true

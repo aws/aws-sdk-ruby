@@ -14,6 +14,7 @@ module Aws::ApplicationAutoScaling
     #   <p>The Amazon Resource Name (ARN) of the alarm.</p>
     #   @return [String]
     class Alarm < Struct.new(
+      nil,
       :alarm_name,
       :alarm_arn,
       keyword_init: true
@@ -37,6 +38,7 @@ module Aws::ApplicationAutoScaling
     #         </p>
     #   @return [Array<Float>]
     class CapacityForecast < Struct.new(
+      nil,
       :timestamps,
       :values,
       keyword_init: true
@@ -49,6 +51,7 @@ module Aws::ApplicationAutoScaling
     # @!attribute message
     #   @return [String]
     class ConcurrentUpdateException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -102,6 +105,7 @@ module Aws::ApplicationAutoScaling
     #            This can include both raw metric and metric math expressions.</p>
     #   @return [Array<Types::TargetTrackingMetricDataQuery>]
     class CustomizedMetricSpecification < Struct.new(
+      nil,
       :metric_name,
       :namespace,
       :dimensions,
@@ -306,6 +310,7 @@ module Aws::ApplicationAutoScaling
     #            </ul>
     #   @return [String]
     class DeleteScalingPolicyRequest < Struct.new(
+      nil,
       :policy_name,
       :service_namespace,
       :resource_id,
@@ -316,6 +321,7 @@ module Aws::ApplicationAutoScaling
     end
 
     class DeleteScalingPolicyResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -514,6 +520,7 @@ module Aws::ApplicationAutoScaling
     #            </ul>
     #   @return [String]
     class DeleteScheduledActionRequest < Struct.new(
+      nil,
       :service_namespace,
       :scheduled_action_name,
       :resource_id,
@@ -524,6 +531,7 @@ module Aws::ApplicationAutoScaling
     end
 
     class DeleteScheduledActionResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -720,6 +728,7 @@ module Aws::ApplicationAutoScaling
     #            </ul>
     #   @return [String]
     class DeregisterScalableTargetRequest < Struct.new(
+      nil,
       :service_namespace,
       :resource_id,
       :scalable_dimension,
@@ -729,6 +738,7 @@ module Aws::ApplicationAutoScaling
     end
 
     class DeregisterScalableTargetResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -937,6 +947,7 @@ module Aws::ApplicationAutoScaling
     #   <p>The token for the next set of results.</p>
     #   @return [String]
     class DescribeScalableTargetsRequest < Struct.new(
+      nil,
       :service_namespace,
       :resource_ids,
       :scalable_dimension,
@@ -955,6 +966,7 @@ module Aws::ApplicationAutoScaling
     #            there are no more results to return.</p>
     #   @return [String]
     class DescribeScalableTargetsResponse < Struct.new(
+      nil,
       :scalable_targets,
       :next_token,
       keyword_init: true
@@ -1171,6 +1183,7 @@ module Aws::ApplicationAutoScaling
     #            help interpreting the not scaled reason details in the response, see <a href="https://docs.aws.amazon.com/autoscaling/application/userguide/application-auto-scaling-scaling-activities.html">Scaling activities for Application Auto Scaling</a>.</p>
     #   @return [Boolean]
     class DescribeScalingActivitiesRequest < Struct.new(
+      nil,
       :service_namespace,
       :resource_id,
       :scalable_dimension,
@@ -1190,6 +1203,7 @@ module Aws::ApplicationAutoScaling
     #            there are no more results to return.</p>
     #   @return [String]
     class DescribeScalingActivitiesResponse < Struct.new(
+      nil,
       :scaling_activities,
       :next_token,
       keyword_init: true
@@ -1403,6 +1417,7 @@ module Aws::ApplicationAutoScaling
     #   <p>The token for the next set of results.</p>
     #   @return [String]
     class DescribeScalingPoliciesRequest < Struct.new(
+      nil,
       :policy_names,
       :service_namespace,
       :resource_id,
@@ -1422,6 +1437,7 @@ module Aws::ApplicationAutoScaling
     #            there are no more results to return.</p>
     #   @return [String]
     class DescribeScalingPoliciesResponse < Struct.new(
+      nil,
       :scaling_policies,
       :next_token,
       keyword_init: true
@@ -1635,6 +1651,7 @@ module Aws::ApplicationAutoScaling
     #   <p>The token for the next set of results.</p>
     #   @return [String]
     class DescribeScheduledActionsRequest < Struct.new(
+      nil,
       :scheduled_action_names,
       :service_namespace,
       :resource_id,
@@ -1654,6 +1671,7 @@ module Aws::ApplicationAutoScaling
     #            there are no more results to return.</p>
     #   @return [String]
     class DescribeScheduledActionsResponse < Struct.new(
+      nil,
       :scheduled_actions,
       :next_token,
       keyword_init: true
@@ -1668,6 +1686,7 @@ module Aws::ApplicationAutoScaling
     # @!attribute message
     #   @return [String]
     class FailedResourceAccessException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -1706,6 +1725,7 @@ module Aws::ApplicationAutoScaling
     #         </p>
     #   @return [Time]
     class GetPredictiveScalingForecastRequest < Struct.new(
+      nil,
       :service_namespace,
       :resource_id,
       :scalable_dimension,
@@ -1733,6 +1753,7 @@ module Aws::ApplicationAutoScaling
     #         </p>
     #   @return [Time]
     class GetPredictiveScalingForecastResponse < Struct.new(
+      nil,
       :load_forecast,
       :capacity_forecast,
       :update_time,
@@ -1745,6 +1766,7 @@ module Aws::ApplicationAutoScaling
     # @!attribute message
     #   @return [String]
     class InternalServiceException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -1755,6 +1777,7 @@ module Aws::ApplicationAutoScaling
     # @!attribute message
     #   @return [String]
     class InvalidNextTokenException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -1765,6 +1788,7 @@ module Aws::ApplicationAutoScaling
     # @!attribute message
     #   @return [String]
     class LimitExceededException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -1779,6 +1803,7 @@ module Aws::ApplicationAutoScaling
     #            <p>To get the ARN for a scalable target, use <a>DescribeScalableTargets</a>.</p>
     #   @return [String]
     class ListTagsForResourceRequest < Struct.new(
+      nil,
       :resource_arn,
       keyword_init: true
     )
@@ -1789,6 +1814,7 @@ module Aws::ApplicationAutoScaling
     #   <p>A list of tags. Each tag consists of a tag key and a tag value.</p>
     #   @return [Hash<String, String>]
     class ListTagsForResourceResponse < Struct.new(
+      nil,
       :tags,
       keyword_init: true
     )
@@ -1816,6 +1842,7 @@ module Aws::ApplicationAutoScaling
     #         </p>
     #   @return [Types::PredictiveScalingMetricSpecification]
     class LoadForecast < Struct.new(
+      nil,
       :timestamps,
       :values,
       :metric_specification,
@@ -1832,6 +1859,7 @@ module Aws::ApplicationAutoScaling
     #   <p>The value of the dimension.</p>
     #   @return [String]
     class MetricDimension < Struct.new(
+      nil,
       :name,
       :value,
       keyword_init: true
@@ -1874,6 +1902,7 @@ module Aws::ApplicationAutoScaling
     #   <p>The current capacity.</p>
     #   @return [Integer]
     class NotScaledReason < Struct.new(
+      nil,
       :code,
       :max_capacity,
       :min_capacity,
@@ -1891,6 +1920,7 @@ module Aws::ApplicationAutoScaling
     # @!attribute message
     #   @return [String]
     class ObjectNotFoundException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -1929,6 +1959,7 @@ module Aws::ApplicationAutoScaling
     #               the <a href="https://docs.aws.amazon.com/elasticloadbalancing/latest/APIReference/API_DescribeTargetGroups.html">DescribeTargetGroups</a> API operation.</p>
     #   @return [String]
     class PredefinedMetricSpecification < Struct.new(
+      nil,
       :predefined_metric_type,
       :resource_label,
       keyword_init: true
@@ -1945,6 +1976,7 @@ module Aws::ApplicationAutoScaling
     #         </p>
     #   @return [Array<Types::PredictiveScalingMetricDataQuery>]
     class PredictiveScalingCustomizedMetricSpecification < Struct.new(
+      nil,
       :metric_data_queries,
       keyword_init: true
     )
@@ -1970,6 +2002,7 @@ module Aws::ApplicationAutoScaling
     #         </p>
     #   @return [String]
     class PredictiveScalingMetric < Struct.new(
+      nil,
       :dimensions,
       :metric_name,
       :namespace,
@@ -2030,6 +2063,7 @@ module Aws::ApplicationAutoScaling
     #            (<code>true</code>).</p>
     #   @return [Boolean]
     class PredictiveScalingMetricDataQuery < Struct.new(
+      nil,
       :id,
       :expression,
       :metric_stat,
@@ -2054,6 +2088,7 @@ module Aws::ApplicationAutoScaling
     #         </p>
     #   @return [String]
     class PredictiveScalingMetricDimension < Struct.new(
+      nil,
       :name,
       :value,
       keyword_init: true
@@ -2106,6 +2141,7 @@ module Aws::ApplicationAutoScaling
     #         </p>
     #   @return [Types::PredictiveScalingCustomizedMetricSpecification]
     class PredictiveScalingMetricSpecification < Struct.new(
+      nil,
       :target_value,
       :predefined_metric_pair_specification,
       :predefined_scaling_metric_specification,
@@ -2143,6 +2179,7 @@ module Aws::ApplicationAutoScaling
     #         </p>
     #   @return [String]
     class PredictiveScalingMetricStat < Struct.new(
+      nil,
       :metric,
       :stat,
       :unit,
@@ -2193,6 +2230,7 @@ module Aws::ApplicationAutoScaling
     #            <code>IncreaseMaxCapacity</code>, and cannot be used otherwise.</p>
     #   @return [Integer]
     class PredictiveScalingPolicyConfiguration < Struct.new(
+      nil,
       :metric_specifications,
       :mode,
       :scheduling_buffer_time,
@@ -2268,6 +2306,7 @@ module Aws::ApplicationAutoScaling
     #         </p>
     #   @return [String]
     class PredictiveScalingPredefinedLoadMetricSpecification < Struct.new(
+      nil,
       :predefined_metric_type,
       :resource_label,
       keyword_init: true
@@ -2339,6 +2378,7 @@ module Aws::ApplicationAutoScaling
     #         </p>
     #   @return [String]
     class PredictiveScalingPredefinedMetricPairSpecification < Struct.new(
+      nil,
       :predefined_metric_type,
       :resource_label,
       keyword_init: true
@@ -2412,6 +2452,7 @@ module Aws::ApplicationAutoScaling
     #         </p>
     #   @return [String]
     class PredictiveScalingPredefinedScalingMetricSpecification < Struct.new(
+      nil,
       :predefined_metric_type,
       :resource_label,
       keyword_init: true
@@ -2645,6 +2686,7 @@ module Aws::ApplicationAutoScaling
     #         </p>
     #   @return [Types::PredictiveScalingPolicyConfiguration]
     class PutScalingPolicyRequest < Struct.new(
+      nil,
       :policy_name,
       :service_namespace,
       :resource_id,
@@ -2665,6 +2707,7 @@ module Aws::ApplicationAutoScaling
     #   <p>The CloudWatch alarms created for the target tracking scaling policy.</p>
     #   @return [Array<Types::Alarm>]
     class PutScalingPolicyResponse < Struct.new(
+      nil,
       :policy_arn,
       :alarms,
       keyword_init: true
@@ -2908,6 +2951,7 @@ module Aws::ApplicationAutoScaling
     #            scales in to the maximum capacity.</p>
     #   @return [Types::ScalableTargetAction]
     class PutScheduledActionRequest < Struct.new(
+      nil,
       :service_namespace,
       :schedule,
       :timezone,
@@ -2923,6 +2967,7 @@ module Aws::ApplicationAutoScaling
     end
 
     class PutScheduledActionResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -3216,6 +3261,7 @@ module Aws::ApplicationAutoScaling
     #               for Application Auto Scaling</a> in the <i>Application Auto Scaling User Guide</i>.</p>
     #   @return [Hash<String, String>]
     class RegisterScalableTargetRequest < Struct.new(
+      nil,
       :service_namespace,
       :resource_id,
       :scalable_dimension,
@@ -3233,6 +3279,7 @@ module Aws::ApplicationAutoScaling
     #   <p>The ARN of the scalable target.</p>
     #   @return [String]
     class RegisterScalableTargetResponse < Struct.new(
+      nil,
       :scalable_target_arn,
       keyword_init: true
     )
@@ -3246,6 +3293,7 @@ module Aws::ApplicationAutoScaling
     #   <p>The name of the Application Auto Scaling resource. This value is an Amazon Resource Name (ARN).</p>
     #   @return [String]
     class ResourceNotFoundException < Struct.new(
+      nil,
       :message,
       :resource_name,
       keyword_init: true
@@ -3470,6 +3518,7 @@ module Aws::ApplicationAutoScaling
     #   <p>The ARN of the scalable target.</p>
     #   @return [String]
     class ScalableTarget < Struct.new(
+      nil,
       :service_namespace,
       :resource_id,
       :scalable_dimension,
@@ -3502,6 +3551,7 @@ module Aws::ApplicationAutoScaling
     #               quotas</a> in the <i>Amazon Web Services General Reference</i>.</p>
     #   @return [Integer]
     class ScalableTargetAction < Struct.new(
+      nil,
       :min_capacity,
       :max_capacity,
       keyword_init: true
@@ -3728,6 +3778,7 @@ module Aws::ApplicationAutoScaling
     #            available when <a href="https://docs.aws.amazon.com/autoscaling/application/APIReference/API_DescribeScalingActivities.html">DescribeScalingActivities</a> includes not scaled activities.</p>
     #   @return [Array<Types::NotScaledReason>]
     class ScalingActivity < Struct.new(
+      nil,
       :activity_id,
       :service_namespace,
       :resource_id,
@@ -3974,6 +4025,7 @@ module Aws::ApplicationAutoScaling
     #   <p>The Unix timestamp for when the scaling policy was created.</p>
     #   @return [Time]
     class ScalingPolicy < Struct.new(
+      nil,
       :policy_arn,
       :policy_name,
       :service_namespace,
@@ -4230,6 +4282,7 @@ module Aws::ApplicationAutoScaling
     #   <p>The date and time that the scheduled action was created.</p>
     #   @return [Time]
     class ScheduledAction < Struct.new(
+      nil,
       :scheduled_action_name,
       :scheduled_action_arn,
       :service_namespace,
@@ -4303,6 +4356,7 @@ module Aws::ApplicationAutoScaling
     #            exact capacity, you must specify a non-negative value.</p>
     #   @return [Integer]
     class StepAdjustment < Struct.new(
+      nil,
       :metric_interval_lower_bound,
       :metric_interval_upper_bound,
       :scaling_adjustment,
@@ -4346,6 +4400,7 @@ module Aws::ApplicationAutoScaling
     #            value is treated as <code>Average</code>.</p>
     #   @return [String]
     class StepScalingPolicyConfiguration < Struct.new(
+      nil,
       :adjustment_type,
       :step_adjustments,
       :min_adjustment_magnitude,
@@ -4374,6 +4429,7 @@ module Aws::ApplicationAutoScaling
     #               <code>false</code>. </p>
     #   @return [Boolean]
     class SuspendedState < Struct.new(
+      nil,
       :dynamic_scaling_in_suspended,
       :dynamic_scaling_out_suspended,
       :scheduled_scaling_suspended,
@@ -4400,6 +4456,7 @@ module Aws::ApplicationAutoScaling
     #               restrictions</a> in the <i>Amazon Web Services Billing User Guide</i>.</p>
     #   @return [Hash<String, String>]
     class TagResourceRequest < Struct.new(
+      nil,
       :resource_arn,
       :tags,
       keyword_init: true
@@ -4408,6 +4465,7 @@ module Aws::ApplicationAutoScaling
     end
 
     class TagResourceResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -4432,6 +4490,7 @@ module Aws::ApplicationAutoScaling
     #               Guide</i>.</p>
     #   @return [String]
     class TargetTrackingMetric < Struct.new(
+      nil,
       :dimensions,
       :metric_name,
       :namespace,
@@ -4482,6 +4541,7 @@ module Aws::ApplicationAutoScaling
     #               (<code>true</code>).</p>
     #   @return [Boolean]
     class TargetTrackingMetricDataQuery < Struct.new(
+      nil,
       :expression,
       :id,
       :label,
@@ -4500,6 +4560,7 @@ module Aws::ApplicationAutoScaling
     #   <p>The value of the dimension.</p>
     #   @return [String]
     class TargetTrackingMetricDimension < Struct.new(
+      nil,
       :name,
       :value,
       keyword_init: true
@@ -4527,6 +4588,7 @@ module Aws::ApplicationAutoScaling
     #            type in the <i>Amazon CloudWatch API Reference</i>.</p>
     #   @return [String]
     class TargetTrackingMetricStat < Struct.new(
+      nil,
       :metric,
       :stat,
       :unit,
@@ -4574,6 +4636,7 @@ module Aws::ApplicationAutoScaling
     #            value is <code>false</code>.</p>
     #   @return [Boolean]
     class TargetTrackingScalingPolicyConfiguration < Struct.new(
+      nil,
       :target_value,
       :predefined_metric_specification,
       :customized_metric_specification,
@@ -4592,6 +4655,7 @@ module Aws::ApplicationAutoScaling
     #   <p>The name of the Application Auto Scaling resource. This value is an Amazon Resource Name (ARN).</p>
     #   @return [String]
     class TooManyTagsException < Struct.new(
+      nil,
       :message,
       :resource_name,
       keyword_init: true
@@ -4610,6 +4674,7 @@ module Aws::ApplicationAutoScaling
     #   <p>One or more tag keys. Specify only the tag keys, not the tag values.</p>
     #   @return [Array<String>]
     class UntagResourceRequest < Struct.new(
+      nil,
       :resource_arn,
       :tag_keys,
       keyword_init: true
@@ -4618,6 +4683,7 @@ module Aws::ApplicationAutoScaling
     end
 
     class UntagResourceResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -4628,6 +4694,7 @@ module Aws::ApplicationAutoScaling
     # @!attribute message
     #   @return [String]
     class ValidationException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )

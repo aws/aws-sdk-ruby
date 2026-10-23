@@ -13,6 +13,7 @@ module Aws::Schemas
     #   <p>The message string of the error output.</p>
     #   @return [String]
     class BadRequestException < Struct.new(
+      nil,
       :code,
       :message,
       keyword_init: true
@@ -27,6 +28,7 @@ module Aws::Schemas
     #   <p>The message string of the error output.</p>
     #   @return [String]
     class ConflictException < Struct.new(
+      nil,
       :code,
       :message,
       keyword_init: true
@@ -47,6 +49,7 @@ module Aws::Schemas
     #   <p>Tags associated with the resource.</p>
     #   @return [Hash<String, String>]
     class CreateDiscovererRequest < Struct.new(
+      nil,
       :description,
       :source_arn,
       :cross_account,
@@ -78,6 +81,7 @@ module Aws::Schemas
     #   <p>Tags associated with the resource.</p>
     #   @return [Hash<String, String>]
     class CreateDiscovererResponse < Struct.new(
+      nil,
       :description,
       :discoverer_arn,
       :discoverer_id,
@@ -100,6 +104,7 @@ module Aws::Schemas
     #   <p>Tags to associate with the registry.</p>
     #   @return [Hash<String, String>]
     class CreateRegistryRequest < Struct.new(
+      nil,
       :description,
       :registry_name,
       :tags,
@@ -121,6 +126,7 @@ module Aws::Schemas
     #   <p>Tags associated with the registry.</p>
     #   @return [Hash<String, String>]
     class CreateRegistryResponse < Struct.new(
+      nil,
       :description,
       :registry_arn,
       :registry_name,
@@ -149,6 +155,7 @@ module Aws::Schemas
     #   <p>The type of schema.</p>
     #   @return [String]
     class CreateSchemaRequest < Struct.new(
+      nil,
       :content,
       :description,
       :registry_name,
@@ -185,6 +192,7 @@ module Aws::Schemas
     #   <p>The date the schema version was created.</p>
     #   @return [Time]
     class CreateSchemaResponse < Struct.new(
+      nil,
       :description,
       :last_modified,
       :schema_arn,
@@ -202,6 +210,7 @@ module Aws::Schemas
     #   <p>The ID of the discoverer.</p>
     #   @return [String]
     class DeleteDiscovererRequest < Struct.new(
+      nil,
       :discoverer_id,
       keyword_init: true
     )
@@ -212,6 +221,7 @@ module Aws::Schemas
     #   <p>The name of the registry.</p>
     #   @return [String]
     class DeleteRegistryRequest < Struct.new(
+      nil,
       :registry_name,
       keyword_init: true
     )
@@ -222,6 +232,7 @@ module Aws::Schemas
     #   <p>The name of the registry.</p>
     #   @return [String]
     class DeleteResourcePolicyRequest < Struct.new(
+      nil,
       :registry_name,
       keyword_init: true
     )
@@ -235,6 +246,7 @@ module Aws::Schemas
     #   <p>The name of the schema.</p>
     #   @return [String]
     class DeleteSchemaRequest < Struct.new(
+      nil,
       :registry_name,
       :schema_name,
       keyword_init: true
@@ -252,6 +264,7 @@ module Aws::Schemas
     #   The version number of the schema
     #   @return [String]
     class DeleteSchemaVersionRequest < Struct.new(
+      nil,
       :registry_name,
       :schema_name,
       :schema_version,
@@ -273,6 +286,7 @@ module Aws::Schemas
     #   <p>Specifying this limits the results to only this schema version.</p>
     #   @return [String]
     class DescribeCodeBindingRequest < Struct.new(
+      nil,
       :language,
       :registry_name,
       :schema_name,
@@ -295,6 +309,7 @@ module Aws::Schemas
     #   <p>The current status of code binding generation.</p>
     #   @return [String]
     class DescribeCodeBindingResponse < Struct.new(
+      nil,
       :creation_date,
       :last_modified,
       :schema_version,
@@ -308,6 +323,7 @@ module Aws::Schemas
     #   <p>The ID of the discoverer.</p>
     #   @return [String]
     class DescribeDiscovererRequest < Struct.new(
+      nil,
       :discoverer_id,
       keyword_init: true
     )
@@ -336,6 +352,7 @@ module Aws::Schemas
     #   <p>Tags associated with the resource.</p>
     #   @return [Hash<String, String>]
     class DescribeDiscovererResponse < Struct.new(
+      nil,
       :description,
       :discoverer_arn,
       :discoverer_id,
@@ -352,6 +369,7 @@ module Aws::Schemas
     #   <p>The name of the registry.</p>
     #   @return [String]
     class DescribeRegistryRequest < Struct.new(
+      nil,
       :registry_name,
       keyword_init: true
     )
@@ -371,6 +389,7 @@ module Aws::Schemas
     #   <p>Tags associated with the registry.</p>
     #   @return [Hash<String, String>]
     class DescribeRegistryResponse < Struct.new(
+      nil,
       :description,
       :registry_arn,
       :registry_name,
@@ -390,6 +409,7 @@ module Aws::Schemas
     #   <p>Specifying this limits the results to only this schema version.</p>
     #   @return [String]
     class DescribeSchemaRequest < Struct.new(
+      nil,
       :registry_name,
       :schema_name,
       :schema_version,
@@ -426,6 +446,7 @@ module Aws::Schemas
     #   <p>The date the schema version was created.</p>
     #   @return [Time]
     class DescribeSchemaResponse < Struct.new(
+      nil,
       :content,
       :description,
       :last_modified,
@@ -459,6 +480,7 @@ module Aws::Schemas
     #   <p>Tags associated with the resource.</p>
     #   @return [Hash<String, String>]
     class DiscovererSummary < Struct.new(
+      nil,
       :discoverer_arn,
       :discoverer_id,
       :source_arn,
@@ -482,6 +504,7 @@ module Aws::Schemas
     # @!attribute type
     #   @return [String]
     class ExportSchemaRequest < Struct.new(
+      nil,
       :registry_name,
       :schema_name,
       :schema_version,
@@ -502,6 +525,7 @@ module Aws::Schemas
     # @!attribute type
     #   @return [String]
     class ExportSchemaResponse < Struct.new(
+      nil,
       :content,
       :schema_arn,
       :schema_name,
@@ -519,6 +543,7 @@ module Aws::Schemas
     #   <p>The message string of the error output.</p>
     #   @return [String]
     class ForbiddenException < Struct.new(
+      nil,
       :code,
       :message,
       keyword_init: true
@@ -539,6 +564,7 @@ module Aws::Schemas
     #   <p>Specifying this limits the results to only this schema version.</p>
     #   @return [String]
     class GetCodeBindingSourceRequest < Struct.new(
+      nil,
       :language,
       :registry_name,
       :schema_name,
@@ -551,6 +577,7 @@ module Aws::Schemas
     # @!attribute body
     #   @return [String]
     class GetCodeBindingSourceResponse < Struct.new(
+      nil,
       :body,
       keyword_init: true
     )
@@ -564,6 +591,7 @@ module Aws::Schemas
     #   <p>The type of event.</p>
     #   @return [String]
     class GetDiscoveredSchemaRequest < Struct.new(
+      nil,
       :events,
       :type,
       keyword_init: true
@@ -575,6 +603,7 @@ module Aws::Schemas
     #   <p>The source of the schema definition.</p>
     #   @return [String]
     class GetDiscoveredSchemaResponse < Struct.new(
+      nil,
       :content,
       keyword_init: true
     )
@@ -585,6 +614,7 @@ module Aws::Schemas
     #   <p>The name of the registry.</p>
     #   @return [String]
     class GetResourcePolicyRequest < Struct.new(
+      nil,
       :registry_name,
       keyword_init: true
     )
@@ -598,6 +628,7 @@ module Aws::Schemas
     #   <p>The revision ID.</p>
     #   @return [String]
     class GetResourcePolicyResponse < Struct.new(
+      nil,
       :policy,
       :revision_id,
       keyword_init: true
@@ -612,6 +643,7 @@ module Aws::Schemas
     #   <p>The message string of the error output.</p>
     #   @return [String]
     class GoneException < Struct.new(
+      nil,
       :code,
       :message,
       keyword_init: true
@@ -626,6 +658,7 @@ module Aws::Schemas
     #   <p>The message string of the error output.</p>
     #   @return [String]
     class InternalServerErrorException < Struct.new(
+      nil,
       :code,
       :message,
       keyword_init: true
@@ -645,6 +678,7 @@ module Aws::Schemas
     #   <p>Specifying this limits the results to only those ARNs that start with the specified prefix.</p>
     #   @return [String]
     class ListDiscoverersRequest < Struct.new(
+      nil,
       :discoverer_id_prefix,
       :limit,
       :next_token,
@@ -661,6 +695,7 @@ module Aws::Schemas
     #   <p>The token that specifies the next page of results to return. To request the first page, leave NextToken empty. The token will expire in 24 hours, and cannot be shared with other accounts.</p>
     #   @return [String]
     class ListDiscoverersResponse < Struct.new(
+      nil,
       :discoverers,
       :next_token,
       keyword_init: true
@@ -680,6 +715,7 @@ module Aws::Schemas
     #   <p>Can be set to Local or AWS to limit responses to your custom registries, or the ones provided by AWS.</p>
     #   @return [String]
     class ListRegistriesRequest < Struct.new(
+      nil,
       :limit,
       :next_token,
       :registry_name_prefix,
@@ -696,6 +732,7 @@ module Aws::Schemas
     #   <p>An array of registry summaries.</p>
     #   @return [Array<Types::RegistrySummary>]
     class ListRegistriesResponse < Struct.new(
+      nil,
       :next_token,
       :registries,
       keyword_init: true
@@ -715,6 +752,7 @@ module Aws::Schemas
     #   <p>The name of the schema.</p>
     #   @return [String]
     class ListSchemaVersionsRequest < Struct.new(
+      nil,
       :limit,
       :next_token,
       :registry_name,
@@ -731,6 +769,7 @@ module Aws::Schemas
     #   <p>An array of schema version summaries.</p>
     #   @return [Array<Types::SchemaVersionSummary>]
     class ListSchemaVersionsResponse < Struct.new(
+      nil,
       :next_token,
       :schema_versions,
       keyword_init: true
@@ -750,6 +789,7 @@ module Aws::Schemas
     #   <p>Specifying this limits the results to only those schema names that start with the specified prefix.</p>
     #   @return [String]
     class ListSchemasRequest < Struct.new(
+      nil,
       :limit,
       :next_token,
       :registry_name,
@@ -766,6 +806,7 @@ module Aws::Schemas
     #   <p>An array of schema summaries.</p>
     #   @return [Array<Types::SchemaSummary>]
     class ListSchemasResponse < Struct.new(
+      nil,
       :next_token,
       :schemas,
       keyword_init: true
@@ -777,6 +818,7 @@ module Aws::Schemas
     #   <p>The ARN of the resource.</p>
     #   @return [String]
     class ListTagsForResourceRequest < Struct.new(
+      nil,
       :resource_arn,
       keyword_init: true
     )
@@ -787,6 +829,7 @@ module Aws::Schemas
     #   <p>Key-value pairs associated with a resource.</p>
     #   @return [Hash<String, String>]
     class ListTagsForResourceResponse < Struct.new(
+      nil,
       :tags,
       keyword_init: true
     )
@@ -800,6 +843,7 @@ module Aws::Schemas
     #   <p>The message string of the error output.</p>
     #   @return [String]
     class NotFoundException < Struct.new(
+      nil,
       :code,
       :message,
       keyword_init: true
@@ -814,6 +858,7 @@ module Aws::Schemas
     #   <p>The message string of the error output.</p>
     #   @return [String]
     class PreconditionFailedException < Struct.new(
+      nil,
       :code,
       :message,
       keyword_init: true
@@ -834,6 +879,7 @@ module Aws::Schemas
     #   <p>Specifying this limits the results to only this schema version.</p>
     #   @return [String]
     class PutCodeBindingRequest < Struct.new(
+      nil,
       :language,
       :registry_name,
       :schema_name,
@@ -856,6 +902,7 @@ module Aws::Schemas
     #   <p>The current status of code binding generation.</p>
     #   @return [String]
     class PutCodeBindingResponse < Struct.new(
+      nil,
       :creation_date,
       :last_modified,
       :schema_version,
@@ -876,6 +923,7 @@ module Aws::Schemas
     #   <p>The revision ID of the policy.</p>
     #   @return [String]
     class PutResourcePolicyRequest < Struct.new(
+      nil,
       :policy,
       :registry_name,
       :revision_id,
@@ -891,6 +939,7 @@ module Aws::Schemas
     #   <p>The revision ID of the policy.</p>
     #   @return [String]
     class PutResourcePolicyResponse < Struct.new(
+      nil,
       :policy,
       :revision_id,
       keyword_init: true
@@ -908,6 +957,7 @@ module Aws::Schemas
     #   <p>Tags associated with the registry.</p>
     #   @return [Hash<String, String>]
     class RegistrySummary < Struct.new(
+      nil,
       :registry_arn,
       :registry_name,
       :tags,
@@ -933,6 +983,7 @@ module Aws::Schemas
     #   <p>The number of versions available for the schema.</p>
     #   @return [Integer]
     class SchemaSummary < Struct.new(
+      nil,
       :last_modified,
       :schema_arn,
       :schema_name,
@@ -956,6 +1007,7 @@ module Aws::Schemas
     #   <p>The type of schema.</p>
     #   @return [String]
     class SchemaVersionSummary < Struct.new(
+      nil,
       :schema_arn,
       :schema_name,
       :schema_version,
@@ -978,6 +1030,7 @@ module Aws::Schemas
     #   <p>An array of schema version summaries.</p>
     #   @return [Array<Types::SearchSchemaVersionSummary>]
     class SearchSchemaSummary < Struct.new(
+      nil,
       :registry_name,
       :schema_arn,
       :schema_name,
@@ -997,6 +1050,7 @@ module Aws::Schemas
     #   <p>The type of schema.</p>
     #   @return [String]
     class SearchSchemaVersionSummary < Struct.new(
+      nil,
       :created_date,
       :schema_version,
       :type,
@@ -1017,6 +1071,7 @@ module Aws::Schemas
     #   <p>The name of the registry.</p>
     #   @return [String]
     class SearchSchemasRequest < Struct.new(
+      nil,
       :keywords,
       :limit,
       :next_token,
@@ -1033,6 +1088,7 @@ module Aws::Schemas
     #   <p>An array of SearchSchemaSummary information.</p>
     #   @return [Array<Types::SearchSchemaSummary>]
     class SearchSchemasResponse < Struct.new(
+      nil,
       :next_token,
       :schemas,
       keyword_init: true
@@ -1047,6 +1103,7 @@ module Aws::Schemas
     #   <p>The message string of the error output.</p>
     #   @return [String]
     class ServiceUnavailableException < Struct.new(
+      nil,
       :code,
       :message,
       keyword_init: true
@@ -1058,6 +1115,7 @@ module Aws::Schemas
     #   <p>The ID of the discoverer.</p>
     #   @return [String]
     class StartDiscovererRequest < Struct.new(
+      nil,
       :discoverer_id,
       keyword_init: true
     )
@@ -1071,6 +1129,7 @@ module Aws::Schemas
     #   <p>The state of the discoverer.</p>
     #   @return [String]
     class StartDiscovererResponse < Struct.new(
+      nil,
       :discoverer_id,
       :state,
       keyword_init: true
@@ -1082,6 +1141,7 @@ module Aws::Schemas
     #   <p>The ID of the discoverer.</p>
     #   @return [String]
     class StopDiscovererRequest < Struct.new(
+      nil,
       :discoverer_id,
       keyword_init: true
     )
@@ -1095,6 +1155,7 @@ module Aws::Schemas
     #   <p>The state of the discoverer.</p>
     #   @return [String]
     class StopDiscovererResponse < Struct.new(
+      nil,
       :discoverer_id,
       :state,
       keyword_init: true
@@ -1110,6 +1171,7 @@ module Aws::Schemas
     #   <p>Tags associated with the resource.</p>
     #   @return [Hash<String, String>]
     class TagResourceRequest < Struct.new(
+      nil,
       :resource_arn,
       :tags,
       keyword_init: true
@@ -1124,6 +1186,7 @@ module Aws::Schemas
     #   <p>The message string of the error output.</p>
     #   @return [String]
     class TooManyRequestsException < Struct.new(
+      nil,
       :code,
       :message,
       keyword_init: true
@@ -1138,6 +1201,7 @@ module Aws::Schemas
     #   <p>The message string of the error output.</p>
     #   @return [String]
     class UnauthorizedException < Struct.new(
+      nil,
       :code,
       :message,
       keyword_init: true
@@ -1152,6 +1216,7 @@ module Aws::Schemas
     #   <p>Keys of key-value pairs.</p>
     #   @return [Array<String>]
     class UntagResourceRequest < Struct.new(
+      nil,
       :resource_arn,
       :tag_keys,
       keyword_init: true
@@ -1169,6 +1234,7 @@ module Aws::Schemas
     #   <p>Support discovery of schemas in events sent to the bus from another account. (default: true)</p>
     #   @return [Boolean]
     class UpdateDiscovererRequest < Struct.new(
+      nil,
       :description,
       :discoverer_id,
       :cross_account,
@@ -1199,6 +1265,7 @@ module Aws::Schemas
     #   <p>Tags associated with the resource.</p>
     #   @return [Hash<String, String>]
     class UpdateDiscovererResponse < Struct.new(
+      nil,
       :description,
       :discoverer_arn,
       :discoverer_id,
@@ -1219,6 +1286,7 @@ module Aws::Schemas
     #   <p>The name of the registry.</p>
     #   @return [String]
     class UpdateRegistryRequest < Struct.new(
+      nil,
       :description,
       :registry_name,
       keyword_init: true
@@ -1239,6 +1307,7 @@ module Aws::Schemas
     #   <p>Tags associated with the registry.</p>
     #   @return [Hash<String, String>]
     class UpdateRegistryResponse < Struct.new(
+      nil,
       :description,
       :registry_arn,
       :registry_name,
@@ -1267,6 +1336,7 @@ module Aws::Schemas
     #   <p>The schema type for the events schema.</p>
     #   @return [String]
     class UpdateSchemaRequest < Struct.new(
+      nil,
       :client_token_id,
       :content,
       :description,
@@ -1303,6 +1373,7 @@ module Aws::Schemas
     #   <p>The date the schema version was created.</p>
     #   @return [Time]
     class UpdateSchemaResponse < Struct.new(
+      nil,
       :description,
       :last_modified,
       :schema_arn,

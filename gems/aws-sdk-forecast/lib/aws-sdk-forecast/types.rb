@@ -35,6 +35,7 @@ module Aws::Forecast
     #   <p>The value that is applied for the chosen <code>Operation</code>.</p>
     #   @return [Float]
     class Action < Struct.new(
+      nil,
       :attribute_name,
       :operation,
       :value,
@@ -280,6 +281,7 @@ module Aws::Forecast
     #            </ul>
     #   @return [Hash<String, Array<String>>]
     class AdditionalDataset < Struct.new(
+      nil,
       :name,
       :configuration,
       keyword_init: true
@@ -373,6 +375,7 @@ module Aws::Forecast
     #                   <code>"backfill": "value"</code> and <code>"backfill_value":"2"</code>. </p>
     #   @return [Hash<String, String>]
     class AttributeConfig < Struct.new(
+      nil,
       :attribute_name,
       :transformations,
       keyword_init: true
@@ -386,6 +389,7 @@ module Aws::Forecast
     #            use your predictor and the metrics change.</p>
     #   @return [Types::PredictorBaseline]
     class Baseline < Struct.new(
+      nil,
       :predictor_baseline,
       keyword_init: true
     )
@@ -400,6 +404,7 @@ module Aws::Forecast
     #   <p>The value for the metric.</p>
     #   @return [Float]
     class BaselineMetric < Struct.new(
+      nil,
       :name,
       :value,
       keyword_init: true
@@ -416,6 +421,7 @@ module Aws::Forecast
     #   <p>A list of the tunable categories for the hyperparameter.</p>
     #   @return [Array<String>]
     class CategoricalParameterRange < Struct.new(
+      nil,
       :name,
       :values,
       keyword_init: true
@@ -466,6 +472,7 @@ module Aws::Forecast
     #         One of the following values:</p>
     #   @return [String]
     class ContinuousParameterRange < Struct.new(
+      nil,
       :name,
       :max_value,
       :min_value,
@@ -599,6 +606,7 @@ module Aws::Forecast
     #               don't provide a time boundary, Forecast uses a set of <a href="https://docs.aws.amazon.com/forecast/latest/dg/data-aggregation.html#default-time-boundaries">Default Time Boundaries</a>.</p>
     #   @return [Types::TimeAlignmentBoundary]
     class CreateAutoPredictorRequest < Struct.new(
+      nil,
       :predictor_name,
       :forecast_horizon,
       :forecast_types,
@@ -621,6 +629,7 @@ module Aws::Forecast
     #   <p>The Amazon Resource Name (ARN) of the predictor.</p>
     #   @return [String]
     class CreateAutoPredictorResponse < Struct.new(
+      nil,
       :predictor_arn,
       keyword_init: true
     )
@@ -684,6 +693,7 @@ module Aws::Forecast
     #            </ul>
     #   @return [Array<Types::Tag>]
     class CreateDatasetGroupRequest < Struct.new(
+      nil,
       :dataset_group_name,
       :domain,
       :dataset_arns,
@@ -697,6 +707,7 @@ module Aws::Forecast
     #   <p>The Amazon Resource Name (ARN) of the dataset group.</p>
     #   @return [String]
     class CreateDatasetGroupResponse < Struct.new(
+      nil,
       :dataset_group_arn,
       keyword_init: true
     )
@@ -809,6 +820,7 @@ module Aws::Forecast
     #   <p>Specifies whether the dataset import job is a <code>FULL</code> or <code>INCREMENTAL</code> import. A <code>FULL</code> dataset import replaces all of the existing data with the newly imported data. An <code>INCREMENTAL</code> import appends the imported data to the existing data.</p>
     #   @return [String]
     class CreateDatasetImportJobRequest < Struct.new(
+      nil,
       :dataset_import_job_name,
       :dataset_arn,
       :data_source,
@@ -828,6 +840,7 @@ module Aws::Forecast
     #   <p>The Amazon Resource Name (ARN) of the dataset import job.</p>
     #   @return [String]
     class CreateDatasetImportJobResponse < Struct.new(
+      nil,
       :dataset_import_job_arn,
       keyword_init: true
     )
@@ -926,6 +939,7 @@ module Aws::Forecast
     #            </ul>
     #   @return [Array<Types::Tag>]
     class CreateDatasetRequest < Struct.new(
+      nil,
       :dataset_name,
       :domain,
       :dataset_type,
@@ -942,6 +956,7 @@ module Aws::Forecast
     #   <p>The Amazon Resource Name (ARN) of the dataset.</p>
     #   @return [String]
     class CreateDatasetResponse < Struct.new(
+      nil,
       :dataset_arn,
       keyword_init: true
     )
@@ -996,6 +1011,7 @@ module Aws::Forecast
     #   <p>The format of the exported data, CSV or PARQUET.</p>
     #   @return [String]
     class CreateExplainabilityExportRequest < Struct.new(
+      nil,
       :explainability_export_name,
       :explainability_arn,
       :destination,
@@ -1010,6 +1026,7 @@ module Aws::Forecast
     #   <p>The Amazon Resource Name (ARN) of the export.</p>
     #   @return [String]
     class CreateExplainabilityExportResponse < Struct.new(
+      nil,
       :explainability_export_arn,
       keyword_init: true
     )
@@ -1084,6 +1101,7 @@ module Aws::Forecast
     #            </ul>
     #   @return [Array<Types::Tag>]
     class CreateExplainabilityRequest < Struct.new(
+      nil,
       :explainability_name,
       :resource_arn,
       :explainability_config,
@@ -1102,6 +1120,7 @@ module Aws::Forecast
     #   <p>The Amazon Resource Name (ARN) of the Explainability.</p>
     #   @return [String]
     class CreateExplainabilityResponse < Struct.new(
+      nil,
       :explainability_arn,
       keyword_init: true
     )
@@ -1163,6 +1182,7 @@ module Aws::Forecast
     #   <p>The format of the exported data, CSV or PARQUET. The default value is CSV.</p>
     #   @return [String]
     class CreateForecastExportJobRequest < Struct.new(
+      nil,
       :forecast_export_job_name,
       :forecast_arn,
       :destination,
@@ -1177,6 +1197,7 @@ module Aws::Forecast
     #   <p>The Amazon Resource Name (ARN) of the export job.</p>
     #   @return [String]
     class CreateForecastExportJobResponse < Struct.new(
+      nil,
       :forecast_export_job_arn,
       keyword_init: true
     )
@@ -1259,6 +1280,7 @@ module Aws::Forecast
     #            </ul>
     #   @return [Types::TimeSeriesSelector]
     class CreateForecastRequest < Struct.new(
+      nil,
       :forecast_name,
       :predictor_arn,
       :forecast_types,
@@ -1273,6 +1295,7 @@ module Aws::Forecast
     #   <p>The Amazon Resource Name (ARN) of the forecast.</p>
     #   @return [String]
     class CreateForecastResponse < Struct.new(
+      nil,
       :forecast_arn,
       keyword_init: true
     )
@@ -1289,6 +1312,7 @@ module Aws::Forecast
     #   <p>A list of <a href="https://docs.aws.amazon.com/forecast/latest/dg/tagging-forecast-resources.html">tags</a> to apply to the monitor resource.</p>
     #   @return [Array<Types::Tag>]
     class CreateMonitorRequest < Struct.new(
+      nil,
       :monitor_name,
       :resource_arn,
       :tags,
@@ -1301,6 +1325,7 @@ module Aws::Forecast
     #   <p>The Amazon Resource Name (ARN) of the monitor resource.</p>
     #   @return [String]
     class CreateMonitorResponse < Struct.new(
+      nil,
       :monitor_arn,
       keyword_init: true
     )
@@ -1355,6 +1380,7 @@ module Aws::Forecast
     #   <p>The format of the exported data, CSV or PARQUET. The default value is CSV.</p>
     #   @return [String]
     class CreatePredictorBacktestExportJobRequest < Struct.new(
+      nil,
       :predictor_backtest_export_job_name,
       :predictor_arn,
       :destination,
@@ -1370,6 +1396,7 @@ module Aws::Forecast
     #               export.</p>
     #   @return [String]
     class CreatePredictorBacktestExportJobResponse < Struct.new(
+      nil,
       :predictor_backtest_export_job_arn,
       keyword_init: true
     )
@@ -1542,6 +1569,7 @@ module Aws::Forecast
     #   <p>The accuracy metric used to optimize the predictor.</p>
     #   @return [String]
     class CreatePredictorRequest < Struct.new(
+      nil,
       :predictor_name,
       :algorithm_arn,
       :forecast_horizon,
@@ -1566,6 +1594,7 @@ module Aws::Forecast
     #   <p>The Amazon Resource Name (ARN) of the predictor.</p>
     #   @return [String]
     class CreatePredictorResponse < Struct.new(
+      nil,
       :predictor_arn,
       keyword_init: true
     )
@@ -1604,6 +1633,7 @@ module Aws::Forecast
     #   <p>A list of <a href="https://docs.aws.amazon.com/forecast/latest/dg/tagging-forecast-resources.html">tags</a> to apply to the what if forecast.</p>
     #   @return [Array<Types::Tag>]
     class CreateWhatIfAnalysisRequest < Struct.new(
+      nil,
       :what_if_analysis_name,
       :forecast_arn,
       :time_series_selector,
@@ -1617,6 +1647,7 @@ module Aws::Forecast
     #   <p>The Amazon Resource Name (ARN) of the what-if analysis.</p>
     #   @return [String]
     class CreateWhatIfAnalysisResponse < Struct.new(
+      nil,
       :what_if_analysis_arn,
       keyword_init: true
     )
@@ -1643,6 +1674,7 @@ module Aws::Forecast
     #   <p>The format of the exported data, CSV or PARQUET.</p>
     #   @return [String]
     class CreateWhatIfForecastExportRequest < Struct.new(
+      nil,
       :what_if_forecast_export_name,
       :what_if_forecast_arns,
       :destination,
@@ -1657,6 +1689,7 @@ module Aws::Forecast
     #   <p>The Amazon Resource Name (ARN) of the what-if forecast.</p>
     #   @return [String]
     class CreateWhatIfForecastExportResponse < Struct.new(
+      nil,
       :what_if_forecast_export_arn,
       keyword_init: true
     )
@@ -1686,6 +1719,7 @@ module Aws::Forecast
     #   <p>A list of <a href="https://docs.aws.amazon.com/forecast/latest/dg/tagging-forecast-resources.html">tags</a> to apply to the what if forecast.</p>
     #   @return [Array<Types::Tag>]
     class CreateWhatIfForecastRequest < Struct.new(
+      nil,
       :what_if_forecast_name,
       :what_if_analysis_arn,
       :time_series_transformations,
@@ -1700,6 +1734,7 @@ module Aws::Forecast
     #   <p>The Amazon Resource Name (ARN) of the what-if forecast.</p>
     #   @return [String]
     class CreateWhatIfForecastResponse < Struct.new(
+      nil,
       :what_if_forecast_arn,
       keyword_init: true
     )
@@ -1717,6 +1752,7 @@ module Aws::Forecast
     #   <p>Additional built-in datasets like Holidays and the Weather Index.</p>
     #   @return [Array<Types::AdditionalDataset>]
     class DataConfig < Struct.new(
+      nil,
       :dataset_group_arn,
       :attribute_configs,
       :additional_datasets,
@@ -1732,6 +1768,7 @@ module Aws::Forecast
     #         bucket.</p>
     #   @return [Types::S3Config]
     class DataDestination < Struct.new(
+      nil,
       :s3_config,
       keyword_init: true
     )
@@ -1745,6 +1782,7 @@ module Aws::Forecast
     #         credentials to access the data.</p>
     #   @return [Types::S3Config]
     class DataSource < Struct.new(
+      nil,
       :s3_config,
       keyword_init: true
     )
@@ -1769,6 +1807,7 @@ module Aws::Forecast
     #         call.</p>
     #   @return [Time]
     class DatasetGroupSummary < Struct.new(
+      nil,
       :dataset_group_arn,
       :dataset_group_name,
       :creation_time,
@@ -1856,6 +1895,7 @@ module Aws::Forecast
     #   <p>The import mode of the dataset import job, FULL or INCREMENTAL.</p>
     #   @return [String]
     class DatasetImportJobSummary < Struct.new(
+      nil,
       :dataset_import_job_arn,
       :dataset_import_job_name,
       :data_source,
@@ -1895,6 +1935,7 @@ module Aws::Forecast
     #         when the import job completed or failed.</p>
     #   @return [Time]
     class DatasetSummary < Struct.new(
+      nil,
       :dataset_arn,
       :dataset_name,
       :dataset_type,
@@ -1910,6 +1951,7 @@ module Aws::Forecast
     #   <p>The Amazon Resource Name (ARN) of the dataset group to delete.</p>
     #   @return [String]
     class DeleteDatasetGroupRequest < Struct.new(
+      nil,
       :dataset_group_arn,
       keyword_init: true
     )
@@ -1920,6 +1962,7 @@ module Aws::Forecast
     #   <p>The Amazon Resource Name (ARN) of the dataset import job to delete.</p>
     #   @return [String]
     class DeleteDatasetImportJobRequest < Struct.new(
+      nil,
       :dataset_import_job_arn,
       keyword_init: true
     )
@@ -1930,6 +1973,7 @@ module Aws::Forecast
     #   <p>The Amazon Resource Name (ARN) of the dataset to delete.</p>
     #   @return [String]
     class DeleteDatasetRequest < Struct.new(
+      nil,
       :dataset_arn,
       keyword_init: true
     )
@@ -1940,6 +1984,7 @@ module Aws::Forecast
     #   <p>The Amazon Resource Name (ARN) of the Explainability export to delete. </p>
     #   @return [String]
     class DeleteExplainabilityExportRequest < Struct.new(
+      nil,
       :explainability_export_arn,
       keyword_init: true
     )
@@ -1950,6 +1995,7 @@ module Aws::Forecast
     #   <p>The Amazon Resource Name (ARN) of the Explainability resource to delete.</p>
     #   @return [String]
     class DeleteExplainabilityRequest < Struct.new(
+      nil,
       :explainability_arn,
       keyword_init: true
     )
@@ -1960,6 +2006,7 @@ module Aws::Forecast
     #   <p>The Amazon Resource Name (ARN) of the forecast export job to delete.</p>
     #   @return [String]
     class DeleteForecastExportJobRequest < Struct.new(
+      nil,
       :forecast_export_job_arn,
       keyword_init: true
     )
@@ -1970,6 +2017,7 @@ module Aws::Forecast
     #   <p>The Amazon Resource Name (ARN) of the forecast to delete.</p>
     #   @return [String]
     class DeleteForecastRequest < Struct.new(
+      nil,
       :forecast_arn,
       keyword_init: true
     )
@@ -1980,6 +2028,7 @@ module Aws::Forecast
     #   <p>The Amazon Resource Name (ARN) of the monitor resource to delete.</p>
     #   @return [String]
     class DeleteMonitorRequest < Struct.new(
+      nil,
       :monitor_arn,
       keyword_init: true
     )
@@ -1990,6 +2039,7 @@ module Aws::Forecast
     #   <p>The Amazon Resource Name (ARN) of the predictor backtest export job to delete.</p>
     #   @return [String]
     class DeletePredictorBacktestExportJobRequest < Struct.new(
+      nil,
       :predictor_backtest_export_job_arn,
       keyword_init: true
     )
@@ -2000,6 +2050,7 @@ module Aws::Forecast
     #   <p>The Amazon Resource Name (ARN) of the predictor to delete.</p>
     #   @return [String]
     class DeletePredictorRequest < Struct.new(
+      nil,
       :predictor_arn,
       keyword_init: true
     )
@@ -2011,6 +2062,7 @@ module Aws::Forecast
     #               of the parent resource will also be deleted.</p>
     #   @return [String]
     class DeleteResourceTreeRequest < Struct.new(
+      nil,
       :resource_arn,
       keyword_init: true
     )
@@ -2021,6 +2073,7 @@ module Aws::Forecast
     #   <p>The Amazon Resource Name (ARN) of the what-if analysis that you want to delete.</p>
     #   @return [String]
     class DeleteWhatIfAnalysisRequest < Struct.new(
+      nil,
       :what_if_analysis_arn,
       keyword_init: true
     )
@@ -2031,6 +2084,7 @@ module Aws::Forecast
     #   <p>The Amazon Resource Name (ARN) of the what-if forecast export that you want to delete.</p>
     #   @return [String]
     class DeleteWhatIfForecastExportRequest < Struct.new(
+      nil,
       :what_if_forecast_export_arn,
       keyword_init: true
     )
@@ -2041,6 +2095,7 @@ module Aws::Forecast
     #   <p>The Amazon Resource Name (ARN) of the what-if forecast that you want to delete.</p>
     #   @return [String]
     class DeleteWhatIfForecastRequest < Struct.new(
+      nil,
       :what_if_forecast_arn,
       keyword_init: true
     )
@@ -2051,6 +2106,7 @@ module Aws::Forecast
     #   <p>The Amazon Resource Name (ARN) of the predictor.</p>
     #   @return [String]
     class DescribeAutoPredictorRequest < Struct.new(
+      nil,
       :predictor_arn,
       keyword_init: true
     )
@@ -2174,6 +2230,7 @@ module Aws::Forecast
     #   <p>The time boundary Forecast uses when aggregating data.</p>
     #   @return [Types::TimeAlignmentBoundary]
     class DescribeAutoPredictorResponse < Struct.new(
+      nil,
       :predictor_arn,
       :predictor_name,
       :forecast_horizon,
@@ -2202,6 +2259,7 @@ module Aws::Forecast
     #   <p>The Amazon Resource Name (ARN) of the dataset group.</p>
     #   @return [String]
     class DescribeDatasetGroupRequest < Struct.new(
+      nil,
       :dataset_group_arn,
       keyword_init: true
     )
@@ -2264,6 +2322,7 @@ module Aws::Forecast
     #           <code>DescribeDatasetGroup</code> call.</p>
     #   @return [Time]
     class DescribeDatasetGroupResponse < Struct.new(
+      nil,
       :dataset_group_name,
       :dataset_group_arn,
       :dataset_arns,
@@ -2280,6 +2339,7 @@ module Aws::Forecast
     #   <p>The Amazon Resource Name (ARN) of the dataset import job.</p>
     #   @return [String]
     class DescribeDatasetImportJobRequest < Struct.new(
+      nil,
       :dataset_import_job_arn,
       keyword_init: true
     )
@@ -2404,6 +2464,7 @@ module Aws::Forecast
     #   <p>The import mode of the dataset import job, FULL or INCREMENTAL.</p>
     #   @return [String]
     class DescribeDatasetImportJobResponse < Struct.new(
+      nil,
       :dataset_import_job_name,
       :dataset_import_job_arn,
       :dataset_arn,
@@ -2435,6 +2496,7 @@ module Aws::Forecast
     #   <p>The Amazon Resource Name (ARN) of the dataset.</p>
     #   @return [String]
     class DescribeDatasetRequest < Struct.new(
+      nil,
       :dataset_arn,
       keyword_init: true
     )
@@ -2515,6 +2577,7 @@ module Aws::Forecast
     #         failed.</p>
     #   @return [Time]
     class DescribeDatasetResponse < Struct.new(
+      nil,
       :dataset_arn,
       :dataset_name,
       :domain,
@@ -2534,6 +2597,7 @@ module Aws::Forecast
     #   <p>The Amazon Resource Name (ARN) of the Explainability export.</p>
     #   @return [String]
     class DescribeExplainabilityExportRequest < Struct.new(
+      nil,
       :explainability_export_arn,
       keyword_init: true
     )
@@ -2617,6 +2681,7 @@ module Aws::Forecast
     #   <p>The format of the exported data, CSV or PARQUET.</p>
     #   @return [String]
     class DescribeExplainabilityExportResponse < Struct.new(
+      nil,
       :explainability_export_arn,
       :explainability_export_name,
       :explainability_arn,
@@ -2635,6 +2700,7 @@ module Aws::Forecast
     #   <p>The Amazon Resource Name (ARN) of the Explaianability to describe.</p>
     #   @return [String]
     class DescribeExplainabilityRequest < Struct.new(
+      nil,
       :explainability_arn,
       keyword_init: true
     )
@@ -2738,6 +2804,7 @@ module Aws::Forecast
     #            </ul>
     #   @return [Time]
     class DescribeExplainabilityResponse < Struct.new(
+      nil,
       :explainability_arn,
       :explainability_name,
       :resource_arn,
@@ -2761,6 +2828,7 @@ module Aws::Forecast
     #   <p>The Amazon Resource Name (ARN) of the forecast export job.</p>
     #   @return [String]
     class DescribeForecastExportJobRequest < Struct.new(
+      nil,
       :forecast_export_job_arn,
       keyword_init: true
     )
@@ -2846,6 +2914,7 @@ module Aws::Forecast
     #   <p>The format of the exported data, CSV or PARQUET.</p>
     #   @return [String]
     class DescribeForecastExportJobResponse < Struct.new(
+      nil,
       :forecast_export_job_arn,
       :forecast_export_job_name,
       :forecast_arn,
@@ -2864,6 +2933,7 @@ module Aws::Forecast
     #   <p>The Amazon Resource Name (ARN) of the forecast.</p>
     #   @return [String]
     class DescribeForecastRequest < Struct.new(
+      nil,
       :forecast_arn,
       keyword_init: true
     )
@@ -2955,6 +3025,7 @@ module Aws::Forecast
     #   <p>The time series to include in the forecast.</p>
     #   @return [Types::TimeSeriesSelector]
     class DescribeForecastResponse < Struct.new(
+      nil,
       :forecast_arn,
       :forecast_name,
       :forecast_types,
@@ -2975,6 +3046,7 @@ module Aws::Forecast
     #   <p>The Amazon Resource Name (ARN) of the monitor resource to describe.</p>
     #   @return [String]
     class DescribeMonitorRequest < Struct.new(
+      nil,
       :monitor_arn,
       keyword_init: true
     )
@@ -3015,6 +3087,7 @@ module Aws::Forecast
     #   <p>The estimated number of minutes remaining before the monitor resource finishes its current evaluation.</p>
     #   @return [Integer]
     class DescribeMonitorResponse < Struct.new(
+      nil,
       :monitor_name,
       :monitor_arn,
       :resource_arn,
@@ -3035,6 +3108,7 @@ module Aws::Forecast
     #   <p>The Amazon Resource Name (ARN) of the predictor backtest export job.</p>
     #   @return [String]
     class DescribePredictorBacktestExportJobRequest < Struct.new(
+      nil,
       :predictor_backtest_export_job_arn,
       keyword_init: true
     )
@@ -3118,6 +3192,7 @@ module Aws::Forecast
     #   <p>The format of the exported data, CSV or PARQUET.</p>
     #   @return [String]
     class DescribePredictorBacktestExportJobResponse < Struct.new(
+      nil,
       :predictor_backtest_export_job_arn,
       :predictor_backtest_export_job_name,
       :predictor_arn,
@@ -3136,6 +3211,7 @@ module Aws::Forecast
     #   <p>The Amazon Resource Name (ARN) of the predictor that you want information about.</p>
     #   @return [String]
     class DescribePredictorRequest < Struct.new(
+      nil,
       :predictor_arn,
       keyword_init: true
     )
@@ -3284,6 +3360,7 @@ module Aws::Forecast
     #   <p>The accuracy metric used to optimize the predictor.</p>
     #   @return [String]
     class DescribePredictorResponse < Struct.new(
+      nil,
       :predictor_arn,
       :predictor_name,
       :algorithm_arn,
@@ -3317,6 +3394,7 @@ module Aws::Forecast
     #   <p>The Amazon Resource Name (ARN) of the what-if analysis that you are interested in.</p>
     #   @return [String]
     class DescribeWhatIfAnalysisRequest < Struct.new(
+      nil,
       :what_if_analysis_arn,
       keyword_init: true
     )
@@ -3420,6 +3498,7 @@ module Aws::Forecast
     #            </ul>
     #   @return [Types::TimeSeriesSelector]
     class DescribeWhatIfAnalysisResponse < Struct.new(
+      nil,
       :what_if_analysis_name,
       :what_if_analysis_arn,
       :forecast_arn,
@@ -3438,6 +3517,7 @@ module Aws::Forecast
     #   <p>The Amazon Resource Name (ARN) of the what-if forecast export that you are interested in.</p>
     #   @return [String]
     class DescribeWhatIfForecastExportRequest < Struct.new(
+      nil,
       :what_if_forecast_export_arn,
       keyword_init: true
     )
@@ -3528,6 +3608,7 @@ module Aws::Forecast
     #   <p>The format of the exported data, CSV or PARQUET.</p>
     #   @return [String]
     class DescribeWhatIfForecastExportResponse < Struct.new(
+      nil,
       :what_if_forecast_export_arn,
       :what_if_forecast_export_name,
       :what_if_forecast_arns,
@@ -3547,6 +3628,7 @@ module Aws::Forecast
     #   <p>The Amazon Resource Name (ARN) of the what-if forecast that you are interested in.</p>
     #   @return [String]
     class DescribeWhatIfForecastRequest < Struct.new(
+      nil,
       :what_if_forecast_arn,
       keyword_init: true
     )
@@ -3640,6 +3722,7 @@ module Aws::Forecast
     #         values are <code>["0.1", "0.5", "0.9"]</code>. </p>
     #   @return [Array<String>]
     class DescribeWhatIfForecastResponse < Struct.new(
+      nil,
       :what_if_forecast_name,
       :what_if_forecast_arn,
       :what_if_analysis_arn,
@@ -3668,6 +3751,7 @@ module Aws::Forecast
     #   <p>The Amazon Resource Name (ARN) of the KMS key.</p>
     #   @return [String]
     class EncryptionConfig < Struct.new(
+      nil,
       :role_arn,
       :kms_key_arn,
       keyword_init: true
@@ -3693,6 +3777,7 @@ module Aws::Forecast
     #   <p>The Mean Absolute Percentage Error (MAPE)</p>
     #   @return [Float]
     class ErrorMetric < Struct.new(
+      nil,
       :forecast_type,
       :wape,
       :rmse,
@@ -3721,6 +3806,7 @@ module Aws::Forecast
     #         TARGET_TIME_SERIES dataset length</p>
     #   @return [Integer]
     class EvaluationParameters < Struct.new(
+      nil,
       :number_of_backtest_windows,
       :back_test_window_offset,
       keyword_init: true
@@ -3738,6 +3824,7 @@ module Aws::Forecast
     #         determines the number of windows in the array.</p>
     #   @return [Array<Types::WindowSummary>]
     class EvaluationResult < Struct.new(
+      nil,
       :algorithm_arn,
       :test_windows,
       keyword_init: true
@@ -3769,6 +3856,7 @@ module Aws::Forecast
     #               parameters within the <a>CreateExplainability</a> operation.</p>
     #   @return [String]
     class ExplainabilityConfig < Struct.new(
+      nil,
       :time_series_granularity,
       :time_point_granularity,
       keyword_init: true
@@ -3851,6 +3939,7 @@ module Aws::Forecast
     #            </ul>
     #   @return [Time]
     class ExplainabilityExportSummary < Struct.new(
+      nil,
       :explainability_export_arn,
       :explainability_export_name,
       :destination,
@@ -3895,6 +3984,7 @@ module Aws::Forecast
     #            </ul>
     #   @return [String]
     class ExplainabilityInfo < Struct.new(
+      nil,
       :explainability_arn,
       :status,
       keyword_init: true
@@ -3981,6 +4071,7 @@ module Aws::Forecast
     #            </ul>
     #   @return [Time]
     class ExplainabilitySummary < Struct.new(
+      nil,
       :explainability_arn,
       :explainability_name,
       :resource_arn,
@@ -4035,6 +4126,7 @@ module Aws::Forecast
     #         transformation method.</p>
     #   @return [Array<Types::FeaturizationMethod>]
     class Featurization < Struct.new(
+      nil,
       :attribute_name,
       :featurization_pipeline,
       keyword_init: true
@@ -4104,6 +4196,7 @@ module Aws::Forecast
     #   <p>An array of featurization (transformation) information for the fields of a dataset.</p>
     #   @return [Array<Types::Featurization>]
     class FeaturizationConfig < Struct.new(
+      nil,
       :forecast_frequency,
       :forecast_dimensions,
       :featurizations,
@@ -4193,6 +4286,7 @@ module Aws::Forecast
     #           <code>"backfill_value":"2"</code>. </p>
     #   @return [Hash<String, String>]
     class FeaturizationMethod < Struct.new(
+      nil,
       :featurization_method_name,
       :featurization_method_parameters,
       keyword_init: true
@@ -4216,6 +4310,7 @@ module Aws::Forecast
     #         <code>IS</code>. To exclude matching objects, specify <code>IS_NOT</code>.</p>
     #   @return [String]
     class Filter < Struct.new(
+      nil,
       :key,
       :value,
       :condition,
@@ -4300,6 +4395,7 @@ module Aws::Forecast
     #            </ul>
     #   @return [Time]
     class ForecastExportJobSummary < Struct.new(
+      nil,
       :forecast_export_job_arn,
       :forecast_export_job_name,
       :destination,
@@ -4395,6 +4491,7 @@ module Aws::Forecast
     #            </ul>
     #   @return [Time]
     class ForecastSummary < Struct.new(
+      nil,
       :forecast_arn,
       :forecast_name,
       :predictor_arn,
@@ -4413,6 +4510,7 @@ module Aws::Forecast
     #   <p>The Amazon Resource Name (ARN) of the predictor to get metrics for.</p>
     #   @return [String]
     class GetAccuracyMetricsRequest < Struct.new(
+      nil,
       :predictor_arn,
       keyword_init: true
     )
@@ -4439,6 +4537,7 @@ module Aws::Forecast
     #   <p>The accuracy metric used to optimize the predictor.</p>
     #   @return [String]
     class GetAccuracyMetricsResponse < Struct.new(
+      nil,
       :predictor_evaluation_results,
       :is_auto_predictor,
       :auto_ml_override_strategy,
@@ -4461,6 +4560,7 @@ module Aws::Forecast
     #   <p>Specifies the ranges of valid values for the hyperparameters.</p>
     #   @return [Types::ParameterRanges]
     class HyperParameterTuningJobConfig < Struct.new(
+      nil,
       :parameter_ranges,
       keyword_init: true
     )
@@ -4482,6 +4582,7 @@ module Aws::Forecast
     #         calendar.</p>
     #   @return [Array<Types::SupplementaryFeature>]
     class InputDataConfig < Struct.new(
+      nil,
       :dataset_group_arn,
       :supplementary_features,
       keyword_init: true
@@ -4531,6 +4632,7 @@ module Aws::Forecast
     #         One of the following values:</p>
     #   @return [String]
     class IntegerParameterRange < Struct.new(
+      nil,
       :name,
       :max_value,
       :min_value,
@@ -4545,6 +4647,7 @@ module Aws::Forecast
     # @!attribute message
     #   @return [String]
     class InvalidInputException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -4555,6 +4658,7 @@ module Aws::Forecast
     # @!attribute message
     #   @return [String]
     class InvalidNextTokenException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -4565,6 +4669,7 @@ module Aws::Forecast
     # @!attribute message
     #   @return [String]
     class LimitExceededException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -4580,6 +4685,7 @@ module Aws::Forecast
     #   <p>The number of items to return in the response.</p>
     #   @return [Integer]
     class ListDatasetGroupsRequest < Struct.new(
+      nil,
       :next_token,
       :max_results,
       keyword_init: true
@@ -4595,6 +4701,7 @@ module Aws::Forecast
     #         results, use the token in the next request.</p>
     #   @return [String]
     class ListDatasetGroupsResponse < Struct.new(
+      nil,
       :dataset_groups,
       :next_token,
       keyword_init: true
@@ -4642,6 +4749,7 @@ module Aws::Forecast
     #            </p>
     #   @return [Array<Types::Filter>]
     class ListDatasetImportJobsRequest < Struct.new(
+      nil,
       :next_token,
       :max_results,
       :filters,
@@ -4658,6 +4766,7 @@ module Aws::Forecast
     #         results, use the token in the next request.</p>
     #   @return [String]
     class ListDatasetImportJobsResponse < Struct.new(
+      nil,
       :dataset_import_jobs,
       :next_token,
       keyword_init: true
@@ -4674,6 +4783,7 @@ module Aws::Forecast
     #   <p>The number of items to return in the response.</p>
     #   @return [Integer]
     class ListDatasetsRequest < Struct.new(
+      nil,
       :next_token,
       :max_results,
       keyword_init: true
@@ -4689,6 +4799,7 @@ module Aws::Forecast
     #         results, use the token in the next request.</p>
     #   @return [String]
     class ListDatasetsResponse < Struct.new(
+      nil,
       :datasets,
       :next_token,
       keyword_init: true
@@ -4730,6 +4841,7 @@ module Aws::Forecast
     #            </ul>
     #   @return [Array<Types::Filter>]
     class ListExplainabilitiesRequest < Struct.new(
+      nil,
       :next_token,
       :max_results,
       :filters,
@@ -4747,6 +4859,7 @@ module Aws::Forecast
     #               use the token in the next request.</p>
     #   @return [String]
     class ListExplainabilitiesResponse < Struct.new(
+      nil,
       :explainabilities,
       :next_token,
       keyword_init: true
@@ -4788,6 +4901,7 @@ module Aws::Forecast
     #            </ul>
     #   @return [Array<Types::Filter>]
     class ListExplainabilityExportsRequest < Struct.new(
+      nil,
       :next_token,
       :max_results,
       :filters,
@@ -4805,6 +4919,7 @@ module Aws::Forecast
     #               use the token in the next request.</p>
     #   @return [String]
     class ListExplainabilityExportsResponse < Struct.new(
+      nil,
       :explainability_exports,
       :next_token,
       keyword_init: true
@@ -4854,6 +4969,7 @@ module Aws::Forecast
     #            </p>
     #   @return [Array<Types::Filter>]
     class ListForecastExportJobsRequest < Struct.new(
+      nil,
       :next_token,
       :max_results,
       :filters,
@@ -4870,6 +4986,7 @@ module Aws::Forecast
     #         results, use the token in the next request.</p>
     #   @return [String]
     class ListForecastExportJobsResponse < Struct.new(
+      nil,
       :forecast_export_jobs,
       :next_token,
       keyword_init: true
@@ -4917,6 +5034,7 @@ module Aws::Forecast
     #            </p>
     #   @return [Array<Types::Filter>]
     class ListForecastsRequest < Struct.new(
+      nil,
       :next_token,
       :max_results,
       :filters,
@@ -4933,6 +5051,7 @@ module Aws::Forecast
     #         of results, use the token in the next request.</p>
     #   @return [String]
     class ListForecastsResponse < Struct.new(
+      nil,
       :forecasts,
       :next_token,
       keyword_init: true
@@ -4981,6 +5100,7 @@ module Aws::Forecast
     #            </p>
     #   @return [Array<Types::Filter>]
     class ListMonitorEvaluationsRequest < Struct.new(
+      nil,
       :next_token,
       :max_results,
       :monitor_arn,
@@ -4999,6 +5119,7 @@ module Aws::Forecast
     #            <p>For information about monitoring see <a href="https://docs.aws.amazon.com/forecast/latest/dg/predictor-monitoring-results.html">Viewing Monitoring Results</a>. For more information about retrieving monitoring results see <a href="https://docs.aws.amazon.com/forecast/latest/dg/predictor-monitoring-results.html">Viewing Monitoring Results</a>.</p>
     #   @return [Array<Types::PredictorMonitorEvaluation>]
     class ListMonitorEvaluationsResponse < Struct.new(
+      nil,
       :next_token,
       :predictor_monitor_evaluations,
       keyword_init: true
@@ -5044,6 +5165,7 @@ module Aws::Forecast
     #            </p>
     #   @return [Array<Types::Filter>]
     class ListMonitorsRequest < Struct.new(
+      nil,
       :next_token,
       :max_results,
       :filters,
@@ -5060,6 +5182,7 @@ module Aws::Forecast
     #            results, use the token in the next request.</p>
     #   @return [String]
     class ListMonitorsResponse < Struct.new(
+      nil,
       :monitors,
       :next_token,
       keyword_init: true
@@ -5103,6 +5226,7 @@ module Aws::Forecast
     #            </ul>
     #   @return [Array<Types::Filter>]
     class ListPredictorBacktestExportJobsRequest < Struct.new(
+      nil,
       :next_token,
       :max_results,
       :filters,
@@ -5120,6 +5244,7 @@ module Aws::Forecast
     #               use the token in the next request.</p>
     #   @return [String]
     class ListPredictorBacktestExportJobsResponse < Struct.new(
+      nil,
       :predictor_backtest_export_jobs,
       :next_token,
       keyword_init: true
@@ -5167,6 +5292,7 @@ module Aws::Forecast
     #            </p>
     #   @return [Array<Types::Filter>]
     class ListPredictorsRequest < Struct.new(
+      nil,
       :next_token,
       :max_results,
       :filters,
@@ -5183,6 +5309,7 @@ module Aws::Forecast
     #         results, use the token in the next request.</p>
     #   @return [String]
     class ListPredictorsResponse < Struct.new(
+      nil,
       :predictors,
       :next_token,
       keyword_init: true
@@ -5195,6 +5322,7 @@ module Aws::Forecast
     #       </p>
     #   @return [String]
     class ListTagsForResourceRequest < Struct.new(
+      nil,
       :resource_arn,
       keyword_init: true
     )
@@ -5205,6 +5333,7 @@ module Aws::Forecast
     #   <p>The tags for the resource.</p>
     #   @return [Array<Types::Tag>]
     class ListTagsForResourceResponse < Struct.new(
+      nil,
       :tags,
       keyword_init: true
     )
@@ -5251,6 +5380,7 @@ module Aws::Forecast
     #            </p>
     #   @return [Array<Types::Filter>]
     class ListWhatIfAnalysesRequest < Struct.new(
+      nil,
       :next_token,
       :max_results,
       :filters,
@@ -5266,6 +5396,7 @@ module Aws::Forecast
     #   <p>If the response is truncated, Forecast returns this token. To retrieve the next set of results, use the token in the next request.</p>
     #   @return [String]
     class ListWhatIfAnalysesResponse < Struct.new(
+      nil,
       :what_if_analyses,
       :next_token,
       keyword_init: true
@@ -5313,6 +5444,7 @@ module Aws::Forecast
     #            </p>
     #   @return [Array<Types::Filter>]
     class ListWhatIfForecastExportsRequest < Struct.new(
+      nil,
       :next_token,
       :max_results,
       :filters,
@@ -5328,6 +5460,7 @@ module Aws::Forecast
     #   <p>If the response is truncated, Forecast returns this token. To retrieve the next set of results, use the token in the next request.</p>
     #   @return [String]
     class ListWhatIfForecastExportsResponse < Struct.new(
+      nil,
       :what_if_forecast_exports,
       :next_token,
       keyword_init: true
@@ -5375,6 +5508,7 @@ module Aws::Forecast
     #            </p>
     #   @return [Array<Types::Filter>]
     class ListWhatIfForecastsRequest < Struct.new(
+      nil,
       :next_token,
       :max_results,
       :filters,
@@ -5390,6 +5524,7 @@ module Aws::Forecast
     #   <p>If the result of the previous request was truncated, the response includes a <code>NextToken</code>. To retrieve the next set of results, use the token in the next  request. Tokens expire after 24 hours.</p>
     #   @return [String]
     class ListWhatIfForecastsResponse < Struct.new(
+      nil,
       :what_if_forecasts,
       :next_token,
       keyword_init: true
@@ -5407,6 +5542,7 @@ module Aws::Forecast
     #   <p>The value for the metric.</p>
     #   @return [Float]
     class MetricResult < Struct.new(
+      nil,
       :metric_name,
       :metric_value,
       keyword_init: true
@@ -5434,6 +5570,7 @@ module Aws::Forecast
     #   <p>The average value of all weighted quantile losses.</p>
     #   @return [Float]
     class Metrics < Struct.new(
+      nil,
       :rmse,
       :weighted_quantile_losses,
       :error_metrics,
@@ -5448,6 +5585,7 @@ module Aws::Forecast
     #   <p>The name of the monitor resource.</p>
     #   @return [String]
     class MonitorConfig < Struct.new(
+      nil,
       :monitor_name,
       keyword_init: true
     )
@@ -5465,6 +5603,7 @@ module Aws::Forecast
     #   <p>The Amazon Resource Name (ARN) of the predictor resource you are monitoring.</p>
     #   @return [String]
     class MonitorDataSource < Struct.new(
+      nil,
       :dataset_import_job_arn,
       :forecast_arn,
       :predictor_arn,
@@ -5508,6 +5647,7 @@ module Aws::Forecast
     #            </ul>
     #   @return [String]
     class MonitorInfo < Struct.new(
+      nil,
       :monitor_arn,
       :status,
       keyword_init: true
@@ -5584,6 +5724,7 @@ module Aws::Forecast
     #            </ul>
     #   @return [Time]
     class MonitorSummary < Struct.new(
+      nil,
       :monitor_arn,
       :monitor_name,
       :resource_arn,
@@ -5609,6 +5750,7 @@ module Aws::Forecast
     #   <p>Specifies the tunable range for each integer hyperparameter.</p>
     #   @return [Array<Types::IntegerParameterRange>]
     class ParameterRanges < Struct.new(
+      nil,
       :categorical_parameter_ranges,
       :continuous_parameter_ranges,
       :integer_parameter_ranges,
@@ -5691,6 +5833,7 @@ module Aws::Forecast
     #            </ul>
     #   @return [Time]
     class PredictorBacktestExportJobSummary < Struct.new(
+      nil,
       :predictor_backtest_export_job_arn,
       :predictor_backtest_export_job_name,
       :destination,
@@ -5709,6 +5852,7 @@ module Aws::Forecast
     #            use your predictor and the metrics change.</p>
     #   @return [Array<Types::BaselineMetric>]
     class PredictorBaseline < Struct.new(
+      nil,
       :baseline_metrics,
       keyword_init: true
     )
@@ -5723,6 +5867,7 @@ module Aws::Forecast
     #   <p>The timestamp for when the event occurred.</p>
     #   @return [Time]
     class PredictorEvent < Struct.new(
+      nil,
       :detail,
       :datetime,
       keyword_init: true
@@ -5740,6 +5885,7 @@ module Aws::Forecast
     #         object determines the number of windows in the array.</p>
     #   @return [Array<Types::TestWindowSummary>]
     class PredictorExecution < Struct.new(
+      nil,
       :algorithm_arn,
       :test_windows,
       keyword_init: true
@@ -5756,6 +5902,7 @@ module Aws::Forecast
     #         array.</p>
     #   @return [Array<Types::PredictorExecution>]
     class PredictorExecutionDetails < Struct.new(
+      nil,
       :predictor_executions,
       keyword_init: true
     )
@@ -5797,6 +5944,7 @@ module Aws::Forecast
     #   <p>Information about any errors that may have occurred during the monitor evaluation.</p>
     #   @return [String]
     class PredictorMonitorEvaluation < Struct.new(
+      nil,
       :resource_arn,
       :monitor_arn,
       :evaluation_time,
@@ -5897,6 +6045,7 @@ module Aws::Forecast
     #            </ul>
     #   @return [Time]
     class PredictorSummary < Struct.new(
+      nil,
       :predictor_arn,
       :predictor_name,
       :dataset_group_arn,
@@ -5920,6 +6069,7 @@ module Aws::Forecast
     #   <p>Whether the reference predictor is <code>Active</code> or <code>Deleted</code>.</p>
     #   @return [String]
     class ReferencePredictorSummary < Struct.new(
+      nil,
       :arn,
       :state,
       keyword_init: true
@@ -5931,6 +6081,7 @@ module Aws::Forecast
     # @!attribute message
     #   @return [String]
     class ResourceAlreadyExistsException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -5941,6 +6092,7 @@ module Aws::Forecast
     # @!attribute message
     #   @return [String]
     class ResourceInUseException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -5952,6 +6104,7 @@ module Aws::Forecast
     # @!attribute message
     #   @return [String]
     class ResourceNotFoundException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -5962,6 +6115,7 @@ module Aws::Forecast
     #   <p>The Amazon Resource Name (ARN) of the monitor resource to resume.</p>
     #   @return [String]
     class ResumeResourceRequest < Struct.new(
+      nil,
       :resource_arn,
       keyword_init: true
     )
@@ -5985,6 +6139,7 @@ module Aws::Forecast
     #   <p>The Amazon Resource Name (ARN) of an Key Management Service (KMS) key.</p>
     #   @return [String]
     class S3Config < Struct.new(
+      nil,
       :path,
       :role_arn,
       :kms_key_arn,
@@ -5998,6 +6153,7 @@ module Aws::Forecast
     #   <p>An array of attributes specifying the name and type of each field in a dataset.</p>
     #   @return [Array<Types::SchemaAttribute>]
     class Schema < Struct.new(
+      nil,
       :attributes,
       keyword_init: true
     )
@@ -6015,6 +6171,7 @@ module Aws::Forecast
     #            <p>For a related time series dataset, other than date, item_id, and forecast dimensions attributes, all attributes should be of numerical type (integer/float).</p>
     #   @return [String]
     class SchemaAttribute < Struct.new(
+      nil,
       :attribute_name,
       :attribute_type,
       keyword_init: true
@@ -6069,6 +6226,7 @@ module Aws::Forecast
     #         instead of <code>CountNan</code> if the value is greater than 2,147,483,647.</p>
     #   @return [Integer]
     class Statistics < Struct.new(
+      nil,
       :count,
       :count_distinct,
       :count_null,
@@ -6094,6 +6252,7 @@ module Aws::Forecast
     #               <code>ExplainabilityExportArn</code>. </p>
     #   @return [String]
     class StopResourceRequest < Struct.new(
+      nil,
       :resource_arn,
       keyword_init: true
     )
@@ -6338,6 +6497,7 @@ module Aws::Forecast
     #            </ul>
     #   @return [String]
     class SupplementaryFeature < Struct.new(
+      nil,
       :name,
       :value,
       keyword_init: true
@@ -6389,6 +6549,7 @@ module Aws::Forecast
     #         descriptor within a tag category (key).</p>
     #   @return [String]
     class Tag < Struct.new(
+      nil,
       :key,
       :value,
       keyword_init: true
@@ -6437,6 +6598,7 @@ module Aws::Forecast
     #            </ul>
     #   @return [Array<Types::Tag>]
     class TagResourceRequest < Struct.new(
+      nil,
       :resource_arn,
       :tags,
       keyword_init: true
@@ -6445,6 +6607,7 @@ module Aws::Forecast
     end
 
     class TagResourceResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -6482,6 +6645,7 @@ module Aws::Forecast
     #   <p>If the test failed, the reason why it failed.</p>
     #   @return [String]
     class TestWindowSummary < Struct.new(
+      nil,
       :test_window_start,
       :test_window_end,
       :status,
@@ -6513,6 +6677,7 @@ module Aws::Forecast
     #   <p>The hour of day to use for time alignment during aggregation.</p>
     #   @return [Integer]
     class TimeAlignmentBoundary < Struct.new(
+      nil,
       :month,
       :day_of_month,
       :day_of_week,
@@ -6534,6 +6699,7 @@ module Aws::Forecast
     #         <code>GREATER_THAN</code>.</p>
     #   @return [String]
     class TimeSeriesCondition < Struct.new(
+      nil,
       :attribute_name,
       :attribute_value,
       :condition,
@@ -6554,6 +6720,7 @@ module Aws::Forecast
     #   <p>The format of the data, either CSV or PARQUET.</p>
     #   @return [String]
     class TimeSeriesIdentifiers < Struct.new(
+      nil,
       :data_source,
       :schema,
       :format,
@@ -6582,6 +6749,7 @@ module Aws::Forecast
     #   <p>The timestamp format of the replacement data.</p>
     #   @return [String]
     class TimeSeriesReplacementsDataSource < Struct.new(
+      nil,
       :s3_config,
       :schema,
       :format,
@@ -6614,6 +6782,7 @@ module Aws::Forecast
     #   <p>Details about the import file that contains the time series for which you want to create forecasts.</p>
     #   @return [Types::TimeSeriesIdentifiers]
     class TimeSeriesSelector < Struct.new(
+      nil,
       :time_series_identifiers,
       keyword_init: true
     )
@@ -6629,6 +6798,7 @@ module Aws::Forecast
     #   <p>An array of conditions that define which members of the related time series are transformed.</p>
     #   @return [Array<Types::TimeSeriesCondition>]
     class TimeSeriesTransformation < Struct.new(
+      nil,
       :action,
       :time_series_conditions,
       keyword_init: true
@@ -6644,6 +6814,7 @@ module Aws::Forecast
     #   <p>The keys of the tags to be removed.</p>
     #   @return [Array<String>]
     class UntagResourceRequest < Struct.new(
+      nil,
       :resource_arn,
       :tag_keys,
       keyword_init: true
@@ -6652,6 +6823,7 @@ module Aws::Forecast
     end
 
     class UntagResourceResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -6665,6 +6837,7 @@ module Aws::Forecast
     #         group.</p>
     #   @return [Array<String>]
     class UpdateDatasetGroupRequest < Struct.new(
+      nil,
       :dataset_group_arn,
       :dataset_arns,
       keyword_init: true
@@ -6673,6 +6846,7 @@ module Aws::Forecast
     end
 
     class UpdateDatasetGroupResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -6689,6 +6863,7 @@ module Aws::Forecast
     #         weighted (normalized) by dividing by the sum over all quantiles.</p>
     #   @return [Float]
     class WeightedQuantileLoss < Struct.new(
+      nil,
       :quantile,
       :loss_value,
       keyword_init: true
@@ -6770,6 +6945,7 @@ module Aws::Forecast
     #            </ul>
     #   @return [Time]
     class WhatIfAnalysisSummary < Struct.new(
+      nil,
       :what_if_analysis_arn,
       :what_if_analysis_name,
       :forecast_arn,
@@ -6859,6 +7035,7 @@ module Aws::Forecast
     #            </ul>
     #   @return [Time]
     class WhatIfForecastExportSummary < Struct.new(
+      nil,
       :what_if_forecast_export_arn,
       :what_if_forecast_arns,
       :what_if_forecast_export_name,
@@ -6946,6 +7123,7 @@ module Aws::Forecast
     #            </ul>
     #   @return [Time]
     class WhatIfForecastSummary < Struct.new(
+      nil,
       :what_if_forecast_arn,
       :what_if_forecast_name,
       :what_if_analysis_arn,
@@ -6988,6 +7166,7 @@ module Aws::Forecast
     #   <p>Provides metrics used to evaluate the performance of a predictor.</p>
     #   @return [Types::Metrics]
     class WindowSummary < Struct.new(
+      nil,
       :test_window_start,
       :test_window_end,
       :item_count,

@@ -10,6 +10,7 @@ module Aws::PaymentCryptographyData
     # @!attribute message
     #   @return [String]
     class AccessDeniedException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -36,6 +37,7 @@ module Aws::PaymentCryptographyData
     #   <p>The encrypted pinblock of the old pin stored on the chip card.</p>
     #   @return [Types::CurrentPinAttributes]
     class AmexAttributes < Struct.new(
+      nil,
       :major_key_derivation_mode,
       :primary_account_number,
       :pan_sequence_number,
@@ -52,6 +54,7 @@ module Aws::PaymentCryptographyData
     #   <p>The expiry date of a payment card.</p>
     #   @return [String]
     class AmexCardSecurityCodeVersion1 < Struct.new(
+      nil,
       :card_expiry_date,
       keyword_init: true
     )
@@ -66,6 +69,7 @@ module Aws::PaymentCryptographyData
     #   <p>The service code of the AMEX payment card. This is different from the Card Security Code (CSC).</p>
     #   @return [String]
     class AmexCardSecurityCodeVersion2 < Struct.new(
+      nil,
       :card_expiry_date,
       :service_code,
       keyword_init: true
@@ -78,6 +82,7 @@ module Aws::PaymentCryptographyData
     #   <p>The padding to be included with the data.</p>
     #   @return [String]
     class AsymmetricEncryptionAttributes < Struct.new(
+      nil,
       :padding_type,
       keyword_init: true
     )
@@ -140,6 +145,7 @@ module Aws::PaymentCryptographyData
     #   <p>The transaction counter value that comes from a point of sale terminal.</p>
     #   @return [String]
     class CardHolderVerificationValue < Struct.new(
+      nil,
       :unpredictable_number,
       :pan_sequence_number,
       :application_transaction_counter,
@@ -206,6 +212,7 @@ module Aws::PaymentCryptographyData
     #   <p>The service code of the payment card. This is different from Card Security Code (CSC).</p>
     #   @return [String]
     class CardVerificationValue1 < Struct.new(
+      nil,
       :card_expiry_date,
       :service_code,
       keyword_init: true
@@ -218,6 +225,7 @@ module Aws::PaymentCryptographyData
     #   <p>The expiry date of a payment card.</p>
     #   @return [String]
     class CardVerificationValue2 < Struct.new(
+      nil,
       :card_expiry_date,
       keyword_init: true
     )
@@ -249,6 +257,7 @@ module Aws::PaymentCryptographyData
     #   <p>The auth code used to calculate APRC after ARQC verification is successful. This is the same auth code used for ARQC generation outside of Amazon Web Services Payment Cryptography.</p>
     #   @return [String]
     class CryptogramVerificationArpcMethod1 < Struct.new(
+      nil,
       :auth_response_code,
       keyword_init: true
     )
@@ -263,6 +272,7 @@ module Aws::PaymentCryptographyData
     #   <p>The proprietary authentication data used by issuer for communication during online transaction using an EMV chip card.</p>
     #   @return [String]
     class CryptogramVerificationArpcMethod2 < Struct.new(
+      nil,
       :card_status_update,
       :proprietary_authentication_data,
       keyword_init: true
@@ -278,6 +288,7 @@ module Aws::PaymentCryptographyData
     #   <p>The encrypted pinblock of the current pin stored on the chip card.</p>
     #   @return [String]
     class CurrentPinAttributes < Struct.new(
+      nil,
       :current_pin_pek_identifier,
       :current_encrypted_pin_block,
       keyword_init: true
@@ -298,6 +309,7 @@ module Aws::PaymentCryptographyData
     #   <p>The WrappedKeyBlock containing the encryption key for ciphertext decryption.</p>
     #   @return [Types::WrappedKey]
     class DecryptDataInput < Struct.new(
+      nil,
       :key_identifier,
       :cipher_text,
       :decryption_attributes,
@@ -317,6 +329,7 @@ module Aws::PaymentCryptographyData
     #   <p>The decrypted plaintext data in hexBinary format.</p>
     #   @return [String]
     class DecryptDataOutput < Struct.new(
+      nil,
       :key_arn,
       :key_check_value,
       :plain_text,
@@ -386,6 +399,7 @@ module Aws::PaymentCryptographyData
     #   <p>The transaction counter value that comes from the terminal.</p>
     #   @return [String]
     class DiscoverDynamicCardVerificationCode < Struct.new(
+      nil,
       :card_expiry_date,
       :unpredictable_number,
       :application_transaction_counter,
@@ -402,6 +416,7 @@ module Aws::PaymentCryptographyData
     #   <p>The key type derived using DUKPT from a Base Derivation Key (BDK) and Key Serial Number (KSN). This must be less than or equal to the strength of the BDK. For example, you can't use <code>AES_128</code> as a derivation type for a BDK of <code>AES_128</code> or <code>TDES_2KEY</code>.</p>
     #   @return [String]
     class DukptAttributes < Struct.new(
+      nil,
       :key_serial_number,
       :dukpt_derivation_type,
       keyword_init: true
@@ -420,6 +435,7 @@ module Aws::PaymentCryptographyData
     #   <p>The type of use of DUKPT, which can be for incoming data decryption, outgoing data encryption, or both.</p>
     #   @return [String]
     class DukptDerivationAttributes < Struct.new(
+      nil,
       :key_serial_number,
       :dukpt_key_derivation_type,
       :dukpt_key_variant,
@@ -445,6 +461,7 @@ module Aws::PaymentCryptographyData
     #   <p>An input used to provide the intial state. If no value is provided, Amazon Web Services Payment Cryptography defaults it to zero.</p>
     #   @return [String]
     class DukptEncryptionAttributes < Struct.new(
+      nil,
       :key_serial_number,
       :mode,
       :dukpt_key_derivation_type,
@@ -469,6 +486,7 @@ module Aws::PaymentCryptographyData
     #   <p>The data on the two tracks of magnetic cards used for financial transactions. This includes the cardholder name, PAN, expiration date, bank ID (BIN) and several other numbers the issuing bank uses to validate the data received.</p>
     #   @return [String]
     class DynamicCardVerificationCode < Struct.new(
+      nil,
       :unpredictable_number,
       :pan_sequence_number,
       :application_transaction_counter,
@@ -492,6 +510,7 @@ module Aws::PaymentCryptographyData
     #   <p>The transaction counter value that comes from the terminal.</p>
     #   @return [String]
     class DynamicCardVerificationValue < Struct.new(
+      nil,
       :pan_sequence_number,
       :card_expiry_date,
       :service_code,
@@ -521,6 +540,7 @@ module Aws::PaymentCryptographyData
     #   <p>A byte string containing information that binds the ECDH derived key to the two parties involved or to the context of the key.</p> <p>It may include details like identities of the two parties deriving the key, context of the operation, session IDs, and optionally a nonce. It must not contain zero bytes, and re-using shared information for multiple ECDH key derivations is not recommended.</p>
     #   @return [String]
     class EcdhDerivationAttributes < Struct.new(
+      nil,
       :certificate_authority_public_key_identifier,
       :public_key_certificate,
       :key_algorithm,
@@ -546,6 +566,7 @@ module Aws::PaymentCryptographyData
     #   <p>The transaction counter of the current transaction that is provided by the terminal during transaction processing.</p>
     #   @return [String]
     class Emv2000Attributes < Struct.new(
+      nil,
       :major_key_derivation_mode,
       :primary_account_number,
       :pan_sequence_number,
@@ -578,6 +599,7 @@ module Aws::PaymentCryptographyData
     #   <p>Specifies if PIN block length should be added to front of the pin block. </p> <p>If value is set to <code>FRONT_OF_PIN_BLOCK</code>, then PIN block padding type should be <code>ISO_IEC_7816_4</code>.</p>
     #   @return [String]
     class EmvCommonAttributes < Struct.new(
+      nil,
       :major_key_derivation_mode,
       :primary_account_number,
       :pan_sequence_number,
@@ -610,6 +632,7 @@ module Aws::PaymentCryptographyData
     #   <p>An input used to provide the intial state. If no value is provided, Amazon Web Services Payment Cryptography defaults it to zero.</p>
     #   @return [String]
     class EmvEncryptionAttributes < Struct.new(
+      nil,
       :major_key_derivation_mode,
       :primary_account_number,
       :pan_sequence_number,
@@ -634,6 +657,7 @@ module Aws::PaymentCryptographyData
     #   <p>The WrappedKeyBlock containing the encryption key for plaintext encryption.</p>
     #   @return [Types::WrappedKey]
     class EncryptDataInput < Struct.new(
+      nil,
       :key_identifier,
       :plain_text,
       :encryption_attributes,
@@ -653,6 +677,7 @@ module Aws::PaymentCryptographyData
     #   <p>The encrypted ciphertext.</p>
     #   @return [String]
     class EncryptDataOutput < Struct.new(
+      nil,
       :key_arn,
       :key_check_value,
       :cipher_text,
@@ -704,6 +729,7 @@ module Aws::PaymentCryptographyData
     #   <p>The length of the CVV or CSC to be generated. The default value is 3.</p>
     #   @return [Integer]
     class GenerateCardValidationDataInput < Struct.new(
+      nil,
       :key_identifier,
       :primary_account_number,
       :generation_attributes,
@@ -723,6 +749,7 @@ module Aws::PaymentCryptographyData
     #   <p>The CVV or CSC value that Amazon Web Services Payment Cryptography generates for the card.</p>
     #   @return [String]
     class GenerateCardValidationDataOutput < Struct.new(
+      nil,
       :key_arn,
       :key_check_value,
       :validation_data,
@@ -753,6 +780,7 @@ module Aws::PaymentCryptographyData
     #   <p>The attributes and data values to derive payment card specific confidentiality and integrity keys.</p>
     #   @return [Types::DerivationMethodAttributes]
     class GenerateMacEmvPinChangeInput < Struct.new(
+      nil,
       :new_pin_pek_identifier,
       :new_encrypted_pin_block,
       :pin_block_format,
@@ -793,6 +821,7 @@ module Aws::PaymentCryptographyData
     #   <p>The attribute values used for Amex and Visa derivation methods.</p>
     #   @return [Types::VisaAmexDerivationOutputs]
     class GenerateMacEmvPinChangeOutput < Struct.new(
+      nil,
       :new_pin_pek_arn,
       :secure_messaging_integrity_key_arn,
       :secure_messaging_confidentiality_key_arn,
@@ -820,6 +849,7 @@ module Aws::PaymentCryptographyData
     #   <p>The length of a MAC under generation.</p>
     #   @return [Integer]
     class GenerateMacInput < Struct.new(
+      nil,
       :key_identifier,
       :message_data,
       :generation_attributes,
@@ -839,6 +869,7 @@ module Aws::PaymentCryptographyData
     #   <p>The MAC cryptogram generated within Amazon Web Services Payment Cryptography.</p>
     #   @return [String]
     class GenerateMacOutput < Struct.new(
+      nil,
       :key_arn,
       :key_check_value,
       :mac,
@@ -869,6 +900,7 @@ module Aws::PaymentCryptographyData
     #   <p>Parameter information of a WrappedKeyBlock for encryption key exchange.</p>
     #   @return [Types::WrappedKey]
     class GeneratePinDataInput < Struct.new(
+      nil,
       :generation_key_identifier,
       :encryption_key_identifier,
       :generation_attributes,
@@ -900,6 +932,7 @@ module Aws::PaymentCryptographyData
     #   <p>The attributes and values Amazon Web Services Payment Cryptography uses for pin data generation.</p>
     #   @return [Types::PinData]
     class GeneratePinDataOutput < Struct.new(
+      nil,
       :generation_key_arn,
       :generation_key_check_value,
       :encryption_key_arn,
@@ -922,6 +955,7 @@ module Aws::PaymentCryptographyData
     #   <p>The unique data for cardholder identification.</p>
     #   @return [String]
     class Ibm3624NaturalPin < Struct.new(
+      nil,
       :decimalization_table,
       :pin_validation_data_pad_character,
       :pin_validation_data,
@@ -944,6 +978,7 @@ module Aws::PaymentCryptographyData
     #   <p>The PIN offset value.</p>
     #   @return [String]
     class Ibm3624PinFromOffset < Struct.new(
+      nil,
       :decimalization_table,
       :pin_validation_data_pad_character,
       :pin_validation_data,
@@ -967,6 +1002,7 @@ module Aws::PaymentCryptographyData
     #   <p>The unique data for cardholder identification.</p>
     #   @return [String]
     class Ibm3624PinOffset < Struct.new(
+      nil,
       :encrypted_pin_block,
       :decimalization_table,
       :pin_validation_data_pad_character,
@@ -990,6 +1026,7 @@ module Aws::PaymentCryptographyData
     #   <p>The PIN offset value.</p>
     #   @return [String]
     class Ibm3624PinVerification < Struct.new(
+      nil,
       :decimalization_table,
       :pin_validation_data_pad_character,
       :pin_validation_data,
@@ -1010,6 +1047,7 @@ module Aws::PaymentCryptographyData
     #   <p>The unique data for cardholder identification.</p>
     #   @return [String]
     class Ibm3624RandomPin < Struct.new(
+      nil,
       :decimalization_table,
       :pin_validation_data_pad_character,
       :pin_validation_data,
@@ -1044,6 +1082,7 @@ module Aws::PaymentCryptographyData
     #   <p>The WrappedKeyBlock containing the transaction key wrapped using an ECDH dervied key. </p>
     #   @return [String]
     class IncomingDiffieHellmanTr31KeyBlock < Struct.new(
+      nil,
       :private_key_identifier,
       :certificate_authority_public_key_identifier,
       :public_key_certificate,
@@ -1076,6 +1115,7 @@ module Aws::PaymentCryptographyData
     # @!attribute message
     #   @return [String]
     class InternalServerException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -1093,6 +1133,7 @@ module Aws::PaymentCryptographyData
     #   <p>The key type derived using DUKPT from a Base Derivation Key (BDK) and Key Serial Number (KSN). This must be less than or equal to the strength of the BDK. For example, you can't use <code>AES_128</code> as a derivation type for a BDK of <code>AES_128</code> or <code>TDES_2KEY</code>.</p>
     #   @return [String]
     class MacAlgorithmDukpt < Struct.new(
+      nil,
       :key_serial_number,
       :dukpt_key_variant,
       :dukpt_derivation_type,
@@ -1118,6 +1159,7 @@ module Aws::PaymentCryptographyData
     #   <p>Parameters that are required to generate session key for EMV generation and verification.</p>
     #   @return [Types::SessionKeyDerivationValue]
     class MacAlgorithmEmv < Struct.new(
+      nil,
       :major_key_derivation_mode,
       :primary_account_number,
       :pan_sequence_number,
@@ -1177,6 +1219,7 @@ module Aws::PaymentCryptographyData
     #   <p>The application cryptogram for the current transaction that is provided by the terminal during transaction processing.</p>
     #   @return [String]
     class MasterCardAttributes < Struct.new(
+      nil,
       :major_key_derivation_mode,
       :primary_account_number,
       :pan_sequence_number,
@@ -1206,6 +1249,7 @@ module Aws::PaymentCryptographyData
     #   <p>The <code>keyARN</code> of the KEK used to wrap the transaction key.</p>
     #   @return [String]
     class OutgoingTr31KeyBlock < Struct.new(
+      nil,
       :wrapping_key_identifier,
       keyword_init: true
     )
@@ -1314,6 +1358,7 @@ module Aws::PaymentCryptographyData
     #   <p>The WrappedKeyBlock containing the encryption key of outgoing ciphertext data after encryption by Amazon Web Services Payment Cryptography.</p>
     #   @return [Types::WrappedKey]
     class ReEncryptDataInput < Struct.new(
+      nil,
       :incoming_key_identifier,
       :outgoing_key_identifier,
       :cipher_text,
@@ -1336,6 +1381,7 @@ module Aws::PaymentCryptographyData
     #   <p>The encrypted ciphertext.</p>
     #   @return [String]
     class ReEncryptDataOutput < Struct.new(
+      nil,
       :key_arn,
       :key_check_value,
       :cipher_text,
@@ -1369,6 +1415,7 @@ module Aws::PaymentCryptographyData
     #   <p>The resource that is missing.</p>
     #   @return [String]
     class ResourceNotFoundException < Struct.new(
+      nil,
       :resource_id,
       keyword_init: true
     )
@@ -1383,6 +1430,7 @@ module Aws::PaymentCryptographyData
     #   <p>A number that identifies and differentiates payment cards with the same Primary Account Number (PAN).</p>
     #   @return [String]
     class SessionKeyAmex < Struct.new(
+      nil,
       :primary_account_number,
       :pan_sequence_number,
       keyword_init: true
@@ -1456,6 +1504,7 @@ module Aws::PaymentCryptographyData
     #   <p>The transaction counter that is provided by the terminal during transaction processing.</p>
     #   @return [String]
     class SessionKeyEmv2000 < Struct.new(
+      nil,
       :primary_account_number,
       :pan_sequence_number,
       :application_transaction_counter,
@@ -1475,6 +1524,7 @@ module Aws::PaymentCryptographyData
     #   <p>The transaction counter that is provided by the terminal during transaction processing.</p>
     #   @return [String]
     class SessionKeyEmvCommon < Struct.new(
+      nil,
       :primary_account_number,
       :pan_sequence_number,
       :application_transaction_counter,
@@ -1497,6 +1547,7 @@ module Aws::PaymentCryptographyData
     #   <p>A random number generated by the issuer.</p>
     #   @return [String]
     class SessionKeyMastercard < Struct.new(
+      nil,
       :primary_account_number,
       :pan_sequence_number,
       :application_transaction_counter,
@@ -1514,6 +1565,7 @@ module Aws::PaymentCryptographyData
     #   <p>A number that identifies and differentiates payment cards with the same Primary Account Number (PAN).</p>
     #   @return [String]
     class SessionKeyVisa < Struct.new(
+      nil,
       :primary_account_number,
       :pan_sequence_number,
       keyword_init: true
@@ -1532,6 +1584,7 @@ module Aws::PaymentCryptographyData
     #   <p>The padding to be included with the data.</p>
     #   @return [String]
     class SymmetricEncryptionAttributes < Struct.new(
+      nil,
       :mode,
       :initialization_vector,
       :padding_type,
@@ -1544,6 +1597,7 @@ module Aws::PaymentCryptographyData
     # @!attribute message
     #   @return [String]
     class ThrottlingException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -1560,6 +1614,7 @@ module Aws::PaymentCryptographyData
     #   <p>The key check value (KCV) algorithm used for calculating the KCV.</p>
     #   @return [String]
     class TranslateKeyMaterialInput < Struct.new(
+      nil,
       :incoming_key_material,
       :outgoing_key_material,
       :key_check_value_algorithm,
@@ -1572,6 +1627,7 @@ module Aws::PaymentCryptographyData
     #   <p>The outgoing KEK wrapped TR31WrappedKeyBlock.</p>
     #   @return [Types::WrappedWorkingKey]
     class TranslateKeyMaterialOutput < Struct.new(
+      nil,
       :wrapped_key,
       keyword_init: true
     )
@@ -1606,6 +1662,7 @@ module Aws::PaymentCryptographyData
     #   <p>The WrappedKeyBlock containing the encryption key for encrypting outgoing PIN block data.</p>
     #   @return [Types::WrappedKey]
     class TranslatePinDataInput < Struct.new(
+      nil,
       :incoming_key_identifier,
       :outgoing_key_identifier,
       :incoming_translation_attributes,
@@ -1630,6 +1687,7 @@ module Aws::PaymentCryptographyData
     #   <p>The key check value (KCV) of the encryption key. The KCV is used to check if all parties holding a given key have the same key or to detect that a key has changed.</p> <p>Amazon Web Services Payment Cryptography computes the KCV according to the CMAC specification.</p>
     #   @return [String]
     class TranslatePinDataOutput < Struct.new(
+      nil,
       :pin_block,
       :key_arn,
       :key_check_value,
@@ -1673,6 +1731,7 @@ module Aws::PaymentCryptographyData
     #   <p>The Primary Account Number (PAN) of the cardholder. A PAN is a unique identifier for a payment credit or debit card and associates the card to a specific account holder.</p>
     #   @return [String]
     class TranslationPinDataIsoFormat034 < Struct.new(
+      nil,
       :primary_account_number,
       keyword_init: true
     )
@@ -1681,6 +1740,7 @@ module Aws::PaymentCryptographyData
 
     # <p>Parameters that are required for ISO9564 PIN format 1 tranlation.</p>
     class TranslationPinDataIsoFormat1 < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1693,6 +1753,7 @@ module Aws::PaymentCryptographyData
     #   <p>The request was denied due to an invalid request error.</p>
     #   @return [Array<Types::ValidationExceptionField>]
     class ValidationException < Struct.new(
+      nil,
       :message,
       :field_list,
       keyword_init: true
@@ -1708,6 +1769,7 @@ module Aws::PaymentCryptographyData
     #   <p>The request was denied due to an invalid request error.</p>
     #   @return [String]
     class ValidationExceptionField < Struct.new(
+      nil,
       :path,
       :message,
       keyword_init: true
@@ -1722,6 +1784,7 @@ module Aws::PaymentCryptographyData
     # @!attribute message
     #   @return [String]
     class VerificationFailedException < Struct.new(
+      nil,
       :reason,
       :message,
       keyword_init: true
@@ -1748,6 +1811,7 @@ module Aws::PaymentCryptographyData
     #   <p>The attributes and values for auth request cryptogram verification. These parameters are required in case using ARPC Method 1 or Method 2 for ARQC verification.</p>
     #   @return [Types::CryptogramAuthResponse]
     class VerifyAuthRequestCryptogramInput < Struct.new(
+      nil,
       :key_identifier,
       :transaction_data,
       :auth_request_cryptogram,
@@ -1769,6 +1833,7 @@ module Aws::PaymentCryptographyData
     #   <p>The result for ARQC verification or ARPC generation within Amazon Web Services Payment Cryptography.</p>
     #   @return [String]
     class VerifyAuthRequestCryptogramOutput < Struct.new(
+      nil,
       :key_arn,
       :key_check_value,
       :auth_response_value,
@@ -1790,6 +1855,7 @@ module Aws::PaymentCryptographyData
     #   <p>The CVV or CSC value for use for card data verification within Amazon Web Services Payment Cryptography.</p>
     #   @return [String]
     class VerifyCardValidationDataInput < Struct.new(
+      nil,
       :key_identifier,
       :primary_account_number,
       :verification_attributes,
@@ -1806,6 +1872,7 @@ module Aws::PaymentCryptographyData
     #   <p>The key check value (KCV) of the encryption key. The KCV is used to check if all parties holding a given key have the same key or to detect that a key has changed.</p> <p>Amazon Web Services Payment Cryptography computes the KCV according to the CMAC specification.</p>
     #   @return [String]
     class VerifyCardValidationDataOutput < Struct.new(
+      nil,
       :key_arn,
       :key_check_value,
       keyword_init: true
@@ -1829,6 +1896,7 @@ module Aws::PaymentCryptographyData
     #   <p>The length of the MAC.</p>
     #   @return [Integer]
     class VerifyMacInput < Struct.new(
+      nil,
       :key_identifier,
       :message_data,
       :mac,
@@ -1846,6 +1914,7 @@ module Aws::PaymentCryptographyData
     #   <p>The key check value (KCV) of the encryption key. The KCV is used to check if all parties holding a given key have the same key or to detect that a key has changed.</p> <p>Amazon Web Services Payment Cryptography computes the KCV according to the CMAC specification.</p>
     #   @return [String]
     class VerifyMacOutput < Struct.new(
+      nil,
       :key_arn,
       :key_check_value,
       keyword_init: true
@@ -1881,6 +1950,7 @@ module Aws::PaymentCryptographyData
     #   <p>Parameter information of a WrappedKeyBlock for encryption key exchange.</p>
     #   @return [Types::WrappedKey]
     class VerifyPinDataInput < Struct.new(
+      nil,
       :verification_key_identifier,
       :encryption_key_identifier,
       :verification_attributes,
@@ -1908,6 +1978,7 @@ module Aws::PaymentCryptographyData
     #   <p>The key check value (KCV) of the encryption key. The KCV is used to check if all parties holding a given key have the same key or to detect that a key has changed.</p> <p>Amazon Web Services Payment Cryptography computes the KCV according to the CMAC specification.</p>
     #   @return [String]
     class VerifyPinDataOutput < Struct.new(
+      nil,
       :verification_key_arn,
       :verification_key_check_value,
       :encryption_key_arn,
@@ -1931,6 +2002,7 @@ module Aws::PaymentCryptographyData
     #   <p>The key check value (KCV) of the current PIN PEK.</p>
     #   @return [String]
     class VisaAmexDerivationOutputs < Struct.new(
+      nil,
       :authorization_request_key_arn,
       :authorization_request_key_check_value,
       :current_pin_pek_arn,
@@ -1960,6 +2032,7 @@ module Aws::PaymentCryptographyData
     #   <p>The encrypted pinblock of the old pin stored on the chip card.</p>
     #   @return [Types::CurrentPinAttributes]
     class VisaAttributes < Struct.new(
+      nil,
       :major_key_derivation_mode,
       :primary_account_number,
       :pan_sequence_number,
@@ -1976,6 +2049,7 @@ module Aws::PaymentCryptographyData
     #   <p>The value for PIN verification index. It is used in the Visa PIN algorithm to calculate the PVV (PIN Verification Value).</p>
     #   @return [Integer]
     class VisaPin < Struct.new(
+      nil,
       :pin_verification_key_index,
       keyword_init: true
     )
@@ -1990,6 +2064,7 @@ module Aws::PaymentCryptographyData
     #   <p>Parameters that are required to generate or verify Visa PVV (PIN Verification Value).</p>
     #   @return [String]
     class VisaPinVerification < Struct.new(
+      nil,
       :pin_verification_key_index,
       :verification_value,
       keyword_init: true
@@ -2005,6 +2080,7 @@ module Aws::PaymentCryptographyData
     #   <p>The value for PIN verification index. It is used in the Visa PIN algorithm to calculate the PVV (PIN Verification Value).</p>
     #   @return [Integer]
     class VisaPinVerificationValue < Struct.new(
+      nil,
       :encrypted_pin_block,
       :pin_verification_key_index,
       keyword_init: true
@@ -2020,6 +2096,7 @@ module Aws::PaymentCryptographyData
     #   <p>The algorithm that Amazon Web Services Payment Cryptography uses to calculate the key check value (KCV). It is used to validate the key integrity.</p> <p>For TDES keys, the KCV is computed by encrypting 8 bytes, each with value of zero, with the key to be checked and retaining the 3 highest order bytes of the encrypted result. For AES keys, the KCV is computed using a CMAC algorithm where the input data is 16 bytes of zero and retaining the 3 highest order bytes of the encrypted result.</p>
     #   @return [String]
     class WrappedKey < Struct.new(
+      nil,
       :wrapped_key_material,
       :key_check_value_algorithm,
       keyword_init: true
@@ -2058,6 +2135,7 @@ module Aws::PaymentCryptographyData
     #   <p>The key block format of the wrapped key.</p>
     #   @return [String]
     class WrappedWorkingKey < Struct.new(
+      nil,
       :wrapped_key_material,
       :key_check_value,
       :wrapped_key_material_format,

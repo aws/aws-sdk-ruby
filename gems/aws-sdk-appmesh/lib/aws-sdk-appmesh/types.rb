@@ -35,6 +35,7 @@ module Aws::AppMesh
     #            returned.</p>
     #   @return [String]
     class AwsCloudMapInstanceAttribute < Struct.new(
+      nil,
       :key,
       :value,
       keyword_init: true
@@ -64,6 +65,7 @@ module Aws::AppMesh
     #            node.</p>
     #   @return [String]
     class AwsCloudMapServiceDiscovery < Struct.new(
+      nil,
       :namespace_name,
       :service_name,
       :attributes,
@@ -94,6 +96,7 @@ module Aws::AppMesh
     #   <p>A reference to an object that represents a client policy.</p>
     #   @return [Types::ClientPolicy]
     class BackendDefaults < Struct.new(
+      nil,
       :client_policy,
       keyword_init: true
     )
@@ -104,6 +107,7 @@ module Aws::AppMesh
     # @!attribute message
     #   @return [String]
     class BadRequestException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -115,6 +119,7 @@ module Aws::AppMesh
     #   <p>A reference to an object that represents a Transport Layer Security (TLS) client policy.</p>
     #   @return [Types::ClientPolicyTls]
     class ClientPolicy < Struct.new(
+      nil,
       :tls,
       keyword_init: true
     )
@@ -135,6 +140,7 @@ module Aws::AppMesh
     #   <p>A reference to an object that represents a TLS validation context.</p>
     #   @return [Types::TlsValidationContext]
     class ClientPolicyTls < Struct.new(
+      nil,
       :enforce,
       :ports,
       :certificate,
@@ -177,6 +183,7 @@ module Aws::AppMesh
     # @!attribute message
     #   @return [String]
     class ConflictException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -213,6 +220,7 @@ module Aws::AppMesh
     #                the resource in the service mesh. For more information about mesh sharing, see <a href="https://docs.aws.amazon.com/app-mesh/latest/userguide/sharing.html">Working with shared meshes</a>.</p>
     #   @return [String]
     class CreateGatewayRouteOperationInput < Struct.new(
+      nil,
       :gateway_route_name,
       :mesh_name,
       :virtual_gateway_name,
@@ -229,6 +237,7 @@ module Aws::AppMesh
     #   <p>The full description of your gateway route following the create call.</p>
     #   @return [Types::GatewayRouteData]
     class CreateGatewayRouteOperationOutput < Struct.new(
+      nil,
       :gateway_route,
       keyword_init: true
     )
@@ -252,6 +261,7 @@ module Aws::AppMesh
     #   request. Up to 36 letters, numbers, hyphens, and underscores are allowed.</p>
     #   @return [String]
     class CreateMeshOperationInput < Struct.new(
+      nil,
       :mesh_name,
       :spec,
       :tags,
@@ -265,6 +275,7 @@ module Aws::AppMesh
     #   <p>The full description of your service mesh following the create call.</p>
     #   @return [Types::MeshData]
     class CreateMeshOperationOutput < Struct.new(
+      nil,
       :mesh,
       keyword_init: true
     )
@@ -300,6 +311,7 @@ module Aws::AppMesh
     #                the resource in the service mesh. For more information about mesh sharing, see <a href="https://docs.aws.amazon.com/app-mesh/latest/userguide/sharing.html">Working with shared meshes</a>.</p>
     #   @return [String]
     class CreateRouteOperationInput < Struct.new(
+      nil,
       :route_name,
       :mesh_name,
       :virtual_router_name,
@@ -316,6 +328,7 @@ module Aws::AppMesh
     #   <p>The full description of your mesh following the create call.</p>
     #   @return [Types::RouteData]
     class CreateRouteOperationOutput < Struct.new(
+      nil,
       :route,
       keyword_init: true
     )
@@ -347,6 +360,7 @@ module Aws::AppMesh
     #                the resource in the service mesh. For more information about mesh sharing, see <a href="https://docs.aws.amazon.com/app-mesh/latest/userguide/sharing.html">Working with shared meshes</a>.</p>
     #   @return [String]
     class CreateVirtualGatewayOperationInput < Struct.new(
+      nil,
       :virtual_gateway_name,
       :mesh_name,
       :spec,
@@ -362,6 +376,7 @@ module Aws::AppMesh
     #   <p>The full description of your virtual gateway following the create call.</p>
     #   @return [Types::VirtualGatewayData]
     class CreateVirtualGatewayOperationOutput < Struct.new(
+      nil,
       :virtual_gateway,
       keyword_init: true
     )
@@ -393,6 +408,7 @@ module Aws::AppMesh
     #                the resource in the service mesh. For more information about mesh sharing, see <a href="https://docs.aws.amazon.com/app-mesh/latest/userguide/sharing.html">Working with shared meshes</a>.</p>
     #   @return [String]
     class CreateVirtualNodeOperationInput < Struct.new(
+      nil,
       :virtual_node_name,
       :mesh_name,
       :spec,
@@ -408,6 +424,7 @@ module Aws::AppMesh
     #   <p>The full description of your virtual node following the create call.</p>
     #   @return [Types::VirtualNodeData]
     class CreateVirtualNodeOperationOutput < Struct.new(
+      nil,
       :virtual_node,
       keyword_init: true
     )
@@ -439,6 +456,7 @@ module Aws::AppMesh
     #                the resource in the service mesh. For more information about mesh sharing, see <a href="https://docs.aws.amazon.com/app-mesh/latest/userguide/sharing.html">Working with shared meshes</a>.</p>
     #   @return [String]
     class CreateVirtualRouterOperationInput < Struct.new(
+      nil,
       :virtual_router_name,
       :mesh_name,
       :spec,
@@ -454,6 +472,7 @@ module Aws::AppMesh
     #   <p>The full description of your virtual router following the create call.</p>
     #   @return [Types::VirtualRouterData]
     class CreateVirtualRouterOperationOutput < Struct.new(
+      nil,
       :virtual_router,
       keyword_init: true
     )
@@ -485,6 +504,7 @@ module Aws::AppMesh
     #                the resource in the service mesh. For more information about mesh sharing, see <a href="https://docs.aws.amazon.com/app-mesh/latest/userguide/sharing.html">Working with shared meshes</a>.</p>
     #   @return [String]
     class CreateVirtualServiceOperationInput < Struct.new(
+      nil,
       :virtual_service_name,
       :mesh_name,
       :spec,
@@ -500,6 +520,7 @@ module Aws::AppMesh
     #   <p>The full description of your virtual service following the create call.</p>
     #   @return [Types::VirtualServiceData]
     class CreateVirtualServiceOperationOutput < Struct.new(
+      nil,
       :virtual_service,
       keyword_init: true
     )
@@ -520,6 +541,7 @@ module Aws::AppMesh
     #                  the ID of the account that shared the mesh with your account. For more information about mesh sharing, see <a href="https://docs.aws.amazon.com/app-mesh/latest/userguide/sharing.html">Working with shared meshes</a>.</p>
     #   @return [String]
     class DeleteGatewayRouteOperationInput < Struct.new(
+      nil,
       :gateway_route_name,
       :mesh_name,
       :virtual_gateway_name,
@@ -533,6 +555,7 @@ module Aws::AppMesh
     #   <p>The gateway route that was deleted.</p>
     #   @return [Types::GatewayRouteData]
     class DeleteGatewayRouteOperationOutput < Struct.new(
+      nil,
       :gateway_route,
       keyword_init: true
     )
@@ -543,6 +566,7 @@ module Aws::AppMesh
     #   <p>The name of the service mesh to delete.</p>
     #   @return [String]
     class DeleteMeshOperationInput < Struct.new(
+      nil,
       :mesh_name,
       keyword_init: true
     )
@@ -553,6 +577,7 @@ module Aws::AppMesh
     #   <p>The service mesh that was deleted.</p>
     #   @return [Types::MeshData]
     class DeleteMeshOperationOutput < Struct.new(
+      nil,
       :mesh,
       keyword_init: true
     )
@@ -573,6 +598,7 @@ module Aws::AppMesh
     #                  the ID of the account that shared the mesh with your account. For more information about mesh sharing, see <a href="https://docs.aws.amazon.com/app-mesh/latest/userguide/sharing.html">Working with shared meshes</a>.</p>
     #   @return [String]
     class DeleteRouteOperationInput < Struct.new(
+      nil,
       :route_name,
       :mesh_name,
       :virtual_router_name,
@@ -586,6 +612,7 @@ module Aws::AppMesh
     #   <p>The route that was deleted.</p>
     #   @return [Types::RouteData]
     class DeleteRouteOperationOutput < Struct.new(
+      nil,
       :route,
       keyword_init: true
     )
@@ -603,6 +630,7 @@ module Aws::AppMesh
     #                  the ID of the account that shared the mesh with your account. For more information about mesh sharing, see <a href="https://docs.aws.amazon.com/app-mesh/latest/userguide/sharing.html">Working with shared meshes</a>.</p>
     #   @return [String]
     class DeleteVirtualGatewayOperationInput < Struct.new(
+      nil,
       :virtual_gateway_name,
       :mesh_name,
       :mesh_owner,
@@ -615,6 +643,7 @@ module Aws::AppMesh
     #   <p>The virtual gateway that was deleted.</p>
     #   @return [Types::VirtualGatewayData]
     class DeleteVirtualGatewayOperationOutput < Struct.new(
+      nil,
       :virtual_gateway,
       keyword_init: true
     )
@@ -633,6 +662,7 @@ module Aws::AppMesh
     #                  the ID of the account that shared the mesh with your account. For more information about mesh sharing, see <a href="https://docs.aws.amazon.com/app-mesh/latest/userguide/sharing.html">Working with shared meshes</a>.</p>
     #   @return [String]
     class DeleteVirtualNodeOperationInput < Struct.new(
+      nil,
       :virtual_node_name,
       :mesh_name,
       :mesh_owner,
@@ -645,6 +675,7 @@ module Aws::AppMesh
     #   <p>The virtual node that was deleted.</p>
     #   @return [Types::VirtualNodeData]
     class DeleteVirtualNodeOperationOutput < Struct.new(
+      nil,
       :virtual_node,
       keyword_init: true
     )
@@ -662,6 +693,7 @@ module Aws::AppMesh
     #                  the ID of the account that shared the mesh with your account. For more information about mesh sharing, see <a href="https://docs.aws.amazon.com/app-mesh/latest/userguide/sharing.html">Working with shared meshes</a>.</p>
     #   @return [String]
     class DeleteVirtualRouterOperationInput < Struct.new(
+      nil,
       :virtual_router_name,
       :mesh_name,
       :mesh_owner,
@@ -674,6 +706,7 @@ module Aws::AppMesh
     #   <p>The virtual router that was deleted.</p>
     #   @return [Types::VirtualRouterData]
     class DeleteVirtualRouterOperationOutput < Struct.new(
+      nil,
       :virtual_router,
       keyword_init: true
     )
@@ -691,6 +724,7 @@ module Aws::AppMesh
     #                  the ID of the account that shared the mesh with your account. For more information about mesh sharing, see <a href="https://docs.aws.amazon.com/app-mesh/latest/userguide/sharing.html">Working with shared meshes</a>.</p>
     #   @return [String]
     class DeleteVirtualServiceOperationInput < Struct.new(
+      nil,
       :virtual_service_name,
       :mesh_name,
       :mesh_owner,
@@ -703,6 +737,7 @@ module Aws::AppMesh
     #   <p>The virtual service that was deleted.</p>
     #   @return [Types::VirtualServiceData]
     class DeleteVirtualServiceOperationOutput < Struct.new(
+      nil,
       :virtual_service,
       keyword_init: true
     )
@@ -723,6 +758,7 @@ module Aws::AppMesh
     #                  the ID of the account that shared the mesh with your account. For more information about mesh sharing, see <a href="https://docs.aws.amazon.com/app-mesh/latest/userguide/sharing.html">Working with shared meshes</a>.</p>
     #   @return [String]
     class DescribeGatewayRouteOperationInput < Struct.new(
+      nil,
       :gateway_route_name,
       :mesh_name,
       :virtual_gateway_name,
@@ -736,6 +772,7 @@ module Aws::AppMesh
     #   <p>The full description of your gateway route.</p>
     #   @return [Types::GatewayRouteData]
     class DescribeGatewayRouteOperationOutput < Struct.new(
+      nil,
       :gateway_route,
       keyword_init: true
     )
@@ -750,6 +787,7 @@ module Aws::AppMesh
     #                  the ID of the account that shared the mesh with your account. For more information about mesh sharing, see <a href="https://docs.aws.amazon.com/app-mesh/latest/userguide/sharing.html">Working with shared meshes</a>.</p>
     #   @return [String]
     class DescribeMeshOperationInput < Struct.new(
+      nil,
       :mesh_name,
       :mesh_owner,
       keyword_init: true
@@ -761,6 +799,7 @@ module Aws::AppMesh
     #   <p>The full description of your service mesh.</p>
     #   @return [Types::MeshData]
     class DescribeMeshOperationOutput < Struct.new(
+      nil,
       :mesh,
       keyword_init: true
     )
@@ -781,6 +820,7 @@ module Aws::AppMesh
     #   <p>The name of the virtual router that the route is associated with.</p>
     #   @return [String]
     class DescribeRouteOperationInput < Struct.new(
+      nil,
       :route_name,
       :mesh_name,
       :mesh_owner,
@@ -794,6 +834,7 @@ module Aws::AppMesh
     #   <p>The full description of your route.</p>
     #   @return [Types::RouteData]
     class DescribeRouteOperationOutput < Struct.new(
+      nil,
       :route,
       keyword_init: true
     )
@@ -811,6 +852,7 @@ module Aws::AppMesh
     #                  the ID of the account that shared the mesh with your account. For more information about mesh sharing, see <a href="https://docs.aws.amazon.com/app-mesh/latest/userguide/sharing.html">Working with shared meshes</a>.</p>
     #   @return [String]
     class DescribeVirtualGatewayOperationInput < Struct.new(
+      nil,
       :virtual_gateway_name,
       :mesh_name,
       :mesh_owner,
@@ -823,6 +865,7 @@ module Aws::AppMesh
     #   <p>The full description of your virtual gateway.</p>
     #   @return [Types::VirtualGatewayData]
     class DescribeVirtualGatewayOperationOutput < Struct.new(
+      nil,
       :virtual_gateway,
       keyword_init: true
     )
@@ -840,6 +883,7 @@ module Aws::AppMesh
     #                  the ID of the account that shared the mesh with your account. For more information about mesh sharing, see <a href="https://docs.aws.amazon.com/app-mesh/latest/userguide/sharing.html">Working with shared meshes</a>.</p>
     #   @return [String]
     class DescribeVirtualNodeOperationInput < Struct.new(
+      nil,
       :virtual_node_name,
       :mesh_name,
       :mesh_owner,
@@ -852,6 +896,7 @@ module Aws::AppMesh
     #   <p>The full description of your virtual node.</p>
     #   @return [Types::VirtualNodeData]
     class DescribeVirtualNodeOperationOutput < Struct.new(
+      nil,
       :virtual_node,
       keyword_init: true
     )
@@ -869,6 +914,7 @@ module Aws::AppMesh
     #                  the ID of the account that shared the mesh with your account. For more information about mesh sharing, see <a href="https://docs.aws.amazon.com/app-mesh/latest/userguide/sharing.html">Working with shared meshes</a>.</p>
     #   @return [String]
     class DescribeVirtualRouterOperationInput < Struct.new(
+      nil,
       :virtual_router_name,
       :mesh_name,
       :mesh_owner,
@@ -881,6 +927,7 @@ module Aws::AppMesh
     #   <p>The full description of your virtual router.</p>
     #   @return [Types::VirtualRouterData]
     class DescribeVirtualRouterOperationOutput < Struct.new(
+      nil,
       :virtual_router,
       keyword_init: true
     )
@@ -898,6 +945,7 @@ module Aws::AppMesh
     #                  the ID of the account that shared the mesh with your account. For more information about mesh sharing, see <a href="https://docs.aws.amazon.com/app-mesh/latest/userguide/sharing.html">Working with shared meshes</a>.</p>
     #   @return [String]
     class DescribeVirtualServiceOperationInput < Struct.new(
+      nil,
       :virtual_service_name,
       :mesh_name,
       :mesh_owner,
@@ -910,6 +958,7 @@ module Aws::AppMesh
     #   <p>The full description of your virtual service.</p>
     #   @return [Types::VirtualServiceData]
     class DescribeVirtualServiceOperationOutput < Struct.new(
+      nil,
       :virtual_service,
       keyword_init: true
     )
@@ -930,6 +979,7 @@ module Aws::AppMesh
     #            node.</p>
     #   @return [String]
     class DnsServiceDiscovery < Struct.new(
+      nil,
       :hostname,
       :response_type,
       :ip_preference,
@@ -946,6 +996,7 @@ module Aws::AppMesh
     #   <p>A unit of time.</p>
     #   @return [String]
     class Duration < Struct.new(
+      nil,
       :value,
       :unit,
       keyword_init: true
@@ -962,6 +1013,7 @@ module Aws::AppMesh
     #            outside of the service mesh.</p>
     #   @return [String]
     class EgressFilter < Struct.new(
+      nil,
       :type,
       keyword_init: true
     )
@@ -985,6 +1037,7 @@ module Aws::AppMesh
     #               <code>text_format</code>.</p>
     #   @return [Types::LoggingFormat]
     class FileAccessLog < Struct.new(
+      nil,
       :path,
       :format,
       keyword_init: true
@@ -996,6 +1049,7 @@ module Aws::AppMesh
     # @!attribute message
     #   @return [String]
     class ForbiddenException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -1022,6 +1076,7 @@ module Aws::AppMesh
     #   <p>The status of the gateway route.</p>
     #   @return [Types::GatewayRouteStatus]
     class GatewayRouteData < Struct.new(
+      nil,
       :mesh_name,
       :gateway_route_name,
       :virtual_gateway_name,
@@ -1041,6 +1096,7 @@ module Aws::AppMesh
     #   <p>The specified ending characters of the host name to match on.</p>
     #   @return [String]
     class GatewayRouteHostnameMatch < Struct.new(
+      nil,
       :exact,
       :suffix,
       keyword_init: true
@@ -1053,6 +1109,7 @@ module Aws::AppMesh
     #   <p>The default target host name to write to.</p>
     #   @return [String]
     class GatewayRouteHostnameRewrite < Struct.new(
+      nil,
       :default_target_hostname,
       keyword_init: true
     )
@@ -1090,6 +1147,7 @@ module Aws::AppMesh
     #   <p>The Unix epoch timestamp in seconds for when the resource was last updated.</p>
     #   @return [Time]
     class GatewayRouteRef < Struct.new(
+      nil,
       :mesh_name,
       :gateway_route_name,
       :virtual_gateway_name,
@@ -1119,6 +1177,7 @@ module Aws::AppMesh
     #   <p>An object that represents the specification of a gRPC gateway route.</p>
     #   @return [Types::GrpcGatewayRoute]
     class GatewayRouteSpec < Struct.new(
+      nil,
       :priority,
       :http_route,
       :http2_route,
@@ -1133,6 +1192,7 @@ module Aws::AppMesh
     #   <p>The current status for the gateway route.</p>
     #   @return [String]
     class GatewayRouteStatus < Struct.new(
+      nil,
       :status,
       keyword_init: true
     )
@@ -1147,6 +1207,7 @@ module Aws::AppMesh
     #   <p>The port number of the gateway route target.</p>
     #   @return [Integer]
     class GatewayRouteTarget < Struct.new(
+      nil,
       :virtual_service,
       :port,
       keyword_init: true
@@ -1159,6 +1220,7 @@ module Aws::AppMesh
     #   <p>The name of the virtual service that traffic is routed to.</p>
     #   @return [String]
     class GatewayRouteVirtualService < Struct.new(
+      nil,
       :virtual_service_name,
       keyword_init: true
     )
@@ -1173,6 +1235,7 @@ module Aws::AppMesh
     #   <p>An object that represents the action to take if a match is determined.</p>
     #   @return [Types::GrpcGatewayRouteAction]
     class GrpcGatewayRoute < Struct.new(
+      nil,
       :match,
       :action,
       keyword_init: true
@@ -1188,6 +1251,7 @@ module Aws::AppMesh
     #   <p>The gateway route action to rewrite.</p>
     #   @return [Types::GrpcGatewayRouteRewrite]
     class GrpcGatewayRouteAction < Struct.new(
+      nil,
       :target,
       :rewrite,
       keyword_init: true
@@ -1209,6 +1273,7 @@ module Aws::AppMesh
     #   <p>The gateway route port to be matched on.</p>
     #   @return [Integer]
     class GrpcGatewayRouteMatch < Struct.new(
+      nil,
       :service_name,
       :hostname,
       :metadata,
@@ -1230,6 +1295,7 @@ module Aws::AppMesh
     #   <p>The criteria for determining a metadata match.</p>
     #   @return [Types::GrpcMetadataMatchMethod]
     class GrpcGatewayRouteMetadata < Struct.new(
+      nil,
       :name,
       :invert,
       :match,
@@ -1243,6 +1309,7 @@ module Aws::AppMesh
     #   <p>The host name of the gateway route to rewrite.</p>
     #   @return [Types::GatewayRouteHostnameRewrite]
     class GrpcGatewayRouteRewrite < Struct.new(
+      nil,
       :hostname,
       keyword_init: true
     )
@@ -1324,6 +1391,7 @@ module Aws::AppMesh
     #   <p>Specify at least one of the valid values.</p>
     #   @return [Array<String>]
     class GrpcRetryPolicy < Struct.new(
+      nil,
       :per_retry_timeout,
       :max_retries,
       :http_retry_events,
@@ -1348,6 +1416,7 @@ module Aws::AppMesh
     #   <p>An object that represents types of timeouts. </p>
     #   @return [Types::GrpcTimeout]
     class GrpcRoute < Struct.new(
+      nil,
       :action,
       :match,
       :retry_policy,
@@ -1362,6 +1431,7 @@ module Aws::AppMesh
     #   <p>An object that represents the targets that traffic is routed to when a request matches the route.</p>
     #   @return [Array<Types::WeightedTarget>]
     class GrpcRouteAction < Struct.new(
+      nil,
       :weighted_targets,
       keyword_init: true
     )
@@ -1383,6 +1453,7 @@ module Aws::AppMesh
     #   <p>The port number to match on.</p>
     #   @return [Integer]
     class GrpcRouteMatch < Struct.new(
+      nil,
       :service_name,
       :method_name,
       :metadata,
@@ -1403,6 +1474,7 @@ module Aws::AppMesh
     #   <p>An object that represents the data to match from the request.</p>
     #   @return [Types::GrpcRouteMetadataMatchMethod]
     class GrpcRouteMetadata < Struct.new(
+      nil,
       :name,
       :invert,
       :match,
@@ -1456,6 +1528,7 @@ module Aws::AppMesh
     #   <p>An object that represents an idle timeout. An idle timeout bounds the amount of time that a connection may be idle. The default value is none.</p>
     #   @return [Types::Duration]
     class GrpcTimeout < Struct.new(
+      nil,
       :per_request,
       :idle,
       keyword_init: true
@@ -1529,6 +1602,7 @@ module Aws::AppMesh
     #            virtual node unhealthy. </p>
     #   @return [Integer]
     class HealthCheckPolicy < Struct.new(
+      nil,
       :timeout_millis,
       :interval_millis,
       :protocol,
@@ -1549,6 +1623,7 @@ module Aws::AppMesh
     #   <p>An object that represents the action to take if a match is determined.</p>
     #   @return [Types::HttpGatewayRouteAction]
     class HttpGatewayRoute < Struct.new(
+      nil,
       :match,
       :action,
       keyword_init: true
@@ -1564,6 +1639,7 @@ module Aws::AppMesh
     #   <p>The gateway route action to rewrite.</p>
     #   @return [Types::HttpGatewayRouteRewrite]
     class HttpGatewayRouteAction < Struct.new(
+      nil,
       :target,
       :rewrite,
       keyword_init: true
@@ -1584,6 +1660,7 @@ module Aws::AppMesh
     #            request. Specify one match method.</p>
     #   @return [Types::HeaderMatchMethod]
     class HttpGatewayRouteHeader < Struct.new(
+      nil,
       :name,
       :invert,
       :match,
@@ -1620,6 +1697,7 @@ module Aws::AppMesh
     #   <p>The port number to match on.</p>
     #   @return [Integer]
     class HttpGatewayRouteMatch < Struct.new(
+      nil,
       :prefix,
       :path,
       :query_parameters,
@@ -1637,6 +1715,7 @@ module Aws::AppMesh
     #   <p>The exact path to rewrite.</p>
     #   @return [String]
     class HttpGatewayRoutePathRewrite < Struct.new(
+      nil,
       :exact,
       keyword_init: true
     )
@@ -1651,6 +1730,7 @@ module Aws::AppMesh
     #   <p>The value used to replace the incoming route prefix when rewritten.</p>
     #   @return [String]
     class HttpGatewayRoutePrefixRewrite < Struct.new(
+      nil,
       :default_prefix,
       :value,
       keyword_init: true
@@ -1669,6 +1749,7 @@ module Aws::AppMesh
     #   <p>The host name to rewrite.</p>
     #   @return [Types::GatewayRouteHostnameRewrite]
     class HttpGatewayRouteRewrite < Struct.new(
+      nil,
       :prefix,
       :path,
       :hostname,
@@ -1685,6 +1766,7 @@ module Aws::AppMesh
     #   <p>The regex used to match the path.</p>
     #   @return [String]
     class HttpPathMatch < Struct.new(
+      nil,
       :exact,
       :regex,
       keyword_init: true
@@ -1700,6 +1782,7 @@ module Aws::AppMesh
     #   <p>The query parameter to match on.</p>
     #   @return [Types::QueryParameterMatch]
     class HttpQueryParameter < Struct.new(
+      nil,
       :name,
       :match,
       keyword_init: true
@@ -1744,6 +1827,7 @@ module Aws::AppMesh
     #   <p>Specify a valid value. The event occurs before any processing of a request has started and is encountered when the upstream is temporarily or permanently unavailable.</p>
     #   @return [Array<String>]
     class HttpRetryPolicy < Struct.new(
+      nil,
       :per_retry_timeout,
       :max_retries,
       :http_retry_events,
@@ -1767,6 +1851,7 @@ module Aws::AppMesh
     #   <p>An object that represents types of timeouts. </p>
     #   @return [Types::HttpTimeout]
     class HttpRoute < Struct.new(
+      nil,
       :match,
       :action,
       :retry_policy,
@@ -1781,6 +1866,7 @@ module Aws::AppMesh
     #   <p>An object that represents the targets that traffic is routed to when a request matches the route.</p>
     #   @return [Array<Types::WeightedTarget>]
     class HttpRouteAction < Struct.new(
+      nil,
       :weighted_targets,
       keyword_init: true
     )
@@ -1798,6 +1884,7 @@ module Aws::AppMesh
     #   <p>The <code>HeaderMatchMethod</code> object.</p>
     #   @return [Types::HeaderMatchMethod]
     class HttpRouteHeader < Struct.new(
+      nil,
       :name,
       :invert,
       :match,
@@ -1836,6 +1923,7 @@ module Aws::AppMesh
     #   <p>The port number to match on.</p>
     #   @return [Integer]
     class HttpRouteMatch < Struct.new(
+      nil,
       :prefix,
       :path,
       :query_parameters,
@@ -1858,6 +1946,7 @@ module Aws::AppMesh
     #   <p>An object that represents an idle timeout. An idle timeout bounds the amount of time that a connection may be idle. The default value is none.</p>
     #   @return [Types::Duration]
     class HttpTimeout < Struct.new(
+      nil,
       :per_request,
       :idle,
       keyword_init: true
@@ -1870,6 +1959,7 @@ module Aws::AppMesh
     # @!attribute message
     #   @return [String]
     class InternalServerErrorException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -1884,6 +1974,7 @@ module Aws::AppMesh
     #   <p>The specified value for the JSON.</p>
     #   @return [String]
     class JsonFormatRef < Struct.new(
+      nil,
       :key,
       :value,
       keyword_init: true
@@ -1896,6 +1987,7 @@ module Aws::AppMesh
     # @!attribute message
     #   @return [String]
     class LimitExceededException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -1929,6 +2021,7 @@ module Aws::AppMesh
     #                  the ID of the account that shared the mesh with your account. For more information about mesh sharing, see <a href="https://docs.aws.amazon.com/app-mesh/latest/userguide/sharing.html">Working with shared meshes</a>.</p>
     #   @return [String]
     class ListGatewayRoutesOperationInput < Struct.new(
+      nil,
       :mesh_name,
       :virtual_gateway_name,
       :next_token,
@@ -1950,6 +2043,7 @@ module Aws::AppMesh
     #            value is <code>null</code> when there are no more results to return.</p>
     #   @return [String]
     class ListGatewayRoutesOperationOutput < Struct.new(
+      nil,
       :gateway_routes,
       :next_token,
       keyword_init: true
@@ -1978,6 +2072,7 @@ module Aws::AppMesh
     #               <code>nextToken</code> value if applicable.</p>
     #   @return [Integer]
     class ListMeshesOperationInput < Struct.new(
+      nil,
       :next_token,
       :limit,
       keyword_init: true
@@ -1995,6 +2090,7 @@ module Aws::AppMesh
     #            there are no more results to return.</p>
     #   @return [String]
     class ListMeshesOperationOutput < Struct.new(
+      nil,
       :meshes,
       :next_token,
       keyword_init: true
@@ -2029,6 +2125,7 @@ module Aws::AppMesh
     #                  the ID of the account that shared the mesh with your account. For more information about mesh sharing, see <a href="https://docs.aws.amazon.com/app-mesh/latest/userguide/sharing.html">Working with shared meshes</a>.</p>
     #   @return [String]
     class ListRoutesOperationInput < Struct.new(
+      nil,
       :mesh_name,
       :virtual_router_name,
       :next_token,
@@ -2049,6 +2146,7 @@ module Aws::AppMesh
     #            there are no more results to return.</p>
     #   @return [String]
     class ListRoutesOperationOutput < Struct.new(
+      nil,
       :routes,
       :next_token,
       keyword_init: true
@@ -2076,6 +2174,7 @@ module Aws::AppMesh
     #            results and a <code>nextToken</code> value if applicable.</p>
     #   @return [Integer]
     class ListTagsForResourceOperationInput < Struct.new(
+      nil,
       :resource_arn,
       :next_token,
       :limit,
@@ -2094,6 +2193,7 @@ module Aws::AppMesh
     #            value is <code>null</code> when there are no more results to return.</p>
     #   @return [String]
     class ListTagsForResourceOperationOutput < Struct.new(
+      nil,
       :tags,
       :next_token,
       keyword_init: true
@@ -2125,6 +2225,7 @@ module Aws::AppMesh
     #                  the ID of the account that shared the mesh with your account. For more information about mesh sharing, see <a href="https://docs.aws.amazon.com/app-mesh/latest/userguide/sharing.html">Working with shared meshes</a>.</p>
     #   @return [String]
     class ListVirtualGatewaysOperationInput < Struct.new(
+      nil,
       :mesh_name,
       :next_token,
       :limit,
@@ -2144,6 +2245,7 @@ module Aws::AppMesh
     #            value is <code>null</code> when there are no more results to return.</p>
     #   @return [String]
     class ListVirtualGatewaysOperationOutput < Struct.new(
+      nil,
       :virtual_gateways,
       :next_token,
       keyword_init: true
@@ -2175,6 +2277,7 @@ module Aws::AppMesh
     #                  the ID of the account that shared the mesh with your account. For more information about mesh sharing, see <a href="https://docs.aws.amazon.com/app-mesh/latest/userguide/sharing.html">Working with shared meshes</a>.</p>
     #   @return [String]
     class ListVirtualNodesOperationInput < Struct.new(
+      nil,
       :mesh_name,
       :next_token,
       :limit,
@@ -2194,6 +2297,7 @@ module Aws::AppMesh
     #            value is <code>null</code> when there are no more results to return.</p>
     #   @return [String]
     class ListVirtualNodesOperationOutput < Struct.new(
+      nil,
       :virtual_nodes,
       :next_token,
       keyword_init: true
@@ -2225,6 +2329,7 @@ module Aws::AppMesh
     #                  the ID of the account that shared the mesh with your account. For more information about mesh sharing, see <a href="https://docs.aws.amazon.com/app-mesh/latest/userguide/sharing.html">Working with shared meshes</a>.</p>
     #   @return [String]
     class ListVirtualRoutersOperationInput < Struct.new(
+      nil,
       :mesh_name,
       :next_token,
       :limit,
@@ -2244,6 +2349,7 @@ module Aws::AppMesh
     #            value is <code>null</code> when there are no more results to return.</p>
     #   @return [String]
     class ListVirtualRoutersOperationOutput < Struct.new(
+      nil,
       :virtual_routers,
       :next_token,
       keyword_init: true
@@ -2275,6 +2381,7 @@ module Aws::AppMesh
     #                  the ID of the account that shared the mesh with your account. For more information about mesh sharing, see <a href="https://docs.aws.amazon.com/app-mesh/latest/userguide/sharing.html">Working with shared meshes</a>.</p>
     #   @return [String]
     class ListVirtualServicesOperationInput < Struct.new(
+      nil,
       :mesh_name,
       :next_token,
       :limit,
@@ -2294,6 +2401,7 @@ module Aws::AppMesh
     #            value is <code>null</code> when there are no more results to return.</p>
     #   @return [String]
     class ListVirtualServicesOperationOutput < Struct.new(
+      nil,
       :virtual_services,
       :next_token,
       keyword_init: true
@@ -2321,6 +2429,7 @@ module Aws::AppMesh
     #   <p>The connection pool information for the listener.</p>
     #   @return [Types::VirtualNodeConnectionPool]
     class Listener < Struct.new(
+      nil,
       :port_mapping,
       :tls,
       :health_check,
@@ -2390,6 +2499,7 @@ module Aws::AppMesh
     #   <p>A reference to an object that represents a listener's Transport Layer Security (TLS) validation context.</p>
     #   @return [Types::ListenerTlsValidationContext]
     class ListenerTls < Struct.new(
+      nil,
       :mode,
       :certificate,
       :validation,
@@ -2403,6 +2513,7 @@ module Aws::AppMesh
     #   <p>The Amazon Resource Name (ARN) for the certificate. The certificate must meet specific requirements and you must have proxy authorization enabled. For more information, see <a href="https://docs.aws.amazon.com/app-mesh/latest/userguide/tls.html#virtual-node-tls-prerequisites">Transport Layer Security (TLS)</a>.</p>
     #   @return [String]
     class ListenerTlsAcmCertificate < Struct.new(
+      nil,
       :certificate_arn,
       keyword_init: true
     )
@@ -2445,6 +2556,7 @@ module Aws::AppMesh
     #            proxy is running on.</p>
     #   @return [String]
     class ListenerTlsFileCertificate < Struct.new(
+      nil,
       :certificate_chain,
       :private_key,
       keyword_init: true
@@ -2462,6 +2574,7 @@ module Aws::AppMesh
     #            certificate chain.</p>
     #   @return [String]
     class ListenerTlsSdsCertificate < Struct.new(
+      nil,
       :secret_name,
       keyword_init: true
     )
@@ -2478,6 +2591,7 @@ module Aws::AppMesh
     #            context.</p>
     #   @return [Types::SubjectAlternativeNames]
     class ListenerTlsValidationContext < Struct.new(
+      nil,
       :trust,
       :subject_alternative_names,
       keyword_init: true
@@ -2511,6 +2625,7 @@ module Aws::AppMesh
     #   <p>The access log configuration for a virtual node.</p>
     #   @return [Types::AccessLog]
     class Logging < Struct.new(
+      nil,
       :access_log,
       keyword_init: true
     )
@@ -2545,6 +2660,7 @@ module Aws::AppMesh
     #   <p>The end of the range.</p>
     #   @return [Integer]
     class MatchRange < Struct.new(
+      nil,
       :start,
       :end,
       keyword_init: true
@@ -2566,6 +2682,7 @@ module Aws::AppMesh
     #   <p>The status of the service mesh.</p>
     #   @return [Types::MeshStatus]
     class MeshData < Struct.new(
+      nil,
       :mesh_name,
       :spec,
       :metadata,
@@ -2600,6 +2717,7 @@ module Aws::AppMesh
     #   <p>The Unix epoch timestamp in seconds for when the resource was last updated.</p>
     #   @return [Time]
     class MeshRef < Struct.new(
+      nil,
       :mesh_name,
       :mesh_owner,
       :resource_owner,
@@ -2617,6 +2735,7 @@ module Aws::AppMesh
     #   <p>The IP version to use to control traffic within the mesh.</p>
     #   @return [String]
     class MeshServiceDiscovery < Struct.new(
+      nil,
       :ip_preference,
       keyword_init: true
     )
@@ -2631,6 +2750,7 @@ module Aws::AppMesh
     #   <p>An object that represents the service discovery information for a service mesh.</p>
     #   @return [Types::MeshServiceDiscovery]
     class MeshSpec < Struct.new(
+      nil,
       :egress_filter,
       :service_discovery,
       keyword_init: true
@@ -2643,6 +2763,7 @@ module Aws::AppMesh
     #   <p>The current mesh status.</p>
     #   @return [String]
     class MeshStatus < Struct.new(
+      nil,
       :status,
       keyword_init: true
     )
@@ -2653,6 +2774,7 @@ module Aws::AppMesh
     # @!attribute message
     #   @return [String]
     class NotFoundException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -2674,6 +2796,7 @@ module Aws::AppMesh
     #            ejected. Will eject at least one host regardless of the value.</p>
     #   @return [Integer]
     class OutlierDetection < Struct.new(
+      nil,
       :max_server_errors,
       :interval,
       :base_ejection_duration,
@@ -2691,6 +2814,7 @@ module Aws::AppMesh
     #   <p>The protocol used for the port mapping. Specify one protocol.</p>
     #   @return [String]
     class PortMapping < Struct.new(
+      nil,
       :port,
       :protocol,
       keyword_init: true
@@ -2703,6 +2827,7 @@ module Aws::AppMesh
     #   <p>The exact query parameter to match on.</p>
     #   @return [String]
     class QueryParameterMatch < Struct.new(
+      nil,
       :exact,
       keyword_init: true
     )
@@ -2714,6 +2839,7 @@ module Aws::AppMesh
     # @!attribute message
     #   @return [String]
     class ResourceInUseException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -2745,6 +2871,7 @@ module Aws::AppMesh
     #                  the ID of the mesh owner or of another account that the mesh is shared with. For more information about mesh sharing, see <a href="https://docs.aws.amazon.com/app-mesh/latest/userguide/sharing.html">Working with shared meshes</a>.</p>
     #   @return [String]
     class ResourceMetadata < Struct.new(
+      nil,
       :arn,
       :version,
       :uid,
@@ -2777,6 +2904,7 @@ module Aws::AppMesh
     #   <p>The status of the route.</p>
     #   @return [Types::RouteStatus]
     class RouteData < Struct.new(
+      nil,
       :mesh_name,
       :virtual_router_name,
       :route_name,
@@ -2819,6 +2947,7 @@ module Aws::AppMesh
     #   <p>The Unix epoch timestamp in seconds for when the resource was last updated.</p>
     #   @return [Time]
     class RouteRef < Struct.new(
+      nil,
       :mesh_name,
       :virtual_router_name,
       :route_name,
@@ -2851,6 +2980,7 @@ module Aws::AppMesh
     #   <p>An object that represents the specification of a gRPC route.</p>
     #   @return [Types::GrpcRoute]
     class RouteSpec < Struct.new(
+      nil,
       :priority,
       :http_route,
       :tcp_route,
@@ -2866,6 +2996,7 @@ module Aws::AppMesh
     #   <p>The current status for the route.</p>
     #   @return [String]
     class RouteStatus < Struct.new(
+      nil,
       :status,
       keyword_init: true
     )
@@ -2896,6 +3027,7 @@ module Aws::AppMesh
     # @!attribute message
     #   @return [String]
     class ServiceUnavailableException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -2908,6 +3040,7 @@ module Aws::AppMesh
     #   <p>The values sent must match the specified values exactly.</p>
     #   @return [Array<String>]
     class SubjectAlternativeNameMatchers < Struct.new(
+      nil,
       :exact,
       keyword_init: true
     )
@@ -2920,6 +3053,7 @@ module Aws::AppMesh
     #   <p>An object that represents the criteria for determining a SANs match.</p>
     #   @return [Types::SubjectAlternativeNameMatchers]
     class SubjectAlternativeNames < Struct.new(
+      nil,
       :match,
       keyword_init: true
     )
@@ -2939,6 +3073,7 @@ module Aws::AppMesh
     #            descriptor within a tag category (key).</p>
     #   @return [String]
     class TagRef < Struct.new(
+      nil,
       :key,
       :value,
       keyword_init: true
@@ -2955,6 +3090,7 @@ module Aws::AppMesh
     #               a maximum length of 256 characters.</p>
     #   @return [Array<Types::TagRef>]
     class TagResourceOperationInput < Struct.new(
+      nil,
       :resource_arn,
       :tags,
       keyword_init: true
@@ -2963,6 +3099,7 @@ module Aws::AppMesh
     end
 
     class TagResourceOperationOutput < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -2979,6 +3116,7 @@ module Aws::AppMesh
     #   <p>An object that represents the criteria for determining a request match.</p>
     #   @return [Types::TcpRouteMatch]
     class TcpRoute < Struct.new(
+      nil,
       :action,
       :timeout,
       :match,
@@ -2992,6 +3130,7 @@ module Aws::AppMesh
     #   <p>An object that represents the targets that traffic is routed to when a request matches the route.</p>
     #   @return [Array<Types::WeightedTarget>]
     class TcpRouteAction < Struct.new(
+      nil,
       :weighted_targets,
       keyword_init: true
     )
@@ -3003,6 +3142,7 @@ module Aws::AppMesh
     #   <p>The port number to match on.</p>
     #   @return [Integer]
     class TcpRouteMatch < Struct.new(
+      nil,
       :port,
       keyword_init: true
     )
@@ -3014,6 +3154,7 @@ module Aws::AppMesh
     #   <p>An object that represents an idle timeout. An idle timeout bounds the amount of time that a connection may be idle. The default value is none.</p>
     #   @return [Types::Duration]
     class TcpTimeout < Struct.new(
+      nil,
       :idle,
       keyword_init: true
     )
@@ -3036,6 +3177,7 @@ module Aws::AppMesh
     #            SAN since the name doesn't match the service discovery name.</p>
     #   @return [Types::SubjectAlternativeNames]
     class TlsValidationContext < Struct.new(
+      nil,
       :trust,
       :subject_alternative_names,
       keyword_init: true
@@ -3049,6 +3191,7 @@ module Aws::AppMesh
     #   <p>One or more ACM Amazon Resource Name (ARN)s.</p>
     #   @return [Array<String>]
     class TlsValidationContextAcmTrust < Struct.new(
+      nil,
       :certificate_authority_arns,
       keyword_init: true
     )
@@ -3061,6 +3204,7 @@ module Aws::AppMesh
     #            node that the proxy is running on.</p>
     #   @return [String]
     class TlsValidationContextFileTrust < Struct.new(
+      nil,
       :certificate_chain,
       keyword_init: true
     )
@@ -3076,6 +3220,7 @@ module Aws::AppMesh
     #            Discovery Service validation context trust.</p>
     #   @return [String]
     class TlsValidationContextSdsTrust < Struct.new(
+      nil,
       :secret_name,
       keyword_init: true
     )
@@ -3114,6 +3259,7 @@ module Aws::AppMesh
     # @!attribute message
     #   @return [String]
     class TooManyRequestsException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -3126,6 +3272,7 @@ module Aws::AppMesh
     # @!attribute message
     #   @return [String]
     class TooManyTagsException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -3139,6 +3286,7 @@ module Aws::AppMesh
     #   <p>The keys of the tags to be removed.</p>
     #   @return [Array<String>]
     class UntagResourceOperationInput < Struct.new(
+      nil,
       :resource_arn,
       :tag_keys,
       keyword_init: true
@@ -3147,6 +3295,7 @@ module Aws::AppMesh
     end
 
     class UntagResourceOperationOutput < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -3173,6 +3322,7 @@ module Aws::AppMesh
     #                  the ID of the account that shared the mesh with your account. For more information about mesh sharing, see <a href="https://docs.aws.amazon.com/app-mesh/latest/userguide/sharing.html">Working with shared meshes</a>.</p>
     #   @return [String]
     class UpdateGatewayRouteOperationInput < Struct.new(
+      nil,
       :gateway_route_name,
       :mesh_name,
       :virtual_gateway_name,
@@ -3188,6 +3338,7 @@ module Aws::AppMesh
     #   <p>A full description of the gateway route that was updated.</p>
     #   @return [Types::GatewayRouteData]
     class UpdateGatewayRouteOperationOutput < Struct.new(
+      nil,
       :gateway_route,
       keyword_init: true
     )
@@ -3205,6 +3356,7 @@ module Aws::AppMesh
     #   request. Up to 36 letters, numbers, hyphens, and underscores are allowed.</p>
     #   @return [String]
     class UpdateMeshOperationInput < Struct.new(
+      nil,
       :mesh_name,
       :spec,
       :client_token,
@@ -3217,6 +3369,7 @@ module Aws::AppMesh
     #   <p>An object that represents a service mesh returned by a describe operation.</p>
     #   @return [Types::MeshData]
     class UpdateMeshOperationOutput < Struct.new(
+      nil,
       :mesh,
       keyword_init: true
     )
@@ -3244,6 +3397,7 @@ module Aws::AppMesh
     #                  the ID of the account that shared the mesh with your account. For more information about mesh sharing, see <a href="https://docs.aws.amazon.com/app-mesh/latest/userguide/sharing.html">Working with shared meshes</a>.</p>
     #   @return [String]
     class UpdateRouteOperationInput < Struct.new(
+      nil,
       :route_name,
       :mesh_name,
       :virtual_router_name,
@@ -3259,6 +3413,7 @@ module Aws::AppMesh
     #   <p>A full description of the route that was updated.</p>
     #   @return [Types::RouteData]
     class UpdateRouteOperationOutput < Struct.new(
+      nil,
       :route,
       keyword_init: true
     )
@@ -3284,6 +3439,7 @@ module Aws::AppMesh
     #                  the ID of the account that shared the mesh with your account. For more information about mesh sharing, see <a href="https://docs.aws.amazon.com/app-mesh/latest/userguide/sharing.html">Working with shared meshes</a>.</p>
     #   @return [String]
     class UpdateVirtualGatewayOperationInput < Struct.new(
+      nil,
       :virtual_gateway_name,
       :mesh_name,
       :spec,
@@ -3298,6 +3454,7 @@ module Aws::AppMesh
     #   <p>A full description of the virtual gateway that was updated.</p>
     #   @return [Types::VirtualGatewayData]
     class UpdateVirtualGatewayOperationOutput < Struct.new(
+      nil,
       :virtual_gateway,
       keyword_init: true
     )
@@ -3322,6 +3479,7 @@ module Aws::AppMesh
     #                  the ID of the account that shared the mesh with your account. For more information about mesh sharing, see <a href="https://docs.aws.amazon.com/app-mesh/latest/userguide/sharing.html">Working with shared meshes</a>.</p>
     #   @return [String]
     class UpdateVirtualNodeOperationInput < Struct.new(
+      nil,
       :virtual_node_name,
       :mesh_name,
       :spec,
@@ -3336,6 +3494,7 @@ module Aws::AppMesh
     #   <p>A full description of the virtual node that was updated.</p>
     #   @return [Types::VirtualNodeData]
     class UpdateVirtualNodeOperationOutput < Struct.new(
+      nil,
       :virtual_node,
       keyword_init: true
     )
@@ -3360,6 +3519,7 @@ module Aws::AppMesh
     #                  the ID of the account that shared the mesh with your account. For more information about mesh sharing, see <a href="https://docs.aws.amazon.com/app-mesh/latest/userguide/sharing.html">Working with shared meshes</a>.</p>
     #   @return [String]
     class UpdateVirtualRouterOperationInput < Struct.new(
+      nil,
       :virtual_router_name,
       :mesh_name,
       :spec,
@@ -3374,6 +3534,7 @@ module Aws::AppMesh
     #   <p>A full description of the virtual router that was updated.</p>
     #   @return [Types::VirtualRouterData]
     class UpdateVirtualRouterOperationOutput < Struct.new(
+      nil,
       :virtual_router,
       keyword_init: true
     )
@@ -3399,6 +3560,7 @@ module Aws::AppMesh
     #                  the ID of the account that shared the mesh with your account. For more information about mesh sharing, see <a href="https://docs.aws.amazon.com/app-mesh/latest/userguide/sharing.html">Working with shared meshes</a>.</p>
     #   @return [String]
     class UpdateVirtualServiceOperationInput < Struct.new(
+      nil,
       :virtual_service_name,
       :mesh_name,
       :spec,
@@ -3413,6 +3575,7 @@ module Aws::AppMesh
     #   <p>A full description of the virtual service that was updated.</p>
     #   @return [Types::VirtualServiceData]
     class UpdateVirtualServiceOperationOutput < Struct.new(
+      nil,
       :virtual_service,
       keyword_init: true
     )
@@ -3439,6 +3602,7 @@ module Aws::AppMesh
     #   <p>A reference to an object that represents a client policy.</p>
     #   @return [Types::VirtualGatewayClientPolicy]
     class VirtualGatewayBackendDefaults < Struct.new(
+      nil,
       :client_policy,
       keyword_init: true
     )
@@ -3450,6 +3614,7 @@ module Aws::AppMesh
     #   <p>A reference to an object that represents a Transport Layer Security (TLS) client policy.</p>
     #   @return [Types::VirtualGatewayClientPolicyTls]
     class VirtualGatewayClientPolicy < Struct.new(
+      nil,
       :tls,
       keyword_init: true
     )
@@ -3472,6 +3637,7 @@ module Aws::AppMesh
     #   <p>A reference to an object that represents a Transport Layer Security (TLS) validation context.</p>
     #   @return [Types::VirtualGatewayTlsValidationContext]
     class VirtualGatewayClientPolicyTls < Struct.new(
+      nil,
       :enforce,
       :ports,
       :certificate,
@@ -3556,6 +3722,7 @@ module Aws::AppMesh
     #   <p>The current status of the virtual gateway.</p>
     #   @return [Types::VirtualGatewayStatus]
     class VirtualGatewayData < Struct.new(
+      nil,
       :mesh_name,
       :virtual_gateway_name,
       :spec,
@@ -3579,6 +3746,7 @@ module Aws::AppMesh
     #               <code>json_format</code> or <code>text_format</code>.</p>
     #   @return [Types::LoggingFormat]
     class VirtualGatewayFileAccessLog < Struct.new(
+      nil,
       :path,
       :format,
       keyword_init: true
@@ -3592,6 +3760,7 @@ module Aws::AppMesh
     #            upstream cluster.</p>
     #   @return [Integer]
     class VirtualGatewayGrpcConnectionPool < Struct.new(
+      nil,
       :max_requests,
       keyword_init: true
     )
@@ -3629,6 +3798,7 @@ module Aws::AppMesh
     #            virtual gateway unhealthy.</p>
     #   @return [Integer]
     class VirtualGatewayHealthCheckPolicy < Struct.new(
+      nil,
       :timeout_millis,
       :interval_millis,
       :protocol,
@@ -3647,6 +3817,7 @@ module Aws::AppMesh
     #            upstream cluster.</p>
     #   @return [Integer]
     class VirtualGatewayHttp2ConnectionPool < Struct.new(
+      nil,
       :max_requests,
       keyword_init: true
     )
@@ -3663,6 +3834,7 @@ module Aws::AppMesh
     #            upstream cluster.</p>
     #   @return [Integer]
     class VirtualGatewayHttpConnectionPool < Struct.new(
+      nil,
       :max_connections,
       :max_pending_requests,
       keyword_init: true
@@ -3689,6 +3861,7 @@ module Aws::AppMesh
     #   <p>The connection pool information for the virtual gateway listener.</p>
     #   @return [Types::VirtualGatewayConnectionPool]
     class VirtualGatewayListener < Struct.new(
+      nil,
       :health_check,
       :port_mapping,
       :tls,
@@ -3727,6 +3900,7 @@ module Aws::AppMesh
     #   <p>An object that represents a Transport Layer Security (TLS) certificate.</p>
     #   @return [Types::VirtualGatewayListenerTlsCertificate]
     class VirtualGatewayListenerTls < Struct.new(
+      nil,
       :mode,
       :validation,
       :certificate,
@@ -3740,6 +3914,7 @@ module Aws::AppMesh
     #   <p>The Amazon Resource Name (ARN) for the certificate. The certificate must meet specific requirements and you must have proxy authorization enabled. For more information, see <a href="https://docs.aws.amazon.com/app-mesh/latest/userguide/tls.html#virtual-node-tls-prerequisites">Transport Layer Security (TLS)</a>.</p>
     #   @return [String]
     class VirtualGatewayListenerTlsAcmCertificate < Struct.new(
+      nil,
       :certificate_arn,
       keyword_init: true
     )
@@ -3782,6 +3957,7 @@ module Aws::AppMesh
     #            the proxy is running on.</p>
     #   @return [String]
     class VirtualGatewayListenerTlsFileCertificate < Struct.new(
+      nil,
       :certificate_chain,
       :private_key,
       keyword_init: true
@@ -3799,6 +3975,7 @@ module Aws::AppMesh
     #            certificate chain.</p>
     #   @return [String]
     class VirtualGatewayListenerTlsSdsCertificate < Struct.new(
+      nil,
       :secret_name,
       keyword_init: true
     )
@@ -3816,6 +3993,7 @@ module Aws::AppMesh
     #            validation context.</p>
     #   @return [Types::SubjectAlternativeNames]
     class VirtualGatewayListenerTlsValidationContext < Struct.new(
+      nil,
       :trust,
       :subject_alternative_names,
       keyword_init: true
@@ -3850,6 +4028,7 @@ module Aws::AppMesh
     #   <p>The access log configuration.</p>
     #   @return [Types::VirtualGatewayAccessLog]
     class VirtualGatewayLogging < Struct.new(
+      nil,
       :access_log,
       keyword_init: true
     )
@@ -3864,6 +4043,7 @@ module Aws::AppMesh
     #   <p>The protocol used for the port mapping.</p>
     #   @return [String]
     class VirtualGatewayPortMapping < Struct.new(
+      nil,
       :port,
       :protocol,
       keyword_init: true
@@ -3899,6 +4079,7 @@ module Aws::AppMesh
     #   <p>The Unix epoch timestamp in seconds for when the resource was last updated.</p>
     #   @return [Time]
     class VirtualGatewayRef < Struct.new(
+      nil,
       :mesh_name,
       :virtual_gateway_name,
       :mesh_owner,
@@ -3924,6 +4105,7 @@ module Aws::AppMesh
     #   <p>An object that represents logging information.</p>
     #   @return [Types::VirtualGatewayLogging]
     class VirtualGatewaySpec < Struct.new(
+      nil,
       :backend_defaults,
       :listeners,
       :logging,
@@ -3937,6 +4119,7 @@ module Aws::AppMesh
     #   <p>The current status.</p>
     #   @return [String]
     class VirtualGatewayStatus < Struct.new(
+      nil,
       :status,
       keyword_init: true
     )
@@ -3953,6 +4136,7 @@ module Aws::AppMesh
     #            Transport Layer Security (TLS) validation context.</p>
     #   @return [Types::SubjectAlternativeNames]
     class VirtualGatewayTlsValidationContext < Struct.new(
+      nil,
       :trust,
       :subject_alternative_names,
       keyword_init: true
@@ -3966,6 +4150,7 @@ module Aws::AppMesh
     #   <p>One or more ACM Amazon Resource Name (ARN)s.</p>
     #   @return [Array<String>]
     class VirtualGatewayTlsValidationContextAcmTrust < Struct.new(
+      nil,
       :certificate_authority_arns,
       keyword_init: true
     )
@@ -3978,6 +4163,7 @@ module Aws::AppMesh
     #            node that the proxy is running on.</p>
     #   @return [String]
     class VirtualGatewayTlsValidationContextFileTrust < Struct.new(
+      nil,
       :certificate_chain,
       keyword_init: true
     )
@@ -3994,6 +4180,7 @@ module Aws::AppMesh
     #            Transport Layer Security (TLS) Secret Discovery Service validation context trust.</p>
     #   @return [String]
     class VirtualGatewayTlsValidationContextSdsTrust < Struct.new(
+      nil,
       :secret_name,
       keyword_init: true
     )
@@ -4078,6 +4265,7 @@ module Aws::AppMesh
     #   <p>The current status for the virtual node.</p>
     #   @return [Types::VirtualNodeStatus]
     class VirtualNodeData < Struct.new(
+      nil,
       :mesh_name,
       :virtual_node_name,
       :spec,
@@ -4094,6 +4282,7 @@ module Aws::AppMesh
     #            upstream cluster.</p>
     #   @return [Integer]
     class VirtualNodeGrpcConnectionPool < Struct.new(
+      nil,
       :max_requests,
       keyword_init: true
     )
@@ -4106,6 +4295,7 @@ module Aws::AppMesh
     #            upstream cluster.</p>
     #   @return [Integer]
     class VirtualNodeHttp2ConnectionPool < Struct.new(
+      nil,
       :max_requests,
       keyword_init: true
     )
@@ -4122,6 +4312,7 @@ module Aws::AppMesh
     #            upstream cluster.</p>
     #   @return [Integer]
     class VirtualNodeHttpConnectionPool < Struct.new(
+      nil,
       :max_connections,
       :max_pending_requests,
       keyword_init: true
@@ -4162,6 +4353,7 @@ module Aws::AppMesh
     #   <p>The Unix epoch timestamp in seconds for when the resource was last updated.</p>
     #   @return [Time]
     class VirtualNodeRef < Struct.new(
+      nil,
       :mesh_name,
       :virtual_node_name,
       :mesh_owner,
@@ -4180,6 +4372,7 @@ module Aws::AppMesh
     #   <p>The name of the virtual node that is acting as a service provider.</p>
     #   @return [String]
     class VirtualNodeServiceProvider < Struct.new(
+      nil,
       :virtual_node_name,
       keyword_init: true
     )
@@ -4206,6 +4399,7 @@ module Aws::AppMesh
     #   <p>The inbound and outbound access logging information for the virtual node.</p>
     #   @return [Types::Logging]
     class VirtualNodeSpec < Struct.new(
+      nil,
       :service_discovery,
       :listeners,
       :backends,
@@ -4221,6 +4415,7 @@ module Aws::AppMesh
     #   <p>The current status of the virtual node.</p>
     #   @return [String]
     class VirtualNodeStatus < Struct.new(
+      nil,
       :status,
       keyword_init: true
     )
@@ -4233,6 +4428,7 @@ module Aws::AppMesh
     #            hosts in upstream cluster.</p>
     #   @return [Integer]
     class VirtualNodeTcpConnectionPool < Struct.new(
+      nil,
       :max_connections,
       keyword_init: true
     )
@@ -4256,6 +4452,7 @@ module Aws::AppMesh
     #   <p>The current status of the virtual router.</p>
     #   @return [Types::VirtualRouterStatus]
     class VirtualRouterData < Struct.new(
+      nil,
       :mesh_name,
       :virtual_router_name,
       :spec,
@@ -4271,6 +4468,7 @@ module Aws::AppMesh
     #   <p>An object that represents a port mapping.</p>
     #   @return [Types::PortMapping]
     class VirtualRouterListener < Struct.new(
+      nil,
       :port_mapping,
       keyword_init: true
     )
@@ -4305,6 +4503,7 @@ module Aws::AppMesh
     #   <p>The Unix epoch timestamp in seconds for when the resource was last updated.</p>
     #   @return [Time]
     class VirtualRouterRef < Struct.new(
+      nil,
       :mesh_name,
       :virtual_router_name,
       :mesh_owner,
@@ -4323,6 +4522,7 @@ module Aws::AppMesh
     #   <p>The name of the virtual router that is acting as a service provider.</p>
     #   @return [String]
     class VirtualRouterServiceProvider < Struct.new(
+      nil,
       :virtual_router_name,
       keyword_init: true
     )
@@ -4335,6 +4535,7 @@ module Aws::AppMesh
     #            can specify one listener.</p>
     #   @return [Array<Types::VirtualRouterListener>]
     class VirtualRouterSpec < Struct.new(
+      nil,
       :listeners,
       keyword_init: true
     )
@@ -4346,6 +4547,7 @@ module Aws::AppMesh
     #   <p>The current status of the virtual router.</p>
     #   @return [String]
     class VirtualRouterStatus < Struct.new(
+      nil,
       :status,
       keyword_init: true
     )
@@ -4360,6 +4562,7 @@ module Aws::AppMesh
     #   <p>A reference to an object that represents the client policy for a backend.</p>
     #   @return [Types::ClientPolicy]
     class VirtualServiceBackend < Struct.new(
+      nil,
       :virtual_service_name,
       :client_policy,
       keyword_init: true
@@ -4384,6 +4587,7 @@ module Aws::AppMesh
     #   <p>The current status of the virtual service.</p>
     #   @return [Types::VirtualServiceStatus]
     class VirtualServiceData < Struct.new(
+      nil,
       :mesh_name,
       :virtual_service_name,
       :spec,
@@ -4442,6 +4646,7 @@ module Aws::AppMesh
     #   <p>The Unix epoch timestamp in seconds for when the resource was last updated.</p>
     #   @return [Time]
     class VirtualServiceRef < Struct.new(
+      nil,
       :mesh_name,
       :virtual_service_name,
       :mesh_owner,
@@ -4461,6 +4666,7 @@ module Aws::AppMesh
     #            can specify a single virtual node or virtual router.</p>
     #   @return [Types::VirtualServiceProvider]
     class VirtualServiceSpec < Struct.new(
+      nil,
       :provider,
       keyword_init: true
     )
@@ -4472,6 +4678,7 @@ module Aws::AppMesh
     #   <p>The current status of the virtual service.</p>
     #   @return [String]
     class VirtualServiceStatus < Struct.new(
+      nil,
       :status,
       keyword_init: true
     )
@@ -4492,6 +4699,7 @@ module Aws::AppMesh
     #   <p>The targeted port of the weighted object.</p>
     #   @return [Integer]
     class WeightedTarget < Struct.new(
+      nil,
       :virtual_node,
       :weight,
       :port,

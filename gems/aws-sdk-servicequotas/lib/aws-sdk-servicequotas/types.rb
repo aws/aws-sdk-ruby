@@ -11,6 +11,7 @@ module Aws::ServiceQuotas
     # @!attribute message
     #   @return [String]
     class AWSServiceAccessNotEnabledException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -21,6 +22,7 @@ module Aws::ServiceQuotas
     # @!attribute message
     #   @return [String]
     class AccessDeniedException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -28,12 +30,14 @@ module Aws::ServiceQuotas
     end
 
     class AssociateServiceQuotaTemplateRequest < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
     end
 
     class AssociateServiceQuotaTemplateResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -43,6 +47,7 @@ module Aws::ServiceQuotas
     #   <p>The ID of the pending quota increase request for which you want to open a Support case. </p>
     #   @return [String]
     class CreateSupportCaseRequest < Struct.new(
+      nil,
       :request_id,
       keyword_init: true
     )
@@ -50,6 +55,7 @@ module Aws::ServiceQuotas
     end
 
     class CreateSupportCaseResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -68,6 +74,7 @@ module Aws::ServiceQuotas
     #   <p>Specifies the Amazon Web Services Region for which the request was made.</p>
     #   @return [String]
     class DeleteServiceQuotaIncreaseRequestFromTemplateRequest < Struct.new(
+      nil,
       :service_code,
       :quota_code,
       :aws_region,
@@ -77,6 +84,7 @@ module Aws::ServiceQuotas
     end
 
     class DeleteServiceQuotaIncreaseRequestFromTemplateResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -86,6 +94,7 @@ module Aws::ServiceQuotas
     # @!attribute message
     #   @return [String]
     class DependencyAccessDeniedException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -93,12 +102,14 @@ module Aws::ServiceQuotas
     end
 
     class DisassociateServiceQuotaTemplateRequest < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
     end
 
     class DisassociateServiceQuotaTemplateResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -135,6 +146,7 @@ module Aws::ServiceQuotas
     #   <p>The error message.</p>
     #   @return [String]
     class ErrorReason < Struct.new(
+      nil,
       :error_code,
       :error_message,
       keyword_init: true
@@ -152,6 +164,7 @@ module Aws::ServiceQuotas
     #                <code>QuotaCode</code> response in the output for the quota you want.</p>
     #   @return [String]
     class GetAWSDefaultServiceQuotaRequest < Struct.new(
+      nil,
       :service_code,
       :quota_code,
       keyword_init: true
@@ -163,6 +176,7 @@ module Aws::ServiceQuotas
     #   <p>Information about the quota.</p>
     #   @return [Types::ServiceQuota]
     class GetAWSDefaultServiceQuotaResponse < Struct.new(
+      nil,
       :quota,
       keyword_init: true
     )
@@ -170,6 +184,7 @@ module Aws::ServiceQuotas
     end
 
     class GetAssociationForServiceQuotaTemplateRequest < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -181,6 +196,7 @@ module Aws::ServiceQuotas
     #               organization.</p>
     #   @return [String]
     class GetAssociationForServiceQuotaTemplateResponse < Struct.new(
+      nil,
       :service_quota_template_association_status,
       keyword_init: true
     )
@@ -191,6 +207,7 @@ module Aws::ServiceQuotas
     #   <p>Specifies the ID of the quota increase request.</p>
     #   @return [String]
     class GetRequestedServiceQuotaChangeRequest < Struct.new(
+      nil,
       :request_id,
       keyword_init: true
     )
@@ -201,6 +218,7 @@ module Aws::ServiceQuotas
     #   <p>Information about the quota increase request.</p>
     #   @return [Types::RequestedServiceQuotaChange]
     class GetRequestedServiceQuotaChangeResponse < Struct.new(
+      nil,
       :requested_quota,
       keyword_init: true
     )
@@ -220,6 +238,7 @@ module Aws::ServiceQuotas
     #   <p>Specifies the Amazon Web Services Region for which you made the request.</p>
     #   @return [String]
     class GetServiceQuotaIncreaseRequestFromTemplateRequest < Struct.new(
+      nil,
       :service_code,
       :quota_code,
       :aws_region,
@@ -232,6 +251,7 @@ module Aws::ServiceQuotas
     #   <p>Information about the quota increase request.</p>
     #   @return [Types::ServiceQuotaIncreaseRequestInTemplate]
     class GetServiceQuotaIncreaseRequestFromTemplateResponse < Struct.new(
+      nil,
       :service_quota_increase_request_in_template,
       keyword_init: true
     )
@@ -251,6 +271,7 @@ module Aws::ServiceQuotas
     #   <p>Specifies the resource with an Amazon Resource Name (ARN).</p>
     #   @return [String]
     class GetServiceQuotaRequest < Struct.new(
+      nil,
       :service_code,
       :quota_code,
       :context_id,
@@ -263,6 +284,7 @@ module Aws::ServiceQuotas
     #   <p>Information about the quota.</p>
     #   @return [Types::ServiceQuota]
     class GetServiceQuotaResponse < Struct.new(
+      nil,
       :quota,
       keyword_init: true
     )
@@ -273,6 +295,7 @@ module Aws::ServiceQuotas
     # @!attribute message
     #   @return [String]
     class IllegalArgumentException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -283,6 +306,7 @@ module Aws::ServiceQuotas
     # @!attribute message
     #   @return [String]
     class InvalidPaginationTokenException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -293,6 +317,7 @@ module Aws::ServiceQuotas
     # @!attribute message
     #   @return [String]
     class InvalidResourceStateException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -324,6 +349,7 @@ module Aws::ServiceQuotas
     #            </note>
     #   @return [Integer]
     class ListAWSDefaultServiceQuotasRequest < Struct.new(
+      nil,
       :service_code,
       :next_token,
       :max_results,
@@ -342,6 +368,7 @@ module Aws::ServiceQuotas
     #   <p>Information about the quotas.</p>
     #   @return [Array<Types::ServiceQuota>]
     class ListAWSDefaultServiceQuotasResponse < Struct.new(
+      nil,
       :next_token,
       :quotas,
       keyword_init: true
@@ -386,6 +413,7 @@ module Aws::ServiceQuotas
     #   <p>Filters the response to return quota requests for the <code>ACCOUNT</code>, <code>RESOURCE</code>, or <code>ALL</code> levels. <code>ACCOUNT</code> is the default.</p>
     #   @return [String]
     class ListRequestedServiceQuotaChangeHistoryByQuotaRequest < Struct.new(
+      nil,
       :service_code,
       :quota_code,
       :status,
@@ -407,6 +435,7 @@ module Aws::ServiceQuotas
     #   <p>Information about the quota increase requests.</p>
     #   @return [Array<Types::RequestedServiceQuotaChange>]
     class ListRequestedServiceQuotaChangeHistoryByQuotaResponse < Struct.new(
+      nil,
       :next_token,
       :requested_quotas,
       keyword_init: true
@@ -446,6 +475,7 @@ module Aws::ServiceQuotas
     #   <p>Filters the response to return quota requests for the <code>ACCOUNT</code>, <code>RESOURCE</code>, or <code>ALL</code> levels. <code>ACCOUNT</code> is the default.</p>
     #   @return [String]
     class ListRequestedServiceQuotaChangeHistoryRequest < Struct.new(
+      nil,
       :service_code,
       :status,
       :next_token,
@@ -466,6 +496,7 @@ module Aws::ServiceQuotas
     #   <p>Information about the quota increase requests.</p>
     #   @return [Array<Types::RequestedServiceQuotaChange>]
     class ListRequestedServiceQuotaChangeHistoryResponse < Struct.new(
+      nil,
       :next_token,
       :requested_quotas,
       keyword_init: true
@@ -501,6 +532,7 @@ module Aws::ServiceQuotas
     #            </note>
     #   @return [Integer]
     class ListServiceQuotaIncreaseRequestsInTemplateRequest < Struct.new(
+      nil,
       :service_code,
       :aws_region,
       :next_token,
@@ -520,6 +552,7 @@ module Aws::ServiceQuotas
     #       until the <code>NextToken</code> response element comes back as <code>null</code>.</p>
     #   @return [String]
     class ListServiceQuotaIncreaseRequestsInTemplateResponse < Struct.new(
+      nil,
       :service_quota_increase_request_in_template_list,
       :next_token,
       keyword_init: true
@@ -560,6 +593,7 @@ module Aws::ServiceQuotas
     #   <p>Filters the response to return applied quota values for the <code>ACCOUNT</code>, <code>RESOURCE</code>, or <code>ALL</code> levels. <code>ACCOUNT</code> is the default.</p>
     #   @return [String]
     class ListServiceQuotasRequest < Struct.new(
+      nil,
       :service_code,
       :next_token,
       :max_results,
@@ -580,6 +614,7 @@ module Aws::ServiceQuotas
     #   <p>Information about the quotas.</p>
     #   @return [Array<Types::ServiceQuota>]
     class ListServiceQuotasResponse < Struct.new(
+      nil,
       :next_token,
       :quotas,
       keyword_init: true
@@ -608,6 +643,7 @@ module Aws::ServiceQuotas
     #            </note>
     #   @return [Integer]
     class ListServicesRequest < Struct.new(
+      nil,
       :next_token,
       :max_results,
       keyword_init: true
@@ -625,6 +661,7 @@ module Aws::ServiceQuotas
     #   <p>The list of the Amazon Web Services service names and service codes.</p>
     #   @return [Array<Types::ServiceInfo>]
     class ListServicesResponse < Struct.new(
+      nil,
       :next_token,
       :services,
       keyword_init: true
@@ -638,6 +675,7 @@ module Aws::ServiceQuotas
     #               using the <a href="https://docs.aws.amazon.com/cli/latest/reference/service-quotas/list-service-quotas.html">list-service-quotas</a> CLI command or the <a href="https://docs.aws.amazon.com/servicequotas/2019-06-24/apireference/API_ListServiceQuotas.html">ListServiceQuotas</a> Amazon Web Services API operation.</p>
     #   @return [String]
     class ListTagsForResourceRequest < Struct.new(
+      nil,
       :resource_arn,
       keyword_init: true
     )
@@ -648,6 +686,7 @@ module Aws::ServiceQuotas
     #   <p>A complex data type that contains zero or more tag elements.</p>
     #   @return [Array<Types::Tag>]
     class ListTagsForResourceResponse < Struct.new(
+      nil,
       :tags,
       keyword_init: true
     )
@@ -669,6 +708,7 @@ module Aws::ServiceQuotas
     #   <p>The metric statistic that we recommend you use when determining quota usage.</p>
     #   @return [String]
     class MetricInfo < Struct.new(
+      nil,
       :metric_namespace,
       :metric_name,
       :metric_dimensions,
@@ -682,6 +722,7 @@ module Aws::ServiceQuotas
     # @!attribute message
     #   @return [String]
     class NoAvailableOrganizationException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -692,6 +733,7 @@ module Aws::ServiceQuotas
     # @!attribute message
     #   @return [String]
     class NoSuchResourceException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -703,6 +745,7 @@ module Aws::ServiceQuotas
     # @!attribute message
     #   @return [String]
     class OrganizationNotInAllFeaturesModeException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -725,6 +768,7 @@ module Aws::ServiceQuotas
     #   <p>Specifies the new, increased value for the quota.</p>
     #   @return [Float]
     class PutServiceQuotaIncreaseRequestIntoTemplateRequest < Struct.new(
+      nil,
       :quota_code,
       :service_code,
       :aws_region,
@@ -738,6 +782,7 @@ module Aws::ServiceQuotas
     #   <p>Information about the quota increase request.</p>
     #   @return [Types::ServiceQuotaIncreaseRequestInTemplate]
     class PutServiceQuotaIncreaseRequestIntoTemplateResponse < Struct.new(
+      nil,
       :service_quota_increase_request_in_template,
       keyword_init: true
     )
@@ -755,6 +800,7 @@ module Aws::ServiceQuotas
     #   <p>Specifies the resource, or resources, to which the quota applies. The value for this field is either an Amazon Resource Name (ARN) or *. If the value is an ARN, the quota value applies to that resource. If the value is *, then the quota value applies to all resources listed in the <code>ContextScopeType</code> field. The quota value applies to all resources for which you haven’t previously applied a quota value, and any new resources you create in your Amazon Web Services account.</p>
     #   @return [String]
     class QuotaContextInfo < Struct.new(
+      nil,
       :context_scope,
       :context_scope_type,
       :context_id,
@@ -768,6 +814,7 @@ module Aws::ServiceQuotas
     # @!attribute message
     #   @return [String]
     class QuotaExceededException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -782,6 +829,7 @@ module Aws::ServiceQuotas
     #   <p>The time unit.</p>
     #   @return [String]
     class QuotaPeriod < Struct.new(
+      nil,
       :period_value,
       :period_unit,
       keyword_init: true
@@ -812,6 +860,7 @@ module Aws::ServiceQuotas
     #               Amazon Web Services does not open a support case and updates the request status to <code>Not approved</code>. </p>
     #   @return [Boolean]
     class RequestServiceQuotaIncreaseRequest < Struct.new(
+      nil,
       :service_code,
       :quota_code,
       :desired_value,
@@ -826,6 +875,7 @@ module Aws::ServiceQuotas
     #   <p>Information about the quota increase request.</p>
     #   @return [Types::RequestedServiceQuotaChange]
     class RequestServiceQuotaIncreaseResponse < Struct.new(
+      nil,
       :requested_quota,
       keyword_init: true
     )
@@ -921,6 +971,7 @@ module Aws::ServiceQuotas
     #   <p>The context for this service quota.</p>
     #   @return [Types::QuotaContextInfo]
     class RequestedServiceQuotaChange < Struct.new(
+      nil,
       :id,
       :case_id,
       :service_code,
@@ -951,6 +1002,7 @@ module Aws::ServiceQuotas
     # @!attribute message
     #   @return [String]
     class ResourceAlreadyExistsException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -961,6 +1013,7 @@ module Aws::ServiceQuotas
     # @!attribute message
     #   @return [String]
     class ServiceException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -976,6 +1029,7 @@ module Aws::ServiceQuotas
     #   <p>Specifies the service name.</p>
     #   @return [String]
     class ServiceInfo < Struct.new(
+      nil,
       :service_code,
       :service_name,
       keyword_init: true
@@ -1033,6 +1087,7 @@ module Aws::ServiceQuotas
     #   <p>The quota description. </p>
     #   @return [String]
     class ServiceQuota < Struct.new(
+      nil,
       :service_code,
       :service_name,
       :quota_arn,
@@ -1088,6 +1143,7 @@ module Aws::ServiceQuotas
     #   <p>Indicates whether the quota is global.</p>
     #   @return [Boolean]
     class ServiceQuotaIncreaseRequestInTemplate < Struct.new(
+      nil,
       :service_code,
       :service_name,
       :quota_code,
@@ -1110,6 +1166,7 @@ module Aws::ServiceQuotas
     # @!attribute message
     #   @return [String]
     class ServiceQuotaTemplateNotInUseException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -1128,6 +1185,7 @@ module Aws::ServiceQuotas
     #               characters _ - . : / = + @.</p>
     #   @return [String]
     class Tag < Struct.new(
+      nil,
       :key,
       :value,
       keyword_init: true
@@ -1139,6 +1197,7 @@ module Aws::ServiceQuotas
     # @!attribute message
     #   @return [String]
     class TagPolicyViolationException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -1153,6 +1212,7 @@ module Aws::ServiceQuotas
     #   <p>The tags that you want to add to the resource.</p>
     #   @return [Array<Types::Tag>]
     class TagResourceRequest < Struct.new(
+      nil,
       :resource_arn,
       :tags,
       keyword_init: true
@@ -1161,6 +1221,7 @@ module Aws::ServiceQuotas
     end
 
     class TagResourceResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1170,6 +1231,7 @@ module Aws::ServiceQuotas
     # @!attribute message
     #   @return [String]
     class TemplatesNotAvailableInRegionException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -1181,6 +1243,7 @@ module Aws::ServiceQuotas
     # @!attribute message
     #   @return [String]
     class TooManyRequestsException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -1193,6 +1256,7 @@ module Aws::ServiceQuotas
     # @!attribute message
     #   @return [String]
     class TooManyTagsException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -1208,6 +1272,7 @@ module Aws::ServiceQuotas
     #   <p>The keys of the tags that you want to remove from the resource.</p>
     #   @return [Array<String>]
     class UntagResourceRequest < Struct.new(
+      nil,
       :resource_arn,
       :tag_keys,
       keyword_init: true
@@ -1216,6 +1281,7 @@ module Aws::ServiceQuotas
     end
 
     class UntagResourceResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure

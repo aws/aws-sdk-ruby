@@ -10,6 +10,7 @@ module Aws::Wisdom
     # @!attribute message
     #   @return [String]
     class AccessDeniedException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -83,6 +84,7 @@ module Aws::Wisdom
     #         recommendations. </p>
     #   @return [Array<String>]
     class AppIntegrationsConfiguration < Struct.new(
+      nil,
       :app_integration_arn,
       :object_fields,
       keyword_init: true
@@ -113,6 +115,7 @@ module Aws::Wisdom
     #   <p>The tags used to organize, track, or control access for this resource.</p>
     #   @return [Hash<String, String>]
     class AssistantAssociationData < Struct.new(
+      nil,
       :assistant_association_id,
       :assistant_association_arn,
       :assistant_id,
@@ -179,6 +182,7 @@ module Aws::Wisdom
     #   <p>The tags used to organize, track, or control access for this resource.</p>
     #   @return [Hash<String, String>]
     class AssistantAssociationSummary < Struct.new(
+      nil,
       :assistant_association_id,
       :assistant_association_arn,
       :assistant_id,
@@ -228,6 +232,7 @@ module Aws::Wisdom
     #   <p>The configuration information for the Wisdom assistant integration.</p>
     #   @return [Types::AssistantIntegrationConfiguration]
     class AssistantData < Struct.new(
+      nil,
       :assistant_id,
       :assistant_arn,
       :name,
@@ -247,6 +252,7 @@ module Aws::Wisdom
     #   <p>The Amazon Resource Name (ARN) of the integrated Amazon SNS topic used for streaming chat messages.</p>
     #   @return [String]
     class AssistantIntegrationConfiguration < Struct.new(
+      nil,
       :topic_integration_arn,
       keyword_init: true
     )
@@ -290,6 +296,7 @@ module Aws::Wisdom
     #   <p>The configuration information for the Wisdom assistant integration.</p>
     #   @return [Types::AssistantIntegrationConfiguration]
     class AssistantSummary < Struct.new(
+      nil,
       :assistant_id,
       :assistant_arn,
       :name,
@@ -326,6 +333,7 @@ module Aws::Wisdom
     # @!attribute message
     #   @return [String]
     class ConflictException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -337,6 +345,7 @@ module Aws::Wisdom
     #   <p>The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.</p>
     #   @return [String]
     class ConnectConfiguration < Struct.new(
+      nil,
       :instance_id,
       keyword_init: true
     )
@@ -389,6 +398,7 @@ module Aws::Wisdom
     #   <p>The expiration time of the URL as an epoch timestamp.</p>
     #   @return [Time]
     class ContentData < Struct.new(
+      nil,
       :content_arn,
       :content_id,
       :knowledge_base_arn,
@@ -423,6 +433,7 @@ module Aws::Wisdom
     #   <p>The identifier of the content.</p>
     #   @return [String]
     class ContentReference < Struct.new(
+      nil,
       :knowledge_base_arn,
       :knowledge_base_id,
       :content_arn,
@@ -469,6 +480,7 @@ module Aws::Wisdom
     #   <p>The tags used to organize, track, or control access for this resource.</p>
     #   @return [Hash<String, String>]
     class ContentSummary < Struct.new(
+      nil,
       :content_arn,
       :content_id,
       :knowledge_base_arn,
@@ -504,6 +516,7 @@ module Aws::Wisdom
     #   <p>The tags used to organize, track, or control access for this resource.</p>
     #   @return [Hash<String, String>]
     class CreateAssistantAssociationInput < Struct.new(
+      nil,
       :assistant_id,
       :association_type,
       :association,
@@ -518,6 +531,7 @@ module Aws::Wisdom
     #   <p>The assistant association.</p>
     #   @return [Types::AssistantAssociationData]
     class CreateAssistantAssociationOutput < Struct.new(
+      nil,
       :assistant_association,
       keyword_init: true
     )
@@ -554,6 +568,7 @@ module Aws::Wisdom
     #           for your instance</a>.</p>
     #   @return [Types::ServerSideEncryptionConfiguration]
     class CreateAssistantInput < Struct.new(
+      nil,
       :client_token,
       :name,
       :type,
@@ -569,6 +584,7 @@ module Aws::Wisdom
     #   <p>Information about the assistant.</p>
     #   @return [Types::AssistantData]
     class CreateAssistantOutput < Struct.new(
+      nil,
       :assistant,
       keyword_init: true
     )
@@ -608,6 +624,7 @@ module Aws::Wisdom
     #   <p>The tags used to organize, track, or control access for this resource.</p>
     #   @return [Hash<String, String>]
     class CreateContentInput < Struct.new(
+      nil,
       :knowledge_base_id,
       :name,
       :title,
@@ -625,6 +642,7 @@ module Aws::Wisdom
     #   <p>The content.</p>
     #   @return [Types::ContentData]
     class CreateContentOutput < Struct.new(
+      nil,
       :content,
       keyword_init: true
     )
@@ -667,6 +685,7 @@ module Aws::Wisdom
     #   <p>The tags used to organize, track, or control access for this resource.</p>
     #   @return [Hash<String, String>]
     class CreateKnowledgeBaseInput < Struct.new(
+      nil,
       :client_token,
       :name,
       :knowledge_base_type,
@@ -684,6 +703,7 @@ module Aws::Wisdom
     #   <p>The knowledge base.</p>
     #   @return [Types::KnowledgeBaseData]
     class CreateKnowledgeBaseOutput < Struct.new(
+      nil,
       :knowledge_base,
       keyword_init: true
     )
@@ -744,6 +764,7 @@ module Aws::Wisdom
     #   <p>The tags used to organize, track, or control access for this resource.</p>
     #   @return [Hash<String, String>]
     class CreateQuickResponseRequest < Struct.new(
+      nil,
       :knowledge_base_id,
       :name,
       :content,
@@ -765,6 +786,7 @@ module Aws::Wisdom
     #   <p>The quick response.</p>
     #   @return [Types::QuickResponseData]
     class CreateQuickResponseResponse < Struct.new(
+      nil,
       :quick_response,
       keyword_init: true
     )
@@ -790,6 +812,7 @@ module Aws::Wisdom
     #   <p>The tags used to organize, track, or control access for this resource.</p>
     #   @return [Hash<String, String>]
     class CreateSessionInput < Struct.new(
+      nil,
       :client_token,
       :assistant_id,
       :name,
@@ -804,6 +827,7 @@ module Aws::Wisdom
     #   <p>The session.</p>
     #   @return [Types::SessionData]
     class CreateSessionOutput < Struct.new(
+      nil,
       :session,
       keyword_init: true
     )
@@ -817,6 +841,7 @@ module Aws::Wisdom
     #   <p>The identifier of the Wisdom assistant. Can be either the ID or the ARN. URLs cannot contain the ARN.</p>
     #   @return [String]
     class DeleteAssistantAssociationInput < Struct.new(
+      nil,
       :assistant_association_id,
       :assistant_id,
       keyword_init: true
@@ -825,6 +850,7 @@ module Aws::Wisdom
     end
 
     class DeleteAssistantAssociationOutput < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -834,6 +860,7 @@ module Aws::Wisdom
     #   <p>The identifier of the Wisdom assistant. Can be either the ID or the ARN. URLs cannot contain the ARN.</p>
     #   @return [String]
     class DeleteAssistantInput < Struct.new(
+      nil,
       :assistant_id,
       keyword_init: true
     )
@@ -841,6 +868,7 @@ module Aws::Wisdom
     end
 
     class DeleteAssistantOutput < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -854,6 +882,7 @@ module Aws::Wisdom
     #   <p>The identifier of the content. Can be either the ID or the ARN. URLs cannot contain the ARN.</p>
     #   @return [String]
     class DeleteContentInput < Struct.new(
+      nil,
       :knowledge_base_id,
       :content_id,
       keyword_init: true
@@ -862,6 +891,7 @@ module Aws::Wisdom
     end
 
     class DeleteContentOutput < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -875,6 +905,7 @@ module Aws::Wisdom
     #   <p>The identifier of the import job to be deleted.</p>
     #   @return [String]
     class DeleteImportJobRequest < Struct.new(
+      nil,
       :knowledge_base_id,
       :import_job_id,
       keyword_init: true
@@ -883,6 +914,7 @@ module Aws::Wisdom
     end
 
     class DeleteImportJobResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -892,6 +924,7 @@ module Aws::Wisdom
     #   <p>The knowledge base to delete content from. Can be either the ID or the ARN. URLs cannot contain the ARN.</p>
     #   @return [String]
     class DeleteKnowledgeBaseInput < Struct.new(
+      nil,
       :knowledge_base_id,
       keyword_init: true
     )
@@ -899,6 +932,7 @@ module Aws::Wisdom
     end
 
     class DeleteKnowledgeBaseOutput < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -912,6 +946,7 @@ module Aws::Wisdom
     #   <p>The identifier of the quick response to delete.</p>
     #   @return [String]
     class DeleteQuickResponseRequest < Struct.new(
+      nil,
       :knowledge_base_id,
       :quick_response_id,
       keyword_init: true
@@ -920,6 +955,7 @@ module Aws::Wisdom
     end
 
     class DeleteQuickResponseResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -936,6 +972,7 @@ module Aws::Wisdom
     #   <p>The excerpt from the document.</p>
     #   @return [Types::DocumentText]
     class Document < Struct.new(
+      nil,
       :content_reference,
       :title,
       :excerpt,
@@ -952,6 +989,7 @@ module Aws::Wisdom
     #   <p>Highlights in the document text.</p>
     #   @return [Array<Types::Highlight>]
     class DocumentText < Struct.new(
+      nil,
       :text,
       :highlights,
       keyword_init: true
@@ -967,6 +1005,7 @@ module Aws::Wisdom
     #   <p>The configuration information of the external data source.</p>
     #   @return [Types::Configuration]
     class ExternalSourceConfiguration < Struct.new(
+      nil,
       :source,
       :configuration,
       keyword_init: true
@@ -985,6 +1024,7 @@ module Aws::Wisdom
     #   <p>The desired field value on which to filter.</p>
     #   @return [String]
     class Filter < Struct.new(
+      nil,
       :field,
       :operator,
       :value,
@@ -1000,6 +1040,7 @@ module Aws::Wisdom
     #   <p>The identifier of the Wisdom assistant. Can be either the ID or the ARN. URLs cannot contain the ARN.</p>
     #   @return [String]
     class GetAssistantAssociationInput < Struct.new(
+      nil,
       :assistant_association_id,
       :assistant_id,
       keyword_init: true
@@ -1011,6 +1052,7 @@ module Aws::Wisdom
     #   <p>The assistant association.</p>
     #   @return [Types::AssistantAssociationData]
     class GetAssistantAssociationOutput < Struct.new(
+      nil,
       :assistant_association,
       keyword_init: true
     )
@@ -1021,6 +1063,7 @@ module Aws::Wisdom
     #   <p>The identifier of the Wisdom assistant. Can be either the ID or the ARN. URLs cannot contain the ARN.</p>
     #   @return [String]
     class GetAssistantInput < Struct.new(
+      nil,
       :assistant_id,
       keyword_init: true
     )
@@ -1031,6 +1074,7 @@ module Aws::Wisdom
     #   <p>Information about the assistant.</p>
     #   @return [Types::AssistantData]
     class GetAssistantOutput < Struct.new(
+      nil,
       :assistant,
       keyword_init: true
     )
@@ -1045,6 +1089,7 @@ module Aws::Wisdom
     #   base if you're storing Wisdom Content resource to it. Can be either the ID or the ARN. URLs cannot contain the ARN.</p>
     #   @return [String]
     class GetContentInput < Struct.new(
+      nil,
       :content_id,
       :knowledge_base_id,
       keyword_init: true
@@ -1056,6 +1101,7 @@ module Aws::Wisdom
     #   <p>The content.</p>
     #   @return [Types::ContentData]
     class GetContentOutput < Struct.new(
+      nil,
       :content,
       keyword_init: true
     )
@@ -1070,6 +1116,7 @@ module Aws::Wisdom
     #   base if you're storing Wisdom Content resource to it. Can be either the ID or the ARN. URLs cannot contain the ARN.</p>
     #   @return [String]
     class GetContentSummaryInput < Struct.new(
+      nil,
       :content_id,
       :knowledge_base_id,
       keyword_init: true
@@ -1081,6 +1128,7 @@ module Aws::Wisdom
     #   <p>The content summary.</p>
     #   @return [Types::ContentSummary]
     class GetContentSummaryOutput < Struct.new(
+      nil,
       :content_summary,
       keyword_init: true
     )
@@ -1094,6 +1142,7 @@ module Aws::Wisdom
     #   <p>The identifier of the knowledge base that the import job belongs to.</p>
     #   @return [String]
     class GetImportJobRequest < Struct.new(
+      nil,
       :import_job_id,
       :knowledge_base_id,
       keyword_init: true
@@ -1105,6 +1154,7 @@ module Aws::Wisdom
     #   <p>The import job.</p>
     #   @return [Types::ImportJobData]
     class GetImportJobResponse < Struct.new(
+      nil,
       :import_job,
       keyword_init: true
     )
@@ -1116,6 +1166,7 @@ module Aws::Wisdom
     #   base if you're storing Wisdom Content resource to it. Can be either the ID or the ARN. URLs cannot contain the ARN.</p>
     #   @return [String]
     class GetKnowledgeBaseInput < Struct.new(
+      nil,
       :knowledge_base_id,
       keyword_init: true
     )
@@ -1126,6 +1177,7 @@ module Aws::Wisdom
     #   <p>The knowledge base.</p>
     #   @return [Types::KnowledgeBaseData]
     class GetKnowledgeBaseOutput < Struct.new(
+      nil,
       :knowledge_base,
       keyword_init: true
     )
@@ -1139,6 +1191,7 @@ module Aws::Wisdom
     #   <p>The identifier of the knowledge base. This should be a QUICK_RESPONSES type knowledge base.</p>
     #   @return [String]
     class GetQuickResponseRequest < Struct.new(
+      nil,
       :quick_response_id,
       :knowledge_base_id,
       keyword_init: true
@@ -1150,6 +1203,7 @@ module Aws::Wisdom
     #   <p>The quick response.</p>
     #   @return [Types::QuickResponseData]
     class GetQuickResponseResponse < Struct.new(
+      nil,
       :quick_response,
       keyword_init: true
     )
@@ -1172,6 +1226,7 @@ module Aws::Wisdom
     #         call returns successfully with an empty list.</p>
     #   @return [Integer]
     class GetRecommendationsInput < Struct.new(
+      nil,
       :assistant_id,
       :session_id,
       :max_results,
@@ -1188,6 +1243,7 @@ module Aws::Wisdom
     #   <p>The triggers corresponding to recommendations.</p>
     #   @return [Array<Types::RecommendationTrigger>]
     class GetRecommendationsOutput < Struct.new(
+      nil,
       :recommendations,
       :triggers,
       keyword_init: true
@@ -1202,6 +1258,7 @@ module Aws::Wisdom
     #   <p>The identifier of the session. Can be either the ID or the ARN. URLs cannot contain the ARN.</p>
     #   @return [String]
     class GetSessionInput < Struct.new(
+      nil,
       :assistant_id,
       :session_id,
       keyword_init: true
@@ -1213,6 +1270,7 @@ module Aws::Wisdom
     #   <p>The session.</p>
     #   @return [Types::SessionData]
     class GetSessionOutput < Struct.new(
+      nil,
       :session,
       keyword_init: true
     )
@@ -1241,6 +1299,7 @@ module Aws::Wisdom
     #            </ul>
     #   @return [Array<String>]
     class GroupingConfiguration < Struct.new(
+      nil,
       :criteria,
       :values,
       keyword_init: true
@@ -1257,6 +1316,7 @@ module Aws::Wisdom
     #   <p>The offset for the end of the highlight.</p>
     #   @return [Integer]
     class Highlight < Struct.new(
+      nil,
       :begin_offset_inclusive,
       :end_offset_exclusive,
       keyword_init: true
@@ -1312,6 +1372,7 @@ module Aws::Wisdom
     #   <p>The configuration information of the external data source.</p>
     #   @return [Types::ExternalSourceConfiguration]
     class ImportJobData < Struct.new(
+      nil,
       :import_job_id,
       :knowledge_base_id,
       :upload_id,
@@ -1363,6 +1424,7 @@ module Aws::Wisdom
     #   <p>The configuration information of the external source that the resource data are imported from.</p>
     #   @return [Types::ExternalSourceConfiguration]
     class ImportJobSummary < Struct.new(
+      nil,
       :import_job_id,
       :knowledge_base_id,
       :upload_id,
@@ -1387,6 +1449,7 @@ module Aws::Wisdom
     #   <p>The Amazon Resource Name (ARN) of the knowledge base.</p>
     #   @return [String]
     class KnowledgeBaseAssociationData < Struct.new(
+      nil,
       :knowledge_base_id,
       :knowledge_base_arn,
       keyword_init: true
@@ -1436,6 +1499,7 @@ module Aws::Wisdom
     #   <p>The tags used to organize, track, or control access for this resource.</p>
     #   @return [Hash<String, String>]
     class KnowledgeBaseData < Struct.new(
+      nil,
       :knowledge_base_id,
       :knowledge_base_arn,
       :name,
@@ -1490,6 +1554,7 @@ module Aws::Wisdom
     #   <p>The tags used to organize, track, or control access for this resource.</p>
     #   @return [Hash<String, String>]
     class KnowledgeBaseSummary < Struct.new(
+      nil,
       :knowledge_base_id,
       :knowledge_base_arn,
       :name,
@@ -1516,6 +1581,7 @@ module Aws::Wisdom
     #   <p>The identifier of the Wisdom assistant. Can be either the ID or the ARN. URLs cannot contain the ARN.</p>
     #   @return [String]
     class ListAssistantAssociationsInput < Struct.new(
+      nil,
       :next_token,
       :max_results,
       :assistant_id,
@@ -1531,6 +1597,7 @@ module Aws::Wisdom
     #   <p>If there are additional results, this is the token for the next set of results.</p>
     #   @return [String]
     class ListAssistantAssociationsOutput < Struct.new(
+      nil,
       :assistant_association_summaries,
       :next_token,
       keyword_init: true
@@ -1546,6 +1613,7 @@ module Aws::Wisdom
     #   <p>The maximum number of results to return per page.</p>
     #   @return [Integer]
     class ListAssistantsInput < Struct.new(
+      nil,
       :next_token,
       :max_results,
       keyword_init: true
@@ -1560,6 +1628,7 @@ module Aws::Wisdom
     #   <p>If there are additional results, this is the token for the next set of results.</p>
     #   @return [String]
     class ListAssistantsOutput < Struct.new(
+      nil,
       :assistant_summaries,
       :next_token,
       keyword_init: true
@@ -1579,6 +1648,7 @@ module Aws::Wisdom
     #   base if you're storing Wisdom Content resource to it. Can be either the ID or the ARN. URLs cannot contain the ARN.</p>
     #   @return [String]
     class ListContentsInput < Struct.new(
+      nil,
       :next_token,
       :max_results,
       :knowledge_base_id,
@@ -1594,6 +1664,7 @@ module Aws::Wisdom
     #   <p>If there are additional results, this is the token for the next set of results.</p>
     #   @return [String]
     class ListContentsOutput < Struct.new(
+      nil,
       :content_summaries,
       :next_token,
       keyword_init: true
@@ -1613,6 +1684,7 @@ module Aws::Wisdom
     #   base if you're storing Wisdom Content resource to it. Can be either the ID or the ARN. URLs cannot contain the ARN.</p>
     #   @return [String]
     class ListImportJobsRequest < Struct.new(
+      nil,
       :next_token,
       :max_results,
       :knowledge_base_id,
@@ -1629,6 +1701,7 @@ module Aws::Wisdom
     #   response in the next request to retrieve the next set of results.</p>
     #   @return [String]
     class ListImportJobsResponse < Struct.new(
+      nil,
       :import_job_summaries,
       :next_token,
       keyword_init: true
@@ -1644,6 +1717,7 @@ module Aws::Wisdom
     #   <p>The maximum number of results to return per page.</p>
     #   @return [Integer]
     class ListKnowledgeBasesInput < Struct.new(
+      nil,
       :next_token,
       :max_results,
       keyword_init: true
@@ -1658,6 +1732,7 @@ module Aws::Wisdom
     #   <p>If there are additional results, this is the token for the next set of results.</p>
     #   @return [String]
     class ListKnowledgeBasesOutput < Struct.new(
+      nil,
       :knowledge_base_summaries,
       :next_token,
       keyword_init: true
@@ -1677,6 +1752,7 @@ module Aws::Wisdom
     #   base if you're storing Wisdom Content resource to it. Can be either the ID or the ARN. URLs cannot contain the ARN.</p>
     #   @return [String]
     class ListQuickResponsesRequest < Struct.new(
+      nil,
       :next_token,
       :max_results,
       :knowledge_base_id,
@@ -1693,6 +1769,7 @@ module Aws::Wisdom
     #   response in the next request to retrieve the next set of results.</p>
     #   @return [String]
     class ListQuickResponsesResponse < Struct.new(
+      nil,
       :quick_response_summaries,
       :next_token,
       keyword_init: true
@@ -1704,6 +1781,7 @@ module Aws::Wisdom
     #   <p>The Amazon Resource Name (ARN) of the resource.</p>
     #   @return [String]
     class ListTagsForResourceInput < Struct.new(
+      nil,
       :resource_arn,
       keyword_init: true
     )
@@ -1714,6 +1792,7 @@ module Aws::Wisdom
     #   <p>The tags used to organize, track, or control access for this resource.</p>
     #   @return [Hash<String, String>]
     class ListTagsForResourceOutput < Struct.new(
+      nil,
       :tags,
       keyword_init: true
     )
@@ -1728,6 +1807,7 @@ module Aws::Wisdom
     #   <p>A recommendation is causing an error.</p>
     #   @return [String]
     class NotifyRecommendationsReceivedError < Struct.new(
+      nil,
       :recommendation_id,
       :message,
       keyword_init: true
@@ -1745,6 +1825,7 @@ module Aws::Wisdom
     #   <p>The identifiers of the recommendations.</p>
     #   @return [Array<String>]
     class NotifyRecommendationsReceivedInput < Struct.new(
+      nil,
       :assistant_id,
       :session_id,
       :recommendation_ids,
@@ -1760,6 +1841,7 @@ module Aws::Wisdom
     #   <p>The identifiers of recommendations that are causing errors.</p>
     #   @return [Array<Types::NotifyRecommendationsReceivedError>]
     class NotifyRecommendationsReceivedOutput < Struct.new(
+      nil,
       :recommendation_ids,
       :errors,
       keyword_init: true
@@ -1772,6 +1854,7 @@ module Aws::Wisdom
     # @!attribute message
     #   @return [String]
     class PreconditionFailedException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -1792,6 +1875,7 @@ module Aws::Wisdom
     #   <p>The maximum number of results to return per page.</p>
     #   @return [Integer]
     class QueryAssistantInput < Struct.new(
+      nil,
       :assistant_id,
       :query_text,
       :next_token,
@@ -1808,6 +1892,7 @@ module Aws::Wisdom
     #   <p>If there are additional results, this is the token for the next set of results.</p>
     #   @return [String]
     class QueryAssistantOutput < Struct.new(
+      nil,
       :results,
       :next_token,
       keyword_init: true
@@ -1820,6 +1905,7 @@ module Aws::Wisdom
     #   <p>The text associated with the recommendation trigger.</p>
     #   @return [String]
     class QueryRecommendationTriggerData < Struct.new(
+      nil,
       :text,
       keyword_init: true
     )
@@ -1849,6 +1935,7 @@ module Aws::Wisdom
     #   <p>The container quick response content.</p>
     #   @return [Types::QuickResponseContentProvider]
     class QuickResponseContents < Struct.new(
+      nil,
       :plain_text,
       :markdown,
       keyword_init: true
@@ -1922,6 +2009,7 @@ module Aws::Wisdom
     #   <p>The tags used to organize, track, or control access for this resource.</p>
     #   @return [Hash<String, String>]
     class QuickResponseData < Struct.new(
+      nil,
       :quick_response_arn,
       :quick_response_id,
       :knowledge_base_arn,
@@ -2013,6 +2101,7 @@ module Aws::Wisdom
     #   <p>Whether to treat null value as a match for the attribute field.</p>
     #   @return [Boolean]
     class QuickResponseFilterField < Struct.new(
+      nil,
       :name,
       :values,
       :operator,
@@ -2069,6 +2158,7 @@ module Aws::Wisdom
     #   <p>The order at which the quick responses are sorted by.</p>
     #   @return [String]
     class QuickResponseOrderField < Struct.new(
+      nil,
       :name,
       :order,
       keyword_init: true
@@ -2109,6 +2199,7 @@ module Aws::Wisdom
     #         The value set for this parameter affects the ordering of search results.</p>
     #   @return [String]
     class QuickResponseQueryField < Struct.new(
+      nil,
       :name,
       :values,
       :operator,
@@ -2130,6 +2221,7 @@ module Aws::Wisdom
     #   <p>The quick response attribute fields on which the query results are ordered.</p>
     #   @return [Types::QuickResponseOrderField]
     class QuickResponseSearchExpression < Struct.new(
+      nil,
       :queries,
       :filters,
       :order_on_field,
@@ -2210,6 +2302,7 @@ module Aws::Wisdom
     #   <p>The tags used to organize, track, or control access for this resource.</p>
     #   @return [Hash<String, String>]
     class QuickResponseSearchResultData < Struct.new(
+      nil,
       :quick_response_arn,
       :quick_response_id,
       :knowledge_base_arn,
@@ -2288,6 +2381,7 @@ module Aws::Wisdom
     #   <p>The tags used to organize, track, or control access for this resource.</p>
     #   @return [Hash<String, String>]
     class QuickResponseSummary < Struct.new(
+      nil,
       :quick_response_arn,
       :quick_response_id,
       :knowledge_base_arn,
@@ -2324,6 +2418,7 @@ module Aws::Wisdom
     #   <p>The type of recommendation.</p>
     #   @return [String]
     class RecommendationData < Struct.new(
+      nil,
       :recommendation_id,
       :document,
       :relevance_score,
@@ -2368,6 +2463,7 @@ module Aws::Wisdom
     #   <p>The identifiers of the recommendations.</p>
     #   @return [Array<String>]
     class RecommendationTrigger < Struct.new(
+      nil,
       :id,
       :type,
       :source,
@@ -2398,6 +2494,7 @@ module Aws::Wisdom
     #   base if you're storing Wisdom Content resource to it. Can be either the ID or the ARN. URLs cannot contain the ARN.</p>
     #   @return [String]
     class RemoveKnowledgeBaseTemplateUriInput < Struct.new(
+      nil,
       :knowledge_base_id,
       keyword_init: true
     )
@@ -2405,6 +2502,7 @@ module Aws::Wisdom
     end
 
     class RemoveKnowledgeBaseTemplateUriOutput < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -2435,6 +2533,7 @@ module Aws::Wisdom
     #            <p>The variable is replaced with the actual value for a piece of content when calling <a href="https://docs.aws.amazon.com/wisdom/latest/APIReference/API_GetContent.html">GetContent</a>. </p>
     #   @return [String]
     class RenderingConfiguration < Struct.new(
+      nil,
       :template_uri,
       keyword_init: true
     )
@@ -2447,6 +2546,7 @@ module Aws::Wisdom
     # @!attribute message
     #   @return [String]
     class RequestTimeoutException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -2460,6 +2560,7 @@ module Aws::Wisdom
     #   <p>The specified resource name.</p>
     #   @return [String]
     class ResourceNotFoundException < Struct.new(
+      nil,
       :message,
       :resource_name,
       keyword_init: true
@@ -2478,6 +2579,7 @@ module Aws::Wisdom
     #   <p>The relevance score of the results.</p>
     #   @return [Float]
     class ResultData < Struct.new(
+      nil,
       :result_id,
       :document,
       :relevance_score,
@@ -2506,6 +2608,7 @@ module Aws::Wisdom
     #   <p>The search expression to filter results.</p>
     #   @return [Types::SearchExpression]
     class SearchContentInput < Struct.new(
+      nil,
       :next_token,
       :max_results,
       :knowledge_base_id,
@@ -2522,6 +2625,7 @@ module Aws::Wisdom
     #   <p>If there are additional results, this is the token for the next set of results.</p>
     #   @return [String]
     class SearchContentOutput < Struct.new(
+      nil,
       :content_summaries,
       :next_token,
       keyword_init: true
@@ -2534,6 +2638,7 @@ module Aws::Wisdom
     #   <p>The search expression filters.</p>
     #   @return [Array<Types::Filter>]
     class SearchExpression < Struct.new(
+      nil,
       :filters,
       keyword_init: true
     )
@@ -2557,6 +2662,7 @@ module Aws::Wisdom
     #   <p>The <a href="https://docs.aws.amazon.com/connect/latest/adminguide/connect-attrib-list.html#user-defined-attributes">user-defined Amazon Connect contact attributes</a> to be resolved when search results are returned.</p>
     #   @return [Hash<String, String>]
     class SearchQuickResponsesRequest < Struct.new(
+      nil,
       :knowledge_base_id,
       :search_expression,
       :next_token,
@@ -2575,6 +2681,7 @@ module Aws::Wisdom
     #   response in the next request to retrieve the next set of results.</p>
     #   @return [String]
     class SearchQuickResponsesResponse < Struct.new(
+      nil,
       :results,
       :next_token,
       keyword_init: true
@@ -2596,6 +2703,7 @@ module Aws::Wisdom
     #   <p>The search expression to filter results.</p>
     #   @return [Types::SearchExpression]
     class SearchSessionsInput < Struct.new(
+      nil,
       :next_token,
       :max_results,
       :assistant_id,
@@ -2612,6 +2720,7 @@ module Aws::Wisdom
     #   <p>If there are additional results, this is the token for the next set of results.</p>
     #   @return [String]
     class SearchSessionsOutput < Struct.new(
+      nil,
       :session_summaries,
       :next_token,
       keyword_init: true
@@ -2626,6 +2735,7 @@ module Aws::Wisdom
     #           instance</a>. For information about valid ID values, see <a href="https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#key-id">Key identifiers (KeyId)</a>.</p>
     #   @return [String]
     class ServerSideEncryptionConfiguration < Struct.new(
+      nil,
       :kms_key_id,
       keyword_init: true
     )
@@ -2637,6 +2747,7 @@ module Aws::Wisdom
     # @!attribute message
     #   @return [String]
     class ServiceQuotaExceededException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -2663,6 +2774,7 @@ module Aws::Wisdom
     #   <p>The configuration information for the session integration.</p>
     #   @return [Types::SessionIntegrationConfiguration]
     class SessionData < Struct.new(
+      nil,
       :session_arn,
       :session_id,
       :name,
@@ -2679,6 +2791,7 @@ module Aws::Wisdom
     #   <p>The Amazon Resource Name (ARN) of the integrated Amazon SNS topic used for streaming chat messages.</p>
     #   @return [String]
     class SessionIntegrationConfiguration < Struct.new(
+      nil,
       :topic_integration_arn,
       keyword_init: true
     )
@@ -2699,6 +2812,7 @@ module Aws::Wisdom
     #   <p>The Amazon Resource Name (ARN) of the Wisdom assistant.</p>
     #   @return [String]
     class SessionSummary < Struct.new(
+      nil,
       :session_id,
       :session_arn,
       :assistant_id,
@@ -2734,6 +2848,7 @@ module Aws::Wisdom
     #   <p>The expected expiration time of the generated presigned URL, specified in minutes.</p>
     #   @return [Integer]
     class StartContentUploadInput < Struct.new(
+      nil,
       :knowledge_base_id,
       :content_type,
       :presigned_url_time_to_live,
@@ -2755,6 +2870,7 @@ module Aws::Wisdom
     #   <p>The headers to include in the upload.</p>
     #   @return [Hash<String, String>]
     class StartContentUploadOutput < Struct.new(
+      nil,
       :upload_id,
       :url,
       :url_expiry,
@@ -2794,6 +2910,7 @@ module Aws::Wisdom
     #   <p>The configuration information of the external source that the resource data are imported from.</p>
     #   @return [Types::ExternalSourceConfiguration]
     class StartImportJobRequest < Struct.new(
+      nil,
       :knowledge_base_id,
       :import_job_type,
       :upload_id,
@@ -2809,6 +2926,7 @@ module Aws::Wisdom
     #   <p>The import job.</p>
     #   @return [Types::ImportJobData]
     class StartImportJobResponse < Struct.new(
+      nil,
       :import_job,
       keyword_init: true
     )
@@ -2822,6 +2940,7 @@ module Aws::Wisdom
     #   <p>The tags used to organize, track, or control access for this resource.</p>
     #   @return [Hash<String, String>]
     class TagResourceInput < Struct.new(
+      nil,
       :resource_arn,
       :tags,
       keyword_init: true
@@ -2830,6 +2949,7 @@ module Aws::Wisdom
     end
 
     class TagResourceOutput < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -2842,6 +2962,7 @@ module Aws::Wisdom
     #   <p>The specified resource name.</p>
     #   @return [String]
     class TooManyTagsException < Struct.new(
+      nil,
       :message,
       :resource_name,
       keyword_init: true
@@ -2856,6 +2977,7 @@ module Aws::Wisdom
     #   <p>The tag keys.</p>
     #   @return [Array<String>]
     class UntagResourceInput < Struct.new(
+      nil,
       :resource_arn,
       :tag_keys,
       keyword_init: true
@@ -2864,6 +2986,7 @@ module Aws::Wisdom
     end
 
     class UntagResourceOutput < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -2904,6 +3027,7 @@ module Aws::Wisdom
     #       </p>
     #   @return [String]
     class UpdateContentInput < Struct.new(
+      nil,
       :knowledge_base_id,
       :content_id,
       :revision_id,
@@ -2921,6 +3045,7 @@ module Aws::Wisdom
     #   <p>The content.</p>
     #   @return [Types::ContentData]
     class UpdateContentOutput < Struct.new(
+      nil,
       :content,
       keyword_init: true
     )
@@ -2935,6 +3060,7 @@ module Aws::Wisdom
     #   <p>The template URI to update.</p>
     #   @return [String]
     class UpdateKnowledgeBaseTemplateUriInput < Struct.new(
+      nil,
       :knowledge_base_id,
       :template_uri,
       keyword_init: true
@@ -2946,6 +3072,7 @@ module Aws::Wisdom
     #   <p>The knowledge base to update.</p>
     #   @return [Types::KnowledgeBaseData]
     class UpdateKnowledgeBaseTemplateUriOutput < Struct.new(
+      nil,
       :knowledge_base,
       keyword_init: true
     )
@@ -3008,6 +3135,7 @@ module Aws::Wisdom
     #            </p>
     #   @return [String]
     class UpdateQuickResponseRequest < Struct.new(
+      nil,
       :knowledge_base_id,
       :quick_response_id,
       :name,
@@ -3031,6 +3159,7 @@ module Aws::Wisdom
     #   <p>The quick response.</p>
     #   @return [Types::QuickResponseData]
     class UpdateQuickResponseResponse < Struct.new(
+      nil,
       :quick_response,
       keyword_init: true
     )
@@ -3041,6 +3170,7 @@ module Aws::Wisdom
     # @!attribute message
     #   @return [String]
     class ValidationException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )

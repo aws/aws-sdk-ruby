@@ -32,6 +32,7 @@ module Aws::MediaPackageVod
     #   A collection of tags associated with a resource
     #   @return [Hash<String, String>]
     class AssetShallow < Struct.new(
+      nil,
       :arn,
       :created_at,
       :id,
@@ -53,6 +54,7 @@ module Aws::MediaPackageVod
     #   The Amazon Resource Name (ARN) for the IAM role that allows MediaPackage to communicate with AWS Secrets Manager.
     #   @return [String]
     class Authorization < Struct.new(
+      nil,
       :cdn_identifier_secret,
       :secrets_role_arn,
       keyword_init: true
@@ -68,6 +70,7 @@ module Aws::MediaPackageVod
     #   A configuration for accessing an external Secure Packager and Encoder Key Exchange (SPEKE) service that will provide encryption keys.
     #   @return [Types::SpekeKeyProvider]
     class CmafEncryption < Struct.new(
+      nil,
       :constant_initialization_vector,
       :speke_key_provider,
       keyword_init: true
@@ -90,6 +93,7 @@ module Aws::MediaPackageVod
     #   rounded to the nearest multiple of the source fragment duration.
     #   @return [Integer]
     class CmafPackage < Struct.new(
+      nil,
       :encryption,
       :hls_manifests,
       :include_encoder_configuration_in_segments,
@@ -107,6 +111,7 @@ module Aws::MediaPackageVod
     #   The ID of a MediaPackage VOD PackagingGroup resource.
     #   @return [String]
     class ConfigureLogsRequest < Struct.new(
+      nil,
       :egress_access_logs,
       :id,
       keyword_init: true
@@ -136,6 +141,7 @@ module Aws::MediaPackageVod
     #   A collection of tags associated with a resource
     #   @return [Hash<String, String>]
     class ConfigureLogsResponse < Struct.new(
+      nil,
       :arn,
       :authorization,
       :created_at,
@@ -168,6 +174,7 @@ module Aws::MediaPackageVod
     #   A collection of tags associated with a resource
     #   @return [Hash<String, String>]
     class CreateAssetRequest < Struct.new(
+      nil,
       :id,
       :packaging_group_id,
       :resource_id,
@@ -207,6 +214,7 @@ module Aws::MediaPackageVod
     #   A collection of tags associated with a resource
     #   @return [Hash<String, String>]
     class CreateAssetResponse < Struct.new(
+      nil,
       :arn,
       :created_at,
       :egress_endpoints,
@@ -244,6 +252,7 @@ module Aws::MediaPackageVod
     #   A collection of tags associated with a resource
     #   @return [Hash<String, String>]
     class CreatePackagingConfigurationRequest < Struct.new(
+      nil,
       :cmaf_package,
       :dash_package,
       :hls_package,
@@ -284,6 +293,7 @@ module Aws::MediaPackageVod
     #   A collection of tags associated with a resource
     #   @return [Hash<String, String>]
     class CreatePackagingConfigurationResponse < Struct.new(
+      nil,
       :arn,
       :cmaf_package,
       :created_at,
@@ -312,6 +322,7 @@ module Aws::MediaPackageVod
     #   A collection of tags associated with a resource
     #   @return [Hash<String, String>]
     class CreatePackagingGroupRequest < Struct.new(
+      nil,
       :authorization,
       :egress_access_logs,
       :id,
@@ -343,6 +354,7 @@ module Aws::MediaPackageVod
     #   A collection of tags associated with a resource
     #   @return [Hash<String, String>]
     class CreatePackagingGroupResponse < Struct.new(
+      nil,
       :arn,
       :authorization,
       :created_at,
@@ -360,6 +372,7 @@ module Aws::MediaPackageVod
     #   A configuration for accessing an external Secure Packager and Encoder Key Exchange (SPEKE) service that will provide encryption keys.
     #   @return [Types::SpekeKeyProvider]
     class DashEncryption < Struct.new(
+      nil,
       :speke_key_provider,
       keyword_init: true
     )
@@ -386,6 +399,7 @@ module Aws::MediaPackageVod
     #   A StreamSelection configuration.
     #   @return [Types::StreamSelection]
     class DashManifest < Struct.new(
+      nil,
       :manifest_layout,
       :manifest_name,
       :min_buffer_time_seconds,
@@ -424,6 +438,7 @@ module Aws::MediaPackageVod
     #   Determines the type of SegmentTemplate included in the Media Presentation Description (MPD).  When set to NUMBER_WITH_TIMELINE, a full timeline is presented in each SegmentTemplate, with $Number$ media URLs.  When set to TIME_WITH_TIMELINE, a full timeline is presented in each SegmentTemplate, with $Time$ media URLs. When set to NUMBER_WITH_DURATION, only a duration is included in each SegmentTemplate, with $Number$ media URLs.
     #   @return [String]
     class DashPackage < Struct.new(
+      nil,
       :dash_manifests,
       :encryption,
       :include_encoder_configuration_in_segments,
@@ -440,6 +455,7 @@ module Aws::MediaPackageVod
     #   The ID of the MediaPackage VOD Asset resource to delete.
     #   @return [String]
     class DeleteAssetRequest < Struct.new(
+      nil,
       :id,
       keyword_init: true
     )
@@ -447,6 +463,7 @@ module Aws::MediaPackageVod
     end
 
     class DeleteAssetResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -456,6 +473,7 @@ module Aws::MediaPackageVod
     #   The ID of the MediaPackage VOD PackagingConfiguration resource to delete.
     #   @return [String]
     class DeletePackagingConfigurationRequest < Struct.new(
+      nil,
       :id,
       keyword_init: true
     )
@@ -463,6 +481,7 @@ module Aws::MediaPackageVod
     end
 
     class DeletePackagingConfigurationResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -472,6 +491,7 @@ module Aws::MediaPackageVod
     #   The ID of the MediaPackage VOD PackagingGroup resource to delete.
     #   @return [String]
     class DeletePackagingGroupRequest < Struct.new(
+      nil,
       :id,
       keyword_init: true
     )
@@ -479,6 +499,7 @@ module Aws::MediaPackageVod
     end
 
     class DeletePackagingGroupResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -488,6 +509,7 @@ module Aws::MediaPackageVod
     #   The ID of an MediaPackage VOD Asset resource.
     #   @return [String]
     class DescribeAssetRequest < Struct.new(
+      nil,
       :id,
       keyword_init: true
     )
@@ -522,6 +544,7 @@ module Aws::MediaPackageVod
     #   A collection of tags associated with a resource
     #   @return [Hash<String, String>]
     class DescribeAssetResponse < Struct.new(
+      nil,
       :arn,
       :created_at,
       :egress_endpoints,
@@ -540,6 +563,7 @@ module Aws::MediaPackageVod
     #   The ID of a MediaPackage VOD PackagingConfiguration resource.
     #   @return [String]
     class DescribePackagingConfigurationRequest < Struct.new(
+      nil,
       :id,
       keyword_init: true
     )
@@ -574,6 +598,7 @@ module Aws::MediaPackageVod
     #   A collection of tags associated with a resource
     #   @return [Hash<String, String>]
     class DescribePackagingConfigurationResponse < Struct.new(
+      nil,
       :arn,
       :cmaf_package,
       :created_at,
@@ -592,6 +617,7 @@ module Aws::MediaPackageVod
     #   The ID of a MediaPackage VOD PackagingGroup resource.
     #   @return [String]
     class DescribePackagingGroupRequest < Struct.new(
+      nil,
       :id,
       keyword_init: true
     )
@@ -623,6 +649,7 @@ module Aws::MediaPackageVod
     #   A collection of tags associated with a resource
     #   @return [Hash<String, String>]
     class DescribePackagingGroupResponse < Struct.new(
+      nil,
       :approximate_asset_count,
       :arn,
       :authorization,
@@ -641,6 +668,7 @@ module Aws::MediaPackageVod
     #   Customize the log group name.
     #   @return [String]
     class EgressAccessLogs < Struct.new(
+      nil,
       :log_group_name,
       keyword_init: true
     )
@@ -658,6 +686,7 @@ module Aws::MediaPackageVod
     #   The URL of the parent manifest for the repackaged Asset.
     #   @return [String]
     class EgressEndpoint < Struct.new(
+      nil,
       :packaging_configuration_id,
       :status,
       :url,
@@ -679,6 +708,7 @@ module Aws::MediaPackageVod
     #   A collection of video encryption presets.
     #   @return [String]
     class EncryptionContractConfiguration < Struct.new(
+      nil,
       :preset_speke20_audio,
       :preset_speke20_video,
       keyword_init: true
@@ -690,6 +720,7 @@ module Aws::MediaPackageVod
     # @!attribute message
     #   @return [String]
     class ForbiddenException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -708,6 +739,7 @@ module Aws::MediaPackageVod
     #   A configuration for accessing an external Secure Packager and Encoder Key Exchange (SPEKE) service that will provide encryption keys.
     #   @return [Types::SpekeKeyProvider]
     class HlsEncryption < Struct.new(
+      nil,
       :constant_initialization_vector,
       :encryption_method,
       :speke_key_provider,
@@ -749,6 +781,7 @@ module Aws::MediaPackageVod
     #   A StreamSelection configuration.
     #   @return [Types::StreamSelection]
     class HlsManifest < Struct.new(
+      nil,
       :ad_markers,
       :include_iframe_only_stream,
       :manifest_name,
@@ -778,6 +811,7 @@ module Aws::MediaPackageVod
     #   When enabled, audio streams will be placed in rendition groups in the output.
     #   @return [Boolean]
     class HlsPackage < Struct.new(
+      nil,
       :encryption,
       :hls_manifests,
       :include_dvb_subtitles,
@@ -792,6 +826,7 @@ module Aws::MediaPackageVod
     # @!attribute message
     #   @return [String]
     class InternalServerErrorException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -808,6 +843,7 @@ module Aws::MediaPackageVod
     #   Returns Assets associated with the specified PackagingGroup.
     #   @return [String]
     class ListAssetsRequest < Struct.new(
+      nil,
       :max_results,
       :next_token,
       :packaging_group_id,
@@ -823,6 +859,7 @@ module Aws::MediaPackageVod
     #   A token that can be used to resume pagination from the end of the collection.
     #   @return [String]
     class ListAssetsResponse < Struct.new(
+      nil,
       :assets,
       :next_token,
       keyword_init: true
@@ -840,6 +877,7 @@ module Aws::MediaPackageVod
     #   Returns MediaPackage VOD PackagingConfigurations associated with the specified PackagingGroup.
     #   @return [String]
     class ListPackagingConfigurationsRequest < Struct.new(
+      nil,
       :max_results,
       :next_token,
       :packaging_group_id,
@@ -855,6 +893,7 @@ module Aws::MediaPackageVod
     #   A list of MediaPackage VOD PackagingConfiguration resources.
     #   @return [Array<Types::PackagingConfiguration>]
     class ListPackagingConfigurationsResponse < Struct.new(
+      nil,
       :next_token,
       :packaging_configurations,
       keyword_init: true
@@ -869,6 +908,7 @@ module Aws::MediaPackageVod
     #   A token used to resume pagination from the end of a previous request.
     #   @return [String]
     class ListPackagingGroupsRequest < Struct.new(
+      nil,
       :max_results,
       :next_token,
       keyword_init: true
@@ -883,6 +923,7 @@ module Aws::MediaPackageVod
     #   A list of MediaPackage VOD PackagingGroup resources.
     #   @return [Array<Types::PackagingGroup>]
     class ListPackagingGroupsResponse < Struct.new(
+      nil,
       :next_token,
       :packaging_groups,
       keyword_init: true
@@ -894,6 +935,7 @@ module Aws::MediaPackageVod
     #   The Amazon Resource Name (ARN) for the resource. You can get this from the response to any request to the resource.
     #   @return [String]
     class ListTagsForResourceRequest < Struct.new(
+      nil,
       :resource_arn,
       keyword_init: true
     )
@@ -904,6 +946,7 @@ module Aws::MediaPackageVod
     #   A collection of tags associated with a resource
     #   @return [Hash<String, String>]
     class ListTagsForResourceResponse < Struct.new(
+      nil,
       :tags,
       keyword_init: true
     )
@@ -915,6 +958,7 @@ module Aws::MediaPackageVod
     #   A configuration for accessing an external Secure Packager and Encoder Key Exchange (SPEKE) service that will provide encryption keys.
     #   @return [Types::SpekeKeyProvider]
     class MssEncryption < Struct.new(
+      nil,
       :speke_key_provider,
       keyword_init: true
     )
@@ -929,6 +973,7 @@ module Aws::MediaPackageVod
     #   A StreamSelection configuration.
     #   @return [Types::StreamSelection]
     class MssManifest < Struct.new(
+      nil,
       :manifest_name,
       :stream_selection,
       keyword_init: true
@@ -947,6 +992,7 @@ module Aws::MediaPackageVod
     #   The duration (in seconds) of each segment.
     #   @return [Integer]
     class MssPackage < Struct.new(
+      nil,
       :encryption,
       :mss_manifests,
       :segment_duration_seconds,
@@ -959,6 +1005,7 @@ module Aws::MediaPackageVod
     # @!attribute message
     #   @return [String]
     class NotFoundException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -994,6 +1041,7 @@ module Aws::MediaPackageVod
     #   A collection of tags associated with a resource
     #   @return [Hash<String, String>]
     class PackagingConfiguration < Struct.new(
+      nil,
       :arn,
       :cmaf_package,
       :created_at,
@@ -1034,6 +1082,7 @@ module Aws::MediaPackageVod
     #   A collection of tags associated with a resource
     #   @return [Hash<String, String>]
     class PackagingGroup < Struct.new(
+      nil,
       :approximate_asset_count,
       :arn,
       :authorization,
@@ -1051,6 +1100,7 @@ module Aws::MediaPackageVod
     # @!attribute message
     #   @return [String]
     class ServiceUnavailableException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -1077,6 +1127,7 @@ module Aws::MediaPackageVod
     #   The URL of the external key provider service.
     #   @return [String]
     class SpekeKeyProvider < Struct.new(
+      nil,
       :encryption_contract_configuration,
       :role_arn,
       :system_ids,
@@ -1097,6 +1148,7 @@ module Aws::MediaPackageVod
     #   A directive that determines the order of streams in the output.
     #   @return [String]
     class StreamSelection < Struct.new(
+      nil,
       :max_video_bits_per_second,
       :min_video_bits_per_second,
       :stream_order,
@@ -1112,6 +1164,7 @@ module Aws::MediaPackageVod
     #   A collection of tags associated with a resource
     #   @return [Hash<String, String>]
     class TagResourceRequest < Struct.new(
+      nil,
       :resource_arn,
       :tags,
       keyword_init: true
@@ -1123,6 +1176,7 @@ module Aws::MediaPackageVod
     # @!attribute message
     #   @return [String]
     class TooManyRequestsException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -1133,6 +1187,7 @@ module Aws::MediaPackageVod
     # @!attribute message
     #   @return [String]
     class UnprocessableEntityException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -1146,6 +1201,7 @@ module Aws::MediaPackageVod
     #   A comma-separated list of the tag keys to remove from the resource.
     #   @return [Array<String>]
     class UntagResourceRequest < Struct.new(
+      nil,
       :resource_arn,
       :tag_keys,
       keyword_init: true
@@ -1161,6 +1217,7 @@ module Aws::MediaPackageVod
     #   The ID of a MediaPackage VOD PackagingGroup resource.
     #   @return [String]
     class UpdatePackagingGroupRequest < Struct.new(
+      nil,
       :authorization,
       :id,
       keyword_init: true
@@ -1193,6 +1250,7 @@ module Aws::MediaPackageVod
     #   A collection of tags associated with a resource
     #   @return [Hash<String, String>]
     class UpdatePackagingGroupResponse < Struct.new(
+      nil,
       :approximate_asset_count,
       :arn,
       :authorization,

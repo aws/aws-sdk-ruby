@@ -51,6 +51,7 @@ module Aws::WorkMail
     #   <p>Impersonation role IDs to exclude from the rule.</p>
     #   @return [Array<String>]
     class AccessControlRule < Struct.new(
+      nil,
       :name,
       :effect,
       :description,
@@ -103,6 +104,7 @@ module Aws::WorkMail
     #            </ul>
     #   @return [String]
     class AssociateDelegateToResourceRequest < Struct.new(
+      nil,
       :organization_id,
       :resource_id,
       :entity_id,
@@ -112,6 +114,7 @@ module Aws::WorkMail
     end
 
     class AssociateDelegateToResourceResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -151,6 +154,7 @@ module Aws::WorkMail
     #            </ul>
     #   @return [String]
     class AssociateMemberToGroupRequest < Struct.new(
+      nil,
       :organization_id,
       :group_id,
       :member_id,
@@ -160,6 +164,7 @@ module Aws::WorkMail
     end
 
     class AssociateMemberToGroupResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -172,6 +177,7 @@ module Aws::WorkMail
     #   <p>The impersonation role ID to assume.</p>
     #   @return [String]
     class AssumeImpersonationRoleRequest < Struct.new(
+      nil,
       :organization_id,
       :impersonation_role_id,
       keyword_init: true
@@ -186,6 +192,7 @@ module Aws::WorkMail
     #   <p>The authentication token's validity, in seconds.</p>
     #   @return [Integer]
     class AssumeImpersonationRoleResponse < Struct.new(
+      nil,
       :token,
       :expires_in,
       keyword_init: true
@@ -216,6 +223,7 @@ module Aws::WorkMail
     #   <p>The date and time at which the availability configuration was last modified.</p>
     #   @return [Time]
     class AvailabilityConfiguration < Struct.new(
+      nil,
       :domain_name,
       :provider_type,
       :ews_provider,
@@ -240,6 +248,7 @@ module Aws::WorkMail
     #   <p>The resource's ability to automatically decline any conflicting requests.</p>
     #   @return [Boolean]
     class BookingOptions < Struct.new(
+      nil,
       :auto_accept_requests,
       :auto_decline_recurring_requests,
       :auto_decline_conflicting_requests,
@@ -265,6 +274,7 @@ module Aws::WorkMail
     #   <p>The organization ID.</p>
     #   @return [String]
     class CancelMailboxExportJobRequest < Struct.new(
+      nil,
       :client_token,
       :job_id,
       :organization_id,
@@ -274,6 +284,7 @@ module Aws::WorkMail
     end
 
     class CancelMailboxExportJobResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -289,6 +300,7 @@ module Aws::WorkMail
     #   <p>The alias to add to the member set.</p>
     #   @return [String]
     class CreateAliasRequest < Struct.new(
+      nil,
       :organization_id,
       :entity_id,
       :alias,
@@ -298,6 +310,7 @@ module Aws::WorkMail
     end
 
     class CreateAliasResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -319,6 +332,7 @@ module Aws::WorkMail
     #   <p>Lambda availability provider definition. The request must contain exactly one provider definition, either <code>EwsProvider</code> or <code>LambdaProvider</code>.</p>
     #   @return [Types::LambdaAvailabilityProvider]
     class CreateAvailabilityConfigurationRequest < Struct.new(
+      nil,
       :client_token,
       :organization_id,
       :domain_name,
@@ -330,6 +344,7 @@ module Aws::WorkMail
     end
 
     class CreateAvailabilityConfigurationResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -345,6 +360,7 @@ module Aws::WorkMail
     #   <p>If this parameter is enabled, the group will be hidden from the address book.</p>
     #   @return [Boolean]
     class CreateGroupRequest < Struct.new(
+      nil,
       :organization_id,
       :name,
       :hidden_from_global_address_list,
@@ -357,6 +373,7 @@ module Aws::WorkMail
     #   <p>The identifier of the group.</p>
     #   @return [String]
     class CreateGroupResponse < Struct.new(
+      nil,
       :group_id,
       keyword_init: true
     )
@@ -383,6 +400,7 @@ module Aws::WorkMail
     #         </p>
     #   @return [String]
     class CreateIdentityCenterApplicationRequest < Struct.new(
+      nil,
       :name,
       :instance_arn,
       :client_token,
@@ -397,6 +415,7 @@ module Aws::WorkMail
     #         </p>
     #   @return [String]
     class CreateIdentityCenterApplicationResponse < Struct.new(
+      nil,
       :application_arn,
       keyword_init: true
     )
@@ -423,6 +442,7 @@ module Aws::WorkMail
     #   <p>The list of rules for the impersonation role.</p>
     #   @return [Array<Types::ImpersonationRule>]
     class CreateImpersonationRoleRequest < Struct.new(
+      nil,
       :client_token,
       :organization_id,
       :name,
@@ -438,6 +458,7 @@ module Aws::WorkMail
     #   <p>The new impersonation role ID.</p>
     #   @return [String]
     class CreateImpersonationRoleResponse < Struct.new(
+      nil,
       :impersonation_role_id,
       keyword_init: true
     )
@@ -484,6 +505,7 @@ module Aws::WorkMail
     #   <p>Device user agents that the rule <b>will not</b> match. All other device user agents will match.</p>
     #   @return [Array<String>]
     class CreateMobileDeviceAccessRuleRequest < Struct.new(
+      nil,
       :organization_id,
       :client_token,
       :name,
@@ -506,6 +528,7 @@ module Aws::WorkMail
     #   <p>The identifier for the newly created mobile device access rule.</p>
     #   @return [String]
     class CreateMobileDeviceAccessRuleResponse < Struct.new(
+      nil,
       :mobile_device_access_rule_id,
       keyword_init: true
     )
@@ -533,6 +556,7 @@ module Aws::WorkMail
     #            the request.</p>
     #   @return [Boolean]
     class CreateOrganizationRequest < Struct.new(
+      nil,
       :directory_id,
       :alias,
       :client_token,
@@ -548,6 +572,7 @@ module Aws::WorkMail
     #   <p>The organization ID.</p>
     #   @return [String]
     class CreateOrganizationResponse < Struct.new(
+      nil,
       :organization_id,
       keyword_init: true
     )
@@ -572,6 +597,7 @@ module Aws::WorkMail
     #   <p>If this parameter is enabled, the resource will be hidden from the address book.</p>
     #   @return [Boolean]
     class CreateResourceRequest < Struct.new(
+      nil,
       :organization_id,
       :name,
       :type,
@@ -586,6 +612,7 @@ module Aws::WorkMail
     #   <p>The identifier of the new resource.</p>
     #   @return [String]
     class CreateResourceResponse < Struct.new(
+      nil,
       :resource_id,
       keyword_init: true
     )
@@ -621,6 +648,7 @@ module Aws::WorkMail
     #   <p>User ID from the IAM Identity Center. If this parameter is empty it will be updated automatically when the user logs in for the first time to the mailbox associated with WorkMail.</p>
     #   @return [String]
     class CreateUserRequest < Struct.new(
+      nil,
       :organization_id,
       :name,
       :display_name,
@@ -639,6 +667,7 @@ module Aws::WorkMail
     #   <p>The identifier for the new user.</p>
     #   @return [String]
     class CreateUserResponse < Struct.new(
+      nil,
       :user_id,
       keyword_init: true
     )
@@ -654,6 +683,7 @@ module Aws::WorkMail
     #   <p>The type of the delegate: user or group.</p>
     #   @return [String]
     class Delegate < Struct.new(
+      nil,
       :id,
       :type,
       keyword_init: true
@@ -668,6 +698,7 @@ module Aws::WorkMail
     #   <p>The name of the access control rule.</p>
     #   @return [String]
     class DeleteAccessControlRuleRequest < Struct.new(
+      nil,
       :organization_id,
       :name,
       keyword_init: true
@@ -676,6 +707,7 @@ module Aws::WorkMail
     end
 
     class DeleteAccessControlRuleResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -693,6 +725,7 @@ module Aws::WorkMail
     #            list are collapsed into single entries (the list is transformed into a set).</p>
     #   @return [String]
     class DeleteAliasRequest < Struct.new(
+      nil,
       :organization_id,
       :entity_id,
       :alias,
@@ -702,6 +735,7 @@ module Aws::WorkMail
     end
 
     class DeleteAliasResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -714,6 +748,7 @@ module Aws::WorkMail
     #   <p>The domain for which the <code>AvailabilityConfiguration</code> will be deleted.</p>
     #   @return [String]
     class DeleteAvailabilityConfigurationRequest < Struct.new(
+      nil,
       :organization_id,
       :domain_name,
       keyword_init: true
@@ -722,6 +757,7 @@ module Aws::WorkMail
     end
 
     class DeleteAvailabilityConfigurationResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -731,6 +767,7 @@ module Aws::WorkMail
     #   <p>The ID of the organization from which the email monitoring configuration is deleted.</p>
     #   @return [String]
     class DeleteEmailMonitoringConfigurationRequest < Struct.new(
+      nil,
       :organization_id,
       keyword_init: true
     )
@@ -738,6 +775,7 @@ module Aws::WorkMail
     end
 
     class DeleteEmailMonitoringConfigurationResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -759,6 +797,7 @@ module Aws::WorkMail
     #            </ul>
     #   @return [String]
     class DeleteGroupRequest < Struct.new(
+      nil,
       :organization_id,
       :group_id,
       keyword_init: true
@@ -767,6 +806,7 @@ module Aws::WorkMail
     end
 
     class DeleteGroupResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -778,6 +818,7 @@ module Aws::WorkMail
     #         </p>
     #   @return [String]
     class DeleteIdentityCenterApplicationRequest < Struct.new(
+      nil,
       :application_arn,
       keyword_init: true
     )
@@ -785,6 +826,7 @@ module Aws::WorkMail
     end
 
     class DeleteIdentityCenterApplicationResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -795,6 +837,7 @@ module Aws::WorkMail
     #   The Organization ID. </p>
     #   @return [String]
     class DeleteIdentityProviderConfigurationRequest < Struct.new(
+      nil,
       :organization_id,
       keyword_init: true
     )
@@ -802,6 +845,7 @@ module Aws::WorkMail
     end
 
     class DeleteIdentityProviderConfigurationResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -814,6 +858,7 @@ module Aws::WorkMail
     #   <p>The ID of the impersonation role to delete.</p>
     #   @return [String]
     class DeleteImpersonationRoleRequest < Struct.new(
+      nil,
       :organization_id,
       :impersonation_role_id,
       keyword_init: true
@@ -822,6 +867,7 @@ module Aws::WorkMail
     end
 
     class DeleteImpersonationRoleResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -862,6 +908,7 @@ module Aws::WorkMail
     #            </ul>
     #   @return [String]
     class DeleteMailboxPermissionsRequest < Struct.new(
+      nil,
       :organization_id,
       :entity_id,
       :grantee_id,
@@ -871,6 +918,7 @@ module Aws::WorkMail
     end
 
     class DeleteMailboxPermissionsResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -900,6 +948,7 @@ module Aws::WorkMail
     #   <p>The mobile device for which you delete the override. <code>DeviceId</code> is case insensitive.</p>
     #   @return [String]
     class DeleteMobileDeviceAccessOverrideRequest < Struct.new(
+      nil,
       :organization_id,
       :user_id,
       :device_id,
@@ -909,6 +958,7 @@ module Aws::WorkMail
     end
 
     class DeleteMobileDeviceAccessOverrideResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -921,6 +971,7 @@ module Aws::WorkMail
     #   <p>The identifier of the rule to be deleted.</p>
     #   @return [String]
     class DeleteMobileDeviceAccessRuleRequest < Struct.new(
+      nil,
       :organization_id,
       :mobile_device_access_rule_id,
       keyword_init: true
@@ -929,6 +980,7 @@ module Aws::WorkMail
     end
 
     class DeleteMobileDeviceAccessRuleResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -950,6 +1002,7 @@ module Aws::WorkMail
     #   <p>Deletes IAM Identity Center application for WorkMail. This action does not affect authentication settings for any organization.</p>
     #   @return [Boolean]
     class DeleteOrganizationRequest < Struct.new(
+      nil,
       :client_token,
       :organization_id,
       :delete_directory,
@@ -967,6 +1020,7 @@ module Aws::WorkMail
     #   <p>The state of the organization.</p>
     #   @return [String]
     class DeleteOrganizationResponse < Struct.new(
+      nil,
       :organization_id,
       :state,
       keyword_init: true
@@ -983,6 +1037,7 @@ module Aws::WorkMail
     #           The Personal Access Token ID.</p>
     #   @return [String]
     class DeletePersonalAccessTokenRequest < Struct.new(
+      nil,
       :organization_id,
       :personal_access_token_id,
       keyword_init: true
@@ -991,6 +1046,7 @@ module Aws::WorkMail
     end
 
     class DeletePersonalAccessTokenResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1013,6 +1069,7 @@ module Aws::WorkMail
     #            </ul>
     #   @return [String]
     class DeleteResourceRequest < Struct.new(
+      nil,
       :organization_id,
       :resource_id,
       keyword_init: true
@@ -1021,6 +1078,7 @@ module Aws::WorkMail
     end
 
     class DeleteResourceResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1033,6 +1091,7 @@ module Aws::WorkMail
     #   <p>The retention policy ID.</p>
     #   @return [String]
     class DeleteRetentionPolicyRequest < Struct.new(
+      nil,
       :organization_id,
       :id,
       keyword_init: true
@@ -1041,6 +1100,7 @@ module Aws::WorkMail
     end
 
     class DeleteRetentionPolicyResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1062,6 +1122,7 @@ module Aws::WorkMail
     #            </ul>
     #   @return [String]
     class DeleteUserRequest < Struct.new(
+      nil,
       :organization_id,
       :user_id,
       keyword_init: true
@@ -1070,6 +1131,7 @@ module Aws::WorkMail
     end
 
     class DeleteUserResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1094,6 +1156,7 @@ module Aws::WorkMail
     #            </ul>
     #   @return [String]
     class DeregisterFromWorkMailRequest < Struct.new(
+      nil,
       :organization_id,
       :entity_id,
       keyword_init: true
@@ -1102,6 +1165,7 @@ module Aws::WorkMail
     end
 
     class DeregisterFromWorkMailResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1114,6 +1178,7 @@ module Aws::WorkMail
     #   <p>The domain to deregister in WorkMail and SES.</p>
     #   @return [String]
     class DeregisterMailDomainRequest < Struct.new(
+      nil,
       :organization_id,
       :domain_name,
       keyword_init: true
@@ -1122,6 +1187,7 @@ module Aws::WorkMail
     end
 
     class DeregisterMailDomainResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1131,6 +1197,7 @@ module Aws::WorkMail
     #   <p>The ID of the organization for which the email monitoring configuration is described.</p>
     #   @return [String]
     class DescribeEmailMonitoringConfigurationRequest < Struct.new(
+      nil,
       :organization_id,
       keyword_init: true
     )
@@ -1144,6 +1211,7 @@ module Aws::WorkMail
     #   <p>The Amazon Resource Name (ARN) of the CloudWatch Log group associated with the email monitoring configuration.</p>
     #   @return [String]
     class DescribeEmailMonitoringConfigurationResponse < Struct.new(
+      nil,
       :role_arn,
       :log_group_arn,
       keyword_init: true
@@ -1158,6 +1226,7 @@ module Aws::WorkMail
     #   <p>The email under which the entity exists.</p>
     #   @return [String]
     class DescribeEntityRequest < Struct.new(
+      nil,
       :organization_id,
       :email,
       keyword_init: true
@@ -1175,6 +1244,7 @@ module Aws::WorkMail
     #   <p>Entity type.</p>
     #   @return [String]
     class DescribeEntityResponse < Struct.new(
+      nil,
       :entity_id,
       :name,
       :type,
@@ -1202,6 +1272,7 @@ module Aws::WorkMail
     #            </ul>
     #   @return [String]
     class DescribeGroupRequest < Struct.new(
+      nil,
       :organization_id,
       :group_id,
       keyword_init: true
@@ -1234,6 +1305,7 @@ module Aws::WorkMail
     #   <p>If the value is set to <i>true</i>, the group is hidden from the address book.</p>
     #   @return [Boolean]
     class DescribeGroupResponse < Struct.new(
+      nil,
       :group_id,
       :name,
       :email,
@@ -1256,6 +1328,7 @@ module Aws::WorkMail
     #            The Organization ID. </p>
     #   @return [String]
     class DescribeIdentityProviderConfigurationRequest < Struct.new(
+      nil,
       :organization_id,
       keyword_init: true
     )
@@ -1277,6 +1350,7 @@ module Aws::WorkMail
     #         </p>
     #   @return [Types::PersonalAccessTokenConfiguration]
     class DescribeIdentityProviderConfigurationResponse < Struct.new(
+      nil,
       :authentication_mode,
       :identity_center_configuration,
       :personal_access_token_configuration,
@@ -1289,6 +1363,7 @@ module Aws::WorkMail
     #   <p>Lists the ID of the given organization.</p>
     #   @return [String]
     class DescribeInboundDmarcSettingsRequest < Struct.new(
+      nil,
       :organization_id,
       keyword_init: true
     )
@@ -1299,6 +1374,7 @@ module Aws::WorkMail
     #   <p>Lists the enforcement setting of the applied policy.</p>
     #   @return [Boolean]
     class DescribeInboundDmarcSettingsResponse < Struct.new(
+      nil,
       :enforced,
       keyword_init: true
     )
@@ -1317,6 +1393,7 @@ module Aws::WorkMail
     #   <p>The organization ID.</p>
     #   @return [String]
     class DescribeMailboxExportJobRequest < Struct.new(
+      nil,
       :job_id,
       :organization_id,
       keyword_init: true
@@ -1364,6 +1441,7 @@ module Aws::WorkMail
     #   <p>The mailbox export job end timestamp.</p>
     #   @return [Time]
     class DescribeMailboxExportJobResponse < Struct.new(
+      nil,
       :entity_id,
       :description,
       :role_arn,
@@ -1390,6 +1468,7 @@ module Aws::WorkMail
     #   <p>The identifier for the organization to be described.</p>
     #   @return [String]
     class DescribeOrganizationRequest < Struct.new(
+      nil,
       :organization_id,
       keyword_init: true
     )
@@ -1432,6 +1511,7 @@ module Aws::WorkMail
     #   <p>Indicates if interoperability is enabled for this organization.</p>
     #   @return [Boolean]
     class DescribeOrganizationResponse < Struct.new(
+      nil,
       :organization_id,
       :alias,
       :state,
@@ -1473,6 +1553,7 @@ module Aws::WorkMail
     #            </ul>
     #   @return [String]
     class DescribeResourceRequest < Struct.new(
+      nil,
       :organization_id,
       :resource_id,
       keyword_init: true
@@ -1514,6 +1595,7 @@ module Aws::WorkMail
     #   <p>If enabled, the resource is hidden from the global address list.</p>
     #   @return [Boolean]
     class DescribeResourceResponse < Struct.new(
+      nil,
       :resource_id,
       :email,
       :name,
@@ -1554,6 +1636,7 @@ module Aws::WorkMail
     #            <p></p>
     #   @return [String]
     class DescribeUserRequest < Struct.new(
+      nil,
       :organization_id,
       :user_id,
       keyword_init: true
@@ -1646,6 +1729,7 @@ module Aws::WorkMail
     #         </p>
     #   @return [String]
     class DescribeUserResponse < Struct.new(
+      nil,
       :user_id,
       :name,
       :email,
@@ -1685,6 +1769,7 @@ module Aws::WorkMail
     # @!attribute message
     #   @return [String]
     class DirectoryInUseException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -1695,6 +1780,7 @@ module Aws::WorkMail
     # @!attribute message
     #   @return [String]
     class DirectoryServiceAuthenticationFailedException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -1705,6 +1791,7 @@ module Aws::WorkMail
     # @!attribute message
     #   @return [String]
     class DirectoryUnavailableException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -1747,6 +1834,7 @@ module Aws::WorkMail
     #            </ul>
     #   @return [String]
     class DisassociateDelegateFromResourceRequest < Struct.new(
+      nil,
       :organization_id,
       :resource_id,
       :entity_id,
@@ -1756,6 +1844,7 @@ module Aws::WorkMail
     end
 
     class DisassociateDelegateFromResourceResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1795,6 +1884,7 @@ module Aws::WorkMail
     #            </ul>
     #   @return [String]
     class DisassociateMemberFromGroupRequest < Struct.new(
+      nil,
       :organization_id,
       :group_id,
       :member_id,
@@ -1804,6 +1894,7 @@ module Aws::WorkMail
     end
 
     class DisassociateMemberFromGroupResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1820,6 +1911,7 @@ module Aws::WorkMail
     #   <p>The value returned by the DNS for a query to that hostname and record type.</p>
     #   @return [String]
     class DnsRecord < Struct.new(
+      nil,
       :type,
       :hostname,
       :value,
@@ -1837,6 +1929,7 @@ module Aws::WorkMail
     #   <p>The hosted zone ID for a domain hosted in Route 53. Required when configuring a domain hosted in Route 53.</p>
     #   @return [String]
     class Domain < Struct.new(
+      nil,
       :domain_name,
       :hosted_zone_id,
       keyword_init: true
@@ -1849,6 +1942,7 @@ module Aws::WorkMail
     # @!attribute message
     #   @return [String]
     class EmailAddressInUseException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -1860,6 +1954,7 @@ module Aws::WorkMail
     # @!attribute message
     #   @return [String]
     class EntityAlreadyRegisteredException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -1871,6 +1966,7 @@ module Aws::WorkMail
     # @!attribute message
     #   @return [String]
     class EntityNotFoundException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -1882,6 +1978,7 @@ module Aws::WorkMail
     # @!attribute message
     #   @return [String]
     class EntityStateException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -1899,6 +1996,7 @@ module Aws::WorkMail
     #   <p>The password used to authenticate the remote EWS server.</p>
     #   @return [String]
     class EwsAvailabilityProvider < Struct.new(
+      nil,
       :ews_endpoint,
       :ews_username,
       :ews_password,
@@ -1920,6 +2018,7 @@ module Aws::WorkMail
     #   <p>The number of days for which the folder-configuration action applies.</p>
     #   @return [Integer]
     class FolderConfiguration < Struct.new(
+      nil,
       :name,
       :action,
       :period,
@@ -1946,6 +2045,7 @@ module Aws::WorkMail
     #   <p>The impersonation role ID.</p>
     #   @return [String]
     class GetAccessControlEffectRequest < Struct.new(
+      nil,
       :organization_id,
       :ip_address,
       :action,
@@ -1963,6 +2063,7 @@ module Aws::WorkMail
     #   <p>The rules that match the given parameters, resulting in an effect.</p>
     #   @return [Array<String>]
     class GetAccessControlEffectResponse < Struct.new(
+      nil,
       :effect,
       :matched_rules,
       keyword_init: true
@@ -1974,6 +2075,7 @@ module Aws::WorkMail
     #   <p>The organization ID.</p>
     #   @return [String]
     class GetDefaultRetentionPolicyRequest < Struct.new(
+      nil,
       :organization_id,
       keyword_init: true
     )
@@ -1993,6 +2095,7 @@ module Aws::WorkMail
     #   <p>The retention policy folder configurations.</p>
     #   @return [Array<Types::FolderConfiguration>]
     class GetDefaultRetentionPolicyResponse < Struct.new(
+      nil,
       :id,
       :name,
       :description,
@@ -2027,6 +2130,7 @@ module Aws::WorkMail
     #            </ul>
     #   @return [String]
     class GetImpersonationRoleEffectRequest < Struct.new(
+      nil,
       :organization_id,
       :impersonation_role_id,
       :target_user,
@@ -2047,6 +2151,7 @@ module Aws::WorkMail
     #   <p>A list of the rules that match the input and produce the configured effect.</p>
     #   @return [Array<Types::ImpersonationMatchedRule>]
     class GetImpersonationRoleEffectResponse < Struct.new(
+      nil,
       :type,
       :effect,
       :matched_rules,
@@ -2062,6 +2167,7 @@ module Aws::WorkMail
     #   <p>The impersonation role ID to retrieve.</p>
     #   @return [String]
     class GetImpersonationRoleRequest < Struct.new(
+      nil,
       :organization_id,
       :impersonation_role_id,
       keyword_init: true
@@ -2091,6 +2197,7 @@ module Aws::WorkMail
     #   <p>The date when the impersonation role was last modified.</p>
     #   @return [Time]
     class GetImpersonationRoleResponse < Struct.new(
+      nil,
       :impersonation_role_id,
       :name,
       :type,
@@ -2110,6 +2217,7 @@ module Aws::WorkMail
     #   <p>The domain from which you want to retrieve details.</p>
     #   @return [String]
     class GetMailDomainRequest < Struct.new(
+      nil,
       :organization_id,
       :domain_name,
       keyword_init: true
@@ -2134,6 +2242,7 @@ module Aws::WorkMail
     #   <p>Indicates the status of a DKIM verification.</p>
     #   @return [String]
     class GetMailDomainResponse < Struct.new(
+      nil,
       :records,
       :is_test_domain,
       :is_default,
@@ -2170,6 +2279,7 @@ module Aws::WorkMail
     #            </ul>
     #   @return [String]
     class GetMailboxDetailsRequest < Struct.new(
+      nil,
       :organization_id,
       :user_id,
       keyword_init: true
@@ -2184,6 +2294,7 @@ module Aws::WorkMail
     #   <p>The current mailbox size, in MB, for the specified user.</p>
     #   @return [Float]
     class GetMailboxDetailsResponse < Struct.new(
+      nil,
       :mailbox_quota,
       :mailbox_size,
       keyword_init: true
@@ -2212,6 +2323,7 @@ module Aws::WorkMail
     #   <p>Device user agent the simulated user will report.</p>
     #   @return [String]
     class GetMobileDeviceAccessEffectRequest < Struct.new(
+      nil,
       :organization_id,
       :device_type,
       :device_model,
@@ -2230,6 +2342,7 @@ module Aws::WorkMail
     #   <p>A list of the rules which matched the simulated user input and produced the effect.</p>
     #   @return [Array<Types::MobileDeviceAccessMatchedRule>]
     class GetMobileDeviceAccessEffectResponse < Struct.new(
+      nil,
       :effect,
       :matched_rules,
       keyword_init: true
@@ -2261,6 +2374,7 @@ module Aws::WorkMail
     #   <p>The mobile device to which the override applies. <code>DeviceId</code> is case insensitive.</p>
     #   @return [String]
     class GetMobileDeviceAccessOverrideRequest < Struct.new(
+      nil,
       :organization_id,
       :user_id,
       :device_id,
@@ -2288,6 +2402,7 @@ module Aws::WorkMail
     #   <p>The date the description was last modified.</p>
     #   @return [Time]
     class GetMobileDeviceAccessOverrideResponse < Struct.new(
+      nil,
       :user_id,
       :device_id,
       :effect,
@@ -2308,6 +2423,7 @@ module Aws::WorkMail
     #            The Personal Access Token ID.</p>
     #   @return [String]
     class GetPersonalAccessTokenMetadataRequest < Struct.new(
+      nil,
       :organization_id,
       :personal_access_token_id,
       keyword_init: true
@@ -2350,6 +2466,7 @@ module Aws::WorkMail
     #         </p>
     #   @return [Array<String>]
     class GetPersonalAccessTokenMetadataResponse < Struct.new(
+      nil,
       :personal_access_token_id,
       :user_id,
       :name,
@@ -2382,6 +2499,7 @@ module Aws::WorkMail
     #   <p>The date indicating when the group was disabled from WorkMail use.</p>
     #   @return [Time]
     class Group < Struct.new(
+      nil,
       :id,
       :email,
       :name,
@@ -2401,6 +2519,7 @@ module Aws::WorkMail
     #   <p>Group name that matched the group.</p>
     #   @return [String]
     class GroupIdentifier < Struct.new(
+      nil,
       :group_id,
       :group_name,
       keyword_init: true
@@ -2420,6 +2539,7 @@ module Aws::WorkMail
     #            The Amazon Resource Name (ARN) of IAMIdentity Center Application for WorkMail. Must be created by the WorkMail API, see CreateIdentityCenterApplication.</p>
     #   @return [String]
     class IdentityCenterConfiguration < Struct.new(
+      nil,
       :instance_arn,
       :application_arn,
       keyword_init: true
@@ -2435,6 +2555,7 @@ module Aws::WorkMail
     #   <p>The name of the rule that matched the input.</p>
     #   @return [String]
     class ImpersonationMatchedRule < Struct.new(
+      nil,
       :impersonation_rule_id,
       :name,
       keyword_init: true
@@ -2459,6 +2580,7 @@ module Aws::WorkMail
     #   <p>The date when the impersonation role was last modified.</p>
     #   @return [Time]
     class ImpersonationRole < Struct.new(
+      nil,
       :impersonation_role_id,
       :name,
       :type,
@@ -2490,6 +2612,7 @@ module Aws::WorkMail
     #   <p>A list of user IDs that don't match the rule.</p>
     #   @return [Array<String>]
     class ImpersonationRule < Struct.new(
+      nil,
       :impersonation_rule_id,
       :name,
       :description,
@@ -2507,6 +2630,7 @@ module Aws::WorkMail
     # @!attribute message
     #   @return [String]
     class InvalidConfigurationException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -2518,6 +2642,7 @@ module Aws::WorkMail
     # @!attribute message
     #   @return [String]
     class InvalidCustomSesConfigurationException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -2528,6 +2653,7 @@ module Aws::WorkMail
     # @!attribute message
     #   @return [String]
     class InvalidParameterException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -2539,6 +2665,7 @@ module Aws::WorkMail
     # @!attribute message
     #   @return [String]
     class InvalidPasswordException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -2550,6 +2677,7 @@ module Aws::WorkMail
     #   <p>The Amazon Resource Name (ARN) of the Lambda that acts as the availability provider.</p>
     #   @return [String]
     class LambdaAvailabilityProvider < Struct.new(
+      nil,
       :lambda_arn,
       keyword_init: true
     )
@@ -2560,6 +2688,7 @@ module Aws::WorkMail
     # @!attribute message
     #   @return [String]
     class LimitExceededException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -2570,6 +2699,7 @@ module Aws::WorkMail
     #   <p>The identifier for the organization.</p>
     #   @return [String]
     class ListAccessControlRulesRequest < Struct.new(
+      nil,
       :organization_id,
       keyword_init: true
     )
@@ -2580,6 +2710,7 @@ module Aws::WorkMail
     #   <p>The access control rules.</p>
     #   @return [Array<Types::AccessControlRule>]
     class ListAccessControlRulesResponse < Struct.new(
+      nil,
       :rules,
       keyword_init: true
     )
@@ -2600,6 +2731,7 @@ module Aws::WorkMail
     #   <p>The maximum number of results to return in a single call.</p>
     #   @return [Integer]
     class ListAliasesRequest < Struct.new(
+      nil,
       :organization_id,
       :entity_id,
       :next_token,
@@ -2617,6 +2749,7 @@ module Aws::WorkMail
     #            are no more results to return.</p>
     #   @return [String]
     class ListAliasesResponse < Struct.new(
+      nil,
       :aliases,
       :next_token,
       keyword_init: true
@@ -2635,6 +2768,7 @@ module Aws::WorkMail
     #   <p>The token to use to retrieve the next page of results. The first call does not require a token.</p>
     #   @return [String]
     class ListAvailabilityConfigurationsRequest < Struct.new(
+      nil,
       :organization_id,
       :max_results,
       :next_token,
@@ -2650,6 +2784,7 @@ module Aws::WorkMail
     #   <p>The token to use to retrieve the next page of results. The value is <code>null</code> when there are no further results to return.</p>
     #   @return [String]
     class ListAvailabilityConfigurationsResponse < Struct.new(
+      nil,
       :availability_configurations,
       :next_token,
       keyword_init: true
@@ -2684,6 +2819,7 @@ module Aws::WorkMail
     #   <p>The maximum number of results to return in a single call.</p>
     #   @return [Integer]
     class ListGroupMembersRequest < Struct.new(
+      nil,
       :organization_id,
       :group_id,
       :next_token,
@@ -2701,6 +2837,7 @@ module Aws::WorkMail
     #            contain any tokens.</p>
     #   @return [String]
     class ListGroupMembersResponse < Struct.new(
+      nil,
       :members,
       :next_token,
       keyword_init: true
@@ -2719,6 +2856,7 @@ module Aws::WorkMail
     #   <p>Filters only groups with the provided state.</p>
     #   @return [String]
     class ListGroupsFilters < Struct.new(
+      nil,
       :name_prefix,
       :primary_email_prefix,
       :state,
@@ -2732,6 +2870,7 @@ module Aws::WorkMail
     #   <p>Filters only group names that start with the provided name prefix.</p>
     #   @return [String]
     class ListGroupsForEntityFilters < Struct.new(
+      nil,
       :group_name_prefix,
       keyword_init: true
     )
@@ -2766,6 +2905,7 @@ module Aws::WorkMail
     #   <p>The maximum number of results to return in a single call.</p>
     #   @return [Integer]
     class ListGroupsForEntityRequest < Struct.new(
+      nil,
       :organization_id,
       :entity_id,
       :filters,
@@ -2783,6 +2923,7 @@ module Aws::WorkMail
     #   <p>The token to use to retrieve the next page of results. This value is `null` when there are no more results to return.</p>
     #   @return [String]
     class ListGroupsForEntityResponse < Struct.new(
+      nil,
       :groups,
       :next_token,
       keyword_init: true
@@ -2804,6 +2945,7 @@ module Aws::WorkMail
     #   <p>Limit the search results based on the filter criteria. Only one filter per request is supported.</p>
     #   @return [Types::ListGroupsFilters]
     class ListGroupsRequest < Struct.new(
+      nil,
       :organization_id,
       :next_token,
       :max_results,
@@ -2821,6 +2963,7 @@ module Aws::WorkMail
     #            are no more results to return.</p>
     #   @return [String]
     class ListGroupsResponse < Struct.new(
+      nil,
       :groups,
       :next_token,
       keyword_init: true
@@ -2839,6 +2982,7 @@ module Aws::WorkMail
     #   <p>The maximum number of results returned in a single call.</p>
     #   @return [Integer]
     class ListImpersonationRolesRequest < Struct.new(
+      nil,
       :organization_id,
       :next_token,
       :max_results,
@@ -2855,6 +2999,7 @@ module Aws::WorkMail
     #            there are no results to return.</p>
     #   @return [String]
     class ListImpersonationRolesResponse < Struct.new(
+      nil,
       :roles,
       :next_token,
       keyword_init: true
@@ -2872,6 +3017,7 @@ module Aws::WorkMail
     #   <p>The token to use to retrieve the next page of results. The first call does not require a token.</p>
     #   @return [String]
     class ListMailDomainsRequest < Struct.new(
+      nil,
       :organization_id,
       :max_results,
       :next_token,
@@ -2887,6 +3033,7 @@ module Aws::WorkMail
     #   <p>The token to use to retrieve the next page of results. The value becomes <code>null</code> when there are no more results to return.</p>
     #   @return [String]
     class ListMailDomainsResponse < Struct.new(
+      nil,
       :mail_domains,
       :next_token,
       keyword_init: true
@@ -2904,6 +3051,7 @@ module Aws::WorkMail
     #   <p>The maximum number of results to return in a single call.</p>
     #   @return [Integer]
     class ListMailboxExportJobsRequest < Struct.new(
+      nil,
       :organization_id,
       :next_token,
       :max_results,
@@ -2919,6 +3067,7 @@ module Aws::WorkMail
     #   <p>The token to use to retrieve the next page of results.</p>
     #   @return [String]
     class ListMailboxExportJobsResponse < Struct.new(
+      nil,
       :jobs,
       :next_token,
       keyword_init: true
@@ -2954,6 +3103,7 @@ module Aws::WorkMail
     #   <p>The maximum number of results to return in a single call.</p>
     #   @return [Integer]
     class ListMailboxPermissionsRequest < Struct.new(
+      nil,
       :organization_id,
       :entity_id,
       :next_token,
@@ -2971,6 +3121,7 @@ module Aws::WorkMail
     #            are no more results to return.</p>
     #   @return [String]
     class ListMailboxPermissionsResponse < Struct.new(
+      nil,
       :permissions,
       :next_token,
       keyword_init: true
@@ -3008,6 +3159,7 @@ module Aws::WorkMail
     #   <p>The maximum number of results to return in a single call.</p>
     #   @return [Integer]
     class ListMobileDeviceAccessOverridesRequest < Struct.new(
+      nil,
       :organization_id,
       :user_id,
       :device_id,
@@ -3025,6 +3177,7 @@ module Aws::WorkMail
     #   <p>The token to use to retrieve the next page of results. The value is “null” when there are no more results to return.</p>
     #   @return [String]
     class ListMobileDeviceAccessOverridesResponse < Struct.new(
+      nil,
       :overrides,
       :next_token,
       keyword_init: true
@@ -3036,6 +3189,7 @@ module Aws::WorkMail
     #   <p>The WorkMail organization for which to list the rules.</p>
     #   @return [String]
     class ListMobileDeviceAccessRulesRequest < Struct.new(
+      nil,
       :organization_id,
       keyword_init: true
     )
@@ -3046,6 +3200,7 @@ module Aws::WorkMail
     #   <p>The list of mobile device access rules that exist under the specified WorkMail organization.</p>
     #   @return [Array<Types::MobileDeviceAccessRule>]
     class ListMobileDeviceAccessRulesResponse < Struct.new(
+      nil,
       :rules,
       keyword_init: true
     )
@@ -3060,6 +3215,7 @@ module Aws::WorkMail
     #   <p>The maximum number of results to return in a single call.</p>
     #   @return [Integer]
     class ListOrganizationsRequest < Struct.new(
+      nil,
       :next_token,
       :max_results,
       keyword_init: true
@@ -3076,6 +3232,7 @@ module Aws::WorkMail
     #            are no more results to return.</p>
     #   @return [String]
     class ListOrganizationsResponse < Struct.new(
+      nil,
       :organization_summaries,
       :next_token,
       keyword_init: true
@@ -3102,6 +3259,7 @@ module Aws::WorkMail
     #         </p>
     #   @return [Integer]
     class ListPersonalAccessTokensRequest < Struct.new(
+      nil,
       :organization_id,
       :user_id,
       :next_token,
@@ -3121,6 +3279,7 @@ module Aws::WorkMail
     #         </p>
     #   @return [Array<Types::PersonalAccessTokenSummary>]
     class ListPersonalAccessTokensResponse < Struct.new(
+      nil,
       :next_token,
       :personal_access_token_summaries,
       keyword_init: true
@@ -3155,6 +3314,7 @@ module Aws::WorkMail
     #   <p>The number of maximum results in a page.</p>
     #   @return [Integer]
     class ListResourceDelegatesRequest < Struct.new(
+      nil,
       :organization_id,
       :resource_id,
       :next_token,
@@ -3173,6 +3333,7 @@ module Aws::WorkMail
     #            token is empty.</p>
     #   @return [String]
     class ListResourceDelegatesResponse < Struct.new(
+      nil,
       :delegates,
       :next_token,
       keyword_init: true
@@ -3191,6 +3352,7 @@ module Aws::WorkMail
     #   <p>Filters only resource with the provided state.</p>
     #   @return [String]
     class ListResourcesFilters < Struct.new(
+      nil,
       :name_prefix,
       :primary_email_prefix,
       :state,
@@ -3213,6 +3375,7 @@ module Aws::WorkMail
     #   <p>Limit the resource search results based on the filter criteria. You can only use one filter per request.</p>
     #   @return [Types::ListResourcesFilters]
     class ListResourcesRequest < Struct.new(
+      nil,
       :organization_id,
       :next_token,
       :max_results,
@@ -3231,6 +3394,7 @@ module Aws::WorkMail
     #            is empty.</p>
     #   @return [String]
     class ListResourcesResponse < Struct.new(
+      nil,
       :resources,
       :next_token,
       keyword_init: true
@@ -3242,6 +3406,7 @@ module Aws::WorkMail
     #   <p>The resource ARN.</p>
     #   @return [String]
     class ListTagsForResourceRequest < Struct.new(
+      nil,
       :resource_arn,
       keyword_init: true
     )
@@ -3252,6 +3417,7 @@ module Aws::WorkMail
     #   <p>A list of tag key-value pairs.</p>
     #   @return [Array<Types::Tag>]
     class ListTagsForResourceResponse < Struct.new(
+      nil,
       :tags,
       keyword_init: true
     )
@@ -3275,6 +3441,7 @@ module Aws::WorkMail
     #   <p>Filters only users with the ID from the IAM Identity Center.</p>
     #   @return [String]
     class ListUsersFilters < Struct.new(
+      nil,
       :username_prefix,
       :display_name_prefix,
       :primary_email_prefix,
@@ -3299,6 +3466,7 @@ module Aws::WorkMail
     #   <p>Limit the user search results based on the filter criteria. You can only use one filter per request.</p>
     #   @return [Types::ListUsersFilters]
     class ListUsersRequest < Struct.new(
+      nil,
       :organization_id,
       :next_token,
       :max_results,
@@ -3316,6 +3484,7 @@ module Aws::WorkMail
     #            there are no more results to return.</p>
     #   @return [String]
     class ListUsersResponse < Struct.new(
+      nil,
       :users,
       :next_token,
       keyword_init: true
@@ -3327,6 +3496,7 @@ module Aws::WorkMail
     # @!attribute message
     #   @return [String]
     class MailDomainInUseException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -3337,6 +3507,7 @@ module Aws::WorkMail
     # @!attribute message
     #   @return [String]
     class MailDomainNotFoundException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -3348,6 +3519,7 @@ module Aws::WorkMail
     # @!attribute message
     #   @return [String]
     class MailDomainStateException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -3362,6 +3534,7 @@ module Aws::WorkMail
     #   <p>Whether the domain is default or not.</p>
     #   @return [Boolean]
     class MailDomainSummary < Struct.new(
+      nil,
       :domain_name,
       :default_domain,
       keyword_init: true
@@ -3404,6 +3577,7 @@ module Aws::WorkMail
     #   <p>The mailbox export job end timestamp.</p>
     #   @return [Time]
     class MailboxExportJob < Struct.new(
+      nil,
       :job_id,
       :entity_id,
       :description,
@@ -3443,6 +3617,7 @@ module Aws::WorkMail
     #   <p>The date indicating when the member was disabled from WorkMail use.</p>
     #   @return [Time]
     class Member < Struct.new(
+      nil,
       :id,
       :name,
       :type,
@@ -3462,6 +3637,7 @@ module Aws::WorkMail
     #   <p>Name of a rule that a simulated user matches.</p>
     #   @return [String]
     class MobileDeviceAccessMatchedRule < Struct.new(
+      nil,
       :mobile_device_access_rule_id,
       :name,
       keyword_init: true
@@ -3489,6 +3665,7 @@ module Aws::WorkMail
     #   <p>The date the override was last modified.</p>
     #   @return [Time]
     class MobileDeviceAccessOverride < Struct.new(
+      nil,
       :user_id,
       :device_id,
       :effect,
@@ -3544,6 +3721,7 @@ module Aws::WorkMail
     #   <p>The date and time at which an access rule was modified.</p>
     #   @return [Time]
     class MobileDeviceAccessRule < Struct.new(
+      nil,
       :mobile_device_access_rule_id,
       :name,
       :description,
@@ -3567,6 +3745,7 @@ module Aws::WorkMail
     # @!attribute message
     #   @return [String]
     class NameAvailabilityException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -3578,6 +3757,7 @@ module Aws::WorkMail
     # @!attribute message
     #   @return [String]
     class OrganizationNotFoundException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -3589,6 +3769,7 @@ module Aws::WorkMail
     # @!attribute message
     #   @return [String]
     class OrganizationStateException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -3614,6 +3795,7 @@ module Aws::WorkMail
     #   <p>The state associated with the organization.</p>
     #   @return [String]
     class OrganizationSummary < Struct.new(
+      nil,
       :organization_id,
       :alias,
       :default_mail_domain,
@@ -3642,6 +3824,7 @@ module Aws::WorkMail
     #            mailbox.</p>
     #   @return [Array<String>]
     class Permission < Struct.new(
+      nil,
       :grantee_id,
       :grantee_type,
       :permission_values,
@@ -3676,6 +3859,7 @@ module Aws::WorkMail
     #         </p>
     #   @return [Integer]
     class PersonalAccessTokenConfiguration < Struct.new(
+      nil,
       :status,
       :lifetime_in_days,
       keyword_init: true
@@ -3722,6 +3906,7 @@ module Aws::WorkMail
     #         </p>
     #   @return [Array<String>]
     class PersonalAccessTokenSummary < Struct.new(
+      nil,
       :personal_access_token_id,
       :user_id,
       :name,
@@ -3775,6 +3960,7 @@ module Aws::WorkMail
     #   <p>Impersonation role IDs to exclude from the rule.</p>
     #   @return [Array<String>]
     class PutAccessControlRuleRequest < Struct.new(
+      nil,
       :name,
       :effect,
       :description,
@@ -3793,6 +3979,7 @@ module Aws::WorkMail
     end
 
     class PutAccessControlRuleResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -3808,6 +3995,7 @@ module Aws::WorkMail
     #   <p>The Amazon Resource Name (ARN) of the CloudWatch Log group associated with the email monitoring configuration.</p>
     #   @return [String]
     class PutEmailMonitoringConfigurationRequest < Struct.new(
+      nil,
       :organization_id,
       :role_arn,
       :log_group_arn,
@@ -3817,6 +4005,7 @@ module Aws::WorkMail
     end
 
     class PutEmailMonitoringConfigurationResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -3840,6 +4029,7 @@ module Aws::WorkMail
     #         </p>
     #   @return [Types::PersonalAccessTokenConfiguration]
     class PutIdentityProviderConfigurationRequest < Struct.new(
+      nil,
       :organization_id,
       :authentication_mode,
       :identity_center_configuration,
@@ -3850,6 +4040,7 @@ module Aws::WorkMail
     end
 
     class PutIdentityProviderConfigurationResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -3862,6 +4053,7 @@ module Aws::WorkMail
     #   <p>Enforces or suspends a policy after it's applied.</p>
     #   @return [Boolean]
     class PutInboundDmarcSettingsRequest < Struct.new(
+      nil,
       :organization_id,
       :enforced,
       keyword_init: true
@@ -3870,6 +4062,7 @@ module Aws::WorkMail
     end
 
     class PutInboundDmarcSettingsResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -3920,6 +4113,7 @@ module Aws::WorkMail
     #            mailbox.</p>
     #   @return [Array<String>]
     class PutMailboxPermissionsRequest < Struct.new(
+      nil,
       :organization_id,
       :entity_id,
       :grantee_id,
@@ -3930,6 +4124,7 @@ module Aws::WorkMail
     end
 
     class PutMailboxPermissionsResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -3965,6 +4160,7 @@ module Aws::WorkMail
     #   <p>A description of the override.</p>
     #   @return [String]
     class PutMobileDeviceAccessOverrideRequest < Struct.new(
+      nil,
       :organization_id,
       :user_id,
       :device_id,
@@ -3976,6 +4172,7 @@ module Aws::WorkMail
     end
 
     class PutMobileDeviceAccessOverrideResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -3997,6 +4194,7 @@ module Aws::WorkMail
     #   <p>The retention policy folder configurations.</p>
     #   @return [Array<Types::FolderConfiguration>]
     class PutRetentionPolicyRequest < Struct.new(
+      nil,
       :organization_id,
       :id,
       :name,
@@ -4008,6 +4206,7 @@ module Aws::WorkMail
     end
 
     class PutRetentionPolicyResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -4022,6 +4221,7 @@ module Aws::WorkMail
     #   <p>The username used to authenticate the remote EWS server.</p>
     #   @return [String]
     class RedactedEwsAvailabilityProvider < Struct.new(
+      nil,
       :ews_endpoint,
       :ews_username,
       keyword_init: true
@@ -4039,6 +4239,7 @@ module Aws::WorkMail
     #   <p>The name of the mail domain to create in WorkMail and SES.</p>
     #   @return [String]
     class RegisterMailDomainRequest < Struct.new(
+      nil,
       :client_token,
       :organization_id,
       :domain_name,
@@ -4048,6 +4249,7 @@ module Aws::WorkMail
     end
 
     class RegisterMailDomainResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -4073,6 +4275,7 @@ module Aws::WorkMail
     #   <p>The email for the user, group, or resource to be updated.</p>
     #   @return [String]
     class RegisterToWorkMailRequest < Struct.new(
+      nil,
       :organization_id,
       :entity_id,
       :email,
@@ -4082,6 +4285,7 @@ module Aws::WorkMail
     end
 
     class RegisterToWorkMailResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -4091,6 +4295,7 @@ module Aws::WorkMail
     # @!attribute message
     #   @return [String]
     class ReservedNameException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -4108,6 +4313,7 @@ module Aws::WorkMail
     #   <p>The new password for the user.</p>
     #   @return [String]
     class ResetPasswordRequest < Struct.new(
+      nil,
       :organization_id,
       :user_id,
       :password,
@@ -4117,6 +4323,7 @@ module Aws::WorkMail
     end
 
     class ResetPasswordResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -4148,6 +4355,7 @@ module Aws::WorkMail
     #   <p>Resource description.</p>
     #   @return [String]
     class Resource < Struct.new(
+      nil,
       :id,
       :email,
       :name,
@@ -4165,6 +4373,7 @@ module Aws::WorkMail
     # @!attribute message
     #   @return [String]
     class ResourceNotFoundException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -4211,6 +4420,7 @@ module Aws::WorkMail
     #   <p>The S3 bucket prefix.</p>
     #   @return [String]
     class StartMailboxExportJobRequest < Struct.new(
+      nil,
       :client_token,
       :organization_id,
       :entity_id,
@@ -4228,6 +4438,7 @@ module Aws::WorkMail
     #   <p>The job ID.</p>
     #   @return [String]
     class StartMailboxExportJobResponse < Struct.new(
+      nil,
       :job_id,
       keyword_init: true
     )
@@ -4242,6 +4453,7 @@ module Aws::WorkMail
     #   <p>The value of the tag.</p>
     #   @return [String]
     class Tag < Struct.new(
+      nil,
       :key,
       :value,
       keyword_init: true
@@ -4256,6 +4468,7 @@ module Aws::WorkMail
     #   <p>The tag key-value pairs.</p>
     #   @return [Array<Types::Tag>]
     class TagResourceRequest < Struct.new(
+      nil,
       :resource_arn,
       :tags,
       keyword_init: true
@@ -4264,6 +4477,7 @@ module Aws::WorkMail
     end
 
     class TagResourceResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -4282,6 +4496,7 @@ module Aws::WorkMail
     #   <p>Describes a Lambda based availability provider.</p>
     #   @return [Types::LambdaAvailabilityProvider]
     class TestAvailabilityConfigurationRequest < Struct.new(
+      nil,
       :organization_id,
       :domain_name,
       :ews_provider,
@@ -4298,6 +4513,7 @@ module Aws::WorkMail
     #   <p>String containing the reason for a failed test if <code>TestPassed</code> is false.</p>
     #   @return [String]
     class TestAvailabilityConfigurationResponse < Struct.new(
+      nil,
       :test_passed,
       :failure_reason,
       keyword_init: true
@@ -4314,6 +4530,7 @@ module Aws::WorkMail
     # @!attribute message
     #   @return [String]
     class TooManyTagsException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -4324,6 +4541,7 @@ module Aws::WorkMail
     # @!attribute message
     #   @return [String]
     class UnsupportedOperationException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -4337,6 +4555,7 @@ module Aws::WorkMail
     #   <p>The tag keys.</p>
     #   @return [Array<String>]
     class UntagResourceRequest < Struct.new(
+      nil,
       :resource_arn,
       :tag_keys,
       keyword_init: true
@@ -4345,6 +4564,7 @@ module Aws::WorkMail
     end
 
     class UntagResourceResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -4368,6 +4588,7 @@ module Aws::WorkMail
     #            previously stored provider will be overridden by the one provided.</p>
     #   @return [Types::LambdaAvailabilityProvider]
     class UpdateAvailabilityConfigurationRequest < Struct.new(
+      nil,
       :organization_id,
       :domain_name,
       :ews_provider,
@@ -4378,6 +4599,7 @@ module Aws::WorkMail
     end
 
     class UpdateAvailabilityConfigurationResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -4390,6 +4612,7 @@ module Aws::WorkMail
     #   <p>The domain name that will become the default domain.</p>
     #   @return [String]
     class UpdateDefaultMailDomainRequest < Struct.new(
+      nil,
       :organization_id,
       :domain_name,
       keyword_init: true
@@ -4398,6 +4621,7 @@ module Aws::WorkMail
     end
 
     class UpdateDefaultMailDomainResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -4425,6 +4649,7 @@ module Aws::WorkMail
     #   <p>If enabled, the group is hidden from the global address list.</p>
     #   @return [Boolean]
     class UpdateGroupRequest < Struct.new(
+      nil,
       :organization_id,
       :group_id,
       :hidden_from_global_address_list,
@@ -4434,6 +4659,7 @@ module Aws::WorkMail
     end
 
     class UpdateGroupResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -4458,6 +4684,7 @@ module Aws::WorkMail
     #   <p>The updated list of rules.</p>
     #   @return [Array<Types::ImpersonationRule>]
     class UpdateImpersonationRoleRequest < Struct.new(
+      nil,
       :organization_id,
       :impersonation_role_id,
       :name,
@@ -4470,6 +4697,7 @@ module Aws::WorkMail
     end
 
     class UpdateImpersonationRoleResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -4498,6 +4726,7 @@ module Aws::WorkMail
     #   <p>The updated mailbox quota, in MB, for the specified user.</p>
     #   @return [Integer]
     class UpdateMailboxQuotaRequest < Struct.new(
+      nil,
       :organization_id,
       :user_id,
       :mailbox_quota,
@@ -4507,6 +4736,7 @@ module Aws::WorkMail
     end
 
     class UpdateMailboxQuotaResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -4552,6 +4782,7 @@ module Aws::WorkMail
     #   <p>User agents that the updated rule <b>will not</b> match. All other user agents will match.</p>
     #   @return [Array<String>]
     class UpdateMobileDeviceAccessRuleRequest < Struct.new(
+      nil,
       :organization_id,
       :mobile_device_access_rule_id,
       :name,
@@ -4571,6 +4802,7 @@ module Aws::WorkMail
     end
 
     class UpdateMobileDeviceAccessRuleResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -4598,6 +4830,7 @@ module Aws::WorkMail
     #   <p>The value of the email to be updated as primary.</p>
     #   @return [String]
     class UpdatePrimaryEmailAddressRequest < Struct.new(
+      nil,
       :organization_id,
       :entity_id,
       :email,
@@ -4607,6 +4840,7 @@ module Aws::WorkMail
     end
 
     class UpdatePrimaryEmailAddressResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -4647,6 +4881,7 @@ module Aws::WorkMail
     #   <p>If enabled, the resource is hidden from the global address list.</p>
     #   @return [Boolean]
     class UpdateResourceRequest < Struct.new(
+      nil,
       :organization_id,
       :resource_id,
       :name,
@@ -4660,6 +4895,7 @@ module Aws::WorkMail
     end
 
     class UpdateResourceResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -4733,6 +4969,7 @@ module Aws::WorkMail
     #   <p>User ID from the IAM Identity Center. If this parameter is empty it will be updated automatically when the user logs in for the first time to the mailbox associated with WorkMail.</p>
     #   @return [String]
     class UpdateUserRequest < Struct.new(
+      nil,
       :organization_id,
       :user_id,
       :role,
@@ -4757,6 +4994,7 @@ module Aws::WorkMail
     end
 
     class UpdateUserResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -4794,6 +5032,7 @@ module Aws::WorkMail
     #   <p>Identity store ID from the IAM Identity Center. If this parameter is empty it will be updated automatically when the user logs in for the first time to the mailbox associated with WorkMail.</p>
     #   @return [String]
     class User < Struct.new(
+      nil,
       :id,
       :email,
       :name,

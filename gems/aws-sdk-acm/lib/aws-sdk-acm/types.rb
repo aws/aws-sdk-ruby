@@ -10,6 +10,7 @@ module Aws::ACM
     # @!attribute message
     #   @return [String]
     class AccessDeniedException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -23,6 +24,7 @@ module Aws::ACM
     #   <p>The key-value pair that defines the tag. The tag value is optional.</p>
     #   @return [Array<Types::Tag>]
     class AddTagsToCertificateRequest < Struct.new(
+      nil,
       :certificate_arn,
       :tags,
       keyword_init: true
@@ -113,6 +115,7 @@ module Aws::ACM
     #   <p>Value that specifies whether to add the certificate to a transparency log. Certificate transparency makes it possible to detect SSL certificates that have been mistakenly or maliciously issued. A browser might respond to certificate that has not been logged by showing an error message. The logs are cryptographically secure. </p>
     #   @return [Types::CertificateOptions]
     class CertificateDetail < Struct.new(
+      nil,
       :certificate_arn,
       :domain_name,
       :subject_alternative_names,
@@ -153,6 +156,7 @@ module Aws::ACM
     #   <p>You can opt in to allow the export of your certificates by specifying <code>ENABLED</code>.</p>
     #   @return [String]
     class CertificateOptions < Struct.new(
+      nil,
       :certificate_transparency_logging_preference,
       :export,
       keyword_init: true
@@ -222,6 +226,7 @@ module Aws::ACM
     #   <p>Identifies the Amazon Web Services service that manages the certificate issued by ACM.</p>
     #   @return [String]
     class CertificateSummary < Struct.new(
+      nil,
       :certificate_arn,
       :domain_name,
       :subject_alternative_name_summaries,
@@ -251,6 +256,7 @@ module Aws::ACM
     # @!attribute message
     #   @return [String]
     class ConflictException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -261,6 +267,7 @@ module Aws::ACM
     #   <p>String that contains the ARN of the ACM certificate to be deleted. This must be of the form:</p> <p> <code>arn:aws:acm:region:123456789012:certificate/12345678-1234-1234-1234-123456789012</code> </p> <p>For more information about ARNs, see <a href="https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html">Amazon Resource Names (ARNs)</a>.</p>
     #   @return [String]
     class DeleteCertificateRequest < Struct.new(
+      nil,
       :certificate_arn,
       keyword_init: true
     )
@@ -271,6 +278,7 @@ module Aws::ACM
     #   <p>The Amazon Resource Name (ARN) of the ACM certificate. The ARN must have the following form:</p> <p> <code>arn:aws:acm:region:123456789012:certificate/12345678-1234-1234-1234-123456789012</code> </p> <p>For more information about ARNs, see <a href="https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html">Amazon Resource Names (ARNs)</a>.</p>
     #   @return [String]
     class DescribeCertificateRequest < Struct.new(
+      nil,
       :certificate_arn,
       keyword_init: true
     )
@@ -281,6 +289,7 @@ module Aws::ACM
     #   <p>Metadata about an ACM certificate.</p>
     #   @return [Types::CertificateDetail]
     class DescribeCertificateResponse < Struct.new(
+      nil,
       :certificate,
       keyword_init: true
     )
@@ -310,6 +319,7 @@ module Aws::ACM
     #   <p>Specifies the domain validation method.</p>
     #   @return [String]
     class DomainValidation < Struct.new(
+      nil,
       :domain_name,
       :validation_emails,
       :validation_domain,
@@ -330,6 +340,7 @@ module Aws::ACM
     #   <p>The domain name that you want ACM to use to send you validation emails. This domain name is the suffix of the email addresses that you want ACM to use. This must be the same as the <code>DomainName</code> value or a superdomain of the <code>DomainName</code> value. For example, if you request a certificate for <code>testing.example.com</code>, you can specify <code>example.com</code> for this value. In that case, ACM sends domain validation emails to the following five addresses:</p> <ul> <li> <p>admin@example.com</p> </li> <li> <p>administrator@example.com</p> </li> <li> <p>hostmaster@example.com</p> </li> <li> <p>postmaster@example.com</p> </li> <li> <p>webmaster@example.com</p> </li> </ul>
     #   @return [String]
     class DomainValidationOption < Struct.new(
+      nil,
       :domain_name,
       :validation_domain,
       keyword_init: true
@@ -342,6 +353,7 @@ module Aws::ACM
     #   <p>Specifies the number of days prior to certificate expiration when ACM starts generating <code>EventBridge</code> events. ACM sends one event per day per certificate until the certificate expires. By default, accounts receive events starting 45 days before certificate expiration.</p>
     #   @return [Integer]
     class ExpiryEventsConfiguration < Struct.new(
+      nil,
       :days_before_expiry,
       keyword_init: true
     )
@@ -355,6 +367,7 @@ module Aws::ACM
     #   <p>Passphrase to associate with the encrypted exported private key. </p> <note> <p>When creating your passphrase, you can use any ASCII character except #, $, or %.</p> </note> <p>If you want to later decrypt the private key, you must have the passphrase. You can use the following OpenSSL command to decrypt a private key. After entering the command, you are prompted for the passphrase.</p> <p> <code>openssl rsa -in encrypted_key.pem -out decrypted_key.pem</code> </p>
     #   @return [String]
     class ExportCertificateRequest < Struct.new(
+      nil,
       :certificate_arn,
       :passphrase,
       keyword_init: true
@@ -372,6 +385,7 @@ module Aws::ACM
     #   <p>The encrypted private key associated with the public key in the certificate. The key is output in PKCS #8 format and is base64 PEM-encoded. </p>
     #   @return [String]
     class ExportCertificateResponse < Struct.new(
+      nil,
       :certificate,
       :certificate_chain,
       :private_key,
@@ -388,6 +402,7 @@ module Aws::ACM
     #   <p>An object identifier (OID) for the extension value. OIDs are strings of numbers separated by periods. The following OIDs are defined in RFC 3280 and RFC 5280. </p> <ul> <li> <p> <code>1.3.6.1.5.5.7.3.1 (TLS_WEB_SERVER_AUTHENTICATION)</code> </p> </li> <li> <p> <code>1.3.6.1.5.5.7.3.2 (TLS_WEB_CLIENT_AUTHENTICATION)</code> </p> </li> <li> <p> <code>1.3.6.1.5.5.7.3.3 (CODE_SIGNING)</code> </p> </li> <li> <p> <code>1.3.6.1.5.5.7.3.4 (EMAIL_PROTECTION)</code> </p> </li> <li> <p> <code>1.3.6.1.5.5.7.3.8 (TIME_STAMPING)</code> </p> </li> <li> <p> <code>1.3.6.1.5.5.7.3.9 (OCSP_SIGNING)</code> </p> </li> <li> <p> <code>1.3.6.1.5.5.7.3.5 (IPSEC_END_SYSTEM)</code> </p> </li> <li> <p> <code>1.3.6.1.5.5.7.3.6 (IPSEC_TUNNEL)</code> </p> </li> <li> <p> <code>1.3.6.1.5.5.7.3.7 (IPSEC_USER)</code> </p> </li> </ul>
     #   @return [String]
     class ExtendedKeyUsage < Struct.new(
+      nil,
       :name,
       :oid,
       keyword_init: true
@@ -412,6 +427,7 @@ module Aws::ACM
     #   <p>Identifies the Amazon Web Services service that manages the certificate issued by ACM.</p>
     #   @return [String]
     class Filters < Struct.new(
+      nil,
       :extended_key_usage,
       :key_usage,
       :key_types,
@@ -426,6 +442,7 @@ module Aws::ACM
     #   <p>Expiration events configuration options associated with the Amazon Web Services account.</p>
     #   @return [Types::ExpiryEventsConfiguration]
     class GetAccountConfigurationResponse < Struct.new(
+      nil,
       :expiry_events,
       keyword_init: true
     )
@@ -436,6 +453,7 @@ module Aws::ACM
     #   <p>String that contains a certificate ARN in the following format:</p> <p> <code>arn:aws:acm:region:123456789012:certificate/12345678-1234-1234-1234-123456789012</code> </p> <p>For more information about ARNs, see <a href="https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html">Amazon Resource Names (ARNs)</a>.</p>
     #   @return [String]
     class GetCertificateRequest < Struct.new(
+      nil,
       :certificate_arn,
       keyword_init: true
     )
@@ -449,6 +467,7 @@ module Aws::ACM
     #   <p>Certificates forming the requested certificate's chain of trust. The chain consists of the certificate of the issuing CA and the intermediate certificates of any other subordinate CAs. </p>
     #   @return [String]
     class GetCertificateResponse < Struct.new(
+      nil,
       :certificate,
       :certificate_chain,
       keyword_init: true
@@ -464,6 +483,7 @@ module Aws::ACM
     #   <p>The URL hosting the validation token. <code>RedirectFrom</code> must return this content or redirect here.</p>
     #   @return [String]
     class HttpRedirect < Struct.new(
+      nil,
       :redirect_from,
       :redirect_to,
       keyword_init: true
@@ -487,6 +507,7 @@ module Aws::ACM
     #   <p>One or more resource tags to associate with the imported certificate. </p> <p>Note: You cannot apply tags when reimporting a certificate.</p>
     #   @return [Array<Types::Tag>]
     class ImportCertificateRequest < Struct.new(
+      nil,
       :certificate_arn,
       :certificate,
       :private_key,
@@ -501,6 +522,7 @@ module Aws::ACM
     #   <p>The <a href="https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html">Amazon Resource Name (ARN)</a> of the imported certificate.</p>
     #   @return [String]
     class ImportCertificateResponse < Struct.new(
+      nil,
       :certificate_arn,
       keyword_init: true
     )
@@ -511,6 +533,7 @@ module Aws::ACM
     # @!attribute message
     #   @return [String]
     class InvalidArgsException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -521,6 +544,7 @@ module Aws::ACM
     # @!attribute message
     #   @return [String]
     class InvalidArnException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -531,6 +555,7 @@ module Aws::ACM
     # @!attribute message
     #   @return [String]
     class InvalidDomainValidationOptionsException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -541,6 +566,7 @@ module Aws::ACM
     # @!attribute message
     #   @return [String]
     class InvalidParameterException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -551,6 +577,7 @@ module Aws::ACM
     # @!attribute message
     #   @return [String]
     class InvalidStateException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -561,6 +588,7 @@ module Aws::ACM
     # @!attribute message
     #   @return [String]
     class InvalidTagException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -572,6 +600,7 @@ module Aws::ACM
     #   <p>A string value that contains a Key Usage extension name.</p>
     #   @return [String]
     class KeyUsage < Struct.new(
+      nil,
       :name,
       keyword_init: true
     )
@@ -582,6 +611,7 @@ module Aws::ACM
     # @!attribute message
     #   @return [String]
     class LimitExceededException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -607,6 +637,7 @@ module Aws::ACM
     #   <p>Specifies the order of sorted results. If you specify <code>SortOrder</code>, you must also specify <code>SortBy</code>.</p>
     #   @return [String]
     class ListCertificatesRequest < Struct.new(
+      nil,
       :certificate_statuses,
       :includes,
       :next_token,
@@ -625,6 +656,7 @@ module Aws::ACM
     #   <p>A list of ACM certificates.</p>
     #   @return [Array<Types::CertificateSummary>]
     class ListCertificatesResponse < Struct.new(
+      nil,
       :next_token,
       :certificate_summary_list,
       keyword_init: true
@@ -636,6 +668,7 @@ module Aws::ACM
     #   <p>String that contains the ARN of the ACM certificate for which you want to list the tags. This must have the following form:</p> <p> <code>arn:aws:acm:region:123456789012:certificate/12345678-1234-1234-1234-123456789012</code> </p> <p>For more information about ARNs, see <a href="https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html">Amazon Resource Names (ARNs)</a>.</p>
     #   @return [String]
     class ListTagsForCertificateRequest < Struct.new(
+      nil,
       :certificate_arn,
       keyword_init: true
     )
@@ -646,6 +679,7 @@ module Aws::ACM
     #   <p>The key-value pairs that define the applied tags.</p>
     #   @return [Array<Types::Tag>]
     class ListTagsForCertificateResponse < Struct.new(
+      nil,
       :tags,
       keyword_init: true
     )
@@ -659,6 +693,7 @@ module Aws::ACM
     #   <p>Customer-chosen string used to distinguish between calls to <code>PutAccountConfiguration</code>. Idempotency tokens time out after one hour. If you call <code>PutAccountConfiguration</code> multiple times with the same unexpired idempotency token, ACM treats it as the same request and returns the original result. If you change the idempotency token for each call, ACM treats each call as a new request.</p>
     #   @return [String]
     class PutAccountConfigurationRequest < Struct.new(
+      nil,
       :expiry_events,
       :idempotency_token,
       keyword_init: true
@@ -673,6 +708,7 @@ module Aws::ACM
     #   <p>The key-value pair that defines the tag to remove.</p>
     #   @return [Array<Types::Tag>]
     class RemoveTagsFromCertificateRequest < Struct.new(
+      nil,
       :certificate_arn,
       :tags,
       keyword_init: true
@@ -684,6 +720,7 @@ module Aws::ACM
     #   <p>String that contains the ARN of the ACM certificate to be renewed. This must be of the form:</p> <p> <code>arn:aws:acm:region:123456789012:certificate/12345678-1234-1234-1234-123456789012</code> </p> <p>For more information about ARNs, see <a href="https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html">Amazon Resource Names (ARNs)</a>.</p>
     #   @return [String]
     class RenewCertificateRequest < Struct.new(
+      nil,
       :certificate_arn,
       keyword_init: true
     )
@@ -704,6 +741,7 @@ module Aws::ACM
     #   <p>The time at which the renewal summary was last updated.</p>
     #   @return [Time]
     class RenewalSummary < Struct.new(
+      nil,
       :renewal_status,
       :domain_validation_options,
       :renewal_status_reason,
@@ -744,6 +782,7 @@ module Aws::ACM
     #   <p>Identifies the Amazon Web Services service that manages the certificate issued by ACM.</p>
     #   @return [String]
     class RequestCertificateRequest < Struct.new(
+      nil,
       :domain_name,
       :validation_method,
       :subject_alternative_names,
@@ -763,6 +802,7 @@ module Aws::ACM
     #   <p>String that contains the ARN of the issued certificate. This must be of the form:</p> <p> <code>arn:aws:acm:us-east-1:123456789012:certificate/12345678-1234-1234-1234-123456789012</code> </p>
     #   @return [String]
     class RequestCertificateResponse < Struct.new(
+      nil,
       :certificate_arn,
       keyword_init: true
     )
@@ -773,6 +813,7 @@ module Aws::ACM
     # @!attribute message
     #   @return [String]
     class RequestInProgressException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -789,6 +830,7 @@ module Aws::ACM
     #   <p>The base validation domain that will act as the suffix of the email addresses that are used to send the emails. This must be the same as the <code>Domain</code> value or a superdomain of the <code>Domain</code> value. For example, if you requested a certificate for <code>site.subdomain.example.com</code> and specify a <b>ValidationDomain</b> of <code>subdomain.example.com</code>, ACM sends email to the domain registrant, technical contact, and administrative contact in WHOIS and the following five addresses:</p> <ul> <li> <p>admin@subdomain.example.com</p> </li> <li> <p>administrator@subdomain.example.com</p> </li> <li> <p>hostmaster@subdomain.example.com</p> </li> <li> <p>postmaster@subdomain.example.com</p> </li> <li> <p>webmaster@subdomain.example.com</p> </li> </ul>
     #   @return [String]
     class ResendValidationEmailRequest < Struct.new(
+      nil,
       :certificate_arn,
       :domain,
       :validation_domain,
@@ -801,6 +843,7 @@ module Aws::ACM
     # @!attribute message
     #   @return [String]
     class ResourceInUseException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -811,6 +854,7 @@ module Aws::ACM
     # @!attribute message
     #   @return [String]
     class ResourceNotFoundException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -828,6 +872,7 @@ module Aws::ACM
     #   <p>The value of the CNAME record to add to your DNS database. This is supplied by ACM.</p>
     #   @return [String]
     class ResourceRecord < Struct.new(
+      nil,
       :name,
       :type,
       :value,
@@ -843,6 +888,7 @@ module Aws::ACM
     #   <p>Specifies why you revoked the certificate.</p>
     #   @return [String]
     class RevokeCertificateRequest < Struct.new(
+      nil,
       :certificate_arn,
       :revocation_reason,
       keyword_init: true
@@ -854,6 +900,7 @@ module Aws::ACM
     #   <p>The Amazon Resource Name (ARN) of the public or private certificate that was revoked.</p>
     #   @return [String]
     class RevokeCertificateResponse < Struct.new(
+      nil,
       :certificate_arn,
       keyword_init: true
     )
@@ -868,6 +915,7 @@ module Aws::ACM
     #   <p>The value of the tag.</p>
     #   @return [String]
     class Tag < Struct.new(
+      nil,
       :key,
       :value,
       keyword_init: true
@@ -879,6 +927,7 @@ module Aws::ACM
     # @!attribute message
     #   @return [String]
     class TagPolicyException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -889,6 +938,7 @@ module Aws::ACM
     # @!attribute message
     #   @return [String]
     class ThrottlingException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -899,6 +949,7 @@ module Aws::ACM
     # @!attribute message
     #   @return [String]
     class TooManyTagsException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -912,6 +963,7 @@ module Aws::ACM
     #   <p>Use to update the options for your certificate. Currently, you can specify whether to add your certificate to a transparency log or export your certificate. Certificate transparency makes it possible to detect SSL/TLS certificates that have been mistakenly or maliciously issued. Certificates that have not been logged typically produce an error message in a browser. </p>
     #   @return [Types::CertificateOptions]
     class UpdateCertificateOptionsRequest < Struct.new(
+      nil,
       :certificate_arn,
       :options,
       keyword_init: true
@@ -923,6 +975,7 @@ module Aws::ACM
     # @!attribute message
     #   @return [String]
     class ValidationException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )

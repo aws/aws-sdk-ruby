@@ -17,6 +17,7 @@ module Aws::DataPipeline
     #   <p>The date and time to resume the pipeline. By default, the pipeline resumes from the last completed execution.</p>
     #   @return [Time]
     class ActivatePipelineInput < Struct.new(
+      nil,
       :pipeline_id,
       :parameter_values,
       :start_timestamp,
@@ -27,6 +28,7 @@ module Aws::DataPipeline
 
     # <p>Contains the output of ActivatePipeline.</p>
     class ActivatePipelineOutput < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -40,6 +42,7 @@ module Aws::DataPipeline
     #   <p>The tags to add, as key/value pairs.</p>
     #   @return [Array<Types::Tag>]
     class AddTagsInput < Struct.new(
+      nil,
       :pipeline_id,
       :tags,
       keyword_init: true
@@ -49,6 +52,7 @@ module Aws::DataPipeline
 
     # <p>Contains the output of AddTags.</p>
     class AddTagsOutput < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -78,6 +82,7 @@ module Aws::DataPipeline
     #               in the <i>AWS Data Pipeline Developer Guide</i>.</p>
     #   @return [Array<Types::Tag>]
     class CreatePipelineInput < Struct.new(
+      nil,
       :name,
       :unique_id,
       :description,
@@ -92,6 +97,7 @@ module Aws::DataPipeline
     #   <p>The ID that AWS Data Pipeline assigns the newly created pipeline. For example, <code>df-06372391ZG65EXAMPLE</code>.</p>
     #   @return [String]
     class CreatePipelineOutput < Struct.new(
+      nil,
       :pipeline_id,
       keyword_init: true
     )
@@ -109,6 +115,7 @@ module Aws::DataPipeline
     #             running objects finish.</p>
     #   @return [Boolean]
     class DeactivatePipelineInput < Struct.new(
+      nil,
       :pipeline_id,
       :cancel_active,
       keyword_init: true
@@ -118,6 +125,7 @@ module Aws::DataPipeline
 
     # <p>Contains the output of DeactivatePipeline.</p>
     class DeactivatePipelineOutput < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -128,6 +136,7 @@ module Aws::DataPipeline
     #   <p>The ID of the pipeline.</p>
     #   @return [String]
     class DeletePipelineInput < Struct.new(
+      nil,
       :pipeline_id,
       keyword_init: true
     )
@@ -150,6 +159,7 @@ module Aws::DataPipeline
     #              the marker value from the previous call to retrieve the next set of results.</p>
     #   @return [String]
     class DescribeObjectsInput < Struct.new(
+      nil,
       :pipeline_id,
       :object_ids,
       :evaluate_expressions,
@@ -171,6 +181,7 @@ module Aws::DataPipeline
     #   <p>Indicates whether there are more results to return.</p>
     #   @return [Boolean]
     class DescribeObjectsOutput < Struct.new(
+      nil,
       :pipeline_objects,
       :marker,
       :has_more_results,
@@ -190,6 +201,7 @@ module Aws::DataPipeline
     #               To obtain pipeline IDs, call <a>ListPipelines</a>.</p>
     #   @return [Array<String>]
     class DescribePipelinesInput < Struct.new(
+      nil,
       :pipeline_ids,
       keyword_init: true
     )
@@ -201,6 +213,7 @@ module Aws::DataPipeline
     #   <p>An array of descriptions for the specified pipelines.</p>
     #   @return [Array<Types::PipelineDescription>]
     class DescribePipelinesOutput < Struct.new(
+      nil,
       :pipeline_description_list,
       keyword_init: true
     )
@@ -218,6 +231,7 @@ module Aws::DataPipeline
     #   <p>The expression to evaluate.</p>
     #   @return [String]
     class EvaluateExpressionInput < Struct.new(
+      nil,
       :pipeline_id,
       :object_id,
       :expression,
@@ -231,6 +245,7 @@ module Aws::DataPipeline
     #   <p>The evaluated expression.</p>
     #   @return [String]
     class EvaluateExpressionOutput < Struct.new(
+      nil,
       :evaluated_expression,
       keyword_init: true
     )
@@ -248,6 +263,7 @@ module Aws::DataPipeline
     #   <p>The field value, expressed as the identifier of another object.</p>
     #   @return [String]
     class Field < Struct.new(
+      nil,
       :key,
       :string_value,
       :ref_value,
@@ -266,6 +282,7 @@ module Aws::DataPipeline
     #               that was activated.</p>
     #   @return [String]
     class GetPipelineDefinitionInput < Struct.new(
+      nil,
       :pipeline_id,
       :version,
       keyword_init: true
@@ -284,6 +301,7 @@ module Aws::DataPipeline
     #   <p>The parameter values used in the pipeline definition.</p>
     #   @return [Array<Types::ParameterValue>]
     class GetPipelineDefinitionOutput < Struct.new(
+      nil,
       :pipeline_objects,
       :parameter_objects,
       :parameter_values,
@@ -302,6 +320,7 @@ module Aws::DataPipeline
     #   <p>A signature which can be used to verify the accuracy and authenticity of the information provided in the instance identity document.</p>
     #   @return [String]
     class InstanceIdentity < Struct.new(
+      nil,
       :document,
       :signature,
       keyword_init: true
@@ -314,6 +333,7 @@ module Aws::DataPipeline
     #   <p>Description of the error message.</p>
     #   @return [String]
     class InternalServiceError < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -325,6 +345,7 @@ module Aws::DataPipeline
     #   <p>Description of the error message.</p>
     #   @return [String]
     class InvalidRequestException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -338,6 +359,7 @@ module Aws::DataPipeline
     #              the marker value from the previous call to retrieve the next set of results.</p>
     #   @return [String]
     class ListPipelinesInput < Struct.new(
+      nil,
       :marker,
       keyword_init: true
     )
@@ -357,6 +379,7 @@ module Aws::DataPipeline
     #   <p>Indicates whether there are more results that can be obtained by a subsequent call.</p>
     #   @return [Boolean]
     class ListPipelinesOutput < Struct.new(
+      nil,
       :pipeline_id_list,
       :marker,
       :has_more_results,
@@ -406,6 +429,7 @@ module Aws::DataPipeline
     #   <p>The value that the actual field value will be compared with.</p>
     #   @return [Array<String>]
     class Operator < Struct.new(
+      nil,
       :type,
       :values,
       keyword_init: true
@@ -421,6 +445,7 @@ module Aws::DataPipeline
     #   <p>The field value, expressed as a String.</p>
     #   @return [String]
     class ParameterAttribute < Struct.new(
+      nil,
       :key,
       :string_value,
       keyword_init: true
@@ -436,6 +461,7 @@ module Aws::DataPipeline
     #   <p>The attributes of the parameter object.</p>
     #   @return [Array<Types::ParameterAttribute>]
     class ParameterObject < Struct.new(
+      nil,
       :id,
       :attributes,
       keyword_init: true
@@ -451,6 +477,7 @@ module Aws::DataPipeline
     #   <p>The field value, expressed as a String.</p>
     #   @return [String]
     class ParameterValue < Struct.new(
+      nil,
       :id,
       :string_value,
       keyword_init: true
@@ -463,6 +490,7 @@ module Aws::DataPipeline
     #   <p>Description of the error message.</p>
     #   @return [String]
     class PipelineDeletedException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -487,6 +515,7 @@ module Aws::DataPipeline
     #               For more information, see <a href="http://docs.aws.amazon.com/datapipeline/latest/DeveloperGuide/dp-control-access.html">Controlling User Access to Pipelines</a> in the <i>AWS Data Pipeline Developer Guide</i>.</p>
     #   @return [Array<Types::Tag>]
     class PipelineDescription < Struct.new(
+      nil,
       :pipeline_id,
       :name,
       :fields,
@@ -505,6 +534,7 @@ module Aws::DataPipeline
     #   <p>The name of the pipeline.</p>
     #   @return [String]
     class PipelineIdName < Struct.new(
+      nil,
       :id,
       :name,
       keyword_init: true
@@ -517,6 +547,7 @@ module Aws::DataPipeline
     #   <p>Description of the error message.</p>
     #   @return [String]
     class PipelineNotFoundException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -534,6 +565,7 @@ module Aws::DataPipeline
     #   <p>Key-value pairs that define the properties of the object.</p>
     #   @return [Array<Types::Field>]
     class PipelineObject < Struct.new(
+      nil,
       :id,
       :name,
       :fields,
@@ -555,6 +587,7 @@ module Aws::DataPipeline
     #   <p>Identity information for the EC2 instance that is hosting the task runner. You can get this value from the instance using <code>http://169.254.169.254/latest/meta-data/instance-id</code>. For more information, see <a href="http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/AESDG-chapter-instancedata.html">Instance Metadata</a> in the <i>Amazon Elastic Compute Cloud User Guide.</i> Passing in this value proves that your task runner is running on an EC2 instance, and ensures the proper AWS Data Pipeline service charges are applied to your pipeline.</p>
     #   @return [Types::InstanceIdentity]
     class PollForTaskInput < Struct.new(
+      nil,
       :worker_group,
       :hostname,
       :instance_identity,
@@ -570,6 +603,7 @@ module Aws::DataPipeline
     #               and <a>SetTaskStatus</a>.</p>
     #   @return [Types::TaskObject]
     class PollForTaskOutput < Struct.new(
+      nil,
       :task_object,
       keyword_init: true
     )
@@ -590,6 +624,7 @@ module Aws::DataPipeline
     #   <p>The parameter values used with the pipeline.</p>
     #   @return [Array<Types::ParameterValue>]
     class PutPipelineDefinitionInput < Struct.new(
+      nil,
       :pipeline_id,
       :pipeline_objects,
       :parameter_objects,
@@ -611,6 +646,7 @@ module Aws::DataPipeline
     #               activated until you correct the pipeline and call <code>PutPipelineDefinition</code> to commit the corrected pipeline.</p>
     #   @return [Boolean]
     class PutPipelineDefinitionOutput < Struct.new(
+      nil,
       :validation_errors,
       :validation_warnings,
       :errored,
@@ -629,6 +665,7 @@ module Aws::DataPipeline
     #   <p>List of selectors that define the query. An object must satisfy all of the selectors to match the query.</p>
     #   @return [Array<Types::Selector>]
     class Query < Struct.new(
+      nil,
       :selectors,
       keyword_init: true
     )
@@ -657,6 +694,7 @@ module Aws::DataPipeline
     #   <p>The maximum number of object names that <code>QueryObjects</code> will return in a single call. The default value is 100. </p>
     #   @return [Integer]
     class QueryObjectsInput < Struct.new(
+      nil,
       :pipeline_id,
       :query,
       :sphere,
@@ -679,6 +717,7 @@ module Aws::DataPipeline
     #   <p>Indicates whether there are more results that can be obtained by a subsequent call.</p>
     #   @return [Boolean]
     class QueryObjectsOutput < Struct.new(
+      nil,
       :ids,
       :marker,
       :has_more_results,
@@ -700,6 +739,7 @@ module Aws::DataPipeline
     #   <p>The keys of the tags to remove.</p>
     #   @return [Array<String>]
     class RemoveTagsInput < Struct.new(
+      nil,
       :pipeline_id,
       :tag_keys,
       keyword_init: true
@@ -709,6 +749,7 @@ module Aws::DataPipeline
 
     # <p>Contains the output of RemoveTags.</p>
     class RemoveTagsOutput < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -722,6 +763,7 @@ module Aws::DataPipeline
     #   <p>Key-value pairs that define the properties of the ReportTaskProgressInput object.</p>
     #   @return [Array<Types::Field>]
     class ReportTaskProgressInput < Struct.new(
+      nil,
       :task_id,
       :fields,
       keyword_init: true
@@ -734,6 +776,7 @@ module Aws::DataPipeline
     #   <p>If true, the calling task runner should cancel processing of the task. The task runner does not need to call <a>SetTaskStatus</a> for canceled tasks.</p>
     #   @return [Boolean]
     class ReportTaskProgressOutput < Struct.new(
+      nil,
       :canceled,
       keyword_init: true
     )
@@ -760,6 +803,7 @@ module Aws::DataPipeline
     #   <p>The public DNS name of the task runner.</p>
     #   @return [String]
     class ReportTaskRunnerHeartbeatInput < Struct.new(
+      nil,
       :taskrunner_id,
       :worker_group,
       :hostname,
@@ -773,6 +817,7 @@ module Aws::DataPipeline
     #   <p>Indicates whether the calling task runner should terminate.</p>
     #   @return [Boolean]
     class ReportTaskRunnerHeartbeatOutput < Struct.new(
+      nil,
       :terminate,
       keyword_init: true
     )
@@ -792,6 +837,7 @@ module Aws::DataPipeline
     #   <p>Contains a logical operation for comparing the value of a field with a specified value.</p>
     #   @return [Types::Operator]
     class Selector < Struct.new(
+      nil,
       :field_name,
       :operator,
       keyword_init: true
@@ -811,6 +857,7 @@ module Aws::DataPipeline
     #               For instances, use <code>TRY_CANCEL</code>, <code>RERUN</code>, or <code>MARK_FINISHED</code>.</p>
     #   @return [String]
     class SetStatusInput < Struct.new(
+      nil,
       :pipeline_id,
       :object_ids,
       :status,
@@ -839,6 +886,7 @@ module Aws::DataPipeline
     #               It is used to display error information to the user. The web service does not parse this value.</p>
     #   @return [String]
     class SetTaskStatusInput < Struct.new(
+      nil,
       :task_id,
       :task_status,
       :error_id,
@@ -851,6 +899,7 @@ module Aws::DataPipeline
 
     # <p>Contains the output of SetTaskStatus.</p>
     class SetTaskStatusOutput < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -867,6 +916,7 @@ module Aws::DataPipeline
     #               For more information, see <a href="http://docs.aws.amazon.com/datapipeline/latest/DeveloperGuide/dp-control-access.html">Controlling User Access to Pipelines</a> in the <i>AWS Data Pipeline Developer Guide</i>.</p>
     #   @return [String]
     class Tag < Struct.new(
+      nil,
       :key,
       :value,
       keyword_init: true
@@ -879,6 +929,7 @@ module Aws::DataPipeline
     #   <p>Description of the error message.</p>
     #   @return [String]
     class TaskNotFoundException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -899,6 +950,7 @@ module Aws::DataPipeline
     #   <p>Connection information for the location where the task runner will publish the output of the task.</p>
     #   @return [Hash<String, Types::PipelineObject>]
     class TaskObject < Struct.new(
+      nil,
       :task_id,
       :pipeline_id,
       :attempt_id,
@@ -922,6 +974,7 @@ module Aws::DataPipeline
     #   <p>The parameter values used with the pipeline.</p>
     #   @return [Array<Types::ParameterValue>]
     class ValidatePipelineDefinitionInput < Struct.new(
+      nil,
       :pipeline_id,
       :pipeline_objects,
       :parameter_objects,
@@ -942,6 +995,7 @@ module Aws::DataPipeline
     #   <p>Indicates whether there were validation errors.</p>
     #   @return [Boolean]
     class ValidatePipelineDefinitionOutput < Struct.new(
+      nil,
       :validation_errors,
       :validation_warnings,
       :errored,
@@ -963,6 +1017,7 @@ module Aws::DataPipeline
     #   <p>A description of the validation error.</p>
     #   @return [Array<String>]
     class ValidationError < Struct.new(
+      nil,
       :id,
       :errors,
       keyword_init: true
@@ -978,6 +1033,7 @@ module Aws::DataPipeline
     #   <p>A description of the validation warning.</p>
     #   @return [Array<String>]
     class ValidationWarning < Struct.new(
+      nil,
       :id,
       :warnings,
       keyword_init: true

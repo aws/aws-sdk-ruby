@@ -23,6 +23,7 @@ module Aws::Signin
     #   Provides specific information about why access was denied
     #   @return [String]
     class AccessDeniedException < Struct.new(
+      nil,
       :error,
       :message,
       keyword_init: true
@@ -46,6 +47,7 @@ module Aws::Signin
     #   AWS session token for temporary credentials
     #   @return [String]
     class AccessToken < Struct.new(
+      nil,
       :access_key_id,
       :secret_access_key,
       :session_token,
@@ -63,6 +65,7 @@ module Aws::Signin
     #   The specific operation is determined by grant_type in the request body
     #   @return [Types::CreateOAuth2TokenRequestBody]
     class CreateOAuth2TokenRequest < Struct.new(
+      nil,
       :token_input,
       keyword_init: true
     )
@@ -99,6 +102,7 @@ module Aws::Signin
     #   Required only when grant_type=refresh_token
     #   @return [String]
     class CreateOAuth2TokenRequestBody < Struct.new(
+      nil,
       :client_id,
       :grant_type,
       :code,
@@ -119,6 +123,7 @@ module Aws::Signin
     #   The specific response fields depend on the grant_type used in the request
     #   @return [Types::CreateOAuth2TokenResponseBody]
     class CreateOAuth2TokenResponse < Struct.new(
+      nil,
       :token_output,
       keyword_init: true
     )
@@ -152,6 +157,7 @@ module Aws::Signin
     #   Not included in token refresh responses
     #   @return [String]
     class CreateOAuth2TokenResponseBody < Struct.new(
+      nil,
       :access_token,
       :token_type,
       :expires_in,
@@ -176,6 +182,7 @@ module Aws::Signin
     #   May include error details for debugging purposes
     #   @return [String]
     class InternalServerException < Struct.new(
+      nil,
       :error,
       :message,
       keyword_init: true
@@ -204,6 +211,7 @@ module Aws::Signin
     #   May include retry-after information or rate limit details
     #   @return [String]
     class TooManyRequestsError < Struct.new(
+      nil,
       :error,
       :message,
       keyword_init: true
@@ -226,6 +234,7 @@ module Aws::Signin
     #   Provides specific information about which validation failed
     #   @return [String]
     class ValidationException < Struct.new(
+      nil,
       :error,
       :message,
       keyword_init: true

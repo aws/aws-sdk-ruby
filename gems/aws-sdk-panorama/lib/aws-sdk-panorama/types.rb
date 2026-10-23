@@ -10,6 +10,7 @@ module Aws::Panorama
     # @!attribute message
     #   @return [String]
     class AccessDeniedException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -21,6 +22,7 @@ module Aws::Panorama
     #   <p>The appliance software version.</p>
     #   @return [String]
     class AlternateSoftwareMetadata < Struct.new(
+      nil,
       :version,
       keyword_init: true
     )
@@ -65,6 +67,7 @@ module Aws::Panorama
     #   <p>The application's state.</p>
     #   @return [Array<Types::ReportedRuntimeContextState>]
     class ApplicationInstance < Struct.new(
+      nil,
       :name,
       :application_instance_id,
       :default_runtime_context_device,
@@ -98,6 +101,7 @@ module Aws::Panorama
     #   <p>A list of attributes that led to the exception and their values.</p>
     #   @return [Array<Types::ConflictExceptionErrorArgument>]
     class ConflictException < Struct.new(
+      nil,
       :message,
       :resource_id,
       :resource_type,
@@ -116,6 +120,7 @@ module Aws::Panorama
     #   <p>The error argument's value.</p>
     #   @return [String]
     class ConflictExceptionErrorArgument < Struct.new(
+      nil,
       :name,
       :value,
       keyword_init: true
@@ -148,6 +153,7 @@ module Aws::Panorama
     #   <p>Tags for the application instance.</p>
     #   @return [Hash<String, String>]
     class CreateApplicationInstanceInput < Struct.new(
+      nil,
       :name,
       :description,
       :manifest_payload,
@@ -165,6 +171,7 @@ module Aws::Panorama
     #   <p>The application instance's ID.</p>
     #   @return [String]
     class CreateApplicationInstanceOutput < Struct.new(
+      nil,
       :application_instance_id,
       keyword_init: true
     )
@@ -181,6 +188,7 @@ module Aws::Panorama
     #   <p>The type of job to run.</p>
     #   @return [String]
     class CreateJobForDevicesInput < Struct.new(
+      nil,
       :device_ids,
       :device_job_config,
       :job_type,
@@ -193,6 +201,7 @@ module Aws::Panorama
     #   <p>A list of jobs.</p>
     #   @return [Array<Types::Job>]
     class CreateJobForDevicesOutput < Struct.new(
+      nil,
       :jobs,
       keyword_init: true
     )
@@ -221,6 +230,7 @@ module Aws::Panorama
     #   <p>Tags for the job.</p>
     #   @return [Array<Types::JobResourceTags>]
     class CreateNodeFromTemplateJobInput < Struct.new(
+      nil,
       :template_type,
       :output_package_name,
       :output_package_version,
@@ -237,6 +247,7 @@ module Aws::Panorama
     #   <p>The job's ID.</p>
     #   @return [String]
     class CreateNodeFromTemplateJobOutput < Struct.new(
+      nil,
       :job_id,
       keyword_init: true
     )
@@ -259,6 +270,7 @@ module Aws::Panorama
     #   <p>Tags for the package import job.</p>
     #   @return [Array<Types::JobResourceTags>]
     class CreatePackageImportJobInput < Struct.new(
+      nil,
       :job_type,
       :input_config,
       :output_config,
@@ -273,6 +285,7 @@ module Aws::Panorama
     #   <p>The job's ID.</p>
     #   @return [String]
     class CreatePackageImportJobOutput < Struct.new(
+      nil,
       :job_id,
       keyword_init: true
     )
@@ -286,6 +299,7 @@ module Aws::Panorama
     #   <p>Tags for the package.</p>
     #   @return [Hash<String, String>]
     class CreatePackageInput < Struct.new(
+      nil,
       :package_name,
       :tags,
       keyword_init: true
@@ -303,6 +317,7 @@ module Aws::Panorama
     #   <p>The package's storage location.</p>
     #   @return [Types::StorageLocation]
     class CreatePackageOutput < Struct.new(
+      nil,
       :package_id,
       :arn,
       :storage_location,
@@ -315,6 +330,7 @@ module Aws::Panorama
     #   <p>The device's ID.</p>
     #   @return [String]
     class DeleteDeviceInput < Struct.new(
+      nil,
       :device_id,
       keyword_init: true
     )
@@ -325,6 +341,7 @@ module Aws::Panorama
     #   <p>The device's ID.</p>
     #   @return [String]
     class DeleteDeviceOutput < Struct.new(
+      nil,
       :device_id,
       keyword_init: true
     )
@@ -339,6 +356,7 @@ module Aws::Panorama
     #         Amazon S3.</p>
     #   @return [Boolean]
     class DeletePackageInput < Struct.new(
+      nil,
       :package_id,
       :force_delete,
       keyword_init: true
@@ -347,6 +365,7 @@ module Aws::Panorama
     end
 
     class DeletePackageOutput < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -368,6 +387,7 @@ module Aws::Panorama
     #   <p>If the version was marked latest, the new version to maker as latest.</p>
     #   @return [String]
     class DeregisterPackageVersionInput < Struct.new(
+      nil,
       :owner_account,
       :package_id,
       :package_version,
@@ -379,6 +399,7 @@ module Aws::Panorama
     end
 
     class DeregisterPackageVersionOutput < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -388,6 +409,7 @@ module Aws::Panorama
     #   <p>The application instance's ID.</p>
     #   @return [String]
     class DescribeApplicationInstanceDetailsInput < Struct.new(
+      nil,
       :application_instance_id,
       keyword_init: true
     )
@@ -419,6 +441,7 @@ module Aws::Panorama
     #   <p>The application instance's ID.</p>
     #   @return [String]
     class DescribeApplicationInstanceDetailsOutput < Struct.new(
+      nil,
       :name,
       :description,
       :default_runtime_context_device,
@@ -436,6 +459,7 @@ module Aws::Panorama
     #   <p>The application instance's ID.</p>
     #   @return [String]
     class DescribeApplicationInstanceInput < Struct.new(
+      nil,
       :application_instance_id,
       keyword_init: true
     )
@@ -488,6 +512,7 @@ module Aws::Panorama
     #   <p>The application instance's state.</p>
     #   @return [Array<Types::ReportedRuntimeContextState>]
     class DescribeApplicationInstanceOutput < Struct.new(
+      nil,
       :name,
       :description,
       :default_runtime_context_device,
@@ -512,6 +537,7 @@ module Aws::Panorama
     #   <p>The device's ID.</p>
     #   @return [String]
     class DescribeDeviceInput < Struct.new(
+      nil,
       :device_id,
       keyword_init: true
     )
@@ -522,6 +548,7 @@ module Aws::Panorama
     #   <p>The job's ID.</p>
     #   @return [String]
     class DescribeDeviceJobInput < Struct.new(
+      nil,
       :job_id,
       keyword_init: true
     )
@@ -556,6 +583,7 @@ module Aws::Panorama
     #   <p>The job's type.</p>
     #   @return [String]
     class DescribeDeviceJobOutput < Struct.new(
+      nil,
       :job_id,
       :device_id,
       :device_arn,
@@ -631,6 +659,7 @@ module Aws::Panorama
     #   <p>A device's aggregated status. Including the device's connection status, provisioning status, and lease status.</p>
     #   @return [String]
     class DescribeDeviceOutput < Struct.new(
+      nil,
       :device_id,
       :name,
       :arn,
@@ -660,6 +689,7 @@ module Aws::Panorama
     #   <p>The job's ID.</p>
     #   @return [String]
     class DescribeNodeFromTemplateJobInput < Struct.new(
+      nil,
       :job_id,
       keyword_init: true
     )
@@ -703,6 +733,7 @@ module Aws::Panorama
     #   <p>The job's tags.</p>
     #   @return [Array<Types::JobResourceTags>]
     class DescribeNodeFromTemplateJobOutput < Struct.new(
+      nil,
       :job_id,
       :status,
       :status_message,
@@ -727,6 +758,7 @@ module Aws::Panorama
     #   <p>The account ID of the node's owner.</p>
     #   @return [String]
     class DescribeNodeInput < Struct.new(
+      nil,
       :node_id,
       :owner_account,
       keyword_init: true
@@ -777,6 +809,7 @@ module Aws::Panorama
     #   <p>When the node was updated.</p>
     #   @return [Time]
     class DescribeNodeOutput < Struct.new(
+      nil,
       :node_id,
       :name,
       :category,
@@ -800,6 +833,7 @@ module Aws::Panorama
     #   <p>The job's ID.</p>
     #   @return [String]
     class DescribePackageImportJobInput < Struct.new(
+      nil,
       :job_id,
       keyword_init: true
     )
@@ -840,6 +874,7 @@ module Aws::Panorama
     #   <p>The job's tags.</p>
     #   @return [Array<Types::JobResourceTags>]
     class DescribePackageImportJobOutput < Struct.new(
+      nil,
       :job_id,
       :client_token,
       :job_type,
@@ -860,6 +895,7 @@ module Aws::Panorama
     #   <p>The package's ID.</p>
     #   @return [String]
     class DescribePackageInput < Struct.new(
+      nil,
       :package_id,
       keyword_init: true
     )
@@ -891,6 +927,7 @@ module Aws::Panorama
     #   <p>The package's tags.</p>
     #   @return [Hash<String, String>]
     class DescribePackageOutput < Struct.new(
+      nil,
       :package_id,
       :package_name,
       :arn,
@@ -917,6 +954,7 @@ module Aws::Panorama
     #   <p>The version's patch version.</p>
     #   @return [String]
     class DescribePackageVersionInput < Struct.new(
+      nil,
       :owner_account,
       :package_id,
       :package_version,
@@ -957,6 +995,7 @@ module Aws::Panorama
     #   <p>The version's registered time.</p>
     #   @return [Time]
     class DescribePackageVersionOutput < Struct.new(
+      nil,
       :owner_account,
       :package_id,
       :package_arn,
@@ -1018,6 +1057,7 @@ module Aws::Panorama
     #   <p>A device's aggregated status. Including the device's connection status, provisioning status, and lease status.</p>
     #   @return [String]
     class Device < Struct.new(
+      nil,
       :device_id,
       :name,
       :created_time,
@@ -1053,6 +1093,7 @@ module Aws::Panorama
     #   <p>The job's type.</p>
     #   @return [String]
     class DeviceJob < Struct.new(
+      nil,
       :device_name,
       :device_id,
       :job_id,
@@ -1068,6 +1109,7 @@ module Aws::Panorama
     #   <p>A configuration for an over-the-air (OTA) upgrade. Required for OTA jobs.</p>
     #   @return [Types::OTAJobConfig]
     class DeviceJobConfig < Struct.new(
+      nil,
       :ota_job_config,
       keyword_init: true
     )
@@ -1082,6 +1124,7 @@ module Aws::Panorama
     #   <p>Network configuration for a static IP connection.</p>
     #   @return [Types::StaticIpConnectionInfo]
     class EthernetPayload < Struct.new(
+      nil,
       :connection_type,
       :static_ip_connection_info,
       keyword_init: true
@@ -1100,6 +1143,7 @@ module Aws::Panorama
     #   <p>The device's physical address.</p>
     #   @return [String]
     class EthernetStatus < Struct.new(
+      nil,
       :ip_address,
       :connection_status,
       :hw_address,
@@ -1115,6 +1159,7 @@ module Aws::Panorama
     #   <p>The number of seconds a client should wait before retrying the call.</p>
     #   @return [Integer]
     class InternalServerException < Struct.new(
+      nil,
       :message,
       :retry_after_seconds,
       keyword_init: true
@@ -1135,6 +1180,7 @@ module Aws::Panorama
     #   <p>The target device's ID.</p>
     #   @return [String]
     class Job < Struct.new(
+      nil,
       :job_id,
       :device_id,
       keyword_init: true
@@ -1150,6 +1196,7 @@ module Aws::Panorama
     #   <p>The job's tags.</p>
     #   @return [Hash<String, String>]
     class JobResourceTags < Struct.new(
+      nil,
       :resource_type,
       :tags,
       keyword_init: true
@@ -1168,6 +1215,7 @@ module Aws::Panorama
     #   <p>The job's type.</p>
     #   @return [String]
     class LatestDeviceJob < Struct.new(
+      nil,
       :image_version,
       :status,
       :job_type,
@@ -1186,6 +1234,7 @@ module Aws::Panorama
     #   <p>Specify the pagination token from a previous request to retrieve the next page of results.</p>
     #   @return [String]
     class ListApplicationInstanceDependenciesInput < Struct.new(
+      nil,
       :application_instance_id,
       :max_results,
       :next_token,
@@ -1201,6 +1250,7 @@ module Aws::Panorama
     #   <p>A pagination token that's included if more results are available.</p>
     #   @return [String]
     class ListApplicationInstanceDependenciesOutput < Struct.new(
+      nil,
       :package_objects,
       :next_token,
       keyword_init: true
@@ -1218,6 +1268,7 @@ module Aws::Panorama
     #   <p>Specify the pagination token from a previous request to retrieve the next page of results.</p>
     #   @return [String]
     class ListApplicationInstanceNodeInstancesInput < Struct.new(
+      nil,
       :application_instance_id,
       :max_results,
       :next_token,
@@ -1233,6 +1284,7 @@ module Aws::Panorama
     #   <p>A pagination token that's included if more results are available.</p>
     #   @return [String]
     class ListApplicationInstanceNodeInstancesOutput < Struct.new(
+      nil,
       :node_instances,
       :next_token,
       keyword_init: true
@@ -1253,6 +1305,7 @@ module Aws::Panorama
     #   <p>Specify the pagination token from a previous request to retrieve the next page of results.</p>
     #   @return [String]
     class ListApplicationInstancesInput < Struct.new(
+      nil,
       :device_id,
       :status_filter,
       :max_results,
@@ -1269,6 +1322,7 @@ module Aws::Panorama
     #   <p>A pagination token that's included if more results are available.</p>
     #   @return [String]
     class ListApplicationInstancesOutput < Struct.new(
+      nil,
       :application_instances,
       :next_token,
       keyword_init: true
@@ -1295,6 +1349,7 @@ module Aws::Panorama
     #   <p>Filter based on a device's status.</p>
     #   @return [String]
     class ListDevicesInput < Struct.new(
+      nil,
       :next_token,
       :max_results,
       :sort_by,
@@ -1316,6 +1371,7 @@ module Aws::Panorama
     #   <p>The maximum number of device jobs to return in one page of results.</p>
     #   @return [Integer]
     class ListDevicesJobsInput < Struct.new(
+      nil,
       :device_id,
       :next_token,
       :max_results,
@@ -1331,6 +1387,7 @@ module Aws::Panorama
     #   <p>A pagination token that's included if more results are available.</p>
     #   @return [String]
     class ListDevicesJobsOutput < Struct.new(
+      nil,
       :device_jobs,
       :next_token,
       keyword_init: true
@@ -1345,6 +1402,7 @@ module Aws::Panorama
     #   <p>A pagination token that's included if more results are available.</p>
     #   @return [String]
     class ListDevicesOutput < Struct.new(
+      nil,
       :devices,
       :next_token,
       keyword_init: true
@@ -1359,6 +1417,7 @@ module Aws::Panorama
     #   <p>The maximum number of node from template jobs to return in one page of results.</p>
     #   @return [Integer]
     class ListNodeFromTemplateJobsInput < Struct.new(
+      nil,
       :next_token,
       :max_results,
       keyword_init: true
@@ -1373,6 +1432,7 @@ module Aws::Panorama
     #   <p>A pagination token that's included if more results are available.</p>
     #   @return [String]
     class ListNodeFromTemplateJobsOutput < Struct.new(
+      nil,
       :node_from_template_jobs,
       :next_token,
       keyword_init: true
@@ -1402,6 +1462,7 @@ module Aws::Panorama
     #   <p>The maximum number of nodes to return in one page of results.</p>
     #   @return [Integer]
     class ListNodesInput < Struct.new(
+      nil,
       :category,
       :owner_account,
       :package_name,
@@ -1421,6 +1482,7 @@ module Aws::Panorama
     #   <p>A pagination token that's included if more results are available.</p>
     #   @return [String]
     class ListNodesOutput < Struct.new(
+      nil,
       :nodes,
       :next_token,
       keyword_init: true
@@ -1435,6 +1497,7 @@ module Aws::Panorama
     #   <p>The maximum number of package import jobs to return in one page of results.</p>
     #   @return [Integer]
     class ListPackageImportJobsInput < Struct.new(
+      nil,
       :next_token,
       :max_results,
       keyword_init: true
@@ -1449,6 +1512,7 @@ module Aws::Panorama
     #   <p>A pagination token that's included if more results are available.</p>
     #   @return [String]
     class ListPackageImportJobsOutput < Struct.new(
+      nil,
       :package_import_jobs,
       :next_token,
       keyword_init: true
@@ -1463,6 +1527,7 @@ module Aws::Panorama
     #   <p>Specify the pagination token from a previous request to retrieve the next page of results.</p>
     #   @return [String]
     class ListPackagesInput < Struct.new(
+      nil,
       :max_results,
       :next_token,
       keyword_init: true
@@ -1477,6 +1542,7 @@ module Aws::Panorama
     #   <p>A pagination token that's included if more results are available.</p>
     #   @return [String]
     class ListPackagesOutput < Struct.new(
+      nil,
       :packages,
       :next_token,
       keyword_init: true
@@ -1488,6 +1554,7 @@ module Aws::Panorama
     #   <p>The resource's ARN.</p>
     #   @return [String]
     class ListTagsForResourceInput < Struct.new(
+      nil,
       :resource_arn,
       keyword_init: true
     )
@@ -1498,6 +1565,7 @@ module Aws::Panorama
     #   <p>A list of tags.</p>
     #   @return [Hash<String, String>]
     class ListTagsForResourceOutput < Struct.new(
+      nil,
       :tags,
       keyword_init: true
     )
@@ -1548,6 +1616,7 @@ module Aws::Panorama
     #   <p>Network time protocol (NTP) server settings.</p>
     #   @return [Types::NtpPayload]
     class NetworkPayload < Struct.new(
+      nil,
       :ethernet0,
       :ethernet1,
       :ntp,
@@ -1570,6 +1639,7 @@ module Aws::Panorama
     #   <p>When the network status changed.</p>
     #   @return [Time]
     class NetworkStatus < Struct.new(
+      nil,
       :ethernet0_status,
       :ethernet1_status,
       :ntp_status,
@@ -1614,6 +1684,7 @@ module Aws::Panorama
     #   <p>When the node was created.</p>
     #   @return [Time]
     class Node < Struct.new(
+      nil,
       :node_id,
       :name,
       :category,
@@ -1650,6 +1721,7 @@ module Aws::Panorama
     #   <p>The node's name.</p>
     #   @return [String]
     class NodeFromTemplateJob < Struct.new(
+      nil,
       :job_id,
       :template_type,
       :status,
@@ -1678,6 +1750,7 @@ module Aws::Panorama
     #   <p>The input port's max connections.</p>
     #   @return [Integer]
     class NodeInputPort < Struct.new(
+      nil,
       :name,
       :description,
       :type,
@@ -1716,6 +1789,7 @@ module Aws::Panorama
     #   <p>The instance's current status.</p>
     #   @return [String]
     class NodeInstance < Struct.new(
+      nil,
       :node_instance_id,
       :node_id,
       :package_name,
@@ -1736,6 +1810,7 @@ module Aws::Panorama
     #   <p>The node interface's outputs.</p>
     #   @return [Array<Types::NodeOutputPort>]
     class NodeInterface < Struct.new(
+      nil,
       :inputs,
       :outputs,
       keyword_init: true
@@ -1754,6 +1829,7 @@ module Aws::Panorama
     #   <p>The output port's type.</p>
     #   @return [String]
     class NodeOutputPort < Struct.new(
+      nil,
       :name,
       :description,
       :type,
@@ -1770,6 +1846,7 @@ module Aws::Panorama
     #   <p>The signal value.</p>
     #   @return [String]
     class NodeSignal < Struct.new(
+      nil,
       :node_instance_id,
       :signal,
       keyword_init: true
@@ -1783,6 +1860,7 @@ module Aws::Panorama
     #   <p>NTP servers to use, in order of preference.</p>
     #   @return [Array<String>]
     class NtpPayload < Struct.new(
+      nil,
       :ntp_servers,
       keyword_init: true
     )
@@ -1800,6 +1878,7 @@ module Aws::Panorama
     #   <p>The domain name of the server.</p>
     #   @return [String]
     class NtpStatus < Struct.new(
+      nil,
       :connection_status,
       :ip_address,
       :ntp_server_name,
@@ -1816,6 +1895,7 @@ module Aws::Panorama
     #   <p>Whether to apply the update if it is a major version change.</p>
     #   @return [Boolean]
     class OTAJobConfig < Struct.new(
+      nil,
       :image_version,
       :allow_major_version_update,
       keyword_init: true
@@ -1836,6 +1916,7 @@ module Aws::Panorama
     #   <p>The object's key.</p>
     #   @return [String]
     class OutPutS3Location < Struct.new(
+      nil,
       :bucket_name,
       :object_key,
       keyword_init: true
@@ -1863,6 +1944,7 @@ module Aws::Panorama
     #   <p>When the job was updated.</p>
     #   @return [Time]
     class PackageImportJob < Struct.new(
+      nil,
       :job_id,
       :job_type,
       :status,
@@ -1879,6 +1961,7 @@ module Aws::Panorama
     #   <p>The package version's input configuration.</p>
     #   @return [Types::PackageVersionInputConfig]
     class PackageImportJobInputConfig < Struct.new(
+      nil,
       :package_version_input_config,
       keyword_init: true
     )
@@ -1899,6 +1982,7 @@ module Aws::Panorama
     #   <p>The package's output location.</p>
     #   @return [Types::OutPutS3Location]
     class PackageImportJobOutput < Struct.new(
+      nil,
       :package_id,
       :package_version,
       :patch_version,
@@ -1913,6 +1997,7 @@ module Aws::Panorama
     #   <p>The package version's output configuration.</p>
     #   @return [Types::PackageVersionOutputConfig]
     class PackageImportJobOutputConfig < Struct.new(
+      nil,
       :package_version_output_config,
       keyword_init: true
     )
@@ -1936,6 +2021,7 @@ module Aws::Panorama
     #   <p>The package's tags.</p>
     #   @return [Hash<String, String>]
     class PackageListItem < Struct.new(
+      nil,
       :package_id,
       :package_name,
       :arn,
@@ -1957,6 +2043,7 @@ module Aws::Panorama
     #   <p>The object's patch version.</p>
     #   @return [String]
     class PackageObject < Struct.new(
+      nil,
       :name,
       :package_version,
       :patch_version,
@@ -1970,6 +2057,7 @@ module Aws::Panorama
     #   <p>A location in Amazon S3.</p>
     #   @return [Types::S3Location]
     class PackageVersionInputConfig < Struct.new(
+      nil,
       :s3_location,
       keyword_init: true
     )
@@ -1987,6 +2075,7 @@ module Aws::Panorama
     #   <p>Indicates that the version is recommended for all users.</p>
     #   @return [Boolean]
     class PackageVersionOutputConfig < Struct.new(
+      nil,
       :package_name,
       :package_version,
       :mark_latest,
@@ -2013,6 +2102,7 @@ module Aws::Panorama
     #   <p>A networking configuration for the device.</p>
     #   @return [Types::NetworkPayload]
     class ProvisionDeviceInput < Struct.new(
+      nil,
       :name,
       :description,
       :tags,
@@ -2038,6 +2128,7 @@ module Aws::Panorama
     #   <p>The device's IoT thing name.</p>
     #   @return [String]
     class ProvisionDeviceOutput < Struct.new(
+      nil,
       :device_id,
       :arn,
       :status,
@@ -2064,6 +2155,7 @@ module Aws::Panorama
     #   <p>Whether to mark the new version as the latest version.</p>
     #   @return [Boolean]
     class RegisterPackageVersionInput < Struct.new(
+      nil,
       :owner_account,
       :package_id,
       :package_version,
@@ -2075,6 +2167,7 @@ module Aws::Panorama
     end
 
     class RegisterPackageVersionOutput < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -2084,6 +2177,7 @@ module Aws::Panorama
     #   <p>An application instance ID.</p>
     #   @return [String]
     class RemoveApplicationInstanceInput < Struct.new(
+      nil,
       :application_instance_id,
       keyword_init: true
     )
@@ -2091,6 +2185,7 @@ module Aws::Panorama
     end
 
     class RemoveApplicationInstanceOutput < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -2110,6 +2205,7 @@ module Aws::Panorama
     #   <p>When the device reported the application's state.</p>
     #   @return [Time]
     class ReportedRuntimeContextState < Struct.new(
+      nil,
       :desired_state,
       :runtime_context_name,
       :device_reported_status,
@@ -2129,6 +2225,7 @@ module Aws::Panorama
     #   <p>The resource's type.</p>
     #   @return [String]
     class ResourceNotFoundException < Struct.new(
+      nil,
       :message,
       :resource_id,
       :resource_type,
@@ -2148,6 +2245,7 @@ module Aws::Panorama
     #   <p>An object key.</p>
     #   @return [String]
     class S3Location < Struct.new(
+      nil,
       :region,
       :bucket_name,
       :object_key,
@@ -2172,6 +2270,7 @@ module Aws::Panorama
     #   <p>The name of the service.</p>
     #   @return [String]
     class ServiceQuotaExceededException < Struct.new(
+      nil,
       :message,
       :resource_id,
       :resource_type,
@@ -2189,6 +2288,7 @@ module Aws::Panorama
     #   <p>A list of signals.</p>
     #   @return [Array<Types::NodeSignal>]
     class SignalApplicationInstanceNodeInstancesInput < Struct.new(
+      nil,
       :application_instance_id,
       :node_signals,
       keyword_init: true
@@ -2200,6 +2300,7 @@ module Aws::Panorama
     #   <p>An application instance ID.</p>
     #   @return [String]
     class SignalApplicationInstanceNodeInstancesOutput < Struct.new(
+      nil,
       :application_instance_id,
       keyword_init: true
     )
@@ -2220,6 +2321,7 @@ module Aws::Panorama
     #   <p>The connection's default gateway.</p>
     #   @return [String]
     class StaticIpConnectionInfo < Struct.new(
+      nil,
       :ip_address,
       :mask,
       :dns,
@@ -2246,6 +2348,7 @@ module Aws::Panorama
     #   <p>The location's manifest prefix.</p>
     #   @return [String]
     class StorageLocation < Struct.new(
+      nil,
       :bucket,
       :repo_prefix_location,
       :generated_prefix_location,
@@ -2263,6 +2366,7 @@ module Aws::Panorama
     #   <p>Tags for the resource.</p>
     #   @return [Hash<String, String>]
     class TagResourceInput < Struct.new(
+      nil,
       :resource_arn,
       :tags,
       keyword_init: true
@@ -2271,6 +2375,7 @@ module Aws::Panorama
     end
 
     class TagResourceOutput < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -2283,6 +2388,7 @@ module Aws::Panorama
     #   <p>Tag keys to remove.</p>
     #   @return [Array<String>]
     class UntagResourceInput < Struct.new(
+      nil,
       :resource_arn,
       :tag_keys,
       keyword_init: true
@@ -2291,6 +2397,7 @@ module Aws::Panorama
     end
 
     class UntagResourceOutput < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -2303,6 +2410,7 @@ module Aws::Panorama
     #   <p>A description for the device.</p>
     #   @return [String]
     class UpdateDeviceMetadataInput < Struct.new(
+      nil,
       :device_id,
       :description,
       keyword_init: true
@@ -2314,6 +2422,7 @@ module Aws::Panorama
     #   <p>The device's ID.</p>
     #   @return [String]
     class UpdateDeviceMetadataOutput < Struct.new(
+      nil,
       :device_id,
       keyword_init: true
     )
@@ -2336,6 +2445,7 @@ module Aws::Panorama
     #   <p>A list of request parameters that failed validation.</p>
     #   @return [Array<Types::ValidationExceptionField>]
     class ValidationException < Struct.new(
+      nil,
       :message,
       :reason,
       :error_id,
@@ -2354,6 +2464,7 @@ module Aws::Panorama
     #   <p>The argument's value.</p>
     #   @return [String]
     class ValidationExceptionErrorArgument < Struct.new(
+      nil,
       :name,
       :value,
       keyword_init: true
@@ -2369,6 +2480,7 @@ module Aws::Panorama
     #   <p>The field's message.</p>
     #   @return [String]
     class ValidationExceptionField < Struct.new(
+      nil,
       :name,
       :message,
       keyword_init: true

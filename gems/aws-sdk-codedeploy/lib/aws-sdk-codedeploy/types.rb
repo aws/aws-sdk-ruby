@@ -16,6 +16,7 @@ module Aws::CodeDeploy
     #   <p>The names of the on-premises instances to which to add tags.</p>
     #   @return [Array<String>]
     class AddTagsToOnPremisesInstancesInput < Struct.new(
+      nil,
       :tags,
       :instance_names,
       keyword_init: true
@@ -29,6 +30,7 @@ module Aws::CodeDeploy
     #               only once in a list of alarms.</p>
     #   @return [String]
     class Alarm < Struct.new(
+      nil,
       :name,
       keyword_init: true
     )
@@ -60,6 +62,7 @@ module Aws::CodeDeploy
     #               alarms can be added.</p>
     #   @return [Array<Types::Alarm>]
     class AlarmConfiguration < Struct.new(
+      nil,
       :enabled,
       :ignore_poll_alarm_failure,
       :alarms,
@@ -79,6 +82,7 @@ module Aws::CodeDeploy
     #   <p>The message that corresponds to the exception thrown by CodeDeploy.</p>
     #   @return [String]
     class AlarmsLimitExceededException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -103,6 +107,7 @@ module Aws::CodeDeploy
     #   <p> The SHA256 hash value of the revision content. </p>
     #   @return [String]
     class AppSpecContent < Struct.new(
+      nil,
       :content,
       :sha256,
       keyword_init: true
@@ -116,6 +121,7 @@ module Aws::CodeDeploy
     #   <p>The message that corresponds to the exception thrown by CodeDeploy.</p>
     #   @return [String]
     class ApplicationAlreadyExistsException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -127,6 +133,7 @@ module Aws::CodeDeploy
     #   <p>The message that corresponds to the exception thrown by CodeDeploy.</p>
     #   @return [String]
     class ApplicationDoesNotExistException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -154,6 +161,7 @@ module Aws::CodeDeploy
     #   <p>The destination platform type for deployment of the application (<code>Lambda</code> or <code>Server</code>).</p>
     #   @return [String]
     class ApplicationInfo < Struct.new(
+      nil,
       :application_id,
       :application_name,
       :create_time,
@@ -175,6 +183,7 @@ module Aws::CodeDeploy
     #   <p>The message that corresponds to the exception thrown by CodeDeploy.</p>
     #   @return [String]
     class ApplicationLimitExceededException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -186,6 +195,7 @@ module Aws::CodeDeploy
     #   <p>The message that corresponds to the exception thrown by CodeDeploy.</p>
     #   @return [String]
     class ApplicationNameRequiredException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -198,6 +208,7 @@ module Aws::CodeDeploy
     #   <p>The message that corresponds to the exception thrown by CodeDeploy.</p>
     #   @return [String]
     class ArnNotSupportedException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -214,6 +225,7 @@ module Aws::CodeDeploy
     #   <p>The event type or types that trigger a rollback.</p>
     #   @return [Array<String>]
     class AutoRollbackConfiguration < Struct.new(
+      nil,
       :enabled,
       :events,
       keyword_init: true
@@ -241,6 +253,7 @@ module Aws::CodeDeploy
     #               <i>CodeDeploy User Guide</i>.</p>
     #   @return [String]
     class AutoScalingGroup < Struct.new(
+      nil,
       :name,
       :hook,
       :termination_hook,
@@ -260,6 +273,7 @@ module Aws::CodeDeploy
     #                   <code>RevisionLocation</code> objects you can specify is 25.</p>
     #   @return [Array<Types::RevisionLocation>]
     class BatchGetApplicationRevisionsInput < Struct.new(
+      nil,
       :application_name,
       :revisions,
       keyword_init: true
@@ -278,6 +292,7 @@ module Aws::CodeDeploy
     #   <p>Additional information about the revisions, including the type and location.</p>
     #   @return [Array<Types::RevisionInfo>]
     class BatchGetApplicationRevisionsOutput < Struct.new(
+      nil,
       :application_name,
       :error_message,
       :revisions,
@@ -292,6 +307,7 @@ module Aws::CodeDeploy
     #               names you can specify is 100.</p>
     #   @return [Array<String>]
     class BatchGetApplicationsInput < Struct.new(
+      nil,
       :application_names,
       keyword_init: true
     )
@@ -303,6 +319,7 @@ module Aws::CodeDeploy
     #   <p>Information about the applications.</p>
     #   @return [Array<Types::ApplicationInfo>]
     class BatchGetApplicationsOutput < Struct.new(
+      nil,
       :applications_info,
       keyword_init: true
     )
@@ -318,6 +335,7 @@ module Aws::CodeDeploy
     #   <p>The names of the deployment groups.</p>
     #   @return [Array<String>]
     class BatchGetDeploymentGroupsInput < Struct.new(
+      nil,
       :application_name,
       :deployment_group_names,
       keyword_init: true
@@ -333,6 +351,7 @@ module Aws::CodeDeploy
     #   <p>Information about errors that might have occurred during the API call.</p>
     #   @return [String]
     class BatchGetDeploymentGroupsOutput < Struct.new(
+      nil,
       :deployment_groups_info,
       :error_message,
       keyword_init: true
@@ -349,6 +368,7 @@ module Aws::CodeDeploy
     #               you can specify is 25.</p>
     #   @return [Array<String>]
     class BatchGetDeploymentInstancesInput < Struct.new(
+      nil,
       :deployment_id,
       :instance_ids,
       keyword_init: true
@@ -364,6 +384,7 @@ module Aws::CodeDeploy
     #   <p>Information about errors that might have occurred during the API call.</p>
     #   @return [String]
     class BatchGetDeploymentInstancesOutput < Struct.new(
+      nil,
       :instances_summary,
       :error_message,
       keyword_init: true
@@ -403,6 +424,7 @@ module Aws::CodeDeploy
     #            </ul>
     #   @return [Array<String>]
     class BatchGetDeploymentTargetsInput < Struct.new(
+      nil,
       :deployment_id,
       :target_ids,
       keyword_init: true
@@ -438,6 +460,7 @@ module Aws::CodeDeploy
     #            </ul>
     #   @return [Array<Types::DeploymentTarget>]
     class BatchGetDeploymentTargetsOutput < Struct.new(
+      nil,
       :deployment_targets,
       keyword_init: true
     )
@@ -450,6 +473,7 @@ module Aws::CodeDeploy
     #               you can specify is 25.</p>
     #   @return [Array<String>]
     class BatchGetDeploymentsInput < Struct.new(
+      nil,
       :deployment_ids,
       keyword_init: true
     )
@@ -461,6 +485,7 @@ module Aws::CodeDeploy
     #   <p> Information about the deployments. </p>
     #   @return [Array<Types::DeploymentInfo>]
     class BatchGetDeploymentsOutput < Struct.new(
+      nil,
       :deployments_info,
       keyword_init: true
     )
@@ -473,6 +498,7 @@ module Aws::CodeDeploy
     #               number of instance names you can specify is 25.</p>
     #   @return [Array<String>]
     class BatchGetOnPremisesInstancesInput < Struct.new(
+      nil,
       :instance_names,
       keyword_init: true
     )
@@ -484,6 +510,7 @@ module Aws::CodeDeploy
     #   <p>Information about the on-premises instances.</p>
     #   @return [Array<Types::InstanceInfo>]
     class BatchGetOnPremisesInstancesOutput < Struct.new(
+      nil,
       :instance_infos,
       keyword_init: true
     )
@@ -495,6 +522,7 @@ module Aws::CodeDeploy
     #   <p>The message that corresponds to the exception thrown by CodeDeploy.</p>
     #   @return [String]
     class BatchLimitExceededException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -515,6 +543,7 @@ module Aws::CodeDeploy
     #               blue/green deployment.</p>
     #   @return [Types::GreenFleetProvisioningOption]
     class BlueGreenDeploymentConfiguration < Struct.new(
+      nil,
       :terminate_blue_instances_on_deployment_success,
       :deployment_ready_option,
       :green_fleet_provisioning_option,
@@ -552,6 +581,7 @@ module Aws::CodeDeploy
     #            <p> The maximum setting is 2880 minutes (2 days). </p>
     #   @return [Integer]
     class BlueInstanceTerminationOption < Struct.new(
+      nil,
       :action,
       :termination_wait_time_in_minutes,
       keyword_init: true
@@ -569,6 +599,7 @@ module Aws::CodeDeploy
     #   <p>The message that corresponds to the exception thrown by CodeDeploy.</p>
     #   @return [String]
     class BucketNameFilterRequiredException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -604,6 +635,7 @@ module Aws::CodeDeploy
     #               blue/green deployment receives.</p>
     #   @return [Float]
     class CloudFormationTarget < Struct.new(
+      nil,
       :deployment_id,
       :target_id,
       :last_updated_at,
@@ -632,6 +664,7 @@ module Aws::CodeDeploy
     #           </p>
     #   @return [String]
     class ContinueDeploymentInput < Struct.new(
+      nil,
       :deployment_id,
       :deployment_wait_type,
       keyword_init: true
@@ -654,6 +687,7 @@ module Aws::CodeDeploy
     #               define. </p>
     #   @return [Array<Types::Tag>]
     class CreateApplicationInput < Struct.new(
+      nil,
       :application_name,
       :compute_platform,
       :tags,
@@ -667,6 +701,7 @@ module Aws::CodeDeploy
     #   <p>A unique application ID.</p>
     #   @return [String]
     class CreateApplicationOutput < Struct.new(
+      nil,
       :application_id,
       keyword_init: true
     )
@@ -711,6 +746,7 @@ module Aws::CodeDeploy
     #                   Guide</i>.</p>
     #   @return [Types::ZonalConfig]
     class CreateDeploymentConfigInput < Struct.new(
+      nil,
       :deployment_config_name,
       :minimum_healthy_hosts,
       :traffic_routing_config,
@@ -726,6 +762,7 @@ module Aws::CodeDeploy
     #   <p>A unique deployment configuration ID.</p>
     #   @return [String]
     class CreateDeploymentConfigOutput < Struct.new(
+      nil,
       :deployment_config_id,
       keyword_init: true
     )
@@ -832,6 +869,7 @@ module Aws::CodeDeploy
     #               Guide</i>.</p>
     #   @return [Boolean]
     class CreateDeploymentGroupInput < Struct.new(
+      nil,
       :application_name,
       :deployment_group_name,
       :deployment_config_name,
@@ -861,6 +899,7 @@ module Aws::CodeDeploy
     #   <p>A unique deployment group ID.</p>
     #   @return [String]
     class CreateDeploymentGroupOutput < Struct.new(
+      nil,
       :deployment_group_id,
       keyword_init: true
     )
@@ -960,6 +999,7 @@ module Aws::CodeDeploy
     #            </note>
     #   @return [Types::AlarmConfiguration]
     class CreateDeploymentInput < Struct.new(
+      nil,
       :application_name,
       :deployment_group_name,
       :revision,
@@ -981,6 +1021,7 @@ module Aws::CodeDeploy
     #   <p> The unique ID of a deployment. </p>
     #   @return [String]
     class CreateDeploymentOutput < Struct.new(
+      nil,
       :deployment_id,
       keyword_init: true
     )
@@ -992,6 +1033,7 @@ module Aws::CodeDeploy
     #   <p>The name of an CodeDeploy application associated with the user or Amazon Web Services account.</p>
     #   @return [String]
     class DeleteApplicationInput < Struct.new(
+      nil,
       :application_name,
       keyword_init: true
     )
@@ -1003,6 +1045,7 @@ module Aws::CodeDeploy
     #   <p>The name of a deployment configuration associated with the user or Amazon Web Services account.</p>
     #   @return [String]
     class DeleteDeploymentConfigInput < Struct.new(
+      nil,
       :deployment_config_name,
       keyword_init: true
     )
@@ -1017,6 +1060,7 @@ module Aws::CodeDeploy
     #   <p>The name of a deployment group for the specified application.</p>
     #   @return [String]
     class DeleteDeploymentGroupInput < Struct.new(
+      nil,
       :application_name,
       :deployment_group_name,
       keyword_init: true
@@ -1033,6 +1077,7 @@ module Aws::CodeDeploy
     #               the Amazon EC2 instances in the Auto Scaling group.</p>
     #   @return [Array<Types::AutoScalingGroup>]
     class DeleteDeploymentGroupOutput < Struct.new(
+      nil,
       :hooks_not_cleaned_up,
       keyword_init: true
     )
@@ -1044,6 +1089,7 @@ module Aws::CodeDeploy
     #   <p>The name of the GitHub account connection to delete.</p>
     #   @return [String]
     class DeleteGitHubAccountTokenInput < Struct.new(
+      nil,
       :token_name,
       keyword_init: true
     )
@@ -1055,6 +1101,7 @@ module Aws::CodeDeploy
     #   <p>The name of the GitHub account connection that was deleted.</p>
     #   @return [String]
     class DeleteGitHubAccountTokenOutput < Struct.new(
+      nil,
       :token_name,
       keyword_init: true
     )
@@ -1066,6 +1113,7 @@ module Aws::CodeDeploy
     #               ID) that is linked to one or more CodeDeploy resources.</p>
     #   @return [String]
     class DeleteResourcesByExternalIdInput < Struct.new(
+      nil,
       :external_id,
       keyword_init: true
     )
@@ -1073,6 +1121,7 @@ module Aws::CodeDeploy
     end
 
     class DeleteResourcesByExternalIdOutput < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1083,6 +1132,7 @@ module Aws::CodeDeploy
     #   <p>The message that corresponds to the exception thrown by CodeDeploy.</p>
     #   @return [String]
     class DeploymentAlreadyCompletedException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -1094,6 +1144,7 @@ module Aws::CodeDeploy
     #   <p>The message that corresponds to the exception thrown by CodeDeploy.</p>
     #   @return [String]
     class DeploymentConfigAlreadyExistsException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -1105,6 +1156,7 @@ module Aws::CodeDeploy
     #   <p>The message that corresponds to the exception thrown by CodeDeploy.</p>
     #   @return [String]
     class DeploymentConfigDoesNotExistException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -1116,6 +1168,7 @@ module Aws::CodeDeploy
     #   <p>The message that corresponds to the exception thrown by CodeDeploy.</p>
     #   @return [String]
     class DeploymentConfigInUseException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -1148,6 +1201,7 @@ module Aws::CodeDeploy
     #   <p>Information about a zonal configuration.</p>
     #   @return [Types::ZonalConfig]
     class DeploymentConfigInfo < Struct.new(
+      nil,
       :deployment_config_id,
       :deployment_config_name,
       :minimum_healthy_hosts,
@@ -1165,6 +1219,7 @@ module Aws::CodeDeploy
     #   <p>The message that corresponds to the exception thrown by CodeDeploy.</p>
     #   @return [String]
     class DeploymentConfigLimitExceededException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -1176,6 +1231,7 @@ module Aws::CodeDeploy
     #   <p>The message that corresponds to the exception thrown by CodeDeploy.</p>
     #   @return [String]
     class DeploymentConfigNameRequiredException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -1187,6 +1243,7 @@ module Aws::CodeDeploy
     #   <p>The message that corresponds to the exception thrown by CodeDeploy.</p>
     #   @return [String]
     class DeploymentDoesNotExistException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -1199,6 +1256,7 @@ module Aws::CodeDeploy
     #   <p>The message that corresponds to the exception thrown by CodeDeploy.</p>
     #   @return [String]
     class DeploymentGroupAlreadyExistsException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -1211,6 +1269,7 @@ module Aws::CodeDeploy
     #   <p>The message that corresponds to the exception thrown by CodeDeploy.</p>
     #   @return [String]
     class DeploymentGroupDoesNotExistException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -1313,6 +1372,7 @@ module Aws::CodeDeploy
     #                       <i>CodeDeploy User Guide</i>.</p>
     #   @return [Boolean]
     class DeploymentGroupInfo < Struct.new(
+      nil,
       :application_name,
       :deployment_group_id,
       :deployment_group_name,
@@ -1351,6 +1411,7 @@ module Aws::CodeDeploy
     #   <p>The message that corresponds to the exception thrown by CodeDeploy.</p>
     #   @return [String]
     class DeploymentGroupLimitExceededException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -1362,6 +1423,7 @@ module Aws::CodeDeploy
     #   <p>The message that corresponds to the exception thrown by CodeDeploy.</p>
     #   @return [String]
     class DeploymentGroupNameRequiredException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -1373,6 +1435,7 @@ module Aws::CodeDeploy
     #   <p>The message that corresponds to the exception thrown by CodeDeploy.</p>
     #   @return [String]
     class DeploymentIdRequiredException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -1546,6 +1609,7 @@ module Aws::CodeDeploy
     #   <p>Information about alarms associated with a deployment or deployment group.</p>
     #   @return [Types::AlarmConfiguration]
     class DeploymentInfo < Struct.new(
+      nil,
       :application_name,
       :deployment_group_name,
       :deployment_config_name,
@@ -1593,6 +1657,7 @@ module Aws::CodeDeploy
     #   <p>The message that corresponds to the exception thrown by CodeDeploy.</p>
     #   @return [String]
     class DeploymentIsNotInReadyStateException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -1604,6 +1669,7 @@ module Aws::CodeDeploy
     #   <p>The message that corresponds to the exception thrown by CodeDeploy.</p>
     #   @return [String]
     class DeploymentLimitExceededException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -1615,6 +1681,7 @@ module Aws::CodeDeploy
     #   <p>The message that corresponds to the exception thrown by CodeDeploy.</p>
     #   @return [String]
     class DeploymentNotStartedException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -1643,6 +1710,7 @@ module Aws::CodeDeploy
     #               blue/green deployment.</p>
     #   @return [Integer]
     class DeploymentOverview < Struct.new(
+      nil,
       :pending,
       :in_progress,
       :succeeded,
@@ -1689,6 +1757,7 @@ module Aws::CodeDeploy
     #                   <code>STOP_DEPLOYMENT</code> option for <code>actionOnTimeout</code>.</p>
     #   @return [Integer]
     class DeploymentReadyOption < Struct.new(
+      nil,
       :action_on_timeout,
       :wait_time_in_minutes,
       keyword_init: true
@@ -1710,6 +1779,7 @@ module Aws::CodeDeploy
     #   <p>Indicates whether to route deployment traffic behind a load balancer.</p>
     #   @return [String]
     class DeploymentStyle < Struct.new(
+      nil,
       :deployment_type,
       :deployment_option,
       keyword_init: true
@@ -1739,6 +1809,7 @@ module Aws::CodeDeploy
     #               deployment. This target type is used for all deployments initiated by a CloudFormation stack update.</p>
     #   @return [Types::CloudFormationTarget]
     class DeploymentTarget < Struct.new(
+      nil,
       :deployment_target_type,
       :instance_target,
       :lambda_target,
@@ -1754,6 +1825,7 @@ module Aws::CodeDeploy
     #   <p>The message that corresponds to the exception thrown by CodeDeploy.</p>
     #   @return [String]
     class DeploymentTargetDoesNotExistException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -1765,6 +1837,7 @@ module Aws::CodeDeploy
     #   <p>The message that corresponds to the exception thrown by CodeDeploy.</p>
     #   @return [String]
     class DeploymentTargetIdRequiredException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -1779,6 +1852,7 @@ module Aws::CodeDeploy
     #   <p>The message that corresponds to the exception thrown by CodeDeploy.</p>
     #   @return [String]
     class DeploymentTargetListSizeExceededException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -1790,6 +1864,7 @@ module Aws::CodeDeploy
     #   <p>The name of the on-premises instance to deregister.</p>
     #   @return [String]
     class DeregisterOnPremisesInstanceInput < Struct.new(
+      nil,
       :instance_name,
       keyword_init: true
     )
@@ -1801,6 +1876,7 @@ module Aws::CodeDeploy
     #   <p>The message that corresponds to the exception thrown by CodeDeploy.</p>
     #   @return [String]
     class DescriptionTooLongException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -1846,6 +1922,7 @@ module Aws::CodeDeploy
     #               log.</p>
     #   @return [String]
     class Diagnostics < Struct.new(
+      nil,
       :error_code,
       :script_name,
       :message,
@@ -1880,6 +1957,7 @@ module Aws::CodeDeploy
     #            </ul>
     #   @return [String]
     class EC2TagFilter < Struct.new(
+      nil,
       :key,
       :value,
       :type,
@@ -1895,6 +1973,7 @@ module Aws::CodeDeploy
     #               groups in the list.</p>
     #   @return [Array<Array<Types::EC2TagFilter>>]
     class EC2TagSet < Struct.new(
+      nil,
       :ec2_tag_set_list,
       keyword_init: true
     )
@@ -1911,6 +1990,7 @@ module Aws::CodeDeploy
     #           </p>
     #   @return [String]
     class ECSService < Struct.new(
+      nil,
       :service_name,
       :cluster_name,
       keyword_init: true
@@ -1924,6 +2004,7 @@ module Aws::CodeDeploy
     #   <p>The message that corresponds to the exception thrown by CodeDeploy.</p>
     #   @return [String]
     class ECSServiceMappingLimitExceededException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -1956,6 +2037,7 @@ module Aws::CodeDeploy
     #   <p> The <code>ECSTaskSet</code> objects associated with the ECS target. </p>
     #   @return [Array<Types::ECSTaskSet>]
     class ECSTarget < Struct.new(
+      nil,
       :deployment_id,
       :target_id,
       :target_arn,
@@ -2026,6 +2108,7 @@ module Aws::CodeDeploy
     #                   (<code>BLUE</code>) or a replacement target (<code>GREEN</code>). </p>
     #   @return [String]
     class ECSTaskSet < Struct.new(
+      nil,
       :identifer,
       :desired_count,
       :pending_count,
@@ -2058,6 +2141,7 @@ module Aws::CodeDeploy
     #               then re-registered with after the deployment is complete.</p>
     #   @return [String]
     class ELBInfo < Struct.new(
+      nil,
       :name,
       keyword_init: true
     )
@@ -2125,6 +2209,7 @@ module Aws::CodeDeploy
     #   <p>An accompanying error message.</p>
     #   @return [String]
     class ErrorInformation < Struct.new(
+      nil,
       :code,
       :message,
       keyword_init: true
@@ -2149,6 +2234,7 @@ module Aws::CodeDeploy
     #   <p>When the revision was registered with CodeDeploy.</p>
     #   @return [Time]
     class GenericRevisionInfo < Struct.new(
+      nil,
       :description,
       :deployment_groups,
       :first_used_time,
@@ -2164,6 +2250,7 @@ module Aws::CodeDeploy
     #   <p>The name of an CodeDeploy application associated with the user or Amazon Web Services account.</p>
     #   @return [String]
     class GetApplicationInput < Struct.new(
+      nil,
       :application_name,
       keyword_init: true
     )
@@ -2175,6 +2262,7 @@ module Aws::CodeDeploy
     #   <p>Information about the application.</p>
     #   @return [Types::ApplicationInfo]
     class GetApplicationOutput < Struct.new(
+      nil,
       :application,
       keyword_init: true
     )
@@ -2189,6 +2277,7 @@ module Aws::CodeDeploy
     #   <p>Information about the application revision to get, including type and location.</p>
     #   @return [Types::RevisionLocation]
     class GetApplicationRevisionInput < Struct.new(
+      nil,
       :application_name,
       :revision,
       keyword_init: true
@@ -2207,6 +2296,7 @@ module Aws::CodeDeploy
     #   <p>General information about the revision.</p>
     #   @return [Types::GenericRevisionInfo]
     class GetApplicationRevisionOutput < Struct.new(
+      nil,
       :application_name,
       :revision,
       :revision_info,
@@ -2220,6 +2310,7 @@ module Aws::CodeDeploy
     #   <p>The name of a deployment configuration associated with the user or Amazon Web Services account.</p>
     #   @return [String]
     class GetDeploymentConfigInput < Struct.new(
+      nil,
       :deployment_config_name,
       keyword_init: true
     )
@@ -2231,6 +2322,7 @@ module Aws::CodeDeploy
     #   <p>Information about the deployment configuration.</p>
     #   @return [Types::DeploymentConfigInfo]
     class GetDeploymentConfigOutput < Struct.new(
+      nil,
       :deployment_config_info,
       keyword_init: true
     )
@@ -2245,6 +2337,7 @@ module Aws::CodeDeploy
     #   <p>The name of a deployment group for the specified application.</p>
     #   @return [String]
     class GetDeploymentGroupInput < Struct.new(
+      nil,
       :application_name,
       :deployment_group_name,
       keyword_init: true
@@ -2257,6 +2350,7 @@ module Aws::CodeDeploy
     #   <p>Information about the deployment group.</p>
     #   @return [Types::DeploymentGroupInfo]
     class GetDeploymentGroupOutput < Struct.new(
+      nil,
       :deployment_group_info,
       keyword_init: true
     )
@@ -2269,6 +2363,7 @@ module Aws::CodeDeploy
     #           </p>
     #   @return [String]
     class GetDeploymentInput < Struct.new(
+      nil,
       :deployment_id,
       keyword_init: true
     )
@@ -2283,6 +2378,7 @@ module Aws::CodeDeploy
     #   <p> The unique ID of an instance in the deployment group. </p>
     #   @return [String]
     class GetDeploymentInstanceInput < Struct.new(
+      nil,
       :deployment_id,
       :instance_id,
       keyword_init: true
@@ -2295,6 +2391,7 @@ module Aws::CodeDeploy
     #   <p> Information about the instance. </p>
     #   @return [Types::InstanceSummary]
     class GetDeploymentInstanceOutput < Struct.new(
+      nil,
       :instance_summary,
       keyword_init: true
     )
@@ -2306,6 +2403,7 @@ module Aws::CodeDeploy
     #   <p>Information about the deployment.</p>
     #   @return [Types::DeploymentInfo]
     class GetDeploymentOutput < Struct.new(
+      nil,
       :deployment_info,
       keyword_init: true
     )
@@ -2319,6 +2417,7 @@ module Aws::CodeDeploy
     #   <p> The unique ID of a deployment target. </p>
     #   @return [String]
     class GetDeploymentTargetInput < Struct.new(
+      nil,
       :deployment_id,
       :target_id,
       keyword_init: true
@@ -2334,6 +2433,7 @@ module Aws::CodeDeploy
     #               <code>ecsTarget</code>). </p>
     #   @return [Types::DeploymentTarget]
     class GetDeploymentTargetOutput < Struct.new(
+      nil,
       :deployment_target,
       keyword_init: true
     )
@@ -2345,6 +2445,7 @@ module Aws::CodeDeploy
     #   <p> The name of the on-premises instance about which to get information. </p>
     #   @return [String]
     class GetOnPremisesInstanceInput < Struct.new(
+      nil,
       :instance_name,
       keyword_init: true
     )
@@ -2356,6 +2457,7 @@ module Aws::CodeDeploy
     #   <p> Information about the on-premises instance. </p>
     #   @return [Types::InstanceInfo]
     class GetOnPremisesInstanceOutput < Struct.new(
+      nil,
       :instance_info,
       keyword_init: true
     )
@@ -2367,6 +2469,7 @@ module Aws::CodeDeploy
     #   <p>The message that corresponds to the exception thrown by CodeDeploy.</p>
     #   @return [String]
     class GitHubAccountTokenDoesNotExistException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -2378,6 +2481,7 @@ module Aws::CodeDeploy
     #   <p>The message that corresponds to the exception thrown by CodeDeploy.</p>
     #   @return [String]
     class GitHubAccountTokenNameRequiredException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -2395,6 +2499,7 @@ module Aws::CodeDeploy
     #               application revision.</p>
     #   @return [String]
     class GitHubLocation < Struct.new(
+      nil,
       :repository,
       :commit_id,
       keyword_init: true
@@ -2420,6 +2525,7 @@ module Aws::CodeDeploy
     #            </ul>
     #   @return [String]
     class GreenFleetProvisioningOption < Struct.new(
+      nil,
       :action,
       keyword_init: true
     )
@@ -2431,6 +2537,7 @@ module Aws::CodeDeploy
     #   <p>The message that corresponds to the exception thrown by CodeDeploy.</p>
     #   @return [String]
     class IamArnRequiredException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -2443,6 +2550,7 @@ module Aws::CodeDeploy
     #   <p>The message that corresponds to the exception thrown by CodeDeploy.</p>
     #   @return [String]
     class IamSessionArnAlreadyRegisteredException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -2454,6 +2562,7 @@ module Aws::CodeDeploy
     #   <p>The message that corresponds to the exception thrown by CodeDeploy.</p>
     #   @return [String]
     class IamUserArnAlreadyRegisteredException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -2465,6 +2574,7 @@ module Aws::CodeDeploy
     #   <p>The message that corresponds to the exception thrown by CodeDeploy.</p>
     #   @return [String]
     class IamUserArnRequiredException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -2478,6 +2588,7 @@ module Aws::CodeDeploy
     #   <p>The message that corresponds to the exception thrown by CodeDeploy.</p>
     #   @return [String]
     class InstanceDoesNotExistException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -2491,6 +2602,7 @@ module Aws::CodeDeploy
     #   <p>The message that corresponds to the exception thrown by CodeDeploy.</p>
     #   @return [String]
     class InstanceIdRequiredException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -2522,6 +2634,7 @@ module Aws::CodeDeploy
     #   <p>The tags currently associated with the on-premises instance.</p>
     #   @return [Array<Types::Tag>]
     class InstanceInfo < Struct.new(
+      nil,
       :instance_name,
       :iam_session_arn,
       :iam_user_arn,
@@ -2540,6 +2653,7 @@ module Aws::CodeDeploy
     #   <p>The message that corresponds to the exception thrown by CodeDeploy.</p>
     #   @return [String]
     class InstanceLimitExceededException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -2551,6 +2665,7 @@ module Aws::CodeDeploy
     #   <p>The message that corresponds to the exception thrown by CodeDeploy.</p>
     #   @return [String]
     class InstanceNameAlreadyRegisteredException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -2562,6 +2677,7 @@ module Aws::CodeDeploy
     #   <p>The message that corresponds to the exception thrown by CodeDeploy.</p>
     #   @return [String]
     class InstanceNameRequiredException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -2573,6 +2689,7 @@ module Aws::CodeDeploy
     #   <p>The message that corresponds to the exception thrown by CodeDeploy.</p>
     #   @return [String]
     class InstanceNotRegisteredException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -2639,6 +2756,7 @@ module Aws::CodeDeploy
     #            </ul>
     #   @return [String]
     class InstanceSummary < Struct.new(
+      nil,
       :deployment_id,
       :instance_id,
       :status,
@@ -2676,6 +2794,7 @@ module Aws::CodeDeploy
     #               (<code>BLUE</code>) or a replacement target (<code>GREEN</code>). </p>
     #   @return [String]
     class InstanceTarget < Struct.new(
+      nil,
       :deployment_id,
       :target_id,
       :target_arn,
@@ -2710,6 +2829,7 @@ module Aws::CodeDeploy
     #   <p>The message that corresponds to the exception thrown by CodeDeploy.</p>
     #   @return [String]
     class InvalidAlarmConfigException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -2721,6 +2841,7 @@ module Aws::CodeDeploy
     #   <p>The message that corresponds to the exception thrown by CodeDeploy.</p>
     #   @return [String]
     class InvalidApplicationNameException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -2732,6 +2853,7 @@ module Aws::CodeDeploy
     #   <p>The message that corresponds to the exception thrown by CodeDeploy.</p>
     #   @return [String]
     class InvalidArnException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -2745,6 +2867,7 @@ module Aws::CodeDeploy
     #   <p>The message that corresponds to the exception thrown by CodeDeploy.</p>
     #   @return [String]
     class InvalidAutoRollbackConfigException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -2757,6 +2880,7 @@ module Aws::CodeDeploy
     #   <p>The message that corresponds to the exception thrown by CodeDeploy.</p>
     #   @return [String]
     class InvalidAutoScalingGroupException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -2769,6 +2893,7 @@ module Aws::CodeDeploy
     #   <p>The message that corresponds to the exception thrown by CodeDeploy.</p>
     #   @return [String]
     class InvalidBlueGreenDeploymentConfigurationException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -2780,6 +2905,7 @@ module Aws::CodeDeploy
     #   <p>The message that corresponds to the exception thrown by CodeDeploy.</p>
     #   @return [String]
     class InvalidBucketNameFilterException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -2791,6 +2917,7 @@ module Aws::CodeDeploy
     #   <p>The message that corresponds to the exception thrown by CodeDeploy.</p>
     #   @return [String]
     class InvalidComputePlatformException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -2802,6 +2929,7 @@ module Aws::CodeDeploy
     #   <p>The message that corresponds to the exception thrown by CodeDeploy.</p>
     #   @return [String]
     class InvalidDeployedStateFilterException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -2813,6 +2941,7 @@ module Aws::CodeDeploy
     #   <p>The message that corresponds to the exception thrown by CodeDeploy.</p>
     #   @return [String]
     class InvalidDeploymentConfigNameException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -2824,6 +2953,7 @@ module Aws::CodeDeploy
     #   <p>The message that corresponds to the exception thrown by CodeDeploy.</p>
     #   @return [String]
     class InvalidDeploymentGroupNameException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -2835,6 +2965,7 @@ module Aws::CodeDeploy
     #   <p>The message that corresponds to the exception thrown by CodeDeploy.</p>
     #   @return [String]
     class InvalidDeploymentIdException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -2847,6 +2978,7 @@ module Aws::CodeDeploy
     #   <p>The message that corresponds to the exception thrown by CodeDeploy.</p>
     #   @return [String]
     class InvalidDeploymentInstanceTypeException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -2858,6 +2990,7 @@ module Aws::CodeDeploy
     #   <p>The message that corresponds to the exception thrown by CodeDeploy.</p>
     #   @return [String]
     class InvalidDeploymentStatusException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -2871,6 +3004,7 @@ module Aws::CodeDeploy
     #   <p>The message that corresponds to the exception thrown by CodeDeploy.</p>
     #   @return [String]
     class InvalidDeploymentStyleException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -2882,6 +3016,7 @@ module Aws::CodeDeploy
     #   <p>The message that corresponds to the exception thrown by CodeDeploy.</p>
     #   @return [String]
     class InvalidDeploymentTargetIdException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -2893,6 +3028,7 @@ module Aws::CodeDeploy
     #   <p>The message that corresponds to the exception thrown by CodeDeploy.</p>
     #   @return [String]
     class InvalidDeploymentWaitTypeException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -2905,6 +3041,7 @@ module Aws::CodeDeploy
     #   <p>The message that corresponds to the exception thrown by CodeDeploy.</p>
     #   @return [String]
     class InvalidEC2TagCombinationException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -2916,6 +3053,7 @@ module Aws::CodeDeploy
     #   <p>The message that corresponds to the exception thrown by CodeDeploy.</p>
     #   @return [String]
     class InvalidEC2TagException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -2927,6 +3065,7 @@ module Aws::CodeDeploy
     #   <p>The message that corresponds to the exception thrown by CodeDeploy.</p>
     #   @return [String]
     class InvalidECSServiceException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -2938,6 +3077,7 @@ module Aws::CodeDeploy
     #   <p>The message that corresponds to the exception thrown by CodeDeploy.</p>
     #   @return [String]
     class InvalidExternalIdException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -2951,6 +3091,7 @@ module Aws::CodeDeploy
     #   <p>The message that corresponds to the exception thrown by CodeDeploy.</p>
     #   @return [String]
     class InvalidFileExistsBehaviorException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -2962,6 +3103,7 @@ module Aws::CodeDeploy
     #   <p>The message that corresponds to the exception thrown by CodeDeploy.</p>
     #   @return [String]
     class InvalidGitHubAccountTokenException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -2973,6 +3115,7 @@ module Aws::CodeDeploy
     #   <p>The message that corresponds to the exception thrown by CodeDeploy.</p>
     #   @return [String]
     class InvalidGitHubAccountTokenNameException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -2984,6 +3127,7 @@ module Aws::CodeDeploy
     #   <p>The message that corresponds to the exception thrown by CodeDeploy.</p>
     #   @return [String]
     class InvalidIamSessionArnException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -2995,6 +3139,7 @@ module Aws::CodeDeploy
     #   <p>The message that corresponds to the exception thrown by CodeDeploy.</p>
     #   @return [String]
     class InvalidIamUserArnException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -3008,6 +3153,7 @@ module Aws::CodeDeploy
     #   <p>The message that corresponds to the exception thrown by CodeDeploy.</p>
     #   @return [String]
     class InvalidIgnoreApplicationStopFailuresValueException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -3019,6 +3165,7 @@ module Aws::CodeDeploy
     #   <p>The message that corresponds to the exception thrown by CodeDeploy.</p>
     #   @return [String]
     class InvalidInputException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -3030,6 +3177,7 @@ module Aws::CodeDeploy
     #   <p>The message that corresponds to the exception thrown by CodeDeploy.</p>
     #   @return [String]
     class InvalidInstanceNameException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -3041,6 +3189,7 @@ module Aws::CodeDeploy
     #   <p>The message that corresponds to the exception thrown by CodeDeploy.</p>
     #   @return [String]
     class InvalidInstanceStatusException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -3054,6 +3203,7 @@ module Aws::CodeDeploy
     #   <p>The message that corresponds to the exception thrown by CodeDeploy.</p>
     #   @return [String]
     class InvalidInstanceTypeException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -3065,6 +3215,7 @@ module Aws::CodeDeploy
     #   <p>The message that corresponds to the exception thrown by CodeDeploy.</p>
     #   @return [String]
     class InvalidKeyPrefixFilterException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -3078,6 +3229,7 @@ module Aws::CodeDeploy
     #   <p>The message that corresponds to the exception thrown by CodeDeploy.</p>
     #   @return [String]
     class InvalidLifecycleEventHookExecutionIdException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -3090,6 +3242,7 @@ module Aws::CodeDeploy
     #   <p>The message that corresponds to the exception thrown by CodeDeploy.</p>
     #   @return [String]
     class InvalidLifecycleEventHookExecutionStatusException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -3101,6 +3254,7 @@ module Aws::CodeDeploy
     #   <p>The message that corresponds to the exception thrown by CodeDeploy.</p>
     #   @return [String]
     class InvalidLoadBalancerInfoException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -3112,6 +3266,7 @@ module Aws::CodeDeploy
     #   <p>The message that corresponds to the exception thrown by CodeDeploy.</p>
     #   @return [String]
     class InvalidMinimumHealthyHostValueException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -3123,6 +3278,7 @@ module Aws::CodeDeploy
     #   <p>The message that corresponds to the exception thrown by CodeDeploy.</p>
     #   @return [String]
     class InvalidNextTokenException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -3135,6 +3291,7 @@ module Aws::CodeDeploy
     #   <p>The message that corresponds to the exception thrown by CodeDeploy.</p>
     #   @return [String]
     class InvalidOnPremisesTagCombinationException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -3146,6 +3303,7 @@ module Aws::CodeDeploy
     #   <p>The message that corresponds to the exception thrown by CodeDeploy.</p>
     #   @return [String]
     class InvalidOperationException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -3157,6 +3315,7 @@ module Aws::CodeDeploy
     #   <p>The message that corresponds to the exception thrown by CodeDeploy.</p>
     #   @return [String]
     class InvalidRegistrationStatusException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -3168,6 +3327,7 @@ module Aws::CodeDeploy
     #   <p>The message that corresponds to the exception thrown by CodeDeploy.</p>
     #   @return [String]
     class InvalidRevisionException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -3181,6 +3341,7 @@ module Aws::CodeDeploy
     #   <p>The message that corresponds to the exception thrown by CodeDeploy.</p>
     #   @return [String]
     class InvalidRoleException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -3193,6 +3354,7 @@ module Aws::CodeDeploy
     #   <p>The message that corresponds to the exception thrown by CodeDeploy.</p>
     #   @return [String]
     class InvalidSortByException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -3204,6 +3366,7 @@ module Aws::CodeDeploy
     #   <p>The message that corresponds to the exception thrown by CodeDeploy.</p>
     #   @return [String]
     class InvalidSortOrderException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -3215,6 +3378,7 @@ module Aws::CodeDeploy
     #   <p>The message that corresponds to the exception thrown by CodeDeploy.</p>
     #   @return [String]
     class InvalidTagException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -3226,6 +3390,7 @@ module Aws::CodeDeploy
     #   <p>The message that corresponds to the exception thrown by CodeDeploy.</p>
     #   @return [String]
     class InvalidTagFilterException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -3237,6 +3402,7 @@ module Aws::CodeDeploy
     #   <p>The message that corresponds to the exception thrown by CodeDeploy.</p>
     #   @return [String]
     class InvalidTagsToAddException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -3248,6 +3414,7 @@ module Aws::CodeDeploy
     #   <p>The message that corresponds to the exception thrown by CodeDeploy.</p>
     #   @return [String]
     class InvalidTargetFilterNameException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -3259,6 +3426,7 @@ module Aws::CodeDeploy
     #   <p>The message that corresponds to the exception thrown by CodeDeploy.</p>
     #   @return [String]
     class InvalidTargetGroupPairException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -3285,6 +3453,7 @@ module Aws::CodeDeploy
     #   <p>The message that corresponds to the exception thrown by CodeDeploy.</p>
     #   @return [String]
     class InvalidTargetInstancesException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -3296,6 +3465,7 @@ module Aws::CodeDeploy
     #   <p>The message that corresponds to the exception thrown by CodeDeploy.</p>
     #   @return [String]
     class InvalidTimeRangeException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -3308,6 +3478,7 @@ module Aws::CodeDeploy
     #   <p>The message that corresponds to the exception thrown by CodeDeploy.</p>
     #   @return [String]
     class InvalidTrafficRoutingConfigurationException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -3319,6 +3490,7 @@ module Aws::CodeDeploy
     #   <p>The message that corresponds to the exception thrown by CodeDeploy.</p>
     #   @return [String]
     class InvalidTriggerConfigException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -3332,6 +3504,7 @@ module Aws::CodeDeploy
     #   <p>The message that corresponds to the exception thrown by CodeDeploy.</p>
     #   @return [String]
     class InvalidUpdateOutdatedInstancesOnlyValueException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -3343,6 +3516,7 @@ module Aws::CodeDeploy
     #   <p>The message that corresponds to the exception thrown by CodeDeploy.</p>
     #   @return [String]
     class InvalidZonalDeploymentConfigurationException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -3370,6 +3544,7 @@ module Aws::CodeDeploy
     #               function receives. </p>
     #   @return [Float]
     class LambdaFunctionInfo < Struct.new(
+      nil,
       :function_name,
       :function_alias,
       :current_version,
@@ -3413,6 +3588,7 @@ module Aws::CodeDeploy
     #               function. </p>
     #   @return [Types::LambdaFunctionInfo]
     class LambdaTarget < Struct.new(
+      nil,
       :deployment_id,
       :target_id,
       :target_arn,
@@ -3442,6 +3618,7 @@ module Aws::CodeDeploy
     #               started.</p>
     #   @return [Time]
     class LastDeploymentInfo < Struct.new(
+      nil,
       :deployment_id,
       :status,
       :end_time,
@@ -3490,6 +3667,7 @@ module Aws::CodeDeploy
     #            </ul>
     #   @return [String]
     class LifecycleEvent < Struct.new(
+      nil,
       :lifecycle_event_name,
       :diagnostics,
       :start_time,
@@ -3506,6 +3684,7 @@ module Aws::CodeDeploy
     #   <p>The message that corresponds to the exception thrown by CodeDeploy.</p>
     #   @return [String]
     class LifecycleEventAlreadyCompletedException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -3517,6 +3696,7 @@ module Aws::CodeDeploy
     #   <p>The message that corresponds to the exception thrown by CodeDeploy.</p>
     #   @return [String]
     class LifecycleHookLimitExceededException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -3597,6 +3777,7 @@ module Aws::CodeDeploy
     #               It can be used to return the next set of applications in the list.</p>
     #   @return [String]
     class ListApplicationRevisionsInput < Struct.new(
+      nil,
       :application_name,
       :sort_by,
       :sort_order,
@@ -3619,6 +3800,7 @@ module Aws::CodeDeploy
     #               application revisions in the list.</p>
     #   @return [String]
     class ListApplicationRevisionsOutput < Struct.new(
+      nil,
       :revisions,
       :next_token,
       keyword_init: true
@@ -3632,6 +3814,7 @@ module Aws::CodeDeploy
     #               return the next set of applications in the list.</p>
     #   @return [String]
     class ListApplicationsInput < Struct.new(
+      nil,
       :next_token,
       keyword_init: true
     )
@@ -3648,6 +3831,7 @@ module Aws::CodeDeploy
     #               the list.</p>
     #   @return [String]
     class ListApplicationsOutput < Struct.new(
+      nil,
       :applications,
       :next_token,
       keyword_init: true
@@ -3661,6 +3845,7 @@ module Aws::CodeDeploy
     #               can be used to return the next set of deployment configurations in the list. </p>
     #   @return [String]
     class ListDeploymentConfigsInput < Struct.new(
+      nil,
       :next_token,
       keyword_init: true
     )
@@ -3678,6 +3863,7 @@ module Aws::CodeDeploy
     #               deployment configurations in the list.</p>
     #   @return [String]
     class ListDeploymentConfigsOutput < Struct.new(
+      nil,
       :deployment_configs_list,
       :next_token,
       keyword_init: true
@@ -3694,6 +3880,7 @@ module Aws::CodeDeploy
     #               to return the next set of deployment groups in the list.</p>
     #   @return [String]
     class ListDeploymentGroupsInput < Struct.new(
+      nil,
       :application_name,
       :next_token,
       keyword_init: true
@@ -3714,6 +3901,7 @@ module Aws::CodeDeploy
     #               groups in the list.</p>
     #   @return [String]
     class ListDeploymentGroupsOutput < Struct.new(
+      nil,
       :application_name,
       :deployment_groups,
       :next_token,
@@ -3768,6 +3956,7 @@ module Aws::CodeDeploy
     #               want to view instance information.</p>
     #   @return [Array<String>]
     class ListDeploymentInstancesInput < Struct.new(
+      nil,
       :deployment_id,
       :next_token,
       :instance_status_filter,
@@ -3787,6 +3976,7 @@ module Aws::CodeDeploy
     #               deployment instances in the list.</p>
     #   @return [String]
     class ListDeploymentInstancesOutput < Struct.new(
+      nil,
       :instances_list,
       :next_token,
       keyword_init: true
@@ -3819,6 +4009,7 @@ module Aws::CodeDeploy
     #            </ul>
     #   @return [Hash<String, Array<String>>]
     class ListDeploymentTargetsInput < Struct.new(
+      nil,
       :deployment_id,
       :next_token,
       :target_filters,
@@ -3836,6 +4027,7 @@ module Aws::CodeDeploy
     #               set of deployment targets in the list. </p>
     #   @return [String]
     class ListDeploymentTargetsOutput < Struct.new(
+      nil,
       :target_ids,
       :next_token,
       keyword_init: true
@@ -3905,6 +4097,7 @@ module Aws::CodeDeploy
     #               return the next set of deployments in the list.</p>
     #   @return [String]
     class ListDeploymentsInput < Struct.new(
+      nil,
       :application_name,
       :deployment_group_name,
       :external_id,
@@ -3926,6 +4119,7 @@ module Aws::CodeDeploy
     #               the list.</p>
     #   @return [String]
     class ListDeploymentsOutput < Struct.new(
+      nil,
       :deployments,
       :next_token,
       keyword_init: true
@@ -3939,6 +4133,7 @@ module Aws::CodeDeploy
     #               call. It can be used to return the next set of names in the list. </p>
     #   @return [String]
     class ListGitHubAccountTokenNamesInput < Struct.new(
+      nil,
       :next_token,
       keyword_init: true
     )
@@ -3955,6 +4150,7 @@ module Aws::CodeDeploy
     #               set of names in the list. </p>
     #   @return [String]
     class ListGitHubAccountTokenNamesOutput < Struct.new(
+      nil,
       :token_name_list,
       :next_token,
       keyword_init: true
@@ -3987,6 +4183,7 @@ module Aws::CodeDeploy
     #               used to return the next set of on-premises instances in the list.</p>
     #   @return [String]
     class ListOnPremisesInstancesInput < Struct.new(
+      nil,
       :registration_status,
       :tag_filters,
       :next_token,
@@ -4005,6 +4202,7 @@ module Aws::CodeDeploy
     #               on-premises instances in the list.</p>
     #   @return [String]
     class ListOnPremisesInstancesOutput < Struct.new(
+      nil,
       :instance_names,
       :next_token,
       keyword_init: true
@@ -4022,6 +4220,7 @@ module Aws::CodeDeploy
     #               be used to return the next set of applications in the list.</p>
     #   @return [String]
     class ListTagsForResourceInput < Struct.new(
+      nil,
       :resource_arn,
       :next_token,
       keyword_init: true
@@ -4039,6 +4238,7 @@ module Aws::CodeDeploy
     #               application revisions in the list.</p>
     #   @return [String]
     class ListTagsForResourceOutput < Struct.new(
+      nil,
       :tags,
       :next_token,
       keyword_init: true
@@ -4081,6 +4281,7 @@ module Aws::CodeDeploy
     #                   <code>TargeGroupPairInfo</code> objects with a maximum size of one. </p>
     #   @return [Array<Types::TargetGroupPairInfo>]
     class LoadBalancerInfo < Struct.new(
+      nil,
       :elb_info_list,
       :target_group_info_list,
       :target_group_pair_info_list,
@@ -4129,6 +4330,7 @@ module Aws::CodeDeploy
     #   <p>The minimum healthy instance value.</p>
     #   @return [Integer]
     class MinimumHealthyHosts < Struct.new(
+      nil,
       :type,
       :value,
       keyword_init: true
@@ -4152,6 +4354,7 @@ module Aws::CodeDeploy
     #               option.</p>
     #   @return [Integer]
     class MinimumHealthyHostsPerZone < Struct.new(
+      nil,
       :type,
       :value,
       keyword_init: true
@@ -4170,6 +4373,7 @@ module Aws::CodeDeploy
     #   <p>The message that corresponds to the exception thrown by CodeDeploy.</p>
     #   @return [String]
     class MultipleIamArnsProvidedException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -4183,6 +4387,7 @@ module Aws::CodeDeploy
     #               in the list.</p>
     #   @return [Array<Array<Types::TagFilter>>]
     class OnPremisesTagSet < Struct.new(
+      nil,
       :on_premises_tag_set_list,
       keyword_init: true
     )
@@ -4194,6 +4399,7 @@ module Aws::CodeDeploy
     #   <p>The message that corresponds to the exception thrown by CodeDeploy.</p>
     #   @return [String]
     class OperationNotSupportedException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -4215,6 +4421,7 @@ module Aws::CodeDeploy
     #                   <code>Failed</code> can be passed successfully in your API call.</p>
     #   @return [String]
     class PutLifecycleEventHookExecutionStatusInput < Struct.new(
+      nil,
       :deployment_id,
       :lifecycle_event_hook_execution_id,
       :status,
@@ -4228,6 +4435,7 @@ module Aws::CodeDeploy
     #                   <code>hooks</code> section of the deployment's AppSpec file.</p>
     #   @return [String]
     class PutLifecycleEventHookExecutionStatusOutput < Struct.new(
+      nil,
       :lifecycle_event_hook_execution_id,
       keyword_init: true
     )
@@ -4248,6 +4456,7 @@ module Aws::CodeDeploy
     #   <p>The SHA256 hash value of the revision content.</p>
     #   @return [String]
     class RawString < Struct.new(
+      nil,
       :content,
       :sha256,
       keyword_init: true
@@ -4267,6 +4476,7 @@ module Aws::CodeDeploy
     #               location.</p>
     #   @return [Types::RevisionLocation]
     class RegisterApplicationRevisionInput < Struct.new(
+      nil,
       :application_name,
       :description,
       :revision,
@@ -4287,6 +4497,7 @@ module Aws::CodeDeploy
     #   <p>The ARN of the user to associate with the on-premises instance.</p>
     #   @return [String]
     class RegisterOnPremisesInstanceInput < Struct.new(
+      nil,
       :instance_name,
       :iam_session_arn,
       :iam_user_arn,
@@ -4304,6 +4515,7 @@ module Aws::CodeDeploy
     #               deployment.</p>
     #   @return [Array<String>]
     class RelatedDeployments < Struct.new(
+      nil,
       :auto_update_outdated_instances_root_deployment_id,
       :auto_update_outdated_instances_deployment_ids,
       keyword_init: true
@@ -4320,6 +4532,7 @@ module Aws::CodeDeploy
     #   <p>The names of the on-premises instances from which to remove tags.</p>
     #   @return [Array<String>]
     class RemoveTagsFromOnPremisesInstancesInput < Struct.new(
+      nil,
       :tags,
       :instance_names,
       keyword_init: true
@@ -4332,6 +4545,7 @@ module Aws::CodeDeploy
     #   <p>The message that corresponds to the exception thrown by CodeDeploy.</p>
     #   @return [String]
     class ResourceArnRequiredException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -4343,6 +4557,7 @@ module Aws::CodeDeploy
     #   <p>The message that corresponds to the exception thrown by CodeDeploy.</p>
     #   @return [String]
     class ResourceValidationException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -4354,6 +4569,7 @@ module Aws::CodeDeploy
     #   <p>The message that corresponds to the exception thrown by CodeDeploy.</p>
     #   @return [String]
     class RevisionDoesNotExistException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -4369,6 +4585,7 @@ module Aws::CodeDeploy
     #               deployment groups.</p>
     #   @return [Types::GenericRevisionInfo]
     class RevisionInfo < Struct.new(
+      nil,
       :revision_location,
       :generic_revision_info,
       keyword_init: true
@@ -4414,6 +4631,7 @@ module Aws::CodeDeploy
     #               deployment. The content is formatted as JSON or YAML and stored as a RawString. </p>
     #   @return [Types::AppSpecContent]
     class RevisionLocation < Struct.new(
+      nil,
       :revision_type,
       :s3_location,
       :git_hub_location,
@@ -4429,6 +4647,7 @@ module Aws::CodeDeploy
     #   <p>The message that corresponds to the exception thrown by CodeDeploy.</p>
     #   @return [String]
     class RevisionRequiredException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -4440,6 +4659,7 @@ module Aws::CodeDeploy
     #   <p>The message that corresponds to the exception thrown by CodeDeploy.</p>
     #   @return [String]
     class RoleRequiredException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -4459,6 +4679,7 @@ module Aws::CodeDeploy
     #               the deployment can't be rolled back, is in progress, failed, or succeeded). </p>
     #   @return [String]
     class RollbackInfo < Struct.new(
+      nil,
       :rollback_deployment_id,
       :rollback_triggering_deployment_id,
       :rollback_message,
@@ -4514,6 +4735,7 @@ module Aws::CodeDeploy
     #               skipped.</p>
     #   @return [String]
     class S3Location < Struct.new(
+      nil,
       :bucket,
       :key,
       :bundle_type,
@@ -4529,6 +4751,7 @@ module Aws::CodeDeploy
     #               termination wait time. </p>
     #   @return [String]
     class SkipWaitTimeForInstanceTerminationInput < Struct.new(
+      nil,
       :deployment_id,
       keyword_init: true
     )
@@ -4544,6 +4767,7 @@ module Aws::CodeDeploy
     #               should be rolled back to the previous version of the application revision. </p>
     #   @return [Boolean]
     class StopDeploymentInput < Struct.new(
+      nil,
       :deployment_id,
       :auto_rollback_enabled,
       keyword_init: true
@@ -4567,6 +4791,7 @@ module Aws::CodeDeploy
     #   <p>An accompanying status message.</p>
     #   @return [String]
     class StopDeploymentOutput < Struct.new(
+      nil,
       :status,
       :status_message,
       keyword_init: true
@@ -4582,6 +4807,7 @@ module Aws::CodeDeploy
     #   <p>The tag's value.</p>
     #   @return [String]
     class Tag < Struct.new(
+      nil,
       :key,
       :value,
       keyword_init: true
@@ -4611,6 +4837,7 @@ module Aws::CodeDeploy
     #            </ul>
     #   @return [String]
     class TagFilter < Struct.new(
+      nil,
       :key,
       :value,
       :type,
@@ -4624,6 +4851,7 @@ module Aws::CodeDeploy
     #   <p>The message that corresponds to the exception thrown by CodeDeploy.</p>
     #   @return [String]
     class TagLimitExceededException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -4635,6 +4863,7 @@ module Aws::CodeDeploy
     #   <p>The message that corresponds to the exception thrown by CodeDeploy.</p>
     #   @return [String]
     class TagRequiredException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -4649,6 +4878,7 @@ module Aws::CodeDeploy
     #               is identified by the <code>ResourceArn</code> input parameter. </p>
     #   @return [Array<Types::Tag>]
     class TagResourceInput < Struct.new(
+      nil,
       :resource_arn,
       :tags,
       keyword_init: true
@@ -4657,6 +4887,7 @@ module Aws::CodeDeploy
     end
 
     class TagResourceOutput < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -4668,6 +4899,7 @@ module Aws::CodeDeploy
     #   <p>The message that corresponds to the exception thrown by CodeDeploy.</p>
     #   @return [String]
     class TagSetListLimitExceededException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -4685,6 +4917,7 @@ module Aws::CodeDeploy
     #               and then re-registered with after the deployment is complete. </p>
     #   @return [String]
     class TargetGroupInfo < Struct.new(
+      nil,
       :name,
       keyword_init: true
     )
@@ -4705,6 +4938,7 @@ module Aws::CodeDeploy
     #               deployment. </p>
     #   @return [Types::TrafficRoute]
     class TargetGroupPairInfo < Struct.new(
+      nil,
       :target_groups,
       :prod_traffic_route,
       :test_traffic_route,
@@ -4731,6 +4965,7 @@ module Aws::CodeDeploy
     #               <code>tagFilters</code>.</p>
     #   @return [Types::EC2TagSet]
     class TargetInstances < Struct.new(
+      nil,
       :tag_filters,
       :auto_scaling_groups,
       :ec2_tag_set,
@@ -4744,6 +4979,7 @@ module Aws::CodeDeploy
     #   <p>The message that corresponds to the exception thrown by CodeDeploy.</p>
     #   @return [String]
     class ThrottlingException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -4763,6 +4999,7 @@ module Aws::CodeDeploy
     #                   <code>TimeBasedCanary</code> deployment.</p>
     #   @return [Integer]
     class TimeBasedCanary < Struct.new(
+      nil,
       :canary_percentage,
       :canary_interval,
       keyword_init: true
@@ -4789,6 +5026,7 @@ module Aws::CodeDeploy
     #                   <code>TimeBasedLinear</code> deployment.</p>
     #   @return [Integer]
     class TimeBasedLinear < Struct.new(
+      nil,
       :linear_percentage,
       :linear_interval,
       keyword_init: true
@@ -4816,6 +5054,7 @@ module Aws::CodeDeploy
     #            </note>
     #   @return [Time]
     class TimeRange < Struct.new(
+      nil,
       :start,
       :end,
       keyword_init: true
@@ -4831,6 +5070,7 @@ module Aws::CodeDeploy
     #               size of one. </p>
     #   @return [Array<String>]
     class TrafficRoute < Struct.new(
+      nil,
       :listener_arns,
       keyword_init: true
     )
@@ -4858,6 +5098,7 @@ module Aws::CodeDeploy
     #               file.</p>
     #   @return [Types::TimeBasedLinear]
     class TrafficRoutingConfig < Struct.new(
+      nil,
       :type,
       :time_based_canary,
       :time_based_linear,
@@ -4878,6 +5119,7 @@ module Aws::CodeDeploy
     #   <p>The event type or types for which notifications are triggered.</p>
     #   @return [Array<String>]
     class TriggerConfig < Struct.new(
+      nil,
       :trigger_name,
       :trigger_target_arn,
       :trigger_events,
@@ -4891,6 +5133,7 @@ module Aws::CodeDeploy
     #   <p>The message that corresponds to the exception thrown by CodeDeploy.</p>
     #   @return [String]
     class TriggerTargetsLimitExceededException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -4902,6 +5145,7 @@ module Aws::CodeDeploy
     #   <p>The message that corresponds to the exception thrown by CodeDeploy.</p>
     #   @return [String]
     class UnsupportedActionForDeploymentTypeException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -4918,6 +5162,7 @@ module Aws::CodeDeploy
     #                   <code>ResourceArn</code> input parameter. </p>
     #   @return [Array<String>]
     class UntagResourceInput < Struct.new(
+      nil,
       :resource_arn,
       :tag_keys,
       keyword_init: true
@@ -4926,6 +5171,7 @@ module Aws::CodeDeploy
     end
 
     class UntagResourceOutput < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -4939,6 +5185,7 @@ module Aws::CodeDeploy
     #   <p>The new name to give the application.</p>
     #   @return [String]
     class UpdateApplicationInput < Struct.new(
+      nil,
       :application_name,
       :new_application_name,
       keyword_init: true
@@ -5047,6 +5294,7 @@ module Aws::CodeDeploy
     #                   Guide</i>.</p>
     #   @return [Boolean]
     class UpdateDeploymentGroupInput < Struct.new(
+      nil,
       :application_name,
       :current_deployment_group_name,
       :new_deployment_group_name,
@@ -5078,6 +5326,7 @@ module Aws::CodeDeploy
     #               corresponding Auto Scaling lifecycle event hooks from the Amazon Web Services account. If the output contains data, CodeDeploy could not remove some Auto Scaling lifecycle event hooks from the Amazon Web Services account.</p>
     #   @return [Array<Types::AutoScalingGroup>]
     class UpdateDeploymentGroupOutput < Struct.new(
+      nil,
       :hooks_not_cleaned_up,
       keyword_init: true
     )
@@ -5124,6 +5373,7 @@ module Aws::CodeDeploy
     #                   Guide</i>.</p>
     #   @return [Types::MinimumHealthyHostsPerZone]
     class ZonalConfig < Struct.new(
+      nil,
       :first_zone_monitor_duration_in_seconds,
       :monitor_duration_in_seconds,
       :minimum_healthy_hosts_per_zone,

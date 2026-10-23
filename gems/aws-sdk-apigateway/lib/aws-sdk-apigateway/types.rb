@@ -14,6 +14,7 @@ module Aws::APIGateway
     #   <p>The Amazon Resource Name (ARN) of the CloudWatch Logs log group or Kinesis Data Firehose delivery stream to receive access logs. If you specify a Kinesis Data Firehose delivery stream, the stream name must begin with <code>amazon-apigateway-</code>.</p>
     #   @return [String]
     class AccessLogSettings < Struct.new(
+      nil,
       :format,
       :destination_arn,
       keyword_init: true
@@ -53,6 +54,7 @@ module Aws::APIGateway
     #   <p>The collection of tags. Each tag element is associated with a given resource.</p>
     #   @return [Hash<String, String>]
     class ApiKey < Struct.new(
+      nil,
       :id,
       :value,
       :name,
@@ -84,6 +86,7 @@ module Aws::APIGateway
     #   <p>Map containing method level throttling information for API stage in a usage plan.</p>
     #   @return [Hash<String, Types::ThrottleSettings>]
     class ApiStage < Struct.new(
+      nil,
       :api_id,
       :stage,
       :throttle,
@@ -138,6 +141,7 @@ module Aws::APIGateway
     #   <p>The TTL in seconds of cached authorizer results. If it equals 0, authorization caching is disabled. If it is greater than 0, API Gateway will cache authorizer responses. If this field is not set, the default value is 300. The maximum value is 3600, or 1 hour.</p>
     #   @return [Integer]
     class Authorizer < Struct.new(
+      nil,
       :id,
       :name,
       :type,
@@ -157,6 +161,7 @@ module Aws::APIGateway
     # @!attribute message
     #   @return [String]
     class BadRequestException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -174,6 +179,7 @@ module Aws::APIGateway
     #   <p>The name of the associated stage.</p>
     #   @return [String]
     class BasePathMapping < Struct.new(
+      nil,
       :base_path,
       :rest_api_id,
       :stage,
@@ -196,6 +202,7 @@ module Aws::APIGateway
     #   <p>A Boolean flag to indicate whether the canary deployment uses the stage cache or not.</p>
     #   @return [Boolean]
     class CanarySettings < Struct.new(
+      nil,
       :percent_traffic,
       :deployment_id,
       :stage_variable_overrides,
@@ -231,6 +238,7 @@ module Aws::APIGateway
     #   <p>The collection of tags. Each tag element is associated with a given resource.</p>
     #   @return [Hash<String, String>]
     class ClientCertificate < Struct.new(
+      nil,
       :client_certificate_id,
       :description,
       :pem_encoded_certificate,
@@ -246,6 +254,7 @@ module Aws::APIGateway
     # @!attribute message
     #   @return [String]
     class ConflictException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -284,6 +293,7 @@ module Aws::APIGateway
     #   <p>The collection of tags. Each tag element is associated with a given resource.</p>
     #   @return [Hash<String, String>]
     class CreateApiKeyOutput < Struct.new(
+      nil,
       :id,
       :value,
       :name,
@@ -330,6 +340,7 @@ module Aws::APIGateway
     #   <p>The key-value map of strings. The valid character set is [a-zA-Z+-=._:/]. The tag key can be up to 128 characters and must not start with <code>aws:</code>. The tag value can be up to 256 characters.</p>
     #   @return [Hash<String, String>]
     class CreateApiKeyRequest < Struct.new(
+      nil,
       :name,
       :description,
       :enabled,
@@ -389,6 +400,7 @@ module Aws::APIGateway
     #   <p>The TTL in seconds of cached authorizer results. If it equals 0, authorization caching is disabled. If it is greater than 0, API Gateway will cache authorizer responses. If this field is not set, the default value is 300. The maximum value is 3600, or 1 hour.</p>
     #   @return [Integer]
     class CreateAuthorizerOutput < Struct.new(
+      nil,
       :id,
       :name,
       :type,
@@ -452,6 +464,7 @@ module Aws::APIGateway
     #   <p>The TTL in seconds of cached authorizer results. If it equals 0, authorization caching is disabled. If it is greater than 0, API Gateway will cache authorizer responses. If this field is not set, the default value is 300. The maximum value is 3600, or 1 hour.</p>
     #   @return [Integer]
     class CreateAuthorizerRequest < Struct.new(
+      nil,
       :rest_api_id,
       :name,
       :type,
@@ -478,6 +491,7 @@ module Aws::APIGateway
     #   <p>The name of the associated stage.</p>
     #   @return [String]
     class CreateBasePathMappingOutput < Struct.new(
+      nil,
       :base_path,
       :rest_api_id,
       :stage,
@@ -503,6 +517,7 @@ module Aws::APIGateway
     #   <p>The name of the API's stage that you want to use for this mapping. Specify '(none)' if you want callers to explicitly specify the stage name after any base path name.</p>
     #   @return [String]
     class CreateBasePathMappingRequest < Struct.new(
+      nil,
       :domain_name,
       :domain_name_id,
       :base_path,
@@ -527,6 +542,7 @@ module Aws::APIGateway
     #   <p>A summary of the RestApi at the date and time that the deployment resource was created.</p>
     #   @return [Hash<String, Hash<String, Types::MethodSnapshot>>]
     class CreateDeploymentOutput < Struct.new(
+      nil,
       :id,
       :description,
       :created_date,
@@ -567,6 +583,7 @@ module Aws::APIGateway
     #   <p>Specifies whether active tracing with X-ray is enabled for the Stage.</p>
     #   @return [Boolean]
     class CreateDeploymentRequest < Struct.new(
+      nil,
       :rest_api_id,
       :stage_name,
       :stage_description,
@@ -592,6 +609,7 @@ module Aws::APIGateway
     #   <p>A content map of API-specific key-value pairs describing the targeted API entity. The map must be encoded as a JSON string, e.g., <code>"{ \"description\": \"The API does ...\" }"</code>.  Only OpenAPI-compliant documentation-related fields from the properties map are exported and, hence, published as part of the API entity definitions, while the original documentation parts are exported in a OpenAPI extension of <code>x-amazon-apigateway-documentation</code>.</p>
     #   @return [String]
     class CreateDocumentationPartOutput < Struct.new(
+      nil,
       :id,
       :location,
       :properties,
@@ -611,6 +629,7 @@ module Aws::APIGateway
     #   <p>The new documentation content map of the targeted API entity. Enclosed key-value pairs are API-specific, but only OpenAPI-compliant key-value pairs can be exported and, hence, published.</p>
     #   @return [String]
     class CreateDocumentationPartRequest < Struct.new(
+      nil,
       :rest_api_id,
       :location,
       :properties,
@@ -630,6 +649,7 @@ module Aws::APIGateway
     #   <p>The description of the API documentation snapshot.</p>
     #   @return [String]
     class CreateDocumentationVersionOutput < Struct.new(
+      nil,
       :version,
       :created_date,
       :description,
@@ -652,6 +672,7 @@ module Aws::APIGateway
     #   <p>A description about the new documentation snapshot.</p>
     #   @return [String]
     class CreateDocumentationVersionRequest < Struct.new(
+      nil,
       :rest_api_id,
       :documentation_version,
       :stage_name,
@@ -686,6 +707,7 @@ module Aws::APIGateway
     #   </p>
     #   @return [Hash<String, String>]
     class CreateDomainNameAccessAssociationOutput < Struct.new(
+      nil,
       :domain_name_access_association_arn,
       :domain_name_arn,
       :access_association_source_type,
@@ -715,6 +737,7 @@ module Aws::APIGateway
     #   <p>The key-value map of strings. The valid character set is [a-zA-Z+-=._:/]. The tag key can be up to 128 characters and must not start with <code>aws:</code>. The tag value can be up to 256 characters.</p>
     #   @return [Hash<String, String>]
     class CreateDomainNameAccessAssociationRequest < Struct.new(
+      nil,
       :domain_name_arn,
       :access_association_source_type,
       :access_association_source,
@@ -799,6 +822,7 @@ module Aws::APIGateway
     #   <p>The routing mode for this domain name. The routing mode determines how API Gateway sends traffic from your custom domain name to your private APIs.</p>
     #   @return [String]
     class CreateDomainNameOutput < Struct.new(
+      nil,
       :domain_name,
       :domain_name_id,
       :domain_name_arn,
@@ -881,6 +905,7 @@ module Aws::APIGateway
     #   </p>
     #   @return [String]
     class CreateDomainNameRequest < Struct.new(
+      nil,
       :domain_name,
       :certificate_name,
       :certificate_body,
@@ -918,6 +943,7 @@ module Aws::APIGateway
     #   <p>The content-type for the model.</p>
     #   @return [String]
     class CreateModelOutput < Struct.new(
+      nil,
       :id,
       :name,
       :description,
@@ -945,6 +971,7 @@ module Aws::APIGateway
     #   <p>The content-type for the model.</p>
     #   @return [String]
     class CreateModelRequest < Struct.new(
+      nil,
       :rest_api_id,
       :name,
       :description,
@@ -969,6 +996,7 @@ module Aws::APIGateway
     #   <p>A Boolean flag to indicate whether to validate request parameters (<code>true</code>) or not (<code>false</code>).</p>
     #   @return [Boolean]
     class CreateRequestValidatorOutput < Struct.new(
+      nil,
       :id,
       :name,
       :validate_request_body,
@@ -998,6 +1026,7 @@ module Aws::APIGateway
     #   <p>A Boolean flag to indicate whether to validate request parameters, <code>true</code>, or not <code>false</code>.</p>
     #   @return [Boolean]
     class CreateRequestValidatorRequest < Struct.new(
+      nil,
       :rest_api_id,
       :name,
       :validate_request_body,
@@ -1024,6 +1053,7 @@ module Aws::APIGateway
     #   <p>Gets an API resource's method of a given HTTP verb.</p>
     #   @return [Hash<String, Types::Method>]
     class CreateResourceOutput < Struct.new(
+      nil,
       :id,
       :parent_id,
       :path_part,
@@ -1045,6 +1075,7 @@ module Aws::APIGateway
     #   <p>The last path segment for this resource.</p>
     #   @return [String]
     class CreateResourceRequest < Struct.new(
+      nil,
       :rest_api_id,
       :parent_id,
       :path_part,
@@ -1103,6 +1134,7 @@ module Aws::APIGateway
     #   <p>The API's root resource ID.</p>
     #   @return [String]
     class CreateRestApiOutput < Struct.new(
+      nil,
       :id,
       :name,
       :description,
@@ -1168,6 +1200,7 @@ module Aws::APIGateway
     #         custom domain name to invoke your API, disable the default endpoint</p>
     #   @return [Boolean]
     class CreateRestApiRequest < Struct.new(
+      nil,
       :name,
       :description,
       :version,
@@ -1238,6 +1271,7 @@ module Aws::APIGateway
     #   <p>The timestamp when the stage last updated.</p>
     #   @return [Time]
     class CreateStageOutput < Struct.new(
+      nil,
       :deployment_id,
       :client_certificate_id,
       :stage_name,
@@ -1303,6 +1337,7 @@ module Aws::APIGateway
     #   <p>The key-value map of strings. The valid character set is [a-zA-Z+-=._:/]. The tag key can be up to 128 characters and must not start with <code>aws:</code>. The tag value can be up to 256 characters.</p>
     #   @return [Hash<String, String>]
     class CreateStageRequest < Struct.new(
+      nil,
       :rest_api_id,
       :stage_name,
       :deployment_id,
@@ -1333,6 +1368,7 @@ module Aws::APIGateway
     #   <p>The name of a usage plan key.</p>
     #   @return [String]
     class CreateUsagePlanKeyOutput < Struct.new(
+      nil,
       :id,
       :type,
       :value,
@@ -1353,6 +1389,7 @@ module Aws::APIGateway
     #   <p>The type of a UsagePlanKey resource for a plan customer.</p>
     #   @return [String]
     class CreateUsagePlanKeyRequest < Struct.new(
+      nil,
       :usage_plan_id,
       :key_id,
       :key_type,
@@ -1390,6 +1427,7 @@ module Aws::APIGateway
     #   <p>The collection of tags. Each tag element is associated with a given resource.</p>
     #   @return [Hash<String, String>]
     class CreateUsagePlanOutput < Struct.new(
+      nil,
       :id,
       :name,
       :description,
@@ -1423,6 +1461,7 @@ module Aws::APIGateway
     #   <p>The key-value map of strings. The valid character set is [a-zA-Z+-=._:/]. The tag key can be up to 128 characters and must not start with <code>aws:</code>. The tag value can be up to 256 characters.</p>
     #   @return [Hash<String, String>]
     class CreateUsagePlanRequest < Struct.new(
+      nil,
       :name,
       :description,
       :api_stages,
@@ -1457,6 +1496,7 @@ module Aws::APIGateway
     #   <p>The collection of tags. Each tag element is associated with a given resource.</p>
     #   @return [Hash<String, String>]
     class CreateVpcLinkOutput < Struct.new(
+      nil,
       :id,
       :name,
       :description,
@@ -1483,6 +1523,7 @@ module Aws::APIGateway
     #   <p>The key-value map of strings. The valid character set is [a-zA-Z+-=._:/]. The tag key can be up to 128 characters and must not start with <code>aws:</code>. The tag value can be up to 256 characters.</p>
     #   @return [Hash<String, String>]
     class CreateVpcLinkRequest < Struct.new(
+      nil,
       :name,
       :description,
       :target_arns,
@@ -1497,6 +1538,7 @@ module Aws::APIGateway
     #   <p>The identifier of the ApiKey resource to be deleted.</p>
     #   @return [String]
     class DeleteApiKeyRequest < Struct.new(
+      nil,
       :api_key,
       keyword_init: true
     )
@@ -1511,6 +1553,7 @@ module Aws::APIGateway
     #   <p>The identifier of the Authorizer resource.</p>
     #   @return [String]
     class DeleteAuthorizerRequest < Struct.new(
+      nil,
       :rest_api_id,
       :authorizer_id,
       keyword_init: true
@@ -1532,6 +1575,7 @@ module Aws::APIGateway
     #            <p>To specify an empty base path, set this parameter to <code>'(none)'</code>.</p>
     #   @return [String]
     class DeleteBasePathMappingRequest < Struct.new(
+      nil,
       :domain_name,
       :domain_name_id,
       :base_path,
@@ -1545,6 +1589,7 @@ module Aws::APIGateway
     #   <p>The identifier of the ClientCertificate resource to be deleted.</p>
     #   @return [String]
     class DeleteClientCertificateRequest < Struct.new(
+      nil,
       :client_certificate_id,
       keyword_init: true
     )
@@ -1559,6 +1604,7 @@ module Aws::APIGateway
     #   <p>The identifier of the Deployment resource to delete.</p>
     #   @return [String]
     class DeleteDeploymentRequest < Struct.new(
+      nil,
       :rest_api_id,
       :deployment_id,
       keyword_init: true
@@ -1574,6 +1620,7 @@ module Aws::APIGateway
     #   <p>The identifier of the to-be-deleted documentation part.</p>
     #   @return [String]
     class DeleteDocumentationPartRequest < Struct.new(
+      nil,
       :rest_api_id,
       :documentation_part_id,
       keyword_init: true
@@ -1589,6 +1636,7 @@ module Aws::APIGateway
     #   <p>The version identifier of a to-be-deleted documentation snapshot.</p>
     #   @return [String]
     class DeleteDocumentationVersionRequest < Struct.new(
+      nil,
       :rest_api_id,
       :documentation_version,
       keyword_init: true
@@ -1601,6 +1649,7 @@ module Aws::APIGateway
     #     The ARN of the domain name access association resource.</p>
     #   @return [String]
     class DeleteDomainNameAccessAssociationRequest < Struct.new(
+      nil,
       :domain_name_access_association_arn,
       keyword_init: true
     )
@@ -1617,6 +1666,7 @@ module Aws::APIGateway
     #   </p>
     #   @return [String]
     class DeleteDomainNameRequest < Struct.new(
+      nil,
       :domain_name,
       :domain_name_id,
       keyword_init: true
@@ -1632,6 +1682,7 @@ module Aws::APIGateway
     #   <p>The response type of the associated GatewayResponse.</p>
     #   @return [String]
     class DeleteGatewayResponseRequest < Struct.new(
+      nil,
       :rest_api_id,
       :response_type,
       keyword_init: true
@@ -1650,6 +1701,7 @@ module Aws::APIGateway
     #   <p>Specifies a delete integration request's HTTP method.</p>
     #   @return [String]
     class DeleteIntegrationRequest < Struct.new(
+      nil,
       :rest_api_id,
       :resource_id,
       :http_method,
@@ -1672,6 +1724,7 @@ module Aws::APIGateway
     #   <p>Specifies a delete integration response request's status code.</p>
     #   @return [String]
     class DeleteIntegrationResponseRequest < Struct.new(
+      nil,
       :rest_api_id,
       :resource_id,
       :http_method,
@@ -1692,6 +1745,7 @@ module Aws::APIGateway
     #   <p>The HTTP verb of the Method resource.</p>
     #   @return [String]
     class DeleteMethodRequest < Struct.new(
+      nil,
       :rest_api_id,
       :resource_id,
       :http_method,
@@ -1714,6 +1768,7 @@ module Aws::APIGateway
     #   <p>The status code identifier for the MethodResponse resource.</p>
     #   @return [String]
     class DeleteMethodResponseRequest < Struct.new(
+      nil,
       :rest_api_id,
       :resource_id,
       :http_method,
@@ -1731,6 +1786,7 @@ module Aws::APIGateway
     #   <p>The name of the model to delete.</p>
     #   @return [String]
     class DeleteModelRequest < Struct.new(
+      nil,
       :rest_api_id,
       :model_name,
       keyword_init: true
@@ -1746,6 +1802,7 @@ module Aws::APIGateway
     #   <p>The identifier of the RequestValidator to be deleted.</p>
     #   @return [String]
     class DeleteRequestValidatorRequest < Struct.new(
+      nil,
       :rest_api_id,
       :request_validator_id,
       keyword_init: true
@@ -1761,6 +1818,7 @@ module Aws::APIGateway
     #   <p>The identifier of the Resource resource.</p>
     #   @return [String]
     class DeleteResourceRequest < Struct.new(
+      nil,
       :rest_api_id,
       :resource_id,
       keyword_init: true
@@ -1773,6 +1831,7 @@ module Aws::APIGateway
     #   <p>The string identifier of the associated RestApi.</p>
     #   @return [String]
     class DeleteRestApiRequest < Struct.new(
+      nil,
       :rest_api_id,
       keyword_init: true
     )
@@ -1787,6 +1846,7 @@ module Aws::APIGateway
     #   <p>The name of the Stage resource to delete.</p>
     #   @return [String]
     class DeleteStageRequest < Struct.new(
+      nil,
       :rest_api_id,
       :stage_name,
       keyword_init: true
@@ -1802,6 +1862,7 @@ module Aws::APIGateway
     #   <p>The Id of the UsagePlanKey resource to be deleted.</p>
     #   @return [String]
     class DeleteUsagePlanKeyRequest < Struct.new(
+      nil,
       :usage_plan_id,
       :key_id,
       keyword_init: true
@@ -1814,6 +1875,7 @@ module Aws::APIGateway
     #   <p>The Id of the to-be-deleted usage plan.</p>
     #   @return [String]
     class DeleteUsagePlanRequest < Struct.new(
+      nil,
       :usage_plan_id,
       keyword_init: true
     )
@@ -1825,6 +1887,7 @@ module Aws::APIGateway
     #   <p>The identifier of the  VpcLink. It is used in an Integration to reference this VpcLink.</p>
     #   @return [String]
     class DeleteVpcLinkRequest < Struct.new(
+      nil,
       :vpc_link_id,
       keyword_init: true
     )
@@ -1845,6 +1908,7 @@ module Aws::APIGateway
     #   <p>A summary of the RestApi at the date and time that the deployment resource was created.</p>
     #   @return [Hash<String, Hash<String, Types::MethodSnapshot>>]
     class Deployment < Struct.new(
+      nil,
       :id,
       :description,
       :created_date,
@@ -1865,6 +1929,7 @@ module Aws::APIGateway
     #   <p>A Boolean flag to indicate whether the canary release deployment uses the stage cache or not.</p>
     #   @return [Boolean]
     class DeploymentCanarySettings < Struct.new(
+      nil,
       :percent_traffic,
       :stage_variable_overrides,
       :use_stage_cache,
@@ -1890,6 +1955,7 @@ module Aws::APIGateway
     #   <p>A content map of API-specific key-value pairs describing the targeted API entity. The map must be encoded as a JSON string, e.g., <code>"{ \"description\": \"The API does ...\" }"</code>.  Only OpenAPI-compliant documentation-related fields from the properties map are exported and, hence, published as part of the API entity definitions, while the original documentation parts are exported in a OpenAPI extension of <code>x-amazon-apigateway-documentation</code>.</p>
     #   @return [String]
     class DocumentationPart < Struct.new(
+      nil,
       :id,
       :location,
       :properties,
@@ -1915,6 +1981,7 @@ module Aws::APIGateway
     #   <p>The name of the targeted API entity. It is a valid and required field for the API entity types of <code>AUTHORIZER</code>, <code>MODEL</code>, <code>PATH_PARAMETER</code>, <code>QUERY_PARAMETER</code>, <code>REQUEST_HEADER</code>, <code>REQUEST_BODY</code> and <code>RESPONSE_HEADER</code>. It is an invalid field for any other entity type.</p>
     #   @return [String]
     class DocumentationPartLocation < Struct.new(
+      nil,
       :type,
       :path,
       :method,
@@ -1936,6 +2003,7 @@ module Aws::APIGateway
     #   <p>The description of the API documentation snapshot.</p>
     #   @return [String]
     class DocumentationVersion < Struct.new(
+      nil,
       :version,
       :created_date,
       :description,
@@ -2019,6 +2087,7 @@ module Aws::APIGateway
     #   <p>The routing mode for this domain name. The routing mode determines how API Gateway sends traffic from your custom domain name to your private APIs.</p>
     #   @return [String]
     class DomainName < Struct.new(
+      nil,
       :domain_name,
       :domain_name_id,
       :domain_name_arn,
@@ -2071,6 +2140,7 @@ module Aws::APIGateway
     #   </p>
     #   @return [Hash<String, String>]
     class DomainNameAccessAssociation < Struct.new(
+      nil,
       :domain_name_access_association_arn,
       :domain_name_arn,
       :access_association_source_type,
@@ -2094,6 +2164,7 @@ module Aws::APIGateway
     #   <p>A list of VpcEndpointIds of an API (RestApi) against which to create Route53 ALIASes. It is only supported for <code>PRIVATE</code> endpoint type.</p>
     #   @return [Array<String>]
     class EndpointConfiguration < Struct.new(
+      nil,
       :types,
       :ip_address_type,
       :vpc_endpoint_ids,
@@ -2113,6 +2184,7 @@ module Aws::APIGateway
     #   <p>The binary blob response to GetExport, which contains the export.</p>
     #   @return [String]
     class ExportResponse < Struct.new(
+      nil,
       :content_type,
       :content_disposition,
       :body,
@@ -2129,6 +2201,7 @@ module Aws::APIGateway
     #   <p>The name of the stage to flush.</p>
     #   @return [String]
     class FlushStageAuthorizersCacheRequest < Struct.new(
+      nil,
       :rest_api_id,
       :stage_name,
       keyword_init: true
@@ -2144,6 +2217,7 @@ module Aws::APIGateway
     #   <p>The name of the stage to flush its cache.</p>
     #   @return [String]
     class FlushStageCacheRequest < Struct.new(
+      nil,
       :rest_api_id,
       :stage_name,
       keyword_init: true
@@ -2169,6 +2243,7 @@ module Aws::APIGateway
     #   <p>A Boolean flag to indicate whether this GatewayResponse is the default gateway response (<code>true</code>) or not (<code>false</code>). A default gateway response is one generated by API Gateway without any customization by an API developer. </p>
     #   @return [Boolean]
     class GatewayResponse < Struct.new(
+      nil,
       :response_type,
       :status_code,
       :response_parameters,
@@ -2204,6 +2279,7 @@ module Aws::APIGateway
     #   <p>The collection of tags. Each tag element is associated with a given resource.</p>
     #   @return [Hash<String, String>]
     class GenerateClientCertificateOutput < Struct.new(
+      nil,
       :client_certificate_id,
       :description,
       :pem_encoded_certificate,
@@ -2223,6 +2299,7 @@ module Aws::APIGateway
     #   <p>The key-value map of strings. The valid character set is [a-zA-Z+-=._:/]. The tag key can be up to 128 characters and must not start with <code>aws:</code>. The tag value can be up to 256 characters.</p>
     #   @return [Hash<String, String>]
     class GenerateClientCertificateRequest < Struct.new(
+      nil,
       :description,
       :tags,
       keyword_init: true
@@ -2244,6 +2321,7 @@ module Aws::APIGateway
     #   <p>The version of the API keys used for the account.</p>
     #   @return [String]
     class GetAccountOutput < Struct.new(
+      nil,
       :cloudwatch_role_arn,
       :throttle_settings,
       :features,
@@ -2255,6 +2333,7 @@ module Aws::APIGateway
 
     # <p>Requests API Gateway to get information about the current Account resource.</p>
     class GetAccountRequest < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -2292,6 +2371,7 @@ module Aws::APIGateway
     #   <p>The collection of tags. Each tag element is associated with a given resource.</p>
     #   @return [Hash<String, String>]
     class GetApiKeyOutput < Struct.new(
+      nil,
       :id,
       :value,
       :name,
@@ -2320,6 +2400,7 @@ module Aws::APIGateway
     #   <p>A boolean flag to specify whether (<code>true</code>) or not (<code>false</code>) the result contains the key value.</p>
     #   @return [Boolean]
     class GetApiKeyRequest < Struct.new(
+      nil,
       :api_key,
       :include_value,
       keyword_init: true
@@ -2338,6 +2419,7 @@ module Aws::APIGateway
     #   <p>The current pagination position in the paged result set.</p>
     #   @return [String]
     class GetApiKeysOutput < Struct.new(
+      nil,
       :warnings,
       :items,
       :position,
@@ -2363,6 +2445,7 @@ module Aws::APIGateway
     #   <p>A boolean flag to specify whether (<code>true</code>) or not (<code>false</code>) the result contains key values.</p>
     #   @return [Boolean]
     class GetApiKeysRequest < Struct.new(
+      nil,
       :position,
       :limit,
       :name_query,
@@ -2419,6 +2502,7 @@ module Aws::APIGateway
     #   <p>The TTL in seconds of cached authorizer results. If it equals 0, authorization caching is disabled. If it is greater than 0, API Gateway will cache authorizer responses. If this field is not set, the default value is 300. The maximum value is 3600, or 1 hour.</p>
     #   @return [Integer]
     class GetAuthorizerOutput < Struct.new(
+      nil,
       :id,
       :name,
       :type,
@@ -2442,6 +2526,7 @@ module Aws::APIGateway
     #   <p>The identifier of the Authorizer resource.</p>
     #   @return [String]
     class GetAuthorizerRequest < Struct.new(
+      nil,
       :rest_api_id,
       :authorizer_id,
       keyword_init: true
@@ -2457,6 +2542,7 @@ module Aws::APIGateway
     #   <p>The current pagination position in the paged result set.</p>
     #   @return [String]
     class GetAuthorizersOutput < Struct.new(
+      nil,
       :items,
       :position,
       keyword_init: true
@@ -2475,6 +2561,7 @@ module Aws::APIGateway
     #   <p>The maximum number of returned results per page. The default value is 25 and the maximum value is 500.</p>
     #   @return [Integer]
     class GetAuthorizersRequest < Struct.new(
+      nil,
       :rest_api_id,
       :position,
       :limit,
@@ -2494,6 +2581,7 @@ module Aws::APIGateway
     #   <p>The name of the associated stage.</p>
     #   @return [String]
     class GetBasePathMappingOutput < Struct.new(
+      nil,
       :base_path,
       :rest_api_id,
       :stage,
@@ -2514,6 +2602,7 @@ module Aws::APIGateway
     #   <p>The base path name that callers of the API must provide as part of the URL after the domain name. This value must be unique for all of the mappings across a single API. Specify '(none)' if you do not want callers to specify any base path name after the domain name.</p>
     #   @return [String]
     class GetBasePathMappingRequest < Struct.new(
+      nil,
       :domain_name,
       :domain_name_id,
       :base_path,
@@ -2530,6 +2619,7 @@ module Aws::APIGateway
     #   <p>The current pagination position in the paged result set.</p>
     #   @return [String]
     class GetBasePathMappingsOutput < Struct.new(
+      nil,
       :items,
       :position,
       keyword_init: true
@@ -2553,6 +2643,7 @@ module Aws::APIGateway
     #   <p>The maximum number of returned results per page. The default value is 25 and the maximum value is 500.</p>
     #   @return [Integer]
     class GetBasePathMappingsRequest < Struct.new(
+      nil,
       :domain_name,
       :domain_name_id,
       :position,
@@ -2582,6 +2673,7 @@ module Aws::APIGateway
     #   <p>The collection of tags. Each tag element is associated with a given resource.</p>
     #   @return [Hash<String, String>]
     class GetClientCertificateOutput < Struct.new(
+      nil,
       :client_certificate_id,
       :description,
       :pem_encoded_certificate,
@@ -2598,6 +2690,7 @@ module Aws::APIGateway
     #   <p>The identifier of the ClientCertificate resource to be described.</p>
     #   @return [String]
     class GetClientCertificateRequest < Struct.new(
+      nil,
       :client_certificate_id,
       keyword_init: true
     )
@@ -2612,6 +2705,7 @@ module Aws::APIGateway
     #   <p>The current pagination position in the paged result set.</p>
     #   @return [String]
     class GetClientCertificatesOutput < Struct.new(
+      nil,
       :items,
       :position,
       keyword_init: true
@@ -2627,6 +2721,7 @@ module Aws::APIGateway
     #   <p>The maximum number of returned results per page. The default value is 25 and the maximum value is 500.</p>
     #   @return [Integer]
     class GetClientCertificatesRequest < Struct.new(
+      nil,
       :position,
       :limit,
       keyword_init: true
@@ -2648,6 +2743,7 @@ module Aws::APIGateway
     #   <p>A summary of the RestApi at the date and time that the deployment resource was created.</p>
     #   @return [Hash<String, Hash<String, Types::MethodSnapshot>>]
     class GetDeploymentOutput < Struct.new(
+      nil,
       :id,
       :description,
       :created_date,
@@ -2668,6 +2764,7 @@ module Aws::APIGateway
     #   <p>A query parameter to retrieve the specified embedded resources of the returned Deployment resource in the response. In a REST API call, this <code>embed</code> parameter value is a list of comma-separated strings, as in  <code>GET /restapis/{restapi_id}/deployments/{deployment_id}?embed=var1,var2</code>. The SDK and other platform-dependent libraries might use a different format for the list. Currently, this request supports only retrieval of the embedded API summary this way. Hence, the parameter value must be a single-valued list containing only the <code>"apisummary"</code> string.  For example, <code>GET /restapis/{restapi_id}/deployments/{deployment_id}?embed=apisummary</code>.</p>
     #   @return [Array<String>]
     class GetDeploymentRequest < Struct.new(
+      nil,
       :rest_api_id,
       :deployment_id,
       :embed,
@@ -2684,6 +2781,7 @@ module Aws::APIGateway
     #   <p>The current pagination position in the paged result set.</p>
     #   @return [String]
     class GetDeploymentsOutput < Struct.new(
+      nil,
       :items,
       :position,
       keyword_init: true
@@ -2702,6 +2800,7 @@ module Aws::APIGateway
     #   <p>The maximum number of returned results per page. The default value is 25 and the maximum value is 500.</p>
     #   @return [Integer]
     class GetDeploymentsRequest < Struct.new(
+      nil,
       :rest_api_id,
       :position,
       :limit,
@@ -2721,6 +2820,7 @@ module Aws::APIGateway
     #   <p>A content map of API-specific key-value pairs describing the targeted API entity. The map must be encoded as a JSON string, e.g., <code>"{ \"description\": \"The API does ...\" }"</code>.  Only OpenAPI-compliant documentation-related fields from the properties map are exported and, hence, published as part of the API entity definitions, while the original documentation parts are exported in a OpenAPI extension of <code>x-amazon-apigateway-documentation</code>.</p>
     #   @return [String]
     class GetDocumentationPartOutput < Struct.new(
+      nil,
       :id,
       :location,
       :properties,
@@ -2737,6 +2837,7 @@ module Aws::APIGateway
     #   <p>The string identifier of the associated RestApi.</p>
     #   @return [String]
     class GetDocumentationPartRequest < Struct.new(
+      nil,
       :rest_api_id,
       :documentation_part_id,
       keyword_init: true
@@ -2752,6 +2853,7 @@ module Aws::APIGateway
     #   <p>The current pagination position in the paged result set.</p>
     #   @return [String]
     class GetDocumentationPartsOutput < Struct.new(
+      nil,
       :items,
       :position,
       keyword_init: true
@@ -2782,6 +2884,7 @@ module Aws::APIGateway
     #   <p>The status of the API documentation parts to retrieve. Valid values are <code>DOCUMENTED</code> for retrieving DocumentationPart resources with content and <code>UNDOCUMENTED</code> for DocumentationPart resources without content.</p>
     #   @return [String]
     class GetDocumentationPartsRequest < Struct.new(
+      nil,
       :rest_api_id,
       :type,
       :name_query,
@@ -2805,6 +2908,7 @@ module Aws::APIGateway
     #   <p>The description of the API documentation snapshot.</p>
     #   @return [String]
     class GetDocumentationVersionOutput < Struct.new(
+      nil,
       :version,
       :created_date,
       :description,
@@ -2821,6 +2925,7 @@ module Aws::APIGateway
     #   <p>The version identifier of the to-be-retrieved documentation snapshot.</p>
     #   @return [String]
     class GetDocumentationVersionRequest < Struct.new(
+      nil,
       :rest_api_id,
       :documentation_version,
       keyword_init: true
@@ -2836,6 +2941,7 @@ module Aws::APIGateway
     #   <p>The current pagination position in the paged result set.</p>
     #   @return [String]
     class GetDocumentationVersionsOutput < Struct.new(
+      nil,
       :items,
       :position,
       keyword_init: true
@@ -2854,6 +2960,7 @@ module Aws::APIGateway
     #   <p>The maximum number of returned results per page. The default value is 25 and the maximum value is 500.</p>
     #   @return [Integer]
     class GetDocumentationVersionsRequest < Struct.new(
+      nil,
       :rest_api_id,
       :position,
       :limit,
@@ -2872,6 +2979,7 @@ module Aws::APIGateway
     #   </p>
     #   @return [String]
     class GetDomainNameAccessAssociationsOutput < Struct.new(
+      nil,
       :items,
       :position,
       keyword_init: true
@@ -2893,6 +3001,7 @@ module Aws::APIGateway
     #         accounts.</p>
     #   @return [String]
     class GetDomainNameAccessAssociationsRequest < Struct.new(
+      nil,
       :position,
       :limit,
       :resource_owner,
@@ -2976,6 +3085,7 @@ module Aws::APIGateway
     #   <p>The routing mode for this domain name. The routing mode determines how API Gateway sends traffic from your custom domain name to your private APIs.</p>
     #   @return [String]
     class GetDomainNameOutput < Struct.new(
+      nil,
       :domain_name,
       :domain_name_id,
       :domain_name_arn,
@@ -3013,6 +3123,7 @@ module Aws::APIGateway
     #   </p>
     #   @return [String]
     class GetDomainNameRequest < Struct.new(
+      nil,
       :domain_name,
       :domain_name_id,
       keyword_init: true
@@ -3028,6 +3139,7 @@ module Aws::APIGateway
     #   <p>The current pagination position in the paged result set.</p>
     #   @return [String]
     class GetDomainNamesOutput < Struct.new(
+      nil,
       :items,
       :position,
       keyword_init: true
@@ -3047,6 +3159,7 @@ module Aws::APIGateway
     #   </p>
     #   @return [String]
     class GetDomainNamesRequest < Struct.new(
+      nil,
       :position,
       :limit,
       :resource_owner,
@@ -3073,6 +3186,7 @@ module Aws::APIGateway
     #   <p>The content-type of the export, for example <code>application/json</code>. Currently <code>application/json</code> and <code>application/yaml</code> are supported for <code>exportType</code> of<code>oas30</code> and <code>swagger</code>. This should be specified in the <code>Accept</code> header for direct API requests.</p>
     #   @return [String]
     class GetExportRequest < Struct.new(
+      nil,
       :rest_api_id,
       :stage_name,
       :export_type,
@@ -3101,6 +3215,7 @@ module Aws::APIGateway
     #   <p>A Boolean flag to indicate whether this GatewayResponse is the default gateway response (<code>true</code>) or not (<code>false</code>). A default gateway response is one generated by API Gateway without any customization by an API developer. </p>
     #   @return [Boolean]
     class GetGatewayResponseOutput < Struct.new(
+      nil,
       :response_type,
       :status_code,
       :response_parameters,
@@ -3124,6 +3239,7 @@ module Aws::APIGateway
     #   <p>The response type of the associated GatewayResponse.</p>
     #   @return [String]
     class GetGatewayResponseRequest < Struct.new(
+      nil,
       :rest_api_id,
       :response_type,
       keyword_init: true
@@ -3139,6 +3255,7 @@ module Aws::APIGateway
     #   <p>The current pagination position in the paged result set. The GatewayResponse collection does not support pagination and the position does not apply here.</p>
     #   @return [String]
     class GetGatewayResponsesOutput < Struct.new(
+      nil,
       :items,
       :position,
       keyword_init: true
@@ -3157,6 +3274,7 @@ module Aws::APIGateway
     #   <p>The maximum number of returned results per page. The default value is 25 and the maximum value is 500. The GatewayResponses collection does not support pagination and the limit does not apply here.</p>
     #   @return [Integer]
     class GetGatewayResponsesRequest < Struct.new(
+      nil,
       :rest_api_id,
       :position,
       :limit,
@@ -3243,6 +3361,7 @@ module Aws::APIGateway
     #   <p>Specifies the TLS configuration for an integration.</p>
     #   @return [Types::TlsConfig]
     class GetIntegrationOutput < Struct.new(
+      nil,
       :type,
       :http_method,
       :uri,
@@ -3279,6 +3398,7 @@ module Aws::APIGateway
     #   <p>Specifies a get integration request's HTTP method.</p>
     #   @return [String]
     class GetIntegrationRequest < Struct.new(
+      nil,
       :rest_api_id,
       :resource_id,
       :http_method,
@@ -3306,6 +3426,7 @@ module Aws::APIGateway
     #            <p>If this property is not defined, the response payload will be passed through from the integration response to the method response without modification.</p>
     #   @return [String]
     class GetIntegrationResponseOutput < Struct.new(
+      nil,
       :status_code,
       :selection_pattern,
       :response_parameters,
@@ -3330,6 +3451,7 @@ module Aws::APIGateway
     #   <p>Specifies a get integration response request's status code.</p>
     #   @return [String]
     class GetIntegrationResponseRequest < Struct.new(
+      nil,
       :rest_api_id,
       :resource_id,
       :http_method,
@@ -3381,6 +3503,7 @@ module Aws::APIGateway
     #   <p>A list of authorization scopes configured on the method. The scopes are used with a <code>COGNITO_USER_POOLS</code> authorizer to authorize the method invocation. The authorization works by matching the method scopes against the scopes parsed from the access token in the incoming request. The method invocation is authorized if any method scopes matches a claimed scope in the access token. Otherwise, the invocation is not authorized. When the method scope is configured, the client must provide an access token instead of an identity token for authorization purposes.</p>
     #   @return [Array<String>]
     class GetMethodOutput < Struct.new(
+      nil,
       :http_method,
       :authorization_type,
       :authorizer_id,
@@ -3408,6 +3531,7 @@ module Aws::APIGateway
     #   <p>Specifies the method request's HTTP method type.</p>
     #   @return [String]
     class GetMethodRequest < Struct.new(
+      nil,
       :rest_api_id,
       :resource_id,
       :http_method,
@@ -3427,6 +3551,7 @@ module Aws::APIGateway
     #   <p>Specifies the Model resources used for the response's content-type. Response models are represented as a key/value map, with a content-type as the key and a Model name as the value.</p>
     #   @return [Hash<String, String>]
     class GetMethodResponseOutput < Struct.new(
+      nil,
       :status_code,
       :response_parameters,
       :response_models,
@@ -3449,6 +3574,7 @@ module Aws::APIGateway
     #   <p>The status code for the MethodResponse resource.</p>
     #   @return [String]
     class GetMethodResponseRequest < Struct.new(
+      nil,
       :rest_api_id,
       :resource_id,
       :http_method,
@@ -3475,6 +3601,7 @@ module Aws::APIGateway
     #   <p>The content-type for the model.</p>
     #   @return [String]
     class GetModelOutput < Struct.new(
+      nil,
       :id,
       :name,
       :description,
@@ -3496,6 +3623,7 @@ module Aws::APIGateway
     #   <p>A query parameter of a Boolean value to resolve (<code>true</code>) all external model references and returns a flattened model schema or not (<code>false</code>) The default is <code>false</code>.</p>
     #   @return [Boolean]
     class GetModelRequest < Struct.new(
+      nil,
       :rest_api_id,
       :model_name,
       :flatten,
@@ -3509,6 +3637,7 @@ module Aws::APIGateway
     #   <p>The Apache Velocity Template Language (VTL) template content used for the template resource.</p>
     #   @return [String]
     class GetModelTemplateOutput < Struct.new(
+      nil,
       :value,
       keyword_init: true
     )
@@ -3523,6 +3652,7 @@ module Aws::APIGateway
     #   <p>The name of the model for which to generate a template.</p>
     #   @return [String]
     class GetModelTemplateRequest < Struct.new(
+      nil,
       :rest_api_id,
       :model_name,
       keyword_init: true
@@ -3538,6 +3668,7 @@ module Aws::APIGateway
     #   <p>The current pagination position in the paged result set.</p>
     #   @return [String]
     class GetModelsOutput < Struct.new(
+      nil,
       :items,
       :position,
       keyword_init: true
@@ -3556,6 +3687,7 @@ module Aws::APIGateway
     #   <p>The maximum number of returned results per page. The default value is 25 and the maximum value is 500.</p>
     #   @return [Integer]
     class GetModelsRequest < Struct.new(
+      nil,
       :rest_api_id,
       :position,
       :limit,
@@ -3578,6 +3710,7 @@ module Aws::APIGateway
     #   <p>A Boolean flag to indicate whether to validate request parameters (<code>true</code>) or not (<code>false</code>).</p>
     #   @return [Boolean]
     class GetRequestValidatorOutput < Struct.new(
+      nil,
       :id,
       :name,
       :validate_request_body,
@@ -3601,6 +3734,7 @@ module Aws::APIGateway
     #   <p>The identifier of the RequestValidator to be retrieved.</p>
     #   @return [String]
     class GetRequestValidatorRequest < Struct.new(
+      nil,
       :rest_api_id,
       :request_validator_id,
       keyword_init: true
@@ -3616,6 +3750,7 @@ module Aws::APIGateway
     #   <p>The current pagination position in the paged result set.</p>
     #   @return [String]
     class GetRequestValidatorsOutput < Struct.new(
+      nil,
       :items,
       :position,
       keyword_init: true
@@ -3634,6 +3769,7 @@ module Aws::APIGateway
     #   <p>The maximum number of returned results per page. The default value is 25 and the maximum value is 500.</p>
     #   @return [Integer]
     class GetRequestValidatorsRequest < Struct.new(
+      nil,
       :rest_api_id,
       :position,
       :limit,
@@ -3659,6 +3795,7 @@ module Aws::APIGateway
     #   <p>Gets an API resource's method of a given HTTP verb.</p>
     #   @return [Hash<String, Types::Method>]
     class GetResourceOutput < Struct.new(
+      nil,
       :id,
       :parent_id,
       :path_part,
@@ -3680,6 +3817,7 @@ module Aws::APIGateway
     #   <p>A query parameter to retrieve the specified resources embedded in the returned Resource representation in the response. This <code>embed</code> parameter value is a list of comma-separated strings. Currently, the request supports only retrieval of the embedded Method resources this way. The query parameter value must be a single-valued list and contain the <code>"methods"</code> string. For example, <code>GET /restapis/{restapi_id}/resources/{resource_id}?embed=methods</code>.</p>
     #   @return [Array<String>]
     class GetResourceRequest < Struct.new(
+      nil,
       :rest_api_id,
       :resource_id,
       :embed,
@@ -3696,6 +3834,7 @@ module Aws::APIGateway
     #   <p>The current pagination position in the paged result set.</p>
     #   @return [String]
     class GetResourcesOutput < Struct.new(
+      nil,
       :items,
       :position,
       keyword_init: true
@@ -3717,6 +3856,7 @@ module Aws::APIGateway
     #   <p>A query parameter used to retrieve the specified resources embedded in the returned Resources resource in the response.  This <code>embed</code> parameter value is a list of comma-separated strings. Currently, the request supports only retrieval of the embedded Method resources this way. The query parameter value must be a single-valued list and contain the <code>"methods"</code> string. For example, <code>GET /restapis/{restapi_id}/resources?embed=methods</code>.</p>
     #   @return [Array<String>]
     class GetResourcesRequest < Struct.new(
+      nil,
       :rest_api_id,
       :position,
       :limit,
@@ -3776,6 +3916,7 @@ module Aws::APIGateway
     #   <p>The API's root resource ID.</p>
     #   @return [String]
     class GetRestApiOutput < Struct.new(
+      nil,
       :id,
       :name,
       :description,
@@ -3805,6 +3946,7 @@ module Aws::APIGateway
     #   <p>The string identifier of the associated RestApi.</p>
     #   @return [String]
     class GetRestApiRequest < Struct.new(
+      nil,
       :rest_api_id,
       keyword_init: true
     )
@@ -3819,6 +3961,7 @@ module Aws::APIGateway
     #   <p>The current pagination position in the paged result set.</p>
     #   @return [String]
     class GetRestApisOutput < Struct.new(
+      nil,
       :items,
       :position,
       keyword_init: true
@@ -3834,6 +3977,7 @@ module Aws::APIGateway
     #   <p>The maximum number of returned results per page. The default value is 25 and the maximum value is 500.</p>
     #   @return [Integer]
     class GetRestApisRequest < Struct.new(
+      nil,
       :position,
       :limit,
       keyword_init: true
@@ -3855,6 +3999,7 @@ module Aws::APIGateway
     #   <p>A string-to-string key-value map of query parameters <code>sdkType</code>-dependent properties of the SDK. For <code>sdkType</code> of <code>objectivec</code> or <code>swift</code>,  a parameter named <code>classPrefix</code> is required. For <code>sdkType</code> of <code>android</code>, parameters named <code>groupId</code>, <code>artifactId</code>, <code>artifactVersion</code>, and <code>invokerPackage</code> are required. For <code>sdkType</code> of <code>java</code>, parameters named <code>serviceName</code> and <code>javaPackageName</code> are required. </p>
     #   @return [Hash<String, String>]
     class GetSdkRequest < Struct.new(
+      nil,
       :rest_api_id,
       :stage_name,
       :sdk_type,
@@ -3878,6 +4023,7 @@ module Aws::APIGateway
     #   <p>A list of configuration properties of an SdkType.</p>
     #   @return [Array<Types::SdkConfigurationProperty>]
     class GetSdkTypeOutput < Struct.new(
+      nil,
       :id,
       :friendly_name,
       :description,
@@ -3892,6 +4038,7 @@ module Aws::APIGateway
     #   <p>The identifier of the queried SdkType instance.</p>
     #   @return [String]
     class GetSdkTypeRequest < Struct.new(
+      nil,
       :id,
       keyword_init: true
     )
@@ -3903,6 +4050,7 @@ module Aws::APIGateway
     #   <p>The current page of elements from this collection.</p>
     #   @return [Array<Types::SdkType>]
     class GetSdkTypesOutput < Struct.new(
+      nil,
       :items,
       keyword_init: true
     )
@@ -3917,6 +4065,7 @@ module Aws::APIGateway
     #   <p>The maximum number of returned results per page. The default value is 25 and the maximum value is 500.</p>
     #   @return [Integer]
     class GetSdkTypesRequest < Struct.new(
+      nil,
       :position,
       :limit,
       keyword_init: true
@@ -3978,6 +4127,7 @@ module Aws::APIGateway
     #   <p>The timestamp when the stage last updated.</p>
     #   @return [Time]
     class GetStageOutput < Struct.new(
+      nil,
       :deployment_id,
       :client_certificate_id,
       :stage_name,
@@ -4014,6 +4164,7 @@ module Aws::APIGateway
     #   <p>The name of the Stage resource to get information about.</p>
     #   @return [String]
     class GetStageRequest < Struct.new(
+      nil,
       :rest_api_id,
       :stage_name,
       keyword_init: true
@@ -4026,6 +4177,7 @@ module Aws::APIGateway
     #   <p>The current page of elements from this collection.</p>
     #   @return [Array<Types::Stage>]
     class GetStagesOutput < Struct.new(
+      nil,
       :item,
       keyword_init: true
     )
@@ -4040,6 +4192,7 @@ module Aws::APIGateway
     #   <p>The stages' deployment identifiers.</p>
     #   @return [String]
     class GetStagesRequest < Struct.new(
+      nil,
       :rest_api_id,
       :deployment_id,
       keyword_init: true
@@ -4052,6 +4205,7 @@ module Aws::APIGateway
     #   <p>The collection of tags. Each tag element is associated with a given resource.</p>
     #   @return [Hash<String, String>]
     class GetTagsOutput < Struct.new(
+      nil,
       :tags,
       keyword_init: true
     )
@@ -4069,6 +4223,7 @@ module Aws::APIGateway
     #   <p>(Not currently supported) The maximum number of returned results per page. The default value is 25 and the maximum value is 500.</p>
     #   @return [Integer]
     class GetTagsRequest < Struct.new(
+      nil,
       :resource_arn,
       :position,
       :limit,
@@ -4094,6 +4249,7 @@ module Aws::APIGateway
     #   <p>The current pagination position in the paged result set.</p>
     #   @return [String]
     class GetUsageOutput < Struct.new(
+      nil,
       :usage_plan_id,
       :start_date,
       :end_date,
@@ -4118,6 +4274,7 @@ module Aws::APIGateway
     #   <p>The name of a usage plan key.</p>
     #   @return [String]
     class GetUsagePlanKeyOutput < Struct.new(
+      nil,
       :id,
       :type,
       :value,
@@ -4135,6 +4292,7 @@ module Aws::APIGateway
     #   <p>The key Id of the to-be-retrieved UsagePlanKey resource representing a plan customer.</p>
     #   @return [String]
     class GetUsagePlanKeyRequest < Struct.new(
+      nil,
       :usage_plan_id,
       :key_id,
       keyword_init: true
@@ -4150,6 +4308,7 @@ module Aws::APIGateway
     #   <p>The current pagination position in the paged result set.</p>
     #   @return [String]
     class GetUsagePlanKeysOutput < Struct.new(
+      nil,
       :items,
       :position,
       keyword_init: true
@@ -4171,6 +4330,7 @@ module Aws::APIGateway
     #   <p>A query parameter specifying the name of the to-be-returned usage plan keys.</p>
     #   @return [String]
     class GetUsagePlanKeysRequest < Struct.new(
+      nil,
       :usage_plan_id,
       :position,
       :limit,
@@ -4209,6 +4369,7 @@ module Aws::APIGateway
     #   <p>The collection of tags. Each tag element is associated with a given resource.</p>
     #   @return [Hash<String, String>]
     class GetUsagePlanOutput < Struct.new(
+      nil,
       :id,
       :name,
       :description,
@@ -4227,6 +4388,7 @@ module Aws::APIGateway
     #   <p>The identifier of the UsagePlan resource to be retrieved.</p>
     #   @return [String]
     class GetUsagePlanRequest < Struct.new(
+      nil,
       :usage_plan_id,
       keyword_init: true
     )
@@ -4241,6 +4403,7 @@ module Aws::APIGateway
     #   <p>The current pagination position in the paged result set.</p>
     #   @return [String]
     class GetUsagePlansOutput < Struct.new(
+      nil,
       :items,
       :position,
       keyword_init: true
@@ -4259,6 +4422,7 @@ module Aws::APIGateway
     #   <p>The maximum number of returned results per page. The default value is 25 and the maximum value is 500.</p>
     #   @return [Integer]
     class GetUsagePlansRequest < Struct.new(
+      nil,
       :position,
       :key_id,
       :limit,
@@ -4287,6 +4451,7 @@ module Aws::APIGateway
     #   <p>The maximum number of returned results per page. The default value is 25 and the maximum value is 500.</p>
     #   @return [Integer]
     class GetUsageRequest < Struct.new(
+      nil,
       :usage_plan_id,
       :key_id,
       :start_date,
@@ -4321,6 +4486,7 @@ module Aws::APIGateway
     #   <p>The collection of tags. Each tag element is associated with a given resource.</p>
     #   @return [Hash<String, String>]
     class GetVpcLinkOutput < Struct.new(
+      nil,
       :id,
       :name,
       :description,
@@ -4338,6 +4504,7 @@ module Aws::APIGateway
     #   <p>The identifier of the  VpcLink. It is used in an Integration to reference this VpcLink.</p>
     #   @return [String]
     class GetVpcLinkRequest < Struct.new(
+      nil,
       :vpc_link_id,
       keyword_init: true
     )
@@ -4352,6 +4519,7 @@ module Aws::APIGateway
     #   <p>The current pagination position in the paged result set.</p>
     #   @return [String]
     class GetVpcLinksOutput < Struct.new(
+      nil,
       :items,
       :position,
       keyword_init: true
@@ -4367,6 +4535,7 @@ module Aws::APIGateway
     #   <p>The maximum number of returned results per page. The default value is 25 and the maximum value is 500.</p>
     #   @return [Integer]
     class GetVpcLinksRequest < Struct.new(
+      nil,
       :position,
       :limit,
       keyword_init: true
@@ -4382,6 +4551,7 @@ module Aws::APIGateway
     #   <p>A list of warning messages.</p>
     #   @return [Array<String>]
     class ImportApiKeysOutput < Struct.new(
+      nil,
       :ids,
       :warnings,
       keyword_init: true
@@ -4400,6 +4570,7 @@ module Aws::APIGateway
     #   <p>A query parameter to indicate whether to rollback ApiKey importation (<code>true</code>) or not (<code>false</code>) when error is encountered.</p>
     #   @return [Boolean]
     class ImportApiKeysRequest < Struct.new(
+      nil,
       :body,
       :format,
       :fail_on_warnings,
@@ -4416,6 +4587,7 @@ module Aws::APIGateway
     #   <p>A list of warning messages reported during import of documentation parts.</p>
     #   @return [Array<String>]
     class ImportDocumentationPartsOutput < Struct.new(
+      nil,
       :ids,
       :warnings,
       keyword_init: true
@@ -4437,6 +4609,7 @@ module Aws::APIGateway
     #   <p>Raw byte array representing the to-be-imported documentation parts. To import from an OpenAPI file, this is a JSON object.</p>
     #   @return [String]
     class ImportDocumentationPartsRequest < Struct.new(
+      nil,
       :rest_api_id,
       :mode,
       :fail_on_warnings,
@@ -4496,6 +4669,7 @@ module Aws::APIGateway
     #   <p>The API's root resource ID.</p>
     #   @return [String]
     class ImportRestApiOutput < Struct.new(
+      nil,
       :id,
       :name,
       :description,
@@ -4535,6 +4709,7 @@ module Aws::APIGateway
     #   <p>The POST request body containing external API definitions. Currently, only OpenAPI definition JSON/YAML files are supported. The maximum size of the API definition file is 6MB.</p>
     #   @return [String]
     class ImportRestApiRequest < Struct.new(
+      nil,
       :fail_on_warnings,
       :parameters,
       :body,
@@ -4621,6 +4796,7 @@ module Aws::APIGateway
     #   <p>Specifies the TLS configuration for an integration.</p>
     #   @return [Types::TlsConfig]
     class Integration < Struct.new(
+      nil,
       :type,
       :http_method,
       :uri,
@@ -4665,6 +4841,7 @@ module Aws::APIGateway
     #            <p>If this property is not defined, the response payload will be passed through from the integration response to the method response without modification.</p>
     #   @return [String]
     class IntegrationResponse < Struct.new(
+      nil,
       :status_code,
       :selection_pattern,
       :response_parameters,
@@ -4681,6 +4858,7 @@ module Aws::APIGateway
     # @!attribute message
     #   @return [String]
     class LimitExceededException < Struct.new(
+      nil,
       :retry_after_seconds,
       :message,
       keyword_init: true
@@ -4730,6 +4908,7 @@ module Aws::APIGateway
     #   <p>A list of authorization scopes configured on the method. The scopes are used with a <code>COGNITO_USER_POOLS</code> authorizer to authorize the method invocation. The authorization works by matching the method scopes against the scopes parsed from the access token in the incoming request. The method invocation is authorized if any method scopes matches a claimed scope in the access token. Otherwise, the invocation is not authorized. When the method scope is configured, the client must provide an access token instead of an identity token for authorization purposes.</p>
     #   @return [Array<String>]
     class Method < Struct.new(
+      nil,
       :http_method,
       :authorization_type,
       :authorizer_id,
@@ -4757,6 +4936,7 @@ module Aws::APIGateway
     #   <p>Specifies the Model resources used for the response's content-type. Response models are represented as a key/value map, with a content-type as the key and a Model name as the value.</p>
     #   @return [Hash<String, String>]
     class MethodResponse < Struct.new(
+      nil,
       :status_code,
       :response_parameters,
       :response_models,
@@ -4797,6 +4977,7 @@ module Aws::APIGateway
     #   <p>Specifies how to handle unauthorized requests for cache invalidation.</p>
     #   @return [String]
     class MethodSetting < Struct.new(
+      nil,
       :metrics_enabled,
       :logging_level,
       :data_trace_enabled,
@@ -4832,6 +5013,7 @@ module Aws::APIGateway
     #   <p>Specifies whether the method requires a valid ApiKey.</p>
     #   @return [Boolean]
     class MethodSnapshot < Struct.new(
+      nil,
       :authorization_type,
       :api_key_required,
       keyword_init: true
@@ -4861,6 +5043,7 @@ module Aws::APIGateway
     #   <p>The content-type for the model.</p>
     #   @return [String]
     class Model < Struct.new(
+      nil,
       :id,
       :name,
       :description,
@@ -4891,6 +5074,7 @@ module Aws::APIGateway
     #         domain name to use the new version.</p>
     #   @return [Array<String>]
     class MutualTlsAuthentication < Struct.new(
+      nil,
       :truststore_uri,
       :truststore_version,
       :truststore_warnings,
@@ -4913,6 +5097,7 @@ module Aws::APIGateway
     #   <p>The version of the S3 object that contains your truststore. To specify a version, you must have versioning enabled for the S3 bucket</p>
     #   @return [String]
     class MutualTlsAuthenticationInput < Struct.new(
+      nil,
       :truststore_uri,
       :truststore_version,
       keyword_init: true
@@ -4924,6 +5109,7 @@ module Aws::APIGateway
     # @!attribute message
     #   @return [String]
     class NotFoundException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -4959,6 +5145,7 @@ module Aws::APIGateway
     #               "from":"/canarySettings/deploymentId" and "path":"/deploymentId".</p>
     #   @return [String]
     class PatchOperation < Struct.new(
+      nil,
       :op,
       :path,
       :value,
@@ -4986,6 +5173,7 @@ module Aws::APIGateway
     #   <p>A Boolean flag to indicate whether this GatewayResponse is the default gateway response (<code>true</code>) or not (<code>false</code>). A default gateway response is one generated by API Gateway without any customization by an API developer. </p>
     #   @return [Boolean]
     class PutGatewayResponseOutput < Struct.new(
+      nil,
       :response_type,
       :status_code,
       :response_parameters,
@@ -5018,6 +5206,7 @@ module Aws::APIGateway
     #   <p>Response templates of the GatewayResponse as a string-to-string map of key-value pairs.</p>
     #   @return [Hash<String, String>]
     class PutGatewayResponseRequest < Struct.new(
+      nil,
       :rest_api_id,
       :response_type,
       :status_code,
@@ -5106,6 +5295,7 @@ module Aws::APIGateway
     #   <p>Specifies the TLS configuration for an integration.</p>
     #   @return [Types::TlsConfig]
     class PutIntegrationOutput < Struct.new(
+      nil,
       :type,
       :http_method,
       :uri,
@@ -5201,6 +5391,7 @@ module Aws::APIGateway
     #   <p>Specifies the TLS configuration for an integration.</p>
     #   @return [Types::TlsConfig]
     class PutIntegrationRequest < Struct.new(
+      nil,
       :rest_api_id,
       :resource_id,
       :http_method,
@@ -5242,6 +5433,7 @@ module Aws::APIGateway
     #            <p>If this property is not defined, the response payload will be passed through from the integration response to the method response without modification.</p>
     #   @return [String]
     class PutIntegrationResponseOutput < Struct.new(
+      nil,
       :status_code,
       :selection_pattern,
       :response_parameters,
@@ -5280,6 +5472,7 @@ module Aws::APIGateway
     #            <p>If this property is not defined, the response payload will be passed through from the integration response to the method response without modification.</p>
     #   @return [String]
     class PutIntegrationResponseRequest < Struct.new(
+      nil,
       :rest_api_id,
       :resource_id,
       :http_method,
@@ -5335,6 +5528,7 @@ module Aws::APIGateway
     #   <p>A list of authorization scopes configured on the method. The scopes are used with a <code>COGNITO_USER_POOLS</code> authorizer to authorize the method invocation. The authorization works by matching the method scopes against the scopes parsed from the access token in the incoming request. The method invocation is authorized if any method scopes matches a claimed scope in the access token. Otherwise, the invocation is not authorized. When the method scope is configured, the client must provide an access token instead of an identity token for authorization purposes.</p>
     #   @return [Array<String>]
     class PutMethodOutput < Struct.new(
+      nil,
       :http_method,
       :authorization_type,
       :authorizer_id,
@@ -5386,6 +5580,7 @@ module Aws::APIGateway
     #   <p>A list of authorization scopes configured on the method. The scopes are used with a <code>COGNITO_USER_POOLS</code> authorizer to authorize the method invocation. The authorization works by matching the method scopes against the scopes parsed from the access token in the incoming request. The method invocation is authorized if any method scopes matches a claimed scope in the access token. Otherwise, the invocation is not authorized. When the method scope is configured, the client must provide an access token instead of an identity token for authorization purposes.</p>
     #   @return [Array<String>]
     class PutMethodRequest < Struct.new(
+      nil,
       :rest_api_id,
       :resource_id,
       :http_method,
@@ -5413,6 +5608,7 @@ module Aws::APIGateway
     #   <p>Specifies the Model resources used for the response's content-type. Response models are represented as a key/value map, with a content-type as the key and a Model name as the value.</p>
     #   @return [Hash<String, String>]
     class PutMethodResponseOutput < Struct.new(
+      nil,
       :status_code,
       :response_parameters,
       :response_models,
@@ -5441,6 +5637,7 @@ module Aws::APIGateway
     #   <p>Specifies the Model resources used for the response's content type. Response models are represented as a key/value map, with a content type as the key and a Model name as the value.</p>
     #   @return [Hash<String, String>]
     class PutMethodResponseRequest < Struct.new(
+      nil,
       :rest_api_id,
       :resource_id,
       :http_method,
@@ -5502,6 +5699,7 @@ module Aws::APIGateway
     #   <p>The API's root resource ID.</p>
     #   @return [String]
     class PutRestApiOutput < Struct.new(
+      nil,
       :id,
       :name,
       :description,
@@ -5545,6 +5743,7 @@ module Aws::APIGateway
     #   <p>The PUT request body containing external API definitions. Currently, only OpenAPI definition JSON/YAML files are supported. The maximum size of the API definition file is 6MB.</p>
     #   @return [String]
     class PutRestApiRequest < Struct.new(
+      nil,
       :rest_api_id,
       :mode,
       :fail_on_warnings,
@@ -5566,6 +5765,7 @@ module Aws::APIGateway
     #   <p>The time period in which the limit applies. Valid values are "DAY", "WEEK" or "MONTH".</p>
     #   @return [String]
     class QuotaSettings < Struct.new(
+      nil,
       :limit,
       :offset,
       :period,
@@ -5590,6 +5790,7 @@ module Aws::APIGateway
     #   </p>
     #   @return [String]
     class RejectDomainNameAccessAssociationRequest < Struct.new(
+      nil,
       :domain_name_access_association_arn,
       :domain_name_arn,
       keyword_init: true
@@ -5611,6 +5812,7 @@ module Aws::APIGateway
     #   <p>A Boolean flag to indicate whether to validate request parameters (<code>true</code>) or not (<code>false</code>).</p>
     #   @return [Boolean]
     class RequestValidator < Struct.new(
+      nil,
       :id,
       :name,
       :validate_request_body,
@@ -5643,6 +5845,7 @@ module Aws::APIGateway
     #   <p>Gets an API resource's method of a given HTTP verb.</p>
     #   @return [Hash<String, Types::Method>]
     class Resource < Struct.new(
+      nil,
       :id,
       :parent_id,
       :path_part,
@@ -5703,6 +5906,7 @@ module Aws::APIGateway
     #   <p>The API's root resource ID.</p>
     #   @return [String]
     class RestApi < Struct.new(
+      nil,
       :id,
       :name,
       :description,
@@ -5744,6 +5948,7 @@ module Aws::APIGateway
     #   <p>The default value of an SdkType configuration property.</p>
     #   @return [String]
     class SdkConfigurationProperty < Struct.new(
+      nil,
       :name,
       :friendly_name,
       :description,
@@ -5770,6 +5975,7 @@ module Aws::APIGateway
     #   <p>The binary blob response to GetSdk, which contains the generated SDK.</p>
     #   @return [String]
     class SdkResponse < Struct.new(
+      nil,
       :content_type,
       :content_disposition,
       :body,
@@ -5792,6 +5998,7 @@ module Aws::APIGateway
     #   <p>A list of configuration properties of an SdkType.</p>
     #   @return [Array<Types::SdkConfigurationProperty>]
     class SdkType < Struct.new(
+      nil,
       :id,
       :friendly_name,
       :description,
@@ -5807,6 +6014,7 @@ module Aws::APIGateway
     # @!attribute message
     #   @return [String]
     class ServiceUnavailableException < Struct.new(
+      nil,
       :retry_after_seconds,
       :message,
       keyword_init: true
@@ -5868,6 +6076,7 @@ module Aws::APIGateway
     #   <p>The timestamp when the stage last updated.</p>
     #   @return [Time]
     class Stage < Struct.new(
+      nil,
       :deployment_id,
       :client_certificate_id,
       :stage_name,
@@ -5904,6 +6113,7 @@ module Aws::APIGateway
     #   <p>The stage name associated with the stage key.</p>
     #   @return [String]
     class StageKey < Struct.new(
+      nil,
       :rest_api_id,
       :stage_name,
       keyword_init: true
@@ -5919,6 +6129,7 @@ module Aws::APIGateway
     #   <p>The key-value map of strings. The valid character set is [a-zA-Z+-=._:/]. The tag key can be up to 128 characters and must not start with <code>aws:</code>. The tag value can be up to 256 characters.</p>
     #   @return [Hash<String, String>]
     class TagResourceRequest < Struct.new(
+      nil,
       :resource_arn,
       :tags,
       keyword_init: true
@@ -5952,6 +6163,7 @@ module Aws::APIGateway
     #   <p>A key-value map of additional context variables.</p>
     #   @return [Hash<String, String>]
     class TestInvokeAuthorizerRequest < Struct.new(
+      nil,
       :rest_api_id,
       :authorizer_id,
       :headers,
@@ -5988,6 +6200,7 @@ module Aws::APIGateway
     #   <p>The open identity claims, with any supported custom attributes, returned from the Cognito Your User Pool configured for the API.</p>
     #   @return [Hash<String, String>]
     class TestInvokeAuthorizerResponse < Struct.new(
+      nil,
       :client_status,
       :log,
       :latency,
@@ -6035,6 +6248,7 @@ module Aws::APIGateway
     #   <p>A key-value map of stage variables to simulate an invocation on a deployed Stage.</p>
     #   @return [Hash<String, String>]
     class TestInvokeMethodRequest < Struct.new(
+      nil,
       :rest_api_id,
       :resource_id,
       :http_method,
@@ -6069,6 +6283,7 @@ module Aws::APIGateway
     #   <p>The execution latency, in ms, of the test invoke request.</p>
     #   @return [Integer]
     class TestInvokeMethodResponse < Struct.new(
+      nil,
       :status,
       :body,
       :headers,
@@ -6094,6 +6309,7 @@ module Aws::APIGateway
     #   <p>The API target request rate limit.</p>
     #   @return [Float]
     class ThrottleSettings < Struct.new(
+      nil,
       :burst_limit,
       :rate_limit,
       keyword_init: true
@@ -6122,6 +6338,7 @@ module Aws::APIGateway
     #            </important>
     #   @return [Boolean]
     class TlsConfig < Struct.new(
+      nil,
       :insecure_skip_verification,
       keyword_init: true
     )
@@ -6139,6 +6356,7 @@ module Aws::APIGateway
     # @!attribute message
     #   @return [String]
     class TooManyRequestsException < Struct.new(
+      nil,
       :retry_after_seconds,
       :message,
       keyword_init: true
@@ -6150,6 +6368,7 @@ module Aws::APIGateway
     # @!attribute message
     #   @return [String]
     class UnauthorizedException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -6164,6 +6383,7 @@ module Aws::APIGateway
     #   <p>The Tag keys to delete.</p>
     #   @return [Array<String>]
     class UntagResourceRequest < Struct.new(
+      nil,
       :resource_arn,
       :tag_keys,
       keyword_init: true
@@ -6185,6 +6405,7 @@ module Aws::APIGateway
     #   <p>The version of the API keys used for the account.</p>
     #   @return [String]
     class UpdateAccountOutput < Struct.new(
+      nil,
       :cloudwatch_role_arn,
       :throttle_settings,
       :features,
@@ -6199,6 +6420,7 @@ module Aws::APIGateway
     #   <p>For more information about supported patch operations, see <a href="https://docs.aws.amazon.com/apigateway/latest/api/patch-operations.html">Patch Operations</a>.</p>
     #   @return [Array<Types::PatchOperation>]
     class UpdateAccountRequest < Struct.new(
+      nil,
       :patch_operations,
       keyword_init: true
     )
@@ -6237,6 +6459,7 @@ module Aws::APIGateway
     #   <p>The collection of tags. Each tag element is associated with a given resource.</p>
     #   @return [Hash<String, String>]
     class UpdateApiKeyOutput < Struct.new(
+      nil,
       :id,
       :value,
       :name,
@@ -6265,6 +6488,7 @@ module Aws::APIGateway
     #   <p>For more information about supported patch operations, see <a href="https://docs.aws.amazon.com/apigateway/latest/api/patch-operations.html">Patch Operations</a>.</p>
     #   @return [Array<Types::PatchOperation>]
     class UpdateApiKeyRequest < Struct.new(
+      nil,
       :api_key,
       :patch_operations,
       keyword_init: true
@@ -6318,6 +6542,7 @@ module Aws::APIGateway
     #   <p>The TTL in seconds of cached authorizer results. If it equals 0, authorization caching is disabled. If it is greater than 0, API Gateway will cache authorizer responses. If this field is not set, the default value is 300. The maximum value is 3600, or 1 hour.</p>
     #   @return [Integer]
     class UpdateAuthorizerOutput < Struct.new(
+      nil,
       :id,
       :name,
       :type,
@@ -6344,6 +6569,7 @@ module Aws::APIGateway
     #   <p>For more information about supported patch operations, see <a href="https://docs.aws.amazon.com/apigateway/latest/api/patch-operations.html">Patch Operations</a>.</p>
     #   @return [Array<Types::PatchOperation>]
     class UpdateAuthorizerRequest < Struct.new(
+      nil,
       :rest_api_id,
       :authorizer_id,
       :patch_operations,
@@ -6363,6 +6589,7 @@ module Aws::APIGateway
     #   <p>The name of the associated stage.</p>
     #   @return [String]
     class UpdateBasePathMappingOutput < Struct.new(
+      nil,
       :base_path,
       :rest_api_id,
       :stage,
@@ -6388,6 +6615,7 @@ module Aws::APIGateway
     #   <p>For more information about supported patch operations, see <a href="https://docs.aws.amazon.com/apigateway/latest/api/patch-operations.html">Patch Operations</a>.</p>
     #   @return [Array<Types::PatchOperation>]
     class UpdateBasePathMappingRequest < Struct.new(
+      nil,
       :domain_name,
       :domain_name_id,
       :base_path,
@@ -6417,6 +6645,7 @@ module Aws::APIGateway
     #   <p>The collection of tags. Each tag element is associated with a given resource.</p>
     #   @return [Hash<String, String>]
     class UpdateClientCertificateOutput < Struct.new(
+      nil,
       :client_certificate_id,
       :description,
       :pem_encoded_certificate,
@@ -6436,6 +6665,7 @@ module Aws::APIGateway
     #   <p>For more information about supported patch operations, see <a href="https://docs.aws.amazon.com/apigateway/latest/api/patch-operations.html">Patch Operations</a>.</p>
     #   @return [Array<Types::PatchOperation>]
     class UpdateClientCertificateRequest < Struct.new(
+      nil,
       :client_certificate_id,
       :patch_operations,
       keyword_init: true
@@ -6457,6 +6687,7 @@ module Aws::APIGateway
     #   <p>A summary of the RestApi at the date and time that the deployment resource was created.</p>
     #   @return [Hash<String, Hash<String, Types::MethodSnapshot>>]
     class UpdateDeploymentOutput < Struct.new(
+      nil,
       :id,
       :description,
       :created_date,
@@ -6477,6 +6708,7 @@ module Aws::APIGateway
     #   <p>For more information about supported patch operations, see <a href="https://docs.aws.amazon.com/apigateway/latest/api/patch-operations.html">Patch Operations</a>.</p>
     #   @return [Array<Types::PatchOperation>]
     class UpdateDeploymentRequest < Struct.new(
+      nil,
       :rest_api_id,
       :deployment_id,
       :patch_operations,
@@ -6496,6 +6728,7 @@ module Aws::APIGateway
     #   <p>A content map of API-specific key-value pairs describing the targeted API entity. The map must be encoded as a JSON string, e.g., <code>"{ \"description\": \"The API does ...\" }"</code>.  Only OpenAPI-compliant documentation-related fields from the properties map are exported and, hence, published as part of the API entity definitions, while the original documentation parts are exported in a OpenAPI extension of <code>x-amazon-apigateway-documentation</code>.</p>
     #   @return [String]
     class UpdateDocumentationPartOutput < Struct.new(
+      nil,
       :id,
       :location,
       :properties,
@@ -6515,6 +6748,7 @@ module Aws::APIGateway
     #   <p>For more information about supported patch operations, see <a href="https://docs.aws.amazon.com/apigateway/latest/api/patch-operations.html">Patch Operations</a>.</p>
     #   @return [Array<Types::PatchOperation>]
     class UpdateDocumentationPartRequest < Struct.new(
+      nil,
       :rest_api_id,
       :documentation_part_id,
       :patch_operations,
@@ -6534,6 +6768,7 @@ module Aws::APIGateway
     #   <p>The description of the API documentation snapshot.</p>
     #   @return [String]
     class UpdateDocumentationVersionOutput < Struct.new(
+      nil,
       :version,
       :created_date,
       :description,
@@ -6553,6 +6788,7 @@ module Aws::APIGateway
     #   <p>For more information about supported patch operations, see <a href="https://docs.aws.amazon.com/apigateway/latest/api/patch-operations.html">Patch Operations</a>.</p>
     #   @return [Array<Types::PatchOperation>]
     class UpdateDocumentationVersionRequest < Struct.new(
+      nil,
       :rest_api_id,
       :documentation_version,
       :patch_operations,
@@ -6636,6 +6872,7 @@ module Aws::APIGateway
     #   <p>The routing mode for this domain name. The routing mode determines how API Gateway sends traffic from your custom domain name to your private APIs.</p>
     #   @return [String]
     class UpdateDomainNameOutput < Struct.new(
+      nil,
       :domain_name,
       :domain_name_id,
       :domain_name_arn,
@@ -6676,6 +6913,7 @@ module Aws::APIGateway
     #   <p>For more information about supported patch operations, see <a href="https://docs.aws.amazon.com/apigateway/latest/api/patch-operations.html">Patch Operations</a>.</p>
     #   @return [Array<Types::PatchOperation>]
     class UpdateDomainNameRequest < Struct.new(
+      nil,
       :domain_name,
       :domain_name_id,
       :patch_operations,
@@ -6702,6 +6940,7 @@ module Aws::APIGateway
     #   <p>A Boolean flag to indicate whether this GatewayResponse is the default gateway response (<code>true</code>) or not (<code>false</code>). A default gateway response is one generated by API Gateway without any customization by an API developer. </p>
     #   @return [Boolean]
     class UpdateGatewayResponseOutput < Struct.new(
+      nil,
       :response_type,
       :status_code,
       :response_parameters,
@@ -6728,6 +6967,7 @@ module Aws::APIGateway
     #   <p>For more information about supported patch operations, see <a href="https://docs.aws.amazon.com/apigateway/latest/api/patch-operations.html">Patch Operations</a>.</p>
     #   @return [Array<Types::PatchOperation>]
     class UpdateGatewayResponseRequest < Struct.new(
+      nil,
       :rest_api_id,
       :response_type,
       :patch_operations,
@@ -6814,6 +7054,7 @@ module Aws::APIGateway
     #   <p>Specifies the TLS configuration for an integration.</p>
     #   @return [Types::TlsConfig]
     class UpdateIntegrationOutput < Struct.new(
+      nil,
       :type,
       :http_method,
       :uri,
@@ -6853,6 +7094,7 @@ module Aws::APIGateway
     #   <p>For more information about supported patch operations, see <a href="https://docs.aws.amazon.com/apigateway/latest/api/patch-operations.html">Patch Operations</a>.</p>
     #   @return [Array<Types::PatchOperation>]
     class UpdateIntegrationRequest < Struct.new(
+      nil,
       :rest_api_id,
       :resource_id,
       :http_method,
@@ -6881,6 +7123,7 @@ module Aws::APIGateway
     #            <p>If this property is not defined, the response payload will be passed through from the integration response to the method response without modification.</p>
     #   @return [String]
     class UpdateIntegrationResponseOutput < Struct.new(
+      nil,
       :status_code,
       :selection_pattern,
       :response_parameters,
@@ -6908,6 +7151,7 @@ module Aws::APIGateway
     #   <p>For more information about supported patch operations, see <a href="https://docs.aws.amazon.com/apigateway/latest/api/patch-operations.html">Patch Operations</a>.</p>
     #   @return [Array<Types::PatchOperation>]
     class UpdateIntegrationResponseRequest < Struct.new(
+      nil,
       :rest_api_id,
       :resource_id,
       :http_method,
@@ -6960,6 +7204,7 @@ module Aws::APIGateway
     #   <p>A list of authorization scopes configured on the method. The scopes are used with a <code>COGNITO_USER_POOLS</code> authorizer to authorize the method invocation. The authorization works by matching the method scopes against the scopes parsed from the access token in the incoming request. The method invocation is authorized if any method scopes matches a claimed scope in the access token. Otherwise, the invocation is not authorized. When the method scope is configured, the client must provide an access token instead of an identity token for authorization purposes.</p>
     #   @return [Array<String>]
     class UpdateMethodOutput < Struct.new(
+      nil,
       :http_method,
       :authorization_type,
       :authorizer_id,
@@ -6990,6 +7235,7 @@ module Aws::APIGateway
     #   <p>For more information about supported patch operations, see <a href="https://docs.aws.amazon.com/apigateway/latest/api/patch-operations.html">Patch Operations</a>.</p>
     #   @return [Array<Types::PatchOperation>]
     class UpdateMethodRequest < Struct.new(
+      nil,
       :rest_api_id,
       :resource_id,
       :http_method,
@@ -7010,6 +7256,7 @@ module Aws::APIGateway
     #   <p>Specifies the Model resources used for the response's content-type. Response models are represented as a key/value map, with a content-type as the key and a Model name as the value.</p>
     #   @return [Hash<String, String>]
     class UpdateMethodResponseOutput < Struct.new(
+      nil,
       :status_code,
       :response_parameters,
       :response_models,
@@ -7035,6 +7282,7 @@ module Aws::APIGateway
     #   <p>For more information about supported patch operations, see <a href="https://docs.aws.amazon.com/apigateway/latest/api/patch-operations.html">Patch Operations</a>.</p>
     #   @return [Array<Types::PatchOperation>]
     class UpdateMethodResponseRequest < Struct.new(
+      nil,
       :rest_api_id,
       :resource_id,
       :http_method,
@@ -7062,6 +7310,7 @@ module Aws::APIGateway
     #   <p>The content-type for the model.</p>
     #   @return [String]
     class UpdateModelOutput < Struct.new(
+      nil,
       :id,
       :name,
       :description,
@@ -7083,6 +7332,7 @@ module Aws::APIGateway
     #   <p>For more information about supported patch operations, see <a href="https://docs.aws.amazon.com/apigateway/latest/api/patch-operations.html">Patch Operations</a>.</p>
     #   @return [Array<Types::PatchOperation>]
     class UpdateModelRequest < Struct.new(
+      nil,
       :rest_api_id,
       :model_name,
       :patch_operations,
@@ -7105,6 +7355,7 @@ module Aws::APIGateway
     #   <p>A Boolean flag to indicate whether to validate request parameters (<code>true</code>) or not (<code>false</code>).</p>
     #   @return [Boolean]
     class UpdateRequestValidatorOutput < Struct.new(
+      nil,
       :id,
       :name,
       :validate_request_body,
@@ -7131,6 +7382,7 @@ module Aws::APIGateway
     #   <p>For more information about supported patch operations, see <a href="https://docs.aws.amazon.com/apigateway/latest/api/patch-operations.html">Patch Operations</a>.</p>
     #   @return [Array<Types::PatchOperation>]
     class UpdateRequestValidatorRequest < Struct.new(
+      nil,
       :rest_api_id,
       :request_validator_id,
       :patch_operations,
@@ -7156,6 +7408,7 @@ module Aws::APIGateway
     #   <p>Gets an API resource's method of a given HTTP verb.</p>
     #   @return [Hash<String, Types::Method>]
     class UpdateResourceOutput < Struct.new(
+      nil,
       :id,
       :parent_id,
       :path_part,
@@ -7177,6 +7430,7 @@ module Aws::APIGateway
     #   <p>For more information about supported patch operations, see <a href="https://docs.aws.amazon.com/apigateway/latest/api/patch-operations.html">Patch Operations</a>.</p>
     #   @return [Array<Types::PatchOperation>]
     class UpdateResourceRequest < Struct.new(
+      nil,
       :rest_api_id,
       :resource_id,
       :patch_operations,
@@ -7235,6 +7489,7 @@ module Aws::APIGateway
     #   <p>The API's root resource ID.</p>
     #   @return [String]
     class UpdateRestApiOutput < Struct.new(
+      nil,
       :id,
       :name,
       :description,
@@ -7267,6 +7522,7 @@ module Aws::APIGateway
     #   <p>For more information about supported patch operations, see <a href="https://docs.aws.amazon.com/apigateway/latest/api/patch-operations.html">Patch Operations</a>.</p>
     #   @return [Array<Types::PatchOperation>]
     class UpdateRestApiRequest < Struct.new(
+      nil,
       :rest_api_id,
       :patch_operations,
       keyword_init: true
@@ -7328,6 +7584,7 @@ module Aws::APIGateway
     #   <p>The timestamp when the stage last updated.</p>
     #   @return [Time]
     class UpdateStageOutput < Struct.new(
+      nil,
       :deployment_id,
       :client_certificate_id,
       :stage_name,
@@ -7367,6 +7624,7 @@ module Aws::APIGateway
     #   <p>For more information about supported patch operations, see <a href="https://docs.aws.amazon.com/apigateway/latest/api/patch-operations.html">Patch Operations</a>.</p>
     #   @return [Array<Types::PatchOperation>]
     class UpdateStageRequest < Struct.new(
+      nil,
       :rest_api_id,
       :stage_name,
       :patch_operations,
@@ -7392,6 +7650,7 @@ module Aws::APIGateway
     #   <p>The current pagination position in the paged result set.</p>
     #   @return [String]
     class UpdateUsageOutput < Struct.new(
+      nil,
       :usage_plan_id,
       :start_date,
       :end_date,
@@ -7431,6 +7690,7 @@ module Aws::APIGateway
     #   <p>The collection of tags. Each tag element is associated with a given resource.</p>
     #   @return [Hash<String, String>]
     class UpdateUsagePlanOutput < Struct.new(
+      nil,
       :id,
       :name,
       :description,
@@ -7452,6 +7712,7 @@ module Aws::APIGateway
     #   <p>For more information about supported patch operations, see <a href="https://docs.aws.amazon.com/apigateway/latest/api/patch-operations.html">Patch Operations</a>.</p>
     #   @return [Array<Types::PatchOperation>]
     class UpdateUsagePlanRequest < Struct.new(
+      nil,
       :usage_plan_id,
       :patch_operations,
       keyword_init: true
@@ -7470,6 +7731,7 @@ module Aws::APIGateway
     #   <p>For more information about supported patch operations, see <a href="https://docs.aws.amazon.com/apigateway/latest/api/patch-operations.html">Patch Operations</a>.</p>
     #   @return [Array<Types::PatchOperation>]
     class UpdateUsageRequest < Struct.new(
+      nil,
       :usage_plan_id,
       :key_id,
       :patch_operations,
@@ -7501,6 +7763,7 @@ module Aws::APIGateway
     #   <p>The collection of tags. Each tag element is associated with a given resource.</p>
     #   @return [Hash<String, String>]
     class UpdateVpcLinkOutput < Struct.new(
+      nil,
       :id,
       :name,
       :description,
@@ -7521,6 +7784,7 @@ module Aws::APIGateway
     #   <p>For more information about supported patch operations, see <a href="https://docs.aws.amazon.com/apigateway/latest/api/patch-operations.html">Patch Operations</a>.</p>
     #   @return [Array<Types::PatchOperation>]
     class UpdateVpcLinkRequest < Struct.new(
+      nil,
       :vpc_link_id,
       :patch_operations,
       keyword_init: true
@@ -7557,6 +7821,7 @@ module Aws::APIGateway
     #   <p>The collection of tags. Each tag element is associated with a given resource.</p>
     #   @return [Hash<String, String>]
     class UsagePlan < Struct.new(
+      nil,
       :id,
       :name,
       :description,
@@ -7584,6 +7849,7 @@ module Aws::APIGateway
     #   <p>The name of a usage plan key.</p>
     #   @return [String]
     class UsagePlanKey < Struct.new(
+      nil,
       :id,
       :type,
       :value,
@@ -7616,6 +7882,7 @@ module Aws::APIGateway
     #   <p>The collection of tags. Each tag element is associated with a given resource.</p>
     #   @return [Hash<String, String>]
     class VpcLink < Struct.new(
+      nil,
       :id,
       :name,
       :description,

@@ -41,6 +41,7 @@ module Aws::S3Control
   #   Internal parameter to indicate whether S3Express operation should use control plane, (ex. ListDirectoryAccessPoints)
   #   @return [Boolean]
   EndpointParameters = Struct.new(
+    nil,
     :region,
     :use_fips,
     :use_dual_stack,

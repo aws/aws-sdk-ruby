@@ -23,6 +23,7 @@ module Aws::WAFV2
     #   <p>Internal value used by WAF to manage the key. </p>
     #   @return [Integer]
     class APIKeySummary < Struct.new(
+      nil,
       :token_domains,
       :api_key,
       :creation_timestamp,
@@ -84,6 +85,7 @@ module Aws::WAFV2
     #   <p>Allow the use of regular expressions in the registration page path and the account creation path. </p>
     #   @return [Boolean]
     class AWSManagedRulesACFPRuleSet < Struct.new(
+      nil,
       :creation_path,
       :registration_page_path,
       :request_inspection,
@@ -125,6 +127,7 @@ module Aws::WAFV2
     #   <p>Allow the use of regular expressions in the login page path. </p>
     #   @return [Boolean]
     class AWSManagedRulesATPRuleSet < Struct.new(
+      nil,
       :login_path,
       :request_inspection,
       :response_inspection,
@@ -168,6 +171,7 @@ module Aws::WAFV2
     #            </p>
     #   @return [String]
     class AWSManagedRulesAntiDDoSRuleSet < Struct.new(
+      nil,
       :client_side_action_config,
       :sensitivity_to_block,
       keyword_init: true
@@ -197,6 +201,7 @@ module Aws::WAFV2
     #            </p>
     #   @return [Boolean]
     class AWSManagedRulesBotControlRuleSet < Struct.new(
+      nil,
       :inspection_level,
       :enable_machine_learning,
       keyword_init: true
@@ -217,6 +222,7 @@ module Aws::WAFV2
     #          excluded rules and also on rules that have a rule action override of Count. </p>
     #   @return [String]
     class ActionCondition < Struct.new(
+      nil,
       :action,
       keyword_init: true
     )
@@ -246,6 +252,7 @@ module Aws::WAFV2
     #            </ul>
     #   @return [String]
     class AddressField < Struct.new(
+      nil,
       :identifier,
       keyword_init: true
     )
@@ -258,6 +265,7 @@ module Aws::WAFV2
     #          <p>JSON specification: <code>"All": {}</code>
     #          </p>
     class All < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -268,6 +276,7 @@ module Aws::WAFV2
     #          <p>JSON specification: <code>"AllQueryArguments": {}</code>
     #          </p>
     class AllQueryArguments < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -283,6 +292,7 @@ module Aws::WAFV2
     #       in the <i>WAF Developer Guide</i>. </p>
     #   @return [Types::CustomRequestHandling]
     class AllowAction < Struct.new(
+      nil,
       :custom_request_handling,
       keyword_init: true
     )
@@ -295,6 +305,7 @@ module Aws::WAFV2
     #         </p>
     #   @return [Array<Types::Statement>]
     class AndStatement < Struct.new(
+      nil,
       :statements,
       keyword_init: true
     )
@@ -309,6 +320,7 @@ module Aws::WAFV2
     #   <p>Specifies the attribute value.</p>
     #   @return [Array<String>]
     class ApplicationAttribute < Struct.new(
+      nil,
       :name,
       :values,
       keyword_init: true
@@ -321,6 +333,7 @@ module Aws::WAFV2
     #   <p>Contains the attribute name and a list of values for that attribute.</p>
     #   @return [Array<Types::ApplicationAttribute>]
     class ApplicationConfig < Struct.new(
+      nil,
       :attributes,
       keyword_init: true
     )
@@ -340,6 +353,7 @@ module Aws::WAFV2
     #            but you can specify any header name. </p>
     #   @return [Types::ForwardedIPConfig]
     class AsnMatchStatement < Struct.new(
+      nil,
       :asn_list,
       :forwarded_ip_config,
       keyword_init: true
@@ -393,6 +407,7 @@ module Aws::WAFV2
     #            </ul>
     #   @return [String]
     class AssociateWebACLRequest < Struct.new(
+      nil,
       :web_acl_arn,
       :resource_arn,
       keyword_init: true
@@ -401,6 +416,7 @@ module Aws::WAFV2
     end
 
     class AssociateWebACLResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -426,6 +442,7 @@ module Aws::WAFV2
     #            <p>For Application Load Balancer and AppSync, the limit is fixed at 8 KB (8,192 bytes).</p>
     #   @return [Hash<String, Types::RequestBodyAssociatedResourceTypeConfig>]
     class AssociationConfig < Struct.new(
+      nil,
       :request_body,
       keyword_init: true
     )
@@ -442,6 +459,7 @@ module Aws::WAFV2
     #       in the <i>WAF Developer Guide</i>. </p>
     #   @return [Types::CustomResponse]
     class BlockAction < Struct.new(
+      nil,
       :custom_response,
       keyword_init: true
     )
@@ -491,6 +509,7 @@ module Aws::WAFV2
     #            </p>
     #   @return [String]
     class Body < Struct.new(
+      nil,
       :oversize_handling,
       keyword_init: true
     )
@@ -601,6 +620,7 @@ module Aws::WAFV2
     #            the web request.</p>
     #   @return [String]
     class ByteMatchStatement < Struct.new(
+      nil,
       :search_string,
       :field_to_match,
       :text_transformations,
@@ -645,6 +665,7 @@ module Aws::WAFV2
     #       in the <i>WAF Developer Guide</i>. </p>
     #   @return [Types::CustomRequestHandling]
     class CaptchaAction < Struct.new(
+      nil,
       :custom_request_handling,
       keyword_init: true
     )
@@ -658,6 +679,7 @@ module Aws::WAFV2
     #            successfully solves a <code>CAPTCHA</code> puzzle. </p>
     #   @return [Types::ImmunityTimeProperty]
     class CaptchaConfig < Struct.new(
+      nil,
       :immunity_time_property,
       keyword_init: true
     )
@@ -677,6 +699,7 @@ module Aws::WAFV2
     #   <p>The reason for failure, populated when the evaluation of the token fails.</p>
     #   @return [String]
     class CaptchaResponse < Struct.new(
+      nil,
       :response_code,
       :solve_timestamp,
       :failure_reason,
@@ -724,6 +747,7 @@ module Aws::WAFV2
     #       in the <i>WAF Developer Guide</i>. </p>
     #   @return [Types::CustomRequestHandling]
     class ChallengeAction < Struct.new(
+      nil,
       :custom_request_handling,
       keyword_init: true
     )
@@ -737,6 +761,7 @@ module Aws::WAFV2
     #            successfully responds to a challenge. </p>
     #   @return [Types::ImmunityTimeProperty]
     class ChallengeConfig < Struct.new(
+      nil,
       :immunity_time_property,
       keyword_init: true
     )
@@ -755,6 +780,7 @@ module Aws::WAFV2
     #   <p>The reason for failure, populated when the evaluation of the token fails.</p>
     #   @return [String]
     class ChallengeResponse < Struct.new(
+      nil,
       :response_code,
       :solve_timestamp,
       :failure_reason,
@@ -780,6 +806,7 @@ module Aws::WAFV2
     #            ACL. </p>
     #   @return [Array<Types::Rule>]
     class CheckCapacityRequest < Struct.new(
+      nil,
       :scope,
       :rules,
       keyword_init: true
@@ -791,6 +818,7 @@ module Aws::WAFV2
     #   <p>The capacity required by the rules and scope.</p>
     #   @return [Integer]
     class CheckCapacityResponse < Struct.new(
+      nil,
       :capacity,
       keyword_init: true
     )
@@ -880,6 +908,7 @@ module Aws::WAFV2
     #            </p>
     #   @return [Array<Types::Regex>]
     class ClientSideAction < Struct.new(
+      nil,
       :usage_of_action,
       :sensitivity,
       :exempt_uri_regular_expressions,
@@ -899,6 +928,7 @@ module Aws::WAFV2
     #            <p>You can enable or disable the use of these rules, and you can configure how to use them when they are enabled. </p>
     #   @return [Types::ClientSideAction]
     class ClientSideActionConfig < Struct.new(
+      nil,
       :challenge,
       keyword_init: true
     )
@@ -914,6 +944,7 @@ module Aws::WAFV2
     #          Fully qualified labels have a prefix, optional namespaces, and label name. The prefix identifies the rule group or web ACL context of the rule that added the label.  </p>
     #   @return [Types::LabelNameCondition]
     class Condition < Struct.new(
+      nil,
       :action_condition,
       :label_name_condition,
       keyword_init: true
@@ -937,6 +968,7 @@ module Aws::WAFV2
     #         </p>
     #   @return [Array<String>]
     class CookieMatchPattern < Struct.new(
+      nil,
       :all,
       :included_cookies,
       :excluded_cookies,
@@ -991,6 +1023,7 @@ module Aws::WAFV2
     #            </ul>
     #   @return [String]
     class Cookies < Struct.new(
+      nil,
       :match_pattern,
       :match_scope,
       :oversize_handling,
@@ -1009,6 +1042,7 @@ module Aws::WAFV2
     #       in the <i>WAF Developer Guide</i>. </p>
     #   @return [Types::CustomRequestHandling]
     class CountAction < Struct.new(
+      nil,
       :custom_request_handling,
       keyword_init: true
     )
@@ -1034,6 +1068,7 @@ module Aws::WAFV2
     #            <p>Public suffixes aren't allowed. For example, you can't use <code>gov.au</code> or <code>co.uk</code> as token domains.</p>
     #   @return [Array<String>]
     class CreateAPIKeyRequest < Struct.new(
+      nil,
       :scope,
       :token_domains,
       keyword_init: true
@@ -1045,6 +1080,7 @@ module Aws::WAFV2
     #   <p>The generated, encrypted API key. You can copy this for use in your JavaScript CAPTCHA integration.  </p>
     #   @return [String]
     class CreateAPIKeyResponse < Struct.new(
+      nil,
       :api_key,
       keyword_init: true
     )
@@ -1114,6 +1150,7 @@ module Aws::WAFV2
     #   <p>An array of key:value pairs to associate with the resource.</p>
     #   @return [Array<Types::Tag>]
     class CreateIPSetRequest < Struct.new(
+      nil,
       :name,
       :scope,
       :description,
@@ -1129,6 +1166,7 @@ module Aws::WAFV2
     #   <p>High-level information about an <a>IPSet</a>, returned by operations like create and list. This provides information like the ID, that you can use to retrieve and manage an <code>IPSet</code>, and the ARN, that you provide to the <a>IPSetReferenceStatement</a> to use the address set in a <a>Rule</a>.</p>
     #   @return [Types::IPSetSummary]
     class CreateIPSetResponse < Struct.new(
+      nil,
       :summary,
       keyword_init: true
     )
@@ -1160,6 +1198,7 @@ module Aws::WAFV2
     #   <p>An array of key:value pairs to associate with the resource.</p>
     #   @return [Array<Types::Tag>]
     class CreateRegexPatternSetRequest < Struct.new(
+      nil,
       :name,
       :scope,
       :description,
@@ -1174,6 +1213,7 @@ module Aws::WAFV2
     #   <p>High-level information about a <a>RegexPatternSet</a>, returned by operations like create and list. This provides information like the ID, that you can use to retrieve and manage a <code>RegexPatternSet</code>, and the ARN, that you provide to the <a>RegexPatternSetReferenceStatement</a> to use the pattern set in a <a>Rule</a>.</p>
     #   @return [Types::RegexPatternSetSummary]
     class CreateRegexPatternSetResponse < Struct.new(
+      nil,
       :summary,
       keyword_init: true
     )
@@ -1233,6 +1273,7 @@ module Aws::WAFV2
     #        in the <i>WAF Developer Guide</i>. </p>
     #   @return [Hash<String, Types::CustomResponseBody>]
     class CreateRuleGroupRequest < Struct.new(
+      nil,
       :name,
       :scope,
       :capacity,
@@ -1250,6 +1291,7 @@ module Aws::WAFV2
     #   <p>High-level information about a <a>RuleGroup</a>, returned by operations like create and list. This provides information like the ID, that you can use to retrieve and manage a <code>RuleGroup</code>, and the ARN, that you provide to the <a>RuleGroupReferenceStatement</a> to use the rule group in a <a>Rule</a>.</p>
     #   @return [Types::RuleGroupSummary]
     class CreateRuleGroupResponse < Struct.new(
+      nil,
       :summary,
       keyword_init: true
     )
@@ -1332,6 +1374,7 @@ module Aws::WAFV2
     #   <p>Configures the ability for the WAF console to store and retrieve application attributes during the web ACL creation process. Application attributes help WAF give recommendations for protection packs.</p>
     #   @return [Types::ApplicationConfig]
     class CreateWebACLRequest < Struct.new(
+      nil,
       :name,
       :scope,
       :default_action,
@@ -1356,6 +1399,7 @@ module Aws::WAFV2
     #   <p>High-level information about a <a>WebACL</a>, returned by operations like create and list. This provides information like the ID, that you can use to retrieve and manage a <code>WebACL</code>, and the ARN, that you provide to operations like <a>AssociateWebACL</a>.</p>
     #   @return [Types::WebACLSummary]
     class CreateWebACLResponse < Struct.new(
+      nil,
       :summary,
       keyword_init: true
     )
@@ -1374,6 +1418,7 @@ module Aws::WAFV2
     #   <p>The value of the custom header.</p>
     #   @return [String]
     class CustomHTTPHeader < Struct.new(
+      nil,
       :name,
       :value,
       keyword_init: true
@@ -1393,6 +1438,7 @@ module Aws::WAFV2
     #        in the <i>WAF Developer Guide</i>. </p>
     #   @return [Array<Types::CustomHTTPHeader>]
     class CustomRequestHandling < Struct.new(
+      nil,
       :insert_headers,
       keyword_init: true
     )
@@ -1423,6 +1469,7 @@ module Aws::WAFV2
     #        in the <i>WAF Developer Guide</i>. </p>
     #   @return [Array<Types::CustomHTTPHeader>]
     class CustomResponse < Struct.new(
+      nil,
       :response_code,
       :custom_response_body_key,
       :response_headers,
@@ -1446,6 +1493,7 @@ module Aws::WAFV2
     #        in the <i>WAF Developer Guide</i>. </p>
     #   @return [String]
     class CustomResponseBody < Struct.new(
+      nil,
       :content_type,
       :content,
       keyword_init: true
@@ -1487,6 +1535,7 @@ module Aws::WAFV2
     #            </p>
     #   @return [Boolean]
     class DataProtection < Struct.new(
+      nil,
       :field,
       :action,
       :exclude_rule_match_details,
@@ -1511,6 +1560,7 @@ module Aws::WAFV2
     #              web ACL. WAF applies the specified protection to all web requests that the web ACL inspects.  </p>
     #   @return [Array<Types::DataProtection>]
     class DataProtectionConfig < Struct.new(
+      nil,
       :data_protections,
       keyword_init: true
     )
@@ -1527,6 +1577,7 @@ module Aws::WAFV2
     #   <p>Specifies that WAF should allow requests by default.</p>
     #   @return [Types::AllowAction]
     class DefaultAction < Struct.new(
+      nil,
       :block,
       :allow,
       keyword_init: true
@@ -1550,6 +1601,7 @@ module Aws::WAFV2
     #   <p>The encrypted API key that you want to delete. </p>
     #   @return [String]
     class DeleteAPIKeyRequest < Struct.new(
+      nil,
       :scope,
       :api_key,
       keyword_init: true
@@ -1558,6 +1610,7 @@ module Aws::WAFV2
     end
 
     class DeleteAPIKeyResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1570,6 +1623,7 @@ module Aws::WAFV2
     #   <p>A token used for optimistic locking. WAF returns a token to your <code>get</code> and <code>list</code> requests, to mark the state of the entity at the time of the request. To make changes to the entity associated with the token, you provide the token to operations like <code>update</code> and <code>delete</code>. WAF uses the token to ensure that no changes have been made to the entity since you last retrieved it. If a change has been made, the update fails with a <code>WAFOptimisticLockException</code>. If this happens, perform another <code>get</code>, and use the new token returned by that operation. </p>
     #   @return [String]
     class DeleteFirewallManagerRuleGroupsRequest < Struct.new(
+      nil,
       :web_acl_arn,
       :web_acl_lock_token,
       keyword_init: true
@@ -1581,6 +1635,7 @@ module Aws::WAFV2
     #   <p>A token used for optimistic locking. WAF returns a token to your <code>get</code> and <code>list</code> requests, to mark the state of the entity at the time of the request. To make changes to the entity associated with the token, you provide the token to operations like <code>update</code> and <code>delete</code>. WAF uses the token to ensure that no changes have been made to the entity since you last retrieved it. If a change has been made, the update fails with a <code>WAFOptimisticLockException</code>. If this happens, perform another <code>get</code>, and use the new token returned by that operation. </p>
     #   @return [String]
     class DeleteFirewallManagerRuleGroupsResponse < Struct.new(
+      nil,
       :next_web_acl_lock_token,
       keyword_init: true
     )
@@ -1609,6 +1664,7 @@ module Aws::WAFV2
     #   <p>A token used for optimistic locking. WAF returns a token to your <code>get</code> and <code>list</code> requests, to mark the state of the entity at the time of the request. To make changes to the entity associated with the token, you provide the token to operations like <code>update</code> and <code>delete</code>. WAF uses the token to ensure that no changes have been made to the entity since you last retrieved it. If a change has been made, the update fails with a <code>WAFOptimisticLockException</code>. If this happens, perform another <code>get</code>, and use the new token returned by that operation. </p>
     #   @return [String]
     class DeleteIPSetRequest < Struct.new(
+      nil,
       :name,
       :scope,
       :id,
@@ -1619,6 +1675,7 @@ module Aws::WAFV2
     end
 
     class DeleteIPSetResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1641,6 +1698,7 @@ module Aws::WAFV2
     #            </p>
     #   @return [String]
     class DeleteLoggingConfigurationRequest < Struct.new(
+      nil,
       :resource_arn,
       :log_type,
       :log_scope,
@@ -1650,6 +1708,7 @@ module Aws::WAFV2
     end
 
     class DeleteLoggingConfigurationResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1661,6 +1720,7 @@ module Aws::WAFV2
     #            <p>You must be the owner of the rule group to perform this operation.</p>
     #   @return [String]
     class DeletePermissionPolicyRequest < Struct.new(
+      nil,
       :resource_arn,
       keyword_init: true
     )
@@ -1668,6 +1728,7 @@ module Aws::WAFV2
     end
 
     class DeletePermissionPolicyResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1695,6 +1756,7 @@ module Aws::WAFV2
     #   <p>A token used for optimistic locking. WAF returns a token to your <code>get</code> and <code>list</code> requests, to mark the state of the entity at the time of the request. To make changes to the entity associated with the token, you provide the token to operations like <code>update</code> and <code>delete</code>. WAF uses the token to ensure that no changes have been made to the entity since you last retrieved it. If a change has been made, the update fails with a <code>WAFOptimisticLockException</code>. If this happens, perform another <code>get</code>, and use the new token returned by that operation. </p>
     #   @return [String]
     class DeleteRegexPatternSetRequest < Struct.new(
+      nil,
       :name,
       :scope,
       :id,
@@ -1705,6 +1767,7 @@ module Aws::WAFV2
     end
 
     class DeleteRegexPatternSetResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1732,6 +1795,7 @@ module Aws::WAFV2
     #   <p>A token used for optimistic locking. WAF returns a token to your <code>get</code> and <code>list</code> requests, to mark the state of the entity at the time of the request. To make changes to the entity associated with the token, you provide the token to operations like <code>update</code> and <code>delete</code>. WAF uses the token to ensure that no changes have been made to the entity since you last retrieved it. If a change has been made, the update fails with a <code>WAFOptimisticLockException</code>. If this happens, perform another <code>get</code>, and use the new token returned by that operation. </p>
     #   @return [String]
     class DeleteRuleGroupRequest < Struct.new(
+      nil,
       :name,
       :scope,
       :id,
@@ -1742,6 +1806,7 @@ module Aws::WAFV2
     end
 
     class DeleteRuleGroupResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1769,6 +1834,7 @@ module Aws::WAFV2
     #   <p>A token used for optimistic locking. WAF returns a token to your <code>get</code> and <code>list</code> requests, to mark the state of the entity at the time of the request. To make changes to the entity associated with the token, you provide the token to operations like <code>update</code> and <code>delete</code>. WAF uses the token to ensure that no changes have been made to the entity since you last retrieved it. If a change has been made, the update fails with a <code>WAFOptimisticLockException</code>. If this happens, perform another <code>get</code>, and use the new token returned by that operation. </p>
     #   @return [String]
     class DeleteWebACLRequest < Struct.new(
+      nil,
       :name,
       :scope,
       :id,
@@ -1779,6 +1845,7 @@ module Aws::WAFV2
     end
 
     class DeleteWebACLResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1797,6 +1864,7 @@ module Aws::WAFV2
     #            </ul>
     #   @return [String]
     class DescribeAllManagedProductsRequest < Struct.new(
+      nil,
       :scope,
       keyword_init: true
     )
@@ -1807,6 +1875,7 @@ module Aws::WAFV2
     #   <p>High-level information for the Amazon Web Services Managed Rules rule groups and Amazon Web Services Marketplace managed rule groups. </p>
     #   @return [Array<Types::ManagedProductDescriptor>]
     class DescribeAllManagedProductsResponse < Struct.new(
+      nil,
       :managed_products,
       keyword_init: true
     )
@@ -1829,6 +1898,7 @@ module Aws::WAFV2
     #            </ul>
     #   @return [String]
     class DescribeManagedProductsByVendorRequest < Struct.new(
+      nil,
       :vendor_name,
       :scope,
       keyword_init: true
@@ -1840,6 +1910,7 @@ module Aws::WAFV2
     #   <p>High-level information for the managed rule groups owned by the specified vendor.  </p>
     #   @return [Array<Types::ManagedProductDescriptor>]
     class DescribeManagedProductsByVendorResponse < Struct.new(
+      nil,
       :managed_products,
       keyword_init: true
     )
@@ -1869,6 +1940,7 @@ module Aws::WAFV2
     #            expiration. If you don't provide this, WAF uses the vendor's default version. </p>
     #   @return [String]
     class DescribeManagedRuleGroupRequest < Struct.new(
+      nil,
       :vendor_name,
       :name,
       :scope,
@@ -1924,6 +1996,7 @@ module Aws::WAFV2
     #   <p>The labels that one or more rules in this rule group match against in label match statements. These labels are defined in a <code>LabelMatchStatement</code> specification, in the <a>Statement</a> definition of a rule.  </p>
     #   @return [Array<Types::LabelSummary>]
     class DescribeManagedRuleGroupResponse < Struct.new(
+      nil,
       :version_name,
       :sns_topic_arn,
       :capacity,
@@ -1978,6 +2051,7 @@ module Aws::WAFV2
     #            </ul>
     #   @return [String]
     class DisassociateWebACLRequest < Struct.new(
+      nil,
       :resource_arn,
       keyword_init: true
     )
@@ -1985,6 +2059,7 @@ module Aws::WAFV2
     end
 
     class DisassociateWebACLResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -2013,6 +2088,7 @@ module Aws::WAFV2
     #            </ul>
     #   @return [String]
     class EmailField < Struct.new(
+      nil,
       :identifier,
       keyword_init: true
     )
@@ -2027,6 +2103,7 @@ module Aws::WAFV2
     #   <p>The name of the rule whose action you want to override to <code>Count</code>.</p>
     #   @return [String]
     class ExcludedRule < Struct.new(
+      nil,
       :name,
       keyword_init: true
     )
@@ -2212,6 +2289,7 @@ module Aws::WAFV2
     #            underlying host service. </p>
     #   @return [Types::UriFragment]
     class FieldToMatch < Struct.new(
+      nil,
       :single_header,
       :single_query_argument,
       :all_query_arguments,
@@ -2239,6 +2317,7 @@ module Aws::WAFV2
     #   <p>Specifies the keys to protect for the specified field type. If you don't specify any key, then all keys for the field type are protected.  </p>
     #   @return [Array<String>]
     class FieldToProtect < Struct.new(
+      nil,
       :field_type,
       :field_keys,
       keyword_init: true
@@ -2258,6 +2337,7 @@ module Aws::WAFV2
     #   <p>Match conditions for the filter.</p>
     #   @return [Array<Types::Condition>]
     class Filter < Struct.new(
+      nil,
       :behavior,
       :requirement,
       :conditions,
@@ -2291,6 +2371,7 @@ module Aws::WAFV2
     #   <p>Defines and enables Amazon CloudWatch metrics and web request sample collection.  </p>
     #   @return [Types::VisibilityConfig]
     class FirewallManagerRuleGroup < Struct.new(
+      nil,
       :name,
       :priority,
       :firewall_manager_statement,
@@ -2314,6 +2395,7 @@ module Aws::WAFV2
     #   <p>A statement used by Firewall Manager to run the rules that are defined in a rule group. This is managed by Firewall Manager for an Firewall Manager WAF policy.</p>
     #   @return [Types::RuleGroupReferenceStatement]
     class FirewallManagerStatement < Struct.new(
+      nil,
       :managed_rule_group_statement,
       :rule_group_reference_statement,
       keyword_init: true
@@ -2353,6 +2435,7 @@ module Aws::WAFV2
     #            </ul>
     #   @return [String]
     class ForwardedIPConfig < Struct.new(
+      nil,
       :header_name,
       :fallback_behavior,
       keyword_init: true
@@ -2368,6 +2451,7 @@ module Aws::WAFV2
     #            <code>LATEST</code>.</p>
     #   @return [String]
     class GenerateMobileSdkReleaseUrlRequest < Struct.new(
+      nil,
       :platform,
       :release_version,
       keyword_init: true
@@ -2379,6 +2463,7 @@ module Aws::WAFV2
     #   <p>The presigned download URL for the specified SDK release.</p>
     #   @return [String]
     class GenerateMobileSdkReleaseUrlResponse < Struct.new(
+      nil,
       :url,
       keyword_init: true
     )
@@ -2410,6 +2495,7 @@ module Aws::WAFV2
     #            </note>
     #   @return [Types::ForwardedIPConfig]
     class GeoMatchStatement < Struct.new(
+      nil,
       :country_codes,
       :forwarded_ip_config,
       keyword_init: true
@@ -2433,6 +2519,7 @@ module Aws::WAFV2
     #   <p>The encrypted API key. </p>
     #   @return [String]
     class GetDecryptedAPIKeyRequest < Struct.new(
+      nil,
       :scope,
       :api_key,
       keyword_init: true
@@ -2447,6 +2534,7 @@ module Aws::WAFV2
     #   <p>The date and time that the key was created. </p>
     #   @return [Time]
     class GetDecryptedAPIKeyResponse < Struct.new(
+      nil,
       :token_domains,
       :creation_timestamp,
       keyword_init: true
@@ -2473,6 +2561,7 @@ module Aws::WAFV2
     #   <p>A unique identifier for the set. This ID is returned in the responses to create and list commands. You provide it to operations like update and delete.</p>
     #   @return [String]
     class GetIPSetRequest < Struct.new(
+      nil,
       :name,
       :scope,
       :id,
@@ -2488,6 +2577,7 @@ module Aws::WAFV2
     #   <p>A token used for optimistic locking. WAF returns a token to your <code>get</code> and <code>list</code> requests, to mark the state of the entity at the time of the request. To make changes to the entity associated with the token, you provide the token to operations like <code>update</code> and <code>delete</code>. WAF uses the token to ensure that no changes have been made to the entity since you last retrieved it. If a change has been made, the update fails with a <code>WAFOptimisticLockException</code>. If this happens, perform another <code>get</code>, and use the new token returned by that operation. </p>
     #   @return [String]
     class GetIPSetResponse < Struct.new(
+      nil,
       :ip_set,
       :lock_token,
       keyword_init: true
@@ -2512,6 +2602,7 @@ module Aws::WAFV2
     #            </p>
     #   @return [String]
     class GetLoggingConfigurationRequest < Struct.new(
+      nil,
       :resource_arn,
       :log_type,
       :log_scope,
@@ -2524,6 +2615,7 @@ module Aws::WAFV2
     #   <p>The <a>LoggingConfiguration</a> for the specified web ACL.</p>
     #   @return [Types::LoggingConfiguration]
     class GetLoggingConfigurationResponse < Struct.new(
+      nil,
       :logging_configuration,
       keyword_init: true
     )
@@ -2550,6 +2642,7 @@ module Aws::WAFV2
     #   <p>A unique identifier for the managed rule set. The ID is returned in the responses to commands like <code>list</code>. You provide it to operations like <code>get</code> and <code>update</code>.</p>
     #   @return [String]
     class GetManagedRuleSetRequest < Struct.new(
+      nil,
       :name,
       :scope,
       :id,
@@ -2565,6 +2658,7 @@ module Aws::WAFV2
     #   <p>A token used for optimistic locking. WAF returns a token to your <code>get</code> and <code>list</code> requests, to mark the state of the entity at the time of the request. To make changes to the entity associated with the token, you provide the token to operations like <code>update</code> and <code>delete</code>. WAF uses the token to ensure that no changes have been made to the entity since you last retrieved it. If a change has been made, the update fails with a <code>WAFOptimisticLockException</code>. If this happens, perform another <code>get</code>, and use the new token returned by that operation. </p>
     #   @return [String]
     class GetManagedRuleSetResponse < Struct.new(
+      nil,
       :managed_rule_set,
       :lock_token,
       keyword_init: true
@@ -2580,6 +2674,7 @@ module Aws::WAFV2
     #            <code>LATEST</code>.</p>
     #   @return [String]
     class GetMobileSdkReleaseRequest < Struct.new(
+      nil,
       :platform,
       :release_version,
       keyword_init: true
@@ -2591,6 +2686,7 @@ module Aws::WAFV2
     #   <p>Information for a specified SDK release, including release notes and tags.</p>
     #   @return [Types::MobileSdkRelease]
     class GetMobileSdkReleaseResponse < Struct.new(
+      nil,
       :mobile_sdk_release,
       keyword_init: true
     )
@@ -2602,6 +2698,7 @@ module Aws::WAFV2
     #            policy.</p>
     #   @return [String]
     class GetPermissionPolicyRequest < Struct.new(
+      nil,
       :resource_arn,
       keyword_init: true
     )
@@ -2612,6 +2709,7 @@ module Aws::WAFV2
     #   <p>The IAM policy that is attached to the specified rule group.</p>
     #   @return [String]
     class GetPermissionPolicyResponse < Struct.new(
+      nil,
       :policy,
       keyword_init: true
     )
@@ -2646,6 +2744,7 @@ module Aws::WAFV2
     #            reference statement in the request parameter <code>RuleGroupRuleName</code>.</p>
     #   @return [String]
     class GetRateBasedStatementManagedKeysRequest < Struct.new(
+      nil,
       :scope,
       :web_acl_name,
       :web_acl_id,
@@ -2663,6 +2762,7 @@ module Aws::WAFV2
     #   <p>The keys that are of Internet Protocol version 6 (IPv6). </p>
     #   @return [Types::RateBasedStatementManagedKeysIPSet]
     class GetRateBasedStatementManagedKeysResponse < Struct.new(
+      nil,
       :managed_keys_ipv4,
       :managed_keys_ipv6,
       keyword_init: true
@@ -2689,6 +2789,7 @@ module Aws::WAFV2
     #   <p>A unique identifier for the set. This ID is returned in the responses to create and list commands. You provide it to operations like update and delete.</p>
     #   @return [String]
     class GetRegexPatternSetRequest < Struct.new(
+      nil,
       :name,
       :scope,
       :id,
@@ -2704,6 +2805,7 @@ module Aws::WAFV2
     #   <p>A token used for optimistic locking. WAF returns a token to your <code>get</code> and <code>list</code> requests, to mark the state of the entity at the time of the request. To make changes to the entity associated with the token, you provide the token to operations like <code>update</code> and <code>delete</code>. WAF uses the token to ensure that no changes have been made to the entity since you last retrieved it. If a change has been made, the update fails with a <code>WAFOptimisticLockException</code>. If this happens, perform another <code>get</code>, and use the new token returned by that operation. </p>
     #   @return [String]
     class GetRegexPatternSetResponse < Struct.new(
+      nil,
       :regex_pattern_set,
       :lock_token,
       keyword_init: true
@@ -2733,6 +2835,7 @@ module Aws::WAFV2
     #   <p>The Amazon Resource Name (ARN) of the entity.</p>
     #   @return [String]
     class GetRuleGroupRequest < Struct.new(
+      nil,
       :name,
       :scope,
       :id,
@@ -2749,6 +2852,7 @@ module Aws::WAFV2
     #   <p>A token used for optimistic locking. WAF returns a token to your <code>get</code> and <code>list</code> requests, to mark the state of the entity at the time of the request. To make changes to the entity associated with the token, you provide the token to operations like <code>update</code> and <code>delete</code>. WAF uses the token to ensure that no changes have been made to the entity since you last retrieved it. If a change has been made, the update fails with a <code>WAFOptimisticLockException</code>. If this happens, perform another <code>get</code>, and use the new token returned by that operation. </p>
     #   @return [String]
     class GetRuleGroupResponse < Struct.new(
+      nil,
       :rule_group,
       :lock_token,
       keyword_init: true
@@ -2791,6 +2895,7 @@ module Aws::WAFV2
     #            returns information about all of them. </p>
     #   @return [Integer]
     class GetSampledRequestsRequest < Struct.new(
+      nil,
       :web_acl_arn,
       :rule_metric_name,
       :scope,
@@ -2819,6 +2924,7 @@ module Aws::WAFV2
     #            Times are in Coordinated Universal Time (UTC) format.</p>
     #   @return [Types::TimeWindow]
     class GetSampledRequestsResponse < Struct.new(
+      nil,
       :sampled_requests,
       :population_size,
       :time_window,
@@ -2874,6 +2980,7 @@ module Aws::WAFV2
     #            </ul>
     #   @return [String]
     class GetWebACLForResourceRequest < Struct.new(
+      nil,
       :resource_arn,
       keyword_init: true
     )
@@ -2885,6 +2992,7 @@ module Aws::WAFV2
     #            WAF returns a null web ACL.</p>
     #   @return [Types::WebACL]
     class GetWebACLForResourceResponse < Struct.new(
+      nil,
       :web_acl,
       keyword_init: true
     )
@@ -2913,6 +3021,7 @@ module Aws::WAFV2
     #   <p>The Amazon Resource Name (ARN) of the web ACL that you want to retrieve. </p>
     #   @return [String]
     class GetWebACLRequest < Struct.new(
+      nil,
       :name,
       :scope,
       :id,
@@ -2934,6 +3043,7 @@ module Aws::WAFV2
     #   in the <i>WAF Developer Guide</i>.</p>
     #   @return [String]
     class GetWebACLResponse < Struct.new(
+      nil,
       :web_acl,
       :lock_token,
       :application_integration_url,
@@ -2953,6 +3063,7 @@ module Aws::WAFV2
     #   <p>The value of the HTTP header.</p>
     #   @return [String]
     class HTTPHeader < Struct.new(
+      nil,
       :name,
       :value,
       keyword_init: true
@@ -3001,6 +3112,7 @@ module Aws::WAFV2
     #            request.</p>
     #   @return [Array<Types::HTTPHeader>]
     class HTTPRequest < Struct.new(
+      nil,
       :client_ip,
       :country,
       :uri,
@@ -3028,6 +3140,7 @@ module Aws::WAFV2
     #         </p>
     #   @return [Array<String>]
     class HeaderMatchPattern < Struct.new(
+      nil,
       :all,
       :included_headers,
       :excluded_headers,
@@ -3064,6 +3177,7 @@ module Aws::WAFV2
     #            </ul>
     #   @return [String]
     class HeaderOrder < Struct.new(
+      nil,
       :oversize_handling,
       keyword_init: true
     )
@@ -3119,6 +3233,7 @@ module Aws::WAFV2
     #            </ul>
     #   @return [String]
     class Headers < Struct.new(
+      nil,
       :match_pattern,
       :match_scope,
       :oversize_handling,
@@ -3187,6 +3302,7 @@ module Aws::WAFV2
     #            </ul>
     #   @return [Array<String>]
     class IPSet < Struct.new(
+      nil,
       :name,
       :id,
       :arn,
@@ -3248,6 +3364,7 @@ module Aws::WAFV2
     #            </ul>
     #   @return [String]
     class IPSetForwardedIPConfig < Struct.new(
+      nil,
       :header_name,
       :fallback_behavior,
       :position,
@@ -3269,6 +3386,7 @@ module Aws::WAFV2
     #            </note>
     #   @return [Types::IPSetForwardedIPConfig]
     class IPSetReferenceStatement < Struct.new(
+      nil,
       :arn,
       :ip_set_forwarded_ip_config,
       keyword_init: true
@@ -3293,6 +3411,7 @@ module Aws::WAFV2
     #   <p>The Amazon Resource Name (ARN) of the entity.</p>
     #   @return [String]
     class IPSetSummary < Struct.new(
+      nil,
       :name,
       :id,
       :description,
@@ -3311,6 +3430,7 @@ module Aws::WAFV2
     #            <p>For the Challenge action, the minimum setting is 300. </p>
     #   @return [Integer]
     class ImmunityTimeProperty < Struct.new(
+      nil,
       :immunity_time,
       keyword_init: true
     )
@@ -3345,6 +3465,7 @@ module Aws::WAFV2
     #            </ul>
     #   @return [String]
     class JA3Fingerprint < Struct.new(
+      nil,
       :fallback_behavior,
       keyword_init: true
     )
@@ -3379,6 +3500,7 @@ module Aws::WAFV2
     #            </ul>
     #   @return [String]
     class JA4Fingerprint < Struct.new(
+      nil,
       :fallback_behavior,
       keyword_init: true
     )
@@ -3479,6 +3601,7 @@ module Aws::WAFV2
     #            </p>
     #   @return [String]
     class JsonBody < Struct.new(
+      nil,
       :match_pattern,
       :match_scope,
       :invalid_fallback_behavior,
@@ -3513,6 +3636,7 @@ module Aws::WAFV2
     #            </note>
     #   @return [Array<String>]
     class JsonMatchPattern < Struct.new(
+      nil,
       :all,
       :included_paths,
       keyword_init: true
@@ -3527,6 +3651,7 @@ module Aws::WAFV2
     #   <p>The label string. </p>
     #   @return [String]
     class Label < Struct.new(
+      nil,
       :name,
       keyword_init: true
     )
@@ -3558,6 +3683,7 @@ module Aws::WAFV2
     #            example <code>NS1:NS2:name</code>.</p>
     #   @return [String]
     class LabelMatchStatement < Struct.new(
+      nil,
       :scope,
       :key,
       keyword_init: true
@@ -3572,6 +3698,7 @@ module Aws::WAFV2
     #            be a fully qualified label name. Fully qualified labels have a prefix, optional namespaces, and label name. The prefix identifies the rule group or web ACL context of the rule that added the label.  </p>
     #   @return [String]
     class LabelNameCondition < Struct.new(
+      nil,
       :label_name,
       keyword_init: true
     )
@@ -3596,6 +3723,7 @@ module Aws::WAFV2
     #   <p>An individual label specification.</p>
     #   @return [String]
     class LabelSummary < Struct.new(
+      nil,
       :name,
       keyword_init: true
     )
@@ -3625,6 +3753,7 @@ module Aws::WAFV2
     #            <code>NextMarker</code> value that you can use in a subsequent call to get the next batch of objects.</p>
     #   @return [Integer]
     class ListAPIKeysRequest < Struct.new(
+      nil,
       :scope,
       :next_marker,
       :limit,
@@ -3645,6 +3774,7 @@ module Aws::WAFV2
     #   <p>The CAPTCHA application integration URL, for use in your JavaScript implementation. </p>
     #   @return [String]
     class ListAPIKeysResponse < Struct.new(
+      nil,
       :next_marker,
       :api_key_summaries,
       :application_integration_url,
@@ -3682,6 +3812,7 @@ module Aws::WAFV2
     #            <code>NextMarker</code> value that you can use in a subsequent call to get the next batch of objects.</p>
     #   @return [Integer]
     class ListAvailableManagedRuleGroupVersionsRequest < Struct.new(
+      nil,
       :vendor_name,
       :name,
       :scope,
@@ -3704,6 +3835,7 @@ module Aws::WAFV2
     #   <p>The name of the version that's currently set as the default. </p>
     #   @return [String]
     class ListAvailableManagedRuleGroupVersionsResponse < Struct.new(
+      nil,
       :next_marker,
       :versions,
       :current_default_version,
@@ -3735,6 +3867,7 @@ module Aws::WAFV2
     #            <code>NextMarker</code> value that you can use in a subsequent call to get the next batch of objects.</p>
     #   @return [Integer]
     class ListAvailableManagedRuleGroupsRequest < Struct.new(
+      nil,
       :scope,
       :next_marker,
       :limit,
@@ -3752,6 +3885,7 @@ module Aws::WAFV2
     #   <p>Array of managed rule groups that you can use. If you specified a <code>Limit</code> in your request, this might not be the full list. </p>
     #   @return [Array<Types::ManagedRuleGroupSummary>]
     class ListAvailableManagedRuleGroupsResponse < Struct.new(
+      nil,
       :next_marker,
       :managed_rule_groups,
       keyword_init: true
@@ -3782,6 +3916,7 @@ module Aws::WAFV2
     #            <code>NextMarker</code> value that you can use in a subsequent call to get the next batch of objects.</p>
     #   @return [Integer]
     class ListIPSetsRequest < Struct.new(
+      nil,
       :scope,
       :next_marker,
       :limit,
@@ -3799,6 +3934,7 @@ module Aws::WAFV2
     #   <p>Array of IPSets. If you specified a <code>Limit</code> in your request, this might not be the full list. </p>
     #   @return [Array<Types::IPSetSummary>]
     class ListIPSetsResponse < Struct.new(
+      nil,
       :next_marker,
       :ip_sets,
       keyword_init: true
@@ -3837,6 +3973,7 @@ module Aws::WAFV2
     #            </p>
     #   @return [String]
     class ListLoggingConfigurationsRequest < Struct.new(
+      nil,
       :scope,
       :next_marker,
       :limit,
@@ -3855,6 +3992,7 @@ module Aws::WAFV2
     #            value in the response. To retrieve the next batch of objects, provide the marker from the prior call in your next request.</p>
     #   @return [String]
     class ListLoggingConfigurationsResponse < Struct.new(
+      nil,
       :logging_configurations,
       :next_marker,
       keyword_init: true
@@ -3885,6 +4023,7 @@ module Aws::WAFV2
     #            <code>NextMarker</code> value that you can use in a subsequent call to get the next batch of objects.</p>
     #   @return [Integer]
     class ListManagedRuleSetsRequest < Struct.new(
+      nil,
       :scope,
       :next_marker,
       :limit,
@@ -3902,6 +4041,7 @@ module Aws::WAFV2
     #   <p>Your managed rule sets. If you specified a <code>Limit</code> in your request, this might not be the full list. </p>
     #   @return [Array<Types::ManagedRuleSetSummary>]
     class ListManagedRuleSetsResponse < Struct.new(
+      nil,
       :next_marker,
       :managed_rule_sets,
       keyword_init: true
@@ -3923,6 +4063,7 @@ module Aws::WAFV2
     #            <code>NextMarker</code> value that you can use in a subsequent call to get the next batch of objects.</p>
     #   @return [Integer]
     class ListMobileSdkReleasesRequest < Struct.new(
+      nil,
       :platform,
       :next_marker,
       :limit,
@@ -3940,6 +4081,7 @@ module Aws::WAFV2
     #            value in the response. To retrieve the next batch of objects, provide the marker from the prior call in your next request.</p>
     #   @return [String]
     class ListMobileSdkReleasesResponse < Struct.new(
+      nil,
       :release_summaries,
       :next_marker,
       keyword_init: true
@@ -3970,6 +4112,7 @@ module Aws::WAFV2
     #            <code>NextMarker</code> value that you can use in a subsequent call to get the next batch of objects.</p>
     #   @return [Integer]
     class ListRegexPatternSetsRequest < Struct.new(
+      nil,
       :scope,
       :next_marker,
       :limit,
@@ -3987,6 +4130,7 @@ module Aws::WAFV2
     #   <p>Array of regex pattern sets. If you specified a <code>Limit</code> in your request, this might not be the full list. </p>
     #   @return [Array<Types::RegexPatternSetSummary>]
     class ListRegexPatternSetsResponse < Struct.new(
+      nil,
       :next_marker,
       :regex_pattern_sets,
       keyword_init: true
@@ -4009,6 +4153,7 @@ module Aws::WAFV2
     #            </p>
     #   @return [String]
     class ListResourcesForWebACLRequest < Struct.new(
+      nil,
       :web_acl_arn,
       :resource_type,
       keyword_init: true
@@ -4020,6 +4165,7 @@ module Aws::WAFV2
     #   <p>The array of Amazon Resource Names (ARNs) of the associated resources.</p>
     #   @return [Array<String>]
     class ListResourcesForWebACLResponse < Struct.new(
+      nil,
       :resource_arns,
       keyword_init: true
     )
@@ -4049,6 +4195,7 @@ module Aws::WAFV2
     #            <code>NextMarker</code> value that you can use in a subsequent call to get the next batch of objects.</p>
     #   @return [Integer]
     class ListRuleGroupsRequest < Struct.new(
+      nil,
       :scope,
       :next_marker,
       :limit,
@@ -4066,6 +4213,7 @@ module Aws::WAFV2
     #   <p>Array of rule groups. If you specified a <code>Limit</code> in your request, this might not be the full list. </p>
     #   @return [Array<Types::RuleGroupSummary>]
     class ListRuleGroupsResponse < Struct.new(
+      nil,
       :next_marker,
       :rule_groups,
       keyword_init: true
@@ -4087,6 +4235,7 @@ module Aws::WAFV2
     #   <p>The Amazon Resource Name (ARN) of the resource.</p>
     #   @return [String]
     class ListTagsForResourceRequest < Struct.new(
+      nil,
       :next_marker,
       :limit,
       :resource_arn,
@@ -4104,6 +4253,7 @@ module Aws::WAFV2
     #   <p>The collection of tagging definitions for the resource. If you specified a <code>Limit</code> in your request, this might not be the full list. </p>
     #   @return [Types::TagInfoForResource]
     class ListTagsForResourceResponse < Struct.new(
+      nil,
       :next_marker,
       :tag_info_for_resource,
       keyword_init: true
@@ -4134,6 +4284,7 @@ module Aws::WAFV2
     #            <code>NextMarker</code> value that you can use in a subsequent call to get the next batch of objects.</p>
     #   @return [Integer]
     class ListWebACLsRequest < Struct.new(
+      nil,
       :scope,
       :next_marker,
       :limit,
@@ -4151,6 +4302,7 @@ module Aws::WAFV2
     #   <p>Array of web ACLs. If you specified a <code>Limit</code> in your request, this might not be the full list. </p>
     #   @return [Array<Types::WebACLSummary>]
     class ListWebACLsResponse < Struct.new(
+      nil,
       :next_marker,
       :web_ac_ls,
       keyword_init: true
@@ -4246,6 +4398,7 @@ module Aws::WAFV2
     #            </p>
     #   @return [String]
     class LoggingConfiguration < Struct.new(
+      nil,
       :resource_arn,
       :log_destination_configs,
       :redacted_fields,
@@ -4275,6 +4428,7 @@ module Aws::WAFV2
     #         </p>
     #   @return [String]
     class LoggingFilter < Struct.new(
+      nil,
       :filters,
       :default_behavior,
       keyword_init: true
@@ -4315,6 +4469,7 @@ module Aws::WAFV2
     #              are used for WAF intelligent threat mitigation.  </p>
     #   @return [Boolean]
     class ManagedProductDescriptor < Struct.new(
+      nil,
       :vendor_name,
       :managed_rule_set_name,
       :product_id,
@@ -4416,6 +4571,7 @@ module Aws::WAFV2
     #                  in the <i>WAF Developer Guide</i>.</p>
     #   @return [Types::AWSManagedRulesAntiDDoSRuleSet]
     class ManagedRuleGroupConfig < Struct.new(
+      nil,
       :login_path,
       :payload_type,
       :username_field,
@@ -4487,6 +4643,7 @@ module Aws::WAFV2
     #            <p>You can use overrides for testing, for example you can override all of rule actions to <code>Count</code> and then monitor the resulting count metrics to understand how the rule group would handle your web traffic. You can also permanently override some or all actions, to modify how the rule group manages your web traffic.</p>
     #   @return [Array<Types::RuleActionOverride>]
     class ManagedRuleGroupStatement < Struct.new(
+      nil,
       :vendor_name,
       :name,
       :version,
@@ -4514,6 +4671,7 @@ module Aws::WAFV2
     #   <p>The description of the managed rule group, provided by Amazon Web Services Managed Rules or the Amazon Web Services Marketplace seller who manages it.</p>
     #   @return [String]
     class ManagedRuleGroupSummary < Struct.new(
+      nil,
       :vendor_name,
       :name,
       :versioning_supported,
@@ -4537,6 +4695,7 @@ module Aws::WAFV2
     #            information. </p>
     #   @return [Time]
     class ManagedRuleGroupVersion < Struct.new(
+      nil,
       :name,
       :last_update_timestamp,
       keyword_init: true
@@ -4586,6 +4745,7 @@ module Aws::WAFV2
     #            </ul>
     #   @return [String]
     class ManagedRuleSet < Struct.new(
+      nil,
       :name,
       :id,
       :arn,
@@ -4636,6 +4796,7 @@ module Aws::WAFV2
     #            </ul>
     #   @return [String]
     class ManagedRuleSetSummary < Struct.new(
+      nil,
       :name,
       :id,
       :description,
@@ -4684,6 +4845,7 @@ module Aws::WAFV2
     #            <p>Times are in Coordinated Universal Time (UTC) format. UTC format includes the special designator, Z. For example, "2016-09-27T14:50Z". </p>
     #   @return [Time]
     class ManagedRuleSetVersion < Struct.new(
+      nil,
       :associated_rule_group_arn,
       :capacity,
       :forecasted_lifetime,
@@ -4701,6 +4863,7 @@ module Aws::WAFV2
     #          <p>JSON specification: <code>"Method": {}</code>
     #          </p>
     class Method < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -4722,6 +4885,7 @@ module Aws::WAFV2
     #   <p>Tags that are associated with the release. </p>
     #   @return [Array<Types::Tag>]
     class MobileSdkRelease < Struct.new(
+      nil,
       :release_version,
       :timestamp,
       :release_notes,
@@ -4738,6 +4902,7 @@ module Aws::WAFV2
     #          <p>JSON specification: <code>"None": {}</code>
     #          </p>
     class NoneAction < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -4748,6 +4913,7 @@ module Aws::WAFV2
     #   <p>The statement to negate. You can use any statement that can be nested.</p>
     #   @return [Types::Statement]
     class NotStatement < Struct.new(
+      nil,
       :statement,
       keyword_init: true
     )
@@ -4761,6 +4927,7 @@ module Aws::WAFV2
     #         <code>ALWAYS_ON</code> protection provides constant, always-on monitoring of known low reputation sources for suspected DDoS attacks. While this provides a higher level of protection, there may be potential impacts on legitimate traffic.</p>
     #   @return [String]
     class OnSourceDDoSProtectionConfig < Struct.new(
+      nil,
       :alb_low_reputation_mode,
       keyword_init: true
     )
@@ -4773,6 +4940,7 @@ module Aws::WAFV2
     #            nested.</p>
     #   @return [Array<Types::Statement>]
     class OrStatement < Struct.new(
+      nil,
       :statements,
       keyword_init: true
     )
@@ -4796,6 +4964,7 @@ module Aws::WAFV2
     #   <p>Don't override the rule group evaluation result. This is the most common setting.</p>
     #   @return [Types::NoneAction]
     class OverrideAction < Struct.new(
+      nil,
       :count,
       :none,
       keyword_init: true
@@ -4826,6 +4995,7 @@ module Aws::WAFV2
     #            </ul>
     #   @return [String]
     class PasswordField < Struct.new(
+      nil,
       :identifier,
       keyword_init: true
     )
@@ -4855,6 +5025,7 @@ module Aws::WAFV2
     #            </ul>
     #   @return [String]
     class PhoneNumberField < Struct.new(
+      nil,
       :identifier,
       keyword_init: true
     )
@@ -4865,6 +5036,7 @@ module Aws::WAFV2
     #   <p></p>
     #   @return [Types::LoggingConfiguration]
     class PutLoggingConfigurationRequest < Struct.new(
+      nil,
       :logging_configuration,
       keyword_init: true
     )
@@ -4875,6 +5047,7 @@ module Aws::WAFV2
     #   <p></p>
     #   @return [Types::LoggingConfiguration]
     class PutLoggingConfigurationResponse < Struct.new(
+      nil,
       :logging_configuration,
       keyword_init: true
     )
@@ -4912,6 +5085,7 @@ module Aws::WAFV2
     #         </p>
     #   @return [Hash<String, Types::VersionToPublish>]
     class PutManagedRuleSetVersionsRequest < Struct.new(
+      nil,
       :name,
       :scope,
       :id,
@@ -4927,6 +5101,7 @@ module Aws::WAFV2
     #   <p>A token used for optimistic locking. WAF returns a token to your <code>get</code> and <code>list</code> requests, to mark the state of the entity at the time of the request. To make changes to the entity associated with the token, you provide the token to operations like <code>update</code> and <code>delete</code>. WAF uses the token to ensure that no changes have been made to the entity since you last retrieved it. If a change has been made, the update fails with a <code>WAFOptimisticLockException</code>. If this happens, perform another <code>get</code>, and use the new token returned by that operation. </p>
     #   @return [String]
     class PutManagedRuleSetVersionsResponse < Struct.new(
+      nil,
       :next_lock_token,
       keyword_init: true
     )
@@ -4964,6 +5139,7 @@ module Aws::WAFV2
     #            <p>For more information, see <a href="https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies.html">IAM Policies</a>.  </p>
     #   @return [String]
     class PutPermissionPolicyRequest < Struct.new(
+      nil,
       :resource_arn,
       :policy,
       keyword_init: true
@@ -4972,6 +5148,7 @@ module Aws::WAFV2
     end
 
     class PutPermissionPolicyResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -4983,6 +5160,7 @@ module Aws::WAFV2
     #          <p>JSON specification: <code>"QueryString": {}</code>
     #          </p>
     class QueryString < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -5135,6 +5313,7 @@ module Aws::WAFV2
     #   <p>Specifies the aggregate keys to use in a rate-base rule. </p>
     #   @return [Array<Types::RateBasedStatementCustomKey>]
     class RateBasedStatement < Struct.new(
+      nil,
       :limit,
       :evaluation_window_sec,
       :aggregate_key_type,
@@ -5212,6 +5391,7 @@ module Aws::WAFV2
     #            Each distinct ASN contributes to the aggregation instance. </p>
     #   @return [Types::RateLimitAsn]
     class RateBasedStatementCustomKey < Struct.new(
+      nil,
       :header,
       :cookie,
       :query_argument,
@@ -5240,6 +5420,7 @@ module Aws::WAFV2
     #   <p>The IP addresses that are currently blocked.</p>
     #   @return [Array<String>]
     class RateBasedStatementManagedKeysIPSet < Struct.new(
+      nil,
       :ip_address_version,
       :addresses,
       keyword_init: true
@@ -5251,6 +5432,7 @@ module Aws::WAFV2
     #          Each distinct ASN contributes to the aggregation instance. 
     #          If you use a single ASN as your custom key, then each ASN fully defines an aggregation instance. </p>
     class RateLimitAsn < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -5265,6 +5447,7 @@ module Aws::WAFV2
     #   <p>Text transformations eliminate some of the unusual formatting that attackers use in web requests in an effort to bypass detection. Text transformations are used in rule match statements, to transform the <code>FieldToMatch</code> request component before inspecting it, and they're used in rate-based rule statements, to transform request components before using them as custom aggregation keys. If you specify one or more transformations to apply, WAF performs all transformations on the specified content, starting from the lowest priority setting, and then uses the transformed component contents. </p>
     #   @return [Array<Types::TextTransformation>]
     class RateLimitCookie < Struct.new(
+      nil,
       :name,
       :text_transformations,
       keyword_init: true
@@ -5281,6 +5464,7 @@ module Aws::WAFV2
     #          </p>
     #          <p>When you use this specification, you must also configure the forwarded IP address in the rate-based statement's <code>ForwardedIPConfig</code>. </p>
     class RateLimitForwardedIP < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -5291,6 +5475,7 @@ module Aws::WAFV2
     #          <p>JSON specification: <code>"RateLimitHTTPMethod": {}</code>
     #          </p>
     class RateLimitHTTPMethod < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -5305,6 +5490,7 @@ module Aws::WAFV2
     #   <p>Text transformations eliminate some of the unusual formatting that attackers use in web requests in an effort to bypass detection. Text transformations are used in rule match statements, to transform the <code>FieldToMatch</code> request component before inspecting it, and they're used in rate-based rule statements, to transform request components before using them as custom aggregation keys. If you specify one or more transformations to apply, WAF performs all transformations on the specified content, starting from the lowest priority setting, and then uses the transformed component contents. </p>
     #   @return [Array<Types::TextTransformation>]
     class RateLimitHeader < Struct.new(
+      nil,
       :name,
       :text_transformations,
       keyword_init: true
@@ -5319,6 +5505,7 @@ module Aws::WAFV2
     #          <p>JSON specification: <code>"RateLimitIP": {}</code>
     #          </p>
     class RateLimitIP < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -5343,6 +5530,7 @@ module Aws::WAFV2
     #            </ul>
     #   @return [String]
     class RateLimitJA3Fingerprint < Struct.new(
+      nil,
       :fallback_behavior,
       keyword_init: true
     )
@@ -5366,6 +5554,7 @@ module Aws::WAFV2
     #            </ul>
     #   @return [String]
     class RateLimitJA4Fingerprint < Struct.new(
+      nil,
       :fallback_behavior,
       keyword_init: true
     )
@@ -5380,6 +5569,7 @@ module Aws::WAFV2
     #   <p>The namespace to use for aggregation. </p>
     #   @return [String]
     class RateLimitLabelNamespace < Struct.new(
+      nil,
       :namespace,
       keyword_init: true
     )
@@ -5395,6 +5585,7 @@ module Aws::WAFV2
     #   <p>Text transformations eliminate some of the unusual formatting that attackers use in web requests in an effort to bypass detection. Text transformations are used in rule match statements, to transform the <code>FieldToMatch</code> request component before inspecting it, and they're used in rate-based rule statements, to transform request components before using them as custom aggregation keys. If you specify one or more transformations to apply, WAF performs all transformations on the specified content, starting from the lowest priority setting, and then uses the transformed component contents. </p>
     #   @return [Array<Types::TextTransformation>]
     class RateLimitQueryArgument < Struct.new(
+      nil,
       :name,
       :text_transformations,
       keyword_init: true
@@ -5408,6 +5599,7 @@ module Aws::WAFV2
     #   <p>Text transformations eliminate some of the unusual formatting that attackers use in web requests in an effort to bypass detection. Text transformations are used in rule match statements, to transform the <code>FieldToMatch</code> request component before inspecting it, and they're used in rate-based rule statements, to transform request components before using them as custom aggregation keys. If you specify one or more transformations to apply, WAF performs all transformations on the specified content, starting from the lowest priority setting, and then uses the transformed component contents. </p>
     #   @return [Array<Types::TextTransformation>]
     class RateLimitQueryString < Struct.new(
+      nil,
       :text_transformations,
       keyword_init: true
     )
@@ -5420,6 +5612,7 @@ module Aws::WAFV2
     #   <p>Text transformations eliminate some of the unusual formatting that attackers use in web requests in an effort to bypass detection. Text transformations are used in rule match statements, to transform the <code>FieldToMatch</code> request component before inspecting it, and they're used in rate-based rule statements, to transform request components before using them as custom aggregation keys. If you specify one or more transformations to apply, WAF performs all transformations on the specified content, starting from the lowest priority setting, and then uses the transformed component contents. </p>
     #   @return [Array<Types::TextTransformation>]
     class RateLimitUriPath < Struct.new(
+      nil,
       :text_transformations,
       keyword_init: true
     )
@@ -5432,6 +5625,7 @@ module Aws::WAFV2
     #   <p>The string representing the regular expression.</p>
     #   @return [String]
     class Regex < Struct.new(
+      nil,
       :regex_string,
       keyword_init: true
     )
@@ -5449,6 +5643,7 @@ module Aws::WAFV2
     #   <p>Text transformations eliminate some of the unusual formatting that attackers use in web requests in an effort to bypass detection. Text transformations are used in rule match statements, to transform the <code>FieldToMatch</code> request component before inspecting it, and they're used in rate-based rule statements, to transform request components before using them as custom aggregation keys. If you specify one or more transformations to apply, WAF performs all transformations on the specified content, starting from the lowest priority setting, and then uses the transformed component contents. </p>
     #   @return [Array<Types::TextTransformation>]
     class RegexMatchStatement < Struct.new(
+      nil,
       :regex_string,
       :field_to_match,
       :text_transformations,
@@ -5476,6 +5671,7 @@ module Aws::WAFV2
     #   <p>The regular expression patterns in the set.</p>
     #   @return [Array<Types::Regex>]
     class RegexPatternSet < Struct.new(
+      nil,
       :name,
       :id,
       :arn,
@@ -5499,6 +5695,7 @@ module Aws::WAFV2
     #   <p>Text transformations eliminate some of the unusual formatting that attackers use in web requests in an effort to bypass detection. Text transformations are used in rule match statements, to transform the <code>FieldToMatch</code> request component before inspecting it, and they're used in rate-based rule statements, to transform request components before using them as custom aggregation keys. If you specify one or more transformations to apply, WAF performs all transformations on the specified content, starting from the lowest priority setting, and then uses the transformed component contents. </p>
     #   @return [Array<Types::TextTransformation>]
     class RegexPatternSetReferenceStatement < Struct.new(
+      nil,
       :arn,
       :field_to_match,
       :text_transformations,
@@ -5524,6 +5721,7 @@ module Aws::WAFV2
     #   <p>The Amazon Resource Name (ARN) of the entity.</p>
     #   @return [String]
     class RegexPatternSetSummary < Struct.new(
+      nil,
       :name,
       :id,
       :description,
@@ -5542,6 +5740,7 @@ module Aws::WAFV2
     #   <p>The timestamp of the release. </p>
     #   @return [Time]
     class ReleaseSummary < Struct.new(
+      nil,
       :release_version,
       :timestamp,
       keyword_init: true
@@ -5566,6 +5765,7 @@ module Aws::WAFV2
     #            </p>
     #   @return [String]
     class RequestBodyAssociatedResourceTypeConfig < Struct.new(
+      nil,
       :default_size_inspection_limit,
       keyword_init: true
     )
@@ -5623,6 +5823,7 @@ module Aws::WAFV2
     #            </ul>
     #   @return [Types::PasswordField]
     class RequestInspection < Struct.new(
+      nil,
       :payload_type,
       :username_field,
       :password_field,
@@ -5744,6 +5945,7 @@ module Aws::WAFV2
     #            </ul>
     #   @return [Array<Types::AddressField>]
     class RequestInspectionACFP < Struct.new(
+      nil,
       :payload_type,
       :username_field,
       :password_field,
@@ -5776,6 +5978,7 @@ module Aws::WAFV2
     #   <p>Configures inspection of the response JSON for success and failure indicators. WAF can inspect the first 65,536 bytes (64 KB) of the response JSON. </p>
     #   @return [Types::ResponseInspectionJson]
     class ResponseInspection < Struct.new(
+      nil,
       :status_code,
       :header,
       :body_contains,
@@ -5801,6 +6004,7 @@ module Aws::WAFV2
     #            </p>
     #   @return [Array<String>]
     class ResponseInspectionBodyContains < Struct.new(
+      nil,
       :success_strings,
       :failure_strings,
       keyword_init: true
@@ -5829,6 +6033,7 @@ module Aws::WAFV2
     #            </p>
     #   @return [Array<String>]
     class ResponseInspectionHeader < Struct.new(
+      nil,
       :name,
       :success_values,
       :failure_values,
@@ -5858,6 +6063,7 @@ module Aws::WAFV2
     #            </p>
     #   @return [Array<String>]
     class ResponseInspectionJson < Struct.new(
+      nil,
       :identifier,
       :success_values,
       :failure_values,
@@ -5882,6 +6088,7 @@ module Aws::WAFV2
     #            </p>
     #   @return [Array<Integer>]
     class ResponseInspectionStatusCode < Struct.new(
+      nil,
       :success_codes,
       :failure_codes,
       keyword_init: true
@@ -5972,6 +6179,7 @@ module Aws::WAFV2
     #   <p>Specifies how WAF should handle <code>Challenge</code> evaluations. If you don't specify this, WAF uses the challenge configuration that's defined for the web ACL. </p>
     #   @return [Types::ChallengeConfig]
     class Rule < Struct.new(
+      nil,
       :name,
       :priority,
       :statement,
@@ -6009,6 +6217,7 @@ module Aws::WAFV2
     #   <p>Instructs WAF to run a <code>Challenge</code> check against the web request.</p>
     #   @return [Types::ChallengeAction]
     class RuleAction < Struct.new(
+      nil,
       :block,
       :allow,
       :count,
@@ -6034,6 +6243,7 @@ module Aws::WAFV2
     #   <p>The override action to use, in place of the configured action of the rule in the rule group. </p>
     #   @return [Types::RuleAction]
     class RuleActionOverride < Struct.new(
+      nil,
       :name,
       :action_to_use,
       keyword_init: true
@@ -6109,6 +6319,7 @@ module Aws::WAFV2
     #   <p>The labels that one or more rules in this rule group match against in label match statements. These labels are defined in a <code>LabelMatchStatement</code> specification, in the <a>Statement</a> definition of a rule.  </p>
     #   @return [Array<Types::LabelSummary>]
     class RuleGroup < Struct.new(
+      nil,
       :name,
       :id,
       :capacity,
@@ -6145,6 +6356,7 @@ module Aws::WAFV2
     #            <p>You can use overrides for testing, for example you can override all of rule actions to <code>Count</code> and then monitor the resulting count metrics to understand how the rule group would handle your web traffic. You can also permanently override some or all actions, to modify how the rule group manages your web traffic.</p>
     #   @return [Array<Types::RuleActionOverride>]
     class RuleGroupReferenceStatement < Struct.new(
+      nil,
       :arn,
       :excluded_rules,
       :rule_action_overrides,
@@ -6170,6 +6382,7 @@ module Aws::WAFV2
     #   <p>The Amazon Resource Name (ARN) of the entity.</p>
     #   @return [String]
     class RuleGroupSummary < Struct.new(
+      nil,
       :name,
       :id,
       :description,
@@ -6189,6 +6402,7 @@ module Aws::WAFV2
     #            statement. Settings at the web ACL level can override the rule action setting. </p>
     #   @return [Types::RuleAction]
     class RuleSummary < Struct.new(
+      nil,
       :name,
       :action,
       keyword_init: true
@@ -6248,6 +6462,7 @@ module Aws::WAFV2
     #   <p>Used only for rule group rules that have a rule action override in place in the web ACL. This is the action that the rule group rule is configured for, and not the action that was applied to the request. The action that WAF applied is the <code>Action</code> value. </p>
     #   @return [String]
     class SampledHTTPRequest < Struct.new(
+      nil,
       :request,
       :weight,
       :timestamp,
@@ -6280,6 +6495,7 @@ module Aws::WAFV2
     #   <p>The name of the query header to inspect.</p>
     #   @return [String]
     class SingleHeader < Struct.new(
+      nil,
       :name,
       keyword_init: true
     )
@@ -6296,6 +6512,7 @@ module Aws::WAFV2
     #   <p>The name of the query argument to inspect.</p>
     #   @return [String]
     class SingleQueryArgument < Struct.new(
+      nil,
       :name,
       keyword_init: true
     )
@@ -6318,6 +6535,7 @@ module Aws::WAFV2
     #   <p>Text transformations eliminate some of the unusual formatting that attackers use in web requests in an effort to bypass detection. Text transformations are used in rule match statements, to transform the <code>FieldToMatch</code> request component before inspecting it, and they're used in rate-based rule statements, to transform request components before using them as custom aggregation keys. If you specify one or more transformations to apply, WAF performs all transformations on the specified content, starting from the lowest priority setting, and then uses the transformed component contents. </p>
     #   @return [Array<Types::TextTransformation>]
     class SizeConstraintStatement < Struct.new(
+      nil,
       :field_to_match,
       :comparison_operator,
       :size,
@@ -6354,6 +6572,7 @@ module Aws::WAFV2
     #            </p>
     #   @return [String]
     class SqliMatchStatement < Struct.new(
+      nil,
       :field_to_match,
       :text_transformations,
       :sensitivity_level,
@@ -6508,6 +6727,7 @@ module Aws::WAFV2
     #            <p>For additional details, see <a href="https://docs.aws.amazon.com/waf/latest/developerguide/waf-rule-statement-type-asn-match.html">ASN match rule statement</a> in the <a href="https://docs.aws.amazon.com/waf/latest/developerguide/waf-chapter.html">WAF Developer Guide</a>. </p>
     #   @return [Types::AsnMatchStatement]
     class Statement < Struct.new(
+      nil,
       :byte_match_statement,
       :sqli_match_statement,
       :xss_match_statement,
@@ -6549,6 +6769,7 @@ module Aws::WAFV2
     #            case-sensitive.</p>
     #   @return [String]
     class Tag < Struct.new(
+      nil,
       :key,
       :value,
       keyword_init: true
@@ -6573,6 +6794,7 @@ module Aws::WAFV2
     #   <p>The array of <a>Tag</a> objects defined for the resource. </p>
     #   @return [Array<Types::Tag>]
     class TagInfoForResource < Struct.new(
+      nil,
       :resource_arn,
       :tag_list,
       keyword_init: true
@@ -6587,6 +6809,7 @@ module Aws::WAFV2
     #   <p>An array of key:value pairs to associate with the resource.</p>
     #   @return [Array<Types::Tag>]
     class TagResourceRequest < Struct.new(
+      nil,
       :resource_arn,
       :tags,
       keyword_init: true
@@ -6595,6 +6818,7 @@ module Aws::WAFV2
     end
 
     class TagResourceResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -6613,6 +6837,7 @@ module Aws::WAFV2
     #                  in the <i>WAF Developer Guide</i>.</p>
     #   @return [String]
     class TextTransformation < Struct.new(
+      nil,
       :priority,
       :type,
       keyword_init: true
@@ -6654,6 +6879,7 @@ module Aws::WAFV2
     #            range in the previous three hours.</p>
     #   @return [Time]
     class TimeWindow < Struct.new(
+      nil,
       :start_time,
       :end_time,
       keyword_init: true
@@ -6668,6 +6894,7 @@ module Aws::WAFV2
     #   <p>An array of keys identifying the tags to disassociate from the resource.</p>
     #   @return [Array<String>]
     class UntagResourceRequest < Struct.new(
+      nil,
       :resource_arn,
       :tag_keys,
       keyword_init: true
@@ -6676,6 +6903,7 @@ module Aws::WAFV2
     end
 
     class UntagResourceResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -6744,6 +6972,7 @@ module Aws::WAFV2
     #   <p>A token used for optimistic locking. WAF returns a token to your <code>get</code> and <code>list</code> requests, to mark the state of the entity at the time of the request. To make changes to the entity associated with the token, you provide the token to operations like <code>update</code> and <code>delete</code>. WAF uses the token to ensure that no changes have been made to the entity since you last retrieved it. If a change has been made, the update fails with a <code>WAFOptimisticLockException</code>. If this happens, perform another <code>get</code>, and use the new token returned by that operation. </p>
     #   @return [String]
     class UpdateIPSetRequest < Struct.new(
+      nil,
       :name,
       :scope,
       :id,
@@ -6759,6 +6988,7 @@ module Aws::WAFV2
     #   <p>A token used for optimistic locking. WAF returns this token to your <code>update</code> requests. You use <code>NextLockToken</code> in the same manner as you use <code>LockToken</code>. </p>
     #   @return [String]
     class UpdateIPSetResponse < Struct.new(
+      nil,
       :next_lock_token,
       keyword_init: true
     )
@@ -6796,6 +7026,7 @@ module Aws::WAFV2
     #            <p>Times are in Coordinated Universal Time (UTC) format. UTC format includes the special designator, Z. For example, "2016-09-27T14:50Z". </p>
     #   @return [Time]
     class UpdateManagedRuleSetVersionExpiryDateRequest < Struct.new(
+      nil,
       :name,
       :scope,
       :id,
@@ -6818,6 +7049,7 @@ module Aws::WAFV2
     #   <p>A token used for optimistic locking. WAF returns a token to your <code>get</code> and <code>list</code> requests, to mark the state of the entity at the time of the request. To make changes to the entity associated with the token, you provide the token to operations like <code>update</code> and <code>delete</code>. WAF uses the token to ensure that no changes have been made to the entity since you last retrieved it. If a change has been made, the update fails with a <code>WAFOptimisticLockException</code>. If this happens, perform another <code>get</code>, and use the new token returned by that operation. </p>
     #   @return [String]
     class UpdateManagedRuleSetVersionExpiryDateResponse < Struct.new(
+      nil,
       :expiring_version,
       :expiry_timestamp,
       :next_lock_token,
@@ -6854,6 +7086,7 @@ module Aws::WAFV2
     #   <p>A token used for optimistic locking. WAF returns a token to your <code>get</code> and <code>list</code> requests, to mark the state of the entity at the time of the request. To make changes to the entity associated with the token, you provide the token to operations like <code>update</code> and <code>delete</code>. WAF uses the token to ensure that no changes have been made to the entity since you last retrieved it. If a change has been made, the update fails with a <code>WAFOptimisticLockException</code>. If this happens, perform another <code>get</code>, and use the new token returned by that operation. </p>
     #   @return [String]
     class UpdateRegexPatternSetRequest < Struct.new(
+      nil,
       :name,
       :scope,
       :id,
@@ -6869,6 +7102,7 @@ module Aws::WAFV2
     #   <p>A token used for optimistic locking. WAF returns this token to your <code>update</code> requests. You use <code>NextLockToken</code> in the same manner as you use <code>LockToken</code>. </p>
     #   @return [String]
     class UpdateRegexPatternSetResponse < Struct.new(
+      nil,
       :next_lock_token,
       keyword_init: true
     )
@@ -6917,6 +7151,7 @@ module Aws::WAFV2
     #        in the <i>WAF Developer Guide</i>. </p>
     #   @return [Hash<String, Types::CustomResponseBody>]
     class UpdateRuleGroupRequest < Struct.new(
+      nil,
       :name,
       :scope,
       :id,
@@ -6934,6 +7169,7 @@ module Aws::WAFV2
     #   <p>A token used for optimistic locking. WAF returns this token to your <code>update</code> requests. You use <code>NextLockToken</code> in the same manner as you use <code>LockToken</code>. </p>
     #   @return [String]
     class UpdateRuleGroupResponse < Struct.new(
+      nil,
       :next_lock_token,
       keyword_init: true
     )
@@ -7029,6 +7265,7 @@ module Aws::WAFV2
     #            </ul>
     #   @return [Types::ApplicationConfig]
     class UpdateWebACLRequest < Struct.new(
+      nil,
       :name,
       :scope,
       :id,
@@ -7054,6 +7291,7 @@ module Aws::WAFV2
     #   <p>A token used for optimistic locking. WAF returns this token to your <code>update</code> requests. You use <code>NextLockToken</code> in the same manner as you use <code>LockToken</code>. </p>
     #   @return [String]
     class UpdateWebACLResponse < Struct.new(
+      nil,
       :next_lock_token,
       keyword_init: true
     )
@@ -7101,6 +7339,7 @@ module Aws::WAFV2
     #            </note>
     #   @return [String]
     class UriFragment < Struct.new(
+      nil,
       :fallback_behavior,
       keyword_init: true
     )
@@ -7113,6 +7352,7 @@ module Aws::WAFV2
     #          <p>JSON specification: <code>"UriPath": {}</code>
     #          </p>
     class UriPath < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -7143,6 +7383,7 @@ module Aws::WAFV2
     #            </ul>
     #   @return [String]
     class UsernameField < Struct.new(
+      nil,
       :identifier,
       keyword_init: true
     )
@@ -7164,6 +7405,7 @@ module Aws::WAFV2
     #            days. </p>
     #   @return [Integer]
     class VersionToPublish < Struct.new(
+      nil,
       :associated_rule_group_arn,
       :forecasted_lifetime,
       keyword_init: true
@@ -7198,6 +7440,7 @@ module Aws::WAFV2
     #         <code>Default_Action</code>. </p>
     #   @return [String]
     class VisibilityConfig < Struct.new(
+      nil,
       :sampled_requests_enabled,
       :cloud_watch_metrics_enabled,
       :metric_name,
@@ -7217,6 +7460,7 @@ module Aws::WAFV2
     # @!attribute message
     #   @return [String]
     class WAFAssociatedItemException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -7237,6 +7481,7 @@ module Aws::WAFV2
     # @!attribute message
     #   @return [String]
     class WAFConfigurationWarningException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -7248,6 +7493,7 @@ module Aws::WAFV2
     # @!attribute message
     #   @return [String]
     class WAFDuplicateItemException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -7260,6 +7506,7 @@ module Aws::WAFV2
     # @!attribute message
     #   @return [String]
     class WAFExpiredManagedRuleGroupVersionException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -7271,6 +7518,7 @@ module Aws::WAFV2
     # @!attribute message
     #   @return [String]
     class WAFInternalErrorException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -7281,6 +7529,7 @@ module Aws::WAFV2
     # @!attribute message
     #   @return [String]
     class WAFInvalidOperationException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -7318,6 +7567,7 @@ module Aws::WAFV2
     #   <p>Additional information about the exception.</p>
     #   @return [String]
     class WAFInvalidParameterException < Struct.new(
+      nil,
       :message,
       :field,
       :parameter,
@@ -7354,6 +7604,7 @@ module Aws::WAFV2
     # @!attribute message
     #   @return [String]
     class WAFInvalidPermissionPolicyException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -7365,6 +7616,7 @@ module Aws::WAFV2
     # @!attribute message
     #   @return [String]
     class WAFInvalidResourceException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -7381,6 +7633,7 @@ module Aws::WAFV2
     #   <p>Source type for the exception. </p>
     #   @return [String]
     class WAFLimitsExceededException < Struct.new(
+      nil,
       :message,
       :source_type,
       keyword_init: true
@@ -7394,6 +7647,7 @@ module Aws::WAFV2
     # @!attribute message
     #   @return [String]
     class WAFLogDestinationPermissionIssueException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -7407,6 +7661,7 @@ module Aws::WAFV2
     # @!attribute message
     #   @return [String]
     class WAFNonexistentItemException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -7419,6 +7674,7 @@ module Aws::WAFV2
     # @!attribute message
     #   @return [String]
     class WAFOptimisticLockException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -7436,6 +7692,7 @@ module Aws::WAFV2
     # @!attribute message
     #   @return [String]
     class WAFServiceLinkedRoleErrorException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -7447,6 +7704,7 @@ module Aws::WAFV2
     # @!attribute message
     #   @return [String]
     class WAFSubscriptionNotFoundException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -7457,6 +7715,7 @@ module Aws::WAFV2
     # @!attribute message
     #   @return [String]
     class WAFTagOperationException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -7468,6 +7727,7 @@ module Aws::WAFV2
     # @!attribute message
     #   @return [String]
     class WAFTagOperationInternalErrorException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -7482,6 +7742,7 @@ module Aws::WAFV2
     # @!attribute message
     #   @return [String]
     class WAFUnavailableEntityException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -7493,6 +7754,7 @@ module Aws::WAFV2
     # @!attribute message
     #   @return [String]
     class WAFUnsupportedAggregateKeyTypeException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -7622,6 +7884,7 @@ module Aws::WAFV2
     #   <p>Returns a list of <code>ApplicationAttribute</code>s.</p>
     #   @return [Types::ApplicationConfig]
     class WebACL < Struct.new(
+      nil,
       :name,
       :id,
       :arn,
@@ -7672,6 +7935,7 @@ module Aws::WAFV2
     #   <p>The Amazon Resource Name (ARN) of the entity.</p>
     #   @return [String]
     class WebACLSummary < Struct.new(
+      nil,
       :name,
       :id,
       :description,
@@ -7691,6 +7955,7 @@ module Aws::WAFV2
     #   <p>Text transformations eliminate some of the unusual formatting that attackers use in web requests in an effort to bypass detection. Text transformations are used in rule match statements, to transform the <code>FieldToMatch</code> request component before inspecting it, and they're used in rate-based rule statements, to transform request components before using them as custom aggregation keys. If you specify one or more transformations to apply, WAF performs all transformations on the specified content, starting from the lowest priority setting, and then uses the transformed component contents. </p>
     #   @return [Array<Types::TextTransformation>]
     class XssMatchStatement < Struct.new(
+      nil,
       :field_to_match,
       :text_transformations,
       keyword_init: true

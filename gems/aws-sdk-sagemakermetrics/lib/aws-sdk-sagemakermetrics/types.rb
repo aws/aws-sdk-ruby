@@ -10,6 +10,7 @@ module Aws::SageMakerMetrics
     #   <p>Queries made to retrieve training metrics from SageMaker.</p>
     #   @return [Array<Types::MetricQuery>]
     class BatchGetMetricsRequest < Struct.new(
+      nil,
       :metric_queries,
       keyword_init: true
     )
@@ -20,6 +21,7 @@ module Aws::SageMakerMetrics
     #   <p>The results of a query to retrieve training metrics from SageMaker.</p>
     #   @return [Array<Types::MetricQueryResult>]
     class BatchGetMetricsResponse < Struct.new(
+      nil,
       :metric_query_results,
       keyword_init: true
     )
@@ -54,6 +56,7 @@ module Aws::SageMakerMetrics
     #   <p>An index that corresponds to the metric in the request.</p>
     #   @return [Integer]
     class BatchPutMetricsError < Struct.new(
+      nil,
       :code,
       :metric_index,
       keyword_init: true
@@ -68,6 +71,7 @@ module Aws::SageMakerMetrics
     #   <p>A list of raw metric values to put.</p>
     #   @return [Array<Types::RawMetricData>]
     class BatchPutMetricsRequest < Struct.new(
+      nil,
       :trial_component_name,
       :metric_data,
       keyword_init: true
@@ -79,6 +83,7 @@ module Aws::SageMakerMetrics
     #   <p>Lists any errors that occur when inserting metric data.</p>
     #   @return [Array<Types::BatchPutMetricsError>]
     class BatchPutMetricsResponse < Struct.new(
+      nil,
       :errors,
       keyword_init: true
     )
@@ -108,6 +113,7 @@ module Aws::SageMakerMetrics
     #   <p>The end time of metrics to retrieve.</p>
     #   @return [Integer]
     class MetricQuery < Struct.new(
+      nil,
       :metric_name,
       :resource_arn,
       :metric_stat,
@@ -134,6 +140,7 @@ module Aws::SageMakerMetrics
     #   <p>The metric values retrieved by the query.</p>
     #   @return [Array<Float>]
     class MetricQueryResult < Struct.new(
+      nil,
       :status,
       :message,
       :x_axis_values,
@@ -158,6 +165,7 @@ module Aws::SageMakerMetrics
     #   <p>The metric value.</p>
     #   @return [Float]
     class RawMetricData < Struct.new(
+      nil,
       :metric_name,
       :timestamp,
       :step,

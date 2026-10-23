@@ -17,6 +17,7 @@ module Aws::ECRPUBLIC
     #            Authorization tokens are valid for 12 hours.</p>
     #   @return [Time]
     class AuthorizationData < Struct.new(
+      nil,
       :authorization_token,
       :expires_at,
       keyword_init: true
@@ -35,6 +36,7 @@ module Aws::ECRPUBLIC
     #   <p>The digests of the image layers to check.</p>
     #   @return [Array<String>]
     class BatchCheckLayerAvailabilityRequest < Struct.new(
+      nil,
       :registry_id,
       :repository_name,
       :layer_digests,
@@ -51,6 +53,7 @@ module Aws::ECRPUBLIC
     #   <p>Any failures associated with the call.</p>
     #   @return [Array<Types::LayerFailure>]
     class BatchCheckLayerAvailabilityResponse < Struct.new(
+      nil,
       :layers,
       :failures,
       keyword_init: true
@@ -71,6 +74,7 @@ module Aws::ECRPUBLIC
     #               <code>imageDigest=digest</code>.</p>
     #   @return [Array<Types::ImageIdentifier>]
     class BatchDeleteImageRequest < Struct.new(
+      nil,
       :registry_id,
       :repository_name,
       :image_ids,
@@ -86,6 +90,7 @@ module Aws::ECRPUBLIC
     #   <p>Any failures associated with the call.</p>
     #   @return [Array<Types::ImageFailure>]
     class BatchDeleteImageResponse < Struct.new(
+      nil,
       :image_ids,
       :failures,
       keyword_init: true
@@ -109,6 +114,7 @@ module Aws::ECRPUBLIC
     #   <p>The <code>sha256</code> digest of the image layer.</p>
     #   @return [Array<String>]
     class CompleteLayerUploadRequest < Struct.new(
+      nil,
       :registry_id,
       :repository_name,
       :upload_id,
@@ -131,6 +137,7 @@ module Aws::ECRPUBLIC
     #   <p>The <code>sha256</code> digest of the image layer.</p>
     #   @return [String]
     class CompleteLayerUploadResponse < Struct.new(
+      nil,
       :registry_id,
       :repository_name,
       :upload_id,
@@ -156,6 +163,7 @@ module Aws::ECRPUBLIC
     #            Tag keys can have a maximum character length of 128 characters, and tag values can have a maximum length of 256 characters.</p>
     #   @return [Array<Types::Tag>]
     class CreateRepositoryRequest < Struct.new(
+      nil,
       :repository_name,
       :catalog_data,
       :tags,
@@ -172,6 +180,7 @@ module Aws::ECRPUBLIC
     #            Amazon ECR Public Gallery.</p>
     #   @return [Types::RepositoryCatalogData]
     class CreateRepositoryResponse < Struct.new(
+      nil,
       :repository,
       :catalog_data,
       keyword_init: true
@@ -188,6 +197,7 @@ module Aws::ECRPUBLIC
     #            delete.</p>
     #   @return [String]
     class DeleteRepositoryPolicyRequest < Struct.new(
+      nil,
       :registry_id,
       :repository_name,
       keyword_init: true
@@ -205,6 +215,7 @@ module Aws::ECRPUBLIC
     #   <p>The JSON repository policy that was deleted from the repository.</p>
     #   @return [String]
     class DeleteRepositoryPolicyResponse < Struct.new(
+      nil,
       :registry_id,
       :repository_name,
       :policy_text,
@@ -225,6 +236,7 @@ module Aws::ECRPUBLIC
     #            option is not used, the repository must be empty prior to deletion.</p>
     #   @return [Boolean]
     class DeleteRepositoryRequest < Struct.new(
+      nil,
       :registry_id,
       :repository_name,
       :force,
@@ -237,6 +249,7 @@ module Aws::ECRPUBLIC
     #   <p>The repository that was deleted.</p>
     #   @return [Types::Repository]
     class DeleteRepositoryResponse < Struct.new(
+      nil,
       :repository,
       keyword_init: true
     )
@@ -271,6 +284,7 @@ module Aws::ECRPUBLIC
     #            option.</p>
     #   @return [Integer]
     class DescribeImageTagsRequest < Struct.new(
+      nil,
       :registry_id,
       :repository_name,
       :next_token,
@@ -290,6 +304,7 @@ module Aws::ECRPUBLIC
     #            there are no more results to return, this value is <code>null</code>.</p>
     #   @return [String]
     class DescribeImageTagsResponse < Struct.new(
+      nil,
       :image_tag_details,
       :next_token,
       keyword_init: true
@@ -327,6 +342,7 @@ module Aws::ECRPUBLIC
     #               <code>imageIds</code>, you can't use this option.</p>
     #   @return [Integer]
     class DescribeImagesRequest < Struct.new(
+      nil,
       :registry_id,
       :repository_name,
       :image_ids,
@@ -348,6 +364,7 @@ module Aws::ECRPUBLIC
     #            there are no more results to return, this value is <code>null</code>.</p>
     #   @return [String]
     class DescribeImagesResponse < Struct.new(
+      nil,
       :image_details,
       :next_token,
       keyword_init: true
@@ -377,6 +394,7 @@ module Aws::ECRPUBLIC
     #            applicable.</p>
     #   @return [Integer]
     class DescribeRegistriesRequest < Struct.new(
+      nil,
       :next_token,
       :max_results,
       keyword_init: true
@@ -395,6 +413,7 @@ module Aws::ECRPUBLIC
     #            is <code>null</code>.</p>
     #   @return [String]
     class DescribeRegistriesResponse < Struct.new(
+      nil,
       :registries,
       :next_token,
       keyword_init: true
@@ -434,6 +453,7 @@ module Aws::ECRPUBLIC
     #            this option.</p>
     #   @return [Integer]
     class DescribeRepositoriesRequest < Struct.new(
+      nil,
       :registry_id,
       :repository_names,
       :next_token,
@@ -454,6 +474,7 @@ module Aws::ECRPUBLIC
     #            value is <code>null</code>.</p>
     #   @return [String]
     class DescribeRepositoriesResponse < Struct.new(
+      nil,
       :repositories,
       :next_token,
       keyword_init: true
@@ -465,6 +486,7 @@ module Aws::ECRPUBLIC
     # @!attribute message
     #   @return [String]
     class EmptyUploadException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -472,6 +494,7 @@ module Aws::ECRPUBLIC
     end
 
     class GetAuthorizationTokenRequest < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -481,6 +504,7 @@ module Aws::ECRPUBLIC
     #   <p>An authorization token data object that corresponds to a public registry.</p>
     #   @return [Types::AuthorizationData]
     class GetAuthorizationTokenResponse < Struct.new(
+      nil,
       :authorization_data,
       keyword_init: true
     )
@@ -488,6 +512,7 @@ module Aws::ECRPUBLIC
     end
 
     class GetRegistryCatalogDataRequest < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -497,6 +522,7 @@ module Aws::ECRPUBLIC
     #   <p>The catalog metadata for the public registry.</p>
     #   @return [Types::RegistryCatalogData]
     class GetRegistryCatalogDataResponse < Struct.new(
+      nil,
       :registry_catalog_data,
       keyword_init: true
     )
@@ -511,6 +537,7 @@ module Aws::ECRPUBLIC
     #   <p>The name of the repository to retrieve the catalog metadata for.</p>
     #   @return [String]
     class GetRepositoryCatalogDataRequest < Struct.new(
+      nil,
       :registry_id,
       :repository_name,
       keyword_init: true
@@ -522,6 +549,7 @@ module Aws::ECRPUBLIC
     #   <p>The catalog metadata for the repository.</p>
     #   @return [Types::RepositoryCatalogData]
     class GetRepositoryCatalogDataResponse < Struct.new(
+      nil,
       :catalog_data,
       keyword_init: true
     )
@@ -536,6 +564,7 @@ module Aws::ECRPUBLIC
     #   <p>The name of the repository with the policy to retrieve.</p>
     #   @return [String]
     class GetRepositoryPolicyRequest < Struct.new(
+      nil,
       :registry_id,
       :repository_name,
       keyword_init: true
@@ -554,6 +583,7 @@ module Aws::ECRPUBLIC
     #            be in JSON format.</p>
     #   @return [String]
     class GetRepositoryPolicyResponse < Struct.new(
+      nil,
       :registry_id,
       :repository_name,
       :policy_text,
@@ -579,6 +609,7 @@ module Aws::ECRPUBLIC
     #   <p>The manifest media type of the image.</p>
     #   @return [String]
     class Image < Struct.new(
+      nil,
       :registry_id,
       :repository_name,
       :image_id,
@@ -594,6 +625,7 @@ module Aws::ECRPUBLIC
     # @!attribute message
     #   @return [String]
     class ImageAlreadyExistsException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -637,6 +669,7 @@ module Aws::ECRPUBLIC
     #   <p>The artifact media type of the image.</p>
     #   @return [String]
     class ImageDetail < Struct.new(
+      nil,
       :registry_id,
       :repository_name,
       :image_digest,
@@ -655,6 +688,7 @@ module Aws::ECRPUBLIC
     # @!attribute message
     #   @return [String]
     class ImageDigestDoesNotMatchException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -672,6 +706,7 @@ module Aws::ECRPUBLIC
     #   <p>The reason for the failure.</p>
     #   @return [String]
     class ImageFailure < Struct.new(
+      nil,
       :image_id,
       :failure_code,
       :failure_reason,
@@ -688,6 +723,7 @@ module Aws::ECRPUBLIC
     #   <p>The tag that's used for the image.</p>
     #   @return [String]
     class ImageIdentifier < Struct.new(
+      nil,
       :image_digest,
       :image_tag,
       keyword_init: true
@@ -699,6 +735,7 @@ module Aws::ECRPUBLIC
     # @!attribute message
     #   @return [String]
     class ImageNotFoundException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -710,6 +747,7 @@ module Aws::ECRPUBLIC
     # @!attribute message
     #   @return [String]
     class ImageTagAlreadyExistsException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -727,6 +765,7 @@ module Aws::ECRPUBLIC
     #   <p>An object that describes the details of an image.</p>
     #   @return [Types::ReferencedImageDetail]
     class ImageTagDetail < Struct.new(
+      nil,
       :image_tag,
       :created_at,
       :image_detail,
@@ -743,6 +782,7 @@ module Aws::ECRPUBLIC
     #   <p>The name of the repository that you want to upload layers to.</p>
     #   @return [String]
     class InitiateLayerUploadRequest < Struct.new(
+      nil,
       :registry_id,
       :repository_name,
       keyword_init: true
@@ -757,6 +797,7 @@ module Aws::ECRPUBLIC
     #   <p>The size, in bytes, that Amazon ECR expects future layer part uploads to be.</p>
     #   @return [Integer]
     class InitiateLayerUploadResponse < Struct.new(
+      nil,
       :upload_id,
       :part_size,
       keyword_init: true
@@ -769,6 +810,7 @@ module Aws::ECRPUBLIC
     # @!attribute message
     #   @return [String]
     class InvalidLayerException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -792,6 +834,7 @@ module Aws::ECRPUBLIC
     # @!attribute message
     #   @return [String]
     class InvalidLayerPartException < Struct.new(
+      nil,
       :registry_id,
       :repository_name,
       :upload_id,
@@ -807,6 +850,7 @@ module Aws::ECRPUBLIC
     # @!attribute message
     #   @return [String]
     class InvalidParameterException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -817,6 +861,7 @@ module Aws::ECRPUBLIC
     # @!attribute message
     #   @return [String]
     class InvalidTagParameterException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -839,6 +884,7 @@ module Aws::ECRPUBLIC
     #               <code>application/vnd.oci.image.layer.v1.tar+gzip</code>.</p>
     #   @return [String]
     class Layer < Struct.new(
+      nil,
       :layer_digest,
       :layer_availability,
       :layer_size,
@@ -852,6 +898,7 @@ module Aws::ECRPUBLIC
     # @!attribute message
     #   @return [String]
     class LayerAlreadyExistsException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -869,6 +916,7 @@ module Aws::ECRPUBLIC
     #   <p>The reason for the failure.</p>
     #   @return [String]
     class LayerFailure < Struct.new(
+      nil,
       :layer_digest,
       :failure_code,
       :failure_reason,
@@ -881,6 +929,7 @@ module Aws::ECRPUBLIC
     # @!attribute message
     #   @return [String]
     class LayerPartTooSmallException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -892,6 +941,7 @@ module Aws::ECRPUBLIC
     # @!attribute message
     #   @return [String]
     class LayersNotFoundException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -904,6 +954,7 @@ module Aws::ECRPUBLIC
     # @!attribute message
     #   @return [String]
     class LimitExceededException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -915,6 +966,7 @@ module Aws::ECRPUBLIC
     #            supported resource is an Amazon ECR Public repository.</p>
     #   @return [String]
     class ListTagsForResourceRequest < Struct.new(
+      nil,
       :resource_arn,
       keyword_init: true
     )
@@ -925,6 +977,7 @@ module Aws::ECRPUBLIC
     #   <p>The tags for the resource.</p>
     #   @return [Array<Types::Tag>]
     class ListTagsForResourceResponse < Struct.new(
+      nil,
       :tags,
       keyword_init: true
     )
@@ -954,6 +1007,7 @@ module Aws::ECRPUBLIC
     #   <p>The image digest of the image manifest that corresponds to the image.</p>
     #   @return [String]
     class PutImageRequest < Struct.new(
+      nil,
       :registry_id,
       :repository_name,
       :image_manifest,
@@ -969,6 +1023,7 @@ module Aws::ECRPUBLIC
     #   <p>Details of the image uploaded.</p>
     #   @return [Types::Image]
     class PutImageResponse < Struct.new(
+      nil,
       :image,
       keyword_init: true
     )
@@ -984,6 +1039,7 @@ module Aws::ECRPUBLIC
     #            </note>
     #   @return [String]
     class PutRegistryCatalogDataRequest < Struct.new(
+      nil,
       :display_name,
       keyword_init: true
     )
@@ -994,6 +1050,7 @@ module Aws::ECRPUBLIC
     #   <p>The catalog data for the public registry.</p>
     #   @return [Types::RegistryCatalogData]
     class PutRegistryCatalogDataResponse < Struct.new(
+      nil,
       :registry_catalog_data,
       keyword_init: true
     )
@@ -1012,6 +1069,7 @@ module Aws::ECRPUBLIC
     #            the Amazon ECR Public Gallery.</p>
     #   @return [Types::RepositoryCatalogDataInput]
     class PutRepositoryCatalogDataRequest < Struct.new(
+      nil,
       :registry_id,
       :repository_name,
       :catalog_data,
@@ -1024,6 +1082,7 @@ module Aws::ECRPUBLIC
     #   <p>The catalog data for the repository.</p>
     #   @return [Types::RepositoryCatalogData]
     class PutRepositoryCatalogDataResponse < Struct.new(
+      nil,
       :catalog_data,
       keyword_init: true
     )
@@ -1056,6 +1115,7 @@ module Aws::ECRPUBLIC
     #   <p>The artifact media type of the image.</p>
     #   @return [String]
     class ReferencedImageDetail < Struct.new(
+      nil,
       :image_digest,
       :image_size_in_bytes,
       :image_pushed_at,
@@ -1070,6 +1130,7 @@ module Aws::ECRPUBLIC
     # @!attribute message
     #   @return [String]
     class ReferencedImagesNotFoundException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -1097,6 +1158,7 @@ module Aws::ECRPUBLIC
     #   <p>An array of objects that represents the aliases for a public registry.</p>
     #   @return [Array<Types::RegistryAlias>]
     class Registry < Struct.new(
+      nil,
       :registry_id,
       :registry_arn,
       :registry_uri,
@@ -1132,6 +1194,7 @@ module Aws::ECRPUBLIC
     #            alias.</p>
     #   @return [Boolean]
     class RegistryAlias < Struct.new(
+      nil,
       :name,
       :status,
       :primary_registry_alias,
@@ -1156,6 +1219,7 @@ module Aws::ECRPUBLIC
     #            </important>
     #   @return [String]
     class RegistryCatalogData < Struct.new(
+      nil,
       :display_name,
       keyword_init: true
     )
@@ -1166,6 +1230,7 @@ module Aws::ECRPUBLIC
     # @!attribute message
     #   @return [String]
     class RegistryNotFoundException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -1191,6 +1256,7 @@ module Aws::ECRPUBLIC
     #   <p>The date and time, in JavaScript date format, when the repository was created.</p>
     #   @return [Time]
     class Repository < Struct.new(
+      nil,
       :repository_arn,
       :registry_id,
       :repository_name,
@@ -1205,6 +1271,7 @@ module Aws::ECRPUBLIC
     # @!attribute message
     #   @return [String]
     class RepositoryAlreadyExistsException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -1245,6 +1312,7 @@ module Aws::ECRPUBLIC
     #   <p>Indicates whether the repository is certified by Amazon Web Services Marketplace.</p>
     #   @return [Boolean]
     class RepositoryCatalogData < Struct.new(
+      nil,
       :description,
       :architectures,
       :operating_systems,
@@ -1335,6 +1403,7 @@ module Aws::ECRPUBLIC
     #            format.</p>
     #   @return [String]
     class RepositoryCatalogDataInput < Struct.new(
+      nil,
       :description,
       :architectures,
       :operating_systems,
@@ -1350,6 +1419,7 @@ module Aws::ECRPUBLIC
     # @!attribute message
     #   @return [String]
     class RepositoryCatalogDataNotFoundException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -1361,6 +1431,7 @@ module Aws::ECRPUBLIC
     # @!attribute message
     #   @return [String]
     class RepositoryNotEmptyException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -1372,6 +1443,7 @@ module Aws::ECRPUBLIC
     # @!attribute message
     #   @return [String]
     class RepositoryNotFoundException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -1383,6 +1455,7 @@ module Aws::ECRPUBLIC
     # @!attribute message
     #   @return [String]
     class RepositoryPolicyNotFoundException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -1393,6 +1466,7 @@ module Aws::ECRPUBLIC
     # @!attribute message
     #   @return [String]
     class ServerException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -1417,6 +1491,7 @@ module Aws::ECRPUBLIC
     #            operation. This prevents accidental repository lockouts.</p>
     #   @return [Boolean]
     class SetRepositoryPolicyRequest < Struct.new(
+      nil,
       :registry_id,
       :repository_name,
       :policy_text,
@@ -1436,6 +1511,7 @@ module Aws::ECRPUBLIC
     #   <p>The JSON repository policy text that's applied to the repository.</p>
     #   @return [String]
     class SetRepositoryPolicyResponse < Struct.new(
+      nil,
       :registry_id,
       :repository_name,
       :policy_text,
@@ -1455,6 +1531,7 @@ module Aws::ECRPUBLIC
     #            descriptor within a tag category (key).</p>
     #   @return [String]
     class Tag < Struct.new(
+      nil,
       :key,
       :value,
       keyword_init: true
@@ -1471,6 +1548,7 @@ module Aws::ECRPUBLIC
     #            Tag keys can have a maximum character length of 128 characters, and tag values can have a maximum length of 256 characters.</p>
     #   @return [Array<Types::Tag>]
     class TagResourceRequest < Struct.new(
+      nil,
       :resource_arn,
       :tags,
       keyword_init: true
@@ -1479,6 +1557,7 @@ module Aws::ECRPUBLIC
     end
 
     class TagResourceResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1489,6 +1568,7 @@ module Aws::ECRPUBLIC
     # @!attribute message
     #   @return [String]
     class TooManyTagsException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -1499,6 +1579,7 @@ module Aws::ECRPUBLIC
     # @!attribute message
     #   @return [String]
     class UnsupportedCommandException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -1513,6 +1594,7 @@ module Aws::ECRPUBLIC
     #   <p>The keys of the tags to be removed.</p>
     #   @return [Array<String>]
     class UntagResourceRequest < Struct.new(
+      nil,
       :resource_arn,
       :tag_keys,
       keyword_init: true
@@ -1521,6 +1603,7 @@ module Aws::ECRPUBLIC
     end
 
     class UntagResourceResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1547,6 +1630,7 @@ module Aws::ECRPUBLIC
     #   <p>The base64-encoded layer part payload.</p>
     #   @return [String]
     class UploadLayerPartRequest < Struct.new(
+      nil,
       :registry_id,
       :repository_name,
       :upload_id,
@@ -1571,6 +1655,7 @@ module Aws::ECRPUBLIC
     #   <p>The integer value of the last byte that's received in the request.</p>
     #   @return [Integer]
     class UploadLayerPartResponse < Struct.new(
+      nil,
       :registry_id,
       :repository_name,
       :upload_id,
@@ -1585,6 +1670,7 @@ module Aws::ECRPUBLIC
     # @!attribute message
     #   @return [String]
     class UploadNotFoundException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )

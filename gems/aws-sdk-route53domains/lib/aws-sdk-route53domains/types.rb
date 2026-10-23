@@ -16,6 +16,7 @@ module Aws::Route53Domains
     #   <p>The password that was returned by the <a href="https://docs.aws.amazon.com/Route53/latest/APIReference/API_domains_TransferDomainToAnotherAwsAccount.html">TransferDomainToAnotherAwsAccount</a> request. </p>
     #   @return [String]
     class AcceptDomainTransferFromAnotherAwsAccountRequest < Struct.new(
+      nil,
       :domain_name,
       :password,
       keyword_init: true
@@ -30,6 +31,7 @@ module Aws::Route53Domains
     #   			use <a href="https://docs.aws.amazon.com/Route53/latest/APIReference/API_domains_GetOperationDetail.html">GetOperationDetail</a>.</p>
     #   @return [String]
     class AcceptDomainTransferFromAnotherAwsAccountResponse < Struct.new(
+      nil,
       :operation_id,
       keyword_init: true
     )
@@ -44,6 +46,7 @@ module Aws::Route53Domains
     #   			flags.</p>
     #   @return [Types::DnssecSigningAttributes]
     class AssociateDelegationSignerToDomainRequest < Struct.new(
+      nil,
       :domain_name,
       :signing_attributes,
       keyword_init: true
@@ -56,6 +59,7 @@ module Aws::Route53Domains
     #   			status, use <a href="https://docs.aws.amazon.com/Route53/latest/APIReference/API_domains_GetOperationDetail.html">GetOperationDetail</a>.</p>
     #   @return [String]
     class AssociateDelegationSignerToDomainResponse < Struct.new(
+      nil,
       :operation_id,
       keyword_init: true
     )
@@ -84,6 +88,7 @@ module Aws::Route53Domains
     #            <p>Example value: 12.0</p>
     #   @return [Float]
     class BillingRecord < Struct.new(
+      nil,
       :domain_name,
       :operation,
       :invoice_id,
@@ -105,6 +110,7 @@ module Aws::Route53Domains
     #   <p>The name of the domain for which you want to cancel the transfer to another Amazon Web Services account.</p>
     #   @return [String]
     class CancelDomainTransferToAnotherAwsAccountRequest < Struct.new(
+      nil,
       :domain_name,
       keyword_init: true
     )
@@ -120,6 +126,7 @@ module Aws::Route53Domains
     #   			status.</p>
     #   @return [String]
     class CancelDomainTransferToAnotherAwsAccountResponse < Struct.new(
+      nil,
       :operation_id,
       keyword_init: true
     )
@@ -159,6 +166,7 @@ module Aws::Route53Domains
     #   <p>Reserved for future use.</p>
     #   @return [String]
     class CheckDomainAvailabilityRequest < Struct.new(
+      nil,
       :domain_name,
       :idn_lang_code,
       keyword_init: true
@@ -223,6 +231,7 @@ module Aws::Route53Domains
     #            </dl>
     #   @return [String]
     class CheckDomainAvailabilityResponse < Struct.new(
+      nil,
       :availability,
       keyword_init: true
     )
@@ -260,6 +269,7 @@ module Aws::Route53Domains
     #   			domain.</p>
     #   @return [String]
     class CheckDomainTransferabilityRequest < Struct.new(
+      nil,
       :domain_name,
       :auth_code,
       keyword_init: true
@@ -276,6 +286,7 @@ module Aws::Route53Domains
     #   <p>Provides an explanation for when a domain can't be transferred.</p>
     #   @return [String]
     class CheckDomainTransferabilityResponse < Struct.new(
+      nil,
       :transferability,
       :message,
       keyword_init: true
@@ -291,6 +302,7 @@ module Aws::Route53Domains
     #   <p> Currency for the <code>MaxPrice</code>. </p>
     #   @return [String]
     class Consent < Struct.new(
+      nil,
       :max_price,
       :currency,
       keyword_init: true
@@ -374,6 +386,7 @@ module Aws::Route53Domains
     #   			domains.</p>
     #   @return [Array<Types::ExtraParam>]
     class ContactDetail < Struct.new(
+      nil,
       :first_name,
       :last_name,
       :contact_type,
@@ -397,6 +410,7 @@ module Aws::Route53Domains
     #   <p>Name of the domain to be deleted.</p>
     #   @return [String]
     class DeleteDomainRequest < Struct.new(
+      nil,
       :domain_name,
       keyword_init: true
     )
@@ -408,6 +422,7 @@ module Aws::Route53Domains
     #   			use <a href="https://docs.aws.amazon.com/Route53/latest/APIReference/API_domains_GetOperationDetail.html">GetOperationDetail</a>.</p>
     #   @return [String]
     class DeleteDomainResponse < Struct.new(
+      nil,
       :operation_id,
       keyword_init: true
     )
@@ -422,6 +437,7 @@ module Aws::Route53Domains
     #   <p>A list of tag keys to delete.</p>
     #   @return [Array<String>]
     class DeleteTagsForDomainRequest < Struct.new(
+      nil,
       :domain_name,
       :tags_to_delete,
       keyword_init: true
@@ -430,6 +446,7 @@ module Aws::Route53Domains
     end
 
     class DeleteTagsForDomainResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -439,6 +456,7 @@ module Aws::Route53Domains
     #   <p>The name of the domain that you want to disable automatic renewal for.</p>
     #   @return [String]
     class DisableDomainAutoRenewRequest < Struct.new(
+      nil,
       :domain_name,
       keyword_init: true
     )
@@ -446,6 +464,7 @@ module Aws::Route53Domains
     end
 
     class DisableDomainAutoRenewResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -456,6 +475,7 @@ module Aws::Route53Domains
     #   <p>The name of the domain that you want to remove the transfer lock for.</p>
     #   @return [String]
     class DisableDomainTransferLockRequest < Struct.new(
+      nil,
       :domain_name,
       keyword_init: true
     )
@@ -468,6 +488,7 @@ module Aws::Route53Domains
     #   			use <a href="https://docs.aws.amazon.com/Route53/latest/APIReference/API_domains_GetOperationDetail.html">GetOperationDetail</a>.</p>
     #   @return [String]
     class DisableDomainTransferLockResponse < Struct.new(
+      nil,
       :operation_id,
       keyword_init: true
     )
@@ -482,6 +503,7 @@ module Aws::Route53Domains
     #   			can retrieve it as part of DNSSEC information returned by <a href="https://docs.aws.amazon.com/Route53/latest/APIReference/API_domains_GetDomainDetail.html">GetDomainDetail</a>.</p>
     #   @return [String]
     class DisassociateDelegationSignerFromDomainRequest < Struct.new(
+      nil,
       :domain_name,
       :id,
       keyword_init: true
@@ -494,6 +516,7 @@ module Aws::Route53Domains
     #   			use <a href="https://docs.aws.amazon.com/Route53/latest/APIReference/API_domains_GetOperationDetail.html">GetOperationDetail</a>.</p>
     #   @return [String]
     class DisassociateDelegationSignerFromDomainResponse < Struct.new(
+      nil,
       :operation_id,
       keyword_init: true
     )
@@ -538,6 +561,7 @@ module Aws::Route53Domains
     #   <p> An ID assigned to each DS record created by <a href="https://docs.aws.amazon.com/Route53/latest/APIReference/API_domains_AssociateDelegationSignerToDomain.html">AssociateDelegationSignerToDomain</a>. </p>
     #   @return [String]
     class DnssecKey < Struct.new(
+      nil,
       :algorithm,
       :flags,
       :public_key,
@@ -556,6 +580,7 @@ module Aws::Route53Domains
     # @!attribute message
     #   @return [String]
     class DnssecLimitExceeded < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -579,6 +604,7 @@ module Aws::Route53Domains
     #   		</p>
     #   @return [String]
     class DnssecSigningAttributes < Struct.new(
+      nil,
       :algorithm,
       :flags,
       :public_key,
@@ -592,6 +618,7 @@ module Aws::Route53Domains
     #   <p>The number of domains has exceeded the allowed threshold for the account.</p>
     #   @return [String]
     class DomainLimitExceeded < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -618,6 +645,7 @@ module Aws::Route53Domains
     #   <p>The price for restoring the domain with Route 53.</p>
     #   @return [Types::PriceWithCurrency]
     class DomainPrice < Struct.new(
+      nil,
       :name,
       :registration_price,
       :transfer_price,
@@ -686,6 +714,7 @@ module Aws::Route53Domains
     #            </dl>
     #   @return [String]
     class DomainSuggestion < Struct.new(
+      nil,
       :domain_name,
       :availability,
       keyword_init: true
@@ -709,6 +738,7 @@ module Aws::Route53Domains
     #   			(UTC).</p>
     #   @return [Time]
     class DomainSummary < Struct.new(
+      nil,
       :domain_name,
       :auto_renew,
       :transfer_lock,
@@ -755,6 +785,7 @@ module Aws::Route53Domains
     #            </dl>
     #   @return [String]
     class DomainTransferability < Struct.new(
+      nil,
       :transferable,
       keyword_init: true
     )
@@ -769,6 +800,7 @@ module Aws::Route53Domains
     #   <p>The request is already in progress for the domain.</p>
     #   @return [String]
     class DuplicateRequest < Struct.new(
+      nil,
       :request_id,
       :message,
       keyword_init: true
@@ -780,6 +812,7 @@ module Aws::Route53Domains
     #   <p>The name of the domain that you want to enable automatic renewal for.</p>
     #   @return [String]
     class EnableDomainAutoRenewRequest < Struct.new(
+      nil,
       :domain_name,
       keyword_init: true
     )
@@ -787,6 +820,7 @@ module Aws::Route53Domains
     end
 
     class EnableDomainAutoRenewResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -797,6 +831,7 @@ module Aws::Route53Domains
     #   <p>The name of the domain that you want to set the transfer lock for.</p>
     #   @return [String]
     class EnableDomainTransferLockRequest < Struct.new(
+      nil,
       :domain_name,
       keyword_init: true
     )
@@ -809,6 +844,7 @@ module Aws::Route53Domains
     #   			operation status, use GetOperationDetail.</p>
     #   @return [String]
     class EnableDomainTransferLockResponse < Struct.new(
+      nil,
       :operation_id,
       keyword_init: true
     )
@@ -1639,6 +1675,7 @@ module Aws::Route53Domains
     #   <p>The value that corresponds with the name of an extra parameter.</p>
     #   @return [String]
     class ExtraParam < Struct.new(
+      nil,
       :name,
       :value,
       keyword_init: true
@@ -1672,6 +1709,7 @@ module Aws::Route53Domains
     #   			currently supported.</p>
     #   @return [Array<String>]
     class FilterCondition < Struct.new(
+      nil,
       :name,
       :operator,
       :values,
@@ -1685,6 +1723,7 @@ module Aws::Route53Domains
     #   			confirmed that the email address is valid.</p>
     #   @return [String]
     class GetContactReachabilityStatusRequest < Struct.new(
+      nil,
       :domain_name,
       keyword_init: true
     )
@@ -1712,6 +1751,7 @@ module Aws::Route53Domains
     #            </dl>
     #   @return [String]
     class GetContactReachabilityStatusResponse < Struct.new(
+      nil,
       :domain_name,
       :status,
       keyword_init: true
@@ -1724,6 +1764,7 @@ module Aws::Route53Domains
     #   <p>The name of the domain that you want to get detailed information about.</p>
     #   @return [String]
     class GetDomainDetailRequest < Struct.new(
+      nil,
       :domain_name,
       keyword_init: true
     )
@@ -1837,6 +1878,7 @@ module Aws::Route53Domains
     #   		information that you entered for the billing contact.</p>
     #   @return [Boolean]
     class GetDomainDetailResponse < Struct.new(
+      nil,
       :domain_name,
       :nameservers,
       :auto_renew,
@@ -1906,6 +1948,7 @@ module Aws::Route53Domains
     #   				<code>checkDomainAvailability</code> for each suggestion.</p>
     #   @return [Boolean]
     class GetDomainSuggestionsRequest < Struct.new(
+      nil,
       :domain_name,
       :suggestion_count,
       :only_available,
@@ -1920,6 +1963,7 @@ module Aws::Route53Domains
     #   			available for registration.</p>
     #   @return [Array<Types::DomainSuggestion>]
     class GetDomainSuggestionsResponse < Struct.new(
+      nil,
       :suggestions_list,
       keyword_init: true
     )
@@ -1932,6 +1976,7 @@ module Aws::Route53Domains
     #   			returned the identifier in the response to the original request.</p>
     #   @return [String]
     class GetOperationDetailRequest < Struct.new(
+      nil,
       :operation_id,
       keyword_init: true
     )
@@ -1992,6 +2037,7 @@ module Aws::Route53Domains
     #            </ul>
     #   @return [String]
     class GetOperationDetailResponse < Struct.new(
+      nil,
       :operation_id,
       :status,
       :message,
@@ -2015,6 +2061,7 @@ module Aws::Route53Domains
     #   			a valid domain name or belong to the requester account.</p>
     #   @return [String]
     class InvalidInput < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -2045,6 +2092,7 @@ module Aws::Route53Domains
     #            <p>Default: 20</p>
     #   @return [Integer]
     class ListDomainsRequest < Struct.new(
+      nil,
       :filter_conditions,
       :sort_condition,
       :marker,
@@ -2064,6 +2112,7 @@ module Aws::Route53Domains
     #   			of <code>Marker</code>.</p>
     #   @return [String]
     class ListDomainsResponse < Struct.new(
+      nil,
       :domains,
       :next_page_marker,
       keyword_init: true
@@ -2102,6 +2151,7 @@ module Aws::Route53Domains
     #   <p> The sort order for returned values, either ascending or descending. </p>
     #   @return [String]
     class ListOperationsRequest < Struct.new(
+      nil,
       :submitted_since,
       :marker,
       :max_items,
@@ -2124,6 +2174,7 @@ module Aws::Route53Domains
     #   			the value of <code>Marker</code>.</p>
     #   @return [String]
     class ListOperationsResponse < Struct.new(
+      nil,
       :operations,
       :next_page_marker,
       keyword_init: true
@@ -2153,6 +2204,7 @@ module Aws::Route53Domains
     #   			<code>MaxItems</code>.</p>
     #   @return [Integer]
     class ListPricesRequest < Struct.new(
+      nil,
       :tld,
       :marker,
       :max_items,
@@ -2173,6 +2225,7 @@ module Aws::Route53Domains
     #   				<code>NextPageMarker</code>.</p>
     #   @return [String]
     class ListPricesResponse < Struct.new(
+      nil,
       :prices,
       :next_page_marker,
       keyword_init: true
@@ -2185,6 +2238,7 @@ module Aws::Route53Domains
     #   <p>The domain for which you want to get a list of tags.</p>
     #   @return [String]
     class ListTagsForDomainRequest < Struct.new(
+      nil,
       :domain_name,
       keyword_init: true
     )
@@ -2196,6 +2250,7 @@ module Aws::Route53Domains
     #   <p>A list of the tags that are associated with the specified domain.</p>
     #   @return [Array<Types::Tag>]
     class ListTagsForDomainResponse < Struct.new(
+      nil,
       :tag_list,
       keyword_init: true
     )
@@ -2215,6 +2270,7 @@ module Aws::Route53Domains
     #            <p>Constraints: The list can contain only one IPv4 and one IPv6 address.</p>
     #   @return [Array<String>]
     class Nameserver < Struct.new(
+      nil,
       :name,
       :glue_ips,
       keyword_init: true
@@ -2229,6 +2285,7 @@ module Aws::Route53Domains
     #   			account.</p>
     #   @return [String]
     class OperationLimitExceeded < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -2291,6 +2348,7 @@ module Aws::Route53Domains
     #   			Time (UTC). </p>
     #   @return [Time]
     class OperationSummary < Struct.new(
+      nil,
       :operation_id,
       :status,
       :type,
@@ -2312,6 +2370,7 @@ module Aws::Route53Domains
     #   <p>The currency specifier.</p>
     #   @return [String]
     class PriceWithCurrency < Struct.new(
+      nil,
       :price,
       :currency,
       keyword_init: true
@@ -2331,6 +2390,7 @@ module Aws::Route53Domains
     #   <p> New IPS tag for the domain. </p>
     #   @return [String]
     class PushDomainRequest < Struct.new(
+      nil,
       :domain_name,
       :target,
       keyword_init: true
@@ -2450,6 +2510,7 @@ module Aws::Route53Domains
     #            </note>
     #   @return [Boolean]
     class RegisterDomainRequest < Struct.new(
+      nil,
       :domain_name,
       :idn_lang_code,
       :duration_in_years,
@@ -2473,6 +2534,7 @@ module Aws::Route53Domains
     #   			use <a href="https://docs.aws.amazon.com/Route53/latest/APIReference/API_domains_GetOperationDetail.html">GetOperationDetail</a>.</p>
     #   @return [String]
     class RegisterDomainResponse < Struct.new(
+      nil,
       :operation_id,
       keyword_init: true
     )
@@ -2486,6 +2548,7 @@ module Aws::Route53Domains
     #   			submitted a <a href="https://docs.aws.amazon.com/Route53/latest/APIReference/API_domains_TransferDomainToAnotherAwsAccount.html">TransferDomainToAnotherAwsAccount</a> request. </p>
     #   @return [String]
     class RejectDomainTransferFromAnotherAwsAccountRequest < Struct.new(
+      nil,
       :domain_name,
       keyword_init: true
     )
@@ -2501,6 +2564,7 @@ module Aws::Route53Domains
     #   			status.</p>
     #   @return [String]
     class RejectDomainTransferFromAnotherAwsAccountResponse < Struct.new(
+      nil,
       :operation_id,
       keyword_init: true
     )
@@ -2525,6 +2589,7 @@ module Aws::Route53Domains
     #   			the current expiration date for the domain.</p>
     #   @return [Integer]
     class RenewDomainRequest < Struct.new(
+      nil,
       :domain_name,
       :duration_in_years,
       :current_expiry_year,
@@ -2538,6 +2603,7 @@ module Aws::Route53Domains
     #   			use <a href="https://docs.aws.amazon.com/Route53/latest/APIReference/API_domains_GetOperationDetail.html">GetOperationDetail</a>.</p>
     #   @return [String]
     class RenewDomainResponse < Struct.new(
+      nil,
       :operation_id,
       keyword_init: true
     )
@@ -2549,6 +2615,7 @@ module Aws::Route53Domains
     #   			the registrant contact.</p>
     #   @return [String]
     class ResendContactReachabilityEmailRequest < Struct.new(
+      nil,
       :domain_name,
       keyword_init: true
     )
@@ -2569,6 +2636,7 @@ module Aws::Route53Domains
     #   			verified, we don't send another confirmation email.</p>
     #   @return [Boolean]
     class ResendContactReachabilityEmailResponse < Struct.new(
+      nil,
       :domain_name,
       :email_address,
       :is_already_verified,
@@ -2581,6 +2649,7 @@ module Aws::Route53Domains
     #   <p> Operation ID. </p>
     #   @return [String]
     class ResendOperationAuthorizationRequest < Struct.new(
+      nil,
       :operation_id,
       keyword_init: true
     )
@@ -2593,6 +2662,7 @@ module Aws::Route53Domains
     #   <p>The name of the domain that you want to get an authorization code for.</p>
     #   @return [String]
     class RetrieveDomainAuthCodeRequest < Struct.new(
+      nil,
       :domain_name,
       keyword_init: true
     )
@@ -2604,6 +2674,7 @@ module Aws::Route53Domains
     #   <p>The authorization code for the domain.</p>
     #   @return [String]
     class RetrieveDomainAuthCodeResponse < Struct.new(
+      nil,
       :auth_code,
       keyword_init: true
     )
@@ -2623,6 +2694,7 @@ module Aws::Route53Domains
     #   			(DES).</p>
     #   @return [String]
     class SortCondition < Struct.new(
+      nil,
       :name,
       :sort_order,
       keyword_init: true
@@ -2635,6 +2707,7 @@ module Aws::Route53Domains
     #   <p>The top-level domain does not support this operation.</p>
     #   @return [String]
     class TLDRulesViolation < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -2653,6 +2726,7 @@ module Aws::Route53Domains
     #            <p>Constraints: Each value can be 0-256 characters long.</p>
     #   @return [String]
     class Tag < Struct.new(
+      nil,
       :key,
       :value,
       keyword_init: true
@@ -2769,6 +2843,7 @@ module Aws::Route53Domains
     #            </note>
     #   @return [Boolean]
     class TransferDomainRequest < Struct.new(
+      nil,
       :domain_name,
       :idn_lang_code,
       :duration_in_years,
@@ -2794,6 +2869,7 @@ module Aws::Route53Domains
     #   			use <a href="https://docs.aws.amazon.com/Route53/latest/APIReference/API_domains_GetOperationDetail.html">GetOperationDetail</a>.</p>
     #   @return [String]
     class TransferDomainResponse < Struct.new(
+      nil,
       :operation_id,
       keyword_init: true
     )
@@ -2809,6 +2885,7 @@ module Aws::Route53Domains
     #   			to, for example, <code>111122223333</code>.</p>
     #   @return [String]
     class TransferDomainToAnotherAwsAccountRequest < Struct.new(
+      nil,
       :domain_name,
       :account_id,
       keyword_init: true
@@ -2829,6 +2906,7 @@ module Aws::Route53Domains
     #   				<code>TransferDomainToAnotherAwsAccount</code> response.</p>
     #   @return [String]
     class TransferDomainToAnotherAwsAccountResponse < Struct.new(
+      nil,
       :operation_id,
       :password,
       keyword_init: true
@@ -2841,6 +2919,7 @@ module Aws::Route53Domains
     #   <p>Amazon Route 53 does not support this top-level domain (TLD).</p>
     #   @return [String]
     class UnsupportedTLD < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -2898,6 +2977,7 @@ module Aws::Route53Domains
     #            </note>
     #   @return [Boolean]
     class UpdateDomainContactPrivacyRequest < Struct.new(
+      nil,
       :domain_name,
       :admin_privacy,
       :registrant_privacy,
@@ -2914,6 +2994,7 @@ module Aws::Route53Domains
     #   			operation status, use GetOperationDetail.</p>
     #   @return [String]
     class UpdateDomainContactPrivacyResponse < Struct.new(
+      nil,
       :operation_id,
       keyword_init: true
     )
@@ -2940,6 +3021,7 @@ module Aws::Route53Domains
     #   <p>Provides detailed contact information.</p>
     #   @return [Types::ContactDetail]
     class UpdateDomainContactRequest < Struct.new(
+      nil,
       :domain_name,
       :admin_contact,
       :registrant_contact,
@@ -2957,6 +3039,7 @@ module Aws::Route53Domains
     #   			use <a href="https://docs.aws.amazon.com/Route53/latest/APIReference/API_domains_GetOperationDetail.html">GetOperationDetail</a>.</p>
     #   @return [String]
     class UpdateDomainContactResponse < Struct.new(
+      nil,
       :operation_id,
       keyword_init: true
     )
@@ -2980,6 +3063,7 @@ module Aws::Route53Domains
     #   <p>A list of new name servers for the domain.</p>
     #   @return [Array<Types::Nameserver>]
     class UpdateDomainNameserversRequest < Struct.new(
+      nil,
       :domain_name,
       :fi_auth_key,
       :nameservers,
@@ -2994,6 +3078,7 @@ module Aws::Route53Domains
     #   			use <a href="https://docs.aws.amazon.com/Route53/latest/APIReference/API_domains_GetOperationDetail.html">GetOperationDetail</a>.</p>
     #   @return [String]
     class UpdateDomainNameserversResponse < Struct.new(
+      nil,
       :operation_id,
       keyword_init: true
     )
@@ -3009,6 +3094,7 @@ module Aws::Route53Domains
     #   			that already exists, the corresponding value will be replaced.</p>
     #   @return [Array<Types::Tag>]
     class UpdateTagsForDomainRequest < Struct.new(
+      nil,
       :domain_name,
       :tags_to_update,
       keyword_init: true
@@ -3017,6 +3103,7 @@ module Aws::Route53Domains
     end
 
     class UpdateTagsForDomainResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -3049,6 +3136,7 @@ module Aws::Route53Domains
     #            <p>Default: 20</p>
     #   @return [Integer]
     class ViewBillingRequest < Struct.new(
+      nil,
       :start,
       :end,
       :marker,
@@ -3068,6 +3156,7 @@ module Aws::Route53Domains
     #   <p>A summary of billing records.</p>
     #   @return [Array<Types::BillingRecord>]
     class ViewBillingResponse < Struct.new(
+      nil,
       :next_page_marker,
       :billing_records,
       keyword_init: true

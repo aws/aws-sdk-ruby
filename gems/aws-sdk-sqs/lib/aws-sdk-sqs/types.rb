@@ -34,6 +34,7 @@ module Aws::SQS
     #                   <code>ChangeMessageVisibilityBatch</code>.</p>
     #   @return [Array<String>]
     class AddPermissionRequest < Struct.new(
+      nil,
       :queue_url,
       :label,
       :aws_account_ids,
@@ -47,6 +48,7 @@ module Aws::SQS
     # @!attribute message
     #   @return [String]
     class BatchEntryIdsNotDistinct < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -57,6 +59,7 @@ module Aws::SQS
     # @!attribute message
     #   @return [String]
     class BatchRequestTooLong < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -78,6 +81,7 @@ module Aws::SQS
     #   <p>A message explaining why the action failed on this entry.</p>
     #   @return [String]
     class BatchResultErrorEntry < Struct.new(
+      nil,
       :id,
       :sender_fault,
       :code,
@@ -96,6 +100,7 @@ module Aws::SQS
     #   <p>An identifier associated with a message movement task.</p>
     #   @return [String]
     class CancelMessageMoveTaskRequest < Struct.new(
+      nil,
       :task_handle,
       keyword_init: true
     )
@@ -106,6 +111,7 @@ module Aws::SQS
     #   <p>The approximate number of messages already moved to the destination queue.</p>
     #   @return [Integer]
     class CancelMessageMoveTaskResult < Struct.new(
+      nil,
       :approximate_number_of_messages_moved,
       keyword_init: true
     )
@@ -127,6 +133,7 @@ module Aws::SQS
     #               changed.</p>
     #   @return [Array<Types::ChangeMessageVisibilityBatchRequestEntry>]
     class ChangeMessageVisibilityBatchRequest < Struct.new(
+      nil,
       :queue_url,
       :entries,
       keyword_init: true
@@ -152,6 +159,7 @@ module Aws::SQS
     #   <p>The new value (in seconds) for the message's visibility timeout.</p>
     #   @return [Integer]
     class ChangeMessageVisibilityBatchRequestEntry < Struct.new(
+      nil,
       :id,
       :receipt_handle,
       :visibility_timeout,
@@ -179,6 +187,7 @@ module Aws::SQS
     #               </code> items.</p>
     #   @return [Array<Types::BatchResultErrorEntry>]
     class ChangeMessageVisibilityBatchResult < Struct.new(
+      nil,
       :successful,
       :failed,
       keyword_init: true
@@ -193,6 +202,7 @@ module Aws::SQS
     #   <p>Represents a message whose visibility timeout has been changed successfully.</p>
     #   @return [String]
     class ChangeMessageVisibilityBatchResultEntry < Struct.new(
+      nil,
       :id,
       keyword_init: true
     )
@@ -215,6 +225,7 @@ module Aws::SQS
     #                   <code>0</code> to <code>43200</code>. Maximum: 12 hours.</p>
     #   @return [Integer]
     class ChangeMessageVisibilityRequest < Struct.new(
+      nil,
       :queue_url,
       :receipt_handle,
       :visibility_timeout,
@@ -512,6 +523,7 @@ module Aws::SQS
     #            </note>
     #   @return [Hash<String, String>]
     class CreateQueueRequest < Struct.new(
+      nil,
       :queue_name,
       :attributes,
       :tags,
@@ -525,6 +537,7 @@ module Aws::SQS
     #   <p>The URL of the created Amazon SQS queue.</p>
     #   @return [String]
     class CreateQueueResult < Struct.new(
+      nil,
       :queue_url,
       keyword_init: true
     )
@@ -540,6 +553,7 @@ module Aws::SQS
     #   <p>Lists the receipt handles for the messages to be deleted.</p>
     #   @return [Array<Types::DeleteMessageBatchRequestEntry>]
     class DeleteMessageBatchRequest < Struct.new(
+      nil,
       :queue_url,
       :entries,
       keyword_init: true
@@ -560,6 +574,7 @@ module Aws::SQS
     #   <p>A receipt handle.</p>
     #   @return [String]
     class DeleteMessageBatchRequestEntry < Struct.new(
+      nil,
       :id,
       :receipt_handle,
       keyword_init: true
@@ -585,6 +600,7 @@ module Aws::SQS
     #               </code> items.</p>
     #   @return [Array<Types::BatchResultErrorEntry>]
     class DeleteMessageBatchResult < Struct.new(
+      nil,
       :successful,
       :failed,
       keyword_init: true
@@ -599,6 +615,7 @@ module Aws::SQS
     #   <p>Represents a successfully deleted message.</p>
     #   @return [String]
     class DeleteMessageBatchResultEntry < Struct.new(
+      nil,
       :id,
       keyword_init: true
     )
@@ -614,6 +631,7 @@ module Aws::SQS
     #   <p>The receipt handle associated with the message to delete.</p>
     #   @return [String]
     class DeleteMessageRequest < Struct.new(
+      nil,
       :queue_url,
       :receipt_handle,
       keyword_init: true
@@ -627,6 +645,7 @@ module Aws::SQS
     #            <p>Queue URLs and names are case-sensitive.</p>
     #   @return [String]
     class DeleteQueueRequest < Struct.new(
+      nil,
       :queue_url,
       keyword_init: true
     )
@@ -637,6 +656,7 @@ module Aws::SQS
     # @!attribute message
     #   @return [String]
     class EmptyBatchRequest < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -878,6 +898,7 @@ module Aws::SQS
     #     in the <i>Amazon SQS Developer Guide</i>.</p>
     #   @return [Array<String>]
     class GetQueueAttributesRequest < Struct.new(
+      nil,
       :queue_url,
       :attribute_names,
       keyword_init: true
@@ -890,6 +911,7 @@ module Aws::SQS
     #   <p>A map of attributes to their respective values.</p>
     #   @return [Hash<String, String>]
     class GetQueueAttributesResult < Struct.new(
+      nil,
       :attributes,
       keyword_init: true
     )
@@ -909,6 +931,7 @@ module Aws::SQS
     #               Amazon Web Services account.</p>
     #   @return [String]
     class GetQueueUrlRequest < Struct.new(
+      nil,
       :queue_name,
       :queue_owner_aws_account_id,
       keyword_init: true
@@ -922,6 +945,7 @@ module Aws::SQS
     #   <p>The URL of the queue.</p>
     #   @return [String]
     class GetQueueUrlResult < Struct.new(
+      nil,
       :queue_url,
       keyword_init: true
     )
@@ -932,6 +956,7 @@ module Aws::SQS
     # @!attribute message
     #   @return [String]
     class InvalidAddress < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -942,6 +967,7 @@ module Aws::SQS
     # @!attribute message
     #   @return [String]
     class InvalidAttributeName < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -952,6 +978,7 @@ module Aws::SQS
     # @!attribute message
     #   @return [String]
     class InvalidAttributeValue < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -963,6 +990,7 @@ module Aws::SQS
     # @!attribute message
     #   @return [String]
     class InvalidBatchEntryId < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -973,6 +1001,7 @@ module Aws::SQS
     # @deprecated
     #   exception has been included in ReceiptHandleIsInvalid
     class InvalidIdFormat < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -982,6 +1011,7 @@ module Aws::SQS
     # @!attribute message
     #   @return [String]
     class InvalidMessageContents < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -992,6 +1022,7 @@ module Aws::SQS
     # @!attribute message
     #   @return [String]
     class InvalidSecurity < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -1002,6 +1033,7 @@ module Aws::SQS
     # @!attribute message
     #   @return [String]
     class KmsAccessDenied < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -1012,6 +1044,7 @@ module Aws::SQS
     # @!attribute message
     #   @return [String]
     class KmsDisabled < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -1032,6 +1065,7 @@ module Aws::SQS
     # @!attribute message
     #   @return [String]
     class KmsInvalidKeyUsage < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -1043,6 +1077,7 @@ module Aws::SQS
     # @!attribute message
     #   @return [String]
     class KmsInvalidState < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -1054,6 +1089,7 @@ module Aws::SQS
     # @!attribute message
     #   @return [String]
     class KmsNotFound < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -1065,6 +1101,7 @@ module Aws::SQS
     # @!attribute message
     #   @return [String]
     class KmsOptInRequired < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -1075,6 +1112,7 @@ module Aws::SQS
     # @!attribute message
     #   @return [String]
     class KmsThrottled < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -1095,6 +1133,7 @@ module Aws::SQS
     #               response.</p>
     #   @return [Integer]
     class ListDeadLetterSourceQueuesRequest < Struct.new(
+      nil,
       :queue_url,
       :next_token,
       :max_results,
@@ -1114,6 +1153,7 @@ module Aws::SQS
     #                   <code>MaxResults</code> in the request.</p>
     #   @return [String]
     class ListDeadLetterSourceQueuesResult < Struct.new(
+      nil,
       :queue_urls,
       :next_token,
       keyword_init: true
@@ -1129,6 +1169,7 @@ module Aws::SQS
     #               provides the most recent message movement task. The upper limit is 10.</p>
     #   @return [Integer]
     class ListMessageMoveTasksRequest < Struct.new(
+      nil,
       :source_arn,
       :max_results,
       keyword_init: true
@@ -1140,6 +1181,7 @@ module Aws::SQS
     #   <p>A list of message movement tasks and their attributes.</p>
     #   @return [Array<Types::ListMessageMoveTasksResultEntry>]
     class ListMessageMoveTasksResult < Struct.new(
+      nil,
       :results,
       keyword_init: true
     )
@@ -1186,6 +1228,7 @@ module Aws::SQS
     #   <p>The timestamp of starting the message movement task.</p>
     #   @return [Integer]
     class ListMessageMoveTasksResultEntry < Struct.new(
+      nil,
       :task_handle,
       :status,
       :source_arn,
@@ -1210,6 +1253,7 @@ module Aws::SQS
     #   <p>The URL of the queue.</p>
     #   @return [String]
     class ListQueueTagsRequest < Struct.new(
+      nil,
       :queue_url,
       keyword_init: true
     )
@@ -1220,6 +1264,7 @@ module Aws::SQS
     #   <p>The list of all tags added to the specified queue.</p>
     #   @return [Hash<String, String>]
     class ListQueueTagsResult < Struct.new(
+      nil,
       :tags,
       keyword_init: true
     )
@@ -1241,6 +1286,7 @@ module Aws::SQS
     #               response.</p>
     #   @return [Integer]
     class ListQueuesRequest < Struct.new(
+      nil,
       :queue_name_prefix,
       :next_token,
       :max_results,
@@ -1260,6 +1306,7 @@ module Aws::SQS
     #                   <code>MaxResults</code> in the request.</p>
     #   @return [String]
     class ListQueuesResult < Struct.new(
+      nil,
       :queue_urls,
       :next_token,
       keyword_init: true
@@ -1340,6 +1387,7 @@ module Aws::SQS
     #   message attributes</a> in the <i>Amazon SQS Developer Guide</i>.</p>
     #   @return [Hash<String, Types::MessageAttributeValue>]
     class Message < Struct.new(
+      nil,
       :message_id,
       :receipt_handle,
       :md5_of_body,
@@ -1384,6 +1432,7 @@ module Aws::SQS
     #               Guide</i>.</p>
     #   @return [String]
     class MessageAttributeValue < Struct.new(
+      nil,
       :string_value,
       :binary_value,
       :string_list_values,
@@ -1396,6 +1445,7 @@ module Aws::SQS
 
     # <p>The specified message isn't in flight.</p>
     class MessageNotInflight < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1431,6 +1481,7 @@ module Aws::SQS
     #               Guide</i>.</p>
     #   @return [String]
     class MessageSystemAttributeValue < Struct.new(
+      nil,
       :string_value,
       :binary_value,
       :string_list_values,
@@ -1448,6 +1499,7 @@ module Aws::SQS
     # @!attribute message
     #   @return [String]
     class OverLimit < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -1460,6 +1512,7 @@ module Aws::SQS
     # @!attribute message
     #   @return [String]
     class PurgeQueueInProgress < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -1473,6 +1526,7 @@ module Aws::SQS
     #            <p>Queue URLs and names are case-sensitive.</p>
     #   @return [String]
     class PurgeQueueRequest < Struct.new(
+      nil,
       :queue_url,
       keyword_init: true
     )
@@ -1484,6 +1538,7 @@ module Aws::SQS
     # @!attribute message
     #   @return [String]
     class QueueDeletedRecently < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -1495,6 +1550,7 @@ module Aws::SQS
     # @!attribute message
     #   @return [String]
     class QueueDoesNotExist < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -1506,6 +1562,7 @@ module Aws::SQS
     # @!attribute message
     #   @return [String]
     class QueueNameExists < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -1516,6 +1573,7 @@ module Aws::SQS
     # @!attribute message
     #   @return [String]
     class ReceiptHandleIsInvalid < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -1827,6 +1885,7 @@ module Aws::SQS
     #                   Developer Guide</i>.</p>
     #   @return [String]
     class ReceiveMessageRequest < Struct.new(
+      nil,
       :queue_url,
       :attribute_names,
       :message_system_attribute_names,
@@ -1845,6 +1904,7 @@ module Aws::SQS
     #   <p>A list of messages.</p>
     #   @return [Array<Types::Message>]
     class ReceiveMessageResult < Struct.new(
+      nil,
       :messages,
       keyword_init: true
     )
@@ -1863,6 +1923,7 @@ module Aws::SQS
     #               </code> action.</p>
     #   @return [String]
     class RemovePermissionRequest < Struct.new(
+      nil,
       :queue_url,
       :label,
       keyword_init: true
@@ -1885,6 +1946,7 @@ module Aws::SQS
     # @!attribute message
     #   @return [String]
     class RequestThrottled < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -1895,6 +1957,7 @@ module Aws::SQS
     # @!attribute message
     #   @return [String]
     class ResourceNotFoundException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -1912,6 +1975,7 @@ module Aws::SQS
     #               </code> items.</p>
     #   @return [Array<Types::SendMessageBatchRequestEntry>]
     class SendMessageBatchRequest < Struct.new(
+      nil,
       :queue_url,
       :entries,
       keyword_init: true
@@ -2069,6 +2133,7 @@ module Aws::SQS
     #                   Guide</i>.</p>
     #   @return [String]
     class SendMessageBatchRequestEntry < Struct.new(
+      nil,
       :id,
       :message_body,
       :delay_seconds,
@@ -2100,6 +2165,7 @@ module Aws::SQS
     #               details about each message that can't be enqueued.</p>
     #   @return [Array<Types::BatchResultErrorEntry>]
     class SendMessageBatchResult < Struct.new(
+      nil,
       :successful,
       :failed,
       keyword_init: true
@@ -2133,6 +2199,7 @@ module Aws::SQS
     #               continues to increase for a particular <code>MessageGroupId</code>.</p>
     #   @return [String]
     class SendMessageBatchResultEntry < Struct.new(
+      nil,
       :id,
       :message_id,
       :md5_of_message_body,
@@ -2299,6 +2366,7 @@ module Aws::SQS
     #                   Guide</i>.</p>
     #   @return [String]
     class SendMessageRequest < Struct.new(
+      nil,
       :queue_url,
       :message_body,
       :delay_seconds,
@@ -2334,6 +2402,7 @@ module Aws::SQS
     #               continues to increase for a particular <code>MessageGroupId</code>.</p>
     #   @return [String]
     class SendMessageResult < Struct.new(
+      nil,
       :md5_of_message_body,
       :md5_of_message_attributes,
       :md5_of_message_system_attributes,
@@ -2581,6 +2650,7 @@ module Aws::SQS
     #     in the <i>Amazon SQS Developer Guide</i>.</p>
     #   @return [Hash<String, String>]
     class SetQueueAttributesRequest < Struct.new(
+      nil,
       :queue_url,
       :attributes,
       keyword_init: true
@@ -2608,6 +2678,7 @@ module Aws::SQS
     #               movement task.</p>
     #   @return [Integer]
     class StartMessageMoveTaskRequest < Struct.new(
+      nil,
       :source_arn,
       :destination_arn,
       :max_number_of_messages_per_second,
@@ -2622,6 +2693,7 @@ module Aws::SQS
     #               action.</p>
     #   @return [String]
     class StartMessageMoveTaskResult < Struct.new(
+      nil,
       :task_handle,
       keyword_init: true
     )
@@ -2635,6 +2707,7 @@ module Aws::SQS
     #   <p>The list of tags to be added to the specified queue.</p>
     #   @return [Hash<String, String>]
     class TagQueueRequest < Struct.new(
+      nil,
       :queue_url,
       :tags,
       keyword_init: true
@@ -2647,6 +2720,7 @@ module Aws::SQS
     # @!attribute message
     #   @return [String]
     class TooManyEntriesInBatchRequest < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -2657,6 +2731,7 @@ module Aws::SQS
     # @!attribute message
     #   @return [String]
     class UnsupportedOperation < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -2670,6 +2745,7 @@ module Aws::SQS
     #   <p>The list of tags to be removed from the specified queue.</p>
     #   @return [Array<String>]
     class UntagQueueRequest < Struct.new(
+      nil,
       :queue_url,
       :tag_keys,
       keyword_init: true

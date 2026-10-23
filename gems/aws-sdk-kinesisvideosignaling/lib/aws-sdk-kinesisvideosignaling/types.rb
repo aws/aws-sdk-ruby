@@ -11,6 +11,7 @@ module Aws::KinesisVideoSignaling
     # @!attribute message
     #   @return [String]
     class ClientLimitExceededException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -32,6 +33,7 @@ module Aws::KinesisVideoSignaling
     #   <p>An optional user ID to be associated with the credentials.</p>
     #   @return [String]
     class GetIceServerConfigRequest < Struct.new(
+      nil,
       :channel_arn,
       :client_id,
       :service,
@@ -45,6 +47,7 @@ module Aws::KinesisVideoSignaling
     #   <p>The list of ICE server information objects.</p>
     #   @return [Array<Types::IceServer>]
     class GetIceServerConfigResponse < Struct.new(
+      nil,
       :ice_server_list,
       keyword_init: true
     )
@@ -67,6 +70,7 @@ module Aws::KinesisVideoSignaling
     #               valid.</p>
     #   @return [Integer]
     class IceServer < Struct.new(
+      nil,
       :uris,
       :username,
       :password,
@@ -80,6 +84,7 @@ module Aws::KinesisVideoSignaling
     # @!attribute message
     #   @return [String]
     class InvalidArgumentException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -90,6 +95,7 @@ module Aws::KinesisVideoSignaling
     # @!attribute message
     #   @return [String]
     class InvalidClientException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -100,6 +106,7 @@ module Aws::KinesisVideoSignaling
     # @!attribute message
     #   @return [String]
     class NotAuthorizedException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -110,6 +117,7 @@ module Aws::KinesisVideoSignaling
     # @!attribute message
     #   @return [String]
     class ResourceNotFoundException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -127,6 +135,7 @@ module Aws::KinesisVideoSignaling
     #   <p>The base64-encoded SDP offer content.</p>
     #   @return [String]
     class SendAlexaOfferToMasterRequest < Struct.new(
+      nil,
       :channel_arn,
       :sender_client_id,
       :message_payload,
@@ -139,6 +148,7 @@ module Aws::KinesisVideoSignaling
     #   <p>The base64-encoded SDP answer content.</p>
     #   @return [String]
     class SendAlexaOfferToMasterResponse < Struct.new(
+      nil,
       :answer,
       keyword_init: true
     )
@@ -151,6 +161,7 @@ module Aws::KinesisVideoSignaling
     # @!attribute message
     #   @return [String]
     class SessionExpiredException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )

@@ -10,6 +10,7 @@ module Aws::DataExchange
     #   <p>The Amazon Resource Name (ARN) of the data grant to accept.</p>
     #   @return [String]
     class AcceptDataGrantRequest < Struct.new(
+      nil,
       :data_grant_arn,
       keyword_init: true
     )
@@ -56,6 +57,7 @@ module Aws::DataExchange
     #   <p>The timestamp of when the data grant was last updated.</p>
     #   @return [Time]
     class AcceptDataGrantResponse < Struct.new(
+      nil,
       :name,
       :sender_principal,
       :receiver_principal,
@@ -79,6 +81,7 @@ module Aws::DataExchange
     #   <p>Access to the resource is denied.</p>
     #   @return [String]
     class AccessDeniedException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -90,6 +93,7 @@ module Aws::DataExchange
     #   <p>Details for the export revision to Amazon S3 action.</p>
     #   @return [Types::AutoExportRevisionToS3RequestDetails]
     class Action < Struct.new(
+      nil,
       :export_revision_to_s3,
       keyword_init: true
     )
@@ -125,6 +129,7 @@ module Aws::DataExchange
     #   <p>The stage of the API asset.</p>
     #   @return [String]
     class ApiGatewayApiAsset < Struct.new(
+      nil,
       :api_description,
       :api_endpoint,
       :api_id,
@@ -150,6 +155,7 @@ module Aws::DataExchange
     #   <p>The name of the object in Amazon S3 for the asset.</p>
     #   @return [String]
     class AssetDestinationEntry < Struct.new(
+      nil,
       :asset_id,
       :bucket,
       :key,
@@ -175,6 +181,7 @@ module Aws::DataExchange
     #   <p>The AWS Lake Formation data permission that is the asset.</p>
     #   @return [Types::LakeFormationDataPermissionAsset]
     class AssetDetails < Struct.new(
+      nil,
       :s3_snapshot_asset,
       :redshift_data_share_asset,
       :api_gateway_api_asset,
@@ -232,6 +239,7 @@ module Aws::DataExchange
     #   <p>The date and time that the asset was last updated, in ISO 8601 format.</p>
     #   @return [Time]
     class AssetEntry < Struct.new(
+      nil,
       :arn,
       :asset_details,
       :asset_type,
@@ -255,6 +263,7 @@ module Aws::DataExchange
     #   <p>The name of the object in Amazon S3 for the asset.</p>
     #   @return [String]
     class AssetSourceEntry < Struct.new(
+      nil,
       :bucket,
       :key,
       keyword_init: true
@@ -272,6 +281,7 @@ module Aws::DataExchange
     #            revision. For more information about key patterns, see <a href="https://docs.aws.amazon.com/data-exchange/latest/userguide/jobs.html#revision-export-keypatterns">Key patterns when exporting revisions</a>.</p>
     #   @return [String]
     class AutoExportRevisionDestinationEntry < Struct.new(
+      nil,
       :bucket,
       :key_pattern,
       keyword_init: true
@@ -288,6 +298,7 @@ module Aws::DataExchange
     #            will be sent.</p>
     #   @return [Types::AutoExportRevisionDestinationEntry]
     class AutoExportRevisionToS3RequestDetails < Struct.new(
+      nil,
       :encryption,
       :revision_destination,
       keyword_init: true
@@ -299,6 +310,7 @@ module Aws::DataExchange
     #   <p>The unique identifier for a job.</p>
     #   @return [String]
     class CancelJobInput < Struct.new(
+      nil,
       :job_id,
       keyword_init: true
     )
@@ -318,6 +330,7 @@ module Aws::DataExchange
     #   <p>The type of the resource with the conflict.</p>
     #   @return [String]
     class ConflictException < Struct.new(
+      nil,
       :message,
       :resource_id,
       :resource_type,
@@ -348,6 +361,7 @@ module Aws::DataExchange
     #   <p>The tags to add to the data grant. A tag is a key-value pair.</p>
     #   @return [Hash<String, String>]
     class CreateDataGrantRequest < Struct.new(
+      nil,
       :name,
       :grant_distribution_scope,
       :receiver_principal,
@@ -406,6 +420,7 @@ module Aws::DataExchange
     #   <p>The tags associated to the data grant. A tag is a key-value pair.</p>
     #   @return [Hash<String, String>]
     class CreateDataGrantResponse < Struct.new(
+      nil,
       :name,
       :sender_principal,
       :receiver_principal,
@@ -442,6 +457,7 @@ module Aws::DataExchange
     #            these data sets and revisions.</p>
     #   @return [Hash<String, String>]
     class CreateDataSetInput < Struct.new(
+      nil,
       :asset_type,
       :description,
       :name,
@@ -489,6 +505,7 @@ module Aws::DataExchange
     #   <p>The date and time that the data set was last updated, in ISO 8601 format.</p>
     #   @return [Time]
     class CreateDataSetOutput < Struct.new(
+      nil,
       :arn,
       :asset_type,
       :created_at,
@@ -515,6 +532,7 @@ module Aws::DataExchange
     #   <p>Key-value pairs that you can associate with the event action.</p>
     #   @return [Hash<String, String>]
     class CreateEventActionInput < Struct.new(
+      nil,
       :action,
       :event,
       :tags,
@@ -545,6 +563,7 @@ module Aws::DataExchange
     #   <p>The date and time that the event action was last updated, in ISO 8601 format.</p>
     #   @return [Time]
     class CreateEventActionOutput < Struct.new(
+      nil,
       :action,
       :arn,
       :created_at,
@@ -564,6 +583,7 @@ module Aws::DataExchange
     #   <p>The type of job to be created.</p>
     #   @return [String]
     class CreateJobInput < Struct.new(
+      nil,
       :details,
       :type,
       keyword_init: true
@@ -596,6 +616,7 @@ module Aws::DataExchange
     #   <p>The date and time that the job was last updated, in ISO 8601 format.</p>
     #   @return [Time]
     class CreateJobOutput < Struct.new(
+      nil,
       :arn,
       :created_at,
       :details,
@@ -622,6 +643,7 @@ module Aws::DataExchange
     #            these data sets and revisions.</p>
     #   @return [Hash<String, String>]
     class CreateRevisionInput < Struct.new(
+      nil,
       :comment,
       :data_set_id,
       :tags,
@@ -675,6 +697,7 @@ module Aws::DataExchange
     #   <p>The date and time that the revision was revoked, in ISO 8601 format.</p>
     #   @return [Time]
     class CreateRevisionOutput < Struct.new(
+      nil,
       :arn,
       :comment,
       :created_at,
@@ -710,6 +733,7 @@ module Aws::DataExchange
     #   <p>The unique identifier for a revision.</p>
     #   @return [String]
     class CreateS3DataAccessFromS3BucketRequestDetails < Struct.new(
+      nil,
       :asset_source,
       :data_set_id,
       :revision_id,
@@ -730,6 +754,7 @@ module Aws::DataExchange
     #   <p>The unique identifier for the revision.</p>
     #   @return [String]
     class CreateS3DataAccessFromS3BucketResponseDetails < Struct.new(
+      nil,
       :asset_source,
       :data_set_id,
       :revision_id,
@@ -776,6 +801,7 @@ module Aws::DataExchange
     #   <p>The timestamp of when the data grant was last updated.</p>
     #   @return [Time]
     class DataGrantSummaryEntry < Struct.new(
+      nil,
       :name,
       :sender_principal,
       :receiver_principal,
@@ -829,6 +855,7 @@ module Aws::DataExchange
     #   <p>The date and time that the data set was last updated, in ISO 8601 format.</p>
     #   @return [Time]
     class DataSetEntry < Struct.new(
+      nil,
       :arn,
       :asset_type,
       :created_at,
@@ -851,6 +878,7 @@ module Aws::DataExchange
     #            resource supporting the data set was updated.</p>
     #   @return [Time]
     class DataUpdateRequestDetails < Struct.new(
+      nil,
       :data_updated_at,
       keyword_init: true
     )
@@ -862,6 +890,7 @@ module Aws::DataExchange
     #   <p>A list of LF-tag conditions that apply to database resources.</p>
     #   @return [Array<Types::LFTag>]
     class DatabaseLFTagPolicy < Struct.new(
+      nil,
       :expression,
       keyword_init: true
     )
@@ -876,6 +905,7 @@ module Aws::DataExchange
     #   <p>The permissions granted to subscribers on database resources.</p>
     #   @return [Array<String>]
     class DatabaseLFTagPolicyAndPermissions < Struct.new(
+      nil,
       :expression,
       :permissions,
       keyword_init: true
@@ -893,6 +923,7 @@ module Aws::DataExchange
     #   <p>The unique identifier for a revision.</p>
     #   @return [String]
     class DeleteAssetInput < Struct.new(
+      nil,
       :asset_id,
       :data_set_id,
       :revision_id,
@@ -905,6 +936,7 @@ module Aws::DataExchange
     #   <p>The ID of the data grant to delete.</p>
     #   @return [String]
     class DeleteDataGrantRequest < Struct.new(
+      nil,
       :data_grant_id,
       keyword_init: true
     )
@@ -915,6 +947,7 @@ module Aws::DataExchange
     #   <p>The unique identifier for a data set.</p>
     #   @return [String]
     class DeleteDataSetInput < Struct.new(
+      nil,
       :data_set_id,
       keyword_init: true
     )
@@ -925,6 +958,7 @@ module Aws::DataExchange
     #   <p>The unique identifier for the event action.</p>
     #   @return [String]
     class DeleteEventActionInput < Struct.new(
+      nil,
       :event_action_id,
       keyword_init: true
     )
@@ -938,6 +972,7 @@ module Aws::DataExchange
     #   <p>The unique identifier for a revision.</p>
     #   @return [String]
     class DeleteRevisionInput < Struct.new(
+      nil,
       :data_set_id,
       :revision_id,
       keyword_init: true
@@ -951,6 +986,7 @@ module Aws::DataExchange
     #            datetime in the future when the data set will be deprecated.</p>
     #   @return [Time]
     class DeprecationRequestDetails < Struct.new(
+      nil,
       :deprecation_at,
       keyword_init: true
     )
@@ -965,6 +1001,7 @@ module Aws::DataExchange
     #   <p>Details about the job error.</p>
     #   @return [Array<Types::AssetSourceEntry>]
     class Details < Struct.new(
+      nil,
       :import_asset_from_signed_url_job_error_details,
       :import_assets_from_s3_job_error_details,
       keyword_init: true
@@ -977,6 +1014,7 @@ module Aws::DataExchange
     #   <p>What occurs to start the revision publish action.</p>
     #   @return [Types::RevisionPublished]
     class Event < Struct.new(
+      nil,
       :revision_published,
       keyword_init: true
     )
@@ -1004,6 +1042,7 @@ module Aws::DataExchange
     #   <p>The date and time that the event action was last updated, in ISO 8601 format.</p>
     #   @return [Time]
     class EventActionEntry < Struct.new(
+      nil,
       :action,
       :arn,
       :created_at,
@@ -1026,6 +1065,7 @@ module Aws::DataExchange
     #   <p>The unique identifier for the revision associated with this export request.</p>
     #   @return [String]
     class ExportAssetToSignedUrlRequestDetails < Struct.new(
+      nil,
       :asset_id,
       :data_set_id,
       :revision_id,
@@ -1051,6 +1091,7 @@ module Aws::DataExchange
     #   <p>The date and time that the signed URL expires, in ISO 8601 format.</p>
     #   @return [Time]
     class ExportAssetToSignedUrlResponseDetails < Struct.new(
+      nil,
       :asset_id,
       :data_set_id,
       :revision_id,
@@ -1075,6 +1116,7 @@ module Aws::DataExchange
     #   <p>The unique identifier for the revision associated with this export request.</p>
     #   @return [String]
     class ExportAssetsToS3RequestDetails < Struct.new(
+      nil,
       :asset_destinations,
       :data_set_id,
       :encryption,
@@ -1098,6 +1140,7 @@ module Aws::DataExchange
     #   <p>The unique identifier for the revision associated with this export response.</p>
     #   @return [String]
     class ExportAssetsToS3ResponseDetails < Struct.new(
+      nil,
       :asset_destinations,
       :data_set_id,
       :encryption,
@@ -1118,6 +1161,7 @@ module Aws::DataExchange
     #   <p>The destination for the revision.</p>
     #   @return [Array<Types::RevisionDestinationEntry>]
     class ExportRevisionsToS3RequestDetails < Struct.new(
+      nil,
       :data_set_id,
       :encryption,
       :revision_destinations,
@@ -1140,6 +1184,7 @@ module Aws::DataExchange
     #   <p>The Amazon Resource Name (ARN) of the event action.</p>
     #   @return [String]
     class ExportRevisionsToS3ResponseDetails < Struct.new(
+      nil,
       :data_set_id,
       :encryption,
       :revision_destinations,
@@ -1159,6 +1204,7 @@ module Aws::DataExchange
     #   <p>The type of server side encryption used for encrypting the objects in Amazon S3.</p>
     #   @return [String]
     class ExportServerSideEncryption < Struct.new(
+      nil,
       :kms_key_arn,
       :type,
       keyword_init: true
@@ -1176,6 +1222,7 @@ module Aws::DataExchange
     #   <p>The unique identifier for a revision.</p>
     #   @return [String]
     class GetAssetInput < Struct.new(
+      nil,
       :asset_id,
       :data_set_id,
       :revision_id,
@@ -1223,6 +1270,7 @@ module Aws::DataExchange
     #   <p>The date and time that the asset was last updated, in ISO 8601 format.</p>
     #   @return [Time]
     class GetAssetOutput < Struct.new(
+      nil,
       :arn,
       :asset_details,
       :asset_type,
@@ -1242,6 +1290,7 @@ module Aws::DataExchange
     #   <p>The ID of the data grant.</p>
     #   @return [String]
     class GetDataGrantRequest < Struct.new(
+      nil,
       :data_grant_id,
       keyword_init: true
     )
@@ -1294,6 +1343,7 @@ module Aws::DataExchange
     #   <p>The tags associated to the data grant. A tag is a key-value pair.</p>
     #   @return [Hash<String, String>]
     class GetDataGrantResponse < Struct.new(
+      nil,
       :name,
       :sender_principal,
       :receiver_principal,
@@ -1318,6 +1368,7 @@ module Aws::DataExchange
     #   <p>The unique identifier for a data set.</p>
     #   @return [String]
     class GetDataSetInput < Struct.new(
+      nil,
       :data_set_id,
       keyword_init: true
     )
@@ -1362,6 +1413,7 @@ module Aws::DataExchange
     #   <p>The date and time that the data set was last updated, in ISO 8601 format.</p>
     #   @return [Time]
     class GetDataSetOutput < Struct.new(
+      nil,
       :arn,
       :asset_type,
       :created_at,
@@ -1382,6 +1434,7 @@ module Aws::DataExchange
     #   <p>The unique identifier for the event action.</p>
     #   @return [String]
     class GetEventActionInput < Struct.new(
+      nil,
       :event_action_id,
       keyword_init: true
     )
@@ -1410,6 +1463,7 @@ module Aws::DataExchange
     #   <p>The date and time that the event action was last updated, in ISO 8601 format.</p>
     #   @return [Time]
     class GetEventActionOutput < Struct.new(
+      nil,
       :action,
       :arn,
       :created_at,
@@ -1426,6 +1480,7 @@ module Aws::DataExchange
     #   <p>The unique identifier for a job.</p>
     #   @return [String]
     class GetJobInput < Struct.new(
+      nil,
       :job_id,
       keyword_init: true
     )
@@ -1457,6 +1512,7 @@ module Aws::DataExchange
     #   <p>The date and time that the job was last updated, in ISO 8601 format.</p>
     #   @return [Time]
     class GetJobOutput < Struct.new(
+      nil,
       :arn,
       :created_at,
       :details,
@@ -1474,6 +1530,7 @@ module Aws::DataExchange
     #   <p>The Amazon Resource Name (ARN) of the data grant.</p>
     #   @return [String]
     class GetReceivedDataGrantRequest < Struct.new(
+      nil,
       :data_grant_arn,
       keyword_init: true
     )
@@ -1520,6 +1577,7 @@ module Aws::DataExchange
     #   <p>The timestamp of when the data grant was last updated.</p>
     #   @return [Time]
     class GetReceivedDataGrantResponse < Struct.new(
+      nil,
       :name,
       :sender_principal,
       :receiver_principal,
@@ -1545,6 +1603,7 @@ module Aws::DataExchange
     #   <p>The unique identifier for a revision.</p>
     #   @return [String]
     class GetRevisionInput < Struct.new(
+      nil,
       :data_set_id,
       :revision_id,
       keyword_init: true
@@ -1597,6 +1656,7 @@ module Aws::DataExchange
     #   <p>The date and time that the revision was revoked, in ISO 8601 format.</p>
     #   @return [Time]
     class GetRevisionOutput < Struct.new(
+      nil,
       :arn,
       :comment,
       :created_at,
@@ -1650,6 +1710,7 @@ module Aws::DataExchange
     #   <p>The API stage.</p>
     #   @return [String]
     class ImportAssetFromApiGatewayApiRequestDetails < Struct.new(
+      nil,
       :api_description,
       :api_id,
       :api_key,
@@ -1700,6 +1761,7 @@ module Aws::DataExchange
     #   <p>The API stage.</p>
     #   @return [String]
     class ImportAssetFromApiGatewayApiResponseDetails < Struct.new(
+      nil,
       :api_description,
       :api_id,
       :api_key,
@@ -1721,6 +1783,7 @@ module Aws::DataExchange
     #   <p>Details about the job error.</p>
     #   @return [String]
     class ImportAssetFromSignedUrlJobErrorDetails < Struct.new(
+      nil,
       :asset_name,
       keyword_init: true
     )
@@ -1743,6 +1806,7 @@ module Aws::DataExchange
     #   <p>The unique identifier for the revision associated with this import request.</p>
     #   @return [String]
     class ImportAssetFromSignedUrlRequestDetails < Struct.new(
+      nil,
       :asset_name,
       :data_set_id,
       :md5_hash,
@@ -1774,6 +1838,7 @@ module Aws::DataExchange
     #   <p>The time and date at which the signed URL expires, in ISO 8601 format.</p>
     #   @return [Time]
     class ImportAssetFromSignedUrlResponseDetails < Struct.new(
+      nil,
       :asset_name,
       :data_set_id,
       :md5_hash,
@@ -1806,6 +1871,7 @@ module Aws::DataExchange
     #   <p>The unique identifier for the revision associated with this import job.</p>
     #   @return [String]
     class ImportAssetsFromLakeFormationTagPolicyRequestDetails < Struct.new(
+      nil,
       :catalog_id,
       :database,
       :table,
@@ -1838,6 +1904,7 @@ module Aws::DataExchange
     #   <p>The unique identifier for the revision associated with this import job.</p>
     #   @return [String]
     class ImportAssetsFromLakeFormationTagPolicyResponseDetails < Struct.new(
+      nil,
       :catalog_id,
       :database,
       :table,
@@ -1860,6 +1927,7 @@ module Aws::DataExchange
     #   <p>The unique identifier for the revision associated with this import job.</p>
     #   @return [String]
     class ImportAssetsFromRedshiftDataSharesRequestDetails < Struct.new(
+      nil,
       :asset_sources,
       :data_set_id,
       :revision_id,
@@ -1879,6 +1947,7 @@ module Aws::DataExchange
     #   <p>The unique identifier for the revision associated with this import job.</p>
     #   @return [String]
     class ImportAssetsFromRedshiftDataSharesResponseDetails < Struct.new(
+      nil,
       :asset_sources,
       :data_set_id,
       :revision_id,
@@ -1898,6 +1967,7 @@ module Aws::DataExchange
     #   <p>The unique identifier for the revision associated with this import request.</p>
     #   @return [String]
     class ImportAssetsFromS3RequestDetails < Struct.new(
+      nil,
       :asset_sources,
       :data_set_id,
       :revision_id,
@@ -1917,6 +1987,7 @@ module Aws::DataExchange
     #   <p>The unique identifier for the revision associated with this import response.</p>
     #   @return [String]
     class ImportAssetsFromS3ResponseDetails < Struct.new(
+      nil,
       :asset_sources,
       :data_set_id,
       :revision_id,
@@ -1930,6 +2001,7 @@ module Aws::DataExchange
     #   <p>The message identifying the service exception that occurred.</p>
     #   @return [String]
     class InternalServerException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -1966,6 +2038,7 @@ module Aws::DataExchange
     #   <p>The date and time that the job was last updated, in ISO 8601 format.</p>
     #   @return [Time]
     class JobEntry < Struct.new(
+      nil,
       :arn,
       :created_at,
       :details,
@@ -2002,6 +2075,7 @@ module Aws::DataExchange
     #   <p>The type of resource related to the error.</p>
     #   @return [String]
     class JobError < Struct.new(
+      nil,
       :code,
       :details,
       :limit_name,
@@ -2028,6 +2102,7 @@ module Aws::DataExchange
     #            specified.</p>
     #   @return [String]
     class KmsKeyToGrant < Struct.new(
+      nil,
       :kms_key_arn,
       keyword_init: true
     )
@@ -2045,6 +2120,7 @@ module Aws::DataExchange
     #            permission.</p>
     #   @return [Types::TableLFTagPolicy]
     class LFResourceDetails < Struct.new(
+      nil,
       :database,
       :table,
       keyword_init: true
@@ -2060,6 +2136,7 @@ module Aws::DataExchange
     #   <p>A list of LF-tag values.</p>
     #   @return [Array<String>]
     class LFTag < Struct.new(
+      nil,
       :tag_key,
       :tag_values,
       keyword_init: true
@@ -2078,6 +2155,7 @@ module Aws::DataExchange
     #   <p>Details for the Lake Formation Resources included in the LF-tag policy.</p>
     #   @return [Types::LFResourceDetails]
     class LFTagPolicyDetails < Struct.new(
+      nil,
       :catalog_id,
       :resource_type,
       :resource_details,
@@ -2101,6 +2179,7 @@ module Aws::DataExchange
     #            permissions to AWS Lake Formation data permissions.</p>
     #   @return [String]
     class LakeFormationDataPermissionAsset < Struct.new(
+      nil,
       :lake_formation_data_permission_details,
       :lake_formation_data_permission_type,
       :permissions,
@@ -2115,6 +2194,7 @@ module Aws::DataExchange
     #   <p>Details about the LF-tag policy.</p>
     #   @return [Types::LFTagPolicyDetails]
     class LakeFormationDataPermissionDetails < Struct.new(
+      nil,
       :lf_tag_policy,
       keyword_init: true
     )
@@ -2131,6 +2211,7 @@ module Aws::DataExchange
     #            underlying Glue table that the notification is referring to.</p>
     #   @return [String]
     class LakeFormationTagPolicyDetails < Struct.new(
+      nil,
       :database,
       :table,
       keyword_init: true
@@ -2146,6 +2227,7 @@ module Aws::DataExchange
     #            operation.</p>
     #   @return [String]
     class ListDataGrantsRequest < Struct.new(
+      nil,
       :max_results,
       :next_token,
       keyword_init: true
@@ -2161,6 +2243,7 @@ module Aws::DataExchange
     #            operation.</p>
     #   @return [String]
     class ListDataGrantsResponse < Struct.new(
+      nil,
       :data_grant_summaries,
       :next_token,
       keyword_init: true
@@ -2179,6 +2262,7 @@ module Aws::DataExchange
     #            results.</p>
     #   @return [String]
     class ListDataSetRevisionsInput < Struct.new(
+      nil,
       :data_set_id,
       :max_results,
       :next_token,
@@ -2195,6 +2279,7 @@ module Aws::DataExchange
     #   <p>The asset objects listed by the request.</p>
     #   @return [Array<Types::RevisionEntry>]
     class ListDataSetRevisionsOutput < Struct.new(
+      nil,
       :next_token,
       :revisions,
       keyword_init: true
@@ -2214,6 +2299,7 @@ module Aws::DataExchange
     #            to the account (for subscribers).</p>
     #   @return [String]
     class ListDataSetsInput < Struct.new(
+      nil,
       :max_results,
       :next_token,
       :origin,
@@ -2230,6 +2316,7 @@ module Aws::DataExchange
     #            results.</p>
     #   @return [String]
     class ListDataSetsOutput < Struct.new(
+      nil,
       :data_sets,
       :next_token,
       keyword_init: true
@@ -2248,6 +2335,7 @@ module Aws::DataExchange
     #            results.</p>
     #   @return [String]
     class ListEventActionsInput < Struct.new(
+      nil,
       :event_source_id,
       :max_results,
       :next_token,
@@ -2264,6 +2352,7 @@ module Aws::DataExchange
     #            results.</p>
     #   @return [String]
     class ListEventActionsOutput < Struct.new(
+      nil,
       :event_actions,
       :next_token,
       keyword_init: true
@@ -2285,6 +2374,7 @@ module Aws::DataExchange
     #   <p>The unique identifier for a revision.</p>
     #   @return [String]
     class ListJobsInput < Struct.new(
+      nil,
       :data_set_id,
       :max_results,
       :next_token,
@@ -2302,6 +2392,7 @@ module Aws::DataExchange
     #            results.</p>
     #   @return [String]
     class ListJobsOutput < Struct.new(
+      nil,
       :jobs,
       :next_token,
       keyword_init: true
@@ -2320,6 +2411,7 @@ module Aws::DataExchange
     #   <p>The acceptance state of the data grants to list.</p>
     #   @return [Array<String>]
     class ListReceivedDataGrantsRequest < Struct.new(
+      nil,
       :max_results,
       :next_token,
       :acceptance_state,
@@ -2336,6 +2428,7 @@ module Aws::DataExchange
     #            operation.</p>
     #   @return [String]
     class ListReceivedDataGrantsResponse < Struct.new(
+      nil,
       :data_grant_summaries,
       :next_token,
       keyword_init: true
@@ -2357,6 +2450,7 @@ module Aws::DataExchange
     #   <p>The unique identifier for a revision.</p>
     #   @return [String]
     class ListRevisionAssetsInput < Struct.new(
+      nil,
       :data_set_id,
       :max_results,
       :next_token,
@@ -2374,6 +2468,7 @@ module Aws::DataExchange
     #            results.</p>
     #   @return [String]
     class ListRevisionAssetsOutput < Struct.new(
+      nil,
       :assets,
       :next_token,
       keyword_init: true
@@ -2385,6 +2480,7 @@ module Aws::DataExchange
     #   <p>An Amazon Resource Name (ARN) that uniquely identifies an AWS resource.</p>
     #   @return [String]
     class ListTagsForResourceInput < Struct.new(
+      nil,
       :resource_arn,
       keyword_init: true
     )
@@ -2395,6 +2491,7 @@ module Aws::DataExchange
     #   <p>A label that consists of a customer-defined key and an optional value.</p>
     #   @return [Hash<String, String>]
     class ListTagsForResourceOutput < Struct.new(
+      nil,
       :tags,
       keyword_init: true
     )
@@ -2415,6 +2512,7 @@ module Aws::DataExchange
     #            details specific to a schema change type notification.</p>
     #   @return [Types::SchemaChangeRequestDetails]
     class NotificationDetails < Struct.new(
+      nil,
       :data_update,
       :deprecation,
       :schema_change,
@@ -2431,6 +2529,7 @@ module Aws::DataExchange
     #   <p>The ID of the data grant.</p>
     #   @return [String]
     class OriginDetails < Struct.new(
+      nil,
       :product_id,
       :data_grant_id,
       keyword_init: true
@@ -2473,6 +2572,7 @@ module Aws::DataExchange
     #   <p>The timestamp of when the data grant was last updated.</p>
     #   @return [Time]
     class ReceivedDataGrantSummariesEntry < Struct.new(
+      nil,
       :name,
       :sender_principal,
       :receiver_principal,
@@ -2494,6 +2594,7 @@ module Aws::DataExchange
     #   <p>The Amazon Resource Name (ARN) of the datashare asset.</p>
     #   @return [String]
     class RedshiftDataShareAsset < Struct.new(
+      nil,
       :arn,
       keyword_init: true
     )
@@ -2505,6 +2606,7 @@ module Aws::DataExchange
     #   <p>The Amazon Resource Name (ARN) of the datashare asset.</p>
     #   @return [String]
     class RedshiftDataShareAssetSourceEntry < Struct.new(
+      nil,
       :data_share_arn,
       keyword_init: true
     )
@@ -2539,6 +2641,7 @@ module Aws::DataExchange
     #            view name in the Redshift database that is being affected by this notification.</p>
     #   @return [String]
     class RedshiftDataShareDetails < Struct.new(
+      nil,
       :arn,
       :database,
       :function,
@@ -2579,6 +2682,7 @@ module Aws::DataExchange
     #   <p>Request details for the ImportAssetsFromLakeFormationTagPolicy job.</p>
     #   @return [Types::ImportAssetsFromLakeFormationTagPolicyRequestDetails]
     class RequestDetails < Struct.new(
+      nil,
       :export_asset_to_signed_url,
       :export_assets_to_s3,
       :export_revisions_to_s3,
@@ -2604,6 +2708,7 @@ module Aws::DataExchange
     #   <p>The type of resource that couldn't be found.</p>
     #   @return [String]
     class ResourceNotFoundException < Struct.new(
+      nil,
       :message,
       :resource_id,
       :resource_type,
@@ -2641,6 +2746,7 @@ module Aws::DataExchange
     #   <p>Response details from the ImportAssetsFromLakeFormationTagPolicy job.</p>
     #   @return [Types::ImportAssetsFromLakeFormationTagPolicyResponseDetails]
     class ResponseDetails < Struct.new(
+      nil,
       :export_asset_to_signed_url,
       :export_assets_to_s3,
       :export_revisions_to_s3,
@@ -2667,6 +2773,7 @@ module Aws::DataExchange
     #   <p>The unique identifier for the revision.</p>
     #   @return [String]
     class RevisionDestinationEntry < Struct.new(
+      nil,
       :bucket,
       :key_pattern,
       :revision_id,
@@ -2718,6 +2825,7 @@ module Aws::DataExchange
     #   <p>The date and time that the revision was revoked, in ISO 8601 format.</p>
     #   @return [Time]
     class RevisionEntry < Struct.new(
+      nil,
       :arn,
       :comment,
       :created_at,
@@ -2745,6 +2853,7 @@ module Aws::DataExchange
     #   <p>The data set ID of the published revision.</p>
     #   @return [String]
     class RevisionPublished < Struct.new(
+      nil,
       :data_set_id,
       keyword_init: true
     )
@@ -2762,6 +2871,7 @@ module Aws::DataExchange
     #            revoked.</p>
     #   @return [String]
     class RevokeRevisionInput < Struct.new(
+      nil,
       :data_set_id,
       :revision_id,
       :revocation_comment,
@@ -2812,6 +2922,7 @@ module Aws::DataExchange
     #   <p>The date and time that the revision was revoked, in ISO 8601 format.</p>
     #   @return [Time]
     class RevokeRevisionOutput < Struct.new(
+      nil,
       :arn,
       :comment,
       :created_at,
@@ -2858,6 +2969,7 @@ module Aws::DataExchange
     #            AWS KMS keys used to encrypt these shared S3 objects.</p>
     #   @return [Array<Types::KmsKeyToGrant>]
     class S3DataAccessAsset < Struct.new(
+      nil,
       :bucket,
       :key_prefixes,
       :keys,
@@ -2884,6 +2996,7 @@ module Aws::DataExchange
     #            encrypt S3 objects being shared in this S3 Data Access asset.</p>
     #   @return [Array<Types::KmsKeyToGrant>]
     class S3DataAccessAssetSourceEntry < Struct.new(
+      nil,
       :bucket,
       :key_prefixes,
       :keys,
@@ -2907,6 +3020,7 @@ module Aws::DataExchange
     #            can have up to 50 entries.</p>
     #   @return [Array<String>]
     class S3DataAccessDetails < Struct.new(
+      nil,
       :key_prefixes,
       :keys,
       keyword_init: true
@@ -2919,6 +3033,7 @@ module Aws::DataExchange
     #   <p>The size of the Amazon S3 object that is the object.</p>
     #   @return [Float]
     class S3SnapshotAsset < Struct.new(
+      nil,
       :size,
       keyword_init: true
     )
@@ -2949,6 +3064,7 @@ module Aws::DataExchange
     #            can be up to 512 characters long.</p>
     #   @return [String]
     class SchemaChangeDetails < Struct.new(
+      nil,
       :name,
       :type,
       :description,
@@ -2969,6 +3085,7 @@ module Aws::DataExchange
     #            date in the future when the schema change is taking effect.</p>
     #   @return [Time]
     class SchemaChangeRequestDetails < Struct.new(
+      nil,
       :changes,
       :schema_change_at,
       keyword_init: true
@@ -2990,6 +3107,7 @@ module Aws::DataExchange
     #            S3 resources that will be affected by this notification.</p>
     #   @return [Array<Types::S3DataAccessDetails>]
     class ScopeDetails < Struct.new(
+      nil,
       :lake_formation_tag_policies,
       :redshift_data_shares,
       :s3_data_accesses,
@@ -3029,6 +3147,7 @@ module Aws::DataExchange
     #   <p>Revision ID value for the API request.</p>
     #   @return [String]
     class SendApiAssetInput < Struct.new(
+      nil,
       :body,
       :query_string_parameters,
       :asset_id,
@@ -3049,6 +3168,7 @@ module Aws::DataExchange
     #   <p>The response headers from the underlying API tracked by the API asset.</p>
     #   @return [Hash<String, String>]
     class SendApiAssetOutput < Struct.new(
+      nil,
       :body,
       :response_headers,
       keyword_init: true
@@ -3084,6 +3204,7 @@ module Aws::DataExchange
     #            to.</p>
     #   @return [String]
     class SendDataSetNotificationRequest < Struct.new(
+      nil,
       :scope,
       :client_token,
       :comment,
@@ -3096,6 +3217,7 @@ module Aws::DataExchange
     end
 
     class SendDataSetNotificationResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -3112,6 +3234,7 @@ module Aws::DataExchange
     #   <p>The request has exceeded the quotas imposed by the service.</p>
     #   @return [String]
     class ServiceLimitExceededException < Struct.new(
+      nil,
       :limit_name,
       :limit_value,
       :message,
@@ -3129,6 +3252,7 @@ module Aws::DataExchange
     #   <p>The unique identifier for a job.</p>
     #   @return [String]
     class StartJobInput < Struct.new(
+      nil,
       :job_id,
       keyword_init: true
     )
@@ -3136,6 +3260,7 @@ module Aws::DataExchange
     end
 
     class StartJobOutput < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -3146,6 +3271,7 @@ module Aws::DataExchange
     #   <p>A list of LF-tag conditions that apply to table resources.</p>
     #   @return [Array<Types::LFTag>]
     class TableLFTagPolicy < Struct.new(
+      nil,
       :expression,
       keyword_init: true
     )
@@ -3160,6 +3286,7 @@ module Aws::DataExchange
     #   <p>The permissions granted to subscribers on table resources.</p>
     #   @return [Array<String>]
     class TableLFTagPolicyAndPermissions < Struct.new(
+      nil,
       :expression,
       :permissions,
       keyword_init: true
@@ -3174,6 +3301,7 @@ module Aws::DataExchange
     #   <p>A label that consists of a customer-defined key and an optional value.</p>
     #   @return [Hash<String, String>]
     class TagResourceInput < Struct.new(
+      nil,
       :resource_arn,
       :tags,
       keyword_init: true
@@ -3186,6 +3314,7 @@ module Aws::DataExchange
     #   <p>The limit on the number of requests per second was exceeded.</p>
     #   @return [String]
     class ThrottlingException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -3199,6 +3328,7 @@ module Aws::DataExchange
     #   <p>The key tags.</p>
     #   @return [Array<String>]
     class UntagResourceInput < Struct.new(
+      nil,
       :resource_arn,
       :tag_keys,
       keyword_init: true
@@ -3225,6 +3355,7 @@ module Aws::DataExchange
     #   <p>The unique identifier for a revision.</p>
     #   @return [String]
     class UpdateAssetInput < Struct.new(
+      nil,
       :asset_id,
       :data_set_id,
       :name,
@@ -3273,6 +3404,7 @@ module Aws::DataExchange
     #   <p>The date and time that the asset was last updated, in ISO 8601 format.</p>
     #   @return [Time]
     class UpdateAssetOutput < Struct.new(
+      nil,
       :arn,
       :asset_details,
       :asset_type,
@@ -3298,6 +3430,7 @@ module Aws::DataExchange
     #   <p>The name of the data set.</p>
     #   @return [String]
     class UpdateDataSetInput < Struct.new(
+      nil,
       :data_set_id,
       :description,
       :name,
@@ -3341,6 +3474,7 @@ module Aws::DataExchange
     #   <p>The date and time that the data set was last updated, in ISO 8601 format.</p>
     #   @return [Time]
     class UpdateDataSetOutput < Struct.new(
+      nil,
       :arn,
       :asset_type,
       :created_at,
@@ -3363,6 +3497,7 @@ module Aws::DataExchange
     #   <p>The unique identifier for the event action.</p>
     #   @return [String]
     class UpdateEventActionInput < Struct.new(
+      nil,
       :action,
       :event_action_id,
       keyword_init: true
@@ -3389,6 +3524,7 @@ module Aws::DataExchange
     #   <p>The date and time that the event action was last updated, in ISO 8601 format.</p>
     #   @return [Time]
     class UpdateEventActionOutput < Struct.new(
+      nil,
       :action,
       :arn,
       :created_at,
@@ -3415,6 +3551,7 @@ module Aws::DataExchange
     #   <p>The unique identifier for a revision.</p>
     #   @return [String]
     class UpdateRevisionInput < Struct.new(
+      nil,
       :comment,
       :data_set_id,
       :finalized,
@@ -3466,6 +3603,7 @@ module Aws::DataExchange
     #   <p>The date and time that the revision was revoked, in ISO 8601 format.</p>
     #   @return [Time]
     class UpdateRevisionOutput < Struct.new(
+      nil,
       :arn,
       :comment,
       :created_at,
@@ -3496,6 +3634,7 @@ module Aws::DataExchange
     #   <p>The unique identifier for the resource that couldn't be found.</p>
     #   @return [String]
     class ValidationException < Struct.new(
+      nil,
       :message,
       :exception_cause,
       keyword_init: true

@@ -10,6 +10,7 @@ module Aws::IoTSiteWise
     # @!attribute message
     #   @return [String]
     class AccessDeniedException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -38,6 +39,7 @@ module Aws::IoTSiteWise
     #   <p>The date the access policy was last updated, in Unix epoch time.</p>
     #   @return [Time]
     class AccessPolicySummary < Struct.new(
+      nil,
       :id,
       :identity,
       :resource,
@@ -60,6 +62,7 @@ module Aws::IoTSiteWise
     #   <p>The type of the action definition.</p>
     #   @return [String]
     class ActionDefinition < Struct.new(
+      nil,
       :action_definition_id,
       :action_name,
       :action_type,
@@ -73,6 +76,7 @@ module Aws::IoTSiteWise
     #   <p>The payload of the action in a JSON string.</p>
     #   @return [String]
     class ActionPayload < Struct.new(
+      nil,
       :string_value,
       keyword_init: true
     )
@@ -94,6 +98,7 @@ module Aws::IoTSiteWise
     #   <p>The detailed resource this action resolves to.</p>
     #   @return [Types::ResolveTo]
     class ActionSummary < Struct.new(
+      nil,
       :action_id,
       :action_definition_id,
       :target_resource,
@@ -115,6 +120,7 @@ module Aws::IoTSiteWise
     #   <p>The value of the aggregates.</p>
     #   @return [Types::Aggregates]
     class AggregatedValue < Struct.new(
+      nil,
       :timestamp,
       :quality,
       :value,
@@ -143,6 +149,7 @@ module Aws::IoTSiteWise
     #   <p>The standard deviation of the time series over a time interval window.</p>
     #   @return [Float]
     class Aggregates < Struct.new(
+      nil,
       :average,
       :count,
       :maximum,
@@ -167,6 +174,7 @@ module Aws::IoTSiteWise
     #           notifications</a> in the <i>IoT Events Developer Guide</i>.</p>
     #   @return [String]
     class Alarms < Struct.new(
+      nil,
       :alarm_role_arn,
       :notification_lambda_arn,
       keyword_init: true
@@ -181,6 +189,7 @@ module Aws::IoTSiteWise
     #         specific asset are matched.</p>
     #   @return [String]
     class AssetBindingValueFilter < Struct.new(
+      nil,
       :asset_id,
       keyword_init: true
     )
@@ -209,6 +218,7 @@ module Aws::IoTSiteWise
     #   <p>The external ID of the asset composite model. For more information, see <a href="https://docs.aws.amazon.com/iot-sitewise/latest/userguide/object-ids.html#external-ids">Using external IDs</a> in the <i>IoT SiteWise User Guide</i>.</p>
     #   @return [String]
     class AssetCompositeModel < Struct.new(
+      nil,
       :name,
       :description,
       :type,
@@ -228,6 +238,7 @@ module Aws::IoTSiteWise
     #   <p>The name of the path segment.</p>
     #   @return [String]
     class AssetCompositeModelPathSegment < Struct.new(
+      nil,
       :id,
       :name,
       keyword_init: true
@@ -271,6 +282,7 @@ module Aws::IoTSiteWise
     #   <p>The path that includes all the components of the asset model for the asset.</p>
     #   @return [Array<Types::AssetCompositeModelPathSegment>]
     class AssetCompositeModelSummary < Struct.new(
+      nil,
       :id,
       :external_id,
       :name,
@@ -293,6 +305,7 @@ module Aws::IoTSiteWise
     #   <p>The error message.</p>
     #   @return [String]
     class AssetErrorDetails < Struct.new(
+      nil,
       :asset_id,
       :code,
       :message,
@@ -315,6 +328,7 @@ module Aws::IoTSiteWise
     #         API operation.</p>
     #   @return [String]
     class AssetHierarchy < Struct.new(
+      nil,
       :id,
       :external_id,
       :name,
@@ -332,6 +346,7 @@ module Aws::IoTSiteWise
     #   <p>The ID of the child asset in this asset relationship.</p>
     #   @return [String]
     class AssetHierarchyInfo < Struct.new(
+      nil,
       :parent_asset_id,
       :child_asset_id,
       keyword_init: true
@@ -347,6 +362,7 @@ module Aws::IoTSiteWise
     #         specific asset model are matched.</p>
     #   @return [String]
     class AssetModelBindingValueFilter < Struct.new(
+      nil,
       :asset_model_id,
       keyword_init: true
     )
@@ -375,6 +391,7 @@ module Aws::IoTSiteWise
     #   <p>The external ID of the asset model composite model. For more information, see <a href="https://docs.aws.amazon.com/iot-sitewise/latest/userguide/object-ids.html#external-ids">Using external IDs</a> in the <i>IoT SiteWise User Guide</i>.</p>
     #   @return [String]
     class AssetModelCompositeModel < Struct.new(
+      nil,
       :name,
       :description,
       :type,
@@ -411,6 +428,7 @@ module Aws::IoTSiteWise
     #   <p>The asset property definitions for this composite model.</p>
     #   @return [Array<Types::AssetModelPropertyDefinition>]
     class AssetModelCompositeModelDefinition < Struct.new(
+      nil,
       :id,
       :external_id,
       :name,
@@ -430,6 +448,7 @@ module Aws::IoTSiteWise
     #   <p>The name of the path segment.</p>
     #   @return [String]
     class AssetModelCompositeModelPathSegment < Struct.new(
+      nil,
       :id,
       :name,
       keyword_init: true
@@ -457,6 +476,7 @@ module Aws::IoTSiteWise
     #   <p>The path that includes all the pieces that make up the composite model.</p>
     #   @return [Array<Types::AssetModelCompositeModelPathSegment>]
     class AssetModelCompositeModelSummary < Struct.new(
+      nil,
       :id,
       :external_id,
       :name,
@@ -505,6 +525,7 @@ module Aws::IoTSiteWise
     #       </p>
     #   @return [String]
     class AssetModelHierarchy < Struct.new(
+      nil,
       :id,
       :external_id,
       :name,
@@ -534,6 +555,7 @@ module Aws::IoTSiteWise
     #       For more information, see <a href="https://docs.aws.amazon.com/iot-sitewise/latest/userguide/object-ids.html#external-id-references">Referencing objects with external IDs</a> in the <i>IoT SiteWise User Guide</i>.</p>
     #   @return [String]
     class AssetModelHierarchyDefinition < Struct.new(
+      nil,
       :id,
       :external_id,
       :name,
@@ -589,6 +611,7 @@ module Aws::IoTSiteWise
     #   <p>The structured path to the property from the root of the asset model.</p>
     #   @return [Array<Types::AssetModelPropertyPathSegment>]
     class AssetModelProperty < Struct.new(
+      nil,
       :id,
       :external_id,
       :name,
@@ -610,6 +633,7 @@ module Aws::IoTSiteWise
     #   <p>The ID of the asset model property used in data binding value.</p>
     #   @return [String]
     class AssetModelPropertyBindingValue < Struct.new(
+      nil,
       :asset_model_id,
       :property_id,
       keyword_init: true
@@ -629,6 +653,7 @@ module Aws::IoTSiteWise
     #         this specific property of the specified asset model are matched.</p>
     #   @return [String]
     class AssetModelPropertyBindingValueFilter < Struct.new(
+      nil,
       :asset_model_id,
       :property_id,
       keyword_init: true
@@ -671,6 +696,7 @@ module Aws::IoTSiteWise
     #         type in a property definition.</p>
     #   @return [Types::PropertyType]
     class AssetModelPropertyDefinition < Struct.new(
+      nil,
       :id,
       :external_id,
       :name,
@@ -691,6 +717,7 @@ module Aws::IoTSiteWise
     #   <p>The name of the path segment.</p>
     #   @return [String]
     class AssetModelPropertyPathSegment < Struct.new(
+      nil,
       :id,
       :name,
       keyword_init: true
@@ -735,6 +762,7 @@ module Aws::IoTSiteWise
     #         interface.</p>
     #   @return [Array<Types::InterfaceSummary>]
     class AssetModelPropertySummary < Struct.new(
+      nil,
       :id,
       :external_id,
       :name,
@@ -759,6 +787,7 @@ module Aws::IoTSiteWise
     #   <p>Contains associated error information, if any.</p>
     #   @return [Types::ErrorDetails]
     class AssetModelStatus < Struct.new(
+      nil,
       :state,
       :error,
       keyword_init: true
@@ -813,6 +842,7 @@ module Aws::IoTSiteWise
     #   <p>The version number of the asset model.</p>
     #   @return [String]
     class AssetModelSummary < Struct.new(
+      nil,
       :id,
       :external_id,
       :arn,
@@ -861,6 +891,7 @@ module Aws::IoTSiteWise
     #   <p>The structured path to the property from the root of the asset.</p>
     #   @return [Array<Types::AssetPropertyPathSegment>]
     class AssetProperty < Struct.new(
+      nil,
       :id,
       :external_id,
       :name,
@@ -886,6 +917,7 @@ module Aws::IoTSiteWise
     #         used in the computation model.</p>
     #   @return [String]
     class AssetPropertyBindingValue < Struct.new(
+      nil,
       :asset_id,
       :property_id,
       keyword_init: true
@@ -905,6 +937,7 @@ module Aws::IoTSiteWise
     #         specific property of the specified asset are matched.</p>
     #   @return [String]
     class AssetPropertyBindingValueFilter < Struct.new(
+      nil,
       :asset_id,
       :property_id,
       keyword_init: true
@@ -920,6 +953,7 @@ module Aws::IoTSiteWise
     #   <p>The name of the path segment.</p>
     #   @return [String]
     class AssetPropertyPathSegment < Struct.new(
+      nil,
       :id,
       :name,
       keyword_init: true
@@ -954,6 +988,7 @@ module Aws::IoTSiteWise
     #   <p>The structured path to the property from the root of the asset.</p>
     #   @return [Array<Types::AssetPropertyPathSegment>]
     class AssetPropertySummary < Struct.new(
+      nil,
       :id,
       :external_id,
       :alias,
@@ -977,6 +1012,7 @@ module Aws::IoTSiteWise
     #   <p>The quality of the asset property value.</p>
     #   @return [String]
     class AssetPropertyValue < Struct.new(
+      nil,
       :value,
       :timestamp,
       :quality,
@@ -1004,6 +1040,7 @@ module Aws::IoTSiteWise
     #            </ul>
     #   @return [String]
     class AssetRelationshipSummary < Struct.new(
+      nil,
       :hierarchy_info,
       :relationship_type,
       keyword_init: true
@@ -1021,6 +1058,7 @@ module Aws::IoTSiteWise
     #   <p>Contains associated error information, if any.</p>
     #   @return [Types::ErrorDetails]
     class AssetStatus < Struct.new(
+      nil,
       :state,
       :error,
       keyword_init: true
@@ -1063,6 +1101,7 @@ module Aws::IoTSiteWise
     #   <p>A description for the asset.</p>
     #   @return [String]
     class AssetSummary < Struct.new(
+      nil,
       :id,
       :external_id,
       :arn,
@@ -1096,6 +1135,7 @@ module Aws::IoTSiteWise
     #   <p>A unique case-sensitive identifier that you can provide to ensure the idempotency of the request. Don't reuse this client token if a new idempotent request is required.</p>
     #   @return [String]
     class AssociateAssetsRequest < Struct.new(
+      nil,
       :asset_id,
       :hierarchy_id,
       :child_asset_id,
@@ -1120,6 +1160,7 @@ module Aws::IoTSiteWise
     #   <p>A unique case-sensitive identifier that you can provide to ensure the idempotency of the request. Don't reuse this client token if a new idempotent request is required.</p>
     #   @return [String]
     class AssociateTimeSeriesToAssetPropertyRequest < Struct.new(
+      nil,
       :alias,
       :asset_id,
       :property_id,
@@ -1164,6 +1205,7 @@ module Aws::IoTSiteWise
     #   <p>A description for the asset.</p>
     #   @return [String]
     class AssociatedAssetsSummary < Struct.new(
+      nil,
       :id,
       :external_id,
       :arn,
@@ -1188,6 +1230,7 @@ module Aws::IoTSiteWise
     #           <i>IoT SiteWise User Guide</i>.</p>
     #   @return [String]
     class Attribute < Struct.new(
+      nil,
       :default_value,
       keyword_init: true
     )
@@ -1204,6 +1247,7 @@ module Aws::IoTSiteWise
     #   <p>A unique case-sensitive identifier that you can provide to ensure the idempotency of the request. Don't reuse this client token if a new idempotent request is required.</p>
     #   @return [String]
     class BatchAssociateProjectAssetsRequest < Struct.new(
+      nil,
       :project_id,
       :asset_ids,
       :client_token,
@@ -1216,6 +1260,7 @@ module Aws::IoTSiteWise
     #   <p>A list of associated error information, if any.</p>
     #   @return [Array<Types::AssetErrorDetails>]
     class BatchAssociateProjectAssetsResponse < Struct.new(
+      nil,
       :errors,
       keyword_init: true
     )
@@ -1232,6 +1277,7 @@ module Aws::IoTSiteWise
     #   <p>A unique case-sensitive identifier that you can provide to ensure the idempotency of the request. Don't reuse this client token if a new idempotent request is required.</p>
     #   @return [String]
     class BatchDisassociateProjectAssetsRequest < Struct.new(
+      nil,
       :project_id,
       :asset_ids,
       :client_token,
@@ -1244,6 +1290,7 @@ module Aws::IoTSiteWise
     #   <p>A list of associated error information, if any.</p>
     #   @return [Array<Types::AssetErrorDetails>]
     class BatchDisassociateProjectAssetsResponse < Struct.new(
+      nil,
       :errors,
       keyword_init: true
     )
@@ -1298,6 +1345,7 @@ module Aws::IoTSiteWise
     #            </p>
     #   @return [String]
     class BatchGetAssetPropertyAggregatesEntry < Struct.new(
+      nil,
       :entry_id,
       :asset_id,
       :property_id,
@@ -1325,6 +1373,7 @@ module Aws::IoTSiteWise
     #   <p>The ID of the entry.</p>
     #   @return [String]
     class BatchGetAssetPropertyAggregatesErrorEntry < Struct.new(
+      nil,
       :error_code,
       :error_message,
       :entry_id,
@@ -1342,6 +1391,7 @@ module Aws::IoTSiteWise
     #   <p>The date the error occurred, in Unix epoch time.</p>
     #   @return [Time]
     class BatchGetAssetPropertyAggregatesErrorInfo < Struct.new(
+      nil,
       :error_code,
       :error_timestamp,
       keyword_init: true
@@ -1370,6 +1420,7 @@ module Aws::IoTSiteWise
     #            </ul>
     #   @return [Integer]
     class BatchGetAssetPropertyAggregatesRequest < Struct.new(
+      nil,
       :entries,
       :next_token,
       :max_results,
@@ -1395,6 +1446,7 @@ module Aws::IoTSiteWise
     #   <p>The token for the next set of results, or null if there are no additional results.</p>
     #   @return [String]
     class BatchGetAssetPropertyAggregatesResponse < Struct.new(
+      nil,
       :error_entries,
       :success_entries,
       :skipped_entries,
@@ -1415,6 +1467,7 @@ module Aws::IoTSiteWise
     #   <p>The error information, such as the error code and the timestamp.</p>
     #   @return [Types::BatchGetAssetPropertyAggregatesErrorInfo]
     class BatchGetAssetPropertyAggregatesSkippedEntry < Struct.new(
+      nil,
       :entry_id,
       :completion_status,
       :error_info,
@@ -1432,6 +1485,7 @@ module Aws::IoTSiteWise
     #         maximum).</p>
     #   @return [Array<Types::AggregatedValue>]
     class BatchGetAssetPropertyAggregatesSuccessEntry < Struct.new(
+      nil,
       :entry_id,
       :aggregated_values,
       keyword_init: true
@@ -1466,6 +1520,7 @@ module Aws::IoTSiteWise
     #           <i>IoT SiteWise User Guide</i>.</p>
     #   @return [String]
     class BatchGetAssetPropertyValueEntry < Struct.new(
+      nil,
       :entry_id,
       :asset_id,
       :property_id,
@@ -1487,6 +1542,7 @@ module Aws::IoTSiteWise
     #   <p>The ID of the entry.</p>
     #   @return [String]
     class BatchGetAssetPropertyValueErrorEntry < Struct.new(
+      nil,
       :error_code,
       :error_message,
       :entry_id,
@@ -1503,6 +1559,7 @@ module Aws::IoTSiteWise
     #   <p>The date the error occurred, in Unix epoch time.</p>
     #   @return [Time]
     class BatchGetAssetPropertyValueErrorInfo < Struct.new(
+      nil,
       :error_code,
       :error_timestamp,
       keyword_init: true
@@ -1552,6 +1609,7 @@ module Aws::IoTSiteWise
     #            </p>
     #   @return [String]
     class BatchGetAssetPropertyValueHistoryEntry < Struct.new(
+      nil,
       :entry_id,
       :asset_id,
       :property_id,
@@ -1577,6 +1635,7 @@ module Aws::IoTSiteWise
     #   <p>The ID of the entry.</p>
     #   @return [String]
     class BatchGetAssetPropertyValueHistoryErrorEntry < Struct.new(
+      nil,
       :error_code,
       :error_message,
       :entry_id,
@@ -1593,6 +1652,7 @@ module Aws::IoTSiteWise
     #   <p>The date the error occurred, in Unix epoch time.</p>
     #   @return [Time]
     class BatchGetAssetPropertyValueHistoryErrorInfo < Struct.new(
+      nil,
       :error_code,
       :error_timestamp,
       keyword_init: true
@@ -1621,6 +1681,7 @@ module Aws::IoTSiteWise
     #            </ul>
     #   @return [Integer]
     class BatchGetAssetPropertyValueHistoryRequest < Struct.new(
+      nil,
       :entries,
       :next_token,
       :max_results,
@@ -1646,6 +1707,7 @@ module Aws::IoTSiteWise
     #   <p>The token for the next set of results, or null if there are no additional results.</p>
     #   @return [String]
     class BatchGetAssetPropertyValueHistoryResponse < Struct.new(
+      nil,
       :error_entries,
       :success_entries,
       :skipped_entries,
@@ -1666,6 +1728,7 @@ module Aws::IoTSiteWise
     #   <p>The error information, such as the error code and the timestamp.</p>
     #   @return [Types::BatchGetAssetPropertyValueHistoryErrorInfo]
     class BatchGetAssetPropertyValueHistorySkippedEntry < Struct.new(
+      nil,
       :entry_id,
       :completion_status,
       :error_info,
@@ -1682,6 +1745,7 @@ module Aws::IoTSiteWise
     #   <p>The requested historical values for the specified asset property.</p>
     #   @return [Array<Types::AssetPropertyValue>]
     class BatchGetAssetPropertyValueHistorySuccessEntry < Struct.new(
+      nil,
       :entry_id,
       :asset_property_value_history,
       keyword_init: true
@@ -1697,6 +1761,7 @@ module Aws::IoTSiteWise
     #   <p>The token to be used for the next set of paginated results.</p>
     #   @return [String]
     class BatchGetAssetPropertyValueRequest < Struct.new(
+      nil,
       :entries,
       :next_token,
       keyword_init: true
@@ -1721,6 +1786,7 @@ module Aws::IoTSiteWise
     #   <p>The token for the next set of results, or null if there are no additional results.</p>
     #   @return [String]
     class BatchGetAssetPropertyValueResponse < Struct.new(
+      nil,
       :error_entries,
       :success_entries,
       :skipped_entries,
@@ -1741,6 +1807,7 @@ module Aws::IoTSiteWise
     #   <p>The error information, such as the error code and the timestamp.</p>
     #   @return [Types::BatchGetAssetPropertyValueErrorInfo]
     class BatchGetAssetPropertyValueSkippedEntry < Struct.new(
+      nil,
       :entry_id,
       :completion_status,
       :error_info,
@@ -1757,6 +1824,7 @@ module Aws::IoTSiteWise
     #   <p>Contains asset property value information.</p>
     #   @return [Types::AssetPropertyValue]
     class BatchGetAssetPropertyValueSuccessEntry < Struct.new(
+      nil,
       :entry_id,
       :asset_property_value,
       keyword_init: true
@@ -1775,6 +1843,7 @@ module Aws::IoTSiteWise
     #   <p>A list of timestamps for each  error, if any.</p>
     #   @return [Array<Types::TimeInNanos>]
     class BatchPutAssetPropertyError < Struct.new(
+      nil,
       :error_code,
       :error_message,
       :timestamps,
@@ -1792,6 +1861,7 @@ module Aws::IoTSiteWise
     #   <p>The list of update property value errors.</p>
     #   @return [Array<Types::BatchPutAssetPropertyError>]
     class BatchPutAssetPropertyErrorEntry < Struct.new(
+      nil,
       :entry_id,
       :errors,
       keyword_init: true
@@ -1809,6 +1879,7 @@ module Aws::IoTSiteWise
     #         10 entries per request.</p>
     #   @return [Array<Types::PutAssetPropertyValueEntry>]
     class BatchPutAssetPropertyValueRequest < Struct.new(
+      nil,
       :enable_partial_entry_processing,
       :entries,
       keyword_init: true
@@ -1821,6 +1892,7 @@ module Aws::IoTSiteWise
     #         contains the <code>entryId</code> of the entry that failed.</p>
     #   @return [Array<Types::BatchPutAssetPropertyErrorEntry>]
     class BatchPutAssetPropertyValueResponse < Struct.new(
+      nil,
       :error_entries,
       keyword_init: true
     )
@@ -1836,6 +1908,7 @@ module Aws::IoTSiteWise
     #   <p>Contains the cited text from the data source.</p>
     #   @return [Types::Content]
     class Citation < Struct.new(
+      nil,
       :reference,
       :content,
       keyword_init: true
@@ -1851,6 +1924,7 @@ module Aws::IoTSiteWise
     #   <p>The type of the column description.</p>
     #   @return [Types::ColumnType]
     class ColumnInfo < Struct.new(
+      nil,
       :name,
       :type,
       keyword_init: true
@@ -1863,6 +1937,7 @@ module Aws::IoTSiteWise
     #   <p>The allowed data types that the column has as it's value.</p>
     #   @return [String]
     class ColumnType < Struct.new(
+      nil,
       :scalar_type,
       keyword_init: true
     )
@@ -1886,6 +1961,7 @@ module Aws::IoTSiteWise
     #   <p>The external ID of the composite model that contains the property. For more information, see <a href="https://docs.aws.amazon.com/iot-sitewise/latest/userguide/object-ids.html#external-ids">Using external IDs</a> in the <i>IoT SiteWise User Guide</i>.</p>
     #   @return [String]
     class CompositeModelProperty < Struct.new(
+      nil,
       :name,
       :type,
       :asset_property,
@@ -1904,6 +1980,7 @@ module Aws::IoTSiteWise
     #   <p>An array detailing the composition relationship for this composite model.</p>
     #   @return [Array<Types::CompositionRelationshipItem>]
     class CompositionDetails < Struct.new(
+      nil,
       :composition_relationship,
       keyword_init: true
     )
@@ -1916,6 +1993,7 @@ module Aws::IoTSiteWise
     #   <p>The ID of the component.</p>
     #   @return [String]
     class CompositionRelationshipItem < Struct.new(
+      nil,
       :id,
       keyword_init: true
     )
@@ -1934,6 +2012,7 @@ module Aws::IoTSiteWise
     #           <code> AWS/L4E_ANOMALY</code>.</p>
     #   @return [String]
     class CompositionRelationshipSummary < Struct.new(
+      nil,
       :asset_model_id,
       :asset_model_composite_model_id,
       :asset_model_composite_model_type,
@@ -1952,6 +2031,7 @@ module Aws::IoTSiteWise
     #           <code>${VariableName}</code>.</p>
     #   @return [String]
     class ComputationModelAnomalyDetectionConfiguration < Struct.new(
+      nil,
       :input_properties,
       :result_property,
       keyword_init: true
@@ -1964,6 +2044,7 @@ module Aws::IoTSiteWise
     #   <p>The configuration for the anomaly detection type of computation model.</p>
     #   @return [Types::ComputationModelAnomalyDetectionConfiguration]
     class ComputationModelConfiguration < Struct.new(
+      nil,
       :anomaly_detection,
       keyword_init: true
     )
@@ -1982,6 +2063,7 @@ module Aws::IoTSiteWise
     #         binding values used by the computation models.</p>
     #   @return [Types::MatchedDataBinding]
     class ComputationModelDataBindingUsageSummary < Struct.new(
+      nil,
       :computation_model_ids,
       :matched_data_binding,
       keyword_init: true
@@ -2001,6 +2083,7 @@ module Aws::IoTSiteWise
     #   <p>Specifies a list of data binding value.</p>
     #   @return [Array<Types::ComputationModelDataBindingValue>]
     class ComputationModelDataBindingValue < Struct.new(
+      nil,
       :asset_model_property,
       :asset_property,
       :list,
@@ -2014,6 +2097,7 @@ module Aws::IoTSiteWise
     #   <p>The detailed resource this execution summary resolves to.</p>
     #   @return [Types::ResolveTo]
     class ComputationModelResolveToResourceSummary < Struct.new(
+      nil,
       :resolve_to,
       keyword_init: true
     )
@@ -2028,6 +2112,7 @@ module Aws::IoTSiteWise
     #   <p>Contains the details of an IoT SiteWise error.</p>
     #   @return [Types::ErrorDetails]
     class ComputationModelStatus < Struct.new(
+      nil,
       :state,
       :error,
       keyword_init: true
@@ -2067,6 +2152,7 @@ module Aws::IoTSiteWise
     #   <p>The version of the computation model.</p>
     #   @return [String]
     class ComputationModelSummary < Struct.new(
+      nil,
       :id,
       :arn,
       :name,
@@ -2089,6 +2175,7 @@ module Aws::IoTSiteWise
     #   <p>The error message.</p>
     #   @return [String]
     class ConfigurationErrorDetails < Struct.new(
+      nil,
       :code,
       :message,
       keyword_init: true
@@ -2104,6 +2191,7 @@ module Aws::IoTSiteWise
     #   <p>Contains associated error information, if any.</p>
     #   @return [Types::ConfigurationErrorDetails]
     class ConfigurationStatus < Struct.new(
+      nil,
       :state,
       :error,
       keyword_init: true
@@ -2122,6 +2210,7 @@ module Aws::IoTSiteWise
     #   <p>The ARN of the resource that conflicts with this operation.</p>
     #   @return [String]
     class ConflictingOperationException < Struct.new(
+      nil,
       :message,
       :resource_id,
       :resource_arn,
@@ -2135,6 +2224,7 @@ module Aws::IoTSiteWise
     #   <p>The cited text from the data source.</p>
     #   @return [String]
     class Content < Struct.new(
+      nil,
       :text,
       keyword_init: true
     )
@@ -2159,6 +2249,7 @@ module Aws::IoTSiteWise
     #           IoT SiteWise resources</a> in the <i>IoT SiteWise User Guide</i>.</p>
     #   @return [Hash<String, String>]
     class CreateAccessPolicyRequest < Struct.new(
+      nil,
       :access_policy_identity,
       :access_policy_resource,
       :access_policy_permission,
@@ -2179,6 +2270,7 @@ module Aws::IoTSiteWise
     #            </p>
     #   @return [String]
     class CreateAccessPolicyResponse < Struct.new(
+      nil,
       :access_policy_id,
       :access_policy_arn,
       keyword_init: true
@@ -2240,6 +2332,7 @@ module Aws::IoTSiteWise
     #     conjunction with <code>If-Match</code> or <code>If-None-Match</code> headers to determine the target ETag for the create operation.</p>
     #   @return [String]
     class CreateAssetModelCompositeModelRequest < Struct.new(
+      nil,
       :asset_model_id,
       :asset_model_composite_model_external_id,
       :parent_asset_model_composite_model_id,
@@ -2270,6 +2363,7 @@ module Aws::IoTSiteWise
     #           states</a> in the <i>IoT SiteWise User Guide</i>.</p>
     #   @return [Types::AssetModelStatus]
     class CreateAssetModelCompositeModelResponse < Struct.new(
+      nil,
       :asset_model_composite_model_id,
       :asset_model_composite_model_path,
       :asset_model_status,
@@ -2340,6 +2434,7 @@ module Aws::IoTSiteWise
     #           resources</a> in the <i>IoT SiteWise User Guide</i>.</p>
     #   @return [Hash<String, String>]
     class CreateAssetModelRequest < Struct.new(
+      nil,
       :asset_model_name,
       :asset_model_type,
       :asset_model_id,
@@ -2369,6 +2464,7 @@ module Aws::IoTSiteWise
     #         successfully calling this operation) and any error message.</p>
     #   @return [Types::AssetModelStatus]
     class CreateAssetModelResponse < Struct.new(
+      nil,
       :asset_model_id,
       :asset_model_arn,
       :asset_model_status,
@@ -2404,6 +2500,7 @@ module Aws::IoTSiteWise
     #   <p>A description for the asset.</p>
     #   @return [String]
     class CreateAssetRequest < Struct.new(
+      nil,
       :asset_name,
       :asset_model_id,
       :asset_id,
@@ -2431,6 +2528,7 @@ module Aws::IoTSiteWise
     #         calling this operation) and any error message.</p>
     #   @return [Types::AssetStatus]
     class CreateAssetResponse < Struct.new(
+      nil,
       :asset_id,
       :asset_arn,
       :asset_status,
@@ -2462,6 +2560,7 @@ module Aws::IoTSiteWise
     #   <p>If set to true, your data files is deleted from S3, after ingestion into IoT SiteWise storage.</p>
     #   @return [Boolean]
     class CreateBulkImportJobRequest < Struct.new(
+      nil,
       :job_name,
       :job_role_arn,
       :files,
@@ -2512,6 +2611,7 @@ module Aws::IoTSiteWise
     #            </ul>
     #   @return [String]
     class CreateBulkImportJobResponse < Struct.new(
+      nil,
       :job_id,
       :job_name,
       :job_status,
@@ -2542,6 +2642,7 @@ module Aws::IoTSiteWise
     #           resources</a> in the <i>IoT SiteWise User Guide</i>.</p>
     #   @return [Hash<String, String>]
     class CreateComputationModelRequest < Struct.new(
+      nil,
       :computation_model_name,
       :computation_model_description,
       :computation_model_configuration,
@@ -2567,6 +2668,7 @@ module Aws::IoTSiteWise
     #         calling this operation) and any error messages.</p>
     #   @return [Types::ComputationModelStatus]
     class CreateComputationModelResponse < Struct.new(
+      nil,
       :computation_model_id,
       :computation_model_arn,
       :computation_model_status,
@@ -2608,6 +2710,7 @@ module Aws::IoTSiteWise
     #           resources</a> in the <i>IoT SiteWise User Guide</i>.</p>
     #   @return [Hash<String, String>]
     class CreateDashboardRequest < Struct.new(
+      nil,
       :project_id,
       :dashboard_name,
       :dashboard_description,
@@ -2629,6 +2732,7 @@ module Aws::IoTSiteWise
     #            </p>
     #   @return [String]
     class CreateDashboardResponse < Struct.new(
+      nil,
       :dashboard_id,
       :dashboard_arn,
       keyword_init: true
@@ -2657,6 +2761,7 @@ module Aws::IoTSiteWise
     #           IoT SiteWise resources</a> in the <i>IoT SiteWise User Guide</i>.</p>
     #   @return [Hash<String, String>]
     class CreateDatasetRequest < Struct.new(
+      nil,
       :dataset_id,
       :dataset_name,
       :dataset_description,
@@ -2681,6 +2786,7 @@ module Aws::IoTSiteWise
     #     <code>ACTIVE</code> when ready to use.</p>
     #   @return [Types::DatasetStatus]
     class CreateDatasetResponse < Struct.new(
+      nil,
       :dataset_id,
       :dataset_arn,
       :dataset_status,
@@ -2714,6 +2820,7 @@ module Aws::IoTSiteWise
     #           resources</a> in the <i>IoT SiteWise User Guide</i>.</p>
     #   @return [Hash<String, String>]
     class CreateGatewayRequest < Struct.new(
+      nil,
       :gateway_name,
       :gateway_platform,
       :gateway_version,
@@ -2733,6 +2840,7 @@ module Aws::IoTSiteWise
     #            </p>
     #   @return [String]
     class CreateGatewayResponse < Struct.new(
+      nil,
       :gateway_id,
       :gateway_arn,
       keyword_init: true
@@ -2808,6 +2916,7 @@ module Aws::IoTSiteWise
     #   <p>The configuration entry associated with the specific portal type. The value for IoT SiteWise Monitor (Classic) is <code>SITEWISE_PORTAL_V1</code>. The value for IoT SiteWise Monitor (AI-aware) is <code>SITEWISE_PORTAL_V2</code>.</p>
     #   @return [Hash<String, Types::PortalTypeEntry>]
     class CreatePortalRequest < Struct.new(
+      nil,
       :portal_name,
       :portal_description,
       :portal_contact_email,
@@ -2847,6 +2956,7 @@ module Aws::IoTSiteWise
     #   <p>The associated IAM Identity Center application ID, if the portal uses IAM Identity Center.</p>
     #   @return [String]
     class CreatePortalResponse < Struct.new(
+      nil,
       :portal_id,
       :portal_arn,
       :portal_start_url,
@@ -2875,6 +2985,7 @@ module Aws::IoTSiteWise
     #           resources</a> in the <i>IoT SiteWise User Guide</i>.</p>
     #   @return [Hash<String, String>]
     class CreateProjectRequest < Struct.new(
+      nil,
       :portal_id,
       :project_name,
       :project_description,
@@ -2895,6 +3006,7 @@ module Aws::IoTSiteWise
     #            </p>
     #   @return [String]
     class CreateProjectResponse < Struct.new(
+      nil,
       :project_id,
       :project_arn,
       keyword_init: true
@@ -2907,6 +3019,7 @@ module Aws::IoTSiteWise
     #   <p>The column names specified in the .csv file.</p>
     #   @return [Array<String>]
     class Csv < Struct.new(
+      nil,
       :column_names,
       keyword_init: true
     )
@@ -2923,6 +3036,7 @@ module Aws::IoTSiteWise
     #   <p>The <a href="https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html">ARN</a> of the Identity and Access Management role that allows IoT SiteWise to send data to Amazon S3.</p>
     #   @return [String]
     class CustomerManagedS3Storage < Struct.new(
+      nil,
       :s3_resource_arn,
       :role_arn,
       keyword_init: true
@@ -2947,6 +3061,7 @@ module Aws::IoTSiteWise
     #   <p>The date the dashboard was last updated, in Unix epoch time.</p>
     #   @return [Time]
     class DashboardSummary < Struct.new(
+      nil,
       :id,
       :name,
       :description,
@@ -2966,6 +3081,7 @@ module Aws::IoTSiteWise
     #   <p>The asset property value used in the data binding.</p>
     #   @return [Types::AssetPropertyBindingValue]
     class DataBindingValue < Struct.new(
+      nil,
       :asset_model_property,
       :asset_property,
       keyword_init: true
@@ -2993,6 +3109,7 @@ module Aws::IoTSiteWise
     #         to list all data bindings referencing a particular property of an asset model.</p>
     #   @return [Types::AssetModelPropertyBindingValueFilter]
     class DataBindingValueFilter < Struct.new(
+      nil,
       :asset,
       :asset_model,
       :asset_property,
@@ -3011,6 +3128,7 @@ module Aws::IoTSiteWise
     #   <p>The data source for the dataset.</p>
     #   @return [Types::Source]
     class DataSetReference < Struct.new(
+      nil,
       :dataset_arn,
       :source,
       keyword_init: true
@@ -3029,6 +3147,7 @@ module Aws::IoTSiteWise
     #   <p>The details of the dataset source associated with the dataset.</p>
     #   @return [Types::SourceDetail]
     class DatasetSource < Struct.new(
+      nil,
       :source_type,
       :source_format,
       :source_detail,
@@ -3046,6 +3165,7 @@ module Aws::IoTSiteWise
     #   <p>Contains the details of an IoT SiteWise error.</p>
     #   @return [Types::ErrorDetails]
     class DatasetStatus < Struct.new(
+      nil,
       :state,
       :error,
       keyword_init: true
@@ -3078,6 +3198,7 @@ module Aws::IoTSiteWise
     #     <code>ACTIVE</code> when ready to use.</p>
     #   @return [Types::DatasetStatus]
     class DatasetSummary < Struct.new(
+      nil,
       :id,
       :arn,
       :name,
@@ -3105,6 +3226,7 @@ module Aws::IoTSiteWise
     #   <p>Indicates if the data point is null.</p>
     #   @return [Boolean]
     class Datum < Struct.new(
+      nil,
       :scalar_value,
       :array_value,
       :row_value,
@@ -3121,6 +3243,7 @@ module Aws::IoTSiteWise
     #   <p>A unique case-sensitive identifier that you can provide to ensure the idempotency of the request. Don't reuse this client token if a new idempotent request is required.</p>
     #   @return [String]
     class DeleteAccessPolicyRequest < Struct.new(
+      nil,
       :access_policy_id,
       :client_token,
       keyword_init: true
@@ -3129,6 +3252,7 @@ module Aws::IoTSiteWise
     end
 
     class DeleteAccessPolicyResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -3158,6 +3282,7 @@ module Aws::IoTSiteWise
     #     conjunction with <code>If-Match</code> or <code>If-None-Match</code> headers to determine the target ETag for the delete operation.</p>
     #   @return [String]
     class DeleteAssetModelCompositeModelRequest < Struct.new(
+      nil,
       :asset_model_id,
       :asset_model_composite_model_id,
       :client_token,
@@ -3174,6 +3299,7 @@ module Aws::IoTSiteWise
     #           states</a> in the <i>IoT SiteWise User Guide</i>.</p>
     #   @return [Types::AssetModelStatus]
     class DeleteAssetModelCompositeModelResponse < Struct.new(
+      nil,
       :asset_model_status,
       keyword_init: true
     )
@@ -3193,6 +3319,7 @@ module Aws::IoTSiteWise
     #         request. Don't reuse this client token if a new idempotent request is required.</p>
     #   @return [String]
     class DeleteAssetModelInterfaceRelationshipRequest < Struct.new(
+      nil,
       :asset_model_id,
       :interface_asset_model_id,
       :client_token,
@@ -3217,6 +3344,7 @@ module Aws::IoTSiteWise
     #           states</a> in the <i>IoT SiteWise User Guide</i>.</p>
     #   @return [Types::AssetModelStatus]
     class DeleteAssetModelInterfaceRelationshipResponse < Struct.new(
+      nil,
       :asset_model_id,
       :interface_asset_model_id,
       :asset_model_arn,
@@ -3248,6 +3376,7 @@ module Aws::IoTSiteWise
     #     conjunction with <code>If-Match</code> or <code>If-None-Match</code> headers to determine the target ETag for the delete operation.</p>
     #   @return [String]
     class DeleteAssetModelRequest < Struct.new(
+      nil,
       :asset_model_id,
       :client_token,
       :if_match,
@@ -3263,6 +3392,7 @@ module Aws::IoTSiteWise
     #         successfully calling this operation) and any error message.</p>
     #   @return [Types::AssetModelStatus]
     class DeleteAssetModelResponse < Struct.new(
+      nil,
       :asset_model_status,
       keyword_init: true
     )
@@ -3277,6 +3407,7 @@ module Aws::IoTSiteWise
     #   <p>A unique case-sensitive identifier that you can provide to ensure the idempotency of the request. Don't reuse this client token if a new idempotent request is required.</p>
     #   @return [String]
     class DeleteAssetRequest < Struct.new(
+      nil,
       :asset_id,
       :client_token,
       keyword_init: true
@@ -3289,6 +3420,7 @@ module Aws::IoTSiteWise
     #         calling this operation) and any error message.</p>
     #   @return [Types::AssetStatus]
     class DeleteAssetResponse < Struct.new(
+      nil,
       :asset_status,
       keyword_init: true
     )
@@ -3302,6 +3434,7 @@ module Aws::IoTSiteWise
     #   <p>A unique case-sensitive identifier that you can provide to ensure the idempotency of the request. Don't reuse this client token if a new idempotent request is required.</p>
     #   @return [String]
     class DeleteComputationModelRequest < Struct.new(
+      nil,
       :computation_model_id,
       :client_token,
       keyword_init: true
@@ -3314,6 +3447,7 @@ module Aws::IoTSiteWise
     #         calling this operation) and any error messages.</p>
     #   @return [Types::ComputationModelStatus]
     class DeleteComputationModelResponse < Struct.new(
+      nil,
       :computation_model_status,
       keyword_init: true
     )
@@ -3327,6 +3461,7 @@ module Aws::IoTSiteWise
     #   <p>A unique case-sensitive identifier that you can provide to ensure the idempotency of the request. Don't reuse this client token if a new idempotent request is required.</p>
     #   @return [String]
     class DeleteDashboardRequest < Struct.new(
+      nil,
       :dashboard_id,
       :client_token,
       keyword_init: true
@@ -3335,6 +3470,7 @@ module Aws::IoTSiteWise
     end
 
     class DeleteDashboardResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -3347,6 +3483,7 @@ module Aws::IoTSiteWise
     #   <p>A unique case-sensitive identifier that you can provide to ensure the idempotency of the request. Don't reuse this client token if a new idempotent request is required.</p>
     #   @return [String]
     class DeleteDatasetRequest < Struct.new(
+      nil,
       :dataset_id,
       :client_token,
       keyword_init: true
@@ -3359,6 +3496,7 @@ module Aws::IoTSiteWise
     #     State is <code>DELETING</code> after a successfull call to this API, and any associated error message.</p>
     #   @return [Types::DatasetStatus]
     class DeleteDatasetResponse < Struct.new(
+      nil,
       :dataset_status,
       keyword_init: true
     )
@@ -3369,6 +3507,7 @@ module Aws::IoTSiteWise
     #   <p>The ID of the gateway to delete.</p>
     #   @return [String]
     class DeleteGatewayRequest < Struct.new(
+      nil,
       :gateway_id,
       keyword_init: true
     )
@@ -3382,6 +3521,7 @@ module Aws::IoTSiteWise
     #   <p>A unique case-sensitive identifier that you can provide to ensure the idempotency of the request. Don't reuse this client token if a new idempotent request is required.</p>
     #   @return [String]
     class DeletePortalRequest < Struct.new(
+      nil,
       :portal_id,
       :client_token,
       keyword_init: true
@@ -3394,6 +3534,7 @@ module Aws::IoTSiteWise
     #         calling this operation) and any error message.</p>
     #   @return [Types::PortalStatus]
     class DeletePortalResponse < Struct.new(
+      nil,
       :portal_status,
       keyword_init: true
     )
@@ -3407,6 +3548,7 @@ module Aws::IoTSiteWise
     #   <p>A unique case-sensitive identifier that you can provide to ensure the idempotency of the request. Don't reuse this client token if a new idempotent request is required.</p>
     #   @return [String]
     class DeleteProjectRequest < Struct.new(
+      nil,
       :project_id,
       :client_token,
       keyword_init: true
@@ -3415,6 +3557,7 @@ module Aws::IoTSiteWise
     end
 
     class DeleteProjectResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -3435,6 +3578,7 @@ module Aws::IoTSiteWise
     #   <p>A unique case-sensitive identifier that you can provide to ensure the idempotency of the request. Don't reuse this client token if a new idempotent request is required.</p>
     #   @return [String]
     class DeleteTimeSeriesRequest < Struct.new(
+      nil,
       :alias,
       :asset_id,
       :property_id,
@@ -3448,6 +3592,7 @@ module Aws::IoTSiteWise
     #   <p>The ID of the access policy.</p>
     #   @return [String]
     class DescribeAccessPolicyRequest < Struct.new(
+      nil,
       :access_policy_id,
       keyword_init: true
     )
@@ -3482,6 +3627,7 @@ module Aws::IoTSiteWise
     #   <p>The date the access policy was last updated, in Unix epoch time.</p>
     #   @return [Time]
     class DescribeAccessPolicyResponse < Struct.new(
+      nil,
       :access_policy_id,
       :access_policy_arn,
       :access_policy_identity,
@@ -3498,6 +3644,7 @@ module Aws::IoTSiteWise
     #   <p>The ID of the action.</p>
     #   @return [String]
     class DescribeActionRequest < Struct.new(
+      nil,
       :action_id,
       keyword_init: true
     )
@@ -3523,6 +3670,7 @@ module Aws::IoTSiteWise
     #   <p>The detailed resource this action resolves to.</p>
     #   @return [Types::ResolveTo]
     class DescribeActionResponse < Struct.new(
+      nil,
       :action_id,
       :target_resource,
       :action_definition_id,
@@ -3543,6 +3691,7 @@ module Aws::IoTSiteWise
     #       For more information, see <a href="https://docs.aws.amazon.com/iot-sitewise/latest/userguide/object-ids.html#external-id-references">Referencing objects with external IDs</a> in the <i>IoT SiteWise User Guide</i>.</p>
     #   @return [String]
     class DescribeAssetCompositeModelRequest < Struct.new(
+      nil,
       :asset_id,
       :asset_composite_model_id,
       keyword_init: true
@@ -3587,6 +3736,7 @@ module Aws::IoTSiteWise
     #   <p>The available actions for a composite model on this asset.</p>
     #   @return [Array<Types::ActionDefinition>]
     class DescribeAssetCompositeModelResponse < Struct.new(
+      nil,
       :asset_id,
       :asset_composite_model_id,
       :asset_composite_model_external_id,
@@ -3616,6 +3766,7 @@ module Aws::IoTSiteWise
     #             Asset model versions</a> in the <i>IoT SiteWise User Guide</i>.</p>
     #   @return [String]
     class DescribeAssetModelCompositeModelRequest < Struct.new(
+      nil,
       :asset_model_id,
       :asset_model_composite_model_id,
       :asset_model_version,
@@ -3663,6 +3814,7 @@ module Aws::IoTSiteWise
     #   <p>The available actions for a composite model on this asset model.</p>
     #   @return [Array<Types::ActionDefinition>]
     class DescribeAssetModelCompositeModelResponse < Struct.new(
+      nil,
       :asset_model_id,
       :asset_model_composite_model_id,
       :asset_model_composite_model_external_id,
@@ -3688,6 +3840,7 @@ module Aws::IoTSiteWise
     #         else externalId: followed by the external ID.</p>
     #   @return [String]
     class DescribeAssetModelInterfaceRelationshipRequest < Struct.new(
+      nil,
       :asset_model_id,
       :interface_asset_model_id,
       keyword_init: true
@@ -3710,6 +3863,7 @@ module Aws::IoTSiteWise
     #         the interface is applied.</p>
     #   @return [Array<Types::HierarchyMapping>]
     class DescribeAssetModelInterfaceRelationshipResponse < Struct.new(
+      nil,
       :asset_model_id,
       :interface_asset_model_id,
       :property_mappings,
@@ -3732,6 +3886,7 @@ module Aws::IoTSiteWise
     #             Asset model versions</a> in the <i>IoT SiteWise User Guide</i>.</p>
     #   @return [String]
     class DescribeAssetModelRequest < Struct.new(
+      nil,
       :asset_model_id,
       :exclude_properties,
       :asset_model_version,
@@ -3818,6 +3973,7 @@ module Aws::IoTSiteWise
     #           model writes</a> in the <i>IoT SiteWise User Guide</i>.</p>
     #   @return [String]
     class DescribeAssetModelResponse < Struct.new(
+      nil,
       :asset_model_id,
       :asset_model_external_id,
       :asset_model_arn,
@@ -3848,6 +4004,7 @@ module Aws::IoTSiteWise
     #       For more information, see <a href="https://docs.aws.amazon.com/iot-sitewise/latest/userguide/object-ids.html#external-id-references">Referencing objects with external IDs</a> in the <i>IoT SiteWise User Guide</i>.</p>
     #   @return [String]
     class DescribeAssetPropertyRequest < Struct.new(
+      nil,
       :asset_id,
       :property_id,
       keyword_init: true
@@ -3878,6 +4035,7 @@ module Aws::IoTSiteWise
     #         composite model.</p>
     #   @return [Types::CompositeModelProperty]
     class DescribeAssetPropertyResponse < Struct.new(
+      nil,
       :asset_id,
       :asset_external_id,
       :asset_name,
@@ -3897,6 +4055,7 @@ module Aws::IoTSiteWise
     #   <p> Whether or not to exclude asset properties from the response. </p>
     #   @return [Boolean]
     class DescribeAssetRequest < Struct.new(
+      nil,
       :asset_id,
       :exclude_properties,
       keyword_init: true
@@ -3949,6 +4108,7 @@ module Aws::IoTSiteWise
     #   <p>The list of the immediate child custom composite model summaries for the asset.</p>
     #   @return [Array<Types::AssetCompositeModelSummary>]
     class DescribeAssetResponse < Struct.new(
+      nil,
       :asset_id,
       :asset_external_id,
       :asset_arn,
@@ -3971,6 +4131,7 @@ module Aws::IoTSiteWise
     #   <p>The ID of the job.</p>
     #   @return [String]
     class DescribeBulkImportJobRequest < Struct.new(
+      nil,
       :job_id,
       keyword_init: true
     )
@@ -4040,6 +4201,7 @@ module Aws::IoTSiteWise
     #   <p>If set to true, your data files is deleted from S3, after ingestion into IoT SiteWise storage.</p>
     #   @return [Boolean]
     class DescribeBulkImportJobResponse < Struct.new(
+      nil,
       :job_id,
       :job_name,
       :job_status,
@@ -4066,6 +4228,7 @@ module Aws::IoTSiteWise
     #   <p>The ID of the resolved resource.</p>
     #   @return [String]
     class DescribeComputationModelExecutionSummaryRequest < Struct.new(
+      nil,
       :computation_model_id,
       :resolve_to_resource_type,
       :resolve_to_resource_id,
@@ -4084,6 +4247,7 @@ module Aws::IoTSiteWise
     #   <p>Contains the execution summary of the computation model.</p>
     #   @return [Hash<String, String>]
     class DescribeComputationModelExecutionSummaryResponse < Struct.new(
+      nil,
       :computation_model_id,
       :resolve_to,
       :computation_model_execution_summary,
@@ -4099,6 +4263,7 @@ module Aws::IoTSiteWise
     #   <p>The version of the computation model.</p>
     #   @return [String]
     class DescribeComputationModelRequest < Struct.new(
+      nil,
       :computation_model_id,
       :computation_model_version,
       keyword_init: true
@@ -4145,6 +4310,7 @@ module Aws::IoTSiteWise
     #   <p>The available actions for this computation model.</p>
     #   @return [Array<Types::ActionDefinition>]
     class DescribeComputationModelResponse < Struct.new(
+      nil,
       :computation_model_id,
       :computation_model_arn,
       :computation_model_name,
@@ -4165,6 +4331,7 @@ module Aws::IoTSiteWise
     #   <p>The ID of the dashboard.</p>
     #   @return [String]
     class DescribeDashboardRequest < Struct.new(
+      nil,
       :dashboard_id,
       keyword_init: true
     )
@@ -4200,6 +4367,7 @@ module Aws::IoTSiteWise
     #   <p>The date the dashboard was last updated, in Unix epoch time.</p>
     #   @return [Time]
     class DescribeDashboardResponse < Struct.new(
+      nil,
       :dashboard_id,
       :dashboard_arn,
       :dashboard_name,
@@ -4217,6 +4385,7 @@ module Aws::IoTSiteWise
     #   <p>The ID of the dataset.</p>
     #   @return [String]
     class DescribeDatasetRequest < Struct.new(
+      nil,
       :dataset_id,
       keyword_init: true
     )
@@ -4254,6 +4423,7 @@ module Aws::IoTSiteWise
     #   <p>The version of the dataset.</p>
     #   @return [String]
     class DescribeDatasetResponse < Struct.new(
+      nil,
       :dataset_id,
       :dataset_arn,
       :dataset_name,
@@ -4269,6 +4439,7 @@ module Aws::IoTSiteWise
     end
 
     class DescribeDefaultEncryptionConfigurationRequest < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -4287,6 +4458,7 @@ module Aws::IoTSiteWise
     #           <code>ErrorDetails</code>.</p>
     #   @return [Types::ConfigurationStatus]
     class DescribeDefaultEncryptionConfigurationResponse < Struct.new(
+      nil,
       :encryption_type,
       :kms_key_arn,
       :configuration_status,
@@ -4299,6 +4471,7 @@ module Aws::IoTSiteWise
     #   <p>The ID of the execution.</p>
     #   @return [String]
     class DescribeExecutionRequest < Struct.new(
+      nil,
       :execution_id,
       keyword_init: true
     )
@@ -4353,6 +4526,7 @@ module Aws::IoTSiteWise
     #   <p>Entity version used for the execution.</p>
     #   @return [String]
     class DescribeExecutionResponse < Struct.new(
+      nil,
       :execution_id,
       :action_type,
       :target_resource,
@@ -4379,6 +4553,7 @@ module Aws::IoTSiteWise
     #           <code>iotsitewise:opcuacollector:3</code>.</p>
     #   @return [String]
     class DescribeGatewayCapabilityConfigurationRequest < Struct.new(
+      nil,
       :gateway_id,
       :capability_namespace,
       keyword_init: true
@@ -4422,6 +4597,7 @@ module Aws::IoTSiteWise
     #            </ul>
     #   @return [String]
     class DescribeGatewayCapabilityConfigurationResponse < Struct.new(
+      nil,
       :gateway_id,
       :capability_namespace,
       :capability_configuration,
@@ -4435,6 +4611,7 @@ module Aws::IoTSiteWise
     #   <p>The ID of the gateway device.</p>
     #   @return [String]
     class DescribeGatewayRequest < Struct.new(
+      nil,
       :gateway_id,
       keyword_init: true
     )
@@ -4472,6 +4649,7 @@ module Aws::IoTSiteWise
     #   <p>The date the gateway was last updated, in Unix epoch time.</p>
     #   @return [Time]
     class DescribeGatewayResponse < Struct.new(
+      nil,
       :gateway_id,
       :gateway_name,
       :gateway_arn,
@@ -4486,6 +4664,7 @@ module Aws::IoTSiteWise
     end
 
     class DescribeLoggingOptionsRequest < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -4495,6 +4674,7 @@ module Aws::IoTSiteWise
     #   <p>The current logging options.</p>
     #   @return [Types::LoggingOptions]
     class DescribeLoggingOptionsResponse < Struct.new(
+      nil,
       :logging_options,
       keyword_init: true
     )
@@ -4505,6 +4685,7 @@ module Aws::IoTSiteWise
     #   <p>The ID of the portal.</p>
     #   @return [String]
     class DescribePortalRequest < Struct.new(
+      nil,
       :portal_id,
       keyword_init: true
     )
@@ -4571,6 +4752,7 @@ module Aws::IoTSiteWise
     #   <p>The configuration entry associated with the specific portal type. The value for IoT SiteWise Monitor (Classic) is <code>SITEWISE_PORTAL_V1</code>. The value for IoT SiteWise Monitor (AI-aware) is <code>SITEWISE_PORTAL_V2</code>.</p>
     #   @return [Hash<String, Types::PortalTypeEntry>]
     class DescribePortalResponse < Struct.new(
+      nil,
       :portal_id,
       :portal_arn,
       :portal_name,
@@ -4597,6 +4779,7 @@ module Aws::IoTSiteWise
     #   <p>The ID of the project.</p>
     #   @return [String]
     class DescribeProjectRequest < Struct.new(
+      nil,
       :project_id,
       keyword_init: true
     )
@@ -4628,6 +4811,7 @@ module Aws::IoTSiteWise
     #   <p>The date the project was last updated, in Unix epoch time.</p>
     #   @return [Time]
     class DescribeProjectResponse < Struct.new(
+      nil,
       :project_id,
       :project_arn,
       :project_name,
@@ -4641,6 +4825,7 @@ module Aws::IoTSiteWise
     end
 
     class DescribeStorageConfigurationRequest < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -4704,6 +4889,7 @@ module Aws::IoTSiteWise
     #         allowed. The feature is disallowed if the value is <code>true</code>.</p>
     #   @return [Boolean]
     class DescribeStorageConfigurationResponse < Struct.new(
+      nil,
       :storage_type,
       :multi_layer_storage,
       :disassociated_data_storage,
@@ -4730,6 +4916,7 @@ module Aws::IoTSiteWise
     #       For more information, see <a href="https://docs.aws.amazon.com/iot-sitewise/latest/userguide/object-ids.html#external-id-references">Referencing objects with external IDs</a> in the <i>IoT SiteWise User Guide</i>.</p>
     #   @return [String]
     class DescribeTimeSeriesRequest < Struct.new(
+      nil,
       :alias,
       :asset_id,
       :property_id,
@@ -4774,6 +4961,7 @@ module Aws::IoTSiteWise
     #            </p>
     #   @return [String]
     class DescribeTimeSeriesResponse < Struct.new(
+      nil,
       :asset_id,
       :property_id,
       :alias,
@@ -4796,6 +4984,7 @@ module Aws::IoTSiteWise
     #   <p>The error message. </p>
     #   @return [String]
     class DetailedError < Struct.new(
+      nil,
       :code,
       :message,
       keyword_init: true
@@ -4823,6 +5012,7 @@ module Aws::IoTSiteWise
     #   <p>A unique case-sensitive identifier that you can provide to ensure the idempotency of the request. Don't reuse this client token if a new idempotent request is required.</p>
     #   @return [String]
     class DisassociateAssetsRequest < Struct.new(
+      nil,
       :asset_id,
       :hierarchy_id,
       :child_asset_id,
@@ -4847,6 +5037,7 @@ module Aws::IoTSiteWise
     #   <p>A unique case-sensitive identifier that you can provide to ensure the idempotency of the request. Don't reuse this client token if a new idempotent request is required.</p>
     #   @return [String]
     class DisassociateTimeSeriesFromAssetPropertyRequest < Struct.new(
+      nil,
       :alias,
       :asset_id,
       :property_id,
@@ -4867,6 +5058,7 @@ module Aws::IoTSiteWise
     #   <p> A list of detailed errors. </p>
     #   @return [Array<Types::DetailedError>]
     class ErrorDetails < Struct.new(
+      nil,
       :code,
       :message,
       :details,
@@ -4887,6 +5079,7 @@ module Aws::IoTSiteWise
     #           using prefixes</a> in the <i>Amazon Simple Storage Service User Guide</i>.</p>
     #   @return [String]
     class ErrorReportLocation < Struct.new(
+      nil,
       :bucket,
       :prefix,
       keyword_init: true
@@ -4910,6 +5103,7 @@ module Aws::IoTSiteWise
     #   <p>The detailed resource this action resolves to.</p>
     #   @return [Types::ResolveTo]
     class ExecuteActionRequest < Struct.new(
+      nil,
       :target_resource,
       :action_definition_id,
       :action_payload,
@@ -4924,6 +5118,7 @@ module Aws::IoTSiteWise
     #   <p>The ID of the action.</p>
     #   @return [String]
     class ExecuteActionResponse < Struct.new(
+      nil,
       :action_id,
       keyword_init: true
     )
@@ -4954,6 +5149,7 @@ module Aws::IoTSiteWise
     #   <p>A unique case-sensitive identifier that you can provide to ensure the idempotency of the request. Don't reuse this client token if a new idempotent request is required.</p>
     #   @return [String]
     class ExecuteQueryRequest < Struct.new(
+      nil,
       :query_statement,
       :next_token,
       :max_results,
@@ -4973,6 +5169,7 @@ module Aws::IoTSiteWise
     #   <p>The string that specifies the next page of results.</p>
     #   @return [String]
     class ExecuteQueryResponse < Struct.new(
+      nil,
       :columns,
       :rows,
       :next_token,
@@ -4986,6 +5183,7 @@ module Aws::IoTSiteWise
     #   <p>The current state of the computation model.</p>
     #   @return [String]
     class ExecutionStatus < Struct.new(
+      nil,
       :state,
       keyword_init: true
     )
@@ -5022,6 +5220,7 @@ module Aws::IoTSiteWise
     #   <p>The execution entity version associated with the summary.</p>
     #   @return [String]
     class ExecutionSummary < Struct.new(
+      nil,
       :execution_id,
       :action_type,
       :target_resource,
@@ -5044,6 +5243,7 @@ module Aws::IoTSiteWise
     #   <p>The variable that identifies an asset property from which to use values.</p>
     #   @return [Types::VariableValue]
     class ExpressionVariable < Struct.new(
+      nil,
       :name,
       :value,
       keyword_init: true
@@ -5064,6 +5264,7 @@ module Aws::IoTSiteWise
     #         data.</p>
     #   @return [String]
     class File < Struct.new(
+      nil,
       :bucket,
       :key,
       :version_id,
@@ -5080,6 +5281,7 @@ module Aws::IoTSiteWise
     #   <p>The file is in parquet format.</p>
     #   @return [Types::Parquet]
     class FileFormat < Struct.new(
+      nil,
       :csv,
       :parquet,
       keyword_init: true
@@ -5092,6 +5294,7 @@ module Aws::IoTSiteWise
     #   <p>The forwarding state for the given property. </p>
     #   @return [String]
     class ForwardingConfig < Struct.new(
+      nil,
       :state,
       keyword_init: true
     )
@@ -5131,6 +5334,7 @@ module Aws::IoTSiteWise
     #            </ul>
     #   @return [String]
     class GatewayCapabilitySummary < Struct.new(
+      nil,
       :capability_namespace,
       :capability_sync_status,
       keyword_init: true
@@ -5157,6 +5361,7 @@ module Aws::IoTSiteWise
     #   <p>A SiteWise Edge gateway that runs on a Siemens Industrial Edge Device.</p>
     #   @return [Types::SiemensIE]
     class GatewayPlatform < Struct.new(
+      nil,
       :greengrass,
       :greengrass_v2,
       :siemens_ie,
@@ -5199,6 +5404,7 @@ module Aws::IoTSiteWise
     #   <p>The date the gateway was last updated, in Unix epoch time.</p>
     #   @return [Time]
     class GatewaySummary < Struct.new(
+      nil,
       :gateway_id,
       :gateway_name,
       :gateway_platform,
@@ -5260,6 +5466,7 @@ module Aws::IoTSiteWise
     #            </ul>
     #   @return [Integer]
     class GetAssetPropertyAggregatesRequest < Struct.new(
+      nil,
       :asset_id,
       :property_id,
       :property_alias,
@@ -5283,6 +5490,7 @@ module Aws::IoTSiteWise
     #   <p>The token for the next set of results, or null if there are no additional results.</p>
     #   @return [String]
     class GetAssetPropertyAggregatesResponse < Struct.new(
+      nil,
       :aggregated_values,
       :next_token,
       keyword_init: true
@@ -5333,6 +5541,7 @@ module Aws::IoTSiteWise
     #            </ul>
     #   @return [Integer]
     class GetAssetPropertyValueHistoryRequest < Struct.new(
+      nil,
       :asset_id,
       :property_id,
       :property_alias,
@@ -5354,6 +5563,7 @@ module Aws::IoTSiteWise
     #   <p>The token for the next set of results, or null if there are no additional results.</p>
     #   @return [String]
     class GetAssetPropertyValueHistoryResponse < Struct.new(
+      nil,
       :asset_property_value_history,
       :next_token,
       keyword_init: true
@@ -5374,6 +5584,7 @@ module Aws::IoTSiteWise
     #           <i>IoT SiteWise User Guide</i>.</p>
     #   @return [String]
     class GetAssetPropertyValueRequest < Struct.new(
+      nil,
       :asset_id,
       :property_id,
       :property_alias,
@@ -5386,6 +5597,7 @@ module Aws::IoTSiteWise
     #   <p>The current asset property value.</p>
     #   @return [Types::AssetPropertyValue]
     class GetAssetPropertyValueResponse < Struct.new(
+      nil,
       :property_value,
       keyword_init: true
     )
@@ -5488,6 +5700,7 @@ module Aws::IoTSiteWise
     #         compute the second interpolated value, and so on. </p>
     #   @return [Integer]
     class GetInterpolatedAssetPropertyValuesRequest < Struct.new(
+      nil,
       :asset_id,
       :property_id,
       :property_alias,
@@ -5513,6 +5726,7 @@ module Aws::IoTSiteWise
     #   <p>The token for the next set of results, or null if there are no additional results.</p>
     #   @return [String]
     class GetInterpolatedAssetPropertyValuesResponse < Struct.new(
+      nil,
       :interpolated_asset_property_values,
       :next_token,
       keyword_init: true
@@ -5530,6 +5744,7 @@ module Aws::IoTSiteWise
     #           API Reference</i>.</p>
     #   @return [String]
     class Greengrass < Struct.new(
+      nil,
       :group_arn,
       keyword_init: true
     )
@@ -5552,6 +5767,7 @@ module Aws::IoTSiteWise
     #               <code>2</code>).</p>
     #   @return [String]
     class GreengrassV2 < Struct.new(
+      nil,
       :core_device_thing_name,
       :core_device_operating_system,
       keyword_init: true
@@ -5564,6 +5780,7 @@ module Aws::IoTSiteWise
     #   <p>The IAM Identity Center ID of the group.</p>
     #   @return [String]
     class GroupIdentity < Struct.new(
+      nil,
       :id,
       keyword_init: true
     )
@@ -5579,6 +5796,7 @@ module Aws::IoTSiteWise
     #   <p>The ID of the hierarchy in the interface asset model.</p>
     #   @return [String]
     class HierarchyMapping < Struct.new(
+      nil,
       :asset_model_hierarchy_id,
       :interface_asset_model_hierarchy_id,
       keyword_init: true
@@ -5593,6 +5811,7 @@ module Aws::IoTSiteWise
     #           <i>IAM User Guide</i>.</p>
     #   @return [String]
     class IAMRoleIdentity < Struct.new(
+      nil,
       :arn,
       keyword_init: true
     )
@@ -5610,6 +5829,7 @@ module Aws::IoTSiteWise
     #            </note>
     #   @return [String]
     class IAMUserIdentity < Struct.new(
+      nil,
       :arn,
       keyword_init: true
     )
@@ -5634,6 +5854,7 @@ module Aws::IoTSiteWise
     #   <p>An IAM role identity.</p>
     #   @return [Types::IAMRoleIdentity]
     class Identity < Struct.new(
+      nil,
       :user,
       :group,
       :iam_user,
@@ -5659,6 +5880,7 @@ module Aws::IoTSiteWise
     #   <p>Contains an image file.</p>
     #   @return [Types::ImageFile]
     class Image < Struct.new(
+      nil,
       :id,
       :file,
       keyword_init: true
@@ -5675,6 +5897,7 @@ module Aws::IoTSiteWise
     #   <p>The file type of the image.</p>
     #   @return [String]
     class ImageFile < Struct.new(
+      nil,
       :data,
       :type,
       keyword_init: true
@@ -5691,6 +5914,7 @@ module Aws::IoTSiteWise
     #         and download the image</p>
     #   @return [String]
     class ImageLocation < Struct.new(
+      nil,
       :id,
       :url,
       keyword_init: true
@@ -5704,6 +5928,7 @@ module Aws::IoTSiteWise
     #   <p>The ID of the asset model that has the interface applied to it.</p>
     #   @return [String]
     class InterfaceRelationship < Struct.new(
+      nil,
       :id,
       keyword_init: true
     )
@@ -5717,6 +5942,7 @@ module Aws::IoTSiteWise
     #   <p>The ID of the asset model that has the interface applied to it.</p>
     #   @return [String]
     class InterfaceRelationshipSummary < Struct.new(
+      nil,
       :id,
       keyword_init: true
     )
@@ -5732,6 +5958,7 @@ module Aws::IoTSiteWise
     #         property.</p>
     #   @return [String]
     class InterfaceSummary < Struct.new(
+      nil,
       :interface_asset_model_id,
       :interface_asset_model_property_id,
       keyword_init: true
@@ -5743,6 +5970,7 @@ module Aws::IoTSiteWise
     # @!attribute message
     #   @return [String]
     class InternalFailureException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -5757,6 +5985,7 @@ module Aws::IoTSiteWise
     #   <p>Contains an asset property value (of a single type only).</p>
     #   @return [Types::Variant]
     class InterpolatedAssetPropertyValue < Struct.new(
+      nil,
       :timestamp,
       :value,
       keyword_init: true
@@ -5769,6 +5998,7 @@ module Aws::IoTSiteWise
     # @!attribute message
     #   @return [String]
     class InvalidRequestException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -5783,6 +6013,7 @@ module Aws::IoTSiteWise
     #   <p>A list of citations, and related information for the SiteWise Assistant's response.</p>
     #   @return [Array<Types::Citation>]
     class InvocationOutput < Struct.new(
+      nil,
       :message,
       :citations,
       keyword_init: true
@@ -5802,6 +6033,7 @@ module Aws::IoTSiteWise
     #     reasoning, and data access process.</p>
     #   @return [Boolean]
     class InvokeAssistantRequest < Struct.new(
+      nil,
       :conversation_id,
       :message,
       :enable_trace,
@@ -5817,6 +6049,7 @@ module Aws::IoTSiteWise
     #   <p>The ID of the conversation, in UUID format. This ID uniquely identifies the conversation within IoT SiteWise.</p>
     #   @return [String]
     class InvokeAssistantResponse < Struct.new(
+      nil,
       :body,
       :conversation_id,
       keyword_init: true
@@ -5829,6 +6062,7 @@ module Aws::IoTSiteWise
     #   <p>The file format of the data in S3.</p>
     #   @return [Types::FileFormat]
     class JobConfiguration < Struct.new(
+      nil,
       :file_format,
       keyword_init: true
     )
@@ -5874,6 +6108,7 @@ module Aws::IoTSiteWise
     #            </ul>
     #   @return [String]
     class JobSummary < Struct.new(
+      nil,
       :id,
       :name,
       :status,
@@ -5890,6 +6125,7 @@ module Aws::IoTSiteWise
     #   <p>The <code>roleARN</code> details for the Kendra dataset source.</p>
     #   @return [String]
     class KendraSourceDetail < Struct.new(
+      nil,
       :knowledge_base_arn,
       :role_arn,
       keyword_init: true
@@ -5904,6 +6140,7 @@ module Aws::IoTSiteWise
     # @!attribute message
     #   @return [String]
     class LimitExceededException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -5939,6 +6176,7 @@ module Aws::IoTSiteWise
     #            <p>Default: 50</p>
     #   @return [Integer]
     class ListAccessPoliciesRequest < Struct.new(
+      nil,
       :identity_type,
       :identity_id,
       :resource_type,
@@ -5958,6 +6196,7 @@ module Aws::IoTSiteWise
     #   <p>The token for the next set of results, or null if there are no additional results.</p>
     #   @return [String]
     class ListAccessPoliciesResponse < Struct.new(
+      nil,
       :access_policy_summaries,
       :next_token,
       keyword_init: true
@@ -5984,6 +6223,7 @@ module Aws::IoTSiteWise
     #   <p>The ID of the resolved resource.</p>
     #   @return [String]
     class ListActionsRequest < Struct.new(
+      nil,
       :target_resource_type,
       :target_resource_id,
       :next_token,
@@ -6002,6 +6242,7 @@ module Aws::IoTSiteWise
     #   <p>The token for the next set of results, or null if there are no additional results.</p>
     #   @return [String]
     class ListActionsResponse < Struct.new(
+      nil,
       :action_summaries,
       :next_token,
       keyword_init: true
@@ -6026,6 +6267,7 @@ module Aws::IoTSiteWise
     #             Asset model versions</a> in the <i>IoT SiteWise User Guide</i>.</p>
     #   @return [String]
     class ListAssetModelCompositeModelsRequest < Struct.new(
+      nil,
       :asset_model_id,
       :next_token,
       :max_results,
@@ -6042,6 +6284,7 @@ module Aws::IoTSiteWise
     #   <p>The token for the next set of results, or null if there are no additional results.</p>
     #   @return [String]
     class ListAssetModelCompositeModelsResponse < Struct.new(
+      nil,
       :asset_model_composite_model_summaries,
       :next_token,
       keyword_init: true
@@ -6083,6 +6326,7 @@ module Aws::IoTSiteWise
     #             Asset model versions</a> in the <i>IoT SiteWise User Guide</i>.</p>
     #   @return [String]
     class ListAssetModelPropertiesRequest < Struct.new(
+      nil,
       :asset_model_id,
       :next_token,
       :max_results,
@@ -6100,6 +6344,7 @@ module Aws::IoTSiteWise
     #   <p>The token for the next set of results, or null if there are no additional results.</p>
     #   @return [String]
     class ListAssetModelPropertiesResponse < Struct.new(
+      nil,
       :asset_model_property_summaries,
       :next_token,
       keyword_init: true
@@ -6142,6 +6387,7 @@ module Aws::IoTSiteWise
     #             Asset model versions</a> in the <i>IoT SiteWise User Guide</i>.</p>
     #   @return [String]
     class ListAssetModelsRequest < Struct.new(
+      nil,
       :asset_model_types,
       :next_token,
       :max_results,
@@ -6158,6 +6404,7 @@ module Aws::IoTSiteWise
     #   <p>The token for the next set of results, or null if there are no additional results.</p>
     #   @return [String]
     class ListAssetModelsResponse < Struct.new(
+      nil,
       :asset_model_summaries,
       :next_token,
       keyword_init: true
@@ -6194,6 +6441,7 @@ module Aws::IoTSiteWise
     #            </p>
     #   @return [String]
     class ListAssetPropertiesRequest < Struct.new(
+      nil,
       :asset_id,
       :next_token,
       :max_results,
@@ -6210,6 +6458,7 @@ module Aws::IoTSiteWise
     #   <p>The token for the next set of results, or null if there are no additional results.</p>
     #   @return [String]
     class ListAssetPropertiesResponse < Struct.new(
+      nil,
       :asset_property_summaries,
       :next_token,
       keyword_init: true
@@ -6240,6 +6489,7 @@ module Aws::IoTSiteWise
     #   <p>The maximum number of results to return for each paginated request.</p>
     #   @return [Integer]
     class ListAssetRelationshipsRequest < Struct.new(
+      nil,
       :asset_id,
       :traversal_type,
       :next_token,
@@ -6256,6 +6506,7 @@ module Aws::IoTSiteWise
     #   <p>The token for the next set of results, or null if there are no additional results.</p>
     #   @return [String]
     class ListAssetRelationshipsResponse < Struct.new(
+      nil,
       :asset_relationship_summaries,
       :next_token,
       keyword_init: true
@@ -6294,6 +6545,7 @@ module Aws::IoTSiteWise
     #            </p>
     #   @return [String]
     class ListAssetsRequest < Struct.new(
+      nil,
       :next_token,
       :max_results,
       :asset_model_id,
@@ -6310,6 +6562,7 @@ module Aws::IoTSiteWise
     #   <p>The token for the next set of results, or null if there are no additional results.</p>
     #   @return [String]
     class ListAssetsResponse < Struct.new(
+      nil,
       :asset_summaries,
       :next_token,
       keyword_init: true
@@ -6353,6 +6606,7 @@ module Aws::IoTSiteWise
     #            <p>Default: 50</p>
     #   @return [Integer]
     class ListAssociatedAssetsRequest < Struct.new(
+      nil,
       :asset_id,
       :hierarchy_id,
       :traversal_direction,
@@ -6370,6 +6624,7 @@ module Aws::IoTSiteWise
     #   <p>The token for the next set of results, or null if there are no additional results.</p>
     #   @return [String]
     class ListAssociatedAssetsResponse < Struct.new(
+      nil,
       :asset_summaries,
       :next_token,
       keyword_init: true
@@ -6387,6 +6642,7 @@ module Aws::IoTSiteWise
     #   <p>You can use a filter to select the bulk import jobs that you want to retrieve.</p>
     #   @return [String]
     class ListBulkImportJobsRequest < Struct.new(
+      nil,
       :next_token,
       :max_results,
       :filter,
@@ -6402,6 +6658,7 @@ module Aws::IoTSiteWise
     #   <p>The token for the next set of results, or null if there are no additional results.</p>
     #   @return [String]
     class ListBulkImportJobsResponse < Struct.new(
+      nil,
       :job_summaries,
       :next_token,
       keyword_init: true
@@ -6421,6 +6678,7 @@ module Aws::IoTSiteWise
     #            <p>Default: 50</p>
     #   @return [Integer]
     class ListCompositionRelationshipsRequest < Struct.new(
+      nil,
       :asset_model_id,
       :next_token,
       :max_results,
@@ -6436,6 +6694,7 @@ module Aws::IoTSiteWise
     #   <p>The token for the next set of results, or null if there are no additional results.</p>
     #   @return [String]
     class ListCompositionRelationshipsResponse < Struct.new(
+      nil,
       :composition_relationship_summaries,
       :next_token,
       keyword_init: true
@@ -6455,6 +6714,7 @@ module Aws::IoTSiteWise
     #   <p>The maximum number of results returned for each paginated request.</p>
     #   @return [Integer]
     class ListComputationModelDataBindingUsagesRequest < Struct.new(
+      nil,
       :data_binding_value_filter,
       :next_token,
       :max_results,
@@ -6472,6 +6732,7 @@ module Aws::IoTSiteWise
     #         results.</p>
     #   @return [String]
     class ListComputationModelDataBindingUsagesResponse < Struct.new(
+      nil,
       :data_binding_usage_summaries,
       :next_token,
       keyword_init: true
@@ -6489,6 +6750,7 @@ module Aws::IoTSiteWise
     #   <p>The maximum number of results returned for each paginated request.</p>
     #   @return [Integer]
     class ListComputationModelResolveToResourcesRequest < Struct.new(
+      nil,
       :computation_model_id,
       :next_token,
       :max_results,
@@ -6506,6 +6768,7 @@ module Aws::IoTSiteWise
     #         results.</p>
     #   @return [String]
     class ListComputationModelResolveToResourcesResponse < Struct.new(
+      nil,
       :computation_model_resolve_to_resource_summaries,
       :next_token,
       keyword_init: true
@@ -6524,6 +6787,7 @@ module Aws::IoTSiteWise
     #   <p>The maximum number of results to return for each paginated request.</p>
     #   @return [Integer]
     class ListComputationModelsRequest < Struct.new(
+      nil,
       :computation_model_type,
       :next_token,
       :max_results,
@@ -6539,6 +6803,7 @@ module Aws::IoTSiteWise
     #   <p>The token for the next set of results, or null if there are no additional results.</p>
     #   @return [String]
     class ListComputationModelsResponse < Struct.new(
+      nil,
       :computation_model_summaries,
       :next_token,
       keyword_init: true
@@ -6557,6 +6822,7 @@ module Aws::IoTSiteWise
     #            <p>Default: 50</p>
     #   @return [Integer]
     class ListDashboardsRequest < Struct.new(
+      nil,
       :project_id,
       :next_token,
       :max_results,
@@ -6572,6 +6838,7 @@ module Aws::IoTSiteWise
     #   <p>The token for the next set of results, or null if there are no additional results.</p>
     #   @return [String]
     class ListDashboardsResponse < Struct.new(
+      nil,
       :dashboard_summaries,
       :next_token,
       keyword_init: true
@@ -6589,6 +6856,7 @@ module Aws::IoTSiteWise
     #   <p>The maximum number of results to return for each paginated request.</p>
     #   @return [Integer]
     class ListDatasetsRequest < Struct.new(
+      nil,
       :source_type,
       :next_token,
       :max_results,
@@ -6604,6 +6872,7 @@ module Aws::IoTSiteWise
     #   <p>The token for the next set of results, or null if there are no additional results.</p>
     #   @return [String]
     class ListDatasetsResponse < Struct.new(
+      nil,
       :dataset_summaries,
       :next_token,
       keyword_init: true
@@ -6633,6 +6902,7 @@ module Aws::IoTSiteWise
     #   <p>The type of action exectued.</p>
     #   @return [String]
     class ListExecutionsRequest < Struct.new(
+      nil,
       :target_resource_type,
       :target_resource_id,
       :resolve_to_resource_type,
@@ -6652,6 +6922,7 @@ module Aws::IoTSiteWise
     #   <p>The token for the next set of results, or null if there are no additional results.</p>
     #   @return [String]
     class ListExecutionsResponse < Struct.new(
+      nil,
       :execution_summaries,
       :next_token,
       keyword_init: true
@@ -6667,6 +6938,7 @@ module Aws::IoTSiteWise
     #            <p>Default: 50</p>
     #   @return [Integer]
     class ListGatewaysRequest < Struct.new(
+      nil,
       :next_token,
       :max_results,
       keyword_init: true
@@ -6681,6 +6953,7 @@ module Aws::IoTSiteWise
     #   <p>The token for the next set of results, or null if there are no additional results.</p>
     #   @return [String]
     class ListGatewaysResponse < Struct.new(
+      nil,
       :gateway_summaries,
       :next_token,
       keyword_init: true
@@ -6699,6 +6972,7 @@ module Aws::IoTSiteWise
     #   <p>The maximum number of results to return for each paginated request. Default: 50</p>
     #   @return [Integer]
     class ListInterfaceRelationshipsRequest < Struct.new(
+      nil,
       :interface_asset_model_id,
       :next_token,
       :max_results,
@@ -6714,6 +6988,7 @@ module Aws::IoTSiteWise
     #   <p>The token for the next set of results, or null if there are no additional results.</p>
     #   @return [String]
     class ListInterfaceRelationshipsResponse < Struct.new(
+      nil,
       :interface_relationship_summaries,
       :next_token,
       keyword_init: true
@@ -6729,6 +7004,7 @@ module Aws::IoTSiteWise
     #            <p>Default: 50</p>
     #   @return [Integer]
     class ListPortalsRequest < Struct.new(
+      nil,
       :next_token,
       :max_results,
       keyword_init: true
@@ -6743,6 +7019,7 @@ module Aws::IoTSiteWise
     #   <p>The token for the next set of results, or null if there are no additional results.</p>
     #   @return [String]
     class ListPortalsResponse < Struct.new(
+      nil,
       :portal_summaries,
       :next_token,
       keyword_init: true
@@ -6761,6 +7038,7 @@ module Aws::IoTSiteWise
     #            <p>Default: 50</p>
     #   @return [Integer]
     class ListProjectAssetsRequest < Struct.new(
+      nil,
       :project_id,
       :next_token,
       :max_results,
@@ -6776,6 +7054,7 @@ module Aws::IoTSiteWise
     #   <p>The token for the next set of results, or null if there are no additional results.</p>
     #   @return [String]
     class ListProjectAssetsResponse < Struct.new(
+      nil,
       :asset_ids,
       :next_token,
       keyword_init: true
@@ -6794,6 +7073,7 @@ module Aws::IoTSiteWise
     #            <p>Default: 50</p>
     #   @return [Integer]
     class ListProjectsRequest < Struct.new(
+      nil,
       :portal_id,
       :next_token,
       :max_results,
@@ -6809,6 +7089,7 @@ module Aws::IoTSiteWise
     #   <p>The token for the next set of results, or null if there are no additional results.</p>
     #   @return [String]
     class ListProjectsResponse < Struct.new(
+      nil,
       :project_summaries,
       :next_token,
       keyword_init: true
@@ -6820,6 +7101,7 @@ module Aws::IoTSiteWise
     #   <p>The <a href="https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html">ARN</a> of the resource.</p>
     #   @return [String]
     class ListTagsForResourceRequest < Struct.new(
+      nil,
       :resource_arn,
       keyword_init: true
     )
@@ -6832,6 +7114,7 @@ module Aws::IoTSiteWise
     #           resources</a> in the <i>IoT SiteWise User Guide</i>.</p>
     #   @return [Hash<String, String>]
     class ListTagsForResourceResponse < Struct.new(
+      nil,
       :tags,
       keyword_init: true
     )
@@ -6868,6 +7151,7 @@ module Aws::IoTSiteWise
     #            </ul>
     #   @return [String]
     class ListTimeSeriesRequest < Struct.new(
+      nil,
       :next_token,
       :max_results,
       :asset_id,
@@ -6885,6 +7169,7 @@ module Aws::IoTSiteWise
     #   <p>The token for the next set of results, or null if there are no additional results.</p>
     #   @return [String]
     class ListTimeSeriesResponse < Struct.new(
+      nil,
       :time_series_summaries,
       :next_token,
       keyword_init: true
@@ -6897,6 +7182,7 @@ module Aws::IoTSiteWise
     #   <p>The URI of the location.</p>
     #   @return [String]
     class Location < Struct.new(
+      nil,
       :uri,
       keyword_init: true
     )
@@ -6908,6 +7194,7 @@ module Aws::IoTSiteWise
     #   <p>The IoT SiteWise logging verbosity level.</p>
     #   @return [String]
     class LoggingOptions < Struct.new(
+      nil,
       :level,
       keyword_init: true
     )
@@ -6919,6 +7206,7 @@ module Aws::IoTSiteWise
     #   <p>The value of the matched data binding.</p>
     #   @return [Types::DataBindingValue]
     class MatchedDataBinding < Struct.new(
+      nil,
       :value,
       keyword_init: true
     )
@@ -6933,6 +7221,7 @@ module Aws::IoTSiteWise
     #         By default, measurements are forwarded to the cloud.</p>
     #   @return [Types::MeasurementProcessingConfig]
     class Measurement < Struct.new(
+      nil,
       :processing_config,
       keyword_init: true
     )
@@ -6946,6 +7235,7 @@ module Aws::IoTSiteWise
     #   <p>The forwarding configuration for the given measurement property. </p>
     #   @return [Types::ForwardingConfig]
     class MeasurementProcessingConfig < Struct.new(
+      nil,
       :forwarding_config,
       keyword_init: true
     )
@@ -6980,6 +7270,7 @@ module Aws::IoTSiteWise
     #         By default, metrics are forwarded to the cloud.</p>
     #   @return [Types::MetricProcessingConfig]
     class Metric < Struct.new(
+      nil,
       :expression,
       :variables,
       :window,
@@ -7002,6 +7293,7 @@ module Aws::IoTSiteWise
     #   <p>The compute location for the given metric property. </p>
     #   @return [String]
     class MetricProcessingConfig < Struct.new(
+      nil,
       :compute_location,
       keyword_init: true
     )
@@ -7014,6 +7306,7 @@ module Aws::IoTSiteWise
     #   <p>The tumbling time interval window.</p>
     #   @return [Types::TumblingWindow]
     class MetricWindow < Struct.new(
+      nil,
       :tumbling,
       keyword_init: true
     )
@@ -7028,6 +7321,7 @@ module Aws::IoTSiteWise
     #   <p>The error message.</p>
     #   @return [String]
     class MonitorErrorDetails < Struct.new(
+      nil,
       :code,
       :message,
       keyword_init: true
@@ -7040,6 +7334,7 @@ module Aws::IoTSiteWise
     #   <p>Contains information about a customer managed Amazon S3 bucket.</p>
     #   @return [Types::CustomerManagedS3Storage]
     class MultiLayerStorage < Struct.new(
+      nil,
       :customer_managed_s3_storage,
       keyword_init: true
     )
@@ -7048,6 +7343,7 @@ module Aws::IoTSiteWise
 
     # <p>A parquet file.</p>
     class Parquet < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -7058,6 +7354,7 @@ module Aws::IoTSiteWise
     #   <p>The ID of the portal.</p>
     #   @return [String]
     class PortalResource < Struct.new(
+      nil,
       :id,
       keyword_init: true
     )
@@ -7072,6 +7369,7 @@ module Aws::IoTSiteWise
     #   <p>Contains associated error information, if any.</p>
     #   @return [Types::MonitorErrorDetails]
     class PortalStatus < Struct.new(
+      nil,
       :state,
       :error,
       keyword_init: true
@@ -7112,6 +7410,7 @@ module Aws::IoTSiteWise
     #   <p>Define the type of portal. The value for IoT SiteWise Monitor (Classic) is <code>SITEWISE_PORTAL_V1</code>. The value for IoT SiteWise Monitor (AI-aware) is <code>SITEWISE_PORTAL_V2</code>.</p>
     #   @return [String]
     class PortalSummary < Struct.new(
+      nil,
       :id,
       :name,
       :description,
@@ -7132,6 +7431,7 @@ module Aws::IoTSiteWise
     #   <p>The array of tools associated with the specified portal type. The possible values are <code>ASSISTANT</code> and <code>DASHBOARD</code>.</p>
     #   @return [Array<String>]
     class PortalTypeEntry < Struct.new(
+      nil,
       :portal_tools,
       keyword_init: true
     )
@@ -7149,6 +7449,7 @@ module Aws::IoTSiteWise
     #   <p>The ARN of the resource on which precondition failed with this operation.</p>
     #   @return [String]
     class PreconditionFailedException < Struct.new(
+      nil,
       :message,
       :resource_id,
       :resource_arn,
@@ -7162,6 +7463,7 @@ module Aws::IoTSiteWise
     #   <p>The ID of the project.</p>
     #   @return [String]
     class ProjectResource < Struct.new(
+      nil,
       :id,
       keyword_init: true
     )
@@ -7185,6 +7487,7 @@ module Aws::IoTSiteWise
     #   <p>The date the project was last updated, in Unix epoch time.</p>
     #   @return [Time]
     class ProjectSummary < Struct.new(
+      nil,
       :id,
       :name,
       :description,
@@ -7227,6 +7530,7 @@ module Aws::IoTSiteWise
     #   <p>The structured path to the property from the root of the asset.</p>
     #   @return [Array<Types::AssetPropertyPathSegment>]
     class Property < Struct.new(
+      nil,
       :id,
       :external_id,
       :name,
@@ -7250,6 +7554,7 @@ module Aws::IoTSiteWise
     #   <p>The ID of the property in the interface asset model.</p>
     #   @return [String]
     class PropertyMapping < Struct.new(
+      nil,
       :asset_model_property_id,
       :interface_asset_model_property_id,
       keyword_init: true
@@ -7272,6 +7577,7 @@ module Aws::IoTSiteWise
     #         interface is applied to an asset model.</p>
     #   @return [Array<Types::PropertyMapping>]
     class PropertyMappingConfiguration < Struct.new(
+      nil,
       :match_by_property_name,
       :create_missing_property,
       :overrides,
@@ -7295,6 +7601,7 @@ module Aws::IoTSiteWise
     #   <p>The current notification state.</p>
     #   @return [String]
     class PropertyNotification < Struct.new(
+      nil,
       :topic,
       :state,
       keyword_init: true
@@ -7323,6 +7630,7 @@ module Aws::IoTSiteWise
     #         data point, such as to calculate the average hourly temperature.</p>
     #   @return [Types::Metric]
     class PropertyType < Struct.new(
+      nil,
       :attribute,
       :measurement,
       :transform,
@@ -7337,6 +7645,7 @@ module Aws::IoTSiteWise
     #   <p>The type of null asset property data.</p>
     #   @return [String]
     class PropertyValueNullValue < Struct.new(
+      nil,
       :value_type,
       keyword_init: true
     )
@@ -7361,6 +7670,7 @@ module Aws::IoTSiteWise
     #         request. Don't reuse this client token if a new idempotent request is required.</p>
     #   @return [String]
     class PutAssetModelInterfaceRelationshipRequest < Struct.new(
+      nil,
       :asset_model_id,
       :interface_asset_model_id,
       :property_mapping_configuration,
@@ -7386,6 +7696,7 @@ module Aws::IoTSiteWise
     #           states</a> in the <i>IoT SiteWise User Guide</i>.</p>
     #   @return [Types::AssetModelStatus]
     class PutAssetModelInterfaceRelationshipResponse < Struct.new(
+      nil,
       :asset_model_id,
       :interface_asset_model_id,
       :asset_model_arn,
@@ -7419,6 +7730,7 @@ module Aws::IoTSiteWise
     #           <code>propertyValues</code> array elements. </p>
     #   @return [Array<Types::AssetPropertyValue>]
     class PutAssetPropertyValueEntry < Struct.new(
+      nil,
       :entry_id,
       :asset_id,
       :property_id,
@@ -7437,6 +7749,7 @@ module Aws::IoTSiteWise
     #         use <code>KMS_BASED_ENCRYPTION</code>.</p>
     #   @return [String]
     class PutDefaultEncryptionConfigurationRequest < Struct.new(
+      nil,
       :encryption_type,
       :kms_key_id,
       keyword_init: true
@@ -7457,6 +7770,7 @@ module Aws::IoTSiteWise
     #           <code>ErrorDetails</code>.</p>
     #   @return [Types::ConfigurationStatus]
     class PutDefaultEncryptionConfigurationResponse < Struct.new(
+      nil,
       :encryption_type,
       :kms_key_arn,
       :configuration_status,
@@ -7469,6 +7783,7 @@ module Aws::IoTSiteWise
     #   <p>The logging options to set.</p>
     #   @return [Types::LoggingOptions]
     class PutLoggingOptionsRequest < Struct.new(
+      nil,
       :logging_options,
       keyword_init: true
     )
@@ -7476,6 +7791,7 @@ module Aws::IoTSiteWise
     end
 
     class PutLoggingOptionsResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -7534,6 +7850,7 @@ module Aws::IoTSiteWise
     #         allowed. The feature is disallowed if the value is <code>true</code>.</p>
     #   @return [Boolean]
     class PutStorageConfigurationRequest < Struct.new(
+      nil,
       :storage_type,
       :multi_layer_storage,
       :disassociated_data_storage,
@@ -7601,6 +7918,7 @@ module Aws::IoTSiteWise
     #         allowed. The feature is disallowed if the value is <code>true</code>.</p>
     #   @return [Boolean]
     class PutStorageConfigurationResponse < Struct.new(
+      nil,
       :storage_type,
       :multi_layer_storage,
       :disassociated_data_storage,
@@ -7618,6 +7936,7 @@ module Aws::IoTSiteWise
     # @!attribute message
     #   @return [String]
     class QueryTimeoutException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -7629,6 +7948,7 @@ module Aws::IoTSiteWise
     #   <p>Contains the dataset reference information.</p>
     #   @return [Types::DataSetReference]
     class Reference < Struct.new(
+      nil,
       :dataset,
       keyword_init: true
     )
@@ -7640,6 +7960,7 @@ module Aws::IoTSiteWise
     #   <p>The ID of the asset that the resource resolves to.</p>
     #   @return [String]
     class ResolveTo < Struct.new(
+      nil,
       :asset_id,
       keyword_init: true
     )
@@ -7654,6 +7975,7 @@ module Aws::IoTSiteWise
     #   <p>A project resource.</p>
     #   @return [Types::ProjectResource]
     class Resource < Struct.new(
+      nil,
       :portal,
       :project,
       keyword_init: true
@@ -7671,6 +7993,7 @@ module Aws::IoTSiteWise
     #   <p>The ARN of the resource that already exists.</p>
     #   @return [String]
     class ResourceAlreadyExistsException < Struct.new(
+      nil,
       :message,
       :resource_id,
       :resource_arn,
@@ -7683,6 +8006,7 @@ module Aws::IoTSiteWise
     # @!attribute message
     #   @return [String]
     class ResourceNotFoundException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -7768,6 +8092,7 @@ module Aws::IoTSiteWise
     #            </note>
     #   @return [Boolean]
     class RetentionPeriod < Struct.new(
+      nil,
       :number_of_days,
       :unlimited,
       keyword_init: true
@@ -7780,6 +8105,7 @@ module Aws::IoTSiteWise
     #   <p>List of data points in a single row of the result set.</p>
     #   @return [Array<Types::Datum>]
     class Row < Struct.new(
+      nil,
       :data,
       keyword_init: true
     )
@@ -7790,6 +8116,7 @@ module Aws::IoTSiteWise
     # @!attribute message
     #   @return [String]
     class ServiceUnavailableException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -7802,6 +8129,7 @@ module Aws::IoTSiteWise
     #   <p>The name of the IoT Thing for your SiteWise Edge gateway.</p>
     #   @return [String]
     class SiemensIE < Struct.new(
+      nil,
       :iot_core_thing_name,
       keyword_init: true
     )
@@ -7817,6 +8145,7 @@ module Aws::IoTSiteWise
     #     For example, if the data source is Kendra, and the text synchronized is from an S3 bucket, then the location refers to an S3 object.</p>
     #   @return [Types::Location]
     class Source < Struct.new(
+      nil,
       :arn,
       :location,
       keyword_init: true
@@ -7829,6 +8158,7 @@ module Aws::IoTSiteWise
     #   <p>Contains details about the Kendra dataset source.</p>
     #   @return [Types::KendraSourceDetail]
     class SourceDetail < Struct.new(
+      nil,
       :kendra,
       keyword_init: true
     )
@@ -7844,6 +8174,7 @@ module Aws::IoTSiteWise
     #           resources</a> in the <i>IoT SiteWise User Guide</i>.</p>
     #   @return [Hash<String, String>]
     class TagResourceRequest < Struct.new(
+      nil,
       :resource_arn,
       :tags,
       keyword_init: true
@@ -7852,6 +8183,7 @@ module Aws::IoTSiteWise
     end
 
     class TagResourceResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -7866,6 +8198,7 @@ module Aws::IoTSiteWise
     #   <p>The ID of the computation model.</p>
     #   @return [String]
     class TargetResource < Struct.new(
+      nil,
       :asset_id,
       :computation_model_id,
       keyword_init: true
@@ -7880,6 +8213,7 @@ module Aws::IoTSiteWise
     # @!attribute message
     #   @return [String]
     class ThrottlingException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -7895,6 +8229,7 @@ module Aws::IoTSiteWise
     #   <p>The nanosecond offset from <code>timeInSeconds</code>.</p>
     #   @return [Integer]
     class TimeInNanos < Struct.new(
+      nil,
       :time_in_seconds,
       :offset_in_nanos,
       keyword_init: true
@@ -7939,6 +8274,7 @@ module Aws::IoTSiteWise
     #            </p>
     #   @return [String]
     class TimeSeriesSummary < Struct.new(
+      nil,
       :asset_id,
       :property_id,
       :alias,
@@ -7962,6 +8298,7 @@ module Aws::IoTSiteWise
     #   <p>The name of the resource with too many tags.</p>
     #   @return [String]
     class TooManyTagsException < Struct.new(
+      nil,
       :message,
       :resource_name,
       keyword_init: true
@@ -7974,6 +8311,7 @@ module Aws::IoTSiteWise
     #   <p>The cited text from the data source.</p>
     #   @return [String]
     class Trace < Struct.new(
+      nil,
       :text,
       keyword_init: true
     )
@@ -8001,6 +8339,7 @@ module Aws::IoTSiteWise
     #         You can also configure transforms to be computed at the edge or in the cloud.</p>
     #   @return [Types::TransformProcessingConfig]
     class Transform < Struct.new(
+      nil,
       :expression,
       :variables,
       :processing_config,
@@ -8019,6 +8358,7 @@ module Aws::IoTSiteWise
     #   <p>The forwarding configuration for a given property.</p>
     #   @return [Types::ForwardingConfig]
     class TransformProcessingConfig < Struct.new(
+      nil,
       :compute_location,
       :forwarding_config,
       keyword_init: true
@@ -8108,6 +8448,7 @@ module Aws::IoTSiteWise
     #            </ul>
     #   @return [String]
     class TumblingWindow < Struct.new(
+      nil,
       :interval,
       :offset,
       keyword_init: true
@@ -8119,6 +8460,7 @@ module Aws::IoTSiteWise
     # @!attribute message
     #   @return [String]
     class UnauthorizedException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -8132,6 +8474,7 @@ module Aws::IoTSiteWise
     #   <p>A list of keys for tags to remove from the resource.</p>
     #   @return [Array<String>]
     class UntagResourceRequest < Struct.new(
+      nil,
       :resource_arn,
       :tag_keys,
       keyword_init: true
@@ -8140,6 +8483,7 @@ module Aws::IoTSiteWise
     end
 
     class UntagResourceResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -8161,6 +8505,7 @@ module Aws::IoTSiteWise
     #   <p>A unique case-sensitive identifier that you can provide to ensure the idempotency of the request. Don't reuse this client token if a new idempotent request is required.</p>
     #   @return [String]
     class UpdateAccessPolicyRequest < Struct.new(
+      nil,
       :access_policy_id,
       :access_policy_identity,
       :access_policy_resource,
@@ -8172,6 +8517,7 @@ module Aws::IoTSiteWise
     end
 
     class UpdateAccessPolicyResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -8218,6 +8564,7 @@ module Aws::IoTSiteWise
     #     conjunction with <code>If-Match</code> or <code>If-None-Match</code> headers to determine the target ETag for the update operation.</p>
     #   @return [String]
     class UpdateAssetModelCompositeModelRequest < Struct.new(
+      nil,
       :asset_model_id,
       :asset_model_composite_model_id,
       :asset_model_composite_model_external_id,
@@ -8241,6 +8588,7 @@ module Aws::IoTSiteWise
     #           states</a> in the <i>IoT SiteWise User Guide</i>.</p>
     #   @return [Types::AssetModelStatus]
     class UpdateAssetModelCompositeModelResponse < Struct.new(
+      nil,
       :asset_model_composite_model_path,
       :asset_model_status,
       keyword_init: true
@@ -8304,6 +8652,7 @@ module Aws::IoTSiteWise
     #     conjunction with <code>If-Match</code> or <code>If-None-Match</code> headers to determine the target ETag for the update operation.</p>
     #   @return [String]
     class UpdateAssetModelRequest < Struct.new(
+      nil,
       :asset_model_id,
       :asset_model_external_id,
       :asset_model_name,
@@ -8325,6 +8674,7 @@ module Aws::IoTSiteWise
     #         successfully calling this operation) and any error message.</p>
     #   @return [Types::AssetModelStatus]
     class UpdateAssetModelResponse < Struct.new(
+      nil,
       :asset_model_status,
       keyword_init: true
     )
@@ -8361,6 +8711,7 @@ module Aws::IoTSiteWise
     #         the asset model.</p>
     #   @return [String]
     class UpdateAssetPropertyRequest < Struct.new(
+      nil,
       :asset_id,
       :property_id,
       :property_alias,
@@ -8390,6 +8741,7 @@ module Aws::IoTSiteWise
     #   <p>A description for the asset.</p>
     #   @return [String]
     class UpdateAssetRequest < Struct.new(
+      nil,
       :asset_id,
       :asset_external_id,
       :asset_name,
@@ -8405,6 +8757,7 @@ module Aws::IoTSiteWise
     #         calling this operation) and any error message.</p>
     #   @return [Types::AssetStatus]
     class UpdateAssetResponse < Struct.new(
+      nil,
       :asset_status,
       keyword_init: true
     )
@@ -8432,6 +8785,7 @@ module Aws::IoTSiteWise
     #         request. Don't reuse this client token if a new idempotent request is required.</p>
     #   @return [String]
     class UpdateComputationModelRequest < Struct.new(
+      nil,
       :computation_model_id,
       :computation_model_name,
       :computation_model_description,
@@ -8448,6 +8802,7 @@ module Aws::IoTSiteWise
     #         calling this operation) and an error message if any.</p>
     #   @return [Types::ComputationModelStatus]
     class UpdateComputationModelResponse < Struct.new(
+      nil,
       :computation_model_status,
       keyword_init: true
     )
@@ -8482,6 +8837,7 @@ module Aws::IoTSiteWise
     #   <p>A unique case-sensitive identifier that you can provide to ensure the idempotency of the request. Don't reuse this client token if a new idempotent request is required.</p>
     #   @return [String]
     class UpdateDashboardRequest < Struct.new(
+      nil,
       :dashboard_id,
       :dashboard_name,
       :dashboard_description,
@@ -8493,6 +8849,7 @@ module Aws::IoTSiteWise
     end
 
     class UpdateDashboardResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -8514,6 +8871,7 @@ module Aws::IoTSiteWise
     #   <p>A unique case-sensitive identifier that you can provide to ensure the idempotency of the request. Don't reuse this client token if a new idempotent request is required.</p>
     #   @return [String]
     class UpdateDatasetRequest < Struct.new(
+      nil,
       :dataset_id,
       :dataset_name,
       :dataset_description,
@@ -8537,6 +8895,7 @@ module Aws::IoTSiteWise
     #     <code>ACTIVE</code> when ready to use.</p>
     #   @return [Types::DatasetStatus]
     class UpdateDatasetResponse < Struct.new(
+      nil,
       :dataset_id,
       :dataset_arn,
       :dataset_status,
@@ -8559,6 +8918,7 @@ module Aws::IoTSiteWise
     #         information, see <a href="https://docs.aws.amazon.com/iot-sitewise/latest/userguide/configure-sources.html#configure-source-cli">Configuring data sources (CLI)</a> in the <i>IoT SiteWise User Guide</i>.</p>
     #   @return [String]
     class UpdateGatewayCapabilityConfigurationRequest < Struct.new(
+      nil,
       :gateway_id,
       :capability_namespace,
       :capability_configuration,
@@ -8598,6 +8958,7 @@ module Aws::IoTSiteWise
     #         until the gateway receives and applies or rejects the updated configuration.</p>
     #   @return [String]
     class UpdateGatewayCapabilityConfigurationResponse < Struct.new(
+      nil,
       :capability_namespace,
       :capability_sync_status,
       keyword_init: true
@@ -8612,6 +8973,7 @@ module Aws::IoTSiteWise
     #   <p>A unique name for the gateway.</p>
     #   @return [String]
     class UpdateGatewayRequest < Struct.new(
+      nil,
       :gateway_id,
       :gateway_name,
       keyword_init: true
@@ -8665,6 +9027,7 @@ module Aws::IoTSiteWise
     #   <p>The configuration entry associated with the specific portal type. The value for IoT SiteWise Monitor (Classic) is <code>SITEWISE_PORTAL_V1</code>. The value for IoT SiteWise Monitor (AI-aware) is <code>SITEWISE_PORTAL_V2</code>.</p>
     #   @return [Hash<String, Types::PortalTypeEntry>]
     class UpdatePortalRequest < Struct.new(
+      nil,
       :portal_id,
       :portal_name,
       :portal_description,
@@ -8686,6 +9049,7 @@ module Aws::IoTSiteWise
     #         calling this operation) and any error message.</p>
     #   @return [Types::PortalStatus]
     class UpdatePortalResponse < Struct.new(
+      nil,
       :portal_status,
       keyword_init: true
     )
@@ -8705,6 +9069,7 @@ module Aws::IoTSiteWise
     #   <p>A unique case-sensitive identifier that you can provide to ensure the idempotency of the request. Don't reuse this client token if a new idempotent request is required.</p>
     #   @return [String]
     class UpdateProjectRequest < Struct.new(
+      nil,
       :project_id,
       :project_name,
       :project_description,
@@ -8715,6 +9080,7 @@ module Aws::IoTSiteWise
     end
 
     class UpdateProjectResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -8725,6 +9091,7 @@ module Aws::IoTSiteWise
     #   <p>The IAM Identity Center ID of the user.</p>
     #   @return [String]
     class UserIdentity < Struct.new(
+      nil,
       :id,
       keyword_init: true
     )
@@ -8735,6 +9102,7 @@ module Aws::IoTSiteWise
     # @!attribute message
     #   @return [String]
     class ValidationException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -8760,6 +9128,7 @@ module Aws::IoTSiteWise
     #   <p>The path of the property.</p>
     #   @return [Array<Types::AssetModelPropertyPathSegment>]
     class VariableValue < Struct.new(
+      nil,
       :property_id,
       :hierarchy_id,
       :property_path,
@@ -8787,6 +9156,7 @@ module Aws::IoTSiteWise
     #   <p>The type of null asset property data with BAD and UNCERTAIN qualities.</p>
     #   @return [Types::PropertyValueNullValue]
     class Variant < Struct.new(
+      nil,
       :string_value,
       :integer_value,
       :double_value,
@@ -8805,6 +9175,7 @@ module Aws::IoTSiteWise
     #   <p>If set to true, the data is stored indefinitely in the warm tier.</p>
     #   @return [Boolean]
     class WarmTierRetentionPeriod < Struct.new(
+      nil,
       :number_of_days,
       :unlimited,
       keyword_init: true

@@ -17,6 +17,7 @@ module Aws::Neptunedata
     #   <p>The HTTP status code returned with the exception.</p>
     #   @return [String]
     class AccessDeniedException < Struct.new(
+      nil,
       :detailed_message,
       :request_id,
       :code,
@@ -36,6 +37,7 @@ module Aws::Neptunedata
     #   <p>The HTTP status code returned with the exception.</p>
     #   @return [String]
     class BadRequestException < Struct.new(
+      nil,
       :detailed_message,
       :request_id,
       :code,
@@ -55,6 +57,7 @@ module Aws::Neptunedata
     #   <p>The HTTP status code returned with the exception.</p>
     #   @return [String]
     class BulkLoadIdNotFoundException < Struct.new(
+      nil,
       :detailed_message,
       :request_id,
       :code,
@@ -67,6 +70,7 @@ module Aws::Neptunedata
     #   <p>The unique identifier that identifies the query to be canceled.</p>
     #   @return [String]
     class CancelGremlinQueryInput < Struct.new(
+      nil,
       :query_id,
       keyword_init: true
     )
@@ -77,6 +81,7 @@ module Aws::Neptunedata
     #   <p>The status of the cancelation</p>
     #   @return [String]
     class CancelGremlinQueryOutput < Struct.new(
+      nil,
       :status,
       keyword_init: true
     )
@@ -87,6 +92,7 @@ module Aws::Neptunedata
     #   <p>The ID of the load job to be deleted.</p>
     #   @return [String]
     class CancelLoaderJobInput < Struct.new(
+      nil,
       :load_id,
       keyword_init: true
     )
@@ -97,6 +103,7 @@ module Aws::Neptunedata
     #   <p>The cancellation status.</p>
     #   @return [String]
     class CancelLoaderJobOutput < Struct.new(
+      nil,
       :status,
       keyword_init: true
     )
@@ -113,6 +120,7 @@ module Aws::Neptunedata
     #   <p>If set to <code>TRUE</code>, this flag specifies that all Neptune ML S3 artifacts should be deleted when the job is stopped. The default is <code>FALSE</code>.</p>
     #   @return [Boolean]
     class CancelMLDataProcessingJobInput < Struct.new(
+      nil,
       :id,
       :neptune_iam_role_arn,
       :clean,
@@ -125,6 +133,7 @@ module Aws::Neptunedata
     #   <p>The status of the cancellation request.</p>
     #   @return [String]
     class CancelMLDataProcessingJobOutput < Struct.new(
+      nil,
       :status,
       keyword_init: true
     )
@@ -141,6 +150,7 @@ module Aws::Neptunedata
     #   <p>If set to <code>TRUE</code>, this flag specifies that all Amazon S3 artifacts should be deleted when the job is stopped. The default is <code>FALSE</code>.</p>
     #   @return [Boolean]
     class CancelMLModelTrainingJobInput < Struct.new(
+      nil,
       :id,
       :neptune_iam_role_arn,
       :clean,
@@ -153,6 +163,7 @@ module Aws::Neptunedata
     #   <p>The status of the cancellation.</p>
     #   @return [String]
     class CancelMLModelTrainingJobOutput < Struct.new(
+      nil,
       :status,
       keyword_init: true
     )
@@ -169,6 +180,7 @@ module Aws::Neptunedata
     #   <p>If this flag is set to <code>TRUE</code>, all Neptune ML S3 artifacts should be deleted when the job is stopped. The default is <code>FALSE</code>.</p>
     #   @return [Boolean]
     class CancelMLModelTransformJobInput < Struct.new(
+      nil,
       :id,
       :neptune_iam_role_arn,
       :clean,
@@ -181,6 +193,7 @@ module Aws::Neptunedata
     #   <p>the status of the cancelation.</p>
     #   @return [String]
     class CancelMLModelTransformJobOutput < Struct.new(
+      nil,
       :status,
       keyword_init: true
     )
@@ -194,6 +207,7 @@ module Aws::Neptunedata
     #   <p>If set to <code>TRUE</code>, causes the cancelation of the openCypher query to happen silently.</p>
     #   @return [Boolean]
     class CancelOpenCypherQueryInput < Struct.new(
+      nil,
       :query_id,
       :silent,
       keyword_init: true
@@ -208,6 +222,7 @@ module Aws::Neptunedata
     #   <p>The cancelation payload for the openCypher query.</p>
     #   @return [Boolean]
     class CancelOpenCypherQueryOutput < Struct.new(
+      nil,
       :status,
       :payload,
       keyword_init: true
@@ -226,6 +241,7 @@ module Aws::Neptunedata
     #   <p>The HTTP status code returned with the exception.</p>
     #   @return [String]
     class CancelledByUserException < Struct.new(
+      nil,
       :detailed_message,
       :request_id,
       :code,
@@ -245,6 +261,7 @@ module Aws::Neptunedata
     #   <p>The HTTP status code returned with the exception.</p>
     #   @return [String]
     class ClientTimeoutException < Struct.new(
+      nil,
       :detailed_message,
       :request_id,
       :code,
@@ -264,6 +281,7 @@ module Aws::Neptunedata
     #   <p>The HTTP status code returned with the exception.</p>
     #   @return [String]
     class ConcurrentModificationException < Struct.new(
+      nil,
       :detailed_message,
       :request_id,
       :code,
@@ -283,6 +301,7 @@ module Aws::Neptunedata
     #   <p>The HTTP status code returned with the exception.</p>
     #   @return [String]
     class ConstraintViolationException < Struct.new(
+      nil,
       :detailed_message,
       :request_id,
       :code,
@@ -319,6 +338,7 @@ module Aws::Neptunedata
     #   <p>The Amazon Key Management Service (Amazon KMS) key that SageMaker uses to encrypt data on the storage volume attached to the ML compute instances that run the training job. The default is None.</p>
     #   @return [String]
     class CreateMLEndpointInput < Struct.new(
+      nil,
       :id,
       :ml_model_training_job_id,
       :ml_model_transform_job_id,
@@ -343,6 +363,7 @@ module Aws::Neptunedata
     #   <p>The endpoint creation time, in milliseconds.</p>
     #   @return [Integer]
     class CreateMLEndpointOutput < Struct.new(
+      nil,
       :id,
       :arn,
       :creation_time_in_millis,
@@ -362,6 +383,7 @@ module Aws::Neptunedata
     #   <p>The name of the entry point in your module of a script that should be run after the best model from the hyperparameter search has been identified, to compute the model artifacts necessary for model deployment. It should be able to run with no command-line arguments.The default is <code>transform.py</code>.</p>
     #   @return [String]
     class CustomModelTrainingParameters < Struct.new(
+      nil,
       :source_s3_directory_path,
       :training_entry_point_script,
       :transform_entry_point_script,
@@ -378,6 +400,7 @@ module Aws::Neptunedata
     #   <p>The name of the entry point in your module of a script that should be run after the best model from the hyperparameter search has been identified, to compute the model artifacts necessary for model deployment. It should be able to run with no command-line arguments. The default is <code>transform.py</code>.</p>
     #   @return [String]
     class CustomModelTransformParameters < Struct.new(
+      nil,
       :source_s3_directory_path,
       :transform_entry_point_script,
       keyword_init: true
@@ -395,6 +418,7 @@ module Aws::Neptunedata
     #   <p>If this flag is set to <code>TRUE</code>, all Neptune ML S3 artifacts should be deleted when the job is stopped. The default is <code>FALSE</code>.</p>
     #   @return [Boolean]
     class DeleteMLEndpointInput < Struct.new(
+      nil,
       :id,
       :neptune_iam_role_arn,
       :clean,
@@ -407,6 +431,7 @@ module Aws::Neptunedata
     #   <p>The status of the cancellation.</p>
     #   @return [String]
     class DeleteMLEndpointOutput < Struct.new(
+      nil,
       :status,
       keyword_init: true
     )
@@ -423,6 +448,7 @@ module Aws::Neptunedata
     #   <p>The deletion payload.</p>
     #   @return [Types::DeleteStatisticsValueMap]
     class DeletePropertygraphStatisticsOutput < Struct.new(
+      nil,
       :status_code,
       :status,
       :payload,
@@ -441,6 +467,7 @@ module Aws::Neptunedata
     #   <p>The deletion payload.</p>
     #   @return [Types::DeleteStatisticsValueMap]
     class DeleteSparqlStatisticsOutput < Struct.new(
+      nil,
       :status_code,
       :status,
       :payload,
@@ -457,6 +484,7 @@ module Aws::Neptunedata
     #   <p>The ID of the statistics generation run that is currently occurring.</p>
     #   @return [String]
     class DeleteStatisticsValueMap < Struct.new(
+      nil,
       :active,
       :statistics_id,
       keyword_init: true
@@ -472,6 +500,7 @@ module Aws::Neptunedata
     #   <p>A list of edge properties present in this specific structure.</p>
     #   @return [Array<String>]
     class EdgeStructure < Struct.new(
+      nil,
       :count,
       :edge_properties,
       keyword_init: true
@@ -486,6 +515,7 @@ module Aws::Neptunedata
     #   <p>The fast-reset token to initiate the reset.</p>
     #   @return [String]
     class ExecuteFastResetInput < Struct.new(
+      nil,
       :action,
       :token,
       keyword_init: true
@@ -500,6 +530,7 @@ module Aws::Neptunedata
     #   <p>The <code>payload</code> is only returned by the <code>initiateDatabaseReset</code> action, and contains the unique token to use with the <code>performDatabaseReset</code> action to make the reset occur.</p>
     #   @return [Types::FastResetToken]
     class ExecuteFastResetOutput < Struct.new(
+      nil,
       :status,
       :payload,
       keyword_init: true
@@ -511,6 +542,7 @@ module Aws::Neptunedata
     #   <p>The Gremlin explain query string.</p>
     #   @return [String]
     class ExecuteGremlinExplainQueryInput < Struct.new(
+      nil,
       :gremlin_query,
       keyword_init: true
     )
@@ -521,6 +553,7 @@ module Aws::Neptunedata
     #   <p>A text blob containing the Gremlin explain result, as described in <a href="https://docs.aws.amazon.com/neptune/latest/userguide/gremlin-traversal-tuning.html">Tuning Gremlin queries</a>.</p>
     #   @return [String]
     class ExecuteGremlinExplainQueryOutput < Struct.new(
+      nil,
       :output,
       keyword_init: true
     )
@@ -543,6 +576,7 @@ module Aws::Neptunedata
     #   <p>If this flag is set to <code>TRUE</code>, the results include a detailed report of all index operations that took place during query execution and serialization.</p>
     #   @return [Boolean]
     class ExecuteGremlinProfileQueryInput < Struct.new(
+      nil,
       :gremlin_query,
       :results,
       :chop,
@@ -557,6 +591,7 @@ module Aws::Neptunedata
     #   <p>A text blob containing the Gremlin Profile result. See <a href="https://docs.aws.amazon.com/neptune/latest/userguide/gremlin-profile-api.html">Gremlin profile API in Neptune</a> for details.</p>
     #   @return [String]
     class ExecuteGremlinProfileQueryOutput < Struct.new(
+      nil,
       :output,
       keyword_init: true
     )
@@ -570,6 +605,7 @@ module Aws::Neptunedata
     #   <p>If non-null, the query results are returned in a serialized response message in the format specified by this parameter. See the <a href="https://tinkerpop.apache.org/docs/current/reference/#_graphson">GraphSON</a> section in the TinkerPop documentation for a list of the formats that are currently supported.</p>
     #   @return [String]
     class ExecuteGremlinQueryInput < Struct.new(
+      nil,
       :gremlin_query,
       :serializer,
       keyword_init: true
@@ -590,6 +626,7 @@ module Aws::Neptunedata
     #   <p>Metadata about the Gremlin query.</p>
     #   @return [JSON]
     class ExecuteGremlinQueryOutput < Struct.new(
+      nil,
       :request_id,
       :status,
       :result,
@@ -609,6 +646,7 @@ module Aws::Neptunedata
     #   <p>The openCypher <code>explain</code> mode. Can be one of: <code>static</code>, <code>dynamic</code>, or <code>details</code>.</p>
     #   @return [String]
     class ExecuteOpenCypherExplainQueryInput < Struct.new(
+      nil,
       :open_cypher_query,
       :parameters,
       :explain_mode,
@@ -621,6 +659,7 @@ module Aws::Neptunedata
     #   <p>A text blob containing the openCypher <code>explain</code> results.</p>
     #   @return [String]
     class ExecuteOpenCypherExplainQueryOutput < Struct.new(
+      nil,
       :results,
       keyword_init: true
     )
@@ -634,6 +673,7 @@ module Aws::Neptunedata
     #   <p>The openCypher query parameters for query execution. See <a href="https://docs.aws.amazon.com/neptune/latest/userguide/opencypher-parameterized-queries.html">Examples of openCypher parameterized queries</a> for more information.</p>
     #   @return [String]
     class ExecuteOpenCypherQueryInput < Struct.new(
+      nil,
       :open_cypher_query,
       :parameters,
       keyword_init: true
@@ -645,6 +685,7 @@ module Aws::Neptunedata
     #   <p>The openCypherquery results.</p>
     #   @return [JSON]
     class ExecuteOpenCypherQueryOutput < Struct.new(
+      nil,
       :results,
       keyword_init: true
     )
@@ -662,6 +703,7 @@ module Aws::Neptunedata
     #   <p>The HTTP status code returned with the exception.</p>
     #   @return [String]
     class ExpiredStreamException < Struct.new(
+      nil,
       :detailed_message,
       :request_id,
       :code,
@@ -681,6 +723,7 @@ module Aws::Neptunedata
     #   <p>The HTTP status code returned with the exception.</p>
     #   @return [String]
     class FailureByQueryException < Struct.new(
+      nil,
       :detailed_message,
       :request_id,
       :code,
@@ -694,6 +737,7 @@ module Aws::Neptunedata
     #   <p>A UUID generated by the database in the <code>initiateDatabaseReset</code> action, and then consumed by the <code>performDatabaseReset</code> to reset the database.</p>
     #   @return [String]
     class FastResetToken < Struct.new(
+      nil,
       :token,
       keyword_init: true
     )
@@ -740,6 +784,7 @@ module Aws::Neptunedata
     #   <p>Contains information about the current settings on your DB cluster. For example, contains the current cluster query timeout setting (<code>clusterQueryTimeoutInMs</code>).</p>
     #   @return [Hash<String, String>]
     class GetEngineStatusOutput < Struct.new(
+      nil,
       :status,
       :start_time,
       :db_engine_version,
@@ -762,6 +807,7 @@ module Aws::Neptunedata
     #   <p>The unique identifier that identifies the Gremlin query.</p>
     #   @return [String]
     class GetGremlinQueryStatusInput < Struct.new(
+      nil,
       :query_id,
       keyword_init: true
     )
@@ -778,6 +824,7 @@ module Aws::Neptunedata
     #   <p>The evaluation status of the Gremlin query.</p>
     #   @return [Types::QueryEvalStats]
     class GetGremlinQueryStatusOutput < Struct.new(
+      nil,
       :query_id,
       :query_string,
       :query_eval_stats,
@@ -802,6 +849,7 @@ module Aws::Neptunedata
     #   <p>The number of errors returned in each page (a positive integer; the default is <code>10</code>). Only valid when the <code>errors</code> parameter set to <code>TRUE</code>.</p>
     #   @return [Integer]
     class GetLoaderJobStatusInput < Struct.new(
+      nil,
       :load_id,
       :details,
       :errors,
@@ -819,6 +867,7 @@ module Aws::Neptunedata
     #   <p>Status information about the load job, in a layout that could look like this:</p>
     #   @return [JSON]
     class GetLoaderJobStatusOutput < Struct.new(
+      nil,
       :status,
       :payload,
       keyword_init: true
@@ -833,6 +882,7 @@ module Aws::Neptunedata
     #   <p>The ARN of an IAM role that provides Neptune access to SageMaker and Amazon S3 resources. This must be listed in your DB cluster parameter group or an error will occur.</p>
     #   @return [String]
     class GetMLDataProcessingJobInput < Struct.new(
+      nil,
       :id,
       :neptune_iam_role_arn,
       keyword_init: true
@@ -850,6 +900,7 @@ module Aws::Neptunedata
     #   <p>Definition of the data processing job.</p>
     #   @return [Types::MlResourceDefinition]
     class GetMLDataProcessingJobOutput < Struct.new(
+      nil,
       :status,
       :id,
       :processing_job,
@@ -865,6 +916,7 @@ module Aws::Neptunedata
     #   <p>The ARN of an IAM role that provides Neptune access to SageMaker and Amazon S3 resources. This must be listed in your DB cluster parameter group or an error will occur.</p>
     #   @return [String]
     class GetMLEndpointInput < Struct.new(
+      nil,
       :id,
       :neptune_iam_role_arn,
       keyword_init: true
@@ -885,6 +937,7 @@ module Aws::Neptunedata
     #   <p>The endpoint configuration</p>
     #   @return [Types::MlConfigDefinition]
     class GetMLEndpointOutput < Struct.new(
+      nil,
       :status,
       :id,
       :endpoint,
@@ -901,6 +954,7 @@ module Aws::Neptunedata
     #   <p>The ARN of an IAM role that provides Neptune access to SageMaker and Amazon S3 resources. This must be listed in your DB cluster parameter group or an error will occur.</p>
     #   @return [String]
     class GetMLModelTrainingJobInput < Struct.new(
+      nil,
       :id,
       :neptune_iam_role_arn,
       keyword_init: true
@@ -927,6 +981,7 @@ module Aws::Neptunedata
     #   <p>A list of the configurations of the ML models being used.</p>
     #   @return [Array<Types::MlConfigDefinition>]
     class GetMLModelTrainingJobOutput < Struct.new(
+      nil,
       :status,
       :id,
       :processing_job,
@@ -945,6 +1000,7 @@ module Aws::Neptunedata
     #   <p>The ARN of an IAM role that provides Neptune access to SageMaker and Amazon S3 resources. This must be listed in your DB cluster parameter group or an error will occur.</p>
     #   @return [String]
     class GetMLModelTransformJobInput < Struct.new(
+      nil,
       :id,
       :neptune_iam_role_arn,
       keyword_init: true
@@ -968,6 +1024,7 @@ module Aws::Neptunedata
     #   <p>A list of the configuration information for the models being used.</p>
     #   @return [Array<Types::MlConfigDefinition>]
     class GetMLModelTransformJobOutput < Struct.new(
+      nil,
       :status,
       :id,
       :base_processing_job,
@@ -982,6 +1039,7 @@ module Aws::Neptunedata
     #   <p>The unique ID of the openCypher query for which to retrieve the query status.</p>
     #   @return [String]
     class GetOpenCypherQueryStatusInput < Struct.new(
+      nil,
       :query_id,
       keyword_init: true
     )
@@ -998,6 +1056,7 @@ module Aws::Neptunedata
     #   <p>The openCypher query evaluation status.</p>
     #   @return [Types::QueryEvalStats]
     class GetOpenCypherQueryStatusOutput < Struct.new(
+      nil,
       :query_id,
       :query_string,
       :query_eval_stats,
@@ -1013,6 +1072,7 @@ module Aws::Neptunedata
     #   <p>Statistics for property-graph data.</p>
     #   @return [Types::Statistics]
     class GetPropertygraphStatisticsOutput < Struct.new(
+      nil,
       :status,
       :payload,
       keyword_init: true
@@ -1036,6 +1096,7 @@ module Aws::Neptunedata
     #   <p>If set to TRUE, Neptune compresses the response using gzip encoding.</p>
     #   @return [String]
     class GetPropertygraphStreamInput < Struct.new(
+      nil,
       :limit,
       :iterator_type,
       :commit_num,
@@ -1062,6 +1123,7 @@ module Aws::Neptunedata
     #   <p>The total number of records in the response.</p>
     #   @return [Integer]
     class GetPropertygraphStreamOutput < Struct.new(
+      nil,
       :last_event_id,
       :last_trx_timestamp_in_millis,
       :format,
@@ -1076,6 +1138,7 @@ module Aws::Neptunedata
     #   <p>Mode can take one of two values: <code>BASIC</code> (the default), and <code>DETAILED</code>.</p>
     #   @return [String]
     class GetPropertygraphSummaryInput < Struct.new(
+      nil,
       :mode,
       keyword_init: true
     )
@@ -1089,6 +1152,7 @@ module Aws::Neptunedata
     #   <p>Payload containing the property graph summary response.</p>
     #   @return [Types::PropertygraphSummaryValueMap]
     class GetPropertygraphSummaryOutput < Struct.new(
+      nil,
       :status_code,
       :payload,
       keyword_init: true
@@ -1100,6 +1164,7 @@ module Aws::Neptunedata
     #   <p>Mode can take one of two values: <code>BASIC</code> (the default), and <code>DETAILED</code>.</p>
     #   @return [String]
     class GetRDFGraphSummaryInput < Struct.new(
+      nil,
       :mode,
       keyword_init: true
     )
@@ -1113,6 +1178,7 @@ module Aws::Neptunedata
     #   <p>Payload for an RDF graph summary response</p>
     #   @return [Types::RDFGraphSummaryValueMap]
     class GetRDFGraphSummaryOutput < Struct.new(
+      nil,
       :status_code,
       :payload,
       keyword_init: true
@@ -1127,6 +1193,7 @@ module Aws::Neptunedata
     #   <p>Statistics for RDF data.</p>
     #   @return [Types::Statistics]
     class GetSparqlStatisticsOutput < Struct.new(
+      nil,
       :status,
       :payload,
       keyword_init: true
@@ -1150,6 +1217,7 @@ module Aws::Neptunedata
     #   <p>If set to TRUE, Neptune compresses the response using gzip encoding.</p>
     #   @return [String]
     class GetSparqlStreamInput < Struct.new(
+      nil,
       :limit,
       :iterator_type,
       :commit_num,
@@ -1176,6 +1244,7 @@ module Aws::Neptunedata
     #   <p>The total number of records in the response.</p>
     #   @return [Integer]
     class GetSparqlStreamOutput < Struct.new(
+      nil,
       :last_event_id,
       :last_trx_timestamp_in_millis,
       :format,
@@ -1197,6 +1266,7 @@ module Aws::Neptunedata
     #   <p>The query statistics of the Gremlin query.</p>
     #   @return [Types::QueryEvalStats]
     class GremlinQueryStatus < Struct.new(
+      nil,
       :query_id,
       :query_string,
       :query_eval_stats,
@@ -1216,6 +1286,7 @@ module Aws::Neptunedata
     #   <p>Attributes of the Gremlin query status.</p>
     #   @return [JSON]
     class GremlinQueryStatusAttributes < Struct.new(
+      nil,
       :message,
       :code,
       :attributes,
@@ -1235,6 +1306,7 @@ module Aws::Neptunedata
     #   <p>The HTTP status code returned with the exception.</p>
     #   @return [String]
     class IllegalArgumentException < Struct.new(
+      nil,
       :detailed_message,
       :request_id,
       :code,
@@ -1254,6 +1326,7 @@ module Aws::Neptunedata
     #   <p>The HTTP status code returned with the exception.</p>
     #   @return [String]
     class InternalFailureException < Struct.new(
+      nil,
       :detailed_message,
       :request_id,
       :code,
@@ -1273,6 +1346,7 @@ module Aws::Neptunedata
     #   <p>The HTTP status code returned with the exception.</p>
     #   @return [String]
     class InvalidArgumentException < Struct.new(
+      nil,
       :detailed_message,
       :request_id,
       :code,
@@ -1292,6 +1366,7 @@ module Aws::Neptunedata
     #   <p>The HTTP status code returned with the exception.</p>
     #   @return [String]
     class InvalidNumericDataException < Struct.new(
+      nil,
       :detailed_message,
       :request_id,
       :code,
@@ -1311,6 +1386,7 @@ module Aws::Neptunedata
     #   <p>The HTTP status code returned with the exception.</p>
     #   @return [String]
     class InvalidParameterException < Struct.new(
+      nil,
       :detailed_message,
       :request_id,
       :code,
@@ -1323,6 +1399,7 @@ module Aws::Neptunedata
     #   <p>If set to <code>TRUE</code>, the list returned includes waiting queries. The default is <code>FALSE</code>;</p>
     #   @return [Boolean]
     class ListGremlinQueriesInput < Struct.new(
+      nil,
       :include_waiting,
       keyword_init: true
     )
@@ -1339,6 +1416,7 @@ module Aws::Neptunedata
     #   <p>A list of the current queries.</p>
     #   @return [Array<Types::GremlinQueryStatus>]
     class ListGremlinQueriesOutput < Struct.new(
+      nil,
       :accepted_query_count,
       :running_query_count,
       :queries,
@@ -1354,6 +1432,7 @@ module Aws::Neptunedata
     #   <p>An optional parameter that can be used to exclude the load IDs of queued load requests when requesting a list of load IDs by setting the parameter to <code>FALSE</code>. The default value is <code>TRUE</code>.</p>
     #   @return [Boolean]
     class ListLoaderJobsInput < Struct.new(
+      nil,
       :limit,
       :include_queued_loads,
       keyword_init: true
@@ -1368,6 +1447,7 @@ module Aws::Neptunedata
     #   <p>The requested list of job IDs.</p>
     #   @return [Types::LoaderIdResult]
     class ListLoaderJobsOutput < Struct.new(
+      nil,
       :status,
       :payload,
       keyword_init: true
@@ -1382,6 +1462,7 @@ module Aws::Neptunedata
     #   <p>The ARN of an IAM role that provides Neptune access to SageMaker and Amazon S3 resources. This must be listed in your DB cluster parameter group or an error will occur.</p>
     #   @return [String]
     class ListMLDataProcessingJobsInput < Struct.new(
+      nil,
       :max_items,
       :neptune_iam_role_arn,
       keyword_init: true
@@ -1393,6 +1474,7 @@ module Aws::Neptunedata
     #   <p>A page listing data processing job IDs.</p>
     #   @return [Array<String>]
     class ListMLDataProcessingJobsOutput < Struct.new(
+      nil,
       :ids,
       keyword_init: true
     )
@@ -1406,6 +1488,7 @@ module Aws::Neptunedata
     #   <p>The ARN of an IAM role that provides Neptune access to SageMaker and Amazon S3 resources. This must be listed in your DB cluster parameter group or an error will occur.</p>
     #   @return [String]
     class ListMLEndpointsInput < Struct.new(
+      nil,
       :max_items,
       :neptune_iam_role_arn,
       keyword_init: true
@@ -1417,6 +1500,7 @@ module Aws::Neptunedata
     #   <p>A page from the list of inference endpoint IDs.</p>
     #   @return [Array<String>]
     class ListMLEndpointsOutput < Struct.new(
+      nil,
       :ids,
       keyword_init: true
     )
@@ -1430,6 +1514,7 @@ module Aws::Neptunedata
     #   <p>The ARN of an IAM role that provides Neptune access to SageMaker and Amazon S3 resources. This must be listed in your DB cluster parameter group or an error will occur.</p>
     #   @return [String]
     class ListMLModelTrainingJobsInput < Struct.new(
+      nil,
       :max_items,
       :neptune_iam_role_arn,
       keyword_init: true
@@ -1441,6 +1526,7 @@ module Aws::Neptunedata
     #   <p>A page of the list of model training job IDs.</p>
     #   @return [Array<String>]
     class ListMLModelTrainingJobsOutput < Struct.new(
+      nil,
       :ids,
       keyword_init: true
     )
@@ -1454,6 +1540,7 @@ module Aws::Neptunedata
     #   <p>The ARN of an IAM role that provides Neptune access to SageMaker and Amazon S3 resources. This must be listed in your DB cluster parameter group or an error will occur.</p>
     #   @return [String]
     class ListMLModelTransformJobsInput < Struct.new(
+      nil,
       :max_items,
       :neptune_iam_role_arn,
       keyword_init: true
@@ -1465,6 +1552,7 @@ module Aws::Neptunedata
     #   <p>A page from the list of model transform IDs.</p>
     #   @return [Array<String>]
     class ListMLModelTransformJobsOutput < Struct.new(
+      nil,
       :ids,
       keyword_init: true
     )
@@ -1475,6 +1563,7 @@ module Aws::Neptunedata
     #   <p> When set to <code>TRUE</code> and other parameters are not present, causes status information to be returned for waiting queries as well as for running queries.</p>
     #   @return [Boolean]
     class ListOpenCypherQueriesInput < Struct.new(
+      nil,
       :include_waiting,
       keyword_init: true
     )
@@ -1491,6 +1580,7 @@ module Aws::Neptunedata
     #   <p>A list of current openCypher queries.</p>
     #   @return [Array<Types::GremlinQueryStatus>]
     class ListOpenCypherQueriesOutput < Struct.new(
+      nil,
       :accepted_query_count,
       :running_query_count,
       :queries,
@@ -1510,6 +1600,7 @@ module Aws::Neptunedata
     #   <p>The HTTP status code returned with the exception.</p>
     #   @return [String]
     class LoadUrlAccessDeniedException < Struct.new(
+      nil,
       :detailed_message,
       :request_id,
       :code,
@@ -1523,6 +1614,7 @@ module Aws::Neptunedata
     #   <p>A list of load IDs.</p>
     #   @return [Array<String>]
     class LoaderIdResult < Struct.new(
+      nil,
       :load_ids,
       keyword_init: true
     )
@@ -1540,6 +1632,7 @@ module Aws::Neptunedata
     #   <p>The HTTP status code returned with the exception.</p>
     #   @return [String]
     class MLResourceNotFoundException < Struct.new(
+      nil,
       :detailed_message,
       :request_id,
       :code,
@@ -1559,6 +1652,7 @@ module Aws::Neptunedata
     #   <p>The HTTP status code returned with the exception.</p>
     #   @return [String]
     class MalformedQueryException < Struct.new(
+      nil,
       :detailed_message,
       :request_id,
       :code,
@@ -1571,6 +1665,7 @@ module Aws::Neptunedata
     #   <p>The statistics generation mode. One of: <code>DISABLE_AUTOCOMPUTE</code>, <code>ENABLE_AUTOCOMPUTE</code>, or <code>REFRESH</code>, the last of which manually triggers DFE statistics generation.</p>
     #   @return [String]
     class ManagePropertygraphStatisticsInput < Struct.new(
+      nil,
       :mode,
       keyword_init: true
     )
@@ -1584,6 +1679,7 @@ module Aws::Neptunedata
     #   <p>This is only returned for refresh mode.</p>
     #   @return [Types::RefreshStatisticsIdMap]
     class ManagePropertygraphStatisticsOutput < Struct.new(
+      nil,
       :status,
       :payload,
       keyword_init: true
@@ -1595,6 +1691,7 @@ module Aws::Neptunedata
     #   <p>The statistics generation mode. One of: <code>DISABLE_AUTOCOMPUTE</code>, <code>ENABLE_AUTOCOMPUTE</code>, or <code>REFRESH</code>, the last of which manually triggers DFE statistics generation.</p>
     #   @return [String]
     class ManageSparqlStatisticsInput < Struct.new(
+      nil,
       :mode,
       keyword_init: true
     )
@@ -1608,6 +1705,7 @@ module Aws::Neptunedata
     #   <p>This is only returned for refresh mode.</p>
     #   @return [Types::RefreshStatisticsIdMap]
     class ManageSparqlStatisticsOutput < Struct.new(
+      nil,
       :status,
       :payload,
       keyword_init: true
@@ -1626,6 +1724,7 @@ module Aws::Neptunedata
     #   <p>The HTTP status code returned with the exception.</p>
     #   @return [String]
     class MemoryLimitExceededException < Struct.new(
+      nil,
       :detailed_message,
       :request_id,
       :code,
@@ -1645,6 +1744,7 @@ module Aws::Neptunedata
     #   <p>The HTTP status code returned with the exception.</p>
     #   @return [String]
     class MethodNotAllowedException < Struct.new(
+      nil,
       :detailed_message,
       :request_id,
       :code,
@@ -1664,6 +1764,7 @@ module Aws::Neptunedata
     #   <p>The HTTP status code returned with the exception.</p>
     #   @return [String]
     class MissingParameterException < Struct.new(
+      nil,
       :detailed_message,
       :request_id,
       :code,
@@ -1680,6 +1781,7 @@ module Aws::Neptunedata
     #   <p>The ARN for the configuration.</p>
     #   @return [String]
     class MlConfigDefinition < Struct.new(
+      nil,
       :name,
       :arn,
       keyword_init: true
@@ -1707,6 +1809,7 @@ module Aws::Neptunedata
     #   <p>The CloudWatch log URL for the resource.</p>
     #   @return [String]
     class MlResourceDefinition < Struct.new(
+      nil,
       :name,
       :arn,
       :status,
@@ -1729,6 +1832,7 @@ module Aws::Neptunedata
     #   <p>A list of distinct outgoing edge labels present in this specific structure.</p>
     #   @return [Array<String>]
     class NodeStructure < Struct.new(
+      nil,
       :count,
       :node_properties,
       :distinct_outgoing_edge_labels,
@@ -1748,6 +1852,7 @@ module Aws::Neptunedata
     #   <p>The HTTP status code returned with the exception.</p>
     #   @return [String]
     class ParsingException < Struct.new(
+      nil,
       :detailed_message,
       :request_id,
       :code,
@@ -1767,6 +1872,7 @@ module Aws::Neptunedata
     #   <p>The HTTP status code returned with the exception.</p>
     #   @return [String]
     class PreconditionsFailedException < Struct.new(
+      nil,
       :detailed_message,
       :request_id,
       :code,
@@ -1795,6 +1901,7 @@ module Aws::Neptunedata
     #   <p>If this is an edge (type = <code>e</code>), the ID of the corresponding <code>to</code> vertex or target node.</p>
     #   @return [String]
     class PropertygraphData < Struct.new(
+      nil,
       :id,
       :type,
       :key,
@@ -1823,6 +1930,7 @@ module Aws::Neptunedata
     #   <p>Only present if this operation is the last one in its transaction. If present, it is set to true. It is useful for ensuring that an entire transaction is consumed.</p>
     #   @return [Boolean]
     class PropertygraphRecord < Struct.new(
+      nil,
       :commit_timestamp_in_millis,
       :event_id,
       :data,
@@ -1877,6 +1985,7 @@ module Aws::Neptunedata
     #   <p>This field is only present when the requested mode is <code>DETAILED</code>. It contains a list of edge structures.</p>
     #   @return [Array<Types::EdgeStructure>]
     class PropertygraphSummary < Struct.new(
+      nil,
       :num_nodes,
       :num_edges,
       :num_node_labels,
@@ -1907,6 +2016,7 @@ module Aws::Neptunedata
     #   <p>The graph summary.</p>
     #   @return [Types::PropertygraphSummary]
     class PropertygraphSummaryValueMap < Struct.new(
+      nil,
       :version,
       :last_statistics_computation_time,
       :graph_summary,
@@ -1929,6 +2039,7 @@ module Aws::Neptunedata
     #   <p>The number of subqueries in this query.</p>
     #   @return [JSON]
     class QueryEvalStats < Struct.new(
+      nil,
       :waited,
       :elapsed,
       :cancelled,
@@ -1943,6 +2054,7 @@ module Aws::Neptunedata
     #   <p>The version of the query language.</p>
     #   @return [String]
     class QueryLanguageVersion < Struct.new(
+      nil,
       :version,
       keyword_init: true
     )
@@ -1960,6 +2072,7 @@ module Aws::Neptunedata
     #   <p>The HTTP status code returned with the exception.</p>
     #   @return [String]
     class QueryLimitExceededException < Struct.new(
+      nil,
       :detailed_message,
       :request_id,
       :code,
@@ -1979,6 +2092,7 @@ module Aws::Neptunedata
     #   <p>The HTTP status code returned with the exception.</p>
     #   @return [String]
     class QueryLimitException < Struct.new(
+      nil,
       :detailed_message,
       :request_id,
       :code,
@@ -1998,6 +2112,7 @@ module Aws::Neptunedata
     #   <p>The HTTP status code returned with the exception.</p>
     #   @return [String]
     class QueryTooLargeException < Struct.new(
+      nil,
       :detailed_message,
       :request_id,
       :code,
@@ -2029,6 +2144,7 @@ module Aws::Neptunedata
     #   <p>This field is only present when the request mode is <code>DETAILED</code>. It contains a list of subject structures.</p>
     #   @return [Array<Types::SubjectStructure>]
     class RDFGraphSummary < Struct.new(
+      nil,
       :num_distinct_subjects,
       :num_distinct_predicates,
       :num_quads,
@@ -2052,6 +2168,7 @@ module Aws::Neptunedata
     #   <p>The graph summary of an RDF graph. See <a href="https://docs.aws.amazon.com/neptune/latest/userguide/neptune-graph-summary.html#neptune-graph-summary-rdf-response">Graph summary response for an RDF graph</a>.</p>
     #   @return [Types::RDFGraphSummary]
     class RDFGraphSummaryValueMap < Struct.new(
+      nil,
       :version,
       :last_statistics_computation_time,
       :graph_summary,
@@ -2071,6 +2188,7 @@ module Aws::Neptunedata
     #   <p>The HTTP status code returned with the exception.</p>
     #   @return [String]
     class ReadOnlyViolationException < Struct.new(
+      nil,
       :detailed_message,
       :request_id,
       :code,
@@ -2084,6 +2202,7 @@ module Aws::Neptunedata
     #   <p>The ID of the statistics generation run that is currently occurring.</p>
     #   @return [String]
     class RefreshStatisticsIdMap < Struct.new(
+      nil,
       :statistics_id,
       keyword_init: true
     )
@@ -2101,6 +2220,7 @@ module Aws::Neptunedata
     #   <p>The HTTP status code returned with the exception.</p>
     #   @return [String]
     class S3Exception < Struct.new(
+      nil,
       :detailed_message,
       :request_id,
       :code,
@@ -2120,6 +2240,7 @@ module Aws::Neptunedata
     #   <p>The HTTP status code returned with the exception.</p>
     #   @return [String]
     class ServerShutdownException < Struct.new(
+      nil,
       :detailed_message,
       :request_id,
       :code,
@@ -2133,6 +2254,7 @@ module Aws::Neptunedata
     #   <p>Holds an <a href="https://www.w3.org/TR/n-quads/">N-QUADS</a> statement expressing the changed quad.</p>
     #   @return [String]
     class SparqlData < Struct.new(
+      nil,
       :stmt,
       keyword_init: true
     )
@@ -2156,6 +2278,7 @@ module Aws::Neptunedata
     #   <p>Only present if this operation is the last one in its transaction. If present, it is set to true. It is useful for ensuring that an entire transaction is consumed.</p>
     #   @return [Boolean]
     class SparqlRecord < Struct.new(
+      nil,
       :commit_timestamp_in_millis,
       :event_id,
       :data,
@@ -2203,6 +2326,7 @@ module Aws::Neptunedata
     #   <p>This parameter is required only when loading openCypher data that contains relationship IDs. It must be included and set to <code>True</code> when openCypher relationship IDs are explicitly provided in the load data (recommended).</p> <p>When <code>userProvidedEdgeIds</code> is absent or set to <code>True</code>, an <code>:ID</code> column must be present in every relationship file in the load.</p> <p>When <code>userProvidedEdgeIds</code> is present and set to <code>False</code>, relationship files in the load <b>must not</b> contain an <code>:ID</code> column. Instead, the Neptune loader automatically generates an ID for each relationship.</p> <p>It's useful to provide relationship IDs explicitly so that the loader can resume loading after error in the CSV data have been fixed, without having to reload any relationships that have already been loaded. If relationship IDs have not been explicitly assigned, the loader cannot resume a failed load if any relationship file has had to be corrected, and must instead reload all the relationships.</p>
     #   @return [Boolean]
     class StartLoaderJobInput < Struct.new(
+      nil,
       :source,
       :format,
       :s3_bucket_region,
@@ -2227,6 +2351,7 @@ module Aws::Neptunedata
     #   <p>Contains a <code>loadId</code> name-value pair that provides an identifier for the load operation.</p>
     #   @return [Hash<String, String>]
     class StartLoaderJobOutput < Struct.new(
+      nil,
       :status,
       :payload,
       keyword_init: true
@@ -2280,6 +2405,7 @@ module Aws::Neptunedata
     #   <p>The Amazon Key Management Service (Amazon KMS) key that SageMaker uses to encrypt the output of the processing job. The default is none.</p>
     #   @return [String]
     class StartMLDataProcessingJobInput < Struct.new(
+      nil,
       :id,
       :previous_data_processing_job_id,
       :input_data_s3_location,
@@ -2310,6 +2436,7 @@ module Aws::Neptunedata
     #   <p>The time it took to create the new processing job, in milliseconds.</p>
     #   @return [Integer]
     class StartMLDataProcessingJobOutput < Struct.new(
+      nil,
       :id,
       :arn,
       :creation_time_in_millis,
@@ -2373,6 +2500,7 @@ module Aws::Neptunedata
     #   <p>The configuration for custom model training. This is a JSON object.</p>
     #   @return [Types::CustomModelTrainingParameters]
     class StartMLModelTrainingJobInput < Struct.new(
+      nil,
       :id,
       :previous_model_training_job_id,
       :data_processing_job_id,
@@ -2406,6 +2534,7 @@ module Aws::Neptunedata
     #   <p>The model training job creation time, in milliseconds.</p>
     #   @return [Integer]
     class StartMLModelTrainingJobOutput < Struct.new(
+      nil,
       :id,
       :arn,
       :creation_time_in_millis,
@@ -2457,6 +2586,7 @@ module Aws::Neptunedata
     #   <p>The Amazon Key Management Service (KMS) key that SageMaker uses to encrypt the output of the processing job. The default is none.</p>
     #   @return [String]
     class StartMLModelTransformJobInput < Struct.new(
+      nil,
       :id,
       :data_processing_job_id,
       :ml_model_training_job_id,
@@ -2486,6 +2616,7 @@ module Aws::Neptunedata
     #   <p>The creation time of the model transform job, in milliseconds.</p>
     #   @return [Integer]
     class StartMLModelTransformJobOutput < Struct.new(
+      nil,
       :id,
       :arn,
       :creation_time_in_millis,
@@ -2514,6 +2645,7 @@ module Aws::Neptunedata
     #   <p>A StatisticsSummary structure that contains:</p> <ul> <li> <p> <code>signatureCount</code> - The total number of signatures across all characteristic sets.</p> </li> <li> <p> <code>instanceCount</code> - The total number of characteristic-set instances.</p> </li> <li> <p> <code>predicateCount</code> - The total number of unique predicates.</p> </li> </ul>
     #   @return [Types::StatisticsSummary]
     class Statistics < Struct.new(
+      nil,
       :auto_compute,
       :active,
       :statistics_id,
@@ -2536,6 +2668,7 @@ module Aws::Neptunedata
     #   <p>The HTTP status code returned with the exception.</p>
     #   @return [String]
     class StatisticsNotAvailableException < Struct.new(
+      nil,
       :detailed_message,
       :request_id,
       :code,
@@ -2555,6 +2688,7 @@ module Aws::Neptunedata
     #   <p>The total number of unique predicates.</p>
     #   @return [Integer]
     class StatisticsSummary < Struct.new(
+      nil,
       :signature_count,
       :instance_count,
       :predicate_count,
@@ -2574,6 +2708,7 @@ module Aws::Neptunedata
     #   <p>The HTTP status code returned with the exception.</p>
     #   @return [String]
     class StreamRecordsNotFoundException < Struct.new(
+      nil,
       :detailed_message,
       :request_id,
       :code,
@@ -2590,6 +2725,7 @@ module Aws::Neptunedata
     #   <p>A list of predicates present in this specific structure.</p>
     #   @return [Array<String>]
     class SubjectStructure < Struct.new(
+      nil,
       :count,
       :predicates,
       keyword_init: true
@@ -2608,6 +2744,7 @@ module Aws::Neptunedata
     #   <p>The HTTP status code returned with the exception.</p>
     #   @return [String]
     class ThrottlingException < Struct.new(
+      nil,
       :detailed_message,
       :request_id,
       :code,
@@ -2627,6 +2764,7 @@ module Aws::Neptunedata
     #   <p>The HTTP status code returned with the exception.</p>
     #   @return [String]
     class TimeLimitExceededException < Struct.new(
+      nil,
       :detailed_message,
       :request_id,
       :code,
@@ -2646,6 +2784,7 @@ module Aws::Neptunedata
     #   <p>The HTTP status code returned with the exception.</p>
     #   @return [String]
     class TooManyRequestsException < Struct.new(
+      nil,
       :detailed_message,
       :request_id,
       :code,
@@ -2665,6 +2804,7 @@ module Aws::Neptunedata
     #   <p>The HTTP status code returned with the exception.</p>
     #   @return [String]
     class UnsupportedOperationException < Struct.new(
+      nil,
       :detailed_message,
       :request_id,
       :code,

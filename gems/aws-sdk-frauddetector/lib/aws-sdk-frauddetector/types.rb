@@ -35,6 +35,7 @@ module Aws::FraudDetector
     #           </p>
     #   @return [Float]
     class ATIMetricDataPoint < Struct.new(
+      nil,
       :cr,
       :adr,
       :threshold,
@@ -55,6 +56,7 @@ module Aws::FraudDetector
     #           </p>
     #   @return [Float]
     class ATIModelPerformance < Struct.new(
+      nil,
       :asi,
       keyword_init: true
     )
@@ -75,6 +77,7 @@ module Aws::FraudDetector
     #           </p>
     #   @return [Types::ATIModelPerformance]
     class ATITrainingMetricsValue < Struct.new(
+      nil,
       :metric_data_points,
       :model_performance,
       keyword_init: true
@@ -86,6 +89,7 @@ module Aws::FraudDetector
     # @!attribute message
     #   @return [String]
     class AccessDeniedException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -107,6 +111,7 @@ module Aws::FraudDetector
     #           </p>
     #   @return [Float]
     class AggregatedLogOddsMetric < Struct.new(
+      nil,
       :variable_names,
       :aggregated_variables_importance,
       keyword_init: true
@@ -142,6 +147,7 @@ module Aws::FraudDetector
     #            </ul>
     #   @return [Float]
     class AggregatedVariablesImpactExplanation < Struct.new(
+      nil,
       :event_variable_names,
       :relative_impact,
       :log_odds_impact,
@@ -160,6 +166,7 @@ module Aws::FraudDetector
     #           </p>
     #   @return [Array<Types::AggregatedLogOddsMetric>]
     class AggregatedVariablesImportanceMetrics < Struct.new(
+      nil,
       :log_odds_metrics,
       keyword_init: true
     )
@@ -200,6 +207,7 @@ module Aws::FraudDetector
     #           </p>
     #   @return [String]
     class AllowDenyList < Struct.new(
+      nil,
       :name,
       :description,
       :variable_type,
@@ -222,6 +230,7 @@ module Aws::FraudDetector
     #   <p>The error message.</p>
     #   @return [String]
     class BatchCreateVariableError < Struct.new(
+      nil,
       :name,
       :code,
       :message,
@@ -242,6 +251,7 @@ module Aws::FraudDetector
     #   <p>A collection of key and value pairs.</p>
     #   @return [Array<Types::Tag>]
     class BatchCreateVariableRequest < Struct.new(
+      nil,
       :variable_entries,
       :tags,
       keyword_init: true
@@ -253,6 +263,7 @@ module Aws::FraudDetector
     #   <p>Provides the errors for the <code>BatchCreateVariable</code> request.</p>
     #   @return [Array<Types::BatchCreateVariableError>]
     class BatchCreateVariableResult < Struct.new(
+      nil,
       :errors,
       keyword_init: true
     )
@@ -270,6 +281,7 @@ module Aws::FraudDetector
     #   <p>The error message.</p>
     #   @return [String]
     class BatchGetVariableError < Struct.new(
+      nil,
       :name,
       :code,
       :message,
@@ -287,6 +299,7 @@ module Aws::FraudDetector
     #   <p>The list of variable names to get.</p>
     #   @return [Array<String>]
     class BatchGetVariableRequest < Struct.new(
+      nil,
       :names,
       keyword_init: true
     )
@@ -300,6 +313,7 @@ module Aws::FraudDetector
     #   <p>The errors from the request.</p>
     #   @return [Array<Types::BatchGetVariableError>]
     class BatchGetVariableResult < Struct.new(
+      nil,
       :variables,
       :errors,
       keyword_init: true
@@ -348,6 +362,7 @@ module Aws::FraudDetector
     #   <p>The total number of records in the batch import job.</p>
     #   @return [Integer]
     class BatchImport < Struct.new(
+      nil,
       :job_id,
       :status,
       :failure_reason,
@@ -413,6 +428,7 @@ module Aws::FraudDetector
     #   <p>The total number of records in the batch prediction job.</p>
     #   @return [Integer]
     class BatchPrediction < Struct.new(
+      nil,
       :job_id,
       :status,
       :failure_reason,
@@ -438,6 +454,7 @@ module Aws::FraudDetector
     #            <p>Amazon Fraud Detector will throw an error if the batch import job is in <code>FAILED</code>, <code>CANCELED</code>, or  <code>COMPLETED</code> state.</p>
     #   @return [String]
     class CancelBatchImportJobRequest < Struct.new(
+      nil,
       :job_id,
       keyword_init: true
     )
@@ -445,6 +462,7 @@ module Aws::FraudDetector
     end
 
     class CancelBatchImportJobResult < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -454,6 +472,7 @@ module Aws::FraudDetector
     #   <p>The ID of the batch prediction job to cancel.</p>
     #   @return [String]
     class CancelBatchPredictionJobRequest < Struct.new(
+      nil,
       :job_id,
       keyword_init: true
     )
@@ -461,6 +480,7 @@ module Aws::FraudDetector
     end
 
     class CancelBatchPredictionJobResult < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -470,6 +490,7 @@ module Aws::FraudDetector
     # @!attribute message
     #   @return [String]
     class ConflictException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -498,6 +519,7 @@ module Aws::FraudDetector
     #   <p>A collection of key-value pairs associated with this request.  </p>
     #   @return [Array<Types::Tag>]
     class CreateBatchImportJobRequest < Struct.new(
+      nil,
       :job_id,
       :input_path,
       :output_path,
@@ -510,6 +532,7 @@ module Aws::FraudDetector
     end
 
     class CreateBatchImportJobResult < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -543,6 +566,7 @@ module Aws::FraudDetector
     #   <p>A collection of key and value pairs.</p>
     #   @return [Array<Types::Tag>]
     class CreateBatchPredictionJobRequest < Struct.new(
+      nil,
       :job_id,
       :input_path,
       :output_path,
@@ -557,6 +581,7 @@ module Aws::FraudDetector
     end
 
     class CreateBatchPredictionJobResult < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -588,6 +613,7 @@ module Aws::FraudDetector
     #   <p>A collection of key and value pairs.</p>
     #   @return [Array<Types::Tag>]
     class CreateDetectorVersionRequest < Struct.new(
+      nil,
       :detector_id,
       :description,
       :external_model_endpoints,
@@ -610,6 +636,7 @@ module Aws::FraudDetector
     #   <p>The status of the detector version.</p>
     #   @return [String]
     class CreateDetectorVersionResult < Struct.new(
+      nil,
       :detector_id,
       :detector_version_id,
       :status,
@@ -645,6 +672,7 @@ module Aws::FraudDetector
     #           </p>
     #   @return [Array<Types::Tag>]
     class CreateListRequest < Struct.new(
+      nil,
       :name,
       :elements,
       :variable_type,
@@ -656,6 +684,7 @@ module Aws::FraudDetector
     end
 
     class CreateListResult < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -677,6 +706,7 @@ module Aws::FraudDetector
     #   <p>A collection of key and value pairs.</p>
     #   @return [Array<Types::Tag>]
     class CreateModelRequest < Struct.new(
+      nil,
       :model_id,
       :model_type,
       :description,
@@ -688,6 +718,7 @@ module Aws::FraudDetector
     end
 
     class CreateModelResult < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -715,6 +746,7 @@ module Aws::FraudDetector
     #   <p>A collection of key and value pairs.</p>
     #   @return [Array<Types::Tag>]
     class CreateModelVersionRequest < Struct.new(
+      nil,
       :model_id,
       :model_type,
       :training_data_source,
@@ -740,6 +772,7 @@ module Aws::FraudDetector
     #   <p>The model version status. </p>
     #   @return [String]
     class CreateModelVersionResult < Struct.new(
+      nil,
       :model_id,
       :model_type,
       :model_version_number,
@@ -771,6 +804,7 @@ module Aws::FraudDetector
     #   <p>A collection of key and value pairs.</p>
     #   @return [Array<Types::Tag>]
     class CreateRuleRequest < Struct.new(
+      nil,
       :rule_id,
       :detector_id,
       :description,
@@ -787,6 +821,7 @@ module Aws::FraudDetector
     #   <p>The created rule.</p>
     #   @return [Types::Rule]
     class CreateRuleResult < Struct.new(
+      nil,
       :rule,
       keyword_init: true
     )
@@ -818,6 +853,7 @@ module Aws::FraudDetector
     #   <p>A collection of key and value pairs.</p>
     #   @return [Array<Types::Tag>]
     class CreateVariableRequest < Struct.new(
+      nil,
       :name,
       :data_type,
       :data_source,
@@ -831,6 +867,7 @@ module Aws::FraudDetector
     end
 
     class CreateVariableResult < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -844,6 +881,7 @@ module Aws::FraudDetector
     #   <p>The field-specific model training validation messages.</p>
     #   @return [Array<Types::FieldValidationMessage>]
     class DataValidationMetrics < Struct.new(
+      nil,
       :file_level_messages,
       :field_level_messages,
       keyword_init: true
@@ -855,6 +893,7 @@ module Aws::FraudDetector
     #   <p>The ID of the batch import job to delete. </p>
     #   @return [String]
     class DeleteBatchImportJobRequest < Struct.new(
+      nil,
       :job_id,
       keyword_init: true
     )
@@ -862,6 +901,7 @@ module Aws::FraudDetector
     end
 
     class DeleteBatchImportJobResult < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -871,6 +911,7 @@ module Aws::FraudDetector
     #   <p>The ID of the batch prediction job to delete.</p>
     #   @return [String]
     class DeleteBatchPredictionJobRequest < Struct.new(
+      nil,
       :job_id,
       keyword_init: true
     )
@@ -878,6 +919,7 @@ module Aws::FraudDetector
     end
 
     class DeleteBatchPredictionJobResult < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -887,6 +929,7 @@ module Aws::FraudDetector
     #   <p>The ID of the detector to delete.</p>
     #   @return [String]
     class DeleteDetectorRequest < Struct.new(
+      nil,
       :detector_id,
       keyword_init: true
     )
@@ -894,6 +937,7 @@ module Aws::FraudDetector
     end
 
     class DeleteDetectorResult < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -906,6 +950,7 @@ module Aws::FraudDetector
     #   <p>The ID of the detector version to delete.</p>
     #   @return [String]
     class DeleteDetectorVersionRequest < Struct.new(
+      nil,
       :detector_id,
       :detector_version_id,
       keyword_init: true
@@ -914,6 +959,7 @@ module Aws::FraudDetector
     end
 
     class DeleteDetectorVersionResult < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -923,6 +969,7 @@ module Aws::FraudDetector
     #   <p>The name of the entity type to delete.</p>
     #   @return [String]
     class DeleteEntityTypeRequest < Struct.new(
+      nil,
       :name,
       keyword_init: true
     )
@@ -930,6 +977,7 @@ module Aws::FraudDetector
     end
 
     class DeleteEntityTypeResult < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -945,6 +993,7 @@ module Aws::FraudDetector
     #   <p>Specifies whether or not to delete any predictions associated with the event. If set to <code>True</code>, </p>
     #   @return [Boolean]
     class DeleteEventRequest < Struct.new(
+      nil,
       :event_id,
       :event_type_name,
       :delete_audit_history,
@@ -954,6 +1003,7 @@ module Aws::FraudDetector
     end
 
     class DeleteEventResult < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -963,6 +1013,7 @@ module Aws::FraudDetector
     #   <p>The name of the event type to delete.</p>
     #   @return [String]
     class DeleteEventTypeRequest < Struct.new(
+      nil,
       :name,
       keyword_init: true
     )
@@ -970,6 +1021,7 @@ module Aws::FraudDetector
     end
 
     class DeleteEventTypeResult < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -979,6 +1031,7 @@ module Aws::FraudDetector
     #   <p>The name of the event type.</p>
     #   @return [String]
     class DeleteEventsByEventTypeRequest < Struct.new(
+      nil,
       :event_type_name,
       keyword_init: true
     )
@@ -992,6 +1045,7 @@ module Aws::FraudDetector
     #   <p>The status of the delete request.</p>
     #   @return [String]
     class DeleteEventsByEventTypeResult < Struct.new(
+      nil,
       :event_type_name,
       :events_deletion_status,
       keyword_init: true
@@ -1003,6 +1057,7 @@ module Aws::FraudDetector
     #   <p>The endpoint of the Amazon Sagemaker model to delete.</p>
     #   @return [String]
     class DeleteExternalModelRequest < Struct.new(
+      nil,
       :model_endpoint,
       keyword_init: true
     )
@@ -1010,6 +1065,7 @@ module Aws::FraudDetector
     end
 
     class DeleteExternalModelResult < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1019,6 +1075,7 @@ module Aws::FraudDetector
     #   <p>The name of the label to delete.</p>
     #   @return [String]
     class DeleteLabelRequest < Struct.new(
+      nil,
       :name,
       keyword_init: true
     )
@@ -1026,6 +1083,7 @@ module Aws::FraudDetector
     end
 
     class DeleteLabelResult < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1037,6 +1095,7 @@ module Aws::FraudDetector
     #           </p>
     #   @return [String]
     class DeleteListRequest < Struct.new(
+      nil,
       :name,
       keyword_init: true
     )
@@ -1044,6 +1103,7 @@ module Aws::FraudDetector
     end
 
     class DeleteListResult < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1056,6 +1116,7 @@ module Aws::FraudDetector
     #   <p>The model type of the model to delete.</p>
     #   @return [String]
     class DeleteModelRequest < Struct.new(
+      nil,
       :model_id,
       :model_type,
       keyword_init: true
@@ -1064,6 +1125,7 @@ module Aws::FraudDetector
     end
 
     class DeleteModelResult < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1079,6 +1141,7 @@ module Aws::FraudDetector
     #   <p>The model version number of the model version to delete.</p>
     #   @return [String]
     class DeleteModelVersionRequest < Struct.new(
+      nil,
       :model_id,
       :model_type,
       :model_version_number,
@@ -1088,6 +1151,7 @@ module Aws::FraudDetector
     end
 
     class DeleteModelVersionResult < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1097,6 +1161,7 @@ module Aws::FraudDetector
     #   <p>The name of the outcome to delete.</p>
     #   @return [String]
     class DeleteOutcomeRequest < Struct.new(
+      nil,
       :name,
       keyword_init: true
     )
@@ -1104,6 +1169,7 @@ module Aws::FraudDetector
     end
 
     class DeleteOutcomeResult < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1113,6 +1179,7 @@ module Aws::FraudDetector
     #   <p>A rule.</p>
     #   @return [Types::Rule]
     class DeleteRuleRequest < Struct.new(
+      nil,
       :rule,
       keyword_init: true
     )
@@ -1120,6 +1187,7 @@ module Aws::FraudDetector
     end
 
     class DeleteRuleResult < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1129,6 +1197,7 @@ module Aws::FraudDetector
     #   <p>The name of the variable to delete.</p>
     #   @return [String]
     class DeleteVariableRequest < Struct.new(
+      nil,
       :name,
       keyword_init: true
     )
@@ -1136,6 +1205,7 @@ module Aws::FraudDetector
     end
 
     class DeleteVariableResult < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1151,6 +1221,7 @@ module Aws::FraudDetector
     #   <p>The maximum number of results to return for the request.</p>
     #   @return [Integer]
     class DescribeDetectorRequest < Struct.new(
+      nil,
       :detector_id,
       :next_token,
       :max_results,
@@ -1172,6 +1243,7 @@ module Aws::FraudDetector
     #   <p>The detector ARN.</p>
     #   @return [String]
     class DescribeDetectorResult < Struct.new(
+      nil,
       :detector_id,
       :detector_version_summaries,
       :next_token,
@@ -1197,6 +1269,7 @@ module Aws::FraudDetector
     #   <p>The maximum number of results to return.</p>
     #   @return [Integer]
     class DescribeModelVersionsRequest < Struct.new(
+      nil,
       :model_id,
       :model_version_number,
       :model_type,
@@ -1214,6 +1287,7 @@ module Aws::FraudDetector
     #   <p>The next token.</p>
     #   @return [String]
     class DescribeModelVersionsResult < Struct.new(
+      nil,
       :model_version_details,
       :next_token,
       keyword_init: true
@@ -1241,6 +1315,7 @@ module Aws::FraudDetector
     #   <p>The detector ARN.</p>
     #   @return [String]
     class Detector < Struct.new(
+      nil,
       :detector_id,
       :description,
       :event_type_name,
@@ -1266,6 +1341,7 @@ module Aws::FraudDetector
     #   <p>Timestamp of when the detector version was last updated.</p>
     #   @return [String]
     class DetectorVersionSummary < Struct.new(
+      nil,
       :detector_version_id,
       :status,
       :description,
@@ -1284,6 +1360,7 @@ module Aws::FraudDetector
     #   <p>The entity ID. If you do not know the <code>entityId</code>, you can pass <code>unknown</code>, which is areserved string literal.</p>
     #   @return [String]
     class Entity < Struct.new(
+      nil,
       :entity_type,
       :entity_id,
       keyword_init: true
@@ -1308,6 +1385,7 @@ module Aws::FraudDetector
     #   <p>The entity type ARN.</p>
     #   @return [String]
     class EntityType < Struct.new(
+      nil,
       :name,
       :description,
       :last_updated_time,
@@ -1342,6 +1420,7 @@ module Aws::FraudDetector
     #   </p>
     #   @return [Hash<String, String>]
     class EvaluatedExternalModel < Struct.new(
+      nil,
       :model_endpoint,
       :use_event_variables,
       :input_variables,
@@ -1375,6 +1454,7 @@ module Aws::FraudDetector
     #   </p>
     #   @return [Array<Types::ModelVersionEvaluation>]
     class EvaluatedModelVersion < Struct.new(
+      nil,
       :model_id,
       :model_version,
       :model_type,
@@ -1423,6 +1503,7 @@ module Aws::FraudDetector
     #   </p>
     #   @return [Boolean]
     class EvaluatedRule < Struct.new(
+      nil,
       :rule_id,
       :rule_version,
       :expression,
@@ -1458,6 +1539,7 @@ module Aws::FraudDetector
     #   <p>The event entities.</p>
     #   @return [Array<Types::Entity>]
     class Event < Struct.new(
+      nil,
       :event_id,
       :event_type_name,
       :event_timestamp,
@@ -1477,6 +1559,7 @@ module Aws::FraudDetector
     #   <p>Specifies if event orchestration is enabled through Amazon EventBridge.</p>
     #   @return [Boolean]
     class EventOrchestration < Struct.new(
+      nil,
       :event_bridge_enabled,
       keyword_init: true
     )
@@ -1517,6 +1600,7 @@ module Aws::FraudDetector
     #   </p>
     #   @return [String]
     class EventPredictionSummary < Struct.new(
+      nil,
       :event_id,
       :event_type_name,
       :event_timestamp,
@@ -1564,6 +1648,7 @@ module Aws::FraudDetector
     #   <p>The event orchestration status. </p>
     #   @return [Types::EventOrchestration]
     class EventType < Struct.new(
+      nil,
       :name,
       :description,
       :event_variables,
@@ -1599,6 +1684,7 @@ module Aws::FraudDetector
     #   </p>
     #   @return [String]
     class EventVariableSummary < Struct.new(
+      nil,
       :name,
       :value,
       :source,
@@ -1615,6 +1701,7 @@ module Aws::FraudDetector
     #   <p>The ARN of the role that provides Amazon Fraud Detector access to the data location.</p>
     #   @return [String]
     class ExternalEventsDetail < Struct.new(
+      nil,
       :data_location,
       :data_access_role_arn,
       keyword_init: true
@@ -1651,6 +1738,7 @@ module Aws::FraudDetector
     #   <p>The model ARN.</p>
     #   @return [String]
     class ExternalModel < Struct.new(
+      nil,
       :model_endpoint,
       :model_source,
       :invoke_model_endpoint_role_arn,
@@ -1673,6 +1761,7 @@ module Aws::FraudDetector
     #   <p>The fraud prediction scores from Amazon SageMaker model.</p>
     #   @return [Hash<String, String>]
     class ExternalModelOutputs < Struct.new(
+      nil,
       :external_model,
       :outputs,
       keyword_init: true
@@ -1688,6 +1777,7 @@ module Aws::FraudDetector
     #   <p>The source of the model.</p>
     #   @return [String]
     class ExternalModelSummary < Struct.new(
+      nil,
       :model_endpoint,
       :model_source,
       keyword_init: true
@@ -1712,6 +1802,7 @@ module Aws::FraudDetector
     #   <p>The message type.</p>
     #   @return [String]
     class FieldValidationMessage < Struct.new(
+      nil,
       :field_name,
       :identifier,
       :title,
@@ -1733,6 +1824,7 @@ module Aws::FraudDetector
     #   <p>The message type.</p>
     #   @return [String]
     class FileValidationMessage < Struct.new(
+      nil,
       :title,
       :content,
       :type,
@@ -1750,6 +1842,7 @@ module Aws::FraudDetector
     #   </p>
     #   @return [String]
     class FilterCondition < Struct.new(
+      nil,
       :value,
       keyword_init: true
     )
@@ -1766,6 +1859,7 @@ module Aws::FraudDetector
     #   <p>The next token from the previous request.</p>
     #   @return [String]
     class GetBatchImportJobsRequest < Struct.new(
+      nil,
       :job_id,
       :max_results,
       :next_token,
@@ -1781,6 +1875,7 @@ module Aws::FraudDetector
     #   <p>The next token for the subsequent resquest.</p>
     #   @return [String]
     class GetBatchImportJobsResult < Struct.new(
+      nil,
       :batch_imports,
       :next_token,
       keyword_init: true
@@ -1798,6 +1893,7 @@ module Aws::FraudDetector
     #   <p>The next token from the previous request.</p>
     #   @return [String]
     class GetBatchPredictionJobsRequest < Struct.new(
+      nil,
       :job_id,
       :max_results,
       :next_token,
@@ -1813,6 +1909,7 @@ module Aws::FraudDetector
     #   <p>The next token for the subsequent request.</p>
     #   @return [String]
     class GetBatchPredictionJobsResult < Struct.new(
+      nil,
       :batch_predictions,
       :next_token,
       keyword_init: true
@@ -1824,6 +1921,7 @@ module Aws::FraudDetector
     #   <p>Name of event type for which to get the deletion status.</p>
     #   @return [String]
     class GetDeleteEventsByEventTypeStatusRequest < Struct.new(
+      nil,
       :event_type_name,
       keyword_init: true
     )
@@ -1837,6 +1935,7 @@ module Aws::FraudDetector
     #   <p>The deletion status.</p>
     #   @return [String]
     class GetDeleteEventsByEventTypeStatusResult < Struct.new(
+      nil,
       :event_type_name,
       :events_deletion_status,
       keyword_init: true
@@ -1851,6 +1950,7 @@ module Aws::FraudDetector
     #   <p>The detector version ID.</p>
     #   @return [String]
     class GetDetectorVersionRequest < Struct.new(
+      nil,
       :detector_id,
       :detector_version_id,
       keyword_init: true
@@ -1897,6 +1997,7 @@ module Aws::FraudDetector
     #   <p>The detector version ARN.</p>
     #   @return [String]
     class GetDetectorVersionResult < Struct.new(
+      nil,
       :detector_id,
       :detector_version_id,
       :description,
@@ -1923,6 +2024,7 @@ module Aws::FraudDetector
     #   <p>The maximum number of objects to return for the request.</p>
     #   @return [Integer]
     class GetDetectorsRequest < Struct.new(
+      nil,
       :detector_id,
       :next_token,
       :max_results,
@@ -1938,6 +2040,7 @@ module Aws::FraudDetector
     #   <p>The next page token.</p>
     #   @return [String]
     class GetDetectorsResult < Struct.new(
+      nil,
       :detectors,
       :next_token,
       keyword_init: true
@@ -1955,6 +2058,7 @@ module Aws::FraudDetector
     #   <p>The maximum number of objects to return for the request.</p>
     #   @return [Integer]
     class GetEntityTypesRequest < Struct.new(
+      nil,
       :name,
       :next_token,
       :max_results,
@@ -1970,6 +2074,7 @@ module Aws::FraudDetector
     #   <p>The next page token.</p>
     #   @return [String]
     class GetEntityTypesResult < Struct.new(
+      nil,
       :entity_types,
       :next_token,
       keyword_init: true
@@ -2004,6 +2109,7 @@ module Aws::FraudDetector
     #           first, and using the <code>predictionTimestamp</code> value in the response to provide an accurate prediction timestamp value.</p>
     #   @return [String]
     class GetEventPredictionMetadataRequest < Struct.new(
+      nil,
       :event_id,
       :event_type_name,
       :detector_id,
@@ -2088,6 +2194,7 @@ module Aws::FraudDetector
     #   <p>The timestamp that defines when the prediction was generated. </p>
     #   @return [String]
     class GetEventPredictionMetadataResult < Struct.new(
+      nil,
       :event_id,
       :event_type_name,
       :entity_id,
@@ -2148,6 +2255,7 @@ module Aws::FraudDetector
     #   <p>The Amazon SageMaker model endpoint input data blobs.</p>
     #   @return [Hash<String, Types::ModelEndpointDataBlob>]
     class GetEventPredictionRequest < Struct.new(
+      nil,
       :detector_id,
       :detector_version_id,
       :event_id,
@@ -2171,6 +2279,7 @@ module Aws::FraudDetector
     #   <p>The model scores for Amazon SageMaker models.</p>
     #   @return [Array<Types::ExternalModelOutputs>]
     class GetEventPredictionResult < Struct.new(
+      nil,
       :model_scores,
       :rule_results,
       :external_model_outputs,
@@ -2186,6 +2295,7 @@ module Aws::FraudDetector
     #   <p>The event type of the event to retrieve.</p>
     #   @return [String]
     class GetEventRequest < Struct.new(
+      nil,
       :event_id,
       :event_type_name,
       keyword_init: true
@@ -2197,6 +2307,7 @@ module Aws::FraudDetector
     #   <p>The details of the event.</p>
     #   @return [Types::Event]
     class GetEventResult < Struct.new(
+      nil,
       :event,
       keyword_init: true
     )
@@ -2213,6 +2324,7 @@ module Aws::FraudDetector
     #   <p>The maximum number of objects to return for the request.</p>
     #   @return [Integer]
     class GetEventTypesRequest < Struct.new(
+      nil,
       :name,
       :next_token,
       :max_results,
@@ -2228,6 +2340,7 @@ module Aws::FraudDetector
     #   <p>The next page token.</p>
     #   @return [String]
     class GetEventTypesResult < Struct.new(
+      nil,
       :event_types,
       :next_token,
       keyword_init: true
@@ -2245,6 +2358,7 @@ module Aws::FraudDetector
     #   <p>The maximum number of objects to return for the request.</p>
     #   @return [Integer]
     class GetExternalModelsRequest < Struct.new(
+      nil,
       :model_endpoint,
       :next_token,
       :max_results,
@@ -2260,6 +2374,7 @@ module Aws::FraudDetector
     #   <p>The next page token to be used in subsequent requests.</p>
     #   @return [String]
     class GetExternalModelsResult < Struct.new(
+      nil,
       :external_models,
       :next_token,
       keyword_init: true
@@ -2271,6 +2386,7 @@ module Aws::FraudDetector
     #   <p>The KMS encryption key.</p>
     #   @return [Types::KMSKey]
     class GetKMSEncryptionKeyResult < Struct.new(
+      nil,
       :kms_key,
       keyword_init: true
     )
@@ -2287,6 +2403,7 @@ module Aws::FraudDetector
     #   <p>The maximum number of objects to return for the request.</p>
     #   @return [Integer]
     class GetLabelsRequest < Struct.new(
+      nil,
       :name,
       :next_token,
       :max_results,
@@ -2302,6 +2419,7 @@ module Aws::FraudDetector
     #   <p>The next page token.</p>
     #   @return [String]
     class GetLabelsResult < Struct.new(
+      nil,
       :labels,
       :next_token,
       keyword_init: true
@@ -2325,6 +2443,7 @@ module Aws::FraudDetector
     #           </p>
     #   @return [Integer]
     class GetListElementsRequest < Struct.new(
+      nil,
       :name,
       :next_token,
       :max_results,
@@ -2344,6 +2463,7 @@ module Aws::FraudDetector
     #           </p>
     #   @return [String]
     class GetListElementsResult < Struct.new(
+      nil,
       :elements,
       :next_token,
       keyword_init: true
@@ -2367,6 +2487,7 @@ module Aws::FraudDetector
     #           </p>
     #   @return [Integer]
     class GetListsMetadataRequest < Struct.new(
+      nil,
       :name,
       :next_token,
       :max_results,
@@ -2386,6 +2507,7 @@ module Aws::FraudDetector
     #           </p>
     #   @return [String]
     class GetListsMetadataResult < Struct.new(
+      nil,
       :lists,
       :next_token,
       keyword_init: true
@@ -2403,6 +2525,7 @@ module Aws::FraudDetector
     #   <p>The model version number.</p>
     #   @return [String]
     class GetModelVersionRequest < Struct.new(
+      nil,
       :model_id,
       :model_type,
       :model_version_number,
@@ -2490,6 +2613,7 @@ module Aws::FraudDetector
     #   <p>The model version ARN.</p>
     #   @return [String]
     class GetModelVersionResult < Struct.new(
+      nil,
       :model_id,
       :model_type,
       :model_version_number,
@@ -2517,6 +2641,7 @@ module Aws::FraudDetector
     #   <p>The maximum number of objects to return for the request. </p>
     #   @return [Integer]
     class GetModelsRequest < Struct.new(
+      nil,
       :model_id,
       :model_type,
       :next_token,
@@ -2533,6 +2658,7 @@ module Aws::FraudDetector
     #   <p>The array of models.</p>
     #   @return [Array<Types::Model>]
     class GetModelsResult < Struct.new(
+      nil,
       :next_token,
       :models,
       keyword_init: true
@@ -2550,6 +2676,7 @@ module Aws::FraudDetector
     #   <p>The maximum number of objects to return for the request. </p>
     #   @return [Integer]
     class GetOutcomesRequest < Struct.new(
+      nil,
       :name,
       :next_token,
       :max_results,
@@ -2565,6 +2692,7 @@ module Aws::FraudDetector
     #   <p>The next page token for subsequent requests.</p>
     #   @return [String]
     class GetOutcomesResult < Struct.new(
+      nil,
       :outcomes,
       :next_token,
       keyword_init: true
@@ -2588,6 +2716,7 @@ module Aws::FraudDetector
     #   <p>The maximum number of rules to return for the request.</p>
     #   @return [Integer]
     class GetRulesRequest < Struct.new(
+      nil,
       :rule_id,
       :detector_id,
       :rule_version,
@@ -2605,6 +2734,7 @@ module Aws::FraudDetector
     #   <p>The next page token to be used in subsequent requests.</p>
     #   @return [String]
     class GetRulesResult < Struct.new(
+      nil,
       :rule_details,
       :next_token,
       keyword_init: true
@@ -2622,6 +2752,7 @@ module Aws::FraudDetector
     #   <p>The max size per page determined for the get variable request. </p>
     #   @return [Integer]
     class GetVariablesRequest < Struct.new(
+      nil,
       :name,
       :next_token,
       :max_results,
@@ -2637,6 +2768,7 @@ module Aws::FraudDetector
     #   <p>The next page token to be used in subsequent requests. </p>
     #   @return [String]
     class GetVariablesResult < Struct.new(
+      nil,
       :variables,
       :next_token,
       keyword_init: true
@@ -2662,6 +2794,7 @@ module Aws::FraudDetector
     #         </p>
     #   @return [String]
     class IngestedEventStatistics < Struct.new(
+      nil,
       :number_of_events,
       :event_data_size_in_bytes,
       :least_recent_event,
@@ -2677,6 +2810,7 @@ module Aws::FraudDetector
     #   <p>The start and stop time of the ingested events.</p>
     #   @return [Types::IngestedEventsTimeWindow]
     class IngestedEventsDetail < Struct.new(
+      nil,
       :ingested_events_time_window,
       keyword_init: true
     )
@@ -2691,6 +2825,7 @@ module Aws::FraudDetector
     #   <p>Timestamp of the final ingested event.</p>
     #   @return [String]
     class IngestedEventsTimeWindow < Struct.new(
+      nil,
       :start_time,
       :end_time,
       keyword_init: true
@@ -2702,6 +2837,7 @@ module Aws::FraudDetector
     # @!attribute message
     #   @return [String]
     class InternalServerException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -2713,6 +2849,7 @@ module Aws::FraudDetector
     #   <p>The encryption key ARN.</p>
     #   @return [String]
     class KMSKey < Struct.new(
+      nil,
       :kms_encryption_key_arn,
       keyword_init: true
     )
@@ -2736,6 +2873,7 @@ module Aws::FraudDetector
     #   <p>The label ARN.</p>
     #   @return [String]
     class Label < Struct.new(
+      nil,
       :name,
       :description,
       :last_updated_time,
@@ -2770,6 +2908,7 @@ module Aws::FraudDetector
     #            <p>By default, Amazon Fraud Detector ignores the unlabeled data.</p>
     #   @return [String]
     class LabelSchema < Struct.new(
+      nil,
       :label_mapper,
       :unlabeled_events_treatment,
       keyword_init: true
@@ -2813,6 +2952,7 @@ module Aws::FraudDetector
     #   </p>
     #   @return [Integer]
     class ListEventPredictionsRequest < Struct.new(
+      nil,
       :event_id,
       :event_type,
       :detector_id,
@@ -2836,6 +2976,7 @@ module Aws::FraudDetector
     #   </p>
     #   @return [String]
     class ListEventPredictionsResult < Struct.new(
+      nil,
       :event_prediction_summaries,
       :next_token,
       keyword_init: true
@@ -2853,6 +2994,7 @@ module Aws::FraudDetector
     #   <p>The maximum number of objects to return for the request. </p>
     #   @return [Integer]
     class ListTagsForResourceRequest < Struct.new(
+      nil,
       :resource_arn,
       :next_token,
       :max_results,
@@ -2868,6 +3010,7 @@ module Aws::FraudDetector
     #   <p>The next token for subsequent requests. </p>
     #   @return [String]
     class ListTagsForResourceResult < Struct.new(
+      nil,
       :tags,
       :next_token,
       keyword_init: true
@@ -2886,6 +3029,7 @@ module Aws::FraudDetector
     #   <p>The relative importance of the variable. For more information, see <a href="https://docs.aws.amazon.com/frauddetector/latest/ug/model-variable-importance.html">Model variable importance</a>.</p>
     #   @return [Float]
     class LogOddsMetric < Struct.new(
+      nil,
       :variable_name,
       :variable_type,
       :variable_importance,
@@ -2908,6 +3052,7 @@ module Aws::FraudDetector
     #   <p>The model threshold that specifies an acceptable fraud capture rate. For example, a threshold of 500 means any model score 500 or above is labeled as fraud.</p>
     #   @return [Float]
     class MetricDataPoint < Struct.new(
+      nil,
       :fpr,
       :precision,
       :tpr,
@@ -2940,6 +3085,7 @@ module Aws::FraudDetector
     #   <p>The ARN of the model.</p>
     #   @return [String]
     class Model < Struct.new(
+      nil,
       :model_id,
       :model_type,
       :description,
@@ -2960,6 +3106,7 @@ module Aws::FraudDetector
     #   <p>The content type of the Amazon SageMaker model endpoint input data blob. </p>
     #   @return [String]
     class ModelEndpointDataBlob < Struct.new(
+      nil,
       :byte_buffer,
       :content_type,
       keyword_init: true
@@ -2989,6 +3136,7 @@ module Aws::FraudDetector
     #               values before being sent to SageMaker. </p>
     #   @return [String]
     class ModelInputConfiguration < Struct.new(
+      nil,
       :event_type_name,
       :format,
       :use_event_variables,
@@ -3010,6 +3158,7 @@ module Aws::FraudDetector
     #   <p>A map of CSV index values in the SageMaker response to the Amazon Fraud Detector variables. </p>
     #   @return [Hash<String, String>]
     class ModelOutputConfiguration < Struct.new(
+      nil,
       :format,
       :json_key_to_variable_map,
       :csv_index_to_variable_map,
@@ -3026,6 +3175,7 @@ module Aws::FraudDetector
     #   <p>The model's fraud prediction scores.</p>
     #   @return [Hash<String, Float>]
     class ModelScores < Struct.new(
+      nil,
       :model_version,
       :scores,
       keyword_init: true
@@ -3047,6 +3197,7 @@ module Aws::FraudDetector
     #   <p>The model version ARN.</p>
     #   @return [String]
     class ModelVersion < Struct.new(
+      nil,
       :model_id,
       :model_type,
       :model_version_number,
@@ -3099,6 +3250,7 @@ module Aws::FraudDetector
     #           </p>
     #   @return [Types::TrainingResultV2]
     class ModelVersionDetail < Struct.new(
+      nil,
       :model_id,
       :model_type,
       :model_version_number,
@@ -3136,6 +3288,7 @@ module Aws::FraudDetector
     #   </p>
     #   @return [Types::PredictionExplanations]
     class ModelVersionEvaluation < Struct.new(
+      nil,
       :output_variable_name,
       :evaluation_score,
       :prediction_explanations,
@@ -3168,6 +3321,7 @@ module Aws::FraudDetector
     #           </p>
     #   @return [Float]
     class OFIMetricDataPoint < Struct.new(
+      nil,
       :fpr,
       :precision,
       :tpr,
@@ -3191,6 +3345,7 @@ module Aws::FraudDetector
     #           </p>
     #   @return [Types::UncertaintyRange]
     class OFIModelPerformance < Struct.new(
+      nil,
       :auc,
       :uncertainty_range,
       keyword_init: true
@@ -3212,6 +3367,7 @@ module Aws::FraudDetector
     #           </p>
     #   @return [Types::OFIModelPerformance]
     class OFITrainingMetricsValue < Struct.new(
+      nil,
       :metric_data_points,
       :model_performance,
       keyword_init: true
@@ -3236,6 +3392,7 @@ module Aws::FraudDetector
     #   <p>The outcome ARN.</p>
     #   @return [String]
     class Outcome < Struct.new(
+      nil,
       :name,
       :description,
       :last_updated_time,
@@ -3263,6 +3420,7 @@ module Aws::FraudDetector
     #               In this case, event variables used to derive the aggregated variables are <code>IP address</code> and <code>user</code>.</p>
     #   @return [Array<Types::AggregatedVariablesImpactExplanation>]
     class PredictionExplanations < Struct.new(
+      nil,
       :variable_impact_explanations,
       :aggregated_variables_impact_explanations,
       keyword_init: true
@@ -3284,6 +3442,7 @@ module Aws::FraudDetector
     #   </p>
     #   @return [String]
     class PredictionTimeRange < Struct.new(
+      nil,
       :start_time,
       :end_time,
       keyword_init: true
@@ -3304,6 +3463,7 @@ module Aws::FraudDetector
     #   <p>A collection of key and value pairs.</p>
     #   @return [Array<Types::Tag>]
     class PutDetectorRequest < Struct.new(
+      nil,
       :detector_id,
       :description,
       :event_type_name,
@@ -3314,6 +3474,7 @@ module Aws::FraudDetector
     end
 
     class PutDetectorResult < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -3329,6 +3490,7 @@ module Aws::FraudDetector
     #   <p>A collection of key and value pairs.</p>
     #   @return [Array<Types::Tag>]
     class PutEntityTypeRequest < Struct.new(
+      nil,
       :name,
       :description,
       :tags,
@@ -3338,6 +3500,7 @@ module Aws::FraudDetector
     end
 
     class PutEntityTypeResult < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -3368,6 +3531,7 @@ module Aws::FraudDetector
     #   <p>Enables or disables event orchestration. If enabled, you can send event predictions to select AWS services for downstream processing of the events.</p>
     #   @return [Types::EventOrchestration]
     class PutEventTypeRequest < Struct.new(
+      nil,
       :name,
       :description,
       :event_variables,
@@ -3382,6 +3546,7 @@ module Aws::FraudDetector
     end
 
     class PutEventTypeResult < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -3409,6 +3574,7 @@ module Aws::FraudDetector
     #   <p>A collection of key and value pairs.</p>
     #   @return [Array<Types::Tag>]
     class PutExternalModelRequest < Struct.new(
+      nil,
       :model_endpoint,
       :model_source,
       :invoke_model_endpoint_role_arn,
@@ -3422,6 +3588,7 @@ module Aws::FraudDetector
     end
 
     class PutExternalModelResult < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -3432,6 +3599,7 @@ module Aws::FraudDetector
     #            <p>The KMS key must be single-Region key. Amazon Fraud Detector does not support multi-Region KMS key.</p>
     #   @return [String]
     class PutKMSEncryptionKeyRequest < Struct.new(
+      nil,
       :kms_encryption_key_arn,
       keyword_init: true
     )
@@ -3439,6 +3607,7 @@ module Aws::FraudDetector
     end
 
     class PutKMSEncryptionKeyResult < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -3454,6 +3623,7 @@ module Aws::FraudDetector
     #   <p>A collection of key and value pairs.</p>
     #   @return [Array<Types::Tag>]
     class PutLabelRequest < Struct.new(
+      nil,
       :name,
       :description,
       :tags,
@@ -3463,6 +3633,7 @@ module Aws::FraudDetector
     end
 
     class PutLabelResult < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -3478,6 +3649,7 @@ module Aws::FraudDetector
     #   <p>A collection of key and value pairs.</p>
     #   @return [Array<Types::Tag>]
     class PutOutcomeRequest < Struct.new(
+      nil,
       :name,
       :description,
       :tags,
@@ -3487,6 +3659,7 @@ module Aws::FraudDetector
     end
 
     class PutOutcomeResult < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -3496,6 +3669,7 @@ module Aws::FraudDetector
     # @!attribute message
     #   @return [String]
     class ResourceNotFoundException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -3506,6 +3680,7 @@ module Aws::FraudDetector
     # @!attribute message
     #   @return [String]
     class ResourceUnavailableException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -3523,6 +3698,7 @@ module Aws::FraudDetector
     #   <p>The rule version.</p>
     #   @return [String]
     class Rule < Struct.new(
+      nil,
       :detector_id,
       :rule_id,
       :rule_version,
@@ -3563,6 +3739,7 @@ module Aws::FraudDetector
     #   <p>The rule ARN.</p>
     #   @return [String]
     class RuleDetail < Struct.new(
+      nil,
       :rule_id,
       :description,
       :detector_id,
@@ -3586,6 +3763,7 @@ module Aws::FraudDetector
     #   <p>The outcomes of the matched rule, based on the rule execution mode.</p>
     #   @return [Array<String>]
     class RuleResult < Struct.new(
+      nil,
       :rule_id,
       :outcomes,
       keyword_init: true
@@ -3615,6 +3793,7 @@ module Aws::FraudDetector
     #   <p>An array of entities.</p>
     #   @return [Array<Types::Entity>]
     class SendEventRequest < Struct.new(
+      nil,
       :event_id,
       :event_type_name,
       :event_timestamp,
@@ -3628,6 +3807,7 @@ module Aws::FraudDetector
     end
 
     class SendEventResult < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -3658,6 +3838,7 @@ module Aws::FraudDetector
     #           </p>
     #   @return [Float]
     class TFIMetricDataPoint < Struct.new(
+      nil,
       :fpr,
       :precision,
       :tpr,
@@ -3681,6 +3862,7 @@ module Aws::FraudDetector
     #           </p>
     #   @return [Types::UncertaintyRange]
     class TFIModelPerformance < Struct.new(
+      nil,
       :auc,
       :uncertainty_range,
       keyword_init: true
@@ -3702,6 +3884,7 @@ module Aws::FraudDetector
     #           </p>
     #   @return [Types::TFIModelPerformance]
     class TFITrainingMetricsValue < Struct.new(
+      nil,
       :metric_data_points,
       :model_performance,
       keyword_init: true
@@ -3717,6 +3900,7 @@ module Aws::FraudDetector
     #   <p>A value assigned to a tag key.</p>
     #   @return [String]
     class Tag < Struct.new(
+      nil,
       :key,
       :value,
       keyword_init: true
@@ -3731,6 +3915,7 @@ module Aws::FraudDetector
     #   <p>The tags to assign to the resource.</p>
     #   @return [Array<Types::Tag>]
     class TagResourceRequest < Struct.new(
+      nil,
       :resource_arn,
       :tags,
       keyword_init: true
@@ -3739,6 +3924,7 @@ module Aws::FraudDetector
     end
 
     class TagResourceResult < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -3748,6 +3934,7 @@ module Aws::FraudDetector
     # @!attribute message
     #   @return [String]
     class ThrottlingException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -3762,6 +3949,7 @@ module Aws::FraudDetector
     #   <p>The label schema.</p>
     #   @return [Types::LabelSchema]
     class TrainingDataSchema < Struct.new(
+      nil,
       :model_variables,
       :label_schema,
       keyword_init: true
@@ -3777,6 +3965,7 @@ module Aws::FraudDetector
     #   <p>The data points details.</p>
     #   @return [Array<Types::MetricDataPoint>]
     class TrainingMetrics < Struct.new(
+      nil,
       :auc,
       :metric_data_points,
       keyword_init: true
@@ -3803,6 +3992,7 @@ module Aws::FraudDetector
     #           </p>
     #   @return [Types::ATITrainingMetricsValue]
     class TrainingMetricsV2 < Struct.new(
+      nil,
       :ofi,
       :tfi,
       :ati,
@@ -3822,6 +4012,7 @@ module Aws::FraudDetector
     #   <p>The variable importance metrics.</p>
     #   @return [Types::VariableImportanceMetrics]
     class TrainingResult < Struct.new(
+      nil,
       :data_validation_metrics,
       :training_metrics,
       :variable_importance_metrics,
@@ -3853,6 +4044,7 @@ module Aws::FraudDetector
     #               In this case, event variables used to derive the aggregated variables are <code>IP address</code> and <code>user</code>.</p>
     #   @return [Types::AggregatedVariablesImportanceMetrics]
     class TrainingResultV2 < Struct.new(
+      nil,
       :data_validation_metrics,
       :training_metrics_v2,
       :variable_importance_metrics,
@@ -3877,6 +4069,7 @@ module Aws::FraudDetector
     #           </p>
     #   @return [Float]
     class UncertaintyRange < Struct.new(
+      nil,
       :lower_bound_value,
       :upper_bound_value,
       keyword_init: true
@@ -3891,6 +4084,7 @@ module Aws::FraudDetector
     #   <p>The resource ARN.</p>
     #   @return [Array<String>]
     class UntagResourceRequest < Struct.new(
+      nil,
       :resource_arn,
       :tag_keys,
       keyword_init: true
@@ -3899,6 +4093,7 @@ module Aws::FraudDetector
     end
 
     class UntagResourceResult < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -3914,6 +4109,7 @@ module Aws::FraudDetector
     #   <p>The description.</p>
     #   @return [String]
     class UpdateDetectorVersionMetadataRequest < Struct.new(
+      nil,
       :detector_id,
       :detector_version_id,
       :description,
@@ -3923,6 +4119,7 @@ module Aws::FraudDetector
     end
 
     class UpdateDetectorVersionMetadataResult < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -3953,6 +4150,7 @@ module Aws::FraudDetector
     #            <p>The default behavior is <code>FIRST_MATCHED</code>.</p>
     #   @return [String]
     class UpdateDetectorVersionRequest < Struct.new(
+      nil,
       :detector_id,
       :detector_version_id,
       :external_model_endpoints,
@@ -3966,6 +4164,7 @@ module Aws::FraudDetector
     end
 
     class UpdateDetectorVersionResult < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -3983,6 +4182,7 @@ module Aws::FraudDetector
     #            </p>
     #   @return [String]
     class UpdateDetectorVersionStatusRequest < Struct.new(
+      nil,
       :detector_id,
       :detector_version_id,
       :status,
@@ -3992,6 +4192,7 @@ module Aws::FraudDetector
     end
 
     class UpdateDetectorVersionStatusResult < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -4010,6 +4211,7 @@ module Aws::FraudDetector
     #   <p>The timestamp associated with the label. The timestamp must be specified using ISO 8601 standard in UTC. </p>
     #   @return [String]
     class UpdateEventLabelRequest < Struct.new(
+      nil,
       :event_id,
       :event_type_name,
       :assigned_label,
@@ -4020,6 +4222,7 @@ module Aws::FraudDetector
     end
 
     class UpdateEventLabelResult < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -4066,6 +4269,7 @@ module Aws::FraudDetector
     #            </note>
     #   @return [String]
     class UpdateListRequest < Struct.new(
+      nil,
       :name,
       :elements,
       :description,
@@ -4077,6 +4281,7 @@ module Aws::FraudDetector
     end
 
     class UpdateListResult < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -4092,6 +4297,7 @@ module Aws::FraudDetector
     #   <p>The new model description.</p>
     #   @return [String]
     class UpdateModelRequest < Struct.new(
+      nil,
       :model_id,
       :model_type,
       :description,
@@ -4101,6 +4307,7 @@ module Aws::FraudDetector
     end
 
     class UpdateModelResult < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -4125,6 +4332,7 @@ module Aws::FraudDetector
     #   <p>A collection of key and value pairs.</p>
     #   @return [Array<Types::Tag>]
     class UpdateModelVersionRequest < Struct.new(
+      nil,
       :model_id,
       :model_type,
       :major_version_number,
@@ -4149,6 +4357,7 @@ module Aws::FraudDetector
     #   <p>The status of the updated model version.</p>
     #   @return [String]
     class UpdateModelVersionResult < Struct.new(
+      nil,
       :model_id,
       :model_type,
       :model_version_number,
@@ -4171,6 +4380,7 @@ module Aws::FraudDetector
     #   <p>The model version status.</p>
     #   @return [String]
     class UpdateModelVersionStatusRequest < Struct.new(
+      nil,
       :model_id,
       :model_type,
       :model_version_number,
@@ -4181,6 +4391,7 @@ module Aws::FraudDetector
     end
 
     class UpdateModelVersionStatusResult < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -4193,6 +4404,7 @@ module Aws::FraudDetector
     #   <p>The rule description.</p>
     #   @return [String]
     class UpdateRuleMetadataRequest < Struct.new(
+      nil,
       :rule,
       :description,
       keyword_init: true
@@ -4201,6 +4413,7 @@ module Aws::FraudDetector
     end
 
     class UpdateRuleMetadataResult < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -4225,6 +4438,7 @@ module Aws::FraudDetector
     #   <p>The tags to assign to the rule version.</p>
     #   @return [Array<Types::Tag>]
     class UpdateRuleVersionRequest < Struct.new(
+      nil,
       :rule,
       :description,
       :expression,
@@ -4240,6 +4454,7 @@ module Aws::FraudDetector
     #   <p>The new rule version that was created.</p>
     #   @return [Types::Rule]
     class UpdateRuleVersionResult < Struct.new(
+      nil,
       :rule,
       keyword_init: true
     )
@@ -4259,6 +4474,7 @@ module Aws::FraudDetector
     #   <p>The variable type. For more information see <a href="https://docs.aws.amazon.com/frauddetector/latest/ug/create-a-variable.html#variable-types">Variable types</a>.</p>
     #   @return [String]
     class UpdateVariableRequest < Struct.new(
+      nil,
       :name,
       :default_value,
       :description,
@@ -4269,6 +4485,7 @@ module Aws::FraudDetector
     end
 
     class UpdateVariableResult < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -4278,6 +4495,7 @@ module Aws::FraudDetector
     # @!attribute message
     #   @return [String]
     class ValidationException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -4315,6 +4533,7 @@ module Aws::FraudDetector
     #   <p>The ARN of the variable.</p>
     #   @return [String]
     class Variable < Struct.new(
+      nil,
       :name,
       :data_type,
       :data_source,
@@ -4351,6 +4570,7 @@ module Aws::FraudDetector
     #            </p>
     #   @return [String]
     class VariableEntry < Struct.new(
+      nil,
       :name,
       :data_type,
       :data_source,
@@ -4389,6 +4609,7 @@ module Aws::FraudDetector
     #            </ul>
     #   @return [Float]
     class VariableImpactExplanation < Struct.new(
+      nil,
       :event_variable_name,
       :relative_impact,
       :log_odds_impact,
@@ -4402,6 +4623,7 @@ module Aws::FraudDetector
     #   <p>List of variable metrics.</p>
     #   @return [Array<Types::LogOddsMetric>]
     class VariableImportanceMetrics < Struct.new(
+      nil,
       :log_odds_metrics,
       keyword_init: true
     )

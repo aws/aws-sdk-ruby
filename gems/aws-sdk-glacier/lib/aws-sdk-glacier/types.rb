@@ -25,6 +25,7 @@ module Aws::Glacier
     #   <p>The upload ID of the multipart upload to delete.</p>
     #   @return [String]
     class AbortMultipartUploadInput < Struct.new(
+      nil,
       :account_id,
       :vault_name,
       :upload_id,
@@ -45,6 +46,7 @@ module Aws::Glacier
     #   <p>The name of the vault.</p>
     #   @return [String]
     class AbortVaultLockInput < Struct.new(
+      nil,
       :account_id,
       :vault_name,
       keyword_init: true
@@ -68,6 +70,7 @@ module Aws::Glacier
     #            can be an empty string.</p>
     #   @return [Hash<String, String>]
     class AddTagsToVaultInput < Struct.new(
+      nil,
       :account_id,
       :vault_name,
       :tags,
@@ -100,6 +103,7 @@ module Aws::Glacier
     #               value.</p>
     #   @return [String]
     class CSVInput < Struct.new(
+      nil,
       :file_header_info,
       :comments,
       :quote_escape_character,
@@ -132,6 +136,7 @@ module Aws::Glacier
     #               value.</p>
     #   @return [String]
     class CSVOutput < Struct.new(
+      nil,
       :quote_fields,
       :quote_escape_character,
       :record_delimiter,
@@ -170,6 +175,7 @@ module Aws::Glacier
     #            Glacier returns an error and the request fails.</p>
     #   @return [String]
     class CompleteMultipartUploadInput < Struct.new(
+      nil,
       :account_id,
       :vault_name,
       :upload_id,
@@ -194,6 +200,7 @@ module Aws::Glacier
     #   <p>The ID of the archive. This value is also included as part of the location.</p>
     #   @return [String]
     class CompleteMultipartUploadOutput < Struct.new(
+      nil,
       :location,
       :checksum,
       :archive_id,
@@ -217,6 +224,7 @@ module Aws::Glacier
     #   <p>The <code>lockId</code> value is the lock ID obtained from a <a>InitiateVaultLock</a> request.</p>
     #   @return [String]
     class CompleteVaultLockInput < Struct.new(
+      nil,
       :account_id,
       :vault_name,
       :lock_id,
@@ -237,6 +245,7 @@ module Aws::Glacier
     #   <p>The name of the vault.</p>
     #   @return [String]
     class CreateVaultInput < Struct.new(
+      nil,
       :account_id,
       :vault_name,
       keyword_init: true
@@ -249,6 +258,7 @@ module Aws::Glacier
     #   <p>The URI of the vault that was created.</p>
     #   @return [String]
     class CreateVaultOutput < Struct.new(
+      nil,
       :location,
       keyword_init: true
     )
@@ -261,6 +271,7 @@ module Aws::Glacier
     #            which contains a Strategy field and optionally a BytesPerHour field.</p>
     #   @return [Array<Types::DataRetrievalRule>]
     class DataRetrievalPolicy < Struct.new(
+      nil,
       :rules,
       keyword_init: true
     )
@@ -279,6 +290,7 @@ module Aws::Glacier
     #            not set to <code>BytesPerHour</code> and you set this field.</p>
     #   @return [Integer]
     class DataRetrievalRule < Struct.new(
+      nil,
       :strategy,
       :bytes_per_hour,
       keyword_init: true
@@ -301,6 +313,7 @@ module Aws::Glacier
     #   <p>The ID of the archive to delete.</p>
     #   @return [String]
     class DeleteArchiveInput < Struct.new(
+      nil,
       :account_id,
       :vault_name,
       :archive_id,
@@ -321,6 +334,7 @@ module Aws::Glacier
     #   <p>The name of the vault.</p>
     #   @return [String]
     class DeleteVaultAccessPolicyInput < Struct.new(
+      nil,
       :account_id,
       :vault_name,
       keyword_init: true
@@ -340,6 +354,7 @@ module Aws::Glacier
     #   <p>The name of the vault.</p>
     #   @return [String]
     class DeleteVaultInput < Struct.new(
+      nil,
       :account_id,
       :vault_name,
       keyword_init: true
@@ -360,6 +375,7 @@ module Aws::Glacier
     #   <p>The name of the vault.</p>
     #   @return [String]
     class DeleteVaultNotificationsInput < Struct.new(
+      nil,
       :account_id,
       :vault_name,
       keyword_init: true
@@ -382,6 +398,7 @@ module Aws::Glacier
     #   <p>The ID of the job to describe.</p>
     #   @return [String]
     class DescribeJobInput < Struct.new(
+      nil,
       :account_id,
       :vault_name,
       :job_id,
@@ -502,6 +519,7 @@ module Aws::Glacier
     #   <p>Contains the location where the data from the select job is stored.</p>
     #   @return [Types::OutputLocation]
     class DescribeJobOutput < Struct.new(
+      nil,
       :job_id,
       :job_description,
       :action,
@@ -546,6 +564,7 @@ module Aws::Glacier
     #   <p>The name of the vault.</p>
     #   @return [String]
     class DescribeVaultInput < Struct.new(
+      nil,
       :account_id,
       :vault_name,
       keyword_init: true
@@ -581,6 +600,7 @@ module Aws::Glacier
     #            you just created the vault.</p>
     #   @return [Integer]
     class DescribeVaultOperationOutput < Struct.new(
+      nil,
       :vault_arn,
       :vault_name,
       :creation_date,
@@ -626,6 +646,7 @@ module Aws::Glacier
     #            you just created the vault.</p>
     #   @return [Integer]
     class DescribeVaultOutput < Struct.new(
+      nil,
       :vault_arn,
       :vault_name,
       :creation_date,
@@ -658,6 +679,7 @@ module Aws::Glacier
     #               specify the encryption context for the job results.</p>
     #   @return [String]
     class Encryption < Struct.new(
+      nil,
       :encryption_type,
       :kms_key_id,
       :kms_context,
@@ -675,6 +697,7 @@ module Aws::Glacier
     #            If you specify your account ID, do not include any hyphens ('-') in the ID. </p>
     #   @return [String]
     class GetDataRetrievalPolicyInput < Struct.new(
+      nil,
       :account_id,
       keyword_init: true
     )
@@ -687,6 +710,7 @@ module Aws::Glacier
     #   <p>Contains the returned data retrieval policy in JSON format.</p>
     #   @return [Types::DataRetrievalPolicy]
     class GetDataRetrievalPolicyOutput < Struct.new(
+      nil,
       :policy,
       keyword_init: true
     )
@@ -746,6 +770,7 @@ module Aws::Glacier
     #            </ol>
     #   @return [String]
     class GetJobOutputInput < Struct.new(
+      nil,
       :account_id,
       :vault_name,
       :job_id,
@@ -804,6 +829,7 @@ module Aws::Glacier
     #   <p>The description of an archive.</p>
     #   @return [String]
     class GetJobOutputOutput < Struct.new(
+      nil,
       :body,
       :checksum,
       :status,
@@ -834,6 +860,7 @@ module Aws::Glacier
     #   <p>The name of the vault.</p>
     #   @return [String]
     class GetVaultAccessPolicyInput < Struct.new(
+      nil,
       :account_id,
       :vault_name,
       keyword_init: true
@@ -846,6 +873,7 @@ module Aws::Glacier
     #   <p>Contains the returned vault access policy as a JSON string.</p>
     #   @return [Types::VaultAccessPolicy]
     class GetVaultAccessPolicyOutput < Struct.new(
+      nil,
       :policy,
       keyword_init: true
     )
@@ -864,6 +892,7 @@ module Aws::Glacier
     #   <p>The name of the vault.</p>
     #   @return [String]
     class GetVaultLockInput < Struct.new(
+      nil,
       :account_id,
       :vault_name,
       keyword_init: true
@@ -889,6 +918,7 @@ module Aws::Glacier
     #               <code>InProgress</code> state.</p>
     #   @return [String]
     class GetVaultLockOutput < Struct.new(
+      nil,
       :policy,
       :state,
       :expiration_date,
@@ -911,6 +941,7 @@ module Aws::Glacier
     #   <p>The name of the vault.</p>
     #   @return [String]
     class GetVaultNotificationsInput < Struct.new(
+      nil,
       :account_id,
       :vault_name,
       keyword_init: true
@@ -923,6 +954,7 @@ module Aws::Glacier
     #   <p>Returns the notification configuration set on the vault.</p>
     #   @return [Types::VaultNotificationConfig]
     class GetVaultNotificationsOutput < Struct.new(
+      nil,
       :vault_notification_config,
       keyword_init: true
     )
@@ -1041,6 +1073,7 @@ module Aws::Glacier
     #   <p>Contains the location where the data from the select job is stored.</p>
     #   @return [Types::OutputLocation]
     class GlacierJobDescription < Struct.new(
+      nil,
       :job_id,
       :job_description,
       :action,
@@ -1080,6 +1113,7 @@ module Aws::Glacier
     #   <p>Specifies the permission given to the grantee. </p>
     #   @return [String]
     class Grant < Struct.new(
+      nil,
       :grantee,
       :permission,
       keyword_init: true
@@ -1104,6 +1138,7 @@ module Aws::Glacier
     #   <p>Email address of the grantee.</p>
     #   @return [String]
     class Grantee < Struct.new(
+      nil,
       :type,
       :display_name,
       :uri,
@@ -1129,6 +1164,7 @@ module Aws::Glacier
     #   <p>Provides options for specifying job information.</p>
     #   @return [Types::JobParameters]
     class InitiateJobInput < Struct.new(
+      nil,
       :account_id,
       :vault_name,
       :job_parameters,
@@ -1148,6 +1184,7 @@ module Aws::Glacier
     #   <p>The path to the location of where the select results are stored.</p>
     #   @return [String]
     class InitiateJobOutput < Struct.new(
+      nil,
       :location,
       :job_id,
       :job_output_path,
@@ -1179,6 +1216,7 @@ module Aws::Glacier
     #            this part size.</p>
     #   @return [String]
     class InitiateMultipartUploadInput < Struct.new(
+      nil,
       :account_id,
       :vault_name,
       :archive_description,
@@ -1197,6 +1235,7 @@ module Aws::Glacier
     #            location.</p>
     #   @return [String]
     class InitiateMultipartUploadOutput < Struct.new(
+      nil,
       :location,
       :upload_id,
       keyword_init: true
@@ -1220,6 +1259,7 @@ module Aws::Glacier
     #            character.</p>
     #   @return [Types::VaultLockPolicy]
     class InitiateVaultLockInput < Struct.new(
+      nil,
       :account_id,
       :vault_name,
       :policy,
@@ -1233,6 +1273,7 @@ module Aws::Glacier
     #   <p>The lock ID, which is used to complete the vault locking process.</p>
     #   @return [String]
     class InitiateVaultLockOutput < Struct.new(
+      nil,
       :lock_id,
       keyword_init: true
     )
@@ -1244,6 +1285,7 @@ module Aws::Glacier
     #   <p>Describes the serialization of a CSV-encoded object.</p>
     #   @return [Types::CSVInput]
     class InputSerialization < Struct.new(
+      nil,
       :csv,
       keyword_init: true
     )
@@ -1260,6 +1302,7 @@ module Aws::Glacier
     # @!attribute message
     #   @return [String]
     class InsufficientCapacityException < Struct.new(
+      nil,
       :type,
       :code,
       :message,
@@ -1279,6 +1322,7 @@ module Aws::Glacier
     #   <p>Returned if a parameter of the request is incorrectly specified.</p>
     #   @return [String]
     class InvalidParameterValueException < Struct.new(
+      nil,
       :type,
       :code,
       :message,
@@ -1314,6 +1358,7 @@ module Aws::Glacier
     #                   <a href="https://docs.aws.amazon.com/amazonglacier/latest/dev/api-initiate-job-post.html#api-initiate-job-post-vault-inventory-list-filtering"> Range Inventory Retrieval</a>.</p>
     #   @return [String]
     class InventoryRetrievalJobDescription < Struct.new(
+      nil,
       :format,
       :start_date,
       :end_date,
@@ -1346,6 +1391,7 @@ module Aws::Glacier
     #            value is <code>null</code>.</p>
     #   @return [String]
     class InventoryRetrievalJobInput < Struct.new(
+      nil,
       :start_date,
       :end_date,
       :limit,
@@ -1409,6 +1455,7 @@ module Aws::Glacier
     #   <p>Contains information about the location where the select job results are stored.</p>
     #   @return [Types::OutputLocation]
     class JobParameters < Struct.new(
+      nil,
       :format,
       :type,
       :archive_id,
@@ -1435,6 +1482,7 @@ module Aws::Glacier
     #   <p>Returned if the request results in a vault limit or tags limit being exceeded.</p>
     #   @return [String]
     class LimitExceededException < Struct.new(
+      nil,
       :type,
       :code,
       :message,
@@ -1474,6 +1522,7 @@ module Aws::Glacier
     #               <code>false</code>.</p>
     #   @return [String]
     class ListJobsInput < Struct.new(
+      nil,
       :account_id,
       :vault_name,
       :limit,
@@ -1498,6 +1547,7 @@ module Aws::Glacier
     #            previous List Jobs request. </p>
     #   @return [String]
     class ListJobsOutput < Struct.new(
+      nil,
       :job_list,
       :marker,
       keyword_init: true
@@ -1528,6 +1578,7 @@ module Aws::Glacier
     #            started in a previous List Uploads request.</p>
     #   @return [String]
     class ListMultipartUploadsInput < Struct.new(
+      nil,
       :account_id,
       :vault_name,
       :limit,
@@ -1547,6 +1598,7 @@ module Aws::Glacier
     #            there are no more uploads, this value is <code>null</code>.</p>
     #   @return [String]
     class ListMultipartUploadsOutput < Struct.new(
+      nil,
       :uploads_list,
       :marker,
       keyword_init: true
@@ -1581,6 +1633,7 @@ module Aws::Glacier
     #            never exceeds the limit.</p>
     #   @return [Integer]
     class ListPartsInput < Struct.new(
+      nil,
       :account_id,
       :vault_name,
       :upload_id,
@@ -1621,6 +1674,7 @@ module Aws::Glacier
     #            more parts, this value is <code>null</code>.</p>
     #   @return [String]
     class ListPartsOutput < Struct.new(
+      nil,
       :multipart_upload_id,
       :vault_arn,
       :archive_description,
@@ -1645,6 +1699,7 @@ module Aws::Glacier
     #            ID, don't include any hyphens ('-') in the ID. </p>
     #   @return [String]
     class ListProvisionedCapacityInput < Struct.new(
+      nil,
       :account_id,
       keyword_init: true
     )
@@ -1655,6 +1710,7 @@ module Aws::Glacier
     #   <p>The response body contains the following JSON fields.</p>
     #   @return [Array<Types::ProvisionedCapacityDescription>]
     class ListProvisionedCapacityOutput < Struct.new(
+      nil,
       :provisioned_capacity_list,
       keyword_init: true
     )
@@ -1673,6 +1729,7 @@ module Aws::Glacier
     #   <p>The name of the vault.</p>
     #   @return [String]
     class ListTagsForVaultInput < Struct.new(
+      nil,
       :account_id,
       :vault_name,
       keyword_init: true
@@ -1685,6 +1742,7 @@ module Aws::Glacier
     #   <p>The tags attached to the vault. Each tag is composed of a key and a value.</p>
     #   @return [Hash<String, String>]
     class ListTagsForVaultOutput < Struct.new(
+      nil,
       :tags,
       keyword_init: true
     )
@@ -1710,6 +1768,7 @@ module Aws::Glacier
     #            never exceeds the limit.</p>
     #   @return [Integer]
     class ListVaultsInput < Struct.new(
+      nil,
       :account_id,
       :marker,
       :limit,
@@ -1727,6 +1786,7 @@ module Aws::Glacier
     #            another List Vaults request to obtain more vaults in the list.</p>
     #   @return [String]
     class ListVaultsOutput < Struct.new(
+      nil,
       :vault_list,
       :marker,
       keyword_init: true
@@ -1745,6 +1805,7 @@ module Aws::Glacier
     #   <p>Returned if no authentication data is found for the request.</p>
     #   @return [String]
     class MissingParameterValueException < Struct.new(
+      nil,
       :type,
       :code,
       :message,
@@ -1758,6 +1819,7 @@ module Aws::Glacier
     #   <p>Describes an S3 location that will receive the results of the job request.</p>
     #   @return [Types::S3Location]
     class OutputLocation < Struct.new(
+      nil,
       :s3,
       keyword_init: true
     )
@@ -1769,6 +1831,7 @@ module Aws::Glacier
     #   <p>Describes the serialization of CSV-encoded query results.</p>
     #   @return [Types::CSVOutput]
     class OutputSerialization < Struct.new(
+      nil,
       :csv,
       keyword_init: true
     )
@@ -1784,6 +1847,7 @@ module Aws::Glacier
     #            never <code>null</code>.</p>
     #   @return [String]
     class PartListElement < Struct.new(
+      nil,
       :range_in_bytes,
       :sha256_tree_hash,
       keyword_init: true
@@ -1803,6 +1867,7 @@ module Aws::Glacier
     #   <p>InitiateJob request denied by current data retrieval policy.</p>
     #   @return [String]
     class PolicyEnforcedException < Struct.new(
+      nil,
       :type,
       :code,
       :message,
@@ -1822,6 +1887,7 @@ module Aws::Glacier
     #   <p>The date that the provisioned capacity unit expires, in Universal Coordinated Time (UTC).</p>
     #   @return [String]
     class ProvisionedCapacityDescription < Struct.new(
+      nil,
       :capacity_id,
       :start_date,
       :expiration_date,
@@ -1837,6 +1903,7 @@ module Aws::Glacier
     #            ID, don't include any hyphens ('-') in the ID. </p>
     #   @return [String]
     class PurchaseProvisionedCapacityInput < Struct.new(
+      nil,
       :account_id,
       keyword_init: true
     )
@@ -1847,6 +1914,7 @@ module Aws::Glacier
     #   <p>The ID that identifies the provisioned capacity unit.</p>
     #   @return [String]
     class PurchaseProvisionedCapacityOutput < Struct.new(
+      nil,
       :capacity_id,
       keyword_init: true
     )
@@ -1868,6 +1936,7 @@ module Aws::Glacier
     #   <p>A list of tag keys. Each corresponding tag is removed from the vault.</p>
     #   @return [Array<String>]
     class RemoveTagsFromVaultInput < Struct.new(
+      nil,
       :account_id,
       :vault_name,
       :tag_keys,
@@ -1889,6 +1958,7 @@ module Aws::Glacier
     #            upload.</p>
     #   @return [String]
     class RequestTimeoutException < Struct.new(
+      nil,
       :type,
       :code,
       :message,
@@ -1910,6 +1980,7 @@ module Aws::Glacier
     #            exist.</p>
     #   @return [String]
     class ResourceNotFoundException < Struct.new(
+      nil,
       :type,
       :code,
       :message,
@@ -1944,6 +2015,7 @@ module Aws::Glacier
     #   <p>The storage class used to store the job results.</p>
     #   @return [String]
     class S3Location < Struct.new(
+      nil,
       :bucket_name,
       :prefix,
       :encryption,
@@ -1971,6 +2043,7 @@ module Aws::Glacier
     #   <p>Describes how the results of the select job are serialized.</p>
     #   @return [Types::OutputSerialization]
     class SelectParameters < Struct.new(
+      nil,
       :input_serialization,
       :expression_type,
       :expression,
@@ -1991,6 +2064,7 @@ module Aws::Glacier
     #   <p>Returned if the service cannot complete the request.</p>
     #   @return [String]
     class ServiceUnavailableException < Struct.new(
+      nil,
       :type,
       :code,
       :message,
@@ -2011,6 +2085,7 @@ module Aws::Glacier
     #   <p>The data retrieval policy in JSON format.</p>
     #   @return [Types::DataRetrievalPolicy]
     class SetDataRetrievalPolicyInput < Struct.new(
+      nil,
       :account_id,
       :policy,
       keyword_init: true
@@ -2033,6 +2108,7 @@ module Aws::Glacier
     #   <p>The vault access policy as a JSON string.</p>
     #   @return [Types::VaultAccessPolicy]
     class SetVaultAccessPolicyInput < Struct.new(
+      nil,
       :account_id,
       :vault_name,
       :policy,
@@ -2057,6 +2133,7 @@ module Aws::Glacier
     #   <p>Provides options for specifying notification configuration.</p>
     #   @return [Types::VaultNotificationConfig]
     class SetVaultNotificationsInput < Struct.new(
+      nil,
       :account_id,
       :vault_name,
       :vault_notification_config,
@@ -2086,6 +2163,7 @@ module Aws::Glacier
     #   <p>The data to upload.</p>
     #   @return [String]
     class UploadArchiveInput < Struct.new(
+      nil,
       :vault_name,
       :account_id,
       :archive_description,
@@ -2110,6 +2188,7 @@ module Aws::Glacier
     #   <p>The ID of the archive. This value is also included as part of the location.</p>
     #   @return [String]
     class UploadArchiveOutput < Struct.new(
+      nil,
       :location,
       :checksum,
       :archive_id,
@@ -2138,6 +2217,7 @@ module Aws::Glacier
     #   <p>The UTC time at which the multipart upload was initiated.</p>
     #   @return [String]
     class UploadListElement < Struct.new(
+      nil,
       :multipart_upload_id,
       :vault_arn,
       :archive_description,
@@ -2181,6 +2261,7 @@ module Aws::Glacier
     #   <p>The data to upload.</p>
     #   @return [String]
     class UploadMultipartPartInput < Struct.new(
+      nil,
       :account_id,
       :vault_name,
       :upload_id,
@@ -2197,6 +2278,7 @@ module Aws::Glacier
     #   <p>The SHA256 tree hash that Amazon S3 Glacier computed for the uploaded part.</p>
     #   @return [String]
     class UploadMultipartPartOutput < Struct.new(
+      nil,
       :checksum,
       keyword_init: true
     )
@@ -2208,6 +2290,7 @@ module Aws::Glacier
     #   <p>The vault access policy.</p>
     #   @return [String]
     class VaultAccessPolicy < Struct.new(
+      nil,
       :policy,
       keyword_init: true
     )
@@ -2219,6 +2302,7 @@ module Aws::Glacier
     #   <p>The vault lock policy.</p>
     #   @return [String]
     class VaultLockPolicy < Struct.new(
+      nil,
       :policy,
       keyword_init: true
     )
@@ -2235,6 +2319,7 @@ module Aws::Glacier
     #            specified Amazon SNS topic.</p>
     #   @return [Array<String>]
     class VaultNotificationConfig < Struct.new(
+      nil,
       :sns_topic,
       :events,
       keyword_init: true

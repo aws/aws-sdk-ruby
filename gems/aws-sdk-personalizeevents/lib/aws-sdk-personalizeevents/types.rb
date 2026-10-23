@@ -22,6 +22,7 @@ module Aws::PersonalizeEvents
     #         separate each category with a pipe separator (<code>|</code>). For example, <code>\"Deluxe|Premium\"</code>.</p>
     #   @return [String]
     class Action < Struct.new(
+      nil,
       :action_id,
       :properties,
       keyword_init: true
@@ -103,6 +104,7 @@ module Aws::PersonalizeEvents
     #            </ul>
     #   @return [String]
     class ActionInteraction < Struct.new(
+      nil,
       :action_id,
       :user_id,
       :session_id,
@@ -197,6 +199,7 @@ module Aws::PersonalizeEvents
     #   <p>Contains information about the metric attribution associated with an event. For more information about metric attributions, see <a href="https://docs.aws.amazon.com/personalize/latest/dg/measuring-recommendation-impact.html">Measuring impact of recommendations</a>.</p>
     #   @return [Types::MetricAttribution]
     class Event < Struct.new(
+      nil,
       :event_id,
       :event_type,
       :event_value,
@@ -215,6 +218,7 @@ module Aws::PersonalizeEvents
     # @!attribute message
     #   @return [String]
     class InvalidInputException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -237,6 +241,7 @@ module Aws::PersonalizeEvents
     #         separate each category with a pipe separator (<code>|</code>). For example, <code>\"Horror|Action\"</code>.</p>
     #   @return [String]
     class Item < Struct.new(
+      nil,
       :item_id,
       :properties,
       keyword_init: true
@@ -249,6 +254,7 @@ module Aws::PersonalizeEvents
     #   <p>The source of the event, such as a third party.</p>
     #   @return [String]
     class MetricAttribution < Struct.new(
+      nil,
       :event_attribution_source,
       keyword_init: true
     )
@@ -263,6 +269,7 @@ module Aws::PersonalizeEvents
     #   <p>A list of action interaction events from the session.</p>
     #   @return [Array<Types::ActionInteraction>]
     class PutActionInteractionsRequest < Struct.new(
+      nil,
       :tracking_id,
       :action_interactions,
       keyword_init: true
@@ -277,6 +284,7 @@ module Aws::PersonalizeEvents
     #   <p>A list of action data.</p>
     #   @return [Array<Types::Action>]
     class PutActionsRequest < Struct.new(
+      nil,
       :dataset_arn,
       :actions,
       keyword_init: true
@@ -301,6 +309,7 @@ module Aws::PersonalizeEvents
     #   <p>A list of event data from the session.</p>
     #   @return [Array<Types::Event>]
     class PutEventsRequest < Struct.new(
+      nil,
       :tracking_id,
       :user_id,
       :session_id,
@@ -317,6 +326,7 @@ module Aws::PersonalizeEvents
     #   <p>A list of item data.</p>
     #   @return [Array<Types::Item>]
     class PutItemsRequest < Struct.new(
+      nil,
       :dataset_arn,
       :items,
       keyword_init: true
@@ -331,6 +341,7 @@ module Aws::PersonalizeEvents
     #   <p>A list of user data.</p>
     #   @return [Array<Types::User>]
     class PutUsersRequest < Struct.new(
+      nil,
       :dataset_arn,
       :users,
       keyword_init: true
@@ -342,6 +353,7 @@ module Aws::PersonalizeEvents
     # @!attribute message
     #   @return [String]
     class ResourceInUseException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -352,6 +364,7 @@ module Aws::PersonalizeEvents
     # @!attribute message
     #   @return [String]
     class ResourceNotFoundException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -374,6 +387,7 @@ module Aws::PersonalizeEvents
     #         For example, <code>\"Member|Frequent shopper\"</code>.</p>
     #   @return [String]
     class User < Struct.new(
+      nil,
       :user_id,
       :properties,
       keyword_init: true

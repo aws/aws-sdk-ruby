@@ -17,6 +17,7 @@ module Aws::ResourceGroups
     #   <p>The text of any error message occurs during an attempt to turn group lifecycle events on or off.</p>
     #   @return [String]
     class AccountSettings < Struct.new(
+      nil,
       :group_lifecycle_events_desired_status,
       :group_lifecycle_events_status,
       :group_lifecycle_events_status_message,
@@ -29,6 +30,7 @@ module Aws::ResourceGroups
     # @!attribute message
     #   @return [String]
     class BadRequestException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -39,6 +41,7 @@ module Aws::ResourceGroups
     #   <p>The Amazon resource name (ARN) of the tag-sync task. </p>
     #   @return [String]
     class CancelTagSyncTaskInput < Struct.new(
+      nil,
       :task_arn,
       keyword_init: true
     )
@@ -91,6 +94,7 @@ module Aws::ResourceGroups
     #   <p>The name of the application group, which you can change at any time. </p>
     #   @return [String]
     class CreateGroupInput < Struct.new(
+      nil,
       :name,
       :description,
       :resource_query,
@@ -120,6 +124,7 @@ module Aws::ResourceGroups
     #               syntax of a service configuration, see <a href="https://docs.aws.amazon.com/ARG/latest/APIReference/about-slg.html">Service configurations for Resource Groups</a>.</p>
     #   @return [Types::GroupConfiguration]
     class CreateGroupOutput < Struct.new(
+      nil,
       :group,
       :resource_query,
       :tags,
@@ -138,6 +143,7 @@ module Aws::ResourceGroups
     #   <p>The name or the Amazon resource name (ARN) of the resource group to delete.</p>
     #   @return [String]
     class DeleteGroupInput < Struct.new(
+      nil,
       :group_name,
       :group,
       keyword_init: true
@@ -149,6 +155,7 @@ module Aws::ResourceGroups
     #   <p>A full description of the deleted resource group.</p>
     #   @return [Types::Group]
     class DeleteGroupOutput < Struct.new(
+      nil,
       :group,
       keyword_init: true
     )
@@ -166,6 +173,7 @@ module Aws::ResourceGroups
     #   <p>The error code associated with the failure.</p>
     #   @return [String]
     class FailedResource < Struct.new(
+      nil,
       :resource_arn,
       :error_message,
       :error_code,
@@ -178,6 +186,7 @@ module Aws::ResourceGroups
     # @!attribute message
     #   @return [String]
     class ForbiddenException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -188,6 +197,7 @@ module Aws::ResourceGroups
     #   <p>The current settings for the optional features in Resource Groups.</p>
     #   @return [Types::AccountSettings]
     class GetAccountSettingsOutput < Struct.new(
+      nil,
       :account_settings,
       keyword_init: true
     )
@@ -199,6 +209,7 @@ module Aws::ResourceGroups
     #               configuration.</p>
     #   @return [String]
     class GetGroupConfigurationInput < Struct.new(
+      nil,
       :group,
       keyword_init: true
     )
@@ -211,6 +222,7 @@ module Aws::ResourceGroups
     #                   Resource Groups</a>.</p>
     #   @return [Types::GroupConfiguration]
     class GetGroupConfigurationOutput < Struct.new(
+      nil,
       :group_configuration,
       keyword_init: true
     )
@@ -226,6 +238,7 @@ module Aws::ResourceGroups
     #   <p>The name or the Amazon resource name (ARN) of the resource group to retrieve.</p>
     #   @return [String]
     class GetGroupInput < Struct.new(
+      nil,
       :group_name,
       :group,
       keyword_init: true
@@ -239,6 +252,7 @@ module Aws::ResourceGroups
     #               those additional details of the resource group.</p>
     #   @return [Types::Group]
     class GetGroupOutput < Struct.new(
+      nil,
       :group,
       keyword_init: true
     )
@@ -254,6 +268,7 @@ module Aws::ResourceGroups
     #   <p>The name or the Amazon resource name (ARN) of the resource group to query.</p>
     #   @return [String]
     class GetGroupQueryInput < Struct.new(
+      nil,
       :group_name,
       :group,
       keyword_init: true
@@ -267,6 +282,7 @@ module Aws::ResourceGroups
     #                   a tag-based group in Resource Groups</a>.</p>
     #   @return [Types::GroupQuery]
     class GetGroupQueryOutput < Struct.new(
+      nil,
       :group_query,
       keyword_init: true
     )
@@ -277,6 +293,7 @@ module Aws::ResourceGroups
     #   <p>The Amazon resource name (ARN) of the tag-sync task. </p>
     #   @return [String]
     class GetTagSyncTaskInput < Struct.new(
+      nil,
       :task_arn,
       keyword_init: true
     )
@@ -360,6 +377,7 @@ module Aws::ResourceGroups
     #   <p>The timestamp of when the tag-sync task was created. </p>
     #   @return [Time]
     class GetTagSyncTaskOutput < Struct.new(
+      nil,
       :group_arn,
       :group_name,
       :task_arn,
@@ -379,6 +397,7 @@ module Aws::ResourceGroups
     #   <p>The Amazon resource name (ARN) of the resource group whose tags you want to retrieve.</p>
     #   @return [String]
     class GetTagsInput < Struct.new(
+      nil,
       :arn,
       keyword_init: true
     )
@@ -392,6 +411,7 @@ module Aws::ResourceGroups
     #   <p>The tags associated with the specified resource group.</p>
     #   @return [Hash<String, String>]
     class GetTagsOutput < Struct.new(
+      nil,
       :arn,
       :tags,
       keyword_init: true
@@ -441,6 +461,7 @@ module Aws::ResourceGroups
     #               for application groups. </p>
     #   @return [Hash<String, String>]
     class Group < Struct.new(
+      nil,
       :group_arn,
       :name,
       :description,
@@ -473,6 +494,7 @@ module Aws::ResourceGroups
     #   <p>If present, the reason why a request to update the group configuration failed.</p>
     #   @return [String]
     class GroupConfiguration < Struct.new(
+      nil,
       :configuration,
       :proposed_configuration,
       :status,
@@ -497,6 +519,7 @@ module Aws::ResourceGroups
     #                   resource types and parameters</a>.</p>
     #   @return [Array<Types::GroupConfigurationParameter>]
     class GroupConfigurationItem < Struct.new(
+      nil,
       :type,
       :parameters,
       keyword_init: true
@@ -518,6 +541,7 @@ module Aws::ResourceGroups
     #                   parameters</a>.</p>
     #   @return [Array<String>]
     class GroupConfigurationParameter < Struct.new(
+      nil,
       :name,
       :values,
       keyword_init: true
@@ -535,6 +559,7 @@ module Aws::ResourceGroups
     #               case-sensitive.</p>
     #   @return [Array<String>]
     class GroupFilter < Struct.new(
+      nil,
       :name,
       :values,
       keyword_init: true
@@ -564,6 +589,7 @@ module Aws::ResourceGroups
     #   <p>The name of the application group, which you can change at any time. </p>
     #   @return [String]
     class GroupIdentifier < Struct.new(
+      nil,
       :group_name,
       :group_arn,
       :description,
@@ -586,6 +612,7 @@ module Aws::ResourceGroups
     #               resource group.</p>
     #   @return [Types::ResourceQuery]
     class GroupQuery < Struct.new(
+      nil,
       :group_name,
       :resource_query,
       keyword_init: true
@@ -600,6 +627,7 @@ module Aws::ResourceGroups
     #   <p>The list of Amazon resource names (ARNs) of the resources to be added to the group. </p>
     #   @return [Array<String>]
     class GroupResourcesInput < Struct.new(
+      nil,
       :group,
       :resource_arns,
       keyword_init: true
@@ -624,6 +652,7 @@ module Aws::ResourceGroups
     #                   <code>Status</code> field of each object in that array. </p>
     #   @return [Array<Types::PendingResource>]
     class GroupResourcesOutput < Struct.new(
+      nil,
       :succeeded,
       :failed,
       :pending,
@@ -655,6 +684,7 @@ module Aws::ResourceGroups
     #   <p>A timestamp of when the status was last updated. </p>
     #   @return [Time]
     class GroupingStatusesItem < Struct.new(
+      nil,
       :resource_arn,
       :action,
       :status,
@@ -670,6 +700,7 @@ module Aws::ResourceGroups
     # @!attribute message
     #   @return [String]
     class InternalServerErrorException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -739,6 +770,7 @@ module Aws::ResourceGroups
     #   call's <code>NextToken</code> response to indicate where the output should continue from.</p>
     #   @return [String]
     class ListGroupResourcesInput < Struct.new(
+      nil,
       :group_name,
       :group,
       :filters,
@@ -764,6 +796,7 @@ module Aws::ResourceGroups
     #            </note>
     #   @return [Types::ResourceStatus]
     class ListGroupResourcesItem < Struct.new(
+      nil,
       :identifier,
       :status,
       keyword_init: true
@@ -801,6 +834,7 @@ module Aws::ResourceGroups
     #               <code>CLOUDFORMATION_STACK_UNASSUMABLE_ROLE</code> and <code>RESOURCE_TYPE_NOT_SUPPORTED</code>. </p>
     #   @return [Array<Types::QueryError>]
     class ListGroupResourcesOutput < Struct.new(
+      nil,
       :resources,
       :resource_identifiers,
       :next_token,
@@ -818,6 +852,7 @@ module Aws::ResourceGroups
     #   <p>One or more filter values. Allowed filter values vary by resource filter name, and are case-sensitive. </p>
     #   @return [Array<String>]
     class ListGroupingStatusesFilter < Struct.new(
+      nil,
       :name,
       :values,
       keyword_init: true
@@ -844,6 +879,7 @@ module Aws::ResourceGroups
     #               where the output should continue from. </p>
     #   @return [String]
     class ListGroupingStatusesInput < Struct.new(
+      nil,
       :group,
       :max_results,
       :filters,
@@ -866,6 +902,7 @@ module Aws::ResourceGroups
     #               You should repeat this until the <code>NextToken</code> response element comes back as <code>null</code>. </p>
     #   @return [String]
     class ListGroupingStatusesOutput < Struct.new(
+      nil,
       :group,
       :grouping_statuses,
       :next_token,
@@ -947,6 +984,7 @@ module Aws::ResourceGroups
     #   call's <code>NextToken</code> response to indicate where the output should continue from.</p>
     #   @return [String]
     class ListGroupsInput < Struct.new(
+      nil,
       :filters,
       :max_results,
       :next_token,
@@ -979,6 +1017,7 @@ module Aws::ResourceGroups
     #   until the <code>NextToken</code> response element comes back as <code>null</code>.</p>
     #   @return [String]
     class ListGroupsOutput < Struct.new(
+      nil,
       :group_identifiers,
       :groups,
       :next_token,
@@ -996,6 +1035,7 @@ module Aws::ResourceGroups
     #   <p>The name of the application group. </p>
     #   @return [String]
     class ListTagSyncTasksFilter < Struct.new(
+      nil,
       :group_arn,
       :group_name,
       keyword_init: true
@@ -1018,6 +1058,7 @@ module Aws::ResourceGroups
     #               where the output should continue from. </p>
     #   @return [String]
     class ListTagSyncTasksInput < Struct.new(
+      nil,
       :filters,
       :max_results,
       :next_token,
@@ -1035,6 +1076,7 @@ module Aws::ResourceGroups
     #               You should repeat this until the <code>NextToken</code> response element comes back as <code>null</code>.</p>
     #   @return [String]
     class ListTagSyncTasksOutput < Struct.new(
+      nil,
       :tag_sync_tasks,
       :next_token,
       keyword_init: true
@@ -1046,6 +1088,7 @@ module Aws::ResourceGroups
     # @!attribute message
     #   @return [String]
     class MethodNotAllowedException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -1056,6 +1099,7 @@ module Aws::ResourceGroups
     # @!attribute message
     #   @return [String]
     class NotFoundException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -1069,6 +1113,7 @@ module Aws::ResourceGroups
     #   <p>The Amazon resource name (ARN) of the resource that's in a pending state.</p>
     #   @return [String]
     class PendingResource < Struct.new(
+      nil,
       :resource_arn,
       keyword_init: true
     )
@@ -1091,6 +1136,7 @@ module Aws::ResourceGroups
     #            </note>
     #   @return [Array<Types::GroupConfigurationItem>]
     class PutGroupConfigurationInput < Struct.new(
+      nil,
       :group,
       :configuration,
       keyword_init: true
@@ -1099,6 +1145,7 @@ module Aws::ResourceGroups
     end
 
     class PutGroupConfigurationOutput < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1113,6 +1160,7 @@ module Aws::ResourceGroups
     #   <p>A message that explains the <code>ErrorCode</code>. </p>
     #   @return [String]
     class QueryError < Struct.new(
+      nil,
       :error_code,
       :message,
       keyword_init: true
@@ -1130,6 +1178,7 @@ module Aws::ResourceGroups
     #               case-sensitive.</p>
     #   @return [Array<String>]
     class ResourceFilter < Struct.new(
+      nil,
       :name,
       :values,
       keyword_init: true
@@ -1145,6 +1194,7 @@ module Aws::ResourceGroups
     #   <p>The resource type of a resource, such as <code>AWS::EC2::Instance</code>.</p>
     #   @return [String]
     class ResourceIdentifier < Struct.new(
+      nil,
       :resource_arn,
       :resource_type,
       keyword_init: true
@@ -1298,6 +1348,7 @@ module Aws::ResourceGroups
     #            </ul>
     #   @return [String]
     class ResourceQuery < Struct.new(
+      nil,
       :type,
       :query,
       keyword_init: true
@@ -1313,6 +1364,7 @@ module Aws::ResourceGroups
     #   <p>The current status.</p>
     #   @return [String]
     class ResourceStatus < Struct.new(
+      nil,
       :name,
       keyword_init: true
     )
@@ -1340,6 +1392,7 @@ module Aws::ResourceGroups
     #   call's <code>NextToken</code> response to indicate where the output should continue from.</p>
     #   @return [String]
     class SearchResourcesInput < Struct.new(
+      nil,
       :resource_query,
       :max_results,
       :next_token,
@@ -1381,6 +1434,7 @@ module Aws::ResourceGroups
     #            </ul>
     #   @return [Array<Types::QueryError>]
     class SearchResourcesOutput < Struct.new(
+      nil,
       :resource_identifiers,
       :next_token,
       :query_errors,
@@ -1439,6 +1493,7 @@ module Aws::ResourceGroups
     #   <p>The Amazon resource name (ARN) of the role assumed by the service to tag and untag resources on your behalf.</p>
     #   @return [String]
     class StartTagSyncTaskInput < Struct.new(
+      nil,
       :group,
       :tag_key,
       :tag_value,
@@ -1497,6 +1552,7 @@ module Aws::ResourceGroups
     #   <p>The Amazon resource name (ARN) of the role assumed by the service to tag and untag resources on your behalf.</p>
     #   @return [String]
     class StartTagSyncTaskOutput < Struct.new(
+      nil,
       :group_arn,
       :group_name,
       :task_arn,
@@ -1517,6 +1573,7 @@ module Aws::ResourceGroups
     #               key-value pairs.</p>
     #   @return [Hash<String, String>]
     class TagInput < Struct.new(
+      nil,
       :arn,
       :tags,
       keyword_init: true
@@ -1531,6 +1588,7 @@ module Aws::ResourceGroups
     #   <p>The tags that have been added to the specified resource group.</p>
     #   @return [Hash<String, String>]
     class TagOutput < Struct.new(
+      nil,
       :arn,
       :tags,
       keyword_init: true
@@ -1614,6 +1672,7 @@ module Aws::ResourceGroups
     #   <p>The timestamp of when the tag-sync task was created. </p>
     #   @return [Time]
     class TagSyncTaskItem < Struct.new(
+      nil,
       :group_arn,
       :group_name,
       :task_arn,
@@ -1634,6 +1693,7 @@ module Aws::ResourceGroups
     # @!attribute message
     #   @return [String]
     class TooManyRequestsException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -1645,6 +1705,7 @@ module Aws::ResourceGroups
     # @!attribute message
     #   @return [String]
     class UnauthorizedException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -1658,6 +1719,7 @@ module Aws::ResourceGroups
     #   <p>The Amazon resource names (ARNs) of the resources to be removed from the group.</p>
     #   @return [Array<String>]
     class UngroupResourcesInput < Struct.new(
+      nil,
       :group,
       :resource_arns,
       keyword_init: true
@@ -1682,6 +1744,7 @@ module Aws::ResourceGroups
     #               appears in the response.</p>
     #   @return [Array<Types::PendingResource>]
     class UngroupResourcesOutput < Struct.new(
+      nil,
       :succeeded,
       :failed,
       :pending,
@@ -1698,6 +1761,7 @@ module Aws::ResourceGroups
     #   <p>The keys of the tags to be removed.</p>
     #   @return [Array<String>]
     class UntagInput < Struct.new(
+      nil,
       :arn,
       :keys,
       keyword_init: true
@@ -1712,6 +1776,7 @@ module Aws::ResourceGroups
     #   <p>The keys of the tags that were removed.</p>
     #   @return [Array<String>]
     class UntagOutput < Struct.new(
+      nil,
       :arn,
       :keys,
       keyword_init: true
@@ -1724,6 +1789,7 @@ module Aws::ResourceGroups
     #            <p>You can't turn on group lifecycle events if your resource groups quota is greater than 2,000. </p>
     #   @return [String]
     class UpdateAccountSettingsInput < Struct.new(
+      nil,
       :group_lifecycle_events_desired_status,
       keyword_init: true
     )
@@ -1734,6 +1800,7 @@ module Aws::ResourceGroups
     #   <p>A structure that displays the status of the optional features in the account.</p>
     #   @return [Types::AccountSettings]
     class UpdateAccountSettingsOutput < Struct.new(
+      nil,
       :account_settings,
       keyword_init: true
     )
@@ -1764,6 +1831,7 @@ module Aws::ResourceGroups
     #   <p>The name of the application group, which you can change at any time. </p>
     #   @return [String]
     class UpdateGroupInput < Struct.new(
+      nil,
       :group_name,
       :group,
       :description,
@@ -1779,6 +1847,7 @@ module Aws::ResourceGroups
     #   <p>The update description of the resource group.</p>
     #   @return [Types::Group]
     class UpdateGroupOutput < Struct.new(
+      nil,
       :group,
       keyword_init: true
     )
@@ -1802,6 +1871,7 @@ module Aws::ResourceGroups
     #            </note>
     #   @return [Types::ResourceQuery]
     class UpdateGroupQueryInput < Struct.new(
+      nil,
       :group_name,
       :group,
       :resource_query,
@@ -1814,6 +1884,7 @@ module Aws::ResourceGroups
     #   <p>The updated resource query associated with the resource group after the update.</p>
     #   @return [Types::GroupQuery]
     class UpdateGroupQueryOutput < Struct.new(
+      nil,
       :group_query,
       keyword_init: true
     )

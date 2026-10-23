@@ -10,6 +10,7 @@ module Aws::Transfer
     # @!attribute message
     #   @return [String]
     class AccessDeniedException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -48,6 +49,7 @@ module Aws::Transfer
     #   <p>Allows you to use the Amazon S3 <code>Content-Type</code> that is associated with objects in S3 instead of having the content type mapped based on the file extension. This parameter is enabled by default when you create an AS2 connector from the console, but disabled by default when you create an AS2 connector by calling the API directly.</p>
     #   @return [String]
     class As2ConnectorConfig < Struct.new(
+      nil,
       :local_profile_id,
       :partner_profile_id,
       :message_subject,
@@ -67,6 +69,7 @@ module Aws::Transfer
     # @!attribute message
     #   @return [String]
     class ConflictException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -87,6 +90,7 @@ module Aws::Transfer
     #   <p>For transfers that fail, this parameter describes the reason for the failure.</p>
     #   @return [String]
     class ConnectorFileTransferResult < Struct.new(
+      nil,
       :file_path,
       :status_code,
       :failure_code,
@@ -110,6 +114,7 @@ module Aws::Transfer
     #   <p>Specifies which file to use as input to the workflow step: either the output from the previous step, or the originally uploaded file for the workflow.</p> <ul> <li> <p>To use the previous file as the input, enter <code>${previous.file}</code>. In this case, this workflow step uses the output file from the previous workflow step as input. This is the default value.</p> </li> <li> <p>To use the originally uploaded file location as input for this step, enter <code>${original.file}</code>.</p> </li> </ul>
     #   @return [String]
     class CopyStepDetails < Struct.new(
+      nil,
       :name,
       :destination_file_location,
       :overwrite_existing,
@@ -144,6 +149,7 @@ module Aws::Transfer
     #   <p>A unique identifier that is required to identify specific groups within your directory. The users of the group that you associate have access to your Amazon S3 or Amazon EFS resources over the enabled protocols using Transfer Family. If you know the group name, you can view the SID values by running the following command using Windows PowerShell.</p> <p> <code>Get-ADGroup -Filter {samAccountName -like "<i>YourGroupName</i>*"} -Properties * | Select SamAccountName,ObjectSid</code> </p> <p>In that command, replace <i>YourGroupName</i> with the name of your Active Directory group.</p> <p>The regular expression used to validate this parameter is a string of characters consisting of uppercase and lowercase alphanumeric characters with no spaces. You can also include underscores or any of the following characters: =,.@:/-</p>
     #   @return [String]
     class CreateAccessRequest < Struct.new(
+      nil,
       :home_directory,
       :home_directory_type,
       :home_directory_mappings,
@@ -164,6 +170,7 @@ module Aws::Transfer
     #   <p>The external identifier of the group whose users have access to your Amazon S3 or Amazon EFS resources over the enabled protocols using Transfer Family.</p>
     #   @return [String]
     class CreateAccessResponse < Struct.new(
+      nil,
       :server_id,
       :external_id,
       keyword_init: true
@@ -205,6 +212,7 @@ module Aws::Transfer
     #   <p>A <code>CustomDirectoriesType</code> structure. This structure specifies custom directories for storing various AS2 message files. You can specify directories for the following types of files.</p> <ul> <li> <p>Failed files</p> </li> <li> <p>MDN files</p> </li> <li> <p>Payload files</p> </li> <li> <p>Status files</p> </li> <li> <p>Temporary files</p> </li> </ul>
     #   @return [Types::CustomDirectoriesType]
     class CreateAgreementRequest < Struct.new(
+      nil,
       :description,
       :server_id,
       :local_profile_id,
@@ -225,6 +233,7 @@ module Aws::Transfer
     #   <p>The unique identifier for the agreement. Use this ID for deleting, or updating an agreement, as well as in any other API calls that require that you specify the agreement ID.</p>
     #   @return [String]
     class CreateAgreementResponse < Struct.new(
+      nil,
       :agreement_id,
       keyword_init: true
     )
@@ -253,6 +262,7 @@ module Aws::Transfer
     #   <p>Specifies the name of the security policy for the connector.</p>
     #   @return [String]
     class CreateConnectorRequest < Struct.new(
+      nil,
       :url,
       :as2_config,
       :access_role,
@@ -269,6 +279,7 @@ module Aws::Transfer
     #   <p>The unique identifier for the connector, returned after the API call succeeds.</p>
     #   @return [String]
     class CreateConnectorResponse < Struct.new(
+      nil,
       :connector_id,
       keyword_init: true
     )
@@ -288,6 +299,7 @@ module Aws::Transfer
     #   <p>Key-value pairs that can be used to group and search for AS2 profiles.</p>
     #   @return [Array<Types::Tag>]
     class CreateProfileRequest < Struct.new(
+      nil,
       :as2_id,
       :profile_type,
       :certificate_ids,
@@ -301,6 +313,7 @@ module Aws::Transfer
     #   <p>The unique identifier for the AS2 profile, returned after the API call succeeds.</p>
     #   @return [String]
     class CreateProfileResponse < Struct.new(
+      nil,
       :profile_id,
       keyword_init: true
     )
@@ -362,6 +375,7 @@ module Aws::Transfer
     #   <p>Specifies whether to use IPv4 only, or to use dual-stack (IPv4 and IPv6) for your Transfer Family endpoint. The default value is <code>IPV4</code>.</p> <important> <p>The <code>IpAddressType</code> parameter has the following limitations:</p> <ul> <li> <p>It cannot be changed while the server is online. You must stop the server before modifying this parameter.</p> </li> <li> <p>It cannot be updated to <code>DUALSTACK</code> if the server has <code>AddressAllocationIds</code> specified.</p> </li> </ul> </important> <note> <p>When using <code>DUALSTACK</code> as the <code>IpAddressType</code>, you cannot set the <code>AddressAllocationIds</code> parameter for the <a href="https://docs.aws.amazon.com/transfer/latest/APIReference/API_EndpointDetails.html">EndpointDetails</a> for the server.</p> </note>
     #   @return [String]
     class CreateServerRequest < Struct.new(
+      nil,
       :certificate,
       :domain,
       :endpoint_details,
@@ -389,6 +403,7 @@ module Aws::Transfer
     #   <p>The service-assigned identifier of the server that is created.</p>
     #   @return [String]
     class CreateServerResponse < Struct.new(
+      nil,
       :server_id,
       keyword_init: true
     )
@@ -426,6 +441,7 @@ module Aws::Transfer
     #   <p>A unique string that identifies a user and is associated with a <code>ServerId</code>. This user name must be a minimum of 3 and a maximum of 100 characters long. The following are valid characters: a-z, A-Z, 0-9, underscore '_', hyphen '-', period '.', and at sign '@'. The user name can't start with a hyphen, period, or at sign.</p>
     #   @return [String]
     class CreateUserRequest < Struct.new(
+      nil,
       :home_directory,
       :home_directory_type,
       :home_directory_mappings,
@@ -448,6 +464,7 @@ module Aws::Transfer
     #   <p>A unique string that identifies a Transfer Family user.</p>
     #   @return [String]
     class CreateUserResponse < Struct.new(
+      nil,
       :server_id,
       :user_name,
       keyword_init: true
@@ -471,6 +488,7 @@ module Aws::Transfer
     #   <p> Setting for the type of endpoint policy for the web app. The default value is <code>STANDARD</code>. </p> <p>If you are creating the web app in an Amazon Web Services GovCloud (US) Region, you can set this parameter to <code>FIPS</code>.</p>
     #   @return [String]
     class CreateWebAppRequest < Struct.new(
+      nil,
       :identity_provider_details,
       :access_endpoint,
       :web_app_units,
@@ -485,6 +503,7 @@ module Aws::Transfer
     #   <p>Returns a unique identifier for the web app.</p>
     #   @return [String]
     class CreateWebAppResponse < Struct.new(
+      nil,
       :web_app_id,
       keyword_init: true
     )
@@ -504,6 +523,7 @@ module Aws::Transfer
     #   <p>Key-value pairs that can be used to group and search for workflows. Tags are metadata attached to workflows for any purpose.</p>
     #   @return [Array<Types::Tag>]
     class CreateWorkflowRequest < Struct.new(
+      nil,
       :description,
       :steps,
       :on_exception_steps,
@@ -517,6 +537,7 @@ module Aws::Transfer
     #   <p>A unique identifier for the workflow.</p>
     #   @return [String]
     class CreateWorkflowResponse < Struct.new(
+      nil,
       :workflow_id,
       keyword_init: true
     )
@@ -540,6 +561,7 @@ module Aws::Transfer
     #   <p>Specifies a location to store temporary AS2 message files.</p>
     #   @return [String]
     class CustomDirectoriesType < Struct.new(
+      nil,
       :failed_files_directory,
       :mdn_files_directory,
       :payload_files_directory,
@@ -564,6 +586,7 @@ module Aws::Transfer
     #   <p>Specifies which file to use as input to the workflow step: either the output from the previous step, or the originally uploaded file for the workflow.</p> <ul> <li> <p>To use the previous file as the input, enter <code>${previous.file}</code>. In this case, this workflow step uses the output file from the previous workflow step as input. This is the default value.</p> </li> <li> <p>To use the originally uploaded file location as input for this step, enter <code>${original.file}</code>.</p> </li> </ul>
     #   @return [String]
     class CustomStepDetails < Struct.new(
+      nil,
       :name,
       :target,
       :timeout_seconds,
@@ -590,6 +613,7 @@ module Aws::Transfer
     #   <p>Specifies the location for the file being decrypted. Use <code>${Transfer:UserName}</code> or <code>${Transfer:UploadDate}</code> in this field to parametrize the destination prefix by username or uploaded date.</p> <ul> <li> <p>Set the value of <code>DestinationFileLocation</code> to <code>${Transfer:UserName}</code> to decrypt uploaded files to an Amazon S3 bucket that is prefixed with the name of the Transfer Family user that uploaded the file.</p> </li> <li> <p>Set the value of <code>DestinationFileLocation</code> to <code>${Transfer:UploadDate}</code> to decrypt uploaded files to an Amazon S3 bucket that is prefixed with the date of the upload.</p> <note> <p>The system resolves <code>UploadDate</code> to a date format of <i>YYYY-MM-DD</i>, based on the date the file is uploaded in UTC.</p> </note> </li> </ul>
     #   @return [Types::InputFileLocation]
     class DecryptStepDetails < Struct.new(
+      nil,
       :name,
       :type,
       :source_file_location,
@@ -607,6 +631,7 @@ module Aws::Transfer
     #   <p>A unique identifier that is required to identify specific groups within your directory. The users of the group that you associate have access to your Amazon S3 or Amazon EFS resources over the enabled protocols using Transfer Family. If you know the group name, you can view the SID values by running the following command using Windows PowerShell.</p> <p> <code>Get-ADGroup -Filter {samAccountName -like "<i>YourGroupName</i>*"} -Properties * | Select SamAccountName,ObjectSid</code> </p> <p>In that command, replace <i>YourGroupName</i> with the name of your Active Directory group.</p> <p>The regular expression used to validate this parameter is a string of characters consisting of uppercase and lowercase alphanumeric characters with no spaces. You can also include underscores or any of the following characters: =,.@:/-</p>
     #   @return [String]
     class DeleteAccessRequest < Struct.new(
+      nil,
       :server_id,
       :external_id,
       keyword_init: true
@@ -621,6 +646,7 @@ module Aws::Transfer
     #   <p>The server identifier associated with the agreement that you are deleting.</p>
     #   @return [String]
     class DeleteAgreementRequest < Struct.new(
+      nil,
       :agreement_id,
       :server_id,
       keyword_init: true
@@ -632,6 +658,7 @@ module Aws::Transfer
     #   <p>The identifier of the certificate object that you are deleting.</p>
     #   @return [String]
     class DeleteCertificateRequest < Struct.new(
+      nil,
       :certificate_id,
       keyword_init: true
     )
@@ -642,6 +669,7 @@ module Aws::Transfer
     #   <p>The unique identifier for the connector.</p>
     #   @return [String]
     class DeleteConnectorRequest < Struct.new(
+      nil,
       :connector_id,
       keyword_init: true
     )
@@ -655,6 +683,7 @@ module Aws::Transfer
     #   <p>The identifier of the host key that you are deleting.</p>
     #   @return [String]
     class DeleteHostKeyRequest < Struct.new(
+      nil,
       :server_id,
       :host_key_id,
       keyword_init: true
@@ -666,6 +695,7 @@ module Aws::Transfer
     #   <p>The identifier of the profile that you are deleting.</p>
     #   @return [String]
     class DeleteProfileRequest < Struct.new(
+      nil,
       :profile_id,
       keyword_init: true
     )
@@ -676,6 +706,7 @@ module Aws::Transfer
     #   <p>A unique system-assigned identifier for a server instance.</p>
     #   @return [String]
     class DeleteServerRequest < Struct.new(
+      nil,
       :server_id,
       keyword_init: true
     )
@@ -692,6 +723,7 @@ module Aws::Transfer
     #   <p>A unique string that identifies a user whose public key is being deleted.</p>
     #   @return [String]
     class DeleteSshPublicKeyRequest < Struct.new(
+      nil,
       :server_id,
       :ssh_public_key_id,
       :user_name,
@@ -708,6 +740,7 @@ module Aws::Transfer
     #   <p>Specifies which file to use as input to the workflow step: either the output from the previous step, or the originally uploaded file for the workflow.</p> <ul> <li> <p>To use the previous file as the input, enter <code>${previous.file}</code>. In this case, this workflow step uses the output file from the previous workflow step as input. This is the default value.</p> </li> <li> <p>To use the originally uploaded file location as input for this step, enter <code>${original.file}</code>.</p> </li> </ul>
     #   @return [String]
     class DeleteStepDetails < Struct.new(
+      nil,
       :name,
       :source_file_location,
       keyword_init: true
@@ -722,6 +755,7 @@ module Aws::Transfer
     #   <p>A unique string that identifies a user that is being deleted from a server.</p>
     #   @return [String]
     class DeleteUserRequest < Struct.new(
+      nil,
       :server_id,
       :user_name,
       keyword_init: true
@@ -733,6 +767,7 @@ module Aws::Transfer
     #   <p>Provide the unique identifier for the web app that contains the customizations that you are deleting.</p>
     #   @return [String]
     class DeleteWebAppCustomizationRequest < Struct.new(
+      nil,
       :web_app_id,
       keyword_init: true
     )
@@ -743,6 +778,7 @@ module Aws::Transfer
     #   <p>Provide the unique identifier for the web app that you are deleting.</p>
     #   @return [String]
     class DeleteWebAppRequest < Struct.new(
+      nil,
       :web_app_id,
       keyword_init: true
     )
@@ -753,6 +789,7 @@ module Aws::Transfer
     #   <p>A unique identifier for the workflow.</p>
     #   @return [String]
     class DeleteWorkflowRequest < Struct.new(
+      nil,
       :workflow_id,
       keyword_init: true
     )
@@ -766,6 +803,7 @@ module Aws::Transfer
     #   <p>A unique identifier that is required to identify specific groups within your directory. The users of the group that you associate have access to your Amazon S3 or Amazon EFS resources over the enabled protocols using Transfer Family. If you know the group name, you can view the SID values by running the following command using Windows PowerShell.</p> <p> <code>Get-ADGroup -Filter {samAccountName -like "<i>YourGroupName</i>*"} -Properties * | Select SamAccountName,ObjectSid</code> </p> <p>In that command, replace <i>YourGroupName</i> with the name of your Active Directory group.</p> <p>The regular expression used to validate this parameter is a string of characters consisting of uppercase and lowercase alphanumeric characters with no spaces. You can also include underscores or any of the following characters: =,.@:/-</p>
     #   @return [String]
     class DescribeAccessRequest < Struct.new(
+      nil,
       :server_id,
       :external_id,
       keyword_init: true
@@ -780,6 +818,7 @@ module Aws::Transfer
     #   <p>The external identifier of the server that the access is attached to.</p>
     #   @return [Types::DescribedAccess]
     class DescribeAccessResponse < Struct.new(
+      nil,
       :server_id,
       :access,
       keyword_init: true
@@ -794,6 +833,7 @@ module Aws::Transfer
     #   <p>The server identifier that's associated with the agreement.</p>
     #   @return [String]
     class DescribeAgreementRequest < Struct.new(
+      nil,
       :agreement_id,
       :server_id,
       keyword_init: true
@@ -805,6 +845,7 @@ module Aws::Transfer
     #   <p>The details for the specified agreement, returned as a <code>DescribedAgreement</code> object.</p>
     #   @return [Types::DescribedAgreement]
     class DescribeAgreementResponse < Struct.new(
+      nil,
       :agreement,
       keyword_init: true
     )
@@ -815,6 +856,7 @@ module Aws::Transfer
     #   <p>An array of identifiers for the imported certificates. You use this identifier for working with profiles and partner profiles.</p>
     #   @return [String]
     class DescribeCertificateRequest < Struct.new(
+      nil,
       :certificate_id,
       keyword_init: true
     )
@@ -825,6 +867,7 @@ module Aws::Transfer
     #   <p>The details for the specified certificate, returned as an object.</p>
     #   @return [Types::DescribedCertificate]
     class DescribeCertificateResponse < Struct.new(
+      nil,
       :certificate,
       keyword_init: true
     )
@@ -835,6 +878,7 @@ module Aws::Transfer
     #   <p>The unique identifier for the connector.</p>
     #   @return [String]
     class DescribeConnectorRequest < Struct.new(
+      nil,
       :connector_id,
       keyword_init: true
     )
@@ -845,6 +889,7 @@ module Aws::Transfer
     #   <p>The structure that contains the details of the connector.</p>
     #   @return [Types::DescribedConnector]
     class DescribeConnectorResponse < Struct.new(
+      nil,
       :connector,
       keyword_init: true
     )
@@ -858,6 +903,7 @@ module Aws::Transfer
     #   <p>A unique identifier for the workflow.</p>
     #   @return [String]
     class DescribeExecutionRequest < Struct.new(
+      nil,
       :execution_id,
       :workflow_id,
       keyword_init: true
@@ -872,6 +918,7 @@ module Aws::Transfer
     #   <p>The structure that contains the details of the workflow' execution.</p>
     #   @return [Types::DescribedExecution]
     class DescribeExecutionResponse < Struct.new(
+      nil,
       :workflow_id,
       :execution,
       keyword_init: true
@@ -886,6 +933,7 @@ module Aws::Transfer
     #   <p>The identifier of the host key that you want described.</p>
     #   @return [String]
     class DescribeHostKeyRequest < Struct.new(
+      nil,
       :server_id,
       :host_key_id,
       keyword_init: true
@@ -897,6 +945,7 @@ module Aws::Transfer
     #   <p>Returns the details for the specified host key.</p>
     #   @return [Types::DescribedHostKey]
     class DescribeHostKeyResponse < Struct.new(
+      nil,
       :host_key,
       keyword_init: true
     )
@@ -907,6 +956,7 @@ module Aws::Transfer
     #   <p>The identifier of the profile that you want described.</p>
     #   @return [String]
     class DescribeProfileRequest < Struct.new(
+      nil,
       :profile_id,
       keyword_init: true
     )
@@ -917,6 +967,7 @@ module Aws::Transfer
     #   <p>The details of the specified profile, returned as an object.</p>
     #   @return [Types::DescribedProfile]
     class DescribeProfileResponse < Struct.new(
+      nil,
       :profile,
       keyword_init: true
     )
@@ -927,6 +978,7 @@ module Aws::Transfer
     #   <p>Specify the text name of the security policy for which you want the details.</p>
     #   @return [String]
     class DescribeSecurityPolicyRequest < Struct.new(
+      nil,
       :security_policy_name,
       keyword_init: true
     )
@@ -937,6 +989,7 @@ module Aws::Transfer
     #   <p>An array containing the properties of the security policy.</p>
     #   @return [Types::DescribedSecurityPolicy]
     class DescribeSecurityPolicyResponse < Struct.new(
+      nil,
       :security_policy,
       keyword_init: true
     )
@@ -947,6 +1000,7 @@ module Aws::Transfer
     #   <p>A system-assigned unique identifier for a server.</p>
     #   @return [String]
     class DescribeServerRequest < Struct.new(
+      nil,
       :server_id,
       keyword_init: true
     )
@@ -957,6 +1011,7 @@ module Aws::Transfer
     #   <p>An array containing the properties of a server with the <code>ServerID</code> you specified.</p>
     #   @return [Types::DescribedServer]
     class DescribeServerResponse < Struct.new(
+      nil,
       :server,
       keyword_init: true
     )
@@ -970,6 +1025,7 @@ module Aws::Transfer
     #   <p>The name of the user assigned to one or more servers. User names are part of the sign-in credentials to use the Transfer Family service and perform file transfer tasks.</p>
     #   @return [String]
     class DescribeUserRequest < Struct.new(
+      nil,
       :server_id,
       :user_name,
       keyword_init: true
@@ -984,6 +1040,7 @@ module Aws::Transfer
     #   <p>An array containing the properties of the Transfer Family user for the <code>ServerID</code> value that you specified.</p>
     #   @return [Types::DescribedUser]
     class DescribeUserResponse < Struct.new(
+      nil,
       :server_id,
       :user,
       keyword_init: true
@@ -995,6 +1052,7 @@ module Aws::Transfer
     #   <p>Provide the unique identifier for the web app.</p>
     #   @return [String]
     class DescribeWebAppCustomizationRequest < Struct.new(
+      nil,
       :web_app_id,
       keyword_init: true
     )
@@ -1005,6 +1063,7 @@ module Aws::Transfer
     #   <p>Returns a structure that contains the details of the web app customizations.</p>
     #   @return [Types::DescribedWebAppCustomization]
     class DescribeWebAppCustomizationResponse < Struct.new(
+      nil,
       :web_app_customization,
       keyword_init: true
     )
@@ -1015,6 +1074,7 @@ module Aws::Transfer
     #   <p>Provide the unique identifier for the web app.</p>
     #   @return [String]
     class DescribeWebAppRequest < Struct.new(
+      nil,
       :web_app_id,
       keyword_init: true
     )
@@ -1025,6 +1085,7 @@ module Aws::Transfer
     #   <p>Returns a structure that contains the details of the web app.</p>
     #   @return [Types::DescribedWebApp]
     class DescribeWebAppResponse < Struct.new(
+      nil,
       :web_app,
       keyword_init: true
     )
@@ -1035,6 +1096,7 @@ module Aws::Transfer
     #   <p>A unique identifier for the workflow.</p>
     #   @return [String]
     class DescribeWorkflowRequest < Struct.new(
+      nil,
       :workflow_id,
       keyword_init: true
     )
@@ -1045,6 +1107,7 @@ module Aws::Transfer
     #   <p>The structure that contains the details of the workflow.</p>
     #   @return [Types::DescribedWorkflow]
     class DescribeWorkflowResponse < Struct.new(
+      nil,
       :workflow,
       keyword_init: true
     )
@@ -1074,6 +1137,7 @@ module Aws::Transfer
     #   <p>A unique identifier that is required to identify specific groups within your directory. The users of the group that you associate have access to your Amazon S3 or Amazon EFS resources over the enabled protocols using Transfer Family. If you know the group name, you can view the SID values by running the following command using Windows PowerShell.</p> <p> <code>Get-ADGroup -Filter {samAccountName -like "<i>YourGroupName</i>*"} -Properties * | Select SamAccountName,ObjectSid</code> </p> <p>In that command, replace <i>YourGroupName</i> with the name of your Active Directory group.</p> <p>The regular expression used to validate this parameter is a string of characters consisting of uppercase and lowercase alphanumeric characters with no spaces. You can also include underscores or any of the following characters: =,.@:/-</p>
     #   @return [String]
     class DescribedAccess < Struct.new(
+      nil,
       :home_directory,
       :home_directory_mappings,
       :home_directory_type,
@@ -1127,6 +1191,7 @@ module Aws::Transfer
     #   <p>A <code>CustomDirectoriesType</code> structure. This structure specifies custom directories for storing various AS2 message files. You can specify directories for the following types of files.</p> <ul> <li> <p>Failed files</p> </li> <li> <p>MDN files</p> </li> <li> <p>Payload files</p> </li> <li> <p>Status files</p> </li> <li> <p>Temporary files</p> </li> </ul>
     #   @return [Types::CustomDirectoriesType]
     class DescribedAgreement < Struct.new(
+      nil,
       :arn,
       :agreement_id,
       :description,
@@ -1189,6 +1254,7 @@ module Aws::Transfer
     #   <p>Key-value pairs that can be used to group and search for certificates.</p>
     #   @return [Array<Types::Tag>]
     class DescribedCertificate < Struct.new(
+      nil,
       :arn,
       :certificate_id,
       :usage,
@@ -1240,6 +1306,7 @@ module Aws::Transfer
     #   <p>The text name of the security policy for the specified connector.</p>
     #   @return [String]
     class DescribedConnector < Struct.new(
+      nil,
       :arn,
       :connector_id,
       :url,
@@ -1281,6 +1348,7 @@ module Aws::Transfer
     #   <p>A structure that describes the execution results. This includes a list of the steps along with the details of each step, error type and message (if any), and the <code>OnExceptionSteps</code> structure.</p>
     #   @return [Types::ExecutionResults]
     class DescribedExecution < Struct.new(
+      nil,
       :execution_id,
       :initial_file_location,
       :service_metadata,
@@ -1317,6 +1385,7 @@ module Aws::Transfer
     #   <p>Key-value pairs that can be used to group and search for host keys.</p>
     #   @return [Array<Types::Tag>]
     class DescribedHostKey < Struct.new(
+      nil,
       :arn,
       :host_key_id,
       :host_key_fingerprint,
@@ -1340,6 +1409,7 @@ module Aws::Transfer
     #   <p>The IAM role in IAM Identity Center used for the web app.</p>
     #   @return [String]
     class DescribedIdentityCenterConfig < Struct.new(
+      nil,
       :application_arn,
       :instance_arn,
       :role,
@@ -1368,6 +1438,7 @@ module Aws::Transfer
     #   <p>Key-value pairs that can be used to group and search for profiles.</p>
     #   @return [Array<Types::Tag>]
     class DescribedProfile < Struct.new(
+      nil,
       :arn,
       :profile_id,
       :profile_type,
@@ -1408,6 +1479,7 @@ module Aws::Transfer
     #   <p>Lists the file transfer protocols that the security policy applies to.</p>
     #   @return [Array<String>]
     class DescribedSecurityPolicy < Struct.new(
+      nil,
       :fips,
       :security_policy_name,
       :ssh_ciphers,
@@ -1493,6 +1565,7 @@ module Aws::Transfer
     #   <p>Specifies whether to use IPv4 only, or to use dual-stack (IPv4 and IPv6) for your Transfer Family endpoint. The default value is <code>IPV4</code>.</p> <important> <p>The <code>IpAddressType</code> parameter has the following limitations:</p> <ul> <li> <p>It cannot be changed while the server is online. You must stop the server before modifying this parameter.</p> </li> <li> <p>It cannot be updated to <code>DUALSTACK</code> if the server has <code>AddressAllocationIds</code> specified.</p> </li> </ul> </important> <note> <p>When using <code>DUALSTACK</code> as the <code>IpAddressType</code>, you cannot set the <code>AddressAllocationIds</code> parameter for the <a href="https://docs.aws.amazon.com/transfer/latest/APIReference/API_EndpointDetails.html">EndpointDetails</a> for the server.</p> </note>
     #   @return [String]
     class DescribedServer < Struct.new(
+      nil,
       :arn,
       :certificate,
       :protocol_details,
@@ -1553,6 +1626,7 @@ module Aws::Transfer
     #   <p>Specifies the name of the user that was requested to be described. User names are used for authentication purposes. This is the string that will be used by your user when they log in to your server.</p>
     #   @return [String]
     class DescribedUser < Struct.new(
+      nil,
       :arn,
       :home_directory,
       :home_directory_mappings,
@@ -1594,6 +1668,7 @@ module Aws::Transfer
     #   <p> Setting for the type of endpoint policy for the web app. The default value is <code>STANDARD</code>. </p> <p>If your web app was created in an Amazon Web Services GovCloud (US) Region, the value of this parameter can be <code>FIPS</code>, which indicates the web app endpoint is FIPS-compliant.</p>
     #   @return [String]
     class DescribedWebApp < Struct.new(
+      nil,
       :arn,
       :web_app_id,
       :described_identity_provider_details,
@@ -1624,6 +1699,7 @@ module Aws::Transfer
     #   <p>Returns an icon file data string (in base64 encoding).</p>
     #   @return [String]
     class DescribedWebAppCustomization < Struct.new(
+      nil,
       :arn,
       :web_app_id,
       :title,
@@ -1669,6 +1745,7 @@ module Aws::Transfer
     #   <p>Key-value pairs that can be used to group and search for workflows. Tags are metadata attached to workflows for any purpose.</p>
     #   @return [Array<Types::Tag>]
     class DescribedWorkflow < Struct.new(
+      nil,
       :arn,
       :description,
       :steps,
@@ -1688,6 +1765,7 @@ module Aws::Transfer
     #   <p>The pathname for the folder being used by a workflow.</p>
     #   @return [String]
     class EfsFileLocation < Struct.new(
+      nil,
       :file_system_id,
       :path,
       keyword_init: true
@@ -1712,6 +1790,7 @@ module Aws::Transfer
     #   <p>A list of security groups IDs that are available to attach to your server's endpoint.</p> <note> <p>While <code>SecurityGroupIds</code> appears in the response syntax for consistency with <code>CreateServer</code> and <code>UpdateServer</code> operations, this field is not populated in <code>DescribeServer</code> responses. Security groups are managed at the VPC endpoint level and can be modified outside of the Transfer Family service. To retrieve current security group information, use the EC2 <code>DescribeVpcEndpoints</code> API with the <code>VpcEndpointId</code> returned in the response.</p> <p>This property can only be set when <code>EndpointType</code> is set to <code>VPC</code>.</p> <p>You can edit the <code>SecurityGroupIds</code> property in the <a href="https://docs.aws.amazon.com/transfer/latest/userguide/API_UpdateServer.html">UpdateServer</a> API only if you are changing the <code>EndpointType</code> from <code>PUBLIC</code> or <code>VPC_ENDPOINT</code> to <code>VPC</code>. To change security groups associated with your server's VPC endpoint after creation, use the Amazon EC2 <a href="https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_ModifyVpcEndpoint.html">ModifyVpcEndpoint</a> API.</p> </note>
     #   @return [Array<String>]
     class EndpointDetails < Struct.new(
+      nil,
       :address_allocation_ids,
       :subnet_ids,
       :vpc_endpoint_id,
@@ -1730,6 +1809,7 @@ module Aws::Transfer
     #   <p>Specifies the descriptive message that corresponds to the <code>ErrorType</code>.</p>
     #   @return [String]
     class ExecutionError < Struct.new(
+      nil,
       :type,
       :message,
       keyword_init: true
@@ -1745,6 +1825,7 @@ module Aws::Transfer
     #   <p>Specifies the steps (actions) to take if errors are encountered during execution of the workflow.</p>
     #   @return [Array<Types::ExecutionStepResult>]
     class ExecutionResults < Struct.new(
+      nil,
       :steps,
       :on_exception_steps,
       keyword_init: true
@@ -1763,6 +1844,7 @@ module Aws::Transfer
     #   <p>Specifies the details for an error, if it occurred during execution of the specified workflow step.</p>
     #   @return [Types::ExecutionError]
     class ExecutionStepResult < Struct.new(
+      nil,
       :step_type,
       :outputs,
       :error,
@@ -1779,6 +1861,7 @@ module Aws::Transfer
     #   <p>Specifies the Amazon EFS identifier and the path for the file being used.</p>
     #   @return [Types::EfsFileLocation]
     class FileLocation < Struct.new(
+      nil,
       :s3_file_location,
       :efs_file_location,
       keyword_init: true
@@ -1797,6 +1880,7 @@ module Aws::Transfer
     #   <p>Specifies the type of mapping. Set the type to <code>FILE</code> if you want the mapping to point to a file, or <code>DIRECTORY</code> for the directory to point to a directory.</p> <note> <p>By default, home directory mappings have a <code>Type</code> of <code>DIRECTORY</code> when you create a Transfer Family server. You would need to explicitly set <code>Type</code> to <code>FILE</code> if you want a mapping to have a file target.</p> </note>
     #   @return [String]
     class HomeDirectoryMapEntry < Struct.new(
+      nil,
       :entry,
       :target,
       :type,
@@ -1813,6 +1897,7 @@ module Aws::Transfer
     #   <p>The IAM role in IAM Identity Center used for the web app.</p>
     #   @return [String]
     class IdentityCenterConfig < Struct.new(
+      nil,
       :instance_arn,
       :role,
       keyword_init: true
@@ -1837,6 +1922,7 @@ module Aws::Transfer
     #   <p>For SFTP-enabled servers, and for custom identity providers <i>only</i>, you can specify whether to authenticate using a password, SSH key pair, or both.</p> <ul> <li> <p> <code>PASSWORD</code> - users must provide their password to connect.</p> </li> <li> <p> <code>PUBLIC_KEY</code> - users must provide their private key to connect.</p> </li> <li> <p> <code>PUBLIC_KEY_OR_PASSWORD</code> - users can authenticate with either their password or their key. This is the default value.</p> </li> <li> <p> <code>PUBLIC_KEY_AND_PASSWORD</code> - users must provide both their private key and their password to connect. The server checks the key first, and then if the key is valid, the system prompts for a password. If the private key provided does not match the public key that is stored, authentication fails.</p> </li> </ul>
     #   @return [String]
     class IdentityProviderDetails < Struct.new(
+      nil,
       :url,
       :invocation_role,
       :directory_id,
@@ -1872,6 +1958,7 @@ module Aws::Transfer
     #   <p>Key-value pairs that can be used to group and search for certificates.</p>
     #   @return [Array<Types::Tag>]
     class ImportCertificateRequest < Struct.new(
+      nil,
       :usage,
       :certificate,
       :certificate_chain,
@@ -1889,6 +1976,7 @@ module Aws::Transfer
     #   <p>An array of identifiers for the imported certificates. You use this identifier for working with profiles and partner profiles.</p>
     #   @return [String]
     class ImportCertificateResponse < Struct.new(
+      nil,
       :certificate_id,
       keyword_init: true
     )
@@ -1908,6 +1996,7 @@ module Aws::Transfer
     #   <p>Key-value pairs that can be used to group and search for host keys.</p>
     #   @return [Array<Types::Tag>]
     class ImportHostKeyRequest < Struct.new(
+      nil,
       :server_id,
       :host_key_body,
       :description,
@@ -1924,6 +2013,7 @@ module Aws::Transfer
     #   <p>Returns the host key identifier for the imported key.</p>
     #   @return [String]
     class ImportHostKeyResponse < Struct.new(
+      nil,
       :server_id,
       :host_key_id,
       keyword_init: true
@@ -1941,6 +2031,7 @@ module Aws::Transfer
     #   <p>The name of the Transfer Family user that is assigned to one or more servers.</p>
     #   @return [String]
     class ImportSshPublicKeyRequest < Struct.new(
+      nil,
       :server_id,
       :ssh_public_key_body,
       :user_name,
@@ -1960,6 +2051,7 @@ module Aws::Transfer
     #   <p>A user name assigned to the <code>ServerID</code> value that you specified.</p>
     #   @return [String]
     class ImportSshPublicKeyResponse < Struct.new(
+      nil,
       :server_id,
       :ssh_public_key_id,
       :user_name,
@@ -1976,6 +2068,7 @@ module Aws::Transfer
     #   <p>Specifies the details for the Amazon Elastic File System (Amazon EFS) file that's being decrypted.</p>
     #   @return [Types::EfsFileLocation]
     class InputFileLocation < Struct.new(
+      nil,
       :s3_file_location,
       :efs_file_location,
       keyword_init: true
@@ -1987,6 +2080,7 @@ module Aws::Transfer
     # @!attribute message
     #   @return [String]
     class InternalServiceError < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -1997,6 +2091,7 @@ module Aws::Transfer
     # @!attribute message
     #   @return [String]
     class InvalidNextTokenException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -2007,6 +2102,7 @@ module Aws::Transfer
     # @!attribute message
     #   @return [String]
     class InvalidRequestException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -2023,6 +2119,7 @@ module Aws::Transfer
     #   <p>A system-assigned unique identifier for a server that has users assigned to it.</p>
     #   @return [String]
     class ListAccessesRequest < Struct.new(
+      nil,
       :max_results,
       :next_token,
       :server_id,
@@ -2041,6 +2138,7 @@ module Aws::Transfer
     #   <p>Returns the accesses and their properties for the <code>ServerId</code> value that you specify.</p>
     #   @return [Array<Types::ListedAccess>]
     class ListAccessesResponse < Struct.new(
+      nil,
       :next_token,
       :server_id,
       :accesses,
@@ -2059,6 +2157,7 @@ module Aws::Transfer
     #   <p>The identifier of the server for which you want a list of agreements.</p>
     #   @return [String]
     class ListAgreementsRequest < Struct.new(
+      nil,
       :max_results,
       :next_token,
       :server_id,
@@ -2074,6 +2173,7 @@ module Aws::Transfer
     #   <p>Returns an array, where each item contains the details of an agreement.</p>
     #   @return [Array<Types::ListedAgreement>]
     class ListAgreementsResponse < Struct.new(
+      nil,
       :next_token,
       :agreements,
       keyword_init: true
@@ -2088,6 +2188,7 @@ module Aws::Transfer
     #   <p>When you can get additional results from the <code>ListCertificates</code> call, a <code>NextToken</code> parameter is returned in the output. You can then pass in a subsequent command to the <code>NextToken</code> parameter to continue listing additional certificates.</p>
     #   @return [String]
     class ListCertificatesRequest < Struct.new(
+      nil,
       :max_results,
       :next_token,
       keyword_init: true
@@ -2102,6 +2203,7 @@ module Aws::Transfer
     #   <p>Returns an array of the certificates that are specified in the <code>ListCertificates</code> call.</p>
     #   @return [Array<Types::ListedCertificate>]
     class ListCertificatesResponse < Struct.new(
+      nil,
       :next_token,
       :certificates,
       keyword_init: true
@@ -2116,6 +2218,7 @@ module Aws::Transfer
     #   <p>When you can get additional results from the <code>ListConnectors</code> call, a <code>NextToken</code> parameter is returned in the output. You can then pass in a subsequent command to the <code>NextToken</code> parameter to continue listing additional connectors.</p>
     #   @return [String]
     class ListConnectorsRequest < Struct.new(
+      nil,
       :max_results,
       :next_token,
       keyword_init: true
@@ -2130,6 +2233,7 @@ module Aws::Transfer
     #   <p>Returns an array, where each item contains the details of a connector.</p>
     #   @return [Array<Types::ListedConnector>]
     class ListConnectorsResponse < Struct.new(
+      nil,
       :next_token,
       :connectors,
       keyword_init: true
@@ -2147,6 +2251,7 @@ module Aws::Transfer
     #   <p>A unique identifier for the workflow.</p>
     #   @return [String]
     class ListExecutionsRequest < Struct.new(
+      nil,
       :max_results,
       :next_token,
       :workflow_id,
@@ -2165,6 +2270,7 @@ module Aws::Transfer
     #   <p>Returns the details for each execution, in a <code>ListedExecution</code> array.</p>
     #   @return [Array<Types::ListedExecution>]
     class ListExecutionsResponse < Struct.new(
+      nil,
       :next_token,
       :workflow_id,
       :executions,
@@ -2186,6 +2292,7 @@ module Aws::Transfer
     #   <p>The maximum number of files to return in a single page. Note that currently you can specify a maximum of 10 file paths in a single <a href="https://docs.aws.amazon.com/transfer/latest/APIReference/API_StartFileTransfer.html">StartFileTransfer</a> operation. Thus, the maximum number of file transfer results that can be returned in a single page is 10. </p>
     #   @return [Integer]
     class ListFileTransferResultsRequest < Struct.new(
+      nil,
       :connector_id,
       :transfer_id,
       :next_token,
@@ -2202,6 +2309,7 @@ module Aws::Transfer
     #   <p>Returns a token that you can use to call <code>ListFileTransferResults</code> again and receive additional results, if there are any (against the same <code>TransferId</code>.</p>
     #   @return [String]
     class ListFileTransferResultsResponse < Struct.new(
+      nil,
       :file_transfer_results,
       :next_token,
       keyword_init: true
@@ -2219,6 +2327,7 @@ module Aws::Transfer
     #   <p>The identifier of the server that contains the host keys that you want to view.</p>
     #   @return [String]
     class ListHostKeysRequest < Struct.new(
+      nil,
       :max_results,
       :next_token,
       :server_id,
@@ -2237,6 +2346,7 @@ module Aws::Transfer
     #   <p>Returns an array, where each item contains the details of a host key.</p>
     #   @return [Array<Types::ListedHostKey>]
     class ListHostKeysResponse < Struct.new(
+      nil,
       :next_token,
       :server_id,
       :host_keys,
@@ -2255,6 +2365,7 @@ module Aws::Transfer
     #   <p>Indicates whether to list only <code>LOCAL</code> type profiles or only <code>PARTNER</code> type profiles. If not supplied in the request, the command lists all types of profiles.</p>
     #   @return [String]
     class ListProfilesRequest < Struct.new(
+      nil,
       :max_results,
       :next_token,
       :profile_type,
@@ -2270,6 +2381,7 @@ module Aws::Transfer
     #   <p>Returns an array, where each item contains the details of a profile.</p>
     #   @return [Array<Types::ListedProfile>]
     class ListProfilesResponse < Struct.new(
+      nil,
       :next_token,
       :profiles,
       keyword_init: true
@@ -2284,6 +2396,7 @@ module Aws::Transfer
     #   <p>When additional results are obtained from the <code>ListSecurityPolicies</code> command, a <code>NextToken</code> parameter is returned in the output. You can then pass the <code>NextToken</code> parameter in a subsequent command to continue listing additional security policies.</p>
     #   @return [String]
     class ListSecurityPoliciesRequest < Struct.new(
+      nil,
       :max_results,
       :next_token,
       keyword_init: true
@@ -2298,6 +2411,7 @@ module Aws::Transfer
     #   <p>An array of security policies that were listed.</p>
     #   @return [Array<String>]
     class ListSecurityPoliciesResponse < Struct.new(
+      nil,
       :next_token,
       :security_policy_names,
       keyword_init: true
@@ -2312,6 +2426,7 @@ module Aws::Transfer
     #   <p>When additional results are obtained from the <code>ListServers</code> command, a <code>NextToken</code> parameter is returned in the output. You can then pass the <code>NextToken</code> parameter in a subsequent command to continue listing additional servers.</p>
     #   @return [String]
     class ListServersRequest < Struct.new(
+      nil,
       :max_results,
       :next_token,
       keyword_init: true
@@ -2326,6 +2441,7 @@ module Aws::Transfer
     #   <p>An array of servers that were listed.</p>
     #   @return [Array<Types::ListedServer>]
     class ListServersResponse < Struct.new(
+      nil,
       :next_token,
       :servers,
       keyword_init: true
@@ -2343,6 +2459,7 @@ module Aws::Transfer
     #   <p>When you request additional results from the <code>ListTagsForResource</code> operation, a <code>NextToken</code> parameter is returned in the input. You can then pass in a subsequent command to the <code>NextToken</code> parameter to continue listing additional tags.</p>
     #   @return [String]
     class ListTagsForResourceRequest < Struct.new(
+      nil,
       :arn,
       :max_results,
       :next_token,
@@ -2361,6 +2478,7 @@ module Aws::Transfer
     #   <p>Key-value pairs that are assigned to a resource, usually for the purpose of grouping and searching for items. Tags are metadata that you define.</p>
     #   @return [Array<Types::Tag>]
     class ListTagsForResourceResponse < Struct.new(
+      nil,
       :arn,
       :next_token,
       :tags,
@@ -2379,6 +2497,7 @@ module Aws::Transfer
     #   <p>A system-assigned unique identifier for a server that has users assigned to it.</p>
     #   @return [String]
     class ListUsersRequest < Struct.new(
+      nil,
       :max_results,
       :next_token,
       :server_id,
@@ -2397,6 +2516,7 @@ module Aws::Transfer
     #   <p>Returns the Transfer Family users and their properties for the <code>ServerId</code> value that you specify.</p>
     #   @return [Array<Types::ListedUser>]
     class ListUsersResponse < Struct.new(
+      nil,
       :next_token,
       :server_id,
       :users,
@@ -2412,6 +2532,7 @@ module Aws::Transfer
     #   <p>Returns the <code>NextToken</code> parameter in the output. You can then pass the <code>NextToken</code> parameter in a subsequent command to continue listing additional web apps.</p>
     #   @return [String]
     class ListWebAppsRequest < Struct.new(
+      nil,
       :max_results,
       :next_token,
       keyword_init: true
@@ -2426,6 +2547,7 @@ module Aws::Transfer
     #   <p>Returns, for each listed web app, a structure that contains details for the web app.</p>
     #   @return [Array<Types::ListedWebApp>]
     class ListWebAppsResponse < Struct.new(
+      nil,
       :next_token,
       :web_apps,
       keyword_init: true
@@ -2440,6 +2562,7 @@ module Aws::Transfer
     #   <p> <code>ListWorkflows</code> returns the <code>NextToken</code> parameter in the output. You can then pass the <code>NextToken</code> parameter in a subsequent command to continue listing additional workflows.</p>
     #   @return [String]
     class ListWorkflowsRequest < Struct.new(
+      nil,
       :max_results,
       :next_token,
       keyword_init: true
@@ -2454,6 +2577,7 @@ module Aws::Transfer
     #   <p>Returns the <code>Arn</code>, <code>WorkflowId</code>, and <code>Description</code> for each workflow.</p>
     #   @return [Array<Types::ListedWorkflow>]
     class ListWorkflowsResponse < Struct.new(
+      nil,
       :next_token,
       :workflows,
       keyword_init: true
@@ -2475,6 +2599,7 @@ module Aws::Transfer
     #   <p>A unique identifier that is required to identify specific groups within your directory. The users of the group that you associate have access to your Amazon S3 or Amazon EFS resources over the enabled protocols using Transfer Family. If you know the group name, you can view the SID values by running the following command using Windows PowerShell.</p> <p> <code>Get-ADGroup -Filter {samAccountName -like "<i>YourGroupName</i>*"} -Properties * | Select SamAccountName,ObjectSid</code> </p> <p>In that command, replace <i>YourGroupName</i> with the name of your Active Directory group.</p> <p>The regular expression used to validate this parameter is a string of characters consisting of uppercase and lowercase alphanumeric characters with no spaces. You can also include underscores or any of the following characters: =,.@:/-</p>
     #   @return [String]
     class ListedAccess < Struct.new(
+      nil,
       :home_directory,
       :home_directory_type,
       :role,
@@ -2507,6 +2632,7 @@ module Aws::Transfer
     #   <p>A unique identifier for the partner profile.</p>
     #   @return [String]
     class ListedAgreement < Struct.new(
+      nil,
       :arn,
       :agreement_id,
       :description,
@@ -2545,6 +2671,7 @@ module Aws::Transfer
     #   <p>The name or short description that's used to identify the certificate.</p>
     #   @return [String]
     class ListedCertificate < Struct.new(
+      nil,
       :arn,
       :certificate_id,
       :usage,
@@ -2569,6 +2696,7 @@ module Aws::Transfer
     #   <p>The URL of the partner's AS2 or SFTP endpoint.</p>
     #   @return [String]
     class ListedConnector < Struct.new(
+      nil,
       :arn,
       :connector_id,
       :url,
@@ -2591,6 +2719,7 @@ module Aws::Transfer
     #   <p>The status is one of the execution. Can be in progress, completed, exception encountered, or handling the exception.</p>
     #   @return [String]
     class ListedExecution < Struct.new(
+      nil,
       :execution_id,
       :initial_file_location,
       :service_metadata,
@@ -2620,6 +2749,7 @@ module Aws::Transfer
     #   <p>The date on which the host key was added to the server.</p>
     #   @return [Time]
     class ListedHostKey < Struct.new(
+      nil,
       :arn,
       :host_key_id,
       :fingerprint,
@@ -2645,6 +2775,7 @@ module Aws::Transfer
     #   <p>Indicates whether to list only <code>LOCAL</code> type profiles or only <code>PARTNER</code> type profiles. If not supplied in the request, the command lists all types of profiles.</p>
     #   @return [String]
     class ListedProfile < Struct.new(
+      nil,
       :arn,
       :profile_id,
       :as2_id,
@@ -2680,6 +2811,7 @@ module Aws::Transfer
     #   <p>Specifies the number of users that are assigned to a server you specified with the <code>ServerId</code>.</p>
     #   @return [Integer]
     class ListedServer < Struct.new(
+      nil,
       :arn,
       :domain,
       :identity_provider_type,
@@ -2713,6 +2845,7 @@ module Aws::Transfer
     #   <p>Specifies the name of the user whose ARN was specified. User names are used for authentication purposes.</p>
     #   @return [String]
     class ListedUser < Struct.new(
+      nil,
       :arn,
       :home_directory,
       :home_directory_type,
@@ -2738,6 +2871,7 @@ module Aws::Transfer
     #   <p>The <code>WebAppEndpoint</code> is the unique URL for your Transfer Family web app. This is the value that you use when you configure <b>Origins</b> on CloudFront.</p>
     #   @return [String]
     class ListedWebApp < Struct.new(
+      nil,
       :arn,
       :web_app_id,
       :access_endpoint,
@@ -2758,6 +2892,7 @@ module Aws::Transfer
     #   <p>Specifies the unique Amazon Resource Name (ARN) for the workflow.</p>
     #   @return [String]
     class ListedWorkflow < Struct.new(
+      nil,
       :workflow_id,
       :description,
       :arn,
@@ -2774,6 +2909,7 @@ module Aws::Transfer
     #   <p>The name of the CloudWatch logging group for the Transfer Family server to which this workflow belongs.</p>
     #   @return [String]
     class LoggingConfiguration < Struct.new(
+      nil,
       :logging_role,
       :log_group_name,
       keyword_init: true
@@ -2792,6 +2928,7 @@ module Aws::Transfer
     #   <p>The secondary POSIX group IDs used for all EFS operations by this user.</p>
     #   @return [Array<Integer>]
     class PosixProfile < Struct.new(
+      nil,
       :uid,
       :gid,
       :secondary_gids,
@@ -2814,6 +2951,7 @@ module Aws::Transfer
     #   <p>Indicates the transport method for the AS2 messages. Currently, only HTTP is supported.</p>
     #   @return [Array<String>]
     class ProtocolDetails < Struct.new(
+      nil,
       :passive_ip,
       :tls_session_resumption_mode,
       :set_stat_option,
@@ -2831,6 +2969,7 @@ module Aws::Transfer
     # @!attribute resource_type
     #   @return [String]
     class ResourceExistsException < Struct.new(
+      nil,
       :message,
       :resource,
       :resource_type,
@@ -2847,6 +2986,7 @@ module Aws::Transfer
     # @!attribute resource_type
     #   @return [String]
     class ResourceNotFoundException < Struct.new(
+      nil,
       :message,
       :resource,
       :resource_type,
@@ -2869,6 +3009,7 @@ module Aws::Transfer
     #   <p>The entity tag is a hash of the object. The ETag reflects changes only to the contents of an object, not its metadata.</p>
     #   @return [String]
     class S3FileLocation < Struct.new(
+      nil,
       :bucket,
       :key,
       :version_id,
@@ -2886,6 +3027,7 @@ module Aws::Transfer
     #   <p>The name assigned to the file when it was created in Amazon S3. You use the object key to retrieve the object.</p>
     #   @return [String]
     class S3InputFileLocation < Struct.new(
+      nil,
       :bucket,
       :key,
       keyword_init: true
@@ -2898,6 +3040,7 @@ module Aws::Transfer
     #   <p>Specifies whether or not performance for your Amazon S3 directories is optimized.</p> <ul> <li> <p>If using the console, this is enabled by default.</p> </li> <li> <p>If using the API or CLI, this is disabled by default.</p> </li> </ul> <p>By default, home directory mappings have a <code>TYPE</code> of <code>DIRECTORY</code>. If you enable this option, you would then need to explicitly set the <code>HomeDirectoryMapEntry</code> <code>Type</code> to <code>FILE</code> if you want a mapping to have a file target.</p>
     #   @return [String]
     class S3StorageOptions < Struct.new(
+      nil,
       :directory_listing_optimization,
       keyword_init: true
     )
@@ -2912,6 +3055,7 @@ module Aws::Transfer
     #   <p>The value that corresponds to the key.</p>
     #   @return [String]
     class S3Tag < Struct.new(
+      nil,
       :key,
       :value,
       keyword_init: true
@@ -2932,6 +3076,7 @@ module Aws::Transfer
     #   <p>Indicates whether the specified step succeeded or failed.</p>
     #   @return [String]
     class SendWorkflowStepStateRequest < Struct.new(
+      nil,
       :workflow_id,
       :execution_id,
       :token,
@@ -2942,6 +3087,7 @@ module Aws::Transfer
     end
 
     class SendWorkflowStepStateResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -2952,6 +3098,7 @@ module Aws::Transfer
     #   <p>The Server ID (<code>ServerId</code>), Session ID (<code>SessionId</code>) and user (<code>UserName</code>) make up the <code>UserDetails</code>.</p>
     #   @return [Types::UserDetails]
     class ServiceMetadata < Struct.new(
+      nil,
       :user_details,
       keyword_init: true
     )
@@ -2962,6 +3109,7 @@ module Aws::Transfer
     # @!attribute message
     #   @return [String]
     class ServiceUnavailableException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -2979,6 +3127,7 @@ module Aws::Transfer
     #   <p>Specify the number of concurrent connections that your connector creates to the remote server. The default value is <code>1</code>. The maximum values is <code>5</code>.</p> <note> <p>If you are using the Amazon Web Services Management Console, the default value is <code>5</code>.</p> </note> <p>This parameter specifies the number of active connections that your connector can establish with the remote server at the same time. Increasing this value can enhance connector performance when transferring large file batches by enabling parallel operations.</p>
     #   @return [Integer]
     class SftpConnectorConfig < Struct.new(
+      nil,
       :user_secret_id,
       :trusted_host_keys,
       :max_concurrent_connections,
@@ -2997,6 +3146,7 @@ module Aws::Transfer
     #   <p>The SSH public key of the remote SFTP server. This is returned during the initial connection attempt when you call <code>TestConnection</code>. It allows you to retrieve the valid server host key to update the connector when you are unable to obtain it in advance.</p>
     #   @return [String]
     class SftpConnectorConnectionDetails < Struct.new(
+      nil,
       :host_key,
       keyword_init: true
     )
@@ -3014,6 +3164,7 @@ module Aws::Transfer
     #   <p>Specifies the <code>SshPublicKeyId</code> parameter contains the identifier of the public key.</p>
     #   @return [String]
     class SshPublicKey < Struct.new(
+      nil,
       :date_imported,
       :ssh_public_key_body,
       :ssh_public_key_id,
@@ -3035,6 +3186,7 @@ module Aws::Transfer
     #   <p>Specifies the path (bucket and prefix) in Amazon S3 storage to store the results of the directory listing.</p>
     #   @return [String]
     class StartDirectoryListingRequest < Struct.new(
+      nil,
       :connector_id,
       :remote_directory_path,
       :max_items,
@@ -3051,6 +3203,7 @@ module Aws::Transfer
     #   <p>Returns the file name where the results are stored. This is a combination of the connector ID and the listing ID: <code>&lt;connector-id&gt;-&lt;listing-id&gt;.json</code>.</p>
     #   @return [String]
     class StartDirectoryListingResponse < Struct.new(
+      nil,
       :listing_id,
       :output_file_name,
       keyword_init: true
@@ -3074,6 +3227,7 @@ module Aws::Transfer
     #   <p>For an outbound transfer, the <code>RemoteDirectoryPath</code> specifies the destination for one or more files that are transferred to the partner's SFTP server. If you don't specify a <code>RemoteDirectoryPath</code>, the destination for transferred files is the SFTP user's home directory.</p>
     #   @return [String]
     class StartFileTransferRequest < Struct.new(
+      nil,
       :connector_id,
       :send_file_paths,
       :retrieve_file_paths,
@@ -3088,6 +3242,7 @@ module Aws::Transfer
     #   <p>Returns the unique identifier for the file transfer.</p>
     #   @return [String]
     class StartFileTransferResponse < Struct.new(
+      nil,
       :transfer_id,
       keyword_init: true
     )
@@ -3101,6 +3256,7 @@ module Aws::Transfer
     #   <p>The absolute path of the file or directory to delete. You can only specify one path per call to this operation.</p>
     #   @return [String]
     class StartRemoteDeleteRequest < Struct.new(
+      nil,
       :connector_id,
       :delete_path,
       keyword_init: true
@@ -3112,6 +3268,7 @@ module Aws::Transfer
     #   <p>Returns a unique identifier for the delete operation.</p>
     #   @return [String]
     class StartRemoteDeleteResponse < Struct.new(
+      nil,
       :delete_id,
       keyword_init: true
     )
@@ -3128,6 +3285,7 @@ module Aws::Transfer
     #   <p>The absolute path for the target of the move/rename operation.</p>
     #   @return [String]
     class StartRemoteMoveRequest < Struct.new(
+      nil,
       :connector_id,
       :source_path,
       :target_path,
@@ -3140,6 +3298,7 @@ module Aws::Transfer
     #   <p>Returns a unique identifier for the move/rename operation.</p>
     #   @return [String]
     class StartRemoteMoveResponse < Struct.new(
+      nil,
       :move_id,
       keyword_init: true
     )
@@ -3150,6 +3309,7 @@ module Aws::Transfer
     #   <p>A system-assigned unique identifier for a server that you start.</p>
     #   @return [String]
     class StartServerRequest < Struct.new(
+      nil,
       :server_id,
       keyword_init: true
     )
@@ -3160,6 +3320,7 @@ module Aws::Transfer
     #   <p>A system-assigned unique identifier for a server that you stopped.</p>
     #   @return [String]
     class StopServerRequest < Struct.new(
+      nil,
       :server_id,
       keyword_init: true
     )
@@ -3174,6 +3335,7 @@ module Aws::Transfer
     #   <p>Contains one or more values that you assigned to the key name you create.</p>
     #   @return [String]
     class Tag < Struct.new(
+      nil,
       :key,
       :value,
       keyword_init: true
@@ -3188,6 +3350,7 @@ module Aws::Transfer
     #   <p>Key-value pairs assigned to ARNs that you can use to group and search for resources by type. You can attach this metadata to resources (servers, users, workflows, and so on) for any purpose.</p>
     #   @return [Array<Types::Tag>]
     class TagResourceRequest < Struct.new(
+      nil,
       :arn,
       :tags,
       keyword_init: true
@@ -3206,6 +3369,7 @@ module Aws::Transfer
     #   <p>Specifies which file to use as input to the workflow step: either the output from the previous step, or the originally uploaded file for the workflow.</p> <ul> <li> <p>To use the previous file as the input, enter <code>${previous.file}</code>. In this case, this workflow step uses the output file from the previous workflow step as input. This is the default value.</p> </li> <li> <p>To use the originally uploaded file location as input for this step, enter <code>${original.file}</code>.</p> </li> </ul>
     #   @return [String]
     class TagStepDetails < Struct.new(
+      nil,
       :name,
       :tags,
       :source_file_location,
@@ -3218,6 +3382,7 @@ module Aws::Transfer
     #   <p>The unique identifier for the connector.</p>
     #   @return [String]
     class TestConnectionRequest < Struct.new(
+      nil,
       :connector_id,
       keyword_init: true
     )
@@ -3237,6 +3402,7 @@ module Aws::Transfer
     #   <p>Structure that contains the SFTP connector host key.</p>
     #   @return [Types::SftpConnectorConnectionDetails]
     class TestConnectionResponse < Struct.new(
+      nil,
       :connector_id,
       :status,
       :status_message,
@@ -3262,6 +3428,7 @@ module Aws::Transfer
     #   <p>The password of the account to be tested.</p>
     #   @return [String]
     class TestIdentityProviderRequest < Struct.new(
+      nil,
       :server_id,
       :server_protocol,
       :source_ip,
@@ -3285,6 +3452,7 @@ module Aws::Transfer
     #   <p>The endpoint of the service used to authenticate a user.</p>
     #   @return [String]
     class TestIdentityProviderResponse < Struct.new(
+      nil,
       :response,
       :status_code,
       :message,
@@ -3303,6 +3471,7 @@ module Aws::Transfer
     # @!attribute retry_after_seconds
     #   @return [String]
     class ThrottlingException < Struct.new(
+      nil,
       :retry_after_seconds,
       keyword_init: true
     )
@@ -3316,6 +3485,7 @@ module Aws::Transfer
     #   <p>TagKeys are key-value pairs assigned to ARNs that can be used to group and search for resources by type. This metadata can be attached to resources for any purpose.</p>
     #   @return [Array<String>]
     class UntagResourceRequest < Struct.new(
+      nil,
       :arn,
       :tag_keys,
       keyword_init: true
@@ -3348,6 +3518,7 @@ module Aws::Transfer
     #   <p>A unique identifier that is required to identify specific groups within your directory. The users of the group that you associate have access to your Amazon S3 or Amazon EFS resources over the enabled protocols using Transfer Family. If you know the group name, you can view the SID values by running the following command using Windows PowerShell.</p> <p> <code>Get-ADGroup -Filter {samAccountName -like "<i>YourGroupName</i>*"} -Properties * | Select SamAccountName,ObjectSid</code> </p> <p>In that command, replace <i>YourGroupName</i> with the name of your Active Directory group.</p> <p>The regular expression used to validate this parameter is a string of characters consisting of uppercase and lowercase alphanumeric characters with no spaces. You can also include underscores or any of the following characters: =,.@:/-</p>
     #   @return [String]
     class UpdateAccessRequest < Struct.new(
+      nil,
       :home_directory,
       :home_directory_type,
       :home_directory_mappings,
@@ -3368,6 +3539,7 @@ module Aws::Transfer
     #   <p>The external identifier of the group whose users have access to your Amazon S3 or Amazon EFS resources over the enabled protocols using Amazon Web ServicesTransfer Family.</p>
     #   @return [String]
     class UpdateAccessResponse < Struct.new(
+      nil,
       :server_id,
       :external_id,
       keyword_init: true
@@ -3409,6 +3581,7 @@ module Aws::Transfer
     #   <p>A <code>CustomDirectoriesType</code> structure. This structure specifies custom directories for storing various AS2 message files. You can specify directories for the following types of files.</p> <ul> <li> <p>Failed files</p> </li> <li> <p>MDN files</p> </li> <li> <p>Payload files</p> </li> <li> <p>Status files</p> </li> <li> <p>Temporary files</p> </li> </ul>
     #   @return [Types::CustomDirectoriesType]
     class UpdateAgreementRequest < Struct.new(
+      nil,
       :agreement_id,
       :server_id,
       :description,
@@ -3429,6 +3602,7 @@ module Aws::Transfer
     #   <p>A unique identifier for the agreement. This identifier is returned when you create an agreement.</p>
     #   @return [String]
     class UpdateAgreementResponse < Struct.new(
+      nil,
       :agreement_id,
       keyword_init: true
     )
@@ -3448,6 +3622,7 @@ module Aws::Transfer
     #   <p>A short description to help identify the certificate.</p>
     #   @return [String]
     class UpdateCertificateRequest < Struct.new(
+      nil,
       :certificate_id,
       :active_date,
       :inactive_date,
@@ -3461,6 +3636,7 @@ module Aws::Transfer
     #   <p>Returns the identifier of the certificate object that you are updating.</p>
     #   @return [String]
     class UpdateCertificateResponse < Struct.new(
+      nil,
       :certificate_id,
       keyword_init: true
     )
@@ -3489,6 +3665,7 @@ module Aws::Transfer
     #   <p>Specifies the name of the security policy for the connector.</p>
     #   @return [String]
     class UpdateConnectorRequest < Struct.new(
+      nil,
       :connector_id,
       :url,
       :as2_config,
@@ -3505,6 +3682,7 @@ module Aws::Transfer
     #   <p>Returns the identifier of the connector object that you are updating.</p>
     #   @return [String]
     class UpdateConnectorResponse < Struct.new(
+      nil,
       :connector_id,
       keyword_init: true
     )
@@ -3521,6 +3699,7 @@ module Aws::Transfer
     #   <p>An updated description for the host key.</p>
     #   @return [String]
     class UpdateHostKeyRequest < Struct.new(
+      nil,
       :server_id,
       :host_key_id,
       :description,
@@ -3536,6 +3715,7 @@ module Aws::Transfer
     #   <p>Returns the host key identifier for the updated host key.</p>
     #   @return [String]
     class UpdateHostKeyResponse < Struct.new(
+      nil,
       :server_id,
       :host_key_id,
       keyword_init: true
@@ -3550,6 +3730,7 @@ module Aws::Transfer
     #   <p>An array of identifiers for the imported certificates. You use this identifier for working with profiles and partner profiles.</p>
     #   @return [Array<String>]
     class UpdateProfileRequest < Struct.new(
+      nil,
       :profile_id,
       :certificate_ids,
       keyword_init: true
@@ -3561,6 +3742,7 @@ module Aws::Transfer
     #   <p>Returns the identifier for the profile that's being updated.</p>
     #   @return [String]
     class UpdateProfileResponse < Struct.new(
+      nil,
       :profile_id,
       keyword_init: true
     )
@@ -3619,6 +3801,7 @@ module Aws::Transfer
     #   <p>The mode of authentication for a server. The default value is <code>SERVICE_MANAGED</code>, which allows you to store and access user credentials within the Transfer Family service.</p> <p>Use <code>AWS_DIRECTORY_SERVICE</code> to provide access to Active Directory groups in Directory Service for Microsoft Active Directory or Microsoft Active Directory in your on-premises environment or in Amazon Web Services using AD Connector. This option also requires you to provide a Directory ID by using the <code>IdentityProviderDetails</code> parameter.</p> <p>Use the <code>API_GATEWAY</code> value to integrate with an identity provider of your choosing. The <code>API_GATEWAY</code> setting requires you to provide an Amazon API Gateway endpoint URL to call for authentication by using the <code>IdentityProviderDetails</code> parameter.</p> <p>Use the <code>AWS_LAMBDA</code> value to directly use an Lambda function as your identity provider. If you choose this value, you must specify the ARN for the Lambda function in the <code>Function</code> parameter for the <code>IdentityProviderDetails</code> data type.</p>
     #   @return [String]
     class UpdateServerRequest < Struct.new(
+      nil,
       :certificate,
       :protocol_details,
       :endpoint_details,
@@ -3645,6 +3828,7 @@ module Aws::Transfer
     #   <p>A system-assigned unique identifier for a server that the Transfer Family user is assigned to.</p>
     #   @return [String]
     class UpdateServerResponse < Struct.new(
+      nil,
       :server_id,
       keyword_init: true
     )
@@ -3676,6 +3860,7 @@ module Aws::Transfer
     #   <p>A unique string that identifies a user and is associated with a server as specified by the <code>ServerId</code>. This user name must be a minimum of 3 and a maximum of 100 characters long. The following are valid characters: a-z, A-Z, 0-9, underscore '_', hyphen '-', period '.', and at sign '@'. The user name can't start with a hyphen, period, or at sign.</p>
     #   @return [String]
     class UpdateUserRequest < Struct.new(
+      nil,
       :home_directory,
       :home_directory_type,
       :home_directory_mappings,
@@ -3697,6 +3882,7 @@ module Aws::Transfer
     #   <p>The unique identifier for a user that is assigned to a server instance that was specified in the request.</p>
     #   @return [String]
     class UpdateUserResponse < Struct.new(
+      nil,
       :server_id,
       :user_name,
       keyword_init: true
@@ -3717,6 +3903,7 @@ module Aws::Transfer
     #   <p>Specify an icon file data string (in base64 encoding).</p>
     #   @return [String]
     class UpdateWebAppCustomizationRequest < Struct.new(
+      nil,
       :web_app_id,
       :title,
       :logo_file,
@@ -3730,6 +3917,7 @@ module Aws::Transfer
     #   <p>Returns the unique identifier for the web app being updated.</p>
     #   @return [String]
     class UpdateWebAppCustomizationResponse < Struct.new(
+      nil,
       :web_app_id,
       keyword_init: true
     )
@@ -3741,6 +3929,7 @@ module Aws::Transfer
     #   <p>The IAM role used to access IAM Identity Center.</p>
     #   @return [String]
     class UpdateWebAppIdentityCenterConfig < Struct.new(
+      nil,
       :role,
       keyword_init: true
     )
@@ -3775,6 +3964,7 @@ module Aws::Transfer
     #   <p>A union that contains the value for number of concurrent connections or the user sessions on your web app.</p>
     #   @return [Types::WebAppUnits]
     class UpdateWebAppRequest < Struct.new(
+      nil,
       :web_app_id,
       :identity_provider_details,
       :access_endpoint,
@@ -3788,6 +3978,7 @@ module Aws::Transfer
     #   <p>Returns the unique identifier for the web app being updated.</p>
     #   @return [String]
     class UpdateWebAppResponse < Struct.new(
+      nil,
       :web_app_id,
       keyword_init: true
     )
@@ -3805,6 +3996,7 @@ module Aws::Transfer
     #   <p>The system-assigned unique identifier for a session that corresponds to the workflow.</p>
     #   @return [String]
     class UserDetails < Struct.new(
+      nil,
       :user_name,
       :server_id,
       :session_id,
@@ -3851,6 +4043,7 @@ module Aws::Transfer
     #   <p>Includes the necessary permissions for S3, EFS, and Lambda operations that Transfer can assume, so that all workflow steps can operate on the required resources</p>
     #   @return [String]
     class WorkflowDetail < Struct.new(
+      nil,
       :workflow_id,
       :execution_role,
       keyword_init: true
@@ -3866,6 +4059,7 @@ module Aws::Transfer
     #   <p>A trigger that starts a workflow if a file is only partially uploaded. You can attach a workflow to a server that executes whenever there is a partial upload.</p> <p>A <i>partial upload</i> occurs when a file is open when the session disconnects.</p> <note> <p> <code>OnPartialUpload</code> can contain a maximum of one <code>WorkflowDetail</code> object.</p> </note>
     #   @return [Array<Types::WorkflowDetail>]
     class WorkflowDetails < Struct.new(
+      nil,
       :on_upload,
       :on_partial_upload,
       keyword_init: true
@@ -3893,6 +4087,7 @@ module Aws::Transfer
     #   <p>Details for a step that decrypts an encrypted file.</p> <p>Consists of the following values:</p> <ul> <li> <p>A descriptive name</p> </li> <li> <p>An Amazon S3 or Amazon Elastic File System (Amazon EFS) location for the source file to decrypt.</p> </li> <li> <p>An S3 or Amazon EFS location for the destination of the file decryption.</p> </li> <li> <p>A flag that indicates whether to overwrite an existing file of the same name. The default is <code>FALSE</code>.</p> </li> <li> <p>The type of encryption that's used. Currently, only PGP encryption is supported.</p> </li> </ul>
     #   @return [Types::DecryptStepDetails]
     class WorkflowStep < Struct.new(
+      nil,
       :type,
       :copy_step_details,
       :custom_step_details,

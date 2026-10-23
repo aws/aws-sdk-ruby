@@ -53,6 +53,7 @@ module Aws::ACMPCA
     #   <p/> <p>Contains a sequence of one or more X.500 relative distinguished names (RDNs), each of which consists of an object identifier (OID) and a value. For more information, see NIST’s definition of <a href="https://csrc.nist.gov/glossary/term/Object_Identifier">Object Identifier (OID)</a>.</p> <note> <p>Custom attributes cannot be used in combination with standard attributes.</p> </note>
     #   @return [Array<Types::CustomAttribute>]
     class ASN1Subject < Struct.new(
+      nil,
       :country,
       :organization,
       :organizational_unit,
@@ -81,6 +82,7 @@ module Aws::ACMPCA
     #   <p>The location of <code>AccessDescription</code> information.</p>
     #   @return [Types::GeneralName]
     class AccessDescription < Struct.new(
+      nil,
       :access_method,
       :access_location,
       keyword_init: true
@@ -96,6 +98,7 @@ module Aws::ACMPCA
     #   <p>Specifies the <code>AccessMethod</code>.</p>
     #   @return [String]
     class AccessMethod < Struct.new(
+      nil,
       :custom_object_identifier,
       :access_method_type,
       keyword_init: true
@@ -111,6 +114,7 @@ module Aws::ACMPCA
     #   <p>Contains information about the certificate subject. The <code>Subject</code> field in the certificate identifies the entity that owns or controls the public key in the certificate. The entity can be a user, computer, device, or service. The <code>Subject </code>must contain an X.500 distinguished name (DN). A DN is a sequence of relative distinguished names (RDNs). The RDNs are separated by commas in the certificate.</p>
     #   @return [Types::ASN1Subject]
     class ApiPassthrough < Struct.new(
+      nil,
       :extensions,
       :subject,
       keyword_init: true
@@ -165,6 +169,7 @@ module Aws::ACMPCA
     #   <p>Specifies whether the CA issues general-purpose certificates that typically require a revocation mechanism, or short-lived certificates that may optionally omit revocation because they expire quickly. Short-lived certificate validity is limited to seven days.</p> <p>The default value is GENERAL_PURPOSE.</p>
     #   @return [String]
     class CertificateAuthority < Struct.new(
+      nil,
       :arn,
       :owner_account,
       :created_at,
@@ -199,6 +204,7 @@ module Aws::ACMPCA
     #   <p>Specifies information to be added to the extension section of the certificate signing request (CSR).</p>
     #   @return [Types::CsrExtensions]
     class CertificateAuthorityConfiguration < Struct.new(
+      nil,
       :key_algorithm,
       :signing_algorithm,
       :subject,
@@ -212,6 +218,7 @@ module Aws::ACMPCA
     # @!attribute message
     #   @return [String]
     class CertificateMismatchException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -222,6 +229,7 @@ module Aws::ACMPCA
     # @!attribute message
     #   @return [String]
     class ConcurrentModificationException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -238,6 +246,7 @@ module Aws::ACMPCA
     #   <p>The format in which to create the report. This can be either <b>JSON</b> or <b>CSV</b>.</p>
     #   @return [String]
     class CreateCertificateAuthorityAuditReportRequest < Struct.new(
+      nil,
       :certificate_authority_arn,
       :s3_bucket_name,
       :audit_report_response_format,
@@ -253,6 +262,7 @@ module Aws::ACMPCA
     #   <p>The <b>key</b> that uniquely identifies the report file in your S3 bucket.</p>
     #   @return [String]
     class CreateCertificateAuthorityAuditReportResponse < Struct.new(
+      nil,
       :audit_report_id,
       :s3_key,
       keyword_init: true
@@ -282,6 +292,7 @@ module Aws::ACMPCA
     #   <p>Specifies whether the CA issues general-purpose certificates that typically require a revocation mechanism, or short-lived certificates that may optionally omit revocation because they expire quickly. Short-lived certificate validity is limited to seven days.</p> <p>The default value is GENERAL_PURPOSE.</p>
     #   @return [String]
     class CreateCertificateAuthorityRequest < Struct.new(
+      nil,
       :certificate_authority_configuration,
       :revocation_configuration,
       :certificate_authority_type,
@@ -298,6 +309,7 @@ module Aws::ACMPCA
     #   <p>If successful, the Amazon Resource Name (ARN) of the certificate authority (CA). This is of the form: </p> <p> <code>arn:aws:acm-pca:<i>region</i>:<i>account</i>:certificate-authority/<i>12345678-1234-1234-1234-123456789012</i> </code>. </p>
     #   @return [String]
     class CreateCertificateAuthorityResponse < Struct.new(
+      nil,
       :certificate_authority_arn,
       keyword_init: true
     )
@@ -317,6 +329,7 @@ module Aws::ACMPCA
     #   <p>The actions that the specified Amazon Web Services service principal can use. These include <code>IssueCertificate</code>, <code>GetCertificate</code>, and <code>ListPermissions</code>.</p>
     #   @return [Array<String>]
     class CreatePermissionRequest < Struct.new(
+      nil,
       :certificate_authority_arn,
       :principal,
       :source_account,
@@ -352,6 +365,7 @@ module Aws::ACMPCA
     #   <p>Designates a custom ﬁle path in S3 for CRL(s). For example, <code>http://&lt;CustomName&gt;/ &lt;CustomPath&gt;/&lt;CrlPartition_GUID&gt;.crl</code>. </p>
     #   @return [String]
     class CrlConfiguration < Struct.new(
+      nil,
       :enabled,
       :expiration_in_days,
       :custom_cname,
@@ -375,6 +389,7 @@ module Aws::ACMPCA
     #   <p>Configures whether the CRL Distribution Point extension should be populated with the default URL to the CRL. If set to <code>true</code>, then the CDP extension will not be present in any certificates issued by that CA unless otherwise specified through CSR or API passthrough.</p> <note> <p>Only set this if you have another way to distribute the CRL Distribution Points ffor certificates issued by your CA, such as the Matter Distributed Compliance Ledger</p> <p>This configuration cannot be enabled with a custom CNAME set.</p> </note>
     #   @return [Boolean]
     class CrlDistributionPointExtensionConfiguration < Struct.new(
+      nil,
       :omit_extension,
       keyword_init: true
     )
@@ -394,6 +409,7 @@ module Aws::ACMPCA
     #   <p>For CA certificates, provides a path to additional information pertaining to the CA, such as revocation and policy. For more information, see <a href="https://datatracker.ietf.org/doc/html/rfc5280#section-4.2.2.2">Subject Information Access</a> in RFC 5280.</p>
     #   @return [Array<Types::AccessDescription>]
     class CsrExtensions < Struct.new(
+      nil,
       :key_usage,
       :subject_information_access,
       keyword_init: true
@@ -409,6 +425,7 @@ module Aws::ACMPCA
     #   <p/> <p>Specifies the attribute value of relative distinguished name (RDN).</p>
     #   @return [String]
     class CustomAttribute < Struct.new(
+      nil,
       :object_identifier,
       :value,
       keyword_init: true
@@ -427,6 +444,7 @@ module Aws::ACMPCA
     #   <p/> <p>Specifies the critical flag of the X.509 extension.</p>
     #   @return [Boolean]
     class CustomExtension < Struct.new(
+      nil,
       :object_identifier,
       :value,
       :critical,
@@ -447,6 +465,7 @@ module Aws::ACMPCA
     #   <p>The number of days to make a CA restorable after it has been deleted. This can be anywhere from 7 to 30 days, with 30 being the default.</p>
     #   @return [Integer]
     class DeleteCertificateAuthorityRequest < Struct.new(
+      nil,
       :certificate_authority_arn,
       :permanent_deletion_time_in_days,
       keyword_init: true
@@ -464,6 +483,7 @@ module Aws::ACMPCA
     #   <p>The Amazon Web Services account that calls this action.</p>
     #   @return [String]
     class DeletePermissionRequest < Struct.new(
+      nil,
       :certificate_authority_arn,
       :principal,
       :source_account,
@@ -476,6 +496,7 @@ module Aws::ACMPCA
     #   <p>The Amazon Resource Number (ARN) of the private CA that will have its policy deleted. You can find the CA's ARN by calling the <a href="https://docs.aws.amazon.com/privateca/latest/APIReference/API_ListCertificateAuthorities.html">ListCertificateAuthorities</a> action. The ARN value must have the form <code>arn:aws:acm-pca:region:account:certificate-authority/01234567-89ab-cdef-0123-0123456789ab</code>. </p>
     #   @return [String]
     class DeletePolicyRequest < Struct.new(
+      nil,
       :resource_arn,
       keyword_init: true
     )
@@ -489,6 +510,7 @@ module Aws::ACMPCA
     #   <p>The report ID returned by calling the <a href="https://docs.aws.amazon.com/privateca/latest/APIReference/API_CreateCertificateAuthorityAuditReport.html">CreateCertificateAuthorityAuditReport</a> action.</p>
     #   @return [String]
     class DescribeCertificateAuthorityAuditReportRequest < Struct.new(
+      nil,
       :certificate_authority_arn,
       :audit_report_id,
       keyword_init: true
@@ -509,6 +531,7 @@ module Aws::ACMPCA
     #   <p>The date and time at which the report was created.</p>
     #   @return [Time]
     class DescribeCertificateAuthorityAuditReportResponse < Struct.new(
+      nil,
       :audit_report_status,
       :s3_bucket_name,
       :s3_key,
@@ -522,6 +545,7 @@ module Aws::ACMPCA
     #   <p>The Amazon Resource Name (ARN) that was returned when you called <a href="https://docs.aws.amazon.com/privateca/latest/APIReference/API_CreateCertificateAuthority.html">CreateCertificateAuthority</a>. This must be of the form: </p> <p> <code>arn:aws:acm-pca:<i>region</i>:<i>account</i>:certificate-authority/<i>12345678-1234-1234-1234-123456789012</i> </code>. </p>
     #   @return [String]
     class DescribeCertificateAuthorityRequest < Struct.new(
+      nil,
       :certificate_authority_arn,
       keyword_init: true
     )
@@ -532,6 +556,7 @@ module Aws::ACMPCA
     #   <p>A <a href="https://docs.aws.amazon.com/privateca/latest/APIReference/API_CertificateAuthority.html">CertificateAuthority</a> structure that contains information about your private CA.</p>
     #   @return [Types::CertificateAuthority]
     class DescribeCertificateAuthorityResponse < Struct.new(
+      nil,
       :certificate_authority,
       keyword_init: true
     )
@@ -546,6 +571,7 @@ module Aws::ACMPCA
     #   <p>Specifies the name assigner.</p>
     #   @return [String]
     class EdiPartyName < Struct.new(
+      nil,
       :party_name,
       :name_assigner,
       keyword_init: true
@@ -561,6 +587,7 @@ module Aws::ACMPCA
     #   <p>Specifies a custom <code>ExtendedKeyUsage</code> with an object identifier (OID).</p>
     #   @return [String]
     class ExtendedKeyUsage < Struct.new(
+      nil,
       :extended_key_usage_type,
       :extended_key_usage_object_identifier,
       keyword_init: true
@@ -585,6 +612,7 @@ module Aws::ACMPCA
     #   <p/> <p>Contains a sequence of one or more X.509 extensions, each of which consists of an object identifier (OID), a base64-encoded value, and the critical flag. For more information, see the <a href="https://oidref.com/2.5.29">Global OID reference database.</a> </p>
     #   @return [Array<Types::CustomExtension>]
     class Extensions < Struct.new(
+      nil,
       :certificate_policies,
       :extended_key_usage,
       :key_usage,
@@ -621,6 +649,7 @@ module Aws::ACMPCA
     #   <p> Represents <code>GeneralName</code> as an object identifier (OID).</p>
     #   @return [String]
     class GeneralName < Struct.new(
+      nil,
       :other_name,
       :rfc822_name,
       :dns_name,
@@ -638,6 +667,7 @@ module Aws::ACMPCA
     #   <p>The Amazon Resource Name (ARN) of your private CA. This is of the form:</p> <p> <code>arn:aws:acm-pca:<i>region</i>:<i>account</i>:certificate-authority/<i>12345678-1234-1234-1234-123456789012</i> </code>. </p>
     #   @return [String]
     class GetCertificateAuthorityCertificateRequest < Struct.new(
+      nil,
       :certificate_authority_arn,
       keyword_init: true
     )
@@ -651,6 +681,7 @@ module Aws::ACMPCA
     #   <p>Base64-encoded certificate chain that includes any intermediate certificates and chains up to root certificate that you used to sign your private CA certificate. The chain does not include your private CA certificate. If this is a root CA, the value will be null.</p>
     #   @return [String]
     class GetCertificateAuthorityCertificateResponse < Struct.new(
+      nil,
       :certificate,
       :certificate_chain,
       keyword_init: true
@@ -662,6 +693,7 @@ module Aws::ACMPCA
     #   <p>The Amazon Resource Name (ARN) that was returned when you called the <a href="https://docs.aws.amazon.com/privateca/latest/APIReference/API_CreateCertificateAuthority.html">CreateCertificateAuthority</a> action. This must be of the form: </p> <p> <code>arn:aws:acm-pca:<i>region</i>:<i>account</i>:certificate-authority/<i>12345678-1234-1234-1234-123456789012</i> </code> </p>
     #   @return [String]
     class GetCertificateAuthorityCsrRequest < Struct.new(
+      nil,
       :certificate_authority_arn,
       keyword_init: true
     )
@@ -672,6 +704,7 @@ module Aws::ACMPCA
     #   <p>The base64 PEM-encoded certificate signing request (CSR) for your private CA certificate.</p>
     #   @return [String]
     class GetCertificateAuthorityCsrResponse < Struct.new(
+      nil,
       :csr,
       keyword_init: true
     )
@@ -685,6 +718,7 @@ module Aws::ACMPCA
     #   <p>The ARN of the issued certificate. The ARN contains the certificate serial number and must be in the following form: </p> <p> <code>arn:aws:acm-pca:<i>region</i>:<i>account</i>:certificate-authority/<i>12345678-1234-1234-1234-123456789012</i>/certificate/<i>286535153982981100925020015808220737245</i> </code> </p>
     #   @return [String]
     class GetCertificateRequest < Struct.new(
+      nil,
       :certificate_authority_arn,
       :certificate_arn,
       keyword_init: true
@@ -699,6 +733,7 @@ module Aws::ACMPCA
     #   <p>The base64 PEM-encoded certificate chain that chains up to the root CA certificate that you used to sign your private CA certificate. </p>
     #   @return [String]
     class GetCertificateResponse < Struct.new(
+      nil,
       :certificate,
       :certificate_chain,
       keyword_init: true
@@ -710,6 +745,7 @@ module Aws::ACMPCA
     #   <p>The Amazon Resource Number (ARN) of the private CA that will have its policy retrieved. You can find the CA's ARN by calling the ListCertificateAuthorities action. </p>
     #   @return [String]
     class GetPolicyRequest < Struct.new(
+      nil,
       :resource_arn,
       keyword_init: true
     )
@@ -720,6 +756,7 @@ module Aws::ACMPCA
     #   <p>The policy attached to the private CA as a JSON document.</p>
     #   @return [String]
     class GetPolicyResponse < Struct.new(
+      nil,
       :policy,
       keyword_init: true
     )
@@ -736,6 +773,7 @@ module Aws::ACMPCA
     #   <p>A PEM-encoded file that contains all of your certificates, other than the certificate you're importing, chaining up to your root CA. Your Amazon Web Services Private CA-hosted or on-premises root certificate is the last in the chain, and each certificate in the chain signs the one preceding. </p> <p>This parameter must be supplied when you import a subordinate CA. When you import a root CA, there is no chain.</p>
     #   @return [String]
     class ImportCertificateAuthorityCertificateRequest < Struct.new(
+      nil,
       :certificate_authority_arn,
       :certificate,
       :certificate_chain,
@@ -748,6 +786,7 @@ module Aws::ACMPCA
     # @!attribute message
     #   @return [String]
     class InvalidArgsException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -758,6 +797,7 @@ module Aws::ACMPCA
     # @!attribute message
     #   @return [String]
     class InvalidArnException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -768,6 +808,7 @@ module Aws::ACMPCA
     # @!attribute message
     #   @return [String]
     class InvalidNextTokenException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -778,6 +819,7 @@ module Aws::ACMPCA
     # @!attribute message
     #   @return [String]
     class InvalidPolicyException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -788,6 +830,7 @@ module Aws::ACMPCA
     # @!attribute message
     #   @return [String]
     class InvalidRequestException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -798,6 +841,7 @@ module Aws::ACMPCA
     # @!attribute message
     #   @return [String]
     class InvalidStateException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -808,6 +852,7 @@ module Aws::ACMPCA
     # @!attribute message
     #   @return [String]
     class InvalidTagException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -839,6 +884,7 @@ module Aws::ACMPCA
     #   <p>Alphanumeric string that can be used to distinguish between calls to the <b>IssueCertificate</b> action. Idempotency tokens for <b>IssueCertificate</b> time out after five minutes. Therefore, if you call <b>IssueCertificate</b> multiple times with the same idempotency token within five minutes, Amazon Web Services Private CA recognizes that you are requesting only one certificate and will issue only one. If you change the idempotency token for each call, Amazon Web Services Private CA recognizes that you are requesting multiple certificates.</p>
     #   @return [String]
     class IssueCertificateRequest < Struct.new(
+      nil,
       :api_passthrough,
       :certificate_authority_arn,
       :csr,
@@ -856,6 +902,7 @@ module Aws::ACMPCA
     #   <p>The Amazon Resource Name (ARN) of the issued certificate and the certificate serial number. This is of the form:</p> <p> <code>arn:aws:acm-pca:<i>region</i>:<i>account</i>:certificate-authority/<i>12345678-1234-1234-1234-123456789012</i>/certificate/<i>286535153982981100925020015808220737245</i> </code> </p>
     #   @return [String]
     class IssueCertificateResponse < Struct.new(
+      nil,
       :certificate_arn,
       keyword_init: true
     )
@@ -891,6 +938,7 @@ module Aws::ACMPCA
     #   <p>Key can be used only to decipher data.</p>
     #   @return [Boolean]
     class KeyUsage < Struct.new(
+      nil,
       :digital_signature,
       :non_repudiation,
       :key_encipherment,
@@ -922,6 +970,7 @@ module Aws::ACMPCA
     # @!attribute message
     #   @return [String]
     class LimitExceededException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -938,6 +987,7 @@ module Aws::ACMPCA
     #   <p>Use this parameter to filter the returned set of certificate authorities based on their owner. The default is SELF.</p>
     #   @return [String]
     class ListCertificateAuthoritiesRequest < Struct.new(
+      nil,
       :max_results,
       :next_token,
       :resource_owner,
@@ -953,6 +1003,7 @@ module Aws::ACMPCA
     #   <p>Summary information about each certificate authority you have created.</p>
     #   @return [Array<Types::CertificateAuthority>]
     class ListCertificateAuthoritiesResponse < Struct.new(
+      nil,
       :next_token,
       :certificate_authorities,
       keyword_init: true
@@ -970,6 +1021,7 @@ module Aws::ACMPCA
     #   <p>The Amazon Resource Number (ARN) of the private CA to inspect. You can find the ARN by calling the <a href="https://docs.aws.amazon.com/privateca/latest/APIReference/API_ListCertificateAuthorities.html">ListCertificateAuthorities</a> action. This must be of the form: <code>arn:aws:acm-pca:region:account:certificate-authority/12345678-1234-1234-1234-123456789012</code> You can get a private CA's ARN by running the <a href="https://docs.aws.amazon.com/privateca/latest/APIReference/API_ListCertificateAuthorities.html">ListCertificateAuthorities</a> action.</p>
     #   @return [String]
     class ListPermissionsRequest < Struct.new(
+      nil,
       :max_results,
       :next_token,
       :certificate_authority_arn,
@@ -985,6 +1037,7 @@ module Aws::ACMPCA
     #   <p>Summary information about each permission assigned by the specified private CA, including the action enabled, the policy provided, and the time of creation.</p>
     #   @return [Array<Types::Permission>]
     class ListPermissionsResponse < Struct.new(
+      nil,
       :next_token,
       :permissions,
       keyword_init: true
@@ -1002,6 +1055,7 @@ module Aws::ACMPCA
     #   <p>The Amazon Resource Name (ARN) that was returned when you called the <a href="https://docs.aws.amazon.com/privateca/latest/APIReference/API_CreateCertificateAuthority.html">CreateCertificateAuthority</a> action. This must be of the form: </p> <p> <code>arn:aws:acm-pca:<i>region</i>:<i>account</i>:certificate-authority/<i>12345678-1234-1234-1234-123456789012</i> </code> </p>
     #   @return [String]
     class ListTagsRequest < Struct.new(
+      nil,
       :max_results,
       :next_token,
       :certificate_authority_arn,
@@ -1017,6 +1071,7 @@ module Aws::ACMPCA
     #   <p>The tags associated with your private CA.</p>
     #   @return [Array<Types::Tag>]
     class ListTagsResponse < Struct.new(
+      nil,
       :next_token,
       :tags,
       keyword_init: true
@@ -1028,6 +1083,7 @@ module Aws::ACMPCA
     # @!attribute message
     #   @return [String]
     class LockoutPreventedException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -1038,6 +1094,7 @@ module Aws::ACMPCA
     # @!attribute message
     #   @return [String]
     class MalformedCSRException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -1048,6 +1105,7 @@ module Aws::ACMPCA
     # @!attribute message
     #   @return [String]
     class MalformedCertificateException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -1062,6 +1120,7 @@ module Aws::ACMPCA
     #   <p>By default, Amazon Web Services Private CA injects an Amazon Web Services domain into certificates being validated by the Online Certificate Status Protocol (OCSP). A customer can alternatively use this object to define a CNAME specifying a customized OCSP domain.</p> <note> <p>The content of a Canonical Name (CNAME) record must conform to <a href="https://www.ietf.org/rfc/rfc2396.txt">RFC2396</a> restrictions on the use of special characters in URIs. Additionally, the value of the CNAME must not include a protocol prefix such as "http://" or "https://".</p> </note> <p>For more information, see <a href="https://docs.aws.amazon.com/privateca/latest/userguide/ocsp-customize.html">Customizing Online Certificate Status Protocol (OCSP) </a> in the <i>Amazon Web Services Private Certificate Authority User Guide</i>.</p>
     #   @return [String]
     class OcspConfiguration < Struct.new(
+      nil,
       :enabled,
       :ocsp_custom_cname,
       keyword_init: true
@@ -1082,6 +1141,7 @@ module Aws::ACMPCA
     #   <p>Specifies an OID value.</p>
     #   @return [String]
     class OtherName < Struct.new(
+      nil,
       :type_id,
       :value,
       keyword_init: true
@@ -1109,6 +1169,7 @@ module Aws::ACMPCA
     #   <p>The name of the policy that is associated with the permission.</p>
     #   @return [String]
     class Permission < Struct.new(
+      nil,
       :certificate_authority_arn,
       :created_at,
       :principal,
@@ -1124,6 +1185,7 @@ module Aws::ACMPCA
     # @!attribute message
     #   @return [String]
     class PermissionAlreadyExistsException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -1138,6 +1200,7 @@ module Aws::ACMPCA
     #   <p>Modifies the given <code>CertPolicyId</code> with a qualifier. Amazon Web Services Private CA supports the certification practice statement (CPS) qualifier.</p>
     #   @return [Array<Types::PolicyQualifierInfo>]
     class PolicyInformation < Struct.new(
+      nil,
       :cert_policy_id,
       :policy_qualifiers,
       keyword_init: true
@@ -1153,6 +1216,7 @@ module Aws::ACMPCA
     #   <p>Defines the qualifier type. Amazon Web Services Private CA supports the use of a URI for a CPS qualifier in this field.</p>
     #   @return [Types::Qualifier]
     class PolicyQualifierInfo < Struct.new(
+      nil,
       :policy_qualifier_id,
       :qualifier,
       keyword_init: true
@@ -1167,6 +1231,7 @@ module Aws::ACMPCA
     #   <p>The path and file name of a JSON-formatted IAM policy to attach to the specified private CA resource. If this policy does not contain all required statements or if it includes any statement that is not allowed, the <code>PutPolicy</code> action returns an <code>InvalidPolicyException</code>. For information about IAM policy and statement structure, see <a href="https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies.html#access_policies-json">Overview of JSON Policies</a>.</p>
     #   @return [String]
     class PutPolicyRequest < Struct.new(
+      nil,
       :resource_arn,
       :policy,
       keyword_init: true
@@ -1179,6 +1244,7 @@ module Aws::ACMPCA
     #   <p>Contains a pointer to a certification practice statement (CPS) published by the CA.</p>
     #   @return [String]
     class Qualifier < Struct.new(
+      nil,
       :cps_uri,
       keyword_init: true
     )
@@ -1189,6 +1255,7 @@ module Aws::ACMPCA
     # @!attribute message
     #   @return [String]
     class RequestAlreadyProcessedException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -1199,6 +1266,7 @@ module Aws::ACMPCA
     # @!attribute message
     #   @return [String]
     class RequestFailedException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -1209,6 +1277,7 @@ module Aws::ACMPCA
     # @!attribute message
     #   @return [String]
     class RequestInProgressException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -1219,6 +1288,7 @@ module Aws::ACMPCA
     # @!attribute message
     #   @return [String]
     class ResourceNotFoundException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -1229,6 +1299,7 @@ module Aws::ACMPCA
     #   <p>The Amazon Resource Name (ARN) that was returned when you called the <a href="https://docs.aws.amazon.com/privateca/latest/APIReference/API_CreateCertificateAuthority.html">CreateCertificateAuthority</a> action. This must be of the form: </p> <p> <code>arn:aws:acm-pca:<i>region</i>:<i>account</i>:certificate-authority/<i>12345678-1234-1234-1234-123456789012</i> </code> </p>
     #   @return [String]
     class RestoreCertificateAuthorityRequest < Struct.new(
+      nil,
       :certificate_authority_arn,
       keyword_init: true
     )
@@ -1243,6 +1314,7 @@ module Aws::ACMPCA
     #   <p>Configuration of Online Certificate Status Protocol (OCSP) support, if any, maintained by your private CA. When you revoke a certificate, OCSP responses may take up to 60 minutes to reflect the new status.</p>
     #   @return [Types::OcspConfiguration]
     class RevocationConfiguration < Struct.new(
+      nil,
       :crl_configuration,
       :ocsp_configuration,
       keyword_init: true
@@ -1260,6 +1332,7 @@ module Aws::ACMPCA
     #   <p>Specifies why you revoked the certificate.</p>
     #   @return [String]
     class RevokeCertificateRequest < Struct.new(
+      nil,
       :certificate_authority_arn,
       :certificate_serial,
       :revocation_reason,
@@ -1276,6 +1349,7 @@ module Aws::ACMPCA
     #   <p>Value of the tag.</p>
     #   @return [String]
     class Tag < Struct.new(
+      nil,
       :key,
       :value,
       keyword_init: true
@@ -1290,6 +1364,7 @@ module Aws::ACMPCA
     #   <p>List of tags to be associated with the CA.</p>
     #   @return [Array<Types::Tag>]
     class TagCertificateAuthorityRequest < Struct.new(
+      nil,
       :certificate_authority_arn,
       :tags,
       keyword_init: true
@@ -1301,6 +1376,7 @@ module Aws::ACMPCA
     # @!attribute message
     #   @return [String]
     class TooManyTagsException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -1314,6 +1390,7 @@ module Aws::ACMPCA
     #   <p>List of tags to be removed from the CA.</p>
     #   @return [Array<Types::Tag>]
     class UntagCertificateAuthorityRequest < Struct.new(
+      nil,
       :certificate_authority_arn,
       :tags,
       keyword_init: true
@@ -1331,6 +1408,7 @@ module Aws::ACMPCA
     #   <p>Status of your private CA.</p>
     #   @return [String]
     class UpdateCertificateAuthorityRequest < Struct.new(
+      nil,
       :certificate_authority_arn,
       :revocation_configuration,
       :status,
@@ -1347,6 +1425,7 @@ module Aws::ACMPCA
     #   <p>Determines how <i>Amazon Web Services Private CA</i> interprets the <code>Value</code> parameter, an integer. Supported validity types include those listed below. Type definitions with values include a sample input value and the resulting output. </p> <p> <code>END_DATE</code>: The specific date and time when the certificate will expire, expressed using UTCTime (YYMMDDHHMMSS) or GeneralizedTime (YYYYMMDDHHMMSS) format. When UTCTime is used, if the year field (YY) is greater than or equal to 50, the year is interpreted as 19YY. If the year field is less than 50, the year is interpreted as 20YY.</p> <ul> <li> <p>Sample input value: 491231235959 (UTCTime format)</p> </li> <li> <p>Output expiration date/time: 12/31/2049 23:59:59</p> </li> </ul> <p> <code>ABSOLUTE</code>: The specific date and time when the validity of a certificate will start or expire, expressed in seconds since the Unix Epoch. </p> <ul> <li> <p>Sample input value: 2524608000</p> </li> <li> <p>Output expiration date/time: 01/01/2050 00:00:00</p> </li> </ul> <p> <code>DAYS</code>, <code>MONTHS</code>, <code>YEARS</code>: The relative time from the moment of issuance until the certificate will expire, expressed in days, months, or years. </p> <p>Example if <code>DAYS</code>, issued on 10/12/2020 at 12:34:54 UTC:</p> <ul> <li> <p>Sample input value: 90</p> </li> <li> <p>Output expiration date: 01/10/2020 12:34:54 UTC</p> </li> </ul> <p>The minimum validity duration for a certificate using relative time (<code>DAYS</code>) is one day. The minimum validity for a certificate using absolute time (<code>ABSOLUTE</code> or <code>END_DATE</code>) is one second.</p>
     #   @return [String]
     class Validity < Struct.new(
+      nil,
       :value,
       :type,
       keyword_init: true

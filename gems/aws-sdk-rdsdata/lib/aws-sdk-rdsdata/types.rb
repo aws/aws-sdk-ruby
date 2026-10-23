@@ -10,6 +10,7 @@ module Aws::RDSData
     # @!attribute message
     #   @return [String]
     class AccessDeniedException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -56,6 +57,7 @@ module Aws::RDSData
     #   <p>The error message returned by this <code>BadRequestException</code> error.</p>
     #   @return [String]
     class BadRequestException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -108,6 +110,7 @@ module Aws::RDSData
     #               parameter.</p>
     #   @return [String]
     class BatchExecuteStatementInput < Struct.new(
+      nil,
       :resource_arn,
       :secret_arn,
       :sql,
@@ -126,6 +129,7 @@ module Aws::RDSData
     #   <p>The execution results of each batch entry.</p>
     #   @return [Array<Types::UpdateResult>]
     class BatchExecuteStatementOutput < Struct.new(
+      nil,
       :update_results,
       keyword_init: true
     )
@@ -147,6 +151,7 @@ module Aws::RDSData
     #   <p>The name of the database schema.</p>
     #   @return [String]
     class BeginTransactionInput < Struct.new(
+      nil,
       :resource_arn,
       :secret_arn,
       :database,
@@ -162,6 +167,7 @@ module Aws::RDSData
     #   <p>The transaction ID of the transaction started by the call.</p>
     #   @return [String]
     class BeginTransactionOutput < Struct.new(
+      nil,
       :transaction_id,
       keyword_init: true
     )
@@ -212,6 +218,7 @@ module Aws::RDSData
     #   <p>The type of the column.</p>
     #   @return [Integer]
     class ColumnMetadata < Struct.new(
+      nil,
       :name,
       :type,
       :type_name,
@@ -255,6 +262,7 @@ module Aws::RDSData
     #   <p>The identifier of the transaction to end and commit.</p>
     #   @return [String]
     class CommitTransactionInput < Struct.new(
+      nil,
       :resource_arn,
       :secret_arn,
       :transaction_id,
@@ -268,6 +276,7 @@ module Aws::RDSData
     #   <p>The status of the commit operation.</p>
     #   @return [String]
     class CommitTransactionOutput < Struct.new(
+      nil,
       :transaction_status,
       keyword_init: true
     )
@@ -278,6 +287,7 @@ module Aws::RDSData
     # @!attribute message
     #   @return [String]
     class DatabaseErrorException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -288,6 +298,7 @@ module Aws::RDSData
     # @!attribute message
     #   @return [String]
     class DatabaseNotFoundException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -300,6 +311,7 @@ module Aws::RDSData
     # @!attribute message
     #   @return [String]
     class DatabaseResumingException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -308,6 +320,7 @@ module Aws::RDSData
 
     # <p>The writer instance in the DB cluster isn't available.</p>
     class DatabaseUnavailableException < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -336,6 +349,7 @@ module Aws::RDSData
     #   <p>The name of the database schema.</p>
     #   @return [String]
     class ExecuteSqlInput < Struct.new(
+      nil,
       :db_cluster_or_instance_arn,
       :aws_secret_store_arn,
       :sql_statements,
@@ -352,6 +366,7 @@ module Aws::RDSData
     #   <p>The results of the SQL statement or statements.</p>
     #   @return [Array<Types::SqlStatementResult>]
     class ExecuteSqlOutput < Struct.new(
+      nil,
       :sql_statement_results,
       keyword_init: true
     )
@@ -418,6 +433,7 @@ module Aws::RDSData
     #             in the <i>Amazon Aurora User Guide</i>.</p>
     #   @return [String]
     class ExecuteStatementInput < Struct.new(
+      nil,
       :resource_arn,
       :secret_arn,
       :sql,
@@ -464,6 +480,7 @@ module Aws::RDSData
     #             result set requires more than 10 MB, the call returns an error.</p>
     #   @return [String]
     class ExecuteStatementOutput < Struct.new(
+      nil,
       :records,
       :column_metadata,
       :number_of_records_updated,
@@ -529,6 +546,7 @@ module Aws::RDSData
     #   <p>The error message returned by this <code>ForbiddenException</code> error.</p>
     #   @return [String]
     class ForbiddenException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -539,6 +557,7 @@ module Aws::RDSData
     # @!attribute message
     #   @return [String]
     class HttpEndpointNotEnabledException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -547,6 +566,7 @@ module Aws::RDSData
 
     # <p>An internal error occurred.</p>
     class InternalServerErrorException < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -556,6 +576,7 @@ module Aws::RDSData
     # @!attribute message
     #   @return [String]
     class InvalidResourceStateException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -566,6 +587,7 @@ module Aws::RDSData
     # @!attribute message
     #   @return [String]
     class InvalidSecretException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -577,6 +599,7 @@ module Aws::RDSData
     #   <p>The error message returned by this <code>NotFoundException</code> error.</p>
     #   @return [String]
     class NotFoundException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -592,6 +615,7 @@ module Aws::RDSData
     #   <p>The values returned in the record.</p>
     #   @return [Array<Types::Value>]
     class Record < Struct.new(
+      nil,
       :values,
       keyword_init: true
     )
@@ -610,6 +634,7 @@ module Aws::RDSData
     #   <p>The records in the result set.</p>
     #   @return [Array<Types::Record>]
     class ResultFrame < Struct.new(
+      nil,
       :result_set_metadata,
       :records,
       keyword_init: true
@@ -625,6 +650,7 @@ module Aws::RDSData
     #   <p>The metadata of the columns in the result set.</p>
     #   @return [Array<Types::ColumnMetadata>]
     class ResultSetMetadata < Struct.new(
+      nil,
       :column_count,
       :column_metadata,
       keyword_init: true
@@ -657,6 +683,7 @@ module Aws::RDSData
     #           </p>
     #   @return [String]
     class ResultSetOptions < Struct.new(
+      nil,
       :decimal_return_type,
       :long_return_type,
       keyword_init: true
@@ -676,6 +703,7 @@ module Aws::RDSData
     #   <p>The identifier of the transaction to roll back.</p>
     #   @return [String]
     class RollbackTransactionInput < Struct.new(
+      nil,
       :resource_arn,
       :secret_arn,
       :transaction_id,
@@ -690,6 +718,7 @@ module Aws::RDSData
     #   <p>The status of the rollback operation.</p>
     #   @return [String]
     class RollbackTransactionOutput < Struct.new(
+      nil,
       :transaction_status,
       keyword_init: true
     )
@@ -711,6 +740,7 @@ module Aws::RDSData
     # @!attribute message
     #   @return [String]
     class SecretsErrorException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -720,6 +750,7 @@ module Aws::RDSData
     # <p>The service specified by the <code>resourceArn</code> parameter isn't
     #             available.</p>
     class ServiceUnavailableError < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -770,6 +801,7 @@ module Aws::RDSData
     #            </ul>
     #   @return [String]
     class SqlParameter < Struct.new(
+      nil,
       :name,
       :value,
       :type_hint,
@@ -790,6 +822,7 @@ module Aws::RDSData
     #   <p>The number of records updated by a SQL statement.</p>
     #   @return [Integer]
     class SqlStatementResult < Struct.new(
+      nil,
       :result_frame,
       :number_of_records_updated,
       keyword_init: true
@@ -810,6 +843,7 @@ module Aws::RDSData
     #   <p>The database connection ID that executed the SQL statement.</p>
     #   @return [Integer]
     class StatementTimeoutException < Struct.new(
+      nil,
       :message,
       :db_connection_id,
       keyword_init: true
@@ -831,6 +865,7 @@ module Aws::RDSData
     #   <p>The attributes returned in the record.</p>
     #   @return [Array<Types::Value>]
     class StructValue < Struct.new(
+      nil,
       :attributes,
       keyword_init: true
     )
@@ -841,6 +876,7 @@ module Aws::RDSData
     # @!attribute message
     #   @return [String]
     class TransactionNotFoundException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -862,6 +898,7 @@ module Aws::RDSData
     # @!attribute message
     #   @return [String]
     class UnsupportedResultException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -873,6 +910,7 @@ module Aws::RDSData
     #   <p>Values for fields generated during the request.</p>
     #   @return [Array<Types::Field>]
     class UpdateResult < Struct.new(
+      nil,
       :generated_fields,
       keyword_init: true
     )

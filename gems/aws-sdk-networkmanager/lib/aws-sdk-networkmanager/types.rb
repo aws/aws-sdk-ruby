@@ -15,6 +15,7 @@ module Aws::NetworkManager
     #   <p>The Amazon Resource Name (ARN) of the subnet that the device is located in.</p>
     #   @return [String]
     class AWSLocation < Struct.new(
+      nil,
       :zone,
       :subnet_arn,
       keyword_init: true
@@ -26,6 +27,7 @@ module Aws::NetworkManager
     #   <p>The ID of the attachment. </p>
     #   @return [String]
     class AcceptAttachmentRequest < Struct.new(
+      nil,
       :attachment_id,
       keyword_init: true
     )
@@ -36,6 +38,7 @@ module Aws::NetworkManager
     #   <p>The response to the attachment request. </p>
     #   @return [Types::Attachment]
     class AcceptAttachmentResponse < Struct.new(
+      nil,
       :attachment,
       keyword_init: true
     )
@@ -46,6 +49,7 @@ module Aws::NetworkManager
     # @!attribute message
     #   @return [String]
     class AccessDeniedException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -60,6 +64,7 @@ module Aws::NetworkManager
     #   <p>The status of SLR deployment for the account.</p>
     #   @return [String]
     class AccountStatus < Struct.new(
+      nil,
       :account_id,
       :slr_deployment_status,
       keyword_init: true
@@ -80,6 +85,7 @@ module Aws::NetworkManager
     #   <p>The ID of the link.</p>
     #   @return [String]
     class AssociateConnectPeerRequest < Struct.new(
+      nil,
       :global_network_id,
       :connect_peer_id,
       :device_id,
@@ -93,6 +99,7 @@ module Aws::NetworkManager
     #   <p>The response to the Connect peer request.</p>
     #   @return [Types::ConnectPeerAssociation]
     class AssociateConnectPeerResponse < Struct.new(
+      nil,
       :connect_peer_association,
       keyword_init: true
     )
@@ -112,6 +119,7 @@ module Aws::NetworkManager
     #   <p>The ID of the link.</p>
     #   @return [String]
     class AssociateCustomerGatewayRequest < Struct.new(
+      nil,
       :customer_gateway_arn,
       :global_network_id,
       :device_id,
@@ -125,6 +133,7 @@ module Aws::NetworkManager
     #   <p>The customer gateway association.</p>
     #   @return [Types::CustomerGatewayAssociation]
     class AssociateCustomerGatewayResponse < Struct.new(
+      nil,
       :customer_gateway_association,
       keyword_init: true
     )
@@ -141,6 +150,7 @@ module Aws::NetworkManager
     #   <p>The ID of the link.</p>
     #   @return [String]
     class AssociateLinkRequest < Struct.new(
+      nil,
       :global_network_id,
       :device_id,
       :link_id,
@@ -153,6 +163,7 @@ module Aws::NetworkManager
     #   <p>The link association.</p>
     #   @return [Types::LinkAssociation]
     class AssociateLinkResponse < Struct.new(
+      nil,
       :link_association,
       keyword_init: true
     )
@@ -172,6 +183,7 @@ module Aws::NetworkManager
     #   <p>The ID of the link.</p>
     #   @return [String]
     class AssociateTransitGatewayConnectPeerRequest < Struct.new(
+      nil,
       :global_network_id,
       :transit_gateway_connect_peer_arn,
       :device_id,
@@ -185,6 +197,7 @@ module Aws::NetworkManager
     #   <p>The transit gateway Connect peer association.</p>
     #   @return [Types::TransitGatewayConnectPeerAssociation]
     class AssociateTransitGatewayConnectPeerResponse < Struct.new(
+      nil,
       :transit_gateway_connect_peer_association,
       keyword_init: true
     )
@@ -247,6 +260,7 @@ module Aws::NetworkManager
     #   <p>Describes the error associated with the attachment request.</p>
     #   @return [Array<Types::AttachmentError>]
     class Attachment < Struct.new(
+      nil,
       :core_network_id,
       :core_network_arn,
       :attachment_id,
@@ -284,6 +298,7 @@ module Aws::NetworkManager
     #   <p>The ID of the attachment request.</p>
     #   @return [String]
     class AttachmentError < Struct.new(
+      nil,
       :code,
       :message,
       :resource_arn,
@@ -301,6 +316,7 @@ module Aws::NetworkManager
     #   <p>Download speed in Mbps.</p>
     #   @return [Integer]
     class Bandwidth < Struct.new(
+      nil,
       :upload_speed,
       :download_speed,
       keyword_init: true
@@ -313,6 +329,7 @@ module Aws::NetworkManager
     #   <p>The Peer ASN of the BGP.</p>
     #   @return [Integer]
     class BgpOptions < Struct.new(
+      nil,
       :peer_asn,
       keyword_init: true
     )
@@ -330,6 +347,7 @@ module Aws::NetworkManager
     #   <p>The resource type.</p>
     #   @return [String]
     class ConflictException < Struct.new(
+      nil,
       :message,
       :resource_id,
       :resource_type,
@@ -349,6 +367,7 @@ module Aws::NetworkManager
     #   <p>Options for connecting an attachment.</p>
     #   @return [Types::ConnectAttachmentOptions]
     class ConnectAttachment < Struct.new(
+      nil,
       :attachment,
       :transport_attachment_id,
       :options,
@@ -362,6 +381,7 @@ module Aws::NetworkManager
     #   <p>The protocol used for the attachment connection.</p>
     #   @return [String]
     class ConnectAttachmentOptions < Struct.new(
+      nil,
       :protocol,
       keyword_init: true
     )
@@ -400,6 +420,7 @@ module Aws::NetworkManager
     #   <p>Describes the error associated with the attachment request.</p>
     #   @return [Array<Types::ConnectPeerError>]
     class ConnectPeer < Struct.new(
+      nil,
       :core_network_id,
       :connect_attachment_id,
       :connect_peer_id,
@@ -432,6 +453,7 @@ module Aws::NetworkManager
     #   <p>The state of the Connect peer association.</p>
     #   @return [String]
     class ConnectPeerAssociation < Struct.new(
+      nil,
       :connect_peer_id,
       :global_network_id,
       :device_id,
@@ -456,6 +478,7 @@ module Aws::NetworkManager
     #   <p>The address of a core network Connect peer.</p>
     #   @return [String]
     class ConnectPeerBgpConfiguration < Struct.new(
+      nil,
       :core_network_asn,
       :peer_asn,
       :core_network_address,
@@ -482,6 +505,7 @@ module Aws::NetworkManager
     #   <p>The Connect peer BGP configurations.</p>
     #   @return [Array<Types::ConnectPeerBgpConfiguration>]
     class ConnectPeerConfiguration < Struct.new(
+      nil,
       :core_network_address,
       :peer_address,
       :inside_cidr_blocks,
@@ -506,6 +530,7 @@ module Aws::NetworkManager
     #   <p>The ID of the Connect peer request.</p>
     #   @return [String]
     class ConnectPeerError < Struct.new(
+      nil,
       :code,
       :message,
       :resource_arn,
@@ -541,6 +566,7 @@ module Aws::NetworkManager
     #   <p>The subnet ARN for the Connect peer summary.</p>
     #   @return [String]
     class ConnectPeerSummary < Struct.new(
+      nil,
       :core_network_id,
       :connect_attachment_id,
       :connect_peer_id,
@@ -589,6 +615,7 @@ module Aws::NetworkManager
     #   <p>The tags for the connection.</p>
     #   @return [Array<Types::Tag>]
     class Connection < Struct.new(
+      nil,
       :connection_id,
       :connection_arn,
       :global_network_id,
@@ -616,6 +643,7 @@ module Aws::NetworkManager
     #   <p>The time the status was last updated.</p>
     #   @return [Time]
     class ConnectionHealth < Struct.new(
+      nil,
       :type,
       :status,
       :timestamp,
@@ -656,6 +684,7 @@ module Aws::NetworkManager
     #   <p>The list of key-value tags associated with a core network.</p>
     #   @return [Array<Types::Tag>]
     class CoreNetwork < Struct.new(
+      nil,
       :global_network_id,
       :core_network_id,
       :core_network_arn,
@@ -691,6 +720,7 @@ module Aws::NetworkManager
     #   <p>Uniquely identifies the path for a change within the changeset. For example, the <code>IdentifierPath</code> for a core network segment change might be <code>"CORE_NETWORK_SEGMENT/us-east-1/devsegment"</code>.</p>
     #   @return [String]
     class CoreNetworkChange < Struct.new(
+      nil,
       :type,
       :action,
       :identifier,
@@ -722,6 +752,7 @@ module Aws::NetworkManager
     #   <p>Details of the change event.</p>
     #   @return [Types::CoreNetworkChangeEventValues]
     class CoreNetworkChangeEvent < Struct.new(
+      nil,
       :type,
       :action,
       :identifier_path,
@@ -750,6 +781,7 @@ module Aws::NetworkManager
     #   <p>For a <code>STATIC_ROUTE</code> event, this is the IP address.</p>
     #   @return [String]
     class CoreNetworkChangeEventValues < Struct.new(
+      nil,
       :edge_location,
       :segment_name,
       :network_function_group_name,
@@ -798,6 +830,7 @@ module Aws::NetworkManager
     #   <p>Indicates whether security group referencing is enabled for the core network.</p>
     #   @return [Boolean]
     class CoreNetworkChangeValues < Struct.new(
+      nil,
       :segment_name,
       :network_function_group_name,
       :edge_locations,
@@ -833,6 +866,7 @@ module Aws::NetworkManager
     #   <p>The inside IP addresses used for core network edges.</p>
     #   @return [Array<String>]
     class CoreNetworkEdge < Struct.new(
+      nil,
       :edge_location,
       :asn,
       :inside_cidr_blocks,
@@ -852,6 +886,7 @@ module Aws::NetworkManager
     #   <p>The segments associated with the network function group.</p>
     #   @return [Types::ServiceInsertionSegments]
     class CoreNetworkNetworkFunctionGroup < Struct.new(
+      nil,
       :name,
       :edge_locations,
       :segments,
@@ -871,6 +906,7 @@ module Aws::NetworkManager
     #   <p>The location for the core network edge.</p>
     #   @return [String]
     class CoreNetworkNetworkFunctionGroupIdentifier < Struct.new(
+      nil,
       :core_network_id,
       :network_function_group_name,
       :edge_location,
@@ -905,6 +941,7 @@ module Aws::NetworkManager
     #   <p>Describes a core network policy.</p>
     #   @return [String]
     class CoreNetworkPolicy < Struct.new(
+      nil,
       :core_network_id,
       :policy_version_id,
       :alias,
@@ -929,6 +966,7 @@ module Aws::NetworkManager
     #   <p>The JSON path where the error was discovered in the policy document.</p>
     #   @return [String]
     class CoreNetworkPolicyError < Struct.new(
+      nil,
       :error_code,
       :message,
       :path,
@@ -944,6 +982,7 @@ module Aws::NetworkManager
     #   <p>Describes a core network policy exception.</p>
     #   @return [Array<Types::CoreNetworkPolicyError>]
     class CoreNetworkPolicyException < Struct.new(
+      nil,
       :message,
       :errors,
       keyword_init: true
@@ -971,6 +1010,7 @@ module Aws::NetworkManager
     #   <p>The status of the policy version change set.</p>
     #   @return [String]
     class CoreNetworkPolicyVersion < Struct.new(
+      nil,
       :core_network_id,
       :policy_version_id,
       :alias,
@@ -993,6 +1033,7 @@ module Aws::NetworkManager
     #   <p>The shared segments of a core network.</p>
     #   @return [Array<String>]
     class CoreNetworkSegment < Struct.new(
+      nil,
       :name,
       :edge_locations,
       :shared_segments,
@@ -1012,6 +1053,7 @@ module Aws::NetworkManager
     #   <p>The Region where the segment edge is located.</p>
     #   @return [String]
     class CoreNetworkSegmentEdgeIdentifier < Struct.new(
+      nil,
       :core_network_id,
       :segment_name,
       :edge_location,
@@ -1043,6 +1085,7 @@ module Aws::NetworkManager
     #   <p>The key-value tags associated with a core network summary.</p>
     #   @return [Array<Types::Tag>]
     class CoreNetworkSummary < Struct.new(
+      nil,
       :core_network_id,
       :core_network_arn,
       :global_network_id,
@@ -1074,6 +1117,7 @@ module Aws::NetworkManager
     #   <p>The client token associated with the request.</p>
     #   @return [String]
     class CreateConnectAttachmentRequest < Struct.new(
+      nil,
       :core_network_id,
       :edge_location,
       :transport_attachment_id,
@@ -1089,6 +1133,7 @@ module Aws::NetworkManager
     #   <p>The response to a Connect attachment request.</p>
     #   @return [Types::ConnectAttachment]
     class CreateConnectAttachmentResponse < Struct.new(
+      nil,
       :connect_attachment,
       keyword_init: true
     )
@@ -1120,6 +1165,7 @@ module Aws::NetworkManager
     #   <p>The subnet ARN for the Connect peer. This only applies only when the protocol is NO_ENCAP.</p>
     #   @return [String]
     class CreateConnectPeerRequest < Struct.new(
+      nil,
       :connect_attachment_id,
       :core_network_address,
       :peer_address,
@@ -1137,6 +1183,7 @@ module Aws::NetworkManager
     #   <p>The response to the request.</p>
     #   @return [Types::ConnectPeer]
     class CreateConnectPeerResponse < Struct.new(
+      nil,
       :connect_peer,
       keyword_init: true
     )
@@ -1166,6 +1213,7 @@ module Aws::NetworkManager
     #   <p>The tags to apply to the resource during creation.</p>
     #   @return [Array<Types::Tag>]
     class CreateConnectionRequest < Struct.new(
+      nil,
       :global_network_id,
       :device_id,
       :connected_device_id,
@@ -1182,6 +1230,7 @@ module Aws::NetworkManager
     #   <p>Information about the connection.</p>
     #   @return [Types::Connection]
     class CreateConnectionResponse < Struct.new(
+      nil,
       :connection,
       keyword_init: true
     )
@@ -1204,6 +1253,7 @@ module Aws::NetworkManager
     #   <p>The client token associated with a core network request.</p>
     #   @return [String]
     class CreateCoreNetworkRequest < Struct.new(
+      nil,
       :global_network_id,
       :description,
       :tags,
@@ -1218,6 +1268,7 @@ module Aws::NetworkManager
     #   <p>Returns details about a core network.</p>
     #   @return [Types::CoreNetwork]
     class CreateCoreNetworkResponse < Struct.new(
+      nil,
       :core_network,
       keyword_init: true
     )
@@ -1259,6 +1310,7 @@ module Aws::NetworkManager
     #   <p>The tags to apply to the resource during creation.</p>
     #   @return [Array<Types::Tag>]
     class CreateDeviceRequest < Struct.new(
+      nil,
       :global_network_id,
       :aws_location,
       :description,
@@ -1278,6 +1330,7 @@ module Aws::NetworkManager
     #   <p>Information about the device.</p>
     #   @return [Types::Device]
     class CreateDeviceResponse < Struct.new(
+      nil,
       :device,
       keyword_init: true
     )
@@ -1300,6 +1353,7 @@ module Aws::NetworkManager
     #   <p>client token</p>
     #   @return [String]
     class CreateDirectConnectGatewayAttachmentRequest < Struct.new(
+      nil,
       :core_network_id,
       :direct_connect_gateway_arn,
       :edge_locations,
@@ -1314,6 +1368,7 @@ module Aws::NetworkManager
     #   <p>Describes the details of a <code>CreateDirectConnectGatewayAttachment</code> request.</p>
     #   @return [Types::DirectConnectGatewayAttachment]
     class CreateDirectConnectGatewayAttachmentResponse < Struct.new(
+      nil,
       :direct_connect_gateway_attachment,
       keyword_init: true
     )
@@ -1328,6 +1383,7 @@ module Aws::NetworkManager
     #   <p>The tags to apply to the resource during creation.</p>
     #   @return [Array<Types::Tag>]
     class CreateGlobalNetworkRequest < Struct.new(
+      nil,
       :description,
       :tags,
       keyword_init: true
@@ -1339,6 +1395,7 @@ module Aws::NetworkManager
     #   <p>Information about the global network object.</p>
     #   @return [Types::GlobalNetwork]
     class CreateGlobalNetworkResponse < Struct.new(
+      nil,
       :global_network,
       keyword_init: true
     )
@@ -1370,6 +1427,7 @@ module Aws::NetworkManager
     #   <p>The tags to apply to the resource during creation.</p>
     #   @return [Array<Types::Tag>]
     class CreateLinkRequest < Struct.new(
+      nil,
       :global_network_id,
       :description,
       :type,
@@ -1386,6 +1444,7 @@ module Aws::NetworkManager
     #   <p>Information about the link.</p>
     #   @return [Types::Link]
     class CreateLinkResponse < Struct.new(
+      nil,
       :link,
       keyword_init: true
     )
@@ -1420,6 +1479,7 @@ module Aws::NetworkManager
     #   <p>The tags to apply to the resource during creation.</p>
     #   @return [Array<Types::Tag>]
     class CreateSiteRequest < Struct.new(
+      nil,
       :global_network_id,
       :description,
       :location,
@@ -1433,6 +1493,7 @@ module Aws::NetworkManager
     #   <p>Information about the site.</p>
     #   @return [Types::Site]
     class CreateSiteResponse < Struct.new(
+      nil,
       :site,
       keyword_init: true
     )
@@ -1452,6 +1513,7 @@ module Aws::NetworkManager
     #   <p>The client token associated with the request.</p>
     #   @return [String]
     class CreateSiteToSiteVpnAttachmentRequest < Struct.new(
+      nil,
       :core_network_id,
       :vpn_connection_arn,
       :tags,
@@ -1465,6 +1527,7 @@ module Aws::NetworkManager
     #   <p>Details about a site-to-site VPN attachment.</p>
     #   @return [Types::SiteToSiteVpnAttachment]
     class CreateSiteToSiteVpnAttachmentResponse < Struct.new(
+      nil,
       :site_to_site_vpn_attachment,
       keyword_init: true
     )
@@ -1484,6 +1547,7 @@ module Aws::NetworkManager
     #   <p>The client token associated with the request.</p>
     #   @return [String]
     class CreateTransitGatewayPeeringRequest < Struct.new(
+      nil,
       :core_network_id,
       :transit_gateway_arn,
       :tags,
@@ -1497,6 +1561,7 @@ module Aws::NetworkManager
     #   <p>Returns information about the transit gateway peering connection request.</p>
     #   @return [Types::TransitGatewayPeering]
     class CreateTransitGatewayPeeringResponse < Struct.new(
+      nil,
       :transit_gateway_peering,
       keyword_init: true
     )
@@ -1516,6 +1581,7 @@ module Aws::NetworkManager
     #   <p>The client token associated with the request.</p>
     #   @return [String]
     class CreateTransitGatewayRouteTableAttachmentRequest < Struct.new(
+      nil,
       :peering_id,
       :transit_gateway_route_table_arn,
       :tags,
@@ -1529,6 +1595,7 @@ module Aws::NetworkManager
     #   <p>The route table associated with the create transit gateway route table attachment request.</p>
     #   @return [Types::TransitGatewayRouteTableAttachment]
     class CreateTransitGatewayRouteTableAttachmentResponse < Struct.new(
+      nil,
       :transit_gateway_route_table_attachment,
       keyword_init: true
     )
@@ -1554,6 +1621,7 @@ module Aws::NetworkManager
     #   <p>The client token associated with the request.</p>
     #   @return [String]
     class CreateVpcAttachmentRequest < Struct.new(
+      nil,
       :core_network_id,
       :vpc_arn,
       :subnet_arns,
@@ -1569,6 +1637,7 @@ module Aws::NetworkManager
     #   <p>Provides details about the VPC attachment.</p>
     #   @return [Types::VpcAttachment]
     class CreateVpcAttachmentResponse < Struct.new(
+      nil,
       :vpc_attachment,
       keyword_init: true
     )
@@ -1592,6 +1661,7 @@ module Aws::NetworkManager
     #   <p>The association state.</p>
     #   @return [String]
     class CustomerGatewayAssociation < Struct.new(
+      nil,
       :customer_gateway_arn,
       :global_network_id,
       :device_id,
@@ -1606,6 +1676,7 @@ module Aws::NetworkManager
     #   <p>The ID of the attachment to delete.</p>
     #   @return [String]
     class DeleteAttachmentRequest < Struct.new(
+      nil,
       :attachment_id,
       keyword_init: true
     )
@@ -1616,6 +1687,7 @@ module Aws::NetworkManager
     #   <p>Information about the deleted attachment.</p>
     #   @return [Types::Attachment]
     class DeleteAttachmentResponse < Struct.new(
+      nil,
       :attachment,
       keyword_init: true
     )
@@ -1626,6 +1698,7 @@ module Aws::NetworkManager
     #   <p>The ID of the deleted Connect peer.</p>
     #   @return [String]
     class DeleteConnectPeerRequest < Struct.new(
+      nil,
       :connect_peer_id,
       keyword_init: true
     )
@@ -1636,6 +1709,7 @@ module Aws::NetworkManager
     #   <p>Information about the deleted Connect peer.</p>
     #   @return [Types::ConnectPeer]
     class DeleteConnectPeerResponse < Struct.new(
+      nil,
       :connect_peer,
       keyword_init: true
     )
@@ -1649,6 +1723,7 @@ module Aws::NetworkManager
     #   <p>The ID of the connection.</p>
     #   @return [String]
     class DeleteConnectionRequest < Struct.new(
+      nil,
       :global_network_id,
       :connection_id,
       keyword_init: true
@@ -1660,6 +1735,7 @@ module Aws::NetworkManager
     #   <p>Information about the connection.</p>
     #   @return [Types::Connection]
     class DeleteConnectionResponse < Struct.new(
+      nil,
       :connection,
       keyword_init: true
     )
@@ -1673,6 +1749,7 @@ module Aws::NetworkManager
     #   <p>The version ID of the deleted policy.</p>
     #   @return [Integer]
     class DeleteCoreNetworkPolicyVersionRequest < Struct.new(
+      nil,
       :core_network_id,
       :policy_version_id,
       keyword_init: true
@@ -1684,6 +1761,7 @@ module Aws::NetworkManager
     #   <p>Returns information about the deleted policy version. </p>
     #   @return [Types::CoreNetworkPolicy]
     class DeleteCoreNetworkPolicyVersionResponse < Struct.new(
+      nil,
       :core_network_policy,
       keyword_init: true
     )
@@ -1694,6 +1772,7 @@ module Aws::NetworkManager
     #   <p>The network ID of the deleted core network.</p>
     #   @return [String]
     class DeleteCoreNetworkRequest < Struct.new(
+      nil,
       :core_network_id,
       keyword_init: true
     )
@@ -1704,6 +1783,7 @@ module Aws::NetworkManager
     #   <p>Information about the deleted core network.</p>
     #   @return [Types::CoreNetwork]
     class DeleteCoreNetworkResponse < Struct.new(
+      nil,
       :core_network,
       keyword_init: true
     )
@@ -1717,6 +1797,7 @@ module Aws::NetworkManager
     #   <p>The ID of the device.</p>
     #   @return [String]
     class DeleteDeviceRequest < Struct.new(
+      nil,
       :global_network_id,
       :device_id,
       keyword_init: true
@@ -1728,6 +1809,7 @@ module Aws::NetworkManager
     #   <p>Information about the device.</p>
     #   @return [Types::Device]
     class DeleteDeviceResponse < Struct.new(
+      nil,
       :device,
       keyword_init: true
     )
@@ -1738,6 +1820,7 @@ module Aws::NetworkManager
     #   <p>The ID of the global network.</p>
     #   @return [String]
     class DeleteGlobalNetworkRequest < Struct.new(
+      nil,
       :global_network_id,
       keyword_init: true
     )
@@ -1748,6 +1831,7 @@ module Aws::NetworkManager
     #   <p>Information about the global network.</p>
     #   @return [Types::GlobalNetwork]
     class DeleteGlobalNetworkResponse < Struct.new(
+      nil,
       :global_network,
       keyword_init: true
     )
@@ -1761,6 +1845,7 @@ module Aws::NetworkManager
     #   <p>The ID of the link.</p>
     #   @return [String]
     class DeleteLinkRequest < Struct.new(
+      nil,
       :global_network_id,
       :link_id,
       keyword_init: true
@@ -1772,6 +1857,7 @@ module Aws::NetworkManager
     #   <p>Information about the link.</p>
     #   @return [Types::Link]
     class DeleteLinkResponse < Struct.new(
+      nil,
       :link,
       keyword_init: true
     )
@@ -1782,6 +1868,7 @@ module Aws::NetworkManager
     #   <p>The ID of the peering connection to delete.</p>
     #   @return [String]
     class DeletePeeringRequest < Struct.new(
+      nil,
       :peering_id,
       keyword_init: true
     )
@@ -1792,6 +1879,7 @@ module Aws::NetworkManager
     #   <p>Information about a deleted peering connection.</p>
     #   @return [Types::Peering]
     class DeletePeeringResponse < Struct.new(
+      nil,
       :peering,
       keyword_init: true
     )
@@ -1802,6 +1890,7 @@ module Aws::NetworkManager
     #   <p>The ARN of the policy to delete.</p>
     #   @return [String]
     class DeleteResourcePolicyRequest < Struct.new(
+      nil,
       :resource_arn,
       keyword_init: true
     )
@@ -1809,6 +1898,7 @@ module Aws::NetworkManager
     end
 
     class DeleteResourcePolicyResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1821,6 +1911,7 @@ module Aws::NetworkManager
     #   <p>The ID of the site.</p>
     #   @return [String]
     class DeleteSiteRequest < Struct.new(
+      nil,
       :global_network_id,
       :site_id,
       keyword_init: true
@@ -1832,6 +1923,7 @@ module Aws::NetworkManager
     #   <p>Information about the site.</p>
     #   @return [Types::Site]
     class DeleteSiteResponse < Struct.new(
+      nil,
       :site,
       keyword_init: true
     )
@@ -1845,6 +1937,7 @@ module Aws::NetworkManager
     #   <p>The Amazon Resource Name (ARN) of the transit gateway.</p>
     #   @return [String]
     class DeregisterTransitGatewayRequest < Struct.new(
+      nil,
       :global_network_id,
       :transit_gateway_arn,
       keyword_init: true
@@ -1856,6 +1949,7 @@ module Aws::NetworkManager
     #   <p>The transit gateway registration information.</p>
     #   @return [Types::TransitGatewayRegistration]
     class DeregisterTransitGatewayResponse < Struct.new(
+      nil,
       :transit_gateway_registration,
       keyword_init: true
     )
@@ -1872,6 +1966,7 @@ module Aws::NetworkManager
     #   <p>The token for the next page of results.</p>
     #   @return [String]
     class DescribeGlobalNetworksRequest < Struct.new(
+      nil,
       :global_network_ids,
       :max_results,
       :next_token,
@@ -1887,6 +1982,7 @@ module Aws::NetworkManager
     #   <p>The token for the next page of results.</p>
     #   @return [String]
     class DescribeGlobalNetworksResponse < Struct.new(
+      nil,
       :global_networks,
       :next_token,
       keyword_init: true
@@ -1938,6 +2034,7 @@ module Aws::NetworkManager
     #   <p>The tags for the device.</p>
     #   @return [Array<Types::Tag>]
     class Device < Struct.new(
+      nil,
       :device_id,
       :device_arn,
       :global_network_id,
@@ -1965,6 +2062,7 @@ module Aws::NetworkManager
     #   <p>The Direct Connect gateway attachment ARN.</p>
     #   @return [String]
     class DirectConnectGatewayAttachment < Struct.new(
+      nil,
       :attachment,
       :direct_connect_gateway_arn,
       keyword_init: true
@@ -1979,6 +2077,7 @@ module Aws::NetworkManager
     #   <p>The ID of the Connect peer to disassociate from a device.</p>
     #   @return [String]
     class DisassociateConnectPeerRequest < Struct.new(
+      nil,
       :global_network_id,
       :connect_peer_id,
       keyword_init: true
@@ -1990,6 +2089,7 @@ module Aws::NetworkManager
     #   <p>Describes the Connect peer association.</p>
     #   @return [Types::ConnectPeerAssociation]
     class DisassociateConnectPeerResponse < Struct.new(
+      nil,
       :connect_peer_association,
       keyword_init: true
     )
@@ -2003,6 +2103,7 @@ module Aws::NetworkManager
     #   <p>The Amazon Resource Name (ARN) of the customer gateway.</p>
     #   @return [String]
     class DisassociateCustomerGatewayRequest < Struct.new(
+      nil,
       :global_network_id,
       :customer_gateway_arn,
       keyword_init: true
@@ -2014,6 +2115,7 @@ module Aws::NetworkManager
     #   <p>Information about the customer gateway association.</p>
     #   @return [Types::CustomerGatewayAssociation]
     class DisassociateCustomerGatewayResponse < Struct.new(
+      nil,
       :customer_gateway_association,
       keyword_init: true
     )
@@ -2030,6 +2132,7 @@ module Aws::NetworkManager
     #   <p>The ID of the link.</p>
     #   @return [String]
     class DisassociateLinkRequest < Struct.new(
+      nil,
       :global_network_id,
       :device_id,
       :link_id,
@@ -2042,6 +2145,7 @@ module Aws::NetworkManager
     #   <p>Information about the link association.</p>
     #   @return [Types::LinkAssociation]
     class DisassociateLinkResponse < Struct.new(
+      nil,
       :link_association,
       keyword_init: true
     )
@@ -2055,6 +2159,7 @@ module Aws::NetworkManager
     #   <p>The Amazon Resource Name (ARN) of the transit gateway Connect peer.</p>
     #   @return [String]
     class DisassociateTransitGatewayConnectPeerRequest < Struct.new(
+      nil,
       :global_network_id,
       :transit_gateway_connect_peer_arn,
       keyword_init: true
@@ -2066,6 +2171,7 @@ module Aws::NetworkManager
     #   <p>The transit gateway Connect peer association.</p>
     #   @return [Types::TransitGatewayConnectPeerAssociation]
     class DisassociateTransitGatewayConnectPeerResponse < Struct.new(
+      nil,
       :transit_gateway_connect_peer_association,
       keyword_init: true
     )
@@ -2080,6 +2186,7 @@ module Aws::NetworkManager
     #   <p>The edge that should be used when overriding the current edge order.</p>
     #   @return [String]
     class EdgeOverride < Struct.new(
+      nil,
       :edge_sets,
       :use_edge,
       keyword_init: true
@@ -2094,6 +2201,7 @@ module Aws::NetworkManager
     #   <p>The ID of the policy version.</p>
     #   @return [Integer]
     class ExecuteCoreNetworkChangeSetRequest < Struct.new(
+      nil,
       :core_network_id,
       :policy_version_id,
       keyword_init: true
@@ -2102,6 +2210,7 @@ module Aws::NetworkManager
     end
 
     class ExecuteCoreNetworkChangeSetResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -2111,6 +2220,7 @@ module Aws::NetworkManager
     #   <p>The ID of the attachment.</p>
     #   @return [String]
     class GetConnectAttachmentRequest < Struct.new(
+      nil,
       :attachment_id,
       keyword_init: true
     )
@@ -2121,6 +2231,7 @@ module Aws::NetworkManager
     #   <p>Details about the Connect attachment.</p>
     #   @return [Types::ConnectAttachment]
     class GetConnectAttachmentResponse < Struct.new(
+      nil,
       :connect_attachment,
       keyword_init: true
     )
@@ -2140,6 +2251,7 @@ module Aws::NetworkManager
     #   <p>The token for the next page of results.</p>
     #   @return [String]
     class GetConnectPeerAssociationsRequest < Struct.new(
+      nil,
       :global_network_id,
       :connect_peer_ids,
       :max_results,
@@ -2156,6 +2268,7 @@ module Aws::NetworkManager
     #   <p>The token for the next page of results.</p>
     #   @return [String]
     class GetConnectPeerAssociationsResponse < Struct.new(
+      nil,
       :connect_peer_associations,
       :next_token,
       keyword_init: true
@@ -2167,6 +2280,7 @@ module Aws::NetworkManager
     #   <p>The ID of the Connect peer.</p>
     #   @return [String]
     class GetConnectPeerRequest < Struct.new(
+      nil,
       :connect_peer_id,
       keyword_init: true
     )
@@ -2177,6 +2291,7 @@ module Aws::NetworkManager
     #   <p>Returns information about a core network Connect peer.</p>
     #   @return [Types::ConnectPeer]
     class GetConnectPeerResponse < Struct.new(
+      nil,
       :connect_peer,
       keyword_init: true
     )
@@ -2199,6 +2314,7 @@ module Aws::NetworkManager
     #   <p>The token for the next page of results.</p>
     #   @return [String]
     class GetConnectionsRequest < Struct.new(
+      nil,
       :global_network_id,
       :connection_ids,
       :device_id,
@@ -2216,6 +2332,7 @@ module Aws::NetworkManager
     #   <p>The token to use for the next page of results.</p>
     #   @return [String]
     class GetConnectionsResponse < Struct.new(
+      nil,
       :connections,
       :next_token,
       keyword_init: true
@@ -2236,6 +2353,7 @@ module Aws::NetworkManager
     #   <p>The token for the next page of results.</p>
     #   @return [String]
     class GetCoreNetworkChangeEventsRequest < Struct.new(
+      nil,
       :core_network_id,
       :policy_version_id,
       :max_results,
@@ -2252,6 +2370,7 @@ module Aws::NetworkManager
     #   <p>The token for the next page of results.</p>
     #   @return [String]
     class GetCoreNetworkChangeEventsResponse < Struct.new(
+      nil,
       :core_network_change_events,
       :next_token,
       keyword_init: true
@@ -2272,6 +2391,7 @@ module Aws::NetworkManager
     #   <p>The token for the next page of results.</p>
     #   @return [String]
     class GetCoreNetworkChangeSetRequest < Struct.new(
+      nil,
       :core_network_id,
       :policy_version_id,
       :max_results,
@@ -2288,6 +2408,7 @@ module Aws::NetworkManager
     #   <p>The token for the next page of results.</p>
     #   @return [String]
     class GetCoreNetworkChangeSetResponse < Struct.new(
+      nil,
       :core_network_changes,
       :next_token,
       keyword_init: true
@@ -2305,6 +2426,7 @@ module Aws::NetworkManager
     #   <p>The alias of a core network policy </p>
     #   @return [String]
     class GetCoreNetworkPolicyRequest < Struct.new(
+      nil,
       :core_network_id,
       :policy_version_id,
       :alias,
@@ -2317,6 +2439,7 @@ module Aws::NetworkManager
     #   <p>The details about a core network policy.</p>
     #   @return [Types::CoreNetworkPolicy]
     class GetCoreNetworkPolicyResponse < Struct.new(
+      nil,
       :core_network_policy,
       keyword_init: true
     )
@@ -2327,6 +2450,7 @@ module Aws::NetworkManager
     #   <p>The ID of a core network.</p>
     #   @return [String]
     class GetCoreNetworkRequest < Struct.new(
+      nil,
       :core_network_id,
       keyword_init: true
     )
@@ -2337,6 +2461,7 @@ module Aws::NetworkManager
     #   <p>Details about a core network.</p>
     #   @return [Types::CoreNetwork]
     class GetCoreNetworkResponse < Struct.new(
+      nil,
       :core_network,
       keyword_init: true
     )
@@ -2356,6 +2481,7 @@ module Aws::NetworkManager
     #   <p>The token for the next page of results.</p>
     #   @return [String]
     class GetCustomerGatewayAssociationsRequest < Struct.new(
+      nil,
       :global_network_id,
       :customer_gateway_arns,
       :max_results,
@@ -2372,6 +2498,7 @@ module Aws::NetworkManager
     #   <p>The token for the next page of results.</p>
     #   @return [String]
     class GetCustomerGatewayAssociationsResponse < Struct.new(
+      nil,
       :customer_gateway_associations,
       :next_token,
       keyword_init: true
@@ -2395,6 +2522,7 @@ module Aws::NetworkManager
     #   <p>The token for the next page of results.</p>
     #   @return [String]
     class GetDevicesRequest < Struct.new(
+      nil,
       :global_network_id,
       :device_ids,
       :site_id,
@@ -2412,6 +2540,7 @@ module Aws::NetworkManager
     #   <p>The token for the next page of results.</p>
     #   @return [String]
     class GetDevicesResponse < Struct.new(
+      nil,
       :devices,
       :next_token,
       keyword_init: true
@@ -2423,6 +2552,7 @@ module Aws::NetworkManager
     #   <p>The ID of the Direct Connect gateway attachment that you want to see details about.</p>
     #   @return [String]
     class GetDirectConnectGatewayAttachmentRequest < Struct.new(
+      nil,
       :attachment_id,
       keyword_init: true
     )
@@ -2433,6 +2563,7 @@ module Aws::NetworkManager
     #   <p>Shows details about the Direct Connect gateway attachment. </p>
     #   @return [Types::DirectConnectGatewayAttachment]
     class GetDirectConnectGatewayAttachmentResponse < Struct.new(
+      nil,
       :direct_connect_gateway_attachment,
       keyword_init: true
     )
@@ -2455,6 +2586,7 @@ module Aws::NetworkManager
     #   <p>The token for the next page of results.</p>
     #   @return [String]
     class GetLinkAssociationsRequest < Struct.new(
+      nil,
       :global_network_id,
       :device_id,
       :link_id,
@@ -2472,6 +2604,7 @@ module Aws::NetworkManager
     #   <p>The token for the next page of results.</p>
     #   @return [String]
     class GetLinkAssociationsResponse < Struct.new(
+      nil,
       :link_associations,
       :next_token,
       keyword_init: true
@@ -2501,6 +2634,7 @@ module Aws::NetworkManager
     #   <p>The token for the next page of results.</p>
     #   @return [String]
     class GetLinksRequest < Struct.new(
+      nil,
       :global_network_id,
       :link_ids,
       :site_id,
@@ -2520,6 +2654,7 @@ module Aws::NetworkManager
     #   <p>The token for the next page of results.</p>
     #   @return [String]
     class GetLinksResponse < Struct.new(
+      nil,
       :links,
       :next_token,
       keyword_init: true
@@ -2634,6 +2769,7 @@ module Aws::NetworkManager
     #   <p>The token for the next page of results.</p>
     #   @return [String]
     class GetNetworkResourceCountsRequest < Struct.new(
+      nil,
       :global_network_id,
       :resource_type,
       :max_results,
@@ -2650,6 +2786,7 @@ module Aws::NetworkManager
     #   <p>The token for the next page of results.</p>
     #   @return [String]
     class GetNetworkResourceCountsResponse < Struct.new(
+      nil,
       :network_resource_counts,
       :next_token,
       keyword_init: true
@@ -2779,6 +2916,7 @@ module Aws::NetworkManager
     #   <p>The token for the next page of results.</p>
     #   @return [String]
     class GetNetworkResourceRelationshipsRequest < Struct.new(
+      nil,
       :global_network_id,
       :core_network_id,
       :registered_gateway_arn,
@@ -2800,6 +2938,7 @@ module Aws::NetworkManager
     #   <p>The token for the next page of results.</p>
     #   @return [String]
     class GetNetworkResourceRelationshipsResponse < Struct.new(
+      nil,
       :relationships,
       :next_token,
       keyword_init: true
@@ -2929,6 +3068,7 @@ module Aws::NetworkManager
     #   <p>The token for the next page of results.</p>
     #   @return [String]
     class GetNetworkResourcesRequest < Struct.new(
+      nil,
       :global_network_id,
       :core_network_id,
       :registered_gateway_arn,
@@ -2950,6 +3090,7 @@ module Aws::NetworkManager
     #   <p>The token for the next page of results.</p>
     #   @return [String]
     class GetNetworkResourcesResponse < Struct.new(
+      nil,
       :network_resources,
       :next_token,
       keyword_init: true
@@ -2988,6 +3129,7 @@ module Aws::NetworkManager
     #   <p>Filter by route table destination. Possible Values: TRANSIT_GATEWAY_ATTACHMENT_ID, RESOURCE_ID, or RESOURCE_TYPE.</p>
     #   @return [Hash<String, Array<String>>]
     class GetNetworkRoutesRequest < Struct.new(
+      nil,
       :global_network_id,
       :route_table_identifier,
       :exact_cidr_matches,
@@ -3019,6 +3161,7 @@ module Aws::NetworkManager
     #   <p>The network routes.</p>
     #   @return [Array<Types::NetworkRoute>]
     class GetNetworkRoutesResponse < Struct.new(
+      nil,
       :route_table_arn,
       :core_network_segment_edge,
       :route_table_type,
@@ -3074,6 +3217,7 @@ module Aws::NetworkManager
     #   <p>The token for the next page of results.</p>
     #   @return [String]
     class GetNetworkTelemetryRequest < Struct.new(
+      nil,
       :global_network_id,
       :core_network_id,
       :registered_gateway_arn,
@@ -3095,6 +3239,7 @@ module Aws::NetworkManager
     #   <p>The token for the next page of results.</p>
     #   @return [String]
     class GetNetworkTelemetryResponse < Struct.new(
+      nil,
       :network_telemetry,
       :next_token,
       keyword_init: true
@@ -3106,6 +3251,7 @@ module Aws::NetworkManager
     #   <p>The ARN of the resource.</p>
     #   @return [String]
     class GetResourcePolicyRequest < Struct.new(
+      nil,
       :resource_arn,
       keyword_init: true
     )
@@ -3116,6 +3262,7 @@ module Aws::NetworkManager
     #   <p>The resource policy document.</p>
     #   @return [String]
     class GetResourcePolicyResponse < Struct.new(
+      nil,
       :policy_document,
       keyword_init: true
     )
@@ -3129,6 +3276,7 @@ module Aws::NetworkManager
     #   <p>The ID of the route analysis.</p>
     #   @return [String]
     class GetRouteAnalysisRequest < Struct.new(
+      nil,
       :global_network_id,
       :route_analysis_id,
       keyword_init: true
@@ -3140,6 +3288,7 @@ module Aws::NetworkManager
     #   <p>The route analysis.</p>
     #   @return [Types::RouteAnalysis]
     class GetRouteAnalysisResponse < Struct.new(
+      nil,
       :route_analysis,
       keyword_init: true
     )
@@ -3150,6 +3299,7 @@ module Aws::NetworkManager
     #   <p>The ID of the attachment.</p>
     #   @return [String]
     class GetSiteToSiteVpnAttachmentRequest < Struct.new(
+      nil,
       :attachment_id,
       keyword_init: true
     )
@@ -3160,6 +3310,7 @@ module Aws::NetworkManager
     #   <p>Describes the site-to-site attachment.</p>
     #   @return [Types::SiteToSiteVpnAttachment]
     class GetSiteToSiteVpnAttachmentResponse < Struct.new(
+      nil,
       :site_to_site_vpn_attachment,
       keyword_init: true
     )
@@ -3179,6 +3330,7 @@ module Aws::NetworkManager
     #   <p>The token for the next page of results.</p>
     #   @return [String]
     class GetSitesRequest < Struct.new(
+      nil,
       :global_network_id,
       :site_ids,
       :max_results,
@@ -3195,6 +3347,7 @@ module Aws::NetworkManager
     #   <p>The token for the next page of results.</p>
     #   @return [String]
     class GetSitesResponse < Struct.new(
+      nil,
       :sites,
       :next_token,
       keyword_init: true
@@ -3215,6 +3368,7 @@ module Aws::NetworkManager
     #   <p>The token for the next page of results.</p>
     #   @return [String]
     class GetTransitGatewayConnectPeerAssociationsRequest < Struct.new(
+      nil,
       :global_network_id,
       :transit_gateway_connect_peer_arns,
       :max_results,
@@ -3231,6 +3385,7 @@ module Aws::NetworkManager
     #   <p>The token to use for the next page of results.</p>
     #   @return [String]
     class GetTransitGatewayConnectPeerAssociationsResponse < Struct.new(
+      nil,
       :transit_gateway_connect_peer_associations,
       :next_token,
       keyword_init: true
@@ -3242,6 +3397,7 @@ module Aws::NetworkManager
     #   <p>The ID of the peering request.</p>
     #   @return [String]
     class GetTransitGatewayPeeringRequest < Struct.new(
+      nil,
       :peering_id,
       keyword_init: true
     )
@@ -3252,6 +3408,7 @@ module Aws::NetworkManager
     #   <p>Returns information about a transit gateway peering. </p>
     #   @return [Types::TransitGatewayPeering]
     class GetTransitGatewayPeeringResponse < Struct.new(
+      nil,
       :transit_gateway_peering,
       keyword_init: true
     )
@@ -3272,6 +3429,7 @@ module Aws::NetworkManager
     #   <p>The token for the next page of results.</p>
     #   @return [String]
     class GetTransitGatewayRegistrationsRequest < Struct.new(
+      nil,
       :global_network_id,
       :transit_gateway_arns,
       :max_results,
@@ -3288,6 +3446,7 @@ module Aws::NetworkManager
     #   <p>The token for the next page of results.</p>
     #   @return [String]
     class GetTransitGatewayRegistrationsResponse < Struct.new(
+      nil,
       :transit_gateway_registrations,
       :next_token,
       keyword_init: true
@@ -3299,6 +3458,7 @@ module Aws::NetworkManager
     #   <p>The ID of the transit gateway route table attachment.</p>
     #   @return [String]
     class GetTransitGatewayRouteTableAttachmentRequest < Struct.new(
+      nil,
       :attachment_id,
       keyword_init: true
     )
@@ -3309,6 +3469,7 @@ module Aws::NetworkManager
     #   <p>Returns information about the transit gateway route table attachment.</p>
     #   @return [Types::TransitGatewayRouteTableAttachment]
     class GetTransitGatewayRouteTableAttachmentResponse < Struct.new(
+      nil,
       :transit_gateway_route_table_attachment,
       keyword_init: true
     )
@@ -3319,6 +3480,7 @@ module Aws::NetworkManager
     #   <p>The ID of the attachment.</p>
     #   @return [String]
     class GetVpcAttachmentRequest < Struct.new(
+      nil,
       :attachment_id,
       keyword_init: true
     )
@@ -3329,6 +3491,7 @@ module Aws::NetworkManager
     #   <p>Returns details about a VPC attachment.</p>
     #   @return [Types::VpcAttachment]
     class GetVpcAttachmentResponse < Struct.new(
+      nil,
       :vpc_attachment,
       keyword_init: true
     )
@@ -3355,6 +3518,7 @@ module Aws::NetworkManager
     #   <p>The tags for the global network.</p>
     #   @return [Array<Types::Tag>]
     class GlobalNetwork < Struct.new(
+      nil,
       :global_network_id,
       :global_network_arn,
       :description,
@@ -3373,6 +3537,7 @@ module Aws::NetworkManager
     #   <p>Indicates when to retry the request.</p>
     #   @return [Integer]
     class InternalServerException < Struct.new(
+      nil,
       :message,
       :retry_after_seconds,
       keyword_init: true
@@ -3415,6 +3580,7 @@ module Aws::NetworkManager
     #   <p>The tags for the link.</p>
     #   @return [Array<Types::Tag>]
     class Link < Struct.new(
+      nil,
       :link_id,
       :link_arn,
       :global_network_id,
@@ -3445,6 +3611,7 @@ module Aws::NetworkManager
     #   <p>The state of the association.</p>
     #   @return [String]
     class LinkAssociation < Struct.new(
+      nil,
       :global_network_id,
       :device_id,
       :link_id,
@@ -3473,6 +3640,7 @@ module Aws::NetworkManager
     #   <p>The token for the next page of results.</p>
     #   @return [String]
     class ListAttachmentsRequest < Struct.new(
+      nil,
       :core_network_id,
       :attachment_type,
       :edge_location,
@@ -3491,6 +3659,7 @@ module Aws::NetworkManager
     #   <p>The token for the next page of results.</p>
     #   @return [String]
     class ListAttachmentsResponse < Struct.new(
+      nil,
       :attachments,
       :next_token,
       keyword_init: true
@@ -3511,6 +3680,7 @@ module Aws::NetworkManager
     #   <p>The token for the next page of results.</p>
     #   @return [String]
     class ListConnectPeersRequest < Struct.new(
+      nil,
       :core_network_id,
       :connect_attachment_id,
       :max_results,
@@ -3527,6 +3697,7 @@ module Aws::NetworkManager
     #   <p>The token for the next page of results.</p>
     #   @return [String]
     class ListConnectPeersResponse < Struct.new(
+      nil,
       :connect_peers,
       :next_token,
       keyword_init: true
@@ -3544,6 +3715,7 @@ module Aws::NetworkManager
     #   <p>The token for the next page of results.</p>
     #   @return [String]
     class ListCoreNetworkPolicyVersionsRequest < Struct.new(
+      nil,
       :core_network_id,
       :max_results,
       :next_token,
@@ -3559,6 +3731,7 @@ module Aws::NetworkManager
     #   <p>The token for the next page of results.</p>
     #   @return [String]
     class ListCoreNetworkPolicyVersionsResponse < Struct.new(
+      nil,
       :core_network_policy_versions,
       :next_token,
       keyword_init: true
@@ -3573,6 +3746,7 @@ module Aws::NetworkManager
     #   <p>The token for the next page of results.</p>
     #   @return [String]
     class ListCoreNetworksRequest < Struct.new(
+      nil,
       :max_results,
       :next_token,
       keyword_init: true
@@ -3587,6 +3761,7 @@ module Aws::NetworkManager
     #   <p>The token for the next page of results.</p>
     #   @return [String]
     class ListCoreNetworksResponse < Struct.new(
+      nil,
       :core_networks,
       :next_token,
       keyword_init: true
@@ -3601,6 +3776,7 @@ module Aws::NetworkManager
     #   <p>The token for the next page of results.</p>
     #   @return [String]
     class ListOrganizationServiceAccessStatusRequest < Struct.new(
+      nil,
       :max_results,
       :next_token,
       keyword_init: true
@@ -3615,6 +3791,7 @@ module Aws::NetworkManager
     #   <p>The token for the next page of results.</p>
     #   @return [String]
     class ListOrganizationServiceAccessStatusResponse < Struct.new(
+      nil,
       :organization_status,
       :next_token,
       keyword_init: true
@@ -3641,6 +3818,7 @@ module Aws::NetworkManager
     #   <p>The token for the next page of results.</p>
     #   @return [String]
     class ListPeeringsRequest < Struct.new(
+      nil,
       :core_network_id,
       :peering_type,
       :edge_location,
@@ -3659,6 +3837,7 @@ module Aws::NetworkManager
     #   <p>The token for the next page of results.</p>
     #   @return [String]
     class ListPeeringsResponse < Struct.new(
+      nil,
       :peerings,
       :next_token,
       keyword_init: true
@@ -3670,6 +3849,7 @@ module Aws::NetworkManager
     #   <p>The Amazon Resource Name (ARN) of the resource.</p>
     #   @return [String]
     class ListTagsForResourceRequest < Struct.new(
+      nil,
       :resource_arn,
       keyword_init: true
     )
@@ -3680,6 +3860,7 @@ module Aws::NetworkManager
     #   <p>The list of tags.</p>
     #   @return [Array<Types::Tag>]
     class ListTagsForResourceResponse < Struct.new(
+      nil,
       :tag_list,
       keyword_init: true
     )
@@ -3698,6 +3879,7 @@ module Aws::NetworkManager
     #   <p>The longitude.</p>
     #   @return [String]
     class Location < Struct.new(
+      nil,
       :address,
       :latitude,
       :longitude,
@@ -3711,6 +3893,7 @@ module Aws::NetworkManager
     #   <p>The name of the network function group.</p>
     #   @return [String]
     class NetworkFunctionGroup < Struct.new(
+      nil,
       :name,
       keyword_init: true
     )
@@ -3846,6 +4029,7 @@ module Aws::NetworkManager
     #   <p>The resource metadata.</p>
     #   @return [Hash<String, String>]
     class NetworkResource < Struct.new(
+      nil,
       :registered_gateway_arn,
       :core_network_id,
       :aws_region,
@@ -3870,6 +4054,7 @@ module Aws::NetworkManager
     #   <p>The resource count.</p>
     #   @return [Integer]
     class NetworkResourceCount < Struct.new(
+      nil,
       :resource_type,
       :count,
       keyword_init: true
@@ -3897,6 +4082,7 @@ module Aws::NetworkManager
     #   <p>Indicates whether this is a middlebox appliance.</p>
     #   @return [Boolean]
     class NetworkResourceSummary < Struct.new(
+      nil,
       :registered_gateway_arn,
       :resource_arn,
       :resource_type,
@@ -3930,6 +4116,7 @@ module Aws::NetworkManager
     #   <p>The route type. The possible values are <code>propagated</code> and <code>static</code>.</p>
     #   @return [String]
     class NetworkRoute < Struct.new(
+      nil,
       :destination_cidr_block,
       :destinations,
       :prefix_list_id,
@@ -3963,6 +4150,7 @@ module Aws::NetworkManager
     #   <p>The ID of the resource.</p>
     #   @return [String]
     class NetworkRouteDestination < Struct.new(
+      nil,
       :core_network_attachment_id,
       :transit_gateway_attachment_id,
       :segment_name,
@@ -4004,6 +4192,7 @@ module Aws::NetworkManager
     #   <p>The connection health.</p>
     #   @return [Types::ConnectionHealth]
     class NetworkTelemetry < Struct.new(
+      nil,
       :registered_gateway_arn,
       :core_network_id,
       :aws_region,
@@ -4032,6 +4221,7 @@ module Aws::NetworkManager
     #   <p>The current service-linked role (SLR) deployment status for an Amazon Web Services Organization's accounts. This will be either <code>SUCCEEDED</code> or <code>IN_PROGRESS</code>.</p>
     #   @return [Array<Types::AccountStatus>]
     class OrganizationStatus < Struct.new(
+      nil,
       :organization_id,
       :organization_aws_service_access_status,
       :slr_deployment_status,
@@ -4052,6 +4242,7 @@ module Aws::NetworkManager
     #   <p>The destination CIDR block in the route table.</p>
     #   @return [String]
     class PathComponent < Struct.new(
+      nil,
       :sequence,
       :resource,
       :destination_cidr_block,
@@ -4095,6 +4286,7 @@ module Aws::NetworkManager
     #   <p>Describes the error associated with the Connect peer request.</p>
     #   @return [Array<Types::PeeringError>]
     class Peering < Struct.new(
+      nil,
       :core_network_id,
       :core_network_arn,
       :peering_id,
@@ -4129,6 +4321,7 @@ module Aws::NetworkManager
     #               error.</p>
     #   @return [Types::PermissionsErrorContext]
     class PeeringError < Struct.new(
+      nil,
       :code,
       :message,
       :resource_arn,
@@ -4144,6 +4337,7 @@ module Aws::NetworkManager
     #   <p>The missing permissions.</p>
     #   @return [String]
     class PermissionsErrorContext < Struct.new(
+      nil,
       :missing_permission,
       keyword_init: true
     )
@@ -4161,6 +4355,7 @@ module Aws::NetworkManager
     #   <p>The proposed name change for the network function group name.</p>
     #   @return [String]
     class ProposedNetworkFunctionGroupChange < Struct.new(
+      nil,
       :tags,
       :attachment_policy_rule_number,
       :network_function_group_name,
@@ -4180,6 +4375,7 @@ module Aws::NetworkManager
     #   <p>The name of the segment to change.</p>
     #   @return [String]
     class ProposedSegmentChange < Struct.new(
+      nil,
       :tags,
       :attachment_policy_rule_number,
       :segment_name,
@@ -4204,6 +4400,7 @@ module Aws::NetworkManager
     #   <p>The client token associated with the request.</p>
     #   @return [String]
     class PutCoreNetworkPolicyRequest < Struct.new(
+      nil,
       :core_network_id,
       :policy_document,
       :description,
@@ -4218,6 +4415,7 @@ module Aws::NetworkManager
     #   <p>Describes the changed core network policy.</p>
     #   @return [Types::CoreNetworkPolicy]
     class PutCoreNetworkPolicyResponse < Struct.new(
+      nil,
       :core_network_policy,
       keyword_init: true
     )
@@ -4231,6 +4429,7 @@ module Aws::NetworkManager
     #   <p>The ARN of the resource policy. </p>
     #   @return [String]
     class PutResourcePolicyRequest < Struct.new(
+      nil,
       :policy_document,
       :resource_arn,
       keyword_init: true
@@ -4239,6 +4438,7 @@ module Aws::NetworkManager
     end
 
     class PutResourcePolicyResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -4251,6 +4451,7 @@ module Aws::NetworkManager
     #   <p>The Amazon Resource Name (ARN) of the transit gateway.</p>
     #   @return [String]
     class RegisterTransitGatewayRequest < Struct.new(
+      nil,
       :global_network_id,
       :transit_gateway_arn,
       keyword_init: true
@@ -4262,6 +4463,7 @@ module Aws::NetworkManager
     #   <p>Information about the transit gateway registration.</p>
     #   @return [Types::TransitGatewayRegistration]
     class RegisterTransitGatewayResponse < Struct.new(
+      nil,
       :transit_gateway_registration,
       keyword_init: true
     )
@@ -4272,6 +4474,7 @@ module Aws::NetworkManager
     #   <p>The ID of the attachment.</p>
     #   @return [String]
     class RejectAttachmentRequest < Struct.new(
+      nil,
       :attachment_id,
       keyword_init: true
     )
@@ -4282,6 +4485,7 @@ module Aws::NetworkManager
     #   <p>Describes the rejected attachment request.</p>
     #   @return [Types::Attachment]
     class RejectAttachmentResponse < Struct.new(
+      nil,
       :attachment,
       keyword_init: true
     )
@@ -4296,6 +4500,7 @@ module Aws::NetworkManager
     #   <p>The ARN of the resource.</p>
     #   @return [String]
     class Relationship < Struct.new(
+      nil,
       :from,
       :to,
       keyword_init: true
@@ -4316,6 +4521,7 @@ module Aws::NetworkManager
     #   <p>The specified resource could not be found.</p>
     #   @return [Hash<String, String>]
     class ResourceNotFoundException < Struct.new(
+      nil,
       :message,
       :resource_id,
       :resource_type,
@@ -4332,6 +4538,7 @@ module Aws::NetworkManager
     #   <p>The ID of the policy version to restore.</p>
     #   @return [Integer]
     class RestoreCoreNetworkPolicyVersionRequest < Struct.new(
+      nil,
       :core_network_id,
       :policy_version_id,
       keyword_init: true
@@ -4343,6 +4550,7 @@ module Aws::NetworkManager
     #   <p>Describes the restored core network policy.</p>
     #   @return [Types::CoreNetworkPolicy]
     class RestoreCoreNetworkPolicyVersionResponse < Struct.new(
+      nil,
       :core_network_policy,
       keyword_init: true
     )
@@ -4385,6 +4593,7 @@ module Aws::NetworkManager
     #   <p>The return path.</p>
     #   @return [Types::RouteAnalysisPath]
     class RouteAnalysis < Struct.new(
+      nil,
       :global_network_id,
       :owner_account_id,
       :route_analysis_id,
@@ -4457,6 +4666,7 @@ module Aws::NetworkManager
     #   <p>Additional information about the path. Available only if a connection is not found.</p>
     #   @return [Hash<String, String>]
     class RouteAnalysisCompletion < Struct.new(
+      nil,
       :result_code,
       :reason_code,
       :reason_context,
@@ -4476,6 +4686,7 @@ module Aws::NetworkManager
     #   <p>The IP address.</p>
     #   @return [String]
     class RouteAnalysisEndpointOptions < Struct.new(
+      nil,
       :transit_gateway_attachment_arn,
       :transit_gateway_arn,
       :ip_address,
@@ -4492,6 +4703,7 @@ module Aws::NetworkManager
     #   <p>The IP address.</p>
     #   @return [String]
     class RouteAnalysisEndpointOptionsSpecification < Struct.new(
+      nil,
       :transit_gateway_attachment_arn,
       :ip_address,
       keyword_init: true
@@ -4507,6 +4719,7 @@ module Aws::NetworkManager
     #   <p>The route analysis path.</p>
     #   @return [Array<Types::PathComponent>]
     class RouteAnalysisPath < Struct.new(
+      nil,
       :completion_status,
       :path,
       keyword_init: true
@@ -4525,6 +4738,7 @@ module Aws::NetworkManager
     #   <p>The route table identifier associated with the network function group.</p>
     #   @return [Types::CoreNetworkNetworkFunctionGroupIdentifier]
     class RouteTableIdentifier < Struct.new(
+      nil,
       :transit_gateway_route_table_arn,
       :core_network_segment_edge,
       :core_network_network_function_group,
@@ -4553,6 +4767,7 @@ module Aws::NetworkManager
     #               insertion action. Used for both <code>send-to</code> or <code>send-via</code>.</p>
     #   @return [Types::Via]
     class ServiceInsertionAction < Struct.new(
+      nil,
       :action,
       :mode,
       :when_sent_to,
@@ -4570,6 +4785,7 @@ module Aws::NetworkManager
     #   <p>The list of segments associated with the <code>send-to</code> action.</p>
     #   @return [Array<String>]
     class ServiceInsertionSegments < Struct.new(
+      nil,
       :send_via,
       :send_to,
       keyword_init: true
@@ -4594,6 +4810,7 @@ module Aws::NetworkManager
     #   <p>The service code.</p>
     #   @return [String]
     class ServiceQuotaExceededException < Struct.new(
+      nil,
       :message,
       :resource_id,
       :resource_type,
@@ -4630,6 +4847,7 @@ module Aws::NetworkManager
     #   <p>The tags for the site.</p>
     #   @return [Array<Types::Tag>]
     class Site < Struct.new(
+      nil,
       :site_id,
       :site_arn,
       :global_network_id,
@@ -4651,6 +4869,7 @@ module Aws::NetworkManager
     #   <p>The ARN of the site-to-site VPN attachment. </p>
     #   @return [String]
     class SiteToSiteVpnAttachment < Struct.new(
+      nil,
       :attachment,
       :vpn_connection_arn,
       keyword_init: true
@@ -4662,6 +4881,7 @@ module Aws::NetworkManager
     #   <p>The action to take for the update request. This can be either <code>ENABLE</code> or <code>DISABLE</code>.</p>
     #   @return [String]
     class StartOrganizationServiceAccessUpdateRequest < Struct.new(
+      nil,
       :action,
       keyword_init: true
     )
@@ -4672,6 +4892,7 @@ module Aws::NetworkManager
     #   <p>The status of the service access update request for an Amazon Web Services Organization.</p>
     #   @return [Types::OrganizationStatus]
     class StartOrganizationServiceAccessUpdateResponse < Struct.new(
+      nil,
       :organization_status,
       keyword_init: true
     )
@@ -4695,6 +4916,7 @@ module Aws::NetworkManager
     #               The default is <code>false</code>.</p>
     #   @return [Boolean]
     class StartRouteAnalysisRequest < Struct.new(
+      nil,
       :global_network_id,
       :source,
       :destination,
@@ -4709,6 +4931,7 @@ module Aws::NetworkManager
     #   <p>The route analysis.</p>
     #   @return [Types::RouteAnalysis]
     class StartRouteAnalysisResponse < Struct.new(
+      nil,
       :route_analysis,
       keyword_init: true
     )
@@ -4725,6 +4948,7 @@ module Aws::NetworkManager
     #            <p>Constraints: Maximum length of 256 characters.</p>
     #   @return [String]
     class Tag < Struct.new(
+      nil,
       :key,
       :value,
       keyword_init: true
@@ -4739,6 +4963,7 @@ module Aws::NetworkManager
     #   <p>The tags to apply to the specified resource.</p>
     #   @return [Array<Types::Tag>]
     class TagResourceRequest < Struct.new(
+      nil,
       :resource_arn,
       :tags,
       keyword_init: true
@@ -4747,6 +4972,7 @@ module Aws::NetworkManager
     end
 
     class TagResourceResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -4759,6 +4985,7 @@ module Aws::NetworkManager
     #   <p>Indicates when to retry the request.</p>
     #   @return [Integer]
     class ThrottlingException < Struct.new(
+      nil,
       :message,
       :retry_after_seconds,
       keyword_init: true
@@ -4783,6 +5010,7 @@ module Aws::NetworkManager
     #   <p>The state of the association.</p>
     #   @return [String]
     class TransitGatewayConnectPeerAssociation < Struct.new(
+      nil,
       :transit_gateway_connect_peer_arn,
       :global_network_id,
       :device_id,
@@ -4804,6 +5032,7 @@ module Aws::NetworkManager
     #   <p>The ID of the transit gateway peering attachment.</p>
     #   @return [String]
     class TransitGatewayPeering < Struct.new(
+      nil,
       :peering,
       :transit_gateway_arn,
       :transit_gateway_peering_attachment_id,
@@ -4823,6 +5052,7 @@ module Aws::NetworkManager
     #   <p>The state of the transit gateway registration.</p>
     #   @return [Types::TransitGatewayRegistrationStateReason]
     class TransitGatewayRegistration < Struct.new(
+      nil,
       :global_network_id,
       :transit_gateway_arn,
       :state,
@@ -4839,6 +5069,7 @@ module Aws::NetworkManager
     #   <p>The message for the state reason.</p>
     #   @return [String]
     class TransitGatewayRegistrationStateReason < Struct.new(
+      nil,
       :code,
       :message,
       keyword_init: true
@@ -4857,6 +5088,7 @@ module Aws::NetworkManager
     #   <p>The ARN of the transit gateway attachment route table. For example, <code>"TransitGatewayRouteTableArn": "arn:aws:ec2:us-west-2:123456789012:transit-gateway-route-table/tgw-rtb-9876543210123456"</code>.</p>
     #   @return [String]
     class TransitGatewayRouteTableAttachment < Struct.new(
+      nil,
       :attachment,
       :peering_id,
       :transit_gateway_route_table_arn,
@@ -4872,6 +5104,7 @@ module Aws::NetworkManager
     #   <p>The tag keys to remove from the specified resource.</p>
     #   @return [Array<String>]
     class UntagResourceRequest < Struct.new(
+      nil,
       :resource_arn,
       :tag_keys,
       keyword_init: true
@@ -4880,6 +5113,7 @@ module Aws::NetworkManager
     end
 
     class UntagResourceResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -4902,6 +5136,7 @@ module Aws::NetworkManager
     #            <p>Length Constraints: Maximum length of 256 characters.</p>
     #   @return [String]
     class UpdateConnectionRequest < Struct.new(
+      nil,
       :global_network_id,
       :connection_id,
       :link_id,
@@ -4916,6 +5151,7 @@ module Aws::NetworkManager
     #   <p>Information about the connection.</p>
     #   @return [Types::Connection]
     class UpdateConnectionResponse < Struct.new(
+      nil,
       :connection,
       keyword_init: true
     )
@@ -4929,6 +5165,7 @@ module Aws::NetworkManager
     #   <p>The description of the update.</p>
     #   @return [String]
     class UpdateCoreNetworkRequest < Struct.new(
+      nil,
       :core_network_id,
       :description,
       keyword_init: true
@@ -4940,6 +5177,7 @@ module Aws::NetworkManager
     #   <p>Returns information about a core network update.</p>
     #   @return [Types::CoreNetwork]
     class UpdateCoreNetworkResponse < Struct.new(
+      nil,
       :core_network,
       keyword_init: true
     )
@@ -4981,6 +5219,7 @@ module Aws::NetworkManager
     #   <p>The ID of the site.</p>
     #   @return [String]
     class UpdateDeviceRequest < Struct.new(
+      nil,
       :global_network_id,
       :device_id,
       :aws_location,
@@ -5000,6 +5239,7 @@ module Aws::NetworkManager
     #   <p>Information about the device.</p>
     #   @return [Types::Device]
     class UpdateDeviceResponse < Struct.new(
+      nil,
       :device,
       keyword_init: true
     )
@@ -5013,6 +5253,7 @@ module Aws::NetworkManager
     #   <p>One or more edge locations to update for the Direct Connect gateway attachment. The updated array of edge locations overwrites the previous array of locations. <code>EdgeLocations</code> is only used for Direct Connect gateway attachments.</p>
     #   @return [Array<String>]
     class UpdateDirectConnectGatewayAttachmentRequest < Struct.new(
+      nil,
       :attachment_id,
       :edge_locations,
       keyword_init: true
@@ -5024,6 +5265,7 @@ module Aws::NetworkManager
     #   <p>Returns details of the Direct Connect gateway attachment with the updated edge locations.</p>
     #   @return [Types::DirectConnectGatewayAttachment]
     class UpdateDirectConnectGatewayAttachmentResponse < Struct.new(
+      nil,
       :direct_connect_gateway_attachment,
       keyword_init: true
     )
@@ -5038,6 +5280,7 @@ module Aws::NetworkManager
     #            <p>Constraints: Maximum length of 256 characters.</p>
     #   @return [String]
     class UpdateGlobalNetworkRequest < Struct.new(
+      nil,
       :global_network_id,
       :description,
       keyword_init: true
@@ -5049,6 +5292,7 @@ module Aws::NetworkManager
     #   <p>Information about the global network object.</p>
     #   @return [Types::GlobalNetwork]
     class UpdateGlobalNetworkResponse < Struct.new(
+      nil,
       :global_network,
       keyword_init: true
     )
@@ -5077,6 +5321,7 @@ module Aws::NetworkManager
     #            <p>Constraints: Maximum length of 128 characters.</p>
     #   @return [String]
     class UpdateLinkRequest < Struct.new(
+      nil,
       :global_network_id,
       :link_id,
       :description,
@@ -5092,6 +5337,7 @@ module Aws::NetworkManager
     #   <p>Information about the link.</p>
     #   @return [Types::Link]
     class UpdateLinkResponse < Struct.new(
+      nil,
       :link,
       keyword_init: true
     )
@@ -5108,6 +5354,7 @@ module Aws::NetworkManager
     #   <p>The resource metadata.</p>
     #   @return [Hash<String, String>]
     class UpdateNetworkResourceMetadataRequest < Struct.new(
+      nil,
       :global_network_id,
       :resource_arn,
       :metadata,
@@ -5123,6 +5370,7 @@ module Aws::NetworkManager
     #   <p>The updated resource metadata.</p>
     #   @return [Hash<String, String>]
     class UpdateNetworkResourceMetadataResponse < Struct.new(
+      nil,
       :resource_arn,
       :metadata,
       keyword_init: true
@@ -5158,6 +5406,7 @@ module Aws::NetworkManager
     #            </ul>
     #   @return [Types::Location]
     class UpdateSiteRequest < Struct.new(
+      nil,
       :global_network_id,
       :site_id,
       :description,
@@ -5171,6 +5420,7 @@ module Aws::NetworkManager
     #   <p>Information about the site.</p>
     #   @return [Types::Site]
     class UpdateSiteResponse < Struct.new(
+      nil,
       :site,
       keyword_init: true
     )
@@ -5190,6 +5440,7 @@ module Aws::NetworkManager
     #   <p>Additional options for updating the VPC attachment. </p>
     #   @return [Types::VpcOptions]
     class UpdateVpcAttachmentRequest < Struct.new(
+      nil,
       :attachment_id,
       :add_subnet_arns,
       :remove_subnet_arns,
@@ -5203,6 +5454,7 @@ module Aws::NetworkManager
     #   <p>Describes the updated VPC attachment.</p>
     #   @return [Types::VpcAttachment]
     class UpdateVpcAttachmentResponse < Struct.new(
+      nil,
       :vpc_attachment,
       keyword_init: true
     )
@@ -5219,6 +5471,7 @@ module Aws::NetworkManager
     #   <p>The fields that caused the error, if applicable.</p>
     #   @return [Array<Types::ValidationExceptionField>]
     class ValidationException < Struct.new(
+      nil,
       :message,
       :reason,
       :fields,
@@ -5235,6 +5488,7 @@ module Aws::NetworkManager
     #   <p>The message for the field.</p>
     #   @return [String]
     class ValidationExceptionField < Struct.new(
+      nil,
       :name,
       :message,
       keyword_init: true
@@ -5251,6 +5505,7 @@ module Aws::NetworkManager
     #   <p>Describes any edge overrides. An edge override is a specific edge to be used for traffic.</p>
     #   @return [Array<Types::EdgeOverride>]
     class Via < Struct.new(
+      nil,
       :network_function_groups,
       :with_edge_overrides,
       keyword_init: true
@@ -5269,6 +5524,7 @@ module Aws::NetworkManager
     #   <p>Provides details about the VPC attachment.</p>
     #   @return [Types::VpcOptions]
     class VpcAttachment < Struct.new(
+      nil,
       :attachment,
       :subnet_arns,
       :options,
@@ -5291,6 +5547,7 @@ module Aws::NetworkManager
     #   <p>Indicates whether security group referencing is enabled for this VPC attachment. The default is <code>true</code>. However, at the core network policy-level the default is set to <code>false</code>.</p>
     #   @return [Boolean]
     class VpcOptions < Struct.new(
+      nil,
       :ipv6_support,
       :appliance_mode_support,
       :dns_support,
@@ -5314,6 +5571,7 @@ module Aws::NetworkManager
     #   <p>The list of destination segments when the service insertion action is <code>send-to</code>.</p>
     #   @return [Array<String>]
     class WhenSentTo < Struct.new(
+      nil,
       :when_sent_to_segments_list,
       keyword_init: true
     )

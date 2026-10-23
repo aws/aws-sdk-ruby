@@ -56,6 +56,7 @@ module Aws::S3
   #   Parameter to indicate whether S3Express session auth should be disabled
   #   @return [Boolean]
   EndpointParameters = Struct.new(
+    nil,
     :bucket,
     :region,
     :use_fips,

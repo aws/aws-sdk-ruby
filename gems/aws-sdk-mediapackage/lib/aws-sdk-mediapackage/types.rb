@@ -14,6 +14,7 @@ module Aws::MediaPackage
     #   The Amazon Resource Name (ARN) for the IAM role that allows MediaPackage to communicate with AWS Secrets Manager.
     #   @return [String]
     class Authorization < Struct.new(
+      nil,
       :cdn_identifier_secret,
       :secrets_role_arn,
       keyword_init: true
@@ -47,6 +48,7 @@ module Aws::MediaPackage
     #   A collection of tags associated with a resource
     #   @return [Hash<String, String>]
     class Channel < Struct.new(
+      nil,
       :arn,
       :created_at,
       :description,
@@ -74,6 +76,7 @@ module Aws::MediaPackage
     #   A configuration for accessing an external Secure Packager and Encoder Key Exchange (SPEKE) service that will provide encryption keys.
     #   @return [Types::SpekeKeyProvider]
     class CmafEncryption < Struct.new(
+      nil,
       :constant_initialization_vector,
       :encryption_method,
       :key_rotation_interval_seconds,
@@ -101,6 +104,7 @@ module Aws::MediaPackage
     #   A StreamSelection configuration.
     #   @return [Types::StreamSelection]
     class CmafPackage < Struct.new(
+      nil,
       :encryption,
       :hls_manifests,
       :segment_duration_seconds,
@@ -129,6 +133,7 @@ module Aws::MediaPackage
     #   A StreamSelection configuration.
     #   @return [Types::StreamSelection]
     class CmafPackageCreateOrUpdateParameters < Struct.new(
+      nil,
       :encryption,
       :hls_manifests,
       :segment_duration_seconds,
@@ -150,6 +155,7 @@ module Aws::MediaPackage
     #   Configure ingress access logging.
     #   @return [Types::IngressAccessLogs]
     class ConfigureLogsRequest < Struct.new(
+      nil,
       :egress_access_logs,
       :id,
       :ingress_access_logs,
@@ -183,6 +189,7 @@ module Aws::MediaPackage
     #   A collection of tags associated with a resource
     #   @return [Hash<String, String>]
     class ConfigureLogsResponse < Struct.new(
+      nil,
       :arn,
       :created_at,
       :description,
@@ -208,6 +215,7 @@ module Aws::MediaPackage
     #   A collection of tags associated with a resource
     #   @return [Hash<String, String>]
     class CreateChannelRequest < Struct.new(
+      nil,
       :description,
       :id,
       :tags,
@@ -241,6 +249,7 @@ module Aws::MediaPackage
     #   A collection of tags associated with a resource
     #   @return [Hash<String, String>]
     class CreateChannelResponse < Struct.new(
+      nil,
       :arn,
       :created_at,
       :description,
@@ -273,6 +282,7 @@ module Aws::MediaPackage
     #   The start of the time-window which will be harvested
     #   @return [String]
     class CreateHarvestJobRequest < Struct.new(
+      nil,
       :end_time,
       :id,
       :origin_endpoint_id,
@@ -315,6 +325,7 @@ module Aws::MediaPackage
     #   include an explanation of why the HarvestJob failed.
     #   @return [String]
     class CreateHarvestJobResponse < Struct.new(
+      nil,
       :arn,
       :channel_id,
       :created_at,
@@ -379,6 +390,7 @@ module Aws::MediaPackage
     #   A list of source IP CIDR blocks that will be allowed to access the OriginEndpoint.
     #   @return [Array<String>]
     class CreateOriginEndpointRequest < Struct.new(
+      nil,
       :authorization,
       :channel_id,
       :cmaf_package,
@@ -454,6 +466,7 @@ module Aws::MediaPackage
     #   A list of source IP CIDR blocks that will be allowed to access the OriginEndpoint.
     #   @return [Array<String>]
     class CreateOriginEndpointResponse < Struct.new(
+      nil,
       :arn,
       :authorization,
       :channel_id,
@@ -484,6 +497,7 @@ module Aws::MediaPackage
     #   A configuration for accessing an external Secure Packager and Encoder Key Exchange (SPEKE) service that will provide encryption keys.
     #   @return [Types::SpekeKeyProvider]
     class DashEncryption < Struct.new(
+      nil,
       :key_rotation_interval_seconds,
       :speke_key_provider,
       keyword_init: true
@@ -554,6 +568,7 @@ module Aws::MediaPackage
     #   Specifies the value attribute of the UTCTiming field when utcTiming is set to HTTP-ISO, HTTP-HEAD or HTTP-XSDATE
     #   @return [String]
     class DashPackage < Struct.new(
+      nil,
       :ad_triggers,
       :ads_on_delivery_restrictions,
       :encryption,
@@ -579,6 +594,7 @@ module Aws::MediaPackage
     #   The ID of the Channel to delete.
     #   @return [String]
     class DeleteChannelRequest < Struct.new(
+      nil,
       :id,
       keyword_init: true
     )
@@ -586,6 +602,7 @@ module Aws::MediaPackage
     end
 
     class DeleteChannelResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -595,6 +612,7 @@ module Aws::MediaPackage
     #   The ID of the OriginEndpoint to delete.
     #   @return [String]
     class DeleteOriginEndpointRequest < Struct.new(
+      nil,
       :id,
       keyword_init: true
     )
@@ -602,6 +620,7 @@ module Aws::MediaPackage
     end
 
     class DeleteOriginEndpointResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -611,6 +630,7 @@ module Aws::MediaPackage
     #   The ID of a Channel.
     #   @return [String]
     class DescribeChannelRequest < Struct.new(
+      nil,
       :id,
       keyword_init: true
     )
@@ -642,6 +662,7 @@ module Aws::MediaPackage
     #   A collection of tags associated with a resource
     #   @return [Hash<String, String>]
     class DescribeChannelResponse < Struct.new(
+      nil,
       :arn,
       :created_at,
       :description,
@@ -659,6 +680,7 @@ module Aws::MediaPackage
     #   The ID of the HarvestJob.
     #   @return [String]
     class DescribeHarvestJobRequest < Struct.new(
+      nil,
       :id,
       keyword_init: true
     )
@@ -697,6 +719,7 @@ module Aws::MediaPackage
     #   include an explanation of why the HarvestJob failed.
     #   @return [String]
     class DescribeHarvestJobResponse < Struct.new(
+      nil,
       :arn,
       :channel_id,
       :created_at,
@@ -715,6 +738,7 @@ module Aws::MediaPackage
     #   The ID of the OriginEndpoint.
     #   @return [String]
     class DescribeOriginEndpointRequest < Struct.new(
+      nil,
       :id,
       keyword_init: true
     )
@@ -777,6 +801,7 @@ module Aws::MediaPackage
     #   A list of source IP CIDR blocks that will be allowed to access the OriginEndpoint.
     #   @return [Array<String>]
     class DescribeOriginEndpointResponse < Struct.new(
+      nil,
       :arn,
       :authorization,
       :channel_id,
@@ -804,6 +829,7 @@ module Aws::MediaPackage
     #   Customize the log group name.
     #   @return [String]
     class EgressAccessLogs < Struct.new(
+      nil,
       :log_group_name,
       keyword_init: true
     )
@@ -823,6 +849,7 @@ module Aws::MediaPackage
     #   A collection of video encryption presets.
     #   @return [String]
     class EncryptionContractConfiguration < Struct.new(
+      nil,
       :preset_speke20_audio,
       :preset_speke20_video,
       keyword_init: true
@@ -834,6 +861,7 @@ module Aws::MediaPackage
     # @!attribute message
     #   @return [String]
     class ForbiddenException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -873,6 +901,7 @@ module Aws::MediaPackage
     #   include an explanation of why the HarvestJob failed.
     #   @return [String]
     class HarvestJob < Struct.new(
+      nil,
       :arn,
       :channel_id,
       :created_at,
@@ -905,6 +934,7 @@ module Aws::MediaPackage
     #   A configuration for accessing an external Secure Packager and Encoder Key Exchange (SPEKE) service that will provide encryption keys.
     #   @return [Types::SpekeKeyProvider]
     class HlsEncryption < Struct.new(
+      nil,
       :constant_initialization_vector,
       :encryption_method,
       :key_rotation_interval_seconds,
@@ -920,6 +950,7 @@ module Aws::MediaPackage
     #   A list of endpoints to which the source stream should be sent.
     #   @return [Array<Types::IngestEndpoint>]
     class HlsIngest < Struct.new(
+      nil,
       :ingest_endpoints,
       keyword_init: true
     )
@@ -985,6 +1016,7 @@ module Aws::MediaPackage
     #   and are always treated as ads if specified in AdTriggers.
     #   @return [String]
     class HlsManifest < Struct.new(
+      nil,
       :ad_markers,
       :id,
       :include_iframe_only_stream,
@@ -1056,6 +1088,7 @@ module Aws::MediaPackage
     #   it will be passed through to HLS output.
     #   @return [Integer]
     class HlsManifestCreateOrUpdateParameters < Struct.new(
+      nil,
       :ad_markers,
       :ad_triggers,
       :ads_on_delivery_restrictions,
@@ -1136,6 +1169,7 @@ module Aws::MediaPackage
     #   When enabled, audio streams will be placed in rendition groups in the output.
     #   @return [Boolean]
     class HlsPackage < Struct.new(
+      nil,
       :ad_markers,
       :ad_triggers,
       :ads_on_delivery_restrictions,
@@ -1167,6 +1201,7 @@ module Aws::MediaPackage
     #   The system generated username for ingest authentication.
     #   @return [String]
     class IngestEndpoint < Struct.new(
+      nil,
       :id,
       :password,
       :url,
@@ -1181,6 +1216,7 @@ module Aws::MediaPackage
     #   Customize the log group name.
     #   @return [String]
     class IngressAccessLogs < Struct.new(
+      nil,
       :log_group_name,
       keyword_init: true
     )
@@ -1191,6 +1227,7 @@ module Aws::MediaPackage
     # @!attribute message
     #   @return [String]
     class InternalServerErrorException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -1204,6 +1241,7 @@ module Aws::MediaPackage
     #   A token used to resume pagination from the end of a previous request.
     #   @return [String]
     class ListChannelsRequest < Struct.new(
+      nil,
       :max_results,
       :next_token,
       keyword_init: true
@@ -1218,6 +1256,7 @@ module Aws::MediaPackage
     #   A token that can be used to resume pagination from the end of the collection.
     #   @return [String]
     class ListChannelsResponse < Struct.new(
+      nil,
       :channels,
       :next_token,
       keyword_init: true
@@ -1238,6 +1277,7 @@ module Aws::MediaPackage
     #   A token used to resume pagination from the end of a previous request.
     #   @return [String]
     class ListHarvestJobsRequest < Struct.new(
+      nil,
       :include_channel_id,
       :include_status,
       :max_results,
@@ -1254,6 +1294,7 @@ module Aws::MediaPackage
     #   A token that can be used to resume pagination from the end of the collection.
     #   @return [String]
     class ListHarvestJobsResponse < Struct.new(
+      nil,
       :harvest_jobs,
       :next_token,
       keyword_init: true
@@ -1271,6 +1312,7 @@ module Aws::MediaPackage
     #   A token used to resume pagination from the end of a previous request.
     #   @return [String]
     class ListOriginEndpointsRequest < Struct.new(
+      nil,
       :channel_id,
       :max_results,
       :next_token,
@@ -1286,6 +1328,7 @@ module Aws::MediaPackage
     #   A list of OriginEndpoint records.
     #   @return [Array<Types::OriginEndpoint>]
     class ListOriginEndpointsResponse < Struct.new(
+      nil,
       :next_token,
       :origin_endpoints,
       keyword_init: true
@@ -1296,6 +1339,7 @@ module Aws::MediaPackage
     # @!attribute resource_arn
     #   @return [String]
     class ListTagsForResourceRequest < Struct.new(
+      nil,
       :resource_arn,
       keyword_init: true
     )
@@ -1305,6 +1349,7 @@ module Aws::MediaPackage
     # @!attribute tags
     #   @return [Hash<String, String>]
     class ListTagsForResourceResponse < Struct.new(
+      nil,
       :tags,
       keyword_init: true
     )
@@ -1316,6 +1361,7 @@ module Aws::MediaPackage
     #   A configuration for accessing an external Secure Packager and Encoder Key Exchange (SPEKE) service that will provide encryption keys.
     #   @return [Types::SpekeKeyProvider]
     class MssEncryption < Struct.new(
+      nil,
       :speke_key_provider,
       keyword_init: true
     )
@@ -1336,6 +1382,7 @@ module Aws::MediaPackage
     #   A StreamSelection configuration.
     #   @return [Types::StreamSelection]
     class MssPackage < Struct.new(
+      nil,
       :encryption,
       :manifest_window_seconds,
       :segment_duration_seconds,
@@ -1349,6 +1396,7 @@ module Aws::MediaPackage
     # @!attribute message
     #   @return [String]
     class NotFoundException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -1412,6 +1460,7 @@ module Aws::MediaPackage
     #   A list of source IP CIDR blocks that will be allowed to access the OriginEndpoint.
     #   @return [Array<String>]
     class OriginEndpoint < Struct.new(
+      nil,
       :arn,
       :authorization,
       :channel_id,
@@ -1439,6 +1488,7 @@ module Aws::MediaPackage
     #   The ID of the channel to update.
     #   @return [String]
     class RotateChannelCredentialsRequest < Struct.new(
+      nil,
       :id,
       keyword_init: true
     )
@@ -1471,6 +1521,7 @@ module Aws::MediaPackage
     #   A collection of tags associated with a resource
     #   @return [Hash<String, String>]
     class RotateChannelCredentialsResponse < Struct.new(
+      nil,
       :arn,
       :created_at,
       :description,
@@ -1491,6 +1542,7 @@ module Aws::MediaPackage
     #   The id of the IngestEndpoint whose credentials should be rotated
     #   @return [String]
     class RotateIngestEndpointCredentialsRequest < Struct.new(
+      nil,
       :id,
       :ingest_endpoint_id,
       keyword_init: true
@@ -1523,6 +1575,7 @@ module Aws::MediaPackage
     #   A collection of tags associated with a resource
     #   @return [Hash<String, String>]
     class RotateIngestEndpointCredentialsResponse < Struct.new(
+      nil,
       :arn,
       :created_at,
       :description,
@@ -1547,6 +1600,7 @@ module Aws::MediaPackage
     #   The IAM role used to write to the specified S3 bucket
     #   @return [String]
     class S3Destination < Struct.new(
+      nil,
       :bucket_name,
       :manifest_key,
       :role_arn,
@@ -1559,6 +1613,7 @@ module Aws::MediaPackage
     # @!attribute message
     #   @return [String]
     class ServiceUnavailableException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -1593,6 +1648,7 @@ module Aws::MediaPackage
     #   The URL of the external key provider service.
     #   @return [String]
     class SpekeKeyProvider < Struct.new(
+      nil,
       :certificate_arn,
       :encryption_contract_configuration,
       :resource_id,
@@ -1615,6 +1671,7 @@ module Aws::MediaPackage
     #   A directive that determines the order of streams in the output.
     #   @return [String]
     class StreamSelection < Struct.new(
+      nil,
       :max_video_bits_per_second,
       :min_video_bits_per_second,
       :stream_order,
@@ -1628,6 +1685,7 @@ module Aws::MediaPackage
     # @!attribute tags
     #   @return [Hash<String, String>]
     class TagResourceRequest < Struct.new(
+      nil,
       :resource_arn,
       :tags,
       keyword_init: true
@@ -1639,6 +1697,7 @@ module Aws::MediaPackage
     # @!attribute message
     #   @return [String]
     class TooManyRequestsException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -1649,6 +1708,7 @@ module Aws::MediaPackage
     # @!attribute message
     #   @return [String]
     class UnprocessableEntityException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -1661,6 +1721,7 @@ module Aws::MediaPackage
     #   The key(s) of tag to be deleted
     #   @return [Array<String>]
     class UntagResourceRequest < Struct.new(
+      nil,
       :resource_arn,
       :tag_keys,
       keyword_init: true
@@ -1676,6 +1737,7 @@ module Aws::MediaPackage
     #   The ID of the Channel to update.
     #   @return [String]
     class UpdateChannelRequest < Struct.new(
+      nil,
       :description,
       :id,
       keyword_init: true
@@ -1708,6 +1770,7 @@ module Aws::MediaPackage
     #   A collection of tags associated with a resource
     #   @return [Hash<String, String>]
     class UpdateChannelResponse < Struct.new(
+      nil,
       :arn,
       :created_at,
       :description,
@@ -1763,6 +1826,7 @@ module Aws::MediaPackage
     #   A list of source IP CIDR blocks that will be allowed to access the OriginEndpoint.
     #   @return [Array<String>]
     class UpdateOriginEndpointRequest < Struct.new(
+      nil,
       :authorization,
       :cmaf_package,
       :dash_package,
@@ -1836,6 +1900,7 @@ module Aws::MediaPackage
     #   A list of source IP CIDR blocks that will be allowed to access the OriginEndpoint.
     #   @return [Array<String>]
     class UpdateOriginEndpointResponse < Struct.new(
+      nil,
       :arn,
       :authorization,
       :channel_id,

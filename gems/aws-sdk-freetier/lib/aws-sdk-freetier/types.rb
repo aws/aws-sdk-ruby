@@ -10,6 +10,7 @@ module Aws::FreeTier
     # @!attribute message
     #   @return [String]
     class AccessDeniedException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -45,6 +46,7 @@ module Aws::FreeTier
     #   <p> The current status of the activity. </p>
     #   @return [String]
     class ActivitySummary < Struct.new(
+      nil,
       :activity_id,
       :title,
       :reward,
@@ -65,6 +67,7 @@ module Aws::FreeTier
     #   <p>The match options that you can use to filter your results. You can specify only one of these values in the array.</p>
     #   @return [Array<String>]
     class DimensionValues < Struct.new(
+      nil,
       :key,
       :values,
       :match_options,
@@ -87,6 +90,7 @@ module Aws::FreeTier
     #   <p>The specific dimension, values, and match type to filter objects with.</p>
     #   @return [Types::DimensionValues]
     class Expression < Struct.new(
+      nil,
       :or,
       :and,
       :not,
@@ -128,6 +132,7 @@ module Aws::FreeTier
     #   <p>Describes the type of the Free Tier offer. For example, the offer can be <code>"12 Months Free"</code>, <code>"Always Free"</code>, and <code>"Free Trial"</code>.</p>
     #   @return [String]
     class FreeTierUsage < Struct.new(
+      nil,
       :service,
       :operation,
       :usage_type,
@@ -157,6 +162,7 @@ module Aws::FreeTier
     #   <p> The language code used to return translated title and description fields. </p>
     #   @return [String]
     class GetAccountActivityRequest < Struct.new(
+      nil,
       :activity_id,
       :language_code,
       keyword_init: true
@@ -195,6 +201,7 @@ module Aws::FreeTier
     #   <p> The timestamp when the activity is completed. This field appears only for activities in the <code>COMPLETED</code> state. </p>
     #   @return [Time]
     class GetAccountActivityResponse < Struct.new(
+      nil,
       :activity_id,
       :title,
       :description,
@@ -211,6 +218,7 @@ module Aws::FreeTier
     end
 
     class GetAccountPlanStateRequest < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -232,6 +240,7 @@ module Aws::FreeTier
     #   <p> The timestamp for when the current account plan expires. </p>
     #   @return [Time]
     class GetAccountPlanStateResponse < Struct.new(
+      nil,
       :account_id,
       :account_plan_type,
       :account_plan_status,
@@ -252,6 +261,7 @@ module Aws::FreeTier
     #   <p>The pagination token that indicates the next set of results to retrieve.</p>
     #   @return [String]
     class GetFreeTierUsageRequest < Struct.new(
+      nil,
       :filter,
       :max_results,
       :next_token,
@@ -267,6 +277,7 @@ module Aws::FreeTier
     #   <p>The pagination token that indicates the next set of results to retrieve.</p>
     #   @return [String]
     class GetFreeTierUsageResponse < Struct.new(
+      nil,
       :free_tier_usages,
       :next_token,
       keyword_init: true
@@ -278,6 +289,7 @@ module Aws::FreeTier
     # @!attribute message
     #   @return [String]
     class InternalServerException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -297,6 +309,7 @@ module Aws::FreeTier
     #   <p> The language code used to return translated titles. </p>
     #   @return [String]
     class ListAccountActivitiesRequest < Struct.new(
+      nil,
       :filter_activity_statuses,
       :next_token,
       :max_results,
@@ -313,6 +326,7 @@ module Aws::FreeTier
     #   <p> The token to include in another request to get the next page of items. This value is <code>null</code> when there are no more items to return. </p>
     #   @return [String]
     class ListAccountActivitiesResponse < Struct.new(
+      nil,
       :activities,
       :next_token,
       keyword_init: true
@@ -328,6 +342,7 @@ module Aws::FreeTier
     #   <p> The unit that the monetary amount is given in. </p>
     #   @return [String]
     class MonetaryAmount < Struct.new(
+      nil,
       :amount,
       :unit,
       keyword_init: true
@@ -344,6 +359,7 @@ module Aws::FreeTier
     # @!attribute message
     #   @return [String]
     class ResourceNotFoundException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -354,6 +370,7 @@ module Aws::FreeTier
     # @!attribute message
     #   @return [String]
     class ThrottlingException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -364,6 +381,7 @@ module Aws::FreeTier
     #   <p> The target account plan type. This makes it explicit about the change and latest value of the <code>accountPlanType</code>. </p>
     #   @return [String]
     class UpgradeAccountPlanRequest < Struct.new(
+      nil,
       :account_plan_type,
       keyword_init: true
     )
@@ -380,6 +398,7 @@ module Aws::FreeTier
     #   <p> This indicates the latest state of the account plan within its lifecycle. </p>
     #   @return [String]
     class UpgradeAccountPlanResponse < Struct.new(
+      nil,
       :account_id,
       :account_plan_type,
       :account_plan_status,
@@ -392,6 +411,7 @@ module Aws::FreeTier
     # @!attribute message
     #   @return [String]
     class ValidationException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )

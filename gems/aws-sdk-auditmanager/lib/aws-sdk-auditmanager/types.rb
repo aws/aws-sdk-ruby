@@ -18,6 +18,7 @@ module Aws::AuditManager
     #   <p> The name of the Amazon Web Services account. </p>
     #   @return [String]
     class AWSAccount < Struct.new(
+      nil,
       :id,
       :email_address,
       :name,
@@ -46,6 +47,7 @@ module Aws::AuditManager
     #   <p> The name of the Amazon Web Services service. </p>
     #   @return [String]
     class AWSService < Struct.new(
+      nil,
       :service_name,
       keyword_init: true
     )
@@ -57,6 +59,7 @@ module Aws::AuditManager
     # @!attribute message
     #   @return [String]
     class AccessDeniedException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -81,6 +84,7 @@ module Aws::AuditManager
     #   <p> The tags that are associated with the assessment. </p>
     #   @return [Hash<String, String>]
     class Assessment < Struct.new(
+      nil,
       :arn,
       :aws_account,
       :metadata,
@@ -123,6 +127,7 @@ module Aws::AuditManager
     #   <p> The amount of evidence in the assessment report. </p>
     #   @return [Integer]
     class AssessmentControl < Struct.new(
+      nil,
       :id,
       :name,
       :description,
@@ -172,6 +177,7 @@ module Aws::AuditManager
     #         </p>
     #   @return [Integer]
     class AssessmentControlSet < Struct.new(
+      nil,
       :id,
       :description,
       :status,
@@ -254,6 +260,7 @@ module Aws::AuditManager
     #            evidence. </p>
     #   @return [Integer]
     class AssessmentEvidenceFolder < Struct.new(
+      nil,
       :name,
       :date,
       :assessment_id,
@@ -306,6 +313,7 @@ module Aws::AuditManager
     #   <p> The control sets that are associated with the framework. </p>
     #   @return [Array<Types::AssessmentControlSet>]
     class AssessmentFramework < Struct.new(
+      nil,
       :id,
       :arn,
       :metadata,
@@ -351,6 +359,7 @@ module Aws::AuditManager
     #   <p> The time when the framework was most recently updated. </p>
     #   @return [Time]
     class AssessmentFrameworkMetadata < Struct.new(
+      nil,
       :arn,
       :id,
       :type,
@@ -421,6 +430,7 @@ module Aws::AuditManager
     #            HIPAA.</p>
     #   @return [String]
     class AssessmentFrameworkShareRequest < Struct.new(
+      nil,
       :id,
       :framework_id,
       :framework_name,
@@ -478,6 +488,7 @@ module Aws::AuditManager
     #   <p> The time of the most recent update. </p>
     #   @return [Time]
     class AssessmentMetadata < Struct.new(
+      nil,
       :name,
       :id,
       :description,
@@ -522,6 +533,7 @@ module Aws::AuditManager
     #   <p> The time of the most recent update. </p>
     #   @return [Time]
     class AssessmentMetadataItem < Struct.new(
+      nil,
       :name,
       :id,
       :compliance_type,
@@ -567,6 +579,7 @@ module Aws::AuditManager
     #   <p> Specifies when the assessment report was created. </p>
     #   @return [Time]
     class AssessmentReport < Struct.new(
+      nil,
       :id,
       :name,
       :description,
@@ -593,6 +606,7 @@ module Aws::AuditManager
     #   <p> The error message that was returned. </p>
     #   @return [String]
     class AssessmentReportEvidenceError < Struct.new(
+      nil,
       :evidence_id,
       :error_code,
       :error_message,
@@ -627,6 +641,7 @@ module Aws::AuditManager
     #   <p> Specifies when the assessment report was created. </p>
     #   @return [Time]
     class AssessmentReportMetadata < Struct.new(
+      nil,
       :id,
       :name,
       :description,
@@ -650,6 +665,7 @@ module Aws::AuditManager
     #   <p> The destination bucket where Audit Manager stores assessment reports. </p>
     #   @return [String]
     class AssessmentReportsDestination < Struct.new(
+      nil,
       :destination_type,
       :destination,
       keyword_init: true
@@ -664,6 +680,7 @@ module Aws::AuditManager
     #   <p> The identifier for the folder that the evidence is stored in. </p>
     #   @return [String]
     class AssociateAssessmentReportEvidenceFolderRequest < Struct.new(
+      nil,
       :assessment_id,
       :evidence_folder_id,
       keyword_init: true
@@ -672,6 +689,7 @@ module Aws::AuditManager
     end
 
     class AssociateAssessmentReportEvidenceFolderResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -687,6 +705,7 @@ module Aws::AuditManager
     #   <p> The list of evidence identifiers. </p>
     #   @return [Array<String>]
     class BatchAssociateAssessmentReportEvidenceRequest < Struct.new(
+      nil,
       :assessment_id,
       :evidence_folder_id,
       :evidence_ids,
@@ -703,6 +722,7 @@ module Aws::AuditManager
     #            returned. </p>
     #   @return [Array<Types::AssessmentReportEvidenceError>]
     class BatchAssociateAssessmentReportEvidenceResponse < Struct.new(
+      nil,
       :evidence_ids,
       :errors,
       keyword_init: true
@@ -724,6 +744,7 @@ module Aws::AuditManager
     #         </p>
     #   @return [String]
     class BatchCreateDelegationByAssessmentError < Struct.new(
+      nil,
       :create_delegation_request,
       :error_code,
       :error_message,
@@ -739,6 +760,7 @@ module Aws::AuditManager
     #   <p> The identifier for the assessment. </p>
     #   @return [String]
     class BatchCreateDelegationByAssessmentRequest < Struct.new(
+      nil,
       :create_delegation_requests,
       :assessment_id,
       keyword_init: true
@@ -754,6 +776,7 @@ module Aws::AuditManager
     #         </p>
     #   @return [Array<Types::BatchCreateDelegationByAssessmentError>]
     class BatchCreateDelegationByAssessmentResponse < Struct.new(
+      nil,
       :delegations,
       :errors,
       keyword_init: true
@@ -775,6 +798,7 @@ module Aws::AuditManager
     #         </p>
     #   @return [String]
     class BatchDeleteDelegationByAssessmentError < Struct.new(
+      nil,
       :delegation_id,
       :error_code,
       :error_message,
@@ -790,6 +814,7 @@ module Aws::AuditManager
     #   <p> The identifier for the assessment. </p>
     #   @return [String]
     class BatchDeleteDelegationByAssessmentRequest < Struct.new(
+      nil,
       :delegation_ids,
       :assessment_id,
       keyword_init: true
@@ -802,6 +827,7 @@ module Aws::AuditManager
     #         </p>
     #   @return [Array<Types::BatchDeleteDelegationByAssessmentError>]
     class BatchDeleteDelegationByAssessmentResponse < Struct.new(
+      nil,
       :errors,
       keyword_init: true
     )
@@ -818,6 +844,7 @@ module Aws::AuditManager
     #   <p> The list of evidence identifiers. </p>
     #   @return [Array<String>]
     class BatchDisassociateAssessmentReportEvidenceRequest < Struct.new(
+      nil,
       :assessment_id,
       :evidence_folder_id,
       :evidence_ids,
@@ -834,6 +861,7 @@ module Aws::AuditManager
     #            returned. </p>
     #   @return [Array<Types::AssessmentReportEvidenceError>]
     class BatchDisassociateAssessmentReportEvidenceResponse < Struct.new(
+      nil,
       :evidence_ids,
       :errors,
       keyword_init: true
@@ -855,6 +883,7 @@ module Aws::AuditManager
     #            returned. </p>
     #   @return [String]
     class BatchImportEvidenceToAssessmentControlError < Struct.new(
+      nil,
       :manual_evidence,
       :error_code,
       :error_message,
@@ -876,6 +905,7 @@ module Aws::AuditManager
     #   <p> The list of manual evidence objects. </p>
     #   @return [Array<Types::ManualEvidence>]
     class BatchImportEvidenceToAssessmentControlRequest < Struct.new(
+      nil,
       :assessment_id,
       :control_set_id,
       :control_id,
@@ -890,6 +920,7 @@ module Aws::AuditManager
     #            returned. </p>
     #   @return [Array<Types::BatchImportEvidenceToAssessmentControlError>]
     class BatchImportEvidenceToAssessmentControlResponse < Struct.new(
+      nil,
       :errors,
       keyword_init: true
     )
@@ -915,6 +946,7 @@ module Aws::AuditManager
     #   <p> The user or role that performed the action. </p>
     #   @return [String]
     class ChangeLog < Struct.new(
+      nil,
       :object_type,
       :object_name,
       :action,
@@ -980,6 +1012,7 @@ module Aws::AuditManager
     #            control.</p>
     #   @return [String]
     class Control < Struct.new(
+      nil,
       :arn,
       :id,
       :type,
@@ -1013,6 +1046,7 @@ module Aws::AuditManager
     #   <p> The time when the comment was posted. </p>
     #   @return [Time]
     class ControlComment < Struct.new(
+      nil,
       :author_name,
       :comment_body,
       :posted_date,
@@ -1050,6 +1084,7 @@ module Aws::AuditManager
     #   <p>The time when the control domain insights were last updated. </p>
     #   @return [Time]
     class ControlDomainInsights < Struct.new(
+      nil,
       :name,
       :id,
       :controls_count_by_noncompliant_evidence,
@@ -1082,6 +1117,7 @@ module Aws::AuditManager
     #   <p>The time when the assessment control insights were last updated. </p>
     #   @return [Time]
     class ControlInsightsMetadataByAssessmentItem < Struct.new(
+      nil,
       :name,
       :id,
       :evidence_insights,
@@ -1110,6 +1146,7 @@ module Aws::AuditManager
     #   <p>The time when the control insights were last updated. </p>
     #   @return [Time]
     class ControlInsightsMetadataItem < Struct.new(
+      nil,
       :name,
       :id,
       :evidence_insights,
@@ -1191,6 +1228,7 @@ module Aws::AuditManager
     #   <p> The instructions for troubleshooting the control. </p>
     #   @return [String]
     class ControlMappingSource < Struct.new(
+      nil,
       :source_id,
       :source_name,
       :source_description,
@@ -1225,6 +1263,7 @@ module Aws::AuditManager
     #   <p> The time when the control was most recently updated. </p>
     #   @return [Time]
     class ControlMetadata < Struct.new(
+      nil,
       :arn,
       :id,
       :name,
@@ -1248,6 +1287,7 @@ module Aws::AuditManager
     #   <p> The list of controls within the control set. </p>
     #   @return [Array<Types::Control>]
     class ControlSet < Struct.new(
+      nil,
       :id,
       :name,
       :controls,
@@ -1262,6 +1302,7 @@ module Aws::AuditManager
     #   <p> The unique identifier of the control. </p>
     #   @return [String]
     class CreateAssessmentFrameworkControl < Struct.new(
+      nil,
       :id,
       keyword_init: true
     )
@@ -1277,6 +1318,7 @@ module Aws::AuditManager
     #         </p>
     #   @return [Array<Types::CreateAssessmentFrameworkControl>]
     class CreateAssessmentFrameworkControlSet < Struct.new(
+      nil,
       :name,
       :controls,
       keyword_init: true
@@ -1305,6 +1347,7 @@ module Aws::AuditManager
     #   <p> The tags that are associated with the framework. </p>
     #   @return [Hash<String, String>]
     class CreateAssessmentFrameworkRequest < Struct.new(
+      nil,
       :name,
       :description,
       :compliance_type,
@@ -1319,6 +1362,7 @@ module Aws::AuditManager
     #   <p> The new framework object that the <code>CreateAssessmentFramework</code> API returned. </p>
     #   @return [Types::Framework]
     class CreateAssessmentFrameworkResponse < Struct.new(
+      nil,
       :framework,
       keyword_init: true
     )
@@ -1347,6 +1391,7 @@ module Aws::AuditManager
     #            </p>
     #   @return [String]
     class CreateAssessmentReportRequest < Struct.new(
+      nil,
       :name,
       :description,
       :assessment_id,
@@ -1361,6 +1406,7 @@ module Aws::AuditManager
     #         </p>
     #   @return [Types::AssessmentReport]
     class CreateAssessmentReportResponse < Struct.new(
+      nil,
       :assessment_report,
       keyword_init: true
     )
@@ -1401,6 +1447,7 @@ module Aws::AuditManager
     #   <p> The tags that are associated with the assessment. </p>
     #   @return [Hash<String, String>]
     class CreateAssessmentRequest < Struct.new(
+      nil,
       :name,
       :description,
       :assessment_reports_destination,
@@ -1418,6 +1465,7 @@ module Aws::AuditManager
     #            An Audit Manager assessment is an implementation of an Audit Manager framework. </p>
     #   @return [Types::Assessment]
     class CreateAssessmentResponse < Struct.new(
+      nil,
       :assessment,
       keyword_init: true
     )
@@ -1494,6 +1542,7 @@ module Aws::AuditManager
     #   <p> The instructions for troubleshooting the control. </p>
     #   @return [String]
     class CreateControlMappingSource < Struct.new(
+      nil,
       :source_name,
       :source_description,
       :source_set_up_option,
@@ -1528,6 +1577,7 @@ module Aws::AuditManager
     #   <p> The tags that are associated with the control. </p>
     #   @return [Hash<String, String>]
     class CreateControlRequest < Struct.new(
+      nil,
       :name,
       :description,
       :testing_information,
@@ -1544,6 +1594,7 @@ module Aws::AuditManager
     #   <p> The new control that the <code>CreateControl</code> API returned. </p>
     #   @return [Types::Control]
     class CreateControlResponse < Struct.new(
+      nil,
       :control,
       keyword_init: true
     )
@@ -1573,6 +1624,7 @@ module Aws::AuditManager
     #            </note>
     #   @return [String]
     class CreateDelegationRequest < Struct.new(
+      nil,
       :comment,
       :control_set_id,
       :role_arn,
@@ -1590,6 +1642,7 @@ module Aws::AuditManager
     #   <p>The destination bucket where Audit Manager stores exported files.</p>
     #   @return [String]
     class DefaultExportDestination < Struct.new(
+      nil,
       :destination_type,
       :destination,
       keyword_init: true
@@ -1641,6 +1694,7 @@ module Aws::AuditManager
     #   <p> The user or role that created the delegation. </p>
     #   @return [String]
     class Delegation < Struct.new(
+      nil,
       :id,
       :assessment_name,
       :assessment_id,
@@ -1680,6 +1734,7 @@ module Aws::AuditManager
     #   <p> Specifies the name of the control set that was delegated for review. </p>
     #   @return [String]
     class DelegationMetadata < Struct.new(
+      nil,
       :id,
       :assessment_name,
       :assessment_id,
@@ -1696,6 +1751,7 @@ module Aws::AuditManager
     #   <p> The identifier for the custom framework. </p>
     #   @return [String]
     class DeleteAssessmentFrameworkRequest < Struct.new(
+      nil,
       :framework_id,
       keyword_init: true
     )
@@ -1703,6 +1759,7 @@ module Aws::AuditManager
     end
 
     class DeleteAssessmentFrameworkResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1715,6 +1772,7 @@ module Aws::AuditManager
     #   <p>Specifies whether the share request is a sent request or a received request.</p>
     #   @return [String]
     class DeleteAssessmentFrameworkShareRequest < Struct.new(
+      nil,
       :request_id,
       :request_type,
       keyword_init: true
@@ -1723,6 +1781,7 @@ module Aws::AuditManager
     end
 
     class DeleteAssessmentFrameworkShareResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1735,6 +1794,7 @@ module Aws::AuditManager
     #   <p> The unique identifier for the assessment report. </p>
     #   @return [String]
     class DeleteAssessmentReportRequest < Struct.new(
+      nil,
       :assessment_id,
       :assessment_report_id,
       keyword_init: true
@@ -1743,6 +1803,7 @@ module Aws::AuditManager
     end
 
     class DeleteAssessmentReportResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1752,6 +1813,7 @@ module Aws::AuditManager
     #   <p> The identifier for the assessment. </p>
     #   @return [String]
     class DeleteAssessmentRequest < Struct.new(
+      nil,
       :assessment_id,
       keyword_init: true
     )
@@ -1759,6 +1821,7 @@ module Aws::AuditManager
     end
 
     class DeleteAssessmentResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1768,6 +1831,7 @@ module Aws::AuditManager
     #   <p> The unique identifier for the control. </p>
     #   @return [String]
     class DeleteControlRequest < Struct.new(
+      nil,
       :control_id,
       keyword_init: true
     )
@@ -1775,12 +1839,14 @@ module Aws::AuditManager
     end
 
     class DeleteControlResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
     end
 
     class DeregisterAccountRequest < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1790,6 +1856,7 @@ module Aws::AuditManager
     #   <p> The registration status of the account. </p>
     #   @return [String]
     class DeregisterAccountResponse < Struct.new(
+      nil,
       :status,
       keyword_init: true
     )
@@ -1800,6 +1867,7 @@ module Aws::AuditManager
     #   <p> The identifier for the administrator account. </p>
     #   @return [String]
     class DeregisterOrganizationAdminAccountRequest < Struct.new(
+      nil,
       :admin_account_id,
       keyword_init: true
     )
@@ -1807,6 +1875,7 @@ module Aws::AuditManager
     end
 
     class DeregisterOrganizationAdminAccountResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1844,6 +1913,7 @@ module Aws::AuditManager
     #            </ul>
     #   @return [String]
     class DeregistrationPolicy < Struct.new(
+      nil,
       :delete_resources,
       keyword_init: true
     )
@@ -1857,6 +1927,7 @@ module Aws::AuditManager
     #   <p> The unique identifier for the folder that the evidence is stored in. </p>
     #   @return [String]
     class DisassociateAssessmentReportEvidenceFolderRequest < Struct.new(
+      nil,
       :assessment_id,
       :evidence_folder_id,
       keyword_init: true
@@ -1865,6 +1936,7 @@ module Aws::AuditManager
     end
 
     class DisassociateAssessmentReportEvidenceFolderResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1944,6 +2016,7 @@ module Aws::AuditManager
     #   <p> Specifies whether the evidence is included in the assessment report. </p>
     #   @return [String]
     class Evidence < Struct.new(
+      nil,
       :data_source,
       :evidence_aws_account_id,
       :time,
@@ -2027,6 +2100,7 @@ module Aws::AuditManager
     #   <p>Represents any errors that occurred when enabling or disabling evidence finder. </p>
     #   @return [String]
     class EvidenceFinderEnablement < Struct.new(
+      nil,
       :event_data_store_arn,
       :enablement_status,
       :backfill_status,
@@ -2061,6 +2135,7 @@ module Aws::AuditManager
     #            </note>
     #   @return [Integer]
     class EvidenceInsights < Struct.new(
+      nil,
       :noncompliant_evidence_count,
       :compliant_evidence_count,
       :inconclusive_evidence_count,
@@ -2125,6 +2200,7 @@ module Aws::AuditManager
     #   <p> The tags that are associated with the framework. </p>
     #   @return [Hash<String, String>]
     class Framework < Struct.new(
+      nil,
       :arn,
       :id,
       :name,
@@ -2159,6 +2235,7 @@ module Aws::AuditManager
     #            be PCI DSS or HIPAA. </p>
     #   @return [String]
     class FrameworkMetadata < Struct.new(
+      nil,
       :name,
       :description,
       :logo,
@@ -2169,6 +2246,7 @@ module Aws::AuditManager
     end
 
     class GetAccountStatusRequest < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -2178,6 +2256,7 @@ module Aws::AuditManager
     #   <p> The status of the Amazon Web Services account. </p>
     #   @return [String]
     class GetAccountStatusResponse < Struct.new(
+      nil,
       :status,
       keyword_init: true
     )
@@ -2188,6 +2267,7 @@ module Aws::AuditManager
     #   <p> The identifier for the framework. </p>
     #   @return [String]
     class GetAssessmentFrameworkRequest < Struct.new(
+      nil,
       :framework_id,
       keyword_init: true
     )
@@ -2203,6 +2283,7 @@ module Aws::AuditManager
     #            </note>
     #   @return [Types::Framework]
     class GetAssessmentFrameworkResponse < Struct.new(
+      nil,
       :framework,
       keyword_init: true
     )
@@ -2216,6 +2297,7 @@ module Aws::AuditManager
     #   <p> The unique identifier for the assessment. </p>
     #   @return [String]
     class GetAssessmentReportUrlRequest < Struct.new(
+      nil,
       :assessment_report_id,
       :assessment_id,
       keyword_init: true
@@ -2228,6 +2310,7 @@ module Aws::AuditManager
     #            resource on the internet. </p>
     #   @return [Types::URL]
     class GetAssessmentReportUrlResponse < Struct.new(
+      nil,
       :pre_signed_url,
       keyword_init: true
     )
@@ -2238,6 +2321,7 @@ module Aws::AuditManager
     #   <p>The unique identifier for the assessment. </p>
     #   @return [String]
     class GetAssessmentRequest < Struct.new(
+      nil,
       :assessment_id,
       keyword_init: true
     )
@@ -2253,6 +2337,7 @@ module Aws::AuditManager
     #            This includes the role type and IAM Amazon Resource Name (ARN). </p>
     #   @return [Types::Role]
     class GetAssessmentResponse < Struct.new(
+      nil,
       :assessment,
       :user_role,
       keyword_init: true
@@ -2276,6 +2361,7 @@ module Aws::AuditManager
     #   <p>Represents the maximum number of results on a page or for an API request call. </p>
     #   @return [Integer]
     class GetChangeLogsRequest < Struct.new(
+      nil,
       :assessment_id,
       :control_set_id,
       :control_id,
@@ -2293,6 +2379,7 @@ module Aws::AuditManager
     #   <p>The pagination token that's used to fetch the next set of results. </p>
     #   @return [String]
     class GetChangeLogsResponse < Struct.new(
+      nil,
       :change_logs,
       :next_token,
       keyword_init: true
@@ -2304,6 +2391,7 @@ module Aws::AuditManager
     #   <p> The identifier for the control. </p>
     #   @return [String]
     class GetControlRequest < Struct.new(
+      nil,
       :control_id,
       keyword_init: true
     )
@@ -2314,6 +2402,7 @@ module Aws::AuditManager
     #   <p> The details of the control that the <code>GetControl</code> API returned. </p>
     #   @return [Types::Control]
     class GetControlResponse < Struct.new(
+      nil,
       :control,
       keyword_init: true
     )
@@ -2327,6 +2416,7 @@ module Aws::AuditManager
     #   <p> Represents the maximum number of results on a page or for an API request call. </p>
     #   @return [Integer]
     class GetDelegationsRequest < Struct.new(
+      nil,
       :next_token,
       :max_results,
       keyword_init: true
@@ -2341,6 +2431,7 @@ module Aws::AuditManager
     #   <p> The pagination token that's used to fetch the next set of results. </p>
     #   @return [String]
     class GetDelegationsResponse < Struct.new(
+      nil,
       :delegations,
       :next_token,
       keyword_init: true
@@ -2364,6 +2455,7 @@ module Aws::AuditManager
     #   <p> Represents the maximum number of results on a page or for an API request call. </p>
     #   @return [Integer]
     class GetEvidenceByEvidenceFolderRequest < Struct.new(
+      nil,
       :assessment_id,
       :control_set_id,
       :evidence_folder_id,
@@ -2382,6 +2474,7 @@ module Aws::AuditManager
     #   <p> The pagination token that's used to fetch the next set of results. </p>
     #   @return [String]
     class GetEvidenceByEvidenceFolderResponse < Struct.new(
+      nil,
       :evidence,
       :next_token,
       keyword_init: true
@@ -2394,6 +2487,7 @@ module Aws::AuditManager
     #               User Guide</i>.</p>
     #   @return [String]
     class GetEvidenceFileUploadUrlRequest < Struct.new(
+      nil,
       :file_name,
       keyword_init: true
     )
@@ -2409,6 +2503,7 @@ module Aws::AuditManager
     #   <p>The presigned URL that was generated.</p>
     #   @return [String]
     class GetEvidenceFileUploadUrlResponse < Struct.new(
+      nil,
       :evidence_file_name,
       :upload_url,
       keyword_init: true
@@ -2426,6 +2521,7 @@ module Aws::AuditManager
     #   <p> The unique identifier for the folder that the evidence is stored in. </p>
     #   @return [String]
     class GetEvidenceFolderRequest < Struct.new(
+      nil,
       :assessment_id,
       :control_set_id,
       :evidence_folder_id,
@@ -2438,6 +2534,7 @@ module Aws::AuditManager
     #   <p> The folder that the evidence is stored in. </p>
     #   @return [Types::AssessmentEvidenceFolder]
     class GetEvidenceFolderResponse < Struct.new(
+      nil,
       :evidence_folder,
       keyword_init: true
     )
@@ -2460,6 +2557,7 @@ module Aws::AuditManager
     #   <p> Represents the maximum number of results on a page or for an API request call. </p>
     #   @return [Integer]
     class GetEvidenceFoldersByAssessmentControlRequest < Struct.new(
+      nil,
       :assessment_id,
       :control_set_id,
       :control_id,
@@ -2478,6 +2576,7 @@ module Aws::AuditManager
     #   <p> The pagination token that's used to fetch the next set of results. </p>
     #   @return [String]
     class GetEvidenceFoldersByAssessmentControlResponse < Struct.new(
+      nil,
       :evidence_folders,
       :next_token,
       keyword_init: true
@@ -2495,6 +2594,7 @@ module Aws::AuditManager
     #   <p> Represents the maximum number of results on a page or for an API request call. </p>
     #   @return [Integer]
     class GetEvidenceFoldersByAssessmentRequest < Struct.new(
+      nil,
       :assessment_id,
       :next_token,
       :max_results,
@@ -2511,6 +2611,7 @@ module Aws::AuditManager
     #   <p> The pagination token that's used to fetch the next set of results. </p>
     #   @return [String]
     class GetEvidenceFoldersByAssessmentResponse < Struct.new(
+      nil,
       :evidence_folders,
       :next_token,
       keyword_init: true
@@ -2531,6 +2632,7 @@ module Aws::AuditManager
     #   <p> The unique identifier for the evidence. </p>
     #   @return [String]
     class GetEvidenceRequest < Struct.new(
+      nil,
       :assessment_id,
       :control_set_id,
       :evidence_folder_id,
@@ -2544,6 +2646,7 @@ module Aws::AuditManager
     #   <p> The evidence that the <code>GetEvidence</code> API returned. </p>
     #   @return [Types::Evidence]
     class GetEvidenceResponse < Struct.new(
+      nil,
       :evidence,
       keyword_init: true
     )
@@ -2554,6 +2657,7 @@ module Aws::AuditManager
     #   <p>The unique identifier for the assessment. </p>
     #   @return [String]
     class GetInsightsByAssessmentRequest < Struct.new(
+      nil,
       :assessment_id,
       keyword_init: true
     )
@@ -2565,6 +2669,7 @@ module Aws::AuditManager
     #            returned. </p>
     #   @return [Types::InsightsByAssessment]
     class GetInsightsByAssessmentResponse < Struct.new(
+      nil,
       :insights,
       keyword_init: true
     )
@@ -2572,6 +2677,7 @@ module Aws::AuditManager
     end
 
     class GetInsightsRequest < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -2581,6 +2687,7 @@ module Aws::AuditManager
     #   <p>The analytics data that the <code>GetInsights</code> API returned. </p>
     #   @return [Types::Insights]
     class GetInsightsResponse < Struct.new(
+      nil,
       :insights,
       keyword_init: true
     )
@@ -2588,6 +2695,7 @@ module Aws::AuditManager
     end
 
     class GetOrganizationAdminAccountRequest < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -2600,6 +2708,7 @@ module Aws::AuditManager
     #   <p> The identifier for the organization. </p>
     #   @return [String]
     class GetOrganizationAdminAccountResponse < Struct.new(
+      nil,
       :admin_account_id,
       :organization_id,
       keyword_init: true
@@ -2608,6 +2717,7 @@ module Aws::AuditManager
     end
 
     class GetServicesInScopeRequest < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -2617,6 +2727,7 @@ module Aws::AuditManager
     #   <p> The metadata that's associated with the Amazon Web Services service. </p>
     #   @return [Array<Types::ServiceMetadata>]
     class GetServicesInScopeResponse < Struct.new(
+      nil,
       :service_metadata,
       keyword_init: true
     )
@@ -2627,6 +2738,7 @@ module Aws::AuditManager
     #   <p> The list of setting attribute enum values. </p>
     #   @return [String]
     class GetSettingsRequest < Struct.new(
+      nil,
       :attribute,
       keyword_init: true
     )
@@ -2637,6 +2749,7 @@ module Aws::AuditManager
     #   <p> The settings object that holds all supported Audit Manager settings. </p>
     #   @return [Types::Settings]
     class GetSettingsResponse < Struct.new(
+      nil,
       :settings,
       keyword_init: true
     )
@@ -2708,6 +2821,7 @@ module Aws::AuditManager
     #   <p>The time when the cross-assessment insights were last updated. </p>
     #   @return [Time]
     class Insights < Struct.new(
+      nil,
       :active_assessments_count,
       :noncompliant_evidence_count,
       :compliant_evidence_count,
@@ -2784,6 +2898,7 @@ module Aws::AuditManager
     #   <p>The time when the assessment insights were last updated.</p>
     #   @return [Time]
     class InsightsByAssessment < Struct.new(
+      nil,
       :noncompliant_evidence_count,
       :compliant_evidence_count,
       :inconclusive_evidence_count,
@@ -2800,6 +2915,7 @@ module Aws::AuditManager
     # @!attribute message
     #   @return [String]
     class InternalServerException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -2825,6 +2941,7 @@ module Aws::AuditManager
     #   <p>Represents the maximum number of results on a page or for an API request call. </p>
     #   @return [Integer]
     class ListAssessmentControlInsightsByControlDomainRequest < Struct.new(
+      nil,
       :control_domain_id,
       :assessment_id,
       :next_token,
@@ -2842,6 +2959,7 @@ module Aws::AuditManager
     #   <p>The pagination token that's used to fetch the next set of results. </p>
     #   @return [String]
     class ListAssessmentControlInsightsByControlDomainResponse < Struct.new(
+      nil,
       :control_insights_by_assessment,
       :next_token,
       keyword_init: true
@@ -2859,6 +2977,7 @@ module Aws::AuditManager
     #   <p> Represents the maximum number of results on a page or for an API request call. </p>
     #   @return [Integer]
     class ListAssessmentFrameworkShareRequestsRequest < Struct.new(
+      nil,
       :request_type,
       :next_token,
       :max_results,
@@ -2875,6 +2994,7 @@ module Aws::AuditManager
     #   <p> The pagination token that's used to fetch the next set of results. </p>
     #   @return [String]
     class ListAssessmentFrameworkShareRequestsResponse < Struct.new(
+      nil,
       :assessment_framework_share_requests,
       :next_token,
       keyword_init: true
@@ -2892,6 +3012,7 @@ module Aws::AuditManager
     #   <p> Represents the maximum number of results on a page or for an API request call. </p>
     #   @return [Integer]
     class ListAssessmentFrameworksRequest < Struct.new(
+      nil,
       :framework_type,
       :next_token,
       :max_results,
@@ -2908,6 +3029,7 @@ module Aws::AuditManager
     #   <p> The pagination token that's used to fetch the next set of results. </p>
     #   @return [String]
     class ListAssessmentFrameworksResponse < Struct.new(
+      nil,
       :framework_metadata_list,
       :next_token,
       keyword_init: true
@@ -2922,6 +3044,7 @@ module Aws::AuditManager
     #   <p> Represents the maximum number of results on a page or for an API request call. </p>
     #   @return [Integer]
     class ListAssessmentReportsRequest < Struct.new(
+      nil,
       :next_token,
       :max_results,
       keyword_init: true
@@ -2937,6 +3060,7 @@ module Aws::AuditManager
     #   <p> The pagination token that's used to fetch the next set of results. </p>
     #   @return [String]
     class ListAssessmentReportsResponse < Struct.new(
+      nil,
       :assessment_reports,
       :next_token,
       keyword_init: true
@@ -2954,6 +3078,7 @@ module Aws::AuditManager
     #   <p> Represents the maximum number of results on a page or for an API request call. </p>
     #   @return [Integer]
     class ListAssessmentsRequest < Struct.new(
+      nil,
       :status,
       :next_token,
       :max_results,
@@ -2970,6 +3095,7 @@ module Aws::AuditManager
     #   <p> The pagination token that's used to fetch the next set of results. </p>
     #   @return [String]
     class ListAssessmentsResponse < Struct.new(
+      nil,
       :assessment_metadata,
       :next_token,
       keyword_init: true
@@ -2987,6 +3113,7 @@ module Aws::AuditManager
     #   <p>Represents the maximum number of results on a page or for an API request call. </p>
     #   @return [Integer]
     class ListControlDomainInsightsByAssessmentRequest < Struct.new(
+      nil,
       :assessment_id,
       :next_token,
       :max_results,
@@ -3003,6 +3130,7 @@ module Aws::AuditManager
     #   <p>The pagination token that's used to fetch the next set of results. </p>
     #   @return [String]
     class ListControlDomainInsightsByAssessmentResponse < Struct.new(
+      nil,
       :control_domain_insights,
       :next_token,
       keyword_init: true
@@ -3017,6 +3145,7 @@ module Aws::AuditManager
     #   <p>Represents the maximum number of results on a page or for an API request call. </p>
     #   @return [Integer]
     class ListControlDomainInsightsRequest < Struct.new(
+      nil,
       :next_token,
       :max_results,
       keyword_init: true
@@ -3032,6 +3161,7 @@ module Aws::AuditManager
     #   <p>The pagination token that's used to fetch the next set of results. </p>
     #   @return [String]
     class ListControlDomainInsightsResponse < Struct.new(
+      nil,
       :control_domain_insights,
       :next_token,
       keyword_init: true
@@ -3055,6 +3185,7 @@ module Aws::AuditManager
     #   <p>Represents the maximum number of results on a page or for an API request call. </p>
     #   @return [Integer]
     class ListControlInsightsByControlDomainRequest < Struct.new(
+      nil,
       :control_domain_id,
       :next_token,
       :max_results,
@@ -3071,6 +3202,7 @@ module Aws::AuditManager
     #   <p>The pagination token that's used to fetch the next set of results. </p>
     #   @return [String]
     class ListControlInsightsByControlDomainResponse < Struct.new(
+      nil,
       :control_insights_metadata,
       :next_token,
       keyword_init: true
@@ -3110,6 +3242,7 @@ module Aws::AuditManager
     #            custom controls that don't belong to any control domain or control objective.</p>
     #   @return [String]
     class ListControlsRequest < Struct.new(
+      nil,
       :control_type,
       :next_token,
       :max_results,
@@ -3127,6 +3260,7 @@ module Aws::AuditManager
     #   <p>The pagination token that's used to fetch the next set of results. </p>
     #   @return [String]
     class ListControlsResponse < Struct.new(
+      nil,
       :control_metadata_list,
       :next_token,
       keyword_init: true
@@ -3144,6 +3278,7 @@ module Aws::AuditManager
     #   <p> Represents the maximum number of results on a page or for an API request call. </p>
     #   @return [Integer]
     class ListKeywordsForDataSourceRequest < Struct.new(
+      nil,
       :source,
       :next_token,
       :max_results,
@@ -3159,6 +3294,7 @@ module Aws::AuditManager
     #   <p> The pagination token that's used to fetch the next set of results. </p>
     #   @return [String]
     class ListKeywordsForDataSourceResponse < Struct.new(
+      nil,
       :keywords,
       :next_token,
       keyword_init: true
@@ -3173,6 +3309,7 @@ module Aws::AuditManager
     #   <p> Represents the maximum number of results on a page or for an API request call. </p>
     #   @return [Integer]
     class ListNotificationsRequest < Struct.new(
+      nil,
       :next_token,
       :max_results,
       keyword_init: true
@@ -3187,6 +3324,7 @@ module Aws::AuditManager
     #   <p> The pagination token that's used to fetch the next set of results. </p>
     #   @return [String]
     class ListNotificationsResponse < Struct.new(
+      nil,
       :notifications,
       :next_token,
       keyword_init: true
@@ -3198,6 +3336,7 @@ module Aws::AuditManager
     #   <p> The Amazon Resource Name (ARN) of the resource. </p>
     #   @return [String]
     class ListTagsForResourceRequest < Struct.new(
+      nil,
       :resource_arn,
       keyword_init: true
     )
@@ -3208,6 +3347,7 @@ module Aws::AuditManager
     #   <p> The list of tags that the <code>ListTagsForResource</code> API returned. </p>
     #   @return [Hash<String, String>]
     class ListTagsForResourceResponse < Struct.new(
+      nil,
       :tags,
       keyword_init: true
     )
@@ -3230,6 +3370,7 @@ module Aws::AuditManager
     #               </a> API response.</p>
     #   @return [String]
     class ManualEvidence < Struct.new(
+      nil,
       :s3_resource_path,
       :text_response,
       :evidence_file_name,
@@ -3266,6 +3407,7 @@ module Aws::AuditManager
     #   <p> The sender of the notification. </p>
     #   @return [String]
     class Notification < Struct.new(
+      nil,
       :id,
       :assessment_id,
       :assessment_name,
@@ -3286,6 +3428,7 @@ module Aws::AuditManager
     #   <p> The delegated administrator account for Audit Manager. </p>
     #   @return [String]
     class RegisterAccountRequest < Struct.new(
+      nil,
       :kms_key,
       :delegated_admin_account,
       keyword_init: true
@@ -3297,6 +3440,7 @@ module Aws::AuditManager
     #   <p> The status of the account registration request. </p>
     #   @return [String]
     class RegisterAccountResponse < Struct.new(
+      nil,
       :status,
       keyword_init: true
     )
@@ -3307,6 +3451,7 @@ module Aws::AuditManager
     #   <p> The identifier for the delegated administrator account. </p>
     #   @return [String]
     class RegisterOrganizationAdminAccountRequest < Struct.new(
+      nil,
       :admin_account_id,
       keyword_init: true
     )
@@ -3320,6 +3465,7 @@ module Aws::AuditManager
     #   <p> The identifier for the organization. </p>
     #   @return [String]
     class RegisterOrganizationAdminAccountResponse < Struct.new(
+      nil,
       :admin_account_id,
       :organization_id,
       keyword_init: true
@@ -3358,6 +3504,7 @@ module Aws::AuditManager
     #            </ul>
     #   @return [String]
     class Resource < Struct.new(
+      nil,
       :arn,
       :value,
       :compliance_check,
@@ -3376,6 +3523,7 @@ module Aws::AuditManager
     #   <p> The type of resource that's affected by the error. </p>
     #   @return [String]
     class ResourceNotFoundException < Struct.new(
+      nil,
       :message,
       :resource_id,
       :resource_type,
@@ -3401,6 +3549,7 @@ module Aws::AuditManager
     #   <p> The Amazon Resource Name (ARN) of the IAM role. </p>
     #   @return [String]
     class Role < Struct.new(
+      nil,
       :role_type,
       :role_arn,
       keyword_init: true
@@ -3437,6 +3586,7 @@ module Aws::AuditManager
     #     You can't specify services in scope when creating/updating an assessment. If you use the parameter to specify one or more AWS services, Audit Manager ignores the input. Instead the value of the parameter will show as empty indicating that the services are defined and managed by Audit Manager.
     #   @return [Array<Types::AWSService>]
     class Scope < Struct.new(
+      nil,
       :aws_accounts,
       :aws_services,
       keyword_init: true
@@ -3459,6 +3609,7 @@ module Aws::AuditManager
     #            or database. </p>
     #   @return [String]
     class ServiceMetadata < Struct.new(
+      nil,
       :name,
       :display_name,
       :description,
@@ -3475,6 +3626,7 @@ module Aws::AuditManager
     # @!attribute message
     #   @return [String]
     class ServiceQuotaExceededException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -3508,6 +3660,7 @@ module Aws::AuditManager
     #   <p>The default S3 destination bucket for storing evidence finder exports.</p>
     #   @return [Types::DefaultExportDestination]
     class Settings < Struct.new(
+      nil,
       :is_aws_org_enabled,
       :sns_topic,
       :default_assessment_reports_destination,
@@ -3693,6 +3846,7 @@ module Aws::AuditManager
     #            </important>
     #   @return [String]
     class SourceKeyword < Struct.new(
+      nil,
       :keyword_input_type,
       :keyword_value,
       keyword_init: true
@@ -3713,6 +3867,7 @@ module Aws::AuditManager
     #   <p> An optional comment from the sender about the share request. </p>
     #   @return [String]
     class StartAssessmentFrameworkShareRequest < Struct.new(
+      nil,
       :framework_id,
       :destination_account,
       :destination_region,
@@ -3727,6 +3882,7 @@ module Aws::AuditManager
     #         </p>
     #   @return [Types::AssessmentFrameworkShareRequest]
     class StartAssessmentFrameworkShareResponse < Struct.new(
+      nil,
       :assessment_framework_share_request,
       keyword_init: true
     )
@@ -3740,6 +3896,7 @@ module Aws::AuditManager
     #   <p> The tags that are associated with the resource. </p>
     #   @return [Hash<String, String>]
     class TagResourceRequest < Struct.new(
+      nil,
       :resource_arn,
       :tags,
       keyword_init: true
@@ -3748,6 +3905,7 @@ module Aws::AuditManager
     end
 
     class TagResourceResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -3757,6 +3915,7 @@ module Aws::AuditManager
     # @!attribute message
     #   @return [String]
     class ThrottlingException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -3772,6 +3931,7 @@ module Aws::AuditManager
     #   <p> The unique identifier for the internet resource. </p>
     #   @return [String]
     class URL < Struct.new(
+      nil,
       :hyperlink_name,
       :link,
       keyword_init: true
@@ -3786,6 +3946,7 @@ module Aws::AuditManager
     #   <p> The name or key of the tag. </p>
     #   @return [Array<String>]
     class UntagResourceRequest < Struct.new(
+      nil,
       :resource_arn,
       :tag_keys,
       keyword_init: true
@@ -3794,6 +3955,7 @@ module Aws::AuditManager
     end
 
     class UntagResourceResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -3815,6 +3977,7 @@ module Aws::AuditManager
     #   <p> The comment body text for the control. </p>
     #   @return [String]
     class UpdateAssessmentControlRequest < Struct.new(
+      nil,
       :assessment_id,
       :control_set_id,
       :control_id,
@@ -3830,6 +3993,7 @@ module Aws::AuditManager
     #            returned. </p>
     #   @return [Types::AssessmentControl]
     class UpdateAssessmentControlResponse < Struct.new(
+      nil,
       :control,
       keyword_init: true
     )
@@ -3849,6 +4013,7 @@ module Aws::AuditManager
     #   <p> The comment that's related to the status update. </p>
     #   @return [String]
     class UpdateAssessmentControlSetStatusRequest < Struct.new(
+      nil,
       :assessment_id,
       :control_set_id,
       :status,
@@ -3863,6 +4028,7 @@ module Aws::AuditManager
     #               <code>UpdateAssessmentControlSetStatus</code> API returned. </p>
     #   @return [Types::AssessmentControlSet]
     class UpdateAssessmentControlSetStatusResponse < Struct.new(
+      nil,
       :control_set,
       keyword_init: true
     )
@@ -3880,6 +4046,7 @@ module Aws::AuditManager
     #   <p> The list of controls that are contained within the control set. </p>
     #   @return [Array<Types::CreateAssessmentFrameworkControl>]
     class UpdateAssessmentFrameworkControlSet < Struct.new(
+      nil,
       :id,
       :name,
       :controls,
@@ -3909,6 +4076,7 @@ module Aws::AuditManager
     #            </note>
     #   @return [Array<Types::UpdateAssessmentFrameworkControlSet>]
     class UpdateAssessmentFrameworkRequest < Struct.new(
+      nil,
       :framework_id,
       :name,
       :description,
@@ -3923,6 +4091,7 @@ module Aws::AuditManager
     #   <p> The framework object. </p>
     #   @return [Types::Framework]
     class UpdateAssessmentFrameworkResponse < Struct.new(
+      nil,
       :framework,
       keyword_init: true
     )
@@ -3939,6 +4108,7 @@ module Aws::AuditManager
     #   <p>Specifies the update action for the share request.</p>
     #   @return [String]
     class UpdateAssessmentFrameworkShareRequest < Struct.new(
+      nil,
       :request_id,
       :request_type,
       :action,
@@ -3952,6 +4122,7 @@ module Aws::AuditManager
     #               <code>UpdateAssessmentFrameworkShare</code> operation. </p>
     #   @return [Types::AssessmentFrameworkShareRequest]
     class UpdateAssessmentFrameworkShareResponse < Struct.new(
+      nil,
       :assessment_framework_share_request,
       keyword_init: true
     )
@@ -3978,6 +4149,7 @@ module Aws::AuditManager
     #   <p> The list of roles for the assessment. </p>
     #   @return [Array<Types::Role>]
     class UpdateAssessmentRequest < Struct.new(
+      nil,
       :assessment_id,
       :assessment_name,
       :assessment_description,
@@ -3994,6 +4166,7 @@ module Aws::AuditManager
     #            updated assessment.</p>
     #   @return [Types::Assessment]
     class UpdateAssessmentResponse < Struct.new(
+      nil,
       :assessment,
       keyword_init: true
     )
@@ -4007,6 +4180,7 @@ module Aws::AuditManager
     #   <p> The current status of the assessment. </p>
     #   @return [String]
     class UpdateAssessmentStatusRequest < Struct.new(
+      nil,
       :assessment_id,
       :status,
       keyword_init: true
@@ -4019,6 +4193,7 @@ module Aws::AuditManager
     #            returned. </p>
     #   @return [Types::Assessment]
     class UpdateAssessmentStatusResponse < Struct.new(
+      nil,
       :assessment,
       keyword_init: true
     )
@@ -4047,6 +4222,7 @@ module Aws::AuditManager
     #   <p> The data mapping sources for the control. </p>
     #   @return [Array<Types::ControlMappingSource>]
     class UpdateControlRequest < Struct.new(
+      nil,
       :control_id,
       :name,
       :description,
@@ -4064,6 +4240,7 @@ module Aws::AuditManager
     #         </p>
     #   @return [Types::Control]
     class UpdateControlResponse < Struct.new(
+      nil,
       :control,
       keyword_init: true
     )
@@ -4101,6 +4278,7 @@ module Aws::AuditManager
     #   <p> The default S3 destination bucket for storing evidence finder exports. </p>
     #   @return [Types::DefaultExportDestination]
     class UpdateSettingsRequest < Struct.new(
+      nil,
       :sns_topic,
       :default_assessment_reports_destination,
       :default_process_owners,
@@ -4117,6 +4295,7 @@ module Aws::AuditManager
     #   <p> The current list of settings. </p>
     #   @return [Types::Settings]
     class UpdateSettingsResponse < Struct.new(
+      nil,
       :settings,
       keyword_init: true
     )
@@ -4128,6 +4307,7 @@ module Aws::AuditManager
     #            in. </p>
     #   @return [String]
     class ValidateAssessmentReportIntegrityRequest < Struct.new(
+      nil,
       :s3_relative_path,
       keyword_init: true
     )
@@ -4151,6 +4331,7 @@ module Aws::AuditManager
     #   <p> Represents any errors that occurred when validating the assessment report. </p>
     #   @return [Array<String>]
     class ValidateAssessmentReportIntegrityResponse < Struct.new(
+      nil,
       :signature_valid,
       :signature_algorithm,
       :signature_date_time,
@@ -4171,6 +4352,7 @@ module Aws::AuditManager
     #   <p> The fields that caused the error, if applicable. </p>
     #   @return [Array<Types::ValidationExceptionField>]
     class ValidationException < Struct.new(
+      nil,
       :message,
       :reason,
       :fields,
@@ -4187,6 +4369,7 @@ module Aws::AuditManager
     #   <p> The body of the error message. </p>
     #   @return [String]
     class ValidationExceptionField < Struct.new(
+      nil,
       :name,
       :message,
       keyword_init: true

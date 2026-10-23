@@ -46,6 +46,7 @@ module Aws::IAM
     #            roles) that attempted to access the service in the tracking period.</p>
     #   @return [Integer]
     class AccessDetail < Struct.new(
+      nil,
       :service_name,
       :service_namespace,
       :region,
@@ -82,6 +83,7 @@ module Aws::IAM
     #   <p>The date when the access key was created.</p>
     #   @return [Time]
     class AccessKey < Struct.new(
+      nil,
       :user_name,
       :access_key_id,
       :status,
@@ -148,6 +150,7 @@ module Aws::IAM
     #            General Reference.</p>
     #   @return [String]
     class AccessKeyLastUsed < Struct.new(
+      nil,
       :last_used_date,
       :service_name,
       :region,
@@ -173,6 +176,7 @@ module Aws::IAM
     #   <p>The date when the access key was created.</p>
     #   @return [Time]
     class AccessKeyMetadata < Struct.new(
+      nil,
       :user_name,
       :access_key_id,
       :status,
@@ -188,6 +192,7 @@ module Aws::IAM
     # @!attribute message
     #   @return [String]
     class AccountNotManagementOrDelegatedAdministratorException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -203,6 +208,7 @@ module Aws::IAM
     #               resource.</p>
     #   @return [String]
     class AddClientIDToOpenIDConnectProviderRequest < Struct.new(
+      nil,
       :open_id_connect_provider_arn,
       :client_id,
       keyword_init: true
@@ -221,6 +227,7 @@ module Aws::IAM
     #       characters with no spaces. You can also include any of the following characters: _+=,.@-</p>
     #   @return [String]
     class AddRoleToInstanceProfileRequest < Struct.new(
+      nil,
       :instance_profile_name,
       :role_name,
       keyword_init: true
@@ -239,6 +246,7 @@ module Aws::IAM
     #       characters with no spaces. You can also include any of the following characters: _+=,.@-</p>
     #   @return [String]
     class AddUserToGroupRequest < Struct.new(
+      nil,
       :group_name,
       :user_name,
       keyword_init: true
@@ -256,6 +264,7 @@ module Aws::IAM
     #            <p>For more information about ARNs, see <a href="https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html">Amazon Resource Names (ARNs)</a> in the <i>Amazon Web Services General Reference</i>.</p>
     #   @return [String]
     class AttachGroupPolicyRequest < Struct.new(
+      nil,
       :group_name,
       :policy_arn,
       keyword_init: true
@@ -273,6 +282,7 @@ module Aws::IAM
     #            <p>For more information about ARNs, see <a href="https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html">Amazon Resource Names (ARNs)</a> in the <i>Amazon Web Services General Reference</i>.</p>
     #   @return [String]
     class AttachRolePolicyRequest < Struct.new(
+      nil,
       :role_name,
       :policy_arn,
       keyword_init: true
@@ -290,6 +300,7 @@ module Aws::IAM
     #            <p>For more information about ARNs, see <a href="https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html">Amazon Resource Names (ARNs)</a> in the <i>Amazon Web Services General Reference</i>.</p>
     #   @return [String]
     class AttachUserPolicyRequest < Struct.new(
+      nil,
       :user_name,
       :policy_arn,
       keyword_init: true
@@ -311,6 +322,7 @@ module Aws::IAM
     #   <p> The ARN of the policy used to set the permissions boundary for the user or role.</p>
     #   @return [String]
     class AttachedPermissionsBoundary < Struct.new(
+      nil,
       :permissions_boundary_type,
       :permissions_boundary_arn,
       keyword_init: true
@@ -332,6 +344,7 @@ module Aws::IAM
     #            the <i>Amazon Web Services General Reference</i>. </p>
     #   @return [String]
     class AttachedPolicy < Struct.new(
+      nil,
       :policy_name,
       :policy_arn,
       keyword_init: true
@@ -344,6 +357,7 @@ module Aws::IAM
     # @!attribute message
     #   @return [String]
     class CallerIsNotManagementAccountException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -365,6 +379,7 @@ module Aws::IAM
     #       special meaning within that tool.</p>
     #   @return [String]
     class ChangePasswordRequest < Struct.new(
+      nil,
       :old_password,
       :new_password,
       keyword_init: true
@@ -377,6 +392,7 @@ module Aws::IAM
     # @!attribute message
     #   @return [String]
     class ConcurrentModificationException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -403,6 +419,7 @@ module Aws::IAM
     #            parameter.</p>
     #   @return [String]
     class ContextEntry < Struct.new(
+      nil,
       :context_key_name,
       :context_key_values,
       :context_key_type,
@@ -417,6 +434,7 @@ module Aws::IAM
     #       characters with no spaces. You can also include any of the following characters: _+=,.@-</p>
     #   @return [String]
     class CreateAccessKeyRequest < Struct.new(
+      nil,
       :user_name,
       keyword_init: true
     )
@@ -429,6 +447,7 @@ module Aws::IAM
     #   <p>A structure with details about the access key.</p>
     #   @return [Types::AccessKey]
     class CreateAccessKeyResponse < Struct.new(
+      nil,
       :access_key,
       keyword_init: true
     )
@@ -442,6 +461,7 @@ module Aws::IAM
     #       two dashes in a row.</p>
     #   @return [String]
     class CreateAccountAliasRequest < Struct.new(
+      nil,
       :account_alias,
       keyword_init: true
     )
@@ -464,6 +484,7 @@ module Aws::IAM
     #               "MyResource" and "myresource".</p>
     #   @return [String]
     class CreateGroupRequest < Struct.new(
+      nil,
       :path,
       :group_name,
       keyword_init: true
@@ -476,6 +497,7 @@ module Aws::IAM
     #   <p>A structure containing details about the new group.</p>
     #   @return [Types::Group]
     class CreateGroupResponse < Struct.new(
+      nil,
       :group,
       keyword_init: true
     )
@@ -506,6 +528,7 @@ module Aws::IAM
     #            </note>
     #   @return [Array<Types::Tag>]
     class CreateInstanceProfileRequest < Struct.new(
+      nil,
       :instance_profile_name,
       :path,
       :tags,
@@ -520,6 +543,7 @@ module Aws::IAM
     #   <p>A structure containing details about the new instance profile.</p>
     #   @return [Types::InstanceProfile]
     class CreateInstanceProfileResponse < Struct.new(
+      nil,
       :instance_profile,
       keyword_init: true
     )
@@ -550,6 +574,7 @@ module Aws::IAM
     #   <p>Specifies whether the user is required to set a new password on next sign-in.</p>
     #   @return [Boolean]
     class CreateLoginProfileRequest < Struct.new(
+      nil,
       :user_name,
       :password,
       :password_reset_required,
@@ -564,6 +589,7 @@ module Aws::IAM
     #   <p>A structure containing the user name and password create date.</p>
     #   @return [Types::LoginProfile]
     class CreateLoginProfileResponse < Struct.new(
+      nil,
       :login_profile,
       keyword_init: true
     )
@@ -623,6 +649,7 @@ module Aws::IAM
     #            </note>
     #   @return [Array<Types::Tag>]
     class CreateOpenIDConnectProviderRequest < Struct.new(
+      nil,
       :url,
       :client_id_list,
       :thumbprint_list,
@@ -643,6 +670,7 @@ module Aws::IAM
     #         <i>IAM User Guide</i>.</p>
     #   @return [Array<Types::Tag>]
     class CreateOpenIDConnectProviderResponse < Struct.new(
+      nil,
       :open_id_connect_provider_arn,
       :tags,
       keyword_init: true
@@ -713,6 +741,7 @@ module Aws::IAM
     #            </note>
     #   @return [Array<Types::Tag>]
     class CreatePolicyRequest < Struct.new(
+      nil,
       :policy_name,
       :path,
       :policy_document,
@@ -728,6 +757,7 @@ module Aws::IAM
     #   <p>A structure containing details about the new policy.</p>
     #   @return [Types::Policy]
     class CreatePolicyResponse < Struct.new(
+      nil,
       :policy,
       keyword_init: true
     )
@@ -773,6 +803,7 @@ module Aws::IAM
     #                   policies</a> in the <i>IAM User Guide</i>.</p>
     #   @return [Boolean]
     class CreatePolicyVersionRequest < Struct.new(
+      nil,
       :policy_arn,
       :policy_document,
       :set_as_default,
@@ -787,6 +818,7 @@ module Aws::IAM
     #   <p>A structure containing details about the new policy version.</p>
     #   @return [Types::PolicyVersion]
     class CreatePolicyVersionResponse < Struct.new(
+      nil,
       :policy_version,
       keyword_init: true
     )
@@ -874,6 +906,7 @@ module Aws::IAM
     #            </note>
     #   @return [Array<Types::Tag>]
     class CreateRoleRequest < Struct.new(
+      nil,
       :path,
       :role_name,
       :assume_role_policy_document,
@@ -891,6 +924,7 @@ module Aws::IAM
     #   <p>A structure containing details about the new role.</p>
     #   @return [Types::Role]
     class CreateRoleResponse < Struct.new(
+      nil,
       :role,
       keyword_init: true
     )
@@ -930,6 +964,7 @@ module Aws::IAM
     #               assertions.</p>
     #   @return [String]
     class CreateSAMLProviderRequest < Struct.new(
+      nil,
       :saml_metadata_document,
       :name,
       :tags,
@@ -951,6 +986,7 @@ module Aws::IAM
     #         <i>IAM User Guide</i>.</p>
     #   @return [Array<Types::Tag>]
     class CreateSAMLProviderResponse < Struct.new(
+      nil,
       :saml_provider_arn,
       :tags,
       keyword_init: true
@@ -983,6 +1019,7 @@ module Aws::IAM
     #               suffix.</p>
     #   @return [String]
     class CreateServiceLinkedRoleRequest < Struct.new(
+      nil,
       :aws_service_name,
       :description,
       :custom_suffix,
@@ -996,6 +1033,7 @@ module Aws::IAM
     #               object that contains details about the newly created role.</p>
     #   @return [Types::Role]
     class CreateServiceLinkedRoleResponse < Struct.new(
+      nil,
       :role,
       keyword_init: true
     )
@@ -1020,6 +1058,7 @@ module Aws::IAM
     #               credential will not expire.</p>
     #   @return [Integer]
     class CreateServiceSpecificCredentialRequest < Struct.new(
+      nil,
       :user_name,
       :service_name,
       :credential_age_days,
@@ -1037,6 +1076,7 @@ module Aws::IAM
     #            </important>
     #   @return [Types::ServiceSpecificCredential]
     class CreateServiceSpecificCredentialResponse < Struct.new(
+      nil,
       :service_specific_credential,
       keyword_init: true
     )
@@ -1079,6 +1119,7 @@ module Aws::IAM
     #            </note>
     #   @return [Array<Types::Tag>]
     class CreateUserRequest < Struct.new(
+      nil,
       :path,
       :user_name,
       :permissions_boundary,
@@ -1093,6 +1134,7 @@ module Aws::IAM
     #   <p>A structure with details about the new IAM user.</p>
     #   @return [Types::User]
     class CreateUserResponse < Struct.new(
+      nil,
       :user,
       keyword_init: true
     )
@@ -1124,6 +1166,7 @@ module Aws::IAM
     #            </note>
     #   @return [Array<Types::Tag>]
     class CreateVirtualMFADeviceRequest < Struct.new(
+      nil,
       :path,
       :virtual_mfa_device_name,
       :tags,
@@ -1138,6 +1181,7 @@ module Aws::IAM
     #   <p>A structure containing details about the new virtual MFA device.</p>
     #   @return [Types::VirtualMFADevice]
     class CreateVirtualMFADeviceResponse < Struct.new(
+      nil,
       :virtual_mfa_device,
       keyword_init: true
     )
@@ -1151,6 +1195,7 @@ module Aws::IAM
     # @!attribute message
     #   @return [String]
     class CredentialReportExpiredException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -1162,6 +1207,7 @@ module Aws::IAM
     # @!attribute message
     #   @return [String]
     class CredentialReportNotPresentException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -1172,6 +1218,7 @@ module Aws::IAM
     # @!attribute message
     #   @return [String]
     class CredentialReportNotReadyException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -1194,6 +1241,7 @@ module Aws::IAM
     #       following characters: =,.@:/-</p>
     #   @return [String]
     class DeactivateMFADeviceRequest < Struct.new(
+      nil,
       :user_name,
       :serial_number,
       keyword_init: true
@@ -1213,6 +1261,7 @@ module Aws::IAM
     #       consist of any upper or lowercased letter or digit.</p>
     #   @return [String]
     class DeleteAccessKeyRequest < Struct.new(
+      nil,
       :user_name,
       :access_key_id,
       keyword_init: true
@@ -1227,6 +1276,7 @@ module Aws::IAM
     #       two dashes in a row.</p>
     #   @return [String]
     class DeleteAccountAliasRequest < Struct.new(
+      nil,
       :account_alias,
       keyword_init: true
     )
@@ -1238,6 +1288,7 @@ module Aws::IAM
     # @!attribute message
     #   @return [String]
     class DeleteConflictException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -1256,6 +1307,7 @@ module Aws::IAM
     #       characters with no spaces. You can also include any of the following characters: _+=,.@-</p>
     #   @return [String]
     class DeleteGroupPolicyRequest < Struct.new(
+      nil,
       :group_name,
       :policy_name,
       keyword_init: true
@@ -1269,6 +1321,7 @@ module Aws::IAM
     #       characters with no spaces. You can also include any of the following characters: _+=,.@-</p>
     #   @return [String]
     class DeleteGroupRequest < Struct.new(
+      nil,
       :group_name,
       keyword_init: true
     )
@@ -1281,6 +1334,7 @@ module Aws::IAM
     #       characters with no spaces. You can also include any of the following characters: _+=,.@-</p>
     #   @return [String]
     class DeleteInstanceProfileRequest < Struct.new(
+      nil,
       :instance_profile_name,
       keyword_init: true
     )
@@ -1296,6 +1350,7 @@ module Aws::IAM
     #       characters with no spaces. You can also include any of the following characters: _+=,.@-</p>
     #   @return [String]
     class DeleteLoginProfileRequest < Struct.new(
+      nil,
       :user_name,
       keyword_init: true
     )
@@ -1307,6 +1362,7 @@ module Aws::IAM
     #               delete. You can get a list of OpenID Connect provider resource ARNs by using the <a href="https://docs.aws.amazon.com/IAM/latest/APIReference/API_ListOpenIDConnectProviders.html">ListOpenIDConnectProviders</a> operation.</p>
     #   @return [String]
     class DeleteOpenIDConnectProviderRequest < Struct.new(
+      nil,
       :open_id_connect_provider_arn,
       keyword_init: true
     )
@@ -1318,6 +1374,7 @@ module Aws::IAM
     #            <p>For more information about ARNs, see <a href="https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html">Amazon Resource Names (ARNs)</a> in the <i>Amazon Web Services General Reference</i>.</p>
     #   @return [String]
     class DeletePolicyRequest < Struct.new(
+      nil,
       :policy_arn,
       keyword_init: true
     )
@@ -1338,6 +1395,7 @@ module Aws::IAM
     #                   policies</a> in the <i>IAM User Guide</i>.</p>
     #   @return [String]
     class DeletePolicyVersionRequest < Struct.new(
+      nil,
       :policy_arn,
       :version_id,
       keyword_init: true
@@ -1350,6 +1408,7 @@ module Aws::IAM
     #               permissions boundary.</p>
     #   @return [String]
     class DeleteRolePermissionsBoundaryRequest < Struct.new(
+      nil,
       :role_name,
       keyword_init: true
     )
@@ -1368,6 +1427,7 @@ module Aws::IAM
     #       characters with no spaces. You can also include any of the following characters: _+=,.@-</p>
     #   @return [String]
     class DeleteRolePolicyRequest < Struct.new(
+      nil,
       :role_name,
       :policy_name,
       keyword_init: true
@@ -1381,6 +1441,7 @@ module Aws::IAM
     #       characters with no spaces. You can also include any of the following characters: _+=,.@-</p>
     #   @return [String]
     class DeleteRoleRequest < Struct.new(
+      nil,
       :role_name,
       keyword_init: true
     )
@@ -1391,6 +1452,7 @@ module Aws::IAM
     #   <p>The Amazon Resource Name (ARN) of the SAML provider to delete.</p>
     #   @return [String]
     class DeleteSAMLProviderRequest < Struct.new(
+      nil,
       :saml_provider_arn,
       keyword_init: true
     )
@@ -1408,6 +1470,7 @@ module Aws::IAM
     #       consist of any upper or lowercased letter or digit.</p>
     #   @return [String]
     class DeleteSSHPublicKeyRequest < Struct.new(
+      nil,
       :user_name,
       :ssh_public_key_id,
       keyword_init: true
@@ -1421,6 +1484,7 @@ module Aws::IAM
     #       characters with no spaces. You can also include any of the following characters: _+=,.@-</p>
     #   @return [String]
     class DeleteServerCertificateRequest < Struct.new(
+      nil,
       :server_certificate_name,
       keyword_init: true
     )
@@ -1431,6 +1495,7 @@ module Aws::IAM
     #   <p>The name of the service-linked role to be deleted.</p>
     #   @return [String]
     class DeleteServiceLinkedRoleRequest < Struct.new(
+      nil,
       :role_name,
       keyword_init: true
     )
@@ -1443,6 +1508,7 @@ module Aws::IAM
     #                   <code>task/aws-service-role/<service-principal-name>/<role-name>/<task-uuid></code>.</p>
     #   @return [String]
     class DeleteServiceLinkedRoleResponse < Struct.new(
+      nil,
       :deletion_task_id,
       keyword_init: true
     )
@@ -1463,6 +1529,7 @@ module Aws::IAM
     #       consist of any upper or lowercased letter or digit.</p>
     #   @return [String]
     class DeleteServiceSpecificCredentialRequest < Struct.new(
+      nil,
       :user_name,
       :service_specific_credential_id,
       keyword_init: true
@@ -1481,6 +1548,7 @@ module Aws::IAM
     #               characters that can be upper- or lower-cased letters or digits.</p>
     #   @return [String]
     class DeleteSigningCertificateRequest < Struct.new(
+      nil,
       :user_name,
       :certificate_id,
       keyword_init: true
@@ -1493,6 +1561,7 @@ module Aws::IAM
     #               permissions boundary.</p>
     #   @return [String]
     class DeleteUserPermissionsBoundaryRequest < Struct.new(
+      nil,
       :user_name,
       keyword_init: true
     )
@@ -1511,6 +1580,7 @@ module Aws::IAM
     #       characters with no spaces. You can also include any of the following characters: _+=,.@-</p>
     #   @return [String]
     class DeleteUserPolicyRequest < Struct.new(
+      nil,
       :user_name,
       :policy_name,
       keyword_init: true
@@ -1524,6 +1594,7 @@ module Aws::IAM
     #       characters with no spaces. You can also include any of the following characters: _+=,.@-</p>
     #   @return [String]
     class DeleteUserRequest < Struct.new(
+      nil,
       :user_name,
       keyword_init: true
     )
@@ -1538,6 +1609,7 @@ module Aws::IAM
     #       following characters: =,.@:/-</p>
     #   @return [String]
     class DeleteVirtualMFADeviceRequest < Struct.new(
+      nil,
       :serial_number,
       keyword_init: true
     )
@@ -1558,6 +1630,7 @@ module Aws::IAM
     #            used.</p>
     #   @return [Array<Types::RoleUsageType>]
     class DeletionTaskFailureReasonType < Struct.new(
+      nil,
       :reason,
       :role_usage_list,
       keyword_init: true
@@ -1575,6 +1648,7 @@ module Aws::IAM
     #            <p>For more information about ARNs, see <a href="https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html">Amazon Resource Names (ARNs)</a> in the <i>Amazon Web Services General Reference</i>.</p>
     #   @return [String]
     class DetachGroupPolicyRequest < Struct.new(
+      nil,
       :group_name,
       :policy_arn,
       keyword_init: true
@@ -1592,6 +1666,7 @@ module Aws::IAM
     #            <p>For more information about ARNs, see <a href="https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html">Amazon Resource Names (ARNs)</a> in the <i>Amazon Web Services General Reference</i>.</p>
     #   @return [String]
     class DetachRolePolicyRequest < Struct.new(
+      nil,
       :role_name,
       :policy_arn,
       keyword_init: true
@@ -1609,6 +1684,7 @@ module Aws::IAM
     #            <p>For more information about ARNs, see <a href="https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html">Amazon Resource Names (ARNs)</a> in the <i>Amazon Web Services General Reference</i>.</p>
     #   @return [String]
     class DetachUserPolicyRequest < Struct.new(
+      nil,
       :user_name,
       :policy_arn,
       keyword_init: true
@@ -1617,6 +1693,7 @@ module Aws::IAM
     end
 
     class DisableOrganizationsRootCredentialsManagementRequest < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1630,6 +1707,7 @@ module Aws::IAM
     #               organization.</p>
     #   @return [Array<String>]
     class DisableOrganizationsRootCredentialsManagementResponse < Struct.new(
+      nil,
       :organization_id,
       :enabled_features,
       keyword_init: true
@@ -1638,6 +1716,7 @@ module Aws::IAM
     end
 
     class DisableOrganizationsRootSessionsRequest < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1651,6 +1730,7 @@ module Aws::IAM
     #               organization.</p>
     #   @return [Array<String>]
     class DisableOrganizationsRootSessionsResponse < Struct.new(
+      nil,
       :organization_id,
       :enabled_features,
       keyword_init: true
@@ -1663,6 +1743,7 @@ module Aws::IAM
     # @!attribute message
     #   @return [String]
     class DuplicateCertificateException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -1674,6 +1755,7 @@ module Aws::IAM
     # @!attribute message
     #   @return [String]
     class DuplicateSSHPublicKeyException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -1717,6 +1799,7 @@ module Aws::IAM
     #            </important>
     #   @return [String]
     class EnableMFADeviceRequest < Struct.new(
+      nil,
       :user_name,
       :serial_number,
       :authentication_code1,
@@ -1727,6 +1810,7 @@ module Aws::IAM
     end
 
     class EnableOrganizationsRootCredentialsManagementRequest < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1739,6 +1823,7 @@ module Aws::IAM
     #   <p>The features you have enabled for centralized root access.</p>
     #   @return [Array<String>]
     class EnableOrganizationsRootCredentialsManagementResponse < Struct.new(
+      nil,
       :organization_id,
       :enabled_features,
       keyword_init: true
@@ -1747,6 +1832,7 @@ module Aws::IAM
     end
 
     class EnableOrganizationsRootSessionsRequest < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1759,6 +1845,7 @@ module Aws::IAM
     #   <p>The features you have enabled for centralized root access.</p>
     #   @return [Array<String>]
     class EnableOrganizationsRootSessionsResponse < Struct.new(
+      nil,
       :organization_id,
       :enabled_features,
       keyword_init: true
@@ -1771,6 +1858,7 @@ module Aws::IAM
     # @!attribute message
     #   @return [String]
     class EntityAlreadyExistsException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -1792,6 +1880,7 @@ module Aws::IAM
     #               <a href="https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_access-advisor.html#service-last-accessed-reporting-period">tracking period</a>.</p>
     #   @return [Time]
     class EntityDetails < Struct.new(
+      nil,
       :entity_info,
       :last_authenticated,
       keyword_init: true
@@ -1821,6 +1910,7 @@ module Aws::IAM
     #               identifiers</a> in the <i>IAM User Guide</i>. </p>
     #   @return [String]
     class EntityInfo < Struct.new(
+      nil,
       :arn,
       :name,
       :type,
@@ -1838,6 +1928,7 @@ module Aws::IAM
     # @!attribute message
     #   @return [String]
     class EntityTemporarilyUnmodifiableException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -1853,6 +1944,7 @@ module Aws::IAM
     #   <p>The error code associated with the operation failure.</p>
     #   @return [String]
     class ErrorDetails < Struct.new(
+      nil,
       :message,
       :code,
       keyword_init: true
@@ -1918,6 +2010,7 @@ module Aws::IAM
     #            EvalActionName on each resource.</p>
     #   @return [Array<Types::ResourceSpecificResult>]
     class EvaluationResult < Struct.new(
+      nil,
       :eval_action_name,
       :eval_resource_name,
       :eval_decision,
@@ -1940,6 +2033,7 @@ module Aws::IAM
     #   <p>Information about the credential report.</p>
     #   @return [String]
     class GenerateCredentialReportResponse < Struct.new(
+      nil,
       :state,
       :description,
       keyword_init: true
@@ -1962,6 +2056,7 @@ module Aws::IAM
     #               limited by the SCP attempted to access an Amazon Web Services service.</p>
     #   @return [String]
     class GenerateOrganizationsAccessReportRequest < Struct.new(
+      nil,
       :entity_path,
       :organizations_policy_id,
       keyword_init: true
@@ -1973,6 +2068,7 @@ module Aws::IAM
     #   <p>The job identifier that you can use in the <a href="https://docs.aws.amazon.com/IAM/latest/APIReference/API_GetOrganizationsAccessReport.html">GetOrganizationsAccessReport</a> operation.</p>
     #   @return [String]
     class GenerateOrganizationsAccessReportResponse < Struct.new(
+      nil,
       :job_id,
       keyword_init: true
     )
@@ -1992,6 +2088,7 @@ module Aws::IAM
     #               include this optional parameter, the operation generates service data.</p>
     #   @return [String]
     class GenerateServiceLastAccessedDetailsRequest < Struct.new(
+      nil,
       :arn,
       :granularity,
       keyword_init: true
@@ -2006,6 +2103,7 @@ module Aws::IAM
     #                   <code>GetServiceLastAccessedDetail</code>.</p>
     #   @return [String]
     class GenerateServiceLastAccessedDetailsResponse < Struct.new(
+      nil,
       :job_id,
       keyword_init: true
     )
@@ -2018,6 +2116,7 @@ module Aws::IAM
     #       consist of any upper or lowercased letter or digit.</p>
     #   @return [String]
     class GetAccessKeyLastUsedRequest < Struct.new(
+      nil,
       :access_key_id,
       keyword_init: true
     )
@@ -2035,6 +2134,7 @@ module Aws::IAM
     #   <p>Contains information about the last time the access key was used.</p>
     #   @return [Types::AccessKeyLastUsed]
     class GetAccessKeyLastUsedResponse < Struct.new(
+      nil,
       :user_name,
       :access_key_last_used,
       keyword_init: true
@@ -2066,6 +2166,7 @@ module Aws::IAM
     #       should start.</p>
     #   @return [String]
     class GetAccountAuthorizationDetailsRequest < Struct.new(
+      nil,
       :filter,
       :max_items,
       :marker,
@@ -2101,6 +2202,7 @@ module Aws::IAM
     #       pagination request.</p>
     #   @return [String]
     class GetAccountAuthorizationDetailsResponse < Struct.new(
+      nil,
       :user_detail_list,
       :group_detail_list,
       :role_detail_list,
@@ -2122,6 +2224,7 @@ module Aws::IAM
     #   <p>A structure that contains details about the account's password policy.</p>
     #   @return [Types::PasswordPolicy]
     class GetAccountPasswordPolicyResponse < Struct.new(
+      nil,
       :password_policy,
       keyword_init: true
     )
@@ -2135,6 +2238,7 @@ module Aws::IAM
     #               IAM quotas.</p>
     #   @return [Hash<String, Integer>]
     class GetAccountSummaryResponse < Struct.new(
+      nil,
       :summary_map,
       keyword_init: true
     )
@@ -2146,6 +2250,7 @@ module Aws::IAM
     #   <p>The list of context keys that are referenced in the input policies.</p>
     #   @return [Array<String>]
     class GetContextKeysForCustomPolicyOutput < Struct.new(
+      nil,
       :context_key_names,
       keyword_init: true
     )
@@ -2174,6 +2279,7 @@ module Aws::IAM
     #            </ul>
     #   @return [Array<String>]
     class GetContextKeysForCustomPolicyRequest < Struct.new(
+      nil,
       :policy_input_list,
       keyword_init: true
     )
@@ -2185,6 +2291,7 @@ module Aws::IAM
     #   <p>The list of context keys that are referenced in the input policies.</p>
     #   @return [Array<String>]
     class GetContextKeysForPrincipalPolicyOutput < Struct.new(
+      nil,
       :context_key_names,
       keyword_init: true
     )
@@ -2222,6 +2329,7 @@ module Aws::IAM
     #            </ul>
     #   @return [Array<String>]
     class GetContextKeysForPrincipalPolicyRequest < Struct.new(
+      nil,
       :policy_source_arn,
       :policy_input_list,
       keyword_init: true
@@ -2241,6 +2349,7 @@ module Aws::IAM
     #   <p> The date and time when the credential report was created, in <a href="http://www.iso.org/iso/iso8601">ISO 8601 date-time format</a>.</p>
     #   @return [Time]
     class GetCredentialReportResponse < Struct.new(
+      nil,
       :content,
       :report_format,
       :generated_time,
@@ -2260,6 +2369,7 @@ module Aws::IAM
     #       characters with no spaces. You can also include any of the following characters: _+=,.@-</p>
     #   @return [String]
     class GetGroupPolicyRequest < Struct.new(
+      nil,
       :group_name,
       :policy_name,
       keyword_init: true
@@ -2282,6 +2392,7 @@ module Aws::IAM
     #               before submitting it to IAM.</p>
     #   @return [String]
     class GetGroupPolicyResponse < Struct.new(
+      nil,
       :group_name,
       :policy_name,
       :policy_document,
@@ -2312,6 +2423,7 @@ module Aws::IAM
     #       from.</p>
     #   @return [Integer]
     class GetGroupRequest < Struct.new(
+      nil,
       :group_name,
       :marker,
       :max_items,
@@ -2341,6 +2453,7 @@ module Aws::IAM
     #       pagination request.</p>
     #   @return [String]
     class GetGroupResponse < Struct.new(
+      nil,
       :group,
       :users,
       :is_truncated,
@@ -2361,6 +2474,7 @@ module Aws::IAM
     #       characters with no spaces. You can also include any of the following characters: _+=,.@-</p>
     #   @return [String]
     class GetInstanceProfileRequest < Struct.new(
+      nil,
       :instance_profile_name,
       keyword_init: true
     )
@@ -2373,6 +2487,7 @@ module Aws::IAM
     #   <p>A structure containing details about the instance profile.</p>
     #   @return [Types::InstanceProfile]
     class GetInstanceProfileResponse < Struct.new(
+      nil,
       :instance_profile,
       keyword_init: true
     )
@@ -2388,6 +2503,7 @@ module Aws::IAM
     #       characters with no spaces. You can also include any of the following characters: _+=,.@-</p>
     #   @return [String]
     class GetLoginProfileRequest < Struct.new(
+      nil,
       :user_name,
       keyword_init: true
     )
@@ -2401,6 +2517,7 @@ module Aws::IAM
     #               user.</p>
     #   @return [Types::LoginProfile]
     class GetLoginProfileResponse < Struct.new(
+      nil,
       :login_profile,
       keyword_init: true
     )
@@ -2415,6 +2532,7 @@ module Aws::IAM
     #   <p>The friendly name identifying the user.</p>
     #   @return [String]
     class GetMFADeviceRequest < Struct.new(
+      nil,
       :serial_number,
       :user_name,
       keyword_init: true
@@ -2438,6 +2556,7 @@ module Aws::IAM
     #                   (MDS)</a>.</p>
     #   @return [Hash<String, String>]
     class GetMFADeviceResponse < Struct.new(
+      nil,
       :user_name,
       :serial_number,
       :enable_date,
@@ -2453,6 +2572,7 @@ module Aws::IAM
     #            <p>For more information about ARNs, see <a href="https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html">Amazon Resource Names (ARNs)</a> in the <i>Amazon Web Services General Reference</i>.</p>
     #   @return [String]
     class GetOpenIDConnectProviderRequest < Struct.new(
+      nil,
       :open_id_connect_provider_arn,
       keyword_init: true
     )
@@ -2482,6 +2602,7 @@ module Aws::IAM
     #         <i>IAM User Guide</i>.</p>
     #   @return [Array<Types::Tag>]
     class GetOpenIDConnectProviderResponse < Struct.new(
+      nil,
       :url,
       :client_id_list,
       :thumbprint_list,
@@ -2517,6 +2638,7 @@ module Aws::IAM
     #               numerically by the date and time.</p>
     #   @return [String]
     class GetOrganizationsAccessReportRequest < Struct.new(
+      nil,
       :job_id,
       :max_items,
       :marker,
@@ -2569,6 +2691,7 @@ module Aws::IAM
     #            <p>This data type is used as a response element in the <a href="https://docs.aws.amazon.com/IAM/latest/APIReference/API_GetOrganizationsAccessReport.html">GetOrganizationsAccessReport</a>, <a href="https://docs.aws.amazon.com/IAM/latest/APIReference/API_GetServiceLastAccessedDetails.html">GetServiceLastAccessedDetails</a>, and <a href="https://docs.aws.amazon.com/IAM/latest/APIReference/API_GetServiceLastAccessedDetailsWithEntities.html">GetServiceLastAccessedDetailsWithEntities</a> operations.</p>
     #   @return [Types::ErrorDetails]
     class GetOrganizationsAccessReportResponse < Struct.new(
+      nil,
       :job_status,
       :job_creation_date,
       :job_completion_date,
@@ -2594,6 +2717,7 @@ module Aws::IAM
     #            <p>For more information about ARNs, see <a href="https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html">Amazon Resource Names (ARNs)</a> in the <i>Amazon Web Services General Reference</i>.</p>
     #   @return [String]
     class GetPolicyRequest < Struct.new(
+      nil,
       :policy_arn,
       keyword_init: true
     )
@@ -2605,6 +2729,7 @@ module Aws::IAM
     #   <p>A structure containing details about the policy.</p>
     #   @return [Types::Policy]
     class GetPolicyResponse < Struct.new(
+      nil,
       :policy,
       keyword_init: true
     )
@@ -2623,6 +2748,7 @@ module Aws::IAM
     #       followed by a period '.' and a string of letters and digits.</p>
     #   @return [String]
     class GetPolicyVersionRequest < Struct.new(
+      nil,
       :policy_arn,
       :version_id,
       keyword_init: true
@@ -2636,6 +2762,7 @@ module Aws::IAM
     #   <p>A structure containing details about the policy version.</p>
     #   @return [Types::PolicyVersion]
     class GetPolicyVersionResponse < Struct.new(
+      nil,
       :policy_version,
       keyword_init: true
     )
@@ -2653,6 +2780,7 @@ module Aws::IAM
     #       characters with no spaces. You can also include any of the following characters: _+=,.@-</p>
     #   @return [String]
     class GetRolePolicyRequest < Struct.new(
+      nil,
       :role_name,
       :policy_name,
       keyword_init: true
@@ -2674,6 +2802,7 @@ module Aws::IAM
     #               before submitting it to IAM.</p>
     #   @return [String]
     class GetRolePolicyResponse < Struct.new(
+      nil,
       :role_name,
       :policy_name,
       :policy_document,
@@ -2688,6 +2817,7 @@ module Aws::IAM
     #       characters with no spaces. You can also include any of the following characters: _+=,.@-</p>
     #   @return [String]
     class GetRoleRequest < Struct.new(
+      nil,
       :role_name,
       keyword_init: true
     )
@@ -2699,6 +2829,7 @@ module Aws::IAM
     #   <p>A structure containing details about the IAM role.</p>
     #   @return [Types::Role]
     class GetRoleResponse < Struct.new(
+      nil,
       :role,
       keyword_init: true
     )
@@ -2711,6 +2842,7 @@ module Aws::IAM
     #            <p>For more information about ARNs, see <a href="https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html">Amazon Resource Names (ARNs)</a> in the <i>Amazon Web Services General Reference</i>.</p>
     #   @return [String]
     class GetSAMLProviderRequest < Struct.new(
+      nil,
       :saml_provider_arn,
       keyword_init: true
     )
@@ -2743,6 +2875,7 @@ module Aws::IAM
     #   <p>The private key metadata for the SAML provider.</p>
     #   @return [Array<Types::SAMLPrivateKey>]
     class GetSAMLProviderResponse < Struct.new(
+      nil,
       :saml_provider_uuid,
       :saml_metadata_document,
       :create_date,
@@ -2771,6 +2904,7 @@ module Aws::IAM
     #               format, use <code>PEM</code>.</p>
     #   @return [String]
     class GetSSHPublicKeyRequest < Struct.new(
+      nil,
       :user_name,
       :ssh_public_key_id,
       :encoding,
@@ -2785,6 +2919,7 @@ module Aws::IAM
     #   <p>A structure containing details about the SSH public key.</p>
     #   @return [Types::SSHPublicKey]
     class GetSSHPublicKeyResponse < Struct.new(
+      nil,
       :ssh_public_key,
       keyword_init: true
     )
@@ -2797,6 +2932,7 @@ module Aws::IAM
     #       characters with no spaces. You can also include any of the following characters: _+=,.@-</p>
     #   @return [String]
     class GetServerCertificateRequest < Struct.new(
+      nil,
       :server_certificate_name,
       keyword_init: true
     )
@@ -2809,6 +2945,7 @@ module Aws::IAM
     #   <p>A structure containing details about the server certificate.</p>
     #   @return [Types::ServerCertificate]
     class GetServerCertificateResponse < Struct.new(
+      nil,
       :server_certificate,
       keyword_init: true
     )
@@ -2838,6 +2975,7 @@ module Aws::IAM
     #       should start.</p>
     #   @return [String]
     class GetServiceLastAccessedDetailsRequest < Struct.new(
+      nil,
       :job_id,
       :max_items,
       :marker,
@@ -2885,6 +3023,7 @@ module Aws::IAM
     #   <p>An object that contains details about the reason the operation failed.</p>
     #   @return [Types::ErrorDetails]
     class GetServiceLastAccessedDetailsResponse < Struct.new(
+      nil,
       :job_status,
       :job_type,
       :job_creation_date,
@@ -2934,6 +3073,7 @@ module Aws::IAM
     #       should start.</p>
     #   @return [String]
     class GetServiceLastAccessedDetailsWithEntitiesRequest < Struct.new(
+      nil,
       :job_id,
       :service_namespace,
       :max_items,
@@ -2978,6 +3118,7 @@ module Aws::IAM
     #   <p>An object that contains details about the reason the operation failed.</p>
     #   @return [Types::ErrorDetails]
     class GetServiceLastAccessedDetailsWithEntitiesResponse < Struct.new(
+      nil,
       :job_status,
       :job_creation_date,
       :job_completion_date,
@@ -3000,6 +3141,7 @@ module Aws::IAM
     #                   <code>task/aws-service-role/<service-principal-name>/<role-name>/<task-uuid></code>.</p>
     #   @return [String]
     class GetServiceLinkedRoleDeletionStatusRequest < Struct.new(
+      nil,
       :deletion_task_id,
       keyword_init: true
     )
@@ -3013,6 +3155,7 @@ module Aws::IAM
     #   <p>An object that contains details about the reason the deletion failed.</p>
     #   @return [Types::DeletionTaskFailureReasonType]
     class GetServiceLinkedRoleDeletionStatusResponse < Struct.new(
+      nil,
       :status,
       :reason,
       keyword_init: true
@@ -3031,6 +3174,7 @@ module Aws::IAM
     #       characters with no spaces. You can also include any of the following characters: _+=,.@-</p>
     #   @return [String]
     class GetUserPolicyRequest < Struct.new(
+      nil,
       :user_name,
       :policy_name,
       keyword_init: true
@@ -3052,6 +3196,7 @@ module Aws::IAM
     #               before submitting it to IAM.</p>
     #   @return [String]
     class GetUserPolicyResponse < Struct.new(
+      nil,
       :user_name,
       :policy_name,
       :policy_document,
@@ -3067,6 +3212,7 @@ module Aws::IAM
     #       characters with no spaces. You can also include any of the following characters: _+=,.@-</p>
     #   @return [String]
     class GetUserRequest < Struct.new(
+      nil,
       :user_name,
       keyword_init: true
     )
@@ -3093,6 +3239,7 @@ module Aws::IAM
     #            </important>
     #   @return [Types::User]
     class GetUserResponse < Struct.new(
+      nil,
       :user,
       keyword_init: true
     )
@@ -3140,6 +3287,7 @@ module Aws::IAM
     #               format</a>, when the group was created.</p>
     #   @return [Time]
     class Group < Struct.new(
+      nil,
       :path,
       :group_name,
       :group_id,
@@ -3180,6 +3328,7 @@ module Aws::IAM
     #   <p>A list of the managed policies attached to the group.</p>
     #   @return [Array<Types::AttachedPolicy>]
     class GroupDetail < Struct.new(
+      nil,
       :path,
       :group_name,
       :group_id,
@@ -3243,6 +3392,7 @@ module Aws::IAM
     #         <i>IAM User Guide</i>.</p>
     #   @return [Array<Types::Tag>]
     class InstanceProfile < Struct.new(
+      nil,
       :path,
       :instance_profile_name,
       :instance_profile_id,
@@ -3260,6 +3410,7 @@ module Aws::IAM
     # @!attribute message
     #   @return [String]
     class InvalidAuthenticationCodeException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -3270,6 +3421,7 @@ module Aws::IAM
     # @!attribute message
     #   @return [String]
     class InvalidCertificateException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -3281,6 +3433,7 @@ module Aws::IAM
     # @!attribute message
     #   @return [String]
     class InvalidInputException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -3291,6 +3444,7 @@ module Aws::IAM
     # @!attribute message
     #   @return [String]
     class InvalidPublicKeyException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -3302,6 +3456,7 @@ module Aws::IAM
     # @!attribute message
     #   @return [String]
     class InvalidUserTypeException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -3313,6 +3468,7 @@ module Aws::IAM
     # @!attribute message
     #   @return [String]
     class KeyPairMismatchException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -3324,6 +3480,7 @@ module Aws::IAM
     # @!attribute message
     #   @return [String]
     class LimitExceededException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -3352,6 +3509,7 @@ module Aws::IAM
     #       from.</p>
     #   @return [Integer]
     class ListAccessKeysRequest < Struct.new(
+      nil,
       :user_name,
       :marker,
       :max_items,
@@ -3379,6 +3537,7 @@ module Aws::IAM
     #       pagination request.</p>
     #   @return [String]
     class ListAccessKeysResponse < Struct.new(
+      nil,
       :access_key_metadata,
       :is_truncated,
       :marker,
@@ -3409,6 +3568,7 @@ module Aws::IAM
     #       from.</p>
     #   @return [Integer]
     class ListAccountAliasesRequest < Struct.new(
+      nil,
       :marker,
       :max_items,
       keyword_init: true
@@ -3436,6 +3596,7 @@ module Aws::IAM
     #       pagination request.</p>
     #   @return [String]
     class ListAccountAliasesResponse < Struct.new(
+      nil,
       :account_aliases,
       :is_truncated,
       :marker,
@@ -3479,6 +3640,7 @@ module Aws::IAM
     #       from.</p>
     #   @return [Integer]
     class ListAttachedGroupPoliciesRequest < Struct.new(
+      nil,
       :group_name,
       :path_prefix,
       :marker,
@@ -3506,6 +3668,7 @@ module Aws::IAM
     #       pagination request.</p>
     #   @return [String]
     class ListAttachedGroupPoliciesResponse < Struct.new(
+      nil,
       :attached_policies,
       :is_truncated,
       :marker,
@@ -3549,6 +3712,7 @@ module Aws::IAM
     #       from.</p>
     #   @return [Integer]
     class ListAttachedRolePoliciesRequest < Struct.new(
+      nil,
       :role_name,
       :path_prefix,
       :marker,
@@ -3576,6 +3740,7 @@ module Aws::IAM
     #       pagination request.</p>
     #   @return [String]
     class ListAttachedRolePoliciesResponse < Struct.new(
+      nil,
       :attached_policies,
       :is_truncated,
       :marker,
@@ -3619,6 +3784,7 @@ module Aws::IAM
     #       from.</p>
     #   @return [Integer]
     class ListAttachedUserPoliciesRequest < Struct.new(
+      nil,
       :user_name,
       :path_prefix,
       :marker,
@@ -3646,6 +3812,7 @@ module Aws::IAM
     #       pagination request.</p>
     #   @return [String]
     class ListAttachedUserPoliciesResponse < Struct.new(
+      nil,
       :attached_policies,
       :is_truncated,
       :marker,
@@ -3704,6 +3871,7 @@ module Aws::IAM
     #       from.</p>
     #   @return [Integer]
     class ListEntitiesForPolicyRequest < Struct.new(
+      nil,
       :policy_arn,
       :entity_filter,
       :path_prefix,
@@ -3740,6 +3908,7 @@ module Aws::IAM
     #       pagination request.</p>
     #   @return [String]
     class ListEntitiesForPolicyResponse < Struct.new(
+      nil,
       :policy_groups,
       :policy_users,
       :policy_roles,
@@ -3777,6 +3946,7 @@ module Aws::IAM
     #       from.</p>
     #   @return [Integer]
     class ListGroupPoliciesRequest < Struct.new(
+      nil,
       :group_name,
       :marker,
       :max_items,
@@ -3806,6 +3976,7 @@ module Aws::IAM
     #       pagination request.</p>
     #   @return [String]
     class ListGroupPoliciesResponse < Struct.new(
+      nil,
       :policy_names,
       :is_truncated,
       :marker,
@@ -3841,6 +4012,7 @@ module Aws::IAM
     #       from.</p>
     #   @return [Integer]
     class ListGroupsForUserRequest < Struct.new(
+      nil,
       :user_name,
       :marker,
       :max_items,
@@ -3868,6 +4040,7 @@ module Aws::IAM
     #       pagination request.</p>
     #   @return [String]
     class ListGroupsForUserResponse < Struct.new(
+      nil,
       :groups,
       :is_truncated,
       :marker,
@@ -3908,6 +4081,7 @@ module Aws::IAM
     #       from.</p>
     #   @return [Integer]
     class ListGroupsRequest < Struct.new(
+      nil,
       :path_prefix,
       :marker,
       :max_items,
@@ -3934,6 +4108,7 @@ module Aws::IAM
     #       pagination request.</p>
     #   @return [String]
     class ListGroupsResponse < Struct.new(
+      nil,
       :groups,
       :is_truncated,
       :marker,
@@ -3969,6 +4144,7 @@ module Aws::IAM
     #       from.</p>
     #   @return [Integer]
     class ListInstanceProfileTagsRequest < Struct.new(
+      nil,
       :instance_profile_name,
       :marker,
       :max_items,
@@ -3994,6 +4170,7 @@ module Aws::IAM
     #       pagination request.</p>
     #   @return [String]
     class ListInstanceProfileTagsResponse < Struct.new(
+      nil,
       :tags,
       :is_truncated,
       :marker,
@@ -4029,6 +4206,7 @@ module Aws::IAM
     #       from.</p>
     #   @return [Integer]
     class ListInstanceProfilesForRoleRequest < Struct.new(
+      nil,
       :role_name,
       :marker,
       :max_items,
@@ -4055,6 +4233,7 @@ module Aws::IAM
     #       pagination request.</p>
     #   @return [String]
     class ListInstanceProfilesForRoleResponse < Struct.new(
+      nil,
       :instance_profiles,
       :is_truncated,
       :marker,
@@ -4095,6 +4274,7 @@ module Aws::IAM
     #       from.</p>
     #   @return [Integer]
     class ListInstanceProfilesRequest < Struct.new(
+      nil,
       :path_prefix,
       :marker,
       :max_items,
@@ -4122,6 +4302,7 @@ module Aws::IAM
     #       pagination request.</p>
     #   @return [String]
     class ListInstanceProfilesResponse < Struct.new(
+      nil,
       :instance_profiles,
       :is_truncated,
       :marker,
@@ -4158,6 +4339,7 @@ module Aws::IAM
     #       from.</p>
     #   @return [Integer]
     class ListMFADeviceTagsRequest < Struct.new(
+      nil,
       :serial_number,
       :marker,
       :max_items,
@@ -4183,6 +4365,7 @@ module Aws::IAM
     #       pagination request.</p>
     #   @return [String]
     class ListMFADeviceTagsResponse < Struct.new(
+      nil,
       :tags,
       :is_truncated,
       :marker,
@@ -4218,6 +4401,7 @@ module Aws::IAM
     #       from.</p>
     #   @return [Integer]
     class ListMFADevicesRequest < Struct.new(
+      nil,
       :user_name,
       :marker,
       :max_items,
@@ -4245,6 +4429,7 @@ module Aws::IAM
     #       pagination request.</p>
     #   @return [String]
     class ListMFADevicesResponse < Struct.new(
+      nil,
       :mfa_devices,
       :is_truncated,
       :marker,
@@ -4281,6 +4466,7 @@ module Aws::IAM
     #       from.</p>
     #   @return [Integer]
     class ListOpenIDConnectProviderTagsRequest < Struct.new(
+      nil,
       :open_id_connect_provider_arn,
       :marker,
       :max_items,
@@ -4307,6 +4493,7 @@ module Aws::IAM
     #       pagination request.</p>
     #   @return [String]
     class ListOpenIDConnectProviderTagsResponse < Struct.new(
+      nil,
       :tags,
       :is_truncated,
       :marker,
@@ -4321,6 +4508,7 @@ module Aws::IAM
     end
 
     class ListOpenIDConnectProvidersRequest < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -4331,6 +4519,7 @@ module Aws::IAM
     #   <p>The list of IAM OIDC provider resource objects defined in the Amazon Web Services account.</p>
     #   @return [Array<Types::OpenIDConnectProviderListEntry>]
     class ListOpenIDConnectProvidersResponse < Struct.new(
+      nil,
       :open_id_connect_provider_list,
       keyword_init: true
     )
@@ -4338,6 +4527,7 @@ module Aws::IAM
     end
 
     class ListOrganizationsFeaturesRequest < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -4350,6 +4540,7 @@ module Aws::IAM
     #   <p>Specifies the features that are currently available in your organization.</p>
     #   @return [Array<String>]
     class ListOrganizationsFeaturesResponse < Struct.new(
+      nil,
       :organization_id,
       :enabled_features,
       keyword_init: true
@@ -4374,6 +4565,7 @@ module Aws::IAM
     #            policy.</p>
     #   @return [Array<Types::PolicyGrantingServiceAccess>]
     class ListPoliciesGrantingServiceAccessEntry < Struct.new(
+      nil,
       :service_namespace,
       :policies,
       keyword_init: true
@@ -4401,6 +4593,7 @@ module Aws::IAM
     #                   service namespaces</a> in the <i>Amazon Web Services General Reference</i>.</p>
     #   @return [Array<String>]
     class ListPoliciesGrantingServiceAccessRequest < Struct.new(
+      nil,
       :marker,
       :arn,
       :service_namespaces,
@@ -4427,6 +4620,7 @@ module Aws::IAM
     #       pagination request.</p>
     #   @return [String]
     class ListPoliciesGrantingServiceAccessResponse < Struct.new(
+      nil,
       :policies_granting_service_access,
       :is_truncated,
       :marker,
@@ -4487,6 +4681,7 @@ module Aws::IAM
     #       from.</p>
     #   @return [Integer]
     class ListPoliciesRequest < Struct.new(
+      nil,
       :scope,
       :only_attached,
       :path_prefix,
@@ -4516,6 +4711,7 @@ module Aws::IAM
     #       pagination request.</p>
     #   @return [String]
     class ListPoliciesResponse < Struct.new(
+      nil,
       :policies,
       :is_truncated,
       :marker,
@@ -4551,6 +4747,7 @@ module Aws::IAM
     #       from.</p>
     #   @return [Integer]
     class ListPolicyTagsRequest < Struct.new(
+      nil,
       :policy_arn,
       :marker,
       :max_items,
@@ -4577,6 +4774,7 @@ module Aws::IAM
     #       pagination request.</p>
     #   @return [String]
     class ListPolicyTagsResponse < Struct.new(
+      nil,
       :tags,
       :is_truncated,
       :marker,
@@ -4612,6 +4810,7 @@ module Aws::IAM
     #       from.</p>
     #   @return [Integer]
     class ListPolicyVersionsRequest < Struct.new(
+      nil,
       :policy_arn,
       :marker,
       :max_items,
@@ -4641,6 +4840,7 @@ module Aws::IAM
     #       pagination request.</p>
     #   @return [String]
     class ListPolicyVersionsResponse < Struct.new(
+      nil,
       :versions,
       :is_truncated,
       :marker,
@@ -4676,6 +4876,7 @@ module Aws::IAM
     #       from.</p>
     #   @return [Integer]
     class ListRolePoliciesRequest < Struct.new(
+      nil,
       :role_name,
       :marker,
       :max_items,
@@ -4703,6 +4904,7 @@ module Aws::IAM
     #       pagination request.</p>
     #   @return [String]
     class ListRolePoliciesResponse < Struct.new(
+      nil,
       :policy_names,
       :is_truncated,
       :marker,
@@ -4738,6 +4940,7 @@ module Aws::IAM
     #       from.</p>
     #   @return [Integer]
     class ListRoleTagsRequest < Struct.new(
+      nil,
       :role_name,
       :marker,
       :max_items,
@@ -4763,6 +4966,7 @@ module Aws::IAM
     #       pagination request.</p>
     #   @return [String]
     class ListRoleTagsResponse < Struct.new(
+      nil,
       :tags,
       :is_truncated,
       :marker,
@@ -4803,6 +5007,7 @@ module Aws::IAM
     #       from.</p>
     #   @return [Integer]
     class ListRolesRequest < Struct.new(
+      nil,
       :path_prefix,
       :marker,
       :max_items,
@@ -4829,6 +5034,7 @@ module Aws::IAM
     #       pagination request.</p>
     #   @return [String]
     class ListRolesResponse < Struct.new(
+      nil,
       :roles,
       :is_truncated,
       :marker,
@@ -4865,6 +5071,7 @@ module Aws::IAM
     #       from.</p>
     #   @return [Integer]
     class ListSAMLProviderTagsRequest < Struct.new(
+      nil,
       :saml_provider_arn,
       :marker,
       :max_items,
@@ -4891,6 +5098,7 @@ module Aws::IAM
     #       pagination request.</p>
     #   @return [String]
     class ListSAMLProviderTagsResponse < Struct.new(
+      nil,
       :tags,
       :is_truncated,
       :marker,
@@ -4905,6 +5113,7 @@ module Aws::IAM
     end
 
     class ListSAMLProvidersRequest < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -4917,6 +5126,7 @@ module Aws::IAM
     #               account.</p>
     #   @return [Array<Types::SAMLProviderListEntry>]
     class ListSAMLProvidersResponse < Struct.new(
+      nil,
       :saml_provider_list,
       keyword_init: true
     )
@@ -4947,6 +5157,7 @@ module Aws::IAM
     #       from.</p>
     #   @return [Integer]
     class ListSSHPublicKeysRequest < Struct.new(
+      nil,
       :user_name,
       :marker,
       :max_items,
@@ -4974,6 +5185,7 @@ module Aws::IAM
     #       pagination request.</p>
     #   @return [String]
     class ListSSHPublicKeysResponse < Struct.new(
+      nil,
       :ssh_public_keys,
       :is_truncated,
       :marker,
@@ -5009,6 +5221,7 @@ module Aws::IAM
     #       from.</p>
     #   @return [Integer]
     class ListServerCertificateTagsRequest < Struct.new(
+      nil,
       :server_certificate_name,
       :marker,
       :max_items,
@@ -5035,6 +5248,7 @@ module Aws::IAM
     #       pagination request.</p>
     #   @return [String]
     class ListServerCertificateTagsResponse < Struct.new(
+      nil,
       :tags,
       :is_truncated,
       :marker,
@@ -5075,6 +5289,7 @@ module Aws::IAM
     #       from.</p>
     #   @return [Integer]
     class ListServerCertificatesRequest < Struct.new(
+      nil,
       :path_prefix,
       :marker,
       :max_items,
@@ -5102,6 +5317,7 @@ module Aws::IAM
     #       pagination request.</p>
     #   @return [String]
     class ListServerCertificatesResponse < Struct.new(
+      nil,
       :server_certificate_metadata_list,
       :is_truncated,
       :marker,
@@ -5142,6 +5358,7 @@ module Aws::IAM
     #               IsTruncated response element is true.</p>
     #   @return [Integer]
     class ListServiceSpecificCredentialsRequest < Struct.new(
+      nil,
       :user_name,
       :service_name,
       :all_users,
@@ -5166,6 +5383,7 @@ module Aws::IAM
     #               parameter to retrieve more items.</p>
     #   @return [Boolean]
     class ListServiceSpecificCredentialsResponse < Struct.new(
+      nil,
       :service_specific_credentials,
       :marker,
       :is_truncated,
@@ -5201,6 +5419,7 @@ module Aws::IAM
     #       from.</p>
     #   @return [Integer]
     class ListSigningCertificatesRequest < Struct.new(
+      nil,
       :user_name,
       :marker,
       :max_items,
@@ -5227,6 +5446,7 @@ module Aws::IAM
     #       pagination request.</p>
     #   @return [String]
     class ListSigningCertificatesResponse < Struct.new(
+      nil,
       :certificates,
       :is_truncated,
       :marker,
@@ -5262,6 +5482,7 @@ module Aws::IAM
     #       from.</p>
     #   @return [Integer]
     class ListUserPoliciesRequest < Struct.new(
+      nil,
       :user_name,
       :marker,
       :max_items,
@@ -5289,6 +5510,7 @@ module Aws::IAM
     #       pagination request.</p>
     #   @return [String]
     class ListUserPoliciesResponse < Struct.new(
+      nil,
       :policy_names,
       :is_truncated,
       :marker,
@@ -5324,6 +5546,7 @@ module Aws::IAM
     #       from.</p>
     #   @return [Integer]
     class ListUserTagsRequest < Struct.new(
+      nil,
       :user_name,
       :marker,
       :max_items,
@@ -5349,6 +5572,7 @@ module Aws::IAM
     #       pagination request.</p>
     #   @return [String]
     class ListUserTagsResponse < Struct.new(
+      nil,
       :tags,
       :is_truncated,
       :marker,
@@ -5389,6 +5613,7 @@ module Aws::IAM
     #       from.</p>
     #   @return [Integer]
     class ListUsersRequest < Struct.new(
+      nil,
       :path_prefix,
       :marker,
       :max_items,
@@ -5415,6 +5640,7 @@ module Aws::IAM
     #       pagination request.</p>
     #   @return [String]
     class ListUsersResponse < Struct.new(
+      nil,
       :users,
       :is_truncated,
       :marker,
@@ -5451,6 +5677,7 @@ module Aws::IAM
     #       from.</p>
     #   @return [Integer]
     class ListVirtualMFADevicesRequest < Struct.new(
+      nil,
       :assignment_status,
       :marker,
       :max_items,
@@ -5479,6 +5706,7 @@ module Aws::IAM
     #               pagination request.</p>
     #   @return [String]
     class ListVirtualMFADevicesResponse < Struct.new(
+      nil,
       :virtual_mfa_devices,
       :is_truncated,
       :marker,
@@ -5505,6 +5733,7 @@ module Aws::IAM
     #   <p>Specifies whether the user is required to set a new password on next sign-in.</p>
     #   @return [Boolean]
     class LoginProfile < Struct.new(
+      nil,
       :user_name,
       :create_date,
       :password_reset_required,
@@ -5532,6 +5761,7 @@ module Aws::IAM
     #   <p>The date when the MFA device was enabled for the user.</p>
     #   @return [Time]
     class MFADevice < Struct.new(
+      nil,
       :user_name,
       :serial_number,
       :enable_date,
@@ -5545,6 +5775,7 @@ module Aws::IAM
     # @!attribute message
     #   @return [String]
     class MalformedCertificateException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -5556,6 +5787,7 @@ module Aws::IAM
     # @!attribute message
     #   @return [String]
     class MalformedPolicyDocumentException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -5623,6 +5855,7 @@ module Aws::IAM
     #   <p>A list containing information about the versions of the policy.</p>
     #   @return [Array<Types::PolicyVersion>]
     class ManagedPolicyDetail < Struct.new(
+      nil,
       :policy_name,
       :policy_id,
       :arn,
@@ -5650,6 +5883,7 @@ module Aws::IAM
     # @!attribute message
     #   @return [String]
     class NoSuchEntityException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -5663,6 +5897,7 @@ module Aws::IAM
     #            the <i>Amazon Web Services General Reference</i>. </p>
     #   @return [String]
     class OpenIDConnectProviderListEntry < Struct.new(
+      nil,
       :arn,
       keyword_init: true
     )
@@ -5674,6 +5909,7 @@ module Aws::IAM
     # @!attribute message
     #   @return [String]
     class OpenIdIdpCommunicationErrorException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -5684,6 +5920,7 @@ module Aws::IAM
     # @!attribute message
     #   @return [String]
     class OrganizationNotFoundException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -5696,6 +5933,7 @@ module Aws::IAM
     # @!attribute message
     #   @return [String]
     class OrganizationNotInAllFeaturesModeException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -5708,6 +5946,7 @@ module Aws::IAM
     #            policies that impact the simulated user's account.</p>
     #   @return [Boolean]
     class OrganizationsDecisionDetail < Struct.new(
+      nil,
       :allowed_by_organizations,
       keyword_init: true
     )
@@ -5768,6 +6007,7 @@ module Aws::IAM
     #            CLI or API.</p>
     #   @return [Boolean]
     class PasswordPolicy < Struct.new(
+      nil,
       :minimum_password_length,
       :require_symbols,
       :require_numbers,
@@ -5798,6 +6038,7 @@ module Aws::IAM
     # @!attribute message
     #   @return [String]
     class PasswordPolicyViolationException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -5817,6 +6058,7 @@ module Aws::IAM
     #            these cases, the action is not allowed, regardless of the identity-based policy.</p>
     #   @return [Boolean]
     class PermissionsBoundaryDecisionDetail < Struct.new(
+      nil,
       :allowed_by_permissions_boundary,
       keyword_init: true
     )
@@ -5888,6 +6130,7 @@ module Aws::IAM
     #         <i>IAM User Guide</i>.</p>
     #   @return [Array<Types::Tag>]
     class Policy < Struct.new(
+      nil,
       :policy_name,
       :policy_id,
       :arn,
@@ -5919,6 +6162,7 @@ module Aws::IAM
     #   <p>The policy document.</p>
     #   @return [String]
     class PolicyDetail < Struct.new(
+      nil,
       :policy_name,
       :policy_document,
       keyword_init: true
@@ -5931,6 +6175,7 @@ module Aws::IAM
     # @!attribute message
     #   @return [String]
     class PolicyEvaluationException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -5967,6 +6212,7 @@ module Aws::IAM
     #               <i>IAM User Guide</i>.</p>
     #   @return [String]
     class PolicyGrantingServiceAccess < Struct.new(
+      nil,
       :policy_name,
       :policy_type,
       :policy_arn,
@@ -5990,6 +6236,7 @@ module Aws::IAM
     #               identifiers</a> in the <i>IAM User Guide</i>.</p>
     #   @return [String]
     class PolicyGroup < Struct.new(
+      nil,
       :group_name,
       :group_id,
       keyword_init: true
@@ -6002,6 +6249,7 @@ module Aws::IAM
     # @!attribute message
     #   @return [String]
     class PolicyNotAttachableException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -6021,6 +6269,7 @@ module Aws::IAM
     #               identifiers</a> in the <i>IAM User Guide</i>.</p>
     #   @return [String]
     class PolicyRole < Struct.new(
+      nil,
       :role_name,
       :role_id,
       keyword_init: true
@@ -6041,6 +6290,7 @@ module Aws::IAM
     #               identifiers</a> in the <i>IAM User Guide</i>.</p>
     #   @return [String]
     class PolicyUser < Struct.new(
+      nil,
       :user_name,
       :user_id,
       keyword_init: true
@@ -6078,6 +6328,7 @@ module Aws::IAM
     #               format</a>, when the policy version was created.</p>
     #   @return [Time]
     class PolicyVersion < Struct.new(
+      nil,
       :document,
       :version_id,
       :is_default_version,
@@ -6104,6 +6355,7 @@ module Aws::IAM
     #   <p>The column in the line containing the specified position in the document.</p>
     #   @return [Integer]
     class Position < Struct.new(
+      nil,
       :line,
       :column,
       keyword_init: true
@@ -6150,6 +6402,7 @@ module Aws::IAM
     #            </ul>
     #   @return [String]
     class PutGroupPolicyRequest < Struct.new(
+      nil,
       :group_name,
       :policy_name,
       :policy_document,
@@ -6174,6 +6427,7 @@ module Aws::IAM
     #               </a> in the <i>IAM User Guide</i>.</p>
     #   @return [String]
     class PutRolePermissionsBoundaryRequest < Struct.new(
+      nil,
       :role_name,
       :permissions_boundary,
       keyword_init: true
@@ -6214,6 +6468,7 @@ module Aws::IAM
     #            </ul>
     #   @return [String]
     class PutRolePolicyRequest < Struct.new(
+      nil,
       :role_name,
       :policy_name,
       :policy_document,
@@ -6238,6 +6493,7 @@ module Aws::IAM
     #               </a> in the <i>IAM User Guide</i>.</p>
     #   @return [String]
     class PutUserPermissionsBoundaryRequest < Struct.new(
+      nil,
       :user_name,
       :permissions_boundary,
       keyword_init: true
@@ -6278,6 +6534,7 @@ module Aws::IAM
     #            </ul>
     #   @return [String]
     class PutUserPolicyRequest < Struct.new(
+      nil,
       :user_name,
       :policy_name,
       :policy_document,
@@ -6296,6 +6553,7 @@ module Aws::IAM
     #               resource. For more information about client IDs, see <a href="https://docs.aws.amazon.com/IAM/latest/APIReference/API_CreateOpenIDConnectProvider.html">CreateOpenIDConnectProvider</a>.</p>
     #   @return [String]
     class RemoveClientIDFromOpenIDConnectProviderRequest < Struct.new(
+      nil,
       :open_id_connect_provider_arn,
       :client_id,
       keyword_init: true
@@ -6314,6 +6572,7 @@ module Aws::IAM
     #       characters with no spaces. You can also include any of the following characters: _+=,.@-</p>
     #   @return [String]
     class RemoveRoleFromInstanceProfileRequest < Struct.new(
+      nil,
       :instance_profile_name,
       :role_name,
       keyword_init: true
@@ -6332,6 +6591,7 @@ module Aws::IAM
     #       characters with no spaces. You can also include any of the following characters: _+=,.@-</p>
     #   @return [String]
     class RemoveUserFromGroupRequest < Struct.new(
+      nil,
       :group_name,
       :user_name,
       keyword_init: true
@@ -6344,6 +6604,7 @@ module Aws::IAM
     # @!attribute message
     #   @return [String]
     class ReportGenerationLimitExceededException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -6363,6 +6624,7 @@ module Aws::IAM
     #       consist of any upper or lowercased letter or digit.</p>
     #   @return [String]
     class ResetServiceSpecificCredentialRequest < Struct.new(
+      nil,
       :user_name,
       :service_specific_credential_id,
       keyword_init: true
@@ -6379,6 +6641,7 @@ module Aws::IAM
     #            </important>
     #   @return [Types::ServiceSpecificCredential]
     class ResetServiceSpecificCredentialResponse < Struct.new(
+      nil,
       :service_specific_credential,
       keyword_init: true
     )
@@ -6422,6 +6685,7 @@ module Aws::IAM
     #            simulation when that boundary is applied to an IAM entity.</p>
     #   @return [Types::PermissionsBoundaryDecisionDetail]
     class ResourceSpecificResult < Struct.new(
+      nil,
       :eval_resource_name,
       :eval_resource_decision,
       :matched_statements,
@@ -6452,6 +6716,7 @@ module Aws::IAM
     #            <p>The format for this parameter is a sequence of six digits.</p>
     #   @return [String]
     class ResyncMFADeviceRequest < Struct.new(
+      nil,
       :user_name,
       :serial_number,
       :authentication_code1,
@@ -6514,6 +6779,7 @@ module Aws::IAM
     #            Guide</i>.</p>
     #   @return [Types::RoleLastUsed]
     class Role < Struct.new(
+      nil,
       :path,
       :role_name,
       :role_id,
@@ -6585,6 +6851,7 @@ module Aws::IAM
     #            <i>IAM User Guide</i>.</p>
     #   @return [Types::RoleLastUsed]
     class RoleDetail < Struct.new(
+      nil,
       :path,
       :role_name,
       :role_id,
@@ -6620,6 +6887,7 @@ module Aws::IAM
     #   <p>The name of the Amazon Web Services Region in which the role was last used.</p>
     #   @return [String]
     class RoleLastUsed < Struct.new(
+      nil,
       :last_used_date,
       :region,
       keyword_init: true
@@ -6637,6 +6905,7 @@ module Aws::IAM
     #   <p>The name of the resource that is using the service-linked role.</p>
     #   @return [Array<String>]
     class RoleUsageType < Struct.new(
+      nil,
       :region,
       :resources,
       keyword_init: true
@@ -6655,6 +6924,7 @@ module Aws::IAM
     #            </a> format, when the private key was uploaded.</p>
     #   @return [Time]
     class SAMLPrivateKey < Struct.new(
+      nil,
       :key_id,
       :timestamp,
       keyword_init: true
@@ -6673,6 +6943,7 @@ module Aws::IAM
     #   <p>The date and time when the SAML provider was created.</p>
     #   @return [Time]
     class SAMLProviderListEntry < Struct.new(
+      nil,
       :arn,
       :valid_until,
       :create_date,
@@ -6706,6 +6977,7 @@ module Aws::IAM
     #               format</a>, when the SSH public key was uploaded.</p>
     #   @return [Time]
     class SSHPublicKey < Struct.new(
+      nil,
       :user_name,
       :ssh_public_key_id,
       :fingerprint,
@@ -6737,6 +7009,7 @@ module Aws::IAM
     #               format</a>, when the SSH public key was uploaded.</p>
     #   @return [Time]
     class SSHPublicKeyMetadata < Struct.new(
+      nil,
       :user_name,
       :ssh_public_key_id,
       :status,
@@ -6764,6 +7037,7 @@ module Aws::IAM
     #         <i>IAM User Guide</i>.</p>
     #   @return [Array<Types::Tag>]
     class ServerCertificate < Struct.new(
+      nil,
       :server_certificate_metadata,
       :certificate_body,
       :certificate_chain,
@@ -6799,6 +7073,7 @@ module Aws::IAM
     #   <p>The date on which the certificate is set to expire.</p>
     #   @return [Time]
     class ServerCertificateMetadata < Struct.new(
+      nil,
       :path,
       :server_certificate_name,
       :server_certificate_id,
@@ -6814,6 +7089,7 @@ module Aws::IAM
     # @!attribute message
     #   @return [String]
     class ServiceAccessNotEnabledException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -6825,6 +7101,7 @@ module Aws::IAM
     # @!attribute message
     #   @return [String]
     class ServiceFailureException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -6878,6 +7155,7 @@ module Aws::IAM
     #               <code>Granularity</code> field in <a href="https://docs.aws.amazon.com/IAM/latest/APIReference/API_GenerateServiceLastAccessedDetails.html">GenerateServiceLastAccessedDetails</a>.</p>
     #   @return [Array<Types::TrackedActionLastAccessed>]
     class ServiceLastAccessed < Struct.new(
+      nil,
       :service_name,
       :last_authenticated,
       :service_namespace,
@@ -6894,6 +7172,7 @@ module Aws::IAM
     # @!attribute message
     #   @return [String]
     class ServiceNotSupportedException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -6941,6 +7220,7 @@ module Aws::IAM
     #            valid for API calls, while <code>Inactive</code> means it is not.</p>
     #   @return [String]
     class ServiceSpecificCredential < Struct.new(
+      nil,
       :create_date,
       :expiration_date,
       :service_name,
@@ -6992,6 +7272,7 @@ module Aws::IAM
     #   <p>The name of the service associated with the service-specific credential.</p>
     #   @return [String]
     class ServiceSpecificCredentialMetadata < Struct.new(
+      nil,
       :user_name,
       :status,
       :service_user_name,
@@ -7021,6 +7302,7 @@ module Aws::IAM
     #                   policies</a> in the <i>IAM User Guide</i>.</p>
     #   @return [String]
     class SetDefaultPolicyVersionRequest < Struct.new(
+      nil,
       :policy_arn,
       :version_id,
       keyword_init: true
@@ -7038,6 +7320,7 @@ module Aws::IAM
     #                   <i>IAM User Guide</i>.</p>
     #   @return [String]
     class SetSecurityTokenServicePreferencesRequest < Struct.new(
+      nil,
       :global_endpoint_token_version,
       keyword_init: true
     )
@@ -7063,6 +7346,7 @@ module Aws::IAM
     #   <p>The date when the signing certificate was uploaded.</p>
     #   @return [Time]
     class SigningCertificate < Struct.new(
+      nil,
       :user_name,
       :certificate_id,
       :certificate_body,
@@ -7092,6 +7376,7 @@ module Aws::IAM
     #       pagination request.</p>
     #   @return [String]
     class SimulateCustomPolicyOutput < Struct.new(
+      nil,
       :evaluation_results,
       :is_truncated,
       :marker,
@@ -7293,6 +7578,7 @@ module Aws::IAM
     #       should start.</p>
     #   @return [String]
     class SimulateCustomPolicyRequest < Struct.new(
+      nil,
       :policy_input_list,
       :permissions_boundary_policy_input_list,
       :action_names,
@@ -7328,6 +7614,7 @@ module Aws::IAM
     #       pagination request.</p>
     #   @return [String]
     class SimulatePrincipalPolicyOutput < Struct.new(
+      nil,
       :evaluation_results,
       :is_truncated,
       :marker,
@@ -7538,6 +7825,7 @@ module Aws::IAM
     #       should start.</p>
     #   @return [String]
     class SimulatePrincipalPolicyRequest < Struct.new(
+      nil,
       :policy_source_arn,
       :policy_input_list,
       :permissions_boundary_policy_input_list,
@@ -7574,6 +7862,7 @@ module Aws::IAM
     #   <p>The row and column of the end of a <code>Statement</code> in an IAM policy.</p>
     #   @return [Types::Position]
     class Statement < Struct.new(
+      nil,
       :source_policy_id,
       :source_policy_type,
       :start_position,
@@ -7599,6 +7888,7 @@ module Aws::IAM
     #         with different values.</p>
     #   @return [String]
     class Tag < Struct.new(
+      nil,
       :key,
       :value,
       keyword_init: true
@@ -7616,6 +7906,7 @@ module Aws::IAM
     #         Each tag consists of a key name and an associated value.</p>
     #   @return [Array<Types::Tag>]
     class TagInstanceProfileRequest < Struct.new(
+      nil,
       :instance_profile_name,
       :tags,
       keyword_init: true
@@ -7634,6 +7925,7 @@ module Aws::IAM
     #         Each tag consists of a key name and an associated value.</p>
     #   @return [Array<Types::Tag>]
     class TagMFADeviceRequest < Struct.new(
+      nil,
       :serial_number,
       :tags,
       keyword_init: true
@@ -7651,6 +7943,7 @@ module Aws::IAM
     #         Each tag consists of a key name and an associated value.</p>
     #   @return [Array<Types::Tag>]
     class TagOpenIDConnectProviderRequest < Struct.new(
+      nil,
       :open_id_connect_provider_arn,
       :tags,
       keyword_init: true
@@ -7668,6 +7961,7 @@ module Aws::IAM
     #         Each tag consists of a key name and an associated value.</p>
     #   @return [Array<Types::Tag>]
     class TagPolicyRequest < Struct.new(
+      nil,
       :policy_arn,
       :tags,
       keyword_init: true
@@ -7684,6 +7978,7 @@ module Aws::IAM
     #   <p>The list of tags that you want to attach to the IAM role. Each tag consists of a key name and an associated value.</p>
     #   @return [Array<Types::Tag>]
     class TagRoleRequest < Struct.new(
+      nil,
       :role_name,
       :tags,
       keyword_init: true
@@ -7701,6 +7996,7 @@ module Aws::IAM
     #         Each tag consists of a key name and an associated value.</p>
     #   @return [Array<Types::Tag>]
     class TagSAMLProviderRequest < Struct.new(
+      nil,
       :saml_provider_arn,
       :tags,
       keyword_init: true
@@ -7718,6 +8014,7 @@ module Aws::IAM
     #         Each tag consists of a key name and an associated value.</p>
     #   @return [Array<Types::Tag>]
     class TagServerCertificateRequest < Struct.new(
+      nil,
       :server_certificate_name,
       :tags,
       keyword_init: true
@@ -7734,6 +8031,7 @@ module Aws::IAM
     #   <p>The list of tags that you want to attach to the IAM user. Each tag consists of a key name and an associated value.</p>
     #   @return [Array<Types::Tag>]
     class TagUserRequest < Struct.new(
+      nil,
       :user_name,
       :tags,
       keyword_init: true
@@ -7767,6 +8065,7 @@ module Aws::IAM
     #               <a href="https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_access-advisor.html#service-last-accessed-reporting-period">tracking period</a>.</p>
     #   @return [String]
     class TrackedActionLastAccessed < Struct.new(
+      nil,
       :action_name,
       :last_accessed_entity,
       :last_accessed_time,
@@ -7783,6 +8082,7 @@ module Aws::IAM
     # @!attribute message
     #   @return [String]
     class UnmodifiableEntityException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -7794,6 +8094,7 @@ module Aws::IAM
     # @!attribute message
     #   @return [String]
     class UnrecognizedPublicKeyEncodingException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -7810,6 +8111,7 @@ module Aws::IAM
     #         removed from the specified instance profile.</p>
     #   @return [Array<String>]
     class UntagInstanceProfileRequest < Struct.new(
+      nil,
       :instance_profile_name,
       :tag_keys,
       keyword_init: true
@@ -7828,6 +8130,7 @@ module Aws::IAM
     #         removed from the specified instance profile.</p>
     #   @return [Array<String>]
     class UntagMFADeviceRequest < Struct.new(
+      nil,
       :serial_number,
       :tag_keys,
       keyword_init: true
@@ -7845,6 +8148,7 @@ module Aws::IAM
     #         removed from the specified OIDC provider.</p>
     #   @return [Array<String>]
     class UntagOpenIDConnectProviderRequest < Struct.new(
+      nil,
       :open_id_connect_provider_arn,
       :tag_keys,
       keyword_init: true
@@ -7863,6 +8167,7 @@ module Aws::IAM
     #         removed from the specified policy.</p>
     #   @return [Array<String>]
     class UntagPolicyRequest < Struct.new(
+      nil,
       :policy_arn,
       :tag_keys,
       keyword_init: true
@@ -7880,6 +8185,7 @@ module Aws::IAM
     #         removed from the specified role.</p>
     #   @return [Array<String>]
     class UntagRoleRequest < Struct.new(
+      nil,
       :role_name,
       :tag_keys,
       keyword_init: true
@@ -7898,6 +8204,7 @@ module Aws::IAM
     #         removed from the specified SAML identity provider.</p>
     #   @return [Array<String>]
     class UntagSAMLProviderRequest < Struct.new(
+      nil,
       :saml_provider_arn,
       :tag_keys,
       keyword_init: true
@@ -7915,6 +8222,7 @@ module Aws::IAM
     #         removed from the specified IAM server certificate.</p>
     #   @return [Array<String>]
     class UntagServerCertificateRequest < Struct.new(
+      nil,
       :server_certificate_name,
       :tag_keys,
       keyword_init: true
@@ -7932,6 +8240,7 @@ module Aws::IAM
     #         removed from the specified user.</p>
     #   @return [Array<String>]
     class UntagUserRequest < Struct.new(
+      nil,
       :user_name,
       :tag_keys,
       keyword_init: true
@@ -7955,6 +8264,7 @@ module Aws::IAM
     #               means that the key cannot be used.</p>
     #   @return [String]
     class UpdateAccessKeyRequest < Struct.new(
+      nil,
       :user_name,
       :access_key_id,
       :status,
@@ -8037,6 +8347,7 @@ module Aws::IAM
     #            </note>
     #   @return [Boolean]
     class UpdateAccountPasswordPolicyRequest < Struct.new(
+      nil,
       :minimum_password_length,
       :require_symbols,
       :require_numbers,
@@ -8079,6 +8390,7 @@ module Aws::IAM
     #            </ul>
     #   @return [String]
     class UpdateAssumeRolePolicyRequest < Struct.new(
+      nil,
       :role_name,
       :policy_document,
       keyword_init: true
@@ -8106,6 +8418,7 @@ module Aws::IAM
     #               "MyResource" and "myresource".</p>
     #   @return [String]
     class UpdateGroupRequest < Struct.new(
+      nil,
       :group_name,
       :new_path,
       :new_group_name,
@@ -8145,6 +8458,7 @@ module Aws::IAM
     #               set a new password on next sign-in.</p>
     #   @return [Boolean]
     class UpdateLoginProfileRequest < Struct.new(
+      nil,
       :user_name,
       :password,
       :password_reset_required,
@@ -8164,6 +8478,7 @@ module Aws::IAM
     #               Connect provider. For more information, see <a href="https://docs.aws.amazon.com/IAM/latest/APIReference/API_CreateOpenIDConnectProvider.html">CreateOpenIDConnectProvider</a>. </p>
     #   @return [Array<String>]
     class UpdateOpenIDConnectProviderThumbprintRequest < Struct.new(
+      nil,
       :open_id_connect_provider_arn,
       :thumbprint_list,
       keyword_init: true
@@ -8178,6 +8493,7 @@ module Aws::IAM
     #   <p>The new description that you want to apply to the specified role.</p>
     #   @return [String]
     class UpdateRoleDescriptionRequest < Struct.new(
+      nil,
       :role_name,
       :description,
       keyword_init: true
@@ -8189,6 +8505,7 @@ module Aws::IAM
     #   <p>A structure that contains details about the modified role.</p>
     #   @return [Types::Role]
     class UpdateRoleDescriptionResponse < Struct.new(
+      nil,
       :role,
       keyword_init: true
     )
@@ -8221,6 +8538,7 @@ module Aws::IAM
     #            </note>
     #   @return [Integer]
     class UpdateRoleRequest < Struct.new(
+      nil,
       :role_name,
       :description,
       :max_session_duration,
@@ -8230,6 +8548,7 @@ module Aws::IAM
     end
 
     class UpdateRoleResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -8258,6 +8577,7 @@ module Aws::IAM
     #   <p>The Key ID of the private key to remove.</p>
     #   @return [String]
     class UpdateSAMLProviderRequest < Struct.new(
+      nil,
       :saml_metadata_document,
       :saml_provider_arn,
       :assertion_encryption_mode,
@@ -8274,6 +8594,7 @@ module Aws::IAM
     #   <p>The Amazon Resource Name (ARN) of the SAML provider that was updated.</p>
     #   @return [String]
     class UpdateSAMLProviderResponse < Struct.new(
+      nil,
       :saml_provider_arn,
       keyword_init: true
     )
@@ -8296,6 +8617,7 @@ module Aws::IAM
     #               the key cannot be used.</p>
     #   @return [String]
     class UpdateSSHPublicKeyRequest < Struct.new(
+      nil,
       :user_name,
       :ssh_public_key_id,
       :status,
@@ -8324,6 +8646,7 @@ module Aws::IAM
     #       characters with no spaces. You can also include any of the following characters: _+=,.@-</p>
     #   @return [String]
     class UpdateServerCertificateRequest < Struct.new(
+      nil,
       :server_certificate_name,
       :new_path,
       :new_server_certificate_name,
@@ -8348,6 +8671,7 @@ module Aws::IAM
     #   <p>The status to be assigned to the service-specific credential.</p>
     #   @return [String]
     class UpdateServiceSpecificCredentialRequest < Struct.new(
+      nil,
       :user_name,
       :service_specific_credential_id,
       :status,
@@ -8372,6 +8696,7 @@ module Aws::IAM
     #               the certificate cannot be used.</p>
     #   @return [String]
     class UpdateSigningCertificateRequest < Struct.new(
+      nil,
       :user_name,
       :certificate_id,
       :status,
@@ -8402,6 +8727,7 @@ module Aws::IAM
     #               "MyResource" and "myresource".</p>
     #   @return [String]
     class UpdateUserRequest < Struct.new(
+      nil,
       :user_name,
       :new_path,
       :new_user_name,
@@ -8437,6 +8763,7 @@ module Aws::IAM
     #            </ul>
     #   @return [String]
     class UploadSSHPublicKeyRequest < Struct.new(
+      nil,
       :user_name,
       :ssh_public_key_body,
       keyword_init: true
@@ -8450,6 +8777,7 @@ module Aws::IAM
     #   <p>Contains information about the SSH public key.</p>
     #   @return [Types::SSHPublicKey]
     class UploadSSHPublicKeyResponse < Struct.new(
+      nil,
       :ssh_public_key,
       keyword_init: true
     )
@@ -8545,6 +8873,7 @@ module Aws::IAM
     #            </note>
     #   @return [Array<Types::Tag>]
     class UploadServerCertificateRequest < Struct.new(
+      nil,
       :path,
       :server_certificate_name,
       :certificate_body,
@@ -8567,6 +8896,7 @@ module Aws::IAM
     #         <i>IAM User Guide</i>.</p>
     #   @return [Array<Types::Tag>]
     class UploadServerCertificateResponse < Struct.new(
+      nil,
       :server_certificate_metadata,
       :tags,
       keyword_init: true
@@ -8599,6 +8929,7 @@ module Aws::IAM
     #            </ul>
     #   @return [String]
     class UploadSigningCertificateRequest < Struct.new(
+      nil,
       :user_name,
       :certificate_body,
       keyword_init: true
@@ -8611,6 +8942,7 @@ module Aws::IAM
     #   <p>Information about the certificate.</p>
     #   @return [Types::SigningCertificate]
     class UploadSigningCertificateResponse < Struct.new(
+      nil,
       :certificate,
       keyword_init: true
     )
@@ -8690,6 +9022,7 @@ module Aws::IAM
     #         <i>IAM User Guide</i>.</p>
     #   @return [Array<Types::Tag>]
     class User < Struct.new(
+      nil,
       :path,
       :user_name,
       :user_id,
@@ -8746,6 +9079,7 @@ module Aws::IAM
     #         <i>IAM User Guide</i>.</p>
     #   @return [Array<Types::Tag>]
     class UserDetail < Struct.new(
+      nil,
       :path,
       :user_name,
       :user_id,
@@ -8787,6 +9121,7 @@ module Aws::IAM
     #         <i>IAM User Guide</i>.</p>
     #   @return [Array<Types::Tag>]
     class VirtualMFADevice < Struct.new(
+      nil,
       :serial_number,
       :base32_string_seed,
       :qr_code_png,

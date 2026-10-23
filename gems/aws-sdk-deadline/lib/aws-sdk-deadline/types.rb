@@ -18,6 +18,7 @@ module Aws::Deadline
     #   <p>The number of GPU accelerators specified for worker hosts in this fleet. </p>
     #   @return [Types::AcceleratorCountRange]
     class AcceleratorCapabilities < Struct.new(
+      nil,
       :selections,
       :count,
       keyword_init: true
@@ -34,6 +35,7 @@ module Aws::Deadline
     #   <p>The maximum number of GPU accelerators in the worker host.</p>
     #   @return [Integer]
     class AcceleratorCountRange < Struct.new(
+      nil,
       :min,
       :max,
       keyword_init: true
@@ -93,6 +95,7 @@ module Aws::Deadline
     #            blank, Deadline Cloud raises an exception.</p>
     #   @return [String]
     class AcceleratorSelection < Struct.new(
+      nil,
       :name,
       :runtime,
       keyword_init: true
@@ -114,6 +117,7 @@ module Aws::Deadline
     #   <p>The maximum amount of memory to use for the accelerator, measured in MiB.</p>
     #   @return [Integer]
     class AcceleratorTotalMemoryMiBRange < Struct.new(
+      nil,
       :min,
       :max,
       keyword_init: true
@@ -128,6 +132,7 @@ module Aws::Deadline
     #   <p>Information about the resources in use when the exception was thrown.</p>
     #   @return [Hash<String, String>]
     class AccessDeniedException < Struct.new(
+      nil,
       :message,
       :context,
       keyword_init: true
@@ -143,6 +148,7 @@ module Aws::Deadline
     #   <p>The number of limit resources used.</p>
     #   @return [Integer]
     class AcquiredLimit < Struct.new(
+      nil,
       :limit_id,
       :count,
       keyword_init: true
@@ -155,6 +161,7 @@ module Aws::Deadline
     #   <p>The environment ID of the assigned environment at the start of a session.</p>
     #   @return [String]
     class AssignedEnvironmentEnterSessionActionDefinition < Struct.new(
+      nil,
       :environment_id,
       keyword_init: true
     )
@@ -166,6 +173,7 @@ module Aws::Deadline
     #   <p>The environment ID of the assigned environment when exiting a session.</p>
     #   @return [String]
     class AssignedEnvironmentExitSessionActionDefinition < Struct.new(
+      nil,
       :environment_id,
       keyword_init: true
     )
@@ -186,6 +194,7 @@ module Aws::Deadline
     #   <p>The log configuration for the worker's assigned session.</p>
     #   @return [Types::LogConfiguration]
     class AssignedSession < Struct.new(
+      nil,
       :queue_id,
       :job_id,
       :session_actions,
@@ -203,6 +212,7 @@ module Aws::Deadline
     #   <p>The definition of the assigned session action.</p>
     #   @return [Types::AssignedSessionActionDefinition]
     class AssignedSessionAction < Struct.new(
+      nil,
       :session_action_id,
       :definition,
       keyword_init: true
@@ -245,6 +255,7 @@ module Aws::Deadline
     #   <p>The step ID.</p>
     #   @return [String]
     class AssignedSyncInputJobAttachmentsSessionActionDefinition < Struct.new(
+      nil,
       :step_id,
       keyword_init: true
     )
@@ -262,6 +273,7 @@ module Aws::Deadline
     #   <p>The parameters to include.</p>
     #   @return [Hash<String, Types::TaskParameterValue>]
     class AssignedTaskRunSessionActionDefinition < Struct.new(
+      nil,
       :task_id,
       :step_id,
       :parameters,
@@ -286,6 +298,7 @@ module Aws::Deadline
     #   <p>The principal's membership level for the associated farm.</p>
     #   @return [String]
     class AssociateMemberToFarmRequest < Struct.new(
+      nil,
       :farm_id,
       :principal_id,
       :principal_type,
@@ -297,6 +310,7 @@ module Aws::Deadline
     end
 
     class AssociateMemberToFarmResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -321,6 +335,7 @@ module Aws::Deadline
     #   <p>The principal's membership level for the associated fleet.</p>
     #   @return [String]
     class AssociateMemberToFleetRequest < Struct.new(
+      nil,
       :farm_id,
       :fleet_id,
       :principal_id,
@@ -333,6 +348,7 @@ module Aws::Deadline
     end
 
     class AssociateMemberToFleetResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -360,6 +376,7 @@ module Aws::Deadline
     #   <p>The principal's membership level for the associated job.</p>
     #   @return [String]
     class AssociateMemberToJobRequest < Struct.new(
+      nil,
       :farm_id,
       :queue_id,
       :job_id,
@@ -373,6 +390,7 @@ module Aws::Deadline
     end
 
     class AssociateMemberToJobResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -397,6 +415,7 @@ module Aws::Deadline
     #   <p>The principal's membership level for the associated queue.</p>
     #   @return [String]
     class AssociateMemberToQueueRequest < Struct.new(
+      nil,
       :farm_id,
       :queue_id,
       :principal_id,
@@ -409,6 +428,7 @@ module Aws::Deadline
     end
 
     class AssociateMemberToQueueResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -421,6 +441,7 @@ module Aws::Deadline
     #   <p>The fleet ID.</p>
     #   @return [String]
     class AssumeFleetRoleForReadRequest < Struct.new(
+      nil,
       :farm_id,
       :fleet_id,
       keyword_init: true
@@ -433,6 +454,7 @@ module Aws::Deadline
     #   <p>The credentials for the fleet role.</p>
     #   @return [Types::AwsCredentials]
     class AssumeFleetRoleForReadResponse < Struct.new(
+      nil,
       :credentials,
       keyword_init: true
     )
@@ -449,6 +471,7 @@ module Aws::Deadline
     #   <p>The ID of the worker assuming the fleet role.</p>
     #   @return [String]
     class AssumeFleetRoleForWorkerRequest < Struct.new(
+      nil,
       :farm_id,
       :fleet_id,
       :worker_id,
@@ -462,6 +485,7 @@ module Aws::Deadline
     #   <p>The credentials for the worker.</p>
     #   @return [Types::AwsCredentials]
     class AssumeFleetRoleForWorkerResponse < Struct.new(
+      nil,
       :credentials,
       keyword_init: true
     )
@@ -475,6 +499,7 @@ module Aws::Deadline
     #   <p>The queue ID.</p>
     #   @return [String]
     class AssumeQueueRoleForReadRequest < Struct.new(
+      nil,
       :farm_id,
       :queue_id,
       keyword_init: true
@@ -487,6 +512,7 @@ module Aws::Deadline
     #   <p>The credentials for the queue role.</p>
     #   @return [Types::AwsCredentials]
     class AssumeQueueRoleForReadResponse < Struct.new(
+      nil,
       :credentials,
       keyword_init: true
     )
@@ -500,6 +526,7 @@ module Aws::Deadline
     #   <p>The queue ID of the queue that the user assumes the role for.</p>
     #   @return [String]
     class AssumeQueueRoleForUserRequest < Struct.new(
+      nil,
       :farm_id,
       :queue_id,
       keyword_init: true
@@ -512,6 +539,7 @@ module Aws::Deadline
     #   <p>The credentials for the queue role that a user has access to.</p>
     #   @return [Types::AwsCredentials]
     class AssumeQueueRoleForUserResponse < Struct.new(
+      nil,
       :credentials,
       keyword_init: true
     )
@@ -531,6 +559,7 @@ module Aws::Deadline
     #   <p>The queue ID of the worker assuming the queue role.</p>
     #   @return [String]
     class AssumeQueueRoleForWorkerRequest < Struct.new(
+      nil,
       :farm_id,
       :fleet_id,
       :worker_id,
@@ -545,6 +574,7 @@ module Aws::Deadline
     #   <p>The Amazon Web Services credentials for the role that the worker is assuming.</p>
     #   @return [Types::AwsCredentials]
     class AssumeQueueRoleForWorkerResponse < Struct.new(
+      nil,
       :credentials,
       keyword_init: true
     )
@@ -559,6 +589,7 @@ module Aws::Deadline
     #   <p>The file system.</p>
     #   @return [String]
     class Attachments < Struct.new(
+      nil,
       :manifests,
       :file_system,
       keyword_init: true
@@ -586,6 +617,7 @@ module Aws::Deadline
     #   <p>The expiration date and time of the IAM credentials.</p>
     #   @return [Time]
     class AwsCredentials < Struct.new(
+      nil,
       :access_key_id,
       :secret_access_key,
       :session_token,
@@ -610,6 +642,7 @@ module Aws::Deadline
     #   <p>The job identifiers to include within the job entity batch details.</p>
     #   @return [Array<Types::JobEntityIdentifiersUnion>]
     class BatchGetJobEntityRequest < Struct.new(
+      nil,
       :farm_id,
       :fleet_id,
       :worker_id,
@@ -626,6 +659,7 @@ module Aws::Deadline
     #   <p>A list of errors from the job error logs for the batch.</p>
     #   @return [Array<Types::GetJobEntityError>]
     class BatchGetJobEntityResponse < Struct.new(
+      nil,
       :entities,
       :errors,
       keyword_init: true
@@ -647,6 +681,7 @@ module Aws::Deadline
     #            </important>
     #   @return [String]
     class BudgetActionToAdd < Struct.new(
+      nil,
       :type,
       :threshold_percentage,
       :description,
@@ -663,6 +698,7 @@ module Aws::Deadline
     #   <p>The percentage threshold for the budget action to remove.</p>
     #   @return [Float]
     class BudgetActionToRemove < Struct.new(
+      nil,
       :type,
       :threshold_percentage,
       keyword_init: true
@@ -739,6 +775,7 @@ module Aws::Deadline
     #   <p>The date and time the resource was updated.</p>
     #   @return [Time]
     class BudgetSummary < Struct.new(
+      nil,
       :budget_id,
       :usage_tracking_resource,
       :status,
@@ -772,6 +809,7 @@ module Aws::Deadline
     #   <p>Information about the resources in use when the exception was thrown.</p>
     #   @return [Hash<String, String>]
     class ConflictException < Struct.new(
+      nil,
       :message,
       :reason,
       :resource_id,
@@ -787,6 +825,7 @@ module Aws::Deadline
     #   <p>The amount of the budget consumed.</p>
     #   @return [Float]
     class ConsumedUsages < Struct.new(
+      nil,
       :approximate_dollar_usage,
       keyword_init: true
     )
@@ -807,6 +846,7 @@ module Aws::Deadline
     #            template.</p>
     #   @return [Types::S3Location]
     class CopyJobTemplateRequest < Struct.new(
+      nil,
       :farm_id,
       :job_id,
       :queue_id,
@@ -820,6 +860,7 @@ module Aws::Deadline
     #   <p>The format of the job template, either <code>JSON</code> or <code>YAML</code>.</p>
     #   @return [String]
     class CopyJobTemplateResponse < Struct.new(
+      nil,
       :template_type,
       keyword_init: true
     )
@@ -857,6 +898,7 @@ module Aws::Deadline
     #   <p>The schedule to associate with this budget.</p>
     #   @return [Types::BudgetSchedule]
     class CreateBudgetRequest < Struct.new(
+      nil,
       :client_token,
       :farm_id,
       :usage_tracking_resource,
@@ -874,6 +916,7 @@ module Aws::Deadline
     #   <p>The budget ID.</p>
     #   @return [String]
     class CreateBudgetResponse < Struct.new(
+      nil,
       :budget_id,
       keyword_init: true
     )
@@ -902,6 +945,7 @@ module Aws::Deadline
     #   <p>The tags to add to your farm. Each tag consists of a tag key and a tag value. Tag keys and values are both required, but tag values can be empty strings.</p>
     #   @return [Hash<String, String>]
     class CreateFarmRequest < Struct.new(
+      nil,
       :client_token,
       :display_name,
       :description,
@@ -916,6 +960,7 @@ module Aws::Deadline
     #   <p>The farm ID.</p>
     #   @return [String]
     class CreateFarmResponse < Struct.new(
+      nil,
       :farm_id,
       keyword_init: true
     )
@@ -968,6 +1013,7 @@ module Aws::Deadline
     #            additional configuration for workers in your fleet.</p>
     #   @return [Types::HostConfiguration]
     class CreateFleetRequest < Struct.new(
+      nil,
       :client_token,
       :farm_id,
       :display_name,
@@ -987,6 +1033,7 @@ module Aws::Deadline
     #   <p>The fleet ID.</p>
     #   @return [String]
     class CreateFleetResponse < Struct.new(
+      nil,
       :fleet_id,
       keyword_init: true
     )
@@ -1045,6 +1092,7 @@ module Aws::Deadline
     #   <p>The job ID for the source job.</p>
     #   @return [String]
     class CreateJobRequest < Struct.new(
+      nil,
       :farm_id,
       :queue_id,
       :client_token,
@@ -1068,6 +1116,7 @@ module Aws::Deadline
     #   <p>The job ID.</p>
     #   @return [String]
     class CreateJobResponse < Struct.new(
+      nil,
       :job_id,
       keyword_init: true
     )
@@ -1090,6 +1139,7 @@ module Aws::Deadline
     #   <p>Each tag consists of a tag key and a tag value. Tag keys and values are both required, but tag values can be empty strings.</p>
     #   @return [Hash<String, String>]
     class CreateLicenseEndpointRequest < Struct.new(
+      nil,
       :client_token,
       :vpc_id,
       :subnet_ids,
@@ -1104,6 +1154,7 @@ module Aws::Deadline
     #   <p>The license endpoint ID.</p>
     #   @return [String]
     class CreateLicenseEndpointResponse < Struct.new(
+      nil,
       :license_endpoint_id,
       keyword_init: true
     )
@@ -1142,6 +1193,7 @@ module Aws::Deadline
     #            </important>
     #   @return [String]
     class CreateLimitRequest < Struct.new(
+      nil,
       :client_token,
       :display_name,
       :amount_requirement_name,
@@ -1158,6 +1210,7 @@ module Aws::Deadline
     #               <code>CreateQueueLimitAssociation</code> and <code>DeleteLimit</code>.</p>
     #   @return [String]
     class CreateLimitResponse < Struct.new(
+      nil,
       :limit_id,
       keyword_init: true
     )
@@ -1189,6 +1242,7 @@ module Aws::Deadline
     #   <p>The tags to add to your monitor. Each tag consists of a tag key and a tag value. Tag keys and values are both required, but tag values can be empty strings.</p>
     #   @return [Hash<String, String>]
     class CreateMonitorRequest < Struct.new(
+      nil,
       :client_token,
       :display_name,
       :identity_center_instance_arn,
@@ -1207,6 +1261,7 @@ module Aws::Deadline
     #   <p>The Amazon Resource Name (ARN) that IAM Identity Center assigns to the monitor.</p>
     #   @return [String]
     class CreateMonitorResponse < Struct.new(
+      nil,
       :monitor_id,
       :identity_center_application_arn,
       keyword_init: true
@@ -1235,6 +1290,7 @@ module Aws::Deadline
     #   <p>The environment template to use in the queue.</p>
     #   @return [String]
     class CreateQueueEnvironmentRequest < Struct.new(
+      nil,
       :client_token,
       :farm_id,
       :queue_id,
@@ -1250,6 +1306,7 @@ module Aws::Deadline
     #   <p>The queue environment ID.</p>
     #   @return [String]
     class CreateQueueEnvironmentResponse < Struct.new(
+      nil,
       :queue_environment_id,
       keyword_init: true
     )
@@ -1266,6 +1323,7 @@ module Aws::Deadline
     #   <p>The fleet ID.</p>
     #   @return [String]
     class CreateQueueFleetAssociationRequest < Struct.new(
+      nil,
       :farm_id,
       :queue_id,
       :fleet_id,
@@ -1275,6 +1333,7 @@ module Aws::Deadline
     end
 
     class CreateQueueFleetAssociationResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1290,6 +1349,7 @@ module Aws::Deadline
     #   <p>The unique identifier of the limit to associate with the queue.</p>
     #   @return [String]
     class CreateQueueLimitAssociationRequest < Struct.new(
+      nil,
       :farm_id,
       :queue_id,
       :limit_id,
@@ -1299,6 +1359,7 @@ module Aws::Deadline
     end
 
     class CreateQueueLimitAssociationResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1345,6 +1406,7 @@ module Aws::Deadline
     #   <p>Each tag consists of a tag key and a tag value. Tag keys and values are both required, but tag values can be empty strings.</p>
     #   @return [Hash<String, String>]
     class CreateQueueRequest < Struct.new(
+      nil,
       :client_token,
       :farm_id,
       :display_name,
@@ -1365,6 +1427,7 @@ module Aws::Deadline
     #   <p>The queue ID.</p>
     #   @return [String]
     class CreateQueueResponse < Struct.new(
+      nil,
       :queue_id,
       keyword_init: true
     )
@@ -1390,6 +1453,7 @@ module Aws::Deadline
     #   <p>File system paths to include in the storage profile.</p>
     #   @return [Array<Types::FileSystemLocation>]
     class CreateStorageProfileRequest < Struct.new(
+      nil,
       :client_token,
       :farm_id,
       :display_name,
@@ -1404,6 +1468,7 @@ module Aws::Deadline
     #   <p>The storage profile ID.</p>
     #   @return [String]
     class CreateStorageProfileResponse < Struct.new(
+      nil,
       :storage_profile_id,
       keyword_init: true
     )
@@ -1426,6 +1491,7 @@ module Aws::Deadline
     #   <p>Each tag consists of a tag key and a tag value. Tag keys and values are both required, but tag values can be empty strings.</p>
     #   @return [Hash<String, String>]
     class CreateWorkerRequest < Struct.new(
+      nil,
       :farm_id,
       :fleet_id,
       :host_properties,
@@ -1440,6 +1506,7 @@ module Aws::Deadline
     #   <p>The worker ID.</p>
     #   @return [String]
     class CreateWorkerResponse < Struct.new(
+      nil,
       :worker_id,
       keyword_init: true
     )
@@ -1467,6 +1534,7 @@ module Aws::Deadline
     #               <code>NO_PROPAGATION</code>.</p>
     #   @return [String]
     class CustomerManagedFleetConfiguration < Struct.new(
+      nil,
       :mode,
       :worker_capabilities,
       :storage_profile_id,
@@ -1505,6 +1573,7 @@ module Aws::Deadline
     #   <p>Custom attributes for the customer manged worker capabilities.</p>
     #   @return [Array<Types::FleetAttributeCapability>]
     class CustomerManagedWorkerCapabilities < Struct.new(
+      nil,
       :v_cpu_count,
       :memory_mi_b,
       :accelerator_types,
@@ -1530,6 +1599,7 @@ module Aws::Deadline
     #   <p>The date and time.</p>
     #   @return [Time]
     class DateTimeFilterExpression < Struct.new(
+      nil,
       :name,
       :operator,
       :date_time,
@@ -1545,6 +1615,7 @@ module Aws::Deadline
     #   <p>The budget ID of the budget to delete.</p>
     #   @return [String]
     class DeleteBudgetRequest < Struct.new(
+      nil,
       :farm_id,
       :budget_id,
       keyword_init: true
@@ -1553,6 +1624,7 @@ module Aws::Deadline
     end
 
     class DeleteBudgetResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1562,6 +1634,7 @@ module Aws::Deadline
     #   <p>The farm ID of the farm to delete.</p>
     #   @return [String]
     class DeleteFarmRequest < Struct.new(
+      nil,
       :farm_id,
       keyword_init: true
     )
@@ -1569,6 +1642,7 @@ module Aws::Deadline
     end
 
     class DeleteFarmResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1584,6 +1658,7 @@ module Aws::Deadline
     #   <p>The fleet ID of the fleet to delete.</p>
     #   @return [String]
     class DeleteFleetRequest < Struct.new(
+      nil,
       :client_token,
       :farm_id,
       :fleet_id,
@@ -1593,6 +1668,7 @@ module Aws::Deadline
     end
 
     class DeleteFleetResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1602,6 +1678,7 @@ module Aws::Deadline
     #   <p>The license endpoint ID of the license endpoint to delete.</p>
     #   @return [String]
     class DeleteLicenseEndpointRequest < Struct.new(
+      nil,
       :license_endpoint_id,
       keyword_init: true
     )
@@ -1609,6 +1686,7 @@ module Aws::Deadline
     end
 
     class DeleteLicenseEndpointResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1621,6 +1699,7 @@ module Aws::Deadline
     #   <p>The unique identifier of the limit to delete.</p>
     #   @return [String]
     class DeleteLimitRequest < Struct.new(
+      nil,
       :farm_id,
       :limit_id,
       keyword_init: true
@@ -1629,6 +1708,7 @@ module Aws::Deadline
     end
 
     class DeleteLimitResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1641,6 +1721,7 @@ module Aws::Deadline
     #   <p>The product ID to remove from the license endpoint.</p>
     #   @return [String]
     class DeleteMeteredProductRequest < Struct.new(
+      nil,
       :license_endpoint_id,
       :product_id,
       keyword_init: true
@@ -1649,6 +1730,7 @@ module Aws::Deadline
     end
 
     class DeleteMeteredProductResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1660,6 +1742,7 @@ module Aws::Deadline
     #               <code>GetMonitor</code> operation.</p>
     #   @return [String]
     class DeleteMonitorRequest < Struct.new(
+      nil,
       :monitor_id,
       keyword_init: true
     )
@@ -1667,6 +1750,7 @@ module Aws::Deadline
     end
 
     class DeleteMonitorResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1682,6 +1766,7 @@ module Aws::Deadline
     #   <p>The queue environment ID of the queue environment to delete.</p>
     #   @return [String]
     class DeleteQueueEnvironmentRequest < Struct.new(
+      nil,
       :farm_id,
       :queue_id,
       :queue_environment_id,
@@ -1691,6 +1776,7 @@ module Aws::Deadline
     end
 
     class DeleteQueueEnvironmentResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1706,6 +1792,7 @@ module Aws::Deadline
     #   <p>The fleet ID of the queue-fleet association.</p>
     #   @return [String]
     class DeleteQueueFleetAssociationRequest < Struct.new(
+      nil,
       :farm_id,
       :queue_id,
       :fleet_id,
@@ -1715,6 +1802,7 @@ module Aws::Deadline
     end
 
     class DeleteQueueFleetAssociationResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1731,6 +1819,7 @@ module Aws::Deadline
     #   <p>The unique identifier of the limit to disassociate.</p>
     #   @return [String]
     class DeleteQueueLimitAssociationRequest < Struct.new(
+      nil,
       :farm_id,
       :queue_id,
       :limit_id,
@@ -1740,6 +1829,7 @@ module Aws::Deadline
     end
 
     class DeleteQueueLimitAssociationResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1752,6 +1842,7 @@ module Aws::Deadline
     #   <p>The queue ID of the queue to delete.</p>
     #   @return [String]
     class DeleteQueueRequest < Struct.new(
+      nil,
       :farm_id,
       :queue_id,
       keyword_init: true
@@ -1760,6 +1851,7 @@ module Aws::Deadline
     end
 
     class DeleteQueueResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1772,6 +1864,7 @@ module Aws::Deadline
     #   <p>The storage profile ID of the storage profile to delete.</p>
     #   @return [String]
     class DeleteStorageProfileRequest < Struct.new(
+      nil,
       :farm_id,
       :storage_profile_id,
       keyword_init: true
@@ -1780,6 +1873,7 @@ module Aws::Deadline
     end
 
     class DeleteStorageProfileResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1795,6 +1889,7 @@ module Aws::Deadline
     #   <p>The worker ID of the worker to delete.</p>
     #   @return [String]
     class DeleteWorkerRequest < Struct.new(
+      nil,
       :farm_id,
       :fleet_id,
       :worker_id,
@@ -1804,6 +1899,7 @@ module Aws::Deadline
     end
 
     class DeleteWorkerResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1823,6 +1919,7 @@ module Aws::Deadline
     #   <p>The number of unresolved consumers.</p>
     #   @return [Integer]
     class DependencyCounts < Struct.new(
+      nil,
       :dependencies_resolved,
       :dependencies_unresolved,
       :consumers_resolved,
@@ -1839,6 +1936,7 @@ module Aws::Deadline
     #   <p>A member's principal ID to disassociate from a farm.</p>
     #   @return [String]
     class DisassociateMemberFromFarmRequest < Struct.new(
+      nil,
       :farm_id,
       :principal_id,
       keyword_init: true
@@ -1847,6 +1945,7 @@ module Aws::Deadline
     end
 
     class DisassociateMemberFromFarmResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1862,6 +1961,7 @@ module Aws::Deadline
     #   <p>A member's principal ID to disassociate from a fleet.</p>
     #   @return [String]
     class DisassociateMemberFromFleetRequest < Struct.new(
+      nil,
       :farm_id,
       :fleet_id,
       :principal_id,
@@ -1871,6 +1971,7 @@ module Aws::Deadline
     end
 
     class DisassociateMemberFromFleetResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1889,6 +1990,7 @@ module Aws::Deadline
     #   <p>A member's principal ID to disassociate from a job.</p>
     #   @return [String]
     class DisassociateMemberFromJobRequest < Struct.new(
+      nil,
       :farm_id,
       :queue_id,
       :job_id,
@@ -1899,6 +2001,7 @@ module Aws::Deadline
     end
 
     class DisassociateMemberFromJobResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1914,6 +2017,7 @@ module Aws::Deadline
     #   <p>A member's principal ID to disassociate from a queue.</p>
     #   @return [String]
     class DisassociateMemberFromQueueRequest < Struct.new(
+      nil,
       :farm_id,
       :queue_id,
       :principal_id,
@@ -1923,6 +2027,7 @@ module Aws::Deadline
     end
 
     class DisassociateMemberFromQueueResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1939,6 +2044,7 @@ module Aws::Deadline
     #   <p>The throughput per volume in MiB.</p>
     #   @return [Integer]
     class Ec2EbsVolume < Struct.new(
+      nil,
       :size_gi_b,
       :iops,
       :throughput_mi_b,
@@ -1968,6 +2074,7 @@ module Aws::Deadline
     #   <p>The template used for the environment.</p>
     #   @return [JSON]
     class EnvironmentDetailsEntity < Struct.new(
+      nil,
       :job_id,
       :environment_id,
       :schema_version,
@@ -1991,6 +2098,7 @@ module Aws::Deadline
     #   <p>The error message detailing the error's cause.</p>
     #   @return [String]
     class EnvironmentDetailsError < Struct.new(
+      nil,
       :job_id,
       :environment_id,
       :code,
@@ -2008,6 +2116,7 @@ module Aws::Deadline
     #   <p>The environment ID.</p>
     #   @return [String]
     class EnvironmentDetailsIdentifiers < Struct.new(
+      nil,
       :job_id,
       :environment_id,
       keyword_init: true
@@ -2020,6 +2129,7 @@ module Aws::Deadline
     #   <p>The environment ID.</p>
     #   @return [String]
     class EnvironmentEnterSessionActionDefinition < Struct.new(
+      nil,
       :environment_id,
       keyword_init: true
     )
@@ -2031,6 +2141,7 @@ module Aws::Deadline
     #   <p>The environment ID.</p>
     #   @return [String]
     class EnvironmentEnterSessionActionDefinitionSummary < Struct.new(
+      nil,
       :environment_id,
       keyword_init: true
     )
@@ -2042,6 +2153,7 @@ module Aws::Deadline
     #   <p>The environment ID.</p>
     #   @return [String]
     class EnvironmentExitSessionActionDefinition < Struct.new(
+      nil,
       :environment_id,
       keyword_init: true
     )
@@ -2053,6 +2165,7 @@ module Aws::Deadline
     #   <p>The environment ID.</p>
     #   @return [String]
     class EnvironmentExitSessionActionDefinitionSummary < Struct.new(
+      nil,
       :environment_id,
       keyword_init: true
     )
@@ -2076,6 +2189,7 @@ module Aws::Deadline
     #   <p>The farm member's membership level.</p>
     #   @return [String]
     class FarmMember < Struct.new(
+      nil,
       :farm_id,
       :principal_id,
       :principal_type,
@@ -2112,6 +2226,7 @@ module Aws::Deadline
     #   <p>The user or system that updated this resource.</p>
     #   @return [String]
     class FarmSummary < Struct.new(
+      nil,
       :farm_id,
       :display_name,
       :kms_key_arn,
@@ -2132,6 +2247,7 @@ module Aws::Deadline
     #   <p>The name of the field.</p>
     #   @return [String]
     class FieldSortExpression < Struct.new(
+      nil,
       :sort_order,
       :name,
       keyword_init: true
@@ -2151,6 +2267,7 @@ module Aws::Deadline
     #   <p>The type of file.</p>
     #   @return [String]
     class FileSystemLocation < Struct.new(
+      nil,
       :name,
       :path,
       :type,
@@ -2167,6 +2284,7 @@ module Aws::Deadline
     #   <p>When the budget ends.</p>
     #   @return [Time]
     class FixedBudgetSchedule < Struct.new(
+      nil,
       :start_time,
       :end_time,
       keyword_init: true
@@ -2185,6 +2303,7 @@ module Aws::Deadline
     #   <p>The maximum amount of the fleet worker capability.</p>
     #   @return [Float]
     class FleetAmountCapability < Struct.new(
+      nil,
       :name,
       :min,
       :max,
@@ -2201,6 +2320,7 @@ module Aws::Deadline
     #   <p>The number of fleet attribute capabilities.</p>
     #   @return [Array<String>]
     class FleetAttributeCapability < Struct.new(
+      nil,
       :name,
       :values,
       keyword_init: true
@@ -2216,6 +2336,7 @@ module Aws::Deadline
     #   <p>Attribute capabilities of the fleet.</p>
     #   @return [Array<Types::FleetAttributeCapability>]
     class FleetCapabilities < Struct.new(
+      nil,
       :amounts,
       :attributes,
       keyword_init: true
@@ -2263,6 +2384,7 @@ module Aws::Deadline
     #   <p>The fleet member's membership level.</p>
     #   @return [String]
     class FleetMember < Struct.new(
+      nil,
       :farm_id,
       :fleet_id,
       :principal_id,
@@ -2324,6 +2446,7 @@ module Aws::Deadline
     #   <p>The user or system that updated this resource.</p>
     #   @return [String]
     class FleetSummary < Struct.new(
+      nil,
       :fleet_id,
       :farm_id,
       :display_name,
@@ -2351,6 +2474,7 @@ module Aws::Deadline
     #   <p>The budget ID.</p>
     #   @return [String]
     class GetBudgetRequest < Struct.new(
+      nil,
       :farm_id,
       :budget_id,
       keyword_init: true
@@ -2418,6 +2542,7 @@ module Aws::Deadline
     #   <p>The date and time the queue stopped.</p>
     #   @return [Time]
     class GetBudgetResponse < Struct.new(
+      nil,
       :budget_id,
       :usage_tracking_resource,
       :status,
@@ -2441,6 +2566,7 @@ module Aws::Deadline
     #   <p>The farm ID of the farm.</p>
     #   @return [String]
     class GetFarmRequest < Struct.new(
+      nil,
       :farm_id,
       keyword_init: true
     )
@@ -2478,6 +2604,7 @@ module Aws::Deadline
     #   <p>The user or system that updated this resource.</p>
     #   @return [String]
     class GetFarmResponse < Struct.new(
+      nil,
       :farm_id,
       :display_name,
       :description,
@@ -2498,6 +2625,7 @@ module Aws::Deadline
     #   <p>The fleet ID of the fleet to get.</p>
     #   @return [String]
     class GetFleetRequest < Struct.new(
+      nil,
       :farm_id,
       :fleet_id,
       keyword_init: true
@@ -2572,6 +2700,7 @@ module Aws::Deadline
     #   <p>The user or system that updated this resource.</p>
     #   @return [String]
     class GetFleetResponse < Struct.new(
+      nil,
       :fleet_id,
       :farm_id,
       :display_name,
@@ -2636,6 +2765,7 @@ module Aws::Deadline
     #   <p>The job ID.</p>
     #   @return [String]
     class GetJobRequest < Struct.new(
+      nil,
       :farm_id,
       :queue_id,
       :job_id,
@@ -2721,6 +2851,7 @@ module Aws::Deadline
     #   <p>The job ID for the source job.</p>
     #   @return [String]
     class GetJobResponse < Struct.new(
+      nil,
       :job_id,
       :name,
       :lifecycle_status,
@@ -2753,6 +2884,7 @@ module Aws::Deadline
     #   <p>The license endpoint ID.</p>
     #   @return [String]
     class GetLicenseEndpointRequest < Struct.new(
+      nil,
       :license_endpoint_id,
       keyword_init: true
     )
@@ -2781,6 +2913,7 @@ module Aws::Deadline
     #   <p>The security group IDs for the license endpoint.</p>
     #   @return [Array<String>]
     class GetLicenseEndpointResponse < Struct.new(
+      nil,
       :license_endpoint_id,
       :status,
       :status_message,
@@ -2800,6 +2933,7 @@ module Aws::Deadline
     #   <p>The unique identifier of the limit to return.</p>
     #   @return [String]
     class GetLimitRequest < Struct.new(
+      nil,
       :farm_id,
       :limit_id,
       keyword_init: true
@@ -2854,6 +2988,7 @@ module Aws::Deadline
     #            </important>
     #   @return [String]
     class GetLimitResponse < Struct.new(
+      nil,
       :display_name,
       :amount_requirement_name,
       :max_count,
@@ -2875,6 +3010,7 @@ module Aws::Deadline
     #               <code>CreateMonitor</code> operation.</p>
     #   @return [String]
     class GetMonitorRequest < Struct.new(
+      nil,
       :monitor_id,
       keyword_init: true
     )
@@ -2921,6 +3057,7 @@ module Aws::Deadline
     #   <p>The user name of the person that last updated the monitor.</p>
     #   @return [String]
     class GetMonitorResponse < Struct.new(
+      nil,
       :monitor_id,
       :display_name,
       :subdomain,
@@ -2947,6 +3084,7 @@ module Aws::Deadline
     #   <p>The queue environment ID.</p>
     #   @return [String]
     class GetQueueEnvironmentRequest < Struct.new(
+      nil,
       :farm_id,
       :queue_id,
       :queue_environment_id,
@@ -2983,6 +3121,7 @@ module Aws::Deadline
     #   <p>The user or system that updated this resource.</p>
     #   @return [String]
     class GetQueueEnvironmentResponse < Struct.new(
+      nil,
       :queue_environment_id,
       :name,
       :priority,
@@ -3007,6 +3146,7 @@ module Aws::Deadline
     #   <p>The fleet ID for the queue-fleet association.</p>
     #   @return [String]
     class GetQueueFleetAssociationRequest < Struct.new(
+      nil,
       :farm_id,
       :queue_id,
       :fleet_id,
@@ -3037,6 +3177,7 @@ module Aws::Deadline
     #   <p>The user or system that updated this resource.</p>
     #   @return [String]
     class GetQueueFleetAssociationResponse < Struct.new(
+      nil,
       :queue_id,
       :fleet_id,
       :status,
@@ -3059,6 +3200,7 @@ module Aws::Deadline
     #   <p>The unique identifier of the limit associated with the queue.</p>
     #   @return [String]
     class GetQueueLimitAssociationRequest < Struct.new(
+      nil,
       :farm_id,
       :queue_id,
       :limit_id,
@@ -3089,6 +3231,7 @@ module Aws::Deadline
     #   <p>The current status of the limit.</p>
     #   @return [String]
     class GetQueueLimitAssociationResponse < Struct.new(
+      nil,
       :created_at,
       :created_by,
       :updated_at,
@@ -3108,6 +3251,7 @@ module Aws::Deadline
     #   <p>The queue ID for the queue to retrieve.</p>
     #   @return [String]
     class GetQueueRequest < Struct.new(
+      nil,
       :farm_id,
       :queue_id,
       keyword_init: true
@@ -3185,6 +3329,7 @@ module Aws::Deadline
     #   <p>The user or system that updated this resource.</p>
     #   @return [String]
     class GetQueueResponse < Struct.new(
+      nil,
       :queue_id,
       :display_name,
       :description,
@@ -3219,6 +3364,7 @@ module Aws::Deadline
     #   <p>The session action ID for the session.</p>
     #   @return [String]
     class GetSessionActionRequest < Struct.new(
+      nil,
       :farm_id,
       :queue_id,
       :job_id,
@@ -3267,6 +3413,7 @@ module Aws::Deadline
     #   <p>The list of manifest properties that describe file attachments for the task run.</p>
     #   @return [Array<Types::TaskRunManifestPropertiesResponse>]
     class GetSessionActionResponse < Struct.new(
+      nil,
       :session_action_id,
       :status,
       :started_at,
@@ -3297,6 +3444,7 @@ module Aws::Deadline
     #   <p>The session ID.</p>
     #   @return [String]
     class GetSessionRequest < Struct.new(
+      nil,
       :farm_id,
       :queue_id,
       :job_id,
@@ -3343,6 +3491,7 @@ module Aws::Deadline
     #   <p>The worker log for the session.</p>
     #   @return [Types::LogConfiguration]
     class GetSessionResponse < Struct.new(
+      nil,
       :session_id,
       :fleet_id,
       :worker_id,
@@ -3376,6 +3525,7 @@ module Aws::Deadline
     #   <p>The token for the next set of results, or <code>null</code> to start from the beginning.</p>
     #   @return [String]
     class GetSessionsStatisticsAggregationRequest < Struct.new(
+      nil,
       :farm_id,
       :aggregation_id,
       :max_results,
@@ -3405,6 +3555,7 @@ module Aws::Deadline
     #   <p>A message that describes the status.</p>
     #   @return [String]
     class GetSessionsStatisticsAggregationResponse < Struct.new(
+      nil,
       :statistics,
       :next_token,
       :status,
@@ -3427,6 +3578,7 @@ module Aws::Deadline
     #   <p>The step ID.</p>
     #   @return [String]
     class GetStepRequest < Struct.new(
+      nil,
       :farm_id,
       :queue_id,
       :job_id,
@@ -3494,6 +3646,7 @@ module Aws::Deadline
     #            </important>
     #   @return [String]
     class GetStepResponse < Struct.new(
+      nil,
       :step_id,
       :name,
       :lifecycle_status,
@@ -3527,6 +3680,7 @@ module Aws::Deadline
     #   <p>The storage profile ID for the storage profile in the queue.</p>
     #   @return [String]
     class GetStorageProfileForQueueRequest < Struct.new(
+      nil,
       :farm_id,
       :queue_id,
       :storage_profile_id,
@@ -3551,6 +3705,7 @@ module Aws::Deadline
     #   <p>The location of the files for the storage profile within the queue.</p>
     #   @return [Array<Types::FileSystemLocation>]
     class GetStorageProfileForQueueResponse < Struct.new(
+      nil,
       :storage_profile_id,
       :display_name,
       :os_family,
@@ -3567,6 +3722,7 @@ module Aws::Deadline
     #   <p>The storage profile ID.</p>
     #   @return [String]
     class GetStorageProfileRequest < Struct.new(
+      nil,
       :farm_id,
       :storage_profile_id,
       keyword_init: true
@@ -3602,6 +3758,7 @@ module Aws::Deadline
     #   <p>The location of the files for the storage profile.</p>
     #   @return [Array<Types::FileSystemLocation>]
     class GetStorageProfileResponse < Struct.new(
+      nil,
       :storage_profile_id,
       :display_name,
       :os_family,
@@ -3631,6 +3788,7 @@ module Aws::Deadline
     #   <p>The task ID.</p>
     #   @return [String]
     class GetTaskRequest < Struct.new(
+      nil,
       :farm_id,
       :queue_id,
       :job_id,
@@ -3678,6 +3836,7 @@ module Aws::Deadline
     #   <p>The latest session ID for the task.</p>
     #   @return [String]
     class GetTaskResponse < Struct.new(
+      nil,
       :task_id,
       :created_at,
       :created_by,
@@ -3705,6 +3864,7 @@ module Aws::Deadline
     #   <p>The worker ID.</p>
     #   @return [String]
     class GetWorkerRequest < Struct.new(
+      nil,
       :farm_id,
       :fleet_id,
       :worker_id,
@@ -3744,6 +3904,7 @@ module Aws::Deadline
     #   <p>The user or system that updated this resource.</p>
     #   @return [String]
     class GetWorkerResponse < Struct.new(
+      nil,
       :farm_id,
       :fleet_id,
       :worker_id,
@@ -3787,6 +3948,7 @@ module Aws::Deadline
     #            <p>The default is 300 seconds (5 minutes).</p>
     #   @return [Integer]
     class HostConfiguration < Struct.new(
+      nil,
       :script_body,
       :script_timeout_seconds,
       keyword_init: true
@@ -3807,6 +3969,7 @@ module Aws::Deadline
     #   <p>The host name.</p>
     #   @return [String]
     class HostPropertiesRequest < Struct.new(
+      nil,
       :ip_addresses,
       :host_name,
       keyword_init: true
@@ -3828,6 +3991,7 @@ module Aws::Deadline
     #   <p>The instance type of the host EC2 instance.</p>
     #   @return [String]
     class HostPropertiesResponse < Struct.new(
+      nil,
       :ip_addresses,
       :host_name,
       :ec2_instance_arn,
@@ -3844,6 +4008,7 @@ module Aws::Deadline
     #   <p>The number of seconds a client should wait before retrying the request.</p>
     #   @return [Integer]
     class InternalServerErrorException < Struct.new(
+      nil,
       :message,
       :retry_after_seconds,
       keyword_init: true
@@ -3859,6 +4024,7 @@ module Aws::Deadline
     #   <p>The IpV6 address for the network and node component.</p>
     #   @return [Array<String>]
     class IpAddresses < Struct.new(
+      nil,
       :ip_v4_addresses,
       :ip_v6_addresses,
       keyword_init: true
@@ -3874,6 +4040,7 @@ module Aws::Deadline
     #   <p>The job attachments.</p>
     #   @return [Types::Attachments]
     class JobAttachmentDetailsEntity < Struct.new(
+      nil,
       :job_id,
       :attachments,
       keyword_init: true
@@ -3892,6 +4059,7 @@ module Aws::Deadline
     #   <p>The error message detailing the error's cause.</p>
     #   @return [String]
     class JobAttachmentDetailsError < Struct.new(
+      nil,
       :job_id,
       :code,
       :message,
@@ -3905,6 +4073,7 @@ module Aws::Deadline
     #   <p>The job ID.</p>
     #   @return [String]
     class JobAttachmentDetailsIdentifiers < Struct.new(
+      nil,
       :job_id,
       keyword_init: true
     )
@@ -3919,6 +4088,7 @@ module Aws::Deadline
     #   <p>The root prefix.</p>
     #   @return [String]
     class JobAttachmentSettings < Struct.new(
+      nil,
       :s3_bucket_name,
       :root_prefix,
       keyword_init: true
@@ -3952,6 +4122,7 @@ module Aws::Deadline
     #   <p>The path mapping rules.</p>
     #   @return [Array<Types::PathMappingRule>]
     class JobDetailsEntity < Struct.new(
+      nil,
       :job_id,
       :job_attachment_settings,
       :job_run_as_user,
@@ -3976,6 +4147,7 @@ module Aws::Deadline
     #   <p>The error message detailing the error's cause.</p>
     #   @return [String]
     class JobDetailsError < Struct.new(
+      nil,
       :job_id,
       :code,
       :message,
@@ -3989,6 +4161,7 @@ module Aws::Deadline
     #   <p>The job ID.</p>
     #   @return [String]
     class JobDetailsIdentifiers < Struct.new(
+      nil,
       :job_id,
       keyword_init: true
     )
@@ -4078,6 +4251,7 @@ module Aws::Deadline
     #   <p>The job member's membership level.</p>
     #   @return [String]
     class JobMember < Struct.new(
+      nil,
       :farm_id,
       :queue_id,
       :job_id,
@@ -4132,6 +4306,7 @@ module Aws::Deadline
     #            run using the worker agent system user.</p>
     #   @return [String]
     class JobRunAsUser < Struct.new(
+      nil,
       :posix,
       :windows,
       :run_as,
@@ -4252,6 +4427,7 @@ module Aws::Deadline
     #   <p>The job ID for the source job.</p>
     #   @return [String]
     class JobSearchSummary < Struct.new(
+      nil,
       :job_id,
       :queue_id,
       :name,
@@ -4384,6 +4560,7 @@ module Aws::Deadline
     #   <p>The job ID for the source job.</p>
     #   @return [String]
     class JobSummary < Struct.new(
+      nil,
       :job_id,
       :name,
       :lifecycle_status,
@@ -4422,6 +4599,7 @@ module Aws::Deadline
     #   <p>The VCP(virtual private cloud) ID associated with the license endpoint.</p>
     #   @return [String]
     class LicenseEndpointSummary < Struct.new(
+      nil,
       :license_endpoint_id,
       :status,
       :status_message,
@@ -4473,6 +4651,7 @@ module Aws::Deadline
     #            delayed and may not be the count at the time that you called the operation.</p>
     #   @return [Integer]
     class LimitSummary < Struct.new(
+      nil,
       :display_name,
       :amount_requirement_name,
       :max_count,
@@ -4495,6 +4674,7 @@ module Aws::Deadline
     #   <p>The maximum number of results to return. Use this parameter with <code>NextToken</code> to get results as a set of sequential pages.</p>
     #   @return [Integer]
     class ListAvailableMeteredProductsRequest < Struct.new(
+      nil,
       :next_token,
       :max_results,
       keyword_init: true
@@ -4509,6 +4689,7 @@ module Aws::Deadline
     #   <p>If Deadline Cloud returns <code>nextToken</code>, then there are more results available. The value of <code>nextToken</code> is a unique pagination token for each page. To retrieve the next page, call the operation again using the returned token. Keep all other arguments unchanged. If no results remain, then <code>nextToken</code> is set to <code>null</code>. Each pagination token expires after 24 hours. If you provide a token that isn't valid, then you receive an HTTP 400 <code>ValidationException</code> error.</p>
     #   @return [String]
     class ListAvailableMeteredProductsResponse < Struct.new(
+      nil,
       :metered_products,
       :next_token,
       keyword_init: true
@@ -4529,6 +4710,7 @@ module Aws::Deadline
     #   <p>The status to list for the budgets.</p>
     #   @return [String]
     class ListBudgetsRequest < Struct.new(
+      nil,
       :next_token,
       :farm_id,
       :max_results,
@@ -4545,6 +4727,7 @@ module Aws::Deadline
     #   <p>The budgets to include on the list.</p>
     #   @return [Array<Types::BudgetSummary>]
     class ListBudgetsResponse < Struct.new(
+      nil,
       :next_token,
       :budgets,
       keyword_init: true
@@ -4562,6 +4745,7 @@ module Aws::Deadline
     #   <p>The maximum number of results to return. Use this parameter with <code>NextToken</code> to get results as a set of sequential pages.</p>
     #   @return [Integer]
     class ListFarmMembersRequest < Struct.new(
+      nil,
       :farm_id,
       :next_token,
       :max_results,
@@ -4577,6 +4761,7 @@ module Aws::Deadline
     #   <p>If Deadline Cloud returns <code>nextToken</code>, then there are more results available. The value of <code>nextToken</code> is a unique pagination token for each page. To retrieve the next page, call the operation again using the returned token. Keep all other arguments unchanged. If no results remain, then <code>nextToken</code> is set to <code>null</code>. Each pagination token expires after 24 hours. If you provide a token that isn't valid, then you receive an HTTP 400 <code>ValidationException</code> error.</p>
     #   @return [String]
     class ListFarmMembersResponse < Struct.new(
+      nil,
       :members,
       :next_token,
       keyword_init: true
@@ -4594,6 +4779,7 @@ module Aws::Deadline
     #   <p>The maximum number of results to return. Use this parameter with <code>NextToken</code> to get results as a set of sequential pages.</p>
     #   @return [Integer]
     class ListFarmsRequest < Struct.new(
+      nil,
       :next_token,
       :principal_id,
       :max_results,
@@ -4609,6 +4795,7 @@ module Aws::Deadline
     #   <p>Farms on the list.</p>
     #   @return [Array<Types::FarmSummary>]
     class ListFarmsResponse < Struct.new(
+      nil,
       :next_token,
       :farms,
       keyword_init: true
@@ -4629,6 +4816,7 @@ module Aws::Deadline
     #   <p>The maximum number of results to return. Use this parameter with <code>NextToken</code> to get results as a set of sequential pages.</p>
     #   @return [Integer]
     class ListFleetMembersRequest < Struct.new(
+      nil,
       :farm_id,
       :fleet_id,
       :next_token,
@@ -4645,6 +4833,7 @@ module Aws::Deadline
     #   <p>If Deadline Cloud returns <code>nextToken</code>, then there are more results available. The value of <code>nextToken</code> is a unique pagination token for each page. To retrieve the next page, call the operation again using the returned token. Keep all other arguments unchanged. If no results remain, then <code>nextToken</code> is set to <code>null</code>. Each pagination token expires after 24 hours. If you provide a token that isn't valid, then you receive an HTTP 400 <code>ValidationException</code> error.</p>
     #   @return [String]
     class ListFleetMembersResponse < Struct.new(
+      nil,
       :members,
       :next_token,
       keyword_init: true
@@ -4674,6 +4863,7 @@ module Aws::Deadline
     #   <p>The maximum number of results to return. Use this parameter with <code>NextToken</code> to get results as a set of sequential pages.</p>
     #   @return [Integer]
     class ListFleetsRequest < Struct.new(
+      nil,
       :farm_id,
       :principal_id,
       :display_name,
@@ -4692,6 +4882,7 @@ module Aws::Deadline
     #   <p>If Deadline Cloud returns <code>nextToken</code>, then there are more results available. The value of <code>nextToken</code> is a unique pagination token for each page. To retrieve the next page, call the operation again using the returned token. Keep all other arguments unchanged. If no results remain, then <code>nextToken</code> is set to <code>null</code>. Each pagination token expires after 24 hours. If you provide a token that isn't valid, then you receive an HTTP 400 <code>ValidationException</code> error.</p>
     #   @return [String]
     class ListFleetsResponse < Struct.new(
+      nil,
       :fleets,
       :next_token,
       keyword_init: true
@@ -4715,6 +4906,7 @@ module Aws::Deadline
     #   <p>The maximum number of results to return. Use this parameter with <code>NextToken</code> to get results as a set of sequential pages.</p>
     #   @return [Integer]
     class ListJobMembersRequest < Struct.new(
+      nil,
       :farm_id,
       :queue_id,
       :job_id,
@@ -4732,6 +4924,7 @@ module Aws::Deadline
     #   <p>If Deadline Cloud returns <code>nextToken</code>, then there are more results available. The value of <code>nextToken</code> is a unique pagination token for each page. To retrieve the next page, call the operation again using the returned token. Keep all other arguments unchanged. If no results remain, then <code>nextToken</code> is set to <code>null</code>. Each pagination token expires after 24 hours. If you provide a token that isn't valid, then you receive an HTTP 400 <code>ValidationException</code> error.</p>
     #   @return [String]
     class ListJobMembersResponse < Struct.new(
+      nil,
       :members,
       :next_token,
       keyword_init: true
@@ -4755,6 +4948,7 @@ module Aws::Deadline
     #   <p>The maximum number of results to return. Use this parameter with <code>NextToken</code> to get results as a set of sequential pages.</p>
     #   @return [Integer]
     class ListJobParameterDefinitionsRequest < Struct.new(
+      nil,
       :farm_id,
       :job_id,
       :queue_id,
@@ -4772,6 +4966,7 @@ module Aws::Deadline
     #   <p>If Deadline Cloud returns <code>nextToken</code>, then there are more results available. The value of <code>nextToken</code> is a unique pagination token for each page. To retrieve the next page, call the operation again using the returned token. Keep all other arguments unchanged. If no results remain, then <code>nextToken</code> is set to <code>null</code>. Each pagination token expires after 24 hours. If you provide a token that isn't valid, then you receive an HTTP 400 <code>ValidationException</code> error.</p>
     #   @return [String]
     class ListJobParameterDefinitionsResponse < Struct.new(
+      nil,
       :job_parameter_definitions,
       :next_token,
       keyword_init: true
@@ -4795,6 +4990,7 @@ module Aws::Deadline
     #   <p>The maximum number of results to return. Use this parameter with <code>NextToken</code> to get results as a set of sequential pages.</p>
     #   @return [Integer]
     class ListJobsRequest < Struct.new(
+      nil,
       :farm_id,
       :principal_id,
       :queue_id,
@@ -4812,6 +5008,7 @@ module Aws::Deadline
     #   <p>If Deadline Cloud returns <code>nextToken</code>, then there are more results available. The value of <code>nextToken</code> is a unique pagination token for each page. To retrieve the next page, call the operation again using the returned token. Keep all other arguments unchanged. If no results remain, then <code>nextToken</code> is set to <code>null</code>. Each pagination token expires after 24 hours. If you provide a token that isn't valid, then you receive an HTTP 400 <code>ValidationException</code> error.</p>
     #   @return [String]
     class ListJobsResponse < Struct.new(
+      nil,
       :jobs,
       :next_token,
       keyword_init: true
@@ -4826,6 +5023,7 @@ module Aws::Deadline
     #   <p>The maximum number of results to return. Use this parameter with <code>NextToken</code> to get results as a set of sequential pages.</p>
     #   @return [Integer]
     class ListLicenseEndpointsRequest < Struct.new(
+      nil,
       :next_token,
       :max_results,
       keyword_init: true
@@ -4840,6 +5038,7 @@ module Aws::Deadline
     #   <p>If Deadline Cloud returns <code>nextToken</code>, then there are more results available. The value of <code>nextToken</code> is a unique pagination token for each page. To retrieve the next page, call the operation again using the returned token. Keep all other arguments unchanged. If no results remain, then <code>nextToken</code> is set to <code>null</code>. Each pagination token expires after 24 hours. If you provide a token that isn't valid, then you receive an HTTP 400 <code>ValidationException</code> error.</p>
     #   @return [String]
     class ListLicenseEndpointsResponse < Struct.new(
+      nil,
       :license_endpoints,
       :next_token,
       keyword_init: true
@@ -4857,6 +5056,7 @@ module Aws::Deadline
     #   <p>The maximum number of limits to return in each page of results.</p>
     #   @return [Integer]
     class ListLimitsRequest < Struct.new(
+      nil,
       :farm_id,
       :next_token,
       :max_results,
@@ -4872,6 +5072,7 @@ module Aws::Deadline
     #   <p>If Deadline Cloud returns <code>nextToken</code>, then there are more results available. The value of <code>nextToken</code> is a unique pagination token for each page. To retrieve the next page, call the operation again using the returned token. Keep all other arguments unchanged. If no results remain, then <code>nextToken</code> is set to <code>null</code>. Each pagination token expires after 24 hours. If you provide a token that isn't valid, then you receive an HTTP 400 <code>ValidationException</code> error.</p>
     #   @return [String]
     class ListLimitsResponse < Struct.new(
+      nil,
       :limits,
       :next_token,
       keyword_init: true
@@ -4889,6 +5090,7 @@ module Aws::Deadline
     #   <p>The maximum number of results to return. Use this parameter with <code>NextToken</code> to get results as a set of sequential pages.</p>
     #   @return [Integer]
     class ListMeteredProductsRequest < Struct.new(
+      nil,
       :license_endpoint_id,
       :next_token,
       :max_results,
@@ -4904,6 +5106,7 @@ module Aws::Deadline
     #   <p>If Deadline Cloud returns <code>nextToken</code>, then there are more results available. The value of <code>nextToken</code> is a unique pagination token for each page. To retrieve the next page, call the operation again using the returned token. Keep all other arguments unchanged. If no results remain, then <code>nextToken</code> is set to <code>null</code>. Each pagination token expires after 24 hours. If you provide a token that isn't valid, then you receive an HTTP 400 <code>ValidationException</code> error.</p>
     #   @return [String]
     class ListMeteredProductsResponse < Struct.new(
+      nil,
       :metered_products,
       :next_token,
       keyword_init: true
@@ -4918,6 +5121,7 @@ module Aws::Deadline
     #   <p>The maximum number of results to return. Use this parameter with <code>NextToken</code> to get results as a set of sequential pages.</p>
     #   @return [Integer]
     class ListMonitorsRequest < Struct.new(
+      nil,
       :next_token,
       :max_results,
       keyword_init: true
@@ -4933,6 +5137,7 @@ module Aws::Deadline
     #            Deadline Cloud.</p>
     #   @return [Array<Types::MonitorSummary>]
     class ListMonitorsResponse < Struct.new(
+      nil,
       :next_token,
       :monitors,
       keyword_init: true
@@ -4953,6 +5158,7 @@ module Aws::Deadline
     #   <p>The maximum number of results to return. Use this parameter with <code>NextToken</code> to get results as a set of sequential pages.</p>
     #   @return [Integer]
     class ListQueueEnvironmentsRequest < Struct.new(
+      nil,
       :farm_id,
       :queue_id,
       :next_token,
@@ -4969,6 +5175,7 @@ module Aws::Deadline
     #   <p>If Deadline Cloud returns <code>nextToken</code>, then there are more results available. The value of <code>nextToken</code> is a unique pagination token for each page. To retrieve the next page, call the operation again using the returned token. Keep all other arguments unchanged. If no results remain, then <code>nextToken</code> is set to <code>null</code>. Each pagination token expires after 24 hours. If you provide a token that isn't valid, then you receive an HTTP 400 <code>ValidationException</code> error.</p>
     #   @return [String]
     class ListQueueEnvironmentsResponse < Struct.new(
+      nil,
       :environments,
       :next_token,
       keyword_init: true
@@ -4992,6 +5199,7 @@ module Aws::Deadline
     #   <p>The maximum number of results to return. Use this parameter with <code>NextToken</code> to get results as a set of sequential pages.</p>
     #   @return [Integer]
     class ListQueueFleetAssociationsRequest < Struct.new(
+      nil,
       :farm_id,
       :queue_id,
       :fleet_id,
@@ -5009,6 +5217,7 @@ module Aws::Deadline
     #   <p>If Deadline Cloud returns <code>nextToken</code>, then there are more results available. The value of <code>nextToken</code> is a unique pagination token for each page. To retrieve the next page, call the operation again using the returned token. Keep all other arguments unchanged. If no results remain, then <code>nextToken</code> is set to <code>null</code>. Each pagination token expires after 24 hours. If you provide a token that isn't valid, then you receive an HTTP 400 <code>ValidationException</code> error.</p>
     #   @return [String]
     class ListQueueFleetAssociationsResponse < Struct.new(
+      nil,
       :queue_fleet_associations,
       :next_token,
       keyword_init: true
@@ -5036,6 +5245,7 @@ module Aws::Deadline
     #   <p>The maximum number of associations to return in each page of results.</p>
     #   @return [Integer]
     class ListQueueLimitAssociationsRequest < Struct.new(
+      nil,
       :farm_id,
       :queue_id,
       :limit_id,
@@ -5054,6 +5264,7 @@ module Aws::Deadline
     #   <p>If Deadline Cloud returns <code>nextToken</code>, then there are more results available. The value of <code>nextToken</code> is a unique pagination token for each page. To retrieve the next page, call the operation again using the returned token. Keep all other arguments unchanged. If no results remain, then <code>nextToken</code> is set to <code>null</code>. Each pagination token expires after 24 hours. If you provide a token that isn't valid, then you receive an HTTP 400 <code>ValidationException</code> error.</p>
     #   @return [String]
     class ListQueueLimitAssociationsResponse < Struct.new(
+      nil,
       :queue_limit_associations,
       :next_token,
       keyword_init: true
@@ -5074,6 +5285,7 @@ module Aws::Deadline
     #   <p>The maximum number of results to return. Use this parameter with <code>NextToken</code> to get results as a set of sequential pages.</p>
     #   @return [Integer]
     class ListQueueMembersRequest < Struct.new(
+      nil,
       :farm_id,
       :queue_id,
       :next_token,
@@ -5090,6 +5302,7 @@ module Aws::Deadline
     #   <p>If Deadline Cloud returns <code>nextToken</code>, then there are more results available. The value of <code>nextToken</code> is a unique pagination token for each page. To retrieve the next page, call the operation again using the returned token. Keep all other arguments unchanged. If no results remain, then <code>nextToken</code> is set to <code>null</code>. Each pagination token expires after 24 hours. If you provide a token that isn't valid, then you receive an HTTP 400 <code>ValidationException</code> error.</p>
     #   @return [String]
     class ListQueueMembersResponse < Struct.new(
+      nil,
       :members,
       :next_token,
       keyword_init: true
@@ -5128,6 +5341,7 @@ module Aws::Deadline
     #   <p>The maximum number of results to return. Use this parameter with <code>NextToken</code> to get results as a set of sequential pages.</p>
     #   @return [Integer]
     class ListQueuesRequest < Struct.new(
+      nil,
       :farm_id,
       :principal_id,
       :status,
@@ -5145,6 +5359,7 @@ module Aws::Deadline
     #   <p>If Deadline Cloud returns <code>nextToken</code>, then there are more results available. The value of <code>nextToken</code> is a unique pagination token for each page. To retrieve the next page, call the operation again using the returned token. Keep all other arguments unchanged. If no results remain, then <code>nextToken</code> is set to <code>null</code>. Each pagination token expires after 24 hours. If you provide a token that isn't valid, then you receive an HTTP 400 <code>ValidationException</code> error.</p>
     #   @return [String]
     class ListQueuesResponse < Struct.new(
+      nil,
       :queues,
       :next_token,
       keyword_init: true
@@ -5174,6 +5389,7 @@ module Aws::Deadline
     #   <p>The maximum number of results to return. Use this parameter with <code>NextToken</code> to get results as a set of sequential pages.</p>
     #   @return [Integer]
     class ListSessionActionsRequest < Struct.new(
+      nil,
       :farm_id,
       :queue_id,
       :job_id,
@@ -5193,6 +5409,7 @@ module Aws::Deadline
     #   <p>If Deadline Cloud returns <code>nextToken</code>, then there are more results available. The value of <code>nextToken</code> is a unique pagination token for each page. To retrieve the next page, call the operation again using the returned token. Keep all other arguments unchanged. If no results remain, then <code>nextToken</code> is set to <code>null</code>. Each pagination token expires after 24 hours. If you provide a token that isn't valid, then you receive an HTTP 400 <code>ValidationException</code> error.</p>
     #   @return [String]
     class ListSessionActionsResponse < Struct.new(
+      nil,
       :session_actions,
       :next_token,
       keyword_init: true
@@ -5216,6 +5433,7 @@ module Aws::Deadline
     #   <p>The maximum number of results to return. Use this parameter with <code>NextToken</code> to get results as a set of sequential pages.</p>
     #   @return [Integer]
     class ListSessionsForWorkerRequest < Struct.new(
+      nil,
       :farm_id,
       :fleet_id,
       :worker_id,
@@ -5233,6 +5451,7 @@ module Aws::Deadline
     #   <p>The token for the next set of results, or <code>null</code> to start from the beginning.</p>
     #   @return [String]
     class ListSessionsForWorkerResponse < Struct.new(
+      nil,
       :sessions,
       :next_token,
       keyword_init: true
@@ -5256,6 +5475,7 @@ module Aws::Deadline
     #   <p>The maximum number of results to return. Use this parameter with <code>NextToken</code> to get results as a set of sequential pages.</p>
     #   @return [Integer]
     class ListSessionsRequest < Struct.new(
+      nil,
       :farm_id,
       :queue_id,
       :job_id,
@@ -5273,6 +5493,7 @@ module Aws::Deadline
     #   <p>If Deadline Cloud returns <code>nextToken</code>, then there are more results available. The value of <code>nextToken</code> is a unique pagination token for each page. To retrieve the next page, call the operation again using the returned token. Keep all other arguments unchanged. If no results remain, then <code>nextToken</code> is set to <code>null</code>. Each pagination token expires after 24 hours. If you provide a token that isn't valid, then you receive an HTTP 400 <code>ValidationException</code> error.</p>
     #   @return [String]
     class ListSessionsResponse < Struct.new(
+      nil,
       :sessions,
       :next_token,
       keyword_init: true
@@ -5299,6 +5520,7 @@ module Aws::Deadline
     #   <p>The maximum number of results to return. Use this parameter with <code>NextToken</code> to get results as a set of sequential pages.</p>
     #   @return [Integer]
     class ListStepConsumersRequest < Struct.new(
+      nil,
       :farm_id,
       :queue_id,
       :job_id,
@@ -5317,6 +5539,7 @@ module Aws::Deadline
     #   <p>If Deadline Cloud returns <code>nextToken</code>, then there are more results available. The value of <code>nextToken</code> is a unique pagination token for each page. To retrieve the next page, call the operation again using the returned token. Keep all other arguments unchanged. If no results remain, then <code>nextToken</code> is set to <code>null</code>. Each pagination token expires after 24 hours. If you provide a token that isn't valid, then you receive an HTTP 400 <code>ValidationException</code> error.</p>
     #   @return [String]
     class ListStepConsumersResponse < Struct.new(
+      nil,
       :consumers,
       :next_token,
       keyword_init: true
@@ -5343,6 +5566,7 @@ module Aws::Deadline
     #   <p>The maximum number of results to return. Use this parameter with <code>NextToken</code> to get results as a set of sequential pages.</p>
     #   @return [Integer]
     class ListStepDependenciesRequest < Struct.new(
+      nil,
       :farm_id,
       :queue_id,
       :job_id,
@@ -5361,6 +5585,7 @@ module Aws::Deadline
     #   <p>If Deadline Cloud returns <code>nextToken</code>, then there are more results available. The value of <code>nextToken</code> is a unique pagination token for each page. To retrieve the next page, call the operation again using the returned token. Keep all other arguments unchanged. If no results remain, then <code>nextToken</code> is set to <code>null</code>. Each pagination token expires after 24 hours. If you provide a token that isn't valid, then you receive an HTTP 400 <code>ValidationException</code> error.</p>
     #   @return [String]
     class ListStepDependenciesResponse < Struct.new(
+      nil,
       :dependencies,
       :next_token,
       keyword_init: true
@@ -5384,6 +5609,7 @@ module Aws::Deadline
     #   <p>The maximum number of results to return. Use this parameter with <code>NextToken</code> to get results as a set of sequential pages.</p>
     #   @return [Integer]
     class ListStepsRequest < Struct.new(
+      nil,
       :farm_id,
       :queue_id,
       :job_id,
@@ -5401,6 +5627,7 @@ module Aws::Deadline
     #   <p>If Deadline Cloud returns <code>nextToken</code>, then there are more results available. The value of <code>nextToken</code> is a unique pagination token for each page. To retrieve the next page, call the operation again using the returned token. Keep all other arguments unchanged. If no results remain, then <code>nextToken</code> is set to <code>null</code>. Each pagination token expires after 24 hours. If you provide a token that isn't valid, then you receive an HTTP 400 <code>ValidationException</code> error.</p>
     #   @return [String]
     class ListStepsResponse < Struct.new(
+      nil,
       :steps,
       :next_token,
       keyword_init: true
@@ -5421,6 +5648,7 @@ module Aws::Deadline
     #   <p>The maximum number of results to return. Use this parameter with <code>NextToken</code> to get results as a set of sequential pages.</p>
     #   @return [Integer]
     class ListStorageProfilesForQueueRequest < Struct.new(
+      nil,
       :farm_id,
       :queue_id,
       :next_token,
@@ -5437,6 +5665,7 @@ module Aws::Deadline
     #   <p>If Deadline Cloud returns <code>nextToken</code>, then there are more results available. The value of <code>nextToken</code> is a unique pagination token for each page. To retrieve the next page, call the operation again using the returned token. Keep all other arguments unchanged. If no results remain, then <code>nextToken</code> is set to <code>null</code>. Each pagination token expires after 24 hours. If you provide a token that isn't valid, then you receive an HTTP 400 <code>ValidationException</code> error.</p>
     #   @return [String]
     class ListStorageProfilesForQueueResponse < Struct.new(
+      nil,
       :storage_profiles,
       :next_token,
       keyword_init: true
@@ -5454,6 +5683,7 @@ module Aws::Deadline
     #   <p>The maximum number of results to return. Use this parameter with <code>NextToken</code> to get results as a set of sequential pages.</p>
     #   @return [Integer]
     class ListStorageProfilesRequest < Struct.new(
+      nil,
       :farm_id,
       :next_token,
       :max_results,
@@ -5469,6 +5699,7 @@ module Aws::Deadline
     #   <p>If Deadline Cloud returns <code>nextToken</code>, then there are more results available. The value of <code>nextToken</code> is a unique pagination token for each page. To retrieve the next page, call the operation again using the returned token. Keep all other arguments unchanged. If no results remain, then <code>nextToken</code> is set to <code>null</code>. Each pagination token expires after 24 hours. If you provide a token that isn't valid, then you receive an HTTP 400 <code>ValidationException</code> error.</p>
     #   @return [String]
     class ListStorageProfilesResponse < Struct.new(
+      nil,
       :storage_profiles,
       :next_token,
       keyword_init: true
@@ -5480,6 +5711,7 @@ module Aws::Deadline
     #   <p>The resource ARN to list tags for.</p>
     #   @return [String]
     class ListTagsForResourceRequest < Struct.new(
+      nil,
       :resource_arn,
       keyword_init: true
     )
@@ -5490,6 +5722,7 @@ module Aws::Deadline
     #   <p>Each tag consists of a tag key and a tag value. Tag keys and values are both required, but tag values can be empty strings.</p>
     #   @return [Hash<String, String>]
     class ListTagsForResourceResponse < Struct.new(
+      nil,
       :tags,
       keyword_init: true
     )
@@ -5515,6 +5748,7 @@ module Aws::Deadline
     #   <p>The maximum number of results to return. Use this parameter with <code>NextToken</code> to get results as a set of sequential pages.</p>
     #   @return [Integer]
     class ListTasksRequest < Struct.new(
+      nil,
       :farm_id,
       :queue_id,
       :job_id,
@@ -5533,6 +5767,7 @@ module Aws::Deadline
     #   <p>If Deadline Cloud returns <code>nextToken</code>, then there are more results available. The value of <code>nextToken</code> is a unique pagination token for each page. To retrieve the next page, call the operation again using the returned token. Keep all other arguments unchanged. If no results remain, then <code>nextToken</code> is set to <code>null</code>. Each pagination token expires after 24 hours. If you provide a token that isn't valid, then you receive an HTTP 400 <code>ValidationException</code> error.</p>
     #   @return [String]
     class ListTasksResponse < Struct.new(
+      nil,
       :tasks,
       :next_token,
       keyword_init: true
@@ -5553,6 +5788,7 @@ module Aws::Deadline
     #   <p>The maximum number of results to return. Use this parameter with <code>NextToken</code> to get results as a set of sequential pages.</p>
     #   @return [Integer]
     class ListWorkersRequest < Struct.new(
+      nil,
       :farm_id,
       :fleet_id,
       :next_token,
@@ -5569,6 +5805,7 @@ module Aws::Deadline
     #   <p>The workers on the list.</p>
     #   @return [Array<Types::WorkerSummary>]
     class ListWorkersResponse < Struct.new(
+      nil,
       :next_token,
       :workers,
       keyword_init: true
@@ -5590,6 +5827,7 @@ module Aws::Deadline
     #   <p>The log configuration error details.</p>
     #   @return [String]
     class LogConfiguration < Struct.new(
+      nil,
       :log_driver,
       :options,
       :parameters,
@@ -5620,6 +5858,7 @@ module Aws::Deadline
     #   <p>The hash value of the file.</p>
     #   @return [String]
     class ManifestProperties < Struct.new(
+      nil,
       :file_system_location_name,
       :root_path,
       :root_path_format,
@@ -5639,6 +5878,7 @@ module Aws::Deadline
     #   <p>The maximum amount of memory (in MiB).</p>
     #   @return [Integer]
     class MemoryMiBRange < Struct.new(
+      nil,
       :min,
       :max,
       keyword_init: true
@@ -5660,6 +5900,7 @@ module Aws::Deadline
     #   <p>The port on which the metered product should run.</p>
     #   @return [Integer]
     class MeteredProductSummary < Struct.new(
+      nil,
       :product_id,
       :family,
       :vendor,
@@ -5710,6 +5951,7 @@ module Aws::Deadline
     #   <p>The user name of the person that last updated the monitor.</p>
     #   @return [String]
     class MonitorSummary < Struct.new(
+      nil,
       :monitor_id,
       :display_name,
       :subdomain,
@@ -5737,6 +5979,7 @@ module Aws::Deadline
     #   <p>The parameter's value.</p>
     #   @return [String]
     class ParameterFilterExpression < Struct.new(
+      nil,
       :name,
       :operator,
       :value,
@@ -5753,6 +5996,7 @@ module Aws::Deadline
     #   <p>The parameter name to sort by.</p>
     #   @return [String]
     class ParameterSortExpression < Struct.new(
+      nil,
       :sort_order,
       :name,
       keyword_init: true
@@ -5768,6 +6012,7 @@ module Aws::Deadline
     #   <p>The combination expression to use in the search.</p>
     #   @return [String]
     class ParameterSpace < Struct.new(
+      nil,
       :parameters,
       :combination,
       keyword_init: true
@@ -5787,6 +6032,7 @@ module Aws::Deadline
     #   <p>The destination path.</p>
     #   @return [String]
     class PathMappingRule < Struct.new(
+      nil,
       :source_path_format,
       :source_path,
       :destination_path,
@@ -5803,6 +6049,7 @@ module Aws::Deadline
     #   <p>The name of the POSIX user's group.</p>
     #   @return [String]
     class PosixUser < Struct.new(
+      nil,
       :user,
       :group,
       keyword_init: true
@@ -5817,6 +6064,7 @@ module Aws::Deadline
     #   <p>The product ID to add to the metered product.</p>
     #   @return [String]
     class PutMeteredProductRequest < Struct.new(
+      nil,
       :license_endpoint_id,
       :product_id,
       keyword_init: true
@@ -5825,6 +6073,7 @@ module Aws::Deadline
     end
 
     class PutMeteredProductResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -5841,6 +6090,7 @@ module Aws::Deadline
     #   <p>The queue environment's priority.</p>
     #   @return [Integer]
     class QueueEnvironmentSummary < Struct.new(
+      nil,
       :queue_environment_id,
       :name,
       :priority,
@@ -5892,6 +6142,7 @@ module Aws::Deadline
     #   <p>The user or system that updated this resource.</p>
     #   @return [String]
     class QueueFleetAssociationSummary < Struct.new(
+      nil,
       :queue_id,
       :fleet_id,
       :status,
@@ -5947,6 +6198,7 @@ module Aws::Deadline
     #            </ul>
     #   @return [String]
     class QueueLimitAssociationSummary < Struct.new(
+      nil,
       :created_at,
       :created_by,
       :updated_at,
@@ -5979,6 +6231,7 @@ module Aws::Deadline
     #   <p>The queue member's membership level.</p>
     #   @return [String]
     class QueueMember < Struct.new(
+      nil,
       :farm_id,
       :queue_id,
       :principal_id,
@@ -6025,6 +6278,7 @@ module Aws::Deadline
     #   <p>The user or system that updated this resource.</p>
     #   @return [String]
     class QueueSummary < Struct.new(
+      nil,
       :farm_id,
       :queue_id,
       :display_name,
@@ -6053,6 +6307,7 @@ module Aws::Deadline
     #   <p>Information about the resources in use when the exception was thrown.</p>
     #   @return [Hash<String, String>]
     class ResourceNotFoundException < Struct.new(
+      nil,
       :message,
       :resource_id,
       :resource_type,
@@ -6076,6 +6331,7 @@ module Aws::Deadline
     #            </important>
     #   @return [String]
     class ResponseBudgetAction < Struct.new(
+      nil,
       :type,
       :threshold_percentage,
       :description,
@@ -6092,6 +6348,7 @@ module Aws::Deadline
     #   <p>The Amazon S3 object key that uniquely identifies the Amazon S3 bucket.</p>
     #   @return [String]
     class S3Location < Struct.new(
+      nil,
       :bucket_name,
       :key,
       keyword_init: true
@@ -6145,6 +6402,7 @@ module Aws::Deadline
     #   <p>The operators to include in the search.</p>
     #   @return [String]
     class SearchGroupedFilterExpressions < Struct.new(
+      nil,
       :filters,
       :operator,
       keyword_init: true
@@ -6174,6 +6432,7 @@ module Aws::Deadline
     #   <p>Specifies the number of items per page for the resource.</p>
     #   @return [Integer]
     class SearchJobsRequest < Struct.new(
+      nil,
       :farm_id,
       :queue_ids,
       :filter_expressions,
@@ -6195,6 +6454,7 @@ module Aws::Deadline
     #   <p>The total number of results in the search.</p>
     #   @return [Integer]
     class SearchJobsResponse < Struct.new(
+      nil,
       :jobs,
       :next_item_offset,
       :total_results,
@@ -6253,6 +6513,7 @@ module Aws::Deadline
     #   <p>Specifies the number of items per page for the resource.</p>
     #   @return [Integer]
     class SearchStepsRequest < Struct.new(
+      nil,
       :farm_id,
       :queue_ids,
       :job_id,
@@ -6275,6 +6536,7 @@ module Aws::Deadline
     #   <p>The total number of results in the search.</p>
     #   @return [Integer]
     class SearchStepsResponse < Struct.new(
+      nil,
       :steps,
       :next_item_offset,
       :total_results,
@@ -6308,6 +6570,7 @@ module Aws::Deadline
     #   <p>Specifies the number of items per page for the resource.</p>
     #   @return [Integer]
     class SearchTasksRequest < Struct.new(
+      nil,
       :farm_id,
       :queue_ids,
       :job_id,
@@ -6330,6 +6593,7 @@ module Aws::Deadline
     #   <p>The total number of results in the search.</p>
     #   @return [Integer]
     class SearchTasksResponse < Struct.new(
+      nil,
       :tasks,
       :next_item_offset,
       :total_results,
@@ -6359,6 +6623,7 @@ module Aws::Deadline
     #            </ul>
     #   @return [String]
     class SearchTermFilterExpression < Struct.new(
+      nil,
       :search_term,
       :match_type,
       keyword_init: true
@@ -6393,6 +6658,7 @@ module Aws::Deadline
     #   <p>Specifies the number of items per page for the resource.</p>
     #   @return [Integer]
     class SearchWorkersRequest < Struct.new(
+      nil,
       :farm_id,
       :fleet_ids,
       :filter_expressions,
@@ -6414,6 +6680,7 @@ module Aws::Deadline
     #   <p>The total number of results in the search.</p>
     #   @return [Integer]
     class SearchWorkersResponse < Struct.new(
+      nil,
       :workers,
       :next_item_offset,
       :total_results,
@@ -6436,6 +6703,7 @@ module Aws::Deadline
     #   <p>The storage profile ID.</p>
     #   @return [String]
     class ServiceManagedEc2FleetConfiguration < Struct.new(
+      nil,
       :instance_capabilities,
       :instance_market_options,
       :vpc_configuration,
@@ -6478,6 +6746,7 @@ module Aws::Deadline
     #   <p>The custom capability attributes to require for instances in this fleet.</p>
     #   @return [Array<Types::FleetAttributeCapability>]
     class ServiceManagedEc2InstanceCapabilities < Struct.new(
+      nil,
       :v_cpu_count,
       :memory_mi_b,
       :os_family,
@@ -6498,6 +6767,7 @@ module Aws::Deadline
     #   <p>The Amazon EC2 instance type.</p>
     #   @return [String]
     class ServiceManagedEc2InstanceMarketOptions < Struct.new(
+      nil,
       :type,
       keyword_init: true
     )
@@ -6527,6 +6797,7 @@ module Aws::Deadline
     #   <p>Information about the resources in use when the exception was thrown.</p>
     #   @return [Hash<String, String>]
     class ServiceQuotaExceededException < Struct.new(
+      nil,
       :message,
       :reason,
       :resource_type,
@@ -6626,6 +6897,7 @@ module Aws::Deadline
     #   <p>The list of manifest properties that describe file attachments for the task run.</p>
     #   @return [Array<Types::TaskRunManifestPropertiesResponse>]
     class SessionActionSummary < Struct.new(
+      nil,
       :session_action_id,
       :status,
       :started_at,
@@ -6668,6 +6940,7 @@ module Aws::Deadline
     #   <p>The target life cycle status for the session.</p>
     #   @return [String]
     class SessionSummary < Struct.new(
+      nil,
       :session_id,
       :fleet_id,
       :worker_id,
@@ -6731,6 +7004,7 @@ module Aws::Deadline
     #   <p>One to four statistics to return.</p>
     #   @return [Array<String>]
     class StartSessionsStatisticsAggregationRequest < Struct.new(
+      nil,
       :farm_id,
       :resource_ids,
       :start_time,
@@ -6750,6 +7024,7 @@ module Aws::Deadline
     #            statistics.</p>
     #   @return [String]
     class StartSessionsStatisticsAggregationResponse < Struct.new(
+      nil,
       :aggregation_id,
       keyword_init: true
     )
@@ -6798,6 +7073,7 @@ module Aws::Deadline
     #   <p>The end time for the aggregation.</p>
     #   @return [Time]
     class Statistics < Struct.new(
+      nil,
       :queue_id,
       :fleet_id,
       :job_id,
@@ -6830,6 +7106,7 @@ module Aws::Deadline
     #   <p>The sum of the usage statistics.</p>
     #   @return [Float]
     class Stats < Struct.new(
+      nil,
       :min,
       :max,
       :avg,
@@ -6853,6 +7130,7 @@ module Aws::Deadline
     #   <p>The amount value.</p>
     #   @return [Float]
     class StepAmountCapability < Struct.new(
+      nil,
       :name,
       :min,
       :max,
@@ -6873,6 +7151,7 @@ module Aws::Deadline
     #   <p>Requires all of the step attribute values.</p>
     #   @return [Array<String>]
     class StepAttributeCapability < Struct.new(
+      nil,
       :name,
       :any_of,
       :all_of,
@@ -6889,6 +7168,7 @@ module Aws::Deadline
     #   <p>The step consumer status.</p>
     #   @return [String]
     class StepConsumer < Struct.new(
+      nil,
       :step_id,
       :status,
       keyword_init: true
@@ -6904,6 +7184,7 @@ module Aws::Deadline
     #   <p>The step dependency status.</p>
     #   @return [String]
     class StepDependency < Struct.new(
+      nil,
       :step_id,
       :status,
       keyword_init: true
@@ -6928,6 +7209,7 @@ module Aws::Deadline
     #   <p>The dependencies for a step.</p>
     #   @return [Array<String>]
     class StepDetailsEntity < Struct.new(
+      nil,
       :job_id,
       :step_id,
       :schema_version,
@@ -6952,6 +7234,7 @@ module Aws::Deadline
     #   <p>The error message detailing the error's cause.</p>
     #   @return [String]
     class StepDetailsError < Struct.new(
+      nil,
       :job_id,
       :step_id,
       :code,
@@ -6969,6 +7252,7 @@ module Aws::Deadline
     #   <p>The step ID.</p>
     #   @return [String]
     class StepDetailsIdentifiers < Struct.new(
+      nil,
       :job_id,
       :step_id,
       keyword_init: true
@@ -6984,6 +7268,7 @@ module Aws::Deadline
     #   <p>The data type of the parameter.</p>
     #   @return [String]
     class StepParameter < Struct.new(
+      nil,
       :name,
       :type,
       keyword_init: true
@@ -6999,6 +7284,7 @@ module Aws::Deadline
     #   <p>The capability amounts that the step requires.</p>
     #   @return [Array<Types::StepAmountCapability>]
     class StepRequiredCapabilities < Struct.new(
+      nil,
       :attributes,
       :amounts,
       keyword_init: true
@@ -7101,6 +7387,7 @@ module Aws::Deadline
     #   <p>The parameters and combination expressions for the search.</p>
     #   @return [Types::ParameterSpace]
     class StepSearchSummary < Struct.new(
+      nil,
       :step_id,
       :job_id,
       :queue_id,
@@ -7212,6 +7499,7 @@ module Aws::Deadline
     #   <p>The number of dependencies for the step.</p>
     #   @return [Types::DependencyCounts]
     class StepSummary < Struct.new(
+      nil,
       :step_id,
       :name,
       :lifecycle_status,
@@ -7246,6 +7534,7 @@ module Aws::Deadline
     #   <p>The operating system (OS) family.</p>
     #   @return [String]
     class StorageProfileSummary < Struct.new(
+      nil,
       :storage_profile_id,
       :display_name,
       :os_family,
@@ -7265,6 +7554,7 @@ module Aws::Deadline
     #   <p>The string to search for.</p>
     #   @return [String]
     class StringFilterExpression < Struct.new(
+      nil,
       :name,
       :operator,
       :value,
@@ -7278,6 +7568,7 @@ module Aws::Deadline
     #   <p>The step ID for the step in the job attachment.</p>
     #   @return [String]
     class SyncInputJobAttachmentsSessionActionDefinition < Struct.new(
+      nil,
       :step_id,
       keyword_init: true
     )
@@ -7289,6 +7580,7 @@ module Aws::Deadline
     #   <p>The step ID of the step in the job attachment.</p>
     #   @return [String]
     class SyncInputJobAttachmentsSessionActionDefinitionSummary < Struct.new(
+      nil,
       :step_id,
       keyword_init: true
     )
@@ -7302,6 +7594,7 @@ module Aws::Deadline
     #   <p>Each tag consists of a tag key and a tag value. Tag keys and values are both required, but tag values can be empty strings.</p>
     #   @return [Hash<String, String>]
     class TagResourceRequest < Struct.new(
+      nil,
       :resource_arn,
       :tags,
       keyword_init: true
@@ -7310,6 +7603,7 @@ module Aws::Deadline
     end
 
     class TagResourceResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -7359,6 +7653,7 @@ module Aws::Deadline
     #   <p>The hash value of the file.</p>
     #   @return [String]
     class TaskRunManifestPropertiesRequest < Struct.new(
+      nil,
       :output_manifest_path,
       :output_manifest_hash,
       keyword_init: true
@@ -7374,6 +7669,7 @@ module Aws::Deadline
     #   <p>The hash value of the file.</p>
     #   @return [String]
     class TaskRunManifestPropertiesResponse < Struct.new(
+      nil,
       :output_manifest_path,
       :output_manifest_hash,
       keyword_init: true
@@ -7392,6 +7688,7 @@ module Aws::Deadline
     #   <p>The task parameters.</p>
     #   @return [Hash<String, Types::TaskParameterValue>]
     class TaskRunSessionActionDefinition < Struct.new(
+      nil,
       :task_id,
       :step_id,
       :parameters,
@@ -7411,6 +7708,7 @@ module Aws::Deadline
     #   <p>The parameters of a task run in a session action.</p>
     #   @return [Hash<String, Types::TaskParameterValue>]
     class TaskRunSessionActionDefinitionSummary < Struct.new(
+      nil,
       :task_id,
       :step_id,
       :parameters,
@@ -7457,6 +7755,7 @@ module Aws::Deadline
     #   <p>The user or system that updated this resource.</p>
     #   @return [String]
     class TaskSearchSummary < Struct.new(
+      nil,
       :task_id,
       :step_id,
       :job_id,
@@ -7512,6 +7811,7 @@ module Aws::Deadline
     #   <p>The latest session action for the task.</p>
     #   @return [String]
     class TaskSummary < Struct.new(
+      nil,
       :task_id,
       :created_at,
       :created_by,
@@ -7545,6 +7845,7 @@ module Aws::Deadline
     #   <p>Information about the resources in use when the exception was thrown.</p>
     #   @return [Hash<String, String>]
     class ThrottlingException < Struct.new(
+      nil,
       :message,
       :service_code,
       :quota_code,
@@ -7562,6 +7863,7 @@ module Aws::Deadline
     #   <p>They keys of the tag.</p>
     #   @return [Array<String>]
     class UntagResourceRequest < Struct.new(
+      nil,
       :resource_arn,
       :tag_keys,
       keyword_init: true
@@ -7570,6 +7872,7 @@ module Aws::Deadline
     end
 
     class UntagResourceResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -7624,6 +7927,7 @@ module Aws::Deadline
     #   <p>The schedule to update.</p>
     #   @return [Types::BudgetSchedule]
     class UpdateBudgetRequest < Struct.new(
+      nil,
       :client_token,
       :farm_id,
       :budget_id,
@@ -7640,6 +7944,7 @@ module Aws::Deadline
     end
 
     class UpdateBudgetResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -7661,6 +7966,7 @@ module Aws::Deadline
     #            </important>
     #   @return [String]
     class UpdateFarmRequest < Struct.new(
+      nil,
       :farm_id,
       :display_name,
       :description,
@@ -7670,6 +7976,7 @@ module Aws::Deadline
     end
 
     class UpdateFarmResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -7720,6 +8027,7 @@ module Aws::Deadline
     #            additional configuration for workers in your fleet.</p>
     #   @return [Types::HostConfiguration]
     class UpdateFleetRequest < Struct.new(
+      nil,
       :client_token,
       :farm_id,
       :fleet_id,
@@ -7736,6 +8044,7 @@ module Aws::Deadline
     end
 
     class UpdateFleetResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -7783,6 +8092,7 @@ module Aws::Deadline
     #   <p>The job ID to update.</p>
     #   @return [String]
     class UpdateJobRequest < Struct.new(
+      nil,
       :client_token,
       :target_task_run_status,
       :priority,
@@ -7799,6 +8109,7 @@ module Aws::Deadline
     end
 
     class UpdateJobResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -7833,6 +8144,7 @@ module Aws::Deadline
     #            the number of resources that can be acquired for this limit.</p>
     #   @return [Integer]
     class UpdateLimitRequest < Struct.new(
+      nil,
       :farm_id,
       :limit_id,
       :display_name,
@@ -7844,6 +8156,7 @@ module Aws::Deadline
     end
 
     class UpdateLimitResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -7865,6 +8178,7 @@ module Aws::Deadline
     #   <p>The Amazon Resource Name (ARN) of the new IAM role to use with the monitor.</p>
     #   @return [String]
     class UpdateMonitorRequest < Struct.new(
+      nil,
       :monitor_id,
       :subdomain,
       :display_name,
@@ -7875,6 +8189,7 @@ module Aws::Deadline
     end
 
     class UpdateMonitorResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -7902,6 +8217,7 @@ module Aws::Deadline
     #   <p>The template to update.</p>
     #   @return [String]
     class UpdateQueueEnvironmentRequest < Struct.new(
+      nil,
       :client_token,
       :farm_id,
       :queue_id,
@@ -7915,6 +8231,7 @@ module Aws::Deadline
     end
 
     class UpdateQueueEnvironmentResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -7933,6 +8250,7 @@ module Aws::Deadline
     #   <p>The status to update.</p>
     #   @return [String]
     class UpdateQueueFleetAssociationRequest < Struct.new(
+      nil,
       :farm_id,
       :queue_id,
       :fleet_id,
@@ -7943,6 +8261,7 @@ module Aws::Deadline
     end
 
     class UpdateQueueFleetAssociationResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -7963,6 +8282,7 @@ module Aws::Deadline
     #         </p>
     #   @return [String]
     class UpdateQueueLimitAssociationRequest < Struct.new(
+      nil,
       :farm_id,
       :queue_id,
       :limit_id,
@@ -7973,6 +8293,7 @@ module Aws::Deadline
     end
 
     class UpdateQueueLimitAssociationResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -8025,6 +8346,7 @@ module Aws::Deadline
     #   <p>The storage profile ID to remove.</p>
     #   @return [Array<String>]
     class UpdateQueueRequest < Struct.new(
+      nil,
       :client_token,
       :farm_id,
       :queue_id,
@@ -8044,6 +8366,7 @@ module Aws::Deadline
     end
 
     class UpdateQueueResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -8068,6 +8391,7 @@ module Aws::Deadline
     #   <p>The session ID to update.</p>
     #   @return [String]
     class UpdateSessionRequest < Struct.new(
+      nil,
       :client_token,
       :target_lifecycle_status,
       :farm_id,
@@ -8080,6 +8404,7 @@ module Aws::Deadline
     end
 
     class UpdateSessionResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -8104,6 +8429,7 @@ module Aws::Deadline
     #   <p>The step ID to update.</p>
     #   @return [String]
     class UpdateStepRequest < Struct.new(
+      nil,
       :target_task_run_status,
       :client_token,
       :farm_id,
@@ -8116,6 +8442,7 @@ module Aws::Deadline
     end
 
     class UpdateStepResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -8146,6 +8473,7 @@ module Aws::Deadline
     #   <p>The file system location names to remove.</p>
     #   @return [Array<Types::FileSystemLocation>]
     class UpdateStorageProfileRequest < Struct.new(
+      nil,
       :client_token,
       :farm_id,
       :storage_profile_id,
@@ -8159,6 +8487,7 @@ module Aws::Deadline
     end
 
     class UpdateStorageProfileResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -8186,6 +8515,7 @@ module Aws::Deadline
     #   <p>The task ID to update.</p>
     #   @return [String]
     class UpdateTaskRequest < Struct.new(
+      nil,
       :client_token,
       :target_run_status,
       :farm_id,
@@ -8199,6 +8529,7 @@ module Aws::Deadline
     end
 
     class UpdateTaskResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -8223,6 +8554,7 @@ module Aws::Deadline
     #   <p>The host properties to update.</p>
     #   @return [Types::HostPropertiesRequest]
     class UpdateWorkerRequest < Struct.new(
+      nil,
       :farm_id,
       :fleet_id,
       :worker_id,
@@ -8242,6 +8574,7 @@ module Aws::Deadline
     #            configuration for workers in your fleet.</p>
     #   @return [Types::HostConfiguration]
     class UpdateWorkerResponse < Struct.new(
+      nil,
       :log,
       :host_configuration,
       keyword_init: true
@@ -8262,6 +8595,7 @@ module Aws::Deadline
     #   <p>The session actions associated with the worker schedule to update.</p>
     #   @return [Hash<String, Types::UpdatedSessionActionInfo>]
     class UpdateWorkerScheduleRequest < Struct.new(
+      nil,
       :farm_id,
       :fleet_id,
       :worker_id,
@@ -8284,6 +8618,7 @@ module Aws::Deadline
     #   <p>Updates the time interval (in seconds) for the schedule.</p>
     #   @return [Integer]
     class UpdateWorkerScheduleResponse < Struct.new(
+      nil,
       :assigned_sessions,
       :cancel_session_actions,
       :desired_worker_status,
@@ -8322,6 +8657,7 @@ module Aws::Deadline
     #            agent, with each entry corresponding to a manifest property in the job.</p>
     #   @return [Array<Types::TaskRunManifestPropertiesRequest>]
     class UpdatedSessionActionInfo < Struct.new(
+      nil,
       :completed_status,
       :process_exit_code,
       :progress_message,
@@ -8355,6 +8691,7 @@ module Aws::Deadline
     #   <p>The user's ID.</p>
     #   @return [String]
     class UserJobsFirst < Struct.new(
+      nil,
       :user_identity_id,
       keyword_init: true
     )
@@ -8369,6 +8706,7 @@ module Aws::Deadline
     #   <p>The maximum amount of vCPU.</p>
     #   @return [Integer]
     class VCpuCountRange < Struct.new(
+      nil,
       :min,
       :max,
       keyword_init: true
@@ -8390,6 +8728,7 @@ module Aws::Deadline
     #   <p>Information about the resources in use when the exception was thrown.</p>
     #   @return [Hash<String, String>]
     class ValidationException < Struct.new(
+      nil,
       :message,
       :reason,
       :field_list,
@@ -8407,6 +8746,7 @@ module Aws::Deadline
     #   <p>The error message for the validation exception.</p>
     #   @return [String]
     class ValidationExceptionField < Struct.new(
+      nil,
       :name,
       :message,
       keyword_init: true
@@ -8419,6 +8759,7 @@ module Aws::Deadline
     #   <p>The ARNs of the VPC Lattice resource configurations attached to the fleet.</p>
     #   @return [Array<String>]
     class VpcConfiguration < Struct.new(
+      nil,
       :resource_configuration_arns,
       keyword_init: true
     )
@@ -8433,6 +8774,7 @@ module Aws::Deadline
     #   <p>The password ARN for the Windows user.</p>
     #   @return [String]
     class WindowsUser < Struct.new(
+      nil,
       :user,
       :password_arn,
       keyword_init: true
@@ -8448,6 +8790,7 @@ module Aws::Deadline
     #   <p>The value of the worker amount capability.</p>
     #   @return [Float]
     class WorkerAmountCapability < Struct.new(
+      nil,
       :name,
       :value,
       keyword_init: true
@@ -8463,6 +8806,7 @@ module Aws::Deadline
     #   <p>The values of the worker amount capability.</p>
     #   @return [Array<String>]
     class WorkerAttributeCapability < Struct.new(
+      nil,
       :name,
       :values,
       keyword_init: true
@@ -8478,6 +8822,7 @@ module Aws::Deadline
     #   <p>The worker attribute capabilities in the list of attribute capabilities.</p>
     #   @return [Array<Types::WorkerAttributeCapability>]
     class WorkerCapabilities < Struct.new(
+      nil,
       :amounts,
       :attributes,
       keyword_init: true
@@ -8511,6 +8856,7 @@ module Aws::Deadline
     #   <p>The date and time the resource was updated.</p>
     #   @return [Time]
     class WorkerSearchSummary < Struct.new(
+      nil,
       :fleet_id,
       :worker_id,
       :status,
@@ -8547,6 +8893,7 @@ module Aws::Deadline
     #   <p>The life cycle status </p>
     #   @return [String]
     class WorkerSessionSummary < Struct.new(
+      nil,
       :session_id,
       :queue_id,
       :job_id,
@@ -8591,6 +8938,7 @@ module Aws::Deadline
     #   <p>The user or system that updated this resource.</p>
     #   @return [String]
     class WorkerSummary < Struct.new(
+      nil,
       :worker_id,
       :farm_id,
       :fleet_id,

@@ -11,6 +11,7 @@ module Aws::Batch
     #   <p>The size of the array job.</p>
     #   @return [Integer]
     class ArrayProperties < Struct.new(
+      nil,
       :size,
       keyword_init: true
     )
@@ -30,6 +31,7 @@ module Aws::Batch
     #      for array job children.</p>
     #   @return [Integer]
     class ArrayPropertiesDetail < Struct.new(
+      nil,
       :status_summary,
       :size,
       :index,
@@ -47,6 +49,7 @@ module Aws::Batch
     #      for children of array jobs.</p>
     #   @return [Integer]
     class ArrayPropertiesSummary < Struct.new(
+      nil,
       :size,
       :index,
       keyword_init: true
@@ -78,6 +81,7 @@ module Aws::Batch
     #   <p>The network interfaces that are associated with the job attempt.</p>
     #   @return [Array<Types::NetworkInterface>]
     class AttemptContainerDetail < Struct.new(
+      nil,
       :container_instance_arn,
       :task_arn,
       :exit_code,
@@ -111,6 +115,7 @@ module Aws::Batch
     #      an Amazon ECS task.</p>
     #   @return [Array<Types::AttemptEcsTaskDetails>]
     class AttemptDetail < Struct.new(
+      nil,
       :container,
       :started_at,
       :stopped_at,
@@ -132,6 +137,7 @@ module Aws::Batch
     #   <p>A list of containers that are included in the <code>taskProperties</code> list.</p>
     #   @return [Array<Types::AttemptTaskContainerDetails>]
     class AttemptEcsTaskDetails < Struct.new(
+      nil,
       :container_instance_arn,
       :task_arn,
       :containers,
@@ -160,6 +166,7 @@ module Aws::Batch
     #   <p>The network interfaces that are associated with the job attempt.</p>
     #   @return [Array<Types::NetworkInterface>]
     class AttemptTaskContainerDetails < Struct.new(
+      nil,
       :exit_code,
       :name,
       :reason,
@@ -181,6 +188,7 @@ module Aws::Batch
     #            <p>This parameter has as limit of 1024 characters.</p>
     #   @return [String]
     class CancelJobRequest < Struct.new(
+      nil,
       :job_id,
       :reason,
       keyword_init: true
@@ -189,6 +197,7 @@ module Aws::Batch
     end
 
     class CancelJobResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -206,6 +215,7 @@ module Aws::Batch
     #   <p>The unit of measure for the capacity limit. This defines how the maxCapacity value should be interpreted. For <code>SAGEMAKER_TRAINING</code> jobs, use <code>NUM_INSTANCES</code>.</p>
     #   @return [String]
     class CapacityLimit < Struct.new(
+      nil,
       :max_capacity,
       :capacity_unit,
       keyword_init: true
@@ -219,6 +229,7 @@ module Aws::Batch
     # @!attribute message
     #   @return [String]
     class ClientException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -305,6 +316,7 @@ module Aws::Batch
     #   <p>Reserved.</p>
     #   @return [String]
     class ComputeEnvironmentDetail < Struct.new(
+      nil,
       :compute_environment_name,
       :compute_environment_arn,
       :unmanagedv_cpus,
@@ -347,6 +359,7 @@ module Aws::Batch
     #   <p>The Amazon Resource Name (ARN) of the compute environment.</p>
     #   @return [String]
     class ComputeEnvironmentOrder < Struct.new(
+      nil,
       :order,
       :compute_environment,
       keyword_init: true
@@ -634,6 +647,7 @@ module Aws::Batch
     #            </note>
     #   @return [Array<Types::Ec2Configuration>]
     class ComputeResource < Struct.new(
+      nil,
       :type,
       :allocation_strategy,
       :minv_cpus,
@@ -971,6 +985,7 @@ module Aws::Batch
     #            </note>
     #   @return [String]
     class ComputeResourceUpdate < Struct.new(
+      nil,
       :minv_cpus,
       :maxv_cpus,
       :desiredv_cpus,
@@ -998,6 +1013,7 @@ module Aws::Batch
     #   <p>The list of consumable resources required by a job.</p>
     #   @return [Array<Types::ConsumableResourceRequirement>]
     class ConsumableResourceProperties < Struct.new(
+      nil,
       :consumable_resource_list,
       keyword_init: true
     )
@@ -1012,6 +1028,7 @@ module Aws::Batch
     #   <p>The quantity of the consumable resource that is needed.</p>
     #   @return [Integer]
     class ConsumableResourceRequirement < Struct.new(
+      nil,
       :consumable_resource,
       :quantity,
       keyword_init: true
@@ -1049,6 +1066,7 @@ module Aws::Batch
     #            </ul>
     #   @return [String]
     class ConsumableResourceSummary < Struct.new(
+      nil,
       :consumable_resource_arn,
       :consumable_resource_name,
       :total_quantity,
@@ -1232,6 +1250,7 @@ module Aws::Batch
     #               command functionality is turned on all the containers in the task.</p>
     #   @return [Boolean]
     class ContainerDetail < Struct.new(
+      nil,
       :image,
       :vcpus,
       :memory,
@@ -1327,6 +1346,7 @@ module Aws::Batch
     #       <code>VCPU</code>.</p>
     #   @return [Array<Types::ResourceRequirement>]
     class ContainerOverrides < Struct.new(
+      nil,
       :vcpus,
       :memory,
       :command,
@@ -1544,6 +1564,7 @@ module Aws::Batch
     #   <p>The private repository authentication credentials to use.</p>
     #   @return [Types::RepositoryCredentials]
     class ContainerProperties < Struct.new(
+      nil,
       :image,
       :vcpus,
       :memory,
@@ -1582,6 +1603,7 @@ module Aws::Batch
     #      running or stopped container.</p>
     #   @return [String]
     class ContainerSummary < Struct.new(
+      nil,
       :exit_code,
       :reason,
       keyword_init: true
@@ -1677,6 +1699,7 @@ module Aws::Batch
     #   <p>Reserved.</p>
     #   @return [String]
     class CreateComputeEnvironmentRequest < Struct.new(
+      nil,
       :compute_environment_name,
       :type,
       :state,
@@ -1699,6 +1722,7 @@ module Aws::Batch
     #   <p>The Amazon Resource Name (ARN) of the compute environment.</p>
     #   @return [String]
     class CreateComputeEnvironmentResponse < Struct.new(
+      nil,
       :compute_environment_name,
       :compute_environment_arn,
       keyword_init: true
@@ -1732,6 +1756,7 @@ module Aws::Batch
     #               resources. Each tag consists of a key and an optional value. For more information, see <a href="https://docs.aws.amazon.com/batch/latest/userguide/using-tags.html">Tagging your Batch resources</a>.</p>
     #   @return [Hash<String, String>]
     class CreateConsumableResourceRequest < Struct.new(
+      nil,
       :consumable_resource_name,
       :total_quantity,
       :resource_type,
@@ -1748,6 +1773,7 @@ module Aws::Batch
     #   <p>The Amazon Resource Name (ARN) of the consumable resource.</p>
     #   @return [String]
     class CreateConsumableResourceResponse < Struct.new(
+      nil,
       :consumable_resource_name,
       :consumable_resource_arn,
       keyword_init: true
@@ -1812,6 +1838,7 @@ module Aws::Batch
     #   <p>The set of actions that Batch performs on jobs that remain at the head of the job queue in the specified state longer than specified times. Batch will perform each action after <code>maxTimeSeconds</code> has passed. (<b>Note</b>: The minimum value for maxTimeSeconds is 600 (10 minutes) and its maximum value is 86,400 (24 hours).)</p>
     #   @return [Array<Types::JobStateTimeLimitAction>]
     class CreateJobQueueRequest < Struct.new(
+      nil,
       :job_queue_name,
       :state,
       :scheduling_policy_arn,
@@ -1833,6 +1860,7 @@ module Aws::Batch
     #   <p>The Amazon Resource Name (ARN) of the job queue.</p>
     #   @return [String]
     class CreateJobQueueResponse < Struct.new(
+      nil,
       :job_queue_name,
       :job_queue_arn,
       keyword_init: true
@@ -1855,6 +1883,7 @@ module Aws::Batch
     #            <p>These tags can be updated or removed using the <a href="https://docs.aws.amazon.com/batch/latest/APIReference/API_TagResource.html">TagResource</a> and <a href="https://docs.aws.amazon.com/batch/latest/APIReference/API_UntagResource.html">UntagResource</a> API operations.</p>
     #   @return [Hash<String, String>]
     class CreateSchedulingPolicyRequest < Struct.new(
+      nil,
       :name,
       :fairshare_policy,
       :tags,
@@ -1874,6 +1903,7 @@ module Aws::Batch
     #           <code>aws:aws:batch:us-west-2:123456789012:scheduling-policy/MySchedulingPolicy</code>.</p>
     #   @return [String]
     class CreateSchedulingPolicyResponse < Struct.new(
+      nil,
       :name,
       :arn,
       keyword_init: true
@@ -1897,6 +1927,7 @@ module Aws::Batch
     #   <p>The tags that you apply to the service environment to help you categorize and organize your resources. Each tag consists of a key and an optional value. For more information, see <a href="https://docs.aws.amazon.com/batch/latest/userguide/using-tags.html">Tagging your Batch resources</a>.</p>
     #   @return [Hash<String, String>]
     class CreateServiceEnvironmentRequest < Struct.new(
+      nil,
       :service_environment_name,
       :service_environment_type,
       :state,
@@ -1914,6 +1945,7 @@ module Aws::Batch
     #   <p>The Amazon Resource Name (ARN) of the service environment.</p>
     #   @return [String]
     class CreateServiceEnvironmentResponse < Struct.new(
+      nil,
       :service_environment_name,
       :service_environment_arn,
       keyword_init: true
@@ -1926,6 +1958,7 @@ module Aws::Batch
     #   <p>The name or Amazon Resource Name (ARN) of the compute environment to delete.</p>
     #   @return [String]
     class DeleteComputeEnvironmentRequest < Struct.new(
+      nil,
       :compute_environment,
       keyword_init: true
     )
@@ -1933,6 +1966,7 @@ module Aws::Batch
     end
 
     class DeleteComputeEnvironmentResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1942,6 +1976,7 @@ module Aws::Batch
     #   <p>The name or ARN of the consumable resource that will be deleted.</p>
     #   @return [String]
     class DeleteConsumableResourceRequest < Struct.new(
+      nil,
       :consumable_resource,
       keyword_init: true
     )
@@ -1949,6 +1984,7 @@ module Aws::Batch
     end
 
     class DeleteConsumableResourceResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1959,6 +1995,7 @@ module Aws::Batch
     #   <p>The short name or full Amazon Resource Name (ARN) of the queue to delete.</p>
     #   @return [String]
     class DeleteJobQueueRequest < Struct.new(
+      nil,
       :job_queue,
       keyword_init: true
     )
@@ -1966,6 +2003,7 @@ module Aws::Batch
     end
 
     class DeleteJobQueueResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1976,6 +2014,7 @@ module Aws::Batch
     #   <p>The Amazon Resource Name (ARN) of the scheduling policy to delete.</p>
     #   @return [String]
     class DeleteSchedulingPolicyRequest < Struct.new(
+      nil,
       :arn,
       keyword_init: true
     )
@@ -1983,6 +2022,7 @@ module Aws::Batch
     end
 
     class DeleteSchedulingPolicyResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1992,6 +2032,7 @@ module Aws::Batch
     #   <p>The name or ARN of the service environment to delete.</p>
     #   @return [String]
     class DeleteServiceEnvironmentRequest < Struct.new(
+      nil,
       :service_environment,
       keyword_init: true
     )
@@ -1999,6 +2040,7 @@ module Aws::Batch
     end
 
     class DeleteServiceEnvironmentResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -2009,6 +2051,7 @@ module Aws::Batch
     #         to deregister.</p>
     #   @return [String]
     class DeregisterJobDefinitionRequest < Struct.new(
+      nil,
       :job_definition,
       keyword_init: true
     )
@@ -2016,6 +2059,7 @@ module Aws::Batch
     end
 
     class DeregisterJobDefinitionResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -2048,6 +2092,7 @@ module Aws::Batch
     #            </note>
     #   @return [String]
     class DescribeComputeEnvironmentsRequest < Struct.new(
+      nil,
       :compute_environments,
       :max_results,
       :next_token,
@@ -2067,6 +2112,7 @@ module Aws::Batch
     #         are no more results to return.</p>
     #   @return [String]
     class DescribeComputeEnvironmentsResponse < Struct.new(
+      nil,
       :compute_environments,
       :next_token,
       keyword_init: true
@@ -2078,6 +2124,7 @@ module Aws::Batch
     #   <p>The name or ARN of the consumable resource whose description will be returned.</p>
     #   @return [String]
     class DescribeConsumableResourceRequest < Struct.new(
+      nil,
       :consumable_resource,
       keyword_init: true
     )
@@ -2123,6 +2170,7 @@ module Aws::Batch
     #               resources. Each tag consists of a key and an optional value. For more information, see <a href="https://docs.aws.amazon.com/batch/latest/userguide/using-tags.html">Tagging your Batch resources</a>.</p>
     #   @return [Hash<String, String>]
     class DescribeConsumableResourceResponse < Struct.new(
+      nil,
       :consumable_resource_name,
       :consumable_resource_arn,
       :total_quantity,
@@ -2172,6 +2220,7 @@ module Aws::Batch
     #            </note>
     #   @return [String]
     class DescribeJobDefinitionsRequest < Struct.new(
+      nil,
       :job_definitions,
       :max_results,
       :job_definition_name,
@@ -2193,6 +2242,7 @@ module Aws::Batch
     #         no more results to return.</p>
     #   @return [String]
     class DescribeJobDefinitionsResponse < Struct.new(
+      nil,
       :job_definitions,
       :next_token,
       keyword_init: true
@@ -2226,6 +2276,7 @@ module Aws::Batch
     #            </note>
     #   @return [String]
     class DescribeJobQueuesRequest < Struct.new(
+      nil,
       :job_queues,
       :max_results,
       :next_token,
@@ -2244,6 +2295,7 @@ module Aws::Batch
     #         value is <code>null</code> when there are no more results to return.</p>
     #   @return [String]
     class DescribeJobQueuesResponse < Struct.new(
+      nil,
       :job_queues,
       :next_token,
       keyword_init: true
@@ -2256,6 +2308,7 @@ module Aws::Batch
     #   <p>A list of up to 100 job IDs.</p>
     #   @return [Array<String>]
     class DescribeJobsRequest < Struct.new(
+      nil,
       :jobs,
       keyword_init: true
     )
@@ -2266,6 +2319,7 @@ module Aws::Batch
     #   <p>The list of jobs.</p>
     #   @return [Array<Types::JobDetail>]
     class DescribeJobsResponse < Struct.new(
+      nil,
       :jobs,
       keyword_init: true
     )
@@ -2277,6 +2331,7 @@ module Aws::Batch
     #   <p>A list of up to 100 scheduling policy Amazon Resource Name (ARN) entries.</p>
     #   @return [Array<String>]
     class DescribeSchedulingPoliciesRequest < Struct.new(
+      nil,
       :arns,
       keyword_init: true
     )
@@ -2287,6 +2342,7 @@ module Aws::Batch
     #   <p>The list of scheduling policies.</p>
     #   @return [Array<Types::SchedulingPolicyDetail>]
     class DescribeSchedulingPoliciesResponse < Struct.new(
+      nil,
       :scheduling_policies,
       keyword_init: true
     )
@@ -2307,6 +2363,7 @@ module Aws::Batch
     #            </note>
     #   @return [String]
     class DescribeServiceEnvironmentsRequest < Struct.new(
+      nil,
       :service_environments,
       :max_results,
       :next_token,
@@ -2322,6 +2379,7 @@ module Aws::Batch
     #   <p>The <code>nextToken</code> value to include in a future <code>DescribeServiceEnvironments</code> request. When the results of a <code>DescribeServiceEnvironments</code> request exceed <code>maxResults</code>, this value can be used to retrieve the next page of results. This value is <code>null</code> when there are no more results to return.</p>
     #   @return [String]
     class DescribeServiceEnvironmentsResponse < Struct.new(
+      nil,
       :service_environments,
       :next_token,
       keyword_init: true
@@ -2333,6 +2391,7 @@ module Aws::Batch
     #   <p>The job ID for the service job to describe.</p>
     #   @return [String]
     class DescribeServiceJobRequest < Struct.new(
+      nil,
       :job_id,
       keyword_init: true
     )
@@ -2397,6 +2456,7 @@ module Aws::Batch
     #   <p>The timeout configuration for the service job.</p>
     #   @return [Types::ServiceJobTimeout]
     class DescribeServiceJobResponse < Struct.new(
+      nil,
       :attempts,
       :created_at,
       :is_terminated,
@@ -2439,6 +2499,7 @@ module Aws::Batch
     #      the device.</p>
     #   @return [Array<String>]
     class Device < Struct.new(
+      nil,
       :host_path,
       :container_path,
       :permissions,
@@ -2466,6 +2527,7 @@ module Aws::Batch
     #      specified.</p>
     #   @return [String]
     class EFSAuthorizationConfig < Struct.new(
+      nil,
       :access_point_id,
       :iam,
       keyword_init: true
@@ -2506,6 +2568,7 @@ module Aws::Batch
     #   <p>The authorization configuration details for the Amazon EFS file system.</p>
     #   @return [Types::EFSAuthorizationConfig]
     class EFSVolumeConfiguration < Struct.new(
+      nil,
       :file_system_id,
       :root_directory,
       :transit_encryption,
@@ -2644,6 +2707,7 @@ module Aws::Batch
     #      version that Batch supports is used.</p>
     #   @return [String]
     class Ec2Configuration < Struct.new(
+      nil,
       :image_type,
       :image_id_override,
       :image_kubernetes_version,
@@ -2660,6 +2724,7 @@ module Aws::Batch
     #            </note>
     #   @return [Array<Types::EcsTaskProperties>]
     class EcsProperties < Struct.new(
+      nil,
       :task_properties,
       keyword_init: true
     )
@@ -2671,6 +2736,7 @@ module Aws::Batch
     #   <p>The properties for the Amazon ECS task definition of a job.</p>
     #   @return [Array<Types::EcsTaskDetails>]
     class EcsPropertiesDetail < Struct.new(
+      nil,
       :task_properties,
       keyword_init: true
     )
@@ -2685,6 +2751,7 @@ module Aws::Batch
     #            </note>
     #   @return [Array<Types::TaskPropertiesOverride>]
     class EcsPropertiesOverride < Struct.new(
+      nil,
       :task_properties,
       keyword_init: true
     )
@@ -2745,6 +2812,7 @@ module Aws::Batch
     #               command functionality is turned on all the containers in the task.</p>
     #   @return [Boolean]
     class EcsTaskDetails < Struct.new(
+      nil,
       :containers,
       :container_instance_arn,
       :task_arn,
@@ -2835,6 +2903,7 @@ module Aws::Batch
     #               command functionality is turned on all the containers in the task.</p>
     #   @return [Boolean]
     class EcsTaskProperties < Struct.new(
+      nil,
       :containers,
       :ephemeral_storage,
       :execution_role_arn,
@@ -2868,6 +2937,7 @@ module Aws::Batch
     #      running or stopped container.</p>
     #   @return [String]
     class EksAttemptContainerDetail < Struct.new(
+      nil,
       :name,
       :container_id,
       :exit_code,
@@ -2911,6 +2981,7 @@ module Aws::Batch
     #      job attempt.</p>
     #   @return [String]
     class EksAttemptDetail < Struct.new(
+      nil,
       :containers,
       :init_containers,
       :eks_cluster_arn,
@@ -2940,6 +3011,7 @@ module Aws::Batch
     #      expression: <code>^[a-z0-9]([-a-z0-9]*[a-z0-9])?$</code>. For more information, see <a href="https://kubernetes.io/docs/concepts/overview/working-with-objects/namespaces/">Namespaces</a> in the Kubernetes documentation.</p>
     #   @return [String]
     class EksConfiguration < Struct.new(
+      nil,
       :eks_cluster_arn,
       :kubernetes_namespace,
       keyword_init: true
@@ -3013,6 +3085,7 @@ module Aws::Batch
     #       documentation</i>.</p>
     #   @return [Types::EksContainerSecurityContext]
     class EksContainer < Struct.new(
+      nil,
       :name,
       :image,
       :image_pull_policy,
@@ -3091,6 +3164,7 @@ module Aws::Batch
     #       documentation</i>.</p>
     #   @return [Types::EksContainerSecurityContext]
     class EksContainerDetail < Struct.new(
+      nil,
       :name,
       :image,
       :image_pull_policy,
@@ -3115,6 +3189,7 @@ module Aws::Batch
     #   <p>The value of the environment variable.</p>
     #   @return [String]
     class EksContainerEnvironmentVariable < Struct.new(
+      nil,
       :name,
       :value,
       keyword_init: true
@@ -3158,6 +3233,7 @@ module Aws::Batch
     #      documentation</i>.</p>
     #   @return [Types::EksContainerResourceRequirements]
     class EksContainerOverride < Struct.new(
+      nil,
       :name,
       :image,
       :command,
@@ -3248,6 +3324,7 @@ module Aws::Batch
     #            </dl>
     #   @return [Hash<String, String>]
     class EksContainerResourceRequirements < Struct.new(
+      nil,
       :limits,
       :requests,
       keyword_init: true
@@ -3299,6 +3376,7 @@ module Aws::Batch
     #      documentation</i>.</p>
     #   @return [Boolean]
     class EksContainerSecurityContext < Struct.new(
+      nil,
       :run_as_user,
       :run_as_group,
       :privileged,
@@ -3327,6 +3405,7 @@ module Aws::Batch
     #      Otherwise, the container can write to the volume. The default value is <code>false</code>.</p>
     #   @return [Boolean]
     class EksContainerVolumeMount < Struct.new(
+      nil,
       :name,
       :mount_path,
       :sub_path,
@@ -3365,6 +3444,7 @@ module Aws::Batch
     #   <p>The maximum size of the volume. By default, there's no maximum size defined.</p>
     #   @return [String]
     class EksEmptyDir < Struct.new(
+      nil,
       :medium,
       :size_limit,
       keyword_init: true
@@ -3379,6 +3459,7 @@ module Aws::Batch
     #   <p>The path of the file or directory on the host to mount into containers on the pod.</p>
     #   @return [String]
     class EksHostPath < Struct.new(
+      nil,
       :path,
       keyword_init: true
     )
@@ -3447,6 +3528,7 @@ module Aws::Batch
     #      the same value must be provided across all the node ranges.</p>
     #   @return [String]
     class EksMetadata < Struct.new(
+      nil,
       :labels,
       :annotations,
       :namespace,
@@ -3470,6 +3552,7 @@ module Aws::Batch
     #            Read Only Mounts</a> in the <i>Kubernetes documentation</i>.</p>
     #   @return [Boolean]
     class EksPersistentVolumeClaim < Struct.new(
+      nil,
       :claim_name,
       :read_only,
       keyword_init: true
@@ -3538,6 +3621,7 @@ module Aws::Batch
     #       Process Namespace between Containers in a Pod</a>.</p>
     #   @return [Boolean]
     class EksPodProperties < Struct.new(
+      nil,
       :service_account_name,
       :host_network,
       :dns_policy,
@@ -3613,6 +3697,7 @@ module Aws::Batch
     #       Process Namespace between Containers in a Pod</a>.</p>
     #   @return [Boolean]
     class EksPodPropertiesDetail < Struct.new(
+      nil,
       :service_account_name,
       :host_network,
       :dns_policy,
@@ -3644,6 +3729,7 @@ module Aws::Batch
     #   <p>Metadata about the overrides for the container that's used on the Amazon EKS pod.</p>
     #   @return [Types::EksMetadata]
     class EksPodPropertiesOverride < Struct.new(
+      nil,
       :containers,
       :init_containers,
       :metadata,
@@ -3657,6 +3743,7 @@ module Aws::Batch
     #   <p>The properties for the Kubernetes pod resources of a job.</p>
     #   @return [Types::EksPodProperties]
     class EksProperties < Struct.new(
+      nil,
       :pod_properties,
       keyword_init: true
     )
@@ -3668,6 +3755,7 @@ module Aws::Batch
     #   <p>The properties for the Kubernetes pod resources of a job.</p>
     #   @return [Types::EksPodPropertiesDetail]
     class EksPropertiesDetail < Struct.new(
+      nil,
       :pod_properties,
       keyword_init: true
     )
@@ -3679,6 +3767,7 @@ module Aws::Batch
     #   <p>The overrides for the Kubernetes pod resources of a job.</p>
     #   @return [Types::EksPodPropertiesOverride]
     class EksPropertiesOverride < Struct.new(
+      nil,
       :pod_properties,
       keyword_init: true
     )
@@ -3696,6 +3785,7 @@ module Aws::Batch
     #   <p>Specifies whether the secret or the secret's keys must be defined.</p>
     #   @return [Boolean]
     class EksSecret < Struct.new(
+      nil,
       :secret_name,
       :optional,
       keyword_init: true
@@ -3729,6 +3819,7 @@ module Aws::Batch
     #           Persistent Volume Claims</a> in the <i>Kubernetes documentation</i>.</p>
     #   @return [Types::EksPersistentVolumeClaim]
     class EksVolume < Struct.new(
+      nil,
       :name,
       :host_path,
       :empty_dir,
@@ -3747,6 +3838,7 @@ module Aws::Batch
     #      value is <code>21</code> GiB and the maximum supported value is <code>200</code> GiB.</p>
     #   @return [Integer]
     class EphemeralStorage < Struct.new(
+      nil,
       :size_in_gi_b,
       keyword_init: true
     )
@@ -3782,6 +3874,7 @@ module Aws::Batch
     #      values aren't case sensitive.</p>
     #   @return [String]
     class EvaluateOnExit < Struct.new(
+      nil,
       :on_status_reason,
       :on_reason,
       :on_exit_code,
@@ -3825,6 +3918,7 @@ module Aws::Batch
     #      default weight of <code>1.0</code>.</p>
     #   @return [Array<Types::ShareAttributes>]
     class FairsharePolicy < Struct.new(
+      nil,
       :share_decay_seconds,
       :compute_reservation,
       :share_distribution,
@@ -3843,6 +3937,7 @@ module Aws::Batch
     #       platform versions</a> in the <i>Amazon Elastic Container Service Developer Guide</i>.</p>
     #   @return [String]
     class FargatePlatformConfiguration < Struct.new(
+      nil,
       :platform_version,
       keyword_init: true
     )
@@ -3865,6 +3960,7 @@ module Aws::Batch
     #               in the <i>Amazon Elastic Container Service Developer Guide</i>.</p>
     #   @return [Hash<String, String>]
     class FirelensConfiguration < Struct.new(
+      nil,
       :type,
       :options,
       keyword_init: true
@@ -3880,6 +3976,7 @@ module Aws::Batch
     #   <p>The Unix timestamp (in milliseconds) for when each of the first 100 <code>RUNNABLE</code> jobs were last updated. </p>
     #   @return [Integer]
     class FrontOfQueueDetail < Struct.new(
+      nil,
       :jobs,
       :last_updated_at,
       keyword_init: true
@@ -3895,6 +3992,7 @@ module Aws::Batch
     #   <p>The Unix timestamp (in milliseconds) for when the job transitioned to its current position in the job queue.</p>
     #   @return [Integer]
     class FrontOfQueueJobSummary < Struct.new(
+      nil,
       :job_arn,
       :earliest_time_at_position,
       keyword_init: true
@@ -3906,6 +4004,7 @@ module Aws::Batch
     #   <p>The job queue’s name or full queue Amazon Resource Name (ARN).</p>
     #   @return [String]
     class GetJobQueueSnapshotRequest < Struct.new(
+      nil,
       :job_queue,
       keyword_init: true
     )
@@ -3916,6 +4015,7 @@ module Aws::Batch
     #   <p>The list of the first 100 <code>RUNNABLE</code> jobs in each job queue. For first-in-first-out (FIFO) job queues, jobs are ordered based on their submission time. For fair-share scheduling (FSS) job queues, jobs are ordered based on their job priority and share usage.</p>
     #   @return [Types::FrontOfQueueDetail]
     class GetJobQueueSnapshotResponse < Struct.new(
+      nil,
       :front_of_queue,
       keyword_init: true
     )
@@ -3939,6 +4039,7 @@ module Aws::Batch
     #            </note>
     #   @return [String]
     class Host < Struct.new(
+      nil,
       :source_path,
       keyword_init: true
     )
@@ -3953,6 +4054,7 @@ module Aws::Batch
     #      when <code>EksPodProperties$imagePullSecrets</code> is used.</p>
     #   @return [String]
     class ImagePullSecret < Struct.new(
+      nil,
       :name,
       keyword_init: true
     )
@@ -4048,6 +4150,7 @@ module Aws::Batch
     #   <p>Contains a list of consumable resources required by the job.</p>
     #   @return [Types::ConsumableResourceProperties]
     class JobDefinition < Struct.new(
+      nil,
       :job_definition_name,
       :job_definition_arn,
       :revision,
@@ -4079,6 +4182,7 @@ module Aws::Batch
     #   <p>The type of the job dependency.</p>
     #   @return [String]
     class JobDependency < Struct.new(
+      nil,
       :job_id,
       :type,
       keyword_init: true
@@ -4228,6 +4332,7 @@ module Aws::Batch
     #   <p>Contains a list of consumable resources required by the job.</p>
     #   @return [Types::ConsumableResourceProperties]
     class JobDetail < Struct.new(
+      nil,
       :job_arn,
       :job_name,
       :job_id,
@@ -4331,6 +4436,7 @@ module Aws::Batch
     #   <p>The set of actions that Batch perform on jobs that remain at the head of the job queue in the specified state longer than specified times. Batch will perform each action after <code>maxTimeSeconds</code> has passed.</p>
     #   @return [Array<Types::JobStateTimeLimitAction>]
     class JobQueueDetail < Struct.new(
+      nil,
       :job_queue_name,
       :job_queue_arn,
       :state,
@@ -4364,6 +4470,7 @@ module Aws::Batch
     #      time. The only supported value is <code>CANCEL</code>, which will cancel the job.</p>
     #   @return [String]
     class JobStateTimeLimitAction < Struct.new(
+      nil,
       :reason,
       :state,
       :max_time_seconds,
@@ -4423,6 +4530,7 @@ module Aws::Batch
     #   <p>The Amazon Resource Name (ARN) of the job definition.</p>
     #   @return [String]
     class JobSummary < Struct.new(
+      nil,
       :job_arn,
       :job_id,
       :job_name,
@@ -4450,6 +4558,7 @@ module Aws::Batch
     #      individual nodes.</p>
     #   @return [Integer]
     class JobTimeout < Struct.new(
+      nil,
       :attempt_duration_seconds,
       keyword_init: true
     )
@@ -4466,6 +4575,7 @@ module Aws::Batch
     #      environment variable.</p>
     #   @return [String]
     class KeyValuePair < Struct.new(
+      nil,
       :name,
       :value,
       keyword_init: true
@@ -4482,6 +4592,7 @@ module Aws::Batch
     #   <p>The filter values.</p>
     #   @return [Array<String>]
     class KeyValuesPair < Struct.new(
+      nil,
       :name,
       :values,
       keyword_init: true
@@ -4494,6 +4605,7 @@ module Aws::Batch
     #   <p>The service resource identifier associated with the service job attempt.</p>
     #   @return [Types::ServiceResourceId]
     class LatestServiceJobAttempt < Struct.new(
+      nil,
       :service_resource_id,
       keyword_init: true
     )
@@ -4551,6 +4663,7 @@ module Aws::Batch
     #      must choose <code>EKS_NODEADM</code>.</p>
     #   @return [String]
     class LaunchTemplateSpecification < Struct.new(
+      nil,
       :launch_template_id,
       :launch_template_name,
       :version,
@@ -4634,6 +4747,7 @@ module Aws::Batch
     #      must choose <code>EKS_NODEADM</code>.</p>
     #   @return [String]
     class LaunchTemplateSpecificationOverride < Struct.new(
+      nil,
       :launch_template_id,
       :launch_template_name,
       :version,
@@ -4737,6 +4851,7 @@ module Aws::Batch
     #            </note>
     #   @return [Integer]
     class LinuxParameters < Struct.new(
+      nil,
       :devices,
       :init_process_enabled,
       :shared_memory_size,
@@ -4783,6 +4898,7 @@ module Aws::Batch
     #            </note>
     #   @return [String]
     class ListConsumableResourcesRequest < Struct.new(
+      nil,
       :filters,
       :max_results,
       :next_token,
@@ -4801,6 +4917,7 @@ module Aws::Batch
     #               when there are no more results to return.</p>
     #   @return [String]
     class ListConsumableResourcesResponse < Struct.new(
+      nil,
       :consumable_resources,
       :next_token,
       keyword_init: true
@@ -4853,6 +4970,7 @@ module Aws::Batch
     #            </note>
     #   @return [String]
     class ListJobsByConsumableResourceRequest < Struct.new(
+      nil,
       :consumable_resource,
       :filters,
       :max_results,
@@ -4872,6 +4990,7 @@ module Aws::Batch
     #               value is <code>null</code> when there are no more results to return.</p>
     #   @return [String]
     class ListJobsByConsumableResourceResponse < Struct.new(
+      nil,
       :jobs,
       :next_token,
       keyword_init: true
@@ -4952,6 +5071,7 @@ module Aws::Batch
     #   <p>Contains a list of consumable resources required by the job.</p>
     #   @return [Types::ConsumableResourceProperties]
     class ListJobsByConsumableResourceSummary < Struct.new(
+      nil,
       :job_arn,
       :job_queue_arn,
       :job_name,
@@ -5062,6 +5182,7 @@ module Aws::Batch
     #            </dl>
     #   @return [Array<Types::KeyValuesPair>]
     class ListJobsRequest < Struct.new(
+      nil,
       :job_queue,
       :array_job_id,
       :multi_node_job_id,
@@ -5084,6 +5205,7 @@ module Aws::Batch
     #         are no more results to return.</p>
     #   @return [String]
     class ListJobsResponse < Struct.new(
+      nil,
       :job_summary_list,
       :next_token,
       keyword_init: true
@@ -5114,6 +5236,7 @@ module Aws::Batch
     #            </note>
     #   @return [String]
     class ListSchedulingPoliciesRequest < Struct.new(
+      nil,
       :max_results,
       :next_token,
       keyword_init: true
@@ -5132,6 +5255,7 @@ module Aws::Batch
     #         no more results to return.</p>
     #   @return [String]
     class ListSchedulingPoliciesResponse < Struct.new(
+      nil,
       :scheduling_policies,
       :next_token,
       keyword_init: true
@@ -5185,6 +5309,7 @@ module Aws::Batch
     #            </dl>
     #   @return [Array<Types::KeyValuesPair>]
     class ListServiceJobsRequest < Struct.new(
+      nil,
       :job_queue,
       :job_status,
       :max_results,
@@ -5202,6 +5327,7 @@ module Aws::Batch
     #   <p>The <code>nextToken</code> value to include in a future <code>ListServiceJobs</code> request. When the results of a <code>ListServiceJobs</code> request exceed <code>maxResults</code>, this value can be used to retrieve the next page of results. This value is <code>null</code> when there are no more results to return.</p>
     #   @return [String]
     class ListServiceJobsResponse < Struct.new(
+      nil,
       :job_summary_list,
       :next_token,
       keyword_init: true
@@ -5215,6 +5341,7 @@ module Aws::Batch
     #    and scheduling policies. ARNs for child jobs of array and multi-node parallel (MNP) jobs aren't supported.</p>
     #   @return [String]
     class ListTagsForResourceRequest < Struct.new(
+      nil,
       :resource_arn,
       keyword_init: true
     )
@@ -5225,6 +5352,7 @@ module Aws::Batch
     #   <p>The tags for the resource.</p>
     #   @return [Hash<String, String>]
     class ListTagsForResourceResponse < Struct.new(
+      nil,
       :tags,
       keyword_init: true
     )
@@ -5316,6 +5444,7 @@ module Aws::Batch
     #       data</a> in the <i>Batch User Guide</i>.</p>
     #   @return [Array<Types::Secret>]
     class LogConfiguration < Struct.new(
+      nil,
       :log_driver,
       :options,
       :secret_options,
@@ -5339,6 +5468,7 @@ module Aws::Batch
     #   <p>The name of the volume to mount.</p>
     #   @return [String]
     class MountPoint < Struct.new(
+      nil,
       :container_path,
       :read_only,
       :source_volume,
@@ -5357,6 +5487,7 @@ module Aws::Batch
     #       <i>Amazon Elastic Container Service Developer Guide</i>. The default value is "<code>DISABLED</code>".</p>
     #   @return [String]
     class NetworkConfiguration < Struct.new(
+      nil,
       :assign_public_ip,
       keyword_init: true
     )
@@ -5375,6 +5506,7 @@ module Aws::Batch
     #   <p>The private IPv4 address for the network interface.</p>
     #   @return [String]
     class NetworkInterface < Struct.new(
+      nil,
       :attachment_id,
       :ipv6_address,
       :private_ipv4_address,
@@ -5392,6 +5524,7 @@ module Aws::Batch
     #   <p>Specifies whether the current node is the main node for a multi-node parallel job.</p>
     #   @return [Boolean]
     class NodeDetails < Struct.new(
+      nil,
       :node_index,
       :is_main_node,
       keyword_init: true
@@ -5428,6 +5561,7 @@ module Aws::Batch
     #   <p>The node property overrides for the job.</p>
     #   @return [Array<Types::NodePropertyOverride>]
     class NodeOverrides < Struct.new(
+      nil,
       :num_nodes,
       :node_property_overrides,
       keyword_init: true
@@ -5451,6 +5585,7 @@ module Aws::Batch
     #      job.</p>
     #   @return [Array<Types::NodeRangeProperty>]
     class NodeProperties < Struct.new(
+      nil,
       :num_nodes,
       :main_node,
       :node_range_properties,
@@ -5472,6 +5607,7 @@ module Aws::Batch
     #      available on the node with the <code>AWS_BATCH_JOB_NODE_INDEX</code> environment variable.</p>
     #   @return [Integer]
     class NodePropertiesSummary < Struct.new(
+      nil,
       :is_main_node,
       :num_nodes,
       :node_index,
@@ -5507,6 +5643,7 @@ module Aws::Batch
     #   <p>An object that contains overrides for the consumable resources of a job.</p>
     #   @return [Types::ConsumableResourceProperties]
     class NodePropertyOverride < Struct.new(
+      nil,
       :target_nodes,
       :container_overrides,
       :ecs_properties_override,
@@ -5551,6 +5688,7 @@ module Aws::Batch
     #   <p>Contains a list of consumable resources required by a job.</p>
     #   @return [Types::ConsumableResourceProperties]
     class NodeRangeProperty < Struct.new(
+      nil,
       :target_nodes,
       :container,
       :instance_types,
@@ -5667,6 +5805,7 @@ module Aws::Batch
     #   <p>Contains a list of consumable resources required by the job.</p>
     #   @return [Types::ConsumableResourceProperties]
     class RegisterJobDefinitionRequest < Struct.new(
+      nil,
       :job_definition_name,
       :type,
       :parameters,
@@ -5696,6 +5835,7 @@ module Aws::Batch
     #   <p>The revision of the job definition.</p>
     #   @return [Integer]
     class RegisterJobDefinitionResponse < Struct.new(
+      nil,
       :job_definition_name,
       :job_definition_arn,
       :revision,
@@ -5710,6 +5850,7 @@ module Aws::Batch
     #      credentials.</p>
     #   @return [String]
     class RepositoryCredentials < Struct.new(
+      nil,
       :credentials_parameter,
       keyword_init: true
     )
@@ -5885,6 +6026,7 @@ module Aws::Batch
     #       <code>GPU</code>, <code>MEMORY</code>, and <code>VCPU</code>.</p>
     #   @return [String]
     class ResourceRequirement < Struct.new(
+      nil,
       :value,
       :type,
       keyword_init: true
@@ -5905,6 +6047,7 @@ module Aws::Batch
     #      none of the listed conditions match, then the job is retried.</p>
     #   @return [Array<Types::EvaluateOnExit>]
     class RetryStrategy < Struct.new(
+      nil,
       :attempts,
       :evaluate_on_exit,
       keyword_init: true
@@ -5953,6 +6096,7 @@ module Aws::Batch
     #            </note>
     #   @return [String]
     class RuntimePlatform < Struct.new(
+      nil,
       :operating_system_family,
       :cpu_architecture,
       keyword_init: true
@@ -5978,6 +6122,7 @@ module Aws::Batch
     #       <i>Amazon Web Services General Reference</i>.</p>
     #   @return [Hash<String, String>]
     class SchedulingPolicyDetail < Struct.new(
+      nil,
       :name,
       :arn,
       :fairshare_policy,
@@ -5993,6 +6138,7 @@ module Aws::Batch
     #   <p>Amazon Resource Name (ARN) of the scheduling policy.</p>
     #   @return [String]
     class SchedulingPolicyListingDetail < Struct.new(
+      nil,
       :arn,
       keyword_init: true
     )
@@ -6026,6 +6172,7 @@ module Aws::Batch
     #            </note>
     #   @return [String]
     class Secret < Struct.new(
+      nil,
       :name,
       :value_from,
       keyword_init: true
@@ -6037,6 +6184,7 @@ module Aws::Batch
     # @!attribute message
     #   @return [String]
     class ServerException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -6066,6 +6214,7 @@ module Aws::Batch
     #   <p>The tags associated with the service environment. Each tag consists of a key and an optional value. For more information, see <a href="https://docs.aws.amazon.com/batch/latest/userguide/using-tags.html">Tagging your Batch resources</a>.</p>
     #   @return [Hash<String, String>]
     class ServiceEnvironmentDetail < Struct.new(
+      nil,
       :service_environment_name,
       :service_environment_arn,
       :service_environment_type,
@@ -6086,6 +6235,7 @@ module Aws::Batch
     #   <p>The name or ARN of the service environment.</p>
     #   @return [String]
     class ServiceEnvironmentOrder < Struct.new(
+      nil,
       :order,
       :service_environment,
       keyword_init: true
@@ -6107,6 +6257,7 @@ module Aws::Batch
     #   <p>A string that provides additional details for the current status of the service job attempt.</p>
     #   @return [String]
     class ServiceJobAttemptDetail < Struct.new(
+      nil,
       :service_resource_id,
       :started_at,
       :stopped_at,
@@ -6124,6 +6275,7 @@ module Aws::Batch
     #   <p>Contains a glob pattern to match against the StatusReason returned for a job. The pattern can contain up to 512 characters and can contain all printable characters. It can optionally end with an asterisk (*) so that only the start of the string needs to be an exact match.</p>
     #   @return [String]
     class ServiceJobEvaluateOnExit < Struct.new(
+      nil,
       :action,
       :on_status_reason,
       keyword_init: true
@@ -6139,6 +6291,7 @@ module Aws::Batch
     #   <p>Array of <code>ServiceJobEvaluateOnExit</code> objects that specify conditions under which the service job should be retried or failed.</p>
     #   @return [Array<Types::ServiceJobEvaluateOnExit>]
     class ServiceJobRetryStrategy < Struct.new(
+      nil,
       :attempts,
       :evaluate_on_exit,
       keyword_init: true
@@ -6181,6 +6334,7 @@ module Aws::Batch
     #   <p>The Unix timestamp (in milliseconds) for when the service job stopped running.</p>
     #   @return [Integer]
     class ServiceJobSummary < Struct.new(
+      nil,
       :latest_attempt,
       :created_at,
       :job_arn,
@@ -6202,6 +6356,7 @@ module Aws::Batch
     #   <p>The maximum duration in seconds that a service job attempt can run. After this time is reached, Batch terminates the service job attempt.</p>
     #   @return [Integer]
     class ServiceJobTimeout < Struct.new(
+      nil,
       :attempt_duration_seconds,
       keyword_init: true
     )
@@ -6216,6 +6371,7 @@ module Aws::Batch
     #   <p>The value of the resource identifier. </p>
     #   @return [String]
     class ServiceResourceId < Struct.new(
+      nil,
       :name,
       :value,
       keyword_init: true
@@ -6243,6 +6399,7 @@ module Aws::Batch
     #            <p>The smallest supported value is 0.0001, and the largest supported value is 999.9999.</p>
     #   @return [Float]
     class ShareAttributes < Struct.new(
+      nil,
       :share_identifier,
       :weight_factor,
       keyword_init: true
@@ -6357,6 +6514,7 @@ module Aws::Batch
     #   <p>An object that contains overrides for the consumable resources of a job.</p>
     #   @return [Types::ConsumableResourceProperties]
     class SubmitJobRequest < Struct.new(
+      nil,
       :job_name,
       :job_queue,
       :share_identifier,
@@ -6389,6 +6547,7 @@ module Aws::Batch
     #   <p>The unique identifier for the job.</p>
     #   @return [String]
     class SubmitJobResponse < Struct.new(
+      nil,
       :job_arn,
       :job_name,
       :job_id,
@@ -6430,6 +6589,7 @@ module Aws::Batch
     #   <p>A unique identifier for the request. This token is used to ensure idempotency of requests. If this parameter is specified and two submit requests with identical payloads and <code>clientToken</code>s are received, these requests are considered the same request and the second request is rejected.</p>
     #   @return [String]
     class SubmitServiceJobRequest < Struct.new(
+      nil,
       :job_name,
       :job_queue,
       :retry_strategy,
@@ -6455,6 +6615,7 @@ module Aws::Batch
     #   <p>The unique identifier for the service job.</p>
     #   @return [String]
     class SubmitServiceJobResponse < Struct.new(
+      nil,
       :job_arn,
       :job_name,
       :job_id,
@@ -6474,6 +6635,7 @@ module Aws::Batch
     #           Resources</a> in <i>Amazon Web Services General Reference</i>.</p>
     #   @return [Hash<String, String>]
     class TagResourceRequest < Struct.new(
+      nil,
       :resource_arn,
       :tags,
       keyword_init: true
@@ -6482,6 +6644,7 @@ module Aws::Batch
     end
 
     class TagResourceResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -6517,6 +6680,7 @@ module Aws::Batch
     #            </ul>
     #   @return [String]
     class TaskContainerDependency < Struct.new(
+      nil,
       :container_name,
       :condition,
       keyword_init: true
@@ -6742,6 +6906,7 @@ module Aws::Batch
     #   <p>The network interfaces that are associated with the job.</p>
     #   @return [Array<Types::NetworkInterface>]
     class TaskContainerDetails < Struct.new(
+      nil,
       :command,
       :depends_on,
       :environment,
@@ -6797,6 +6962,7 @@ module Aws::Batch
     #       <code>VCPU</code>.</p>
     #   @return [Array<Types::ResourceRequirement>]
     class TaskContainerOverrides < Struct.new(
+      nil,
       :command,
       :environment,
       :name,
@@ -7009,6 +7175,7 @@ module Aws::Batch
     #            </note>
     #   @return [String]
     class TaskContainerProperties < Struct.new(
+      nil,
       :command,
       :depends_on,
       :environment,
@@ -7036,6 +7203,7 @@ module Aws::Batch
     #   <p>The overrides for the container definition of a job.</p>
     #   @return [Array<Types::TaskContainerOverrides>]
     class TaskPropertiesOverride < Struct.new(
+      nil,
       :containers,
       keyword_init: true
     )
@@ -7053,6 +7221,7 @@ module Aws::Batch
     #            <p>This parameter has as limit of 1024 characters.</p>
     #   @return [String]
     class TerminateJobRequest < Struct.new(
+      nil,
       :job_id,
       :reason,
       keyword_init: true
@@ -7061,6 +7230,7 @@ module Aws::Batch
     end
 
     class TerminateJobResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -7073,6 +7243,7 @@ module Aws::Batch
     #   <p>A message to attach to the service job that explains the reason for canceling it. This message is returned by <code>DescribeServiceJob</code> operations on the service job.</p>
     #   @return [String]
     class TerminateServiceJobRequest < Struct.new(
+      nil,
       :job_id,
       :reason,
       keyword_init: true
@@ -7081,6 +7252,7 @@ module Aws::Batch
     end
 
     class TerminateServiceJobResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -7111,6 +7283,7 @@ module Aws::Batch
     #       "<code>nr_blocks</code>" | "<code>mpol</code>"</p>
     #   @return [Array<String>]
     class Tmpfs < Struct.new(
+      nil,
       :container_path,
       :size,
       :mount_options,
@@ -7137,6 +7310,7 @@ module Aws::Batch
     #   <p>The soft limit for the <code>ulimit</code> type.</p>
     #   @return [Integer]
     class Ulimit < Struct.new(
+      nil,
       :hard_limit,
       :name,
       :soft_limit,
@@ -7154,6 +7328,7 @@ module Aws::Batch
     #   <p>The keys of the tags to be removed.</p>
     #   @return [Array<String>]
     class UntagResourceRequest < Struct.new(
+      nil,
       :resource_arn,
       :tag_keys,
       keyword_init: true
@@ -7162,6 +7337,7 @@ module Aws::Batch
     end
 
     class UntagResourceResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -7236,6 +7412,7 @@ module Aws::Batch
     #   <p>Reserved.</p>
     #   @return [String]
     class UpdateComputeEnvironmentRequest < Struct.new(
+      nil,
       :compute_environment,
       :state,
       :unmanagedv_cpus,
@@ -7256,6 +7433,7 @@ module Aws::Batch
     #   <p>The Amazon Resource Name (ARN) of the compute environment.</p>
     #   @return [String]
     class UpdateComputeEnvironmentResponse < Struct.new(
+      nil,
       :compute_environment_name,
       :compute_environment_arn,
       keyword_init: true
@@ -7303,6 +7481,7 @@ module Aws::Batch
     #             <code>clientToken</code>s are received, these requests are considered the same request. Both requests will succeed, but the update will only happen once. A <code>clientToken</code> is valid for 8 hours.</p>
     #   @return [String]
     class UpdateConsumableResourceRequest < Struct.new(
+      nil,
       :consumable_resource,
       :operation,
       :quantity,
@@ -7322,6 +7501,7 @@ module Aws::Batch
     #   <p>The total amount of the consumable resource that is available.</p>
     #   @return [Integer]
     class UpdateConsumableResourceResponse < Struct.new(
+      nil,
       :consumable_resource_name,
       :consumable_resource_arn,
       :total_quantity,
@@ -7376,6 +7556,7 @@ module Aws::Batch
     #   <p>The set of actions that Batch perform on jobs that remain at the head of the job queue in the specified state longer than specified times. Batch will perform each action after <code>maxTimeSeconds</code> has passed. (<b>Note</b>: The minimum value for maxTimeSeconds is 600 (10 minutes) and its maximum value is 86,400 (24 hours).)</p>
     #   @return [Array<Types::JobStateTimeLimitAction>]
     class UpdateJobQueueRequest < Struct.new(
+      nil,
       :job_queue,
       :state,
       :scheduling_policy_arn,
@@ -7395,6 +7576,7 @@ module Aws::Batch
     #   <p>The Amazon Resource Name (ARN) of the job queue.</p>
     #   @return [String]
     class UpdateJobQueueResponse < Struct.new(
+      nil,
       :job_queue_name,
       :job_queue_arn,
       keyword_init: true
@@ -7414,6 +7596,7 @@ module Aws::Batch
     #      updated. The default value is 30.</p>
     #   @return [Integer]
     class UpdatePolicy < Struct.new(
+      nil,
       :terminate_jobs_on_update,
       :job_execution_timeout_minutes,
       keyword_init: true
@@ -7429,6 +7612,7 @@ module Aws::Batch
     #   <p>The fair-share policy scheduling details.</p>
     #   @return [Types::FairsharePolicy]
     class UpdateSchedulingPolicyRequest < Struct.new(
+      nil,
       :arn,
       :fairshare_policy,
       keyword_init: true
@@ -7437,6 +7621,7 @@ module Aws::Batch
     end
 
     class UpdateSchedulingPolicyResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -7452,6 +7637,7 @@ module Aws::Batch
     #   <p>The capacity limits for the service environment. This defines the maximum resources that can be used by service jobs in this environment.</p>
     #   @return [Array<Types::CapacityLimit>]
     class UpdateServiceEnvironmentRequest < Struct.new(
+      nil,
       :service_environment,
       :state,
       :capacity_limits,
@@ -7467,6 +7653,7 @@ module Aws::Batch
     #   <p>The Amazon Resource Name (ARN) of the service environment that was updated.</p>
     #   @return [String]
     class UpdateServiceEnvironmentResponse < Struct.new(
+      nil,
       :service_environment_name,
       :service_environment_arn,
       keyword_init: true
@@ -7496,6 +7683,7 @@ module Aws::Batch
     #       <code>1.4.0</code>.</p>
     #   @return [Types::EFSVolumeConfiguration]
     class Volume < Struct.new(
+      nil,
       :host,
       :name,
       :efs_volume_configuration,

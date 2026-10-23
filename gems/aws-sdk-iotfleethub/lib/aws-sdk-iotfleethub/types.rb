@@ -29,6 +29,7 @@ module Aws::IoTFleetHub
     #   <p>The current state of the web application.</p>
     #   @return [String]
     class ApplicationSummary < Struct.new(
+      nil,
       :application_id,
       :application_name,
       :application_description,
@@ -51,6 +52,7 @@ module Aws::IoTFleetHub
     # @!attribute message
     #   @return [String]
     class ConflictException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -78,6 +80,7 @@ module Aws::IoTFleetHub
     #   <p>A set of key/value pairs that you can use to manage the web application resource.</p>
     #   @return [Hash<String, String>]
     class CreateApplicationRequest < Struct.new(
+      nil,
       :application_name,
       :application_description,
       :client_token,
@@ -95,6 +98,7 @@ module Aws::IoTFleetHub
     #   <p>The ARN of the web application.</p>
     #   @return [String]
     class CreateApplicationResponse < Struct.new(
+      nil,
       :application_id,
       :application_arn,
       keyword_init: true
@@ -110,6 +114,7 @@ module Aws::IoTFleetHub
     #         Don't reuse this client token if a new idempotent request is required.</p>
     #   @return [String]
     class DeleteApplicationRequest < Struct.new(
+      nil,
       :application_id,
       :client_token,
       keyword_init: true
@@ -118,6 +123,7 @@ module Aws::IoTFleetHub
     end
 
     class DeleteApplicationResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -127,6 +133,7 @@ module Aws::IoTFleetHub
     #   <p>The unique Id of the web application.</p>
     #   @return [String]
     class DescribeApplicationRequest < Struct.new(
+      nil,
       :application_id,
       keyword_init: true
     )
@@ -171,6 +178,7 @@ module Aws::IoTFleetHub
     #   <p>A set of key/value pairs that you can use to manage the web application resource.</p>
     #   @return [Hash<String, String>]
     class DescribeApplicationResponse < Struct.new(
+      nil,
       :application_id,
       :application_arn,
       :application_name,
@@ -198,6 +206,7 @@ module Aws::IoTFleetHub
     # @!attribute message
     #   @return [String]
     class InternalFailureException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -208,6 +217,7 @@ module Aws::IoTFleetHub
     # @!attribute message
     #   @return [String]
     class InvalidRequestException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -218,6 +228,7 @@ module Aws::IoTFleetHub
     # @!attribute message
     #   @return [String]
     class LimitExceededException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -228,6 +239,7 @@ module Aws::IoTFleetHub
     #   <p>A token used to get the next set of results.</p>
     #   @return [String]
     class ListApplicationsRequest < Struct.new(
+      nil,
       :next_token,
       keyword_init: true
     )
@@ -241,6 +253,7 @@ module Aws::IoTFleetHub
     #   <p>A token used to get the next set of results.</p>
     #   @return [String]
     class ListApplicationsResponse < Struct.new(
+      nil,
       :application_summaries,
       :next_token,
       keyword_init: true
@@ -252,6 +265,7 @@ module Aws::IoTFleetHub
     #   <p>The ARN of the resource.</p>
     #   @return [String]
     class ListTagsForResourceRequest < Struct.new(
+      nil,
       :resource_arn,
       keyword_init: true
     )
@@ -262,6 +276,7 @@ module Aws::IoTFleetHub
     #   <p>The list of tags assigned to the resource.</p>
     #   @return [Hash<String, String>]
     class ListTagsForResourceResponse < Struct.new(
+      nil,
       :tags,
       keyword_init: true
     )
@@ -272,6 +287,7 @@ module Aws::IoTFleetHub
     # @!attribute message
     #   @return [String]
     class ResourceNotFoundException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -285,6 +301,7 @@ module Aws::IoTFleetHub
     #   <p>The new or modified tags for the resource.</p>
     #   @return [Hash<String, String>]
     class TagResourceRequest < Struct.new(
+      nil,
       :resource_arn,
       :tags,
       keyword_init: true
@@ -293,6 +310,7 @@ module Aws::IoTFleetHub
     end
 
     class TagResourceResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -302,6 +320,7 @@ module Aws::IoTFleetHub
     # @!attribute message
     #   @return [String]
     class ThrottlingException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -315,6 +334,7 @@ module Aws::IoTFleetHub
     #   <p>A list of the keys of the tags to be removed from the resource.</p>
     #   @return [Array<String>]
     class UntagResourceRequest < Struct.new(
+      nil,
       :resource_arn,
       :tag_keys,
       keyword_init: true
@@ -323,6 +343,7 @@ module Aws::IoTFleetHub
     end
 
     class UntagResourceResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -342,6 +363,7 @@ module Aws::IoTFleetHub
     #         Don't reuse this client token if a new idempotent request is required.</p>
     #   @return [String]
     class UpdateApplicationRequest < Struct.new(
+      nil,
       :application_id,
       :application_name,
       :application_description,
@@ -352,6 +374,7 @@ module Aws::IoTFleetHub
     end
 
     class UpdateApplicationResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure

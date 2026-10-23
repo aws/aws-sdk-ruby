@@ -16,6 +16,7 @@ module Aws::Macie2
     #   <p>(Deprecated) The Amazon Web Services account ID for the account that sent the invitation. This property has been replaced by the administratorAccountId property and is retained only for backward compatibility.</p>
     #   @return [String]
     class AcceptInvitationRequest < Struct.new(
+      nil,
       :administrator_account_id,
       :invitation_id,
       :master_account,
@@ -25,6 +26,7 @@ module Aws::Macie2
     end
 
     class AcceptInvitationResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -38,6 +40,7 @@ module Aws::Macie2
     #   <p>Specifies whether the ACL grants the general public with write access permissions for the bucket.</p>
     #   @return [Boolean]
     class AccessControlList < Struct.new(
+      nil,
       :allows_public_read_access,
       :allows_public_write_access,
       keyword_init: true
@@ -50,6 +53,7 @@ module Aws::Macie2
     #   <p>The explanation of the error that occurred.</p>
     #   @return [String]
     class AccessDeniedException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -64,6 +68,7 @@ module Aws::Macie2
     #   <p>The email address for the account.</p>
     #   @return [String]
     class AccountDetail < Struct.new(
+      nil,
       :account_id,
       :email,
       keyword_init: true
@@ -76,6 +81,7 @@ module Aws::Macie2
     #   <p>The block public access settings for the Amazon Web Services account that owns the bucket.</p>
     #   @return [Types::BlockPublicAccess]
     class AccountLevelPermissions < Struct.new(
+      nil,
       :block_public_access,
       keyword_init: true
     )
@@ -90,6 +96,7 @@ module Aws::Macie2
     #   <p>The current status of the account as the delegated Amazon Macie administrator account for the organization.</p>
     #   @return [String]
     class AdminAccount < Struct.new(
+      nil,
       :account_id,
       :status,
       keyword_init: true
@@ -105,6 +112,7 @@ module Aws::Macie2
     #   <p>The location and name of the S3 object that lists specific text to ignore.</p>
     #   @return [Types::S3WordsList]
     class AllowListCriteria < Struct.new(
+      nil,
       :regex,
       :s3_words_list,
       keyword_init: true
@@ -120,6 +128,7 @@ module Aws::Macie2
     #   <p>A brief description of the status of the allow list. Amazon Macie uses this value to provide additional information about an error that occurred when Macie tried to access and use the list's criteria.</p>
     #   @return [String]
     class AllowListStatus < Struct.new(
+      nil,
       :code,
       :description,
       keyword_init: true
@@ -147,6 +156,7 @@ module Aws::Macie2
     #   <p>The date and time, in UTC and extended ISO 8601 format, when the allow list's settings were most recently changed in Amazon Macie.</p>
     #   @return [Time]
     class AllowListSummary < Struct.new(
+      nil,
       :arn,
       :created_at,
       :description,
@@ -172,6 +182,7 @@ module Aws::Macie2
     #   <p>The most recent date and time, in UTC and extended ISO 8601 format, when the specified operation (api) was invoked and produced the finding.</p>
     #   @return [Time]
     class ApiCallDetails < Struct.new(
+      nil,
       :api,
       :api_service_name,
       :first_seen,
@@ -198,6 +209,7 @@ module Aws::Macie2
     #   <p>The details of the session that was created for the credentials, including the entity that issued the session.</p>
     #   @return [Types::SessionContext]
     class AssumedRole < Struct.new(
+      nil,
       :access_key_id,
       :account_id,
       :arn,
@@ -216,6 +228,7 @@ module Aws::Macie2
     #   <p>The current status of automated sensitive data discovery for the account. Possible values are: ENABLED, perform automated sensitive data discovery activities for the account; and, DISABLED, don't perform automated sensitive data discovery activities for the account.</p>
     #   @return [String]
     class AutomatedDiscoveryAccount < Struct.new(
+      nil,
       :account_id,
       :status,
       keyword_init: true
@@ -231,6 +244,7 @@ module Aws::Macie2
     #   <p>The new status of automated sensitive data discovery for the account. Valid values are: ENABLED, perform automated sensitive data discovery activities for the account; and, DISABLED, don't perform automated sensitive data discovery activities for the account.</p>
     #   @return [String]
     class AutomatedDiscoveryAccountUpdate < Struct.new(
+      nil,
       :account_id,
       :status,
       keyword_init: true
@@ -246,6 +260,7 @@ module Aws::Macie2
     #   <p>The error code for the error that caused the request to fail for the account (accountId). Possible values are: ACCOUNT_NOT_FOUND, the account doesn’t exist or you're not the Amazon Macie administrator for the account; and, ACCOUNT_PAUSED, Macie isn’t enabled for the account in the current Amazon Web Services Region.</p>
     #   @return [String]
     class AutomatedDiscoveryAccountUpdateError < Struct.new(
+      nil,
       :account_id,
       :error_code,
       keyword_init: true
@@ -261,6 +276,7 @@ module Aws::Macie2
     #   <p>The unique identifier for the entity that performed the action.</p>
     #   @return [String]
     class AwsAccount < Struct.new(
+      nil,
       :account_id,
       :principal_id,
       keyword_init: true
@@ -273,6 +289,7 @@ module Aws::Macie2
     #   <p>The name of the Amazon Web Service that performed the action.</p>
     #   @return [String]
     class AwsService < Struct.new(
+      nil,
       :invoked_by,
       keyword_init: true
     )
@@ -299,6 +316,7 @@ module Aws::Macie2
     #   <p>The custom name of the custom data identifier.</p>
     #   @return [String]
     class BatchGetCustomDataIdentifierSummary < Struct.new(
+      nil,
       :arn,
       :created_at,
       :deleted,
@@ -314,6 +332,7 @@ module Aws::Macie2
     #   <p>An array of custom data identifier IDs, one for each custom data identifier to retrieve information about.</p>
     #   @return [Array<String>]
     class BatchGetCustomDataIdentifiersRequest < Struct.new(
+      nil,
       :ids,
       keyword_init: true
     )
@@ -327,6 +346,7 @@ module Aws::Macie2
     #   <p>An array of custom data identifier IDs, one for each custom data identifier that was specified in the request but doesn't correlate to an existing custom data identifier.</p>
     #   @return [Array<String>]
     class BatchGetCustomDataIdentifiersResponse < Struct.new(
+      nil,
       :custom_data_identifiers,
       :not_found_identifier_ids,
       keyword_init: true
@@ -338,6 +358,7 @@ module Aws::Macie2
     #   <p>An array of objects, one for each account to change the status of automated sensitive data discovery for. Each object specifies the Amazon Web Services account ID for an account and a new status for that account.</p>
     #   @return [Array<Types::AutomatedDiscoveryAccountUpdate>]
     class BatchUpdateAutomatedDiscoveryAccountsRequest < Struct.new(
+      nil,
       :accounts,
       keyword_init: true
     )
@@ -348,6 +369,7 @@ module Aws::Macie2
     #   <p>An array of objects, one for each account whose status wasn’t changed. Each object identifies the account and explains why the status of automated sensitive data discovery wasn’t changed for the account. This value is null if the request succeeded for all specified accounts.</p>
     #   @return [Array<Types::AutomatedDiscoveryAccountUpdateError>]
     class BatchUpdateAutomatedDiscoveryAccountsResponse < Struct.new(
+      nil,
       :errors,
       keyword_init: true
     )
@@ -368,6 +390,7 @@ module Aws::Macie2
     #   <p>Specifies whether Amazon S3 restricts public bucket policies for the bucket.</p>
     #   @return [Boolean]
     class BlockPublicAccess < Struct.new(
+      nil,
       :block_public_acls,
       :block_public_policy,
       :ignore_public_acls,
@@ -391,6 +414,7 @@ module Aws::Macie2
     #   <p>The total number of buckets that Amazon Macie wasn't able to evaluate permissions settings for. For example, the buckets' policies or a quota prevented Macie from retrieving the requisite data. Macie can't determine whether the buckets are publicly accessible.</p>
     #   @return [Integer]
     class BucketCountByEffectivePermission < Struct.new(
+      nil,
       :publicly_accessible,
       :publicly_readable,
       :publicly_writable,
@@ -414,6 +438,7 @@ module Aws::Macie2
     #   <p>The total number of buckets that Amazon Macie doesn't have current encryption metadata for. For example, the buckets' permissions settings or a quota prevented Macie from retrieving the default encryption settings for the buckets.</p>
     #   @return [Integer]
     class BucketCountByEncryptionType < Struct.new(
+      nil,
       :kms_managed,
       :s3_managed,
       :unencrypted,
@@ -437,6 +462,7 @@ module Aws::Macie2
     #   <p>The total number of buckets that Amazon Macie wasn't able to evaluate shared access settings for. For example, the buckets' permissions settings or a quota prevented Macie from retrieving the requisite data. Macie can't determine whether the buckets are shared with other Amazon Web Services accounts, Amazon CloudFront OAIs, or CloudFront OACs.</p>
     #   @return [Integer]
     class BucketCountBySharedAccessType < Struct.new(
+      nil,
       :external,
       :internal,
       :not_shared,
@@ -457,6 +483,7 @@ module Aws::Macie2
     #   <p>The total number of buckets that Amazon Macie wasn't able to evaluate server-side encryption requirements for. For example, the buckets' permissions settings or a quota prevented Macie from retrieving the requisite data. Macie can't determine whether bucket policies for the buckets require server-side encryption of new objects.</p>
     #   @return [Integer]
     class BucketCountPolicyAllowsUnencryptedObjectUploads < Struct.new(
+      nil,
       :allows_unencrypted_object_uploads,
       :denies_unencrypted_object_uploads,
       :unknown,
@@ -488,6 +515,7 @@ module Aws::Macie2
     #   <p>The name of the bucket begins with the specified value.</p>
     #   @return [String]
     class BucketCriteriaAdditionalProperties < Struct.new(
+      nil,
       :eq,
       :gt,
       :gte,
@@ -511,6 +539,7 @@ module Aws::Macie2
     #   <p>The permissions settings of the bucket policy for the bucket. This value is null if a bucket policy hasn't been defined for the bucket.</p>
     #   @return [Types::BucketPolicy]
     class BucketLevelPermissions < Struct.new(
+      nil,
       :access_control_list,
       :block_public_access,
       :bucket_policy,
@@ -602,6 +631,7 @@ module Aws::Macie2
     #   <p>Specifies whether versioning is enabled for the bucket.</p>
     #   @return [Boolean]
     class BucketMetadata < Struct.new(
+      nil,
       :account_id,
       :allows_unencrypted_object_uploads,
       :automated_discovery_monitoring_status,
@@ -642,6 +672,7 @@ module Aws::Macie2
     #   <p>The bucket-level permissions settings for the bucket.</p>
     #   @return [Types::BucketLevelPermissions]
     class BucketPermissionConfiguration < Struct.new(
+      nil,
       :account_level_permissions,
       :bucket_level_permissions,
       keyword_init: true
@@ -657,6 +688,7 @@ module Aws::Macie2
     #   <p>Specifies whether the bucket policy allows the general public to have write access to the bucket.</p>
     #   @return [Boolean]
     class BucketPolicy < Struct.new(
+      nil,
       :allows_public_read_access,
       :allows_public_write_access,
       keyword_init: true
@@ -672,6 +704,7 @@ module Aws::Macie2
     #   <p>The account-level and bucket-level permissions settings for the bucket.</p>
     #   @return [Types::BucketPermissionConfiguration]
     class BucketPublicAccess < Struct.new(
+      nil,
       :effective_permission,
       :permission_configuration,
       keyword_init: true
@@ -687,6 +720,7 @@ module Aws::Macie2
     #   <p>The server-side encryption algorithm that's used by default to encrypt objects that are added to the bucket. Possible values are:</p> <ul><li><p>AES256 - New objects use SSE-S3 encryption. They're encrypted with an Amazon S3 managed key.</p></li> <li><p>aws:kms - New objects use SSE-KMS encryption. They're encrypted with an KMS key (kmsMasterKeyId), either an Amazon Web Services managed key or a customer managed key.</p></li> <li><p>aws:kms:dsse - New objects use DSSE-KMS encryption. They're encrypted with an KMS key (kmsMasterKeyId), either an Amazon Web Services managed key or a customer managed key.</p></li> <li><p>NONE - The bucket's default encryption settings don't specify server-side encryption behavior for new objects.</p></li></ul>
     #   @return [String]
     class BucketServerSideEncryption < Struct.new(
+      nil,
       :kms_master_key_id,
       :type,
       keyword_init: true
@@ -702,6 +736,7 @@ module Aws::Macie2
     #   <p>The sort order to apply to the results, based on the value specified by the attributeName property. Valid values are: ASC, sort the results in ascending order; and, DESC, sort the results in descending order.</p>
     #   @return [String]
     class BucketSortCriteria < Struct.new(
+      nil,
       :attribute_name,
       :order_by,
       keyword_init: true
@@ -723,6 +758,7 @@ module Aws::Macie2
     #   <p>The aggregated statistical data for all buckets that have a sensitivity score of 51-100.</p>
     #   @return [Types::SensitivityAggregations]
     class BucketStatisticsBySensitivity < Struct.new(
+      nil,
       :classification_error,
       :not_classified,
       :not_sensitive,
@@ -746,6 +782,7 @@ module Aws::Macie2
     #   <p>The row number of the row that contains the sensitive data.</p>
     #   @return [Integer]
     class Cell < Struct.new(
+      nil,
       :cell_reference,
       :column,
       :column_name,
@@ -772,6 +809,7 @@ module Aws::Macie2
     #   <p>The status and other details of the finding.</p>
     #   @return [Types::ClassificationResult]
     class ClassificationDetails < Struct.new(
+      nil,
       :detailed_results_location,
       :job_arn,
       :job_id,
@@ -787,6 +825,7 @@ module Aws::Macie2
     #   <p>The S3 bucket to store data classification results in, and the encryption settings to use when storing results in that bucket.</p>
     #   @return [Types::S3Destination]
     class ClassificationExportConfiguration < Struct.new(
+      nil,
       :s3_destination,
       keyword_init: true
     )
@@ -813,6 +852,7 @@ module Aws::Macie2
     #   <p>The status of the finding.</p>
     #   @return [Types::ClassificationResultStatus]
     class ClassificationResult < Struct.new(
+      nil,
       :additional_occurrences,
       :custom_data_identifiers,
       :mime_type,
@@ -832,6 +872,7 @@ module Aws::Macie2
     #   <p>A brief description of the status of the finding. This value is null if the status (code) of the finding is COMPLETE.</p> <p>Amazon Macie uses this value to notify you of any errors, warnings, or considerations that might impact your analysis of the finding and the affected S3 object. Possible values are:</p> <ul><li><p>ARCHIVE_CONTAINS_UNPROCESSED_FILES - The object is an archive file and Macie extracted and analyzed only some or none of the files in the archive. To determine which files Macie analyzed, if any, refer to the corresponding sensitive data discovery result for the finding (classificationDetails.detailedResultsLocation).</p></li> <li><p>ARCHIVE_EXCEEDS_SIZE_LIMIT - The object is an archive file whose total storage size exceeds the size quota for this type of archive.</p></li> <li><p>ARCHIVE_NESTING_LEVEL_OVER_LIMIT - The object is an archive file whose nested depth exceeds the quota for the maximum number of nested levels that Macie analyzes for this type of archive.</p></li> <li><p>ARCHIVE_TOTAL_BYTES_EXTRACTED_OVER_LIMIT - The object is an archive file that exceeds the quota for the maximum amount of data that Macie extracts and analyzes for this type of archive.</p></li> <li><p>ARCHIVE_TOTAL_DOCUMENTS_PROCESSED_OVER_LIMIT - The object is an archive file that contains more than the maximum number of files that Macie extracts and analyzes for this type of archive.</p></li> <li><p>FILE_EXCEEDS_SIZE_LIMIT - The storage size of the object exceeds the size quota for this type of file.</p></li> <li><p>INVALID_ENCRYPTION - The object is encrypted using server-side encryption but Macie isn't allowed to use the key. Macie can't decrypt and analyze the object.</p></li> <li><p>INVALID_KMS_KEY - The object is encrypted with an KMS key that was disabled or is being deleted. Macie can't decrypt and analyze the object.</p></li> <li><p>INVALID_OBJECT_STATE - The object doesn't use a supported Amazon S3 storage class.</p></li> <li><p>JSON_NESTING_LEVEL_OVER_LIMIT - The object contains JSON data and the nested depth of the data exceeds the quota for the number of nested levels that Macie analyzes for this type of file.</p></li> <li><p>MALFORMED_FILE - The object is a malformed or corrupted file. An error occurred when Macie attempted to detect the file's type or extract data from the file.</p></li> <li><p>MALFORMED_OR_FILE_SIZE_EXCEEDS_LIMIT - The object is a Microsoft Office file that is malformed or exceeds the size quota for this type of file. If the file is malformed, an error occurred when Macie attempted to extract data from the file.</p></li> <li><p>NO_SUCH_BUCKET_AVAILABLE - The object was in a bucket that was deleted shortly before or when Macie attempted to analyze the object.</p></li> <li><p>OBJECT_VERSION_MISMATCH - The object was changed while Macie was analyzing it.</p></li> <li><p>OOXML_UNCOMPRESSED_RATIO_EXCEEDS_LIMIT - The object is an Office Open XML file whose compression ratio exceeds the compression quota for this type of file.</p></li> <li><p>OOXML_UNCOMPRESSED_SIZE_EXCEEDS_LIMIT - The object is an Office Open XML file that exceeds the size quota for this type of file.</p></li> <li><p>PERMISSION_DENIED - Macie isn't allowed to access the object. The object's permissions settings prevent Macie from analyzing the object.</p></li> <li><p>SOURCE_OBJECT_NO_LONGER_AVAILABLE - The object was deleted shortly before or when Macie attempted to analyze it.</p></li> <li><p>TIME_CUT_OFF_REACHED - Macie started analyzing the object but additional analysis would exceed the time quota for analyzing an object.</p></li> <li><p>UNABLE_TO_PARSE_FILE - The object is a file that contains structured data and an error occurred when Macie attempted to parse the data.</p></li> <li><p>UNSUPPORTED_FILE_TYPE_EXCEPTION - The object is a file that uses an unsupported file or storage format.</p></li></ul> <p>For information about quotas, supported storage classes, and supported file and storage formats, see <a href="https://docs.aws.amazon.com/macie/latest/user/macie-quotas.html">Quotas</a> and <a href="https://docs.aws.amazon.com/macie/latest/user/discovery-supported-storage.html">Supported storage classes and formats</a> in the <i>Amazon Macie User Guide</i>.</p>
     #   @return [String]
     class ClassificationResultStatus < Struct.new(
+      nil,
       :code,
       :reason,
       keyword_init: true
@@ -847,6 +888,7 @@ module Aws::Macie2
     #   <p>The name of the classification scope: automated-sensitive-data-discovery.</p>
     #   @return [String]
     class ClassificationScopeSummary < Struct.new(
+      nil,
       :id,
       :name,
       keyword_init: true
@@ -859,6 +901,7 @@ module Aws::Macie2
     #   <p>The explanation of the error that occurred.</p>
     #   @return [String]
     class ConflictException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -881,6 +924,7 @@ module Aws::Macie2
     #   <p>A map of key-value pairs that specifies the tags to associate with the allow list.</p> <p>An allow list can have a maximum of 50 tags. Each tag consists of a tag key and an associated tag value. The maximum length of a tag key is 128 characters. The maximum length of a tag value is 256 characters.</p>
     #   @return [Hash<String, String>]
     class CreateAllowListRequest < Struct.new(
+      nil,
       :client_token,
       :criteria,
       :description,
@@ -898,6 +942,7 @@ module Aws::Macie2
     #   <p>The unique identifier for the allow list.</p>
     #   @return [String]
     class CreateAllowListResponse < Struct.new(
+      nil,
       :arn,
       :id,
       keyword_init: true
@@ -945,6 +990,7 @@ module Aws::Macie2
     #   <p>A map of key-value pairs that specifies the tags to associate with the job.</p> <p>A job can have a maximum of 50 tags. Each tag consists of a tag key and an associated tag value. The maximum length of a tag key is 128 characters. The maximum length of a tag value is 256 characters.</p>
     #   @return [Hash<String, String>]
     class CreateClassificationJobRequest < Struct.new(
+      nil,
       :allow_list_ids,
       :client_token,
       :custom_data_identifier_ids,
@@ -970,6 +1016,7 @@ module Aws::Macie2
     #   <p>The unique identifier for the job.</p>
     #   @return [String]
     class CreateClassificationJobResponse < Struct.new(
+      nil,
       :job_arn,
       :job_id,
       keyword_init: true
@@ -1005,6 +1052,7 @@ module Aws::Macie2
     #   <p>A map of key-value pairs that specifies the tags to associate with the custom data identifier.</p> <p>A custom data identifier can have a maximum of 50 tags. Each tag consists of a tag key and an associated tag value. The maximum length of a tag key is 128 characters. The maximum length of a tag value is 256 characters.</p>
     #   @return [Hash<String, String>]
     class CreateCustomDataIdentifierRequest < Struct.new(
+      nil,
       :client_token,
       :description,
       :ignore_words,
@@ -1023,6 +1071,7 @@ module Aws::Macie2
     #   <p>The unique identifier for the custom data identifier that was created.</p>
     #   @return [String]
     class CreateCustomDataIdentifierResponse < Struct.new(
+      nil,
       :custom_data_identifier_id,
       keyword_init: true
     )
@@ -1051,6 +1100,7 @@ module Aws::Macie2
     #   <p>A map of key-value pairs that specifies the tags to associate with the filter.</p> <p>A findings filter can have a maximum of 50 tags. Each tag consists of a tag key and an associated tag value. The maximum length of a tag key is 128 characters. The maximum length of a tag value is 256 characters.</p>
     #   @return [Hash<String, String>]
     class CreateFindingsFilterRequest < Struct.new(
+      nil,
       :action,
       :client_token,
       :description,
@@ -1070,6 +1120,7 @@ module Aws::Macie2
     #   <p>The unique identifier for the filter that was created.</p>
     #   @return [String]
     class CreateFindingsFilterResponse < Struct.new(
+      nil,
       :arn,
       :id,
       keyword_init: true
@@ -1087,6 +1138,7 @@ module Aws::Macie2
     #   <p>Custom text to include in the email message that contains the invitation. The text can contain as many as 80 alphanumeric characters.</p>
     #   @return [String]
     class CreateInvitationsRequest < Struct.new(
+      nil,
       :account_ids,
       :disable_email_notification,
       :message,
@@ -1099,6 +1151,7 @@ module Aws::Macie2
     #   <p>An array of objects, one for each account whose invitation hasn't been processed. Each object identifies the account and explains why the invitation hasn't been processed for the account.</p>
     #   @return [Array<Types::UnprocessedAccount>]
     class CreateInvitationsResponse < Struct.new(
+      nil,
       :unprocessed_accounts,
       keyword_init: true
     )
@@ -1112,6 +1165,7 @@ module Aws::Macie2
     #   <p>A map of key-value pairs that specifies the tags to associate with the account in Amazon Macie.</p> <p>An account can have a maximum of 50 tags. Each tag consists of a tag key and an associated tag value. The maximum length of a tag key is 128 characters. The maximum length of a tag value is 256 characters.</p>
     #   @return [Hash<String, String>]
     class CreateMemberRequest < Struct.new(
+      nil,
       :account,
       :tags,
       keyword_init: true
@@ -1123,6 +1177,7 @@ module Aws::Macie2
     #   <p>The Amazon Resource Name (ARN) of the account that was associated with the administrator account.</p>
     #   @return [String]
     class CreateMemberResponse < Struct.new(
+      nil,
       :arn,
       keyword_init: true
     )
@@ -1133,6 +1188,7 @@ module Aws::Macie2
     #   <p>An array of finding types, one for each type of sample finding to create. To create a sample of every type of finding that Amazon Macie supports, don't include this array in your request.</p>
     #   @return [Array<String>]
     class CreateSampleFindingsRequest < Struct.new(
+      nil,
       :finding_types,
       keyword_init: true
     )
@@ -1140,6 +1196,7 @@ module Aws::Macie2
     end
 
     class CreateSampleFindingsResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1150,6 +1207,7 @@ module Aws::Macie2
     #   <p>An array of conditions, one for each condition that determines which buckets to include or exclude from the job. If you specify more than one condition, Amazon Macie uses AND logic to join the conditions.</p>
     #   @return [Array<Types::CriteriaForJob>]
     class CriteriaBlockForJob < Struct.new(
+      nil,
       :and,
       keyword_init: true
     )
@@ -1164,6 +1222,7 @@ module Aws::Macie2
     #   <p>A tag-based condition that defines an operator and tag keys, tag values, or tag key and value pairs for including or excluding buckets from the job.</p>
     #   @return [Types::TagCriterionForJob]
     class CriteriaForJob < Struct.new(
+      nil,
       :simple_criterion,
       :tag_criterion,
       keyword_init: true
@@ -1194,6 +1253,7 @@ module Aws::Macie2
     #   <p>The value for the property doesn't match (doesn't equal) the specified value. If you specify multiple values, Macie uses OR logic to join the values.</p>
     #   @return [Array<String>]
     class CriterionAdditionalProperties < Struct.new(
+      nil,
       :eq,
       :eq_exact_match,
       :gt,
@@ -1223,6 +1283,7 @@ module Aws::Macie2
     #   <p>The custom name of the custom data identifier.</p>
     #   @return [String]
     class CustomDataIdentifierSummary < Struct.new(
+      nil,
       :arn,
       :created_at,
       :description,
@@ -1241,6 +1302,7 @@ module Aws::Macie2
     #   <p>The total number of occurrences of the data that was detected by the custom data identifiers and produced the finding.</p>
     #   @return [Integer]
     class CustomDataIdentifiers < Struct.new(
+      nil,
       :detections,
       :total_count,
       keyword_init: true
@@ -1262,6 +1324,7 @@ module Aws::Macie2
     #   <p>The location of 1-15 occurrences of the sensitive data that the custom data identifier detected. A finding includes location data for a maximum of 15 occurrences of sensitive data.</p>
     #   @return [Types::Occurrences]
     class CustomDetection < Struct.new(
+      nil,
       :arn,
       :count,
       :name,
@@ -1273,6 +1336,7 @@ module Aws::Macie2
 
     # <p>Specifies that a classification job runs once a day, every day. This is an empty object.</p>
     class DailySchedule < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1282,6 +1346,7 @@ module Aws::Macie2
     #   <p>An array that lists Amazon Web Services account IDs, one for each account that sent an invitation to decline.</p>
     #   @return [Array<String>]
     class DeclineInvitationsRequest < Struct.new(
+      nil,
       :account_ids,
       keyword_init: true
     )
@@ -1292,6 +1357,7 @@ module Aws::Macie2
     #   <p>An array of objects, one for each account whose invitation hasn't been declined. Each object identifies the account and explains why the request hasn't been processed for that account.</p>
     #   @return [Array<Types::UnprocessedAccount>]
     class DeclineInvitationsResponse < Struct.new(
+      nil,
       :unprocessed_accounts,
       keyword_init: true
     )
@@ -1309,6 +1375,7 @@ module Aws::Macie2
     #   <p>The type of sensitive data that was detected. For example, AWS_CREDENTIALS, PHONE_NUMBER, or ADDRESS.</p>
     #   @return [String]
     class DefaultDetection < Struct.new(
+      nil,
       :count,
       :occurrences,
       :type,
@@ -1324,6 +1391,7 @@ module Aws::Macie2
     #   <p>Specifies whether to force deletion of the allow list, even if active classification jobs are configured to use the list.</p> <p>When you try to delete an allow list, Amazon Macie checks for classification jobs that use the list and have a status other than COMPLETE or CANCELLED. By default, Macie rejects your request if any jobs meet these criteria. To skip these checks and delete the list, set this value to true. To delete the list only if no active jobs are configured to use it, set this value to false.</p>
     #   @return [String]
     class DeleteAllowListRequest < Struct.new(
+      nil,
       :id,
       :ignore_job_checks,
       keyword_init: true
@@ -1332,6 +1400,7 @@ module Aws::Macie2
     end
 
     class DeleteAllowListResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1341,6 +1410,7 @@ module Aws::Macie2
     #   <p>The unique identifier for the Amazon Macie resource that the request applies to.</p>
     #   @return [String]
     class DeleteCustomDataIdentifierRequest < Struct.new(
+      nil,
       :id,
       keyword_init: true
     )
@@ -1348,6 +1418,7 @@ module Aws::Macie2
     end
 
     class DeleteCustomDataIdentifierResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1357,6 +1428,7 @@ module Aws::Macie2
     #   <p>The unique identifier for the Amazon Macie resource that the request applies to.</p>
     #   @return [String]
     class DeleteFindingsFilterRequest < Struct.new(
+      nil,
       :id,
       keyword_init: true
     )
@@ -1364,6 +1436,7 @@ module Aws::Macie2
     end
 
     class DeleteFindingsFilterResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1373,6 +1446,7 @@ module Aws::Macie2
     #   <p>An array that lists Amazon Web Services account IDs, one for each account that sent an invitation to delete.</p>
     #   @return [Array<String>]
     class DeleteInvitationsRequest < Struct.new(
+      nil,
       :account_ids,
       keyword_init: true
     )
@@ -1383,6 +1457,7 @@ module Aws::Macie2
     #   <p>An array of objects, one for each account whose invitation hasn't been deleted. Each object identifies the account and explains why the request hasn't been processed for that account.</p>
     #   @return [Array<Types::UnprocessedAccount>]
     class DeleteInvitationsResponse < Struct.new(
+      nil,
       :unprocessed_accounts,
       keyword_init: true
     )
@@ -1393,6 +1468,7 @@ module Aws::Macie2
     #   <p>The unique identifier for the Amazon Macie resource that the request applies to.</p>
     #   @return [String]
     class DeleteMemberRequest < Struct.new(
+      nil,
       :id,
       keyword_init: true
     )
@@ -1400,6 +1476,7 @@ module Aws::Macie2
     end
 
     class DeleteMemberResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1418,6 +1495,7 @@ module Aws::Macie2
     #   <p>The criteria to use to sort the query results.</p>
     #   @return [Types::BucketSortCriteria]
     class DescribeBucketsRequest < Struct.new(
+      nil,
       :criteria,
       :max_results,
       :next_token,
@@ -1434,6 +1512,7 @@ module Aws::Macie2
     #   <p>The string to use in a subsequent request to get the next page of results in a paginated response. This value is null if there are no additional pages.</p>
     #   @return [String]
     class DescribeBucketsResponse < Struct.new(
+      nil,
       :buckets,
       :next_token,
       keyword_init: true
@@ -1445,6 +1524,7 @@ module Aws::Macie2
     #   <p>The unique identifier for the classification job.</p>
     #   @return [String]
     class DescribeClassificationJobRequest < Struct.new(
+      nil,
       :job_id,
       keyword_init: true
     )
@@ -1515,6 +1595,7 @@ module Aws::Macie2
     #   <p>If the current status of the job is USER_PAUSED, specifies when the job was paused and when the job or job run will expire and be cancelled if it isn't resumed. This value is present only if the value for jobStatus is USER_PAUSED.</p>
     #   @return [Types::UserPausedDetails]
     class DescribeClassificationJobResponse < Struct.new(
+      nil,
       :allow_list_ids,
       :client_token,
       :created_at,
@@ -1542,6 +1623,7 @@ module Aws::Macie2
     end
 
     class DescribeOrganizationConfigurationRequest < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1554,6 +1636,7 @@ module Aws::Macie2
     #   <p>Specifies whether the maximum number of Amazon Macie member accounts are part of the organization.</p>
     #   @return [Boolean]
     class DescribeOrganizationConfigurationResponse < Struct.new(
+      nil,
       :auto_enable,
       :max_account_limit_reached,
       keyword_init: true
@@ -1566,6 +1649,7 @@ module Aws::Macie2
     #   <p>An occurrence of the specified type of sensitive data. Each occurrence contains 1-128 characters.</p>
     #   @return [String]
     class DetectedDataDetails < Struct.new(
+      nil,
       :value,
       keyword_init: true
     )
@@ -1592,6 +1676,7 @@ module Aws::Macie2
     #   <p>The type of data identifier that detected the sensitive data. Possible values are: CUSTOM, for a custom data identifier; and, MANAGED, for a managed data identifier.</p>
     #   @return [String]
     class Detection < Struct.new(
+      nil,
       :arn,
       :count,
       :id,
@@ -1604,12 +1689,14 @@ module Aws::Macie2
     end
 
     class DisableMacieRequest < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
     end
 
     class DisableMacieResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1619,6 +1706,7 @@ module Aws::Macie2
     #   <p>The Amazon Web Services account ID of the delegated Amazon Macie administrator account.</p>
     #   @return [String]
     class DisableOrganizationAdminAccountRequest < Struct.new(
+      nil,
       :admin_account_id,
       keyword_init: true
     )
@@ -1626,30 +1714,35 @@ module Aws::Macie2
     end
 
     class DisableOrganizationAdminAccountResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
     end
 
     class DisassociateFromAdministratorAccountRequest < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
     end
 
     class DisassociateFromAdministratorAccountResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
     end
 
     class DisassociateFromMasterAccountRequest < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
     end
 
     class DisassociateFromMasterAccountResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1659,6 +1752,7 @@ module Aws::Macie2
     #   <p>The unique identifier for the Amazon Macie resource that the request applies to.</p>
     #   @return [String]
     class DisassociateMemberRequest < Struct.new(
+      nil,
       :id,
       keyword_init: true
     )
@@ -1666,6 +1760,7 @@ module Aws::Macie2
     end
 
     class DisassociateMemberResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1676,6 +1771,7 @@ module Aws::Macie2
     #   <p>The name of the domain.</p>
     #   @return [String]
     class DomainDetails < Struct.new(
+      nil,
       :domain_name,
       keyword_init: true
     )
@@ -1692,6 +1788,7 @@ module Aws::Macie2
     #   <p>Specifies the new status for the account. To enable Amazon Macie and start all Macie activities for the account, set this value to ENABLED.</p>
     #   @return [String]
     class EnableMacieRequest < Struct.new(
+      nil,
       :client_token,
       :finding_publishing_frequency,
       :status,
@@ -1701,6 +1798,7 @@ module Aws::Macie2
     end
 
     class EnableMacieResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1713,6 +1811,7 @@ module Aws::Macie2
     #   <p>A unique, case-sensitive token that you provide to ensure the idempotency of the request.</p>
     #   @return [String]
     class EnableOrganizationAdminAccountRequest < Struct.new(
+      nil,
       :admin_account_id,
       :client_token,
       keyword_init: true
@@ -1721,6 +1820,7 @@ module Aws::Macie2
     end
 
     class EnableOrganizationAdminAccountResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1743,6 +1843,7 @@ module Aws::Macie2
     #   <p>The details of the session that was created for the credentials, including the entity that issued the session.</p>
     #   @return [Types::SessionContext]
     class FederatedUser < Struct.new(
+      nil,
       :access_key_id,
       :account_id,
       :arn,
@@ -1809,6 +1910,7 @@ module Aws::Macie2
     #   <p>The date and time, in UTC and extended ISO 8601 format, when Amazon Macie last updated the finding. For sensitive data findings, this value is the same as the value for the createdAt property. All sensitive data findings are considered new.</p>
     #   @return [Time]
     class Finding < Struct.new(
+      nil,
       :account_id,
       :archived,
       :category,
@@ -1840,6 +1942,7 @@ module Aws::Macie2
     #   <p>The invocation details of the API operation that an entity invoked for the affected resource, if the value for the actionType property is AWS_API_CALL.</p>
     #   @return [Types::ApiCallDetails]
     class FindingAction < Struct.new(
+      nil,
       :action_type,
       :api_call_details,
       keyword_init: true
@@ -1858,6 +1961,7 @@ module Aws::Macie2
     #   <p>The type and other characteristics of the entity that performed the action on the affected resource. This value is null if the action was performed by an anonymous (unauthenticated) entity.</p>
     #   @return [Types::UserIdentity]
     class FindingActor < Struct.new(
+      nil,
       :domain_details,
       :ip_address_details,
       :user_identity,
@@ -1871,6 +1975,7 @@ module Aws::Macie2
     #   <p>A condition that specifies the property, operator, and one or more values to use to filter the results.</p>
     #   @return [Hash<String, Types::CriterionAdditionalProperties>]
     class FindingCriteria < Struct.new(
+      nil,
       :criterion,
       keyword_init: true
     )
@@ -1885,6 +1990,7 @@ module Aws::Macie2
     #   <p>The sort order to apply to the results, based on the value for the property specified by the attributeName property. Valid values are: ASC, sort the results in ascending order; and, DESC, sort the results in descending order.</p>
     #   @return [String]
     class FindingStatisticsSortCriteria < Struct.new(
+      nil,
       :attribute_name,
       :order_by,
       keyword_init: true
@@ -1909,6 +2015,7 @@ module Aws::Macie2
     #   <p>A map of key-value pairs that specifies which tags (keys and values) are associated with the filter.</p>
     #   @return [Hash<String, String>]
     class FindingsFilterListItem < Struct.new(
+      nil,
       :action,
       :arn,
       :id,
@@ -1920,6 +2027,7 @@ module Aws::Macie2
     end
 
     class GetAdministratorAccountRequest < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1929,6 +2037,7 @@ module Aws::Macie2
     #   <p>The Amazon Web Services account ID for the administrator account. If the accounts are associated by an Amazon Macie membership invitation, this object also provides details about the invitation that was sent to establish the relationship between the accounts.</p>
     #   @return [Types::Invitation]
     class GetAdministratorAccountResponse < Struct.new(
+      nil,
       :administrator,
       keyword_init: true
     )
@@ -1939,6 +2048,7 @@ module Aws::Macie2
     #   <p>The unique identifier for the Amazon Macie resource that the request applies to.</p>
     #   @return [String]
     class GetAllowListRequest < Struct.new(
+      nil,
       :id,
       keyword_init: true
     )
@@ -1973,6 +2083,7 @@ module Aws::Macie2
     #   <p>The date and time, in UTC and extended ISO 8601 format, when the allow list's settings were most recently changed in Amazon Macie.</p>
     #   @return [Time]
     class GetAllowListResponse < Struct.new(
+      nil,
       :arn,
       :created_at,
       :criteria,
@@ -1988,6 +2099,7 @@ module Aws::Macie2
     end
 
     class GetAutomatedDiscoveryConfigurationRequest < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -2015,6 +2127,7 @@ module Aws::Macie2
     #   <p>The current status of automated sensitive data discovery for the organization or account. Possible values are: ENABLED, use the specified settings to perform automated sensitive data discovery activities; and, DISABLED, don't perform automated sensitive data discovery activities.</p>
     #   @return [String]
     class GetAutomatedDiscoveryConfigurationResponse < Struct.new(
+      nil,
       :auto_enable_organization_members,
       :classification_scope_id,
       :disabled_at,
@@ -2031,6 +2144,7 @@ module Aws::Macie2
     #   <p>The unique identifier for the Amazon Web Services account.</p>
     #   @return [String]
     class GetBucketStatisticsRequest < Struct.new(
+      nil,
       :account_id,
       keyword_init: true
     )
@@ -2080,6 +2194,7 @@ module Aws::Macie2
     #   <p>The total storage size, in bytes, of the objects that Amazon Macie can't analyze in the buckets. These objects don't use a supported storage class or don't have a file name extension for a supported file or storage format.</p>
     #   @return [Types::ObjectLevelStatistics]
     class GetBucketStatisticsResponse < Struct.new(
+      nil,
       :bucket_count,
       :bucket_count_by_effective_permission,
       :bucket_count_by_encryption_type,
@@ -2100,6 +2215,7 @@ module Aws::Macie2
     end
 
     class GetClassificationExportConfigurationRequest < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -2109,6 +2225,7 @@ module Aws::Macie2
     #   <p>The location where data classification results are stored, and the encryption settings that are used when storing results in that location.</p>
     #   @return [Types::ClassificationExportConfiguration]
     class GetClassificationExportConfigurationResponse < Struct.new(
+      nil,
       :configuration,
       keyword_init: true
     )
@@ -2119,6 +2236,7 @@ module Aws::Macie2
     #   <p>The unique identifier for the Amazon Macie resource that the request applies to.</p>
     #   @return [String]
     class GetClassificationScopeRequest < Struct.new(
+      nil,
       :id,
       keyword_init: true
     )
@@ -2135,6 +2253,7 @@ module Aws::Macie2
     #   <p>The S3 buckets that are excluded from automated sensitive data discovery.</p>
     #   @return [Types::S3ClassificationScope]
     class GetClassificationScopeResponse < Struct.new(
+      nil,
       :id,
       :name,
       :s3,
@@ -2147,6 +2266,7 @@ module Aws::Macie2
     #   <p>The unique identifier for the Amazon Macie resource that the request applies to.</p>
     #   @return [String]
     class GetCustomDataIdentifierRequest < Struct.new(
+      nil,
       :id,
       keyword_init: true
     )
@@ -2190,6 +2310,7 @@ module Aws::Macie2
     #   <p>A map of key-value pairs that identifies the tags (keys and values) that are associated with the custom data identifier.</p>
     #   @return [Hash<String, String>]
     class GetCustomDataIdentifierResponse < Struct.new(
+      nil,
       :arn,
       :created_at,
       :deleted,
@@ -2220,6 +2341,7 @@ module Aws::Macie2
     #   <p>The criteria to use to sort the query results.</p>
     #   @return [Types::FindingStatisticsSortCriteria]
     class GetFindingStatisticsRequest < Struct.new(
+      nil,
       :finding_criteria,
       :group_by,
       :size,
@@ -2233,6 +2355,7 @@ module Aws::Macie2
     #   <p>An array of objects, one for each group of findings that matches the filter criteria specified in the request.</p>
     #   @return [Array<Types::GroupCount>]
     class GetFindingStatisticsResponse < Struct.new(
+      nil,
       :counts_by_group,
       keyword_init: true
     )
@@ -2243,6 +2366,7 @@ module Aws::Macie2
     #   <p>The unique identifier for the Amazon Macie resource that the request applies to.</p>
     #   @return [String]
     class GetFindingsFilterRequest < Struct.new(
+      nil,
       :id,
       keyword_init: true
     )
@@ -2274,6 +2398,7 @@ module Aws::Macie2
     #   <p>A map of key-value pairs that specifies which tags (keys and values) are associated with the filter.</p>
     #   @return [Hash<String, String>]
     class GetFindingsFilterResponse < Struct.new(
+      nil,
       :action,
       :arn,
       :description,
@@ -2288,6 +2413,7 @@ module Aws::Macie2
     end
 
     class GetFindingsPublicationConfigurationRequest < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -2297,6 +2423,7 @@ module Aws::Macie2
     #   <p>The configuration settings that determine which findings are published to Security Hub.</p>
     #   @return [Types::SecurityHubConfiguration]
     class GetFindingsPublicationConfigurationResponse < Struct.new(
+      nil,
       :security_hub_configuration,
       keyword_init: true
     )
@@ -2310,6 +2437,7 @@ module Aws::Macie2
     #   <p>The criteria for sorting the results of the request.</p>
     #   @return [Types::SortCriteria]
     class GetFindingsRequest < Struct.new(
+      nil,
       :finding_ids,
       :sort_criteria,
       keyword_init: true
@@ -2321,6 +2449,7 @@ module Aws::Macie2
     #   <p>An array of objects, one for each finding that matches the criteria specified in the request.</p>
     #   @return [Array<Types::Finding>]
     class GetFindingsResponse < Struct.new(
+      nil,
       :findings,
       keyword_init: true
     )
@@ -2328,6 +2457,7 @@ module Aws::Macie2
     end
 
     class GetInvitationsCountRequest < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -2337,6 +2467,7 @@ module Aws::Macie2
     #   <p>The total number of invitations that were received by the account, not including the currently accepted invitation.</p>
     #   @return [Integer]
     class GetInvitationsCountResponse < Struct.new(
+      nil,
       :invitations_count,
       keyword_init: true
     )
@@ -2344,6 +2475,7 @@ module Aws::Macie2
     end
 
     class GetMacieSessionRequest < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -2365,6 +2497,7 @@ module Aws::Macie2
     #   <p>The date and time, in UTC and extended ISO 8601 format, of the most recent change to the status or configuration settings for the Amazon Macie account.</p>
     #   @return [Time]
     class GetMacieSessionResponse < Struct.new(
+      nil,
       :created_at,
       :finding_publishing_frequency,
       :service_role,
@@ -2376,6 +2509,7 @@ module Aws::Macie2
     end
 
     class GetMasterAccountRequest < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -2385,6 +2519,7 @@ module Aws::Macie2
     #   <p>(Deprecated) The Amazon Web Services account ID for the administrator account. If the accounts are associated by a Macie membership invitation, this object also provides details about the invitation that was sent to establish the relationship between the accounts.</p>
     #   @return [Types::Invitation]
     class GetMasterAccountResponse < Struct.new(
+      nil,
       :master,
       keyword_init: true
     )
@@ -2395,6 +2530,7 @@ module Aws::Macie2
     #   <p>The unique identifier for the Amazon Macie resource that the request applies to.</p>
     #   @return [String]
     class GetMemberRequest < Struct.new(
+      nil,
       :id,
       keyword_init: true
     )
@@ -2429,6 +2565,7 @@ module Aws::Macie2
     #   <p>The date and time, in UTC and extended ISO 8601 format, of the most recent change to the status of the relationship between the account and the administrator account.</p>
     #   @return [Time]
     class GetMemberResponse < Struct.new(
+      nil,
       :account_id,
       :administrator_account_id,
       :arn,
@@ -2447,6 +2584,7 @@ module Aws::Macie2
     #   <p>The Amazon Resource Name (ARN) of the S3 bucket that the request applies to.</p>
     #   @return [String]
     class GetResourceProfileRequest < Struct.new(
+      nil,
       :resource_arn,
       keyword_init: true
     )
@@ -2466,6 +2604,7 @@ module Aws::Macie2
     #   <p>The sensitive data discovery statistics for the bucket. The statistics capture the results of automated sensitive data discovery activities that Amazon Macie has performed for the bucket.</p>
     #   @return [Types::ResourceStatistics]
     class GetResourceProfileResponse < Struct.new(
+      nil,
       :profile_updated_at,
       :sensitivity_score,
       :sensitivity_score_overridden,
@@ -2476,6 +2615,7 @@ module Aws::Macie2
     end
 
     class GetRevealConfigurationRequest < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -2488,6 +2628,7 @@ module Aws::Macie2
     #   <p>The access method and settings that are used to retrieve the sensitive data.</p>
     #   @return [Types::RetrievalConfiguration]
     class GetRevealConfigurationResponse < Struct.new(
+      nil,
       :configuration,
       :retrieval_configuration,
       keyword_init: true
@@ -2499,6 +2640,7 @@ module Aws::Macie2
     #   <p>The unique identifier for the finding.</p>
     #   @return [String]
     class GetSensitiveDataOccurrencesAvailabilityRequest < Struct.new(
+      nil,
       :finding_id,
       keyword_init: true
     )
@@ -2512,6 +2654,7 @@ module Aws::Macie2
     #   <p>Specifies why occurrences of sensitive data can't be retrieved for the finding. Possible values are:</p> <ul><li><p>ACCOUNT_NOT_IN_ORGANIZATION - The affected account isn't currently part of your organization. Or the account is part of your organization but Macie isn't currently enabled for the account. You're not allowed to access the affected S3 object by using Macie.</p></li> <li><p>INVALID_CLASSIFICATION_RESULT - There isn't a corresponding sensitive data discovery result for the finding. Or the corresponding sensitive data discovery result isn't available in the current Amazon Web Services Region, is malformed or corrupted, or uses an unsupported storage format. Macie can't verify the location of the sensitive data to retrieve.</p></li> <li><p>INVALID_RESULT_SIGNATURE - The corresponding sensitive data discovery result is stored in an S3 object that wasn't signed by Macie. Macie can't verify the integrity and authenticity of the sensitive data discovery result. Therefore, Macie can't verify the location of the sensitive data to retrieve.</p></li> <li><p>MEMBER_ROLE_TOO_PERMISSIVE - The trust or permissions policy for the IAM role in the affected member account doesn't meet Macie requirements for restricting access to the role. Or the role's trust policy doesn't specify the correct external ID for your organization. Macie can't assume the role to retrieve the sensitive data.</p></li> <li><p>MISSING_GET_MEMBER_PERMISSION - You're not allowed to retrieve information about the association between your account and the affected account. Macie can't determine whether you’re allowed to access the affected S3 object as the delegated Macie administrator for the affected account.</p></li> <li><p>OBJECT_EXCEEDS_SIZE_QUOTA - The storage size of the affected S3 object exceeds the size quota for retrieving occurrences of sensitive data from this type of file.</p></li> <li><p>OBJECT_UNAVAILABLE - The affected S3 object isn't available. The object was renamed, moved, deleted, or changed after Macie created the finding. Or the object is encrypted with an KMS key that isn’t available. For example, the key is disabled, is scheduled for deletion, or was deleted.</p></li> <li><p>RESULT_NOT_SIGNED - The corresponding sensitive data discovery result is stored in an S3 object that hasn't been signed. Macie can't verify the integrity and authenticity of the sensitive data discovery result. Therefore, Macie can't verify the location of the sensitive data to retrieve.</p></li> <li><p>ROLE_TOO_PERMISSIVE - Your account is configured to retrieve occurrences of sensitive data by using an IAM role whose trust or permissions policy doesn't meet Macie requirements for restricting access to the role. Macie can’t assume the role to retrieve the sensitive data.</p></li> <li><p>UNSUPPORTED_FINDING_TYPE - The specified finding isn't a sensitive data finding.</p></li> <li><p>UNSUPPORTED_OBJECT_TYPE - The affected S3 object uses a file or storage format that Macie doesn't support for retrieving occurrences of sensitive data.</p></li></ul> <p>This value is null if sensitive data can be retrieved for the finding.</p>
     #   @return [Array<String>]
     class GetSensitiveDataOccurrencesAvailabilityResponse < Struct.new(
+      nil,
       :code,
       :reasons,
       keyword_init: true
@@ -2523,6 +2666,7 @@ module Aws::Macie2
     #   <p>The unique identifier for the finding.</p>
     #   @return [String]
     class GetSensitiveDataOccurrencesRequest < Struct.new(
+      nil,
       :finding_id,
       keyword_init: true
     )
@@ -2539,6 +2683,7 @@ module Aws::Macie2
     #   <p>The status of the request to retrieve occurrences of sensitive data reported by the finding. Possible values are:</p> <ul><li><p>ERROR - An error occurred when Amazon Macie attempted to locate, retrieve, or encrypt the sensitive data. The error value indicates the nature of the error that occurred.</p></li> <li><p>PROCESSING - Macie is processing the request.</p></li> <li><p>SUCCESS - Macie successfully located, retrieved, and encrypted the sensitive data.</p></li></ul>
     #   @return [String]
     class GetSensitiveDataOccurrencesResponse < Struct.new(
+      nil,
       :error,
       :sensitive_data_occurrences,
       :status,
@@ -2551,6 +2696,7 @@ module Aws::Macie2
     #   <p>The unique identifier for the Amazon Macie resource that the request applies to.</p>
     #   @return [String]
     class GetSensitivityInspectionTemplateRequest < Struct.new(
+      nil,
       :id,
       keyword_init: true
     )
@@ -2573,6 +2719,7 @@ module Aws::Macie2
     #   <p>The unique identifier for the template.</p>
     #   @return [String]
     class GetSensitivityInspectionTemplateResponse < Struct.new(
+      nil,
       :description,
       :excludes,
       :includes,
@@ -2599,6 +2746,7 @@ module Aws::Macie2
     #   <p>The inclusive time period to query usage data for. Valid values are: MONTH_TO_DATE, for the current calendar month to date; and, PAST_30_DAYS, for the preceding 30 days. If you don't specify a value, Amazon Macie provides usage data for the preceding 30 days.</p>
     #   @return [String]
     class GetUsageStatisticsRequest < Struct.new(
+      nil,
       :filter_by,
       :max_results,
       :next_token,
@@ -2619,6 +2767,7 @@ module Aws::Macie2
     #   <p>The inclusive time period that the usage data applies to. Possible values are: MONTH_TO_DATE, for the current calendar month to date; and, PAST_30_DAYS, for the preceding 30 days.</p>
     #   @return [String]
     class GetUsageStatisticsResponse < Struct.new(
+      nil,
       :next_token,
       :records,
       :time_range,
@@ -2631,6 +2780,7 @@ module Aws::Macie2
     #   <p>The inclusive time period to retrieve the data for. Valid values are: MONTH_TO_DATE, for the current calendar month to date; and, PAST_30_DAYS, for the preceding 30 days. If you don't specify a value for this parameter, Amazon Macie provides aggregated usage data for the preceding 30 days.</p>
     #   @return [String]
     class GetUsageTotalsRequest < Struct.new(
+      nil,
       :time_range,
       keyword_init: true
     )
@@ -2644,6 +2794,7 @@ module Aws::Macie2
     #   <p>An array of objects that contains the results of the query. Each object contains the data for a specific usage metric.</p>
     #   @return [Array<Types::UsageTotal>]
     class GetUsageTotalsResponse < Struct.new(
+      nil,
       :time_range,
       :usage_totals,
       keyword_init: true
@@ -2659,6 +2810,7 @@ module Aws::Macie2
     #   <p>The name of the property that defines the group in the query results, as specified by the groupBy property in the query request.</p>
     #   @return [String]
     class GroupCount < Struct.new(
+      nil,
       :count,
       :group_key,
       keyword_init: true
@@ -2680,6 +2832,7 @@ module Aws::Macie2
     #   <p>The username of the IAM user who performed the action.</p>
     #   @return [String]
     class IamUser < Struct.new(
+      nil,
       :account_id,
       :arn,
       :principal_id,
@@ -2694,6 +2847,7 @@ module Aws::Macie2
     #   <p>The explanation of the error that occurred.</p>
     #   @return [String]
     class InternalServerException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -2714,6 +2868,7 @@ module Aws::Macie2
     #   <p>The status of the relationship between the account that sent the invitation and the account that received the invitation.</p>
     #   @return [String]
     class Invitation < Struct.new(
+      nil,
       :account_id,
       :invitation_id,
       :invited_at,
@@ -2740,6 +2895,7 @@ module Aws::Macie2
     #   <p>The registered owner of the IP address.</p>
     #   @return [Types::IpOwner]
     class IpAddressDetails < Struct.new(
+      nil,
       :ip_address_v4,
       :ip_city,
       :ip_country,
@@ -2755,6 +2911,7 @@ module Aws::Macie2
     #   <p>The name of the city.</p>
     #   @return [String]
     class IpCity < Struct.new(
+      nil,
       :name,
       keyword_init: true
     )
@@ -2769,6 +2926,7 @@ module Aws::Macie2
     #   <p>The name of the country that the IP address originated from.</p>
     #   @return [String]
     class IpCountry < Struct.new(
+      nil,
       :code,
       :name,
       keyword_init: true
@@ -2784,6 +2942,7 @@ module Aws::Macie2
     #   <p>The longitude coordinate of the location, rounded to four decimal places.</p>
     #   @return [Float]
     class IpGeoLocation < Struct.new(
+      nil,
       :lat,
       :lon,
       keyword_init: true
@@ -2805,6 +2964,7 @@ module Aws::Macie2
     #   <p>The name of the organization that owned the IP address.</p>
     #   @return [String]
     class IpOwner < Struct.new(
+      nil,
       :asn,
       :asn_org,
       :isp,
@@ -2828,6 +2988,7 @@ module Aws::Macie2
     #   <p>The date and time, in UTC and extended ISO 8601 format, when the job (lastJobId) started. If the job is a recurring job, this value indicates when the most recent run started.</p> <p>This value is typically null if the value for the isDefinedInJob property is FALSE or UNKNOWN.</p>
     #   @return [Time]
     class JobDetails < Struct.new(
+      nil,
       :is_defined_in_job,
       :is_monitored_by_job,
       :last_job_id,
@@ -2848,6 +3009,7 @@ module Aws::Macie2
     #   <p>Specifies a weekly recurrence pattern for running the job.</p>
     #   @return [Types::WeeklySchedule]
     class JobScheduleFrequency < Struct.new(
+      nil,
       :daily_schedule,
       :monthly_schedule,
       :weekly_schedule,
@@ -2864,6 +3026,7 @@ module Aws::Macie2
     #   <p>A tag-based condition that defines the operator and tag keys or tag key and value pairs for including or excluding objects from the job.</p>
     #   @return [Types::TagScopeTerm]
     class JobScopeTerm < Struct.new(
+      nil,
       :simple_scope_term,
       :tag_scope_term,
       keyword_init: true
@@ -2876,6 +3039,7 @@ module Aws::Macie2
     #   <p>An array of conditions, one for each property- or tag-based condition that determines which objects to include or exclude from the job. If you specify more than one condition, Amazon Macie uses AND logic to join the conditions.</p>
     #   @return [Array<Types::JobScopeTerm>]
     class JobScopingBlock < Struct.new(
+      nil,
       :and,
       keyword_init: true
     )
@@ -2911,6 +3075,7 @@ module Aws::Macie2
     #   <p>If the current status of the job is USER_PAUSED, specifies when the job was paused and when the job or job run will expire and be cancelled if it isn't resumed. This value is present only if the value for jobStatus is USER_PAUSED.</p>
     #   @return [Types::UserPausedDetails]
     class JobSummary < Struct.new(
+      nil,
       :bucket_criteria,
       :bucket_definitions,
       :created_at,
@@ -2933,6 +3098,7 @@ module Aws::Macie2
     #   <p>One part of a key-value pair that comprises a tag. A tag value acts as a descriptor for a tag key. A tag value can be an empty string.</p>
     #   @return [String]
     class KeyValuePair < Struct.new(
+      nil,
       :key,
       :value,
       keyword_init: true
@@ -2945,6 +3111,7 @@ module Aws::Macie2
     #   <p>Specifies whether any account- or bucket-level access errors occurred when the job ran. For a recurring job, this value indicates the error status of the job's most recent run. Possible values are:</p> <ul><li><p>ERROR - One or more errors occurred. Amazon Macie didn't process all the data specified for the job.</p></li> <li><p>NONE - No errors occurred. Macie processed all the data specified for the job.</p></li></ul>
     #   @return [String]
     class LastRunErrorStatus < Struct.new(
+      nil,
       :code,
       keyword_init: true
     )
@@ -2958,6 +3125,7 @@ module Aws::Macie2
     #   <p>The nextToken string that specifies which page of results to return in a paginated response.</p>
     #   @return [String]
     class ListAllowListsRequest < Struct.new(
+      nil,
       :max_results,
       :next_token,
       keyword_init: true
@@ -2972,6 +3140,7 @@ module Aws::Macie2
     #   <p>The string to use in a subsequent request to get the next page of results in a paginated response. This value is null if there are no additional pages.</p>
     #   @return [String]
     class ListAllowListsResponse < Struct.new(
+      nil,
       :allow_lists,
       :next_token,
       keyword_init: true
@@ -2989,6 +3158,7 @@ module Aws::Macie2
     #   <p>The nextToken string that specifies which page of results to return in a paginated response.</p>
     #   @return [String]
     class ListAutomatedDiscoveryAccountsRequest < Struct.new(
+      nil,
       :account_ids,
       :max_results,
       :next_token,
@@ -3004,6 +3174,7 @@ module Aws::Macie2
     #   <p>The string to use in a subsequent request to get the next page of results in a paginated response. This value is null if there are no additional pages.</p>
     #   @return [String]
     class ListAutomatedDiscoveryAccountsResponse < Struct.new(
+      nil,
       :items,
       :next_token,
       keyword_init: true
@@ -3024,6 +3195,7 @@ module Aws::Macie2
     #   <p>The criteria to use to sort the results.</p>
     #   @return [Types::ListJobsSortCriteria]
     class ListClassificationJobsRequest < Struct.new(
+      nil,
       :filter_criteria,
       :max_results,
       :next_token,
@@ -3040,6 +3212,7 @@ module Aws::Macie2
     #   <p>The string to use in a subsequent request to get the next page of results in a paginated response. This value is null if there are no additional pages.</p>
     #   @return [String]
     class ListClassificationJobsResponse < Struct.new(
+      nil,
       :items,
       :next_token,
       keyword_init: true
@@ -3054,6 +3227,7 @@ module Aws::Macie2
     #   <p>The nextToken string that specifies which page of results to return in a paginated response.</p>
     #   @return [String]
     class ListClassificationScopesRequest < Struct.new(
+      nil,
       :name,
       :next_token,
       keyword_init: true
@@ -3068,6 +3242,7 @@ module Aws::Macie2
     #   <p>The string to use in a subsequent request to get the next page of results in a paginated response. This value is null if there are no additional pages.</p>
     #   @return [String]
     class ListClassificationScopesResponse < Struct.new(
+      nil,
       :classification_scopes,
       :next_token,
       keyword_init: true
@@ -3082,6 +3257,7 @@ module Aws::Macie2
     #   <p>The nextToken string that specifies which page of results to return in a paginated response.</p>
     #   @return [String]
     class ListCustomDataIdentifiersRequest < Struct.new(
+      nil,
       :max_results,
       :next_token,
       keyword_init: true
@@ -3096,6 +3272,7 @@ module Aws::Macie2
     #   <p>The string to use in a subsequent request to get the next page of results in a paginated response. This value is null if there are no additional pages.</p>
     #   @return [String]
     class ListCustomDataIdentifiersResponse < Struct.new(
+      nil,
       :items,
       :next_token,
       keyword_init: true
@@ -3110,6 +3287,7 @@ module Aws::Macie2
     #   <p>The nextToken string that specifies which page of results to return in a paginated response.</p>
     #   @return [String]
     class ListFindingsFiltersRequest < Struct.new(
+      nil,
       :max_results,
       :next_token,
       keyword_init: true
@@ -3124,6 +3302,7 @@ module Aws::Macie2
     #   <p>The string to use in a subsequent request to get the next page of results in a paginated response. This value is null if there are no additional pages.</p>
     #   @return [String]
     class ListFindingsFiltersResponse < Struct.new(
+      nil,
       :findings_filter_list_items,
       :next_token,
       keyword_init: true
@@ -3144,6 +3323,7 @@ module Aws::Macie2
     #   <p>The criteria to use to sort the results.</p>
     #   @return [Types::SortCriteria]
     class ListFindingsRequest < Struct.new(
+      nil,
       :finding_criteria,
       :max_results,
       :next_token,
@@ -3160,6 +3340,7 @@ module Aws::Macie2
     #   <p>The string to use in a subsequent request to get the next page of results in a paginated response. This value is null if there are no additional pages.</p>
     #   @return [String]
     class ListFindingsResponse < Struct.new(
+      nil,
       :finding_ids,
       :next_token,
       keyword_init: true
@@ -3174,6 +3355,7 @@ module Aws::Macie2
     #   <p>The nextToken string that specifies which page of results to return in a paginated response.</p>
     #   @return [String]
     class ListInvitationsRequest < Struct.new(
+      nil,
       :max_results,
       :next_token,
       keyword_init: true
@@ -3188,6 +3370,7 @@ module Aws::Macie2
     #   <p>The string to use in a subsequent request to get the next page of results in a paginated response. This value is null if there are no additional pages.</p>
     #   @return [String]
     class ListInvitationsResponse < Struct.new(
+      nil,
       :invitations,
       :next_token,
       keyword_init: true
@@ -3203,6 +3386,7 @@ module Aws::Macie2
     #   <p>An array of objects, one for each condition that determines which jobs to include in the results.</p>
     #   @return [Array<Types::ListJobsFilterTerm>]
     class ListJobsFilterCriteria < Struct.new(
+      nil,
       :excludes,
       :includes,
       keyword_init: true
@@ -3221,6 +3405,7 @@ module Aws::Macie2
     #   <p>An array that lists one or more values to use to filter the results.</p>
     #   @return [Array<String>]
     class ListJobsFilterTerm < Struct.new(
+      nil,
       :comparator,
       :key,
       :values,
@@ -3237,6 +3422,7 @@ module Aws::Macie2
     #   <p>The sort order to apply to the results, based on the value for the property specified by the attributeName property. Valid values are: ASC, sort the results in ascending order; and, DESC, sort the results in descending order.</p>
     #   @return [String]
     class ListJobsSortCriteria < Struct.new(
+      nil,
       :attribute_name,
       :order_by,
       keyword_init: true
@@ -3248,6 +3434,7 @@ module Aws::Macie2
     #   <p>The nextToken string that specifies which page of results to return in a paginated response.</p>
     #   @return [String]
     class ListManagedDataIdentifiersRequest < Struct.new(
+      nil,
       :next_token,
       keyword_init: true
     )
@@ -3261,6 +3448,7 @@ module Aws::Macie2
     #   <p>The string to use in a subsequent request to get the next page of results in a paginated response. This value is null if there are no additional pages.</p>
     #   @return [String]
     class ListManagedDataIdentifiersResponse < Struct.new(
+      nil,
       :items,
       :next_token,
       keyword_init: true
@@ -3278,6 +3466,7 @@ module Aws::Macie2
     #   <p>Specifies which accounts to include in the response, based on the status of an account's relationship with the administrator account. By default, the response includes only current member accounts. To include all accounts, set this value to false.</p>
     #   @return [String]
     class ListMembersRequest < Struct.new(
+      nil,
       :max_results,
       :next_token,
       :only_associated,
@@ -3293,6 +3482,7 @@ module Aws::Macie2
     #   <p>The string to use in a subsequent request to get the next page of results in a paginated response. This value is null if there are no additional pages.</p>
     #   @return [String]
     class ListMembersResponse < Struct.new(
+      nil,
       :members,
       :next_token,
       keyword_init: true
@@ -3307,6 +3497,7 @@ module Aws::Macie2
     #   <p>The nextToken string that specifies which page of results to return in a paginated response.</p>
     #   @return [String]
     class ListOrganizationAdminAccountsRequest < Struct.new(
+      nil,
       :max_results,
       :next_token,
       keyword_init: true
@@ -3321,6 +3512,7 @@ module Aws::Macie2
     #   <p>The string to use in a subsequent request to get the next page of results in a paginated response. This value is null if there are no additional pages.</p>
     #   @return [String]
     class ListOrganizationAdminAccountsResponse < Struct.new(
+      nil,
       :admin_accounts,
       :next_token,
       keyword_init: true
@@ -3335,6 +3527,7 @@ module Aws::Macie2
     #   <p>The Amazon Resource Name (ARN) of the S3 bucket that the request applies to.</p>
     #   @return [String]
     class ListResourceProfileArtifactsRequest < Struct.new(
+      nil,
       :next_token,
       :resource_arn,
       keyword_init: true
@@ -3349,6 +3542,7 @@ module Aws::Macie2
     #   <p>The string to use in a subsequent request to get the next page of results in a paginated response. This value is null if there are no additional pages.</p>
     #   @return [String]
     class ListResourceProfileArtifactsResponse < Struct.new(
+      nil,
       :artifacts,
       :next_token,
       keyword_init: true
@@ -3366,6 +3560,7 @@ module Aws::Macie2
     #   <p>The Amazon Resource Name (ARN) of the S3 bucket that the request applies to.</p>
     #   @return [String]
     class ListResourceProfileDetectionsRequest < Struct.new(
+      nil,
       :max_results,
       :next_token,
       :resource_arn,
@@ -3381,6 +3576,7 @@ module Aws::Macie2
     #   <p>The string to use in a subsequent request to get the next page of results in a paginated response. This value is null if there are no additional pages.</p>
     #   @return [String]
     class ListResourceProfileDetectionsResponse < Struct.new(
+      nil,
       :detections,
       :next_token,
       keyword_init: true
@@ -3395,6 +3591,7 @@ module Aws::Macie2
     #   <p>The nextToken string that specifies which page of results to return in a paginated response.</p>
     #   @return [String]
     class ListSensitivityInspectionTemplatesRequest < Struct.new(
+      nil,
       :max_results,
       :next_token,
       keyword_init: true
@@ -3409,6 +3606,7 @@ module Aws::Macie2
     #   <p>An array that specifies the unique identifier and name of the sensitivity inspection template for the account.</p>
     #   @return [Array<Types::SensitivityInspectionTemplatesEntry>]
     class ListSensitivityInspectionTemplatesResponse < Struct.new(
+      nil,
       :next_token,
       :sensitivity_inspection_templates,
       keyword_init: true
@@ -3420,6 +3618,7 @@ module Aws::Macie2
     #   <p>The Amazon Resource Name (ARN) of the resource.</p>
     #   @return [String]
     class ListTagsForResourceRequest < Struct.new(
+      nil,
       :resource_arn,
       keyword_init: true
     )
@@ -3430,6 +3629,7 @@ module Aws::Macie2
     #   <p>A map of key-value pairs that specifies which tags (keys and values) are associated with the resource.</p>
     #   @return [Hash<String, String>]
     class ListTagsForResourceResponse < Struct.new(
+      nil,
       :tags,
       keyword_init: true
     )
@@ -3444,6 +3644,7 @@ module Aws::Macie2
     #   <p>The unique identifier for the managed data identifier. This is a string that describes the type of sensitive data that the managed data identifier detects. For example: OPENSSH_PRIVATE_KEY for OpenSSH private keys, CREDIT_CARD_NUMBER for credit card numbers, or USA_PASSPORT_NUMBER for US passport numbers.</p>
     #   @return [String]
     class ManagedDataIdentifierSummary < Struct.new(
+      nil,
       :category,
       :id,
       keyword_init: true
@@ -3501,6 +3702,7 @@ module Aws::Macie2
     #   <p>The total storage size, in bytes, of the objects that Amazon Macie can't analyze in the bucket. These objects don't use a supported storage class or don't have a file name extension for a supported file or storage format.</p>
     #   @return [Types::ObjectLevelStatistics]
     class MatchingBucket < Struct.new(
+      nil,
       :account_id,
       :automated_discovery_monitoring_status,
       :bucket_name,
@@ -3527,6 +3729,7 @@ module Aws::Macie2
     #   <p>The details of an S3 bucket that Amazon Macie monitors and analyzes for your account.</p>
     #   @return [Types::MatchingBucket]
     class MatchingResource < Struct.new(
+      nil,
       :matching_bucket,
       keyword_init: true
     )
@@ -3562,6 +3765,7 @@ module Aws::Macie2
     #   <p>The date and time, in UTC and extended ISO 8601 format, of the most recent change to the status of the relationship between the account and the administrator account.</p>
     #   @return [Time]
     class Member < Struct.new(
+      nil,
       :account_id,
       :administrator_account_id,
       :arn,
@@ -3581,6 +3785,7 @@ module Aws::Macie2
     #   <p>The numeric day of the month when Amazon Macie runs the job. This value can be an integer from 1 through 31.</p> <p>If this value exceeds the number of days in a certain month, Macie doesn't run the job that month. Macie runs the job only during months that have the specified day. For example, if this value is 31 and a month has only 30 days, Macie doesn't run the job that month. To run the job every month, specify a value that's less than 29.</p>
     #   @return [Integer]
     class MonthlySchedule < Struct.new(
+      nil,
       :day_of_month,
       keyword_init: true
     )
@@ -3604,6 +3809,7 @@ module Aws::Macie2
     #   <p>The total number of objects that Amazon Macie doesn't have current encryption metadata for. Macie can't provide current data about the encryption settings for these objects.</p>
     #   @return [Integer]
     class ObjectCountByEncryptionType < Struct.new(
+      nil,
       :customer_managed,
       :kms_managed,
       :s3_managed,
@@ -3625,6 +3831,7 @@ module Aws::Macie2
     #   <p>The total storage size (in bytes) or number of objects that Amazon Macie can't analyze because the objects use an unsupported storage class or don't have a file name extension for a supported file or storage format.</p>
     #   @return [Integer]
     class ObjectLevelStatistics < Struct.new(
+      nil,
       :file_type,
       :storage_class,
       :total,
@@ -3650,6 +3857,7 @@ module Aws::Macie2
     #   <p>An array of objects, one for each occurrence of sensitive data in an Apache Avro object container, Apache Parquet file, JSON file, or JSON Lines file. This value is null for all other types of files.</p> <p>For an Avro object container or Parquet file, each Record object specifies a record index and the path to a field in a record that contains the sensitive data. For a JSON or JSON Lines file, each Record object specifies the path to a field or array that contains the sensitive data. For a JSON Lines file, it also specifies the index of the line that contains the data.</p>
     #   @return [Array<Types::Record>]
     class Occurrences < Struct.new(
+      nil,
       :cells,
       :line_ranges,
       :offset_ranges,
@@ -3671,6 +3879,7 @@ module Aws::Macie2
     #   <p>The page number of the page that contains the sensitive data.</p>
     #   @return [Integer]
     class Page < Struct.new(
+      nil,
       :line_range,
       :offset_range,
       :page_number,
@@ -3687,6 +3896,7 @@ module Aws::Macie2
     #   <p>The entity that performed the action that produced the finding.</p>
     #   @return [Types::FindingActor]
     class PolicyDetails < Struct.new(
+      nil,
       :action,
       :actor,
       keyword_init: true
@@ -3698,6 +3908,7 @@ module Aws::Macie2
     #   <p>The location to store data classification results in, and the encryption settings to use when storing results in that location.</p>
     #   @return [Types::ClassificationExportConfiguration]
     class PutClassificationExportConfigurationRequest < Struct.new(
+      nil,
       :configuration,
       keyword_init: true
     )
@@ -3708,6 +3919,7 @@ module Aws::Macie2
     #   <p>The location where the data classification results are stored, and the encryption settings that are used when storing results in that location.</p>
     #   @return [Types::ClassificationExportConfiguration]
     class PutClassificationExportConfigurationResponse < Struct.new(
+      nil,
       :configuration,
       keyword_init: true
     )
@@ -3721,6 +3933,7 @@ module Aws::Macie2
     #   <p>The configuration settings that determine which findings to publish to Security Hub.</p>
     #   @return [Types::SecurityHubConfiguration]
     class PutFindingsPublicationConfigurationRequest < Struct.new(
+      nil,
       :client_token,
       :security_hub_configuration,
       keyword_init: true
@@ -3729,6 +3942,7 @@ module Aws::Macie2
     end
 
     class PutFindingsPublicationConfigurationResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -3745,6 +3959,7 @@ module Aws::Macie2
     #   <p>The number of characters, with spaces and starting from 1, from the beginning of the first line that contains the sensitive data (start) to the beginning of the sensitive data.</p>
     #   @return [Integer]
     class Range < Struct.new(
+      nil,
       :end,
       :start,
       :start_column,
@@ -3761,6 +3976,7 @@ module Aws::Macie2
     #   <p>For an Avro object container or Parquet file, the record index, starting from 0, for the record that contains the sensitive data. For a JSON Lines file, the line index, starting from 0, for the line that contains the sensitive data. This value is always 0 for JSON files.</p>
     #   @return [Integer]
     class Record < Struct.new(
+      nil,
       :json_path,
       :record_index,
       keyword_init: true
@@ -3779,6 +3995,7 @@ module Aws::Macie2
     #   <p>An array of Amazon Web Services account IDs, one for each Amazon Web Services account that owns a bucket that the bucket is configured to replicate one or more objects to.</p>
     #   @return [Array<String>]
     class ReplicationDetails < Struct.new(
+      nil,
       :replicated,
       :replicated_externally,
       :replication_accounts,
@@ -3792,6 +4009,7 @@ module Aws::Macie2
     #   <p>The explanation of the error that occurred.</p>
     #   @return [String]
     class ResourceNotFoundException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -3809,6 +4027,7 @@ module Aws::Macie2
     #   <p>Specifies whether Amazon Macie found sensitive data in the object.</p>
     #   @return [Boolean]
     class ResourceProfileArtifact < Struct.new(
+      nil,
       :arn,
       :classification_result_status,
       :sensitive,
@@ -3846,6 +4065,7 @@ module Aws::Macie2
     #   <p>The total number of objects that Amazon Macie wasn't able to analyze in the bucket due to the permissions settings for the objects or the permissions settings for the keys that were used to encrypt the objects.</p>
     #   @return [Integer]
     class ResourceStatistics < Struct.new(
+      nil,
       :total_bytes_classified,
       :total_detections,
       :total_detections_suppressed,
@@ -3868,6 +4088,7 @@ module Aws::Macie2
     #   <p>The details of the S3 object that the finding applies to.</p>
     #   @return [Types::S3Object]
     class ResourcesAffected < Struct.new(
+      nil,
       :s3_bucket,
       :s3_object,
       keyword_init: true
@@ -3886,6 +4107,7 @@ module Aws::Macie2
     #   <p>The name of the IAM role that is in the affected Amazon Web Services account and Amazon Macie is allowed to assume when retrieving sensitive data from affected S3 objects for the account. This value is null if the value for retrievalMode is CALLER_CREDENTIALS.</p>
     #   @return [String]
     class RetrievalConfiguration < Struct.new(
+      nil,
       :external_id,
       :retrieval_mode,
       :role_name,
@@ -3902,6 +4124,7 @@ module Aws::Macie2
     #   <p>The status of the configuration for the Amazon Macie account. In a response, possible values are: ENABLED, the configuration is currently enabled for the account; and, DISABLED, the configuration is currently disabled for the account. In a request, valid values are: ENABLED, enable the configuration for the account; and, DISABLED, disable the configuration for the account.</p> <important><p>If you disable the configuration, you also permanently delete current settings that specify how to access affected S3 objects. If your current access method is ASSUME_ROLE, Macie also deletes the external ID and role name currently specified for the configuration. These settings can't be recovered after they're deleted.</p></important>
     #   @return [String]
     class RevealConfiguration < Struct.new(
+      nil,
       :kms_key_id,
       :status,
       keyword_init: true
@@ -3935,6 +4158,7 @@ module Aws::Macie2
     #   <p>The tags that are associated with the bucket.</p>
     #   @return [Array<Types::KeyValuePair>]
     class S3Bucket < Struct.new(
+      nil,
       :allows_unencrypted_object_uploads,
       :arn,
       :created_at,
@@ -3956,6 +4180,7 @@ module Aws::Macie2
     #   <p>The property- and tag-based conditions that determine which buckets to include in the job.</p>
     #   @return [Types::CriteriaBlockForJob]
     class S3BucketCriteriaForJob < Struct.new(
+      nil,
       :excludes,
       :includes,
       keyword_init: true
@@ -3971,6 +4196,7 @@ module Aws::Macie2
     #   <p>An array that lists the names of the buckets.</p>
     #   @return [Array<String>]
     class S3BucketDefinitionForJob < Struct.new(
+      nil,
       :account_id,
       :buckets,
       keyword_init: true
@@ -3986,6 +4212,7 @@ module Aws::Macie2
     #   <p>The canonical user ID for the account that owns the bucket.</p>
     #   @return [String]
     class S3BucketOwner < Struct.new(
+      nil,
       :display_name,
       :id,
       keyword_init: true
@@ -3998,6 +4225,7 @@ module Aws::Macie2
     #   <p>The S3 buckets that are excluded.</p>
     #   @return [Types::S3ClassificationScopeExclusion]
     class S3ClassificationScope < Struct.new(
+      nil,
       :excludes,
       keyword_init: true
     )
@@ -4009,6 +4237,7 @@ module Aws::Macie2
     #   <p>An array of strings, one for each S3 bucket that is excluded. Each string is the full name of an excluded bucket.</p>
     #   @return [Array<String>]
     class S3ClassificationScopeExclusion < Struct.new(
+      nil,
       :bucket_names,
       keyword_init: true
     )
@@ -4023,6 +4252,7 @@ module Aws::Macie2
     #   <p>Specifies how to apply the changes to the exclusion list. Valid values are:</p> <ul><li><p>ADD - Append the specified bucket names to the current list.</p></li> <li><p>REMOVE - Remove the specified bucket names from the current list.</p></li> <li><p>REPLACE - Overwrite the current list with the specified list of bucket names. If you specify this value, Amazon Macie removes all existing names from the list and adds all the specified names to the list.</p></li></ul>
     #   @return [String]
     class S3ClassificationScopeExclusionUpdate < Struct.new(
+      nil,
       :bucket_names,
       :operation,
       keyword_init: true
@@ -4035,6 +4265,7 @@ module Aws::Macie2
     #   <p>The names of the S3 buckets to add or remove from the list.</p>
     #   @return [Types::S3ClassificationScopeExclusionUpdate]
     class S3ClassificationScopeUpdate < Struct.new(
+      nil,
       :excludes,
       keyword_init: true
     )
@@ -4052,6 +4283,7 @@ module Aws::Macie2
     #   <p>The Amazon Resource Name (ARN) of the customer managed KMS key to use for encryption of the results. This must be the ARN of an existing, symmetric encryption KMS key that's enabled in the same Amazon Web Services Region as the bucket.</p>
     #   @return [String]
     class S3Destination < Struct.new(
+      nil,
       :bucket_name,
       :key_prefix,
       :kms_key_arn,
@@ -4071,6 +4303,7 @@ module Aws::Macie2
     #   <p>The property- and tag-based conditions that determine which S3 objects to include or exclude from the analysis. Each time the job runs, the job uses these criteria to determine which objects to analyze.</p>
     #   @return [Types::Scoping]
     class S3JobDefinition < Struct.new(
+      nil,
       :bucket_criteria,
       :bucket_definitions,
       :scoping,
@@ -4117,6 +4350,7 @@ module Aws::Macie2
     #   <p>The identifier for the affected version of the object.</p>
     #   @return [String]
     class S3Object < Struct.new(
+      nil,
       :bucket_arn,
       :e_tag,
       :extension,
@@ -4142,6 +4376,7 @@ module Aws::Macie2
     #   <p>The full name (key) of the object.</p>
     #   @return [String]
     class S3WordsList < Struct.new(
+      nil,
       :bucket_name,
       :object_key,
       keyword_init: true
@@ -4157,6 +4392,7 @@ module Aws::Macie2
     #   <p>The property- and tag-based conditions that determine which objects to include in the analysis.</p>
     #   @return [Types::JobScopingBlock]
     class Scoping < Struct.new(
+      nil,
       :excludes,
       :includes,
       keyword_init: true
@@ -4172,6 +4408,7 @@ module Aws::Macie2
     #   <p>The property- and tag-based conditions that determine which buckets to include in the results.</p>
     #   @return [Types::SearchResourcesCriteriaBlock]
     class SearchResourcesBucketCriteria < Struct.new(
+      nil,
       :excludes,
       :includes,
       keyword_init: true
@@ -4187,6 +4424,7 @@ module Aws::Macie2
     #   <p>A tag-based condition that defines an operator and tag keys, tag values, or tag key and value pairs for including or excluding resources from the results.</p>
     #   @return [Types::SearchResourcesTagCriterion]
     class SearchResourcesCriteria < Struct.new(
+      nil,
       :simple_criterion,
       :tag_criterion,
       keyword_init: true
@@ -4199,6 +4437,7 @@ module Aws::Macie2
     #   <p>An array of objects, one for each property- or tag-based condition that includes or excludes resources from the query results. If you specify more than one condition, Amazon Macie uses AND logic to join the conditions.</p>
     #   @return [Array<Types::SearchResourcesCriteria>]
     class SearchResourcesCriteriaBlock < Struct.new(
+      nil,
       :and,
       keyword_init: true
     )
@@ -4218,6 +4457,7 @@ module Aws::Macie2
     #   <p>The criteria to use to sort the results.</p>
     #   @return [Types::SearchResourcesSortCriteria]
     class SearchResourcesRequest < Struct.new(
+      nil,
       :bucket_criteria,
       :max_results,
       :next_token,
@@ -4234,6 +4474,7 @@ module Aws::Macie2
     #   <p>The string to use in a subsequent request to get the next page of results in a paginated response. This value is null if there are no additional pages.</p>
     #   @return [String]
     class SearchResourcesResponse < Struct.new(
+      nil,
       :matching_resources,
       :next_token,
       keyword_init: true
@@ -4252,6 +4493,7 @@ module Aws::Macie2
     #   <p>An array that lists one or more values to use in the condition. If you specify multiple values, Amazon Macie uses OR logic to join the values. Valid values for each supported property (key) are:</p> <ul><li><p>ACCOUNT_ID - A string that represents the unique identifier for the Amazon Web Services account that owns the resource.</p></li> <li><p>AUTOMATED_DISCOVERY_MONITORING_STATUS - A string that represents an enumerated value that Macie defines for the <a href="https://docs.aws.amazon.com/macie/latest/APIReference/datasources-s3.html#datasources-s3-prop-bucketmetadata-automateddiscoverymonitoringstatus">BucketMetadata.automatedDiscoveryMonitoringStatus</a> property of an S3 bucket.</p></li> <li><p>S3_BUCKET_EFFECTIVE_PERMISSION - A string that represents an enumerated value that Macie defines for the <a href="https://docs.aws.amazon.com/macie/latest/APIReference/datasources-s3.html#datasources-s3-prop-bucketpublicaccess-effectivepermission">BucketPublicAccess.effectivePermission</a> property of an S3 bucket.</p></li> <li><p>S3_BUCKET_NAME - A string that represents the name of an S3 bucket.</p></li> <li><p>S3_BUCKET_SHARED_ACCESS - A string that represents an enumerated value that Macie defines for the <a href="https://docs.aws.amazon.com/macie/latest/APIReference/datasources-s3.html#datasources-s3-prop-bucketmetadata-sharedaccess">BucketMetadata.sharedAccess</a> property of an S3 bucket.</p></li></ul> <p>Values are case sensitive. Also, Macie doesn't support use of partial values or wildcard characters in values.</p>
     #   @return [Array<String>]
     class SearchResourcesSimpleCriterion < Struct.new(
+      nil,
       :comparator,
       :key,
       :values,
@@ -4268,6 +4510,7 @@ module Aws::Macie2
     #   <p>The sort order to apply to the results, based on the value for the property specified by the attributeName property. Valid values are: ASC, sort the results in ascending order; and, DESC, sort the results in descending order.</p>
     #   @return [String]
     class SearchResourcesSortCriteria < Struct.new(
+      nil,
       :attribute_name,
       :order_by,
       keyword_init: true
@@ -4283,6 +4526,7 @@ module Aws::Macie2
     #   <p>The tag keys, tag values, or tag key and value pairs to use in the condition.</p>
     #   @return [Array<Types::SearchResourcesTagCriterionPair>]
     class SearchResourcesTagCriterion < Struct.new(
+      nil,
       :comparator,
       :tag_values,
       keyword_init: true
@@ -4298,6 +4542,7 @@ module Aws::Macie2
     #   <p>The tag value to use in the condition.</p>
     #   @return [String]
     class SearchResourcesTagCriterionPair < Struct.new(
+      nil,
       :key,
       :value,
       keyword_init: true
@@ -4313,6 +4558,7 @@ module Aws::Macie2
     #   <p>Specifies whether to publish policy findings to Security Hub. If you set this value to true, Amazon Macie automatically publishes all new and updated policy findings that weren't suppressed by a findings filter. The default value is true.</p>
     #   @return [Boolean]
     class SecurityHubConfiguration < Struct.new(
+      nil,
       :publish_classification_findings,
       :publish_policy_findings,
       keyword_init: true
@@ -4331,6 +4577,7 @@ module Aws::Macie2
     #   <p>The total number of occurrences of the sensitive data that was detected.</p>
     #   @return [Integer]
     class SensitiveDataItem < Struct.new(
+      nil,
       :category,
       :detections,
       :total_count,
@@ -4353,6 +4600,7 @@ module Aws::Macie2
     #   <p>The total storage size, in bytes, of the buckets.</p> <p>If versioning is enabled for any of the buckets, this value is based on the size of the latest version of each object in the buckets. This value doesn't reflect the storage size of all versions of the objects in the buckets.</p>
     #   @return [Integer]
     class SensitivityAggregations < Struct.new(
+      nil,
       :classifiable_size_in_bytes,
       :publicly_accessible_count,
       :total_count,
@@ -4367,6 +4615,7 @@ module Aws::Macie2
     #   <p>An array of unique identifiers, one for each managed data identifier to exclude. To retrieve a list of valid values, use the ListManagedDataIdentifiers operation.</p>
     #   @return [Array<String>]
     class SensitivityInspectionTemplateExcludes < Struct.new(
+      nil,
       :managed_data_identifier_ids,
       keyword_init: true
     )
@@ -4384,6 +4633,7 @@ module Aws::Macie2
     #   <p>An array of unique identifiers, one for each managed data identifier to include.</p> <p>Amazon Macie uses these managed data identifiers in addition to managed data identifiers that are subsequently released and recommended for automated sensitive data discovery. To retrieve a list of valid values for the managed data identifiers that are currently available, use the ListManagedDataIdentifiers operation.</p> <para/>
     #   @return [Array<String>]
     class SensitivityInspectionTemplateIncludes < Struct.new(
+      nil,
       :allow_list_ids,
       :custom_data_identifier_ids,
       :managed_data_identifier_ids,
@@ -4400,6 +4650,7 @@ module Aws::Macie2
     #   <p>The name of the sensitivity inspection template: automated-sensitive-data-discovery.</p>
     #   @return [String]
     class SensitivityInspectionTemplatesEntry < Struct.new(
+      nil,
       :id,
       :name,
       keyword_init: true
@@ -4415,6 +4666,7 @@ module Aws::Macie2
     #   <p>The Amazon Resource Name (ARN) or unique identifier (key ID) for the KMS key that's used to encrypt data in the bucket or the object. This value is null if an KMS key isn't used to encrypt the data.</p>
     #   @return [String]
     class ServerSideEncryption < Struct.new(
+      nil,
       :encryption_type,
       :kms_master_key_id,
       keyword_init: true
@@ -4433,6 +4685,7 @@ module Aws::Macie2
     #   <p>The value for the metric specified by the UsageByAccount.type field in the response.</p>
     #   @return [Integer]
     class ServiceLimit < Struct.new(
+      nil,
       :is_service_limited,
       :unit,
       :value,
@@ -4446,6 +4699,7 @@ module Aws::Macie2
     #   <p>The explanation of the error that occurred.</p>
     #   @return [String]
     class ServiceQuotaExceededException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -4460,6 +4714,7 @@ module Aws::Macie2
     #   <p>The source and type of credentials that were issued to the entity.</p>
     #   @return [Types::SessionIssuer]
     class SessionContext < Struct.new(
+      nil,
       :attributes,
       :session_issuer,
       keyword_init: true
@@ -4475,6 +4730,7 @@ module Aws::Macie2
     #   <p>Specifies whether the credentials were authenticated with a multi-factor authentication (MFA) device.</p>
     #   @return [Boolean]
     class SessionContextAttributes < Struct.new(
+      nil,
       :creation_date,
       :mfa_authenticated,
       keyword_init: true
@@ -4499,6 +4755,7 @@ module Aws::Macie2
     #   <p>The name or alias of the user or role that issued the session. This value is null if the credentials were obtained from a root account that doesn't have an alias.</p>
     #   @return [String]
     class SessionIssuer < Struct.new(
+      nil,
       :account_id,
       :arn,
       :principal_id,
@@ -4517,6 +4774,7 @@ module Aws::Macie2
     #   <p>The numerical representation of the finding's severity, ranging from 1 (least severe) to 3 (most severe).</p>
     #   @return [Integer]
     class Severity < Struct.new(
+      nil,
       :description,
       :score,
       keyword_init: true
@@ -4532,6 +4790,7 @@ module Aws::Macie2
     #   <p>The severity to assign to a finding: if the number of occurrences is greater than or equal to the specified threshold (occurrencesThreshold); and, if applicable, the number of occurrences is less than the threshold for the next consecutive severity level for the custom data identifier, moving from LOW to HIGH.</p>
     #   @return [String]
     class SeverityLevel < Struct.new(
+      nil,
       :occurrences_threshold,
       :severity,
       keyword_init: true
@@ -4550,6 +4809,7 @@ module Aws::Macie2
     #   <p>An array that lists one or more values to use in the condition. If you specify multiple values, Amazon Macie uses OR logic to join the values. Valid values for each supported property (key) are:</p> <ul><li><p>ACCOUNT_ID - A string that represents the unique identifier for the Amazon Web Services account that owns the bucket.</p></li> <li><p>S3_BUCKET_EFFECTIVE_PERMISSION - A string that represents an enumerated value that Macie defines for the <a href="https://docs.aws.amazon.com/macie/latest/APIReference/datasources-s3.html#datasources-s3-prop-bucketpublicaccess-effectivepermission">BucketPublicAccess.effectivePermission</a> property of a bucket.</p></li> <li><p>S3_BUCKET_NAME - A string that represents the name of a bucket.</p></li> <li><p>S3_BUCKET_SHARED_ACCESS - A string that represents an enumerated value that Macie defines for the <a href="https://docs.aws.amazon.com/macie/latest/APIReference/datasources-s3.html#datasources-s3-prop-bucketmetadata-sharedaccess">BucketMetadata.sharedAccess</a> property of a bucket.</p></li></ul> <p>Values are case sensitive. Also, Macie doesn't support use of partial values or wildcard characters in these values.</p>
     #   @return [Array<String>]
     class SimpleCriterionForJob < Struct.new(
+      nil,
       :comparator,
       :key,
       :values,
@@ -4569,6 +4829,7 @@ module Aws::Macie2
     #   <p>An array that lists the values to use in the condition. If the value for the key property is OBJECT_EXTENSION or OBJECT_KEY, this array can specify multiple values and Amazon Macie uses OR logic to join the values. Otherwise, this array can specify only one value.</p> <p>Valid values for each supported property (key) are:</p> <ul><li><p>OBJECT_EXTENSION - A string that represents the file name extension of an object. For example: docx or pdf</p></li> <li><p>OBJECT_KEY - A string that represents the key prefix (folder name or path) of an object. For example: logs or awslogs/eventlogs. This value applies a condition to objects whose keys (names) begin with the specified value.</p></li> <li><p>OBJECT_LAST_MODIFIED_DATE - The date and time (in UTC and extended ISO 8601 format) when an object was created or last changed, whichever is latest. For example: 2023-09-24T14:31:13Z</p></li> <li><p>OBJECT_SIZE - An integer that represents the storage size (in bytes) of an object.</p></li></ul> <p>Macie doesn't support use of wildcard characters in these values. Also, string values are case sensitive.</p>
     #   @return [Array<String>]
     class SimpleScopeTerm < Struct.new(
+      nil,
       :comparator,
       :key,
       :values,
@@ -4585,6 +4846,7 @@ module Aws::Macie2
     #   <p>The sort order to apply to the results, based on the value for the property specified by the attributeName property. Valid values are: ASC, sort the results in ascending order; and, DESC, sort the results in descending order.</p>
     #   @return [String]
     class SortCriteria < Struct.new(
+      nil,
       :attribute_name,
       :order_by,
       keyword_init: true
@@ -4600,6 +4862,7 @@ module Aws::Macie2
     #   <p>The number of times that the job has run.</p>
     #   @return [Float]
     class Statistics < Struct.new(
+      nil,
       :approximate_number_of_objects_to_process,
       :number_of_runs,
       keyword_init: true
@@ -4615,6 +4878,7 @@ module Aws::Macie2
     #   <p>The type of data identifier that detected the sensitive data. Possible values are: CUSTOM, for a custom data identifier; and, MANAGED, for a managed data identifier.</p>
     #   @return [String]
     class SuppressDataIdentifier < Struct.new(
+      nil,
       :id,
       :type,
       keyword_init: true
@@ -4630,6 +4894,7 @@ module Aws::Macie2
     #   <p>The tag keys, tag values, or tag key and value pairs to use in the condition.</p>
     #   @return [Array<Types::TagCriterionPairForJob>]
     class TagCriterionForJob < Struct.new(
+      nil,
       :comparator,
       :tag_values,
       keyword_init: true
@@ -4645,6 +4910,7 @@ module Aws::Macie2
     #   <p>The tag value to use in the condition.</p>
     #   @return [String]
     class TagCriterionPairForJob < Struct.new(
+      nil,
       :key,
       :value,
       keyword_init: true
@@ -4659,6 +4925,7 @@ module Aws::Macie2
     #   <p>A map of key-value pairs that specifies the tags to associate with the resource.</p> <p>A resource can have a maximum of 50 tags. Each tag consists of a tag key and an associated tag value. The maximum length of a tag key is 128 characters. The maximum length of a tag value is 256 characters.</p>
     #   @return [Hash<String, String>]
     class TagResourceRequest < Struct.new(
+      nil,
       :resource_arn,
       :tags,
       keyword_init: true
@@ -4667,6 +4934,7 @@ module Aws::Macie2
     end
 
     class TagResourceResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -4686,6 +4954,7 @@ module Aws::Macie2
     #   <p>The type of object to apply the condition to.</p>
     #   @return [String]
     class TagScopeTerm < Struct.new(
+      nil,
       :comparator,
       :key,
       :tag_values,
@@ -4703,6 +4972,7 @@ module Aws::Macie2
     #   <p>The tag value, associated with the specified tag key (key), to use in the condition. To specify only a tag key for a condition, specify the tag key for the key property and set this value to an empty string.</p>
     #   @return [String]
     class TagValuePair < Struct.new(
+      nil,
       :key,
       :value,
       keyword_init: true
@@ -4726,6 +4996,7 @@ module Aws::Macie2
     #   <p>The sample text to inspect by using the custom data identifier. The text can contain as many as 1,000 characters.</p>
     #   @return [String]
     class TestCustomDataIdentifierRequest < Struct.new(
+      nil,
       :ignore_words,
       :keywords,
       :maximum_match_distance,
@@ -4740,6 +5011,7 @@ module Aws::Macie2
     #   <p>The number of occurrences of sample text that matched the criteria specified by the custom data identifier.</p>
     #   @return [Integer]
     class TestCustomDataIdentifierResponse < Struct.new(
+      nil,
       :match_count,
       keyword_init: true
     )
@@ -4751,6 +5023,7 @@ module Aws::Macie2
     #   <p>The explanation of the error that occurred.</p>
     #   @return [String]
     class ThrottlingException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -4762,6 +5035,7 @@ module Aws::Macie2
     #   <p>The type of error that occurred and prevented Amazon Macie from retrieving occurrences of sensitive data reported by the finding. Possible values are:</p> <ul><li><p>ACCOUNT_NOT_IN_ORGANIZATION - The affected account isn't currently part of your organization. Or the account is part of your organization but Macie isn't currently enabled for the account. You're not allowed to access the affected S3 object by using Macie.</p></li> <li><p>INVALID_CLASSIFICATION_RESULT - There isn't a corresponding sensitive data discovery result for the finding. Or the corresponding sensitive data discovery result isn't available in the current Amazon Web Services Region, is malformed or corrupted, or uses an unsupported storage format. Macie can't verify the location of the sensitive data to retrieve.</p></li> <li><p>INVALID_RESULT_SIGNATURE - The corresponding sensitive data discovery result is stored in an S3 object that wasn't signed by Macie. Macie can't verify the integrity and authenticity of the sensitive data discovery result. Therefore, Macie can't verify the location of the sensitive data to retrieve.</p></li> <li><p>MEMBER_ROLE_TOO_PERMISSIVE - The trust or permissions policy for the IAM role in the affected member account doesn't meet Macie requirements for restricting access to the role. Or the role's trust policy doesn't specify the correct external ID for your organization. Macie can't assume the role to retrieve the sensitive data.</p></li> <li><p>MISSING_GET_MEMBER_PERMISSION - You're not allowed to retrieve information about the association between your account and the affected account. Macie can't determine whether you’re allowed to access the affected S3 object as the delegated Macie administrator for the affected account.</p></li> <li><p>OBJECT_EXCEEDS_SIZE_QUOTA - The storage size of the affected S3 object exceeds the size quota for retrieving occurrences of sensitive data from this type of file.</p></li> <li><p>OBJECT_UNAVAILABLE - The affected S3 object isn't available. The object was renamed, moved, deleted, or changed after Macie created the finding. Or the object is encrypted with an KMS key that isn’t available. For example, the key is disabled, is scheduled for deletion, or was deleted.</p></li> <li><p>RESULT_NOT_SIGNED - The corresponding sensitive data discovery result is stored in an S3 object that hasn't been signed. Macie can't verify the integrity and authenticity of the sensitive data discovery result. Therefore, Macie can't verify the location of the sensitive data to retrieve.</p></li> <li><p>ROLE_TOO_PERMISSIVE - Your account is configured to retrieve occurrences of sensitive data by using an IAM role whose trust or permissions policy doesn't meet Macie requirements for restricting access to the role. Macie can’t assume the role to retrieve the sensitive data.</p></li> <li><p>UNSUPPORTED_FINDING_TYPE - The specified finding isn't a sensitive data finding.</p></li> <li><p>UNSUPPORTED_OBJECT_TYPE - The affected S3 object uses a file or storage format that Macie doesn't support for retrieving occurrences of sensitive data.</p></li></ul>
     #   @return [String]
     class UnprocessableEntityException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -4779,6 +5053,7 @@ module Aws::Macie2
     #   <p>The reason why the request hasn't been processed.</p>
     #   @return [String]
     class UnprocessedAccount < Struct.new(
+      nil,
       :account_id,
       :error_code,
       :error_message,
@@ -4794,6 +5069,7 @@ module Aws::Macie2
     #   <p>One or more tags (keys) to remove from the resource. In an HTTP request to remove multiple tags, append the tagKeys parameter and argument for each tag to remove, separated by an ampersand (&amp;).</p>
     #   @return [Array<String>]
     class UntagResourceRequest < Struct.new(
+      nil,
       :resource_arn,
       :tag_keys,
       keyword_init: true
@@ -4802,6 +5078,7 @@ module Aws::Macie2
     end
 
     class UntagResourceResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -4820,6 +5097,7 @@ module Aws::Macie2
     #   <p>A custom name for the allow list. The name can contain as many as 128 characters.</p>
     #   @return [String]
     class UpdateAllowListRequest < Struct.new(
+      nil,
       :criteria,
       :description,
       :id,
@@ -4836,6 +5114,7 @@ module Aws::Macie2
     #   <p>The unique identifier for the allow list.</p>
     #   @return [String]
     class UpdateAllowListResponse < Struct.new(
+      nil,
       :arn,
       :id,
       keyword_init: true
@@ -4850,6 +5129,7 @@ module Aws::Macie2
     #   <p>The new status of automated sensitive data discovery for the organization or account. Valid values are: ENABLED, start or resume all automated sensitive data discovery activities; and, DISABLED, stop performing all automated sensitive data discovery activities.</p> <p>If you specify DISABLED for an administrator account, you also disable automated sensitive data discovery for all member accounts in the organization.</p>
     #   @return [String]
     class UpdateAutomatedDiscoveryConfigurationRequest < Struct.new(
+      nil,
       :auto_enable_organization_members,
       :status,
       keyword_init: true
@@ -4858,6 +5138,7 @@ module Aws::Macie2
     end
 
     class UpdateAutomatedDiscoveryConfigurationResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -4870,6 +5151,7 @@ module Aws::Macie2
     #   <p>The new status for the job. Valid values are:</p> <ul><li><p>CANCELLED - Stops the job permanently and cancels it. This value is valid only if the job's current status is IDLE, PAUSED, RUNNING, or USER_PAUSED.</p> <p>If you specify this value and the job's current status is RUNNING, Amazon Macie immediately begins to stop all processing tasks for the job. You can't resume or restart a job after you cancel it.</p></li> <li><p>RUNNING - Resumes the job. This value is valid only if the job's current status is USER_PAUSED.</p> <p>If you paused the job while it was actively running and you specify this value less than 30 days after you paused the job, Macie immediately resumes processing from the point where you paused the job. Otherwise, Macie resumes the job according to the schedule and other settings for the job.</p></li> <li><p>USER_PAUSED - Pauses the job temporarily. This value is valid only if the job's current status is IDLE, PAUSED, or RUNNING. If you specify this value and the job's current status is RUNNING, Macie immediately begins to pause all processing tasks for the job.</p> <p>If you pause a one-time job and you don't resume it within 30 days, the job expires and Macie cancels the job. If you pause a recurring job when its status is RUNNING and you don't resume it within 30 days, the job run expires and Macie cancels the run. To check the expiration date, refer to the UserPausedDetails.jobExpiresAt property.</p></li></ul>
     #   @return [String]
     class UpdateClassificationJobRequest < Struct.new(
+      nil,
       :job_id,
       :job_status,
       keyword_init: true
@@ -4878,6 +5160,7 @@ module Aws::Macie2
     end
 
     class UpdateClassificationJobResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -4890,6 +5173,7 @@ module Aws::Macie2
     #   <p>The S3 buckets to add or remove from the exclusion list defined by the classification scope.</p>
     #   @return [Types::S3ClassificationScopeUpdate]
     class UpdateClassificationScopeRequest < Struct.new(
+      nil,
       :id,
       :s3,
       keyword_init: true
@@ -4898,6 +5182,7 @@ module Aws::Macie2
     end
 
     class UpdateClassificationScopeResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -4925,6 +5210,7 @@ module Aws::Macie2
     #   <p>The position of the filter in the list of saved filters on the Amazon Macie console. This value also determines the order in which the filter is applied to findings, relative to other filters that are also applied to the findings.</p>
     #   @return [Integer]
     class UpdateFindingsFilterRequest < Struct.new(
+      nil,
       :action,
       :client_token,
       :description,
@@ -4944,6 +5230,7 @@ module Aws::Macie2
     #   <p>The unique identifier for the filter that was updated.</p>
     #   @return [String]
     class UpdateFindingsFilterResponse < Struct.new(
+      nil,
       :arn,
       :id,
       keyword_init: true
@@ -4958,6 +5245,7 @@ module Aws::Macie2
     #   <p>Specifies a new status for the account. Valid values are: ENABLED, resume all Amazon Macie activities for the account; and, PAUSED, suspend all Macie activities for the account.</p>
     #   @return [String]
     class UpdateMacieSessionRequest < Struct.new(
+      nil,
       :finding_publishing_frequency,
       :status,
       keyword_init: true
@@ -4966,6 +5254,7 @@ module Aws::Macie2
     end
 
     class UpdateMacieSessionResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -4978,6 +5267,7 @@ module Aws::Macie2
     #   <p>Specifies the new status for the account. Valid values are: ENABLED, resume all Amazon Macie activities for the account; and, PAUSED, suspend all Macie activities for the account.</p>
     #   @return [String]
     class UpdateMemberSessionRequest < Struct.new(
+      nil,
       :id,
       :status,
       keyword_init: true
@@ -4986,6 +5276,7 @@ module Aws::Macie2
     end
 
     class UpdateMemberSessionResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -4995,6 +5286,7 @@ module Aws::Macie2
     #   <p>Specifies whether to enable Amazon Macie automatically for accounts that are added to the organization in Organizations.</p>
     #   @return [Boolean]
     class UpdateOrganizationConfigurationRequest < Struct.new(
+      nil,
       :auto_enable,
       keyword_init: true
     )
@@ -5002,6 +5294,7 @@ module Aws::Macie2
     end
 
     class UpdateOrganizationConfigurationResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -5014,6 +5307,7 @@ module Aws::Macie2
     #   <p>An array of objects, one for each custom data identifier or managed data identifier that detected a type of sensitive data to exclude from the bucket's score. To include all sensitive data types in the score, don't specify any values for this array.</p>
     #   @return [Array<Types::SuppressDataIdentifier>]
     class UpdateResourceProfileDetectionsRequest < Struct.new(
+      nil,
       :resource_arn,
       :suppress_data_identifiers,
       keyword_init: true
@@ -5022,6 +5316,7 @@ module Aws::Macie2
     end
 
     class UpdateResourceProfileDetectionsResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -5034,6 +5329,7 @@ module Aws::Macie2
     #   <p>The new sensitivity score for the bucket. Valid values are: 100, assign the maximum score and apply the <i>Sensitive</i> label to the bucket; and, null (empty), assign a score that Amazon Macie calculates automatically after you submit the request.</p>
     #   @return [Integer]
     class UpdateResourceProfileRequest < Struct.new(
+      nil,
       :resource_arn,
       :sensitivity_score_override,
       keyword_init: true
@@ -5042,6 +5338,7 @@ module Aws::Macie2
     end
 
     class UpdateResourceProfileResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -5055,6 +5352,7 @@ module Aws::Macie2
     #   <p>The name of the IAM role that is in the affected Amazon Web Services account and Amazon Macie is allowed to assume when retrieving sensitive data from affected S3 objects for the account. The trust and permissions policies for the role must meet all requirements for Macie to assume the role.</p>
     #   @return [String]
     class UpdateRetrievalConfiguration < Struct.new(
+      nil,
       :retrieval_mode,
       :role_name,
       keyword_init: true
@@ -5069,6 +5367,7 @@ module Aws::Macie2
     #   <p>The access method and settings to use when retrieving the sensitive data.</p>
     #   @return [Types::UpdateRetrievalConfiguration]
     class UpdateRevealConfigurationRequest < Struct.new(
+      nil,
       :configuration,
       :retrieval_configuration,
       keyword_init: true
@@ -5083,6 +5382,7 @@ module Aws::Macie2
     #   <p>The access method and settings to use when retrieving the sensitive data.</p>
     #   @return [Types::RetrievalConfiguration]
     class UpdateRevealConfigurationResponse < Struct.new(
+      nil,
       :configuration,
       :retrieval_configuration,
       keyword_init: true
@@ -5103,6 +5403,7 @@ module Aws::Macie2
     #   <p>The allow lists, custom data identifiers, and managed data identifiers to explicitly include (use) when performing automated sensitive data discovery.</p>
     #   @return [Types::SensitivityInspectionTemplateIncludes]
     class UpdateSensitivityInspectionTemplateRequest < Struct.new(
+      nil,
       :description,
       :excludes,
       :id,
@@ -5113,6 +5414,7 @@ module Aws::Macie2
     end
 
     class UpdateSensitivityInspectionTemplateResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -5132,6 +5434,7 @@ module Aws::Macie2
     #   <p>The name of the metric. Possible values are: AUTOMATED_OBJECT_MONITORING, to monitor S3 objects for automated sensitive data discovery; AUTOMATED_SENSITIVE_DATA_DISCOVERY, to analyze S3 objects for automated sensitive data discovery; DATA_INVENTORY_EVALUATION, to monitor S3 buckets; and, SENSITIVE_DATA_DISCOVERY, to run classification jobs.</p>
     #   @return [String]
     class UsageByAccount < Struct.new(
+      nil,
       :currency,
       :estimated_cost,
       :service_limit,
@@ -5155,6 +5458,7 @@ module Aws::Macie2
     #   <p>An array of objects that contains usage data and quotas for the account. Each object contains the data for a specific usage metric and the corresponding quota.</p>
     #   @return [Array<Types::UsageByAccount>]
     class UsageRecord < Struct.new(
+      nil,
       :account_id,
       :automated_discovery_free_trial_start_date,
       :free_trial_start_date,
@@ -5175,6 +5479,7 @@ module Aws::Macie2
     #   <p>An array that lists values to use in the condition, based on the value for the field specified by the key property. If the value for the key property is accountId, this array can specify multiple values. Otherwise, this array can specify only one value.</p> <p>Valid values for each supported field are:</p> <ul><li><p>accountId - The unique identifier for an Amazon Web Services account.</p></li> <li><p>freeTrialStartDate - The date and time, in UTC and extended ISO 8601 format, when the Amazon Macie free trial started for an account.</p></li> <li><p>serviceLimit - A Boolean (true or false) value that indicates whether an account has reached its monthly quota.</p></li> <li><p>total - A string that represents the current estimated cost for an account.</p></li></ul>
     #   @return [Array<String>]
     class UsageStatisticsFilter < Struct.new(
+      nil,
       :comparator,
       :key,
       :values,
@@ -5191,6 +5496,7 @@ module Aws::Macie2
     #   <p>The sort order to apply to the results, based on the value for the field specified by the key property. Valid values are: ASC, sort the results in ascending order; and, DESC, sort the results in descending order.</p>
     #   @return [String]
     class UsageStatisticsSortBy < Struct.new(
+      nil,
       :key,
       :order_by,
       keyword_init: true
@@ -5209,6 +5515,7 @@ module Aws::Macie2
     #   <p>The name of the metric. Possible values are: AUTOMATED_OBJECT_MONITORING, to monitor S3 objects for automated sensitive data discovery; AUTOMATED_SENSITIVE_DATA_DISCOVERY, to analyze S3 objects for automated sensitive data discovery; DATA_INVENTORY_EVALUATION, to monitor S3 buckets; and, SENSITIVE_DATA_DISCOVERY, to run classification jobs.</p>
     #   @return [String]
     class UsageTotal < Struct.new(
+      nil,
       :currency,
       :estimated_cost,
       :type,
@@ -5240,6 +5547,7 @@ module Aws::Macie2
     #   <p>The type of entity that performed the action.</p>
     #   @return [String]
     class UserIdentity < Struct.new(
+      nil,
       :assumed_role,
       :aws_account,
       :aws_service,
@@ -5263,6 +5571,7 @@ module Aws::Macie2
     #   <p>The unique identifier for the entity that performed the action.</p>
     #   @return [String]
     class UserIdentityRoot < Struct.new(
+      nil,
       :account_id,
       :arn,
       :principal_id,
@@ -5282,6 +5591,7 @@ module Aws::Macie2
     #   <p>The date and time, in UTC and extended ISO 8601 format, when you paused the job.</p>
     #   @return [Time]
     class UserPausedDetails < Struct.new(
+      nil,
       :job_expires_at,
       :job_imminent_expiration_health_event_arn,
       :job_paused_at,
@@ -5295,6 +5605,7 @@ module Aws::Macie2
     #   <p>The explanation of the error that occurred.</p>
     #   @return [String]
     class ValidationException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -5306,6 +5617,7 @@ module Aws::Macie2
     #   <p>The day of the week when Amazon Macie runs the job.</p>
     #   @return [String]
     class WeeklySchedule < Struct.new(
+      nil,
       :day_of_week,
       keyword_init: true
     )

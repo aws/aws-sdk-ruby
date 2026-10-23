@@ -43,6 +43,7 @@ module Aws::AmplifyUIBuilder
     #   <p>A key-value pair that specifies the state property name and its initial value.</p>
     #   @return [Types::MutationActionSetStateParameter]
     class ActionParameters < Struct.new(
+      nil,
       :type,
       :url,
       :anchor,
@@ -96,6 +97,7 @@ module Aws::AmplifyUIBuilder
     #   <p>Indicates the reason to include the dependency package in your project code.</p>
     #   @return [String]
     class CodegenDependency < Struct.new(
+      nil,
       :name,
       :supported_version,
       :is_sem_ver,
@@ -113,6 +115,7 @@ module Aws::AmplifyUIBuilder
     #   <p>Specifies whether a code generation job supports non models.</p>
     #   @return [Boolean]
     class CodegenFeatureFlags < Struct.new(
+      nil,
       :is_relationship_supported,
       :is_non_model_supported,
       keyword_init: true
@@ -125,6 +128,7 @@ module Aws::AmplifyUIBuilder
     #   <p>The list of enum values in the generic data schema.</p>
     #   @return [Array<String>]
     class CodegenGenericDataEnum < Struct.new(
+      nil,
       :values,
       keyword_init: true
     )
@@ -151,6 +155,7 @@ module Aws::AmplifyUIBuilder
     #   <p>The relationship of the generic data schema.</p>
     #   @return [Types::CodegenGenericDataRelationshipType]
     class CodegenGenericDataField < Struct.new(
+      nil,
       :data_type,
       :data_type_value,
       :required,
@@ -173,6 +178,7 @@ module Aws::AmplifyUIBuilder
     #   <p>The primary keys of the generic data model.</p>
     #   @return [Array<String>]
     class CodegenGenericDataModel < Struct.new(
+      nil,
       :fields,
       :is_join_table,
       :primary_keys,
@@ -186,6 +192,7 @@ module Aws::AmplifyUIBuilder
     #   <p>The fields in a generic data schema non model.</p>
     #   @return [Hash<String, Types::CodegenGenericDataField>]
     class CodegenGenericDataNonModel < Struct.new(
+      nil,
       :fields,
       keyword_init: true
     )
@@ -221,6 +228,7 @@ module Aws::AmplifyUIBuilder
     #   <p>Specifies whether the <code>@index</code> directive is supported for a <code>hasMany</code> data relationship.</p>
     #   @return [Boolean]
     class CodegenGenericDataRelationshipType < Struct.new(
+      nil,
       :type,
       :related_model_name,
       :related_model_fields,
@@ -279,6 +287,7 @@ module Aws::AmplifyUIBuilder
     #   <p>Lists the dependency packages that may be required for the project code to run.</p>
     #   @return [Array<Types::CodegenDependency>]
     class CodegenJob < Struct.new(
+      nil,
       :id,
       :app_id,
       :environment_name,
@@ -303,6 +312,7 @@ module Aws::AmplifyUIBuilder
     #   <p>The URL to use to access the asset.</p>
     #   @return [String]
     class CodegenJobAsset < Struct.new(
+      nil,
       :download_url,
       keyword_init: true
     )
@@ -323,6 +333,7 @@ module Aws::AmplifyUIBuilder
     #   <p>The name of a <code>CodegenGenericDataNonModel</code>.</p>
     #   @return [Hash<String, Types::CodegenGenericDataNonModel>]
     class CodegenJobGenericDataSchema < Struct.new(
+      nil,
       :data_source_type,
       :models,
       :enums,
@@ -364,6 +375,7 @@ module Aws::AmplifyUIBuilder
     #   <p>The time that the code generation job summary was modified.</p>
     #   @return [Time]
     class CodegenJobSummary < Struct.new(
+      nil,
       :app_id,
       :environment_name,
       :id,
@@ -442,6 +454,7 @@ module Aws::AmplifyUIBuilder
     #   <p>The schema version of the component when it was imported.</p>
     #   @return [String]
     class Component < Struct.new(
+      nil,
       :app_id,
       :environment_name,
       :source_id,
@@ -478,6 +491,7 @@ module Aws::AmplifyUIBuilder
     #   <p>The default value of the property.</p>
     #   @return [String]
     class ComponentBindingPropertiesValue < Struct.new(
+      nil,
       :type,
       :binding_properties,
       :default_value,
@@ -515,6 +529,7 @@ module Aws::AmplifyUIBuilder
     #   <p>The name of a component slot.</p>
     #   @return [String]
     class ComponentBindingPropertiesValueProperties < Struct.new(
+      nil,
       :model,
       :field,
       :predicates,
@@ -551,6 +566,7 @@ module Aws::AmplifyUIBuilder
     #   <p>The unique ID of the child component in its original source system, such as Figma.</p>
     #   @return [String]
     class ComponentChild < Struct.new(
+      nil,
       :component_type,
       :name,
       :properties,
@@ -588,6 +604,7 @@ module Aws::AmplifyUIBuilder
     #   <p>The type of the property to evaluate.</p>
     #   @return [String]
     class ComponentConditionProperty < Struct.new(
+      nil,
       :property,
       :field,
       :operator,
@@ -616,6 +633,7 @@ module Aws::AmplifyUIBuilder
     #         chosen data, rather than data retrieved from a query.</p>
     #   @return [Array<String>]
     class ComponentDataConfiguration < Struct.new(
+      nil,
       :model,
       :sort,
       :predicate,
@@ -639,6 +657,7 @@ module Aws::AmplifyUIBuilder
     #         the event is called when the action is performed.</p>
     #   @return [String]
     class ComponentEvent < Struct.new(
+      nil,
       :action,
       :parameters,
       :binding_event,
@@ -699,6 +718,7 @@ module Aws::AmplifyUIBuilder
     #   <p>The name of the component's property that is affected by an event.</p>
     #   @return [String]
     class ComponentProperty < Struct.new(
+      nil,
       :value,
       :binding_properties,
       :collection_binding_properties,
@@ -728,6 +748,7 @@ module Aws::AmplifyUIBuilder
     #   <p>The data field to bind the property to.</p>
     #   @return [String]
     class ComponentPropertyBindingProperties < Struct.new(
+      nil,
       :property,
       :field,
       keyword_init: true
@@ -754,6 +775,7 @@ module Aws::AmplifyUIBuilder
     #   <p>The component type.</p>
     #   @return [String]
     class ComponentSummary < Struct.new(
+      nil,
       :app_id,
       :environment_name,
       :id,
@@ -775,6 +797,7 @@ module Aws::AmplifyUIBuilder
     #           <code>overrides</code>.</p>
     #   @return [Hash<String, Hash<String, String>>]
     class ComponentVariant < Struct.new(
+      nil,
       :variant_values,
       :overrides,
       keyword_init: true
@@ -823,6 +846,7 @@ module Aws::AmplifyUIBuilder
     #   <p>The schema version of the component when it was imported.</p>
     #   @return [String]
     class CreateComponentData < Struct.new(
+      nil,
       :name,
       :source_id,
       :component_type,
@@ -854,6 +878,7 @@ module Aws::AmplifyUIBuilder
     #   <p>Represents the configuration of the component to create.</p>
     #   @return [Types::CreateComponentData]
     class CreateComponentInput < Struct.new(
+      nil,
       :app_id,
       :environment_name,
       :client_token,
@@ -867,6 +892,7 @@ module Aws::AmplifyUIBuilder
     #   <p>Describes the configuration of the new component.</p>
     #   @return [Types::Component]
     class CreateComponentOutput < Struct.new(
+      nil,
       :entity,
       keyword_init: true
     )
@@ -907,6 +933,7 @@ module Aws::AmplifyUIBuilder
     #   <p>Specifies an icon or decoration to display on the form.</p>
     #   @return [String]
     class CreateFormData < Struct.new(
+      nil,
       :name,
       :data_type,
       :form_action_type,
@@ -935,6 +962,7 @@ module Aws::AmplifyUIBuilder
     #   <p>Represents the configuration of the form to create.</p>
     #   @return [Types::CreateFormData]
     class CreateFormInput < Struct.new(
+      nil,
       :app_id,
       :environment_name,
       :client_token,
@@ -948,6 +976,7 @@ module Aws::AmplifyUIBuilder
     #   <p>Describes the configuration of the new form.</p>
     #   @return [Types::Form]
     class CreateFormOutput < Struct.new(
+      nil,
       :entity,
       keyword_init: true
     )
@@ -969,6 +998,7 @@ module Aws::AmplifyUIBuilder
     #   <p>One or more key-value pairs to use when tagging the theme data.</p>
     #   @return [Hash<String, String>]
     class CreateThemeData < Struct.new(
+      nil,
       :name,
       :values,
       :overrides,
@@ -992,6 +1022,7 @@ module Aws::AmplifyUIBuilder
     #   <p>Represents the configuration of the theme to create.</p>
     #   @return [Types::CreateThemeData]
     class CreateThemeInput < Struct.new(
+      nil,
       :app_id,
       :environment_name,
       :client_token,
@@ -1005,6 +1036,7 @@ module Aws::AmplifyUIBuilder
     #   <p>Describes the configuration of the new theme.</p>
     #   @return [Types::Theme]
     class CreateThemeOutput < Struct.new(
+      nil,
       :entity,
       keyword_init: true
     )
@@ -1013,6 +1045,7 @@ module Aws::AmplifyUIBuilder
 
     # <p>Describes the DataStore configuration for an API for a code generation job.</p>
     class DataStoreRenderConfig < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1030,6 +1063,7 @@ module Aws::AmplifyUIBuilder
     #   <p>The unique ID of the component to delete.</p>
     #   @return [String]
     class DeleteComponentInput < Struct.new(
+      nil,
       :app_id,
       :environment_name,
       :id,
@@ -1048,6 +1082,7 @@ module Aws::AmplifyUIBuilder
     #   <p>The unique ID of the form to delete.</p>
     #   @return [String]
     class DeleteFormInput < Struct.new(
+      nil,
       :app_id,
       :environment_name,
       :id,
@@ -1068,6 +1103,7 @@ module Aws::AmplifyUIBuilder
     #   <p>The unique ID of the theme to delete.</p>
     #   @return [String]
     class DeleteThemeInput < Struct.new(
+      nil,
       :app_id,
       :environment_name,
       :id,
@@ -1083,6 +1119,7 @@ module Aws::AmplifyUIBuilder
     #   <p>Describes the configuration of the request.</p>
     #   @return [Types::ExchangeCodeForTokenRequestBody]
     class ExchangeCodeForTokenInput < Struct.new(
+      nil,
       :provider,
       :request,
       keyword_init: true
@@ -1101,6 +1138,7 @@ module Aws::AmplifyUIBuilder
     #         expired.</p>
     #   @return [String]
     class ExchangeCodeForTokenOutput < Struct.new(
+      nil,
       :access_token,
       :expires_in,
       :refresh_token,
@@ -1120,6 +1158,7 @@ module Aws::AmplifyUIBuilder
     #   <p>The ID of the client to request the token from.</p>
     #   @return [String]
     class ExchangeCodeForTokenRequestBody < Struct.new(
+      nil,
       :code,
       :redirect_uri,
       :client_id,
@@ -1139,6 +1178,7 @@ module Aws::AmplifyUIBuilder
     #   <p>The token to request the next page of results.</p>
     #   @return [String]
     class ExportComponentsInput < Struct.new(
+      nil,
       :app_id,
       :environment_name,
       :next_token,
@@ -1154,6 +1194,7 @@ module Aws::AmplifyUIBuilder
     #   <p>The pagination token that's included if more results are available.</p>
     #   @return [String]
     class ExportComponentsOutput < Struct.new(
+      nil,
       :entities,
       :next_token,
       keyword_init: true
@@ -1171,6 +1212,7 @@ module Aws::AmplifyUIBuilder
     #   <p>The token to request the next page of results.</p>
     #   @return [String]
     class ExportFormsInput < Struct.new(
+      nil,
       :app_id,
       :environment_name,
       :next_token,
@@ -1186,6 +1228,7 @@ module Aws::AmplifyUIBuilder
     #   <p>The pagination token that's included if more results are available.</p>
     #   @return [String]
     class ExportFormsOutput < Struct.new(
+      nil,
       :entities,
       :next_token,
       keyword_init: true
@@ -1203,6 +1246,7 @@ module Aws::AmplifyUIBuilder
     #   <p>The token to request the next page of results.</p>
     #   @return [String]
     class ExportThemesInput < Struct.new(
+      nil,
       :app_id,
       :environment_name,
       :next_token,
@@ -1218,6 +1262,7 @@ module Aws::AmplifyUIBuilder
     #   <p>The pagination token that's included if more results are available.</p>
     #   @return [String]
     class ExportThemesOutput < Struct.new(
+      nil,
       :entities,
       :next_token,
       keyword_init: true
@@ -1242,6 +1287,7 @@ module Aws::AmplifyUIBuilder
     #   <p>The validations to perform on the value in the field.</p>
     #   @return [Array<Types::FieldValidationConfiguration>]
     class FieldConfig < Struct.new(
+      nil,
       :label,
       :position,
       :excluded,
@@ -1303,6 +1349,7 @@ module Aws::AmplifyUIBuilder
     #   <p>The configuration for the file uploader field.</p>
     #   @return [Types::FileUploaderFieldConfig]
     class FieldInputConfig < Struct.new(
+      nil,
       :type,
       :required,
       :read_only,
@@ -1364,6 +1411,7 @@ module Aws::AmplifyUIBuilder
     #   <p>The validation message to display.</p>
     #   @return [String]
     class FieldValidationConfiguration < Struct.new(
+      nil,
       :type,
       :str_values,
       :num_values,
@@ -1405,6 +1453,7 @@ module Aws::AmplifyUIBuilder
     #         unlimited file size.</p>
     #   @return [Integer]
     class FileUploaderFieldConfig < Struct.new(
+      nil,
       :access_level,
       :accepted_file_types,
       :show_thumbnails,
@@ -1460,6 +1509,7 @@ module Aws::AmplifyUIBuilder
     #   <p>Specifies an icon or decoration to display on the form.</p>
     #   @return [String]
     class Form < Struct.new(
+      nil,
       :app_id,
       :environment_name,
       :id,
@@ -1486,6 +1536,7 @@ module Aws::AmplifyUIBuilder
     #   <p>The property to retrieve a value from.</p>
     #   @return [String]
     class FormBindingElement < Struct.new(
+      nil,
       :element,
       :property,
       keyword_init: true
@@ -1504,6 +1555,7 @@ module Aws::AmplifyUIBuilder
     #   <p>The position of the button.</p>
     #   @return [Types::FieldPosition]
     class FormButton < Struct.new(
+      nil,
       :excluded,
       :children,
       :position,
@@ -1526,6 +1578,7 @@ module Aws::AmplifyUIBuilder
     #   <p>Displays a submit button.</p>
     #   @return [Types::FormButton]
     class FormCTA < Struct.new(
+      nil,
       :position,
       :clear,
       :cancel,
@@ -1543,6 +1596,7 @@ module Aws::AmplifyUIBuilder
     #   <p>The unique name of the data type you are using as the data source for the form.</p>
     #   @return [String]
     class FormDataTypeConfig < Struct.new(
+      nil,
       :data_source_type,
       :data_type_name,
       keyword_init: true
@@ -1560,6 +1614,7 @@ module Aws::AmplifyUIBuilder
     #   <p>Describes the properties to customize with data at runtime.</p>
     #   @return [Types::FormInputBindingPropertiesValueProperties]
     class FormInputBindingPropertiesValue < Struct.new(
+      nil,
       :type,
       :binding_properties,
       keyword_init: true
@@ -1574,6 +1629,7 @@ module Aws::AmplifyUIBuilder
     #   <p>An Amplify DataStore model.</p>
     #   @return [String]
     class FormInputBindingPropertiesValueProperties < Struct.new(
+      nil,
       :model,
       keyword_init: true
     )
@@ -1594,6 +1650,7 @@ module Aws::AmplifyUIBuilder
     #         property.</p>
     #   @return [Array<Types::FormInputValueProperty>]
     class FormInputValueProperty < Struct.new(
+      nil,
       :value,
       :binding_properties,
       :concat,
@@ -1611,6 +1668,7 @@ module Aws::AmplifyUIBuilder
     #   <p>The data field to bind the property to.</p>
     #   @return [String]
     class FormInputValuePropertyBindingProperties < Struct.new(
+      nil,
       :property,
       :field,
       keyword_init: true
@@ -1629,6 +1687,7 @@ module Aws::AmplifyUIBuilder
     #   <p>The size of the outer padding for the form.</p>
     #   @return [Types::FormStyleConfig]
     class FormStyle < Struct.new(
+      nil,
       :horizontal_gap,
       :vertical_gap,
       :outer_padding,
@@ -1678,6 +1737,7 @@ module Aws::AmplifyUIBuilder
     #   <p>The name of the form.</p>
     #   @return [String]
     class FormSummary < Struct.new(
+      nil,
       :app_id,
       :data_type,
       :environment_name,
@@ -1699,6 +1759,7 @@ module Aws::AmplifyUIBuilder
     #   <p>The unique ID of the code generation job.</p>
     #   @return [String]
     class GetCodegenJobRequest < Struct.new(
+      nil,
       :app_id,
       :environment_name,
       :id,
@@ -1711,6 +1772,7 @@ module Aws::AmplifyUIBuilder
     #   <p>The configuration settings for the code generation job.</p>
     #   @return [Types::CodegenJob]
     class GetCodegenJobResponse < Struct.new(
+      nil,
       :job,
       keyword_init: true
     )
@@ -1727,6 +1789,7 @@ module Aws::AmplifyUIBuilder
     #   <p>The unique ID of the component.</p>
     #   @return [String]
     class GetComponentInput < Struct.new(
+      nil,
       :app_id,
       :environment_name,
       :id,
@@ -1739,6 +1802,7 @@ module Aws::AmplifyUIBuilder
     #   <p>Represents the configuration settings for the component.</p>
     #   @return [Types::Component]
     class GetComponentOutput < Struct.new(
+      nil,
       :component,
       keyword_init: true
     )
@@ -1755,6 +1819,7 @@ module Aws::AmplifyUIBuilder
     #   <p>The unique ID of the form.</p>
     #   @return [String]
     class GetFormInput < Struct.new(
+      nil,
       :app_id,
       :environment_name,
       :id,
@@ -1767,6 +1832,7 @@ module Aws::AmplifyUIBuilder
     #   <p>Represents the configuration settings for the form.</p>
     #   @return [Types::Form]
     class GetFormOutput < Struct.new(
+      nil,
       :form,
       keyword_init: true
     )
@@ -1780,6 +1846,7 @@ module Aws::AmplifyUIBuilder
     #   <p>The name of the backend environment that is part of the Amplify app.</p>
     #   @return [String]
     class GetMetadataInput < Struct.new(
+      nil,
       :app_id,
       :environment_name,
       keyword_init: true
@@ -1791,6 +1858,7 @@ module Aws::AmplifyUIBuilder
     #   <p>Represents the configuration settings for the features metadata.</p>
     #   @return [Hash<String, String>]
     class GetMetadataOutput < Struct.new(
+      nil,
       :features,
       keyword_init: true
     )
@@ -1807,6 +1875,7 @@ module Aws::AmplifyUIBuilder
     #   <p>The unique ID for the theme.</p>
     #   @return [String]
     class GetThemeInput < Struct.new(
+      nil,
       :app_id,
       :environment_name,
       :id,
@@ -1819,6 +1888,7 @@ module Aws::AmplifyUIBuilder
     #   <p>Represents the configuration settings for the theme.</p>
     #   @return [Types::Theme]
     class GetThemeOutput < Struct.new(
+      nil,
       :theme,
       keyword_init: true
     )
@@ -1842,6 +1912,7 @@ module Aws::AmplifyUIBuilder
     #   <p>The path to the GraphQL fragments file, relative to the component output directory.</p>
     #   @return [String]
     class GraphQLRenderConfig < Struct.new(
+      nil,
       :types_file_path,
       :queries_file_path,
       :mutations_file_path,
@@ -1856,6 +1927,7 @@ module Aws::AmplifyUIBuilder
     # @!attribute message
     #   @return [String]
     class InternalServerException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -1866,6 +1938,7 @@ module Aws::AmplifyUIBuilder
     # @!attribute message
     #   @return [String]
     class InvalidParameterException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -1885,6 +1958,7 @@ module Aws::AmplifyUIBuilder
     #   <p>The maximum number of jobs to retrieve.</p>
     #   @return [Integer]
     class ListCodegenJobsRequest < Struct.new(
+      nil,
       :app_id,
       :environment_name,
       :next_token,
@@ -1901,6 +1975,7 @@ module Aws::AmplifyUIBuilder
     #   <p>The pagination token that's included if more results are available.</p>
     #   @return [String]
     class ListCodegenJobsResponse < Struct.new(
+      nil,
       :entities,
       :next_token,
       keyword_init: true
@@ -1922,6 +1997,7 @@ module Aws::AmplifyUIBuilder
     #   <p>The maximum number of components to retrieve.</p>
     #   @return [Integer]
     class ListComponentsInput < Struct.new(
+      nil,
       :app_id,
       :environment_name,
       :next_token,
@@ -1938,6 +2014,7 @@ module Aws::AmplifyUIBuilder
     #   <p>The pagination token that's included if more results are available.</p>
     #   @return [String]
     class ListComponentsOutput < Struct.new(
+      nil,
       :entities,
       :next_token,
       keyword_init: true
@@ -1958,6 +2035,7 @@ module Aws::AmplifyUIBuilder
     #   <p>The maximum number of forms to retrieve.</p>
     #   @return [Integer]
     class ListFormsInput < Struct.new(
+      nil,
       :app_id,
       :environment_name,
       :next_token,
@@ -1974,6 +2052,7 @@ module Aws::AmplifyUIBuilder
     #   <p>The pagination token that's included if more results are available.</p>
     #   @return [String]
     class ListFormsOutput < Struct.new(
+      nil,
       :entities,
       :next_token,
       keyword_init: true
@@ -1985,6 +2064,7 @@ module Aws::AmplifyUIBuilder
     #   <p>The Amazon Resource Name (ARN) to use to list tags.</p>
     #   @return [String]
     class ListTagsForResourceRequest < Struct.new(
+      nil,
       :resource_arn,
       keyword_init: true
     )
@@ -1995,6 +2075,7 @@ module Aws::AmplifyUIBuilder
     #   <p>A list of tag key value pairs for a specified Amazon Resource Name (ARN).</p>
     #   @return [Hash<String, String>]
     class ListTagsForResourceResponse < Struct.new(
+      nil,
       :tags,
       keyword_init: true
     )
@@ -2015,6 +2096,7 @@ module Aws::AmplifyUIBuilder
     #   <p>The maximum number of theme results to return in the response.</p>
     #   @return [Integer]
     class ListThemesInput < Struct.new(
+      nil,
       :app_id,
       :environment_name,
       :next_token,
@@ -2031,6 +2113,7 @@ module Aws::AmplifyUIBuilder
     #   <p>The pagination token that's returned if more results are available.</p>
     #   @return [String]
     class ListThemesOutput < Struct.new(
+      nil,
       :entities,
       :next_token,
       keyword_init: true
@@ -2050,6 +2133,7 @@ module Aws::AmplifyUIBuilder
     #   <p>The state configuration to assign to the property.</p>
     #   @return [Types::ComponentProperty]
     class MutationActionSetStateParameter < Struct.new(
+      nil,
       :component_name,
       :property,
       :set,
@@ -2060,6 +2144,7 @@ module Aws::AmplifyUIBuilder
 
     # <p>Describes the configuration for an application with no API being used.</p>
     class NoApiRenderConfig < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -2086,6 +2171,7 @@ module Aws::AmplifyUIBuilder
     #   <p>The type of value to use when performing the evaluation.</p>
     #   @return [String]
     class Predicate < Struct.new(
+      nil,
       :or,
       :and,
       :field,
@@ -2102,6 +2188,7 @@ module Aws::AmplifyUIBuilder
     #   <p>The new information to store.</p>
     #   @return [String]
     class PutMetadataFlagBody < Struct.new(
+      nil,
       :new_value,
       keyword_init: true
     )
@@ -2121,6 +2208,7 @@ module Aws::AmplifyUIBuilder
     #   <p>The metadata information to store.</p>
     #   @return [Types::PutMetadataFlagBody]
     class PutMetadataFlagInput < Struct.new(
+      nil,
       :app_id,
       :environment_name,
       :feature_name,
@@ -2153,6 +2241,7 @@ module Aws::AmplifyUIBuilder
     #   <p>Lists the dependency packages that may be required for the project code to run.</p>
     #   @return [Hash<String, String>]
     class ReactStartCodegenJobData < Struct.new(
+      nil,
       :module,
       :target,
       :script,
@@ -2178,6 +2267,7 @@ module Aws::AmplifyUIBuilder
     #   <p>Information about the refresh token request.</p>
     #   @return [Types::RefreshTokenRequestBody]
     class RefreshTokenInput < Struct.new(
+      nil,
       :provider,
       :refresh_token_body,
       keyword_init: true
@@ -2192,6 +2282,7 @@ module Aws::AmplifyUIBuilder
     #   <p>The date and time when the new access token expires.</p>
     #   @return [Integer]
     class RefreshTokenOutput < Struct.new(
+      nil,
       :access_token,
       :expires_in,
       keyword_init: true
@@ -2208,6 +2299,7 @@ module Aws::AmplifyUIBuilder
     #   <p>The ID of the client to request the token from.</p>
     #   @return [String]
     class RefreshTokenRequestBody < Struct.new(
+      nil,
       :token,
       :client_id,
       keyword_init: true
@@ -2219,6 +2311,7 @@ module Aws::AmplifyUIBuilder
     # @!attribute message
     #   @return [String]
     class ResourceConflictException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -2229,6 +2322,7 @@ module Aws::AmplifyUIBuilder
     # @!attribute message
     #   @return [String]
     class ResourceNotFoundException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -2262,6 +2356,7 @@ module Aws::AmplifyUIBuilder
     #         model.</p>
     #   @return [Boolean]
     class SectionalElement < Struct.new(
+      nil,
       :type,
       :position,
       :text,
@@ -2278,6 +2373,7 @@ module Aws::AmplifyUIBuilder
     # @!attribute message
     #   @return [String]
     class ServiceQuotaExceededException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -2292,6 +2388,7 @@ module Aws::AmplifyUIBuilder
     #   <p>The direction of the sort, either ascending or descending.</p>
     #   @return [String]
     class SortProperty < Struct.new(
+      nil,
       :field,
       :direction,
       keyword_init: true
@@ -2316,6 +2413,7 @@ module Aws::AmplifyUIBuilder
     #   <p>One or more key-value pairs to use when tagging the code generation job data.</p>
     #   @return [Hash<String, String>]
     class StartCodegenJobData < Struct.new(
+      nil,
       :render_config,
       :generic_data_schema,
       :auto_generate_forms,
@@ -2339,6 +2437,7 @@ module Aws::AmplifyUIBuilder
     #   <p>The code generation job resource configuration.</p>
     #   @return [Types::StartCodegenJobData]
     class StartCodegenJobRequest < Struct.new(
+      nil,
       :app_id,
       :environment_name,
       :client_token,
@@ -2352,6 +2451,7 @@ module Aws::AmplifyUIBuilder
     #   <p>The code generation job for a UI component that is associated with an Amplify app.</p>
     #   @return [Types::CodegenJob]
     class StartCodegenJobResponse < Struct.new(
+      nil,
       :entity,
       keyword_init: true
     )
@@ -2365,6 +2465,7 @@ module Aws::AmplifyUIBuilder
     #   <p>A list of tag key value pairs for a specified Amazon Resource Name (ARN).</p>
     #   @return [Hash<String, String>]
     class TagResourceRequest < Struct.new(
+      nil,
       :resource_arn,
       :tags,
       keyword_init: true
@@ -2373,6 +2474,7 @@ module Aws::AmplifyUIBuilder
     end
 
     class TagResourceResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -2409,6 +2511,7 @@ module Aws::AmplifyUIBuilder
     #   <p>One or more key-value pairs to use when tagging the theme.</p>
     #   @return [Hash<String, String>]
     class Theme < Struct.new(
+      nil,
       :app_id,
       :environment_name,
       :id,
@@ -2437,6 +2540,7 @@ module Aws::AmplifyUIBuilder
     #   <p>The name of the theme.</p>
     #   @return [String]
     class ThemeSummary < Struct.new(
+      nil,
       :app_id,
       :environment_name,
       :id,
@@ -2454,6 +2558,7 @@ module Aws::AmplifyUIBuilder
     #   <p>A list of key-value pairs that define the theme's properties.</p>
     #   @return [Array<Types::ThemeValues>]
     class ThemeValue < Struct.new(
+      nil,
       :value,
       :children,
       keyword_init: true
@@ -2469,6 +2574,7 @@ module Aws::AmplifyUIBuilder
     #   <p>The value of the property.</p>
     #   @return [Types::ThemeValue]
     class ThemeValues < Struct.new(
+      nil,
       :key,
       :value,
       keyword_init: true
@@ -2480,6 +2586,7 @@ module Aws::AmplifyUIBuilder
     # @!attribute message
     #   @return [String]
     class ThrottlingException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -2490,6 +2597,7 @@ module Aws::AmplifyUIBuilder
     # @!attribute message
     #   @return [String]
     class UnauthorizedException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -2503,6 +2611,7 @@ module Aws::AmplifyUIBuilder
     #   <p>The tag keys to use to untag a resource.</p>
     #   @return [Array<String>]
     class UntagResourceRequest < Struct.new(
+      nil,
       :resource_arn,
       :tag_keys,
       keyword_init: true
@@ -2511,6 +2620,7 @@ module Aws::AmplifyUIBuilder
     end
 
     class UntagResourceResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -2556,6 +2666,7 @@ module Aws::AmplifyUIBuilder
     #   <p>The schema version of the component when it was imported.</p>
     #   @return [String]
     class UpdateComponentData < Struct.new(
+      nil,
       :id,
       :name,
       :source_id,
@@ -2589,6 +2700,7 @@ module Aws::AmplifyUIBuilder
     #   <p>The configuration of the updated component.</p>
     #   @return [Types::UpdateComponentData]
     class UpdateComponentInput < Struct.new(
+      nil,
       :app_id,
       :environment_name,
       :id,
@@ -2603,6 +2715,7 @@ module Aws::AmplifyUIBuilder
     #   <p>Describes the configuration of the updated component.</p>
     #   @return [Types::Component]
     class UpdateComponentOutput < Struct.new(
+      nil,
       :entity,
       keyword_init: true
     )
@@ -2640,6 +2753,7 @@ module Aws::AmplifyUIBuilder
     #   <p>Specifies an icon or decoration to display on the form.</p>
     #   @return [String]
     class UpdateFormData < Struct.new(
+      nil,
       :name,
       :data_type,
       :form_action_type,
@@ -2670,6 +2784,7 @@ module Aws::AmplifyUIBuilder
     #   <p>The request accepts the following data in JSON format.</p>
     #   @return [Types::UpdateFormData]
     class UpdateFormInput < Struct.new(
+      nil,
       :app_id,
       :environment_name,
       :id,
@@ -2684,6 +2799,7 @@ module Aws::AmplifyUIBuilder
     #   <p>Describes the configuration of the updated form.</p>
     #   @return [Types::Form]
     class UpdateFormOutput < Struct.new(
+      nil,
       :entity,
       keyword_init: true
     )
@@ -2704,6 +2820,7 @@ module Aws::AmplifyUIBuilder
     #   <p>Describes the properties that can be overriden to customize the theme.</p>
     #   @return [Array<Types::ThemeValues>]
     class UpdateThemeData < Struct.new(
+      nil,
       :id,
       :name,
       :values,
@@ -2729,6 +2846,7 @@ module Aws::AmplifyUIBuilder
     #   <p>The configuration of the updated theme.</p>
     #   @return [Types::UpdateThemeData]
     class UpdateThemeInput < Struct.new(
+      nil,
       :app_id,
       :environment_name,
       :id,
@@ -2743,6 +2861,7 @@ module Aws::AmplifyUIBuilder
     #   <p>Describes the configuration of the updated theme.</p>
     #   @return [Types::Theme]
     class UpdateThemeOutput < Struct.new(
+      nil,
       :entity,
       keyword_init: true
     )
@@ -2758,6 +2877,7 @@ module Aws::AmplifyUIBuilder
     #   <p>The complex object.</p>
     #   @return [Types::FormInputValueProperty]
     class ValueMapping < Struct.new(
+      nil,
       :display_value,
       :value,
       keyword_init: true
@@ -2773,6 +2893,7 @@ module Aws::AmplifyUIBuilder
     #   <p>The information to bind fields to data at runtime.</p>
     #   @return [Hash<String, Types::FormInputBindingPropertiesValue>]
     class ValueMappings < Struct.new(
+      nil,
       :values,
       :binding_properties,
       keyword_init: true

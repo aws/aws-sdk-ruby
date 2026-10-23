@@ -17,6 +17,7 @@ module Aws::EC2
     #            maximum limit.</p>
     #   @return [Integer]
     class AcceleratorCount < Struct.new(
+      nil,
       :min,
       :max,
       keyword_init: true
@@ -37,6 +38,7 @@ module Aws::EC2
     #            <code>0</code>.</p>
     #   @return [Integer]
     class AcceleratorCountRequest < Struct.new(
+      nil,
       :min,
       :max,
       keyword_init: true
@@ -54,6 +56,7 @@ module Aws::EC2
     #            there is no maximum limit.</p>
     #   @return [Integer]
     class AcceleratorTotalMemoryMiB < Struct.new(
+      nil,
       :min,
       :max,
       keyword_init: true
@@ -71,6 +74,7 @@ module Aws::EC2
     #            parameter.</p>
     #   @return [Integer]
     class AcceleratorTotalMemoryMiBRequest < Struct.new(
+      nil,
       :min,
       :max,
       keyword_init: true
@@ -92,6 +96,7 @@ module Aws::EC2
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     class AcceptAddressTransferRequest < Struct.new(
+      nil,
       :address,
       :tag_specifications,
       :dry_run,
@@ -104,6 +109,7 @@ module Aws::EC2
     #   <p>An Elastic IP address transfer.</p>
     #   @return [Types::AddressTransfer]
     class AcceptAddressTransferResult < Struct.new(
+      nil,
       :address_transfer,
       keyword_init: true
     )
@@ -117,6 +123,7 @@ module Aws::EC2
     #   <p>The ID of the Capacity Reservation for which to accept the request.</p>
     #   @return [String]
     class AcceptCapacityReservationBillingOwnershipRequest < Struct.new(
+      nil,
       :dry_run,
       :capacity_reservation_id,
       keyword_init: true
@@ -128,6 +135,7 @@ module Aws::EC2
     #   <p>Returns <code>true</code> if the request succeeds; otherwise, it returns an error.</p>
     #   @return [Boolean]
     class AcceptCapacityReservationBillingOwnershipResult < Struct.new(
+      nil,
       :return,
       keyword_init: true
     )
@@ -150,6 +158,7 @@ module Aws::EC2
     #         Convertible Reserved Instances.</p>
     #   @return [Array<Types::TargetConfigurationRequest>]
     class AcceptReservedInstancesExchangeQuoteRequest < Struct.new(
+      nil,
       :dry_run,
       :reserved_instance_ids,
       :target_configurations,
@@ -163,6 +172,7 @@ module Aws::EC2
     #   <p>The ID of the successful exchange.</p>
     #   @return [String]
     class AcceptReservedInstancesExchangeQuoteResult < Struct.new(
+      nil,
       :exchange_id,
       keyword_init: true
     )
@@ -184,6 +194,7 @@ module Aws::EC2
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     class AcceptTransitGatewayMulticastDomainAssociationsRequest < Struct.new(
+      nil,
       :transit_gateway_multicast_domain_id,
       :transit_gateway_attachment_id,
       :subnet_ids,
@@ -197,6 +208,7 @@ module Aws::EC2
     #   <p>Information about the multicast domain associations.</p>
     #   @return [Types::TransitGatewayMulticastDomainAssociations]
     class AcceptTransitGatewayMulticastDomainAssociationsResult < Struct.new(
+      nil,
       :associations,
       keyword_init: true
     )
@@ -212,6 +224,7 @@ module Aws::EC2
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     class AcceptTransitGatewayPeeringAttachmentRequest < Struct.new(
+      nil,
       :transit_gateway_attachment_id,
       :dry_run,
       keyword_init: true
@@ -223,6 +236,7 @@ module Aws::EC2
     #   <p>The transit gateway peering attachment.</p>
     #   @return [Types::TransitGatewayPeeringAttachment]
     class AcceptTransitGatewayPeeringAttachmentResult < Struct.new(
+      nil,
       :transit_gateway_peering_attachment,
       keyword_init: true
     )
@@ -238,6 +252,7 @@ module Aws::EC2
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     class AcceptTransitGatewayVpcAttachmentRequest < Struct.new(
+      nil,
       :transit_gateway_attachment_id,
       :dry_run,
       keyword_init: true
@@ -249,6 +264,7 @@ module Aws::EC2
     #   <p>The VPC attachment.</p>
     #   @return [Types::TransitGatewayVpcAttachment]
     class AcceptTransitGatewayVpcAttachmentResult < Struct.new(
+      nil,
       :transit_gateway_vpc_attachment,
       keyword_init: true
     )
@@ -267,6 +283,7 @@ module Aws::EC2
     #   <p>The IDs of the interface VPC endpoints.</p>
     #   @return [Array<String>]
     class AcceptVpcEndpointConnectionsRequest < Struct.new(
+      nil,
       :dry_run,
       :service_id,
       :vpc_endpoint_ids,
@@ -280,6 +297,7 @@ module Aws::EC2
     #               applicable.</p>
     #   @return [Array<Types::UnsuccessfulItem>]
     class AcceptVpcEndpointConnectionsResult < Struct.new(
+      nil,
       :unsuccessful,
       keyword_init: true
     )
@@ -296,6 +314,7 @@ module Aws::EC2
     #   			request.</p>
     #   @return [String]
     class AcceptVpcPeeringConnectionRequest < Struct.new(
+      nil,
       :dry_run,
       :vpc_peering_connection_id,
       keyword_init: true
@@ -307,6 +326,7 @@ module Aws::EC2
     #   <p>Information about the VPC peering connection.</p>
     #   @return [Types::VpcPeeringConnection]
     class AcceptVpcPeeringConnectionResult < Struct.new(
+      nil,
       :vpc_peering_connection,
       keyword_init: true
     )
@@ -327,6 +347,7 @@ module Aws::EC2
     #   <p>The finding components.</p>
     #   @return [Array<Types::PathComponent>]
     class AccessScopeAnalysisFinding < Struct.new(
+      nil,
       :network_insights_access_scope_analysis_id,
       :network_insights_access_scope_id,
       :finding_id,
@@ -347,6 +368,7 @@ module Aws::EC2
     #   <p>The through resources.</p>
     #   @return [Array<Types::ThroughResourcesStatement>]
     class AccessScopePath < Struct.new(
+      nil,
       :source,
       :destination,
       :through_resources,
@@ -366,6 +388,7 @@ module Aws::EC2
     #   <p>The through resources.</p>
     #   @return [Array<Types::ThroughResourcesStatementRequest>]
     class AccessScopePathRequest < Struct.new(
+      nil,
       :source,
       :destination,
       :through_resources,
@@ -382,6 +405,7 @@ module Aws::EC2
     #   <p>The values for the account attribute.</p>
     #   @return [Array<Types::AccountAttributeValue>]
     class AccountAttribute < Struct.new(
+      nil,
       :attribute_name,
       :attribute_values,
       keyword_init: true
@@ -394,6 +418,7 @@ module Aws::EC2
     #   <p>The value of the attribute.</p>
     #   @return [String]
     class AccountAttributeValue < Struct.new(
+      nil,
       :attribute_value,
       keyword_init: true
     )
@@ -416,6 +441,7 @@ module Aws::EC2
     #               is <code>unhealthy</code>. Otherwise, the health status is <code>healthy</code>.</p>
     #   @return [String]
     class ActiveInstance < Struct.new(
+      nil,
       :instance_id,
       :instance_type,
       :spot_instance_request_id,
@@ -454,6 +480,7 @@ module Aws::EC2
     #   <p>The reason for the current provisioning status.</p>
     #   @return [String]
     class ActiveVpnTunnelStatus < Struct.new(
+      nil,
       :phase1_encryption_algorithm,
       :phase2_encryption_algorithm,
       :phase1_integrity_algorithm,
@@ -475,6 +502,7 @@ module Aws::EC2
     #   <p>The name of the operating Region.</p>
     #   @return [String]
     class AddIpamOperatingRegion < Struct.new(
+      nil,
       :region_name,
       keyword_init: true
     )
@@ -516,6 +544,7 @@ module Aws::EC2
     #            <p>For more information on how to construct an entity path, see <a href="https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_last-accessed-view-data-orgs.html#access_policies_access-advisor-viewing-orgs-entity-path">Understand the Amazon Web Services Organizations entity path</a> in the <i>Amazon Web Services Identity and Access Management User Guide</i>.</p>
     #   @return [String]
     class AddIpamOrganizationalUnitExclusion < Struct.new(
+      nil,
       :organizations_entity_path,
       keyword_init: true
     )
@@ -531,6 +560,7 @@ module Aws::EC2
     #            <p>Constraints: Up to 255 characters in length.</p>
     #   @return [String]
     class AddPrefixListEntry < Struct.new(
+      nil,
       :cidr,
       :description,
       keyword_init: true
@@ -552,6 +582,7 @@ module Aws::EC2
     #   <p>The ID of the service.</p>
     #   @return [String]
     class AddedPrincipal < Struct.new(
+      nil,
       :principal_type,
       :principal,
       :service_permission_id,
@@ -587,6 +618,7 @@ module Aws::EC2
     #   <p>The load balancers.</p>
     #   @return [Array<Types::AnalysisComponent>]
     class AdditionalDetail < Struct.new(
+      nil,
       :additional_detail_type,
       :component,
       :vpc_endpoint_service,
@@ -655,6 +687,7 @@ module Aws::EC2
     #   <p>The Elastic IP address.</p>
     #   @return [String]
     class Address < Struct.new(
+      nil,
       :allocation_id,
       :association_id,
       :domain,
@@ -690,6 +723,7 @@ module Aws::EC2
     #   <p>The updated PTR record for the IP address.</p>
     #   @return [Types::PtrUpdateStatus]
     class AddressAttribute < Struct.new(
+      nil,
       :public_ip,
       :allocation_id,
       :ptr_record,
@@ -721,6 +755,7 @@ module Aws::EC2
     #   <p>The Elastic IP address transfer status.</p>
     #   @return [String]
     class AddressTransfer < Struct.new(
+      nil,
       :public_ip,
       :allocation_id,
       :transfer_account_id,
@@ -763,6 +798,7 @@ module Aws::EC2
     #            </note>
     #   @return [String]
     class AdvertiseByoipCidrRequest < Struct.new(
+      nil,
       :cidr,
       :asn,
       :dry_run,
@@ -776,6 +812,7 @@ module Aws::EC2
     #   <p>Information about the address range.</p>
     #   @return [Types::ByoipCidr]
     class AdvertiseByoipCidrResult < Struct.new(
+      nil,
       :byoip_cidr,
       keyword_init: true
     )
@@ -814,6 +851,7 @@ module Aws::EC2
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     class AllocateAddressRequest < Struct.new(
+      nil,
       :domain,
       :address,
       :public_ipv4_pool,
@@ -854,6 +892,7 @@ module Aws::EC2
     #   <p>The Elastic IP address.</p>
     #   @return [String]
     class AllocateAddressResult < Struct.new(
+      nil,
       :allocation_id,
       :public_ipv4_pool,
       :network_border_group,
@@ -949,6 +988,7 @@ module Aws::EC2
     #   <p>The Availability Zone in which to allocate the Dedicated Host.</p>
     #   @return [String]
     class AllocateHostsRequest < Struct.new(
+      nil,
       :instance_family,
       :tag_specifications,
       :host_recovery,
@@ -972,6 +1012,7 @@ module Aws::EC2
     #               specific host.</p>
     #   @return [Array<String>]
     class AllocateHostsResult < Struct.new(
+      nil,
       :host_ids,
       keyword_init: true
     )
@@ -1026,6 +1067,7 @@ module Aws::EC2
     #   <p>Exclude a particular CIDR range from being returned by the pool. Disallowed CIDRs are only allowed if using netmask length for allocation.</p>
     #   @return [Array<String>]
     class AllocateIpamPoolCidrRequest < Struct.new(
+      nil,
       :dry_run,
       :ipam_pool_id,
       :cidr,
@@ -1044,6 +1086,7 @@ module Aws::EC2
     #   <p>Information about the allocation created.</p>
     #   @return [Types::IpamPoolAllocation]
     class AllocateIpamPoolCidrResult < Struct.new(
+      nil,
       :ipam_pool_allocation,
       keyword_init: true
     )
@@ -1067,6 +1110,7 @@ module Aws::EC2
     #   <p>The ID of the service.</p>
     #   @return [String]
     class AllowedPrincipal < Struct.new(
+      nil,
       :principal_type,
       :principal,
       :service_permission_id,
@@ -1085,6 +1129,7 @@ module Aws::EC2
     #   <p>The Amazon Resource Name (ARN) of the component.</p>
     #   @return [String]
     class AlternatePathHint < Struct.new(
+      nil,
       :component_id,
       :component_arn,
       keyword_init: true
@@ -1112,6 +1157,7 @@ module Aws::EC2
     #   <p>The rule number.</p>
     #   @return [Integer]
     class AnalysisAclRule < Struct.new(
+      nil,
       :cidr,
       :egress,
       :port_range,
@@ -1134,6 +1180,7 @@ module Aws::EC2
     #   <p>The name of the analysis component.</p>
     #   @return [String]
     class AnalysisComponent < Struct.new(
+      nil,
       :id,
       :arn,
       :name,
@@ -1150,6 +1197,7 @@ module Aws::EC2
     #   <p>[Classic Load Balancers] The back-end port for the listener.</p>
     #   @return [Integer]
     class AnalysisLoadBalancerListener < Struct.new(
+      nil,
       :load_balancer_port,
       :instance_port,
       keyword_init: true
@@ -1174,6 +1222,7 @@ module Aws::EC2
     #   <p>The port on which the target is listening.</p>
     #   @return [Integer]
     class AnalysisLoadBalancerTarget < Struct.new(
+      nil,
       :address,
       :availability_zone,
       :availability_zone_id,
@@ -1202,6 +1251,7 @@ module Aws::EC2
     #   <p>The source port ranges.</p>
     #   @return [Array<Types::PortRange>]
     class AnalysisPacketHeader < Struct.new(
+      nil,
       :destination_addresses,
       :destination_port_ranges,
       :protocol,
@@ -1275,6 +1325,7 @@ module Aws::EC2
     #   <p>The ID of a local gateway.</p>
     #   @return [String]
     class AnalysisRouteTableRoute < Struct.new(
+      nil,
       :destination_cidr,
       :destination_prefix_list_id,
       :egress_only_internet_gateway_id,
@@ -1322,6 +1373,7 @@ module Aws::EC2
     #   <p>The protocol name.</p>
     #   @return [String]
     class AnalysisSecurityGroupRule < Struct.new(
+      nil,
       :cidr,
       :direction,
       :security_group_id,
@@ -1347,6 +1399,7 @@ module Aws::EC2
     #   <p>Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     class ApplySecurityGroupsToClientVpnTargetNetworkRequest < Struct.new(
+      nil,
       :client_vpn_endpoint_id,
       :vpc_id,
       :security_group_ids,
@@ -1360,6 +1413,7 @@ module Aws::EC2
     #   <p>The IDs of the applied security groups.</p>
     #   @return [Array<String>]
     class ApplySecurityGroupsToClientVpnTargetNetworkResult < Struct.new(
+      nil,
       :security_group_ids,
       keyword_init: true
     )
@@ -1380,6 +1434,7 @@ module Aws::EC2
     #   <p>The association's state.</p>
     #   @return [String]
     class AsnAssociation < Struct.new(
+      nil,
       :asn,
       :cidr,
       :status_message,
@@ -1398,6 +1453,7 @@ module Aws::EC2
     #   <p>The authorization context's signature.</p>
     #   @return [String]
     class AsnAuthorizationContext < Struct.new(
+      nil,
       :message,
       :signature,
       keyword_init: true
@@ -1428,6 +1484,7 @@ module Aws::EC2
     #               specifying specific IPv6 addresses.</p>
     #   @return [Integer]
     class AssignIpv6AddressesRequest < Struct.new(
+      nil,
       :ipv6_prefix_count,
       :ipv6_prefixes,
       :network_interface_id,
@@ -1449,6 +1506,7 @@ module Aws::EC2
     #   <p>The ID of the network interface.</p>
     #   @return [String]
     class AssignIpv6AddressesResult < Struct.new(
+      nil,
       :assigned_ipv6_addresses,
       :assigned_ipv6_prefixes,
       :network_interface_id,
@@ -1483,6 +1541,7 @@ module Aws::EC2
     #               interface or instance to be reassigned to the specified network interface.</p>
     #   @return [Boolean]
     class AssignPrivateIpAddressesRequest < Struct.new(
+      nil,
       :ipv4_prefixes,
       :ipv4_prefix_count,
       :network_interface_id,
@@ -1504,6 +1563,7 @@ module Aws::EC2
     #   <p>The IPv4 prefixes that are assigned to the network interface.</p>
     #   @return [Array<Types::Ipv4PrefixSpecification>]
     class AssignPrivateIpAddressesResult < Struct.new(
+      nil,
       :network_interface_id,
       :assigned_private_ip_addresses,
       :assigned_ipv4_prefixes,
@@ -1527,6 +1587,7 @@ module Aws::EC2
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     class AssignPrivateNatGatewayAddressRequest < Struct.new(
+      nil,
       :nat_gateway_id,
       :private_ip_addresses,
       :private_ip_address_count,
@@ -1543,6 +1604,7 @@ module Aws::EC2
     #   <p>NAT gateway IP addresses.</p>
     #   @return [Array<Types::NatGatewayAddress>]
     class AssignPrivateNatGatewayAddressResult < Struct.new(
+      nil,
       :nat_gateway_id,
       :nat_gateway_addresses,
       keyword_init: true
@@ -1555,6 +1617,7 @@ module Aws::EC2
     #   <p>The private IP address assigned to the network interface.</p>
     #   @return [String]
     class AssignedPrivateIpAddress < Struct.new(
+      nil,
       :private_ip_address,
       keyword_init: true
     )
@@ -1587,6 +1650,7 @@ module Aws::EC2
     #   <p>Reassociation is automatic, but you can specify false to ensure the operation fails if the Elastic IP address is already associated with another resource.</p>
     #   @return [Boolean]
     class AssociateAddressRequest < Struct.new(
+      nil,
       :allocation_id,
       :instance_id,
       :public_ip,
@@ -1603,6 +1667,7 @@ module Aws::EC2
     #   <p>The ID that represents the association of the Elastic IP address with an instance.</p>
     #   @return [String]
     class AssociateAddressResult < Struct.new(
+      nil,
       :association_id,
       keyword_init: true
     )
@@ -1619,6 +1684,7 @@ module Aws::EC2
     #   <p>The ID of the consumer account to which to assign billing.</p>
     #   @return [String]
     class AssociateCapacityReservationBillingOwnerRequest < Struct.new(
+      nil,
       :dry_run,
       :capacity_reservation_id,
       :unused_reservation_billing_owner_id,
@@ -1631,6 +1697,7 @@ module Aws::EC2
     #   <p>Returns <code>true</code> if the request succeeds; otherwise, it returns an error.</p>
     #   @return [Boolean]
     class AssociateCapacityReservationBillingOwnerResult < Struct.new(
+      nil,
       :return,
       keyword_init: true
     )
@@ -1651,6 +1718,7 @@ module Aws::EC2
     #   <p>Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     class AssociateClientVpnTargetNetworkRequest < Struct.new(
+      nil,
       :client_vpn_endpoint_id,
       :subnet_id,
       :client_token,
@@ -1667,6 +1735,7 @@ module Aws::EC2
     #   <p>The current state of the target network association.</p>
     #   @return [Types::AssociationStatus]
     class AssociateClientVpnTargetNetworkResult < Struct.new(
+      nil,
       :association_id,
       :status,
       keyword_init: true
@@ -1687,6 +1756,7 @@ module Aws::EC2
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     class AssociateDhcpOptionsRequest < Struct.new(
+      nil,
       :dhcp_options_id,
       :vpc_id,
       :dry_run,
@@ -1706,6 +1776,7 @@ module Aws::EC2
     #   <p>Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     class AssociateEnclaveCertificateIamRoleRequest < Struct.new(
+      nil,
       :certificate_arn,
       :role_arn,
       :dry_run,
@@ -1725,6 +1796,7 @@ module Aws::EC2
     #   <p>The ID of the KMS key used to encrypt the private key of the certificate.</p>
     #   @return [String]
     class AssociateEnclaveCertificateIamRoleResult < Struct.new(
+      nil,
       :certificate_s3_bucket_name,
       :certificate_s3_object_key,
       :encryption_kms_key_id,
@@ -1740,6 +1812,7 @@ module Aws::EC2
     #   <p>The ID of the instance.</p>
     #   @return [String]
     class AssociateIamInstanceProfileRequest < Struct.new(
+      nil,
       :iam_instance_profile,
       :instance_id,
       keyword_init: true
@@ -1751,6 +1824,7 @@ module Aws::EC2
     #   <p>Information about the IAM instance profile association.</p>
     #   @return [Types::IamInstanceProfileAssociation]
     class AssociateIamInstanceProfileResult < Struct.new(
+      nil,
       :iam_instance_profile_association,
       keyword_init: true
     )
@@ -1769,6 +1843,7 @@ module Aws::EC2
     #   <p>One or more targets associated with the specified event window.</p>
     #   @return [Types::InstanceEventWindowAssociationRequest]
     class AssociateInstanceEventWindowRequest < Struct.new(
+      nil,
       :dry_run,
       :instance_event_window_id,
       :association_target,
@@ -1781,6 +1856,7 @@ module Aws::EC2
     #   <p>Information about the event window.</p>
     #   @return [Types::InstanceEventWindow]
     class AssociateInstanceEventWindowResult < Struct.new(
+      nil,
       :instance_event_window,
       keyword_init: true
     )
@@ -1799,6 +1875,7 @@ module Aws::EC2
     #   <p>The BYOIP CIDR you want to associate with an ASN.</p>
     #   @return [String]
     class AssociateIpamByoasnRequest < Struct.new(
+      nil,
       :dry_run,
       :asn,
       :cidr,
@@ -1811,6 +1888,7 @@ module Aws::EC2
     #   <p>The ASN and BYOIP CIDR association.</p>
     #   @return [Types::AsnAssociation]
     class AssociateIpamByoasnResult < Struct.new(
+      nil,
       :asn_association,
       keyword_init: true
     )
@@ -1835,6 +1913,7 @@ module Aws::EC2
     #   <p>A client token.</p>
     #   @return [String]
     class AssociateIpamResourceDiscoveryRequest < Struct.new(
+      nil,
       :dry_run,
       :ipam_id,
       :ipam_resource_discovery_id,
@@ -1849,6 +1928,7 @@ module Aws::EC2
     #   <p>A resource discovery association. An associated resource discovery is a resource discovery that has been associated with an IPAM.</p>
     #   @return [Types::IpamResourceDiscoveryAssociation]
     class AssociateIpamResourceDiscoveryResult < Struct.new(
+      nil,
       :ipam_resource_discovery_association,
       keyword_init: true
     )
@@ -1870,6 +1950,7 @@ module Aws::EC2
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     class AssociateNatGatewayAddressRequest < Struct.new(
+      nil,
       :nat_gateway_id,
       :allocation_ids,
       :private_ip_addresses,
@@ -1886,6 +1967,7 @@ module Aws::EC2
     #   <p>The IP addresses.</p>
     #   @return [Array<Types::NatGatewayAddress>]
     class AssociateNatGatewayAddressResult < Struct.new(
+      nil,
       :nat_gateway_id,
       :nat_gateway_addresses,
       keyword_init: true
@@ -1905,6 +1987,7 @@ module Aws::EC2
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     class AssociateRouteServerRequest < Struct.new(
+      nil,
       :route_server_id,
       :vpc_id,
       :dry_run,
@@ -1917,6 +2000,7 @@ module Aws::EC2
     #   <p>Information about the association between the route server and the VPC.</p>
     #   @return [Types::RouteServerAssociation]
     class AssociateRouteServerResult < Struct.new(
+      nil,
       :route_server_association,
       keyword_init: true
     )
@@ -1941,6 +2025,7 @@ module Aws::EC2
     #   <p>The ID of the route table.</p>
     #   @return [String]
     class AssociateRouteTableRequest < Struct.new(
+      nil,
       :gateway_id,
       :public_ipv4_pool,
       :dry_run,
@@ -1959,6 +2044,7 @@ module Aws::EC2
     #   <p>The state of the association.</p>
     #   @return [Types::RouteTableAssociationState]
     class AssociateRouteTableResult < Struct.new(
+      nil,
       :association_id,
       :association_state,
       keyword_init: true
@@ -1978,6 +2064,7 @@ module Aws::EC2
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     class AssociateSecurityGroupVpcRequest < Struct.new(
+      nil,
       :group_id,
       :vpc_id,
       :dry_run,
@@ -1990,6 +2077,7 @@ module Aws::EC2
     #   <p>The state of the association.</p>
     #   @return [String]
     class AssociateSecurityGroupVpcResult < Struct.new(
+      nil,
       :state,
       keyword_init: true
     )
@@ -2009,6 +2097,7 @@ module Aws::EC2
     #   <p>The IPv6 CIDR block for your subnet.</p>
     #   @return [String]
     class AssociateSubnetCidrBlockRequest < Struct.new(
+      nil,
       :ipv6_ipam_pool_id,
       :ipv6_netmask_length,
       :subnet_id,
@@ -2025,6 +2114,7 @@ module Aws::EC2
     #   <p>The ID of the subnet.</p>
     #   @return [String]
     class AssociateSubnetCidrBlockResult < Struct.new(
+      nil,
       :ipv6_cidr_block_association,
       :subnet_id,
       keyword_init: true
@@ -2047,6 +2137,7 @@ module Aws::EC2
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     class AssociateTransitGatewayMulticastDomainRequest < Struct.new(
+      nil,
       :transit_gateway_multicast_domain_id,
       :transit_gateway_attachment_id,
       :subnet_ids,
@@ -2060,6 +2151,7 @@ module Aws::EC2
     #   <p>Information about the transit gateway multicast domain associations.</p>
     #   @return [Types::TransitGatewayMulticastDomainAssociations]
     class AssociateTransitGatewayMulticastDomainResult < Struct.new(
+      nil,
       :associations,
       keyword_init: true
     )
@@ -2078,6 +2170,7 @@ module Aws::EC2
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     class AssociateTransitGatewayPolicyTableRequest < Struct.new(
+      nil,
       :transit_gateway_policy_table_id,
       :transit_gateway_attachment_id,
       :dry_run,
@@ -2090,6 +2183,7 @@ module Aws::EC2
     #   <p>Describes the association of a transit gateway and a transit gateway policy table.</p>
     #   @return [Types::TransitGatewayPolicyTableAssociation]
     class AssociateTransitGatewayPolicyTableResult < Struct.new(
+      nil,
       :association,
       keyword_init: true
     )
@@ -2108,6 +2202,7 @@ module Aws::EC2
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     class AssociateTransitGatewayRouteTableRequest < Struct.new(
+      nil,
       :transit_gateway_route_table_id,
       :transit_gateway_attachment_id,
       :dry_run,
@@ -2120,6 +2215,7 @@ module Aws::EC2
     #   <p>The ID of the association.</p>
     #   @return [Types::TransitGatewayAssociation]
     class AssociateTransitGatewayRouteTableResult < Struct.new(
+      nil,
       :association,
       keyword_init: true
     )
@@ -2149,6 +2245,7 @@ module Aws::EC2
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     class AssociateTrunkInterfaceRequest < Struct.new(
+      nil,
       :branch_interface_id,
       :trunk_interface_id,
       :vlan_id,
@@ -2169,6 +2266,7 @@ module Aws::EC2
     #                   idempotency</a>.</p>
     #   @return [String]
     class AssociateTrunkInterfaceResult < Struct.new(
+      nil,
       :interface_association,
       :client_token,
       keyword_init: true
@@ -2213,6 +2311,7 @@ module Aws::EC2
     #               cannot specify the range of IPv6 addresses or the size of the CIDR block.</p>
     #   @return [Boolean]
     class AssociateVpcCidrBlockRequest < Struct.new(
+      nil,
       :cidr_block,
       :ipv6_cidr_block_network_border_group,
       :ipv6_pool,
@@ -2238,6 +2337,7 @@ module Aws::EC2
     #   <p>The ID of the VPC.</p>
     #   @return [String]
     class AssociateVpcCidrBlockResult < Struct.new(
+      nil,
       :ipv6_cidr_block_association,
       :cidr_block_association,
       :vpc_id,
@@ -2262,6 +2362,7 @@ module Aws::EC2
     #   <p>The ID of the KMS key used to encrypt the private key.</p>
     #   @return [String]
     class AssociatedRole < Struct.new(
+      nil,
       :associated_role_arn,
       :certificate_s3_bucket_name,
       :certificate_s3_object_key,
@@ -2279,6 +2380,7 @@ module Aws::EC2
     #   <p>The target network type.</p>
     #   @return [String]
     class AssociatedTargetNetwork < Struct.new(
+      nil,
       :network_id,
       :network_type,
       keyword_init: true
@@ -2294,6 +2396,7 @@ module Aws::EC2
     #   <p>A message about the status of the target network association, if applicable.</p>
     #   @return [String]
     class AssociationStatus < Struct.new(
+      nil,
       :code,
       :message,
       keyword_init: true
@@ -2315,6 +2418,7 @@ module Aws::EC2
     #   <p>The end date for the partition.</p>
     #   @return [Time]
     class AthenaIntegration < Struct.new(
+      nil,
       :integration_result_s3_destination_arn,
       :partition_load_frequency,
       :partition_start_date,
@@ -2339,6 +2443,7 @@ module Aws::EC2
     #   <p>The IDs of the security groups. You cannot specify security groups from a different VPC.</p>
     #   @return [Array<String>]
     class AttachClassicLinkVpcRequest < Struct.new(
+      nil,
       :dry_run,
       :instance_id,
       :vpc_id,
@@ -2352,6 +2457,7 @@ module Aws::EC2
     #   <p>Returns <code>true</code> if the request succeeds; otherwise, it returns an error.</p>
     #   @return [Boolean]
     class AttachClassicLinkVpcResult < Struct.new(
+      nil,
       :return,
       keyword_init: true
     )
@@ -2370,6 +2476,7 @@ module Aws::EC2
     #   <p>The ID of the VPC.</p>
     #   @return [String]
     class AttachInternetGatewayRequest < Struct.new(
+      nil,
       :dry_run,
       :internet_gateway_id,
       :vpc_id,
@@ -2407,6 +2514,7 @@ module Aws::EC2
     #   <p>The index of the device for the network interface attachment.</p>
     #   @return [Integer]
     class AttachNetworkInterfaceRequest < Struct.new(
+      nil,
       :network_card_index,
       :ena_srd_specification,
       :ena_queue_count,
@@ -2427,6 +2535,7 @@ module Aws::EC2
     #   <p>The index of the network card.</p>
     #   @return [Integer]
     class AttachNetworkInterfaceResult < Struct.new(
+      nil,
       :attachment_id,
       :network_card_index,
       keyword_init: true
@@ -2450,6 +2559,7 @@ module Aws::EC2
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     class AttachVerifiedAccessTrustProviderRequest < Struct.new(
+      nil,
       :verified_access_instance_id,
       :verified_access_trust_provider_id,
       :client_token,
@@ -2466,6 +2576,7 @@ module Aws::EC2
     #   <p>Details about the Verified Access instance.</p>
     #   @return [Types::VerifiedAccessInstance]
     class AttachVerifiedAccessTrustProviderResult < Struct.new(
+      nil,
       :verified_access_trust_provider,
       :verified_access_instance,
       keyword_init: true
@@ -2507,6 +2618,7 @@ module Aws::EC2
     #   <p>The time stamp when the attachment initiated.</p>
     #   @return [Time]
     class AttachVolumeOutput < Struct.new(
+      nil,
       :delete_on_termination,
       :associated_resource,
       :instance_owning_service,
@@ -2536,6 +2648,7 @@ module Aws::EC2
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     class AttachVolumeRequest < Struct.new(
+      nil,
       :device,
       :instance_id,
       :volume_id,
@@ -2559,6 +2672,7 @@ module Aws::EC2
     #                   <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     class AttachVpnGatewayRequest < Struct.new(
+      nil,
       :vpc_id,
       :vpn_gateway_id,
       :dry_run,
@@ -2572,6 +2686,7 @@ module Aws::EC2
     #   <p>Information about the attachment.</p>
     #   @return [Types::VpcAttachment]
     class AttachVpnGatewayResult < Struct.new(
+      nil,
       :vpc_attachment,
       keyword_init: true
     )
@@ -2593,6 +2708,7 @@ module Aws::EC2
     #   <p>Configures ENA Express for UDP network traffic.</p>
     #   @return [Types::AttachmentEnaSrdUdpSpecification]
     class AttachmentEnaSrdSpecification < Struct.new(
+      nil,
       :ena_srd_enabled,
       :ena_srd_udp_specification,
       keyword_init: true
@@ -2610,6 +2726,7 @@ module Aws::EC2
     #   			you must first enable ENA Express.</p>
     #   @return [Boolean]
     class AttachmentEnaSrdUdpSpecification < Struct.new(
+      nil,
       :ena_srd_udp_enabled,
       keyword_init: true
     )
@@ -2621,6 +2738,7 @@ module Aws::EC2
     #   <p>The attribute value. The valid values are <code>true</code> or <code>false</code>.</p>
     #   @return [Boolean]
     class AttributeBooleanValue < Struct.new(
+      nil,
       :value,
       keyword_init: true
     )
@@ -2646,6 +2764,7 @@ module Aws::EC2
     #   <p>The summary report for each Region for the attribute.</p>
     #   @return [Array<Types::RegionalSummary>]
     class AttributeSummary < Struct.new(
+      nil,
       :attribute_name,
       :most_frequent_value,
       :number_of_matched_accounts,
@@ -2661,6 +2780,7 @@ module Aws::EC2
     #   <p>The attribute value. The value is case-sensitive.</p>
     #   @return [String]
     class AttributeValue < Struct.new(
+      nil,
       :value,
       keyword_init: true
     )
@@ -2687,6 +2807,7 @@ module Aws::EC2
     #   <p>The current state of the authorization rule.</p>
     #   @return [Types::ClientVpnAuthorizationRuleStatus]
     class AuthorizationRule < Struct.new(
+      nil,
       :client_vpn_endpoint_id,
       :description,
       :group_id,
@@ -2723,6 +2844,7 @@ module Aws::EC2
     #   <p>Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     class AuthorizeClientVpnIngressRequest < Struct.new(
+      nil,
       :client_vpn_endpoint_id,
       :target_network_cidr,
       :access_group_id,
@@ -2739,6 +2861,7 @@ module Aws::EC2
     #   <p>The current state of the authorization rule.</p>
     #   @return [Types::ClientVpnAuthorizationRuleStatus]
     class AuthorizeClientVpnIngressResult < Struct.new(
+      nil,
       :status,
       keyword_init: true
     )
@@ -2778,6 +2901,7 @@ module Aws::EC2
     #   <p>The permissions for the security group rules.</p>
     #   @return [Array<Types::IpPermission>]
     class AuthorizeSecurityGroupEgressRequest < Struct.new(
+      nil,
       :tag_specifications,
       :dry_run,
       :group_id,
@@ -2800,6 +2924,7 @@ module Aws::EC2
     #   <p>Information about the outbound (egress) security group rules that were added.</p>
     #   @return [Array<Types::SecurityGroupRule>]
     class AuthorizeSecurityGroupEgressResult < Struct.new(
+      nil,
       :return,
       :security_group_rules,
       keyword_init: true
@@ -2870,6 +2995,7 @@ module Aws::EC2
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     class AuthorizeSecurityGroupIngressRequest < Struct.new(
+      nil,
       :cidr_ip,
       :from_port,
       :group_id,
@@ -2893,6 +3019,7 @@ module Aws::EC2
     #   <p>Information about the inbound (ingress) security group rules that were added.</p>
     #   @return [Array<Types::SecurityGroupRule>]
     class AuthorizeSecurityGroupIngressResult < Struct.new(
+      nil,
       :return,
       :security_group_rules,
       keyword_init: true
@@ -2962,6 +3089,7 @@ module Aws::EC2
     #           <code>available</code>, <code>unavailable</code>, and <code>constrained</code>.</p>
     #   @return [String]
     class AvailabilityZone < Struct.new(
+      nil,
       :opt_in_status,
       :messages,
       :region_name,
@@ -2984,6 +3112,7 @@ module Aws::EC2
     #   <p>The message about the Availability Zone, Local Zone, or Wavelength Zone.</p>
     #   @return [String]
     class AvailabilityZoneMessage < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -3002,6 +3131,7 @@ module Aws::EC2
     #   <p>The number of vCPUs available for launching instances onto the Dedicated Host.</p>
     #   @return [Integer]
     class AvailableCapacity < Struct.new(
+      nil,
       :available_instance_capacity,
       :available_v_cpus,
       keyword_init: true
@@ -3021,6 +3151,7 @@ module Aws::EC2
     #            maximum limit.</p>
     #   @return [Integer]
     class BaselineEbsBandwidthMbps < Struct.new(
+      nil,
       :min,
       :max,
       keyword_init: true
@@ -3040,6 +3171,7 @@ module Aws::EC2
     #            this parameter.</p>
     #   @return [Integer]
     class BaselineEbsBandwidthMbpsRequest < Struct.new(
+      nil,
       :min,
       :max,
       keyword_init: true
@@ -3058,6 +3190,7 @@ module Aws::EC2
     #   <p>The CPU performance to consider, using an instance family as the baseline reference.</p>
     #   @return [Types::CpuPerformanceFactor]
     class BaselinePerformanceFactors < Struct.new(
+      nil,
       :cpu,
       keyword_init: true
     )
@@ -3075,6 +3208,7 @@ module Aws::EC2
     #   <p>The CPU performance to consider, using an instance family as the baseline reference.</p>
     #   @return [Types::CpuPerformanceFactorRequest]
     class BaselinePerformanceFactorsRequest < Struct.new(
+      nil,
       :cpu,
       keyword_init: true
     )
@@ -3084,6 +3218,7 @@ module Aws::EC2
     # @!attribute value
     #   @return [String]
     class BlobAttributeValue < Struct.new(
+      nil,
       :value,
       keyword_init: true
     )
@@ -3117,6 +3252,7 @@ module Aws::EC2
     #               store volumes specified in the block device mapping for the AMI.</p>
     #   @return [String]
     class BlockDeviceMapping < Struct.new(
+      nil,
       :ebs,
       :no_device,
       :device_name,
@@ -3142,6 +3278,7 @@ module Aws::EC2
     #   <p>Suppresses the specified device included in the block device mapping.</p>
     #   @return [String]
     class BlockDeviceMappingResponse < Struct.new(
+      nil,
       :device_name,
       :virtual_name,
       :ebs,
@@ -3170,6 +3307,7 @@ module Aws::EC2
     #            </ul>
     #   @return [String]
     class BlockPublicAccessStates < Struct.new(
+      nil,
       :internet_gateway_block_mode,
       keyword_init: true
     )
@@ -3192,6 +3330,7 @@ module Aws::EC2
     #   			<code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     class BundleInstanceRequest < Struct.new(
+      nil,
       :instance_id,
       :storage,
       :dry_run,
@@ -3205,6 +3344,7 @@ module Aws::EC2
     #   <p>Information about the bundle task.</p>
     #   @return [Types::BundleTask]
     class BundleInstanceResult < Struct.new(
+      nil,
       :bundle_task,
       keyword_init: true
     )
@@ -3237,6 +3377,7 @@ module Aws::EC2
     #   <p>If the task fails, a description of the error.</p>
     #   @return [Types::BundleTaskError]
     class BundleTask < Struct.new(
+      nil,
       :instance_id,
       :bundle_id,
       :state,
@@ -3258,6 +3399,7 @@ module Aws::EC2
     #   <p>The error message.</p>
     #   @return [String]
     class BundleTaskError < Struct.new(
+      nil,
       :code,
       :message,
       keyword_init: true
@@ -3279,6 +3421,7 @@ module Aws::EC2
     #   <p>The provisioning state of the BYOASN.</p>
     #   @return [String]
     class Byoasn < Struct.new(
+      nil,
       :asn,
       :ipam_id,
       :status_message,
@@ -3358,6 +3501,7 @@ module Aws::EC2
     #            </note>
     #   @return [String]
     class ByoipCidr < Struct.new(
+      nil,
       :cidr,
       :description,
       :asn_associations,
@@ -3379,6 +3523,7 @@ module Aws::EC2
     #   			<code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     class CancelBundleTaskRequest < Struct.new(
+      nil,
       :bundle_id,
       :dry_run,
       keyword_init: true
@@ -3391,6 +3536,7 @@ module Aws::EC2
     #   <p>Information about the bundle task.</p>
     #   @return [Types::BundleTask]
     class CancelBundleTaskResult < Struct.new(
+      nil,
       :bundle_task,
       keyword_init: true
     )
@@ -3405,6 +3551,7 @@ module Aws::EC2
     #   <p>The error message.</p>
     #   @return [String]
     class CancelCapacityReservationFleetError < Struct.new(
+      nil,
       :code,
       :message,
       keyword_init: true
@@ -3419,6 +3566,7 @@ module Aws::EC2
     #   <p>The IDs of the Capacity Reservation Fleets to cancel.</p>
     #   @return [Array<String>]
     class CancelCapacityReservationFleetsRequest < Struct.new(
+      nil,
       :dry_run,
       :capacity_reservation_fleet_ids,
       keyword_init: true
@@ -3434,6 +3582,7 @@ module Aws::EC2
     #   <p>Information about the Capacity Reservation Fleets that could not be cancelled.</p>
     #   @return [Array<Types::FailedCapacityReservationFleetCancellationResult>]
     class CancelCapacityReservationFleetsResult < Struct.new(
+      nil,
       :successful_fleet_cancellations,
       :failed_fleet_cancellations,
       keyword_init: true
@@ -3448,6 +3597,7 @@ module Aws::EC2
     #   <p>Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     class CancelCapacityReservationRequest < Struct.new(
+      nil,
       :capacity_reservation_id,
       :dry_run,
       keyword_init: true
@@ -3459,6 +3609,7 @@ module Aws::EC2
     #   <p>Returns <code>true</code> if the request succeeds; otherwise, it returns an error.</p>
     #   @return [Boolean]
     class CancelCapacityReservationResult < Struct.new(
+      nil,
       :return,
       keyword_init: true
     )
@@ -3477,6 +3628,7 @@ module Aws::EC2
     #   <p>The reason for canceling the conversion task.</p>
     #   @return [String]
     class CancelConversionRequest < Struct.new(
+      nil,
       :dry_run,
       :conversion_task_id,
       :reason_message,
@@ -3494,6 +3646,7 @@ module Aws::EC2
     #   <p>The ID of the report.</p>
     #   @return [String]
     class CancelDeclarativePoliciesReportRequest < Struct.new(
+      nil,
       :dry_run,
       :report_id,
       keyword_init: true
@@ -3505,6 +3658,7 @@ module Aws::EC2
     #   <p>Is <code>true</code> if the request succeeds, and an error otherwise.</p>
     #   @return [Boolean]
     class CancelDeclarativePoliciesReportResult < Struct.new(
+      nil,
       :return,
       keyword_init: true
     )
@@ -3516,6 +3670,7 @@ module Aws::EC2
     #       <code>CreateInstanceExportTask</code> and <code>ExportImage</code> operations.</p>
     #   @return [String]
     class CancelExportTaskRequest < Struct.new(
+      nil,
       :export_task_id,
       keyword_init: true
     )
@@ -3531,6 +3686,7 @@ module Aws::EC2
     #   			<code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     class CancelImageLaunchPermissionRequest < Struct.new(
+      nil,
       :image_id,
       :dry_run,
       keyword_init: true
@@ -3542,6 +3698,7 @@ module Aws::EC2
     #   <p>Returns <code>true</code> if the request succeeds; otherwise, it returns an error.</p>
     #   @return [Boolean]
     class CancelImageLaunchPermissionResult < Struct.new(
+      nil,
       :return,
       keyword_init: true
     )
@@ -3560,6 +3717,7 @@ module Aws::EC2
     #   <p>The ID of the import image or import snapshot task to be canceled.</p>
     #   @return [String]
     class CancelImportTaskRequest < Struct.new(
+      nil,
       :cancel_reason,
       :dry_run,
       :import_task_id,
@@ -3578,6 +3736,7 @@ module Aws::EC2
     #   <p>The current state of the task being canceled.</p>
     #   @return [String]
     class CancelImportTaskResult < Struct.new(
+      nil,
       :import_task_id,
       :previous_state,
       :state,
@@ -3591,6 +3750,7 @@ module Aws::EC2
     #   <p>The ID of the Reserved Instance listing.</p>
     #   @return [String]
     class CancelReservedInstancesListingRequest < Struct.new(
+      nil,
       :reserved_instances_listing_id,
       keyword_init: true
     )
@@ -3602,6 +3762,7 @@ module Aws::EC2
     #   <p>The Reserved Instance listing.</p>
     #   @return [Array<Types::ReservedInstancesListing>]
     class CancelReservedInstancesListingResult < Struct.new(
+      nil,
       :reserved_instances_listings,
       keyword_init: true
     )
@@ -3616,6 +3777,7 @@ module Aws::EC2
     #   <p>The description for the error code.</p>
     #   @return [String]
     class CancelSpotFleetRequestsError < Struct.new(
+      nil,
       :code,
       :message,
       keyword_init: true
@@ -3631,6 +3793,7 @@ module Aws::EC2
     #   <p>The ID of the Spot Fleet request.</p>
     #   @return [String]
     class CancelSpotFleetRequestsErrorItem < Struct.new(
+      nil,
       :error,
       :spot_fleet_request_id,
       keyword_init: true
@@ -3655,6 +3818,7 @@ module Aws::EC2
     #             <code>no-terminate-instances</code>.</p>
     #   @return [Boolean]
     class CancelSpotFleetRequestsRequest < Struct.new(
+      nil,
       :dry_run,
       :spot_fleet_request_ids,
       :terminate_instances,
@@ -3671,6 +3835,7 @@ module Aws::EC2
     #   <p>Information about the Spot Fleet requests that are not successfully canceled.</p>
     #   @return [Array<Types::CancelSpotFleetRequestsErrorItem>]
     class CancelSpotFleetRequestsResponse < Struct.new(
+      nil,
       :successful_fleet_requests,
       :unsuccessful_fleet_requests,
       keyword_init: true
@@ -3689,6 +3854,7 @@ module Aws::EC2
     #   <p>The ID of the Spot Fleet request.</p>
     #   @return [String]
     class CancelSpotFleetRequestsSuccessItem < Struct.new(
+      nil,
       :current_spot_fleet_request_state,
       :previous_spot_fleet_request_state,
       :spot_fleet_request_id,
@@ -3708,6 +3874,7 @@ module Aws::EC2
     #   <p>The IDs of the Spot Instance requests.</p>
     #   @return [Array<String>]
     class CancelSpotInstanceRequestsRequest < Struct.new(
+      nil,
       :dry_run,
       :spot_instance_request_ids,
       keyword_init: true
@@ -3720,6 +3887,7 @@ module Aws::EC2
     #   <p>The Spot Instance requests.</p>
     #   @return [Array<Types::CancelledSpotInstanceRequest>]
     class CancelSpotInstanceRequestsResult < Struct.new(
+      nil,
       :cancelled_spot_instance_requests,
       keyword_init: true
     )
@@ -3734,6 +3902,7 @@ module Aws::EC2
     #   <p>The state of the Spot Instance request.</p>
     #   @return [String]
     class CancelledSpotInstanceRequest < Struct.new(
+      nil,
       :spot_instance_request_id,
       :state,
       keyword_init: true
@@ -3752,6 +3921,7 @@ module Aws::EC2
     #   			use.</p>
     #   @return [Integer]
     class CapacityAllocation < Struct.new(
+      nil,
       :allocation_type,
       :count,
       keyword_init: true
@@ -3793,6 +3963,7 @@ module Aws::EC2
     #   <p>The tags assigned to the Capacity Block.</p>
     #   @return [Array<Types::Tag>]
     class CapacityBlock < Struct.new(
+      nil,
       :capacity_block_id,
       :ultraserver_type,
       :availability_zone,
@@ -3871,6 +4042,7 @@ module Aws::EC2
     #   <p>The currency of the payment for the Capacity Block extension.</p>
     #   @return [String]
     class CapacityBlockExtension < Struct.new(
+      nil,
       :capacity_reservation_id,
       :instance_type,
       :instance_count,
@@ -3944,6 +4116,7 @@ module Aws::EC2
     #            </ul>
     #   @return [String]
     class CapacityBlockExtensionOffering < Struct.new(
+      nil,
       :capacity_block_extension_offering_id,
       :instance_type,
       :instance_count,
@@ -4006,6 +4179,7 @@ module Aws::EC2
     #   				<b>08:55</b> and ends at <b>11:30</b>, the minutes field would be <b>35</b>.</p>
     #   @return [Integer]
     class CapacityBlockOffering < Struct.new(
+      nil,
       :capacity_block_offering_id,
       :instance_type,
       :availability_zone,
@@ -4059,6 +4233,7 @@ module Aws::EC2
     #   <p>The availability of capacity for the Capacity Block reservations.</p>
     #   @return [Array<Types::CapacityReservationStatus>]
     class CapacityBlockStatus < Struct.new(
+      nil,
       :capacity_block_id,
       :interconnect_status,
       :total_capacity,
@@ -4281,6 +4456,7 @@ module Aws::EC2
     #   <p>The ID of the Capacity Block.</p>
     #   @return [String]
     class CapacityReservation < Struct.new(
+      nil,
       :capacity_reservation_id,
       :owner_id,
       :capacity_reservation_arn,
@@ -4339,6 +4515,7 @@ module Aws::EC2
     #   <p>Information about the Capacity Reservation.</p>
     #   @return [Types::CapacityReservationInfo]
     class CapacityReservationBillingRequest < Struct.new(
+      nil,
       :capacity_reservation_id,
       :requested_by,
       :unused_reservation_billing_owner_id,
@@ -4362,6 +4539,7 @@ module Aws::EC2
     #   			instance count or cancel the Capacity Reservation before this date and time.</p>
     #   @return [Time]
     class CapacityReservationCommitmentInfo < Struct.new(
+      nil,
       :committed_instance_count,
       :commitment_end_date,
       keyword_init: true
@@ -4484,6 +4662,7 @@ module Aws::EC2
     #   <p>The tags assigned to the Capacity Reservation Fleet.</p>
     #   @return [Array<Types::Tag>]
     class CapacityReservationFleet < Struct.new(
+      nil,
       :capacity_reservation_fleet_id,
       :capacity_reservation_fleet_arn,
       :state,
@@ -4512,6 +4691,7 @@ module Aws::EC2
     #   <p>The ID of the Capacity Reservation Fleet that was successfully cancelled.</p>
     #   @return [String]
     class CapacityReservationFleetCancellationState < Struct.new(
+      nil,
       :current_fleet_state,
       :previous_fleet_state,
       :capacity_reservation_fleet_id,
@@ -4528,6 +4708,7 @@ module Aws::EC2
     #   <p>The ID of the Amazon Web Services account that owns the resource group.</p>
     #   @return [String]
     class CapacityReservationGroup < Struct.new(
+      nil,
       :group_arn,
       :owner_id,
       keyword_init: true
@@ -4549,6 +4730,7 @@ module Aws::EC2
     #   <p>The ID of the Availability Zone.</p>
     #   @return [String]
     class CapacityReservationInfo < Struct.new(
+      nil,
       :instance_type,
       :availability_zone,
       :tenancy,
@@ -4581,6 +4763,7 @@ module Aws::EC2
     #            chosen On-Demand allocation strategy.</p>
     #   @return [String]
     class CapacityReservationOptions < Struct.new(
+      nil,
       :usage_strategy,
       keyword_init: true
     )
@@ -4609,6 +4792,7 @@ module Aws::EC2
     #            chosen On-Demand allocation strategy.</p>
     #   @return [String]
     class CapacityReservationOptionsRequest < Struct.new(
+      nil,
       :usage_strategy,
       keyword_init: true
     )
@@ -4655,6 +4839,7 @@ module Aws::EC2
     #   			group.</p>
     #   @return [Types::CapacityReservationTarget]
     class CapacityReservationSpecification < Struct.new(
+      nil,
       :capacity_reservation_preference,
       :capacity_reservation_target,
       keyword_init: true
@@ -4687,6 +4872,7 @@ module Aws::EC2
     #   <p>Information about the targeted Capacity Reservation or Capacity Reservation group.</p>
     #   @return [Types::CapacityReservationTargetResponse]
     class CapacityReservationSpecificationResponse < Struct.new(
+      nil,
       :capacity_reservation_preference,
       :capacity_reservation_target,
       keyword_init: true
@@ -4708,6 +4894,7 @@ module Aws::EC2
     #   <p>The used capacity. Indicates that the capacity is in use by resources that are running in the Capacity Reservation.</p>
     #   @return [Integer]
     class CapacityReservationStatus < Struct.new(
+      nil,
       :capacity_reservation_id,
       :total_capacity,
       :total_available_capacity,
@@ -4726,6 +4913,7 @@ module Aws::EC2
     #   			instance.</p>
     #   @return [String]
     class CapacityReservationTarget < Struct.new(
+      nil,
       :capacity_reservation_id,
       :capacity_reservation_resource_group_arn,
       keyword_init: true
@@ -4741,6 +4929,7 @@ module Aws::EC2
     #   <p>The ARN of the targeted Capacity Reservation group.</p>
     #   @return [String]
     class CapacityReservationTargetResponse < Struct.new(
+      nil,
       :capacity_reservation_id,
       :capacity_reservation_resource_group_arn,
       keyword_init: true
@@ -4765,6 +4954,7 @@ module Aws::EC2
     #   <p>The tags assigned to the carrier gateway.</p>
     #   @return [Array<Types::Tag>]
     class CarrierGateway < Struct.new(
+      nil,
       :carrier_gateway_id,
       :vpc_id,
       :state,
@@ -4780,6 +4970,7 @@ module Aws::EC2
     #   <p>The ARN of the client certificate. </p>
     #   @return [String]
     class CertificateAuthentication < Struct.new(
+      nil,
       :client_root_certificate_chain,
       keyword_init: true
     )
@@ -4792,6 +4983,7 @@ module Aws::EC2
     #   			authority (CA) and it must be provisioned in Certificate Manager (ACM).</p>
     #   @return [String]
     class CertificateAuthenticationRequest < Struct.new(
+      nil,
       :client_root_certificate_chain_arn,
       keyword_init: true
     )
@@ -4807,6 +4999,7 @@ module Aws::EC2
     #   <p>The signed authorization message for the prefix and account.</p>
     #   @return [String]
     class CidrAuthorizationContext < Struct.new(
+      nil,
       :message,
       :signature,
       keyword_init: true
@@ -4819,6 +5012,7 @@ module Aws::EC2
     #   <p>The IPv4 CIDR block.</p>
     #   @return [String]
     class CidrBlock < Struct.new(
+      nil,
       :cidr_block,
       keyword_init: true
     )
@@ -4836,6 +5030,7 @@ module Aws::EC2
     #   <p>The ID of the VPC.</p>
     #   @return [String]
     class ClassicLinkDnsSupport < Struct.new(
+      nil,
       :classic_link_dns_supported,
       :vpc_id,
       keyword_init: true
@@ -4860,6 +5055,7 @@ module Aws::EC2
     #   <p>The ID of the VPC.</p>
     #   @return [String]
     class ClassicLinkInstance < Struct.new(
+      nil,
       :groups,
       :instance_id,
       :tags,
@@ -4874,6 +5070,7 @@ module Aws::EC2
     #   <p>The name of the load balancer.</p>
     #   @return [String]
     class ClassicLoadBalancer < Struct.new(
+      nil,
       :name,
       keyword_init: true
     )
@@ -4886,6 +5083,7 @@ module Aws::EC2
     #   <p>One or more Classic Load Balancers.</p>
     #   @return [Array<Types::ClassicLoadBalancer>]
     class ClassicLoadBalancersConfig < Struct.new(
+      nil,
       :classic_load_balancers,
       keyword_init: true
     )
@@ -4900,6 +5098,7 @@ module Aws::EC2
     #   <p>A message about the status of the client certificate revocation list, if applicable.</p>
     #   @return [String]
     class ClientCertificateRevocationListStatus < Struct.new(
+      nil,
       :code,
       :message,
       keyword_init: true
@@ -4915,6 +5114,7 @@ module Aws::EC2
     #   <p>The Amazon Resource Name (ARN) of the Lambda function used for connection authorization.</p>
     #   @return [String]
     class ClientConnectOptions < Struct.new(
+      nil,
       :enabled,
       :lambda_function_arn,
       keyword_init: true
@@ -4933,6 +5133,7 @@ module Aws::EC2
     #   <p>The status of any updates to the client connect options.</p>
     #   @return [Types::ClientVpnEndpointAttributeStatus]
     class ClientConnectResponseOptions < Struct.new(
+      nil,
       :enabled,
       :lambda_function_arn,
       :status,
@@ -4955,6 +5156,7 @@ module Aws::EC2
     #   <p>The time that the disk upload starts.</p>
     #   @return [Time]
     class ClientData < Struct.new(
+      nil,
       :comment,
       :upload_end,
       :upload_size,
@@ -4980,6 +5182,7 @@ module Aws::EC2
     #   			1400 characters.</p>
     #   @return [String]
     class ClientLoginBannerOptions < Struct.new(
+      nil,
       :enabled,
       :banner_text,
       keyword_init: true
@@ -5000,6 +5203,7 @@ module Aws::EC2
     #   			characters only. Maximum of 1400 characters.</p>
     #   @return [String]
     class ClientLoginBannerResponseOptions < Struct.new(
+      nil,
       :enabled,
       :banner_text,
       keyword_init: true
@@ -5024,6 +5228,7 @@ module Aws::EC2
     #            </p>
     #   @return [Boolean]
     class ClientRouteEnforcementOptions < Struct.new(
+      nil,
       :enforced,
       keyword_init: true
     )
@@ -5040,6 +5245,7 @@ module Aws::EC2
     #            </p>
     #   @return [Boolean]
     class ClientRouteEnforcementResponseOptions < Struct.new(
+      nil,
       :enforced,
       keyword_init: true
     )
@@ -5061,6 +5267,7 @@ module Aws::EC2
     #   <p>Information about the IAM SAML identity provider, if applicable.</p>
     #   @return [Types::FederatedAuthentication]
     class ClientVpnAuthentication < Struct.new(
+      nil,
       :type,
       :active_directory,
       :mutual_authentication,
@@ -5085,6 +5292,7 @@ module Aws::EC2
     #   <p>Information about the IAM SAML identity provider to be used, if applicable. You must provide this information if <b>Type</b> is <code>federated-authentication</code>.</p>
     #   @return [Types::FederatedAuthenticationRequest]
     class ClientVpnAuthenticationRequest < Struct.new(
+      nil,
       :type,
       :active_directory,
       :mutual_authentication,
@@ -5102,6 +5310,7 @@ module Aws::EC2
     #   <p>A message about the status of the authorization rule, if applicable.</p>
     #   @return [String]
     class ClientVpnAuthorizationRuleStatus < Struct.new(
+      nil,
       :code,
       :message,
       keyword_init: true
@@ -5158,6 +5367,7 @@ module Aws::EC2
     #   <p>The statuses returned by the client connect handler for posture compliance, if applicable.</p>
     #   @return [Array<String>]
     class ClientVpnConnection < Struct.new(
+      nil,
       :client_vpn_endpoint_id,
       :timestamp,
       :connection_id,
@@ -5186,6 +5396,7 @@ module Aws::EC2
     #   <p>A message about the status of the client connection, if applicable.</p>
     #   @return [String]
     class ClientVpnConnectionStatus < Struct.new(
+      nil,
       :code,
       :message,
       keyword_init: true
@@ -5288,6 +5499,7 @@ module Aws::EC2
     #   <p>The IP address type of the Client VPN endpoint. Possible values are either <code>ipv4</code> for IPv4 addressing only, <code>ipv6</code> for IPv6 addressing only, or <code>dual-stack</code> for both IPv4 and IPv6 addressing.</p>
     #   @return [String]
     class ClientVpnEndpoint < Struct.new(
+      nil,
       :client_vpn_endpoint_id,
       :description,
       :status,
@@ -5328,6 +5540,7 @@ module Aws::EC2
     #   <p>The status message.</p>
     #   @return [String]
     class ClientVpnEndpointAttributeStatus < Struct.new(
+      nil,
       :code,
       :message,
       keyword_init: true
@@ -5365,6 +5578,7 @@ module Aws::EC2
     #   <p>A message about the status of the Client VPN endpoint.</p>
     #   @return [String]
     class ClientVpnEndpointStatus < Struct.new(
+      nil,
       :code,
       :message,
       keyword_init: true
@@ -5398,6 +5612,7 @@ module Aws::EC2
     #   <p>A brief description of the route.</p>
     #   @return [String]
     class ClientVpnRoute < Struct.new(
+      nil,
       :client_vpn_endpoint_id,
       :destination_cidr,
       :target_subnet,
@@ -5418,6 +5633,7 @@ module Aws::EC2
     #   <p>A message about the status of the Client VPN endpoint route, if applicable.</p>
     #   @return [String]
     class ClientVpnRouteStatus < Struct.new(
+      nil,
       :code,
       :message,
       keyword_init: true
@@ -5440,6 +5656,7 @@ module Aws::EC2
     #            </p>
     #   @return [String]
     class CloudWatchLogOptions < Struct.new(
+      nil,
       :log_enabled,
       :log_group_arn,
       :log_output_format,
@@ -5463,6 +5680,7 @@ module Aws::EC2
     #            </p>
     #   @return [String]
     class CloudWatchLogOptionsSpecification < Struct.new(
+      nil,
       :log_enabled,
       :log_group_arn,
       :log_output_format,
@@ -5485,6 +5703,7 @@ module Aws::EC2
     #   <p>The customer-owned IP address.</p>
     #   @return [String]
     class CoipAddressUsage < Struct.new(
+      nil,
       :allocation_id,
       :aws_account_id,
       :aws_service,
@@ -5513,6 +5732,7 @@ module Aws::EC2
     #         </p>
     #   @return [String]
     class CoipCidr < Struct.new(
+      nil,
       :cidr,
       :coip_pool_id,
       :local_gateway_route_table_id,
@@ -5538,6 +5758,7 @@ module Aws::EC2
     #   <p>The ARN of the address pool.</p>
     #   @return [String]
     class CoipPool < Struct.new(
+      nil,
       :pool_id,
       :pool_cidrs,
       :local_gateway_route_table_id,
@@ -5560,6 +5781,7 @@ module Aws::EC2
     #     <code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     class ConfirmProductInstanceRequest < Struct.new(
+      nil,
       :instance_id,
       :product_code,
       :dry_run,
@@ -5577,6 +5799,7 @@ module Aws::EC2
     #               product code is attached to the instance.</p>
     #   @return [String]
     class ConfirmProductInstanceResult < Struct.new(
+      nil,
       :return,
       :owner_id,
       keyword_init: true
@@ -5595,6 +5818,7 @@ module Aws::EC2
     #   <p>The name of the CloudWatch Logs log stream to which the connection data is published.</p>
     #   @return [String]
     class ConnectionLogOptions < Struct.new(
+      nil,
       :enabled,
       :cloudwatch_log_group,
       :cloudwatch_log_stream,
@@ -5614,6 +5838,7 @@ module Aws::EC2
     #   <p>The name of the Amazon CloudWatch Logs log stream to which connection logging data is published.</p>
     #   @return [String]
     class ConnectionLogResponseOptions < Struct.new(
+      nil,
       :enabled,
       :cloudwatch_log_group,
       :cloudwatch_log_stream,
@@ -5650,6 +5875,7 @@ module Aws::EC2
     #   <p>The Region for the endpoint service.</p>
     #   @return [String]
     class ConnectionNotification < Struct.new(
+      nil,
       :connection_notification_id,
       :service_id,
       :vpc_endpoint_id,
@@ -5684,6 +5910,7 @@ module Aws::EC2
     #   						transaction. Min: 30 seconds. Max: 60 seconds. Default: 30 seconds.</p>
     #   @return [Integer]
     class ConnectionTrackingConfiguration < Struct.new(
+      nil,
       :tcp_established_timeout,
       :udp_stream_timeout,
       :udp_timeout,
@@ -5713,6 +5940,7 @@ module Aws::EC2
     #   						seconds.</p>
     #   @return [Integer]
     class ConnectionTrackingSpecification < Struct.new(
+      nil,
       :tcp_established_timeout,
       :udp_timeout,
       :udp_stream_timeout,
@@ -5742,6 +5970,7 @@ module Aws::EC2
     #   						transaction. Min: 30 seconds. Max: 60 seconds. Default: 30 seconds.</p>
     #   @return [Integer]
     class ConnectionTrackingSpecificationRequest < Struct.new(
+      nil,
       :tcp_established_timeout,
       :udp_stream_timeout,
       :udp_timeout,
@@ -5771,6 +6000,7 @@ module Aws::EC2
     #   						transaction. Min: 30 seconds. Max: 60 seconds. Default: 30 seconds.</p>
     #   @return [Integer]
     class ConnectionTrackingSpecificationResponse < Struct.new(
+      nil,
       :tcp_established_timeout,
       :udp_stream_timeout,
       :udp_timeout,
@@ -5803,6 +6033,7 @@ module Aws::EC2
     #   <p>Any tags assigned to the task.</p>
     #   @return [Array<Types::Tag>]
     class ConversionTask < Struct.new(
+      nil,
       :conversion_task_id,
       :expiration_time,
       :import_instance,
@@ -5837,6 +6068,7 @@ module Aws::EC2
     #         	For more information, see <a href="https://docs.aws.amazon.com/ec2/latest/devguide/ec2-api-idempotency.html">Ensuring idempotency</a>.</p>
     #   @return [String]
     class CopyFpgaImageRequest < Struct.new(
+      nil,
       :dry_run,
       :source_fpga_image_id,
       :description,
@@ -5852,6 +6084,7 @@ module Aws::EC2
     #   <p>The ID of the new AFI.</p>
     #   @return [String]
     class CopyFpgaImageResult < Struct.new(
+      nil,
       :fpga_image_id,
       keyword_init: true
     )
@@ -5982,6 +6215,7 @@ module Aws::EC2
     #   			<code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     class CopyImageRequest < Struct.new(
+      nil,
       :client_token,
       :description,
       :encrypted,
@@ -6006,6 +6240,7 @@ module Aws::EC2
     #   <p>The ID of the new AMI.</p>
     #   @return [String]
     class CopyImageResult < Struct.new(
+      nil,
       :image_id,
       keyword_init: true
     )
@@ -6090,6 +6325,7 @@ module Aws::EC2
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     class CopySnapshotRequest < Struct.new(
+      nil,
       :description,
       :destination_outpost_arn,
       :destination_region,
@@ -6114,6 +6350,7 @@ module Aws::EC2
     #   <p>The ID of the new snapshot.</p>
     #   @return [String]
     class CopySnapshotResult < Struct.new(
+      nil,
       :tags,
       :snapshot_id,
       keyword_init: true
@@ -6133,6 +6370,7 @@ module Aws::EC2
     #               <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/sev-snp.html">AMD SEV-SNP</a>.</p>
     #   @return [String]
     class CpuOptions < Struct.new(
+      nil,
       :core_count,
       :threads_per_core,
       :amd_sev_snp,
@@ -6157,6 +6395,7 @@ module Aws::EC2
     #               <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/sev-snp.html">AMD SEV-SNP</a>.</p>
     #   @return [String]
     class CpuOptionsRequest < Struct.new(
+      nil,
       :core_count,
       :threads_per_core,
       :amd_sev_snp,
@@ -6176,6 +6415,7 @@ module Aws::EC2
     #            </note>
     #   @return [Array<Types::PerformanceFactorReference>]
     class CpuPerformanceFactor < Struct.new(
+      nil,
       :references,
       keyword_init: true
     )
@@ -6193,6 +6433,7 @@ module Aws::EC2
     #            </note>
     #   @return [Array<Types::PerformanceFactorReferenceRequest>]
     class CpuPerformanceFactorRequest < Struct.new(
+      nil,
       :references,
       keyword_init: true
     )
@@ -6215,6 +6456,7 @@ module Aws::EC2
     #   <p> The tags to apply to the new Capacity Reservation. </p>
     #   @return [Array<Types::TagSpecification>]
     class CreateCapacityReservationBySplittingRequest < Struct.new(
+      nil,
       :dry_run,
       :client_token,
       :source_capacity_reservation_id,
@@ -6236,6 +6478,7 @@ module Aws::EC2
     #   			the source Capacity Reservation was reduced by this amount. </p>
     #   @return [Integer]
     class CreateCapacityReservationBySplittingResult < Struct.new(
+      nil,
       :source_capacity_reservation,
       :destination_capacity_reservation,
       :instance_count,
@@ -6309,6 +6552,7 @@ module Aws::EC2
     #   <p>Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     class CreateCapacityReservationFleetRequest < Struct.new(
+      nil,
       :allocation_strategy,
       :client_token,
       :instance_type_specifications,
@@ -6359,6 +6603,7 @@ module Aws::EC2
     #   <p>The tags assigned to the Capacity Reservation Fleet.</p>
     #   @return [Array<Types::Tag>]
     class CreateCapacityReservationFleetResult < Struct.new(
+      nil,
       :capacity_reservation_fleet_id,
       :state,
       :total_target_capacity,
@@ -6549,6 +6794,7 @@ module Aws::EC2
     #            <p>The only supported value is <code>incremental</code>.</p>
     #   @return [String]
     class CreateCapacityReservationRequest < Struct.new(
+      nil,
       :client_token,
       :instance_type,
       :instance_platform,
@@ -6577,6 +6823,7 @@ module Aws::EC2
     #   <p>Information about the Capacity Reservation.</p>
     #   @return [Types::CapacityReservation]
     class CreateCapacityReservationResult < Struct.new(
+      nil,
       :capacity_reservation,
       keyword_init: true
     )
@@ -6600,6 +6847,7 @@ module Aws::EC2
     #                   idempotency</a>.</p>
     #   @return [String]
     class CreateCarrierGatewayRequest < Struct.new(
+      nil,
       :vpc_id,
       :tag_specifications,
       :dry_run,
@@ -6613,6 +6861,7 @@ module Aws::EC2
     #   <p>Information about the carrier gateway.</p>
     #   @return [Types::CarrierGateway]
     class CreateCarrierGatewayResult < Struct.new(
+      nil,
       :carrier_gateway,
       keyword_init: true
     )
@@ -6728,6 +6977,7 @@ module Aws::EC2
     #   <p>The IP address type for traffic within the Client VPN tunnel. Valid values are <code>ipv4</code> (default) for IPv4 traffic only, <code>ipv6</code> for IPv6 addressing only, or <code>dual-stack</code> for both IPv4 and IPv6 traffic. When set to <code>dual-stack</code>, clients can access both IPv4 and IPv6 resources through the VPN .</p>
     #   @return [String]
     class CreateClientVpnEndpointRequest < Struct.new(
+      nil,
       :client_cidr_block,
       :server_certificate_arn,
       :authentication_options,
@@ -6765,6 +7015,7 @@ module Aws::EC2
     #   <p>The DNS name to be used by clients when establishing their VPN session.</p>
     #   @return [String]
     class CreateClientVpnEndpointResult < Struct.new(
+      nil,
       :client_vpn_endpoint_id,
       :status,
       :dns_name,
@@ -6810,6 +7061,7 @@ module Aws::EC2
     #   <p>Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     class CreateClientVpnRouteRequest < Struct.new(
+      nil,
       :client_vpn_endpoint_id,
       :destination_cidr_block,
       :target_vpc_subnet_id,
@@ -6825,6 +7077,7 @@ module Aws::EC2
     #   <p>The current state of the route.</p>
     #   @return [Types::ClientVpnRouteStatus]
     class CreateClientVpnRouteResult < Struct.new(
+      nil,
       :status,
       keyword_init: true
     )
@@ -6847,6 +7100,7 @@ module Aws::EC2
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     class CreateCoipCidrRequest < Struct.new(
+      nil,
       :cidr,
       :coip_pool_id,
       :dry_run,
@@ -6861,6 +7115,7 @@ module Aws::EC2
     #         </p>
     #   @return [Types::CoipCidr]
     class CreateCoipCidrResult < Struct.new(
+      nil,
       :coip_cidr,
       keyword_init: true
     )
@@ -6883,6 +7138,7 @@ module Aws::EC2
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     class CreateCoipPoolRequest < Struct.new(
+      nil,
       :local_gateway_route_table_id,
       :tag_specifications,
       :dry_run,
@@ -6895,6 +7151,7 @@ module Aws::EC2
     #   <p>Information about the CoIP address pool.</p>
     #   @return [Types::CoipPool]
     class CreateCoipPoolResult < Struct.new(
+      nil,
       :coip_pool,
       keyword_init: true
     )
@@ -6945,6 +7202,7 @@ module Aws::EC2
     #                   <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     class CreateCustomerGatewayRequest < Struct.new(
+      nil,
       :bgp_asn,
       :public_ip,
       :certificate_arn,
@@ -6964,6 +7222,7 @@ module Aws::EC2
     #   <p>Information about the customer gateway.</p>
     #   @return [Types::CustomerGateway]
     class CreateCustomerGatewayResult < Struct.new(
+      nil,
       :customer_gateway,
       keyword_init: true
     )
@@ -6990,6 +7249,7 @@ module Aws::EC2
     #               but not both.</p>
     #   @return [String]
     class CreateDefaultSubnetRequest < Struct.new(
+      nil,
       :availability_zone,
       :dry_run,
       :ipv6_native,
@@ -7003,6 +7263,7 @@ module Aws::EC2
     #   <p>Information about the subnet.</p>
     #   @return [Types::Subnet]
     class CreateDefaultSubnetResult < Struct.new(
+      nil,
       :subnet,
       keyword_init: true
     )
@@ -7015,6 +7276,7 @@ module Aws::EC2
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     class CreateDefaultVpcRequest < Struct.new(
+      nil,
       :dry_run,
       keyword_init: true
     )
@@ -7025,6 +7287,7 @@ module Aws::EC2
     #   <p>Information about the VPC.</p>
     #   @return [Types::Vpc]
     class CreateDefaultVpcResult < Struct.new(
+      nil,
       :vpc,
       keyword_init: true
     )
@@ -7094,6 +7357,7 @@ module Aws::EC2
     #   <p>The tags to assign to the volume ownership delegation task.</p>
     #   @return [Array<Types::TagSpecification>]
     class CreateDelegateMacVolumeOwnershipTaskRequest < Struct.new(
+      nil,
       :client_token,
       :dry_run,
       :instance_id,
@@ -7108,6 +7372,7 @@ module Aws::EC2
     #   <p>Information about the volume ownership delegation task.</p>
     #   @return [Types::MacModificationTask]
     class CreateDelegateMacVolumeOwnershipTaskResult < Struct.new(
+      nil,
       :mac_modification_task,
       keyword_init: true
     )
@@ -7126,6 +7391,7 @@ module Aws::EC2
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     class CreateDhcpOptionsRequest < Struct.new(
+      nil,
       :dhcp_configurations,
       :tag_specifications,
       :dry_run,
@@ -7138,6 +7404,7 @@ module Aws::EC2
     #   <p>A set of DHCP options.</p>
     #   @return [Types::DhcpOptions]
     class CreateDhcpOptionsResult < Struct.new(
+      nil,
       :dhcp_options,
       keyword_init: true
     )
@@ -7160,6 +7427,7 @@ module Aws::EC2
     #   <p>The tags to assign to the egress-only internet gateway.</p>
     #   @return [Array<Types::TagSpecification>]
     class CreateEgressOnlyInternetGatewayRequest < Struct.new(
+      nil,
       :client_token,
       :dry_run,
       :vpc_id,
@@ -7177,6 +7445,7 @@ module Aws::EC2
     #   <p>Information about the egress-only internet gateway.</p>
     #   @return [Types::EgressOnlyInternetGateway]
     class CreateEgressOnlyInternetGatewayResult < Struct.new(
+      nil,
       :client_token,
       :egress_only_internet_gateway,
       keyword_init: true
@@ -7201,6 +7470,7 @@ module Aws::EC2
     #            information about error messages, see <a href="https://docs.aws.amazon.com/AWSEC2/latest/APIReference/errors-overview.html">Error codes</a>.</p>
     #   @return [String]
     class CreateFleetError < Struct.new(
+      nil,
       :launch_template_and_overrides,
       :lifecycle,
       :error_code,
@@ -7229,6 +7499,7 @@ module Aws::EC2
     #            blank.</p>
     #   @return [String]
     class CreateFleetInstance < Struct.new(
+      nil,
       :launch_template_and_overrides,
       :lifecycle,
       :instance_ids,
@@ -7325,6 +7596,7 @@ module Aws::EC2
     #   <p>Reserved.</p>
     #   @return [String]
     class CreateFleetRequest < Struct.new(
+      nil,
       :dry_run,
       :client_token,
       :spot_options,
@@ -7356,6 +7628,7 @@ module Aws::EC2
     #               fleets of type <code>instant</code>.</p>
     #   @return [Array<Types::CreateFleetInstance>]
     class CreateFleetResult < Struct.new(
+      nil,
       :fleet_id,
       :errors,
       :instances,
@@ -7452,6 +7725,7 @@ module Aws::EC2
     #   <p>The destination options.</p>
     #   @return [Types::DestinationOptionsRequest]
     class CreateFlowLogsRequest < Struct.new(
+      nil,
       :dry_run,
       :client_token,
       :deliver_logs_permission_arn,
@@ -7482,6 +7756,7 @@ module Aws::EC2
     #   <p>Information about the flow logs that could not be created successfully.</p>
     #   @return [Array<Types::UnsuccessfulItem>]
     class CreateFlowLogsResult < Struct.new(
+      nil,
       :client_token,
       :flow_log_ids,
       :unsuccessful,
@@ -7515,6 +7790,7 @@ module Aws::EC2
     #   <p>The tags to apply to the FPGA image during creation.</p>
     #   @return [Array<Types::TagSpecification>]
     class CreateFpgaImageRequest < Struct.new(
+      nil,
       :dry_run,
       :input_storage_location,
       :logs_storage_location,
@@ -7534,6 +7810,7 @@ module Aws::EC2
     #   <p>The global FPGA image identifier (AGFI ID).</p>
     #   @return [String]
     class CreateFpgaImageResult < Struct.new(
+      nil,
       :fpga_image_id,
       :fpga_image_global_id,
       keyword_init: true
@@ -7638,6 +7915,7 @@ module Aws::EC2
     #            </ul>
     #   @return [Array<Types::BlockDeviceMapping>]
     class CreateImageRequest < Struct.new(
+      nil,
       :tag_specifications,
       :snapshot_location,
       :dry_run,
@@ -7655,6 +7933,7 @@ module Aws::EC2
     #   <p>The ID of the new AMI.</p>
     #   @return [String]
     class CreateImageResult < Struct.new(
+      nil,
       :image_id,
       keyword_init: true
     )
@@ -7686,6 +7965,7 @@ module Aws::EC2
     #            <p>To tag a report after it has been created, see <a href="https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_CreateTags.html">CreateTags</a>.</p>
     #   @return [Array<Types::TagSpecification>]
     class CreateImageUsageReportRequest < Struct.new(
+      nil,
       :image_id,
       :dry_run,
       :resource_types,
@@ -7701,6 +7981,7 @@ module Aws::EC2
     #   <p>The ID of the report.</p>
     #   @return [String]
     class CreateImageUsageReportResult < Struct.new(
+      nil,
       :report_id,
       keyword_init: true
     )
@@ -7772,6 +8053,7 @@ module Aws::EC2
     #            </note>
     #   @return [String]
     class CreateInstanceConnectEndpointRequest < Struct.new(
+      nil,
       :dry_run,
       :subnet_id,
       :security_group_ids,
@@ -7791,6 +8073,7 @@ module Aws::EC2
     #   <p>Unique, case-sensitive idempotency token provided by the client in the the request.</p>
     #   @return [String]
     class CreateInstanceConnectEndpointResult < Struct.new(
+      nil,
       :instance_connect_endpoint,
       :client_token,
       keyword_init: true
@@ -7846,6 +8129,7 @@ module Aws::EC2
     #   <p>The tags to apply to the event window.</p>
     #   @return [Array<Types::TagSpecification>]
     class CreateInstanceEventWindowRequest < Struct.new(
+      nil,
       :dry_run,
       :name,
       :time_ranges,
@@ -7860,6 +8144,7 @@ module Aws::EC2
     #   <p>Information about the event window.</p>
     #   @return [Types::InstanceEventWindow]
     class CreateInstanceEventWindowResult < Struct.new(
+      nil,
       :instance_event_window,
       keyword_init: true
     )
@@ -7882,6 +8167,7 @@ module Aws::EC2
     #   <p>The format and location for an export instance task.</p>
     #   @return [Types::ExportToS3TaskSpecification]
     class CreateInstanceExportTaskRequest < Struct.new(
+      nil,
       :tag_specifications,
       :description,
       :instance_id,
@@ -7896,6 +8182,7 @@ module Aws::EC2
     #   <p>Information about the export instance task.</p>
     #   @return [Types::ExportTask]
     class CreateInstanceExportTaskResult < Struct.new(
+      nil,
       :export_task,
       keyword_init: true
     )
@@ -7911,6 +8198,7 @@ module Aws::EC2
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     class CreateInternetGatewayRequest < Struct.new(
+      nil,
       :tag_specifications,
       :dry_run,
       keyword_init: true
@@ -7922,6 +8210,7 @@ module Aws::EC2
     #   <p>Information about the internet gateway.</p>
     #   @return [Types::InternetGateway]
     class CreateInternetGatewayResult < Struct.new(
+      nil,
       :internet_gateway,
       keyword_init: true
     )
@@ -7943,6 +8232,7 @@ module Aws::EC2
     #   <p>A unique, case-sensitive identifier that you provide to ensure the idempotency of the request. For more information, see <a href="https://docs.aws.amazon.com/ec2/latest/devguide/ec2-api-idempotency.html">Ensuring idempotency</a>.</p>
     #   @return [String]
     class CreateIpamExternalResourceVerificationTokenRequest < Struct.new(
+      nil,
       :dry_run,
       :ipam_id,
       :tag_specifications,
@@ -7956,6 +8246,7 @@ module Aws::EC2
     #   <p>The verification token.</p>
     #   @return [Types::IpamExternalResourceVerificationToken]
     class CreateIpamExternalResourceVerificationTokenResult < Struct.new(
+      nil,
       :ipam_external_resource_verification_token,
       keyword_init: true
     )
@@ -8037,6 +8328,7 @@ module Aws::EC2
     #   <p>The resource used to provision CIDRs to a resource planning pool.</p>
     #   @return [Types::IpamPoolSourceResourceRequest]
     class CreateIpamPoolRequest < Struct.new(
+      nil,
       :dry_run,
       :ipam_scope_id,
       :locale,
@@ -8063,6 +8355,7 @@ module Aws::EC2
     #   <p>Information about the IPAM pool created.</p>
     #   @return [Types::IpamPool]
     class CreateIpamPoolResult < Struct.new(
+      nil,
       :ipam_pool,
       keyword_init: true
     )
@@ -8110,6 +8403,7 @@ module Aws::EC2
     #            </ul>
     #   @return [String]
     class CreateIpamRequest < Struct.new(
+      nil,
       :dry_run,
       :description,
       :operating_regions,
@@ -8141,6 +8435,7 @@ module Aws::EC2
     #   <p>A client token for the IPAM resource discovery.</p>
     #   @return [String]
     class CreateIpamResourceDiscoveryRequest < Struct.new(
+      nil,
       :dry_run,
       :description,
       :operating_regions,
@@ -8155,6 +8450,7 @@ module Aws::EC2
     #   <p>An IPAM resource discovery.</p>
     #   @return [Types::IpamResourceDiscovery]
     class CreateIpamResourceDiscoveryResult < Struct.new(
+      nil,
       :ipam_resource_discovery,
       keyword_init: true
     )
@@ -8165,6 +8461,7 @@ module Aws::EC2
     #   <p>Information about the IPAM created.</p>
     #   @return [Types::Ipam]
     class CreateIpamResult < Struct.new(
+      nil,
       :ipam,
       keyword_init: true
     )
@@ -8190,6 +8487,7 @@ module Aws::EC2
     #   <p>A unique, case-sensitive identifier that you provide to ensure the idempotency of the request. For more information, see <a href="https://docs.aws.amazon.com/ec2/latest/devguide/ec2-api-idempotency.html">Ensuring idempotency</a>.</p>
     #   @return [String]
     class CreateIpamScopeRequest < Struct.new(
+      nil,
       :dry_run,
       :ipam_id,
       :description,
@@ -8204,6 +8502,7 @@ module Aws::EC2
     #   <p>Information about the created scope.</p>
     #   @return [Types::IpamScope]
     class CreateIpamScopeResult < Struct.new(
+      nil,
       :ipam_scope,
       keyword_init: true
     )
@@ -8234,6 +8533,7 @@ module Aws::EC2
     #   <p>An unencrypted PEM encoded RSA or ED25519 private key.</p>
     #   @return [String]
     class CreateKeyPairOutput < Struct.new(
+      nil,
       :key_pair_id,
       :tags,
       :key_name,
@@ -8267,6 +8567,7 @@ module Aws::EC2
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     class CreateKeyPairRequest < Struct.new(
+      nil,
       :key_name,
       :key_type,
       :tag_specifications,
@@ -8311,6 +8612,7 @@ module Aws::EC2
     #                   data</a> structure.</p>
     #   @return [Array<Types::TagSpecification>]
     class CreateLaunchTemplateRequest < Struct.new(
+      nil,
       :dry_run,
       :client_token,
       :launch_template_name,
@@ -8332,6 +8634,7 @@ module Aws::EC2
     #               found.</p>
     #   @return [Types::ValidationWarning]
     class CreateLaunchTemplateResult < Struct.new(
+      nil,
       :launch_template,
       :warning,
       keyword_init: true
@@ -8388,6 +8691,7 @@ module Aws::EC2
     #            </p>
     #   @return [Boolean]
     class CreateLaunchTemplateVersionRequest < Struct.new(
+      nil,
       :dry_run,
       :client_token,
       :launch_template_id,
@@ -8410,6 +8714,7 @@ module Aws::EC2
     #               each issue that's found.</p>
     #   @return [Types::ValidationWarning]
     class CreateLaunchTemplateVersionResult < Struct.new(
+      nil,
       :launch_template_version,
       :warning,
       keyword_init: true
@@ -8442,6 +8747,7 @@ module Aws::EC2
     #         </p>
     #   @return [String]
     class CreateLocalGatewayRouteRequest < Struct.new(
+      nil,
       :destination_cidr_block,
       :local_gateway_route_table_id,
       :local_gateway_virtual_interface_group_id,
@@ -8457,6 +8763,7 @@ module Aws::EC2
     #   <p>Information about the route.</p>
     #   @return [Types::LocalGatewayRoute]
     class CreateLocalGatewayRouteResult < Struct.new(
+      nil,
       :route,
       keyword_init: true
     )
@@ -8484,6 +8791,7 @@ module Aws::EC2
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     class CreateLocalGatewayRouteTableRequest < Struct.new(
+      nil,
       :local_gateway_id,
       :mode,
       :tag_specifications,
@@ -8497,6 +8805,7 @@ module Aws::EC2
     #   <p>Information about the local gateway route table.</p>
     #   @return [Types::LocalGatewayRouteTable]
     class CreateLocalGatewayRouteTableResult < Struct.new(
+      nil,
       :local_gateway_route_table,
       keyword_init: true
     )
@@ -8524,6 +8833,7 @@ module Aws::EC2
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     class CreateLocalGatewayRouteTableVirtualInterfaceGroupAssociationRequest < Struct.new(
+      nil,
       :local_gateway_route_table_id,
       :local_gateway_virtual_interface_group_id,
       :tag_specifications,
@@ -8537,6 +8847,7 @@ module Aws::EC2
     #   <p>Information about the local gateway route table virtual interface group association.</p>
     #   @return [Types::LocalGatewayRouteTableVirtualInterfaceGroupAssociation]
     class CreateLocalGatewayRouteTableVirtualInterfaceGroupAssociationResult < Struct.new(
+      nil,
       :local_gateway_route_table_virtual_interface_group_association,
       keyword_init: true
     )
@@ -8558,6 +8869,7 @@ module Aws::EC2
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     class CreateLocalGatewayRouteTableVpcAssociationRequest < Struct.new(
+      nil,
       :local_gateway_route_table_id,
       :vpc_id,
       :tag_specifications,
@@ -8571,6 +8883,7 @@ module Aws::EC2
     #   <p>Information about the association.</p>
     #   @return [Types::LocalGatewayRouteTableVpcAssociation]
     class CreateLocalGatewayRouteTableVpcAssociationResult < Struct.new(
+      nil,
       :local_gateway_route_table_vpc_association,
       keyword_init: true
     )
@@ -8596,6 +8909,7 @@ module Aws::EC2
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     class CreateLocalGatewayVirtualInterfaceGroupRequest < Struct.new(
+      nil,
       :local_gateway_id,
       :local_bgp_asn,
       :local_bgp_asn_extended,
@@ -8610,6 +8924,7 @@ module Aws::EC2
     #   <p>Information about the created local gateway virtual interface group.</p>
     #   @return [Types::LocalGatewayVirtualInterfaceGroup]
     class CreateLocalGatewayVirtualInterfaceGroupResult < Struct.new(
+      nil,
       :local_gateway_virtual_interface_group,
       keyword_init: true
     )
@@ -8647,6 +8962,7 @@ module Aws::EC2
     #   <p>The extended 32-bit ASN of the BGP peer for use with larger ASN values.</p>
     #   @return [Integer]
     class CreateLocalGatewayVirtualInterfaceRequest < Struct.new(
+      nil,
       :local_gateway_virtual_interface_group_id,
       :outpost_lag_id,
       :vlan,
@@ -8665,6 +8981,7 @@ module Aws::EC2
     #   <p>Information about the local gateway virtual interface.</p>
     #   @return [Types::LocalGatewayVirtualInterface]
     class CreateLocalGatewayVirtualInterfaceResult < Struct.new(
+      nil,
       :local_gateway_virtual_interface,
       keyword_init: true
     )
@@ -8745,6 +9062,7 @@ module Aws::EC2
     #   <p>Specifies tags to apply to the SIP modification task.</p>
     #   @return [Array<Types::TagSpecification>]
     class CreateMacSystemIntegrityProtectionModificationTaskRequest < Struct.new(
+      nil,
       :client_token,
       :dry_run,
       :instance_id,
@@ -8761,6 +9079,7 @@ module Aws::EC2
     #   <p>Information about the SIP modification task.</p>
     #   @return [Types::MacModificationTask]
     class CreateMacSystemIntegrityProtectionModificationTaskResult < Struct.new(
+      nil,
       :mac_modification_task,
       keyword_init: true
     )
@@ -8797,6 +9116,7 @@ module Aws::EC2
     #            <p>Constraints: Up to 255 UTF-8 characters in length.</p>
     #   @return [String]
     class CreateManagedPrefixListRequest < Struct.new(
+      nil,
       :dry_run,
       :prefix_list_name,
       :entries,
@@ -8813,6 +9133,7 @@ module Aws::EC2
     #   <p>Information about the prefix list.</p>
     #   @return [Types::ManagedPrefixList]
     class CreateManagedPrefixListResult < Struct.new(
+      nil,
       :prefix_list,
       keyword_init: true
     )
@@ -8861,6 +9182,7 @@ module Aws::EC2
     #               in the <i>Amazon VPC User Guide</i>.</p>
     #   @return [Integer]
     class CreateNatGatewayRequest < Struct.new(
+      nil,
       :allocation_id,
       :client_token,
       :dry_run,
@@ -8883,6 +9205,7 @@ module Aws::EC2
     #   <p>Information about the NAT gateway.</p>
     #   @return [Types::NatGateway]
     class CreateNatGatewayResult < Struct.new(
+      nil,
       :client_token,
       :nat_gateway,
       keyword_init: true
@@ -8933,6 +9256,7 @@ module Aws::EC2
     #   		        Required if specifying protocol 6 (TCP) or 17 (UDP).</p>
     #   @return [Types::PortRange]
     class CreateNetworkAclEntryRequest < Struct.new(
+      nil,
       :dry_run,
       :network_acl_id,
       :rule_number,
@@ -8964,6 +9288,7 @@ module Aws::EC2
     #   <p>The ID of the VPC.</p>
     #   @return [String]
     class CreateNetworkAclRequest < Struct.new(
+      nil,
       :tag_specifications,
       :client_token,
       :dry_run,
@@ -8980,6 +9305,7 @@ module Aws::EC2
     #   <p>Unique, case-sensitive identifier to ensure the idempotency of the request. Only returned if a client token was provided in the request.</p>
     #   @return [String]
     class CreateNetworkAclResult < Struct.new(
+      nil,
       :network_acl,
       :client_token,
       keyword_init: true
@@ -9006,6 +9332,7 @@ module Aws::EC2
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     class CreateNetworkInsightsAccessScopeRequest < Struct.new(
+      nil,
       :match_paths,
       :exclude_paths,
       :client_token,
@@ -9023,6 +9350,7 @@ module Aws::EC2
     #   <p>The Network Access Scope content.</p>
     #   @return [Types::NetworkInsightsAccessScopeContent]
     class CreateNetworkInsightsAccessScopeResult < Struct.new(
+      nil,
       :network_insights_access_scope,
       :network_insights_access_scope_content,
       keyword_init: true
@@ -9069,6 +9397,7 @@ module Aws::EC2
     #             this parameter, you can't specify the parameter for the destination IP address.</p>
     #   @return [Types::PathRequestFilter]
     class CreateNetworkInsightsPathRequest < Struct.new(
+      nil,
       :source_ip,
       :destination_ip,
       :source,
@@ -9089,6 +9418,7 @@ module Aws::EC2
     #   <p>Information about the path.</p>
     #   @return [Types::NetworkInsightsPath]
     class CreateNetworkInsightsPathResult < Struct.new(
+      nil,
       :network_insights_path,
       keyword_init: true
     )
@@ -9115,6 +9445,7 @@ module Aws::EC2
     #                   <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     class CreateNetworkInterfacePermissionRequest < Struct.new(
+      nil,
       :network_interface_id,
       :aws_account_id,
       :aws_service,
@@ -9130,6 +9461,7 @@ module Aws::EC2
     #   <p>Information about the permission for the network interface.</p>
     #   @return [Types::NetworkInterfacePermission]
     class CreateNetworkInterfacePermissionResult < Struct.new(
+      nil,
       :interface_permission,
       keyword_init: true
     )
@@ -9246,6 +9578,7 @@ module Aws::EC2
     #                   <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     class CreateNetworkInterfaceRequest < Struct.new(
+      nil,
       :ipv4_prefixes,
       :ipv4_prefix_count,
       :ipv6_prefixes,
@@ -9277,6 +9610,7 @@ module Aws::EC2
     #   <p>The token to use to retrieve the next page of results. This value is <code>null</code> when there are no more results to return.</p>
     #   @return [String]
     class CreateNetworkInterfaceResult < Struct.new(
+      nil,
       :network_interface,
       :client_token,
       keyword_init: true
@@ -9317,6 +9651,7 @@ module Aws::EC2
     #   <p>The placement strategy.</p>
     #   @return [String]
     class CreatePlacementGroupRequest < Struct.new(
+      nil,
       :partition_count,
       :tag_specifications,
       :spread_level,
@@ -9332,6 +9667,7 @@ module Aws::EC2
     #   <p>Information about the placement group.</p>
     #   @return [Types::PlacementGroup]
     class CreatePlacementGroupResult < Struct.new(
+      nil,
       :placement_group,
       keyword_init: true
     )
@@ -9351,6 +9687,7 @@ module Aws::EC2
     #   <p>The Availability Zone (AZ) or Local Zone (LZ) network border group that the resource that the IP address is assigned to is in. Defaults to an AZ network border group. For more information on available Local Zones, see <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-byoip.html#byoip-zone-avail">Local Zone availability</a> in the <i>Amazon EC2 User Guide</i>.</p>
     #   @return [String]
     class CreatePublicIpv4PoolRequest < Struct.new(
+      nil,
       :dry_run,
       :tag_specifications,
       :network_border_group,
@@ -9363,6 +9700,7 @@ module Aws::EC2
     #   <p>The ID of the public IPv4 pool.</p>
     #   @return [String]
     class CreatePublicIpv4PoolResult < Struct.new(
+      nil,
       :pool_id,
       keyword_init: true
     )
@@ -9431,6 +9769,7 @@ module Aws::EC2
     #            <p>Valid range: 100 - 300 MiB/s</p>
     #   @return [Integer]
     class CreateReplaceRootVolumeTaskRequest < Struct.new(
+      nil,
       :instance_id,
       :snapshot_id,
       :client_token,
@@ -9448,6 +9787,7 @@ module Aws::EC2
     #   <p>Information about the root volume replacement task.</p>
     #   @return [Types::ReplaceRootVolumeTask]
     class CreateReplaceRootVolumeTaskResult < Struct.new(
+      nil,
       :replace_root_volume_task,
       keyword_init: true
     )
@@ -9473,6 +9813,7 @@ module Aws::EC2
     #         Idempotency</a>.</p>
     #   @return [String]
     class CreateReservedInstancesListingRequest < Struct.new(
+      nil,
       :reserved_instances_id,
       :instance_count,
       :price_schedules,
@@ -9487,6 +9828,7 @@ module Aws::EC2
     #   <p>Information about the Standard Reserved Instance listing.</p>
     #   @return [Array<Types::ReservedInstancesListing>]
     class CreateReservedInstancesListingResult < Struct.new(
+      nil,
       :reserved_instances_listings,
       keyword_init: true
     )
@@ -9525,6 +9867,7 @@ module Aws::EC2
     #   			<code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     class CreateRestoreImageTaskRequest < Struct.new(
+      nil,
       :bucket,
       :object_key,
       :name,
@@ -9539,6 +9882,7 @@ module Aws::EC2
     #   <p>The AMI ID.</p>
     #   @return [String]
     class CreateRestoreImageTaskResult < Struct.new(
+      nil,
       :image_id,
       keyword_init: true
     )
@@ -9601,6 +9945,7 @@ module Aws::EC2
     #   <p>[IPv4 traffic only] The ID of a NAT gateway.</p>
     #   @return [String]
     class CreateRouteRequest < Struct.new(
+      nil,
       :destination_prefix_list_id,
       :vpc_endpoint_id,
       :transit_gateway_id,
@@ -9627,6 +9972,7 @@ module Aws::EC2
     #   <p>Returns <code>true</code> if the request succeeds; otherwise, it returns an error.</p>
     #   @return [Boolean]
     class CreateRouteResult < Struct.new(
+      nil,
       :return,
       keyword_init: true
     )
@@ -9651,6 +9997,7 @@ module Aws::EC2
     #   <p>The tags to apply to the route server endpoint during creation.</p>
     #   @return [Array<Types::TagSpecification>]
     class CreateRouteServerEndpointRequest < Struct.new(
+      nil,
       :route_server_id,
       :subnet_id,
       :client_token,
@@ -9665,6 +10012,7 @@ module Aws::EC2
     #   <p>Information about the created route server endpoint.</p>
     #   @return [Types::RouteServerEndpoint]
     class CreateRouteServerEndpointResult < Struct.new(
+      nil,
       :route_server_endpoint,
       keyword_init: true
     )
@@ -9689,6 +10037,7 @@ module Aws::EC2
     #   <p>The tags to apply to the route server peer during creation.</p>
     #   @return [Array<Types::TagSpecification>]
     class CreateRouteServerPeerRequest < Struct.new(
+      nil,
       :route_server_endpoint_id,
       :peer_address,
       :bgp_options,
@@ -9703,6 +10052,7 @@ module Aws::EC2
     #   <p>Information about the created route server peer.</p>
     #   @return [Types::RouteServerPeer]
     class CreateRouteServerPeerResult < Struct.new(
+      nil,
       :route_server_peer,
       keyword_init: true
     )
@@ -9734,6 +10084,7 @@ module Aws::EC2
     #   <p>The tags to apply to the route server during creation.</p>
     #   @return [Array<Types::TagSpecification>]
     class CreateRouteServerRequest < Struct.new(
+      nil,
       :amazon_side_asn,
       :client_token,
       :dry_run,
@@ -9750,6 +10101,7 @@ module Aws::EC2
     #   <p>Information about the created route server.</p>
     #   @return [Types::RouteServer]
     class CreateRouteServerResult < Struct.new(
+      nil,
       :route_server,
       keyword_init: true
     )
@@ -9772,6 +10124,7 @@ module Aws::EC2
     #   <p>The ID of the VPC.</p>
     #   @return [String]
     class CreateRouteTableRequest < Struct.new(
+      nil,
       :tag_specifications,
       :client_token,
       :dry_run,
@@ -9788,6 +10141,7 @@ module Aws::EC2
     #   <p>Unique, case-sensitive identifier to ensure the idempotency of the request. Only returned if a client token was provided in the request.</p>
     #   @return [String]
     class CreateRouteTableResult < Struct.new(
+      nil,
       :route_table,
       :client_token,
       keyword_init: true
@@ -9817,6 +10171,7 @@ module Aws::EC2
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     class CreateSecurityGroupRequest < Struct.new(
+      nil,
       :description,
       :group_name,
       :vpc_id,
@@ -9837,6 +10192,7 @@ module Aws::EC2
     #   <p>The security group ARN.</p>
     #   @return [String]
     class CreateSecurityGroupResult < Struct.new(
+      nil,
       :group_id,
       :tags,
       :security_group_arn,
@@ -9959,6 +10315,7 @@ module Aws::EC2
     #         to the same volume/snapshot lineage. This parameter is only returned by <a>DescribeSnapshots</a>.</p>
     #   @return [String]
     class CreateSnapshotOutput < Struct.new(
+      nil,
       :owner_alias,
       :outpost_arn,
       :tags,
@@ -10036,6 +10393,7 @@ module Aws::EC2
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     class CreateSnapshotRequest < Struct.new(
+      nil,
       :description,
       :outpost_arn,
       :volume_id,
@@ -10100,6 +10458,7 @@ module Aws::EC2
     #            </p>
     #   @return [String]
     class CreateSnapshotsRequest < Struct.new(
+      nil,
       :description,
       :instance_specification,
       :outpost_arn,
@@ -10116,6 +10475,7 @@ module Aws::EC2
     #   <p>List of snapshots.</p>
     #   @return [Array<Types::SnapshotInfo>]
     class CreateSnapshotsResult < Struct.new(
+      nil,
       :snapshots,
       keyword_init: true
     )
@@ -10138,6 +10498,7 @@ module Aws::EC2
     #   <p>The prefix for the data feed file names.</p>
     #   @return [String]
     class CreateSpotDatafeedSubscriptionRequest < Struct.new(
+      nil,
       :dry_run,
       :bucket,
       :prefix,
@@ -10151,6 +10512,7 @@ module Aws::EC2
     #   <p>The Spot Instance data feed subscription.</p>
     #   @return [Types::SpotDatafeedSubscription]
     class CreateSpotDatafeedSubscriptionResult < Struct.new(
+      nil,
       :spot_datafeed_subscription,
       keyword_init: true
     )
@@ -10174,6 +10536,7 @@ module Aws::EC2
     #   			<code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     class CreateStoreImageTaskRequest < Struct.new(
+      nil,
       :image_id,
       :bucket,
       :s3_object_tags,
@@ -10187,6 +10550,7 @@ module Aws::EC2
     #   <p>The name of the stored AMI object in the S3 bucket.</p>
     #   @return [String]
     class CreateStoreImageTaskResult < Struct.new(
+      nil,
       :object_key,
       keyword_init: true
     )
@@ -10226,6 +10590,7 @@ module Aws::EC2
     #   <p>The tags to assign to the subnet CIDR reservation.</p>
     #   @return [Array<Types::TagSpecification>]
     class CreateSubnetCidrReservationRequest < Struct.new(
+      nil,
       :subnet_id,
       :cidr,
       :reservation_type,
@@ -10241,6 +10606,7 @@ module Aws::EC2
     #   <p>Information about the created subnet CIDR reservation.</p>
     #   @return [Types::SubnetCidrReservation]
     class CreateSubnetCidrReservationResult < Struct.new(
+      nil,
       :subnet_cidr_reservation,
       keyword_init: true
     )
@@ -10301,6 +10667,7 @@ module Aws::EC2
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     class CreateSubnetRequest < Struct.new(
+      nil,
       :tag_specifications,
       :availability_zone,
       :availability_zone_id,
@@ -10323,6 +10690,7 @@ module Aws::EC2
     #   <p>Information about the subnet.</p>
     #   @return [Types::Subnet]
     class CreateSubnetResult < Struct.new(
+      nil,
       :subnet,
       keyword_init: true
     )
@@ -10343,6 +10711,7 @@ module Aws::EC2
     #           specify the parameter with no value, and we set the value to an empty string.</p>
     #   @return [Array<Types::Tag>]
     class CreateTagsRequest < Struct.new(
+      nil,
       :dry_run,
       :resources,
       :tags,
@@ -10366,6 +10735,7 @@ module Aws::EC2
     #   <p>Unique, case-sensitive identifier that you provide to ensure the idempotency of the request. For more information, see <a href="https://docs.aws.amazon.com/ec2/latest/devguide/ec2-api-idempotency.html">How to ensure idempotency</a>.</p>
     #   @return [String]
     class CreateTrafficMirrorFilterRequest < Struct.new(
+      nil,
       :description,
       :tag_specifications,
       :dry_run,
@@ -10382,6 +10752,7 @@ module Aws::EC2
     #   <p>Unique, case-sensitive identifier that you provide to ensure the idempotency of the request. For more information, see <a href="https://docs.aws.amazon.com/ec2/latest/devguide/ec2-api-idempotency.html">How to ensure idempotency</a>.</p>
     #   @return [String]
     class CreateTrafficMirrorFilterResult < Struct.new(
+      nil,
       :traffic_mirror_filter,
       :client_token,
       keyword_init: true
@@ -10433,6 +10804,7 @@ module Aws::EC2
     #   <p>Traffic Mirroring tags specifications.</p>
     #   @return [Array<Types::TagSpecification>]
     class CreateTrafficMirrorFilterRuleRequest < Struct.new(
+      nil,
       :traffic_mirror_filter_id,
       :traffic_direction,
       :rule_number,
@@ -10458,6 +10830,7 @@ module Aws::EC2
     #   <p>Unique, case-sensitive identifier that you provide to ensure the idempotency of the request. For more information, see <a href="https://docs.aws.amazon.com/ec2/latest/devguide/ec2-api-idempotency.html">How to ensure idempotency</a>.</p>
     #   @return [String]
     class CreateTrafficMirrorFilterRuleResult < Struct.new(
+      nil,
       :traffic_mirror_filter_rule,
       :client_token,
       keyword_init: true
@@ -10508,6 +10881,7 @@ module Aws::EC2
     #   <p>Unique, case-sensitive identifier that you provide to ensure the idempotency of the request. For more information, see <a href="https://docs.aws.amazon.com/ec2/latest/devguide/ec2-api-idempotency.html">How to ensure idempotency</a>.</p>
     #   @return [String]
     class CreateTrafficMirrorSessionRequest < Struct.new(
+      nil,
       :network_interface_id,
       :traffic_mirror_target_id,
       :traffic_mirror_filter_id,
@@ -10530,6 +10904,7 @@ module Aws::EC2
     #   <p>Unique, case-sensitive identifier that you provide to ensure the idempotency of the request. For more information, see <a href="https://docs.aws.amazon.com/ec2/latest/devguide/ec2-api-idempotency.html">How to ensure idempotency</a>.</p>
     #   @return [String]
     class CreateTrafficMirrorSessionResult < Struct.new(
+      nil,
       :traffic_mirror_session,
       :client_token,
       keyword_init: true
@@ -10561,6 +10936,7 @@ module Aws::EC2
     #   <p>The ID of the Gateway Load Balancer endpoint.</p>
     #   @return [String]
     class CreateTrafficMirrorTargetRequest < Struct.new(
+      nil,
       :network_interface_id,
       :network_load_balancer_arn,
       :description,
@@ -10580,6 +10956,7 @@ module Aws::EC2
     #   <p>Unique, case-sensitive identifier that you provide to ensure the idempotency of the request. For more information, see <a href="https://docs.aws.amazon.com/ec2/latest/devguide/ec2-api-idempotency.html">How to ensure idempotency</a>.</p>
     #   @return [String]
     class CreateTrafficMirrorTargetResult < Struct.new(
+      nil,
       :traffic_mirror_target,
       :client_token,
       keyword_init: true
@@ -10617,6 +10994,7 @@ module Aws::EC2
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     class CreateTransitGatewayConnectPeerRequest < Struct.new(
+      nil,
       :transit_gateway_attachment_id,
       :transit_gateway_address,
       :peer_address,
@@ -10633,6 +11011,7 @@ module Aws::EC2
     #   <p>Information about the Connect peer.</p>
     #   @return [Types::TransitGatewayConnectPeer]
     class CreateTransitGatewayConnectPeerResult < Struct.new(
+      nil,
       :transit_gateway_connect_peer,
       keyword_init: true
     )
@@ -10654,6 +11033,7 @@ module Aws::EC2
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     class CreateTransitGatewayConnectRequest < Struct.new(
+      nil,
       :transport_transit_gateway_attachment_id,
       :options,
       :tag_specifications,
@@ -10668,6 +11048,7 @@ module Aws::EC2
     #   <p>The tunnel protocol.</p>
     #   @return [String]
     class CreateTransitGatewayConnectRequestOptions < Struct.new(
+      nil,
       :protocol,
       keyword_init: true
     )
@@ -10678,6 +11059,7 @@ module Aws::EC2
     #   <p>Information about the Connect attachment.</p>
     #   @return [Types::TransitGatewayConnect]
     class CreateTransitGatewayConnectResult < Struct.new(
+      nil,
       :transit_gateway_connect,
       keyword_init: true
     )
@@ -10699,6 +11081,7 @@ module Aws::EC2
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     class CreateTransitGatewayMulticastDomainRequest < Struct.new(
+      nil,
       :transit_gateway_id,
       :options,
       :tag_specifications,
@@ -10719,6 +11102,7 @@ module Aws::EC2
     #   <p>Indicates whether to automatically accept cross-account subnet associations that are associated with the transit gateway multicast domain.</p>
     #   @return [String]
     class CreateTransitGatewayMulticastDomainRequestOptions < Struct.new(
+      nil,
       :igmpv2_support,
       :static_sources_support,
       :auto_accept_shared_associations,
@@ -10731,6 +11115,7 @@ module Aws::EC2
     #   <p>Information about the transit gateway multicast domain.</p>
     #   @return [Types::TransitGatewayMulticastDomain]
     class CreateTransitGatewayMulticastDomainResult < Struct.new(
+      nil,
       :transit_gateway_multicast_domain,
       keyword_init: true
     )
@@ -10761,6 +11146,7 @@ module Aws::EC2
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     class CreateTransitGatewayPeeringAttachmentRequest < Struct.new(
+      nil,
       :transit_gateway_id,
       :peer_transit_gateway_id,
       :peer_account_id,
@@ -10778,6 +11164,7 @@ module Aws::EC2
     #   <p>Indicates whether dynamic routing is enabled or disabled.</p>
     #   @return [String]
     class CreateTransitGatewayPeeringAttachmentRequestOptions < Struct.new(
+      nil,
       :dynamic_routing,
       keyword_init: true
     )
@@ -10788,6 +11175,7 @@ module Aws::EC2
     #   <p>The transit gateway peering attachment.</p>
     #   @return [Types::TransitGatewayPeeringAttachment]
     class CreateTransitGatewayPeeringAttachmentResult < Struct.new(
+      nil,
       :transit_gateway_peering_attachment,
       keyword_init: true
     )
@@ -10806,6 +11194,7 @@ module Aws::EC2
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     class CreateTransitGatewayPolicyTableRequest < Struct.new(
+      nil,
       :transit_gateway_id,
       :tag_specifications,
       :dry_run,
@@ -10818,6 +11207,7 @@ module Aws::EC2
     #   <p>Describes the created transit gateway policy table.</p>
     #   @return [Types::TransitGatewayPolicyTable]
     class CreateTransitGatewayPolicyTableResult < Struct.new(
+      nil,
       :transit_gateway_policy_table,
       keyword_init: true
     )
@@ -10842,6 +11232,7 @@ module Aws::EC2
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     class CreateTransitGatewayPrefixListReferenceRequest < Struct.new(
+      nil,
       :transit_gateway_route_table_id,
       :prefix_list_id,
       :transit_gateway_attachment_id,
@@ -10856,6 +11247,7 @@ module Aws::EC2
     #   <p>Information about the prefix list reference.</p>
     #   @return [Types::TransitGatewayPrefixListReference]
     class CreateTransitGatewayPrefixListReferenceResult < Struct.new(
+      nil,
       :transit_gateway_prefix_list_reference,
       keyword_init: true
     )
@@ -10877,6 +11269,7 @@ module Aws::EC2
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     class CreateTransitGatewayRequest < Struct.new(
+      nil,
       :description,
       :options,
       :tag_specifications,
@@ -10890,6 +11283,7 @@ module Aws::EC2
     #   <p>Information about the transit gateway.</p>
     #   @return [Types::TransitGateway]
     class CreateTransitGatewayResult < Struct.new(
+      nil,
       :transit_gateway,
       keyword_init: true
     )
@@ -10915,6 +11309,7 @@ module Aws::EC2
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     class CreateTransitGatewayRouteRequest < Struct.new(
+      nil,
       :destination_cidr_block,
       :transit_gateway_route_table_id,
       :transit_gateway_attachment_id,
@@ -10929,6 +11324,7 @@ module Aws::EC2
     #   <p>Information about the route.</p>
     #   @return [Types::TransitGatewayRoute]
     class CreateTransitGatewayRouteResult < Struct.new(
+      nil,
       :route,
       keyword_init: true
     )
@@ -10950,6 +11346,7 @@ module Aws::EC2
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     class CreateTransitGatewayRouteTableAnnouncementRequest < Struct.new(
+      nil,
       :transit_gateway_route_table_id,
       :peering_attachment_id,
       :tag_specifications,
@@ -10963,6 +11360,7 @@ module Aws::EC2
     #   <p>Provides details about the transit gateway route table announcement.</p>
     #   @return [Types::TransitGatewayRouteTableAnnouncement]
     class CreateTransitGatewayRouteTableAnnouncementResult < Struct.new(
+      nil,
       :transit_gateway_route_table_announcement,
       keyword_init: true
     )
@@ -10981,6 +11379,7 @@ module Aws::EC2
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     class CreateTransitGatewayRouteTableRequest < Struct.new(
+      nil,
       :transit_gateway_id,
       :tag_specifications,
       :dry_run,
@@ -10993,6 +11392,7 @@ module Aws::EC2
     #   <p>Information about the transit gateway route table.</p>
     #   @return [Types::TransitGatewayRouteTable]
     class CreateTransitGatewayRouteTableResult < Struct.new(
+      nil,
       :transit_gateway_route_table,
       keyword_init: true
     )
@@ -11022,6 +11422,7 @@ module Aws::EC2
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     class CreateTransitGatewayVpcAttachmentRequest < Struct.new(
+      nil,
       :transit_gateway_id,
       :vpc_id,
       :subnet_ids,
@@ -11049,6 +11450,7 @@ module Aws::EC2
     #   <p>Enable or disable support for appliance mode. If enabled, a traffic flow between a source and destination uses the same Availability Zone for the VPC attachment for the lifetime of that flow. The default is <code>disable</code>.</p>
     #   @return [String]
     class CreateTransitGatewayVpcAttachmentRequestOptions < Struct.new(
+      nil,
       :dns_support,
       :security_group_referencing_support,
       :ipv6_support,
@@ -11062,6 +11464,7 @@ module Aws::EC2
     #   <p>Information about the VPC attachment.</p>
     #   @return [Types::TransitGatewayVpcAttachment]
     class CreateTransitGatewayVpcAttachmentResult < Struct.new(
+      nil,
       :transit_gateway_vpc_attachment,
       keyword_init: true
     )
@@ -11082,6 +11485,7 @@ module Aws::EC2
     #   <p>The port ranges.</p>
     #   @return [Array<Types::CreateVerifiedAccessEndpointPortRange>]
     class CreateVerifiedAccessEndpointCidrOptions < Struct.new(
+      nil,
       :protocol,
       :subnet_ids,
       :cidr,
@@ -11106,6 +11510,7 @@ module Aws::EC2
     #   <p>The port ranges.</p>
     #   @return [Array<Types::CreateVerifiedAccessEndpointPortRange>]
     class CreateVerifiedAccessEndpointEniOptions < Struct.new(
+      nil,
       :network_interface_id,
       :protocol,
       :port,
@@ -11133,6 +11538,7 @@ module Aws::EC2
     #   <p>The port ranges.</p>
     #   @return [Array<Types::CreateVerifiedAccessEndpointPortRange>]
     class CreateVerifiedAccessEndpointLoadBalancerOptions < Struct.new(
+      nil,
       :protocol,
       :port,
       :load_balancer_arn,
@@ -11151,6 +11557,7 @@ module Aws::EC2
     #   <p>The end of the port range.</p>
     #   @return [Integer]
     class CreateVerifiedAccessEndpointPortRange < Struct.new(
+      nil,
       :from_port,
       :to_port,
       keyword_init: true
@@ -11181,6 +11588,7 @@ module Aws::EC2
     #   <p>The IDs of the subnets. You can specify only one subnet per Availability Zone.</p>
     #   @return [Array<String>]
     class CreateVerifiedAccessEndpointRdsOptions < Struct.new(
+      nil,
       :protocol,
       :port,
       :rds_db_instance_arn,
@@ -11253,6 +11661,7 @@ module Aws::EC2
     #   <p>The CIDR options. This parameter is required if the endpoint type is <code>cidr</code>.</p>
     #   @return [Types::CreateVerifiedAccessEndpointCidrOptions]
     class CreateVerifiedAccessEndpointRequest < Struct.new(
+      nil,
       :verified_access_group_id,
       :endpoint_type,
       :attachment_type,
@@ -11279,6 +11688,7 @@ module Aws::EC2
     #   <p>Details about the Verified Access endpoint.</p>
     #   @return [Types::VerifiedAccessEndpoint]
     class CreateVerifiedAccessEndpointResult < Struct.new(
+      nil,
       :verified_access_endpoint,
       keyword_init: true
     )
@@ -11310,6 +11720,7 @@ module Aws::EC2
     #   <p>The options for server side encryption.</p>
     #   @return [Types::VerifiedAccessSseSpecificationRequest]
     class CreateVerifiedAccessGroupRequest < Struct.new(
+      nil,
       :verified_access_instance_id,
       :description,
       :policy_document,
@@ -11326,6 +11737,7 @@ module Aws::EC2
     #   <p>Details about the Verified Access group.</p>
     #   @return [Types::VerifiedAccessGroup]
     class CreateVerifiedAccessGroupResult < Struct.new(
+      nil,
       :verified_access_group,
       keyword_init: true
     )
@@ -11354,6 +11766,7 @@ module Aws::EC2
     #   <p>The custom subdomain.</p>
     #   @return [String]
     class CreateVerifiedAccessInstanceRequest < Struct.new(
+      nil,
       :description,
       :tag_specifications,
       :client_token,
@@ -11369,6 +11782,7 @@ module Aws::EC2
     #   <p>Details about the Verified Access instance.</p>
     #   @return [Types::VerifiedAccessInstance]
     class CreateVerifiedAccessInstanceResult < Struct.new(
+      nil,
       :verified_access_instance,
       keyword_init: true
     )
@@ -11401,6 +11815,7 @@ module Aws::EC2
     #   <p>The set of user claims to be requested from the IdP.</p>
     #   @return [String]
     class CreateVerifiedAccessNativeApplicationOidcOptions < Struct.new(
+      nil,
       :public_signing_key_endpoint,
       :issuer,
       :authorization_endpoint,
@@ -11425,6 +11840,7 @@ module Aws::EC2
     #         </p>
     #   @return [String]
     class CreateVerifiedAccessTrustProviderDeviceOptions < Struct.new(
+      nil,
       :tenant_id,
       :public_signing_key_url,
       keyword_init: true
@@ -11456,6 +11872,7 @@ module Aws::EC2
     #   <p>OpenID Connect (OIDC) scopes are used by an application during authentication to authorize access to a user's details. Each scope returns a specific set of user attributes.</p>
     #   @return [String]
     class CreateVerifiedAccessTrustProviderOidcOptions < Struct.new(
+      nil,
       :issuer,
       :authorization_endpoint,
       :token_endpoint,
@@ -11512,6 +11929,7 @@ module Aws::EC2
     #   <p>The OpenID Connect (OIDC) options.</p>
     #   @return [Types::CreateVerifiedAccessNativeApplicationOidcOptions]
     class CreateVerifiedAccessTrustProviderRequest < Struct.new(
+      nil,
       :trust_provider_type,
       :user_trust_provider_type,
       :device_trust_provider_type,
@@ -11533,6 +11951,7 @@ module Aws::EC2
     #   <p>Details about the Verified Access trust provider.</p>
     #   @return [Types::VerifiedAccessTrustProvider]
     class CreateVerifiedAccessTrustProviderResult < Struct.new(
+      nil,
       :verified_access_trust_provider,
       keyword_init: true
     )
@@ -11614,6 +12033,7 @@ module Aws::EC2
     #         volume encryption key for the volume.</p>
     #   @return [String]
     class CreateVolumeOutput < Struct.new(
+      nil,
       :availability_zone_id,
       :outpost_arn,
       :iops,
@@ -11648,6 +12068,7 @@ module Aws::EC2
     #   <p>The group to be added or removed. The possible value is <code>all</code>.</p>
     #   @return [String]
     class CreateVolumePermission < Struct.new(
+      nil,
       :user_id,
       :group,
       keyword_init: true
@@ -11663,6 +12084,7 @@ module Aws::EC2
     #   <p>Removes the specified Amazon Web Services account ID or group from the list.</p>
     #   @return [Array<Types::CreateVolumePermission>]
     class CreateVolumePermissionModifications < Struct.new(
+      nil,
       :add,
       :remove,
       keyword_init: true
@@ -11864,6 +12286,7 @@ module Aws::EC2
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     class CreateVolumeRequest < Struct.new(
+      nil,
       :availability_zone,
       :availability_zone_id,
       :encrypted,
@@ -11915,6 +12338,7 @@ module Aws::EC2
     #       For example, to find all resources that have a tag with the key <code>Owner</code> and the value <code>TeamA</code>, specify <code>tag:Owner</code> for the filter name and <code>TeamA</code> for the filter value.</p>
     #   @return [Array<Types::TagSpecification>]
     class CreateVpcBlockPublicAccessExclusionRequest < Struct.new(
+      nil,
       :dry_run,
       :subnet_id,
       :vpc_id,
@@ -11929,6 +12353,7 @@ module Aws::EC2
     #   <p>Details about an exclusion.</p>
     #   @return [Types::VpcBlockPublicAccessExclusion]
     class CreateVpcBlockPublicAccessExclusionResult < Struct.new(
+      nil,
       :vpc_block_public_access_exclusion,
       keyword_init: true
     )
@@ -11960,6 +12385,7 @@ module Aws::EC2
     #                   idempotency</a>.</p>
     #   @return [String]
     class CreateVpcEndpointConnectionNotificationRequest < Struct.new(
+      nil,
       :dry_run,
       :service_id,
       :vpc_endpoint_id,
@@ -11979,6 +12405,7 @@ module Aws::EC2
     #               request.</p>
     #   @return [String]
     class CreateVpcEndpointConnectionNotificationResult < Struct.new(
+      nil,
       :connection_notification,
       :client_token,
       keyword_init: true
@@ -12060,6 +12487,7 @@ module Aws::EC2
     #   <p>The Region where the service is hosted. The default is the current Region.</p>
     #   @return [String]
     class CreateVpcEndpointRequest < Struct.new(
+      nil,
       :dry_run,
       :vpc_endpoint_type,
       :vpc_id,
@@ -12090,6 +12518,7 @@ module Aws::EC2
     #               request.</p>
     #   @return [String]
     class CreateVpcEndpointResult < Struct.new(
+      nil,
       :vpc_endpoint,
       :client_token,
       keyword_init: true
@@ -12130,6 +12559,7 @@ module Aws::EC2
     #   <p>The tags to associate with the service.</p>
     #   @return [Array<Types::TagSpecification>]
     class CreateVpcEndpointServiceConfigurationRequest < Struct.new(
+      nil,
       :dry_run,
       :acceptance_required,
       :private_dns_name,
@@ -12152,6 +12582,7 @@ module Aws::EC2
     #               request.</p>
     #   @return [String]
     class CreateVpcEndpointServiceConfigurationResult < Struct.new(
+      nil,
       :service_configuration,
       :client_token,
       keyword_init: true
@@ -12185,6 +12616,7 @@ module Aws::EC2
     #            <p>Default: Your Amazon Web Services account ID</p>
     #   @return [String]
     class CreateVpcPeeringConnectionRequest < Struct.new(
+      nil,
       :peer_region,
       :tag_specifications,
       :dry_run,
@@ -12200,6 +12632,7 @@ module Aws::EC2
     #   <p>Information about the VPC peering connection.</p>
     #   @return [Types::VpcPeeringConnection]
     class CreateVpcPeeringConnectionResult < Struct.new(
+      nil,
       :vpc_peering_connection,
       keyword_init: true
     )
@@ -12259,6 +12692,7 @@ module Aws::EC2
     #               You cannot specify the range of IP addresses, or the size of the CIDR block.</p>
     #   @return [Boolean]
     class CreateVpcRequest < Struct.new(
+      nil,
       :cidr_block,
       :ipv6_pool,
       :ipv6_cidr_block,
@@ -12280,6 +12714,7 @@ module Aws::EC2
     #   <p>Information about the VPC.</p>
     #   @return [Types::Vpc]
     class CreateVpcResult < Struct.new(
+      nil,
       :vpc,
       keyword_init: true
     )
@@ -12317,6 +12752,7 @@ module Aws::EC2
     #   <p>The options for the VPN connection.</p>
     #   @return [Types::VpnConnectionOptionsSpecification]
     class CreateVpnConnectionRequest < Struct.new(
+      nil,
       :customer_gateway_id,
       :type,
       :vpn_gateway_id,
@@ -12335,6 +12771,7 @@ module Aws::EC2
     #   <p>Information about the VPN connection.</p>
     #   @return [Types::VpnConnection]
     class CreateVpnConnectionResult < Struct.new(
+      nil,
       :vpn_connection,
       keyword_init: true
     )
@@ -12349,6 +12786,7 @@ module Aws::EC2
     #   <p>The ID of the VPN connection.</p>
     #   @return [String]
     class CreateVpnConnectionRouteRequest < Struct.new(
+      nil,
       :destination_cidr_block,
       :vpn_connection_id,
       keyword_init: true
@@ -12379,6 +12817,7 @@ module Aws::EC2
     #                   <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     class CreateVpnGatewayRequest < Struct.new(
+      nil,
       :availability_zone,
       :type,
       :tag_specifications,
@@ -12394,6 +12833,7 @@ module Aws::EC2
     #   <p>Information about the virtual private gateway.</p>
     #   @return [Types::VpnGateway]
     class CreateVpnGatewayResult < Struct.new(
+      nil,
       :vpn_gateway,
       keyword_init: true
     )
@@ -12406,6 +12846,7 @@ module Aws::EC2
     #         value of <code>300</code> allows images that were created within the last 300 days.</p>
     #   @return [Integer]
     class CreationDateCondition < Struct.new(
+      nil,
       :maximum_days_since_created,
       keyword_init: true
     )
@@ -12418,6 +12859,7 @@ module Aws::EC2
     #         value of <code>300</code> allows images that were created within the last 300 days.</p>
     #   @return [Integer]
     class CreationDateConditionRequest < Struct.new(
+      nil,
       :maximum_days_since_created,
       keyword_init: true
     )
@@ -12431,6 +12873,7 @@ module Aws::EC2
     #            </p>
     #   @return [String]
     class CreditSpecification < Struct.new(
+      nil,
       :cpu_credits,
       keyword_init: true
     )
@@ -12444,6 +12887,7 @@ module Aws::EC2
     #            </p>
     #   @return [String]
     class CreditSpecificationRequest < Struct.new(
+      nil,
       :cpu_credits,
       keyword_init: true
     )
@@ -12490,6 +12934,7 @@ module Aws::EC2
     #            </p>
     #   @return [String]
     class CustomerGateway < Struct.new(
+      nil,
       :certificate_arn,
       :device_name,
       :tags,
@@ -12526,6 +12971,7 @@ module Aws::EC2
     #   <p>The aggregation period used for the data query.</p>
     #   @return [String]
     class DataQuery < Struct.new(
+      nil,
       :id,
       :source,
       :destination,
@@ -12560,6 +13006,7 @@ module Aws::EC2
     #   <p>A list of <code>MetricPoint</code> objects.</p>
     #   @return [Array<Types::MetricPoint>]
     class DataResponse < Struct.new(
+      nil,
       :id,
       :source,
       :destination,
@@ -12613,6 +13060,7 @@ module Aws::EC2
     #   <p>Any tags assigned to the report.</p>
     #   @return [Array<Types::Tag>]
     class DeclarativePoliciesReport < Struct.new(
+      nil,
       :report_id,
       :s3_bucket,
       :s3_prefix,
@@ -12635,6 +13083,7 @@ module Aws::EC2
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     class DeleteCarrierGatewayRequest < Struct.new(
+      nil,
       :carrier_gateway_id,
       :dry_run,
       keyword_init: true
@@ -12646,6 +13095,7 @@ module Aws::EC2
     #   <p>Information about the carrier gateway.</p>
     #   @return [Types::CarrierGateway]
     class DeleteCarrierGatewayResult < Struct.new(
+      nil,
       :carrier_gateway,
       keyword_init: true
     )
@@ -12659,6 +13109,7 @@ module Aws::EC2
     #   <p>Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     class DeleteClientVpnEndpointRequest < Struct.new(
+      nil,
       :client_vpn_endpoint_id,
       :dry_run,
       keyword_init: true
@@ -12670,6 +13121,7 @@ module Aws::EC2
     #   <p>The current state of the Client VPN endpoint.</p>
     #   @return [Types::ClientVpnEndpointStatus]
     class DeleteClientVpnEndpointResult < Struct.new(
+      nil,
       :status,
       keyword_init: true
     )
@@ -12689,6 +13141,7 @@ module Aws::EC2
     #   <p>Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     class DeleteClientVpnRouteRequest < Struct.new(
+      nil,
       :client_vpn_endpoint_id,
       :target_vpc_subnet_id,
       :destination_cidr_block,
@@ -12702,6 +13155,7 @@ module Aws::EC2
     #   <p>The current state of the route.</p>
     #   @return [Types::ClientVpnRouteStatus]
     class DeleteClientVpnRouteResult < Struct.new(
+      nil,
       :status,
       keyword_init: true
     )
@@ -12722,6 +13176,7 @@ module Aws::EC2
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     class DeleteCoipCidrRequest < Struct.new(
+      nil,
       :cidr,
       :coip_pool_id,
       :dry_run,
@@ -12736,6 +13191,7 @@ module Aws::EC2
     #         </p>
     #   @return [Types::CoipCidr]
     class DeleteCoipCidrResult < Struct.new(
+      nil,
       :coip_cidr,
       keyword_init: true
     )
@@ -12751,6 +13207,7 @@ module Aws::EC2
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     class DeleteCoipPoolRequest < Struct.new(
+      nil,
       :coip_pool_id,
       :dry_run,
       keyword_init: true
@@ -12762,6 +13219,7 @@ module Aws::EC2
     #   <p>Information about the CoIP address pool.</p>
     #   @return [Types::CoipPool]
     class DeleteCoipPoolResult < Struct.new(
+      nil,
       :coip_pool,
       keyword_init: true
     )
@@ -12779,6 +13237,7 @@ module Aws::EC2
     #                   <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     class DeleteCustomerGatewayRequest < Struct.new(
+      nil,
       :customer_gateway_id,
       :dry_run,
       keyword_init: true
@@ -12795,6 +13254,7 @@ module Aws::EC2
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     class DeleteDhcpOptionsRequest < Struct.new(
+      nil,
       :dhcp_options_id,
       :dry_run,
       keyword_init: true
@@ -12811,6 +13271,7 @@ module Aws::EC2
     #   <p>The ID of the egress-only internet gateway.</p>
     #   @return [String]
     class DeleteEgressOnlyInternetGatewayRequest < Struct.new(
+      nil,
       :dry_run,
       :egress_only_internet_gateway_id,
       keyword_init: true
@@ -12822,6 +13283,7 @@ module Aws::EC2
     #   <p>Returns <code>true</code> if the request succeeds; otherwise, it returns an error.</p>
     #   @return [Boolean]
     class DeleteEgressOnlyInternetGatewayResult < Struct.new(
+      nil,
       :return_code,
       keyword_init: true
     )
@@ -12836,6 +13298,7 @@ module Aws::EC2
     #   <p>The description for the error code.</p>
     #   @return [String]
     class DeleteFleetError < Struct.new(
+      nil,
       :code,
       :message,
       keyword_init: true
@@ -12851,6 +13314,7 @@ module Aws::EC2
     #   <p>The ID of the EC2 Fleet.</p>
     #   @return [String]
     class DeleteFleetErrorItem < Struct.new(
+      nil,
       :error,
       :fleet_id,
       keyword_init: true
@@ -12869,6 +13333,7 @@ module Aws::EC2
     #   <p>The ID of the EC2 Fleet.</p>
     #   @return [String]
     class DeleteFleetSuccessItem < Struct.new(
+      nil,
       :current_fleet_state,
       :previous_fleet_state,
       :fleet_id,
@@ -12897,6 +13362,7 @@ module Aws::EC2
     #            deleted <code>instant</code> fleet with running instances is not supported.</p>
     #   @return [Boolean]
     class DeleteFleetsRequest < Struct.new(
+      nil,
       :dry_run,
       :fleet_ids,
       :terminate_instances,
@@ -12912,6 +13378,7 @@ module Aws::EC2
     #   <p>Information about the EC2 Fleets that are not successfully deleted.</p>
     #   @return [Array<Types::DeleteFleetErrorItem>]
     class DeleteFleetsResult < Struct.new(
+      nil,
       :successful_fleet_deletions,
       :unsuccessful_fleet_deletions,
       keyword_init: true
@@ -12929,6 +13396,7 @@ module Aws::EC2
     #            <p>Constraint: Maximum of 1000 flow log IDs.</p>
     #   @return [Array<String>]
     class DeleteFlowLogsRequest < Struct.new(
+      nil,
       :dry_run,
       :flow_log_ids,
       keyword_init: true
@@ -12940,6 +13408,7 @@ module Aws::EC2
     #   <p>Information about the flow logs that could not be deleted successfully.</p>
     #   @return [Array<Types::UnsuccessfulItem>]
     class DeleteFlowLogsResult < Struct.new(
+      nil,
       :unsuccessful,
       keyword_init: true
     )
@@ -12955,6 +13424,7 @@ module Aws::EC2
     #   <p>The ID of the AFI.</p>
     #   @return [String]
     class DeleteFpgaImageRequest < Struct.new(
+      nil,
       :dry_run,
       :fpga_image_id,
       keyword_init: true
@@ -12966,6 +13436,7 @@ module Aws::EC2
     #   <p>Is <code>true</code> if the request succeeds, and an error otherwise.</p>
     #   @return [Boolean]
     class DeleteFpgaImageResult < Struct.new(
+      nil,
       :return,
       keyword_init: true
     )
@@ -12981,6 +13452,7 @@ module Aws::EC2
     #   			<code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     class DeleteImageUsageReportRequest < Struct.new(
+      nil,
       :report_id,
       :dry_run,
       keyword_init: true
@@ -12992,6 +13464,7 @@ module Aws::EC2
     #   <p>Returns <code>true</code> if the request succeeds; otherwise, it returns an error.</p>
     #   @return [Boolean]
     class DeleteImageUsageReportResult < Struct.new(
+      nil,
       :return,
       keyword_init: true
     )
@@ -13007,6 +13480,7 @@ module Aws::EC2
     #   <p>The ID of the EC2 Instance Connect Endpoint to delete.</p>
     #   @return [String]
     class DeleteInstanceConnectEndpointRequest < Struct.new(
+      nil,
       :dry_run,
       :instance_connect_endpoint_id,
       keyword_init: true
@@ -13018,6 +13492,7 @@ module Aws::EC2
     #   <p>Information about the EC2 Instance Connect Endpoint.</p>
     #   @return [Types::Ec2InstanceConnectEndpoint]
     class DeleteInstanceConnectEndpointResult < Struct.new(
+      nil,
       :instance_connect_endpoint,
       keyword_init: true
     )
@@ -13037,6 +13512,7 @@ module Aws::EC2
     #   <p>The ID of the event window.</p>
     #   @return [String]
     class DeleteInstanceEventWindowRequest < Struct.new(
+      nil,
       :dry_run,
       :force_delete,
       :instance_event_window_id,
@@ -13049,6 +13525,7 @@ module Aws::EC2
     #   <p>The state of the event window.</p>
     #   @return [Types::InstanceEventWindowStateChange]
     class DeleteInstanceEventWindowResult < Struct.new(
+      nil,
       :instance_event_window_state,
       keyword_init: true
     )
@@ -13064,6 +13541,7 @@ module Aws::EC2
     #   <p>The ID of the internet gateway.</p>
     #   @return [String]
     class DeleteInternetGatewayRequest < Struct.new(
+      nil,
       :dry_run,
       :internet_gateway_id,
       keyword_init: true
@@ -13080,6 +13558,7 @@ module Aws::EC2
     #   <p>The token ID.</p>
     #   @return [String]
     class DeleteIpamExternalResourceVerificationTokenRequest < Struct.new(
+      nil,
       :dry_run,
       :ipam_external_resource_verification_token_id,
       keyword_init: true
@@ -13091,6 +13570,7 @@ module Aws::EC2
     #   <p>The verification token.</p>
     #   @return [Types::IpamExternalResourceVerificationToken]
     class DeleteIpamExternalResourceVerificationTokenResult < Struct.new(
+      nil,
       :ipam_external_resource_verification_token,
       keyword_init: true
     )
@@ -13113,6 +13593,7 @@ module Aws::EC2
     #            </important>
     #   @return [Boolean]
     class DeleteIpamPoolRequest < Struct.new(
+      nil,
       :dry_run,
       :ipam_pool_id,
       :cascade,
@@ -13125,6 +13606,7 @@ module Aws::EC2
     #   <p>Information about the results of the deletion.</p>
     #   @return [Types::IpamPool]
     class DeleteIpamPoolResult < Struct.new(
+      nil,
       :ipam_pool,
       keyword_init: true
     )
@@ -13164,6 +13646,7 @@ module Aws::EC2
     #            </ul>
     #   @return [Boolean]
     class DeleteIpamRequest < Struct.new(
+      nil,
       :dry_run,
       :ipam_id,
       :cascade,
@@ -13181,6 +13664,7 @@ module Aws::EC2
     #   <p>The IPAM resource discovery ID.</p>
     #   @return [String]
     class DeleteIpamResourceDiscoveryRequest < Struct.new(
+      nil,
       :dry_run,
       :ipam_resource_discovery_id,
       keyword_init: true
@@ -13192,6 +13676,7 @@ module Aws::EC2
     #   <p>The IPAM resource discovery.</p>
     #   @return [Types::IpamResourceDiscovery]
     class DeleteIpamResourceDiscoveryResult < Struct.new(
+      nil,
       :ipam_resource_discovery,
       keyword_init: true
     )
@@ -13202,6 +13687,7 @@ module Aws::EC2
     #   <p>Information about the results of the deletion.</p>
     #   @return [Types::Ipam]
     class DeleteIpamResult < Struct.new(
+      nil,
       :ipam,
       keyword_init: true
     )
@@ -13217,6 +13703,7 @@ module Aws::EC2
     #   <p>The ID of the scope to delete.</p>
     #   @return [String]
     class DeleteIpamScopeRequest < Struct.new(
+      nil,
       :dry_run,
       :ipam_scope_id,
       keyword_init: true
@@ -13228,6 +13715,7 @@ module Aws::EC2
     #   <p>Information about the results of the deletion.</p>
     #   @return [Types::IpamScope]
     class DeleteIpamScopeResult < Struct.new(
+      nil,
       :ipam_scope,
       keyword_init: true
     )
@@ -13246,6 +13734,7 @@ module Aws::EC2
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     class DeleteKeyPairRequest < Struct.new(
+      nil,
       :key_name,
       :key_pair_id,
       :dry_run,
@@ -13261,6 +13750,7 @@ module Aws::EC2
     #   <p>The ID of the key pair.</p>
     #   @return [String]
     class DeleteKeyPairResult < Struct.new(
+      nil,
       :return,
       :key_pair_id,
       keyword_init: true
@@ -13285,6 +13775,7 @@ module Aws::EC2
     #               both.</p>
     #   @return [String]
     class DeleteLaunchTemplateRequest < Struct.new(
+      nil,
       :dry_run,
       :launch_template_id,
       :launch_template_name,
@@ -13297,6 +13788,7 @@ module Aws::EC2
     #   <p>Information about the launch template.</p>
     #   @return [Types::LaunchTemplate]
     class DeleteLaunchTemplateResult < Struct.new(
+      nil,
       :launch_template,
       keyword_init: true
     )
@@ -13324,6 +13816,7 @@ module Aws::EC2
     #               up to 200 launch template version numbers.</p>
     #   @return [Array<String>]
     class DeleteLaunchTemplateVersionsRequest < Struct.new(
+      nil,
       :dry_run,
       :launch_template_id,
       :launch_template_name,
@@ -13347,6 +13840,7 @@ module Aws::EC2
     #   <p>Information about the error.</p>
     #   @return [Types::ResponseError]
     class DeleteLaunchTemplateVersionsResponseErrorItem < Struct.new(
+      nil,
       :launch_template_id,
       :launch_template_name,
       :version_number,
@@ -13367,6 +13861,7 @@ module Aws::EC2
     #   <p>The version number of the launch template.</p>
     #   @return [Integer]
     class DeleteLaunchTemplateVersionsResponseSuccessItem < Struct.new(
+      nil,
       :launch_template_id,
       :launch_template_name,
       :version_number,
@@ -13382,6 +13877,7 @@ module Aws::EC2
     #   <p>Information about the launch template versions that could not be deleted.</p>
     #   @return [Array<Types::DeleteLaunchTemplateVersionsResponseErrorItem>]
     class DeleteLaunchTemplateVersionsResult < Struct.new(
+      nil,
       :successfully_deleted_launch_template_versions,
       :unsuccessfully_deleted_launch_template_versions,
       keyword_init: true
@@ -13407,6 +13903,7 @@ module Aws::EC2
     #         </p>
     #   @return [String]
     class DeleteLocalGatewayRouteRequest < Struct.new(
+      nil,
       :destination_cidr_block,
       :local_gateway_route_table_id,
       :dry_run,
@@ -13420,6 +13917,7 @@ module Aws::EC2
     #   <p>Information about the route.</p>
     #   @return [Types::LocalGatewayRoute]
     class DeleteLocalGatewayRouteResult < Struct.new(
+      nil,
       :route,
       keyword_init: true
     )
@@ -13437,6 +13935,7 @@ module Aws::EC2
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     class DeleteLocalGatewayRouteTableRequest < Struct.new(
+      nil,
       :local_gateway_route_table_id,
       :dry_run,
       keyword_init: true
@@ -13448,6 +13947,7 @@ module Aws::EC2
     #   <p>Information about the local gateway route table.</p>
     #   @return [Types::LocalGatewayRouteTable]
     class DeleteLocalGatewayRouteTableResult < Struct.new(
+      nil,
       :local_gateway_route_table,
       keyword_init: true
     )
@@ -13465,6 +13965,7 @@ module Aws::EC2
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     class DeleteLocalGatewayRouteTableVirtualInterfaceGroupAssociationRequest < Struct.new(
+      nil,
       :local_gateway_route_table_virtual_interface_group_association_id,
       :dry_run,
       keyword_init: true
@@ -13476,6 +13977,7 @@ module Aws::EC2
     #   <p>Information about the association.</p>
     #   @return [Types::LocalGatewayRouteTableVirtualInterfaceGroupAssociation]
     class DeleteLocalGatewayRouteTableVirtualInterfaceGroupAssociationResult < Struct.new(
+      nil,
       :local_gateway_route_table_virtual_interface_group_association,
       keyword_init: true
     )
@@ -13491,6 +13993,7 @@ module Aws::EC2
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     class DeleteLocalGatewayRouteTableVpcAssociationRequest < Struct.new(
+      nil,
       :local_gateway_route_table_vpc_association_id,
       :dry_run,
       keyword_init: true
@@ -13502,6 +14005,7 @@ module Aws::EC2
     #   <p>Information about the association.</p>
     #   @return [Types::LocalGatewayRouteTableVpcAssociation]
     class DeleteLocalGatewayRouteTableVpcAssociationResult < Struct.new(
+      nil,
       :local_gateway_route_table_vpc_association,
       keyword_init: true
     )
@@ -13517,6 +14021,7 @@ module Aws::EC2
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     class DeleteLocalGatewayVirtualInterfaceGroupRequest < Struct.new(
+      nil,
       :local_gateway_virtual_interface_group_id,
       :dry_run,
       keyword_init: true
@@ -13528,6 +14033,7 @@ module Aws::EC2
     #   <p>Information about the deleted local gateway virtual interface group.</p>
     #   @return [Types::LocalGatewayVirtualInterfaceGroup]
     class DeleteLocalGatewayVirtualInterfaceGroupResult < Struct.new(
+      nil,
       :local_gateway_virtual_interface_group,
       keyword_init: true
     )
@@ -13543,6 +14049,7 @@ module Aws::EC2
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     class DeleteLocalGatewayVirtualInterfaceRequest < Struct.new(
+      nil,
       :local_gateway_virtual_interface_id,
       :dry_run,
       keyword_init: true
@@ -13554,6 +14061,7 @@ module Aws::EC2
     #   <p>Information about the deleted local gateway virtual interface.</p>
     #   @return [Types::LocalGatewayVirtualInterface]
     class DeleteLocalGatewayVirtualInterfaceResult < Struct.new(
+      nil,
       :local_gateway_virtual_interface,
       keyword_init: true
     )
@@ -13569,6 +14077,7 @@ module Aws::EC2
     #   <p>The ID of the prefix list.</p>
     #   @return [String]
     class DeleteManagedPrefixListRequest < Struct.new(
+      nil,
       :dry_run,
       :prefix_list_id,
       keyword_init: true
@@ -13580,6 +14089,7 @@ module Aws::EC2
     #   <p>Information about the prefix list.</p>
     #   @return [Types::ManagedPrefixList]
     class DeleteManagedPrefixListResult < Struct.new(
+      nil,
       :prefix_list,
       keyword_init: true
     )
@@ -13595,6 +14105,7 @@ module Aws::EC2
     #   <p>The ID of the NAT gateway.</p>
     #   @return [String]
     class DeleteNatGatewayRequest < Struct.new(
+      nil,
       :dry_run,
       :nat_gateway_id,
       keyword_init: true
@@ -13606,6 +14117,7 @@ module Aws::EC2
     #   <p>The ID of the NAT gateway.</p>
     #   @return [String]
     class DeleteNatGatewayResult < Struct.new(
+      nil,
       :nat_gateway_id,
       keyword_init: true
     )
@@ -13627,6 +14139,7 @@ module Aws::EC2
     #   <p>Indicates whether the rule is an egress rule.</p>
     #   @return [Boolean]
     class DeleteNetworkAclEntryRequest < Struct.new(
+      nil,
       :dry_run,
       :network_acl_id,
       :rule_number,
@@ -13645,6 +14158,7 @@ module Aws::EC2
     #   <p>The ID of the network ACL.</p>
     #   @return [String]
     class DeleteNetworkAclRequest < Struct.new(
+      nil,
       :dry_run,
       :network_acl_id,
       keyword_init: true
@@ -13661,6 +14175,7 @@ module Aws::EC2
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     class DeleteNetworkInsightsAccessScopeAnalysisRequest < Struct.new(
+      nil,
       :network_insights_access_scope_analysis_id,
       :dry_run,
       keyword_init: true
@@ -13672,6 +14187,7 @@ module Aws::EC2
     #   <p>The ID of the Network Access Scope analysis.</p>
     #   @return [String]
     class DeleteNetworkInsightsAccessScopeAnalysisResult < Struct.new(
+      nil,
       :network_insights_access_scope_analysis_id,
       keyword_init: true
     )
@@ -13687,6 +14203,7 @@ module Aws::EC2
     #   <p>The ID of the Network Access Scope.</p>
     #   @return [String]
     class DeleteNetworkInsightsAccessScopeRequest < Struct.new(
+      nil,
       :dry_run,
       :network_insights_access_scope_id,
       keyword_init: true
@@ -13698,6 +14215,7 @@ module Aws::EC2
     #   <p>The ID of the Network Access Scope.</p>
     #   @return [String]
     class DeleteNetworkInsightsAccessScopeResult < Struct.new(
+      nil,
       :network_insights_access_scope_id,
       keyword_init: true
     )
@@ -13713,6 +14231,7 @@ module Aws::EC2
     #   <p>The ID of the network insights analysis.</p>
     #   @return [String]
     class DeleteNetworkInsightsAnalysisRequest < Struct.new(
+      nil,
       :dry_run,
       :network_insights_analysis_id,
       keyword_init: true
@@ -13724,6 +14243,7 @@ module Aws::EC2
     #   <p>The ID of the network insights analysis.</p>
     #   @return [String]
     class DeleteNetworkInsightsAnalysisResult < Struct.new(
+      nil,
       :network_insights_analysis_id,
       keyword_init: true
     )
@@ -13739,6 +14259,7 @@ module Aws::EC2
     #   <p>The ID of the path.</p>
     #   @return [String]
     class DeleteNetworkInsightsPathRequest < Struct.new(
+      nil,
       :dry_run,
       :network_insights_path_id,
       keyword_init: true
@@ -13750,6 +14271,7 @@ module Aws::EC2
     #   <p>The ID of the path.</p>
     #   @return [String]
     class DeleteNetworkInsightsPathResult < Struct.new(
+      nil,
       :network_insights_path_id,
       keyword_init: true
     )
@@ -13771,6 +14293,7 @@ module Aws::EC2
     #                   <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     class DeleteNetworkInterfacePermissionRequest < Struct.new(
+      nil,
       :network_interface_permission_id,
       :force,
       :dry_run,
@@ -13784,6 +14307,7 @@ module Aws::EC2
     #   <p>Returns <code>true</code> if the request succeeds, otherwise returns an error.</p>
     #   @return [Boolean]
     class DeleteNetworkInterfacePermissionResult < Struct.new(
+      nil,
       :return,
       keyword_init: true
     )
@@ -13801,6 +14325,7 @@ module Aws::EC2
     #   <p>The ID of the network interface.</p>
     #   @return [String]
     class DeleteNetworkInterfaceRequest < Struct.new(
+      nil,
       :dry_run,
       :network_interface_id,
       keyword_init: true
@@ -13817,6 +14342,7 @@ module Aws::EC2
     #   <p>The name of the placement group.</p>
     #   @return [String]
     class DeletePlacementGroupRequest < Struct.new(
+      nil,
       :dry_run,
       :group_name,
       keyword_init: true
@@ -13836,6 +14362,7 @@ module Aws::EC2
     #   <p>The Availability Zone (AZ) or Local Zone (LZ) network border group that the resource that the IP address is assigned to is in. Defaults to an AZ network border group. For more information on available Local Zones, see <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-byoip.html#byoip-zone-avail">Local Zone availability</a> in the <i>Amazon EC2 User Guide</i>.</p>
     #   @return [String]
     class DeletePublicIpv4PoolRequest < Struct.new(
+      nil,
       :dry_run,
       :pool_id,
       :network_border_group,
@@ -13848,6 +14375,7 @@ module Aws::EC2
     #   <p>Information about the result of deleting the public IPv4 pool.</p>
     #   @return [Boolean]
     class DeletePublicIpv4PoolResult < Struct.new(
+      nil,
       :return_value,
       keyword_init: true
     )
@@ -13863,6 +14391,7 @@ module Aws::EC2
     #   <p>The error message.</p>
     #   @return [String]
     class DeleteQueuedReservedInstancesError < Struct.new(
+      nil,
       :code,
       :message,
       keyword_init: true
@@ -13880,6 +14409,7 @@ module Aws::EC2
     #   <p>The IDs of the Reserved Instances.</p>
     #   @return [Array<String>]
     class DeleteQueuedReservedInstancesRequest < Struct.new(
+      nil,
       :dry_run,
       :reserved_instances_ids,
       keyword_init: true
@@ -13894,6 +14424,7 @@ module Aws::EC2
     #   <p>Information about the queued purchases that could not be deleted.</p>
     #   @return [Array<Types::FailedQueuedPurchaseDeletion>]
     class DeleteQueuedReservedInstancesResult < Struct.new(
+      nil,
       :successful_queued_purchase_deletions,
       :failed_queued_purchase_deletions,
       keyword_init: true
@@ -13919,6 +14450,7 @@ module Aws::EC2
     #   <p>The IPv6 CIDR range for the route. The value you specify must match the CIDR for the route exactly.</p>
     #   @return [String]
     class DeleteRouteRequest < Struct.new(
+      nil,
       :destination_prefix_list_id,
       :dry_run,
       :route_table_id,
@@ -13938,6 +14470,7 @@ module Aws::EC2
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     class DeleteRouteServerEndpointRequest < Struct.new(
+      nil,
       :route_server_endpoint_id,
       :dry_run,
       keyword_init: true
@@ -13949,6 +14482,7 @@ module Aws::EC2
     #   <p>Information about the deleted route server endpoint.</p>
     #   @return [Types::RouteServerEndpoint]
     class DeleteRouteServerEndpointResult < Struct.new(
+      nil,
       :route_server_endpoint,
       keyword_init: true
     )
@@ -13964,6 +14498,7 @@ module Aws::EC2
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     class DeleteRouteServerPeerRequest < Struct.new(
+      nil,
       :route_server_peer_id,
       :dry_run,
       keyword_init: true
@@ -13975,6 +14510,7 @@ module Aws::EC2
     #   <p>Information about the deleted route server peer.</p>
     #   @return [Types::RouteServerPeer]
     class DeleteRouteServerPeerResult < Struct.new(
+      nil,
       :route_server_peer,
       keyword_init: true
     )
@@ -13990,6 +14526,7 @@ module Aws::EC2
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     class DeleteRouteServerRequest < Struct.new(
+      nil,
       :route_server_id,
       :dry_run,
       keyword_init: true
@@ -14001,6 +14538,7 @@ module Aws::EC2
     #   <p>Information about the deleted route server.</p>
     #   @return [Types::RouteServer]
     class DeleteRouteServerResult < Struct.new(
+      nil,
       :route_server,
       keyword_init: true
     )
@@ -14016,6 +14554,7 @@ module Aws::EC2
     #   <p>The ID of the route table.</p>
     #   @return [String]
     class DeleteRouteTableRequest < Struct.new(
+      nil,
       :dry_run,
       :route_table_id,
       keyword_init: true
@@ -14037,6 +14576,7 @@ module Aws::EC2
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     class DeleteSecurityGroupRequest < Struct.new(
+      nil,
       :group_id,
       :group_name,
       :dry_run,
@@ -14052,6 +14592,7 @@ module Aws::EC2
     #   <p>The ID of the deleted security group.</p>
     #   @return [String]
     class DeleteSecurityGroupResult < Struct.new(
+      nil,
       :return,
       :group_id,
       keyword_init: true
@@ -14068,6 +14609,7 @@ module Aws::EC2
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     class DeleteSnapshotRequest < Struct.new(
+      nil,
       :snapshot_id,
       :dry_run,
       keyword_init: true
@@ -14113,6 +14655,7 @@ module Aws::EC2
     #         in the <i>Amazon Web Services CloudTrail User Guide</i>.</p>
     #   @return [String]
     class DeleteSnapshotReturnCode < Struct.new(
+      nil,
       :snapshot_id,
       :return_code,
       keyword_init: true
@@ -14128,6 +14671,7 @@ module Aws::EC2
     #               <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     class DeleteSpotDatafeedSubscriptionRequest < Struct.new(
+      nil,
       :dry_run,
       keyword_init: true
     )
@@ -14143,6 +14687,7 @@ module Aws::EC2
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     class DeleteSubnetCidrReservationRequest < Struct.new(
+      nil,
       :subnet_cidr_reservation_id,
       :dry_run,
       keyword_init: true
@@ -14154,6 +14699,7 @@ module Aws::EC2
     #   <p>Information about the deleted subnet CIDR reservation.</p>
     #   @return [Types::SubnetCidrReservation]
     class DeleteSubnetCidrReservationResult < Struct.new(
+      nil,
       :deleted_subnet_cidr_reservation,
       keyword_init: true
     )
@@ -14169,6 +14715,7 @@ module Aws::EC2
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     class DeleteSubnetRequest < Struct.new(
+      nil,
       :subnet_id,
       :dry_run,
       keyword_init: true
@@ -14196,6 +14743,7 @@ module Aws::EC2
     #            <p>Constraints: Up to 1000 tags.</p>
     #   @return [Array<Types::Tag>]
     class DeleteTagsRequest < Struct.new(
+      nil,
       :dry_run,
       :resources,
       :tags,
@@ -14213,6 +14761,7 @@ module Aws::EC2
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     class DeleteTrafficMirrorFilterRequest < Struct.new(
+      nil,
       :traffic_mirror_filter_id,
       :dry_run,
       keyword_init: true
@@ -14224,6 +14773,7 @@ module Aws::EC2
     #   <p>The ID of the Traffic Mirror filter.</p>
     #   @return [String]
     class DeleteTrafficMirrorFilterResult < Struct.new(
+      nil,
       :traffic_mirror_filter_id,
       keyword_init: true
     )
@@ -14239,6 +14789,7 @@ module Aws::EC2
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     class DeleteTrafficMirrorFilterRuleRequest < Struct.new(
+      nil,
       :traffic_mirror_filter_rule_id,
       :dry_run,
       keyword_init: true
@@ -14250,6 +14801,7 @@ module Aws::EC2
     #   <p>The ID of the deleted Traffic Mirror rule.</p>
     #   @return [String]
     class DeleteTrafficMirrorFilterRuleResult < Struct.new(
+      nil,
       :traffic_mirror_filter_rule_id,
       keyword_init: true
     )
@@ -14265,6 +14817,7 @@ module Aws::EC2
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     class DeleteTrafficMirrorSessionRequest < Struct.new(
+      nil,
       :traffic_mirror_session_id,
       :dry_run,
       keyword_init: true
@@ -14276,6 +14829,7 @@ module Aws::EC2
     #   <p>The ID of the deleted Traffic Mirror session.</p>
     #   @return [String]
     class DeleteTrafficMirrorSessionResult < Struct.new(
+      nil,
       :traffic_mirror_session_id,
       keyword_init: true
     )
@@ -14291,6 +14845,7 @@ module Aws::EC2
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     class DeleteTrafficMirrorTargetRequest < Struct.new(
+      nil,
       :traffic_mirror_target_id,
       :dry_run,
       keyword_init: true
@@ -14302,6 +14857,7 @@ module Aws::EC2
     #   <p>The ID of the deleted Traffic Mirror target.</p>
     #   @return [String]
     class DeleteTrafficMirrorTargetResult < Struct.new(
+      nil,
       :traffic_mirror_target_id,
       keyword_init: true
     )
@@ -14317,6 +14873,7 @@ module Aws::EC2
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     class DeleteTransitGatewayConnectPeerRequest < Struct.new(
+      nil,
       :transit_gateway_connect_peer_id,
       :dry_run,
       keyword_init: true
@@ -14328,6 +14885,7 @@ module Aws::EC2
     #   <p>Information about the deleted Connect peer.</p>
     #   @return [Types::TransitGatewayConnectPeer]
     class DeleteTransitGatewayConnectPeerResult < Struct.new(
+      nil,
       :transit_gateway_connect_peer,
       keyword_init: true
     )
@@ -14343,6 +14901,7 @@ module Aws::EC2
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     class DeleteTransitGatewayConnectRequest < Struct.new(
+      nil,
       :transit_gateway_attachment_id,
       :dry_run,
       keyword_init: true
@@ -14354,6 +14913,7 @@ module Aws::EC2
     #   <p>Information about the deleted Connect attachment.</p>
     #   @return [Types::TransitGatewayConnect]
     class DeleteTransitGatewayConnectResult < Struct.new(
+      nil,
       :transit_gateway_connect,
       keyword_init: true
     )
@@ -14369,6 +14929,7 @@ module Aws::EC2
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     class DeleteTransitGatewayMulticastDomainRequest < Struct.new(
+      nil,
       :transit_gateway_multicast_domain_id,
       :dry_run,
       keyword_init: true
@@ -14380,6 +14941,7 @@ module Aws::EC2
     #   <p>Information about the deleted transit gateway multicast domain.</p>
     #   @return [Types::TransitGatewayMulticastDomain]
     class DeleteTransitGatewayMulticastDomainResult < Struct.new(
+      nil,
       :transit_gateway_multicast_domain,
       keyword_init: true
     )
@@ -14395,6 +14957,7 @@ module Aws::EC2
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     class DeleteTransitGatewayPeeringAttachmentRequest < Struct.new(
+      nil,
       :transit_gateway_attachment_id,
       :dry_run,
       keyword_init: true
@@ -14406,6 +14969,7 @@ module Aws::EC2
     #   <p>The transit gateway peering attachment.</p>
     #   @return [Types::TransitGatewayPeeringAttachment]
     class DeleteTransitGatewayPeeringAttachmentResult < Struct.new(
+      nil,
       :transit_gateway_peering_attachment,
       keyword_init: true
     )
@@ -14421,6 +14985,7 @@ module Aws::EC2
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     class DeleteTransitGatewayPolicyTableRequest < Struct.new(
+      nil,
       :transit_gateway_policy_table_id,
       :dry_run,
       keyword_init: true
@@ -14432,6 +14997,7 @@ module Aws::EC2
     #   <p>Provides details about the deleted transit gateway policy table.</p>
     #   @return [Types::TransitGatewayPolicyTable]
     class DeleteTransitGatewayPolicyTableResult < Struct.new(
+      nil,
       :transit_gateway_policy_table,
       keyword_init: true
     )
@@ -14450,6 +15016,7 @@ module Aws::EC2
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     class DeleteTransitGatewayPrefixListReferenceRequest < Struct.new(
+      nil,
       :transit_gateway_route_table_id,
       :prefix_list_id,
       :dry_run,
@@ -14462,6 +15029,7 @@ module Aws::EC2
     #   <p>Information about the deleted prefix list reference.</p>
     #   @return [Types::TransitGatewayPrefixListReference]
     class DeleteTransitGatewayPrefixListReferenceResult < Struct.new(
+      nil,
       :transit_gateway_prefix_list_reference,
       keyword_init: true
     )
@@ -14477,6 +15045,7 @@ module Aws::EC2
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     class DeleteTransitGatewayRequest < Struct.new(
+      nil,
       :transit_gateway_id,
       :dry_run,
       keyword_init: true
@@ -14488,6 +15057,7 @@ module Aws::EC2
     #   <p>Information about the deleted transit gateway.</p>
     #   @return [Types::TransitGateway]
     class DeleteTransitGatewayResult < Struct.new(
+      nil,
       :transit_gateway,
       keyword_init: true
     )
@@ -14506,6 +15076,7 @@ module Aws::EC2
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     class DeleteTransitGatewayRouteRequest < Struct.new(
+      nil,
       :transit_gateway_route_table_id,
       :destination_cidr_block,
       :dry_run,
@@ -14518,6 +15089,7 @@ module Aws::EC2
     #   <p>Information about the route.</p>
     #   @return [Types::TransitGatewayRoute]
     class DeleteTransitGatewayRouteResult < Struct.new(
+      nil,
       :route,
       keyword_init: true
     )
@@ -14533,6 +15105,7 @@ module Aws::EC2
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     class DeleteTransitGatewayRouteTableAnnouncementRequest < Struct.new(
+      nil,
       :transit_gateway_route_table_announcement_id,
       :dry_run,
       keyword_init: true
@@ -14544,6 +15117,7 @@ module Aws::EC2
     #   <p>Provides details about a deleted transit gateway route table.</p>
     #   @return [Types::TransitGatewayRouteTableAnnouncement]
     class DeleteTransitGatewayRouteTableAnnouncementResult < Struct.new(
+      nil,
       :transit_gateway_route_table_announcement,
       keyword_init: true
     )
@@ -14559,6 +15133,7 @@ module Aws::EC2
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     class DeleteTransitGatewayRouteTableRequest < Struct.new(
+      nil,
       :transit_gateway_route_table_id,
       :dry_run,
       keyword_init: true
@@ -14570,6 +15145,7 @@ module Aws::EC2
     #   <p>Information about the deleted transit gateway route table.</p>
     #   @return [Types::TransitGatewayRouteTable]
     class DeleteTransitGatewayRouteTableResult < Struct.new(
+      nil,
       :transit_gateway_route_table,
       keyword_init: true
     )
@@ -14585,6 +15161,7 @@ module Aws::EC2
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     class DeleteTransitGatewayVpcAttachmentRequest < Struct.new(
+      nil,
       :transit_gateway_attachment_id,
       :dry_run,
       keyword_init: true
@@ -14596,6 +15173,7 @@ module Aws::EC2
     #   <p>Information about the deleted VPC attachment.</p>
     #   @return [Types::TransitGatewayVpcAttachment]
     class DeleteTransitGatewayVpcAttachmentResult < Struct.new(
+      nil,
       :transit_gateway_vpc_attachment,
       keyword_init: true
     )
@@ -14615,6 +15193,7 @@ module Aws::EC2
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     class DeleteVerifiedAccessEndpointRequest < Struct.new(
+      nil,
       :verified_access_endpoint_id,
       :client_token,
       :dry_run,
@@ -14627,6 +15206,7 @@ module Aws::EC2
     #   <p>Details about the Verified Access endpoint.</p>
     #   @return [Types::VerifiedAccessEndpoint]
     class DeleteVerifiedAccessEndpointResult < Struct.new(
+      nil,
       :verified_access_endpoint,
       keyword_init: true
     )
@@ -14646,6 +15226,7 @@ module Aws::EC2
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     class DeleteVerifiedAccessGroupRequest < Struct.new(
+      nil,
       :verified_access_group_id,
       :client_token,
       :dry_run,
@@ -14658,6 +15239,7 @@ module Aws::EC2
     #   <p>Details about the Verified Access group.</p>
     #   @return [Types::VerifiedAccessGroup]
     class DeleteVerifiedAccessGroupResult < Struct.new(
+      nil,
       :verified_access_group,
       keyword_init: true
     )
@@ -14677,6 +15259,7 @@ module Aws::EC2
     #               modification request. For more information, see <a href="https://docs.aws.amazon.com/ec2/latest/devguide/ec2-api-idempotency.html">Ensuring idempotency</a>.</p>
     #   @return [String]
     class DeleteVerifiedAccessInstanceRequest < Struct.new(
+      nil,
       :verified_access_instance_id,
       :dry_run,
       :client_token,
@@ -14689,6 +15272,7 @@ module Aws::EC2
     #   <p>Details about the Verified Access instance.</p>
     #   @return [Types::VerifiedAccessInstance]
     class DeleteVerifiedAccessInstanceResult < Struct.new(
+      nil,
       :verified_access_instance,
       keyword_init: true
     )
@@ -14708,6 +15292,7 @@ module Aws::EC2
     #               modification request. For more information, see <a href="https://docs.aws.amazon.com/ec2/latest/devguide/ec2-api-idempotency.html">Ensuring idempotency</a>.</p>
     #   @return [String]
     class DeleteVerifiedAccessTrustProviderRequest < Struct.new(
+      nil,
       :verified_access_trust_provider_id,
       :dry_run,
       :client_token,
@@ -14720,6 +15305,7 @@ module Aws::EC2
     #   <p>Details about the Verified Access trust provider.</p>
     #   @return [Types::VerifiedAccessTrustProvider]
     class DeleteVerifiedAccessTrustProviderResult < Struct.new(
+      nil,
       :verified_access_trust_provider,
       keyword_init: true
     )
@@ -14735,6 +15321,7 @@ module Aws::EC2
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     class DeleteVolumeRequest < Struct.new(
+      nil,
       :volume_id,
       :dry_run,
       keyword_init: true
@@ -14751,6 +15338,7 @@ module Aws::EC2
     #   <p>The ID of the exclusion.</p>
     #   @return [String]
     class DeleteVpcBlockPublicAccessExclusionRequest < Struct.new(
+      nil,
       :dry_run,
       :exclusion_id,
       keyword_init: true
@@ -14762,6 +15350,7 @@ module Aws::EC2
     #   <p>Details about an exclusion.</p>
     #   @return [Types::VpcBlockPublicAccessExclusion]
     class DeleteVpcBlockPublicAccessExclusionResult < Struct.new(
+      nil,
       :vpc_block_public_access_exclusion,
       keyword_init: true
     )
@@ -14777,6 +15366,7 @@ module Aws::EC2
     #   <p>The IDs of the notifications.</p>
     #   @return [Array<String>]
     class DeleteVpcEndpointConnectionNotificationsRequest < Struct.new(
+      nil,
       :dry_run,
       :connection_notification_ids,
       keyword_init: true
@@ -14789,6 +15379,7 @@ module Aws::EC2
     #               successfully.</p>
     #   @return [Array<Types::UnsuccessfulItem>]
     class DeleteVpcEndpointConnectionNotificationsResult < Struct.new(
+      nil,
       :unsuccessful,
       keyword_init: true
     )
@@ -14804,6 +15395,7 @@ module Aws::EC2
     #   <p>The IDs of the services.</p>
     #   @return [Array<String>]
     class DeleteVpcEndpointServiceConfigurationsRequest < Struct.new(
+      nil,
       :dry_run,
       :service_ids,
       keyword_init: true
@@ -14816,6 +15408,7 @@ module Aws::EC2
     #               applicable.</p>
     #   @return [Array<Types::UnsuccessfulItem>]
     class DeleteVpcEndpointServiceConfigurationsResult < Struct.new(
+      nil,
       :unsuccessful,
       keyword_init: true
     )
@@ -14831,6 +15424,7 @@ module Aws::EC2
     #   <p>The IDs of the VPC endpoints.</p>
     #   @return [Array<String>]
     class DeleteVpcEndpointsRequest < Struct.new(
+      nil,
       :dry_run,
       :vpc_endpoint_ids,
       keyword_init: true
@@ -14842,6 +15436,7 @@ module Aws::EC2
     #   <p>Information about the VPC endpoints that were not successfully deleted.</p>
     #   @return [Array<Types::UnsuccessfulItem>]
     class DeleteVpcEndpointsResult < Struct.new(
+      nil,
       :unsuccessful,
       keyword_init: true
     )
@@ -14857,6 +15452,7 @@ module Aws::EC2
     #   <p>The ID of the VPC peering connection.</p>
     #   @return [String]
     class DeleteVpcPeeringConnectionRequest < Struct.new(
+      nil,
       :dry_run,
       :vpc_peering_connection_id,
       keyword_init: true
@@ -14868,6 +15464,7 @@ module Aws::EC2
     #   <p>Returns <code>true</code> if the request succeeds; otherwise, it returns an error.</p>
     #   @return [Boolean]
     class DeleteVpcPeeringConnectionResult < Struct.new(
+      nil,
       :return,
       keyword_init: true
     )
@@ -14883,6 +15480,7 @@ module Aws::EC2
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     class DeleteVpcRequest < Struct.new(
+      nil,
       :vpc_id,
       :dry_run,
       keyword_init: true
@@ -14901,6 +15499,7 @@ module Aws::EC2
     #                   <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     class DeleteVpnConnectionRequest < Struct.new(
+      nil,
       :vpn_connection_id,
       :dry_run,
       keyword_init: true
@@ -14916,6 +15515,7 @@ module Aws::EC2
     #   <p>The ID of the VPN connection.</p>
     #   @return [String]
     class DeleteVpnConnectionRouteRequest < Struct.new(
+      nil,
       :destination_cidr_block,
       :vpn_connection_id,
       keyword_init: true
@@ -14934,6 +15534,7 @@ module Aws::EC2
     #                   <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     class DeleteVpnGatewayRequest < Struct.new(
+      nil,
       :vpn_gateway_id,
       :dry_run,
       keyword_init: true
@@ -14947,6 +15548,7 @@ module Aws::EC2
     #         <code>0</code>, no deprecated images are allowed.</p>
     #   @return [Integer]
     class DeprecationTimeCondition < Struct.new(
+      nil,
       :maximum_days_since_deprecated,
       keyword_init: true
     )
@@ -14959,6 +15561,7 @@ module Aws::EC2
     #         <code>0</code> to exclude all deprecated images.</p>
     #   @return [Integer]
     class DeprecationTimeConditionRequest < Struct.new(
+      nil,
       :maximum_days_since_deprecated,
       keyword_init: true
     )
@@ -14975,6 +15578,7 @@ module Aws::EC2
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     class DeprovisionByoipCidrRequest < Struct.new(
+      nil,
       :cidr,
       :dry_run,
       keyword_init: true
@@ -14986,6 +15590,7 @@ module Aws::EC2
     #   <p>Information about the address range.</p>
     #   @return [Types::ByoipCidr]
     class DeprovisionByoipCidrResult < Struct.new(
+      nil,
       :byoip_cidr,
       keyword_init: true
     )
@@ -15004,6 +15609,7 @@ module Aws::EC2
     #   <p>An ASN.</p>
     #   @return [String]
     class DeprovisionIpamByoasnRequest < Struct.new(
+      nil,
       :dry_run,
       :ipam_id,
       :asn,
@@ -15016,6 +15622,7 @@ module Aws::EC2
     #   <p>An ASN and BYOIP CIDR association.</p>
     #   @return [Types::Byoasn]
     class DeprovisionIpamByoasnResult < Struct.new(
+      nil,
       :byoasn,
       keyword_init: true
     )
@@ -15034,6 +15641,7 @@ module Aws::EC2
     #   <p>The CIDR which you want to deprovision from the pool.</p>
     #   @return [String]
     class DeprovisionIpamPoolCidrRequest < Struct.new(
+      nil,
       :dry_run,
       :ipam_pool_id,
       :cidr,
@@ -15046,6 +15654,7 @@ module Aws::EC2
     #   <p>The deprovisioned pool CIDR.</p>
     #   @return [Types::IpamPoolCidr]
     class DeprovisionIpamPoolCidrResult < Struct.new(
+      nil,
       :ipam_pool_cidr,
       keyword_init: true
     )
@@ -15064,6 +15673,7 @@ module Aws::EC2
     #   <p>The CIDR you want to deprovision from the pool.</p>
     #   @return [String]
     class DeprovisionPublicIpv4PoolCidrRequest < Struct.new(
+      nil,
       :dry_run,
       :pool_id,
       :cidr,
@@ -15079,6 +15689,7 @@ module Aws::EC2
     #   <p>The deprovisioned CIDRs.</p>
     #   @return [Array<String>]
     class DeprovisionPublicIpv4PoolCidrResult < Struct.new(
+      nil,
       :pool_id,
       :deprovisioned_addresses,
       keyword_init: true
@@ -15104,6 +15715,7 @@ module Aws::EC2
     #   			<code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     class DeregisterImageRequest < Struct.new(
+      nil,
       :image_id,
       :delete_associated_snapshots,
       :dry_run,
@@ -15120,6 +15732,7 @@ module Aws::EC2
     #         and its success or error code.</p>
     #   @return [Array<Types::DeleteSnapshotReturnCode>]
     class DeregisterImageResult < Struct.new(
+      nil,
       :return,
       :delete_snapshot_results,
       keyword_init: true
@@ -15136,6 +15749,7 @@ module Aws::EC2
     #   <p>Information about the tag keys to deregister.</p>
     #   @return [Types::DeregisterInstanceTagAttributeRequest]
     class DeregisterInstanceEventNotificationAttributesRequest < Struct.new(
+      nil,
       :dry_run,
       :instance_tag_attribute,
       keyword_init: true
@@ -15147,6 +15761,7 @@ module Aws::EC2
     #   <p>The resulting set of tag keys.</p>
     #   @return [Types::InstanceTagNotificationAttribute]
     class DeregisterInstanceEventNotificationAttributesResult < Struct.new(
+      nil,
       :instance_tag_attribute,
       keyword_init: true
     )
@@ -15165,6 +15780,7 @@ module Aws::EC2
     #   <p>Information about the tag keys to deregister.</p>
     #   @return [Array<String>]
     class DeregisterInstanceTagAttributeRequest < Struct.new(
+      nil,
       :include_all_tags_of_instance,
       :instance_tag_keys,
       keyword_init: true
@@ -15187,6 +15803,7 @@ module Aws::EC2
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     class DeregisterTransitGatewayMulticastGroupMembersRequest < Struct.new(
+      nil,
       :transit_gateway_multicast_domain_id,
       :group_ip_address,
       :network_interface_ids,
@@ -15200,6 +15817,7 @@ module Aws::EC2
     #   <p>Information about the deregistered members.</p>
     #   @return [Types::TransitGatewayMulticastDeregisteredGroupMembers]
     class DeregisterTransitGatewayMulticastGroupMembersResult < Struct.new(
+      nil,
       :deregistered_multicast_group_members,
       keyword_init: true
     )
@@ -15221,6 +15839,7 @@ module Aws::EC2
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     class DeregisterTransitGatewayMulticastGroupSourcesRequest < Struct.new(
+      nil,
       :transit_gateway_multicast_domain_id,
       :group_ip_address,
       :network_interface_ids,
@@ -15234,6 +15853,7 @@ module Aws::EC2
     #   <p>Information about the deregistered group sources.</p>
     #   @return [Types::TransitGatewayMulticastDeregisteredGroupSources]
     class DeregisterTransitGatewayMulticastGroupSourcesResult < Struct.new(
+      nil,
       :deregistered_multicast_group_sources,
       keyword_init: true
     )
@@ -15249,6 +15869,7 @@ module Aws::EC2
     #   <p>The account attribute names.</p>
     #   @return [Array<String>]
     class DescribeAccountAttributesRequest < Struct.new(
+      nil,
       :dry_run,
       :attribute_names,
       keyword_init: true
@@ -15260,6 +15881,7 @@ module Aws::EC2
     #   <p>Information about the account attributes.</p>
     #   @return [Array<Types::AccountAttribute>]
     class DescribeAccountAttributesResult < Struct.new(
+      nil,
       :account_attributes,
       keyword_init: true
     )
@@ -15281,6 +15903,7 @@ module Aws::EC2
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     class DescribeAddressTransfersRequest < Struct.new(
+      nil,
       :allocation_ids,
       :next_token,
       :max_results,
@@ -15297,6 +15920,7 @@ module Aws::EC2
     #   <p>Specify the pagination token from a previous request to retrieve the next page of results.</p>
     #   @return [String]
     class DescribeAddressTransfersResult < Struct.new(
+      nil,
       :address_transfers,
       :next_token,
       keyword_init: true
@@ -15322,6 +15946,7 @@ module Aws::EC2
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     class DescribeAddressesAttributeRequest < Struct.new(
+      nil,
       :allocation_ids,
       :attribute,
       :next_token,
@@ -15339,6 +15964,7 @@ module Aws::EC2
     #   <p>The token to use to retrieve the next page of results. This value is <code>null</code> when there are no more results to return.</p>
     #   @return [String]
     class DescribeAddressesAttributeResult < Struct.new(
+      nil,
       :addresses,
       :next_token,
       keyword_init: true
@@ -15406,6 +16032,7 @@ module Aws::EC2
     #   <p>Information about the allocation IDs.</p>
     #   @return [Array<String>]
     class DescribeAddressesRequest < Struct.new(
+      nil,
       :public_ips,
       :dry_run,
       :filters,
@@ -15419,6 +16046,7 @@ module Aws::EC2
     #   <p>Information about the Elastic IP addresses.</p>
     #   @return [Array<Types::Address>]
     class DescribeAddressesResult < Struct.new(
+      nil,
       :addresses,
       keyword_init: true
     )
@@ -15431,6 +16059,7 @@ module Aws::EC2
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     class DescribeAggregateIdFormatRequest < Struct.new(
+      nil,
       :dry_run,
       keyword_init: true
     )
@@ -15446,6 +16075,7 @@ module Aws::EC2
     #   <p>Information about each resource's ID format.</p>
     #   @return [Array<Types::IdFormat>]
     class DescribeAggregateIdFormatResult < Struct.new(
+      nil,
       :use_long_ids_aggregated,
       :statuses,
       keyword_init: true
@@ -15534,6 +16164,7 @@ module Aws::EC2
     #            </ul>
     #   @return [Array<Types::Filter>]
     class DescribeAvailabilityZonesRequest < Struct.new(
+      nil,
       :zone_names,
       :zone_ids,
       :all_availability_zones,
@@ -15548,6 +16179,7 @@ module Aws::EC2
     #   <p>Information about the Availability Zones, Local Zones, and Wavelength Zones.</p>
     #   @return [Array<Types::AvailabilityZone>]
     class DescribeAvailabilityZonesResult < Struct.new(
+      nil,
       :availability_zones,
       keyword_init: true
     )
@@ -15570,6 +16202,7 @@ module Aws::EC2
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     class DescribeAwsNetworkPerformanceMetricSubscriptionsRequest < Struct.new(
+      nil,
       :max_results,
       :next_token,
       :filters,
@@ -15586,6 +16219,7 @@ module Aws::EC2
     #   <p>Describes the current Infrastructure Performance subscriptions.</p>
     #   @return [Array<Types::Subscription>]
     class DescribeAwsNetworkPerformanceMetricSubscriptionsResult < Struct.new(
+      nil,
       :next_token,
       :subscriptions,
       keyword_init: true
@@ -15652,6 +16286,7 @@ module Aws::EC2
     #            </ul>
     #   @return [Array<Types::Filter>]
     class DescribeBundleTasksRequest < Struct.new(
+      nil,
       :bundle_ids,
       :dry_run,
       :filters,
@@ -15664,6 +16299,7 @@ module Aws::EC2
     #   <p>Information about the bundle tasks.</p>
     #   @return [Array<Types::BundleTask>]
     class DescribeBundleTasksResult < Struct.new(
+      nil,
       :bundle_tasks,
       keyword_init: true
     )
@@ -15683,6 +16319,7 @@ module Aws::EC2
     #   <p>The token for the next page of results.</p>
     #   @return [String]
     class DescribeByoipCidrsRequest < Struct.new(
+      nil,
       :dry_run,
       :max_results,
       :next_token,
@@ -15698,6 +16335,7 @@ module Aws::EC2
     #   <p>The token to use to retrieve the next page of results. This value is <code>null</code> when there are no more results to return.</p>
     #   @return [String]
     class DescribeByoipCidrsResult < Struct.new(
+      nil,
       :byoip_cidrs,
       :next_token,
       keyword_init: true
@@ -15755,6 +16393,7 @@ module Aws::EC2
     #   <p>Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     class DescribeCapacityBlockExtensionHistoryRequest < Struct.new(
+      nil,
       :capacity_reservation_ids,
       :next_token,
       :max_results,
@@ -15773,6 +16412,7 @@ module Aws::EC2
     #   <p>The token to use to retrieve the next page of results. This value is <code>null</code> when there are no more results to return.</p>
     #   @return [String]
     class DescribeCapacityBlockExtensionHistoryResult < Struct.new(
+      nil,
       :capacity_block_extensions,
       :next_token,
       keyword_init: true
@@ -15797,6 +16437,7 @@ module Aws::EC2
     #       see <a href="https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Query-Requests.html#api-pagination">Pagination</a>.</p>
     #   @return [Integer]
     class DescribeCapacityBlockExtensionOfferingsRequest < Struct.new(
+      nil,
       :dry_run,
       :capacity_block_extension_duration_hours,
       :capacity_reservation_id,
@@ -15814,6 +16455,7 @@ module Aws::EC2
     #   <p>The token to use to retrieve the next page of results. This value is <code>null</code> when there are no more results to return.</p>
     #   @return [String]
     class DescribeCapacityBlockExtensionOfferingsResult < Struct.new(
+      nil,
       :capacity_block_extension_offerings,
       :next_token,
       keyword_init: true
@@ -15855,6 +16497,7 @@ module Aws::EC2
     #   <p>The number of EC2 UltraServers in the offerings.</p>
     #   @return [Integer]
     class DescribeCapacityBlockOfferingsRequest < Struct.new(
+      nil,
       :dry_run,
       :instance_type,
       :instance_count,
@@ -15877,6 +16520,7 @@ module Aws::EC2
     #   <p>The token to use to retrieve the next page of results. This value is <code>null</code> when there are no more results to return.</p>
     #   @return [String]
     class DescribeCapacityBlockOfferingsResult < Struct.new(
+      nil,
       :capacity_block_offerings,
       :next_token,
       keyword_init: true
@@ -15907,6 +16551,7 @@ module Aws::EC2
     #   <p>Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     class DescribeCapacityBlockStatusRequest < Struct.new(
+      nil,
       :capacity_block_ids,
       :next_token,
       :max_results,
@@ -15924,6 +16569,7 @@ module Aws::EC2
     #   <p>The token to use to retrieve the next page of results. This value is <code>null</code> when there are no more results to return.</p>
     #   @return [String]
     class DescribeCapacityBlockStatusResult < Struct.new(
+      nil,
       :capacity_block_statuses,
       :next_token,
       keyword_init: true
@@ -15991,6 +16637,7 @@ module Aws::EC2
     #   <p>Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     class DescribeCapacityBlocksRequest < Struct.new(
+      nil,
       :capacity_block_ids,
       :next_token,
       :max_results,
@@ -16008,6 +16655,7 @@ module Aws::EC2
     #   <p>The token to use to retrieve the next page of results. This value is <code>null</code> when there are no more results to return.</p>
     #   @return [String]
     class DescribeCapacityBlocksResult < Struct.new(
+      nil,
       :capacity_blocks,
       :next_token,
       keyword_init: true
@@ -16069,6 +16717,7 @@ module Aws::EC2
     #   <p>Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     class DescribeCapacityReservationBillingRequestsRequest < Struct.new(
+      nil,
       :capacity_reservation_ids,
       :role,
       :next_token,
@@ -16087,6 +16736,7 @@ module Aws::EC2
     #   <p>Information about the request.</p>
     #   @return [Array<Types::CapacityReservationBillingRequest>]
     class DescribeCapacityReservationBillingRequestsResult < Struct.new(
+      nil,
       :next_token,
       :capacity_reservation_billing_requests,
       keyword_init: true
@@ -16136,6 +16786,7 @@ module Aws::EC2
     #   <p>Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     class DescribeCapacityReservationFleetsRequest < Struct.new(
+      nil,
       :capacity_reservation_fleet_ids,
       :next_token,
       :max_results,
@@ -16153,6 +16804,7 @@ module Aws::EC2
     #   <p>The token to use to retrieve the next page of results. This value is <code>null</code> when there are no more results to return.</p>
     #   @return [String]
     class DescribeCapacityReservationFleetsResult < Struct.new(
+      nil,
       :capacity_reservation_fleets,
       :next_token,
       keyword_init: true
@@ -16314,6 +16966,7 @@ module Aws::EC2
     #   <p>Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     class DescribeCapacityReservationsRequest < Struct.new(
+      nil,
       :capacity_reservation_ids,
       :next_token,
       :max_results,
@@ -16331,6 +16984,7 @@ module Aws::EC2
     #   <p>Information about the Capacity Reservations.</p>
     #   @return [Array<Types::CapacityReservation>]
     class DescribeCapacityReservationsResult < Struct.new(
+      nil,
       :next_token,
       :capacity_reservations,
       keyword_init: true
@@ -16385,6 +17039,7 @@ module Aws::EC2
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     class DescribeCarrierGatewaysRequest < Struct.new(
+      nil,
       :carrier_gateway_ids,
       :filters,
       :max_results,
@@ -16402,6 +17057,7 @@ module Aws::EC2
     #   <p>The token to use to retrieve the next page of results. This value is <code>null</code> when there are no more results to return.</p>
     #   @return [String]
     class DescribeCarrierGatewaysResult < Struct.new(
+      nil,
       :carrier_gateways,
       :next_token,
       keyword_init: true
@@ -16453,6 +17109,7 @@ module Aws::EC2
     #            <p>Constraint: If the value is greater than 1000, we return only 1000 items.</p>
     #   @return [Integer]
     class DescribeClassicLinkInstancesRequest < Struct.new(
+      nil,
       :dry_run,
       :instance_ids,
       :filters,
@@ -16470,6 +17127,7 @@ module Aws::EC2
     #   <p>The token to include in another request to get the next page of items. This value is <code>null</code> when there are no more items to return.</p>
     #   @return [String]
     class DescribeClassicLinkInstancesResult < Struct.new(
+      nil,
       :instances,
       :next_token,
       keyword_init: true
@@ -16508,6 +17166,7 @@ module Aws::EC2
     #   <p>The maximum number of results to return for the request in a single page. The remaining results can be seen by sending another request with the nextToken value.</p>
     #   @return [Integer]
     class DescribeClientVpnAuthorizationRulesRequest < Struct.new(
+      nil,
       :client_vpn_endpoint_id,
       :dry_run,
       :next_token,
@@ -16525,6 +17184,7 @@ module Aws::EC2
     #   <p>The token to use to retrieve the next page of results. This value is <code>null</code> when there are no more results to return.</p>
     #   @return [String]
     class DescribeClientVpnAuthorizationRulesResult < Struct.new(
+      nil,
       :authorization_rules,
       :next_token,
       keyword_init: true
@@ -16559,6 +17219,7 @@ module Aws::EC2
     #   <p>Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     class DescribeClientVpnConnectionsRequest < Struct.new(
+      nil,
       :client_vpn_endpoint_id,
       :filters,
       :next_token,
@@ -16576,6 +17237,7 @@ module Aws::EC2
     #   <p>The token to use to retrieve the next page of results. This value is <code>null</code> when there are no more results to return.</p>
     #   @return [String]
     class DescribeClientVpnConnectionsResult < Struct.new(
+      nil,
       :connections,
       :next_token,
       keyword_init: true
@@ -16610,6 +17272,7 @@ module Aws::EC2
     #   <p>Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     class DescribeClientVpnEndpointsRequest < Struct.new(
+      nil,
       :client_vpn_endpoint_ids,
       :max_results,
       :next_token,
@@ -16627,6 +17290,7 @@ module Aws::EC2
     #   <p>The token to use to retrieve the next page of results. This value is <code>null</code> when there are no more results to return.</p>
     #   @return [String]
     class DescribeClientVpnEndpointsResult < Struct.new(
+      nil,
       :client_vpn_endpoints,
       :next_token,
       keyword_init: true
@@ -16664,6 +17328,7 @@ module Aws::EC2
     #   <p>Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     class DescribeClientVpnRoutesRequest < Struct.new(
+      nil,
       :client_vpn_endpoint_id,
       :filters,
       :max_results,
@@ -16681,6 +17346,7 @@ module Aws::EC2
     #   <p>The token to use to retrieve the next page of results. This value is <code>null</code> when there are no more results to return.</p>
     #   @return [String]
     class DescribeClientVpnRoutesResult < Struct.new(
+      nil,
       :routes,
       :next_token,
       keyword_init: true
@@ -16721,6 +17387,7 @@ module Aws::EC2
     #   <p>Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     class DescribeClientVpnTargetNetworksRequest < Struct.new(
+      nil,
       :client_vpn_endpoint_id,
       :association_ids,
       :max_results,
@@ -16739,6 +17406,7 @@ module Aws::EC2
     #   <p>The token to use to retrieve the next page of results. This value is <code>null</code> when there are no more results to return.</p>
     #   @return [String]
     class DescribeClientVpnTargetNetworksResult < Struct.new(
+      nil,
       :client_vpn_target_networks,
       :next_token,
       keyword_init: true
@@ -16775,6 +17443,7 @@ module Aws::EC2
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     class DescribeCoipPoolsRequest < Struct.new(
+      nil,
       :pool_ids,
       :filters,
       :max_results,
@@ -16792,6 +17461,7 @@ module Aws::EC2
     #   <p>The token to use to retrieve the next page of results. This value is <code>null</code> when there are no more results to return.</p>
     #   @return [String]
     class DescribeCoipPoolsResult < Struct.new(
+      nil,
       :coip_pools,
       :next_token,
       keyword_init: true
@@ -16808,6 +17478,7 @@ module Aws::EC2
     #   <p>The conversion task IDs.</p>
     #   @return [Array<String>]
     class DescribeConversionTasksRequest < Struct.new(
+      nil,
       :dry_run,
       :conversion_task_ids,
       keyword_init: true
@@ -16819,6 +17490,7 @@ module Aws::EC2
     #   <p>Information about the conversion tasks.</p>
     #   @return [Array<Types::ConversionTask>]
     class DescribeConversionTasksResult < Struct.new(
+      nil,
       :conversion_tasks,
       keyword_init: true
     )
@@ -16876,6 +17548,7 @@ module Aws::EC2
     #                   <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     class DescribeCustomerGatewaysRequest < Struct.new(
+      nil,
       :customer_gateway_ids,
       :filters,
       :dry_run,
@@ -16889,6 +17562,7 @@ module Aws::EC2
     #   <p>Information about one or more customer gateways.</p>
     #   @return [Array<Types::CustomerGateway>]
     class DescribeCustomerGatewaysResult < Struct.new(
+      nil,
       :customer_gateways,
       keyword_init: true
     )
@@ -16912,6 +17586,7 @@ module Aws::EC2
     #   <p>One or more report IDs.</p>
     #   @return [Array<String>]
     class DescribeDeclarativePoliciesReportsRequest < Struct.new(
+      nil,
       :dry_run,
       :next_token,
       :max_results,
@@ -16928,6 +17603,7 @@ module Aws::EC2
     #   <p>The report metadata.</p>
     #   @return [Array<Types::DeclarativePoliciesReport>]
     class DescribeDeclarativePoliciesReportsResult < Struct.new(
+      nil,
       :next_token,
       :reports,
       keyword_init: true
@@ -16982,6 +17658,7 @@ module Aws::EC2
     #            </ul>
     #   @return [Array<Types::Filter>]
     class DescribeDhcpOptionsRequest < Struct.new(
+      nil,
       :dhcp_options_ids,
       :next_token,
       :max_results,
@@ -16999,6 +17676,7 @@ module Aws::EC2
     #   <p>Information about the DHCP options sets.</p>
     #   @return [Array<Types::DhcpOptions>]
     class DescribeDhcpOptionsResult < Struct.new(
+      nil,
       :next_token,
       :dhcp_options,
       keyword_init: true
@@ -17037,6 +17715,7 @@ module Aws::EC2
     #            </ul>
     #   @return [Array<Types::Filter>]
     class DescribeEgressOnlyInternetGatewaysRequest < Struct.new(
+      nil,
       :dry_run,
       :egress_only_internet_gateway_ids,
       :max_results,
@@ -17054,6 +17733,7 @@ module Aws::EC2
     #   <p>The token to include in another request to get the next page of items. This value is <code>null</code> when there are no more items to return.</p>
     #   @return [String]
     class DescribeEgressOnlyInternetGatewaysResult < Struct.new(
+      nil,
       :egress_only_internet_gateways,
       :next_token,
       keyword_init: true
@@ -17108,6 +17788,7 @@ module Aws::EC2
     #   <p>The token to request the next page of results.</p>
     #   @return [String]
     class DescribeElasticGpusRequest < Struct.new(
+      nil,
       :elastic_gpu_ids,
       :dry_run,
       :filters,
@@ -17131,6 +17812,7 @@ module Aws::EC2
     #                   <code>null</code> when there are no more results to return.</p>
     #   @return [String]
     class DescribeElasticGpusResult < Struct.new(
+      nil,
       :elastic_gpu_set,
       :max_results,
       :next_token,
@@ -17158,6 +17840,7 @@ module Aws::EC2
     #   <p>A token that indicates the next page of results.</p>
     #   @return [String]
     class DescribeExportImageTasksRequest < Struct.new(
+      nil,
       :dry_run,
       :filters,
       :export_image_task_ids,
@@ -17176,6 +17859,7 @@ module Aws::EC2
     #      to return.</p>
     #   @return [String]
     class DescribeExportImageTasksResult < Struct.new(
+      nil,
       :export_image_tasks,
       :next_token,
       keyword_init: true
@@ -17190,6 +17874,7 @@ module Aws::EC2
     #   <p>The export task IDs.</p>
     #   @return [Array<String>]
     class DescribeExportTasksRequest < Struct.new(
+      nil,
       :filters,
       :export_task_ids,
       keyword_init: true
@@ -17201,6 +17886,7 @@ module Aws::EC2
     #   <p>Information about the export tasks.</p>
     #   @return [Array<Types::ExportTask>]
     class DescribeExportTasksResult < Struct.new(
+      nil,
       :export_tasks,
       keyword_init: true
     )
@@ -17241,6 +17927,7 @@ module Aws::EC2
     #   			<code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     class DescribeFastLaunchImagesRequest < Struct.new(
+      nil,
       :image_ids,
       :filters,
       :max_results,
@@ -17260,6 +17947,7 @@ module Aws::EC2
     #            are no more items to return.</p>
     #   @return [String]
     class DescribeFastLaunchImagesResult < Struct.new(
+      nil,
       :fast_launch_images,
       :next_token,
       keyword_init: true
@@ -17302,6 +17990,7 @@ module Aws::EC2
     #   <p>The time that Windows fast launch for the AMI changed to the current state.</p>
     #   @return [Time]
     class DescribeFastLaunchImagesSuccessItem < Struct.new(
+      nil,
       :image_id,
       :resource_type,
       :snapshot_configuration,
@@ -17363,6 +18052,7 @@ module Aws::EC2
     #   <p>The time at which fast snapshot restores entered the <code>disabled</code> state.</p>
     #   @return [Time]
     class DescribeFastSnapshotRestoreSuccessItem < Struct.new(
+      nil,
       :snapshot_id,
       :availability_zone,
       :state,
@@ -17420,6 +18110,7 @@ module Aws::EC2
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     class DescribeFastSnapshotRestoresRequest < Struct.new(
+      nil,
       :filters,
       :max_results,
       :next_token,
@@ -17437,6 +18128,7 @@ module Aws::EC2
     #     This value is <code>null</code> when there are no more items to return.</p>
     #   @return [String]
     class DescribeFastSnapshotRestoresResult < Struct.new(
+      nil,
       :fast_snapshot_restores,
       :next_token,
       keyword_init: true
@@ -17461,6 +18153,7 @@ module Aws::EC2
     #            information about error messages, see <a href="https://docs.aws.amazon.com/AWSEC2/latest/APIReference/errors-overview.html.html">Error codes</a>.</p>
     #   @return [String]
     class DescribeFleetError < Struct.new(
+      nil,
       :launch_template_and_overrides,
       :lifecycle,
       :error_code,
@@ -17494,6 +18187,7 @@ module Aws::EC2
     #               <i>YYYY</i>-<i>MM</i>-<i>DD</i>T<i>HH</i>:<i>MM</i>:<i>SS</i>Z).</p>
     #   @return [Time]
     class DescribeFleetHistoryRequest < Struct.new(
+      nil,
       :dry_run,
       :event_type,
       :max_results,
@@ -17527,6 +18221,7 @@ module Aws::EC2
     #               <i>YYYY</i>-<i>MM</i>-<i>DD</i>T<i>HH</i>:<i>MM</i>:<i>SS</i>Z).</p>
     #   @return [Time]
     class DescribeFleetHistoryResult < Struct.new(
+      nil,
       :history_records,
       :last_evaluated_time,
       :next_token,
@@ -17563,6 +18258,7 @@ module Aws::EC2
     #            </ul>
     #   @return [Array<Types::Filter>]
     class DescribeFleetInstancesRequest < Struct.new(
+      nil,
       :dry_run,
       :max_results,
       :next_token,
@@ -17585,6 +18281,7 @@ module Aws::EC2
     #   <p>The ID of the EC2 Fleet.</p>
     #   @return [String]
     class DescribeFleetInstancesResult < Struct.new(
+      nil,
       :active_instances,
       :next_token,
       :fleet_id,
@@ -17612,6 +18309,7 @@ module Aws::EC2
     #            blank.</p>
     #   @return [String]
     class DescribeFleetsInstances < Struct.new(
+      nil,
       :launch_template_and_overrides,
       :lifecycle,
       :instance_ids,
@@ -17677,6 +18375,7 @@ module Aws::EC2
     #            </ul>
     #   @return [Array<Types::Filter>]
     class DescribeFleetsRequest < Struct.new(
+      nil,
       :dry_run,
       :max_results,
       :next_token,
@@ -17695,6 +18394,7 @@ module Aws::EC2
     #   <p>Information about the EC2 Fleets.</p>
     #   @return [Array<Types::FleetData>]
     class DescribeFleetsResult < Struct.new(
+      nil,
       :next_token,
       :fleets,
       keyword_init: true
@@ -17762,6 +18462,7 @@ module Aws::EC2
     #   <p>The token to request the next page of items. Pagination continues from the end of the items returned by the previous request.</p>
     #   @return [String]
     class DescribeFlowLogsRequest < Struct.new(
+      nil,
       :dry_run,
       :filter,
       :flow_log_ids,
@@ -17779,6 +18480,7 @@ module Aws::EC2
     #   <p>The token to request the next page of items. This value is <code>null</code> when there are no more items to return.</p>
     #   @return [String]
     class DescribeFlowLogsResult < Struct.new(
+      nil,
       :flow_logs,
       :next_token,
       keyword_init: true
@@ -17798,6 +18500,7 @@ module Aws::EC2
     #   <p>The AFI attribute.</p>
     #   @return [String]
     class DescribeFpgaImageAttributeRequest < Struct.new(
+      nil,
       :dry_run,
       :fpga_image_id,
       :attribute,
@@ -17810,6 +18513,7 @@ module Aws::EC2
     #   <p>Information about the attribute.</p>
     #   @return [Types::FpgaImageAttribute]
     class DescribeFpgaImageAttributeResult < Struct.new(
+      nil,
       :fpga_image_attribute,
       keyword_init: true
     )
@@ -17886,6 +18590,7 @@ module Aws::EC2
     #   <p>The maximum number of results to return in a single call.</p>
     #   @return [Integer]
     class DescribeFpgaImagesRequest < Struct.new(
+      nil,
       :dry_run,
       :fpga_image_ids,
       :owners,
@@ -17904,6 +18609,7 @@ module Aws::EC2
     #   <p>The token to use to retrieve the next page of results. This value is <code>null</code> when there are no more results to return.</p>
     #   @return [String]
     class DescribeFpgaImagesResult < Struct.new(
+      nil,
       :fpga_images,
       :next_token,
       keyword_init: true
@@ -17948,6 +18654,7 @@ module Aws::EC2
     #   <p>The ID of the reservation offering.</p>
     #   @return [String]
     class DescribeHostReservationOfferingsRequest < Struct.new(
+      nil,
       :filter,
       :max_duration,
       :max_results,
@@ -17966,6 +18673,7 @@ module Aws::EC2
     #   <p>Information about the offerings.</p>
     #   @return [Array<Types::HostOffering>]
     class DescribeHostReservationOfferingsResult < Struct.new(
+      nil,
       :next_token,
       :offering_set,
       keyword_init: true
@@ -18013,6 +18721,7 @@ module Aws::EC2
     #   <p>The token to use to retrieve the next page of results.</p>
     #   @return [String]
     class DescribeHostReservationsRequest < Struct.new(
+      nil,
       :filter,
       :host_reservation_id_set,
       :max_results,
@@ -18029,6 +18738,7 @@ module Aws::EC2
     #   <p>The token to use to retrieve the next page of results. This value is <code>null</code> when there are no more results to return.</p>
     #   @return [String]
     class DescribeHostReservationsResult < Struct.new(
+      nil,
       :host_reservation_set,
       :next_token,
       keyword_init: true
@@ -18089,6 +18799,7 @@ module Aws::EC2
     #            </ul>
     #   @return [Array<Types::Filter>]
     class DescribeHostsRequest < Struct.new(
+      nil,
       :host_ids,
       :next_token,
       :max_results,
@@ -18105,6 +18816,7 @@ module Aws::EC2
     #   <p>The token to use to retrieve the next page of results. This value is <code>null</code> when there are no more results to return.</p>
     #   @return [String]
     class DescribeHostsResult < Struct.new(
+      nil,
       :hosts,
       :next_token,
       keyword_init: true
@@ -18139,6 +18851,7 @@ module Aws::EC2
     #               Pagination continues from the end of the items returned by the previous request.</p>
     #   @return [String]
     class DescribeIamInstanceProfileAssociationsRequest < Struct.new(
+      nil,
       :association_ids,
       :filters,
       :max_results,
@@ -18156,6 +18869,7 @@ module Aws::EC2
     #               This value is <code>null</code> when there are no more items to return.</p>
     #   @return [String]
     class DescribeIamInstanceProfileAssociationsResult < Struct.new(
+      nil,
       :iam_instance_profile_associations,
       :next_token,
       keyword_init: true
@@ -18180,6 +18894,7 @@ module Aws::EC2
     #            </p>
     #   @return [String]
     class DescribeIdFormatRequest < Struct.new(
+      nil,
       :resource,
       keyword_init: true
     )
@@ -18190,6 +18905,7 @@ module Aws::EC2
     #   <p>Information about the ID format for the resource.</p>
     #   @return [Array<Types::IdFormat>]
     class DescribeIdFormatResult < Struct.new(
+      nil,
       :statuses,
       keyword_init: true
     )
@@ -18216,6 +18932,7 @@ module Aws::EC2
     #   <p>The ARN of the principal, which can be an IAM role, IAM user, or the root user.</p>
     #   @return [String]
     class DescribeIdentityIdFormatRequest < Struct.new(
+      nil,
       :resource,
       :principal_arn,
       keyword_init: true
@@ -18227,6 +18944,7 @@ module Aws::EC2
     #   <p>Information about the ID format for the resources.</p>
     #   @return [Array<Types::IdFormat>]
     class DescribeIdentityIdFormatResult < Struct.new(
+      nil,
       :statuses,
       keyword_init: true
     )
@@ -18292,6 +19010,7 @@ module Aws::EC2
     #   <p>The block device mapping entries.</p>
     #   @return [Array<Types::BlockDeviceMapping>]
     class DescribeImageAttributeOutput < Struct.new(
+      nil,
       :description,
       :kernel_id,
       :ramdisk_id,
@@ -18328,6 +19047,7 @@ module Aws::EC2
     #   			<code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     class DescribeImageAttributeRequest < Struct.new(
+      nil,
       :attribute,
       :image_id,
       :dry_run,
@@ -18374,6 +19094,7 @@ module Aws::EC2
     #       </p>
     #   @return [Integer]
     class DescribeImageReferencesRequest < Struct.new(
+      nil,
       :image_ids,
       :include_all_resource_types,
       :resource_types,
@@ -18393,6 +19114,7 @@ module Aws::EC2
     #   <p>The resources that are referencing the specified images.</p>
     #   @return [Array<Types::ImageReference>]
     class DescribeImageReferencesResult < Struct.new(
+      nil,
       :next_token,
       :image_references,
       keyword_init: true
@@ -18442,6 +19164,7 @@ module Aws::EC2
     #   	        For more information, see <a href="https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Query-Requests.html#api-pagination">Pagination</a>.</p>
     #   @return [Integer]
     class DescribeImageUsageReportEntriesRequest < Struct.new(
+      nil,
       :image_ids,
       :report_ids,
       :next_token,
@@ -18461,6 +19184,7 @@ module Aws::EC2
     #   <p>The content of the usage reports.</p>
     #   @return [Array<Types::ImageUsageReportEntry>]
     class DescribeImageUsageReportEntriesResult < Struct.new(
+      nil,
       :next_token,
       :image_usage_report_entries,
       keyword_init: true
@@ -18506,6 +19230,7 @@ module Aws::EC2
     #   	        For more information, see <a href="https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Query-Requests.html#api-pagination">Pagination</a>.</p>
     #   @return [Integer]
     class DescribeImageUsageReportsRequest < Struct.new(
+      nil,
       :image_ids,
       :report_ids,
       :next_token,
@@ -18525,6 +19250,7 @@ module Aws::EC2
     #   <p>The image usage reports.</p>
     #   @return [Array<Types::ImageUsageReport>]
     class DescribeImageUsageReportsResult < Struct.new(
+      nil,
       :next_token,
       :image_usage_reports,
       keyword_init: true
@@ -18776,6 +19502,7 @@ module Aws::EC2
     #            </ul>
     #   @return [Array<Types::Filter>]
     class DescribeImagesRequest < Struct.new(
+      nil,
       :executable_users,
       :image_ids,
       :owners,
@@ -18798,6 +19525,7 @@ module Aws::EC2
     #   <p>Information about the images.</p>
     #   @return [Array<Types::Image>]
     class DescribeImagesResult < Struct.new(
+      nil,
       :next_token,
       :images,
       keyword_init: true
@@ -18824,6 +19552,7 @@ module Aws::EC2
     #   <p>A token that indicates the next page of results.</p>
     #   @return [String]
     class DescribeImportImageTasksRequest < Struct.new(
+      nil,
       :dry_run,
       :filters,
       :import_task_ids,
@@ -18843,6 +19572,7 @@ module Aws::EC2
     #      to return.</p>
     #   @return [String]
     class DescribeImportImageTasksResult < Struct.new(
+      nil,
       :import_image_tasks,
       :next_token,
       keyword_init: true
@@ -18869,6 +19599,7 @@ module Aws::EC2
     #   <p>A token that indicates the next page of results.</p>
     #   @return [String]
     class DescribeImportSnapshotTasksRequest < Struct.new(
+      nil,
       :dry_run,
       :filters,
       :import_task_ids,
@@ -18888,6 +19619,7 @@ module Aws::EC2
     #      to return.</p>
     #   @return [String]
     class DescribeImportSnapshotTasksResult < Struct.new(
+      nil,
       :import_snapshot_tasks,
       :next_token,
       keyword_init: true
@@ -18952,6 +19684,7 @@ module Aws::EC2
     #   <p>The security groups associated with the instance.</p>
     #   @return [Array<Types::GroupIdentifier>]
     class DescribeInstanceAttributeOutput < Struct.new(
+      nil,
       :block_device_mappings,
       :disable_api_termination,
       :ena_support,
@@ -18987,6 +19720,7 @@ module Aws::EC2
     #            <p>Note that the <code>enaSupport</code> attribute is not supported.</p>
     #   @return [String]
     class DescribeInstanceAttributeRequest < Struct.new(
+      nil,
       :dry_run,
       :instance_id,
       :attribute,
@@ -19050,6 +19784,7 @@ module Aws::EC2
     #   <p>One or more EC2 Instance Connect Endpoint IDs.</p>
     #   @return [Array<String>]
     class DescribeInstanceConnectEndpointsRequest < Struct.new(
+      nil,
       :dry_run,
       :max_results,
       :next_token,
@@ -19068,6 +19803,7 @@ module Aws::EC2
     #            are no more items to return.</p>
     #   @return [String]
     class DescribeInstanceConnectEndpointsResult < Struct.new(
+      nil,
       :instance_connect_endpoints,
       :next_token,
       keyword_init: true
@@ -19105,6 +19841,7 @@ module Aws::EC2
     #   <p>The token returned from a previous paginated request. Pagination continues from the end of the items returned by the previous request.</p>
     #   @return [String]
     class DescribeInstanceCreditSpecificationsRequest < Struct.new(
+      nil,
       :dry_run,
       :filters,
       :instance_ids,
@@ -19123,6 +19860,7 @@ module Aws::EC2
     #            are no more items to return.</p>
     #   @return [String]
     class DescribeInstanceCreditSpecificationsResult < Struct.new(
+      nil,
       :instance_credit_specifications,
       :next_token,
       keyword_init: true
@@ -19136,6 +19874,7 @@ module Aws::EC2
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     class DescribeInstanceEventNotificationAttributesRequest < Struct.new(
+      nil,
       :dry_run,
       keyword_init: true
     )
@@ -19146,6 +19885,7 @@ module Aws::EC2
     #   <p>Information about the registered tag keys.</p>
     #   @return [Types::InstanceTagNotificationAttribute]
     class DescribeInstanceEventNotificationAttributesResult < Struct.new(
+      nil,
       :instance_tag_attribute,
       keyword_init: true
     )
@@ -19226,6 +19966,7 @@ module Aws::EC2
     #   <p>The token to request the next page of results.</p>
     #   @return [String]
     class DescribeInstanceEventWindowsRequest < Struct.new(
+      nil,
       :dry_run,
       :instance_event_window_ids,
       :filters,
@@ -19244,6 +19985,7 @@ module Aws::EC2
     #            when there are no more results to return. </p>
     #   @return [String]
     class DescribeInstanceEventWindowsResult < Struct.new(
+      nil,
       :instance_event_windows,
       :next_token,
       keyword_init: true
@@ -19337,6 +20079,7 @@ module Aws::EC2
     #   			<code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     class DescribeInstanceImageMetadataRequest < Struct.new(
+      nil,
       :filters,
       :instance_ids,
       :max_results,
@@ -19355,6 +20098,7 @@ module Aws::EC2
     #            are no more items to return.</p>
     #   @return [String]
     class DescribeInstanceImageMetadataResult < Struct.new(
+      nil,
       :instance_image_metadata,
       :next_token,
       keyword_init: true
@@ -19489,6 +20233,7 @@ module Aws::EC2
     #            </p>
     #   @return [Boolean]
     class DescribeInstanceStatusRequest < Struct.new(
+      nil,
       :instance_ids,
       :max_results,
       :next_token,
@@ -19508,6 +20253,7 @@ module Aws::EC2
     #            are no more items to return.</p>
     #   @return [String]
     class DescribeInstanceStatusResult < Struct.new(
+      nil,
       :instance_statuses,
       :next_token,
       keyword_init: true
@@ -19566,6 +20312,7 @@ module Aws::EC2
     #            </ul>
     #   @return [Array<Types::Filter>]
     class DescribeInstanceTopologyRequest < Struct.new(
+      nil,
       :dry_run,
       :next_token,
       :max_results,
@@ -19585,6 +20332,7 @@ module Aws::EC2
     #            are no more items to return.</p>
     #   @return [String]
     class DescribeInstanceTopologyResult < Struct.new(
+      nil,
       :instances,
       :next_token,
       keyword_init: true
@@ -19644,6 +20392,7 @@ module Aws::EC2
     #   <p>The token returned from a previous paginated request. Pagination continues from the end of the items returned by the previous request.</p>
     #   @return [String]
     class DescribeInstanceTypeOfferingsRequest < Struct.new(
+      nil,
       :dry_run,
       :location_type,
       :filters,
@@ -19662,6 +20411,7 @@ module Aws::EC2
     #            are no more items to return.</p>
     #   @return [String]
     class DescribeInstanceTypeOfferingsResult < Struct.new(
+      nil,
       :instance_type_offerings,
       :next_token,
       keyword_init: true
@@ -19974,6 +20724,7 @@ module Aws::EC2
     #   <p>The token returned from a previous paginated request. Pagination continues from the end of the items returned by the previous request.</p>
     #   @return [String]
     class DescribeInstanceTypesRequest < Struct.new(
+      nil,
       :dry_run,
       :instance_types,
       :filters,
@@ -19992,6 +20743,7 @@ module Aws::EC2
     #            are no more items to return.</p>
     #   @return [String]
     class DescribeInstanceTypesResult < Struct.new(
+      nil,
       :instance_types,
       :next_token,
       keyword_init: true
@@ -20735,6 +21487,7 @@ module Aws::EC2
     #            <p>You cannot specify this parameter and the instance IDs parameter in the same request.</p>
     #   @return [Integer]
     class DescribeInstancesRequest < Struct.new(
+      nil,
       :instance_ids,
       :dry_run,
       :filters,
@@ -20753,6 +21506,7 @@ module Aws::EC2
     #   <p>Information about the reservations.</p>
     #   @return [Array<Types::Reservation>]
     class DescribeInstancesResult < Struct.new(
+      nil,
       :next_token,
       :reservations,
       keyword_init: true
@@ -20809,6 +21563,7 @@ module Aws::EC2
     #            </ul>
     #   @return [Array<Types::Filter>]
     class DescribeInternetGatewaysRequest < Struct.new(
+      nil,
       :next_token,
       :max_results,
       :dry_run,
@@ -20826,6 +21581,7 @@ module Aws::EC2
     #   <p>The token to include in another request to get the next page of items. This value is <code>null</code> when there are no more items to return.</p>
     #   @return [String]
     class DescribeInternetGatewaysResult < Struct.new(
+      nil,
       :internet_gateways,
       :next_token,
       keyword_init: true
@@ -20846,6 +21602,7 @@ module Aws::EC2
     #   <p>The token for the next page of results.</p>
     #   @return [String]
     class DescribeIpamByoasnRequest < Struct.new(
+      nil,
       :dry_run,
       :max_results,
       :next_token,
@@ -20861,6 +21618,7 @@ module Aws::EC2
     #   <p>The token to use to retrieve the next page of results. This value is <code>null</code> when there are no more results to return.</p>
     #   @return [String]
     class DescribeIpamByoasnResult < Struct.new(
+      nil,
       :byoasns,
       :next_token,
       keyword_init: true
@@ -20934,6 +21692,7 @@ module Aws::EC2
     #   <p>Verification token IDs.</p>
     #   @return [Array<String>]
     class DescribeIpamExternalResourceVerificationTokensRequest < Struct.new(
+      nil,
       :dry_run,
       :filters,
       :next_token,
@@ -20951,6 +21710,7 @@ module Aws::EC2
     #   <p>Verification tokens.</p>
     #   @return [Array<Types::IpamExternalResourceVerificationToken>]
     class DescribeIpamExternalResourceVerificationTokensResult < Struct.new(
+      nil,
       :next_token,
       :ipam_external_resource_verification_tokens,
       keyword_init: true
@@ -20976,6 +21736,7 @@ module Aws::EC2
     #   <p>The IDs of the IPAM pools you would like information on.</p>
     #   @return [Array<String>]
     class DescribeIpamPoolsRequest < Struct.new(
+      nil,
       :dry_run,
       :filters,
       :max_results,
@@ -20993,6 +21754,7 @@ module Aws::EC2
     #   <p>Information about the IPAM pools.</p>
     #   @return [Array<Types::IpamPool>]
     class DescribeIpamPoolsResult < Struct.new(
+      nil,
       :next_token,
       :ipam_pools,
       keyword_init: true
@@ -21018,6 +21780,7 @@ module Aws::EC2
     #   <p>The resource discovery filters.</p>
     #   @return [Array<Types::Filter>]
     class DescribeIpamResourceDiscoveriesRequest < Struct.new(
+      nil,
       :dry_run,
       :ipam_resource_discovery_ids,
       :next_token,
@@ -21035,6 +21798,7 @@ module Aws::EC2
     #   <p>Specify the pagination token from a previous request to retrieve the next page of results.</p>
     #   @return [String]
     class DescribeIpamResourceDiscoveriesResult < Struct.new(
+      nil,
       :ipam_resource_discoveries,
       :next_token,
       keyword_init: true
@@ -21060,6 +21824,7 @@ module Aws::EC2
     #   <p>The resource discovery association filters.</p>
     #   @return [Array<Types::Filter>]
     class DescribeIpamResourceDiscoveryAssociationsRequest < Struct.new(
+      nil,
       :dry_run,
       :ipam_resource_discovery_association_ids,
       :next_token,
@@ -21077,6 +21842,7 @@ module Aws::EC2
     #   <p>Specify the pagination token from a previous request to retrieve the next page of results.</p>
     #   @return [String]
     class DescribeIpamResourceDiscoveryAssociationsResult < Struct.new(
+      nil,
       :ipam_resource_discovery_associations,
       :next_token,
       keyword_init: true
@@ -21102,6 +21868,7 @@ module Aws::EC2
     #   <p>The IDs of the scopes you want information on.</p>
     #   @return [Array<String>]
     class DescribeIpamScopesRequest < Struct.new(
+      nil,
       :dry_run,
       :filters,
       :max_results,
@@ -21119,6 +21886,7 @@ module Aws::EC2
     #   <p>The scopes you want information on.</p>
     #   @return [Array<Types::IpamScope>]
     class DescribeIpamScopesResult < Struct.new(
+      nil,
       :next_token,
       :ipam_scopes,
       keyword_init: true
@@ -21144,6 +21912,7 @@ module Aws::EC2
     #   <p>The IDs of the IPAMs you want information on.</p>
     #   @return [Array<String>]
     class DescribeIpamsRequest < Struct.new(
+      nil,
       :dry_run,
       :filters,
       :max_results,
@@ -21161,6 +21930,7 @@ module Aws::EC2
     #   <p>Information about the IPAMs.</p>
     #   @return [Array<Types::Ipam>]
     class DescribeIpamsResult < Struct.new(
+      nil,
       :next_token,
       :ipams,
       keyword_init: true
@@ -21198,6 +21968,7 @@ module Aws::EC2
     #            </ul>
     #   @return [Array<Types::Filter>]
     class DescribeIpv6PoolsRequest < Struct.new(
+      nil,
       :pool_ids,
       :next_token,
       :max_results,
@@ -21215,6 +21986,7 @@ module Aws::EC2
     #   <p>The token to use to retrieve the next page of results. This value is <code>null</code> when there are no more results to return.</p>
     #   @return [String]
     class DescribeIpv6PoolsResult < Struct.new(
+      nil,
       :ipv6_pools,
       :next_token,
       keyword_init: true
@@ -21266,6 +22038,7 @@ module Aws::EC2
     #            </ul>
     #   @return [Array<Types::Filter>]
     class DescribeKeyPairsRequest < Struct.new(
+      nil,
       :key_names,
       :key_pair_ids,
       :include_public_key,
@@ -21280,6 +22053,7 @@ module Aws::EC2
     #   <p>Information about the key pairs.</p>
     #   @return [Array<Types::KeyPairInfo>]
     class DescribeKeyPairsResult < Struct.new(
+      nil,
       :key_pairs,
       keyword_init: true
     )
@@ -21416,6 +22190,7 @@ module Aws::EC2
     #            </p>
     #   @return [Boolean]
     class DescribeLaunchTemplateVersionsRequest < Struct.new(
+      nil,
       :dry_run,
       :launch_template_id,
       :launch_template_name,
@@ -21439,6 +22214,7 @@ module Aws::EC2
     #               when there are no more results to return.</p>
     #   @return [String]
     class DescribeLaunchTemplateVersionsResult < Struct.new(
+      nil,
       :launch_template_versions,
       :next_token,
       keyword_init: true
@@ -21489,6 +22265,7 @@ module Aws::EC2
     #               can be between 1 and 200.</p>
     #   @return [Integer]
     class DescribeLaunchTemplatesRequest < Struct.new(
+      nil,
       :dry_run,
       :launch_template_ids,
       :launch_template_names,
@@ -21508,6 +22285,7 @@ module Aws::EC2
     #               when there are no more results to return.</p>
     #   @return [String]
     class DescribeLaunchTemplatesResult < Struct.new(
+      nil,
       :launch_templates,
       :next_token,
       keyword_init: true
@@ -21566,6 +22344,7 @@ module Aws::EC2
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     class DescribeLocalGatewayRouteTableVirtualInterfaceGroupAssociationsRequest < Struct.new(
+      nil,
       :local_gateway_route_table_virtual_interface_group_association_ids,
       :filters,
       :max_results,
@@ -21583,6 +22362,7 @@ module Aws::EC2
     #   <p>The token to use to retrieve the next page of results. This value is <code>null</code> when there are no more results to return.</p>
     #   @return [String]
     class DescribeLocalGatewayRouteTableVirtualInterfaceGroupAssociationsResult < Struct.new(
+      nil,
       :local_gateway_route_table_virtual_interface_group_associations,
       :next_token,
       keyword_init: true
@@ -21641,6 +22421,7 @@ module Aws::EC2
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     class DescribeLocalGatewayRouteTableVpcAssociationsRequest < Struct.new(
+      nil,
       :local_gateway_route_table_vpc_association_ids,
       :filters,
       :max_results,
@@ -21658,6 +22439,7 @@ module Aws::EC2
     #   <p>The token to use to retrieve the next page of results. This value is <code>null</code> when there are no more results to return.</p>
     #   @return [String]
     class DescribeLocalGatewayRouteTableVpcAssociationsResult < Struct.new(
+      nil,
       :local_gateway_route_table_vpc_associations,
       :next_token,
       keyword_init: true
@@ -21711,6 +22493,7 @@ module Aws::EC2
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     class DescribeLocalGatewayRouteTablesRequest < Struct.new(
+      nil,
       :local_gateway_route_table_ids,
       :filters,
       :max_results,
@@ -21728,6 +22511,7 @@ module Aws::EC2
     #   <p>The token to use to retrieve the next page of results. This value is <code>null</code> when there are no more results to return.</p>
     #   @return [String]
     class DescribeLocalGatewayRouteTablesResult < Struct.new(
+      nil,
       :local_gateway_route_tables,
       :next_token,
       keyword_init: true
@@ -21772,6 +22556,7 @@ module Aws::EC2
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     class DescribeLocalGatewayVirtualInterfaceGroupsRequest < Struct.new(
+      nil,
       :local_gateway_virtual_interface_group_ids,
       :filters,
       :max_results,
@@ -21789,6 +22574,7 @@ module Aws::EC2
     #   <p>The token to use to retrieve the next page of results. This value is <code>null</code> when there are no more results to return.</p>
     #   @return [String]
     class DescribeLocalGatewayVirtualInterfaceGroupsResult < Struct.new(
+      nil,
       :local_gateway_virtual_interface_groups,
       :next_token,
       keyword_init: true
@@ -21850,6 +22636,7 @@ module Aws::EC2
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     class DescribeLocalGatewayVirtualInterfacesRequest < Struct.new(
+      nil,
       :local_gateway_virtual_interface_ids,
       :filters,
       :max_results,
@@ -21867,6 +22654,7 @@ module Aws::EC2
     #   <p>The token to use to retrieve the next page of results. This value is <code>null</code> when there are no more results to return.</p>
     #   @return [String]
     class DescribeLocalGatewayVirtualInterfacesResult < Struct.new(
+      nil,
       :local_gateway_virtual_interfaces,
       :next_token,
       keyword_init: true
@@ -21911,6 +22699,7 @@ module Aws::EC2
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     class DescribeLocalGatewaysRequest < Struct.new(
+      nil,
       :local_gateway_ids,
       :filters,
       :max_results,
@@ -21928,6 +22717,7 @@ module Aws::EC2
     #   <p>The token to use to retrieve the next page of results. This value is <code>null</code> when there are no more results to return.</p>
     #   @return [String]
     class DescribeLocalGatewaysResult < Struct.new(
+      nil,
       :local_gateways,
       :next_token,
       keyword_init: true
@@ -21963,6 +22753,7 @@ module Aws::EC2
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     class DescribeLockedSnapshotsRequest < Struct.new(
+      nil,
       :filters,
       :max_results,
       :next_token,
@@ -21981,6 +22772,7 @@ module Aws::EC2
     #     This value is <code>null</code> when there are no more items to return.</p>
     #   @return [String]
     class DescribeLockedSnapshotsResult < Struct.new(
+      nil,
       :snapshots,
       :next_token,
       keyword_init: true
@@ -22014,6 +22806,7 @@ module Aws::EC2
     #   <p>The token to use to retrieve the next page of results.</p>
     #   @return [String]
     class DescribeMacHostsRequest < Struct.new(
+      nil,
       :filters,
       :host_ids,
       :max_results,
@@ -22032,6 +22825,7 @@ module Aws::EC2
     #   <p>The token to use to retrieve the next page of results.</p>
     #   @return [String]
     class DescribeMacHostsResult < Struct.new(
+      nil,
       :mac_hosts,
       :next_token,
       keyword_init: true
@@ -22079,6 +22873,7 @@ module Aws::EC2
     #   <p>The token to use to retrieve the next page of results.</p>
     #   @return [String]
     class DescribeMacModificationTasksRequest < Struct.new(
+      nil,
       :dry_run,
       :filters,
       :mac_modification_task_ids,
@@ -22096,6 +22891,7 @@ module Aws::EC2
     #   <p>The token to use to retrieve the next page of results. This value is <code>null</code> when there are no more results to return.</p>
     #   @return [String]
     class DescribeMacModificationTasksResult < Struct.new(
+      nil,
       :mac_modification_tasks,
       :next_token,
       keyword_init: true
@@ -22136,6 +22932,7 @@ module Aws::EC2
     #   <p>One or more prefix list IDs.</p>
     #   @return [Array<String>]
     class DescribeManagedPrefixListsRequest < Struct.new(
+      nil,
       :dry_run,
       :filters,
       :max_results,
@@ -22153,6 +22950,7 @@ module Aws::EC2
     #   <p>Information about the prefix lists.</p>
     #   @return [Array<Types::ManagedPrefixList>]
     class DescribeManagedPrefixListsResult < Struct.new(
+      nil,
       :next_token,
       :prefix_lists,
       keyword_init: true
@@ -22189,6 +22987,7 @@ module Aws::EC2
     #            <p>Default: If no value is provided, the default is 1000.</p>
     #   @return [Integer]
     class DescribeMovingAddressesRequest < Struct.new(
+      nil,
       :dry_run,
       :public_ips,
       :next_token,
@@ -22206,6 +23005,7 @@ module Aws::EC2
     #   <p>The token to use to retrieve the next page of results. This value is <code>null</code> when there are no more results to return.</p>
     #   @return [String]
     class DescribeMovingAddressesResult < Struct.new(
+      nil,
       :moving_address_statuses,
       :next_token,
       keyword_init: true
@@ -22261,6 +23061,7 @@ module Aws::EC2
     #   <p>The token returned from a previous paginated request. Pagination continues from the end of the items returned by the previous request.</p>
     #   @return [String]
     class DescribeNatGatewaysRequest < Struct.new(
+      nil,
       :dry_run,
       :filter,
       :max_results,
@@ -22278,6 +23079,7 @@ module Aws::EC2
     #   <p>The token to include in another request to get the next page of items. This value is <code>null</code> when there are no more items to return.</p>
     #   @return [String]
     class DescribeNatGatewaysResult < Struct.new(
+      nil,
       :nat_gateways,
       :next_token,
       keyword_init: true
@@ -22386,6 +23188,7 @@ module Aws::EC2
     #            </ul>
     #   @return [Array<Types::Filter>]
     class DescribeNetworkAclsRequest < Struct.new(
+      nil,
       :next_token,
       :max_results,
       :dry_run,
@@ -22403,6 +23206,7 @@ module Aws::EC2
     #   <p>The token to include in another request to get the next page of items. This value is <code>null</code> when there are no more items to return.</p>
     #   @return [String]
     class DescribeNetworkAclsResult < Struct.new(
+      nil,
       :network_acls,
       :next_token,
       keyword_init: true
@@ -22438,6 +23242,7 @@ module Aws::EC2
     #   <p>The token for the next page of results.</p>
     #   @return [String]
     class DescribeNetworkInsightsAccessScopeAnalysesRequest < Struct.new(
+      nil,
       :network_insights_access_scope_analysis_ids,
       :network_insights_access_scope_id,
       :analysis_start_time_begin,
@@ -22458,6 +23263,7 @@ module Aws::EC2
     #   <p>The token to use to retrieve the next page of results. This value is <code>null</code> when there are no more results to return.</p>
     #   @return [String]
     class DescribeNetworkInsightsAccessScopeAnalysesResult < Struct.new(
+      nil,
       :network_insights_access_scope_analyses,
       :next_token,
       keyword_init: true
@@ -22484,6 +23290,7 @@ module Aws::EC2
     #   <p>The token for the next page of results.</p>
     #   @return [String]
     class DescribeNetworkInsightsAccessScopesRequest < Struct.new(
+      nil,
       :network_insights_access_scope_ids,
       :filters,
       :max_results,
@@ -22501,6 +23308,7 @@ module Aws::EC2
     #   <p>The token to use to retrieve the next page of results. This value is <code>null</code> when there are no more results to return.</p>
     #   @return [String]
     class DescribeNetworkInsightsAccessScopesResult < Struct.new(
+      nil,
       :network_insights_access_scopes,
       :next_token,
       keyword_init: true
@@ -22544,6 +23352,7 @@ module Aws::EC2
     #   <p>The token for the next page of results.</p>
     #   @return [String]
     class DescribeNetworkInsightsAnalysesRequest < Struct.new(
+      nil,
       :network_insights_analysis_ids,
       :network_insights_path_id,
       :analysis_start_time,
@@ -22564,6 +23373,7 @@ module Aws::EC2
     #   <p>The token to use to retrieve the next page of results. This value is <code>null</code> when there are no more results to return.</p>
     #   @return [String]
     class DescribeNetworkInsightsAnalysesResult < Struct.new(
+      nil,
       :network_insights_analyses,
       :next_token,
       keyword_init: true
@@ -22625,6 +23435,7 @@ module Aws::EC2
     #   <p>The token for the next page of results.</p>
     #   @return [String]
     class DescribeNetworkInsightsPathsRequest < Struct.new(
+      nil,
       :network_insights_path_ids,
       :filters,
       :max_results,
@@ -22642,6 +23453,7 @@ module Aws::EC2
     #   <p>The token to use to retrieve the next page of results. This value is <code>null</code> when there are no more results to return.</p>
     #   @return [String]
     class DescribeNetworkInsightsPathsResult < Struct.new(
+      nil,
       :network_insights_paths,
       :next_token,
       keyword_init: true
@@ -22663,6 +23475,7 @@ module Aws::EC2
     #   <p>The attribute of the network interface. This parameter is required.</p>
     #   @return [String]
     class DescribeNetworkInterfaceAttributeRequest < Struct.new(
+      nil,
       :dry_run,
       :network_interface_id,
       :attribute,
@@ -22693,6 +23506,7 @@ module Aws::EC2
     #               interface (eth0).</p>
     #   @return [Boolean]
     class DescribeNetworkInterfaceAttributeResult < Struct.new(
+      nil,
       :attachment,
       :description,
       :groups,
@@ -22747,6 +23561,7 @@ module Aws::EC2
     #               specified, up to 50 results are returned by default. For more information, see <a href="https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Query-Requests.html#api-pagination">Pagination</a>.</p>
     #   @return [Integer]
     class DescribeNetworkInterfacePermissionsRequest < Struct.new(
+      nil,
       :network_interface_permission_ids,
       :filters,
       :next_token,
@@ -22765,6 +23580,7 @@ module Aws::EC2
     #                   <code>null</code> when there are no more items to return.</p>
     #   @return [String]
     class DescribeNetworkInterfacePermissionsResult < Struct.new(
+      nil,
       :network_interface_permissions,
       :next_token,
       keyword_init: true
@@ -22994,6 +23810,7 @@ module Aws::EC2
     #            </ul>
     #   @return [Array<Types::Filter>]
     class DescribeNetworkInterfacesRequest < Struct.new(
+      nil,
       :next_token,
       :max_results,
       :dry_run,
@@ -23012,6 +23829,7 @@ module Aws::EC2
     #                   <code>null</code> when there are no more items to return.</p>
     #   @return [String]
     class DescribeNetworkInterfacesResult < Struct.new(
+      nil,
       :network_interfaces,
       :next_token,
       keyword_init: true
@@ -23085,6 +23903,7 @@ module Aws::EC2
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     class DescribeOutpostLagsRequest < Struct.new(
+      nil,
       :outpost_lag_ids,
       :filters,
       :max_results,
@@ -23102,6 +23921,7 @@ module Aws::EC2
     #   <p>The token to use to retrieve the next page of results. This value is <code>null</code> when there are no more results to return.</p>
     #   @return [String]
     class DescribeOutpostLagsResult < Struct.new(
+      nil,
       :outpost_lags,
       :next_token,
       keyword_init: true
@@ -23173,6 +23993,7 @@ module Aws::EC2
     #            </ul>
     #   @return [Array<Types::Filter>]
     class DescribePlacementGroupsRequest < Struct.new(
+      nil,
       :group_ids,
       :dry_run,
       :group_names,
@@ -23186,6 +24007,7 @@ module Aws::EC2
     #   <p>Information about the placement groups.</p>
     #   @return [Array<Types::PlacementGroup>]
     class DescribePlacementGroupsResult < Struct.new(
+      nil,
       :placement_groups,
       keyword_init: true
     )
@@ -23221,6 +24043,7 @@ module Aws::EC2
     #   <p>One or more prefix list IDs.</p>
     #   @return [Array<String>]
     class DescribePrefixListsRequest < Struct.new(
+      nil,
       :dry_run,
       :filters,
       :max_results,
@@ -23238,6 +24061,7 @@ module Aws::EC2
     #   <p>All available prefix lists.</p>
     #   @return [Array<Types::PrefixList>]
     class DescribePrefixListsResult < Struct.new(
+      nil,
       :next_token,
       :prefix_lists,
       keyword_init: true
@@ -23274,6 +24098,7 @@ module Aws::EC2
     #   <p>The token to request the next page of results.</p>
     #   @return [String]
     class DescribePrincipalIdFormatRequest < Struct.new(
+      nil,
       :dry_run,
       :resources,
       :max_results,
@@ -23290,6 +24115,7 @@ module Aws::EC2
     #   <p>The token to use to retrieve the next page of results. This value is null when there are no more results to return.</p>
     #   @return [String]
     class DescribePrincipalIdFormatResult < Struct.new(
+      nil,
       :principals,
       :next_token,
       keyword_init: true
@@ -23322,6 +24148,7 @@ module Aws::EC2
     #            </ul>
     #   @return [Array<Types::Filter>]
     class DescribePublicIpv4PoolsRequest < Struct.new(
+      nil,
       :pool_ids,
       :next_token,
       :max_results,
@@ -23338,6 +24165,7 @@ module Aws::EC2
     #   <p>The token to use to retrieve the next page of results. This value is <code>null</code> when there are no more results to return.</p>
     #   @return [String]
     class DescribePublicIpv4PoolsResult < Struct.new(
+      nil,
       :public_ipv4_pools,
       :next_token,
       keyword_init: true
@@ -23375,6 +24203,7 @@ module Aws::EC2
     #            </ul>
     #   @return [Array<Types::Filter>]
     class DescribeRegionsRequest < Struct.new(
+      nil,
       :region_names,
       :all_regions,
       :dry_run,
@@ -23388,6 +24217,7 @@ module Aws::EC2
     #   <p>Information about the Regions.</p>
     #   @return [Array<Types::Region>]
     class DescribeRegionsResult < Struct.new(
+      nil,
       :regions,
       keyword_init: true
     )
@@ -23421,6 +24251,7 @@ module Aws::EC2
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     class DescribeReplaceRootVolumeTasksRequest < Struct.new(
+      nil,
       :replace_root_volume_task_ids,
       :filters,
       :max_results,
@@ -23439,6 +24270,7 @@ module Aws::EC2
     #     This value is <code>null</code> when there are no more items to return.</p>
     #   @return [String]
     class DescribeReplaceRootVolumeTasksResult < Struct.new(
+      nil,
       :replace_root_volume_tasks,
       :next_token,
       keyword_init: true
@@ -23477,6 +24309,7 @@ module Aws::EC2
     #            </ul>
     #   @return [Array<Types::Filter>]
     class DescribeReservedInstancesListingsRequest < Struct.new(
+      nil,
       :reserved_instances_id,
       :reserved_instances_listing_id,
       :filters,
@@ -23490,6 +24323,7 @@ module Aws::EC2
     #   <p>Information about the Reserved Instance listing.</p>
     #   @return [Array<Types::ReservedInstancesListing>]
     class DescribeReservedInstancesListingsResult < Struct.new(
+      nil,
       :reserved_instances_listings,
       keyword_init: true
     )
@@ -23569,6 +24403,7 @@ module Aws::EC2
     #            </ul>
     #   @return [Array<Types::Filter>]
     class DescribeReservedInstancesModificationsRequest < Struct.new(
+      nil,
       :reserved_instances_modification_ids,
       :next_token,
       :filters,
@@ -23586,6 +24421,7 @@ module Aws::EC2
     #   <p>The Reserved Instance modification information.</p>
     #   @return [Array<Types::ReservedInstancesModification>]
     class DescribeReservedInstancesModificationsResult < Struct.new(
+      nil,
       :next_token,
       :reserved_instances_modifications,
       keyword_init: true
@@ -23725,6 +24561,7 @@ module Aws::EC2
     #            <p>Default: 100</p>
     #   @return [Integer]
     class DescribeReservedInstancesOfferingsRequest < Struct.new(
+      nil,
       :availability_zone,
       :include_marketplace,
       :instance_type,
@@ -23755,6 +24592,7 @@ module Aws::EC2
     #   <p>A list of Reserved Instances offerings.</p>
     #   @return [Array<Types::ReservedInstancesOffering>]
     class DescribeReservedInstancesOfferingsResult < Struct.new(
+      nil,
       :next_token,
       :reserved_instances_offerings,
       keyword_init: true
@@ -23860,6 +24698,7 @@ module Aws::EC2
     #         offering type.</p>
     #   @return [String]
     class DescribeReservedInstancesRequest < Struct.new(
+      nil,
       :offering_class,
       :reserved_instances_ids,
       :dry_run,
@@ -23875,6 +24714,7 @@ module Aws::EC2
     #   <p>A list of Reserved Instances.</p>
     #   @return [Array<Types::ReservedInstances>]
     class DescribeReservedInstancesResult < Struct.new(
+      nil,
       :reserved_instances,
       keyword_init: true
     )
@@ -23899,6 +24739,7 @@ module Aws::EC2
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     class DescribeRouteServerEndpointsRequest < Struct.new(
+      nil,
       :route_server_endpoint_ids,
       :next_token,
       :max_results,
@@ -23916,6 +24757,7 @@ module Aws::EC2
     #   <p>The token to use to retrieve the next page of results. This value is <code>null</code> when there are no more results to return.</p>
     #   @return [String]
     class DescribeRouteServerEndpointsResult < Struct.new(
+      nil,
       :route_server_endpoints,
       :next_token,
       keyword_init: true
@@ -23941,6 +24783,7 @@ module Aws::EC2
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     class DescribeRouteServerPeersRequest < Struct.new(
+      nil,
       :route_server_peer_ids,
       :next_token,
       :max_results,
@@ -23958,6 +24801,7 @@ module Aws::EC2
     #   <p>The token to use to retrieve the next page of results. This value is <code>null</code> when there are no more results to return.</p>
     #   @return [String]
     class DescribeRouteServerPeersResult < Struct.new(
+      nil,
       :route_server_peers,
       :next_token,
       keyword_init: true
@@ -23983,6 +24827,7 @@ module Aws::EC2
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     class DescribeRouteServersRequest < Struct.new(
+      nil,
       :route_server_ids,
       :next_token,
       :max_results,
@@ -24000,6 +24845,7 @@ module Aws::EC2
     #   <p>The token to use to retrieve the next page of results. This value is <code>null</code> when there are no more results to return.</p>
     #   @return [String]
     class DescribeRouteServersResult < Struct.new(
+      nil,
       :route_servers,
       :next_token,
       keyword_init: true
@@ -24133,6 +24979,7 @@ module Aws::EC2
     #            </ul>
     #   @return [Array<Types::Filter>]
     class DescribeRouteTablesRequest < Struct.new(
+      nil,
       :next_token,
       :max_results,
       :dry_run,
@@ -24151,6 +24998,7 @@ module Aws::EC2
     #   <p>The token to include in another request to get the next page of items. This value is <code>null</code> when there are no more items to return.</p>
     #   @return [String]
     class DescribeRouteTablesResult < Struct.new(
+      nil,
       :route_tables,
       :next_token,
       keyword_init: true
@@ -24204,6 +25052,7 @@ module Aws::EC2
     #   <p>The schedule recurrence.</p>
     #   @return [Types::ScheduledInstanceRecurrenceRequest]
     class DescribeScheduledInstanceAvailabilityRequest < Struct.new(
+      nil,
       :dry_run,
       :filters,
       :first_slot_start_time_range,
@@ -24225,6 +25074,7 @@ module Aws::EC2
     #   <p>Information about the available Scheduled Instances.</p>
     #   @return [Array<Types::ScheduledInstanceAvailability>]
     class DescribeScheduledInstanceAvailabilityResult < Struct.new(
+      nil,
       :next_token,
       :scheduled_instance_availability_set,
       keyword_init: true
@@ -24271,6 +25121,7 @@ module Aws::EC2
     #   <p>The time period for the first schedule to start.</p>
     #   @return [Types::SlotStartTimeRangeRequest]
     class DescribeScheduledInstancesRequest < Struct.new(
+      nil,
       :dry_run,
       :filters,
       :max_results,
@@ -24290,6 +25141,7 @@ module Aws::EC2
     #   <p>Information about the Scheduled Instances.</p>
     #   @return [Array<Types::ScheduledInstance>]
     class DescribeScheduledInstancesResult < Struct.new(
+      nil,
       :next_token,
       :scheduled_instance_set,
       keyword_init: true
@@ -24306,6 +25158,7 @@ module Aws::EC2
     #   <p>The IDs of the security groups in your account.</p>
     #   @return [Array<String>]
     class DescribeSecurityGroupReferencesRequest < Struct.new(
+      nil,
       :dry_run,
       :group_id,
       keyword_init: true
@@ -24317,6 +25170,7 @@ module Aws::EC2
     #   <p>Information about the VPCs with the referencing security groups.</p>
     #   @return [Array<Types::SecurityGroupReference>]
     class DescribeSecurityGroupReferencesResult < Struct.new(
+      nil,
       :security_group_reference_set,
       keyword_init: true
     )
@@ -24360,6 +25214,7 @@ module Aws::EC2
     #               returned. For more information, see <a href="https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Query-Requests.html#api-pagination">Pagination</a>.</p>
     #   @return [Integer]
     class DescribeSecurityGroupRulesRequest < Struct.new(
+      nil,
       :filters,
       :security_group_rule_ids,
       :dry_run,
@@ -24378,6 +25233,7 @@ module Aws::EC2
     #               This value is <code>null</code> when there are no more items to return.</p>
     #   @return [String]
     class DescribeSecurityGroupRulesResult < Struct.new(
+      nil,
       :security_group_rules,
       :next_token,
       keyword_init: true
@@ -24436,6 +25292,7 @@ module Aws::EC2
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     class DescribeSecurityGroupVpcAssociationsRequest < Struct.new(
+      nil,
       :filters,
       :next_token,
       :max_results,
@@ -24452,6 +25309,7 @@ module Aws::EC2
     #   <p>The token to include in another request to get the next page of items. This value is <code>null</code> when there are no more items to return.</p>
     #   @return [String]
     class DescribeSecurityGroupVpcAssociationsResult < Struct.new(
+      nil,
       :security_group_vpc_associations,
       :next_token,
       keyword_init: true
@@ -24609,6 +25467,7 @@ module Aws::EC2
     #            </ul>
     #   @return [Array<Types::Filter>]
     class DescribeSecurityGroupsRequest < Struct.new(
+      nil,
       :group_ids,
       :group_names,
       :next_token,
@@ -24627,6 +25486,7 @@ module Aws::EC2
     #   <p>Information about the security groups.</p>
     #   @return [Array<Types::SecurityGroup>]
     class DescribeSecurityGroupsResult < Struct.new(
+      nil,
       :next_token,
       :security_groups,
       keyword_init: true
@@ -24684,6 +25544,7 @@ module Aws::EC2
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     class DescribeServiceLinkVirtualInterfacesRequest < Struct.new(
+      nil,
       :service_link_virtual_interface_ids,
       :filters,
       :max_results,
@@ -24701,6 +25562,7 @@ module Aws::EC2
     #   <p>The token to use to retrieve the next page of results. This value is <code>null</code> when there are no more results to return.</p>
     #   @return [String]
     class DescribeServiceLinkVirtualInterfacesResult < Struct.new(
+      nil,
       :service_link_virtual_interfaces,
       :next_token,
       keyword_init: true
@@ -24720,6 +25582,7 @@ module Aws::EC2
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     class DescribeSnapshotAttributeRequest < Struct.new(
+      nil,
       :attribute,
       :snapshot_id,
       :dry_run,
@@ -24739,6 +25602,7 @@ module Aws::EC2
     #         snapshot.</p>
     #   @return [Array<Types::CreateVolumePermission>]
     class DescribeSnapshotAttributeResult < Struct.new(
+      nil,
       :product_codes,
       :snapshot_id,
       :create_volume_permissions,
@@ -24781,6 +25645,7 @@ module Aws::EC2
     #   	For more information, see <a href="https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Query-Requests.html#api-pagination">Pagination</a>.</p>
     #   @return [Integer]
     class DescribeSnapshotTierStatusRequest < Struct.new(
+      nil,
       :filters,
       :dry_run,
       :next_token,
@@ -24798,6 +25663,7 @@ module Aws::EC2
     #     This value is <code>null</code> when there are no more items to return.</p>
     #   @return [String]
     class DescribeSnapshotTierStatusResult < Struct.new(
+      nil,
       :snapshot_tier_statuses,
       :next_token,
       keyword_init: true
@@ -24901,6 +25767,7 @@ module Aws::EC2
     #            </ul>
     #   @return [Array<Types::Filter>]
     class DescribeSnapshotsRequest < Struct.new(
+      nil,
       :max_results,
       :next_token,
       :owner_ids,
@@ -24921,6 +25788,7 @@ module Aws::EC2
     #   <p>Information about the snapshots.</p>
     #   @return [Array<Types::Snapshot>]
     class DescribeSnapshotsResult < Struct.new(
+      nil,
       :next_token,
       :snapshots,
       keyword_init: true
@@ -24936,6 +25804,7 @@ module Aws::EC2
     #               <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     class DescribeSpotDatafeedSubscriptionRequest < Struct.new(
+      nil,
       :dry_run,
       keyword_init: true
     )
@@ -24947,6 +25816,7 @@ module Aws::EC2
     #   <p>The Spot Instance data feed subscription.</p>
     #   @return [Types::SpotDatafeedSubscription]
     class DescribeSpotDatafeedSubscriptionResult < Struct.new(
+      nil,
       :spot_datafeed_subscription,
       keyword_init: true
     )
@@ -24973,6 +25843,7 @@ module Aws::EC2
     #   	        For more information, see <a href="https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Query-Requests.html#api-pagination">Pagination</a>.</p>
     #   @return [Integer]
     class DescribeSpotFleetInstancesRequest < Struct.new(
+      nil,
       :dry_run,
       :spot_fleet_request_id,
       :next_token,
@@ -24995,6 +25866,7 @@ module Aws::EC2
     #   <p>The ID of the Spot Fleet request.</p>
     #   @return [String]
     class DescribeSpotFleetInstancesResponse < Struct.new(
+      nil,
       :active_instances,
       :next_token,
       :spot_fleet_request_id,
@@ -25030,6 +25902,7 @@ module Aws::EC2
     #   	        For more information, see <a href="https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Query-Requests.html#api-pagination">Pagination</a>.</p>
     #   @return [Integer]
     class DescribeSpotFleetRequestHistoryRequest < Struct.new(
+      nil,
       :dry_run,
       :spot_fleet_request_id,
       :event_type,
@@ -25064,6 +25937,7 @@ module Aws::EC2
     #                   <i>YYYY</i>-<i>MM</i>-<i>DD</i>T<i>HH</i>:<i>MM</i>:<i>SS</i>Z).</p>
     #   @return [Time]
     class DescribeSpotFleetRequestHistoryResponse < Struct.new(
+      nil,
       :history_records,
       :last_evaluated_time,
       :next_token,
@@ -25094,6 +25968,7 @@ module Aws::EC2
     #   	        For more information, see <a href="https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Query-Requests.html#api-pagination">Pagination</a>.</p>
     #   @return [Integer]
     class DescribeSpotFleetRequestsRequest < Struct.new(
+      nil,
       :dry_run,
       :spot_fleet_request_ids,
       :next_token,
@@ -25112,6 +25987,7 @@ module Aws::EC2
     #   <p>Information about the configuration of your Spot Fleet.</p>
     #   @return [Array<Types::SpotFleetRequestConfig>]
     class DescribeSpotFleetRequestsResponse < Struct.new(
+      nil,
       :next_token,
       :spot_fleet_request_configs,
       keyword_init: true
@@ -25339,6 +26215,7 @@ module Aws::EC2
     #            </ul>
     #   @return [Array<Types::Filter>]
     class DescribeSpotInstanceRequestsRequest < Struct.new(
+      nil,
       :next_token,
       :max_results,
       :dry_run,
@@ -25358,6 +26235,7 @@ module Aws::EC2
     #            are no more items to return.</p>
     #   @return [String]
     class DescribeSpotInstanceRequestsResult < Struct.new(
+      nil,
       :spot_instance_requests,
       :next_token,
       keyword_init: true
@@ -25448,6 +26326,7 @@ module Aws::EC2
     #   <p>The token returned from a previous paginated request. Pagination continues from the end of the items returned by the previous request.</p>
     #   @return [String]
     class DescribeSpotPriceHistoryRequest < Struct.new(
+      nil,
       :availability_zone_id,
       :dry_run,
       :start_time,
@@ -25472,6 +26351,7 @@ module Aws::EC2
     #   <p>The historical Spot prices.</p>
     #   @return [Array<Types::SpotPrice>]
     class DescribeSpotPriceHistoryResult < Struct.new(
+      nil,
       :next_token,
       :spot_price_history,
       keyword_init: true
@@ -25496,6 +26376,7 @@ module Aws::EC2
     #   <p>The ID of the VPC.</p>
     #   @return [String]
     class DescribeStaleSecurityGroupsRequest < Struct.new(
+      nil,
       :dry_run,
       :max_results,
       :next_token,
@@ -25512,6 +26393,7 @@ module Aws::EC2
     #   <p>Information about the stale security groups.</p>
     #   @return [Array<Types::StaleSecurityGroup>]
     class DescribeStaleSecurityGroupsResult < Struct.new(
+      nil,
       :next_token,
       :stale_security_group_set,
       keyword_init: true
@@ -25558,6 +26440,7 @@ module Aws::EC2
     #         call.</p>
     #   @return [Integer]
     class DescribeStoreImageTasksRequest < Struct.new(
+      nil,
       :image_ids,
       :dry_run,
       :filters,
@@ -25576,6 +26459,7 @@ module Aws::EC2
     #            are no more items to return.</p>
     #   @return [String]
     class DescribeStoreImageTasksResult < Struct.new(
+      nil,
       :store_image_task_results,
       :next_token,
       keyword_init: true
@@ -25737,6 +26621,7 @@ module Aws::EC2
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     class DescribeSubnetsRequest < Struct.new(
+      nil,
       :filters,
       :subnet_ids,
       :next_token,
@@ -25754,6 +26639,7 @@ module Aws::EC2
     #   <p>Information about the subnets.</p>
     #   @return [Array<Types::Subnet>]
     class DescribeSubnetsResult < Struct.new(
+      nil,
       :next_token,
       :subnets,
       keyword_init: true
@@ -25804,6 +26690,7 @@ module Aws::EC2
     #            Pagination continues from the end of the items returned by the previous request.</p>
     #   @return [String]
     class DescribeTagsRequest < Struct.new(
+      nil,
       :dry_run,
       :filters,
       :max_results,
@@ -25821,6 +26708,7 @@ module Aws::EC2
     #   <p>The tags.</p>
     #   @return [Array<Types::TagDescription>]
     class DescribeTagsResult < Struct.new(
+      nil,
       :next_token,
       :tags,
       keyword_init: true
@@ -25888,6 +26776,7 @@ module Aws::EC2
     #   <p>The token for the next page of results.</p>
     #   @return [String]
     class DescribeTrafficMirrorFilterRulesRequest < Struct.new(
+      nil,
       :traffic_mirror_filter_rule_ids,
       :traffic_mirror_filter_id,
       :dry_run,
@@ -25906,6 +26795,7 @@ module Aws::EC2
     #   <p>The token to use to retrieve the next page of results. The value is <code>null</code> when there are no more results to return.</p>
     #   @return [String]
     class DescribeTrafficMirrorFilterRulesResult < Struct.new(
+      nil,
       :traffic_mirror_filter_rules,
       :next_token,
       keyword_init: true
@@ -25942,6 +26832,7 @@ module Aws::EC2
     #   <p>The token for the next page of results.</p>
     #   @return [String]
     class DescribeTrafficMirrorFiltersRequest < Struct.new(
+      nil,
       :traffic_mirror_filter_ids,
       :dry_run,
       :filters,
@@ -25959,6 +26850,7 @@ module Aws::EC2
     #   <p>The token to use to retrieve the next page of results. The value is <code>null</code> when there are no more results to return.</p>
     #   @return [String]
     class DescribeTrafficMirrorFiltersResult < Struct.new(
+      nil,
       :traffic_mirror_filters,
       :next_token,
       keyword_init: true
@@ -26023,6 +26915,7 @@ module Aws::EC2
     #   <p>The token for the next page of results.</p>
     #   @return [String]
     class DescribeTrafficMirrorSessionsRequest < Struct.new(
+      nil,
       :traffic_mirror_session_ids,
       :dry_run,
       :filters,
@@ -26040,6 +26933,7 @@ module Aws::EC2
     #   <p>The token to use to retrieve the next page of results. The value is <code>null</code> when there are no more results to return.</p>
     #   @return [String]
     class DescribeTrafficMirrorSessionsResult < Struct.new(
+      nil,
       :traffic_mirror_sessions,
       :next_token,
       keyword_init: true
@@ -26088,6 +26982,7 @@ module Aws::EC2
     #   <p>The token for the next page of results.</p>
     #   @return [String]
     class DescribeTrafficMirrorTargetsRequest < Struct.new(
+      nil,
       :traffic_mirror_target_ids,
       :dry_run,
       :filters,
@@ -26105,6 +27000,7 @@ module Aws::EC2
     #   <p>The token to use to retrieve the next page of results. The value is <code>null</code> when there are no more results to return.</p>
     #   @return [String]
     class DescribeTrafficMirrorTargetsResult < Struct.new(
+      nil,
       :traffic_mirror_targets,
       :next_token,
       keyword_init: true
@@ -26172,6 +27068,7 @@ module Aws::EC2
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     class DescribeTransitGatewayAttachmentsRequest < Struct.new(
+      nil,
       :transit_gateway_attachment_ids,
       :filters,
       :max_results,
@@ -26189,6 +27086,7 @@ module Aws::EC2
     #   <p>The token to use to retrieve the next page of results. This value is <code>null</code> when there are no more results to return.</p>
     #   @return [String]
     class DescribeTransitGatewayAttachmentsResult < Struct.new(
+      nil,
       :transit_gateway_attachments,
       :next_token,
       keyword_init: true
@@ -26231,6 +27129,7 @@ module Aws::EC2
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     class DescribeTransitGatewayConnectPeersRequest < Struct.new(
+      nil,
       :transit_gateway_connect_peer_ids,
       :filters,
       :max_results,
@@ -26248,6 +27147,7 @@ module Aws::EC2
     #   <p>The token to use to retrieve the next page of results. This value is <code>null</code> when there are no more results to return.</p>
     #   @return [String]
     class DescribeTransitGatewayConnectPeersResult < Struct.new(
+      nil,
       :transit_gateway_connect_peers,
       :next_token,
       keyword_init: true
@@ -26302,6 +27202,7 @@ module Aws::EC2
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     class DescribeTransitGatewayConnectsRequest < Struct.new(
+      nil,
       :transit_gateway_attachment_ids,
       :filters,
       :max_results,
@@ -26319,6 +27220,7 @@ module Aws::EC2
     #   <p>The token to use to retrieve the next page of results. This value is <code>null</code> when there are no more results to return.</p>
     #   @return [String]
     class DescribeTransitGatewayConnectsResult < Struct.new(
+      nil,
       :transit_gateway_connects,
       :next_token,
       keyword_init: true
@@ -26359,6 +27261,7 @@ module Aws::EC2
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     class DescribeTransitGatewayMulticastDomainsRequest < Struct.new(
+      nil,
       :transit_gateway_multicast_domain_ids,
       :filters,
       :max_results,
@@ -26376,6 +27279,7 @@ module Aws::EC2
     #   <p>The token to use to retrieve the next page of results. This value is <code>null</code> when there are no more results to return.</p>
     #   @return [String]
     class DescribeTransitGatewayMulticastDomainsResult < Struct.new(
+      nil,
       :transit_gateway_multicast_domains,
       :next_token,
       keyword_init: true
@@ -26433,6 +27337,7 @@ module Aws::EC2
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     class DescribeTransitGatewayPeeringAttachmentsRequest < Struct.new(
+      nil,
       :transit_gateway_attachment_ids,
       :filters,
       :max_results,
@@ -26450,6 +27355,7 @@ module Aws::EC2
     #   <p>The token to use to retrieve the next page of results. This value is <code>null</code> when there are no more results to return.</p>
     #   @return [String]
     class DescribeTransitGatewayPeeringAttachmentsResult < Struct.new(
+      nil,
       :transit_gateway_peering_attachments,
       :next_token,
       keyword_init: true
@@ -26476,6 +27382,7 @@ module Aws::EC2
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     class DescribeTransitGatewayPolicyTablesRequest < Struct.new(
+      nil,
       :transit_gateway_policy_table_ids,
       :filters,
       :max_results,
@@ -26493,6 +27400,7 @@ module Aws::EC2
     #   <p>The token for the next page of results.</p>
     #   @return [String]
     class DescribeTransitGatewayPolicyTablesResult < Struct.new(
+      nil,
       :transit_gateway_policy_tables,
       :next_token,
       keyword_init: true
@@ -26519,6 +27427,7 @@ module Aws::EC2
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     class DescribeTransitGatewayRouteTableAnnouncementsRequest < Struct.new(
+      nil,
       :transit_gateway_route_table_announcement_ids,
       :filters,
       :max_results,
@@ -26536,6 +27445,7 @@ module Aws::EC2
     #   <p>The token for the next page of results.</p>
     #   @return [String]
     class DescribeTransitGatewayRouteTableAnnouncementsResult < Struct.new(
+      nil,
       :transit_gateway_route_table_announcements,
       :next_token,
       keyword_init: true
@@ -26586,6 +27496,7 @@ module Aws::EC2
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     class DescribeTransitGatewayRouteTablesRequest < Struct.new(
+      nil,
       :transit_gateway_route_table_ids,
       :filters,
       :max_results,
@@ -26603,6 +27514,7 @@ module Aws::EC2
     #   <p>The token to use to retrieve the next page of results. This value is <code>null</code> when there are no more results to return.</p>
     #   @return [String]
     class DescribeTransitGatewayRouteTablesResult < Struct.new(
+      nil,
       :transit_gateway_route_tables,
       :next_token,
       keyword_init: true
@@ -26647,6 +27559,7 @@ module Aws::EC2
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     class DescribeTransitGatewayVpcAttachmentsRequest < Struct.new(
+      nil,
       :transit_gateway_attachment_ids,
       :filters,
       :max_results,
@@ -26664,6 +27577,7 @@ module Aws::EC2
     #   <p>The token to use to retrieve the next page of results. This value is <code>null</code> when there are no more results to return.</p>
     #   @return [String]
     class DescribeTransitGatewayVpcAttachmentsResult < Struct.new(
+      nil,
       :transit_gateway_vpc_attachments,
       :next_token,
       keyword_init: true
@@ -26745,6 +27659,7 @@ module Aws::EC2
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     class DescribeTransitGatewaysRequest < Struct.new(
+      nil,
       :transit_gateway_ids,
       :filters,
       :max_results,
@@ -26762,6 +27677,7 @@ module Aws::EC2
     #   <p>The token to use to retrieve the next page of results. This value is <code>null</code> when there are no more results to return.</p>
     #   @return [String]
     class DescribeTransitGatewaysResult < Struct.new(
+      nil,
       :transit_gateways,
       :next_token,
       keyword_init: true
@@ -26798,6 +27714,7 @@ module Aws::EC2
     #               To retrieve the remaining results, make another call with the returned <code>nextToken</code> value.</p>
     #   @return [Integer]
     class DescribeTrunkInterfaceAssociationsRequest < Struct.new(
+      nil,
       :association_ids,
       :dry_run,
       :filters,
@@ -26815,6 +27732,7 @@ module Aws::EC2
     #   <p>The token to use to retrieve the next page of results. This value is <code>null</code> when there are no more results to return.</p>
     #   @return [String]
     class DescribeTrunkInterfaceAssociationsResult < Struct.new(
+      nil,
       :interface_associations,
       :next_token,
       keyword_init: true
@@ -26847,6 +27765,7 @@ module Aws::EC2
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     class DescribeVerifiedAccessEndpointsRequest < Struct.new(
+      nil,
       :verified_access_endpoint_ids,
       :verified_access_instance_id,
       :verified_access_group_id,
@@ -26866,6 +27785,7 @@ module Aws::EC2
     #   <p>The token to use to retrieve the next page of results. This value is <code>null</code> when there are no more results to return.</p>
     #   @return [String]
     class DescribeVerifiedAccessEndpointsResult < Struct.new(
+      nil,
       :verified_access_endpoints,
       :next_token,
       keyword_init: true
@@ -26895,6 +27815,7 @@ module Aws::EC2
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     class DescribeVerifiedAccessGroupsRequest < Struct.new(
+      nil,
       :verified_access_group_ids,
       :verified_access_instance_id,
       :max_results,
@@ -26913,6 +27834,7 @@ module Aws::EC2
     #   <p>The token to use to retrieve the next page of results. This value is <code>null</code> when there are no more results to return.</p>
     #   @return [String]
     class DescribeVerifiedAccessGroupsResult < Struct.new(
+      nil,
       :verified_access_groups,
       :next_token,
       keyword_init: true
@@ -26939,6 +27861,7 @@ module Aws::EC2
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     class DescribeVerifiedAccessInstanceLoggingConfigurationsRequest < Struct.new(
+      nil,
       :verified_access_instance_ids,
       :max_results,
       :next_token,
@@ -26956,6 +27879,7 @@ module Aws::EC2
     #   <p>The token to use to retrieve the next page of results. This value is <code>null</code> when there are no more results to return.</p>
     #   @return [String]
     class DescribeVerifiedAccessInstanceLoggingConfigurationsResult < Struct.new(
+      nil,
       :logging_configurations,
       :next_token,
       keyword_init: true
@@ -26982,6 +27906,7 @@ module Aws::EC2
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     class DescribeVerifiedAccessInstancesRequest < Struct.new(
+      nil,
       :verified_access_instance_ids,
       :max_results,
       :next_token,
@@ -26999,6 +27924,7 @@ module Aws::EC2
     #   <p>The token to use to retrieve the next page of results. This value is <code>null</code> when there are no more results to return.</p>
     #   @return [String]
     class DescribeVerifiedAccessInstancesResult < Struct.new(
+      nil,
       :verified_access_instances,
       :next_token,
       keyword_init: true
@@ -27025,6 +27951,7 @@ module Aws::EC2
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     class DescribeVerifiedAccessTrustProvidersRequest < Struct.new(
+      nil,
       :verified_access_trust_provider_ids,
       :max_results,
       :next_token,
@@ -27042,6 +27969,7 @@ module Aws::EC2
     #   <p>The token to use to retrieve the next page of results. This value is <code>null</code> when there are no more results to return.</p>
     #   @return [String]
     class DescribeVerifiedAccessTrustProvidersResult < Struct.new(
+      nil,
       :verified_access_trust_providers,
       :next_token,
       keyword_init: true
@@ -27061,6 +27989,7 @@ module Aws::EC2
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     class DescribeVolumeAttributeRequest < Struct.new(
+      nil,
       :attribute,
       :volume_id,
       :dry_run,
@@ -27079,6 +28008,7 @@ module Aws::EC2
     #   <p>The ID of the volume.</p>
     #   @return [String]
     class DescribeVolumeAttributeResult < Struct.new(
+      nil,
       :auto_enable_io,
       :product_codes,
       :volume_id,
@@ -27170,6 +28100,7 @@ module Aws::EC2
     #            </ul>
     #   @return [Array<Types::Filter>]
     class DescribeVolumeStatusRequest < Struct.new(
+      nil,
       :max_results,
       :next_token,
       :volume_ids,
@@ -27188,6 +28119,7 @@ module Aws::EC2
     #   <p>Information about the status of the volumes.</p>
     #   @return [Array<Types::VolumeStatusItem>]
     class DescribeVolumeStatusResult < Struct.new(
+      nil,
       :next_token,
       :volume_statuses,
       keyword_init: true
@@ -27264,6 +28196,7 @@ module Aws::EC2
     #         request. For more information, see <a href="https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Query-Requests.html#api-pagination">Pagination</a>.</p>
     #   @return [Integer]
     class DescribeVolumesModificationsRequest < Struct.new(
+      nil,
       :dry_run,
       :volume_ids,
       :filters,
@@ -27282,6 +28215,7 @@ module Aws::EC2
     #   <p>Information about the volume modifications.</p>
     #   @return [Array<Types::VolumeModification>]
     class DescribeVolumesModificationsResult < Struct.new(
+      nil,
       :next_token,
       :volumes_modifications,
       keyword_init: true
@@ -27409,6 +28343,7 @@ module Aws::EC2
     #   	For more information, see <a href="https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Query-Requests.html#api-pagination">Pagination</a>.</p>
     #   @return [Integer]
     class DescribeVolumesRequest < Struct.new(
+      nil,
       :volume_ids,
       :dry_run,
       :filters,
@@ -27427,6 +28362,7 @@ module Aws::EC2
     #   <p>Information about the volumes.</p>
     #   @return [Array<Types::Volume>]
     class DescribeVolumesResult < Struct.new(
+      nil,
       :next_token,
       :volumes,
       keyword_init: true
@@ -27446,6 +28382,7 @@ module Aws::EC2
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     class DescribeVpcAttributeRequest < Struct.new(
+      nil,
       :attribute,
       :vpc_id,
       :dry_run,
@@ -27472,6 +28409,7 @@ module Aws::EC2
     #   <p>The ID of the VPC.</p>
     #   @return [String]
     class DescribeVpcAttributeResult < Struct.new(
+      nil,
       :enable_dns_hostnames,
       :enable_dns_support,
       :enable_network_address_usage_metrics,
@@ -27529,6 +28467,7 @@ module Aws::EC2
     #   	For more information, see <a href="https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Query-Requests.html#api-pagination">Pagination</a>.</p>
     #   @return [Integer]
     class DescribeVpcBlockPublicAccessExclusionsRequest < Struct.new(
+      nil,
       :dry_run,
       :filters,
       :exclusion_ids,
@@ -27546,6 +28485,7 @@ module Aws::EC2
     #   <p>The token to include in another request to get the next page of items. This value is <code>null</code> when there are no more items to return.</p>
     #   @return [String]
     class DescribeVpcBlockPublicAccessExclusionsResult < Struct.new(
+      nil,
       :vpc_block_public_access_exclusions,
       :next_token,
       keyword_init: true
@@ -27559,6 +28499,7 @@ module Aws::EC2
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     class DescribeVpcBlockPublicAccessOptionsRequest < Struct.new(
+      nil,
       :dry_run,
       keyword_init: true
     )
@@ -27569,6 +28510,7 @@ module Aws::EC2
     #   <p>Details related to the options.</p>
     #   @return [Types::VpcBlockPublicAccessOptions]
     class DescribeVpcBlockPublicAccessOptionsResult < Struct.new(
+      nil,
       :vpc_block_public_access_options,
       keyword_init: true
     )
@@ -27587,6 +28529,7 @@ module Aws::EC2
     #   <p>The token returned from a previous paginated request. Pagination continues from the end of the items returned by the previous request.</p>
     #   @return [String]
     class DescribeVpcClassicLinkDnsSupportRequest < Struct.new(
+      nil,
       :vpc_ids,
       :max_results,
       :next_token,
@@ -27602,6 +28545,7 @@ module Aws::EC2
     #   <p>Information about the ClassicLink DNS support status of the VPCs.</p>
     #   @return [Array<Types::ClassicLinkDnsSupport>]
     class DescribeVpcClassicLinkDnsSupportResult < Struct.new(
+      nil,
       :next_token,
       :vpcs,
       keyword_init: true
@@ -27637,6 +28581,7 @@ module Aws::EC2
     #            </ul>
     #   @return [Array<Types::Filter>]
     class DescribeVpcClassicLinkRequest < Struct.new(
+      nil,
       :dry_run,
       :vpc_ids,
       :filters,
@@ -27649,6 +28594,7 @@ module Aws::EC2
     #   <p>The ClassicLink status of the VPCs.</p>
     #   @return [Array<Types::VpcClassicLink>]
     class DescribeVpcClassicLinkResult < Struct.new(
+      nil,
       :vpcs,
       keyword_init: true
     )
@@ -27706,6 +28652,7 @@ module Aws::EC2
     #   <p>The pagination token.</p>
     #   @return [String]
     class DescribeVpcEndpointAssociationsRequest < Struct.new(
+      nil,
       :dry_run,
       :vpc_endpoint_ids,
       :filters,
@@ -27723,6 +28670,7 @@ module Aws::EC2
     #   <p>The pagination token.</p>
     #   @return [String]
     class DescribeVpcEndpointAssociationsResult < Struct.new(
+      nil,
       :vpc_endpoint_associations,
       :next_token,
       keyword_init: true
@@ -27779,6 +28727,7 @@ module Aws::EC2
     #   <p>The token to request the next page of results.</p>
     #   @return [String]
     class DescribeVpcEndpointConnectionNotificationsRequest < Struct.new(
+      nil,
       :dry_run,
       :connection_notification_id,
       :filters,
@@ -27797,6 +28746,7 @@ module Aws::EC2
     #               <code>null</code> when there are no more results to return.</p>
     #   @return [String]
     class DescribeVpcEndpointConnectionNotificationsResult < Struct.new(
+      nil,
       :connection_notification_set,
       :next_token,
       keyword_init: true
@@ -27854,6 +28804,7 @@ module Aws::EC2
     #   <p>The token to retrieve the next page of results.</p>
     #   @return [String]
     class DescribeVpcEndpointConnectionsRequest < Struct.new(
+      nil,
       :dry_run,
       :filters,
       :max_results,
@@ -27870,6 +28821,7 @@ module Aws::EC2
     #   <p>The token to use to retrieve the next page of results. This value is <code>null</code> when there are no more results to return.</p>
     #   @return [String]
     class DescribeVpcEndpointConnectionsResult < Struct.new(
+      nil,
       :vpc_endpoint_connections,
       :next_token,
       keyword_init: true
@@ -27927,6 +28879,7 @@ module Aws::EC2
     #   <p>The token to retrieve the next page of results.</p>
     #   @return [String]
     class DescribeVpcEndpointServiceConfigurationsRequest < Struct.new(
+      nil,
       :dry_run,
       :service_ids,
       :filters,
@@ -27944,6 +28897,7 @@ module Aws::EC2
     #   <p>The token to use to retrieve the next page of results. This value is <code>null</code> when there are no more results to return.</p>
     #   @return [String]
     class DescribeVpcEndpointServiceConfigurationsResult < Struct.new(
+      nil,
       :service_configurations,
       :next_token,
       keyword_init: true
@@ -27985,6 +28939,7 @@ module Aws::EC2
     #   <p>The token to retrieve the next page of results.</p>
     #   @return [String]
     class DescribeVpcEndpointServicePermissionsRequest < Struct.new(
+      nil,
       :dry_run,
       :service_id,
       :filters,
@@ -28002,6 +28957,7 @@ module Aws::EC2
     #   <p>The token to use to retrieve the next page of results. This value is <code>null</code> when there are no more results to return.</p>
     #   @return [String]
     class DescribeVpcEndpointServicePermissionsResult < Struct.new(
+      nil,
       :allowed_principals,
       :next_token,
       keyword_init: true
@@ -28063,6 +29019,7 @@ module Aws::EC2
     #   <p>The service Regions.</p>
     #   @return [Array<String>]
     class DescribeVpcEndpointServicesRequest < Struct.new(
+      nil,
       :dry_run,
       :service_names,
       :filters,
@@ -28084,6 +29041,7 @@ module Aws::EC2
     #   <p>The token to use when requesting the next set of items. If there are no additional items to return, the string is empty.</p>
     #   @return [String]
     class DescribeVpcEndpointServicesResult < Struct.new(
+      nil,
       :service_names,
       :service_details,
       :next_token,
@@ -28154,6 +29112,7 @@ module Aws::EC2
     #   <p>The token for the next set of items to return. (You received this token from a prior call.)</p>
     #   @return [String]
     class DescribeVpcEndpointsRequest < Struct.new(
+      nil,
       :dry_run,
       :vpc_endpoint_ids,
       :filters,
@@ -28171,6 +29130,7 @@ module Aws::EC2
     #   <p>The token to use when requesting the next set of items. If there are no additional items to return, the string is empty.</p>
     #   @return [String]
     class DescribeVpcEndpointsResult < Struct.new(
+      nil,
       :vpc_endpoints,
       :next_token,
       keyword_init: true
@@ -28260,6 +29220,7 @@ module Aws::EC2
     #            </ul>
     #   @return [Array<Types::Filter>]
     class DescribeVpcPeeringConnectionsRequest < Struct.new(
+      nil,
       :next_token,
       :max_results,
       :dry_run,
@@ -28277,6 +29238,7 @@ module Aws::EC2
     #   <p>The token to include in another request to get the next page of items. This value is <code>null</code> when there are no more items to return.</p>
     #   @return [String]
     class DescribeVpcPeeringConnectionsResult < Struct.new(
+      nil,
       :vpc_peering_connections,
       :next_token,
       keyword_init: true
@@ -28376,6 +29338,7 @@ module Aws::EC2
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     class DescribeVpcsRequest < Struct.new(
+      nil,
       :filters,
       :vpc_ids,
       :next_token,
@@ -28393,6 +29356,7 @@ module Aws::EC2
     #   <p>Information about the VPCs.</p>
     #   @return [Array<Types::Vpc>]
     class DescribeVpcsResult < Struct.new(
+      nil,
       :next_token,
       :vpcs,
       keyword_init: true
@@ -28477,6 +29441,7 @@ module Aws::EC2
     #                   <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     class DescribeVpnConnectionsRequest < Struct.new(
+      nil,
       :filters,
       :vpn_connection_ids,
       :dry_run,
@@ -28490,6 +29455,7 @@ module Aws::EC2
     #   <p>Information about one or more VPN connections.</p>
     #   @return [Array<Types::VpnConnection>]
     class DescribeVpnConnectionsResult < Struct.new(
+      nil,
       :vpn_connections,
       keyword_init: true
     )
@@ -28557,6 +29523,7 @@ module Aws::EC2
     #                   <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     class DescribeVpnGatewaysRequest < Struct.new(
+      nil,
       :filters,
       :vpn_gateway_ids,
       :dry_run,
@@ -28570,6 +29537,7 @@ module Aws::EC2
     #   <p>Information about one or more virtual private gateways.</p>
     #   @return [Array<Types::VpnGateway>]
     class DescribeVpnGatewaysResult < Struct.new(
+      nil,
       :vpn_gateways,
       keyword_init: true
     )
@@ -28589,6 +29557,7 @@ module Aws::EC2
     #               time for queries. The default is <code>false</code>.</p>
     #   @return [Boolean]
     class DestinationOptionsRequest < Struct.new(
+      nil,
       :file_format,
       :hive_compatible_partitions,
       :per_hour_partition,
@@ -28608,6 +29577,7 @@ module Aws::EC2
     #   <p>Indicates whether to partition the flow log per hour.</p>
     #   @return [Boolean]
     class DestinationOptionsResponse < Struct.new(
+      nil,
       :file_format,
       :hive_compatible_partitions,
       :per_hour_partition,
@@ -28628,6 +29598,7 @@ module Aws::EC2
     #   <p>The ID of the VPC to which the instance is linked.</p>
     #   @return [String]
     class DetachClassicLinkVpcRequest < Struct.new(
+      nil,
       :dry_run,
       :instance_id,
       :vpc_id,
@@ -28640,6 +29611,7 @@ module Aws::EC2
     #   <p>Returns <code>true</code> if the request succeeds; otherwise, it returns an error.</p>
     #   @return [Boolean]
     class DetachClassicLinkVpcResult < Struct.new(
+      nil,
       :return,
       keyword_init: true
     )
@@ -28658,6 +29630,7 @@ module Aws::EC2
     #   <p>The ID of the VPC.</p>
     #   @return [String]
     class DetachInternetGatewayRequest < Struct.new(
+      nil,
       :dry_run,
       :internet_gateway_id,
       :vpc_id,
@@ -28701,6 +29674,7 @@ module Aws::EC2
     #            </note>
     #   @return [Boolean]
     class DetachNetworkInterfaceRequest < Struct.new(
+      nil,
       :dry_run,
       :attachment_id,
       :force,
@@ -28725,6 +29699,7 @@ module Aws::EC2
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     class DetachVerifiedAccessTrustProviderRequest < Struct.new(
+      nil,
       :verified_access_instance_id,
       :verified_access_trust_provider_id,
       :client_token,
@@ -28741,6 +29716,7 @@ module Aws::EC2
     #   <p>Details about the Verified Access instance.</p>
     #   @return [Types::VerifiedAccessInstance]
     class DetachVerifiedAccessTrustProviderResult < Struct.new(
+      nil,
       :verified_access_trust_provider,
       :verified_access_instance,
       keyword_init: true
@@ -28782,6 +29758,7 @@ module Aws::EC2
     #   <p>The time stamp when the attachment initiated.</p>
     #   @return [Time]
     class DetachVolumeOutput < Struct.new(
+      nil,
       :delete_on_termination,
       :associated_resource,
       :instance_owning_service,
@@ -28818,6 +29795,7 @@ module Aws::EC2
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     class DetachVolumeRequest < Struct.new(
+      nil,
       :device,
       :force,
       :instance_id,
@@ -28842,6 +29820,7 @@ module Aws::EC2
     #                   <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     class DetachVpnGatewayRequest < Struct.new(
+      nil,
       :vpc_id,
       :vpn_gateway_id,
       :dry_run,
@@ -28860,6 +29839,7 @@ module Aws::EC2
     #         </p>
     #   @return [String]
     class DeviceOptions < Struct.new(
+      nil,
       :tenant_id,
       :public_signing_key_url,
       keyword_init: true
@@ -28875,6 +29855,7 @@ module Aws::EC2
     #   <p>The values for the DHCP option.</p>
     #   @return [Array<Types::AttributeValue>]
     class DhcpConfiguration < Struct.new(
+      nil,
       :key,
       :values,
       keyword_init: true
@@ -28896,6 +29877,7 @@ module Aws::EC2
     #   <p>The DHCP options in the set.</p>
     #   @return [Array<Types::DhcpConfiguration>]
     class DhcpOptions < Struct.new(
+      nil,
       :owner_id,
       :tags,
       :dhcp_options_id,
@@ -28910,6 +29892,7 @@ module Aws::EC2
     #   <p>The ID of the Active Directory used for authentication.</p>
     #   @return [String]
     class DirectoryServiceAuthentication < Struct.new(
+      nil,
       :directory_id,
       keyword_init: true
     )
@@ -28921,6 +29904,7 @@ module Aws::EC2
     #   <p>The ID of the Active Directory to be used for authentication.</p>
     #   @return [String]
     class DirectoryServiceAuthenticationRequest < Struct.new(
+      nil,
       :directory_id,
       keyword_init: true
     )
@@ -28936,6 +29920,7 @@ module Aws::EC2
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     class DisableAddressTransferRequest < Struct.new(
+      nil,
       :allocation_id,
       :dry_run,
       keyword_init: true
@@ -28947,6 +29932,7 @@ module Aws::EC2
     #   <p>An Elastic IP address transfer.</p>
     #   @return [Types::AddressTransfer]
     class DisableAddressTransferResult < Struct.new(
+      nil,
       :address_transfer,
       keyword_init: true
     )
@@ -28959,6 +29945,7 @@ module Aws::EC2
     #   			<code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     class DisableAllowedImagesSettingsRequest < Struct.new(
+      nil,
       :dry_run,
       keyword_init: true
     )
@@ -28970,6 +29957,7 @@ module Aws::EC2
     #         error.</p>
     #   @return [String]
     class DisableAllowedImagesSettingsResult < Struct.new(
+      nil,
       :allowed_images_settings_state,
       keyword_init: true
     )
@@ -28994,6 +29982,7 @@ module Aws::EC2
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     class DisableAwsNetworkPerformanceMetricSubscriptionRequest < Struct.new(
+      nil,
       :source,
       :destination,
       :metric,
@@ -29008,6 +29997,7 @@ module Aws::EC2
     #   <p>Indicates whether the unsubscribe action was successful.</p>
     #   @return [Boolean]
     class DisableAwsNetworkPerformanceMetricSubscriptionResult < Struct.new(
+      nil,
       :output,
       keyword_init: true
     )
@@ -29020,6 +30010,7 @@ module Aws::EC2
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     class DisableEbsEncryptionByDefaultRequest < Struct.new(
+      nil,
       :dry_run,
       keyword_init: true
     )
@@ -29030,6 +30021,7 @@ module Aws::EC2
     #   <p>The updated status of encryption by default.</p>
     #   @return [Boolean]
     class DisableEbsEncryptionByDefaultResult < Struct.new(
+      nil,
       :ebs_encryption_by_default,
       keyword_init: true
     )
@@ -29050,6 +30042,7 @@ module Aws::EC2
     #   			<code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     class DisableFastLaunchRequest < Struct.new(
+      nil,
       :image_id,
       :force,
       :dry_run,
@@ -29090,6 +30083,7 @@ module Aws::EC2
     #   <p>The time that the state changed for Windows fast launch for the Windows AMI.</p>
     #   @return [Time]
     class DisableFastLaunchResult < Struct.new(
+      nil,
       :image_id,
       :resource_type,
       :snapshot_configuration,
@@ -29112,6 +30106,7 @@ module Aws::EC2
     #   <p>The errors.</p>
     #   @return [Array<Types::DisableFastSnapshotRestoreStateErrorItem>]
     class DisableFastSnapshotRestoreErrorItem < Struct.new(
+      nil,
       :snapshot_id,
       :fast_snapshot_restore_state_errors,
       keyword_init: true
@@ -29127,6 +30122,7 @@ module Aws::EC2
     #   <p>The error message.</p>
     #   @return [String]
     class DisableFastSnapshotRestoreStateError < Struct.new(
+      nil,
       :code,
       :message,
       keyword_init: true
@@ -29142,6 +30138,7 @@ module Aws::EC2
     #   <p>The error.</p>
     #   @return [Types::DisableFastSnapshotRestoreStateError]
     class DisableFastSnapshotRestoreStateErrorItem < Struct.new(
+      nil,
       :availability_zone,
       :error,
       keyword_init: true
@@ -29196,6 +30193,7 @@ module Aws::EC2
     #   <p>The time at which fast snapshot restores entered the <code>disabled</code> state.</p>
     #   @return [Time]
     class DisableFastSnapshotRestoreSuccessItem < Struct.new(
+      nil,
       :snapshot_id,
       :availability_zone,
       :state,
@@ -29224,6 +30222,7 @@ module Aws::EC2
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     class DisableFastSnapshotRestoresRequest < Struct.new(
+      nil,
       :availability_zones,
       :source_snapshot_ids,
       :dry_run,
@@ -29239,6 +30238,7 @@ module Aws::EC2
     #   <p>Information about the snapshots for which fast snapshot restores could not be disabled.</p>
     #   @return [Array<Types::DisableFastSnapshotRestoreErrorItem>]
     class DisableFastSnapshotRestoresResult < Struct.new(
+      nil,
       :successful,
       :unsuccessful,
       keyword_init: true
@@ -29252,6 +30252,7 @@ module Aws::EC2
     #   			<code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     class DisableImageBlockPublicAccessRequest < Struct.new(
+      nil,
       :dry_run,
       keyword_init: true
     )
@@ -29263,6 +30264,7 @@ module Aws::EC2
     #         error.</p>
     #   @return [String]
     class DisableImageBlockPublicAccessResult < Struct.new(
+      nil,
       :image_block_public_access_state,
       keyword_init: true
     )
@@ -29278,6 +30280,7 @@ module Aws::EC2
     #   			<code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     class DisableImageDeprecationRequest < Struct.new(
+      nil,
       :image_id,
       :dry_run,
       keyword_init: true
@@ -29289,6 +30292,7 @@ module Aws::EC2
     #   <p>Returns <code>true</code> if the request succeeds; otherwise, it returns an error.</p>
     #   @return [Boolean]
     class DisableImageDeprecationResult < Struct.new(
+      nil,
       :return,
       keyword_init: true
     )
@@ -29304,6 +30308,7 @@ module Aws::EC2
     #   			<code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     class DisableImageDeregistrationProtectionRequest < Struct.new(
+      nil,
       :image_id,
       :dry_run,
       keyword_init: true
@@ -29315,6 +30320,7 @@ module Aws::EC2
     #   <p>Returns <code>true</code> if the request succeeds; otherwise, it returns an error.</p>
     #   @return [String]
     class DisableImageDeregistrationProtectionResult < Struct.new(
+      nil,
       :return,
       keyword_init: true
     )
@@ -29330,6 +30336,7 @@ module Aws::EC2
     #   			<code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     class DisableImageRequest < Struct.new(
+      nil,
       :image_id,
       :dry_run,
       keyword_init: true
@@ -29341,6 +30348,7 @@ module Aws::EC2
     #   <p>Returns <code>true</code> if the request succeeds; otherwise, it returns an error.</p>
     #   @return [Boolean]
     class DisableImageResult < Struct.new(
+      nil,
       :return,
       keyword_init: true
     )
@@ -29356,6 +30364,7 @@ module Aws::EC2
     #   <p>The Organizations member account ID that you want to disable as IPAM account.</p>
     #   @return [String]
     class DisableIpamOrganizationAdminAccountRequest < Struct.new(
+      nil,
       :dry_run,
       :delegated_admin_account_id,
       keyword_init: true
@@ -29367,6 +30376,7 @@ module Aws::EC2
     #   <p>The result of disabling the IPAM account.</p>
     #   @return [Boolean]
     class DisableIpamOrganizationAdminAccountResult < Struct.new(
+      nil,
       :success,
       keyword_init: true
     )
@@ -29385,6 +30395,7 @@ module Aws::EC2
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     class DisableRouteServerPropagationRequest < Struct.new(
+      nil,
       :route_server_id,
       :route_table_id,
       :dry_run,
@@ -29397,6 +30408,7 @@ module Aws::EC2
     #   <p>Information about the disabled route server propagation.</p>
     #   @return [Types::RouteServerPropagation]
     class DisableRouteServerPropagationResult < Struct.new(
+      nil,
       :route_server_propagation,
       keyword_init: true
     )
@@ -29407,6 +30419,7 @@ module Aws::EC2
     #   <p>Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     class DisableSerialConsoleAccessRequest < Struct.new(
+      nil,
       :dry_run,
       keyword_init: true
     )
@@ -29419,6 +30432,7 @@ module Aws::EC2
     #   			is disabled for your account.</p>
     #   @return [Boolean]
     class DisableSerialConsoleAccessResult < Struct.new(
+      nil,
       :serial_console_access_enabled,
       keyword_init: true
     )
@@ -29431,6 +30445,7 @@ module Aws::EC2
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     class DisableSnapshotBlockPublicAccessRequest < Struct.new(
+      nil,
       :dry_run,
       keyword_init: true
     )
@@ -29441,6 +30456,7 @@ module Aws::EC2
     #   <p>Returns <code>unblocked</code> if the request succeeds.</p>
     #   @return [String]
     class DisableSnapshotBlockPublicAccessResult < Struct.new(
+      nil,
       :state,
       keyword_init: true
     )
@@ -29462,6 +30478,7 @@ module Aws::EC2
     #   <p>The ID of the route table announcement.</p>
     #   @return [String]
     class DisableTransitGatewayRouteTablePropagationRequest < Struct.new(
+      nil,
       :transit_gateway_route_table_id,
       :transit_gateway_attachment_id,
       :dry_run,
@@ -29475,6 +30492,7 @@ module Aws::EC2
     #   <p>Information about route propagation.</p>
     #   @return [Types::TransitGatewayPropagation]
     class DisableTransitGatewayRouteTablePropagationResult < Struct.new(
+      nil,
       :propagation,
       keyword_init: true
     )
@@ -29495,6 +30513,7 @@ module Aws::EC2
     #                   <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     class DisableVgwRoutePropagationRequest < Struct.new(
+      nil,
       :gateway_id,
       :route_table_id,
       :dry_run,
@@ -29507,6 +30526,7 @@ module Aws::EC2
     #   <p>The ID of the VPC.</p>
     #   @return [String]
     class DisableVpcClassicLinkDnsSupportRequest < Struct.new(
+      nil,
       :vpc_id,
       keyword_init: true
     )
@@ -29517,6 +30537,7 @@ module Aws::EC2
     #   <p>Returns <code>true</code> if the request succeeds; otherwise, it returns an error.</p>
     #   @return [Boolean]
     class DisableVpcClassicLinkDnsSupportResult < Struct.new(
+      nil,
       :return,
       keyword_init: true
     )
@@ -29532,6 +30553,7 @@ module Aws::EC2
     #   <p>The ID of the VPC.</p>
     #   @return [String]
     class DisableVpcClassicLinkRequest < Struct.new(
+      nil,
       :dry_run,
       :vpc_id,
       keyword_init: true
@@ -29543,6 +30565,7 @@ module Aws::EC2
     #   <p>Returns <code>true</code> if the request succeeds; otherwise, it returns an error.</p>
     #   @return [Boolean]
     class DisableVpcClassicLinkResult < Struct.new(
+      nil,
       :return,
       keyword_init: true
     )
@@ -29561,6 +30584,7 @@ module Aws::EC2
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     class DisassociateAddressRequest < Struct.new(
+      nil,
       :association_id,
       :public_ip,
       :dry_run,
@@ -29579,6 +30603,7 @@ module Aws::EC2
     #   <p>The ID of the consumer account to which the request was sent.</p>
     #   @return [String]
     class DisassociateCapacityReservationBillingOwnerRequest < Struct.new(
+      nil,
       :dry_run,
       :capacity_reservation_id,
       :unused_reservation_billing_owner_id,
@@ -29591,6 +30616,7 @@ module Aws::EC2
     #   <p>Returns <code>true</code> if the request succeeds; otherwise, it returns an error.</p>
     #   @return [Boolean]
     class DisassociateCapacityReservationBillingOwnerResult < Struct.new(
+      nil,
       :return,
       keyword_init: true
     )
@@ -29607,6 +30633,7 @@ module Aws::EC2
     #   <p>Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     class DisassociateClientVpnTargetNetworkRequest < Struct.new(
+      nil,
       :client_vpn_endpoint_id,
       :association_id,
       :dry_run,
@@ -29622,6 +30649,7 @@ module Aws::EC2
     #   <p>The current state of the target network association.</p>
     #   @return [Types::AssociationStatus]
     class DisassociateClientVpnTargetNetworkResult < Struct.new(
+      nil,
       :association_id,
       :status,
       keyword_init: true
@@ -29639,6 +30667,7 @@ module Aws::EC2
     #   <p>Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     class DisassociateEnclaveCertificateIamRoleRequest < Struct.new(
+      nil,
       :certificate_arn,
       :role_arn,
       :dry_run,
@@ -29651,6 +30680,7 @@ module Aws::EC2
     #   <p>Returns <code>true</code> if the request succeeds; otherwise, it returns an error.</p>
     #   @return [Boolean]
     class DisassociateEnclaveCertificateIamRoleResult < Struct.new(
+      nil,
       :return,
       keyword_init: true
     )
@@ -29661,6 +30691,7 @@ module Aws::EC2
     #   <p>The ID of the IAM instance profile association.</p>
     #   @return [String]
     class DisassociateIamInstanceProfileRequest < Struct.new(
+      nil,
       :association_id,
       keyword_init: true
     )
@@ -29671,6 +30702,7 @@ module Aws::EC2
     #   <p>Information about the IAM instance profile association.</p>
     #   @return [Types::IamInstanceProfileAssociation]
     class DisassociateIamInstanceProfileResult < Struct.new(
+      nil,
       :iam_instance_profile_association,
       keyword_init: true
     )
@@ -29689,6 +30721,7 @@ module Aws::EC2
     #   <p>One or more targets to disassociate from the specified event window.</p>
     #   @return [Types::InstanceEventWindowDisassociationRequest]
     class DisassociateInstanceEventWindowRequest < Struct.new(
+      nil,
       :dry_run,
       :instance_event_window_id,
       :association_target,
@@ -29701,6 +30734,7 @@ module Aws::EC2
     #   <p>Information about the event window.</p>
     #   @return [Types::InstanceEventWindow]
     class DisassociateInstanceEventWindowResult < Struct.new(
+      nil,
       :instance_event_window,
       keyword_init: true
     )
@@ -29719,6 +30753,7 @@ module Aws::EC2
     #   <p>A BYOIP CIDR.</p>
     #   @return [String]
     class DisassociateIpamByoasnRequest < Struct.new(
+      nil,
       :dry_run,
       :asn,
       :cidr,
@@ -29731,6 +30766,7 @@ module Aws::EC2
     #   <p>An ASN and BYOIP CIDR association.</p>
     #   @return [Types::AsnAssociation]
     class DisassociateIpamByoasnResult < Struct.new(
+      nil,
       :asn_association,
       keyword_init: true
     )
@@ -29746,6 +30782,7 @@ module Aws::EC2
     #   <p>A resource discovery association ID.</p>
     #   @return [String]
     class DisassociateIpamResourceDiscoveryRequest < Struct.new(
+      nil,
       :dry_run,
       :ipam_resource_discovery_association_id,
       keyword_init: true
@@ -29757,6 +30794,7 @@ module Aws::EC2
     #   <p>A resource discovery association.</p>
     #   @return [Types::IpamResourceDiscoveryAssociation]
     class DisassociateIpamResourceDiscoveryResult < Struct.new(
+      nil,
       :ipam_resource_discovery_association,
       keyword_init: true
     )
@@ -29778,6 +30816,7 @@ module Aws::EC2
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     class DisassociateNatGatewayAddressRequest < Struct.new(
+      nil,
       :nat_gateway_id,
       :association_ids,
       :max_drain_duration_seconds,
@@ -29794,6 +30833,7 @@ module Aws::EC2
     #   <p>Information about the NAT gateway IP addresses.</p>
     #   @return [Array<Types::NatGatewayAddress>]
     class DisassociateNatGatewayAddressResult < Struct.new(
+      nil,
       :nat_gateway_id,
       :nat_gateway_addresses,
       keyword_init: true
@@ -29813,6 +30853,7 @@ module Aws::EC2
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     class DisassociateRouteServerRequest < Struct.new(
+      nil,
       :route_server_id,
       :vpc_id,
       :dry_run,
@@ -29825,6 +30866,7 @@ module Aws::EC2
     #   <p>Information about the disassociated route server.</p>
     #   @return [Types::RouteServerAssociation]
     class DisassociateRouteServerResult < Struct.new(
+      nil,
       :route_server_association,
       keyword_init: true
     )
@@ -29840,6 +30882,7 @@ module Aws::EC2
     #   <p>The association ID representing the current association between the route table and subnet or gateway.</p>
     #   @return [String]
     class DisassociateRouteTableRequest < Struct.new(
+      nil,
       :dry_run,
       :association_id,
       keyword_init: true
@@ -29859,6 +30902,7 @@ module Aws::EC2
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     class DisassociateSecurityGroupVpcRequest < Struct.new(
+      nil,
       :group_id,
       :vpc_id,
       :dry_run,
@@ -29871,6 +30915,7 @@ module Aws::EC2
     #   <p>The state of the disassociation.</p>
     #   @return [String]
     class DisassociateSecurityGroupVpcResult < Struct.new(
+      nil,
       :state,
       keyword_init: true
     )
@@ -29881,6 +30926,7 @@ module Aws::EC2
     #   <p>The association ID for the CIDR block.</p>
     #   @return [String]
     class DisassociateSubnetCidrBlockRequest < Struct.new(
+      nil,
       :association_id,
       keyword_init: true
     )
@@ -29894,6 +30940,7 @@ module Aws::EC2
     #   <p>The ID of the subnet.</p>
     #   @return [String]
     class DisassociateSubnetCidrBlockResult < Struct.new(
+      nil,
       :ipv6_cidr_block_association,
       :subnet_id,
       keyword_init: true
@@ -29916,6 +30963,7 @@ module Aws::EC2
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     class DisassociateTransitGatewayMulticastDomainRequest < Struct.new(
+      nil,
       :transit_gateway_multicast_domain_id,
       :transit_gateway_attachment_id,
       :subnet_ids,
@@ -29929,6 +30977,7 @@ module Aws::EC2
     #   <p>Information about the association.</p>
     #   @return [Types::TransitGatewayMulticastDomainAssociations]
     class DisassociateTransitGatewayMulticastDomainResult < Struct.new(
+      nil,
       :associations,
       keyword_init: true
     )
@@ -29947,6 +30996,7 @@ module Aws::EC2
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     class DisassociateTransitGatewayPolicyTableRequest < Struct.new(
+      nil,
       :transit_gateway_policy_table_id,
       :transit_gateway_attachment_id,
       :dry_run,
@@ -29959,6 +31009,7 @@ module Aws::EC2
     #   <p>Returns details about the transit gateway policy table disassociation.</p>
     #   @return [Types::TransitGatewayPolicyTableAssociation]
     class DisassociateTransitGatewayPolicyTableResult < Struct.new(
+      nil,
       :association,
       keyword_init: true
     )
@@ -29977,6 +31028,7 @@ module Aws::EC2
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     class DisassociateTransitGatewayRouteTableRequest < Struct.new(
+      nil,
       :transit_gateway_route_table_id,
       :transit_gateway_attachment_id,
       :dry_run,
@@ -29989,6 +31041,7 @@ module Aws::EC2
     #   <p>Information about the association.</p>
     #   @return [Types::TransitGatewayAssociation]
     class DisassociateTransitGatewayRouteTableResult < Struct.new(
+      nil,
       :association,
       keyword_init: true
     )
@@ -30009,6 +31062,7 @@ module Aws::EC2
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     class DisassociateTrunkInterfaceRequest < Struct.new(
+      nil,
       :association_id,
       :client_token,
       :dry_run,
@@ -30026,6 +31080,7 @@ module Aws::EC2
     #                   idempotency</a>.</p>
     #   @return [String]
     class DisassociateTrunkInterfaceResult < Struct.new(
+      nil,
       :return,
       :client_token,
       keyword_init: true
@@ -30037,6 +31092,7 @@ module Aws::EC2
     #   <p>The association ID for the CIDR block.</p>
     #   @return [String]
     class DisassociateVpcCidrBlockRequest < Struct.new(
+      nil,
       :association_id,
       keyword_init: true
     )
@@ -30053,6 +31109,7 @@ module Aws::EC2
     #   <p>The ID of the VPC.</p>
     #   @return [String]
     class DisassociateVpcCidrBlockResult < Struct.new(
+      nil,
       :ipv6_cidr_block_association,
       :cidr_block_association,
       :vpc_id,
@@ -30072,6 +31129,7 @@ module Aws::EC2
     #   <p>Information about the volume.</p>
     #   @return [Types::VolumeDetail]
     class DiskImage < Struct.new(
+      nil,
       :description,
       :image,
       :volume,
@@ -30097,6 +31155,7 @@ module Aws::EC2
     #   <p>The size of the disk image, in GiB.</p>
     #   @return [Integer]
     class DiskImageDescription < Struct.new(
+      nil,
       :checksum,
       :format,
       :import_manifest_url,
@@ -30121,6 +31180,7 @@ module Aws::EC2
     #            <p>For information about the import manifest referenced by this API action, see <a href="https://docs.aws.amazon.com/AWSEC2/latest/APIReference/manifest.html">VM Import Manifest</a>.</p>
     #   @return [String]
     class DiskImageDetail < Struct.new(
+      nil,
       :format,
       :bytes,
       :import_manifest_url,
@@ -30137,6 +31197,7 @@ module Aws::EC2
     #   <p>The size of the volume, in GiB.</p>
     #   @return [Integer]
     class DiskImageVolumeDescription < Struct.new(
+      nil,
       :id,
       :size,
       keyword_init: true
@@ -30155,6 +31216,7 @@ module Aws::EC2
     #   <p>The type of disk.</p>
     #   @return [String]
     class DiskInfo < Struct.new(
+      nil,
       :size_in_gb,
       :count,
       :type,
@@ -30171,6 +31233,7 @@ module Aws::EC2
     #   <p>The ID of the private hosted zone.</p>
     #   @return [String]
     class DnsEntry < Struct.new(
+      nil,
       :dns_name,
       :hosted_zone_id,
       keyword_init: true
@@ -30186,6 +31249,7 @@ module Aws::EC2
     #   <p>Indicates whether to enable private DNS only for inbound endpoints.</p>
     #   @return [Boolean]
     class DnsOptions < Struct.new(
+      nil,
       :dns_record_ip_type,
       :private_dns_only_for_inbound_resolver_endpoint,
       keyword_init: true
@@ -30204,6 +31268,7 @@ module Aws::EC2
     #             from on-premises to the interface endpoint.</p>
     #   @return [Boolean]
     class DnsOptionsSpecification < Struct.new(
+      nil,
       :dns_record_ip_type,
       :private_dns_only_for_inbound_resolver_endpoint,
       keyword_init: true
@@ -30222,6 +31287,7 @@ module Aws::EC2
     #   			servers.</p>
     #   @return [Boolean]
     class DnsServersOptionsModifyStructure < Struct.new(
+      nil,
       :custom_dns_servers,
       :enabled,
       keyword_init: true
@@ -30410,6 +31476,7 @@ module Aws::EC2
     #               <a href="https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_RunInstances.html">RunInstances</a>.</p>
     #   @return [String]
     class EbsBlockDevice < Struct.new(
+      nil,
       :delete_on_termination,
       :iops,
       :snapshot_id,
@@ -30458,6 +31525,7 @@ module Aws::EC2
     #            <i>Amazon EBS User Guide</i>.</p>
     #   @return [String]
     class EbsBlockDeviceResponse < Struct.new(
+      nil,
       :encrypted,
       :delete_on_termination,
       :iops,
@@ -30496,6 +31564,7 @@ module Aws::EC2
     #       Amazon EC2 instances</a> in the <i>Amazon EC2 User Guide</i>.</p>
     #   @return [String]
     class EbsInfo < Struct.new(
+      nil,
       :ebs_optimized_support,
       :encryption_support,
       :ebs_optimized_info,
@@ -30533,6 +31602,7 @@ module Aws::EC2
     #   <p>The service provider that manages the EBS volume.</p>
     #   @return [Types::OperatorResponse]
     class EbsInstanceBlockDevice < Struct.new(
+      nil,
       :attach_time,
       :delete_on_termination,
       :status,
@@ -30554,6 +31624,7 @@ module Aws::EC2
     #   <p>Indicates whether the volume is deleted on instance termination.</p>
     #   @return [Boolean]
     class EbsInstanceBlockDeviceSpecification < Struct.new(
+      nil,
       :volume_id,
       :delete_on_termination,
       keyword_init: true
@@ -30583,6 +31654,7 @@ module Aws::EC2
     #      type.</p>
     #   @return [Integer]
     class EbsOptimizedInfo < Struct.new(
+      nil,
       :baseline_bandwidth_in_mbps,
       :baseline_throughput_in_m_bps,
       :baseline_iops,
@@ -30605,6 +31677,7 @@ module Aws::EC2
     #   <p>The result of the attached EBS status check.</p>
     #   @return [String]
     class EbsStatusDetails < Struct.new(
+      nil,
       :impaired_since,
       :name,
       :status,
@@ -30621,6 +31694,7 @@ module Aws::EC2
     #   <p>The current status.</p>
     #   @return [String]
     class EbsStatusSummary < Struct.new(
+      nil,
       :details,
       :status,
       keyword_init: true
@@ -30695,6 +31769,7 @@ module Aws::EC2
     #   <p>The public DNS names of the endpoint.</p>
     #   @return [Types::InstanceConnectEndpointPublicDnsNames]
     class Ec2InstanceConnectEndpoint < Struct.new(
+      nil,
       :owner_id,
       :instance_connect_endpoint_id,
       :instance_connect_endpoint_arn,
@@ -30722,6 +31797,7 @@ module Aws::EC2
     #   <p>The maximum number of Elastic Fabric Adapters for the instance type.</p>
     #   @return [Integer]
     class EfaInfo < Struct.new(
+      nil,
       :maximum_efa_interfaces,
       keyword_init: true
     )
@@ -30739,6 +31815,7 @@ module Aws::EC2
     #   <p>The tags assigned to the egress-only internet gateway.</p>
     #   @return [Array<Types::Tag>]
     class EgressOnlyInternetGateway < Struct.new(
+      nil,
       :attachments,
       :egress_only_internet_gateway_id,
       :tags,
@@ -30765,6 +31842,7 @@ module Aws::EC2
     #   <p>The time the Elastic Graphics accelerator was associated with the instance.</p>
     #   @return [String]
     class ElasticGpuAssociation < Struct.new(
+      nil,
       :elastic_gpu_id,
       :elastic_gpu_association_id,
       :elastic_gpu_association_state,
@@ -30782,6 +31860,7 @@ module Aws::EC2
     #   <p>The health status.</p>
     #   @return [String]
     class ElasticGpuHealth < Struct.new(
+      nil,
       :status,
       keyword_init: true
     )
@@ -30796,6 +31875,7 @@ module Aws::EC2
     #   <p>The type of Elastic Graphics accelerator.</p>
     #   @return [String]
     class ElasticGpuSpecification < Struct.new(
+      nil,
       :type,
       keyword_init: true
     )
@@ -30813,6 +31893,7 @@ module Aws::EC2
     #            </note>
     #   @return [String]
     class ElasticGpuSpecificationResponse < Struct.new(
+      nil,
       :type,
       keyword_init: true
     )
@@ -30845,6 +31926,7 @@ module Aws::EC2
     #   <p>The tags assigned to the Elastic Graphics accelerator.</p>
     #   @return [Array<Types::Tag>]
     class ElasticGpus < Struct.new(
+      nil,
       :elastic_gpu_id,
       :availability_zone,
       :elastic_gpu_type,
@@ -30875,6 +31957,7 @@ module Aws::EC2
     #            <p>Default: 1</p>
     #   @return [Integer]
     class ElasticInferenceAccelerator < Struct.new(
+      nil,
       :type,
       :count,
       keyword_init: true
@@ -30909,6 +31992,7 @@ module Aws::EC2
     #           </p>
     #   @return [Time]
     class ElasticInferenceAcceleratorAssociation < Struct.new(
+      nil,
       :elastic_inference_accelerator_arn,
       :elastic_inference_accelerator_association_id,
       :elastic_inference_accelerator_association_state,
@@ -30933,6 +32017,7 @@ module Aws::EC2
     #   <p>Configures ENA Express for UDP network traffic.</p>
     #   @return [Types::EnaSrdUdpSpecification]
     class EnaSrdSpecification < Struct.new(
+      nil,
       :ena_srd_enabled,
       :ena_srd_udp_specification,
       keyword_init: true
@@ -30951,6 +32036,7 @@ module Aws::EC2
     #               attached to the instance.</p>
     #   @return [Types::EnaSrdUdpSpecificationRequest]
     class EnaSrdSpecificationRequest < Struct.new(
+      nil,
       :ena_srd_enabled,
       :ena_srd_udp_specification,
       keyword_init: true
@@ -30968,6 +32054,7 @@ module Aws::EC2
     #   			you must first enable ENA Express.</p>
     #   @return [Boolean]
     class EnaSrdUdpSpecification < Struct.new(
+      nil,
       :ena_srd_udp_enabled,
       keyword_init: true
     )
@@ -30980,6 +32067,7 @@ module Aws::EC2
     #               traffic can use ENA Express when you launch an instance, you must also set <b>EnaSrdEnabled</b> in the <b>EnaSrdSpecificationRequest</b> to <code>true</code>.</p>
     #   @return [Boolean]
     class EnaSrdUdpSpecificationRequest < Struct.new(
+      nil,
       :ena_srd_udp_enabled,
       keyword_init: true
     )
@@ -30998,6 +32086,7 @@ module Aws::EC2
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     class EnableAddressTransferRequest < Struct.new(
+      nil,
       :allocation_id,
       :transfer_account_id,
       :dry_run,
@@ -31010,6 +32099,7 @@ module Aws::EC2
     #   <p>An Elastic IP address transfer.</p>
     #   @return [Types::AddressTransfer]
     class EnableAddressTransferResult < Struct.new(
+      nil,
       :address_transfer,
       keyword_init: true
     )
@@ -31027,6 +32117,7 @@ module Aws::EC2
     #   			<code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     class EnableAllowedImagesSettingsRequest < Struct.new(
+      nil,
       :allowed_images_settings_state,
       :dry_run,
       keyword_init: true
@@ -31039,6 +32130,7 @@ module Aws::EC2
     #         otherwise, it returns an error.</p>
     #   @return [String]
     class EnableAllowedImagesSettingsResult < Struct.new(
+      nil,
       :allowed_images_settings_state,
       keyword_init: true
     )
@@ -31063,6 +32155,7 @@ module Aws::EC2
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     class EnableAwsNetworkPerformanceMetricSubscriptionRequest < Struct.new(
+      nil,
       :source,
       :destination,
       :metric,
@@ -31077,6 +32170,7 @@ module Aws::EC2
     #   <p>Indicates whether the subscribe action was successful.</p>
     #   @return [Boolean]
     class EnableAwsNetworkPerformanceMetricSubscriptionResult < Struct.new(
+      nil,
       :output,
       keyword_init: true
     )
@@ -31089,6 +32183,7 @@ module Aws::EC2
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     class EnableEbsEncryptionByDefaultRequest < Struct.new(
+      nil,
       :dry_run,
       keyword_init: true
     )
@@ -31099,6 +32194,7 @@ module Aws::EC2
     #   <p>The updated status of encryption by default.</p>
     #   @return [Boolean]
     class EnableEbsEncryptionByDefaultResult < Struct.new(
+      nil,
       :ebs_encryption_by_default,
       keyword_init: true
     )
@@ -31133,6 +32229,7 @@ module Aws::EC2
     #   			<code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     class EnableFastLaunchRequest < Struct.new(
+      nil,
       :image_id,
       :resource_type,
       :snapshot_configuration,
@@ -31177,6 +32274,7 @@ module Aws::EC2
     #   <p>The time that the state changed for Windows fast launch for the AMI.</p>
     #   @return [Time]
     class EnableFastLaunchResult < Struct.new(
+      nil,
       :image_id,
       :resource_type,
       :snapshot_configuration,
@@ -31199,6 +32297,7 @@ module Aws::EC2
     #   <p>The errors.</p>
     #   @return [Array<Types::EnableFastSnapshotRestoreStateErrorItem>]
     class EnableFastSnapshotRestoreErrorItem < Struct.new(
+      nil,
       :snapshot_id,
       :fast_snapshot_restore_state_errors,
       keyword_init: true
@@ -31214,6 +32313,7 @@ module Aws::EC2
     #   <p>The error message.</p>
     #   @return [String]
     class EnableFastSnapshotRestoreStateError < Struct.new(
+      nil,
       :code,
       :message,
       keyword_init: true
@@ -31229,6 +32329,7 @@ module Aws::EC2
     #   <p>The error.</p>
     #   @return [Types::EnableFastSnapshotRestoreStateError]
     class EnableFastSnapshotRestoreStateErrorItem < Struct.new(
+      nil,
       :availability_zone,
       :error,
       keyword_init: true
@@ -31283,6 +32384,7 @@ module Aws::EC2
     #   <p>The time at which fast snapshot restores entered the <code>disabled</code> state.</p>
     #   @return [Time]
     class EnableFastSnapshotRestoreSuccessItem < Struct.new(
+      nil,
       :snapshot_id,
       :availability_zone,
       :state,
@@ -31312,6 +32414,7 @@ module Aws::EC2
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     class EnableFastSnapshotRestoresRequest < Struct.new(
+      nil,
       :availability_zones,
       :source_snapshot_ids,
       :dry_run,
@@ -31327,6 +32430,7 @@ module Aws::EC2
     #   <p>Information about the snapshots for which fast snapshot restores could not be enabled.</p>
     #   @return [Array<Types::EnableFastSnapshotRestoreErrorItem>]
     class EnableFastSnapshotRestoresResult < Struct.new(
+      nil,
       :successful,
       :unsuccessful,
       keyword_init: true
@@ -31345,6 +32449,7 @@ module Aws::EC2
     #   			<code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     class EnableImageBlockPublicAccessRequest < Struct.new(
+      nil,
       :image_block_public_access_state,
       :dry_run,
       keyword_init: true
@@ -31357,6 +32462,7 @@ module Aws::EC2
     #         error.</p>
     #   @return [String]
     class EnableImageBlockPublicAccessResult < Struct.new(
+      nil,
       :image_block_public_access_state,
       keyword_init: true
     )
@@ -31380,6 +32486,7 @@ module Aws::EC2
     #   			<code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     class EnableImageDeprecationRequest < Struct.new(
+      nil,
       :image_id,
       :deprecate_at,
       :dry_run,
@@ -31392,6 +32499,7 @@ module Aws::EC2
     #   <p>Returns <code>true</code> if the request succeeds; otherwise, it returns an error.</p>
     #   @return [Boolean]
     class EnableImageDeprecationResult < Struct.new(
+      nil,
       :return,
       keyword_init: true
     )
@@ -31411,6 +32519,7 @@ module Aws::EC2
     #   			<code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     class EnableImageDeregistrationProtectionRequest < Struct.new(
+      nil,
       :image_id,
       :with_cooldown,
       :dry_run,
@@ -31423,6 +32532,7 @@ module Aws::EC2
     #   <p>Returns <code>true</code> if the request succeeds; otherwise, it returns an error.</p>
     #   @return [String]
     class EnableImageDeregistrationProtectionResult < Struct.new(
+      nil,
       :return,
       keyword_init: true
     )
@@ -31438,6 +32548,7 @@ module Aws::EC2
     #   			<code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     class EnableImageRequest < Struct.new(
+      nil,
       :image_id,
       :dry_run,
       keyword_init: true
@@ -31449,6 +32560,7 @@ module Aws::EC2
     #   <p>Returns <code>true</code> if the request succeeds; otherwise, it returns an error.</p>
     #   @return [Boolean]
     class EnableImageResult < Struct.new(
+      nil,
       :return,
       keyword_init: true
     )
@@ -31464,6 +32576,7 @@ module Aws::EC2
     #   <p>The Organizations member account ID that you want to enable as the IPAM account.</p>
     #   @return [String]
     class EnableIpamOrganizationAdminAccountRequest < Struct.new(
+      nil,
       :dry_run,
       :delegated_admin_account_id,
       keyword_init: true
@@ -31475,6 +32588,7 @@ module Aws::EC2
     #   <p>The result of enabling the IPAM account.</p>
     #   @return [Boolean]
     class EnableIpamOrganizationAdminAccountResult < Struct.new(
+      nil,
       :success,
       keyword_init: true
     )
@@ -31487,6 +32601,7 @@ module Aws::EC2
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     class EnableReachabilityAnalyzerOrganizationSharingRequest < Struct.new(
+      nil,
       :dry_run,
       keyword_init: true
     )
@@ -31497,6 +32612,7 @@ module Aws::EC2
     #   <p>Returns <code>true</code> if the request succeeds; otherwise, returns an error.</p>
     #   @return [Boolean]
     class EnableReachabilityAnalyzerOrganizationSharingResult < Struct.new(
+      nil,
       :return_value,
       keyword_init: true
     )
@@ -31515,6 +32631,7 @@ module Aws::EC2
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     class EnableRouteServerPropagationRequest < Struct.new(
+      nil,
       :route_server_id,
       :route_table_id,
       :dry_run,
@@ -31527,6 +32644,7 @@ module Aws::EC2
     #   <p>Information about the enabled route server propagation.</p>
     #   @return [Types::RouteServerPropagation]
     class EnableRouteServerPropagationResult < Struct.new(
+      nil,
       :route_server_propagation,
       keyword_init: true
     )
@@ -31537,6 +32655,7 @@ module Aws::EC2
     #   <p>Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     class EnableSerialConsoleAccessRequest < Struct.new(
+      nil,
       :dry_run,
       keyword_init: true
     )
@@ -31549,6 +32668,7 @@ module Aws::EC2
     #   			is disabled for your account.</p>
     #   @return [Boolean]
     class EnableSerialConsoleAccessResult < Struct.new(
+      nil,
       :serial_console_access_enabled,
       keyword_init: true
     )
@@ -31583,6 +32703,7 @@ module Aws::EC2
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     class EnableSnapshotBlockPublicAccessRequest < Struct.new(
+      nil,
       :state,
       :dry_run,
       keyword_init: true
@@ -31596,6 +32717,7 @@ module Aws::EC2
     #         succeeds.</p>
     #   @return [String]
     class EnableSnapshotBlockPublicAccessResult < Struct.new(
+      nil,
       :state,
       keyword_init: true
     )
@@ -31617,6 +32739,7 @@ module Aws::EC2
     #   <p>The ID of the transit gateway route table announcement.</p>
     #   @return [String]
     class EnableTransitGatewayRouteTablePropagationRequest < Struct.new(
+      nil,
       :transit_gateway_route_table_id,
       :transit_gateway_attachment_id,
       :dry_run,
@@ -31630,6 +32753,7 @@ module Aws::EC2
     #   <p>Information about route propagation.</p>
     #   @return [Types::TransitGatewayPropagation]
     class EnableTransitGatewayRouteTablePropagationResult < Struct.new(
+      nil,
       :propagation,
       keyword_init: true
     )
@@ -31653,6 +32777,7 @@ module Aws::EC2
     #                   <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     class EnableVgwRoutePropagationRequest < Struct.new(
+      nil,
       :gateway_id,
       :route_table_id,
       :dry_run,
@@ -31670,6 +32795,7 @@ module Aws::EC2
     #   <p>The ID of the volume.</p>
     #   @return [String]
     class EnableVolumeIORequest < Struct.new(
+      nil,
       :dry_run,
       :volume_id,
       keyword_init: true
@@ -31681,6 +32807,7 @@ module Aws::EC2
     #   <p>The ID of the VPC.</p>
     #   @return [String]
     class EnableVpcClassicLinkDnsSupportRequest < Struct.new(
+      nil,
       :vpc_id,
       keyword_init: true
     )
@@ -31691,6 +32818,7 @@ module Aws::EC2
     #   <p>Returns <code>true</code> if the request succeeds; otherwise, it returns an error.</p>
     #   @return [Boolean]
     class EnableVpcClassicLinkDnsSupportResult < Struct.new(
+      nil,
       :return,
       keyword_init: true
     )
@@ -31706,6 +32834,7 @@ module Aws::EC2
     #   <p>The ID of the VPC.</p>
     #   @return [String]
     class EnableVpcClassicLinkRequest < Struct.new(
+      nil,
       :dry_run,
       :vpc_id,
       keyword_init: true
@@ -31717,6 +32846,7 @@ module Aws::EC2
     #   <p>Returns <code>true</code> if the request succeeds; otherwise, it returns an error.</p>
     #   @return [Boolean]
     class EnableVpcClassicLinkResult < Struct.new(
+      nil,
       :return,
       keyword_init: true
     )
@@ -31730,6 +32860,7 @@ module Aws::EC2
     #               Enclaves.</p>
     #   @return [Boolean]
     class EnclaveOptions < Struct.new(
+      nil,
       :enabled,
       keyword_init: true
     )
@@ -31745,6 +32876,7 @@ module Aws::EC2
     #                   <code>true</code>.</p>
     #   @return [Boolean]
     class EnclaveOptionsRequest < Struct.new(
+      nil,
       :enabled,
       keyword_init: true
     )
@@ -31892,6 +33024,7 @@ module Aws::EC2
     #            <code>instanceChange</code> events.</p>
     #   @return [String]
     class EventInformation < Struct.new(
+      nil,
       :event_description,
       :event_sub_type,
       :instance_id,
@@ -32072,6 +33205,7 @@ module Aws::EC2
     #   <p>The Network Firewall stateful rule.</p>
     #   @return [Types::FirewallStatefulRule]
     class Explanation < Struct.new(
+      nil,
       :acl,
       :acl_rule,
       :address,
@@ -32138,6 +33272,7 @@ module Aws::EC2
     #   <p>Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     class ExportClientVpnClientCertificateRevocationListRequest < Struct.new(
+      nil,
       :client_vpn_endpoint_id,
       :dry_run,
       keyword_init: true
@@ -32152,6 +33287,7 @@ module Aws::EC2
     #   <p>The current state of the client certificate revocation list.</p>
     #   @return [Types::ClientCertificateRevocationListStatus]
     class ExportClientVpnClientCertificateRevocationListResult < Struct.new(
+      nil,
       :certificate_revocation_list,
       :status,
       keyword_init: true
@@ -32166,6 +33302,7 @@ module Aws::EC2
     #   <p>Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     class ExportClientVpnClientConfigurationRequest < Struct.new(
+      nil,
       :client_vpn_endpoint_id,
       :dry_run,
       keyword_init: true
@@ -32177,6 +33314,7 @@ module Aws::EC2
     #   <p>The contents of the Client VPN endpoint configuration file.</p>
     #   @return [String]
     class ExportClientVpnClientConfigurationResult < Struct.new(
+      nil,
       :client_configuration,
       keyword_init: true
     )
@@ -32211,6 +33349,7 @@ module Aws::EC2
     #   <p>The tags to apply to the export image task during creation.</p>
     #   @return [Array<Types::TagSpecification>]
     class ExportImageRequest < Struct.new(
+      nil,
       :client_token,
       :description,
       :disk_image_format,
@@ -32257,6 +33396,7 @@ module Aws::EC2
     #   <p>Any tags assigned to the export image task.</p>
     #   @return [Array<Types::Tag>]
     class ExportImageResult < Struct.new(
+      nil,
       :description,
       :disk_image_format,
       :export_image_task_id,
@@ -32299,6 +33439,7 @@ module Aws::EC2
     #   <p>Any tags assigned to the export image task.</p>
     #   @return [Array<Types::Tag>]
     class ExportImageTask < Struct.new(
+      nil,
       :description,
       :export_image_task_id,
       :image_id,
@@ -32335,6 +33476,7 @@ module Aws::EC2
     #   <p>The tags for the export task.</p>
     #   @return [Array<Types::Tag>]
     class ExportTask < Struct.new(
+      nil,
       :description,
       :export_task_id,
       :export_to_s3_task,
@@ -32355,6 +33497,7 @@ module Aws::EC2
     #   <p>The prefix (logical hierarchy) in the bucket.</p>
     #   @return [String]
     class ExportTaskS3Location < Struct.new(
+      nil,
       :s3_bucket,
       :s3_prefix,
       keyword_init: true
@@ -32370,6 +33513,7 @@ module Aws::EC2
     #   <p>The prefix (logical hierarchy) in the bucket.</p>
     #   @return [String]
     class ExportTaskS3LocationRequest < Struct.new(
+      nil,
       :s3_bucket,
       :s3_prefix,
       keyword_init: true
@@ -32394,6 +33538,7 @@ module Aws::EC2
     #   <p>The encryption key for your S3 bucket.</p>
     #   @return [String]
     class ExportToS3Task < Struct.new(
+      nil,
       :container_format,
       :disk_image_format,
       :s3_bucket,
@@ -32421,6 +33566,7 @@ module Aws::EC2
     #      exportTaskId + '.' + diskImageFormat.</p>
     #   @return [String]
     class ExportToS3TaskSpecification < Struct.new(
+      nil,
       :disk_image_format,
       :container_format,
       :s3_bucket,
@@ -32484,6 +33630,7 @@ module Aws::EC2
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     class ExportTransitGatewayRoutesRequest < Struct.new(
+      nil,
       :transit_gateway_route_table_id,
       :filters,
       :s3_bucket,
@@ -32498,6 +33645,7 @@ module Aws::EC2
     #            s3://<i>bucket_name</i>/VPCTransitGateway/TransitGatewayRouteTables/<i>file_name</i>.</p>
     #   @return [String]
     class ExportTransitGatewayRoutesResult < Struct.new(
+      nil,
       :s3_location,
       keyword_init: true
     )
@@ -32513,6 +33661,7 @@ module Aws::EC2
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     class ExportVerifiedAccessInstanceClientConfigurationRequest < Struct.new(
+      nil,
       :verified_access_instance_id,
       :dry_run,
       keyword_init: true
@@ -32539,6 +33688,7 @@ module Aws::EC2
     #   <p>The Open VPN configuration.</p>
     #   @return [Array<Types::VerifiedAccessInstanceOpenVpnClientConfiguration>]
     class ExportVerifiedAccessInstanceClientConfigurationResult < Struct.new(
+      nil,
       :version,
       :verified_access_instance_id,
       :region,
@@ -32558,6 +33708,7 @@ module Aws::EC2
     #   <p>Information about the Capacity Reservation Fleet cancellation error.</p>
     #   @return [Types::CancelCapacityReservationFleetError]
     class FailedCapacityReservationFleetCancellationResult < Struct.new(
+      nil,
       :capacity_reservation_fleet_id,
       :cancel_capacity_reservation_fleet_error,
       keyword_init: true
@@ -32573,6 +33724,7 @@ module Aws::EC2
     #   <p>The ID of the Reserved Instance.</p>
     #   @return [String]
     class FailedQueuedPurchaseDeletion < Struct.new(
+      nil,
       :error,
       :reserved_instances_id,
       keyword_init: true
@@ -32598,6 +33750,7 @@ module Aws::EC2
     #         launch.</p>
     #   @return [String]
     class FastLaunchLaunchTemplateSpecificationRequest < Struct.new(
+      nil,
       :launch_template_id,
       :launch_template_name,
       :version,
@@ -32617,6 +33770,7 @@ module Aws::EC2
     #   <p>The version of the launch template that the AMI uses for Windows fast launch.</p>
     #   @return [String]
     class FastLaunchLaunchTemplateSpecificationResponse < Struct.new(
+      nil,
       :launch_template_id,
       :launch_template_name,
       :version,
@@ -32632,6 +33786,7 @@ module Aws::EC2
     #         AMI.</p>
     #   @return [Integer]
     class FastLaunchSnapshotConfigurationRequest < Struct.new(
+      nil,
       :target_resource_count,
       keyword_init: true
     )
@@ -32645,6 +33800,7 @@ module Aws::EC2
     #         launch enabled AMI.</p>
     #   @return [Integer]
     class FastLaunchSnapshotConfigurationResponse < Struct.new(
+      nil,
       :target_resource_count,
       keyword_init: true
     )
@@ -32659,6 +33815,7 @@ module Aws::EC2
     #   <p>The Amazon Resource Name (ARN) of the IAM SAML identity provider for the self-service portal.</p>
     #   @return [String]
     class FederatedAuthentication < Struct.new(
+      nil,
       :saml_provider_arn,
       :self_service_saml_provider_arn,
       keyword_init: true
@@ -32674,6 +33831,7 @@ module Aws::EC2
     #   <p>The Amazon Resource Name (ARN) of the IAM SAML identity provider for the self-service portal.</p>
     #   @return [String]
     class FederatedAuthenticationRequest < Struct.new(
+      nil,
       :saml_provider_arn,
       :self_service_saml_provider_arn,
       keyword_init: true
@@ -32695,6 +33853,7 @@ module Aws::EC2
     #            that match any of the specified values.</p>
     #   @return [Array<String>]
     class Filter < Struct.new(
+      nil,
       :name,
       :values,
       keyword_init: true
@@ -32710,6 +33869,7 @@ module Aws::EC2
     #   <p>The last port in the range.</p>
     #   @return [Integer]
     class FilterPortRange < Struct.new(
+      nil,
       :from_port,
       :to_port,
       keyword_init: true
@@ -32744,6 +33904,7 @@ module Aws::EC2
     #   <p>The direction. The possible values are <code>FORWARD</code> and <code>ANY</code>.</p>
     #   @return [String]
     class FirewallStatefulRule < Struct.new(
+      nil,
       :rule_group_arn,
       :sources,
       :destinations,
@@ -32784,6 +33945,7 @@ module Aws::EC2
     #   <p>The rule priority.</p>
     #   @return [Integer]
     class FirewallStatelessRule < Struct.new(
+      nil,
       :rule_group_arn,
       :sources,
       :destinations,
@@ -32848,6 +34010,7 @@ module Aws::EC2
     #            the assigned value.</p>
     #   @return [String]
     class FleetBlockDeviceMappingRequest < Struct.new(
+      nil,
       :device_name,
       :virtual_name,
       :ebs,
@@ -32902,6 +34065,7 @@ module Aws::EC2
     #   				priority</a> in the <i>Amazon EC2 User Guide</i>.</p>
     #   @return [Integer]
     class FleetCapacityReservation < Struct.new(
+      nil,
       :capacity_reservation_id,
       :availability_zone_id,
       :instance_type,
@@ -33016,6 +34180,7 @@ module Aws::EC2
     #   <p>Reserved.</p>
     #   @return [String]
     class FleetData < Struct.new(
+      nil,
       :activity_status,
       :create_time,
       :fleet_id,
@@ -33166,6 +34331,7 @@ module Aws::EC2
     #            <i>Amazon EBS User Guide</i>.</p>
     #   @return [String]
     class FleetEbsBlockDeviceRequest < Struct.new(
+      nil,
       :encrypted,
       :delete_on_termination,
       :iops,
@@ -33188,6 +34354,7 @@ module Aws::EC2
     #            template.</p>
     #   @return [Array<Types::FleetLaunchTemplateOverrides>]
     class FleetLaunchTemplateConfig < Struct.new(
+      nil,
       :launch_template_specification,
       :overrides,
       keyword_init: true
@@ -33207,6 +34374,7 @@ module Aws::EC2
     #            items is allowed across all launch templates.</p>
     #   @return [Array<Types::FleetLaunchTemplateOverridesRequest>]
     class FleetLaunchTemplateConfigRequest < Struct.new(
+      nil,
       :launch_template_specification,
       :overrides,
       keyword_init: true
@@ -33356,6 +34524,7 @@ module Aws::EC2
     #            Guide</i>.</p>
     #   @return [Array<Types::BlockDeviceMappingResponse>]
     class FleetLaunchTemplateOverrides < Struct.new(
+      nil,
       :instance_type,
       :max_price,
       :subnet_id,
@@ -33513,6 +34682,7 @@ module Aws::EC2
     #            </note>
     #   @return [String]
     class FleetLaunchTemplateOverridesRequest < Struct.new(
+      nil,
       :instance_type,
       :max_price,
       :subnet_id,
@@ -33550,6 +34720,7 @@ module Aws::EC2
     #               template.</p>
     #   @return [String]
     class FleetLaunchTemplateSpecification < Struct.new(
+      nil,
       :launch_template_id,
       :launch_template_name,
       :version,
@@ -33577,6 +34748,7 @@ module Aws::EC2
     #            <p>If the value is <code>$Default</code>, Amazon EC2 uses the default version of the launch template.</p>
     #   @return [String]
     class FleetLaunchTemplateSpecificationRequest < Struct.new(
+      nil,
       :launch_template_id,
       :launch_template_name,
       :version,
@@ -33610,6 +34782,7 @@ module Aws::EC2
     #            <p>Valid values: Minimum value of <code>120</code> seconds. Maximum value of <code>7200</code> seconds.</p>
     #   @return [Integer]
     class FleetSpotCapacityRebalance < Struct.new(
+      nil,
       :replacement_strategy,
       :termination_delay,
       keyword_init: true
@@ -33643,6 +34816,7 @@ module Aws::EC2
     #            <p>Valid values: Minimum value of <code>120</code> seconds. Maximum value of <code>7200</code> seconds.</p>
     #   @return [Integer]
     class FleetSpotCapacityRebalanceRequest < Struct.new(
+      nil,
       :replacement_strategy,
       :termination_delay,
       keyword_init: true
@@ -33657,6 +34831,7 @@ module Aws::EC2
     #            elevated risk of being interrupted.</p>
     #   @return [Types::FleetSpotCapacityRebalance]
     class FleetSpotMaintenanceStrategies < Struct.new(
+      nil,
       :capacity_rebalance,
       keyword_init: true
     )
@@ -33669,6 +34844,7 @@ module Aws::EC2
     #            elevated risk of being interrupted.</p>
     #   @return [Types::FleetSpotCapacityRebalanceRequest]
     class FleetSpotMaintenanceStrategiesRequest < Struct.new(
+      nil,
       :capacity_rebalance,
       keyword_init: true
     )
@@ -33735,6 +34911,7 @@ module Aws::EC2
     #   <p>The destination options.</p>
     #   @return [Types::DestinationOptionsResponse]
     class FlowLog < Struct.new(
+      nil,
       :creation_time,
       :deliver_logs_error_message,
       :deliver_logs_permission_arn,
@@ -33770,6 +34947,7 @@ module Aws::EC2
     #   <p>Describes the memory for the FPGA accelerator for the instance type.</p>
     #   @return [Types::FpgaDeviceMemoryInfo]
     class FpgaDeviceInfo < Struct.new(
+      nil,
       :name,
       :manufacturer,
       :count,
@@ -33784,6 +34962,7 @@ module Aws::EC2
     #   <p>The size of the memory available to the FPGA accelerator, in MiB.</p>
     #   @return [Integer]
     class FpgaDeviceMemoryInfo < Struct.new(
+      nil,
       :size_in_mi_b,
       keyword_init: true
     )
@@ -33840,6 +35019,7 @@ module Aws::EC2
     #   <p>The instance types supported by the AFI.</p>
     #   @return [Array<String>]
     class FpgaImage < Struct.new(
+      nil,
       :fpga_image_id,
       :fpga_image_global_id,
       :name,
@@ -33878,6 +35058,7 @@ module Aws::EC2
     #   <p>The product codes.</p>
     #   @return [Array<Types::ProductCode>]
     class FpgaImageAttribute < Struct.new(
+      nil,
       :fpga_image_id,
       :name,
       :description,
@@ -33914,6 +35095,7 @@ module Aws::EC2
     #   <p>If the state is <code>failed</code>, this is the error message.</p>
     #   @return [String]
     class FpgaImageState < Struct.new(
+      nil,
       :code,
       :message,
       keyword_init: true
@@ -33929,6 +35111,7 @@ module Aws::EC2
     #   <p>The total memory of all FPGA accelerators for the instance type.</p>
     #   @return [Integer]
     class FpgaInfo < Struct.new(
+      nil,
       :fpgas,
       :total_fpga_memory_in_mi_b,
       keyword_init: true
@@ -33946,6 +35129,7 @@ module Aws::EC2
     #   <p>Checks whether you have the required permissions for the action, without actually making the request.</p>
     #   @return [Boolean]
     class GetActiveVpnTunnelStatusRequest < Struct.new(
+      nil,
       :vpn_connection_id,
       :vpn_tunnel_outside_ip_address,
       :dry_run,
@@ -33958,6 +35142,7 @@ module Aws::EC2
     #   <p>Information about the current security configuration of the VPN tunnel.</p>
     #   @return [Types::ActiveVpnTunnelStatus]
     class GetActiveVpnTunnelStatusResult < Struct.new(
+      nil,
       :active_vpn_tunnel_status,
       keyword_init: true
     )
@@ -33970,6 +35155,7 @@ module Aws::EC2
     #   			<code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     class GetAllowedImagesSettingsRequest < Struct.new(
+      nil,
       :dry_run,
       keyword_init: true
     )
@@ -34017,6 +35203,7 @@ module Aws::EC2
     #            </ul>
     #   @return [String]
     class GetAllowedImagesSettingsResult < Struct.new(
+      nil,
       :state,
       :image_criteria,
       :managed_by,
@@ -34033,6 +35220,7 @@ module Aws::EC2
     #   <p>Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     class GetAssociatedEnclaveCertificateIamRolesRequest < Struct.new(
+      nil,
       :certificate_arn,
       :dry_run,
       keyword_init: true
@@ -34044,6 +35232,7 @@ module Aws::EC2
     #   <p>Information about the associated IAM roles.</p>
     #   @return [Array<Types::AssociatedRole>]
     class GetAssociatedEnclaveCertificateIamRolesResult < Struct.new(
+      nil,
       :associated_roles,
       keyword_init: true
     )
@@ -34066,6 +35255,7 @@ module Aws::EC2
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     class GetAssociatedIpv6PoolCidrsRequest < Struct.new(
+      nil,
       :pool_id,
       :next_token,
       :max_results,
@@ -34082,6 +35272,7 @@ module Aws::EC2
     #   <p>The token to use to retrieve the next page of results. This value is <code>null</code> when there are no more results to return.</p>
     #   @return [String]
     class GetAssociatedIpv6PoolCidrsResult < Struct.new(
+      nil,
       :ipv6_cidr_associations,
       :next_token,
       keyword_init: true
@@ -34112,6 +35303,7 @@ module Aws::EC2
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     class GetAwsNetworkPerformanceDataRequest < Struct.new(
+      nil,
       :data_queries,
       :start_time,
       :end_time,
@@ -34130,6 +35322,7 @@ module Aws::EC2
     #   <p>The token to use to retrieve the next page of results. This value is <code>null</code> when there are no more results to return.</p>
     #   @return [String]
     class GetAwsNetworkPerformanceDataResult < Struct.new(
+      nil,
       :data_responses,
       :next_token,
       keyword_init: true
@@ -34151,6 +35344,7 @@ module Aws::EC2
     #   <p>Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     class GetCapacityReservationUsageRequest < Struct.new(
+      nil,
       :capacity_reservation_id,
       :next_token,
       :max_results,
@@ -34244,6 +35438,7 @@ module Aws::EC2
     #   <p>Information about the Capacity Reservation usage.</p>
     #   @return [Array<Types::InstanceUsage>]
     class GetCapacityReservationUsageResult < Struct.new(
+      nil,
       :next_token,
       :capacity_reservation_id,
       :instance_type,
@@ -34293,6 +35488,7 @@ module Aws::EC2
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     class GetCoipPoolUsageRequest < Struct.new(
+      nil,
       :pool_id,
       :filters,
       :max_results,
@@ -34316,6 +35512,7 @@ module Aws::EC2
     #   <p>The token to use to retrieve the next page of results. This value is <code>null</code> when there are no more results to return.</p>
     #   @return [String]
     class GetCoipPoolUsageResult < Struct.new(
+      nil,
       :coip_pool_id,
       :coip_address_usages,
       :local_gateway_route_table_id,
@@ -34338,6 +35535,7 @@ module Aws::EC2
     #     <code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     class GetConsoleOutputRequest < Struct.new(
+      nil,
       :instance_id,
       :latest,
       :dry_run,
@@ -34357,6 +35555,7 @@ module Aws::EC2
     #               decodes the output for you.</p>
     #   @return [String]
     class GetConsoleOutputResult < Struct.new(
+      nil,
       :instance_id,
       :timestamp,
       :output,
@@ -34378,6 +35577,7 @@ module Aws::EC2
     #               in standby or "sleep" mode.</p>
     #   @return [Boolean]
     class GetConsoleScreenshotRequest < Struct.new(
+      nil,
       :dry_run,
       :instance_id,
       :wake_up,
@@ -34393,6 +35593,7 @@ module Aws::EC2
     #   <p>The ID of the instance.</p>
     #   @return [String]
     class GetConsoleScreenshotResult < Struct.new(
+      nil,
       :image_data,
       :instance_id,
       keyword_init: true
@@ -34409,6 +35610,7 @@ module Aws::EC2
     #   <p>The ID of the report.</p>
     #   @return [String]
     class GetDeclarativePoliciesReportSummaryRequest < Struct.new(
+      nil,
       :dry_run,
       :report_id,
       keyword_init: true
@@ -34460,6 +35662,7 @@ module Aws::EC2
     #   <p>The attributes described in the report.</p>
     #   @return [Array<Types::AttributeSummary>]
     class GetDeclarativePoliciesReportSummaryResult < Struct.new(
+      nil,
       :report_id,
       :s3_bucket,
       :s3_prefix,
@@ -34483,6 +35686,7 @@ module Aws::EC2
     #   <p>The instance family.</p>
     #   @return [String]
     class GetDefaultCreditSpecificationRequest < Struct.new(
+      nil,
       :dry_run,
       :instance_family,
       keyword_init: true
@@ -34494,6 +35698,7 @@ module Aws::EC2
     #   <p>The default credit option for CPU usage of the instance family.</p>
     #   @return [Types::InstanceFamilyCreditSpecification]
     class GetDefaultCreditSpecificationResult < Struct.new(
+      nil,
       :instance_family_credit_specification,
       keyword_init: true
     )
@@ -34506,6 +35711,7 @@ module Aws::EC2
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     class GetEbsDefaultKmsKeyIdRequest < Struct.new(
+      nil,
       :dry_run,
       keyword_init: true
     )
@@ -34516,6 +35722,7 @@ module Aws::EC2
     #   <p>The Amazon Resource Name (ARN) of the default KMS key for encryption by default.</p>
     #   @return [String]
     class GetEbsDefaultKmsKeyIdResult < Struct.new(
+      nil,
       :kms_key_id,
       keyword_init: true
     )
@@ -34528,6 +35735,7 @@ module Aws::EC2
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     class GetEbsEncryptionByDefaultRequest < Struct.new(
+      nil,
       :dry_run,
       keyword_init: true
     )
@@ -34541,6 +35749,7 @@ module Aws::EC2
     #   <p>Reserved for future use.</p>
     #   @return [String]
     class GetEbsEncryptionByDefaultResult < Struct.new(
+      nil,
       :ebs_encryption_by_default,
       :sse_type,
       keyword_init: true
@@ -34563,6 +35772,7 @@ module Aws::EC2
     #   <p>Information about the service integration.</p>
     #   @return [Types::IntegrateServices]
     class GetFlowLogsIntegrationTemplateRequest < Struct.new(
+      nil,
       :dry_run,
       :flow_log_id,
       :config_delivery_s3_destination_arn,
@@ -34576,6 +35786,7 @@ module Aws::EC2
     #   <p>The generated CloudFormation template.</p>
     #   @return [String]
     class GetFlowLogsIntegrationTemplateResult < Struct.new(
+      nil,
       :result,
       keyword_init: true
     )
@@ -34598,6 +35809,7 @@ module Aws::EC2
     #   <p>Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     class GetGroupsForCapacityReservationRequest < Struct.new(
+      nil,
       :capacity_reservation_id,
       :next_token,
       :max_results,
@@ -34615,6 +35827,7 @@ module Aws::EC2
     #   			added.</p>
     #   @return [Array<Types::CapacityReservationGroup>]
     class GetGroupsForCapacityReservationResult < Struct.new(
+      nil,
       :next_token,
       :capacity_reservation_groups,
       keyword_init: true
@@ -34629,6 +35842,7 @@ module Aws::EC2
     #   <p>The offering ID of the reservation.</p>
     #   @return [String]
     class GetHostReservationPurchasePreviewRequest < Struct.new(
+      nil,
       :host_id_set,
       :offering_id,
       keyword_init: true
@@ -34652,6 +35866,7 @@ module Aws::EC2
     #   <p>The potential total upfront price. This is billed immediately.</p>
     #   @return [String]
     class GetHostReservationPurchasePreviewResult < Struct.new(
+      nil,
       :currency_code,
       :purchase,
       :total_hourly_price,
@@ -34667,6 +35882,7 @@ module Aws::EC2
     #   			<code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     class GetImageBlockPublicAccessStateRequest < Struct.new(
+      nil,
       :dry_run,
       keyword_init: true
     )
@@ -34706,6 +35922,7 @@ module Aws::EC2
     #            </ul>
     #   @return [String]
     class GetImageBlockPublicAccessStateResult < Struct.new(
+      nil,
       :image_block_public_access_state,
       :managed_by,
       keyword_init: true
@@ -34719,6 +35936,7 @@ module Aws::EC2
     #     <code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     class GetInstanceMetadataDefaultsRequest < Struct.new(
+      nil,
       :dry_run,
       keyword_init: true
     )
@@ -34729,6 +35947,7 @@ module Aws::EC2
     #   <p>The account-level default IMDS settings.</p>
     #   @return [Types::InstanceMetadataDefaultsResponse]
     class GetInstanceMetadataDefaultsResult < Struct.new(
+      nil,
       :account_level,
       keyword_init: true
     )
@@ -34752,6 +35971,7 @@ module Aws::EC2
     #               the response is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     class GetInstanceTpmEkPubRequest < Struct.new(
+      nil,
       :instance_id,
       :key_type,
       :key_format,
@@ -34774,6 +35994,7 @@ module Aws::EC2
     #   <p>The public endorsement key material.</p>
     #   @return [String]
     class GetInstanceTpmEkPubResult < Struct.new(
+      nil,
       :instance_id,
       :key_type,
       :key_format,
@@ -34809,6 +36030,7 @@ module Aws::EC2
     #   <p>Reserved.</p>
     #   @return [String]
     class GetInstanceTypesFromInstanceRequirementsRequest < Struct.new(
+      nil,
       :dry_run,
       :architecture_types,
       :virtualization_types,
@@ -34829,6 +36051,7 @@ module Aws::EC2
     #            are no more items to return.</p>
     #   @return [String]
     class GetInstanceTypesFromInstanceRequirementsResult < Struct.new(
+      nil,
       :instance_types,
       :next_token,
       keyword_init: true
@@ -34845,6 +36068,7 @@ module Aws::EC2
     #     <code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     class GetInstanceUefiDataRequest < Struct.new(
+      nil,
       :instance_id,
       :dry_run,
       keyword_init: true
@@ -34859,6 +36083,7 @@ module Aws::EC2
     #   <p>Base64 representation of the non-volatile UEFI variable store.</p>
     #   @return [String]
     class GetInstanceUefiDataResult < Struct.new(
+      nil,
       :instance_id,
       :uefi_data,
       keyword_init: true
@@ -34894,6 +36119,7 @@ module Aws::EC2
     #   <p>The token for the next page of results.</p>
     #   @return [String]
     class GetIpamAddressHistoryRequest < Struct.new(
+      nil,
       :dry_run,
       :cidr,
       :ipam_scope_id,
@@ -34914,6 +36140,7 @@ module Aws::EC2
     #   <p>The token to use to retrieve the next page of results. This value is <code>null</code> when there are no more results to return.</p>
     #   @return [String]
     class GetIpamAddressHistoryResult < Struct.new(
+      nil,
       :history_records,
       :next_token,
       keyword_init: true
@@ -34942,6 +36169,7 @@ module Aws::EC2
     #   <p>The maximum number of discovered accounts to return in one page of results.</p>
     #   @return [Integer]
     class GetIpamDiscoveredAccountsRequest < Struct.new(
+      nil,
       :dry_run,
       :ipam_resource_discovery_id,
       :discovery_region,
@@ -34960,6 +36188,7 @@ module Aws::EC2
     #   <p>Specify the pagination token from a previous request to retrieve the next page of results.</p>
     #   @return [String]
     class GetIpamDiscoveredAccountsResult < Struct.new(
+      nil,
       :ipam_discovered_accounts,
       :next_token,
       keyword_init: true
@@ -34988,6 +36217,7 @@ module Aws::EC2
     #   <p>The maximum number of IPAM discovered public addresses to return in one page of results.</p>
     #   @return [Integer]
     class GetIpamDiscoveredPublicAddressesRequest < Struct.new(
+      nil,
       :dry_run,
       :ipam_resource_discovery_id,
       :address_region,
@@ -35009,6 +36239,7 @@ module Aws::EC2
     #   <p>The token to use to retrieve the next page of results. This value is <code>null</code> when there are no more results to return.</p>
     #   @return [String]
     class GetIpamDiscoveredPublicAddressesResult < Struct.new(
+      nil,
       :ipam_discovered_public_addresses,
       :oldest_sample_time,
       :next_token,
@@ -35038,6 +36269,7 @@ module Aws::EC2
     #   <p>The maximum number of discovered resource CIDRs to return in one page of results.</p>
     #   @return [Integer]
     class GetIpamDiscoveredResourceCidrsRequest < Struct.new(
+      nil,
       :dry_run,
       :ipam_resource_discovery_id,
       :resource_region,
@@ -35056,6 +36288,7 @@ module Aws::EC2
     #   <p>Specify the pagination token from a previous request to retrieve the next page of results.</p>
     #   @return [String]
     class GetIpamDiscoveredResourceCidrsResult < Struct.new(
+      nil,
       :ipam_discovered_resource_cidrs,
       :next_token,
       keyword_init: true
@@ -35084,6 +36317,7 @@ module Aws::EC2
     #   <p>The token for the next page of results.</p>
     #   @return [String]
     class GetIpamPoolAllocationsRequest < Struct.new(
+      nil,
       :dry_run,
       :ipam_pool_id,
       :ipam_pool_allocation_id,
@@ -35102,6 +36336,7 @@ module Aws::EC2
     #   <p>The token to use to retrieve the next page of results. This value is <code>null</code> when there are no more results to return.</p>
     #   @return [String]
     class GetIpamPoolAllocationsResult < Struct.new(
+      nil,
       :ipam_pool_allocations,
       :next_token,
       keyword_init: true
@@ -35127,6 +36362,7 @@ module Aws::EC2
     #   <p>The token for the next page of results.</p>
     #   @return [String]
     class GetIpamPoolCidrsRequest < Struct.new(
+      nil,
       :dry_run,
       :ipam_pool_id,
       :filters,
@@ -35144,6 +36380,7 @@ module Aws::EC2
     #   <p>The token to use to retrieve the next page of results. This value is <code>null</code> when there are no more results to return.</p>
     #   @return [String]
     class GetIpamPoolCidrsResult < Struct.new(
+      nil,
       :ipam_pool_cidrs,
       :next_token,
       keyword_init: true
@@ -35184,6 +36421,7 @@ module Aws::EC2
     #   <p>The ID of the Amazon Web Services account that owns the resource.</p>
     #   @return [String]
     class GetIpamResourceCidrsRequest < Struct.new(
+      nil,
       :dry_run,
       :filters,
       :max_results,
@@ -35206,6 +36444,7 @@ module Aws::EC2
     #   <p>The resource CIDRs.</p>
     #   @return [Array<Types::IpamResourceCidr>]
     class GetIpamResourceCidrsResult < Struct.new(
+      nil,
       :next_token,
       :ipam_resource_cidrs,
       keyword_init: true
@@ -35223,6 +36462,7 @@ module Aws::EC2
     #   <p>The ID of the instance.</p>
     #   @return [String]
     class GetLaunchTemplateDataRequest < Struct.new(
+      nil,
       :dry_run,
       :instance_id,
       keyword_init: true
@@ -35234,6 +36474,7 @@ module Aws::EC2
     #   <p>The instance data.</p>
     #   @return [Types::ResponseLaunchTemplateData]
     class GetLaunchTemplateDataResult < Struct.new(
+      nil,
       :launch_template_data,
       keyword_init: true
     )
@@ -35256,6 +36497,7 @@ module Aws::EC2
     #   <p>The token for the next page of results.</p>
     #   @return [String]
     class GetManagedPrefixListAssociationsRequest < Struct.new(
+      nil,
       :dry_run,
       :prefix_list_id,
       :max_results,
@@ -35272,6 +36514,7 @@ module Aws::EC2
     #   <p>The token to use to retrieve the next page of results. This value is <code>null</code> when there are no more results to return.</p>
     #   @return [String]
     class GetManagedPrefixListAssociationsResult < Struct.new(
+      nil,
       :prefix_list_associations,
       :next_token,
       keyword_init: true
@@ -35298,6 +36541,7 @@ module Aws::EC2
     #   <p>The token for the next page of results.</p>
     #   @return [String]
     class GetManagedPrefixListEntriesRequest < Struct.new(
+      nil,
       :dry_run,
       :prefix_list_id,
       :target_version,
@@ -35315,6 +36559,7 @@ module Aws::EC2
     #   <p>The token to use to retrieve the next page of results. This value is <code>null</code> when there are no more results to return.</p>
     #   @return [String]
     class GetManagedPrefixListEntriesResult < Struct.new(
+      nil,
       :entries,
       :next_token,
       keyword_init: true
@@ -35338,6 +36583,7 @@ module Aws::EC2
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     class GetNetworkInsightsAccessScopeAnalysisFindingsRequest < Struct.new(
+      nil,
       :network_insights_access_scope_analysis_id,
       :max_results,
       :next_token,
@@ -35360,6 +36606,7 @@ module Aws::EC2
     #   <p>The token to use to retrieve the next page of results. This value is <code>null</code> when there are no more results to return.</p>
     #   @return [String]
     class GetNetworkInsightsAccessScopeAnalysisFindingsResult < Struct.new(
+      nil,
       :network_insights_access_scope_analysis_id,
       :analysis_status,
       :analysis_findings,
@@ -35378,6 +36625,7 @@ module Aws::EC2
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     class GetNetworkInsightsAccessScopeContentRequest < Struct.new(
+      nil,
       :network_insights_access_scope_id,
       :dry_run,
       keyword_init: true
@@ -35389,6 +36637,7 @@ module Aws::EC2
     #   <p>The Network Access Scope content.</p>
     #   @return [Types::NetworkInsightsAccessScopeContent]
     class GetNetworkInsightsAccessScopeContentResult < Struct.new(
+      nil,
       :network_insights_access_scope_content,
       keyword_init: true
     )
@@ -35404,6 +36653,7 @@ module Aws::EC2
     #     <code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     class GetPasswordDataRequest < Struct.new(
+      nil,
       :instance_id,
       :dry_run,
       keyword_init: true
@@ -35422,6 +36672,7 @@ module Aws::EC2
     #               available.</p>
     #   @return [String]
     class GetPasswordDataResult < Struct.new(
+      nil,
       :instance_id,
       :timestamp,
       :password_data,
@@ -35445,6 +36696,7 @@ module Aws::EC2
     #         Convertible Reserved Instances.</p>
     #   @return [Array<Types::TargetConfigurationRequest>]
     class GetReservedInstancesExchangeQuoteRequest < Struct.new(
+      nil,
       :dry_run,
       :reserved_instance_ids,
       :target_configurations,
@@ -35483,6 +36735,7 @@ module Aws::EC2
     #   <p>Describes the reason why the exchange cannot be completed.</p>
     #   @return [String]
     class GetReservedInstancesExchangeQuoteResult < Struct.new(
+      nil,
       :currency_code,
       :is_valid_exchange,
       :output_reserved_instances_will_expire_at,
@@ -35506,6 +36759,7 @@ module Aws::EC2
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     class GetRouteServerAssociationsRequest < Struct.new(
+      nil,
       :route_server_id,
       :dry_run,
       keyword_init: true
@@ -35517,6 +36771,7 @@ module Aws::EC2
     #   <p>Information about the associations for the specified route server.</p>
     #   @return [Array<Types::RouteServerAssociation>]
     class GetRouteServerAssociationsResult < Struct.new(
+      nil,
       :route_server_associations,
       keyword_init: true
     )
@@ -35535,6 +36790,7 @@ module Aws::EC2
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     class GetRouteServerPropagationsRequest < Struct.new(
+      nil,
       :route_server_id,
       :route_table_id,
       :dry_run,
@@ -35547,6 +36803,7 @@ module Aws::EC2
     #   <p>Information about the route propagations for the specified route server.</p>
     #   @return [Array<Types::RouteServerPropagation>]
     class GetRouteServerPropagationsResult < Struct.new(
+      nil,
       :route_server_propagations,
       keyword_init: true
     )
@@ -35571,6 +36828,7 @@ module Aws::EC2
     #   <p>Filters to apply to the routing database query.</p>
     #   @return [Array<Types::Filter>]
     class GetRouteServerRoutingDatabaseRequest < Struct.new(
+      nil,
       :route_server_id,
       :next_token,
       :max_results,
@@ -35591,6 +36849,7 @@ module Aws::EC2
     #   <p>The token to use to retrieve the next page of results. This value is <code>null</code> when there are no more results to return.</p>
     #   @return [String]
     class GetRouteServerRoutingDatabaseResult < Struct.new(
+      nil,
       :are_routes_persisted,
       :routes,
       :next_token,
@@ -35641,6 +36900,7 @@ module Aws::EC2
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     class GetSecurityGroupsForVpcRequest < Struct.new(
+      nil,
       :vpc_id,
       :next_token,
       :max_results,
@@ -35658,6 +36918,7 @@ module Aws::EC2
     #   <p>The security group that can be used by interfaces in the VPC.</p>
     #   @return [Array<Types::SecurityGroupForVpc>]
     class GetSecurityGroupsForVpcResult < Struct.new(
+      nil,
       :next_token,
       :security_group_for_vpcs,
       keyword_init: true
@@ -35669,6 +36930,7 @@ module Aws::EC2
     #   <p>Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     class GetSerialConsoleAccessStatusRequest < Struct.new(
+      nil,
       :dry_run,
       keyword_init: true
     )
@@ -35695,6 +36957,7 @@ module Aws::EC2
     #            </ul>
     #   @return [String]
     class GetSerialConsoleAccessStatusResult < Struct.new(
+      nil,
       :serial_console_access_enabled,
       :managed_by,
       keyword_init: true
@@ -35708,6 +36971,7 @@ module Aws::EC2
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     class GetSnapshotBlockPublicAccessStateRequest < Struct.new(
+      nil,
       :dry_run,
       keyword_init: true
     )
@@ -35752,6 +37016,7 @@ module Aws::EC2
     #            </ul>
     #   @return [String]
     class GetSnapshotBlockPublicAccessStateResult < Struct.new(
+      nil,
       :state,
       :managed_by,
       keyword_init: true
@@ -35803,6 +37068,7 @@ module Aws::EC2
     #   <p>The token returned from a previous paginated request. Pagination continues from the end of the items returned by the previous request.</p>
     #   @return [String]
     class GetSpotPlacementScoresRequest < Struct.new(
+      nil,
       :instance_types,
       :target_capacity,
       :target_capacity_unit_type,
@@ -35840,6 +37106,7 @@ module Aws::EC2
     #            are no more items to return.</p>
     #   @return [String]
     class GetSpotPlacementScoresResult < Struct.new(
+      nil,
       :spot_placement_scores,
       :next_token,
       keyword_init: true
@@ -35886,6 +37153,7 @@ module Aws::EC2
     #   	To retrieve the remaining results, make another call with the returned <code>nextToken</code> value.</p>
     #   @return [Integer]
     class GetSubnetCidrReservationsRequest < Struct.new(
+      nil,
       :filters,
       :subnet_id,
       :dry_run,
@@ -35906,6 +37174,7 @@ module Aws::EC2
     #   <p>The token to use to retrieve the next page of results. This value is <code>null</code> when there are no more results to return.</p>
     #   @return [String]
     class GetSubnetCidrReservationsResult < Struct.new(
+      nil,
       :subnet_ipv4_cidr_reservations,
       :subnet_ipv6_cidr_reservations,
       :next_token,
@@ -35939,6 +37208,7 @@ module Aws::EC2
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     class GetTransitGatewayAttachmentPropagationsRequest < Struct.new(
+      nil,
       :transit_gateway_attachment_id,
       :filters,
       :max_results,
@@ -35956,6 +37226,7 @@ module Aws::EC2
     #   <p>The token to use to retrieve the next page of results. This value is <code>null</code> when there are no more results to return.</p>
     #   @return [String]
     class GetTransitGatewayAttachmentPropagationsResult < Struct.new(
+      nil,
       :transit_gateway_attachment_propagations,
       :next_token,
       keyword_init: true
@@ -36006,6 +37277,7 @@ module Aws::EC2
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     class GetTransitGatewayMulticastDomainAssociationsRequest < Struct.new(
+      nil,
       :transit_gateway_multicast_domain_id,
       :filters,
       :max_results,
@@ -36023,6 +37295,7 @@ module Aws::EC2
     #   <p>The token to use to retrieve the next page of results. This value is <code>null</code> when there are no more results to return.</p>
     #   @return [String]
     class GetTransitGatewayMulticastDomainAssociationsResult < Struct.new(
+      nil,
       :multicast_domain_associations,
       :next_token,
       keyword_init: true
@@ -36049,6 +37322,7 @@ module Aws::EC2
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     class GetTransitGatewayPolicyTableAssociationsRequest < Struct.new(
+      nil,
       :transit_gateway_policy_table_id,
       :filters,
       :max_results,
@@ -36066,6 +37340,7 @@ module Aws::EC2
     #   <p>The token for the next page of results.</p>
     #   @return [String]
     class GetTransitGatewayPolicyTableAssociationsResult < Struct.new(
+      nil,
       :associations,
       :next_token,
       keyword_init: true
@@ -36092,6 +37367,7 @@ module Aws::EC2
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     class GetTransitGatewayPolicyTableEntriesRequest < Struct.new(
+      nil,
       :transit_gateway_policy_table_id,
       :filters,
       :max_results,
@@ -36106,6 +37382,7 @@ module Aws::EC2
     #   <p>The entries for the transit gateway policy table.</p>
     #   @return [Array<Types::TransitGatewayPolicyTableEntry>]
     class GetTransitGatewayPolicyTableEntriesResult < Struct.new(
+      nil,
       :transit_gateway_policy_table_entries,
       keyword_init: true
     )
@@ -36163,6 +37440,7 @@ module Aws::EC2
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     class GetTransitGatewayPrefixListReferencesRequest < Struct.new(
+      nil,
       :transit_gateway_route_table_id,
       :filters,
       :max_results,
@@ -36180,6 +37458,7 @@ module Aws::EC2
     #   <p>The token to use to retrieve the next page of results. This value is <code>null</code> when there are no more results to return.</p>
     #   @return [String]
     class GetTransitGatewayPrefixListReferencesResult < Struct.new(
+      nil,
       :transit_gateway_prefix_list_references,
       :next_token,
       keyword_init: true
@@ -36222,6 +37501,7 @@ module Aws::EC2
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     class GetTransitGatewayRouteTableAssociationsRequest < Struct.new(
+      nil,
       :transit_gateway_route_table_id,
       :filters,
       :max_results,
@@ -36239,6 +37519,7 @@ module Aws::EC2
     #   <p>The token to use to retrieve the next page of results. This value is <code>null</code> when there are no more results to return.</p>
     #   @return [String]
     class GetTransitGatewayRouteTableAssociationsResult < Struct.new(
+      nil,
       :associations,
       :next_token,
       keyword_init: true
@@ -36281,6 +37562,7 @@ module Aws::EC2
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     class GetTransitGatewayRouteTablePropagationsRequest < Struct.new(
+      nil,
       :transit_gateway_route_table_id,
       :filters,
       :max_results,
@@ -36298,6 +37580,7 @@ module Aws::EC2
     #   <p>The token to use to retrieve the next page of results. This value is <code>null</code> when there are no more results to return.</p>
     #   @return [String]
     class GetTransitGatewayRouteTablePropagationsResult < Struct.new(
+      nil,
       :transit_gateway_route_table_propagations,
       :next_token,
       keyword_init: true
@@ -36314,6 +37597,7 @@ module Aws::EC2
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     class GetVerifiedAccessEndpointPolicyRequest < Struct.new(
+      nil,
       :verified_access_endpoint_id,
       :dry_run,
       keyword_init: true
@@ -36328,6 +37612,7 @@ module Aws::EC2
     #   <p>The Verified Access policy document.</p>
     #   @return [String]
     class GetVerifiedAccessEndpointPolicyResult < Struct.new(
+      nil,
       :policy_enabled,
       :policy_document,
       keyword_init: true
@@ -36351,6 +37636,7 @@ module Aws::EC2
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     class GetVerifiedAccessEndpointTargetsRequest < Struct.new(
+      nil,
       :verified_access_endpoint_id,
       :max_results,
       :next_token,
@@ -36367,6 +37653,7 @@ module Aws::EC2
     #   <p>The token to use to retrieve the next page of results. This value is <code>null</code> when there are no more results to return.</p>
     #   @return [String]
     class GetVerifiedAccessEndpointTargetsResult < Struct.new(
+      nil,
       :verified_access_endpoint_targets,
       :next_token,
       keyword_init: true
@@ -36383,6 +37670,7 @@ module Aws::EC2
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     class GetVerifiedAccessGroupPolicyRequest < Struct.new(
+      nil,
       :verified_access_group_id,
       :dry_run,
       keyword_init: true
@@ -36397,6 +37685,7 @@ module Aws::EC2
     #   <p>The Verified Access policy document.</p>
     #   @return [String]
     class GetVerifiedAccessGroupPolicyResult < Struct.new(
+      nil,
       :policy_enabled,
       :policy_document,
       keyword_init: true
@@ -36426,6 +37715,7 @@ module Aws::EC2
     #                   <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     class GetVpnConnectionDeviceSampleConfigurationRequest < Struct.new(
+      nil,
       :vpn_connection_id,
       :vpn_connection_device_type_id,
       :internet_key_exchange_version,
@@ -36440,6 +37730,7 @@ module Aws::EC2
     #   <p>Sample configuration file for the specified customer gateway device.</p>
     #   @return [String]
     class GetVpnConnectionDeviceSampleConfigurationResult < Struct.new(
+      nil,
       :vpn_connection_device_sample_configuration,
       keyword_init: true
     )
@@ -36470,6 +37761,7 @@ module Aws::EC2
     #                   <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     class GetVpnConnectionDeviceTypesRequest < Struct.new(
+      nil,
       :max_results,
       :next_token,
       :dry_run,
@@ -36490,6 +37782,7 @@ module Aws::EC2
     #               there are no more results to return.</p>
     #   @return [String]
     class GetVpnConnectionDeviceTypesResult < Struct.new(
+      nil,
       :vpn_connection_device_types,
       :next_token,
       keyword_init: true
@@ -36507,6 +37800,7 @@ module Aws::EC2
     #   <p>Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     class GetVpnTunnelReplacementStatusRequest < Struct.new(
+      nil,
       :vpn_connection_id,
       :vpn_tunnel_outside_ip_address,
       :dry_run,
@@ -36534,6 +37828,7 @@ module Aws::EC2
     #   <p>Get details of pending tunnel endpoint maintenance.</p>
     #   @return [Types::MaintenanceDetails]
     class GetVpnTunnelReplacementStatusResult < Struct.new(
+      nil,
       :vpn_connection_id,
       :transit_gateway_id,
       :customer_gateway_id,
@@ -36559,6 +37854,7 @@ module Aws::EC2
     #   <p>Describes the memory available to the GPU accelerator.</p>
     #   @return [Types::GpuDeviceMemoryInfo]
     class GpuDeviceInfo < Struct.new(
+      nil,
       :name,
       :manufacturer,
       :count,
@@ -36573,6 +37869,7 @@ module Aws::EC2
     #   <p>The size of the memory available to the GPU accelerator, in MiB.</p>
     #   @return [Integer]
     class GpuDeviceMemoryInfo < Struct.new(
+      nil,
       :size_in_mi_b,
       keyword_init: true
     )
@@ -36587,6 +37884,7 @@ module Aws::EC2
     #   <p>The total size of the memory for the GPU accelerators for the instance type, in MiB.</p>
     #   @return [Integer]
     class GpuInfo < Struct.new(
+      nil,
       :gpus,
       :total_gpu_memory_in_mi_b,
       keyword_init: true
@@ -36602,6 +37900,7 @@ module Aws::EC2
     #   <p>The name of the security group.</p>
     #   @return [String]
     class GroupIdentifier < Struct.new(
+      nil,
       :group_id,
       :group_name,
       keyword_init: true
@@ -36618,6 +37917,7 @@ module Aws::EC2
     #               enabled for hibernation.</p>
     #   @return [Boolean]
     class HibernationOptions < Struct.new(
+      nil,
       :configured,
       keyword_init: true
     )
@@ -36649,6 +37949,7 @@ module Aws::EC2
     #            </p>
     #   @return [Boolean]
     class HibernationOptionsRequest < Struct.new(
+      nil,
       :configured,
       keyword_init: true
     )
@@ -36686,6 +37987,7 @@ module Aws::EC2
     #                   <i>YYYY</i>-<i>MM</i>-<i>DD</i>T<i>HH</i>:<i>MM</i>:<i>SS</i>Z).</p>
     #   @return [Time]
     class HistoryRecord < Struct.new(
+      nil,
       :event_information,
       :event_type,
       :timestamp,
@@ -36706,6 +38008,7 @@ module Aws::EC2
     #               <i>YYYY</i>-<i>MM</i>-<i>DD</i>T<i>HH</i>:<i>MM</i>:<i>SS</i>Z).</p>
     #   @return [Time]
     class HistoryRecordEntry < Struct.new(
+      nil,
       :event_information,
       :event_type,
       :timestamp,
@@ -36783,6 +38086,7 @@ module Aws::EC2
     #   <p>The ID of the Outpost hardware asset on which the Dedicated Host is allocated.</p>
     #   @return [String]
     class Host < Struct.new(
+      nil,
       :auto_placement,
       :availability_zone,
       :available_capacity,
@@ -36820,6 +38124,7 @@ module Aws::EC2
     #   <p>The ID of the Amazon Web Services account that owns the instance.</p>
     #   @return [String]
     class HostInstance < Struct.new(
+      nil,
       :instance_id,
       :instance_type,
       :owner_id,
@@ -36851,6 +38156,7 @@ module Aws::EC2
     #   <p>The upfront price of the offering. Does not apply to No Upfront offerings.</p>
     #   @return [String]
     class HostOffering < Struct.new(
+      nil,
       :currency_code,
       :duration,
       :hourly_price,
@@ -36882,6 +38188,7 @@ module Aws::EC2
     #   <p>The total number of vCPUs on the Dedicated Host.</p>
     #   @return [Integer]
     class HostProperties < Struct.new(
+      nil,
       :cores,
       :instance_type,
       :instance_family,
@@ -36941,6 +38248,7 @@ module Aws::EC2
     #   <p>Any tags assigned to the Dedicated Host Reservation.</p>
     #   @return [Array<Types::Tag>]
     class HostReservation < Struct.new(
+      nil,
       :count,
       :currency_code,
       :duration,
@@ -36965,6 +38273,7 @@ module Aws::EC2
     #   <p>The IKE version.</p>
     #   @return [String]
     class IKEVersionsListValue < Struct.new(
+      nil,
       :value,
       keyword_init: true
     )
@@ -36976,6 +38285,7 @@ module Aws::EC2
     #   <p>The IKE version.</p>
     #   @return [String]
     class IKEVersionsRequestListValue < Struct.new(
+      nil,
       :value,
       keyword_init: true
     )
@@ -36990,6 +38300,7 @@ module Aws::EC2
     #   <p>The ID of the instance profile.</p>
     #   @return [String]
     class IamInstanceProfile < Struct.new(
+      nil,
       :arn,
       :id,
       keyword_init: true
@@ -37014,6 +38325,7 @@ module Aws::EC2
     #   <p>The time the IAM instance profile was associated with the instance.</p>
     #   @return [Time]
     class IamInstanceProfileAssociation < Struct.new(
+      nil,
       :association_id,
       :instance_id,
       :iam_instance_profile,
@@ -37032,6 +38344,7 @@ module Aws::EC2
     #   <p>The name of the instance profile.</p>
     #   @return [String]
     class IamInstanceProfileSpecification < Struct.new(
+      nil,
       :arn,
       :name,
       keyword_init: true
@@ -37047,6 +38360,7 @@ module Aws::EC2
     #   <p>The ICMP type. A value of -1 means all types.</p>
     #   @return [Integer]
     class IcmpTypeCode < Struct.new(
+      nil,
       :code,
       :type,
       keyword_init: true
@@ -37065,6 +38379,7 @@ module Aws::EC2
     #   <p>Indicates whether longer IDs (17-character IDs) are enabled for the resource.</p>
     #   @return [Boolean]
     class IdFormat < Struct.new(
+      nil,
       :deadline,
       :resource,
       :use_long_ids,
@@ -37231,6 +38546,7 @@ module Aws::EC2
     #   <p>This value is set to <code>windows</code> for Windows AMIs; otherwise, it is blank.</p>
     #   @return [String]
     class Image < Struct.new(
+      nil,
       :platform_details,
       :usage_operation,
       :block_device_mappings,
@@ -37342,6 +38658,7 @@ module Aws::EC2
     #   <p>The maximum age for allowed images.</p>
     #   @return [Types::CreationDateCondition]
     class ImageCriterion < Struct.new(
+      nil,
       :image_providers,
       :marketplace_product_codes,
       :image_names,
@@ -37444,6 +38761,7 @@ module Aws::EC2
     #   <p>The maximum age for allowed images.</p>
     #   @return [Types::CreationDateConditionRequest]
     class ImageCriterionRequest < Struct.new(
+      nil,
       :image_providers,
       :marketplace_product_codes,
       :image_names,
@@ -37477,6 +38795,7 @@ module Aws::EC2
     #   <p>The S3 bucket for the disk image.</p>
     #   @return [Types::UserBucket]
     class ImageDiskContainer < Struct.new(
+      nil,
       :description,
       :device_name,
       :format,
@@ -37529,6 +38848,7 @@ module Aws::EC2
     #         implicit (AMI owner) or explicit (shared with your account) launch permissions.</p>
     #   @return [Boolean]
     class ImageMetadata < Struct.new(
+      nil,
       :image_id,
       :name,
       :owner_id,
@@ -37560,6 +38880,7 @@ module Aws::EC2
     #   <p>The date and time when the AMI is to be permanently deleted from the Recycle Bin.</p>
     #   @return [Time]
     class ImageRecycleBinInfo < Struct.new(
+      nil,
       :image_id,
       :name,
       :description,
@@ -37581,6 +38902,7 @@ module Aws::EC2
     #   <p>The Amazon Resource Name (ARN) of the resource referencing the image.</p>
     #   @return [String]
     class ImageReference < Struct.new(
+      nil,
       :image_id,
       :resource_type,
       :arn,
@@ -37633,6 +38955,7 @@ module Aws::EC2
     #   <p>Any tags assigned to the report.</p>
     #   @return [Array<Types::Tag>]
     class ImageUsageReport < Struct.new(
+      nil,
       :image_id,
       :report_id,
       :resource_types,
@@ -37669,6 +38992,7 @@ module Aws::EC2
     #   <p>The date and time the report creation was initiated.</p>
     #   @return [Time]
     class ImageUsageReportEntry < Struct.new(
+      nil,
       :resource_type,
       :report_id,
       :usage_count,
@@ -37692,6 +39016,7 @@ module Aws::EC2
     #         is <code>ec2:LaunchTemplate</code>.</p>
     #   @return [Array<Types::ImageUsageResourceTypeOption>]
     class ImageUsageResourceType < Struct.new(
+      nil,
       :resource_type,
       :resource_type_options,
       keyword_init: true
@@ -37707,6 +39032,7 @@ module Aws::EC2
     #   <p>The number of launch template versions to check.</p>
     #   @return [Array<String>]
     class ImageUsageResourceTypeOption < Struct.new(
+      nil,
       :option_name,
       :option_values,
       keyword_init: true
@@ -37728,6 +39054,7 @@ module Aws::EC2
     #            </p>
     #   @return [Array<String>]
     class ImageUsageResourceTypeOptionRequest < Struct.new(
+      nil,
       :option_name,
       :option_values,
       keyword_init: true
@@ -37747,6 +39074,7 @@ module Aws::EC2
     #         is <code>ec2:LaunchTemplate</code>.</p>
     #   @return [Array<Types::ImageUsageResourceTypeOptionRequest>]
     class ImageUsageResourceTypeRequest < Struct.new(
+      nil,
       :resource_type,
       :resource_type_options,
       keyword_init: true
@@ -37765,6 +39093,7 @@ module Aws::EC2
     #   <p>Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     class ImportClientVpnClientCertificateRevocationListRequest < Struct.new(
+      nil,
       :client_vpn_endpoint_id,
       :certificate_revocation_list,
       :dry_run,
@@ -37777,6 +39106,7 @@ module Aws::EC2
     #   <p>Returns <code>true</code> if the request succeeds; otherwise, it returns an error.</p>
     #   @return [Boolean]
     class ImportClientVpnClientCertificateRevocationListResult < Struct.new(
+      nil,
       :return,
       keyword_init: true
     )
@@ -37788,6 +39118,7 @@ module Aws::EC2
     #   <p>The ARN of a license configuration.</p>
     #   @return [String]
     class ImportImageLicenseConfigurationRequest < Struct.new(
+      nil,
       :license_configuration_arn,
       keyword_init: true
     )
@@ -37799,6 +39130,7 @@ module Aws::EC2
     #   <p>The ARN of a license configuration.</p>
     #   @return [String]
     class ImportImageLicenseConfigurationResponse < Struct.new(
+      nil,
       :license_configuration_arn,
       keyword_init: true
     )
@@ -37901,6 +39233,7 @@ module Aws::EC2
     #            </note>
     #   @return [String]
     class ImportImageRequest < Struct.new(
+      nil,
       :architecture,
       :client_data,
       :client_token,
@@ -37971,6 +39304,7 @@ module Aws::EC2
     #   <p>The usage operation value.</p>
     #   @return [String]
     class ImportImageResult < Struct.new(
+      nil,
       :architecture,
       :description,
       :encrypted,
@@ -38049,6 +39383,7 @@ module Aws::EC2
     #   <p>The boot mode of the virtual machine.</p>
     #   @return [String]
     class ImportImageTask < Struct.new(
+      nil,
       :architecture,
       :description,
       :encrypted,
@@ -38108,6 +39443,7 @@ module Aws::EC2
     #   <p>[EC2-VPC] An available IP address from the IP address range of the subnet.</p>
     #   @return [String]
     class ImportInstanceLaunchSpecification < Struct.new(
+      nil,
       :architecture,
       :group_names,
       :group_ids,
@@ -38142,6 +39478,7 @@ module Aws::EC2
     #   <p>The instance operating system.</p>
     #   @return [String]
     class ImportInstanceRequest < Struct.new(
+      nil,
       :dry_run,
       :description,
       :launch_specification,
@@ -38156,6 +39493,7 @@ module Aws::EC2
     #   <p>Information about the conversion task.</p>
     #   @return [Types::ConversionTask]
     class ImportInstanceResult < Struct.new(
+      nil,
       :conversion_task,
       keyword_init: true
     )
@@ -38176,6 +39514,7 @@ module Aws::EC2
     #   <p>The volumes.</p>
     #   @return [Array<Types::ImportInstanceVolumeDetailItem>]
     class ImportInstanceTaskDetails < Struct.new(
+      nil,
       :description,
       :instance_id,
       :platform,
@@ -38211,6 +39550,7 @@ module Aws::EC2
     #   <p>The volume.</p>
     #   @return [Types::DiskImageVolumeDescription]
     class ImportInstanceVolumeDetailItem < Struct.new(
+      nil,
       :availability_zone,
       :availability_zone_id,
       :bytes_converted,
@@ -38239,6 +39579,7 @@ module Aws::EC2
     #   <p>The public key.</p>
     #   @return [String]
     class ImportKeyPairRequest < Struct.new(
+      nil,
       :tag_specifications,
       :dry_run,
       :key_name,
@@ -38268,6 +39609,7 @@ module Aws::EC2
     #   <p>The tags applied to the imported key pair.</p>
     #   @return [Array<Types::Tag>]
     class ImportKeyPairResult < Struct.new(
+      nil,
       :key_fingerprint,
       :key_name,
       :key_pair_id,
@@ -38331,6 +39673,7 @@ module Aws::EC2
     #   <p>The tags to apply to the import snapshot task during creation.</p>
     #   @return [Array<Types::TagSpecification>]
     class ImportSnapshotRequest < Struct.new(
+      nil,
       :client_data,
       :client_token,
       :description,
@@ -38358,6 +39701,7 @@ module Aws::EC2
     #   <p>Any tags assigned to the import snapshot task.</p>
     #   @return [Array<Types::Tag>]
     class ImportSnapshotResult < Struct.new(
+      nil,
       :description,
       :import_task_id,
       :snapshot_task_detail,
@@ -38381,6 +39725,7 @@ module Aws::EC2
     #   <p>The tags for the import snapshot task.</p>
     #   @return [Array<Types::Tag>]
     class ImportSnapshotTask < Struct.new(
+      nil,
       :description,
       :import_task_id,
       :snapshot_task_detail,
@@ -38415,6 +39760,7 @@ module Aws::EC2
     #   <p>The volume size.</p>
     #   @return [Types::VolumeDetail]
     class ImportVolumeRequest < Struct.new(
+      nil,
       :availability_zone_id,
       :dry_run,
       :availability_zone,
@@ -38430,6 +39776,7 @@ module Aws::EC2
     #   <p>Information about the conversion task.</p>
     #   @return [Types::ConversionTask]
     class ImportVolumeResult < Struct.new(
+      nil,
       :conversion_task,
       keyword_init: true
     )
@@ -38456,6 +39803,7 @@ module Aws::EC2
     #   <p>The volume.</p>
     #   @return [Types::DiskImageVolumeDescription]
     class ImportVolumeTaskDetails < Struct.new(
+      nil,
       :availability_zone,
       :availability_zone_id,
       :bytes_converted,
@@ -38479,6 +39827,7 @@ module Aws::EC2
     #      MiB.</p>
     #   @return [Integer]
     class InferenceAcceleratorInfo < Struct.new(
+      nil,
       :accelerators,
       :total_inference_memory_in_mi_b,
       keyword_init: true
@@ -38503,6 +39852,7 @@ module Aws::EC2
     #   <p>Describes the memory available to the inference accelerator.</p>
     #   @return [Types::InferenceDeviceMemoryInfo]
     class InferenceDeviceInfo < Struct.new(
+      nil,
       :count,
       :name,
       :manufacturer,
@@ -38520,6 +39870,7 @@ module Aws::EC2
     #   <p>The size of the memory available to the inference accelerator, in MiB.</p>
     #   @return [Integer]
     class InferenceDeviceMemoryInfo < Struct.new(
+      nil,
       :size_in_mi_b,
       keyword_init: true
     )
@@ -38552,6 +39903,7 @@ module Aws::EC2
     #            <p>Only available for volumes created with Amazon EBS Provisioned Rate for Volume Initialization.</p>
     #   @return [Integer]
     class InitializationStatusDetails < Struct.new(
+      nil,
       :initialization_type,
       :progress,
       :estimated_time_to_complete_in_seconds,
@@ -38791,6 +40143,7 @@ module Aws::EC2
     #               a Wavelength Zone.</p>
     #   @return [String]
     class Instance < Struct.new(
+      nil,
       :architecture,
       :block_device_mappings,
       :client_token,
@@ -38871,6 +40224,7 @@ module Aws::EC2
     #   <p>Configures ENA Express for UDP network traffic.</p>
     #   @return [Types::InstanceAttachmentEnaSrdUdpSpecification]
     class InstanceAttachmentEnaSrdSpecification < Struct.new(
+      nil,
       :ena_srd_enabled,
       :ena_srd_udp_specification,
       keyword_init: true
@@ -38888,6 +40242,7 @@ module Aws::EC2
     #   			you must first enable ENA Express.</p>
     #   @return [Boolean]
     class InstanceAttachmentEnaSrdUdpSpecification < Struct.new(
+      nil,
       :ena_srd_udp_enabled,
       keyword_init: true
     )
@@ -38903,6 +40258,7 @@ module Aws::EC2
     #               launched.</p>
     #   @return [Types::EbsInstanceBlockDevice]
     class InstanceBlockDeviceMapping < Struct.new(
+      nil,
       :device_name,
       :ebs,
       keyword_init: true
@@ -38925,6 +40281,7 @@ module Aws::EC2
     #   <p>Suppresses the specified device included in the block device mapping.</p>
     #   @return [String]
     class InstanceBlockDeviceMappingSpecification < Struct.new(
+      nil,
       :device_name,
       :ebs,
       :virtual_name,
@@ -38948,6 +40305,7 @@ module Aws::EC2
     #               are no instances running on it.</p>
     #   @return [Integer]
     class InstanceCapacity < Struct.new(
+      nil,
       :available_capacity,
       :instance_type,
       :total_capacity,
@@ -38964,6 +40322,7 @@ module Aws::EC2
     #   <p>The Federal Information Processing Standards (FIPS) compliant DNS name of the EC2 Instance Connect Endpoint.</p>
     #   @return [String]
     class InstanceConnectEndpointDnsNames < Struct.new(
+      nil,
       :dns_name,
       :fips_dns_name,
       keyword_init: true
@@ -38980,6 +40339,7 @@ module Aws::EC2
     #   <p>The dualstack DNS name of the EC2 Instance Connect Endpoint. A dualstack DNS name supports connections from both IPv4 and IPv6 clients.</p>
     #   @return [Types::InstanceConnectEndpointDnsNames]
     class InstanceConnectEndpointPublicDnsNames < Struct.new(
+      nil,
       :ipv4,
       :dualstack,
       keyword_init: true
@@ -38996,6 +40356,7 @@ module Aws::EC2
     #   <p>The states of the listed Reserved Instances.</p>
     #   @return [String]
     class InstanceCount < Struct.new(
+      nil,
       :instance_count,
       :state,
       keyword_init: true
@@ -39013,6 +40374,7 @@ module Aws::EC2
     #            </p>
     #   @return [String]
     class InstanceCreditSpecification < Struct.new(
+      nil,
       :instance_id,
       :cpu_credits,
       keyword_init: true
@@ -39032,6 +40394,7 @@ module Aws::EC2
     #               CPU credit option.</p>
     #   @return [String]
     class InstanceCreditSpecificationRequest < Struct.new(
+      nil,
       :instance_id,
       :cpu_credits,
       keyword_init: true
@@ -39062,6 +40425,7 @@ module Aws::EC2
     #   <p>The instance tags associated with the event window.</p>
     #   @return [Array<Types::Tag>]
     class InstanceEventWindow < Struct.new(
+      nil,
       :instance_event_window_id,
       :time_ranges,
       :name,
@@ -39093,6 +40457,7 @@ module Aws::EC2
     #   <p>The IDs of the Dedicated Hosts to associate with the event window.</p>
     #   @return [Array<String>]
     class InstanceEventWindowAssociationRequest < Struct.new(
+      nil,
       :instance_ids,
       :instance_tags,
       :dedicated_host_ids,
@@ -39116,6 +40481,7 @@ module Aws::EC2
     #   <p>The IDs of the Dedicated Hosts associated with the event window.</p>
     #   @return [Array<String>]
     class InstanceEventWindowAssociationTarget < Struct.new(
+      nil,
       :instance_ids,
       :tags,
       :dedicated_host_ids,
@@ -39136,6 +40502,7 @@ module Aws::EC2
     #   <p>The IDs of the Dedicated Hosts to disassociate from the event window.</p>
     #   @return [Array<String>]
     class InstanceEventWindowDisassociationRequest < Struct.new(
+      nil,
       :instance_ids,
       :instance_tags,
       :dedicated_host_ids,
@@ -39152,6 +40519,7 @@ module Aws::EC2
     #   <p>The current state of the event window.</p>
     #   @return [String]
     class InstanceEventWindowStateChange < Struct.new(
+      nil,
       :instance_event_window_id,
       :state,
       keyword_init: true
@@ -39173,6 +40541,7 @@ module Aws::EC2
     #   <p>The hour when the time range ends.</p>
     #   @return [Integer]
     class InstanceEventWindowTimeRange < Struct.new(
+      nil,
       :start_week_day,
       :start_hour,
       :end_week_day,
@@ -39196,6 +40565,7 @@ module Aws::EC2
     #   <p>The hour when the time range ends.</p>
     #   @return [Integer]
     class InstanceEventWindowTimeRangeRequest < Struct.new(
+      nil,
       :start_week_day,
       :start_hour,
       :end_week_day,
@@ -39213,6 +40583,7 @@ module Aws::EC2
     #   <p>The target virtualization environment.</p>
     #   @return [String]
     class InstanceExportDetails < Struct.new(
+      nil,
       :instance_id,
       :target_environment,
       keyword_init: true
@@ -39230,6 +40601,7 @@ module Aws::EC2
     #                   <code>standard</code> and <code>unlimited</code>.</p>
     #   @return [String]
     class InstanceFamilyCreditSpecification < Struct.new(
+      nil,
       :instance_family,
       :cpu_credits,
       keyword_init: true
@@ -39269,6 +40641,7 @@ module Aws::EC2
     #   <p>The entity that manages the instance.</p>
     #   @return [Types::OperatorResponse]
     class InstanceImageMetadata < Struct.new(
+      nil,
       :instance_id,
       :instance_type,
       :launch_time,
@@ -39289,6 +40662,7 @@ module Aws::EC2
     #   <p>One or more IPv4 prefixes assigned to the network interface.</p>
     #   @return [String]
     class InstanceIpv4Prefix < Struct.new(
+      nil,
       :ipv4_prefix,
       keyword_init: true
     )
@@ -39304,6 +40678,7 @@ module Aws::EC2
     #               For more information, see <a href="https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_RunInstances.html">RunInstances</a>.</p>
     #   @return [Boolean]
     class InstanceIpv6Address < Struct.new(
+      nil,
       :ipv6_address,
       :is_primary_ipv6,
       keyword_init: true
@@ -39316,6 +40691,7 @@ module Aws::EC2
     #   <p>The IPv6 address.</p>
     #   @return [String]
     class InstanceIpv6AddressRequest < Struct.new(
+      nil,
       :ipv6_address,
       keyword_init: true
     )
@@ -39327,6 +40703,7 @@ module Aws::EC2
     #   <p>One or more IPv6 prefixes assigned to the network interface.</p>
     #   @return [String]
     class InstanceIpv6Prefix < Struct.new(
+      nil,
       :ipv6_prefix,
       keyword_init: true
     )
@@ -39361,6 +40738,7 @@ module Aws::EC2
     #               <i>Amazon EC2 User Guide</i>.</p>
     #   @return [String]
     class InstanceMaintenanceOptions < Struct.new(
+      nil,
       :auto_recovery,
       :reboot_migration,
       keyword_init: true
@@ -39374,6 +40752,7 @@ module Aws::EC2
     #               more information, see <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-instance-recover.html#instance-configuration-recovery">Simplified automatic recovery</a>.</p>
     #   @return [String]
     class InstanceMaintenanceOptionsRequest < Struct.new(
+      nil,
       :auto_recovery,
       keyword_init: true
     )
@@ -39388,6 +40767,7 @@ module Aws::EC2
     #   <p>The options for Spot Instances.</p>
     #   @return [Types::SpotMarketOptions]
     class InstanceMarketOptionsRequest < Struct.new(
+      nil,
       :market_type,
       :spot_options,
       keyword_init: true
@@ -39444,6 +40824,7 @@ module Aws::EC2
     #   <p>The customized exception message that is specified in the declarative policy.</p>
     #   @return [String]
     class InstanceMetadataDefaultsResponse < Struct.new(
+      nil,
       :http_tokens,
       :http_put_response_hop_limit,
       :http_endpoint,
@@ -39512,6 +40893,7 @@ module Aws::EC2
     #            </p>
     #   @return [String]
     class InstanceMetadataOptionsRequest < Struct.new(
+      nil,
       :http_tokens,
       :http_put_response_hop_limit,
       :http_endpoint,
@@ -39570,6 +40952,7 @@ module Aws::EC2
     #                   instance tags using the instance metadata</a>.</p>
     #   @return [String]
     class InstanceMetadataOptionsResponse < Struct.new(
+      nil,
       :state,
       :http_tokens,
       :http_put_response_hop_limit,
@@ -39589,6 +40972,7 @@ module Aws::EC2
     #   <p>The monitoring for the instance.</p>
     #   @return [Types::Monitoring]
     class InstanceMonitoring < Struct.new(
+      nil,
       :instance_id,
       :monitoring,
       keyword_init: true
@@ -39665,6 +41049,7 @@ module Aws::EC2
     #   <p>The service provider that manages the network interface.</p>
     #   @return [Types::OperatorResponse]
     class InstanceNetworkInterface < Struct.new(
+      nil,
       :association,
       :attachment,
       :description,
@@ -39707,6 +41092,7 @@ module Aws::EC2
     #   <p>The public IP address or Elastic IP address bound to the network interface.</p>
     #   @return [String]
     class InstanceNetworkInterfaceAssociation < Struct.new(
+      nil,
       :carrier_ip,
       :customer_owned_ip,
       :ip_owner_id,
@@ -39745,6 +41131,7 @@ module Aws::EC2
     #   <p>The number of ENA queues created with the instance.</p>
     #   @return [Integer]
     class InstanceNetworkInterfaceAttachment < Struct.new(
+      nil,
       :attach_time,
       :attachment_id,
       :delete_on_termination,
@@ -39880,6 +41267,7 @@ module Aws::EC2
     #   <p>The number of ENA queues to be created with the instance.</p>
     #   @return [Integer]
     class InstanceNetworkInterfaceSpecification < Struct.new(
+      nil,
       :associate_public_ip_address,
       :delete_on_termination,
       :description,
@@ -39916,6 +41304,7 @@ module Aws::EC2
     #       		the same. The default option uses the standard bandwidth configuration for your instance type.</p>
     #   @return [String]
     class InstanceNetworkPerformanceOptions < Struct.new(
+      nil,
       :bandwidth_weighting,
       keyword_init: true
     )
@@ -39945,6 +41334,7 @@ module Aws::EC2
     #            </dl>
     #   @return [String]
     class InstanceNetworkPerformanceOptionsRequest < Struct.new(
+      nil,
       :bandwidth_weighting,
       keyword_init: true
     )
@@ -39967,6 +41357,7 @@ module Aws::EC2
     #   <p>The private IPv4 address of the network interface.</p>
     #   @return [String]
     class InstancePrivateIpAddress < Struct.new(
+      nil,
       :association,
       :primary,
       :private_dns_name,
@@ -40339,6 +41730,7 @@ module Aws::EC2
     #            information, see <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-fleet-attribute-based-instance-type-selection.html#ec2fleet-abis-performance-protection">Performance protection</a> in the <i>Amazon EC2 User Guide</i>.</p>
     #   @return [Types::BaselinePerformanceFactors]
     class InstanceRequirements < Struct.new(
+      nil,
       :v_cpu_count,
       :memory_mi_b,
       :cpu_manufacturers,
@@ -40733,6 +42125,7 @@ module Aws::EC2
     #            information, see <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-fleet-attribute-based-instance-type-selection.html#ec2fleet-abis-performance-protection">Performance protection</a> in the <i>Amazon EC2 User Guide</i>.</p>
     #   @return [Types::BaselinePerformanceFactorsRequest]
     class InstanceRequirementsRequest < Struct.new(
+      nil,
       :v_cpu_count,
       :memory_mi_b,
       :cpu_manufacturers,
@@ -40779,6 +42172,7 @@ module Aws::EC2
     #            identify instance types with those attributes.</p>
     #   @return [Types::InstanceRequirementsRequest]
     class InstanceRequirementsWithMetadataRequest < Struct.new(
+      nil,
       :architecture_types,
       :virtualization_types,
       :instance_requirements,
@@ -40801,6 +42195,7 @@ module Aws::EC2
     #            <p>You can specify up to 40 volume IDs per request.</p>
     #   @return [Array<String>]
     class InstanceSpecification < Struct.new(
+      nil,
       :instance_id,
       :exclude_boot_volume,
       :exclude_data_volume_ids,
@@ -40858,6 +42253,7 @@ module Aws::EC2
     #   <p>The current state of the instance.</p>
     #   @return [String]
     class InstanceState < Struct.new(
+      nil,
       :code,
       :name,
       keyword_init: true
@@ -40876,6 +42272,7 @@ module Aws::EC2
     #   <p>The previous state of the instance.</p>
     #   @return [Types::InstanceState]
     class InstanceStateChange < Struct.new(
+      nil,
       :instance_id,
       :current_state,
       :previous_state,
@@ -40920,6 +42317,7 @@ module Aws::EC2
     #               unreachable and unable to complete I/O operations.</p>
     #   @return [Types::EbsStatusSummary]
     class InstanceStatus < Struct.new(
+      nil,
       :availability_zone,
       :availability_zone_id,
       :outpost_arn,
@@ -40947,6 +42345,7 @@ module Aws::EC2
     #   <p>The status.</p>
     #   @return [String]
     class InstanceStatusDetails < Struct.new(
+      nil,
       :impaired_since,
       :name,
       :status,
@@ -40978,6 +42377,7 @@ module Aws::EC2
     #   <p>The deadline for starting the event.</p>
     #   @return [Time]
     class InstanceStatusEvent < Struct.new(
+      nil,
       :instance_event_id,
       :code,
       :description,
@@ -40997,6 +42397,7 @@ module Aws::EC2
     #   <p>The status.</p>
     #   @return [String]
     class InstanceStatusSummary < Struct.new(
+      nil,
       :details,
       :status,
       keyword_init: true
@@ -41018,6 +42419,7 @@ module Aws::EC2
     #   <p>Indicates whether data is encrypted at rest.</p>
     #   @return [String]
     class InstanceStorageInfo < Struct.new(
+      nil,
       :total_size_in_gb,
       :disks,
       :nvme_support,
@@ -41037,6 +42439,7 @@ module Aws::EC2
     #            Region are registered.</p>
     #   @return [Boolean]
     class InstanceTagNotificationAttribute < Struct.new(
+      nil,
       :instance_tag_keys,
       :include_all_tags_of_instance,
       keyword_init: true
@@ -41070,6 +42473,7 @@ module Aws::EC2
     #               instances and identifies instances within the Ultraserver domain.</p>
     #   @return [String]
     class InstanceTopology < Struct.new(
+      nil,
       :instance_id,
       :instance_type,
       :group_name,
@@ -41186,6 +42590,7 @@ module Aws::EC2
     #      <i>Amazon EC2 User Guide</i>.</p>
     #   @return [String]
     class InstanceTypeInfo < Struct.new(
+      nil,
       :instance_type,
       :current_generation,
       :free_tier_eligible,
@@ -41227,6 +42632,7 @@ module Aws::EC2
     #   <p>The matching instance type.</p>
     #   @return [String]
     class InstanceTypeInfoFromInstanceRequirements < Struct.new(
+      nil,
       :instance_type,
       keyword_init: true
     )
@@ -41247,6 +42653,7 @@ module Aws::EC2
     #       <code>us-east-2</code>.)</p>
     #   @return [String]
     class InstanceTypeOffering < Struct.new(
+      nil,
       :instance_type,
       :location_type,
       :location,
@@ -41265,6 +42672,7 @@ module Aws::EC2
     #   			Reservation.</p>
     #   @return [Integer]
     class InstanceUsage < Struct.new(
+      nil,
       :account_id,
       :used_instance_count,
       keyword_init: true
@@ -41277,6 +42685,7 @@ module Aws::EC2
     #   <p>Information about the integration with Amazon Athena.</p>
     #   @return [Array<Types::AthenaIntegration>]
     class IntegrateServices < Struct.new(
+      nil,
       :athena_integrations,
       keyword_init: true
     )
@@ -41297,6 +42706,7 @@ module Aws::EC2
     #   <p>Any tags assigned to the internet gateway.</p>
     #   @return [Array<Types::Tag>]
     class InternetGateway < Struct.new(
+      nil,
       :attachments,
       :internet_gateway_id,
       :owner_id,
@@ -41316,6 +42726,7 @@ module Aws::EC2
     #   <p>The ID of the VPC.</p>
     #   @return [String]
     class InternetGatewayAttachment < Struct.new(
+      nil,
       :state,
       :vpc_id,
       keyword_init: true
@@ -41356,6 +42767,7 @@ module Aws::EC2
     #   <p>The prefix list IDs.</p>
     #   @return [Array<Types::PrefixListId>]
     class IpPermission < Struct.new(
+      nil,
       :ip_protocol,
       :from_port,
       :to_port,
@@ -41387,6 +42799,7 @@ module Aws::EC2
     #            </note>
     #   @return [String]
     class IpRange < Struct.new(
+      nil,
       :description,
       :cidr_ip,
       keyword_init: true
@@ -41464,6 +42877,7 @@ module Aws::EC2
     #            </ul>
     #   @return [String]
     class Ipam < Struct.new(
+      nil,
       :owner_id,
       :ipam_id,
       :ipam_arn,
@@ -41523,6 +42937,7 @@ module Aws::EC2
     #   <p>Sampled end time of the resource-to-CIDR association within the IPAM scope. Changes are picked up in periodic snapshots, so the end time may have occurred before this specific time.</p>
     #   @return [Time]
     class IpamAddressHistoryRecord < Struct.new(
+      nil,
       :resource_owner_id,
       :resource_region,
       :resource_type,
@@ -41547,6 +42962,7 @@ module Aws::EC2
     #   <p>The signed authorization message for the prefix and account.</p>
     #   @return [String]
     class IpamCidrAuthorizationContext < Struct.new(
+      nil,
       :message,
       :signature,
       keyword_init: true
@@ -41575,6 +42991,7 @@ module Aws::EC2
     #   <p>The ID of an Organizational Unit in Amazon Web Services Organizations.</p>
     #   @return [String]
     class IpamDiscoveredAccount < Struct.new(
+      nil,
       :account_id,
       :discovery_region,
       :failure_reason,
@@ -41645,6 +43062,7 @@ module Aws::EC2
     #   <p>The last successful resource discovery time.</p>
     #   @return [Time]
     class IpamDiscoveredPublicAddress < Struct.new(
+      nil,
       :ipam_resource_discovery_id,
       :address_region,
       :address,
@@ -41727,6 +43145,7 @@ module Aws::EC2
     #   <p>The Availability Zone ID.</p>
     #   @return [String]
     class IpamDiscoveredResourceCidr < Struct.new(
+      nil,
       :ipam_resource_discovery_id,
       :resource_region,
       :resource_id,
@@ -41779,6 +43198,7 @@ module Aws::EC2
     #   <p>The discovery failure message.</p>
     #   @return [String]
     class IpamDiscoveryFailureReason < Struct.new(
+      nil,
       :code,
       :message,
       keyword_init: true
@@ -41822,6 +43242,7 @@ module Aws::EC2
     #   <p>Token state.</p>
     #   @return [String]
     class IpamExternalResourceVerificationToken < Struct.new(
+      nil,
       :ipam_external_resource_verification_token_id,
       :ipam_external_resource_verification_token_arn,
       :ipam_id,
@@ -41844,6 +43265,7 @@ module Aws::EC2
     #   <p>The name of the operating Region.</p>
     #   @return [String]
     class IpamOperatingRegion < Struct.new(
+      nil,
       :region_name,
       keyword_init: true
     )
@@ -41855,6 +43277,7 @@ module Aws::EC2
     #   <p>An Amazon Web Services Organizations entity path. For more information on the entity path, see <a href="https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_last-accessed-view-data-orgs.html#access_policies_access-advisor-viewing-orgs-entity-path">Understand the Amazon Web Services Organizations entity path</a> in the <i>Amazon Web Services Identity and Access Management User Guide</i>.</p>
     #   @return [String]
     class IpamOrganizationalUnitExclusion < Struct.new(
+      nil,
       :organizations_entity_path,
       keyword_init: true
     )
@@ -41956,6 +43379,7 @@ module Aws::EC2
     #   <p>The resource used to provision CIDRs to a resource planning pool.</p>
     #   @return [Types::IpamPoolSourceResource]
     class IpamPool < Struct.new(
+      nil,
       :owner_id,
       :ipam_pool_id,
       :source_ipam_pool_id,
@@ -42009,6 +43433,7 @@ module Aws::EC2
     #   <p>The owner of the resource.</p>
     #   @return [String]
     class IpamPoolAllocation < Struct.new(
+      nil,
       :cidr,
       :ipam_pool_allocation_id,
       :description,
@@ -42039,6 +43464,7 @@ module Aws::EC2
     #   <p>The netmask length of the CIDR you'd like to provision to a pool. Can be used for provisioning Amazon-provided IPv6 CIDRs to top-level pools and for provisioning CIDRs to pools with source pools. Cannot be used to provision BYOIP CIDRs to top-level pools. "NetmaskLength" or "Cidr" is required.</p>
     #   @return [Integer]
     class IpamPoolCidr < Struct.new(
+      nil,
       :cidr,
       :state,
       :failure_reason,
@@ -42057,6 +43483,7 @@ module Aws::EC2
     #   <p>A message related to why an IPAM pool CIDR failed to be provisioned.</p>
     #   @return [String]
     class IpamPoolCidrFailureReason < Struct.new(
+      nil,
       :code,
       :message,
       keyword_init: true
@@ -42078,6 +43505,7 @@ module Aws::EC2
     #   <p>The source resource owner.</p>
     #   @return [String]
     class IpamPoolSourceResource < Struct.new(
+      nil,
       :resource_id,
       :resource_type,
       :resource_region,
@@ -42101,6 +43529,7 @@ module Aws::EC2
     #   <p>The source resource owner.</p>
     #   @return [String]
     class IpamPoolSourceResourceRequest < Struct.new(
+      nil,
       :resource_id,
       :resource_type,
       :resource_region,
@@ -42118,6 +43547,7 @@ module Aws::EC2
     #   <p>The security group's ID.</p>
     #   @return [String]
     class IpamPublicAddressSecurityGroup < Struct.new(
+      nil,
       :group_name,
       :group_id,
       keyword_init: true
@@ -42133,6 +43563,7 @@ module Aws::EC2
     #   <p>The tag's value.</p>
     #   @return [String]
     class IpamPublicAddressTag < Struct.new(
+      nil,
       :key,
       :value,
       keyword_init: true
@@ -42145,6 +43576,7 @@ module Aws::EC2
     #   <p>Tags for an Elastic IP address.</p>
     #   @return [Array<Types::IpamPublicAddressTag>]
     class IpamPublicAddressTags < Struct.new(
+      nil,
       :eip_tags,
       keyword_init: true
     )
@@ -42215,6 +43647,7 @@ module Aws::EC2
     #   <p>The Availability Zone ID.</p>
     #   @return [String]
     class IpamResourceCidr < Struct.new(
+      nil,
       :ipam_id,
       :ipam_scope_id,
       :ipam_pool_id,
@@ -42318,6 +43751,7 @@ module Aws::EC2
     #   <p>If your IPAM is integrated with Amazon Web Services Organizations and you add an organizational unit (OU) exclusion, IPAM will not manage the IP addresses in accounts in that OU exclusion.</p>
     #   @return [Array<Types::IpamOrganizationalUnitExclusion>]
     class IpamResourceDiscovery < Struct.new(
+      nil,
       :owner_id,
       :ipam_resource_discovery_id,
       :ipam_resource_discovery_arn,
@@ -42418,6 +43852,7 @@ module Aws::EC2
     #   <p>A tag is a label that you assign to an Amazon Web Services resource. Each tag consists of a key and an optional value. You can use tags to search and filter your resources or track your Amazon Web Services costs.</p>
     #   @return [Array<Types::Tag>]
     class IpamResourceDiscoveryAssociation < Struct.new(
+      nil,
       :owner_id,
       :ipam_resource_discovery_association_id,
       :ipam_resource_discovery_association_arn,
@@ -42443,6 +43878,7 @@ module Aws::EC2
     #   <p>The value of the tag.</p>
     #   @return [String]
     class IpamResourceTag < Struct.new(
+      nil,
       :key,
       :value,
       keyword_init: true
@@ -42487,6 +43923,7 @@ module Aws::EC2
     #       For example, to find all resources that have a tag with the key <code>Owner</code> and the value <code>TeamA</code>, specify <code>tag:Owner</code> for the filter name and <code>TeamA</code> for the filter value.</p>
     #   @return [Array<Types::Tag>]
     class IpamScope < Struct.new(
+      nil,
       :owner_id,
       :ipam_scope_id,
       :ipam_scope_arn,
@@ -42510,6 +43947,7 @@ module Aws::EC2
     #                   <i>Amazon EC2 User Guide</i>.</p>
     #   @return [String]
     class Ipv4PrefixSpecification < Struct.new(
+      nil,
       :ipv4_prefix,
       keyword_init: true
     )
@@ -42523,6 +43961,7 @@ module Aws::EC2
     #                   <i>Amazon EC2 User Guide</i>.</p>
     #   @return [String]
     class Ipv4PrefixSpecificationRequest < Struct.new(
+      nil,
       :ipv4_prefix,
       keyword_init: true
     )
@@ -42534,6 +43973,7 @@ module Aws::EC2
     #   <p>The IPv4 delegated prefixes assigned to the network interface.</p>
     #   @return [String]
     class Ipv4PrefixSpecificationResponse < Struct.new(
+      nil,
       :ipv4_prefix,
       keyword_init: true
     )
@@ -42548,6 +43988,7 @@ module Aws::EC2
     #   <p>The resource that's associated with the IPv6 CIDR block.</p>
     #   @return [String]
     class Ipv6CidrAssociation < Struct.new(
+      nil,
       :ipv6_cidr,
       :associated_resource,
       keyword_init: true
@@ -42560,6 +44001,7 @@ module Aws::EC2
     #   <p>The IPv6 CIDR block.</p>
     #   @return [String]
     class Ipv6CidrBlock < Struct.new(
+      nil,
       :ipv6_cidr_block,
       keyword_init: true
     )
@@ -42580,6 +44022,7 @@ module Aws::EC2
     #   <p>Any tags for the address pool.</p>
     #   @return [Array<Types::Tag>]
     class Ipv6Pool < Struct.new(
+      nil,
       :pool_id,
       :description,
       :pool_cidr_blocks,
@@ -42594,6 +44037,7 @@ module Aws::EC2
     #   <p>The IPv6 prefix.</p>
     #   @return [String]
     class Ipv6PrefixSpecification < Struct.new(
+      nil,
       :ipv6_prefix,
       keyword_init: true
     )
@@ -42605,6 +44049,7 @@ module Aws::EC2
     #   <p>The IPv6 prefix.</p>
     #   @return [String]
     class Ipv6PrefixSpecificationRequest < Struct.new(
+      nil,
       :ipv6_prefix,
       keyword_init: true
     )
@@ -42616,6 +44061,7 @@ module Aws::EC2
     #   <p>The IPv6 delegated prefixes assigned to the network interface.</p>
     #   @return [String]
     class Ipv6PrefixSpecificationResponse < Struct.new(
+      nil,
       :ipv6_prefix,
       keyword_init: true
     )
@@ -42641,6 +44087,7 @@ module Aws::EC2
     #            </note>
     #   @return [String]
     class Ipv6Range < Struct.new(
+      nil,
       :description,
       :cidr_ipv6,
       keyword_init: true
@@ -42695,6 +44142,7 @@ module Aws::EC2
     #            </ul>
     #   @return [String]
     class KeyPairInfo < Struct.new(
+      nil,
       :key_pair_id,
       :key_type,
       :tags,
@@ -42715,6 +44163,7 @@ module Aws::EC2
     #   <p>The error code for the VPC endpoint error.</p>
     #   @return [String]
     class LastError < Struct.new(
+      nil,
       :message,
       :code,
       keyword_init: true
@@ -42737,6 +44186,7 @@ module Aws::EC2
     #   <p>The name of the group.</p>
     #   @return [String]
     class LaunchPermission < Struct.new(
+      nil,
       :organization_arn,
       :organizational_unit_arn,
       :user_id,
@@ -42756,6 +44206,7 @@ module Aws::EC2
     #         launch permissions for the AMI.</p>
     #   @return [Array<Types::LaunchPermission>]
     class LaunchPermissionModifications < Struct.new(
+      nil,
       :add,
       :remove,
       keyword_init: true
@@ -42813,6 +44264,7 @@ module Aws::EC2
     #   <p>Describes the monitoring of an instance.</p>
     #   @return [Types::RunInstancesMonitoringEnabled]
     class LaunchSpecification < Struct.new(
+      nil,
       :user_data,
       :addressing_type,
       :block_device_mappings,
@@ -42859,6 +44311,7 @@ module Aws::EC2
     #   <p>The entity that manages the launch template.</p>
     #   @return [Types::OperatorResponse]
     class LaunchTemplate < Struct.new(
+      nil,
       :launch_template_id,
       :launch_template_name,
       :create_time,
@@ -42881,6 +44334,7 @@ module Aws::EC2
     #            template.</p>
     #   @return [Types::FleetLaunchTemplateOverrides]
     class LaunchTemplateAndOverridesResponse < Struct.new(
+      nil,
       :launch_template_specification,
       :overrides,
       keyword_init: true
@@ -42902,6 +44356,7 @@ module Aws::EC2
     #   <p>To omit the device from the block device mapping, specify an empty string.</p>
     #   @return [String]
     class LaunchTemplateBlockDeviceMapping < Struct.new(
+      nil,
       :device_name,
       :virtual_name,
       :ebs,
@@ -42929,6 +44384,7 @@ module Aws::EC2
     #   <p>To omit the device from the block device mapping, specify an empty string.</p>
     #   @return [String]
     class LaunchTemplateBlockDeviceMappingRequest < Struct.new(
+      nil,
       :device_name,
       :virtual_name,
       :ebs,
@@ -42972,6 +44428,7 @@ module Aws::EC2
     #               group.</p>
     #   @return [Types::CapacityReservationTarget]
     class LaunchTemplateCapacityReservationSpecificationRequest < Struct.new(
+      nil,
       :capacity_reservation_preference,
       :capacity_reservation_target,
       keyword_init: true
@@ -43002,6 +44459,7 @@ module Aws::EC2
     #               group.</p>
     #   @return [Types::CapacityReservationTargetResponse]
     class LaunchTemplateCapacityReservationSpecificationResponse < Struct.new(
+      nil,
       :capacity_reservation_preference,
       :capacity_reservation_target,
       keyword_init: true
@@ -43020,6 +44478,7 @@ module Aws::EC2
     #            template.</p>
     #   @return [Array<Types::LaunchTemplateOverrides>]
     class LaunchTemplateConfig < Struct.new(
+      nil,
       :launch_template_specification,
       :overrides,
       keyword_init: true
@@ -43040,6 +44499,7 @@ module Aws::EC2
     #                   for Amazon EC2 instances</a>.</p>
     #   @return [String]
     class LaunchTemplateCpuOptions < Struct.new(
+      nil,
       :core_count,
       :threads_per_core,
       :amd_sev_snp,
@@ -43064,6 +44524,7 @@ module Aws::EC2
     #                   Amazon EC2 instances</a>.</p>
     #   @return [String]
     class LaunchTemplateCpuOptionsRequest < Struct.new(
+      nil,
       :core_count,
       :threads_per_core,
       :amd_sev_snp,
@@ -43102,6 +44563,7 @@ module Aws::EC2
     #               If no volume initialization rate was specified, the value is <code>null</code>.</p>
     #   @return [Integer]
     class LaunchTemplateEbsBlockDevice < Struct.new(
+      nil,
       :encrypted,
       :delete_on_termination,
       :iops,
@@ -43222,6 +44684,7 @@ module Aws::EC2
     #            <p>Valid range: 100 - 300 MiB/s</p>
     #   @return [Integer]
     class LaunchTemplateEbsBlockDeviceRequest < Struct.new(
+      nil,
       :encrypted,
       :delete_on_termination,
       :iops,
@@ -43248,6 +44711,7 @@ module Aws::EC2
     #   <p>The number of elastic inference accelerators to attach to the instance. </p>
     #   @return [Integer]
     class LaunchTemplateElasticInferenceAccelerator < Struct.new(
+      nil,
       :type,
       :count,
       keyword_init: true
@@ -43267,6 +44731,7 @@ module Aws::EC2
     #   <p>The number of elastic inference accelerators to attach to the instance. </p>
     #   @return [Integer]
     class LaunchTemplateElasticInferenceAcceleratorResponse < Struct.new(
+      nil,
       :type,
       :count,
       keyword_init: true
@@ -43289,6 +44754,7 @@ module Aws::EC2
     #   <p>Configures ENA Express for UDP network traffic.</p>
     #   @return [Types::LaunchTemplateEnaSrdUdpSpecification]
     class LaunchTemplateEnaSrdSpecification < Struct.new(
+      nil,
       :ena_srd_enabled,
       :ena_srd_udp_specification,
       keyword_init: true
@@ -43306,6 +44772,7 @@ module Aws::EC2
     #   			you must first enable ENA Express.</p>
     #   @return [Boolean]
     class LaunchTemplateEnaSrdUdpSpecification < Struct.new(
+      nil,
       :ena_srd_udp_enabled,
       keyword_init: true
     )
@@ -43318,6 +44785,7 @@ module Aws::EC2
     #               Enclaves; otherwise, it is not enabled for Amazon Web Services Nitro Enclaves.</p>
     #   @return [Boolean]
     class LaunchTemplateEnclaveOptions < Struct.new(
+      nil,
       :enabled,
       keyword_init: true
     )
@@ -43332,6 +44800,7 @@ module Aws::EC2
     #                   <code>true</code>.</p>
     #   @return [Boolean]
     class LaunchTemplateEnclaveOptionsRequest < Struct.new(
+      nil,
       :enabled,
       keyword_init: true
     )
@@ -43344,6 +44813,7 @@ module Aws::EC2
     #               hibernation; otherwise, it is not enabled for hibernation.</p>
     #   @return [Boolean]
     class LaunchTemplateHibernationOptions < Struct.new(
+      nil,
       :configured,
       keyword_init: true
     )
@@ -43360,6 +44830,7 @@ module Aws::EC2
     #            </p>
     #   @return [Boolean]
     class LaunchTemplateHibernationOptionsRequest < Struct.new(
+      nil,
       :configured,
       keyword_init: true
     )
@@ -43374,6 +44845,7 @@ module Aws::EC2
     #   <p>The name of the instance profile.</p>
     #   @return [String]
     class LaunchTemplateIamInstanceProfileSpecification < Struct.new(
+      nil,
       :arn,
       :name,
       keyword_init: true
@@ -43389,6 +44861,7 @@ module Aws::EC2
     #   <p>The name of the instance profile.</p>
     #   @return [String]
     class LaunchTemplateIamInstanceProfileSpecificationRequest < Struct.new(
+      nil,
       :arn,
       :name,
       keyword_init: true
@@ -43402,6 +44875,7 @@ module Aws::EC2
     #               default.</p>
     #   @return [String]
     class LaunchTemplateInstanceMaintenanceOptions < Struct.new(
+      nil,
       :auto_recovery,
       keyword_init: true
     )
@@ -43414,6 +44888,7 @@ module Aws::EC2
     #               more information, see <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-instance-recover.html#instance-configuration-recovery">Simplified automatic recovery</a>.</p>
     #   @return [String]
     class LaunchTemplateInstanceMaintenanceOptionsRequest < Struct.new(
+      nil,
       :auto_recovery,
       keyword_init: true
     )
@@ -43428,6 +44903,7 @@ module Aws::EC2
     #   <p>The options for Spot Instances.</p>
     #   @return [Types::LaunchTemplateSpotMarketOptions]
     class LaunchTemplateInstanceMarketOptions < Struct.new(
+      nil,
       :market_type,
       :spot_options,
       keyword_init: true
@@ -43443,6 +44919,7 @@ module Aws::EC2
     #   <p>The options for Spot Instances.</p>
     #   @return [Types::LaunchTemplateSpotMarketOptionsRequest]
     class LaunchTemplateInstanceMarketOptionsRequest < Struct.new(
+      nil,
       :market_type,
       :spot_options,
       keyword_init: true
@@ -43509,6 +44986,7 @@ module Aws::EC2
     #            </p>
     #   @return [String]
     class LaunchTemplateInstanceMetadataOptions < Struct.new(
+      nil,
       :state,
       :http_tokens,
       :http_put_response_hop_limit,
@@ -43574,6 +45052,7 @@ module Aws::EC2
     #            </p>
     #   @return [String]
     class LaunchTemplateInstanceMetadataOptionsRequest < Struct.new(
+      nil,
       :http_tokens,
       :http_put_response_hop_limit,
       :http_endpoint,
@@ -43673,6 +45152,7 @@ module Aws::EC2
     #   <p>The number of ENA queues created with the instance.</p>
     #   @return [Integer]
     class LaunchTemplateInstanceNetworkInterfaceSpecification < Struct.new(
+      nil,
       :associate_carrier_ip_address,
       :associate_public_ip_address,
       :delete_on_termination,
@@ -43809,6 +45289,7 @@ module Aws::EC2
     #   <p>The number of ENA queues to be created with the instance.</p>
     #   @return [Integer]
     class LaunchTemplateInstanceNetworkInterfaceSpecificationRequest < Struct.new(
+      nil,
       :associate_carrier_ip_address,
       :associate_public_ip_address,
       :delete_on_termination,
@@ -43842,6 +45323,7 @@ module Aws::EC2
     #   <p>The Amazon Resource Name (ARN) of the license configuration.</p>
     #   @return [String]
     class LaunchTemplateLicenseConfiguration < Struct.new(
+      nil,
       :license_configuration_arn,
       keyword_init: true
     )
@@ -43853,6 +45335,7 @@ module Aws::EC2
     #   <p>The Amazon Resource Name (ARN) of the license configuration.</p>
     #   @return [String]
     class LaunchTemplateLicenseConfigurationRequest < Struct.new(
+      nil,
       :license_configuration_arn,
       keyword_init: true
     )
@@ -43868,6 +45351,7 @@ module Aws::EC2
     #               for your instance type.</p>
     #   @return [String]
     class LaunchTemplateNetworkPerformanceOptions < Struct.new(
+      nil,
       :bandwidth_weighting,
       keyword_init: true
     )
@@ -43899,6 +45383,7 @@ module Aws::EC2
     #            </dl>
     #   @return [String]
     class LaunchTemplateNetworkPerformanceOptionsRequest < Struct.new(
+      nil,
       :bandwidth_weighting,
       keyword_init: true
     )
@@ -43963,6 +45448,7 @@ module Aws::EC2
     #            </note>
     #   @return [Types::InstanceRequirements]
     class LaunchTemplateOverrides < Struct.new(
+      nil,
       :instance_type,
       :spot_price,
       :subnet_id,
@@ -44010,6 +45496,7 @@ module Aws::EC2
     #               group.</p>
     #   @return [String]
     class LaunchTemplatePlacement < Struct.new(
+      nil,
       :availability_zone,
       :availability_zone_id,
       :affinity,
@@ -44064,6 +45551,7 @@ module Aws::EC2
     #               group.</p>
     #   @return [String]
     class LaunchTemplatePlacementRequest < Struct.new(
+      nil,
       :availability_zone,
       :availability_zone_id,
       :affinity,
@@ -44092,6 +45580,7 @@ module Aws::EC2
     #               records.</p>
     #   @return [Boolean]
     class LaunchTemplatePrivateDnsNameOptions < Struct.new(
+      nil,
       :hostname_type,
       :enable_resource_name_dns_a_record,
       :enable_resource_name_dns_aaaa_record,
@@ -44116,6 +45605,7 @@ module Aws::EC2
     #               records.</p>
     #   @return [Boolean]
     class LaunchTemplatePrivateDnsNameOptionsRequest < Struct.new(
+      nil,
       :hostname_type,
       :enable_resource_name_dns_a_record,
       :enable_resource_name_dns_aaaa_record,
@@ -44143,6 +45633,7 @@ module Aws::EC2
     #            <p>Default: The default version of the launch template.</p>
     #   @return [String]
     class LaunchTemplateSpecification < Struct.new(
+      nil,
       :launch_template_id,
       :launch_template_name,
       :version,
@@ -44177,6 +45668,7 @@ module Aws::EC2
     #   <p>The behavior when a Spot Instance is interrupted.</p>
     #   @return [String]
     class LaunchTemplateSpotMarketOptions < Struct.new(
+      nil,
       :max_price,
       :spot_instance_type,
       :block_duration_minutes,
@@ -44228,6 +45720,7 @@ module Aws::EC2
     #                   <code>terminate</code>.</p>
     #   @return [String]
     class LaunchTemplateSpotMarketOptionsRequest < Struct.new(
+      nil,
       :max_price,
       :spot_instance_type,
       :block_duration_minutes,
@@ -44246,6 +45739,7 @@ module Aws::EC2
     #   <p>The tags for the resource.</p>
     #   @return [Array<Types::Tag>]
     class LaunchTemplateTagSpecification < Struct.new(
+      nil,
       :resource_type,
       :tags,
       keyword_init: true
@@ -44269,6 +45763,7 @@ module Aws::EC2
     #   <p>The tags to apply to the resource.</p>
     #   @return [Array<Types::Tag>]
     class LaunchTemplateTagSpecificationRequest < Struct.new(
+      nil,
       :resource_type,
       :tags,
       keyword_init: true
@@ -44305,6 +45800,7 @@ module Aws::EC2
     #   <p>The entity that manages the launch template.</p>
     #   @return [Types::OperatorResponse]
     class LaunchTemplateVersion < Struct.new(
+      nil,
       :launch_template_id,
       :launch_template_name,
       :version_number,
@@ -44325,6 +45821,7 @@ module Aws::EC2
     #               enabled.</p>
     #   @return [Boolean]
     class LaunchTemplatesMonitoring < Struct.new(
+      nil,
       :enabled,
       keyword_init: true
     )
@@ -44337,6 +45834,7 @@ module Aws::EC2
     #               is enabled.</p>
     #   @return [Boolean]
     class LaunchTemplatesMonitoringRequest < Struct.new(
+      nil,
       :enabled,
       keyword_init: true
     )
@@ -44348,6 +45846,7 @@ module Aws::EC2
     #   <p>The Amazon Resource Name (ARN) of the license configuration.</p>
     #   @return [String]
     class LicenseConfiguration < Struct.new(
+      nil,
       :license_configuration_arn,
       keyword_init: true
     )
@@ -44359,6 +45858,7 @@ module Aws::EC2
     #   <p>The Amazon Resource Name (ARN) of the license configuration.</p>
     #   @return [String]
     class LicenseConfigurationRequest < Struct.new(
+      nil,
       :license_configuration_arn,
       keyword_init: true
     )
@@ -44383,6 +45883,7 @@ module Aws::EC2
     #   			<code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     class ListImagesInRecycleBinRequest < Struct.new(
+      nil,
       :image_ids,
       :next_token,
       :max_results,
@@ -44400,6 +45901,7 @@ module Aws::EC2
     #            are no more items to return.</p>
     #   @return [String]
     class ListImagesInRecycleBinResult < Struct.new(
+      nil,
       :images,
       :next_token,
       keyword_init: true
@@ -44426,6 +45928,7 @@ module Aws::EC2
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     class ListSnapshotsInRecycleBinRequest < Struct.new(
+      nil,
       :max_results,
       :next_token,
       :snapshot_ids,
@@ -44443,6 +45946,7 @@ module Aws::EC2
     #     This value is <code>null</code> when there are no more items to return.</p>
     #   @return [String]
     class ListSnapshotsInRecycleBinResult < Struct.new(
+      nil,
       :snapshots,
       :next_token,
       keyword_init: true
@@ -44459,6 +45963,7 @@ module Aws::EC2
     #   <p>The target groups.</p>
     #   @return [Types::TargetGroupsConfig]
     class LoadBalancersConfig < Struct.new(
+      nil,
       :classic_load_balancers_config,
       :target_groups_config,
       keyword_init: true
@@ -44474,6 +45979,7 @@ module Aws::EC2
     #   <p>The name of the group.</p>
     #   @return [String]
     class LoadPermission < Struct.new(
+      nil,
       :user_id,
       :group,
       keyword_init: true
@@ -44489,6 +45995,7 @@ module Aws::EC2
     #   <p>The load permissions to remove.</p>
     #   @return [Array<Types::LoadPermissionRequest>]
     class LoadPermissionModifications < Struct.new(
+      nil,
       :add,
       :remove,
       keyword_init: true
@@ -44504,6 +46011,7 @@ module Aws::EC2
     #   <p>The Amazon Web Services account ID.</p>
     #   @return [String]
     class LoadPermissionRequest < Struct.new(
+      nil,
       :group,
       :user_id,
       keyword_init: true
@@ -44528,6 +46036,7 @@ module Aws::EC2
     #   <p>The tags assigned to the local gateway.</p>
     #   @return [Array<Types::Tag>]
     class LocalGateway < Struct.new(
+      nil,
       :local_gateway_id,
       :outpost_arn,
       :owner_id,
@@ -44575,6 +46084,7 @@ module Aws::EC2
     #         </p>
     #   @return [String]
     class LocalGatewayRoute < Struct.new(
+      nil,
       :destination_cidr_block,
       :local_gateway_virtual_interface_group_id,
       :type,
@@ -44620,6 +46130,7 @@ module Aws::EC2
     #   <p>Information about the state change.</p>
     #   @return [Types::StateReason]
     class LocalGatewayRouteTable < Struct.new(
+      nil,
       :local_gateway_route_table_id,
       :local_gateway_route_table_arn,
       :local_gateway_id,
@@ -44660,6 +46171,7 @@ module Aws::EC2
     #   <p>The tags assigned to the association.</p>
     #   @return [Array<Types::Tag>]
     class LocalGatewayRouteTableVirtualInterfaceGroupAssociation < Struct.new(
+      nil,
       :local_gateway_route_table_virtual_interface_group_association_id,
       :local_gateway_virtual_interface_group_id,
       :local_gateway_id,
@@ -44699,6 +46211,7 @@ module Aws::EC2
     #   <p>The tags assigned to the association.</p>
     #   @return [Array<Types::Tag>]
     class LocalGatewayRouteTableVpcAssociation < Struct.new(
+      nil,
       :local_gateway_route_table_vpc_association_id,
       :local_gateway_route_table_id,
       :local_gateway_route_table_arn,
@@ -44756,6 +46269,7 @@ module Aws::EC2
     #   <p>The current state of the local gateway virtual interface.</p>
     #   @return [String]
     class LocalGatewayVirtualInterface < Struct.new(
+      nil,
       :local_gateway_virtual_interface_id,
       :local_gateway_id,
       :local_gateway_virtual_interface_group_id,
@@ -44804,6 +46318,7 @@ module Aws::EC2
     #   <p>The current state of the local gateway virtual interface group.</p>
     #   @return [String]
     class LocalGatewayVirtualInterfaceGroup < Struct.new(
+      nil,
       :local_gateway_virtual_interface_group_id,
       :local_gateway_virtual_interface_ids,
       :local_gateway_id,
@@ -44885,6 +46400,7 @@ module Aws::EC2
     #         not both.</p>
     #   @return [Time]
     class LockSnapshotRequest < Struct.new(
+      nil,
       :snapshot_id,
       :dry_run,
       :lock_mode,
@@ -44951,6 +46467,7 @@ module Aws::EC2
     #         (<code>YYYY-MM-DDThh:mm:ss.sssZ</code>).</p>
     #   @return [Time]
     class LockSnapshotResult < Struct.new(
+      nil,
       :snapshot_id,
       :lock_state,
       :lock_duration,
@@ -45022,6 +46539,7 @@ module Aws::EC2
     #   <p>The date and time at which the lock will expire, in the UTC time zone (<code>YYYY-MM-DDThh:mm:ss.sssZ</code>).</p>
     #   @return [Time]
     class LockedSnapshotsInfo < Struct.new(
+      nil,
       :owner_id,
       :snapshot_id,
       :lock_state,
@@ -45050,6 +46568,7 @@ module Aws::EC2
     #           </p>
     #   @return [Array<String>]
     class MacHost < Struct.new(
+      nil,
       :host_id,
       :mac_os_latest_supported_versions,
       keyword_init: true
@@ -45083,6 +46602,7 @@ module Aws::EC2
     #   <p>The type of task.</p>
     #   @return [String]
     class MacModificationTask < Struct.new(
+      nil,
       :instance_id,
       :mac_modification_task_id,
       :mac_system_integrity_protection_config,
@@ -45121,6 +46641,7 @@ module Aws::EC2
     #   <p>Indicates SIP was enabled or disabled by the task.</p>
     #   @return [String]
     class MacSystemIntegrityProtectionConfiguration < Struct.new(
+      nil,
       :apple_internal,
       :base_system,
       :debugging_restrictions,
@@ -45157,6 +46678,7 @@ module Aws::EC2
     #   <p>Enables or disables Nvram Protections.</p>
     #   @return [String]
     class MacSystemIntegrityProtectionConfigurationRequest < Struct.new(
+      nil,
       :apple_internal,
       :base_system,
       :debugging_restrictions,
@@ -45180,6 +46702,7 @@ module Aws::EC2
     #   <p>Timestamp of last applied maintenance.</p>
     #   @return [Time]
     class MaintenanceDetails < Struct.new(
+      nil,
       :pending_maintenance,
       :maintenance_auto_applied_after,
       :last_maintenance_applied,
@@ -45220,6 +46743,7 @@ module Aws::EC2
     #   <p>The ID of the owner of the prefix list.</p>
     #   @return [String]
     class ManagedPrefixList < Struct.new(
+      nil,
       :prefix_list_id,
       :address_family,
       :state,
@@ -45244,6 +46768,7 @@ module Aws::EC2
     #      MiB.</p>
     #   @return [Integer]
     class MediaAcceleratorInfo < Struct.new(
+      nil,
       :accelerators,
       :total_media_memory_in_mi_b,
       keyword_init: true
@@ -45265,6 +46790,7 @@ module Aws::EC2
     #   <p>Describes the memory available to the media accelerator.</p>
     #   @return [Types::MediaDeviceMemoryInfo]
     class MediaDeviceInfo < Struct.new(
+      nil,
       :count,
       :name,
       :manufacturer,
@@ -45279,6 +46805,7 @@ module Aws::EC2
     #   <p>The size of the memory available to each media accelerator, in MiB.</p>
     #   @return [Integer]
     class MediaDeviceMemoryInfo < Struct.new(
+      nil,
       :size_in_mi_b,
       keyword_init: true
     )
@@ -45296,6 +46823,7 @@ module Aws::EC2
     #            no maximum limit.</p>
     #   @return [Float]
     class MemoryGiBPerVCpu < Struct.new(
+      nil,
       :min,
       :max,
       keyword_init: true
@@ -45313,6 +46841,7 @@ module Aws::EC2
     #            parameter.</p>
     #   @return [Float]
     class MemoryGiBPerVCpuRequest < Struct.new(
+      nil,
       :min,
       :max,
       keyword_init: true
@@ -45325,6 +46854,7 @@ module Aws::EC2
     #   <p>The size of the memory, in MiB.</p>
     #   @return [Integer]
     class MemoryInfo < Struct.new(
+      nil,
       :size_in_mi_b,
       keyword_init: true
     )
@@ -45341,6 +46871,7 @@ module Aws::EC2
     #            maximum limit.</p>
     #   @return [Integer]
     class MemoryMiB < Struct.new(
+      nil,
       :min,
       :max,
       keyword_init: true
@@ -45358,6 +46889,7 @@ module Aws::EC2
     #            parameter.</p>
     #   @return [Integer]
     class MemoryMiBRequest < Struct.new(
+      nil,
       :min,
       :max,
       keyword_init: true
@@ -45379,6 +46911,7 @@ module Aws::EC2
     #   <p>The status of the metric point.</p>
     #   @return [String]
     class MetricPoint < Struct.new(
+      nil,
       :start_date,
       :end_date,
       :value,
@@ -45400,6 +46933,7 @@ module Aws::EC2
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     class ModifyAddressAttributeRequest < Struct.new(
+      nil,
       :allocation_id,
       :domain_name,
       :dry_run,
@@ -45412,6 +46946,7 @@ module Aws::EC2
     #   <p>Information about the Elastic IP address.</p>
     #   @return [Types::AddressAttribute]
     class ModifyAddressAttributeResult < Struct.new(
+      nil,
       :address,
       keyword_init: true
     )
@@ -45432,6 +46967,7 @@ module Aws::EC2
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     class ModifyAvailabilityZoneGroupRequest < Struct.new(
+      nil,
       :group_name,
       :opt_in_status,
       :dry_run,
@@ -45444,6 +46980,7 @@ module Aws::EC2
     #   <p>Is <code>true</code> if the request succeeds, and an error otherwise.</p>
     #   @return [Boolean]
     class ModifyAvailabilityZoneGroupResult < Struct.new(
+      nil,
       :return,
       keyword_init: true
     )
@@ -45482,6 +47019,7 @@ module Aws::EC2
     #            <p>You can't specify <b>RemoveEndDate</b> and <b> EndDate</b> in the same request.</p>
     #   @return [Boolean]
     class ModifyCapacityReservationFleetRequest < Struct.new(
+      nil,
       :capacity_reservation_fleet_id,
       :total_target_capacity,
       :end_date,
@@ -45496,6 +47034,7 @@ module Aws::EC2
     #   <p>Returns <code>true</code> if the request succeeds; otherwise, it returns an error.</p>
     #   @return [Boolean]
     class ModifyCapacityReservationFleetResult < Struct.new(
+      nil,
       :return,
       keyword_init: true
     )
@@ -45560,6 +47099,7 @@ module Aws::EC2
     #   			(zero usage).</p>
     #   @return [String]
     class ModifyCapacityReservationRequest < Struct.new(
+      nil,
       :capacity_reservation_id,
       :instance_count,
       :end_date,
@@ -45577,6 +47117,7 @@ module Aws::EC2
     #   <p>Returns <code>true</code> if the request succeeds; otherwise, it returns an error.</p>
     #   @return [Boolean]
     class ModifyCapacityReservationResult < Struct.new(
+      nil,
       :return,
       keyword_init: true
     )
@@ -45664,6 +47205,7 @@ module Aws::EC2
     #   <p>Indicates whether the client VPN session is disconnected after the maximum timeout specified in <code>sessionTimeoutHours</code> is reached. If <code>true</code>, users are prompted to reconnect client VPN. If <code>false</code>, client VPN attempts to reconnect automatically. The default value is <code>true</code>.</p>
     #   @return [Boolean]
     class ModifyClientVpnEndpointRequest < Struct.new(
+      nil,
       :client_vpn_endpoint_id,
       :server_certificate_arn,
       :connection_log_options,
@@ -45689,6 +47231,7 @@ module Aws::EC2
     #   <p>Returns <code>true</code> if the request succeeds; otherwise, it returns an error.</p>
     #   @return [Boolean]
     class ModifyClientVpnEndpointResult < Struct.new(
+      nil,
       :return,
       keyword_init: true
     )
@@ -45709,6 +47252,7 @@ module Aws::EC2
     #            </p>
     #   @return [String]
     class ModifyDefaultCreditSpecificationRequest < Struct.new(
+      nil,
       :dry_run,
       :instance_family,
       :cpu_credits,
@@ -45721,6 +47265,7 @@ module Aws::EC2
     #   <p>The default credit option for CPU usage of the instance family.</p>
     #   @return [Types::InstanceFamilyCreditSpecification]
     class ModifyDefaultCreditSpecificationResult < Struct.new(
+      nil,
       :instance_family_credit_specification,
       keyword_init: true
     )
@@ -45756,6 +47301,7 @@ module Aws::EC2
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     class ModifyEbsDefaultKmsKeyIdRequest < Struct.new(
+      nil,
       :kms_key_id,
       :dry_run,
       keyword_init: true
@@ -45767,6 +47313,7 @@ module Aws::EC2
     #   <p>The Amazon Resource Name (ARN) of the default KMS key for encryption by default.</p>
     #   @return [String]
     class ModifyEbsDefaultKmsKeyIdResult < Struct.new(
+      nil,
       :kms_key_id,
       keyword_init: true
     )
@@ -45796,6 +47343,7 @@ module Aws::EC2
     #   <p>Reserved.</p>
     #   @return [String]
     class ModifyFleetRequest < Struct.new(
+      nil,
       :dry_run,
       :excess_capacity_termination_policy,
       :launch_template_configs,
@@ -45812,6 +47360,7 @@ module Aws::EC2
     #            no response is returned, and instead an error message is returned.</p>
     #   @return [Boolean]
     class ModifyFleetResult < Struct.new(
+      nil,
       :return,
       keyword_init: true
     )
@@ -45852,6 +47401,7 @@ module Aws::EC2
     #   <p>A name for the AFI.</p>
     #   @return [String]
     class ModifyFpgaImageAttributeRequest < Struct.new(
+      nil,
       :dry_run,
       :fpga_image_id,
       :attribute,
@@ -45871,6 +47421,7 @@ module Aws::EC2
     #   <p>Information about the attribute.</p>
     #   @return [Types::FpgaImageAttribute]
     class ModifyFpgaImageAttributeResult < Struct.new(
+      nil,
       :fpga_image_attribute,
       keyword_init: true
     )
@@ -45909,6 +47460,7 @@ module Aws::EC2
     #   <p>Specify whether to enable or disable auto-placement.</p>
     #   @return [String]
     class ModifyHostsRequest < Struct.new(
+      nil,
       :host_recovery,
       :instance_type,
       :instance_family,
@@ -45928,6 +47480,7 @@ module Aws::EC2
     #               you requested can be used.</p>
     #   @return [Array<Types::UnsuccessfulItem>]
     class ModifyHostsResult < Struct.new(
+      nil,
       :successful,
       :unsuccessful,
       keyword_init: true
@@ -45953,6 +47506,7 @@ module Aws::EC2
     #   <p>Indicate whether the resource should use longer IDs (17-character IDs).</p>
     #   @return [Boolean]
     class ModifyIdFormatRequest < Struct.new(
+      nil,
       :resource,
       :use_long_ids,
       keyword_init: true
@@ -45983,6 +47537,7 @@ module Aws::EC2
     #          the account.</p>
     #   @return [String]
     class ModifyIdentityIdFormatRequest < Struct.new(
+      nil,
       :resource,
       :use_long_ids,
       :principal_arn,
@@ -46053,6 +47608,7 @@ module Aws::EC2
     #   			<code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     class ModifyImageAttributeRequest < Struct.new(
+      nil,
       :attribute,
       :description,
       :image_id,
@@ -46181,6 +47737,7 @@ module Aws::EC2
     #               instance can make it unreachable.</p>
     #   @return [Types::AttributeBooleanValue]
     class ModifyInstanceAttributeRequest < Struct.new(
+      nil,
       :source_dest_check,
       :disable_api_stop,
       :dry_run,
@@ -46213,6 +47770,7 @@ module Aws::EC2
     #   <p>Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     class ModifyInstanceCapacityReservationAttributesRequest < Struct.new(
+      nil,
       :instance_id,
       :capacity_reservation_specification,
       :dry_run,
@@ -46225,6 +47783,7 @@ module Aws::EC2
     #   <p>Returns <code>true</code> if the request succeeds; otherwise, it returns an error.</p>
     #   @return [Boolean]
     class ModifyInstanceCapacityReservationAttributesResult < Struct.new(
+      nil,
       :return,
       keyword_init: true
     )
@@ -46278,6 +47837,7 @@ module Aws::EC2
     #            </p>
     #   @return [Boolean]
     class ModifyInstanceConnectEndpointRequest < Struct.new(
+      nil,
       :dry_run,
       :instance_connect_endpoint_id,
       :ip_address_type,
@@ -46293,6 +47853,7 @@ module Aws::EC2
     #               code is owned by the requester and associated with the specified instance.</p>
     #   @return [Boolean]
     class ModifyInstanceConnectEndpointResult < Struct.new(
+      nil,
       :return,
       keyword_init: true
     )
@@ -46314,6 +47875,7 @@ module Aws::EC2
     #     <code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     class ModifyInstanceCpuOptionsRequest < Struct.new(
+      nil,
       :instance_id,
       :core_count,
       :threads_per_core,
@@ -46335,6 +47897,7 @@ module Aws::EC2
     #   			instance after the update.</p>
     #   @return [Integer]
     class ModifyInstanceCpuOptionsResult < Struct.new(
+      nil,
       :instance_id,
       :core_count,
       :threads_per_core,
@@ -46357,6 +47920,7 @@ module Aws::EC2
     #   <p>Information about the credit option for CPU usage.</p>
     #   @return [Array<Types::InstanceCreditSpecificationRequest>]
     class ModifyInstanceCreditSpecificationRequest < Struct.new(
+      nil,
       :dry_run,
       :client_token,
       :instance_credit_specifications,
@@ -46374,6 +47938,7 @@ module Aws::EC2
     #               modified.</p>
     #   @return [Array<Types::UnsuccessfulInstanceCreditSpecificationItem>]
     class ModifyInstanceCreditSpecificationResult < Struct.new(
+      nil,
       :successful_instance_credit_specifications,
       :unsuccessful_instance_credit_specifications,
       keyword_init: true
@@ -46396,6 +47961,7 @@ module Aws::EC2
     #   <p>The new date and time when the event will take place.</p>
     #   @return [Time]
     class ModifyInstanceEventStartTimeRequest < Struct.new(
+      nil,
       :dry_run,
       :instance_id,
       :instance_event_id,
@@ -46409,6 +47975,7 @@ module Aws::EC2
     #   <p>Information about the event.</p>
     #   @return [Types::InstanceStatusEvent]
     class ModifyInstanceEventStartTimeResult < Struct.new(
+      nil,
       :event,
       keyword_init: true
     )
@@ -46462,6 +48029,7 @@ module Aws::EC2
     #               website</i>.</p>
     #   @return [String]
     class ModifyInstanceEventWindowRequest < Struct.new(
+      nil,
       :dry_run,
       :name,
       :instance_event_window_id,
@@ -46476,6 +48044,7 @@ module Aws::EC2
     #   <p>Information about the event window.</p>
     #   @return [Types::InstanceEventWindow]
     class ModifyInstanceEventWindowResult < Struct.new(
+      nil,
       :instance_event_window,
       keyword_init: true
     )
@@ -46518,6 +48087,7 @@ module Aws::EC2
     #               <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     class ModifyInstanceMaintenanceOptionsRequest < Struct.new(
+      nil,
       :instance_id,
       :auto_recovery,
       :reboot_migration,
@@ -46557,6 +48127,7 @@ module Aws::EC2
     #               <i>Amazon EC2 User Guide</i>.</p>
     #   @return [String]
     class ModifyInstanceMaintenanceOptionsResult < Struct.new(
+      nil,
       :instance_id,
       :auto_recovery,
       :reboot_migration,
@@ -46602,6 +48173,7 @@ module Aws::EC2
     #     <code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     class ModifyInstanceMetadataDefaultsRequest < Struct.new(
+      nil,
       :http_tokens,
       :http_put_response_hop_limit,
       :http_endpoint,
@@ -46617,6 +48189,7 @@ module Aws::EC2
     #               no response is returned, and instead an error message is returned.</p>
     #   @return [Boolean]
     class ModifyInstanceMetadataDefaultsResult < Struct.new(
+      nil,
       :return,
       keyword_init: true
     )
@@ -46691,6 +48264,7 @@ module Aws::EC2
     #                   instance tags using the instance metadata</a>.</p>
     #   @return [String]
     class ModifyInstanceMetadataOptionsRequest < Struct.new(
+      nil,
       :instance_id,
       :http_tokens,
       :http_put_response_hop_limit,
@@ -46710,6 +48284,7 @@ module Aws::EC2
     #   <p>The metadata options for the instance.</p>
     #   @return [Types::InstanceMetadataOptionsResponse]
     class ModifyInstanceMetadataOptionsResult < Struct.new(
+      nil,
       :instance_id,
       :instance_metadata_options,
       keyword_init: true
@@ -46745,6 +48320,7 @@ module Aws::EC2
     #     <code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     class ModifyInstanceNetworkPerformanceRequest < Struct.new(
+      nil,
       :instance_id,
       :bandwidth_weighting,
       :dry_run,
@@ -46760,6 +48336,7 @@ module Aws::EC2
     #   <p>Contains the updated configuration for bandwidth weighting on the specified instance.</p>
     #   @return [String]
     class ModifyInstanceNetworkPerformanceResult < Struct.new(
+      nil,
       :instance_id,
       :bandwidth_weighting,
       keyword_init: true
@@ -46806,6 +48383,7 @@ module Aws::EC2
     #   <p>The ID of the Dedicated Host with which to associate the instance.</p>
     #   @return [String]
     class ModifyInstancePlacementRequest < Struct.new(
+      nil,
       :group_name,
       :partition_number,
       :host_resource_group_arn,
@@ -46823,6 +48401,7 @@ module Aws::EC2
     #   <p>Is <code>true</code> if the request succeeds, and an error otherwise.</p>
     #   @return [Boolean]
     class ModifyInstancePlacementResult < Struct.new(
+      nil,
       :return,
       keyword_init: true
     )
@@ -46873,6 +48452,7 @@ module Aws::EC2
     #   <p>Remove tag allocation rules from a pool.</p>
     #   @return [Array<Types::RequestIpamResourceTag>]
     class ModifyIpamPoolRequest < Struct.new(
+      nil,
       :dry_run,
       :ipam_pool_id,
       :description,
@@ -46892,6 +48472,7 @@ module Aws::EC2
     #   <p>The results of the modification.</p>
     #   @return [Types::IpamPool]
     class ModifyIpamPoolResult < Struct.new(
+      nil,
       :ipam_pool,
       keyword_init: true
     )
@@ -46937,6 +48518,7 @@ module Aws::EC2
     #            </ul>
     #   @return [String]
     class ModifyIpamRequest < Struct.new(
+      nil,
       :dry_run,
       :ipam_id,
       :description,
@@ -46974,6 +48556,7 @@ module Aws::EC2
     #   <p>Determines if the resource is monitored by IPAM. If a resource is monitored, the resource is discovered by IPAM and you can view details about the resource’s CIDR.</p>
     #   @return [Boolean]
     class ModifyIpamResourceCidrRequest < Struct.new(
+      nil,
       :dry_run,
       :resource_id,
       :resource_cidr,
@@ -46990,6 +48573,7 @@ module Aws::EC2
     #   <p>The CIDR of the resource.</p>
     #   @return [Types::IpamResourceCidr]
     class ModifyIpamResourceCidrResult < Struct.new(
+      nil,
       :ipam_resource_cidr,
       keyword_init: true
     )
@@ -47030,6 +48614,7 @@ module Aws::EC2
     #            </note>
     #   @return [Array<Types::RemoveIpamOrganizationalUnitExclusion>]
     class ModifyIpamResourceDiscoveryRequest < Struct.new(
+      nil,
       :dry_run,
       :ipam_resource_discovery_id,
       :description,
@@ -47046,6 +48631,7 @@ module Aws::EC2
     #   <p>A resource discovery.</p>
     #   @return [Types::IpamResourceDiscovery]
     class ModifyIpamResourceDiscoveryResult < Struct.new(
+      nil,
       :ipam_resource_discovery,
       keyword_init: true
     )
@@ -47056,6 +48642,7 @@ module Aws::EC2
     #   <p>The results of the modification.</p>
     #   @return [Types::Ipam]
     class ModifyIpamResult < Struct.new(
+      nil,
       :ipam,
       keyword_init: true
     )
@@ -47074,6 +48661,7 @@ module Aws::EC2
     #   <p>The description of the scope you want to modify.</p>
     #   @return [String]
     class ModifyIpamScopeRequest < Struct.new(
+      nil,
       :dry_run,
       :ipam_scope_id,
       :description,
@@ -47086,6 +48674,7 @@ module Aws::EC2
     #   <p>The results of the modification.</p>
     #   @return [Types::IpamScope]
     class ModifyIpamScopeResult < Struct.new(
+      nil,
       :ipam_scope,
       keyword_init: true
     )
@@ -47120,6 +48709,7 @@ module Aws::EC2
     #   <p>The version number of the launch template to set as the default version.</p>
     #   @return [String]
     class ModifyLaunchTemplateRequest < Struct.new(
+      nil,
       :dry_run,
       :client_token,
       :launch_template_id,
@@ -47134,6 +48724,7 @@ module Aws::EC2
     #   <p>Information about the launch template.</p>
     #   @return [Types::LaunchTemplate]
     class ModifyLaunchTemplateResult < Struct.new(
+      nil,
       :launch_template,
       keyword_init: true
     )
@@ -47166,6 +48757,7 @@ module Aws::EC2
     #         </p>
     #   @return [String]
     class ModifyLocalGatewayRouteRequest < Struct.new(
+      nil,
       :destination_cidr_block,
       :local_gateway_route_table_id,
       :local_gateway_virtual_interface_group_id,
@@ -47181,6 +48773,7 @@ module Aws::EC2
     #   <p>Information about the local gateway route table.</p>
     #   @return [Types::LocalGatewayRoute]
     class ModifyLocalGatewayRouteResult < Struct.new(
+      nil,
       :route,
       keyword_init: true
     )
@@ -47215,6 +48808,7 @@ module Aws::EC2
     #               the first ten resources that do not support the new maximum size.</p>
     #   @return [Integer]
     class ModifyManagedPrefixListRequest < Struct.new(
+      nil,
       :dry_run,
       :prefix_list_id,
       :current_version,
@@ -47231,6 +48825,7 @@ module Aws::EC2
     #   <p>Information about the prefix list.</p>
     #   @return [Types::ManagedPrefixList]
     class ModifyManagedPrefixListResult < Struct.new(
+      nil,
       :prefix_list,
       keyword_init: true
     )
@@ -47299,6 +48894,7 @@ module Aws::EC2
     #               attachment.</p>
     #   @return [Types::NetworkInterfaceAttachmentChanges]
     class ModifyNetworkInterfaceAttributeRequest < Struct.new(
+      nil,
       :ena_srd_specification,
       :enable_primary_ipv6,
       :connection_tracking_specification,
@@ -47339,6 +48935,7 @@ module Aws::EC2
     #               records.</p>
     #   @return [Boolean]
     class ModifyPrivateDnsNameOptionsRequest < Struct.new(
+      nil,
       :dry_run,
       :instance_id,
       :private_dns_hostname_type,
@@ -47354,6 +48951,7 @@ module Aws::EC2
     #               error.</p>
     #   @return [Boolean]
     class ModifyPrivateDnsNameOptionsResult < Struct.new(
+      nil,
       :return,
       keyword_init: true
     )
@@ -47386,6 +48984,7 @@ module Aws::EC2
     #     <code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     class ModifyPublicIpDnsNameOptionsRequest < Struct.new(
+      nil,
       :network_interface_id,
       :hostname_type,
       :dry_run,
@@ -47398,6 +48997,7 @@ module Aws::EC2
     #   <p>Whether or not the request was successful.</p>
     #   @return [Boolean]
     class ModifyPublicIpDnsNameOptionsResult < Struct.new(
+      nil,
       :successful,
       keyword_init: true
     )
@@ -47417,6 +49017,7 @@ module Aws::EC2
     #   <p>The configuration settings for the Reserved Instances to modify.</p>
     #   @return [Array<Types::ReservedInstancesConfiguration>]
     class ModifyReservedInstancesRequest < Struct.new(
+      nil,
       :reserved_instances_ids,
       :client_token,
       :target_configurations,
@@ -47430,6 +49031,7 @@ module Aws::EC2
     #   <p>The ID for the modification.</p>
     #   @return [String]
     class ModifyReservedInstancesResult < Struct.new(
+      nil,
       :reserved_instances_modification_id,
       keyword_init: true
     )
@@ -47466,6 +49068,7 @@ module Aws::EC2
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     class ModifyRouteServerRequest < Struct.new(
+      nil,
       :route_server_id,
       :persist_routes,
       :persist_routes_duration,
@@ -47480,6 +49083,7 @@ module Aws::EC2
     #   <p>Information about the modified route server.</p>
     #   @return [Types::RouteServer]
     class ModifyRouteServerResult < Struct.new(
+      nil,
       :route_server,
       keyword_init: true
     )
@@ -47498,6 +49102,7 @@ module Aws::EC2
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     class ModifySecurityGroupRulesRequest < Struct.new(
+      nil,
       :group_id,
       :security_group_rules,
       :dry_run,
@@ -47510,6 +49115,7 @@ module Aws::EC2
     #   <p>Returns <code>true</code> if the request succeeds; otherwise, returns an error.</p>
     #   @return [Boolean]
     class ModifySecurityGroupRulesResult < Struct.new(
+      nil,
       :return,
       keyword_init: true
     )
@@ -47540,6 +49146,7 @@ module Aws::EC2
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     class ModifySnapshotAttributeRequest < Struct.new(
+      nil,
       :attribute,
       :create_volume_permission,
       :group_names,
@@ -47564,6 +49171,7 @@ module Aws::EC2
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     class ModifySnapshotTierRequest < Struct.new(
+      nil,
       :snapshot_id,
       :storage_tier,
       :dry_run,
@@ -47579,6 +49187,7 @@ module Aws::EC2
     #   <p>The date and time when the archive process was started.</p>
     #   @return [Time]
     class ModifySnapshotTierResult < Struct.new(
+      nil,
       :snapshot_id,
       :tiering_start_time,
       keyword_init: true
@@ -47611,6 +49220,7 @@ module Aws::EC2
     #            <p>Supported only for fleets of type <code>maintain</code>.</p>
     #   @return [String]
     class ModifySpotFleetRequestRequest < Struct.new(
+      nil,
       :launch_template_configs,
       :on_demand_target_capacity,
       :context,
@@ -47628,6 +49238,7 @@ module Aws::EC2
     #               no response is returned, and instead an error message is returned.</p>
     #   @return [Boolean]
     class ModifySpotFleetRequestResponse < Struct.new(
+      nil,
       :return,
       keyword_init: true
     )
@@ -47695,6 +49306,7 @@ module Aws::EC2
     #           </p>
     #   @return [Types::AttributeBooleanValue]
     class ModifySubnetAttributeRequest < Struct.new(
+      nil,
       :assign_ipv6_address_on_creation,
       :map_public_ip_on_launch,
       :subnet_id,
@@ -47726,6 +49338,7 @@ module Aws::EC2
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     class ModifyTrafficMirrorFilterNetworkServicesRequest < Struct.new(
+      nil,
       :traffic_mirror_filter_id,
       :add_network_services,
       :remove_network_services,
@@ -47739,6 +49352,7 @@ module Aws::EC2
     #   <p>The Traffic Mirror filter that the network service is associated with.</p>
     #   @return [Types::TrafficMirrorFilter]
     class ModifyTrafficMirrorFilterNetworkServicesResult < Struct.new(
+      nil,
       :traffic_mirror_filter,
       keyword_init: true
     )
@@ -47786,6 +49400,7 @@ module Aws::EC2
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     class ModifyTrafficMirrorFilterRuleRequest < Struct.new(
+      nil,
       :traffic_mirror_filter_rule_id,
       :traffic_direction,
       :rule_number,
@@ -47810,6 +49425,7 @@ module Aws::EC2
     #            <p>A Traffic Mirror rule.</p>
     #   @return [Types::TrafficMirrorFilterRule]
     class ModifyTrafficMirrorFilterRuleResult < Struct.new(
+      nil,
       :traffic_mirror_filter_rule,
       keyword_init: true
     )
@@ -47849,6 +49465,7 @@ module Aws::EC2
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     class ModifyTrafficMirrorSessionRequest < Struct.new(
+      nil,
       :traffic_mirror_session_id,
       :traffic_mirror_target_id,
       :traffic_mirror_filter_id,
@@ -47867,6 +49484,7 @@ module Aws::EC2
     #   <p>Information about the Traffic Mirror session.</p>
     #   @return [Types::TrafficMirrorSession]
     class ModifyTrafficMirrorSessionResult < Struct.new(
+      nil,
       :traffic_mirror_session,
       keyword_init: true
     )
@@ -47934,6 +49552,7 @@ module Aws::EC2
     #               the transit gateway.</p>
     #   @return [Integer]
     class ModifyTransitGatewayOptions < Struct.new(
+      nil,
       :add_transit_gateway_cidr_blocks,
       :remove_transit_gateway_cidr_blocks,
       :vpn_ecmp_support,
@@ -47968,6 +49587,7 @@ module Aws::EC2
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     class ModifyTransitGatewayPrefixListReferenceRequest < Struct.new(
+      nil,
       :transit_gateway_route_table_id,
       :prefix_list_id,
       :transit_gateway_attachment_id,
@@ -47982,6 +49602,7 @@ module Aws::EC2
     #   <p>Information about the prefix list reference.</p>
     #   @return [Types::TransitGatewayPrefixListReference]
     class ModifyTransitGatewayPrefixListReferenceResult < Struct.new(
+      nil,
       :transit_gateway_prefix_list_reference,
       keyword_init: true
     )
@@ -48003,6 +49624,7 @@ module Aws::EC2
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     class ModifyTransitGatewayRequest < Struct.new(
+      nil,
       :transit_gateway_id,
       :description,
       :options,
@@ -48016,6 +49638,7 @@ module Aws::EC2
     #   <p>Information about the transit gateway.</p>
     #   @return [Types::TransitGateway]
     class ModifyTransitGatewayResult < Struct.new(
+      nil,
       :transit_gateway,
       keyword_init: true
     )
@@ -48040,6 +49663,7 @@ module Aws::EC2
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     class ModifyTransitGatewayVpcAttachmentRequest < Struct.new(
+      nil,
       :transit_gateway_attachment_id,
       :add_subnet_ids,
       :remove_subnet_ids,
@@ -48068,6 +49692,7 @@ module Aws::EC2
     #   <p>Enable or disable support for appliance mode. If enabled, a traffic flow between a source and destination uses the same Availability Zone for the VPC attachment for the lifetime of that flow. The default is <code>disable</code>.</p>
     #   @return [String]
     class ModifyTransitGatewayVpcAttachmentRequestOptions < Struct.new(
+      nil,
       :dns_support,
       :security_group_referencing_support,
       :ipv6_support,
@@ -48081,6 +49706,7 @@ module Aws::EC2
     #   <p>Information about the modified attachment.</p>
     #   @return [Types::TransitGatewayVpcAttachment]
     class ModifyTransitGatewayVpcAttachmentResult < Struct.new(
+      nil,
       :transit_gateway_vpc_attachment,
       keyword_init: true
     )
@@ -48092,6 +49718,7 @@ module Aws::EC2
     #   <p>The port ranges.</p>
     #   @return [Array<Types::ModifyVerifiedAccessEndpointPortRange>]
     class ModifyVerifiedAccessEndpointCidrOptions < Struct.new(
+      nil,
       :port_ranges,
       keyword_init: true
     )
@@ -48110,6 +49737,7 @@ module Aws::EC2
     #   <p>The port ranges.</p>
     #   @return [Array<Types::ModifyVerifiedAccessEndpointPortRange>]
     class ModifyVerifiedAccessEndpointEniOptions < Struct.new(
+      nil,
       :protocol,
       :port,
       :port_ranges,
@@ -48133,6 +49761,7 @@ module Aws::EC2
     #   <p>The port ranges.</p>
     #   @return [Array<Types::ModifyVerifiedAccessEndpointPortRange>]
     class ModifyVerifiedAccessEndpointLoadBalancerOptions < Struct.new(
+      nil,
       :subnet_ids,
       :protocol,
       :port,
@@ -48164,6 +49793,7 @@ module Aws::EC2
     #   <p>The options for server side encryption.</p>
     #   @return [Types::VerifiedAccessSseSpecificationRequest]
     class ModifyVerifiedAccessEndpointPolicyRequest < Struct.new(
+      nil,
       :verified_access_endpoint_id,
       :policy_enabled,
       :policy_document,
@@ -48185,6 +49815,7 @@ module Aws::EC2
     #   <p>The options in use for server side encryption.</p>
     #   @return [Types::VerifiedAccessSseSpecificationResponse]
     class ModifyVerifiedAccessEndpointPolicyResult < Struct.new(
+      nil,
       :policy_enabled,
       :policy_document,
       :sse_specification,
@@ -48201,6 +49832,7 @@ module Aws::EC2
     #   <p>The end of the port range.</p>
     #   @return [Integer]
     class ModifyVerifiedAccessEndpointPortRange < Struct.new(
+      nil,
       :from_port,
       :to_port,
       keyword_init: true
@@ -48219,6 +49851,7 @@ module Aws::EC2
     #   <p>The RDS endpoint.</p>
     #   @return [String]
     class ModifyVerifiedAccessEndpointRdsOptions < Struct.new(
+      nil,
       :subnet_ids,
       :port,
       :rds_endpoint,
@@ -48259,6 +49892,7 @@ module Aws::EC2
     #   <p>The CIDR options.</p>
     #   @return [Types::ModifyVerifiedAccessEndpointCidrOptions]
     class ModifyVerifiedAccessEndpointRequest < Struct.new(
+      nil,
       :verified_access_endpoint_id,
       :verified_access_group_id,
       :load_balancer_options,
@@ -48277,6 +49911,7 @@ module Aws::EC2
     #   <p>Details about the Verified Access endpoint.</p>
     #   @return [Types::VerifiedAccessEndpoint]
     class ModifyVerifiedAccessEndpointResult < Struct.new(
+      nil,
       :verified_access_endpoint,
       keyword_init: true
     )
@@ -48305,6 +49940,7 @@ module Aws::EC2
     #   <p>The options for server side encryption.</p>
     #   @return [Types::VerifiedAccessSseSpecificationRequest]
     class ModifyVerifiedAccessGroupPolicyRequest < Struct.new(
+      nil,
       :verified_access_group_id,
       :policy_enabled,
       :policy_document,
@@ -48326,6 +49962,7 @@ module Aws::EC2
     #   <p>The options in use for server side encryption.</p>
     #   @return [Types::VerifiedAccessSseSpecificationResponse]
     class ModifyVerifiedAccessGroupPolicyResult < Struct.new(
+      nil,
       :policy_enabled,
       :policy_document,
       :sse_specification,
@@ -48353,6 +49990,7 @@ module Aws::EC2
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     class ModifyVerifiedAccessGroupRequest < Struct.new(
+      nil,
       :verified_access_group_id,
       :verified_access_instance_id,
       :description,
@@ -48367,6 +50005,7 @@ module Aws::EC2
     #   <p>Details about the Verified Access group.</p>
     #   @return [Types::VerifiedAccessGroup]
     class ModifyVerifiedAccessGroupResult < Struct.new(
+      nil,
       :verified_access_group,
       keyword_init: true
     )
@@ -48389,6 +50028,7 @@ module Aws::EC2
     #               modification request. For more information, see <a href="https://docs.aws.amazon.com/ec2/latest/devguide/ec2-api-idempotency.html">Ensuring idempotency</a>.</p>
     #   @return [String]
     class ModifyVerifiedAccessInstanceLoggingConfigurationRequest < Struct.new(
+      nil,
       :verified_access_instance_id,
       :access_logs,
       :dry_run,
@@ -48402,6 +50042,7 @@ module Aws::EC2
     #   <p>The logging configuration for the Verified Access instance.</p>
     #   @return [Types::VerifiedAccessInstanceLoggingConfiguration]
     class ModifyVerifiedAccessInstanceLoggingConfigurationResult < Struct.new(
+      nil,
       :logging_configuration,
       keyword_init: true
     )
@@ -48427,6 +50068,7 @@ module Aws::EC2
     #   <p>The custom subdomain.</p>
     #   @return [String]
     class ModifyVerifiedAccessInstanceRequest < Struct.new(
+      nil,
       :verified_access_instance_id,
       :description,
       :dry_run,
@@ -48441,6 +50083,7 @@ module Aws::EC2
     #   <p>Details about the Verified Access instance.</p>
     #   @return [Types::VerifiedAccessInstance]
     class ModifyVerifiedAccessInstanceResult < Struct.new(
+      nil,
       :verified_access_instance,
       keyword_init: true
     )
@@ -48473,6 +50116,7 @@ module Aws::EC2
     #   <p>The set of user claims to be requested from the IdP.</p>
     #   @return [String]
     class ModifyVerifiedAccessNativeApplicationOidcOptions < Struct.new(
+      nil,
       :public_signing_key_endpoint,
       :issuer,
       :authorization_endpoint,
@@ -48491,6 +50135,7 @@ module Aws::EC2
     #   <p> The URL Amazon Web Services Verified Access will use to verify the authenticity of the device tokens.</p>
     #   @return [String]
     class ModifyVerifiedAccessTrustProviderDeviceOptions < Struct.new(
+      nil,
       :public_signing_key_url,
       keyword_init: true
     )
@@ -48520,6 +50165,7 @@ module Aws::EC2
     #   <p>OpenID Connect (OIDC) scopes are used by an application during authentication to authorize access to a user's details. Each scope returns a specific set of user attributes.</p>
     #   @return [String]
     class ModifyVerifiedAccessTrustProviderOidcOptions < Struct.new(
+      nil,
       :issuer,
       :authorization_endpoint,
       :token_endpoint,
@@ -48561,6 +50207,7 @@ module Aws::EC2
     #   <p>The OpenID Connect (OIDC) options.</p>
     #   @return [Types::ModifyVerifiedAccessNativeApplicationOidcOptions]
     class ModifyVerifiedAccessTrustProviderRequest < Struct.new(
+      nil,
       :verified_access_trust_provider_id,
       :oidc_options,
       :device_options,
@@ -48578,6 +50225,7 @@ module Aws::EC2
     #   <p>Details about the Verified Access trust provider.</p>
     #   @return [Types::VerifiedAccessTrustProvider]
     class ModifyVerifiedAccessTrustProviderResult < Struct.new(
+      nil,
       :verified_access_trust_provider,
       keyword_init: true
     )
@@ -48596,6 +50244,7 @@ module Aws::EC2
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     class ModifyVolumeAttributeRequest < Struct.new(
+      nil,
       :auto_enable_io,
       :volume_id,
       :dry_run,
@@ -48687,6 +50336,7 @@ module Aws::EC2
     #   			Amazon EBS Multi-Attach</a> in the <i>Amazon EBS User Guide</i>.</p>
     #   @return [Boolean]
     class ModifyVolumeRequest < Struct.new(
+      nil,
       :dry_run,
       :volume_id,
       :size,
@@ -48703,6 +50353,7 @@ module Aws::EC2
     #   <p>Information about the volume modification.</p>
     #   @return [Types::VolumeModification]
     class ModifyVolumeResult < Struct.new(
+      nil,
       :volume_modification,
       keyword_init: true
     )
@@ -48728,6 +50379,7 @@ module Aws::EC2
     #   <p>Indicates whether Network Address Usage metrics are enabled for your VPC.</p>
     #   @return [Types::AttributeBooleanValue]
     class ModifyVpcAttributeRequest < Struct.new(
+      nil,
       :enable_dns_hostnames,
       :enable_dns_support,
       :vpc_id,
@@ -48759,6 +50411,7 @@ module Aws::EC2
     #            </ul>
     #   @return [String]
     class ModifyVpcBlockPublicAccessExclusionRequest < Struct.new(
+      nil,
       :dry_run,
       :exclusion_id,
       :internet_gateway_exclusion_mode,
@@ -48771,6 +50424,7 @@ module Aws::EC2
     #   <p>Details related to the exclusion.</p>
     #   @return [Types::VpcBlockPublicAccessExclusion]
     class ModifyVpcBlockPublicAccessExclusionResult < Struct.new(
+      nil,
       :vpc_block_public_access_exclusion,
       keyword_init: true
     )
@@ -48800,6 +50454,7 @@ module Aws::EC2
     #            </ul>
     #   @return [String]
     class ModifyVpcBlockPublicAccessOptionsRequest < Struct.new(
+      nil,
       :dry_run,
       :internet_gateway_block_mode,
       keyword_init: true
@@ -48811,6 +50466,7 @@ module Aws::EC2
     #   <p>Details related to the VPC Block Public Access (BPA) options.</p>
     #   @return [Types::VpcBlockPublicAccessOptions]
     class ModifyVpcBlockPublicAccessOptionsResult < Struct.new(
+      nil,
       :vpc_block_public_access_options,
       keyword_init: true
     )
@@ -48833,6 +50489,7 @@ module Aws::EC2
     #                   <code>Connect</code>, <code>Delete</code>, and <code>Reject</code>.</p>
     #   @return [Array<String>]
     class ModifyVpcEndpointConnectionNotificationRequest < Struct.new(
+      nil,
       :dry_run,
       :connection_notification_id,
       :connection_notification_arn,
@@ -48846,6 +50503,7 @@ module Aws::EC2
     #   <p>Returns <code>true</code> if the request succeeds; otherwise, it returns an error.</p>
     #   @return [Boolean]
     class ModifyVpcEndpointConnectionNotificationResult < Struct.new(
+      nil,
       :return_value,
       keyword_init: true
     )
@@ -48900,6 +50558,7 @@ module Aws::EC2
     #   <p>The subnet configurations for the endpoint.</p>
     #   @return [Array<Types::SubnetConfiguration>]
     class ModifyVpcEndpointRequest < Struct.new(
+      nil,
       :dry_run,
       :vpc_endpoint_id,
       :reset_policy,
@@ -48923,6 +50582,7 @@ module Aws::EC2
     #   <p>Returns <code>true</code> if the request succeeds; otherwise, it returns an error.</p>
     #   @return [Boolean]
     class ModifyVpcEndpointResult < Struct.new(
+      nil,
       :return,
       keyword_init: true
     )
@@ -48973,6 +50633,7 @@ module Aws::EC2
     #   <p>The supported Regions to remove from the service configuration.</p>
     #   @return [Array<String>]
     class ModifyVpcEndpointServiceConfigurationRequest < Struct.new(
+      nil,
       :dry_run,
       :service_id,
       :private_dns_name,
@@ -48995,6 +50656,7 @@ module Aws::EC2
     #   <p>Returns <code>true</code> if the request succeeds; otherwise, it returns an error.</p>
     #   @return [Boolean]
     class ModifyVpcEndpointServiceConfigurationResult < Struct.new(
+      nil,
       :return,
       keyword_init: true
     )
@@ -49015,6 +50677,7 @@ module Aws::EC2
     #               endpoint owner.</p>
     #   @return [String]
     class ModifyVpcEndpointServicePayerResponsibilityRequest < Struct.new(
+      nil,
       :dry_run,
       :service_id,
       :payer_responsibility,
@@ -49027,6 +50690,7 @@ module Aws::EC2
     #   <p>Returns <code>true</code> if the request succeeds; otherwise, it returns an error.</p>
     #   @return [Boolean]
     class ModifyVpcEndpointServicePayerResponsibilityResult < Struct.new(
+      nil,
       :return_value,
       keyword_init: true
     )
@@ -49051,6 +50715,7 @@ module Aws::EC2
     #   	        Permissions are revoked for principals in this list.</p>
     #   @return [Array<String>]
     class ModifyVpcEndpointServicePermissionsRequest < Struct.new(
+      nil,
       :dry_run,
       :service_id,
       :add_allowed_principals,
@@ -49067,6 +50732,7 @@ module Aws::EC2
     #   <p>Returns <code>true</code> if the request succeeds; otherwise, it returns an error.</p>
     #   @return [Boolean]
     class ModifyVpcEndpointServicePermissionsResult < Struct.new(
+      nil,
       :added_principals,
       :return_value,
       keyword_init: true
@@ -49089,6 +50755,7 @@ module Aws::EC2
     #   <p>The ID of the VPC peering connection.</p>
     #   @return [String]
     class ModifyVpcPeeringConnectionOptionsRequest < Struct.new(
+      nil,
       :accepter_peering_connection_options,
       :dry_run,
       :requester_peering_connection_options,
@@ -49105,6 +50772,7 @@ module Aws::EC2
     #   <p>Information about the VPC peering connection options for the requester VPC.</p>
     #   @return [Types::PeeringConnectionOptions]
     class ModifyVpcPeeringConnectionOptionsResult < Struct.new(
+      nil,
       :accepter_peering_connection_options,
       :requester_peering_connection_options,
       keyword_init: true
@@ -49124,6 +50792,7 @@ module Aws::EC2
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     class ModifyVpcTenancyRequest < Struct.new(
+      nil,
       :vpc_id,
       :instance_tenancy,
       :dry_run,
@@ -49137,6 +50806,7 @@ module Aws::EC2
     #               error.</p>
     #   @return [Boolean]
     class ModifyVpcTenancyResult < Struct.new(
+      nil,
       :return_value,
       keyword_init: true
     )
@@ -49170,6 +50840,7 @@ module Aws::EC2
     #   <p>Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     class ModifyVpnConnectionOptionsRequest < Struct.new(
+      nil,
       :vpn_connection_id,
       :local_ipv4_network_cidr,
       :remote_ipv4_network_cidr,
@@ -49185,6 +50856,7 @@ module Aws::EC2
     #   <p>Information about the VPN connection.</p>
     #   @return [Types::VpnConnection]
     class ModifyVpnConnectionOptionsResult < Struct.new(
+      nil,
       :vpn_connection,
       keyword_init: true
     )
@@ -49211,6 +50883,7 @@ module Aws::EC2
     #                   <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     class ModifyVpnConnectionRequest < Struct.new(
+      nil,
       :vpn_connection_id,
       :transit_gateway_id,
       :customer_gateway_id,
@@ -49225,6 +50898,7 @@ module Aws::EC2
     #   <p>Information about the VPN connection.</p>
     #   @return [Types::VpnConnection]
     class ModifyVpnConnectionResult < Struct.new(
+      nil,
       :vpn_connection,
       keyword_init: true
     )
@@ -49244,6 +50918,7 @@ module Aws::EC2
     #                   <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     class ModifyVpnTunnelCertificateRequest < Struct.new(
+      nil,
       :vpn_connection_id,
       :vpn_tunnel_outside_ip_address,
       :dry_run,
@@ -49256,6 +50931,7 @@ module Aws::EC2
     #   <p>Information about the VPN connection.</p>
     #   @return [Types::VpnConnection]
     class ModifyVpnTunnelCertificateResult < Struct.new(
+      nil,
       :vpn_connection,
       keyword_init: true
     )
@@ -49286,6 +50962,7 @@ module Aws::EC2
     #   <p>Specifies the storage mode for the pre-shared key (PSK). Valid values are <code>Standard</code> (stored in Site-to-Site VPN service) or <code>SecretsManager</code> (stored in Amazon Web Services Secrets Manager).</p>
     #   @return [String]
     class ModifyVpnTunnelOptionsRequest < Struct.new(
+      nil,
       :vpn_connection_id,
       :vpn_tunnel_outside_ip_address,
       :tunnel_options,
@@ -49301,6 +50978,7 @@ module Aws::EC2
     #   <p>Information about the VPN connection.</p>
     #   @return [Types::VpnConnection]
     class ModifyVpnTunnelOptionsResult < Struct.new(
+      nil,
       :vpn_connection,
       keyword_init: true
     )
@@ -49480,6 +51158,7 @@ module Aws::EC2
     #   <p>Turn on or off tunnel endpoint lifecycle control feature.</p>
     #   @return [Boolean]
     class ModifyVpnTunnelOptionsSpecification < Struct.new(
+      nil,
       :tunnel_inside_cidr,
       :tunnel_inside_ipv6_cidr,
       :pre_shared_key,
@@ -49514,6 +51193,7 @@ module Aws::EC2
     #     <code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     class MonitorInstancesRequest < Struct.new(
+      nil,
       :instance_ids,
       :dry_run,
       keyword_init: true
@@ -49525,6 +51205,7 @@ module Aws::EC2
     #   <p>The monitoring information.</p>
     #   @return [Array<Types::InstanceMonitoring>]
     class MonitorInstancesResult < Struct.new(
+      nil,
       :instance_monitorings,
       keyword_init: true
     )
@@ -49537,6 +51218,7 @@ module Aws::EC2
     #               enabled.</p>
     #   @return [String]
     class Monitoring < Struct.new(
+      nil,
       :state,
       keyword_init: true
     )
@@ -49552,6 +51234,7 @@ module Aws::EC2
     #   <p>The Elastic IP address.</p>
     #   @return [String]
     class MoveAddressToVpcRequest < Struct.new(
+      nil,
       :dry_run,
       :public_ip,
       keyword_init: true
@@ -49566,6 +51249,7 @@ module Aws::EC2
     #   <p>The status of the move of the IP address.</p>
     #   @return [String]
     class MoveAddressToVpcResult < Struct.new(
+      nil,
       :allocation_id,
       :status,
       keyword_init: true
@@ -49588,6 +51272,7 @@ module Aws::EC2
     #   <p>The Amazon Web Services account ID of the owner of the IPAM pool.</p>
     #   @return [String]
     class MoveByoipCidrToIpamRequest < Struct.new(
+      nil,
       :dry_run,
       :cidr,
       :ipam_pool_id,
@@ -49601,6 +51286,7 @@ module Aws::EC2
     #   <p>The BYOIP CIDR.</p>
     #   @return [Types::ByoipCidr]
     class MoveByoipCidrToIpamResult < Struct.new(
+      nil,
       :byoip_cidr,
       keyword_init: true
     )
@@ -49624,6 +51310,7 @@ module Aws::EC2
     #   		</p>
     #   @return [Integer]
     class MoveCapacityReservationInstancesRequest < Struct.new(
+      nil,
       :dry_run,
       :client_token,
       :source_capacity_reservation_id,
@@ -49645,6 +51332,7 @@ module Aws::EC2
     #   			destination Capacity Reservation. </p>
     #   @return [Integer]
     class MoveCapacityReservationInstancesResult < Struct.new(
+      nil,
       :source_capacity_reservation,
       :destination_capacity_reservation,
       :instance_count,
@@ -49664,6 +51352,7 @@ module Aws::EC2
     #   <p>The Elastic IP address.</p>
     #   @return [String]
     class MovingAddressStatus < Struct.new(
+      nil,
       :move_status,
       :public_ip,
       keyword_init: true
@@ -49760,6 +51449,7 @@ module Aws::EC2
     #   <p>Indicates whether the NAT gateway supports public or private connectivity.</p>
     #   @return [String]
     class NatGateway < Struct.new(
+      nil,
       :create_time,
       :delete_time,
       :failure_code,
@@ -49803,6 +51493,7 @@ module Aws::EC2
     #   <p>The address status.</p>
     #   @return [String]
     class NatGatewayAddress < Struct.new(
+      nil,
       :allocation_id,
       :network_interface_id,
       :private_ip,
@@ -49839,6 +51530,7 @@ module Aws::EC2
     #   <p>The set of user claims to be requested from the IdP.</p>
     #   @return [String]
     class NativeApplicationOidcOptions < Struct.new(
+      nil,
       :public_signing_key_endpoint,
       :issuer,
       :authorization_endpoint,
@@ -49874,6 +51566,7 @@ module Aws::EC2
     #   <p>The ID of the Amazon Web Services account that owns the network ACL.</p>
     #   @return [String]
     class NetworkAcl < Struct.new(
+      nil,
       :associations,
       :entries,
       :is_default,
@@ -49897,6 +51590,7 @@ module Aws::EC2
     #   <p>The ID of the subnet.</p>
     #   @return [String]
     class NetworkAclAssociation < Struct.new(
+      nil,
       :network_acl_association_id,
       :network_acl_id,
       :subnet_id,
@@ -49931,6 +51625,7 @@ module Aws::EC2
     #   <p>The rule number for the entry. ACL entries are processed in ascending order by rule number.</p>
     #   @return [Integer]
     class NetworkAclEntry < Struct.new(
+      nil,
       :cidr_block,
       :egress,
       :icmp_type_code,
@@ -49961,6 +51656,7 @@ module Aws::EC2
     #            maximum limit.</p>
     #   @return [Float]
     class NetworkBandwidthGbps < Struct.new(
+      nil,
       :min,
       :max,
       keyword_init: true
@@ -49985,6 +51681,7 @@ module Aws::EC2
     #            parameter.</p>
     #   @return [Float]
     class NetworkBandwidthGbpsRequest < Struct.new(
+      nil,
       :min,
       :max,
       keyword_init: true
@@ -50018,6 +51715,7 @@ module Aws::EC2
     #   <p>The maximum number of the ENA queues for each interface.</p>
     #   @return [Integer]
     class NetworkCardInfo < Struct.new(
+      nil,
       :network_card_index,
       :network_performance,
       :maximum_network_interfaces,
@@ -50081,6 +51779,7 @@ module Aws::EC2
     #   <p>Indicates whether changing the number of ENA queues is supported.</p>
     #   @return [String]
     class NetworkInfo < Struct.new(
+      nil,
       :network_performance,
       :maximum_network_interfaces,
       :maximum_network_cards,
@@ -50118,6 +51817,7 @@ module Aws::EC2
     #   <p>The tags.</p>
     #   @return [Array<Types::Tag>]
     class NetworkInsightsAccessScope < Struct.new(
+      nil,
       :network_insights_access_scope_id,
       :network_insights_access_scope_arn,
       :created_date,
@@ -50163,6 +51863,7 @@ module Aws::EC2
     #   <p>The tags.</p>
     #   @return [Array<Types::Tag>]
     class NetworkInsightsAccessScopeAnalysis < Struct.new(
+      nil,
       :network_insights_access_scope_analysis_id,
       :network_insights_access_scope_analysis_arn,
       :network_insights_access_scope_id,
@@ -50190,6 +51891,7 @@ module Aws::EC2
     #   <p>The paths to exclude.</p>
     #   @return [Array<Types::AccessScopePath>]
     class NetworkInsightsAccessScopeContent < Struct.new(
+      nil,
       :network_insights_access_scope_id,
       :match_paths,
       :exclude_paths,
@@ -50251,6 +51953,7 @@ module Aws::EC2
     #   <p>The tags.</p>
     #   @return [Array<Types::Tag>]
     class NetworkInsightsAnalysis < Struct.new(
+      nil,
       :network_insights_analysis_id,
       :network_insights_analysis_arn,
       :network_insights_path_id,
@@ -50317,6 +52020,7 @@ module Aws::EC2
     #   <p>Scopes the analysis to network paths that match specific filters at the destination.</p>
     #   @return [Types::PathFilter]
     class NetworkInsightsPath < Struct.new(
+      nil,
       :network_insights_path_id,
       :network_insights_path_arn,
       :created_date,
@@ -50440,6 +52144,7 @@ module Aws::EC2
     #   <p>The subnets associated with this network interface.</p>
     #   @return [Array<String>]
     class NetworkInterface < Struct.new(
+      nil,
       :association,
       :attachment,
       :availability_zone,
@@ -50503,6 +52208,7 @@ module Aws::EC2
     #               associated with a Wavelength Zone.</p>
     #   @return [String]
     class NetworkInterfaceAssociation < Struct.new(
+      nil,
       :allocation_id,
       :association_id,
       :ip_owner_id,
@@ -50549,6 +52255,7 @@ module Aws::EC2
     #   <p>The number of ENA queues created with the instance.</p>
     #   @return [Integer]
     class NetworkInterfaceAttachment < Struct.new(
+      nil,
       :attach_time,
       :attachment_id,
       :delete_on_termination,
@@ -50579,6 +52286,7 @@ module Aws::EC2
     #               terminated.</p>
     #   @return [Boolean]
     class NetworkInterfaceAttachmentChanges < Struct.new(
+      nil,
       :default_ena_queue_count,
       :ena_queue_count,
       :attachment_id,
@@ -50598,6 +52306,7 @@ module Aws::EC2
     #            maximum limit.</p>
     #   @return [Integer]
     class NetworkInterfaceCount < Struct.new(
+      nil,
       :min,
       :max,
       keyword_init: true
@@ -50615,6 +52324,7 @@ module Aws::EC2
     #            parameter.</p>
     #   @return [Integer]
     class NetworkInterfaceCountRequest < Struct.new(
+      nil,
       :min,
       :max,
       keyword_init: true
@@ -50636,6 +52346,7 @@ module Aws::EC2
     #               interface is detached. For more information, see <a href="https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_ModifyNetworkInterfaceAttribute.html">ModifyNetworkInterfaceAttribute</a>.</p>
     #   @return [Boolean]
     class NetworkInterfaceIpv6Address < Struct.new(
+      nil,
       :ipv6_address,
       :public_ipv6_dns_name,
       :is_primary_ipv6,
@@ -50664,6 +52375,7 @@ module Aws::EC2
     #   <p>Information about the state of the permission.</p>
     #   @return [Types::NetworkInterfacePermissionState]
     class NetworkInterfacePermission < Struct.new(
+      nil,
       :network_interface_permission_id,
       :network_interface_id,
       :aws_account_id,
@@ -50683,6 +52395,7 @@ module Aws::EC2
     #   <p>A status message, if applicable.</p>
     #   @return [String]
     class NetworkInterfacePermissionState < Struct.new(
+      nil,
       :state,
       :status_message,
       keyword_init: true
@@ -50706,6 +52419,7 @@ module Aws::EC2
     #   <p>The private IPv4 address.</p>
     #   @return [String]
     class NetworkInterfacePrivateIpAddress < Struct.new(
+      nil,
       :association,
       :primary,
       :private_dns_name,
@@ -50723,6 +52437,7 @@ module Aws::EC2
     #   <p>The version of the neuron accelerator.</p>
     #   @return [Integer]
     class NeuronDeviceCoreInfo < Struct.new(
+      nil,
       :count,
       :version,
       keyword_init: true
@@ -50744,6 +52459,7 @@ module Aws::EC2
     #   <p>Describes the memory available to each neuron accelerator.</p>
     #   @return [Types::NeuronDeviceMemoryInfo]
     class NeuronDeviceInfo < Struct.new(
+      nil,
       :count,
       :name,
       :core_info,
@@ -50758,6 +52474,7 @@ module Aws::EC2
     #   <p>The size of the memory available to the neuron accelerator, in MiB.</p>
     #   @return [Integer]
     class NeuronDeviceMemoryInfo < Struct.new(
+      nil,
       :size_in_mi_b,
       keyword_init: true
     )
@@ -50773,6 +52490,7 @@ module Aws::EC2
     #      MiB.</p>
     #   @return [Integer]
     class NeuronInfo < Struct.new(
+      nil,
       :neuron_devices,
       :total_neuron_device_memory_in_mi_b,
       keyword_init: true
@@ -50788,6 +52506,7 @@ module Aws::EC2
     #   <p>The values for the DHCP option.</p>
     #   @return [Array<String>]
     class NewDhcpConfiguration < Struct.new(
+      nil,
       :key,
       :values,
       keyword_init: true
@@ -50800,6 +52519,7 @@ module Aws::EC2
     #   <p>Indicates the supported NitroTPM versions.</p>
     #   @return [Array<String>]
     class NitroTpmInfo < Struct.new(
+      nil,
       :supported_versions,
       keyword_init: true
     )
@@ -50830,6 +52550,7 @@ module Aws::EC2
     #   <p>The OpenID Connect (OIDC) scope specified.</p>
     #   @return [String]
     class OidcOptions < Struct.new(
+      nil,
       :issuer,
       :authorization_endpoint,
       :token_endpoint,
@@ -50890,6 +52611,7 @@ module Aws::EC2
     #            </note>
     #   @return [String]
     class OnDemandOptions < Struct.new(
+      nil,
       :allocation_strategy,
       :capacity_reservation_options,
       :single_instance_type,
@@ -50948,6 +52670,7 @@ module Aws::EC2
     #            </note>
     #   @return [String]
     class OnDemandOptionsRequest < Struct.new(
+      nil,
       :allocation_strategy,
       :capacity_reservation_options,
       :single_instance_type,
@@ -50964,6 +52687,7 @@ module Aws::EC2
     #   <p>The service provider that manages the resource.</p>
     #   @return [String]
     class OperatorRequest < Struct.new(
+      nil,
       :principal,
       keyword_init: true
     )
@@ -50980,6 +52704,7 @@ module Aws::EC2
     #               principal is the service provider that manages the resource.</p>
     #   @return [String]
     class OperatorResponse < Struct.new(
+      nil,
       :managed,
       :principal,
       keyword_init: true
@@ -51010,6 +52735,7 @@ module Aws::EC2
     #   <p>The tags associated with the Outpost LAG.</p>
     #   @return [Array<Types::Tag>]
     class OutpostLag < Struct.new(
+      nil,
       :outpost_arn,
       :owner_id,
       :state,
@@ -51045,6 +52771,7 @@ module Aws::EC2
     #   <p>The protocols.</p>
     #   @return [Array<String>]
     class PacketHeaderStatement < Struct.new(
+      nil,
       :source_addresses,
       :destination_addresses,
       :source_ports,
@@ -51080,6 +52807,7 @@ module Aws::EC2
     #   <p>The protocols.</p>
     #   @return [Array<String>]
     class PacketHeaderStatementRequest < Struct.new(
+      nil,
       :source_addresses,
       :destination_addresses,
       :source_ports,
@@ -51154,6 +52882,7 @@ module Aws::EC2
     #   <p>The name of the VPC endpoint service.</p>
     #   @return [String]
     class PathComponent < Struct.new(
+      nil,
       :sequence_number,
       :acl_rule,
       :attached_to,
@@ -51194,6 +52923,7 @@ module Aws::EC2
     #   <p>The destination port range.</p>
     #   @return [Types::FilterPortRange]
     class PathFilter < Struct.new(
+      nil,
       :source_address,
       :source_port_range,
       :destination_address,
@@ -51218,6 +52948,7 @@ module Aws::EC2
     #   <p>The destination port range.</p>
     #   @return [Types::RequestFilterPortRange]
     class PathRequestFilter < Struct.new(
+      nil,
       :source_address,
       :source_port_range,
       :destination_address,
@@ -51235,6 +52966,7 @@ module Aws::EC2
     #   <p>The resource statement.</p>
     #   @return [Types::ResourceStatement]
     class PathStatement < Struct.new(
+      nil,
       :packet_header_statement,
       :resource_statement,
       keyword_init: true
@@ -51250,6 +52982,7 @@ module Aws::EC2
     #   <p>The resource statement.</p>
     #   @return [Types::ResourceStatementRequest]
     class PathStatementRequest < Struct.new(
+      nil,
       :packet_header_statement,
       :resource_statement,
       keyword_init: true
@@ -51271,6 +53004,7 @@ module Aws::EC2
     #   <p>The ID of the vendor for the subsystem.</p>
     #   @return [String]
     class PciId < Struct.new(
+      nil,
       :device_id,
       :vendor_id,
       :subsystem_id,
@@ -51288,6 +53022,7 @@ module Aws::EC2
     #   <p>The status message, if applicable.</p>
     #   @return [String]
     class PeeringAttachmentStatus < Struct.new(
+      nil,
       :code,
       :message,
       keyword_init: true
@@ -51307,6 +53042,7 @@ module Aws::EC2
     #   <p>Deprecated.</p>
     #   @return [Boolean]
     class PeeringConnectionOptions < Struct.new(
+      nil,
       :allow_dns_resolution_from_remote_vpc,
       :allow_egress_from_local_classic_link_to_remote_vpc,
       :allow_egress_from_local_vpc_to_remote_classic_link,
@@ -51327,6 +53063,7 @@ module Aws::EC2
     #   <p>Deprecated.</p>
     #   @return [Boolean]
     class PeeringConnectionOptionsRequest < Struct.new(
+      nil,
       :allow_dns_resolution_from_remote_vpc,
       :allow_egress_from_local_classic_link_to_remote_vpc,
       :allow_egress_from_local_vpc_to_remote_classic_link,
@@ -51349,6 +53086,7 @@ module Aws::EC2
     #   <p>The Region of the transit gateway.</p>
     #   @return [String]
     class PeeringTgwInfo < Struct.new(
+      nil,
       :transit_gateway_id,
       :core_network_id,
       :owner_id,
@@ -51429,6 +53167,7 @@ module Aws::EC2
     #            API returns an empty response for <a href="https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_GetInstanceTypesFromInstanceRequirements">GetInstanceTypesFromInstanceRequirements</a> and an exception for <a href="https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_CreateFleet">CreateFleet</a>, <a href="https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_RequestSpotFleet">RequestSpotFleet</a>, <a href="https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_ModifyFleet">ModifyFleet</a>, and <a href="https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_ModifySpotFleetRequest">ModifySpotFleetRequest</a>.</p>
     #   @return [String]
     class PerformanceFactorReference < Struct.new(
+      nil,
       :instance_family,
       keyword_init: true
     )
@@ -51506,6 +53245,7 @@ module Aws::EC2
     #            API returns an empty response for <a href="https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_GetInstanceTypesFromInstanceRequirements">GetInstanceTypesFromInstanceRequirements</a> and an exception for <a href="https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_CreateFleet">CreateFleet</a>, <a href="https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_RequestSpotFleet">RequestSpotFleet</a>, <a href="https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_ModifyFleet">ModifyFleet</a>, and <a href="https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_ModifySpotFleetRequest">ModifySpotFleetRequest</a>.</p>
     #   @return [String]
     class PerformanceFactorReferenceRequest < Struct.new(
+      nil,
       :instance_family,
       keyword_init: true
     )
@@ -51517,6 +53257,7 @@ module Aws::EC2
     #   <p>The Diffie-Hellmann group number.</p>
     #   @return [Integer]
     class Phase1DHGroupNumbersListValue < Struct.new(
+      nil,
       :value,
       keyword_init: true
     )
@@ -51529,6 +53270,7 @@ module Aws::EC2
     #   <p>The Diffie-Hellmann group number.</p>
     #   @return [Integer]
     class Phase1DHGroupNumbersRequestListValue < Struct.new(
+      nil,
       :value,
       keyword_init: true
     )
@@ -51540,6 +53282,7 @@ module Aws::EC2
     #   <p>The value for the encryption algorithm.</p>
     #   @return [String]
     class Phase1EncryptionAlgorithmsListValue < Struct.new(
+      nil,
       :value,
       keyword_init: true
     )
@@ -51552,6 +53295,7 @@ module Aws::EC2
     #   <p>The value for the encryption algorithm.</p>
     #   @return [String]
     class Phase1EncryptionAlgorithmsRequestListValue < Struct.new(
+      nil,
       :value,
       keyword_init: true
     )
@@ -51563,6 +53307,7 @@ module Aws::EC2
     #   <p>The value for the integrity algorithm.</p>
     #   @return [String]
     class Phase1IntegrityAlgorithmsListValue < Struct.new(
+      nil,
       :value,
       keyword_init: true
     )
@@ -51575,6 +53320,7 @@ module Aws::EC2
     #   <p>The value for the integrity algorithm.</p>
     #   @return [String]
     class Phase1IntegrityAlgorithmsRequestListValue < Struct.new(
+      nil,
       :value,
       keyword_init: true
     )
@@ -51586,6 +53332,7 @@ module Aws::EC2
     #   <p>The Diffie-Hellmann group number.</p>
     #   @return [Integer]
     class Phase2DHGroupNumbersListValue < Struct.new(
+      nil,
       :value,
       keyword_init: true
     )
@@ -51598,6 +53345,7 @@ module Aws::EC2
     #   <p>The Diffie-Hellmann group number.</p>
     #   @return [Integer]
     class Phase2DHGroupNumbersRequestListValue < Struct.new(
+      nil,
       :value,
       keyword_init: true
     )
@@ -51609,6 +53357,7 @@ module Aws::EC2
     #   <p>The encryption algorithm.</p>
     #   @return [String]
     class Phase2EncryptionAlgorithmsListValue < Struct.new(
+      nil,
       :value,
       keyword_init: true
     )
@@ -51621,6 +53370,7 @@ module Aws::EC2
     #   <p>The encryption algorithm.</p>
     #   @return [String]
     class Phase2EncryptionAlgorithmsRequestListValue < Struct.new(
+      nil,
       :value,
       keyword_init: true
     )
@@ -51632,6 +53382,7 @@ module Aws::EC2
     #   <p>The integrity algorithm.</p>
     #   @return [String]
     class Phase2IntegrityAlgorithmsListValue < Struct.new(
+      nil,
       :value,
       keyword_init: true
     )
@@ -51644,6 +53395,7 @@ module Aws::EC2
     #   <p>The integrity algorithm.</p>
     #   @return [String]
     class Phase2IntegrityAlgorithmsRequestListValue < Struct.new(
+      nil,
       :value,
       keyword_init: true
     )
@@ -51705,6 +53457,7 @@ module Aws::EC2
     #            <p>This parameter is not supported for <a href="https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_CreateFleet">CreateFleet</a>.</p>
     #   @return [String]
     class Placement < Struct.new(
+      nil,
       :availability_zone_id,
       :affinity,
       :group_name,
@@ -51748,6 +53501,7 @@ module Aws::EC2
     #               groups can be spread across hosts.</p>
     #   @return [String]
     class PlacementGroup < Struct.new(
+      nil,
       :group_name,
       :state,
       :strategy,
@@ -51766,6 +53520,7 @@ module Aws::EC2
     #   <p>The supported placement group types.</p>
     #   @return [Array<String>]
     class PlacementGroupInfo < Struct.new(
+      nil,
       :supported_strategies,
       keyword_init: true
     )
@@ -51777,6 +53532,7 @@ module Aws::EC2
     #   <p>The name of the placement group that the instance is in.</p>
     #   @return [String]
     class PlacementResponse < Struct.new(
+      nil,
       :group_name,
       keyword_init: true
     )
@@ -51788,6 +53544,7 @@ module Aws::EC2
     #   <p>The CIDR block.</p>
     #   @return [String]
     class PoolCidrBlock < Struct.new(
+      nil,
       :cidr,
       keyword_init: true
     )
@@ -51802,6 +53559,7 @@ module Aws::EC2
     #   <p>The last port in the range.</p>
     #   @return [Integer]
     class PortRange < Struct.new(
+      nil,
       :from,
       :to,
       keyword_init: true
@@ -51820,6 +53578,7 @@ module Aws::EC2
     #   <p>The name of the prefix.</p>
     #   @return [String]
     class PrefixList < Struct.new(
+      nil,
       :cidrs,
       :prefix_list_id,
       :prefix_list_name,
@@ -51836,6 +53595,7 @@ module Aws::EC2
     #   <p>The owner of the resource.</p>
     #   @return [String]
     class PrefixListAssociation < Struct.new(
+      nil,
       :resource_id,
       :resource_owner,
       keyword_init: true
@@ -51851,6 +53611,7 @@ module Aws::EC2
     #   <p>The description.</p>
     #   @return [String]
     class PrefixListEntry < Struct.new(
+      nil,
       :cidr,
       :description,
       keyword_init: true
@@ -51868,6 +53629,7 @@ module Aws::EC2
     #   <p>The ID of the prefix.</p>
     #   @return [String]
     class PrefixListId < Struct.new(
+      nil,
       :description,
       :prefix_list_id,
       keyword_init: true
@@ -51898,6 +53660,7 @@ module Aws::EC2
     #         last month before the capacity reservation expires.</p>
     #   @return [Integer]
     class PriceSchedule < Struct.new(
+      nil,
       :active,
       :currency_code,
       :price,
@@ -51920,6 +53683,7 @@ module Aws::EC2
     #         supported currency is <code>USD</code>.</p>
     #   @return [String]
     class PriceScheduleSpecification < Struct.new(
+      nil,
       :term,
       :price,
       :currency_code,
@@ -51936,6 +53700,7 @@ module Aws::EC2
     #   <p>The price per instance.</p>
     #   @return [Float]
     class PricingDetail < Struct.new(
+      nil,
       :count,
       :price,
       keyword_init: true
@@ -51951,6 +53716,7 @@ module Aws::EC2
     #   <p>PrincipalIdFormatStatuses description</p>
     #   @return [Array<Types::IdFormat>]
     class PrincipalIdFormat < Struct.new(
+      nil,
       :arn,
       :statuses,
       keyword_init: true
@@ -51963,6 +53729,7 @@ module Aws::EC2
     #   <p>The private DNS name assigned to the VPC endpoint service.</p>
     #   @return [String]
     class PrivateDnsDetails < Struct.new(
+      nil,
       :private_dns_name,
       keyword_init: true
     )
@@ -51986,6 +53753,7 @@ module Aws::EC2
     #   <p>The name of the record subdomain the service provider needs to create. The service provider adds the <code>value</code> text to the <code>name</code>.</p>
     #   @return [String]
     class PrivateDnsNameConfiguration < Struct.new(
+      nil,
       :state,
       :type,
       :value,
@@ -52011,6 +53779,7 @@ module Aws::EC2
     #               records.</p>
     #   @return [Boolean]
     class PrivateDnsNameOptionsOnLaunch < Struct.new(
+      nil,
       :hostname_type,
       :enable_resource_name_dns_a_record,
       :enable_resource_name_dns_aaaa_record,
@@ -52035,6 +53804,7 @@ module Aws::EC2
     #               records.</p>
     #   @return [Boolean]
     class PrivateDnsNameOptionsRequest < Struct.new(
+      nil,
       :hostname_type,
       :enable_resource_name_dns_a_record,
       :enable_resource_name_dns_aaaa_record,
@@ -52056,6 +53826,7 @@ module Aws::EC2
     #               records.</p>
     #   @return [Boolean]
     class PrivateDnsNameOptionsResponse < Struct.new(
+      nil,
       :hostname_type,
       :enable_resource_name_dns_a_record,
       :enable_resource_name_dns_aaaa_record,
@@ -52073,6 +53844,7 @@ module Aws::EC2
     #   <p>The private IPv4 address.</p>
     #   @return [String]
     class PrivateIpAddressSpecification < Struct.new(
+      nil,
       :primary,
       :private_ip_address,
       keyword_init: true
@@ -52097,6 +53869,7 @@ module Aws::EC2
     #   <p>The manufacturer of the processor.</p>
     #   @return [String]
     class ProcessorInfo < Struct.new(
+      nil,
       :supported_architectures,
       :sustained_clock_speed_in_ghz,
       :supported_features,
@@ -52114,6 +53887,7 @@ module Aws::EC2
     #   <p>The type of product code.</p>
     #   @return [String]
     class ProductCode < Struct.new(
+      nil,
       :product_code_id,
       :product_code_type,
       keyword_init: true
@@ -52126,6 +53900,7 @@ module Aws::EC2
     #   <p>The ID of the virtual private gateway.</p>
     #   @return [String]
     class PropagatingVgw < Struct.new(
+      nil,
       :gateway_id,
       keyword_init: true
     )
@@ -52179,6 +53954,7 @@ module Aws::EC2
     #            </note>
     #   @return [String]
     class ProvisionByoipCidrRequest < Struct.new(
+      nil,
       :cidr,
       :cidr_authorization_context,
       :publicly_advertisable,
@@ -52196,6 +53972,7 @@ module Aws::EC2
     #   <p>Information about the address range.</p>
     #   @return [Types::ByoipCidr]
     class ProvisionByoipCidrResult < Struct.new(
+      nil,
       :byoip_cidr,
       keyword_init: true
     )
@@ -52217,6 +53994,7 @@ module Aws::EC2
     #   <p>An ASN authorization context.</p>
     #   @return [Types::AsnAuthorizationContext]
     class ProvisionIpamByoasnRequest < Struct.new(
+      nil,
       :dry_run,
       :ipam_id,
       :asn,
@@ -52230,6 +54008,7 @@ module Aws::EC2
     #   <p>An ASN and BYOIP CIDR association.</p>
     #   @return [Types::Byoasn]
     class ProvisionIpamByoasnResult < Struct.new(
+      nil,
       :byoasn,
       keyword_init: true
     )
@@ -52263,6 +54042,7 @@ module Aws::EC2
     #   <p>Verification token ID. This option only applies to IPv4 and IPv6 pools in the public scope.</p>
     #   @return [String]
     class ProvisionIpamPoolCidrRequest < Struct.new(
+      nil,
       :dry_run,
       :ipam_pool_id,
       :cidr,
@@ -52280,6 +54060,7 @@ module Aws::EC2
     #   <p>Information about the provisioned CIDR.</p>
     #   @return [Types::IpamPoolCidr]
     class ProvisionIpamPoolCidrResult < Struct.new(
+      nil,
       :ipam_pool_cidr,
       keyword_init: true
     )
@@ -52304,6 +54085,7 @@ module Aws::EC2
     #   <p>The Availability Zone (AZ) or Local Zone (LZ) network border group that the resource that the IP address is assigned to is in. Defaults to an AZ network border group. For more information on available Local Zones, see <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-byoip.html#byoip-zone-avail">Local Zone availability</a> in the <i>Amazon EC2 User Guide</i>.</p>
     #   @return [String]
     class ProvisionPublicIpv4PoolCidrRequest < Struct.new(
+      nil,
       :dry_run,
       :ipam_pool_id,
       :pool_id,
@@ -52321,6 +54103,7 @@ module Aws::EC2
     #   <p>Information about the address range of the public IPv4 pool.</p>
     #   @return [Types::PublicIpv4PoolRange]
     class ProvisionPublicIpv4PoolCidrResult < Struct.new(
+      nil,
       :pool_id,
       :pool_address_range,
       keyword_init: true
@@ -52346,6 +54129,7 @@ module Aws::EC2
     #   <p>Reserved.</p>
     #   @return [String]
     class ProvisionedBandwidth < Struct.new(
+      nil,
       :provision_time,
       :provisioned,
       :request_time,
@@ -52367,6 +54151,7 @@ module Aws::EC2
     #   <p>The reason for the PTR record update.</p>
     #   @return [String]
     class PtrUpdateStatus < Struct.new(
+      nil,
       :value,
       :status,
       :reason,
@@ -52389,6 +54174,7 @@ module Aws::EC2
     #   <p>A dual-stack public hostname for a network interface. Requests from within the VPC resolve to both the private IPv4 address and the IPv6 Global Unicast Address of the network interface. Requests from the internet resolve to both the public IPv4 and the IPv6 GUA address of the network interface.</p>
     #   @return [String]
     class PublicIpDnsNameOptions < Struct.new(
+      nil,
       :dns_hostname_type,
       :public_ipv4_dns_name,
       :public_ipv6_dns_name,
@@ -52423,6 +54209,7 @@ module Aws::EC2
     #   <p>Any tags for the address pool.</p>
     #   @return [Array<Types::Tag>]
     class PublicIpv4Pool < Struct.new(
+      nil,
       :pool_id,
       :description,
       :pool_address_ranges,
@@ -52449,6 +54236,7 @@ module Aws::EC2
     #   <p>The number of available addresses in the range.</p>
     #   @return [Integer]
     class PublicIpv4PoolRange < Struct.new(
+      nil,
       :first_address,
       :last_address,
       :address_count,
@@ -52487,6 +54275,7 @@ module Aws::EC2
     #   <p>The upfront price of the reservation.</p>
     #   @return [String]
     class Purchase < Struct.new(
+      nil,
       :currency_code,
       :duration,
       :host_id_set,
@@ -52510,6 +54299,7 @@ module Aws::EC2
     #   <p>Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     class PurchaseCapacityBlockExtensionRequest < Struct.new(
+      nil,
       :capacity_block_extension_offering_id,
       :capacity_reservation_id,
       :dry_run,
@@ -52522,6 +54312,7 @@ module Aws::EC2
     #   <p>The purchased Capacity Block extensions. </p>
     #   @return [Array<Types::CapacityBlockExtension>]
     class PurchaseCapacityBlockExtensionResult < Struct.new(
+      nil,
       :capacity_block_extensions,
       keyword_init: true
     )
@@ -52541,6 +54332,7 @@ module Aws::EC2
     #   <p>The type of operating system for which to reserve capacity.</p>
     #   @return [String]
     class PurchaseCapacityBlockRequest < Struct.new(
+      nil,
       :dry_run,
       :tag_specifications,
       :capacity_block_offering_id,
@@ -52557,6 +54349,7 @@ module Aws::EC2
     #   <p>The Capacity Block.</p>
     #   @return [Array<Types::CapacityBlock>]
     class PurchaseCapacityBlockResult < Struct.new(
+      nil,
       :capacity_reservation,
       :capacity_blocks,
       keyword_init: true
@@ -52590,6 +54383,7 @@ module Aws::EC2
     #   <p>The tags to apply to the Dedicated Host Reservation during purchase.</p>
     #   @return [Array<Types::TagSpecification>]
     class PurchaseHostReservationRequest < Struct.new(
+      nil,
       :client_token,
       :currency_code,
       :host_id_set,
@@ -52619,6 +54413,7 @@ module Aws::EC2
     #   <p>The total amount charged to your account when you purchase the reservation.</p>
     #   @return [String]
     class PurchaseHostReservationResult < Struct.new(
+      nil,
       :client_token,
       :currency_code,
       :purchase,
@@ -52637,6 +54432,7 @@ module Aws::EC2
     #   <p>The purchase token.</p>
     #   @return [String]
     class PurchaseRequest < Struct.new(
+      nil,
       :instance_count,
       :purchase_token,
       keyword_init: true
@@ -52666,6 +54462,7 @@ module Aws::EC2
     #         that the Reserved Instances are not purchased at unexpected prices.</p>
     #   @return [Types::ReservedInstanceLimitPrice]
     class PurchaseReservedInstancesOfferingRequest < Struct.new(
+      nil,
       :instance_count,
       :reserved_instances_offering_id,
       :purchase_time,
@@ -52682,6 +54479,7 @@ module Aws::EC2
     #         pricing tier, the final Reserved Instances IDs might change. For more information, see <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/concepts-reserved-instances-application.html#crossing-pricing-tiers">Crossing pricing tiers</a> in the <i>Amazon EC2 User Guide</i>.</p>
     #   @return [String]
     class PurchaseReservedInstancesOfferingResult < Struct.new(
+      nil,
       :reserved_instances_id,
       keyword_init: true
     )
@@ -52702,6 +54500,7 @@ module Aws::EC2
     #   <p>The purchase requests.</p>
     #   @return [Array<Types::PurchaseRequest>]
     class PurchaseScheduledInstancesRequest < Struct.new(
+      nil,
       :client_token,
       :dry_run,
       :purchase_requests,
@@ -52715,6 +54514,7 @@ module Aws::EC2
     #   <p>Information about the Scheduled Instances.</p>
     #   @return [Array<Types::ScheduledInstance>]
     class PurchaseScheduledInstancesResult < Struct.new(
+      nil,
       :scheduled_instance_set,
       keyword_init: true
     )
@@ -52730,6 +54530,7 @@ module Aws::EC2
     #     <code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     class RebootInstancesRequest < Struct.new(
+      nil,
       :instance_ids,
       :dry_run,
       keyword_init: true
@@ -52745,6 +54546,7 @@ module Aws::EC2
     #   <p>The frequency of the recurring charge.</p>
     #   @return [String]
     class RecurringCharge < Struct.new(
+      nil,
       :amount,
       :frequency,
       keyword_init: true
@@ -52769,6 +54571,7 @@ module Aws::EC2
     #   <p>The ID of the VPC peering connection (if applicable).</p>
     #   @return [String]
     class ReferencedSecurityGroup < Struct.new(
+      nil,
       :group_id,
       :peering_status,
       :user_id,
@@ -52791,6 +54594,7 @@ module Aws::EC2
     #   <p>The Region service endpoint.</p>
     #   @return [String]
     class Region < Struct.new(
+      nil,
       :opt_in_status,
       :region_name,
       :endpoint,
@@ -52812,6 +54616,7 @@ module Aws::EC2
     #               most frequently observed value for the attribute.</p>
     #   @return [Integer]
     class RegionalSummary < Struct.new(
+      nil,
       :region_name,
       :number_of_matched_accounts,
       :number_of_unmatched_accounts,
@@ -52928,6 +54733,7 @@ module Aws::EC2
     #         instances launched from the AMI unreachable.</p>
     #   @return [Boolean]
     class RegisterImageRequest < Struct.new(
+      nil,
       :image_location,
       :billing_products,
       :boot_mode,
@@ -52956,6 +54762,7 @@ module Aws::EC2
     #   <p>The ID of the newly registered AMI.</p>
     #   @return [String]
     class RegisterImageResult < Struct.new(
+      nil,
       :image_id,
       keyword_init: true
     )
@@ -52971,6 +54778,7 @@ module Aws::EC2
     #   <p>Information about the tag keys to register.</p>
     #   @return [Types::RegisterInstanceTagAttributeRequest]
     class RegisterInstanceEventNotificationAttributesRequest < Struct.new(
+      nil,
       :dry_run,
       :instance_tag_attribute,
       keyword_init: true
@@ -52982,6 +54790,7 @@ module Aws::EC2
     #   <p>The resulting set of tag keys.</p>
     #   @return [Types::InstanceTagNotificationAttribute]
     class RegisterInstanceEventNotificationAttributesResult < Struct.new(
+      nil,
       :instance_tag_attribute,
       keyword_init: true
     )
@@ -53000,6 +54809,7 @@ module Aws::EC2
     #   <p>The tag keys to register.</p>
     #   @return [Array<String>]
     class RegisterInstanceTagAttributeRequest < Struct.new(
+      nil,
       :include_all_tags_of_instance,
       :instance_tag_keys,
       keyword_init: true
@@ -53022,6 +54832,7 @@ module Aws::EC2
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     class RegisterTransitGatewayMulticastGroupMembersRequest < Struct.new(
+      nil,
       :transit_gateway_multicast_domain_id,
       :group_ip_address,
       :network_interface_ids,
@@ -53035,6 +54846,7 @@ module Aws::EC2
     #   <p>Information about the registered  transit gateway multicast group members.</p>
     #   @return [Types::TransitGatewayMulticastRegisteredGroupMembers]
     class RegisterTransitGatewayMulticastGroupMembersResult < Struct.new(
+      nil,
       :registered_multicast_group_members,
       keyword_init: true
     )
@@ -53056,6 +54868,7 @@ module Aws::EC2
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     class RegisterTransitGatewayMulticastGroupSourcesRequest < Struct.new(
+      nil,
       :transit_gateway_multicast_domain_id,
       :group_ip_address,
       :network_interface_ids,
@@ -53069,6 +54882,7 @@ module Aws::EC2
     #   <p>Information about the  transit gateway multicast group sources.</p>
     #   @return [Types::TransitGatewayMulticastRegisteredGroupSources]
     class RegisterTransitGatewayMulticastGroupSourcesResult < Struct.new(
+      nil,
       :registered_multicast_group_sources,
       keyword_init: true
     )
@@ -53082,6 +54896,7 @@ module Aws::EC2
     #   <p>The ID of the Capacity Reservation for which to reject the request.</p>
     #   @return [String]
     class RejectCapacityReservationBillingOwnershipRequest < Struct.new(
+      nil,
       :dry_run,
       :capacity_reservation_id,
       keyword_init: true
@@ -53093,6 +54908,7 @@ module Aws::EC2
     #   <p>Returns <code>true</code> if the request succeeds; otherwise, it returns an error.</p>
     #   @return [Boolean]
     class RejectCapacityReservationBillingOwnershipResult < Struct.new(
+      nil,
       :return,
       keyword_init: true
     )
@@ -53114,6 +54930,7 @@ module Aws::EC2
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     class RejectTransitGatewayMulticastDomainAssociationsRequest < Struct.new(
+      nil,
       :transit_gateway_multicast_domain_id,
       :transit_gateway_attachment_id,
       :subnet_ids,
@@ -53127,6 +54944,7 @@ module Aws::EC2
     #   <p>Information about the multicast domain associations.</p>
     #   @return [Types::TransitGatewayMulticastDomainAssociations]
     class RejectTransitGatewayMulticastDomainAssociationsResult < Struct.new(
+      nil,
       :associations,
       keyword_init: true
     )
@@ -53142,6 +54960,7 @@ module Aws::EC2
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     class RejectTransitGatewayPeeringAttachmentRequest < Struct.new(
+      nil,
       :transit_gateway_attachment_id,
       :dry_run,
       keyword_init: true
@@ -53153,6 +54972,7 @@ module Aws::EC2
     #   <p>The transit gateway peering attachment.</p>
     #   @return [Types::TransitGatewayPeeringAttachment]
     class RejectTransitGatewayPeeringAttachmentResult < Struct.new(
+      nil,
       :transit_gateway_peering_attachment,
       keyword_init: true
     )
@@ -53168,6 +54988,7 @@ module Aws::EC2
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     class RejectTransitGatewayVpcAttachmentRequest < Struct.new(
+      nil,
       :transit_gateway_attachment_id,
       :dry_run,
       keyword_init: true
@@ -53179,6 +55000,7 @@ module Aws::EC2
     #   <p>Information about the attachment.</p>
     #   @return [Types::TransitGatewayVpcAttachment]
     class RejectTransitGatewayVpcAttachmentResult < Struct.new(
+      nil,
       :transit_gateway_vpc_attachment,
       keyword_init: true
     )
@@ -53197,6 +55019,7 @@ module Aws::EC2
     #   <p>The IDs of the VPC endpoints.</p>
     #   @return [Array<String>]
     class RejectVpcEndpointConnectionsRequest < Struct.new(
+      nil,
       :dry_run,
       :service_id,
       :vpc_endpoint_ids,
@@ -53209,6 +55032,7 @@ module Aws::EC2
     #   <p>Information about the endpoints that were not rejected, if applicable.</p>
     #   @return [Array<Types::UnsuccessfulItem>]
     class RejectVpcEndpointConnectionsResult < Struct.new(
+      nil,
       :unsuccessful,
       keyword_init: true
     )
@@ -53224,6 +55048,7 @@ module Aws::EC2
     #   <p>The ID of the VPC peering connection.</p>
     #   @return [String]
     class RejectVpcPeeringConnectionRequest < Struct.new(
+      nil,
       :dry_run,
       :vpc_peering_connection_id,
       keyword_init: true
@@ -53235,6 +55060,7 @@ module Aws::EC2
     #   <p>Returns <code>true</code> if the request succeeds; otherwise, it returns an error.</p>
     #   @return [Boolean]
     class RejectVpcPeeringConnectionResult < Struct.new(
+      nil,
       :return,
       keyword_init: true
     )
@@ -53258,6 +55084,7 @@ module Aws::EC2
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     class ReleaseAddressRequest < Struct.new(
+      nil,
       :allocation_id,
       :public_ip,
       :network_border_group,
@@ -53271,6 +55098,7 @@ module Aws::EC2
     #   <p>The IDs of the Dedicated Hosts to release.</p>
     #   @return [Array<String>]
     class ReleaseHostsRequest < Struct.new(
+      nil,
       :host_ids,
       keyword_init: true
     )
@@ -53285,6 +55113,7 @@ module Aws::EC2
     #               message.</p>
     #   @return [Array<Types::UnsuccessfulItem>]
     class ReleaseHostsResult < Struct.new(
+      nil,
       :successful,
       :unsuccessful,
       keyword_init: true
@@ -53307,6 +55136,7 @@ module Aws::EC2
     #   <p>The ID of the allocation.</p>
     #   @return [String]
     class ReleaseIpamPoolAllocationRequest < Struct.new(
+      nil,
       :dry_run,
       :ipam_pool_id,
       :cidr,
@@ -53320,6 +55150,7 @@ module Aws::EC2
     #   <p>Indicates if the release was successful.</p>
     #   @return [Boolean]
     class ReleaseIpamPoolAllocationResult < Struct.new(
+      nil,
       :success,
       keyword_init: true
     )
@@ -53333,6 +55164,7 @@ module Aws::EC2
     #   <p>The name of the operating Region you want to remove.</p>
     #   @return [String]
     class RemoveIpamOperatingRegion < Struct.new(
+      nil,
       :region_name,
       keyword_init: true
     )
@@ -53374,6 +55206,7 @@ module Aws::EC2
     #            <p>For more information on how to construct an entity path, see <a href="https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_last-accessed-view-data-orgs.html#access_policies_access-advisor-viewing-orgs-entity-path">Understand the Amazon Web Services Organizations entity path</a> in the <i>Amazon Web Services Identity and Access Management User Guide</i>.</p>
     #   @return [String]
     class RemoveIpamOrganizationalUnitExclusion < Struct.new(
+      nil,
       :organizations_entity_path,
       keyword_init: true
     )
@@ -53385,6 +55218,7 @@ module Aws::EC2
     #   <p>The CIDR block.</p>
     #   @return [String]
     class RemovePrefixListEntry < Struct.new(
+      nil,
       :cidr,
       keyword_init: true
     )
@@ -53398,6 +55232,7 @@ module Aws::EC2
     #   <p>The ID of the existing IAM instance profile association.</p>
     #   @return [String]
     class ReplaceIamInstanceProfileAssociationRequest < Struct.new(
+      nil,
       :iam_instance_profile,
       :association_id,
       keyword_init: true
@@ -53409,6 +55244,7 @@ module Aws::EC2
     #   <p>Information about the IAM instance profile association.</p>
     #   @return [Types::IamInstanceProfileAssociation]
     class ReplaceIamInstanceProfileAssociationResult < Struct.new(
+      nil,
       :iam_instance_profile_association,
       keyword_init: true
     )
@@ -53425,6 +55261,7 @@ module Aws::EC2
     #   			<code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     class ReplaceImageCriteriaInAllowedImagesSettingsRequest < Struct.new(
+      nil,
       :image_criteria,
       :dry_run,
       keyword_init: true
@@ -53436,6 +55273,7 @@ module Aws::EC2
     #   <p>Returns <code>true</code> if the request succeeds; otherwise, it returns an error.</p>
     #   @return [Boolean]
     class ReplaceImageCriteriaInAllowedImagesSettingsResult < Struct.new(
+      nil,
       :return_value,
       keyword_init: true
     )
@@ -53454,6 +55292,7 @@ module Aws::EC2
     #   <p>The ID of the new network ACL to associate with the subnet.</p>
     #   @return [String]
     class ReplaceNetworkAclAssociationRequest < Struct.new(
+      nil,
       :dry_run,
       :association_id,
       :network_acl_id,
@@ -53466,6 +55305,7 @@ module Aws::EC2
     #   <p>The ID of the new association.</p>
     #   @return [String]
     class ReplaceNetworkAclAssociationResult < Struct.new(
+      nil,
       :new_association_id,
       keyword_init: true
     )
@@ -53515,6 +55355,7 @@ module Aws::EC2
     #   		        Required if specifying protocol 6 (TCP) or 17 (UDP).</p>
     #   @return [Types::PortRange]
     class ReplaceNetworkAclEntryRequest < Struct.new(
+      nil,
       :dry_run,
       :network_acl_id,
       :rule_number,
@@ -53595,6 +55436,7 @@ module Aws::EC2
     #         replacement task completes.</p>
     #   @return [Boolean]
     class ReplaceRootVolumeTask < Struct.new(
+      nil,
       :replace_root_volume_task_id,
       :instance_id,
       :task_state,
@@ -53668,6 +55510,7 @@ module Aws::EC2
     #   <p>[IPv4 traffic only] The ID of a NAT gateway.</p>
     #   @return [String]
     class ReplaceRouteRequest < Struct.new(
+      nil,
       :destination_prefix_list_id,
       :vpc_endpoint_id,
       :local_target,
@@ -53703,6 +55546,7 @@ module Aws::EC2
     #   <p>The ID of the new route table to associate with the subnet.</p>
     #   @return [String]
     class ReplaceRouteTableAssociationRequest < Struct.new(
+      nil,
       :dry_run,
       :association_id,
       :route_table_id,
@@ -53718,6 +55562,7 @@ module Aws::EC2
     #   <p>The state of the association.</p>
     #   @return [Types::RouteTableAssociationState]
     class ReplaceRouteTableAssociationResult < Struct.new(
+      nil,
       :new_association_id,
       :association_state,
       keyword_init: true
@@ -53743,6 +55588,7 @@ module Aws::EC2
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     class ReplaceTransitGatewayRouteRequest < Struct.new(
+      nil,
       :destination_cidr_block,
       :transit_gateway_route_table_id,
       :transit_gateway_attachment_id,
@@ -53757,6 +55603,7 @@ module Aws::EC2
     #   <p>Information about the modified route.</p>
     #   @return [Types::TransitGatewayRoute]
     class ReplaceTransitGatewayRouteResult < Struct.new(
+      nil,
       :route,
       keyword_init: true
     )
@@ -53776,6 +55623,7 @@ module Aws::EC2
     #   <p>Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     class ReplaceVpnTunnelRequest < Struct.new(
+      nil,
       :vpn_connection_id,
       :vpn_tunnel_outside_ip_address,
       :apply_pending_maintenance,
@@ -53789,6 +55637,7 @@ module Aws::EC2
     #   <p>Confirmation of replace tunnel operation.</p>
     #   @return [Boolean]
     class ReplaceVpnTunnelResult < Struct.new(
+      nil,
       :return,
       keyword_init: true
     )
@@ -53865,6 +55714,7 @@ module Aws::EC2
     #     This member has been deprecated
     #   @return [String]
     class ReportInstanceStatusRequest < Struct.new(
+      nil,
       :dry_run,
       :instances,
       :status,
@@ -53885,6 +55735,7 @@ module Aws::EC2
     #   <p>The last port in the range.</p>
     #   @return [Integer]
     class RequestFilterPortRange < Struct.new(
+      nil,
       :from_port,
       :to_port,
       keyword_init: true
@@ -53900,6 +55751,7 @@ module Aws::EC2
     #   <p>The value for the tag.</p>
     #   @return [String]
     class RequestIpamResourceTag < Struct.new(
+      nil,
       :key,
       :value,
       keyword_init: true
@@ -54184,6 +56036,7 @@ module Aws::EC2
     #               workload that runs on your instance.</p>
     #   @return [Types::LaunchTemplateNetworkPerformanceOptionsRequest]
     class RequestLaunchTemplateData < Struct.new(
+      nil,
       :kernel_id,
       :ebs_optimized,
       :iam_instance_profile,
@@ -54233,6 +56086,7 @@ module Aws::EC2
     #   <p>The configuration for the Spot Fleet request.</p>
     #   @return [Types::SpotFleetRequestConfigData]
     class RequestSpotFleetRequest < Struct.new(
+      nil,
       :dry_run,
       :spot_fleet_request_config,
       keyword_init: true
@@ -54245,6 +56099,7 @@ module Aws::EC2
     #   <p>The ID of the Spot Fleet request.</p>
     #   @return [String]
     class RequestSpotFleetResponse < Struct.new(
+      nil,
       :spot_fleet_request_id,
       keyword_init: true
     )
@@ -54342,6 +56197,7 @@ module Aws::EC2
     #   <p>Deprecated.</p>
     #   @return [Integer]
     class RequestSpotInstancesRequest < Struct.new(
+      nil,
       :launch_specification,
       :tag_specifications,
       :instance_interruption_behavior,
@@ -54365,6 +56221,7 @@ module Aws::EC2
     #   <p>The Spot Instance requests.</p>
     #   @return [Array<Types::SpotInstanceRequest>]
     class RequestSpotInstancesResult < Struct.new(
+      nil,
       :spot_instance_requests,
       keyword_init: true
     )
@@ -54427,6 +56284,7 @@ module Aws::EC2
     #   <p>The base64-encoded user data that instances use when starting up. User data is limited to 16 KB.</p>
     #   @return [String]
     class RequestSpotLaunchSpecification < Struct.new(
+      nil,
       :security_group_ids,
       :security_groups,
       :addressing_type,
@@ -54468,6 +56326,7 @@ module Aws::EC2
     #   <p>The instances.</p>
     #   @return [Array<Types::Instance>]
     class Reservation < Struct.new(
+      nil,
       :reservation_id,
       :owner_id,
       :requester_id,
@@ -54519,6 +56378,7 @@ module Aws::EC2
     #   				priority</a> in the <i>Amazon EC2 User Guide</i>.</p>
     #   @return [Integer]
     class ReservationFleetInstanceSpecification < Struct.new(
+      nil,
       :instance_type,
       :instance_platform,
       :weight,
@@ -54543,6 +56403,7 @@ module Aws::EC2
     #   <p>The remaining upfront cost of the reservation.</p>
     #   @return [String]
     class ReservationValue < Struct.new(
+      nil,
       :hourly_price,
       :remaining_total_value,
       :remaining_upfront_value,
@@ -54561,6 +56422,7 @@ module Aws::EC2
     #         only supported currency is <code>USD</code>.</p>
     #   @return [String]
     class ReservedInstanceLimitPrice < Struct.new(
+      nil,
       :amount,
       :currency_code,
       keyword_init: true
@@ -54576,6 +56438,7 @@ module Aws::EC2
     #   <p>The ID of the Convertible Reserved Instance that you are exchanging.</p>
     #   @return [String]
     class ReservedInstanceReservationValue < Struct.new(
+      nil,
       :reservation_value,
       :reserved_instance_id,
       keyword_init: true
@@ -54643,6 +56506,7 @@ module Aws::EC2
     #   <p>The state of the Reserved Instance purchase.</p>
     #   @return [String]
     class ReservedInstances < Struct.new(
+      nil,
       :currency_code,
       :instance_tenancy,
       :offering_class,
@@ -54691,6 +56555,7 @@ module Aws::EC2
     #   <p>The ID of the Availability Zone.</p>
     #   @return [String]
     class ReservedInstancesConfiguration < Struct.new(
+      nil,
       :availability_zone,
       :instance_count,
       :instance_type,
@@ -54707,6 +56572,7 @@ module Aws::EC2
     #   <p>The ID of the Reserved Instance.</p>
     #   @return [String]
     class ReservedInstancesId < Struct.new(
+      nil,
       :reserved_instances_id,
       keyword_init: true
     )
@@ -54748,6 +56614,7 @@ module Aws::EC2
     #   <p>The last modified timestamp of the listing.</p>
     #   @return [Time]
     class ReservedInstancesListing < Struct.new(
+      nil,
       :client_token,
       :create_date,
       :instance_counts,
@@ -54795,6 +56662,7 @@ module Aws::EC2
     #   <p>The time when the modification request was last updated.</p>
     #   @return [Time]
     class ReservedInstancesModification < Struct.new(
+      nil,
       :client_token,
       :create_date,
       :effective_date,
@@ -54819,6 +56687,7 @@ module Aws::EC2
     #         request.</p>
     #   @return [Types::ReservedInstancesConfiguration]
     class ReservedInstancesModificationResult < Struct.new(
+      nil,
       :reserved_instances_id,
       :target_configuration,
       keyword_init: true
@@ -54884,6 +56753,7 @@ module Aws::EC2
     #   <p>The Reserved Instance product platform description.</p>
     #   @return [String]
     class ReservedInstancesOffering < Struct.new(
+      nil,
       :currency_code,
       :instance_tenancy,
       :marketplace,
@@ -54917,6 +56787,7 @@ module Aws::EC2
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     class ResetAddressAttributeRequest < Struct.new(
+      nil,
       :allocation_id,
       :attribute,
       :dry_run,
@@ -54929,6 +56800,7 @@ module Aws::EC2
     #   <p>Information about the IP address.</p>
     #   @return [Types::AddressAttribute]
     class ResetAddressAttributeResult < Struct.new(
+      nil,
       :address,
       keyword_init: true
     )
@@ -54941,6 +56813,7 @@ module Aws::EC2
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     class ResetEbsDefaultKmsKeyIdRequest < Struct.new(
+      nil,
       :dry_run,
       keyword_init: true
     )
@@ -54951,6 +56824,7 @@ module Aws::EC2
     #   <p>The Amazon Resource Name (ARN) of the default KMS key for EBS encryption by default.</p>
     #   @return [String]
     class ResetEbsDefaultKmsKeyIdResult < Struct.new(
+      nil,
       :kms_key_id,
       keyword_init: true
     )
@@ -54969,6 +56843,7 @@ module Aws::EC2
     #   <p>The attribute.</p>
     #   @return [String]
     class ResetFpgaImageAttributeRequest < Struct.new(
+      nil,
       :dry_run,
       :fpga_image_id,
       :attribute,
@@ -54981,6 +56856,7 @@ module Aws::EC2
     #   <p>Is <code>true</code> if the request succeeds, and an error otherwise.</p>
     #   @return [Boolean]
     class ResetFpgaImageAttributeResult < Struct.new(
+      nil,
       :return,
       keyword_init: true
     )
@@ -55001,6 +56877,7 @@ module Aws::EC2
     #   			<code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     class ResetImageAttributeRequest < Struct.new(
+      nil,
       :attribute,
       :image_id,
       :dry_run,
@@ -55025,6 +56902,7 @@ module Aws::EC2
     #            </important>
     #   @return [String]
     class ResetInstanceAttributeRequest < Struct.new(
+      nil,
       :dry_run,
       :instance_id,
       :attribute,
@@ -55048,6 +56926,7 @@ module Aws::EC2
     #               <code>true</code>.</p>
     #   @return [String]
     class ResetNetworkInterfaceAttributeRequest < Struct.new(
+      nil,
       :dry_run,
       :network_interface_id,
       :source_dest_check,
@@ -55069,6 +56948,7 @@ module Aws::EC2
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     class ResetSnapshotAttributeRequest < Struct.new(
+      nil,
       :attribute,
       :snapshot_id,
       :dry_run,
@@ -55085,6 +56965,7 @@ module Aws::EC2
     #   <p>The resource types.</p>
     #   @return [Array<String>]
     class ResourceStatement < Struct.new(
+      nil,
       :resources,
       :resource_types,
       keyword_init: true
@@ -55100,6 +56981,7 @@ module Aws::EC2
     #   <p>The resource types.</p>
     #   @return [Array<String>]
     class ResourceStatementRequest < Struct.new(
+      nil,
       :resources,
       :resource_types,
       keyword_init: true
@@ -55154,6 +57036,7 @@ module Aws::EC2
     #            </ul>
     #   @return [Array<String>]
     class ResourceTypeOption < Struct.new(
+      nil,
       :option_name,
       :option_values,
       keyword_init: true
@@ -55172,6 +57055,7 @@ module Aws::EC2
     #         <code>ec2:LaunchTemplate</code>.</p>
     #   @return [Array<Types::ResourceTypeOption>]
     class ResourceTypeRequest < Struct.new(
+      nil,
       :resource_type,
       :resource_type_options,
       keyword_init: true
@@ -55188,6 +57072,7 @@ module Aws::EC2
     #   <p>The error message, if applicable.</p>
     #   @return [String]
     class ResponseError < Struct.new(
+      nil,
       :code,
       :message,
       keyword_init: true
@@ -55340,6 +57225,7 @@ module Aws::EC2
     #               instance.</p>
     #   @return [Types::LaunchTemplateNetworkPerformanceOptions]
     class ResponseLaunchTemplateData < Struct.new(
+      nil,
       :kernel_id,
       :ebs_optimized,
       :iam_instance_profile,
@@ -55387,6 +57273,7 @@ module Aws::EC2
     #   <p>The Elastic IP address.</p>
     #   @return [String]
     class RestoreAddressToClassicRequest < Struct.new(
+      nil,
       :dry_run,
       :public_ip,
       keyword_init: true
@@ -55401,6 +57288,7 @@ module Aws::EC2
     #   <p>The move status for the IP address.</p>
     #   @return [String]
     class RestoreAddressToClassicResult < Struct.new(
+      nil,
       :public_ip,
       :status,
       keyword_init: true
@@ -55417,6 +57305,7 @@ module Aws::EC2
     #   			<code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     class RestoreImageFromRecycleBinRequest < Struct.new(
+      nil,
       :image_id,
       :dry_run,
       keyword_init: true
@@ -55428,6 +57317,7 @@ module Aws::EC2
     #   <p>Returns <code>true</code> if the request succeeds; otherwise, it returns an error.</p>
     #   @return [Boolean]
     class RestoreImageFromRecycleBinResult < Struct.new(
+      nil,
       :return,
       keyword_init: true
     )
@@ -55449,6 +57339,7 @@ module Aws::EC2
     #   <p>The current version number for the prefix list.</p>
     #   @return [Integer]
     class RestoreManagedPrefixListVersionRequest < Struct.new(
+      nil,
       :dry_run,
       :prefix_list_id,
       :previous_version,
@@ -55462,6 +57353,7 @@ module Aws::EC2
     #   <p>Information about the prefix list.</p>
     #   @return [Types::ManagedPrefixList]
     class RestoreManagedPrefixListVersionResult < Struct.new(
+      nil,
       :prefix_list,
       keyword_init: true
     )
@@ -55477,6 +57369,7 @@ module Aws::EC2
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     class RestoreSnapshotFromRecycleBinRequest < Struct.new(
+      nil,
       :snapshot_id,
       :dry_run,
       keyword_init: true
@@ -55519,6 +57412,7 @@ module Aws::EC2
     #   <p>Reserved for future use.</p>
     #   @return [String]
     class RestoreSnapshotFromRecycleBinResult < Struct.new(
+      nil,
       :snapshot_id,
       :outpost_arn,
       :description,
@@ -55557,6 +57451,7 @@ module Aws::EC2
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     class RestoreSnapshotTierRequest < Struct.new(
+      nil,
       :snapshot_id,
       :temporary_restore_days,
       :permanent_restore,
@@ -55581,6 +57476,7 @@ module Aws::EC2
     #         restore. <code>false</code> indicates a temporary restore.</p>
     #   @return [Boolean]
     class RestoreSnapshotTierResult < Struct.new(
+      nil,
       :snapshot_id,
       :restore_start_time,
       :restore_duration,
@@ -55607,6 +57503,7 @@ module Aws::EC2
     #   <p>Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     class RevokeClientVpnIngressRequest < Struct.new(
+      nil,
       :client_vpn_endpoint_id,
       :target_network_cidr,
       :access_group_id,
@@ -55621,6 +57518,7 @@ module Aws::EC2
     #   <p>The current state of the authorization rule.</p>
     #   @return [Types::ClientVpnAuthorizationRuleStatus]
     class RevokeClientVpnIngressResult < Struct.new(
+      nil,
       :status,
       keyword_init: true
     )
@@ -55663,6 +57561,7 @@ module Aws::EC2
     #   <p>The sets of IP permissions. You can't specify a destination security group and a CIDR IP address range in the same set of permissions.</p>
     #   @return [Array<Types::IpPermission>]
     class RevokeSecurityGroupEgressRequest < Struct.new(
+      nil,
       :security_group_rule_ids,
       :dry_run,
       :group_id,
@@ -55690,6 +57589,7 @@ module Aws::EC2
     #   <p>Details about the revoked security group rules.</p>
     #   @return [Array<Types::RevokedSecurityGroupRule>]
     class RevokeSecurityGroupEgressResult < Struct.new(
+      nil,
       :return,
       :unknown_ip_permissions,
       :revoked_security_group_rules,
@@ -55743,6 +57643,7 @@ module Aws::EC2
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     class RevokeSecurityGroupIngressRequest < Struct.new(
+      nil,
       :cidr_ip,
       :from_port,
       :group_id,
@@ -55771,6 +57672,7 @@ module Aws::EC2
     #   <p>Details about the revoked security group rules.</p>
     #   @return [Array<Types::RevokedSecurityGroupRule>]
     class RevokeSecurityGroupIngressResult < Struct.new(
+      nil,
       :return,
       :unknown_ip_permissions,
       :revoked_security_group_rules,
@@ -55814,6 +57716,7 @@ module Aws::EC2
     #   <p>A description of the revoked security group rule.</p>
     #   @return [String]
     class RevokedSecurityGroupRule < Struct.new(
+      nil,
       :security_group_rule_id,
       :group_id,
       :is_egress,
@@ -55907,6 +57810,7 @@ module Aws::EC2
     #               Server into VPC route tables.</p>
     #   @return [String]
     class Route < Struct.new(
+      nil,
       :destination_cidr_block,
       :destination_ipv6_cidr_block,
       :destination_prefix_list_id,
@@ -55972,6 +57876,7 @@ module Aws::EC2
     #   <p>The ARN of the SNS topic where notifications are published.</p>
     #   @return [String]
     class RouteServer < Struct.new(
+      nil,
       :route_server_id,
       :amazon_side_asn,
       :state,
@@ -55997,6 +57902,7 @@ module Aws::EC2
     #   <p>The current state of the association.</p>
     #   @return [String]
     class RouteServerAssociation < Struct.new(
+      nil,
       :route_server_id,
       :vpc_id,
       :state,
@@ -56010,6 +57916,7 @@ module Aws::EC2
     #   <p>The operational status of the BFD session.</p>
     #   @return [String]
     class RouteServerBfdStatus < Struct.new(
+      nil,
       :status,
       keyword_init: true
     )
@@ -56036,6 +57943,7 @@ module Aws::EC2
     #            <p>Defaults to <code>bgp-keepalive</code>.</p>
     #   @return [String]
     class RouteServerBgpOptions < Struct.new(
+      nil,
       :peer_asn,
       :peer_liveness_detection,
       keyword_init: true
@@ -56062,6 +57970,7 @@ module Aws::EC2
     #            <p>Defaults to <code>bgp-keepalive</code>.</p>
     #   @return [String]
     class RouteServerBgpOptionsRequest < Struct.new(
+      nil,
       :peer_asn,
       :peer_liveness_detection,
       keyword_init: true
@@ -56074,6 +57983,7 @@ module Aws::EC2
     #   <p>The operational status of the BGP session. The status enables you to monitor session liveness if you lack monitoring on your router/appliance.</p>
     #   @return [String]
     class RouteServerBgpStatus < Struct.new(
+      nil,
       :status,
       keyword_init: true
     )
@@ -56110,6 +58020,7 @@ module Aws::EC2
     #   <p>Any tags assigned to the route server endpoint.</p>
     #   @return [Array<Types::Tag>]
     class RouteServerEndpoint < Struct.new(
+      nil,
       :route_server_id,
       :route_server_endpoint_id,
       :vpc_id,
@@ -56180,6 +58091,7 @@ module Aws::EC2
     #   <p>Any tags assigned to the route server peer.</p>
     #   @return [Array<Types::Tag>]
     class RouteServerPeer < Struct.new(
+      nil,
       :route_server_peer_id,
       :route_server_endpoint_id,
       :route_server_id,
@@ -56211,6 +58123,7 @@ module Aws::EC2
     #   <p>The current state of route propagation.</p>
     #   @return [String]
     class RouteServerPropagation < Struct.new(
+      nil,
       :route_server_id,
       :route_table_id,
       :state,
@@ -56247,6 +58160,7 @@ module Aws::EC2
     #   <p>The IP address for the next hop.</p>
     #   @return [String]
     class RouteServerRoute < Struct.new(
+      nil,
       :route_server_endpoint_id,
       :route_server_peer_id,
       :route_installation_details,
@@ -56271,6 +58185,7 @@ module Aws::EC2
     #   <p>The reason for the current installation status of the route.</p>
     #   @return [String]
     class RouteServerRouteInstallationDetail < Struct.new(
+      nil,
       :route_table_id,
       :route_installation_status,
       :route_installation_status_reason,
@@ -56302,6 +58217,7 @@ module Aws::EC2
     #   <p>The ID of the Amazon Web Services account that owns the route table.</p>
     #   @return [String]
     class RouteTable < Struct.new(
+      nil,
       :associations,
       :propagating_vgws,
       :route_table_id,
@@ -56337,6 +58253,7 @@ module Aws::EC2
     #   <p>The state of the association.</p>
     #   @return [Types::RouteTableAssociationState]
     class RouteTableAssociation < Struct.new(
+      nil,
       :main,
       :route_table_association_id,
       :route_table_id,
@@ -56357,6 +58274,7 @@ module Aws::EC2
     #   <p>The status message, if applicable.</p>
     #   @return [String]
     class RouteTableAssociationState < Struct.new(
+      nil,
       :state,
       :status_message,
       keyword_init: true
@@ -56372,6 +58290,7 @@ module Aws::EC2
     #   <p>The rule options.</p>
     #   @return [Array<Types::RuleOption>]
     class RuleGroupRuleOptionsPair < Struct.new(
+      nil,
       :rule_group_arn,
       :rule_options,
       keyword_init: true
@@ -56387,6 +58306,7 @@ module Aws::EC2
     #   <p>The rule group type. The possible values are <code>Domain List</code> and <code>Suricata</code>.</p>
     #   @return [String]
     class RuleGroupTypePair < Struct.new(
+      nil,
       :rule_group_arn,
       :rule_group_type,
       keyword_init: true
@@ -56402,6 +58322,7 @@ module Aws::EC2
     #   <p>The settings for the keyword.</p>
     #   @return [Array<String>]
     class RuleOption < Struct.new(
+      nil,
       :keyword,
       :settings,
       keyword_init: true
@@ -56415,6 +58336,7 @@ module Aws::EC2
     #               enabled.</p>
     #   @return [Boolean]
     class RunInstancesMonitoringEnabled < Struct.new(
+      nil,
       :enabled,
       keyword_init: true
     )
@@ -56441,6 +58363,7 @@ module Aws::EC2
     #   <p>The instances.</p>
     #   @return [Array<Types::Instance>]
     class RunInstancesOutput < Struct.new(
+      nil,
       :reservation_id,
       :owner_id,
       :requester_id,
@@ -56724,6 +58647,7 @@ module Aws::EC2
     #            </p>
     #   @return [Boolean]
     class RunInstancesRequest < Struct.new(
+      nil,
       :block_device_mappings,
       :image_id,
       :instance_type,
@@ -56794,6 +58718,7 @@ module Aws::EC2
     #   <p>The Scheduled Instance ID.</p>
     #   @return [String]
     class RunScheduledInstancesRequest < Struct.new(
+      nil,
       :client_token,
       :dry_run,
       :instance_count,
@@ -56809,6 +58734,7 @@ module Aws::EC2
     #   <p>The IDs of the newly launched instances.</p>
     #   @return [Array<String>]
     class RunScheduledInstancesResult < Struct.new(
+      nil,
       :instance_id_set,
       keyword_init: true
     )
@@ -56829,6 +58755,7 @@ module Aws::EC2
     #         length.</p>
     #   @return [String]
     class S3ObjectTag < Struct.new(
+      nil,
       :key,
       :value,
       keyword_init: true
@@ -56859,6 +58786,7 @@ module Aws::EC2
     #   <p>The signature of the JSON document.</p>
     #   @return [String]
     class S3Storage < Struct.new(
+      nil,
       :aws_access_key_id,
       :bucket,
       :prefix,
@@ -56916,6 +58844,7 @@ module Aws::EC2
     #   <p>The total number of hours for a single instance for the entire term.</p>
     #   @return [Integer]
     class ScheduledInstance < Struct.new(
+      nil,
       :availability_zone,
       :create_date,
       :hourly_price,
@@ -56977,6 +58906,7 @@ module Aws::EC2
     #   <p>The total number of hours for a single instance for the entire term.</p>
     #   @return [Integer]
     class ScheduledInstanceAvailability < Struct.new(
+      nil,
       :availability_zone,
       :available_instance_count,
       :first_slot_start_time,
@@ -57013,6 +58943,7 @@ module Aws::EC2
     #   <p>The unit for <code>occurrenceDaySet</code> (<code>DayOfWeek</code> or <code>DayOfMonth</code>).</p>
     #   @return [String]
     class ScheduledInstanceRecurrence < Struct.new(
+      nil,
       :frequency,
       :interval,
       :occurrence_day_set,
@@ -57044,6 +58975,7 @@ module Aws::EC2
     #           You can't specify this value with a daily schedule.</p>
     #   @return [String]
     class ScheduledInstanceRecurrenceRequest < Struct.new(
+      nil,
       :frequency,
       :interval,
       :occurrence_days,
@@ -57075,6 +59007,7 @@ module Aws::EC2
     #            specified in the block device mapping for the AMI.</p>
     #   @return [String]
     class ScheduledInstancesBlockDeviceMapping < Struct.new(
+      nil,
       :device_name,
       :ebs,
       :no_device,
@@ -57110,6 +59043,7 @@ module Aws::EC2
     #            </p>
     #   @return [String]
     class ScheduledInstancesEbs < Struct.new(
+      nil,
       :delete_on_termination,
       :encrypted,
       :iops,
@@ -57129,6 +59063,7 @@ module Aws::EC2
     #   <p>The name.</p>
     #   @return [String]
     class ScheduledInstancesIamInstanceProfile < Struct.new(
+      nil,
       :arn,
       :name,
       keyword_init: true
@@ -57141,6 +59076,7 @@ module Aws::EC2
     #   <p>The IPv6 address.</p>
     #   @return [String]
     class ScheduledInstancesIpv6Address < Struct.new(
+      nil,
       :ipv6_address,
       keyword_init: true
     )
@@ -57196,6 +59132,7 @@ module Aws::EC2
     #   <p>The base64-encoded MIME user data.</p>
     #   @return [String]
     class ScheduledInstancesLaunchSpecification < Struct.new(
+      nil,
       :block_device_mappings,
       :ebs_optimized,
       :iam_instance_profile,
@@ -57220,6 +59157,7 @@ module Aws::EC2
     #   <p>Indicates whether monitoring is enabled.</p>
     #   @return [Boolean]
     class ScheduledInstancesMonitoring < Struct.new(
+      nil,
       :enabled,
       keyword_init: true
     )
@@ -57270,6 +59208,7 @@ module Aws::EC2
     #   <p>The ID of the subnet.</p>
     #   @return [String]
     class ScheduledInstancesNetworkInterface < Struct.new(
+      nil,
       :associate_public_ip_address,
       :delete_on_termination,
       :description,
@@ -57295,6 +59234,7 @@ module Aws::EC2
     #   <p>The name of the placement group.</p>
     #   @return [String]
     class ScheduledInstancesPlacement < Struct.new(
+      nil,
       :availability_zone,
       :group_name,
       keyword_init: true
@@ -57310,6 +59250,7 @@ module Aws::EC2
     #   <p>The IPv4 address.</p>
     #   @return [String]
     class ScheduledInstancesPrivateIpAddressConfig < Struct.new(
+      nil,
       :primary,
       :private_ip_address,
       keyword_init: true
@@ -57368,6 +59309,7 @@ module Aws::EC2
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     class SearchLocalGatewayRoutesRequest < Struct.new(
+      nil,
       :local_gateway_route_table_id,
       :filters,
       :max_results,
@@ -57385,6 +59327,7 @@ module Aws::EC2
     #   <p>The token to use to retrieve the next page of results. This value is <code>null</code> when there are no more results to return.</p>
     #   @return [String]
     class SearchLocalGatewayRoutesResult < Struct.new(
+      nil,
       :routes,
       :next_token,
       keyword_init: true
@@ -57449,6 +59392,7 @@ module Aws::EC2
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     class SearchTransitGatewayMulticastGroupsRequest < Struct.new(
+      nil,
       :transit_gateway_multicast_domain_id,
       :filters,
       :max_results,
@@ -57466,6 +59410,7 @@ module Aws::EC2
     #   <p>The token to use to retrieve the next page of results. This value is <code>null</code> when there are no more results to return.</p>
     #   @return [String]
     class SearchTransitGatewayMulticastGroupsResult < Struct.new(
+      nil,
       :multicast_groups,
       :next_token,
       keyword_init: true
@@ -57534,6 +59479,7 @@ module Aws::EC2
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     class SearchTransitGatewayRoutesRequest < Struct.new(
+      nil,
       :transit_gateway_route_table_id,
       :filters,
       :max_results,
@@ -57550,6 +59496,7 @@ module Aws::EC2
     #   <p>Indicates whether there are additional routes available.</p>
     #   @return [Boolean]
     class SearchTransitGatewayRoutesResult < Struct.new(
+      nil,
       :routes,
       :additional_routes_available,
       keyword_init: true
@@ -57586,6 +59533,7 @@ module Aws::EC2
     #   <p>The inbound rules associated with the security group.</p>
     #   @return [Array<Types::IpPermission>]
     class SecurityGroup < Struct.new(
+      nil,
       :group_id,
       :ip_permissions_egress,
       :tags,
@@ -57620,6 +59568,7 @@ module Aws::EC2
     #   <p>The VPC ID in which the security group was created.</p>
     #   @return [String]
     class SecurityGroupForVpc < Struct.new(
+      nil,
       :description,
       :group_name,
       :owner_id,
@@ -57639,6 +59588,7 @@ module Aws::EC2
     #   <p>The name of the security group.</p>
     #   @return [String]
     class SecurityGroupIdentifier < Struct.new(
+      nil,
       :group_id,
       :group_name,
       keyword_init: true
@@ -57662,6 +59612,7 @@ module Aws::EC2
     #   <p>The ID of the transit gateway (if applicable).</p>
     #   @return [String]
     class SecurityGroupReference < Struct.new(
+      nil,
       :group_id,
       :referencing_vpc_id,
       :vpc_peering_connection_id,
@@ -57720,6 +59671,7 @@ module Aws::EC2
     #   <p>The ARN of the security group rule.</p>
     #   @return [String]
     class SecurityGroupRule < Struct.new(
+      nil,
       :security_group_rule_id,
       :group_id,
       :group_owner_id,
@@ -57748,6 +59700,7 @@ module Aws::EC2
     #   <p>The description of the security group rule.</p>
     #   @return [String]
     class SecurityGroupRuleDescription < Struct.new(
+      nil,
       :security_group_rule_id,
       :description,
       keyword_init: true
@@ -57812,6 +59765,7 @@ module Aws::EC2
     #   <p>The description of the security group rule.</p>
     #   @return [String]
     class SecurityGroupRuleRequest < Struct.new(
+      nil,
       :ip_protocol,
       :from_port,
       :to_port,
@@ -57833,6 +59787,7 @@ module Aws::EC2
     #   <p>Information about the security group rule.</p>
     #   @return [Types::SecurityGroupRuleRequest]
     class SecurityGroupRuleUpdate < Struct.new(
+      nil,
       :security_group_rule_id,
       :security_group_rule,
       keyword_init: true
@@ -57860,6 +59815,7 @@ module Aws::EC2
     #   <p>The Amazon Web Services account ID of the owner of the security group.</p>
     #   @return [String]
     class SecurityGroupVpcAssociation < Struct.new(
+      nil,
       :group_id,
       :vpc_id,
       :vpc_owner_id,
@@ -57880,6 +59836,7 @@ module Aws::EC2
     #     <code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     class SendDiagnosticInterruptRequest < Struct.new(
+      nil,
       :instance_id,
       :dry_run,
       keyword_init: true
@@ -57947,6 +59904,7 @@ module Aws::EC2
     #               Region where the service is hosted.</p>
     #   @return [Boolean]
     class ServiceConfiguration < Struct.new(
+      nil,
       :service_type,
       :service_id,
       :service_name,
@@ -58027,6 +59985,7 @@ module Aws::EC2
     #   <p>The supported IP address types.</p>
     #   @return [Array<String>]
     class ServiceDetail < Struct.new(
+      nil,
       :service_name,
       :service_id,
       :service_type,
@@ -58087,6 +60046,7 @@ module Aws::EC2
     #   <p>The current state of the service link virtual interface.</p>
     #   @return [String]
     class ServiceLinkVirtualInterface < Struct.new(
+      nil,
       :service_link_virtual_interface_id,
       :service_link_virtual_interface_arn,
       :outpost_id,
@@ -58109,6 +60069,7 @@ module Aws::EC2
     #   <p>The type of service.</p>
     #   @return [String]
     class ServiceTypeDetail < Struct.new(
+      nil,
       :service_type,
       keyword_init: true
     )
@@ -58123,6 +60084,7 @@ module Aws::EC2
     #   <p>The latest date and time, in UTC, for the Scheduled Instance to start. This value must be later than or equal to the earliest date and at most three months in the future.</p>
     #   @return [Time]
     class SlotDateTimeRangeRequest < Struct.new(
+      nil,
       :earliest_time,
       :latest_time,
       keyword_init: true
@@ -58138,6 +60100,7 @@ module Aws::EC2
     #   <p>The latest date and time, in UTC, for the Scheduled Instance to start.</p>
     #   @return [Time]
     class SlotStartTimeRangeRequest < Struct.new(
+      nil,
       :earliest_time,
       :latest_time,
       keyword_init: true
@@ -58259,6 +60222,7 @@ module Aws::EC2
     #         to the same volume/snapshot lineage. This parameter is only returned by <a>DescribeSnapshots</a>.</p>
     #   @return [String]
     class Snapshot < Struct.new(
+      nil,
       :owner_alias,
       :outpost_arn,
       :tags,
@@ -58319,6 +60283,7 @@ module Aws::EC2
     #   <p>The Amazon S3 bucket for the disk image.</p>
     #   @return [Types::UserBucketDetails]
     class SnapshotDetail < Struct.new(
+      nil,
       :description,
       :device_name,
       :disk_image_size,
@@ -58351,6 +60316,7 @@ module Aws::EC2
     #   <p>The Amazon S3 bucket for the disk image.</p>
     #   @return [Types::UserBucket]
     class SnapshotDiskContainer < Struct.new(
+      nil,
       :description,
       :format,
       :url,
@@ -58405,6 +60371,7 @@ module Aws::EC2
     #         (Availability Zone) or <code>us-west-2-lax-1a</code> (Local Zone).</p>
     #   @return [String]
     class SnapshotInfo < Struct.new(
+      nil,
       :description,
       :tags,
       :encrypted,
@@ -58440,6 +60407,7 @@ module Aws::EC2
     #   <p>The ID of the volume from which the snapshot was created.</p>
     #   @return [String]
     class SnapshotRecycleBinInfo < Struct.new(
+      nil,
       :snapshot_id,
       :recycle_bin_enter_time,
       :recycle_bin_exit_time,
@@ -58485,6 +60453,7 @@ module Aws::EC2
     #   <p>The Amazon S3 bucket for the disk image.</p>
     #   @return [Types::UserBucketDetails]
     class SnapshotTaskDetail < Struct.new(
+      nil,
       :description,
       :disk_image_size,
       :encrypted,
@@ -58543,6 +60512,7 @@ module Aws::EC2
     #         time when a temporarily restored snapshot will be automatically re-archived.</p>
     #   @return [Time]
     class SnapshotTierStatus < Struct.new(
+      nil,
       :snapshot_id,
       :volume_id,
       :status,
@@ -58587,6 +60557,7 @@ module Aws::EC2
     #            <p>Valid values: Minimum value of <code>120</code> seconds. Maximum value of <code>7200</code> seconds.</p>
     #   @return [Integer]
     class SpotCapacityRebalance < Struct.new(
+      nil,
       :replacement_strategy,
       :termination_delay,
       keyword_init: true
@@ -58611,6 +60582,7 @@ module Aws::EC2
     #   <p>The state of the Spot Instance data feed subscription.</p>
     #   @return [String]
     class SpotDatafeedSubscription < Struct.new(
+      nil,
       :bucket,
       :fault,
       :owner_id,
@@ -58721,6 +60693,7 @@ module Aws::EC2
     #           the network interface instead of using this parameter.</p>
     #   @return [Array<Types::GroupIdentifier>]
     class SpotFleetLaunchSpecification < Struct.new(
+      nil,
       :addressing_type,
       :block_device_mappings,
       :ebs_optimized,
@@ -58752,6 +60725,7 @@ module Aws::EC2
     #            </p>
     #   @return [Boolean]
     class SpotFleetMonitoring < Struct.new(
+      nil,
       :enabled,
       keyword_init: true
     )
@@ -58783,6 +60757,7 @@ module Aws::EC2
     #   <p>The tags for a Spot Fleet resource.</p>
     #   @return [Array<Types::Tag>]
     class SpotFleetRequestConfig < Struct.new(
+      nil,
       :activity_status,
       :create_time,
       :spot_fleet_request_config,
@@ -59030,6 +61005,7 @@ module Aws::EC2
     #                   <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/Using_Tags.html#tag-resources">Tag your resources</a>.</p>
     #   @return [Array<Types::TagSpecification>]
     class SpotFleetRequestConfigData < Struct.new(
+      nil,
       :allocation_strategy,
       :on_demand_allocation_strategy,
       :spot_maintenance_strategies,
@@ -59073,6 +61049,7 @@ module Aws::EC2
     #   <p>The tags.</p>
     #   @return [Array<Types::Tag>]
     class SpotFleetTagSpecification < Struct.new(
+      nil,
       :resource_type,
       :tags,
       keyword_init: true
@@ -59165,6 +61142,7 @@ module Aws::EC2
     #   <p>The behavior when a Spot Instance is interrupted.</p>
     #   @return [String]
     class SpotInstanceRequest < Struct.new(
+      nil,
       :actual_block_hourly_price,
       :availability_zone_group,
       :block_duration_minutes,
@@ -59198,6 +61176,7 @@ module Aws::EC2
     #   <p>The message for the Spot Instance state change.</p>
     #   @return [String]
     class SpotInstanceStateFault < Struct.new(
+      nil,
       :code,
       :message,
       keyword_init: true
@@ -59217,6 +61196,7 @@ module Aws::EC2
     #                   <i>YYYY</i>-<i>MM</i>-<i>DD</i>T<i>HH</i>:<i>MM</i>:<i>SS</i>Z).</p>
     #   @return [Time]
     class SpotInstanceStatus < Struct.new(
+      nil,
       :code,
       :message,
       :update_time,
@@ -59234,6 +61214,7 @@ module Aws::EC2
     #                   rebalancing</a> in the <i>Amazon EC2 User Guide</i>.</p>
     #   @return [Types::SpotCapacityRebalance]
     class SpotMaintenanceStrategies < Struct.new(
+      nil,
       :capacity_rebalance,
       keyword_init: true
     )
@@ -59295,6 +61276,7 @@ module Aws::EC2
     #                   behavior</a> in the <i>Amazon EC2 User Guide</i>.</p>
     #   @return [String]
     class SpotMarketOptions < Struct.new(
+      nil,
       :max_price,
       :spot_instance_type,
       :block_duration_minutes,
@@ -59415,6 +61397,7 @@ module Aws::EC2
     #            </note>
     #   @return [String]
     class SpotOptions < Struct.new(
+      nil,
       :allocation_strategy,
       :maintenance_strategies,
       :instance_interruption_behavior,
@@ -59537,6 +61520,7 @@ module Aws::EC2
     #            </note>
     #   @return [String]
     class SpotOptionsRequest < Struct.new(
+      nil,
       :allocation_strategy,
       :maintenance_strategies,
       :instance_interruption_behavior,
@@ -59565,6 +61549,7 @@ module Aws::EC2
     #               tenancy is not supported for Spot Instances.</p>
     #   @return [String]
     class SpotPlacement < Struct.new(
+      nil,
       :availability_zone,
       :group_name,
       :tenancy,
@@ -59589,6 +61574,7 @@ module Aws::EC2
     #            not likely to succeed. </p>
     #   @return [Integer]
     class SpotPlacementScore < Struct.new(
+      nil,
       :region,
       :availability_zone_id,
       :score,
@@ -59626,6 +61612,7 @@ module Aws::EC2
     #                   <i>YYYY</i>-<i>MM</i>-<i>DD</i>T<i>HH</i>:<i>MM</i>:<i>SS</i>Z).</p>
     #   @return [Time]
     class SpotPrice < Struct.new(
+      nil,
       :availability_zone,
       :availability_zone_id,
       :instance_type,
@@ -59660,6 +61647,7 @@ module Aws::EC2
     #   <p>The security group pairs. Returns the ID of the referenced security group and VPC, and the ID and status of the VPC peering connection.</p>
     #   @return [Array<Types::UserIdGroupPair>]
     class StaleIpPermission < Struct.new(
+      nil,
       :from_port,
       :ip_protocol,
       :ip_ranges,
@@ -59691,6 +61679,7 @@ module Aws::EC2
     #   <p>The ID of the VPC for the security group.</p>
     #   @return [String]
     class StaleSecurityGroup < Struct.new(
+      nil,
       :description,
       :group_id,
       :group_name,
@@ -59736,6 +61725,7 @@ module Aws::EC2
     #   <p>The tags to apply.</p>
     #   @return [Array<Types::TagSpecification>]
     class StartDeclarativePoliciesReportRequest < Struct.new(
+      nil,
       :dry_run,
       :s3_bucket,
       :s3_prefix,
@@ -59750,6 +61740,7 @@ module Aws::EC2
     #   <p>The ID of the report.</p>
     #   @return [String]
     class StartDeclarativePoliciesReportResult < Struct.new(
+      nil,
       :report_id,
       keyword_init: true
     )
@@ -59768,6 +61759,7 @@ module Aws::EC2
     #     <code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     class StartInstancesRequest < Struct.new(
+      nil,
       :instance_ids,
       :additional_info,
       :dry_run,
@@ -59780,6 +61772,7 @@ module Aws::EC2
     #   <p>Information about the started instances.</p>
     #   @return [Array<Types::InstanceStateChange>]
     class StartInstancesResult < Struct.new(
+      nil,
       :starting_instances,
       keyword_init: true
     )
@@ -59802,6 +61795,7 @@ module Aws::EC2
     #      see <a href="https://docs.aws.amazon.com/ec2/latest/devguide/ec2-api-idempotency.html">How to ensure idempotency</a>.</p>
     #   @return [String]
     class StartNetworkInsightsAccessScopeAnalysisRequest < Struct.new(
+      nil,
       :network_insights_access_scope_id,
       :dry_run,
       :tag_specifications,
@@ -59815,6 +61809,7 @@ module Aws::EC2
     #   <p>The Network Access Scope analysis.</p>
     #   @return [Types::NetworkInsightsAccessScopeAnalysis]
     class StartNetworkInsightsAccessScopeAnalysisResult < Struct.new(
+      nil,
       :network_insights_access_scope_analysis,
       keyword_init: true
     )
@@ -59846,6 +61841,7 @@ module Aws::EC2
     #      see <a href="https://docs.aws.amazon.com/ec2/latest/devguide/ec2-api-idempotency.html">How to ensure idempotency</a>.</p>
     #   @return [String]
     class StartNetworkInsightsAnalysisRequest < Struct.new(
+      nil,
       :network_insights_path_id,
       :additional_accounts,
       :filter_in_arns,
@@ -59862,6 +61858,7 @@ module Aws::EC2
     #   <p>Information about the network insights analysis.</p>
     #   @return [Types::NetworkInsightsAnalysis]
     class StartNetworkInsightsAnalysisResult < Struct.new(
+      nil,
       :network_insights_analysis,
       keyword_init: true
     )
@@ -59877,6 +61874,7 @@ module Aws::EC2
     #   <p>The ID of the endpoint service.</p>
     #   @return [String]
     class StartVpcEndpointServicePrivateDnsVerificationRequest < Struct.new(
+      nil,
       :dry_run,
       :service_id,
       keyword_init: true
@@ -59888,6 +61886,7 @@ module Aws::EC2
     #   <p>Returns <code>true</code> if the request succeeds; otherwise, it returns an error.</p>
     #   @return [Boolean]
     class StartVpcEndpointServicePrivateDnsVerificationResult < Struct.new(
+      nil,
       :return_value,
       keyword_init: true
     )
@@ -59969,6 +61968,7 @@ module Aws::EC2
     #            </ul>
     #   @return [String]
     class StateReason < Struct.new(
+      nil,
       :code,
       :message,
       keyword_init: true
@@ -60017,6 +62017,7 @@ module Aws::EC2
     #            </p>
     #   @return [Boolean]
     class StopInstancesRequest < Struct.new(
+      nil,
       :instance_ids,
       :hibernate,
       :skip_os_shutdown,
@@ -60031,6 +62032,7 @@ module Aws::EC2
     #   <p>Information about the stopped instances.</p>
     #   @return [Array<Types::InstanceStateChange>]
     class StopInstancesResult < Struct.new(
+      nil,
       :stopping_instances,
       keyword_init: true
     )
@@ -60042,6 +62044,7 @@ module Aws::EC2
     #   <p>An Amazon S3 storage location.</p>
     #   @return [Types::S3Storage]
     class Storage < Struct.new(
+      nil,
       :s3,
       keyword_init: true
     )
@@ -60056,6 +62059,7 @@ module Aws::EC2
     #   <p>The key.</p>
     #   @return [String]
     class StorageLocation < Struct.new(
+      nil,
       :bucket,
       :key,
       keyword_init: true
@@ -60088,6 +62092,7 @@ module Aws::EC2
     #         <code>null</code> is returned.</p>
     #   @return [String]
     class StoreImageTaskResult < Struct.new(
+      nil,
       :ami_id,
       :task_start_time,
       :bucket,
@@ -60199,6 +62204,7 @@ module Aws::EC2
     #   associated with running instances and Elastic IP addresses. For more information, see the <i>Public IPv4 Address</i> tab on the <a href="http://aws.amazon.com/vpc/pricing/">Amazon VPC pricing page</a>.</p>
     #   @return [Boolean]
     class Subnet < Struct.new(
+      nil,
       :availability_zone_id,
       :enable_lni_at_device_index,
       :map_customer_owned_ip_on_launch,
@@ -60235,6 +62241,7 @@ module Aws::EC2
     #   <p>The state of the subnet association.</p>
     #   @return [String]
     class SubnetAssociation < Struct.new(
+      nil,
       :subnet_id,
       :state,
       keyword_init: true
@@ -60250,6 +62257,7 @@ module Aws::EC2
     #   <p>A message about the status of the CIDR block, if applicable.</p>
     #   @return [String]
     class SubnetCidrBlockState < Struct.new(
+      nil,
       :state,
       :status_message,
       keyword_init: true
@@ -60280,6 +62288,7 @@ module Aws::EC2
     #   <p>The tags assigned to the subnet CIDR reservation.</p>
     #   @return [Array<Types::Tag>]
     class SubnetCidrReservation < Struct.new(
+      nil,
       :subnet_cidr_reservation_id,
       :subnet_id,
       :cidr,
@@ -60311,6 +62320,7 @@ module Aws::EC2
     #               This process temporarily disconnects the subnet and the VPC endpoint.</p>
     #   @return [String]
     class SubnetConfiguration < Struct.new(
+      nil,
       :subnet_id,
       :ipv4,
       :ipv6,
@@ -60327,6 +62337,7 @@ module Aws::EC2
     #   <p>Array of SubnetIpPrefixes objects.</p>
     #   @return [Array<String>]
     class SubnetIpPrefixes < Struct.new(
+      nil,
       :subnet_id,
       :ip_prefixes,
       keyword_init: true
@@ -60351,6 +62362,7 @@ module Aws::EC2
     #   <p>The source that allocated the IP address space. <code>byoip</code> or <code>amazon</code> indicates public IP address space allocated by Amazon or space that you have allocated with Bring your own IP (BYOIP). <code>none</code> indicates private space.</p>
     #   @return [String]
     class SubnetIpv6CidrBlockAssociation < Struct.new(
+      nil,
       :association_id,
       :ipv6_cidr_block,
       :ipv6_cidr_block_state,
@@ -60378,6 +62390,7 @@ module Aws::EC2
     #   <p>The data aggregation time for the subscription.</p>
     #   @return [String]
     class Subscription < Struct.new(
+      nil,
       :source,
       :destination,
       :metric,
@@ -60394,6 +62407,7 @@ module Aws::EC2
     #   <p>The ID of the instance.</p>
     #   @return [String]
     class SuccessfulInstanceCreditSpecificationItem < Struct.new(
+      nil,
       :instance_id,
       keyword_init: true
     )
@@ -60405,6 +62419,7 @@ module Aws::EC2
     #   <p>The ID of the Reserved Instance.</p>
     #   @return [String]
     class SuccessfulQueuedPurchaseDeletion < Struct.new(
+      nil,
       :reserved_instances_id,
       keyword_init: true
     )
@@ -60420,6 +62435,7 @@ module Aws::EC2
     #               <code>Deleting</code>, <code>Deleted</code>, <code>Failed</code>, and <code>Closed</code>.</p>
     #   @return [String]
     class SupportedRegionDetail < Struct.new(
+      nil,
       :region,
       :service_state,
       keyword_init: true
@@ -60438,6 +62454,7 @@ module Aws::EC2
     #            <p>Constraints: Tag values are case-sensitive and accept a maximum of 256 Unicode characters.</p>
     #   @return [String]
     class Tag < Struct.new(
+      nil,
       :key,
       :value,
       keyword_init: true
@@ -60459,6 +62476,7 @@ module Aws::EC2
     #   <p>The tag value.</p>
     #   @return [String]
     class TagDescription < Struct.new(
+      nil,
       :key,
       :resource_id,
       :resource_type,
@@ -60483,6 +62501,7 @@ module Aws::EC2
     #   <p>The tags to apply to the resource.</p>
     #   @return [Array<Types::Tag>]
     class TagSpecification < Struct.new(
+      nil,
       :resource_type,
       :tags,
       keyword_init: true
@@ -60518,6 +62537,7 @@ module Aws::EC2
     #   <p>The unit for the target capacity.</p>
     #   @return [String]
     class TargetCapacitySpecification < Struct.new(
+      nil,
       :total_target_capacity,
       :on_demand_target_capacity,
       :spot_target_capacity,
@@ -60558,6 +62578,7 @@ module Aws::EC2
     #            <p>Default: <code>units</code> (the number of instances)</p>
     #   @return [String]
     class TargetCapacitySpecificationRequest < Struct.new(
+      nil,
       :total_target_capacity,
       :on_demand_target_capacity,
       :spot_target_capacity,
@@ -60577,6 +62598,7 @@ module Aws::EC2
     #   <p>The ID of the Convertible Reserved Instance offering.</p>
     #   @return [String]
     class TargetConfiguration < Struct.new(
+      nil,
       :instance_count,
       :offering_id,
       keyword_init: true
@@ -60593,6 +62615,7 @@ module Aws::EC2
     #   <p>The Convertible Reserved Instance offering ID.</p>
     #   @return [String]
     class TargetConfigurationRequest < Struct.new(
+      nil,
       :instance_count,
       :offering_id,
       keyword_init: true
@@ -60605,6 +62628,7 @@ module Aws::EC2
     #   <p>The Amazon Resource Name (ARN) of the target group.</p>
     #   @return [String]
     class TargetGroup < Struct.new(
+      nil,
       :arn,
       keyword_init: true
     )
@@ -60617,6 +62641,7 @@ module Aws::EC2
     #   <p>One or more target groups.</p>
     #   @return [Array<Types::TargetGroup>]
     class TargetGroupsConfig < Struct.new(
+      nil,
       :target_groups,
       keyword_init: true
     )
@@ -60643,6 +62668,7 @@ module Aws::EC2
     #   <p>The IDs of the security groups applied to the target network association.</p>
     #   @return [Array<String>]
     class TargetNetwork < Struct.new(
+      nil,
       :association_id,
       :vpc_id,
       :target_network_id,
@@ -60664,6 +62690,7 @@ module Aws::EC2
     #   <p>The configuration of the Convertible Reserved Instances that make up the exchange.</p>
     #   @return [Types::TargetConfiguration]
     class TargetReservationValue < Struct.new(
+      nil,
       :reservation_value,
       :target_configuration,
       keyword_init: true
@@ -60685,6 +62712,7 @@ module Aws::EC2
     #   <p>Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     class TerminateClientVpnConnectionsRequest < Struct.new(
+      nil,
       :client_vpn_endpoint_id,
       :connection_id,
       :username,
@@ -60704,6 +62732,7 @@ module Aws::EC2
     #   <p>The current state of the client connections.</p>
     #   @return [Array<Types::TerminateConnectionStatus>]
     class TerminateClientVpnConnectionsResult < Struct.new(
+      nil,
       :client_vpn_endpoint_id,
       :username,
       :connection_statuses,
@@ -60723,6 +62752,7 @@ module Aws::EC2
     #   <p>A message about the status of the client connection, if applicable.</p>
     #   @return [Types::ClientVpnConnectionStatus]
     class TerminateConnectionStatus < Struct.new(
+      nil,
       :connection_id,
       :previous_status,
       :current_status,
@@ -60754,6 +62784,7 @@ module Aws::EC2
     #     <code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     class TerminateInstancesRequest < Struct.new(
+      nil,
       :instance_ids,
       :force,
       :skip_os_shutdown,
@@ -60767,6 +62798,7 @@ module Aws::EC2
     #   <p>Information about the terminated instances.</p>
     #   @return [Array<Types::InstanceStateChange>]
     class TerminateInstancesResult < Struct.new(
+      nil,
       :terminating_instances,
       keyword_init: true
     )
@@ -60778,6 +62810,7 @@ module Aws::EC2
     #   <p>The resource statement.</p>
     #   @return [Types::ResourceStatement]
     class ThroughResourcesStatement < Struct.new(
+      nil,
       :resource_statement,
       keyword_init: true
     )
@@ -60789,6 +62822,7 @@ module Aws::EC2
     #   <p>The resource statement.</p>
     #   @return [Types::ResourceStatementRequest]
     class ThroughResourcesStatementRequest < Struct.new(
+      nil,
       :resource_statement,
       keyword_init: true
     )
@@ -60805,6 +62839,7 @@ module Aws::EC2
     #            no maximum limit.</p>
     #   @return [Float]
     class TotalLocalStorageGB < Struct.new(
+      nil,
       :min,
       :max,
       keyword_init: true
@@ -60822,6 +62857,7 @@ module Aws::EC2
     #            parameter.</p>
     #   @return [Float]
     class TotalLocalStorageGBRequest < Struct.new(
+      nil,
       :min,
       :max,
       keyword_init: true
@@ -60849,6 +62885,7 @@ module Aws::EC2
     #   <p>The tags assigned to the Traffic Mirror filter.</p>
     #   @return [Array<Types::Tag>]
     class TrafficMirrorFilter < Struct.new(
+      nil,
       :traffic_mirror_filter_id,
       :ingress_filter_rules,
       :egress_filter_rules,
@@ -60898,6 +62935,7 @@ module Aws::EC2
     #   <p>Tags on Traffic Mirroring filter rules.</p>
     #   @return [Array<Types::Tag>]
     class TrafficMirrorFilterRule < Struct.new(
+      nil,
       :traffic_mirror_filter_rule_id,
       :traffic_mirror_filter_id,
       :traffic_direction,
@@ -60923,6 +62961,7 @@ module Aws::EC2
     #   <p>The end of the Traffic Mirror port range. This applies to the TCP and UDP protocols.</p>
     #   @return [Integer]
     class TrafficMirrorPortRange < Struct.new(
+      nil,
       :from_port,
       :to_port,
       keyword_init: true
@@ -60938,6 +62977,7 @@ module Aws::EC2
     #   <p>The last port in the Traffic Mirror port range. This applies to the TCP and UDP protocols.</p>
     #   @return [Integer]
     class TrafficMirrorPortRangeRequest < Struct.new(
+      nil,
       :from_port,
       :to_port,
       keyword_init: true
@@ -60978,6 +63018,7 @@ module Aws::EC2
     #   <p>The tags assigned to the Traffic Mirror session.</p>
     #   @return [Array<Types::Tag>]
     class TrafficMirrorSession < Struct.new(
+      nil,
       :traffic_mirror_session_id,
       :traffic_mirror_target_id,
       :traffic_mirror_filter_id,
@@ -61019,6 +63060,7 @@ module Aws::EC2
     #   <p>The ID of the Gateway Load Balancer endpoint.</p>
     #   @return [String]
     class TrafficMirrorTarget < Struct.new(
+      nil,
       :traffic_mirror_target_id,
       :network_interface_id,
       :network_load_balancer_arn,
@@ -61058,6 +63100,7 @@ module Aws::EC2
     #   <p>The tags for the transit gateway.</p>
     #   @return [Array<Types::Tag>]
     class TransitGateway < Struct.new(
+      nil,
       :transit_gateway_id,
       :transit_gateway_arn,
       :state,
@@ -61088,6 +63131,7 @@ module Aws::EC2
     #   <p>The state of the association.</p>
     #   @return [String]
     class TransitGatewayAssociation < Struct.new(
+      nil,
       :transit_gateway_route_table_id,
       :transit_gateway_attachment_id,
       :resource_id,
@@ -61130,6 +63174,7 @@ module Aws::EC2
     #   <p>The tags for the attachment.</p>
     #   @return [Array<Types::Tag>]
     class TransitGatewayAttachment < Struct.new(
+      nil,
       :transit_gateway_attachment_id,
       :transit_gateway_id,
       :transit_gateway_owner_id,
@@ -61153,6 +63198,7 @@ module Aws::EC2
     #   <p>The state of the association.</p>
     #   @return [String]
     class TransitGatewayAttachmentAssociation < Struct.new(
+      nil,
       :transit_gateway_route_table_id,
       :state,
       keyword_init: true
@@ -61177,6 +63223,7 @@ module Aws::EC2
     #   <p>The BGP status.</p>
     #   @return [String]
     class TransitGatewayAttachmentBgpConfiguration < Struct.new(
+      nil,
       :transit_gateway_asn,
       :peer_asn,
       :transit_gateway_address,
@@ -61195,6 +63242,7 @@ module Aws::EC2
     #   <p>The state of the propagation route table.</p>
     #   @return [String]
     class TransitGatewayAttachmentPropagation < Struct.new(
+      nil,
       :transit_gateway_route_table_id,
       :state,
       keyword_init: true
@@ -61225,6 +63273,7 @@ module Aws::EC2
     #   <p>The tags for the attachment.</p>
     #   @return [Array<Types::Tag>]
     class TransitGatewayConnect < Struct.new(
+      nil,
       :transit_gateway_attachment_id,
       :transport_transit_gateway_attachment_id,
       :transit_gateway_id,
@@ -61242,6 +63291,7 @@ module Aws::EC2
     #   <p>The tunnel protocol.</p>
     #   @return [String]
     class TransitGatewayConnectOptions < Struct.new(
+      nil,
       :protocol,
       keyword_init: true
     )
@@ -61268,6 +63318,7 @@ module Aws::EC2
     #   <p>The tags for the Connect peer.</p>
     #   @return [Array<Types::Tag>]
     class TransitGatewayConnectPeer < Struct.new(
+      nil,
       :transit_gateway_attachment_id,
       :transit_gateway_connect_peer_id,
       :state,
@@ -61296,6 +63347,7 @@ module Aws::EC2
     #   <p>The BGP configuration details.</p>
     #   @return [Array<Types::TransitGatewayAttachmentBgpConfiguration>]
     class TransitGatewayConnectPeerConfiguration < Struct.new(
+      nil,
       :transit_gateway_address,
       :peer_address,
       :inside_cidr_blocks,
@@ -61311,6 +63363,7 @@ module Aws::EC2
     #   <p>The peer Autonomous System Number (ASN).</p>
     #   @return [Integer]
     class TransitGatewayConnectRequestBgpOptions < Struct.new(
+      nil,
       :peer_asn,
       keyword_init: true
     )
@@ -61328,6 +63381,7 @@ module Aws::EC2
     #   <p>The IP address assigned to the  transit gateway multicast group.</p>
     #   @return [String]
     class TransitGatewayMulticastDeregisteredGroupMembers < Struct.new(
+      nil,
       :transit_gateway_multicast_domain_id,
       :deregistered_network_interface_ids,
       :group_ip_address,
@@ -61347,6 +63401,7 @@ module Aws::EC2
     #   <p>The IP address assigned to the  transit gateway multicast group.</p>
     #   @return [String]
     class TransitGatewayMulticastDeregisteredGroupSources < Struct.new(
+      nil,
       :transit_gateway_multicast_domain_id,
       :deregistered_network_interface_ids,
       :group_ip_address,
@@ -61381,6 +63436,7 @@ module Aws::EC2
     #   <p>The tags for the transit gateway multicast domain.</p>
     #   @return [Array<Types::Tag>]
     class TransitGatewayMulticastDomain < Struct.new(
+      nil,
       :transit_gateway_multicast_domain_id,
       :transit_gateway_id,
       :transit_gateway_multicast_domain_arn,
@@ -61411,6 +63467,7 @@ module Aws::EC2
     #   <p>The subnet associated with the transit gateway multicast domain.</p>
     #   @return [Types::SubnetAssociation]
     class TransitGatewayMulticastDomainAssociation < Struct.new(
+      nil,
       :transit_gateway_attachment_id,
       :resource_id,
       :resource_type,
@@ -61441,6 +63498,7 @@ module Aws::EC2
     #   <p>The subnets associated with the multicast domain.</p>
     #   @return [Array<Types::SubnetAssociation>]
     class TransitGatewayMulticastDomainAssociations < Struct.new(
+      nil,
       :transit_gateway_multicast_domain_id,
       :transit_gateway_attachment_id,
       :resource_id,
@@ -61463,6 +63521,7 @@ module Aws::EC2
     #   <p>Indicates whether to automatically cross-account subnet associations that are associated with the transit gateway multicast domain.</p>
     #   @return [String]
     class TransitGatewayMulticastDomainOptions < Struct.new(
+      nil,
       :igmpv2_support,
       :static_sources_support,
       :auto_accept_shared_associations,
@@ -61506,6 +63565,7 @@ module Aws::EC2
     #   <p>The source type.</p>
     #   @return [String]
     class TransitGatewayMulticastGroup < Struct.new(
+      nil,
       :group_ip_address,
       :transit_gateway_attachment_id,
       :subnet_id,
@@ -61533,6 +63593,7 @@ module Aws::EC2
     #   <p>The IP address assigned to the  transit gateway multicast group.</p>
     #   @return [String]
     class TransitGatewayMulticastRegisteredGroupMembers < Struct.new(
+      nil,
       :transit_gateway_multicast_domain_id,
       :registered_network_interface_ids,
       :group_ip_address,
@@ -61552,6 +63613,7 @@ module Aws::EC2
     #   <p>The IP address assigned to the  transit gateway multicast group.</p>
     #   @return [String]
     class TransitGatewayMulticastRegisteredGroupSources < Struct.new(
+      nil,
       :transit_gateway_multicast_domain_id,
       :registered_network_interface_ids,
       :group_ip_address,
@@ -61604,6 +63666,7 @@ module Aws::EC2
     #   <p>Indicates whether multicast is enabled on the transit gateway</p>
     #   @return [String]
     class TransitGatewayOptions < Struct.new(
+      nil,
       :amazon_side_asn,
       :transit_gateway_cidr_blocks,
       :auto_accept_shared_attachments,
@@ -61649,6 +63712,7 @@ module Aws::EC2
     #   <p>The tags for the transit gateway peering attachment.</p>
     #   @return [Array<Types::Tag>]
     class TransitGatewayPeeringAttachment < Struct.new(
+      nil,
       :transit_gateway_attachment_id,
       :accepter_transit_gateway_attachment_id,
       :requester_tgw_info,
@@ -61668,6 +63732,7 @@ module Aws::EC2
     #   <p>Describes whether dynamic routing is enabled or disabled for the transit gateway peering attachment.</p>
     #   @return [String]
     class TransitGatewayPeeringAttachmentOptions < Struct.new(
+      nil,
       :dynamic_routing,
       keyword_init: true
     )
@@ -61694,6 +63759,7 @@ module Aws::EC2
     #   <p>The meta data tags used for the transit gateway policy rule.</p>
     #   @return [Types::TransitGatewayPolicyRuleMetaData]
     class TransitGatewayPolicyRule < Struct.new(
+      nil,
       :source_cidr_block,
       :source_port_range,
       :destination_cidr_block,
@@ -61713,6 +63779,7 @@ module Aws::EC2
     #   <p>The value of the key for the transit gateway policy rule meta data tag.</p>
     #   @return [String]
     class TransitGatewayPolicyRuleMetaData < Struct.new(
+      nil,
       :meta_data_key,
       :meta_data_value,
       keyword_init: true
@@ -61737,6 +63804,7 @@ module Aws::EC2
     #   <p>he key-value pairs associated with the transit gateway policy table.</p>
     #   @return [Array<Types::Tag>]
     class TransitGatewayPolicyTable < Struct.new(
+      nil,
       :transit_gateway_policy_table_id,
       :transit_gateway_id,
       :state,
@@ -61764,6 +63832,7 @@ module Aws::EC2
     #   <p>The state of the transit gateway policy table association.</p>
     #   @return [String]
     class TransitGatewayPolicyTableAssociation < Struct.new(
+      nil,
       :transit_gateway_policy_table_id,
       :transit_gateway_attachment_id,
       :resource_id,
@@ -61785,6 +63854,7 @@ module Aws::EC2
     #   <p>The ID of the target route table.</p>
     #   @return [String]
     class TransitGatewayPolicyTableEntry < Struct.new(
+      nil,
       :policy_rule_number,
       :policy_rule,
       :target_route_table_id,
@@ -61804,6 +63874,7 @@ module Aws::EC2
     #   <p>The ID of the resource.</p>
     #   @return [String]
     class TransitGatewayPrefixListAttachment < Struct.new(
+      nil,
       :transit_gateway_attachment_id,
       :resource_type,
       :resource_id,
@@ -61832,6 +63903,7 @@ module Aws::EC2
     #   <p>Information about the transit gateway attachment.</p>
     #   @return [Types::TransitGatewayPrefixListAttachment]
     class TransitGatewayPrefixListReference < Struct.new(
+      nil,
       :transit_gateway_route_table_id,
       :prefix_list_id,
       :prefix_list_owner_id,
@@ -61863,6 +63935,7 @@ module Aws::EC2
     #   <p>The ID of the transit gateway route table announcement.</p>
     #   @return [String]
     class TransitGatewayPropagation < Struct.new(
+      nil,
       :transit_gateway_attachment_id,
       :resource_id,
       :resource_type,
@@ -61908,6 +63981,7 @@ module Aws::EC2
     #   <p>One or more IPv4 or IPv6 CIDR blocks for the transit gateway. Must be a size /24 CIDR block or larger for IPv4, or a size /64 CIDR block or larger for IPv6.</p>
     #   @return [Array<String>]
     class TransitGatewayRequestOptions < Struct.new(
+      nil,
       :amazon_side_asn,
       :auto_accept_shared_attachments,
       :default_route_table_association,
@@ -61942,6 +64016,7 @@ module Aws::EC2
     #   <p>The state of the route.</p>
     #   @return [String]
     class TransitGatewayRoute < Struct.new(
+      nil,
       :destination_cidr_block,
       :prefix_list_id,
       :transit_gateway_route_table_announcement_id,
@@ -61964,6 +64039,7 @@ module Aws::EC2
     #   <p>The resource type. Note that the <code>tgw-peering</code> resource type has been deprecated. </p>
     #   @return [String]
     class TransitGatewayRouteAttachment < Struct.new(
+      nil,
       :resource_id,
       :transit_gateway_attachment_id,
       :resource_type,
@@ -61995,6 +64071,7 @@ module Aws::EC2
     #   <p>Any tags assigned to the route table.</p>
     #   @return [Array<Types::Tag>]
     class TransitGatewayRouteTable < Struct.new(
+      nil,
       :transit_gateway_route_table_id,
       :transit_gateway_id,
       :state,
@@ -62042,6 +64119,7 @@ module Aws::EC2
     #   <p>The key-value pairs associated with the route table announcement.</p>
     #   @return [Array<Types::Tag>]
     class TransitGatewayRouteTableAnnouncement < Struct.new(
+      nil,
       :transit_gateway_route_table_announcement_id,
       :transit_gateway_id,
       :core_network_id,
@@ -62072,6 +64150,7 @@ module Aws::EC2
     #   <p>The state of the association.</p>
     #   @return [String]
     class TransitGatewayRouteTableAssociation < Struct.new(
+      nil,
       :transit_gateway_attachment_id,
       :resource_id,
       :resource_type,
@@ -62098,6 +64177,7 @@ module Aws::EC2
     #   <p>The ID of the transit gateway route table announcement.</p>
     #   @return [String]
     class TransitGatewayRouteTablePropagation < Struct.new(
+      nil,
       :transit_gateway_attachment_id,
       :resource_id,
       :resource_type,
@@ -62139,6 +64219,7 @@ module Aws::EC2
     #   <p>The resource type for the route attachment.</p>
     #   @return [String]
     class TransitGatewayRouteTableRoute < Struct.new(
+      nil,
       :destination_cidr,
       :state,
       :route_origin,
@@ -62180,6 +64261,7 @@ module Aws::EC2
     #   <p>The tags for the VPC attachment.</p>
     #   @return [Array<Types::Tag>]
     class TransitGatewayVpcAttachment < Struct.new(
+      nil,
       :transit_gateway_attachment_id,
       :transit_gateway_id,
       :vpc_id,
@@ -62210,6 +64292,7 @@ module Aws::EC2
     #   <p>Indicates whether appliance mode support is enabled.</p>
     #   @return [String]
     class TransitGatewayVpcAttachmentOptions < Struct.new(
+      nil,
       :dns_support,
       :security_group_referencing_support,
       :ipv6_support,
@@ -62242,6 +64325,7 @@ module Aws::EC2
     #   <p>The tags for the trunk interface association.</p>
     #   @return [Array<Types::Tag>]
     class TrunkInterfaceAssociation < Struct.new(
+      nil,
       :association_id,
       :branch_interface_id,
       :trunk_interface_id,
@@ -62328,6 +64412,7 @@ module Aws::EC2
     #   <p>Status of tunnel endpoint lifecycle control feature.</p>
     #   @return [Boolean]
     class TunnelOption < Struct.new(
+      nil,
       :outside_ip_address,
       :tunnel_inside_cidr,
       :tunnel_inside_ipv6_cidr,
@@ -62364,6 +64449,7 @@ module Aws::EC2
     #   <p>The IPv6 addresses to unassign from the network interface.</p>
     #   @return [Array<String>]
     class UnassignIpv6AddressesRequest < Struct.new(
+      nil,
       :ipv6_prefixes,
       :network_interface_id,
       :ipv6_addresses,
@@ -62382,6 +64468,7 @@ module Aws::EC2
     #   <p>The IPv6 prefixes that have been unassigned from  the network interface.</p>
     #   @return [Array<String>]
     class UnassignIpv6AddressesResult < Struct.new(
+      nil,
       :network_interface_id,
       :unassigned_ipv6_addresses,
       :unassigned_ipv6_prefixes,
@@ -62402,6 +64489,7 @@ module Aws::EC2
     #               specify this option multiple times to unassign more than one IP address.</p>
     #   @return [Array<String>]
     class UnassignPrivateIpAddressesRequest < Struct.new(
+      nil,
       :ipv4_prefixes,
       :network_interface_id,
       :private_ip_addresses,
@@ -62425,6 +64513,7 @@ module Aws::EC2
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     class UnassignPrivateNatGatewayAddressRequest < Struct.new(
+      nil,
       :nat_gateway_id,
       :private_ip_addresses,
       :max_drain_duration_seconds,
@@ -62441,6 +64530,7 @@ module Aws::EC2
     #   <p>Information about the NAT gateway IP addresses.</p>
     #   @return [Array<Types::NatGatewayAddress>]
     class UnassignPrivateNatGatewayAddressResult < Struct.new(
+      nil,
       :nat_gateway_id,
       :nat_gateway_addresses,
       keyword_init: true
@@ -62457,6 +64547,7 @@ module Aws::EC2
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     class UnlockSnapshotRequest < Struct.new(
+      nil,
       :snapshot_id,
       :dry_run,
       keyword_init: true
@@ -62468,6 +64559,7 @@ module Aws::EC2
     #   <p>The ID of the snapshot.</p>
     #   @return [String]
     class UnlockSnapshotResult < Struct.new(
+      nil,
       :snapshot_id,
       keyword_init: true
     )
@@ -62483,6 +64575,7 @@ module Aws::EC2
     #     <code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     class UnmonitorInstancesRequest < Struct.new(
+      nil,
       :instance_ids,
       :dry_run,
       keyword_init: true
@@ -62494,6 +64587,7 @@ module Aws::EC2
     #   <p>The monitoring information.</p>
     #   @return [Array<Types::InstanceMonitoring>]
     class UnmonitorInstancesResult < Struct.new(
+      nil,
       :instance_monitorings,
       keyword_init: true
     )
@@ -62510,6 +64604,7 @@ module Aws::EC2
     #               CPU usage was not modified.</p>
     #   @return [Types::UnsuccessfulInstanceCreditSpecificationItemError]
     class UnsuccessfulInstanceCreditSpecificationItem < Struct.new(
+      nil,
       :instance_id,
       :error,
       keyword_init: true
@@ -62526,6 +64621,7 @@ module Aws::EC2
     #   <p>The applicable error message.</p>
     #   @return [String]
     class UnsuccessfulInstanceCreditSpecificationItemError < Struct.new(
+      nil,
       :code,
       :message,
       keyword_init: true
@@ -62541,6 +64637,7 @@ module Aws::EC2
     #   <p>The ID of the resource.</p>
     #   @return [String]
     class UnsuccessfulItem < Struct.new(
+      nil,
       :error,
       :resource_id,
       keyword_init: true
@@ -62556,6 +64653,7 @@ module Aws::EC2
     #   <p>The error message accompanying the error code.</p>
     #   @return [String]
     class UnsuccessfulItemError < Struct.new(
+      nil,
       :code,
       :message,
       keyword_init: true
@@ -62586,6 +64684,7 @@ module Aws::EC2
     #               description or the IP permissions.</p>
     #   @return [Array<Types::SecurityGroupRuleDescription>]
     class UpdateSecurityGroupRuleDescriptionsEgressRequest < Struct.new(
+      nil,
       :dry_run,
       :group_id,
       :group_name,
@@ -62600,6 +64699,7 @@ module Aws::EC2
     #   <p>Returns <code>true</code> if the request succeeds; otherwise, returns an error.</p>
     #   @return [Boolean]
     class UpdateSecurityGroupRuleDescriptionsEgressResult < Struct.new(
+      nil,
       :return,
       keyword_init: true
     )
@@ -62630,6 +64730,7 @@ module Aws::EC2
     #               a description or IP permissions.</p>
     #   @return [Array<Types::SecurityGroupRuleDescription>]
     class UpdateSecurityGroupRuleDescriptionsIngressRequest < Struct.new(
+      nil,
       :dry_run,
       :group_id,
       :group_name,
@@ -62644,6 +64745,7 @@ module Aws::EC2
     #   <p>Returns <code>true</code> if the request succeeds; otherwise, returns an error.</p>
     #   @return [Boolean]
     class UpdateSecurityGroupRuleDescriptionsIngressResult < Struct.new(
+      nil,
       :return,
       keyword_init: true
     )
@@ -62658,6 +64760,7 @@ module Aws::EC2
     #   <p>The file name of the disk image.</p>
     #   @return [String]
     class UserBucket < Struct.new(
+      nil,
       :s3_bucket,
       :s3_key,
       keyword_init: true
@@ -62673,6 +64776,7 @@ module Aws::EC2
     #   <p>The file name of the disk image.</p>
     #   @return [String]
     class UserBucketDetails < Struct.new(
+      nil,
       :s3_bucket,
       :s3_key,
       keyword_init: true
@@ -62687,6 +64791,7 @@ module Aws::EC2
     #      can load the text from a file. Otherwise, you must provide Base64-encoded text.</p>
     #   @return [String]
     class UserData < Struct.new(
+      nil,
       :data,
       keyword_init: true
     )
@@ -62725,6 +64830,7 @@ module Aws::EC2
     #   <p>The status of a VPC peering connection, if applicable.</p>
     #   @return [String]
     class UserIdGroupPair < Struct.new(
+      nil,
       :description,
       :user_id,
       :group_name,
@@ -62747,6 +64853,7 @@ module Aws::EC2
     #            limit.</p>
     #   @return [Integer]
     class VCpuCountRange < Struct.new(
+      nil,
       :min,
       :max,
       keyword_init: true
@@ -62762,6 +64869,7 @@ module Aws::EC2
     #   <p>The maximum number of vCPUs. To specify no maximum limit, omit this parameter.</p>
     #   @return [Integer]
     class VCpuCountRangeRequest < Struct.new(
+      nil,
       :min,
       :max,
       keyword_init: true
@@ -62786,6 +64894,7 @@ module Aws::EC2
     #   <p>The valid number of threads per core that can be configured for the instance type.</p>
     #   @return [Array<Integer>]
     class VCpuInfo < Struct.new(
+      nil,
       :default_v_cpus,
       :default_cores,
       :default_threads_per_core,
@@ -62808,6 +64917,7 @@ module Aws::EC2
     #               valid. For more information about error messages, see <a href="https://docs.aws.amazon.com/AWSEC2/latest/APIReference/errors-overview.html">Error codes</a>.</p>
     #   @return [String]
     class ValidationError < Struct.new(
+      nil,
       :code,
       :message,
       keyword_init: true
@@ -62822,6 +64932,7 @@ module Aws::EC2
     #   <p>The error codes and error messages.</p>
     #   @return [Array<Types::ValidationError>]
     class ValidationWarning < Struct.new(
+      nil,
       :errors,
       keyword_init: true
     )
@@ -62899,6 +65010,7 @@ module Aws::EC2
     #   <p>The options for a CIDR endpoint.</p>
     #   @return [Types::VerifiedAccessEndpointCidrOptions]
     class VerifiedAccessEndpoint < Struct.new(
+      nil,
       :verified_access_instance_id,
       :verified_access_group_id,
       :verified_access_endpoint_id,
@@ -62939,6 +65051,7 @@ module Aws::EC2
     #   <p>The IDs of the subnets.</p>
     #   @return [Array<String>]
     class VerifiedAccessEndpointCidrOptions < Struct.new(
+      nil,
       :cidr,
       :port_ranges,
       :protocol,
@@ -62962,6 +65075,7 @@ module Aws::EC2
     #   <p>The port ranges.</p>
     #   @return [Array<Types::VerifiedAccessEndpointPortRange>]
     class VerifiedAccessEndpointEniOptions < Struct.new(
+      nil,
       :network_interface_id,
       :protocol,
       :port,
@@ -62989,6 +65103,7 @@ module Aws::EC2
     #   <p>The port ranges.</p>
     #   @return [Array<Types::VerifiedAccessEndpointPortRange>]
     class VerifiedAccessEndpointLoadBalancerOptions < Struct.new(
+      nil,
       :protocol,
       :port,
       :load_balancer_arn,
@@ -63007,6 +65122,7 @@ module Aws::EC2
     #   <p>The end of the port range.</p>
     #   @return [Integer]
     class VerifiedAccessEndpointPortRange < Struct.new(
+      nil,
       :from_port,
       :to_port,
       keyword_init: true
@@ -63037,6 +65153,7 @@ module Aws::EC2
     #   <p>The IDs of the subnets.</p>
     #   @return [Array<String>]
     class VerifiedAccessEndpointRdsOptions < Struct.new(
+      nil,
       :protocol,
       :port,
       :rds_db_instance_arn,
@@ -63057,6 +65174,7 @@ module Aws::EC2
     #   <p>The status message of the Verified Access endpoint.</p>
     #   @return [String]
     class VerifiedAccessEndpointStatus < Struct.new(
+      nil,
       :code,
       :message,
       keyword_init: true
@@ -63075,6 +65193,7 @@ module Aws::EC2
     #   <p>The DNS name of the target.</p>
     #   @return [String]
     class VerifiedAccessEndpointTarget < Struct.new(
+      nil,
       :verified_access_endpoint_id,
       :verified_access_endpoint_target_ip_address,
       :verified_access_endpoint_target_dns,
@@ -63115,6 +65234,7 @@ module Aws::EC2
     #   <p>The options in use for server side encryption.</p>
     #   @return [Types::VerifiedAccessSseSpecificationResponse]
     class VerifiedAccessGroup < Struct.new(
+      nil,
       :verified_access_group_id,
       :verified_access_instance_id,
       :description,
@@ -63156,6 +65276,7 @@ module Aws::EC2
     #   <p>The custom subdomain.</p>
     #   @return [Types::VerifiedAccessInstanceCustomSubDomain]
     class VerifiedAccessInstance < Struct.new(
+      nil,
       :verified_access_instance_id,
       :description,
       :verified_access_trust_providers,
@@ -63177,6 +65298,7 @@ module Aws::EC2
     #   <p>The name servers.</p>
     #   @return [Array<String>]
     class VerifiedAccessInstanceCustomSubDomain < Struct.new(
+      nil,
       :sub_domain,
       :nameservers,
       keyword_init: true
@@ -63192,6 +65314,7 @@ module Aws::EC2
     #   <p>Details about the logging options.</p>
     #   @return [Types::VerifiedAccessLogs]
     class VerifiedAccessInstanceLoggingConfiguration < Struct.new(
+      nil,
       :verified_access_instance_id,
       :access_logs,
       keyword_init: true
@@ -63207,6 +65330,7 @@ module Aws::EC2
     #   <p>The routes.</p>
     #   @return [Array<Types::VerifiedAccessInstanceOpenVpnClientConfigurationRoute>]
     class VerifiedAccessInstanceOpenVpnClientConfiguration < Struct.new(
+      nil,
       :config,
       :routes,
       keyword_init: true
@@ -63219,6 +65343,7 @@ module Aws::EC2
     #   <p>The CIDR block.</p>
     #   @return [String]
     class VerifiedAccessInstanceOpenVpnClientConfigurationRoute < Struct.new(
+      nil,
       :cidr,
       keyword_init: true
     )
@@ -63257,6 +65382,7 @@ module Aws::EC2
     #   <p>Indicates whether Proof of Key Code Exchange (PKCE) is enabled.</p>
     #   @return [Boolean]
     class VerifiedAccessInstanceUserTrustProviderClientConfiguration < Struct.new(
+      nil,
       :type,
       :scopes,
       :issuer,
@@ -63283,6 +65409,7 @@ module Aws::EC2
     #   <p>The ID of the CloudWatch Logs log group.</p>
     #   @return [String]
     class VerifiedAccessLogCloudWatchLogsDestination < Struct.new(
+      nil,
       :enabled,
       :delivery_status,
       :log_group,
@@ -63299,6 +65426,7 @@ module Aws::EC2
     #   <p>The ID of the CloudWatch Logs log group.</p>
     #   @return [String]
     class VerifiedAccessLogCloudWatchLogsDestinationOptions < Struct.new(
+      nil,
       :enabled,
       :log_group,
       keyword_init: true
@@ -63314,6 +65442,7 @@ module Aws::EC2
     #   <p>The status message.</p>
     #   @return [String]
     class VerifiedAccessLogDeliveryStatus < Struct.new(
+      nil,
       :code,
       :message,
       keyword_init: true
@@ -63332,6 +65461,7 @@ module Aws::EC2
     #   <p>The ID of the delivery stream.</p>
     #   @return [String]
     class VerifiedAccessLogKinesisDataFirehoseDestination < Struct.new(
+      nil,
       :enabled,
       :delivery_status,
       :delivery_stream,
@@ -63348,6 +65478,7 @@ module Aws::EC2
     #   <p>The ID of the delivery stream.</p>
     #   @return [String]
     class VerifiedAccessLogKinesisDataFirehoseDestinationOptions < Struct.new(
+      nil,
       :enabled,
       :delivery_stream,
       keyword_init: true
@@ -63374,6 +65505,7 @@ module Aws::EC2
     #   <p>Indicates whether to include trust data sent by trust providers in the logs.</p>
     #   @return [Boolean]
     class VerifiedAccessLogOptions < Struct.new(
+      nil,
       :s3,
       :cloud_watch_logs,
       :kinesis_data_firehose,
@@ -63401,6 +65533,7 @@ module Aws::EC2
     #   <p>The Amazon Web Services account number that owns the bucket.</p>
     #   @return [String]
     class VerifiedAccessLogS3Destination < Struct.new(
+      nil,
       :enabled,
       :delivery_status,
       :bucket_name,
@@ -63425,6 +65558,7 @@ module Aws::EC2
     #   <p>The ID of the Amazon Web Services account that owns the Amazon S3 bucket.</p>
     #   @return [String]
     class VerifiedAccessLogS3DestinationOptions < Struct.new(
+      nil,
       :enabled,
       :bucket_name,
       :prefix,
@@ -63451,6 +65585,7 @@ module Aws::EC2
     #   <p>Indicates whether trust data is included in the logs.</p>
     #   @return [Boolean]
     class VerifiedAccessLogs < Struct.new(
+      nil,
       :s3,
       :cloud_watch_logs,
       :kinesis_data_firehose,
@@ -63477,6 +65612,7 @@ module Aws::EC2
     #         </p>
     #   @return [String]
     class VerifiedAccessSseSpecificationRequest < Struct.new(
+      nil,
       :customer_managed_key_enabled,
       :kms_key_arn,
       keyword_init: true
@@ -63494,6 +65630,7 @@ module Aws::EC2
     #   <p>The ARN of the KMS key.</p>
     #   @return [String]
     class VerifiedAccessSseSpecificationResponse < Struct.new(
+      nil,
       :customer_managed_key_enabled,
       :kms_key_arn,
       keyword_init: true
@@ -63542,6 +65679,7 @@ module Aws::EC2
     #   <p>The OpenID Connect (OIDC) options.</p>
     #   @return [Types::NativeApplicationOidcOptions]
     class VerifiedAccessTrustProvider < Struct.new(
+      nil,
       :verified_access_trust_provider_id,
       :description,
       :trust_provider_type,
@@ -63577,6 +65715,7 @@ module Aws::EC2
     #   <p>The type of device-based trust provider.</p>
     #   @return [String]
     class VerifiedAccessTrustProviderCondensed < Struct.new(
+      nil,
       :verified_access_trust_provider_id,
       :description,
       :trust_provider_type,
@@ -63608,6 +65747,7 @@ module Aws::EC2
     #   <p>The Amazon Resource Name (ARN) of the VPN tunnel endpoint certificate.</p>
     #   @return [String]
     class VgwTelemetry < Struct.new(
+      nil,
       :accepted_route_count,
       :last_status_change,
       :outside_ip_address,
@@ -63694,6 +65834,7 @@ module Aws::EC2
     #         volume encryption key for the volume.</p>
     #   @return [String]
     class Volume < Struct.new(
+      nil,
       :availability_zone_id,
       :outpost_arn,
       :iops,
@@ -63753,6 +65894,7 @@ module Aws::EC2
     #   <p>The time stamp when the attachment initiated.</p>
     #   @return [Time]
     class VolumeAttachment < Struct.new(
+      nil,
       :delete_on_termination,
       :associated_resource,
       :instance_owning_service,
@@ -63771,6 +65913,7 @@ module Aws::EC2
     #   <p>The size of the volume, in GiB.</p>
     #   @return [Integer]
     class VolumeDetail < Struct.new(
+      nil,
       :size,
       keyword_init: true
     )
@@ -63827,6 +65970,7 @@ module Aws::EC2
     #   <p>The modification completion or failure time.</p>
     #   @return [Time]
     class VolumeModification < Struct.new(
+      nil,
       :volume_id,
       :modification_state,
       :status_message,
@@ -63862,6 +66006,7 @@ module Aws::EC2
     #   <p>The event type associated with this operation.</p>
     #   @return [String]
     class VolumeStatusAction < Struct.new(
+      nil,
       :code,
       :description,
       :event_id,
@@ -63879,6 +66024,7 @@ module Aws::EC2
     #   <p>The ID of the attached instance.</p>
     #   @return [String]
     class VolumeStatusAttachmentStatus < Struct.new(
+      nil,
       :io_performance,
       :instance_id,
       keyword_init: true
@@ -63913,6 +66059,7 @@ module Aws::EC2
     #   <p>The intended status of the volume status.</p>
     #   @return [String]
     class VolumeStatusDetails < Struct.new(
+      nil,
       :name,
       :status,
       keyword_init: true
@@ -63940,6 +66087,7 @@ module Aws::EC2
     #   <p>The ID of the instance associated with the event.</p>
     #   @return [String]
     class VolumeStatusEvent < Struct.new(
+      nil,
       :description,
       :event_id,
       :event_type,
@@ -63959,6 +66107,7 @@ module Aws::EC2
     #   <p>The status of the volume.</p>
     #   @return [String]
     class VolumeStatusInfo < Struct.new(
+      nil,
       :details,
       :status,
       keyword_init: true
@@ -64001,6 +66150,7 @@ module Aws::EC2
     #   <p>The ID of the Availability Zone.</p>
     #   @return [String]
     class VolumeStatusItem < Struct.new(
+      nil,
       :actions,
       :availability_zone,
       :outpost_arn,
@@ -64052,6 +66202,7 @@ module Aws::EC2
     #   <p>The ID of the set of DHCP options you've associated with the VPC.</p>
     #   @return [String]
     class Vpc < Struct.new(
+      nil,
       :owner_id,
       :instance_tenancy,
       :ipv6_cidr_block_association_set,
@@ -64077,6 +66228,7 @@ module Aws::EC2
     #   <p>The current state of the attachment.</p>
     #   @return [String]
     class VpcAttachment < Struct.new(
+      nil,
       :vpc_id,
       :state,
       keyword_init: true
@@ -64125,6 +66277,7 @@ module Aws::EC2
     #       For example, to find all resources that have a tag with the key <code>Owner</code> and the value <code>TeamA</code>, specify <code>tag:Owner</code> for the filter name and <code>TeamA</code> for the filter value.</p>
     #   @return [Array<Types::Tag>]
     class VpcBlockPublicAccessExclusion < Struct.new(
+      nil,
       :exclusion_id,
       :internet_gateway_exclusion_mode,
       :resource_arn,
@@ -64191,6 +66344,7 @@ module Aws::EC2
     #                   <code>not-allowed</code>. Otherwise, they are <code>allowed</code>.</p>
     #   @return [String]
     class VpcBlockPublicAccessOptions < Struct.new(
+      nil,
       :aws_account_id,
       :aws_region,
       :state,
@@ -64215,6 +66369,7 @@ module Aws::EC2
     #   <p>Information about the state of the CIDR block.</p>
     #   @return [Types::VpcCidrBlockState]
     class VpcCidrBlockAssociation < Struct.new(
+      nil,
       :association_id,
       :cidr_block,
       :cidr_block_state,
@@ -64231,6 +66386,7 @@ module Aws::EC2
     #   <p>A message about the status of the CIDR block, if applicable.</p>
     #   @return [String]
     class VpcCidrBlockState < Struct.new(
+      nil,
       :state,
       :status_message,
       keyword_init: true
@@ -64252,6 +66408,7 @@ module Aws::EC2
     #   <p>The ID of the VPC.</p>
     #   @return [String]
     class VpcClassicLink < Struct.new(
+      nil,
       :classic_link_enabled,
       :tags,
       :vpc_id,
@@ -64275,6 +66432,7 @@ module Aws::EC2
     # @!attribute tags
     #   @return [Array<Types::Tag>]
     class VpcEncryptionControl < Struct.new(
+      nil,
       :vpc_id,
       :vpc_encryption_control_id,
       :mode,
@@ -64292,6 +66450,7 @@ module Aws::EC2
     # @!attribute state_message
     #   @return [String]
     class VpcEncryptionControlExclusion < Struct.new(
+      nil,
       :state,
       :state_message,
       keyword_init: true
@@ -64310,6 +66469,7 @@ module Aws::EC2
     # @!attribute vpc_peering
     #   @return [Types::VpcEncryptionControlExclusion]
     class VpcEncryptionControlExclusions < Struct.new(
+      nil,
       :internet_gateway,
       :egress_only_internet_gateway,
       :nat_gateway,
@@ -64398,6 +66558,7 @@ module Aws::EC2
     #   <p>The Region where the service is hosted.</p>
     #   @return [String]
     class VpcEndpoint < Struct.new(
+      nil,
       :vpc_endpoint_id,
       :vpc_endpoint_type,
       :vpc_id,
@@ -64469,6 +66630,7 @@ module Aws::EC2
     #   <p>The tags to apply to the VPC endpoint association.</p>
     #   @return [Array<Types::Tag>]
     class VpcEndpointAssociation < Struct.new(
+      nil,
       :id,
       :vpc_endpoint_id,
       :service_network_arn,
@@ -64524,6 +66686,7 @@ module Aws::EC2
     #   <p>The Region of the endpoint.</p>
     #   @return [String]
     class VpcEndpointConnection < Struct.new(
+      nil,
       :service_id,
       :vpc_endpoint_id,
       :vpc_endpoint_owner,
@@ -64565,6 +66728,7 @@ module Aws::EC2
     #   <p>The source that allocated the IP address space. <code>byoip</code> or <code>amazon</code> indicates public IP address space allocated by Amazon or space that you have allocated with Bring your own IP (BYOIP). <code>none</code> indicates private space.</p>
     #   @return [String]
     class VpcIpv6CidrBlockAssociation < Struct.new(
+      nil,
       :association_id,
       :ipv6_cidr_block,
       :ipv6_cidr_block_state,
@@ -64597,6 +66761,7 @@ module Aws::EC2
     #   <p>The ID of the VPC peering connection.</p>
     #   @return [String]
     class VpcPeeringConnection < Struct.new(
+      nil,
       :accepter_vpc_info,
       :expiration_time,
       :requester_vpc_info,
@@ -64620,6 +66785,7 @@ module Aws::EC2
     #   <p>Deprecated.</p>
     #   @return [Boolean]
     class VpcPeeringConnectionOptionsDescription < Struct.new(
+      nil,
       :allow_dns_resolution_from_remote_vpc,
       :allow_egress_from_local_classic_link_to_remote_vpc,
       :allow_egress_from_local_vpc_to_remote_classic_link,
@@ -64636,6 +66802,7 @@ module Aws::EC2
     #   <p>A message that provides more information about the status, if applicable.</p>
     #   @return [String]
     class VpcPeeringConnectionStateReason < Struct.new(
+      nil,
       :code,
       :message,
       keyword_init: true
@@ -64666,6 +66833,7 @@ module Aws::EC2
     #   <p>The Region in which the VPC is located.</p>
     #   @return [String]
     class VpcPeeringConnectionVpcInfo < Struct.new(
+      nil,
       :cidr_block,
       :ipv6_cidr_block_set,
       :cidr_block_set,
@@ -64733,6 +66901,7 @@ module Aws::EC2
     #               connection.</p>
     #   @return [String]
     class VpnConnection < Struct.new(
+      nil,
       :category,
       :transit_gateway_id,
       :core_network_arn,
@@ -64771,6 +66940,7 @@ module Aws::EC2
     #   <p>Customer gateway device software version.</p>
     #   @return [String]
     class VpnConnectionDeviceType < Struct.new(
+      nil,
       :vpn_connection_device_type_id,
       :vendor,
       :platform,
@@ -64817,6 +66987,7 @@ module Aws::EC2
     #   <p>Indicates the VPN tunnel options.</p>
     #   @return [Array<Types::TunnelOption>]
     class VpnConnectionOptions < Struct.new(
+      nil,
       :enable_acceleration,
       :static_routes_only,
       :local_ipv4_network_cidr,
@@ -64885,6 +67056,7 @@ module Aws::EC2
     #            </p>
     #   @return [Boolean]
     class VpnConnectionOptionsSpecification < Struct.new(
+      nil,
       :enable_acceleration,
       :tunnel_inside_ip_version,
       :tunnel_options,
@@ -64925,6 +67097,7 @@ module Aws::EC2
     #   <p>Any VPCs attached to the virtual private gateway.</p>
     #   @return [Array<Types::VpcAttachment>]
     class VpnGateway < Struct.new(
+      nil,
       :amazon_side_asn,
       :tags,
       :vpn_gateway_id,
@@ -64948,6 +67121,7 @@ module Aws::EC2
     #   <p>The current state of the static route.</p>
     #   @return [String]
     class VpnStaticRoute < Struct.new(
+      nil,
       :destination_cidr_block,
       :source,
       :state,
@@ -64961,6 +67135,7 @@ module Aws::EC2
     #   <p>Options for sending VPN tunnel logs to CloudWatch.</p>
     #   @return [Types::CloudWatchLogOptions]
     class VpnTunnelLogOptions < Struct.new(
+      nil,
       :cloud_watch_log_options,
       keyword_init: true
     )
@@ -64972,6 +67147,7 @@ module Aws::EC2
     #   <p>Options for sending VPN tunnel logs to CloudWatch.</p>
     #   @return [Types::CloudWatchLogOptionsSpecification]
     class VpnTunnelLogOptionsSpecification < Struct.new(
+      nil,
       :cloud_watch_log_options,
       keyword_init: true
     )
@@ -65150,6 +67326,7 @@ module Aws::EC2
     #   <p>Turn on or off tunnel endpoint lifecycle control feature.</p>
     #   @return [Boolean]
     class VpnTunnelOptionsSpecification < Struct.new(
+      nil,
       :tunnel_inside_cidr,
       :tunnel_inside_ipv6_cidr,
       :pre_shared_key,
@@ -65184,6 +67361,7 @@ module Aws::EC2
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     class WithdrawByoipCidrRequest < Struct.new(
+      nil,
       :cidr,
       :dry_run,
       keyword_init: true
@@ -65195,6 +67373,7 @@ module Aws::EC2
     #   <p>Information about the address pool.</p>
     #   @return [Types::ByoipCidr]
     class WithdrawByoipCidrResult < Struct.new(
+      nil,
       :byoip_cidr,
       keyword_init: true
     )

@@ -44,6 +44,7 @@ module Aws::ARCRegionswitch
     #   <p>The actual recovery time that Region switch calculates for a plan execution. Actual recovery time includes the time for the plan to run added to the time elapsed until the application health alarms that you've specified are healthy again.</p>
     #   @return [String]
     class AbbreviatedExecution < Struct.new(
+      nil,
       :plan_arn,
       :execution_id,
       :version,
@@ -99,6 +100,7 @@ module Aws::ARCRegionswitch
     #   <p>The recovery time objective that you've specified.</p>
     #   @return [Integer]
     class AbbreviatedPlan < Struct.new(
+      nil,
       :arn,
       :owner,
       :name,
@@ -120,6 +122,7 @@ module Aws::ARCRegionswitch
     # @!attribute message
     #   @return [String]
     class AccessDeniedException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -142,6 +145,7 @@ module Aws::ARCRegionswitch
     #   <p>A comment that you can enter about a plan execution.</p>
     #   @return [String]
     class ApprovePlanExecutionStepRequest < Struct.new(
+      nil,
       :plan_arn,
       :execution_id,
       :step_name,
@@ -153,6 +157,7 @@ module Aws::ARCRegionswitch
     end
 
     class ApprovePlanExecutionStepResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -172,6 +177,7 @@ module Aws::ARCRegionswitch
     #   <p>The Region and ARC routing controls for the configuration.</p>
     #   @return [Hash<String, Array<Types::ArcRoutingControlState>>]
     class ArcRoutingControlConfiguration < Struct.new(
+      nil,
       :timeout_minutes,
       :cross_account_role,
       :external_id,
@@ -194,6 +200,7 @@ module Aws::ARCRegionswitch
     #   <p>The state of an ARC routing control, On or Off.</p>
     #   @return [String]
     class ArcRoutingControlState < Struct.new(
+      nil,
       :routing_control_arn,
       :state,
       keyword_init: true
@@ -212,6 +219,7 @@ module Aws::ARCRegionswitch
     #   <p>The Amazon Resource Name (ARN) of the EC2 Auto Scaling group.</p>
     #   @return [String]
     class Asg < Struct.new(
+      nil,
       :cross_account_role,
       :external_id,
       :arn,
@@ -234,6 +242,7 @@ module Aws::ARCRegionswitch
     #   <p>The alarm type for an associated alarm. An associated CloudWatch alarm can be an application health alarm or a trigger alarm.</p>
     #   @return [String]
     class AssociatedAlarm < Struct.new(
+      nil,
       :cross_account_role,
       :external_id,
       :resource_identifier,
@@ -253,6 +262,7 @@ module Aws::ARCRegionswitch
     #   <p>A comment that you can enter about canceling a plan execution step.</p>
     #   @return [String]
     class CancelPlanExecutionRequest < Struct.new(
+      nil,
       :plan_arn,
       :execution_id,
       :comment,
@@ -262,6 +272,7 @@ module Aws::ARCRegionswitch
     end
 
     class CancelPlanExecutionResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -301,6 +312,7 @@ module Aws::ARCRegionswitch
     #   <p>The tags to apply to the Region switch plan.</p>
     #   @return [Hash<String, String>]
     class CreatePlanRequest < Struct.new(
+      nil,
       :description,
       :workflows,
       :execution_role,
@@ -321,6 +333,7 @@ module Aws::ARCRegionswitch
     #   <p>The details of the created Region switch plan.</p>
     #   @return [Types::Plan]
     class CreatePlanResponse < Struct.new(
+      nil,
       :plan,
       keyword_init: true
     )
@@ -344,6 +357,7 @@ module Aws::ARCRegionswitch
     #   <p>The settings for ungraceful execution.</p>
     #   @return [Types::LambdaUngraceful]
     class CustomActionLambdaConfiguration < Struct.new(
+      nil,
       :timeout_minutes,
       :lambdas,
       :retry_interval_minutes,
@@ -363,6 +377,7 @@ module Aws::ARCRegionswitch
     #   <p>The Amazon Resource Name (ARN) of the plan.</p>
     #   @return [String]
     class DeletePlanRequest < Struct.new(
+      nil,
       :arn,
       keyword_init: true
     )
@@ -370,6 +385,7 @@ module Aws::ARCRegionswitch
     end
 
     class DeletePlanResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -392,6 +408,7 @@ module Aws::ARCRegionswitch
     #   <p>The monitoring approach that you specify EC2 Auto Scaling groups for the configuration.</p>
     #   @return [String]
     class Ec2AsgCapacityIncreaseConfiguration < Struct.new(
+      nil,
       :timeout_minutes,
       :asgs,
       :ungraceful,
@@ -414,6 +431,7 @@ module Aws::ARCRegionswitch
     #   <p>The minimum success percentage that you specify for EC2 Auto Scaling groups.</p>
     #   @return [Integer]
     class Ec2Ungraceful < Struct.new(
+      nil,
       :minimum_success_percentage,
       keyword_init: true
     )
@@ -437,6 +455,7 @@ module Aws::ARCRegionswitch
     #   <p>The monitoring approach specified for the configuration, for example, <code>Most_Recent</code>.</p>
     #   @return [String]
     class EcsCapacityIncreaseConfiguration < Struct.new(
+      nil,
       :timeout_minutes,
       :services,
       :ungraceful,
@@ -459,6 +478,7 @@ module Aws::ARCRegionswitch
     #   <p>The minimum success percentage specified for the configuration.</p>
     #   @return [Integer]
     class EcsUngraceful < Struct.new(
+      nil,
       :minimum_success_percentage,
       keyword_init: true
     )
@@ -476,6 +496,7 @@ module Aws::ARCRegionswitch
     #   <p>The Amazon Resource Name (ARN) of an Amazon Web Services EKS cluster.</p>
     #   @return [String]
     class EksCluster < Struct.new(
+      nil,
       :cross_account_role,
       :external_id,
       :cluster_arn,
@@ -507,6 +528,7 @@ module Aws::ARCRegionswitch
     #   <p>The monitoring approach for the configuration, that is, whether it was sampled in the last 24 hours or autoscaled in the last 24 hours.</p>
     #   @return [String]
     class EksResourceScalingConfiguration < Struct.new(
+      nil,
       :timeout_minutes,
       :kubernetes_resource_type,
       :scaling_resources,
@@ -531,6 +553,7 @@ module Aws::ARCRegionswitch
     #   <p>The minimum success percentage for the configuration.</p>
     #   @return [Integer]
     class EksResourceScalingUngraceful < Struct.new(
+      nil,
       :minimum_success_percentage,
       keyword_init: true
     )
@@ -545,6 +568,7 @@ module Aws::ARCRegionswitch
     #   <p>The IAM approval role for the configuration.</p>
     #   @return [String]
     class ExecutionApprovalConfiguration < Struct.new(
+      nil,
       :timeout_minutes,
       :approval_role,
       keyword_init: true
@@ -646,6 +670,7 @@ module Aws::ARCRegionswitch
     #   <p>The event ID of the previous execution event.</p>
     #   @return [String]
     class ExecutionEvent < Struct.new(
+      nil,
       :timestamp,
       :type,
       :step_name,
@@ -670,6 +695,7 @@ module Aws::ARCRegionswitch
     #   <p>Specifies that you want to receive the next page of results. Valid only if you received a <code>nextToken</code> response in the previous request. If you did, it indicates that more output is available. Set this parameter to the value provided by the previous call's <code>nextToken</code> response to request the next page of results.</p>
     #   @return [String]
     class GetPlanEvaluationStatusRequest < Struct.new(
+      nil,
       :plan_arn,
       :max_results,
       :next_token,
@@ -700,6 +726,7 @@ module Aws::ARCRegionswitch
     #   <p>Specifies that you want to receive the next page of results. Valid only if you received a <code>nextToken</code> response in the previous request. If you did, it indicates that more output is available. Set this parameter to the value provided by the previous call's <code>nextToken</code> response to request the next page of results.</p>
     #   @return [String]
     class GetPlanEvaluationStatusResponse < Struct.new(
+      nil,
       :plan_arn,
       :last_evaluation_time,
       :last_evaluated_version,
@@ -725,6 +752,7 @@ module Aws::ARCRegionswitch
     #   <p>Specifies that you want to receive the next page of results. Valid only if you received a <code>nextToken</code> response in the previous request. If you did, it indicates that more output is available. Set this parameter to the value provided by the previous call's <code>nextToken</code> response to request the next page of results.</p>
     #   @return [String]
     class GetPlanExecutionRequest < Struct.new(
+      nil,
       :plan_arn,
       :execution_id,
       :max_results,
@@ -780,6 +808,7 @@ module Aws::ARCRegionswitch
     #   <p>Specifies that you want to receive the next page of results. Valid only if you received a <code>nextToken</code> response in the previous request. If you did, it indicates that more output is available. Set this parameter to the value provided by the previous call's <code>nextToken</code> response to request the next page of results.</p>
     #   @return [String]
     class GetPlanExecutionResponse < Struct.new(
+      nil,
       :plan_arn,
       :execution_id,
       :version,
@@ -804,6 +833,7 @@ module Aws::ARCRegionswitch
     #   <p>The Amazon Resource Name (ARN) of the plan in Region.</p>
     #   @return [String]
     class GetPlanInRegionRequest < Struct.new(
+      nil,
       :arn,
       keyword_init: true
     )
@@ -814,6 +844,7 @@ module Aws::ARCRegionswitch
     #   <p>The details of the Region switch plan.</p>
     #   @return [Types::Plan]
     class GetPlanInRegionResponse < Struct.new(
+      nil,
       :plan,
       keyword_init: true
     )
@@ -824,6 +855,7 @@ module Aws::ARCRegionswitch
     #   <p>The Amazon Resource Name (ARN) of the plan.</p>
     #   @return [String]
     class GetPlanRequest < Struct.new(
+      nil,
       :arn,
       keyword_init: true
     )
@@ -834,6 +866,7 @@ module Aws::ARCRegionswitch
     #   <p>The detailed information about the requested Region switch plan.</p>
     #   @return [Types::Plan]
     class GetPlanResponse < Struct.new(
+      nil,
       :plan,
       keyword_init: true
     )
@@ -863,6 +896,7 @@ module Aws::ARCRegionswitch
     #   <p>The database cluster Amazon Resource Names (ARNs) for a global database.</p>
     #   @return [Array<String>]
     class GlobalAuroraConfiguration < Struct.new(
+      nil,
       :timeout_minutes,
       :cross_account_role,
       :external_id,
@@ -886,6 +920,7 @@ module Aws::ARCRegionswitch
     #   <p>The settings for ungraceful execution.</p>
     #   @return [String]
     class GlobalAuroraUngraceful < Struct.new(
+      nil,
       :ungraceful,
       keyword_init: true
     )
@@ -896,6 +931,7 @@ module Aws::ARCRegionswitch
     # @!attribute message
     #   @return [String]
     class IllegalArgumentException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -906,6 +942,7 @@ module Aws::ARCRegionswitch
     # @!attribute message
     #   @return [String]
     class IllegalStateException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -916,6 +953,7 @@ module Aws::ARCRegionswitch
     # @!attribute message
     #   @return [String]
     class InternalServerException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -930,6 +968,7 @@ module Aws::ARCRegionswitch
     #   <p>The kind for the Kubernetes resource.</p>
     #   @return [String]
     class KubernetesResourceType < Struct.new(
+      nil,
       :api_version,
       :kind,
       keyword_init: true
@@ -948,6 +987,7 @@ module Aws::ARCRegionswitch
     #   <p>The hpaname for the Kubernetes resource.</p>
     #   @return [String]
     class KubernetesScalingResource < Struct.new(
+      nil,
       :namespace,
       :name,
       :hpa_name,
@@ -961,6 +1001,7 @@ module Aws::ARCRegionswitch
     #   <p>The ungraceful behavior for a Lambda function, which must be set to <code>skip</code>.</p>
     #   @return [String]
     class LambdaUngraceful < Struct.new(
+      nil,
       :behavior,
       keyword_init: true
     )
@@ -983,6 +1024,7 @@ module Aws::ARCRegionswitch
     #   <p>The Amazon Resource Name (ARN) of the Lambda function.</p>
     #   @return [String]
     class Lambdas < Struct.new(
+      nil,
       :cross_account_role,
       :external_id,
       :arn,
@@ -1007,6 +1049,7 @@ module Aws::ARCRegionswitch
     #   <p>The name of the plan execution event.</p>
     #   @return [String]
     class ListPlanExecutionEventsRequest < Struct.new(
+      nil,
       :plan_arn,
       :execution_id,
       :max_results,
@@ -1024,6 +1067,7 @@ module Aws::ARCRegionswitch
     #   <p>Specifies that you want to receive the next page of results. Valid only if you received a <code>nextToken</code> response in the previous request. If you did, it indicates that more output is available. Set this parameter to the value provided by the previous call's <code>nextToken</code> response to request the next page of results.</p>
     #   @return [String]
     class ListPlanExecutionEventsResponse < Struct.new(
+      nil,
       :items,
       :next_token,
       keyword_init: true
@@ -1044,6 +1088,7 @@ module Aws::ARCRegionswitch
     #   <p>The state of the plan execution. For example, the plan execution might be In Progress.</p>
     #   @return [String]
     class ListPlanExecutionsRequest < Struct.new(
+      nil,
       :plan_arn,
       :max_results,
       :next_token,
@@ -1060,6 +1105,7 @@ module Aws::ARCRegionswitch
     #   <p>Specifies that you want to receive the next page of results. Valid only if you received a <code>nextToken</code> response in the previous request. If you did, it indicates that more output is available. Set this parameter to the value provided by the previous call's <code>nextToken</code> response to request the next page of results.</p>
     #   @return [String]
     class ListPlanExecutionsResponse < Struct.new(
+      nil,
       :items,
       :next_token,
       keyword_init: true
@@ -1074,6 +1120,7 @@ module Aws::ARCRegionswitch
     #   <p>Specifies that you want to receive the next page of results. Valid only if you received a <code>nextToken</code> response in the previous request. If you did, it indicates that more output is available. Set this parameter to the value provided by the previous call's <code>nextToken</code> response to request the next page of results.</p>
     #   @return [String]
     class ListPlansInRegionRequest < Struct.new(
+      nil,
       :max_results,
       :next_token,
       keyword_init: true
@@ -1088,6 +1135,7 @@ module Aws::ARCRegionswitch
     #   <p>Specifies that you want to receive the next page of results. Valid only if you received a <code>nextToken</code> response in the previous request. If you did, it indicates that more output is available. Set this parameter to the value provided by the previous call's <code>nextToken</code> response to request the next page of results.</p>
     #   @return [String]
     class ListPlansInRegionResponse < Struct.new(
+      nil,
       :plans,
       :next_token,
       keyword_init: true
@@ -1102,6 +1150,7 @@ module Aws::ARCRegionswitch
     #   <p>Specifies that you want to receive the next page of results. Valid only if you received a <code>nextToken</code> response in the previous request. If you did, it indicates that more output is available. Set this parameter to the value provided by the previous call's <code>nextToken</code> response to request the next page of results.</p>
     #   @return [String]
     class ListPlansRequest < Struct.new(
+      nil,
       :max_results,
       :next_token,
       keyword_init: true
@@ -1116,6 +1165,7 @@ module Aws::ARCRegionswitch
     #   <p>Specifies that you want to receive the next page of results. Valid only if you received a <code>nextToken</code> response in the previous request. If you did, it indicates that more output is available. Set this parameter to the value provided by the previous call's <code>nextToken</code> response to request the next page of results.</p>
     #   @return [String]
     class ListPlansResponse < Struct.new(
+      nil,
       :plans,
       :next_token,
       keyword_init: true
@@ -1139,6 +1189,7 @@ module Aws::ARCRegionswitch
     #   <p>Specifies that you want to receive the next page of results. Valid only if you received a <code>nextToken</code> response in the previous request. If you did, it indicates that more output is available. Set this parameter to the value provided by the previous call's <code>nextToken</code> response to request the next page of results.</p>
     #   @return [String]
     class ListRoute53HealthChecksRequest < Struct.new(
+      nil,
       :arn,
       :hosted_zone_id,
       :record_name,
@@ -1156,6 +1207,7 @@ module Aws::ARCRegionswitch
     #   <p>Specifies that you want to receive the next page of results. Valid only if you received a <code>nextToken</code> response in the previous request. If you did, it indicates that more output is available. Set this parameter to the value provided by the previous call's <code>nextToken</code> response to request the next page of results.</p>
     #   @return [String]
     class ListRoute53HealthChecksResponse < Struct.new(
+      nil,
       :health_checks,
       :next_token,
       keyword_init: true
@@ -1167,6 +1219,7 @@ module Aws::ARCRegionswitch
     #   <p>The Amazon Resource Name (ARN) of the resource.</p>
     #   @return [String]
     class ListTagsForResourceRequest < Struct.new(
+      nil,
       :arn,
       keyword_init: true
     )
@@ -1177,6 +1230,7 @@ module Aws::ARCRegionswitch
     #   <p>The tags for a resource.</p>
     #   @return [Hash<String, String>]
     class ListTagsForResourceResponse < Struct.new(
+      nil,
       :resource_tags,
       keyword_init: true
     )
@@ -1191,6 +1245,7 @@ module Aws::ARCRegionswitch
     #   <p>The name for a minimal workflow</p>
     #   @return [String]
     class MinimalWorkflow < Struct.new(
+      nil,
       :action,
       :name,
       keyword_init: true
@@ -1203,6 +1258,7 @@ module Aws::ARCRegionswitch
     #   <p>The steps for a parallel execution block.</p>
     #   @return [Array<Types::Step>]
     class ParallelExecutionBlockConfiguration < Struct.new(
+      nil,
       :steps,
       keyword_init: true
     )
@@ -1253,6 +1309,7 @@ module Aws::ARCRegionswitch
     #   <p>The timestamp when the plan was last updated.</p>
     #   @return [Time]
     class Plan < Struct.new(
+      nil,
       :arn,
       :description,
       :workflows,
@@ -1283,6 +1340,7 @@ module Aws::ARCRegionswitch
     #   <p>The Amazon Resource Name (ARN) of the plan configuration.</p>
     #   @return [String]
     class RegionSwitchPlanConfiguration < Struct.new(
+      nil,
       :cross_account_role,
       :external_id,
       :arn,
@@ -1295,6 +1353,7 @@ module Aws::ARCRegionswitch
     # @!attribute message
     #   @return [String]
     class ResourceNotFoundException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -1324,6 +1383,7 @@ module Aws::ARCRegionswitch
     #   <p>The warning message about what needs to be corrected.</p>
     #   @return [String]
     class ResourceWarning < Struct.new(
+      nil,
       :workflow,
       :version,
       :step_name,
@@ -1350,6 +1410,7 @@ module Aws::ARCRegionswitch
     #   <p>The Amazon Route 53 Region.</p>
     #   @return [String]
     class Route53HealthCheck < Struct.new(
+      nil,
       :hosted_zone_id,
       :record_name,
       :health_check_id,
@@ -1379,6 +1440,7 @@ module Aws::ARCRegionswitch
     #   <p>The Amazon Route 53 health check configuration record sets.</p>
     #   @return [Array<Types::Route53ResourceRecordSet>]
     class Route53HealthCheckConfiguration < Struct.new(
+      nil,
       :timeout_minutes,
       :cross_account_role,
       :external_id,
@@ -1403,6 +1465,7 @@ module Aws::ARCRegionswitch
     #   <p>The Amazon Route 53 record set Region.</p>
     #   @return [String]
     class Route53ResourceRecordSet < Struct.new(
+      nil,
       :record_set_identifier,
       :region,
       keyword_init: true
@@ -1424,6 +1487,7 @@ module Aws::ARCRegionswitch
     #   <p>The Amazon Resource Name (ARN) for a service.</p>
     #   @return [String]
     class Service < Struct.new(
+      nil,
       :cross_account_role,
       :external_id,
       :cluster_arn,
@@ -1452,6 +1516,7 @@ module Aws::ARCRegionswitch
     #   <p>A boolean value indicating whether to use the latest version of the plan. If set to false, you must specify a specific version.</p>
     #   @return [String]
     class StartPlanExecutionRequest < Struct.new(
+      nil,
       :plan_arn,
       :target_region,
       :action,
@@ -1479,6 +1544,7 @@ module Aws::ARCRegionswitch
     #   <p>The Amazon Web Services Region to deactivate.</p>
     #   @return [String]
     class StartPlanExecutionResponse < Struct.new(
+      nil,
       :execution_id,
       :plan,
       :plan_version,
@@ -1503,6 +1569,7 @@ module Aws::ARCRegionswitch
     #   <p>The type of an execution block in a workflow.</p>
     #   @return [String]
     class Step < Struct.new(
+      nil,
       :name,
       :description,
       :execution_block_configuration,
@@ -1529,6 +1596,7 @@ module Aws::ARCRegionswitch
     #   <p>The mode for a step execution. The mode can be Graceful or Ungraceful.</p>
     #   @return [String]
     class StepState < Struct.new(
+      nil,
       :name,
       :status,
       :start_time,
@@ -1546,6 +1614,7 @@ module Aws::ARCRegionswitch
     #   <p>Tags that you add to a resource. You can add a maximum of 50 tags in Region switch.</p>
     #   @return [Hash<String, String>]
     class TagResourceRequest < Struct.new(
+      nil,
       :arn,
       :tags,
       keyword_init: true
@@ -1554,6 +1623,7 @@ module Aws::ARCRegionswitch
     end
 
     class TagResourceResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1576,6 +1646,7 @@ module Aws::ARCRegionswitch
     #   <p>The minimum time, in minutes, that must elapse between automatic executions of the plan.</p>
     #   @return [Integer]
     class Trigger < Struct.new(
+      nil,
       :description,
       :target_region,
       :action,
@@ -1594,6 +1665,7 @@ module Aws::ARCRegionswitch
     #   <p>The condition that must be met. Valid values include ALARM and OK.</p>
     #   @return [String]
     class TriggerCondition < Struct.new(
+      nil,
       :associated_alarm_name,
       :condition,
       keyword_init: true
@@ -1608,6 +1680,7 @@ module Aws::ARCRegionswitch
     #   <p>Tag keys that you remove from a resource.</p>
     #   @return [Array<String>]
     class UntagResourceRequest < Struct.new(
+      nil,
       :arn,
       :resource_tag_keys,
       keyword_init: true
@@ -1616,6 +1689,7 @@ module Aws::ARCRegionswitch
     end
 
     class UntagResourceResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1634,6 +1708,7 @@ module Aws::ARCRegionswitch
     #   <p>An optional comment about the plan execution.</p>
     #   @return [String]
     class UpdatePlanExecutionRequest < Struct.new(
+      nil,
       :plan_arn,
       :execution_id,
       :action,
@@ -1644,6 +1719,7 @@ module Aws::ARCRegionswitch
     end
 
     class UpdatePlanExecutionResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1665,6 +1741,7 @@ module Aws::ARCRegionswitch
     #   <p>The updated action to take for the step. This can be used to skip or retry a step.</p>
     #   @return [String]
     class UpdatePlanExecutionStepRequest < Struct.new(
+      nil,
       :plan_arn,
       :execution_id,
       :comment,
@@ -1676,6 +1753,7 @@ module Aws::ARCRegionswitch
     end
 
     class UpdatePlanExecutionStepResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1703,6 +1781,7 @@ module Aws::ARCRegionswitch
     #   <p>The updated conditions that can automatically trigger the execution of the plan.</p>
     #   @return [Array<Types::Trigger>]
     class UpdatePlanRequest < Struct.new(
+      nil,
       :arn,
       :description,
       :workflows,
@@ -1719,6 +1798,7 @@ module Aws::ARCRegionswitch
     #   <p>The details of the updated Region switch plan.</p>
     #   @return [Types::Plan]
     class UpdatePlanResponse < Struct.new(
+      nil,
       :plan,
       keyword_init: true
     )
@@ -1739,6 +1819,7 @@ module Aws::ARCRegionswitch
     #   <p>The description of the workflow.</p>
     #   @return [String]
     class Workflow < Struct.new(
+      nil,
       :steps,
       :workflow_target_action,
       :workflow_target_region,

@@ -11,6 +11,7 @@ module Aws::KinesisVideoMedia
     # @!attribute message
     #   @return [String]
     class ClientLimitExceededException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -22,6 +23,7 @@ module Aws::KinesisVideoMedia
     # @!attribute message
     #   @return [String]
     class ConnectionLimitExceededException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -41,6 +43,7 @@ module Aws::KinesisVideoMedia
     #   <p>Identifies the starting chunk to get from the specified stream. </p>
     #   @return [Types::StartSelector]
     class GetMediaInput < Struct.new(
+      nil,
       :stream_name,
       :stream_arn,
       :start_selector,
@@ -123,6 +126,7 @@ module Aws::KinesisVideoMedia
     #            </ul>
     #   @return [String]
     class GetMediaOutput < Struct.new(
+      nil,
       :content_type,
       :payload,
       keyword_init: true
@@ -139,6 +143,7 @@ module Aws::KinesisVideoMedia
     # @!attribute message
     #   @return [String]
     class InvalidArgumentException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -152,6 +157,7 @@ module Aws::KinesisVideoMedia
     # @!attribute message
     #   @return [String]
     class InvalidEndpointException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -163,6 +169,7 @@ module Aws::KinesisVideoMedia
     # @!attribute message
     #   @return [String]
     class NotAuthorizedException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -173,6 +180,7 @@ module Aws::KinesisVideoMedia
     # @!attribute message
     #   @return [String]
     class ResourceNotFoundException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -242,6 +250,7 @@ module Aws::KinesisVideoMedia
     #         identified by the continuation token.</p>
     #   @return [String]
     class StartSelector < Struct.new(
+      nil,
       :start_selector_type,
       :after_fragment_number,
       :start_timestamp,

@@ -10,6 +10,7 @@ module Aws::BedrockAgentCoreControl
     # @!attribute message
     #   @return [String]
     class AccessDeniedException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -39,6 +40,7 @@ module Aws::BedrockAgentCoreControl
     #   <p>The current status of the agent runtime.</p>
     #   @return [String]
     class AgentRuntime < Struct.new(
+      nil,
       :agent_runtime_arn,
       :agent_runtime_id,
       :agent_runtime_version,
@@ -98,6 +100,7 @@ module Aws::BedrockAgentCoreControl
     #   <p>The timestamp when the agent runtime endpoint was last updated.</p>
     #   @return [Time]
     class AgentRuntimeEndpoint < Struct.new(
+      nil,
       :name,
       :live_version,
       :target_version,
@@ -127,6 +130,7 @@ module Aws::BedrockAgentCoreControl
     #   <p>The timestamp when the API key credential provider was last updated.</p>
     #   @return [Time]
     class ApiKeyCredentialProviderItem < Struct.new(
+      nil,
       :name,
       :credential_provider_arn,
       :created_time,
@@ -179,6 +183,7 @@ module Aws::BedrockAgentCoreControl
     #   <p>VpcConfig for the Agent.</p>
     #   @return [Types::VpcConfig]
     class BrowserNetworkConfiguration < Struct.new(
+      nil,
       :network_mode,
       :vpc_config,
       keyword_init: true
@@ -214,6 +219,7 @@ module Aws::BedrockAgentCoreControl
     #   <p>The timestamp when the browser was last updated.</p>
     #   @return [Time]
     class BrowserSummary < Struct.new(
+      nil,
       :browser_id,
       :browser_arn,
       :name,
@@ -234,6 +240,7 @@ module Aws::BedrockAgentCoreControl
     #   <p>VpcConfig for the Agent.</p>
     #   @return [Types::VpcConfig]
     class CodeInterpreterNetworkConfiguration < Struct.new(
+      nil,
       :network_mode,
       :vpc_config,
       keyword_init: true
@@ -269,6 +276,7 @@ module Aws::BedrockAgentCoreControl
     #   <p>The timestamp when the code interpreter was last updated.</p>
     #   @return [Time]
     class CodeInterpreterSummary < Struct.new(
+      nil,
       :code_interpreter_id,
       :code_interpreter_arn,
       :name,
@@ -285,6 +293,7 @@ module Aws::BedrockAgentCoreControl
     # @!attribute message
     #   @return [String]
     class ConcurrentModificationException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -295,6 +304,7 @@ module Aws::BedrockAgentCoreControl
     # @!attribute message
     #   @return [String]
     class ConflictException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -321,6 +331,7 @@ module Aws::BedrockAgentCoreControl
     #   <p>The ECR URI of the container.</p>
     #   @return [String]
     class ContainerConfiguration < Struct.new(
+      nil,
       :container_uri,
       keyword_init: true
     )
@@ -346,6 +357,7 @@ module Aws::BedrockAgentCoreControl
     #   <p>A map of tag keys and values to assign to the agent runtime endpoint. Tags enable you to categorize your resources in different ways, for example, by purpose, owner, or environment.</p>
     #   @return [Hash<String, String>]
     class CreateAgentRuntimeEndpointRequest < Struct.new(
+      nil,
       :agent_runtime_id,
       :name,
       :agent_runtime_version,
@@ -373,6 +385,7 @@ module Aws::BedrockAgentCoreControl
     #   <p>The timestamp when the AgentCore Runtime endpoint was created.</p>
     #   @return [Time]
     class CreateAgentRuntimeEndpointResponse < Struct.new(
+      nil,
       :target_version,
       :agent_runtime_endpoint_arn,
       :agent_runtime_arn,
@@ -417,6 +430,7 @@ module Aws::BedrockAgentCoreControl
     #   <p>A map of tag keys and values to assign to the agent runtime. Tags enable you to categorize your resources in different ways, for example, by purpose, owner, or environment.</p>
     #   @return [Hash<String, String>]
     class CreateAgentRuntimeRequest < Struct.new(
+      nil,
       :agent_runtime_name,
       :description,
       :agent_runtime_artifact,
@@ -452,6 +466,7 @@ module Aws::BedrockAgentCoreControl
     #   <p>The current status of the AgentCore Runtime.</p>
     #   @return [String]
     class CreateAgentRuntimeResponse < Struct.new(
+      nil,
       :agent_runtime_arn,
       :workload_identity_details,
       :agent_runtime_id,
@@ -470,6 +485,7 @@ module Aws::BedrockAgentCoreControl
     #   <p>The API key to use for authentication. This value is encrypted and stored securely.</p>
     #   @return [String]
     class CreateApiKeyCredentialProviderRequest < Struct.new(
+      nil,
       :name,
       :api_key,
       keyword_init: true
@@ -487,6 +503,7 @@ module Aws::BedrockAgentCoreControl
     #   <p>The Amazon Resource Name (ARN) of the created API key credential provider.</p>
     #   @return [String]
     class CreateApiKeyCredentialProviderResponse < Struct.new(
+      nil,
       :api_key_secret_arn,
       :name,
       :credential_provider_arn,
@@ -517,6 +534,7 @@ module Aws::BedrockAgentCoreControl
     #   <p>A map of tag keys and values to assign to the browser. Tags enable you to categorize your resources in different ways, for example, by purpose, owner, or environment.</p>
     #   @return [Hash<String, String>]
     class CreateBrowserRequest < Struct.new(
+      nil,
       :name,
       :description,
       :execution_role_arn,
@@ -542,6 +560,7 @@ module Aws::BedrockAgentCoreControl
     #   <p>The current status of the browser.</p>
     #   @return [String]
     class CreateBrowserResponse < Struct.new(
+      nil,
       :browser_id,
       :browser_arn,
       :created_at,
@@ -570,6 +589,7 @@ module Aws::BedrockAgentCoreControl
     #   <p>A map of tag keys and values to assign to the code interpreter. Tags enable you to categorize your resources in different ways, for example, by purpose, owner, or environment.</p>
     #   @return [Hash<String, String>]
     class CreateCodeInterpreterRequest < Struct.new(
+      nil,
       :name,
       :description,
       :execution_role_arn,
@@ -594,6 +614,7 @@ module Aws::BedrockAgentCoreControl
     #   <p>The current status of the code interpreter.</p>
     #   @return [String]
     class CreateCodeInterpreterResponse < Struct.new(
+      nil,
       :code_interpreter_id,
       :code_interpreter_arn,
       :created_at,
@@ -637,6 +658,7 @@ module Aws::BedrockAgentCoreControl
     #   <p>A map of key-value pairs to associate with the gateway as metadata tags.</p>
     #   @return [Hash<String, String>]
     class CreateGatewayRequest < Struct.new(
+      nil,
       :name,
       :description,
       :client_token,
@@ -705,6 +727,7 @@ module Aws::BedrockAgentCoreControl
     #   <p>The level of detail in error messages returned when invoking the gateway.</p> <ul> <li> <p>If the value is <code>DEBUG</code>, granular exception messages are returned to help a user debug the gateway.</p> </li> <li> <p>If the value is omitted, a generic error message is returned to the end user.</p> </li> </ul>
     #   @return [String]
     class CreateGatewayResponse < Struct.new(
+      nil,
       :gateway_arn,
       :gateway_id,
       :gateway_url,
@@ -746,6 +769,7 @@ module Aws::BedrockAgentCoreControl
     #   <p>The credential provider configurations for the target. These configurations specify how the gateway authenticates with the target endpoint.</p>
     #   @return [Array<Types::CredentialProviderConfiguration>]
     class CreateGatewayTargetRequest < Struct.new(
+      nil,
       :gateway_identifier,
       :name,
       :description,
@@ -788,6 +812,7 @@ module Aws::BedrockAgentCoreControl
     #   <p>The credential provider configurations for the target.</p>
     #   @return [Array<Types::CredentialProviderConfiguration>]
     class CreateGatewayTargetResponse < Struct.new(
+      nil,
       :gateway_arn,
       :target_id,
       :created_at,
@@ -825,6 +850,7 @@ module Aws::BedrockAgentCoreControl
     #   <p>The memory strategies to use for this memory. Strategies define how information is extracted, processed, and consolidated.</p>
     #   @return [Array<Types::MemoryStrategyInput>]
     class CreateMemoryInput < Struct.new(
+      nil,
       :client_token,
       :name,
       :description,
@@ -841,6 +867,7 @@ module Aws::BedrockAgentCoreControl
     #   <p>The details of the created memory, including its ID, ARN, name, description, and configuration settings.</p>
     #   @return [Types::Memory]
     class CreateMemoryOutput < Struct.new(
+      nil,
       :memory,
       keyword_init: true
     )
@@ -857,6 +884,7 @@ module Aws::BedrockAgentCoreControl
     #   <p>The configuration settings for the OAuth2 provider, including client ID, client secret, and other vendor-specific settings.</p>
     #   @return [Types::Oauth2ProviderConfigInput]
     class CreateOauth2CredentialProviderRequest < Struct.new(
+      nil,
       :name,
       :credential_provider_vendor,
       :oauth2_provider_config_input,
@@ -875,6 +903,7 @@ module Aws::BedrockAgentCoreControl
     #   <p>The Amazon Resource Name (ARN) of the OAuth2 credential provider.</p>
     #   @return [String]
     class CreateOauth2CredentialProviderResponse < Struct.new(
+      nil,
       :client_secret_arn,
       :name,
       :credential_provider_arn,
@@ -890,6 +919,7 @@ module Aws::BedrockAgentCoreControl
     #   <p>The list of allowed OAuth2 return URLs for resources associated with this workload identity.</p>
     #   @return [Array<String>]
     class CreateWorkloadIdentityRequest < Struct.new(
+      nil,
       :name,
       :allowed_resource_oauth2_return_urls,
       keyword_init: true
@@ -907,6 +937,7 @@ module Aws::BedrockAgentCoreControl
     #   <p>The list of allowed OAuth2 return URLs for resources associated with this workload identity.</p>
     #   @return [Array<String>]
     class CreateWorkloadIdentityResponse < Struct.new(
+      nil,
       :name,
       :workload_identity_arn,
       :allowed_resource_oauth2_return_urls,
@@ -943,6 +974,7 @@ module Aws::BedrockAgentCoreControl
     #   <p>The credential provider. This field contains the specific configuration for the credential provider type.</p>
     #   @return [Types::CredentialProvider]
     class CredentialProviderConfiguration < Struct.new(
+      nil,
       :credential_provider_type,
       :credential_provider,
       keyword_init: true
@@ -1076,6 +1108,7 @@ module Aws::BedrockAgentCoreControl
     #   <p>Represents individual client IDs that are validated in the incoming JWT token validation process.</p>
     #   @return [Array<String>]
     class CustomJWTAuthorizerConfiguration < Struct.new(
+      nil,
       :discovery_url,
       :allowed_audience,
       :allowed_clients,
@@ -1098,6 +1131,7 @@ module Aws::BedrockAgentCoreControl
     #   <p>The configuration for the custom memory strategy.</p>
     #   @return [Types::CustomConfigurationInput]
     class CustomMemoryStrategyInput < Struct.new(
+      nil,
       :name,
       :description,
       :namespaces,
@@ -1118,6 +1152,7 @@ module Aws::BedrockAgentCoreControl
     #   <p>The client secret for the custom OAuth2 provider.</p>
     #   @return [String]
     class CustomOauth2ProviderConfigInput < Struct.new(
+      nil,
       :oauth_discovery,
       :client_id,
       :client_secret,
@@ -1131,6 +1166,7 @@ module Aws::BedrockAgentCoreControl
     #   <p>The OAuth2 discovery information for the custom provider.</p>
     #   @return [Types::Oauth2Discovery]
     class CustomOauth2ProviderConfigOutput < Struct.new(
+      nil,
       :oauth_discovery,
       keyword_init: true
     )
@@ -1141,6 +1177,7 @@ module Aws::BedrockAgentCoreControl
     # @!attribute message
     #   @return [String]
     class DecryptionFailure < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -1157,6 +1194,7 @@ module Aws::BedrockAgentCoreControl
     #   <p>A unique, case-sensitive identifier to ensure idempotency of the request.</p>
     #   @return [String]
     class DeleteAgentRuntimeEndpointRequest < Struct.new(
+      nil,
       :agent_runtime_id,
       :endpoint_name,
       :client_token,
@@ -1169,6 +1207,7 @@ module Aws::BedrockAgentCoreControl
     #   <p>The current status of the AgentCore Runtime endpoint deletion.</p>
     #   @return [String]
     class DeleteAgentRuntimeEndpointResponse < Struct.new(
+      nil,
       :status,
       keyword_init: true
     )
@@ -1179,6 +1218,7 @@ module Aws::BedrockAgentCoreControl
     #   <p>The unique identifier of the AgentCore Runtime to delete.</p>
     #   @return [String]
     class DeleteAgentRuntimeRequest < Struct.new(
+      nil,
       :agent_runtime_id,
       keyword_init: true
     )
@@ -1189,6 +1229,7 @@ module Aws::BedrockAgentCoreControl
     #   <p>The current status of the AgentCore Runtime deletion.</p>
     #   @return [String]
     class DeleteAgentRuntimeResponse < Struct.new(
+      nil,
       :status,
       keyword_init: true
     )
@@ -1199,6 +1240,7 @@ module Aws::BedrockAgentCoreControl
     #   <p>The name of the API key credential provider to delete.</p>
     #   @return [String]
     class DeleteApiKeyCredentialProviderRequest < Struct.new(
+      nil,
       :name,
       keyword_init: true
     )
@@ -1206,6 +1248,7 @@ module Aws::BedrockAgentCoreControl
     end
 
     class DeleteApiKeyCredentialProviderResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1218,6 +1261,7 @@ module Aws::BedrockAgentCoreControl
     #   <p>A unique, case-sensitive identifier to ensure idempotency of the request.</p>
     #   @return [String]
     class DeleteBrowserRequest < Struct.new(
+      nil,
       :browser_id,
       :client_token,
       keyword_init: true
@@ -1235,6 +1279,7 @@ module Aws::BedrockAgentCoreControl
     #   <p>The timestamp when the browser was last updated.</p>
     #   @return [Time]
     class DeleteBrowserResponse < Struct.new(
+      nil,
       :browser_id,
       :status,
       :last_updated_at,
@@ -1250,6 +1295,7 @@ module Aws::BedrockAgentCoreControl
     #   <p>A unique, case-sensitive identifier to ensure idempotency of the request.</p>
     #   @return [String]
     class DeleteCodeInterpreterRequest < Struct.new(
+      nil,
       :code_interpreter_id,
       :client_token,
       keyword_init: true
@@ -1267,6 +1313,7 @@ module Aws::BedrockAgentCoreControl
     #   <p>The timestamp when the code interpreter was last updated.</p>
     #   @return [Time]
     class DeleteCodeInterpreterResponse < Struct.new(
+      nil,
       :code_interpreter_id,
       :status,
       :last_updated_at,
@@ -1279,6 +1326,7 @@ module Aws::BedrockAgentCoreControl
     #   <p>The identifier of the gateway to delete.</p>
     #   @return [String]
     class DeleteGatewayRequest < Struct.new(
+      nil,
       :gateway_identifier,
       keyword_init: true
     )
@@ -1295,6 +1343,7 @@ module Aws::BedrockAgentCoreControl
     #   <p>The reasons for the current status of the gateway deletion.</p>
     #   @return [Array<String>]
     class DeleteGatewayResponse < Struct.new(
+      nil,
       :gateway_id,
       :status,
       :status_reasons,
@@ -1310,6 +1359,7 @@ module Aws::BedrockAgentCoreControl
     #   <p>The unique identifier of the gateway target to delete.</p>
     #   @return [String]
     class DeleteGatewayTargetRequest < Struct.new(
+      nil,
       :gateway_identifier,
       :target_id,
       keyword_init: true
@@ -1330,6 +1380,7 @@ module Aws::BedrockAgentCoreControl
     #   <p>The reasons for the current status of the gateway target deletion.</p>
     #   @return [Array<String>]
     class DeleteGatewayTargetResponse < Struct.new(
+      nil,
       :gateway_arn,
       :target_id,
       :status,
@@ -1346,6 +1397,7 @@ module Aws::BedrockAgentCoreControl
     #   <p>The unique identifier of the memory to delete.</p>
     #   @return [String]
     class DeleteMemoryInput < Struct.new(
+      nil,
       :client_token,
       :memory_id,
       keyword_init: true
@@ -1360,6 +1412,7 @@ module Aws::BedrockAgentCoreControl
     #   <p>The current status of the AgentCore Memory resource deletion.</p>
     #   @return [String]
     class DeleteMemoryOutput < Struct.new(
+      nil,
       :memory_id,
       :status,
       keyword_init: true
@@ -1372,6 +1425,7 @@ module Aws::BedrockAgentCoreControl
     #   <p>The unique identifier of the memory strategy to delete.</p>
     #   @return [String]
     class DeleteMemoryStrategyInput < Struct.new(
+      nil,
       :memory_strategy_id,
       keyword_init: true
     )
@@ -1382,6 +1436,7 @@ module Aws::BedrockAgentCoreControl
     #   <p>The name of the OAuth2 credential provider to delete.</p>
     #   @return [String]
     class DeleteOauth2CredentialProviderRequest < Struct.new(
+      nil,
       :name,
       keyword_init: true
     )
@@ -1389,6 +1444,7 @@ module Aws::BedrockAgentCoreControl
     end
 
     class DeleteOauth2CredentialProviderResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1398,6 +1454,7 @@ module Aws::BedrockAgentCoreControl
     #   <p>The name of the workload identity to delete.</p>
     #   @return [String]
     class DeleteWorkloadIdentityRequest < Struct.new(
+      nil,
       :name,
       keyword_init: true
     )
@@ -1405,6 +1462,7 @@ module Aws::BedrockAgentCoreControl
     end
 
     class DeleteWorkloadIdentityResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1414,6 +1472,7 @@ module Aws::BedrockAgentCoreControl
     # @!attribute message
     #   @return [String]
     class EncryptionFailure < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -1449,6 +1508,7 @@ module Aws::BedrockAgentCoreControl
     #   <p>The location of the API key credential. This field specifies where in the request the API key should be placed.</p>
     #   @return [String]
     class GatewayApiKeyCredentialProvider < Struct.new(
+      nil,
       :provider_arn,
       :credential_parameter_name,
       :credential_prefix,
@@ -1499,6 +1559,7 @@ module Aws::BedrockAgentCoreControl
     #   <p>The protocol type used by the gateway.</p>
     #   @return [String]
     class GatewaySummary < Struct.new(
+      nil,
       :gateway_id,
       :name,
       :status,
@@ -1519,6 +1580,7 @@ module Aws::BedrockAgentCoreControl
     #   <p>The name of the AgentCore Runtime endpoint to retrieve.</p>
     #   @return [String]
     class GetAgentRuntimeEndpointRequest < Struct.new(
+      nil,
       :agent_runtime_id,
       :endpoint_name,
       keyword_init: true
@@ -1560,6 +1622,7 @@ module Aws::BedrockAgentCoreControl
     #   <p>The unique identifier of the AgentCore Runtime endpoint.</p>
     #   @return [String]
     class GetAgentRuntimeEndpointResponse < Struct.new(
+      nil,
       :live_version,
       :target_version,
       :agent_runtime_endpoint_arn,
@@ -1583,6 +1646,7 @@ module Aws::BedrockAgentCoreControl
     #   <p>The version of the AgentCore Runtime to retrieve.</p>
     #   @return [String]
     class GetAgentRuntimeRequest < Struct.new(
+      nil,
       :agent_runtime_id,
       :agent_runtime_version,
       keyword_init: true
@@ -1639,6 +1703,7 @@ module Aws::BedrockAgentCoreControl
     #   <p>The current status of the AgentCore Runtime.</p>
     #   @return [String]
     class GetAgentRuntimeResponse < Struct.new(
+      nil,
       :agent_runtime_arn,
       :workload_identity_details,
       :agent_runtime_name,
@@ -1664,6 +1729,7 @@ module Aws::BedrockAgentCoreControl
     #   <p>The name of the API key credential provider to retrieve.</p>
     #   @return [String]
     class GetApiKeyCredentialProviderRequest < Struct.new(
+      nil,
       :name,
       keyword_init: true
     )
@@ -1686,6 +1752,7 @@ module Aws::BedrockAgentCoreControl
     #   <p>The timestamp when the API key credential provider was last updated.</p>
     #   @return [Time]
     class GetApiKeyCredentialProviderResponse < Struct.new(
+      nil,
       :api_key_secret_arn,
       :name,
       :credential_provider_arn,
@@ -1700,6 +1767,7 @@ module Aws::BedrockAgentCoreControl
     #   <p>The unique identifier of the browser to retrieve.</p>
     #   @return [String]
     class GetBrowserRequest < Struct.new(
+      nil,
       :browser_id,
       keyword_init: true
     )
@@ -1740,6 +1808,7 @@ module Aws::BedrockAgentCoreControl
     #   <p>The timestamp when the browser was last updated.</p>
     #   @return [Time]
     class GetBrowserResponse < Struct.new(
+      nil,
       :browser_id,
       :browser_arn,
       :name,
@@ -1760,6 +1829,7 @@ module Aws::BedrockAgentCoreControl
     #   <p>The unique identifier of the code interpreter to retrieve.</p>
     #   @return [String]
     class GetCodeInterpreterRequest < Struct.new(
+      nil,
       :code_interpreter_id,
       keyword_init: true
     )
@@ -1797,6 +1867,7 @@ module Aws::BedrockAgentCoreControl
     #   <p>The timestamp when the code interpreter was last updated.</p>
     #   @return [Time]
     class GetCodeInterpreterResponse < Struct.new(
+      nil,
       :code_interpreter_id,
       :code_interpreter_arn,
       :name,
@@ -1816,6 +1887,7 @@ module Aws::BedrockAgentCoreControl
     #   <p>The identifier of the gateway to retrieve.</p>
     #   @return [String]
     class GetGatewayRequest < Struct.new(
+      nil,
       :gateway_identifier,
       keyword_init: true
     )
@@ -1874,6 +1946,7 @@ module Aws::BedrockAgentCoreControl
     #   <p>The level of detail in error messages returned when invoking the gateway.</p> <ul> <li> <p>If the value is <code>DEBUG</code>, granular exception messages are returned to help a user debug the gateway.</p> </li> <li> <p>If the value is omitted, a generic error message is returned to the end user.</p> </li> </ul>
     #   @return [String]
     class GetGatewayResponse < Struct.new(
+      nil,
       :gateway_arn,
       :gateway_id,
       :gateway_url,
@@ -1903,6 +1976,7 @@ module Aws::BedrockAgentCoreControl
     #   <p>The unique identifier of the target to retrieve.</p>
     #   @return [String]
     class GetGatewayTargetRequest < Struct.new(
+      nil,
       :gateway_identifier,
       :target_id,
       keyword_init: true
@@ -1941,6 +2015,7 @@ module Aws::BedrockAgentCoreControl
     #   <p>The credential provider configurations for the gateway target.</p>
     #   @return [Array<Types::CredentialProviderConfiguration>]
     class GetGatewayTargetResponse < Struct.new(
+      nil,
       :gateway_arn,
       :target_id,
       :created_at,
@@ -1960,6 +2035,7 @@ module Aws::BedrockAgentCoreControl
     #   <p>The unique identifier of the memory to retrieve.</p>
     #   @return [String]
     class GetMemoryInput < Struct.new(
+      nil,
       :memory_id,
       keyword_init: true
     )
@@ -1970,6 +2046,7 @@ module Aws::BedrockAgentCoreControl
     #   <p>The retrieved AgentCore Memory resource details.</p>
     #   @return [Types::Memory]
     class GetMemoryOutput < Struct.new(
+      nil,
       :memory,
       keyword_init: true
     )
@@ -1980,6 +2057,7 @@ module Aws::BedrockAgentCoreControl
     #   <p>The name of the OAuth2 credential provider to retrieve.</p>
     #   @return [String]
     class GetOauth2CredentialProviderRequest < Struct.new(
+      nil,
       :name,
       keyword_init: true
     )
@@ -2008,6 +2086,7 @@ module Aws::BedrockAgentCoreControl
     #   <p>The timestamp when the OAuth2 credential provider was last updated.</p>
     #   @return [Time]
     class GetOauth2CredentialProviderResponse < Struct.new(
+      nil,
       :client_secret_arn,
       :name,
       :credential_provider_arn,
@@ -2024,6 +2103,7 @@ module Aws::BedrockAgentCoreControl
     #   <p>The unique identifier of the token vault to retrieve.</p>
     #   @return [String]
     class GetTokenVaultRequest < Struct.new(
+      nil,
       :token_vault_id,
       keyword_init: true
     )
@@ -2040,6 +2120,7 @@ module Aws::BedrockAgentCoreControl
     #   <p>The timestamp when the token vault was last modified.</p>
     #   @return [Time]
     class GetTokenVaultResponse < Struct.new(
+      nil,
       :token_vault_id,
       :kms_configuration,
       :last_modified_date,
@@ -2052,6 +2133,7 @@ module Aws::BedrockAgentCoreControl
     #   <p>The name of the workload identity to retrieve.</p>
     #   @return [String]
     class GetWorkloadIdentityRequest < Struct.new(
+      nil,
       :name,
       keyword_init: true
     )
@@ -2074,6 +2156,7 @@ module Aws::BedrockAgentCoreControl
     #   <p>The timestamp when the workload identity was last updated.</p>
     #   @return [Time]
     class GetWorkloadIdentityResponse < Struct.new(
+      nil,
       :name,
       :workload_identity_arn,
       :allowed_resource_oauth2_return_urls,
@@ -2092,6 +2175,7 @@ module Aws::BedrockAgentCoreControl
     #   <p>The client secret for the GitHub OAuth2 provider.</p>
     #   @return [String]
     class GithubOauth2ProviderConfigInput < Struct.new(
+      nil,
       :client_id,
       :client_secret,
       keyword_init: true
@@ -2104,6 +2188,7 @@ module Aws::BedrockAgentCoreControl
     #   <p>The OAuth2 discovery information for the GitHub provider.</p>
     #   @return [Types::Oauth2Discovery]
     class GithubOauth2ProviderConfigOutput < Struct.new(
+      nil,
       :oauth_discovery,
       keyword_init: true
     )
@@ -2118,6 +2203,7 @@ module Aws::BedrockAgentCoreControl
     #   <p>The client secret for the Google OAuth2 provider.</p>
     #   @return [String]
     class GoogleOauth2ProviderConfigInput < Struct.new(
+      nil,
       :client_id,
       :client_secret,
       keyword_init: true
@@ -2130,6 +2216,7 @@ module Aws::BedrockAgentCoreControl
     #   <p>The OAuth2 discovery information for the Google provider.</p>
     #   @return [Types::Oauth2Discovery]
     class GoogleOauth2ProviderConfigOutput < Struct.new(
+      nil,
       :oauth_discovery,
       keyword_init: true
     )
@@ -2140,6 +2227,7 @@ module Aws::BedrockAgentCoreControl
     # @!attribute message
     #   @return [String]
     class InternalServerException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -2154,6 +2242,7 @@ module Aws::BedrockAgentCoreControl
     #   <p>The Amazon Resource Name (ARN) of the KMS key.</p>
     #   @return [String]
     class KmsConfiguration < Struct.new(
+      nil,
       :key_type,
       :kms_key_arn,
       keyword_init: true
@@ -2171,6 +2260,7 @@ module Aws::BedrockAgentCoreControl
     #   <p>A token to retrieve the next page of results.</p>
     #   @return [String]
     class ListAgentRuntimeEndpointsRequest < Struct.new(
+      nil,
       :agent_runtime_id,
       :max_results,
       :next_token,
@@ -2186,6 +2276,7 @@ module Aws::BedrockAgentCoreControl
     #   <p>A token to retrieve the next page of results.</p>
     #   @return [String]
     class ListAgentRuntimeEndpointsResponse < Struct.new(
+      nil,
       :runtime_endpoints,
       :next_token,
       keyword_init: true
@@ -2203,6 +2294,7 @@ module Aws::BedrockAgentCoreControl
     #   <p>A token to retrieve the next page of results.</p>
     #   @return [String]
     class ListAgentRuntimeVersionsRequest < Struct.new(
+      nil,
       :agent_runtime_id,
       :max_results,
       :next_token,
@@ -2218,6 +2310,7 @@ module Aws::BedrockAgentCoreControl
     #   <p>A token to retrieve the next page of results.</p>
     #   @return [String]
     class ListAgentRuntimeVersionsResponse < Struct.new(
+      nil,
       :agent_runtimes,
       :next_token,
       keyword_init: true
@@ -2232,6 +2325,7 @@ module Aws::BedrockAgentCoreControl
     #   <p>A token to retrieve the next page of results.</p>
     #   @return [String]
     class ListAgentRuntimesRequest < Struct.new(
+      nil,
       :max_results,
       :next_token,
       keyword_init: true
@@ -2246,6 +2340,7 @@ module Aws::BedrockAgentCoreControl
     #   <p>A token to retrieve the next page of results.</p>
     #   @return [String]
     class ListAgentRuntimesResponse < Struct.new(
+      nil,
       :agent_runtimes,
       :next_token,
       keyword_init: true
@@ -2260,6 +2355,7 @@ module Aws::BedrockAgentCoreControl
     #   <p>Maximum number of results to return.</p>
     #   @return [Integer]
     class ListApiKeyCredentialProvidersRequest < Struct.new(
+      nil,
       :next_token,
       :max_results,
       keyword_init: true
@@ -2274,6 +2370,7 @@ module Aws::BedrockAgentCoreControl
     #   <p>Pagination token for the next page of results.</p>
     #   @return [String]
     class ListApiKeyCredentialProvidersResponse < Struct.new(
+      nil,
       :credential_providers,
       :next_token,
       keyword_init: true
@@ -2291,6 +2388,7 @@ module Aws::BedrockAgentCoreControl
     #   <p>The type of browsers to list. If not specified, all browser types are returned.</p>
     #   @return [String]
     class ListBrowsersRequest < Struct.new(
+      nil,
       :max_results,
       :next_token,
       :type,
@@ -2306,6 +2404,7 @@ module Aws::BedrockAgentCoreControl
     #   <p>A token to retrieve the next page of results.</p>
     #   @return [String]
     class ListBrowsersResponse < Struct.new(
+      nil,
       :browser_summaries,
       :next_token,
       keyword_init: true
@@ -2323,6 +2422,7 @@ module Aws::BedrockAgentCoreControl
     #   <p>The type of code interpreters to list.</p>
     #   @return [String]
     class ListCodeInterpretersRequest < Struct.new(
+      nil,
       :max_results,
       :next_token,
       :type,
@@ -2338,6 +2438,7 @@ module Aws::BedrockAgentCoreControl
     #   <p>A token to retrieve the next page of results.</p>
     #   @return [String]
     class ListCodeInterpretersResponse < Struct.new(
+      nil,
       :code_interpreter_summaries,
       :next_token,
       keyword_init: true
@@ -2355,6 +2456,7 @@ module Aws::BedrockAgentCoreControl
     #   <p>If the total number of results is greater than the <code>maxResults</code> value provided in the request, enter the token returned in the <code>nextToken</code> field in the response in this field to return the next batch of results.</p>
     #   @return [String]
     class ListGatewayTargetsRequest < Struct.new(
+      nil,
       :gateway_identifier,
       :max_results,
       :next_token,
@@ -2370,6 +2472,7 @@ module Aws::BedrockAgentCoreControl
     #   <p>If the total number of results is greater than the <code>maxResults</code> value provided in the request, use this token when making another request in the <code>nextToken</code> field to return the next batch of results.</p>
     #   @return [String]
     class ListGatewayTargetsResponse < Struct.new(
+      nil,
       :items,
       :next_token,
       keyword_init: true
@@ -2384,6 +2487,7 @@ module Aws::BedrockAgentCoreControl
     #   <p>If the total number of results is greater than the <code>maxResults</code> value provided in the request, enter the token returned in the <code>nextToken</code> field in the response in this field to return the next batch of results.</p>
     #   @return [String]
     class ListGatewaysRequest < Struct.new(
+      nil,
       :max_results,
       :next_token,
       keyword_init: true
@@ -2398,6 +2502,7 @@ module Aws::BedrockAgentCoreControl
     #   <p>If the total number of results is greater than the <code>maxResults</code> value provided in the request, use this token when making another request in the <code>nextToken</code> field to return the next batch of results.</p>
     #   @return [String]
     class ListGatewaysResponse < Struct.new(
+      nil,
       :items,
       :next_token,
       keyword_init: true
@@ -2412,6 +2517,7 @@ module Aws::BedrockAgentCoreControl
     #   <p>The token for the next set of results. Use the value returned in the previous response in the next request to retrieve the next set of results.</p>
     #   @return [String]
     class ListMemoriesInput < Struct.new(
+      nil,
       :max_results,
       :next_token,
       keyword_init: true
@@ -2426,6 +2532,7 @@ module Aws::BedrockAgentCoreControl
     #   <p>A token to retrieve the next page of results.</p>
     #   @return [String]
     class ListMemoriesOutput < Struct.new(
+      nil,
       :memories,
       :next_token,
       keyword_init: true
@@ -2440,6 +2547,7 @@ module Aws::BedrockAgentCoreControl
     #   <p>Maximum number of results to return.</p>
     #   @return [Integer]
     class ListOauth2CredentialProvidersRequest < Struct.new(
+      nil,
       :next_token,
       :max_results,
       keyword_init: true
@@ -2454,6 +2562,7 @@ module Aws::BedrockAgentCoreControl
     #   <p>Pagination token for the next page of results.</p>
     #   @return [String]
     class ListOauth2CredentialProvidersResponse < Struct.new(
+      nil,
       :credential_providers,
       :next_token,
       keyword_init: true
@@ -2465,6 +2574,7 @@ module Aws::BedrockAgentCoreControl
     #   <p>The Amazon Resource Name (ARN) of the resource for which you want to list tags.</p>
     #   @return [String]
     class ListTagsForResourceRequest < Struct.new(
+      nil,
       :resource_arn,
       keyword_init: true
     )
@@ -2475,6 +2585,7 @@ module Aws::BedrockAgentCoreControl
     #   <p>The tags associated with the resource.</p>
     #   @return [Hash<String, String>]
     class ListTagsForResourceResponse < Struct.new(
+      nil,
       :tags,
       keyword_init: true
     )
@@ -2488,6 +2599,7 @@ module Aws::BedrockAgentCoreControl
     #   <p>Maximum number of results to return.</p>
     #   @return [Integer]
     class ListWorkloadIdentitiesRequest < Struct.new(
+      nil,
       :next_token,
       :max_results,
       keyword_init: true
@@ -2502,6 +2614,7 @@ module Aws::BedrockAgentCoreControl
     #   <p>Pagination token for the next page of results.</p>
     #   @return [String]
     class ListWorkloadIdentitiesResponse < Struct.new(
+      nil,
       :workload_identities,
       :next_token,
       keyword_init: true
@@ -2520,6 +2633,7 @@ module Aws::BedrockAgentCoreControl
     #   <p>The search type for the Model Context Protocol gateway. This field specifies how the gateway handles search operations.</p>
     #   @return [String]
     class MCPGatewayConfiguration < Struct.new(
+      nil,
       :supported_versions,
       :instructions,
       :search_type,
@@ -2536,6 +2650,7 @@ module Aws::BedrockAgentCoreControl
     #   <p>The tool schema for the Lambda function. This schema defines the structure of the tools that the Lambda function provides.</p>
     #   @return [Types::ToolSchema]
     class McpLambdaTargetConfiguration < Struct.new(
+      nil,
       :lambda_arn,
       :tool_schema,
       keyword_init: true
@@ -2606,6 +2721,7 @@ module Aws::BedrockAgentCoreControl
     #   <p>The list of memory strategies associated with this memory.</p>
     #   @return [Array<Types::MemoryStrategy>]
     class Memory < Struct.new(
+      nil,
       :arn,
       :id,
       :name,
@@ -2652,6 +2768,7 @@ module Aws::BedrockAgentCoreControl
     #   <p>The current status of the memory strategy.</p>
     #   @return [String]
     class MemoryStrategy < Struct.new(
+      nil,
       :strategy_id,
       :name,
       :description,
@@ -2713,6 +2830,7 @@ module Aws::BedrockAgentCoreControl
     #   <p>The timestamp when the memory was last updated.</p>
     #   @return [Time]
     class MemorySummary < Struct.new(
+      nil,
       :arn,
       :id,
       :status,
@@ -2731,6 +2849,7 @@ module Aws::BedrockAgentCoreControl
     #   <p>The client secret for the Microsoft OAuth2 provider.</p>
     #   @return [String]
     class MicrosoftOauth2ProviderConfigInput < Struct.new(
+      nil,
       :client_id,
       :client_secret,
       keyword_init: true
@@ -2743,6 +2862,7 @@ module Aws::BedrockAgentCoreControl
     #   <p>The OAuth2 discovery information for the Microsoft provider.</p>
     #   @return [Types::Oauth2Discovery]
     class MicrosoftOauth2ProviderConfigOutput < Struct.new(
+      nil,
       :oauth_discovery,
       keyword_init: true
     )
@@ -2790,6 +2910,7 @@ module Aws::BedrockAgentCoreControl
     #   <p>The list of memory strategies to delete.</p>
     #   @return [Array<Types::DeleteMemoryStrategyInput>]
     class ModifyMemoryStrategies < Struct.new(
+      nil,
       :add_memory_strategies,
       :modify_memory_strategies,
       :delete_memory_strategies,
@@ -2812,6 +2933,7 @@ module Aws::BedrockAgentCoreControl
     #   <p>The updated configuration for the memory strategy.</p>
     #   @return [Types::ModifyStrategyConfiguration]
     class ModifyMemoryStrategyInput < Struct.new(
+      nil,
       :memory_strategy_id,
       :description,
       :namespaces,
@@ -2829,6 +2951,7 @@ module Aws::BedrockAgentCoreControl
     #   <p>The updated consolidation configuration.</p>
     #   @return [Types::ModifyConsolidationConfiguration]
     class ModifyStrategyConfiguration < Struct.new(
+      nil,
       :extraction,
       :consolidation,
       keyword_init: true
@@ -2844,6 +2967,7 @@ module Aws::BedrockAgentCoreControl
     #   <p>The network mode configuration for the AgentCore Runtime.</p>
     #   @return [Types::VpcConfig]
     class NetworkConfiguration < Struct.new(
+      nil,
       :network_mode,
       :network_mode_config,
       keyword_init: true
@@ -2862,6 +2986,7 @@ module Aws::BedrockAgentCoreControl
     #   <p>The custom parameters for the OAuth credential provider. These parameters provide additional configuration for the OAuth authentication process.</p>
     #   @return [Hash<String, String>]
     class OAuthCredentialProvider < Struct.new(
+      nil,
       :provider_arn,
       :scopes,
       :custom_parameters,
@@ -2884,6 +3009,7 @@ module Aws::BedrockAgentCoreControl
     #   <p>The supported response types for the OAuth2 authorization server.</p>
     #   @return [Array<String>]
     class Oauth2AuthorizationServerMetadata < Struct.new(
+      nil,
       :issuer,
       :authorization_endpoint,
       :token_endpoint,
@@ -2910,6 +3036,7 @@ module Aws::BedrockAgentCoreControl
     #   <p>The timestamp when the OAuth2 credential provider was last updated.</p>
     #   @return [Time]
     class Oauth2CredentialProviderItem < Struct.new(
+      nil,
       :name,
       :credential_provider_vendor,
       :credential_provider_arn,
@@ -3025,6 +3152,7 @@ module Aws::BedrockAgentCoreControl
     #   <p>The server protocol for the agent runtime. This field specifies which protocol the agent runtime uses to communicate with clients.</p>
     #   @return [String]
     class ProtocolConfiguration < Struct.new(
+      nil,
       :server_protocol,
       keyword_init: true
     )
@@ -3039,6 +3167,7 @@ module Aws::BedrockAgentCoreControl
     #   <p>The Amazon S3 location where browser recordings are stored. This location contains the recorded browser sessions.</p>
     #   @return [Types::S3Location]
     class RecordingConfig < Struct.new(
+      nil,
       :enabled,
       :s3_location,
       keyword_init: true
@@ -3070,6 +3199,7 @@ module Aws::BedrockAgentCoreControl
     # @!attribute message
     #   @return [String]
     class ResourceLimitExceededException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -3080,6 +3210,7 @@ module Aws::BedrockAgentCoreControl
     # @!attribute message
     #   @return [String]
     class ResourceNotFoundException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -3094,6 +3225,7 @@ module Aws::BedrockAgentCoreControl
     #   <p>The account ID of the Amazon S3 bucket owner. This ID is used for cross-account access to the bucket.</p>
     #   @return [String]
     class S3Configuration < Struct.new(
+      nil,
       :uri,
       :bucket_owner_account_id,
       keyword_init: true
@@ -3109,6 +3241,7 @@ module Aws::BedrockAgentCoreControl
     #   <p>The prefix for objects in the Amazon S3 bucket. This prefix is added to the object keys to organize the data.</p>
     #   @return [String]
     class S3Location < Struct.new(
+      nil,
       :bucket,
       :prefix,
       keyword_init: true
@@ -3124,6 +3257,7 @@ module Aws::BedrockAgentCoreControl
     #   <p>The client secret for the Salesforce OAuth2 provider.</p>
     #   @return [String]
     class SalesforceOauth2ProviderConfigInput < Struct.new(
+      nil,
       :client_id,
       :client_secret,
       keyword_init: true
@@ -3136,6 +3270,7 @@ module Aws::BedrockAgentCoreControl
     #   <p>The OAuth2 discovery information for the Salesforce provider.</p>
     #   @return [Types::Oauth2Discovery]
     class SalesforceOauth2ProviderConfigOutput < Struct.new(
+      nil,
       :oauth_discovery,
       keyword_init: true
     )
@@ -3159,6 +3294,7 @@ module Aws::BedrockAgentCoreControl
     #   <p>The description of the schema definition. This description provides information about the purpose and usage of the schema.</p>
     #   @return [String]
     class SchemaDefinition < Struct.new(
+      nil,
       :type,
       :properties,
       :required,
@@ -3174,6 +3310,7 @@ module Aws::BedrockAgentCoreControl
     #   <p>The Amazon Resource Name (ARN) of the secret in AWS Secrets Manager.</p>
     #   @return [String]
     class Secret < Struct.new(
+      nil,
       :secret_arn,
       keyword_init: true
     )
@@ -3188,6 +3325,7 @@ module Aws::BedrockAgentCoreControl
     #   <p>The model ID to use for semantic consolidation.</p>
     #   @return [String]
     class SemanticConsolidationOverride < Struct.new(
+      nil,
       :append_to_prompt,
       :model_id,
       keyword_init: true
@@ -3203,6 +3341,7 @@ module Aws::BedrockAgentCoreControl
     #   <p>The model ID to use for semantic extraction.</p>
     #   @return [String]
     class SemanticExtractionOverride < Struct.new(
+      nil,
       :append_to_prompt,
       :model_id,
       keyword_init: true
@@ -3221,6 +3360,7 @@ module Aws::BedrockAgentCoreControl
     #   <p>The namespaces associated with the semantic memory strategy.</p>
     #   @return [Array<String>]
     class SemanticMemoryStrategyInput < Struct.new(
+      nil,
       :name,
       :description,
       :namespaces,
@@ -3237,6 +3377,7 @@ module Aws::BedrockAgentCoreControl
     #   <p>The consolidation configuration for a semantic override.</p>
     #   @return [Types::SemanticOverrideConsolidationConfigurationInput]
     class SemanticOverrideConfigurationInput < Struct.new(
+      nil,
       :extraction,
       :consolidation,
       keyword_init: true
@@ -3252,6 +3393,7 @@ module Aws::BedrockAgentCoreControl
     #   <p>The model ID to use for semantic consolidation.</p>
     #   @return [String]
     class SemanticOverrideConsolidationConfigurationInput < Struct.new(
+      nil,
       :append_to_prompt,
       :model_id,
       keyword_init: true
@@ -3267,6 +3409,7 @@ module Aws::BedrockAgentCoreControl
     #   <p>The model ID to use for semantic extraction.</p>
     #   @return [String]
     class SemanticOverrideExtractionConfigurationInput < Struct.new(
+      nil,
       :append_to_prompt,
       :model_id,
       keyword_init: true
@@ -3278,6 +3421,7 @@ module Aws::BedrockAgentCoreControl
     # @!attribute message
     #   @return [String]
     class ServiceException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -3288,6 +3432,7 @@ module Aws::BedrockAgentCoreControl
     # @!attribute message
     #   @return [String]
     class ServiceQuotaExceededException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -3301,6 +3446,7 @@ module Aws::BedrockAgentCoreControl
     #   <p>The KMS configuration for the token vault, including the key type and KMS key ARN.</p>
     #   @return [Types::KmsConfiguration]
     class SetTokenVaultCMKRequest < Struct.new(
+      nil,
       :token_vault_id,
       :kms_configuration,
       keyword_init: true
@@ -3318,6 +3464,7 @@ module Aws::BedrockAgentCoreControl
     #   <p>The timestamp when the token vault was last modified.</p>
     #   @return [Time]
     class SetTokenVaultCMKResponse < Struct.new(
+      nil,
       :token_vault_id,
       :kms_configuration,
       :last_modified_date,
@@ -3334,6 +3481,7 @@ module Aws::BedrockAgentCoreControl
     #   <p>The client secret for the Slack OAuth2 provider.</p>
     #   @return [String]
     class SlackOauth2ProviderConfigInput < Struct.new(
+      nil,
       :client_id,
       :client_secret,
       keyword_init: true
@@ -3346,6 +3494,7 @@ module Aws::BedrockAgentCoreControl
     #   <p>The OAuth2 discovery information for the Slack provider.</p>
     #   @return [Types::Oauth2Discovery]
     class SlackOauth2ProviderConfigOutput < Struct.new(
+      nil,
       :oauth_discovery,
       keyword_init: true
     )
@@ -3363,6 +3512,7 @@ module Aws::BedrockAgentCoreControl
     #   <p>The consolidation configuration for the memory strategy.</p>
     #   @return [Types::ConsolidationConfiguration]
     class StrategyConfiguration < Struct.new(
+      nil,
       :type,
       :extraction,
       :consolidation,
@@ -3379,6 +3529,7 @@ module Aws::BedrockAgentCoreControl
     #   <p>The model ID to use for summary consolidation.</p>
     #   @return [String]
     class SummaryConsolidationOverride < Struct.new(
+      nil,
       :append_to_prompt,
       :model_id,
       keyword_init: true
@@ -3397,6 +3548,7 @@ module Aws::BedrockAgentCoreControl
     #   <p>The namespaces associated with the summary memory strategy.</p>
     #   @return [Array<String>]
     class SummaryMemoryStrategyInput < Struct.new(
+      nil,
       :name,
       :description,
       :namespaces,
@@ -3410,6 +3562,7 @@ module Aws::BedrockAgentCoreControl
     #   <p>The consolidation configuration for a summary override.</p>
     #   @return [Types::SummaryOverrideConsolidationConfigurationInput]
     class SummaryOverrideConfigurationInput < Struct.new(
+      nil,
       :consolidation,
       keyword_init: true
     )
@@ -3424,6 +3577,7 @@ module Aws::BedrockAgentCoreControl
     #   <p>The model ID to use for summary consolidation.</p>
     #   @return [String]
     class SummaryOverrideConsolidationConfigurationInput < Struct.new(
+      nil,
       :append_to_prompt,
       :model_id,
       keyword_init: true
@@ -3438,6 +3592,7 @@ module Aws::BedrockAgentCoreControl
     #   <p>The tags to add to the resource. A tag is a key-value pair.</p>
     #   @return [Hash<String, String>]
     class TagResourceRequest < Struct.new(
+      nil,
       :resource_arn,
       :tags,
       keyword_init: true
@@ -3446,6 +3601,7 @@ module Aws::BedrockAgentCoreControl
     end
 
     class TagResourceResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -3486,6 +3642,7 @@ module Aws::BedrockAgentCoreControl
     #   <p>The timestamp when the target was last updated.</p>
     #   @return [Time]
     class TargetSummary < Struct.new(
+      nil,
       :target_id,
       :name,
       :status,
@@ -3501,6 +3658,7 @@ module Aws::BedrockAgentCoreControl
     # @!attribute message
     #   @return [String]
     class ThrottledException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -3511,6 +3669,7 @@ module Aws::BedrockAgentCoreControl
     # @!attribute message
     #   @return [String]
     class ThrottlingException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -3531,6 +3690,7 @@ module Aws::BedrockAgentCoreControl
     #   <p>The output schema for the tool. This schema defines the structure of the output that the tool produces.</p>
     #   @return [Types::SchemaDefinition]
     class ToolDefinition < Struct.new(
+      nil,
       :name,
       :description,
       :input_schema,
@@ -3564,6 +3724,7 @@ module Aws::BedrockAgentCoreControl
     # @!attribute message
     #   @return [String]
     class UnauthorizedException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -3577,6 +3738,7 @@ module Aws::BedrockAgentCoreControl
     #   <p>The tag keys of the tags to remove from the resource.</p>
     #   @return [Array<String>]
     class UntagResourceRequest < Struct.new(
+      nil,
       :resource_arn,
       :tag_keys,
       keyword_init: true
@@ -3585,6 +3747,7 @@ module Aws::BedrockAgentCoreControl
     end
 
     class UntagResourceResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -3606,6 +3769,7 @@ module Aws::BedrockAgentCoreControl
     #   <p>A unique, case-sensitive identifier to ensure idempotency of the request.</p>
     #   @return [String]
     class UpdateAgentRuntimeEndpointRequest < Struct.new(
+      nil,
       :agent_runtime_id,
       :endpoint_name,
       :agent_runtime_version,
@@ -3638,6 +3802,7 @@ module Aws::BedrockAgentCoreControl
     #   <p>The timestamp when the AgentCore Runtime endpoint was last updated.</p>
     #   @return [Time]
     class UpdateAgentRuntimeEndpointResponse < Struct.new(
+      nil,
       :live_version,
       :target_version,
       :agent_runtime_endpoint_arn,
@@ -3681,6 +3846,7 @@ module Aws::BedrockAgentCoreControl
     #   <p>The updated configuration for HTTP request headers that will be passed through to the runtime.</p>
     #   @return [Types::RequestHeaderConfiguration]
     class UpdateAgentRuntimeRequest < Struct.new(
+      nil,
       :agent_runtime_id,
       :description,
       :agent_runtime_artifact,
@@ -3718,6 +3884,7 @@ module Aws::BedrockAgentCoreControl
     #   <p>The current status of the updated AgentCore Runtime.</p>
     #   @return [String]
     class UpdateAgentRuntimeResponse < Struct.new(
+      nil,
       :agent_runtime_arn,
       :agent_runtime_id,
       :workload_identity_details,
@@ -3737,6 +3904,7 @@ module Aws::BedrockAgentCoreControl
     #   <p>The new API key to use for authentication. This value replaces the existing API key and is encrypted and stored securely.</p>
     #   @return [String]
     class UpdateApiKeyCredentialProviderRequest < Struct.new(
+      nil,
       :name,
       :api_key,
       keyword_init: true
@@ -3760,6 +3928,7 @@ module Aws::BedrockAgentCoreControl
     #   <p>The timestamp when the API key credential provider was last updated.</p>
     #   @return [Time]
     class UpdateApiKeyCredentialProviderResponse < Struct.new(
+      nil,
       :api_key_secret_arn,
       :name,
       :credential_provider_arn,
@@ -3801,6 +3970,7 @@ module Aws::BedrockAgentCoreControl
     #   <p>The level of detail in error messages returned when invoking the gateway.</p> <ul> <li> <p>If the value is <code>DEBUG</code>, granular exception messages are returned to help a user debug the gateway.</p> </li> <li> <p>If the value is omitted, a generic error message is returned to the end user.</p> </li> </ul>
     #   @return [String]
     class UpdateGatewayRequest < Struct.new(
+      nil,
       :gateway_identifier,
       :name,
       :description,
@@ -3868,6 +4038,7 @@ module Aws::BedrockAgentCoreControl
     #   <p>The level of detail in error messages returned when invoking the gateway.</p> <ul> <li> <p>If the value is <code>DEBUG</code>, granular exception messages are returned to help a user debug the gateway.</p> </li> <li> <p>If the value is omitted, a generic error message is returned to the end user.</p> </li> </ul>
     #   @return [String]
     class UpdateGatewayResponse < Struct.new(
+      nil,
       :gateway_arn,
       :gateway_id,
       :gateway_url,
@@ -3909,6 +4080,7 @@ module Aws::BedrockAgentCoreControl
     #   <p>The updated credential provider configurations for the gateway target.</p>
     #   @return [Array<Types::CredentialProviderConfiguration>]
     class UpdateGatewayTargetRequest < Struct.new(
+      nil,
       :gateway_identifier,
       :target_id,
       :name,
@@ -3951,6 +4123,7 @@ module Aws::BedrockAgentCoreControl
     #   <p>The updated credential provider configurations for the gateway target.</p>
     #   @return [Array<Types::CredentialProviderConfiguration>]
     class UpdateGatewayTargetResponse < Struct.new(
+      nil,
       :gateway_arn,
       :target_id,
       :created_at,
@@ -3985,6 +4158,7 @@ module Aws::BedrockAgentCoreControl
     #   <p>The memory strategies to add, modify, or delete.</p>
     #   @return [Types::ModifyMemoryStrategies]
     class UpdateMemoryInput < Struct.new(
+      nil,
       :client_token,
       :memory_id,
       :description,
@@ -4000,6 +4174,7 @@ module Aws::BedrockAgentCoreControl
     #   <p>The updated AgentCore Memory resource details.</p>
     #   @return [Types::Memory]
     class UpdateMemoryOutput < Struct.new(
+      nil,
       :memory,
       keyword_init: true
     )
@@ -4016,6 +4191,7 @@ module Aws::BedrockAgentCoreControl
     #   <p>The configuration input for the OAuth2 provider.</p>
     #   @return [Types::Oauth2ProviderConfigInput]
     class UpdateOauth2CredentialProviderRequest < Struct.new(
+      nil,
       :name,
       :credential_provider_vendor,
       :oauth2_provider_config_input,
@@ -4046,6 +4222,7 @@ module Aws::BedrockAgentCoreControl
     #   <p>The timestamp when the OAuth2 credential provider was last updated.</p>
     #   @return [Time]
     class UpdateOauth2CredentialProviderResponse < Struct.new(
+      nil,
       :client_secret_arn,
       :name,
       :credential_provider_vendor,
@@ -4065,6 +4242,7 @@ module Aws::BedrockAgentCoreControl
     #   <p>The new list of allowed OAuth2 return URLs for resources associated with this workload identity. This list replaces the existing list.</p>
     #   @return [Array<String>]
     class UpdateWorkloadIdentityRequest < Struct.new(
+      nil,
       :name,
       :allowed_resource_oauth2_return_urls,
       keyword_init: true
@@ -4088,6 +4266,7 @@ module Aws::BedrockAgentCoreControl
     #   <p>The timestamp when the workload identity was last updated.</p>
     #   @return [Time]
     class UpdateWorkloadIdentityResponse < Struct.new(
+      nil,
       :name,
       :workload_identity_arn,
       :allowed_resource_oauth2_return_urls,
@@ -4106,6 +4285,7 @@ module Aws::BedrockAgentCoreControl
     #   <p>The model ID to use for user preference consolidation.</p>
     #   @return [String]
     class UserPreferenceConsolidationOverride < Struct.new(
+      nil,
       :append_to_prompt,
       :model_id,
       keyword_init: true
@@ -4121,6 +4301,7 @@ module Aws::BedrockAgentCoreControl
     #   <p>The model ID to use for user preference extraction.</p>
     #   @return [String]
     class UserPreferenceExtractionOverride < Struct.new(
+      nil,
       :append_to_prompt,
       :model_id,
       keyword_init: true
@@ -4139,6 +4320,7 @@ module Aws::BedrockAgentCoreControl
     #   <p>The namespaces associated with the user preference memory strategy.</p>
     #   @return [Array<String>]
     class UserPreferenceMemoryStrategyInput < Struct.new(
+      nil,
       :name,
       :description,
       :namespaces,
@@ -4155,6 +4337,7 @@ module Aws::BedrockAgentCoreControl
     #   <p>The consolidation configuration for a user preference override.</p>
     #   @return [Types::UserPreferenceOverrideConsolidationConfigurationInput]
     class UserPreferenceOverrideConfigurationInput < Struct.new(
+      nil,
       :extraction,
       :consolidation,
       keyword_init: true
@@ -4170,6 +4353,7 @@ module Aws::BedrockAgentCoreControl
     #   <p>The model ID to use for user preference consolidation.</p>
     #   @return [String]
     class UserPreferenceOverrideConsolidationConfigurationInput < Struct.new(
+      nil,
       :append_to_prompt,
       :model_id,
       keyword_init: true
@@ -4185,6 +4369,7 @@ module Aws::BedrockAgentCoreControl
     #   <p>The model ID to use for user preference extraction.</p>
     #   @return [String]
     class UserPreferenceOverrideExtractionConfigurationInput < Struct.new(
+      nil,
       :append_to_prompt,
       :model_id,
       keyword_init: true
@@ -4200,6 +4385,7 @@ module Aws::BedrockAgentCoreControl
     # @!attribute field_list
     #   @return [Array<Types::ValidationExceptionField>]
     class ValidationException < Struct.new(
+      nil,
       :message,
       :reason,
       :field_list,
@@ -4216,6 +4402,7 @@ module Aws::BedrockAgentCoreControl
     #   <p>A message describing why this field failed validation.</p>
     #   @return [String]
     class ValidationExceptionField < Struct.new(
+      nil,
       :name,
       :message,
       keyword_init: true
@@ -4231,6 +4418,7 @@ module Aws::BedrockAgentCoreControl
     #   <p>The subnets associated with the VPC configuration.</p>
     #   @return [Array<String>]
     class VpcConfig < Struct.new(
+      nil,
       :security_groups,
       :subnets,
       keyword_init: true
@@ -4243,6 +4431,7 @@ module Aws::BedrockAgentCoreControl
     #   <p>The ARN associated with the workload identity.</p>
     #   @return [String]
     class WorkloadIdentityDetails < Struct.new(
+      nil,
       :workload_identity_arn,
       keyword_init: true
     )
@@ -4257,6 +4446,7 @@ module Aws::BedrockAgentCoreControl
     #   <p>The Amazon Resource Name (ARN) of the workload identity.</p>
     #   @return [String]
     class WorkloadIdentityType < Struct.new(
+      nil,
       :name,
       :workload_identity_arn,
       keyword_init: true

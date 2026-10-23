@@ -29,6 +29,7 @@ module Aws::PcaConnectorAd
     #   <p>The date and time that the Access Control Entry was updated.</p>
     #   @return [Time]
     class AccessControlEntry < Struct.new(
+      nil,
       :group_display_name,
       :group_security_identifier,
       :access_rights,
@@ -63,6 +64,7 @@ module Aws::PcaConnectorAd
     #   <p>The date and time that the Access Control Entry was updated.</p>
     #   @return [Time]
     class AccessControlEntrySummary < Struct.new(
+      nil,
       :group_display_name,
       :group_security_identifier,
       :access_rights,
@@ -82,6 +84,7 @@ module Aws::PcaConnectorAd
     # @!attribute message
     #   @return [String]
     class AccessDeniedException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -99,6 +102,7 @@ module Aws::PcaConnectorAd
     #            The Active Directory group must be allowed to enroll to allow autoenrollment</p>
     #   @return [String]
     class AccessRights < Struct.new(
+      nil,
       :enroll,
       :auto_enroll,
       keyword_init: true
@@ -114,6 +118,7 @@ module Aws::PcaConnectorAd
     #   <p>Application policies describe what the certificate can be used for.</p>
     #   @return [Array<Types::ApplicationPolicy>]
     class ApplicationPolicies < Struct.new(
+      nil,
       :critical,
       :policies,
       keyword_init: true
@@ -164,6 +169,7 @@ module Aws::PcaConnectorAd
     #            certificate will be requested.</p>
     #   @return [Types::ValidityPeriod]
     class CertificateValidity < Struct.new(
+      nil,
       :validity_period,
       :renewal_period,
       keyword_init: true
@@ -182,6 +188,7 @@ module Aws::PcaConnectorAd
     #   <p>The resource type, which can be one of <code>Connector</code>, <code>Template</code>, <code>TemplateGroupAccessControlEntry</code>, <code>ServicePrincipalName</code>, or <code>DirectoryRegistration</code>.</p>
     #   @return [String]
     class ConflictException < Struct.new(
+      nil,
       :message,
       :resource_id,
       :resource_type,
@@ -222,6 +229,7 @@ module Aws::PcaConnectorAd
     #   <p>The date and time that the connector was updated.</p>
     #   @return [Time]
     class Connector < Struct.new(
+      nil,
       :arn,
       :certificate_authority_arn,
       :certificate_enrollment_policy_server_endpoint,
@@ -267,6 +275,7 @@ module Aws::PcaConnectorAd
     #   <p>The date and time that the connector was updated.</p>
     #   @return [Time]
     class ConnectorSummary < Struct.new(
+      nil,
       :arn,
       :certificate_authority_arn,
       :certificate_enrollment_policy_server_endpoint,
@@ -297,6 +306,7 @@ module Aws::PcaConnectorAd
     #   <p>Metadata assigned to a connector consisting of a key-value pair.</p>
     #   @return [Hash<String, String>]
     class CreateConnectorRequest < Struct.new(
+      nil,
       :directory_id,
       :certificate_authority_arn,
       :vpc_information,
@@ -311,6 +321,7 @@ module Aws::PcaConnectorAd
     #   <p>If successful, the Amazon Resource Name (ARN) of the connector for Active Directory.</p>
     #   @return [String]
     class CreateConnectorResponse < Struct.new(
+      nil,
       :connector_arn,
       keyword_init: true
     )
@@ -327,6 +338,7 @@ module Aws::PcaConnectorAd
     #   <p>Metadata assigned to a directory registration consisting of a key-value pair.</p>
     #   @return [Hash<String, String>]
     class CreateDirectoryRegistrationRequest < Struct.new(
+      nil,
       :directory_id,
       :client_token,
       :tags,
@@ -339,6 +351,7 @@ module Aws::PcaConnectorAd
     #   <p>The Amazon Resource Name (ARN) that was returned when you called <a href="https://docs.aws.amazon.com/pca-connector-ad/latest/APIReference/API_CreateDirectoryRegistration.html">CreateDirectoryRegistration</a>.</p>
     #   @return [String]
     class CreateDirectoryRegistrationResponse < Struct.new(
+      nil,
       :directory_registration_arn,
       keyword_init: true
     )
@@ -355,6 +368,7 @@ module Aws::PcaConnectorAd
     #   <p>Idempotency token.</p>
     #   @return [String]
     class CreateServicePrincipalNameRequest < Struct.new(
+      nil,
       :directory_registration_arn,
       :connector_arn,
       :client_token,
@@ -381,6 +395,7 @@ module Aws::PcaConnectorAd
     #   <p>Idempotency token.</p>
     #   @return [String]
     class CreateTemplateGroupAccessControlEntryRequest < Struct.new(
+      nil,
       :template_arn,
       :group_security_identifier,
       :group_display_name,
@@ -409,6 +424,7 @@ module Aws::PcaConnectorAd
     #   <p>Metadata assigned to a template consisting of a key-value pair.</p>
     #   @return [Hash<String, String>]
     class CreateTemplateRequest < Struct.new(
+      nil,
       :connector_arn,
       :name,
       :definition,
@@ -423,6 +439,7 @@ module Aws::PcaConnectorAd
     #   <p>If successful, the Amazon Resource Name (ARN) of the template.</p>
     #   @return [String]
     class CreateTemplateResponse < Struct.new(
+      nil,
       :template_arn,
       keyword_init: true
     )
@@ -433,6 +450,7 @@ module Aws::PcaConnectorAd
     #   <p> The Amazon Resource Name (ARN) that was returned when you called <a href="https://docs.aws.amazon.com/pca-connector-ad/latest/APIReference/API_CreateConnector.html">CreateConnector</a>.</p>
     #   @return [String]
     class DeleteConnectorRequest < Struct.new(
+      nil,
       :connector_arn,
       keyword_init: true
     )
@@ -443,6 +461,7 @@ module Aws::PcaConnectorAd
     #   <p>The Amazon Resource Name (ARN) that was returned when you called <a href="https://docs.aws.amazon.com/pca-connector-ad/latest/APIReference/API_CreateDirectoryRegistration.html">CreateDirectoryRegistration</a>.</p>
     #   @return [String]
     class DeleteDirectoryRegistrationRequest < Struct.new(
+      nil,
       :directory_registration_arn,
       keyword_init: true
     )
@@ -456,6 +475,7 @@ module Aws::PcaConnectorAd
     #   <p> The Amazon Resource Name (ARN) that was returned when you called <a href="https://docs.aws.amazon.com/pca-connector-ad/latest/APIReference/API_CreateConnector.html">CreateConnector</a>.</p>
     #   @return [String]
     class DeleteServicePrincipalNameRequest < Struct.new(
+      nil,
       :directory_registration_arn,
       :connector_arn,
       keyword_init: true
@@ -471,6 +491,7 @@ module Aws::PcaConnectorAd
     #            "S-".</p>
     #   @return [String]
     class DeleteTemplateGroupAccessControlEntryRequest < Struct.new(
+      nil,
       :template_arn,
       :group_security_identifier,
       keyword_init: true
@@ -482,6 +503,7 @@ module Aws::PcaConnectorAd
     #   <p>The Amazon Resource Name (ARN) that was returned when you called <a href="https://docs.aws.amazon.com/pca-connector-ad/latest/APIReference/API_CreateTemplate.html">CreateTemplate</a>.</p>
     #   @return [String]
     class DeleteTemplateRequest < Struct.new(
+      nil,
       :template_arn,
       keyword_init: true
     )
@@ -511,6 +533,7 @@ module Aws::PcaConnectorAd
     #   <p>The date and time that the directory registration was updated.</p>
     #   @return [Time]
     class DirectoryRegistration < Struct.new(
+      nil,
       :arn,
       :directory_id,
       :status,
@@ -544,6 +567,7 @@ module Aws::PcaConnectorAd
     #   <p>The date and time that the directory registration was updated.</p>
     #   @return [Time]
     class DirectoryRegistrationSummary < Struct.new(
+      nil,
       :arn,
       :directory_id,
       :status,
@@ -576,6 +600,7 @@ module Aws::PcaConnectorAd
     #   <p>Allow renewal using the same key.</p>
     #   @return [Boolean]
     class EnrollmentFlagsV2 < Struct.new(
+      nil,
       :include_symmetric_algorithms,
       :user_interaction_required,
       :remove_invalid_certificate_from_personal_store,
@@ -607,6 +632,7 @@ module Aws::PcaConnectorAd
     #   <p>Allow renewal using the same key.</p>
     #   @return [Boolean]
     class EnrollmentFlagsV3 < Struct.new(
+      nil,
       :include_symmetric_algorithms,
       :user_interaction_required,
       :remove_invalid_certificate_from_personal_store,
@@ -638,6 +664,7 @@ module Aws::PcaConnectorAd
     #   <p>Allow renewal using the same key.</p>
     #   @return [Boolean]
     class EnrollmentFlagsV4 < Struct.new(
+      nil,
       :include_symmetric_algorithms,
       :user_interaction_required,
       :remove_invalid_certificate_from_personal_store,
@@ -657,6 +684,7 @@ module Aws::PcaConnectorAd
     #   <p>Application policies specify what the certificate is used for and its purpose. </p>
     #   @return [Types::ApplicationPolicies]
     class ExtensionsV2 < Struct.new(
+      nil,
       :key_usage,
       :application_policies,
       keyword_init: true
@@ -673,6 +701,7 @@ module Aws::PcaConnectorAd
     #   <p>Application policies specify what the certificate is used for and its purpose.</p>
     #   @return [Types::ApplicationPolicies]
     class ExtensionsV3 < Struct.new(
+      nil,
       :key_usage,
       :application_policies,
       keyword_init: true
@@ -689,6 +718,7 @@ module Aws::PcaConnectorAd
     #   <p>Application policies specify what the certificate is used for and its purpose.</p>
     #   @return [Types::ApplicationPolicies]
     class ExtensionsV4 < Struct.new(
+      nil,
       :key_usage,
       :application_policies,
       keyword_init: true
@@ -707,6 +737,7 @@ module Aws::PcaConnectorAd
     #            machines. Set to FALSE if the template is for users.</p>
     #   @return [Boolean]
     class GeneralFlagsV2 < Struct.new(
+      nil,
       :auto_enrollment,
       :machine_type,
       keyword_init: true
@@ -725,6 +756,7 @@ module Aws::PcaConnectorAd
     #            machines. Set to FALSE if the template is for users</p>
     #   @return [Boolean]
     class GeneralFlagsV3 < Struct.new(
+      nil,
       :auto_enrollment,
       :machine_type,
       keyword_init: true
@@ -743,6 +775,7 @@ module Aws::PcaConnectorAd
     #            machines. Set to FALSE if the template is for users</p>
     #   @return [Boolean]
     class GeneralFlagsV4 < Struct.new(
+      nil,
       :auto_enrollment,
       :machine_type,
       keyword_init: true
@@ -754,6 +787,7 @@ module Aws::PcaConnectorAd
     #   <p> The Amazon Resource Name (ARN) that was returned when you called <a href="https://docs.aws.amazon.com/pca-connector-ad/latest/APIReference/API_CreateConnector.html">CreateConnector</a>.</p>
     #   @return [String]
     class GetConnectorRequest < Struct.new(
+      nil,
       :connector_arn,
       keyword_init: true
     )
@@ -764,6 +798,7 @@ module Aws::PcaConnectorAd
     #   <p>A structure that contains information about your connector.</p>
     #   @return [Types::Connector]
     class GetConnectorResponse < Struct.new(
+      nil,
       :connector,
       keyword_init: true
     )
@@ -774,6 +809,7 @@ module Aws::PcaConnectorAd
     #   <p>The Amazon Resource Name (ARN) that was returned when you called <a href="https://docs.aws.amazon.com/pca-connector-ad/latest/APIReference/API_CreateDirectoryRegistration.html">CreateDirectoryRegistration</a>.</p>
     #   @return [String]
     class GetDirectoryRegistrationRequest < Struct.new(
+      nil,
       :directory_registration_arn,
       keyword_init: true
     )
@@ -785,6 +821,7 @@ module Aws::PcaConnectorAd
     #            directory.</p>
     #   @return [Types::DirectoryRegistration]
     class GetDirectoryRegistrationResponse < Struct.new(
+      nil,
       :directory_registration,
       keyword_init: true
     )
@@ -798,6 +835,7 @@ module Aws::PcaConnectorAd
     #   <p>The Amazon Resource Name (ARN) that was returned when you called <a href="https://docs.aws.amazon.com/pca-connector-ad/latest/APIReference/API_CreateConnector.html">CreateConnector</a>.</p>
     #   @return [String]
     class GetServicePrincipalNameRequest < Struct.new(
+      nil,
       :directory_registration_arn,
       :connector_arn,
       keyword_init: true
@@ -809,6 +847,7 @@ module Aws::PcaConnectorAd
     #   <p>The service principal name that the connector uses to authenticate with Active Directory.</p>
     #   @return [Types::ServicePrincipalName]
     class GetServicePrincipalNameResponse < Struct.new(
+      nil,
       :service_principal_name,
       keyword_init: true
     )
@@ -823,6 +862,7 @@ module Aws::PcaConnectorAd
     #            "S-".</p>
     #   @return [String]
     class GetTemplateGroupAccessControlEntryRequest < Struct.new(
+      nil,
       :template_arn,
       :group_security_identifier,
       keyword_init: true
@@ -835,6 +875,7 @@ module Aws::PcaConnectorAd
     #            autoenrolling with a template.</p>
     #   @return [Types::AccessControlEntry]
     class GetTemplateGroupAccessControlEntryResponse < Struct.new(
+      nil,
       :access_control_entry,
       keyword_init: true
     )
@@ -845,6 +886,7 @@ module Aws::PcaConnectorAd
     #   <p>The Amazon Resource Name (ARN) that was returned when you called <a href="https://docs.aws.amazon.com/pca-connector-ad/latest/APIReference/API_CreateTemplate.html">CreateTemplate</a>.</p>
     #   @return [String]
     class GetTemplateRequest < Struct.new(
+      nil,
       :template_arn,
       keyword_init: true
     )
@@ -856,6 +898,7 @@ module Aws::PcaConnectorAd
     #            CA.</p>
     #   @return [Types::Template]
     class GetTemplateResponse < Struct.new(
+      nil,
       :template,
       keyword_init: true
     )
@@ -867,6 +910,7 @@ module Aws::PcaConnectorAd
     # @!attribute message
     #   @return [String]
     class InternalServerException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -883,6 +927,7 @@ module Aws::PcaConnectorAd
     #            contained in the certificate.</p>
     #   @return [Types::KeyUsageFlags]
     class KeyUsage < Struct.new(
+      nil,
       :critical,
       :usage_flags,
       keyword_init: true
@@ -912,6 +957,7 @@ module Aws::PcaConnectorAd
     #   <p>KeyAgreement is asserted when the subject public key is used for key agreement.</p>
     #   @return [Boolean]
     class KeyUsageFlags < Struct.new(
+      nil,
       :digital_signature,
       :non_repudiation,
       :key_encipherment,
@@ -957,6 +1003,7 @@ module Aws::PcaConnectorAd
     #   <p>Allow key use for digital signature.</p>
     #   @return [Boolean]
     class KeyUsagePropertyFlags < Struct.new(
+      nil,
       :decrypt,
       :key_agreement,
       :sign,
@@ -978,6 +1025,7 @@ module Aws::PcaConnectorAd
     #            parameter from the response you just received.</p>
     #   @return [String]
     class ListConnectorsRequest < Struct.new(
+      nil,
       :max_results,
       :next_token,
       keyword_init: true
@@ -994,6 +1042,7 @@ module Aws::PcaConnectorAd
     #            response you just received.</p>
     #   @return [String]
     class ListConnectorsResponse < Struct.new(
+      nil,
       :connectors,
       :next_token,
       keyword_init: true
@@ -1014,6 +1063,7 @@ module Aws::PcaConnectorAd
     #            parameter from the response you just received.</p>
     #   @return [String]
     class ListDirectoryRegistrationsRequest < Struct.new(
+      nil,
       :max_results,
       :next_token,
       keyword_init: true
@@ -1030,6 +1080,7 @@ module Aws::PcaConnectorAd
     #            parameter from the response you just received.</p>
     #   @return [String]
     class ListDirectoryRegistrationsResponse < Struct.new(
+      nil,
       :directory_registrations,
       :next_token,
       keyword_init: true
@@ -1053,6 +1104,7 @@ module Aws::PcaConnectorAd
     #   <p>The Amazon Resource Name (ARN) that was returned when you called <a href="https://docs.aws.amazon.com/pca-connector-ad/latest/APIReference/API_CreateDirectoryRegistration.html">CreateDirectoryRegistration</a>.</p>
     #   @return [String]
     class ListServicePrincipalNamesRequest < Struct.new(
+      nil,
       :max_results,
       :next_token,
       :directory_registration_arn,
@@ -1071,6 +1123,7 @@ module Aws::PcaConnectorAd
     #            parameter from the response you just received.</p>
     #   @return [String]
     class ListServicePrincipalNamesResponse < Struct.new(
+      nil,
       :service_principal_names,
       :next_token,
       keyword_init: true
@@ -1082,6 +1135,7 @@ module Aws::PcaConnectorAd
     #   <p>The Amazon Resource Name (ARN) that was returned when you created the resource. </p>
     #   @return [String]
     class ListTagsForResourceRequest < Struct.new(
+      nil,
       :resource_arn,
       keyword_init: true
     )
@@ -1092,6 +1146,7 @@ module Aws::PcaConnectorAd
     #   <p>The tags, if any, that are associated with your resource.</p>
     #   @return [Hash<String, String>]
     class ListTagsForResourceResponse < Struct.new(
+      nil,
       :tags,
       keyword_init: true
     )
@@ -1114,6 +1169,7 @@ module Aws::PcaConnectorAd
     #   <p>The Amazon Resource Name (ARN) that was returned when you called <a href="https://docs.aws.amazon.com/pca-connector-ad/latest/APIReference/API_CreateTemplate.html">CreateTemplate</a>.</p>
     #   @return [String]
     class ListTemplateGroupAccessControlEntriesRequest < Struct.new(
+      nil,
       :max_results,
       :next_token,
       :template_arn,
@@ -1132,6 +1188,7 @@ module Aws::PcaConnectorAd
     #            parameter from the response you just received.</p>
     #   @return [String]
     class ListTemplateGroupAccessControlEntriesResponse < Struct.new(
+      nil,
       :access_control_entries,
       :next_token,
       keyword_init: true
@@ -1155,6 +1212,7 @@ module Aws::PcaConnectorAd
     #   <p>The Amazon Resource Name (ARN) that was returned when you called <a href="https://docs.aws.amazon.com/pca-connector-ad/latest/APIReference/API_CreateConnector.html">CreateConnector</a>.</p>
     #   @return [String]
     class ListTemplatesRequest < Struct.new(
+      nil,
       :max_results,
       :next_token,
       :connector_arn,
@@ -1172,6 +1230,7 @@ module Aws::PcaConnectorAd
     #            parameter from the response you just received.</p>
     #   @return [String]
     class ListTemplatesResponse < Struct.new(
+      nil,
       :templates,
       :next_token,
       keyword_init: true
@@ -1191,6 +1250,7 @@ module Aws::PcaConnectorAd
     #   <p>Defines the cryptographic providers used to generate the private key.</p>
     #   @return [Array<String>]
     class PrivateKeyAttributesV2 < Struct.new(
+      nil,
       :minimal_key_length,
       :key_spec,
       :crypto_providers,
@@ -1219,6 +1279,7 @@ module Aws::PcaConnectorAd
     #   <p>Defines the algorithm used to generate the private key.</p>
     #   @return [String]
     class PrivateKeyAttributesV3 < Struct.new(
+      nil,
       :minimal_key_length,
       :key_spec,
       :crypto_providers,
@@ -1249,6 +1310,7 @@ module Aws::PcaConnectorAd
     #   <p>Defines the algorithm used to generate the private key.</p>
     #   @return [String]
     class PrivateKeyAttributesV4 < Struct.new(
+      nil,
       :minimal_key_length,
       :key_spec,
       :crypto_providers,
@@ -1271,6 +1333,7 @@ module Aws::PcaConnectorAd
     #   <p>Defines the minimum client compatibility.</p>
     #   @return [String]
     class PrivateKeyFlagsV2 < Struct.new(
+      nil,
       :exportable_key,
       :strong_key_protection_required,
       :client_version,
@@ -1296,6 +1359,7 @@ module Aws::PcaConnectorAd
     #   <p>Defines the minimum client compatibility.</p>
     #   @return [String]
     class PrivateKeyFlagsV3 < Struct.new(
+      nil,
       :exportable_key,
       :strong_key_protection_required,
       :require_alternate_signature_algorithm,
@@ -1331,6 +1395,7 @@ module Aws::PcaConnectorAd
     #   <p>Defines the minimum client compatibility.</p>
     #   @return [String]
     class PrivateKeyFlagsV4 < Struct.new(
+      nil,
       :exportable_key,
       :strong_key_protection_required,
       :require_alternate_signature_algorithm,
@@ -1353,6 +1418,7 @@ module Aws::PcaConnectorAd
     #   <p>The resource type, which can be one of <code>Connector</code>, <code>Template</code>, <code>TemplateGroupAccessControlEntry</code>, <code>ServicePrincipalName</code>, or <code>DirectoryRegistration</code>.</p>
     #   @return [String]
     class ResourceNotFoundException < Struct.new(
+      nil,
       :message,
       :resource_id,
       :resource_type,
@@ -1382,6 +1448,7 @@ module Aws::PcaConnectorAd
     #   <p>The date and time that the service principal name was updated.</p>
     #   @return [Time]
     class ServicePrincipalName < Struct.new(
+      nil,
       :directory_registration_arn,
       :connector_arn,
       :status,
@@ -1414,6 +1481,7 @@ module Aws::PcaConnectorAd
     #   <p>Time when the service principal name was updated.</p>
     #   @return [Time]
     class ServicePrincipalNameSummary < Struct.new(
+      nil,
       :directory_registration_arn,
       :connector_arn,
       :status,
@@ -1441,6 +1509,7 @@ module Aws::PcaConnectorAd
     #   <p>The code associated with the service quota.</p>
     #   @return [String]
     class ServiceQuotaExceededException < Struct.new(
+      nil,
       :message,
       :resource_id,
       :resource_type,
@@ -1489,6 +1558,7 @@ module Aws::PcaConnectorAd
     #   <p>Include the directory path in the subject name.</p>
     #   @return [Boolean]
     class SubjectNameFlagsV2 < Struct.new(
+      nil,
       :san_require_domain_dns,
       :san_require_spn,
       :san_require_directory_guid,
@@ -1542,6 +1612,7 @@ module Aws::PcaConnectorAd
     #   <p>Include the directory path in the subject name.</p>
     #   @return [Boolean]
     class SubjectNameFlagsV3 < Struct.new(
+      nil,
       :san_require_domain_dns,
       :san_require_spn,
       :san_require_directory_guid,
@@ -1595,6 +1666,7 @@ module Aws::PcaConnectorAd
     #   <p>Include the directory path in the subject name.</p>
     #   @return [Boolean]
     class SubjectNameFlagsV4 < Struct.new(
+      nil,
       :san_require_domain_dns,
       :san_require_spn,
       :san_require_directory_guid,
@@ -1617,6 +1689,7 @@ module Aws::PcaConnectorAd
     #   <p>Metadata assigned to a directory registration consisting of a key-value pair.</p>
     #   @return [Hash<String, String>]
     class TagResourceRequest < Struct.new(
+      nil,
       :resource_arn,
       :tags,
       keyword_init: true
@@ -1661,6 +1734,7 @@ module Aws::PcaConnectorAd
     #   <p>The date and time that the template was updated.</p>
     #   @return [Time]
     class Template < Struct.new(
+      nil,
       :arn,
       :connector_arn,
       :definition,
@@ -1720,6 +1794,7 @@ module Aws::PcaConnectorAd
     #            increment the major revision.</p>
     #   @return [Integer]
     class TemplateRevision < Struct.new(
+      nil,
       :major_revision,
       :minor_revision,
       keyword_init: true
@@ -1764,6 +1839,7 @@ module Aws::PcaConnectorAd
     #   <p>The date and time that the template was updated.</p>
     #   @return [Time]
     class TemplateSummary < Struct.new(
+      nil,
       :arn,
       :connector_arn,
       :definition,
@@ -1812,6 +1888,7 @@ module Aws::PcaConnectorAd
     #            template.</p>
     #   @return [Types::ExtensionsV2]
     class TemplateV2 < Struct.new(
+      nil,
       :certificate_validity,
       :superseded_templates,
       :private_key_attributes,
@@ -1862,6 +1939,7 @@ module Aws::PcaConnectorAd
     #            template.</p>
     #   @return [Types::ExtensionsV3]
     class TemplateV3 < Struct.new(
+      nil,
       :certificate_validity,
       :superseded_templates,
       :private_key_attributes,
@@ -1917,6 +1995,7 @@ module Aws::PcaConnectorAd
     #            template.</p>
     #   @return [Types::ExtensionsV4]
     class TemplateV4 < Struct.new(
+      nil,
       :certificate_validity,
       :superseded_templates,
       :private_key_attributes,
@@ -1941,6 +2020,7 @@ module Aws::PcaConnectorAd
     #   <p>The code associated with the quota.</p>
     #   @return [String]
     class ThrottlingException < Struct.new(
+      nil,
       :message,
       :service_code,
       :quota_code,
@@ -1957,6 +2037,7 @@ module Aws::PcaConnectorAd
     #            resources.</p>
     #   @return [Array<String>]
     class UntagResourceRequest < Struct.new(
+      nil,
       :resource_arn,
       :tag_keys,
       keyword_init: true
@@ -1979,6 +2060,7 @@ module Aws::PcaConnectorAd
     #            template.</p>
     #   @return [Types::AccessRights]
     class UpdateTemplateGroupAccessControlEntryRequest < Struct.new(
+      nil,
       :template_arn,
       :group_security_identifier,
       :group_display_name,
@@ -2002,6 +2084,7 @@ module Aws::PcaConnectorAd
     #            certificate issued using that template.</p>
     #   @return [Boolean]
     class UpdateTemplateRequest < Struct.new(
+      nil,
       :template_arn,
       :definition,
       :reenroll_all_certificate_holders,
@@ -2019,6 +2102,7 @@ module Aws::PcaConnectorAd
     #            validation exception.</p>
     #   @return [String]
     class ValidationException < Struct.new(
+      nil,
       :message,
       :reason,
       keyword_init: true
@@ -2041,6 +2125,7 @@ module Aws::PcaConnectorAd
     #   <p>The numeric value for the validity period.</p>
     #   @return [Integer]
     class ValidityPeriod < Struct.new(
+      nil,
       :period_type,
       :period,
       keyword_init: true
@@ -2057,6 +2142,7 @@ module Aws::PcaConnectorAd
     #            with a connector.</p>
     #   @return [Array<String>]
     class VpcInformation < Struct.new(
+      nil,
       :ip_address_type,
       :security_group_ids,
       keyword_init: true

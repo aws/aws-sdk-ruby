@@ -10,6 +10,7 @@ module Aws::CostOptimizationHub
     # @!attribute message
     #   @return [String]
     class AccessDeniedException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -30,6 +31,7 @@ module Aws::CostOptimizationHub
     #   <p>The time when the account enrollment status was created.</p>
     #   @return [Time]
     class AccountEnrollmentStatus < Struct.new(
+      nil,
       :account_id,
       :status,
       :last_updated_timestamp,
@@ -47,6 +49,7 @@ module Aws::CostOptimizationHub
     #   <p>Cost impact of the resource recommendation.</p>
     #   @return [Types::ResourceCostCalculation]
     class AuroraDbClusterStorage < Struct.new(
+      nil,
       :configuration,
       :cost_calculation,
       keyword_init: true
@@ -59,6 +62,7 @@ module Aws::CostOptimizationHub
     #   <p>The storage type to associate with the Aurora DB cluster.</p>
     #   @return [String]
     class AuroraDbClusterStorageConfiguration < Struct.new(
+      nil,
       :storage_type,
       keyword_init: true
     )
@@ -73,6 +77,7 @@ module Aws::CostOptimizationHub
     #   <p>The throughput that the volume supports.</p>
     #   @return [Float]
     class BlockStoragePerformanceConfiguration < Struct.new(
+      nil,
       :iops,
       :throughput,
       keyword_init: true
@@ -94,6 +99,7 @@ module Aws::CostOptimizationHub
     #   <p>The platform of the resource. The platform is the specific combination of operating system, license model, and software on an instance.</p>
     #   @return [String]
     class ComputeConfiguration < Struct.new(
+      nil,
       :v_cpu,
       :memory_size_in_mb,
       :architecture,
@@ -111,6 +117,7 @@ module Aws::CostOptimizationHub
     #   <p>Cost impact of the Savings Plans purchase recommendation.</p>
     #   @return [Types::SavingsPlansCostCalculation]
     class ComputeSavingsPlans < Struct.new(
+      nil,
       :configuration,
       :cost_calculation,
       keyword_init: true
@@ -132,6 +139,7 @@ module Aws::CostOptimizationHub
     #   <p>The hourly commitment for the Savings Plans type.</p>
     #   @return [String]
     class ComputeSavingsPlansConfiguration < Struct.new(
+      nil,
       :account_scope,
       :term,
       :payment_option,
@@ -146,6 +154,7 @@ module Aws::CostOptimizationHub
     #   <p>The DB instance class of the DB instance.</p>
     #   @return [String]
     class DbInstanceConfiguration < Struct.new(
+      nil,
       :db_instance_class,
       keyword_init: true
     )
@@ -160,6 +169,7 @@ module Aws::CostOptimizationHub
     #   <p>Cost impact of the purchase recommendation.</p>
     #   @return [Types::ReservedInstancesCostCalculation]
     class DynamoDbReservedCapacity < Struct.new(
+      nil,
       :configuration,
       :cost_calculation,
       keyword_init: true
@@ -196,6 +206,7 @@ module Aws::CostOptimizationHub
     #   <p>The capacity unit of the recommended reservation.</p>
     #   @return [String]
     class DynamoDbReservedCapacityConfiguration < Struct.new(
+      nil,
       :account_scope,
       :service,
       :term,
@@ -218,6 +229,7 @@ module Aws::CostOptimizationHub
     #   <p>Cost impact of the recommendation.</p>
     #   @return [Types::ResourceCostCalculation]
     class EbsVolume < Struct.new(
+      nil,
       :configuration,
       :cost_calculation,
       keyword_init: true
@@ -236,6 +248,7 @@ module Aws::CostOptimizationHub
     #   <p>The Amazon Elastic Block Store attachment state.</p>
     #   @return [String]
     class EbsVolumeConfiguration < Struct.new(
+      nil,
       :storage,
       :performance,
       :attachment_state,
@@ -252,6 +265,7 @@ module Aws::CostOptimizationHub
     #   <p>Cost impact of the recommendation.</p>
     #   @return [Types::ResourceCostCalculation]
     class Ec2AutoScalingGroup < Struct.new(
+      nil,
       :configuration,
       :cost_calculation,
       keyword_init: true
@@ -273,6 +287,7 @@ module Aws::CostOptimizationHub
     #   <p>The strategy used for allocating instances, based on a predefined priority order or based on the lowest available price.</p>
     #   @return [String]
     class Ec2AutoScalingGroupConfiguration < Struct.new(
+      nil,
       :instance,
       :mixed_instances,
       :type,
@@ -290,6 +305,7 @@ module Aws::CostOptimizationHub
     #   <p>Cost impact of the recommendation.</p>
     #   @return [Types::ResourceCostCalculation]
     class Ec2Instance < Struct.new(
+      nil,
       :configuration,
       :cost_calculation,
       keyword_init: true
@@ -302,6 +318,7 @@ module Aws::CostOptimizationHub
     #   <p>Details about the instance.</p>
     #   @return [Types::InstanceConfiguration]
     class Ec2InstanceConfiguration < Struct.new(
+      nil,
       :instance,
       keyword_init: true
     )
@@ -316,6 +333,7 @@ module Aws::CostOptimizationHub
     #   <p>Cost impact of the Savings Plans purchase recommendation.</p>
     #   @return [Types::SavingsPlansCostCalculation]
     class Ec2InstanceSavingsPlans < Struct.new(
+      nil,
       :configuration,
       :cost_calculation,
       keyword_init: true
@@ -343,6 +361,7 @@ module Aws::CostOptimizationHub
     #   <p>The Amazon Web Services Region of the commitment.</p>
     #   @return [String]
     class Ec2InstanceSavingsPlansConfiguration < Struct.new(
+      nil,
       :account_scope,
       :term,
       :payment_option,
@@ -362,6 +381,7 @@ module Aws::CostOptimizationHub
     #   <p>Cost impact of the purchase recommendation.</p>
     #   @return [Types::ReservedInstancesCostCalculation]
     class Ec2ReservedInstances < Struct.new(
+      nil,
       :configuration,
       :cost_calculation,
       keyword_init: true
@@ -419,6 +439,7 @@ module Aws::CostOptimizationHub
     #   <p>Determines whether the recommendation is size flexible.</p>
     #   @return [Boolean]
     class Ec2ReservedInstancesConfiguration < Struct.new(
+      nil,
       :account_scope,
       :service,
       :term,
@@ -448,6 +469,7 @@ module Aws::CostOptimizationHub
     #   <p>Cost impact of the recommendation.</p>
     #   @return [Types::ResourceCostCalculation]
     class EcsService < Struct.new(
+      nil,
       :configuration,
       :cost_calculation,
       keyword_init: true
@@ -460,6 +482,7 @@ module Aws::CostOptimizationHub
     #   <p>Details about the compute configuration.</p>
     #   @return [Types::ComputeConfiguration]
     class EcsServiceConfiguration < Struct.new(
+      nil,
       :compute,
       keyword_init: true
     )
@@ -474,6 +497,7 @@ module Aws::CostOptimizationHub
     #   <p>Cost impact of the purchase recommendation.</p>
     #   @return [Types::ReservedInstancesCostCalculation]
     class ElastiCacheReservedInstances < Struct.new(
+      nil,
       :configuration,
       :cost_calculation,
       keyword_init: true
@@ -522,6 +546,7 @@ module Aws::CostOptimizationHub
     #   <p>Determines whether the recommendation is size flexible.</p>
     #   @return [Boolean]
     class ElastiCacheReservedInstancesConfiguration < Struct.new(
+      nil,
       :account_scope,
       :service,
       :term,
@@ -551,6 +576,7 @@ module Aws::CostOptimizationHub
     #   <p>Estimated other discounts include all discounts that are not itemized. Itemized discounts include <code>reservedInstanceDiscount</code> and <code>savingsPlansDiscount</code>.</p>
     #   @return [Float]
     class EstimatedDiscounts < Struct.new(
+      nil,
       :savings_plans_discount,
       :reserved_instances_discount,
       :other_discount,
@@ -594,6 +620,7 @@ module Aws::CostOptimizationHub
     #   <p>The IDs for the recommendations.</p>
     #   @return [Array<String>]
     class Filter < Struct.new(
+      nil,
       :restart_needed,
       :rollback_possible,
       :implementation_efforts,
@@ -611,6 +638,7 @@ module Aws::CostOptimizationHub
     end
 
     class GetPreferencesRequest < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -626,6 +654,7 @@ module Aws::CostOptimizationHub
     #   <p>Retrieves the current preferences for how Reserved Instances and Savings Plans cost-saving opportunities are prioritized in terms of payment option and term length.</p>
     #   @return [Types::PreferredCommitment]
     class GetPreferencesResponse < Struct.new(
+      nil,
       :savings_estimation_mode,
       :member_account_discount_visibility,
       :preferred_commitment,
@@ -638,6 +667,7 @@ module Aws::CostOptimizationHub
     #   <p>The ID for the recommendation.</p>
     #   @return [String]
     class GetRecommendationRequest < Struct.new(
+      nil,
       :recommendation_id,
       keyword_init: true
     )
@@ -714,6 +744,7 @@ module Aws::CostOptimizationHub
     #   <p>A list of tags associated with the resource for which the recommendation exists.</p>
     #   @return [Array<Types::Tag>]
     class GetRecommendationResponse < Struct.new(
+      nil,
       :recommendation_id,
       :resource_id,
       :resource_arn,
@@ -747,6 +778,7 @@ module Aws::CostOptimizationHub
     #   <p>The instance type of the configuration.</p>
     #   @return [String]
     class InstanceConfiguration < Struct.new(
+      nil,
       :type,
       keyword_init: true
     )
@@ -757,6 +789,7 @@ module Aws::CostOptimizationHub
     # @!attribute message
     #   @return [String]
     class InternalServerException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -771,6 +804,7 @@ module Aws::CostOptimizationHub
     #   <p>Cost impact of the recommendation.</p>
     #   @return [Types::ResourceCostCalculation]
     class LambdaFunction < Struct.new(
+      nil,
       :configuration,
       :cost_calculation,
       keyword_init: true
@@ -783,6 +817,7 @@ module Aws::CostOptimizationHub
     #   <p>Details about the compute configuration.</p>
     #   @return [Types::ComputeConfiguration]
     class LambdaFunctionConfiguration < Struct.new(
+      nil,
       :compute,
       keyword_init: true
     )
@@ -802,6 +837,7 @@ module Aws::CostOptimizationHub
     #   <p>The maximum number of objects that are returned for the request.</p>
     #   @return [Integer]
     class ListEnrollmentStatusesRequest < Struct.new(
+      nil,
       :include_organization_info,
       :account_id,
       :next_token,
@@ -821,6 +857,7 @@ module Aws::CostOptimizationHub
     #   <p>The token to retrieve the next set of results.</p>
     #   @return [String]
     class ListEnrollmentStatusesResponse < Struct.new(
+      nil,
       :items,
       :include_member_accounts,
       :next_token,
@@ -845,6 +882,7 @@ module Aws::CostOptimizationHub
     #   <p>The token to retrieve the next set of results.</p>
     #   @return [String]
     class ListRecommendationSummariesRequest < Struct.new(
+      nil,
       :filter,
       :group_by,
       :max_results,
@@ -874,6 +912,7 @@ module Aws::CostOptimizationHub
     #   <p>The token to retrieve the next set of results.</p>
     #   @return [String]
     class ListRecommendationSummariesResponse < Struct.new(
+      nil,
       :estimated_total_deduped_savings,
       :items,
       :group_by,
@@ -901,6 +940,7 @@ module Aws::CostOptimizationHub
     #   <p>The token to retrieve the next set of results.</p>
     #   @return [String]
     class ListRecommendationsRequest < Struct.new(
+      nil,
       :filter,
       :order_by,
       :include_all_recommendations,
@@ -918,6 +958,7 @@ module Aws::CostOptimizationHub
     #   <p>The token to retrieve the next set of results.</p>
     #   @return [String]
     class ListRecommendationsResponse < Struct.new(
+      nil,
       :items,
       :next_token,
       keyword_init: true
@@ -933,6 +974,7 @@ module Aws::CostOptimizationHub
     #   <p>Cost impact of the purchase recommendation.</p>
     #   @return [Types::ReservedInstancesCostCalculation]
     class MemoryDbReservedInstances < Struct.new(
+      nil,
       :configuration,
       :cost_calculation,
       keyword_init: true
@@ -981,6 +1023,7 @@ module Aws::CostOptimizationHub
     #   <p>Determines whether the recommendation is for a current generation instance.</p>
     #   @return [String]
     class MemoryDbReservedInstancesConfiguration < Struct.new(
+      nil,
       :account_scope,
       :service,
       :term,
@@ -1004,6 +1047,7 @@ module Aws::CostOptimizationHub
     #   <p>The instance type of the configuration.</p>
     #   @return [String]
     class MixedInstanceConfiguration < Struct.new(
+      nil,
       :type,
       keyword_init: true
     )
@@ -1018,6 +1062,7 @@ module Aws::CostOptimizationHub
     #   <p>Cost impact of the purchase recommendation.</p>
     #   @return [Types::ReservedInstancesCostCalculation]
     class OpenSearchReservedInstances < Struct.new(
+      nil,
       :configuration,
       :cost_calculation,
       keyword_init: true
@@ -1063,6 +1108,7 @@ module Aws::CostOptimizationHub
     #   <p>Determines whether the recommendation is size flexible.</p>
     #   @return [Boolean]
     class OpenSearchReservedInstancesConfiguration < Struct.new(
+      nil,
       :account_scope,
       :service,
       :term,
@@ -1088,6 +1134,7 @@ module Aws::CostOptimizationHub
     #   <p>The order that's used to sort the data.</p>
     #   @return [String]
     class OrderBy < Struct.new(
+      nil,
       :dimension,
       :order,
       keyword_init: true
@@ -1103,6 +1150,7 @@ module Aws::CostOptimizationHub
     #   <p>The preferred upfront payment structure for commitments. If the value is null, it will default to <code>AllUpfront</code> (highest savings) where applicable.</p>
     #   @return [String]
     class PreferredCommitment < Struct.new(
+      nil,
       :term,
       :payment_option,
       keyword_init: true
@@ -1118,6 +1166,7 @@ module Aws::CostOptimizationHub
     #   <p>Cost impact of the resource recommendation.</p>
     #   @return [Types::ResourceCostCalculation]
     class RdsDbInstance < Struct.new(
+      nil,
       :configuration,
       :cost_calculation,
       keyword_init: true
@@ -1130,6 +1179,7 @@ module Aws::CostOptimizationHub
     #   <p>Details about the instance configuration.</p>
     #   @return [Types::DbInstanceConfiguration]
     class RdsDbInstanceConfiguration < Struct.new(
+      nil,
       :instance,
       keyword_init: true
     )
@@ -1144,6 +1194,7 @@ module Aws::CostOptimizationHub
     #   <p>Cost impact of the resource recommendation.</p>
     #   @return [Types::ResourceCostCalculation]
     class RdsDbInstanceStorage < Struct.new(
+      nil,
       :configuration,
       :cost_calculation,
       keyword_init: true
@@ -1165,6 +1216,7 @@ module Aws::CostOptimizationHub
     #   <p>The storage throughput for the DB instance.</p>
     #   @return [Float]
     class RdsDbInstanceStorageConfiguration < Struct.new(
+      nil,
       :storage_type,
       :allocated_storage_in_gb,
       :iops,
@@ -1182,6 +1234,7 @@ module Aws::CostOptimizationHub
     #   <p>Cost impact of the purchase recommendation.</p>
     #   @return [Types::ReservedInstancesCostCalculation]
     class RdsReservedInstances < Struct.new(
+      nil,
       :configuration,
       :cost_calculation,
       keyword_init: true
@@ -1242,6 +1295,7 @@ module Aws::CostOptimizationHub
     #   <p>Determines whether the recommendation is for a reservation in a single Availability Zone or a reservation with a backup in a second Availability Zone.</p>
     #   @return [String]
     class RdsReservedInstancesConfiguration < Struct.new(
+      nil,
       :account_scope,
       :service,
       :term,
@@ -1329,6 +1383,7 @@ module Aws::CostOptimizationHub
     #   <p>A list of tags assigned to the recommendation.</p>
     #   @return [Array<Types::Tag>]
     class Recommendation < Struct.new(
+      nil,
       :recommendation_id,
       :account_id,
       :region,
@@ -1366,6 +1421,7 @@ module Aws::CostOptimizationHub
     #   <p>The total number of instance recommendations.</p>
     #   @return [Integer]
     class RecommendationSummary < Struct.new(
+      nil,
       :group,
       :estimated_monthly_savings,
       :recommendation_count,
@@ -1382,6 +1438,7 @@ module Aws::CostOptimizationHub
     #   <p>Cost impact of the purchase recommendation.</p>
     #   @return [Types::ReservedInstancesCostCalculation]
     class RedshiftReservedInstances < Struct.new(
+      nil,
       :configuration,
       :cost_calculation,
       keyword_init: true
@@ -1430,6 +1487,7 @@ module Aws::CostOptimizationHub
     #   <p>Determines whether the recommendation is for a current generation instance.</p>
     #   @return [String]
     class RedshiftReservedInstancesConfiguration < Struct.new(
+      nil,
       :account_scope,
       :service,
       :term,
@@ -1453,6 +1511,7 @@ module Aws::CostOptimizationHub
     #   <p>Pricing details of the purchase recommendation.</p>
     #   @return [Types::ReservedInstancesPricing]
     class ReservedInstancesCostCalculation < Struct.new(
+      nil,
       :pricing,
       keyword_init: true
     )
@@ -1473,6 +1532,7 @@ module Aws::CostOptimizationHub
     #   <p>The estimated cost of your recurring monthly fees for the recommended reserved instance across the month.</p>
     #   @return [Float]
     class ReservedInstancesPricing < Struct.new(
+      nil,
       :estimated_on_demand_cost,
       :monthly_reservation_eligible_cost,
       :savings_percentage,
@@ -1490,6 +1550,7 @@ module Aws::CostOptimizationHub
     #   <p>Pricing details of the resource recommendation.</p>
     #   @return [Types::ResourcePricing]
     class ResourceCostCalculation < Struct.new(
+      nil,
       :usages,
       :pricing,
       keyword_init: true
@@ -1604,6 +1665,7 @@ module Aws::CostOptimizationHub
     #   <p>The identifier of the resource that was not found.</p>
     #   @return [String]
     class ResourceNotFoundException < Struct.new(
+      nil,
       :message,
       :resource_id,
       keyword_init: true
@@ -1625,6 +1687,7 @@ module Aws::CostOptimizationHub
     #   <p>The savings estimate incorporating all discounts with Amazon Web Services, such as Reserved Instances and Savings Plans.</p>
     #   @return [Float]
     class ResourcePricing < Struct.new(
+      nil,
       :estimated_cost_before_discounts,
       :estimated_net_unused_amortized_commitments,
       :estimated_discounts,
@@ -1642,6 +1705,7 @@ module Aws::CostOptimizationHub
     #   <p>Cost impact of the Savings Plans purchase recommendation.</p>
     #   @return [Types::SavingsPlansCostCalculation]
     class SageMakerSavingsPlans < Struct.new(
+      nil,
       :configuration,
       :cost_calculation,
       keyword_init: true
@@ -1663,6 +1727,7 @@ module Aws::CostOptimizationHub
     #   <p>The hourly commitment for the Savings Plans type.</p>
     #   @return [String]
     class SageMakerSavingsPlansConfiguration < Struct.new(
+      nil,
       :account_scope,
       :term,
       :payment_option,
@@ -1677,6 +1742,7 @@ module Aws::CostOptimizationHub
     #   <p>Pricing details of the purchase recommendation.</p>
     #   @return [Types::SavingsPlansPricing]
     class SavingsPlansCostCalculation < Struct.new(
+      nil,
       :pricing,
       keyword_init: true
     )
@@ -1697,6 +1763,7 @@ module Aws::CostOptimizationHub
     #   <p>Estimated On-Demand cost you will pay after buying the Savings Plan.</p>
     #   @return [Float]
     class SavingsPlansPricing < Struct.new(
+      nil,
       :monthly_savings_plans_eligible_cost,
       :estimated_monthly_commitment,
       :savings_percentage,
@@ -1714,6 +1781,7 @@ module Aws::CostOptimizationHub
     #   <p>The storage volume.</p>
     #   @return [Float]
     class StorageConfiguration < Struct.new(
+      nil,
       :type,
       :size_in_gb,
       keyword_init: true
@@ -1726,6 +1794,7 @@ module Aws::CostOptimizationHub
     #   <p>The savings percentage based on your Amazon Web Services spend over the past 30 days.</p> <note> <p>Savings percentage is only supported when filtering by Region, account ID, or tags.</p> </note>
     #   @return [String]
     class SummaryMetricsResult < Struct.new(
+      nil,
       :savings_percentage,
       keyword_init: true
     )
@@ -1740,6 +1809,7 @@ module Aws::CostOptimizationHub
     #   <p>The value that's associated with the tag.</p>
     #   @return [String]
     class Tag < Struct.new(
+      nil,
       :key,
       :value,
       keyword_init: true
@@ -1751,6 +1821,7 @@ module Aws::CostOptimizationHub
     # @!attribute message
     #   @return [String]
     class ThrottlingException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -1764,6 +1835,7 @@ module Aws::CostOptimizationHub
     #   <p>Indicates whether to enroll member accounts of the organization if the account is the management account or delegated administrator.</p>
     #   @return [Boolean]
     class UpdateEnrollmentStatusRequest < Struct.new(
+      nil,
       :status,
       :include_member_accounts,
       keyword_init: true
@@ -1775,6 +1847,7 @@ module Aws::CostOptimizationHub
     #   <p>The enrollment status of the account.</p>
     #   @return [String]
     class UpdateEnrollmentStatusResponse < Struct.new(
+      nil,
       :status,
       keyword_init: true
     )
@@ -1791,6 +1864,7 @@ module Aws::CostOptimizationHub
     #   <p>Sets the preferences for how Reserved Instances and Savings Plans cost-saving opportunities are prioritized in terms of payment option and term length.</p>
     #   @return [Types::PreferredCommitment]
     class UpdatePreferencesRequest < Struct.new(
+      nil,
       :savings_estimation_mode,
       :member_account_discount_visibility,
       :preferred_commitment,
@@ -1809,6 +1883,7 @@ module Aws::CostOptimizationHub
     #   <p>Shows the updated preferences for how Reserved Instances and Savings Plans cost-saving opportunities are prioritized in terms of payment option and term length.</p>
     #   @return [Types::PreferredCommitment]
     class UpdatePreferencesResponse < Struct.new(
+      nil,
       :savings_estimation_mode,
       :member_account_discount_visibility,
       :preferred_commitment,
@@ -1834,6 +1909,7 @@ module Aws::CostOptimizationHub
     #   <p>The usage unit.</p>
     #   @return [String]
     class Usage < Struct.new(
+      nil,
       :usage_type,
       :usage_amount,
       :operation,
@@ -1854,6 +1930,7 @@ module Aws::CostOptimizationHub
     #   <p>The list of fields that are invalid.</p>
     #   @return [Array<Types::ValidationExceptionDetail>]
     class ValidationException < Struct.new(
+      nil,
       :message,
       :reason,
       :fields,
@@ -1870,6 +1947,7 @@ module Aws::CostOptimizationHub
     #   <p>A message with the reason for the validation exception error.</p>
     #   @return [String]
     class ValidationExceptionDetail < Struct.new(
+      nil,
       :field_name,
       :message,
       keyword_init: true

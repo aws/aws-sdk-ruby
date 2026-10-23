@@ -21,6 +21,7 @@ module Aws::AppRunner
     #            </p>
     #   @return [Boolean]
     class AssociateCustomDomainRequest < Struct.new(
+      nil,
       :service_arn,
       :domain_name,
       :enable_www_subdomain,
@@ -43,6 +44,7 @@ module Aws::AppRunner
     #       </p>
     #   @return [Array<Types::VpcDNSTarget>]
     class AssociateCustomDomainResponse < Struct.new(
+      nil,
       :dns_target,
       :service_arn,
       :custom_domain,
@@ -62,6 +64,7 @@ module Aws::AppRunner
     #         (but not for ECR Public repositories).</p>
     #   @return [String]
     class AuthenticationConfiguration < Struct.new(
+      nil,
       :connection_arn,
       :access_role_arn,
       keyword_init: true
@@ -123,6 +126,7 @@ module Aws::AppRunner
     #         the same <code>AutoScalingConfigurationName</code>.</p>
     #   @return [Boolean]
     class AutoScalingConfiguration < Struct.new(
+      nil,
       :auto_scaling_configuration_arn,
       :auto_scaling_configuration_name,
       :auto_scaling_configuration_revision,
@@ -172,6 +176,7 @@ module Aws::AppRunner
     #         the same <code>AutoScalingConfigurationName</code>.</p>
     #   @return [Boolean]
     class AutoScalingConfigurationSummary < Struct.new(
+      nil,
       :auto_scaling_configuration_arn,
       :auto_scaling_configuration_name,
       :auto_scaling_configuration_revision,
@@ -204,6 +209,7 @@ module Aws::AppRunner
     #         DNS.</p>
     #   @return [String]
     class CertificateValidationRecord < Struct.new(
+      nil,
       :name,
       :type,
       :value,
@@ -234,6 +240,7 @@ module Aws::AppRunner
     #           <code>apprunner.yaml</code> file in the source code repository (or ignoring the file if it exists).</p>
     #   @return [Types::CodeConfigurationValues]
     class CodeConfiguration < Struct.new(
+      nil,
       :configuration_source,
       :code_configuration_values,
       keyword_init: true
@@ -281,6 +288,7 @@ module Aws::AppRunner
     #            </note>
     #   @return [Hash<String, String>]
     class CodeConfigurationValues < Struct.new(
+      nil,
       :runtime,
       :build_command,
       :start_command,
@@ -311,6 +319,7 @@ module Aws::AppRunner
     #         from root and, if not specified, defaults to the repository root.</p>
     #   @return [String]
     class CodeRepository < Struct.new(
+      nil,
       :repository_url,
       :source_code_version,
       :code_configuration,
@@ -337,6 +346,7 @@ module Aws::AppRunner
     #   <p>The App Runner connection creation time, expressed as a Unix time stamp.</p>
     #   @return [Time]
     class Connection < Struct.new(
+      nil,
       :connection_name,
       :connection_arn,
       :provider_type,
@@ -364,6 +374,7 @@ module Aws::AppRunner
     #   <p>The App Runner connection creation time, expressed as a Unix time stamp.</p>
     #   @return [Time]
     class ConnectionSummary < Struct.new(
+      nil,
       :connection_name,
       :connection_arn,
       :provider_type,
@@ -423,6 +434,7 @@ module Aws::AppRunner
     #   <p>A list of metadata items that you can associate with your auto scaling configuration resource. A tag is a key-value pair.</p>
     #   @return [Array<Types::Tag>]
     class CreateAutoScalingConfigurationRequest < Struct.new(
+      nil,
       :auto_scaling_configuration_name,
       :max_concurrency,
       :min_size,
@@ -437,6 +449,7 @@ module Aws::AppRunner
     #   <p>A description of the App Runner auto scaling configuration that's created by this request.</p>
     #   @return [Types::AutoScalingConfiguration]
     class CreateAutoScalingConfigurationResponse < Struct.new(
+      nil,
       :auto_scaling_configuration,
       keyword_init: true
     )
@@ -453,6 +466,7 @@ module Aws::AppRunner
     #   <p>A list of metadata items that you can associate with your connection resource. A tag is a key-value pair.</p>
     #   @return [Array<Types::Tag>]
     class CreateConnectionRequest < Struct.new(
+      nil,
       :connection_name,
       :provider_type,
       :tags,
@@ -465,6 +479,7 @@ module Aws::AppRunner
     #   <p>A description of the App Runner connection that's created by this request.</p>
     #   @return [Types::Connection]
     class CreateConnectionResponse < Struct.new(
+      nil,
       :connection,
       keyword_init: true
     )
@@ -488,6 +503,7 @@ module Aws::AppRunner
     #   <p>A list of metadata items that you can associate with your observability configuration resource. A tag is a key-value pair.</p>
     #   @return [Array<Types::Tag>]
     class CreateObservabilityConfigurationRequest < Struct.new(
+      nil,
       :observability_configuration_name,
       :trace_configuration,
       :tags,
@@ -500,6 +516,7 @@ module Aws::AppRunner
     #   <p>A description of the App Runner observability configuration that's created by this request.</p>
     #   @return [Types::ObservabilityConfiguration]
     class CreateObservabilityConfigurationResponse < Struct.new(
+      nil,
       :observability_configuration,
       keyword_init: true
     )
@@ -542,6 +559,7 @@ module Aws::AppRunner
     #   <p>The observability configuration of your service.</p>
     #   @return [Types::ServiceObservabilityConfiguration]
     class CreateServiceRequest < Struct.new(
+      nil,
       :service_name,
       :source_configuration,
       :instance_configuration,
@@ -563,6 +581,7 @@ module Aws::AppRunner
     #   <p>The unique ID of the asynchronous operation that this request started. You can use it combined with the <a href="https://docs.aws.amazon.com/apprunner/latest/api/API_ListOperations.html">ListOperations</a> call to track the operation's progress.</p>
     #   @return [String]
     class CreateServiceResponse < Struct.new(
+      nil,
       :service,
       :operation_id,
       keyword_init: true
@@ -589,6 +608,7 @@ module Aws::AppRunner
     #   <p>A list of metadata items that you can associate with your VPC connector resource. A tag is a key-value pair.</p>
     #   @return [Array<Types::Tag>]
     class CreateVpcConnectorRequest < Struct.new(
+      nil,
       :vpc_connector_name,
       :subnets,
       :security_groups,
@@ -602,6 +622,7 @@ module Aws::AppRunner
     #   <p>A description of the App Runner VPC connector that's created by this request.</p>
     #   @return [Types::VpcConnector]
     class CreateVpcConnectorResponse < Struct.new(
+      nil,
       :vpc_connector,
       keyword_init: true
     )
@@ -623,6 +644,7 @@ module Aws::AppRunner
     #   <p>An optional list of metadata items that you can associate with the VPC Ingress Connection resource. A tag is a key-value pair.</p>
     #   @return [Array<Types::Tag>]
     class CreateVpcIngressConnectionRequest < Struct.new(
+      nil,
       :service_arn,
       :vpc_ingress_connection_name,
       :ingress_vpc_configuration,
@@ -636,6 +658,7 @@ module Aws::AppRunner
     #   <p>A description of the App Runner VPC Ingress Connection resource that's created by this request. </p>
     #   @return [Types::VpcIngressConnection]
     class CreateVpcIngressConnectionResponse < Struct.new(
+      nil,
       :vpc_ingress_connection,
       keyword_init: true
     )
@@ -659,6 +682,7 @@ module Aws::AppRunner
     #   <p>The current state of the domain name association.</p>
     #   @return [String]
     class CustomDomain < Struct.new(
+      nil,
       :domain_name,
       :enable_www_subdomain,
       :certificate_validation_records,
@@ -681,6 +705,7 @@ module Aws::AppRunner
     #         with: <code>.../name</code>.</p>
     #   @return [Boolean]
     class DeleteAutoScalingConfigurationRequest < Struct.new(
+      nil,
       :auto_scaling_configuration_arn,
       :delete_all_revisions,
       keyword_init: true
@@ -692,6 +717,7 @@ module Aws::AppRunner
     #   <p>A description of the App Runner auto scaling configuration that this request just deleted.</p>
     #   @return [Types::AutoScalingConfiguration]
     class DeleteAutoScalingConfigurationResponse < Struct.new(
+      nil,
       :auto_scaling_configuration,
       keyword_init: true
     )
@@ -702,6 +728,7 @@ module Aws::AppRunner
     #   <p>The Amazon Resource Name (ARN) of the App Runner connection that you want to delete.</p>
     #   @return [String]
     class DeleteConnectionRequest < Struct.new(
+      nil,
       :connection_arn,
       keyword_init: true
     )
@@ -712,6 +739,7 @@ module Aws::AppRunner
     #   <p>A description of the App Runner connection that this request just deleted.</p>
     #   @return [Types::Connection]
     class DeleteConnectionResponse < Struct.new(
+      nil,
       :connection,
       keyword_init: true
     )
@@ -726,6 +754,7 @@ module Aws::AppRunner
     #               </code>. If a revision isn't specified, the latest active revision is deleted.</p>
     #   @return [String]
     class DeleteObservabilityConfigurationRequest < Struct.new(
+      nil,
       :observability_configuration_arn,
       keyword_init: true
     )
@@ -736,6 +765,7 @@ module Aws::AppRunner
     #   <p>A description of the App Runner observability configuration that this request just deleted.</p>
     #   @return [Types::ObservabilityConfiguration]
     class DeleteObservabilityConfigurationResponse < Struct.new(
+      nil,
       :observability_configuration,
       keyword_init: true
     )
@@ -746,6 +776,7 @@ module Aws::AppRunner
     #   <p>The Amazon Resource Name (ARN) of the App Runner service that you want to delete.</p>
     #   @return [String]
     class DeleteServiceRequest < Struct.new(
+      nil,
       :service_arn,
       keyword_init: true
     )
@@ -760,6 +791,7 @@ module Aws::AppRunner
     #         the operation's progress.</p>
     #   @return [String]
     class DeleteServiceResponse < Struct.new(
+      nil,
       :service,
       :operation_id,
       keyword_init: true
@@ -772,6 +804,7 @@ module Aws::AppRunner
     #            <p>The ARN must be a full VPC connector ARN.</p>
     #   @return [String]
     class DeleteVpcConnectorRequest < Struct.new(
+      nil,
       :vpc_connector_arn,
       keyword_init: true
     )
@@ -782,6 +815,7 @@ module Aws::AppRunner
     #   <p>A description of the App Runner VPC connector that this request just deleted.</p>
     #   @return [Types::VpcConnector]
     class DeleteVpcConnectorResponse < Struct.new(
+      nil,
       :vpc_connector,
       keyword_init: true
     )
@@ -792,6 +826,7 @@ module Aws::AppRunner
     #   <p>The Amazon Resource Name (ARN) of the App Runner VPC Ingress Connection that you want to delete.</p>
     #   @return [String]
     class DeleteVpcIngressConnectionRequest < Struct.new(
+      nil,
       :vpc_ingress_connection_arn,
       keyword_init: true
     )
@@ -802,6 +837,7 @@ module Aws::AppRunner
     #   <p>A description of the App Runner VPC Ingress Connection that this request just deleted.</p>
     #   @return [Types::VpcIngressConnection]
     class DeleteVpcIngressConnectionResponse < Struct.new(
+      nil,
       :vpc_ingress_connection,
       keyword_init: true
     )
@@ -817,6 +853,7 @@ module Aws::AppRunner
     #         described.</p>
     #   @return [String]
     class DescribeAutoScalingConfigurationRequest < Struct.new(
+      nil,
       :auto_scaling_configuration_arn,
       keyword_init: true
     )
@@ -827,6 +864,7 @@ module Aws::AppRunner
     #   <p>A full description of the App Runner auto scaling configuration that you specified in this request.</p>
     #   @return [Types::AutoScalingConfiguration]
     class DescribeAutoScalingConfigurationResponse < Struct.new(
+      nil,
       :auto_scaling_configuration,
       keyword_init: true
     )
@@ -846,6 +884,7 @@ module Aws::AppRunner
     #            <p>If you don't specify <code>MaxResults</code>, the request retrieves all available results in a single response.</p>
     #   @return [Integer]
     class DescribeCustomDomainsRequest < Struct.new(
+      nil,
       :service_arn,
       :next_token,
       :max_results,
@@ -872,6 +911,7 @@ module Aws::AppRunner
     #   <p>The token that you can pass in a subsequent request to get the next result page. It's returned in a paginated request.</p>
     #   @return [String]
     class DescribeCustomDomainsResponse < Struct.new(
+      nil,
       :dns_target,
       :service_arn,
       :custom_domains,
@@ -891,6 +931,7 @@ module Aws::AppRunner
     #         described.</p>
     #   @return [String]
     class DescribeObservabilityConfigurationRequest < Struct.new(
+      nil,
       :observability_configuration_arn,
       keyword_init: true
     )
@@ -901,6 +942,7 @@ module Aws::AppRunner
     #   <p>A full description of the App Runner observability configuration that you specified in this request.</p>
     #   @return [Types::ObservabilityConfiguration]
     class DescribeObservabilityConfigurationResponse < Struct.new(
+      nil,
       :observability_configuration,
       keyword_init: true
     )
@@ -911,6 +953,7 @@ module Aws::AppRunner
     #   <p>The Amazon Resource Name (ARN) of the App Runner service that you want a description for.</p>
     #   @return [String]
     class DescribeServiceRequest < Struct.new(
+      nil,
       :service_arn,
       keyword_init: true
     )
@@ -921,6 +964,7 @@ module Aws::AppRunner
     #   <p>A full description of the App Runner service that you specified in this request.</p>
     #   @return [Types::Service]
     class DescribeServiceResponse < Struct.new(
+      nil,
       :service,
       keyword_init: true
     )
@@ -932,6 +976,7 @@ module Aws::AppRunner
     #            <p>The ARN must be a full VPC connector ARN.</p>
     #   @return [String]
     class DescribeVpcConnectorRequest < Struct.new(
+      nil,
       :vpc_connector_arn,
       keyword_init: true
     )
@@ -942,6 +987,7 @@ module Aws::AppRunner
     #   <p>A description of the App Runner VPC connector that you specified in this request.</p>
     #   @return [Types::VpcConnector]
     class DescribeVpcConnectorResponse < Struct.new(
+      nil,
       :vpc_connector,
       keyword_init: true
     )
@@ -952,6 +998,7 @@ module Aws::AppRunner
     #   <p>The Amazon Resource Name (ARN) of the App Runner VPC Ingress Connection that you want a description for.</p>
     #   @return [String]
     class DescribeVpcIngressConnectionRequest < Struct.new(
+      nil,
       :vpc_ingress_connection_arn,
       keyword_init: true
     )
@@ -962,6 +1009,7 @@ module Aws::AppRunner
     #   <p>A description of the App Runner VPC Ingress Connection that you specified in this request.</p>
     #   @return [Types::VpcIngressConnection]
     class DescribeVpcIngressConnectionResponse < Struct.new(
+      nil,
       :vpc_ingress_connection,
       keyword_init: true
     )
@@ -975,6 +1023,7 @@ module Aws::AppRunner
     #   <p>The domain name that you want to disassociate from the App Runner service.</p>
     #   @return [String]
     class DisassociateCustomDomainRequest < Struct.new(
+      nil,
       :service_arn,
       :domain_name,
       keyword_init: true
@@ -996,6 +1045,7 @@ module Aws::AppRunner
     #         </p>
     #   @return [Array<Types::VpcDNSTarget>]
     class DisassociateCustomDomainResponse < Struct.new(
+      nil,
       :dns_target,
       :service_arn,
       :custom_domain,
@@ -1016,6 +1066,7 @@ module Aws::AppRunner
     #           VPC</code>.</p>
     #   @return [String]
     class EgressConfiguration < Struct.new(
+      nil,
       :egress_type,
       :vpc_connector_arn,
       keyword_init: true
@@ -1028,6 +1079,7 @@ module Aws::AppRunner
     #   <p>The ARN of the KMS key that's used for encryption.</p>
     #   @return [String]
     class EncryptionConfiguration < Struct.new(
+      nil,
       :kms_key,
       keyword_init: true
     )
@@ -1069,6 +1121,7 @@ module Aws::AppRunner
     #            </p>
     #   @return [Integer]
     class HealthCheckConfiguration < Struct.new(
+      nil,
       :protocol,
       :path,
       :interval,
@@ -1110,6 +1163,7 @@ module Aws::AppRunner
     #            </note>
     #   @return [Hash<String, String>]
     class ImageConfiguration < Struct.new(
+      nil,
       :runtime_environment_variables,
       :start_command,
       :port,
@@ -1131,6 +1185,7 @@ module Aws::AppRunner
     #   <p>The type of the image repository. This reflects the repository provider and whether the repository is private or public.</p>
     #   @return [String]
     class ImageRepository < Struct.new(
+      nil,
       :image_identifier,
       :image_configuration,
       :image_repository_type,
@@ -1145,6 +1200,7 @@ module Aws::AppRunner
     #         privately accessible, from only within an Amazon VPC set it to <code>False</code>. </p>
     #   @return [Boolean]
     class IngressConfiguration < Struct.new(
+      nil,
       :is_publicly_accessible,
       keyword_init: true
     )
@@ -1166,6 +1222,7 @@ module Aws::AppRunner
     #       </p>
     #   @return [String]
     class IngressVpcConfiguration < Struct.new(
+      nil,
       :vpc_id,
       :vpc_endpoint_id,
       keyword_init: true
@@ -1189,6 +1246,7 @@ module Aws::AppRunner
     #         any Amazon Web Services APIs.</p>
     #   @return [String]
     class InstanceConfiguration < Struct.new(
+      nil,
       :cpu,
       :memory,
       :instance_role_arn,
@@ -1201,6 +1259,7 @@ module Aws::AppRunner
     # @!attribute message
     #   @return [String]
     class InternalServiceErrorException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -1211,6 +1270,7 @@ module Aws::AppRunner
     # @!attribute message
     #   @return [String]
     class InvalidRequestException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -1221,6 +1281,7 @@ module Aws::AppRunner
     # @!attribute message
     #   @return [String]
     class InvalidStateException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -1247,6 +1308,7 @@ module Aws::AppRunner
     #            <p>If you don't specify <code>NextToken</code>, the request retrieves the first result page.</p>
     #   @return [String]
     class ListAutoScalingConfigurationsRequest < Struct.new(
+      nil,
       :auto_scaling_configuration_name,
       :latest_only,
       :max_results,
@@ -1264,6 +1326,7 @@ module Aws::AppRunner
     #   <p>The token that you can pass in a subsequent request to get the next result page. It's returned in a paginated request.</p>
     #   @return [String]
     class ListAutoScalingConfigurationsResponse < Struct.new(
+      nil,
       :auto_scaling_configuration_summary_list,
       :next_token,
       keyword_init: true
@@ -1284,6 +1347,7 @@ module Aws::AppRunner
     #            <p>If you don't specify <code>NextToken</code>, the request retrieves the first result page.</p>
     #   @return [String]
     class ListConnectionsRequest < Struct.new(
+      nil,
       :connection_name,
       :max_results,
       :next_token,
@@ -1300,6 +1364,7 @@ module Aws::AppRunner
     #   <p>The token that you can pass in a subsequent request to get the next result page. Returned in a paginated request.</p>
     #   @return [String]
     class ListConnectionsResponse < Struct.new(
+      nil,
       :connection_summary_list,
       :next_token,
       keyword_init: true
@@ -1327,6 +1392,7 @@ module Aws::AppRunner
     #            <p>If you don't specify <code>NextToken</code>, the request retrieves the first result page.</p>
     #   @return [String]
     class ListObservabilityConfigurationsRequest < Struct.new(
+      nil,
       :observability_configuration_name,
       :latest_only,
       :max_results,
@@ -1344,6 +1410,7 @@ module Aws::AppRunner
     #   <p>The token that you can pass in a subsequent request to get the next result page. It's returned in a paginated request.</p>
     #   @return [String]
     class ListObservabilityConfigurationsResponse < Struct.new(
+      nil,
       :observability_configuration_summary_list,
       :next_token,
       keyword_init: true
@@ -1364,6 +1431,7 @@ module Aws::AppRunner
     #            <p>If you don't specify <code>MaxResults</code>, the request retrieves all available results in a single response.</p>
     #   @return [Integer]
     class ListOperationsRequest < Struct.new(
+      nil,
       :service_arn,
       :next_token,
       :max_results,
@@ -1380,6 +1448,7 @@ module Aws::AppRunner
     #   <p>The token that you can pass in a subsequent request to get the next result page. It's returned in a paginated request.</p>
     #   @return [String]
     class ListOperationsResponse < Struct.new(
+      nil,
       :operation_summary_list,
       :next_token,
       keyword_init: true
@@ -1404,6 +1473,7 @@ module Aws::AppRunner
     #            <p>If you don't specify <code>NextToken</code>, the request retrieves the first result page.</p>
     #   @return [String]
     class ListServicesForAutoScalingConfigurationRequest < Struct.new(
+      nil,
       :auto_scaling_configuration_arn,
       :max_results,
       :next_token,
@@ -1419,6 +1489,7 @@ module Aws::AppRunner
     #   <p>The token that you can pass in a subsequent request to get the next result page. It's returned in a paginated request.</p>
     #   @return [String]
     class ListServicesForAutoScalingConfigurationResponse < Struct.new(
+      nil,
       :service_arn_list,
       :next_token,
       keyword_init: true
@@ -1436,6 +1507,7 @@ module Aws::AppRunner
     #            <p>If you don't specify <code>MaxResults</code>, the request retrieves all available results in a single response.</p>
     #   @return [Integer]
     class ListServicesRequest < Struct.new(
+      nil,
       :next_token,
       :max_results,
       keyword_init: true
@@ -1450,6 +1522,7 @@ module Aws::AppRunner
     #   <p>The token that you can pass in a subsequent request to get the next result page. It's returned in a paginated request.</p>
     #   @return [String]
     class ListServicesResponse < Struct.new(
+      nil,
       :service_summary_list,
       :next_token,
       keyword_init: true
@@ -1462,6 +1535,7 @@ module Aws::AppRunner
     #            <p>It must be the ARN of an App Runner resource.</p>
     #   @return [String]
     class ListTagsForResourceRequest < Struct.new(
+      nil,
       :resource_arn,
       keyword_init: true
     )
@@ -1472,6 +1546,7 @@ module Aws::AppRunner
     #   <p>A list of the tag key-value pairs that are associated with the resource.</p>
     #   @return [Array<Types::Tag>]
     class ListTagsForResourceResponse < Struct.new(
+      nil,
       :tags,
       keyword_init: true
     )
@@ -1488,6 +1563,7 @@ module Aws::AppRunner
     #            <p>If you don't specify <code>NextToken</code>, the request retrieves the first result page.</p>
     #   @return [String]
     class ListVpcConnectorsRequest < Struct.new(
+      nil,
       :max_results,
       :next_token,
       keyword_init: true
@@ -1503,6 +1579,7 @@ module Aws::AppRunner
     #   <p>The token that you can pass in a subsequent request to get the next result page. It's returned in a paginated request.</p>
     #   @return [String]
     class ListVpcConnectorsResponse < Struct.new(
+      nil,
       :vpc_connectors,
       :next_token,
       keyword_init: true
@@ -1520,6 +1597,7 @@ module Aws::AppRunner
     #       </p>
     #   @return [String]
     class ListVpcIngressConnectionsFilter < Struct.new(
+      nil,
       :service_arn,
       :vpc_endpoint_id,
       keyword_init: true
@@ -1540,6 +1618,7 @@ module Aws::AppRunner
     #            <p>If you don't specify <code>NextToken</code>, the request retrieves the first result page.</p>
     #   @return [String]
     class ListVpcIngressConnectionsRequest < Struct.new(
+      nil,
       :filter,
       :max_results,
       :next_token,
@@ -1555,6 +1634,7 @@ module Aws::AppRunner
     #   <p>The token that you can pass in a subsequent request to get the next result page. It's returned in a paginated request.</p>
     #   @return [String]
     class ListVpcIngressConnectionsResponse < Struct.new(
+      nil,
       :vpc_ingress_connection_summary_list,
       :next_token,
       keyword_init: true
@@ -1575,6 +1655,7 @@ module Aws::AppRunner
     #         This is an optional parameter. If you do not specify an <code>IpAddressType</code>, it defaults to select IPv4.</p>
     #   @return [String]
     class NetworkConfiguration < Struct.new(
+      nil,
       :egress_configuration,
       :ingress_configuration,
       :ip_address_type,
@@ -1616,6 +1697,7 @@ module Aws::AppRunner
     #   <p>The time when the observability configuration was deleted. It's in Unix time stamp format.</p>
     #   @return [Time]
     class ObservabilityConfiguration < Struct.new(
+      nil,
       :observability_configuration_arn,
       :observability_configuration_name,
       :trace_configuration,
@@ -1650,6 +1732,7 @@ module Aws::AppRunner
     #         same <code>ObservabilityConfigurationName</code>.</p>
     #   @return [Integer]
     class ObservabilityConfigurationSummary < Struct.new(
+      nil,
       :observability_configuration_arn,
       :observability_configuration_name,
       :observability_configuration_revision,
@@ -1686,6 +1769,7 @@ module Aws::AppRunner
     #   <p>The time when the operation was last updated. It's in the Unix time stamp format.</p>
     #   @return [Time]
     class OperationSummary < Struct.new(
+      nil,
       :id,
       :type,
       :status,
@@ -1702,6 +1786,7 @@ module Aws::AppRunner
     #   <p>The Amazon Resource Name (ARN) of the App Runner service that you want to pause.</p>
     #   @return [String]
     class PauseServiceRequest < Struct.new(
+      nil,
       :service_arn,
       keyword_init: true
     )
@@ -1716,6 +1801,7 @@ module Aws::AppRunner
     #         the operation's progress.</p>
     #   @return [String]
     class PauseServiceResponse < Struct.new(
+      nil,
       :service,
       :operation_id,
       keyword_init: true
@@ -1727,6 +1813,7 @@ module Aws::AppRunner
     # @!attribute message
     #   @return [String]
     class ResourceNotFoundException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -1737,6 +1824,7 @@ module Aws::AppRunner
     #   <p>The Amazon Resource Name (ARN) of the App Runner service that you want to resume.</p>
     #   @return [String]
     class ResumeServiceRequest < Struct.new(
+      nil,
       :service_arn,
       keyword_init: true
     )
@@ -1751,6 +1839,7 @@ module Aws::AppRunner
     #         the operation's progress.</p>
     #   @return [String]
     class ResumeServiceResponse < Struct.new(
+      nil,
       :service,
       :operation_id,
       keyword_init: true
@@ -1821,6 +1910,7 @@ module Aws::AppRunner
     #   <p>The observability configuration of this service.</p>
     #   @return [Types::ServiceObservabilityConfiguration]
     class Service < Struct.new(
+      nil,
       :service_name,
       :service_id,
       :service_arn,
@@ -1858,6 +1948,7 @@ module Aws::AppRunner
     #            </p>
     #   @return [String]
     class ServiceObservabilityConfiguration < Struct.new(
+      nil,
       :observability_enabled,
       :observability_configuration_arn,
       keyword_init: true
@@ -1876,6 +1967,7 @@ module Aws::AppRunner
     # @!attribute message
     #   @return [String]
     class ServiceQuotaExceededException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -1919,6 +2011,7 @@ module Aws::AppRunner
     #            </ul>
     #   @return [String]
     class ServiceSummary < Struct.new(
+      nil,
       :service_name,
       :service_id,
       :service_arn,
@@ -1941,6 +2034,7 @@ module Aws::AppRunner
     #            <p>For a git-based repository, a branch name maps to a specific version. App Runner uses the most recent commit to the branch.</p>
     #   @return [String]
     class SourceCodeVersion < Struct.new(
+      nil,
       :type,
       :value,
       keyword_init: true
@@ -1969,6 +2063,7 @@ module Aws::AppRunner
     #   <p>Describes the resources that are needed to authenticate access to some source repositories.</p>
     #   @return [Types::AuthenticationConfiguration]
     class SourceConfiguration < Struct.new(
+      nil,
       :code_repository,
       :image_repository,
       :auto_deployments_enabled,
@@ -1982,6 +2077,7 @@ module Aws::AppRunner
     #   <p>The Amazon Resource Name (ARN) of the App Runner service that you want to manually deploy to.</p>
     #   @return [String]
     class StartDeploymentRequest < Struct.new(
+      nil,
       :service_arn,
       keyword_init: true
     )
@@ -1993,6 +2089,7 @@ module Aws::AppRunner
     #         the operation's progress.</p>
     #   @return [String]
     class StartDeploymentResponse < Struct.new(
+      nil,
       :operation_id,
       keyword_init: true
     )
@@ -2007,6 +2104,7 @@ module Aws::AppRunner
     #   <p>The value of the tag.</p>
     #   @return [String]
     class Tag < Struct.new(
+      nil,
       :key,
       :value,
       keyword_init: true
@@ -2023,6 +2121,7 @@ module Aws::AppRunner
     #         associated with the resource, the value of the tag is updated.</p>
     #   @return [Array<Types::Tag>]
     class TagResourceRequest < Struct.new(
+      nil,
       :resource_arn,
       :tags,
       keyword_init: true
@@ -2031,6 +2130,7 @@ module Aws::AppRunner
     end
 
     class TagResourceResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -2041,6 +2141,7 @@ module Aws::AppRunner
     #   <p>The implementation provider chosen for tracing App Runner services.</p>
     #   @return [String]
     class TraceConfiguration < Struct.new(
+      nil,
       :vendor,
       keyword_init: true
     )
@@ -2055,6 +2156,7 @@ module Aws::AppRunner
     #   <p>A list of tag keys that you want to remove.</p>
     #   @return [Array<String>]
     class UntagResourceRequest < Struct.new(
+      nil,
       :resource_arn,
       :tag_keys,
       keyword_init: true
@@ -2063,6 +2165,7 @@ module Aws::AppRunner
     end
 
     class UntagResourceResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -2077,6 +2180,7 @@ module Aws::AppRunner
     #         default.</p>
     #   @return [String]
     class UpdateDefaultAutoScalingConfigurationRequest < Struct.new(
+      nil,
       :auto_scaling_configuration_arn,
       keyword_init: true
     )
@@ -2087,6 +2191,7 @@ module Aws::AppRunner
     #   <p>A description of the App Runner auto scaling configuration that was set as default.</p>
     #   @return [Types::AutoScalingConfiguration]
     class UpdateDefaultAutoScalingConfigurationResponse < Struct.new(
+      nil,
       :auto_scaling_configuration,
       keyword_init: true
     )
@@ -2119,6 +2224,7 @@ module Aws::AppRunner
     #   <p>The observability configuration of your service.</p>
     #   @return [Types::ServiceObservabilityConfiguration]
     class UpdateServiceRequest < Struct.new(
+      nil,
       :service_arn,
       :source_configuration,
       :instance_configuration,
@@ -2140,6 +2246,7 @@ module Aws::AppRunner
     #         the operation's progress.</p>
     #   @return [String]
     class UpdateServiceResponse < Struct.new(
+      nil,
       :service,
       :operation_id,
       keyword_init: true
@@ -2155,6 +2262,7 @@ module Aws::AppRunner
     #         resource.</p>
     #   @return [Types::IngressVpcConfiguration]
     class UpdateVpcIngressConnectionRequest < Struct.new(
+      nil,
       :vpc_ingress_connection_arn,
       :ingress_vpc_configuration,
       keyword_init: true
@@ -2166,6 +2274,7 @@ module Aws::AppRunner
     #   <p>A description of the App Runner VPC Ingress Connection resource that's updated by this request.</p>
     #   @return [Types::VpcIngressConnection]
     class UpdateVpcIngressConnectionResponse < Struct.new(
+      nil,
       :vpc_ingress_connection,
       keyword_init: true
     )
@@ -2209,6 +2318,7 @@ module Aws::AppRunner
     #   <p>The time when the VPC connector was deleted. It's in Unix time stamp format.</p>
     #   @return [Time]
     class VpcConnector < Struct.new(
+      nil,
       :vpc_connector_name,
       :vpc_connector_arn,
       :vpc_connector_revision,
@@ -2238,6 +2348,7 @@ module Aws::AppRunner
     #   <p>The domain name of your target DNS that is associated with the Amazon VPC.</p>
     #   @return [String]
     class VpcDNSTarget < Struct.new(
+      nil,
       :vpc_ingress_connection_arn,
       :vpc_id,
       :domain_name,
@@ -2304,6 +2415,7 @@ module Aws::AppRunner
     #            </ul>
     #   @return [Time]
     class VpcIngressConnection < Struct.new(
+      nil,
       :vpc_ingress_connection_arn,
       :vpc_ingress_connection_name,
       :service_arn,
@@ -2328,6 +2440,7 @@ module Aws::AppRunner
     #       </p>
     #   @return [String]
     class VpcIngressConnectionSummary < Struct.new(
+      nil,
       :vpc_ingress_connection_arn,
       :service_arn,
       keyword_init: true

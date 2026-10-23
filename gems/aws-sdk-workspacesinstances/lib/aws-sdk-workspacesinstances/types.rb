@@ -11,6 +11,7 @@ module Aws::WorkspacesInstances
     #   <p>Detailed explanation of the access denial.</p>
     #   @return [String]
     class AccessDeniedException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -28,6 +29,7 @@ module Aws::WorkspacesInstances
     #   <p>Device path for volume attachment.</p>
     #   @return [String]
     class AssociateVolumeRequest < Struct.new(
+      nil,
       :workspace_instance_id,
       :volume_id,
       :device,
@@ -38,6 +40,7 @@ module Aws::WorkspacesInstances
 
     # <p>Confirms volume attachment.</p>
     class AssociateVolumeResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -57,6 +60,7 @@ module Aws::WorkspacesInstances
     #   <p>Virtual device name for ephemeral storage.</p>
     #   @return [String]
     class BlockDeviceMappingRequest < Struct.new(
+      nil,
       :device_name,
       :ebs,
       :no_device,
@@ -74,6 +78,7 @@ module Aws::WorkspacesInstances
     #   <p>Specific capacity reservation target.</p>
     #   @return [Types::CapacityReservationTarget]
     class CapacityReservationSpecification < Struct.new(
+      nil,
       :capacity_reservation_preference,
       :capacity_reservation_target,
       keyword_init: true
@@ -89,6 +94,7 @@ module Aws::WorkspacesInstances
     #   <p>ARN of the capacity reservation resource group.</p>
     #   @return [String]
     class CapacityReservationTarget < Struct.new(
+      nil,
       :capacity_reservation_id,
       :capacity_reservation_resource_group_arn,
       keyword_init: true
@@ -107,6 +113,7 @@ module Aws::WorkspacesInstances
     #   <p>Type of the conflicting resource.</p>
     #   @return [String]
     class ConflictException < Struct.new(
+      nil,
       :message,
       :resource_id,
       :resource_type,
@@ -126,6 +133,7 @@ module Aws::WorkspacesInstances
     #   <p>General timeout for UDP connections.</p>
     #   @return [Integer]
     class ConnectionTrackingSpecificationRequest < Struct.new(
+      nil,
       :tcp_established_timeout,
       :udp_stream_timeout,
       :udp_timeout,
@@ -145,6 +153,7 @@ module Aws::WorkspacesInstances
     #   <p>Number of threads per CPU core.</p>
     #   @return [Integer]
     class CpuOptionsRequest < Struct.new(
+      nil,
       :amd_sev_snp,
       :core_count,
       :threads_per_core,
@@ -185,6 +194,7 @@ module Aws::WorkspacesInstances
     #   <p>Type of EBS volume.</p>
     #   @return [String]
     class CreateVolumeRequest < Struct.new(
+      nil,
       :availability_zone,
       :client_token,
       :encrypted,
@@ -205,6 +215,7 @@ module Aws::WorkspacesInstances
     #   <p>Unique identifier for the new volume.</p>
     #   @return [String]
     class CreateVolumeResponse < Struct.new(
+      nil,
       :volume_id,
       keyword_init: true
     )
@@ -222,6 +233,7 @@ module Aws::WorkspacesInstances
     #   <p>Comprehensive configuration settings for the WorkSpaces Instance, including network, compute, and storage parameters.</p>
     #   @return [Types::ManagedInstanceRequest]
     class CreateWorkspaceInstanceRequest < Struct.new(
+      nil,
       :client_token,
       :tags,
       :managed_instance,
@@ -235,6 +247,7 @@ module Aws::WorkspacesInstances
     #   <p>Unique identifier assigned to the newly created WorkSpaces Instance.</p>
     #   @return [String]
     class CreateWorkspaceInstanceResponse < Struct.new(
+      nil,
       :workspace_instance_id,
       keyword_init: true
     )
@@ -246,6 +259,7 @@ module Aws::WorkspacesInstances
     #   <p>CPU credit specification mode.</p>
     #   @return [String]
     class CreditSpecificationRequest < Struct.new(
+      nil,
       :cpu_credits,
       keyword_init: true
     )
@@ -257,6 +271,7 @@ module Aws::WorkspacesInstances
     #   <p>Identifier of the volume to delete.</p>
     #   @return [String]
     class DeleteVolumeRequest < Struct.new(
+      nil,
       :volume_id,
       keyword_init: true
     )
@@ -265,6 +280,7 @@ module Aws::WorkspacesInstances
 
     # <p>Confirms volume deletion.</p>
     class DeleteVolumeResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -275,6 +291,7 @@ module Aws::WorkspacesInstances
     #   <p>Unique identifier of the WorkSpaces Instance targeted for deletion.</p>
     #   @return [String]
     class DeleteWorkspaceInstanceRequest < Struct.new(
+      nil,
       :workspace_instance_id,
       keyword_init: true
     )
@@ -283,6 +300,7 @@ module Aws::WorkspacesInstances
 
     # <p>Confirms the successful deletion of the specified WorkSpace Instance.</p>
     class DeleteWorkspaceInstanceResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -302,6 +320,7 @@ module Aws::WorkspacesInstances
     #   <p>Mode for volume detachment.</p>
     #   @return [String]
     class DisassociateVolumeRequest < Struct.new(
+      nil,
       :workspace_instance_id,
       :volume_id,
       :device,
@@ -313,6 +332,7 @@ module Aws::WorkspacesInstances
 
     # <p>Confirms volume detachment.</p>
     class DisassociateVolumeResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -329,6 +349,7 @@ module Aws::WorkspacesInstances
     #   <p>Detailed description of the EC2 instance error.</p>
     #   @return [String]
     class EC2InstanceError < Struct.new(
+      nil,
       :ec2_error_code,
       :ec2_exception_type,
       :ec2_error_message,
@@ -342,6 +363,7 @@ module Aws::WorkspacesInstances
     #   <p>Unique identifier of the managed EC2 instance.</p>
     #   @return [String]
     class EC2ManagedInstance < Struct.new(
+      nil,
       :instance_id,
       keyword_init: true
     )
@@ -368,6 +390,7 @@ module Aws::WorkspacesInstances
     #   <p>Size of the EBS volume in gigabytes.</p>
     #   @return [Integer]
     class EbsBlockDevice < Struct.new(
+      nil,
       :volume_type,
       :encrypted,
       :kms_key_id,
@@ -387,6 +410,7 @@ module Aws::WorkspacesInstances
     #   <p>Configures UDP-specific ENA SRD settings.</p>
     #   @return [Types::EnaSrdUdpSpecificationRequest]
     class EnaSrdSpecificationRequest < Struct.new(
+      nil,
       :ena_srd_enabled,
       :ena_srd_udp_specification,
       keyword_init: true
@@ -399,6 +423,7 @@ module Aws::WorkspacesInstances
     #   <p>Enables or disables ENA SRD for UDP traffic.</p>
     #   @return [Boolean]
     class EnaSrdUdpSpecificationRequest < Struct.new(
+      nil,
       :ena_srd_udp_enabled,
       keyword_init: true
     )
@@ -410,6 +435,7 @@ module Aws::WorkspacesInstances
     #   <p>Enables or disables AWS Nitro Enclaves for enhanced security.</p>
     #   @return [Boolean]
     class EnclaveOptionsRequest < Struct.new(
+      nil,
       :enabled,
       keyword_init: true
     )
@@ -421,6 +447,7 @@ module Aws::WorkspacesInstances
     #   <p>Unique identifier of the WorkSpace Instance to retrieve.</p>
     #   @return [String]
     class GetWorkspaceInstanceRequest < Struct.new(
+      nil,
       :workspace_instance_id,
       keyword_init: true
     )
@@ -444,6 +471,7 @@ module Aws::WorkspacesInstances
     #   <p>Details of the associated EC2 managed instance.</p>
     #   @return [Types::EC2ManagedInstance]
     class GetWorkspaceInstanceResponse < Struct.new(
+      nil,
       :workspace_instance_errors,
       :ec2_instance_errors,
       :provision_state,
@@ -459,6 +487,7 @@ module Aws::WorkspacesInstances
     #   <p>Enables or disables instance hibernation capability.</p>
     #   @return [Boolean]
     class HibernationOptionsRequest < Struct.new(
+      nil,
       :configured,
       keyword_init: true
     )
@@ -473,6 +502,7 @@ module Aws::WorkspacesInstances
     #   <p>Name of the IAM instance profile.</p>
     #   @return [String]
     class IamInstanceProfileSpecification < Struct.new(
+      nil,
       :arn,
       :name,
       keyword_init: true
@@ -488,6 +518,7 @@ module Aws::WorkspacesInstances
     #   <p>Indicates if this is the primary IPv6 address for the instance.</p>
     #   @return [Boolean]
     class InstanceIpv6Address < Struct.new(
+      nil,
       :ipv6_address,
       :is_primary_ipv6,
       keyword_init: true
@@ -500,6 +531,7 @@ module Aws::WorkspacesInstances
     #   <p>Enables or disables automatic instance recovery.</p>
     #   @return [String]
     class InstanceMaintenanceOptionsRequest < Struct.new(
+      nil,
       :auto_recovery,
       keyword_init: true
     )
@@ -514,6 +546,7 @@ module Aws::WorkspacesInstances
     #   <p>Configuration options for spot instance deployment.</p>
     #   @return [Types::SpotMarketOptions]
     class InstanceMarketOptionsRequest < Struct.new(
+      nil,
       :market_type,
       :spot_options,
       keyword_init: true
@@ -538,6 +571,7 @@ module Aws::WorkspacesInstances
     #   <p>Enables or disables instance metadata tags retrieval.</p>
     #   @return [String]
     class InstanceMetadataOptionsRequest < Struct.new(
+      nil,
       :http_endpoint,
       :http_protocol_ipv6,
       :http_put_response_hop_limit,
@@ -613,6 +647,7 @@ module Aws::WorkspacesInstances
     #   <p>Subnet identifier for the network interface.</p>
     #   @return [String]
     class InstanceNetworkInterfaceSpecification < Struct.new(
+      nil,
       :associate_carrier_ip_address,
       :associate_public_ip_address,
       :connection_tracking_specification,
@@ -644,6 +679,7 @@ module Aws::WorkspacesInstances
     #   <p>Defines bandwidth allocation strategy for network interfaces.</p>
     #   @return [String]
     class InstanceNetworkPerformanceOptionsRequest < Struct.new(
+      nil,
       :bandwidth_weighting,
       keyword_init: true
     )
@@ -655,6 +691,7 @@ module Aws::WorkspacesInstances
     #   <p>Unique identifier for the WorkSpace Instance type.</p>
     #   @return [String]
     class InstanceTypeInfo < Struct.new(
+      nil,
       :instance_type,
       keyword_init: true
     )
@@ -669,6 +706,7 @@ module Aws::WorkspacesInstances
     #   <p>Recommended wait time before retrying the request.</p>
     #   @return [Integer]
     class InternalServerException < Struct.new(
+      nil,
       :message,
       :retry_after_seconds,
       keyword_init: true
@@ -681,6 +719,7 @@ module Aws::WorkspacesInstances
     #   <p>Specific IPv4 prefix for network interface configuration.</p>
     #   @return [String]
     class Ipv4PrefixSpecificationRequest < Struct.new(
+      nil,
       :ipv4_prefix,
       keyword_init: true
     )
@@ -692,6 +731,7 @@ module Aws::WorkspacesInstances
     #   <p>Specific IPv6 prefix for network interface configuration.</p>
     #   @return [String]
     class Ipv6PrefixSpecificationRequest < Struct.new(
+      nil,
       :ipv6_prefix,
       keyword_init: true
     )
@@ -703,6 +743,7 @@ module Aws::WorkspacesInstances
     #   <p>ARN of the license configuration for the WorkSpace Instance.</p>
     #   @return [String]
     class LicenseConfigurationRequest < Struct.new(
+      nil,
       :license_configuration_arn,
       keyword_init: true
     )
@@ -717,6 +758,7 @@ module Aws::WorkspacesInstances
     #   <p>Pagination token for retrieving subsequent pages of instance type results.</p>
     #   @return [String]
     class ListInstanceTypesRequest < Struct.new(
+      nil,
       :max_results,
       :next_token,
       keyword_init: true
@@ -732,6 +774,7 @@ module Aws::WorkspacesInstances
     #   <p>Token for retrieving additional instance types if the result set is paginated.</p>
     #   @return [String]
     class ListInstanceTypesResponse < Struct.new(
+      nil,
       :instance_types,
       :next_token,
       keyword_init: true
@@ -747,6 +790,7 @@ module Aws::WorkspacesInstances
     #   <p>Pagination token for retrieving subsequent pages of region results.</p>
     #   @return [String]
     class ListRegionsRequest < Struct.new(
+      nil,
       :max_results,
       :next_token,
       keyword_init: true
@@ -762,6 +806,7 @@ module Aws::WorkspacesInstances
     #   <p>Token for retrieving additional regions if the result set is paginated.</p>
     #   @return [String]
     class ListRegionsResponse < Struct.new(
+      nil,
       :regions,
       :next_token,
       keyword_init: true
@@ -774,6 +819,7 @@ module Aws::WorkspacesInstances
     #   <p>Unique identifier of the WorkSpace Instance.</p>
     #   @return [String]
     class ListTagsForResourceRequest < Struct.new(
+      nil,
       :workspace_instance_id,
       keyword_init: true
     )
@@ -785,6 +831,7 @@ module Aws::WorkspacesInstances
     #   <p>Collection of tags associated with the WorkSpace Instance.</p>
     #   @return [Array<Types::Tag>]
     class ListTagsForResourceResponse < Struct.new(
+      nil,
       :tags,
       keyword_init: true
     )
@@ -802,6 +849,7 @@ module Aws::WorkspacesInstances
     #   <p>Pagination token for retrieving subsequent pages of WorkSpaces Instances.</p>
     #   @return [String]
     class ListWorkspaceInstancesRequest < Struct.new(
+      nil,
       :provision_states,
       :max_results,
       :next_token,
@@ -818,6 +866,7 @@ module Aws::WorkspacesInstances
     #   <p>Token for retrieving additional WorkSpaces Instances if the result set is paginated.</p>
     #   @return [String]
     class ListWorkspaceInstancesResponse < Struct.new(
+      nil,
       :workspace_instances,
       :next_token,
       keyword_init: true
@@ -923,6 +972,7 @@ module Aws::WorkspacesInstances
     #   <p>Provides custom initialization data for the instance.</p>
     #   @return [String]
     class ManagedInstanceRequest < Struct.new(
+      nil,
       :block_device_mappings,
       :capacity_reservation_specification,
       :cpu_options,
@@ -986,6 +1036,7 @@ module Aws::WorkspacesInstances
     #   <p>Defines instance tenancy configuration.</p>
     #   @return [String]
     class Placement < Struct.new(
+      nil,
       :affinity,
       :availability_zone,
       :group_id,
@@ -1010,6 +1061,7 @@ module Aws::WorkspacesInstances
     #   <p>Enables DNS AAAA record for resource name resolution.</p>
     #   @return [Boolean]
     class PrivateDnsNameOptionsRequest < Struct.new(
+      nil,
       :hostname_type,
       :enable_resource_name_dns_a_record,
       :enable_resource_name_dns_aaaa_record,
@@ -1026,6 +1078,7 @@ module Aws::WorkspacesInstances
     #   <p>Specific private IP address for the network interface.</p>
     #   @return [String]
     class PrivateIpAddressSpecification < Struct.new(
+      nil,
       :primary,
       :private_ip_address,
       keyword_init: true
@@ -1038,6 +1091,7 @@ module Aws::WorkspacesInstances
     #   <p>Name of the AWS region.</p>
     #   @return [String]
     class Region < Struct.new(
+      nil,
       :region_name,
       keyword_init: true
     )
@@ -1055,6 +1109,7 @@ module Aws::WorkspacesInstances
     #   <p>Type of the resource that was not found.</p>
     #   @return [String]
     class ResourceNotFoundException < Struct.new(
+      nil,
       :message,
       :resource_id,
       :resource_type,
@@ -1068,6 +1123,7 @@ module Aws::WorkspacesInstances
     #   <p>Enables or disables detailed instance monitoring.</p>
     #   @return [Boolean]
     class RunInstancesMonitoringEnabled < Struct.new(
+      nil,
       :enabled,
       keyword_init: true
     )
@@ -1091,6 +1147,7 @@ module Aws::WorkspacesInstances
     #   <p>Specific code for the exceeded quota.</p>
     #   @return [String]
     class ServiceQuotaExceededException < Struct.new(
+      nil,
       :message,
       :resource_id,
       :resource_type,
@@ -1118,6 +1175,7 @@ module Aws::WorkspacesInstances
     #   <p>Timestamp until which spot instance request is valid.</p>
     #   @return [Time]
     class SpotMarketOptions < Struct.new(
+      nil,
       :block_duration_minutes,
       :instance_interruption_behavior,
       :max_price,
@@ -1136,6 +1194,7 @@ module Aws::WorkspacesInstances
     #   <p>Value associated with the tag key.</p>
     #   @return [String]
     class Tag < Struct.new(
+      nil,
       :key,
       :value,
       keyword_init: true
@@ -1151,6 +1210,7 @@ module Aws::WorkspacesInstances
     #   <p>Tags to be added to the WorkSpace Instance.</p>
     #   @return [Array<Types::Tag>]
     class TagResourceRequest < Struct.new(
+      nil,
       :workspace_instance_id,
       :tags,
       keyword_init: true
@@ -1160,6 +1220,7 @@ module Aws::WorkspacesInstances
 
     # <p>Confirms successful tag addition.</p>
     class TagResourceResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1173,6 +1234,7 @@ module Aws::WorkspacesInstances
     #   <p>Collection of tags for the specified resource.</p>
     #   @return [Array<Types::Tag>]
     class TagSpecification < Struct.new(
+      nil,
       :resource_type,
       :tags,
       keyword_init: true
@@ -1194,6 +1256,7 @@ module Aws::WorkspacesInstances
     #   <p>Recommended wait time before retrying the request.</p>
     #   @return [Integer]
     class ThrottlingException < Struct.new(
+      nil,
       :message,
       :service_code,
       :quota_code,
@@ -1211,6 +1274,7 @@ module Aws::WorkspacesInstances
     #   <p>Keys of tags to be removed.</p>
     #   @return [Array<String>]
     class UntagResourceRequest < Struct.new(
+      nil,
       :workspace_instance_id,
       :tag_keys,
       keyword_init: true
@@ -1220,6 +1284,7 @@ module Aws::WorkspacesInstances
 
     # <p>Confirms successful tag removal.</p>
     class UntagResourceResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1236,6 +1301,7 @@ module Aws::WorkspacesInstances
     #   <p>List of fields that failed validation.</p>
     #   @return [Array<Types::ValidationExceptionField>]
     class ValidationException < Struct.new(
+      nil,
       :message,
       :reason,
       :field_list,
@@ -1255,6 +1321,7 @@ module Aws::WorkspacesInstances
     #   <p>Detailed error message describing the validation issue.</p>
     #   @return [String]
     class ValidationExceptionField < Struct.new(
+      nil,
       :name,
       :reason,
       :message,
@@ -1274,6 +1341,7 @@ module Aws::WorkspacesInstances
     #   <p>Details of the associated EC2 managed instance.</p>
     #   @return [Types::EC2ManagedInstance]
     class WorkspaceInstance < Struct.new(
+      nil,
       :provision_state,
       :workspace_instance_id,
       :ec2_managed_instance,
@@ -1290,6 +1358,7 @@ module Aws::WorkspacesInstances
     #   <p>Detailed description of the WorkSpace Instance error.</p>
     #   @return [String]
     class WorkspaceInstanceError < Struct.new(
+      nil,
       :error_code,
       :error_message,
       keyword_init: true

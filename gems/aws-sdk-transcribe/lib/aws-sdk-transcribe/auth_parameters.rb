@@ -10,6 +10,7 @@ module Aws::Transcribe
   #   @return [Symbol]
   #
   AuthParameters = Struct.new(
+    nil,
     :operation_name,
     keyword_init: true
   ) do

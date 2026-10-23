@@ -16,6 +16,7 @@ module Aws::Redshift
     #            </p>
     #   @return [String]
     class AcceptReservedNodeExchangeInputMessage < Struct.new(
+      nil,
       :reserved_node_id,
       :target_reserved_node_offering_id,
       keyword_init: true
@@ -27,6 +28,7 @@ module Aws::Redshift
     #   <p></p>
     #   @return [Types::ReservedNode]
     class AcceptReservedNodeExchangeOutputMessage < Struct.new(
+      nil,
       :exchanged_reserved_node,
       keyword_init: true
     )
@@ -37,6 +39,7 @@ module Aws::Redshift
     # @!attribute message
     #   @return [String]
     class AccessToClusterDeniedFault < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -48,6 +51,7 @@ module Aws::Redshift
     # @!attribute message
     #   @return [String]
     class AccessToSnapshotDeniedFault < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -62,6 +66,7 @@ module Aws::Redshift
     #   <p>A list of attribute values.</p>
     #   @return [Array<Types::AttributeValueTarget>]
     class AccountAttribute < Struct.new(
+      nil,
       :attribute_name,
       :attribute_values,
       keyword_init: true
@@ -79,6 +84,7 @@ module Aws::Redshift
     #               snapshot. For Amazon Web Services Support, the identifier is <code>amazon-redshift-support</code>. </p>
     #   @return [String]
     class AccountWithRestoreAccess < Struct.new(
+      nil,
       :account_id,
       :account_alias,
       keyword_init: true
@@ -99,6 +105,7 @@ module Aws::Redshift
     #   <p>The name of the partner that is authorized to send data.</p>
     #   @return [String]
     class AddPartnerInput < Struct.new(
+      nil,
       :account_id,
       :cluster_identifier,
       :database_name,
@@ -115,6 +122,7 @@ module Aws::Redshift
     #   <p>The name of the partner that is authorized to send data.</p>
     #   @return [String]
     class AddPartnerOutput < Struct.new(
+      nil,
       :database_name,
       :partner_name,
       keyword_init: true
@@ -130,6 +138,7 @@ module Aws::Redshift
     #   <p>This field is retired. Amazon Redshift automatically determines whether to use AQUA (Advanced Query Accelerator).</p>
     #   @return [String]
     class AquaConfiguration < Struct.new(
+      nil,
       :aqua_status,
       :aqua_configuration_status,
       keyword_init: true
@@ -154,6 +163,7 @@ module Aws::Redshift
     #   <p>If set to true, allows write operations for a datashare.</p>
     #   @return [Boolean]
     class AssociateDataShareConsumerMessage < Struct.new(
+      nil,
       :data_share_arn,
       :associate_entire_account,
       :consumer_arn,
@@ -184,6 +194,7 @@ module Aws::Redshift
     #   <p> The type of the datashare created by RegisterNamespace.</p>
     #   @return [String]
     class AssociateDataShareConsumerOutput < Struct.new(
+      nil,
       :data_share_arn,
       :producer_arn,
       :allow_publicly_accessible_consumers,
@@ -206,6 +217,7 @@ module Aws::Redshift
     #   <p>A list of all associated clusters and domain names tied to a specific certificate.</p>
     #   @return [Array<Types::CertificateAssociation>]
     class Association < Struct.new(
+      nil,
       :custom_domain_certificate_arn,
       :custom_domain_certificate_expiry_date,
       :certificate_associations,
@@ -219,6 +231,7 @@ module Aws::Redshift
     #   <p>The value of the attribute.</p>
     #   @return [String]
     class AttributeValueTarget < Struct.new(
+      nil,
       :attribute_value,
       keyword_init: true
     )
@@ -234,6 +247,7 @@ module Aws::Redshift
     #               The maximum length of the JSON string is determined by a quota for your account.</p>
     #   @return [String]
     class AuthenticationProfile < Struct.new(
+      nil,
       :authentication_profile_name,
       :authentication_profile_content,
       keyword_init: true
@@ -245,6 +259,7 @@ module Aws::Redshift
     # @!attribute message
     #   @return [String]
     class AuthenticationProfileAlreadyExistsFault < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -255,6 +270,7 @@ module Aws::Redshift
     # @!attribute message
     #   @return [String]
     class AuthenticationProfileNotFoundFault < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -266,6 +282,7 @@ module Aws::Redshift
     # @!attribute message
     #   @return [String]
     class AuthenticationProfileQuotaExceededFault < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -277,6 +294,7 @@ module Aws::Redshift
     # @!attribute message
     #   @return [String]
     class AuthorizationAlreadyExistsFault < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -288,6 +306,7 @@ module Aws::Redshift
     # @!attribute message
     #   @return [String]
     class AuthorizationNotFoundFault < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -298,6 +317,7 @@ module Aws::Redshift
     # @!attribute message
     #   @return [String]
     class AuthorizationQuotaExceededFault < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -322,6 +342,7 @@ module Aws::Redshift
     #            </p>
     #   @return [String]
     class AuthorizeClusterSecurityGroupIngressMessage < Struct.new(
+      nil,
       :cluster_security_group_name,
       :cidrip,
       :ec2_security_group_name,
@@ -335,6 +356,7 @@ module Aws::Redshift
     #   <p>Describes a security group.</p>
     #   @return [Types::ClusterSecurityGroup]
     class AuthorizeClusterSecurityGroupIngressResult < Struct.new(
+      nil,
       :cluster_security_group,
       keyword_init: true
     )
@@ -352,6 +374,7 @@ module Aws::Redshift
     #   <p>If set to true, allows write operations for a datashare.</p>
     #   @return [Boolean]
     class AuthorizeDataShareMessage < Struct.new(
+      nil,
       :data_share_arn,
       :consumer_identifier,
       :allow_writes,
@@ -380,6 +403,7 @@ module Aws::Redshift
     #   <p> The type of the datashare created by RegisterNamespace.</p>
     #   @return [String]
     class AuthorizeDataShareOutput < Struct.new(
+      nil,
       :data_share_arn,
       :producer_arn,
       :allow_publicly_accessible_consumers,
@@ -401,6 +425,7 @@ module Aws::Redshift
     #   <p>The virtual private cloud (VPC) identifiers to grant access to.</p>
     #   @return [Array<String>]
     class AuthorizeEndpointAccessMessage < Struct.new(
+      nil,
       :cluster_identifier,
       :account,
       :vpc_ids,
@@ -438,6 +463,7 @@ module Aws::Redshift
     #   <p>The number of Redshift-managed VPC endpoints created for the authorization.</p>
     #   @return [Integer]
     class AuthorizeEndpointAccessOutput < Struct.new(
+      nil,
       :grantor,
       :grantee,
       :cluster_identifier,
@@ -480,6 +506,7 @@ module Aws::Redshift
     #            <p>To share a snapshot with Amazon Web Services Support, specify amazon-redshift-support.</p>
     #   @return [String]
     class AuthorizeSnapshotAccessMessage < Struct.new(
+      nil,
       :snapshot_identifier,
       :snapshot_arn,
       :snapshot_cluster_identifier,
@@ -493,6 +520,7 @@ module Aws::Redshift
     #   <p>Describes a snapshot.</p>
     #   @return [Types::Snapshot]
     class AuthorizeSnapshotAccessResult < Struct.new(
+      nil,
       :snapshot,
       keyword_init: true
     )
@@ -508,6 +536,7 @@ module Aws::Redshift
     #               with IDC Identity Center.</p>
     #   @return [Array<String>]
     class AuthorizedTokenIssuer < Struct.new(
+      nil,
       :trusted_token_issuer_arn,
       :authorized_audiences_list,
       keyword_init: true
@@ -523,6 +552,7 @@ module Aws::Redshift
     #   <p></p>
     #   @return [Array<Types::SupportedPlatform>]
     class AvailabilityZone < Struct.new(
+      nil,
       :name,
       :supported_platforms,
       keyword_init: true
@@ -534,6 +564,7 @@ module Aws::Redshift
     #   <p>A list of identifiers for the snapshots that you want to delete.</p>
     #   @return [Array<Types::DeleteClusterSnapshotMessage>]
     class BatchDeleteClusterSnapshotsRequest < Struct.new(
+      nil,
       :identifiers,
       keyword_init: true
     )
@@ -547,6 +578,7 @@ module Aws::Redshift
     #   <p>A list of any errors returned.</p>
     #   @return [Array<Types::SnapshotErrorMessage>]
     class BatchDeleteClusterSnapshotsResult < Struct.new(
+      nil,
       :resources,
       :errors,
       keyword_init: true
@@ -559,6 +591,7 @@ module Aws::Redshift
     # @!attribute message
     #   @return [String]
     class BatchDeleteRequestSizeExceededFault < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -570,6 +603,7 @@ module Aws::Redshift
     # @!attribute message
     #   @return [String]
     class BatchModifyClusterSnapshotsLimitExceededFault < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -592,6 +626,7 @@ module Aws::Redshift
     #               has passed. </p>
     #   @return [Boolean]
     class BatchModifyClusterSnapshotsMessage < Struct.new(
+      nil,
       :snapshot_identifier_list,
       :manual_snapshot_retention_period,
       :force,
@@ -607,6 +642,7 @@ module Aws::Redshift
     #   <p>A list of any errors returned.</p>
     #   @return [Array<Types::SnapshotErrorMessage>]
     class BatchModifyClusterSnapshotsOutputMessage < Struct.new(
+      nil,
       :resources,
       :errors,
       keyword_init: true
@@ -618,6 +654,7 @@ module Aws::Redshift
     # @!attribute message
     #   @return [String]
     class BucketNotFoundFault < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -629,6 +666,7 @@ module Aws::Redshift
     #               for.</p>
     #   @return [String]
     class CancelResizeMessage < Struct.new(
+      nil,
       :cluster_identifier,
       keyword_init: true
     )
@@ -710,6 +748,7 @@ module Aws::Redshift
     #   <p>The percent of data transferred from source cluster to target cluster.</p>
     #   @return [Float]
     class CancelResizeOutput < Struct.new(
+      nil,
       :target_node_type,
       :target_number_of_nodes,
       :target_cluster_type,
@@ -740,6 +779,7 @@ module Aws::Redshift
     #   <p>The cluster identifier for the certificate association.</p>
     #   @return [String]
     class CertificateAssociation < Struct.new(
+      nil,
       :custom_domain_name,
       :cluster_identifier,
       keyword_init: true
@@ -1101,6 +1141,7 @@ module Aws::Redshift
     #   <p>The secondary compute unit of a cluster, if Multi-AZ deployment is turned on.</p>
     #   @return [Types::SecondaryClusterInfo]
     class Cluster < Struct.new(
+      nil,
       :cluster_identifier,
       :node_type,
       :cluster_status,
@@ -1170,6 +1211,7 @@ module Aws::Redshift
     # @!attribute message
     #   @return [String]
     class ClusterAlreadyExistsFault < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -1184,6 +1226,7 @@ module Aws::Redshift
     #   <p></p>
     #   @return [String]
     class ClusterAssociatedToSchedule < Struct.new(
+      nil,
       :cluster_identifier,
       :schedule_association_state,
       keyword_init: true
@@ -1206,6 +1249,7 @@ module Aws::Redshift
     #               database revision that a cluster can be updated to.</p>
     #   @return [Array<Types::RevisionTarget>]
     class ClusterDbRevision < Struct.new(
+      nil,
       :cluster_identifier,
       :current_database_revision,
       :database_revision_release_date,
@@ -1225,6 +1269,7 @@ module Aws::Redshift
     #   <p>A list of revisions.</p>
     #   @return [Array<Types::ClusterDbRevision>]
     class ClusterDbRevisionsMessage < Struct.new(
+      nil,
       :marker,
       :cluster_db_revisions,
       keyword_init: true
@@ -1260,6 +1305,7 @@ module Aws::Redshift
     #            </ul>
     #   @return [String]
     class ClusterIamRole < Struct.new(
+      nil,
       :iam_role_arn,
       :apply_status,
       keyword_init: true
@@ -1278,6 +1324,7 @@ module Aws::Redshift
     #   <p>The public IP address of a node within a cluster.</p>
     #   @return [String]
     class ClusterNode < Struct.new(
+      nil,
       :node_role,
       :private_ip_address,
       :public_ip_address,
@@ -1291,6 +1338,7 @@ module Aws::Redshift
     # @!attribute message
     #   @return [String]
     class ClusterNotFoundFault < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -1301,6 +1349,7 @@ module Aws::Redshift
     # @!attribute message
     #   @return [String]
     class ClusterOnLatestRevisionFault < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -1322,6 +1371,7 @@ module Aws::Redshift
     #   <p>The list of tags for the cluster parameter group.</p>
     #   @return [Array<Types::Tag>]
     class ClusterParameterGroup < Struct.new(
+      nil,
       :parameter_group_name,
       :parameter_group_family,
       :description,
@@ -1335,6 +1385,7 @@ module Aws::Redshift
     # @!attribute message
     #   @return [String]
     class ClusterParameterGroupAlreadyExistsFault < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -1345,6 +1396,7 @@ module Aws::Redshift
     # @!attribute message
     #   @return [String]
     class ClusterParameterGroupNotFoundFault < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -1359,6 +1411,7 @@ module Aws::Redshift
     # @!attribute message
     #   @return [String]
     class ClusterParameterGroupQuotaExceededFault < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -1380,6 +1433,7 @@ module Aws::Redshift
     #   in the <i>Amazon Redshift Cluster Management Guide</i>.</p>
     #   @return [Array<Types::ClusterParameterStatus>]
     class ClusterParameterGroupStatus < Struct.new(
+      nil,
       :parameter_group_name,
       :parameter_apply_status,
       :cluster_parameter_status_list,
@@ -1402,6 +1456,7 @@ module Aws::Redshift
     #               describes one cluster parameter group. </p>
     #   @return [Array<Types::ClusterParameterGroup>]
     class ClusterParameterGroupsMessage < Struct.new(
+      nil,
       :marker,
       :parameter_groups,
       keyword_init: true
@@ -1461,6 +1516,7 @@ module Aws::Redshift
     #               database.</p>
     #   @return [String]
     class ClusterParameterStatus < Struct.new(
+      nil,
       :parameter_name,
       :parameter_apply_status,
       :parameter_apply_error_description,
@@ -1477,6 +1533,7 @@ module Aws::Redshift
     # @!attribute message
     #   @return [String]
     class ClusterQuotaExceededFault < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -1503,6 +1560,7 @@ module Aws::Redshift
     #   <p>The list of tags for the cluster security group.</p>
     #   @return [Array<Types::Tag>]
     class ClusterSecurityGroup < Struct.new(
+      nil,
       :cluster_security_group_name,
       :description,
       :ec2_security_groups,
@@ -1517,6 +1575,7 @@ module Aws::Redshift
     # @!attribute message
     #   @return [String]
     class ClusterSecurityGroupAlreadyExistsFault < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -1531,6 +1590,7 @@ module Aws::Redshift
     #   <p>The status of the cluster security group.</p>
     #   @return [String]
     class ClusterSecurityGroupMembership < Struct.new(
+      nil,
       :cluster_security_group_name,
       :status,
       keyword_init: true
@@ -1550,6 +1610,7 @@ module Aws::Redshift
     #   <p>A list of <a>ClusterSecurityGroup</a> instances. </p>
     #   @return [Array<Types::ClusterSecurityGroup>]
     class ClusterSecurityGroupMessage < Struct.new(
+      nil,
       :marker,
       :cluster_security_groups,
       keyword_init: true
@@ -1562,6 +1623,7 @@ module Aws::Redshift
     # @!attribute message
     #   @return [String]
     class ClusterSecurityGroupNotFoundFault < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -1576,6 +1638,7 @@ module Aws::Redshift
     # @!attribute message
     #   @return [String]
     class ClusterSecurityGroupQuotaExceededFault < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -1587,6 +1650,7 @@ module Aws::Redshift
     # @!attribute message
     #   @return [String]
     class ClusterSnapshotAlreadyExistsFault < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -1613,6 +1677,7 @@ module Aws::Redshift
     #   <p>The name of the snapshot copy grant.</p>
     #   @return [String]
     class ClusterSnapshotCopyStatus < Struct.new(
+      nil,
       :destination_region,
       :retention_period,
       :manual_snapshot_retention_period,
@@ -1626,6 +1691,7 @@ module Aws::Redshift
     # @!attribute message
     #   @return [String]
     class ClusterSnapshotNotFoundFault < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -1637,6 +1703,7 @@ module Aws::Redshift
     # @!attribute message
     #   @return [String]
     class ClusterSnapshotQuotaExceededFault < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -1667,6 +1734,7 @@ module Aws::Redshift
     #   <p>The IP address types supported by this cluster subnet group. Possible values are <code>ipv4</code> and <code>dualstack</code>.</p>
     #   @return [Array<String>]
     class ClusterSubnetGroup < Struct.new(
+      nil,
       :cluster_subnet_group_name,
       :description,
       :vpc_id,
@@ -1684,6 +1752,7 @@ module Aws::Redshift
     # @!attribute message
     #   @return [String]
     class ClusterSubnetGroupAlreadyExistsFault < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -1703,6 +1772,7 @@ module Aws::Redshift
     #   <p>A list of <a>ClusterSubnetGroup</a> instances. </p>
     #   @return [Array<Types::ClusterSubnetGroup>]
     class ClusterSubnetGroupMessage < Struct.new(
+      nil,
       :marker,
       :cluster_subnet_groups,
       keyword_init: true
@@ -1715,6 +1785,7 @@ module Aws::Redshift
     # @!attribute message
     #   @return [String]
     class ClusterSubnetGroupNotFoundFault < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -1729,6 +1800,7 @@ module Aws::Redshift
     # @!attribute message
     #   @return [String]
     class ClusterSubnetGroupQuotaExceededFault < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -1743,6 +1815,7 @@ module Aws::Redshift
     # @!attribute message
     #   @return [String]
     class ClusterSubnetQuotaExceededFault < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -1761,6 +1834,7 @@ module Aws::Redshift
     #   <p>The description of the cluster version.</p>
     #   @return [String]
     class ClusterVersion < Struct.new(
+      nil,
       :cluster_version,
       :cluster_parameter_group_family,
       :description,
@@ -1782,6 +1856,7 @@ module Aws::Redshift
     #   <p>A list of <code>Version</code> elements. </p>
     #   @return [Array<Types::ClusterVersion>]
     class ClusterVersionsMessage < Struct.new(
+      nil,
       :marker,
       :cluster_versions,
       keyword_init: true
@@ -1802,6 +1877,7 @@ module Aws::Redshift
     #           </p>
     #   @return [Array<Types::Cluster>]
     class ClustersMessage < Struct.new(
+      nil,
       :marker,
       :clusters,
       keyword_init: true
@@ -1813,6 +1889,7 @@ module Aws::Redshift
     # @!attribute message
     #   @return [String]
     class ConflictPolicyUpdateFault < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -1869,6 +1946,7 @@ module Aws::Redshift
     #            <p>The default value is -1.</p>
     #   @return [Integer]
     class CopyClusterSnapshotMessage < Struct.new(
+      nil,
       :source_snapshot_identifier,
       :source_snapshot_cluster_identifier,
       :target_snapshot_identifier,
@@ -1882,6 +1960,7 @@ module Aws::Redshift
     #   <p>Describes a snapshot.</p>
     #   @return [Types::Snapshot]
     class CopyClusterSnapshotResult < Struct.new(
+      nil,
       :snapshot,
       keyword_init: true
     )
@@ -1893,6 +1972,7 @@ module Aws::Redshift
     # @!attribute message
     #   @return [String]
     class CopyToRegionDisabledFault < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -1907,6 +1987,7 @@ module Aws::Redshift
     #               The maximum length of the JSON string is determined by a quota for your account.</p>
     #   @return [String]
     class CreateAuthenticationProfileMessage < Struct.new(
+      nil,
       :authentication_profile_name,
       :authentication_profile_content,
       keyword_init: true
@@ -1921,6 +2002,7 @@ module Aws::Redshift
     #   <p>The content of the authentication profile in JSON format.</p>
     #   @return [String]
     class CreateAuthenticationProfileResult < Struct.new(
+      nil,
       :authentication_profile_name,
       :authentication_profile_content,
       keyword_init: true
@@ -2265,6 +2347,7 @@ module Aws::Redshift
     #   <p>The Amazon resource name (ARN) of the Amazon Redshift IAM Identity Center application.</p>
     #   @return [String]
     class CreateClusterMessage < Struct.new(
+      nil,
       :db_name,
       :cluster_identifier,
       :cluster_type,
@@ -2347,6 +2430,7 @@ module Aws::Redshift
     #   <p>A list of tag instances.</p>
     #   @return [Array<Types::Tag>]
     class CreateClusterParameterGroupMessage < Struct.new(
+      nil,
       :parameter_group_name,
       :parameter_group_family,
       :description,
@@ -2360,6 +2444,7 @@ module Aws::Redshift
     #   <p>Describes a parameter group.</p>
     #   @return [Types::ClusterParameterGroup]
     class CreateClusterParameterGroupResult < Struct.new(
+      nil,
       :cluster_parameter_group,
       keyword_init: true
     )
@@ -2370,6 +2455,7 @@ module Aws::Redshift
     #   <p>Describes a cluster.</p>
     #   @return [Types::Cluster]
     class CreateClusterResult < Struct.new(
+      nil,
       :cluster,
       keyword_init: true
     )
@@ -2402,6 +2488,7 @@ module Aws::Redshift
     #   <p>A list of tag instances.</p>
     #   @return [Array<Types::Tag>]
     class CreateClusterSecurityGroupMessage < Struct.new(
+      nil,
       :cluster_security_group_name,
       :description,
       :tags,
@@ -2414,6 +2501,7 @@ module Aws::Redshift
     #   <p>Describes a security group.</p>
     #   @return [Types::ClusterSecurityGroup]
     class CreateClusterSecurityGroupResult < Struct.new(
+      nil,
       :cluster_security_group,
       keyword_init: true
     )
@@ -2455,6 +2543,7 @@ module Aws::Redshift
     #   <p>A list of tag instances.</p>
     #   @return [Array<Types::Tag>]
     class CreateClusterSnapshotMessage < Struct.new(
+      nil,
       :snapshot_identifier,
       :cluster_identifier,
       :manual_snapshot_retention_period,
@@ -2468,6 +2557,7 @@ module Aws::Redshift
     #   <p>Describes a snapshot.</p>
     #   @return [Types::Snapshot]
     class CreateClusterSnapshotResult < Struct.new(
+      nil,
       :snapshot,
       keyword_init: true
     )
@@ -2504,6 +2594,7 @@ module Aws::Redshift
     #   <p>A list of tag instances.</p>
     #   @return [Array<Types::Tag>]
     class CreateClusterSubnetGroupMessage < Struct.new(
+      nil,
       :cluster_subnet_group_name,
       :description,
       :subnet_ids,
@@ -2517,6 +2608,7 @@ module Aws::Redshift
     #   <p>Describes a subnet group.</p>
     #   @return [Types::ClusterSubnetGroup]
     class CreateClusterSubnetGroupResult < Struct.new(
+      nil,
       :cluster_subnet_group,
       keyword_init: true
     )
@@ -2533,6 +2625,7 @@ module Aws::Redshift
     #   <p>The cluster identifier that the custom domain is associated with.</p>
     #   @return [String]
     class CreateCustomDomainAssociationMessage < Struct.new(
+      nil,
       :custom_domain_name,
       :custom_domain_certificate_arn,
       :cluster_identifier,
@@ -2554,6 +2647,7 @@ module Aws::Redshift
     #   <p>The expiration time for the certificate for the custom domain.</p>
     #   @return [String]
     class CreateCustomDomainAssociationResult < Struct.new(
+      nil,
       :custom_domain_name,
       :custom_domain_certificate_arn,
       :cluster_identifier,
@@ -2583,6 +2677,7 @@ module Aws::Redshift
     #   <p>The security group that defines the ports, protocols, and sources for inbound traffic that you are authorizing into your endpoint.</p>
     #   @return [Array<String>]
     class CreateEndpointAccessMessage < Struct.new(
+      nil,
       :cluster_identifier,
       :resource_owner,
       :endpoint_name,
@@ -2625,6 +2720,7 @@ module Aws::Redshift
     #   <p>The connection endpoint for connecting to an Amazon Redshift cluster through the proxy.</p>
     #   @return [Types::VpcEndpoint]
     class CreateEndpointAccessOutput < Struct.new(
+      nil,
       :cluster_identifier,
       :resource_owner,
       :subnet_group_name,
@@ -2698,6 +2794,7 @@ module Aws::Redshift
     #   <p>A list of tag instances.</p>
     #   @return [Array<Types::Tag>]
     class CreateEventSubscriptionMessage < Struct.new(
+      nil,
       :subscription_name,
       :sns_topic_arn,
       :source_type,
@@ -2715,6 +2812,7 @@ module Aws::Redshift
     #   <p>Describes event subscriptions.</p>
     #   @return [Types::EventSubscription]
     class CreateEventSubscriptionResult < Struct.new(
+      nil,
       :event_subscription,
       keyword_init: true
     )
@@ -2730,6 +2828,7 @@ module Aws::Redshift
     #   <p>A list of tag instances.</p>
     #   @return [Array<Types::Tag>]
     class CreateHsmClientCertificateMessage < Struct.new(
+      nil,
       :hsm_client_certificate_identifier,
       :tags,
       keyword_init: true
@@ -2743,6 +2842,7 @@ module Aws::Redshift
     #               files.</p>
     #   @return [Types::HsmClientCertificate]
     class CreateHsmClientCertificateResult < Struct.new(
+      nil,
       :hsm_client_certificate,
       keyword_init: true
     )
@@ -2774,6 +2874,7 @@ module Aws::Redshift
     #   <p>A list of tag instances.</p>
     #   @return [Array<Types::Tag>]
     class CreateHsmConfigurationMessage < Struct.new(
+      nil,
       :hsm_configuration_identifier,
       :description,
       :hsm_ip_address,
@@ -2792,6 +2893,7 @@ module Aws::Redshift
     #               store database encryption keys.</p>
     #   @return [Types::HsmConfiguration]
     class CreateHsmConfigurationResult < Struct.new(
+      nil,
       :hsm_configuration,
       keyword_init: true
     )
@@ -2826,6 +2928,7 @@ module Aws::Redshift
     #   <p>A description of the integration.</p>
     #   @return [String]
     class CreateIntegrationMessage < Struct.new(
+      nil,
       :source_arn,
       :target_arn,
       :integration_name,
@@ -2876,6 +2979,7 @@ module Aws::Redshift
     #   <p>The list of tags associated with the integration.</p>
     #   @return [Array<Types::Tag>]
     class CreateIntegrationOutput < Struct.new(
+      nil,
       :integration_arn,
       :integration_name,
       :source_arn,
@@ -2924,6 +3028,7 @@ module Aws::Redshift
     #               propagated.</p>
     #   @return [Array<String>]
     class CreateRedshiftIdcApplicationMessage < Struct.new(
+      nil,
       :idc_instance_arn,
       :redshift_idc_application_name,
       :identity_namespace,
@@ -2942,6 +3047,7 @@ module Aws::Redshift
     #   <p>Contains properties for the Redshift IDC application.</p>
     #   @return [Types::RedshiftIdcApplication]
     class CreateRedshiftIdcApplicationResult < Struct.new(
+      nil,
       :redshift_idc_application,
       keyword_init: true
     )
@@ -2982,6 +3088,7 @@ module Aws::Redshift
     #               For more information about <code>state</code> of the scheduled action, see <a>ScheduledAction</a>. </p>
     #   @return [Boolean]
     class CreateScheduledActionMessage < Struct.new(
+      nil,
       :scheduled_action_name,
       :target_action,
       :schedule,
@@ -3039,6 +3146,7 @@ module Aws::Redshift
     #   <p>The end time in UTC when the schedule is no longer active. After this time, the scheduled action does not trigger. </p>
     #   @return [Time]
     class CreateScheduledActionOutput < Struct.new(
+      nil,
       :scheduled_action_name,
       :target_action,
       :schedule,
@@ -3084,6 +3192,7 @@ module Aws::Redshift
     #   <p>A list of tag instances.</p>
     #   @return [Array<Types::Tag>]
     class CreateSnapshotCopyGrantMessage < Struct.new(
+      nil,
       :snapshot_copy_grant_name,
       :kms_key_id,
       :tags,
@@ -3103,6 +3212,7 @@ module Aws::Redshift
     #   </p>
     #   @return [Types::SnapshotCopyGrant]
     class CreateSnapshotCopyGrantResult < Struct.new(
+      nil,
       :snapshot_copy_grant,
       keyword_init: true
     )
@@ -3130,6 +3240,7 @@ module Aws::Redshift
     #   <p></p>
     #   @return [Integer]
     class CreateSnapshotScheduleMessage < Struct.new(
+      nil,
       :schedule_definitions,
       :schedule_identifier,
       :schedule_description,
@@ -3165,6 +3276,7 @@ module Aws::Redshift
     #   <p>A list of clusters associated with the schedule. A maximum of 100 clusters is returned.</p>
     #   @return [Array<Types::ClusterAssociatedToSchedule>]
     class CreateSnapshotScheduleOutput < Struct.new(
+      nil,
       :schedule_definitions,
       :schedule_identifier,
       :schedule_description,
@@ -3191,6 +3303,7 @@ module Aws::Redshift
     #                   "Key"="environment","Value"="test" "Key"="version","Value"="1.0"</code>. </p>
     #   @return [Array<Types::Tag>]
     class CreateTagsMessage < Struct.new(
+      nil,
       :resource_name,
       :tags,
       keyword_init: true
@@ -3228,6 +3341,7 @@ module Aws::Redshift
     #   <p>A list of tag instances.</p>
     #   @return [Array<Types::Tag>]
     class CreateUsageLimitMessage < Struct.new(
+      nil,
       :cluster_identifier,
       :feature_type,
       :limit_type,
@@ -3280,6 +3394,7 @@ module Aws::Redshift
     #   <p>A list of tag instances.</p>
     #   @return [Array<Types::Tag>]
     class CreateUsageLimitOutput < Struct.new(
+      nil,
       :usage_limit_id,
       :cluster_identifier,
       :feature_type,
@@ -3297,6 +3412,7 @@ module Aws::Redshift
     # @!attribute message
     #   @return [String]
     class CustomCnameAssociationFault < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -3307,6 +3423,7 @@ module Aws::Redshift
     # @!attribute message
     #   @return [String]
     class CustomDomainAssociationNotFoundFault < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -3320,6 +3437,7 @@ module Aws::Redshift
     #   <p>The associations for the custom domain.</p>
     #   @return [Array<Types::Association>]
     class CustomDomainAssociationsMessage < Struct.new(
+      nil,
       :marker,
       :associations,
       keyword_init: true
@@ -3334,6 +3452,7 @@ module Aws::Redshift
     #   <p>The total amount of storage currently provisioned.</p>
     #   @return [Float]
     class CustomerStorageMessage < Struct.new(
+      nil,
       :total_backup_size_in_mega_bytes,
       :total_provisioned_storage_in_mega_bytes,
       keyword_init: true
@@ -3361,6 +3480,7 @@ module Aws::Redshift
     #   <p> The type of the datashare created by RegisterNamespace.</p>
     #   @return [String]
     class DataShare < Struct.new(
+      nil,
       :data_share_arn,
       :producer_arn,
       :allow_publicly_accessible_consumers,
@@ -3397,6 +3517,7 @@ module Aws::Redshift
     #   <p>Specifies whether write operations were allowed during data share association.</p>
     #   @return [Boolean]
     class DataShareAssociation < Struct.new(
+      nil,
       :consumer_identifier,
       :status,
       :consumer_region,
@@ -3431,6 +3552,7 @@ module Aws::Redshift
     #   <p>Describes the number of seconds that have elapsed during the data transfer.</p>
     #   @return [Integer]
     class DataTransferProgress < Struct.new(
+      nil,
       :status,
       :current_rate_in_mega_bytes_per_second,
       :total_data_in_mega_bytes,
@@ -3450,6 +3572,7 @@ module Aws::Redshift
     #               This identifier is an Amazon Web Services account ID or a keyword, such as ADX.</p>
     #   @return [String]
     class DeauthorizeDataShareMessage < Struct.new(
+      nil,
       :data_share_arn,
       :consumer_identifier,
       keyword_init: true
@@ -3477,6 +3600,7 @@ module Aws::Redshift
     #   <p> The type of the datashare created by RegisterNamespace.</p>
     #   @return [String]
     class DeauthorizeDataShareOutput < Struct.new(
+      nil,
       :data_share_arn,
       :producer_arn,
       :allow_publicly_accessible_consumers,
@@ -3504,6 +3628,7 @@ module Aws::Redshift
     #   <p>The list of cluster default parameters.</p>
     #   @return [Array<Types::Parameter>]
     class DefaultClusterParameters < Struct.new(
+      nil,
       :parameter_group_family,
       :marker,
       :parameters,
@@ -3523,6 +3648,7 @@ module Aws::Redshift
     #   <p> A timestamp for the end of the time period when we defer maintenance.</p>
     #   @return [Time]
     class DeferredMaintenanceWindow < Struct.new(
+      nil,
       :defer_maintenance_identifier,
       :defer_maintenance_start_time,
       :defer_maintenance_end_time,
@@ -3535,6 +3661,7 @@ module Aws::Redshift
     #   <p>The name of the authentication profile to delete.</p>
     #   @return [String]
     class DeleteAuthenticationProfileMessage < Struct.new(
+      nil,
       :authentication_profile_name,
       keyword_init: true
     )
@@ -3545,6 +3672,7 @@ module Aws::Redshift
     #   <p>The name of the authentication profile that was deleted.</p>
     #   @return [String]
     class DeleteAuthenticationProfileResult < Struct.new(
+      nil,
       :authentication_profile_name,
       keyword_init: true
     )
@@ -3607,6 +3735,7 @@ module Aws::Redshift
     #            <p>The default value is -1.</p>
     #   @return [Integer]
     class DeleteClusterMessage < Struct.new(
+      nil,
       :cluster_identifier,
       :skip_final_cluster_snapshot,
       :final_cluster_snapshot_identifier,
@@ -3630,6 +3759,7 @@ module Aws::Redshift
     #            </ul>
     #   @return [String]
     class DeleteClusterParameterGroupMessage < Struct.new(
+      nil,
       :parameter_group_name,
       keyword_init: true
     )
@@ -3640,6 +3770,7 @@ module Aws::Redshift
     #   <p>Describes a cluster.</p>
     #   @return [Types::Cluster]
     class DeleteClusterResult < Struct.new(
+      nil,
       :cluster,
       keyword_init: true
     )
@@ -3651,6 +3782,7 @@ module Aws::Redshift
     #   <p>The name of the cluster security group to be deleted.</p>
     #   @return [String]
     class DeleteClusterSecurityGroupMessage < Struct.new(
+      nil,
       :cluster_security_group_name,
       keyword_init: true
     )
@@ -3671,6 +3803,7 @@ module Aws::Redshift
     #            <p>Constraints: Must be the name of valid cluster.</p>
     #   @return [String]
     class DeleteClusterSnapshotInput < Struct.new(
+      nil,
       :snapshot_identifier,
       :snapshot_cluster_identifier,
       keyword_init: true
@@ -3692,6 +3825,7 @@ module Aws::Redshift
     #            <p>Constraints: Must be the name of valid cluster.</p>
     #   @return [String]
     class DeleteClusterSnapshotMessage < Struct.new(
+      nil,
       :snapshot_identifier,
       :snapshot_cluster_identifier,
       keyword_init: true
@@ -3703,6 +3837,7 @@ module Aws::Redshift
     #   <p>Describes a snapshot.</p>
     #   @return [Types::Snapshot]
     class DeleteClusterSnapshotResult < Struct.new(
+      nil,
       :snapshot,
       keyword_init: true
     )
@@ -3714,6 +3849,7 @@ module Aws::Redshift
     #   <p>The name of the cluster subnet group name to be deleted.</p>
     #   @return [String]
     class DeleteClusterSubnetGroupMessage < Struct.new(
+      nil,
       :cluster_subnet_group_name,
       keyword_init: true
     )
@@ -3727,6 +3863,7 @@ module Aws::Redshift
     #   <p>The custom domain name for the custom domain association.</p>
     #   @return [String]
     class DeleteCustomDomainAssociationMessage < Struct.new(
+      nil,
       :cluster_identifier,
       :custom_domain_name,
       keyword_init: true
@@ -3738,6 +3875,7 @@ module Aws::Redshift
     #   <p>The Redshift-managed VPC endpoint to delete.</p>
     #   @return [String]
     class DeleteEndpointAccessMessage < Struct.new(
+      nil,
       :endpoint_name,
       keyword_init: true
     )
@@ -3776,6 +3914,7 @@ module Aws::Redshift
     #   <p>The connection endpoint for connecting to an Amazon Redshift cluster through the proxy.</p>
     #   @return [Types::VpcEndpoint]
     class DeleteEndpointAccessOutput < Struct.new(
+      nil,
       :cluster_identifier,
       :resource_owner,
       :subnet_group_name,
@@ -3796,6 +3935,7 @@ module Aws::Redshift
     #   <p>The name of the Amazon Redshift event notification subscription to be deleted.</p>
     #   @return [String]
     class DeleteEventSubscriptionMessage < Struct.new(
+      nil,
       :subscription_name,
       keyword_init: true
     )
@@ -3807,6 +3947,7 @@ module Aws::Redshift
     #   <p>The identifier of the HSM client certificate to be deleted.</p>
     #   @return [String]
     class DeleteHsmClientCertificateMessage < Struct.new(
+      nil,
       :hsm_client_certificate_identifier,
       keyword_init: true
     )
@@ -3818,6 +3959,7 @@ module Aws::Redshift
     #   <p>The identifier of the Amazon Redshift HSM configuration to be deleted.</p>
     #   @return [String]
     class DeleteHsmConfigurationMessage < Struct.new(
+      nil,
       :hsm_configuration_identifier,
       keyword_init: true
     )
@@ -3828,6 +3970,7 @@ module Aws::Redshift
     #   <p>The unique identifier of the integration to delete.</p>
     #   @return [String]
     class DeleteIntegrationMessage < Struct.new(
+      nil,
       :integration_arn,
       keyword_init: true
     )
@@ -3872,6 +4015,7 @@ module Aws::Redshift
     #   <p>The list of tags associated with the integration.</p>
     #   @return [Array<Types::Tag>]
     class DeleteIntegrationOutput < Struct.new(
+      nil,
       :integration_arn,
       :integration_name,
       :source_arn,
@@ -3901,6 +4045,7 @@ module Aws::Redshift
     #   <p>The name of the partner that is authorized to send data.</p>
     #   @return [String]
     class DeletePartnerInput < Struct.new(
+      nil,
       :account_id,
       :cluster_identifier,
       :database_name,
@@ -3917,6 +4062,7 @@ module Aws::Redshift
     #   <p>The name of the partner that is authorized to send data.</p>
     #   @return [String]
     class DeletePartnerOutput < Struct.new(
+      nil,
       :database_name,
       :partner_name,
       keyword_init: true
@@ -3928,6 +4074,7 @@ module Aws::Redshift
     #   <p>The ARN for a deleted Amazon Redshift IAM Identity Center application.</p>
     #   @return [String]
     class DeleteRedshiftIdcApplicationMessage < Struct.new(
+      nil,
       :redshift_idc_application_arn,
       keyword_init: true
     )
@@ -3938,6 +4085,7 @@ module Aws::Redshift
     #   <p>The Amazon Resource Name (ARN) of the resource of which its resource policy is deleted.</p>
     #   @return [String]
     class DeleteResourcePolicyMessage < Struct.new(
+      nil,
       :resource_arn,
       keyword_init: true
     )
@@ -3948,6 +4096,7 @@ module Aws::Redshift
     #   <p>The name of the scheduled action to delete. </p>
     #   @return [String]
     class DeleteScheduledActionMessage < Struct.new(
+      nil,
       :scheduled_action_name,
       keyword_init: true
     )
@@ -3959,6 +4108,7 @@ module Aws::Redshift
     #   <p>The name of the snapshot copy grant to delete.</p>
     #   @return [String]
     class DeleteSnapshotCopyGrantMessage < Struct.new(
+      nil,
       :snapshot_copy_grant_name,
       keyword_init: true
     )
@@ -3969,6 +4119,7 @@ module Aws::Redshift
     #   <p>A unique identifier of the snapshot schedule to delete.</p>
     #   @return [String]
     class DeleteSnapshotScheduleMessage < Struct.new(
+      nil,
       :schedule_identifier,
       keyword_init: true
     )
@@ -3984,6 +4135,7 @@ module Aws::Redshift
     #   <p>The tag key that you want to delete.</p>
     #   @return [Array<String>]
     class DeleteTagsMessage < Struct.new(
+      nil,
       :resource_name,
       :tag_keys,
       keyword_init: true
@@ -3995,6 +4147,7 @@ module Aws::Redshift
     #   <p>The identifier of the usage limit to delete.</p>
     #   @return [String]
     class DeleteUsageLimitMessage < Struct.new(
+      nil,
       :usage_limit_id,
       keyword_init: true
     )
@@ -4005,6 +4158,7 @@ module Aws::Redshift
     # @!attribute message
     #   @return [String]
     class DependentServiceAccessDeniedFault < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -4016,6 +4170,7 @@ module Aws::Redshift
     # @!attribute message
     #   @return [String]
     class DependentServiceRequestThrottlingFault < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -4027,6 +4182,7 @@ module Aws::Redshift
     # @!attribute message
     #   @return [String]
     class DependentServiceUnavailableFault < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -4042,6 +4198,7 @@ module Aws::Redshift
     #               that you want to deregister the cluster or serverless namespace from.</p>
     #   @return [Array<String>]
     class DeregisterNamespaceInputMessage < Struct.new(
+      nil,
       :namespace_identifier,
       :consumer_identifiers,
       keyword_init: true
@@ -4054,6 +4211,7 @@ module Aws::Redshift
     #               serverless namespace.</p>
     #   @return [String]
     class DeregisterNamespaceOutputMessage < Struct.new(
+      nil,
       :status,
       keyword_init: true
     )
@@ -4064,6 +4222,7 @@ module Aws::Redshift
     #   <p>A list of attribute names.</p>
     #   @return [Array<String>]
     class DescribeAccountAttributesMessage < Struct.new(
+      nil,
       :attribute_names,
       keyword_init: true
     )
@@ -4074,6 +4233,7 @@ module Aws::Redshift
     #   <p>A list of attributes assigned to an account.</p>
     #   @return [Array<Types::AccountAttribute>]
     class DescribeAccountAttributesOutput < Struct.new(
+      nil,
       :account_attributes,
       keyword_init: true
     )
@@ -4084,6 +4244,7 @@ module Aws::Redshift
     #   <p>The name of the authentication profile to describe. If not specified then all authentication profiles owned by the account are listed.</p>
     #   @return [String]
     class DescribeAuthenticationProfilesMessage < Struct.new(
+      nil,
       :authentication_profile_name,
       keyword_init: true
     )
@@ -4094,6 +4255,7 @@ module Aws::Redshift
     #   <p>The list of authentication profiles.</p>
     #   @return [Array<Types::AuthenticationProfile>]
     class DescribeAuthenticationProfilesResult < Struct.new(
+      nil,
       :authentication_profiles,
       keyword_init: true
     )
@@ -4125,6 +4287,7 @@ module Aws::Redshift
     #               the <code>marker</code> parameter, but not both.</p>
     #   @return [String]
     class DescribeClusterDbRevisionsMessage < Struct.new(
+      nil,
       :cluster_identifier,
       :max_records,
       :marker,
@@ -4173,6 +4336,7 @@ module Aws::Redshift
     #               values associated with them.</p>
     #   @return [Array<String>]
     class DescribeClusterParameterGroupsMessage < Struct.new(
+      nil,
       :parameter_group_name,
       :max_records,
       :marker,
@@ -4213,6 +4377,7 @@ module Aws::Redshift
     #               retrying the request. </p>
     #   @return [String]
     class DescribeClusterParametersMessage < Struct.new(
+      nil,
       :parameter_group_name,
       :source,
       :max_records,
@@ -4236,6 +4401,7 @@ module Aws::Redshift
     #               records have been retrieved for the request. </p>
     #   @return [String]
     class DescribeClusterParametersOutput < Struct.new(
+      nil,
       :parameters,
       :marker,
       keyword_init: true
@@ -4285,6 +4451,7 @@ module Aws::Redshift
     #               associated with them.</p>
     #   @return [Array<String>]
     class DescribeClusterSecurityGroupsMessage < Struct.new(
+      nil,
       :cluster_security_group_name,
       :max_records,
       :marker,
@@ -4398,6 +4565,7 @@ module Aws::Redshift
     #   <p></p>
     #   @return [Array<Types::SnapshotSortingEntity>]
     class DescribeClusterSnapshotsMessage < Struct.new(
+      nil,
       :cluster_identifier,
       :snapshot_identifier,
       :snapshot_arn,
@@ -4454,6 +4622,7 @@ module Aws::Redshift
     #               associated with them.</p>
     #   @return [Array<String>]
     class DescribeClusterSubnetGroupsMessage < Struct.new(
+      nil,
       :cluster_subnet_group_name,
       :max_records,
       :marker,
@@ -4479,6 +4648,7 @@ module Aws::Redshift
     #               retrying the request. </p>
     #   @return [String]
     class DescribeClusterTracksMessage < Struct.new(
+      nil,
       :maintenance_track_name,
       :max_records,
       :marker,
@@ -4527,6 +4697,7 @@ module Aws::Redshift
     #               retrying the request. </p>
     #   @return [String]
     class DescribeClusterVersionsMessage < Struct.new(
+      nil,
       :cluster_version,
       :cluster_parameter_group_family,
       :max_records,
@@ -4576,6 +4747,7 @@ module Aws::Redshift
     #               them.</p>
     #   @return [Array<String>]
     class DescribeClustersMessage < Struct.new(
+      nil,
       :cluster_identifier,
       :max_records,
       :marker,
@@ -4599,6 +4771,7 @@ module Aws::Redshift
     #   <p>The marker for the custom domain association.</p>
     #   @return [String]
     class DescribeCustomDomainAssociationsMessage < Struct.new(
+      nil,
       :custom_domain_name,
       :custom_domain_certificate_arn,
       :max_records,
@@ -4630,6 +4803,7 @@ module Aws::Redshift
     #               retrying the request. </p>
     #   @return [String]
     class DescribeDataSharesForConsumerMessage < Struct.new(
+      nil,
       :consumer_arn,
       :status,
       :max_records,
@@ -4651,6 +4825,7 @@ module Aws::Redshift
     #               retrying the request. </p>
     #   @return [String]
     class DescribeDataSharesForConsumerResult < Struct.new(
+      nil,
       :data_shares,
       :marker,
       keyword_init: true
@@ -4680,6 +4855,7 @@ module Aws::Redshift
     #               retrying the request. </p>
     #   @return [String]
     class DescribeDataSharesForProducerMessage < Struct.new(
+      nil,
       :producer_arn,
       :status,
       :max_records,
@@ -4701,6 +4877,7 @@ module Aws::Redshift
     #               retrying the request. </p>
     #   @return [String]
     class DescribeDataSharesForProducerResult < Struct.new(
+      nil,
       :data_shares,
       :marker,
       keyword_init: true
@@ -4721,6 +4898,7 @@ module Aws::Redshift
     #   <p>An optional parameter that specifies the starting point to return a set of response records. When the results of a <a>DescribeDataShares</a> request exceed the value specified in <code>MaxRecords</code>, Amazon Web Services returns a value in the <code>Marker</code> field of the response. You can retrieve the next set of response records by providing the returned marker value in the <code>Marker</code> parameter and retrying the request. </p>
     #   @return [String]
     class DescribeDataSharesMessage < Struct.new(
+      nil,
       :data_share_arn,
       :max_records,
       :marker,
@@ -4736,6 +4914,7 @@ module Aws::Redshift
     #   <p>An optional parameter that specifies the starting point to return a set of response records. When the results of a <a>DescribeDataShares</a> request exceed the value specified in <code>MaxRecords</code>, Amazon Web Services returns a value in the <code>Marker</code> field of the response. You can retrieve the next set of response records by providing the returned marker value in the <code>Marker</code> parameter and retrying the request. </p>
     #   @return [String]
     class DescribeDataSharesResult < Struct.new(
+      nil,
       :data_shares,
       :marker,
       keyword_init: true
@@ -4765,6 +4944,7 @@ module Aws::Redshift
     #               retrying the request. </p>
     #   @return [String]
     class DescribeDefaultClusterParametersMessage < Struct.new(
+      nil,
       :parameter_group_family,
       :max_records,
       :marker,
@@ -4777,6 +4957,7 @@ module Aws::Redshift
     #   <p>Describes the default cluster parameters for a parameter group family.</p>
     #   @return [Types::DefaultClusterParameters]
     class DescribeDefaultClusterParametersResult < Struct.new(
+      nil,
       :default_cluster_parameters,
       keyword_init: true
     )
@@ -4807,6 +4988,7 @@ module Aws::Redshift
     #               <code>MaxRecords</code> parameter.</p>
     #   @return [String]
     class DescribeEndpointAccessMessage < Struct.new(
+      nil,
       :cluster_identifier,
       :resource_owner,
       :endpoint_name,
@@ -4828,6 +5010,7 @@ module Aws::Redshift
     #               <code>MaxRecords</code> parameter.</p>
     #   @return [String]
     class DescribeEndpointAccessOutput < Struct.new(
+      nil,
       :endpoint_access_list,
       :marker,
       keyword_init: true
@@ -4859,6 +5042,7 @@ module Aws::Redshift
     #               <code>MaxRecords</code> parameter.</p>
     #   @return [String]
     class DescribeEndpointAuthorizationMessage < Struct.new(
+      nil,
       :cluster_identifier,
       :account,
       :grantee,
@@ -4879,6 +5063,7 @@ module Aws::Redshift
     #               <code>MaxRecords</code> parameter.</p>
     #   @return [String]
     class DescribeEndpointAuthorizationOutput < Struct.new(
+      nil,
       :endpoint_authorization_list,
       :marker,
       keyword_init: true
@@ -4893,6 +5078,7 @@ module Aws::Redshift
     #            <p>Valid values: cluster, cluster-snapshot, cluster-parameter-group, cluster-security-group, and scheduled-action.</p>
     #   @return [String]
     class DescribeEventCategoriesMessage < Struct.new(
+      nil,
       :source_type,
       keyword_init: true
     )
@@ -4938,6 +5124,7 @@ module Aws::Redshift
     #               both of these tag values associated with them.</p>
     #   @return [Array<String>]
     class DescribeEventSubscriptionsMessage < Struct.new(
+      nil,
       :subscription_name,
       :max_records,
       :marker,
@@ -5041,6 +5228,7 @@ module Aws::Redshift
     #           </p>
     #   @return [String]
     class DescribeEventsMessage < Struct.new(
+      nil,
       :source_identifier,
       :source_type,
       :start_time,
@@ -5093,6 +5281,7 @@ module Aws::Redshift
     #               either or both of these tag values associated with them.</p>
     #   @return [Array<String>]
     class DescribeHsmClientCertificatesMessage < Struct.new(
+      nil,
       :hsm_client_certificate_identifier,
       :max_records,
       :marker,
@@ -5143,6 +5332,7 @@ module Aws::Redshift
     #               values associated with them.</p>
     #   @return [Array<String>]
     class DescribeHsmConfigurationsMessage < Struct.new(
+      nil,
       :hsm_configuration_identifier,
       :max_records,
       :marker,
@@ -5177,6 +5367,7 @@ module Aws::Redshift
     #               retrying the request. </p>
     #   @return [String]
     class DescribeInboundIntegrationsMessage < Struct.new(
+      nil,
       :integration_arn,
       :target_arn,
       :max_records,
@@ -5194,6 +5385,7 @@ module Aws::Redshift
     #   <p>Specifies the values to filter on.</p>
     #   @return [Array<String>]
     class DescribeIntegrationsFilter < Struct.new(
+      nil,
       :name,
       :values,
       keyword_init: true
@@ -5222,6 +5414,7 @@ module Aws::Redshift
     #   <p>A filter that specifies one or more resources to return.</p>
     #   @return [Array<Types::DescribeIntegrationsFilter>]
     class DescribeIntegrationsMessage < Struct.new(
+      nil,
       :integration_arn,
       :max_records,
       :marker,
@@ -5238,6 +5431,7 @@ module Aws::Redshift
     #            </p>
     #   @return [String]
     class DescribeLoggingStatusMessage < Struct.new(
+      nil,
       :cluster_identifier,
       keyword_init: true
     )
@@ -5272,6 +5466,7 @@ module Aws::Redshift
     #               <code>userlog</code>.</p>
     #   @return [Array<String>]
     class DescribeLoggingStatusOutput < Struct.new(
+      nil,
       :logging_enabled,
       :bucket_name,
       :s3_key_prefix,
@@ -5327,6 +5522,7 @@ module Aws::Redshift
     #            <p>Constraints: minimum 100, maximum 500.</p>
     #   @return [Integer]
     class DescribeNodeConfigurationOptionsMessage < Struct.new(
+      nil,
       :action_type,
       :cluster_identifier,
       :snapshot_identifier,
@@ -5369,6 +5565,7 @@ module Aws::Redshift
     #               retrying the request. </p>
     #   @return [String]
     class DescribeOrderableClusterOptionsMessage < Struct.new(
+      nil,
       :cluster_version,
       :node_type,
       :max_records,
@@ -5391,6 +5588,7 @@ module Aws::Redshift
     #   <p>The name of the partner that is being described. If partner name is not specified, then all partner integrations are described.</p>
     #   @return [String]
     class DescribePartnersInputMessage < Struct.new(
+      nil,
       :account_id,
       :cluster_identifier,
       :database_name,
@@ -5404,6 +5602,7 @@ module Aws::Redshift
     #   <p>A list of partner integrations.</p>
     #   @return [Array<Types::PartnerIntegrationInfo>]
     class DescribePartnersOutputMessage < Struct.new(
+      nil,
       :partner_integration_info_list,
       keyword_init: true
     )
@@ -5427,6 +5626,7 @@ module Aws::Redshift
     #           </p>
     #   @return [String]
     class DescribeRedshiftIdcApplicationsMessage < Struct.new(
+      nil,
       :redshift_idc_application_arn,
       :max_records,
       :marker,
@@ -5447,6 +5647,7 @@ module Aws::Redshift
     #           </p>
     #   @return [String]
     class DescribeRedshiftIdcApplicationsResult < Struct.new(
+      nil,
       :redshift_idc_applications,
       :marker,
       keyword_init: true
@@ -5474,6 +5675,7 @@ module Aws::Redshift
     #               retrying the request.</p>
     #   @return [String]
     class DescribeReservedNodeExchangeStatusInputMessage < Struct.new(
+      nil,
       :reserved_node_id,
       :reserved_node_exchange_request_id,
       :max_records,
@@ -5491,6 +5693,7 @@ module Aws::Redshift
     #   <p>A pagination token provided by a previous <code>DescribeReservedNodeExchangeStatus</code> request.</p>
     #   @return [String]
     class DescribeReservedNodeExchangeStatusOutputMessage < Struct.new(
+      nil,
       :reserved_node_exchange_status_details,
       :marker,
       keyword_init: true
@@ -5520,6 +5723,7 @@ module Aws::Redshift
     #               retrying the request. </p>
     #   @return [String]
     class DescribeReservedNodeOfferingsMessage < Struct.new(
+      nil,
       :reserved_node_offering_id,
       :max_records,
       :marker,
@@ -5550,6 +5754,7 @@ module Aws::Redshift
     #               retrying the request. </p>
     #   @return [String]
     class DescribeReservedNodesMessage < Struct.new(
+      nil,
       :reserved_node_id,
       :max_records,
       :marker,
@@ -5566,6 +5771,7 @@ module Aws::Redshift
     #               returned.</p>
     #   @return [String]
     class DescribeResizeMessage < Struct.new(
+      nil,
       :cluster_identifier,
       keyword_init: true
     )
@@ -5647,6 +5853,7 @@ module Aws::Redshift
     #   <p>The percent of data transferred from source cluster to target cluster.</p>
     #   @return [Float]
     class DescribeResizeOutput < Struct.new(
+      nil,
       :target_node_type,
       :target_number_of_nodes,
       :target_cluster_type,
@@ -5707,6 +5914,7 @@ module Aws::Redshift
     #            <p>Constraints: minimum 20, maximum 100.</p>
     #   @return [Integer]
     class DescribeScheduledActionsMessage < Struct.new(
+      nil,
       :scheduled_action_name,
       :target_action_type,
       :start_time,
@@ -5757,6 +5965,7 @@ module Aws::Redshift
     #               resources that have either or both of these tag values associated with them.</p>
     #   @return [Array<String>]
     class DescribeSnapshotCopyGrantsMessage < Struct.new(
+      nil,
       :snapshot_copy_grant_name,
       :max_records,
       :marker,
@@ -5795,6 +6004,7 @@ module Aws::Redshift
     #               value.</p>
     #   @return [Integer]
     class DescribeSnapshotSchedulesMessage < Struct.new(
+      nil,
       :cluster_identifier,
       :schedule_identifier,
       :tag_keys,
@@ -5817,6 +6027,7 @@ module Aws::Redshift
     #               records have been retrieved for the request.</p>
     #   @return [String]
     class DescribeSnapshotSchedulesOutputMessage < Struct.new(
+      nil,
       :snapshot_schedules,
       :marker,
       keyword_init: true
@@ -5846,6 +6057,7 @@ module Aws::Redshift
     #                   <code>MaxRecords</code> parameter.</p>
     #   @return [String]
     class DescribeTableRestoreStatusMessage < Struct.new(
+      nil,
       :cluster_identifier,
       :table_restore_request_id,
       :max_records,
@@ -5934,6 +6146,7 @@ module Aws::Redshift
     #               resources that have either or both of these tag values associated with them.</p>
     #   @return [Array<String>]
     class DescribeTagsMessage < Struct.new(
+      nil,
       :resource_name,
       :resource_type,
       :max_records,
@@ -5988,6 +6201,7 @@ module Aws::Redshift
     #               values associated with them.</p>
     #   @return [Array<String>]
     class DescribeUsageLimitsMessage < Struct.new(
+      nil,
       :usage_limit_id,
       :cluster_identifier,
       :feature_type,
@@ -6012,6 +6226,7 @@ module Aws::Redshift
     #               records have been retrieved for the request. </p>
     #   @return [String]
     class DescribeUsageLimitsOutput < Struct.new(
+      nil,
       :usage_limits,
       :marker,
       keyword_init: true
@@ -6026,6 +6241,7 @@ module Aws::Redshift
     #            </p>
     #   @return [String]
     class DisableLoggingMessage < Struct.new(
+      nil,
       :cluster_identifier,
       keyword_init: true
     )
@@ -6060,6 +6276,7 @@ module Aws::Redshift
     #               <code>userlog</code>.</p>
     #   @return [Array<String>]
     class DisableLoggingOutput < Struct.new(
+      nil,
       :logging_enabled,
       :bucket_name,
       :s3_key_prefix,
@@ -6081,6 +6298,7 @@ module Aws::Redshift
     #               snapshot copy enabled.</p>
     #   @return [String]
     class DisableSnapshotCopyMessage < Struct.new(
+      nil,
       :cluster_identifier,
       keyword_init: true
     )
@@ -6091,6 +6309,7 @@ module Aws::Redshift
     #   <p>Describes a cluster.</p>
     #   @return [Types::Cluster]
     class DisableSnapshotCopyResult < Struct.new(
+      nil,
       :cluster,
       keyword_init: true
     )
@@ -6112,6 +6331,7 @@ module Aws::Redshift
     #   <p>From a datashare consumer account, removes association of a datashare from all the existing and future namespaces in the specified Amazon Web Services Region.</p>
     #   @return [String]
     class DisassociateDataShareConsumerMessage < Struct.new(
+      nil,
       :data_share_arn,
       :disassociate_entire_account,
       :consumer_arn,
@@ -6141,6 +6361,7 @@ module Aws::Redshift
     #   <p> The type of the datashare created by RegisterNamespace.</p>
     #   @return [String]
     class DisassociateDataShareConsumerOutput < Struct.new(
+      nil,
       :data_share_arn,
       :producer_arn,
       :allow_publicly_accessible_consumers,
@@ -6167,6 +6388,7 @@ module Aws::Redshift
     #   <p>The list of tags for the EC2 security group.</p>
     #   @return [Array<Types::Tag>]
     class EC2SecurityGroup < Struct.new(
+      nil,
       :status,
       :ec2_security_group_name,
       :ec2_security_group_owner_id,
@@ -6184,6 +6406,7 @@ module Aws::Redshift
     #   <p>The status of the elastic IP (EIP) address.</p>
     #   @return [String]
     class ElasticIpStatus < Struct.new(
+      nil,
       :elastic_ip,
       :status,
       keyword_init: true
@@ -6222,6 +6445,7 @@ module Aws::Redshift
     #   <p>The collection of exported log types. Possible values are <code>connectionlog</code>, <code>useractivitylog</code>, and <code>userlog</code>.</p>
     #   @return [Array<String>]
     class EnableLoggingMessage < Struct.new(
+      nil,
       :cluster_identifier,
       :bucket_name,
       :s3_key_prefix,
@@ -6260,6 +6484,7 @@ module Aws::Redshift
     #               <code>userlog</code>.</p>
     #   @return [Array<String>]
     class EnableLoggingOutput < Struct.new(
+      nil,
       :logging_enabled,
       :bucket_name,
       :s3_key_prefix,
@@ -6302,6 +6527,7 @@ module Aws::Redshift
     #            <p>The value must be either -1 or an integer between 1 and 3,653.</p>
     #   @return [Integer]
     class EnableSnapshotCopyMessage < Struct.new(
+      nil,
       :cluster_identifier,
       :destination_region,
       :retention_period,
@@ -6316,6 +6542,7 @@ module Aws::Redshift
     #   <p>Describes a cluster.</p>
     #   @return [Types::Cluster]
     class EnableSnapshotCopyResult < Struct.new(
+      nil,
       :cluster,
       keyword_init: true
     )
@@ -6333,6 +6560,7 @@ module Aws::Redshift
     #   <p>Describes a connection endpoint.</p>
     #   @return [Array<Types::VpcEndpoint>]
     class Endpoint < Struct.new(
+      nil,
       :address,
       :port,
       :vpc_endpoints,
@@ -6373,6 +6601,7 @@ module Aws::Redshift
     #   <p>The connection endpoint for connecting to an Amazon Redshift cluster through the proxy.</p>
     #   @return [Types::VpcEndpoint]
     class EndpointAccess < Struct.new(
+      nil,
       :cluster_identifier,
       :resource_owner,
       :subnet_group_name,
@@ -6392,6 +6621,7 @@ module Aws::Redshift
     # @!attribute message
     #   @return [String]
     class EndpointAlreadyExistsFault < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -6427,6 +6657,7 @@ module Aws::Redshift
     #   <p>The number of Redshift-managed VPC endpoints created for the authorization.</p>
     #   @return [Integer]
     class EndpointAuthorization < Struct.new(
+      nil,
       :grantor,
       :grantee,
       :cluster_identifier,
@@ -6445,6 +6676,7 @@ module Aws::Redshift
     # @!attribute message
     #   @return [String]
     class EndpointAuthorizationAlreadyExistsFault < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -6455,6 +6687,7 @@ module Aws::Redshift
     # @!attribute message
     #   @return [String]
     class EndpointAuthorizationNotFoundFault < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -6465,6 +6698,7 @@ module Aws::Redshift
     # @!attribute message
     #   @return [String]
     class EndpointAuthorizationsPerClusterLimitExceededFault < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -6475,6 +6709,7 @@ module Aws::Redshift
     # @!attribute message
     #   @return [String]
     class EndpointNotFoundFault < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -6485,6 +6720,7 @@ module Aws::Redshift
     # @!attribute message
     #   @return [String]
     class EndpointsPerAuthorizationLimitExceededFault < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -6495,6 +6731,7 @@ module Aws::Redshift
     # @!attribute message
     #   @return [String]
     class EndpointsPerClusterLimitExceededFault < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -6526,6 +6763,7 @@ module Aws::Redshift
     #   <p>The identifier of the event.</p>
     #   @return [String]
     class Event < Struct.new(
+      nil,
       :source_identifier,
       :source_type,
       :message,
@@ -6547,6 +6785,7 @@ module Aws::Redshift
     #   <p>The events in the event category.</p>
     #   @return [Array<Types::EventInfoMap>]
     class EventCategoriesMap < Struct.new(
+      nil,
       :source_type,
       :events,
       keyword_init: true
@@ -6559,6 +6798,7 @@ module Aws::Redshift
     #   <p>A list of event categories descriptions.</p>
     #   @return [Array<Types::EventCategoriesMap>]
     class EventCategoriesMessage < Struct.new(
+      nil,
       :event_categories_map_list,
       keyword_init: true
     )
@@ -6580,6 +6820,7 @@ module Aws::Redshift
     #            <p>Values: ERROR, INFO</p>
     #   @return [String]
     class EventInfoMap < Struct.new(
+      nil,
       :event_id,
       :event_categories,
       :event_description,
@@ -6647,6 +6888,7 @@ module Aws::Redshift
     #   <p>The list of tags for the event subscription.</p>
     #   @return [Array<Types::Tag>]
     class EventSubscription < Struct.new(
+      nil,
       :customer_aws_id,
       :cust_subscription_id,
       :sns_topic_arn,
@@ -6671,6 +6913,7 @@ module Aws::Redshift
     # @!attribute message
     #   @return [String]
     class EventSubscriptionQuotaExceededFault < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -6689,6 +6932,7 @@ module Aws::Redshift
     #   <p>A list of event subscriptions.</p>
     #   @return [Array<Types::EventSubscription>]
     class EventSubscriptionsMessage < Struct.new(
+      nil,
       :marker,
       :event_subscriptions_list,
       keyword_init: true
@@ -6708,6 +6952,7 @@ module Aws::Redshift
     #   <p>A list of <code>Event</code> instances. </p>
     #   @return [Array<Types::Event>]
     class EventsMessage < Struct.new(
+      nil,
       :marker,
       :events,
       keyword_init: true
@@ -6719,6 +6964,7 @@ module Aws::Redshift
     #   <p>The unique identifier of the cluster for which the primary compute unit will be failed over to another Availability Zone.</p>
     #   @return [String]
     class FailoverPrimaryComputeInputMessage < Struct.new(
+      nil,
       :cluster_identifier,
       keyword_init: true
     )
@@ -6729,6 +6975,7 @@ module Aws::Redshift
     #   <p>Describes a cluster.</p>
     #   @return [Types::Cluster]
     class FailoverPrimaryComputeResult < Struct.new(
+      nil,
       :cluster,
       keyword_init: true
     )
@@ -6837,6 +7084,7 @@ module Aws::Redshift
     #   <p>The custom domain name for the cluster credentials.</p>
     #   @return [String]
     class GetClusterCredentialsMessage < Struct.new(
+      nil,
       :db_user,
       :db_name,
       :cluster_identifier,
@@ -6867,6 +7115,7 @@ module Aws::Redshift
     #   <p>The date and time the password in <code>DbPassword</code> expires.</p>
     #   @return [Time]
     class GetClusterCredentialsOutput < Struct.new(
+      nil,
       :db_user,
       :db_password,
       :expiration,
@@ -6892,6 +7141,7 @@ module Aws::Redshift
     #   <p>The custom domain name for the IAM message cluster credentials.</p>
     #   @return [String]
     class GetClusterCredentialsWithIAMMessage < Struct.new(
+      nil,
       :db_name,
       :cluster_identifier,
       :duration_seconds,
@@ -6914,6 +7164,7 @@ module Aws::Redshift
     #   <p>Reserved for future use.</p>
     #   @return [Time]
     class GetClusterCredentialsWithIAMOutput < Struct.new(
+      nil,
       :db_user,
       :db_password,
       :expiration,
@@ -6946,6 +7197,7 @@ module Aws::Redshift
     #               retrying the request.</p>
     #   @return [String]
     class GetReservedNodeExchangeConfigurationOptionsInputMessage < Struct.new(
+      nil,
       :action_type,
       :cluster_identifier,
       :snapshot_identifier,
@@ -6966,6 +7218,7 @@ module Aws::Redshift
     #               type.</p>
     #   @return [Array<Types::ReservedNodeConfigurationOption>]
     class GetReservedNodeExchangeConfigurationOptionsOutputMessage < Struct.new(
+      nil,
       :marker,
       :reserved_node_configuration_option_list,
       keyword_init: true
@@ -6987,6 +7240,7 @@ module Aws::Redshift
     #               ReservedNodeOfferings.</p>
     #   @return [String]
     class GetReservedNodeExchangeOfferingsInputMessage < Struct.new(
+      nil,
       :reserved_node_id,
       :max_records,
       :marker,
@@ -7007,6 +7261,7 @@ module Aws::Redshift
     #   <p>Returns an array of <a>ReservedNodeOffering</a> objects.</p>
     #   @return [Array<Types::ReservedNodeOffering>]
     class GetReservedNodeExchangeOfferingsOutputMessage < Struct.new(
+      nil,
       :marker,
       :reserved_node_offerings,
       keyword_init: true
@@ -7018,6 +7273,7 @@ module Aws::Redshift
     #   <p>The Amazon Resource Name (ARN) of the resource of which its resource policy is fetched.</p>
     #   @return [String]
     class GetResourcePolicyMessage < Struct.new(
+      nil,
       :resource_arn,
       keyword_init: true
     )
@@ -7028,6 +7284,7 @@ module Aws::Redshift
     #   <p>The content of the resource policy.</p>
     #   @return [Types::ResourcePolicy]
     class GetResourcePolicyResult < Struct.new(
+      nil,
       :resource_policy,
       keyword_init: true
     )
@@ -7048,6 +7305,7 @@ module Aws::Redshift
     #   <p>The list of tags for the HSM client certificate.</p>
     #   @return [Array<Types::Tag>]
     class HsmClientCertificate < Struct.new(
+      nil,
       :hsm_client_certificate_identifier,
       :hsm_client_certificate_public_key,
       :tags,
@@ -7061,6 +7319,7 @@ module Aws::Redshift
     # @!attribute message
     #   @return [String]
     class HsmClientCertificateAlreadyExistsFault < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -7080,6 +7339,7 @@ module Aws::Redshift
     #               clusters to store and retrieve database encryption keys in an HSM.</p>
     #   @return [Array<Types::HsmClientCertificate>]
     class HsmClientCertificateMessage < Struct.new(
+      nil,
       :marker,
       :hsm_client_certificates,
       keyword_init: true
@@ -7092,6 +7352,7 @@ module Aws::Redshift
     # @!attribute message
     #   @return [String]
     class HsmClientCertificateNotFoundFault < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -7105,6 +7366,7 @@ module Aws::Redshift
     # @!attribute message
     #   @return [String]
     class HsmClientCertificateQuotaExceededFault < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -7131,6 +7393,7 @@ module Aws::Redshift
     #   <p>The list of tags for the HSM configuration.</p>
     #   @return [Array<Types::Tag>]
     class HsmConfiguration < Struct.new(
+      nil,
       :hsm_configuration_identifier,
       :description,
       :hsm_ip_address,
@@ -7146,6 +7409,7 @@ module Aws::Redshift
     # @!attribute message
     #   @return [String]
     class HsmConfigurationAlreadyExistsFault < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -7164,6 +7428,7 @@ module Aws::Redshift
     #   <p>A list of <code>HsmConfiguration</code> objects.</p>
     #   @return [Array<Types::HsmConfiguration>]
     class HsmConfigurationMessage < Struct.new(
+      nil,
       :marker,
       :hsm_configurations,
       keyword_init: true
@@ -7175,6 +7440,7 @@ module Aws::Redshift
     # @!attribute message
     #   @return [String]
     class HsmConfigurationNotFoundFault < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -7188,6 +7454,7 @@ module Aws::Redshift
     # @!attribute message
     #   @return [String]
     class HsmConfigurationQuotaExceededFault < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -7209,6 +7476,7 @@ module Aws::Redshift
     #            <p>Values: active, applying</p>
     #   @return [String]
     class HsmStatus < Struct.new(
+      nil,
       :hsm_client_certificate_identifier,
       :hsm_configuration_identifier,
       :status,
@@ -7228,6 +7496,7 @@ module Aws::Redshift
     #   <p>The list of tags for the IP range.</p>
     #   @return [Array<Types::Tag>]
     class IPRange < Struct.new(
+      nil,
       :status,
       :cidrip,
       :tags,
@@ -7241,6 +7510,7 @@ module Aws::Redshift
     # @!attribute message
     #   @return [String]
     class InProgressTableRestoreQuotaExceededFault < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -7267,6 +7537,7 @@ module Aws::Redshift
     #   <p>The creation time of an inbound integration.</p>
     #   @return [Time]
     class InboundIntegration < Struct.new(
+      nil,
       :integration_arn,
       :source_arn,
       :target_arn,
@@ -7289,6 +7560,7 @@ module Aws::Redshift
     #   <p>A list of <a>InboundIntegration</a> instances.</p>
     #   @return [Array<Types::InboundIntegration>]
     class InboundIntegrationsMessage < Struct.new(
+      nil,
       :marker,
       :inbound_integrations,
       keyword_init: true
@@ -7300,6 +7572,7 @@ module Aws::Redshift
     # @!attribute message
     #   @return [String]
     class IncompatibleOrderableOptions < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -7311,6 +7584,7 @@ module Aws::Redshift
     # @!attribute message
     #   @return [String]
     class InsufficientClusterCapacityFault < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -7322,6 +7596,7 @@ module Aws::Redshift
     # @!attribute message
     #   @return [String]
     class InsufficientS3BucketPolicyFault < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -7366,6 +7641,7 @@ module Aws::Redshift
     #   <p>The list of tags associated with the integration.</p>
     #   @return [Array<Types::Tag>]
     class Integration < Struct.new(
+      nil,
       :integration_arn,
       :integration_name,
       :source_arn,
@@ -7386,6 +7662,7 @@ module Aws::Redshift
     # @!attribute message
     #   @return [String]
     class IntegrationAlreadyExistsFault < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -7398,6 +7675,7 @@ module Aws::Redshift
     # @!attribute message
     #   @return [String]
     class IntegrationConflictOperationFault < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -7408,6 +7686,7 @@ module Aws::Redshift
     # @!attribute message
     #   @return [String]
     class IntegrationConflictStateFault < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -7422,6 +7701,7 @@ module Aws::Redshift
     #   <p>The error message of an inbound integration error.</p>
     #   @return [String]
     class IntegrationError < Struct.new(
+      nil,
       :error_code,
       :error_message,
       keyword_init: true
@@ -7433,6 +7713,7 @@ module Aws::Redshift
     # @!attribute message
     #   @return [String]
     class IntegrationNotFoundFault < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -7443,6 +7724,7 @@ module Aws::Redshift
     # @!attribute message
     #   @return [String]
     class IntegrationQuotaExceededFault < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -7453,6 +7735,7 @@ module Aws::Redshift
     # @!attribute message
     #   @return [String]
     class IntegrationSourceNotFoundFault < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -7463,6 +7746,7 @@ module Aws::Redshift
     # @!attribute message
     #   @return [String]
     class IntegrationTargetNotFoundFault < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -7478,6 +7762,7 @@ module Aws::Redshift
     #   <p>List of integrations that are described.</p>
     #   @return [Array<Types::Integration>]
     class IntegrationsMessage < Struct.new(
+      nil,
       :marker,
       :integrations,
       keyword_init: true
@@ -7490,6 +7775,7 @@ module Aws::Redshift
     # @!attribute message
     #   @return [String]
     class InvalidAuthenticationProfileRequestFault < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -7500,6 +7786,7 @@ module Aws::Redshift
     # @!attribute message
     #   @return [String]
     class InvalidAuthorizationStateFault < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -7512,6 +7799,7 @@ module Aws::Redshift
     # @!attribute message
     #   @return [String]
     class InvalidClusterParameterGroupStateFault < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -7522,6 +7810,7 @@ module Aws::Redshift
     # @!attribute message
     #   @return [String]
     class InvalidClusterSecurityGroupStateFault < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -7532,6 +7821,7 @@ module Aws::Redshift
     # @!attribute message
     #   @return [String]
     class InvalidClusterSnapshotScheduleStateFault < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -7543,6 +7833,7 @@ module Aws::Redshift
     # @!attribute message
     #   @return [String]
     class InvalidClusterSnapshotStateFault < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -7553,6 +7844,7 @@ module Aws::Redshift
     # @!attribute message
     #   @return [String]
     class InvalidClusterStateFault < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -7563,6 +7855,7 @@ module Aws::Redshift
     # @!attribute message
     #   @return [String]
     class InvalidClusterSubnetGroupStateFault < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -7573,6 +7866,7 @@ module Aws::Redshift
     # @!attribute message
     #   @return [String]
     class InvalidClusterSubnetStateFault < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -7583,6 +7877,7 @@ module Aws::Redshift
     # @!attribute message
     #   @return [String]
     class InvalidClusterTrackFault < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -7593,6 +7888,7 @@ module Aws::Redshift
     # @!attribute message
     #   @return [String]
     class InvalidDataShareFault < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -7603,6 +7899,7 @@ module Aws::Redshift
     # @!attribute message
     #   @return [String]
     class InvalidElasticIpFault < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -7613,6 +7910,7 @@ module Aws::Redshift
     # @!attribute message
     #   @return [String]
     class InvalidEndpointStateFault < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -7624,6 +7922,7 @@ module Aws::Redshift
     # @!attribute message
     #   @return [String]
     class InvalidHsmClientCertificateStateFault < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -7635,6 +7934,7 @@ module Aws::Redshift
     # @!attribute message
     #   @return [String]
     class InvalidHsmConfigurationStateFault < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -7645,6 +7945,7 @@ module Aws::Redshift
     # @!attribute message
     #   @return [String]
     class InvalidNamespaceFault < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -7655,6 +7956,7 @@ module Aws::Redshift
     # @!attribute message
     #   @return [String]
     class InvalidPolicyFault < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -7665,6 +7967,7 @@ module Aws::Redshift
     # @!attribute message
     #   @return [String]
     class InvalidReservedNodeStateFault < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -7675,6 +7978,7 @@ module Aws::Redshift
     # @!attribute message
     #   @return [String]
     class InvalidRestoreFault < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -7686,6 +7990,7 @@ module Aws::Redshift
     # @!attribute message
     #   @return [String]
     class InvalidRetentionPeriodFault < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -7699,6 +8004,7 @@ module Aws::Redshift
     # @!attribute message
     #   @return [String]
     class InvalidS3BucketNameFault < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -7710,6 +8016,7 @@ module Aws::Redshift
     # @!attribute message
     #   @return [String]
     class InvalidS3KeyPrefixFault < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -7720,6 +8027,7 @@ module Aws::Redshift
     # @!attribute message
     #   @return [String]
     class InvalidScheduleFault < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -7730,6 +8038,7 @@ module Aws::Redshift
     # @!attribute message
     #   @return [String]
     class InvalidScheduledActionFault < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -7741,6 +8050,7 @@ module Aws::Redshift
     # @!attribute message
     #   @return [String]
     class InvalidSnapshotCopyGrantStateFault < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -7752,6 +8062,7 @@ module Aws::Redshift
     # @!attribute message
     #   @return [String]
     class InvalidSubnet < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -7763,6 +8074,7 @@ module Aws::Redshift
     # @!attribute message
     #   @return [String]
     class InvalidSubscriptionStateFault < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -7775,6 +8087,7 @@ module Aws::Redshift
     # @!attribute message
     #   @return [String]
     class InvalidTableRestoreArgumentFault < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -7785,6 +8098,7 @@ module Aws::Redshift
     # @!attribute message
     #   @return [String]
     class InvalidTagFault < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -7795,6 +8109,7 @@ module Aws::Redshift
     # @!attribute message
     #   @return [String]
     class InvalidUsageLimitFault < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -7805,6 +8120,7 @@ module Aws::Redshift
     # @!attribute message
     #   @return [String]
     class InvalidVPCNetworkStateFault < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -7816,6 +8132,7 @@ module Aws::Redshift
     # @!attribute message
     #   @return [String]
     class Ipv6CidrBlockNotFoundFault < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -7827,6 +8144,7 @@ module Aws::Redshift
     #   <p>Determines whether the query scope is enabled or disabled.</p>
     #   @return [String]
     class LakeFormationQuery < Struct.new(
+      nil,
       :authorization,
       keyword_init: true
     )
@@ -7852,6 +8170,7 @@ module Aws::Redshift
     # @!attribute message
     #   @return [String]
     class LimitExceededFault < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -7880,6 +8199,7 @@ module Aws::Redshift
     #           </p>
     #   @return [String]
     class ListRecommendationsMessage < Struct.new(
+      nil,
       :cluster_identifier,
       :namespace_arn,
       :max_records,
@@ -7901,6 +8221,7 @@ module Aws::Redshift
     #           </p>
     #   @return [String]
     class ListRecommendationsResult < Struct.new(
+      nil,
       :recommendations,
       :marker,
       keyword_init: true
@@ -7925,6 +8246,7 @@ module Aws::Redshift
     #               track. </p>
     #   @return [Array<Types::UpdateTarget>]
     class MaintenanceTrack < Struct.new(
+      nil,
       :maintenance_track_name,
       :database_version,
       :update_targets,
@@ -7940,6 +8262,7 @@ module Aws::Redshift
     #   <p>This parameter is retired. Amazon Redshift automatically  determines whether to use AQUA (Advanced Query Accelerator).</p>
     #   @return [String]
     class ModifyAquaInputMessage < Struct.new(
+      nil,
       :cluster_identifier,
       :aqua_configuration_status,
       keyword_init: true
@@ -7951,6 +8274,7 @@ module Aws::Redshift
     #   <p>This parameter is retired. Amazon Redshift automatically determines whether to use AQUA (Advanced Query Accelerator). </p>
     #   @return [Types::AquaConfiguration]
     class ModifyAquaOutputMessage < Struct.new(
+      nil,
       :aqua_configuration,
       keyword_init: true
     )
@@ -7965,6 +8289,7 @@ module Aws::Redshift
     #               The maximum length of the JSON string is determined by a quota for your account.</p>
     #   @return [String]
     class ModifyAuthenticationProfileMessage < Struct.new(
+      nil,
       :authentication_profile_name,
       :authentication_profile_content,
       keyword_init: true
@@ -7979,6 +8304,7 @@ module Aws::Redshift
     #   <p>The updated content of the authentication profile in JSON format.</p>
     #   @return [String]
     class ModifyAuthenticationProfileResult < Struct.new(
+      nil,
       :authentication_profile_name,
       :authentication_profile_content,
       keyword_init: true
@@ -7996,6 +8322,7 @@ module Aws::Redshift
     #               response to the <a>DescribeClusterDbRevisions</a> request.</p>
     #   @return [String]
     class ModifyClusterDbRevisionMessage < Struct.new(
+      nil,
       :cluster_identifier,
       :revision_target,
       keyword_init: true
@@ -8007,6 +8334,7 @@ module Aws::Redshift
     #   <p>Describes a cluster.</p>
     #   @return [Types::Cluster]
     class ModifyClusterDbRevisionResult < Struct.new(
+      nil,
       :cluster,
       keyword_init: true
     )
@@ -8029,6 +8357,7 @@ module Aws::Redshift
     #   <p>The Amazon Resource Name (ARN) for the IAM role that was set as default for the cluster when the cluster was last modified.</p>
     #   @return [String]
     class ModifyClusterIamRolesMessage < Struct.new(
+      nil,
       :cluster_identifier,
       :add_iam_roles,
       :remove_iam_roles,
@@ -8042,6 +8371,7 @@ module Aws::Redshift
     #   <p>Describes a cluster.</p>
     #   @return [Types::Cluster]
     class ModifyClusterIamRolesResult < Struct.new(
+      nil,
       :cluster,
       keyword_init: true
     )
@@ -8069,6 +8399,7 @@ module Aws::Redshift
     #               duration, you can't specify an end time. The duration must be 45 days or less.</p>
     #   @return [Integer]
     class ModifyClusterMaintenanceMessage < Struct.new(
+      nil,
       :cluster_identifier,
       :defer_maintenance,
       :defer_maintenance_identifier,
@@ -8084,6 +8415,7 @@ module Aws::Redshift
     #   <p>Describes a cluster.</p>
     #   @return [Types::Cluster]
     class ModifyClusterMaintenanceResult < Struct.new(
+      nil,
       :cluster,
       keyword_init: true
     )
@@ -8344,6 +8676,7 @@ module Aws::Redshift
     #   <p>If true and the cluster is currently only deployed in a single Availability Zone, the cluster will be modified to be deployed in two Availability Zones.</p>
     #   @return [Boolean]
     class ModifyClusterMessage < Struct.new(
+      nil,
       :cluster_identifier,
       :cluster_type,
       :node_type,
@@ -8391,6 +8724,7 @@ module Aws::Redshift
     #               pairs in the wlm_json_configuration parameter.</p>
     #   @return [Array<Types::Parameter>]
     class ModifyClusterParameterGroupMessage < Struct.new(
+      nil,
       :parameter_group_name,
       :parameters,
       keyword_init: true
@@ -8408,6 +8742,7 @@ module Aws::Redshift
     #               cluster.</p>
     #   @return [String]
     class ModifyClusterParameterGroupOutput < Struct.new(
+      nil,
       :parameter_group_name,
       :parameter_group_status,
       keyword_init: true
@@ -8419,6 +8754,7 @@ module Aws::Redshift
     #   <p>Describes a cluster.</p>
     #   @return [Types::Cluster]
     class ModifyClusterResult < Struct.new(
+      nil,
       :cluster,
       keyword_init: true
     )
@@ -8440,6 +8776,7 @@ module Aws::Redshift
     #               passed.</p>
     #   @return [Boolean]
     class ModifyClusterSnapshotMessage < Struct.new(
+      nil,
       :snapshot_identifier,
       :manual_snapshot_retention_period,
       :force,
@@ -8452,6 +8789,7 @@ module Aws::Redshift
     #   <p>Describes a snapshot.</p>
     #   @return [Types::Snapshot]
     class ModifyClusterSnapshotResult < Struct.new(
+      nil,
       :snapshot,
       keyword_init: true
     )
@@ -8471,6 +8809,7 @@ module Aws::Redshift
     #               schedule.</p>
     #   @return [Boolean]
     class ModifyClusterSnapshotScheduleMessage < Struct.new(
+      nil,
       :cluster_identifier,
       :schedule_identifier,
       :disassociate_schedule,
@@ -8491,6 +8830,7 @@ module Aws::Redshift
     #               request.</p>
     #   @return [Array<String>]
     class ModifyClusterSubnetGroupMessage < Struct.new(
+      nil,
       :cluster_subnet_group_name,
       :description,
       :subnet_ids,
@@ -8503,6 +8843,7 @@ module Aws::Redshift
     #   <p>Describes a subnet group.</p>
     #   @return [Types::ClusterSubnetGroup]
     class ModifyClusterSubnetGroupResult < Struct.new(
+      nil,
       :cluster_subnet_group,
       keyword_init: true
     )
@@ -8519,6 +8860,7 @@ module Aws::Redshift
     #   <p>The identifier of the cluster to change a custom domain association for.</p>
     #   @return [String]
     class ModifyCustomDomainAssociationMessage < Struct.new(
+      nil,
       :custom_domain_name,
       :custom_domain_certificate_arn,
       :cluster_identifier,
@@ -8540,6 +8882,7 @@ module Aws::Redshift
     #   <p>The certificate expiration time associated with the result for the changed custom domain association.</p>
     #   @return [String]
     class ModifyCustomDomainAssociationResult < Struct.new(
+      nil,
       :custom_domain_name,
       :custom_domain_certificate_arn,
       :cluster_identifier,
@@ -8556,6 +8899,7 @@ module Aws::Redshift
     #   <p>The complete list of VPC security groups associated with the endpoint after the endpoint is modified.</p>
     #   @return [Array<String>]
     class ModifyEndpointAccessMessage < Struct.new(
+      nil,
       :endpoint_name,
       :vpc_security_group_ids,
       keyword_init: true
@@ -8595,6 +8939,7 @@ module Aws::Redshift
     #   <p>The connection endpoint for connecting to an Amazon Redshift cluster through the proxy.</p>
     #   @return [Types::VpcEndpoint]
     class ModifyEndpointAccessOutput < Struct.new(
+      nil,
       :cluster_identifier,
       :resource_owner,
       :subnet_group_name,
@@ -8649,6 +8994,7 @@ module Aws::Redshift
     #               indicates the subscription is enabled </p>
     #   @return [Boolean]
     class ModifyEventSubscriptionMessage < Struct.new(
+      nil,
       :subscription_name,
       :sns_topic_arn,
       :source_type,
@@ -8665,6 +9011,7 @@ module Aws::Redshift
     #   <p>Describes event subscriptions.</p>
     #   @return [Types::EventSubscription]
     class ModifyEventSubscriptionResult < Struct.new(
+      nil,
       :event_subscription,
       keyword_init: true
     )
@@ -8681,6 +9028,7 @@ module Aws::Redshift
     #   <p>A new name for the integration.</p>
     #   @return [String]
     class ModifyIntegrationMessage < Struct.new(
+      nil,
       :integration_arn,
       :description,
       :integration_name,
@@ -8727,6 +9075,7 @@ module Aws::Redshift
     #   <p>The list of tags associated with the integration.</p>
     #   @return [Array<Types::Tag>]
     class ModifyIntegrationOutput < Struct.new(
+      nil,
       :integration_arn,
       :integration_name,
       :source_arn,
@@ -8764,6 +9113,7 @@ module Aws::Redshift
     #   <p>A collection of service integrations associated with the application.</p>
     #   @return [Array<Types::ServiceIntegrationsUnion>]
     class ModifyRedshiftIdcApplicationMessage < Struct.new(
+      nil,
       :redshift_idc_application_arn,
       :identity_namespace,
       :iam_role_arn,
@@ -8779,6 +9129,7 @@ module Aws::Redshift
     #   <p>Contains properties for the Redshift IDC application.</p>
     #   @return [Types::RedshiftIdcApplication]
     class ModifyRedshiftIdcApplicationResult < Struct.new(
+      nil,
       :redshift_idc_application,
       keyword_init: true
     )
@@ -8815,6 +9166,7 @@ module Aws::Redshift
     #   <p>A modified enable flag of the scheduled action. If true, the scheduled action is active. If false, the scheduled action is disabled. </p>
     #   @return [Boolean]
     class ModifyScheduledActionMessage < Struct.new(
+      nil,
       :scheduled_action_name,
       :target_action,
       :schedule,
@@ -8872,6 +9224,7 @@ module Aws::Redshift
     #   <p>The end time in UTC when the schedule is no longer active. After this time, the scheduled action does not trigger. </p>
     #   @return [Time]
     class ModifyScheduledActionOutput < Struct.new(
+      nil,
       :scheduled_action_name,
       :target_action,
       :schedule,
@@ -8914,6 +9267,7 @@ module Aws::Redshift
     #               snapshots instead of automated snapshots.</p>
     #   @return [Boolean]
     class ModifySnapshotCopyRetentionPeriodMessage < Struct.new(
+      nil,
       :cluster_identifier,
       :retention_period,
       :manual,
@@ -8926,6 +9280,7 @@ module Aws::Redshift
     #   <p>Describes a cluster.</p>
     #   @return [Types::Cluster]
     class ModifySnapshotCopyRetentionPeriodResult < Struct.new(
+      nil,
       :cluster,
       keyword_init: true
     )
@@ -8940,6 +9295,7 @@ module Aws::Redshift
     #               expressions, for example, "cron(30 12 *)" or "rate(12 hours)".</p>
     #   @return [Array<String>]
     class ModifySnapshotScheduleMessage < Struct.new(
+      nil,
       :schedule_identifier,
       :schedule_definitions,
       keyword_init: true
@@ -8971,6 +9327,7 @@ module Aws::Redshift
     #   <p>A list of clusters associated with the schedule. A maximum of 100 clusters is returned.</p>
     #   @return [Array<Types::ClusterAssociatedToSchedule>]
     class ModifySnapshotScheduleOutput < Struct.new(
+      nil,
       :schedule_definitions,
       :schedule_identifier,
       :schedule_description,
@@ -8995,6 +9352,7 @@ module Aws::Redshift
     #               For more information about this parameter, see <a>UsageLimit</a>. </p>
     #   @return [String]
     class ModifyUsageLimitMessage < Struct.new(
+      nil,
       :usage_limit_id,
       :amount,
       :breach_action,
@@ -9043,6 +9401,7 @@ module Aws::Redshift
     #   <p>A list of tag instances.</p>
     #   @return [Array<Types::Tag>]
     class ModifyUsageLimitOutput < Struct.new(
+      nil,
       :usage_limit_id,
       :cluster_identifier,
       :feature_type,
@@ -9094,6 +9453,7 @@ module Aws::Redshift
     #   <p>The IPv6 address of the network interface within the subnet. </p>
     #   @return [String]
     class NetworkInterface < Struct.new(
+      nil,
       :network_interface_id,
       :subnet_id,
       :private_ip_address,
@@ -9118,6 +9478,7 @@ module Aws::Redshift
     #   <p>The category of the node configuration recommendation.</p>
     #   @return [String]
     class NodeConfigurationOption < Struct.new(
+      nil,
       :node_type,
       :number_of_nodes,
       :estimated_disk_utilization_percent,
@@ -9145,6 +9506,7 @@ module Aws::Redshift
     #               For example, filter NumberOfNodes (name) GT (operator) 3 (values).</p>
     #   @return [Array<String>]
     class NodeConfigurationOptionsFilter < Struct.new(
+      nil,
       :name,
       :operator,
       :values,
@@ -9164,6 +9526,7 @@ module Aws::Redshift
     #               records have been retrieved for the request. </p>
     #   @return [String]
     class NodeConfigurationOptionsMessage < Struct.new(
+      nil,
       :node_configuration_option_list,
       :marker,
       keyword_init: true
@@ -9175,6 +9538,7 @@ module Aws::Redshift
     # @!attribute message
     #   @return [String]
     class NumberOfNodesPerClusterLimitExceededFault < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -9189,6 +9553,7 @@ module Aws::Redshift
     # @!attribute message
     #   @return [String]
     class NumberOfNodesQuotaExceededFault < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -9209,6 +9574,7 @@ module Aws::Redshift
     #   <p>A list of availability zones for the orderable cluster.</p>
     #   @return [Array<Types::AvailabilityZone>]
     class OrderableClusterOption < Struct.new(
+      nil,
       :cluster_version,
       :cluster_type,
       :node_type,
@@ -9232,6 +9598,7 @@ module Aws::Redshift
     #               records have been retrieved for the request. </p>
     #   @return [String]
     class OrderableClusterOptionsMessage < Struct.new(
+      nil,
       :orderable_cluster_options,
       :marker,
       keyword_init: true
@@ -9275,6 +9642,7 @@ module Aws::Redshift
     #   <p>The earliest engine version to which the parameter can apply.</p>
     #   @return [String]
     class Parameter < Struct.new(
+      nil,
       :parameter_name,
       :parameter_value,
       :description,
@@ -9309,6 +9677,7 @@ module Aws::Redshift
     #   <p>The date (UTC) that the partner integration status was last updated by the partner.</p>
     #   @return [Time]
     class PartnerIntegrationInfo < Struct.new(
+      nil,
       :database_name,
       :partner_name,
       :status,
@@ -9324,6 +9693,7 @@ module Aws::Redshift
     # @!attribute message
     #   @return [String]
     class PartnerNotFoundFault < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -9335,6 +9705,7 @@ module Aws::Redshift
     #   <p>The identifier of the cluster to be paused.</p>
     #   @return [String]
     class PauseClusterInput < Struct.new(
+      nil,
       :cluster_identifier,
       keyword_init: true
     )
@@ -9346,6 +9717,7 @@ module Aws::Redshift
     #   <p>The identifier of the cluster to be paused.</p>
     #   @return [String]
     class PauseClusterMessage < Struct.new(
+      nil,
       :cluster_identifier,
       keyword_init: true
     )
@@ -9356,6 +9728,7 @@ module Aws::Redshift
     #   <p>Describes a cluster.</p>
     #   @return [Types::Cluster]
     class PauseClusterResult < Struct.new(
+      nil,
       :cluster,
       keyword_init: true
     )
@@ -9407,6 +9780,7 @@ module Aws::Redshift
     #   <p>The encryption type for a cluster. Possible values are: KMS and None. </p>
     #   @return [String]
     class PendingModifiedValues < Struct.new(
+      nil,
       :master_user_password,
       :node_type,
       :number_of_nodes,
@@ -9428,6 +9802,7 @@ module Aws::Redshift
     #   <p>The unique identifier for the provisioned cluster.</p>
     #   @return [String]
     class ProvisionedIdentifier < Struct.new(
+      nil,
       :cluster_identifier,
       keyword_init: true
     )
@@ -9444,6 +9819,7 @@ module Aws::Redshift
     #            </p>
     #   @return [Integer]
     class PurchaseReservedNodeOfferingMessage < Struct.new(
+      nil,
       :reserved_node_offering_id,
       :node_count,
       keyword_init: true
@@ -9456,6 +9832,7 @@ module Aws::Redshift
     #               offerings. </p>
     #   @return [Types::ReservedNode]
     class PurchaseReservedNodeOfferingResult < Struct.new(
+      nil,
       :reserved_node,
       keyword_init: true
     )
@@ -9469,6 +9846,7 @@ module Aws::Redshift
     #   <p>The content of the resource policy being updated.</p>
     #   @return [String]
     class PutResourcePolicyMessage < Struct.new(
+      nil,
       :resource_arn,
       :policy,
       keyword_init: true
@@ -9480,6 +9858,7 @@ module Aws::Redshift
     #   <p>The content of the updated resource policy.</p>
     #   @return [Types::ResourcePolicy]
     class PutResourcePolicyResult < Struct.new(
+      nil,
       :resource_policy,
       keyword_init: true
     )
@@ -9491,6 +9870,7 @@ module Aws::Redshift
     #   <p>Determines whether the read/write scope is enabled or disabled.</p>
     #   @return [String]
     class ReadWriteAccess < Struct.new(
+      nil,
       :authorization,
       keyword_init: true
     )
@@ -9502,6 +9882,7 @@ module Aws::Redshift
     #   <p>The cluster identifier.</p>
     #   @return [String]
     class RebootClusterMessage < Struct.new(
+      nil,
       :cluster_identifier,
       keyword_init: true
     )
@@ -9512,6 +9893,7 @@ module Aws::Redshift
     #   <p>Describes a cluster.</p>
     #   @return [Types::Cluster]
     class RebootClusterResult < Struct.new(
+      nil,
       :cluster,
       keyword_init: true
     )
@@ -9556,6 +9938,7 @@ module Aws::Redshift
     #   <p>List of helpful links for more information about the Advisor recommendation.</p>
     #   @return [Array<Types::ReferenceLink>]
     class Recommendation < Struct.new(
+      nil,
       :id,
       :cluster_identifier,
       :namespace_arn,
@@ -9587,6 +9970,7 @@ module Aws::Redshift
     #   <p>The type of command.</p>
     #   @return [String]
     class RecommendedAction < Struct.new(
+      nil,
       :text,
       :database,
       :command,
@@ -9605,6 +9989,7 @@ module Aws::Redshift
     #   <p>The frequency at which the recurring charge amount is applied.</p>
     #   @return [String]
     class RecurringCharge < Struct.new(
+      nil,
       :recurring_charge_amount,
       :recurring_charge_frequency,
       keyword_init: true
@@ -9652,6 +10037,7 @@ module Aws::Redshift
     #               propagated.</p>
     #   @return [Array<String>]
     class RedshiftIdcApplication < Struct.new(
+      nil,
       :idc_instance_arn,
       :redshift_idc_application_name,
       :redshift_idc_application_arn,
@@ -9673,6 +10059,7 @@ module Aws::Redshift
     # @!attribute message
     #   @return [String]
     class RedshiftIdcApplicationAlreadyExistsFault < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -9683,6 +10070,7 @@ module Aws::Redshift
     # @!attribute message
     #   @return [String]
     class RedshiftIdcApplicationNotExistsFault < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -9693,6 +10081,7 @@ module Aws::Redshift
     # @!attribute message
     #   @return [String]
     class RedshiftIdcApplicationQuotaExceededFault < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -9707,6 +10096,7 @@ module Aws::Redshift
     #   <p>The URL address to find more information.</p>
     #   @return [String]
     class ReferenceLink < Struct.new(
+      nil,
       :text,
       :link,
       keyword_init: true
@@ -9723,6 +10113,7 @@ module Aws::Redshift
     #               that you want to register the namespace to.</p>
     #   @return [Array<String>]
     class RegisterNamespaceInputMessage < Struct.new(
+      nil,
       :namespace_identifier,
       :consumer_identifiers,
       keyword_init: true
@@ -9735,6 +10126,7 @@ module Aws::Redshift
     #               serverless namespace.</p>
     #   @return [String]
     class RegisterNamespaceOutputMessage < Struct.new(
+      nil,
       :status,
       keyword_init: true
     )
@@ -9745,6 +10137,7 @@ module Aws::Redshift
     #   <p>The Amazon Resource Name (ARN) of the datashare to reject.</p>
     #   @return [String]
     class RejectDataShareMessage < Struct.new(
+      nil,
       :data_share_arn,
       keyword_init: true
     )
@@ -9771,6 +10164,7 @@ module Aws::Redshift
     #   <p> The type of the datashare created by RegisterNamespace.</p>
     #   @return [String]
     class RejectDataShareOutput < Struct.new(
+      nil,
       :data_share_arn,
       :producer_arn,
       :allow_publicly_accessible_consumers,
@@ -9847,6 +10241,7 @@ module Aws::Redshift
     #   <p></p>
     #   @return [String]
     class ReservedNode < Struct.new(
+      nil,
       :reserved_node_id,
       :reserved_node_offering_id,
       :node_type,
@@ -9869,6 +10264,7 @@ module Aws::Redshift
     # @!attribute message
     #   @return [String]
     class ReservedNodeAlreadyExistsFault < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -9879,6 +10275,7 @@ module Aws::Redshift
     # @!attribute message
     #   @return [String]
     class ReservedNodeAlreadyMigratedFault < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -9898,6 +10295,7 @@ module Aws::Redshift
     #   <p>Describes a reserved node offering.</p>
     #   @return [Types::ReservedNodeOffering]
     class ReservedNodeConfigurationOption < Struct.new(
+      nil,
       :source_reserved_node,
       :target_reserved_node_count,
       :target_reserved_node_offering,
@@ -9910,6 +10308,7 @@ module Aws::Redshift
     # @!attribute message
     #   @return [String]
     class ReservedNodeExchangeNotFoundFault < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -9947,6 +10346,7 @@ module Aws::Redshift
     #   <p>The count of target reserved nodes in the cluster.</p>
     #   @return [Integer]
     class ReservedNodeExchangeStatus < Struct.new(
+      nil,
       :reserved_node_exchange_request_id,
       :status,
       :request_time,
@@ -9965,6 +10365,7 @@ module Aws::Redshift
     # @!attribute message
     #   @return [String]
     class ReservedNodeNotFoundFault < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -10005,6 +10406,7 @@ module Aws::Redshift
     #   <p></p>
     #   @return [String]
     class ReservedNodeOffering < Struct.new(
+      nil,
       :reserved_node_offering_id,
       :node_type,
       :duration,
@@ -10023,6 +10425,7 @@ module Aws::Redshift
     # @!attribute message
     #   @return [String]
     class ReservedNodeOfferingNotFoundFault < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -10041,6 +10444,7 @@ module Aws::Redshift
     #   <p>A list of <code>ReservedNodeOffering</code> objects.</p>
     #   @return [Array<Types::ReservedNodeOffering>]
     class ReservedNodeOfferingsMessage < Struct.new(
+      nil,
       :marker,
       :reserved_node_offerings,
       keyword_init: true
@@ -10055,6 +10459,7 @@ module Aws::Redshift
     # @!attribute message
     #   @return [String]
     class ReservedNodeQuotaExceededFault < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -10073,6 +10478,7 @@ module Aws::Redshift
     #   <p>The list of <code>ReservedNode</code> objects.</p>
     #   @return [Array<Types::ReservedNode>]
     class ReservedNodesMessage < Struct.new(
+      nil,
       :marker,
       :reserved_nodes,
       keyword_init: true
@@ -10097,6 +10503,7 @@ module Aws::Redshift
     #            <p>Constraints: A maximum of 20 parameters can be reset in a single request.</p>
     #   @return [Array<Types::Parameter>]
     class ResetClusterParameterGroupMessage < Struct.new(
+      nil,
       :parameter_group_name,
       :reset_all_parameters,
       :parameters,
@@ -10115,6 +10522,7 @@ module Aws::Redshift
     #               cluster.</p>
     #   @return [String]
     class ResetClusterParameterGroupOutput < Struct.new(
+      nil,
       :parameter_group_name,
       :parameter_group_status,
       keyword_init: true
@@ -10147,6 +10555,7 @@ module Aws::Redshift
     #   <p>The identifier of the target reserved node offering.</p>
     #   @return [String]
     class ResizeClusterInput < Struct.new(
+      nil,
       :cluster_identifier,
       :cluster_type,
       :node_type,
@@ -10184,6 +10593,7 @@ module Aws::Redshift
     #   <p>The identifier of the target reserved node offering.</p>
     #   @return [String]
     class ResizeClusterMessage < Struct.new(
+      nil,
       :cluster_identifier,
       :cluster_type,
       :node_type,
@@ -10200,6 +10610,7 @@ module Aws::Redshift
     #   <p>Describes a cluster.</p>
     #   @return [Types::Cluster]
     class ResizeClusterResult < Struct.new(
+      nil,
       :cluster,
       keyword_init: true
     )
@@ -10214,6 +10625,7 @@ module Aws::Redshift
     #   <p>A boolean value indicating if the resize operation can be cancelled.</p>
     #   @return [Boolean]
     class ResizeInfo < Struct.new(
+      nil,
       :resize_type,
       :allow_cancel_resize,
       keyword_init: true
@@ -10225,6 +10637,7 @@ module Aws::Redshift
     # @!attribute message
     #   @return [String]
     class ResizeNotFoundFault < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -10235,6 +10648,7 @@ module Aws::Redshift
     # @!attribute message
     #   @return [String]
     class ResourceNotFoundFault < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -10249,6 +10663,7 @@ module Aws::Redshift
     #   <p>The content of a resource policy.</p>
     #   @return [String]
     class ResourcePolicy < Struct.new(
+      nil,
       :resource_arn,
       :policy,
       keyword_init: true
@@ -10475,6 +10890,7 @@ module Aws::Redshift
     #   <p>If true, the snapshot will be restored to a cluster deployed in two Availability Zones.</p>
     #   @return [Boolean]
     class RestoreFromClusterSnapshotMessage < Struct.new(
+      nil,
       :cluster_identifier,
       :snapshot_identifier,
       :snapshot_arn,
@@ -10521,6 +10937,7 @@ module Aws::Redshift
     #   <p>Describes a cluster.</p>
     #   @return [Types::Cluster]
     class RestoreFromClusterSnapshotResult < Struct.new(
+      nil,
       :cluster,
       keyword_init: true
     )
@@ -10557,6 +10974,7 @@ module Aws::Redshift
     #               This field is only updated when you restore to DC2 node types. </p>
     #   @return [Integer]
     class RestoreStatus < Struct.new(
+      nil,
       :status,
       :current_restore_rate_in_mega_bytes_per_second,
       :snapshot_size_in_mega_bytes,
@@ -10603,6 +11021,7 @@ module Aws::Redshift
     #               If <code>false</code> (default), the names are not case sensitive.</p>
     #   @return [Boolean]
     class RestoreTableFromClusterSnapshotMessage < Struct.new(
+      nil,
       :cluster_identifier,
       :snapshot_identifier,
       :source_database_name,
@@ -10622,6 +11041,7 @@ module Aws::Redshift
     #               operation.</p>
     #   @return [Types::TableRestoreStatus]
     class RestoreTableFromClusterSnapshotResult < Struct.new(
+      nil,
       :table_restore_status,
       keyword_init: true
     )
@@ -10633,6 +11053,7 @@ module Aws::Redshift
     #   <p>The identifier of the cluster to be resumed.</p>
     #   @return [String]
     class ResumeClusterInput < Struct.new(
+      nil,
       :cluster_identifier,
       keyword_init: true
     )
@@ -10644,6 +11065,7 @@ module Aws::Redshift
     #   <p>The identifier of the cluster to be resumed.</p>
     #   @return [String]
     class ResumeClusterMessage < Struct.new(
+      nil,
       :cluster_identifier,
       keyword_init: true
     )
@@ -10654,6 +11076,7 @@ module Aws::Redshift
     #   <p>Describes a cluster.</p>
     #   @return [Types::Cluster]
     class ResumeClusterResult < Struct.new(
+      nil,
       :cluster,
       keyword_init: true
     )
@@ -10673,6 +11096,7 @@ module Aws::Redshift
     #   <p>The date on which the database revision was released.</p>
     #   @return [Time]
     class RevisionTarget < Struct.new(
+      nil,
       :database_revision,
       :description,
       :database_revision_release_date,
@@ -10706,6 +11130,7 @@ module Aws::Redshift
     #            </p>
     #   @return [String]
     class RevokeClusterSecurityGroupIngressMessage < Struct.new(
+      nil,
       :cluster_security_group_name,
       :cidrip,
       :ec2_security_group_name,
@@ -10719,6 +11144,7 @@ module Aws::Redshift
     #   <p>Describes a security group.</p>
     #   @return [Types::ClusterSecurityGroup]
     class RevokeClusterSecurityGroupIngressResult < Struct.new(
+      nil,
       :cluster_security_group,
       keyword_init: true
     )
@@ -10739,6 +11165,7 @@ module Aws::Redshift
     #              If true, the Redshift-managed VPC endpoints associated with the endpoint authorization are also deleted.</p>
     #   @return [Boolean]
     class RevokeEndpointAccessMessage < Struct.new(
+      nil,
       :cluster_identifier,
       :account,
       :vpc_ids,
@@ -10777,6 +11204,7 @@ module Aws::Redshift
     #   <p>The number of Redshift-managed VPC endpoints created for the authorization.</p>
     #   @return [Integer]
     class RevokeEndpointAccessOutput < Struct.new(
+      nil,
       :grantor,
       :grantee,
       :cluster_identifier,
@@ -10808,6 +11236,7 @@ module Aws::Redshift
     #               snapshot.</p>
     #   @return [String]
     class RevokeSnapshotAccessMessage < Struct.new(
+      nil,
       :snapshot_identifier,
       :snapshot_arn,
       :snapshot_cluster_identifier,
@@ -10821,6 +11250,7 @@ module Aws::Redshift
     #   <p>Describes a snapshot.</p>
     #   @return [Types::Snapshot]
     class RevokeSnapshotAccessResult < Struct.new(
+      nil,
       :snapshot,
       keyword_init: true
     )
@@ -10835,6 +11265,7 @@ module Aws::Redshift
     #               enabled.</p>
     #   @return [String]
     class RotateEncryptionKeyMessage < Struct.new(
+      nil,
       :cluster_identifier,
       keyword_init: true
     )
@@ -10845,6 +11276,7 @@ module Aws::Redshift
     #   <p>Describes a cluster.</p>
     #   @return [Types::Cluster]
     class RotateEncryptionKeyResult < Struct.new(
+      nil,
       :cluster,
       keyword_init: true
     )
@@ -10871,6 +11303,7 @@ module Aws::Redshift
     # @!attribute message
     #   @return [String]
     class SNSInvalidTopicFault < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -10881,6 +11314,7 @@ module Aws::Redshift
     # @!attribute message
     #   @return [String]
     class SNSNoAuthorizationFault < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -10892,6 +11326,7 @@ module Aws::Redshift
     # @!attribute message
     #   @return [String]
     class SNSTopicArnNotFoundFault < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -10902,6 +11337,7 @@ module Aws::Redshift
     # @!attribute message
     #   @return [String]
     class ScheduleDefinitionTypeUnsupportedFault < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -10952,6 +11388,7 @@ module Aws::Redshift
     #   <p>The end time in UTC when the schedule is no longer active. After this time, the scheduled action does not trigger. </p>
     #   @return [Time]
     class ScheduledAction < Struct.new(
+      nil,
       :scheduled_action_name,
       :target_action,
       :schedule,
@@ -10970,6 +11407,7 @@ module Aws::Redshift
     # @!attribute message
     #   @return [String]
     class ScheduledActionAlreadyExistsFault < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -10984,6 +11422,7 @@ module Aws::Redshift
     #   <p>List of values. Compare if the value (of type defined by <code>Name</code>) equals an item in the list of scheduled actions. </p>
     #   @return [Array<String>]
     class ScheduledActionFilter < Struct.new(
+      nil,
       :name,
       :values,
       keyword_init: true
@@ -10995,6 +11434,7 @@ module Aws::Redshift
     # @!attribute message
     #   @return [String]
     class ScheduledActionNotFoundFault < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -11005,6 +11445,7 @@ module Aws::Redshift
     # @!attribute message
     #   @return [String]
     class ScheduledActionQuotaExceededFault < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -11022,6 +11463,7 @@ module Aws::Redshift
     #   <p>An action that runs a <code>ResumeCluster</code> API operation. </p>
     #   @return [Types::ResumeClusterMessage]
     class ScheduledActionType < Struct.new(
+      nil,
       :resize_cluster,
       :pause_cluster,
       :resume_cluster,
@@ -11034,6 +11476,7 @@ module Aws::Redshift
     # @!attribute message
     #   @return [String]
     class ScheduledActionTypeUnsupportedFault < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -11052,6 +11495,7 @@ module Aws::Redshift
     #   <p>List of retrieved scheduled actions. </p>
     #   @return [Array<Types::ScheduledAction>]
     class ScheduledActionsMessage < Struct.new(
+      nil,
       :marker,
       :scheduled_actions,
       keyword_init: true
@@ -11067,6 +11511,7 @@ module Aws::Redshift
     #   <p>The nodes in the secondary compute unit.</p>
     #   @return [Array<Types::ClusterNode>]
     class SecondaryClusterInfo < Struct.new(
+      nil,
       :availability_zone,
       :cluster_nodes,
       keyword_init: true
@@ -11083,6 +11528,7 @@ module Aws::Redshift
     #               associated with the serverless namespace.</p>
     #   @return [String]
     class ServerlessIdentifier < Struct.new(
+      nil,
       :namespace_identifier,
       :workgroup_identifier,
       keyword_init: true
@@ -11261,6 +11707,7 @@ module Aws::Redshift
     #   <p>The Amazon Resource Name (ARN) of the snapshot.</p>
     #   @return [String]
     class Snapshot < Struct.new(
+      nil,
       :snapshot_identifier,
       :cluster_identifier,
       :snapshot_create_time,
@@ -11307,6 +11754,7 @@ module Aws::Redshift
     # @!attribute message
     #   @return [String]
     class SnapshotCopyAlreadyDisabledFault < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -11317,6 +11765,7 @@ module Aws::Redshift
     # @!attribute message
     #   @return [String]
     class SnapshotCopyAlreadyEnabledFault < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -11328,6 +11777,7 @@ module Aws::Redshift
     # @!attribute message
     #   @return [String]
     class SnapshotCopyDisabledFault < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -11353,6 +11803,7 @@ module Aws::Redshift
     #   <p>A list of tag instances.</p>
     #   @return [Array<Types::Tag>]
     class SnapshotCopyGrant < Struct.new(
+      nil,
       :snapshot_copy_grant_name,
       :kms_key_id,
       :tags,
@@ -11366,6 +11817,7 @@ module Aws::Redshift
     # @!attribute message
     #   @return [String]
     class SnapshotCopyGrantAlreadyExistsFault < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -11386,6 +11838,7 @@ module Aws::Redshift
     #   <p>The list of <code>SnapshotCopyGrant</code> objects.</p>
     #   @return [Array<Types::SnapshotCopyGrant>]
     class SnapshotCopyGrantMessage < Struct.new(
+      nil,
       :marker,
       :snapshot_copy_grants,
       keyword_init: true
@@ -11398,6 +11851,7 @@ module Aws::Redshift
     # @!attribute message
     #   @return [String]
     class SnapshotCopyGrantNotFoundFault < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -11409,6 +11863,7 @@ module Aws::Redshift
     # @!attribute message
     #   @return [String]
     class SnapshotCopyGrantQuotaExceededFault < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -11429,6 +11884,7 @@ module Aws::Redshift
     #   <p>The text message describing the error.</p>
     #   @return [String]
     class SnapshotErrorMessage < Struct.new(
+      nil,
       :snapshot_identifier,
       :snapshot_cluster_identifier,
       :failure_code,
@@ -11451,6 +11907,7 @@ module Aws::Redshift
     #   <p>A list of <a>Snapshot</a> instances. </p>
     #   @return [Array<Types::Snapshot>]
     class SnapshotMessage < Struct.new(
+      nil,
       :marker,
       :snapshots,
       keyword_init: true
@@ -11482,6 +11939,7 @@ module Aws::Redshift
     #   <p>A list of clusters associated with the schedule. A maximum of 100 clusters is returned.</p>
     #   @return [Array<Types::ClusterAssociatedToSchedule>]
     class SnapshotSchedule < Struct.new(
+      nil,
       :schedule_definitions,
       :schedule_identifier,
       :schedule_description,
@@ -11498,6 +11956,7 @@ module Aws::Redshift
     # @!attribute message
     #   @return [String]
     class SnapshotScheduleAlreadyExistsFault < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -11508,6 +11967,7 @@ module Aws::Redshift
     # @!attribute message
     #   @return [String]
     class SnapshotScheduleNotFoundFault < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -11518,6 +11978,7 @@ module Aws::Redshift
     # @!attribute message
     #   @return [String]
     class SnapshotScheduleQuotaExceededFault < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -11528,6 +11989,7 @@ module Aws::Redshift
     # @!attribute message
     #   @return [String]
     class SnapshotScheduleUpdateInProgressFault < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -11542,6 +12004,7 @@ module Aws::Redshift
     #   <p>The order for listing the attributes.</p>
     #   @return [String]
     class SnapshotSortingEntity < Struct.new(
+      nil,
       :attribute,
       :sort_order,
       keyword_init: true
@@ -11553,6 +12016,7 @@ module Aws::Redshift
     # @!attribute message
     #   @return [String]
     class SourceNotFoundFault < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -11570,6 +12034,7 @@ module Aws::Redshift
     #   <p>The status of the subnet.</p>
     #   @return [String]
     class Subnet < Struct.new(
+      nil,
       :subnet_identifier,
       :subnet_availability_zone,
       :subnet_status,
@@ -11582,6 +12047,7 @@ module Aws::Redshift
     # @!attribute message
     #   @return [String]
     class SubnetAlreadyInUse < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -11593,6 +12059,7 @@ module Aws::Redshift
     # @!attribute message
     #   @return [String]
     class SubscriptionAlreadyExistFault < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -11605,6 +12072,7 @@ module Aws::Redshift
     # @!attribute message
     #   @return [String]
     class SubscriptionCategoryNotFoundFault < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -11615,6 +12083,7 @@ module Aws::Redshift
     # @!attribute message
     #   @return [String]
     class SubscriptionEventIdNotFoundFault < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -11626,6 +12095,7 @@ module Aws::Redshift
     # @!attribute message
     #   @return [String]
     class SubscriptionNotFoundFault < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -11638,6 +12108,7 @@ module Aws::Redshift
     # @!attribute message
     #   @return [String]
     class SubscriptionSeverityNotFoundFault < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -11649,6 +12120,7 @@ module Aws::Redshift
     #   <p>A list of the supported operations.</p>
     #   @return [String]
     class SupportedOperation < Struct.new(
+      nil,
       :operation_name,
       keyword_init: true
     )
@@ -11660,6 +12132,7 @@ module Aws::Redshift
     #   <p></p>
     #   @return [String]
     class SupportedPlatform < Struct.new(
+      nil,
       :name,
       keyword_init: true
     )
@@ -11671,6 +12144,7 @@ module Aws::Redshift
     # @!attribute message
     #   @return [String]
     class TableLimitExceededFault < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -11681,6 +12155,7 @@ module Aws::Redshift
     # @!attribute message
     #   @return [String]
     class TableRestoreNotFoundFault < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -11739,6 +12214,7 @@ module Aws::Redshift
     #   <p>The name of the table to create as a result of the table restore request.</p>
     #   @return [String]
     class TableRestoreStatus < Struct.new(
+      nil,
       :table_restore_request_id,
       :status,
       :message,
@@ -11766,6 +12242,7 @@ module Aws::Redshift
     #   <p>A pagination token that can be used in a subsequent <a>DescribeTableRestoreStatus</a> request.</p>
     #   @return [String]
     class TableRestoreStatusMessage < Struct.new(
+      nil,
       :table_restore_status_details,
       :marker,
       keyword_init: true
@@ -11781,6 +12258,7 @@ module Aws::Redshift
     #   <p>The value for the resource tag.</p>
     #   @return [String]
     class Tag < Struct.new(
+      nil,
       :key,
       :value,
       keyword_init: true
@@ -11792,6 +12270,7 @@ module Aws::Redshift
     # @!attribute message
     #   @return [String]
     class TagLimitExceededFault < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -11842,6 +12321,7 @@ module Aws::Redshift
     #               Amazon Redshift Cluster Management Guide. </p>
     #   @return [String]
     class TaggedResource < Struct.new(
+      nil,
       :tag,
       :resource_name,
       :resource_type,
@@ -11862,6 +12342,7 @@ module Aws::Redshift
     #               records have been retrieved for the request. </p>
     #   @return [String]
     class TaggedResourceListMessage < Struct.new(
+      nil,
       :tagged_resources,
       :marker,
       keyword_init: true
@@ -11879,6 +12360,7 @@ module Aws::Redshift
     #                   <code>Marker</code> parameter and retrying the request.</p>
     #   @return [String]
     class TrackListMessage < Struct.new(
+      nil,
       :maintenance_tracks,
       :marker,
       keyword_init: true
@@ -11890,6 +12372,7 @@ module Aws::Redshift
     # @!attribute message
     #   @return [String]
     class UnauthorizedOperation < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -11900,6 +12383,7 @@ module Aws::Redshift
     # @!attribute message
     #   @return [String]
     class UnauthorizedPartnerIntegrationFault < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -11910,6 +12394,7 @@ module Aws::Redshift
     # @!attribute message
     #   @return [String]
     class UnknownSnapshotCopyRegionFault < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -11920,6 +12405,7 @@ module Aws::Redshift
     # @!attribute message
     #   @return [String]
     class UnsupportedOperationFault < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -11930,6 +12416,7 @@ module Aws::Redshift
     # @!attribute message
     #   @return [String]
     class UnsupportedOptionFault < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -11955,6 +12442,7 @@ module Aws::Redshift
     #   <p>The status message provided by the partner.</p>
     #   @return [String]
     class UpdatePartnerStatusInputMessage < Struct.new(
+      nil,
       :account_id,
       :cluster_identifier,
       :database_name,
@@ -11973,6 +12461,7 @@ module Aws::Redshift
     #   <p>The name of the partner that is authorized to send data.</p>
     #   @return [String]
     class UpdatePartnerStatusOutput < Struct.new(
+      nil,
       :database_name,
       :partner_name,
       keyword_init: true
@@ -11991,6 +12480,7 @@ module Aws::Redshift
     #   <p>A list of operations supported by the maintenance track.</p>
     #   @return [Array<Types::SupportedOperation>]
     class UpdateTarget < Struct.new(
+      nil,
       :maintenance_track_name,
       :database_version,
       :supported_operations,
@@ -12039,6 +12529,7 @@ module Aws::Redshift
     #   <p>A list of tag instances.</p>
     #   @return [Array<Types::Tag>]
     class UsageLimit < Struct.new(
+      nil,
       :usage_limit_id,
       :cluster_identifier,
       :feature_type,
@@ -12056,6 +12547,7 @@ module Aws::Redshift
     # @!attribute message
     #   @return [String]
     class UsageLimitAlreadyExistsFault < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -12066,6 +12558,7 @@ module Aws::Redshift
     # @!attribute message
     #   @return [String]
     class UsageLimitNotFoundFault < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -12083,6 +12576,7 @@ module Aws::Redshift
     #   <p>One or more network interfaces of the endpoint. Also known as an interface endpoint. </p>
     #   @return [Array<Types::NetworkInterface>]
     class VpcEndpoint < Struct.new(
+      nil,
       :vpc_endpoint_id,
       :vpc_id,
       :network_interfaces,
@@ -12099,6 +12593,7 @@ module Aws::Redshift
     #   <p>The status of the VPC security group.</p>
     #   @return [String]
     class VpcSecurityGroupMembership < Struct.new(
+      nil,
       :vpc_security_group_id,
       :status,
       keyword_init: true

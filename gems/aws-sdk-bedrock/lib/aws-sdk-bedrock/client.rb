@@ -106,7 +106,7 @@ module Aws::Bedrock
     #  When `true`, request parameters are coerced into the required types.
     # @option options [#identity] :credentials_provider
     #  The credentials provider used to resolve credentials. Any object that responds to `#identity`
-    #  and returns a {Aws::Core::Credentials}.
+    #  and returns a {Aws::Credentials}.
     # @option options [Boolean] :disable_host_prefix_injection
     #  When `true`, the SDK will not prepend the modeled host prefix to the endpoint.
     # @option options [Boolean] :disable_request_compression
@@ -198,8 +198,9 @@ module Aws::Bedrock
     #  The transport used to send requests. Defaults to an HTTP/1.1 transport based on
     #  Net::HTTP ({Smithy::Client::NetHTTP::Transport}), constructed with the resolved
     #  common client transport options. Supply a custom object responding to
-    #  `#transmit(request)` (returning a stream) to swap the transport, or a
-    #  directly-constructed `NetHTTP::Transport` to set Net::HTTP-specific knobs. A
+    #  `#transmit(request, sink)` and `#transmit_background(request, sink)` (both push
+    #  the response into the sink; see {Smithy::Client::Transport}) to swap the transport,
+    #  or a directly-constructed `NetHTTP::Transport` to set Net::HTTP-specific knobs. A
     #  caller-supplied transport instance is used as-is.
     # @option options [Boolean] :use_dualstack_endpoint
     #  When set to `true`, dualstack enabled endpoints (with `.aws` TLD) will be used if available.

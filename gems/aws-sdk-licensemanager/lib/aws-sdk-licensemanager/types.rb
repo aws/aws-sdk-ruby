@@ -10,6 +10,7 @@ module Aws::LicenseManager
     #   <p>Amazon Resource Name (ARN) of the grant.</p>
     #   @return [String]
     class AcceptGrantRequest < Struct.new(
+      nil,
       :grant_arn,
       keyword_init: true
     )
@@ -26,6 +27,7 @@ module Aws::LicenseManager
     #   <p>Grant version.</p>
     #   @return [String]
     class AcceptGrantResponse < Struct.new(
+      nil,
       :grant_arn,
       :status,
       :version,
@@ -38,6 +40,7 @@ module Aws::LicenseManager
     # @!attribute message
     #   @return [String]
     class AccessDeniedException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -49,6 +52,7 @@ module Aws::LicenseManager
     # @!attribute message
     #   @return [String]
     class AuthorizationException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -60,6 +64,7 @@ module Aws::LicenseManager
     #   <p>Time that automated discovery last ran.</p>
     #   @return [Time]
     class AutomatedDiscoveryInformation < Struct.new(
+      nil,
       :last_run_time,
       keyword_init: true
     )
@@ -74,6 +79,7 @@ module Aws::LicenseManager
     #   <p>Maximum time for the borrow configuration, in minutes.</p>
     #   @return [Integer]
     class BorrowConfiguration < Struct.new(
+      nil,
       :allow_early_check_in,
       :max_time_to_live_in_minutes,
       keyword_init: true
@@ -88,6 +94,7 @@ module Aws::LicenseManager
     #   <p>License beneficiary.</p>
     #   @return [String]
     class CheckInLicenseRequest < Struct.new(
+      nil,
       :license_consumption_token,
       :beneficiary,
       keyword_init: true
@@ -96,6 +103,7 @@ module Aws::LicenseManager
     end
 
     class CheckInLicenseResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -121,6 +129,7 @@ module Aws::LicenseManager
     #   <p>Unique, case-sensitive identifier that you provide to ensure the idempotency of the request.</p>
     #   @return [String]
     class CheckoutBorrowLicenseRequest < Struct.new(
+      nil,
       :license_arn,
       :entitlements,
       :digital_signature_method,
@@ -157,6 +166,7 @@ module Aws::LicenseManager
     #   <p>Information about constraints.</p>
     #   @return [Array<Types::Metadata>]
     class CheckoutBorrowLicenseResponse < Struct.new(
+      nil,
       :license_arn,
       :license_consumption_token,
       :entitlements_allowed,
@@ -192,6 +202,7 @@ module Aws::LicenseManager
     #   <p>Node ID.</p>
     #   @return [String]
     class CheckoutLicenseRequest < Struct.new(
+      nil,
       :product_sku,
       :checkout_type,
       :key_fingerprint,
@@ -229,6 +240,7 @@ module Aws::LicenseManager
     #   <p>Amazon Resource Name (ARN) of the checkout license.</p>
     #   @return [String]
     class CheckoutLicenseResponse < Struct.new(
+      nil,
       :checkout_type,
       :license_consumption_token,
       :entitlements_allowed,
@@ -246,6 +258,7 @@ module Aws::LicenseManager
     # @!attribute message
     #   @return [String]
     class ConflictException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -260,6 +273,7 @@ module Aws::LicenseManager
     #   <p>Number of licenses consumed by the resource.</p>
     #   @return [Integer]
     class ConsumedLicenseSummary < Struct.new(
+      nil,
       :resource_type,
       :consumed_licenses,
       keyword_init: true
@@ -278,6 +292,7 @@ module Aws::LicenseManager
     #   <p>Details about a borrow configuration.</p>
     #   @return [Types::BorrowConfiguration]
     class ConsumptionConfiguration < Struct.new(
+      nil,
       :renew_type,
       :provisional_configuration,
       :borrow_configuration,
@@ -325,6 +340,7 @@ module Aws::LicenseManager
     #            License Manager, see the <a href="https://docs.aws.amazon.com/license-manager/latest/APIReference/API_TagResource.html">TagResource</a> operation.</p>
     #   @return [Array<Types::Tag>]
     class CreateGrantRequest < Struct.new(
+      nil,
       :client_token,
       :grant_name,
       :license_arn,
@@ -347,6 +363,7 @@ module Aws::LicenseManager
     #   <p>Grant version.</p>
     #   @return [String]
     class CreateGrantResponse < Struct.new(
+      nil,
       :grant_arn,
       :status,
       :version,
@@ -380,6 +397,7 @@ module Aws::LicenseManager
     #   <p>The options specified for the grant.</p>
     #   @return [Types::Options]
     class CreateGrantVersionRequest < Struct.new(
+      nil,
       :client_token,
       :grant_arn,
       :grant_name,
@@ -403,6 +421,7 @@ module Aws::LicenseManager
     #   <p>New version of the grant.</p>
     #   @return [String]
     class CreateGrantVersionResponse < Struct.new(
+      nil,
       :grant_arn,
       :status,
       :version,
@@ -474,6 +493,7 @@ module Aws::LicenseManager
     #   <p>Product information.</p>
     #   @return [Array<Types::ProductInformation>]
     class CreateLicenseConfigurationRequest < Struct.new(
+      nil,
       :name,
       :description,
       :license_counting_type,
@@ -492,6 +512,7 @@ module Aws::LicenseManager
     #   <p>Amazon Resource Name (ARN) of the license configuration.</p>
     #   @return [String]
     class CreateLicenseConfigurationResponse < Struct.new(
+      nil,
       :license_configuration_arn,
       keyword_init: true
     )
@@ -510,6 +531,7 @@ module Aws::LicenseManager
     #   <p>Information that identifies the license type you are converting to. For the structure of the destination license, see <a href="https://docs.aws.amazon.com/license-manager/latest/userguide/conversion-procedures.html#conversion-cli">Convert a license type using the CLI </a> in the <i>License Manager User Guide</i>.</p>
     #   @return [Types::LicenseConversionContext]
     class CreateLicenseConversionTaskForResourceRequest < Struct.new(
+      nil,
       :resource_arn,
       :source_license_context,
       :destination_license_context,
@@ -522,6 +544,7 @@ module Aws::LicenseManager
     #   <p>The ID of the created license type conversion task.</p>
     #   @return [String]
     class CreateLicenseConversionTaskForResourceResponse < Struct.new(
+      nil,
       :license_conversion_task_id,
       keyword_init: true
     )
@@ -558,6 +581,7 @@ module Aws::LicenseManager
     #   <p>Tags to add to the report generator.</p>
     #   @return [Array<Types::Tag>]
     class CreateLicenseManagerReportGeneratorRequest < Struct.new(
+      nil,
       :report_generator_name,
       :type,
       :report_context,
@@ -574,6 +598,7 @@ module Aws::LicenseManager
     #   <p>The Amazon Resource Name (ARN) of the new report generator.</p>
     #   @return [String]
     class CreateLicenseManagerReportGeneratorResponse < Struct.new(
+      nil,
       :license_manager_report_generator_arn,
       keyword_init: true
     )
@@ -620,6 +645,7 @@ module Aws::LicenseManager
     #            License Manager, see the <a href="https://docs.aws.amazon.com/license-manager/latest/APIReference/API_TagResource.html">TagResource</a> operation.</p>
     #   @return [Array<Types::Tag>]
     class CreateLicenseRequest < Struct.new(
+      nil,
       :license_name,
       :product_name,
       :product_sku,
@@ -647,6 +673,7 @@ module Aws::LicenseManager
     #   <p>License version.</p>
     #   @return [String]
     class CreateLicenseResponse < Struct.new(
+      nil,
       :license_arn,
       :status,
       :version,
@@ -694,6 +721,7 @@ module Aws::LicenseManager
     #   <p>Current version of the license.</p>
     #   @return [String]
     class CreateLicenseVersionRequest < Struct.new(
+      nil,
       :license_arn,
       :license_name,
       :product_name,
@@ -721,6 +749,7 @@ module Aws::LicenseManager
     #   <p>License status.</p>
     #   @return [String]
     class CreateLicenseVersionResponse < Struct.new(
+      nil,
       :license_arn,
       :version,
       :status,
@@ -748,6 +777,7 @@ module Aws::LicenseManager
     #   <p>Idempotency token, valid for 10 minutes.</p>
     #   @return [String]
     class CreateTokenRequest < Struct.new(
+      nil,
       :license_arn,
       :role_arns,
       :expiration_in_days,
@@ -768,6 +798,7 @@ module Aws::LicenseManager
     #   <p>Refresh token, encoded as a JWT token.</p>
     #   @return [String]
     class CreateTokenResponse < Struct.new(
+      nil,
       :token_id,
       :token_type,
       :token,
@@ -784,6 +815,7 @@ module Aws::LicenseManager
     #   <p>End of the time range.</p>
     #   @return [String]
     class DatetimeRange < Struct.new(
+      nil,
       :begin,
       :end,
       keyword_init: true
@@ -801,6 +833,7 @@ module Aws::LicenseManager
     #   <p>Current version of the grant.</p>
     #   @return [String]
     class DeleteGrantRequest < Struct.new(
+      nil,
       :grant_arn,
       :status_reason,
       :version,
@@ -819,6 +852,7 @@ module Aws::LicenseManager
     #   <p>Grant version.</p>
     #   @return [String]
     class DeleteGrantResponse < Struct.new(
+      nil,
       :grant_arn,
       :status,
       :version,
@@ -831,6 +865,7 @@ module Aws::LicenseManager
     #   <p>ID of the license configuration.</p>
     #   @return [String]
     class DeleteLicenseConfigurationRequest < Struct.new(
+      nil,
       :license_configuration_arn,
       keyword_init: true
     )
@@ -838,6 +873,7 @@ module Aws::LicenseManager
     end
 
     class DeleteLicenseConfigurationResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -847,6 +883,7 @@ module Aws::LicenseManager
     #   <p>Amazon Resource Name (ARN) of the report generator to be deleted.</p>
     #   @return [String]
     class DeleteLicenseManagerReportGeneratorRequest < Struct.new(
+      nil,
       :license_manager_report_generator_arn,
       keyword_init: true
     )
@@ -854,6 +891,7 @@ module Aws::LicenseManager
     end
 
     class DeleteLicenseManagerReportGeneratorResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -866,6 +904,7 @@ module Aws::LicenseManager
     #   <p>Current version of the license.</p>
     #   @return [String]
     class DeleteLicenseRequest < Struct.new(
+      nil,
       :license_arn,
       :source_version,
       keyword_init: true
@@ -880,6 +919,7 @@ module Aws::LicenseManager
     #   <p>Date when the license is deleted.</p>
     #   @return [String]
     class DeleteLicenseResponse < Struct.new(
+      nil,
       :status,
       :deletion_date,
       keyword_init: true
@@ -891,6 +931,7 @@ module Aws::LicenseManager
     #   <p>Token ID.</p>
     #   @return [String]
     class DeleteTokenRequest < Struct.new(
+      nil,
       :token_id,
       keyword_init: true
     )
@@ -898,6 +939,7 @@ module Aws::LicenseManager
     end
 
     class DeleteTokenResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -923,6 +965,7 @@ module Aws::LicenseManager
     #   <p>Indicates whether check-ins are allowed.</p>
     #   @return [Boolean]
     class Entitlement < Struct.new(
+      nil,
       :name,
       :value,
       :max_count,
@@ -945,6 +988,7 @@ module Aws::LicenseManager
     #   <p>Entitlement data unit.</p>
     #   @return [String]
     class EntitlementData < Struct.new(
+      nil,
       :name,
       :value,
       :unit,
@@ -957,6 +1001,7 @@ module Aws::LicenseManager
     # @!attribute message
     #   @return [String]
     class EntitlementNotAllowedException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -977,6 +1022,7 @@ module Aws::LicenseManager
     #   <p>Entitlement usage unit.</p>
     #   @return [String]
     class EntitlementUsage < Struct.new(
+      nil,
       :name,
       :consumed_value,
       :max_count,
@@ -993,6 +1039,7 @@ module Aws::LicenseManager
     #   <p>Checks whether you have the required permissions for the action, without actually making the request. Provides an error response if you do not have the required permissions.</p>
     #   @return [Boolean]
     class ExtendLicenseConsumptionRequest < Struct.new(
+      nil,
       :license_consumption_token,
       :dry_run,
       keyword_init: true
@@ -1007,6 +1054,7 @@ module Aws::LicenseManager
     #   <p>Date and time at which the license consumption expires.</p>
     #   @return [String]
     class ExtendLicenseConsumptionResponse < Struct.new(
+      nil,
       :license_consumption_token,
       :expiration,
       keyword_init: true
@@ -1020,6 +1068,7 @@ module Aws::LicenseManager
     # @!attribute error_code
     #   @return [String]
     class FailedDependencyException < Struct.new(
+      nil,
       :message,
       :error_code,
       keyword_init: true
@@ -1037,6 +1086,7 @@ module Aws::LicenseManager
     #   <p>The value of the filter, which is case-sensitive. You can only specify one value for the filter.</p>
     #   @return [Array<String>]
     class Filter < Struct.new(
+      nil,
       :name,
       :values,
       keyword_init: true
@@ -1048,6 +1098,7 @@ module Aws::LicenseManager
     # @!attribute message
     #   @return [String]
     class FilterLimitExceededException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -1061,6 +1112,7 @@ module Aws::LicenseManager
     #   <p>Token properties to validate against those present in the JWT token.</p>
     #   @return [Array<String>]
     class GetAccessTokenRequest < Struct.new(
+      nil,
       :token,
       :token_properties,
       keyword_init: true
@@ -1072,6 +1124,7 @@ module Aws::LicenseManager
     #   <p>Temporary access token.</p>
     #   @return [String]
     class GetAccessTokenResponse < Struct.new(
+      nil,
       :access_token,
       keyword_init: true
     )
@@ -1085,6 +1138,7 @@ module Aws::LicenseManager
     #   <p>Grant version.</p>
     #   @return [String]
     class GetGrantRequest < Struct.new(
+      nil,
       :grant_arn,
       :version,
       keyword_init: true
@@ -1096,6 +1150,7 @@ module Aws::LicenseManager
     #   <p>Grant details.</p>
     #   @return [Types::Grant]
     class GetGrantResponse < Struct.new(
+      nil,
       :grant,
       keyword_init: true
     )
@@ -1106,6 +1161,7 @@ module Aws::LicenseManager
     #   <p>Amazon Resource Name (ARN) of the license configuration.</p>
     #   @return [String]
     class GetLicenseConfigurationRequest < Struct.new(
+      nil,
       :license_configuration_arn,
       keyword_init: true
     )
@@ -1164,6 +1220,7 @@ module Aws::LicenseManager
     #   <p>When true, disassociates a resource when software is uninstalled.</p>
     #   @return [Boolean]
     class GetLicenseConfigurationResponse < Struct.new(
+      nil,
       :license_configuration_id,
       :license_configuration_arn,
       :name,
@@ -1190,6 +1247,7 @@ module Aws::LicenseManager
     #   <p>ID of the license type conversion task to retrieve information on.</p>
     #   @return [String]
     class GetLicenseConversionTaskRequest < Struct.new(
+      nil,
       :license_conversion_task_id,
       keyword_init: true
     )
@@ -1224,6 +1282,7 @@ module Aws::LicenseManager
     #   <p>Time at which the license type conversion task was completed.</p>
     #   @return [Time]
     class GetLicenseConversionTaskResponse < Struct.new(
+      nil,
       :license_conversion_task_id,
       :resource_arn,
       :source_license_context,
@@ -1242,6 +1301,7 @@ module Aws::LicenseManager
     #   <p>Amazon Resource Name (ARN) of the report generator.</p>
     #   @return [String]
     class GetLicenseManagerReportGeneratorRequest < Struct.new(
+      nil,
       :license_manager_report_generator_arn,
       keyword_init: true
     )
@@ -1252,6 +1312,7 @@ module Aws::LicenseManager
     #   <p>A report generator that creates periodic reports about your license configurations.</p>
     #   @return [Types::ReportGenerator]
     class GetLicenseManagerReportGeneratorResponse < Struct.new(
+      nil,
       :report_generator,
       keyword_init: true
     )
@@ -1265,6 +1326,7 @@ module Aws::LicenseManager
     #   <p>License version.</p>
     #   @return [String]
     class GetLicenseRequest < Struct.new(
+      nil,
       :license_arn,
       :version,
       keyword_init: true
@@ -1276,6 +1338,7 @@ module Aws::LicenseManager
     #   <p>License details.</p>
     #   @return [Types::License]
     class GetLicenseResponse < Struct.new(
+      nil,
       :license,
       keyword_init: true
     )
@@ -1286,6 +1349,7 @@ module Aws::LicenseManager
     #   <p>Amazon Resource Name (ARN) of the license.</p>
     #   @return [String]
     class GetLicenseUsageRequest < Struct.new(
+      nil,
       :license_arn,
       keyword_init: true
     )
@@ -1296,6 +1360,7 @@ module Aws::LicenseManager
     #   <p>License usage details.</p>
     #   @return [Types::LicenseUsage]
     class GetLicenseUsageResponse < Struct.new(
+      nil,
       :license_usage,
       keyword_init: true
     )
@@ -1303,6 +1368,7 @@ module Aws::LicenseManager
     end
 
     class GetServiceSettingsRequest < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1327,6 +1393,7 @@ module Aws::LicenseManager
     #            provides member accounts with access to this share.</p>
     #   @return [String]
     class GetServiceSettingsResponse < Struct.new(
+      nil,
       :s3_bucket_arn,
       :sns_topic_arn,
       :organization_configuration,
@@ -1372,6 +1439,7 @@ module Aws::LicenseManager
     #   <p>The options specified for the grant.</p>
     #   @return [Types::Options]
     class Grant < Struct.new(
+      nil,
       :grant_arn,
       :grant_name,
       :parent_arn,
@@ -1435,6 +1503,7 @@ module Aws::LicenseManager
     #   <p>Granted license received metadata.</p>
     #   @return [Types::ReceivedMetadata]
     class GrantedLicense < Struct.new(
+      nil,
       :license_arn,
       :license_name,
       :product_name,
@@ -1459,6 +1528,7 @@ module Aws::LicenseManager
     # @!attribute message
     #   @return [String]
     class InvalidParameterValueException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -1471,6 +1541,7 @@ module Aws::LicenseManager
     # @!attribute message
     #   @return [String]
     class InvalidResourceStateException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -1488,6 +1559,7 @@ module Aws::LicenseManager
     #   <p>Value of the filter.</p>
     #   @return [String]
     class InventoryFilter < Struct.new(
+      nil,
       :name,
       :condition,
       :value,
@@ -1505,6 +1577,7 @@ module Aws::LicenseManager
     #            and support the RSASSA-PSS SHA-256 signing algorithm.</p>
     #   @return [String]
     class Issuer < Struct.new(
+      nil,
       :name,
       :sign_key,
       keyword_init: true
@@ -1524,6 +1597,7 @@ module Aws::LicenseManager
     #   <p>Issuer key fingerprint.</p>
     #   @return [String]
     class IssuerDetails < Struct.new(
+      nil,
       :name,
       :sign_key,
       :key_fingerprint,
@@ -1576,6 +1650,7 @@ module Aws::LicenseManager
     #   <p>License version.</p>
     #   @return [String]
     class License < Struct.new(
+      nil,
       :license_arn,
       :license_name,
       :product_name,
@@ -1649,6 +1724,7 @@ module Aws::LicenseManager
     #   <p>Automated discovery information.</p>
     #   @return [Types::AutomatedDiscoveryInformation]
     class LicenseConfiguration < Struct.new(
+      nil,
       :license_configuration_id,
       :license_configuration_arn,
       :name,
@@ -1687,6 +1763,7 @@ module Aws::LicenseManager
     #   <p>Scope of AMI associations. The possible value is <code>cross-account</code>.</p>
     #   @return [String]
     class LicenseConfigurationAssociation < Struct.new(
+      nil,
       :resource_arn,
       :resource_type,
       :resource_owner_id,
@@ -1717,6 +1794,7 @@ module Aws::LicenseManager
     #   <p>Number of licenses consumed by the resource.</p>
     #   @return [Integer]
     class LicenseConfigurationUsage < Struct.new(
+      nil,
       :resource_arn,
       :resource_type,
       :resource_status,
@@ -1738,6 +1816,7 @@ module Aws::LicenseManager
     #   <p>Product codes referred to in the license conversion process.</p>
     #   @return [Array<Types::ProductCodeListItem>]
     class LicenseConversionContext < Struct.new(
+      nil,
       :usage_operation,
       :product_codes,
       keyword_init: true
@@ -1775,6 +1854,7 @@ module Aws::LicenseManager
     #   <p>The time the conversion task was completed.</p>
     #   @return [Time]
     class LicenseConversionTask < Struct.new(
+      nil,
       :license_conversion_task_id,
       :resource_arn,
       :source_license_context,
@@ -1815,6 +1895,7 @@ module Aws::LicenseManager
     #   <p>Reserved.</p>
     #   @return [Array<Types::Metadata>]
     class LicenseOperationFailure < Struct.new(
+      nil,
       :resource_arn,
       :resource_type,
       :error_message,
@@ -1836,6 +1917,7 @@ module Aws::LicenseManager
     #   <p>Scope of AMI associations. The possible value is <code>cross-account</code>.</p>
     #   @return [String]
     class LicenseSpecification < Struct.new(
+      nil,
       :license_configuration_arn,
       :ami_association_scope,
       keyword_init: true
@@ -1848,6 +1930,7 @@ module Aws::LicenseManager
     #   <p>License entitlement usages.</p>
     #   @return [Array<Types::EntitlementUsage>]
     class LicenseUsage < Struct.new(
+      nil,
       :entitlement_usages,
       keyword_init: true
     )
@@ -1858,6 +1941,7 @@ module Aws::LicenseManager
     # @!attribute message
     #   @return [String]
     class LicenseUsageException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -1874,6 +1958,7 @@ module Aws::LicenseManager
     #   <p>Token for the next set of results.</p>
     #   @return [String]
     class ListAssociationsForLicenseConfigurationRequest < Struct.new(
+      nil,
       :license_configuration_arn,
       :max_results,
       :next_token,
@@ -1889,6 +1974,7 @@ module Aws::LicenseManager
     #   <p>Token for the next set of results.</p>
     #   @return [String]
     class ListAssociationsForLicenseConfigurationResponse < Struct.new(
+      nil,
       :license_configuration_associations,
       :next_token,
       keyword_init: true
@@ -1936,6 +2022,7 @@ module Aws::LicenseManager
     #   <p>Maximum number of results to return in a single call.</p>
     #   @return [Integer]
     class ListDistributedGrantsRequest < Struct.new(
+      nil,
       :grant_arns,
       :filters,
       :next_token,
@@ -1952,6 +2039,7 @@ module Aws::LicenseManager
     #   <p>Token for the next set of results.</p>
     #   @return [String]
     class ListDistributedGrantsResponse < Struct.new(
+      nil,
       :grants,
       :next_token,
       keyword_init: true
@@ -1969,6 +2057,7 @@ module Aws::LicenseManager
     #   <p>Token for the next set of results.</p>
     #   @return [String]
     class ListFailuresForLicenseConfigurationOperationsRequest < Struct.new(
+      nil,
       :license_configuration_arn,
       :max_results,
       :next_token,
@@ -1984,6 +2073,7 @@ module Aws::LicenseManager
     #   <p>Token for the next set of results.</p>
     #   @return [String]
     class ListFailuresForLicenseConfigurationOperationsResponse < Struct.new(
+      nil,
       :license_operation_failure_list,
       :next_token,
       keyword_init: true
@@ -2020,6 +2110,7 @@ module Aws::LicenseManager
     #            </ul>
     #   @return [Array<Types::Filter>]
     class ListLicenseConfigurationsRequest < Struct.new(
+      nil,
       :license_configuration_arns,
       :max_results,
       :next_token,
@@ -2036,6 +2127,7 @@ module Aws::LicenseManager
     #   <p>Token for the next set of results.</p>
     #   @return [String]
     class ListLicenseConfigurationsResponse < Struct.new(
+      nil,
       :license_configurations,
       :next_token,
       keyword_init: true
@@ -2055,6 +2147,7 @@ module Aws::LicenseManager
     #         </p>
     #   @return [Array<Types::Filter>]
     class ListLicenseConversionTasksRequest < Struct.new(
+      nil,
       :next_token,
       :max_results,
       :filters,
@@ -2070,6 +2163,7 @@ module Aws::LicenseManager
     #   <p>Token for the next set of results.</p>
     #   @return [String]
     class ListLicenseConversionTasksResponse < Struct.new(
+      nil,
       :license_conversion_tasks,
       :next_token,
       keyword_init: true
@@ -2094,6 +2188,7 @@ module Aws::LicenseManager
     #   <p>Maximum number of results to return in a single call.</p>
     #   @return [Integer]
     class ListLicenseManagerReportGeneratorsRequest < Struct.new(
+      nil,
       :filters,
       :next_token,
       :max_results,
@@ -2109,6 +2204,7 @@ module Aws::LicenseManager
     #   <p>Token for the next set of results.</p>
     #   @return [String]
     class ListLicenseManagerReportGeneratorsResponse < Struct.new(
+      nil,
       :report_generators,
       :next_token,
       keyword_init: true
@@ -2126,6 +2222,7 @@ module Aws::LicenseManager
     #   <p>Token for the next set of results.</p>
     #   @return [String]
     class ListLicenseSpecificationsForResourceRequest < Struct.new(
+      nil,
       :resource_arn,
       :max_results,
       :next_token,
@@ -2141,6 +2238,7 @@ module Aws::LicenseManager
     #   <p>Token for the next set of results.</p>
     #   @return [String]
     class ListLicenseSpecificationsForResourceResponse < Struct.new(
+      nil,
       :license_specifications,
       :next_token,
       keyword_init: true
@@ -2158,6 +2256,7 @@ module Aws::LicenseManager
     #   <p>Maximum number of results to return in a single call.</p>
     #   @return [Integer]
     class ListLicenseVersionsRequest < Struct.new(
+      nil,
       :license_arn,
       :next_token,
       :max_results,
@@ -2173,6 +2272,7 @@ module Aws::LicenseManager
     #   <p>Token for the next set of results.</p>
     #   @return [String]
     class ListLicenseVersionsResponse < Struct.new(
+      nil,
       :licenses,
       :next_token,
       keyword_init: true
@@ -2215,6 +2315,7 @@ module Aws::LicenseManager
     #   <p>Maximum number of results to return in a single call.</p>
     #   @return [Integer]
     class ListLicensesRequest < Struct.new(
+      nil,
       :license_arns,
       :filters,
       :next_token,
@@ -2231,6 +2332,7 @@ module Aws::LicenseManager
     #   <p>Token for the next set of results.</p>
     #   @return [String]
     class ListLicensesResponse < Struct.new(
+      nil,
       :licenses,
       :next_token,
       keyword_init: true
@@ -2263,6 +2365,7 @@ module Aws::LicenseManager
     #   <p>Maximum number of results to return in a single call.</p>
     #   @return [Integer]
     class ListReceivedGrantsForOrganizationRequest < Struct.new(
+      nil,
       :license_arn,
       :filters,
       :next_token,
@@ -2279,6 +2382,7 @@ module Aws::LicenseManager
     #   <p>Token for the next set of results.</p>
     #   @return [String]
     class ListReceivedGrantsForOrganizationResponse < Struct.new(
+      nil,
       :grants,
       :next_token,
       keyword_init: true
@@ -2326,6 +2430,7 @@ module Aws::LicenseManager
     #   <p>Maximum number of results to return in a single call.</p>
     #   @return [Integer]
     class ListReceivedGrantsRequest < Struct.new(
+      nil,
       :grant_arns,
       :filters,
       :next_token,
@@ -2342,6 +2447,7 @@ module Aws::LicenseManager
     #   <p>Token for the next set of results.</p>
     #   @return [String]
     class ListReceivedGrantsResponse < Struct.new(
+      nil,
       :grants,
       :next_token,
       keyword_init: true
@@ -2371,6 +2477,7 @@ module Aws::LicenseManager
     #   <p>Maximum number of results to return in a single call.</p>
     #   @return [Integer]
     class ListReceivedLicensesForOrganizationRequest < Struct.new(
+      nil,
       :filters,
       :next_token,
       :max_results,
@@ -2386,6 +2493,7 @@ module Aws::LicenseManager
     #   <p>Token for the next set of results.</p>
     #   @return [String]
     class ListReceivedLicensesForOrganizationResponse < Struct.new(
+      nil,
       :licenses,
       :next_token,
       keyword_init: true
@@ -2433,6 +2541,7 @@ module Aws::LicenseManager
     #   <p>Maximum number of results to return in a single call.</p>
     #   @return [Integer]
     class ListReceivedLicensesRequest < Struct.new(
+      nil,
       :license_arns,
       :filters,
       :next_token,
@@ -2449,6 +2558,7 @@ module Aws::LicenseManager
     #   <p>Token for the next set of results.</p>
     #   @return [String]
     class ListReceivedLicensesResponse < Struct.new(
+      nil,
       :licenses,
       :next_token,
       keyword_init: true
@@ -2504,6 +2614,7 @@ module Aws::LicenseManager
     #            </ul>
     #   @return [Array<Types::InventoryFilter>]
     class ListResourceInventoryRequest < Struct.new(
+      nil,
       :max_results,
       :next_token,
       :filters,
@@ -2519,6 +2630,7 @@ module Aws::LicenseManager
     #   <p>Token for the next set of results.</p>
     #   @return [String]
     class ListResourceInventoryResponse < Struct.new(
+      nil,
       :resource_inventory_list,
       :next_token,
       keyword_init: true
@@ -2530,6 +2642,7 @@ module Aws::LicenseManager
     #   <p>Amazon Resource Name (ARN) of the resource.</p>
     #   @return [String]
     class ListTagsForResourceRequest < Struct.new(
+      nil,
       :resource_arn,
       keyword_init: true
     )
@@ -2540,6 +2653,7 @@ module Aws::LicenseManager
     #   <p>Information about the tags.</p>
     #   @return [Array<Types::Tag>]
     class ListTagsForResourceResponse < Struct.new(
+      nil,
       :tags,
       keyword_init: true
     )
@@ -2566,6 +2680,7 @@ module Aws::LicenseManager
     #   <p>Maximum number of results to return in a single call.</p>
     #   @return [Integer]
     class ListTokensRequest < Struct.new(
+      nil,
       :token_ids,
       :filters,
       :next_token,
@@ -2582,6 +2697,7 @@ module Aws::LicenseManager
     #   <p>Token for the next set of results.</p>
     #   @return [String]
     class ListTokensResponse < Struct.new(
+      nil,
       :tokens,
       :next_token,
       keyword_init: true
@@ -2618,6 +2734,7 @@ module Aws::LicenseManager
     #            </ul>
     #   @return [Array<Types::Filter>]
     class ListUsageForLicenseConfigurationRequest < Struct.new(
+      nil,
       :license_configuration_arn,
       :max_results,
       :next_token,
@@ -2634,6 +2751,7 @@ module Aws::LicenseManager
     #   <p>Token for the next set of results.</p>
     #   @return [String]
     class ListUsageForLicenseConfigurationResponse < Struct.new(
+      nil,
       :license_configuration_usage_list,
       :next_token,
       keyword_init: true
@@ -2649,6 +2767,7 @@ module Aws::LicenseManager
     #   <p>Number of resources associated with licenses.</p>
     #   @return [Integer]
     class ManagedResourceSummary < Struct.new(
+      nil,
       :resource_type,
       :association_count,
       keyword_init: true
@@ -2664,6 +2783,7 @@ module Aws::LicenseManager
     #   <p>The value.</p>
     #   @return [String]
     class Metadata < Struct.new(
+      nil,
       :name,
       :value,
       keyword_init: true
@@ -2675,6 +2795,7 @@ module Aws::LicenseManager
     # @!attribute message
     #   @return [String]
     class NoEntitlementsAllowedException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -2718,6 +2839,7 @@ module Aws::LicenseManager
     #            </dl>
     #   @return [String]
     class Options < Struct.new(
+      nil,
       :activation_override_behavior,
       keyword_init: true
     )
@@ -2729,6 +2851,7 @@ module Aws::LicenseManager
     #   <p>Enables Organizations integration.</p>
     #   @return [Boolean]
     class OrganizationConfiguration < Struct.new(
+      nil,
       :enable_integration,
       keyword_init: true
     )
@@ -2748,6 +2871,7 @@ module Aws::LicenseManager
     #   <p>The product code type</p>
     #   @return [String]
     class ProductCodeListItem < Struct.new(
+      nil,
       :product_code_id,
       :product_code_type,
       keyword_init: true
@@ -2833,6 +2957,7 @@ module Aws::LicenseManager
     #            </ul>
     #   @return [Array<Types::ProductInformationFilter>]
     class ProductInformation < Struct.new(
+      nil,
       :resource_type,
       :product_information_filter_list,
       keyword_init: true
@@ -2851,6 +2976,7 @@ module Aws::LicenseManager
     #   <p>Logical operator.</p>
     #   @return [String]
     class ProductInformationFilter < Struct.new(
+      nil,
       :product_information_filter_name,
       :product_information_filter_value,
       :product_information_filter_comparator,
@@ -2864,6 +2990,7 @@ module Aws::LicenseManager
     #   <p>Maximum time for the provisional configuration, in minutes.</p>
     #   @return [Integer]
     class ProvisionalConfiguration < Struct.new(
+      nil,
       :max_time_to_live_in_minutes,
       keyword_init: true
     )
@@ -2874,6 +3001,7 @@ module Aws::LicenseManager
     # @!attribute message
     #   @return [String]
     class RateLimitExceededException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -2891,6 +3019,7 @@ module Aws::LicenseManager
     #   <p>Allowed operations.</p>
     #   @return [Array<String>]
     class ReceivedMetadata < Struct.new(
+      nil,
       :received_status,
       :received_status_reason,
       :allowed_operations,
@@ -2905,6 +3034,7 @@ module Aws::LicenseManager
     # @!attribute message
     #   @return [String]
     class RedirectException < Struct.new(
+      nil,
       :location,
       :message,
       keyword_init: true
@@ -2916,6 +3046,7 @@ module Aws::LicenseManager
     #   <p>Amazon Resource Name (ARN) of the grant.</p>
     #   @return [String]
     class RejectGrantRequest < Struct.new(
+      nil,
       :grant_arn,
       keyword_init: true
     )
@@ -2932,6 +3063,7 @@ module Aws::LicenseManager
     #   <p>Grant version.</p>
     #   @return [String]
     class RejectGrantResponse < Struct.new(
+      nil,
       :grant_arn,
       :status,
       :version,
@@ -2945,6 +3077,7 @@ module Aws::LicenseManager
     #   <p>Amazon Resource Name (ARN) of the license configuration that this generator reports on.</p>
     #   @return [Array<String>]
     class ReportContext < Struct.new(
+      nil,
       :license_configuration_arns,
       keyword_init: true
     )
@@ -2960,6 +3093,7 @@ module Aws::LicenseManager
     #   <p>Time period between each report. The period can be daily, weekly, or monthly.</p>
     #   @return [String]
     class ReportFrequency < Struct.new(
+      nil,
       :value,
       :period,
       keyword_init: true
@@ -3008,6 +3142,7 @@ module Aws::LicenseManager
     #   <p>Tags associated with the report generator.</p>
     #   @return [Array<Types::Tag>]
     class ReportGenerator < Struct.new(
+      nil,
       :report_generator_name,
       :report_type,
       :report_context,
@@ -3046,6 +3181,7 @@ module Aws::LicenseManager
     #   <p>ID of the account that owns the resource.</p>
     #   @return [String]
     class ResourceInventory < Struct.new(
+      nil,
       :resource_id,
       :resource_type,
       :resource_arn,
@@ -3061,6 +3197,7 @@ module Aws::LicenseManager
     # @!attribute message
     #   @return [String]
     class ResourceLimitExceededException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -3071,6 +3208,7 @@ module Aws::LicenseManager
     # @!attribute message
     #   @return [String]
     class ResourceNotFoundException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -3085,6 +3223,7 @@ module Aws::LicenseManager
     #   <p>Prefix of the S3 bucket reports are published to.</p>
     #   @return [String]
     class S3Location < Struct.new(
+      nil,
       :bucket,
       :key_prefix,
       keyword_init: true
@@ -3096,6 +3235,7 @@ module Aws::LicenseManager
     # @!attribute message
     #   @return [String]
     class ServerInternalException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -3111,6 +3251,7 @@ module Aws::LicenseManager
     #   <p>The tag value.</p>
     #   @return [String]
     class Tag < Struct.new(
+      nil,
       :key,
       :value,
       keyword_init: true
@@ -3148,6 +3289,7 @@ module Aws::LicenseManager
     #   <p>One or more tags.</p>
     #   @return [Array<Types::Tag>]
     class TagResourceRequest < Struct.new(
+      nil,
       :resource_arn,
       :tags,
       keyword_init: true
@@ -3156,6 +3298,7 @@ module Aws::LicenseManager
     end
 
     class TagResourceResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -3184,6 +3327,7 @@ module Aws::LicenseManager
     #   <p>Token status. The possible values are <code>AVAILABLE</code> and <code>DELETED</code>.</p>
     #   @return [String]
     class TokenData < Struct.new(
+      nil,
       :token_id,
       :token_type,
       :license_arn,
@@ -3200,6 +3344,7 @@ module Aws::LicenseManager
     # @!attribute message
     #   @return [String]
     class UnsupportedDigitalSignatureMethodException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -3213,6 +3358,7 @@ module Aws::LicenseManager
     #   <p>Keys identifying the tags to remove.</p>
     #   @return [Array<String>]
     class UntagResourceRequest < Struct.new(
+      nil,
       :resource_arn,
       :tag_keys,
       keyword_init: true
@@ -3221,6 +3367,7 @@ module Aws::LicenseManager
     end
 
     class UntagResourceResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -3255,6 +3402,7 @@ module Aws::LicenseManager
     #   <p>When true, disassociates a resource when software is uninstalled.</p>
     #   @return [Boolean]
     class UpdateLicenseConfigurationRequest < Struct.new(
+      nil,
       :license_configuration_arn,
       :license_configuration_status,
       :license_rules,
@@ -3270,6 +3418,7 @@ module Aws::LicenseManager
     end
 
     class UpdateLicenseConfigurationResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -3305,6 +3454,7 @@ module Aws::LicenseManager
     #   <p>Description of the report generator.</p>
     #   @return [String]
     class UpdateLicenseManagerReportGeneratorRequest < Struct.new(
+      nil,
       :license_manager_report_generator_arn,
       :report_generator_name,
       :type,
@@ -3318,6 +3468,7 @@ module Aws::LicenseManager
     end
 
     class UpdateLicenseManagerReportGeneratorResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -3333,6 +3484,7 @@ module Aws::LicenseManager
     #   <p>ARNs of the license configurations to remove.</p>
     #   @return [Array<Types::LicenseSpecification>]
     class UpdateLicenseSpecificationsForResourceRequest < Struct.new(
+      nil,
       :resource_arn,
       :add_license_specifications,
       :remove_license_specifications,
@@ -3342,6 +3494,7 @@ module Aws::LicenseManager
     end
 
     class UpdateLicenseSpecificationsForResourceResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -3360,6 +3513,7 @@ module Aws::LicenseManager
     #   <p>Activates cross-account discovery.</p>
     #   @return [Boolean]
     class UpdateServiceSettingsRequest < Struct.new(
+      nil,
       :s3_bucket_arn,
       :sns_topic_arn,
       :organization_configuration,
@@ -3370,6 +3524,7 @@ module Aws::LicenseManager
     end
 
     class UpdateServiceSettingsResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -3379,6 +3534,7 @@ module Aws::LicenseManager
     # @!attribute message
     #   @return [String]
     class ValidationException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )

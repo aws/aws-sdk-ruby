@@ -11,6 +11,7 @@ module Aws::Keyspaces
     #   <p>Description of the error.</p>
     #   @return [String]
     class AccessDeniedException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -22,6 +23,7 @@ module Aws::Keyspaces
     #   <p>Auto scaling scales up capacity automatically when traffic exceeds this target utilization rate, and then back down when it falls below the target. A <code>double</code> between 20 and 90.</p>
     #   @return [Types::TargetTrackingScalingPolicyConfiguration]
     class AutoScalingPolicy < Struct.new(
+      nil,
       :target_tracking_scaling_policy_configuration,
       keyword_init: true
     )
@@ -42,6 +44,7 @@ module Aws::Keyspaces
     #   <p>Amazon Keyspaces supports the <code>target tracking</code> auto scaling policy. With this policy, Amazon Keyspaces auto scaling ensures that the table's ratio of consumed to provisioned capacity stays at or near the target value that you specify. You define the target value as a percentage between 20 and 90.</p>
     #   @return [Types::AutoScalingPolicy]
     class AutoScalingSettings < Struct.new(
+      nil,
       :auto_scaling_disabled,
       :minimum_units,
       :maximum_units,
@@ -64,6 +67,7 @@ module Aws::Keyspaces
     #   <p>The auto scaling settings for the table's read capacity.</p>
     #   @return [Types::AutoScalingSettings]
     class AutoScalingSpecification < Struct.new(
+      nil,
       :write_capacity_auto_scaling,
       :read_capacity_auto_scaling,
       keyword_init: true
@@ -82,6 +86,7 @@ module Aws::Keyspaces
     #   <p>The throughput capacity specified for <code>write</code> operations defined in <code>write capacity units</code> <code>(WCUs)</code>.</p>
     #   @return [Integer]
     class CapacitySpecification < Struct.new(
+      nil,
       :throughput_mode,
       :read_capacity_units,
       :write_capacity_units,
@@ -104,6 +109,7 @@ module Aws::Keyspaces
     #   <p>The timestamp of the last operation that changed the provisioned throughput capacity of a table.</p>
     #   @return [Time]
     class CapacitySpecificationSummary < Struct.new(
+      nil,
       :throughput_mode,
       :read_capacity_units,
       :write_capacity_units,
@@ -127,6 +133,7 @@ module Aws::Keyspaces
     #   <p>Specifies that the stream inherits the tags from the table.</p>
     #   @return [String]
     class CdcSpecification < Struct.new(
+      nil,
       :status,
       :view_type,
       :tags,
@@ -144,6 +151,7 @@ module Aws::Keyspaces
     #   <p>The view type specifies the changes Amazon Keyspaces records for each changed row in the stream. This setting can't be changed, after the stream has been created. </p> <p>The options are:</p> <ul> <li> <p> <code>NEW_AND_OLD_IMAGES</code> - both versions of the row, before and after the change. This is the default.</p> </li> <li> <p> <code>NEW_IMAGE</code> - the version of the row after the change.</p> </li> <li> <p> <code>OLD_IMAGE</code> - the version of the row before the change.</p> </li> <li> <p> <code>KEYS_ONLY</code> - the partition and clustering keys of the row that was changed.</p> </li> </ul>
     #   @return [String]
     class CdcSpecificationSummary < Struct.new(
+      nil,
       :status,
       :view_type,
       keyword_init: true
@@ -156,6 +164,7 @@ module Aws::Keyspaces
     #   <p>Shows how to enable client-side timestamps settings for the specified table.</p>
     #   @return [String]
     class ClientSideTimestamps < Struct.new(
+      nil,
       :status,
       keyword_init: true
     )
@@ -170,6 +179,7 @@ module Aws::Keyspaces
     #   <p>Sets the ascendant (<code>ASC</code>) or descendant (<code>DESC</code>) order modifier.</p>
     #   @return [String]
     class ClusteringKey < Struct.new(
+      nil,
       :name,
       :order_by,
       keyword_init: true
@@ -185,6 +195,7 @@ module Aws::Keyspaces
     #   <p>The data type of the column. For a list of available data types, see <a href="https://docs.aws.amazon.com/keyspaces/latest/devguide/cql.elements.html#cql.data-types">Data types</a> in the <i>Amazon Keyspaces Developer Guide</i>.</p>
     #   @return [String]
     class ColumnDefinition < Struct.new(
+      nil,
       :name,
       :type,
       keyword_init: true
@@ -197,6 +208,7 @@ module Aws::Keyspaces
     #   <p>An optional description of the table.</p>
     #   @return [String]
     class Comment < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -208,6 +220,7 @@ module Aws::Keyspaces
     #   <p>Description of the error.</p>
     #   @return [String]
     class ConflictException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -224,6 +237,7 @@ module Aws::Keyspaces
     #   <p> The replication specification of the keyspace includes:</p> <ul> <li> <p> <code>replicationStrategy</code> - the required value is <code>SINGLE_REGION</code> or <code>MULTI_REGION</code>.</p> </li> <li> <p> <code>regionList</code> - if the <code>replicationStrategy</code> is <code>MULTI_REGION</code>, the <code>regionList</code> requires the current Region and at least one additional Amazon Web Services Region where the keyspace is going to be replicated in.</p> </li> </ul>
     #   @return [Types::ReplicationSpecification]
     class CreateKeyspaceInput < Struct.new(
+      nil,
       :keyspace_name,
       :tags,
       :replication_specification,
@@ -236,6 +250,7 @@ module Aws::Keyspaces
     #   <p>The unique identifier of the keyspace in the format of an Amazon Resource Name (ARN).</p>
     #   @return [String]
     class CreateKeyspaceOutput < Struct.new(
+      nil,
       :resource_arn,
       keyword_init: true
     )
@@ -285,6 +300,7 @@ module Aws::Keyspaces
     #   <p>The CDC stream settings of the table.</p>
     #   @return [Types::CdcSpecification]
     class CreateTableInput < Struct.new(
+      nil,
       :keyspace_name,
       :table_name,
       :schema_definition,
@@ -308,6 +324,7 @@ module Aws::Keyspaces
     #   <p>The unique identifier of the table in the format of an Amazon Resource Name (ARN).</p>
     #   @return [String]
     class CreateTableOutput < Struct.new(
+      nil,
       :resource_arn,
       keyword_init: true
     )
@@ -324,6 +341,7 @@ module Aws::Keyspaces
     #   <p> The field definitions, consisting of names and types, that define this type. </p>
     #   @return [Array<Types::FieldDefinition>]
     class CreateTypeRequest < Struct.new(
+      nil,
       :keyspace_name,
       :type_name,
       :field_definitions,
@@ -339,6 +357,7 @@ module Aws::Keyspaces
     #   <p> The formatted name of the user-defined type that was created. Note that Amazon Keyspaces requires the formatted name of the type for other operations, for example <code>GetType</code>. </p>
     #   @return [String]
     class CreateTypeResponse < Struct.new(
+      nil,
       :keyspace_arn,
       :type_name,
       keyword_init: true
@@ -350,6 +369,7 @@ module Aws::Keyspaces
     #   <p>The name of the keyspace to be deleted.</p>
     #   @return [String]
     class DeleteKeyspaceInput < Struct.new(
+      nil,
       :keyspace_name,
       keyword_init: true
     )
@@ -357,6 +377,7 @@ module Aws::Keyspaces
     end
 
     class DeleteKeyspaceOutput < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -369,6 +390,7 @@ module Aws::Keyspaces
     #   <p>The name of the table to be deleted.</p>
     #   @return [String]
     class DeleteTableInput < Struct.new(
+      nil,
       :keyspace_name,
       :table_name,
       keyword_init: true
@@ -377,6 +399,7 @@ module Aws::Keyspaces
     end
 
     class DeleteTableOutput < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -389,6 +412,7 @@ module Aws::Keyspaces
     #   <p> The name of the type to be deleted. </p>
     #   @return [String]
     class DeleteTypeRequest < Struct.new(
+      nil,
       :keyspace_name,
       :type_name,
       keyword_init: true
@@ -403,6 +427,7 @@ module Aws::Keyspaces
     #   <p> The name of the type that was deleted. </p>
     #   @return [String]
     class DeleteTypeResponse < Struct.new(
+      nil,
       :keyspace_arn,
       :type_name,
       keyword_init: true
@@ -418,6 +443,7 @@ module Aws::Keyspaces
     #   <p>The Amazon Resource Name (ARN) of the customer managed KMS key, for example <code>kms_key_identifier:ARN</code>.</p>
     #   @return [String]
     class EncryptionSpecification < Struct.new(
+      nil,
       :type,
       :kms_key_identifier,
       keyword_init: true
@@ -433,6 +459,7 @@ module Aws::Keyspaces
     #   <p> Any supported Cassandra data type, including collections and other user-defined types that are contained in the same keyspace. </p> <p>For more information, see <a href="https://docs.aws.amazon.com/keyspaces/latest/devguide/cassandra-apis.html#cassandra-data-type">Cassandra data type support</a> in the <i>Amazon Keyspaces Developer Guide</i>.</p>
     #   @return [String]
     class FieldDefinition < Struct.new(
+      nil,
       :name,
       :type,
       keyword_init: true
@@ -444,6 +471,7 @@ module Aws::Keyspaces
     #   <p>The name of the keyspace.</p>
     #   @return [String]
     class GetKeyspaceInput < Struct.new(
+      nil,
       :keyspace_name,
       keyword_init: true
     )
@@ -466,6 +494,7 @@ module Aws::Keyspaces
     #   <p> A list of all Regions the keyspace is replicated in after the update keyspace operation and their status. </p>
     #   @return [Array<Types::ReplicationGroupStatus>]
     class GetKeyspaceOutput < Struct.new(
+      nil,
       :keyspace_name,
       :resource_arn,
       :replication_strategy,
@@ -483,6 +512,7 @@ module Aws::Keyspaces
     #   <p>The name of the table.</p>
     #   @return [String]
     class GetTableAutoScalingSettingsRequest < Struct.new(
+      nil,
       :keyspace_name,
       :table_name,
       keyword_init: true
@@ -506,6 +536,7 @@ module Aws::Keyspaces
     #   <p>The Amazon Web Services Region specific settings of a multi-Region table. Returns the settings for all Regions the table is replicated in.</p>
     #   @return [Array<Types::ReplicaAutoScalingSpecification>]
     class GetTableAutoScalingSettingsResponse < Struct.new(
+      nil,
       :keyspace_name,
       :table_name,
       :resource_arn,
@@ -523,6 +554,7 @@ module Aws::Keyspaces
     #   <p>The name of the table.</p>
     #   @return [String]
     class GetTableInput < Struct.new(
+      nil,
       :keyspace_name,
       :table_name,
       keyword_init: true
@@ -579,6 +611,7 @@ module Aws::Keyspaces
     #   <p>The CDC stream settings of the table.</p>
     #   @return [Types::CdcSpecificationSummary]
     class GetTableOutput < Struct.new(
+      nil,
       :keyspace_name,
       :table_name,
       :resource_arn,
@@ -607,6 +640,7 @@ module Aws::Keyspaces
     #   <p>The formatted name of the type. For example, if the name of the type was created without double quotes, Amazon Keyspaces saved the name in lower-case characters. If the name was created in double quotes, you must use double quotes to specify the type name. </p>
     #   @return [String]
     class GetTypeRequest < Struct.new(
+      nil,
       :keyspace_name,
       :type_name,
       keyword_init: true
@@ -642,6 +676,7 @@ module Aws::Keyspaces
     #   <p> The unique identifier of the keyspace that contains this type in the format of an Amazon Resource Name (ARN). </p>
     #   @return [String]
     class GetTypeResponse < Struct.new(
+      nil,
       :keyspace_name,
       :type_name,
       :field_definitions,
@@ -666,6 +701,7 @@ module Aws::Keyspaces
     #   <p>Description of the error.</p>
     #   @return [String]
     class InternalServerException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -686,6 +722,7 @@ module Aws::Keyspaces
     #   <p> If the <code>replicationStrategy</code> of the keyspace is <code>MULTI_REGION</code>, a list of replication Regions is returned. </p>
     #   @return [Array<String>]
     class KeyspaceSummary < Struct.new(
+      nil,
       :keyspace_name,
       :resource_arn,
       :replication_strategy,
@@ -702,6 +739,7 @@ module Aws::Keyspaces
     #   <p>The total number of keyspaces to return in the output. If the total number of keyspaces available is more than the value specified, a <code>NextToken</code> is provided in the output. To resume pagination, provide the <code>NextToken</code> value as an argument of a subsequent API invocation.</p>
     #   @return [Integer]
     class ListKeyspacesInput < Struct.new(
+      nil,
       :next_token,
       :max_results,
       keyword_init: true
@@ -716,6 +754,7 @@ module Aws::Keyspaces
     #   <p>A list of keyspaces.</p>
     #   @return [Array<Types::KeyspaceSummary>]
     class ListKeyspacesOutput < Struct.new(
+      nil,
       :next_token,
       :keyspaces,
       keyword_init: true
@@ -733,6 +772,7 @@ module Aws::Keyspaces
     #   <p>The name of the keyspace.</p>
     #   @return [String]
     class ListTablesInput < Struct.new(
+      nil,
       :next_token,
       :max_results,
       :keyspace_name,
@@ -748,6 +788,7 @@ module Aws::Keyspaces
     #   <p>A list of tables.</p>
     #   @return [Array<Types::TableSummary>]
     class ListTablesOutput < Struct.new(
+      nil,
       :next_token,
       :tables,
       keyword_init: true
@@ -765,6 +806,7 @@ module Aws::Keyspaces
     #   <p>The total number of tags to return in the output. If the total number of tags available is more than the value specified, a <code>NextToken</code> is provided in the output. To resume pagination, provide the <code>NextToken</code> value as an argument of a subsequent API invocation.</p>
     #   @return [Integer]
     class ListTagsForResourceInput < Struct.new(
+      nil,
       :resource_arn,
       :next_token,
       :max_results,
@@ -780,6 +822,7 @@ module Aws::Keyspaces
     #   <p>A list of tags.</p>
     #   @return [Array<Types::Tag>]
     class ListTagsForResourceOutput < Struct.new(
+      nil,
       :next_token,
       :tags,
       keyword_init: true
@@ -797,6 +840,7 @@ module Aws::Keyspaces
     #   <p> The name of the keyspace that contains the listed types. </p>
     #   @return [String]
     class ListTypesRequest < Struct.new(
+      nil,
       :next_token,
       :max_results,
       :keyspace_name,
@@ -812,6 +856,7 @@ module Aws::Keyspaces
     #   <p> The list of types contained in the specified keyspace. </p>
     #   @return [Array<String>]
     class ListTypesResponse < Struct.new(
+      nil,
       :next_token,
       :types,
       keyword_init: true
@@ -824,6 +869,7 @@ module Aws::Keyspaces
     #   <p>The name(s) of the partition key column(s).</p>
     #   @return [String]
     class PartitionKey < Struct.new(
+      nil,
       :name,
       keyword_init: true
     )
@@ -835,6 +881,7 @@ module Aws::Keyspaces
     #   <p>The options are:</p> <ul> <li> <p> <code>status=ENABLED</code> </p> </li> <li> <p> <code>status=DISABLED</code> </p> </li> </ul>
     #   @return [String]
     class PointInTimeRecovery < Struct.new(
+      nil,
       :status,
       keyword_init: true
     )
@@ -849,6 +896,7 @@ module Aws::Keyspaces
     #   <p>Specifies the earliest possible restore point of the table in ISO 8601 format.</p>
     #   @return [Time]
     class PointInTimeRecoverySummary < Struct.new(
+      nil,
       :status,
       :earliest_restorable_timestamp,
       keyword_init: true
@@ -864,6 +912,7 @@ module Aws::Keyspaces
     #   <p>The auto scaling settings for a multi-Region table in the specified Amazon Web Services Region.</p>
     #   @return [Types::AutoScalingSpecification]
     class ReplicaAutoScalingSpecification < Struct.new(
+      nil,
       :region,
       :auto_scaling_specification,
       keyword_init: true
@@ -882,6 +931,7 @@ module Aws::Keyspaces
     #   <p>The read capacity auto scaling settings for the multi-Region table in the specified Amazon Web Services Region.</p>
     #   @return [Types::AutoScalingSettings]
     class ReplicaSpecification < Struct.new(
+      nil,
       :region,
       :read_capacity_units,
       :read_capacity_auto_scaling,
@@ -901,6 +951,7 @@ module Aws::Keyspaces
     #   <p>The read/write throughput capacity mode for a table. The options are:</p> <ul> <li> <p> <code>throughputMode:PAY_PER_REQUEST</code> and </p> </li> <li> <p> <code>throughputMode:PROVISIONED</code>.</p> </li> </ul> <p>For more information, see <a href="https://docs.aws.amazon.com/keyspaces/latest/devguide/ReadWriteCapacityMode.html">Read/write capacity modes</a> in the <i>Amazon Keyspaces Developer Guide</i>.</p>
     #   @return [Types::CapacitySpecificationSummary]
     class ReplicaSpecificationSummary < Struct.new(
+      nil,
       :region,
       :status,
       :capacity_specification,
@@ -920,6 +971,7 @@ module Aws::Keyspaces
     #   <p> This shows the replication progress of tables in the keyspace. The value is expressed as a percentage of the newly replicated tables with status <code>Active</code> compared to the total number of tables in the keyspace. </p>
     #   @return [String]
     class ReplicationGroupStatus < Struct.new(
+      nil,
       :region,
       :keyspace_status,
       :tables_replication_progress,
@@ -936,6 +988,7 @@ module Aws::Keyspaces
     #   <p> The <code>regionList</code> contains the Amazon Web Services Regions where the keyspace is replicated in. </p>
     #   @return [Array<String>]
     class ReplicationSpecification < Struct.new(
+      nil,
       :replication_strategy,
       :region_list,
       keyword_init: true
@@ -951,6 +1004,7 @@ module Aws::Keyspaces
     #   <p>The unique identifier in the format of Amazon Resource Name (ARN) for the resource couldn’t be found.</p>
     #   @return [String]
     class ResourceNotFoundException < Struct.new(
+      nil,
       :message,
       :resource_arn,
       keyword_init: true
@@ -992,6 +1046,7 @@ module Aws::Keyspaces
     #   <p>The optional Region specific settings of a multi-Regional table.</p>
     #   @return [Array<Types::ReplicaSpecification>]
     class RestoreTableInput < Struct.new(
+      nil,
       :source_keyspace_name,
       :source_table_name,
       :target_keyspace_name,
@@ -1012,6 +1067,7 @@ module Aws::Keyspaces
     #   <p>The Amazon Resource Name (ARN) of the restored table.</p>
     #   @return [String]
     class RestoreTableOutput < Struct.new(
+      nil,
       :restored_table_arn,
       keyword_init: true
     )
@@ -1032,6 +1088,7 @@ module Aws::Keyspaces
     #   <p>The columns that have been defined as <code>STATIC</code>. Static columns store values that are shared by all rows in the same partition.</p>
     #   @return [Array<Types::StaticColumn>]
     class SchemaDefinition < Struct.new(
+      nil,
       :all_columns,
       :partition_keys,
       :clustering_keys,
@@ -1046,6 +1103,7 @@ module Aws::Keyspaces
     #   <p>Description of the error.</p>
     #   @return [String]
     class ServiceQuotaExceededException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -1057,6 +1115,7 @@ module Aws::Keyspaces
     #   <p>The name of the static column.</p>
     #   @return [String]
     class StaticColumn < Struct.new(
+      nil,
       :name,
       keyword_init: true
     )
@@ -1074,6 +1133,7 @@ module Aws::Keyspaces
     #   <p>The unique identifier of the table in the format of an Amazon Resource Name (ARN).</p>
     #   @return [String]
     class TableSummary < Struct.new(
+      nil,
       :keyspace_name,
       :table_name,
       :resource_arn,
@@ -1090,6 +1150,7 @@ module Aws::Keyspaces
     #   <p>The value of the tag. Tag values are case-sensitive and can be null.</p>
     #   @return [String]
     class Tag < Struct.new(
+      nil,
       :key,
       :value,
       keyword_init: true
@@ -1104,6 +1165,7 @@ module Aws::Keyspaces
     #   <p>The tags to be assigned to the Amazon Keyspaces resource.</p>
     #   @return [Array<Types::Tag>]
     class TagResourceInput < Struct.new(
+      nil,
       :resource_arn,
       :tags,
       keyword_init: true
@@ -1112,6 +1174,7 @@ module Aws::Keyspaces
     end
 
     class TagResourceOutput < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1131,6 +1194,7 @@ module Aws::Keyspaces
     #   <p>Specifies the target value for the target tracking auto scaling policy.</p> <p>Amazon Keyspaces auto scaling scales up capacity automatically when traffic exceeds this target utilization rate, and then back down when it falls below the target. This ensures that the ratio of consumed capacity to provisioned capacity stays at or near this value. You define <code>targetValue</code> as a percentage. A <code>double</code> between 20 and 90.</p>
     #   @return [Float]
     class TargetTrackingScalingPolicyConfiguration < Struct.new(
+      nil,
       :disable_scale_in,
       :scale_in_cooldown,
       :scale_out_cooldown,
@@ -1153,6 +1217,7 @@ module Aws::Keyspaces
     #   <p>Shows how to enable custom Time to Live (TTL) settings for the specified table.</p>
     #   @return [String]
     class TimeToLive < Struct.new(
+      nil,
       :status,
       keyword_init: true
     )
@@ -1166,6 +1231,7 @@ module Aws::Keyspaces
     #   <p>A list of existing tags to be removed from the Amazon Keyspaces resource.</p>
     #   @return [Array<Types::Tag>]
     class UntagResourceInput < Struct.new(
+      nil,
       :resource_arn,
       :tags,
       keyword_init: true
@@ -1174,6 +1240,7 @@ module Aws::Keyspaces
     end
 
     class UntagResourceOutput < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1189,6 +1256,7 @@ module Aws::Keyspaces
     #   <p>The client-side timestamp setting of the table.</p> <p>For more information, see <a href="https://docs.aws.amazon.com/keyspaces/latest/devguide/client-side-timestamps-how-it-works.html">How it works: Amazon Keyspaces client-side timestamps</a> in the <i>Amazon Keyspaces Developer Guide</i>.</p>
     #   @return [Types::ClientSideTimestamps]
     class UpdateKeyspaceRequest < Struct.new(
+      nil,
       :keyspace_name,
       :replication_specification,
       :client_side_timestamps,
@@ -1201,6 +1269,7 @@ module Aws::Keyspaces
     #   <p> The unique identifier of the keyspace in the format of an Amazon Resource Name (ARN). </p>
     #   @return [String]
     class UpdateKeyspaceResponse < Struct.new(
+      nil,
       :resource_arn,
       keyword_init: true
     )
@@ -1244,6 +1313,7 @@ module Aws::Keyspaces
     #   <p>The CDC stream settings of the table.</p>
     #   @return [Types::CdcSpecification]
     class UpdateTableInput < Struct.new(
+      nil,
       :keyspace_name,
       :table_name,
       :add_columns,
@@ -1265,6 +1335,7 @@ module Aws::Keyspaces
     #   <p>The Amazon Resource Name (ARN) of the modified table.</p>
     #   @return [String]
     class UpdateTableOutput < Struct.new(
+      nil,
       :resource_arn,
       keyword_init: true
     )
@@ -1276,6 +1347,7 @@ module Aws::Keyspaces
     #   <p>Description of the error.</p>
     #   @return [String]
     class ValidationException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )

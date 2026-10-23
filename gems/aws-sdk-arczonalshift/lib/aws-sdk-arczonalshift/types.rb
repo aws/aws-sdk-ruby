@@ -10,6 +10,7 @@ module Aws::ARCZonalShift
     # @!attribute message
     #   @return [String]
     class AccessDeniedException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -27,6 +28,7 @@ module Aws::ARCZonalShift
     #   <p>The time (UTC) when the autoshift started.</p>
     #   @return [Time]
     class AutoshiftInResource < Struct.new(
+      nil,
       :applied_status,
       :away_from,
       :start_time,
@@ -49,6 +51,7 @@ module Aws::ARCZonalShift
     #   <p>The status for an autoshift. </p>
     #   @return [String]
     class AutoshiftSummary < Struct.new(
+      nil,
       :away_from,
       :end_time,
       :start_time,
@@ -62,6 +65,7 @@ module Aws::ARCZonalShift
     #   <p>The identifier of a practice run zonal shift in Amazon Application Recovery Controller that you want to cancel.</p>
     #   @return [String]
     class CancelPracticeRunRequest < Struct.new(
+      nil,
       :zonal_shift_id,
       keyword_init: true
     )
@@ -90,6 +94,7 @@ module Aws::ARCZonalShift
     #   <p>The initial comment that you entered about the practice run. Be aware that this comment can be overwritten by Amazon Web Services if the automatic check for balanced capacity fails. For more information, see <a href="https://docs.aws.amazon.com/r53recovery/latest/dg/arc-zonal-autoshift.how-it-works.capacity-check.html"> Capacity checks for practice runs</a> in the Amazon Application Recovery Controller Developer Guide. </p>
     #   @return [String]
     class CancelPracticeRunResponse < Struct.new(
+      nil,
       :zonal_shift_id,
       :resource_identifier,
       :away_from,
@@ -124,6 +129,7 @@ module Aws::ARCZonalShift
     #   <p>A comment that you enter about the zonal shift. Only the latest comment is retained; no comment history is maintained. A new comment overwrites any existing comment string.</p>
     #   @return [String]
     class CancelZonalShiftOutput < Struct.new(
+      nil,
       :zonal_shift_id,
       :resource_identifier,
       :away_from,
@@ -140,6 +146,7 @@ module Aws::ARCZonalShift
     #   <p>The internally-generated identifier of a zonal shift.</p>
     #   @return [String]
     class CancelZonalShiftRequest < Struct.new(
+      nil,
       :zonal_shift_id,
       keyword_init: true
     )
@@ -156,6 +163,7 @@ module Aws::ARCZonalShift
     #   <p>The zonal shift ID associated with the conflict exception.</p>
     #   @return [String]
     class ConflictException < Struct.new(
+      nil,
       :message,
       :reason,
       :zonal_shift_id,
@@ -172,6 +180,7 @@ module Aws::ARCZonalShift
     #   <p>The Amazon Resource Name (ARN) for an Amazon CloudWatch alarm that you specify as a control condition for a practice run.</p>
     #   @return [String]
     class ControlCondition < Struct.new(
+      nil,
       :type,
       :alarm_identifier,
       keyword_init: true
@@ -198,6 +207,7 @@ module Aws::ARCZonalShift
     #   <p> <i>Outcome alarms</i> for practice runs are alarms that you specify that end a practice run when one or more of the alarms is in an <code>ALARM</code> state.</p> <p>Configure one or more of these alarms to monitor the health of your application when traffic is shifted away from an Availability Zone during each practice run. You should configure these alarms to go into an <code>ALARM</code> state if you want to stop a zonal shift, to let traffic for the resource return to the original Availability Zone.</p>
     #   @return [Array<Types::ControlCondition>]
     class CreatePracticeRunConfigurationRequest < Struct.new(
+      nil,
       :resource_identifier,
       :blocked_windows,
       :blocked_dates,
@@ -222,6 +232,7 @@ module Aws::ARCZonalShift
     #   <p>A practice run configuration for a resource. Configurations include the outcome alarm that you specify for practice runs, and, optionally, a blocking alarm and blocking dates and windows.</p>
     #   @return [Types::PracticeRunConfiguration]
     class CreatePracticeRunConfigurationResponse < Struct.new(
+      nil,
       :arn,
       :name,
       :zonal_autoshift_status,
@@ -235,6 +246,7 @@ module Aws::ARCZonalShift
     #   <p>The identifier for the resource that you want to delete the practice run configuration for. The identifier is the Amazon Resource Name (ARN) for the resource.</p>
     #   @return [String]
     class DeletePracticeRunConfigurationRequest < Struct.new(
+      nil,
       :resource_identifier,
       keyword_init: true
     )
@@ -251,6 +263,7 @@ module Aws::ARCZonalShift
     #   <p>The status of zonal autoshift for the resource.</p>
     #   @return [String]
     class DeletePracticeRunConfigurationResponse < Struct.new(
+      nil,
       :arn,
       :name,
       :zonal_autoshift_status,
@@ -260,6 +273,7 @@ module Aws::ARCZonalShift
     end
 
     class GetAutoshiftObserverNotificationStatusRequest < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -269,6 +283,7 @@ module Aws::ARCZonalShift
     #   <p>The status of autoshift observer notification. If the status is <code>ENABLED</code>, ARC includes all autoshift events when you use the Amazon EventBridge pattern <code>Autoshift In Progress</code>. When the status is <code>DISABLED</code>, ARC includes only autoshift events for autoshifts when one or more of your resources is included in the autoshift. </p>
     #   @return [String]
     class GetAutoshiftObserverNotificationStatusResponse < Struct.new(
+      nil,
       :status,
       keyword_init: true
     )
@@ -279,6 +294,7 @@ module Aws::ARCZonalShift
     #   <p>The identifier for the resource that Amazon Web Services shifts traffic for. The identifier is the Amazon Resource Name (ARN) for the resource.</p> <p>Amazon Application Recovery Controller currently supports enabling the following resources for zonal shift and zonal autoshift:</p> <ul> <li> <p> <a href="https://docs.aws.amazon.com/r53recovery/latest/dg/arc-zonal-shift.resource-types.ec2-auto-scaling-groups.html">Amazon EC2 Auto Scaling groups</a> </p> </li> <li> <p> <a href="https://docs.aws.amazon.com/r53recovery/latest/dg/arc-zonal-shift.resource-types.eks.html">Amazon Elastic Kubernetes Service</a> </p> </li> <li> <p> <a href="https://docs.aws.amazon.com/r53recovery/latest/dg/arc-zonal-shift.resource-types.app-load-balancers.html">Application Load Balancer</a> </p> </li> <li> <p> <a href="https://docs.aws.amazon.com/r53recovery/latest/dg/arc-zonal-shift.resource-types.network-load-balancers.html">Network Load Balancer</a> </p> </li> </ul>
     #   @return [String]
     class GetManagedResourceRequest < Struct.new(
+      nil,
       :resource_identifier,
       keyword_init: true
     )
@@ -307,6 +323,7 @@ module Aws::ARCZonalShift
     #   <p>The status for zonal autoshift for a resource. When the autoshift status is <code>ENABLED</code>, Amazon Web Services shifts traffic for a resource away from an Availability Zone, on your behalf, when Amazon Web Services determines that there's an issue in the Availability Zone that could potentially affect customers.</p>
     #   @return [String]
     class GetManagedResourceResponse < Struct.new(
+      nil,
       :arn,
       :name,
       :applied_weights,
@@ -323,6 +340,7 @@ module Aws::ARCZonalShift
     # @!attribute message
     #   @return [String]
     class InternalServerException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -339,6 +357,7 @@ module Aws::ARCZonalShift
     #   <p>The number of objects that you want to return with this call.</p>
     #   @return [Integer]
     class ListAutoshiftsRequest < Struct.new(
+      nil,
       :next_token,
       :status,
       :max_results,
@@ -354,6 +373,7 @@ module Aws::ARCZonalShift
     #   <p>Specifies that you want to receive the next page of results. Valid only if you received a <code>nextToken</code> response in the previous request. If you did, it indicates that more output is available. Set this parameter to the value provided by the previous call's <code>nextToken</code> response to request the next page of results.</p>
     #   @return [String]
     class ListAutoshiftsResponse < Struct.new(
+      nil,
       :items,
       :next_token,
       keyword_init: true
@@ -368,6 +388,7 @@ module Aws::ARCZonalShift
     #   <p>The number of objects that you want to return with this call.</p>
     #   @return [Integer]
     class ListManagedResourcesRequest < Struct.new(
+      nil,
       :next_token,
       :max_results,
       keyword_init: true
@@ -382,6 +403,7 @@ module Aws::ARCZonalShift
     #   <p>Specifies that you want to receive the next page of results. Valid only if you received a <code>nextToken</code> response in the previous request. If you did, it indicates that more output is available. Set this parameter to the value provided by the previous call's <code>nextToken</code> response to request the next page of results.</p>
     #   @return [String]
     class ListManagedResourcesResponse < Struct.new(
+      nil,
       :items,
       :next_token,
       keyword_init: true
@@ -402,6 +424,7 @@ module Aws::ARCZonalShift
     #   <p>The identifier for the resource that you want to list zonal shifts for. The identifier is the Amazon Resource Name (ARN) for the resource.</p>
     #   @return [String]
     class ListZonalShiftsRequest < Struct.new(
+      nil,
       :next_token,
       :status,
       :max_results,
@@ -418,6 +441,7 @@ module Aws::ARCZonalShift
     #   <p>Specifies that you want to receive the next page of results. Valid only if you received a <code>nextToken</code> response in the previous request. If you did, it indicates that more output is available. Set this parameter to the value provided by the previous call's <code>nextToken</code> response to request the next page of results.</p>
     #   @return [String]
     class ListZonalShiftsResponse < Struct.new(
+      nil,
       :items,
       :next_token,
       keyword_init: true
@@ -451,6 +475,7 @@ module Aws::ARCZonalShift
     #   <p>This status tracks whether a practice run configuration exists for a resource. When you configure a practice run for a resource so that a practice run configuration exists, ARC sets this value to <code>ENABLED</code>. If a you have not configured a practice run for the resource, or delete a practice run configuration, ARC sets the value to <code>DISABLED</code>.</p> <p>ARC updates this status; you can't set a practice run status to <code>ENABLED</code> or <code>DISABLED</code>.</p>
     #   @return [String]
     class ManagedResourceSummary < Struct.new(
+      nil,
       :arn,
       :name,
       :availability_zones,
@@ -481,6 +506,7 @@ module Aws::ARCZonalShift
     #   <p>An array of one or more dates that you can specify when Amazon Web Services does not start practice runs for a resource.</p> <p>Specify blocked dates, in UTC, in the format <code>YYYY-MM-DD</code>, separated by spaces. </p>
     #   @return [Array<String>]
     class PracticeRunConfiguration < Struct.new(
+      nil,
       :blocking_alarms,
       :outcome_alarms,
       :blocked_windows,
@@ -500,6 +526,7 @@ module Aws::ARCZonalShift
     # @!attribute message
     #   @return [String]
     class ResourceNotFoundException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -516,6 +543,7 @@ module Aws::ARCZonalShift
     #   <p>The initial comment that you enter about the practice run. Be aware that this comment can be overwritten by Amazon Web Services if the automatic check for balanced capacity fails. For more information, see <a href="https://docs.aws.amazon.com/r53recovery/latest/dg/arc-zonal-autoshift.how-it-works.capacity-check.html"> Capacity checks for practice runs</a> in the Amazon Application Recovery Controller Developer Guide. </p>
     #   @return [String]
     class StartPracticeRunRequest < Struct.new(
+      nil,
       :resource_identifier,
       :away_from,
       :comment,
@@ -546,6 +574,7 @@ module Aws::ARCZonalShift
     #   <p>The initial comment that you enter about the practice run. Be aware that this comment can be overwritten by Amazon Web Services if the automatic check for balanced capacity fails. For more information, see <a href="https://docs.aws.amazon.com/r53recovery/latest/dg/arc-zonal-autoshift.how-it-works.capacity-check.html"> Capacity checks for practice runs</a> in the Amazon Application Recovery Controller Developer Guide. </p>
     #   @return [String]
     class StartPracticeRunResponse < Struct.new(
+      nil,
       :zonal_shift_id,
       :resource_identifier,
       :away_from,
@@ -580,6 +609,7 @@ module Aws::ARCZonalShift
     #   <p>A comment that you enter about the zonal shift. Only the latest comment is retained; no comment history is maintained. A new comment overwrites any existing comment string.</p>
     #   @return [String]
     class StartZonalShiftOutput < Struct.new(
+      nil,
       :zonal_shift_id,
       :resource_identifier,
       :away_from,
@@ -605,6 +635,7 @@ module Aws::ARCZonalShift
     #   <p>A comment that you enter about the zonal shift. Only the latest comment is retained; no comment history is maintained. A new comment overwrites any existing comment string.</p>
     #   @return [String]
     class StartZonalShiftRequest < Struct.new(
+      nil,
       :resource_identifier,
       :away_from,
       :expires_in,
@@ -618,6 +649,7 @@ module Aws::ARCZonalShift
     # @!attribute message
     #   @return [String]
     class ThrottlingException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -628,6 +660,7 @@ module Aws::ARCZonalShift
     #   <p>The status to set for autoshift observer notification. If the status is <code>ENABLED</code>, ARC includes all autoshift events when you use the Amazon EventBridge pattern <code>Autoshift In Progress</code>. When the status is <code>DISABLED</code>, ARC includes only autoshift events for autoshifts when one or more of your resources is included in the autoshift. </p>
     #   @return [String]
     class UpdateAutoshiftObserverNotificationStatusRequest < Struct.new(
+      nil,
       :status,
       keyword_init: true
     )
@@ -638,6 +671,7 @@ module Aws::ARCZonalShift
     #   <p>The status for autoshift observer notification.</p>
     #   @return [String]
     class UpdateAutoshiftObserverNotificationStatusResponse < Struct.new(
+      nil,
       :status,
       keyword_init: true
     )
@@ -663,6 +697,7 @@ module Aws::ARCZonalShift
     #   <p>Specify one or more Amazon CloudWatch alarms as the outcome alarms for practice runs.</p>
     #   @return [Array<Types::ControlCondition>]
     class UpdatePracticeRunConfigurationRequest < Struct.new(
+      nil,
       :resource_identifier,
       :blocked_windows,
       :blocked_dates,
@@ -687,6 +722,7 @@ module Aws::ARCZonalShift
     #   <p>The practice run configuration that was updated.</p>
     #   @return [Types::PracticeRunConfiguration]
     class UpdatePracticeRunConfigurationResponse < Struct.new(
+      nil,
       :arn,
       :name,
       :zonal_autoshift_status,
@@ -703,6 +739,7 @@ module Aws::ARCZonalShift
     #   <p>The zonal autoshift status for the resource that you want to update the zonal autoshift configuration for. Choose <code>ENABLED</code> to authorize Amazon Web Services to shift away resource traffic for an application from an Availability Zone during events, on your behalf, to help reduce time to recovery.</p>
     #   @return [String]
     class UpdateZonalAutoshiftConfigurationRequest < Struct.new(
+      nil,
       :resource_identifier,
       :zonal_autoshift_status,
       keyword_init: true
@@ -717,6 +754,7 @@ module Aws::ARCZonalShift
     #   <p>The updated zonal autoshift status for the resource.</p>
     #   @return [String]
     class UpdateZonalAutoshiftConfigurationResponse < Struct.new(
+      nil,
       :resource_identifier,
       :zonal_autoshift_status,
       keyword_init: true
@@ -746,6 +784,7 @@ module Aws::ARCZonalShift
     #   <p>A comment that you enter about the zonal shift. Only the latest comment is retained; no comment history is maintained. A new comment overwrites any existing comment string.</p>
     #   @return [String]
     class UpdateZonalShiftOutput < Struct.new(
+      nil,
       :zonal_shift_id,
       :resource_identifier,
       :away_from,
@@ -768,6 +807,7 @@ module Aws::ARCZonalShift
     #   <p>The length of time that you want a zonal shift to be active, which ARC converts to an expiry time (expiration time). Zonal shifts are temporary. You can set a zonal shift to be active initially for up to three days (72 hours).</p> <p>If you want to still keep traffic away from an Availability Zone, you can update the zonal shift and set a new expiration. You can also cancel a zonal shift, before it expires, for example, if you're ready to restore traffic to the Availability Zone.</p> <p>To set a length of time for a zonal shift to be active, specify a whole number, and then one of the following, with no space:</p> <ul> <li> <p> <b>A lowercase letter m:</b> To specify that the value is in minutes.</p> </li> <li> <p> <b>A lowercase letter h:</b> To specify that the value is in hours.</p> </li> </ul> <p>For example: <code>20h</code> means the zonal shift expires in 20 hours. <code>120m</code> means the zonal shift expires in 120 minutes (2 hours).</p>
     #   @return [String]
     class UpdateZonalShiftRequest < Struct.new(
+      nil,
       :zonal_shift_id,
       :comment,
       :expires_in,
@@ -783,6 +823,7 @@ module Aws::ARCZonalShift
     #   <p>The reason for the validation exception.</p>
     #   @return [String]
     class ValidationException < Struct.new(
+      nil,
       :message,
       :reason,
       keyword_init: true
@@ -819,6 +860,7 @@ module Aws::ARCZonalShift
     #   <p>The outcome, or end state, returned for a practice run. The following values can be returned:</p> <ul> <li> <p> <b>PENDING:</b> Outcome value when a practice run is in progress.</p> </li> <li> <p> <b>SUCCEEDED:</b> Outcome value when the outcome alarm specified for the practice run configuration does not go into an <code>ALARM</code> state during the practice run, and the practice run was not interrupted before it completed the expected 30 minute zonal shift.</p> </li> <li> <p> <b>INTERRUPTED:</b> Outcome value when the practice run was stopped before the expected 30 minute zonal shift duration, or there was another problem with the practice run that created an inconclusive outcome.</p> </li> <li> <p> <b>FAILED:</b> Outcome value when the outcome alarm specified for the practice run configuration goes into an <code>ALARM</code> state during the practice run, and the practice run was not interrupted before it completed.</p> </li> <li> <p> <b>CAPACITY_CHECK_FAILED:</b> The check for balanced capacity across Availability Zones for your load balancing and Auto Scaling group resources failed.</p> </li> </ul> <p>For more information about practice run outcomes, see <a href="https://docs.aws.amazon.com/r53recovery/latest/dg/arc-zonal-autoshift.configure.html"> Considerations when you configure zonal autoshift</a> in the Amazon Application Recovery Controller Developer Guide.</p>
     #   @return [String]
     class ZonalShiftInResource < Struct.new(
+      nil,
       :applied_status,
       :zonal_shift_id,
       :resource_identifier,
@@ -862,6 +904,7 @@ module Aws::ARCZonalShift
     #   <p>The outcome, or end state, of a practice run. The following values can be returned:</p> <ul> <li> <p> <b>PENDING:</b> Outcome value when the practice run is in progress.</p> </li> <li> <p> <b>SUCCEEDED:</b> Outcome value when the outcome alarm specified for the practice run configuration does not go into an <code>ALARM</code> state during the practice run, and the practice run was not interrupted before it completed.</p> </li> <li> <p> <b>INTERRUPTED:</b> Outcome value when the practice run did not run for the expected 30 minutes or there was another problem with the practice run that created an inconclusive outcome.</p> </li> <li> <p> <b>FAILED:</b> Outcome value when the outcome alarm specified for the practice run configuration goes into an <code>ALARM</code> state during the practice run, and the practice run was not interrupted before it completed.</p> </li> <li> <p> <b>CAPACITY_CHECK_FAILED:</b> The check for balanced capacity across Availability Zones for your load balancing and Auto Scaling group resources failed.</p> </li> </ul> <p>For more information about practice run outcomes, see <a href="https://docs.aws.amazon.com/r53recovery/latest/dg/arc-zonal-autoshift.configure.html"> Considerations when you configure zonal autoshift</a> in the Amazon Application Recovery Controller Developer Guide.</p>
     #   @return [String]
     class ZonalShiftSummary < Struct.new(
+      nil,
       :zonal_shift_id,
       :resource_identifier,
       :away_from,

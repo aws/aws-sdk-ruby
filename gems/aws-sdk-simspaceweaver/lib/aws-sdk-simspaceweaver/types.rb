@@ -10,6 +10,7 @@ module Aws::SimSpaceWeaver
     # @!attribute message
     #   @return [String]
     class AccessDeniedException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -25,6 +26,7 @@ module Aws::SimSpaceWeaver
     #      groups and log streams</a> in the <i>Amazon CloudWatch Logs User Guide</i>.</p>
     #   @return [String]
     class CloudWatchLogsLogGroup < Struct.new(
+      nil,
       :log_group_arn,
       keyword_init: true
     )
@@ -35,6 +37,7 @@ module Aws::SimSpaceWeaver
     # @!attribute message
     #   @return [String]
     class ConflictException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -49,6 +52,7 @@ module Aws::SimSpaceWeaver
     #            <p>The Amazon S3 bucket must be in the same Amazon Web Services Region as the simulation.</p>
     #   @return [Types::S3Destination]
     class CreateSnapshotInput < Struct.new(
+      nil,
       :simulation,
       :destination,
       keyword_init: true
@@ -57,6 +61,7 @@ module Aws::SimSpaceWeaver
     end
 
     class CreateSnapshotOutput < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -72,6 +77,7 @@ module Aws::SimSpaceWeaver
     #   <p>The name of the app.</p>
     #   @return [String]
     class DeleteAppOperationInput < Struct.new(
+      nil,
       :simulation,
       :domain,
       :app,
@@ -81,6 +87,7 @@ module Aws::SimSpaceWeaver
     end
 
     class DeleteAppOperationOutput < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -90,6 +97,7 @@ module Aws::SimSpaceWeaver
     #   <p>The name of the simulation.</p>
     #   @return [String]
     class DeleteSimulationOperationInput < Struct.new(
+      nil,
       :simulation,
       keyword_init: true
     )
@@ -97,6 +105,7 @@ module Aws::SimSpaceWeaver
     end
 
     class DeleteSimulationOperationOutput < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -112,6 +121,7 @@ module Aws::SimSpaceWeaver
     #   <p>The name of the app.</p>
     #   @return [String]
     class DescribeAppOperationInput < Struct.new(
+      nil,
       :simulation,
       :domain,
       :app,
@@ -145,6 +155,7 @@ module Aws::SimSpaceWeaver
     #   <p>Information about the network endpoint for the custom app. You can use the endpoint to connect to the custom app.</p>
     #   @return [Types::SimulationAppEndpointInfo]
     class DescribeAppOperationOutput < Struct.new(
+      nil,
       :name,
       :simulation,
       :domain,
@@ -162,6 +173,7 @@ module Aws::SimSpaceWeaver
     #   <p>The name of the simulation.</p>
     #   @return [String]
     class DescribeSimulationOperationInput < Struct.new(
+      nil,
       :simulation,
       keyword_init: true
     )
@@ -234,6 +246,7 @@ module Aws::SimSpaceWeaver
     #   <p>An error message that SimSpace Weaver returns only if a problem occurs when the simulation is in the <code>STARTING</code> state.</p>
     #   @return [String]
     class DescribeSimulationOperationOutput < Struct.new(
+      nil,
       :name,
       :execution_id,
       :arn,
@@ -287,6 +300,7 @@ module Aws::SimSpaceWeaver
     #            </ul>
     #   @return [String]
     class Domain < Struct.new(
+      nil,
       :name,
       :lifecycle,
       keyword_init: true
@@ -298,6 +312,7 @@ module Aws::SimSpaceWeaver
     # @!attribute message
     #   @return [String]
     class InternalServerException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -310,6 +325,7 @@ module Aws::SimSpaceWeaver
     #            configured in the simulation schema.</p>
     #   @return [Array<String>]
     class LaunchOverrides < Struct.new(
+      nil,
       :launch_commands,
       keyword_init: true
     )
@@ -333,6 +349,7 @@ module Aws::SimSpaceWeaver
     #      If you provide a token that isn't valid, then you receive an <i>HTTP 400 ValidationException</i> error.</p>
     #   @return [String]
     class ListAppsOperationInput < Struct.new(
+      nil,
       :simulation,
       :domain,
       :max_results,
@@ -353,6 +370,7 @@ module Aws::SimSpaceWeaver
     #      If you provide a token that isn't valid, then you receive an <i>HTTP 400 ValidationException</i> error.</p>
     #   @return [String]
     class ListAppsOperationOutput < Struct.new(
+      nil,
       :apps,
       :next_token,
       keyword_init: true
@@ -371,6 +389,7 @@ module Aws::SimSpaceWeaver
     #      If you provide a token that isn't valid, then you receive an <i>HTTP 400 ValidationException</i> error.</p>
     #   @return [String]
     class ListSimulationsOperationInput < Struct.new(
+      nil,
       :max_results,
       :next_token,
       keyword_init: true
@@ -389,6 +408,7 @@ module Aws::SimSpaceWeaver
     #      If you provide a token that isn't valid, then you receive an <i>HTTP 400 ValidationException</i> error.</p>
     #   @return [String]
     class ListSimulationsOperationOutput < Struct.new(
+      nil,
       :simulations,
       :next_token,
       keyword_init: true
@@ -401,6 +421,7 @@ module Aws::SimSpaceWeaver
     #      in the <i>Amazon Web Services General Reference</i>.</p>
     #   @return [String]
     class ListTagsForResourceOperationInput < Struct.new(
+      nil,
       :resource_arn,
       keyword_init: true
     )
@@ -411,6 +432,7 @@ module Aws::SimSpaceWeaver
     #   <p>The list of tags for the resource.</p>
     #   @return [Hash<String, String>]
     class ListTagsForResourceOperationOutput < Struct.new(
+      nil,
       :tags,
       keyword_init: true
     )
@@ -430,6 +452,7 @@ module Aws::SimSpaceWeaver
     #            </note>
     #   @return [Array<Types::SimulationClock>]
     class LiveSimulationState < Struct.new(
+      nil,
       :domains,
       :clocks,
       keyword_init: true
@@ -443,6 +466,7 @@ module Aws::SimSpaceWeaver
     #      groups and log streams</a> in the <i>Amazon CloudWatch Logs User Guide</i>.</p>
     #   @return [Types::CloudWatchLogsLogGroup]
     class LogDestination < Struct.new(
+      nil,
       :cloud_watch_logs_log_group,
       keyword_init: true
     )
@@ -454,6 +478,7 @@ module Aws::SimSpaceWeaver
     #   <p>A list of the locations where SimSpace Weaver sends simulation log data.</p>
     #   @return [Array<Types::LogDestination>]
     class LoggingConfiguration < Struct.new(
+      nil,
       :destinations,
       keyword_init: true
     )
@@ -464,6 +489,7 @@ module Aws::SimSpaceWeaver
     # @!attribute message
     #   @return [String]
     class ResourceNotFoundException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -482,6 +508,7 @@ module Aws::SimSpaceWeaver
     #      in the <i>Amazon Simple Storage Service User Guide</i>.</p>
     #   @return [String]
     class S3Destination < Struct.new(
+      nil,
       :bucket_name,
       :object_key_prefix,
       keyword_init: true
@@ -505,6 +532,7 @@ module Aws::SimSpaceWeaver
     #               Guide</i>.</p>
     #   @return [String]
     class S3Location < Struct.new(
+      nil,
       :bucket_name,
       :object_key,
       keyword_init: true
@@ -516,6 +544,7 @@ module Aws::SimSpaceWeaver
     # @!attribute message
     #   @return [String]
     class ServiceQuotaExceededException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -534,6 +563,7 @@ module Aws::SimSpaceWeaver
     #            a port number form a network endpoint.</p>
     #   @return [Array<Types::SimulationAppPortMapping>]
     class SimulationAppEndpointInfo < Struct.new(
+      nil,
       :address,
       :ingress_port_mappings,
       keyword_init: true
@@ -559,6 +589,7 @@ module Aws::SimSpaceWeaver
     #   <p>The desired status of the app.</p>
     #   @return [String]
     class SimulationAppMetadata < Struct.new(
+      nil,
       :name,
       :simulation,
       :domain,
@@ -582,6 +613,7 @@ module Aws::SimSpaceWeaver
     #            and the <code>Actual</code> port number.</p>
     #   @return [Integer]
     class SimulationAppPortMapping < Struct.new(
+      nil,
       :declared,
       :actual,
       keyword_init: true
@@ -597,6 +629,7 @@ module Aws::SimSpaceWeaver
     #   <p>The desired status of the simulation clock.</p>
     #   @return [String]
     class SimulationClock < Struct.new(
+      nil,
       :status,
       :target_status,
       keyword_init: true
@@ -623,6 +656,7 @@ module Aws::SimSpaceWeaver
     #   <p>The desired status of the simulation.</p>
     #   @return [String]
     class SimulationMetadata < Struct.new(
+      nil,
       :name,
       :arn,
       :creation_time,
@@ -654,6 +688,7 @@ module Aws::SimSpaceWeaver
     #   <p>Options that apply when the app starts. These options override default behavior.</p>
     #   @return [Types::LaunchOverrides]
     class StartAppOperationInput < Struct.new(
+      nil,
       :client_token,
       :simulation,
       :domain,
@@ -675,6 +710,7 @@ module Aws::SimSpaceWeaver
     #   <p>The name of the simulation of the app.</p>
     #   @return [String]
     class StartAppOperationOutput < Struct.new(
+      nil,
       :name,
       :domain,
       :simulation,
@@ -687,6 +723,7 @@ module Aws::SimSpaceWeaver
     #   <p>The name of the simulation.</p>
     #   @return [String]
     class StartClockOperationInput < Struct.new(
+      nil,
       :simulation,
       keyword_init: true
     )
@@ -694,6 +731,7 @@ module Aws::SimSpaceWeaver
     end
 
     class StartClockOperationOutput < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -746,6 +784,7 @@ module Aws::SimSpaceWeaver
     #            <p>If you provide a <code>SnapshotS3Location</code> then you can't provide a <code>SchemaS3Location</code>.</p>
     #   @return [Types::S3Location]
     class StartSimulationOperationInput < Struct.new(
+      nil,
       :client_token,
       :name,
       :description,
@@ -771,6 +810,7 @@ module Aws::SimSpaceWeaver
     #      number of seconds and milliseconds in UTC since the Unix epoch (0:0:0.000, January 1, 1970).</p>
     #   @return [Time]
     class StartSimulationOperationOutput < Struct.new(
+      nil,
       :arn,
       :execution_id,
       :creation_time,
@@ -789,6 +829,7 @@ module Aws::SimSpaceWeaver
     #   <p>The name of the app.</p>
     #   @return [String]
     class StopAppOperationInput < Struct.new(
+      nil,
       :simulation,
       :domain,
       :app,
@@ -798,6 +839,7 @@ module Aws::SimSpaceWeaver
     end
 
     class StopAppOperationOutput < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -807,6 +849,7 @@ module Aws::SimSpaceWeaver
     #   <p>The name of the simulation.</p>
     #   @return [String]
     class StopClockOperationInput < Struct.new(
+      nil,
       :simulation,
       keyword_init: true
     )
@@ -814,6 +857,7 @@ module Aws::SimSpaceWeaver
     end
 
     class StopClockOperationOutput < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -823,6 +867,7 @@ module Aws::SimSpaceWeaver
     #   <p>The name of the simulation.</p>
     #   @return [String]
     class StopSimulationOperationInput < Struct.new(
+      nil,
       :simulation,
       keyword_init: true
     )
@@ -830,6 +875,7 @@ module Aws::SimSpaceWeaver
     end
 
     class StopSimulationOperationOutput < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -844,6 +890,7 @@ module Aws::SimSpaceWeaver
     #   <p>A list of tags to apply to the resource.</p>
     #   @return [Hash<String, String>]
     class TagResourceOperationInput < Struct.new(
+      nil,
       :resource_arn,
       :tags,
       keyword_init: true
@@ -852,6 +899,7 @@ module Aws::SimSpaceWeaver
     end
 
     class TagResourceOperationOutput < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -861,6 +909,7 @@ module Aws::SimSpaceWeaver
     # @!attribute message
     #   @return [String]
     class TooManyTagsException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -876,6 +925,7 @@ module Aws::SimSpaceWeaver
     #   <p>A list of tag keys to remove from the resource.</p>
     #   @return [Array<String>]
     class UntagResourceOperationInput < Struct.new(
+      nil,
       :resource_arn,
       :tag_keys,
       keyword_init: true
@@ -884,6 +934,7 @@ module Aws::SimSpaceWeaver
     end
 
     class UntagResourceOperationOutput < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -893,6 +944,7 @@ module Aws::SimSpaceWeaver
     # @!attribute message
     #   @return [String]
     class ValidationException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )

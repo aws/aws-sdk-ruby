@@ -10,6 +10,7 @@ module Aws::TrustedAdvisor
     # @!attribute message
     #   @return [String]
     class AccessDeniedException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -48,6 +49,7 @@ module Aws::TrustedAdvisor
     #   <p>When the Recommendation was last updated</p>
     #   @return [Time]
     class AccountRecommendationLifecycleSummary < Struct.new(
+      nil,
       :account_id,
       :account_recommendation_arn,
       :lifecycle_stage,
@@ -65,6 +67,7 @@ module Aws::TrustedAdvisor
     #   <p>A list of recommendation resource ARNs and exclusion status to update</p>
     #   @return [Array<Types::RecommendationResourceExclusion>]
     class BatchUpdateRecommendationResourceExclusionRequest < Struct.new(
+      nil,
       :recommendation_resource_exclusions,
       keyword_init: true
     )
@@ -75,6 +78,7 @@ module Aws::TrustedAdvisor
     #   <p>A list of recommendation resource ARNs whose exclusion status failed to update, if any</p>
     #   @return [Array<Types::UpdateRecommendationResourceExclusionError>]
     class BatchUpdateRecommendationResourceExclusionResponse < Struct.new(
+      nil,
       :batch_update_recommendation_resource_exclusion_errors,
       keyword_init: true
     )
@@ -107,6 +111,7 @@ module Aws::TrustedAdvisor
     #   <p>The column headings for the metadata returned in the resource</p>
     #   @return [Hash<String, String>]
     class CheckSummary < Struct.new(
+      nil,
       :id,
       :arn,
       :name,
@@ -124,6 +129,7 @@ module Aws::TrustedAdvisor
     # @!attribute message
     #   @return [String]
     class ConflictException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -134,6 +140,7 @@ module Aws::TrustedAdvisor
     #   <p>The Recommendation identifier</p>
     #   @return [String]
     class GetOrganizationRecommendationRequest < Struct.new(
+      nil,
       :organization_recommendation_identifier,
       keyword_init: true
     )
@@ -144,6 +151,7 @@ module Aws::TrustedAdvisor
     #   <p>The Recommendation</p>
     #   @return [Types::OrganizationRecommendation]
     class GetOrganizationRecommendationResponse < Struct.new(
+      nil,
       :organization_recommendation,
       keyword_init: true
     )
@@ -154,6 +162,7 @@ module Aws::TrustedAdvisor
     #   <p>The Recommendation identifier</p>
     #   @return [String]
     class GetRecommendationRequest < Struct.new(
+      nil,
       :recommendation_identifier,
       keyword_init: true
     )
@@ -164,6 +173,7 @@ module Aws::TrustedAdvisor
     #   <p>The Recommendation</p>
     #   @return [Types::Recommendation]
     class GetRecommendationResponse < Struct.new(
+      nil,
       :recommendation,
       keyword_init: true
     )
@@ -174,6 +184,7 @@ module Aws::TrustedAdvisor
     # @!attribute message
     #   @return [String]
     class InternalServerException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -201,6 +212,7 @@ module Aws::TrustedAdvisor
     #   <p>The ISO 639-1 code for the language that you want your checks to appear in.</p>
     #   @return [String]
     class ListChecksRequest < Struct.new(
+      nil,
       :next_token,
       :max_results,
       :pillar,
@@ -221,6 +233,7 @@ module Aws::TrustedAdvisor
     #   <p>The list of Checks</p>
     #   @return [Array<Types::CheckSummary>]
     class ListChecksResponse < Struct.new(
+      nil,
       :next_token,
       :check_summaries,
       keyword_init: true
@@ -243,6 +256,7 @@ module Aws::TrustedAdvisor
     #   <p>An account affected by this organization recommendation</p>
     #   @return [String]
     class ListOrganizationRecommendationAccountsRequest < Struct.new(
+      nil,
       :next_token,
       :max_results,
       :organization_recommendation_identifier,
@@ -261,6 +275,7 @@ module Aws::TrustedAdvisor
     #   <p>The account recommendations lifecycles that are applicable to the Recommendation</p>
     #   @return [Array<Types::AccountRecommendationLifecycleSummary>]
     class ListOrganizationRecommendationAccountsResponse < Struct.new(
+      nil,
       :next_token,
       :account_recommendation_lifecycle_summaries,
       keyword_init: true
@@ -292,6 +307,7 @@ module Aws::TrustedAdvisor
     #   <p>An account affected by this organization recommendation</p>
     #   @return [String]
     class ListOrganizationRecommendationResourcesRequest < Struct.new(
+      nil,
       :next_token,
       :max_results,
       :status,
@@ -313,6 +329,7 @@ module Aws::TrustedAdvisor
     #   <p>A list of Recommendation Resources</p>
     #   @return [Array<Types::OrganizationRecommendationResourceSummary>]
     class ListOrganizationRecommendationResourcesResponse < Struct.new(
+      nil,
       :next_token,
       :organization_recommendation_resource_summaries,
       keyword_init: true
@@ -353,6 +370,7 @@ module Aws::TrustedAdvisor
     #   <p>Before the last update of the Recommendation</p>
     #   @return [Time]
     class ListOrganizationRecommendationsRequest < Struct.new(
+      nil,
       :next_token,
       :max_results,
       :type,
@@ -377,6 +395,7 @@ module Aws::TrustedAdvisor
     #   <p>The list of Recommendations</p>
     #   @return [Array<Types::OrganizationRecommendationSummary>]
     class ListOrganizationRecommendationsResponse < Struct.new(
+      nil,
       :next_token,
       :organization_recommendation_summaries,
       keyword_init: true
@@ -405,6 +424,7 @@ module Aws::TrustedAdvisor
     #   <p>The Recommendation identifier</p>
     #   @return [String]
     class ListRecommendationResourcesRequest < Struct.new(
+      nil,
       :next_token,
       :max_results,
       :status,
@@ -425,6 +445,7 @@ module Aws::TrustedAdvisor
     #   <p>A list of Recommendation Resources</p>
     #   @return [Array<Types::RecommendationResourceSummary>]
     class ListRecommendationResourcesResponse < Struct.new(
+      nil,
       :next_token,
       :recommendation_resource_summaries,
       keyword_init: true
@@ -465,6 +486,7 @@ module Aws::TrustedAdvisor
     #   <p>Before the last update of the Recommendation</p>
     #   @return [Time]
     class ListRecommendationsRequest < Struct.new(
+      nil,
       :next_token,
       :max_results,
       :type,
@@ -489,6 +511,7 @@ module Aws::TrustedAdvisor
     #   <p>The list of Recommendations</p>
     #   @return [Array<Types::RecommendationSummary>]
     class ListRecommendationsResponse < Struct.new(
+      nil,
       :next_token,
       :recommendation_summaries,
       keyword_init: true
@@ -567,6 +590,7 @@ module Aws::TrustedAdvisor
     #   <p>When the Recommendation was resolved</p>
     #   @return [Time]
     class OrganizationRecommendation < Struct.new(
+      nil,
       :id,
       :type,
       :check_arn,
@@ -625,6 +649,7 @@ module Aws::TrustedAdvisor
     #   <p>The Recommendation ARN</p>
     #   @return [String]
     class OrganizationRecommendationResourceSummary < Struct.new(
+      nil,
       :id,
       :arn,
       :aws_resource_id,
@@ -689,6 +714,7 @@ module Aws::TrustedAdvisor
     #   <p>The ARN of the Recommendation</p>
     #   @return [String]
     class OrganizationRecommendationSummary < Struct.new(
+      nil,
       :id,
       :type,
       :check_arn,
@@ -779,6 +805,7 @@ module Aws::TrustedAdvisor
     #   <p>When the Recommendation was resolved</p>
     #   @return [Time]
     class Recommendation < Struct.new(
+      nil,
       :id,
       :type,
       :check_arn,
@@ -813,6 +840,7 @@ module Aws::TrustedAdvisor
     #   <p>The estimated percently monthly savings</p>
     #   @return [Float]
     class RecommendationCostOptimizingAggregates < Struct.new(
+      nil,
       :estimated_monthly_savings,
       :estimated_percent_monthly_savings,
       keyword_init: true
@@ -825,6 +853,7 @@ module Aws::TrustedAdvisor
     #   <p>Cost optimizing aggregates</p>
     #   @return [Types::RecommendationCostOptimizingAggregates]
     class RecommendationPillarSpecificAggregates < Struct.new(
+      nil,
       :cost_optimizing,
       keyword_init: true
     )
@@ -839,6 +868,7 @@ module Aws::TrustedAdvisor
     #   <p>The exclusion status</p>
     #   @return [Boolean]
     class RecommendationResourceExclusion < Struct.new(
+      nil,
       :arn,
       :is_excluded,
       keyword_init: true
@@ -875,6 +905,7 @@ module Aws::TrustedAdvisor
     #   <p>The Recommendation ARN</p>
     #   @return [String]
     class RecommendationResourceSummary < Struct.new(
+      nil,
       :id,
       :arn,
       :aws_resource_id,
@@ -906,6 +937,7 @@ module Aws::TrustedAdvisor
     #   <p>The number of AWS resources that were flagged to have errors according to the Trusted Advisor check</p>
     #   @return [Integer]
     class RecommendationResourcesAggregates < Struct.new(
+      nil,
       :ok_count,
       :warning_count,
       :error_count,
@@ -958,6 +990,7 @@ module Aws::TrustedAdvisor
     #   <p>The ARN of the Recommendation</p>
     #   @return [String]
     class RecommendationSummary < Struct.new(
+      nil,
       :id,
       :type,
       :check_arn,
@@ -981,6 +1014,7 @@ module Aws::TrustedAdvisor
     # @!attribute message
     #   @return [String]
     class ResourceNotFoundException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -991,6 +1025,7 @@ module Aws::TrustedAdvisor
     # @!attribute message
     #   @return [String]
     class ThrottlingException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -1010,6 +1045,7 @@ module Aws::TrustedAdvisor
     #   <p>The Recommendation identifier for AWS Trusted Advisor Priority recommendations</p>
     #   @return [String]
     class UpdateOrganizationRecommendationLifecycleRequest < Struct.new(
+      nil,
       :lifecycle_stage,
       :update_reason,
       :update_reason_code,
@@ -1032,6 +1068,7 @@ module Aws::TrustedAdvisor
     #   <p>The Recommendation identifier for AWS Trusted Advisor Priority recommendations</p>
     #   @return [String]
     class UpdateRecommendationLifecycleRequest < Struct.new(
+      nil,
       :lifecycle_stage,
       :update_reason,
       :update_reason_code,
@@ -1052,6 +1089,7 @@ module Aws::TrustedAdvisor
     #   <p>The error message</p>
     #   @return [String]
     class UpdateRecommendationResourceExclusionError < Struct.new(
+      nil,
       :arn,
       :error_code,
       :error_message,
@@ -1064,6 +1102,7 @@ module Aws::TrustedAdvisor
     # @!attribute message
     #   @return [String]
     class ValidationException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )

@@ -11,6 +11,7 @@ module Aws::MarketplaceCatalog
     # @!attribute message
     #   @return [String]
     class AccessDeniedException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -22,6 +23,7 @@ module Aws::MarketplaceCatalog
     #   <p>A string array of unique entity id values to be filtered on.</p>
     #   @return [Array<String>]
     class AmiProductEntityIdFilter < Struct.new(
+      nil,
       :value_list,
       keyword_init: true
     )
@@ -43,6 +45,7 @@ module Aws::MarketplaceCatalog
     #   <p>The visibility of the AMI product.</p>
     #   @return [Types::AmiProductVisibilityFilter]
     class AmiProductFilters < Struct.new(
+      nil,
       :entity_id,
       :last_modified_date,
       :product_title,
@@ -57,6 +60,7 @@ module Aws::MarketplaceCatalog
     #   <p>Dates between which the AMI product was last modified.</p>
     #   @return [Types::AmiProductLastModifiedDateFilterDateRange]
     class AmiProductLastModifiedDateFilter < Struct.new(
+      nil,
       :date_range,
       keyword_init: true
     )
@@ -71,6 +75,7 @@ module Aws::MarketplaceCatalog
     #   <p>Date before which the AMI product was last modified.</p>
     #   @return [String]
     class AmiProductLastModifiedDateFilterDateRange < Struct.new(
+      nil,
       :after_value,
       :before_value,
       keyword_init: true
@@ -86,6 +91,7 @@ module Aws::MarketplaceCatalog
     #   <p>The sorting order. Can be <code>ASCENDING</code> or <code>DESCENDING</code>. The default value is <code>DESCENDING</code>.</p>
     #   @return [String]
     class AmiProductSort < Struct.new(
+      nil,
       :sort_by,
       :sort_order,
       keyword_init: true
@@ -101,6 +107,7 @@ module Aws::MarketplaceCatalog
     #   <p>The lifecycle of the AMI product.</p>
     #   @return [String]
     class AmiProductSummary < Struct.new(
+      nil,
       :product_title,
       :visibility,
       keyword_init: true
@@ -116,6 +123,7 @@ module Aws::MarketplaceCatalog
     #   <p>A string that will be the <code>wildCard</code> input for product tile filter. It matches the provided value as a substring in the actual value.</p>
     #   @return [String]
     class AmiProductTitleFilter < Struct.new(
+      nil,
       :value_list,
       :wild_card_value,
       keyword_init: true
@@ -128,6 +136,7 @@ module Aws::MarketplaceCatalog
     #   <p>A string array of unique visibility values to be filtered on.</p>
     #   @return [Array<String>]
     class AmiProductVisibilityFilter < Struct.new(
+      nil,
       :value_list,
       keyword_init: true
     )
@@ -138,6 +147,7 @@ module Aws::MarketplaceCatalog
     #   <p>List of entity IDs and the catalogs the entities are present in.</p>
     #   @return [Array<Types::EntityRequest>]
     class BatchDescribeEntitiesRequest < Struct.new(
+      nil,
       :entity_request_list,
       keyword_init: true
     )
@@ -152,6 +162,7 @@ module Aws::MarketplaceCatalog
     #                   <code>errorDetail</code> as the value.</p>
     #   @return [Hash<String, Types::BatchDescribeErrorDetail>]
     class BatchDescribeEntitiesResponse < Struct.new(
+      nil,
       :entity_details,
       :errors,
       keyword_init: true
@@ -167,6 +178,7 @@ module Aws::MarketplaceCatalog
     #   <p>The error message returned.</p>
     #   @return [String]
     class BatchDescribeErrorDetail < Struct.new(
+      nil,
       :error_code,
       :error_message,
       keyword_init: true
@@ -183,6 +195,7 @@ module Aws::MarketplaceCatalog
     #               want to cancel.</p>
     #   @return [String]
     class CancelChangeSetRequest < Struct.new(
+      nil,
       :catalog,
       :change_set_id,
       keyword_init: true
@@ -197,6 +210,7 @@ module Aws::MarketplaceCatalog
     #   <p>The ARN associated with the change set referenced in this request.</p>
     #   @return [String]
     class CancelChangeSetResponse < Struct.new(
+      nil,
       :change_set_id,
       :change_set_arn,
       keyword_init: true
@@ -235,6 +249,7 @@ module Aws::MarketplaceCatalog
     #   <p>Optional name for the change.</p>
     #   @return [String]
     class Change < Struct.new(
+      nil,
       :change_type,
       :entity,
       :entity_tags,
@@ -281,6 +296,7 @@ module Aws::MarketplaceCatalog
     #               you should retry your request.</p>
     #   @return [String]
     class ChangeSetSummaryListItem < Struct.new(
+      nil,
       :change_set_id,
       :change_set_arn,
       :change_set_name,
@@ -318,6 +334,7 @@ module Aws::MarketplaceCatalog
     #   <p>Optional name for the change.</p>
     #   @return [String]
     class ChangeSummary < Struct.new(
+      nil,
       :change_type,
       :entity,
       :details,
@@ -334,6 +351,7 @@ module Aws::MarketplaceCatalog
     #   <p>A string array of unique entity id values to be filtered on.</p>
     #   @return [Array<String>]
     class ContainerProductEntityIdFilter < Struct.new(
+      nil,
       :value_list,
       keyword_init: true
     )
@@ -354,6 +372,7 @@ module Aws::MarketplaceCatalog
     #   <p>The visibility of the container product.</p>
     #   @return [Types::ContainerProductVisibilityFilter]
     class ContainerProductFilters < Struct.new(
+      nil,
       :entity_id,
       :last_modified_date,
       :product_title,
@@ -368,6 +387,7 @@ module Aws::MarketplaceCatalog
     #   <p>Dates between which the container product was last modified.</p>
     #   @return [Types::ContainerProductLastModifiedDateFilterDateRange]
     class ContainerProductLastModifiedDateFilter < Struct.new(
+      nil,
       :date_range,
       keyword_init: true
     )
@@ -382,6 +402,7 @@ module Aws::MarketplaceCatalog
     #   <p>Date before which the container product was last modified.</p>
     #   @return [String]
     class ContainerProductLastModifiedDateFilterDateRange < Struct.new(
+      nil,
       :after_value,
       :before_value,
       keyword_init: true
@@ -397,6 +418,7 @@ module Aws::MarketplaceCatalog
     #   <p>The sorting order. Can be <code>ASCENDING</code> or <code>DESCENDING</code>. The default value is <code>DESCENDING</code>.</p>
     #   @return [String]
     class ContainerProductSort < Struct.new(
+      nil,
       :sort_by,
       :sort_order,
       keyword_init: true
@@ -412,6 +434,7 @@ module Aws::MarketplaceCatalog
     #   <p>The lifecycle of the product.</p>
     #   @return [String]
     class ContainerProductSummary < Struct.new(
+      nil,
       :product_title,
       :visibility,
       keyword_init: true
@@ -427,6 +450,7 @@ module Aws::MarketplaceCatalog
     #   <p>A string that will be the <code>wildCard</code> input for product tile filter. It matches the provided value as a substring in the actual value.</p>
     #   @return [String]
     class ContainerProductTitleFilter < Struct.new(
+      nil,
       :value_list,
       :wild_card_value,
       keyword_init: true
@@ -439,6 +463,7 @@ module Aws::MarketplaceCatalog
     #   <p>A string array of unique visibility values to be filtered on.</p>
     #   @return [Array<String>]
     class ContainerProductVisibilityFilter < Struct.new(
+      nil,
       :value_list,
       keyword_init: true
     )
@@ -450,6 +475,7 @@ module Aws::MarketplaceCatalog
     #   <p>A string array of unique entity id values to be filtered on.</p>
     #   @return [Array<String>]
     class DataProductEntityIdFilter < Struct.new(
+      nil,
       :value_list,
       keyword_init: true
     )
@@ -470,6 +496,7 @@ module Aws::MarketplaceCatalog
     #   <p>The last date on which the data product was modified.</p>
     #   @return [Types::DataProductLastModifiedDateFilter]
     class DataProductFilters < Struct.new(
+      nil,
       :entity_id,
       :product_title,
       :visibility,
@@ -484,6 +511,7 @@ module Aws::MarketplaceCatalog
     #   <p>Dates between which the data product was last modified.</p>
     #   @return [Types::DataProductLastModifiedDateFilterDateRange]
     class DataProductLastModifiedDateFilter < Struct.new(
+      nil,
       :date_range,
       keyword_init: true
     )
@@ -498,6 +526,7 @@ module Aws::MarketplaceCatalog
     #   <p>Date before which the data product was last modified.</p>
     #   @return [String]
     class DataProductLastModifiedDateFilterDateRange < Struct.new(
+      nil,
       :after_value,
       :before_value,
       keyword_init: true
@@ -513,6 +542,7 @@ module Aws::MarketplaceCatalog
     #   <p>The sorting order. Can be <code>ASCENDING</code> or <code>DESCENDING</code>. The default value is <code>DESCENDING</code>.</p>
     #   @return [String]
     class DataProductSort < Struct.new(
+      nil,
       :sort_by,
       :sort_order,
       keyword_init: true
@@ -528,6 +558,7 @@ module Aws::MarketplaceCatalog
     #   <p>The lifecycle of the data product.</p>
     #   @return [String]
     class DataProductSummary < Struct.new(
+      nil,
       :product_title,
       :visibility,
       keyword_init: true
@@ -543,6 +574,7 @@ module Aws::MarketplaceCatalog
     #   <p>A string that will be the <code>wildCard</code> input for product tile filter. It matches the provided value as a substring in the actual value.</p>
     #   @return [String]
     class DataProductTitleFilter < Struct.new(
+      nil,
       :value_list,
       :wild_card_value,
       keyword_init: true
@@ -555,6 +587,7 @@ module Aws::MarketplaceCatalog
     #   <p>A string array of unique visibility values to be filtered on.</p>
     #   @return [Array<String>]
     class DataProductVisibilityFilter < Struct.new(
+      nil,
       :value_list,
       keyword_init: true
     )
@@ -566,6 +599,7 @@ module Aws::MarketplaceCatalog
     #               resource policy.</p>
     #   @return [String]
     class DeleteResourcePolicyRequest < Struct.new(
+      nil,
       :resource_arn,
       keyword_init: true
     )
@@ -573,6 +607,7 @@ module Aws::MarketplaceCatalog
     end
 
     class DeleteResourcePolicyResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -588,6 +623,7 @@ module Aws::MarketplaceCatalog
     #               want to describe the details for.</p>
     #   @return [String]
     class DescribeChangeSetRequest < Struct.new(
+      nil,
       :catalog,
       :change_set_id,
       keyword_init: true
@@ -636,6 +672,7 @@ module Aws::MarketplaceCatalog
     #   <p>An array of <code>ChangeSummary</code> objects.</p>
     #   @return [Array<Types::ChangeSummary>]
     class DescribeChangeSetResponse < Struct.new(
+      nil,
       :change_set_id,
       :change_set_arn,
       :change_set_name,
@@ -660,6 +697,7 @@ module Aws::MarketplaceCatalog
     #   <p>Required. The unique ID of the entity to describe.</p>
     #   @return [String]
     class DescribeEntityRequest < Struct.new(
+      nil,
       :catalog,
       :entity_id,
       keyword_init: true
@@ -691,6 +729,7 @@ module Aws::MarketplaceCatalog
     #               and <a href="https://github.com/awslabs/aws-marketplace-catalog-api-shapes-for-java/tree/main">Java</a> shapes on GitHub.</p>
     #   @return [JSON]
     class DescribeEntityResponse < Struct.new(
+      nil,
       :entity_type,
       :entity_identifier,
       :entity_arn,
@@ -711,6 +750,7 @@ module Aws::MarketplaceCatalog
     #   <p>The identifier for the entity.</p>
     #   @return [String]
     class Entity < Struct.new(
+      nil,
       :type,
       :identifier,
       keyword_init: true
@@ -736,6 +776,7 @@ module Aws::MarketplaceCatalog
     #   <p>An object that contains all the details of the entity.</p>
     #   @return [JSON]
     class EntityDetail < Struct.new(
+      nil,
       :entity_type,
       :entity_arn,
       :entity_identifier,
@@ -755,6 +796,7 @@ module Aws::MarketplaceCatalog
     #   <p>The ID of the entity.</p>
     #   @return [String]
     class EntityRequest < Struct.new(
+      nil,
       :catalog,
       :entity_id,
       keyword_init: true
@@ -809,6 +851,7 @@ module Aws::MarketplaceCatalog
     #   <p>A summary of a machine learning product.</p>
     #   @return [Types::MachineLearningProductSummary]
     class EntitySummary < Struct.new(
+      nil,
       :name,
       :entity_type,
       :entity_id,
@@ -925,6 +968,7 @@ module Aws::MarketplaceCatalog
     #   <p>The message for the error.</p>
     #   @return [String]
     class ErrorDetail < Struct.new(
+      nil,
       :error_code,
       :error_message,
       keyword_init: true
@@ -985,6 +1029,7 @@ module Aws::MarketplaceCatalog
     #            </ul>
     #   @return [Array<String>]
     class Filter < Struct.new(
+      nil,
       :name,
       :value_list,
       keyword_init: true
@@ -997,6 +1042,7 @@ module Aws::MarketplaceCatalog
     #               resource policy.</p>
     #   @return [String]
     class GetResourcePolicyRequest < Struct.new(
+      nil,
       :resource_arn,
       keyword_init: true
     )
@@ -1007,6 +1053,7 @@ module Aws::MarketplaceCatalog
     #   <p>The policy document to set; formatted in JSON.</p>
     #   @return [String]
     class GetResourcePolicyResponse < Struct.new(
+      nil,
       :policy,
       keyword_init: true
     )
@@ -1018,6 +1065,7 @@ module Aws::MarketplaceCatalog
     # @!attribute message
     #   @return [String]
     class InternalServiceException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -1045,6 +1093,7 @@ module Aws::MarketplaceCatalog
     #               results.</p>
     #   @return [String]
     class ListChangeSetsRequest < Struct.new(
+      nil,
       :catalog,
       :filter_list,
       :sort,
@@ -1062,6 +1111,7 @@ module Aws::MarketplaceCatalog
     #   <p>The value of the next token, if it exists. Null if there are no more results.</p>
     #   @return [String]
     class ListChangeSetsResponse < Struct.new(
+      nil,
       :change_set_summary_list,
       :next_token,
       keyword_init: true
@@ -1116,6 +1166,7 @@ module Aws::MarketplaceCatalog
     #               can be used to sort the results of the filter query.</p>
     #   @return [Types::EntityTypeSort]
     class ListEntitiesRequest < Struct.new(
+      nil,
       :catalog,
       :entity_type,
       :filter_list,
@@ -1137,6 +1188,7 @@ module Aws::MarketplaceCatalog
     #   <p>The value of the next token if it exists. Null if there is no more result.</p>
     #   @return [String]
     class ListEntitiesResponse < Struct.new(
+      nil,
       :entity_summary_list,
       :next_token,
       keyword_init: true
@@ -1149,6 +1201,7 @@ module Aws::MarketplaceCatalog
     #               tags on.</p>
     #   @return [String]
     class ListTagsForResourceRequest < Struct.new(
+      nil,
       :resource_arn,
       keyword_init: true
     )
@@ -1163,6 +1216,7 @@ module Aws::MarketplaceCatalog
     #               allowed: 1-50.</p>
     #   @return [Array<Types::Tag>]
     class ListTagsForResourceResponse < Struct.new(
+      nil,
       :resource_arn,
       :tags,
       keyword_init: true
@@ -1175,6 +1229,7 @@ module Aws::MarketplaceCatalog
     #   <p>A list of entity IDs to filter by. The operation returns machine learning products with entity IDs that match the values in this list.</p>
     #   @return [Array<String>]
     class MachineLearningProductEntityIdFilter < Struct.new(
+      nil,
       :value_list,
       keyword_init: true
     )
@@ -1195,6 +1250,7 @@ module Aws::MarketplaceCatalog
     #   <p>Filter machine learning products by their visibility status.</p>
     #   @return [Types::MachineLearningProductVisibilityFilter]
     class MachineLearningProductFilters < Struct.new(
+      nil,
       :entity_id,
       :last_modified_date,
       :product_title,
@@ -1209,6 +1265,7 @@ module Aws::MarketplaceCatalog
     #   <p>A date range to filter by. The operation returns machine learning products with last modified dates that fall within this range.</p>
     #   @return [Types::MachineLearningProductLastModifiedDateFilterDateRange]
     class MachineLearningProductLastModifiedDateFilter < Struct.new(
+      nil,
       :date_range,
       keyword_init: true
     )
@@ -1223,6 +1280,7 @@ module Aws::MarketplaceCatalog
     #   <p>The end date (inclusive) of the date range. The operation returns machine learning products with last modified dates on or before this date.</p>
     #   @return [String]
     class MachineLearningProductLastModifiedDateFilterDateRange < Struct.new(
+      nil,
       :after_value,
       :before_value,
       keyword_init: true
@@ -1238,6 +1296,7 @@ module Aws::MarketplaceCatalog
     #   <p>The sort order. Valid values are <code>ASC</code> (ascending) and <code>DESC</code> (descending).</p>
     #   @return [String]
     class MachineLearningProductSort < Struct.new(
+      nil,
       :sort_by,
       :sort_order,
       keyword_init: true
@@ -1253,6 +1312,7 @@ module Aws::MarketplaceCatalog
     #   <p>The visibility status of the machine learning product. Valid values are <code>Limited</code>, <code>Public</code>, <code>Restricted</code>, and <code>Draft</code>.</p>
     #   @return [String]
     class MachineLearningProductSummary < Struct.new(
+      nil,
       :product_title,
       :visibility,
       keyword_init: true
@@ -1268,6 +1328,7 @@ module Aws::MarketplaceCatalog
     #   <p>A wildcard value to filter product titles. The operation returns machine learning products with titles that match this wildcard pattern.</p>
     #   @return [String]
     class MachineLearningProductTitleFilter < Struct.new(
+      nil,
       :value_list,
       :wild_card_value,
       keyword_init: true
@@ -1280,6 +1341,7 @@ module Aws::MarketplaceCatalog
     #   <p>A list of visibility values to filter by. The operation returns machine learning products with visibility status that match the values in this list.</p>
     #   @return [Array<String>]
     class MachineLearningProductVisibilityFilter < Struct.new(
+      nil,
       :value_list,
       keyword_init: true
     )
@@ -1291,6 +1353,7 @@ module Aws::MarketplaceCatalog
     #   <p>Allows filtering on the <code>AvailabilityEndDate</code> of an offer with date range as input.</p>
     #   @return [Types::OfferAvailabilityEndDateFilterDateRange]
     class OfferAvailabilityEndDateFilter < Struct.new(
+      nil,
       :date_range,
       keyword_init: true
     )
@@ -1305,6 +1368,7 @@ module Aws::MarketplaceCatalog
     #   <p>Allows filtering on the <code>AvailabilityEndDate</code> of an offer before a date.</p>
     #   @return [String]
     class OfferAvailabilityEndDateFilterDateRange < Struct.new(
+      nil,
       :after_value,
       :before_value,
       keyword_init: true
@@ -1317,6 +1381,7 @@ module Aws::MarketplaceCatalog
     #   <p>Allows filtering on the <code>BuyerAccounts</code> of an offer with wild card input.</p>
     #   @return [String]
     class OfferBuyerAccountsFilter < Struct.new(
+      nil,
       :wild_card_value,
       keyword_init: true
     )
@@ -1328,6 +1393,7 @@ module Aws::MarketplaceCatalog
     #   <p>Allows filtering on entity id of an offer with list input.</p>
     #   @return [Array<String>]
     class OfferEntityIdFilter < Struct.new(
+      nil,
       :value_list,
       keyword_init: true
     )
@@ -1370,6 +1436,7 @@ module Aws::MarketplaceCatalog
     #   <p>Allows filtering on the <code>LastModifiedDate</code> of an offer.</p>
     #   @return [Types::OfferLastModifiedDateFilter]
     class OfferFilters < Struct.new(
+      nil,
       :entity_id,
       :name,
       :product_id,
@@ -1390,6 +1457,7 @@ module Aws::MarketplaceCatalog
     #   <p>Allows filtering on the <code>LastModifiedDate</code> of an offer with date range as input.</p>
     #   @return [Types::OfferLastModifiedDateFilterDateRange]
     class OfferLastModifiedDateFilter < Struct.new(
+      nil,
       :date_range,
       keyword_init: true
     )
@@ -1404,6 +1472,7 @@ module Aws::MarketplaceCatalog
     #   <p>Allows filtering on the <code>LastModifiedDate</code> of an offer before a date.</p>
     #   @return [String]
     class OfferLastModifiedDateFilterDateRange < Struct.new(
+      nil,
       :after_value,
       :before_value,
       keyword_init: true
@@ -1419,6 +1488,7 @@ module Aws::MarketplaceCatalog
     #   <p>Allows filtering on the <code>Name</code> of an offer with wild card input.</p>
     #   @return [String]
     class OfferNameFilter < Struct.new(
+      nil,
       :value_list,
       :wild_card_value,
       keyword_init: true
@@ -1431,6 +1501,7 @@ module Aws::MarketplaceCatalog
     #   <p>Allows filtering on the <code>ProductId</code> of an offer with list input.</p>
     #   @return [Array<String>]
     class OfferProductIdFilter < Struct.new(
+      nil,
       :value_list,
       keyword_init: true
     )
@@ -1442,6 +1513,7 @@ module Aws::MarketplaceCatalog
     #   <p>Allows filtering on the <code>ReleaseDate</code> of an offer with date range as input.</p>
     #   @return [Types::OfferReleaseDateFilterDateRange]
     class OfferReleaseDateFilter < Struct.new(
+      nil,
       :date_range,
       keyword_init: true
     )
@@ -1456,6 +1528,7 @@ module Aws::MarketplaceCatalog
     #   <p>Allows filtering on the <code>ReleaseDate</code> of offers before a date.</p>
     #   @return [String]
     class OfferReleaseDateFilterDateRange < Struct.new(
+      nil,
       :after_value,
       :before_value,
       keyword_init: true
@@ -1472,6 +1545,7 @@ module Aws::MarketplaceCatalog
     #   <p>Allows filtering on the <code>ResaleAuthorizationId</code> of an offer with list input.</p>
     #   @return [Array<String>]
     class OfferResaleAuthorizationIdFilter < Struct.new(
+      nil,
       :value_list,
       keyword_init: true
     )
@@ -1486,6 +1560,7 @@ module Aws::MarketplaceCatalog
     #   <p>Allows to sort offers.</p>
     #   @return [String]
     class OfferSort < Struct.new(
+      nil,
       :sort_by,
       :sort_order,
       keyword_init: true
@@ -1498,6 +1573,7 @@ module Aws::MarketplaceCatalog
     #   <p>Allows filtering on the <code>State</code> of an offer with list input.</p>
     #   @return [Array<String>]
     class OfferStateFilter < Struct.new(
+      nil,
       :value_list,
       keyword_init: true
     )
@@ -1530,6 +1606,7 @@ module Aws::MarketplaceCatalog
     #   <p>The targeting in the offer.</p>
     #   @return [Array<String>]
     class OfferSummary < Struct.new(
+      nil,
       :name,
       :product_id,
       :resale_authorization_id,
@@ -1548,6 +1625,7 @@ module Aws::MarketplaceCatalog
     #   <p>Allows filtering on the <code>Targeting</code> of an offer with list input.</p>
     #   @return [Array<String>]
     class OfferTargetingFilter < Struct.new(
+      nil,
       :value_list,
       keyword_init: true
     )
@@ -1562,6 +1640,7 @@ module Aws::MarketplaceCatalog
     #   <p>The policy document to set; formatted in JSON.</p>
     #   @return [String]
     class PutResourcePolicyRequest < Struct.new(
+      nil,
       :resource_arn,
       :policy,
       keyword_init: true
@@ -1570,6 +1649,7 @@ module Aws::MarketplaceCatalog
     end
 
     class PutResourcePolicyResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1583,6 +1663,7 @@ module Aws::MarketplaceCatalog
     #   <p>Allows filtering on <code>AvailabilityEndDate</code> of a ResaleAuthorization with date value as input.</p>
     #   @return [Array<String>]
     class ResaleAuthorizationAvailabilityEndDateFilter < Struct.new(
+      nil,
       :date_range,
       :value_list,
       keyword_init: true
@@ -1598,6 +1679,7 @@ module Aws::MarketplaceCatalog
     #   <p>Allows filtering on <code>AvailabilityEndDate</code> of a ResaleAuthorization before a date.</p>
     #   @return [String]
     class ResaleAuthorizationAvailabilityEndDateFilterDateRange < Struct.new(
+      nil,
       :after_value,
       :before_value,
       keyword_init: true
@@ -1613,6 +1695,7 @@ module Aws::MarketplaceCatalog
     #   <p>Allows filtering on <code>CreatedDate</code> of a ResaleAuthorization with date value as input.</p>
     #   @return [Array<String>]
     class ResaleAuthorizationCreatedDateFilter < Struct.new(
+      nil,
       :date_range,
       :value_list,
       keyword_init: true
@@ -1628,6 +1711,7 @@ module Aws::MarketplaceCatalog
     #   <p>Allows filtering on <code>CreatedDate</code> of a ResaleAuthorization before a date.</p>
     #   @return [String]
     class ResaleAuthorizationCreatedDateFilterDateRange < Struct.new(
+      nil,
       :after_value,
       :before_value,
       keyword_init: true
@@ -1640,6 +1724,7 @@ module Aws::MarketplaceCatalog
     #   <p>Allows filtering on <code>EntityId</code> of a ResaleAuthorization with list input.</p>
     #   @return [Array<String>]
     class ResaleAuthorizationEntityIdFilter < Struct.new(
+      nil,
       :value_list,
       keyword_init: true
     )
@@ -1687,6 +1772,7 @@ module Aws::MarketplaceCatalog
     #   <p>Allows filtering on the <code>LastModifiedDate</code> of a ResaleAuthorization.</p>
     #   @return [Types::ResaleAuthorizationLastModifiedDateFilter]
     class ResaleAuthorizationFilters < Struct.new(
+      nil,
       :entity_id,
       :name,
       :product_id,
@@ -1710,6 +1796,7 @@ module Aws::MarketplaceCatalog
     #   <p>Allows filtering on the <code>LastModifiedDate</code> of a ResaleAuthorization with date range as input.</p>
     #   @return [Types::ResaleAuthorizationLastModifiedDateFilterDateRange]
     class ResaleAuthorizationLastModifiedDateFilter < Struct.new(
+      nil,
       :date_range,
       keyword_init: true
     )
@@ -1724,6 +1811,7 @@ module Aws::MarketplaceCatalog
     #   <p>Allows filtering on the <code>LastModifiedDate</code> of a ResaleAuthorization before a date.</p>
     #   @return [String]
     class ResaleAuthorizationLastModifiedDateFilterDateRange < Struct.new(
+      nil,
       :after_value,
       :before_value,
       keyword_init: true
@@ -1739,6 +1827,7 @@ module Aws::MarketplaceCatalog
     #   <p>Allows filtering on the <code>ManufacturerAccountId</code> of a ResaleAuthorization with wild card input.</p>
     #   @return [String]
     class ResaleAuthorizationManufacturerAccountIdFilter < Struct.new(
+      nil,
       :value_list,
       :wild_card_value,
       keyword_init: true
@@ -1754,6 +1843,7 @@ module Aws::MarketplaceCatalog
     #   <p>Allows filtering on the <code>ManufacturerLegalName</code> of a ResaleAuthorization with wild card input.</p>
     #   @return [String]
     class ResaleAuthorizationManufacturerLegalNameFilter < Struct.new(
+      nil,
       :value_list,
       :wild_card_value,
       keyword_init: true
@@ -1769,6 +1859,7 @@ module Aws::MarketplaceCatalog
     #   <p>Allows filtering on the <code>Name</code> of a ResaleAuthorization with wild card input.</p>
     #   @return [String]
     class ResaleAuthorizationNameFilter < Struct.new(
+      nil,
       :value_list,
       :wild_card_value,
       keyword_init: true
@@ -1781,6 +1872,7 @@ module Aws::MarketplaceCatalog
     #   <p>Allows filtering on the <code>OfferExtendedStatus</code> of a ResaleAuthorization with list input.</p>
     #   @return [Array<String>]
     class ResaleAuthorizationOfferExtendedStatusFilter < Struct.new(
+      nil,
       :value_list,
       keyword_init: true
     )
@@ -1795,6 +1887,7 @@ module Aws::MarketplaceCatalog
     #   <p>Allows filtering on the <code>ProductId</code> of a ResaleAuthorization with wild card input.</p>
     #   @return [String]
     class ResaleAuthorizationProductIdFilter < Struct.new(
+      nil,
       :value_list,
       :wild_card_value,
       keyword_init: true
@@ -1810,6 +1903,7 @@ module Aws::MarketplaceCatalog
     #   <p>Allows filtering on the <code>ProductName</code> of a ResaleAuthorization with wild card input.</p>
     #   @return [String]
     class ResaleAuthorizationProductNameFilter < Struct.new(
+      nil,
       :value_list,
       :wild_card_value,
       keyword_init: true
@@ -1825,6 +1919,7 @@ module Aws::MarketplaceCatalog
     #   <p>Allows filtering on the <code>ResellerAccountID</code> of a ResaleAuthorization with wild card input.</p>
     #   @return [String]
     class ResaleAuthorizationResellerAccountIDFilter < Struct.new(
+      nil,
       :value_list,
       :wild_card_value,
       keyword_init: true
@@ -1840,6 +1935,7 @@ module Aws::MarketplaceCatalog
     #   <p>Allows filtering on the ResellerLegalName of a ResaleAuthorization with wild card input.</p>
     #   @return [String]
     class ResaleAuthorizationResellerLegalNameFilter < Struct.new(
+      nil,
       :value_list,
       :wild_card_value,
       keyword_init: true
@@ -1855,6 +1951,7 @@ module Aws::MarketplaceCatalog
     #   <p>Allows to sort ResaleAuthorization.</p>
     #   @return [String]
     class ResaleAuthorizationSort < Struct.new(
+      nil,
       :sort_by,
       :sort_order,
       keyword_init: true
@@ -1867,6 +1964,7 @@ module Aws::MarketplaceCatalog
     #   <p>Allows filtering on the <code>Status</code> of a ResaleAuthorization with list input.</p>
     #   @return [Array<String>]
     class ResaleAuthorizationStatusFilter < Struct.new(
+      nil,
       :value_list,
       keyword_init: true
     )
@@ -1908,6 +2006,7 @@ module Aws::MarketplaceCatalog
     #   <p>The availability end date of the ResaleAuthorization.</p>
     #   @return [String]
     class ResaleAuthorizationSummary < Struct.new(
+      nil,
       :name,
       :product_id,
       :product_name,
@@ -1928,6 +2027,7 @@ module Aws::MarketplaceCatalog
     # @!attribute message
     #   @return [String]
     class ResourceInUseException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -1939,6 +2039,7 @@ module Aws::MarketplaceCatalog
     # @!attribute message
     #   @return [String]
     class ResourceNotFoundException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -1949,6 +2050,7 @@ module Aws::MarketplaceCatalog
     # @!attribute message
     #   @return [String]
     class ResourceNotSupportedException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -1960,6 +2062,7 @@ module Aws::MarketplaceCatalog
     #   <p>A string array of unique entity id values to be filtered on.</p>
     #   @return [Array<String>]
     class SaaSProductEntityIdFilter < Struct.new(
+      nil,
       :value_list,
       keyword_init: true
     )
@@ -1980,6 +2083,7 @@ module Aws::MarketplaceCatalog
     #   <p>The last date on which the SaaS product was modified.</p>
     #   @return [Types::SaaSProductLastModifiedDateFilter]
     class SaaSProductFilters < Struct.new(
+      nil,
       :entity_id,
       :product_title,
       :visibility,
@@ -1994,6 +2098,7 @@ module Aws::MarketplaceCatalog
     #   <p>Dates between which the SaaS product was last modified.</p>
     #   @return [Types::SaaSProductLastModifiedDateFilterDateRange]
     class SaaSProductLastModifiedDateFilter < Struct.new(
+      nil,
       :date_range,
       keyword_init: true
     )
@@ -2008,6 +2113,7 @@ module Aws::MarketplaceCatalog
     #   <p>Date before which the SaaS product was last modified.</p>
     #   @return [String]
     class SaaSProductLastModifiedDateFilterDateRange < Struct.new(
+      nil,
       :after_value,
       :before_value,
       keyword_init: true
@@ -2023,6 +2129,7 @@ module Aws::MarketplaceCatalog
     #   <p>The sorting order. Can be <code>ASCENDING</code> or <code>DESCENDING</code>. The default value is <code>DESCENDING</code>.</p>
     #   @return [String]
     class SaaSProductSort < Struct.new(
+      nil,
       :sort_by,
       :sort_order,
       keyword_init: true
@@ -2038,6 +2145,7 @@ module Aws::MarketplaceCatalog
     #   <p>The lifecycle of the SaaS product.</p>
     #   @return [String]
     class SaaSProductSummary < Struct.new(
+      nil,
       :product_title,
       :visibility,
       keyword_init: true
@@ -2053,6 +2161,7 @@ module Aws::MarketplaceCatalog
     #   <p>A string that will be the <code>wildCard</code> input for product tile filter. It matches the provided value as a substring in the actual value.</p>
     #   @return [String]
     class SaaSProductTitleFilter < Struct.new(
+      nil,
       :value_list,
       :wild_card_value,
       keyword_init: true
@@ -2065,6 +2174,7 @@ module Aws::MarketplaceCatalog
     #   <p>A string array of unique visibility values to be filtered on.</p>
     #   @return [Array<String>]
     class SaaSProductVisibilityFilter < Struct.new(
+      nil,
       :value_list,
       keyword_init: true
     )
@@ -2075,6 +2185,7 @@ module Aws::MarketplaceCatalog
     # @!attribute message
     #   @return [String]
     class ServiceQuotaExceededException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -2096,6 +2207,7 @@ module Aws::MarketplaceCatalog
     #               default value is <code>DESCENDING</code>.</p>
     #   @return [String]
     class Sort < Struct.new(
+      nil,
       :sort_by,
       :sort_order,
       keyword_init: true
@@ -2128,6 +2240,7 @@ module Aws::MarketplaceCatalog
     #               <a href="https://docs.aws.amazon.com/marketplace-catalog/latest/api-reference/ami-products.html#ami-add-version">Add a new version</a>.</p>
     #   @return [String]
     class StartChangeSetRequest < Struct.new(
+      nil,
       :catalog,
       :change_set,
       :change_set_name,
@@ -2146,6 +2259,7 @@ module Aws::MarketplaceCatalog
     #   <p>The ARN associated to the unique identifier generated for the request.</p>
     #   @return [String]
     class StartChangeSetResponse < Struct.new(
+      nil,
       :change_set_id,
       :change_set_arn,
       keyword_init: true
@@ -2161,6 +2275,7 @@ module Aws::MarketplaceCatalog
     #   <p>The value associated with the tag.</p>
     #   @return [String]
     class Tag < Struct.new(
+      nil,
       :key,
       :value,
       keyword_init: true
@@ -2177,6 +2292,7 @@ module Aws::MarketplaceCatalog
     #               allowed: 1-50.</p>
     #   @return [Array<Types::Tag>]
     class TagResourceRequest < Struct.new(
+      nil,
       :resource_arn,
       :tags,
       keyword_init: true
@@ -2185,6 +2301,7 @@ module Aws::MarketplaceCatalog
     end
 
     class TagResourceResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -2195,6 +2312,7 @@ module Aws::MarketplaceCatalog
     # @!attribute message
     #   @return [String]
     class ThrottlingException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -2210,6 +2328,7 @@ module Aws::MarketplaceCatalog
     #               0-256.</p>
     #   @return [Array<String>]
     class UntagResourceRequest < Struct.new(
+      nil,
       :resource_arn,
       :tag_keys,
       keyword_init: true
@@ -2218,6 +2337,7 @@ module Aws::MarketplaceCatalog
     end
 
     class UntagResourceResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -2228,6 +2348,7 @@ module Aws::MarketplaceCatalog
     # @!attribute message
     #   @return [String]
     class ValidationException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )

@@ -10,6 +10,7 @@ module Aws::Finspace
     # @!attribute message
     #   @return [String]
     class AccessDeniedException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -36,6 +37,7 @@ module Aws::Finspace
     #   <p>The duration in seconds that FinSpace will wait after a scale out event before initiating another scaling event.</p>
     #   @return [Float]
     class AutoScalingConfiguration < Struct.new(
+      nil,
       :min_node_count,
       :max_node_count,
       :auto_scaling_metric,
@@ -86,6 +88,7 @@ module Aws::Finspace
     #   <p>The number of instances running in a cluster.</p>
     #   @return [Integer]
     class CapacityConfiguration < Struct.new(
+      nil,
       :node_type,
       :node_count,
       keyword_init: true
@@ -112,6 +115,7 @@ module Aws::Finspace
     #   <p>Defines the path within the database directory. </p>
     #   @return [String]
     class ChangeRequest < Struct.new(
+      nil,
       :change_type,
       :s3_path,
       :db_path,
@@ -131,6 +135,7 @@ module Aws::Finspace
     #   <p>The version of an S3 object.</p>
     #   @return [String]
     class CodeConfiguration < Struct.new(
+      nil,
       :s3_bucket,
       :s3_key,
       :s3_object_version,
@@ -146,6 +151,7 @@ module Aws::Finspace
     #   <p>The reason for the conflict exception.</p>
     #   @return [String]
     class ConflictException < Struct.new(
+      nil,
       :message,
       :reason,
       keyword_init: true
@@ -198,6 +204,7 @@ module Aws::Finspace
     #            </ul>
     #   @return [Array<String>]
     class CreateEnvironmentRequest < Struct.new(
+      nil,
       :name,
       :description,
       :kms_key_id,
@@ -221,6 +228,7 @@ module Aws::Finspace
     #   <p>The sign-in URL for the web application of the FinSpace environment you created.</p>
     #   @return [String]
     class CreateEnvironmentResponse < Struct.new(
+      nil,
       :environment_id,
       :environment_arn,
       :environment_url,
@@ -298,6 +306,7 @@ module Aws::Finspace
     #   <p>A token that ensures idempotency. This token expires in 10 minutes.</p>
     #   @return [String]
     class CreateKxChangesetRequest < Struct.new(
+      nil,
       :environment_id,
       :database_name,
       :change_requests,
@@ -346,6 +355,7 @@ module Aws::Finspace
     #   <p>The details of the error that you receive when creating a changeset. It consists of the type of error and the error message.</p>
     #   @return [Types::ErrorInfo]
     class CreateKxChangesetResponse < Struct.new(
+      nil,
       :changeset_id,
       :database_name,
       :environment_id,
@@ -456,6 +466,7 @@ module Aws::Finspace
     #   <p>The structure that stores the configuration details of a scaling group.</p>
     #   @return [Types::KxScalingGroupConfiguration]
     class CreateKxClusterRequest < Struct.new(
+      nil,
       :client_token,
       :environment_id,
       :cluster_name,
@@ -620,6 +631,7 @@ module Aws::Finspace
     #   <p>The structure that stores the configuration details of a scaling group.</p>
     #   @return [Types::KxScalingGroupConfiguration]
     class CreateKxClusterResponse < Struct.new(
+      nil,
       :environment_id,
       :status,
       :status_reason,
@@ -665,6 +677,7 @@ module Aws::Finspace
     #   <p>A token that ensures idempotency. This token expires in 10 minutes.</p>
     #   @return [String]
     class CreateKxDatabaseRequest < Struct.new(
+      nil,
       :environment_id,
       :database_name,
       :description,
@@ -694,6 +707,7 @@ module Aws::Finspace
     #   <p>The last time that the database was updated in FinSpace. The value is determined as epoch time in milliseconds. For example, the value for Monday, November 1, 2021 12:00:00 PM UTC is specified as 1635768000000.</p>
     #   @return [Time]
     class CreateKxDatabaseResponse < Struct.new(
+      nil,
       :database_name,
       :database_arn,
       :environment_id,
@@ -770,6 +784,7 @@ module Aws::Finspace
     #   <p>A token that ensures idempotency. This token expires in 10 minutes.</p>
     #   @return [String]
     class CreateKxDataviewRequest < Struct.new(
+      nil,
       :environment_id,
       :database_name,
       :dataview_name,
@@ -847,6 +862,7 @@ module Aws::Finspace
     #            </ul>
     #   @return [String]
     class CreateKxDataviewResponse < Struct.new(
+      nil,
       :dataview_name,
       :database_name,
       :environment_id,
@@ -887,6 +903,7 @@ module Aws::Finspace
     #   <p>A token that ensures idempotency. This token expires in 10 minutes.</p>
     #   @return [String]
     class CreateKxEnvironmentRequest < Struct.new(
+      nil,
       :name,
       :description,
       :kms_key_id,
@@ -919,6 +936,7 @@ module Aws::Finspace
     #   <p>The timestamp at which the kdb environment was created in FinSpace.</p>
     #   @return [Time]
     class CreateKxEnvironmentResponse < Struct.new(
+      nil,
       :name,
       :status,
       :environment_id,
@@ -995,6 +1013,7 @@ module Aws::Finspace
     #   </p>
     #   @return [Hash<String, String>]
     class CreateKxScalingGroupRequest < Struct.new(
+      nil,
       :client_token,
       :environment_id,
       :scaling_group_name,
@@ -1059,6 +1078,7 @@ module Aws::Finspace
     #      The timestamp at which the scaling group was created in FinSpace. The value is determined as epoch time in milliseconds. For example, the value for Monday, November 1, 2021 12:00:00 PM UTC is specified as 1635768000000.</p>
     #   @return [Time]
     class CreateKxScalingGroupResponse < Struct.new(
+      nil,
       :environment_id,
       :scaling_group_name,
       :host_type,
@@ -1087,6 +1107,7 @@ module Aws::Finspace
     #   <p>A token that ensures idempotency. This token expires in 10 minutes.</p>
     #   @return [String]
     class CreateKxUserRequest < Struct.new(
+      nil,
       :environment_id,
       :user_name,
       :iam_role,
@@ -1112,6 +1133,7 @@ module Aws::Finspace
     #   <p>The IAM role ARN that will be associated with the user.</p>
     #   @return [String]
     class CreateKxUserResponse < Struct.new(
+      nil,
       :user_name,
       :user_arn,
       :environment_id,
@@ -1157,6 +1179,7 @@ module Aws::Finspace
     #   </p>
     #   @return [Hash<String, String>]
     class CreateKxVolumeRequest < Struct.new(
+      nil,
       :client_token,
       :environment_id,
       :volume_type,
@@ -1240,6 +1263,7 @@ module Aws::Finspace
     #   <p>The timestamp at which the volume was created in FinSpace. The value is determined as epoch time in milliseconds. For example, the value for Monday, November 1, 2021 12:00:00 PM UTC is specified as 1635768000000.</p>
     #   @return [Time]
     class CreateKxVolumeResponse < Struct.new(
+      nil,
       :environment_id,
       :volume_name,
       :volume_type,
@@ -1264,6 +1288,7 @@ module Aws::Finspace
     #   <p>The IP address of the DNS server.</p>
     #   @return [String]
     class CustomDNSServer < Struct.new(
+      nil,
       :custom_dns_server_name,
       :custom_dns_server_ip,
       keyword_init: true
@@ -1275,6 +1300,7 @@ module Aws::Finspace
     #   <p>The identifier for the FinSpace environment.</p>
     #   @return [String]
     class DeleteEnvironmentRequest < Struct.new(
+      nil,
       :environment_id,
       keyword_init: true
     )
@@ -1282,6 +1308,7 @@ module Aws::Finspace
     end
 
     class DeleteEnvironmentResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1297,6 +1324,7 @@ module Aws::Finspace
     #   <p>A unique identifier for the node that you want to delete.</p>
     #   @return [String]
     class DeleteKxClusterNodeRequest < Struct.new(
+      nil,
       :environment_id,
       :cluster_name,
       :node_id,
@@ -1306,6 +1334,7 @@ module Aws::Finspace
     end
 
     class DeleteKxClusterNodeResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1321,6 +1350,7 @@ module Aws::Finspace
     #   <p>A token that ensures idempotency. This token expires in 10 minutes.</p>
     #   @return [String]
     class DeleteKxClusterRequest < Struct.new(
+      nil,
       :environment_id,
       :cluster_name,
       :client_token,
@@ -1330,6 +1360,7 @@ module Aws::Finspace
     end
 
     class DeleteKxClusterResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1345,6 +1376,7 @@ module Aws::Finspace
     #   <p>A token that ensures idempotency. This token expires in 10 minutes.</p>
     #   @return [String]
     class DeleteKxDatabaseRequest < Struct.new(
+      nil,
       :environment_id,
       :database_name,
       :client_token,
@@ -1354,6 +1386,7 @@ module Aws::Finspace
     end
 
     class DeleteKxDatabaseResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1372,6 +1405,7 @@ module Aws::Finspace
     #   <p>A token that ensures idempotency. This token expires in 10 minutes.</p>
     #   @return [String]
     class DeleteKxDataviewRequest < Struct.new(
+      nil,
       :environment_id,
       :database_name,
       :dataview_name,
@@ -1382,6 +1416,7 @@ module Aws::Finspace
     end
 
     class DeleteKxDataviewResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1394,6 +1429,7 @@ module Aws::Finspace
     #   <p>A token that ensures idempotency. This token expires in 10 minutes.</p>
     #   @return [String]
     class DeleteKxEnvironmentRequest < Struct.new(
+      nil,
       :environment_id,
       :client_token,
       keyword_init: true
@@ -1402,6 +1438,7 @@ module Aws::Finspace
     end
 
     class DeleteKxEnvironmentResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1417,6 +1454,7 @@ module Aws::Finspace
     #   <p>A token that ensures idempotency. This token expires in 10 minutes.</p>
     #   @return [String]
     class DeleteKxScalingGroupRequest < Struct.new(
+      nil,
       :environment_id,
       :scaling_group_name,
       :client_token,
@@ -1426,6 +1464,7 @@ module Aws::Finspace
     end
 
     class DeleteKxScalingGroupResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1441,6 +1480,7 @@ module Aws::Finspace
     #   <p>A token that ensures idempotency. This token expires in 10 minutes.</p>
     #   @return [String]
     class DeleteKxUserRequest < Struct.new(
+      nil,
       :user_name,
       :environment_id,
       :client_token,
@@ -1450,6 +1490,7 @@ module Aws::Finspace
     end
 
     class DeleteKxUserResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1467,6 +1508,7 @@ module Aws::Finspace
     #   <p>A token that ensures idempotency. This token expires in 10 minutes.</p>
     #   @return [String]
     class DeleteKxVolumeRequest < Struct.new(
+      nil,
       :environment_id,
       :volume_name,
       :client_token,
@@ -1476,6 +1518,7 @@ module Aws::Finspace
     end
 
     class DeleteKxVolumeResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1520,6 +1563,7 @@ module Aws::Finspace
     #   <p>Configuration information when authentication mode is FEDERATED.</p>
     #   @return [Types::FederationParameters]
     class Environment < Struct.new(
+      nil,
       :name,
       :environment_id,
       :aws_account_id,
@@ -1545,6 +1589,7 @@ module Aws::Finspace
     #   <p>Specifies the type of error.</p>
     #   @return [String]
     class ErrorInfo < Struct.new(
+      nil,
       :error_message,
       :error_type,
       keyword_init: true
@@ -1576,6 +1621,7 @@ module Aws::Finspace
     #            Please check your SAML 2.0 compliant identity provider (IdP) documentation for details.</p>
     #   @return [Hash<String, String>]
     class FederationParameters < Struct.new(
+      nil,
       :saml_metadata_document,
       :saml_metadata_url,
       :application_call_back_url,
@@ -1591,6 +1637,7 @@ module Aws::Finspace
     #   <p>The identifier of the FinSpace environment.</p>
     #   @return [String]
     class GetEnvironmentRequest < Struct.new(
+      nil,
       :environment_id,
       keyword_init: true
     )
@@ -1601,6 +1648,7 @@ module Aws::Finspace
     #   <p>The name of the FinSpace environment.</p>
     #   @return [Types::Environment]
     class GetEnvironmentResponse < Struct.new(
+      nil,
       :environment,
       keyword_init: true
     )
@@ -1617,6 +1665,7 @@ module Aws::Finspace
     #   <p>A unique identifier of the changeset for which you want to retrieve data.</p>
     #   @return [String]
     class GetKxChangesetRequest < Struct.new(
+      nil,
       :environment_id,
       :database_name,
       :changeset_id,
@@ -1669,6 +1718,7 @@ module Aws::Finspace
     #   <p>Provides details in the event of a failed flow, including the error type and the related error message.</p>
     #   @return [Types::ErrorInfo]
     class GetKxChangesetResponse < Struct.new(
+      nil,
       :changeset_id,
       :database_name,
       :environment_id,
@@ -1690,6 +1740,7 @@ module Aws::Finspace
     #   <p>The name of the cluster that you want to retrieve.</p>
     #   @return [String]
     class GetKxClusterRequest < Struct.new(
+      nil,
       :environment_id,
       :cluster_name,
       keyword_init: true
@@ -1832,6 +1883,7 @@ module Aws::Finspace
     #   <p>The structure that stores the capacity configuration details of a scaling group.</p>
     #   @return [Types::KxScalingGroupConfiguration]
     class GetKxClusterResponse < Struct.new(
+      nil,
       :status,
       :status_reason,
       :cluster_name,
@@ -1872,6 +1924,7 @@ module Aws::Finspace
     #   <p>A name of the kdb cluster.</p>
     #   @return [String]
     class GetKxConnectionStringRequest < Struct.new(
+      nil,
       :user_arn,
       :environment_id,
       :cluster_name,
@@ -1884,6 +1937,7 @@ module Aws::Finspace
     #   <p>The signed connection string that you can use to connect to clusters.</p>
     #   @return [String]
     class GetKxConnectionStringResponse < Struct.new(
+      nil,
       :signed_connection_string,
       keyword_init: true
     )
@@ -1897,6 +1951,7 @@ module Aws::Finspace
     #   <p>The name of the kdb database.</p>
     #   @return [String]
     class GetKxDatabaseRequest < Struct.new(
+      nil,
       :environment_id,
       :database_name,
       keyword_init: true
@@ -1935,6 +1990,7 @@ module Aws::Finspace
     #   <p>The total number of files in the database.</p>
     #   @return [Integer]
     class GetKxDatabaseResponse < Struct.new(
+      nil,
       :database_name,
       :database_arn,
       :environment_id,
@@ -1968,6 +2024,7 @@ module Aws::Finspace
     #   <p>A unique identifier for the dataview.</p>
     #   @return [String]
     class GetKxDataviewRequest < Struct.new(
+      nil,
       :environment_id,
       :database_name,
       :dataview_name,
@@ -2049,6 +2106,7 @@ module Aws::Finspace
     #   </p>
     #   @return [String]
     class GetKxDataviewResponse < Struct.new(
+      nil,
       :database_name,
       :dataview_name,
       :az_mode,
@@ -2079,6 +2137,7 @@ module Aws::Finspace
     #   <p>A unique identifier for the kdb environment.</p>
     #   @return [String]
     class GetKxEnvironmentRequest < Struct.new(
+      nil,
       :environment_id,
       keyword_init: true
     )
@@ -2138,6 +2197,7 @@ module Aws::Finspace
     #            kdb environment.</p>
     #   @return [String]
     class GetKxEnvironmentResponse < Struct.new(
+      nil,
       :name,
       :environment_id,
       :aws_account_id,
@@ -2167,6 +2227,7 @@ module Aws::Finspace
     #   <p>A unique identifier for the kdb scaling group. </p>
     #   @return [String]
     class GetKxScalingGroupRequest < Struct.new(
+      nil,
       :environment_id,
       :scaling_group_name,
       keyword_init: true
@@ -2281,6 +2342,7 @@ module Aws::Finspace
     #      The timestamp at which the scaling group was created in FinSpace. The value is determined as epoch time in milliseconds. For example, the value for Monday, November 1, 2021 12:00:00 PM UTC is specified as 1635768000000.</p>
     #   @return [Time]
     class GetKxScalingGroupResponse < Struct.new(
+      nil,
       :scaling_group_name,
       :scaling_group_arn,
       :host_type,
@@ -2302,6 +2364,7 @@ module Aws::Finspace
     #   <p>A unique identifier for the kdb environment.</p>
     #   @return [String]
     class GetKxUserRequest < Struct.new(
+      nil,
       :user_name,
       :environment_id,
       keyword_init: true
@@ -2324,6 +2387,7 @@ module Aws::Finspace
     #   <p>The IAM role ARN that is associated with the user.</p>
     #   @return [String]
     class GetKxUserResponse < Struct.new(
+      nil,
       :user_name,
       :user_arn,
       :environment_id,
@@ -2340,6 +2404,7 @@ module Aws::Finspace
     #   <p>A unique identifier for the volume.</p>
     #   @return [String]
     class GetKxVolumeRequest < Struct.new(
+      nil,
       :environment_id,
       :volume_name,
       keyword_init: true
@@ -2427,6 +2492,7 @@ module Aws::Finspace
     #   </p>
     #   @return [Array<Types::KxAttachedCluster>]
     class GetKxVolumeResponse < Struct.new(
+      nil,
       :environment_id,
       :volume_name,
       :volume_type,
@@ -2458,6 +2524,7 @@ module Aws::Finspace
     #         </p>
     #   @return [Integer]
     class IcmpTypeCode < Struct.new(
+      nil,
       :type,
       :code,
       keyword_init: true
@@ -2476,6 +2543,7 @@ module Aws::Finspace
     # @!attribute message
     #   @return [String]
     class InternalServerException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -2486,6 +2554,7 @@ module Aws::Finspace
     # @!attribute message
     #   @return [String]
     class InvalidRequestException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -2529,6 +2598,7 @@ module Aws::Finspace
     #            </ul>
     #   @return [String]
     class KxAttachedCluster < Struct.new(
+      nil,
       :cluster_name,
       :cluster_type,
       :cluster_status,
@@ -2557,6 +2627,7 @@ module Aws::Finspace
     #   <p>The size of cache in Gigabytes.</p>
     #   @return [Integer]
     class KxCacheStorageConfiguration < Struct.new(
+      nil,
       :type,
       :size,
       keyword_init: true
@@ -2598,6 +2669,7 @@ module Aws::Finspace
     #            </ul>
     #   @return [String]
     class KxChangesetListEntry < Struct.new(
+      nil,
       :changeset_id,
       :created_timestamp,
       :active_from_timestamp,
@@ -2711,6 +2783,7 @@ module Aws::Finspace
     #   <p>The timestamp at which the cluster was created in FinSpace. The value is determined as epoch time in milliseconds. For example, the value for Monday, November 1, 2021 12:00:00 PM UTC is specified as 1635768000000.</p>
     #   @return [Time]
     class KxCluster < Struct.new(
+      nil,
       :status,
       :status_reason,
       :cluster_name,
@@ -2751,6 +2824,7 @@ module Aws::Finspace
     #            </ul>
     #   @return [String]
     class KxClusterCodeDeploymentConfiguration < Struct.new(
+      nil,
       :deployment_strategy,
       keyword_init: true
     )
@@ -2765,6 +2839,7 @@ module Aws::Finspace
     #   <p>The value of the key.</p>
     #   @return [String]
     class KxCommandLineArgument < Struct.new(
+      nil,
       :key,
       :value,
       keyword_init: true
@@ -2791,6 +2866,7 @@ module Aws::Finspace
     #   </p>
     #   @return [String]
     class KxDatabaseCacheConfiguration < Struct.new(
+      nil,
       :cache_type,
       :db_paths,
       :dataview_name,
@@ -2822,6 +2898,7 @@ module Aws::Finspace
     #   </p>
     #   @return [Types::KxDataviewConfiguration]
     class KxDatabaseConfiguration < Struct.new(
+      nil,
       :database_name,
       :cache_configurations,
       :changeset_id,
@@ -2843,6 +2920,7 @@ module Aws::Finspace
     #   <p>The last time that the database was modified. The value is determined as epoch time in milliseconds. For example, the value for Monday, November 1, 2021 12:00:00 PM UTC is specified as 1635768000000.</p>
     #   @return [Time]
     class KxDatabaseListEntry < Struct.new(
+      nil,
       :database_name,
       :created_timestamp,
       :last_modified_timestamp,
@@ -2877,6 +2955,7 @@ module Aws::Finspace
     #   A unique identifier of the active version.</p>
     #   @return [String]
     class KxDataviewActiveVersion < Struct.new(
+      nil,
       :changeset_id,
       :segment_configurations,
       :attached_clusters,
@@ -2907,6 +2986,7 @@ module Aws::Finspace
     #   The db path and volume configuration for the segmented database.</p>
     #   @return [Array<Types::KxDataviewSegmentConfiguration>]
     class KxDataviewConfiguration < Struct.new(
+      nil,
       :dataview_name,
       :dataview_version_id,
       :changeset_id,
@@ -2983,6 +3063,7 @@ module Aws::Finspace
     #   </p>
     #   @return [String]
     class KxDataviewListEntry < Struct.new(
+      nil,
       :environment_id,
       :database_name,
       :dataview_name,
@@ -3026,6 +3107,7 @@ module Aws::Finspace
     #            default value is <b>False</b>. </p>
     #   @return [Boolean]
     class KxDataviewSegmentConfiguration < Struct.new(
+      nil,
       :db_paths,
       :volume_name,
       :on_demand,
@@ -3058,6 +3140,7 @@ module Aws::Finspace
     #            </ul>
     #   @return [String]
     class KxDeploymentConfiguration < Struct.new(
+      nil,
       :deployment_strategy,
       keyword_init: true
     )
@@ -3146,6 +3229,7 @@ module Aws::Finspace
     #   <p>The Amazon Resource Name (ARN) of the certificate authority:</p>
     #   @return [String]
     class KxEnvironment < Struct.new(
+      nil,
       :name,
       :environment_id,
       :aws_account_id,
@@ -3185,6 +3269,7 @@ module Aws::Finspace
     #      of 6000 GB.</p>
     #   @return [Integer]
     class KxNAS1Configuration < Struct.new(
+      nil,
       :type,
       :size,
       keyword_init: true
@@ -3217,6 +3302,7 @@ module Aws::Finspace
     #            </ul>
     #   @return [String]
     class KxNode < Struct.new(
+      nil,
       :node_id,
       :availability_zone_id,
       :launch_time,
@@ -3245,6 +3331,7 @@ module Aws::Finspace
     #   </p>
     #   @return [String]
     class KxSavedownStorageConfiguration < Struct.new(
+      nil,
       :type,
       :size,
       :volume_name,
@@ -3334,6 +3421,7 @@ module Aws::Finspace
     #   </p>
     #   @return [Time]
     class KxScalingGroup < Struct.new(
+      nil,
       :scaling_group_name,
       :host_type,
       :clusters,
@@ -3376,6 +3464,7 @@ module Aws::Finspace
     #   </p>
     #   @return [Float]
     class KxScalingGroupConfiguration < Struct.new(
+      nil,
       :scaling_group_name,
       :memory_limit,
       :memory_reservation,
@@ -3405,6 +3494,7 @@ module Aws::Finspace
     #   <p>The timestamp at which the kdb user was updated. </p>
     #   @return [Time]
     class KxUser < Struct.new(
+      nil,
       :user_arn,
       :user_name,
       :iam_role,
@@ -3480,6 +3570,7 @@ module Aws::Finspace
     #   <p>The last time that the volume was updated in FinSpace. The value is determined as epoch time in milliseconds. For example, the value for Monday, November 1, 2021 12:00:00 PM UTC is specified as 1635768000000.</p>
     #   @return [Time]
     class KxVolume < Struct.new(
+      nil,
       :volume_name,
       :volume_type,
       :status,
@@ -3498,6 +3589,7 @@ module Aws::Finspace
     # @!attribute message
     #   @return [String]
     class LimitExceededException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -3513,6 +3605,7 @@ module Aws::Finspace
     #   <p>The maximum number of results to return in this request.</p>
     #   @return [Integer]
     class ListEnvironmentsRequest < Struct.new(
+      nil,
       :next_token,
       :max_results,
       keyword_init: true
@@ -3528,6 +3621,7 @@ module Aws::Finspace
     #            results.</p>
     #   @return [String]
     class ListEnvironmentsResponse < Struct.new(
+      nil,
       :environments,
       :next_token,
       keyword_init: true
@@ -3548,6 +3642,7 @@ module Aws::Finspace
     #   <p>The maximum number of results to return in this request.</p>
     #   @return [Integer]
     class ListKxChangesetsRequest < Struct.new(
+      nil,
       :environment_id,
       :database_name,
       :next_token,
@@ -3564,6 +3659,7 @@ module Aws::Finspace
     #   <p>A token that indicates where a results page should begin.</p>
     #   @return [String]
     class ListKxChangesetsResponse < Struct.new(
+      nil,
       :kx_changesets,
       :next_token,
       keyword_init: true
@@ -3584,6 +3680,7 @@ module Aws::Finspace
     #   <p>The maximum number of results to return in this request.</p>
     #   @return [Integer]
     class ListKxClusterNodesRequest < Struct.new(
+      nil,
       :environment_id,
       :cluster_name,
       :next_token,
@@ -3600,6 +3697,7 @@ module Aws::Finspace
     #   <p>A token that indicates where a results page should begin.</p>
     #   @return [String]
     class ListKxClusterNodesResponse < Struct.new(
+      nil,
       :nodes,
       :next_token,
       keyword_init: true
@@ -3637,6 +3735,7 @@ module Aws::Finspace
     #   <p>A token that indicates where a results page should begin.</p>
     #   @return [String]
     class ListKxClustersRequest < Struct.new(
+      nil,
       :environment_id,
       :cluster_type,
       :max_results,
@@ -3653,6 +3752,7 @@ module Aws::Finspace
     #   <p>A token that indicates where a results page should begin.</p>
     #   @return [String]
     class ListKxClustersResponse < Struct.new(
+      nil,
       :kx_cluster_summaries,
       :next_token,
       keyword_init: true
@@ -3670,6 +3770,7 @@ module Aws::Finspace
     #   <p>The maximum number of results to return in this request.</p>
     #   @return [Integer]
     class ListKxDatabasesRequest < Struct.new(
+      nil,
       :environment_id,
       :next_token,
       :max_results,
@@ -3685,6 +3786,7 @@ module Aws::Finspace
     #   <p>A token that indicates where a results page should begin.</p>
     #   @return [String]
     class ListKxDatabasesResponse < Struct.new(
+      nil,
       :kx_databases,
       :next_token,
       keyword_init: true
@@ -3708,6 +3810,7 @@ module Aws::Finspace
     #   <p>The maximum number of results to return in this request.</p>
     #   @return [Integer]
     class ListKxDataviewsRequest < Struct.new(
+      nil,
       :environment_id,
       :database_name,
       :next_token,
@@ -3727,6 +3830,7 @@ module Aws::Finspace
     #   A token that indicates where a results page should begin. </p>
     #   @return [String]
     class ListKxDataviewsResponse < Struct.new(
+      nil,
       :kx_dataviews,
       :next_token,
       keyword_init: true
@@ -3741,6 +3845,7 @@ module Aws::Finspace
     #   <p>The maximum number of results to return in this request.</p>
     #   @return [Integer]
     class ListKxEnvironmentsRequest < Struct.new(
+      nil,
       :next_token,
       :max_results,
       keyword_init: true
@@ -3755,6 +3860,7 @@ module Aws::Finspace
     #   <p>A token that indicates where a results page should begin.</p>
     #   @return [String]
     class ListKxEnvironmentsResponse < Struct.new(
+      nil,
       :environments,
       :next_token,
       keyword_init: true
@@ -3773,6 +3879,7 @@ module Aws::Finspace
     #   A token that indicates where a results page should begin. </p>
     #   @return [String]
     class ListKxScalingGroupsRequest < Struct.new(
+      nil,
       :environment_id,
       :max_results,
       :next_token,
@@ -3790,6 +3897,7 @@ module Aws::Finspace
     #   A token that indicates where a results page should begin. </p>
     #   @return [String]
     class ListKxScalingGroupsResponse < Struct.new(
+      nil,
       :scaling_groups,
       :next_token,
       keyword_init: true
@@ -3807,6 +3915,7 @@ module Aws::Finspace
     #   <p>The maximum number of results to return in this request.</p>
     #   @return [Integer]
     class ListKxUsersRequest < Struct.new(
+      nil,
       :environment_id,
       :next_token,
       :max_results,
@@ -3822,6 +3931,7 @@ module Aws::Finspace
     #   <p>A token that indicates where a results page should begin.</p>
     #   @return [String]
     class ListKxUsersResponse < Struct.new(
+      nil,
       :users,
       :next_token,
       keyword_init: true
@@ -3844,6 +3954,7 @@ module Aws::Finspace
     #      </p>
     #   @return [String]
     class ListKxVolumesRequest < Struct.new(
+      nil,
       :environment_id,
       :max_results,
       :next_token,
@@ -3862,6 +3973,7 @@ module Aws::Finspace
     #   <p>A token that indicates where a results page should begin.</p>
     #   @return [String]
     class ListKxVolumesResponse < Struct.new(
+      nil,
       :kx_volume_summaries,
       :next_token,
       keyword_init: true
@@ -3873,6 +3985,7 @@ module Aws::Finspace
     #   <p>The Amazon Resource Name of the resource.</p>
     #   @return [String]
     class ListTagsForResourceRequest < Struct.new(
+      nil,
       :resource_arn,
       keyword_init: true
     )
@@ -3883,6 +3996,7 @@ module Aws::Finspace
     #   <p>A list of all tags for a resource.</p>
     #   @return [Hash<String, String>]
     class ListTagsForResourceResponse < Struct.new(
+      nil,
       :tags,
       keyword_init: true
     )
@@ -3924,6 +4038,7 @@ module Aws::Finspace
     #         </p>
     #   @return [String]
     class NetworkACLEntry < Struct.new(
+      nil,
       :rule_number,
       :protocol,
       :rule_action,
@@ -3949,6 +4064,7 @@ module Aws::Finspace
     #         </p>
     #   @return [Integer]
     class PortRange < Struct.new(
+      nil,
       :from,
       :to,
       keyword_init: true
@@ -3966,6 +4082,7 @@ module Aws::Finspace
     # @!attribute message
     #   @return [String]
     class ResourceAlreadyExistsException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -3976,6 +4093,7 @@ module Aws::Finspace
     # @!attribute message
     #   @return [String]
     class ResourceNotFoundException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -3987,6 +4105,7 @@ module Aws::Finspace
     # @!attribute message
     #   @return [String]
     class ServiceQuotaExceededException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -4004,6 +4123,7 @@ module Aws::Finspace
     #   <p>The last name of the superuser.</p>
     #   @return [String]
     class SuperuserParameters < Struct.new(
+      nil,
       :email_address,
       :first_name,
       :last_name,
@@ -4019,6 +4139,7 @@ module Aws::Finspace
     #   <p>One or more tags to be assigned to the resource.</p>
     #   @return [Hash<String, String>]
     class TagResourceRequest < Struct.new(
+      nil,
       :resource_arn,
       :tags,
       keyword_init: true
@@ -4027,6 +4148,7 @@ module Aws::Finspace
     end
 
     class TagResourceResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -4036,6 +4158,7 @@ module Aws::Finspace
     # @!attribute message
     #   @return [String]
     class ThrottlingException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -4052,6 +4175,7 @@ module Aws::Finspace
     #   </p>
     #   @return [Array<String>]
     class TickerplantLogConfiguration < Struct.new(
+      nil,
       :tickerplant_log_volumes,
       keyword_init: true
     )
@@ -4072,6 +4196,7 @@ module Aws::Finspace
     #         </p>
     #   @return [Array<Types::NetworkACLEntry>]
     class TransitGatewayConfiguration < Struct.new(
+      nil,
       :transit_gateway_id,
       :routable_cidr_space,
       :attachment_network_acl_configuration,
@@ -4088,6 +4213,7 @@ module Aws::Finspace
     #   <p>The tag keys (names) of one or more tags to be removed.</p>
     #   @return [Array<String>]
     class UntagResourceRequest < Struct.new(
+      nil,
       :resource_arn,
       :tag_keys,
       keyword_init: true
@@ -4096,6 +4222,7 @@ module Aws::Finspace
     end
 
     class UntagResourceResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -4127,6 +4254,7 @@ module Aws::Finspace
     #   <p>Configuration information when authentication mode is FEDERATED.</p>
     #   @return [Types::FederationParameters]
     class UpdateEnvironmentRequest < Struct.new(
+      nil,
       :environment_id,
       :name,
       :description,
@@ -4141,6 +4269,7 @@ module Aws::Finspace
     #   <p>Returns the FinSpace environment object.</p>
     #   @return [Types::Environment]
     class UpdateEnvironmentResponse < Struct.new(
+      nil,
       :environment,
       keyword_init: true
     )
@@ -4178,6 +4307,7 @@ module Aws::Finspace
     #         </p>
     #   @return [Types::KxClusterCodeDeploymentConfiguration]
     class UpdateKxClusterCodeConfigurationRequest < Struct.new(
+      nil,
       :environment_id,
       :cluster_name,
       :client_token,
@@ -4191,6 +4321,7 @@ module Aws::Finspace
     end
 
     class UpdateKxClusterCodeConfigurationResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -4214,6 +4345,7 @@ module Aws::Finspace
     #         </p>
     #   @return [Types::KxDeploymentConfiguration]
     class UpdateKxClusterDatabasesRequest < Struct.new(
+      nil,
       :environment_id,
       :cluster_name,
       :client_token,
@@ -4225,6 +4357,7 @@ module Aws::Finspace
     end
 
     class UpdateKxClusterDatabasesResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -4243,6 +4376,7 @@ module Aws::Finspace
     #   <p>A token that ensures idempotency. This token expires in 10 minutes.</p>
     #   @return [String]
     class UpdateKxDatabaseRequest < Struct.new(
+      nil,
       :environment_id,
       :database_name,
       :description,
@@ -4265,6 +4399,7 @@ module Aws::Finspace
     #   <p>The last time that the database was modified. The value is determined as epoch time in milliseconds. For example, the value for Monday, November 1, 2021 12:00:00 PM UTC is specified as 1635768000000.</p>
     #   @return [Time]
     class UpdateKxDatabaseResponse < Struct.new(
+      nil,
       :database_name,
       :environment_id,
       :description,
@@ -4300,6 +4435,7 @@ module Aws::Finspace
     #   <p>A token that ensures idempotency. This token expires in 10 minutes.</p>
     #   @return [String]
     class UpdateKxDataviewRequest < Struct.new(
+      nil,
       :environment_id,
       :database_name,
       :dataview_name,
@@ -4385,6 +4521,7 @@ module Aws::Finspace
     #   </p>
     #   @return [Time]
     class UpdateKxDataviewResponse < Struct.new(
+      nil,
       :environment_id,
       :database_name,
       :dataview_name,
@@ -4423,6 +4560,7 @@ module Aws::Finspace
     #   <p>A token that ensures idempotency. This token expires in 10 minutes.</p>
     #   @return [String]
     class UpdateKxEnvironmentNetworkRequest < Struct.new(
+      nil,
       :environment_id,
       :transit_gateway_configuration,
       :custom_dns_configuration,
@@ -4481,6 +4619,7 @@ module Aws::Finspace
     #   <p>The identifier of the availability zones where subnets for the environment are created.</p>
     #   @return [Array<String>]
     class UpdateKxEnvironmentNetworkResponse < Struct.new(
+      nil,
       :name,
       :environment_id,
       :aws_account_id,
@@ -4515,6 +4654,7 @@ module Aws::Finspace
     #   <p>A token that ensures idempotency. This token expires in 10 minutes.</p>
     #   @return [String]
     class UpdateKxEnvironmentRequest < Struct.new(
+      nil,
       :environment_id,
       :name,
       :description,
@@ -4573,6 +4713,7 @@ module Aws::Finspace
     #   <p>The identifier of the availability zones where subnets for the environment are created.</p>
     #   @return [Array<String>]
     class UpdateKxEnvironmentResponse < Struct.new(
+      nil,
       :name,
       :environment_id,
       :aws_account_id,
@@ -4607,6 +4748,7 @@ module Aws::Finspace
     #   <p>A token that ensures idempotency. This token expires in 10 minutes.</p>
     #   @return [String]
     class UpdateKxUserRequest < Struct.new(
+      nil,
       :environment_id,
       :user_name,
       :iam_role,
@@ -4631,6 +4773,7 @@ module Aws::Finspace
     #   <p>The IAM role ARN that is associated with the user.</p>
     #   @return [String]
     class UpdateKxUserResponse < Struct.new(
+      nil,
       :user_name,
       :user_arn,
       :environment_id,
@@ -4659,6 +4802,7 @@ module Aws::Finspace
     #   <p> Specifies the configuration for the Network attached storage (NAS_1) file system volume.</p>
     #   @return [Types::KxNAS1Configuration]
     class UpdateKxVolumeRequest < Struct.new(
+      nil,
       :environment_id,
       :volume_name,
       :description,
@@ -4747,6 +4891,7 @@ module Aws::Finspace
     #   </p>
     #   @return [Array<Types::KxAttachedCluster>]
     class UpdateKxVolumeResponse < Struct.new(
+      nil,
       :environment_id,
       :volume_name,
       :volume_type,
@@ -4769,6 +4914,7 @@ module Aws::Finspace
     # @!attribute message
     #   @return [String]
     class ValidationException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -4786,6 +4932,7 @@ module Aws::Finspace
     #      </p>
     #   @return [String]
     class Volume < Struct.new(
+      nil,
       :volume_name,
       :volume_type,
       keyword_init: true
@@ -4812,6 +4959,7 @@ module Aws::Finspace
     #            </ul>
     #   @return [String]
     class VpcConfiguration < Struct.new(
+      nil,
       :vpc_id,
       :security_group_ids,
       :subnet_ids,

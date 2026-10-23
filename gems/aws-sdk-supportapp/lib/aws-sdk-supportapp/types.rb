@@ -10,6 +10,7 @@ module Aws::SupportApp
     # @!attribute message
     #   @return [String]
     class AccessDeniedException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -46,6 +47,7 @@ module Aws::SupportApp
     # @!attribute message
     #   @return [String]
     class ConflictException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -122,6 +124,7 @@ module Aws::SupportApp
     #   the Amazon Web Services Support App</a> in the <i>Amazon Web Services Support User Guide</i>.</p>
     #   @return [String]
     class CreateSlackChannelConfigurationInput < Struct.new(
+      nil,
       :team_id,
       :channel_id,
       :channel_name,
@@ -136,18 +139,21 @@ module Aws::SupportApp
     end
 
     class CreateSlackChannelConfigurationOutput < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
     end
 
     class DeleteAccountAliasInput < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
     end
 
     class DeleteAccountAliasOutput < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -161,6 +167,7 @@ module Aws::SupportApp
     #   <p>The channel ID in Slack. This ID identifies a channel within a Slack workspace.</p>
     #   @return [String]
     class DeleteSlackChannelConfigurationInput < Struct.new(
+      nil,
       :team_id,
       :channel_id,
       keyword_init: true
@@ -169,6 +176,7 @@ module Aws::SupportApp
     end
 
     class DeleteSlackChannelConfigurationOutput < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -179,6 +187,7 @@ module Aws::SupportApp
     #   <code>T012ABCDEFG</code>.</p>
     #   @return [String]
     class DeleteSlackWorkspaceConfigurationInput < Struct.new(
+      nil,
       :team_id,
       keyword_init: true
     )
@@ -186,12 +195,14 @@ module Aws::SupportApp
     end
 
     class DeleteSlackWorkspaceConfigurationOutput < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
     end
 
     class GetAccountAliasInput < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -201,6 +212,7 @@ module Aws::SupportApp
     #   <p>An alias or short name for an Amazon Web Services account.</p>
     #   @return [String]
     class GetAccountAliasOutput < Struct.new(
+      nil,
       :account_alias,
       keyword_init: true
     )
@@ -211,6 +223,7 @@ module Aws::SupportApp
     # @!attribute message
     #   @return [String]
     class InternalServerException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -223,6 +236,7 @@ module Aws::SupportApp
     #   When the API returns the last set of results, the response doesn't include a pagination token value.</p>
     #   @return [String]
     class ListSlackChannelConfigurationsInput < Struct.new(
+      nil,
       :next_token,
       keyword_init: true
     )
@@ -237,6 +251,7 @@ module Aws::SupportApp
     #   <p>The configurations for a Slack channel.</p>
     #   @return [Array<Types::SlackChannelConfiguration>]
     class ListSlackChannelConfigurationsOutput < Struct.new(
+      nil,
       :next_token,
       :slack_channel_configurations,
       keyword_init: true
@@ -250,6 +265,7 @@ module Aws::SupportApp
     #   When the API returns the last set of results, the response doesn't include a pagination token value.</p>
     #   @return [String]
     class ListSlackWorkspaceConfigurationsInput < Struct.new(
+      nil,
       :next_token,
       keyword_init: true
     )
@@ -264,6 +280,7 @@ module Aws::SupportApp
     #   <p>The configurations for a Slack workspace.</p>
     #   @return [Array<Types::SlackWorkspaceConfiguration>]
     class ListSlackWorkspaceConfigurationsOutput < Struct.new(
+      nil,
       :next_token,
       :slack_workspace_configurations,
       keyword_init: true
@@ -275,6 +292,7 @@ module Aws::SupportApp
     #   <p>An alias or short name for an Amazon Web Services account.</p>
     #   @return [String]
     class PutAccountAliasInput < Struct.new(
+      nil,
       :account_alias,
       keyword_init: true
     )
@@ -282,6 +300,7 @@ module Aws::SupportApp
     end
 
     class PutAccountAliasOutput < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -292,6 +311,7 @@ module Aws::SupportApp
     #   <code>T012ABCDEFG</code>. Specify the Slack workspace that you want to use for your organization.</p>
     #   @return [String]
     class RegisterSlackWorkspaceForOrganizationInput < Struct.new(
+      nil,
       :team_id,
       keyword_init: true
     )
@@ -310,6 +330,7 @@ module Aws::SupportApp
     #         in Organizations.</p>
     #   @return [String]
     class RegisterSlackWorkspaceForOrganizationOutput < Struct.new(
+      nil,
       :team_id,
       :team_name,
       :account_type,
@@ -323,6 +344,7 @@ module Aws::SupportApp
     # @!attribute message
     #   @return [String]
     class ResourceNotFoundException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -335,6 +357,7 @@ module Aws::SupportApp
     # @!attribute message
     #   @return [String]
     class ServiceQuotaExceededException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -371,6 +394,7 @@ module Aws::SupportApp
     #   the Amazon Web Services Support App</a> in the <i>Amazon Web Services Support User Guide</i>.</p>
     #   @return [String]
     class SlackChannelConfiguration < Struct.new(
+      nil,
       :team_id,
       :channel_id,
       :channel_name,
@@ -397,6 +421,7 @@ module Aws::SupportApp
     #         part of an organization in Organizations.</p>
     #   @return [Boolean]
     class SlackWorkspaceConfiguration < Struct.new(
+      nil,
       :team_id,
       :team_name,
       :allow_organization_member_account,
@@ -475,6 +500,7 @@ module Aws::SupportApp
     #   the Amazon Web Services Support App</a> in the <i>Amazon Web Services Support User Guide</i>.</p>
     #   @return [String]
     class UpdateSlackChannelConfigurationInput < Struct.new(
+      nil,
       :team_id,
       :channel_id,
       :channel_name,
@@ -516,6 +542,7 @@ module Aws::SupportApp
     #   the Amazon Web Services Support App</a> in the <i>Amazon Web Services Support User Guide</i>.</p>
     #   @return [String]
     class UpdateSlackChannelConfigurationOutput < Struct.new(
+      nil,
       :team_id,
       :channel_id,
       :channel_name,
@@ -533,6 +560,7 @@ module Aws::SupportApp
     # @!attribute message
     #   @return [String]
     class ValidationException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )

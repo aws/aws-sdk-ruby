@@ -10,6 +10,7 @@ module Aws::MediaStoreData
     # @!attribute message
     #   @return [String]
     class ContainerNotFoundException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -21,6 +22,7 @@ module Aws::MediaStoreData
     #            Format: <folder name>/<folder name>/<file name></p>
     #   @return [String]
     class DeleteObjectRequest < Struct.new(
+      nil,
       :path,
       keyword_init: true
     )
@@ -28,6 +30,7 @@ module Aws::MediaStoreData
     end
 
     class DeleteObjectResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -38,6 +41,7 @@ module Aws::MediaStoreData
     #            Format: <folder name>/<folder name>/<file name></p>
     #   @return [String]
     class DescribeObjectRequest < Struct.new(
+      nil,
       :path,
       keyword_init: true
     )
@@ -62,6 +66,7 @@ module Aws::MediaStoreData
     #   <p>The date and time that the object was last modified.</p>
     #   @return [Time]
     class DescribeObjectResponse < Struct.new(
+      nil,
       :e_tag,
       :content_type,
       :content_length,
@@ -97,6 +102,7 @@ module Aws::MediaStoreData
     #             <code>Range</code> header, see <a href="http://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.35">http://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.35</a>. AWS Elemental MediaStore ignores this header for partially uploaded objects that have streaming upload availability.</p>
     #   @return [String]
     class GetObjectRequest < Struct.new(
+      nil,
       :path,
       :range,
       keyword_init: true
@@ -132,6 +138,7 @@ module Aws::MediaStoreData
     #            success. All other status codes indicate the type of error that occurred.</p>
     #   @return [Integer]
     class GetObjectResponse < Struct.new(
+      nil,
       :body,
       :cache_control,
       :content_range,
@@ -155,6 +162,7 @@ module Aws::MediaStoreData
     # @!attribute message
     #   @return [String]
     class InternalServerError < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -181,6 +189,7 @@ module Aws::MediaStoreData
     #   <p>The length of the item in bytes.</p>
     #   @return [Integer]
     class Item < Struct.new(
+      nil,
       :name,
       :type,
       :e_tag,
@@ -215,6 +224,7 @@ module Aws::MediaStoreData
     #            <p>Tokens expire after 15 minutes.</p>
     #   @return [String]
     class ListItemsRequest < Struct.new(
+      nil,
       :path,
       :max_results,
       :next_token,
@@ -234,6 +244,7 @@ module Aws::MediaStoreData
     #            results.</p>
     #   @return [String]
     class ListItemsResponse < Struct.new(
+      nil,
       :items,
       :next_token,
       keyword_init: true
@@ -245,6 +256,7 @@ module Aws::MediaStoreData
     # @!attribute message
     #   @return [String]
     class ObjectNotFoundException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -294,6 +306,7 @@ module Aws::MediaStoreData
     #           <p>To use this header, you must also set the HTTP <code>Transfer-Encoding</code> header to <code>chunked</code>.</p>
     #   @return [String]
     class PutObjectRequest < Struct.new(
+      nil,
       :body,
       :path,
       :content_type,
@@ -316,6 +329,7 @@ module Aws::MediaStoreData
     #            “Temporal”.</p>
     #   @return [String]
     class PutObjectResponse < Struct.new(
+      nil,
       :content_sha256,
       :e_tag,
       :storage_class,
@@ -328,6 +342,7 @@ module Aws::MediaStoreData
     # @!attribute message
     #   @return [String]
     class RequestedRangeNotSatisfiableException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )

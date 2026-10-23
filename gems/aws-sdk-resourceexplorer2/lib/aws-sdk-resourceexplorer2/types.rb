@@ -11,6 +11,7 @@ module Aws::ResourceExplorer2
     # @!attribute message
     #   @return [String]
     class AccessDeniedException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -23,6 +24,7 @@ module Aws::ResourceExplorer2
     #               the called Region.</p>
     #   @return [String]
     class AssociateDefaultViewOperationInput < Struct.new(
+      nil,
       :view_arn,
       keyword_init: true
     )
@@ -34,6 +36,7 @@ module Aws::ResourceExplorer2
     #               in the Amazon Web Services Region and Amazon Web Services account in which you called this operation.</p>
     #   @return [String]
     class AssociateDefaultViewOperationOutput < Struct.new(
+      nil,
       :view_arn,
       keyword_init: true
     )
@@ -49,6 +52,7 @@ module Aws::ResourceExplorer2
     #   <p>The description of the error for the specified view.</p>
     #   @return [String]
     class BatchGetViewError < Struct.new(
+      nil,
       :view_arn,
       :error_message,
       keyword_init: true
@@ -60,6 +64,7 @@ module Aws::ResourceExplorer2
     #   <p>A list of <a href="https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html">Amazon resource names (ARNs)</a> that identify the views you want details for.</p>
     #   @return [Array<String>]
     class BatchGetViewOperationInput < Struct.new(
+      nil,
       :view_arns,
       keyword_init: true
     )
@@ -75,6 +80,7 @@ module Aws::ResourceExplorer2
     #               error.</p>
     #   @return [Array<Types::BatchGetViewError>]
     class BatchGetViewOperationOutput < Struct.new(
+      nil,
       :views,
       :errors,
       keyword_init: true
@@ -92,6 +98,7 @@ module Aws::ResourceExplorer2
     # @!attribute message
     #   @return [String]
     class ConflictException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -108,6 +115,7 @@ module Aws::ResourceExplorer2
     #               tags aren't attached to any of the resources listed in the index.</p>
     #   @return [Hash<String, String>]
     class CreateIndexOperationInput < Struct.new(
+      nil,
       :client_token,
       :tags,
       keyword_init: true
@@ -134,6 +142,7 @@ module Aws::ResourceExplorer2
     #   <p>The date and timestamp when the index was created.</p>
     #   @return [Time]
     class CreateIndexOperationOutput < Struct.new(
+      nil,
       :arn,
       :state,
       :created_at,
@@ -181,6 +190,7 @@ module Aws::ResourceExplorer2
     #   <p>Tag key and value pairs that are attached to the view.</p>
     #   @return [Hash<String, String>]
     class CreateViewOperationInput < Struct.new(
+      nil,
       :client_token,
       :view_name,
       :included_properties,
@@ -196,6 +206,7 @@ module Aws::ResourceExplorer2
     #   <p>A structure that contains the details about the new view.</p>
     #   @return [Types::View]
     class CreateViewOperationOutput < Struct.new(
+      nil,
       :view,
       keyword_init: true
     )
@@ -206,6 +217,7 @@ module Aws::ResourceExplorer2
     #   <p>The <a href="https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html">Amazon resource name (ARN)</a> of the index that you want to delete.</p>
     #   @return [String]
     class DeleteIndexOperationInput < Struct.new(
+      nil,
       :arn,
       keyword_init: true
     )
@@ -226,6 +238,7 @@ module Aws::ResourceExplorer2
     #   <p>The date and time when you last updated this index.</p>
     #   @return [Time]
     class DeleteIndexOperationOutput < Struct.new(
+      nil,
       :arn,
       :state,
       :last_updated_at,
@@ -238,6 +251,7 @@ module Aws::ResourceExplorer2
     #   <p>The <a href="https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html">Amazon resource name (ARN)</a> of the view that you want to delete.</p>
     #   @return [String]
     class DeleteViewOperationInput < Struct.new(
+      nil,
       :view_arn,
       keyword_init: true
     )
@@ -248,6 +262,7 @@ module Aws::ResourceExplorer2
     #   <p>The <a href="https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html">Amazon resource name (ARN)</a> of the view that you successfully deleted.</p>
     #   @return [String]
     class DeleteViewOperationOutput < Struct.new(
+      nil,
       :view_arn,
       keyword_init: true
     )
@@ -259,6 +274,7 @@ module Aws::ResourceExplorer2
     #                   <code>DISABLED</code>.</p>
     #   @return [Types::OrgConfiguration]
     class GetAccountLevelServiceConfigurationOutput < Struct.new(
+      nil,
       :org_configuration,
       keyword_init: true
     )
@@ -270,6 +286,7 @@ module Aws::ResourceExplorer2
     #               which you called this operation.</p>
     #   @return [String]
     class GetDefaultViewOperationOutput < Struct.new(
+      nil,
       :view_arn,
       keyword_init: true
     )
@@ -309,6 +326,7 @@ module Aws::ResourceExplorer2
     #   <p>Tag key and value pairs that are attached to the index.</p>
     #   @return [Hash<String, String>]
     class GetIndexOperationOutput < Struct.new(
+      nil,
       :arn,
       :type,
       :state,
@@ -326,6 +344,7 @@ module Aws::ResourceExplorer2
     #   <p>The Amazon resource name (ARN) of the managed view.</p>
     #   @return [String]
     class GetManagedViewInput < Struct.new(
+      nil,
       :managed_view_arn,
       keyword_init: true
     )
@@ -336,6 +355,7 @@ module Aws::ResourceExplorer2
     #   <p>Details about the specified managed view. </p>
     #   @return [Types::ManagedView]
     class GetManagedViewOutput < Struct.new(
+      nil,
       :managed_view,
       keyword_init: true
     )
@@ -346,6 +366,7 @@ module Aws::ResourceExplorer2
     #   <p>The <a href="https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html">Amazon resource name (ARN)</a> of the view that you want information about.</p>
     #   @return [String]
     class GetViewOperationInput < Struct.new(
+      nil,
       :view_arn,
       keyword_init: true
     )
@@ -359,6 +380,7 @@ module Aws::ResourceExplorer2
     #   <p>Tag key and value pairs that are attached to the view.</p>
     #   @return [Hash<String, String>]
     class GetViewOperationOutput < Struct.new(
+      nil,
       :view,
       :tags,
       keyword_init: true
@@ -381,6 +403,7 @@ module Aws::ResourceExplorer2
     #            </ul>
     #   @return [String]
     class IncludedProperty < Struct.new(
+      nil,
       :name,
       keyword_init: true
     )
@@ -420,6 +443,7 @@ module Aws::ResourceExplorer2
     #            </ul>
     #   @return [String]
     class Index < Struct.new(
+      nil,
       :region,
       :arn,
       :type,
@@ -433,6 +457,7 @@ module Aws::ResourceExplorer2
     # @!attribute message
     #   @return [String]
     class InternalServerException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -464,6 +489,7 @@ module Aws::ResourceExplorer2
     #       from. The pagination tokens expire after 24 hours.</p>
     #   @return [String]
     class ListIndexesForMembersInput < Struct.new(
+      nil,
       :account_id_list,
       :max_results,
       :next_token,
@@ -484,6 +510,7 @@ module Aws::ResourceExplorer2
     #       The pagination tokens expire after 24 hours.</p>
     #   @return [String]
     class ListIndexesForMembersOutput < Struct.new(
+      nil,
       :indexes,
       :next_token,
       keyword_init: true
@@ -521,6 +548,7 @@ module Aws::ResourceExplorer2
     #       from. The pagination tokens expire after 24 hours.</p>
     #   @return [String]
     class ListIndexesOperationInput < Struct.new(
+      nil,
       :type,
       :regions,
       :max_results,
@@ -541,6 +569,7 @@ module Aws::ResourceExplorer2
     #       The pagination tokens expire after 24 hours.</p>
     #   @return [String]
     class ListIndexesOperationOutput < Struct.new(
+      nil,
       :indexes,
       :next_token,
       keyword_init: true
@@ -573,6 +602,7 @@ module Aws::ResourceExplorer2
     #               operation only returns the managed views that are managed by the input service. </p>
     #   @return [String]
     class ListManagedViewsInput < Struct.new(
+      nil,
       :max_results,
       :next_token,
       :service_principal,
@@ -592,6 +622,7 @@ module Aws::ResourceExplorer2
     #   <p>The list of managed views available in the Amazon Web Services Region in which you called this operation. </p>
     #   @return [Array<String>]
     class ListManagedViewsOutput < Struct.new(
+      nil,
       :next_token,
       :managed_views,
       keyword_init: true
@@ -647,6 +678,7 @@ module Aws::ResourceExplorer2
     #            </note>
     #   @return [String]
     class ListResourcesInput < Struct.new(
+      nil,
       :filters,
       :max_results,
       :view_arn,
@@ -670,6 +702,7 @@ module Aws::ResourceExplorer2
     #   <p>The Amazon resource name (ARN) of the view that this operation used to perform the search. </p>
     #   @return [String]
     class ListResourcesOutput < Struct.new(
+      nil,
       :resources,
       :next_token,
       :view_arn,
@@ -699,6 +732,7 @@ module Aws::ResourceExplorer2
     #            </note>
     #   @return [Integer]
     class ListSupportedResourceTypesOperationInput < Struct.new(
+      nil,
       :next_token,
       :max_results,
       keyword_init: true
@@ -717,6 +751,7 @@ module Aws::ResourceExplorer2
     #       The pagination tokens expire after 24 hours.</p>
     #   @return [String]
     class ListSupportedResourceTypesOperationOutput < Struct.new(
+      nil,
       :resource_types,
       :next_token,
       keyword_init: true
@@ -728,6 +763,7 @@ module Aws::ResourceExplorer2
     #   <p>The <a href="https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html">Amazon resource name (ARN)</a> of the view or index that you want to attach tags to.</p>
     #   @return [String]
     class ListTagsForResourceOperationInput < Struct.new(
+      nil,
       :resource_arn,
       keyword_init: true
     )
@@ -739,6 +775,7 @@ module Aws::ResourceExplorer2
     #               index.</p>
     #   @return [Hash<String, String>]
     class ListTagsForResourceOperationOutput < Struct.new(
+      nil,
       :tags,
       keyword_init: true
     )
@@ -766,6 +803,7 @@ module Aws::ResourceExplorer2
     #            </note>
     #   @return [Integer]
     class ListViewsOperationInput < Struct.new(
+      nil,
       :next_token,
       :max_results,
       keyword_init: true
@@ -785,6 +823,7 @@ module Aws::ResourceExplorer2
     #       The pagination tokens expire after 24 hours.</p>
     #   @return [String]
     class ListViewsOperationOutput < Struct.new(
+      nil,
       :views,
       :next_token,
       keyword_init: true
@@ -829,6 +868,7 @@ module Aws::ResourceExplorer2
     #   <p>The version of the managed view. </p>
     #   @return [String]
     class ManagedView < Struct.new(
+      nil,
       :managed_view_arn,
       :managed_view_name,
       :trusted_service,
@@ -874,6 +914,7 @@ module Aws::ResourceExplorer2
     #            </ul>
     #   @return [String]
     class MemberIndex < Struct.new(
+      nil,
       :account_id,
       :region,
       :arn,
@@ -892,6 +933,7 @@ module Aws::ResourceExplorer2
     #   <p>This value shows whether or not you have a valid a service-linked role required to start the multi-account search feature.</p>
     #   @return [String]
     class OrgConfiguration < Struct.new(
+      nil,
       :aws_service_access_status,
       :service_linked_role,
       keyword_init: true
@@ -926,6 +968,7 @@ module Aws::ResourceExplorer2
     #               can be added by turning on integration between Resource Explorer and other Amazon Web Services services.</p>
     #   @return [Array<Types::ResourceProperty>]
     class Resource < Struct.new(
+      nil,
       :arn,
       :owning_account_id,
       :region,
@@ -964,6 +1007,7 @@ module Aws::ResourceExplorer2
     #            </ul>
     #   @return [Boolean]
     class ResourceCount < Struct.new(
+      nil,
       :total_resources,
       :complete,
       keyword_init: true
@@ -976,6 +1020,7 @@ module Aws::ResourceExplorer2
     # @!attribute message
     #   @return [String]
     class ResourceNotFoundException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -995,6 +1040,7 @@ module Aws::ResourceExplorer2
     #               based on the resource type.</p>
     #   @return [JSON]
     class ResourceProperty < Struct.new(
+      nil,
       :name,
       :last_reported_at,
       :data,
@@ -1013,6 +1059,7 @@ module Aws::ResourceExplorer2
     #                   query syntax</a>.</p>
     #   @return [String]
     class SearchFilter < Struct.new(
+      nil,
       :filter_string,
       keyword_init: true
     )
@@ -1060,6 +1107,7 @@ module Aws::ResourceExplorer2
     #       from. The pagination tokens expire after 24 hours.</p>
     #   @return [String]
     class SearchOperationInput < Struct.new(
+      nil,
       :query_string,
       :max_results,
       :view_arn,
@@ -1086,6 +1134,7 @@ module Aws::ResourceExplorer2
     #   <p>The number of resources that match the query.</p>
     #   @return [Types::ResourceCount]
     class SearchOperationOutput < Struct.new(
+      nil,
       :resources,
       :next_token,
       :view_arn,
@@ -1105,6 +1154,7 @@ module Aws::ResourceExplorer2
     #   <p>The current value for the quota that the request tried to exceed.</p>
     #   @return [String]
     class ServiceQuotaExceededException < Struct.new(
+      nil,
       :message,
       :name,
       :value,
@@ -1122,6 +1172,7 @@ module Aws::ResourceExplorer2
     #   <p>The unique identifier of the resource type.</p>
     #   @return [String]
     class SupportedResourceType < Struct.new(
+      nil,
       :service,
       :resource_type,
       keyword_init: true
@@ -1138,6 +1189,7 @@ module Aws::ResourceExplorer2
     #               index.</p>
     #   @return [Hash<String, String>]
     class TagResourceOperationInput < Struct.new(
+      nil,
       :resource_arn,
       :tags,
       keyword_init: true
@@ -1146,6 +1198,7 @@ module Aws::ResourceExplorer2
     end
 
     class TagResourceOperationOutput < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1157,6 +1210,7 @@ module Aws::ResourceExplorer2
     # @!attribute message
     #   @return [String]
     class ThrottlingException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -1167,6 +1221,7 @@ module Aws::ResourceExplorer2
     # @!attribute message
     #   @return [String]
     class UnauthorizedException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -1182,6 +1237,7 @@ module Aws::ResourceExplorer2
     #               index.</p>
     #   @return [Array<String>]
     class UntagResourceOperationInput < Struct.new(
+      nil,
       :resource_arn,
       :tag_keys,
       keyword_init: true
@@ -1190,6 +1246,7 @@ module Aws::ResourceExplorer2
     end
 
     class UntagResourceOperationOutput < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1204,6 +1261,7 @@ module Aws::ResourceExplorer2
     #                   search</a> in the <i>Amazon Web Services Resource Explorer User Guide</i>.</p>
     #   @return [String]
     class UpdateIndexTypeOperationInput < Struct.new(
+      nil,
       :arn,
       :type,
       keyword_init: true
@@ -1225,6 +1283,7 @@ module Aws::ResourceExplorer2
     #   <p>The date and timestamp when the index was last updated.</p>
     #   @return [Time]
     class UpdateIndexTypeOperationOutput < Struct.new(
+      nil,
       :arn,
       :type,
       :state,
@@ -1259,6 +1318,7 @@ module Aws::ResourceExplorer2
     #            </important>
     #   @return [Types::SearchFilter]
     class UpdateViewOperationInput < Struct.new(
+      nil,
       :view_arn,
       :included_properties,
       :filters,
@@ -1271,6 +1331,7 @@ module Aws::ResourceExplorer2
     #   <p>Details about the view that you changed with this operation.</p>
     #   @return [Types::View]
     class UpdateViewOperationOutput < Struct.new(
+      nil,
       :view,
       keyword_init: true
     )
@@ -1285,6 +1346,7 @@ module Aws::ResourceExplorer2
     #   <p>An array of the request fields that had validation errors.</p>
     #   @return [Array<Types::ValidationExceptionField>]
     class ValidationException < Struct.new(
+      nil,
       :message,
       :field_list,
       keyword_init: true
@@ -1300,6 +1362,7 @@ module Aws::ResourceExplorer2
     #   <p>The validation error caused by the request field.</p>
     #   @return [String]
     class ValidationExceptionField < Struct.new(
+      nil,
       :name,
       :validation_issue,
       keyword_init: true
@@ -1338,6 +1401,7 @@ module Aws::ResourceExplorer2
     #               included in the results of queries made using this view.</p>
     #   @return [Types::SearchFilter]
     class View < Struct.new(
+      nil,
       :view_arn,
       :owner,
       :last_updated_at,

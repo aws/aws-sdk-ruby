@@ -10,6 +10,7 @@ module Aws::EventBridge
     # @!attribute message
     #   @return [String]
     class AccessDeniedException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -20,6 +21,7 @@ module Aws::EventBridge
     #   <p>The name of the partner event source to activate.</p>
     #   @return [String]
     class ActivateEventSourceRequest < Struct.new(
+      nil,
       :name,
       keyword_init: true
     )
@@ -55,6 +57,7 @@ module Aws::EventBridge
     #   <p>A time stamp for the time that the API destination was last modified.</p>
     #   @return [Time]
     class ApiDestination < Struct.new(
+      nil,
       :api_destination_arn,
       :name,
       :api_destination_state,
@@ -77,6 +80,7 @@ module Aws::EventBridge
     #            <p>For more information, see <a href="https://docs.aws.amazon.com/appsync/latest/devguide/graphql-architecture.html#graphql-operations">Operations</a> in the <i>AppSync User Guide</i>.</p>
     #   @return [String]
     class AppSyncParameters < Struct.new(
+      nil,
       :graph_ql_operation,
       keyword_init: true
     )
@@ -110,6 +114,7 @@ module Aws::EventBridge
     #   <p>The time stamp for the time that the archive was created.</p>
     #   @return [Time]
     class Archive < Struct.new(
+      nil,
       :archive_name,
       :event_source_arn,
       :state,
@@ -147,6 +152,7 @@ module Aws::EventBridge
     #           <code>EcsParameters</code> is set to <code>FARGATE</code>.</p>
     #   @return [String]
     class AwsVpcConfiguration < Struct.new(
+      nil,
       :subnets,
       :security_groups,
       :assign_public_ip,
@@ -163,6 +169,7 @@ module Aws::EventBridge
     #         and 10,000.</p>
     #   @return [Integer]
     class BatchArrayProperties < Struct.new(
+      nil,
       :size,
       keyword_init: true
     )
@@ -194,6 +201,7 @@ module Aws::EventBridge
     #         job definition.</p>
     #   @return [Types::BatchRetryStrategy]
     class BatchParameters < Struct.new(
+      nil,
       :job_definition,
       :job_name,
       :array_properties,
@@ -210,6 +218,7 @@ module Aws::EventBridge
     #   <p>The number of times to attempt to retry, if the job fails. Valid values are 1–10.</p>
     #   @return [Integer]
     class BatchRetryStrategy < Struct.new(
+      nil,
       :attempts,
       keyword_init: true
     )
@@ -225,6 +234,7 @@ module Aws::EventBridge
     #   <p>The name of the replay to cancel.</p>
     #   @return [String]
     class CancelReplayRequest < Struct.new(
+      nil,
       :replay_name,
       keyword_init: true
     )
@@ -241,6 +251,7 @@ module Aws::EventBridge
     #   <p>The reason that the replay is in the current state.</p>
     #   @return [String]
     class CancelReplayResponse < Struct.new(
+      nil,
       :replay_arn,
       :state,
       :state_reason,
@@ -264,6 +275,7 @@ module Aws::EventBridge
     #         If no value is specified, the default value of 0 is used. </p>
     #   @return [Integer]
     class CapacityProviderStrategyItem < Struct.new(
+      nil,
       :capacity_provider,
       :weight,
       :base,
@@ -282,6 +294,7 @@ module Aws::EventBridge
     # @!attribute message
     #   @return [String]
     class ConcurrentModificationException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -311,6 +324,7 @@ module Aws::EventBridge
     #         organization.</p>
     #   @return [String]
     class Condition < Struct.new(
+      nil,
       :type,
       :key,
       :value,
@@ -348,6 +362,7 @@ module Aws::EventBridge
     #   <p>A time stamp for the time that the connection was last authorized.</p>
     #   @return [Time]
     class Connection < Struct.new(
+      nil,
       :connection_arn,
       :name,
       :connection_state,
@@ -368,6 +383,7 @@ module Aws::EventBridge
     #         authorization.</p>
     #   @return [String]
     class ConnectionApiKeyAuthResponseParameters < Struct.new(
+      nil,
       :api_key_name,
       keyword_init: true
     )
@@ -395,6 +411,7 @@ module Aws::EventBridge
     #               </i>.</p>
     #   @return [Types::DescribeConnectionConnectivityParameters]
     class ConnectionAuthResponseParameters < Struct.new(
+      nil,
       :basic_auth_parameters,
       :o_auth_parameters,
       :api_key_auth_parameters,
@@ -411,6 +428,7 @@ module Aws::EventBridge
     #   <p>The user name to use for Basic authorization.</p>
     #   @return [String]
     class ConnectionBasicAuthResponseParameters < Struct.new(
+      nil,
       :username,
       keyword_init: true
     )
@@ -429,6 +447,7 @@ module Aws::EventBridge
     #   <p>Specifies whether the value is secret.</p>
     #   @return [Boolean]
     class ConnectionBodyParameter < Struct.new(
+      nil,
       :key,
       :value,
       :is_value_secret,
@@ -454,6 +473,7 @@ module Aws::EventBridge
     #   <p>Specifies whether the value is a secret.</p>
     #   @return [Boolean]
     class ConnectionHeaderParameter < Struct.new(
+      nil,
       :key,
       :value,
       :is_value_secret,
@@ -478,6 +498,7 @@ module Aws::EventBridge
     #   <p>Any additional body string parameters for the connection.</p>
     #   @return [Array<Types::ConnectionBodyParameter>]
     class ConnectionHttpParameters < Struct.new(
+      nil,
       :header_parameters,
       :query_string_parameters,
       :body_parameters,
@@ -492,6 +513,7 @@ module Aws::EventBridge
     #   <p>The client ID associated with the response to the connection request.</p>
     #   @return [String]
     class ConnectionOAuthClientResponseParameters < Struct.new(
+      nil,
       :client_id,
       keyword_init: true
     )
@@ -512,6 +534,7 @@ module Aws::EventBridge
     #   <p>The additional HTTP parameters used for the OAuth authorization request.</p>
     #   @return [Types::ConnectionHttpParameters]
     class ConnectionOAuthResponseParameters < Struct.new(
+      nil,
       :client_parameters,
       :authorization_endpoint,
       :http_method,
@@ -534,6 +557,7 @@ module Aws::EventBridge
     #   <p>Specifies whether the value is secret.</p>
     #   @return [Boolean]
     class ConnectionQueryStringParameter < Struct.new(
+      nil,
       :key,
       :value,
       :is_value_secret,
@@ -552,6 +576,7 @@ module Aws::EventBridge
     #   <p>The Amazon Resource Name (ARN) of the Amazon VPC Lattice resource configuration for the resource endpoint.</p>
     #   @return [String]
     class ConnectivityResourceConfigurationArn < Struct.new(
+      nil,
       :resource_configuration_arn,
       keyword_init: true
     )
@@ -563,6 +588,7 @@ module Aws::EventBridge
     #   <p>The parameters for EventBridge to use when invoking the resource endpoint.</p>
     #   @return [Types::ConnectivityResourceConfigurationArn]
     class ConnectivityResourceParameters < Struct.new(
+      nil,
       :resource_parameters,
       keyword_init: true
     )
@@ -589,6 +615,7 @@ module Aws::EventBridge
     #   <p>The maximum number of requests per second to send to the HTTP invocation endpoint.</p>
     #   @return [Integer]
     class CreateApiDestinationRequest < Struct.new(
+      nil,
       :name,
       :description,
       :connection_arn,
@@ -613,6 +640,7 @@ module Aws::EventBridge
     #   <p>A time stamp indicating the time that the API destination was last modified.</p>
     #   @return [Time]
     class CreateApiDestinationResponse < Struct.new(
+      nil,
       :api_destination_arn,
       :api_destination_state,
       :creation_time,
@@ -653,6 +681,7 @@ module Aws::EventBridge
     #            </important>
     #   @return [String]
     class CreateArchiveRequest < Struct.new(
+      nil,
       :archive_name,
       :event_source_arn,
       :description,
@@ -677,6 +706,7 @@ module Aws::EventBridge
     #   <p>The time at which the archive was created.</p>
     #   @return [Time]
     class CreateArchiveResponse < Struct.new(
+      nil,
       :archive_arn,
       :state,
       :state_reason,
@@ -694,6 +724,7 @@ module Aws::EventBridge
     #   <p>The value for the API key to use for authorization.</p>
     #   @return [String]
     class CreateConnectionApiKeyAuthRequestParameters < Struct.new(
+      nil,
       :api_key_name,
       :api_key_value,
       keyword_init: true
@@ -728,6 +759,7 @@ module Aws::EventBridge
     #               </i>.</p>
     #   @return [Types::ConnectivityResourceParameters]
     class CreateConnectionAuthRequestParameters < Struct.new(
+      nil,
       :basic_auth_parameters,
       :o_auth_parameters,
       :api_key_auth_parameters,
@@ -746,6 +778,7 @@ module Aws::EventBridge
     #   <p>The password associated with the user name to use for Basic authorization.</p>
     #   @return [String]
     class CreateConnectionBasicAuthRequestParameters < Struct.new(
+      nil,
       :username,
       :password,
       keyword_init: true
@@ -762,6 +795,7 @@ module Aws::EventBridge
     #         connection.</p>
     #   @return [String]
     class CreateConnectionOAuthClientRequestParameters < Struct.new(
+      nil,
       :client_id,
       :client_secret,
       keyword_init: true
@@ -785,6 +819,7 @@ module Aws::EventBridge
     #         parameters to use for the connection.</p>
     #   @return [Types::ConnectionHttpParameters]
     class CreateConnectionOAuthRequestParameters < Struct.new(
+      nil,
       :client_parameters,
       :authorization_endpoint,
       :http_method,
@@ -827,6 +862,7 @@ module Aws::EventBridge
     #                                   Developer Guide</i>. </p>
     #   @return [String]
     class CreateConnectionRequest < Struct.new(
+      nil,
       :name,
       :description,
       :authorization_type,
@@ -851,6 +887,7 @@ module Aws::EventBridge
     #   <p>A time stamp for the time that the connection was last updated.</p>
     #   @return [Time]
     class CreateConnectionResponse < Struct.new(
+      nil,
       :connection_arn,
       :connection_state,
       :creation_time,
@@ -885,6 +922,7 @@ module Aws::EventBridge
     #   <p>The ARN of the role used for replication.</p>
     #   @return [String]
     class CreateEndpointRequest < Struct.new(
+      nil,
       :name,
       :description,
       :routing_config,
@@ -918,6 +956,7 @@ module Aws::EventBridge
     #   <p>The state of the endpoint that was created by this request.</p>
     #   @return [String]
     class CreateEndpointResponse < Struct.new(
+      nil,
       :name,
       :arn,
       :routing_config,
@@ -992,6 +1031,7 @@ module Aws::EventBridge
     #   <p>Tags to associate with the event bus.</p>
     #   @return [Array<Types::Tag>]
     class CreateEventBusRequest < Struct.new(
+      nil,
       :name,
       :event_source_name,
       :description,
@@ -1026,6 +1066,7 @@ module Aws::EventBridge
     #            <p>For more information, see <a href="https://docs.aws.amazon.com/eb-event-bus-logs.html">Configuring logs for event buses</a> in the <i>EventBridge User Guide</i>.</p>
     #   @return [Types::LogConfig]
     class CreateEventBusResponse < Struct.new(
+      nil,
       :event_bus_arn,
       :description,
       :kms_key_identifier,
@@ -1049,6 +1090,7 @@ module Aws::EventBridge
     #         for this partner event source.</p>
     #   @return [String]
     class CreatePartnerEventSourceRequest < Struct.new(
+      nil,
       :name,
       :account,
       keyword_init: true
@@ -1060,6 +1102,7 @@ module Aws::EventBridge
     #   <p>The ARN of the partner event source.</p>
     #   @return [String]
     class CreatePartnerEventSourceResponse < Struct.new(
+      nil,
       :event_source_arn,
       keyword_init: true
     )
@@ -1070,6 +1113,7 @@ module Aws::EventBridge
     #   <p>The name of the partner event source to deactivate.</p>
     #   @return [String]
     class DeactivateEventSourceRequest < Struct.new(
+      nil,
       :name,
       keyword_init: true
     )
@@ -1084,6 +1128,7 @@ module Aws::EventBridge
     #   <p>The ARN of the SQS queue specified as the target for the dead-letter queue.</p>
     #   @return [String]
     class DeadLetterConfig < Struct.new(
+      nil,
       :arn,
       keyword_init: true
     )
@@ -1094,6 +1139,7 @@ module Aws::EventBridge
     #   <p>The name of the connection to remove authorization from.</p>
     #   @return [String]
     class DeauthorizeConnectionRequest < Struct.new(
+      nil,
       :name,
       keyword_init: true
     )
@@ -1116,6 +1162,7 @@ module Aws::EventBridge
     #   <p>A time stamp for the time that the connection was last authorized.</p>
     #   @return [Time]
     class DeauthorizeConnectionResponse < Struct.new(
+      nil,
       :connection_arn,
       :connection_state,
       :creation_time,
@@ -1130,6 +1177,7 @@ module Aws::EventBridge
     #   <p>The name of the destination to delete.</p>
     #   @return [String]
     class DeleteApiDestinationRequest < Struct.new(
+      nil,
       :name,
       keyword_init: true
     )
@@ -1137,6 +1185,7 @@ module Aws::EventBridge
     end
 
     class DeleteApiDestinationResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1146,6 +1195,7 @@ module Aws::EventBridge
     #   <p>The name of the archive to delete.</p>
     #   @return [String]
     class DeleteArchiveRequest < Struct.new(
+      nil,
       :archive_name,
       keyword_init: true
     )
@@ -1153,6 +1203,7 @@ module Aws::EventBridge
     end
 
     class DeleteArchiveResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1162,6 +1213,7 @@ module Aws::EventBridge
     #   <p>The name of the connection to delete.</p>
     #   @return [String]
     class DeleteConnectionRequest < Struct.new(
+      nil,
       :name,
       keyword_init: true
     )
@@ -1186,6 +1238,7 @@ module Aws::EventBridge
     #         deleted.</p>
     #   @return [Time]
     class DeleteConnectionResponse < Struct.new(
+      nil,
       :connection_arn,
       :connection_state,
       :creation_time,
@@ -1201,6 +1254,7 @@ module Aws::EventBridge
     #           <code>"Name":"us-east-2-custom_bus_A-endpoint"</code>..</p>
     #   @return [String]
     class DeleteEndpointRequest < Struct.new(
+      nil,
       :name,
       keyword_init: true
     )
@@ -1208,6 +1262,7 @@ module Aws::EventBridge
     end
 
     class DeleteEndpointResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1217,6 +1272,7 @@ module Aws::EventBridge
     #   <p>The name of the event bus to delete.</p>
     #   @return [String]
     class DeleteEventBusRequest < Struct.new(
+      nil,
       :name,
       keyword_init: true
     )
@@ -1231,6 +1287,7 @@ module Aws::EventBridge
     #         was created for.</p>
     #   @return [String]
     class DeletePartnerEventSourceRequest < Struct.new(
+      nil,
       :name,
       :account,
       keyword_init: true
@@ -1253,6 +1310,7 @@ module Aws::EventBridge
     #           <code>ManagedBy</code> field of the response.</p>
     #   @return [Boolean]
     class DeleteRuleRequest < Struct.new(
+      nil,
       :name,
       :event_bus_name,
       :force,
@@ -1265,6 +1323,7 @@ module Aws::EventBridge
     #   <p>The name of the API destination to retrieve.</p>
     #   @return [String]
     class DescribeApiDestinationRequest < Struct.new(
+      nil,
       :name,
       keyword_init: true
     )
@@ -1307,6 +1366,7 @@ module Aws::EventBridge
     #   <p>A time stamp for the time that the API destination was last modified.</p>
     #   @return [Time]
     class DescribeApiDestinationResponse < Struct.new(
+      nil,
       :api_destination_arn,
       :name,
       :description,
@@ -1326,6 +1386,7 @@ module Aws::EventBridge
     #   <p>The name of the archive to retrieve.</p>
     #   @return [String]
     class DescribeArchiveRequest < Struct.new(
+      nil,
       :archive_name,
       keyword_init: true
     )
@@ -1371,6 +1432,7 @@ module Aws::EventBridge
     #   <p>The time at which the archive was created.</p>
     #   @return [Time]
     class DescribeArchiveResponse < Struct.new(
+      nil,
       :archive_arn,
       :archive_name,
       :event_source_arn,
@@ -1402,6 +1464,7 @@ module Aws::EventBridge
     #   <p>The parameters for EventBridge to use when invoking the resource endpoint.</p>
     #   @return [Types::DescribeConnectionResourceParameters]
     class DescribeConnectionConnectivityParameters < Struct.new(
+      nil,
       :resource_parameters,
       keyword_init: true
     )
@@ -1412,6 +1475,7 @@ module Aws::EventBridge
     #   <p>The name of the connection to retrieve.</p>
     #   @return [String]
     class DescribeConnectionRequest < Struct.new(
+      nil,
       :name,
       keyword_init: true
     )
@@ -1430,6 +1494,7 @@ module Aws::EventBridge
     #               </i>.</p>
     #   @return [String]
     class DescribeConnectionResourceParameters < Struct.new(
+      nil,
       :resource_configuration_arn,
       :resource_association_arn,
       keyword_init: true
@@ -1484,6 +1549,7 @@ module Aws::EventBridge
     #   <p>A time stamp for the time that the connection was last authorized.</p>
     #   @return [Time]
     class DescribeConnectionResponse < Struct.new(
+      nil,
       :connection_arn,
       :name,
       :description,
@@ -1511,6 +1577,7 @@ module Aws::EventBridge
     #           <code>"HomeRegion": "us-east-1"</code>.</p>
     #   @return [String]
     class DescribeEndpointRequest < Struct.new(
+      nil,
       :name,
       :home_region,
       keyword_init: true
@@ -1559,6 +1626,7 @@ module Aws::EventBridge
     #   <p>The last time the endpoint you asked for information about was modified.</p>
     #   @return [Time]
     class DescribeEndpointResponse < Struct.new(
+      nil,
       :name,
       :description,
       :arn,
@@ -1582,6 +1650,7 @@ module Aws::EventBridge
     #         bus is displayed.</p>
     #   @return [String]
     class DescribeEventBusRequest < Struct.new(
+      nil,
       :name,
       keyword_init: true
     )
@@ -1622,6 +1691,7 @@ module Aws::EventBridge
     #   <p>The time the event bus was last modified.</p>
     #   @return [Time]
     class DescribeEventBusResponse < Struct.new(
+      nil,
       :name,
       :arn,
       :description,
@@ -1640,6 +1710,7 @@ module Aws::EventBridge
     #   <p>The name of the partner event source to display the details of.</p>
     #   @return [String]
     class DescribeEventSourceRequest < Struct.new(
+      nil,
       :name,
       keyword_init: true
     )
@@ -1669,6 +1740,7 @@ module Aws::EventBridge
     #         created a matching event bus, but the event source has since been deleted.</p>
     #   @return [String]
     class DescribeEventSourceResponse < Struct.new(
+      nil,
       :arn,
       :created_by,
       :creation_time,
@@ -1684,6 +1756,7 @@ module Aws::EventBridge
     #   <p>The name of the event source to display.</p>
     #   @return [String]
     class DescribePartnerEventSourceRequest < Struct.new(
+      nil,
       :name,
       keyword_init: true
     )
@@ -1697,6 +1770,7 @@ module Aws::EventBridge
     #   <p>The name of the event source.</p>
     #   @return [String]
     class DescribePartnerEventSourceResponse < Struct.new(
+      nil,
       :arn,
       :name,
       keyword_init: true
@@ -1708,6 +1782,7 @@ module Aws::EventBridge
     #   <p>The name of the replay to retrieve.</p>
     #   @return [String]
     class DescribeReplayRequest < Struct.new(
+      nil,
       :replay_name,
       keyword_init: true
     )
@@ -1751,6 +1826,7 @@ module Aws::EventBridge
     #   <p>A time stamp for the time that the replay stopped.</p>
     #   @return [Time]
     class DescribeReplayResponse < Struct.new(
+      nil,
       :replay_name,
       :replay_arn,
       :description,
@@ -1776,6 +1852,7 @@ module Aws::EventBridge
     #         event bus is used.</p>
     #   @return [String]
     class DescribeRuleRequest < Struct.new(
+      nil,
       :name,
       :event_bus_name,
       keyword_init: true
@@ -1823,6 +1900,7 @@ module Aws::EventBridge
     #         account.</p>
     #   @return [String]
     class DescribeRuleResponse < Struct.new(
+      nil,
       :name,
       :arn,
       :event_pattern,
@@ -1846,6 +1924,7 @@ module Aws::EventBridge
     #         event bus is used.</p>
     #   @return [String]
     class DisableRuleRequest < Struct.new(
+      nil,
       :name,
       :event_bus_name,
       keyword_init: true
@@ -1926,6 +2005,7 @@ module Aws::EventBridge
     #         consists of a key and an optional value, both of which you define. To learn more, see <a href="https://docs.aws.amazon.com/AmazonECS/latest/APIReference/API_RunTask.html#ECS-RunTask-request-tags">RunTask</a> in the Amazon ECS API Reference.</p>
     #   @return [Array<Types::Tag>]
     class EcsParameters < Struct.new(
+      nil,
       :task_definition_arn,
       :task_count,
       :launch_type,
@@ -1959,6 +2039,7 @@ module Aws::EventBridge
     #         event bus is used.</p>
     #   @return [String]
     class EnableRuleRequest < Struct.new(
+      nil,
       :name,
       :event_bus_name,
       keyword_init: true
@@ -2017,6 +2098,7 @@ module Aws::EventBridge
     #   <p>The last time the endpoint was modified.</p>
     #   @return [Time]
     class Endpoint < Struct.new(
+      nil,
       :name,
       :description,
       :arn,
@@ -2040,6 +2122,7 @@ module Aws::EventBridge
     #   <p>The ARN of the event bus the endpoint is associated with.</p>
     #   @return [String]
     class EndpointEventBus < Struct.new(
+      nil,
       :event_bus_arn,
       keyword_init: true
     )
@@ -2072,6 +2155,7 @@ module Aws::EventBridge
     #   <p>The time the event bus was last modified.</p>
     #   @return [Time]
     class EventBus < Struct.new(
+      nil,
       :name,
       :arn,
       :description,
@@ -2109,6 +2193,7 @@ module Aws::EventBridge
     #         created a matching event bus, but the event source has since been deleted.</p>
     #   @return [String]
     class EventSource < Struct.new(
+      nil,
       :arn,
       :created_by,
       :creation_time,
@@ -2130,6 +2215,7 @@ module Aws::EventBridge
     #         enabled.</p>
     #   @return [Types::Secondary]
     class FailoverConfig < Struct.new(
+      nil,
       :primary,
       :secondary,
       keyword_init: true
@@ -2152,6 +2238,7 @@ module Aws::EventBridge
     #   <p>The query string keys/values that need to be sent as part of request invoking the API Gateway API or EventBridge ApiDestination.</p>
     #   @return [Hash<String, String>]
     class HttpParameters < Struct.new(
+      nil,
       :path_parameter_values,
       :header_parameters,
       :query_string_parameters,
@@ -2165,6 +2252,7 @@ module Aws::EventBridge
     # @!attribute message
     #   @return [String]
     class IllegalStatusException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -2251,6 +2339,7 @@ module Aws::EventBridge
     #            </p>
     #   @return [String]
     class InputTransformer < Struct.new(
+      nil,
       :input_paths_map,
       :input_template,
       keyword_init: true
@@ -2262,6 +2351,7 @@ module Aws::EventBridge
     # @!attribute message
     #   @return [String]
     class InternalException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -2272,6 +2362,7 @@ module Aws::EventBridge
     # @!attribute message
     #   @return [String]
     class InvalidEventPatternException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -2282,6 +2373,7 @@ module Aws::EventBridge
     # @!attribute message
     #   @return [String]
     class InvalidStateException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -2298,6 +2390,7 @@ module Aws::EventBridge
     #           Concepts</a> in the <i>Amazon Kinesis Streams Developer Guide</i>.</p>
     #   @return [String]
     class KinesisParameters < Struct.new(
+      nil,
       :partition_key_path,
       keyword_init: true
     )
@@ -2309,6 +2402,7 @@ module Aws::EventBridge
     # @!attribute message
     #   @return [String]
     class LimitExceededException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -2332,6 +2426,7 @@ module Aws::EventBridge
     #   <p>The maximum number of API destinations to include in the response.</p>
     #   @return [Integer]
     class ListApiDestinationsRequest < Struct.new(
+      nil,
       :name_prefix,
       :connection_arn,
       :next_token,
@@ -2352,6 +2447,7 @@ module Aws::EventBridge
     #            <p> Using an expired pagination token results in an <code>HTTP 400 InvalidToken</code> error.</p>
     #   @return [String]
     class ListApiDestinationsResponse < Struct.new(
+      nil,
       :api_destinations,
       :next_token,
       keyword_init: true
@@ -2379,6 +2475,7 @@ module Aws::EventBridge
     #   <p>The maximum number of results to return.</p>
     #   @return [Integer]
     class ListArchivesRequest < Struct.new(
+      nil,
       :name_prefix,
       :event_source_arn,
       :state,
@@ -2399,6 +2496,7 @@ module Aws::EventBridge
     #            <p> Using an expired pagination token results in an <code>HTTP 400 InvalidToken</code> error.</p>
     #   @return [String]
     class ListArchivesResponse < Struct.new(
+      nil,
       :archives,
       :next_token,
       keyword_init: true
@@ -2423,6 +2521,7 @@ module Aws::EventBridge
     #   <p>The maximum number of connections to return.</p>
     #   @return [Integer]
     class ListConnectionsRequest < Struct.new(
+      nil,
       :name_prefix,
       :connection_state,
       :next_token,
@@ -2442,6 +2541,7 @@ module Aws::EventBridge
     #            <p> Using an expired pagination token results in an <code>HTTP 400 InvalidToken</code> error.</p>
     #   @return [String]
     class ListConnectionsResponse < Struct.new(
+      nil,
       :connections,
       :next_token,
       keyword_init: true
@@ -2468,6 +2568,7 @@ module Aws::EventBridge
     #   <p>The maximum number of results returned by the call.</p>
     #   @return [Integer]
     class ListEndpointsRequest < Struct.new(
+      nil,
       :name_prefix,
       :home_region,
       :next_token,
@@ -2487,6 +2588,7 @@ module Aws::EventBridge
     #            <p> Using an expired pagination token results in an <code>HTTP 400 InvalidToken</code> error.</p>
     #   @return [String]
     class ListEndpointsResponse < Struct.new(
+      nil,
       :endpoints,
       :next_token,
       keyword_init: true
@@ -2510,6 +2612,7 @@ module Aws::EventBridge
     #         of results.</p>
     #   @return [Integer]
     class ListEventBusesRequest < Struct.new(
+      nil,
       :name_prefix,
       :next_token,
       :limit,
@@ -2528,6 +2631,7 @@ module Aws::EventBridge
     #            <p> Using an expired pagination token results in an <code>HTTP 400 InvalidToken</code> error.</p>
     #   @return [String]
     class ListEventBusesResponse < Struct.new(
+      nil,
       :event_buses,
       :next_token,
       keyword_init: true
@@ -2551,6 +2655,7 @@ module Aws::EventBridge
     #         of results.</p>
     #   @return [Integer]
     class ListEventSourcesRequest < Struct.new(
+      nil,
       :name_prefix,
       :next_token,
       :limit,
@@ -2569,6 +2674,7 @@ module Aws::EventBridge
     #            <p> Using an expired pagination token results in an <code>HTTP 400 InvalidToken</code> error.</p>
     #   @return [String]
     class ListEventSourcesResponse < Struct.new(
+      nil,
       :event_sources,
       :next_token,
       keyword_init: true
@@ -2591,6 +2697,7 @@ module Aws::EventBridge
     #         of results.</p>
     #   @return [Integer]
     class ListPartnerEventSourceAccountsRequest < Struct.new(
+      nil,
       :event_source_name,
       :next_token,
       :limit,
@@ -2609,6 +2716,7 @@ module Aws::EventBridge
     #            <p> Using an expired pagination token results in an <code>HTTP 400 InvalidToken</code> error.</p>
     #   @return [String]
     class ListPartnerEventSourceAccountsResponse < Struct.new(
+      nil,
       :partner_event_source_accounts,
       :next_token,
       keyword_init: true
@@ -2632,6 +2740,7 @@ module Aws::EventBridge
     #         results.</p>
     #   @return [Integer]
     class ListPartnerEventSourcesRequest < Struct.new(
+      nil,
       :name_prefix,
       :next_token,
       :limit,
@@ -2650,6 +2759,7 @@ module Aws::EventBridge
     #            <p> Using an expired pagination token results in an <code>HTTP 400 InvalidToken</code> error.</p>
     #   @return [String]
     class ListPartnerEventSourcesResponse < Struct.new(
+      nil,
       :partner_event_sources,
       :next_token,
       keyword_init: true
@@ -2677,6 +2787,7 @@ module Aws::EventBridge
     #   <p>The maximum number of replays to retrieve.</p>
     #   @return [Integer]
     class ListReplaysRequest < Struct.new(
+      nil,
       :name_prefix,
       :state,
       :event_source_arn,
@@ -2697,6 +2808,7 @@ module Aws::EventBridge
     #            <p> Using an expired pagination token results in an <code>HTTP 400 InvalidToken</code> error.</p>
     #   @return [String]
     class ListReplaysResponse < Struct.new(
+      nil,
       :replays,
       :next_token,
       keyword_init: true
@@ -2721,6 +2833,7 @@ module Aws::EventBridge
     #   <p>The maximum number of results to return.</p>
     #   @return [Integer]
     class ListRuleNamesByTargetRequest < Struct.new(
+      nil,
       :target_arn,
       :event_bus_name,
       :next_token,
@@ -2740,6 +2853,7 @@ module Aws::EventBridge
     #            <p> Using an expired pagination token results in an <code>HTTP 400 InvalidToken</code> error.</p>
     #   @return [String]
     class ListRuleNamesByTargetResponse < Struct.new(
+      nil,
       :rule_names,
       :next_token,
       keyword_init: true
@@ -2764,6 +2878,7 @@ module Aws::EventBridge
     #   <p>The maximum number of results to return.</p>
     #   @return [Integer]
     class ListRulesRequest < Struct.new(
+      nil,
       :name_prefix,
       :event_bus_name,
       :next_token,
@@ -2783,6 +2898,7 @@ module Aws::EventBridge
     #            <p> Using an expired pagination token results in an <code>HTTP 400 InvalidToken</code> error.</p>
     #   @return [String]
     class ListRulesResponse < Struct.new(
+      nil,
       :rules,
       :next_token,
       keyword_init: true
@@ -2794,6 +2910,7 @@ module Aws::EventBridge
     #   <p>The ARN of the EventBridge resource for which you want to view tags.</p>
     #   @return [String]
     class ListTagsForResourceRequest < Struct.new(
+      nil,
       :resource_arn,
       keyword_init: true
     )
@@ -2804,6 +2921,7 @@ module Aws::EventBridge
     #   <p>The list of tag keys and values associated with the resource you specified</p>
     #   @return [Array<Types::Tag>]
     class ListTagsForResourceResponse < Struct.new(
+      nil,
       :tags,
       keyword_init: true
     )
@@ -2827,6 +2945,7 @@ module Aws::EventBridge
     #   <p>The maximum number of results to return.</p>
     #   @return [Integer]
     class ListTargetsByRuleRequest < Struct.new(
+      nil,
       :rule,
       :event_bus_name,
       :next_token,
@@ -2846,6 +2965,7 @@ module Aws::EventBridge
     #            <p> Using an expired pagination token results in an <code>HTTP 400 InvalidToken</code> error.</p>
     #   @return [String]
     class ListTargetsByRuleResponse < Struct.new(
+      nil,
       :targets,
       :next_token,
       keyword_init: true
@@ -2865,6 +2985,7 @@ module Aws::EventBridge
     #            <p>For more information, see <a href="https://docs.aws.amazon.com/eventbridge/latest/userguide/eb-event-bus-logs.html#eb-event-bus-logs-level">Specifying event bus log level</a> in the <i>EventBridge User Guide</i>.</p>
     #   @return [String]
     class LogConfig < Struct.new(
+      nil,
       :include_detail,
       :level,
       keyword_init: true
@@ -2881,6 +3002,7 @@ module Aws::EventBridge
     # @!attribute message
     #   @return [String]
     class ManagedRuleException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -2894,6 +3016,7 @@ module Aws::EventBridge
     #         use the <code>awsvpc</code> network mode.</p>
     #   @return [Types::AwsVpcConfiguration]
     class NetworkConfiguration < Struct.new(
+      nil,
       :awsvpc_configuration,
       keyword_init: true
     )
@@ -2904,6 +3027,7 @@ module Aws::EventBridge
     # @!attribute message
     #   @return [String]
     class OperationDisabledException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -2920,6 +3044,7 @@ module Aws::EventBridge
     #   <p>The name of the partner event source.</p>
     #   @return [String]
     class PartnerEventSource < Struct.new(
+      nil,
       :arn,
       :name,
       keyword_init: true
@@ -2945,6 +3070,7 @@ module Aws::EventBridge
     #         created a matching event bus, but the event source has since been deleted.</p>
     #   @return [String]
     class PartnerEventSourceAccount < Struct.new(
+      nil,
       :account,
       :creation_time,
       :expiration_time,
@@ -2965,6 +3091,7 @@ module Aws::EventBridge
     #         expression if the constraint type is <code>distinctInstance</code>. To learn more, see <a href="https://docs.aws.amazon.com/AmazonECS/latest/developerguide/cluster-query-language.html">Cluster Query Language</a> in the Amazon Elastic Container Service Developer Guide. </p>
     #   @return [String]
     class PlacementConstraint < Struct.new(
+      nil,
       :type,
       :expression,
       keyword_init: true
@@ -2990,6 +3117,7 @@ module Aws::EventBridge
     #         strategy, this field is not used. </p>
     #   @return [String]
     class PlacementStrategy < Struct.new(
+      nil,
       :type,
       :field,
       keyword_init: true
@@ -3001,6 +3129,7 @@ module Aws::EventBridge
     # @!attribute message
     #   @return [String]
     class PolicyLengthExceededException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -3013,6 +3142,7 @@ module Aws::EventBridge
     #         triggered.</p>
     #   @return [String]
     class Primary < Struct.new(
+      nil,
       :health_check,
       keyword_init: true
     )
@@ -3033,6 +3163,7 @@ module Aws::EventBridge
     #            </important>
     #   @return [String]
     class PutEventsRequest < Struct.new(
+      nil,
       :entries,
       :endpoint_id,
       keyword_init: true
@@ -3098,6 +3229,7 @@ module Aws::EventBridge
     #           header</a> in the X-Ray Developer Guide.</p>
     #   @return [String]
     class PutEventsRequestEntry < Struct.new(
+      nil,
       :time,
       :source,
       :resources,
@@ -3121,6 +3253,7 @@ module Aws::EventBridge
     #         array.</p>
     #   @return [Array<Types::PutEventsResultEntry>]
     class PutEventsResponse < Struct.new(
+      nil,
       :failed_entry_count,
       :entries,
       keyword_init: true
@@ -3217,6 +3350,7 @@ module Aws::EventBridge
     #   <p>The error message that explains why the event submission failed.</p>
     #   @return [String]
     class PutEventsResultEntry < Struct.new(
+      nil,
       :event_id,
       :error_code,
       :error_message,
@@ -3229,6 +3363,7 @@ module Aws::EventBridge
     #   <p>The list of events to write to the event bus.</p>
     #   @return [Array<Types::PutPartnerEventsRequestEntry>]
     class PutPartnerEventsRequest < Struct.new(
+      nil,
       :entries,
       keyword_init: true
     )
@@ -3276,6 +3411,7 @@ module Aws::EventBridge
     #            </note>
     #   @return [String]
     class PutPartnerEventsRequestEntry < Struct.new(
+      nil,
       :time,
       :source,
       :resources,
@@ -3298,6 +3434,7 @@ module Aws::EventBridge
     #         array.</p>
     #   @return [Array<Types::PutPartnerEventsResultEntry>]
     class PutPartnerEventsResponse < Struct.new(
+      nil,
       :failed_entry_count,
       :entries,
       keyword_init: true
@@ -3323,6 +3460,7 @@ module Aws::EventBridge
     #   <p>The error message that explains why the event submission failed.</p>
     #   @return [String]
     class PutPartnerEventsResultEntry < Struct.new(
+      nil,
       :event_id,
       :error_code,
       :error_message,
@@ -3374,6 +3512,7 @@ module Aws::EventBridge
     #           <code>Action</code>, <code>Principal</code>, or <code>Condition</code> parameters.</p>
     #   @return [String]
     class PutPermissionRequest < Struct.new(
+      nil,
       :event_bus_name,
       :action,
       :principal,
@@ -3445,6 +3584,7 @@ module Aws::EventBridge
     #         default event bus is used.</p>
     #   @return [String]
     class PutRuleRequest < Struct.new(
+      nil,
       :name,
       :schedule_expression,
       :event_pattern,
@@ -3462,6 +3602,7 @@ module Aws::EventBridge
     #   <p>The Amazon Resource Name (ARN) of the rule.</p>
     #   @return [String]
     class PutRuleResponse < Struct.new(
+      nil,
       :rule_arn,
       keyword_init: true
     )
@@ -3479,6 +3620,7 @@ module Aws::EventBridge
     #   <p>The targets to update or add to the rule.</p>
     #   @return [Array<Types::Target>]
     class PutTargetsRequest < Struct.new(
+      nil,
       :rule,
       :event_bus_name,
       :targets,
@@ -3494,6 +3636,7 @@ module Aws::EventBridge
     #   <p>The failed target entries.</p>
     #   @return [Array<Types::PutTargetsResultEntry>]
     class PutTargetsResponse < Struct.new(
+      nil,
       :failed_entry_count,
       :failed_entries,
       keyword_init: true
@@ -3519,6 +3662,7 @@ module Aws::EventBridge
     #   <p>The error message that explains why the target addition failed.</p>
     #   @return [String]
     class PutTargetsResultEntry < Struct.new(
+      nil,
       :target_id,
       :error_code,
       :error_message,
@@ -3558,6 +3702,7 @@ module Aws::EventBridge
     #         run as one transaction, all work is rolled back.</p>
     #   @return [Array<String>]
     class RedshiftDataParameters < Struct.new(
+      nil,
       :secret_manager_arn,
       :database,
       :db_user,
@@ -3587,6 +3732,7 @@ module Aws::EventBridge
     #         bus is used.</p>
     #   @return [String]
     class RemovePermissionRequest < Struct.new(
+      nil,
       :statement_id,
       :remove_all_permissions,
       :event_bus_name,
@@ -3613,6 +3759,7 @@ module Aws::EventBridge
     #           <code>ManagedBy</code> field of the response.</p>
     #   @return [Boolean]
     class RemoveTargetsRequest < Struct.new(
+      nil,
       :rule,
       :event_bus_name,
       :ids,
@@ -3629,6 +3776,7 @@ module Aws::EventBridge
     #   <p>The failed target entries.</p>
     #   @return [Array<Types::RemoveTargetsResultEntry>]
     class RemoveTargetsResponse < Struct.new(
+      nil,
       :failed_entry_count,
       :failed_entries,
       keyword_init: true
@@ -3654,6 +3802,7 @@ module Aws::EventBridge
     #   <p>The error message that explains why the target removal failed.</p>
     #   @return [String]
     class RemoveTargetsResultEntry < Struct.new(
+      nil,
       :target_id,
       :error_code,
       :error_message,
@@ -3693,6 +3842,7 @@ module Aws::EventBridge
     #   <p>A time stamp for the time that the replay completed.</p>
     #   @return [Time]
     class Replay < Struct.new(
+      nil,
       :replay_name,
       :event_source_arn,
       :state,
@@ -3716,6 +3866,7 @@ module Aws::EventBridge
     #   <p>A list of ARNs for rules to replay events to.</p>
     #   @return [Array<String>]
     class ReplayDestination < Struct.new(
+      nil,
       :arn,
       :filter_arns,
       keyword_init: true
@@ -3728,6 +3879,7 @@ module Aws::EventBridge
     #   <p>The state of event replication.</p>
     #   @return [String]
     class ReplicationConfig < Struct.new(
+      nil,
       :state,
       keyword_init: true
     )
@@ -3738,6 +3890,7 @@ module Aws::EventBridge
     # @!attribute message
     #   @return [String]
     class ResourceAlreadyExistsException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -3748,6 +3901,7 @@ module Aws::EventBridge
     # @!attribute message
     #   @return [String]
     class ResourceNotFoundException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -3765,6 +3919,7 @@ module Aws::EventBridge
     #   <p>The maximum amount of time, in seconds, to continue to make retry attempts.</p>
     #   @return [Integer]
     class RetryPolicy < Struct.new(
+      nil,
       :maximum_retry_attempts,
       :maximum_event_age_in_seconds,
       keyword_init: true
@@ -3778,6 +3933,7 @@ module Aws::EventBridge
     #         happens when it's triggered.</p>
     #   @return [Types::FailoverConfig]
     class RoutingConfig < Struct.new(
+      nil,
       :failover_config,
       keyword_init: true
     )
@@ -3851,6 +4007,7 @@ module Aws::EventBridge
     #         event bus is used.</p>
     #   @return [String]
     class Rule < Struct.new(
+      nil,
       :name,
       :arn,
       :event_pattern,
@@ -3872,6 +4029,7 @@ module Aws::EventBridge
     #         array of InstanceIds or a tag.</p>
     #   @return [Array<Types::RunCommandTarget>]
     class RunCommandParameters < Struct.new(
+      nil,
       :run_command_targets,
       keyword_init: true
     )
@@ -3893,6 +4051,7 @@ module Aws::EventBridge
     #         is a list of Amazon EC2 instance IDs.</p>
     #   @return [Array<String>]
     class RunCommandTarget < Struct.new(
+      nil,
       :key,
       :values,
       keyword_init: true
@@ -3911,6 +4070,7 @@ module Aws::EventBridge
     #         Pipeline.</p>
     #   @return [String]
     class SageMakerPipelineParameter < Struct.new(
+      nil,
       :name,
       :value,
       keyword_init: true
@@ -3925,6 +4085,7 @@ module Aws::EventBridge
     #         execution.</p>
     #   @return [Array<Types::SageMakerPipelineParameter>]
     class SageMakerPipelineParameters < Struct.new(
+      nil,
       :pipeline_parameter_list,
       keyword_init: true
     )
@@ -3937,6 +4098,7 @@ module Aws::EventBridge
     #   <p>Defines the secondary Region.</p>
     #   @return [String]
     class Secondary < Struct.new(
+      nil,
       :route,
       keyword_init: true
     )
@@ -3949,6 +4111,7 @@ module Aws::EventBridge
     #   <p>The FIFO message group ID to use as the target.</p>
     #   @return [String]
     class SqsParameters < Struct.new(
+      nil,
       :message_group_id,
       keyword_init: true
     )
@@ -3977,6 +4140,7 @@ module Aws::EventBridge
     #         the replay.</p>
     #   @return [Types::ReplayDestination]
     class StartReplayRequest < Struct.new(
+      nil,
       :replay_name,
       :description,
       :event_source_arn,
@@ -4001,6 +4165,7 @@ module Aws::EventBridge
     #   <p>The time at which the replay started.</p>
     #   @return [Time]
     class StartReplayResponse < Struct.new(
+      nil,
       :replay_arn,
       :state,
       :state_reason,
@@ -4020,6 +4185,7 @@ module Aws::EventBridge
     #   <p>The value for the specified tag key.</p>
     #   @return [String]
     class Tag < Struct.new(
+      nil,
       :key,
       :value,
       keyword_init: true
@@ -4034,6 +4200,7 @@ module Aws::EventBridge
     #   <p>The list of key-value pairs to associate with the resource.</p>
     #   @return [Array<Types::Tag>]
     class TagResourceRequest < Struct.new(
+      nil,
       :resource_arn,
       :tags,
       keyword_init: true
@@ -4042,6 +4209,7 @@ module Aws::EventBridge
     end
 
     class TagResourceResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -4137,6 +4305,7 @@ module Aws::EventBridge
     #           AppSync API.</p>
     #   @return [Types::AppSyncParameters]
     class Target < Struct.new(
+      nil,
       :id,
       :arn,
       :role_arn,
@@ -4208,6 +4377,7 @@ module Aws::EventBridge
     #            </ul>
     #   @return [String]
     class TestEventPatternRequest < Struct.new(
+      nil,
       :event_pattern,
       :event,
       keyword_init: true
@@ -4219,6 +4389,7 @@ module Aws::EventBridge
     #   <p>Indicates whether the event matches the event pattern.</p>
     #   @return [Boolean]
     class TestEventPatternResponse < Struct.new(
+      nil,
       :result,
       keyword_init: true
     )
@@ -4234,6 +4405,7 @@ module Aws::EventBridge
     # @!attribute message
     #   @return [String]
     class ThrottlingException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -4247,6 +4419,7 @@ module Aws::EventBridge
     #   <p>The list of tag keys to remove from the resource.</p>
     #   @return [Array<String>]
     class UntagResourceRequest < Struct.new(
+      nil,
       :resource_arn,
       :tag_keys,
       keyword_init: true
@@ -4255,6 +4428,7 @@ module Aws::EventBridge
     end
 
     class UntagResourceResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -4279,6 +4453,7 @@ module Aws::EventBridge
     #   <p>The maximum number of invocations per second to send to the API destination.</p>
     #   @return [Integer]
     class UpdateApiDestinationRequest < Struct.new(
+      nil,
       :name,
       :description,
       :connection_arn,
@@ -4303,6 +4478,7 @@ module Aws::EventBridge
     #   <p>A time stamp for the time that the API destination was last modified.</p>
     #   @return [Time]
     class UpdateApiDestinationResponse < Struct.new(
+      nil,
       :api_destination_arn,
       :api_destination_state,
       :creation_time,
@@ -4339,6 +4515,7 @@ module Aws::EventBridge
     #            </important>
     #   @return [String]
     class UpdateArchiveRequest < Struct.new(
+      nil,
       :archive_name,
       :description,
       :event_pattern,
@@ -4362,6 +4539,7 @@ module Aws::EventBridge
     #   <p>The time at which the archive was updated.</p>
     #   @return [Time]
     class UpdateArchiveResponse < Struct.new(
+      nil,
       :archive_arn,
       :state,
       :state_reason,
@@ -4379,6 +4557,7 @@ module Aws::EventBridge
     #   <p>The value associated with the API key to use for authorization.</p>
     #   @return [String]
     class UpdateConnectionApiKeyAuthRequestParameters < Struct.new(
+      nil,
       :api_key_name,
       :api_key_value,
       keyword_init: true
@@ -4410,6 +4589,7 @@ module Aws::EventBridge
     #               </i>.</p>
     #   @return [Types::ConnectivityResourceParameters]
     class UpdateConnectionAuthRequestParameters < Struct.new(
+      nil,
       :basic_auth_parameters,
       :o_auth_parameters,
       :api_key_auth_parameters,
@@ -4428,6 +4608,7 @@ module Aws::EventBridge
     #   <p>The password associated with the user name to use for Basic authorization.</p>
     #   @return [String]
     class UpdateConnectionBasicAuthRequestParameters < Struct.new(
+      nil,
       :username,
       :password,
       keyword_init: true
@@ -4443,6 +4624,7 @@ module Aws::EventBridge
     #   <p>The client secret assciated with the client ID to use for OAuth authorization.</p>
     #   @return [String]
     class UpdateConnectionOAuthClientRequestParameters < Struct.new(
+      nil,
       :client_id,
       :client_secret,
       keyword_init: true
@@ -4467,6 +4649,7 @@ module Aws::EventBridge
     #   <p>The additional HTTP parameters used for the OAuth authorization request.</p>
     #   @return [Types::ConnectionHttpParameters]
     class UpdateConnectionOAuthRequestParameters < Struct.new(
+      nil,
       :client_parameters,
       :authorization_endpoint,
       :http_method,
@@ -4504,6 +4687,7 @@ module Aws::EventBridge
     #                                   Developer Guide</i>. </p>
     #   @return [String]
     class UpdateConnectionRequest < Struct.new(
+      nil,
       :name,
       :description,
       :authorization_type,
@@ -4531,6 +4715,7 @@ module Aws::EventBridge
     #   <p>A time stamp for the time that the connection was last authorized.</p>
     #   @return [Time]
     class UpdateConnectionResponse < Struct.new(
+      nil,
       :connection_arn,
       :connection_state,
       :creation_time,
@@ -4560,6 +4745,7 @@ module Aws::EventBridge
     #   <p>The ARN of the role used by event replication for this request.</p>
     #   @return [String]
     class UpdateEndpointRequest < Struct.new(
+      nil,
       :name,
       :description,
       :routing_config,
@@ -4601,6 +4787,7 @@ module Aws::EventBridge
     #   <p>The state of the endpoint you updated in this request.</p>
     #   @return [String]
     class UpdateEndpointResponse < Struct.new(
+      nil,
       :name,
       :arn,
       :routing_config,
@@ -4664,6 +4851,7 @@ module Aws::EventBridge
     #            <p>For more information, see <a href="https://docs.aws.amazon.com/eb-event-bus-logs.html">Configuring logs for event buses</a> in the <i>EventBridge User Guide</i>.</p>
     #   @return [Types::LogConfig]
     class UpdateEventBusRequest < Struct.new(
+      nil,
       :name,
       :kms_key_identifier,
       :description,
@@ -4699,6 +4887,7 @@ module Aws::EventBridge
     #            <p>For more information, see <a href="https://docs.aws.amazon.com/eb-event-bus-logs.html">Configuring logs for event buses</a> in the <i>EventBridge User Guide</i>.</p>
     #   @return [Types::LogConfig]
     class UpdateEventBusResponse < Struct.new(
+      nil,
       :arn,
       :name,
       :kms_key_identifier,

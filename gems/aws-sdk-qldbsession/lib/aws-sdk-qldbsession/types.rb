@@ -8,6 +8,7 @@ module Aws::QLDBSession
 
     # <p>Contains the details of the transaction to abort.</p>
     class AbortTransactionRequest < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -18,6 +19,7 @@ module Aws::QLDBSession
     #   <p>Contains server-side performance information for the command.</p>
     #   @return [Types::TimingInformation]
     class AbortTransactionResult < Struct.new(
+      nil,
       :timing_information,
       keyword_init: true
     )
@@ -31,6 +33,7 @@ module Aws::QLDBSession
     # @!attribute code
     #   @return [String]
     class BadRequestException < Struct.new(
+      nil,
       :message,
       :code,
       keyword_init: true
@@ -42,6 +45,7 @@ module Aws::QLDBSession
     # @!attribute message
     #   @return [String]
     class CapacityExceededException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -62,6 +66,7 @@ module Aws::QLDBSession
     #            the client, in the same order that client sent them, and with no duplicates.</p>
     #   @return [String]
     class CommitTransactionRequest < Struct.new(
+      nil,
       :transaction_id,
       :commit_digest,
       keyword_init: true
@@ -83,6 +88,7 @@ module Aws::QLDBSession
     #   <p>Contains metrics about the number of I/O requests that were consumed.</p>
     #   @return [Types::IOUsage]
     class CommitTransactionResult < Struct.new(
+      nil,
       :transaction_id,
       :commit_digest,
       :timing_information,
@@ -94,6 +100,7 @@ module Aws::QLDBSession
 
     # <p>Specifies a request to end the session.</p>
     class EndSessionRequest < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -104,6 +111,7 @@ module Aws::QLDBSession
     #   <p>Contains server-side performance information for the command.</p>
     #   @return [Types::TimingInformation]
     class EndSessionResult < Struct.new(
+      nil,
       :timing_information,
       keyword_init: true
     )
@@ -121,6 +129,7 @@ module Aws::QLDBSession
     #   <p>Specifies the parameters for the parameterized statement in the request.</p>
     #   @return [Array<Types::ValueHolder>]
     class ExecuteStatementRequest < Struct.new(
+      nil,
       :transaction_id,
       :statement,
       :parameters,
@@ -140,6 +149,7 @@ module Aws::QLDBSession
     #   <p>Contains metrics about the number of I/O requests that were consumed.</p>
     #   @return [Types::IOUsage]
     class ExecuteStatementResult < Struct.new(
+      nil,
       :first_page,
       :timing_information,
       :consumed_i_os,
@@ -156,6 +166,7 @@ module Aws::QLDBSession
     #   <p>Specifies the next page token of the page to be fetched.</p>
     #   @return [String]
     class FetchPageRequest < Struct.new(
+      nil,
       :transaction_id,
       :next_page_token,
       keyword_init: true
@@ -174,6 +185,7 @@ module Aws::QLDBSession
     #   <p>Contains metrics about the number of I/O requests that were consumed.</p>
     #   @return [Types::IOUsage]
     class FetchPageResult < Struct.new(
+      nil,
       :page,
       :timing_information,
       :consumed_i_os,
@@ -190,6 +202,7 @@ module Aws::QLDBSession
     #   <p>The number of write I/O requests that the command made.</p>
     #   @return [Integer]
     class IOUsage < Struct.new(
+      nil,
       :read_i_os,
       :write_i_os,
       keyword_init: true
@@ -209,6 +222,7 @@ module Aws::QLDBSession
     # @!attribute code
     #   @return [String]
     class InvalidSessionException < Struct.new(
+      nil,
       :message,
       :code,
       keyword_init: true
@@ -220,6 +234,7 @@ module Aws::QLDBSession
     # @!attribute message
     #   @return [String]
     class LimitExceededException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -231,6 +246,7 @@ module Aws::QLDBSession
     # @!attribute message
     #   @return [String]
     class OccConflictException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -245,6 +261,7 @@ module Aws::QLDBSession
     #   <p>The token of the next page.</p>
     #   @return [String]
     class Page < Struct.new(
+      nil,
       :values,
       :next_page_token,
       keyword_init: true
@@ -256,6 +273,7 @@ module Aws::QLDBSession
     # @!attribute message
     #   @return [String]
     class RateExceededException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -292,6 +310,7 @@ module Aws::QLDBSession
     #   <p>Command to fetch a page.</p>
     #   @return [Types::FetchPageRequest]
     class SendCommandRequest < Struct.new(
+      nil,
       :session_token,
       :start_session,
       :start_transaction,
@@ -329,6 +348,7 @@ module Aws::QLDBSession
     #   <p>Contains the details of the fetched page.</p>
     #   @return [Types::FetchPageResult]
     class SendCommandResult < Struct.new(
+      nil,
       :start_session,
       :start_transaction,
       :end_session,
@@ -346,6 +366,7 @@ module Aws::QLDBSession
     #   <p>The name of the ledger to start a new session against.</p>
     #   @return [String]
     class StartSessionRequest < Struct.new(
+      nil,
       :ledger_name,
       keyword_init: true
     )
@@ -361,6 +382,7 @@ module Aws::QLDBSession
     #   <p>Contains server-side performance information for the command.</p>
     #   @return [Types::TimingInformation]
     class StartSessionResult < Struct.new(
+      nil,
       :session_token,
       :timing_information,
       keyword_init: true
@@ -370,6 +392,7 @@ module Aws::QLDBSession
 
     # <p>Specifies a request to start a transaction.</p>
     class StartTransactionRequest < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -383,6 +406,7 @@ module Aws::QLDBSession
     #   <p>Contains server-side performance information for the command.</p>
     #   @return [Types::TimingInformation]
     class StartTransactionResult < Struct.new(
+      nil,
       :transaction_id,
       :timing_information,
       keyword_init: true
@@ -398,6 +422,7 @@ module Aws::QLDBSession
     #            milliseconds.</p>
     #   @return [Integer]
     class TimingInformation < Struct.new(
+      nil,
       :processing_time_milliseconds,
       keyword_init: true
     )
@@ -417,6 +442,7 @@ module Aws::QLDBSession
     #   <p>An Amazon Ion plaintext value contained in a <code>ValueHolder</code> structure.</p>
     #   @return [String]
     class ValueHolder < Struct.new(
+      nil,
       :ion_binary,
       :ion_text,
       keyword_init: true

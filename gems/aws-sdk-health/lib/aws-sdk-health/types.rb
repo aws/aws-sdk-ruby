@@ -17,6 +17,7 @@ module Aws::Health
     #   <p>The number of affected entities aggregated by the entity status codes.</p>
     #   @return [Hash<String, Integer>]
     class AccountEntityAggregate < Struct.new(
+      nil,
       :account_id,
       :count,
       :statuses,
@@ -72,6 +73,7 @@ module Aws::Health
     #   <p>Additional metadata about the affected entity.</p>
     #   @return [Hash<String, String>]
     class AffectedEntity < Struct.new(
+      nil,
       :entity_arn,
       :event_arn,
       :entity_value,
@@ -92,6 +94,7 @@ module Aws::Health
     # @!attribute message
     #   @return [String]
     class ConcurrentModificationException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -112,6 +115,7 @@ module Aws::Health
     #   <p>The ending date and time of a time range.</p>
     #   @return [Time]
     class DateTimeRange < Struct.new(
+      nil,
       :from,
       :to,
       keyword_init: true
@@ -139,6 +143,7 @@ module Aws::Health
     #   <p>The maximum number of items to return in one batch, between 10 and 100, inclusive.</p>
     #   @return [Integer]
     class DescribeAffectedAccountsForOrganizationRequest < Struct.new(
+      nil,
       :event_arn,
       :next_token,
       :max_results,
@@ -178,6 +183,7 @@ module Aws::Health
     #   When all results have been returned, the response does not contain a pagination token value.</p>
     #   @return [String]
     class DescribeAffectedAccountsForOrganizationResponse < Struct.new(
+      nil,
       :affected_accounts,
       :event_scope_code,
       :next_token,
@@ -208,6 +214,7 @@ module Aws::Health
     #   <p>A JSON set of elements including the <code>awsAccountId</code>, <code>eventArn</code> and a set of <code>statusCodes</code>.</p>
     #   @return [Array<Types::EntityAccountFilter>]
     class DescribeAffectedEntitiesForOrganizationRequest < Struct.new(
+      nil,
       :organization_entity_filters,
       :locale,
       :next_token,
@@ -234,6 +241,7 @@ module Aws::Health
     #   When all results have been returned, the response does not contain a pagination token value.</p>
     #   @return [String]
     class DescribeAffectedEntitiesForOrganizationResponse < Struct.new(
+      nil,
       :entities,
       :failed_set,
       :next_token,
@@ -258,6 +266,7 @@ module Aws::Health
     #   <p>The maximum number of items to return in one batch, between 10 and 100, inclusive.</p>
     #   @return [Integer]
     class DescribeAffectedEntitiesRequest < Struct.new(
+      nil,
       :filter,
       :locale,
       :next_token,
@@ -277,6 +286,7 @@ module Aws::Health
     #   When all results have been returned, the response does not contain a pagination token value.</p>
     #   @return [String]
     class DescribeAffectedEntitiesResponse < Struct.new(
+      nil,
       :entities,
       :next_token,
       keyword_init: true
@@ -292,6 +302,7 @@ module Aws::Health
     #   <p>A list of 12-digit Amazon Web Services account numbers that contains the affected entities.</p>
     #   @return [Array<String>]
     class DescribeEntityAggregatesForOrganizationRequest < Struct.new(
+      nil,
       :event_arns,
       :aws_account_ids,
       keyword_init: true
@@ -303,6 +314,7 @@ module Aws::Health
     #   <p>The list of entity aggregates for each of the specified accounts that are affected by each of the specified events.</p>
     #   @return [Array<Types::OrganizationEntityAggregate>]
     class DescribeEntityAggregatesForOrganizationResponse < Struct.new(
+      nil,
       :organization_entity_aggregates,
       keyword_init: true
     )
@@ -314,6 +326,7 @@ module Aws::Health
     #            </p>
     #   @return [Array<String>]
     class DescribeEntityAggregatesRequest < Struct.new(
+      nil,
       :event_arns,
       keyword_init: true
     )
@@ -324,6 +337,7 @@ module Aws::Health
     #   <p>The number of entities that are affected by each of the specified events.</p>
     #   @return [Array<Types::EntityAggregate>]
     class DescribeEntityAggregatesResponse < Struct.new(
+      nil,
       :entity_aggregates,
       keyword_init: true
     )
@@ -346,6 +360,7 @@ module Aws::Health
     #   When all results have been returned, the response does not contain a pagination token value.</p>
     #   @return [String]
     class DescribeEventAggregatesRequest < Struct.new(
+      nil,
       :filter,
       :aggregate_field,
       :max_results,
@@ -365,6 +380,7 @@ module Aws::Health
     #   When all results have been returned, the response does not contain a pagination token value.</p>
     #   @return [String]
     class DescribeEventAggregatesResponse < Struct.new(
+      nil,
       :event_aggregates,
       :next_token,
       keyword_init: true
@@ -380,6 +396,7 @@ module Aws::Health
     #   <p>The locale (language) to return information in. English (en) is the default and the only supported value at this time.</p>
     #   @return [String]
     class DescribeEventDetailsForOrganizationRequest < Struct.new(
+      nil,
       :organization_event_detail_filters,
       :locale,
       keyword_init: true
@@ -394,6 +411,7 @@ module Aws::Health
     #   <p>Error messages for any events that could not be retrieved.</p>
     #   @return [Array<Types::OrganizationEventDetailsErrorItem>]
     class DescribeEventDetailsForOrganizationResponse < Struct.new(
+      nil,
       :successful_set,
       :failed_set,
       keyword_init: true
@@ -409,6 +427,7 @@ module Aws::Health
     #   <p>The locale (language) to return information in. English (en) is the default and the only supported value at this time.</p>
     #   @return [String]
     class DescribeEventDetailsRequest < Struct.new(
+      nil,
       :event_arns,
       :locale,
       keyword_init: true
@@ -423,6 +442,7 @@ module Aws::Health
     #   <p>Error messages for any events that could not be retrieved.</p>
     #   @return [Array<Types::EventDetailsErrorItem>]
     class DescribeEventDetailsResponse < Struct.new(
+      nil,
       :successful_set,
       :failed_set,
       keyword_init: true
@@ -450,6 +470,7 @@ module Aws::Health
     #            </note>
     #   @return [Integer]
     class DescribeEventTypesRequest < Struct.new(
+      nil,
       :filter,
       :locale,
       :next_token,
@@ -475,6 +496,7 @@ module Aws::Health
     #   When all results have been returned, the response does not contain a pagination token value.</p>
     #   @return [String]
     class DescribeEventTypesResponse < Struct.new(
+      nil,
       :event_types,
       :next_token,
       keyword_init: true
@@ -498,6 +520,7 @@ module Aws::Health
     #   <p>The locale (language) to return information in. English (en) is the default and the only supported value at this time.</p>
     #   @return [String]
     class DescribeEventsForOrganizationRequest < Struct.new(
+      nil,
       :filter,
       :next_token,
       :max_results,
@@ -517,6 +540,7 @@ module Aws::Health
     #   When all results have been returned, the response does not contain a pagination token value.</p>
     #   @return [String]
     class DescribeEventsForOrganizationResponse < Struct.new(
+      nil,
       :events,
       :next_token,
       keyword_init: true
@@ -540,6 +564,7 @@ module Aws::Health
     #   <p>The locale (language) to return information in. English (en) is the default and the only supported value at this time.</p>
     #   @return [String]
     class DescribeEventsRequest < Struct.new(
+      nil,
       :filter,
       :next_token,
       :max_results,
@@ -559,6 +584,7 @@ module Aws::Health
     #   When all results have been returned, the response does not contain a pagination token value.</p>
     #   @return [String]
     class DescribeEventsResponse < Struct.new(
+      nil,
       :events,
       :next_token,
       keyword_init: true
@@ -572,6 +598,7 @@ module Aws::Health
     #            <p>Valid values are <code>ENABLED | DISABLED | PENDING</code>. </p>
     #   @return [String]
     class DescribeHealthServiceStatusForOrganizationResponse < Struct.new(
+      nil,
       :health_service_access_status_for_organization,
       keyword_init: true
     )
@@ -596,6 +623,7 @@ module Aws::Health
     #   <p>A list of entity status codes.</p>
     #   @return [Array<String>]
     class EntityAccountFilter < Struct.new(
+      nil,
       :event_arn,
       :aws_account_id,
       :status_codes,
@@ -622,6 +650,7 @@ module Aws::Health
     #   <p>The number of affected entities aggregated by the entity status codes.</p>
     #   @return [Hash<String, Integer>]
     class EntityAggregate < Struct.new(
+      nil,
       :event_arn,
       :count,
       :statuses,
@@ -660,6 +689,7 @@ module Aws::Health
     #               <code>UNKNOWN</code>).</p>
     #   @return [Array<String>]
     class EntityFilter < Struct.new(
+      nil,
       :event_arns,
       :entity_arns,
       :entity_values,
@@ -754,6 +784,7 @@ module Aws::Health
     #            </ul>
     #   @return [String]
     class Event < Struct.new(
+      nil,
       :arn,
       :service,
       :event_type_code,
@@ -785,6 +816,7 @@ module Aws::Health
     #   <p>The 12-digit Amazon Web Services account numbers that contains the affected entities.</p>
     #   @return [String]
     class EventAccountFilter < Struct.new(
+      nil,
       :event_arn,
       :aws_account_id,
       keyword_init: true
@@ -800,6 +832,7 @@ module Aws::Health
     #   <p>The number of events of the associated issue type.</p>
     #   @return [Integer]
     class EventAggregate < Struct.new(
+      nil,
       :aggregate_value,
       :count,
       keyword_init: true
@@ -818,6 +851,7 @@ module Aws::Health
     #   <p>The most recent description of the event.</p>
     #   @return [String]
     class EventDescription < Struct.new(
+      nil,
       :latest_description,
       keyword_init: true
     )
@@ -836,6 +870,7 @@ module Aws::Health
     #   <p>Additional metadata about the event.</p>
     #   @return [Hash<String, String>]
     class EventDetails < Struct.new(
+      nil,
       :event,
       :event_description,
       :event_metadata,
@@ -862,6 +897,7 @@ module Aws::Health
     #   <p>A message that describes the error.</p>
     #   @return [String]
     class EventDetailsErrorItem < Struct.new(
+      nil,
       :event_arn,
       :error_name,
       :error_message,
@@ -920,6 +956,7 @@ module Aws::Health
     #   <p>A list of event status codes.</p>
     #   @return [Array<String>]
     class EventFilter < Struct.new(
+      nil,
       :event_arns,
       :event_type_codes,
       :services,
@@ -961,6 +998,7 @@ module Aws::Health
     #   the <code>investigation</code> value isn't supported at this time.</p>
     #   @return [String]
     class EventType < Struct.new(
+      nil,
       :service,
       :code,
       :category,
@@ -983,6 +1021,7 @@ module Aws::Health
     #   the <code>investigation</code> value isn't supported at this time.</p>
     #   @return [Array<String>]
     class EventTypeFilter < Struct.new(
+      nil,
       :event_type_codes,
       :services,
       :event_type_categories,
@@ -995,6 +1034,7 @@ module Aws::Health
     # @!attribute message
     #   @return [String]
     class InvalidPaginationToken < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -1027,6 +1067,7 @@ module Aws::Health
     #            don't specify an Amazon Web Services account.</p>
     #   @return [String]
     class OrganizationAffectedEntitiesErrorItem < Struct.new(
+      nil,
       :aws_account_id,
       :event_arn,
       :error_name,
@@ -1053,6 +1094,7 @@ module Aws::Health
     #            a specific event. If there are no <code>awsAccountIds</code> provided in the request, this field will be empty in the response.</p>
     #   @return [Array<Types::AccountEntityAggregate>]
     class OrganizationEntityAggregate < Struct.new(
+      nil,
       :event_arn,
       :count,
       :statuses,
@@ -1129,6 +1171,7 @@ module Aws::Health
     #               <code>closed</code>, and <code>upcoming</code>.</p>
     #   @return [String]
     class OrganizationEvent < Struct.new(
+      nil,
       :arn,
       :service,
       :event_type_code,
@@ -1179,6 +1222,7 @@ module Aws::Health
     #   <p>Additional metadata about the event.</p>
     #   @return [Hash<String, String>]
     class OrganizationEventDetails < Struct.new(
+      nil,
       :aws_account_id,
       :event,
       :event_description,
@@ -1224,6 +1268,7 @@ module Aws::Health
     #            </ul>
     #   @return [String]
     class OrganizationEventDetailsErrorItem < Struct.new(
+      nil,
       :aws_account_id,
       :event_arn,
       :error_name,
@@ -1289,6 +1334,7 @@ module Aws::Health
     #   <p>A list of event status codes.</p>
     #   @return [Array<String>]
     class OrganizationEventFilter < Struct.new(
+      nil,
       :event_type_codes,
       :aws_account_ids,
       :services,
@@ -1309,6 +1355,7 @@ module Aws::Health
     # @!attribute message
     #   @return [String]
     class UnsupportedLocale < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )

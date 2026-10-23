@@ -10,6 +10,7 @@ module Aws::ApplicationCostProfiler
     # @!attribute message
     #   @return [String]
     class AccessDeniedException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -20,6 +21,7 @@ module Aws::ApplicationCostProfiler
     #   <p>Required. ID of the report to delete.</p>
     #   @return [String]
     class DeleteReportDefinitionRequest < Struct.new(
+      nil,
       :report_id,
       keyword_init: true
     )
@@ -30,6 +32,7 @@ module Aws::ApplicationCostProfiler
     #   <p>ID of the report that was deleted.</p>
     #   @return [String]
     class DeleteReportDefinitionResult < Struct.new(
+      nil,
       :report_id,
       keyword_init: true
     )
@@ -40,6 +43,7 @@ module Aws::ApplicationCostProfiler
     #   <p>ID of the report to retrieve.</p>
     #   @return [String]
     class GetReportDefinitionRequest < Struct.new(
+      nil,
       :report_id,
       keyword_init: true
     )
@@ -68,6 +72,7 @@ module Aws::ApplicationCostProfiler
     #   <p>Timestamp (milliseconds) when this report definition was last updated.</p>
     #   @return [Time]
     class GetReportDefinitionResult < Struct.new(
+      nil,
       :report_id,
       :report_description,
       :report_frequency,
@@ -84,6 +89,7 @@ module Aws::ApplicationCostProfiler
     #   <p>Amazon S3 location to import application usage data from.</p>
     #   @return [Types::SourceS3Location]
     class ImportApplicationUsageRequest < Struct.new(
+      nil,
       :source_s3_location,
       keyword_init: true
     )
@@ -94,6 +100,7 @@ module Aws::ApplicationCostProfiler
     #   <p>ID of the import request.</p>
     #   @return [String]
     class ImportApplicationUsageResult < Struct.new(
+      nil,
       :import_id,
       keyword_init: true
     )
@@ -104,6 +111,7 @@ module Aws::ApplicationCostProfiler
     # @!attribute message
     #   @return [String]
     class InternalServerException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -117,6 +125,7 @@ module Aws::ApplicationCostProfiler
     #   <p>The maximum number of results to return.</p>
     #   @return [Integer]
     class ListReportDefinitionsRequest < Struct.new(
+      nil,
       :next_token,
       :max_results,
       keyword_init: true
@@ -131,6 +140,7 @@ module Aws::ApplicationCostProfiler
     #   <p>The value of the next token, if it exists. Null if there are no more results.</p>
     #   @return [String]
     class ListReportDefinitionsResult < Struct.new(
+      nil,
       :report_definitions,
       :next_token,
       keyword_init: true
@@ -156,6 +166,7 @@ module Aws::ApplicationCostProfiler
     #         report.</p>
     #   @return [Types::S3Location]
     class PutReportDefinitionRequest < Struct.new(
+      nil,
       :report_id,
       :report_description,
       :report_frequency,
@@ -170,6 +181,7 @@ module Aws::ApplicationCostProfiler
     #   <p>ID of the report.</p>
     #   @return [String]
     class PutReportDefinitionResult < Struct.new(
+      nil,
       :report_id,
       keyword_init: true
     )
@@ -199,6 +211,7 @@ module Aws::ApplicationCostProfiler
     #   <p>Timestamp (milliseconds) when this report definition was last updated.</p>
     #   @return [Time]
     class ReportDefinition < Struct.new(
+      nil,
       :report_id,
       :report_description,
       :report_frequency,
@@ -220,6 +233,7 @@ module Aws::ApplicationCostProfiler
     #   <p>Prefix for the location to write to.</p>
     #   @return [String]
     class S3Location < Struct.new(
+      nil,
       :bucket,
       :prefix,
       keyword_init: true
@@ -231,6 +245,7 @@ module Aws::ApplicationCostProfiler
     # @!attribute message
     #   @return [String]
     class ServiceQuotaExceededException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -251,6 +266,7 @@ module Aws::ApplicationCostProfiler
     #             Enabling a Region</a> in the <i>AWS General Reference guide</i>.</p>
     #   @return [String]
     class SourceS3Location < Struct.new(
+      nil,
       :bucket,
       :key,
       :region,
@@ -263,6 +279,7 @@ module Aws::ApplicationCostProfiler
     # @!attribute message
     #   @return [String]
     class ThrottlingException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -286,6 +303,7 @@ module Aws::ApplicationCostProfiler
     #         report.</p>
     #   @return [Types::S3Location]
     class UpdateReportDefinitionRequest < Struct.new(
+      nil,
       :report_id,
       :report_description,
       :report_frequency,
@@ -300,6 +318,7 @@ module Aws::ApplicationCostProfiler
     #   <p>ID of the report.</p>
     #   @return [String]
     class UpdateReportDefinitionResult < Struct.new(
+      nil,
       :report_id,
       keyword_init: true
     )
@@ -310,6 +329,7 @@ module Aws::ApplicationCostProfiler
     # @!attribute message
     #   @return [String]
     class ValidationException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )

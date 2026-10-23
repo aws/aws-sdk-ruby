@@ -44,6 +44,7 @@ module Aws::PI
     #   <p>The list of identified insights in the analysis report.</p>
     #   @return [Array<Types::Insight>]
     class AnalysisReport < Struct.new(
+      nil,
       :analysis_report_id,
       :identifier,
       :service_type,
@@ -77,6 +78,7 @@ module Aws::PI
     #   <p>List of all the tags added to the analysis report.</p>
     #   @return [Array<Types::Tag>]
     class AnalysisReportSummary < Struct.new(
+      nil,
       :analysis_report_id,
       :create_time,
       :start_time,
@@ -107,6 +109,7 @@ module Aws::PI
     #   <p>The metadata assigned to the analysis report consisting of a key-value pair.</p>
     #   @return [Array<Types::Tag>]
     class CreatePerformanceAnalysisReportRequest < Struct.new(
+      nil,
       :service_type,
       :identifier,
       :start_time,
@@ -121,6 +124,7 @@ module Aws::PI
     #   <p>A unique identifier for the created analysis report.</p>
     #   @return [String]
     class CreatePerformanceAnalysisReportResponse < Struct.new(
+      nil,
       :analysis_report_id,
       keyword_init: true
     )
@@ -138,6 +142,7 @@ module Aws::PI
     #           </p>
     #   @return [Types::PerformanceInsightsMetric]
     class Data < Struct.new(
+      nil,
       :performance_insights_metric,
       keyword_init: true
     )
@@ -152,6 +157,7 @@ module Aws::PI
     #   <p>The actual value associated with a particular <code>Timestamp</code>.</p>
     #   @return [Float]
     class DataPoint < Struct.new(
+      nil,
       :timestamp,
       :value,
       keyword_init: true
@@ -173,6 +179,7 @@ module Aws::PI
     #   <p>The unique identifier of the analysis report for deletion.</p>
     #   @return [String]
     class DeletePerformanceAnalysisReportRequest < Struct.new(
+      nil,
       :service_type,
       :identifier,
       :analysis_report_id,
@@ -182,6 +189,7 @@ module Aws::PI
     end
 
     class DeletePerformanceAnalysisReportResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -314,6 +322,7 @@ module Aws::PI
     #               the token, up to the value specified by <code>MaxRecords</code>.</p>
     #   @return [String]
     class DescribeDimensionKeysRequest < Struct.new(
+      nil,
       :service_type,
       :identifier,
       :start_time,
@@ -351,6 +360,7 @@ module Aws::PI
     #               previous request. To get the remaining records, specify <code>NextToken</code> in a separate request with this value. </p>
     #   @return [String]
     class DescribeDimensionKeysResponse < Struct.new(
+      nil,
       :aligned_start_time,
       :aligned_end_time,
       :partition_keys,
@@ -366,6 +376,7 @@ module Aws::PI
     #   <p>The identifier of a dimension.</p>
     #   @return [String]
     class DimensionDetail < Struct.new(
+      nil,
       :identifier,
       keyword_init: true
     )
@@ -676,6 +687,7 @@ module Aws::PI
     #   <p>The maximum number of items to fetch for this dimension group.</p>
     #   @return [Integer]
     class DimensionGroup < Struct.new(
+      nil,
       :group,
       :dimensions,
       :limit,
@@ -692,6 +704,7 @@ module Aws::PI
     #   <p>The dimensions within a dimension group.</p>
     #   @return [Array<Types::DimensionDetail>]
     class DimensionGroupDetail < Struct.new(
+      nil,
       :group,
       :dimensions,
       keyword_init: true
@@ -714,6 +727,7 @@ module Aws::PI
     #   <p>If <code>PartitionBy</code> was specified, <code>PartitionKeys</code> contains the dimensions that were.</p>
     #   @return [Array<Float>]
     class DimensionKeyDescription < Struct.new(
+      nil,
       :dimensions,
       :total,
       :additional_metrics,
@@ -770,6 +784,7 @@ module Aws::PI
     #            </ul>
     #   @return [String]
     class DimensionKeyDetail < Struct.new(
+      nil,
       :value,
       :dimension,
       :status,
@@ -810,6 +825,7 @@ module Aws::PI
     #            </ul>
     #   @return [String]
     class FeatureMetadata < Struct.new(
+      nil,
       :status,
       keyword_init: true
     )
@@ -894,6 +910,7 @@ module Aws::PI
     #            </ul>
     #   @return [Array<String>]
     class GetDimensionKeyDetailsRequest < Struct.new(
+      nil,
       :service_type,
       :identifier,
       :group,
@@ -908,6 +925,7 @@ module Aws::PI
     #   <p>The details for the requested dimensions.</p>
     #   @return [Array<Types::DimensionKeyDetail>]
     class GetDimensionKeyDetailsResponse < Struct.new(
+      nil,
       :dimensions,
       keyword_init: true
     )
@@ -940,6 +958,7 @@ module Aws::PI
     #           </p>
     #   @return [String]
     class GetPerformanceAnalysisReportRequest < Struct.new(
+      nil,
       :service_type,
       :identifier,
       :analysis_report_id,
@@ -954,6 +973,7 @@ module Aws::PI
     #   <p>The summary of the performance analysis report created for a time period.</p>
     #   @return [Types::AnalysisReport]
     class GetPerformanceAnalysisReportResponse < Struct.new(
+      nil,
       :analysis_report,
       keyword_init: true
     )
@@ -970,6 +990,7 @@ module Aws::PI
     #           </p>
     #   @return [String]
     class GetResourceMetadataRequest < Struct.new(
+      nil,
       :service_type,
       :identifier,
       keyword_init: true
@@ -989,6 +1010,7 @@ module Aws::PI
     #               turned on or off on a specific DB instance.</p>
     #   @return [Hash<String, Types::FeatureMetadata>]
     class GetResourceMetadataResponse < Struct.new(
+      nil,
       :identifier,
       :features,
       keyword_init: true
@@ -1077,6 +1099,7 @@ module Aws::PI
     #   <p>The returned timestamp which is the start or end time of the time periods. The default value is <code>END_TIME</code>.</p>
     #   @return [String]
     class GetResourceMetricsRequest < Struct.new(
+      nil,
       :service_type,
       :identifier,
       :metric_queries,
@@ -1114,6 +1137,7 @@ module Aws::PI
     #         </p>
     #   @return [String]
     class GetResourceMetricsResponse < Struct.new(
+      nil,
       :aligned_start_time,
       :aligned_end_time,
       :identifier,
@@ -1166,6 +1190,7 @@ module Aws::PI
     #               used as baseline to generate the insight.</p>
     #   @return [Array<Types::Data>]
     class Insight < Struct.new(
+      nil,
       :insight_id,
       :insight_type,
       :context,
@@ -1186,6 +1211,7 @@ module Aws::PI
     # @!attribute message
     #   @return [String]
     class InternalServiceError < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -1196,6 +1222,7 @@ module Aws::PI
     # @!attribute message
     #   @return [String]
     class InvalidArgumentException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -1230,6 +1257,7 @@ module Aws::PI
     #               available dimensions for the target database engine whether or not you are authorized to access them.</p>
     #   @return [Array<String>]
     class ListAvailableResourceDimensionsRequest < Struct.new(
+      nil,
       :service_type,
       :identifier,
       :metrics,
@@ -1249,6 +1277,7 @@ module Aws::PI
     #               the response includes only records beyond the token, up to the value specified by <code>MaxRecords</code>.</p>
     #   @return [String]
     class ListAvailableResourceDimensionsResponse < Struct.new(
+      nil,
       :metric_dimensions,
       :next_token,
       keyword_init: true
@@ -1295,6 +1324,7 @@ module Aws::PI
     #               of existing items, the response includes a pagination token. </p>
     #   @return [Integer]
     class ListAvailableResourceMetricsRequest < Struct.new(
+      nil,
       :service_type,
       :identifier,
       :metric_types,
@@ -1315,6 +1345,7 @@ module Aws::PI
     #               previous request. To get the remaining records, specify <code>NextToken</code> in a separate request with this value. </p>
     #   @return [String]
     class ListAvailableResourceMetricsResponse < Struct.new(
+      nil,
       :metrics,
       :next_token,
       keyword_init: true
@@ -1346,6 +1377,7 @@ module Aws::PI
     #   <p>Specifies whether or not to include the list of tags in the response.</p>
     #   @return [Boolean]
     class ListPerformanceAnalysisReportsRequest < Struct.new(
+      nil,
       :service_type,
       :identifier,
       :next_token,
@@ -1366,6 +1398,7 @@ module Aws::PI
     #               up to the value specified by <code>MaxResults</code>.</p>
     #   @return [String]
     class ListPerformanceAnalysisReportsResponse < Struct.new(
+      nil,
       :analysis_reports,
       :next_token,
       keyword_init: true
@@ -1383,6 +1416,7 @@ module Aws::PI
     #                   Constructing an RDS Amazon Resource Name (ARN)</a>.</p>
     #   @return [String]
     class ListTagsForResourceRequest < Struct.new(
+      nil,
       :service_type,
       :resource_arn,
       keyword_init: true
@@ -1394,6 +1428,7 @@ module Aws::PI
     #   <p>The metadata assigned to an Amazon RDS resource consisting of a key-value pair.</p>
     #   @return [Array<Types::Tag>]
     class ListTagsForResourceResponse < Struct.new(
+      nil,
       :tags,
       keyword_init: true
     )
@@ -1408,6 +1443,7 @@ module Aws::PI
     #   <p>The available dimension groups for a metric type.</p>
     #   @return [Array<Types::DimensionGroupDetail>]
     class MetricDimensionGroups < Struct.new(
+      nil,
       :metric,
       :groups,
       keyword_init: true
@@ -1424,6 +1460,7 @@ module Aws::PI
     #   <p>An array of timestamp-value pairs, representing measurements over a period of time.</p>
     #   @return [Array<Types::DataPoint>]
     class MetricKeyDataPoints < Struct.new(
+      nil,
       :key,
       :data_points,
       keyword_init: true
@@ -1486,6 +1523,7 @@ module Aws::PI
     #            </note>
     #   @return [Hash<String, String>]
     class MetricQuery < Struct.new(
+      nil,
       :metric,
       :group_by,
       :filter,
@@ -1498,6 +1536,7 @@ module Aws::PI
     # @!attribute message
     #   @return [String]
     class NotAuthorizedException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -1521,6 +1560,7 @@ module Aws::PI
     #   <p>The value of the metric. For example, <code>9</code> for <code>db.load.avg</code>.</p>
     #   @return [Float]
     class PerformanceInsightsMetric < Struct.new(
+      nil,
       :metric,
       :display_name,
       :dimensions,
@@ -1541,6 +1581,7 @@ module Aws::PI
     #            </p>
     #   @return [String]
     class Recommendation < Struct.new(
+      nil,
       :recommendation_id,
       :recommendation_description,
       keyword_init: true
@@ -1555,6 +1596,7 @@ module Aws::PI
     #   <p>A dimension map that contains the dimensions for this partition.</p>
     #   @return [Hash<String, String>]
     class ResponsePartitionKey < Struct.new(
+      nil,
       :dimensions,
       keyword_init: true
     )
@@ -1573,6 +1615,7 @@ module Aws::PI
     #   <p>The unit of the metric.</p>
     #   @return [String]
     class ResponseResourceMetric < Struct.new(
+      nil,
       :metric,
       :description,
       :unit,
@@ -1614,6 +1657,7 @@ module Aws::PI
     #   <p>The valid dimensions for the metric.</p>
     #   @return [Hash<String, String>]
     class ResponseResourceMetricKey < Struct.new(
+      nil,
       :metric,
       :dimensions,
       keyword_init: true
@@ -1635,6 +1679,7 @@ module Aws::PI
     #               white-space, '_', '.', ':', '/', '=', '+', '-', '@' (Java regex: "^([\\p{L}\\p{Z}\\p{N}_.:/=+\\-@]*)$").</p>
     #   @return [String]
     class Tag < Struct.new(
+      nil,
       :key,
       :value,
       keyword_init: true
@@ -1654,6 +1699,7 @@ module Aws::PI
     #   <p>The metadata assigned to an Amazon RDS resource consisting of a key-value pair.</p>
     #   @return [Array<Types::Tag>]
     class TagResourceRequest < Struct.new(
+      nil,
       :service_type,
       :resource_arn,
       :tags,
@@ -1663,6 +1709,7 @@ module Aws::PI
     end
 
     class TagResourceResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1680,6 +1727,7 @@ module Aws::PI
     #   <p>The metadata assigned to an Amazon RDS Performance Insights resource consisting of a key-value pair.</p>
     #   @return [Array<String>]
     class UntagResourceRequest < Struct.new(
+      nil,
       :service_type,
       :resource_arn,
       :tag_keys,
@@ -1689,6 +1737,7 @@ module Aws::PI
     end
 
     class UntagResourceResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure

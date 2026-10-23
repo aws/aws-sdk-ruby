@@ -42,6 +42,7 @@ module Aws::SESv2
     #   <p>Information about the review of the latest details you submitted.</p>
     #   @return [Types::ReviewDetails]
     class AccountDetails < Struct.new(
+      nil,
       :mail_type,
       :website_url,
       :contact_language,
@@ -58,6 +59,7 @@ module Aws::SESv2
     # @!attribute message
     #   @return [String]
     class AccountSuspendedException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -68,6 +70,7 @@ module Aws::SESv2
     # @!attribute message
     #   @return [String]
     class AlreadyExistsException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -80,6 +83,7 @@ module Aws::SESv2
     #           emails.</p>
     #   @return [String]
     class ArchivingOptions < Struct.new(
+      nil,
       :archive_arn,
       keyword_init: true
     )
@@ -120,6 +124,7 @@ module Aws::SESv2
     #            </note>
     #   @return [String]
     class Attachment < Struct.new(
+      nil,
       :raw_content,
       :content_disposition,
       :file_name,
@@ -136,6 +141,7 @@ module Aws::SESv2
     # @!attribute message
     #   @return [String]
     class BadRequestException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -227,6 +233,7 @@ module Aws::SESv2
     #   <p>Represents the end date for the query interval.</p>
     #   @return [Time]
     class BatchGetMetricDataQuery < Struct.new(
+      nil,
       :id,
       :namespace,
       :metric,
@@ -243,6 +250,7 @@ module Aws::SESv2
     #   <p>A list of queries for metrics to be retrieved.</p>
     #   @return [Array<Types::BatchGetMetricDataQuery>]
     class BatchGetMetricDataRequest < Struct.new(
+      nil,
       :queries,
       keyword_init: true
     )
@@ -257,6 +265,7 @@ module Aws::SESv2
     #   <p>A list of <code>MetricDataError</code> encountered while processing your metric data batch request.</p>
     #   @return [Array<Types::MetricDataError>]
     class BatchGetMetricDataResponse < Struct.new(
+      nil,
       :results,
       :errors,
       keyword_init: true
@@ -277,6 +286,7 @@ module Aws::SESv2
     #               maintainer.</p>
     #   @return [String]
     class BlacklistEntry < Struct.new(
+      nil,
       :rbl_name,
       :listing_time,
       :description,
@@ -297,6 +307,7 @@ module Aws::SESv2
     #               and more. </p>
     #   @return [Types::Content]
     class Body < Struct.new(
+      nil,
       :text,
       :html,
       keyword_init: true
@@ -320,6 +331,7 @@ module Aws::SESv2
     #           </p>
     #   @return [String]
     class Bounce < Struct.new(
+      nil,
       :bounce_type,
       :bounce_sub_type,
       :diagnostic_code,
@@ -334,6 +346,7 @@ module Aws::SESv2
     #   <p>The template to use for the bulk email message.</p>
     #   @return [Types::Template]
     class BulkEmailContent < Struct.new(
+      nil,
       :template,
       keyword_init: true
     )
@@ -394,6 +407,7 @@ module Aws::SESv2
     #            </ul>
     #   @return [Array<Types::MessageHeader>]
     class BulkEmailEntry < Struct.new(
+      nil,
       :destination,
       :replacement_tags,
       :replacement_email_content,
@@ -477,6 +491,7 @@ module Aws::SESv2
     #               operation.</p>
     #   @return [String]
     class BulkEmailEntryResult < Struct.new(
+      nil,
       :status,
       :error,
       :message_id,
@@ -490,6 +505,7 @@ module Aws::SESv2
     #   <p>The export job ID.</p>
     #   @return [String]
     class CancelExportJobRequest < Struct.new(
+      nil,
       :job_id,
       keyword_init: true
     )
@@ -499,6 +515,7 @@ module Aws::SESv2
     # <p>An HTTP 200 response if the request succeeds, or an error message if the request
     #             fails.</p>
     class CancelExportJobResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -511,6 +528,7 @@ module Aws::SESv2
     #               Amazon CloudWatch.</p>
     #   @return [Array<Types::CloudWatchDimensionConfiguration>]
     class CloudWatchDestination < Struct.new(
+      nil,
       :dimension_configurations,
       keyword_init: true
     )
@@ -554,6 +572,7 @@ module Aws::SESv2
     #            </ul>
     #   @return [String]
     class CloudWatchDimensionConfiguration < Struct.new(
+      nil,
       :dimension_name,
       :dimension_value_source,
       :default_dimension_value,
@@ -576,6 +595,7 @@ module Aws::SESv2
     #           </p>
     #   @return [String]
     class Complaint < Struct.new(
+      nil,
       :complaint_sub_type,
       :complaint_feedback_type,
       keyword_init: true
@@ -587,6 +607,7 @@ module Aws::SESv2
     # @!attribute message
     #   @return [String]
     class ConcurrentModificationException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -597,6 +618,7 @@ module Aws::SESv2
     # @!attribute message
     #   @return [String]
     class ConflictException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -621,6 +643,7 @@ module Aws::SESv2
     #   <p>A timestamp noting the last time the contact's information was updated.</p>
     #   @return [Time]
     class Contact < Struct.new(
+      nil,
       :email_address,
       :topic_preferences,
       :topic_default_preferences,
@@ -645,6 +668,7 @@ module Aws::SESv2
     #   <p>A timestamp noting the last time the contact list was updated.</p>
     #   @return [Time]
     class ContactList < Struct.new(
+      nil,
       :contact_list_name,
       :last_updated_timestamp,
       keyword_init: true
@@ -670,6 +694,7 @@ module Aws::SESv2
     #            </ul>
     #   @return [String]
     class ContactListDestination < Struct.new(
+      nil,
       :contact_list_name,
       :contact_list_import_action,
       keyword_init: true
@@ -689,6 +714,7 @@ module Aws::SESv2
     #                   <code>UTF-8</code>, <code>ISO-8859-1</code>, or <code>Shift_JIS</code>.</p>
     #   @return [String]
     class Content < Struct.new(
+      nil,
       :data,
       :charset,
       keyword_init: true
@@ -707,6 +733,7 @@ module Aws::SESv2
     #   <p>An object that defines the event destination.</p>
     #   @return [Types::EventDestinationDefinition]
     class CreateConfigurationSetEventDestinationRequest < Struct.new(
+      nil,
       :configuration_set_name,
       :event_destination_name,
       :event_destination,
@@ -718,6 +745,7 @@ module Aws::SESv2
     # <p>An HTTP 200 response if the request succeeds, or an error message if the request
     #             fails.</p>
     class CreateConfigurationSetEventDestinationResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -761,6 +789,7 @@ module Aws::SESv2
     #               using the configuration set.</p>
     #   @return [Types::ArchivingOptions]
     class CreateConfigurationSetRequest < Struct.new(
+      nil,
       :configuration_set_name,
       :tracking_options,
       :delivery_options,
@@ -778,6 +807,7 @@ module Aws::SESv2
     # <p>An HTTP 200 response if the request succeeds, or an error message if the request
     #             fails.</p>
     class CreateConfigurationSetResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -797,6 +827,7 @@ module Aws::SESv2
     #   <p>The tags associated with a contact list.</p>
     #   @return [Array<Types::Tag>]
     class CreateContactListRequest < Struct.new(
+      nil,
       :contact_list_name,
       :topics,
       :description,
@@ -807,6 +838,7 @@ module Aws::SESv2
     end
 
     class CreateContactListResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -829,6 +861,7 @@ module Aws::SESv2
     #   <p>The attribute data attached to a contact.</p>
     #   @return [String]
     class CreateContactRequest < Struct.new(
+      nil,
       :contact_list_name,
       :email_address,
       :topic_preferences,
@@ -840,6 +873,7 @@ module Aws::SESv2
     end
 
     class CreateContactResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -870,6 +904,7 @@ module Aws::SESv2
     #               is not successfully verified.</p>
     #   @return [String]
     class CreateCustomVerificationEmailTemplateRequest < Struct.new(
+      nil,
       :template_name,
       :from_email_address,
       :template_subject,
@@ -884,6 +919,7 @@ module Aws::SESv2
     # <p>If the action is successful, the service sends back an HTTP 200 response with an empty
     #             HTTP body.</p>
     class CreateCustomVerificationEmailTemplateResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -901,6 +937,7 @@ module Aws::SESv2
     #   <p>The type of scaling mode.</p>
     #   @return [String]
     class CreateDedicatedIpPoolRequest < Struct.new(
+      nil,
       :pool_name,
       :tags,
       :scaling_mode,
@@ -912,6 +949,7 @@ module Aws::SESv2
     # <p>An HTTP 200 response if the request succeeds, or an error message if the request
     #             fails.</p>
     class CreateDedicatedIpPoolResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -939,6 +977,7 @@ module Aws::SESv2
     #               with the predictive inbox placement test.</p>
     #   @return [Array<Types::Tag>]
     class CreateDeliverabilityTestReportRequest < Struct.new(
+      nil,
       :report_name,
       :from_email_address,
       :content,
@@ -959,6 +998,7 @@ module Aws::SESv2
     #               the <code>GetDeliverabilityTestReport</code> to view the results of the test.</p>
     #   @return [String]
     class CreateDeliverabilityTestReportResponse < Struct.new(
+      nil,
       :report_id,
       :deliverability_test_status,
       keyword_init: true
@@ -983,6 +1023,7 @@ module Aws::SESv2
     #                   Guide</a>.</p>
     #   @return [String]
     class CreateEmailIdentityPolicyRequest < Struct.new(
+      nil,
       :email_identity,
       :policy_name,
       :policy,
@@ -994,6 +1035,7 @@ module Aws::SESv2
     # <p>An HTTP 200 response if the request succeeds, or an error message if the request
     #             fails.</p>
     class CreateEmailIdentityPolicyResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1021,6 +1063,7 @@ module Aws::SESv2
     #               configuration set defined in the email sending request takes precedence. </p>
     #   @return [String]
     class CreateEmailIdentityRequest < Struct.new(
+      nil,
       :email_identity,
       :tags,
       :dkim_signing_attributes,
@@ -1046,6 +1089,7 @@ module Aws::SESv2
     #   <p>An object that contains information about the DKIM attributes for the identity.</p>
     #   @return [Types::DkimAttributes]
     class CreateEmailIdentityResponse < Struct.new(
+      nil,
       :identity_type,
       :verified_for_sending_status,
       :dkim_attributes,
@@ -1069,6 +1113,7 @@ module Aws::SESv2
     #               text-only part.</p>
     #   @return [Types::EmailTemplateContent]
     class CreateEmailTemplateRequest < Struct.new(
+      nil,
       :template_name,
       :template_content,
       keyword_init: true
@@ -1079,6 +1124,7 @@ module Aws::SESv2
     # <p>If the action is successful, the service sends back an HTTP 200 response with an empty
     #             HTTP body.</p>
     class CreateEmailTemplateResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1093,6 +1139,7 @@ module Aws::SESv2
     #   <p>The destination for the export job.</p>
     #   @return [Types::ExportDestination]
     class CreateExportJobRequest < Struct.new(
+      nil,
       :export_data_source,
       :export_destination,
       keyword_init: true
@@ -1106,6 +1153,7 @@ module Aws::SESv2
     #   <p>A string that represents the export job ID.</p>
     #   @return [String]
     class CreateExportJobResponse < Struct.new(
+      nil,
       :job_id,
       keyword_init: true
     )
@@ -1121,6 +1169,7 @@ module Aws::SESv2
     #   <p>The data source for the import job.</p>
     #   @return [Types::ImportDataSource]
     class CreateImportJobRequest < Struct.new(
+      nil,
       :import_destination,
       :import_data_source,
       keyword_init: true
@@ -1134,6 +1183,7 @@ module Aws::SESv2
     #   <p>A string that represents the import job ID.</p>
     #   @return [String]
     class CreateImportJobResponse < Struct.new(
+      nil,
       :job_id,
       keyword_init: true
     )
@@ -1151,6 +1201,7 @@ module Aws::SESv2
     #   <p>An array of objects that define the tags (keys and values) to associate with the multi-region endpoint (global-endpoint).</p>
     #   @return [Array<Types::Tag>]
     class CreateMultiRegionEndpointRequest < Struct.new(
+      nil,
       :endpoint_name,
       :details,
       :tags,
@@ -1186,6 +1237,7 @@ module Aws::SESv2
     #   <p>The ID of the multi-region endpoint (global-endpoint).</p>
     #   @return [String]
     class CreateMultiRegionEndpointResponse < Struct.new(
+      nil,
       :status,
       :endpoint_id,
       keyword_init: true
@@ -1207,6 +1259,7 @@ module Aws::SESv2
     #   <p>An array of objects that define the tags (keys and values) to associate with the tenant</p>
     #   @return [Array<Types::Tag>]
     class CreateTenantRequest < Struct.new(
+      nil,
       :tenant_name,
       :tags,
       keyword_init: true
@@ -1225,6 +1278,7 @@ module Aws::SESv2
     #   <p>The Amazon Resource Name (ARN) of the resource to associate with the tenant.</p>
     #   @return [String]
     class CreateTenantResourceAssociationRequest < Struct.new(
+      nil,
       :tenant_name,
       :resource_arn,
       keyword_init: true
@@ -1235,6 +1289,7 @@ module Aws::SESv2
     # <p>If the action is successful, the service sends back an HTTP 200 response with an empty
     #             HTTP body.</p>
     class CreateTenantResourceAssociationResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1260,6 +1315,7 @@ module Aws::SESv2
     #   <p>The status of email sending capability for the tenant.</p>
     #   @return [String]
     class CreateTenantResponse < Struct.new(
+      nil,
       :tenant_name,
       :tenant_id,
       :tenant_arn,
@@ -1290,6 +1346,7 @@ module Aws::SESv2
     #               is not successfully verified.</p>
     #   @return [String]
     class CustomVerificationEmailTemplateMetadata < Struct.new(
+      nil,
       :template_name,
       :from_email_address,
       :template_subject,
@@ -1314,6 +1371,7 @@ module Aws::SESv2
     #               period, broken out by the recipient's email provider.</p>
     #   @return [Array<Types::DomainIspPlacement>]
     class DailyVolume < Struct.new(
+      nil,
       :start_date,
       :volume_statistics,
       :domain_isp_placements,
@@ -1341,6 +1399,7 @@ module Aws::SESv2
     #            </ul>
     #   @return [String]
     class DashboardAttributes < Struct.new(
+      nil,
       :engagement_metrics,
       keyword_init: true
     )
@@ -1366,6 +1425,7 @@ module Aws::SESv2
     #            </ul>
     #   @return [String]
     class DashboardOptions < Struct.new(
+      nil,
       :engagement_metrics,
       keyword_init: true
     )
@@ -1419,6 +1479,7 @@ module Aws::SESv2
     #   <p>The name of the dedicated IP pool that the IP address is associated with.</p>
     #   @return [String]
     class DedicatedIp < Struct.new(
+      nil,
       :ip,
       :warmup_status,
       :warmup_percentage,
@@ -1448,6 +1509,7 @@ module Aws::SESv2
     #            </ul>
     #   @return [String]
     class DedicatedIpPool < Struct.new(
+      nil,
       :pool_name,
       :scaling_mode,
       keyword_init: true
@@ -1464,6 +1526,7 @@ module Aws::SESv2
     #   <p>The name of the event destination to delete.</p>
     #   @return [String]
     class DeleteConfigurationSetEventDestinationRequest < Struct.new(
+      nil,
       :configuration_set_name,
       :event_destination_name,
       keyword_init: true
@@ -1474,6 +1537,7 @@ module Aws::SESv2
     # <p>An HTTP 200 response if the request succeeds, or an error message if the request
     #             fails.</p>
     class DeleteConfigurationSetEventDestinationResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1484,6 +1548,7 @@ module Aws::SESv2
     #   <p>The name of the configuration set.</p>
     #   @return [String]
     class DeleteConfigurationSetRequest < Struct.new(
+      nil,
       :configuration_set_name,
       keyword_init: true
     )
@@ -1493,6 +1558,7 @@ module Aws::SESv2
     # <p>An HTTP 200 response if the request succeeds, or an error message if the request
     #             fails.</p>
     class DeleteConfigurationSetResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1502,6 +1568,7 @@ module Aws::SESv2
     #   <p>The name of the contact list.</p>
     #   @return [String]
     class DeleteContactListRequest < Struct.new(
+      nil,
       :contact_list_name,
       keyword_init: true
     )
@@ -1509,6 +1576,7 @@ module Aws::SESv2
     end
 
     class DeleteContactListResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1521,6 +1589,7 @@ module Aws::SESv2
     #   <p>The contact's email address.</p>
     #   @return [String]
     class DeleteContactRequest < Struct.new(
+      nil,
       :contact_list_name,
       :email_address,
       keyword_init: true
@@ -1529,6 +1598,7 @@ module Aws::SESv2
     end
 
     class DeleteContactResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1539,6 +1609,7 @@ module Aws::SESv2
     #   <p>The name of the custom verification email template that you want to delete.</p>
     #   @return [String]
     class DeleteCustomVerificationEmailTemplateRequest < Struct.new(
+      nil,
       :template_name,
       keyword_init: true
     )
@@ -1548,6 +1619,7 @@ module Aws::SESv2
     # <p>If the action is successful, the service sends back an HTTP 200 response with an empty
     #             HTTP body.</p>
     class DeleteCustomVerificationEmailTemplateResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1558,6 +1630,7 @@ module Aws::SESv2
     #   <p>The name of the dedicated IP pool that you want to delete.</p>
     #   @return [String]
     class DeleteDedicatedIpPoolRequest < Struct.new(
+      nil,
       :pool_name,
       keyword_init: true
     )
@@ -1567,6 +1640,7 @@ module Aws::SESv2
     # <p>An HTTP 200 response if the request succeeds, or an error message if the request
     #             fails.</p>
     class DeleteDedicatedIpPoolResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1584,6 +1658,7 @@ module Aws::SESv2
     #               characters, dashes, and underscores.</p>
     #   @return [String]
     class DeleteEmailIdentityPolicyRequest < Struct.new(
+      nil,
       :email_identity,
       :policy_name,
       keyword_init: true
@@ -1594,6 +1669,7 @@ module Aws::SESv2
     # <p>An HTTP 200 response if the request succeeds, or an error message if the request
     #             fails.</p>
     class DeleteEmailIdentityPolicyResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1606,6 +1682,7 @@ module Aws::SESv2
     #   <p>The identity (that is, the email address or domain) to delete.</p>
     #   @return [String]
     class DeleteEmailIdentityRequest < Struct.new(
+      nil,
       :email_identity,
       keyword_init: true
     )
@@ -1615,6 +1692,7 @@ module Aws::SESv2
     # <p>An HTTP 200 response if the request succeeds, or an error message if the request
     #             fails.</p>
     class DeleteEmailIdentityResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1626,6 +1704,7 @@ module Aws::SESv2
     #   <p>The name of the template to be deleted.</p>
     #   @return [String]
     class DeleteEmailTemplateRequest < Struct.new(
+      nil,
       :template_name,
       keyword_init: true
     )
@@ -1635,6 +1714,7 @@ module Aws::SESv2
     # <p>If the action is successful, the service sends back an HTTP 200 response with an empty
     #             HTTP body.</p>
     class DeleteEmailTemplateResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1645,6 +1725,7 @@ module Aws::SESv2
     #   <p>The name of the multi-region endpoint (global-endpoint) to be deleted.</p>
     #   @return [String]
     class DeleteMultiRegionEndpointRequest < Struct.new(
+      nil,
       :endpoint_name,
       keyword_init: true
     )
@@ -1675,6 +1756,7 @@ module Aws::SESv2
     #            </ul>
     #   @return [String]
     class DeleteMultiRegionEndpointResponse < Struct.new(
+      nil,
       :status,
       keyword_init: true
     )
@@ -1687,6 +1769,7 @@ module Aws::SESv2
     #   <p>The suppressed email destination to remove from the account suppression list.</p>
     #   @return [String]
     class DeleteSuppressedDestinationRequest < Struct.new(
+      nil,
       :email_address,
       keyword_init: true
     )
@@ -1696,6 +1779,7 @@ module Aws::SESv2
     # <p>An HTTP 200 response if the request succeeds, or an error message if the request
     #             fails.</p>
     class DeleteSuppressedDestinationResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1706,6 +1790,7 @@ module Aws::SESv2
     #   <p>The name of the tenant to delete.</p>
     #   @return [String]
     class DeleteTenantRequest < Struct.new(
+      nil,
       :tenant_name,
       keyword_init: true
     )
@@ -1720,6 +1805,7 @@ module Aws::SESv2
     #   <p>The Amazon Resource Name (ARN) of the resource to remove from the tenant association.</p>
     #   @return [String]
     class DeleteTenantResourceAssociationRequest < Struct.new(
+      nil,
       :tenant_name,
       :resource_arn,
       keyword_init: true
@@ -1730,6 +1816,7 @@ module Aws::SESv2
     # <p>If the action is successful, the service sends back an HTTP 200 response with an empty
     #             HTTP body.</p>
     class DeleteTenantResourceAssociationResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1738,6 +1825,7 @@ module Aws::SESv2
     # <p>If the action is successful, the service sends back an HTTP 200 response with an empty
     #             HTTP body.</p>
     class DeleteTenantResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1766,6 +1854,7 @@ module Aws::SESv2
     #               the <code>GetDeliverabilityTestReport</code> to view the results of the test.</p>
     #   @return [String]
     class DeliverabilityTestReport < Struct.new(
+      nil,
       :report_id,
       :report_name,
       :subject,
@@ -1794,6 +1883,7 @@ module Aws::SESv2
     #           </p>
     #   @return [Integer]
     class DeliveryOptions < Struct.new(
+      nil,
       :tls_policy,
       :sending_pool_name,
       :max_delivery_seconds,
@@ -1824,6 +1914,7 @@ module Aws::SESv2
     #               for the email.</p>
     #   @return [Array<String>]
     class Destination < Struct.new(
+      nil,
       :to_addresses,
       :cc_addresses,
       :bcc_addresses,
@@ -1837,6 +1928,7 @@ module Aws::SESv2
     #   <p>A list of route configuration details. Must contain exactly one route configuration.</p>
     #   @return [Array<Types::RouteDetails>]
     class Details < Struct.new(
+      nil,
       :routes_details,
       keyword_init: true
     )
@@ -2092,6 +2184,7 @@ module Aws::SESv2
     #   <p>[Easy DKIM] The last time a key pair was generated for this identity.</p>
     #   @return [Time]
     class DkimAttributes < Struct.new(
+      nil,
       :signing_enabled,
       :status,
       :tokens,
@@ -2321,6 +2414,7 @@ module Aws::SESv2
     #            </ul>
     #   @return [String]
     class DkimSigningAttributes < Struct.new(
+      nil,
       :domain_signing_selector,
       :domain_signing_private_key,
       :next_signing_key_length,
@@ -2390,6 +2484,7 @@ module Aws::SESv2
     #   <p>The major email providers who handled the email message.</p>
     #   @return [Array<String>]
     class DomainDeliverabilityCampaign < Struct.new(
+      nil,
       :campaign_id,
       :image_url,
       :subject,
@@ -2426,6 +2521,7 @@ module Aws::SESv2
     #               domain.</p>
     #   @return [Types::InboxPlacementTrackingOption]
     class DomainDeliverabilityTrackingOption < Struct.new(
+      nil,
       :domain,
       :subscription_start_date,
       :inbox_placement_tracking_option,
@@ -2456,6 +2552,7 @@ module Aws::SESv2
     #               email provider that arrived in recipients' spam or junk mail folders.</p>
     #   @return [Float]
     class DomainIspPlacement < Struct.new(
+      nil,
       :isp_name,
       :inbox_raw_count,
       :spam_raw_count,
@@ -2512,6 +2609,7 @@ module Aws::SESv2
     #   <p>The template to use for the email message.</p>
     #   @return [Types::Template]
     class EmailContent < Struct.new(
+      nil,
       :simple,
       :raw,
       :template,
@@ -2532,6 +2630,7 @@ module Aws::SESv2
     #   <p>A list of events associated with the sent email.</p>
     #   @return [Array<Types::InsightsEvent>]
     class EmailInsights < Struct.new(
+      nil,
       :destination,
       :isp,
       :events,
@@ -2553,6 +2652,7 @@ module Aws::SESv2
     #   <p>The HTML body of the email.</p>
     #   @return [String]
     class EmailTemplateContent < Struct.new(
+      nil,
       :subject,
       :text,
       :html,
@@ -2569,6 +2669,7 @@ module Aws::SESv2
     #   <p>The time and date the template was created.</p>
     #   @return [Time]
     class EmailTemplateMetadata < Struct.new(
+      nil,
       :template_name,
       :created_timestamp,
       keyword_init: true
@@ -2582,6 +2683,7 @@ module Aws::SESv2
     #   <p>The Amazon Resource Name (ARN) of the Amazon EventBridge bus to publish email events to. Only the default bus is supported. </p>
     #   @return [String]
     class EventBridgeDestination < Struct.new(
+      nil,
       :event_bus_arn,
       keyword_init: true
     )
@@ -2696,6 +2798,7 @@ module Aws::SESv2
     #                   Messaging Charts</a> in the <i>Amazon Pinpoint User Guide</i>.</p>
     #   @return [Types::PinpointDestination]
     class EventDestination < Struct.new(
+      nil,
       :name,
       :enabled,
       :matching_event_types,
@@ -2752,6 +2855,7 @@ module Aws::SESv2
     #                   Messaging Charts</a> in the <i>Amazon Pinpoint User Guide</i>.</p>
     #   @return [Types::PinpointDestination]
     class EventDestinationDefinition < Struct.new(
+      nil,
       :enabled,
       :matching_event_types,
       :kinesis_firehose_destination,
@@ -2780,6 +2884,7 @@ module Aws::SESv2
     #   <p>Information about a <code>Complaint</code> event.</p>
     #   @return [Types::Complaint]
     class EventDetails < Struct.new(
+      nil,
       :bounce,
       :complaint,
       keyword_init: true
@@ -2796,6 +2901,7 @@ module Aws::SESv2
     #   <p>An object that contains filters applied when performing the Message Insights export.</p>
     #   @return [Types::MessageInsightsDataSource]
     class ExportDataSource < Struct.new(
+      nil,
       :metrics_data_source,
       :message_insights_data_source,
       keyword_init: true
@@ -2821,6 +2927,7 @@ module Aws::SESv2
     #   <p>An Amazon S3 pre-signed URL that points to the generated export file.</p>
     #   @return [String]
     class ExportDestination < Struct.new(
+      nil,
       :data_format,
       :s3_url,
       keyword_init: true
@@ -2845,6 +2952,7 @@ module Aws::SESv2
     #   <p>The timestamp of when the export job was completed.</p>
     #   @return [Time]
     class ExportJobSummary < Struct.new(
+      nil,
       :job_id,
       :export_source_type,
       :job_status,
@@ -2939,6 +3047,7 @@ module Aws::SESv2
     #            </ul>
     #   @return [String]
     class ExportMetric < Struct.new(
+      nil,
       :name,
       :aggregation,
       keyword_init: true
@@ -2955,6 +3064,7 @@ module Aws::SESv2
     #            <p>This value might not be available for all export source types</p>
     #   @return [Integer]
     class ExportStatistics < Struct.new(
+      nil,
       :processed_records_count,
       :exported_records_count,
       keyword_init: true
@@ -2970,6 +3080,7 @@ module Aws::SESv2
     #   <p>A message about why the job failed.</p>
     #   @return [String]
     class FailureInfo < Struct.new(
+      nil,
       :failed_records_s3_url,
       :error_message,
       keyword_init: true
@@ -2980,6 +3091,7 @@ module Aws::SESv2
     # <p>A request to obtain information about the email-sending capabilities of your Amazon SES
     #             account.</p>
     class GetAccountRequest < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -3045,6 +3157,7 @@ module Aws::SESv2
     #   <p>The VDM attributes that apply to your Amazon SES account.</p>
     #   @return [Types::VdmAttributes]
     class GetAccountResponse < Struct.new(
+      nil,
       :dedicated_ip_auto_warmup_enabled,
       :enforcement_status,
       :production_access_enabled,
@@ -3073,6 +3186,7 @@ module Aws::SESv2
     #               Amazon Pinpoint.</p>
     #   @return [Array<String>]
     class GetBlacklistReportsRequest < Struct.new(
+      nil,
       :blacklist_item_names,
       keyword_init: true
     )
@@ -3085,6 +3199,7 @@ module Aws::SESv2
     #               addresses appears on.</p>
     #   @return [Hash<String, Array<Types::BlacklistEntry>>]
     class GetBlacklistReportsResponse < Struct.new(
+      nil,
       :blacklist_report,
       keyword_init: true
     )
@@ -3097,6 +3212,7 @@ module Aws::SESv2
     #   <p>The name of the configuration set that contains the event destination.</p>
     #   @return [String]
     class GetConfigurationSetEventDestinationsRequest < Struct.new(
+      nil,
       :configuration_set_name,
       keyword_init: true
     )
@@ -3109,6 +3225,7 @@ module Aws::SESv2
     #               the configuration set.</p>
     #   @return [Array<Types::EventDestination>]
     class GetConfigurationSetEventDestinationsResponse < Struct.new(
+      nil,
       :event_destinations,
       keyword_init: true
     )
@@ -3120,6 +3237,7 @@ module Aws::SESv2
     #   <p>The name of the configuration set.</p>
     #   @return [String]
     class GetConfigurationSetRequest < Struct.new(
+      nil,
       :configuration_set_name,
       keyword_init: true
     )
@@ -3163,6 +3281,7 @@ module Aws::SESv2
     #               using the configuration set.</p>
     #   @return [Types::ArchivingOptions]
     class GetConfigurationSetResponse < Struct.new(
+      nil,
       :configuration_set_name,
       :tracking_options,
       :delivery_options,
@@ -3181,6 +3300,7 @@ module Aws::SESv2
     #   <p>The name of the contact list.</p>
     #   @return [String]
     class GetContactListRequest < Struct.new(
+      nil,
       :contact_list_name,
       keyword_init: true
     )
@@ -3207,6 +3327,7 @@ module Aws::SESv2
     #   <p>The tags associated with a contact list.</p>
     #   @return [Array<Types::Tag>]
     class GetContactListResponse < Struct.new(
+      nil,
       :contact_list_name,
       :topics,
       :description,
@@ -3225,6 +3346,7 @@ module Aws::SESv2
     #   <p>The contact's email address.</p>
     #   @return [String]
     class GetContactRequest < Struct.new(
+      nil,
       :contact_list_name,
       :email_address,
       keyword_init: true
@@ -3258,6 +3380,7 @@ module Aws::SESv2
     #   <p>A timestamp noting the last time the contact's information was updated.</p>
     #   @return [Time]
     class GetContactResponse < Struct.new(
+      nil,
       :contact_list_name,
       :email_address,
       :topic_preferences,
@@ -3282,6 +3405,7 @@ module Aws::SESv2
     #   <p>The name of the custom verification email template that you want to retrieve.</p>
     #   @return [String]
     class GetCustomVerificationEmailTemplateRequest < Struct.new(
+      nil,
       :template_name,
       keyword_init: true
     )
@@ -3310,6 +3434,7 @@ module Aws::SESv2
     #               is not successfully verified.</p>
     #   @return [String]
     class GetCustomVerificationEmailTemplateResponse < Struct.new(
+      nil,
       :template_name,
       :from_email_address,
       :template_subject,
@@ -3326,6 +3451,7 @@ module Aws::SESv2
     #   <p>The name of the dedicated IP pool to retrieve.</p>
     #   @return [String]
     class GetDedicatedIpPoolRequest < Struct.new(
+      nil,
       :pool_name,
       keyword_init: true
     )
@@ -3337,6 +3463,7 @@ module Aws::SESv2
     #   <p>An object that contains information about a dedicated IP pool.</p>
     #   @return [Types::DedicatedIpPool]
     class GetDedicatedIpPoolResponse < Struct.new(
+      nil,
       :dedicated_ip_pool,
       keyword_init: true
     )
@@ -3349,6 +3476,7 @@ module Aws::SESv2
     #               has to be a dedicated IP address that's assocaited with your Amazon Web Services account.</p>
     #   @return [String]
     class GetDedicatedIpRequest < Struct.new(
+      nil,
       :ip,
       keyword_init: true
     )
@@ -3360,6 +3488,7 @@ module Aws::SESv2
     #   <p>An object that contains information about a dedicated IP address.</p>
     #   @return [Types::DedicatedIp]
     class GetDedicatedIpResponse < Struct.new(
+      nil,
       :dedicated_ip,
       keyword_init: true
     )
@@ -3381,6 +3510,7 @@ module Aws::SESv2
     #               additional results.</p>
     #   @return [Integer]
     class GetDedicatedIpsRequest < Struct.new(
+      nil,
       :pool_name,
       :next_token,
       :page_size,
@@ -3400,6 +3530,7 @@ module Aws::SESv2
     #               passing this token in the <code>NextToken</code> parameter.</p>
     #   @return [String]
     class GetDedicatedIpsResponse < Struct.new(
+      nil,
       :dedicated_ips,
       :next_token,
       keyword_init: true
@@ -3414,6 +3545,7 @@ module Aws::SESv2
     #             to any other fees that you accrue by using Amazon SES and other Amazon Web Services services. For more
     #             information about the features and cost of a Deliverability dashboard subscription, see <a href="http://aws.amazon.com/pinpoint/pricing/">Amazon Pinpoint Pricing</a>.</p>
     class GetDeliverabilityDashboardOptionsRequest < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -3446,6 +3578,7 @@ module Aws::SESv2
     #               end of the current calendar month.</p>
     #   @return [Array<Types::DomainDeliverabilityTrackingOption>]
     class GetDeliverabilityDashboardOptionsResponse < Struct.new(
+      nil,
       :dashboard_enabled,
       :subscription_expiry_date,
       :account_status,
@@ -3466,6 +3599,7 @@ module Aws::SESv2
     #   <p>A unique string that identifies the predictive inbox placement test.</p>
     #   @return [String]
     class GetDeliverabilityTestReportRequest < Struct.new(
+      nil,
       :report_id,
       keyword_init: true
     )
@@ -3494,6 +3628,7 @@ module Aws::SESv2
     #               the predictive inbox placement test.</p>
     #   @return [Array<Types::Tag>]
     class GetDeliverabilityTestReportResponse < Struct.new(
+      nil,
       :deliverability_test_report,
       :overall_placement,
       :isp_placements,
@@ -3513,6 +3648,7 @@ module Aws::SESv2
     #               and assigns this identifier to a campaign.</p>
     #   @return [String]
     class GetDomainDeliverabilityCampaignRequest < Struct.new(
+      nil,
       :campaign_id,
       keyword_init: true
     )
@@ -3526,6 +3662,7 @@ module Aws::SESv2
     #   <p>An object that contains the deliverability data for the campaign.</p>
     #   @return [Types::DomainDeliverabilityCampaign]
     class GetDomainDeliverabilityCampaignResponse < Struct.new(
+      nil,
       :domain_deliverability_campaign,
       keyword_init: true
     )
@@ -3546,6 +3683,7 @@ module Aws::SESv2
     #               the <code>StartDate</code>.</p>
     #   @return [Time]
     class GetDomainStatisticsReportRequest < Struct.new(
+      nil,
       :domain,
       :start_date,
       :end_date,
@@ -3567,6 +3705,7 @@ module Aws::SESv2
     #               the <code>EndDate</code>.</p>
     #   @return [Array<Types::DailyVolume>]
     class GetDomainStatisticsReportResponse < Struct.new(
+      nil,
       :overall_volume,
       :daily_volumes,
       keyword_init: true
@@ -3579,6 +3718,7 @@ module Aws::SESv2
     #   <p>The email identity.</p>
     #   @return [String]
     class GetEmailIdentityPoliciesRequest < Struct.new(
+      nil,
       :email_identity,
       keyword_init: true
     )
@@ -3590,6 +3730,7 @@ module Aws::SESv2
     #   <p>A map of policy names to policies.</p>
     #   @return [Hash<String, String>]
     class GetEmailIdentityPoliciesResponse < Struct.new(
+      nil,
       :policies,
       keyword_init: true
     )
@@ -3601,6 +3742,7 @@ module Aws::SESv2
     #   <p>The email identity.</p>
     #   @return [String]
     class GetEmailIdentityRequest < Struct.new(
+      nil,
       :email_identity,
       keyword_init: true
     )
@@ -3678,6 +3820,7 @@ module Aws::SESv2
     #               identity.</p>
     #   @return [Types::VerificationInfo]
     class GetEmailIdentityResponse < Struct.new(
+      nil,
       :identity_type,
       :feedback_forwarding_status,
       :verified_for_sending_status,
@@ -3705,6 +3848,7 @@ module Aws::SESv2
     #   <p>The name of the template.</p>
     #   @return [String]
     class GetEmailTemplateRequest < Struct.new(
+      nil,
       :template_name,
       keyword_init: true
     )
@@ -3720,6 +3864,7 @@ module Aws::SESv2
     #               text-only part.</p>
     #   @return [Types::EmailTemplateContent]
     class GetEmailTemplateResponse < Struct.new(
+      nil,
       :template_name,
       :template_content,
       keyword_init: true
@@ -3733,6 +3878,7 @@ module Aws::SESv2
     #   <p>The export job ID.</p>
     #   @return [String]
     class GetExportJobRequest < Struct.new(
+      nil,
       :job_id,
       keyword_init: true
     )
@@ -3769,6 +3915,7 @@ module Aws::SESv2
     #   <p>The statistics about the export job.</p>
     #   @return [Types::ExportStatistics]
     class GetExportJobResponse < Struct.new(
+      nil,
       :job_id,
       :export_source_type,
       :job_status,
@@ -3789,6 +3936,7 @@ module Aws::SESv2
     #   <p>The ID of the import job.</p>
     #   @return [String]
     class GetImportJobRequest < Struct.new(
+      nil,
       :job_id,
       keyword_init: true
     )
@@ -3826,6 +3974,7 @@ module Aws::SESv2
     #               reasons.</p>
     #   @return [Integer]
     class GetImportJobResponse < Struct.new(
+      nil,
       :job_id,
       :import_destination,
       :import_data_source,
@@ -3848,6 +3997,7 @@ module Aws::SESv2
     #           </p>
     #   @return [String]
     class GetMessageInsightsRequest < Struct.new(
+      nil,
       :message_id,
       keyword_init: true
     )
@@ -3874,6 +4024,7 @@ module Aws::SESv2
     #   <p>A set of insights associated with the message.</p>
     #   @return [Array<Types::EmailInsights>]
     class GetMessageInsightsResponse < Struct.new(
+      nil,
       :message_id,
       :from_email_address,
       :subject,
@@ -3889,6 +4040,7 @@ module Aws::SESv2
     #   <p>The name of the multi-region endpoint (global-endpoint).</p>
     #   @return [String]
     class GetMultiRegionEndpointRequest < Struct.new(
+      nil,
       :endpoint_name,
       keyword_init: true
     )
@@ -3934,6 +4086,7 @@ module Aws::SESv2
     #   <p>The time stamp of when the multi-region endpoint (global-endpoint) was last updated.</p>
     #   @return [Time]
     class GetMultiRegionEndpointResponse < Struct.new(
+      nil,
       :endpoint_name,
       :endpoint_id,
       :routes,
@@ -3954,6 +4107,7 @@ module Aws::SESv2
     #   <p>The type of reputation entity. Currently, only <code>RESOURCE</code> type entities are supported.</p>
     #   @return [String]
     class GetReputationEntityRequest < Struct.new(
+      nil,
       :reputation_entity_reference,
       :reputation_entity_type,
       keyword_init: true
@@ -3967,6 +4121,7 @@ module Aws::SESv2
     #               and reputation impact.</p>
     #   @return [Types::ReputationEntity]
     class GetReputationEntityResponse < Struct.new(
+      nil,
       :reputation_entity,
       keyword_init: true
     )
@@ -3979,6 +4134,7 @@ module Aws::SESv2
     #   <p>The email address that's on the account suppression list.</p>
     #   @return [String]
     class GetSuppressedDestinationRequest < Struct.new(
+      nil,
       :email_address,
       keyword_init: true
     )
@@ -3990,6 +4146,7 @@ module Aws::SESv2
     #   <p>An object containing information about the suppressed email address.</p>
     #   @return [Types::SuppressedDestination]
     class GetSuppressedDestinationResponse < Struct.new(
+      nil,
       :suppressed_destination,
       keyword_init: true
     )
@@ -4001,6 +4158,7 @@ module Aws::SESv2
     #   <p>The name of the tenant to retrieve information about.</p>
     #   @return [String]
     class GetTenantRequest < Struct.new(
+      nil,
       :tenant_name,
       keyword_init: true
     )
@@ -4012,6 +4170,7 @@ module Aws::SESv2
     #   <p>A structure that contains details about the tenant.</p>
     #   @return [Types::Tenant]
     class GetTenantResponse < Struct.new(
+      nil,
       :tenant,
       keyword_init: true
     )
@@ -4037,6 +4196,7 @@ module Aws::SESv2
     #            </ul>
     #   @return [String]
     class GuardianAttributes < Struct.new(
+      nil,
       :optimized_shared_delivery,
       keyword_init: true
     )
@@ -4062,6 +4222,7 @@ module Aws::SESv2
     #            </ul>
     #   @return [String]
     class GuardianOptions < Struct.new(
+      nil,
       :optimized_shared_delivery,
       keyword_init: true
     )
@@ -4113,6 +4274,7 @@ module Aws::SESv2
     #            </ul>
     #   @return [String]
     class IdentityInfo < Struct.new(
+      nil,
       :identity_type,
       :identity_name,
       :sending_enabled,
@@ -4136,6 +4298,7 @@ module Aws::SESv2
     #   <p>The data format of the import job's data source.</p>
     #   @return [String]
     class ImportDataSource < Struct.new(
+      nil,
       :s3_url,
       :data_format,
       keyword_init: true
@@ -4152,6 +4315,7 @@ module Aws::SESv2
     #   <p>An object that contains the action of the import job towards a contact list.</p>
     #   @return [Types::ContactListDestination]
     class ImportDestination < Struct.new(
+      nil,
       :suppression_list_destination,
       :contact_list_destination,
       keyword_init: true
@@ -4199,6 +4363,7 @@ module Aws::SESv2
     #               reasons.</p>
     #   @return [Integer]
     class ImportJobSummary < Struct.new(
+      nil,
       :job_id,
       :import_destination,
       :job_status,
@@ -4221,6 +4386,7 @@ module Aws::SESv2
     #               applies to.</p>
     #   @return [Array<String>]
     class InboxPlacementTrackingOption < Struct.new(
+      nil,
       :global,
       :tracked_isps,
       keyword_init: true
@@ -4285,6 +4451,7 @@ module Aws::SESv2
     #   <p>Details about bounce or complaint events.</p>
     #   @return [Types::EventDetails]
     class InsightsEvent < Struct.new(
+      nil,
       :timestamp,
       :type,
       :details,
@@ -4297,6 +4464,7 @@ module Aws::SESv2
     # @!attribute message
     #   @return [String]
     class InternalServiceErrorException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -4307,6 +4475,7 @@ module Aws::SESv2
     # @!attribute message
     #   @return [String]
     class InvalidNextTokenException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -4322,6 +4491,7 @@ module Aws::SESv2
     #   <p>An object that contains inbox placement metrics for a specific email provider.</p>
     #   @return [Types::PlacementStatistics]
     class IspPlacement < Struct.new(
+      nil,
       :isp_name,
       :placement_statistics,
       keyword_init: true
@@ -4340,6 +4510,7 @@ module Aws::SESv2
     #               events to.</p>
     #   @return [String]
     class KinesisFirehoseDestination < Struct.new(
+      nil,
       :iam_role_arn,
       :delivery_stream_arn,
       keyword_init: true
@@ -4351,6 +4522,7 @@ module Aws::SESv2
     # @!attribute message
     #   @return [String]
     class LimitExceededException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -4370,6 +4542,7 @@ module Aws::SESv2
     #               additional results.</p>
     #   @return [Integer]
     class ListConfigurationSetsRequest < Struct.new(
+      nil,
       :next_token,
       :page_size,
       keyword_init: true
@@ -4389,6 +4562,7 @@ module Aws::SESv2
     #                   <code>NextToken</code> parameter.</p>
     #   @return [String]
     class ListConfigurationSetsResponse < Struct.new(
+      nil,
       :configuration_sets,
       :next_token,
       keyword_init: true
@@ -4410,6 +4584,7 @@ module Aws::SESv2
     #               lists.</p>
     #   @return [String]
     class ListContactListsRequest < Struct.new(
+      nil,
       :page_size,
       :next_token,
       keyword_init: true
@@ -4426,6 +4601,7 @@ module Aws::SESv2
     #               same parameters to retrieve the next page of contact lists.</p>
     #   @return [String]
     class ListContactListsResponse < Struct.new(
+      nil,
       :contact_lists,
       :next_token,
       keyword_init: true
@@ -4442,6 +4618,7 @@ module Aws::SESv2
     #   <p>Used for filtering by a specific topic preference.</p>
     #   @return [Types::TopicFilter]
     class ListContactsFilter < Struct.new(
+      nil,
       :filtered_status,
       :topic_filter,
       keyword_init: true
@@ -4469,6 +4646,7 @@ module Aws::SESv2
     #               ListContacts with the same parameters to retrieve the next page of contacts.</p>
     #   @return [String]
     class ListContactsRequest < Struct.new(
+      nil,
       :contact_list_name,
       :filter,
       :page_size,
@@ -4487,6 +4665,7 @@ module Aws::SESv2
     #               parameters to retrieve the next page of contacts.</p>
     #   @return [String]
     class ListContactsResponse < Struct.new(
+      nil,
       :contacts,
       :next_token,
       keyword_init: true
@@ -4510,6 +4689,7 @@ module Aws::SESv2
     #            <p>The value you specify has to be at least 1, and can be no more than 50.</p>
     #   @return [Integer]
     class ListCustomVerificationEmailTemplatesRequest < Struct.new(
+      nil,
       :next_token,
       :page_size,
       keyword_init: true
@@ -4528,6 +4708,7 @@ module Aws::SESv2
     #               verification email templates.</p>
     #   @return [String]
     class ListCustomVerificationEmailTemplatesResponse < Struct.new(
+      nil,
       :custom_verification_email_templates,
       :next_token,
       keyword_init: true
@@ -4547,6 +4728,7 @@ module Aws::SESv2
     #               additional results.</p>
     #   @return [Integer]
     class ListDedicatedIpPoolsRequest < Struct.new(
+      nil,
       :next_token,
       :page_size,
       keyword_init: true
@@ -4565,6 +4747,7 @@ module Aws::SESv2
     #               in the <code>NextToken</code> parameter.</p>
     #   @return [String]
     class ListDedicatedIpPoolsResponse < Struct.new(
+      nil,
       :dedicated_ip_pools,
       :next_token,
       keyword_init: true
@@ -4586,6 +4769,7 @@ module Aws::SESv2
     #            <p>The value you specify has to be at least 0, and can be no more than 1000.</p>
     #   @return [Integer]
     class ListDeliverabilityTestReportsRequest < Struct.new(
+      nil,
       :next_token,
       :page_size,
       keyword_init: true
@@ -4604,6 +4788,7 @@ module Aws::SESv2
     #               this token in the <code>NextToken</code> parameter.</p>
     #   @return [String]
     class ListDeliverabilityTestReportsResponse < Struct.new(
+      nil,
       :deliverability_test_reports,
       :next_token,
       keyword_init: true
@@ -4639,6 +4824,7 @@ module Aws::SESv2
     #               results.</p>
     #   @return [Integer]
     class ListDomainDeliverabilityCampaignsRequest < Struct.new(
+      nil,
       :start_date,
       :end_date,
       :subscribed_domain,
@@ -4662,6 +4848,7 @@ module Aws::SESv2
     #               position of the campaign in the list of campaigns.</p>
     #   @return [String]
     class ListDomainDeliverabilityCampaignsResponse < Struct.new(
+      nil,
       :domain_deliverability_campaigns,
       :next_token,
       keyword_init: true
@@ -4684,6 +4871,7 @@ module Aws::SESv2
     #            <p>The value you specify has to be at least 0, and can be no more than 1000.</p>
     #   @return [Integer]
     class ListEmailIdentitiesRequest < Struct.new(
+      nil,
       :next_token,
       :page_size,
       keyword_init: true
@@ -4704,6 +4892,7 @@ module Aws::SESv2
     #               parameter.</p>
     #   @return [String]
     class ListEmailIdentitiesResponse < Struct.new(
+      nil,
       :email_identities,
       :next_token,
       keyword_init: true
@@ -4725,6 +4914,7 @@ module Aws::SESv2
     #            <p>The value you specify has to be at least 1, and can be no more than 100.</p>
     #   @return [Integer]
     class ListEmailTemplatesRequest < Struct.new(
+      nil,
       :next_token,
       :page_size,
       keyword_init: true
@@ -4743,6 +4933,7 @@ module Aws::SESv2
     #               next 10 email templates.</p>
     #   @return [String]
     class ListEmailTemplatesResponse < Struct.new(
+      nil,
       :templates_metadata,
       :next_token,
       keyword_init: true
@@ -4770,6 +4961,7 @@ module Aws::SESv2
     #   <p>A value used to list export jobs that have a certain <code>JobStatus</code>.</p>
     #   @return [String]
     class ListExportJobsRequest < Struct.new(
+      nil,
       :next_token,
       :page_size,
       :export_source_type,
@@ -4790,6 +4982,7 @@ module Aws::SESv2
     #               parameters to retrieve the next page of export jobs.</p>
     #   @return [String]
     class ListExportJobsResponse < Struct.new(
+      nil,
       :export_jobs,
       :next_token,
       keyword_init: true
@@ -4816,6 +5009,7 @@ module Aws::SESv2
     #               addresses.</p>
     #   @return [Integer]
     class ListImportJobsRequest < Struct.new(
+      nil,
       :import_destination_type,
       :next_token,
       :page_size,
@@ -4835,6 +5029,7 @@ module Aws::SESv2
     #               same parameters to retrieve the next page of import jobs.</p>
     #   @return [String]
     class ListImportJobsResponse < Struct.new(
+      nil,
       :import_jobs,
       :next_token,
       keyword_init: true
@@ -4851,6 +5046,7 @@ module Aws::SESv2
     #   <p>The name of the topic.</p>
     #   @return [String]
     class ListManagementOptions < Struct.new(
+      nil,
       :contact_list_name,
       :topic_name,
       keyword_init: true
@@ -4873,6 +5069,7 @@ module Aws::SESv2
     #           </p>
     #   @return [Integer]
     class ListMultiRegionEndpointsRequest < Struct.new(
+      nil,
       :next_token,
       :page_size,
       keyword_init: true
@@ -4890,6 +5087,7 @@ module Aws::SESv2
     #               next page.</p>
     #   @return [String]
     class ListMultiRegionEndpointsResponse < Struct.new(
+      nil,
       :multi_region_endpoints,
       :next_token,
       keyword_init: true
@@ -4917,6 +5115,7 @@ module Aws::SESv2
     #            <p>The value you specify has to be at least 1, and can be no more than 100.</p>
     #   @return [Integer]
     class ListRecommendationsRequest < Struct.new(
+      nil,
       :filter,
       :next_token,
       :page_size,
@@ -4936,6 +5135,7 @@ module Aws::SESv2
     #               next page of recommendations.</p>
     #   @return [String]
     class ListRecommendationsResponse < Struct.new(
+      nil,
       :recommendations,
       :next_token,
       keyword_init: true
@@ -4960,6 +5160,7 @@ module Aws::SESv2
     #               additional results.</p>
     #   @return [Integer]
     class ListReputationEntitiesRequest < Struct.new(
+      nil,
       :filter,
       :next_token,
       :page_size,
@@ -4978,6 +5179,7 @@ module Aws::SESv2
     #               and pass this token in the <code>NextToken</code> parameter.</p>
     #   @return [String]
     class ListReputationEntitiesResponse < Struct.new(
+      nil,
       :reputation_entities,
       :next_token,
       keyword_init: true
@@ -4998,6 +5200,7 @@ module Aws::SESv2
     #   <p>A token returned from a previous call to <code>ListResourceTenants</code> to indicate the position in the list of resource tenants.</p>
     #   @return [String]
     class ListResourceTenantsRequest < Struct.new(
+      nil,
       :resource_arn,
       :page_size,
       :next_token,
@@ -5015,6 +5218,7 @@ module Aws::SESv2
     #               issue another request to <code>ListResourceTenants</code>, and pass this token in the <code>NextToken</code> parameter.</p>
     #   @return [String]
     class ListResourceTenantsResponse < Struct.new(
+      nil,
       :resource_tenants,
       :next_token,
       keyword_init: true
@@ -5047,6 +5251,7 @@ module Aws::SESv2
     #               results.</p>
     #   @return [Integer]
     class ListSuppressedDestinationsRequest < Struct.new(
+      nil,
       :reasons,
       :start_date,
       :end_date,
@@ -5069,6 +5274,7 @@ module Aws::SESv2
     #                   <code>NextToken</code> parameter.</p>
     #   @return [String]
     class ListSuppressedDestinationsResponse < Struct.new(
+      nil,
       :suppressed_destination_summaries,
       :next_token,
       keyword_init: true
@@ -5081,6 +5287,7 @@ module Aws::SESv2
     #               information for.</p>
     #   @return [String]
     class ListTagsForResourceRequest < Struct.new(
+      nil,
       :resource_arn,
       keyword_init: true
     )
@@ -5093,6 +5300,7 @@ module Aws::SESv2
     #                   (<code>Value</code>)</p>
     #   @return [Array<Types::Tag>]
     class ListTagsForResourceResponse < Struct.new(
+      nil,
       :tags,
       keyword_init: true
     )
@@ -5116,6 +5324,7 @@ module Aws::SESv2
     #   <p>A token returned from a previous call to <code>ListTenantResources</code> to indicate the position in the list of tenant resources.</p>
     #   @return [String]
     class ListTenantResourcesRequest < Struct.new(
+      nil,
       :tenant_name,
       :filter,
       :page_size,
@@ -5134,6 +5343,7 @@ module Aws::SESv2
     #               issue another request to <code>ListTenantResources</code>, and pass this token in the <code>NextToken</code> parameter.</p>
     #   @return [String]
     class ListTenantResourcesResponse < Struct.new(
+      nil,
       :tenant_resources,
       :next_token,
       keyword_init: true
@@ -5151,6 +5361,7 @@ module Aws::SESv2
     #               then the response includes a <code>NextToken</code> element, which you can use to obtain additional results.</p>
     #   @return [Integer]
     class ListTenantsRequest < Struct.new(
+      nil,
       :next_token,
       :page_size,
       keyword_init: true
@@ -5167,6 +5378,7 @@ module Aws::SESv2
     #               issue another request to <code>ListTenants</code>, and pass this token in the <code>NextToken</code> parameter.</p>
     #   @return [String]
     class ListTenantsResponse < Struct.new(
+      nil,
       :tenants,
       :next_token,
       keyword_init: true
@@ -5215,6 +5427,7 @@ module Aws::SESv2
     #               states.</p>
     #   @return [String]
     class MailFromAttributes < Struct.new(
+      nil,
       :mail_from_domain,
       :mail_from_domain_status,
       :behavior_on_mx_failure,
@@ -5227,6 +5440,7 @@ module Aws::SESv2
     # @!attribute message
     #   @return [String]
     class MailFromDomainNotVerifiedException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -5251,6 +5465,7 @@ module Aws::SESv2
     #   <p> The List of attachments to include in your email. All recipients will receive the same attachments.</p>
     #   @return [Array<Types::Attachment>]
     class Message < Struct.new(
+      nil,
       :subject,
       :body,
       :headers,
@@ -5286,6 +5501,7 @@ module Aws::SESv2
     #            </ul>
     #   @return [String]
     class MessageHeader < Struct.new(
+      nil,
       :name,
       :value,
       keyword_init: true
@@ -5310,6 +5526,7 @@ module Aws::SESv2
     #   <p>The maximum number of results.</p>
     #   @return [Integer]
     class MessageInsightsDataSource < Struct.new(
+      nil,
       :start_date,
       :end_date,
       :include,
@@ -5360,6 +5577,7 @@ module Aws::SESv2
     #           </p>
     #   @return [Array<String>]
     class MessageInsightsFilters < Struct.new(
+      nil,
       :from_email_address,
       :destination,
       :subject,
@@ -5375,6 +5593,7 @@ module Aws::SESv2
     # @!attribute message
     #   @return [String]
     class MessageRejected < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -5411,6 +5630,7 @@ module Aws::SESv2
     #            </ul>
     #   @return [String]
     class MessageTag < Struct.new(
+      nil,
       :name,
       :value,
       keyword_init: true
@@ -5440,6 +5660,7 @@ module Aws::SESv2
     #   <p>The error message associated with the current query error.</p>
     #   @return [String]
     class MetricDataError < Struct.new(
+      nil,
       :id,
       :code,
       :message,
@@ -5459,6 +5680,7 @@ module Aws::SESv2
     #   <p>A list of values (cumulative / sum) for the metric data results.</p>
     #   @return [Array<Integer>]
     class MetricDataResult < Struct.new(
+      nil,
       :id,
       :timestamps,
       :values,
@@ -5486,6 +5708,7 @@ module Aws::SESv2
     #   <p>Represents the end date for the export interval as a timestamp.</p>
     #   @return [Time]
     class MetricsDataSource < Struct.new(
+      nil,
       :dimensions,
       :namespace,
       :metrics,
@@ -5534,6 +5757,7 @@ module Aws::SESv2
     #   <p>The time stamp of when the multi-region endpoint (global-endpoint) was last updated.</p>
     #   @return [Time]
     class MultiRegionEndpoint < Struct.new(
+      nil,
       :endpoint_name,
       :status,
       :endpoint_id,
@@ -5549,6 +5773,7 @@ module Aws::SESv2
     # @!attribute message
     #   @return [String]
     class NotFoundException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -5570,6 +5795,7 @@ module Aws::SESv2
     #               providers.</p>
     #   @return [Array<Types::DomainIspPlacement>]
     class OverallVolume < Struct.new(
+      nil,
       :volume_statistics,
       :read_rate_percent,
       :domain_isp_placements,
@@ -5586,6 +5812,7 @@ module Aws::SESv2
     #   <p>The Amazon Resource Name (ARN) of the Amazon Pinpoint project to send email events to.</p>
     #   @return [String]
     class PinpointDestination < Struct.new(
+      nil,
       :application_arn,
       keyword_init: true
     )
@@ -5613,6 +5840,7 @@ module Aws::SESv2
     #               (DKIM) during the predictive inbox placement test.</p>
     #   @return [Float]
     class PlacementStatistics < Struct.new(
+      nil,
       :inbox_percentage,
       :spam_percentage,
       :missing_percentage,
@@ -5631,6 +5859,7 @@ module Aws::SESv2
     #               it.</p>
     #   @return [Boolean]
     class PutAccountDedicatedIpWarmupAttributesRequest < Struct.new(
+      nil,
       :auto_warmup_enabled,
       keyword_init: true
     )
@@ -5640,6 +5869,7 @@ module Aws::SESv2
     # <p>An HTTP 200 response if the request succeeds, or an error message if the request
     #             fails.</p>
     class PutAccountDedicatedIpWarmupAttributesResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -5675,6 +5905,7 @@ module Aws::SESv2
     #               maximum sending rate for your account vary based on your specific use case.</p>
     #   @return [Boolean]
     class PutAccountDetailsRequest < Struct.new(
+      nil,
       :mail_type,
       :website_url,
       :contact_language,
@@ -5689,6 +5920,7 @@ module Aws::SESv2
     # <p>An HTTP 200 response if the request succeeds, or an error message if the request
     #             fails.</p>
     class PutAccountDetailsResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -5704,6 +5936,7 @@ module Aws::SESv2
     #            </note>
     #   @return [Boolean]
     class PutAccountSendingAttributesRequest < Struct.new(
+      nil,
       :sending_enabled,
       keyword_init: true
     )
@@ -5713,6 +5946,7 @@ module Aws::SESv2
     # <p>An HTTP 200 response if the request succeeds, or an error message if the request
     #             fails.</p>
     class PutAccountSendingAttributesResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -5739,6 +5973,7 @@ module Aws::SESv2
     #            </ul>
     #   @return [Array<String>]
     class PutAccountSuppressionAttributesRequest < Struct.new(
+      nil,
       :suppressed_reasons,
       keyword_init: true
     )
@@ -5748,6 +5983,7 @@ module Aws::SESv2
     # <p>An HTTP 200 response if the request succeeds, or an error message if the request
     #             fails.</p>
     class PutAccountSuppressionAttributesResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -5758,6 +5994,7 @@ module Aws::SESv2
     #   <p>The VDM attributes that you wish to apply to your Amazon SES account.</p>
     #   @return [Types::VdmAttributes]
     class PutAccountVdmAttributesRequest < Struct.new(
+      nil,
       :vdm_attributes,
       keyword_init: true
     )
@@ -5765,6 +6002,7 @@ module Aws::SESv2
     end
 
     class PutAccountVdmAttributesResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -5779,6 +6017,7 @@ module Aws::SESv2
     #               to.</p>
     #   @return [String]
     class PutConfigurationSetArchivingOptionsRequest < Struct.new(
+      nil,
       :configuration_set_name,
       :archive_arn,
       keyword_init: true
@@ -5789,6 +6028,7 @@ module Aws::SESv2
     # <p>An HTTP 200 response if the request succeeds, or an error message if the request
     #             fails.</p>
     class PutConfigurationSetArchivingOptionsResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -5814,6 +6054,7 @@ module Aws::SESv2
     #           </p>
     #   @return [Integer]
     class PutConfigurationSetDeliveryOptionsRequest < Struct.new(
+      nil,
       :configuration_set_name,
       :tls_policy,
       :sending_pool_name,
@@ -5826,6 +6067,7 @@ module Aws::SESv2
     # <p>An HTTP 200 response if the request succeeds, or an error message if the request
     #             fails.</p>
     class PutConfigurationSetDeliveryOptionsResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -5842,6 +6084,7 @@ module Aws::SESv2
     #               configuration set.</p>
     #   @return [Boolean]
     class PutConfigurationSetReputationOptionsRequest < Struct.new(
+      nil,
       :configuration_set_name,
       :reputation_metrics_enabled,
       keyword_init: true
@@ -5852,6 +6095,7 @@ module Aws::SESv2
     # <p>An HTTP 200 response if the request succeeds, or an error message if the request
     #             fails.</p>
     class PutConfigurationSetReputationOptionsResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -5867,6 +6111,7 @@ module Aws::SESv2
     #                   <code>false</code>, email sending is disabled for the configuration set.</p>
     #   @return [Boolean]
     class PutConfigurationSetSendingOptionsRequest < Struct.new(
+      nil,
       :configuration_set_name,
       :sending_enabled,
       keyword_init: true
@@ -5877,6 +6122,7 @@ module Aws::SESv2
     # <p>An HTTP 200 response if the request succeeds, or an error message if the request
     #             fails.</p>
     class PutConfigurationSetSendingOptionsResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -5908,6 +6154,7 @@ module Aws::SESv2
     #            </ul>
     #   @return [Array<String>]
     class PutConfigurationSetSuppressionOptionsRequest < Struct.new(
+      nil,
       :configuration_set_name,
       :suppressed_reasons,
       keyword_init: true
@@ -5918,6 +6165,7 @@ module Aws::SESv2
     # <p>An HTTP 200 response if the request succeeds, or an error message if the request
     #             fails.</p>
     class PutConfigurationSetSuppressionOptionsResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -5939,6 +6187,7 @@ module Aws::SESv2
     #           </p>
     #   @return [String]
     class PutConfigurationSetTrackingOptionsRequest < Struct.new(
+      nil,
       :configuration_set_name,
       :custom_redirect_domain,
       :https_policy,
@@ -5950,6 +6199,7 @@ module Aws::SESv2
     # <p>An HTTP 200 response if the request succeeds, or an error message if the request
     #             fails.</p>
     class PutConfigurationSetTrackingOptionsResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -5963,6 +6213,7 @@ module Aws::SESv2
     #   <p>The VDM options to apply to the configuration set.</p>
     #   @return [Types::VdmOptions]
     class PutConfigurationSetVdmOptionsRequest < Struct.new(
+      nil,
       :configuration_set_name,
       :vdm_options,
       keyword_init: true
@@ -5973,6 +6224,7 @@ module Aws::SESv2
     # <p>An HTTP 200 response if the request succeeds, or an error message if the request
     #             fails.</p>
     class PutConfigurationSetVdmOptionsResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -5988,6 +6240,7 @@ module Aws::SESv2
     #               specify an IP pool that already exists.</p>
     #   @return [String]
     class PutDedicatedIpInPoolRequest < Struct.new(
+      nil,
       :ip,
       :destination_pool_name,
       keyword_init: true
@@ -5998,6 +6251,7 @@ module Aws::SESv2
     # <p>An HTTP 200 response if the request succeeds, or an error message if the request
     #             fails.</p>
     class PutDedicatedIpInPoolResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -6014,6 +6268,7 @@ module Aws::SESv2
     #            </note>
     #   @return [String]
     class PutDedicatedIpPoolScalingAttributesRequest < Struct.new(
+      nil,
       :pool_name,
       :scaling_mode,
       keyword_init: true
@@ -6024,6 +6279,7 @@ module Aws::SESv2
     # <p>An HTTP 200 response if the request succeeds, or an error message if the request
     #             fails.</p>
     class PutDedicatedIpPoolScalingAttributesResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -6039,6 +6295,7 @@ module Aws::SESv2
     #               address.</p>
     #   @return [Integer]
     class PutDedicatedIpWarmupAttributesRequest < Struct.new(
+      nil,
       :ip,
       :warmup_percentage,
       keyword_init: true
@@ -6049,6 +6306,7 @@ module Aws::SESv2
     # <p>An HTTP 200 response if the request succeeds, or an error message if the request
     #             fails.</p>
     class PutDedicatedIpWarmupAttributesResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -6069,6 +6327,7 @@ module Aws::SESv2
     #               enabled the Deliverability dashboard for.</p>
     #   @return [Array<Types::DomainDeliverabilityTrackingOption>]
     class PutDeliverabilityDashboardOptionRequest < Struct.new(
+      nil,
       :dashboard_enabled,
       :subscribed_domains,
       keyword_init: true
@@ -6078,6 +6337,7 @@ module Aws::SESv2
 
     # <p>A response that indicates whether the Deliverability dashboard is enabled.</p>
     class PutDeliverabilityDashboardOptionResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -6091,6 +6351,7 @@ module Aws::SESv2
     #   <p>The configuration set to associate with an email identity.</p>
     #   @return [String]
     class PutEmailIdentityConfigurationSetAttributesRequest < Struct.new(
+      nil,
       :email_identity,
       :configuration_set_name,
       keyword_init: true
@@ -6101,6 +6362,7 @@ module Aws::SESv2
     # <p>If the action is successful, the service sends back an HTTP 200 response with an empty
     #             HTTP body.</p>
     class PutEmailIdentityConfigurationSetAttributesResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -6118,6 +6380,7 @@ module Aws::SESv2
     #               messages are sent without DKIM signing.</p>
     #   @return [Boolean]
     class PutEmailIdentityDkimAttributesRequest < Struct.new(
+      nil,
       :email_identity,
       :signing_enabled,
       keyword_init: true
@@ -6128,6 +6391,7 @@ module Aws::SESv2
     # <p>An HTTP 200 response if the request succeeds, or an error message if the request
     #             fails.</p>
     class PutEmailIdentityDkimAttributesResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -6159,6 +6423,7 @@ module Aws::SESv2
     #               identity, or, configures the key length to be used for <a href="https://docs.aws.amazon.com/ses/latest/DeveloperGuide/easy-dkim.html">Easy DKIM</a>.</p>
     #   @return [Types::DkimSigningAttributes]
     class PutEmailIdentityDkimSigningAttributesRequest < Struct.new(
+      nil,
       :email_identity,
       :signing_attributes_origin,
       :signing_attributes,
@@ -6222,6 +6487,7 @@ module Aws::SESv2
     #               appropriate records in the DNS configuration of the domain for up to 72 hours.</p>
     #   @return [Array<String>]
     class PutEmailIdentityDkimSigningAttributesResponse < Struct.new(
+      nil,
       :dkim_status,
       :dkim_tokens,
       keyword_init: true
@@ -6245,6 +6511,7 @@ module Aws::SESv2
     #               occur (even if this setting is disabled).</p>
     #   @return [Boolean]
     class PutEmailIdentityFeedbackAttributesRequest < Struct.new(
+      nil,
       :email_identity,
       :email_forwarding_enabled,
       keyword_init: true
@@ -6255,6 +6522,7 @@ module Aws::SESv2
     # <p>An HTTP 200 response if the request succeeds, or an error message if the request
     #             fails.</p>
     class PutEmailIdentityFeedbackAttributesResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -6292,6 +6560,7 @@ module Aws::SESv2
     #               states.</p>
     #   @return [String]
     class PutEmailIdentityMailFromAttributesRequest < Struct.new(
+      nil,
       :email_identity,
       :mail_from_domain,
       :behavior_on_mx_failure,
@@ -6303,6 +6572,7 @@ module Aws::SESv2
     # <p>An HTTP 200 response if the request succeeds, or an error message if the request
     #             fails.</p>
     class PutEmailIdentityMailFromAttributesResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -6318,6 +6588,7 @@ module Aws::SESv2
     #               for your account.</p>
     #   @return [String]
     class PutSuppressedDestinationRequest < Struct.new(
+      nil,
       :email_address,
       :reason,
       keyword_init: true
@@ -6328,6 +6599,7 @@ module Aws::SESv2
     # <p>An HTTP 200 response if the request succeeds, or an error message if the request
     #             fails.</p>
     class PutSuppressedDestinationResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -6367,6 +6639,7 @@ module Aws::SESv2
     #            </ul>
     #   @return [String]
     class RawMessage < Struct.new(
+      nil,
       :data,
       keyword_init: true
     )
@@ -6401,6 +6674,7 @@ module Aws::SESv2
     #               <code>HIGH</code> or <code>LOW</code>.</p>
     #   @return [String]
     class Recommendation < Struct.new(
+      nil,
       :resource_arn,
       :type,
       :description,
@@ -6421,6 +6695,7 @@ module Aws::SESv2
     #                   <code>ReplacementEmailContent</code>.</p>
     #   @return [Types::ReplacementTemplate]
     class ReplacementEmailContent < Struct.new(
+      nil,
       :replacement_template,
       keyword_init: true
     )
@@ -6435,6 +6710,7 @@ module Aws::SESv2
     #               replacement tags in the email template.</p>
     #   @return [String]
     class ReplacementTemplate < Struct.new(
+      nil,
       :replacement_template_data,
       keyword_init: true
     )
@@ -6478,6 +6754,7 @@ module Aws::SESv2
     #               the <code>ListRecommendations</code> operation.</p>
     #   @return [String]
     class ReputationEntity < Struct.new(
+      nil,
       :reputation_entity_reference,
       :reputation_entity_type,
       :reputation_management_policy,
@@ -6503,6 +6780,7 @@ module Aws::SESv2
     #               starting from the date of the fresh start.</p>
     #   @return [Time]
     class ReputationOptions < Struct.new(
+      nil,
       :reputation_metrics_enabled,
       :last_fresh_start,
       keyword_init: true
@@ -6529,6 +6807,7 @@ module Aws::SESv2
     #   <p>The date and time when the resource was associated with the tenant.</p>
     #   @return [Time]
     class ResourceTenantMetadata < Struct.new(
+      nil,
       :tenant_name,
       :tenant_id,
       :resource_arn,
@@ -6569,6 +6848,7 @@ module Aws::SESv2
     #   <p>The associated support center case ID (if any).</p>
     #   @return [String]
     class ReviewDetails < Struct.new(
+      nil,
       :status,
       :case_id,
       keyword_init: true
@@ -6581,6 +6861,7 @@ module Aws::SESv2
     #   <p>The name of an AWS-Region.</p>
     #   @return [String]
     class Route < Struct.new(
+      nil,
       :region,
       keyword_init: true
     )
@@ -6592,6 +6873,7 @@ module Aws::SESv2
     #   <p>The name of an AWS-Region to be a secondary region for the multi-region endpoint (global-endpoint).</p>
     #   @return [String]
     class RouteDetails < Struct.new(
+      nil,
       :region,
       keyword_init: true
     )
@@ -6610,6 +6892,7 @@ module Aws::SESv2
     #   <p>Serial number from the SOA record.</p>
     #   @return [Integer]
     class SOARecord < Struct.new(
+      nil,
       :primary_name_server,
       :admin_email,
       :serial_number,
@@ -6692,6 +6975,7 @@ module Aws::SESv2
     #            </note>
     #   @return [String]
     class SendBulkEmailRequest < Struct.new(
+      nil,
       :from_email_address,
       :from_email_address_identity_arn,
       :reply_to_addresses,
@@ -6714,6 +6998,7 @@ module Aws::SESv2
     #               with a failure status.</p>
     #   @return [Array<Types::BulkEmailEntryResult>]
     class SendBulkEmailResponse < Struct.new(
+      nil,
       :bulk_email_entry_results,
       keyword_init: true
     )
@@ -6733,6 +7018,7 @@ module Aws::SESv2
     #   <p>Name of a configuration set to use when sending the verification email.</p>
     #   @return [String]
     class SendCustomVerificationEmailRequest < Struct.new(
+      nil,
       :email_address,
       :template_name,
       :configuration_set_name,
@@ -6747,6 +7033,7 @@ module Aws::SESv2
     #                   <code>SendCustomVerificationEmail</code> operation.</p>
     #   @return [String]
     class SendCustomVerificationEmailResponse < Struct.new(
+      nil,
       :message_id,
       keyword_init: true
     )
@@ -6829,6 +7116,7 @@ module Aws::SESv2
     #               used when a contact chooses to unsubscribe.</p>
     #   @return [Types::ListManagementOptions]
     class SendEmailRequest < Struct.new(
+      nil,
       :from_email_address,
       :from_email_address_identity_arn,
       :destination,
@@ -6858,6 +7146,7 @@ module Aws::SESv2
     #            </note>
     #   @return [String]
     class SendEmailResponse < Struct.new(
+      nil,
       :message_id,
       keyword_init: true
     )
@@ -6881,6 +7170,7 @@ module Aws::SESv2
     #               past 24 hours.</p>
     #   @return [Float]
     class SendQuota < Struct.new(
+      nil,
       :max24_hour_send,
       :max_send_rate,
       :sent_last24_hours,
@@ -6903,6 +7193,7 @@ module Aws::SESv2
     #                   <code>false</code>, email sending is disabled for the configuration set.</p>
     #   @return [Boolean]
     class SendingOptions < Struct.new(
+      nil,
       :sending_enabled,
       keyword_init: true
     )
@@ -6919,6 +7210,7 @@ module Aws::SESv2
     # @!attribute message
     #   @return [String]
     class SendingPausedException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -6932,6 +7224,7 @@ module Aws::SESv2
     #               more information about Amazon SNS topics, see the <a href="https://docs.aws.amazon.com/sns/latest/dg/CreateTopic.html">Amazon SNS Developer Guide</a>.</p>
     #   @return [String]
     class SnsDestination < Struct.new(
+      nil,
       :topic_arn,
       keyword_init: true
     )
@@ -6965,6 +7258,7 @@ module Aws::SESv2
     #   <p>The timestamp when this status was last updated.</p>
     #   @return [Time]
     class StatusRecord < Struct.new(
+      nil,
       :status,
       :cause,
       :last_updated_timestamp,
@@ -6990,6 +7284,7 @@ module Aws::SESv2
     #               address was added to the suppression list for your account.</p>
     #   @return [Types::SuppressedDestinationAttributes]
     class SuppressedDestination < Struct.new(
+      nil,
       :email_address,
       :reason,
       :last_update_time,
@@ -7010,6 +7305,7 @@ module Aws::SESv2
     #               list for your account.</p>
     #   @return [String]
     class SuppressedDestinationAttributes < Struct.new(
+      nil,
       :message_id,
       :feedback_id,
       keyword_init: true
@@ -7029,6 +7325,7 @@ module Aws::SESv2
     #               format.</p>
     #   @return [Time]
     class SuppressedDestinationSummary < Struct.new(
+      nil,
       :email_address,
       :reason,
       :last_update_time,
@@ -7059,6 +7356,7 @@ module Aws::SESv2
     #            </ul>
     #   @return [Array<String>]
     class SuppressionAttributes < Struct.new(
+      nil,
       :suppressed_reasons,
       keyword_init: true
     )
@@ -7079,6 +7377,7 @@ module Aws::SESv2
     #            </ul>
     #   @return [String]
     class SuppressionListDestination < Struct.new(
+      nil,
       :suppression_list_import_action,
       keyword_init: true
     )
@@ -7107,6 +7406,7 @@ module Aws::SESv2
     #            </ul>
     #   @return [Array<String>]
     class SuppressionOptions < Struct.new(
+      nil,
       :suppressed_reasons,
       keyword_init: true
     )
@@ -7157,6 +7457,7 @@ module Aws::SESv2
     #               don't specify a value, Amazon SES sets the value to an empty string.</p>
     #   @return [String]
     class Tag < Struct.new(
+      nil,
       :key,
       :value,
       keyword_init: true
@@ -7175,6 +7476,7 @@ module Aws::SESv2
     #               characters.</p>
     #   @return [Array<Types::Tag>]
     class TagResourceRequest < Struct.new(
+      nil,
       :resource_arn,
       :tags,
       keyword_init: true
@@ -7183,6 +7485,7 @@ module Aws::SESv2
     end
 
     class TagResourceResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -7222,6 +7525,7 @@ module Aws::SESv2
     #   <p> The List of attachments to include in your email. All recipients will receive the same attachments.</p>
     #   @return [Array<Types::Attachment>]
     class Template < Struct.new(
+      nil,
       :template_name,
       :template_arn,
       :template_content,
@@ -7253,6 +7557,7 @@ module Aws::SESv2
     #   <p>The status of sending capability for the tenant.</p>
     #   @return [String]
     class Tenant < Struct.new(
+      nil,
       :tenant_name,
       :tenant_id,
       :tenant_arn,
@@ -7278,6 +7583,7 @@ module Aws::SESv2
     #   <p>The date and time when the tenant was created.</p>
     #   @return [Time]
     class TenantInfo < Struct.new(
+      nil,
       :tenant_name,
       :tenant_id,
       :tenant_arn,
@@ -7296,6 +7602,7 @@ module Aws::SESv2
     #   <p>The Amazon Resource Name (ARN) of the resource associated with the tenant.</p>
     #   @return [String]
     class TenantResource < Struct.new(
+      nil,
       :resource_type,
       :resource_arn,
       keyword_init: true
@@ -7314,6 +7621,7 @@ module Aws::SESv2
     #               replacement tags in the email template.</p>
     #   @return [String]
     class TestRenderEmailTemplateRequest < Struct.new(
+      nil,
       :template_name,
       :template_data,
       keyword_init: true
@@ -7328,6 +7636,7 @@ module Aws::SESv2
     #               parameter.</p>
     #   @return [String]
     class TestRenderEmailTemplateResponse < Struct.new(
+      nil,
       :rendered_template,
       keyword_init: true
     )
@@ -7338,6 +7647,7 @@ module Aws::SESv2
     # @!attribute message
     #   @return [String]
     class TooManyRequestsException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -7360,6 +7670,7 @@ module Aws::SESv2
     #               noted their preference for subscribing to a topic.</p>
     #   @return [String]
     class Topic < Struct.new(
+      nil,
       :topic_name,
       :display_name,
       :description,
@@ -7378,6 +7689,7 @@ module Aws::SESv2
     #               contact has not noted their preference for subscribing to a topic.</p>
     #   @return [Boolean]
     class TopicFilter < Struct.new(
+      nil,
       :topic_name,
       :use_default_if_preference_unavailable,
       keyword_init: true
@@ -7399,6 +7711,7 @@ module Aws::SESv2
     #                   <code>OPT_OUT</code>.</p>
     #   @return [String]
     class TopicPreference < Struct.new(
+      nil,
       :topic_name,
       :subscription_status,
       keyword_init: true
@@ -7420,6 +7733,7 @@ module Aws::SESv2
     #   <p>The https policy to use for tracking open and click events.</p>
     #   @return [String]
     class TrackingOptions < Struct.new(
+      nil,
       :custom_redirect_domain,
       :https_policy,
       keyword_init: true
@@ -7441,6 +7755,7 @@ module Aws::SESv2
     #            </p>
     #   @return [Array<String>]
     class UntagResourceRequest < Struct.new(
+      nil,
       :resource_arn,
       :tag_keys,
       keyword_init: true
@@ -7449,6 +7764,7 @@ module Aws::SESv2
     end
 
     class UntagResourceResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -7467,6 +7783,7 @@ module Aws::SESv2
     #   <p>An object that defines the event destination.</p>
     #   @return [Types::EventDestinationDefinition]
     class UpdateConfigurationSetEventDestinationRequest < Struct.new(
+      nil,
       :configuration_set_name,
       :event_destination_name,
       :event_destination,
@@ -7478,6 +7795,7 @@ module Aws::SESv2
     # <p>An HTTP 200 response if the request succeeds, or an error message if the request
     #             fails.</p>
     class UpdateConfigurationSetEventDestinationResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -7494,6 +7812,7 @@ module Aws::SESv2
     #   <p>A description of what the contact list is about.</p>
     #   @return [String]
     class UpdateContactListRequest < Struct.new(
+      nil,
       :contact_list_name,
       :topics,
       :description,
@@ -7503,6 +7822,7 @@ module Aws::SESv2
     end
 
     class UpdateContactListResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -7525,6 +7845,7 @@ module Aws::SESv2
     #   <p>The attribute data attached to a contact.</p>
     #   @return [String]
     class UpdateContactRequest < Struct.new(
+      nil,
       :contact_list_name,
       :email_address,
       :topic_preferences,
@@ -7536,6 +7857,7 @@ module Aws::SESv2
     end
 
     class UpdateContactResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -7566,6 +7888,7 @@ module Aws::SESv2
     #               is not successfully verified.</p>
     #   @return [String]
     class UpdateCustomVerificationEmailTemplateRequest < Struct.new(
+      nil,
       :template_name,
       :from_email_address,
       :template_subject,
@@ -7580,6 +7903,7 @@ module Aws::SESv2
     # <p>If the action is successful, the service sends back an HTTP 200 response with an empty
     #             HTTP body.</p>
     class UpdateCustomVerificationEmailTemplateResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -7602,6 +7926,7 @@ module Aws::SESv2
     #                   Guide</a>.</p>
     #   @return [String]
     class UpdateEmailIdentityPolicyRequest < Struct.new(
+      nil,
       :email_identity,
       :policy_name,
       :policy,
@@ -7613,6 +7938,7 @@ module Aws::SESv2
     # <p>An HTTP 200 response if the request succeeds, or an error message if the request
     #             fails.</p>
     class UpdateEmailIdentityPolicyResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -7628,6 +7954,7 @@ module Aws::SESv2
     #               text-only part.</p>
     #   @return [Types::EmailTemplateContent]
     class UpdateEmailTemplateRequest < Struct.new(
+      nil,
       :template_name,
       :template_content,
       keyword_init: true
@@ -7638,6 +7965,7 @@ module Aws::SESv2
     # <p>If the action is successful, the service sends back an HTTP 200 response with an empty
     #             HTTP body.</p>
     class UpdateEmailTemplateResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -7669,6 +7997,7 @@ module Aws::SESv2
     #            </ul>
     #   @return [String]
     class UpdateReputationEntityCustomerManagedStatusRequest < Struct.new(
+      nil,
       :reputation_entity_type,
       :reputation_entity_reference,
       :sending_status,
@@ -7679,6 +8008,7 @@ module Aws::SESv2
 
     # <p>If the action is successful, the service sends back an HTTP 200 response with an empty HTTP body.</p>
     class UpdateReputationEntityCustomerManagedStatusResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -7697,6 +8027,7 @@ module Aws::SESv2
     #               to this entity. This is an Amazon Web Services Amazon SES-managed policy.</p>
     #   @return [String]
     class UpdateReputationEntityPolicyRequest < Struct.new(
+      nil,
       :reputation_entity_type,
       :reputation_entity_reference,
       :reputation_entity_policy,
@@ -7707,6 +8038,7 @@ module Aws::SESv2
 
     # <p>If the action is successful, the service sends back an HTTP 200 response with an empty HTTP body.</p>
     class UpdateReputationEntityPolicyResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -7735,6 +8067,7 @@ module Aws::SESv2
     #               Guardian.</p>
     #   @return [Types::GuardianAttributes]
     class VdmAttributes < Struct.new(
+      nil,
       :vdm_enabled,
       :dashboard_attributes,
       :guardian_attributes,
@@ -7754,6 +8087,7 @@ module Aws::SESv2
     #               Guardian.</p>
     #   @return [Types::GuardianOptions]
     class VdmOptions < Struct.new(
+      nil,
       :dashboard_options,
       :guardian_options,
       keyword_init: true
@@ -7843,6 +8177,7 @@ module Aws::SESv2
     #               associated with the identity.</p>
     #   @return [Types::SOARecord]
     class VerificationInfo < Struct.new(
+      nil,
       :last_checked_timestamp,
       :last_success_timestamp,
       :error_type,
@@ -7870,6 +8205,7 @@ module Aws::SESv2
     #               in recipients' spam or junk mail folders.</p>
     #   @return [Integer]
     class VolumeStatistics < Struct.new(
+      nil,
       :inbox_raw_count,
       :spam_raw_count,
       :projected_inbox,

@@ -10,6 +10,7 @@ module Aws::NetworkFlowMonitor
     # @!attribute message
     #   @return [String]
     class AccessDeniedException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -20,6 +21,7 @@ module Aws::NetworkFlowMonitor
     # @!attribute message
     #   @return [String]
     class ConflictException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -45,6 +47,7 @@ module Aws::NetworkFlowMonitor
     #   <p>The tags for a monitor. You can add a maximum of 200 tags.</p>
     #   @return [Hash<String, String>]
     class CreateMonitorInput < Struct.new(
+      nil,
       :monitor_name,
       :local_resources,
       :remote_resources,
@@ -81,6 +84,7 @@ module Aws::NetworkFlowMonitor
     #   <p>The tags for a monitor.</p>
     #   @return [Hash<String, String>]
     class CreateMonitorOutput < Struct.new(
+      nil,
       :monitor_arn,
       :monitor_name,
       :monitor_status,
@@ -104,6 +108,7 @@ module Aws::NetworkFlowMonitor
     #   <p>The tags for a scope. You can add a maximum of 200 tags.</p>
     #   @return [Hash<String, String>]
     class CreateScopeInput < Struct.new(
+      nil,
       :targets,
       :client_token,
       :tags,
@@ -125,6 +130,7 @@ module Aws::NetworkFlowMonitor
     #   <p>The tags for a scope.</p>
     #   @return [Hash<String, String>]
     class CreateScopeOutput < Struct.new(
+      nil,
       :scope_id,
       :status,
       :scope_arn,
@@ -138,6 +144,7 @@ module Aws::NetworkFlowMonitor
     #   <p>The name of the monitor to delete.</p>
     #   @return [String]
     class DeleteMonitorInput < Struct.new(
+      nil,
       :monitor_name,
       keyword_init: true
     )
@@ -145,6 +152,7 @@ module Aws::NetworkFlowMonitor
     end
 
     class DeleteMonitorOutput < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -154,6 +162,7 @@ module Aws::NetworkFlowMonitor
     #   <p>The identifier for the scope that includes the resources you want to get data results for. A scope ID is an internally-generated identifier that includes all the resources for a specific root account.</p>
     #   @return [String]
     class DeleteScopeInput < Struct.new(
+      nil,
       :scope_id,
       keyword_init: true
     )
@@ -161,6 +170,7 @@ module Aws::NetworkFlowMonitor
     end
 
     class DeleteScopeOutput < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -170,6 +180,7 @@ module Aws::NetworkFlowMonitor
     #   <p>The name of the monitor.</p>
     #   @return [String]
     class GetMonitorInput < Struct.new(
+      nil,
       :monitor_name,
       keyword_init: true
     )
@@ -201,6 +212,7 @@ module Aws::NetworkFlowMonitor
     #   <p>The tags for a monitor.</p>
     #   @return [Hash<String, String>]
     class GetMonitorOutput < Struct.new(
+      nil,
       :monitor_arn,
       :monitor_name,
       :monitor_status,
@@ -227,6 +239,7 @@ module Aws::NetworkFlowMonitor
     #   <p>The number of query results that you want to return with this call.</p>
     #   @return [Integer]
     class GetQueryResultsMonitorTopContributorsInput < Struct.new(
+      nil,
       :monitor_name,
       :query_id,
       :next_token,
@@ -246,6 +259,7 @@ module Aws::NetworkFlowMonitor
     #   <p>The token for the next set of results. You receive this token from a previous call.</p>
     #   @return [String]
     class GetQueryResultsMonitorTopContributorsOutput < Struct.new(
+      nil,
       :unit,
       :top_contributors,
       :next_token,
@@ -267,6 +281,7 @@ module Aws::NetworkFlowMonitor
     #   <p>The number of query results that you want to return with this call.</p>
     #   @return [Integer]
     class GetQueryResultsWorkloadInsightsTopContributorsDataInput < Struct.new(
+      nil,
       :scope_id,
       :query_id,
       :next_token,
@@ -286,6 +301,7 @@ module Aws::NetworkFlowMonitor
     #   <p>The token for the next set of results. You receive this token from a previous call.</p>
     #   @return [String]
     class GetQueryResultsWorkloadInsightsTopContributorsDataOutput < Struct.new(
+      nil,
       :unit,
       :datapoints,
       :next_token,
@@ -307,6 +323,7 @@ module Aws::NetworkFlowMonitor
     #   <p>The number of query results that you want to return with this call.</p>
     #   @return [Integer]
     class GetQueryResultsWorkloadInsightsTopContributorsInput < Struct.new(
+      nil,
       :scope_id,
       :query_id,
       :next_token,
@@ -323,6 +340,7 @@ module Aws::NetworkFlowMonitor
     #   <p>The token for the next set of results. You receive this token from a previous call.</p>
     #   @return [String]
     class GetQueryResultsWorkloadInsightsTopContributorsOutput < Struct.new(
+      nil,
       :top_contributors,
       :next_token,
       keyword_init: true
@@ -337,6 +355,7 @@ module Aws::NetworkFlowMonitor
     #   <p>The identifier for the query. A query ID is an internally-generated identifier for a specific query returned from an API call to start a query.</p>
     #   @return [String]
     class GetQueryStatusMonitorTopContributorsInput < Struct.new(
+      nil,
       :monitor_name,
       :query_id,
       keyword_init: true
@@ -348,6 +367,7 @@ module Aws::NetworkFlowMonitor
     #   <p>When you run a query, use this call to check the status of the query to make sure that the query has <code>SUCCEEDED</code> before you review the results.</p> <ul> <li> <p> <code>QUEUED</code>: The query is scheduled to run.</p> </li> <li> <p> <code>RUNNING</code>: The query is in progress but not complete.</p> </li> <li> <p> <code>SUCCEEDED</code>: The query completed sucessfully.</p> </li> <li> <p> <code>FAILED</code>: The query failed due to an error.</p> </li> <li> <p> <code>CANCELED</code>: The query was canceled.</p> </li> </ul>
     #   @return [String]
     class GetQueryStatusMonitorTopContributorsOutput < Struct.new(
+      nil,
       :status,
       keyword_init: true
     )
@@ -361,6 +381,7 @@ module Aws::NetworkFlowMonitor
     #   <p>The identifier for the query. A query ID is an internally-generated identifier for a specific query returned from an API call to start a query.</p>
     #   @return [String]
     class GetQueryStatusWorkloadInsightsTopContributorsDataInput < Struct.new(
+      nil,
       :scope_id,
       :query_id,
       keyword_init: true
@@ -372,6 +393,7 @@ module Aws::NetworkFlowMonitor
     #   <p>The status of a query for top contributors data.</p> <ul> <li> <p> <code>QUEUED</code>: The query is scheduled to run.</p> </li> <li> <p> <code>RUNNING</code>: The query is in progress but not complete.</p> </li> <li> <p> <code>SUCCEEDED</code>: The query completed sucessfully.</p> </li> <li> <p> <code>FAILED</code>: The query failed due to an error.</p> </li> <li> <p> <code>CANCELED</code>: The query was canceled.</p> </li> </ul>
     #   @return [String]
     class GetQueryStatusWorkloadInsightsTopContributorsDataOutput < Struct.new(
+      nil,
       :status,
       keyword_init: true
     )
@@ -385,6 +407,7 @@ module Aws::NetworkFlowMonitor
     #   <p>The identifier for the query. A query ID is an internally-generated identifier for a specific query returned from an API call to start a query.</p>
     #   @return [String]
     class GetQueryStatusWorkloadInsightsTopContributorsInput < Struct.new(
+      nil,
       :scope_id,
       :query_id,
       keyword_init: true
@@ -396,6 +419,7 @@ module Aws::NetworkFlowMonitor
     #   <p>When you run a query, use this call to check the status of the query to make sure that the query has <code>SUCCEEDED</code> before you review the results.</p> <ul> <li> <p> <code>QUEUED</code>: The query is scheduled to run.</p> </li> <li> <p> <code>RUNNING</code>: The query is in progress but not complete.</p> </li> <li> <p> <code>SUCCEEDED</code>: The query completed sucessfully.</p> </li> <li> <p> <code>FAILED</code>: The query failed due to an error.</p> </li> <li> <p> <code>CANCELED</code>: The query was canceled.</p> </li> </ul>
     #   @return [String]
     class GetQueryStatusWorkloadInsightsTopContributorsOutput < Struct.new(
+      nil,
       :status,
       keyword_init: true
     )
@@ -406,6 +430,7 @@ module Aws::NetworkFlowMonitor
     #   <p>The identifier for the scope that includes the resources you want to get data results for. A scope ID is an internally-generated identifier that includes all the resources for a specific root account. A scope ID is returned from a <code>CreateScope</code> API call.</p>
     #   @return [String]
     class GetScopeInput < Struct.new(
+      nil,
       :scope_id,
       keyword_init: true
     )
@@ -428,6 +453,7 @@ module Aws::NetworkFlowMonitor
     #   <p>The tags for a scope.</p>
     #   @return [Hash<String, String>]
     class GetScopeOutput < Struct.new(
+      nil,
       :scope_id,
       :status,
       :scope_arn,
@@ -442,6 +468,7 @@ module Aws::NetworkFlowMonitor
     # @!attribute message
     #   @return [String]
     class InternalServerException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -468,6 +495,7 @@ module Aws::NetworkFlowMonitor
     #   <p>The namespace of the pod for a remote resource.</p>
     #   @return [String]
     class KubernetesMetadata < Struct.new(
+      nil,
       :local_service_name,
       :local_pod_name,
       :local_pod_namespace,
@@ -489,6 +517,7 @@ module Aws::NetworkFlowMonitor
     #   <p>The status of a monitor. The status can be one of the following</p> <ul> <li> <p> <code>PENDING</code>: The monitor is in the process of being created.</p> </li> <li> <p> <code>ACTIVE</code>: The monitor is active.</p> </li> <li> <p> <code>INACTIVE</code>: The monitor is inactive.</p> </li> <li> <p> <code>ERROR</code>: Monitor creation failed due to an error.</p> </li> <li> <p> <code>DELETING</code>: The monitor is in the process of being deleted.</p> </li> </ul>
     #   @return [String]
     class ListMonitorsInput < Struct.new(
+      nil,
       :next_token,
       :max_results,
       :monitor_status,
@@ -504,6 +533,7 @@ module Aws::NetworkFlowMonitor
     #   <p>The token for the next set of results. You receive this token from a previous call.</p>
     #   @return [String]
     class ListMonitorsOutput < Struct.new(
+      nil,
       :monitors,
       :next_token,
       keyword_init: true
@@ -518,6 +548,7 @@ module Aws::NetworkFlowMonitor
     #   <p>The number of query results that you want to return with this call.</p>
     #   @return [Integer]
     class ListScopesInput < Struct.new(
+      nil,
       :next_token,
       :max_results,
       keyword_init: true
@@ -532,6 +563,7 @@ module Aws::NetworkFlowMonitor
     #   <p>The token for the next set of results. You receive this token from a previous call.</p>
     #   @return [String]
     class ListScopesOutput < Struct.new(
+      nil,
       :scopes,
       :next_token,
       keyword_init: true
@@ -543,6 +575,7 @@ module Aws::NetworkFlowMonitor
     #   <p>The Amazon Resource Name (ARN) of the resource.</p>
     #   @return [String]
     class ListTagsForResourceInput < Struct.new(
+      nil,
       :resource_arn,
       keyword_init: true
     )
@@ -553,6 +586,7 @@ module Aws::NetworkFlowMonitor
     #   <p>The tags for a resource.</p>
     #   @return [Hash<String, String>]
     class ListTagsForResourceOutput < Struct.new(
+      nil,
       :tags,
       keyword_init: true
     )
@@ -567,6 +601,7 @@ module Aws::NetworkFlowMonitor
     #   <p>The identifier of the local resource. For a VPC or subnet, this identifier is the VPC Amazon Resource Name (ARN) or subnet ARN. For an Availability Zone, this identifier is the AZ name, for example, us-west-2b.</p>
     #   @return [String]
     class MonitorLocalResource < Struct.new(
+      nil,
       :type,
       :identifier,
       keyword_init: true
@@ -582,6 +617,7 @@ module Aws::NetworkFlowMonitor
     #   <p>The identifier of the remote resource. For a VPC or subnet, this identifier is the VPC Amazon Resource Name (ARN) or subnet ARN. For an Availability Zone, this identifier is the AZ name, for example, us-west-2b. For an Amazon Web Services Region , this identifier is the Region name, for example, us-west-2. </p>
     #   @return [String]
     class MonitorRemoteResource < Struct.new(
+      nil,
       :type,
       :identifier,
       keyword_init: true
@@ -600,6 +636,7 @@ module Aws::NetworkFlowMonitor
     #   <p>The status of a monitor. The status can be one of the following</p> <ul> <li> <p> <code>PENDING</code>: The monitor is in the process of being created.</p> </li> <li> <p> <code>ACTIVE</code>: The monitor is active.</p> </li> <li> <p> <code>INACTIVE</code>: The monitor is inactive.</p> </li> <li> <p> <code>ERROR</code>: Monitor creation failed due to an error.</p> </li> <li> <p> <code>DELETING</code>: The monitor is in the process of being deleted.</p> </li> </ul>
     #   @return [String]
     class MonitorSummary < Struct.new(
+      nil,
       :monitor_arn,
       :monitor_name,
       :monitor_status,
@@ -685,6 +722,7 @@ module Aws::NetworkFlowMonitor
     #   <p>The Amazon Resource Name (ARN) of a remote VPC.</p>
     #   @return [String]
     class MonitorTopContributorsRow < Struct.new(
+      nil,
       :local_ip,
       :snat_ip,
       :local_instance_id,
@@ -719,6 +757,7 @@ module Aws::NetworkFlowMonitor
     # @!attribute message
     #   @return [String]
     class ResourceNotFoundException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -736,6 +775,7 @@ module Aws::NetworkFlowMonitor
     #   <p>The Amazon Resource Name (ARN) of the scope.</p>
     #   @return [String]
     class ScopeSummary < Struct.new(
+      nil,
       :scope_id,
       :status,
       :scope_arn,
@@ -748,6 +788,7 @@ module Aws::NetworkFlowMonitor
     # @!attribute message
     #   @return [String]
     class ServiceQuotaExceededException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -773,6 +814,7 @@ module Aws::NetworkFlowMonitor
     #   <p>The maximum number of top contributors to return.</p>
     #   @return [Integer]
     class StartQueryMonitorTopContributorsInput < Struct.new(
+      nil,
       :monitor_name,
       :start_time,
       :end_time,
@@ -788,6 +830,7 @@ module Aws::NetworkFlowMonitor
     #   <p>The identifier for the query. A query ID is an internally-generated identifier for a specific query returned from an API call to start a query.</p>
     #   @return [String]
     class StartQueryMonitorTopContributorsOutput < Struct.new(
+      nil,
       :query_id,
       keyword_init: true
     )
@@ -810,6 +853,7 @@ module Aws::NetworkFlowMonitor
     #   <p>The destination category for a top contributors. Destination categories can be one of the following: </p> <ul> <li> <p> <code>INTRA_AZ</code>: Top contributor network flows within a single Availability Zone</p> </li> <li> <p> <code>INTER_AZ</code>: Top contributor network flows between Availability Zones</p> </li> <li> <p> <code>INTER_REGION</code>: Top contributor network flows between Regions (to the edge of another Region)</p> </li> <li> <p> <code>INTER_VPC</code>: Top contributor network flows between VPCs</p> </li> <li> <p> <code>AWS_SERVICES</code>: Top contributor network flows to or from Amazon Web Services services</p> </li> <li> <p> <code>UNCLASSIFIED</code>: Top contributor network flows that do not have a bucket classification</p> </li> </ul>
     #   @return [String]
     class StartQueryWorkloadInsightsTopContributorsDataInput < Struct.new(
+      nil,
       :scope_id,
       :start_time,
       :end_time,
@@ -824,6 +868,7 @@ module Aws::NetworkFlowMonitor
     #   <p>The identifier for the query. A query ID is an internally-generated identifier for a specific query returned from an API call to start a query.</p>
     #   @return [String]
     class StartQueryWorkloadInsightsTopContributorsDataOutput < Struct.new(
+      nil,
       :query_id,
       keyword_init: true
     )
@@ -849,6 +894,7 @@ module Aws::NetworkFlowMonitor
     #   <p>The maximum number of top contributors to return.</p>
     #   @return [Integer]
     class StartQueryWorkloadInsightsTopContributorsInput < Struct.new(
+      nil,
       :scope_id,
       :start_time,
       :end_time,
@@ -864,6 +910,7 @@ module Aws::NetworkFlowMonitor
     #   <p>The identifier for the query. A query ID is an internally-generated identifier for a specific query returned from an API call to start a query.</p>
     #   @return [String]
     class StartQueryWorkloadInsightsTopContributorsOutput < Struct.new(
+      nil,
       :query_id,
       keyword_init: true
     )
@@ -877,6 +924,7 @@ module Aws::NetworkFlowMonitor
     #   <p>The identifier for the query. A query ID is an internally-generated identifier for a specific query returned from an API call to create a query.</p>
     #   @return [String]
     class StopQueryMonitorTopContributorsInput < Struct.new(
+      nil,
       :monitor_name,
       :query_id,
       keyword_init: true
@@ -885,6 +933,7 @@ module Aws::NetworkFlowMonitor
     end
 
     class StopQueryMonitorTopContributorsOutput < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -897,6 +946,7 @@ module Aws::NetworkFlowMonitor
     #   <p>The identifier for the query. A query ID is an internally-generated identifier for a specific query returned from an API call to create a query.</p>
     #   @return [String]
     class StopQueryWorkloadInsightsTopContributorsDataInput < Struct.new(
+      nil,
       :scope_id,
       :query_id,
       keyword_init: true
@@ -905,6 +955,7 @@ module Aws::NetworkFlowMonitor
     end
 
     class StopQueryWorkloadInsightsTopContributorsDataOutput < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -917,6 +968,7 @@ module Aws::NetworkFlowMonitor
     #   <p>The identifier for the query. A query ID is an internally-generated identifier for a specific query returned from an API call to create a query.</p>
     #   @return [String]
     class StopQueryWorkloadInsightsTopContributorsInput < Struct.new(
+      nil,
       :scope_id,
       :query_id,
       keyword_init: true
@@ -925,6 +977,7 @@ module Aws::NetworkFlowMonitor
     end
 
     class StopQueryWorkloadInsightsTopContributorsOutput < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -937,6 +990,7 @@ module Aws::NetworkFlowMonitor
     #   <p>The tags for a resource.</p>
     #   @return [Hash<String, String>]
     class TagResourceInput < Struct.new(
+      nil,
       :resource_arn,
       :tags,
       keyword_init: true
@@ -945,6 +999,7 @@ module Aws::NetworkFlowMonitor
     end
 
     class TagResourceOutput < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -973,6 +1028,7 @@ module Aws::NetworkFlowMonitor
     #   <p>The type of a target. A target type is currently always <code>ACCOUNT</code>.</p>
     #   @return [String]
     class TargetIdentifier < Struct.new(
+      nil,
       :target_id,
       :target_type,
       keyword_init: true
@@ -988,6 +1044,7 @@ module Aws::NetworkFlowMonitor
     #   <p>The Amazon Web Services Region for the scope.</p>
     #   @return [String]
     class TargetResource < Struct.new(
+      nil,
       :target_identifier,
       :region,
       keyword_init: true
@@ -999,6 +1056,7 @@ module Aws::NetworkFlowMonitor
     # @!attribute message
     #   @return [String]
     class ThrottlingException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -1019,6 +1077,7 @@ module Aws::NetworkFlowMonitor
     #   <p>The service name for the traversed component.</p>
     #   @return [String]
     class TraversedComponent < Struct.new(
+      nil,
       :component_id,
       :component_type,
       :component_arn,
@@ -1035,6 +1094,7 @@ module Aws::NetworkFlowMonitor
     #   <p>Keys that you specified when you tagged a resource.</p>
     #   @return [Array<String>]
     class UntagResourceInput < Struct.new(
+      nil,
       :resource_arn,
       :tag_keys,
       keyword_init: true
@@ -1043,6 +1103,7 @@ module Aws::NetworkFlowMonitor
     end
 
     class UntagResourceOutput < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1067,6 +1128,7 @@ module Aws::NetworkFlowMonitor
     #   <p>A unique, case-sensitive string of up to 64 ASCII characters that you specify to make an idempotent API request. Don't reuse the same client token for other API requests.</p>
     #   @return [String]
     class UpdateMonitorInput < Struct.new(
+      nil,
       :monitor_name,
       :local_resources_to_add,
       :local_resources_to_remove,
@@ -1103,6 +1165,7 @@ module Aws::NetworkFlowMonitor
     #   <p>The tags for a monitor.</p>
     #   @return [Hash<String, String>]
     class UpdateMonitorOutput < Struct.new(
+      nil,
       :monitor_arn,
       :monitor_name,
       :monitor_status,
@@ -1126,6 +1189,7 @@ module Aws::NetworkFlowMonitor
     #   <p>A list of resources to delete from a scope.</p>
     #   @return [Array<Types::TargetResource>]
     class UpdateScopeInput < Struct.new(
+      nil,
       :scope_id,
       :resources_to_add,
       :resources_to_delete,
@@ -1147,6 +1211,7 @@ module Aws::NetworkFlowMonitor
     #   <p>The tags for a scope.</p>
     #   @return [Hash<String, String>]
     class UpdateScopeOutput < Struct.new(
+      nil,
       :scope_id,
       :status,
       :scope_arn,
@@ -1160,6 +1225,7 @@ module Aws::NetworkFlowMonitor
     # @!attribute message
     #   @return [String]
     class ValidationException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -1177,6 +1243,7 @@ module Aws::NetworkFlowMonitor
     #   <p>The label identifying the data point.</p>
     #   @return [String]
     class WorkloadInsightsTopContributorsDataPoint < Struct.new(
+      nil,
       :timestamps,
       :values,
       :label,
@@ -1214,6 +1281,7 @@ module Aws::NetworkFlowMonitor
     #   <p>The Amazon Resource Name (ARN) of a local VPC.</p>
     #   @return [String]
     class WorkloadInsightsTopContributorsRow < Struct.new(
+      nil,
       :account_id,
       :local_subnet_id,
       :local_az,

@@ -14,6 +14,7 @@ module Aws::CloudSearch
     #   <p>The status of domain configuration option.</p>
     #   @return [Types::OptionStatus]
     class AccessPoliciesStatus < Struct.new(
+      nil,
       :options,
       :status,
       keyword_init: true
@@ -38,6 +39,7 @@ module Aws::CloudSearch
     #   <p>The level of algorithmic stemming to perform: <code>none</code>, <code>minimal</code>, <code>light</code>, or <code>full</code>. The available levels vary depending on the language. For more information, see <a href="http://docs.aws.amazon.com/cloudsearch/latest/developerguide/text-processing.html#text-processing-settings" target="_blank">Language Specific Text Processing Settings</a> in the <i>Amazon CloudSearch Developer Guide</i> </p>
     #   @return [String]
     class AnalysisOptions < Struct.new(
+      nil,
       :synonyms,
       :stopwords,
       :stemming_dictionary,
@@ -60,6 +62,7 @@ module Aws::CloudSearch
     #   <p>Synonyms, stopwords, and stemming options for an analysis scheme. Includes tokenization dictionary for Japanese.</p>
     #   @return [Types::AnalysisOptions]
     class AnalysisScheme < Struct.new(
+      nil,
       :analysis_scheme_name,
       :analysis_scheme_language,
       :analysis_options,
@@ -76,6 +79,7 @@ module Aws::CloudSearch
     #   <p>The status of domain configuration option.</p>
     #   @return [Types::OptionStatus]
     class AnalysisSchemeStatus < Struct.new(
+      nil,
       :options,
       :status,
       keyword_init: true
@@ -91,6 +95,7 @@ module Aws::CloudSearch
     #   <p>The status of domain configuration option.</p>
     #   @return [Types::OptionStatus]
     class AvailabilityOptionsStatus < Struct.new(
+      nil,
       :options,
       :status,
       keyword_init: true
@@ -111,6 +116,7 @@ module Aws::CloudSearch
     #   <p>A human-readable string error or warning message.</p>
     #   @return [String]
     class BaseException < Struct.new(
+      nil,
       :code,
       :message,
       keyword_init: true
@@ -123,6 +129,7 @@ module Aws::CloudSearch
     #   <p>A string that represents the name of a domain. Domain names are unique across the domains owned by an account within an AWS region. Domain names start with a letter or number and can contain the following characters: a-z (lowercase), 0-9, and - (hyphen).</p>
     #   @return [String]
     class BuildSuggestersRequest < Struct.new(
+      nil,
       :domain_name,
       keyword_init: true
     )
@@ -134,6 +141,7 @@ module Aws::CloudSearch
     #   <p>A list of field names.</p>
     #   @return [Array<String>]
     class BuildSuggestersResponse < Struct.new(
+      nil,
       :field_names,
       keyword_init: true
     )
@@ -145,6 +153,7 @@ module Aws::CloudSearch
     #   <p>A name for the domain you are creating. Allowed characters are a-z (lower-case letters), 0-9, and hyphen (-). Domain names must start with a letter or number and be at least 3 and no more than 28 characters long.</p>
     #   @return [String]
     class CreateDomainRequest < Struct.new(
+      nil,
       :domain_name,
       keyword_init: true
     )
@@ -156,6 +165,7 @@ module Aws::CloudSearch
     #   <p>The current status of the search domain.</p>
     #   @return [Types::DomainStatus]
     class CreateDomainResponse < Struct.new(
+      nil,
       :domain_status,
       keyword_init: true
     )
@@ -179,6 +189,7 @@ module Aws::CloudSearch
     #   <p>Whether the contents of the field can be returned in the search results.</p>
     #   @return [Boolean]
     class DateArrayOptions < Struct.new(
+      nil,
       :default_value,
       :source_fields,
       :facet_enabled,
@@ -222,6 +233,7 @@ module Aws::CloudSearch
     #   <p>Whether the field can be used to sort the search results.</p>
     #   @return [Boolean]
     class DateOptions < Struct.new(
+      nil,
       :default_value,
       :source_field,
       :facet_enabled,
@@ -241,6 +253,7 @@ module Aws::CloudSearch
     #   <p>Configuration information for an analysis scheme. Each analysis scheme has a unique name and specifies the language of the text to be processed. The following options can be configured for an analysis scheme: <code>Synonyms</code>, <code>Stopwords</code>, <code>StemmingDictionary</code>, <code>JapaneseTokenizationDictionary</code> and <code>AlgorithmicStemming</code>.</p>
     #   @return [Types::AnalysisScheme]
     class DefineAnalysisSchemeRequest < Struct.new(
+      nil,
       :domain_name,
       :analysis_scheme,
       keyword_init: true
@@ -253,6 +266,7 @@ module Aws::CloudSearch
     #   <p>The status and configuration of an  <code>AnalysisScheme</code>.</p>
     #   @return [Types::AnalysisSchemeStatus]
     class DefineAnalysisSchemeResponse < Struct.new(
+      nil,
       :analysis_scheme,
       keyword_init: true
     )
@@ -267,6 +281,7 @@ module Aws::CloudSearch
     #   <p>A named expression that can be evaluated at search time. Can be used to sort the search results, define other expressions, or return computed information in the search results.  </p>
     #   @return [Types::Expression]
     class DefineExpressionRequest < Struct.new(
+      nil,
       :domain_name,
       :expression,
       keyword_init: true
@@ -279,6 +294,7 @@ module Aws::CloudSearch
     #   <p>The value of an <code>Expression</code> and its current status.</p>
     #   @return [Types::ExpressionStatus]
     class DefineExpressionResponse < Struct.new(
+      nil,
       :expression,
       keyword_init: true
     )
@@ -293,6 +309,7 @@ module Aws::CloudSearch
     #   <p>The index field and field options you want to configure. </p>
     #   @return [Types::IndexField]
     class DefineIndexFieldRequest < Struct.new(
+      nil,
       :domain_name,
       :index_field,
       keyword_init: true
@@ -305,6 +322,7 @@ module Aws::CloudSearch
     #   <p>The value of an <code>IndexField</code> and its current status.</p>
     #   @return [Types::IndexFieldStatus]
     class DefineIndexFieldResponse < Struct.new(
+      nil,
       :index_field,
       keyword_init: true
     )
@@ -319,6 +337,7 @@ module Aws::CloudSearch
     #   <p>Configuration information for a search suggester. Each suggester has a unique name and specifies the text field you want to use for suggestions. The following options can be configured for a suggester: <code>FuzzyMatching</code>, <code>SortExpression</code>. </p>
     #   @return [Types::Suggester]
     class DefineSuggesterRequest < Struct.new(
+      nil,
       :domain_name,
       :suggester,
       keyword_init: true
@@ -331,6 +350,7 @@ module Aws::CloudSearch
     #   <p>The value of a <code>Suggester</code> and its current status.</p>
     #   @return [Types::SuggesterStatus]
     class DefineSuggesterResponse < Struct.new(
+      nil,
       :suggester,
       keyword_init: true
     )
@@ -345,6 +365,7 @@ module Aws::CloudSearch
     #   <p>The name of the analysis scheme you want to delete.</p>
     #   @return [String]
     class DeleteAnalysisSchemeRequest < Struct.new(
+      nil,
       :domain_name,
       :analysis_scheme_name,
       keyword_init: true
@@ -357,6 +378,7 @@ module Aws::CloudSearch
     #   <p>The status of the analysis scheme being deleted.</p>
     #   @return [Types::AnalysisSchemeStatus]
     class DeleteAnalysisSchemeResponse < Struct.new(
+      nil,
       :analysis_scheme,
       keyword_init: true
     )
@@ -368,6 +390,7 @@ module Aws::CloudSearch
     #   <p>The name of the domain you want to permanently delete.</p>
     #   @return [String]
     class DeleteDomainRequest < Struct.new(
+      nil,
       :domain_name,
       keyword_init: true
     )
@@ -379,6 +402,7 @@ module Aws::CloudSearch
     #   <p>The current status of the search domain.</p>
     #   @return [Types::DomainStatus]
     class DeleteDomainResponse < Struct.new(
+      nil,
       :domain_status,
       keyword_init: true
     )
@@ -393,6 +417,7 @@ module Aws::CloudSearch
     #   <p>The name of the <code><a>Expression</a></code> to delete.</p>
     #   @return [String]
     class DeleteExpressionRequest < Struct.new(
+      nil,
       :domain_name,
       :expression_name,
       keyword_init: true
@@ -405,6 +430,7 @@ module Aws::CloudSearch
     #   <p>The status of the expression being deleted.</p>
     #   @return [Types::ExpressionStatus]
     class DeleteExpressionResponse < Struct.new(
+      nil,
       :expression,
       keyword_init: true
     )
@@ -419,6 +445,7 @@ module Aws::CloudSearch
     #   <p>The name of the index field your want to remove from the domain's indexing options.</p>
     #   @return [String]
     class DeleteIndexFieldRequest < Struct.new(
+      nil,
       :domain_name,
       :index_field_name,
       keyword_init: true
@@ -431,6 +458,7 @@ module Aws::CloudSearch
     #   <p>The status of the index field being deleted.</p>
     #   @return [Types::IndexFieldStatus]
     class DeleteIndexFieldResponse < Struct.new(
+      nil,
       :index_field,
       keyword_init: true
     )
@@ -445,6 +473,7 @@ module Aws::CloudSearch
     #   <p>Specifies the name of the suggester you want to delete.</p>
     #   @return [String]
     class DeleteSuggesterRequest < Struct.new(
+      nil,
       :domain_name,
       :suggester_name,
       keyword_init: true
@@ -457,6 +486,7 @@ module Aws::CloudSearch
     #   <p>The status of the suggester being deleted.</p>
     #   @return [Types::SuggesterStatus]
     class DeleteSuggesterResponse < Struct.new(
+      nil,
       :suggester,
       keyword_init: true
     )
@@ -474,6 +504,7 @@ module Aws::CloudSearch
     #   <p>Whether to display the deployed configuration (<code>true</code>) or include any pending changes (<code>false</code>). Defaults to <code>false</code>.</p>
     #   @return [Boolean]
     class DescribeAnalysisSchemesRequest < Struct.new(
+      nil,
       :domain_name,
       :analysis_scheme_names,
       :deployed,
@@ -487,6 +518,7 @@ module Aws::CloudSearch
     #   <p>The analysis scheme descriptions.</p>
     #   @return [Array<Types::AnalysisSchemeStatus>]
     class DescribeAnalysisSchemesResponse < Struct.new(
+      nil,
       :analysis_schemes,
       keyword_init: true
     )
@@ -501,6 +533,7 @@ module Aws::CloudSearch
     #   <p>Whether to display the deployed configuration (<code>true</code>) or include any pending changes (<code>false</code>). Defaults to <code>false</code>.</p>
     #   @return [Boolean]
     class DescribeAvailabilityOptionsRequest < Struct.new(
+      nil,
       :domain_name,
       :deployed,
       keyword_init: true
@@ -513,6 +546,7 @@ module Aws::CloudSearch
     #   <p>The availability options configured for the domain. Indicates whether Multi-AZ is enabled for the domain. </p>
     #   @return [Types::AvailabilityOptionsStatus]
     class DescribeAvailabilityOptionsResponse < Struct.new(
+      nil,
       :availability_options,
       keyword_init: true
     )
@@ -527,6 +561,7 @@ module Aws::CloudSearch
     #   <p>Whether to retrieve the latest configuration (which might be in a Processing state) or the current, active configuration. Defaults to <code>false</code>.</p>
     #   @return [Boolean]
     class DescribeDomainEndpointOptionsRequest < Struct.new(
+      nil,
       :domain_name,
       :deployed,
       keyword_init: true
@@ -539,6 +574,7 @@ module Aws::CloudSearch
     #   <p>The status and configuration of a search domain's endpoint options.</p>
     #   @return [Types::DomainEndpointOptionsStatus]
     class DescribeDomainEndpointOptionsResponse < Struct.new(
+      nil,
       :domain_endpoint_options,
       keyword_init: true
     )
@@ -550,6 +586,7 @@ module Aws::CloudSearch
     #   <p>The names of the domains you want to include in the response.</p>
     #   @return [Array<String>]
     class DescribeDomainsRequest < Struct.new(
+      nil,
       :domain_names,
       keyword_init: true
     )
@@ -561,6 +598,7 @@ module Aws::CloudSearch
     #   <p>A list that contains the status of each requested domain.</p>
     #   @return [Array<Types::DomainStatus>]
     class DescribeDomainsResponse < Struct.new(
+      nil,
       :domain_status_list,
       keyword_init: true
     )
@@ -579,6 +617,7 @@ module Aws::CloudSearch
     #   <p>Whether to display the deployed configuration (<code>true</code>) or include any pending changes (<code>false</code>). Defaults to <code>false</code>.</p>
     #   @return [Boolean]
     class DescribeExpressionsRequest < Struct.new(
+      nil,
       :domain_name,
       :expression_names,
       :deployed,
@@ -592,6 +631,7 @@ module Aws::CloudSearch
     #   <p>The expressions configured for the domain.</p>
     #   @return [Array<Types::ExpressionStatus>]
     class DescribeExpressionsResponse < Struct.new(
+      nil,
       :expressions,
       keyword_init: true
     )
@@ -609,6 +649,7 @@ module Aws::CloudSearch
     #   <p>Whether to display the deployed configuration (<code>true</code>) or include any pending changes (<code>false</code>). Defaults to <code>false</code>.</p>
     #   @return [Boolean]
     class DescribeIndexFieldsRequest < Struct.new(
+      nil,
       :domain_name,
       :field_names,
       :deployed,
@@ -622,6 +663,7 @@ module Aws::CloudSearch
     #   <p>The index fields configured for the domain.</p>
     #   @return [Array<Types::IndexFieldStatus>]
     class DescribeIndexFieldsResponse < Struct.new(
+      nil,
       :index_fields,
       keyword_init: true
     )
@@ -633,6 +675,7 @@ module Aws::CloudSearch
     #   <p>A string that represents the name of a domain. Domain names are unique across the domains owned by an account within an AWS region. Domain names start with a letter or number and can contain the following characters: a-z (lowercase), 0-9, and - (hyphen).</p>
     #   @return [String]
     class DescribeScalingParametersRequest < Struct.new(
+      nil,
       :domain_name,
       keyword_init: true
     )
@@ -644,6 +687,7 @@ module Aws::CloudSearch
     #   <p>The status and configuration of a search domain's scaling parameters. </p>
     #   @return [Types::ScalingParametersStatus]
     class DescribeScalingParametersResponse < Struct.new(
+      nil,
       :scaling_parameters,
       keyword_init: true
     )
@@ -658,6 +702,7 @@ module Aws::CloudSearch
     #   <p>Whether to display the deployed configuration (<code>true</code>) or include any pending changes (<code>false</code>). Defaults to <code>false</code>.</p>
     #   @return [Boolean]
     class DescribeServiceAccessPoliciesRequest < Struct.new(
+      nil,
       :domain_name,
       :deployed,
       keyword_init: true
@@ -670,6 +715,7 @@ module Aws::CloudSearch
     #   <p>The access rules configured for the domain specified in the request.</p>
     #   @return [Types::AccessPoliciesStatus]
     class DescribeServiceAccessPoliciesResponse < Struct.new(
+      nil,
       :access_policies,
       keyword_init: true
     )
@@ -687,6 +733,7 @@ module Aws::CloudSearch
     #   <p>Whether to display the deployed configuration (<code>true</code>) or include any pending changes (<code>false</code>). Defaults to <code>false</code>.</p>
     #   @return [Boolean]
     class DescribeSuggestersRequest < Struct.new(
+      nil,
       :domain_name,
       :suggester_names,
       :deployed,
@@ -700,6 +747,7 @@ module Aws::CloudSearch
     #   <p>The suggesters configured for the domain specified in the request.</p>
     #   @return [Array<Types::SuggesterStatus>]
     class DescribeSuggestersResponse < Struct.new(
+      nil,
       :suggesters,
       keyword_init: true
     )
@@ -714,6 +762,7 @@ module Aws::CloudSearch
     #   <p>A human-readable string error or warning message.</p>
     #   @return [String]
     class DisabledOperationException < Struct.new(
+      nil,
       :code,
       :message,
       keyword_init: true
@@ -738,6 +787,7 @@ module Aws::CloudSearch
     #           suggestions are sorted with the closest matches listed first.</p>
     #   @return [String]
     class DocumentSuggesterOptions < Struct.new(
+      nil,
       :source_field,
       :fuzzy_matching,
       :sort_expression,
@@ -754,6 +804,7 @@ module Aws::CloudSearch
     #   <p>The minimum required TLS version</p>
     #   @return [String]
     class DomainEndpointOptions < Struct.new(
+      nil,
       :enforce_https,
       :tls_security_policy,
       keyword_init: true
@@ -769,6 +820,7 @@ module Aws::CloudSearch
     #   <p>The status of the configured domain endpoint options.</p>
     #   @return [Types::OptionStatus]
     class DomainEndpointOptionsStatus < Struct.new(
+      nil,
       :options,
       :status,
       keyword_init: true
@@ -816,6 +868,7 @@ module Aws::CloudSearch
     # @!attribute limits
     #   @return [Types::Limits]
     class DomainStatus < Struct.new(
+      nil,
       :domain_id,
       :domain_name,
       :arn,
@@ -851,6 +904,7 @@ module Aws::CloudSearch
     #   <p>Whether the contents of the field can be returned in the search results.</p>
     #   @return [Boolean]
     class DoubleArrayOptions < Struct.new(
+      nil,
       :default_value,
       :source_fields,
       :facet_enabled,
@@ -881,6 +935,7 @@ module Aws::CloudSearch
     #   <p>Whether the field can be used to sort the search results.</p>
     #   @return [Boolean]
     class DoubleOptions < Struct.new(
+      nil,
       :default_value,
       :source_field,
       :facet_enabled,
@@ -901,6 +956,7 @@ module Aws::CloudSearch
     #   <p>The expression to evaluate for sorting while processing a search request.  The <code>Expression</code> syntax is based on JavaScript expressions. For more information, see <a href="http://docs.aws.amazon.com/cloudsearch/latest/developerguide/configuring-expressions.html" target="_blank">Configuring Expressions</a> in the <i>Amazon CloudSearch Developer Guide</i>.</p>
     #   @return [String]
     class Expression < Struct.new(
+      nil,
       :expression_name,
       :expression_value,
       keyword_init: true
@@ -916,6 +972,7 @@ module Aws::CloudSearch
     #   <p>The status of domain configuration option.</p>
     #   @return [Types::OptionStatus]
     class ExpressionStatus < Struct.new(
+      nil,
       :options,
       :status,
       keyword_init: true
@@ -928,6 +985,7 @@ module Aws::CloudSearch
     #   <p>A string that represents the name of a domain. Domain names are unique across the domains owned by an account within an AWS region. Domain names start with a letter or number and can contain the following characters: a-z (lowercase), 0-9, and - (hyphen).</p>
     #   @return [String]
     class IndexDocumentsRequest < Struct.new(
+      nil,
       :domain_name,
       keyword_init: true
     )
@@ -939,6 +997,7 @@ module Aws::CloudSearch
     #   <p>The names of the fields that are currently being indexed.</p>
     #   @return [Array<String>]
     class IndexDocumentsResponse < Struct.new(
+      nil,
       :field_names,
       keyword_init: true
     )
@@ -999,6 +1058,7 @@ module Aws::CloudSearch
     #   <p>Options for a field that contains an array of dates.  Present if <code>IndexFieldType</code> specifies the field is of type <code>date-array</code>. All options are enabled by default.</p>
     #   @return [Types::DateArrayOptions]
     class IndexField < Struct.new(
+      nil,
       :index_field_name,
       :index_field_type,
       :int_options,
@@ -1025,6 +1085,7 @@ module Aws::CloudSearch
     #   <p>The status of domain configuration option.</p>
     #   @return [Types::OptionStatus]
     class IndexFieldStatus < Struct.new(
+      nil,
       :options,
       :status,
       keyword_init: true
@@ -1049,6 +1110,7 @@ module Aws::CloudSearch
     #   <p>Whether the contents of the field can be returned in the search results.</p>
     #   @return [Boolean]
     class IntArrayOptions < Struct.new(
+      nil,
       :default_value,
       :source_fields,
       :facet_enabled,
@@ -1079,6 +1141,7 @@ module Aws::CloudSearch
     #   <p>Whether the field can be used to sort the search results.</p>
     #   @return [Boolean]
     class IntOptions < Struct.new(
+      nil,
       :default_value,
       :source_field,
       :facet_enabled,
@@ -1099,6 +1162,7 @@ module Aws::CloudSearch
     #   <p>A human-readable string error or warning message.</p>
     #   @return [String]
     class InternalException < Struct.new(
+      nil,
       :code,
       :message,
       keyword_init: true
@@ -1114,6 +1178,7 @@ module Aws::CloudSearch
     #   <p>A human-readable string error or warning message.</p>
     #   @return [String]
     class InvalidTypeException < Struct.new(
+      nil,
       :code,
       :message,
       keyword_init: true
@@ -1154,6 +1219,7 @@ module Aws::CloudSearch
     #   <p>Whether the field can be used to sort the search results.</p>
     #   @return [Boolean]
     class LatLonOptions < Struct.new(
+      nil,
       :default_value,
       :source_field,
       :facet_enabled,
@@ -1173,6 +1239,7 @@ module Aws::CloudSearch
     #   <p>A human-readable string error or warning message.</p>
     #   @return [String]
     class LimitExceededException < Struct.new(
+      nil,
       :code,
       :message,
       keyword_init: true
@@ -1185,6 +1252,7 @@ module Aws::CloudSearch
     # @!attribute maximum_partition_count
     #   @return [Integer]
     class Limits < Struct.new(
+      nil,
       :maximum_replication_count,
       :maximum_partition_count,
       keyword_init: true
@@ -1197,6 +1265,7 @@ module Aws::CloudSearch
     #   <p>The names of the search domains owned by an account.</p>
     #   @return [Hash<String, String>]
     class ListDomainNamesResponse < Struct.new(
+      nil,
       :domain_names,
       keyword_init: true
     )
@@ -1220,6 +1289,7 @@ module Aws::CloudSearch
     #   <p>Whether the contents of the field can be returned in the search results.</p>
     #   @return [Boolean]
     class LiteralArrayOptions < Struct.new(
+      nil,
       :default_value,
       :source_fields,
       :facet_enabled,
@@ -1263,6 +1333,7 @@ module Aws::CloudSearch
     #   <p>Whether the field can be used to sort the search results.</p>
     #   @return [Boolean]
     class LiteralOptions < Struct.new(
+      nil,
       :default_value,
       :source_field,
       :facet_enabled,
@@ -1296,6 +1367,7 @@ module Aws::CloudSearch
     #   <p>Indicates that the option will be deleted once processing is complete.</p>
     #   @return [Boolean]
     class OptionStatus < Struct.new(
+      nil,
       :creation_date,
       :update_date,
       :update_version,
@@ -1319,6 +1391,7 @@ module Aws::CloudSearch
     #   <p>A human-readable string error or warning message.</p>
     #   @return [String]
     class ResourceAlreadyExistsException < Struct.new(
+      nil,
       :code,
       :message,
       keyword_init: true
@@ -1334,6 +1407,7 @@ module Aws::CloudSearch
     #   <p>A human-readable string error or warning message.</p>
     #   @return [String]
     class ResourceNotFoundException < Struct.new(
+      nil,
       :code,
       :message,
       keyword_init: true
@@ -1353,6 +1427,7 @@ module Aws::CloudSearch
     #       you select <code>m2.2xlarge</code> as the desired instance type.</p>
     #   @return [Integer]
     class ScalingParameters < Struct.new(
+      nil,
       :desired_instance_type,
       :desired_replication_count,
       :desired_partition_count,
@@ -1375,6 +1450,7 @@ module Aws::CloudSearch
     #   <p>The status of domain configuration option.</p>
     #   @return [Types::OptionStatus]
     class ScalingParametersStatus < Struct.new(
+      nil,
       :options,
       :status,
       keyword_init: true
@@ -1387,6 +1463,7 @@ module Aws::CloudSearch
     #   <p>The endpoint to which service requests can be submitted. For example, <code>search-imdb-movies-oopcnjfn6ugofer3zx5iadxxca.eu-west-1.cloudsearch.amazonaws.com</code> or <code>doc-imdb-movies-oopcnjfn6ugofer3zx5iadxxca.eu-west-1.cloudsearch.amazonaws.com</code>.</p>
     #   @return [String]
     class ServiceEndpoint < Struct.new(
+      nil,
       :endpoint,
       keyword_init: true
     )
@@ -1402,6 +1479,7 @@ module Aws::CloudSearch
     #   <p>Options for a search suggester.</p>
     #   @return [Types::DocumentSuggesterOptions]
     class Suggester < Struct.new(
+      nil,
       :suggester_name,
       :document_suggester_options,
       keyword_init: true
@@ -1417,6 +1495,7 @@ module Aws::CloudSearch
     #   <p>The status of domain configuration option.</p>
     #   @return [Types::OptionStatus]
     class SuggesterStatus < Struct.new(
+      nil,
       :options,
       :status,
       keyword_init: true
@@ -1441,6 +1520,7 @@ module Aws::CloudSearch
     #   <p>The name of an analysis scheme for a  <code>text-array</code> field.</p>
     #   @return [String]
     class TextArrayOptions < Struct.new(
+      nil,
       :default_value,
       :source_fields,
       :return_enabled,
@@ -1484,6 +1564,7 @@ module Aws::CloudSearch
     #   <p>The name of an analysis scheme for a  <code>text</code> field.</p>
     #   @return [String]
     class TextOptions < Struct.new(
+      nil,
       :default_value,
       :source_field,
       :return_enabled,
@@ -1503,6 +1584,7 @@ module Aws::CloudSearch
     #   <p>You expand an existing search domain to a second Availability Zone by setting the Multi-AZ option to true. Similarly, you can turn off the Multi-AZ option to downgrade the domain to a single Availability Zone by setting the Multi-AZ option to <code>false</code>. </p>
     #   @return [Boolean]
     class UpdateAvailabilityOptionsRequest < Struct.new(
+      nil,
       :domain_name,
       :multi_az,
       keyword_init: true
@@ -1515,6 +1597,7 @@ module Aws::CloudSearch
     #   <p>The newly-configured availability options. Indicates whether Multi-AZ is enabled for the domain. </p>
     #   @return [Types::AvailabilityOptionsStatus]
     class UpdateAvailabilityOptionsResponse < Struct.new(
+      nil,
       :availability_options,
       keyword_init: true
     )
@@ -1529,6 +1612,7 @@ module Aws::CloudSearch
     #   <p>Whether to require that all requests to the domain arrive over HTTPS. We recommend Policy-Min-TLS-1-2-2019-07 for TLSSecurityPolicy. For compatibility with older clients, the default is Policy-Min-TLS-1-0-2019-07. </p>
     #   @return [Types::DomainEndpointOptions]
     class UpdateDomainEndpointOptionsRequest < Struct.new(
+      nil,
       :domain_name,
       :domain_endpoint_options,
       keyword_init: true
@@ -1541,6 +1625,7 @@ module Aws::CloudSearch
     #   <p>The newly-configured domain endpoint options.</p>
     #   @return [Types::DomainEndpointOptionsStatus]
     class UpdateDomainEndpointOptionsResponse < Struct.new(
+      nil,
       :domain_endpoint_options,
       keyword_init: true
     )
@@ -1555,6 +1640,7 @@ module Aws::CloudSearch
     #   <p>The desired instance type and desired number of replicas of each index partition.</p>
     #   @return [Types::ScalingParameters]
     class UpdateScalingParametersRequest < Struct.new(
+      nil,
       :domain_name,
       :scaling_parameters,
       keyword_init: true
@@ -1567,6 +1653,7 @@ module Aws::CloudSearch
     #   <p>The status and configuration of a search domain's scaling parameters. </p>
     #   @return [Types::ScalingParametersStatus]
     class UpdateScalingParametersResponse < Struct.new(
+      nil,
       :scaling_parameters,
       keyword_init: true
     )
@@ -1581,6 +1668,7 @@ module Aws::CloudSearch
     #   <p>The access rules you want to configure. These rules replace any existing rules. </p>
     #   @return [String]
     class UpdateServiceAccessPoliciesRequest < Struct.new(
+      nil,
       :domain_name,
       :access_policies,
       keyword_init: true
@@ -1593,6 +1681,7 @@ module Aws::CloudSearch
     #   <p>The access rules configured for the domain.</p>
     #   @return [Types::AccessPoliciesStatus]
     class UpdateServiceAccessPoliciesResponse < Struct.new(
+      nil,
       :access_policies,
       keyword_init: true
     )
@@ -1607,6 +1696,7 @@ module Aws::CloudSearch
     #   <p>A human-readable string error or warning message.</p>
     #   @return [String]
     class ValidationException < Struct.new(
+      nil,
       :code,
       :message,
       keyword_init: true

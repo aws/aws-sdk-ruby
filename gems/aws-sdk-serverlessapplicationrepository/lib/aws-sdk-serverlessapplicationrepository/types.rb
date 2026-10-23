@@ -14,6 +14,7 @@ module Aws::ServerlessApplicationRepository
     #   <p>The semantic version of the nested application.</p>
     #   @return [String]
     class ApplicationDependencySummary < Struct.new(
+      nil,
       :application_id,
       :semantic_version,
       keyword_init: true
@@ -36,6 +37,7 @@ module Aws::ServerlessApplicationRepository
     #   <p>A unique ID for the statement.</p>
     #   @return [String]
     class ApplicationPolicyStatement < Struct.new(
+      nil,
       :actions,
       :principal_org_i_ds,
       :principals,
@@ -71,6 +73,7 @@ module Aws::ServerlessApplicationRepository
     #   <p>A valid identifier from <a href="https://spdx.org/licenses/">https://spdx.org/licenses/</a>.</p>
     #   @return [String]
     class ApplicationSummary < Struct.new(
+      nil,
       :application_id,
       :author,
       :creation_time,
@@ -92,6 +95,7 @@ module Aws::ServerlessApplicationRepository
     #   <p>One of the parameters in the request is invalid.</p>
     #   @return [String]
     class BadRequestException < Struct.new(
+      nil,
       :error_code,
       :message,
       keyword_init: true
@@ -107,6 +111,7 @@ module Aws::ServerlessApplicationRepository
     #   <p>The resource already exists.</p>
     #   @return [String]
     class ConflictException < Struct.new(
+      nil,
       :error_code,
       :message,
       keyword_init: true
@@ -165,6 +170,7 @@ module Aws::ServerlessApplicationRepository
     #   <p>A link to the S3 object containing the packaged AWS SAM template of your application.</p><p>You can specify only one of templateBody and templateUrl; otherwise an error results.</p>
     #   @return [String]
     class CreateApplicationRequest < Struct.new(
+      nil,
       :author,
       :description,
       :home_page_url,
@@ -225,6 +231,7 @@ module Aws::ServerlessApplicationRepository
     #   <p>Version information about the application.</p>
     #   @return [Types::Version]
     class CreateApplicationResponse < Struct.new(
+      nil,
       :application_id,
       :author,
       :creation_time,
@@ -262,6 +269,7 @@ module Aws::ServerlessApplicationRepository
     #   <p>A link to the packaged AWS SAM template of your application.</p>
     #   @return [String]
     class CreateApplicationVersionRequest < Struct.new(
+      nil,
       :application_id,
       :semantic_version,
       :source_code_archive_url,
@@ -326,6 +334,7 @@ module Aws::ServerlessApplicationRepository
     #   <p>A link to the packaged AWS SAM template of your application.</p>
     #   @return [String]
     class CreateApplicationVersionResponse < Struct.new(
+      nil,
       :application_id,
       :creation_time,
       :parameter_definitions,
@@ -412,6 +421,7 @@ module Aws::ServerlessApplicationRepository
     #   <p>The UUID returned by CreateCloudFormationTemplate.</p><p>Pattern: [0-9a-fA-F]{8}\-[0-9a-fA-F]{4}\-[0-9a-fA-F]{4}\-[0-9a-fA-F]{4}\-[0-9a-fA-F]{12}</p>
     #   @return [String]
     class CreateCloudFormationChangeSetRequest < Struct.new(
+      nil,
       :application_id,
       :capabilities,
       :change_set_name,
@@ -445,6 +455,7 @@ module Aws::ServerlessApplicationRepository
     #   <p>The unique ID of the stack.</p>
     #   @return [String]
     class CreateCloudFormationChangeSetResponse < Struct.new(
+      nil,
       :application_id,
       :change_set_id,
       :semantic_version,
@@ -463,6 +474,7 @@ module Aws::ServerlessApplicationRepository
     #    </p>
     #   @return [String]
     class CreateCloudFormationTemplateRequest < Struct.new(
+      nil,
       :application_id,
       :semantic_version,
       keyword_init: true
@@ -497,6 +509,7 @@ module Aws::ServerlessApplicationRepository
     #    AWS CloudFormation.</p>
     #   @return [String]
     class CreateCloudFormationTemplateResponse < Struct.new(
+      nil,
       :application_id,
       :creation_time,
       :expiration_time,
@@ -513,6 +526,7 @@ module Aws::ServerlessApplicationRepository
     #   <p>The Amazon Resource Name (ARN) of the application.</p>
     #   @return [String]
     class DeleteApplicationRequest < Struct.new(
+      nil,
       :application_id,
       keyword_init: true
     )
@@ -527,6 +541,7 @@ module Aws::ServerlessApplicationRepository
     #   <p>The client is not authenticated.</p>
     #   @return [String]
     class ForbiddenException < Struct.new(
+      nil,
       :error_code,
       :message,
       keyword_init: true
@@ -538,6 +553,7 @@ module Aws::ServerlessApplicationRepository
     #   <p>The Amazon Resource Name (ARN) of the application.</p>
     #   @return [String]
     class GetApplicationPolicyRequest < Struct.new(
+      nil,
       :application_id,
       keyword_init: true
     )
@@ -548,6 +564,7 @@ module Aws::ServerlessApplicationRepository
     #   <p>An array of policy statements applied to the application.</p>
     #   @return [Array<Types::ApplicationPolicyStatement>]
     class GetApplicationPolicyResponse < Struct.new(
+      nil,
       :statements,
       keyword_init: true
     )
@@ -561,6 +578,7 @@ module Aws::ServerlessApplicationRepository
     #   <p>The semantic version of the application to get.</p>
     #   @return [String]
     class GetApplicationRequest < Struct.new(
+      nil,
       :application_id,
       :semantic_version,
       keyword_init: true
@@ -608,6 +626,7 @@ module Aws::ServerlessApplicationRepository
     #   <p>Version information about the application.</p>
     #   @return [Types::Version]
     class GetApplicationResponse < Struct.new(
+      nil,
       :application_id,
       :author,
       :creation_time,
@@ -633,6 +652,7 @@ module Aws::ServerlessApplicationRepository
     #   <p>The UUID returned by CreateCloudFormationTemplate.</p><p>Pattern: [0-9a-fA-F]{8}\-[0-9a-fA-F]{4}\-[0-9a-fA-F]{4}\-[0-9a-fA-F]{4}\-[0-9a-fA-F]{12}</p>
     #   @return [String]
     class GetCloudFormationTemplateRequest < Struct.new(
+      nil,
       :application_id,
       :template_id,
       keyword_init: true
@@ -667,6 +687,7 @@ module Aws::ServerlessApplicationRepository
     #    AWS CloudFormation.</p>
     #   @return [String]
     class GetCloudFormationTemplateResponse < Struct.new(
+      nil,
       :application_id,
       :creation_time,
       :expiration_time,
@@ -687,6 +708,7 @@ module Aws::ServerlessApplicationRepository
     #   <p>The AWS Serverless Application Repository service encountered an internal error.</p>
     #   @return [String]
     class InternalServerErrorException < Struct.new(
+      nil,
       :error_code,
       :message,
       keyword_init: true
@@ -707,6 +729,7 @@ module Aws::ServerlessApplicationRepository
     #   <p>The semantic version of the application to get.</p>
     #   @return [String]
     class ListApplicationDependenciesRequest < Struct.new(
+      nil,
       :application_id,
       :max_items,
       :next_token,
@@ -723,6 +746,7 @@ module Aws::ServerlessApplicationRepository
     #   <p>The token to request the next page of results.</p>
     #   @return [String]
     class ListApplicationDependenciesResponse < Struct.new(
+      nil,
       :dependencies,
       :next_token,
       keyword_init: true
@@ -740,6 +764,7 @@ module Aws::ServerlessApplicationRepository
     #   <p>A token to specify where to start paginating.</p>
     #   @return [String]
     class ListApplicationVersionsRequest < Struct.new(
+      nil,
       :application_id,
       :max_items,
       :next_token,
@@ -755,6 +780,7 @@ module Aws::ServerlessApplicationRepository
     #   <p>An array of version summaries for the application.</p>
     #   @return [Array<Types::VersionSummary>]
     class ListApplicationVersionsResponse < Struct.new(
+      nil,
       :next_token,
       :versions,
       keyword_init: true
@@ -769,6 +795,7 @@ module Aws::ServerlessApplicationRepository
     #   <p>A token to specify where to start paginating.</p>
     #   @return [String]
     class ListApplicationsRequest < Struct.new(
+      nil,
       :max_items,
       :next_token,
       keyword_init: true
@@ -783,6 +810,7 @@ module Aws::ServerlessApplicationRepository
     #   <p>The token to request the next page of results.</p>
     #   @return [String]
     class ListApplicationsResponse < Struct.new(
+      nil,
       :applications,
       :next_token,
       keyword_init: true
@@ -798,6 +826,7 @@ module Aws::ServerlessApplicationRepository
     #   <p>The resource (for example, an access policy statement) specified in the request doesn't exist.</p>
     #   @return [String]
     class NotFoundException < Struct.new(
+      nil,
       :error_code,
       :message,
       keyword_init: true
@@ -863,6 +892,7 @@ module Aws::ServerlessApplicationRepository
     #    Also, each member string is space-trimmed.</p><p>For example, users might specify "test,dev,prod", and then Ref results in ["test","dev","prod"].</p>
     #   @return [String]
     class ParameterDefinition < Struct.new(
+      nil,
       :allowed_pattern,
       :allowed_values,
       :constraint_description,
@@ -890,6 +920,7 @@ module Aws::ServerlessApplicationRepository
     #   <p>The input value associated with the parameter.</p>
     #   @return [String]
     class ParameterValue < Struct.new(
+      nil,
       :name,
       :value,
       keyword_init: true
@@ -904,6 +935,7 @@ module Aws::ServerlessApplicationRepository
     #   <p>An array of policy statements applied to the application.</p>
     #   @return [Array<Types::ApplicationPolicyStatement>]
     class PutApplicationPolicyRequest < Struct.new(
+      nil,
       :application_id,
       :statements,
       keyword_init: true
@@ -915,6 +947,7 @@ module Aws::ServerlessApplicationRepository
     #   <p>An array of policy statements applied to the application.</p>
     #   @return [Array<Types::ApplicationPolicyStatement>]
     class PutApplicationPolicyResponse < Struct.new(
+      nil,
       :statements,
       keyword_init: true
     )
@@ -932,6 +965,7 @@ module Aws::ServerlessApplicationRepository
     #    </i> Data Type.</p>
     #   @return [Array<Types::RollbackTrigger>]
     class RollbackConfiguration < Struct.new(
+      nil,
       :monitoring_time_in_minutes,
       :rollback_triggers,
       keyword_init: true
@@ -950,6 +984,7 @@ module Aws::ServerlessApplicationRepository
     #    </i> Data Type.</p>
     #   @return [String]
     class RollbackTrigger < Struct.new(
+      nil,
       :arn,
       :type,
       keyword_init: true
@@ -970,6 +1005,7 @@ module Aws::ServerlessApplicationRepository
     #    Data Type.</p>
     #   @return [String]
     class Tag < Struct.new(
+      nil,
       :key,
       :value,
       keyword_init: true
@@ -985,6 +1021,7 @@ module Aws::ServerlessApplicationRepository
     #   <p>The client is sending more than the allowed number of requests per unit of time.</p>
     #   @return [String]
     class TooManyRequestsException < Struct.new(
+      nil,
       :error_code,
       :message,
       keyword_init: true
@@ -999,6 +1036,7 @@ module Aws::ServerlessApplicationRepository
     #   <p>The AWS Organization ID to unshare the application from.</p>
     #   @return [String]
     class UnshareApplicationRequest < Struct.new(
+      nil,
       :application_id,
       :organization_id,
       keyword_init: true
@@ -1028,6 +1066,7 @@ module Aws::ServerlessApplicationRepository
     #   <p>A link to the readme file in Markdown language that contains a more detailed description of the application and how it works.</p><p>Maximum size 5 MB</p>
     #   @return [String]
     class UpdateApplicationRequest < Struct.new(
+      nil,
       :application_id,
       :author,
       :description,
@@ -1080,6 +1119,7 @@ module Aws::ServerlessApplicationRepository
     #   <p>Version information about the application.</p>
     #   @return [Types::Version]
     class UpdateApplicationResponse < Struct.new(
+      nil,
       :application_id,
       :author,
       :creation_time,
@@ -1152,6 +1192,7 @@ module Aws::ServerlessApplicationRepository
     #   <p>A link to the packaged AWS SAM template of your application.</p>
     #   @return [String]
     class Version < Struct.new(
+      nil,
       :application_id,
       :creation_time,
       :parameter_definitions,
@@ -1182,6 +1223,7 @@ module Aws::ServerlessApplicationRepository
     #   <p>A link to a public repository for the source code of your application, for example the URL of a specific GitHub commit.</p>
     #   @return [String]
     class VersionSummary < Struct.new(
+      nil,
       :application_id,
       :creation_time,
       :semantic_version,

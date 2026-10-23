@@ -15,6 +15,7 @@ module Aws::DLM
     #   <p>The rule for copying shared snapshots across Regions.</p>
     #   @return [Array<Types::CrossRegionCopyAction>]
     class Action < Struct.new(
+      nil,
       :name,
       :cross_region_copy,
       keyword_init: true
@@ -30,6 +31,7 @@ module Aws::DLM
     #   				EBS snapshots</a>.</p>
     #   @return [Types::RetentionArchiveTier]
     class ArchiveRetainRule < Struct.new(
+      nil,
       :retention_archive_tier,
       keyword_init: true
     )
@@ -42,6 +44,7 @@ module Aws::DLM
     #   <p>Information about the retention period for the snapshot archiving rule.</p>
     #   @return [Types::ArchiveRetainRule]
     class ArchiveRule < Struct.new(
+      nil,
       :retain_rule,
       keyword_init: true
     )
@@ -143,6 +146,7 @@ module Aws::DLM
     #   			for target resources that match any of the specified exclusion parameters.</p>
     #   @return [Types::Exclusions]
     class CreateLifecyclePolicyRequest < Struct.new(
+      nil,
       :execution_role_arn,
       :description,
       :state,
@@ -164,6 +168,7 @@ module Aws::DLM
     #   <p>The identifier of the lifecycle policy.</p>
     #   @return [String]
     class CreateLifecyclePolicyResponse < Struct.new(
+      nil,
       :policy_id,
       keyword_init: true
     )
@@ -247,6 +252,7 @@ module Aws::DLM
     #   				application-consistent snapshots with pre and post scripts</a>.</p>
     #   @return [Array<Types::Script>]
     class CreateRule < Struct.new(
+      nil,
       :location,
       :interval,
       :interval_unit,
@@ -276,6 +282,7 @@ module Aws::DLM
     #   			retention period expires, the cross-Region copy is deleted.</p>
     #   @return [Types::CrossRegionCopyRetainRule]
     class CrossRegionCopyAction < Struct.new(
+      nil,
       :target,
       :encryption_configuration,
       :retain_rule,
@@ -297,6 +304,7 @@ module Aws::DLM
     #   			<code>IntervalUnit=MONTHS</code>.</p>
     #   @return [String]
     class CrossRegionCopyDeprecateRule < Struct.new(
+      nil,
       :interval,
       :interval_unit,
       keyword_init: true
@@ -316,6 +324,7 @@ module Aws::DLM
     #   			3 months, specify <code>Interval=3</code> and <code>IntervalUnit=MONTHS</code>.</p>
     #   @return [String]
     class CrossRegionCopyRetainRule < Struct.new(
+      nil,
       :interval,
       :interval_unit,
       keyword_init: true
@@ -373,6 +382,7 @@ module Aws::DLM
     #               <b>[Custom AMI policies only]</b> The AMI deprecation rule for cross-Region AMI copies created by the rule.</p>
     #   @return [Types::CrossRegionCopyDeprecateRule]
     class CrossRegionCopyRule < Struct.new(
+      nil,
       :target_region,
       :target,
       :encrypted,
@@ -391,6 +401,7 @@ module Aws::DLM
     #   <p>The target Region, for example <code>us-east-1</code>.</p>
     #   @return [String]
     class CrossRegionCopyTarget < Struct.new(
+      nil,
       :target_region,
       keyword_init: true
     )
@@ -401,6 +412,7 @@ module Aws::DLM
     #   <p>The identifier of the lifecycle policy.</p>
     #   @return [String]
     class DeleteLifecyclePolicyRequest < Struct.new(
+      nil,
       :policy_id,
       keyword_init: true
     )
@@ -408,6 +420,7 @@ module Aws::DLM
     end
 
     class DeleteLifecyclePolicyResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -433,6 +446,7 @@ module Aws::DLM
     #   <p>The unit of time in which to measure the <b>Interval</b>.</p>
     #   @return [String]
     class DeprecateRule < Struct.new(
+      nil,
       :count,
       :interval,
       :interval_unit,
@@ -454,6 +468,7 @@ module Aws::DLM
     #   			this parameter is not specified, the default KMS key for the account is used.</p>
     #   @return [String]
     class EncryptionConfiguration < Struct.new(
+      nil,
       :encrypted,
       :cmk_arn,
       keyword_init: true
@@ -479,6 +494,7 @@ module Aws::DLM
     #   			are shared with your account.</p>
     #   @return [String]
     class EventParameters < Struct.new(
+      nil,
       :event_type,
       :snapshot_owner,
       :description_regex,
@@ -496,6 +512,7 @@ module Aws::DLM
     #   <p>Information about the event.</p>
     #   @return [Types::EventParameters]
     class EventSource < Struct.new(
+      nil,
       :type,
       :parameters,
       keyword_init: true
@@ -524,6 +541,7 @@ module Aws::DLM
     #               <b>[Default policies for EBS-backed AMIs only]</b> Specifies whether to exclude volumes that have specific tags. </p>
     #   @return [Array<Types::Tag>]
     class Exclusions < Struct.new(
+      nil,
       :exclude_boot_volumes,
       :exclude_volume_types,
       :exclude_tags,
@@ -550,6 +568,7 @@ module Aws::DLM
     #   <p>The Availability Zones in which to enable fast snapshot restore.</p>
     #   @return [Array<String>]
     class FastRestoreRule < Struct.new(
+      nil,
       :count,
       :interval,
       :interval_unit,
@@ -596,6 +615,7 @@ module Aws::DLM
     #            </ul>
     #   @return [String]
     class GetLifecyclePoliciesRequest < Struct.new(
+      nil,
       :policy_ids,
       :state,
       :resource_types,
@@ -611,6 +631,7 @@ module Aws::DLM
     #   <p>Summary information about the lifecycle policies.</p>
     #   @return [Array<Types::LifecyclePolicySummary>]
     class GetLifecyclePoliciesResponse < Struct.new(
+      nil,
       :policies,
       keyword_init: true
     )
@@ -621,6 +642,7 @@ module Aws::DLM
     #   <p>The identifier of the lifecycle policy.</p>
     #   @return [String]
     class GetLifecyclePolicyRequest < Struct.new(
+      nil,
       :policy_id,
       keyword_init: true
     )
@@ -631,6 +653,7 @@ module Aws::DLM
     #   <p>Detailed information about the lifecycle policy.</p>
     #   @return [Types::LifecyclePolicy]
     class GetLifecyclePolicyResponse < Struct.new(
+      nil,
       :policy,
       keyword_init: true
     )
@@ -643,6 +666,7 @@ module Aws::DLM
     # @!attribute code
     #   @return [String]
     class InternalServerException < Struct.new(
+      nil,
       :message,
       :code,
       keyword_init: true
@@ -663,6 +687,7 @@ module Aws::DLM
     #   <p>The request included parameters that cannot be provided together.</p>
     #   @return [Array<String>]
     class InvalidRequestException < Struct.new(
+      nil,
       :message,
       :code,
       :required_parameters,
@@ -719,6 +744,7 @@ module Aws::DLM
     #            </ul>
     #   @return [Boolean]
     class LifecyclePolicy < Struct.new(
+      nil,
       :policy_id,
       :description,
       :state,
@@ -770,6 +796,7 @@ module Aws::DLM
     #            </ul>
     #   @return [Boolean]
     class LifecyclePolicySummary < Struct.new(
+      nil,
       :policy_id,
       :description,
       :state,
@@ -790,6 +817,7 @@ module Aws::DLM
     #   <p>Value is the type of resource for which a limit was exceeded.</p>
     #   @return [String]
     class LimitExceededException < Struct.new(
+      nil,
       :message,
       :code,
       :resource_type,
@@ -802,6 +830,7 @@ module Aws::DLM
     #   <p>The Amazon Resource Name (ARN) of the resource.</p>
     #   @return [String]
     class ListTagsForResourceRequest < Struct.new(
+      nil,
       :resource_arn,
       keyword_init: true
     )
@@ -812,6 +841,7 @@ module Aws::DLM
     #   <p>Information about the tags.</p>
     #   @return [Hash<String, String>]
     class ListTagsForResourceResponse < Struct.new(
+      nil,
       :tags,
       keyword_init: true
     )
@@ -850,6 +880,7 @@ module Aws::DLM
     #   			instances will be excluded from the multi-volume snapshot sets created by the policy.</p>
     #   @return [Array<Types::Tag>]
     class Parameters < Struct.new(
+      nil,
       :exclude_boot_volume,
       :no_reboot,
       :exclude_data_volume_tags,
@@ -1010,6 +1041,7 @@ module Aws::DLM
     #   			for target resources that match any of the specified exclusion parameters.</p>
     #   @return [Types::Exclusions]
     class PolicyDetails < Struct.new(
+      nil,
       :policy_type,
       :resource_types,
       :resource_locations,
@@ -1043,6 +1075,7 @@ module Aws::DLM
     #   <p>Value is a list of resource IDs that were not found.</p>
     #   @return [Array<String>]
     class ResourceNotFoundException < Struct.new(
+      nil,
       :message,
       :code,
       :resource_type,
@@ -1105,6 +1138,7 @@ module Aws::DLM
     #   			<a href="https://docs.aws.amazon.com/dlm/latest/APIReference/API_ArchiveRule.html">ArchiveRule</a>.</p>
     #   @return [String]
     class RetainRule < Struct.new(
+      nil,
       :count,
       :interval,
       :interval_unit,
@@ -1141,6 +1175,7 @@ module Aws::DLM
     #   			and <code>IntervalUnit=MONTHS</code>.</p>
     #   @return [String]
     class RetentionArchiveTier < Struct.new(
+      nil,
       :count,
       :interval,
       :interval_unit,
@@ -1206,6 +1241,7 @@ module Aws::DLM
     #   				snapshot lifecycle policies</a>.</p>
     #   @return [Types::ArchiveRule]
     class Schedule < Struct.new(
+      nil,
       :name,
       :copy_tags,
       :tags_to_add,
@@ -1328,6 +1364,7 @@ module Aws::DLM
     #            <p>Default: 0</p>
     #   @return [Integer]
     class Script < Struct.new(
+      nil,
       :stages,
       :execution_handler_service,
       :execution_handler,
@@ -1351,6 +1388,7 @@ module Aws::DLM
     #   <p>The unit of time for the automatic unsharing interval.</p>
     #   @return [String]
     class ShareRule < Struct.new(
+      nil,
       :target_accounts,
       :unshare_interval,
       :unshare_interval_unit,
@@ -1367,6 +1405,7 @@ module Aws::DLM
     #   <p>The tag value.</p>
     #   @return [String]
     class Tag < Struct.new(
+      nil,
       :key,
       :value,
       keyword_init: true
@@ -1381,6 +1420,7 @@ module Aws::DLM
     #   <p>One or more tags.</p>
     #   @return [Hash<String, String>]
     class TagResourceRequest < Struct.new(
+      nil,
       :resource_arn,
       :tags,
       keyword_init: true
@@ -1389,6 +1429,7 @@ module Aws::DLM
     end
 
     class TagResourceResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1401,6 +1442,7 @@ module Aws::DLM
     #   <p>The tag keys.</p>
     #   @return [Array<String>]
     class UntagResourceRequest < Struct.new(
+      nil,
       :resource_arn,
       :tag_keys,
       keyword_init: true
@@ -1409,6 +1451,7 @@ module Aws::DLM
     end
 
     class UntagResourceResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1485,6 +1528,7 @@ module Aws::DLM
     #   			for target resources that match any of the specified exclusion parameters.</p>
     #   @return [Types::Exclusions]
     class UpdateLifecyclePolicyRequest < Struct.new(
+      nil,
       :policy_id,
       :execution_role_arn,
       :state,
@@ -1502,6 +1546,7 @@ module Aws::DLM
     end
 
     class UpdateLifecyclePolicyResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure

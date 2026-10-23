@@ -10,6 +10,7 @@ module Aws::Braket
     # @!attribute message
     #   @return [String]
     class AccessDeniedException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -27,6 +28,7 @@ module Aws::Braket
     #   <p>The number of executables in a program set. This is only available for a Program Set.</p>
     #   @return [Integer]
     class ActionMetadata < Struct.new(
+      nil,
       :action_type,
       :program_count,
       :executable_count,
@@ -43,6 +45,7 @@ module Aws::Braket
     #   <p>The container image used to create an Amazon Braket hybrid job.</p>
     #   @return [Types::ContainerImage]
     class AlgorithmSpecification < Struct.new(
+      nil,
       :script_mode_config,
       :container_image,
       keyword_init: true
@@ -58,6 +61,7 @@ module Aws::Braket
     #   <p>The association type for the specified Amazon Braket resource arn.</p>
     #   @return [String]
     class Association < Struct.new(
+      nil,
       :arn,
       :type,
       keyword_init: true
@@ -69,6 +73,7 @@ module Aws::Braket
     #   <p>The ARN of the Amazon Braket hybrid job to cancel.</p>
     #   @return [String]
     class CancelJobInput < Struct.new(
+      nil,
       :job_arn,
       keyword_init: true
     )
@@ -82,6 +87,7 @@ module Aws::Braket
     #   <p>The status of the hybrid job.</p>
     #   @return [String]
     class CancelJobOutput < Struct.new(
+      nil,
       :job_arn,
       :cancellation_status,
       keyword_init: true
@@ -96,6 +102,7 @@ module Aws::Braket
     #   <p>The client token associated with the cancellation request.</p>
     #   @return [String]
     class CancelQuantumTaskInput < Struct.new(
+      nil,
       :quantum_task_arn,
       :client_token,
       keyword_init: true
@@ -110,6 +117,7 @@ module Aws::Braket
     #   <p>The status of the quantum task.</p>
     #   @return [String]
     class CancelQuantumTaskOutput < Struct.new(
+      nil,
       :quantum_task_arn,
       :cancellation_status,
       keyword_init: true
@@ -121,6 +129,7 @@ module Aws::Braket
     # @!attribute message
     #   @return [String]
     class ConflictException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -132,6 +141,7 @@ module Aws::Braket
     #   <p>The URI locating the container image.</p>
     #   @return [String]
     class ContainerImage < Struct.new(
+      nil,
       :uri,
       keyword_init: true
     )
@@ -178,6 +188,7 @@ module Aws::Braket
     #   <p>The list of Amazon Braket resources associated with the hybrid job.</p>
     #   @return [Array<Types::Association>]
     class CreateJobInput < Struct.new(
+      nil,
       :client_token,
       :algorithm_specification,
       :input_data_config,
@@ -200,6 +211,7 @@ module Aws::Braket
     #   <p>The ARN of the Amazon Braket hybrid job created.</p>
     #   @return [String]
     class CreateJobOutput < Struct.new(
+      nil,
       :job_arn,
       keyword_init: true
     )
@@ -237,6 +249,7 @@ module Aws::Braket
     #   <p>The list of Amazon Braket resources associated with the quantum task.</p>
     #   @return [Array<Types::Association>]
     class CreateQuantumTaskInput < Struct.new(
+      nil,
       :client_token,
       :device_arn,
       :device_parameters,
@@ -256,6 +269,7 @@ module Aws::Braket
     #   <p>The ARN of the quantum task created by the request.</p>
     #   @return [String]
     class CreateQuantumTaskOutput < Struct.new(
+      nil,
       :quantum_task_arn,
       keyword_init: true
     )
@@ -267,6 +281,7 @@ module Aws::Braket
     #   <p>Amazon S3 path of the input data used by the hybrid job.</p>
     #   @return [Types::S3DataSource]
     class DataSource < Struct.new(
+      nil,
       :s3_data_source,
       keyword_init: true
     )
@@ -278,6 +293,7 @@ module Aws::Braket
     #   <p>The primary device ARN used to create and run an Amazon Braket hybrid job.</p>
     #   @return [String]
     class DeviceConfig < Struct.new(
+      nil,
       :device,
       keyword_init: true
     )
@@ -288,6 +304,7 @@ module Aws::Braket
     # @!attribute message
     #   @return [String]
     class DeviceOfflineException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -305,6 +322,7 @@ module Aws::Braket
     #   <p>Optional. Specifies the priority of the queue. Quantum tasks in a priority queue are processed before the quantum tasks in a normal queue.</p>
     #   @return [String]
     class DeviceQueueInfo < Struct.new(
+      nil,
       :queue,
       :queue_size,
       :queue_priority,
@@ -317,6 +335,7 @@ module Aws::Braket
     # @!attribute message
     #   @return [String]
     class DeviceRetiredException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -340,6 +359,7 @@ module Aws::Braket
     #   <p>The status of the device.</p>
     #   @return [String]
     class DeviceSummary < Struct.new(
+      nil,
       :device_arn,
       :device_name,
       :provider_name,
@@ -354,6 +374,7 @@ module Aws::Braket
     #   <p>The ARN of the device to retrieve.</p>
     #   @return [String]
     class GetDeviceInput < Struct.new(
+      nil,
       :device_arn,
       keyword_init: true
     )
@@ -382,6 +403,7 @@ module Aws::Braket
     #   <p>The number of quantum tasks and hybrid jobs currently queued on the device.</p>
     #   @return [Array<Types::DeviceQueueInfo>]
     class GetDeviceOutput < Struct.new(
+      nil,
       :device_arn,
       :device_name,
       :provider_name,
@@ -401,6 +423,7 @@ module Aws::Braket
     #   <p>A list of attributes to return additional information for. Only the QueueInfo additional attribute name is currently supported. </p>
     #   @return [Array<String>]
     class GetJobInput < Struct.new(
+      nil,
       :job_arn,
       :additional_attribute_names,
       keyword_init: true
@@ -472,6 +495,7 @@ module Aws::Braket
     #   <p>The list of Amazon Braket resources associated with the hybrid job.</p>
     #   @return [Array<Types::Association>]
     class GetJobOutput < Struct.new(
+      nil,
       :status,
       :job_arn,
       :role_arn,
@@ -505,6 +529,7 @@ module Aws::Braket
     #   <p>A list of attributes to return additional information for. Only the QueueInfo additional attribute name is currently supported.</p>
     #   @return [Array<String>]
     class GetQuantumTaskInput < Struct.new(
+      nil,
       :quantum_task_arn,
       :additional_attribute_names,
       keyword_init: true
@@ -561,6 +586,7 @@ module Aws::Braket
     #   <p>Metadata about the action performed by the quantum task, including information about the type of action and program counts.</p>
     #   @return [Types::ActionMetadata]
     class GetQuantumTaskOutput < Struct.new(
+      nil,
       :quantum_task_arn,
       :status,
       :failure_reason,
@@ -593,6 +619,7 @@ module Aws::Braket
     #   <p>Optional. Provides more information about the queue position. For example, if the hybrid job is complete and no longer in the queue, the message field contains that information.</p>
     #   @return [String]
     class HybridJobQueueInfo < Struct.new(
+      nil,
       :queue,
       :position,
       :message,
@@ -612,6 +639,7 @@ module Aws::Braket
     #   <p>The location of the input data.</p>
     #   @return [Types::DataSource]
     class InputFileConfig < Struct.new(
+      nil,
       :channel_name,
       :content_type,
       :data_source,
@@ -631,6 +659,7 @@ module Aws::Braket
     #   <p>Configures the number of resource instances to use while running an Amazon Braket hybrid job on Amazon Braket. The default value is 1.</p>
     #   @return [Integer]
     class InstanceConfig < Struct.new(
+      nil,
       :instance_type,
       :volume_size_in_gb,
       :instance_count,
@@ -643,6 +672,7 @@ module Aws::Braket
     # @!attribute message
     #   @return [String]
     class InternalServiceException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -657,6 +687,7 @@ module Aws::Braket
     #   <p>Identifies the S3 path where you want Amazon Braket to store checkpoint data. For example, <code>s3://bucket-name/key-name-prefix</code>.</p>
     #   @return [String]
     class JobCheckpointConfig < Struct.new(
+      nil,
       :local_path,
       :s3_uri,
       keyword_init: true
@@ -675,6 +706,7 @@ module Aws::Braket
     #   <p>A message describing the event that occurred related to the Amazon Braket hybrid job.</p>
     #   @return [String]
     class JobEventDetails < Struct.new(
+      nil,
       :event_type,
       :time_of_event,
       :message,
@@ -691,6 +723,7 @@ module Aws::Braket
     #   <p>Identifies the S3 path where you want Amazon Braket to store the hybrid job training artifacts. For example, <code>s3://bucket-name/key-name-prefix</code>.</p>
     #   @return [String]
     class JobOutputDataConfig < Struct.new(
+      nil,
       :kms_key_id,
       :s3_path,
       keyword_init: true
@@ -703,6 +736,7 @@ module Aws::Braket
     #   <p>The maximum length of time, in seconds, that an Amazon Braket hybrid job can run.</p>
     #   @return [Integer]
     class JobStoppingCondition < Struct.new(
+      nil,
       :max_runtime_in_seconds,
       keyword_init: true
     )
@@ -735,6 +769,7 @@ module Aws::Braket
     #   <p>Displays the key, value pairs of tags associated with this hybrid job.</p>
     #   @return [Hash<String, String>]
     class JobSummary < Struct.new(
+      nil,
       :status,
       :job_arn,
       :job_name,
@@ -752,6 +787,7 @@ module Aws::Braket
     #   <p>Specify the <code>resourceArn</code> for the resource whose tags to display.</p>
     #   @return [String]
     class ListTagsForResourceInput < Struct.new(
+      nil,
       :resource_arn,
       keyword_init: true
     )
@@ -762,6 +798,7 @@ module Aws::Braket
     #   <p>Displays the key, value pairs of tags associated with this resource.</p>
     #   @return [Hash<String, String>]
     class ListTagsForResourceOutput < Struct.new(
+      nil,
       :tags,
       keyword_init: true
     )
@@ -779,6 +816,7 @@ module Aws::Braket
     #   <p>A list of error messages describing the validation failures that occurred.</p>
     #   @return [Array<String>]
     class ProgramSetValidationFailure < Struct.new(
+      nil,
       :program_index,
       :inputs_index,
       :errors,
@@ -801,6 +839,7 @@ module Aws::Braket
     #   <p>Optional. Provides more information about the queue position. For example, if the quantum task is complete and no longer in the queue, the message field contains that information.</p>
     #   @return [String]
     class QuantumTaskQueueInfo < Struct.new(
+      nil,
       :queue,
       :position,
       :queue_priority,
@@ -839,6 +878,7 @@ module Aws::Braket
     #   <p>Displays the key, value pairs of tags associated with this quantum task.</p>
     #   @return [Hash<String, String>]
     class QuantumTaskSummary < Struct.new(
+      nil,
       :quantum_task_arn,
       :status,
       :device_arn,
@@ -857,6 +897,7 @@ module Aws::Braket
     # @!attribute message
     #   @return [String]
     class ResourceNotFoundException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -868,6 +909,7 @@ module Aws::Braket
     #   <p>Depending on the value specified for the <code>S3DataType</code>, identifies either a key name prefix or a manifest that locates the S3 data source.</p>
     #   @return [String]
     class S3DataSource < Struct.new(
+      nil,
       :s3_uri,
       keyword_init: true
     )
@@ -885,6 +927,7 @@ module Aws::Braket
     #   <p>The type of compression used to store the algorithm scripts in Amazon S3 storage.</p>
     #   @return [String]
     class ScriptModeConfig < Struct.new(
+      nil,
       :entry_point,
       :s3_uri,
       :compression_type,
@@ -901,6 +944,7 @@ module Aws::Braket
     #   <p>The values used to filter devices based on the filter name.</p>
     #   @return [Array<String>]
     class SearchDevicesFilter < Struct.new(
+      nil,
       :name,
       :values,
       keyword_init: true
@@ -918,6 +962,7 @@ module Aws::Braket
     #   <p>Array of SearchDevicesFilter objects to use when searching for devices.</p>
     #   @return [Array<Types::SearchDevicesFilter>]
     class SearchDevicesInput < Struct.new(
+      nil,
       :next_token,
       :max_results,
       :filters,
@@ -933,6 +978,7 @@ module Aws::Braket
     #   <p>A token used for pagination of results, or null if there are no additional results. Use the token value in a subsequent request to continue search where the previous request ended.</p>
     #   @return [String]
     class SearchDevicesOutput < Struct.new(
+      nil,
       :devices,
       :next_token,
       keyword_init: true
@@ -951,6 +997,7 @@ module Aws::Braket
     #   <p>An operator to use for the filter.</p>
     #   @return [String]
     class SearchJobsFilter < Struct.new(
+      nil,
       :name,
       :values,
       :operator,
@@ -969,6 +1016,7 @@ module Aws::Braket
     #   <p>Array of SearchJobsFilter objects to use when searching for hybrid jobs.</p>
     #   @return [Array<Types::SearchJobsFilter>]
     class SearchJobsInput < Struct.new(
+      nil,
       :next_token,
       :max_results,
       :filters,
@@ -984,6 +1032,7 @@ module Aws::Braket
     #   <p>A token used for pagination of results, or <code>null</code> if there are no additional results. Use the token value in a subsequent request to continue search where the previous request ended.</p>
     #   @return [String]
     class SearchJobsOutput < Struct.new(
+      nil,
       :jobs,
       :next_token,
       keyword_init: true
@@ -1002,6 +1051,7 @@ module Aws::Braket
     #   <p>An operator to use for the filter.</p>
     #   @return [String]
     class SearchQuantumTasksFilter < Struct.new(
+      nil,
       :name,
       :values,
       :operator,
@@ -1020,6 +1070,7 @@ module Aws::Braket
     #   <p>Array of <code>SearchQuantumTasksFilter</code> objects to use when searching for quantum tasks.</p>
     #   @return [Array<Types::SearchQuantumTasksFilter>]
     class SearchQuantumTasksInput < Struct.new(
+      nil,
       :next_token,
       :max_results,
       :filters,
@@ -1035,6 +1086,7 @@ module Aws::Braket
     #   <p>A token used for pagination of results, or null if there are no additional results. Use the token value in a subsequent request to continue search where the previous request ended.</p>
     #   @return [String]
     class SearchQuantumTasksOutput < Struct.new(
+      nil,
       :quantum_tasks,
       :next_token,
       keyword_init: true
@@ -1046,6 +1098,7 @@ module Aws::Braket
     # @!attribute message
     #   @return [String]
     class ServiceQuotaExceededException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -1059,6 +1112,7 @@ module Aws::Braket
     #   <p>Specify the tags to add to the resource. Tags can be specified as a key-value map.</p>
     #   @return [Hash<String, String>]
     class TagResourceInput < Struct.new(
+      nil,
       :resource_arn,
       :tags,
       keyword_init: true
@@ -1067,6 +1121,7 @@ module Aws::Braket
     end
 
     class TagResourceOutput < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1076,6 +1131,7 @@ module Aws::Braket
     # @!attribute message
     #   @return [String]
     class ThrottlingException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -1089,6 +1145,7 @@ module Aws::Braket
     #   <p>Specify the keys for the tags to remove from the resource.</p>
     #   @return [Array<String>]
     class UntagResourceInput < Struct.new(
+      nil,
       :resource_arn,
       :tag_keys,
       keyword_init: true
@@ -1097,6 +1154,7 @@ module Aws::Braket
     end
 
     class UntagResourceOutput < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1112,6 +1170,7 @@ module Aws::Braket
     #   <p>The validation failures in the program set submitted in the request.</p>
     #   @return [Array<Types::ProgramSetValidationFailure>]
     class ValidationException < Struct.new(
+      nil,
       :message,
       :reason,
       :program_set_validation_failures,

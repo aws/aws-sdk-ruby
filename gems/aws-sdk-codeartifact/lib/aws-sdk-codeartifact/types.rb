@@ -12,6 +12,7 @@ module Aws::Codeartifact
     # @!attribute message
     #   @return [String]
     class AccessDeniedException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -37,6 +38,7 @@ module Aws::Codeartifact
     #       </p>
     #   @return [Hash<String, String>]
     class AssetSummary < Struct.new(
+      nil,
       :name,
       :size,
       :hashes,
@@ -114,6 +116,7 @@ module Aws::Codeartifact
     #            </ul>
     #   @return [String]
     class AssociateExternalConnectionRequest < Struct.new(
+      nil,
       :domain,
       :domain_owner,
       :repository,
@@ -129,6 +132,7 @@ module Aws::Codeartifact
     #          </p>
     #   @return [Types::RepositoryDescription]
     class AssociateExternalConnectionResult < Struct.new(
+      nil,
       :repository,
       keyword_init: true
     )
@@ -178,6 +182,7 @@ module Aws::Codeartifact
     #         in the <i>CodeArtifact User Guide</i>.</p>
     #   @return [String]
     class AssociatedPackage < Struct.new(
+      nil,
       :format,
       :namespace,
       :package,
@@ -203,6 +208,7 @@ module Aws::Codeartifact
     #       </p>
     #   @return [String]
     class ConflictException < Struct.new(
+      nil,
       :message,
       :resource_id,
       :resource_type,
@@ -316,6 +322,7 @@ module Aws::Codeartifact
     #           upstream repositories</a>. </p>
     #   @return [Boolean]
     class CopyPackageVersionsRequest < Struct.new(
+      nil,
       :domain,
       :domain_owner,
       :source_repository,
@@ -376,6 +383,7 @@ module Aws::Codeartifact
     #            </ul>
     #   @return [Hash<String, Types::PackageVersionError>]
     class CopyPackageVersionsResult < Struct.new(
+      nil,
       :successful_versions,
       :failed_versions,
       keyword_init: true
@@ -406,6 +414,7 @@ module Aws::Codeartifact
     #   <p>One or more tag key-value pairs for the domain.</p>
     #   @return [Array<Types::Tag>]
     class CreateDomainRequest < Struct.new(
+      nil,
       :domain,
       :encryption_key,
       :tags,
@@ -420,6 +429,7 @@ module Aws::Codeartifact
     #         </p>
     #   @return [Types::DomainDescription]
     class CreateDomainResult < Struct.new(
+      nil,
       :domain,
       keyword_init: true
     )
@@ -454,6 +464,7 @@ module Aws::Codeartifact
     #   <p>One or more tag key-value pairs for the package group.</p>
     #   @return [Array<Types::Tag>]
     class CreatePackageGroupRequest < Struct.new(
+      nil,
       :domain,
       :domain_owner,
       :package_group,
@@ -471,6 +482,7 @@ module Aws::Codeartifact
     #       </p>
     #   @return [Types::PackageGroupDescription]
     class CreatePackageGroupResult < Struct.new(
+      nil,
       :package_group,
       keyword_init: true
     )
@@ -505,6 +517,7 @@ module Aws::Codeartifact
     #   <p>One or more tag key-value pairs for the repository.</p>
     #   @return [Array<Types::Tag>]
     class CreateRepositoryRequest < Struct.new(
+      nil,
       :domain,
       :domain_owner,
       :repository,
@@ -522,6 +535,7 @@ module Aws::Codeartifact
     #         </p>
     #   @return [Types::RepositoryDescription]
     class CreateRepositoryResult < Struct.new(
+      nil,
       :repository,
       keyword_init: true
     )
@@ -546,6 +560,7 @@ module Aws::Codeartifact
     #         </p>
     #   @return [String]
     class DeleteDomainPermissionsPolicyRequest < Struct.new(
+      nil,
       :domain,
       :domain_owner,
       :policy_revision,
@@ -560,6 +575,7 @@ module Aws::Codeartifact
     #         </p>
     #   @return [Types::ResourcePolicy]
     class DeleteDomainPermissionsPolicyResult < Struct.new(
+      nil,
       :policy,
       keyword_init: true
     )
@@ -578,6 +594,7 @@ module Aws::Codeartifact
     #         </p>
     #   @return [String]
     class DeleteDomainRequest < Struct.new(
+      nil,
       :domain,
       :domain_owner,
       keyword_init: true
@@ -591,6 +608,7 @@ module Aws::Codeartifact
     #          </p>
     #   @return [Types::DomainDescription]
     class DeleteDomainResult < Struct.new(
+      nil,
       :domain,
       keyword_init: true
     )
@@ -612,6 +630,7 @@ module Aws::Codeartifact
     #   <p>The pattern of the package group to be deleted.</p>
     #   @return [String]
     class DeletePackageGroupRequest < Struct.new(
+      nil,
       :domain,
       :domain_owner,
       :package_group,
@@ -626,6 +645,7 @@ module Aws::Codeartifact
     #       </p>
     #   @return [Types::PackageGroupDescription]
     class DeletePackageGroupResult < Struct.new(
+      nil,
       :package_group,
       keyword_init: true
     )
@@ -689,6 +709,7 @@ module Aws::Codeartifact
     #   <p>The name of the package to delete.</p>
     #   @return [String]
     class DeletePackageRequest < Struct.new(
+      nil,
       :domain,
       :domain_owner,
       :repository,
@@ -706,6 +727,7 @@ module Aws::Codeartifact
     #       </p>
     #   @return [Types::PackageSummary]
     class DeletePackageResult < Struct.new(
+      nil,
       :deleted_package,
       keyword_init: true
     )
@@ -787,6 +809,7 @@ module Aws::Codeartifact
     #         </p>
     #   @return [String]
     class DeletePackageVersionsRequest < Struct.new(
+      nil,
       :domain,
       :domain_owner,
       :repository,
@@ -845,6 +868,7 @@ module Aws::Codeartifact
     #            </ul>
     #   @return [Hash<String, Types::PackageVersionError>]
     class DeletePackageVersionsResult < Struct.new(
+      nil,
       :successful_versions,
       :failed_versions,
       keyword_init: true
@@ -875,6 +899,7 @@ module Aws::Codeartifact
     #       </p>
     #   @return [String]
     class DeleteRepositoryPermissionsPolicyRequest < Struct.new(
+      nil,
       :domain,
       :domain_owner,
       :repository,
@@ -890,6 +915,7 @@ module Aws::Codeartifact
     #       </p>
     #   @return [Types::ResourcePolicy]
     class DeleteRepositoryPermissionsPolicyResult < Struct.new(
+      nil,
       :policy,
       keyword_init: true
     )
@@ -911,6 +937,7 @@ module Aws::Codeartifact
     #   <p> The name of the repository to delete. </p>
     #   @return [String]
     class DeleteRepositoryRequest < Struct.new(
+      nil,
       :domain,
       :domain_owner,
       :repository,
@@ -925,6 +952,7 @@ module Aws::Codeartifact
     #          </p>
     #   @return [Types::RepositoryDescription]
     class DeleteRepositoryResult < Struct.new(
+      nil,
       :repository,
       keyword_init: true
     )
@@ -943,6 +971,7 @@ module Aws::Codeartifact
     #         </p>
     #   @return [String]
     class DescribeDomainRequest < Struct.new(
+      nil,
       :domain,
       :domain_owner,
       keyword_init: true
@@ -957,6 +986,7 @@ module Aws::Codeartifact
     #         </p>
     #   @return [Types::DomainDescription]
     class DescribeDomainResult < Struct.new(
+      nil,
       :domain,
       keyword_init: true
     )
@@ -978,6 +1008,7 @@ module Aws::Codeartifact
     #   <p>The pattern of the requested package group.</p>
     #   @return [String]
     class DescribePackageGroupRequest < Struct.new(
+      nil,
       :domain,
       :domain_owner,
       :package_group,
@@ -991,6 +1022,7 @@ module Aws::Codeartifact
     #       that contains information about the requested package group.</p>
     #   @return [Types::PackageGroupDescription]
     class DescribePackageGroupResult < Struct.new(
+      nil,
       :package_group,
       keyword_init: true
     )
@@ -1054,6 +1086,7 @@ module Aws::Codeartifact
     #   <p>The name of the requested package.</p>
     #   @return [String]
     class DescribePackageRequest < Struct.new(
+      nil,
       :domain,
       :domain_owner,
       :repository,
@@ -1070,6 +1103,7 @@ module Aws::Codeartifact
     #         object that contains information about the requested package.</p>
     #   @return [Types::PackageDescription]
     class DescribePackageResult < Struct.new(
+      nil,
       :package,
       keyword_init: true
     )
@@ -1143,6 +1177,7 @@ module Aws::Codeartifact
     #       </p>
     #   @return [String]
     class DescribePackageVersionRequest < Struct.new(
+      nil,
       :domain,
       :domain_owner,
       :repository,
@@ -1162,6 +1197,7 @@ module Aws::Codeartifact
     #       </p>
     #   @return [Types::PackageVersionDescription]
     class DescribePackageVersionResult < Struct.new(
+      nil,
       :package_version,
       keyword_init: true
     )
@@ -1185,6 +1221,7 @@ module Aws::Codeartifact
     #          </p>
     #   @return [String]
     class DescribeRepositoryRequest < Struct.new(
+      nil,
       :domain,
       :domain_owner,
       :repository,
@@ -1199,6 +1236,7 @@ module Aws::Codeartifact
     #          </p>
     #   @return [Types::RepositoryDescription]
     class DescribeRepositoryResult < Struct.new(
+      nil,
       :repository,
       keyword_init: true
     )
@@ -1222,6 +1260,7 @@ module Aws::Codeartifact
     #   <p>The name of the external connection to be removed from the repository. </p>
     #   @return [String]
     class DisassociateExternalConnectionRequest < Struct.new(
+      nil,
       :domain,
       :domain_owner,
       :repository,
@@ -1237,6 +1276,7 @@ module Aws::Codeartifact
     #       </p>
     #   @return [Types::RepositoryDescription]
     class DisassociateExternalConnectionResult < Struct.new(
+      nil,
       :repository,
       keyword_init: true
     )
@@ -1324,6 +1364,7 @@ module Aws::Codeartifact
     #       </p>
     #   @return [String]
     class DisposePackageVersionsRequest < Struct.new(
+      nil,
       :domain,
       :domain_owner,
       :repository,
@@ -1382,6 +1423,7 @@ module Aws::Codeartifact
     #            </ul>
     #   @return [Hash<String, Types::PackageVersionError>]
     class DisposePackageVersionsResult < Struct.new(
+      nil,
       :successful_versions,
       :failed_versions,
       keyword_init: true
@@ -1431,6 +1473,7 @@ module Aws::Codeartifact
     #   <p>The Amazon Resource Name (ARN) of the Amazon S3 bucket that is used to store package assets in the domain.</p>
     #   @return [String]
     class DomainDescription < Struct.new(
+      nil,
       :name,
       :owner,
       :arn,
@@ -1465,6 +1508,7 @@ module Aws::Codeartifact
     #   <p>The name of the external connection that a package was ingested from.</p>
     #   @return [String]
     class DomainEntryPoint < Struct.new(
+      nil,
       :repository_name,
       :external_connection_name,
       keyword_init: true
@@ -1507,6 +1551,7 @@ module Aws::Codeartifact
     #       </p>
     #   @return [String]
     class DomainSummary < Struct.new(
+      nil,
       :name,
       :owner,
       :arn,
@@ -1579,6 +1624,7 @@ module Aws::Codeartifact
     #       </p>
     #   @return [String]
     class GetAssociatedPackageGroupRequest < Struct.new(
+      nil,
       :domain,
       :domain_owner,
       :format,
@@ -1597,6 +1643,7 @@ module Aws::Codeartifact
     #       exact match, and a weak match is known as a relative match.</p>
     #   @return [String]
     class GetAssociatedPackageGroupResult < Struct.new(
+      nil,
       :package_group,
       :association_type,
       keyword_init: true
@@ -1622,6 +1669,7 @@ module Aws::Codeartifact
     #       the user's role's temporary credentials.</p>
     #   @return [Integer]
     class GetAuthorizationTokenRequest < Struct.new(
+      nil,
       :domain,
       :domain_owner,
       :duration_seconds,
@@ -1642,6 +1690,7 @@ module Aws::Codeartifact
     #       </p>
     #   @return [Time]
     class GetAuthorizationTokenResult < Struct.new(
+      nil,
       :authorization_token,
       :expiration,
       keyword_init: true
@@ -1661,6 +1710,7 @@ module Aws::Codeartifact
     #         </p>
     #   @return [String]
     class GetDomainPermissionsPolicyRequest < Struct.new(
+      nil,
       :domain,
       :domain_owner,
       keyword_init: true
@@ -1674,6 +1724,7 @@ module Aws::Codeartifact
     #         </p>
     #   @return [Types::ResourcePolicy]
     class GetDomainPermissionsPolicyResult < Struct.new(
+      nil,
       :policy,
       keyword_init: true
     )
@@ -1761,6 +1812,7 @@ module Aws::Codeartifact
     #       </p>
     #   @return [String]
     class GetPackageVersionAssetRequest < Struct.new(
+      nil,
       :domain,
       :domain_owner,
       :repository,
@@ -1794,6 +1846,7 @@ module Aws::Codeartifact
     #       </p>
     #   @return [String]
     class GetPackageVersionAssetResult < Struct.new(
+      nil,
       :asset,
       :asset_name,
       :package_version,
@@ -1879,6 +1932,7 @@ module Aws::Codeartifact
     #       </p>
     #   @return [String]
     class GetPackageVersionReadmeRequest < Struct.new(
+      nil,
       :domain,
       :domain_owner,
       :repository,
@@ -1942,6 +1996,7 @@ module Aws::Codeartifact
     #       </p>
     #   @return [String]
     class GetPackageVersionReadmeResult < Struct.new(
+      nil,
       :format,
       :namespace,
       :package,
@@ -1979,6 +2034,7 @@ module Aws::Codeartifact
     #   <p>A string that specifies the type of endpoint.</p>
     #   @return [String]
     class GetRepositoryEndpointRequest < Struct.new(
+      nil,
       :domain,
       :domain_owner,
       :repository,
@@ -1995,6 +2051,7 @@ module Aws::Codeartifact
     #        </p>
     #   @return [String]
     class GetRepositoryEndpointResult < Struct.new(
+      nil,
       :repository_endpoint,
       keyword_init: true
     )
@@ -2018,6 +2075,7 @@ module Aws::Codeartifact
     #         </p>
     #   @return [String]
     class GetRepositoryPermissionsPolicyRequest < Struct.new(
+      nil,
       :domain,
       :domain_owner,
       :repository,
@@ -2032,6 +2090,7 @@ module Aws::Codeartifact
     #         </p>
     #   @return [Types::ResourcePolicy]
     class GetRepositoryPermissionsPolicyResult < Struct.new(
+      nil,
       :policy,
       keyword_init: true
     )
@@ -2042,6 +2101,7 @@ module Aws::Codeartifact
     # @!attribute message
     #   @return [String]
     class InternalServerException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -2062,6 +2122,7 @@ module Aws::Codeartifact
     #         </p>
     #   @return [String]
     class LicenseInfo < Struct.new(
+      nil,
       :name,
       :url,
       keyword_init: true
@@ -2097,6 +2158,7 @@ module Aws::Codeartifact
     #          </p>
     #   @return [String]
     class ListAllowedRepositoriesForGroupRequest < Struct.new(
+      nil,
       :domain,
       :domain_owner,
       :package_group,
@@ -2117,6 +2179,7 @@ module Aws::Codeartifact
     #          </p>
     #   @return [String]
     class ListAllowedRepositoriesForGroupResult < Struct.new(
+      nil,
       :allowed_repositories,
       :next_token,
       keyword_init: true
@@ -2157,6 +2220,7 @@ module Aws::Codeartifact
     #       </p>
     #   @return [Boolean]
     class ListAssociatedPackagesRequest < Struct.new(
+      nil,
       :domain,
       :domain_owner,
       :package_group,
@@ -2179,6 +2243,7 @@ module Aws::Codeartifact
     #          </p>
     #   @return [String]
     class ListAssociatedPackagesResult < Struct.new(
+      nil,
       :packages,
       :next_token,
       keyword_init: true
@@ -2197,6 +2262,7 @@ module Aws::Codeartifact
     #          </p>
     #   @return [String]
     class ListDomainsRequest < Struct.new(
+      nil,
       :max_results,
       :next_token,
       keyword_init: true
@@ -2215,6 +2281,7 @@ module Aws::Codeartifact
     #          </p>
     #   @return [String]
     class ListDomainsResult < Struct.new(
+      nil,
       :domains,
       :next_token,
       keyword_init: true
@@ -2250,6 +2317,7 @@ module Aws::Codeartifact
     #       </p>
     #   @return [String]
     class ListPackageGroupsRequest < Struct.new(
+      nil,
       :domain,
       :domain_owner,
       :max_results,
@@ -2271,6 +2339,7 @@ module Aws::Codeartifact
     #          </p>
     #   @return [String]
     class ListPackageGroupsResult < Struct.new(
+      nil,
       :package_groups,
       :next_token,
       keyword_init: true
@@ -2359,6 +2428,7 @@ module Aws::Codeartifact
     #          </p>
     #   @return [String]
     class ListPackageVersionAssetsRequest < Struct.new(
+      nil,
       :domain,
       :domain_owner,
       :repository,
@@ -2429,6 +2499,7 @@ module Aws::Codeartifact
     #       </p>
     #   @return [Array<Types::AssetSummary>]
     class ListPackageVersionAssetsResult < Struct.new(
+      nil,
       :format,
       :namespace,
       :package,
@@ -2508,6 +2579,7 @@ module Aws::Codeartifact
     #          </p>
     #   @return [String]
     class ListPackageVersionDependenciesRequest < Struct.new(
+      nil,
       :domain,
       :domain_owner,
       :repository,
@@ -2582,6 +2654,7 @@ module Aws::Codeartifact
     #       </p>
     #   @return [Array<Types::PackageDependency>]
     class ListPackageVersionDependenciesResult < Struct.new(
+      nil,
       :format,
       :namespace,
       :package,
@@ -2684,6 +2757,7 @@ module Aws::Codeartifact
     #         Only package versions with the provided <code>originType</code> will be returned.</p>
     #   @return [String]
     class ListPackageVersionsRequest < Struct.new(
+      nil,
       :domain,
       :domain_owner,
       :repository,
@@ -2766,6 +2840,7 @@ module Aws::Codeartifact
     #          </p>
     #   @return [String]
     class ListPackageVersionsResult < Struct.new(
+      nil,
       :default_display_version,
       :format,
       :namespace,
@@ -2849,6 +2924,7 @@ module Aws::Codeartifact
     #         Only packages with the provided restriction are returned. For more information, see <a href="https://docs.aws.amazon.com/codeartifact/latest/APIReference/API_PackageOriginRestrictions.html">PackageOriginRestrictions</a>.</p>
     #   @return [String]
     class ListPackagesRequest < Struct.new(
+      nil,
       :domain,
       :domain_owner,
       :repository,
@@ -2876,6 +2952,7 @@ module Aws::Codeartifact
     #          </p>
     #   @return [String]
     class ListPackagesResult < Struct.new(
+      nil,
       :packages,
       :next_token,
       keyword_init: true
@@ -2916,6 +2993,7 @@ module Aws::Codeartifact
     #          </p>
     #   @return [String]
     class ListRepositoriesInDomainRequest < Struct.new(
+      nil,
       :domain,
       :domain_owner,
       :administrator_account,
@@ -2938,6 +3016,7 @@ module Aws::Codeartifact
     #          </p>
     #   @return [String]
     class ListRepositoriesInDomainResult < Struct.new(
+      nil,
       :repositories,
       :next_token,
       keyword_init: true
@@ -2960,6 +3039,7 @@ module Aws::Codeartifact
     #          </p>
     #   @return [String]
     class ListRepositoriesRequest < Struct.new(
+      nil,
       :repository_prefix,
       :max_results,
       :next_token,
@@ -2980,6 +3060,7 @@ module Aws::Codeartifact
     #          </p>
     #   @return [String]
     class ListRepositoriesResult < Struct.new(
+      nil,
       :repositories,
       :next_token,
       keyword_init: true
@@ -3014,6 +3095,7 @@ module Aws::Codeartifact
     #          </p>
     #   @return [String]
     class ListSubPackageGroupsRequest < Struct.new(
+      nil,
       :domain,
       :domain_owner,
       :package_group,
@@ -3035,6 +3117,7 @@ module Aws::Codeartifact
     #          </p>
     #   @return [String]
     class ListSubPackageGroupsResult < Struct.new(
+      nil,
       :package_groups,
       :next_token,
       keyword_init: true
@@ -3046,6 +3129,7 @@ module Aws::Codeartifact
     #   <p>The Amazon Resource Name (ARN) of the resource to get tags for.</p>
     #   @return [String]
     class ListTagsForResourceRequest < Struct.new(
+      nil,
       :resource_arn,
       keyword_init: true
     )
@@ -3056,6 +3140,7 @@ module Aws::Codeartifact
     #   <p>A list of tag key and value pairs associated with the specified resource.</p>
     #   @return [Array<Types::Tag>]
     class ListTagsForResourceResult < Struct.new(
+      nil,
       :tags,
       keyword_init: true
     )
@@ -3125,6 +3210,7 @@ module Aws::Codeartifact
     #         </p>
     #   @return [String]
     class PackageDependency < Struct.new(
+      nil,
       :namespace,
       :package,
       :dependency_type,
@@ -3170,6 +3256,7 @@ module Aws::Codeartifact
     #   <p>The package origin configuration for the package.</p>
     #   @return [Types::PackageOriginConfiguration]
     class PackageDescription < Struct.new(
+      nil,
       :format,
       :namespace,
       :name,
@@ -3191,6 +3278,7 @@ module Aws::Codeartifact
     #   <p>The origin configuration restriction type of the allowed repository.</p>
     #   @return [String]
     class PackageGroupAllowedRepository < Struct.new(
+      nil,
       :repository_name,
       :origin_restriction_type,
       keyword_init: true
@@ -3244,6 +3332,7 @@ module Aws::Codeartifact
     #       </p>
     #   @return [Types::PackageGroupReference]
     class PackageGroupDescription < Struct.new(
+      nil,
       :arn,
       :pattern,
       :domain_name,
@@ -3263,6 +3352,7 @@ module Aws::Codeartifact
     #   <p>The origin configuration settings that determine how package versions can enter repositories.</p>
     #   @return [Hash<String, Types::PackageGroupOriginRestriction>]
     class PackageGroupOriginConfiguration < Struct.new(
+      nil,
       :restrictions,
       keyword_init: true
     )
@@ -3289,6 +3379,7 @@ module Aws::Codeartifact
     #   <p>The number of repositories in the allowed repository list.</p>
     #   @return [Integer]
     class PackageGroupOriginRestriction < Struct.new(
+      nil,
       :mode,
       :effective_mode,
       :inherited_from,
@@ -3311,6 +3402,7 @@ module Aws::Codeartifact
     #       </p>
     #   @return [String]
     class PackageGroupReference < Struct.new(
+      nil,
       :arn,
       :pattern,
       keyword_init: true
@@ -3362,6 +3454,7 @@ module Aws::Codeartifact
     #       </p>
     #   @return [Types::PackageGroupReference]
     class PackageGroupSummary < Struct.new(
+      nil,
       :arn,
       :pattern,
       :domain_name,
@@ -3382,6 +3475,7 @@ module Aws::Codeartifact
     #       about the upstream and publish package origin configuration for the package.</p>
     #   @return [Types::PackageOriginRestrictions]
     class PackageOriginConfiguration < Struct.new(
+      nil,
       :restrictions,
       keyword_init: true
     )
@@ -3398,6 +3492,7 @@ module Aws::Codeartifact
     #   <p>The package origin configuration that determines if new versions of the package can be added to the repository from an external connection or upstream source.</p>
     #   @return [String]
     class PackageOriginRestrictions < Struct.new(
+      nil,
       :publish,
       :upstream,
       keyword_init: true
@@ -3449,6 +3544,7 @@ module Aws::Codeartifact
     #         that contains information about the upstream and publish package origin restrictions.</p>
     #   @return [Types::PackageOriginConfiguration]
     class PackageSummary < Struct.new(
+      nil,
       :format,
       :namespace,
       :package,
@@ -3550,6 +3646,7 @@ module Aws::Codeartifact
     #       information about how the package version was added to the repository.</p>
     #   @return [Types::PackageVersionOrigin]
     class PackageVersionDescription < Struct.new(
+      nil,
       :format,
       :namespace,
       :package_name,
@@ -3612,6 +3709,7 @@ module Aws::Codeartifact
     #        </p>
     #   @return [String]
     class PackageVersionError < Struct.new(
+      nil,
       :error_code,
       :error_message,
       keyword_init: true
@@ -3629,6 +3727,7 @@ module Aws::Codeartifact
     #       directly to a repository in the domain. An <code>EXTERNAL</code> origin type means the package version was ingested from an external connection.</p>
     #   @return [String]
     class PackageVersionOrigin < Struct.new(
+      nil,
       :domain_entry_point,
       :origin_type,
       keyword_init: true
@@ -3661,6 +3760,7 @@ module Aws::Codeartifact
     #       about how the package version was added to the repository.</p>
     #   @return [Types::PackageVersionOrigin]
     class PackageVersionSummary < Struct.new(
+      nil,
       :version,
       :revision,
       :status,
@@ -3716,6 +3816,7 @@ module Aws::Codeartifact
     #            </p>
     #   @return [Boolean]
     class PublishPackageVersionRequest < Struct.new(
+      nil,
       :domain,
       :domain_owner,
       :repository,
@@ -3754,6 +3855,7 @@ module Aws::Codeartifact
     #   <p>An <a href="https://docs.aws.amazon.com/codeartifact/latest/APIReference/API_AssetSummary.html">AssetSummary</a> for the published asset.</p>
     #   @return [Types::AssetSummary]
     class PublishPackageVersionResult < Struct.new(
+      nil,
       :format,
       :namespace,
       :package,
@@ -3788,6 +3890,7 @@ module Aws::Codeartifact
     #         policy on the provided domain. </p>
     #   @return [String]
     class PutDomainPermissionsPolicyRequest < Struct.new(
+      nil,
       :domain,
       :domain_owner,
       :policy_revision,
@@ -3801,6 +3904,7 @@ module Aws::Codeartifact
     #   <p> The resource policy that was set after processing the request. </p>
     #   @return [Types::ResourcePolicy]
     class PutDomainPermissionsPolicyResult < Struct.new(
+      nil,
       :policy,
       keyword_init: true
     )
@@ -3858,6 +3962,7 @@ module Aws::Codeartifact
     #            <p>You must include both the desired <code>upstream</code> and <code>publish</code> restrictions.</p>
     #   @return [Types::PackageOriginRestrictions]
     class PutPackageOriginConfigurationRequest < Struct.new(
+      nil,
       :domain,
       :domain_owner,
       :repository,
@@ -3877,6 +3982,7 @@ module Aws::Codeartifact
     #         object that describes how new versions of the package can be introduced to the repository.</p>
     #   @return [Types::PackageOriginConfiguration]
     class PutPackageOriginConfigurationResult < Struct.new(
+      nil,
       :origin_configuration,
       keyword_init: true
     )
@@ -3909,6 +4015,7 @@ module Aws::Codeartifact
     #         policy on the provided repository. </p>
     #   @return [String]
     class PutRepositoryPermissionsPolicyRequest < Struct.new(
+      nil,
       :domain,
       :domain_owner,
       :repository,
@@ -3923,6 +4030,7 @@ module Aws::Codeartifact
     #   <p> The resource policy that was set after processing the request. </p>
     #   @return [Types::ResourcePolicy]
     class PutRepositoryPermissionsPolicyResult < Struct.new(
+      nil,
       :policy,
       keyword_init: true
     )
@@ -3976,6 +4084,7 @@ module Aws::Codeartifact
     #   <p>A timestamp that represents the date and time the repository was created.</p>
     #   @return [Time]
     class RepositoryDescription < Struct.new(
+      nil,
       :name,
       :administrator_account,
       :domain_name,
@@ -4049,6 +4158,7 @@ module Aws::Codeartifact
     #         </p>
     #   @return [String]
     class RepositoryExternalConnectionInfo < Struct.new(
+      nil,
       :external_connection_name,
       :package_format,
       :status,
@@ -4093,6 +4203,7 @@ module Aws::Codeartifact
     #   <p>A timestamp that represents the date and time the repository was created.</p>
     #   @return [Time]
     class RepositorySummary < Struct.new(
+      nil,
       :name,
       :administrator_account,
       :domain_name,
@@ -4121,6 +4232,7 @@ module Aws::Codeartifact
     #       </p>
     #   @return [String]
     class ResourceNotFoundException < Struct.new(
+      nil,
       :message,
       :resource_id,
       :resource_type,
@@ -4148,6 +4260,7 @@ module Aws::Codeartifact
     #       </p>
     #   @return [String]
     class ResourcePolicy < Struct.new(
+      nil,
       :resource_arn,
       :revision,
       :document,
@@ -4172,6 +4285,7 @@ module Aws::Codeartifact
     #       </p>
     #   @return [String]
     class ServiceQuotaExceededException < Struct.new(
+      nil,
       :message,
       :resource_id,
       :resource_type,
@@ -4194,6 +4308,7 @@ module Aws::Codeartifact
     #       </p>
     #   @return [String]
     class SuccessfulPackageVersionInfo < Struct.new(
+      nil,
       :revision,
       :status,
       keyword_init: true
@@ -4209,6 +4324,7 @@ module Aws::Codeartifact
     #   <p>The tag value.</p>
     #   @return [String]
     class Tag < Struct.new(
+      nil,
       :key,
       :value,
       keyword_init: true
@@ -4223,6 +4339,7 @@ module Aws::Codeartifact
     #   <p>The tags you want to modify or add to the resource.</p>
     #   @return [Array<Types::Tag>]
     class TagResourceRequest < Struct.new(
+      nil,
       :resource_arn,
       :tags,
       keyword_init: true
@@ -4231,6 +4348,7 @@ module Aws::Codeartifact
     end
 
     class TagResourceResult < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -4247,6 +4365,7 @@ module Aws::Codeartifact
     #       </p>
     #   @return [Integer]
     class ThrottlingException < Struct.new(
+      nil,
       :message,
       :retry_after_seconds,
       keyword_init: true
@@ -4261,6 +4380,7 @@ module Aws::Codeartifact
     #   <p>The tag key for each tag that you want to remove from the resource.</p>
     #   @return [Array<String>]
     class UntagResourceRequest < Struct.new(
+      nil,
       :resource_arn,
       :tag_keys,
       keyword_init: true
@@ -4269,6 +4389,7 @@ module Aws::Codeartifact
     end
 
     class UntagResourceResult < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -4302,6 +4423,7 @@ module Aws::Codeartifact
     #   <p>The repository name and restrictions to remove from the allowed repository list of the specified package group.</p>
     #   @return [Array<Types::PackageGroupAllowedRepository>]
     class UpdatePackageGroupOriginConfigurationRequest < Struct.new(
+      nil,
       :domain,
       :domain_owner,
       :package_group,
@@ -4322,6 +4444,7 @@ module Aws::Codeartifact
     #   <p>Information about the updated allowed repositories after processing the request.</p>
     #   @return [Hash<String, Hash<String, Array<String>>>]
     class UpdatePackageGroupOriginConfigurationResult < Struct.new(
+      nil,
       :package_group,
       :allowed_repository_updates,
       keyword_init: true
@@ -4356,6 +4479,7 @@ module Aws::Codeartifact
     #       </p>
     #   @return [String]
     class UpdatePackageGroupRequest < Struct.new(
+      nil,
       :domain,
       :domain_owner,
       :package_group,
@@ -4372,6 +4496,7 @@ module Aws::Codeartifact
     #       </p>
     #   @return [Types::PackageGroupDescription]
     class UpdatePackageGroupResult < Struct.new(
+      nil,
       :package_group,
       keyword_init: true
     )
@@ -4451,6 +4576,7 @@ module Aws::Codeartifact
     #       </p>
     #   @return [String]
     class UpdatePackageVersionsStatusRequest < Struct.new(
+      nil,
       :domain,
       :domain_owner,
       :repository,
@@ -4477,6 +4603,7 @@ module Aws::Codeartifact
     #         with a status that successfully updated. </p>
     #   @return [Hash<String, Types::PackageVersionError>]
     class UpdatePackageVersionsStatusResult < Struct.new(
+      nil,
       :successful_versions,
       :failed_versions,
       keyword_init: true
@@ -4511,6 +4638,7 @@ module Aws::Codeartifact
     #           information, see <a href="https://docs.aws.amazon.com/codeartifact/latest/ug/repos-upstream.html">Working with upstream repositories</a>. </p>
     #   @return [Array<Types::UpstreamRepository>]
     class UpdateRepositoryRequest < Struct.new(
+      nil,
       :domain,
       :domain_owner,
       :repository,
@@ -4527,6 +4655,7 @@ module Aws::Codeartifact
     #          </p>
     #   @return [Types::RepositoryDescription]
     class UpdateRepositoryResult < Struct.new(
+      nil,
       :repository,
       keyword_init: true
     )
@@ -4542,6 +4671,7 @@ module Aws::Codeartifact
     #   <p> The name of an upstream repository. </p>
     #   @return [String]
     class UpstreamRepository < Struct.new(
+      nil,
       :repository_name,
       keyword_init: true
     )
@@ -4555,6 +4685,7 @@ module Aws::Codeartifact
     #   <p> The name of an upstream repository. </p>
     #   @return [String]
     class UpstreamRepositoryInfo < Struct.new(
+      nil,
       :repository_name,
       keyword_init: true
     )
@@ -4572,6 +4703,7 @@ module Aws::Codeartifact
     #       </p>
     #   @return [String]
     class ValidationException < Struct.new(
+      nil,
       :message,
       :reason,
       keyword_init: true

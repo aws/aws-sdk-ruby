@@ -17,6 +17,7 @@ module Aws::FMS
     #   <p>A boolean value that excludes the accounts in <code>AccountScope$Accounts</code> from the administrator's scope. If true, the Firewall Manager administrator can apply policies to all members of the organization except for the accounts listed in <code>AccountScope$Accounts</code>. You can either specify a list of accounts to exclude by <code>AccountScope$Accounts</code>, or you can enable management of all accounts by <code>AccountScope$AllAccountsEnabled</code>. You cannot specify both.</p>
     #   @return [Boolean]
     class AccountScope < Struct.new(
+      nil,
       :accounts,
       :all_accounts_enabled,
       :exclude_specified_accounts,
@@ -39,6 +40,7 @@ module Aws::FMS
     #   <p>A description of the remediation action target.</p>
     #   @return [String]
     class ActionTarget < Struct.new(
+      nil,
       :resource_id,
       :description,
       keyword_init: true
@@ -75,6 +77,7 @@ module Aws::FMS
     #            </ul>
     #   @return [String]
     class AdminAccountSummary < Struct.new(
+      nil,
       :admin_account,
       :default_admin,
       :status,
@@ -103,6 +106,7 @@ module Aws::FMS
     #   <p>Defines the Firewall Manager policy types that the specified Firewall Manager administrator can create and manage.</p>
     #   @return [Types::PolicyTypeScope]
     class AdminScope < Struct.new(
+      nil,
       :account_scope,
       :organizational_unit_scope,
       :region_scope,
@@ -123,6 +127,7 @@ module Aws::FMS
     #   <p>The application's port number, for example <code>80</code>.</p>
     #   @return [Integer]
     class App < Struct.new(
+      nil,
       :app_name,
       :protocol,
       :port,
@@ -156,6 +161,7 @@ module Aws::FMS
     #   <p>A map of previous version numbers to their corresponding <code>App</code> object arrays.</p>
     #   @return [Hash<String, Array<Types::App>>]
     class AppsListData < Struct.new(
+      nil,
       :list_id,
       :list_name,
       :list_update_token,
@@ -182,6 +188,7 @@ module Aws::FMS
     #   <p>An array of <code>App</code> objects in the Firewall Manager applications list.</p>
     #   @return [Array<Types::App>]
     class AppsListDataSummary < Struct.new(
+      nil,
       :list_arn,
       :list_id,
       :list_name,
@@ -199,6 +206,7 @@ module Aws::FMS
     #           <a href="https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_accounts.html">Managing the Amazon Web Services Accounts in Your Organization</a>.  </p>
     #   @return [String]
     class AssociateAdminAccountRequest < Struct.new(
+      nil,
       :admin_account,
       keyword_init: true
     )
@@ -209,6 +217,7 @@ module Aws::FMS
     #   <p>The name of the third-party firewall vendor.</p>
     #   @return [String]
     class AssociateThirdPartyFirewallRequest < Struct.new(
+      nil,
       :third_party_firewall,
       keyword_init: true
     )
@@ -241,6 +250,7 @@ module Aws::FMS
     #            </ul>
     #   @return [String]
     class AssociateThirdPartyFirewallResponse < Struct.new(
+      nil,
       :third_party_firewall_status,
       keyword_init: true
     )
@@ -255,6 +265,7 @@ module Aws::FMS
     #   <p>Violation detail for network interfaces associated with the EC2 instance.</p>
     #   @return [Array<Types::AwsEc2NetworkInterfaceViolation>]
     class AwsEc2InstanceViolation < Struct.new(
+      nil,
       :violation_target,
       :aws_ec2_network_interface_violations,
       keyword_init: true
@@ -270,6 +281,7 @@ module Aws::FMS
     #   <p>List of security groups that violate the rules specified in the primary security group of the Firewall Manager policy.</p>
     #   @return [Array<String>]
     class AwsEc2NetworkInterfaceViolation < Struct.new(
+      nil,
       :violation_target,
       :violating_security_groups,
       keyword_init: true
@@ -291,6 +303,7 @@ module Aws::FMS
     #   <p>Remediation options for the rule specified in the <code>ViolationTarget</code>.</p>
     #   @return [Array<Types::SecurityGroupRemediationAction>]
     class AwsVPCSecurityGroupViolation < Struct.new(
+      nil,
       :violation_target,
       :violation_target_description,
       :partial_matches,
@@ -307,6 +320,7 @@ module Aws::FMS
     #   <p>The uniform resource identifiers (URIs) of resources that should be associated to the resource set. The URIs must be Amazon Resource Names (ARNs).</p>
     #   @return [Array<String>]
     class BatchAssociateResourceRequest < Struct.new(
+      nil,
       :resource_set_identifier,
       :items,
       keyword_init: true
@@ -321,6 +335,7 @@ module Aws::FMS
     #   <p>The resources that failed to associate to the resource set.</p>
     #   @return [Array<Types::FailedItem>]
     class BatchAssociateResourceResponse < Struct.new(
+      nil,
       :resource_set_identifier,
       :failed_items,
       keyword_init: true
@@ -335,6 +350,7 @@ module Aws::FMS
     #   <p>The uniform resource identifiers (URI) of resources that should be disassociated from the resource set. The URIs must be Amazon Resource Names (ARNs).</p>
     #   @return [Array<String>]
     class BatchDisassociateResourceRequest < Struct.new(
+      nil,
       :resource_set_identifier,
       :items,
       keyword_init: true
@@ -349,6 +365,7 @@ module Aws::FMS
     #   <p>The resources that failed to disassociate from the resource set.</p>
     #   @return [Array<Types::FailedItem>]
     class BatchDisassociateResourceResponse < Struct.new(
+      nil,
       :resource_set_identifier,
       :failed_items,
       keyword_init: true
@@ -373,6 +390,7 @@ module Aws::FMS
     #   <p>Metadata about the resource that doesn't comply with the policy scope.</p>
     #   @return [Hash<String, String>]
     class ComplianceViolator < Struct.new(
+      nil,
       :resource_id,
       :violation_reason,
       :resource_type,
@@ -393,6 +411,7 @@ module Aws::FMS
     #   <p>Indicates whether it is possible for Firewall Manager to perform this remediation action. A false value indicates that auto remediation is disabled or Firewall Manager is unable to perform the action due to a conflict of some kind.</p>
     #   @return [Boolean]
     class CreateNetworkAclAction < Struct.new(
+      nil,
       :description,
       :vpc,
       :fms_can_remediate,
@@ -420,6 +439,7 @@ module Aws::FMS
     #   <p>Indicates whether it is possible for Firewall Manager to perform this remediation action. A false value indicates that auto remediation is disabled or Firewall Manager is unable to perform the action due to a conflict of some kind.</p>
     #   @return [Boolean]
     class CreateNetworkAclEntriesAction < Struct.new(
+      nil,
       :description,
       :network_acl_id,
       :network_acl_entries_to_be_created,
@@ -439,6 +459,7 @@ module Aws::FMS
     #         <code>PutAppsList</code>, <code>ListAppsLists</code>, and <code>GetAppsList</code>.</p>
     #   @return [String]
     class DeleteAppsListRequest < Struct.new(
+      nil,
       :list_id,
       keyword_init: true
     )
@@ -459,6 +480,7 @@ module Aws::FMS
     #   <p>Indicates whether it is possible for Firewall Manager to perform this remediation action. A false value indicates that auto remediation is disabled or Firewall Manager is unable to perform the action due to a conflict of some kind.</p>
     #   @return [Boolean]
     class DeleteNetworkAclEntriesAction < Struct.new(
+      nil,
       :description,
       :network_acl_id,
       :network_acl_entries_to_be_deleted,
@@ -474,6 +496,7 @@ module Aws::FMS
     end
 
     class DeleteNotificationChannelRequest < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -519,6 +542,7 @@ module Aws::FMS
     #         If you don't specify tags or accounts, all resources are in scope. </p>
     #   @return [Boolean]
     class DeletePolicyRequest < Struct.new(
+      nil,
       :policy_id,
       :delete_all_policy_resources,
       keyword_init: true
@@ -531,6 +555,7 @@ module Aws::FMS
     #         <code>PutProtocolsList</code>, <code>ListProtocolsLists</code>, and <code>GetProtocolsLost</code>.</p>
     #   @return [String]
     class DeleteProtocolsListRequest < Struct.new(
+      nil,
       :list_id,
       keyword_init: true
     )
@@ -541,6 +566,7 @@ module Aws::FMS
     #   <p>A unique identifier for the resource set, used in a request to refer to the resource set.</p>
     #   @return [String]
     class DeleteResourceSetRequest < Struct.new(
+      nil,
       :identifier,
       keyword_init: true
     )
@@ -548,6 +574,7 @@ module Aws::FMS
     end
 
     class DisassociateAdminAccountRequest < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -557,6 +584,7 @@ module Aws::FMS
     #   <p>The name of the third-party firewall vendor.</p>
     #   @return [String]
     class DisassociateThirdPartyFirewallRequest < Struct.new(
+      nil,
       :third_party_firewall,
       keyword_init: true
     )
@@ -567,6 +595,7 @@ module Aws::FMS
     #   <p>The current status for the disassociation of a Firewall Manager administrators account with a third-party firewall.</p>
     #   @return [String]
     class DisassociateThirdPartyFirewallResponse < Struct.new(
+      nil,
       :third_party_firewall_status,
       keyword_init: true
     )
@@ -587,6 +616,7 @@ module Aws::FMS
     #   <p>The name of the discovered resource.</p>
     #   @return [String]
     class DiscoveredResource < Struct.new(
+      nil,
       :uri,
       :account_id,
       :type,
@@ -605,6 +635,7 @@ module Aws::FMS
     #   <p>A description of the violation that specifies the rule group and VPC.</p>
     #   @return [String]
     class DnsDuplicateRuleGroupViolation < Struct.new(
+      nil,
       :violation_target,
       :violation_target_description,
       keyword_init: true
@@ -623,6 +654,7 @@ module Aws::FMS
     #   <p>The number of rule groups currently associated with the VPC.  </p>
     #   @return [Integer]
     class DnsRuleGroupLimitExceededViolation < Struct.new(
+      nil,
       :violation_target,
       :violation_target_description,
       :number_of_rule_groups_already_associated,
@@ -656,6 +688,7 @@ module Aws::FMS
     #          choose priority settings that aren't in this list for the rule groups in your new DNS Firewall policy. </p>
     #   @return [Array<Integer>]
     class DnsRuleGroupPriorityConflictViolation < Struct.new(
+      nil,
       :violation_target,
       :violation_target_description,
       :conflicting_priority,
@@ -685,6 +718,7 @@ module Aws::FMS
     #   <p>The ID of the gateway to be used with the EC2 route table that is associated with the remediation action.</p>
     #   @return [Types::ActionTarget]
     class EC2AssociateRouteTableAction < Struct.new(
+      nil,
       :description,
       :route_table_id,
       :subnet_id,
@@ -705,6 +739,7 @@ module Aws::FMS
     #   <p>The ID of the copied EC2 route table that is associated with the remediation action.</p>
     #   @return [Types::ActionTarget]
     class EC2CopyRouteTableAction < Struct.new(
+      nil,
       :description,
       :vpc_id,
       :route_table_id,
@@ -736,6 +771,7 @@ module Aws::FMS
     #   <p>Information about the ID of the route table for the route.</p>
     #   @return [Types::ActionTarget]
     class EC2CreateRouteAction < Struct.new(
+      nil,
       :description,
       :destination_cidr_block,
       :destination_prefix_list_id,
@@ -756,6 +792,7 @@ module Aws::FMS
     #   <p>Information about the ID of a VPC.</p>
     #   @return [Types::ActionTarget]
     class EC2CreateRouteTableAction < Struct.new(
+      nil,
       :description,
       :vpc_id,
       keyword_init: true
@@ -780,6 +817,7 @@ module Aws::FMS
     #   <p>Information about the ID of the route table.</p>
     #   @return [Types::ActionTarget]
     class EC2DeleteRouteAction < Struct.new(
+      nil,
       :description,
       :destination_cidr_block,
       :destination_prefix_list_id,
@@ -810,6 +848,7 @@ module Aws::FMS
     #   <p>Information about the ID of the route table.</p>
     #   @return [Types::ActionTarget]
     class EC2ReplaceRouteAction < Struct.new(
+      nil,
       :description,
       :destination_cidr_block,
       :destination_prefix_list_id,
@@ -832,6 +871,7 @@ module Aws::FMS
     #   <p>Information about the ID of the new route table to associate with the subnet.</p>
     #   @return [Types::ActionTarget]
     class EC2ReplaceRouteTableAssociationAction < Struct.new(
+      nil,
       :description,
       :association_id,
       :route_table_id,
@@ -859,6 +899,7 @@ module Aws::FMS
     #              is among those that run first in the network ACL or those that run last. </p>
     #   @return [String]
     class EntryDescription < Struct.new(
+      nil,
       :entry_detail,
       :entry_rule_number,
       :entry_type,
@@ -893,6 +934,7 @@ module Aws::FMS
     #   <p>Descriptions of the violations that Firewall Manager found for these entries. </p>
     #   @return [Array<String>]
     class EntryViolation < Struct.new(
+      nil,
       :expected_entry,
       :expected_evaluation_order,
       :actual_evaluation_order,
@@ -921,6 +963,7 @@ module Aws::FMS
     #         policy.</p>
     #   @return [Boolean]
     class EvaluationResult < Struct.new(
+      nil,
       :compliance_status,
       :violator_count,
       :evaluation_limit_exceeded,
@@ -955,6 +998,7 @@ module Aws::FMS
     #   <p>Information about the route table ID.</p>
     #   @return [String]
     class ExpectedRoute < Struct.new(
+      nil,
       :ip_v4_cidr,
       :prefix_list_id,
       :ip_v6_cidr,
@@ -978,6 +1022,7 @@ module Aws::FMS
     #               <a href="https://docs.aws.amazon.com/fms/2018-01-01/APIReference/API_SecurityServicePolicyData.html">SecurityServiceData</a> in order to remedy scope violations.</p>
     #   @return [String]
     class FMSPolicyUpdateFirewallCreationConfigAction < Struct.new(
+      nil,
       :description,
       :firewall_creation_config,
       keyword_init: true
@@ -993,6 +1038,7 @@ module Aws::FMS
     #   <p>The reason the resource's association could not be updated.</p>
     #   @return [String]
     class FailedItem < Struct.new(
+      nil,
       :uri,
       :reason,
       keyword_init: true
@@ -1017,6 +1063,7 @@ module Aws::FMS
     #   <p>The VPC endpoint ID of the firewall subnet that violates the policy scope.</p>
     #   @return [String]
     class FirewallSubnetIsOutOfScopeViolation < Struct.new(
+      nil,
       :firewall_subnet_id,
       :vpc_id,
       :subnet_availability_zone,
@@ -1041,6 +1088,7 @@ module Aws::FMS
     #   <p>The ID of the Availability Zone of the deleted VPC subnet.</p>
     #   @return [String]
     class FirewallSubnetMissingVPCEndpointViolation < Struct.new(
+      nil,
       :firewall_subnet_id,
       :vpc_id,
       :subnet_availability_zone,
@@ -1051,6 +1099,7 @@ module Aws::FMS
     end
 
     class GetAdminAccountRequest < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1064,6 +1113,7 @@ module Aws::FMS
     #         default administrator.</p>
     #   @return [String]
     class GetAdminAccountResponse < Struct.new(
+      nil,
       :admin_account,
       :role_status,
       keyword_init: true
@@ -1075,6 +1125,7 @@ module Aws::FMS
     #   <p>The administrator account that you want to get the details for.</p>
     #   @return [String]
     class GetAdminScopeRequest < Struct.new(
+      nil,
       :admin_account,
       keyword_init: true
     )
@@ -1106,6 +1157,7 @@ module Aws::FMS
     #            </ul>
     #   @return [String]
     class GetAdminScopeResponse < Struct.new(
+      nil,
       :admin_scope,
       :status,
       keyword_init: true
@@ -1120,6 +1172,7 @@ module Aws::FMS
     #   <p>Specifies whether the list to retrieve is a default list owned by Firewall Manager.</p>
     #   @return [Boolean]
     class GetAppsListRequest < Struct.new(
+      nil,
       :list_id,
       :default_list,
       keyword_init: true
@@ -1134,6 +1187,7 @@ module Aws::FMS
     #   <p>The Amazon Resource Name (ARN) of the applications list.</p>
     #   @return [String]
     class GetAppsListResponse < Struct.new(
+      nil,
       :apps_list,
       :apps_list_arn,
       keyword_init: true
@@ -1149,6 +1203,7 @@ module Aws::FMS
     #   <p>The Amazon Web Services account that owns the resources that you want to get the details for.</p>
     #   @return [String]
     class GetComplianceDetailRequest < Struct.new(
+      nil,
       :policy_id,
       :member_account,
       keyword_init: true
@@ -1161,6 +1216,7 @@ module Aws::FMS
     #           <code>GetComplianceDetail</code> request.</p>
     #   @return [Types::PolicyComplianceDetail]
     class GetComplianceDetailResponse < Struct.new(
+      nil,
       :policy_compliance_detail,
       keyword_init: true
     )
@@ -1168,6 +1224,7 @@ module Aws::FMS
     end
 
     class GetNotificationChannelRequest < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1180,6 +1237,7 @@ module Aws::FMS
     #   <p>The IAM role that is used by Firewall Manager to record activity to SNS.</p>
     #   @return [String]
     class GetNotificationChannelResponse < Struct.new(
+      nil,
       :sns_topic_arn,
       :sns_role_name,
       keyword_init: true
@@ -1191,6 +1249,7 @@ module Aws::FMS
     #   <p>The ID of the Firewall Manager policy that you want the details for.</p>
     #   @return [String]
     class GetPolicyRequest < Struct.new(
+      nil,
       :policy_id,
       keyword_init: true
     )
@@ -1204,6 +1263,7 @@ module Aws::FMS
     #   <p>The Amazon Resource Name (ARN) of the specified policy.</p>
     #   @return [String]
     class GetPolicyResponse < Struct.new(
+      nil,
       :policy,
       :policy_arn,
       keyword_init: true
@@ -1240,6 +1300,7 @@ module Aws::FMS
     #            <code>NextToken</code> value that you can use to get another batch of objects.</p>
     #   @return [Integer]
     class GetProtectionStatusRequest < Struct.new(
+      nil,
       :policy_id,
       :member_account_id,
       :start_time,
@@ -1290,6 +1351,7 @@ module Aws::FMS
     #               <code>NextToken</code> using your own processes. </p>
     #   @return [String]
     class GetProtectionStatusResponse < Struct.new(
+      nil,
       :admin_account_id,
       :service_type,
       :data,
@@ -1306,6 +1368,7 @@ module Aws::FMS
     #   <p>Specifies whether the list to retrieve is a default list owned by Firewall Manager.</p>
     #   @return [Boolean]
     class GetProtocolsListRequest < Struct.new(
+      nil,
       :list_id,
       :default_list,
       keyword_init: true
@@ -1320,6 +1383,7 @@ module Aws::FMS
     #   <p>The Amazon Resource Name (ARN) of the specified protocols list.</p>
     #   @return [String]
     class GetProtocolsListResponse < Struct.new(
+      nil,
       :protocols_list,
       :protocols_list_arn,
       keyword_init: true
@@ -1331,6 +1395,7 @@ module Aws::FMS
     #   <p>A unique identifier for the resource set, used in a request to refer to the resource set.</p>
     #   @return [String]
     class GetResourceSetRequest < Struct.new(
+      nil,
       :identifier,
       keyword_init: true
     )
@@ -1344,6 +1409,7 @@ module Aws::FMS
     #   <p>The Amazon Resource Name (ARN) of the resource set.</p>
     #   @return [String]
     class GetResourceSetResponse < Struct.new(
+      nil,
       :resource_set,
       :resource_set_arn,
       keyword_init: true
@@ -1355,6 +1421,7 @@ module Aws::FMS
     #   <p>The name of the third-party firewall vendor.</p>
     #   @return [String]
     class GetThirdPartyFirewallAssociationStatusRequest < Struct.new(
+      nil,
       :third_party_firewall,
       keyword_init: true
     )
@@ -1404,6 +1471,7 @@ module Aws::FMS
     #            </ul>
     #   @return [String]
     class GetThirdPartyFirewallAssociationStatusResponse < Struct.new(
+      nil,
       :third_party_firewall_status,
       :marketplace_onboarding_status,
       keyword_init: true
@@ -1455,6 +1523,7 @@ module Aws::FMS
     #      </p>
     #   @return [String]
     class GetViolationDetailsRequest < Struct.new(
+      nil,
       :policy_id,
       :member_account,
       :resource_id,
@@ -1468,6 +1537,7 @@ module Aws::FMS
     #   <p>Violation detail for a resource.</p>
     #   @return [Types::ViolationDetail]
     class GetViolationDetailsResponse < Struct.new(
+      nil,
       :violation_detail,
       keyword_init: true
     )
@@ -1479,6 +1549,7 @@ module Aws::FMS
     # @!attribute message
     #   @return [String]
     class InternalErrorException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -1489,6 +1560,7 @@ module Aws::FMS
     # @!attribute message
     #   @return [String]
     class InvalidInputException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -1512,6 +1584,7 @@ module Aws::FMS
     #   <p>Detailed information about the entry violations in the network ACL. </p>
     #   @return [Array<Types::EntryViolation>]
     class InvalidNetworkAclEntriesViolation < Struct.new(
+      nil,
       :vpc,
       :subnet,
       :subnet_availability_zone,
@@ -1530,6 +1603,7 @@ module Aws::FMS
     # @!attribute message
     #   @return [String]
     class InvalidOperationException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -1540,6 +1614,7 @@ module Aws::FMS
     # @!attribute message
     #   @return [String]
     class InvalidTypeException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -1553,6 +1628,7 @@ module Aws::FMS
     # @!attribute message
     #   @return [String]
     class LimitExceededException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -1570,6 +1646,7 @@ module Aws::FMS
     #        <code>NextToken</code> value that you can use in a subsequent call to get the next batch of objects.</p>
     #   @return [Integer]
     class ListAdminAccountsForOrganizationRequest < Struct.new(
+      nil,
       :next_token,
       :max_results,
       keyword_init: true
@@ -1586,6 +1663,7 @@ module Aws::FMS
     #        value in the response. To retrieve the next batch of objects, use the token returned from the prior request in your next request.</p>
     #   @return [String]
     class ListAdminAccountsForOrganizationResponse < Struct.new(
+      nil,
       :admin_accounts,
       :next_token,
       keyword_init: true
@@ -1604,6 +1682,7 @@ module Aws::FMS
     #        <code>NextToken</code> value that you can use in a subsequent call to get the next batch of objects.</p>
     #   @return [Integer]
     class ListAdminsManagingAccountRequest < Struct.new(
+      nil,
       :next_token,
       :max_results,
       keyword_init: true
@@ -1620,6 +1699,7 @@ module Aws::FMS
     #        value in the response. To retrieve the next batch of objects, use the token returned from the prior request in your next request.</p>
     #   @return [String]
     class ListAdminsManagingAccountResponse < Struct.new(
+      nil,
       :admin_accounts,
       :next_token,
       keyword_init: true
@@ -1642,6 +1722,7 @@ module Aws::FMS
     #            <p>If you don't specify this, Firewall Manager returns all available objects.</p>
     #   @return [Integer]
     class ListAppsListsRequest < Struct.new(
+      nil,
       :default_lists,
       :next_token,
       :max_results,
@@ -1658,6 +1739,7 @@ module Aws::FMS
     #           Firewall Manager returns this token in the response. You can use this token in subsequent requests to retrieve the next batch of objects.</p>
     #   @return [String]
     class ListAppsListsResponse < Struct.new(
+      nil,
       :apps_lists,
       :next_token,
       keyword_init: true
@@ -1685,6 +1767,7 @@ module Aws::FMS
     #         use to get another batch of <code>PolicyComplianceStatus</code> objects.</p>
     #   @return [Integer]
     class ListComplianceStatusRequest < Struct.new(
+      nil,
       :policy_id,
       :next_token,
       :max_results,
@@ -1705,6 +1788,7 @@ module Aws::FMS
     #         next request.</p>
     #   @return [String]
     class ListComplianceStatusResponse < Struct.new(
+      nil,
       :policy_compliance_status_list,
       :next_token,
       keyword_init: true
@@ -1729,6 +1813,7 @@ module Aws::FMS
     #        value in the response. To retrieve the next batch of objects, use the token returned from the prior request in your next request.</p>
     #   @return [String]
     class ListDiscoveredResourcesRequest < Struct.new(
+      nil,
       :member_account_ids,
       :resource_type,
       :max_results,
@@ -1747,6 +1832,7 @@ module Aws::FMS
     #        value in the response. To retrieve the next batch of objects, use the token returned from the prior request in your next request.</p>
     #   @return [String]
     class ListDiscoveredResourcesResponse < Struct.new(
+      nil,
       :items,
       :next_token,
       keyword_init: true
@@ -1769,6 +1855,7 @@ module Aws::FMS
     #         use to get another batch of member account IDs.</p>
     #   @return [Integer]
     class ListMemberAccountsRequest < Struct.new(
+      nil,
       :next_token,
       :max_results,
       keyword_init: true
@@ -1787,6 +1874,7 @@ module Aws::FMS
     #         next request.</p>
     #   @return [String]
     class ListMemberAccountsResponse < Struct.new(
+      nil,
       :member_accounts,
       :next_token,
       keyword_init: true
@@ -1810,6 +1898,7 @@ module Aws::FMS
     #           <code>PolicySummary</code> objects.</p>
     #   @return [Integer]
     class ListPoliciesRequest < Struct.new(
+      nil,
       :next_token,
       :max_results,
       keyword_init: true
@@ -1828,6 +1917,7 @@ module Aws::FMS
     #         response in the <code>NextToken</code> value in the next request.</p>
     #   @return [String]
     class ListPoliciesResponse < Struct.new(
+      nil,
       :policy_list,
       :next_token,
       keyword_init: true
@@ -1850,6 +1940,7 @@ module Aws::FMS
     #            <p>If you don't specify this, Firewall Manager returns all available objects.</p>
     #   @return [Integer]
     class ListProtocolsListsRequest < Struct.new(
+      nil,
       :default_lists,
       :next_token,
       :max_results,
@@ -1866,6 +1957,7 @@ module Aws::FMS
     #           Firewall Manager returns this token in the response. You can use this token in subsequent requests to retrieve the next batch of objects.</p>
     #   @return [String]
     class ListProtocolsListsResponse < Struct.new(
+      nil,
       :protocols_lists,
       :next_token,
       keyword_init: true
@@ -1887,6 +1979,7 @@ module Aws::FMS
     #        value in the response. To retrieve the next batch of objects, use the token returned from the prior request in your next request.</p>
     #   @return [String]
     class ListResourceSetResourcesRequest < Struct.new(
+      nil,
       :identifier,
       :max_results,
       :next_token,
@@ -1904,6 +1997,7 @@ module Aws::FMS
     #        value in the response. To retrieve the next batch of objects, use the token returned from the prior request in your next request.</p>
     #   @return [String]
     class ListResourceSetResourcesResponse < Struct.new(
+      nil,
       :items,
       :next_token,
       keyword_init: true
@@ -1922,6 +2016,7 @@ module Aws::FMS
     #        <code>NextToken</code> value that you can use in a subsequent call to get the next batch of objects.</p>
     #   @return [Integer]
     class ListResourceSetsRequest < Struct.new(
+      nil,
       :next_token,
       :max_results,
       keyword_init: true
@@ -1938,6 +2033,7 @@ module Aws::FMS
     #        value in the response. To retrieve the next batch of objects, use the token returned from the prior request in your next request.</p>
     #   @return [String]
     class ListResourceSetsResponse < Struct.new(
+      nil,
       :resource_sets,
       :next_token,
       keyword_init: true
@@ -1949,6 +2045,7 @@ module Aws::FMS
     #   <p>The Amazon Resource Name (ARN) of the resource to return tags for. The Firewall Manager resources that support tagging are policies, applications lists, and protocols lists. </p>
     #   @return [String]
     class ListTagsForResourceRequest < Struct.new(
+      nil,
       :resource_arn,
       keyword_init: true
     )
@@ -1959,6 +2056,7 @@ module Aws::FMS
     #   <p>The tags associated with the resource.</p>
     #   @return [Array<Types::Tag>]
     class ListTagsForResourceResponse < Struct.new(
+      nil,
       :tag_list,
       keyword_init: true
     )
@@ -1984,6 +2082,7 @@ module Aws::FMS
     #   that Firewall Manager will return if you submit another request.</p>
     #   @return [Integer]
     class ListThirdPartyFirewallFirewallPoliciesRequest < Struct.new(
+      nil,
       :third_party_firewall,
       :next_token,
       :max_results,
@@ -2000,6 +2099,7 @@ module Aws::FMS
     #   <p>The value that you will use for <code>NextToken</code> in the next <code>ListThirdPartyFirewallFirewallPolicies</code> request.</p>
     #   @return [String]
     class ListThirdPartyFirewallFirewallPoliciesResponse < Struct.new(
+      nil,
       :third_party_firewall_firewall_policies,
       :next_token,
       keyword_init: true
@@ -2016,6 +2116,7 @@ module Aws::FMS
     #   <p>The definition of the first and last rules for the network ACL policy. </p>
     #   @return [Types::NetworkAclEntrySet]
     class NetworkAclCommonPolicy < Struct.new(
+      nil,
       :network_acl_entry_set,
       keyword_init: true
     )
@@ -2052,6 +2153,7 @@ module Aws::FMS
     #      an egress rule, then it's an ingress, or inbound, rule.</p>
     #   @return [Boolean]
     class NetworkAclEntry < Struct.new(
+      nil,
       :icmp_type_code,
       :protocol,
       :port_range,
@@ -2098,6 +2200,7 @@ module Aws::FMS
     #      in the <i>Firewall Manager Developer Guide</i>.</p>
     #   @return [Boolean]
     class NetworkAclEntrySet < Struct.new(
+      nil,
       :first_entries,
       :force_remediate_for_first_entries,
       :last_entries,
@@ -2115,6 +2218,7 @@ module Aws::FMS
     #   <p>ICMP type. </p>
     #   @return [Integer]
     class NetworkAclIcmpTypeCode < Struct.new(
+      nil,
       :code,
       :type,
       keyword_init: true
@@ -2130,6 +2234,7 @@ module Aws::FMS
     #   <p>The ending port number of the range. </p>
     #   @return [Integer]
     class NetworkAclPortRange < Struct.new(
+      nil,
       :from,
       :to,
       keyword_init: true
@@ -2151,6 +2256,7 @@ module Aws::FMS
     #   <p>Information about the route or routes that are in violation.</p>
     #   @return [Array<Types::Route>]
     class NetworkFirewallBlackHoleRouteDetectedViolation < Struct.new(
+      nil,
       :violation_target,
       :route_table_id,
       :vpc_id,
@@ -2207,6 +2313,7 @@ module Aws::FMS
     #   <p>Information about the VPC ID.</p>
     #   @return [String]
     class NetworkFirewallInternetTrafficNotInspectedViolation < Struct.new(
+      nil,
       :subnet_id,
       :subnet_availability_zone,
       :route_table_id,
@@ -2283,6 +2390,7 @@ module Aws::FMS
     #   <p>Information about the VPC ID.</p>
     #   @return [String]
     class NetworkFirewallInvalidRouteConfigurationViolation < Struct.new(
+      nil,
       :affected_subnets,
       :route_table_id,
       :is_route_table_used_in_different_az,
@@ -2327,6 +2435,7 @@ module Aws::FMS
     #   <p>The resource ID of the route table that should be associated with the subnet.</p>
     #   @return [String]
     class NetworkFirewallMissingExpectedRTViolation < Struct.new(
+      nil,
       :violation_target,
       :vpc,
       :availability_zone,
@@ -2348,6 +2457,7 @@ module Aws::FMS
     #   <p>Information about the VPC ID.</p>
     #   @return [String]
     class NetworkFirewallMissingExpectedRoutesViolation < Struct.new(
+      nil,
       :violation_target,
       :expected_routes,
       :vpc_id,
@@ -2371,6 +2481,7 @@ module Aws::FMS
     #   <p>The reason the resource has this violation, if one is available. </p>
     #   @return [String]
     class NetworkFirewallMissingFirewallViolation < Struct.new(
+      nil,
       :violation_target,
       :vpc,
       :availability_zone,
@@ -2395,6 +2506,7 @@ module Aws::FMS
     #   <p>The reason the resource has this violation, if one is available. </p>
     #   @return [String]
     class NetworkFirewallMissingSubnetViolation < Struct.new(
+      nil,
       :violation_target,
       :vpc,
       :availability_zone,
@@ -2413,6 +2525,7 @@ module Aws::FMS
     #            set <a href="https://docs.aws.amazon.com/fms/2018-01-01/APIReference/API_PolicyOption.html">PolicyOption</a> to <code>NULL</code>.</p>
     #   @return [String]
     class NetworkFirewallPolicy < Struct.new(
+      nil,
       :firewall_deployment_model,
       keyword_init: true
     )
@@ -2462,6 +2575,7 @@ module Aws::FMS
     #   settings.</p>
     #   @return [Types::StatefulEngineOptions]
     class NetworkFirewallPolicyDescription < Struct.new(
+      nil,
       :stateless_rule_groups,
       :stateless_default_actions,
       :stateless_fragment_default_actions,
@@ -2486,6 +2600,7 @@ module Aws::FMS
     #   <p>The policy that should be in use in the individual account in order to be compliant. </p>
     #   @return [Types::NetworkFirewallPolicyDescription]
     class NetworkFirewallPolicyModifiedViolation < Struct.new(
+      nil,
       :violation_target,
       :current_policy_description,
       :expected_policy_description,
@@ -2499,6 +2614,7 @@ module Aws::FMS
     #   <p>The action that changes the rule group from <code>DROP</code> to <code>ALERT</code>. This only applies to managed rule groups.</p>
     #   @return [String]
     class NetworkFirewallStatefulRuleGroupOverride < Struct.new(
+      nil,
       :action,
       keyword_init: true
     )
@@ -2522,6 +2638,7 @@ module Aws::FMS
     #   <p>Information about the VPC ID.</p>
     #   @return [String]
     class NetworkFirewallUnexpectedFirewallRoutesViolation < Struct.new(
+      nil,
       :firewall_subnet_id,
       :violating_routes,
       :route_table_id,
@@ -2546,6 +2663,7 @@ module Aws::FMS
     #   <p>Information about the VPC ID.</p>
     #   @return [String]
     class NetworkFirewallUnexpectedGatewayRoutesViolation < Struct.new(
+      nil,
       :gateway_id,
       :violating_routes,
       :route_table_id,
@@ -2567,6 +2685,7 @@ module Aws::FMS
     #   <p>A boolean value that excludes the OUs in <code>OrganizationalUnitScope$OrganizationalUnits</code> from the administrator's scope. If true, the Firewall Manager administrator can apply policies to all OUs in the organization except for the OUs listed in <code>OrganizationalUnitScope$OrganizationalUnits</code>. You can either specify a list of OUs to exclude by <code>OrganizationalUnitScope$OrganizationalUnits</code>, or you can enable management of all OUs by <code>OrganizationalUnitScope$AllOrganizationalUnitsEnabled</code>. You cannot specify both.</p>
     #   @return [Boolean]
     class OrganizationalUnitScope < Struct.new(
+      nil,
       :organizational_units,
       :all_organizational_units_enabled,
       :exclude_specified_organizational_units,
@@ -2589,6 +2708,7 @@ module Aws::FMS
     #   <p>The violation reason.</p>
     #   @return [Array<String>]
     class PartialMatch < Struct.new(
+      nil,
       :reference,
       :target_violation_reasons,
       keyword_init: true
@@ -2737,6 +2857,7 @@ module Aws::FMS
     #            </p>
     #   @return [String]
     class Policy < Struct.new(
+      nil,
       :policy_id,
       :policy_name,
       :policy_update_token,
@@ -2794,6 +2915,7 @@ module Aws::FMS
     #         and the error message received that indicates the problem with the service.</p>
     #   @return [Hash<String, String>]
     class PolicyComplianceDetail < Struct.new(
+      nil,
       :policy_owner,
       :policy_id,
       :member_account,
@@ -2838,6 +2960,7 @@ module Aws::FMS
     #         and the error message received that indicates the problem with the service.</p>
     #   @return [Hash<String, String>]
     class PolicyComplianceStatus < Struct.new(
+      nil,
       :policy_owner,
       :policy_id,
       :policy_name,
@@ -2861,6 +2984,7 @@ module Aws::FMS
     #   <p>Defines a Firewall Manager network ACL policy. </p>
     #   @return [Types::NetworkAclCommonPolicy]
     class PolicyOption < Struct.new(
+      nil,
       :network_firewall_policy,
       :third_party_firewall_policy,
       :network_acl_common_policy,
@@ -2912,6 +3036,7 @@ module Aws::FMS
     #            </ul>
     #   @return [String]
     class PolicySummary < Struct.new(
+      nil,
       :policy_arn,
       :policy_id,
       :policy_name,
@@ -2939,6 +3064,7 @@ module Aws::FMS
     #   <p>Allows the specified Firewall Manager administrator to manage all Firewall Manager policy types, except for third-party policy types. Third-party policy types can only be managed by the Firewall Manager default administrator.</p>
     #   @return [Boolean]
     class PolicyTypeScope < Struct.new(
+      nil,
       :policy_types,
       :all_policy_types_enabled,
       keyword_init: true
@@ -2962,6 +3088,7 @@ module Aws::FMS
     #   <p>Information about whether an action is taken by default.</p>
     #   @return [Boolean]
     class PossibleRemediationAction < Struct.new(
+      nil,
       :description,
       :ordered_remediation_actions,
       :is_default_action,
@@ -2983,6 +3110,7 @@ module Aws::FMS
     #   <p>Information about the actions.</p>
     #   @return [Array<Types::PossibleRemediationAction>]
     class PossibleRemediationActions < Struct.new(
+      nil,
       :description,
       :actions,
       keyword_init: true
@@ -3015,6 +3143,7 @@ module Aws::FMS
     #   <p>A map of previous version numbers to their corresponding protocol arrays.</p>
     #   @return [Hash<String, Array<String>>]
     class ProtocolsListData < Struct.new(
+      nil,
       :list_id,
       :list_name,
       :list_update_token,
@@ -3041,6 +3170,7 @@ module Aws::FMS
     #   <p>An array of protocols in the Firewall Manager protocols list.</p>
     #   @return [Array<String>]
     class ProtocolsListDataSummary < Struct.new(
+      nil,
       :list_arn,
       :list_id,
       :list_name,
@@ -3058,6 +3188,7 @@ module Aws::FMS
     #   <p>Configures the resources that the specified Firewall Manager administrator can manage. As a best practice, set the administrative scope according to the principles of least privilege. Only grant the administrator the specific resources or permissions that they need to perform the duties of their role.</p>
     #   @return [Types::AdminScope]
     class PutAdminAccountRequest < Struct.new(
+      nil,
       :admin_account,
       :admin_scope,
       keyword_init: true
@@ -3072,6 +3203,7 @@ module Aws::FMS
     #   <p>The tags associated with the resource.</p>
     #   @return [Array<Types::Tag>]
     class PutAppsListRequest < Struct.new(
+      nil,
       :apps_list,
       :tag_list,
       keyword_init: true
@@ -3086,6 +3218,7 @@ module Aws::FMS
     #   <p>The Amazon Resource Name (ARN) of the applications list.</p>
     #   @return [String]
     class PutAppsListResponse < Struct.new(
+      nil,
       :apps_list,
       :apps_list_arn,
       keyword_init: true
@@ -3102,6 +3235,7 @@ module Aws::FMS
     #         Firewall Manager activity. </p>
     #   @return [String]
     class PutNotificationChannelRequest < Struct.new(
+      nil,
       :sns_topic_arn,
       :sns_role_name,
       keyword_init: true
@@ -3116,6 +3250,7 @@ module Aws::FMS
     #   <p>The tags to add to the Amazon Web Services resource.</p>
     #   @return [Array<Types::Tag>]
     class PutPolicyRequest < Struct.new(
+      nil,
       :policy,
       :tag_list,
       keyword_init: true
@@ -3130,6 +3265,7 @@ module Aws::FMS
     #   <p>The Amazon Resource Name (ARN) of the policy.</p>
     #   @return [String]
     class PutPolicyResponse < Struct.new(
+      nil,
       :policy,
       :policy_arn,
       keyword_init: true
@@ -3144,6 +3280,7 @@ module Aws::FMS
     #   <p>The tags associated with the resource.</p>
     #   @return [Array<Types::Tag>]
     class PutProtocolsListRequest < Struct.new(
+      nil,
       :protocols_list,
       :tag_list,
       keyword_init: true
@@ -3158,6 +3295,7 @@ module Aws::FMS
     #   <p>The Amazon Resource Name (ARN) of the protocols list.</p>
     #   @return [String]
     class PutProtocolsListResponse < Struct.new(
+      nil,
       :protocols_list,
       :protocols_list_arn,
       keyword_init: true
@@ -3176,6 +3314,7 @@ module Aws::FMS
     #            resource.</p>
     #   @return [Array<Types::Tag>]
     class PutResourceSetRequest < Struct.new(
+      nil,
       :resource_set,
       :tag_list,
       keyword_init: true
@@ -3190,6 +3329,7 @@ module Aws::FMS
     #   <p>The Amazon Resource Name (ARN) of the resource set.</p>
     #   @return [String]
     class PutResourceSetResponse < Struct.new(
+      nil,
       :resource_set,
       :resource_set_arn,
       keyword_init: true
@@ -3205,6 +3345,7 @@ module Aws::FMS
     #   <p>Allows the specified Firewall Manager administrator to manage all Amazon Web Services Regions.</p>
     #   @return [Boolean]
     class RegionScope < Struct.new(
+      nil,
       :regions,
       :all_regions_enabled,
       keyword_init: true
@@ -3258,6 +3399,7 @@ module Aws::FMS
     #   <p>Information about the <code>DeleteNetworkAclEntries</code> action in Amazon EC2.</p>
     #   @return [Types::DeleteNetworkAclEntriesAction]
     class RemediationAction < Struct.new(
+      nil,
       :description,
       :ec2_create_route_action,
       :ec2_replace_route_action,
@@ -3284,6 +3426,7 @@ module Aws::FMS
     #   <p>The order of the remediation actions in the list.</p>
     #   @return [Integer]
     class RemediationActionWithOrder < Struct.new(
+      nil,
       :remediation_action,
       :order,
       keyword_init: true
@@ -3310,6 +3453,7 @@ module Aws::FMS
     #   <p>Indicates whether it is possible for Firewall Manager to perform this remediation action. A false value indicates that auto remediation is disabled or Firewall Manager is unable to perform the action due to a conflict of some kind.</p>
     #   @return [Boolean]
     class ReplaceNetworkAclAssociationAction < Struct.new(
+      nil,
       :description,
       :association_id,
       :network_acl_id,
@@ -3332,6 +3476,7 @@ module Aws::FMS
     #   <p>The Amazon Web Services account ID that the associated resource belongs to.</p>
     #   @return [String]
     class Resource < Struct.new(
+      nil,
       :uri,
       :account_id,
       keyword_init: true
@@ -3343,6 +3488,7 @@ module Aws::FMS
     # @!attribute message
     #   @return [String]
     class ResourceNotFoundException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -3387,6 +3533,7 @@ module Aws::FMS
     #            </ul>
     #   @return [String]
     class ResourceSet < Struct.new(
+      nil,
       :id,
       :name,
       :description,
@@ -3426,6 +3573,7 @@ module Aws::FMS
     #            </ul>
     #   @return [String]
     class ResourceSetSummary < Struct.new(
+      nil,
       :id,
       :name,
       :description,
@@ -3453,6 +3601,7 @@ module Aws::FMS
     #   <p>The resource tag value. To specify an empty string value, either don't provide this or specify it as "". </p>
     #   @return [String]
     class ResourceTag < Struct.new(
+      nil,
       :key,
       :value,
       keyword_init: true
@@ -3548,6 +3697,7 @@ module Aws::FMS
     #   <p>The violation details for a web ACL that's associated with at least one resource that's out of scope of the Firewall Manager policy. </p>
     #   @return [Types::WebACLHasOutOfScopeResourcesViolation]
     class ResourceViolation < Struct.new(
+      nil,
       :aws_vpc_security_group_violation,
       :aws_ec2_network_interface_violation,
       :aws_ec2_instance_violation,
@@ -3593,6 +3743,7 @@ module Aws::FMS
     #   <p>The route's target.</p>
     #   @return [String]
     class Route < Struct.new(
+      nil,
       :destination_type,
       :target_type,
       :destination,
@@ -3640,6 +3791,7 @@ module Aws::FMS
     #   <p>The routes in the route table associated with the Internet Gateway.</p>
     #   @return [Array<Types::Route>]
     class RouteHasOutOfScopeEndpointViolation < Struct.new(
+      nil,
       :subnet_id,
       :vpc_id,
       :route_table_id,
@@ -3671,6 +3823,7 @@ module Aws::FMS
     #   <p>Indicates if the current action is the default action.</p>
     #   @return [Boolean]
     class SecurityGroupRemediationAction < Struct.new(
+      nil,
       :remediation_action_type,
       :description,
       :remediation_result,
@@ -3705,6 +3858,7 @@ module Aws::FMS
     #   <p>The end of the port range for the TCP and UDP protocols, or an ICMP/ICMPv6 code. A value of <code>-1</code> indicates all ICMP/ICMPv6 codes.</p>
     #   @return [Integer]
     class SecurityGroupRuleDescription < Struct.new(
+      nil,
       :ipv4_range,
       :ipv6_range,
       :prefix_list_id,
@@ -3991,6 +4145,7 @@ module Aws::FMS
     #   <p>Contains the settings to configure a network ACL policy, a Network Firewall firewall policy deployment model, or a third-party firewall policy.</p>
     #   @return [Types::PolicyOption]
     class SecurityServicePolicyData < Struct.new(
+      nil,
       :type,
       :managed_service_data,
       :policy_option,
@@ -4036,6 +4191,7 @@ module Aws::FMS
     #            </p>
     #   @return [String]
     class StatefulEngineOptions < Struct.new(
+      nil,
       :rule_order,
       :stream_exception_policy,
       keyword_init: true
@@ -4067,6 +4223,7 @@ module Aws::FMS
     #   <p>The action that allows the policy owner to override the behavior of the rule group within a policy.</p>
     #   @return [Types::NetworkFirewallStatefulRuleGroupOverride]
     class StatefulRuleGroup < Struct.new(
+      nil,
       :rule_group_name,
       :resource_id,
       :priority,
@@ -4087,6 +4244,7 @@ module Aws::FMS
     #   <p>The priority of the rule group. Network Firewall evaluates the stateless rule groups in a firewall policy starting from the lowest priority setting. </p>
     #   @return [Integer]
     class StatelessRuleGroup < Struct.new(
+      nil,
       :rule_group_name,
       :resource_id,
       :priority,
@@ -4103,6 +4261,7 @@ module Aws::FMS
     #   <p>Part of the key:value pair that defines a tag. You can use a tag value to describe a specific value within a category, such as "companyA" or "companyB." Tag values are case-sensitive.  </p>
     #   @return [String]
     class Tag < Struct.new(
+      nil,
       :key,
       :value,
       keyword_init: true
@@ -4117,6 +4276,7 @@ module Aws::FMS
     #   <p>The tags to add to the resource.</p>
     #   @return [Array<Types::Tag>]
     class TagResourceRequest < Struct.new(
+      nil,
       :resource_arn,
       :tag_list,
       keyword_init: true
@@ -4125,6 +4285,7 @@ module Aws::FMS
     end
 
     class TagResourceResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -4138,6 +4299,7 @@ module Aws::FMS
     #   <p>The name of the specified firewall policy.</p>
     #   @return [String]
     class ThirdPartyFirewallFirewallPolicy < Struct.new(
+      nil,
       :firewall_policy_id,
       :firewall_policy_name,
       keyword_init: true
@@ -4162,6 +4324,7 @@ module Aws::FMS
     #   <p>The resource ID of the route table that should be associated with the subnet.</p>
     #   @return [String]
     class ThirdPartyFirewallMissingExpectedRouteTableViolation < Struct.new(
+      nil,
       :violation_target,
       :vpc,
       :availability_zone,
@@ -4186,6 +4349,7 @@ module Aws::FMS
     #   <p>The reason the resource is causing this violation, if a reason is available.</p>
     #   @return [String]
     class ThirdPartyFirewallMissingFirewallViolation < Struct.new(
+      nil,
       :violation_target,
       :vpc,
       :availability_zone,
@@ -4209,6 +4373,7 @@ module Aws::FMS
     #   <p>The reason the resource is causing the violation, if a reason is available.</p>
     #   @return [String]
     class ThirdPartyFirewallMissingSubnetViolation < Struct.new(
+      nil,
       :violation_target,
       :vpc,
       :availability_zone,
@@ -4223,6 +4388,7 @@ module Aws::FMS
     #   <p>Defines the deployment model to use for the third-party firewall policy.</p>
     #   @return [String]
     class ThirdPartyFirewallPolicy < Struct.new(
+      nil,
       :firewall_deployment_model,
       keyword_init: true
     )
@@ -4236,6 +4402,7 @@ module Aws::FMS
     #   <p>The keys of the tags to remove from the resource. </p>
     #   @return [Array<String>]
     class UntagResourceRequest < Struct.new(
+      nil,
       :resource_arn,
       :tag_keys,
       keyword_init: true
@@ -4244,6 +4411,7 @@ module Aws::FMS
     end
 
     class UntagResourceResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -4272,6 +4440,7 @@ module Aws::FMS
     #   <p>Brief description for the requested resource.</p>
     #   @return [String]
     class ViolationDetail < Struct.new(
+      nil,
       :policy_id,
       :member_account,
       :resource_id,
@@ -4292,6 +4461,7 @@ module Aws::FMS
     #   <p>Information about the problems that Firewall Manager encountered with the web ACL configuration. </p>
     #   @return [String]
     class WebACLHasIncompatibleConfigurationViolation < Struct.new(
+      nil,
       :web_acl_arn,
       :description,
       keyword_init: true
@@ -4307,6 +4477,7 @@ module Aws::FMS
     #   <p>An array of Amazon Resource Name (ARN) for the resources that are out of scope of the policy and are associated with the web ACL. </p>
     #   @return [Array<String>]
     class WebACLHasOutOfScopeResourcesViolation < Struct.new(
+      nil,
       :web_acl_arn,
       :out_of_scope_resource_list,
       keyword_init: true

@@ -41,6 +41,7 @@ module Aws::DeviceFarm
     #                   Farm FAQs</i>.</p>
     #   @return [Boolean]
     class AccountSettings < Struct.new(
+      nil,
       :aws_account_number,
       :unmetered_devices,
       :unmetered_remote_access_devices,
@@ -59,6 +60,7 @@ module Aws::DeviceFarm
     #   <p>Any additional information about the exception.</p>
     #   @return [String]
     class ArgumentException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -150,6 +152,7 @@ module Aws::DeviceFarm
     #               file.</p>
     #   @return [String]
     class Artifact < Struct.new(
+      nil,
       :arn,
       :name,
       :type,
@@ -173,6 +176,7 @@ module Aws::DeviceFarm
     #               GHz CPU is expressed as 1200000000.</p>
     #   @return [Float]
     class CPU < Struct.new(
+      nil,
       :frequency,
       :architecture,
       :clock,
@@ -185,6 +189,7 @@ module Aws::DeviceFarm
     # @!attribute message
     #   @return [String]
     class CannotDeleteException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -214,6 +219,7 @@ module Aws::DeviceFarm
     #   <p>The number of skipped entities.</p>
     #   @return [Integer]
     class Counters < Struct.new(
+      nil,
       :total,
       :passed,
       :failed,
@@ -248,6 +254,7 @@ module Aws::DeviceFarm
     #               by running tests.</p>
     #   @return [Integer]
     class CreateDevicePoolRequest < Struct.new(
+      nil,
       :project_arn,
       :name,
       :description,
@@ -263,6 +270,7 @@ module Aws::DeviceFarm
     #   <p>The newly created device pool.</p>
     #   @return [Types::DevicePool]
     class CreateDevicePoolResult < Struct.new(
+      nil,
       :device_pool,
       keyword_init: true
     )
@@ -290,6 +298,7 @@ module Aws::DeviceFarm
     #                   <code>true</code>.</p>
     #   @return [Boolean]
     class CreateInstanceProfileRequest < Struct.new(
+      nil,
       :name,
       :description,
       :package_cleanup,
@@ -304,6 +313,7 @@ module Aws::DeviceFarm
     #   <p>An object that contains information about your instance profile.</p>
     #   @return [Types::InstanceProfile]
     class CreateInstanceProfileResult < Struct.new(
+      nil,
       :instance_profile,
       keyword_init: true
     )
@@ -355,6 +365,7 @@ module Aws::DeviceFarm
     #   <p>Proportion of received packets that fail to arrive from 0 to 100 percent.</p>
     #   @return [Integer]
     class CreateNetworkProfileRequest < Struct.new(
+      nil,
       :project_arn,
       :name,
       :description,
@@ -377,6 +388,7 @@ module Aws::DeviceFarm
     #               request.</p>
     #   @return [Types::NetworkProfile]
     class CreateNetworkProfileResult < Struct.new(
+      nil,
       :network_profile,
       keyword_init: true
     )
@@ -395,6 +407,7 @@ module Aws::DeviceFarm
     #   <p>The VPC security groups and subnets that are attached to a project.</p>
     #   @return [Types::VpcConfig]
     class CreateProjectRequest < Struct.new(
+      nil,
       :name,
       :default_job_timeout_minutes,
       :vpc_config,
@@ -408,6 +421,7 @@ module Aws::DeviceFarm
     #   <p>The newly created project.</p>
     #   @return [Types::Project]
     class CreateProjectResult < Struct.new(
+      nil,
       :project,
       keyword_init: true
     )
@@ -426,6 +440,7 @@ module Aws::DeviceFarm
     #   <p>The device proxy to be configured on the device for the remote access session.</p>
     #   @return [Types::DeviceProxy]
     class CreateRemoteAccessSessionConfiguration < Struct.new(
+      nil,
       :billing_method,
       :vpce_configuration_arns,
       :device_proxy,
@@ -506,6 +521,7 @@ module Aws::DeviceFarm
     #            </p>
     #   @return [Boolean]
     class CreateRemoteAccessSessionRequest < Struct.new(
+      nil,
       :project_arn,
       :device_arn,
       :instance_arn,
@@ -530,6 +546,7 @@ module Aws::DeviceFarm
     #               remote access session is sent.</p>
     #   @return [Types::RemoteAccessSession]
     class CreateRemoteAccessSessionResult < Struct.new(
+      nil,
       :remote_access_session,
       keyword_init: true
     )
@@ -546,6 +563,7 @@ module Aws::DeviceFarm
     #   <p>The VPC security groups and subnets that are attached to a project.</p>
     #   @return [Types::TestGridVpcConfig]
     class CreateTestGridProjectRequest < Struct.new(
+      nil,
       :name,
       :description,
       :vpc_config,
@@ -558,6 +576,7 @@ module Aws::DeviceFarm
     #   <p>ARN of the Selenium testing project that was created.</p>
     #   @return [Types::TestGridProject]
     class CreateTestGridProjectResult < Struct.new(
+      nil,
       :test_grid_project,
       keyword_init: true
     )
@@ -572,6 +591,7 @@ module Aws::DeviceFarm
     #   <p>Lifetime, in seconds, of the URL.</p>
     #   @return [Integer]
     class CreateTestGridUrlRequest < Struct.new(
+      nil,
       :project_arn,
       :expires_in_seconds,
       keyword_init: true
@@ -587,6 +607,7 @@ module Aws::DeviceFarm
     #   <p>The number of seconds the URL from <a>CreateTestGridUrlResult$url</a> stays active.</p>
     #   @return [Time]
     class CreateTestGridUrlResult < Struct.new(
+      nil,
       :url,
       :expires,
       keyword_init: true
@@ -703,6 +724,7 @@ module Aws::DeviceFarm
     #   <p>The upload's content type (for example, <code>application/octet-stream</code>).</p>
     #   @return [String]
     class CreateUploadRequest < Struct.new(
+      nil,
       :project_arn,
       :name,
       :type,
@@ -717,6 +739,7 @@ module Aws::DeviceFarm
     #   <p>The newly created upload.</p>
     #   @return [Types::Upload]
     class CreateUploadResult < Struct.new(
+      nil,
       :upload,
       keyword_init: true
     )
@@ -738,6 +761,7 @@ module Aws::DeviceFarm
     #   <p>An optional description that provides details about your VPC endpoint configuration.</p>
     #   @return [String]
     class CreateVPCEConfigurationRequest < Struct.new(
+      nil,
       :vpce_configuration_name,
       :vpce_service_name,
       :service_dns_name,
@@ -751,6 +775,7 @@ module Aws::DeviceFarm
     #   <p>An object that contains information about your VPC endpoint configuration.</p>
     #   @return [Types::VPCEConfiguration]
     class CreateVPCEConfigurationResult < Struct.new(
+      nil,
       :vpce_configuration,
       keyword_init: true
     )
@@ -776,6 +801,7 @@ module Aws::DeviceFarm
     #               customer's tests are pulled from.</p>
     #   @return [Array<String>]
     class CustomerArtifactPaths < Struct.new(
+      nil,
       :ios_paths,
       :android_paths,
       :device_host_paths,
@@ -789,6 +815,7 @@ module Aws::DeviceFarm
     #   <p>Represents the Amazon Resource Name (ARN) of the Device Farm device pool to delete.</p>
     #   @return [String]
     class DeleteDevicePoolRequest < Struct.new(
+      nil,
       :arn,
       keyword_init: true
     )
@@ -797,6 +824,7 @@ module Aws::DeviceFarm
 
     # <p>Represents the result of a delete device pool request.</p>
     class DeleteDevicePoolResult < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -807,6 +835,7 @@ module Aws::DeviceFarm
     #               delete.</p>
     #   @return [String]
     class DeleteInstanceProfileRequest < Struct.new(
+      nil,
       :arn,
       keyword_init: true
     )
@@ -814,6 +843,7 @@ module Aws::DeviceFarm
     end
 
     class DeleteInstanceProfileResult < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -823,6 +853,7 @@ module Aws::DeviceFarm
     #   <p>The ARN of the network profile to delete.</p>
     #   @return [String]
     class DeleteNetworkProfileRequest < Struct.new(
+      nil,
       :arn,
       keyword_init: true
     )
@@ -830,6 +861,7 @@ module Aws::DeviceFarm
     end
 
     class DeleteNetworkProfileResult < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -840,6 +872,7 @@ module Aws::DeviceFarm
     #   <p>Represents the Amazon Resource Name (ARN) of the Device Farm project to delete.</p>
     #   @return [String]
     class DeleteProjectRequest < Struct.new(
+      nil,
       :arn,
       keyword_init: true
     )
@@ -848,6 +881,7 @@ module Aws::DeviceFarm
 
     # <p>Represents the result of a delete project request.</p>
     class DeleteProjectResult < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -859,6 +893,7 @@ module Aws::DeviceFarm
     #               access.</p>
     #   @return [String]
     class DeleteRemoteAccessSessionRequest < Struct.new(
+      nil,
       :arn,
       keyword_init: true
     )
@@ -868,6 +903,7 @@ module Aws::DeviceFarm
     # <p>The response from the server when a request is made to delete the remote access
     #             session.</p>
     class DeleteRemoteAccessSessionResult < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -878,6 +914,7 @@ module Aws::DeviceFarm
     #   <p>The Amazon Resource Name (ARN) for the run to delete.</p>
     #   @return [String]
     class DeleteRunRequest < Struct.new(
+      nil,
       :arn,
       keyword_init: true
     )
@@ -886,6 +923,7 @@ module Aws::DeviceFarm
 
     # <p>Represents the result of a delete run request.</p>
     class DeleteRunResult < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -895,6 +933,7 @@ module Aws::DeviceFarm
     #   <p>The ARN of the project to delete, from <a>CreateTestGridProject</a> or <a>ListTestGridProjects</a>.</p>
     #   @return [String]
     class DeleteTestGridProjectRequest < Struct.new(
+      nil,
       :project_arn,
       keyword_init: true
     )
@@ -902,6 +941,7 @@ module Aws::DeviceFarm
     end
 
     class DeleteTestGridProjectResult < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -912,6 +952,7 @@ module Aws::DeviceFarm
     #   <p>Represents the Amazon Resource Name (ARN) of the Device Farm upload to delete.</p>
     #   @return [String]
     class DeleteUploadRequest < Struct.new(
+      nil,
       :arn,
       keyword_init: true
     )
@@ -920,6 +961,7 @@ module Aws::DeviceFarm
 
     # <p>Represents the result of a delete upload request.</p>
     class DeleteUploadResult < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -930,6 +972,7 @@ module Aws::DeviceFarm
     #               delete.</p>
     #   @return [String]
     class DeleteVPCEConfigurationRequest < Struct.new(
+      nil,
       :arn,
       keyword_init: true
     )
@@ -937,6 +980,7 @@ module Aws::DeviceFarm
     end
 
     class DeleteVPCEConfigurationResult < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1029,6 +1073,7 @@ module Aws::DeviceFarm
     #   <p>Indicates how likely a device is available for a test run. Currently available in the <a>ListDevices</a> and GetDevice API methods.</p>
     #   @return [String]
     class Device < Struct.new(
+      nil,
       :arn,
       :name,
       :manufacturer,
@@ -1189,6 +1234,7 @@ module Aws::DeviceFarm
     #            </ul>
     #   @return [Array<String>]
     class DeviceFilter < Struct.new(
+      nil,
       :attribute,
       :operator,
       :values,
@@ -1217,6 +1263,7 @@ module Aws::DeviceFarm
     #   <p>A object that contains information about the instance profile.</p>
     #   @return [Types::InstanceProfile]
     class DeviceInstance < Struct.new(
+      nil,
       :arn,
       :device_arn,
       :labels,
@@ -1243,6 +1290,7 @@ module Aws::DeviceFarm
     #               to run tests.</p>
     #   @return [Float]
     class DeviceMinutes < Struct.new(
+      nil,
       :total,
       :metered,
       :unmetered,
@@ -1287,6 +1335,7 @@ module Aws::DeviceFarm
     #               by running tests.</p>
     #   @return [Integer]
     class DevicePool < Struct.new(
+      nil,
       :arn,
       :name,
       :description,
@@ -1309,6 +1358,7 @@ module Aws::DeviceFarm
     #   <p>Information about the compatibility.</p>
     #   @return [Array<Types::IncompatibilityMessage>]
     class DevicePoolCompatibilityResult < Struct.new(
+      nil,
       :device,
       :compatible,
       :incompatibility_messages,
@@ -1325,6 +1375,7 @@ module Aws::DeviceFarm
     #   <p>The port number on which the http/s proxy is listening.</p>
     #   @return [Integer]
     class DeviceProxy < Struct.new(
+      nil,
       :host,
       :port,
       keyword_init: true
@@ -1467,6 +1518,7 @@ module Aws::DeviceFarm
     #   <p>The maximum number of devices to be included in a test run.</p>
     #   @return [Integer]
     class DeviceSelectionConfiguration < Struct.new(
+      nil,
       :filters,
       :max_devices,
       keyword_init: true
@@ -1487,6 +1539,7 @@ module Aws::DeviceFarm
     #               run.</p>
     #   @return [Integer]
     class DeviceSelectionResult < Struct.new(
+      nil,
       :filters,
       :matched_devices_count,
       :max_devices,
@@ -1516,6 +1569,7 @@ module Aws::DeviceFarm
     #                   Farm FAQs</i>.</p>
     #   @return [Boolean]
     class ExecutionConfiguration < Struct.new(
+      nil,
       :job_timeout_minutes,
       :accounts_cleanup,
       :app_packages_cleanup,
@@ -1528,6 +1582,7 @@ module Aws::DeviceFarm
 
     # <p>Represents the request sent to retrieve the account settings.</p>
     class GetAccountSettingsRequest < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1539,6 +1594,7 @@ module Aws::DeviceFarm
     #   <p>The account settings.</p>
     #   @return [Types::AccountSettings]
     class GetAccountSettingsResult < Struct.new(
+      nil,
       :account_settings,
       keyword_init: true
     )
@@ -1550,6 +1606,7 @@ module Aws::DeviceFarm
     #               about.</p>
     #   @return [String]
     class GetDeviceInstanceRequest < Struct.new(
+      nil,
       :arn,
       keyword_init: true
     )
@@ -1560,6 +1617,7 @@ module Aws::DeviceFarm
     #   <p>An object that contains information about your device instance.</p>
     #   @return [Types::DeviceInstance]
     class GetDeviceInstanceResult < Struct.new(
+      nil,
       :device_instance,
       keyword_init: true
     )
@@ -1632,6 +1690,7 @@ module Aws::DeviceFarm
     #               device pool compatibility.</p>
     #   @return [String]
     class GetDevicePoolCompatibilityRequest < Struct.new(
+      nil,
       :device_pool_arn,
       :app_arn,
       :test_type,
@@ -1651,6 +1710,7 @@ module Aws::DeviceFarm
     #   <p>Information about incompatible devices.</p>
     #   @return [Array<Types::DevicePoolCompatibilityResult>]
     class GetDevicePoolCompatibilityResult < Struct.new(
+      nil,
       :compatible_devices,
       :incompatible_devices,
       keyword_init: true
@@ -1663,6 +1723,7 @@ module Aws::DeviceFarm
     #   <p>The device pool's ARN.</p>
     #   @return [String]
     class GetDevicePoolRequest < Struct.new(
+      nil,
       :arn,
       keyword_init: true
     )
@@ -1674,6 +1735,7 @@ module Aws::DeviceFarm
     #   <p>An object that contains information about the requested device pool.</p>
     #   @return [Types::DevicePool]
     class GetDevicePoolResult < Struct.new(
+      nil,
       :device_pool,
       keyword_init: true
     )
@@ -1685,6 +1747,7 @@ module Aws::DeviceFarm
     #   <p>The device type's ARN.</p>
     #   @return [String]
     class GetDeviceRequest < Struct.new(
+      nil,
       :arn,
       keyword_init: true
     )
@@ -1696,6 +1759,7 @@ module Aws::DeviceFarm
     #   <p>An object that contains information about the requested device.</p>
     #   @return [Types::Device]
     class GetDeviceResult < Struct.new(
+      nil,
       :device,
       keyword_init: true
     )
@@ -1706,6 +1770,7 @@ module Aws::DeviceFarm
     #   <p>The Amazon Resource Name (ARN) of an instance profile.</p>
     #   @return [String]
     class GetInstanceProfileRequest < Struct.new(
+      nil,
       :arn,
       keyword_init: true
     )
@@ -1716,6 +1781,7 @@ module Aws::DeviceFarm
     #   <p>An object that contains information about an instance profile.</p>
     #   @return [Types::InstanceProfile]
     class GetInstanceProfileResult < Struct.new(
+      nil,
       :instance_profile,
       keyword_init: true
     )
@@ -1727,6 +1793,7 @@ module Aws::DeviceFarm
     #   <p>The job's ARN.</p>
     #   @return [String]
     class GetJobRequest < Struct.new(
+      nil,
       :arn,
       keyword_init: true
     )
@@ -1738,6 +1805,7 @@ module Aws::DeviceFarm
     #   <p>An object that contains information about the requested job.</p>
     #   @return [Types::Job]
     class GetJobResult < Struct.new(
+      nil,
       :job,
       keyword_init: true
     )
@@ -1748,6 +1816,7 @@ module Aws::DeviceFarm
     #   <p>The ARN of the network profile to return information about.</p>
     #   @return [String]
     class GetNetworkProfileRequest < Struct.new(
+      nil,
       :arn,
       keyword_init: true
     )
@@ -1758,6 +1827,7 @@ module Aws::DeviceFarm
     #   <p>The network profile.</p>
     #   @return [Types::NetworkProfile]
     class GetNetworkProfileResult < Struct.new(
+      nil,
       :network_profile,
       keyword_init: true
     )
@@ -1771,6 +1841,7 @@ module Aws::DeviceFarm
     #               be used to return the next set of items in the list.</p>
     #   @return [String]
     class GetOfferingStatusRequest < Struct.new(
+      nil,
       :next_token,
       keyword_init: true
     )
@@ -1789,6 +1860,7 @@ module Aws::DeviceFarm
     #               be used to return the next set of items in the list.</p>
     #   @return [String]
     class GetOfferingStatusResult < Struct.new(
+      nil,
       :current,
       :next_period,
       :next_token,
@@ -1802,6 +1874,7 @@ module Aws::DeviceFarm
     #   <p>The project's ARN.</p>
     #   @return [String]
     class GetProjectRequest < Struct.new(
+      nil,
       :arn,
       keyword_init: true
     )
@@ -1813,6 +1886,7 @@ module Aws::DeviceFarm
     #   <p>The project to get information about.</p>
     #   @return [Types::Project]
     class GetProjectResult < Struct.new(
+      nil,
       :project,
       keyword_init: true
     )
@@ -1826,6 +1900,7 @@ module Aws::DeviceFarm
     #               get session information.</p>
     #   @return [String]
     class GetRemoteAccessSessionRequest < Struct.new(
+      nil,
       :arn,
       keyword_init: true
     )
@@ -1839,6 +1914,7 @@ module Aws::DeviceFarm
     #               session.</p>
     #   @return [Types::RemoteAccessSession]
     class GetRemoteAccessSessionResult < Struct.new(
+      nil,
       :remote_access_session,
       keyword_init: true
     )
@@ -1850,6 +1926,7 @@ module Aws::DeviceFarm
     #   <p>The run's ARN.</p>
     #   @return [String]
     class GetRunRequest < Struct.new(
+      nil,
       :arn,
       keyword_init: true
     )
@@ -1861,6 +1938,7 @@ module Aws::DeviceFarm
     #   <p>The run to get results from.</p>
     #   @return [Types::Run]
     class GetRunResult < Struct.new(
+      nil,
       :run,
       keyword_init: true
     )
@@ -1872,6 +1950,7 @@ module Aws::DeviceFarm
     #   <p>The suite's ARN.</p>
     #   @return [String]
     class GetSuiteRequest < Struct.new(
+      nil,
       :arn,
       keyword_init: true
     )
@@ -1883,6 +1962,7 @@ module Aws::DeviceFarm
     #   <p>A collection of one or more tests.</p>
     #   @return [Types::Suite]
     class GetSuiteResult < Struct.new(
+      nil,
       :suite,
       keyword_init: true
     )
@@ -1893,6 +1973,7 @@ module Aws::DeviceFarm
     #   <p>The ARN of the Selenium testing project, from either <a>CreateTestGridProject</a> or <a>ListTestGridProjects</a>.</p>
     #   @return [String]
     class GetTestGridProjectRequest < Struct.new(
+      nil,
       :project_arn,
       keyword_init: true
     )
@@ -1903,6 +1984,7 @@ module Aws::DeviceFarm
     #   <p>A <a>TestGridProject</a>.</p>
     #   @return [Types::TestGridProject]
     class GetTestGridProjectResult < Struct.new(
+      nil,
       :test_grid_project,
       keyword_init: true
     )
@@ -1919,6 +2001,7 @@ module Aws::DeviceFarm
     #   <p>An ARN that uniquely identifies a <a>TestGridSession</a>.</p>
     #   @return [String]
     class GetTestGridSessionRequest < Struct.new(
+      nil,
       :project_arn,
       :session_id,
       :session_arn,
@@ -1931,6 +2014,7 @@ module Aws::DeviceFarm
     #   <p>The <a>TestGridSession</a> that was requested.</p>
     #   @return [Types::TestGridSession]
     class GetTestGridSessionResult < Struct.new(
+      nil,
       :test_grid_session,
       keyword_init: true
     )
@@ -1942,6 +2026,7 @@ module Aws::DeviceFarm
     #   <p>The test's ARN.</p>
     #   @return [String]
     class GetTestRequest < Struct.new(
+      nil,
       :arn,
       keyword_init: true
     )
@@ -1953,6 +2038,7 @@ module Aws::DeviceFarm
     #   <p>A test condition that is evaluated.</p>
     #   @return [Types::Test]
     class GetTestResult < Struct.new(
+      nil,
       :test,
       keyword_init: true
     )
@@ -1964,6 +2050,7 @@ module Aws::DeviceFarm
     #   <p>The upload's ARN.</p>
     #   @return [String]
     class GetUploadRequest < Struct.new(
+      nil,
       :arn,
       keyword_init: true
     )
@@ -1976,6 +2063,7 @@ module Aws::DeviceFarm
     #               uploaded.</p>
     #   @return [Types::Upload]
     class GetUploadResult < Struct.new(
+      nil,
       :upload,
       keyword_init: true
     )
@@ -1987,6 +2075,7 @@ module Aws::DeviceFarm
     #               describe.</p>
     #   @return [String]
     class GetVPCEConfigurationRequest < Struct.new(
+      nil,
       :arn,
       keyword_init: true
     )
@@ -1997,6 +2086,7 @@ module Aws::DeviceFarm
     #   <p>An object that contains information about your VPC endpoint configuration.</p>
     #   @return [Types::VPCEConfiguration]
     class GetVPCEConfigurationResult < Struct.new(
+      nil,
       :vpce_configuration,
       keyword_init: true
     )
@@ -2008,6 +2098,7 @@ module Aws::DeviceFarm
     #   <p>Any additional information about the exception.</p>
     #   @return [String]
     class IdempotencyException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -2043,6 +2134,7 @@ module Aws::DeviceFarm
     #            </ul>
     #   @return [String]
     class IncompatibilityMessage < Struct.new(
+      nil,
       :message,
       :type,
       keyword_init: true
@@ -2060,6 +2152,7 @@ module Aws::DeviceFarm
     #   <p>The ARN of the app about which you are requesting information.</p>
     #   @return [String]
     class InstallToRemoteAccessSessionRequest < Struct.new(
+      nil,
       :remote_access_session_arn,
       :app_arn,
       keyword_init: true
@@ -2073,6 +2166,7 @@ module Aws::DeviceFarm
     #   <p>An app to upload or that has been uploaded.</p>
     #   @return [Types::Upload]
     class InstallToRemoteAccessSessionResult < Struct.new(
+      nil,
       :app_upload,
       keyword_init: true
     )
@@ -2104,6 +2198,7 @@ module Aws::DeviceFarm
     #   <p>The description of the instance profile.</p>
     #   @return [String]
     class InstanceProfile < Struct.new(
+      nil,
       :arn,
       :package_cleanup,
       :exclude_app_packages_from_cleanup,
@@ -2120,6 +2215,7 @@ module Aws::DeviceFarm
     # @!attribute message
     #   @return [String]
     class InternalServiceException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -2131,6 +2227,7 @@ module Aws::DeviceFarm
     # @!attribute message
     #   @return [String]
     class InvalidOperationException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -2283,6 +2380,7 @@ module Aws::DeviceFarm
     #   <p>This value is set to true if video capture is enabled. Otherwise, it is set to false.</p>
     #   @return [Boolean]
     class Job < Struct.new(
+      nil,
       :arn,
       :name,
       :type,
@@ -2308,6 +2406,7 @@ module Aws::DeviceFarm
     #   <p>Any additional information about the exception.</p>
     #   @return [String]
     class LimitExceededException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -2338,6 +2437,7 @@ module Aws::DeviceFarm
     #               be used to return the next set of items in the list.</p>
     #   @return [String]
     class ListArtifactsRequest < Struct.new(
+      nil,
       :arn,
       :type,
       :next_token,
@@ -2356,6 +2456,7 @@ module Aws::DeviceFarm
     #               list.</p>
     #   @return [String]
     class ListArtifactsResult < Struct.new(
+      nil,
       :artifacts,
       :next_token,
       keyword_init: true
@@ -2371,6 +2472,7 @@ module Aws::DeviceFarm
     #               used to return the next set of items in the list.</p>
     #   @return [String]
     class ListDeviceInstancesRequest < Struct.new(
+      nil,
       :max_results,
       :next_token,
       keyword_init: true
@@ -2386,6 +2488,7 @@ module Aws::DeviceFarm
     #               set of items in the list.</p>
     #   @return [String]
     class ListDeviceInstancesResult < Struct.new(
+      nil,
       :device_instances,
       :next_token,
       keyword_init: true
@@ -2416,6 +2519,7 @@ module Aws::DeviceFarm
     #               be used to return the next set of items in the list.</p>
     #   @return [String]
     class ListDevicePoolsRequest < Struct.new(
+      nil,
       :arn,
       :type,
       :next_token,
@@ -2434,6 +2538,7 @@ module Aws::DeviceFarm
     #               list.</p>
     #   @return [String]
     class ListDevicePoolsResult < Struct.new(
+      nil,
       :device_pools,
       :next_token,
       keyword_init: true
@@ -2543,6 +2648,7 @@ module Aws::DeviceFarm
     #            </ul>
     #   @return [Array<Types::DeviceFilter>]
     class ListDevicesRequest < Struct.new(
+      nil,
       :arn,
       :next_token,
       :filters,
@@ -2561,6 +2667,7 @@ module Aws::DeviceFarm
     #               list.</p>
     #   @return [String]
     class ListDevicesResult < Struct.new(
+      nil,
       :devices,
       :next_token,
       keyword_init: true
@@ -2576,6 +2683,7 @@ module Aws::DeviceFarm
     #               used to return the next set of items in the list.</p>
     #   @return [String]
     class ListInstanceProfilesRequest < Struct.new(
+      nil,
       :max_results,
       :next_token,
       keyword_init: true
@@ -2591,6 +2699,7 @@ module Aws::DeviceFarm
     #               set of items in the list.</p>
     #   @return [String]
     class ListInstanceProfilesResult < Struct.new(
+      nil,
       :instance_profiles,
       :next_token,
       keyword_init: true
@@ -2607,6 +2716,7 @@ module Aws::DeviceFarm
     #               be used to return the next set of items in the list.</p>
     #   @return [String]
     class ListJobsRequest < Struct.new(
+      nil,
       :arn,
       :next_token,
       keyword_init: true
@@ -2624,6 +2734,7 @@ module Aws::DeviceFarm
     #               list.</p>
     #   @return [String]
     class ListJobsResult < Struct.new(
+      nil,
       :jobs,
       :next_token,
       keyword_init: true
@@ -2643,6 +2754,7 @@ module Aws::DeviceFarm
     #               be used to return the next set of items in the list.</p>
     #   @return [String]
     class ListNetworkProfilesRequest < Struct.new(
+      nil,
       :arn,
       :type,
       :next_token,
@@ -2659,6 +2771,7 @@ module Aws::DeviceFarm
     #               be used to return the next set of items in the list.</p>
     #   @return [String]
     class ListNetworkProfilesResult < Struct.new(
+      nil,
       :network_profiles,
       :next_token,
       keyword_init: true
@@ -2671,6 +2784,7 @@ module Aws::DeviceFarm
     #               be used to return the next set of items in the list.</p>
     #   @return [String]
     class ListOfferingPromotionsRequest < Struct.new(
+      nil,
       :next_token,
       keyword_init: true
     )
@@ -2685,6 +2799,7 @@ module Aws::DeviceFarm
     #               of items in the list.</p>
     #   @return [String]
     class ListOfferingPromotionsResult < Struct.new(
+      nil,
       :offering_promotions,
       :next_token,
       keyword_init: true
@@ -2698,6 +2813,7 @@ module Aws::DeviceFarm
     #               be used to return the next set of items in the list.</p>
     #   @return [String]
     class ListOfferingTransactionsRequest < Struct.new(
+      nil,
       :next_token,
       keyword_init: true
     )
@@ -2714,6 +2830,7 @@ module Aws::DeviceFarm
     #               be used to return the next set of items in the list.</p>
     #   @return [String]
     class ListOfferingTransactionsResult < Struct.new(
+      nil,
       :offering_transactions,
       :next_token,
       keyword_init: true
@@ -2727,6 +2844,7 @@ module Aws::DeviceFarm
     #               be used to return the next set of items in the list.</p>
     #   @return [String]
     class ListOfferingsRequest < Struct.new(
+      nil,
       :next_token,
       keyword_init: true
     )
@@ -2742,6 +2860,7 @@ module Aws::DeviceFarm
     #               be used to return the next set of items in the list.</p>
     #   @return [String]
     class ListOfferingsResult < Struct.new(
+      nil,
       :offerings,
       :next_token,
       keyword_init: true
@@ -2760,6 +2879,7 @@ module Aws::DeviceFarm
     #               be used to return the next set of items in the list.</p>
     #   @return [String]
     class ListProjectsRequest < Struct.new(
+      nil,
       :arn,
       :next_token,
       keyword_init: true
@@ -2777,6 +2897,7 @@ module Aws::DeviceFarm
     #               list.</p>
     #   @return [String]
     class ListProjectsResult < Struct.new(
+      nil,
       :projects,
       :next_token,
       keyword_init: true
@@ -2795,6 +2916,7 @@ module Aws::DeviceFarm
     #               be used to return the next set of items in the list.</p>
     #   @return [String]
     class ListRemoteAccessSessionsRequest < Struct.new(
+      nil,
       :arn,
       :next_token,
       keyword_init: true
@@ -2813,6 +2935,7 @@ module Aws::DeviceFarm
     #               be used to return the next set of items in the list.</p>
     #   @return [String]
     class ListRemoteAccessSessionsResult < Struct.new(
+      nil,
       :remote_access_sessions,
       :next_token,
       keyword_init: true
@@ -2830,6 +2953,7 @@ module Aws::DeviceFarm
     #               be used to return the next set of items in the list.</p>
     #   @return [String]
     class ListRunsRequest < Struct.new(
+      nil,
       :arn,
       :next_token,
       keyword_init: true
@@ -2847,6 +2971,7 @@ module Aws::DeviceFarm
     #               list.</p>
     #   @return [String]
     class ListRunsResult < Struct.new(
+      nil,
       :runs,
       :next_token,
       keyword_init: true
@@ -2863,6 +2988,7 @@ module Aws::DeviceFarm
     #               be used to return the next set of items in the list.</p>
     #   @return [String]
     class ListSamplesRequest < Struct.new(
+      nil,
       :arn,
       :next_token,
       keyword_init: true
@@ -2880,6 +3006,7 @@ module Aws::DeviceFarm
     #               list.</p>
     #   @return [String]
     class ListSamplesResult < Struct.new(
+      nil,
       :samples,
       :next_token,
       keyword_init: true
@@ -2896,6 +3023,7 @@ module Aws::DeviceFarm
     #               be used to return the next set of items in the list.</p>
     #   @return [String]
     class ListSuitesRequest < Struct.new(
+      nil,
       :arn,
       :next_token,
       keyword_init: true
@@ -2913,6 +3041,7 @@ module Aws::DeviceFarm
     #               list.</p>
     #   @return [String]
     class ListSuitesResult < Struct.new(
+      nil,
       :suites,
       :next_token,
       keyword_init: true
@@ -2928,6 +3057,7 @@ module Aws::DeviceFarm
     #               <code>VPCE_CONFIGURATION</code>.</p>
     #   @return [String]
     class ListTagsForResourceRequest < Struct.new(
+      nil,
       :resource_arn,
       keyword_init: true
     )
@@ -2939,6 +3069,7 @@ module Aws::DeviceFarm
     #               character length of 128 characters. Tag values can have a maximum length of 256 characters.</p>
     #   @return [Array<Types::Tag>]
     class ListTagsForResourceResponse < Struct.new(
+      nil,
       :tags,
       keyword_init: true
     )
@@ -2952,6 +3083,7 @@ module Aws::DeviceFarm
     #   <p>From a response, used to continue a paginated listing. </p>
     #   @return [String]
     class ListTestGridProjectsRequest < Struct.new(
+      nil,
       :max_result,
       :next_token,
       keyword_init: true
@@ -2967,6 +3099,7 @@ module Aws::DeviceFarm
     #            request.</p>
     #   @return [String]
     class ListTestGridProjectsResult < Struct.new(
+      nil,
       :test_grid_projects,
       :next_token,
       keyword_init: true
@@ -2984,6 +3117,7 @@ module Aws::DeviceFarm
     #   <p>Pagination token.</p>
     #   @return [String]
     class ListTestGridSessionActionsRequest < Struct.new(
+      nil,
       :session_arn,
       :max_result,
       :next_token,
@@ -2999,6 +3133,7 @@ module Aws::DeviceFarm
     #   <p>Pagination token.</p>
     #   @return [String]
     class ListTestGridSessionActionsResult < Struct.new(
+      nil,
       :actions,
       :next_token,
       keyword_init: true
@@ -3019,6 +3154,7 @@ module Aws::DeviceFarm
     #   <p>Pagination token.</p>
     #   @return [String]
     class ListTestGridSessionArtifactsRequest < Struct.new(
+      nil,
       :session_arn,
       :type,
       :max_result,
@@ -3035,6 +3171,7 @@ module Aws::DeviceFarm
     #   <p>Pagination token.</p>
     #   @return [String]
     class ListTestGridSessionArtifactsResult < Struct.new(
+      nil,
       :artifacts,
       :next_token,
       keyword_init: true
@@ -3067,6 +3204,7 @@ module Aws::DeviceFarm
     #   <p>Pagination token.</p>
     #   @return [String]
     class ListTestGridSessionsRequest < Struct.new(
+      nil,
       :project_arn,
       :status,
       :creation_time_after,
@@ -3087,6 +3225,7 @@ module Aws::DeviceFarm
     #   <p>Pagination token.</p>
     #   @return [String]
     class ListTestGridSessionsResult < Struct.new(
+      nil,
       :test_grid_sessions,
       :next_token,
       keyword_init: true
@@ -3103,6 +3242,7 @@ module Aws::DeviceFarm
     #               be used to return the next set of items in the list.</p>
     #   @return [String]
     class ListTestsRequest < Struct.new(
+      nil,
       :arn,
       :next_token,
       keyword_init: true
@@ -3120,6 +3260,7 @@ module Aws::DeviceFarm
     #               list.</p>
     #   @return [String]
     class ListTestsResult < Struct.new(
+      nil,
       :tests,
       :next_token,
       keyword_init: true
@@ -3136,6 +3277,7 @@ module Aws::DeviceFarm
     #               be used to return the next set of items in the list.</p>
     #   @return [String]
     class ListUniqueProblemsRequest < Struct.new(
+      nil,
       :arn,
       :next_token,
       keyword_init: true
@@ -3177,6 +3319,7 @@ module Aws::DeviceFarm
     #               list.</p>
     #   @return [String]
     class ListUniqueProblemsResult < Struct.new(
+      nil,
       :unique_problems,
       :next_token,
       keyword_init: true
@@ -3287,6 +3430,7 @@ module Aws::DeviceFarm
     #               be used to return the next set of items in the list.</p>
     #   @return [String]
     class ListUploadsRequest < Struct.new(
+      nil,
       :arn,
       :type,
       :next_token,
@@ -3305,6 +3449,7 @@ module Aws::DeviceFarm
     #               list.</p>
     #   @return [String]
     class ListUploadsResult < Struct.new(
+      nil,
       :uploads,
       :next_token,
       keyword_init: true
@@ -3320,6 +3465,7 @@ module Aws::DeviceFarm
     #               used to return the next set of items in the list.</p>
     #   @return [String]
     class ListVPCEConfigurationsRequest < Struct.new(
+      nil,
       :max_results,
       :next_token,
       keyword_init: true
@@ -3336,6 +3482,7 @@ module Aws::DeviceFarm
     #               used to return the next set of items in the list.</p>
     #   @return [String]
     class ListVPCEConfigurationsResult < Struct.new(
+      nil,
       :vpce_configurations,
       :next_token,
       keyword_init: true
@@ -3353,6 +3500,7 @@ module Aws::DeviceFarm
     #   <p>The longitude.</p>
     #   @return [Float]
     class Location < Struct.new(
+      nil,
       :latitude,
       :longitude,
       keyword_init: true
@@ -3368,6 +3516,7 @@ module Aws::DeviceFarm
     #   <p>The currency code of a monetary amount. For example, <code>USD</code> means U.S. dollars.</p>
     #   @return [String]
     class MonetaryAmount < Struct.new(
+      nil,
       :amount,
       :currency_code,
       keyword_init: true
@@ -3420,6 +3569,7 @@ module Aws::DeviceFarm
     #   <p>Proportion of received packets that fail to arrive from 0 to 100 percent.</p>
     #   @return [Integer]
     class NetworkProfile < Struct.new(
+      nil,
       :arn,
       :name,
       :description,
@@ -3449,6 +3599,7 @@ module Aws::DeviceFarm
     #   <p>The HTTP response code of a Not Eligible exception.</p>
     #   @return [String]
     class NotEligibleException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -3460,6 +3611,7 @@ module Aws::DeviceFarm
     #   <p>Any additional information about the exception.</p>
     #   @return [String]
     class NotFoundException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -3483,6 +3635,7 @@ module Aws::DeviceFarm
     #   <p>Specifies whether there are recurring charges for the offering.</p>
     #   @return [Array<Types::RecurringCharge>]
     class Offering < Struct.new(
+      nil,
       :id,
       :description,
       :type,
@@ -3501,6 +3654,7 @@ module Aws::DeviceFarm
     #   <p>A string that describes the offering promotion.</p>
     #   @return [String]
     class OfferingPromotion < Struct.new(
+      nil,
       :id,
       :description,
       keyword_init: true
@@ -3522,6 +3676,7 @@ module Aws::DeviceFarm
     #   <p>The date on which the offering is effective.</p>
     #   @return [Time]
     class OfferingStatus < Struct.new(
+      nil,
       :type,
       :offering,
       :quantity,
@@ -3548,6 +3703,7 @@ module Aws::DeviceFarm
     #   <p>The cost of an offering transaction.</p>
     #   @return [Types::MonetaryAmount]
     class OfferingTransaction < Struct.new(
+      nil,
       :offering_status,
       :transaction_id,
       :offering_promotion_id,
@@ -3605,6 +3761,7 @@ module Aws::DeviceFarm
     #   <p>A message about the problem's result.</p>
     #   @return [String]
     class Problem < Struct.new(
+      nil,
       :run,
       :job,
       :suite,
@@ -3625,6 +3782,7 @@ module Aws::DeviceFarm
     #   <p>The problem detail's name.</p>
     #   @return [String]
     class ProblemDetail < Struct.new(
+      nil,
       :arn,
       :name,
       keyword_init: true
@@ -3651,6 +3809,7 @@ module Aws::DeviceFarm
     #   <p>The VPC security groups and subnets that are attached to a project.</p>
     #   @return [Types::VpcConfig]
     class Project < Struct.new(
+      nil,
       :arn,
       :name,
       :default_job_timeout_minutes,
@@ -3672,6 +3831,7 @@ module Aws::DeviceFarm
     #   <p>The ID of the offering promotion to be applied to the purchase.</p>
     #   @return [String]
     class PurchaseOfferingRequest < Struct.new(
+      nil,
       :offering_id,
       :quantity,
       :offering_promotion_id,
@@ -3685,6 +3845,7 @@ module Aws::DeviceFarm
     #   <p>Represents the offering transaction for the purchase result.</p>
     #   @return [Types::OfferingTransaction]
     class PurchaseOfferingResult < Struct.new(
+      nil,
       :offering_transaction,
       keyword_init: true
     )
@@ -3706,6 +3867,7 @@ module Aws::DeviceFarm
     #   <p>True if GPS is enabled at the beginning of the test. Otherwise, false.</p>
     #   @return [Boolean]
     class Radios < Struct.new(
+      nil,
       :wifi,
       :bluetooth,
       :nfc,
@@ -3723,6 +3885,7 @@ module Aws::DeviceFarm
     #   <p>The frequency in which charges recur.</p>
     #   @return [String]
     class RecurringCharge < Struct.new(
+      nil,
       :cost,
       :frequency,
       keyword_init: true
@@ -3888,6 +4051,7 @@ module Aws::DeviceFarm
     #   <p>The device proxy configured for the remote access session.</p>
     #   @return [Types::DeviceProxy]
     class RemoteAccessSession < Struct.new(
+      nil,
       :arn,
       :name,
       :created,
@@ -3924,6 +4088,7 @@ module Aws::DeviceFarm
     #   <p>The quantity requested in an offering renewal.</p>
     #   @return [Integer]
     class RenewOfferingRequest < Struct.new(
+      nil,
       :offering_id,
       :quantity,
       keyword_init: true
@@ -3936,6 +4101,7 @@ module Aws::DeviceFarm
     #   <p>Represents the status of the offering transaction for the renewal.</p>
     #   @return [Types::OfferingTransaction]
     class RenewOfferingResult < Struct.new(
+      nil,
       :offering_transaction,
       keyword_init: true
     )
@@ -3951,6 +4117,7 @@ module Aws::DeviceFarm
     #   <p>The screen resolution's height, expressed in pixels.</p>
     #   @return [Integer]
     class Resolution < Struct.new(
+      nil,
       :width,
       :height,
       keyword_init: true
@@ -4069,6 +4236,7 @@ module Aws::DeviceFarm
     #   <p>The rule's value.</p>
     #   @return [String]
     class Rule < Struct.new(
+      nil,
       :attribute,
       :operator,
       :value,
@@ -4301,6 +4469,7 @@ module Aws::DeviceFarm
     #   <p>The VPC security groups and subnets that are attached to a project.</p>
     #   @return [Types::VpcConfig]
     class Run < Struct.new(
+      nil,
       :arn,
       :name,
       :type,
@@ -4410,6 +4579,7 @@ module Aws::DeviceFarm
     #               file.</p>
     #   @return [String]
     class Sample < Struct.new(
+      nil,
       :arn,
       :type,
       :url,
@@ -4459,6 +4629,7 @@ module Aws::DeviceFarm
     #           </note>
     #   @return [String]
     class ScheduleRunConfiguration < Struct.new(
+      nil,
       :extra_data_package_arn,
       :network_profile_arn,
       :locale,
@@ -4509,6 +4680,7 @@ module Aws::DeviceFarm
     #               (in minutes).</p>
     #   @return [Types::ExecutionConfiguration]
     class ScheduleRunRequest < Struct.new(
+      nil,
       :project_arn,
       :app_arn,
       :device_pool_arn,
@@ -4527,6 +4699,7 @@ module Aws::DeviceFarm
     #   <p>Information about the scheduled run.</p>
     #   @return [Types::Run]
     class ScheduleRunResult < Struct.new(
+      nil,
       :run,
       keyword_init: true
     )
@@ -4690,6 +4863,7 @@ module Aws::DeviceFarm
     #            </ul>
     #   @return [Hash<String, String>]
     class ScheduleRunTest < Struct.new(
+      nil,
       :type,
       :test_package_arn,
       :test_spec_arn,
@@ -4705,6 +4879,7 @@ module Aws::DeviceFarm
     #   <p>Any additional information about the exception.</p>
     #   @return [String]
     class ServiceAccountException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -4715,6 +4890,7 @@ module Aws::DeviceFarm
     #   <p>Represents the Amazon Resource Name (ARN) of the Device Farm job to stop.</p>
     #   @return [String]
     class StopJobRequest < Struct.new(
+      nil,
       :arn,
       keyword_init: true
     )
@@ -4725,6 +4901,7 @@ module Aws::DeviceFarm
     #   <p>The job that was stopped.</p>
     #   @return [Types::Job]
     class StopJobResult < Struct.new(
+      nil,
       :job,
       keyword_init: true
     )
@@ -4736,6 +4913,7 @@ module Aws::DeviceFarm
     #   <p>The Amazon Resource Name (ARN) of the remote access session to stop.</p>
     #   @return [String]
     class StopRemoteAccessSessionRequest < Struct.new(
+      nil,
       :arn,
       keyword_init: true
     )
@@ -4749,6 +4927,7 @@ module Aws::DeviceFarm
     #               stopping.</p>
     #   @return [Types::RemoteAccessSession]
     class StopRemoteAccessSessionResult < Struct.new(
+      nil,
       :remote_access_session,
       keyword_init: true
     )
@@ -4760,6 +4939,7 @@ module Aws::DeviceFarm
     #   <p>Represents the Amazon Resource Name (ARN) of the Device Farm run to stop.</p>
     #   @return [String]
     class StopRunRequest < Struct.new(
+      nil,
       :arn,
       keyword_init: true
     )
@@ -4771,6 +4951,7 @@ module Aws::DeviceFarm
     #   <p>The run that was stopped.</p>
     #   @return [Types::Run]
     class StopRunResult < Struct.new(
+      nil,
       :run,
       keyword_init: true
     )
@@ -4912,6 +5093,7 @@ module Aws::DeviceFarm
     #               suite.</p>
     #   @return [Types::DeviceMinutes]
     class Suite < Struct.new(
+      nil,
       :arn,
       :name,
       :type,
@@ -4940,6 +5122,7 @@ module Aws::DeviceFarm
     #               tag category (key).</p>
     #   @return [String]
     class Tag < Struct.new(
+      nil,
       :key,
       :value,
       keyword_init: true
@@ -4953,6 +5136,7 @@ module Aws::DeviceFarm
     # @!attribute resource_name
     #   @return [String]
     class TagOperationException < Struct.new(
+      nil,
       :message,
       :resource_name,
       keyword_init: true
@@ -4967,6 +5151,7 @@ module Aws::DeviceFarm
     # @!attribute resource_name
     #   @return [String]
     class TagPolicyException < Struct.new(
+      nil,
       :message,
       :resource_name,
       keyword_init: true
@@ -4986,6 +5171,7 @@ module Aws::DeviceFarm
     #               character length of 128 characters. Tag values can have a maximum length of 256 characters.</p>
     #   @return [Array<Types::Tag>]
     class TagResourceRequest < Struct.new(
+      nil,
       :resource_arn,
       :tags,
       keyword_init: true
@@ -4994,6 +5180,7 @@ module Aws::DeviceFarm
     end
 
     class TagResourceResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -5133,6 +5320,7 @@ module Aws::DeviceFarm
     #   <p>Represents the total (metered or unmetered) minutes used by the test.</p>
     #   @return [Types::DeviceMinutes]
     class Test < Struct.new(
+      nil,
       :arn,
       :name,
       :type,
@@ -5166,6 +5354,7 @@ module Aws::DeviceFarm
     #   <p>When the project was created.</p>
     #   @return [Time]
     class TestGridProject < Struct.new(
+      nil,
       :arn,
       :name,
       :description,
@@ -5197,6 +5386,7 @@ module Aws::DeviceFarm
     #   <p>A JSON object of options and parameters passed to the Selenium WebDriver.</p>
     #   @return [String]
     class TestGridSession < Struct.new(
+      nil,
       :arn,
       :status,
       :created,
@@ -5225,6 +5415,7 @@ module Aws::DeviceFarm
     #   <p>HTTP method that the browser used to make the request.</p>
     #   @return [String]
     class TestGridSessionAction < Struct.new(
+      nil,
       :action,
       :started,
       :duration,
@@ -5250,6 +5441,7 @@ module Aws::DeviceFarm
     #   <p>A semi-stable URL to the content of the object.</p>
     #   @return [String]
     class TestGridSessionArtifact < Struct.new(
+      nil,
       :filename,
       :type,
       :url,
@@ -5269,6 +5461,7 @@ module Aws::DeviceFarm
     #   <p>The ID of the Amazon VPC.</p>
     #   @return [String]
     class TestGridVpcConfig < Struct.new(
+      nil,
       :security_group_ids,
       :subnet_ids,
       :vpc_id,
@@ -5284,6 +5477,7 @@ module Aws::DeviceFarm
     # @!attribute resource_name
     #   @return [String]
     class TooManyTagsException < Struct.new(
+      nil,
       :message,
       :resource_name,
       keyword_init: true
@@ -5300,6 +5494,7 @@ module Aws::DeviceFarm
     #   <p>The number of free trial minutes remaining in the account.</p>
     #   @return [Float]
     class TrialMinutes < Struct.new(
+      nil,
       :total,
       :remaining,
       keyword_init: true
@@ -5315,6 +5510,7 @@ module Aws::DeviceFarm
     #   <p>Information about the problems.</p>
     #   @return [Array<Types::Problem>]
     class UniqueProblem < Struct.new(
+      nil,
       :message,
       :problems,
       keyword_init: true
@@ -5333,6 +5529,7 @@ module Aws::DeviceFarm
     #   <p>The keys of the tags to be removed.</p>
     #   @return [Array<String>]
     class UntagResourceRequest < Struct.new(
+      nil,
       :resource_arn,
       :tag_keys,
       keyword_init: true
@@ -5341,6 +5538,7 @@ module Aws::DeviceFarm
     end
 
     class UntagResourceResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -5356,6 +5554,7 @@ module Aws::DeviceFarm
     #   <p>An array of strings that you want to associate with the device instance.</p>
     #   @return [Array<String>]
     class UpdateDeviceInstanceRequest < Struct.new(
+      nil,
       :arn,
       :profile_arn,
       :labels,
@@ -5368,6 +5567,7 @@ module Aws::DeviceFarm
     #   <p>An object that contains information about your device instance.</p>
     #   @return [Types::DeviceInstance]
     class UpdateDeviceInstanceResult < Struct.new(
+      nil,
       :device_instance,
       keyword_init: true
     )
@@ -5407,6 +5607,7 @@ module Aws::DeviceFarm
     #               parameter in the same request.</p>
     #   @return [Boolean]
     class UpdateDevicePoolRequest < Struct.new(
+      nil,
       :arn,
       :name,
       :description,
@@ -5423,6 +5624,7 @@ module Aws::DeviceFarm
     #   <p>The device pool you just updated.</p>
     #   @return [Types::DevicePool]
     class UpdateDevicePoolResult < Struct.new(
+      nil,
       :device_pool,
       keyword_init: true
     )
@@ -5453,6 +5655,7 @@ module Aws::DeviceFarm
     #               value is <code>true</code>.</p>
     #   @return [Boolean]
     class UpdateInstanceProfileRequest < Struct.new(
+      nil,
       :arn,
       :name,
       :description,
@@ -5468,6 +5671,7 @@ module Aws::DeviceFarm
     #   <p>An object that contains information about your instance profile.</p>
     #   @return [Types::InstanceProfile]
     class UpdateInstanceProfileResult < Struct.new(
+      nil,
       :instance_profile,
       keyword_init: true
     )
@@ -5521,6 +5725,7 @@ module Aws::DeviceFarm
     #   <p>Proportion of received packets that fail to arrive from 0 to 100 percent.</p>
     #   @return [Integer]
     class UpdateNetworkProfileRequest < Struct.new(
+      nil,
       :arn,
       :name,
       :description,
@@ -5542,6 +5747,7 @@ module Aws::DeviceFarm
     #   <p>A list of the available network profiles.</p>
     #   @return [Types::NetworkProfile]
     class UpdateNetworkProfileResult < Struct.new(
+      nil,
       :network_profile,
       keyword_init: true
     )
@@ -5562,6 +5768,7 @@ module Aws::DeviceFarm
     #   <p>The VPC security groups and subnets that are attached to a project.</p>
     #   @return [Types::VpcConfig]
     class UpdateProjectRequest < Struct.new(
+      nil,
       :arn,
       :name,
       :default_job_timeout_minutes,
@@ -5576,6 +5783,7 @@ module Aws::DeviceFarm
     #   <p>The project to update.</p>
     #   @return [Types::Project]
     class UpdateProjectResult < Struct.new(
+      nil,
       :project,
       keyword_init: true
     )
@@ -5595,6 +5803,7 @@ module Aws::DeviceFarm
     #   <p>The VPC security groups and subnets that are attached to a project.</p>
     #   @return [Types::TestGridVpcConfig]
     class UpdateTestGridProjectRequest < Struct.new(
+      nil,
       :project_arn,
       :name,
       :description,
@@ -5608,6 +5817,7 @@ module Aws::DeviceFarm
     #   <p>The project, including updated information.</p>
     #   @return [Types::TestGridProject]
     class UpdateTestGridProjectResult < Struct.new(
+      nil,
       :test_grid_project,
       keyword_init: true
     )
@@ -5628,6 +5838,7 @@ module Aws::DeviceFarm
     #   <p>Set to true if the YAML file has changed and must be updated. Otherwise, set to false.</p>
     #   @return [Boolean]
     class UpdateUploadRequest < Struct.new(
+      nil,
       :arn,
       :name,
       :content_type,
@@ -5641,6 +5852,7 @@ module Aws::DeviceFarm
     #   <p>A test spec uploaded to Device Farm.</p>
     #   @return [Types::Upload]
     class UpdateUploadResult < Struct.new(
+      nil,
       :upload,
       keyword_init: true
     )
@@ -5666,6 +5878,7 @@ module Aws::DeviceFarm
     #   <p>An optional description that provides details about your VPC endpoint configuration.</p>
     #   @return [String]
     class UpdateVPCEConfigurationRequest < Struct.new(
+      nil,
       :arn,
       :vpce_configuration_name,
       :vpce_service_name,
@@ -5680,6 +5893,7 @@ module Aws::DeviceFarm
     #   <p>An object that contains information about your VPC endpoint configuration.</p>
     #   @return [Types::VPCEConfiguration]
     class UpdateVPCEConfigurationResult < Struct.new(
+      nil,
       :vpce_configuration,
       keyword_init: true
     )
@@ -5834,6 +6048,7 @@ module Aws::DeviceFarm
     #            </ul>
     #   @return [String]
     class Upload < Struct.new(
+      nil,
       :arn,
       :name,
       :created,
@@ -5868,6 +6083,7 @@ module Aws::DeviceFarm
     #   <p>An optional description that provides details about your VPC endpoint configuration.</p>
     #   @return [String]
     class VPCEConfiguration < Struct.new(
+      nil,
       :arn,
       :vpce_configuration_name,
       :vpce_service_name,
@@ -5889,6 +6105,7 @@ module Aws::DeviceFarm
     #   <p>The ID of the Amazon VPC.</p>
     #   @return [String]
     class VpcConfig < Struct.new(
+      nil,
       :security_group_ids,
       :subnet_ids,
       :vpc_id,

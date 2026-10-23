@@ -10,6 +10,7 @@ module Aws::CloudDirectory
     # @!attribute message
     #   @return [String]
     class AccessDeniedException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -30,6 +31,7 @@ module Aws::CloudDirectory
     #   <p>A reference to the object you are adding the specified facet to.</p>
     #   @return [Types::ObjectReference]
     class AddFacetToObjectRequest < Struct.new(
+      nil,
       :directory_arn,
       :schema_facet,
       :object_attribute_list,
@@ -40,6 +42,7 @@ module Aws::CloudDirectory
     end
 
     class AddFacetToObjectResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -54,6 +57,7 @@ module Aws::CloudDirectory
     #         into which the schema is copied. For more information, see <a>arns</a>.</p>
     #   @return [String]
     class ApplySchemaRequest < Struct.new(
+      nil,
       :published_schema_arn,
       :directory_arn,
       keyword_init: true
@@ -70,6 +74,7 @@ module Aws::CloudDirectory
     #         see <a>arns</a>.</p>
     #   @return [String]
     class ApplySchemaResponse < Struct.new(
+      nil,
       :applied_schema_arn,
       :directory_arn,
       keyword_init: true
@@ -91,6 +96,7 @@ module Aws::CloudDirectory
     #   <p>The link name with which the child object is attached to the parent.</p>
     #   @return [String]
     class AttachObjectRequest < Struct.new(
+      nil,
       :directory_arn,
       :parent_reference,
       :child_reference,
@@ -105,6 +111,7 @@ module Aws::CloudDirectory
     #           <code>ObjectIdentifier</code>.</p>
     #   @return [String]
     class AttachObjectResponse < Struct.new(
+      nil,
       :attached_object_identifier,
       keyword_init: true
     )
@@ -123,6 +130,7 @@ module Aws::CloudDirectory
     #         attached.</p>
     #   @return [Types::ObjectReference]
     class AttachPolicyRequest < Struct.new(
+      nil,
       :directory_arn,
       :policy_reference,
       :object_reference,
@@ -132,6 +140,7 @@ module Aws::CloudDirectory
     end
 
     class AttachPolicyResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -148,6 +157,7 @@ module Aws::CloudDirectory
     #   <p>A reference to the object that you are attaching to the index.</p>
     #   @return [Types::ObjectReference]
     class AttachToIndexRequest < Struct.new(
+      nil,
       :directory_arn,
       :index_reference,
       :target_reference,
@@ -160,6 +170,7 @@ module Aws::CloudDirectory
     #   <p>The <code>ObjectIdentifier</code> of the object that was attached to the index.</p>
     #   @return [String]
     class AttachToIndexResponse < Struct.new(
+      nil,
       :attached_object_identifier,
       keyword_init: true
     )
@@ -183,6 +194,7 @@ module Aws::CloudDirectory
     #   <p>A set of attributes that are associated with the typed link.</p>
     #   @return [Array<Types::AttributeNameAndValue>]
     class AttachTypedLinkRequest < Struct.new(
+      nil,
       :directory_arn,
       :source_object_reference,
       :target_object_reference,
@@ -197,6 +209,7 @@ module Aws::CloudDirectory
     #   <p>Returns a typed link specifier as output.</p>
     #   @return [Types::TypedLinkSpecifier]
     class AttachTypedLinkResponse < Struct.new(
+      nil,
       :typed_link_specifier,
       keyword_init: true
     )
@@ -215,6 +228,7 @@ module Aws::CloudDirectory
     #   <p>The name of the attribute.</p>
     #   @return [String]
     class AttributeKey < Struct.new(
+      nil,
       :schema_arn,
       :facet_name,
       :name,
@@ -231,6 +245,7 @@ module Aws::CloudDirectory
     #   <p>The value of the attribute.</p>
     #   @return [Types::TypedAttributeValue]
     class AttributeKeyAndValue < Struct.new(
+      nil,
       :key,
       :value,
       keyword_init: true
@@ -246,6 +261,7 @@ module Aws::CloudDirectory
     #   <p>The value for the typed link.</p>
     #   @return [Types::TypedAttributeValue]
     class AttributeNameAndValue < Struct.new(
+      nil,
       :attribute_name,
       :value,
       keyword_init: true
@@ -264,6 +280,7 @@ module Aws::CloudDirectory
     #   <p>A reference to the object being mutated.</p>
     #   @return [Types::ObjectReference]
     class BatchAddFacetToObject < Struct.new(
+      nil,
       :schema_facet,
       :object_attribute_list,
       :object_reference,
@@ -274,6 +291,7 @@ module Aws::CloudDirectory
 
     # <p>The result of a batch add facet to object operation.</p>
     class BatchAddFacetToObjectResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -290,6 +308,7 @@ module Aws::CloudDirectory
     #   <p>The name of the link.</p>
     #   @return [String]
     class BatchAttachObject < Struct.new(
+      nil,
       :parent_reference,
       :child_reference,
       :link_name,
@@ -303,6 +322,7 @@ module Aws::CloudDirectory
     #   <p>The <code>ObjectIdentifier</code> of the object that has been attached.</p>
     #   @return [String]
     class BatchAttachObjectResponse < Struct.new(
+      nil,
       :attached_object_identifier,
       keyword_init: true
     )
@@ -318,6 +338,7 @@ module Aws::CloudDirectory
     #          attached.</p>
     #   @return [Types::ObjectReference]
     class BatchAttachPolicy < Struct.new(
+      nil,
       :policy_reference,
       :object_reference,
       keyword_init: true
@@ -328,6 +349,7 @@ module Aws::CloudDirectory
     # <p>Represents the output of an <a>AttachPolicy</a> response
     #       operation.</p>
     class BatchAttachPolicyResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -341,6 +363,7 @@ module Aws::CloudDirectory
     #   <p>A reference to the object that you are attaching to the index.</p>
     #   @return [Types::ObjectReference]
     class BatchAttachToIndex < Struct.new(
+      nil,
       :index_reference,
       :target_reference,
       keyword_init: true
@@ -353,6 +376,7 @@ module Aws::CloudDirectory
     #   <p>The <code>ObjectIdentifier</code> of the object that was attached to the index.</p>
     #   @return [String]
     class BatchAttachToIndexResponse < Struct.new(
+      nil,
       :attached_object_identifier,
       keyword_init: true
     )
@@ -373,6 +397,7 @@ module Aws::CloudDirectory
     #   <p>A set of attributes that are associated with the typed link.</p>
     #   @return [Array<Types::AttributeNameAndValue>]
     class BatchAttachTypedLink < Struct.new(
+      nil,
       :source_object_reference,
       :target_object_reference,
       :typed_link_facet,
@@ -387,6 +412,7 @@ module Aws::CloudDirectory
     #   <p>Returns a typed link specifier as output.</p>
     #   @return [Types::TypedLinkSpecifier]
     class BatchAttachTypedLinkResponse < Struct.new(
+      nil,
       :typed_link_specifier,
       keyword_init: true
     )
@@ -412,6 +438,7 @@ module Aws::CloudDirectory
     #   <p>The batch reference name. See <a href="https://docs.aws.amazon.com/clouddirectory/latest/developerguide/transaction_support.html">Transaction Support</a> for more information.</p>
     #   @return [String]
     class BatchCreateIndex < Struct.new(
+      nil,
       :ordered_indexed_attribute_list,
       :is_unique,
       :parent_reference,
@@ -432,6 +459,7 @@ module Aws::CloudDirectory
     #   <p>The <code>ObjectIdentifier</code> of the index created by this operation.</p>
     #   @return [String]
     class BatchCreateIndexResponse < Struct.new(
+      nil,
       :object_identifier,
       keyword_init: true
     )
@@ -457,6 +485,7 @@ module Aws::CloudDirectory
     #   <p>The batch reference name. See <a href="https://docs.aws.amazon.com/clouddirectory/latest/developerguide/transaction_support.html">Transaction Support</a> for more information.</p>
     #   @return [String]
     class BatchCreateObject < Struct.new(
+      nil,
       :schema_facet,
       :object_attribute_list,
       :parent_reference,
@@ -472,6 +501,7 @@ module Aws::CloudDirectory
     #   <p>The ID that is associated with the object.</p>
     #   @return [String]
     class BatchCreateObjectResponse < Struct.new(
+      nil,
       :object_identifier,
       keyword_init: true
     )
@@ -483,6 +513,7 @@ module Aws::CloudDirectory
     #   <p>The reference that identifies the object.</p>
     #   @return [Types::ObjectReference]
     class BatchDeleteObject < Struct.new(
+      nil,
       :object_reference,
       keyword_init: true
     )
@@ -491,6 +522,7 @@ module Aws::CloudDirectory
 
     # <p>Represents the output of a <a>DeleteObject</a> response operation.</p>
     class BatchDeleteObjectResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -504,6 +536,7 @@ module Aws::CloudDirectory
     #   <p>A reference to the object being detached from the index.</p>
     #   @return [Types::ObjectReference]
     class BatchDetachFromIndex < Struct.new(
+      nil,
       :index_reference,
       :target_reference,
       keyword_init: true
@@ -516,6 +549,7 @@ module Aws::CloudDirectory
     #   <p>The <code>ObjectIdentifier</code> of the object that was detached from the index.</p>
     #   @return [String]
     class BatchDetachFromIndexResponse < Struct.new(
+      nil,
       :detached_object_identifier,
       keyword_init: true
     )
@@ -534,6 +568,7 @@ module Aws::CloudDirectory
     #   <p>The batch reference name. See <a href="https://docs.aws.amazon.com/clouddirectory/latest/developerguide/transaction_support.html">Transaction Support</a> for more information.</p>
     #   @return [String]
     class BatchDetachObject < Struct.new(
+      nil,
       :parent_reference,
       :link_name,
       :batch_reference_name,
@@ -547,6 +582,7 @@ module Aws::CloudDirectory
     #   <p>The <code>ObjectIdentifier</code> of the detached object.</p>
     #   @return [String]
     class BatchDetachObjectResponse < Struct.new(
+      nil,
       :detached_object_identifier,
       keyword_init: true
     )
@@ -561,6 +597,7 @@ module Aws::CloudDirectory
     #   <p>Reference that identifies the object whose policy object will be detached.</p>
     #   @return [Types::ObjectReference]
     class BatchDetachPolicy < Struct.new(
+      nil,
       :policy_reference,
       :object_reference,
       keyword_init: true
@@ -570,6 +607,7 @@ module Aws::CloudDirectory
 
     # <p>Represents the output of a <a>DetachPolicy</a> response operation.</p>
     class BatchDetachPolicyResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -580,6 +618,7 @@ module Aws::CloudDirectory
     #   <p>Used to accept a typed link specifier as input.</p>
     #   @return [Types::TypedLinkSpecifier]
     class BatchDetachTypedLink < Struct.new(
+      nil,
       :typed_link_specifier,
       keyword_init: true
     )
@@ -588,6 +627,7 @@ module Aws::CloudDirectory
 
     # <p>Represents the output of a <a>DetachTypedLink</a> response operation.</p>
     class BatchDetachTypedLinkResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -601,6 +641,7 @@ module Aws::CloudDirectory
     #   <p>A list of attribute names whose values will be retrieved.</p>
     #   @return [Array<String>]
     class BatchGetLinkAttributes < Struct.new(
+      nil,
       :typed_link_specifier,
       :attribute_names,
       keyword_init: true
@@ -613,6 +654,7 @@ module Aws::CloudDirectory
     #   <p>The attributes that are associated with the typed link.</p>
     #   @return [Array<Types::AttributeKeyAndValue>]
     class BatchGetLinkAttributesResponse < Struct.new(
+      nil,
       :attributes,
       keyword_init: true
     )
@@ -630,6 +672,7 @@ module Aws::CloudDirectory
     #   <p>List of attribute names whose values will be retrieved.</p>
     #   @return [Array<String>]
     class BatchGetObjectAttributes < Struct.new(
+      nil,
       :object_reference,
       :schema_facet,
       :attribute_names,
@@ -643,6 +686,7 @@ module Aws::CloudDirectory
     #   <p>The attribute values that are associated with an object.</p>
     #   @return [Array<Types::AttributeKeyAndValue>]
     class BatchGetObjectAttributesResponse < Struct.new(
+      nil,
       :attributes,
       keyword_init: true
     )
@@ -654,6 +698,7 @@ module Aws::CloudDirectory
     #   <p>A reference to the object.</p>
     #   @return [Types::ObjectReference]
     class BatchGetObjectInformation < Struct.new(
+      nil,
       :object_reference,
       keyword_init: true
     )
@@ -668,6 +713,7 @@ module Aws::CloudDirectory
     #   <p>The <code>ObjectIdentifier</code> of the specified object.</p>
     #   @return [String]
     class BatchGetObjectInformationResponse < Struct.new(
+      nil,
       :schema_facets,
       :object_identifier,
       keyword_init: true
@@ -686,6 +732,7 @@ module Aws::CloudDirectory
     #   <p>The maximum number of results to retrieve.</p>
     #   @return [Integer]
     class BatchListAttachedIndices < Struct.new(
+      nil,
       :target_reference,
       :next_token,
       :max_results,
@@ -702,6 +749,7 @@ module Aws::CloudDirectory
     #   <p>The pagination token.</p>
     #   @return [String]
     class BatchListAttachedIndicesResponse < Struct.new(
+      nil,
       :index_attachments,
       :next_token,
       keyword_init: true
@@ -729,6 +777,7 @@ module Aws::CloudDirectory
     #   <p>The maximum number of results to retrieve.</p>
     #   @return [Integer]
     class BatchListIncomingTypedLinks < Struct.new(
+      nil,
       :object_reference,
       :filter_attribute_ranges,
       :filter_typed_link,
@@ -747,6 +796,7 @@ module Aws::CloudDirectory
     #   <p>The pagination token.</p>
     #   @return [String]
     class BatchListIncomingTypedLinksResponse < Struct.new(
+      nil,
       :link_specifiers,
       :next_token,
       keyword_init: true
@@ -768,6 +818,7 @@ module Aws::CloudDirectory
     #   <p>The pagination token.</p>
     #   @return [String]
     class BatchListIndex < Struct.new(
+      nil,
       :ranges_on_indexed_values,
       :index_reference,
       :max_results,
@@ -785,6 +836,7 @@ module Aws::CloudDirectory
     #   <p>The pagination token.</p>
     #   @return [String]
     class BatchListIndexResponse < Struct.new(
+      nil,
       :index_attachments,
       :next_token,
       keyword_init: true
@@ -808,6 +860,7 @@ module Aws::CloudDirectory
     #         facet.</p>
     #   @return [Types::SchemaFacet]
     class BatchListObjectAttributes < Struct.new(
+      nil,
       :object_reference,
       :next_token,
       :max_results,
@@ -826,6 +879,7 @@ module Aws::CloudDirectory
     #   <p>The pagination token.</p>
     #   @return [String]
     class BatchListObjectAttributesResponse < Struct.new(
+      nil,
       :attributes,
       :next_token,
       keyword_init: true
@@ -845,6 +899,7 @@ module Aws::CloudDirectory
     #          number.</p>
     #   @return [Integer]
     class BatchListObjectChildren < Struct.new(
+      nil,
       :object_reference,
       :next_token,
       :max_results,
@@ -862,6 +917,7 @@ module Aws::CloudDirectory
     #   <p>The pagination token.</p>
     #   @return [String]
     class BatchListObjectChildrenResponse < Struct.new(
+      nil,
       :children,
       :next_token,
       keyword_init: true
@@ -880,6 +936,7 @@ module Aws::CloudDirectory
     #   <p>The maximum number of results to retrieve.</p>
     #   @return [Integer]
     class BatchListObjectParentPaths < Struct.new(
+      nil,
       :object_reference,
       :next_token,
       :max_results,
@@ -897,6 +954,7 @@ module Aws::CloudDirectory
     #   <p>The pagination token.</p>
     #   @return [String]
     class BatchListObjectParentPathsResponse < Struct.new(
+      nil,
       :path_to_object_identifiers_list,
       :next_token,
       keyword_init: true
@@ -917,6 +975,7 @@ module Aws::CloudDirectory
     #         number.</p>
     #   @return [Integer]
     class BatchListObjectParents < Struct.new(
+      nil,
       :object_reference,
       :next_token,
       :max_results,
@@ -933,6 +992,7 @@ module Aws::CloudDirectory
     #   <p>The pagination token.</p>
     #   @return [String]
     class BatchListObjectParentsResponse < Struct.new(
+      nil,
       :parent_links,
       :next_token,
       keyword_init: true
@@ -951,6 +1011,7 @@ module Aws::CloudDirectory
     #   <p>The maximum number of results to retrieve.</p>
     #   @return [Integer]
     class BatchListObjectPolicies < Struct.new(
+      nil,
       :object_reference,
       :next_token,
       :max_results,
@@ -968,6 +1029,7 @@ module Aws::CloudDirectory
     #   <p>The pagination token.</p>
     #   @return [String]
     class BatchListObjectPoliciesResponse < Struct.new(
+      nil,
       :attached_policy_ids,
       :next_token,
       keyword_init: true
@@ -995,6 +1057,7 @@ module Aws::CloudDirectory
     #   <p>The maximum number of results to retrieve.</p>
     #   @return [Integer]
     class BatchListOutgoingTypedLinks < Struct.new(
+      nil,
       :object_reference,
       :filter_attribute_ranges,
       :filter_typed_link,
@@ -1013,6 +1076,7 @@ module Aws::CloudDirectory
     #   <p>The pagination token.</p>
     #   @return [String]
     class BatchListOutgoingTypedLinksResponse < Struct.new(
+      nil,
       :typed_link_specifiers,
       :next_token,
       keyword_init: true
@@ -1031,6 +1095,7 @@ module Aws::CloudDirectory
     #   <p>The maximum number of results to retrieve.</p>
     #   @return [Integer]
     class BatchListPolicyAttachments < Struct.new(
+      nil,
       :policy_reference,
       :next_token,
       :max_results,
@@ -1047,6 +1112,7 @@ module Aws::CloudDirectory
     #   <p>The pagination token.</p>
     #   @return [String]
     class BatchListPolicyAttachmentsResponse < Struct.new(
+      nil,
       :object_identifiers,
       :next_token,
       keyword_init: true
@@ -1065,6 +1131,7 @@ module Aws::CloudDirectory
     #   <p>The maximum number of results to retrieve.</p>
     #   @return [Integer]
     class BatchLookupPolicy < Struct.new(
+      nil,
       :object_reference,
       :next_token,
       :max_results,
@@ -1083,6 +1150,7 @@ module Aws::CloudDirectory
     #   <p>The pagination token.</p>
     #   @return [String]
     class BatchLookupPolicyResponse < Struct.new(
+      nil,
       :policy_to_path_list,
       :next_token,
       keyword_init: true
@@ -1099,6 +1167,7 @@ module Aws::CloudDirectory
     #   <p>An exception message that is associated with the failure.</p>
     #   @return [String]
     class BatchReadException < Struct.new(
+      nil,
       :type,
       :message,
       keyword_init: true
@@ -1162,6 +1231,7 @@ module Aws::CloudDirectory
     #   <p>Retrieves attributes that are associated with a typed link.</p>
     #   @return [Types::BatchGetLinkAttributes]
     class BatchReadOperation < Struct.new(
+      nil,
       :list_object_attributes,
       :list_object_children,
       :list_attached_indices,
@@ -1189,6 +1259,7 @@ module Aws::CloudDirectory
     #   <p>Identifies which operation in a batch has failed.</p>
     #   @return [Types::BatchReadException]
     class BatchReadOperationResponse < Struct.new(
+      nil,
       :successful_response,
       :exception_response,
       keyword_init: true
@@ -1208,6 +1279,7 @@ module Aws::CloudDirectory
     #         is reflected in a subsequent read operation of that same object.</p>
     #   @return [String]
     class BatchReadRequest < Struct.new(
+      nil,
       :directory_arn,
       :operations,
       :consistency_level,
@@ -1220,6 +1292,7 @@ module Aws::CloudDirectory
     #   <p>A list of all the responses for each batch read.</p>
     #   @return [Array<Types::BatchReadOperationResponse>]
     class BatchReadResponse < Struct.new(
+      nil,
       :responses,
       keyword_init: true
     )
@@ -1281,6 +1354,7 @@ module Aws::CloudDirectory
     #   <p>The list of parent objects to retrieve.</p>
     #   @return [Types::BatchListObjectParentsResponse]
     class BatchReadSuccessfulResponse < Struct.new(
+      nil,
       :list_object_attributes,
       :list_object_children,
       :get_object_information,
@@ -1308,6 +1382,7 @@ module Aws::CloudDirectory
     #   <p>A reference to the object whose facet will be removed.</p>
     #   @return [Types::ObjectReference]
     class BatchRemoveFacetFromObject < Struct.new(
+      nil,
       :schema_facet,
       :object_reference,
       keyword_init: true
@@ -1317,6 +1392,7 @@ module Aws::CloudDirectory
 
     # <p>An empty result that represents success.</p>
     class BatchRemoveFacetFromObjectResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1330,6 +1406,7 @@ module Aws::CloudDirectory
     #   <p>The attributes update structure.</p>
     #   @return [Array<Types::LinkAttributeUpdate>]
     class BatchUpdateLinkAttributes < Struct.new(
+      nil,
       :typed_link_specifier,
       :attribute_updates,
       keyword_init: true
@@ -1339,6 +1416,7 @@ module Aws::CloudDirectory
 
     # <p>Represents the output of a <a>UpdateLinkAttributes</a> response operation.</p>
     class BatchUpdateLinkAttributesResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1352,6 +1430,7 @@ module Aws::CloudDirectory
     #   <p>Attributes update structure.</p>
     #   @return [Array<Types::ObjectAttributeUpdate>]
     class BatchUpdateObjectAttributes < Struct.new(
+      nil,
       :object_reference,
       :attribute_updates,
       keyword_init: true
@@ -1364,6 +1443,7 @@ module Aws::CloudDirectory
     #   <p>ID that is associated with the object.</p>
     #   @return [String]
     class BatchUpdateObjectAttributesResponse < Struct.new(
+      nil,
       :object_identifier,
       keyword_init: true
     )
@@ -1378,6 +1458,7 @@ module Aws::CloudDirectory
     # @!attribute message
     #   @return [String]
     class BatchWriteException < Struct.new(
+      nil,
       :index,
       :type,
       :message,
@@ -1439,6 +1520,7 @@ module Aws::CloudDirectory
     #   <p>Updates a given object's attributes.</p>
     #   @return [Types::BatchUpdateLinkAttributes]
     class BatchWriteOperation < Struct.new(
+      nil,
       :create_object,
       :attach_object,
       :detach_object,
@@ -1507,6 +1589,7 @@ module Aws::CloudDirectory
     #   <p>Represents the output of a <code>BatchWrite</code> response operation.</p>
     #   @return [Types::BatchUpdateLinkAttributesResponse]
     class BatchWriteOperationResponse < Struct.new(
+      nil,
       :create_object,
       :attach_object,
       :detach_object,
@@ -1535,6 +1618,7 @@ module Aws::CloudDirectory
     #   <p>A list of operations that are part of the batch.</p>
     #   @return [Array<Types::BatchWriteOperation>]
     class BatchWriteRequest < Struct.new(
+      nil,
       :directory_arn,
       :operations,
       keyword_init: true
@@ -1546,6 +1630,7 @@ module Aws::CloudDirectory
     #   <p>A list of all the responses for each batch write.</p>
     #   @return [Array<Types::BatchWriteOperationResponse>]
     class BatchWriteResponse < Struct.new(
+      nil,
       :responses,
       keyword_init: true
     )
@@ -1556,6 +1641,7 @@ module Aws::CloudDirectory
     # @!attribute message
     #   @return [String]
     class CannotListParentOfRootException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -1571,6 +1657,7 @@ module Aws::CloudDirectory
     #         data <a>Directory</a>. For more information, see <a>arns</a>.</p>
     #   @return [String]
     class CreateDirectoryRequest < Struct.new(
+      nil,
       :name,
       :schema_arn,
       keyword_init: true
@@ -1594,6 +1681,7 @@ module Aws::CloudDirectory
     #         ARN. For more information, see <a>arns</a>.</p>
     #   @return [String]
     class CreateDirectoryResponse < Struct.new(
+      nil,
       :directory_arn,
       :name,
       :object_identifier,
@@ -1642,6 +1730,7 @@ module Aws::CloudDirectory
     #   <p>There are two different styles that you can define on any given facet, <code>Static</code> and <code>Dynamic</code>. For static facets, all attributes must be defined in the schema. For dynamic facets, attributes can be defined during data plane operations.</p>
     #   @return [String]
     class CreateFacetRequest < Struct.new(
+      nil,
       :schema_arn,
       :name,
       :attributes,
@@ -1653,6 +1742,7 @@ module Aws::CloudDirectory
     end
 
     class CreateFacetResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1676,6 +1766,7 @@ module Aws::CloudDirectory
     #   <p>The name of the link between the parent object and the index object.</p>
     #   @return [String]
     class CreateIndexRequest < Struct.new(
+      nil,
       :directory_arn,
       :ordered_indexed_attribute_list,
       :is_unique,
@@ -1690,6 +1781,7 @@ module Aws::CloudDirectory
     #   <p>The <code>ObjectIdentifier</code> of the index created by this operation.</p>
     #   @return [String]
     class CreateIndexResponse < Struct.new(
+      nil,
       :object_identifier,
       keyword_init: true
     )
@@ -1714,6 +1806,7 @@ module Aws::CloudDirectory
     #   <p>The name of link that is used to attach this object to a parent.</p>
     #   @return [String]
     class CreateObjectRequest < Struct.new(
+      nil,
       :directory_arn,
       :schema_facets,
       :object_attribute_list,
@@ -1728,6 +1821,7 @@ module Aws::CloudDirectory
     #   <p>The identifier that is associated with the object.</p>
     #   @return [String]
     class CreateObjectResponse < Struct.new(
+      nil,
       :object_identifier,
       keyword_init: true
     )
@@ -1739,6 +1833,7 @@ module Aws::CloudDirectory
     #         region.</p>
     #   @return [String]
     class CreateSchemaRequest < Struct.new(
+      nil,
       :name,
       keyword_init: true
     )
@@ -1750,6 +1845,7 @@ module Aws::CloudDirectory
     #         information, see <a>arns</a>.</p>
     #   @return [String]
     class CreateSchemaResponse < Struct.new(
+      nil,
       :schema_arn,
       keyword_init: true
     )
@@ -1766,6 +1862,7 @@ module Aws::CloudDirectory
     #         facet.</p>
     #   @return [Types::TypedLinkFacet]
     class CreateTypedLinkFacetRequest < Struct.new(
+      nil,
       :schema_arn,
       :facet,
       keyword_init: true
@@ -1774,6 +1871,7 @@ module Aws::CloudDirectory
     end
 
     class CreateTypedLinkFacetResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1783,6 +1881,7 @@ module Aws::CloudDirectory
     #   <p>The ARN of the directory to delete.</p>
     #   @return [String]
     class DeleteDirectoryRequest < Struct.new(
+      nil,
       :directory_arn,
       keyword_init: true
     )
@@ -1793,6 +1892,7 @@ module Aws::CloudDirectory
     #   <p>The ARN of the deleted directory.</p>
     #   @return [String]
     class DeleteDirectoryResponse < Struct.new(
+      nil,
       :directory_arn,
       keyword_init: true
     )
@@ -1807,6 +1907,7 @@ module Aws::CloudDirectory
     #   <p>The name of the facet to delete.</p>
     #   @return [String]
     class DeleteFacetRequest < Struct.new(
+      nil,
       :schema_arn,
       :name,
       keyword_init: true
@@ -1815,6 +1916,7 @@ module Aws::CloudDirectory
     end
 
     class DeleteFacetResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1828,6 +1930,7 @@ module Aws::CloudDirectory
     #   <p>A reference that identifies the object.</p>
     #   @return [Types::ObjectReference]
     class DeleteObjectRequest < Struct.new(
+      nil,
       :directory_arn,
       :object_reference,
       keyword_init: true
@@ -1836,6 +1939,7 @@ module Aws::CloudDirectory
     end
 
     class DeleteObjectResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1846,6 +1950,7 @@ module Aws::CloudDirectory
     #           <a>arns</a>.</p>
     #   @return [String]
     class DeleteSchemaRequest < Struct.new(
+      nil,
       :schema_arn,
       keyword_init: true
     )
@@ -1857,6 +1962,7 @@ module Aws::CloudDirectory
     #           <a>arns</a>.</p>
     #   @return [String]
     class DeleteSchemaResponse < Struct.new(
+      nil,
       :schema_arn,
       keyword_init: true
     )
@@ -1871,6 +1977,7 @@ module Aws::CloudDirectory
     #   <p>The unique name of the typed link facet.</p>
     #   @return [String]
     class DeleteTypedLinkFacetRequest < Struct.new(
+      nil,
       :schema_arn,
       :name,
       keyword_init: true
@@ -1879,6 +1986,7 @@ module Aws::CloudDirectory
     end
 
     class DeleteTypedLinkFacetResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1895,6 +2003,7 @@ module Aws::CloudDirectory
     #   <p>A reference to the object being detached from the index.</p>
     #   @return [Types::ObjectReference]
     class DetachFromIndexRequest < Struct.new(
+      nil,
       :directory_arn,
       :index_reference,
       :target_reference,
@@ -1907,6 +2016,7 @@ module Aws::CloudDirectory
     #   <p>The <code>ObjectIdentifier</code> of the object that was detached from the index.</p>
     #   @return [String]
     class DetachFromIndexResponse < Struct.new(
+      nil,
       :detached_object_identifier,
       keyword_init: true
     )
@@ -1925,6 +2035,7 @@ module Aws::CloudDirectory
     #   <p>The link name associated with the object that needs to be detached.</p>
     #   @return [String]
     class DetachObjectRequest < Struct.new(
+      nil,
       :directory_arn,
       :parent_reference,
       :link_name,
@@ -1937,6 +2048,7 @@ module Aws::CloudDirectory
     #   <p>The <code>ObjectIdentifier</code> that was detached from the object.</p>
     #   @return [String]
     class DetachObjectResponse < Struct.new(
+      nil,
       :detached_object_identifier,
       keyword_init: true
     )
@@ -1954,6 +2066,7 @@ module Aws::CloudDirectory
     #   <p>Reference that identifies the object whose policy object will be detached.</p>
     #   @return [Types::ObjectReference]
     class DetachPolicyRequest < Struct.new(
+      nil,
       :directory_arn,
       :policy_reference,
       :object_reference,
@@ -1963,6 +2076,7 @@ module Aws::CloudDirectory
     end
 
     class DetachPolicyResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1976,6 +2090,7 @@ module Aws::CloudDirectory
     #   <p>Used to accept a typed link specifier as input.</p>
     #   @return [Types::TypedLinkSpecifier]
     class DetachTypedLinkRequest < Struct.new(
+      nil,
       :directory_arn,
       :typed_link_specifier,
       keyword_init: true
@@ -1998,6 +2113,7 @@ module Aws::CloudDirectory
     #   <p>The date and time when the directory was created.</p>
     #   @return [Time]
     class Directory < Struct.new(
+      nil,
       :name,
       :directory_arn,
       :state,
@@ -2012,6 +2128,7 @@ module Aws::CloudDirectory
     # @!attribute message
     #   @return [String]
     class DirectoryAlreadyExistsException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -2023,6 +2140,7 @@ module Aws::CloudDirectory
     # @!attribute message
     #   @return [String]
     class DirectoryDeletedException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -2033,6 +2151,7 @@ module Aws::CloudDirectory
     # @!attribute message
     #   @return [String]
     class DirectoryNotDisabledException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -2043,6 +2162,7 @@ module Aws::CloudDirectory
     # @!attribute message
     #   @return [String]
     class DirectoryNotEnabledException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -2053,6 +2173,7 @@ module Aws::CloudDirectory
     #   <p>The ARN of the directory to disable.</p>
     #   @return [String]
     class DisableDirectoryRequest < Struct.new(
+      nil,
       :directory_arn,
       keyword_init: true
     )
@@ -2063,6 +2184,7 @@ module Aws::CloudDirectory
     #   <p>The ARN of the directory that has been disabled.</p>
     #   @return [String]
     class DisableDirectoryResponse < Struct.new(
+      nil,
       :directory_arn,
       keyword_init: true
     )
@@ -2073,6 +2195,7 @@ module Aws::CloudDirectory
     #   <p>The ARN of the directory to enable.</p>
     #   @return [String]
     class EnableDirectoryRequest < Struct.new(
+      nil,
       :directory_arn,
       keyword_init: true
     )
@@ -2083,6 +2206,7 @@ module Aws::CloudDirectory
     #   <p>The ARN of the enabled directory.</p>
     #   @return [String]
     class EnableDirectoryResponse < Struct.new(
+      nil,
       :directory_arn,
       keyword_init: true
     )
@@ -2102,6 +2226,7 @@ module Aws::CloudDirectory
     #   <p>There are two different styles that you can define on any given facet, <code>Static</code> and <code>Dynamic</code>. For static facets, all attributes must be defined in the schema. For dynamic facets, attributes can be defined during data plane operations.</p>
     #   @return [String]
     class Facet < Struct.new(
+      nil,
       :name,
       :object_type,
       :facet_style,
@@ -2114,6 +2239,7 @@ module Aws::CloudDirectory
     # @!attribute message
     #   @return [String]
     class FacetAlreadyExistsException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -2135,6 +2261,7 @@ module Aws::CloudDirectory
     #   <p>The required behavior of the <code>FacetAttribute</code>.</p>
     #   @return [String]
     class FacetAttribute < Struct.new(
+      nil,
       :name,
       :attribute_definition,
       :attribute_reference,
@@ -2158,6 +2285,7 @@ module Aws::CloudDirectory
     #   <p>Validation rules attached to the attribute definition.</p>
     #   @return [Hash<String, Types::Rule>]
     class FacetAttributeDefinition < Struct.new(
+      nil,
       :type,
       :default_value,
       :is_immutable,
@@ -2181,6 +2309,7 @@ module Aws::CloudDirectory
     #   <p>The target attribute name that is associated with the facet reference. See <a href="https://docs.aws.amazon.com/clouddirectory/latest/developerguide/schemas_attributereferences.html">Attribute References</a> for more information.</p>
     #   @return [String]
     class FacetAttributeReference < Struct.new(
+      nil,
       :target_facet_name,
       :target_attribute_name,
       keyword_init: true
@@ -2196,6 +2325,7 @@ module Aws::CloudDirectory
     #   <p>The action to perform when updating the attribute.</p>
     #   @return [String]
     class FacetAttributeUpdate < Struct.new(
+      nil,
       :attribute,
       :action,
       keyword_init: true
@@ -2208,6 +2338,7 @@ module Aws::CloudDirectory
     # @!attribute message
     #   @return [String]
     class FacetInUseException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -2218,6 +2349,7 @@ module Aws::CloudDirectory
     # @!attribute message
     #   @return [String]
     class FacetNotFoundException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -2229,6 +2361,7 @@ module Aws::CloudDirectory
     # @!attribute message
     #   @return [String]
     class FacetValidationException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -2239,6 +2372,7 @@ module Aws::CloudDirectory
     #   <p>The ARN of the applied schema.</p>
     #   @return [String]
     class GetAppliedSchemaVersionRequest < Struct.new(
+      nil,
       :schema_arn,
       keyword_init: true
     )
@@ -2249,6 +2383,7 @@ module Aws::CloudDirectory
     #   <p>Current applied schema ARN, including the minor version in use if one was provided.</p>
     #   @return [String]
     class GetAppliedSchemaVersionResponse < Struct.new(
+      nil,
       :applied_schema_arn,
       keyword_init: true
     )
@@ -2259,6 +2394,7 @@ module Aws::CloudDirectory
     #   <p>The ARN of the directory.</p>
     #   @return [String]
     class GetDirectoryRequest < Struct.new(
+      nil,
       :directory_arn,
       keyword_init: true
     )
@@ -2269,6 +2405,7 @@ module Aws::CloudDirectory
     #   <p>Metadata about the directory.</p>
     #   @return [Types::Directory]
     class GetDirectoryResponse < Struct.new(
+      nil,
       :directory,
       keyword_init: true
     )
@@ -2283,6 +2420,7 @@ module Aws::CloudDirectory
     #   <p>The name of the facet to retrieve.</p>
     #   @return [String]
     class GetFacetRequest < Struct.new(
+      nil,
       :schema_arn,
       :name,
       keyword_init: true
@@ -2294,6 +2432,7 @@ module Aws::CloudDirectory
     #   <p>The <a>Facet</a> structure that is associated with the facet.</p>
     #   @return [Types::Facet]
     class GetFacetResponse < Struct.new(
+      nil,
       :facet,
       keyword_init: true
     )
@@ -2313,6 +2452,7 @@ module Aws::CloudDirectory
     #   <p>The consistency level at which to retrieve the attributes on a typed link.</p>
     #   @return [String]
     class GetLinkAttributesRequest < Struct.new(
+      nil,
       :directory_arn,
       :typed_link_specifier,
       :attribute_names,
@@ -2326,6 +2466,7 @@ module Aws::CloudDirectory
     #   <p>The attributes that are associated with the typed link.</p>
     #   @return [Array<Types::AttributeKeyAndValue>]
     class GetLinkAttributesResponse < Struct.new(
+      nil,
       :attributes,
       keyword_init: true
     )
@@ -2348,6 +2489,7 @@ module Aws::CloudDirectory
     #   <p>List of attribute names whose values will be retrieved.</p>
     #   @return [Array<String>]
     class GetObjectAttributesRequest < Struct.new(
+      nil,
       :directory_arn,
       :object_reference,
       :consistency_level,
@@ -2362,6 +2504,7 @@ module Aws::CloudDirectory
     #   <p>The attributes that are associated with the object.</p>
     #   @return [Array<Types::AttributeKeyAndValue>]
     class GetObjectAttributesResponse < Struct.new(
+      nil,
       :attributes,
       keyword_init: true
     )
@@ -2378,6 +2521,7 @@ module Aws::CloudDirectory
     #   <p>The consistency level at which to retrieve the object information.</p>
     #   @return [String]
     class GetObjectInformationRequest < Struct.new(
+      nil,
       :directory_arn,
       :object_reference,
       :consistency_level,
@@ -2393,6 +2537,7 @@ module Aws::CloudDirectory
     #   <p>The <code>ObjectIdentifier</code> of the specified object.</p>
     #   @return [String]
     class GetObjectInformationResponse < Struct.new(
+      nil,
       :schema_facets,
       :object_identifier,
       keyword_init: true
@@ -2404,6 +2549,7 @@ module Aws::CloudDirectory
     #   <p>The ARN of the schema to retrieve.</p>
     #   @return [String]
     class GetSchemaAsJsonRequest < Struct.new(
+      nil,
       :schema_arn,
       keyword_init: true
     )
@@ -2417,6 +2563,7 @@ module Aws::CloudDirectory
     #   <p>The JSON representation of the schema document.</p>
     #   @return [String]
     class GetSchemaAsJsonResponse < Struct.new(
+      nil,
       :name,
       :document,
       keyword_init: true
@@ -2432,6 +2579,7 @@ module Aws::CloudDirectory
     #   <p>The unique name of the typed link facet.</p>
     #   @return [String]
     class GetTypedLinkFacetInformationRequest < Struct.new(
+      nil,
       :schema_arn,
       :name,
       keyword_init: true
@@ -2448,6 +2596,7 @@ module Aws::CloudDirectory
     #         they are supplied to any API calls. For more information about identity attributes, see <a href="https://docs.aws.amazon.com/clouddirectory/latest/developerguide/directory_objects_links.html#directory_objects_links_typedlink">Typed Links</a>.</p>
     #   @return [Array<String>]
     class GetTypedLinkFacetInformationResponse < Struct.new(
+      nil,
       :identity_attribute_order,
       keyword_init: true
     )
@@ -2458,6 +2607,7 @@ module Aws::CloudDirectory
     # @!attribute message
     #   @return [String]
     class IncompatibleSchemaException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -2472,6 +2622,7 @@ module Aws::CloudDirectory
     #   <p>In response to <a>ListIndex</a>, the <code>ObjectIdentifier</code> of the object attached to the index. In response to <a>ListAttachedIndices</a>, the <code>ObjectIdentifier</code> of the index attached to the object. This field will always contain the <code>ObjectIdentifier</code> of the object on the opposite side of the attachment specified in the query.</p>
     #   @return [String]
     class IndexAttachment < Struct.new(
+      nil,
       :indexed_attributes,
       :object_identifier,
       keyword_init: true
@@ -2483,6 +2634,7 @@ module Aws::CloudDirectory
     # @!attribute message
     #   @return [String]
     class IndexedAttributeMissingException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -2493,6 +2645,7 @@ module Aws::CloudDirectory
     # @!attribute message
     #   @return [String]
     class InternalServiceException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -2503,6 +2656,7 @@ module Aws::CloudDirectory
     # @!attribute message
     #   @return [String]
     class InvalidArnException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -2514,6 +2668,7 @@ module Aws::CloudDirectory
     # @!attribute message
     #   @return [String]
     class InvalidAttachmentException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -2525,6 +2680,7 @@ module Aws::CloudDirectory
     # @!attribute message
     #   @return [String]
     class InvalidFacetUpdateException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -2535,6 +2691,7 @@ module Aws::CloudDirectory
     # @!attribute message
     #   @return [String]
     class InvalidNextTokenException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -2545,6 +2702,7 @@ module Aws::CloudDirectory
     # @!attribute message
     #   @return [String]
     class InvalidRuleException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -2555,6 +2713,7 @@ module Aws::CloudDirectory
     # @!attribute message
     #   @return [String]
     class InvalidSchemaDocException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -2565,6 +2724,7 @@ module Aws::CloudDirectory
     # @!attribute message
     #   @return [String]
     class InvalidTaggingRequestException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -2575,6 +2735,7 @@ module Aws::CloudDirectory
     # @!attribute message
     #   @return [String]
     class LimitExceededException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -2589,6 +2750,7 @@ module Aws::CloudDirectory
     #   <p>The value that you want to update to.</p>
     #   @return [Types::TypedAttributeValue]
     class LinkAttributeAction < Struct.new(
+      nil,
       :attribute_action_type,
       :attribute_update_value,
       keyword_init: true
@@ -2604,6 +2766,7 @@ module Aws::CloudDirectory
     #   <p>The action to perform as part of the attribute update.</p>
     #   @return [Types::LinkAttributeAction]
     class LinkAttributeUpdate < Struct.new(
+      nil,
       :attribute_key,
       :attribute_action,
       keyword_init: true
@@ -2616,6 +2779,7 @@ module Aws::CloudDirectory
     # @!attribute message
     #   @return [String]
     class LinkNameAlreadyInUseException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -2635,6 +2799,7 @@ module Aws::CloudDirectory
     #   <p>The maximum number of results to retrieve.</p>
     #   @return [Integer]
     class ListAppliedSchemaArnsRequest < Struct.new(
+      nil,
       :directory_arn,
       :schema_arn,
       :next_token,
@@ -2651,6 +2816,7 @@ module Aws::CloudDirectory
     #   <p>The pagination token.</p>
     #   @return [String]
     class ListAppliedSchemaArnsResponse < Struct.new(
+      nil,
       :schema_arns,
       :next_token,
       keyword_init: true
@@ -2674,6 +2840,7 @@ module Aws::CloudDirectory
     #   <p>The consistency level to use for this operation.</p>
     #   @return [String]
     class ListAttachedIndicesRequest < Struct.new(
+      nil,
       :directory_arn,
       :target_reference,
       :next_token,
@@ -2691,6 +2858,7 @@ module Aws::CloudDirectory
     #   <p>The pagination token.</p>
     #   @return [String]
     class ListAttachedIndicesResponse < Struct.new(
+      nil,
       :index_attachments,
       :next_token,
       keyword_init: true
@@ -2705,6 +2873,7 @@ module Aws::CloudDirectory
     #   <p>The maximum number of results to retrieve.</p>
     #   @return [Integer]
     class ListDevelopmentSchemaArnsRequest < Struct.new(
+      nil,
       :next_token,
       :max_results,
       keyword_init: true
@@ -2719,6 +2888,7 @@ module Aws::CloudDirectory
     #   <p>The pagination token.</p>
     #   @return [String]
     class ListDevelopmentSchemaArnsResponse < Struct.new(
+      nil,
       :schema_arns,
       :next_token,
       keyword_init: true
@@ -2737,6 +2907,7 @@ module Aws::CloudDirectory
     #         Deleted.</p>
     #   @return [String]
     class ListDirectoriesRequest < Struct.new(
+      nil,
       :next_token,
       :max_results,
       :state,
@@ -2753,6 +2924,7 @@ module Aws::CloudDirectory
     #   <p>The pagination token.</p>
     #   @return [String]
     class ListDirectoriesResponse < Struct.new(
+      nil,
       :directories,
       :next_token,
       keyword_init: true
@@ -2773,6 +2945,7 @@ module Aws::CloudDirectory
     #   <p>The maximum number of results to retrieve.</p>
     #   @return [Integer]
     class ListFacetAttributesRequest < Struct.new(
+      nil,
       :schema_arn,
       :name,
       :next_token,
@@ -2789,6 +2962,7 @@ module Aws::CloudDirectory
     #   <p>The pagination token.</p>
     #   @return [String]
     class ListFacetAttributesResponse < Struct.new(
+      nil,
       :attributes,
       :next_token,
       keyword_init: true
@@ -2806,6 +2980,7 @@ module Aws::CloudDirectory
     #   <p>The maximum number of results to retrieve.</p>
     #   @return [Integer]
     class ListFacetNamesRequest < Struct.new(
+      nil,
       :schema_arn,
       :next_token,
       :max_results,
@@ -2821,6 +2996,7 @@ module Aws::CloudDirectory
     #   <p>The pagination token.</p>
     #   @return [String]
     class ListFacetNamesResponse < Struct.new(
+      nil,
       :facet_names,
       :next_token,
       keyword_init: true
@@ -2854,6 +3030,7 @@ module Aws::CloudDirectory
     #   <p>The consistency level to execute the request at.</p>
     #   @return [String]
     class ListIncomingTypedLinksRequest < Struct.new(
+      nil,
       :directory_arn,
       :object_reference,
       :filter_attribute_ranges,
@@ -2873,6 +3050,7 @@ module Aws::CloudDirectory
     #   <p>The pagination token.</p>
     #   @return [String]
     class ListIncomingTypedLinksResponse < Struct.new(
+      nil,
       :link_specifiers,
       :next_token,
       keyword_init: true
@@ -2899,6 +3077,7 @@ module Aws::CloudDirectory
     #   <p>The consistency level to execute the request at.</p>
     #   @return [String]
     class ListIndexRequest < Struct.new(
+      nil,
       :directory_arn,
       :ranges_on_indexed_values,
       :index_reference,
@@ -2917,6 +3096,7 @@ module Aws::CloudDirectory
     #   <p>The pagination token.</p>
     #   @return [String]
     class ListIndexResponse < Struct.new(
+      nil,
       :index_attachments,
       :next_token,
       keyword_init: true
@@ -2934,6 +3114,7 @@ module Aws::CloudDirectory
     #   <p>The maximum number of results to retrieve.</p>
     #   @return [Integer]
     class ListManagedSchemaArnsRequest < Struct.new(
+      nil,
       :schema_arn,
       :next_token,
       :max_results,
@@ -2949,6 +3130,7 @@ module Aws::CloudDirectory
     #   <p>The pagination token.</p>
     #   @return [String]
     class ListManagedSchemaArnsResponse < Struct.new(
+      nil,
       :schema_arns,
       :next_token,
       keyword_init: true
@@ -2979,6 +3161,7 @@ module Aws::CloudDirectory
     #         facet.</p>
     #   @return [Types::SchemaFacet]
     class ListObjectAttributesRequest < Struct.new(
+      nil,
       :directory_arn,
       :object_reference,
       :next_token,
@@ -2998,6 +3181,7 @@ module Aws::CloudDirectory
     #   <p>The pagination token.</p>
     #   @return [String]
     class ListObjectAttributesResponse < Struct.new(
+      nil,
       :attributes,
       :next_token,
       keyword_init: true
@@ -3025,6 +3209,7 @@ module Aws::CloudDirectory
     #         is reflected in a subsequent read operation of that same object.</p>
     #   @return [String]
     class ListObjectChildrenRequest < Struct.new(
+      nil,
       :directory_arn,
       :object_reference,
       :next_token,
@@ -3043,6 +3228,7 @@ module Aws::CloudDirectory
     #   <p>The pagination token.</p>
     #   @return [String]
     class ListObjectChildrenResponse < Struct.new(
+      nil,
       :children,
       :next_token,
       keyword_init: true
@@ -3064,6 +3250,7 @@ module Aws::CloudDirectory
     #         number.</p>
     #   @return [Integer]
     class ListObjectParentPathsRequest < Struct.new(
+      nil,
       :directory_arn,
       :object_reference,
       :next_token,
@@ -3081,6 +3268,7 @@ module Aws::CloudDirectory
     #   <p>The pagination token.</p>
     #   @return [String]
     class ListObjectParentPathsResponse < Struct.new(
+      nil,
       :path_to_object_identifiers_list,
       :next_token,
       keyword_init: true
@@ -3111,6 +3299,7 @@ module Aws::CloudDirectory
     #   <p>When set to True, returns all <a>ListObjectParentsResponse$ParentLinks</a>. There could be multiple links between a parent-child pair.</p>
     #   @return [Boolean]
     class ListObjectParentsRequest < Struct.new(
+      nil,
       :directory_arn,
       :object_reference,
       :next_token,
@@ -3133,6 +3322,7 @@ module Aws::CloudDirectory
     #   <p>Returns a list of parent reference and LinkName Tuples.</p>
     #   @return [Array<Types::ObjectIdentifierAndLinkNameTuple>]
     class ListObjectParentsResponse < Struct.new(
+      nil,
       :parents,
       :next_token,
       :parent_links,
@@ -3160,6 +3350,7 @@ module Aws::CloudDirectory
     #         is reflected in a subsequent read operation of that same object.</p>
     #   @return [String]
     class ListObjectPoliciesRequest < Struct.new(
+      nil,
       :directory_arn,
       :object_reference,
       :next_token,
@@ -3178,6 +3369,7 @@ module Aws::CloudDirectory
     #   <p>The pagination token.</p>
     #   @return [String]
     class ListObjectPoliciesResponse < Struct.new(
+      nil,
       :attached_policy_ids,
       :next_token,
       keyword_init: true
@@ -3211,6 +3403,7 @@ module Aws::CloudDirectory
     #   <p>The consistency level to execute the request at.</p>
     #   @return [String]
     class ListOutgoingTypedLinksRequest < Struct.new(
+      nil,
       :directory_arn,
       :object_reference,
       :filter_attribute_ranges,
@@ -3230,6 +3423,7 @@ module Aws::CloudDirectory
     #   <p>The pagination token.</p>
     #   @return [String]
     class ListOutgoingTypedLinksResponse < Struct.new(
+      nil,
       :typed_link_specifiers,
       :next_token,
       keyword_init: true
@@ -3256,6 +3450,7 @@ module Aws::CloudDirectory
     #         is reflected in a subsequent read operation of that same object.</p>
     #   @return [String]
     class ListPolicyAttachmentsRequest < Struct.new(
+      nil,
       :directory_arn,
       :policy_reference,
       :next_token,
@@ -3273,6 +3468,7 @@ module Aws::CloudDirectory
     #   <p>The pagination token.</p>
     #   @return [String]
     class ListPolicyAttachmentsResponse < Struct.new(
+      nil,
       :object_identifiers,
       :next_token,
       keyword_init: true
@@ -3290,6 +3486,7 @@ module Aws::CloudDirectory
     #   <p>The maximum number of results to retrieve.</p>
     #   @return [Integer]
     class ListPublishedSchemaArnsRequest < Struct.new(
+      nil,
       :schema_arn,
       :next_token,
       :max_results,
@@ -3305,6 +3502,7 @@ module Aws::CloudDirectory
     #   <p>The pagination token.</p>
     #   @return [String]
     class ListPublishedSchemaArnsResponse < Struct.new(
+      nil,
       :schema_arns,
       :next_token,
       keyword_init: true
@@ -3325,6 +3523,7 @@ module Aws::CloudDirectory
     #         single page. This is for future use and is not supported currently.</p>
     #   @return [Integer]
     class ListTagsForResourceRequest < Struct.new(
+      nil,
       :resource_arn,
       :next_token,
       :max_results,
@@ -3340,6 +3539,7 @@ module Aws::CloudDirectory
     #   <p>The token to use to retrieve the next page of results. This value is null when there are no more results to return.</p>
     #   @return [String]
     class ListTagsForResourceResponse < Struct.new(
+      nil,
       :tags,
       :next_token,
       keyword_init: true
@@ -3361,6 +3561,7 @@ module Aws::CloudDirectory
     #   <p>The maximum number of results to retrieve.</p>
     #   @return [Integer]
     class ListTypedLinkFacetAttributesRequest < Struct.new(
+      nil,
       :schema_arn,
       :name,
       :next_token,
@@ -3377,6 +3578,7 @@ module Aws::CloudDirectory
     #   <p>The pagination token.</p>
     #   @return [String]
     class ListTypedLinkFacetAttributesResponse < Struct.new(
+      nil,
       :attributes,
       :next_token,
       keyword_init: true
@@ -3395,6 +3597,7 @@ module Aws::CloudDirectory
     #   <p>The maximum number of results to retrieve.</p>
     #   @return [Integer]
     class ListTypedLinkFacetNamesRequest < Struct.new(
+      nil,
       :schema_arn,
       :next_token,
       :max_results,
@@ -3410,6 +3613,7 @@ module Aws::CloudDirectory
     #   <p>The pagination token.</p>
     #   @return [String]
     class ListTypedLinkFacetNamesResponse < Struct.new(
+      nil,
       :facet_names,
       :next_token,
       keyword_init: true
@@ -3432,6 +3636,7 @@ module Aws::CloudDirectory
     #         number.</p>
     #   @return [Integer]
     class LookupPolicyRequest < Struct.new(
+      nil,
       :directory_arn,
       :object_reference,
       :next_token,
@@ -3450,6 +3655,7 @@ module Aws::CloudDirectory
     #   <p>The pagination token.</p>
     #   @return [String]
     class LookupPolicyResponse < Struct.new(
+      nil,
       :policy_to_path_list,
       :next_token,
       keyword_init: true
@@ -3461,6 +3667,7 @@ module Aws::CloudDirectory
     # @!attribute message
     #   @return [String]
     class NotIndexException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -3472,6 +3679,7 @@ module Aws::CloudDirectory
     # @!attribute message
     #   @return [String]
     class NotNodeException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -3482,6 +3690,7 @@ module Aws::CloudDirectory
     # @!attribute message
     #   @return [String]
     class NotPolicyException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -3492,6 +3701,7 @@ module Aws::CloudDirectory
     # @!attribute message
     #   @return [String]
     class ObjectAlreadyDetachedException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -3506,6 +3716,7 @@ module Aws::CloudDirectory
     #   <p>The value that you want to update to.</p>
     #   @return [Types::TypedAttributeValue]
     class ObjectAttributeAction < Struct.new(
+      nil,
       :object_attribute_action_type,
       :object_attribute_update_value,
       keyword_init: true
@@ -3521,6 +3732,7 @@ module Aws::CloudDirectory
     #   <p>The range of attribute values being selected.</p>
     #   @return [Types::TypedAttributeValueRange]
     class ObjectAttributeRange < Struct.new(
+      nil,
       :attribute_key,
       :range,
       keyword_init: true
@@ -3536,6 +3748,7 @@ module Aws::CloudDirectory
     #   <p>The action to perform as part of the attribute update.</p>
     #   @return [Types::ObjectAttributeAction]
     class ObjectAttributeUpdate < Struct.new(
+      nil,
       :object_attribute_key,
       :object_attribute_action,
       keyword_init: true
@@ -3551,6 +3764,7 @@ module Aws::CloudDirectory
     #   <p>The name of the link between the parent and the child object.</p>
     #   @return [String]
     class ObjectIdentifierAndLinkNameTuple < Struct.new(
+      nil,
       :object_identifier,
       :link_name,
       keyword_init: true
@@ -3563,6 +3777,7 @@ module Aws::CloudDirectory
     # @!attribute message
     #   @return [String]
     class ObjectNotDetachedException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -3588,6 +3803,7 @@ module Aws::CloudDirectory
     #            </ul>
     #   @return [String]
     class ObjectReference < Struct.new(
+      nil,
       :selector,
       keyword_init: true
     )
@@ -3604,6 +3820,7 @@ module Aws::CloudDirectory
     #         request.</p>
     #   @return [Array<String>]
     class PathToObjectIdentifiers < Struct.new(
+      nil,
       :path,
       :object_identifiers,
       keyword_init: true
@@ -3625,6 +3842,7 @@ module Aws::CloudDirectory
     #   <p>The type of policy that can be associated with <code>PolicyAttachment</code>.</p>
     #   @return [String]
     class PolicyAttachment < Struct.new(
+      nil,
       :policy_id,
       :object_identifier,
       :policy_type,
@@ -3643,6 +3861,7 @@ module Aws::CloudDirectory
     #   <p>List of policy objects.</p>
     #   @return [Array<Types::PolicyAttachment>]
     class PolicyToPath < Struct.new(
+      nil,
       :path,
       :policies,
       keyword_init: true
@@ -3665,6 +3884,7 @@ module Aws::CloudDirectory
     #         development schema is considered.</p>
     #   @return [String]
     class PublishSchemaRequest < Struct.new(
+      nil,
       :development_schema_arn,
       :version,
       :minor_version,
@@ -3678,6 +3898,7 @@ module Aws::CloudDirectory
     #   <p>The ARN that is associated with the published schema. For more information, see <a>arns</a>.</p>
     #   @return [String]
     class PublishSchemaResponse < Struct.new(
+      nil,
       :published_schema_arn,
       keyword_init: true
     )
@@ -3691,6 +3912,7 @@ module Aws::CloudDirectory
     #   <p>The replacement JSON schema.</p>
     #   @return [String]
     class PutSchemaFromJsonRequest < Struct.new(
+      nil,
       :schema_arn,
       :document,
       keyword_init: true
@@ -3702,6 +3924,7 @@ module Aws::CloudDirectory
     #   <p>The ARN of the schema to update.</p>
     #   @return [String]
     class PutSchemaFromJsonResponse < Struct.new(
+      nil,
       :arn,
       keyword_init: true
     )
@@ -3718,6 +3941,7 @@ module Aws::CloudDirectory
     #   <p>A reference to the object to remove the facet from.</p>
     #   @return [Types::ObjectReference]
     class RemoveFacetFromObjectRequest < Struct.new(
+      nil,
       :directory_arn,
       :schema_facet,
       :object_reference,
@@ -3727,6 +3951,7 @@ module Aws::CloudDirectory
     end
 
     class RemoveFacetFromObjectResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -3736,6 +3961,7 @@ module Aws::CloudDirectory
     # @!attribute message
     #   @return [String]
     class ResourceNotFoundException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -3746,6 +3972,7 @@ module Aws::CloudDirectory
     # @!attribute message
     #   @return [String]
     class RetryableConflictException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -3761,6 +3988,7 @@ module Aws::CloudDirectory
     #   <p>The minimum and maximum parameters that are associated with the rule.</p>
     #   @return [Hash<String, String>]
     class Rule < Struct.new(
+      nil,
       :type,
       :parameters,
       keyword_init: true
@@ -3773,6 +4001,7 @@ module Aws::CloudDirectory
     # @!attribute message
     #   @return [String]
     class SchemaAlreadyExistsException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -3783,6 +4012,7 @@ module Aws::CloudDirectory
     # @!attribute message
     #   @return [String]
     class SchemaAlreadyPublishedException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -3798,6 +4028,7 @@ module Aws::CloudDirectory
     #   <p>The name of the facet. If this value is set, SchemaArn must also be set.</p>
     #   @return [String]
     class SchemaFacet < Struct.new(
+      nil,
       :schema_arn,
       :facet_name,
       keyword_init: true
@@ -3810,6 +4041,7 @@ module Aws::CloudDirectory
     # @!attribute message
     #   @return [String]
     class StillContainsLinksException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -3824,6 +4056,7 @@ module Aws::CloudDirectory
     #   <p>The value that is associated with the tag.</p>
     #   @return [String]
     class Tag < Struct.new(
+      nil,
       :key,
       :value,
       keyword_init: true
@@ -3839,6 +4072,7 @@ module Aws::CloudDirectory
     #   <p>A list of tag key-value pairs.</p>
     #   @return [Array<Types::Tag>]
     class TagResourceRequest < Struct.new(
+      nil,
       :resource_arn,
       :tags,
       keyword_init: true
@@ -3847,6 +4081,7 @@ module Aws::CloudDirectory
     end
 
     class TagResourceResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -3903,6 +4138,7 @@ module Aws::CloudDirectory
     #   <p>The attribute value to terminate the range at.</p>
     #   @return [Types::TypedAttributeValue]
     class TypedAttributeValueRange < Struct.new(
+      nil,
       :start_mode,
       :start_value,
       :end_mode,
@@ -3932,6 +4168,7 @@ module Aws::CloudDirectory
     #   <p>The required behavior of the <code>TypedLinkAttributeDefinition</code>.</p>
     #   @return [String]
     class TypedLinkAttributeDefinition < Struct.new(
+      nil,
       :name,
       :type,
       :default_value,
@@ -3956,6 +4193,7 @@ module Aws::CloudDirectory
     #   <p>The range of attribute values that are being selected.</p>
     #   @return [Types::TypedAttributeValueRange]
     class TypedLinkAttributeRange < Struct.new(
+      nil,
       :attribute_name,
       :range,
       keyword_init: true
@@ -3975,6 +4213,7 @@ module Aws::CloudDirectory
     #   <p>The set of attributes that distinguish links made from this facet from each other, in the order of significance. Listing typed links can filter on the values of these attributes. See <a>ListOutgoingTypedLinks</a> and <a>ListIncomingTypedLinks</a> for details.</p>
     #   @return [Array<String>]
     class TypedLinkFacet < Struct.new(
+      nil,
       :name,
       :attributes,
       :identity_attribute_order,
@@ -3991,6 +4230,7 @@ module Aws::CloudDirectory
     #   <p>The action to perform when updating the attribute.</p>
     #   @return [String]
     class TypedLinkFacetAttributeUpdate < Struct.new(
+      nil,
       :attribute,
       :action,
       keyword_init: true
@@ -4008,6 +4248,7 @@ module Aws::CloudDirectory
     #   <p>The unique name of the typed link facet.</p>
     #   @return [String]
     class TypedLinkSchemaAndFacetName < Struct.new(
+      nil,
       :schema_arn,
       :typed_link_name,
       keyword_init: true
@@ -4033,6 +4274,7 @@ module Aws::CloudDirectory
     #   <p>Identifies the attribute value to update.</p>
     #   @return [Array<Types::AttributeNameAndValue>]
     class TypedLinkSpecifier < Struct.new(
+      nil,
       :typed_link_facet,
       :source_object_reference,
       :target_object_reference,
@@ -4046,6 +4288,7 @@ module Aws::CloudDirectory
     # @!attribute message
     #   @return [String]
     class UnsupportedIndexTypeException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -4060,6 +4303,7 @@ module Aws::CloudDirectory
     #   <p>Keys of the tag that need to be removed from the resource.</p>
     #   @return [Array<String>]
     class UntagResourceRequest < Struct.new(
+      nil,
       :resource_arn,
       :tag_keys,
       keyword_init: true
@@ -4068,6 +4312,7 @@ module Aws::CloudDirectory
     end
 
     class UntagResourceResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -4089,6 +4334,7 @@ module Aws::CloudDirectory
     #   <p>The object type that is associated with the facet. See <a>CreateFacetRequest$ObjectType</a> for more details.</p>
     #   @return [String]
     class UpdateFacetRequest < Struct.new(
+      nil,
       :schema_arn,
       :name,
       :attribute_updates,
@@ -4099,6 +4345,7 @@ module Aws::CloudDirectory
     end
 
     class UpdateFacetResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -4114,6 +4361,7 @@ module Aws::CloudDirectory
     #   <p>The attributes update structure.</p>
     #   @return [Array<Types::LinkAttributeUpdate>]
     class UpdateLinkAttributesRequest < Struct.new(
+      nil,
       :directory_arn,
       :typed_link_specifier,
       :attribute_updates,
@@ -4123,6 +4371,7 @@ module Aws::CloudDirectory
     end
 
     class UpdateLinkAttributesResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -4139,6 +4388,7 @@ module Aws::CloudDirectory
     #   <p>The attributes update structure.</p>
     #   @return [Array<Types::ObjectAttributeUpdate>]
     class UpdateObjectAttributesRequest < Struct.new(
+      nil,
       :directory_arn,
       :object_reference,
       :attribute_updates,
@@ -4151,6 +4401,7 @@ module Aws::CloudDirectory
     #   <p>The <code>ObjectIdentifier</code> of the updated object.</p>
     #   @return [String]
     class UpdateObjectAttributesResponse < Struct.new(
+      nil,
       :object_identifier,
       keyword_init: true
     )
@@ -4165,6 +4416,7 @@ module Aws::CloudDirectory
     #   <p>The name of the schema.</p>
     #   @return [String]
     class UpdateSchemaRequest < Struct.new(
+      nil,
       :schema_arn,
       :name,
       keyword_init: true
@@ -4176,6 +4428,7 @@ module Aws::CloudDirectory
     #   <p>The ARN that is associated with the updated schema. For more information, see <a>arns</a>.</p>
     #   @return [String]
     class UpdateSchemaResponse < Struct.new(
+      nil,
       :schema_arn,
       keyword_init: true
     )
@@ -4201,6 +4454,7 @@ module Aws::CloudDirectory
     #         in which they are supplied to any API calls. For more information about identity attributes, see <a href="https://docs.aws.amazon.com/clouddirectory/latest/developerguide/directory_objects_links.html#directory_objects_links_typedlink">Typed Links</a>.</p>
     #   @return [Array<String>]
     class UpdateTypedLinkFacetRequest < Struct.new(
+      nil,
       :schema_arn,
       :name,
       :attribute_updates,
@@ -4211,6 +4465,7 @@ module Aws::CloudDirectory
     end
 
     class UpdateTypedLinkFacetResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -4226,6 +4481,7 @@ module Aws::CloudDirectory
     #   <p>Used for testing whether the major version schemas are backward compatible or not. If schema compatibility fails, an exception would be thrown else the call would succeed but no changes will be saved. This parameter is optional.</p>
     #   @return [Boolean]
     class UpgradeAppliedSchemaRequest < Struct.new(
+      nil,
       :published_schema_arn,
       :directory_arn,
       :dry_run,
@@ -4241,6 +4497,7 @@ module Aws::CloudDirectory
     #   <p>The ARN of the directory that is returned as part of the response.</p>
     #   @return [String]
     class UpgradeAppliedSchemaResponse < Struct.new(
+      nil,
       :upgraded_schema_arn,
       :directory_arn,
       keyword_init: true
@@ -4261,6 +4518,7 @@ module Aws::CloudDirectory
     #   <p>Used for testing whether the Development schema provided is backwards compatible, or not, with the publish schema provided by the user to be upgraded. If schema compatibility fails, an exception would be thrown else the call would succeed. This parameter is optional and defaults to false.</p>
     #   @return [Boolean]
     class UpgradePublishedSchemaRequest < Struct.new(
+      nil,
       :development_schema_arn,
       :published_schema_arn,
       :minor_version,
@@ -4274,6 +4532,7 @@ module Aws::CloudDirectory
     #   <p>The ARN of the upgraded schema that is returned as part of the response.</p>
     #   @return [String]
     class UpgradePublishedSchemaResponse < Struct.new(
+      nil,
       :upgraded_schema_arn,
       keyword_init: true
     )
@@ -4285,6 +4544,7 @@ module Aws::CloudDirectory
     # @!attribute message
     #   @return [String]
     class ValidationException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )

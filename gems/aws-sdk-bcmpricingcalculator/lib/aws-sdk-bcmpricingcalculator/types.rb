@@ -10,6 +10,7 @@ module Aws::BCMPricingCalculator
     # @!attribute message
     #   @return [String]
     class AccessDeniedException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -24,6 +25,7 @@ module Aws::BCMPricingCalculator
     #   <p> The number of instances to add for this Reserved Instance offering. </p>
     #   @return [Integer]
     class AddReservedInstanceAction < Struct.new(
+      nil,
       :reserved_instances_offering_id,
       :instance_count,
       keyword_init: true
@@ -39,6 +41,7 @@ module Aws::BCMPricingCalculator
     #   <p> The hourly commitment, in the same currency of the <code>savingsPlanOfferingId</code>. This is a value between 0.001 and 1 million. You cannot specify more than five digits after the decimal point. </p>
     #   @return [Float]
     class AddSavingsPlanAction < Struct.new(
+      nil,
       :savings_plan_offering_id,
       :commitment,
       keyword_init: true
@@ -60,6 +63,7 @@ module Aws::BCMPricingCalculator
     #   <p> The specific commitment action to be taken (e.g., adding a Reserved Instance or Savings Plan). </p>
     #   @return [Types::BillScenarioCommitmentModificationAction]
     class BatchCreateBillScenarioCommitmentModificationEntry < Struct.new(
+      nil,
       :key,
       :group,
       :usage_account_id,
@@ -80,6 +84,7 @@ module Aws::BCMPricingCalculator
     #   <p> The error code associated with the failed operation. </p>
     #   @return [String]
     class BatchCreateBillScenarioCommitmentModificationError < Struct.new(
+      nil,
       :key,
       :error_message,
       :error_code,
@@ -105,6 +110,7 @@ module Aws::BCMPricingCalculator
     #   <p> The specific commitment action that was taken. </p>
     #   @return [Types::BillScenarioCommitmentModificationAction]
     class BatchCreateBillScenarioCommitmentModificationItem < Struct.new(
+      nil,
       :key,
       :id,
       :group,
@@ -125,6 +131,7 @@ module Aws::BCMPricingCalculator
     #   <p> A unique, case-sensitive identifier that you provide to ensure the idempotency of the request. </p>
     #   @return [String]
     class BatchCreateBillScenarioCommitmentModificationRequest < Struct.new(
+      nil,
       :bill_scenario_id,
       :commitment_modifications,
       :client_token,
@@ -140,6 +147,7 @@ module Aws::BCMPricingCalculator
     #   <p> Returns the list of errors reason and the commitment item keys that cannot be created in the Bill Scenario. </p>
     #   @return [Array<Types::BatchCreateBillScenarioCommitmentModificationError>]
     class BatchCreateBillScenarioCommitmentModificationResponse < Struct.new(
+      nil,
       :items,
       :errors,
       keyword_init: true
@@ -176,6 +184,7 @@ module Aws::BCMPricingCalculator
     #   <p> Historical usage data associated with this modification, if available. </p>
     #   @return [Types::HistoricalUsageEntity]
     class BatchCreateBillScenarioUsageModificationEntry < Struct.new(
+      nil,
       :service_code,
       :usage_type,
       :operation,
@@ -201,6 +210,7 @@ module Aws::BCMPricingCalculator
     #   <p> The error code associated with the failed operation. </p>
     #   @return [String]
     class BatchCreateBillScenarioUsageModificationError < Struct.new(
+      nil,
       :key,
       :error_message,
       :error_code,
@@ -244,6 +254,7 @@ module Aws::BCMPricingCalculator
     #   <p> The key of the successfully created entry. </p>
     #   @return [String]
     class BatchCreateBillScenarioUsageModificationItem < Struct.new(
+      nil,
       :service_code,
       :usage_type,
       :operation,
@@ -270,6 +281,7 @@ module Aws::BCMPricingCalculator
     #   <p> A unique, case-sensitive identifier that you provide to ensure the idempotency of the request. </p>
     #   @return [String]
     class BatchCreateBillScenarioUsageModificationRequest < Struct.new(
+      nil,
       :bill_scenario_id,
       :usage_modifications,
       :client_token,
@@ -285,6 +297,7 @@ module Aws::BCMPricingCalculator
     #   <p> Returns the list of errors reason and the usage item keys that cannot be created in the Bill Scenario. </p>
     #   @return [Array<Types::BatchCreateBillScenarioUsageModificationError>]
     class BatchCreateBillScenarioUsageModificationResponse < Struct.new(
+      nil,
       :items,
       :errors,
       keyword_init: true
@@ -318,6 +331,7 @@ module Aws::BCMPricingCalculator
     #   <p> Historical usage data associated with this estimate, if available. </p>
     #   @return [Types::HistoricalUsageEntity]
     class BatchCreateWorkloadEstimateUsageEntry < Struct.new(
+      nil,
       :service_code,
       :usage_type,
       :operation,
@@ -342,6 +356,7 @@ module Aws::BCMPricingCalculator
     #   <p> A descriptive message for the error that occurred. </p>
     #   @return [String]
     class BatchCreateWorkloadEstimateUsageError < Struct.new(
+      nil,
       :key,
       :error_code,
       :error_message,
@@ -391,6 +406,7 @@ module Aws::BCMPricingCalculator
     #   <p> The key of the successfully created entry. </p>
     #   @return [String]
     class BatchCreateWorkloadEstimateUsageItem < Struct.new(
+      nil,
       :service_code,
       :usage_type,
       :operation,
@@ -419,6 +435,7 @@ module Aws::BCMPricingCalculator
     #   <p> A unique, case-sensitive identifier that you provide to ensure the idempotency of the request. </p>
     #   @return [String]
     class BatchCreateWorkloadEstimateUsageRequest < Struct.new(
+      nil,
       :workload_estimate_id,
       :usage,
       :client_token,
@@ -434,6 +451,7 @@ module Aws::BCMPricingCalculator
     #   <p> Returns the list of errors reason and the usage item keys that cannot be created in the Workload estimate. </p>
     #   @return [Array<Types::BatchCreateWorkloadEstimateUsageError>]
     class BatchCreateWorkloadEstimateUsageResponse < Struct.new(
+      nil,
       :items,
       :errors,
       keyword_init: true
@@ -452,6 +470,7 @@ module Aws::BCMPricingCalculator
     #   <p> The message that describes the error. </p>
     #   @return [String]
     class BatchDeleteBillScenarioCommitmentModificationError < Struct.new(
+      nil,
       :id,
       :error_code,
       :error_message,
@@ -467,6 +486,7 @@ module Aws::BCMPricingCalculator
     #   <p> List of commitments that you want to delete from the Bill Scenario. </p>
     #   @return [Array<String>]
     class BatchDeleteBillScenarioCommitmentModificationRequest < Struct.new(
+      nil,
       :bill_scenario_id,
       :ids,
       keyword_init: true
@@ -478,6 +498,7 @@ module Aws::BCMPricingCalculator
     #   <p> Returns the list of errors reason and the commitment item keys that cannot be deleted from the Bill Scenario. </p>
     #   @return [Array<Types::BatchDeleteBillScenarioCommitmentModificationError>]
     class BatchDeleteBillScenarioCommitmentModificationResponse < Struct.new(
+      nil,
       :errors,
       keyword_init: true
     )
@@ -495,6 +516,7 @@ module Aws::BCMPricingCalculator
     #   <p> The code associated with the error. </p>
     #   @return [String]
     class BatchDeleteBillScenarioUsageModificationError < Struct.new(
+      nil,
       :id,
       :error_message,
       :error_code,
@@ -510,6 +532,7 @@ module Aws::BCMPricingCalculator
     #   <p> List of usage that you want to delete from the Bill Scenario. </p>
     #   @return [Array<String>]
     class BatchDeleteBillScenarioUsageModificationRequest < Struct.new(
+      nil,
       :bill_scenario_id,
       :ids,
       keyword_init: true
@@ -521,6 +544,7 @@ module Aws::BCMPricingCalculator
     #   <p> Returns the list of errors reason and the usage item keys that cannot be deleted from the Bill Scenario. </p>
     #   @return [Array<Types::BatchDeleteBillScenarioUsageModificationError>]
     class BatchDeleteBillScenarioUsageModificationResponse < Struct.new(
+      nil,
       :errors,
       keyword_init: true
     )
@@ -538,6 +562,7 @@ module Aws::BCMPricingCalculator
     #   <p> The code associated with the error. </p>
     #   @return [String]
     class BatchDeleteWorkloadEstimateUsageError < Struct.new(
+      nil,
       :id,
       :error_message,
       :error_code,
@@ -553,6 +578,7 @@ module Aws::BCMPricingCalculator
     #   <p> List of usage that you want to delete from the Workload estimate. </p>
     #   @return [Array<String>]
     class BatchDeleteWorkloadEstimateUsageRequest < Struct.new(
+      nil,
       :workload_estimate_id,
       :ids,
       keyword_init: true
@@ -564,6 +590,7 @@ module Aws::BCMPricingCalculator
     #   <p> Returns the list of errors reason and the usage item keys that cannot be deleted from the Workload estimate. </p>
     #   @return [Array<Types::BatchDeleteWorkloadEstimateUsageError>]
     class BatchDeleteWorkloadEstimateUsageResponse < Struct.new(
+      nil,
       :errors,
       keyword_init: true
     )
@@ -578,6 +605,7 @@ module Aws::BCMPricingCalculator
     #   <p> The updated group identifier for the commitment modification. </p>
     #   @return [String]
     class BatchUpdateBillScenarioCommitmentModificationEntry < Struct.new(
+      nil,
       :id,
       :group,
       keyword_init: true
@@ -596,6 +624,7 @@ module Aws::BCMPricingCalculator
     #   <p> The message that describes the error. </p>
     #   @return [String]
     class BatchUpdateBillScenarioCommitmentModificationError < Struct.new(
+      nil,
       :id,
       :error_code,
       :error_message,
@@ -611,6 +640,7 @@ module Aws::BCMPricingCalculator
     #   <p> List of commitments that you want to update in a Bill Scenario. </p>
     #   @return [Array<Types::BatchUpdateBillScenarioCommitmentModificationEntry>]
     class BatchUpdateBillScenarioCommitmentModificationRequest < Struct.new(
+      nil,
       :bill_scenario_id,
       :commitment_modifications,
       keyword_init: true
@@ -625,6 +655,7 @@ module Aws::BCMPricingCalculator
     #   <p> Returns the list of error reasons and commitment line item IDs that could not be updated for the Bill Scenario. </p>
     #   @return [Array<Types::BatchUpdateBillScenarioCommitmentModificationError>]
     class BatchUpdateBillScenarioCommitmentModificationResponse < Struct.new(
+      nil,
       :items,
       :errors,
       keyword_init: true
@@ -643,6 +674,7 @@ module Aws::BCMPricingCalculator
     #   <p> The updated usage amounts for the modification. </p>
     #   @return [Array<Types::UsageAmount>]
     class BatchUpdateBillScenarioUsageModificationEntry < Struct.new(
+      nil,
       :id,
       :group,
       :amounts,
@@ -662,6 +694,7 @@ module Aws::BCMPricingCalculator
     #   <p> The code associated with the error. </p>
     #   @return [String]
     class BatchUpdateBillScenarioUsageModificationError < Struct.new(
+      nil,
       :id,
       :error_message,
       :error_code,
@@ -677,6 +710,7 @@ module Aws::BCMPricingCalculator
     #   <p> List of usage lines that you want to update in a Bill Scenario identified by the usage ID. </p>
     #   @return [Array<Types::BatchUpdateBillScenarioUsageModificationEntry>]
     class BatchUpdateBillScenarioUsageModificationRequest < Struct.new(
+      nil,
       :bill_scenario_id,
       :usage_modifications,
       keyword_init: true
@@ -691,6 +725,7 @@ module Aws::BCMPricingCalculator
     #   <p> Returns the list of error reasons and usage line item IDs that could not be updated for the Bill Scenario. </p>
     #   @return [Array<Types::BatchUpdateBillScenarioUsageModificationError>]
     class BatchUpdateBillScenarioUsageModificationResponse < Struct.new(
+      nil,
       :items,
       :errors,
       keyword_init: true
@@ -709,6 +744,7 @@ module Aws::BCMPricingCalculator
     #   <p> The updated estimated usage amount. </p>
     #   @return [Float]
     class BatchUpdateWorkloadEstimateUsageEntry < Struct.new(
+      nil,
       :id,
       :group,
       :amount,
@@ -728,6 +764,7 @@ module Aws::BCMPricingCalculator
     #   <p> The code associated with the error. </p>
     #   @return [String]
     class BatchUpdateWorkloadEstimateUsageError < Struct.new(
+      nil,
       :id,
       :error_message,
       :error_code,
@@ -743,6 +780,7 @@ module Aws::BCMPricingCalculator
     #   <p> List of usage line amounts and usage group that you want to update in a Workload estimate identified by the usage ID. </p>
     #   @return [Array<Types::BatchUpdateWorkloadEstimateUsageEntry>]
     class BatchUpdateWorkloadEstimateUsageRequest < Struct.new(
+      nil,
       :workload_estimate_id,
       :usage,
       keyword_init: true
@@ -757,6 +795,7 @@ module Aws::BCMPricingCalculator
     #   <p> Returns the list of error reasons and usage line item IDs that could not be updated for the Workload estimate. </p>
     #   @return [Array<Types::BatchUpdateWorkloadEstimateUsageError>]
     class BatchUpdateWorkloadEstimateUsageResponse < Struct.new(
+      nil,
       :items,
       :errors,
       keyword_init: true
@@ -793,6 +832,7 @@ module Aws::BCMPricingCalculator
     #   <p> The monthly payment amount for this commitment, if applicable. </p>
     #   @return [Types::CostAmount]
     class BillEstimateCommitmentSummary < Struct.new(
+      nil,
       :id,
       :purchase_agreement_type,
       :offering_id,
@@ -815,6 +855,7 @@ module Aws::BCMPricingCalculator
     #   <p> A breakdown of cost differences by Amazon Web Services service. </p>
     #   @return [Hash<String, Types::CostDifference>]
     class BillEstimateCostSummary < Struct.new(
+      nil,
       :total_cost_difference,
       :service_cost_differences,
       keyword_init: true
@@ -836,6 +877,7 @@ module Aws::BCMPricingCalculator
     #   <p> The specific commitment action taken in this modification. </p>
     #   @return [Types::BillScenarioCommitmentModificationAction]
     class BillEstimateInputCommitmentModificationSummary < Struct.new(
+      nil,
       :id,
       :group,
       :usage_account_id,
@@ -877,6 +919,7 @@ module Aws::BCMPricingCalculator
     #   <p> Historical usage data associated with this modification, if available. </p>
     #   @return [Types::HistoricalUsageEntity]
     class BillEstimateInputUsageModificationSummary < Struct.new(
+      nil,
       :service_code,
       :usage_type,
       :operation,
@@ -939,6 +982,7 @@ module Aws::BCMPricingCalculator
     #   <p> The Amazon Resource Names (ARNs) of any Savings Plans applied to this line item. </p>
     #   @return [Array<String>]
     class BillEstimateLineItemSummary < Struct.new(
+      nil,
       :service_code,
       :usage_type,
       :operation,
@@ -979,6 +1023,7 @@ module Aws::BCMPricingCalculator
     #   <p> The timestamp when the bill estimate will expire. </p>
     #   @return [Time]
     class BillEstimateSummary < Struct.new(
+      nil,
       :id,
       :name,
       :status,
@@ -998,6 +1043,7 @@ module Aws::BCMPricingCalculator
     #   <p> The end date and time of the interval. </p>
     #   @return [Time]
     class BillInterval < Struct.new(
+      nil,
       :start,
       :end,
       keyword_init: true
@@ -1049,6 +1095,7 @@ module Aws::BCMPricingCalculator
     #   <p> The specific commitment action taken in this modification. </p>
     #   @return [Types::BillScenarioCommitmentModificationAction]
     class BillScenarioCommitmentModificationItem < Struct.new(
+      nil,
       :id,
       :usage_account_id,
       :group,
@@ -1081,6 +1128,7 @@ module Aws::BCMPricingCalculator
     #   <p> An error message if the bill scenario creation or processing failed. </p>
     #   @return [String]
     class BillScenarioSummary < Struct.new(
+      nil,
       :id,
       :name,
       :bill_interval,
@@ -1125,6 +1173,7 @@ module Aws::BCMPricingCalculator
     #   <p> Historical usage data associated with this modification, if available. </p>
     #   @return [Types::HistoricalUsageEntity]
     class BillScenarioUsageModificationItem < Struct.new(
+      nil,
       :service_code,
       :usage_type,
       :operation,
@@ -1150,6 +1199,7 @@ module Aws::BCMPricingCalculator
     #   <p> The type of the resource that was not found. </p>
     #   @return [String]
     class ConflictException < Struct.new(
+      nil,
       :message,
       :resource_id,
       :resource_type,
@@ -1166,6 +1216,7 @@ module Aws::BCMPricingCalculator
     #   <p> The currency code for the cost amount. </p>
     #   @return [String]
     class CostAmount < Struct.new(
+      nil,
       :amount,
       :currency,
       keyword_init: true
@@ -1181,6 +1232,7 @@ module Aws::BCMPricingCalculator
     #   <p> The estimated cost amount. </p>
     #   @return [Types::CostAmount]
     class CostDifference < Struct.new(
+      nil,
       :historical_cost,
       :estimated_cost,
       keyword_init: true
@@ -1201,6 +1253,7 @@ module Aws::BCMPricingCalculator
     #   <p> An optional list of tags to associate with the specified BillEstimate. You can use resource tags to control access to your BillEstimate using IAM policies. Each tag consists of a key and a value, and each key must be unique for the resource. The following restrictions apply to resource tags: </p> <ul> <li> <p>Although the maximum number of array members is 200, you can assign a maximum of 50 user-tags to one resource. The remaining are reserved for Amazon Web Services. </p> </li> <li> <p>The maximum length of a key is 128 characters.</p> </li> <li> <p>The maximum length of a value is 256 characters.</p> </li> <li> <p>Keys and values can only contain alphanumeric characters, spaces, and any of the following: <code>_.:/=+@-</code>.</p> </li> <li> <p>Keys and values are case sensitive.</p> </li> <li> <p>Keys and values are trimmed for any leading or trailing whitespaces.</p> </li> <li> <p>Don't use <code>aws:</code> as a prefix for your keys. This prefix is reserved for Amazon Web Services.</p> </li> </ul>
     #   @return [Hash<String, String>]
     class CreateBillEstimateRequest < Struct.new(
+      nil,
       :bill_scenario_id,
       :name,
       :client_token,
@@ -1235,6 +1288,7 @@ module Aws::BCMPricingCalculator
     #   <p> The timestamp of when the Bill estimate will expire. A Bill estimate becomes inaccessible after expiration. </p>
     #   @return [Time]
     class CreateBillEstimateResponse < Struct.new(
+      nil,
       :id,
       :name,
       :status,
@@ -1258,6 +1312,7 @@ module Aws::BCMPricingCalculator
     #   <p> The tags to apply to the bill scenario. </p>
     #   @return [Hash<String, String>]
     class CreateBillScenarioRequest < Struct.new(
+      nil,
       :name,
       :client_token,
       :tags,
@@ -1288,6 +1343,7 @@ module Aws::BCMPricingCalculator
     #   <p> An error message if the bill scenario creation failed. </p>
     #   @return [String]
     class CreateBillScenarioResponse < Struct.new(
+      nil,
       :id,
       :name,
       :bill_interval,
@@ -1313,6 +1369,7 @@ module Aws::BCMPricingCalculator
     #   <p> The tags to apply to the workload estimate. </p>
     #   @return [Hash<String, String>]
     class CreateWorkloadEstimateRequest < Struct.new(
+      nil,
       :name,
       :client_token,
       :rate_type,
@@ -1354,6 +1411,7 @@ module Aws::BCMPricingCalculator
     #   <p> An error message if the workload estimate creation failed. </p>
     #   @return [String]
     class CreateWorkloadEstimateResponse < Struct.new(
+      nil,
       :id,
       :name,
       :created_at,
@@ -1373,6 +1431,7 @@ module Aws::BCMPricingCalculator
     # @!attribute message
     #   @return [String]
     class DataUnavailableException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -1383,6 +1442,7 @@ module Aws::BCMPricingCalculator
     #   <p> The unique identifier of the bill estimate to delete. </p>
     #   @return [String]
     class DeleteBillEstimateRequest < Struct.new(
+      nil,
       :identifier,
       keyword_init: true
     )
@@ -1390,6 +1450,7 @@ module Aws::BCMPricingCalculator
     end
 
     class DeleteBillEstimateResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1399,6 +1460,7 @@ module Aws::BCMPricingCalculator
     #   <p> The unique identifier of the bill scenario to delete. </p>
     #   @return [String]
     class DeleteBillScenarioRequest < Struct.new(
+      nil,
       :identifier,
       keyword_init: true
     )
@@ -1406,6 +1468,7 @@ module Aws::BCMPricingCalculator
     end
 
     class DeleteBillScenarioResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1415,6 +1478,7 @@ module Aws::BCMPricingCalculator
     #   <p> The unique identifier of the workload estimate to delete. </p>
     #   @return [String]
     class DeleteWorkloadEstimateRequest < Struct.new(
+      nil,
       :identifier,
       keyword_init: true
     )
@@ -1422,6 +1486,7 @@ module Aws::BCMPricingCalculator
     end
 
     class DeleteWorkloadEstimateResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1447,6 +1512,7 @@ module Aws::BCMPricingCalculator
     #   <p> Filters based on resource tags. </p>
     #   @return [Types::ExpressionFilter]
     class Expression < Struct.new(
+      nil,
       :and,
       :or,
       :not,
@@ -1469,6 +1535,7 @@ module Aws::BCMPricingCalculator
     #   <p> The values to match against. </p>
     #   @return [Array<String>]
     class ExpressionFilter < Struct.new(
+      nil,
       :key,
       :match_options,
       :values,
@@ -1485,6 +1552,7 @@ module Aws::BCMPricingCalculator
     #   <p> Include results before this timestamp. </p>
     #   @return [Time]
     class FilterTimestamp < Struct.new(
+      nil,
       :after_timestamp,
       :before_timestamp,
       keyword_init: true
@@ -1496,6 +1564,7 @@ module Aws::BCMPricingCalculator
     #   <p> The unique identifier of the bill estimate to retrieve. </p>
     #   @return [String]
     class GetBillEstimateRequest < Struct.new(
+      nil,
       :identifier,
       keyword_init: true
     )
@@ -1527,6 +1596,7 @@ module Aws::BCMPricingCalculator
     #   <p> The timestamp when the bill estimate will expire. </p>
     #   @return [Time]
     class GetBillEstimateResponse < Struct.new(
+      nil,
       :id,
       :name,
       :status,
@@ -1544,6 +1614,7 @@ module Aws::BCMPricingCalculator
     #   <p> The unique identifier of the bill scenario to retrieve. </p>
     #   @return [String]
     class GetBillScenarioRequest < Struct.new(
+      nil,
       :identifier,
       keyword_init: true
     )
@@ -1572,6 +1643,7 @@ module Aws::BCMPricingCalculator
     #   <p> An error message if the bill scenario retrieval failed. </p>
     #   @return [String]
     class GetBillScenarioResponse < Struct.new(
+      nil,
       :id,
       :name,
       :bill_interval,
@@ -1585,6 +1657,7 @@ module Aws::BCMPricingCalculator
     end
 
     class GetPreferencesRequest < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1600,6 +1673,7 @@ module Aws::BCMPricingCalculator
     #   <p> The preferred rate types for a standalone account. </p>
     #   @return [Array<String>]
     class GetPreferencesResponse < Struct.new(
+      nil,
       :management_account_rate_type_selections,
       :member_account_rate_type_selections,
       :standalone_account_rate_type_selections,
@@ -1612,6 +1686,7 @@ module Aws::BCMPricingCalculator
     #   <p> The unique identifier of the workload estimate to retrieve. </p>
     #   @return [String]
     class GetWorkloadEstimateRequest < Struct.new(
+      nil,
       :identifier,
       keyword_init: true
     )
@@ -1650,6 +1725,7 @@ module Aws::BCMPricingCalculator
     #   <p> An error message if the workload estimate retrieval failed. </p>
     #   @return [String]
     class GetWorkloadEstimateResponse < Struct.new(
+      nil,
       :id,
       :name,
       :created_at,
@@ -1688,6 +1764,7 @@ module Aws::BCMPricingCalculator
     #   <p> An optional filter expression to apply to the historical usage data. </p>
     #   @return [Types::Expression]
     class HistoricalUsageEntity < Struct.new(
+      nil,
       :service_code,
       :usage_type,
       :operation,
@@ -1707,6 +1784,7 @@ module Aws::BCMPricingCalculator
     #   <p> An internal error has occurred. Retry your request, but if the problem persists, contact Amazon Web Services support. </p>
     #   @return [Integer]
     class InternalServerException < Struct.new(
+      nil,
       :message,
       :retry_after_seconds,
       keyword_init: true
@@ -1724,6 +1802,7 @@ module Aws::BCMPricingCalculator
     #   <p> The maximum number of results to return per page. </p>
     #   @return [Integer]
     class ListBillEstimateCommitmentsRequest < Struct.new(
+      nil,
       :bill_estimate_id,
       :next_token,
       :max_results,
@@ -1739,6 +1818,7 @@ module Aws::BCMPricingCalculator
     #   <p> A token to retrieve the next page of results, if any. </p>
     #   @return [String]
     class ListBillEstimateCommitmentsResponse < Struct.new(
+      nil,
       :items,
       :next_token,
       keyword_init: true
@@ -1756,6 +1836,7 @@ module Aws::BCMPricingCalculator
     #   <p> The maximum number of results to return per page. </p>
     #   @return [Integer]
     class ListBillEstimateInputCommitmentModificationsRequest < Struct.new(
+      nil,
       :bill_estimate_id,
       :next_token,
       :max_results,
@@ -1771,6 +1852,7 @@ module Aws::BCMPricingCalculator
     #   <p> A token to retrieve the next page of results, if any. </p>
     #   @return [String]
     class ListBillEstimateInputCommitmentModificationsResponse < Struct.new(
+      nil,
       :items,
       :next_token,
       keyword_init: true
@@ -1791,6 +1873,7 @@ module Aws::BCMPricingCalculator
     #   <p> The maximum number of results to return per page. </p>
     #   @return [Integer]
     class ListBillEstimateInputUsageModificationsRequest < Struct.new(
+      nil,
       :bill_estimate_id,
       :filters,
       :next_token,
@@ -1807,6 +1890,7 @@ module Aws::BCMPricingCalculator
     #   <p> A token to retrieve the next page of results, if any. </p>
     #   @return [String]
     class ListBillEstimateInputUsageModificationsResponse < Struct.new(
+      nil,
       :items,
       :next_token,
       keyword_init: true
@@ -1825,6 +1909,7 @@ module Aws::BCMPricingCalculator
     #   <p> The match option for the filter (e.g., equals, contains). </p>
     #   @return [String]
     class ListBillEstimateLineItemsFilter < Struct.new(
+      nil,
       :name,
       :values,
       :match_option,
@@ -1846,6 +1931,7 @@ module Aws::BCMPricingCalculator
     #   <p> The maximum number of results to return per page. </p>
     #   @return [Integer]
     class ListBillEstimateLineItemsRequest < Struct.new(
+      nil,
       :bill_estimate_id,
       :filters,
       :next_token,
@@ -1862,6 +1948,7 @@ module Aws::BCMPricingCalculator
     #   <p> A token to retrieve the next page of results, if any. </p>
     #   @return [String]
     class ListBillEstimateLineItemsResponse < Struct.new(
+      nil,
       :items,
       :next_token,
       keyword_init: true
@@ -1880,6 +1967,7 @@ module Aws::BCMPricingCalculator
     #   <p> The match option for the filter (e.g., equals, contains). </p>
     #   @return [String]
     class ListBillEstimatesFilter < Struct.new(
+      nil,
       :name,
       :values,
       :match_option,
@@ -1904,6 +1992,7 @@ module Aws::BCMPricingCalculator
     #   <p> The maximum number of results to return per page. </p>
     #   @return [Integer]
     class ListBillEstimatesRequest < Struct.new(
+      nil,
       :filters,
       :created_at_filter,
       :expires_at_filter,
@@ -1921,6 +2010,7 @@ module Aws::BCMPricingCalculator
     #   <p> A token to retrieve the next page of results, if any. </p>
     #   @return [String]
     class ListBillEstimatesResponse < Struct.new(
+      nil,
       :items,
       :next_token,
       keyword_init: true
@@ -1938,6 +2028,7 @@ module Aws::BCMPricingCalculator
     #   <p> The maximum number of results to return per page. </p>
     #   @return [Integer]
     class ListBillScenarioCommitmentModificationsRequest < Struct.new(
+      nil,
       :bill_scenario_id,
       :next_token,
       :max_results,
@@ -1953,6 +2044,7 @@ module Aws::BCMPricingCalculator
     #   <p> A token to retrieve the next page of results, if any. </p>
     #   @return [String]
     class ListBillScenarioCommitmentModificationsResponse < Struct.new(
+      nil,
       :items,
       :next_token,
       keyword_init: true
@@ -1973,6 +2065,7 @@ module Aws::BCMPricingCalculator
     #   <p> The maximum number of results to return per page. </p>
     #   @return [Integer]
     class ListBillScenarioUsageModificationsRequest < Struct.new(
+      nil,
       :bill_scenario_id,
       :filters,
       :next_token,
@@ -1989,6 +2082,7 @@ module Aws::BCMPricingCalculator
     #   <p> A token to retrieve the next page of results, if any. </p>
     #   @return [String]
     class ListBillScenarioUsageModificationsResponse < Struct.new(
+      nil,
       :items,
       :next_token,
       keyword_init: true
@@ -2007,6 +2101,7 @@ module Aws::BCMPricingCalculator
     #   <p> The match option for the filter (e.g., equals, contains). </p>
     #   @return [String]
     class ListBillScenariosFilter < Struct.new(
+      nil,
       :name,
       :values,
       :match_option,
@@ -2031,6 +2126,7 @@ module Aws::BCMPricingCalculator
     #   <p> The maximum number of results to return per page. </p>
     #   @return [Integer]
     class ListBillScenariosRequest < Struct.new(
+      nil,
       :filters,
       :created_at_filter,
       :expires_at_filter,
@@ -2048,6 +2144,7 @@ module Aws::BCMPricingCalculator
     #   <p> A token to retrieve the next page of results, if any. </p>
     #   @return [String]
     class ListBillScenariosResponse < Struct.new(
+      nil,
       :items,
       :next_token,
       keyword_init: true
@@ -2059,6 +2156,7 @@ module Aws::BCMPricingCalculator
     #   <p> The Amazon Resource Name (ARN) of the resource to list tags for. </p>
     #   @return [String]
     class ListTagsForResourceRequest < Struct.new(
+      nil,
       :arn,
       keyword_init: true
     )
@@ -2069,6 +2167,7 @@ module Aws::BCMPricingCalculator
     #   <p> The list of tags associated with the specified resource. </p>
     #   @return [Hash<String, String>]
     class ListTagsForResourceResponse < Struct.new(
+      nil,
       :tags,
       keyword_init: true
     )
@@ -2086,6 +2185,7 @@ module Aws::BCMPricingCalculator
     #   <p> The match option for the filter (e.g., equals, contains). </p>
     #   @return [String]
     class ListUsageFilter < Struct.new(
+      nil,
       :name,
       :values,
       :match_option,
@@ -2107,6 +2207,7 @@ module Aws::BCMPricingCalculator
     #   <p> The maximum number of results to return per page. </p>
     #   @return [Integer]
     class ListWorkloadEstimateUsageRequest < Struct.new(
+      nil,
       :workload_estimate_id,
       :filters,
       :next_token,
@@ -2123,6 +2224,7 @@ module Aws::BCMPricingCalculator
     #   <p> A token to retrieve the next page of results, if any. </p>
     #   @return [String]
     class ListWorkloadEstimateUsageResponse < Struct.new(
+      nil,
       :items,
       :next_token,
       keyword_init: true
@@ -2141,6 +2243,7 @@ module Aws::BCMPricingCalculator
     #   <p> The match option for the filter (e.g., equals, contains). </p>
     #   @return [String]
     class ListWorkloadEstimatesFilter < Struct.new(
+      nil,
       :name,
       :values,
       :match_option,
@@ -2165,6 +2268,7 @@ module Aws::BCMPricingCalculator
     #   <p> The maximum number of results to return per page. </p>
     #   @return [Integer]
     class ListWorkloadEstimatesRequest < Struct.new(
+      nil,
       :created_at_filter,
       :expires_at_filter,
       :filters,
@@ -2182,6 +2286,7 @@ module Aws::BCMPricingCalculator
     #   <p> A token to retrieve the next page of results, if any. </p>
     #   @return [String]
     class ListWorkloadEstimatesResponse < Struct.new(
+      nil,
       :items,
       :next_token,
       keyword_init: true
@@ -2194,6 +2299,7 @@ module Aws::BCMPricingCalculator
     #   <p> The ID of the Reserved Instance to remove. </p>
     #   @return [String]
     class NegateReservedInstanceAction < Struct.new(
+      nil,
       :reserved_instances_id,
       keyword_init: true
     )
@@ -2205,6 +2311,7 @@ module Aws::BCMPricingCalculator
     #   <p> The ID of the Savings Plan to remove. </p>
     #   @return [String]
     class NegateSavingsPlanAction < Struct.new(
+      nil,
       :savings_plan_id,
       keyword_init: true
     )
@@ -2221,6 +2328,7 @@ module Aws::BCMPricingCalculator
     #   <p> The type of the resource that was not found. </p>
     #   @return [String]
     class ResourceNotFoundException < Struct.new(
+      nil,
       :message,
       :resource_id,
       :resource_type,
@@ -2245,6 +2353,7 @@ module Aws::BCMPricingCalculator
     #   <p> The quota code that was exceeded. </p>
     #   @return [String]
     class ServiceQuotaExceededException < Struct.new(
+      nil,
       :message,
       :resource_id,
       :resource_type,
@@ -2262,6 +2371,7 @@ module Aws::BCMPricingCalculator
     #   <p> The tags to add to the resource. </p>
     #   @return [Hash<String, String>]
     class TagResourceRequest < Struct.new(
+      nil,
       :arn,
       :tags,
       keyword_init: true
@@ -2270,6 +2380,7 @@ module Aws::BCMPricingCalculator
     end
 
     class TagResourceResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -2288,6 +2399,7 @@ module Aws::BCMPricingCalculator
     #   <p>The service code that exceeded the throttling limit. Retry your request, but if the problem persists, contact Amazon Web Services support.</p>
     #   @return [Integer]
     class ThrottlingException < Struct.new(
+      nil,
       :message,
       :service_code,
       :quota_code,
@@ -2304,6 +2416,7 @@ module Aws::BCMPricingCalculator
     #   <p> The keys of the tags to remove from the resource. </p>
     #   @return [Array<String>]
     class UntagResourceRequest < Struct.new(
+      nil,
       :arn,
       :tag_keys,
       keyword_init: true
@@ -2312,6 +2425,7 @@ module Aws::BCMPricingCalculator
     end
 
     class UntagResourceResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -2327,6 +2441,7 @@ module Aws::BCMPricingCalculator
     #   <p> The new expiration date for the bill estimate. </p>
     #   @return [Time]
     class UpdateBillEstimateRequest < Struct.new(
+      nil,
       :identifier,
       :name,
       :expires_at,
@@ -2360,6 +2475,7 @@ module Aws::BCMPricingCalculator
     #   <p> The updated expiration timestamp for the bill estimate. </p>
     #   @return [Time]
     class UpdateBillEstimateResponse < Struct.new(
+      nil,
       :id,
       :name,
       :status,
@@ -2383,6 +2499,7 @@ module Aws::BCMPricingCalculator
     #   <p> The new expiration date for the bill scenario. </p>
     #   @return [Time]
     class UpdateBillScenarioRequest < Struct.new(
+      nil,
       :identifier,
       :name,
       :expires_at,
@@ -2413,6 +2530,7 @@ module Aws::BCMPricingCalculator
     #   <p> An error message if the bill scenario update failed. </p>
     #   @return [String]
     class UpdateBillScenarioResponse < Struct.new(
+      nil,
       :id,
       :name,
       :bill_interval,
@@ -2435,6 +2553,7 @@ module Aws::BCMPricingCalculator
     #   <p> The updated preferred rate types for a standalone account. </p>
     #   @return [Array<String>]
     class UpdatePreferencesRequest < Struct.new(
+      nil,
       :management_account_rate_type_selections,
       :member_account_rate_type_selections,
       :standalone_account_rate_type_selections,
@@ -2453,6 +2572,7 @@ module Aws::BCMPricingCalculator
     #   <p> The updated preferred rate types for a standalone account. </p>
     #   @return [Array<String>]
     class UpdatePreferencesResponse < Struct.new(
+      nil,
       :management_account_rate_type_selections,
       :member_account_rate_type_selections,
       :standalone_account_rate_type_selections,
@@ -2471,6 +2591,7 @@ module Aws::BCMPricingCalculator
     #   <p> The new expiration date for the workload estimate. </p>
     #   @return [Time]
     class UpdateWorkloadEstimateRequest < Struct.new(
+      nil,
       :identifier,
       :name,
       :expires_at,
@@ -2511,6 +2632,7 @@ module Aws::BCMPricingCalculator
     #   <p> An error message if the workload estimate update failed. </p>
     #   @return [String]
     class UpdateWorkloadEstimateResponse < Struct.new(
+      nil,
       :id,
       :name,
       :created_at,
@@ -2534,6 +2656,7 @@ module Aws::BCMPricingCalculator
     #   <p> The usage amount for the period. </p>
     #   @return [Float]
     class UsageAmount < Struct.new(
+      nil,
       :start_hour,
       :amount,
       keyword_init: true
@@ -2552,6 +2675,7 @@ module Aws::BCMPricingCalculator
     #   <p> The numeric value of the usage quantity. </p>
     #   @return [Float]
     class UsageQuantity < Struct.new(
+      nil,
       :start_hour,
       :unit,
       :amount,
@@ -2568,6 +2692,7 @@ module Aws::BCMPricingCalculator
     #   <p> The unit of measurement for the usage quantity result. </p>
     #   @return [String]
     class UsageQuantityResult < Struct.new(
+      nil,
       :amount,
       :unit,
       keyword_init: true
@@ -2585,6 +2710,7 @@ module Aws::BCMPricingCalculator
     #   <p> The list of fields that are invalid. </p>
     #   @return [Array<Types::ValidationExceptionField>]
     class ValidationException < Struct.new(
+      nil,
       :message,
       :reason,
       :field_list,
@@ -2601,6 +2727,7 @@ module Aws::BCMPricingCalculator
     #   <p> The error message describing why the field failed validation. </p>
     #   @return [String]
     class ValidationExceptionField < Struct.new(
+      nil,
       :name,
       :message,
       keyword_init: true
@@ -2640,6 +2767,7 @@ module Aws::BCMPricingCalculator
     #   <p> An error message if the workload estimate creation or processing failed. </p>
     #   @return [String]
     class WorkloadEstimateSummary < Struct.new(
+      nil,
       :id,
       :name,
       :created_at,
@@ -2693,6 +2821,7 @@ module Aws::BCMPricingCalculator
     #   <p> Historical usage data associated with this item, if available. </p>
     #   @return [Types::HistoricalUsageEntity]
     class WorkloadEstimateUsageItem < Struct.new(
+      nil,
       :service_code,
       :usage_type,
       :operation,
@@ -2718,6 +2847,7 @@ module Aws::BCMPricingCalculator
     #   <p> The numeric value of the usage quantity. </p>
     #   @return [Float]
     class WorkloadEstimateUsageQuantity < Struct.new(
+      nil,
       :unit,
       :amount,
       keyword_init: true

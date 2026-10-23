@@ -23,6 +23,7 @@ module Aws::RAM
     #                error.</p>
     #   @return [String]
     class AcceptResourceShareInvitationRequest < Struct.new(
+      nil,
       :resource_share_invitation_arn,
       :client_token,
       keyword_init: true
@@ -40,6 +41,7 @@ module Aws::RAM
     #                parameters must also have the same values that you used in the first call.</p>
     #   @return [String]
     class AcceptResourceShareInvitationResponse < Struct.new(
+      nil,
       :resource_share_invitation,
       :client_token,
       keyword_init: true
@@ -94,6 +96,7 @@ module Aws::RAM
     #            </note>
     #   @return [Integer]
     class AssociateResourceSharePermissionRequest < Struct.new(
+      nil,
       :resource_share_arn,
       :permission_arn,
       :replace,
@@ -115,6 +118,7 @@ module Aws::RAM
     #                parameters must also have the same values that you used in the first call.</p>
     #   @return [String]
     class AssociateResourceSharePermissionResponse < Struct.new(
+      nil,
       :return_value,
       :client_token,
       keyword_init: true
@@ -186,6 +190,7 @@ module Aws::RAM
     #               has access to the resources in this resource share.</p>
     #   @return [Array<String>]
     class AssociateResourceShareRequest < Struct.new(
+      nil,
       :resource_share_arn,
       :resource_arns,
       :principals,
@@ -206,6 +211,7 @@ module Aws::RAM
     #                parameters must also have the same values that you used in the first call.</p>
     #   @return [String]
     class AssociateResourceShareResponse < Struct.new(
+      nil,
       :resource_share_associations,
       :client_token,
       keyword_init: true
@@ -291,6 +297,7 @@ module Aws::RAM
     #   <p>The <a href="https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html">Amazon Resource Name (ARN)</a> of a resource share associated with this permission.</p>
     #   @return [String]
     class AssociatedPermission < Struct.new(
+      nil,
       :arn,
       :permission_version,
       :default_version,
@@ -370,6 +377,7 @@ module Aws::RAM
     #               permission.</p>
     #   @return [Array<Types::Tag>]
     class CreatePermissionRequest < Struct.new(
+      nil,
       :name,
       :resource_type,
       :policy_template,
@@ -390,6 +398,7 @@ module Aws::RAM
     #                parameters must also have the same values that you used in the first call.</p>
     #   @return [String]
     class CreatePermissionResponse < Struct.new(
+      nil,
       :permission,
       :client_token,
       keyword_init: true
@@ -448,6 +457,7 @@ module Aws::RAM
     #                error.</p>
     #   @return [String]
     class CreatePermissionVersionRequest < Struct.new(
+      nil,
       :permission_arn,
       :policy_template,
       :client_token,
@@ -466,6 +476,7 @@ module Aws::RAM
     #                parameters must also have the same values that you used in the first call.</p>
     #   @return [String]
     class CreatePermissionVersionResponse < Struct.new(
+      nil,
       :permission,
       :client_token,
       keyword_init: true
@@ -550,6 +561,7 @@ module Aws::RAM
     #               has access to the resources in this resource share.</p>
     #   @return [Array<String>]
     class CreateResourceShareRequest < Struct.new(
+      nil,
       :name,
       :resource_arns,
       :principals,
@@ -573,6 +585,7 @@ module Aws::RAM
     #                parameters must also have the same values that you used in the first call.</p>
     #   @return [String]
     class CreateResourceShareResponse < Struct.new(
+      nil,
       :resource_share,
       :client_token,
       keyword_init: true
@@ -597,6 +610,7 @@ module Aws::RAM
     #                error.</p>
     #   @return [String]
     class DeletePermissionRequest < Struct.new(
+      nil,
       :permission_arn,
       :client_token,
       keyword_init: true
@@ -618,6 +632,7 @@ module Aws::RAM
     #               current status.</p>
     #   @return [String]
     class DeletePermissionResponse < Struct.new(
+      nil,
       :return_value,
       :client_token,
       :permission_status,
@@ -653,6 +668,7 @@ module Aws::RAM
     #                error.</p>
     #   @return [String]
     class DeletePermissionVersionRequest < Struct.new(
+      nil,
       :permission_arn,
       :permission_version,
       :client_token,
@@ -675,6 +691,7 @@ module Aws::RAM
     #               current status.</p>
     #   @return [String]
     class DeletePermissionVersionResponse < Struct.new(
+      nil,
       :return_value,
       :client_token,
       :permission_status,
@@ -700,6 +717,7 @@ module Aws::RAM
     #                error.</p>
     #   @return [String]
     class DeleteResourceShareRequest < Struct.new(
+      nil,
       :resource_share_arn,
       :client_token,
       keyword_init: true
@@ -718,6 +736,7 @@ module Aws::RAM
     #                parameters must also have the same values that you used in the first call.</p>
     #   @return [String]
     class DeleteResourceShareResponse < Struct.new(
+      nil,
       :return_value,
       :client_token,
       keyword_init: true
@@ -746,6 +765,7 @@ module Aws::RAM
     #                error.</p>
     #   @return [String]
     class DisassociateResourceSharePermissionRequest < Struct.new(
+      nil,
       :resource_share_arn,
       :permission_arn,
       :client_token,
@@ -765,6 +785,7 @@ module Aws::RAM
     #                parameters must also have the same values that you used in the first call.</p>
     #   @return [String]
     class DisassociateResourceSharePermissionResponse < Struct.new(
+      nil,
       :return_value,
       :client_token,
       keyword_init: true
@@ -835,6 +856,7 @@ module Aws::RAM
     #               service principal no longer has access to the resources in this resource share.</p>
     #   @return [Array<String>]
     class DisassociateResourceShareRequest < Struct.new(
+      nil,
       :resource_share_arn,
       :resource_arns,
       :principals,
@@ -856,6 +878,7 @@ module Aws::RAM
     #                parameters must also have the same values that you used in the first call.</p>
     #   @return [String]
     class DisassociateResourceShareResponse < Struct.new(
+      nil,
       :resource_share_associations,
       :client_token,
       keyword_init: true
@@ -864,6 +887,7 @@ module Aws::RAM
     end
 
     class EnableSharingWithAwsOrganizationRequest < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -874,6 +898,7 @@ module Aws::RAM
     #                A value of <code>false</code> indicates that the request failed.</p>
     #   @return [Boolean]
     class EnableSharingWithAwsOrganizationResponse < Struct.new(
+      nil,
       :return_value,
       keyword_init: true
     )
@@ -891,6 +916,7 @@ module Aws::RAM
     #            <p>To see the list of available versions, use <a>ListPermissionVersions</a>.</p>
     #   @return [Integer]
     class GetPermissionRequest < Struct.new(
+      nil,
       :permission_arn,
       :permission_version,
       keyword_init: true
@@ -902,6 +928,7 @@ module Aws::RAM
     #   <p>An object with details about the permission.</p>
     #   @return [Types::ResourceSharePermissionDetail]
     class GetPermissionResponse < Struct.new(
+      nil,
       :permission,
       keyword_init: true
     )
@@ -933,6 +960,7 @@ module Aws::RAM
     #                of the results.</p>
     #   @return [Integer]
     class GetResourcePoliciesRequest < Struct.new(
+      nil,
       :resource_arns,
       :principal,
       :next_token,
@@ -953,6 +981,7 @@ module Aws::RAM
     #                back as <code>null</code>. This indicates that this is the last page of results.</p>
     #   @return [String]
     class GetResourcePoliciesResponse < Struct.new(
+      nil,
       :policies,
       :next_token,
       keyword_init: true
@@ -1014,6 +1043,7 @@ module Aws::RAM
     #                of the results.</p>
     #   @return [Integer]
     class GetResourceShareAssociationsRequest < Struct.new(
+      nil,
       :association_type,
       :resource_share_arns,
       :resource_arn,
@@ -1037,6 +1067,7 @@ module Aws::RAM
     #                back as <code>null</code>. This indicates that this is the last page of results.</p>
     #   @return [String]
     class GetResourceShareAssociationsResponse < Struct.new(
+      nil,
       :resource_share_associations,
       :next_token,
       keyword_init: true
@@ -1071,6 +1102,7 @@ module Aws::RAM
     #                of the results.</p>
     #   @return [Integer]
     class GetResourceShareInvitationsRequest < Struct.new(
+      nil,
       :resource_share_invitation_arns,
       :resource_share_arns,
       :next_token,
@@ -1091,6 +1123,7 @@ module Aws::RAM
     #                back as <code>null</code>. This indicates that this is the last page of results.</p>
     #   @return [String]
     class GetResourceShareInvitationsResponse < Struct.new(
+      nil,
       :resource_share_invitations,
       :next_token,
       keyword_init: true
@@ -1160,6 +1193,7 @@ module Aws::RAM
     #               specified version of the managed permission.</p>
     #   @return [Integer]
     class GetResourceSharesRequest < Struct.new(
+      nil,
       :resource_share_arns,
       :resource_share_status,
       :resource_owner,
@@ -1185,6 +1219,7 @@ module Aws::RAM
     #                back as <code>null</code>. This indicates that this is the last page of results.</p>
     #   @return [String]
     class GetResourceSharesResponse < Struct.new(
+      nil,
       :resource_shares,
       :next_token,
       keyword_init: true
@@ -1198,6 +1233,7 @@ module Aws::RAM
     # @!attribute message
     #   @return [String]
     class IdempotentParameterMismatchException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -1208,6 +1244,7 @@ module Aws::RAM
     # @!attribute message
     #   @return [String]
     class InvalidClientTokenException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -1219,6 +1256,7 @@ module Aws::RAM
     # @!attribute message
     #   @return [String]
     class InvalidMaxResultsException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -1231,6 +1269,7 @@ module Aws::RAM
     # @!attribute message
     #   @return [String]
     class InvalidNextTokenException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -1241,6 +1280,7 @@ module Aws::RAM
     # @!attribute message
     #   @return [String]
     class InvalidParameterException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -1251,6 +1291,7 @@ module Aws::RAM
     # @!attribute message
     #   @return [String]
     class InvalidPolicyException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -1261,6 +1302,7 @@ module Aws::RAM
     # @!attribute message
     #   @return [String]
     class InvalidResourceTypeException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -1272,6 +1314,7 @@ module Aws::RAM
     # @!attribute message
     #   @return [String]
     class InvalidStateTransitionException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -1322,6 +1365,7 @@ module Aws::RAM
     #            <p>The default value is <code>ALL</code>.</p>
     #   @return [String]
     class ListPendingInvitationResourcesRequest < Struct.new(
+      nil,
       :resource_share_invitation_arn,
       :next_token,
       :max_results,
@@ -1343,6 +1387,7 @@ module Aws::RAM
     #                back as <code>null</code>. This indicates that this is the last page of results.</p>
     #   @return [String]
     class ListPendingInvitationResourcesResponse < Struct.new(
+      nil,
       :resources,
       :next_token,
       keyword_init: true
@@ -1396,6 +1441,7 @@ module Aws::RAM
     #                of the results.</p>
     #   @return [Integer]
     class ListPermissionAssociationsRequest < Struct.new(
+      nil,
       :permission_arn,
       :permission_version,
       :association_status,
@@ -1420,6 +1466,7 @@ module Aws::RAM
     #                back as <code>null</code>. This indicates that this is the last page of results.</p>
     #   @return [String]
     class ListPermissionAssociationsResponse < Struct.new(
+      nil,
       :permissions,
       :next_token,
       keyword_init: true
@@ -1451,6 +1498,7 @@ module Aws::RAM
     #                of the results.</p>
     #   @return [Integer]
     class ListPermissionVersionsRequest < Struct.new(
+      nil,
       :permission_arn,
       :next_token,
       :max_results,
@@ -1470,6 +1518,7 @@ module Aws::RAM
     #                back as <code>null</code>. This indicates that this is the last page of results.</p>
     #   @return [String]
     class ListPermissionVersionsResponse < Struct.new(
+      nil,
       :permissions,
       :next_token,
       keyword_init: true
@@ -1521,6 +1570,7 @@ module Aws::RAM
     #            <p>If you don't specify this parameter, the default is <code>All</code>.</p>
     #   @return [String]
     class ListPermissionsRequest < Struct.new(
+      nil,
       :resource_type,
       :next_token,
       :max_results,
@@ -1541,6 +1591,7 @@ module Aws::RAM
     #                back as <code>null</code>. This indicates that this is the last page of results.</p>
     #   @return [String]
     class ListPermissionsResponse < Struct.new(
+      nil,
       :permissions,
       :next_token,
       keyword_init: true
@@ -1636,6 +1687,7 @@ module Aws::RAM
     #                of the results.</p>
     #   @return [Integer]
     class ListPrincipalsRequest < Struct.new(
+      nil,
       :resource_owner,
       :resource_arn,
       :principals,
@@ -1659,6 +1711,7 @@ module Aws::RAM
     #                back as <code>null</code>. This indicates that this is the last page of results.</p>
     #   @return [String]
     class ListPrincipalsResponse < Struct.new(
+      nil,
       :principals,
       :next_token,
       keyword_init: true
@@ -1693,6 +1746,7 @@ module Aws::RAM
     #                of the results.</p>
     #   @return [Integer]
     class ListReplacePermissionAssociationsWorkRequest < Struct.new(
+      nil,
       :work_ids,
       :status,
       :next_token,
@@ -1713,6 +1767,7 @@ module Aws::RAM
     #                back as <code>null</code>. This indicates that this is the last page of results.</p>
     #   @return [String]
     class ListReplacePermissionAssociationsWorkResponse < Struct.new(
+      nil,
       :replace_permission_associations_works,
       :next_token,
       keyword_init: true
@@ -1743,6 +1798,7 @@ module Aws::RAM
     #                of the results.</p>
     #   @return [Integer]
     class ListResourceSharePermissionsRequest < Struct.new(
+      nil,
       :resource_share_arn,
       :next_token,
       :max_results,
@@ -1762,6 +1818,7 @@ module Aws::RAM
     #                back as <code>null</code>. This indicates that this is the last page of results.</p>
     #   @return [String]
     class ListResourceSharePermissionsResponse < Struct.new(
+      nil,
       :permissions,
       :next_token,
       keyword_init: true
@@ -1810,6 +1867,7 @@ module Aws::RAM
     #            <p>The default value is <code>ALL</code>.</p>
     #   @return [String]
     class ListResourceTypesRequest < Struct.new(
+      nil,
       :next_token,
       :max_results,
       :resource_region_scope,
@@ -1830,6 +1888,7 @@ module Aws::RAM
     #                back as <code>null</code>. This indicates that this is the last page of results.</p>
     #   @return [String]
     class ListResourceTypesResponse < Struct.new(
+      nil,
       :resource_types,
       :next_token,
       keyword_init: true
@@ -1914,6 +1973,7 @@ module Aws::RAM
     #            <p>The default value is <code>ALL</code>.</p>
     #   @return [String]
     class ListResourcesRequest < Struct.new(
+      nil,
       :resource_owner,
       :principal,
       :resource_type,
@@ -1938,6 +1998,7 @@ module Aws::RAM
     #                back as <code>null</code>. This indicates that this is the last page of results.</p>
     #   @return [String]
     class ListResourcesResponse < Struct.new(
+      nil,
       :resources,
       :next_token,
       keyword_init: true
@@ -1950,6 +2011,7 @@ module Aws::RAM
     # @!attribute message
     #   @return [String]
     class MalformedArnException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -1960,6 +2022,7 @@ module Aws::RAM
     # @!attribute message
     #   @return [String]
     class MalformedPolicyTemplateException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -1970,6 +2033,7 @@ module Aws::RAM
     # @!attribute message
     #   @return [String]
     class MissingRequiredParameterException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -1980,6 +2044,7 @@ module Aws::RAM
     # @!attribute message
     #   @return [String]
     class OperationNotPermittedException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -1991,6 +2056,7 @@ module Aws::RAM
     # @!attribute message
     #   @return [String]
     class PermissionAlreadyExistsException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -2003,6 +2069,7 @@ module Aws::RAM
     # @!attribute message
     #   @return [String]
     class PermissionLimitExceededException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -2015,6 +2082,7 @@ module Aws::RAM
     # @!attribute message
     #   @return [String]
     class PermissionVersionsLimitExceededException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -2052,6 +2120,7 @@ module Aws::RAM
     #            </ul>
     #   @return [Boolean]
     class Principal < Struct.new(
+      nil,
       :id,
       :resource_share_arn,
       :creation_time,
@@ -2083,6 +2152,7 @@ module Aws::RAM
     #                error.</p>
     #   @return [String]
     class PromotePermissionCreatedFromPolicyRequest < Struct.new(
+      nil,
       :permission_arn,
       :name,
       :client_token,
@@ -2101,6 +2171,7 @@ module Aws::RAM
     #                parameters must also have the same values that you used in the first call.</p>
     #   @return [String]
     class PromotePermissionCreatedFromPolicyResponse < Struct.new(
+      nil,
       :permission,
       :client_token,
       keyword_init: true
@@ -2112,6 +2183,7 @@ module Aws::RAM
     #   <p>Specifies the <a href="https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html">Amazon Resource Name (ARN)</a> of the resource share to promote.</p>
     #   @return [String]
     class PromoteResourceShareCreatedFromPolicyRequest < Struct.new(
+      nil,
       :resource_share_arn,
       keyword_init: true
     )
@@ -2123,6 +2195,7 @@ module Aws::RAM
     #                A value of <code>false</code> indicates that the request failed.</p>
     #   @return [Boolean]
     class PromoteResourceShareCreatedFromPolicyResponse < Struct.new(
+      nil,
       :return_value,
       keyword_init: true
     )
@@ -2146,6 +2219,7 @@ module Aws::RAM
     #                error.</p>
     #   @return [String]
     class RejectResourceShareInvitationRequest < Struct.new(
+      nil,
       :resource_share_invitation_arn,
       :client_token,
       keyword_init: true
@@ -2163,6 +2237,7 @@ module Aws::RAM
     #                parameters must also have the same values that you used in the first call.</p>
     #   @return [String]
     class RejectResourceShareInvitationResponse < Struct.new(
+      nil,
       :resource_share_invitation,
       :client_token,
       keyword_init: true
@@ -2198,6 +2273,7 @@ module Aws::RAM
     #                error.</p>
     #   @return [String]
     class ReplacePermissionAssociationsRequest < Struct.new(
+      nil,
       :from_permission_arn,
       :from_permission_version,
       :to_permission_arn,
@@ -2219,6 +2295,7 @@ module Aws::RAM
     #                parameters must also have the same values that you used in the first call.</p>
     #   @return [String]
     class ReplacePermissionAssociationsResponse < Struct.new(
+      nil,
       :replace_permission_associations_work,
       :client_token,
       keyword_init: true
@@ -2278,6 +2355,7 @@ module Aws::RAM
     #   <p>The date and time when the status of this background task was last updated.</p>
     #   @return [Time]
     class ReplacePermissionAssociationsWork < Struct.new(
+      nil,
       :id,
       :from_permission_arn,
       :from_permission_version,
@@ -2339,6 +2417,7 @@ module Aws::RAM
     #            </ul>
     #   @return [String]
     class Resource < Struct.new(
+      nil,
       :arn,
       :type,
       :resource_share_arn,
@@ -2357,6 +2436,7 @@ module Aws::RAM
     # @!attribute message
     #   @return [String]
     class ResourceArnNotFoundException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -2437,6 +2517,7 @@ module Aws::RAM
     #            </ul>
     #   @return [String]
     class ResourceShare < Struct.new(
+      nil,
       :resource_share_arn,
       :name,
       :owning_account_id,
@@ -2507,6 +2588,7 @@ module Aws::RAM
     #               Amazon Web Services account that owns the resource share.</p>
     #   @return [Boolean]
     class ResourceShareAssociation < Struct.new(
+      nil,
       :resource_share_arn,
       :resource_share_name,
       :associated_entity,
@@ -2552,6 +2634,7 @@ module Aws::RAM
     #   <p>The <a href="https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html">Amazon Resource Name (ARN)</a> of the IAM user or role that received the invitation.</p>
     #   @return [String]
     class ResourceShareInvitation < Struct.new(
+      nil,
       :resource_share_invitation_arn,
       :resource_share_name,
       :resource_share_arn,
@@ -2570,6 +2653,7 @@ module Aws::RAM
     # @!attribute message
     #   @return [String]
     class ResourceShareInvitationAlreadyAcceptedException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -2580,6 +2664,7 @@ module Aws::RAM
     # @!attribute message
     #   @return [String]
     class ResourceShareInvitationAlreadyRejectedException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -2591,6 +2676,7 @@ module Aws::RAM
     # @!attribute message
     #   @return [String]
     class ResourceShareInvitationArnNotFoundException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -2602,6 +2688,7 @@ module Aws::RAM
     # @!attribute message
     #   @return [String]
     class ResourceShareInvitationExpiredException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -2614,6 +2701,7 @@ module Aws::RAM
     # @!attribute message
     #   @return [String]
     class ResourceShareLimitExceededException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -2728,6 +2816,7 @@ module Aws::RAM
     #   <p>The tag key and value pairs attached to the resource share.</p>
     #   @return [Array<Types::Tag>]
     class ResourceSharePermissionDetail < Struct.new(
+      nil,
       :arn,
       :version,
       :default_version,
@@ -2830,6 +2919,7 @@ module Aws::RAM
     #   <p>A list of the tag key value pairs currently attached to the permission.</p>
     #   @return [Array<Types::Tag>]
     class ResourceSharePermissionSummary < Struct.new(
+      nil,
       :arn,
       :version,
       :default_version,
@@ -2852,6 +2942,7 @@ module Aws::RAM
     # @!attribute message
     #   @return [String]
     class ServerInternalException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -2886,6 +2977,7 @@ module Aws::RAM
     #            </ul>
     #   @return [String]
     class ServiceNameAndResourceType < Struct.new(
+      nil,
       :resource_type,
       :service_name,
       :resource_region_scope,
@@ -2898,6 +2990,7 @@ module Aws::RAM
     # @!attribute message
     #   @return [String]
     class ServiceUnavailableException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -2925,6 +3018,7 @@ module Aws::RAM
     #                error.</p>
     #   @return [String]
     class SetDefaultPermissionVersionRequest < Struct.new(
+      nil,
       :permission_arn,
       :permission_version,
       :client_token,
@@ -2943,6 +3037,7 @@ module Aws::RAM
     #                parameters must also have the same values that you used in the first call.</p>
     #   @return [String]
     class SetDefaultPermissionVersionResponse < Struct.new(
+      nil,
       :return_value,
       :client_token,
       keyword_init: true
@@ -2965,6 +3060,7 @@ module Aws::RAM
     #               case sensitive.</p>
     #   @return [String]
     class Tag < Struct.new(
+      nil,
       :key,
       :value,
       keyword_init: true
@@ -2982,6 +3078,7 @@ module Aws::RAM
     #               any tag with the specified key, regardless of its value.</p>
     #   @return [Array<String>]
     class TagFilter < Struct.new(
+      nil,
       :tag_key,
       :tag_values,
       keyword_init: true
@@ -2994,6 +3091,7 @@ module Aws::RAM
     # @!attribute message
     #   @return [String]
     class TagLimitExceededException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -3005,6 +3103,7 @@ module Aws::RAM
     # @!attribute message
     #   @return [String]
     class TagPolicyViolationException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -3026,6 +3125,7 @@ module Aws::RAM
     #               <code>resourceArn</code>, or <code>resourceShareArn</code>, but not both.</p>
     #   @return [String]
     class TagResourceRequest < Struct.new(
+      nil,
       :resource_share_arn,
       :tags,
       :resource_arn,
@@ -3035,6 +3135,7 @@ module Aws::RAM
     end
 
     class TagResourceResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -3045,6 +3146,7 @@ module Aws::RAM
     # @!attribute message
     #   @return [String]
     class ThrottlingException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -3055,6 +3157,7 @@ module Aws::RAM
     # @!attribute message
     #   @return [String]
     class UnknownResourceException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -3066,6 +3169,7 @@ module Aws::RAM
     # @!attribute message
     #   @return [String]
     class UnmatchedPolicyPermissionException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -3086,6 +3190,7 @@ module Aws::RAM
     #               both.</p>
     #   @return [String]
     class UntagResourceRequest < Struct.new(
+      nil,
       :resource_share_arn,
       :tag_keys,
       :resource_arn,
@@ -3095,6 +3200,7 @@ module Aws::RAM
     end
 
     class UntagResourceResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -3124,6 +3230,7 @@ module Aws::RAM
     #                error.</p>
     #   @return [String]
     class UpdateResourceShareRequest < Struct.new(
+      nil,
       :resource_share_arn,
       :name,
       :allow_external_principals,
@@ -3143,6 +3250,7 @@ module Aws::RAM
     #                parameters must also have the same values that you used in the first call.</p>
     #   @return [String]
     class UpdateResourceShareResponse < Struct.new(
+      nil,
       :resource_share,
       :client_token,
       keyword_init: true

@@ -33,6 +33,7 @@ module Aws::DataSync
     #   <p>The platform-related details about the agent, such as the version number.</p>
     #   @return [Types::Platform]
     class AgentListEntry < Struct.new(
+      nil,
       :agent_arn,
       :name,
       :status,
@@ -55,6 +56,7 @@ module Aws::DataSync
     #            </p>
     #   @return [String]
     class AzureBlobSasConfiguration < Struct.new(
+      nil,
       :token,
       keyword_init: true
     )
@@ -66,6 +68,7 @@ module Aws::DataSync
     #   <p>The Amazon Resource Name (ARN) of the task execution to stop.</p>
     #   @return [String]
     class CancelTaskExecutionRequest < Struct.new(
+      nil,
       :task_execution_arn,
       keyword_init: true
     )
@@ -73,6 +76,7 @@ module Aws::DataSync
     end
 
     class CancelTaskExecutionResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -95,6 +99,7 @@ module Aws::DataSync
     #           <code>SecretArn</code>. DataSync provides this key to Secrets Manager.</p>
     #   @return [String]
     class CmkSecretConfig < Struct.new(
+      nil,
       :secret_arn,
       :kms_key_arn,
       keyword_init: true
@@ -132,6 +137,7 @@ module Aws::DataSync
     #         your agent and VPC service endpoint. You can only specify one ARN.</p>
     #   @return [Array<String>]
     class CreateAgentRequest < Struct.new(
+      nil,
       :activation_key,
       :agent_name,
       :tags,
@@ -149,6 +155,7 @@ module Aws::DataSync
     #         list of agents in your Amazon Web Services account and Amazon Web Services Region.</p>
     #   @return [String]
     class CreateAgentResponse < Struct.new(
+      nil,
       :agent_arn,
       keyword_init: true
     )
@@ -232,6 +239,7 @@ module Aws::DataSync
     #            </note>
     #   @return [Types::CustomSecretConfig]
     class CreateLocationAzureBlobRequest < Struct.new(
+      nil,
       :container_url,
       :authentication_type,
       :sas_configuration,
@@ -251,6 +259,7 @@ module Aws::DataSync
     #   <p>The ARN of the Azure Blob Storage transfer location that you created.</p>
     #   @return [String]
     class CreateLocationAzureBlobResponse < Struct.new(
+      nil,
       :location_arn,
       keyword_init: true
     )
@@ -296,6 +305,7 @@ module Aws::DataSync
     #           <code>TLS1_2</code>.</p>
     #   @return [String]
     class CreateLocationEfsRequest < Struct.new(
+      nil,
       :subdirectory,
       :efs_filesystem_arn,
       :ec2_config,
@@ -314,6 +324,7 @@ module Aws::DataSync
     #         create.</p>
     #   @return [String]
     class CreateLocationEfsResponse < Struct.new(
+      nil,
       :location_arn,
       keyword_init: true
     )
@@ -346,6 +357,7 @@ module Aws::DataSync
     #         resources. We recommend creating at least a name tag for your location.</p>
     #   @return [Array<Types::TagListEntry>]
     class CreateLocationFsxLustreRequest < Struct.new(
+      nil,
       :fsx_filesystem_arn,
       :security_group_arns,
       :subdirectory,
@@ -360,6 +372,7 @@ module Aws::DataSync
     #         you created. </p>
     #   @return [String]
     class CreateLocationFsxLustreResponse < Struct.new(
+      nil,
       :location_arn,
       keyword_init: true
     )
@@ -408,6 +421,7 @@ module Aws::DataSync
     #         resources. We recommend creating at least a name tag for your location.</p>
     #   @return [Array<Types::TagListEntry>]
     class CreateLocationFsxOntapRequest < Struct.new(
+      nil,
       :protocol,
       :security_group_arns,
       :storage_virtual_machine_arn,
@@ -423,6 +437,7 @@ module Aws::DataSync
     #         create.</p>
     #   @return [String]
     class CreateLocationFsxOntapResponse < Struct.new(
+      nil,
       :location_arn,
       keyword_init: true
     )
@@ -449,6 +464,7 @@ module Aws::DataSync
     #         recommend that you create a name tag for your location.</p>
     #   @return [Array<Types::TagListEntry>]
     class CreateLocationFsxOpenZfsRequest < Struct.new(
+      nil,
       :fsx_filesystem_arn,
       :protocol,
       :security_group_arns,
@@ -463,6 +479,7 @@ module Aws::DataSync
     #   <p>The ARN of the FSx for OpenZFS file system location that you created.</p>
     #   @return [String]
     class CreateLocationFsxOpenZfsResponse < Struct.new(
+      nil,
       :location_arn,
       keyword_init: true
     )
@@ -520,6 +537,7 @@ module Aws::DataSync
     #         folders, and file metadata in your FSx for Windows File Server file system.</p>
     #   @return [String]
     class CreateLocationFsxWindowsRequest < Struct.new(
+      nil,
       :subdirectory,
       :fsx_filesystem_arn,
       :security_group_arns,
@@ -536,6 +554,7 @@ module Aws::DataSync
     #   <p>The ARN of the FSx for Windows File Server file system location you created.</p>
     #   @return [String]
     class CreateLocationFsxWindowsResponse < Struct.new(
+      nil,
       :location_arn,
       keyword_init: true
     )
@@ -616,6 +635,7 @@ module Aws::DataSync
     #         can be an empty string. We recommend using tags to name your resources. </p>
     #   @return [Array<Types::TagListEntry>]
     class CreateLocationHdfsRequest < Struct.new(
+      nil,
       :subdirectory,
       :name_nodes,
       :block_size,
@@ -638,6 +658,7 @@ module Aws::DataSync
     #   <p>The ARN of the source HDFS cluster location that you create.</p>
     #   @return [String]
     class CreateLocationHdfsResponse < Struct.new(
+      nil,
       :location_arn,
       keyword_init: true
     )
@@ -667,6 +688,7 @@ module Aws::DataSync
     #   <p>Specifies labels that help you categorize, filter, and search for your Amazon Web Services resources. We recommend creating at least a name tag for your location.</p>
     #   @return [Array<Types::TagListEntry>]
     class CreateLocationNfsRequest < Struct.new(
+      nil,
       :subdirectory,
       :server_hostname,
       :on_prem_config,
@@ -682,6 +704,7 @@ module Aws::DataSync
     #   <p>The ARN of the transfer location that you created for your NFS file server.</p>
     #   @return [String]
     class CreateLocationNfsResponse < Struct.new(
+      nil,
       :location_arn,
       keyword_init: true
     )
@@ -792,6 +815,7 @@ module Aws::DataSync
     #            </note>
     #   @return [Types::CustomSecretConfig]
     class CreateLocationObjectStorageRequest < Struct.new(
+      nil,
       :server_hostname,
       :server_port,
       :server_protocol,
@@ -814,6 +838,7 @@ module Aws::DataSync
     #   <p>Specifies the ARN of the object storage system location that you create.</p>
     #   @return [String]
     class CreateLocationObjectStorageResponse < Struct.new(
+      nil,
       :location_arn,
       keyword_init: true
     )
@@ -884,6 +909,7 @@ module Aws::DataSync
     #   <p>Specifies labels that help you categorize, filter, and search for your Amazon Web Services resources. We recommend creating at least a name tag for your transfer location.</p>
     #   @return [Array<Types::TagListEntry>]
     class CreateLocationS3Request < Struct.new(
+      nil,
       :subdirectory,
       :s3_bucket_arn,
       :s3_storage_class,
@@ -900,6 +926,7 @@ module Aws::DataSync
     #   <p>The ARN of the S3 location that you created.</p>
     #   @return [String]
     class CreateLocationS3Response < Struct.new(
+      nil,
       :location_arn,
       keyword_init: true
     )
@@ -986,6 +1013,7 @@ module Aws::DataSync
     #         done for you.</p>
     #   @return [String]
     class CreateLocationSmbRequest < Struct.new(
+      nil,
       :subdirectory,
       :server_hostname,
       :user,
@@ -1009,6 +1037,7 @@ module Aws::DataSync
     #   <p>The ARN of the SMB location that you created.</p>
     #   @return [String]
     class CreateLocationSmbResponse < Struct.new(
+      nil,
       :location_arn,
       keyword_init: true
     )
@@ -1097,6 +1126,7 @@ module Aws::DataSync
     #           task mode differences</a>.</p>
     #   @return [String]
     class CreateTaskRequest < Struct.new(
+      nil,
       :source_location_arn,
       :destination_location_arn,
       :cloud_watch_log_group_arn,
@@ -1119,6 +1149,7 @@ module Aws::DataSync
     #   <p>The Amazon Resource Name (ARN) of the task.</p>
     #   @return [String]
     class CreateTaskResponse < Struct.new(
+      nil,
       :task_arn,
       keyword_init: true
     )
@@ -1142,6 +1173,7 @@ module Aws::DataSync
     #         access the secret specified for <code>SecretArn</code>.</p>
     #   @return [String]
     class CustomSecretConfig < Struct.new(
+      nil,
       :secret_arn,
       :secret_access_role_arn,
       keyword_init: true
@@ -1155,6 +1187,7 @@ module Aws::DataSync
     #         operation to return a list of agents for your account and Amazon Web Services Region.</p>
     #   @return [String]
     class DeleteAgentRequest < Struct.new(
+      nil,
       :agent_arn,
       keyword_init: true
     )
@@ -1162,6 +1195,7 @@ module Aws::DataSync
     end
 
     class DeleteAgentResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1172,6 +1206,7 @@ module Aws::DataSync
     #   <p>The Amazon Resource Name (ARN) of the location to delete.</p>
     #   @return [String]
     class DeleteLocationRequest < Struct.new(
+      nil,
       :location_arn,
       keyword_init: true
     )
@@ -1179,6 +1214,7 @@ module Aws::DataSync
     end
 
     class DeleteLocationResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1189,6 +1225,7 @@ module Aws::DataSync
     #   <p>Specifies the Amazon Resource Name (ARN) of the task that you want to delete.</p>
     #   @return [String]
     class DeleteTaskRequest < Struct.new(
+      nil,
       :task_arn,
       keyword_init: true
     )
@@ -1196,6 +1233,7 @@ module Aws::DataSync
     end
 
     class DeleteTaskResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1207,6 +1245,7 @@ module Aws::DataSync
     #         information about.</p>
     #   @return [String]
     class DescribeAgentRequest < Struct.new(
+      nil,
       :agent_arn,
       keyword_init: true
     )
@@ -1253,6 +1292,7 @@ module Aws::DataSync
     #   <p>The platform-related details about the agent, such as the version number.</p>
     #   @return [Types::Platform]
     class DescribeAgentResponse < Struct.new(
+      nil,
       :agent_arn,
       :name,
       :status,
@@ -1271,6 +1311,7 @@ module Aws::DataSync
     #         location.</p>
     #   @return [String]
     class DescribeLocationAzureBlobRequest < Struct.new(
+      nil,
       :location_arn,
       keyword_init: true
     )
@@ -1320,6 +1361,7 @@ module Aws::DataSync
     #         a customer-managed KMS key.</p>
     #   @return [Types::CustomSecretConfig]
     class DescribeLocationAzureBlobResponse < Struct.new(
+      nil,
       :location_arn,
       :location_uri,
       :authentication_type,
@@ -1341,6 +1383,7 @@ module Aws::DataSync
     #         want information about.</p>
     #   @return [String]
     class DescribeLocationEfsRequest < Struct.new(
+      nil,
       :location_arn,
       keyword_init: true
     )
@@ -1378,6 +1421,7 @@ module Aws::DataSync
     #         transferring data to or from the Amazon EFS file system.</p>
     #   @return [String]
     class DescribeLocationEfsResponse < Struct.new(
+      nil,
       :location_arn,
       :location_uri,
       :ec2_config,
@@ -1395,6 +1439,7 @@ module Aws::DataSync
     #       </p>
     #   @return [String]
     class DescribeLocationFsxLustreRequest < Struct.new(
+      nil,
       :location_arn,
       keyword_init: true
     )
@@ -1416,6 +1461,7 @@ module Aws::DataSync
     #   <p>The time that the FSx for Lustre location was created.</p>
     #   @return [Time]
     class DescribeLocationFsxLustreResponse < Struct.new(
+      nil,
       :location_arn,
       :location_uri,
       :security_group_arns,
@@ -1430,6 +1476,7 @@ module Aws::DataSync
     #         location that you want information about.</p>
     #   @return [String]
     class DescribeLocationFsxOntapRequest < Struct.new(
+      nil,
       :location_arn,
       keyword_init: true
     )
@@ -1462,6 +1509,7 @@ module Aws::DataSync
     #   <p>The ARN of the FSx for ONTAP file system.</p>
     #   @return [String]
     class DescribeLocationFsxOntapResponse < Struct.new(
+      nil,
       :creation_time,
       :location_arn,
       :location_uri,
@@ -1478,6 +1526,7 @@ module Aws::DataSync
     #   <p>The Amazon Resource Name (ARN) of the FSx for OpenZFS location to describe.</p>
     #   @return [String]
     class DescribeLocationFsxOpenZfsRequest < Struct.new(
+      nil,
       :location_arn,
       keyword_init: true
     )
@@ -1504,6 +1553,7 @@ module Aws::DataSync
     #   <p>The time that the FSx for OpenZFS location was created.</p>
     #   @return [Time]
     class DescribeLocationFsxOpenZfsResponse < Struct.new(
+      nil,
       :location_arn,
       :location_uri,
       :security_group_arns,
@@ -1518,6 +1568,7 @@ module Aws::DataSync
     #   <p>Specifies the Amazon Resource Name (ARN) of the FSx for Windows File Server location.</p>
     #   @return [String]
     class DescribeLocationFsxWindowsRequest < Struct.new(
+      nil,
       :location_arn,
       keyword_init: true
     )
@@ -1549,6 +1600,7 @@ module Aws::DataSync
     #         system belongs to.</p>
     #   @return [String]
     class DescribeLocationFsxWindowsResponse < Struct.new(
+      nil,
       :location_arn,
       :location_uri,
       :security_group_arns,
@@ -1564,6 +1616,7 @@ module Aws::DataSync
     #   <p>Specifies the Amazon Resource Name (ARN) of the HDFS location.</p>
     #   @return [String]
     class DescribeLocationHdfsRequest < Struct.new(
+      nil,
       :location_arn,
       keyword_init: true
     )
@@ -1611,6 +1664,7 @@ module Aws::DataSync
     #   <p>The time that the HDFS location was created.</p>
     #   @return [Time]
     class DescribeLocationHdfsResponse < Struct.new(
+      nil,
       :location_arn,
       :location_uri,
       :name_nodes,
@@ -1634,6 +1688,7 @@ module Aws::DataSync
     #         about.</p>
     #   @return [String]
     class DescribeLocationNfsRequest < Struct.new(
+      nil,
       :location_arn,
       keyword_init: true
     )
@@ -1658,6 +1713,7 @@ module Aws::DataSync
     #   <p>The time when the NFS location was created.</p>
     #   @return [Time]
     class DescribeLocationNfsResponse < Struct.new(
+      nil,
       :location_arn,
       :location_uri,
       :on_prem_config,
@@ -1673,6 +1729,7 @@ module Aws::DataSync
     #   <p>Specifies the Amazon Resource Name (ARN) of the object storage system location.</p>
     #   @return [String]
     class DescribeLocationObjectStorageRequest < Struct.new(
+      nil,
       :location_arn,
       keyword_init: true
     )
@@ -1724,6 +1781,7 @@ module Aws::DataSync
     #         transfer location, and a customer-managed KMS key.</p>
     #   @return [Types::CustomSecretConfig]
     class DescribeLocationObjectStorageResponse < Struct.new(
+      nil,
       :location_arn,
       :location_uri,
       :access_key,
@@ -1745,6 +1803,7 @@ module Aws::DataSync
     #   <p>Specifies the Amazon Resource Name (ARN) of the Amazon S3 location.</p>
     #   @return [String]
     class DescribeLocationS3Request < Struct.new(
+      nil,
       :location_arn,
       keyword_init: true
     )
@@ -1780,6 +1839,7 @@ module Aws::DataSync
     #   <p>The time that the Amazon S3 location was created.</p>
     #   @return [Time]
     class DescribeLocationS3Response < Struct.new(
+      nil,
       :location_arn,
       :location_uri,
       :s3_storage_class,
@@ -1797,6 +1857,7 @@ module Aws::DataSync
     #         about.</p>
     #   @return [String]
     class DescribeLocationSmbRequest < Struct.new(
+      nil,
       :location_arn,
       keyword_init: true
     )
@@ -1843,6 +1904,7 @@ module Aws::DataSync
     #         server.</p>
     #   @return [String]
     class DescribeLocationSmbResponse < Struct.new(
+      nil,
       :location_arn,
       :location_uri,
       :agent_arns,
@@ -1864,6 +1926,7 @@ module Aws::DataSync
     #         information about.</p>
     #   @return [String]
     class DescribeTaskExecutionRequest < Struct.new(
+      nil,
       :task_execution_arn,
       keyword_init: true
     )
@@ -2047,6 +2110,7 @@ module Aws::DataSync
     #   <p>The time that the transfer task ends.</p>
     #   @return [Time]
     class DescribeTaskExecutionResponse < Struct.new(
+      nil,
       :task_execution_arn,
       :status,
       :options,
@@ -2099,6 +2163,7 @@ module Aws::DataSync
     #         about.</p>
     #   @return [String]
     class DescribeTaskRequest < Struct.new(
+      nil,
       :task_arn,
       keyword_init: true
     )
@@ -2183,6 +2248,7 @@ module Aws::DataSync
     #           transfer</a>.</p>
     #   @return [String]
     class DescribeTaskResponse < Struct.new(
+      nil,
       :task_arn,
       :status,
       :name,
@@ -2231,6 +2297,7 @@ module Aws::DataSync
     #           Amazon EFS file system's mount target.</p>
     #   @return [Array<String>]
     class Ec2Config < Struct.new(
+      nil,
       :subnet_arn,
       :security_group_arns,
       keyword_init: true
@@ -2251,6 +2318,7 @@ module Aws::DataSync
     #            <p> </p>
     #   @return [String]
     class FilterRule < Struct.new(
+      nil,
       :filter_type,
       :value,
       keyword_init: true
@@ -2270,6 +2338,7 @@ module Aws::DataSync
     #         uses to access your FSx for ONTAP file system's SVM.</p>
     #   @return [Types::FsxProtocolSmb]
     class FsxProtocol < Struct.new(
+      nil,
       :nfs,
       :smb,
       keyword_init: true
@@ -2284,6 +2353,7 @@ module Aws::DataSync
     #   <p>Specifies how DataSync can access a location using the NFS protocol.</p>
     #   @return [Types::NfsMountOptions]
     class FsxProtocolNfs < Struct.new(
+      nil,
       :mount_options,
       keyword_init: true
     )
@@ -2314,6 +2384,7 @@ module Aws::DataSync
     #           the SMB protocol</a>.</p>
     #   @return [String]
     class FsxProtocolSmb < Struct.new(
+      nil,
       :domain,
       :mount_options,
       :password,
@@ -2340,6 +2411,7 @@ module Aws::DataSync
     #         (SVM).</p>
     #   @return [Types::FsxUpdateProtocolSmb]
     class FsxUpdateProtocol < Struct.new(
+      nil,
       :nfs,
       :smb,
       keyword_init: true
@@ -2369,6 +2441,7 @@ module Aws::DataSync
     #           the SMB protocol</a>.</p>
     #   @return [String]
     class FsxUpdateProtocolSmb < Struct.new(
+      nil,
       :domain,
       :mount_options,
       :password,
@@ -2391,6 +2464,7 @@ module Aws::DataSync
     #   <p>The port that the NameNode uses to listen to client requests.</p>
     #   @return [Integer]
     class HdfsNameNode < Struct.new(
+      nil,
       :hostname,
       :port,
       keyword_init: true
@@ -2405,6 +2479,7 @@ module Aws::DataSync
     # @!attribute error_code
     #   @return [String]
     class InternalException < Struct.new(
+      nil,
       :message,
       :error_code,
       keyword_init: true
@@ -2420,6 +2495,7 @@ module Aws::DataSync
     # @!attribute datasync_error_code
     #   @return [String]
     class InvalidRequestException < Struct.new(
+      nil,
       :message,
       :error_code,
       :datasync_error_code,
@@ -2438,6 +2514,7 @@ module Aws::DataSync
     #         results in the response.</p>
     #   @return [String]
     class ListAgentsRequest < Struct.new(
+      nil,
       :max_results,
       :next_token,
       keyword_init: true
@@ -2455,6 +2532,7 @@ module Aws::DataSync
     #         response.</p>
     #   @return [String]
     class ListAgentsResponse < Struct.new(
+      nil,
       :agents,
       :next_token,
       keyword_init: true
@@ -2477,6 +2555,7 @@ module Aws::DataSync
     #         and <code>Operator Equals</code>.</p>
     #   @return [Array<Types::LocationFilter>]
     class ListLocationsRequest < Struct.new(
+      nil,
       :max_results,
       :next_token,
       :filters,
@@ -2494,6 +2573,7 @@ module Aws::DataSync
     #         of locations.</p>
     #   @return [String]
     class ListLocationsResponse < Struct.new(
+      nil,
       :locations,
       :next_token,
       keyword_init: true
@@ -2514,6 +2594,7 @@ module Aws::DataSync
     #         results in the response.</p>
     #   @return [String]
     class ListTagsForResourceRequest < Struct.new(
+      nil,
       :resource_arn,
       :max_results,
       :next_token,
@@ -2531,6 +2612,7 @@ module Aws::DataSync
     #         response.</p>
     #   @return [String]
     class ListTagsForResourceResponse < Struct.new(
+      nil,
       :tags,
       :next_token,
       keyword_init: true
@@ -2551,6 +2633,7 @@ module Aws::DataSync
     #         of results in the response.</p>
     #   @return [String]
     class ListTaskExecutionsRequest < Struct.new(
+      nil,
       :task_arn,
       :max_results,
       :next_token,
@@ -2568,6 +2651,7 @@ module Aws::DataSync
     #         response.</p>
     #   @return [String]
     class ListTaskExecutionsResponse < Struct.new(
+      nil,
       :task_executions,
       :next_token,
       keyword_init: true
@@ -2590,6 +2674,7 @@ module Aws::DataSync
     #           Equals</code> with the ARN for the location.</p>
     #   @return [Array<Types::TaskFilter>]
     class ListTasksRequest < Struct.new(
+      nil,
       :max_results,
       :next_token,
       :filters,
@@ -2607,6 +2692,7 @@ module Aws::DataSync
     #         of tasks.</p>
     #   @return [String]
     class ListTasksResponse < Struct.new(
+      nil,
       :tasks,
       :next_token,
       keyword_init: true
@@ -2633,6 +2719,7 @@ module Aws::DataSync
     #           <code>Contains</code>).</p>
     #   @return [String]
     class LocationFilter < Struct.new(
+      nil,
       :name,
       :values,
       :operator,
@@ -2667,6 +2754,7 @@ module Aws::DataSync
     #            <p></p>
     #   @return [String]
     class LocationListEntry < Struct.new(
+      nil,
       :location_arn,
       :location_uri,
       keyword_init: true
@@ -2681,6 +2769,7 @@ module Aws::DataSync
     #   <p>Specifies the ARN for an Secrets Manager secret.</p>
     #   @return [String]
     class ManagedSecretConfig < Struct.new(
+      nil,
       :secret_arn,
       keyword_init: true
     )
@@ -2706,6 +2795,7 @@ module Aws::DataSync
     #            </note>
     #   @return [Types::SourceManifestConfig]
     class ManifestConfig < Struct.new(
+      nil,
       :action,
       :format,
       :source,
@@ -2746,6 +2836,7 @@ module Aws::DataSync
     #            </note>
     #   @return [String]
     class NfsMountOptions < Struct.new(
+      nil,
       :version,
       keyword_init: true
     )
@@ -2760,6 +2851,7 @@ module Aws::DataSync
     #            <p>You can specify more than one agent. For more information, see <a href="https://docs.aws.amazon.com/datasync/latest/userguide/do-i-need-datasync-agent.html#multiple-agents">Using multiple DataSync agents</a>.</p>
     #   @return [Array<String>]
     class OnPremConfig < Struct.new(
+      nil,
       :agent_arns,
       keyword_init: true
     )
@@ -3089,6 +3181,7 @@ module Aws::DataSync
     #         (default behavior) when transferring between object storage systems. If you want your DataSync task to ignore object tags, specify the <code>NONE</code> value.</p>
     #   @return [String]
     class Options < Struct.new(
+      nil,
       :verify_mode,
       :overwrite_mode,
       :atime,
@@ -3115,6 +3208,7 @@ module Aws::DataSync
     #   <p>The version of the DataSync agent.</p>
     #   @return [String]
     class Platform < Struct.new(
+      nil,
       :version,
       keyword_init: true
     )
@@ -3138,6 +3232,7 @@ module Aws::DataSync
     #   <p>Specifies the Amazon Resource Names (ARN) of the security group that provides DataSync access to your VPC endpoint. You can only specify one ARN.</p>
     #   @return [Array<String>]
     class PrivateLinkConfig < Struct.new(
+      nil,
       :vpc_endpoint_id,
       :private_link_endpoint,
       :subnet_arns,
@@ -3161,6 +3256,7 @@ module Aws::DataSync
     #           <code>hdfs-site.xml</code> file on your Hadoop cluster.</p>
     #   @return [String]
     class QopConfiguration < Struct.new(
+      nil,
       :rpc_protection,
       :data_transfer_protection,
       keyword_init: true
@@ -3174,6 +3270,7 @@ module Aws::DataSync
     #         report.</p>
     #   @return [Types::ReportDestinationS3]
     class ReportDestination < Struct.new(
+      nil,
       :s3,
       keyword_init: true
     )
@@ -3195,6 +3292,7 @@ module Aws::DataSync
     #             DataSync to upload a task report to an Amazon S3 bucket</a>.</p>
     #   @return [String]
     class ReportDestinationS3 < Struct.new(
+      nil,
       :subdirectory,
       :s3_bucket_arn,
       :bucket_access_role_arn,
@@ -3215,6 +3313,7 @@ module Aws::DataSync
     #           (<code>SUCCESSES_AND_ERRORS</code>).</p>
     #   @return [String]
     class ReportOverride < Struct.new(
+      nil,
       :report_level,
       keyword_init: true
     )
@@ -3238,6 +3337,7 @@ module Aws::DataSync
     #   <p>Specifies the level of reporting for the files, objects, and directories that DataSync attempted to skip during your transfer.</p>
     #   @return [Types::ReportOverride]
     class ReportOverrides < Struct.new(
+      nil,
       :transferred,
       :verified,
       :deleted,
@@ -3261,6 +3361,7 @@ module Aws::DataSync
     #   <p>Provides details about issues creating a report.</p>
     #   @return [String]
     class ReportResult < Struct.new(
+      nil,
       :status,
       :error_code,
       :error_detail,
@@ -3277,6 +3378,7 @@ module Aws::DataSync
     #         your S3 bucket.</p>
     #   @return [String]
     class S3Config < Struct.new(
+      nil,
       :bucket_access_role_arn,
       keyword_init: true
     )
@@ -3300,6 +3402,7 @@ module Aws::DataSync
     #         If you don't set this, DataSync uses the latest version of the object.</p>
     #   @return [String]
     class S3ManifestConfig < Struct.new(
+      nil,
       :manifest_object_path,
       :bucket_access_role_arn,
       :s3_bucket_arn,
@@ -3349,6 +3452,7 @@ module Aws::DataSync
     #            </ul>
     #   @return [String]
     class SmbMountOptions < Struct.new(
+      nil,
       :version,
       keyword_init: true
     )
@@ -3361,6 +3465,7 @@ module Aws::DataSync
     #   <p>Specifies the S3 bucket where you're hosting your manifest.</p>
     #   @return [Types::S3ManifestConfig]
     class SourceManifestConfig < Struct.new(
+      nil,
       :s3,
       keyword_init: true
     )
@@ -3411,6 +3516,7 @@ module Aws::DataSync
     #         your DataSync resources.</p>
     #   @return [Array<Types::TagListEntry>]
     class StartTaskExecutionRequest < Struct.new(
+      nil,
       :task_arn,
       :override_options,
       :includes,
@@ -3428,6 +3534,7 @@ module Aws::DataSync
     #   <p>The ARN of the running task execution.</p>
     #   @return [String]
     class StartTaskExecutionResponse < Struct.new(
+      nil,
       :task_execution_arn,
       keyword_init: true
     )
@@ -3443,6 +3550,7 @@ module Aws::DataSync
     #   <p>The value for an Amazon Web Services resource tag.</p>
     #   @return [String]
     class TagListEntry < Struct.new(
+      nil,
       :key,
       :value,
       keyword_init: true
@@ -3458,6 +3566,7 @@ module Aws::DataSync
     #   <p>Specifies the tags that you want to apply to the resource.</p>
     #   @return [Array<Types::TagListEntry>]
     class TagResourceRequest < Struct.new(
+      nil,
       :resource_arn,
       :tags,
       keyword_init: true
@@ -3466,6 +3575,7 @@ module Aws::DataSync
     end
 
     class TagResourceResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -3494,6 +3604,7 @@ module Aws::DataSync
     #         execution.</p>
     #   @return [Integer]
     class TaskExecutionFilesFailedDetail < Struct.new(
+      nil,
       :prepare,
       :transfer,
       :verify,
@@ -3539,6 +3650,7 @@ module Aws::DataSync
     #         source.</p>
     #   @return [Integer]
     class TaskExecutionFilesListedDetail < Struct.new(
+      nil,
       :at_source,
       :at_destination_for_delete,
       keyword_init: true
@@ -3566,6 +3678,7 @@ module Aws::DataSync
     #           transfer</a>.</p>
     #   @return [String]
     class TaskExecutionListEntry < Struct.new(
+      nil,
       :task_execution_arn,
       :status,
       :task_mode,
@@ -3627,6 +3740,7 @@ module Aws::DataSync
     #           issues</a>. </p>
     #   @return [String]
     class TaskExecutionResultDetail < Struct.new(
+      nil,
       :prepare_duration,
       :prepare_status,
       :total_duration,
@@ -3660,6 +3774,7 @@ module Aws::DataSync
     #           <code>Contains</code>).</p>
     #   @return [String]
     class TaskFilter < Struct.new(
+      nil,
       :name,
       :values,
       :operator,
@@ -3686,6 +3801,7 @@ module Aws::DataSync
     #           transfer</a>.</p>
     #   @return [String]
     class TaskListEntry < Struct.new(
+      nil,
       :task_arn,
       :status,
       :name,
@@ -3748,6 +3864,7 @@ module Aws::DataSync
     #         location.</p>
     #   @return [Types::ReportOverrides]
     class TaskReportConfig < Struct.new(
+      nil,
       :destination,
       :output_type,
       :report_level,
@@ -3786,6 +3903,7 @@ module Aws::DataSync
     #         with the same error. For more information, see <a href="https://docs.aws.amazon.com/datasync/latest/userguide/API_TaskScheduleDetails.html">TaskScheduleDetails</a>.</p>
     #   @return [String]
     class TaskSchedule < Struct.new(
+      nil,
       :schedule_expression,
       :status,
       keyword_init: true
@@ -3823,6 +3941,7 @@ module Aws::DataSync
     #            </ul>
     #   @return [String]
     class TaskScheduleDetails < Struct.new(
+      nil,
       :status_update_time,
       :disabled_reason,
       :disabled_by,
@@ -3840,6 +3959,7 @@ module Aws::DataSync
     #   <p>Specifies the keys in the tags that you want to remove.</p>
     #   @return [Array<String>]
     class UntagResourceRequest < Struct.new(
+      nil,
       :resource_arn,
       :keys,
       keyword_init: true
@@ -3848,6 +3968,7 @@ module Aws::DataSync
     end
 
     class UntagResourceResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -3861,6 +3982,7 @@ module Aws::DataSync
     #   <p>The name that you want to use to configure the agent.</p>
     #   @return [String]
     class UpdateAgentRequest < Struct.new(
+      nil,
       :agent_arn,
       :name,
       keyword_init: true
@@ -3869,6 +3991,7 @@ module Aws::DataSync
     end
 
     class UpdateAgentResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -3921,6 +4044,7 @@ module Aws::DataSync
     #         transfer location, and a customer-managed KMS key.</p>
     #   @return [Types::CustomSecretConfig]
     class UpdateLocationAzureBlobRequest < Struct.new(
+      nil,
       :location_arn,
       :subdirectory,
       :authentication_type,
@@ -3936,6 +4060,7 @@ module Aws::DataSync
     end
 
     class UpdateLocationAzureBlobResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -3971,6 +4096,7 @@ module Aws::DataSync
     #           <code>TLS1_2</code>.</p>
     #   @return [String]
     class UpdateLocationEfsRequest < Struct.new(
+      nil,
       :location_arn,
       :subdirectory,
       :access_point_arn,
@@ -3982,6 +4108,7 @@ module Aws::DataSync
     end
 
     class UpdateLocationEfsResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -4000,6 +4127,7 @@ module Aws::DataSync
     #           (<code>/</code>).</p>
     #   @return [String]
     class UpdateLocationFsxLustreRequest < Struct.new(
+      nil,
       :location_arn,
       :subdirectory,
       keyword_init: true
@@ -4008,6 +4136,7 @@ module Aws::DataSync
     end
 
     class UpdateLocationFsxLustreResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -4031,6 +4160,7 @@ module Aws::DataSync
     #            </note>
     #   @return [String]
     class UpdateLocationFsxOntapRequest < Struct.new(
+      nil,
       :location_arn,
       :protocol,
       :subdirectory,
@@ -4040,6 +4170,7 @@ module Aws::DataSync
     end
 
     class UpdateLocationFsxOntapResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -4059,6 +4190,7 @@ module Aws::DataSync
     #         file system is a source or destination location).</p>
     #   @return [String]
     class UpdateLocationFsxOpenZfsRequest < Struct.new(
+      nil,
       :location_arn,
       :protocol,
       :subdirectory,
@@ -4068,6 +4200,7 @@ module Aws::DataSync
     end
 
     class UpdateLocationFsxOpenZfsResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -4099,6 +4232,7 @@ module Aws::DataSync
     #         folders, and file metadata in your FSx for Windows File Server file system.</p>
     #   @return [String]
     class UpdateLocationFsxWindowsRequest < Struct.new(
+      nil,
       :location_arn,
       :subdirectory,
       :domain,
@@ -4110,6 +4244,7 @@ module Aws::DataSync
     end
 
     class UpdateLocationFsxWindowsResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -4166,6 +4301,7 @@ module Aws::DataSync
     #         HDFS cluster.</p>
     #   @return [Array<String>]
     class UpdateLocationHdfsRequest < Struct.new(
+      nil,
       :location_arn,
       :subdirectory,
       :name_nodes,
@@ -4185,6 +4321,7 @@ module Aws::DataSync
     end
 
     class UpdateLocationHdfsResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -4212,6 +4349,7 @@ module Aws::DataSync
     #   <p>Specifies how DataSync can access a location using the NFS protocol.</p>
     #   @return [Types::NfsMountOptions]
     class UpdateLocationNfsRequest < Struct.new(
+      nil,
       :location_arn,
       :subdirectory,
       :server_hostname,
@@ -4223,6 +4361,7 @@ module Aws::DataSync
     end
 
     class UpdateLocationNfsResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -4307,6 +4446,7 @@ module Aws::DataSync
     #         transfer location, and a customer-managed KMS key.</p>
     #   @return [Types::CustomSecretConfig]
     class UpdateLocationObjectStorageRequest < Struct.new(
+      nil,
       :location_arn,
       :server_port,
       :server_protocol,
@@ -4324,6 +4464,7 @@ module Aws::DataSync
     end
 
     class UpdateLocationObjectStorageResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -4379,6 +4520,7 @@ module Aws::DataSync
     #             DataSync access to S3 buckets</a>.</p>
     #   @return [Types::S3Config]
     class UpdateLocationS3Request < Struct.new(
+      nil,
       :location_arn,
       :subdirectory,
       :s3_storage_class,
@@ -4389,6 +4531,7 @@ module Aws::DataSync
     end
 
     class UpdateLocationS3Response < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -4471,6 +4614,7 @@ module Aws::DataSync
     #         done for you.</p>
     #   @return [String]
     class UpdateLocationSmbRequest < Struct.new(
+      nil,
       :location_arn,
       :subdirectory,
       :server_hostname,
@@ -4490,6 +4634,7 @@ module Aws::DataSync
     end
 
     class UpdateLocationSmbResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -4509,6 +4654,7 @@ module Aws::DataSync
     #         want to adjust the <code>LogLevel</code> for an individual execution.</p>
     #   @return [Types::Options]
     class UpdateTaskExecutionRequest < Struct.new(
+      nil,
       :task_execution_arn,
       :options,
       keyword_init: true
@@ -4517,6 +4663,7 @@ module Aws::DataSync
     end
 
     class UpdateTaskExecutionResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -4577,6 +4724,7 @@ module Aws::DataSync
     #            <p>To remove a task report configuration, specify this parameter as empty.</p>
     #   @return [Types::TaskReportConfig]
     class UpdateTaskRequest < Struct.new(
+      nil,
       :task_arn,
       :options,
       :excludes,
@@ -4592,6 +4740,7 @@ module Aws::DataSync
     end
 
     class UpdateTaskResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure

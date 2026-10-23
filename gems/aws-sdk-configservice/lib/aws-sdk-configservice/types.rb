@@ -19,6 +19,7 @@ module Aws::ConfigService
     #   <p>The source regions being aggregated.</p>
     #   @return [Array<String>]
     class AccountAggregationSource < Struct.new(
+      nil,
       :account_ids,
       :all_aws_regions,
       :aws_regions,
@@ -52,6 +53,7 @@ module Aws::ConfigService
     #   <p>The source region from where the data is aggregated.</p>
     #   @return [String]
     class AggregateComplianceByConfigRule < Struct.new(
+      nil,
       :config_rule_name,
       :compliance,
       :account_id,
@@ -79,6 +81,7 @@ module Aws::ConfigService
     #   <p>The source Amazon Web Services Region from where the data is aggregated.</p>
     #   @return [String]
     class AggregateComplianceByConformancePack < Struct.new(
+      nil,
       :conformance_pack_name,
       :compliance,
       :account_id,
@@ -99,6 +102,7 @@ module Aws::ConfigService
     #   			rules.</p>
     #   @return [Types::ComplianceSummary]
     class AggregateComplianceCount < Struct.new(
+      nil,
       :group_name,
       :compliance_summary,
       keyword_init: true
@@ -124,6 +128,7 @@ module Aws::ConfigService
     #   <p>Total number of compliant rules, noncompliant rules, and the rules that do not have any applicable resources to evaluate upon resulting in insufficient data.</p>
     #   @return [Integer]
     class AggregateConformancePackCompliance < Struct.new(
+      nil,
       :compliance_type,
       :compliant_rule_count,
       :non_compliant_rule_count,
@@ -148,6 +153,7 @@ module Aws::ConfigService
     #   <p>Number of noncompliant conformance packs.</p>
     #   @return [Integer]
     class AggregateConformancePackComplianceCount < Struct.new(
+      nil,
       :compliant_conformance_pack_count,
       :non_compliant_conformance_pack_count,
       keyword_init: true
@@ -175,6 +181,7 @@ module Aws::ConfigService
     #   <p>The source Amazon Web Services Region from where the data is aggregated.</p>
     #   @return [String]
     class AggregateConformancePackComplianceFilters < Struct.new(
+      nil,
       :conformance_pack_name,
       :compliance_type,
       :account_id,
@@ -192,6 +199,7 @@ module Aws::ConfigService
     #   <p>Groups the result based on Amazon Web Services account ID or Amazon Web Services Region.</p>
     #   @return [String]
     class AggregateConformancePackComplianceSummary < Struct.new(
+      nil,
       :compliance_summary,
       :group_name,
       keyword_init: true
@@ -207,6 +215,7 @@ module Aws::ConfigService
     #   <p>The source Amazon Web Services Region from where the data is aggregated.</p>
     #   @return [String]
     class AggregateConformancePackComplianceSummaryFilters < Struct.new(
+      nil,
       :account_id,
       :aws_region,
       keyword_init: true
@@ -247,6 +256,7 @@ module Aws::ConfigService
     #   <p>The source region from where the data is aggregated.</p>
     #   @return [String]
     class AggregateEvaluationResult < Struct.new(
+      nil,
       :evaluation_result_identifier,
       :compliance_type,
       :result_recorded_time,
@@ -276,6 +286,7 @@ module Aws::ConfigService
     #   <p>The name of the Amazon Web Services resource.</p>
     #   @return [String]
     class AggregateResourceIdentifier < Struct.new(
+      nil,
       :source_account_id,
       :source_region,
       :resource_id,
@@ -326,6 +337,7 @@ module Aws::ConfigService
     #   			failed due to an error.</p>
     #   @return [String]
     class AggregatedSourceStatus < Struct.new(
+      nil,
       :source_id,
       :source_type,
       :aws_region,
@@ -356,6 +368,7 @@ module Aws::ConfigService
     #   			created.</p>
     #   @return [Time]
     class AggregationAuthorization < Struct.new(
+      nil,
       :aggregation_authorization_arn,
       :authorized_account_id,
       :authorized_aws_region,
@@ -373,6 +386,7 @@ module Aws::ConfigService
     #   <p>Comma-separate list of resource types to filter your aggregated configuration recorders.</p>
     #   @return [Array<String>]
     class AggregatorFilterResourceType < Struct.new(
+      nil,
       :type,
       :value,
       keyword_init: true
@@ -388,6 +402,7 @@ module Aws::ConfigService
     #   <p>Comma-separated list of service principals for the linked Amazon Web Services services to filter your aggregated service-linked configuration recorders.</p>
     #   @return [Array<String>]
     class AggregatorFilterServicePrincipal < Struct.new(
+      nil,
       :type,
       :value,
       keyword_init: true
@@ -403,6 +418,7 @@ module Aws::ConfigService
     #   <p>An object to filter service-linked configuration recorders in an aggregator based on the linked Amazon Web Services service.</p>
     #   @return [Types::AggregatorFilterServicePrincipal]
     class AggregatorFilters < Struct.new(
+      nil,
       :resource_type,
       :service_principal,
       keyword_init: true
@@ -417,6 +433,7 @@ module Aws::ConfigService
     #   <p>The list of resource types you want to add to the recording group of the specified configuration recorder.</p>
     #   @return [Array<String>]
     class AssociateResourceTypesRequest < Struct.new(
+      nil,
       :configuration_recorder_arn,
       :resource_types,
       keyword_init: true
@@ -432,6 +449,7 @@ module Aws::ConfigService
     #               </a> in the <i>Config Developer Guide</i>.</p>
     #   @return [Types::ConfigurationRecorder]
     class AssociateResourceTypesResponse < Struct.new(
+      nil,
       :configuration_recorder,
       keyword_init: true
     )
@@ -521,6 +539,7 @@ module Aws::ConfigService
     #            </note>
     #   @return [Time]
     class BaseConfigurationItem < Struct.new(
+      nil,
       :version,
       :account_id,
       :configuration_item_capture_time,
@@ -549,6 +568,7 @@ module Aws::ConfigService
     #   <p>A list of aggregate ResourceIdentifiers objects. </p>
     #   @return [Array<Types::AggregateResourceIdentifier>]
     class BatchGetAggregateResourceConfigRequest < Struct.new(
+      nil,
       :configuration_aggregator_name,
       :resource_identifiers,
       keyword_init: true
@@ -563,6 +583,7 @@ module Aws::ConfigService
     #   <p>A list of resource identifiers that were not processed with current scope. The list is empty if all the resources are processed.</p>
     #   @return [Array<Types::AggregateResourceIdentifier>]
     class BatchGetAggregateResourceConfigResponse < Struct.new(
+      nil,
       :base_configuration_items,
       :unprocessed_resource_identifiers,
       keyword_init: true
@@ -576,6 +597,7 @@ module Aws::ConfigService
     #   			resource ID.</p>
     #   @return [Array<Types::ResourceKey>]
     class BatchGetResourceConfigRequest < Struct.new(
+      nil,
       :resource_keys,
       keyword_init: true
     )
@@ -596,6 +618,7 @@ module Aws::ConfigService
     #   			empty unprocessedResourceKeys list. </p>
     #   @return [Array<Types::ResourceKey>]
     class BatchGetResourceConfigResponse < Struct.new(
+      nil,
       :base_configuration_items,
       :unprocessed_resource_keys,
       keyword_init: true
@@ -628,6 +651,7 @@ module Aws::ConfigService
     #   			number.</p>
     #   @return [Types::ComplianceContributorCount]
     class Compliance < Struct.new(
+      nil,
       :compliance_type,
       :compliance_contributor_count,
       keyword_init: true
@@ -646,6 +670,7 @@ module Aws::ConfigService
     #   <p>Indicates whether the Config rule is compliant.</p>
     #   @return [Types::Compliance]
     class ComplianceByConfigRule < Struct.new(
+      nil,
       :config_rule_name,
       :compliance,
       keyword_init: true
@@ -668,6 +693,7 @@ module Aws::ConfigService
     #   <p>Indicates whether the Amazon Web Services resource complies with all of the Config rules that evaluated it.</p>
     #   @return [Types::Compliance]
     class ComplianceByResource < Struct.new(
+      nil,
       :resource_type,
       :resource_id,
       :compliance,
@@ -687,6 +713,7 @@ module Aws::ConfigService
     #   <p>Indicates whether the maximum count is reached.</p>
     #   @return [Boolean]
     class ComplianceContributorCount < Struct.new(
+      nil,
       :capped_count,
       :cap_exceeded,
       keyword_init: true
@@ -717,6 +744,7 @@ module Aws::ConfigService
     #   			summary.</p>
     #   @return [Time]
     class ComplianceSummary < Struct.new(
+      nil,
       :compliant_resource_count,
       :non_compliant_resource_count,
       :compliance_summary_timestamp,
@@ -736,6 +764,7 @@ module Aws::ConfigService
     #   			up to a maximum of 100 for each.</p>
     #   @return [Types::ComplianceSummary]
     class ComplianceSummaryByResourceType < Struct.new(
+      nil,
       :resource_type,
       :compliance_summary,
       keyword_init: true
@@ -766,6 +795,7 @@ module Aws::ConfigService
     #   <p>The time that the next delivery occurs.</p>
     #   @return [Time]
     class ConfigExportDeliveryInfo < Struct.new(
+      nil,
       :last_status,
       :last_error_code,
       :last_error_message,
@@ -884,6 +914,7 @@ module Aws::ConfigService
     #   <p>The modes the Config rule can be evaluated in. The valid values are distinct objects. By default, the value is Detective evaluation mode only.</p>
     #   @return [Array<Types::EvaluationModeConfiguration>]
     class ConfigRule < Struct.new(
+      nil,
       :config_rule_name,
       :config_rule_arn,
       :config_rule_id,
@@ -921,6 +952,7 @@ module Aws::ConfigService
     #   			</p>
     #   @return [String]
     class ConfigRuleComplianceFilters < Struct.new(
+      nil,
       :config_rule_name,
       :compliance_type,
       :account_id,
@@ -939,6 +971,7 @@ module Aws::ConfigService
     #   <p>The source region where the data is aggregated.</p>
     #   @return [String]
     class ConfigRuleComplianceSummaryFilters < Struct.new(
+      nil,
       :account_id,
       :aws_region,
       keyword_init: true
@@ -1019,6 +1052,7 @@ module Aws::ConfigService
     #   <p>The time Config last attempted to deliver a debug log for your Config Custom Policy rules.</p>
     #   @return [Time]
     class ConfigRuleEvaluationStatus < Struct.new(
+      nil,
       :config_rule_name,
       :config_rule_arn,
       :config_rule_id,
@@ -1101,6 +1135,7 @@ module Aws::ConfigService
     #   			snapshots.</p>
     #   @return [String]
     class ConfigSnapshotDeliveryProperties < Struct.new(
+      nil,
       :delivery_frequency,
       keyword_init: true
     )
@@ -1126,6 +1161,7 @@ module Aws::ConfigService
     #   <p>The time from the last status change.</p>
     #   @return [Time]
     class ConfigStreamDeliveryInfo < Struct.new(
+      nil,
       :last_status,
       :last_error_code,
       :last_error_message,
@@ -1166,6 +1202,7 @@ module Aws::ConfigService
     #   <p>An object to filter the data you specify for an aggregator.</p>
     #   @return [Types::AggregatorFilters]
     class ConfigurationAggregator < Struct.new(
+      nil,
       :configuration_aggregator_name,
       :configuration_aggregator_arn,
       :account_aggregation_sources,
@@ -1289,6 +1326,7 @@ module Aws::ConfigService
     #            </note>
     #   @return [Time]
     class ConfigurationItem < Struct.new(
+      nil,
       :version,
       :account_id,
       :configuration_item_capture_time,
@@ -1414,6 +1452,7 @@ module Aws::ConfigService
     #   <p>For service-linked configuration recorders, specifies the linked Amazon Web Services service for the configuration recorder.</p>
     #   @return [String]
     class ConfigurationRecorder < Struct.new(
+      nil,
       :arn,
       :name,
       :role_arn,
@@ -1438,6 +1477,7 @@ module Aws::ConfigService
     #               <code>PAID</code> indicates that the <a href="https://docs.aws.amazon.com/config/latest/APIReference/API_ConfigurationItem.html">ConfigurationItems</a> in scope for the configuration recorder impact the costs to your bill.</p>
     #   @return [Array<String>]
     class ConfigurationRecorderFilter < Struct.new(
+      nil,
       :filter_name,
       :filter_value,
       keyword_init: true
@@ -1479,6 +1519,7 @@ module Aws::ConfigService
     #   <p>For service-linked configuration recorders, the service principal of the linked Amazon Web Services service.</p>
     #   @return [String]
     class ConfigurationRecorderStatus < Struct.new(
+      nil,
       :arn,
       :name,
       :last_start_time,
@@ -1513,6 +1554,7 @@ module Aws::ConfigService
     #   <p>Indicates whether the <a href="https://docs.aws.amazon.com/config/latest/APIReference/API_ConfigurationItem.html">ConfigurationItems</a> in scope for the configuration recorder are recorded for free (<code>INTERNAL</code>) or if you are charged a service fee for recording (<code>PAID</code>).</p>
     #   @return [String]
     class ConfigurationRecorderSummary < Struct.new(
+      nil,
       :arn,
       :name,
       :service_principal,
@@ -1539,6 +1581,7 @@ module Aws::ConfigService
     #   <p>Error executing the command</p>
     #   @return [String]
     class ConflictException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -1554,6 +1597,7 @@ module Aws::ConfigService
     #            <p>The allowed values are <code>COMPLIANT</code> and <code>NON_COMPLIANT</code>. <code>INSUFFICIENT_DATA</code> is not supported.</p>
     #   @return [String]
     class ConformancePackComplianceFilters < Struct.new(
+      nil,
       :config_rule_names,
       :compliance_type,
       keyword_init: true
@@ -1574,6 +1618,7 @@ module Aws::ConfigService
     #   <p>The time that the conformance pack compliance score was last updated.</p>
     #   @return [Time]
     class ConformancePackComplianceScore < Struct.new(
+      nil,
       :score,
       :conformance_pack_name,
       :last_updated_time,
@@ -1588,6 +1633,7 @@ module Aws::ConfigService
     #   			You can include up to 25 conformance packs in the <code>ConformancePackNames</code> array of strings, each with a character limit of 256 characters for the conformance pack name.</p>
     #   @return [Array<String>]
     class ConformancePackComplianceScoresFilters < Struct.new(
+      nil,
       :conformance_pack_names,
       keyword_init: true
     )
@@ -1602,6 +1648,7 @@ module Aws::ConfigService
     #   <p>The status of the conformance pack.</p>
     #   @return [String]
     class ConformancePackComplianceSummary < Struct.new(
+      nil,
       :conformance_pack_name,
       :conformance_pack_compliance_status,
       keyword_init: true
@@ -1644,6 +1691,7 @@ module Aws::ConfigService
     #   <p>An object that contains the name or Amazon Resource Name (ARN) of the Amazon Web Services Systems Manager document (SSM document) and the version of the SSM document that is used to create a conformance pack.</p>
     #   @return [Types::TemplateSSMDocumentDetails]
     class ConformancePackDetail < Struct.new(
+      nil,
       :conformance_pack_name,
       :conformance_pack_arn,
       :conformance_pack_id,
@@ -1676,6 +1724,7 @@ module Aws::ConfigService
     #            </note>
     #   @return [Array<String>]
     class ConformancePackEvaluationFilters < Struct.new(
+      nil,
       :config_rule_names,
       :compliance_type,
       :resource_type,
@@ -1702,6 +1751,7 @@ module Aws::ConfigService
     #   <p>Supplementary information about how the evaluation determined the compliance. </p>
     #   @return [String]
     class ConformancePackEvaluationResult < Struct.new(
+      nil,
       :compliance_type,
       :evaluation_result_identifier,
       :config_rule_invoked_time,
@@ -1721,6 +1771,7 @@ module Aws::ConfigService
     #   <p>Another part of the key-value pair. </p>
     #   @return [String]
     class ConformancePackInputParameter < Struct.new(
+      nil,
       :parameter_name,
       :parameter_value,
       keyword_init: true
@@ -1740,6 +1791,7 @@ module Aws::ConfigService
     #   			A control can align with a specific compliance regime or map to internal controls defined by an organization.</p>
     #   @return [Array<String>]
     class ConformancePackRuleCompliance < Struct.new(
+      nil,
       :config_rule_name,
       :compliance_type,
       :controls,
@@ -1792,6 +1844,7 @@ module Aws::ConfigService
     #   <p>Last time when conformation pack creation and update was successful.</p>
     #   @return [Time]
     class ConformancePackStatusDetail < Struct.new(
+      nil,
       :conformance_pack_name,
       :conformance_pack_id,
       :conformance_pack_arn,
@@ -1810,6 +1863,7 @@ module Aws::ConfigService
     #   <p>Error executing the command</p>
     #   @return [String]
     class ConformancePackTemplateValidationException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -1831,6 +1885,7 @@ module Aws::ConfigService
     #   <p>The boolean expression for enabling debug logging for your Config Custom Policy rule. The default value is <code>false</code>.</p>
     #   @return [Boolean]
     class CustomPolicyDetails < Struct.new(
+      nil,
       :policy_runtime,
       :policy_text,
       :enable_debug_log_delivery,
@@ -1852,6 +1907,7 @@ module Aws::ConfigService
     #   <p>The region authorized to collect aggregated data.</p>
     #   @return [String]
     class DeleteAggregationAuthorizationRequest < Struct.new(
+      nil,
       :authorized_account_id,
       :authorized_aws_region,
       keyword_init: true
@@ -1865,6 +1921,7 @@ module Aws::ConfigService
     #   			delete.</p>
     #   @return [String]
     class DeleteConfigRuleRequest < Struct.new(
+      nil,
       :config_rule_name,
       keyword_init: true
     )
@@ -1875,6 +1932,7 @@ module Aws::ConfigService
     #   <p>The name of the configuration aggregator.</p>
     #   @return [String]
     class DeleteConfigurationAggregatorRequest < Struct.new(
+      nil,
       :configuration_aggregator_name,
       keyword_init: true
     )
@@ -1888,6 +1946,7 @@ module Aws::ConfigService
     #   			retrieve the name of your configuration recorders by using the <a href="https://docs.aws.amazon.com/config/latest/APIReference/API_DescribeConfigurationRecorders.html">DescribeConfigurationRecorders</a> operation.</p>
     #   @return [String]
     class DeleteConfigurationRecorderRequest < Struct.new(
+      nil,
       :configuration_recorder_name,
       keyword_init: true
     )
@@ -1898,6 +1957,7 @@ module Aws::ConfigService
     #   <p>Name of the conformance pack you want to delete.</p>
     #   @return [String]
     class DeleteConformancePackRequest < Struct.new(
+      nil,
       :conformance_pack_name,
       keyword_init: true
     )
@@ -1911,6 +1971,7 @@ module Aws::ConfigService
     #   <p>The name of the delivery channel that you want to delete.</p>
     #   @return [String]
     class DeleteDeliveryChannelRequest < Struct.new(
+      nil,
       :delivery_channel_name,
       keyword_init: true
     )
@@ -1923,6 +1984,7 @@ module Aws::ConfigService
     #   			the evaluation results.</p>
     #   @return [String]
     class DeleteEvaluationResultsRequest < Struct.new(
+      nil,
       :config_rule_name,
       keyword_init: true
     )
@@ -1932,6 +1994,7 @@ module Aws::ConfigService
     # <p>The output when you delete the evaluation results for the
     # 			specified Config rule.</p>
     class DeleteEvaluationResultsResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1941,6 +2004,7 @@ module Aws::ConfigService
     #   <p>The name of organization Config rule that you want to delete.</p>
     #   @return [String]
     class DeleteOrganizationConfigRuleRequest < Struct.new(
+      nil,
       :organization_config_rule_name,
       keyword_init: true
     )
@@ -1951,6 +2015,7 @@ module Aws::ConfigService
     #   <p>The name of organization conformance pack that you want to delete.</p>
     #   @return [String]
     class DeleteOrganizationConformancePackRequest < Struct.new(
+      nil,
       :organization_conformance_pack_name,
       keyword_init: true
     )
@@ -1965,6 +2030,7 @@ module Aws::ConfigService
     #   <p>The region requesting to aggregate data.</p>
     #   @return [String]
     class DeletePendingAggregationRequestRequest < Struct.new(
+      nil,
       :requester_account_id,
       :requester_aws_region,
       keyword_init: true
@@ -1979,6 +2045,7 @@ module Aws::ConfigService
     #   <p>The type of a resource.</p>
     #   @return [String]
     class DeleteRemediationConfigurationRequest < Struct.new(
+      nil,
       :config_rule_name,
       :resource_type,
       keyword_init: true
@@ -1987,6 +2054,7 @@ module Aws::ConfigService
     end
 
     class DeleteRemediationConfigurationResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1999,6 +2067,7 @@ module Aws::ConfigService
     #   <p>An exception list of resource exception keys to be processed with the current request. Config adds exception for each resource key. For example, Config adds 3 exceptions for 3 resource keys. </p>
     #   @return [Array<Types::RemediationExceptionResourceKey>]
     class DeleteRemediationExceptionsRequest < Struct.new(
+      nil,
       :config_rule_name,
       :resource_keys,
       keyword_init: true
@@ -2010,6 +2079,7 @@ module Aws::ConfigService
     #   <p>Returns a list of failed delete remediation exceptions batch objects. Each object in the batch consists of a list of failed items and failure messages.</p>
     #   @return [Array<Types::FailedDeleteRemediationExceptionsBatch>]
     class DeleteRemediationExceptionsResponse < Struct.new(
+      nil,
       :failed_batches,
       keyword_init: true
     )
@@ -2023,6 +2093,7 @@ module Aws::ConfigService
     #   <p>Unique identifier of the resource.</p>
     #   @return [String]
     class DeleteResourceConfigRequest < Struct.new(
+      nil,
       :resource_type,
       :resource_id,
       keyword_init: true
@@ -2034,6 +2105,7 @@ module Aws::ConfigService
     #   <p>The name of the retention configuration to delete.</p>
     #   @return [String]
     class DeleteRetentionConfigurationRequest < Struct.new(
+      nil,
       :retention_configuration_name,
       keyword_init: true
     )
@@ -2044,6 +2116,7 @@ module Aws::ConfigService
     #   <p>The service principal of the Amazon Web Services service for the service-linked configuration recorder that you want to delete.</p>
     #   @return [String]
     class DeleteServiceLinkedConfigurationRecorderRequest < Struct.new(
+      nil,
       :service_principal,
       keyword_init: true
     )
@@ -2057,6 +2130,7 @@ module Aws::ConfigService
     #   <p>The name of the specified configuration recorder.</p>
     #   @return [String]
     class DeleteServiceLinkedConfigurationRecorderResponse < Struct.new(
+      nil,
       :arn,
       :name,
       keyword_init: true
@@ -2068,6 +2142,7 @@ module Aws::ConfigService
     #   <p>The name of the query that you want to delete.</p>
     #   @return [String]
     class DeleteStoredQueryRequest < Struct.new(
+      nil,
       :query_name,
       keyword_init: true
     )
@@ -2075,6 +2150,7 @@ module Aws::ConfigService
     end
 
     class DeleteStoredQueryResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -2087,6 +2163,7 @@ module Aws::ConfigService
     #   			delivered.</p>
     #   @return [String]
     class DeliverConfigSnapshotRequest < Struct.new(
+      nil,
       :delivery_channel_name,
       keyword_init: true
     )
@@ -2099,6 +2176,7 @@ module Aws::ConfigService
     #   <p>The ID of the snapshot that is being created.</p>
     #   @return [String]
     class DeliverConfigSnapshotResponse < Struct.new(
+      nil,
       :config_snapshot_id,
       keyword_init: true
     )
@@ -2143,6 +2221,7 @@ module Aws::ConfigService
     #   			snapshots to the Amazon S3 bucket.</p>
     #   @return [Types::ConfigSnapshotDeliveryProperties]
     class DeliveryChannel < Struct.new(
+      nil,
       :name,
       :s3_bucket_name,
       :s3_key_prefix,
@@ -2174,6 +2253,7 @@ module Aws::ConfigService
     #   			topic.</p>
     #   @return [Types::ConfigStreamDeliveryInfo]
     class DeliveryChannelStatus < Struct.new(
+      nil,
       :name,
       :config_snapshot_delivery_info,
       :config_history_delivery_info,
@@ -2201,6 +2281,7 @@ module Aws::ConfigService
     #   			to get the next page of results in a paginated response.</p>
     #   @return [String]
     class DescribeAggregateComplianceByConfigRulesRequest < Struct.new(
+      nil,
       :configuration_aggregator_name,
       :filters,
       :limit,
@@ -2219,6 +2300,7 @@ module Aws::ConfigService
     #   			to get the next page of results in a paginated response.</p>
     #   @return [String]
     class DescribeAggregateComplianceByConfigRulesResponse < Struct.new(
+      nil,
       :aggregate_compliance_by_config_rules,
       :next_token,
       keyword_init: true
@@ -2239,6 +2321,7 @@ module Aws::ConfigService
     #   <p>The <code>nextToken</code> string returned on a previous page that you use to get the next page of results in a paginated response.</p>
     #   @return [String]
     class DescribeAggregateComplianceByConformancePacksRequest < Struct.new(
+      nil,
       :configuration_aggregator_name,
       :filters,
       :limit,
@@ -2255,6 +2338,7 @@ module Aws::ConfigService
     #   <p>The <code>nextToken</code> string returned on a previous page that you use to get the next page of results in a paginated response.</p>
     #   @return [String]
     class DescribeAggregateComplianceByConformancePacksResponse < Struct.new(
+      nil,
       :aggregate_compliance_by_conformance_packs,
       :next_token,
       keyword_init: true
@@ -2272,6 +2356,7 @@ module Aws::ConfigService
     #   			to get the next page of results in a paginated response.</p>
     #   @return [String]
     class DescribeAggregationAuthorizationsRequest < Struct.new(
+      nil,
       :limit,
       :next_token,
       keyword_init: true
@@ -2288,6 +2373,7 @@ module Aws::ConfigService
     #   			to get the next page of results in a paginated response.</p>
     #   @return [String]
     class DescribeAggregationAuthorizationsResponse < Struct.new(
+      nil,
       :aggregation_authorizations,
       :next_token,
       keyword_init: true
@@ -2309,6 +2395,7 @@ module Aws::ConfigService
     #   			response.</p>
     #   @return [String]
     class DescribeComplianceByConfigRuleRequest < Struct.new(
+      nil,
       :config_rule_names,
       :compliance_types,
       :next_token,
@@ -2327,6 +2414,7 @@ module Aws::ConfigService
     #   			page of results in a paginated response.</p>
     #   @return [String]
     class DescribeComplianceByConfigRuleResponse < Struct.new(
+      nil,
       :compliance_by_config_rules,
       :next_token,
       keyword_init: true
@@ -2360,6 +2448,7 @@ module Aws::ConfigService
     #   			response.</p>
     #   @return [String]
     class DescribeComplianceByResourceRequest < Struct.new(
+      nil,
       :resource_type,
       :resource_id,
       :compliance_types,
@@ -2380,6 +2469,7 @@ module Aws::ConfigService
     #   			page of results in a paginated response.</p>
     #   @return [String]
     class DescribeComplianceByResourceResponse < Struct.new(
+      nil,
       :compliance_by_resources,
       :next_token,
       keyword_init: true
@@ -2409,6 +2499,7 @@ module Aws::ConfigService
     #   				Reference Guide</i>.</p>
     #   @return [Integer]
     class DescribeConfigRuleEvaluationStatusRequest < Struct.new(
+      nil,
       :config_rule_names,
       :next_token,
       :limit,
@@ -2426,6 +2517,7 @@ module Aws::ConfigService
     #   			page of results in a paginated response.</p>
     #   @return [String]
     class DescribeConfigRuleEvaluationStatusResponse < Struct.new(
+      nil,
       :config_rules_evaluation_status,
       :next_token,
       keyword_init: true
@@ -2441,6 +2533,7 @@ module Aws::ConfigService
     #   <p>The mode of an evaluation. The valid values are Detective or Proactive.</p>
     #   @return [String]
     class DescribeConfigRulesFilters < Struct.new(
+      nil,
       :evaluation_mode,
       keyword_init: true
     )
@@ -2465,6 +2558,7 @@ module Aws::ConfigService
     #               </a> in the <i>Config Developer Guide</i>.</p>
     #   @return [Types::DescribeConfigRulesFilters]
     class DescribeConfigRulesRequest < Struct.new(
+      nil,
       :config_rule_names,
       :next_token,
       :filters,
@@ -2482,6 +2576,7 @@ module Aws::ConfigService
     #   			page of results in a paginated response.</p>
     #   @return [String]
     class DescribeConfigRulesResponse < Struct.new(
+      nil,
       :config_rules,
       :next_token,
       keyword_init: true
@@ -2519,6 +2614,7 @@ module Aws::ConfigService
     #   			default.</p>
     #   @return [Integer]
     class DescribeConfigurationAggregatorSourcesStatusRequest < Struct.new(
+      nil,
       :configuration_aggregator_name,
       :update_status,
       :next_token,
@@ -2537,6 +2633,7 @@ module Aws::ConfigService
     #   			to get the next page of results in a paginated response.</p>
     #   @return [String]
     class DescribeConfigurationAggregatorSourcesStatusResponse < Struct.new(
+      nil,
       :aggregated_source_status_list,
       :next_token,
       keyword_init: true
@@ -2557,6 +2654,7 @@ module Aws::ConfigService
     #   			the default.</p>
     #   @return [Integer]
     class DescribeConfigurationAggregatorsRequest < Struct.new(
+      nil,
       :configuration_aggregator_names,
       :next_token,
       :limit,
@@ -2573,6 +2671,7 @@ module Aws::ConfigService
     #   			to get the next page of results in a paginated response.</p>
     #   @return [String]
     class DescribeConfigurationAggregatorsResponse < Struct.new(
+      nil,
       :configuration_aggregators,
       :next_token,
       keyword_init: true
@@ -2597,6 +2696,7 @@ module Aws::ConfigService
     #   <p>The Amazon Resource Name (ARN) of the configuration recorder that you want to specify.</p>
     #   @return [String]
     class DescribeConfigurationRecorderStatusRequest < Struct.new(
+      nil,
       :configuration_recorder_names,
       :service_principal,
       :arn,
@@ -2612,6 +2712,7 @@ module Aws::ConfigService
     #   			recorders.</p>
     #   @return [Array<Types::ConfigurationRecorderStatus>]
     class DescribeConfigurationRecorderStatusResponse < Struct.new(
+      nil,
       :configuration_recorders_status,
       keyword_init: true
     )
@@ -2632,6 +2733,7 @@ module Aws::ConfigService
     #   <p>The Amazon Resource Name (ARN) of the configuration recorder that you want to specify.</p>
     #   @return [String]
     class DescribeConfigurationRecordersRequest < Struct.new(
+      nil,
       :configuration_recorder_names,
       :service_principal,
       :arn,
@@ -2646,6 +2748,7 @@ module Aws::ConfigService
     #   			configuration recorders.</p>
     #   @return [Array<Types::ConfigurationRecorder>]
     class DescribeConfigurationRecordersResponse < Struct.new(
+      nil,
       :configuration_recorders,
       keyword_init: true
     )
@@ -2665,6 +2768,7 @@ module Aws::ConfigService
     #   <p>The <code>nextToken</code> string returned in a previous request that you use to request the next page of results in a paginated response.</p>
     #   @return [String]
     class DescribeConformancePackComplianceRequest < Struct.new(
+      nil,
       :conformance_pack_name,
       :filters,
       :limit,
@@ -2684,6 +2788,7 @@ module Aws::ConfigService
     #   <p>The <code>nextToken</code> string returned in a previous request that you use to request the next page of results in a paginated response.</p>
     #   @return [String]
     class DescribeConformancePackComplianceResponse < Struct.new(
+      nil,
       :conformance_pack_name,
       :conformance_pack_rule_compliance_list,
       :next_token,
@@ -2702,6 +2807,7 @@ module Aws::ConfigService
     #   <p>The <code>nextToken</code> string returned in a previous request that you use to request the next page of results in a paginated response.</p>
     #   @return [String]
     class DescribeConformancePackStatusRequest < Struct.new(
+      nil,
       :conformance_pack_names,
       :limit,
       :next_token,
@@ -2717,6 +2823,7 @@ module Aws::ConfigService
     #   <p>The <code>nextToken</code> string returned in a previous request that you use to request the next page of results in a paginated response.</p>
     #   @return [String]
     class DescribeConformancePackStatusResponse < Struct.new(
+      nil,
       :conformance_pack_status_details,
       :next_token,
       keyword_init: true
@@ -2734,6 +2841,7 @@ module Aws::ConfigService
     #   <p>The <code>nextToken</code> string returned in a previous request that you use to request the next page of results in a paginated response.</p>
     #   @return [String]
     class DescribeConformancePacksRequest < Struct.new(
+      nil,
       :conformance_pack_names,
       :limit,
       :next_token,
@@ -2749,6 +2857,7 @@ module Aws::ConfigService
     #   <p>The <code>nextToken</code> string returned in a previous request that you use to request the next page of results in a paginated response.</p>
     #   @return [String]
     class DescribeConformancePacksResponse < Struct.new(
+      nil,
       :conformance_pack_details,
       :next_token,
       keyword_init: true
@@ -2762,6 +2871,7 @@ module Aws::ConfigService
     #   <p>A list of delivery channel names.</p>
     #   @return [Array<String>]
     class DescribeDeliveryChannelStatusRequest < Struct.new(
+      nil,
       :delivery_channel_names,
       keyword_init: true
     )
@@ -2774,6 +2884,7 @@ module Aws::ConfigService
     #   			channel.</p>
     #   @return [Array<Types::DeliveryChannelStatus>]
     class DescribeDeliveryChannelStatusResponse < Struct.new(
+      nil,
       :delivery_channels_status,
       keyword_init: true
     )
@@ -2786,6 +2897,7 @@ module Aws::ConfigService
     #   <p>A list of delivery channel names.</p>
     #   @return [Array<String>]
     class DescribeDeliveryChannelsRequest < Struct.new(
+      nil,
       :delivery_channel_names,
       keyword_init: true
     )
@@ -2799,6 +2911,7 @@ module Aws::ConfigService
     #   			channel.</p>
     #   @return [Array<Types::DeliveryChannel>]
     class DescribeDeliveryChannelsResponse < Struct.new(
+      nil,
       :delivery_channels,
       keyword_init: true
     )
@@ -2815,6 +2928,7 @@ module Aws::ConfigService
     #   <p>The <code>nextToken</code> string returned on a previous page that you use to get the next page of results in a paginated response. </p>
     #   @return [String]
     class DescribeOrganizationConfigRuleStatusesRequest < Struct.new(
+      nil,
       :organization_config_rule_names,
       :limit,
       :next_token,
@@ -2830,6 +2944,7 @@ module Aws::ConfigService
     #   <p>The <code>nextToken</code> string returned on a previous page that you use to get the next page of results in a paginated response. </p>
     #   @return [String]
     class DescribeOrganizationConfigRuleStatusesResponse < Struct.new(
+      nil,
       :organization_config_rule_statuses,
       :next_token,
       keyword_init: true
@@ -2847,6 +2962,7 @@ module Aws::ConfigService
     #   <p>The <code>nextToken</code> string returned on a previous page that you use to get the next page of results in a paginated response. </p>
     #   @return [String]
     class DescribeOrganizationConfigRulesRequest < Struct.new(
+      nil,
       :organization_config_rule_names,
       :limit,
       :next_token,
@@ -2862,6 +2978,7 @@ module Aws::ConfigService
     #   <p>The <code>nextToken</code> string returned on a previous page that you use to get the next page of results in a paginated response. </p>
     #   @return [String]
     class DescribeOrganizationConfigRulesResponse < Struct.new(
+      nil,
       :organization_config_rules,
       :next_token,
       keyword_init: true
@@ -2881,6 +2998,7 @@ module Aws::ConfigService
     #   <p>The nextToken string returned on a previous page that you use to get the next page of results in a paginated response. </p>
     #   @return [String]
     class DescribeOrganizationConformancePackStatusesRequest < Struct.new(
+      nil,
       :organization_conformance_pack_names,
       :limit,
       :next_token,
@@ -2896,6 +3014,7 @@ module Aws::ConfigService
     #   <p>The nextToken string returned on a previous page that you use to get the next page of results in a paginated response. </p>
     #   @return [String]
     class DescribeOrganizationConformancePackStatusesResponse < Struct.new(
+      nil,
       :organization_conformance_pack_statuses,
       :next_token,
       keyword_init: true
@@ -2915,6 +3034,7 @@ module Aws::ConfigService
     #   			paginated response.</p>
     #   @return [String]
     class DescribeOrganizationConformancePacksRequest < Struct.new(
+      nil,
       :organization_conformance_pack_names,
       :limit,
       :next_token,
@@ -2931,6 +3051,7 @@ module Aws::ConfigService
     #   			paginated response.</p>
     #   @return [String]
     class DescribeOrganizationConformancePacksResponse < Struct.new(
+      nil,
       :organization_conformance_packs,
       :next_token,
       keyword_init: true
@@ -2948,6 +3069,7 @@ module Aws::ConfigService
     #   			to get the next page of results in a paginated response.</p>
     #   @return [String]
     class DescribePendingAggregationRequestsRequest < Struct.new(
+      nil,
       :limit,
       :next_token,
       keyword_init: true
@@ -2963,6 +3085,7 @@ module Aws::ConfigService
     #   			to get the next page of results in a paginated response.</p>
     #   @return [String]
     class DescribePendingAggregationRequestsResponse < Struct.new(
+      nil,
       :pending_aggregation_requests,
       :next_token,
       keyword_init: true
@@ -2974,6 +3097,7 @@ module Aws::ConfigService
     #   <p>A list of Config rule names of remediation configurations for which you want details. </p>
     #   @return [Array<String>]
     class DescribeRemediationConfigurationsRequest < Struct.new(
+      nil,
       :config_rule_names,
       keyword_init: true
     )
@@ -2984,6 +3108,7 @@ module Aws::ConfigService
     #   <p>Returns a remediation configuration object.</p>
     #   @return [Array<Types::RemediationConfiguration>]
     class DescribeRemediationConfigurationsResponse < Struct.new(
+      nil,
       :remediation_configurations,
       keyword_init: true
     )
@@ -3003,6 +3128,7 @@ module Aws::ConfigService
     #   <p>The <code>nextToken</code> string returned in a previous request that you use to request the next page of results in a paginated response.</p>
     #   @return [String]
     class DescribeRemediationExceptionsRequest < Struct.new(
+      nil,
       :config_rule_name,
       :resource_keys,
       :limit,
@@ -3019,6 +3145,7 @@ module Aws::ConfigService
     #   <p>The <code>nextToken</code> string returned in a previous request that you use to request the next page of results in a paginated response.</p>
     #   @return [String]
     class DescribeRemediationExceptionsResponse < Struct.new(
+      nil,
       :remediation_exceptions,
       :next_token,
       keyword_init: true
@@ -3039,6 +3166,7 @@ module Aws::ConfigService
     #   <p>The <code>nextToken</code> string returned on a previous page that you use to get the next page of results in a paginated response.</p>
     #   @return [String]
     class DescribeRemediationExecutionStatusRequest < Struct.new(
+      nil,
       :config_rule_name,
       :resource_keys,
       :limit,
@@ -3055,6 +3183,7 @@ module Aws::ConfigService
     #   <p>The <code>nextToken</code> string returned on a previous page that you use to get the next page of results in a paginated response.</p>
     #   @return [String]
     class DescribeRemediationExecutionStatusResponse < Struct.new(
+      nil,
       :remediation_execution_statuses,
       :next_token,
       keyword_init: true
@@ -3077,6 +3206,7 @@ module Aws::ConfigService
     #   			response. </p>
     #   @return [String]
     class DescribeRetentionConfigurationsRequest < Struct.new(
+      nil,
       :retention_configuration_names,
       :next_token,
       keyword_init: true
@@ -3093,6 +3223,7 @@ module Aws::ConfigService
     #   			response. </p>
     #   @return [String]
     class DescribeRetentionConfigurationsResponse < Struct.new(
+      nil,
       :retention_configurations,
       :next_token,
       keyword_init: true
@@ -3107,6 +3238,7 @@ module Aws::ConfigService
     #   <p>The list of resource types you want to remove from the recording group of the specified configuration recorder.</p>
     #   @return [Array<String>]
     class DisassociateResourceTypesRequest < Struct.new(
+      nil,
       :configuration_recorder_arn,
       :resource_types,
       keyword_init: true
@@ -3122,6 +3254,7 @@ module Aws::ConfigService
     #               </a> in the <i>Config Developer Guide</i>.</p>
     #   @return [Types::ConfigurationRecorder]
     class DisassociateResourceTypesResponse < Struct.new(
+      nil,
       :configuration_recorder,
       keyword_init: true
     )
@@ -3162,6 +3295,7 @@ module Aws::ConfigService
     #   			example, every 24 hours).</p>
     #   @return [Time]
     class Evaluation < Struct.new(
+      nil,
       :compliance_resource_type,
       :compliance_resource_id,
       :compliance_type,
@@ -3178,6 +3312,7 @@ module Aws::ConfigService
     #   <p>A unique EvaluationContextIdentifier ID for an EvaluationContext.</p>
     #   @return [String]
     class EvaluationContext < Struct.new(
+      nil,
       :evaluation_context_identifier,
       keyword_init: true
     )
@@ -3189,6 +3324,7 @@ module Aws::ConfigService
     #   <p>The mode of an evaluation. The valid values are Detective or Proactive.</p>
     #   @return [String]
     class EvaluationModeConfiguration < Struct.new(
+      nil,
       :mode,
       keyword_init: true
     )
@@ -3227,6 +3363,7 @@ module Aws::ConfigService
     #   			evaluated, and the event that triggered the evaluation.</p>
     #   @return [String]
     class EvaluationResult < Struct.new(
+      nil,
       :evaluation_result_identifier,
       :compliance_type,
       :result_recorded_time,
@@ -3253,6 +3390,7 @@ module Aws::ConfigService
     #   <p>A Unique ID for an evaluation result.</p>
     #   @return [String]
     class EvaluationResultIdentifier < Struct.new(
+      nil,
       :evaluation_result_qualifier,
       :ordering_timestamp,
       :resource_evaluation_id,
@@ -3278,6 +3416,7 @@ module Aws::ConfigService
     #   <p>The mode of an evaluation. The valid values are Detective or Proactive.</p>
     #   @return [String]
     class EvaluationResultQualifier < Struct.new(
+      nil,
       :config_rule_name,
       :resource_type,
       :resource_id,
@@ -3295,6 +3434,7 @@ module Aws::ConfigService
     #   <p>An explanation for failed execution status.</p>
     #   @return [String]
     class EvaluationStatus < Struct.new(
+      nil,
       :status,
       :failure_reason,
       keyword_init: true
@@ -3328,6 +3468,7 @@ module Aws::ConfigService
     #   			recorder.</p>
     #   @return [Array<String>]
     class ExclusionByResourceTypes < Struct.new(
+      nil,
       :resource_types,
       keyword_init: true
     )
@@ -3339,6 +3480,7 @@ module Aws::ConfigService
     #   <p>A SsmControls object.</p>
     #   @return [Types::SsmControls]
     class ExecutionControls < Struct.new(
+      nil,
       :ssm_controls,
       keyword_init: true
     )
@@ -3362,6 +3504,7 @@ module Aws::ConfigService
     #   <p>The time when the compliance was recorded. </p>
     #   @return [Time]
     class ExternalEvaluation < Struct.new(
+      nil,
       :compliance_resource_type,
       :compliance_resource_id,
       :compliance_type,
@@ -3380,6 +3523,7 @@ module Aws::ConfigService
     #   <p>Returns remediation exception resource key object of the failed items.</p>
     #   @return [Array<Types::RemediationExceptionResourceKey>]
     class FailedDeleteRemediationExceptionsBatch < Struct.new(
+      nil,
       :failure_message,
       :failed_items,
       keyword_init: true
@@ -3395,6 +3539,7 @@ module Aws::ConfigService
     #   <p>Returns remediation configurations of the failed items.</p>
     #   @return [Array<Types::RemediationConfiguration>]
     class FailedRemediationBatch < Struct.new(
+      nil,
       :failure_message,
       :failed_items,
       keyword_init: true
@@ -3410,6 +3555,7 @@ module Aws::ConfigService
     #   <p>Returns remediation exception resource key object of the failed items.</p>
     #   @return [Array<Types::RemediationException>]
     class FailedRemediationExceptionBatch < Struct.new(
+      nil,
       :failure_message,
       :failed_items,
       keyword_init: true
@@ -3422,6 +3568,7 @@ module Aws::ConfigService
     #   <p>Name of the field.</p>
     #   @return [String]
     class FieldInfo < Struct.new(
+      nil,
       :name,
       keyword_init: true
     )
@@ -3462,6 +3609,7 @@ module Aws::ConfigService
     #   			to get the next page of results in a paginated response.</p>
     #   @return [String]
     class GetAggregateComplianceDetailsByConfigRuleRequest < Struct.new(
+      nil,
       :configuration_aggregator_name,
       :config_rule_name,
       :account_id,
@@ -3482,6 +3630,7 @@ module Aws::ConfigService
     #   			to get the next page of results in a paginated response.</p>
     #   @return [String]
     class GetAggregateComplianceDetailsByConfigRuleResponse < Struct.new(
+      nil,
       :aggregate_evaluation_results,
       :next_token,
       keyword_init: true
@@ -3509,6 +3658,7 @@ module Aws::ConfigService
     #   			to get the next page of results in a paginated response.</p>
     #   @return [String]
     class GetAggregateConfigRuleComplianceSummaryRequest < Struct.new(
+      nil,
       :configuration_aggregator_name,
       :filters,
       :group_by_key,
@@ -3530,6 +3680,7 @@ module Aws::ConfigService
     #   			to get the next page of results in a paginated response.</p>
     #   @return [String]
     class GetAggregateConfigRuleComplianceSummaryResponse < Struct.new(
+      nil,
       :group_by_key,
       :aggregate_compliance_counts,
       :next_token,
@@ -3554,6 +3705,7 @@ module Aws::ConfigService
     #   <p>The <code>nextToken</code> string returned on a previous page that you use to get the next page of results in a paginated response.</p>
     #   @return [String]
     class GetAggregateConformancePackComplianceSummaryRequest < Struct.new(
+      nil,
       :configuration_aggregator_name,
       :filters,
       :group_by_key,
@@ -3574,6 +3726,7 @@ module Aws::ConfigService
     #   <p>The <code>nextToken</code> string returned on a previous page that you use to get the next page of results in a paginated response.</p>
     #   @return [String]
     class GetAggregateConformancePackComplianceSummaryResponse < Struct.new(
+      nil,
       :aggregate_conformance_pack_compliance_summaries,
       :group_by_key,
       :next_token,
@@ -3598,6 +3751,7 @@ module Aws::ConfigService
     #   <p>The <code>nextToken</code> string returned on a previous page that you use to get the next page of results in a paginated response. </p>
     #   @return [String]
     class GetAggregateDiscoveredResourceCountsRequest < Struct.new(
+      nil,
       :configuration_aggregator_name,
       :filters,
       :group_by_key,
@@ -3621,6 +3775,7 @@ module Aws::ConfigService
     #   <p>The <code>nextToken</code> string returned on a previous page that you use to get the next page of results in a paginated response.</p>
     #   @return [String]
     class GetAggregateDiscoveredResourceCountsResponse < Struct.new(
+      nil,
       :total_discovered_resources,
       :group_by_key,
       :grouped_resource_counts,
@@ -3642,6 +3797,7 @@ module Aws::ConfigService
     #   <p>An object that identifies aggregate resource.</p>
     #   @return [Types::AggregateResourceIdentifier]
     class GetAggregateResourceConfigRequest < Struct.new(
+      nil,
       :configuration_aggregator_name,
       :resource_identifier,
       keyword_init: true
@@ -3653,6 +3809,7 @@ module Aws::ConfigService
     #   <p>Returns a <code>ConfigurationItem</code> object.</p>
     #   @return [Types::ConfigurationItem]
     class GetAggregateResourceConfigResponse < Struct.new(
+      nil,
       :configuration_item,
       keyword_init: true
     )
@@ -3680,6 +3837,7 @@ module Aws::ConfigService
     #   			response.</p>
     #   @return [String]
     class GetComplianceDetailsByConfigRuleRequest < Struct.new(
+      nil,
       :config_rule_name,
       :compliance_types,
       :limit,
@@ -3699,6 +3857,7 @@ module Aws::ConfigService
     #   			page of results in a paginated response.</p>
     #   @return [String]
     class GetComplianceDetailsByConfigRuleResponse < Struct.new(
+      nil,
       :evaluation_results,
       :next_token,
       keyword_init: true
@@ -3732,6 +3891,7 @@ module Aws::ConfigService
     #            </note>
     #   @return [String]
     class GetComplianceDetailsByResourceRequest < Struct.new(
+      nil,
       :resource_type,
       :resource_id,
       :compliance_types,
@@ -3751,6 +3911,7 @@ module Aws::ConfigService
     #   			page of results in a paginated response.</p>
     #   @return [String]
     class GetComplianceDetailsByResourceResponse < Struct.new(
+      nil,
       :evaluation_results,
       :next_token,
       keyword_init: true
@@ -3765,6 +3926,7 @@ module Aws::ConfigService
     #   			each.</p>
     #   @return [Types::ComplianceSummary]
     class GetComplianceSummaryByConfigRuleResponse < Struct.new(
+      nil,
       :compliance_summary,
       keyword_init: true
     )
@@ -3782,6 +3944,7 @@ module Aws::ConfigService
     #   				<code>AWS::::Account</code>.</p>
     #   @return [Array<String>]
     class GetComplianceSummaryByResourceTypeRequest < Struct.new(
+      nil,
       :resource_types,
       keyword_init: true
     )
@@ -3796,6 +3959,7 @@ module Aws::ConfigService
     #   			maximum number returned is 100.</p>
     #   @return [Array<Types::ComplianceSummaryByResourceType>]
     class GetComplianceSummaryByResourceTypeResponse < Struct.new(
+      nil,
       :compliance_summaries_by_resource_type,
       keyword_init: true
     )
@@ -3815,6 +3979,7 @@ module Aws::ConfigService
     #   <p>The <code>nextToken</code> string returned in a previous request that you use to request the next page of results in a paginated response.</p>
     #   @return [String]
     class GetConformancePackComplianceDetailsRequest < Struct.new(
+      nil,
       :conformance_pack_name,
       :filters,
       :limit,
@@ -3834,6 +3999,7 @@ module Aws::ConfigService
     #   <p>The <code>nextToken</code> string returned in a previous request that you use to request the next page of results in a paginated response.</p>
     #   @return [String]
     class GetConformancePackComplianceDetailsResponse < Struct.new(
+      nil,
       :conformance_pack_name,
       :conformance_pack_rule_evaluation_results,
       :next_token,
@@ -3852,6 +4018,7 @@ module Aws::ConfigService
     #   <p>The nextToken string returned on a previous page that you use to get the next page of results in a paginated response.</p>
     #   @return [String]
     class GetConformancePackComplianceSummaryRequest < Struct.new(
+      nil,
       :conformance_pack_names,
       :limit,
       :next_token,
@@ -3867,6 +4034,7 @@ module Aws::ConfigService
     #   <p>The nextToken string returned on a previous page that you use to get the next page of results in a paginated response.</p>
     #   @return [String]
     class GetConformancePackComplianceSummaryResponse < Struct.new(
+      nil,
       :conformance_pack_compliance_summary_list,
       :next_token,
       keyword_init: true
@@ -3878,6 +4046,7 @@ module Aws::ConfigService
     #   <p>The name of your Config Custom Policy rule.</p>
     #   @return [String]
     class GetCustomRulePolicyRequest < Struct.new(
+      nil,
       :config_rule_name,
       keyword_init: true
     )
@@ -3888,6 +4057,7 @@ module Aws::ConfigService
     #   <p>The policy definition containing the logic for your Config Custom Policy rule.</p>
     #   @return [String]
     class GetCustomRulePolicyResponse < Struct.new(
+      nil,
       :policy_text,
       keyword_init: true
     )
@@ -3921,6 +4091,7 @@ module Aws::ConfigService
     #   			response.</p>
     #   @return [String]
     class GetDiscoveredResourceCountsRequest < Struct.new(
+      nil,
       :resource_types,
       :limit,
       :next_token,
@@ -3966,6 +4137,7 @@ module Aws::ConfigService
     #   			page of results in a paginated response.</p>
     #   @return [String]
     class GetDiscoveredResourceCountsResponse < Struct.new(
+      nil,
       :total_discovered_resources,
       :resource_counts,
       :next_token,
@@ -3992,6 +4164,7 @@ module Aws::ConfigService
     #   <p>The <code>nextToken</code> string returned on a previous page that you use to get the next page of results in a paginated response. </p>
     #   @return [String]
     class GetOrganizationConfigRuleDetailedStatusRequest < Struct.new(
+      nil,
       :organization_config_rule_name,
       :filters,
       :limit,
@@ -4008,6 +4181,7 @@ module Aws::ConfigService
     #   <p>The <code>nextToken</code> string returned on a previous page that you use to get the next page of results in a paginated response. </p>
     #   @return [String]
     class GetOrganizationConfigRuleDetailedStatusResponse < Struct.new(
+      nil,
       :organization_config_rule_detailed_status,
       :next_token,
       keyword_init: true
@@ -4029,6 +4203,7 @@ module Aws::ConfigService
     #   <p>The nextToken string returned on a previous page that you use to get the next page of results in a paginated response. </p>
     #   @return [String]
     class GetOrganizationConformancePackDetailedStatusRequest < Struct.new(
+      nil,
       :organization_conformance_pack_name,
       :filters,
       :limit,
@@ -4045,6 +4220,7 @@ module Aws::ConfigService
     #   <p>The nextToken string returned on a previous page that you use to get the next page of results in a paginated response. </p>
     #   @return [String]
     class GetOrganizationConformancePackDetailedStatusResponse < Struct.new(
+      nil,
       :organization_conformance_pack_detailed_statuses,
       :next_token,
       keyword_init: true
@@ -4056,6 +4232,7 @@ module Aws::ConfigService
     #   <p>The name of your organization Config Custom Policy rule. </p>
     #   @return [String]
     class GetOrganizationCustomRulePolicyRequest < Struct.new(
+      nil,
       :organization_config_rule_name,
       keyword_init: true
     )
@@ -4066,6 +4243,7 @@ module Aws::ConfigService
     #   <p>The policy definition containing the logic for your organization Config Custom Policy rule.</p>
     #   @return [String]
     class GetOrganizationCustomRulePolicyResponse < Struct.new(
+      nil,
       :policy_text,
       keyword_init: true
     )
@@ -4107,6 +4285,7 @@ module Aws::ConfigService
     #   			response.</p>
     #   @return [String]
     class GetResourceConfigHistoryRequest < Struct.new(
+      nil,
       :resource_type,
       :resource_id,
       :later_time,
@@ -4130,6 +4309,7 @@ module Aws::ConfigService
     #   			page of results in a paginated response.</p>
     #   @return [String]
     class GetResourceConfigHistoryResponse < Struct.new(
+      nil,
       :configuration_items,
       :next_token,
       keyword_init: true
@@ -4141,6 +4321,7 @@ module Aws::ConfigService
     #   <p>The unique <code>ResourceEvaluationId</code> of Amazon Web Services resource execution for which you want to retrieve the evaluation summary.</p>
     #   @return [String]
     class GetResourceEvaluationSummaryRequest < Struct.new(
+      nil,
       :resource_evaluation_id,
       keyword_init: true
     )
@@ -4169,6 +4350,7 @@ module Aws::ConfigService
     #   <p>Returns a <code>ResourceDetails</code> object.</p>
     #   @return [Types::ResourceDetails]
     class GetResourceEvaluationSummaryResponse < Struct.new(
+      nil,
       :resource_evaluation_id,
       :evaluation_mode,
       :evaluation_status,
@@ -4185,6 +4367,7 @@ module Aws::ConfigService
     #   <p>The name of the query.</p>
     #   @return [String]
     class GetStoredQueryRequest < Struct.new(
+      nil,
       :query_name,
       keyword_init: true
     )
@@ -4195,6 +4378,7 @@ module Aws::ConfigService
     #   <p>Returns a <code>StoredQuery</code> object.</p>
     #   @return [Types::StoredQuery]
     class GetStoredQueryResponse < Struct.new(
+      nil,
       :stored_query,
       keyword_init: true
     )
@@ -4209,6 +4393,7 @@ module Aws::ConfigService
     #   <p>The number of resources in the group.</p>
     #   @return [Integer]
     class GroupedResourceCount < Struct.new(
+      nil,
       :group_name,
       :resource_count,
       keyword_init: true
@@ -4225,6 +4410,7 @@ module Aws::ConfigService
     # @!attribute message
     #   @return [String]
     class IdempotentParameterMismatch < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -4237,6 +4423,7 @@ module Aws::ConfigService
     #   <p>Error executing the command</p>
     #   @return [String]
     class InsufficientDeliveryPolicyException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -4273,6 +4460,7 @@ module Aws::ConfigService
     #   <p>Error executing the command</p>
     #   @return [String]
     class InsufficientPermissionsException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -4284,6 +4472,7 @@ module Aws::ConfigService
     #   <p>Error executing the command</p>
     #   @return [String]
     class InvalidConfigurationRecorderNameException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -4295,6 +4484,7 @@ module Aws::ConfigService
     #   <p>Error executing the command</p>
     #   @return [String]
     class InvalidDeliveryChannelNameException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -4306,6 +4496,7 @@ module Aws::ConfigService
     #   <p>Error executing the command</p>
     #   @return [String]
     class InvalidExpressionException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -4317,6 +4508,7 @@ module Aws::ConfigService
     #   <p>Error executing the command</p>
     #   @return [String]
     class InvalidLimitException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -4330,6 +4522,7 @@ module Aws::ConfigService
     #   <p>Error executing the command</p>
     #   @return [String]
     class InvalidNextTokenException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -4342,6 +4535,7 @@ module Aws::ConfigService
     #   <p>Error executing the command</p>
     #   @return [String]
     class InvalidParameterValueException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -4376,6 +4570,7 @@ module Aws::ConfigService
     #   <p>Error executing the command</p>
     #   @return [String]
     class InvalidRecordingGroupException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -4387,6 +4582,7 @@ module Aws::ConfigService
     #   <p>Error executing the command</p>
     #   @return [String]
     class InvalidResultTokenException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -4398,6 +4594,7 @@ module Aws::ConfigService
     #   <p>Error executing the command</p>
     #   @return [String]
     class InvalidRoleException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -4409,6 +4606,7 @@ module Aws::ConfigService
     #   <p>Error executing the command</p>
     #   @return [String]
     class InvalidS3KeyPrefixException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -4420,6 +4618,7 @@ module Aws::ConfigService
     #   <p>Error executing the command</p>
     #   @return [String]
     class InvalidS3KmsKeyArnException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -4431,6 +4630,7 @@ module Aws::ConfigService
     #   <p>Error executing the command</p>
     #   @return [String]
     class InvalidSNSTopicARNException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -4443,6 +4643,7 @@ module Aws::ConfigService
     #   <p>Error executing the command</p>
     #   @return [String]
     class InvalidTimeRangeException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -4454,6 +4655,7 @@ module Aws::ConfigService
     #   <p>Error executing the command</p>
     #   @return [String]
     class LastDeliveryChannelDeleteFailedException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -4472,6 +4674,7 @@ module Aws::ConfigService
     #   <p>Error executing the command</p>
     #   @return [String]
     class LimitExceededException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -4494,6 +4697,7 @@ module Aws::ConfigService
     #   <p>The <code>nextToken</code> string returned on a previous page that you use to get the next page of results in a paginated response.</p>
     #   @return [String]
     class ListAggregateDiscoveredResourcesRequest < Struct.new(
+      nil,
       :configuration_aggregator_name,
       :resource_type,
       :filters,
@@ -4511,6 +4715,7 @@ module Aws::ConfigService
     #   <p>The <code>nextToken</code> string returned on a previous page that you use to get the next page of results in a paginated response.</p>
     #   @return [String]
     class ListAggregateDiscoveredResourcesResponse < Struct.new(
+      nil,
       :resource_identifiers,
       :next_token,
       keyword_init: true
@@ -4528,6 +4733,7 @@ module Aws::ConfigService
     #   <p>The <code>NextToken</code> string returned on a previous page that you use to get the next page of results in a paginated response.</p>
     #   @return [String]
     class ListConfigurationRecordersRequest < Struct.new(
+      nil,
       :filters,
       :max_results,
       :next_token,
@@ -4543,6 +4749,7 @@ module Aws::ConfigService
     #   <p>The <code>NextToken</code> string returned on a previous page that you use to get the next page of results in a paginated response.</p>
     #   @return [String]
     class ListConfigurationRecordersResponse < Struct.new(
+      nil,
       :configuration_recorder_summaries,
       :next_token,
       keyword_init: true
@@ -4570,6 +4777,7 @@ module Aws::ConfigService
     #   <p>The <code>nextToken</code> string in a prior request that you can use to get the paginated response for the next set of conformance pack compliance scores.</p>
     #   @return [String]
     class ListConformancePackComplianceScoresRequest < Struct.new(
+      nil,
       :filters,
       :sort_order,
       :sort_by,
@@ -4587,6 +4795,7 @@ module Aws::ConfigService
     #   <p>A list of <code>ConformancePackComplianceScore</code> objects.</p>
     #   @return [Array<Types::ConformancePackComplianceScore>]
     class ListConformancePackComplianceScoresResponse < Struct.new(
+      nil,
       :next_token,
       :conformance_pack_compliance_scores,
       keyword_init: true
@@ -4624,6 +4833,7 @@ module Aws::ConfigService
     #   			response.</p>
     #   @return [String]
     class ListDiscoveredResourcesRequest < Struct.new(
+      nil,
       :resource_type,
       :resource_ids,
       :resource_name,
@@ -4645,6 +4855,7 @@ module Aws::ConfigService
     #   			page of results in a paginated response.</p>
     #   @return [String]
     class ListDiscoveredResourcesResponse < Struct.new(
+      nil,
       :resource_identifiers,
       :next_token,
       keyword_init: true
@@ -4663,6 +4874,7 @@ module Aws::ConfigService
     #   <p>The <code>nextToken</code> string returned on a previous page that you use to get the next page of results in a paginated response.</p>
     #   @return [String]
     class ListResourceEvaluationsRequest < Struct.new(
+      nil,
       :filters,
       :limit,
       :next_token,
@@ -4678,6 +4890,7 @@ module Aws::ConfigService
     #   <p>The <code>nextToken</code> string returned on a previous page that you use to get the next page of results in a paginated response.</p>
     #   @return [String]
     class ListResourceEvaluationsResponse < Struct.new(
+      nil,
       :resource_evaluations,
       :next_token,
       keyword_init: true
@@ -4692,6 +4905,7 @@ module Aws::ConfigService
     #   <p>The maximum number of results to be returned with a single call.</p>
     #   @return [Integer]
     class ListStoredQueriesRequest < Struct.new(
+      nil,
       :next_token,
       :max_results,
       keyword_init: true
@@ -4708,6 +4922,7 @@ module Aws::ConfigService
     #   			If there are no remaining results, the previous response object's <code>NextToken</code> parameter is set to <code>null</code>. </p>
     #   @return [String]
     class ListStoredQueriesResponse < Struct.new(
+      nil,
       :stored_query_metadata,
       :next_token,
       keyword_init: true
@@ -4767,6 +4982,7 @@ module Aws::ConfigService
     #   <p>The <code>nextToken</code> string returned on a previous page that you use to get the next page of results in a paginated response. </p>
     #   @return [String]
     class ListTagsForResourceRequest < Struct.new(
+      nil,
       :resource_arn,
       :limit,
       :next_token,
@@ -4782,6 +4998,7 @@ module Aws::ConfigService
     #   <p>The <code>nextToken</code> string returned on a previous page that you use to get the next page of results in a paginated response. </p>
     #   @return [String]
     class ListTagsForResourceResponse < Struct.new(
+      nil,
       :tags,
       :next_token,
       keyword_init: true
@@ -4796,6 +5013,7 @@ module Aws::ConfigService
     #   <p>Error executing the command</p>
     #   @return [String]
     class MaxActiveResourcesExceededException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -4809,6 +5027,7 @@ module Aws::ConfigService
     #   <p>Error executing the command</p>
     #   @return [String]
     class MaxNumberOfConfigRulesExceededException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -4821,6 +5040,7 @@ module Aws::ConfigService
     #   <p>Error executing the command</p>
     #   @return [String]
     class MaxNumberOfConfigurationRecordersExceededException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -4834,6 +5054,7 @@ module Aws::ConfigService
     #   <p>Error executing the command</p>
     #   @return [String]
     class MaxNumberOfConformancePacksExceededException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -4846,6 +5067,7 @@ module Aws::ConfigService
     #   <p>Error executing the command</p>
     #   @return [String]
     class MaxNumberOfDeliveryChannelsExceededException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -4859,6 +5081,7 @@ module Aws::ConfigService
     #   <p>Error executing the command</p>
     #   @return [String]
     class MaxNumberOfOrganizationConfigRulesExceededException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -4872,6 +5095,7 @@ module Aws::ConfigService
     #   <p>Error executing the command</p>
     #   @return [String]
     class MaxNumberOfOrganizationConformancePacksExceededException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -4883,6 +5107,7 @@ module Aws::ConfigService
     #   <p>Error executing the command</p>
     #   @return [String]
     class MaxNumberOfRetentionConfigurationsExceededException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -4952,6 +5177,7 @@ module Aws::ConfigService
     #   <p>The timestamp of the last status update.</p>
     #   @return [Time]
     class MemberAccountStatus < Struct.new(
+      nil,
       :account_id,
       :config_rule_name,
       :member_account_rule_status,
@@ -4969,6 +5195,7 @@ module Aws::ConfigService
     #   <p>Error executing the command</p>
     #   @return [String]
     class NoAvailableConfigurationRecorderException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -4981,6 +5208,7 @@ module Aws::ConfigService
     #   <p>Error executing the command</p>
     #   @return [String]
     class NoAvailableDeliveryChannelException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -4992,6 +5220,7 @@ module Aws::ConfigService
     #   <p>Error executing the command</p>
     #   @return [String]
     class NoAvailableOrganizationException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -5003,6 +5232,7 @@ module Aws::ConfigService
     #   <p>Error executing the command</p>
     #   @return [String]
     class NoRunningConfigurationRecorderException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -5014,6 +5244,7 @@ module Aws::ConfigService
     #   <p>Error executing the command</p>
     #   @return [String]
     class NoSuchBucketException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -5025,6 +5256,7 @@ module Aws::ConfigService
     #   <p>Error executing the command</p>
     #   @return [String]
     class NoSuchConfigRuleException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -5036,6 +5268,7 @@ module Aws::ConfigService
     #   <p>Error executing the command</p>
     #   @return [String]
     class NoSuchConfigRuleInConformancePackException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -5047,6 +5280,7 @@ module Aws::ConfigService
     #   <p>Error executing the command</p>
     #   @return [String]
     class NoSuchConfigurationAggregatorException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -5059,6 +5293,7 @@ module Aws::ConfigService
     #   <p>Error executing the command</p>
     #   @return [String]
     class NoSuchConfigurationRecorderException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -5070,6 +5305,7 @@ module Aws::ConfigService
     #   <p>Error executing the command</p>
     #   @return [String]
     class NoSuchConformancePackException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -5082,6 +5318,7 @@ module Aws::ConfigService
     #   <p>Error executing the command</p>
     #   @return [String]
     class NoSuchDeliveryChannelException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -5093,6 +5330,7 @@ module Aws::ConfigService
     #   <p>Error executing the command</p>
     #   @return [String]
     class NoSuchOrganizationConfigRuleException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -5105,6 +5343,7 @@ module Aws::ConfigService
     #   <p>Error executing the command</p>
     #   @return [String]
     class NoSuchOrganizationConformancePackException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -5116,6 +5355,7 @@ module Aws::ConfigService
     #   <p>Error executing the command</p>
     #   @return [String]
     class NoSuchRemediationConfigurationException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -5127,6 +5367,7 @@ module Aws::ConfigService
     #   <p>Error executing the command</p>
     #   @return [String]
     class NoSuchRemediationExceptionException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -5138,6 +5379,7 @@ module Aws::ConfigService
     #   <p>Error executing the command</p>
     #   @return [String]
     class NoSuchRetentionConfigurationException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -5167,6 +5409,7 @@ module Aws::ConfigService
     #   <p>Error executing the command</p>
     #   @return [String]
     class OrganizationAccessDeniedException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -5187,6 +5430,7 @@ module Aws::ConfigService
     #   			regions.</p>
     #   @return [Boolean]
     class OrganizationAggregationSource < Struct.new(
+      nil,
       :role_arn,
       :aws_regions,
       :all_aws_regions,
@@ -5205,6 +5449,7 @@ module Aws::ConfigService
     #   <p>Error executing the command</p>
     #   @return [String]
     class OrganizationAllFeaturesNotEnabledException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -5237,6 +5482,7 @@ module Aws::ConfigService
     #   			ID of Amazon Web Services resource, and organization trigger types that initiate Config to evaluate Amazon Web Services resources against a rule.</p>
     #   @return [Types::OrganizationCustomPolicyRuleMetadataNoPolicy]
     class OrganizationConfigRule < Struct.new(
+      nil,
       :organization_config_rule_name,
       :organization_config_rule_arn,
       :organization_managed_rule_metadata,
@@ -5308,6 +5554,7 @@ module Aws::ConfigService
     #   <p>The timestamp of the last update.</p>
     #   @return [Time]
     class OrganizationConfigRuleStatus < Struct.new(
+      nil,
       :organization_config_rule_name,
       :organization_rule_status,
       :error_code,
@@ -5347,6 +5594,7 @@ module Aws::ConfigService
     #   <p>Last time when organization conformation pack was updated.</p>
     #   @return [Time]
     class OrganizationConformancePack < Struct.new(
+      nil,
       :organization_conformance_pack_name,
       :organization_conformance_pack_arn,
       :delivery_s3_bucket,
@@ -5426,6 +5674,7 @@ module Aws::ConfigService
     #   <p>The timestamp of the last status update.</p>
     #   @return [Time]
     class OrganizationConformancePackDetailedStatus < Struct.new(
+      nil,
       :account_id,
       :conformance_pack_name,
       :status,
@@ -5502,6 +5751,7 @@ module Aws::ConfigService
     #   <p>The timestamp of the last update.</p>
     #   @return [Time]
     class OrganizationConformancePackStatus < Struct.new(
+      nil,
       :organization_conformance_pack_name,
       :status,
       :error_code,
@@ -5517,6 +5767,7 @@ module Aws::ConfigService
     #   <p>Error executing the command</p>
     #   @return [String]
     class OrganizationConformancePackTemplateValidationException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -5578,6 +5829,7 @@ module Aws::ConfigService
     #   <p>A list of accounts that you can enable debug logging for your organization Config Custom Policy rule. List is null when debug logging is enabled for all accounts.</p>
     #   @return [Array<String>]
     class OrganizationCustomPolicyRuleMetadata < Struct.new(
+      nil,
       :description,
       :organization_config_rule_trigger_types,
       :input_parameters,
@@ -5645,6 +5897,7 @@ module Aws::ConfigService
     #   <p>A list of accounts that you can enable debug logging for your organization Config Custom Policy rule. List is null when debug logging is enabled for all accounts.</p>
     #   @return [Array<String>]
     class OrganizationCustomPolicyRuleMetadataNoPolicy < Struct.new(
+      nil,
       :description,
       :organization_config_rule_trigger_types,
       :input_parameters,
@@ -5713,6 +5966,7 @@ module Aws::ConfigService
     #   			A value acts as a descriptor within a tag category (key). </p>
     #   @return [String]
     class OrganizationCustomRuleMetadata < Struct.new(
+      nil,
       :description,
       :lambda_function_arn,
       :organization_config_rule_trigger_types,
@@ -5762,6 +6016,7 @@ module Aws::ConfigService
     #   			A value acts as a descriptor within a tag category (key).</p>
     #   @return [String]
     class OrganizationManagedRuleMetadata < Struct.new(
+      nil,
       :description,
       :rule_identifier,
       :input_parameters,
@@ -5826,6 +6081,7 @@ module Aws::ConfigService
     #            </ul>
     #   @return [String]
     class OrganizationResourceDetailedStatusFilters < Struct.new(
+      nil,
       :account_id,
       :status,
       keyword_init: true
@@ -5838,6 +6094,7 @@ module Aws::ConfigService
     #   <p>Error executing the command</p>
     #   @return [String]
     class OversizedConfigurationItemException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -5855,6 +6112,7 @@ module Aws::ConfigService
     #   <p>The region requesting to aggregate data. </p>
     #   @return [String]
     class PendingAggregationRequest < Struct.new(
+      nil,
       :requester_account_id,
       :requester_aws_region,
       keyword_init: true
@@ -5872,6 +6130,7 @@ module Aws::ConfigService
     #   <p>An array of tag object.</p>
     #   @return [Array<Types::Tag>]
     class PutAggregationAuthorizationRequest < Struct.new(
+      nil,
       :authorized_account_id,
       :authorized_aws_region,
       :tags,
@@ -5886,6 +6145,7 @@ module Aws::ConfigService
     #   		</p>
     #   @return [Types::AggregationAuthorization]
     class PutAggregationAuthorizationResponse < Struct.new(
+      nil,
       :aggregation_authorization,
       keyword_init: true
     )
@@ -5899,6 +6159,7 @@ module Aws::ConfigService
     #   <p>An array of tag object.</p>
     #   @return [Array<Types::Tag>]
     class PutConfigRuleRequest < Struct.new(
+      nil,
       :config_rule,
       :tags,
       keyword_init: true
@@ -5924,6 +6185,7 @@ module Aws::ConfigService
     #   <p>An object to filter configuration recorders in an aggregator. Either <code>ResourceType</code> or <code>ServicePrincipal</code> is required.</p>
     #   @return [Types::AggregatorFilters]
     class PutConfigurationAggregatorRequest < Struct.new(
+      nil,
       :configuration_aggregator_name,
       :account_aggregation_sources,
       :organization_aggregation_source,
@@ -5938,6 +6200,7 @@ module Aws::ConfigService
     #   <p>Returns a ConfigurationAggregator object.</p>
     #   @return [Types::ConfigurationAggregator]
     class PutConfigurationAggregatorResponse < Struct.new(
+      nil,
       :configuration_aggregator,
       keyword_init: true
     )
@@ -5953,6 +6216,7 @@ module Aws::ConfigService
     #   <p>The tags for the customer managed configuration recorder. Each tag consists of a key and an optional value, both of which you define.</p>
     #   @return [Array<Types::Tag>]
     class PutConfigurationRecorderRequest < Struct.new(
+      nil,
       :configuration_recorder,
       :tags,
       keyword_init: true
@@ -5995,6 +6259,7 @@ module Aws::ConfigService
     #   <p>An object of type <code>TemplateSSMDocumentDetails</code>, which contains the name or the Amazon Resource Name (ARN) of the Amazon Web Services Systems Manager document (SSM document) and the version of the SSM document that is used to create a conformance pack.</p>
     #   @return [Types::TemplateSSMDocumentDetails]
     class PutConformancePackRequest < Struct.new(
+      nil,
       :conformance_pack_name,
       :template_s3_uri,
       :template_body,
@@ -6011,6 +6276,7 @@ module Aws::ConfigService
     #   <p>ARN of the conformance pack.</p>
     #   @return [String]
     class PutConformancePackResponse < Struct.new(
+      nil,
       :conformance_pack_arn,
       keyword_init: true
     )
@@ -6024,6 +6290,7 @@ module Aws::ConfigService
     #   		</p>
     #   @return [Types::DeliveryChannel]
     class PutDeliveryChannelRequest < Struct.new(
+      nil,
       :delivery_channel,
       keyword_init: true
     )
@@ -6054,6 +6321,7 @@ module Aws::ConfigService
     #            </note>
     #   @return [Boolean]
     class PutEvaluationsRequest < Struct.new(
+      nil,
       :evaluations,
       :result_token,
       :test_mode,
@@ -6068,6 +6336,7 @@ module Aws::ConfigService
     #   			error.</p>
     #   @return [Array<Types::Evaluation>]
     class PutEvaluationsResponse < Struct.new(
+      nil,
       :failed_evaluations,
       keyword_init: true
     )
@@ -6081,6 +6350,7 @@ module Aws::ConfigService
     #   <p>An <code>ExternalEvaluation</code> object that provides details about compliance.</p>
     #   @return [Types::ExternalEvaluation]
     class PutExternalEvaluationRequest < Struct.new(
+      nil,
       :config_rule_name,
       :external_evaluation,
       keyword_init: true
@@ -6089,6 +6359,7 @@ module Aws::ConfigService
     end
 
     class PutExternalEvaluationResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -6116,6 +6387,7 @@ module Aws::ConfigService
     #   			Amazon Web Services resource, and organization trigger types that initiate Config to evaluate Amazon Web Services resources against a rule.</p>
     #   @return [Types::OrganizationCustomPolicyRuleMetadata]
     class PutOrganizationConfigRuleRequest < Struct.new(
+      nil,
       :organization_config_rule_name,
       :organization_managed_rule_metadata,
       :organization_custom_rule_metadata,
@@ -6130,6 +6402,7 @@ module Aws::ConfigService
     #   <p>The Amazon Resource Name (ARN) of an organization Config rule.</p>
     #   @return [String]
     class PutOrganizationConfigRuleResponse < Struct.new(
+      nil,
       :organization_config_rule_arn,
       keyword_init: true
     )
@@ -6170,6 +6443,7 @@ module Aws::ConfigService
     #   <p>A list of Amazon Web Services accounts to be excluded from an organization conformance pack while deploying a conformance pack.</p>
     #   @return [Array<String>]
     class PutOrganizationConformancePackRequest < Struct.new(
+      nil,
       :organization_conformance_pack_name,
       :template_s3_uri,
       :template_body,
@@ -6186,6 +6460,7 @@ module Aws::ConfigService
     #   <p>ARN of the organization conformance pack.</p>
     #   @return [String]
     class PutOrganizationConformancePackResponse < Struct.new(
+      nil,
       :organization_conformance_pack_arn,
       keyword_init: true
     )
@@ -6196,6 +6471,7 @@ module Aws::ConfigService
     #   <p>A list of remediation configuration objects.</p>
     #   @return [Array<Types::RemediationConfiguration>]
     class PutRemediationConfigurationsRequest < Struct.new(
+      nil,
       :remediation_configurations,
       keyword_init: true
     )
@@ -6206,6 +6482,7 @@ module Aws::ConfigService
     #   <p>Returns a list of failed remediation batch objects.</p>
     #   @return [Array<Types::FailedRemediationBatch>]
     class PutRemediationConfigurationsResponse < Struct.new(
+      nil,
       :failed_batches,
       keyword_init: true
     )
@@ -6225,6 +6502,7 @@ module Aws::ConfigService
     #   <p>The exception is automatically deleted after the expiration date.</p>
     #   @return [Time]
     class PutRemediationExceptionsRequest < Struct.new(
+      nil,
       :config_rule_name,
       :resource_keys,
       :message,
@@ -6238,6 +6516,7 @@ module Aws::ConfigService
     #   <p>Returns a list of failed remediation exceptions batch objects. Each object in the batch consists of a list of failed items and failure messages.</p>
     #   @return [Array<Types::FailedRemediationExceptionBatch>]
     class PutRemediationExceptionsResponse < Struct.new(
+      nil,
       :failed_batches,
       keyword_init: true
     )
@@ -6273,6 +6552,7 @@ module Aws::ConfigService
     #            </note>
     #   @return [Hash<String, String>]
     class PutResourceConfigRequest < Struct.new(
+      nil,
       :resource_type,
       :schema_version_id,
       :resource_id,
@@ -6293,6 +6573,7 @@ module Aws::ConfigService
     #            </note>
     #   @return [Integer]
     class PutRetentionConfigurationRequest < Struct.new(
+      nil,
       :retention_period_in_days,
       keyword_init: true
     )
@@ -6303,6 +6584,7 @@ module Aws::ConfigService
     #   <p>Returns a retention configuration object.</p>
     #   @return [Types::RetentionConfiguration]
     class PutRetentionConfigurationResponse < Struct.new(
+      nil,
       :retention_configuration,
       keyword_init: true
     )
@@ -6316,6 +6598,7 @@ module Aws::ConfigService
     #   <p>The tags for a service-linked configuration recorder. Each tag consists of a key and an optional value, both of which you define.</p>
     #   @return [Array<Types::Tag>]
     class PutServiceLinkedConfigurationRecorderRequest < Struct.new(
+      nil,
       :service_principal,
       :tags,
       keyword_init: true
@@ -6331,6 +6614,7 @@ module Aws::ConfigService
     #            <p>For service-linked configuration recorders, Config automatically assigns a name that has the prefix "<code>AWSConfigurationRecorderFor</code>" to the new service-linked configuration recorder.</p>
     #   @return [String]
     class PutServiceLinkedConfigurationRecorderResponse < Struct.new(
+      nil,
       :arn,
       :name,
       keyword_init: true
@@ -6350,6 +6634,7 @@ module Aws::ConfigService
     #   <p>A list of <code>Tags</code> object.</p>
     #   @return [Array<Types::Tag>]
     class PutStoredQueryRequest < Struct.new(
+      nil,
       :stored_query,
       :tags,
       keyword_init: true
@@ -6362,6 +6647,7 @@ module Aws::ConfigService
     #   			For example, arn:partition:service:region:account-id:resource-type/resource-name/resource-id.</p>
     #   @return [String]
     class PutStoredQueryResponse < Struct.new(
+      nil,
       :query_arn,
       keyword_init: true
     )
@@ -6373,6 +6659,7 @@ module Aws::ConfigService
     #   <p>Returns a <code>FieldInfo</code> object.</p>
     #   @return [Array<Types::FieldInfo>]
     class QueryInfo < Struct.new(
+      nil,
       :select_fields,
       keyword_init: true
     )
@@ -6560,6 +6847,7 @@ module Aws::ConfigService
     #            </note>
     #   @return [Types::RecordingStrategy]
     class RecordingGroup < Struct.new(
+      nil,
       :all_supported,
       :include_global_resource_types,
       :resource_types,
@@ -6622,6 +6910,7 @@ module Aws::ConfigService
     #   			The <code>recordingModeOverride</code> object in the <code>recordingModeOverrides</code> array consists of three fields: a <code>description</code>, the new <code>recordingFrequency</code>, and an array of <code>resourceTypes</code> to override.</p>
     #   @return [Array<Types::RecordingModeOverride>]
     class RecordingMode < Struct.new(
+      nil,
       :recording_frequency,
       :recording_mode_overrides,
       keyword_init: true
@@ -6674,6 +6963,7 @@ module Aws::ConfigService
     #            </note>
     #   @return [String]
     class RecordingModeOverride < Struct.new(
+      nil,
       :description,
       :resource_types,
       :recording_frequency,
@@ -6759,6 +7049,7 @@ module Aws::ConfigService
     #            </note>
     #   @return [String]
     class RecordingStrategy < Struct.new(
+      nil,
       :use_only,
       keyword_init: true
     )
@@ -6782,6 +7073,7 @@ module Aws::ConfigService
     #   <p>The type of relationship with the related resource.</p>
     #   @return [String]
     class Relationship < Struct.new(
+      nil,
       :resource_type,
       :resource_id,
       :resource_name,
@@ -6841,6 +7133,7 @@ module Aws::ConfigService
     #   <p>Name of the service that owns the service-linked rule, if applicable.</p>
     #   @return [String]
     class RemediationConfiguration < Struct.new(
+      nil,
       :config_rule_name,
       :target_type,
       :target_id,
@@ -6880,6 +7173,7 @@ module Aws::ConfigService
     #   <p>The time when the remediation exception will be deleted.</p>
     #   @return [Time]
     class RemediationException < Struct.new(
+      nil,
       :config_rule_name,
       :resource_type,
       :resource_id,
@@ -6898,6 +7192,7 @@ module Aws::ConfigService
     #   <p>The ID of the resource (for example., sg-xxxxxx).</p>
     #   @return [String]
     class RemediationExceptionResourceKey < Struct.new(
+      nil,
       :resource_type,
       :resource_id,
       keyword_init: true
@@ -6923,6 +7218,7 @@ module Aws::ConfigService
     #   <p>The time when the remediation execution was last updated.</p>
     #   @return [Time]
     class RemediationExecutionStatus < Struct.new(
+      nil,
       :resource_key,
       :state,
       :step_details,
@@ -6950,6 +7246,7 @@ module Aws::ConfigService
     #   <p>The time when the step stopped.</p>
     #   @return [Time]
     class RemediationExecutionStep < Struct.new(
+      nil,
       :name,
       :state,
       :error_message,
@@ -6965,6 +7262,7 @@ module Aws::ConfigService
     #   <p>Error executing the command</p>
     #   @return [String]
     class RemediationInProgressException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -6979,6 +7277,7 @@ module Aws::ConfigService
     #   <p>The value is static and does not change at run-time.</p>
     #   @return [Types::StaticValue]
     class RemediationParameterValue < Struct.new(
+      nil,
       :resource_value,
       :static_value,
       keyword_init: true
@@ -6990,6 +7289,7 @@ module Aws::ConfigService
     # @!attribute message
     #   @return [String]
     class ResourceConcurrentModificationException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -7006,6 +7306,7 @@ module Aws::ConfigService
     #   <p>The number of resources.</p>
     #   @return [Integer]
     class ResourceCount < Struct.new(
+      nil,
       :resource_type,
       :count,
       keyword_init: true
@@ -7029,6 +7330,7 @@ module Aws::ConfigService
     #   <p>The region where the account is located.</p>
     #   @return [String]
     class ResourceCountFilters < Struct.new(
+      nil,
       :resource_type,
       :account_id,
       :region,
@@ -7058,6 +7360,7 @@ module Aws::ConfigService
     #            </note>
     #   @return [String]
     class ResourceDetails < Struct.new(
+      nil,
       :resource_id,
       :resource_type,
       :resource_configuration,
@@ -7078,6 +7381,7 @@ module Aws::ConfigService
     #   <p>The starting time of an execution.</p>
     #   @return [Time]
     class ResourceEvaluation < Struct.new(
+      nil,
       :resource_evaluation_id,
       :evaluation_mode,
       :evaluation_start_timestamp,
@@ -7100,6 +7404,7 @@ module Aws::ConfigService
     #   <p>Filters evaluations for a given infrastructure deployment. For example: CFN Stack.</p>
     #   @return [String]
     class ResourceEvaluationFilters < Struct.new(
+      nil,
       :evaluation_mode,
       :time_window,
       :evaluation_context_identifier,
@@ -7122,6 +7427,7 @@ module Aws::ConfigService
     #   <p>The source region.</p>
     #   @return [String]
     class ResourceFilters < Struct.new(
+      nil,
       :account_id,
       :resource_id,
       :resource_name,
@@ -7147,6 +7453,7 @@ module Aws::ConfigService
     #   <p>The time that the resource was deleted.</p>
     #   @return [Time]
     class ResourceIdentifier < Struct.new(
+      nil,
       :resource_type,
       :resource_id,
       :resource_name,
@@ -7184,6 +7491,7 @@ module Aws::ConfigService
     #   <p>Error executing the command</p>
     #   @return [String]
     class ResourceInUseException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -7199,6 +7507,7 @@ module Aws::ConfigService
     #   <p>The ID of the resource (for example., sg-xxxxxx). </p>
     #   @return [String]
     class ResourceKey < Struct.new(
+      nil,
       :resource_type,
       :resource_id,
       keyword_init: true
@@ -7212,6 +7521,7 @@ module Aws::ConfigService
     #   <p>Error executing the command</p>
     #   @return [String]
     class ResourceNotDiscoveredException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -7223,6 +7533,7 @@ module Aws::ConfigService
     #   <p>Error executing the command</p>
     #   @return [String]
     class ResourceNotFoundException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -7234,6 +7545,7 @@ module Aws::ConfigService
     #   <p>The value is a resource ID.</p>
     #   @return [String]
     class ResourceValue < Struct.new(
+      nil,
       :value,
       keyword_init: true
     )
@@ -7251,6 +7563,7 @@ module Aws::ConfigService
     #            </note>
     #   @return [Integer]
     class RetentionConfiguration < Struct.new(
+      nil,
       :name,
       :retention_period_in_days,
       keyword_init: true
@@ -7288,6 +7601,7 @@ module Aws::ConfigService
     #   			<code>ComplianceResourceTypes</code>.</p>
     #   @return [String]
     class Scope < Struct.new(
+      nil,
       :compliance_resource_types,
       :tag_key,
       :tag_value,
@@ -7313,6 +7627,7 @@ module Aws::ConfigService
     #   <p>The nextToken string returned in a previous request that you use to request the next page of results in a paginated response. </p>
     #   @return [String]
     class SelectAggregateResourceConfigRequest < Struct.new(
+      nil,
       :expression,
       :configuration_aggregator_name,
       :limit,
@@ -7333,6 +7648,7 @@ module Aws::ConfigService
     #   <p>The nextToken string returned in a previous request that you use to request the next page of results in a paginated response. </p>
     #   @return [String]
     class SelectAggregateResourceConfigResponse < Struct.new(
+      nil,
       :results,
       :query_info,
       :next_token,
@@ -7351,6 +7667,7 @@ module Aws::ConfigService
     #   <p>The <code>nextToken</code> string returned in a previous request that you use to request the next page of results in a paginated response. </p>
     #   @return [String]
     class SelectResourceConfigRequest < Struct.new(
+      nil,
       :expression,
       :limit,
       :next_token,
@@ -7369,6 +7686,7 @@ module Aws::ConfigService
     #   <p>The <code>nextToken</code> string returned in a previous request that you use to request the next page of results in a paginated response. </p>
     #   @return [String]
     class SelectResourceConfigResponse < Struct.new(
+      nil,
       :results,
       :query_info,
       :next_token,
@@ -7402,6 +7720,7 @@ module Aws::ConfigService
     #   <p>Provides the runtime system, policy definition, and whether debug logging is enabled. Required when owner is set to <code>CUSTOM_POLICY</code>.</p>
     #   @return [Types::CustomPolicyDetails]
     class Source < Struct.new(
+      nil,
       :owner,
       :source_identifier,
       :source_details,
@@ -7477,6 +7796,7 @@ module Aws::ConfigService
     #            </note>
     #   @return [String]
     class SourceDetail < Struct.new(
+      nil,
       :event_source,
       :message_type,
       :maximum_execution_frequency,
@@ -7495,6 +7815,7 @@ module Aws::ConfigService
     #   			For example, if you set the ErrorPercentage to 40% for 10 non-compliant resources, then SSM stops running the automations when the fifth error is received. </p>
     #   @return [Integer]
     class SsmControls < Struct.new(
+      nil,
       :concurrent_execution_rate_percentage,
       :error_percentage,
       keyword_init: true
@@ -7508,6 +7829,7 @@ module Aws::ConfigService
     #   			evaluations for.</p>
     #   @return [Array<String>]
     class StartConfigRulesEvaluationRequest < Struct.new(
+      nil,
       :config_rule_names,
       keyword_init: true
     )
@@ -7516,6 +7838,7 @@ module Aws::ConfigService
 
     # <p>The output when you start the evaluation for the specified Config rule.</p>
     class StartConfigRulesEvaluationResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -7527,6 +7850,7 @@ module Aws::ConfigService
     #   <p>The name of the customer managed configuration recorder that you want to start.</p>
     #   @return [String]
     class StartConfigurationRecorderRequest < Struct.new(
+      nil,
       :configuration_recorder_name,
       keyword_init: true
     )
@@ -7540,6 +7864,7 @@ module Aws::ConfigService
     #   <p>A list of resource keys to be processed with the current request. Each element in the list consists of the resource type and resource ID. </p>
     #   @return [Array<Types::ResourceKey>]
     class StartRemediationExecutionRequest < Struct.new(
+      nil,
       :config_rule_name,
       :resource_keys,
       keyword_init: true
@@ -7554,6 +7879,7 @@ module Aws::ConfigService
     #   <p>For resources that have failed to start execution, the API returns a resource key object.</p>
     #   @return [Array<Types::ResourceKey>]
     class StartRemediationExecutionResponse < Struct.new(
+      nil,
       :failure_message,
       :failed_items,
       keyword_init: true
@@ -7589,6 +7915,7 @@ module Aws::ConfigService
     #            </note>
     #   @return [String]
     class StartResourceEvaluationRequest < Struct.new(
+      nil,
       :resource_details,
       :evaluation_context,
       :evaluation_mode,
@@ -7604,6 +7931,7 @@ module Aws::ConfigService
     #   			unique ResourceEvaluationId that is associated with a single execution.</p>
     #   @return [String]
     class StartResourceEvaluationResponse < Struct.new(
+      nil,
       :resource_evaluation_id,
       keyword_init: true
     )
@@ -7615,6 +7943,7 @@ module Aws::ConfigService
     #   <p>A list of values. For example, the ARN of the assumed role. </p>
     #   @return [Array<String>]
     class StaticValue < Struct.new(
+      nil,
       :values,
       keyword_init: true
     )
@@ -7672,6 +8001,7 @@ module Aws::ConfigService
     #            </ul>
     #   @return [String]
     class StatusDetailFilters < Struct.new(
+      nil,
       :account_id,
       :member_account_rule_status,
       keyword_init: true
@@ -7684,6 +8014,7 @@ module Aws::ConfigService
     #   <p>The name of the customer managed configuration recorder that you want to stop.</p>
     #   @return [String]
     class StopConfigurationRecorderRequest < Struct.new(
+      nil,
       :configuration_recorder_name,
       keyword_init: true
     )
@@ -7714,6 +8045,7 @@ module Aws::ConfigService
     #            </p>
     #   @return [String]
     class StoredQuery < Struct.new(
+      nil,
       :query_id,
       :query_arn,
       :query_name,
@@ -7738,6 +8070,7 @@ module Aws::ConfigService
     #   <p>A unique description for the query.</p>
     #   @return [String]
     class StoredQueryMetadata < Struct.new(
+      nil,
       :query_id,
       :query_arn,
       :query_name,
@@ -7757,6 +8090,7 @@ module Aws::ConfigService
     #   <p>The optional part of a key-value pair that make up a tag. A value acts as a descriptor within a tag category (key).</p>
     #   @return [String]
     class Tag < Struct.new(
+      nil,
       :key,
       :value,
       keyword_init: true
@@ -7813,6 +8147,7 @@ module Aws::ConfigService
     #   <p>An array of tag object.</p>
     #   @return [Array<Types::Tag>]
     class TagResourceRequest < Struct.new(
+      nil,
       :resource_arn,
       :tags,
       keyword_init: true
@@ -7834,6 +8169,7 @@ module Aws::ConfigService
     #            </note>
     #   @return [String]
     class TemplateSSMDocumentDetails < Struct.new(
+      nil,
       :document_name,
       :document_version,
       keyword_init: true
@@ -7849,6 +8185,7 @@ module Aws::ConfigService
     #   <p>The end time of an execution. The end time must be after the start date.</p>
     #   @return [Time]
     class TimeWindow < Struct.new(
+      nil,
       :start_time,
       :end_time,
       keyword_init: true
@@ -7864,6 +8201,7 @@ module Aws::ConfigService
     #   <p>Error executing the command</p>
     #   @return [String]
     class TooManyTagsException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -7883,6 +8221,7 @@ module Aws::ConfigService
     #   <p>Error executing the command</p>
     #   @return [String]
     class UnmodifiableEntityException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -7938,6 +8277,7 @@ module Aws::ConfigService
     #   <p>The keys of the tags to be removed.</p>
     #   @return [Array<String>]
     class UntagResourceRequest < Struct.new(
+      nil,
       :resource_arn,
       :tag_keys,
       keyword_init: true
@@ -7983,6 +8323,7 @@ module Aws::ConfigService
     #   <p>Error executing the command</p>
     #   @return [String]
     class ValidationException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )

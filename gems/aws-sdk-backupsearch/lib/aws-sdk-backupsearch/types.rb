@@ -11,6 +11,7 @@ module Aws::BackupSearch
     #   <p>User does not have sufficient access to perform this action.</p>
     #   @return [String]
     class AccessDeniedException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -25,6 +26,7 @@ module Aws::BackupSearch
     #   <p>This timestamp includes recovery points only created before the specified time.</p>
     #   @return [Time]
     class BackupCreationTimeFilter < Struct.new(
+      nil,
       :created_after,
       :created_before,
       keyword_init: true
@@ -43,6 +45,7 @@ module Aws::BackupSearch
     #   <p>Type of the resource affected.</p>
     #   @return [String]
     class ConflictException < Struct.new(
+      nil,
       :message,
       :resource_id,
       :resource_type,
@@ -62,6 +65,7 @@ module Aws::BackupSearch
     #   <p>This number is the sum of all items that match the item filters in a search job in progress.</p>
     #   @return [Integer]
     class CurrentSearchProgress < Struct.new(
+      nil,
       :recovery_points_scanned_count,
       :items_scanned_count,
       :items_matched_count,
@@ -84,6 +88,7 @@ module Aws::BackupSearch
     #   <p>You can include 1 to 10 values.</p> <p>If one is included, the results will return only items that match.</p> <p>If more than one is included, the results will return all items that match any of the included values.</p>
     #   @return [Array<Types::TimeCondition>]
     class EBSItemFilter < Struct.new(
+      nil,
       :file_paths,
       :sizes,
       :creation_times,
@@ -119,6 +124,7 @@ module Aws::BackupSearch
     #   <p>These are one or more items in the results that match values for Last Modified Time returned in a search of Amazon EBS backup metadata.</p>
     #   @return [Time]
     class EBSResultItem < Struct.new(
+      nil,
       :backup_resource_arn,
       :source_resource_arn,
       :backup_vault_name,
@@ -155,6 +161,7 @@ module Aws::BackupSearch
     #   <p>The unique string that identifies the Amazon Resource Name (ARN) of the specified search job.</p>
     #   @return [String]
     class ExportJobSummary < Struct.new(
+      nil,
       :export_job_identifier,
       :export_job_arn,
       :status,
@@ -186,6 +193,7 @@ module Aws::BackupSearch
     #   <p>Required unique string that specifies the search job.</p>
     #   @return [String]
     class GetSearchJobInput < Struct.new(
+      nil,
       :search_job_identifier,
       keyword_init: true
     )
@@ -229,6 +237,7 @@ module Aws::BackupSearch
     #   <p>The unique string that identifies the Amazon Resource Name (ARN) of the specified search job.</p>
     #   @return [String]
     class GetSearchJobOutput < Struct.new(
+      nil,
       :name,
       :search_scope_summary,
       :current_search_progress,
@@ -250,6 +259,7 @@ module Aws::BackupSearch
     #   <p>This is the unique string that identifies a specific export job.</p> <p>Required for this operation.</p>
     #   @return [String]
     class GetSearchResultExportJobInput < Struct.new(
+      nil,
       :export_job_identifier,
       keyword_init: true
     )
@@ -281,6 +291,7 @@ module Aws::BackupSearch
     #   <p>The unique string that identifies the Amazon Resource Name (ARN) of the specified search job.</p>
     #   @return [String]
     class GetSearchResultExportJobOutput < Struct.new(
+      nil,
       :export_job_identifier,
       :export_job_arn,
       :status,
@@ -302,6 +313,7 @@ module Aws::BackupSearch
     #   <p>Retry the call after number of seconds.</p>
     #   @return [Integer]
     class InternalServerException < Struct.new(
+      nil,
       :message,
       :retry_after_seconds,
       keyword_init: true
@@ -317,6 +329,7 @@ module Aws::BackupSearch
     #   <p>This array can contain CreationTimes, FilePaths, LastModificationTimes, or Sizes objects.</p>
     #   @return [Array<Types::EBSItemFilter>]
     class ItemFilters < Struct.new(
+      nil,
       :s3_item_filters,
       :ebs_item_filters,
       keyword_init: true
@@ -334,6 +347,7 @@ module Aws::BackupSearch
     #   <p>The maximum number of resource list items to be returned.</p>
     #   @return [Integer]
     class ListSearchJobBackupsInput < Struct.new(
+      nil,
       :search_job_identifier,
       :next_token,
       :max_results,
@@ -349,6 +363,7 @@ module Aws::BackupSearch
     #   <p>The next item following a partial list of returned backups included in a search job.</p> <p>For example, if a request is made to return <code>MaxResults</code> number of backups, <code>NextToken</code> allows you to return more items in your list starting at the location pointed to by the next token.</p>
     #   @return [String]
     class ListSearchJobBackupsOutput < Struct.new(
+      nil,
       :results,
       :next_token,
       keyword_init: true
@@ -366,6 +381,7 @@ module Aws::BackupSearch
     #   <p>The maximum number of resource list items to be returned.</p>
     #   @return [Integer]
     class ListSearchJobResultsInput < Struct.new(
+      nil,
       :search_job_identifier,
       :next_token,
       :max_results,
@@ -381,6 +397,7 @@ module Aws::BackupSearch
     #   <p>The next item following a partial list of search job results.</p> <p>For example, if a request is made to return <code>MaxResults</code> number of backups, <code>NextToken</code> allows you to return more items in your list starting at the location pointed to by the next token.</p>
     #   @return [String]
     class ListSearchJobResultsOutput < Struct.new(
+      nil,
       :results,
       :next_token,
       keyword_init: true
@@ -398,6 +415,7 @@ module Aws::BackupSearch
     #   <p>The maximum number of resource list items to be returned.</p>
     #   @return [Integer]
     class ListSearchJobsInput < Struct.new(
+      nil,
       :by_status,
       :next_token,
       :max_results,
@@ -413,6 +431,7 @@ module Aws::BackupSearch
     #   <p>The next item following a partial list of returned backups included in a search job.</p> <p>For example, if a request is made to return <code>MaxResults</code> number of backups, <code>NextToken</code> allows you to return more items in your list starting at the location pointed to by the next token.</p>
     #   @return [String]
     class ListSearchJobsOutput < Struct.new(
+      nil,
       :search_jobs,
       :next_token,
       keyword_init: true
@@ -433,6 +452,7 @@ module Aws::BackupSearch
     #   <p>The maximum number of resource list items to be returned.</p>
     #   @return [Integer]
     class ListSearchResultExportJobsInput < Struct.new(
+      nil,
       :status,
       :search_job_identifier,
       :next_token,
@@ -449,6 +469,7 @@ module Aws::BackupSearch
     #   <p>The next item following a partial list of returned backups included in a search job.</p> <p>For example, if a request is made to return <code>MaxResults</code> number of backups, <code>NextToken</code> allows you to return more items in your list starting at the location pointed to by the next token.</p>
     #   @return [String]
     class ListSearchResultExportJobsOutput < Struct.new(
+      nil,
       :export_jobs,
       :next_token,
       keyword_init: true
@@ -460,6 +481,7 @@ module Aws::BackupSearch
     #   <p>The Amazon Resource Name (ARN) that uniquely identifies the resource.&gt;</p>
     #   @return [String]
     class ListTagsForResourceRequest < Struct.new(
+      nil,
       :resource_arn,
       keyword_init: true
     )
@@ -470,6 +492,7 @@ module Aws::BackupSearch
     #   <p>List of tags returned by the operation.</p>
     #   @return [Hash<String, String>]
     class ListTagsForResourceResponse < Struct.new(
+      nil,
       :tags,
       keyword_init: true
     )
@@ -484,6 +507,7 @@ module Aws::BackupSearch
     #   <p>A string that defines what values will be returned.</p> <p>If this is included, avoid combinations of operators that will return all possible values. For example, including both <code>EQUALS_TO</code> and <code>NOT_EQUALS_TO</code> with a value of <code>4</code> will return all values.</p>
     #   @return [String]
     class LongCondition < Struct.new(
+      nil,
       :value,
       :operator,
       keyword_init: true
@@ -507,6 +531,7 @@ module Aws::BackupSearch
     #   <p>Hypothetical type of the resource affected.</p>
     #   @return [String]
     class ResourceNotFoundException < Struct.new(
+      nil,
       :message,
       :resource_id,
       :resource_type,
@@ -543,6 +568,7 @@ module Aws::BackupSearch
     #   <p>This specifies the prefix for the destination Amazon S3 bucket for the export job.</p>
     #   @return [String]
     class S3ExportSpecification < Struct.new(
+      nil,
       :destination_bucket,
       :destination_prefix,
       keyword_init: true
@@ -567,6 +593,7 @@ module Aws::BackupSearch
     #   <p>You can include 1 to 10 values.</p> <p>If one value is included, the results will return only items that match the value.</p> <p>If more than one value is included, the results will return all items that match any of the values.</p>
     #   @return [Array<Types::StringCondition>]
     class S3ItemFilter < Struct.new(
+      nil,
       :object_keys,
       :sizes,
       :creation_times,
@@ -603,6 +630,7 @@ module Aws::BackupSearch
     #   <p>These are one or more items in the returned results that match values for version IDs input during a search of Amazon S3 backup metadata.</p>
     #   @return [String]
     class S3ResultItem < Struct.new(
+      nil,
       :backup_resource_arn,
       :source_resource_arn,
       :backup_vault_name,
@@ -639,6 +667,7 @@ module Aws::BackupSearch
     #   <p>This is the creation time of the backup (recovery point).</p>
     #   @return [Time]
     class SearchJobBackupsResult < Struct.new(
+      nil,
       :status,
       :status_message,
       :resource_type,
@@ -677,6 +706,7 @@ module Aws::BackupSearch
     #   <p>A status message will be returned for either a earch job with a status of <code>ERRORED</code> or a status of <code>COMPLETED</code> jobs with issues.</p> <p>For example, a message may say that a search contained recovery points unable to be scanned because of a permissions issue.</p>
     #   @return [String]
     class SearchJobSummary < Struct.new(
+      nil,
       :search_job_identifier,
       :search_job_arn,
       :name,
@@ -707,6 +737,7 @@ module Aws::BackupSearch
     #   <p>These are one or more tags on the backup (recovery point).</p>
     #   @return [Hash<String, String>]
     class SearchScope < Struct.new(
+      nil,
       :backup_resource_types,
       :backup_resource_creation_time,
       :source_resource_arns,
@@ -725,6 +756,7 @@ module Aws::BackupSearch
     #   <p>This is the count of the total number of items that will be scanned in a search.</p>
     #   @return [Integer]
     class SearchScopeSummary < Struct.new(
+      nil,
       :total_recovery_points_to_scan_count,
       :total_items_to_scan_count,
       keyword_init: true
@@ -749,6 +781,7 @@ module Aws::BackupSearch
     #   <p>This is the code specific to the quota type.</p>
     #   @return [String]
     class ServiceQuotaExceededException < Struct.new(
+      nil,
       :message,
       :resource_id,
       :resource_type,
@@ -778,6 +811,7 @@ module Aws::BackupSearch
     #   <p>Item Filters represent all input item properties specified when the search was created.</p> <p>Contains either EBSItemFilters or S3ItemFilters</p>
     #   @return [Types::ItemFilters]
     class StartSearchJobInput < Struct.new(
+      nil,
       :tags,
       :name,
       :encryption_key_arn,
@@ -799,6 +833,7 @@ module Aws::BackupSearch
     #   <p>The unique string that specifies the search job.</p>
     #   @return [String]
     class StartSearchJobOutput < Struct.new(
+      nil,
       :search_job_arn,
       :creation_time,
       :search_job_identifier,
@@ -823,6 +858,7 @@ module Aws::BackupSearch
     #   <p>This parameter specifies the role ARN used to start the search results export jobs.</p>
     #   @return [String]
     class StartSearchResultExportJobInput < Struct.new(
+      nil,
       :search_job_identifier,
       :export_specification,
       :client_token,
@@ -840,6 +876,7 @@ module Aws::BackupSearch
     #   <p>This is the unique identifier that specifies the new export job.</p>
     #   @return [String]
     class StartSearchResultExportJobOutput < Struct.new(
+      nil,
       :export_job_arn,
       :export_job_identifier,
       keyword_init: true
@@ -851,6 +888,7 @@ module Aws::BackupSearch
     #   <p>The unique string that specifies the search job.</p>
     #   @return [String]
     class StopSearchJobInput < Struct.new(
+      nil,
       :search_job_identifier,
       keyword_init: true
     )
@@ -858,6 +896,7 @@ module Aws::BackupSearch
     end
 
     class StopSearchJobOutput < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -871,6 +910,7 @@ module Aws::BackupSearch
     #   <p>A string that defines what values will be returned.</p> <p>If this is included, avoid combinations of operators that will return all possible values. For example, including both <code>EQUALS_TO</code> and <code>NOT_EQUALS_TO</code> with a value of <code>4</code> will return all values.</p>
     #   @return [String]
     class StringCondition < Struct.new(
+      nil,
       :value,
       :operator,
       keyword_init: true
@@ -890,6 +930,7 @@ module Aws::BackupSearch
     #   <p>Required tags to include. A tag is a key-value pair you can use to manage, filter, and search for your resources. Allowed characters include UTF-8 letters, numbers, spaces, and the following characters: + - = . _ : /. </p>
     #   @return [Hash<String, String>]
     class TagResourceRequest < Struct.new(
+      nil,
       :resource_arn,
       :tags,
       keyword_init: true
@@ -898,6 +939,7 @@ module Aws::BackupSearch
     end
 
     class TagResourceResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -917,6 +959,7 @@ module Aws::BackupSearch
     #   <p>Retry the call after number of seconds.</p>
     #   @return [Integer]
     class ThrottlingException < Struct.new(
+      nil,
       :message,
       :service_code,
       :quota_code,
@@ -934,6 +977,7 @@ module Aws::BackupSearch
     #   <p>A string that defines what values will be returned.</p> <p>If this is included, avoid combinations of operators that will return all possible values. For example, including both <code>EQUALS_TO</code> and <code>NOT_EQUALS_TO</code> with a value of <code>4</code> will return all values.</p>
     #   @return [String]
     class TimeCondition < Struct.new(
+      nil,
       :value,
       :operator,
       keyword_init: true
@@ -953,6 +997,7 @@ module Aws::BackupSearch
     #   <p>This required parameter contains the tag keys you want to remove from the source.</p>
     #   @return [Array<String>]
     class UntagResourceRequest < Struct.new(
+      nil,
       :resource_arn,
       :tag_keys,
       keyword_init: true
@@ -961,6 +1006,7 @@ module Aws::BackupSearch
     end
 
     class UntagResourceResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -971,6 +1017,7 @@ module Aws::BackupSearch
     #   <p>The input fails to satisfy the constraints specified by an Amazon service.</p>
     #   @return [String]
     class ValidationException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )

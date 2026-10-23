@@ -13,6 +13,7 @@ module Aws::SecurityHub
     #   <p>The identifier of the invitation sent from the Security Hub administrator account.</p>
     #   @return [String]
     class AcceptAdministratorInvitationRequest < Struct.new(
+      nil,
       :administrator_id,
       :invitation_id,
       keyword_init: true
@@ -21,6 +22,7 @@ module Aws::SecurityHub
     end
 
     class AcceptAdministratorInvitationResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -33,6 +35,7 @@ module Aws::SecurityHub
     #   <p>The identifier of the invitation sent from the Security Hub administrator account.</p>
     #   @return [String]
     class AcceptInvitationRequest < Struct.new(
+      nil,
       :master_id,
       :invitation_id,
       keyword_init: true
@@ -41,6 +44,7 @@ module Aws::SecurityHub
     end
 
     class AcceptInvitationResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -52,6 +56,7 @@ module Aws::SecurityHub
     # @!attribute code
     #   @return [String]
     class AccessDeniedException < Struct.new(
+      nil,
       :message,
       :code,
       keyword_init: true
@@ -67,6 +72,7 @@ module Aws::SecurityHub
     #   <p>The email of an Amazon Web Services account.</p>
     #   @return [String]
     class AccountDetails < Struct.new(
+      nil,
       :account_id,
       :email,
       keyword_init: true
@@ -131,6 +137,7 @@ module Aws::SecurityHub
     #            the port probe that was detected. </p>
     #   @return [Types::PortProbeAction]
     class Action < Struct.new(
+      nil,
       :action_type,
       :network_connection_action,
       :aws_api_call_action,
@@ -146,6 +153,7 @@ module Aws::SecurityHub
     #   <p>The IP address.</p>
     #   @return [String]
     class ActionLocalIpDetails < Struct.new(
+      nil,
       :ip_address_v4,
       keyword_init: true
     )
@@ -163,6 +171,7 @@ module Aws::SecurityHub
     #            <p>Length Constraints: 128.</p>
     #   @return [String]
     class ActionLocalPortDetails < Struct.new(
+      nil,
       :port,
       :port_name,
       keyword_init: true
@@ -190,6 +199,7 @@ module Aws::SecurityHub
     #   <p>The coordinates of the location of the remote IP address.</p>
     #   @return [Types::GeoLocation]
     class ActionRemoteIpDetails < Struct.new(
+      nil,
       :ip_address_v4,
       :organization,
       :country,
@@ -210,6 +220,7 @@ module Aws::SecurityHub
     #            <p>Length Constraints: 128.</p>
     #   @return [String]
     class ActionRemotePortDetails < Struct.new(
+      nil,
       :port,
       :port_name,
       keyword_init: true
@@ -228,6 +239,7 @@ module Aws::SecurityHub
     #   <p>The description of the target action.</p>
     #   @return [String]
     class ActionTarget < Struct.new(
+      nil,
       :action_target_arn,
       :name,
       :description,
@@ -254,6 +266,7 @@ module Aws::SecurityHub
     #               Contains information about the user session where the activity initiated.</p>
     #   @return [Types::ActorSession]
     class Actor < Struct.new(
+      nil,
       :id,
       :user,
       :session,
@@ -288,6 +301,7 @@ module Aws::SecurityHub
     #            <p>In CloudTrail, you can find this value as <code>userIdentity.sessionContext.sessionIssuer.arn</code>.</p>
     #   @return [String]
     class ActorSession < Struct.new(
+      nil,
       :uid,
       :mfa_status,
       :created_time,
@@ -327,6 +341,7 @@ module Aws::SecurityHub
     #           </p>
     #   @return [Types::UserAccount]
     class ActorUser < Struct.new(
+      nil,
       :name,
       :uid,
       :type,
@@ -345,6 +360,7 @@ module Aws::SecurityHub
     #   <p>The reason for the adjustment.</p>
     #   @return [String]
     class Adjustment < Struct.new(
+      nil,
       :metric,
       :reason,
       keyword_init: true
@@ -362,6 +378,7 @@ module Aws::SecurityHub
     #            currently enabled as a Security Hub administrator.</p>
     #   @return [String]
     class AdminAccount < Struct.new(
+      nil,
       :account_id,
       :status,
       keyword_init: true
@@ -374,6 +391,7 @@ module Aws::SecurityHub
     #   <p>The ARN of the aggregatorV2.</p>
     #   @return [String]
     class AggregatorV2 < Struct.new(
+      nil,
       :aggregator_v2_arn,
       keyword_init: true
     )
@@ -389,6 +407,7 @@ module Aws::SecurityHub
     #         </p>
     #   @return [String]
     class AssociatedStandard < Struct.new(
+      nil,
       :standards_id,
       keyword_init: true
     )
@@ -416,6 +435,7 @@ module Aws::SecurityHub
     #           </p>
     #   @return [String]
     class AssociationFilters < Struct.new(
+      nil,
       :configuration_policy_id,
       :association_type,
       :association_status,
@@ -458,6 +478,7 @@ module Aws::SecurityHub
     #         </p>
     #   @return [String]
     class AssociationSetDetails < Struct.new(
+      nil,
       :association_state,
       :gateway_id,
       :main,
@@ -483,6 +504,7 @@ module Aws::SecurityHub
     #         </p>
     #   @return [String]
     class AssociationStateDetails < Struct.new(
+      nil,
       :state,
       :status_message,
       keyword_init: true
@@ -505,6 +527,7 @@ module Aws::SecurityHub
     #         </p>
     #   @return [Types::AutomationRulesFindingFieldsUpdate]
     class AutomationRulesAction < Struct.new(
+      nil,
       :type,
       :finding_fields_update,
       keyword_init: true
@@ -517,6 +540,7 @@ module Aws::SecurityHub
     #   <p>The category of action to be executed by the automation rule.</p>
     #   @return [String]
     class AutomationRulesActionTypeObjectV2 < Struct.new(
+      nil,
       :type,
       keyword_init: true
     )
@@ -534,6 +558,7 @@ module Aws::SecurityHub
     #   <p>The settings for integrating automation rule actions with external systems or service.</p>
     #   @return [Types::ExternalIntegrationConfiguration]
     class AutomationRulesActionV2 < Struct.new(
+      nil,
       :type,
       :finding_fields_update,
       :external_integration_configuration,
@@ -610,6 +635,7 @@ module Aws::SecurityHub
     #         </p>
     #   @return [String]
     class AutomationRulesConfig < Struct.new(
+      nil,
       :rule_arn,
       :rule_status,
       :rule_order,
@@ -669,6 +695,7 @@ module Aws::SecurityHub
     #           </p>
     #   @return [Array<Types::RelatedFinding>]
     class AutomationRulesFindingFieldsUpdate < Struct.new(
+      nil,
       :note,
       :severity,
       :verification_state,
@@ -694,6 +721,7 @@ module Aws::SecurityHub
     #   <p>The status to be applied to findings that match automation rule criteria.</p>
     #   @return [Integer]
     class AutomationRulesFindingFieldsUpdateV2 < Struct.new(
+      nil,
       :severity_id,
       :comment,
       :status_id,
@@ -1025,6 +1053,7 @@ module Aws::SecurityHub
     #           </p>
     #   @return [Array<Types::StringFilter>]
     class AutomationRulesFindingFilters < Struct.new(
+      nil,
       :product_arn,
       :aws_account_id,
       :id,
@@ -1126,6 +1155,7 @@ module Aws::SecurityHub
     #         </p>
     #   @return [String]
     class AutomationRulesMetadata < Struct.new(
+      nil,
       :rule_arn,
       :rule_status,
       :rule_order,
@@ -1169,6 +1199,7 @@ module Aws::SecurityHub
     #   <p>The timestamp for the most recent modification to the automation rule.</p>
     #   @return [Time]
     class AutomationRulesMetadataV2 < Struct.new(
+      nil,
       :rule_arn,
       :rule_id,
       :rule_order,
@@ -1191,6 +1222,7 @@ module Aws::SecurityHub
     #   <p>The ID of the subnet. You can specify one subnet per Availability Zone.</p>
     #   @return [String]
     class AvailabilityZone < Struct.new(
+      nil,
       :zone_name,
       :subnet_id,
       keyword_init: true
@@ -1293,6 +1325,7 @@ module Aws::SecurityHub
     #           </p>
     #   @return [Array<Types::AwsAmazonMqBrokerUsersDetails>]
     class AwsAmazonMqBrokerDetails < Struct.new(
+      nil,
       :authentication_strategy,
       :auto_minor_version_upgrade,
       :broker_arn,
@@ -1332,6 +1365,7 @@ module Aws::SecurityHub
     #           </p>
     #   @return [Boolean]
     class AwsAmazonMqBrokerEncryptionOptionsDetails < Struct.new(
+      nil,
       :kms_key_id,
       :use_aws_owned_key,
       keyword_init: true
@@ -1393,6 +1427,7 @@ module Aws::SecurityHub
     #           </p>
     #   @return [Boolean]
     class AwsAmazonMqBrokerLdapServerMetadataDetails < Struct.new(
+      nil,
       :hosts,
       :role_base,
       :role_name,
@@ -1437,6 +1472,7 @@ module Aws::SecurityHub
     #           </p>
     #   @return [Types::AwsAmazonMqBrokerLogsPendingDetails]
     class AwsAmazonMqBrokerLogsDetails < Struct.new(
+      nil,
       :audit,
       :general,
       :audit_log_group,
@@ -1462,6 +1498,7 @@ module Aws::SecurityHub
     #           </p>
     #   @return [Boolean]
     class AwsAmazonMqBrokerLogsPendingDetails < Struct.new(
+      nil,
       :audit,
       :general,
       keyword_init: true
@@ -1488,6 +1525,7 @@ module Aws::SecurityHub
     #           </p>
     #   @return [String]
     class AwsAmazonMqBrokerMaintenanceWindowStartTimeDetails < Struct.new(
+      nil,
       :day_of_week,
       :time_of_day,
       :time_zone,
@@ -1510,6 +1548,7 @@ module Aws::SecurityHub
     #           </p>
     #   @return [String]
     class AwsAmazonMqBrokerUsersDetails < Struct.new(
+      nil,
       :pending_change,
       :username,
       keyword_init: true
@@ -1553,6 +1592,7 @@ module Aws::SecurityHub
     #            <p>For more information about the validation and formatting of timestamp fields in Security Hub, see <a href="https://docs.aws.amazon.com/securityhub/1.0/APIReference/Welcome.html#timestamps">Timestamps</a>.</p>
     #   @return [String]
     class AwsApiCallAction < Struct.new(
+      nil,
       :api,
       :service_name,
       :caller_type,
@@ -1573,6 +1613,7 @@ module Aws::SecurityHub
     #            <p>Length Constraints: 128.</p>
     #   @return [String]
     class AwsApiCallActionDomainDetails < Struct.new(
+      nil,
       :domain,
       keyword_init: true
     )
@@ -1589,6 +1630,7 @@ module Aws::SecurityHub
     #   <p>The ARN of the CloudWatch Logs log group that receives the access logs.</p>
     #   @return [String]
     class AwsApiGatewayAccessLogSettings < Struct.new(
+      nil,
       :format,
       :destination_arn,
       keyword_init: true
@@ -1613,6 +1655,7 @@ module Aws::SecurityHub
     #   <p>Indicates whether the canary deployment uses the stage cache.</p>
     #   @return [Boolean]
     class AwsApiGatewayCanarySettings < Struct.new(
+      nil,
       :percent_traffic,
       :deployment_id,
       :stage_variable_overrides,
@@ -1630,6 +1673,7 @@ module Aws::SecurityHub
     #               <code>PRIVATE</code>.</p>
     #   @return [Array<String>]
     class AwsApiGatewayEndpointConfiguration < Struct.new(
+      nil,
       :types,
       keyword_init: true
     )
@@ -1693,6 +1737,7 @@ module Aws::SecurityHub
     #            wildcard to apply method settings to multiple methods.</p>
     #   @return [String]
     class AwsApiGatewayMethodSettings < Struct.new(
+      nil,
       :metrics_enabled,
       :logging_level,
       :data_trace_enabled,
@@ -1748,6 +1793,7 @@ module Aws::SecurityHub
     #   <p>The endpoint configuration of the REST API.</p>
     #   @return [Types::AwsApiGatewayEndpointConfiguration]
     class AwsApiGatewayRestApiDetails < Struct.new(
+      nil,
       :id,
       :name,
       :description,
@@ -1827,6 +1873,7 @@ module Aws::SecurityHub
     #   <p>The ARN of the web ACL associated with the stage.</p>
     #   @return [String]
     class AwsApiGatewayStageDetails < Struct.new(
+      nil,
       :deployment_id,
       :client_certificate_id,
       :stage_name,
@@ -1893,6 +1940,7 @@ module Aws::SecurityHub
     #            APIs.</p>
     #   @return [Types::AwsCorsConfiguration]
     class AwsApiGatewayV2ApiDetails < Struct.new(
+      nil,
       :api_endpoint,
       :api_id,
       :api_key_selection_expression,
@@ -1933,6 +1981,7 @@ module Aws::SecurityHub
     #   <p>The throttling rate limit.</p>
     #   @return [Float]
     class AwsApiGatewayV2RouteSettings < Struct.new(
+      nil,
       :detailed_metrics_enabled,
       :logging_level,
       :data_trace_enabled,
@@ -2000,6 +2049,7 @@ module Aws::SecurityHub
     #   <p>Indicates whether the stage is managed by API Gateway.</p>
     #   @return [Boolean]
     class AwsApiGatewayV2StageDetails < Struct.new(
+      nil,
       :client_certificate_id,
       :created_date,
       :description,
@@ -2042,6 +2092,7 @@ module Aws::SecurityHub
     #           </p>
     #   @return [Types::AwsAppSyncGraphQlApiUserPoolConfigDetails]
     class AwsAppSyncGraphQlApiAdditionalAuthenticationProvidersDetails < Struct.new(
+      nil,
       :authentication_type,
       :lambda_authorizer_config,
       :open_id_connect_config,
@@ -2114,6 +2165,7 @@ module Aws::SecurityHub
     #           </p>
     #   @return [String]
     class AwsAppSyncGraphQlApiDetails < Struct.new(
+      nil,
       :api_id,
       :id,
       :open_id_connect_config,
@@ -2152,6 +2204,7 @@ module Aws::SecurityHub
     #           </p>
     #   @return [String]
     class AwsAppSyncGraphQlApiLambdaAuthorizerConfigDetails < Struct.new(
+      nil,
       :authorizer_result_ttl_in_seconds,
       :authorizer_uri,
       :identity_validation_expression,
@@ -2182,6 +2235,7 @@ module Aws::SecurityHub
     #           </p>
     #   @return [String]
     class AwsAppSyncGraphQlApiLogConfigDetails < Struct.new(
+      nil,
       :cloud_watch_logs_role_arn,
       :exclude_verbose_content,
       :field_log_level,
@@ -2218,6 +2272,7 @@ module Aws::SecurityHub
     #           </p>
     #   @return [String]
     class AwsAppSyncGraphQlApiOpenIdConnectConfigDetails < Struct.new(
+      nil,
       :auth_tt_l,
       :client_id,
       :iat_tt_l,
@@ -2254,6 +2309,7 @@ module Aws::SecurityHub
     #           </p>
     #   @return [String]
     class AwsAppSyncGraphQlApiUserPoolConfigDetails < Struct.new(
+      nil,
       :app_id_client_regex,
       :aws_region,
       :default_action,
@@ -2276,6 +2332,7 @@ module Aws::SecurityHub
     #               workgroup settings override client-side settings, then the query uses the workgroup settings.</p>
     #   @return [Types::AwsAthenaWorkGroupConfigurationResultConfigurationDetails]
     class AwsAthenaWorkGroupConfigurationDetails < Struct.new(
+      nil,
       :result_configuration,
       keyword_init: true
     )
@@ -2293,6 +2350,7 @@ module Aws::SecurityHub
     #           </p>
     #   @return [Types::AwsAthenaWorkGroupConfigurationResultConfigurationEncryptionConfigurationDetails]
     class AwsAthenaWorkGroupConfigurationResultConfigurationDetails < Struct.new(
+      nil,
       :encryption_configuration,
       keyword_init: true
     )
@@ -2315,6 +2373,7 @@ module Aws::SecurityHub
     #           </p>
     #   @return [String]
     class AwsAthenaWorkGroupConfigurationResultConfigurationEncryptionConfigurationDetails < Struct.new(
+      nil,
       :encryption_option,
       :kms_key,
       keyword_init: true
@@ -2349,6 +2408,7 @@ module Aws::SecurityHub
     #           </p>
     #   @return [Types::AwsAthenaWorkGroupConfigurationDetails]
     class AwsAthenaWorkGroupDetails < Struct.new(
+      nil,
       :name,
       :description,
       :state,
@@ -2363,6 +2423,7 @@ module Aws::SecurityHub
     #   <p>The name of the Availability Zone.</p>
     #   @return [String]
     class AwsAutoScalingAutoScalingGroupAvailabilityZonesListDetails < Struct.new(
+      nil,
       :value,
       keyword_init: true
     )
@@ -2401,6 +2462,7 @@ module Aws::SecurityHub
     #         </p>
     #   @return [Boolean]
     class AwsAutoScalingAutoScalingGroupDetails < Struct.new(
+      nil,
       :launch_configuration_name,
       :load_balancer_names,
       :health_check_type,
@@ -2426,6 +2488,7 @@ module Aws::SecurityHub
     #   <p>Identifies the version of the launch template. You can specify a version identifier, or use the values <code>$Latest</code> or <code>$Default</code>.</p>
     #   @return [String]
     class AwsAutoScalingAutoScalingGroupLaunchTemplateLaunchTemplateSpecification < Struct.new(
+      nil,
       :launch_template_id,
       :launch_template_name,
       :version,
@@ -2442,6 +2505,7 @@ module Aws::SecurityHub
     #   <p>The launch template to use and the instance types (overrides) to use to provision EC2 instances to fulfill On-Demand and Spot capacities.</p>
     #   @return [Types::AwsAutoScalingAutoScalingGroupMixedInstancesPolicyLaunchTemplateDetails]
     class AwsAutoScalingAutoScalingGroupMixedInstancesPolicyDetails < Struct.new(
+      nil,
       :instances_distribution,
       :launch_template,
       keyword_init: true
@@ -2486,6 +2550,7 @@ module Aws::SecurityHub
     #   <p>The maximum price per unit hour that you are willing to pay for a Spot Instance.</p>
     #   @return [String]
     class AwsAutoScalingAutoScalingGroupMixedInstancesPolicyInstancesDistributionDetails < Struct.new(
+      nil,
       :on_demand_allocation_strategy,
       :on_demand_base_capacity,
       :on_demand_percentage_above_base_capacity,
@@ -2505,6 +2570,7 @@ module Aws::SecurityHub
     #   <p>Property values to use to override the values in the launch template.</p>
     #   @return [Array<Types::AwsAutoScalingAutoScalingGroupMixedInstancesPolicyLaunchTemplateOverridesListDetails>]
     class AwsAutoScalingAutoScalingGroupMixedInstancesPolicyLaunchTemplateDetails < Struct.new(
+      nil,
       :launch_template_specification,
       :overrides,
       keyword_init: true
@@ -2523,6 +2589,7 @@ module Aws::SecurityHub
     #   <p>Identifies the version of the launch template. You can specify a version identifier, or use the values <code>$Latest</code> or <code>$Default</code>.</p>
     #   @return [String]
     class AwsAutoScalingAutoScalingGroupMixedInstancesPolicyLaunchTemplateLaunchTemplateSpecification < Struct.new(
+      nil,
       :launch_template_id,
       :launch_template_name,
       :version,
@@ -2539,6 +2606,7 @@ module Aws::SecurityHub
     #   <p>The number of capacity units provided by the specified instance type in terms of virtual CPUs, memory, storage, throughput, or other relative performance characteristic.</p>
     #   @return [String]
     class AwsAutoScalingAutoScalingGroupMixedInstancesPolicyLaunchTemplateOverridesListDetails < Struct.new(
+      nil,
       :instance_type,
       :weighted_capacity,
       keyword_init: true
@@ -2562,6 +2630,7 @@ module Aws::SecurityHub
     #            <p>You can provide either <code>VirtualName</code> or <code>Ebs</code>, but not both.</p>
     #   @return [String]
     class AwsAutoScalingLaunchConfigurationBlockDeviceMappingsDetails < Struct.new(
+      nil,
       :device_name,
       :ebs,
       :no_device,
@@ -2640,6 +2709,7 @@ module Aws::SecurityHub
     #            </ul>
     #   @return [String]
     class AwsAutoScalingLaunchConfigurationBlockDeviceMappingsEbsDetails < Struct.new(
+      nil,
       :delete_on_termination,
       :encrypted,
       :iops,
@@ -2716,6 +2786,7 @@ module Aws::SecurityHub
     #   <p>The metadata options for the instances.</p>
     #   @return [Types::AwsAutoScalingLaunchConfigurationMetadataOptions]
     class AwsAutoScalingLaunchConfigurationDetails < Struct.new(
+      nil,
       :associate_public_ip_address,
       :block_device_mappings,
       :classic_link_vpc_id,
@@ -2748,6 +2819,7 @@ module Aws::SecurityHub
     #            monitoring.</p>
     #   @return [Boolean]
     class AwsAutoScalingLaunchConfigurationInstanceMonitoringDetails < Struct.new(
+      nil,
       :enabled,
       keyword_init: true
     )
@@ -2765,6 +2837,7 @@ module Aws::SecurityHub
     #   <p>Indicates whether token usage is <code>required</code> or <code>optional</code> for metadata requests. By default, token usage is <code>optional</code>.</p>
     #   @return [String]
     class AwsAutoScalingLaunchConfigurationMetadataOptions < Struct.new(
+      nil,
       :http_endpoint,
       :http_put_response_hop_limit,
       :http_tokens,
@@ -2792,6 +2865,7 @@ module Aws::SecurityHub
     #            <p>The only valid value is <code>EC2</code>.</p>
     #   @return [String]
     class AwsBackupBackupPlanAdvancedBackupSettingsDetails < Struct.new(
+      nil,
       :backup_options,
       :resource_type,
       keyword_init: true
@@ -2814,6 +2888,7 @@ module Aws::SecurityHub
     #         </p>
     #   @return [Array<Types::AwsBackupBackupPlanRuleDetails>]
     class AwsBackupBackupPlanBackupPlanDetails < Struct.new(
+      nil,
       :backup_plan_name,
       :advanced_backup_settings,
       :backup_plan_rule,
@@ -2841,6 +2916,7 @@ module Aws::SecurityHub
     #         </p>
     #   @return [String]
     class AwsBackupBackupPlanDetails < Struct.new(
+      nil,
       :backup_plan,
       :backup_plan_arn,
       :backup_plan_id,
@@ -2861,6 +2937,7 @@ module Aws::SecurityHub
     #         </p>
     #   @return [Integer]
     class AwsBackupBackupPlanLifecycleDetails < Struct.new(
+      nil,
       :delete_after_days,
       :move_to_cold_storage_after_days,
       keyword_init: true
@@ -2882,6 +2959,7 @@ module Aws::SecurityHub
     #            <p>Backups transitioned to cold storage must be stored in cold storage for a minimum of 90 days.</p>
     #   @return [Types::AwsBackupBackupPlanLifecycleDetails]
     class AwsBackupBackupPlanRuleCopyActionsDetails < Struct.new(
+      nil,
       :destination_backup_vault_arn,
       :lifecycle,
       keyword_init: true
@@ -2927,6 +3005,7 @@ module Aws::SecurityHub
     #            <p>Backups transitioned to cold storage must be stored in cold storage for a minimum of 90 days.</p>
     #   @return [Types::AwsBackupBackupPlanLifecycleDetails]
     class AwsBackupBackupPlanRuleDetails < Struct.new(
+      nil,
       :target_backup_vault,
       :start_window_minutes,
       :schedule_expression,
@@ -2968,6 +3047,7 @@ module Aws::SecurityHub
     #         </p>
     #   @return [String]
     class AwsBackupBackupVaultDetails < Struct.new(
+      nil,
       :backup_vault_arn,
       :backup_vault_name,
       :encryption_key_arn,
@@ -3011,6 +3091,7 @@ module Aws::SecurityHub
     #            a backup vault's events. </p>
     #   @return [String]
     class AwsBackupBackupVaultNotificationsDetails < Struct.new(
+      nil,
       :backup_vault_events,
       :sns_topic_arn,
       keyword_init: true
@@ -3030,6 +3111,7 @@ module Aws::SecurityHub
     #         </p>
     #   @return [String]
     class AwsBackupRecoveryPointCalculatedLifecycleDetails < Struct.new(
+      nil,
       :delete_at,
       :move_to_cold_storage_at,
       keyword_init: true
@@ -3057,6 +3139,7 @@ module Aws::SecurityHub
     #         </p>
     #   @return [String]
     class AwsBackupRecoveryPointCreatedByDetails < Struct.new(
+      nil,
       :backup_plan_arn,
       :backup_plan_id,
       :backup_plan_version,
@@ -3196,6 +3279,7 @@ module Aws::SecurityHub
     #            </ul>
     #   @return [String]
     class AwsBackupRecoveryPointDetails < Struct.new(
+      nil,
       :backup_size_in_bytes,
       :backup_vault_arn,
       :backup_vault_name,
@@ -3232,6 +3316,7 @@ module Aws::SecurityHub
     #         </p>
     #   @return [Integer]
     class AwsBackupRecoveryPointLifecycleDetails < Struct.new(
+      nil,
       :delete_after_days,
       :move_to_cold_storage_after_days,
       keyword_init: true
@@ -3354,6 +3439,7 @@ module Aws::SecurityHub
     #            </p>
     #   @return [String]
     class AwsCertificateManagerCertificateDetails < Struct.new(
+      nil,
       :certificate_authority_arn,
       :created_at,
       :domain_name,
@@ -3413,6 +3499,7 @@ module Aws::SecurityHub
     #   <p>The validation status of the domain name.</p>
     #   @return [String]
     class AwsCertificateManagerCertificateDomainValidationOption < Struct.new(
+      nil,
       :domain_name,
       :resource_record,
       :validation_domain,
@@ -3434,6 +3521,7 @@ module Aws::SecurityHub
     #            <p>The format is numbers separated by periods.</p>
     #   @return [String]
     class AwsCertificateManagerCertificateExtendedKeyUsage < Struct.new(
+      nil,
       :name,
       :o_id,
       keyword_init: true
@@ -3446,6 +3534,7 @@ module Aws::SecurityHub
     #   <p>The key usage extension name.</p>
     #   @return [String]
     class AwsCertificateManagerCertificateKeyUsage < Struct.new(
+      nil,
       :name,
       keyword_init: true
     )
@@ -3459,6 +3548,7 @@ module Aws::SecurityHub
     #            </p>
     #   @return [String]
     class AwsCertificateManagerCertificateOptions < Struct.new(
+      nil,
       :certificate_transparency_logging_preference,
       keyword_init: true
     )
@@ -3495,6 +3585,7 @@ module Aws::SecurityHub
     #            <p>For more information about the validation and formatting of timestamp fields in Security Hub, see <a href="https://docs.aws.amazon.com/securityhub/1.0/APIReference/Welcome.html#timestamps">Timestamps</a>.</p>
     #   @return [String]
     class AwsCertificateManagerCertificateRenewalSummary < Struct.new(
+      nil,
       :domain_validation_options,
       :renewal_status,
       :renewal_status_reason,
@@ -3516,6 +3607,7 @@ module Aws::SecurityHub
     #   <p>The value of the resource.</p>
     #   @return [String]
     class AwsCertificateManagerCertificateResourceRecord < Struct.new(
+      nil,
       :name,
       :type,
       :value,
@@ -3588,6 +3680,7 @@ module Aws::SecurityHub
     #         </p>
     #   @return [Integer]
     class AwsCloudFormationStackDetails < Struct.new(
+      nil,
       :capabilities,
       :creation_time,
       :description,
@@ -3615,6 +3708,7 @@ module Aws::SecurityHub
     #         </p>
     #   @return [String]
     class AwsCloudFormationStackDriftInformationDetails < Struct.new(
+      nil,
       :stack_drift_status,
       keyword_init: true
     )
@@ -3636,6 +3730,7 @@ module Aws::SecurityHub
     #         </p>
     #   @return [String]
     class AwsCloudFormationStackOutputsDetails < Struct.new(
+      nil,
       :description,
       :output_key,
       :output_value,
@@ -3667,6 +3762,7 @@ module Aws::SecurityHub
     #            </ul>
     #   @return [String]
     class AwsCloudFrontDistributionCacheBehavior < Struct.new(
+      nil,
       :viewer_protocol_policy,
       keyword_init: true
     )
@@ -3678,6 +3774,7 @@ module Aws::SecurityHub
     #   <p>The cache behaviors for the distribution.</p>
     #   @return [Array<Types::AwsCloudFrontDistributionCacheBehavior>]
     class AwsCloudFrontDistributionCacheBehaviors < Struct.new(
+      nil,
       :items,
       keyword_init: true
     )
@@ -3707,6 +3804,7 @@ module Aws::SecurityHub
     #            </ul>
     #   @return [String]
     class AwsCloudFrontDistributionDefaultCacheBehavior < Struct.new(
+      nil,
       :viewer_protocol_policy,
       keyword_init: true
     )
@@ -3755,6 +3853,7 @@ module Aws::SecurityHub
     #   <p>A unique identifier that specifies the WAF web ACL, if any, to associate with this distribution.</p>
     #   @return [String]
     class AwsCloudFrontDistributionDetails < Struct.new(
+      nil,
       :cache_behaviors,
       :default_cache_behavior,
       :default_root_object,
@@ -3787,6 +3886,7 @@ module Aws::SecurityHub
     #            filenames for this distribution.</p>
     #   @return [String]
     class AwsCloudFrontDistributionLogging < Struct.new(
+      nil,
       :bucket,
       :enabled,
       :include_cookies,
@@ -3823,6 +3923,7 @@ module Aws::SecurityHub
     #         </p>
     #   @return [Types::AwsCloudFrontDistributionOriginSslProtocols]
     class AwsCloudFrontDistributionOriginCustomOriginConfig < Struct.new(
+      nil,
       :http_port,
       :https_port,
       :origin_keepalive_timeout,
@@ -3839,6 +3940,7 @@ module Aws::SecurityHub
     #   <p>Provides the criteria for an origin group to fail over.</p>
     #   @return [Types::AwsCloudFrontDistributionOriginGroupFailover]
     class AwsCloudFrontDistributionOriginGroup < Struct.new(
+      nil,
       :failover_criteria,
       keyword_init: true
     )
@@ -3850,6 +3952,7 @@ module Aws::SecurityHub
     #   <p>Information about the status codes that cause an origin group to fail over.</p>
     #   @return [Types::AwsCloudFrontDistributionOriginGroupFailoverStatusCodes]
     class AwsCloudFrontDistributionOriginGroupFailover < Struct.new(
+      nil,
       :status_codes,
       keyword_init: true
     )
@@ -3864,6 +3967,7 @@ module Aws::SecurityHub
     #   <p>The number of status codes that can cause a failover.</p>
     #   @return [Integer]
     class AwsCloudFrontDistributionOriginGroupFailoverStatusCodes < Struct.new(
+      nil,
       :items,
       :quantity,
       keyword_init: true
@@ -3876,6 +3980,7 @@ module Aws::SecurityHub
     #   <p>The list of origin groups.</p>
     #   @return [Array<Types::AwsCloudFrontDistributionOriginGroup>]
     class AwsCloudFrontDistributionOriginGroups < Struct.new(
+      nil,
       :items,
       keyword_init: true
     )
@@ -3906,6 +4011,7 @@ module Aws::SecurityHub
     #         </p>
     #   @return [Types::AwsCloudFrontDistributionOriginCustomOriginConfig]
     class AwsCloudFrontDistributionOriginItem < Struct.new(
+      nil,
       :domain_name,
       :id,
       :origin_path,
@@ -3922,6 +4028,7 @@ module Aws::SecurityHub
     #   <p>The CloudFront origin access identity to associate with the origin.</p>
     #   @return [String]
     class AwsCloudFrontDistributionOriginS3OriginConfig < Struct.new(
+      nil,
       :origin_access_identity,
       keyword_init: true
     )
@@ -3941,6 +4048,7 @@ module Aws::SecurityHub
     #         </p>
     #   @return [Integer]
     class AwsCloudFrontDistributionOriginSslProtocols < Struct.new(
+      nil,
       :items,
       :quantity,
       keyword_init: true
@@ -3953,6 +4061,7 @@ module Aws::SecurityHub
     #   <p>A complex type that contains origins or origin groups for this distribution.</p>
     #   @return [Array<Types::AwsCloudFrontDistributionOriginItem>]
     class AwsCloudFrontDistributionOrigins < Struct.new(
+      nil,
       :items,
       keyword_init: true
     )
@@ -3982,6 +4091,7 @@ module Aws::SecurityHub
     #   <p>The viewers that the distribution accepts HTTPS connections from.</p>
     #   @return [String]
     class AwsCloudFrontDistributionViewerCertificate < Struct.new(
+      nil,
       :acm_certificate_arn,
       :certificate,
       :certificate_source,
@@ -4045,6 +4155,7 @@ module Aws::SecurityHub
     #   <p>The ARN of the trail.</p>
     #   @return [String]
     class AwsCloudTrailTrailDetails < Struct.new(
+      nil,
       :cloud_watch_logs_log_group_arn,
       :cloud_watch_logs_role_arn,
       :has_custom_event_selectors,
@@ -4167,6 +4278,7 @@ module Aws::SecurityHub
     #         </p>
     #   @return [String]
     class AwsCloudWatchAlarmDetails < Struct.new(
+      nil,
       :actions_enabled,
       :alarm_actions,
       :alarm_arn,
@@ -4205,6 +4317,7 @@ module Aws::SecurityHub
     #         </p>
     #   @return [String]
     class AwsCloudWatchAlarmDimensionsDetails < Struct.new(
+      nil,
       :name,
       :value,
       keyword_init: true
@@ -4241,6 +4354,7 @@ module Aws::SecurityHub
     #   <p>The type of build artifact.</p>
     #   @return [String]
     class AwsCodeBuildProjectArtifactsDetails < Struct.new(
+      nil,
       :artifact_identifier,
       :encryption_disabled,
       :location,
@@ -4288,6 +4402,7 @@ module Aws::SecurityHub
     #   <p>Information about the secondary artifacts for the CodeBuild project.</p>
     #   @return [Array<Types::AwsCodeBuildProjectArtifactsDetails>]
     class AwsCodeBuildProjectDetails < Struct.new(
+      nil,
       :encryption_key,
       :artifacts,
       :environment,
@@ -4355,6 +4470,7 @@ module Aws::SecurityHub
     #            </p>
     #   @return [String]
     class AwsCodeBuildProjectEnvironment < Struct.new(
+      nil,
       :certificate,
       :environment_variables,
       :privileged_mode,
@@ -4377,6 +4493,7 @@ module Aws::SecurityHub
     #   <p>The value of the environment variable.</p>
     #   @return [String]
     class AwsCodeBuildProjectEnvironmentEnvironmentVariablesDetails < Struct.new(
+      nil,
       :name,
       :type,
       :value,
@@ -4398,6 +4515,7 @@ module Aws::SecurityHub
     #            <p>The valid value,<code> SECRETS_MANAGER</code>, is for Secrets Manager.</p>
     #   @return [String]
     class AwsCodeBuildProjectEnvironmentRegistryCredential < Struct.new(
+      nil,
       :credential,
       :credential_provider,
       keyword_init: true
@@ -4416,6 +4534,7 @@ module Aws::SecurityHub
     #   <p>The prefix of the stream name of the CloudWatch Logs.</p>
     #   @return [String]
     class AwsCodeBuildProjectLogsConfigCloudWatchLogsDetails < Struct.new(
+      nil,
       :group_name,
       :status,
       :stream_name,
@@ -4432,6 +4551,7 @@ module Aws::SecurityHub
     #   <p>Information about logs built to an S3 bucket for a build project.</p>
     #   @return [Types::AwsCodeBuildProjectLogsConfigS3LogsDetails]
     class AwsCodeBuildProjectLogsConfigDetails < Struct.new(
+      nil,
       :cloud_watch_logs,
       :s3_logs,
       keyword_init: true
@@ -4450,6 +4570,7 @@ module Aws::SecurityHub
     #   <p>The current status of the S3 build logs.</p>
     #   @return [String]
     class AwsCodeBuildProjectLogsConfigS3LogsDetails < Struct.new(
+      nil,
       :encryption_disabled,
       :location,
       :status,
@@ -4541,6 +4662,7 @@ module Aws::SecurityHub
     #   <p>Whether to ignore SSL warnings while connecting to the project source code.</p>
     #   @return [Boolean]
     class AwsCodeBuildProjectSource < Struct.new(
+      nil,
       :type,
       :location,
       :git_clone_depth,
@@ -4561,6 +4683,7 @@ module Aws::SecurityHub
     #   <p>A list of one or more security group IDs in your VPC.</p>
     #   @return [Array<String>]
     class AwsCodeBuildProjectVpcConfig < Struct.new(
+      nil,
       :vpc_id,
       :subnets,
       :security_group_ids,
@@ -4590,6 +4713,7 @@ module Aws::SecurityHub
     #   <p>The allowed headers for CORS requests.</p>
     #   @return [Array<String>]
     class AwsCorsConfiguration < Struct.new(
+      nil,
       :allow_origins,
       :allow_credentials,
       :expose_headers,
@@ -4671,6 +4795,7 @@ module Aws::SecurityHub
     #           </p>
     #   @return [String]
     class AwsDmsEndpointDetails < Struct.new(
+      nil,
       :certificate_arn,
       :database_name,
       :endpoint_arn,
@@ -4755,6 +4880,7 @@ module Aws::SecurityHub
     #               The virtual private cloud (VPC) security group for the replication instance.</p>
     #   @return [Array<Types::AwsDmsReplicationInstanceVpcSecurityGroupsDetails>]
     class AwsDmsReplicationInstanceDetails < Struct.new(
+      nil,
       :allocated_storage,
       :auto_minor_version_upgrade,
       :availability_zone,
@@ -4780,6 +4906,7 @@ module Aws::SecurityHub
     #           </p>
     #   @return [String]
     class AwsDmsReplicationInstanceReplicationSubnetGroupDetails < Struct.new(
+      nil,
       :replication_subnet_group_identifier,
       keyword_init: true
     )
@@ -4794,6 +4921,7 @@ module Aws::SecurityHub
     #           </p>
     #   @return [String]
     class AwsDmsReplicationInstanceVpcSecurityGroupsDetails < Struct.new(
+      nil,
       :vpc_security_group_id,
       keyword_init: true
     )
@@ -4863,6 +4991,7 @@ module Aws::SecurityHub
     #               Supplemental information that the task requires to migrate the data for certain source and target endpoints.</p>
     #   @return [String]
     class AwsDmsReplicationTaskDetails < Struct.new(
+      nil,
       :cdc_start_position,
       :cdc_start_time,
       :cdc_stop_position,
@@ -4889,6 +5018,7 @@ module Aws::SecurityHub
     #   <p>The type of the attribute.</p>
     #   @return [String]
     class AwsDynamoDbTableAttributeDefinition < Struct.new(
+      nil,
       :attribute_name,
       :attribute_type,
       keyword_init: true
@@ -4906,6 +5036,7 @@ module Aws::SecurityHub
     #            <p>For more information about the validation and formatting of timestamp fields in Security Hub, see <a href="https://docs.aws.amazon.com/securityhub/1.0/APIReference/Welcome.html#timestamps">Timestamps</a>.</p>
     #   @return [String]
     class AwsDynamoDbTableBillingModeSummary < Struct.new(
+      nil,
       :billing_mode,
       :last_update_to_pay_per_request_date_time,
       keyword_init: true
@@ -5015,6 +5146,7 @@ module Aws::SecurityHub
     #           </p>
     #   @return [Boolean]
     class AwsDynamoDbTableDetails < Struct.new(
+      nil,
       :attribute_definitions,
       :billing_mode_summary,
       :creation_date_time,
@@ -5091,6 +5223,7 @@ module Aws::SecurityHub
     #   <p>Information about the provisioned throughput settings for the indexes.</p>
     #   @return [Types::AwsDynamoDbTableProvisionedThroughput]
     class AwsDynamoDbTableGlobalSecondaryIndex < Struct.new(
+      nil,
       :backfilling,
       :index_arn,
       :index_name,
@@ -5114,6 +5247,7 @@ module Aws::SecurityHub
     #   <p>The type of key used for the key schema attribute. Valid values are <code>HASH</code> or <code>RANGE</code>.</p>
     #   @return [String]
     class AwsDynamoDbTableKeySchema < Struct.new(
+      nil,
       :attribute_name,
       :key_type,
       keyword_init: true
@@ -5136,6 +5270,7 @@ module Aws::SecurityHub
     #            primary key attributes and index key attributes, which are automatically projected.</p>
     #   @return [Types::AwsDynamoDbTableProjection]
     class AwsDynamoDbTableLocalSecondaryIndex < Struct.new(
+      nil,
       :index_arn,
       :index_name,
       :key_schema,
@@ -5172,6 +5307,7 @@ module Aws::SecurityHub
     #            </ul>
     #   @return [String]
     class AwsDynamoDbTableProjection < Struct.new(
+      nil,
       :non_key_attributes,
       :projection_type,
       keyword_init: true
@@ -5202,6 +5338,7 @@ module Aws::SecurityHub
     #               <code>ThrottlingException</code>.</p>
     #   @return [Integer]
     class AwsDynamoDbTableProvisionedThroughput < Struct.new(
+      nil,
       :last_decrease_date_time,
       :last_increase_date_time,
       :number_of_decreases_today,
@@ -5217,6 +5354,7 @@ module Aws::SecurityHub
     #   <p>The read capacity units for the replica.</p>
     #   @return [Integer]
     class AwsDynamoDbTableProvisionedThroughputOverride < Struct.new(
+      nil,
       :read_capacity_units,
       keyword_init: true
     )
@@ -5271,6 +5409,7 @@ module Aws::SecurityHub
     #   <p>Detailed information about the replica status.</p>
     #   @return [String]
     class AwsDynamoDbTableReplica < Struct.new(
+      nil,
       :global_secondary_indexes,
       :kms_master_key_id,
       :provisioned_throughput_override,
@@ -5290,6 +5429,7 @@ module Aws::SecurityHub
     #   <p>Replica-specific configuration for the provisioned throughput for the index.</p>
     #   @return [Types::AwsDynamoDbTableProvisionedThroughputOverride]
     class AwsDynamoDbTableReplicaGlobalSecondaryIndex < Struct.new(
+      nil,
       :index_name,
       :provisioned_throughput_override,
       keyword_init: true
@@ -5312,6 +5452,7 @@ module Aws::SecurityHub
     #   <p>Whether a restore is currently in progress.</p>
     #   @return [Boolean]
     class AwsDynamoDbTableRestoreSummary < Struct.new(
+      nil,
       :source_backup_arn,
       :source_table_arn,
       :restore_date_time,
@@ -5338,6 +5479,7 @@ module Aws::SecurityHub
     #            encryption.</p>
     #   @return [String]
     class AwsDynamoDbTableSseDescription < Struct.new(
+      nil,
       :inaccessible_encryption_date_time,
       :status,
       :sse_type,
@@ -5355,6 +5497,7 @@ module Aws::SecurityHub
     #   <p>Determines the information that is written to the table.</p>
     #   @return [String]
     class AwsDynamoDbTableStreamSpecification < Struct.new(
+      nil,
       :stream_enabled,
       :stream_view_type,
       keyword_init: true
@@ -5371,6 +5514,7 @@ module Aws::SecurityHub
     #           </p>
     #   @return [String]
     class AwsEc2ClientVpnEndpointAuthenticationOptionsActiveDirectoryDetails < Struct.new(
+      nil,
       :directory_id,
       keyword_init: true
     )
@@ -5400,6 +5544,7 @@ module Aws::SecurityHub
     #               Information about the IAM SAML identity provider, if applicable.</p>
     #   @return [Types::AwsEc2ClientVpnEndpointAuthenticationOptionsFederatedAuthenticationDetails]
     class AwsEc2ClientVpnEndpointAuthenticationOptionsDetails < Struct.new(
+      nil,
       :type,
       :active_directory,
       :mutual_authentication,
@@ -5423,6 +5568,7 @@ module Aws::SecurityHub
     #           </p>
     #   @return [String]
     class AwsEc2ClientVpnEndpointAuthenticationOptionsFederatedAuthenticationDetails < Struct.new(
+      nil,
       :saml_provider_arn,
       :self_service_saml_provider_arn,
       keyword_init: true
@@ -5439,6 +5585,7 @@ module Aws::SecurityHub
     #           </p>
     #   @return [String]
     class AwsEc2ClientVpnEndpointAuthenticationOptionsMutualAuthenticationDetails < Struct.new(
+      nil,
       :client_root_certificate_chain,
       keyword_init: true
     )
@@ -5464,6 +5611,7 @@ module Aws::SecurityHub
     #           </p>
     #   @return [Types::AwsEc2ClientVpnEndpointClientConnectOptionsStatusDetails]
     class AwsEc2ClientVpnEndpointClientConnectOptionsDetails < Struct.new(
+      nil,
       :enabled,
       :lambda_function_arn,
       :status,
@@ -5486,6 +5634,7 @@ module Aws::SecurityHub
     #           </p>
     #   @return [String]
     class AwsEc2ClientVpnEndpointClientConnectOptionsStatusDetails < Struct.new(
+      nil,
       :code,
       :message,
       keyword_init: true
@@ -5509,6 +5658,7 @@ module Aws::SecurityHub
     #           </p>
     #   @return [String]
     class AwsEc2ClientVpnEndpointClientLoginBannerOptionsDetails < Struct.new(
+      nil,
       :enabled,
       :banner_text,
       keyword_init: true
@@ -5535,6 +5685,7 @@ module Aws::SecurityHub
     #           </p>
     #   @return [String]
     class AwsEc2ClientVpnEndpointConnectionLogOptionsDetails < Struct.new(
+      nil,
       :enabled,
       :cloudwatch_log_group,
       :cloudwatch_log_stream,
@@ -5629,6 +5780,7 @@ module Aws::SecurityHub
     #           </p>
     #   @return [Types::AwsEc2ClientVpnEndpointClientLoginBannerOptionsDetails]
     class AwsEc2ClientVpnEndpointDetails < Struct.new(
+      nil,
       :client_vpn_endpoint_id,
       :description,
       :client_cidr_block,
@@ -5687,6 +5839,7 @@ module Aws::SecurityHub
     #   <p>The private IP address that is associated with the Elastic IP address.</p>
     #   @return [String]
     class AwsEc2EipDetails < Struct.new(
+      nil,
       :instance_id,
       :public_ip,
       :allocation_id,
@@ -5748,6 +5901,7 @@ module Aws::SecurityHub
     #         </p>
     #   @return [Types::AwsEc2InstanceMonitoringDetails]
     class AwsEc2InstanceDetails < Struct.new(
+      nil,
       :type,
       :image_id,
       :ip_v4_addresses,
@@ -5789,6 +5943,7 @@ module Aws::SecurityHub
     #         </p>
     #   @return [String]
     class AwsEc2InstanceMetadataOptions < Struct.new(
+      nil,
       :http_endpoint,
       :http_protocol_ipv6,
       :http_put_response_hop_limit,
@@ -5808,6 +5963,7 @@ module Aws::SecurityHub
     #         </p>
     #   @return [String]
     class AwsEc2InstanceMonitoringDetails < Struct.new(
+      nil,
       :state,
       keyword_init: true
     )
@@ -5819,6 +5975,7 @@ module Aws::SecurityHub
     #   <p>The identifier of the network interface. The details are in a corresponding <code>AwsEc2NetworkInterfacesDetails</code> object.</p>
     #   @return [String]
     class AwsEc2InstanceNetworkInterfacesDetails < Struct.new(
+      nil,
       :network_interface_id,
       keyword_init: true
     )
@@ -5853,6 +6010,7 @@ module Aws::SecurityHub
     #         </p>
     #   @return [String]
     class AwsEc2LaunchTemplateDataBlockDeviceMappingSetDetails < Struct.new(
+      nil,
       :device_name,
       :ebs,
       :no_device,
@@ -5909,6 +6067,7 @@ module Aws::SecurityHub
     #         </p>
     #   @return [String]
     class AwsEc2LaunchTemplateDataBlockDeviceMappingSetEbsDetails < Struct.new(
+      nil,
       :delete_on_termination,
       :encrypted,
       :iops,
@@ -5936,6 +6095,7 @@ module Aws::SecurityHub
     #         </p>
     #   @return [String]
     class AwsEc2LaunchTemplateDataCapacityReservationSpecificationCapacityReservationTargetDetails < Struct.new(
+      nil,
       :capacity_reservation_id,
       :capacity_reservation_resource_group_arn,
       keyword_init: true
@@ -5958,6 +6118,7 @@ module Aws::SecurityHub
     #         </p>
     #   @return [Types::AwsEc2LaunchTemplateDataCapacityReservationSpecificationCapacityReservationTargetDetails]
     class AwsEc2LaunchTemplateDataCapacityReservationSpecificationDetails < Struct.new(
+      nil,
       :capacity_reservation_preference,
       :capacity_reservation_target,
       keyword_init: true
@@ -5981,6 +6142,7 @@ module Aws::SecurityHub
     #         </p>
     #   @return [Integer]
     class AwsEc2LaunchTemplateDataCpuOptionsDetails < Struct.new(
+      nil,
       :core_count,
       :threads_per_core,
       keyword_init: true
@@ -5997,6 +6159,7 @@ module Aws::SecurityHub
     #         </p>
     #   @return [String]
     class AwsEc2LaunchTemplateDataCreditSpecificationDetails < Struct.new(
+      nil,
       :cpu_credits,
       keyword_init: true
     )
@@ -6162,6 +6325,7 @@ module Aws::SecurityHub
     #         </p>
     #   @return [String]
     class AwsEc2LaunchTemplateDataDetails < Struct.new(
+      nil,
       :block_device_mapping_set,
       :capacity_reservation_specification,
       :cpu_options,
@@ -6206,6 +6370,7 @@ module Aws::SecurityHub
     #         </p>
     #   @return [String]
     class AwsEc2LaunchTemplateDataElasticGpuSpecificationSetDetails < Struct.new(
+      nil,
       :type,
       keyword_init: true
     )
@@ -6226,6 +6391,7 @@ module Aws::SecurityHub
     #         </p>
     #   @return [String]
     class AwsEc2LaunchTemplateDataElasticInferenceAcceleratorSetDetails < Struct.new(
+      nil,
       :count,
       :type,
       keyword_init: true
@@ -6242,6 +6408,7 @@ module Aws::SecurityHub
     #         </p>
     #   @return [Boolean]
     class AwsEc2LaunchTemplateDataEnclaveOptionsDetails < Struct.new(
+      nil,
       :enabled,
       keyword_init: true
     )
@@ -6257,6 +6424,7 @@ module Aws::SecurityHub
     #         </p>
     #   @return [Boolean]
     class AwsEc2LaunchTemplateDataHibernationOptionsDetails < Struct.new(
+      nil,
       :configured,
       keyword_init: true
     )
@@ -6277,6 +6445,7 @@ module Aws::SecurityHub
     #         </p>
     #   @return [String]
     class AwsEc2LaunchTemplateDataIamInstanceProfileDetails < Struct.new(
+      nil,
       :arn,
       :name,
       keyword_init: true
@@ -6298,6 +6467,7 @@ module Aws::SecurityHub
     #         </p>
     #   @return [Types::AwsEc2LaunchTemplateDataInstanceMarketOptionsSpotOptionsDetails]
     class AwsEc2LaunchTemplateDataInstanceMarketOptionsDetails < Struct.new(
+      nil,
       :market_type,
       :spot_options,
       keyword_init: true
@@ -6334,6 +6504,7 @@ module Aws::SecurityHub
     #         </p>
     #   @return [String]
     class AwsEc2LaunchTemplateDataInstanceMarketOptionsSpotOptionsDetails < Struct.new(
+      nil,
       :block_duration_minutes,
       :instance_interruption_behavior,
       :max_price,
@@ -6358,6 +6529,7 @@ module Aws::SecurityHub
     #         </p>
     #   @return [Integer]
     class AwsEc2LaunchTemplateDataInstanceRequirementsAcceleratorCountDetails < Struct.new(
+      nil,
       :max,
       :min,
       keyword_init: true
@@ -6379,6 +6551,7 @@ module Aws::SecurityHub
     #         </p>
     #   @return [Integer]
     class AwsEc2LaunchTemplateDataInstanceRequirementsAcceleratorTotalMemoryMiBDetails < Struct.new(
+      nil,
       :max,
       :min,
       keyword_init: true
@@ -6401,6 +6574,7 @@ module Aws::SecurityHub
     #         </p>
     #   @return [Integer]
     class AwsEc2LaunchTemplateDataInstanceRequirementsBaselineEbsBandwidthMbpsDetails < Struct.new(
+      nil,
       :max,
       :min,
       keyword_init: true
@@ -6521,6 +6695,7 @@ module Aws::SecurityHub
     #         </p>
     #   @return [Types::AwsEc2LaunchTemplateDataInstanceRequirementsVCpuCountDetails]
     class AwsEc2LaunchTemplateDataInstanceRequirementsDetails < Struct.new(
+      nil,
       :accelerator_count,
       :accelerator_manufacturers,
       :accelerator_names,
@@ -6561,6 +6736,7 @@ module Aws::SecurityHub
     #         </p>
     #   @return [Float]
     class AwsEc2LaunchTemplateDataInstanceRequirementsMemoryGiBPerVCpuDetails < Struct.new(
+      nil,
       :max,
       :min,
       keyword_init: true
@@ -6582,6 +6758,7 @@ module Aws::SecurityHub
     #         </p>
     #   @return [Integer]
     class AwsEc2LaunchTemplateDataInstanceRequirementsMemoryMiBDetails < Struct.new(
+      nil,
       :max,
       :min,
       keyword_init: true
@@ -6603,6 +6780,7 @@ module Aws::SecurityHub
     #         </p>
     #   @return [Integer]
     class AwsEc2LaunchTemplateDataInstanceRequirementsNetworkInterfaceCountDetails < Struct.new(
+      nil,
       :max,
       :min,
       keyword_init: true
@@ -6624,6 +6802,7 @@ module Aws::SecurityHub
     #         </p>
     #   @return [Float]
     class AwsEc2LaunchTemplateDataInstanceRequirementsTotalLocalStorageGBDetails < Struct.new(
+      nil,
       :max,
       :min,
       keyword_init: true
@@ -6645,6 +6824,7 @@ module Aws::SecurityHub
     #         </p>
     #   @return [Integer]
     class AwsEc2LaunchTemplateDataInstanceRequirementsVCpuCountDetails < Struct.new(
+      nil,
       :max,
       :min,
       keyword_init: true
@@ -6661,6 +6841,7 @@ module Aws::SecurityHub
     #         </p>
     #   @return [String]
     class AwsEc2LaunchTemplateDataLicenseSetDetails < Struct.new(
+      nil,
       :license_configuration_arn,
       keyword_init: true
     )
@@ -6676,6 +6857,7 @@ module Aws::SecurityHub
     #         </p>
     #   @return [String]
     class AwsEc2LaunchTemplateDataMaintenanceOptionsDetails < Struct.new(
+      nil,
       :auto_recovery,
       keyword_init: true
     )
@@ -6713,6 +6895,7 @@ module Aws::SecurityHub
     #         </p>
     #   @return [String]
     class AwsEc2LaunchTemplateDataMetadataOptionsDetails < Struct.new(
+      nil,
       :http_endpoint,
       :http_protocol_ipv6,
       :http_tokens,
@@ -6734,6 +6917,7 @@ module Aws::SecurityHub
     #         </p>
     #   @return [Boolean]
     class AwsEc2LaunchTemplateDataMonitoringDetails < Struct.new(
+      nil,
       :enabled,
       keyword_init: true
     )
@@ -6852,6 +7036,7 @@ module Aws::SecurityHub
     #         </p>
     #   @return [String]
     class AwsEc2LaunchTemplateDataNetworkInterfaceSetDetails < Struct.new(
+      nil,
       :associate_carrier_ip_address,
       :associate_public_ip_address,
       :delete_on_termination,
@@ -6885,6 +7070,7 @@ module Aws::SecurityHub
     #         </p>
     #   @return [String]
     class AwsEc2LaunchTemplateDataNetworkInterfaceSetIpv4PrefixesDetails < Struct.new(
+      nil,
       :ipv4_prefix,
       keyword_init: true
     )
@@ -6900,6 +7086,7 @@ module Aws::SecurityHub
     #         </p>
     #   @return [String]
     class AwsEc2LaunchTemplateDataNetworkInterfaceSetIpv6AddressesDetails < Struct.new(
+      nil,
       :ipv6_address,
       keyword_init: true
     )
@@ -6915,6 +7102,7 @@ module Aws::SecurityHub
     #         </p>
     #   @return [String]
     class AwsEc2LaunchTemplateDataNetworkInterfaceSetIpv6PrefixesDetails < Struct.new(
+      nil,
       :ipv6_prefix,
       keyword_init: true
     )
@@ -6935,6 +7123,7 @@ module Aws::SecurityHub
     #         </p>
     #   @return [String]
     class AwsEc2LaunchTemplateDataNetworkInterfaceSetPrivateIpAddressesDetails < Struct.new(
+      nil,
       :primary,
       :private_ip_address,
       keyword_init: true
@@ -6986,6 +7175,7 @@ module Aws::SecurityHub
     #         </p>
     #   @return [String]
     class AwsEc2LaunchTemplateDataPlacementDetails < Struct.new(
+      nil,
       :affinity,
       :availability_zone,
       :group_name,
@@ -7018,6 +7208,7 @@ module Aws::SecurityHub
     #         </p>
     #   @return [String]
     class AwsEc2LaunchTemplateDataPrivateDnsNameOptionsDetails < Struct.new(
+      nil,
       :enable_resource_name_dns_aaaa_record,
       :enable_resource_name_dns_a_record,
       :hostname_type,
@@ -7055,6 +7246,7 @@ module Aws::SecurityHub
     #         </p>
     #   @return [Integer]
     class AwsEc2LaunchTemplateDetails < Struct.new(
+      nil,
       :launch_template_name,
       :id,
       :launch_template_data,
@@ -7076,6 +7268,7 @@ module Aws::SecurityHub
     #   <p>The identifier of the subnet that is associated with the network ACL.</p>
     #   @return [String]
     class AwsEc2NetworkAclAssociation < Struct.new(
+      nil,
       :network_acl_association_id,
       :network_acl_id,
       :subnet_id,
@@ -7104,6 +7297,7 @@ module Aws::SecurityHub
     #   <p>The set of rules in the network ACL.</p>
     #   @return [Array<Types::AwsEc2NetworkAclEntry>]
     class AwsEc2NetworkAclDetails < Struct.new(
+      nil,
       :is_default,
       :network_acl_id,
       :owner_id,
@@ -7142,6 +7336,7 @@ module Aws::SecurityHub
     #   <p>The rule number. The rules are processed in order by their number.</p>
     #   @return [Integer]
     class AwsEc2NetworkAclEntry < Struct.new(
+      nil,
       :cidr_block,
       :egress,
       :icmp_type_code,
@@ -7183,6 +7378,7 @@ module Aws::SecurityHub
     #            </p>
     #   @return [String]
     class AwsEc2NetworkInterfaceAttachment < Struct.new(
+      nil,
       :attach_time,
       :attachment_id,
       :delete_on_termination,
@@ -7221,6 +7417,7 @@ module Aws::SecurityHub
     #   <p>The address of the Elastic IP address bound to the network interface.</p>
     #   @return [String]
     class AwsEc2NetworkInterfaceDetails < Struct.new(
+      nil,
       :attachment,
       :network_interface_id,
       :security_groups,
@@ -7240,6 +7437,7 @@ module Aws::SecurityHub
     #   <p>The IPV6 address.</p>
     #   @return [String]
     class AwsEc2NetworkInterfaceIpV6AddressDetail < Struct.new(
+      nil,
       :ip_v6_address,
       keyword_init: true
     )
@@ -7255,6 +7453,7 @@ module Aws::SecurityHub
     #   <p>The private DNS name for the IP address.</p>
     #   @return [String]
     class AwsEc2NetworkInterfacePrivateIpAddressDetail < Struct.new(
+      nil,
       :private_ip_address,
       :private_dns_name,
       keyword_init: true
@@ -7270,6 +7469,7 @@ module Aws::SecurityHub
     #   <p>The ID of the security group.</p>
     #   @return [String]
     class AwsEc2NetworkInterfaceSecurityGroup < Struct.new(
+      nil,
       :group_name,
       :group_id,
       keyword_init: true
@@ -7311,6 +7511,7 @@ module Aws::SecurityHub
     #         </p>
     #   @return [String]
     class AwsEc2RouteTableDetails < Struct.new(
+      nil,
       :association_set,
       :owner_id,
       :propagating_vgw_set,
@@ -7342,6 +7543,7 @@ module Aws::SecurityHub
     #   <p>[VPC only] The outbound rules associated with the security group.</p>
     #   @return [Array<Types::AwsEc2SecurityGroupIpPermission>]
     class AwsEc2SecurityGroupDetails < Struct.new(
+      nil,
       :group_name,
       :group_id,
       :owner_id,
@@ -7393,6 +7595,7 @@ module Aws::SecurityHub
     #            group.</p>
     #   @return [Array<Types::AwsEc2SecurityGroupPrefixListId>]
     class AwsEc2SecurityGroupIpPermission < Struct.new(
+      nil,
       :ip_protocol,
       :from_port,
       :to_port,
@@ -7411,6 +7614,7 @@ module Aws::SecurityHub
     #            not both. To specify a single IPv4 address, use the /32 prefix length.</p>
     #   @return [String]
     class AwsEc2SecurityGroupIpRange < Struct.new(
+      nil,
       :cidr_ip,
       keyword_init: true
     )
@@ -7423,6 +7627,7 @@ module Aws::SecurityHub
     #            not both. To specify a single IPv6 address, use the /128 prefix length.</p>
     #   @return [String]
     class AwsEc2SecurityGroupIpv6Range < Struct.new(
+      nil,
       :cidr_ipv6,
       keyword_init: true
     )
@@ -7434,6 +7639,7 @@ module Aws::SecurityHub
     #   <p>The ID of the prefix.</p>
     #   @return [String]
     class AwsEc2SecurityGroupPrefixListId < Struct.new(
+      nil,
       :prefix_list_id,
       keyword_init: true
     )
@@ -7465,6 +7671,7 @@ module Aws::SecurityHub
     #   <p>The ID of the VPC peering connection, if applicable.</p>
     #   @return [String]
     class AwsEc2SecurityGroupUserIdGroupPair < Struct.new(
+      nil,
       :group_id,
       :group_name,
       :peering_status,
@@ -7517,6 +7724,7 @@ module Aws::SecurityHub
     #   <p>The IPV6 CIDR blocks that are associated with the subnet.</p>
     #   @return [Array<Types::Ipv6CidrBlockAssociation>]
     class AwsEc2SubnetDetails < Struct.new(
+      nil,
       :assign_ipv6_address_on_creation,
       :availability_zone,
       :availability_zone_id,
@@ -7587,6 +7795,7 @@ module Aws::SecurityHub
     #         </p>
     #   @return [Integer]
     class AwsEc2TransitGatewayDetails < Struct.new(
+      nil,
       :id,
       :description,
       :default_route_table_propagation,
@@ -7645,6 +7854,7 @@ module Aws::SecurityHub
     #            </ul>
     #   @return [String]
     class AwsEc2VolumeAttachment < Struct.new(
+      nil,
       :attach_time,
       :delete_on_termination,
       :instance_id,
@@ -7727,6 +7937,7 @@ module Aws::SecurityHub
     #         </p>
     #   @return [String]
     class AwsEc2VolumeDetails < Struct.new(
+      nil,
       :create_time,
       :device_name,
       :encrypted,
@@ -7759,6 +7970,7 @@ module Aws::SecurityHub
     #   <p>The current state of the VPC. Valid values are <code>available</code> or <code>pending</code>.</p>
     #   @return [String]
     class AwsEc2VpcDetails < Struct.new(
+      nil,
       :cidr_block_association_set,
       :ipv6_cidr_block_association_set,
       :dhcp_options_id,
@@ -7830,6 +8042,7 @@ module Aws::SecurityHub
     #   <p>The types for the service.</p>
     #   @return [Array<Types::AwsEc2VpcEndpointServiceServiceTypeDetails>]
     class AwsEc2VpcEndpointServiceDetails < Struct.new(
+      nil,
       :acceptance_required,
       :availability_zones,
       :base_endpoint_dns_names,
@@ -7851,6 +8064,7 @@ module Aws::SecurityHub
     #   <p>The type of service.</p>
     #   @return [String]
     class AwsEc2VpcEndpointServiceServiceTypeDetails < Struct.new(
+      nil,
       :service_type,
       keyword_init: true
     )
@@ -7881,6 +8095,7 @@ module Aws::SecurityHub
     #         </p>
     #   @return [String]
     class AwsEc2VpcPeeringConnectionDetails < Struct.new(
+      nil,
       :accepter_vpc_info,
       :expiration_time,
       :requester_vpc_info,
@@ -7902,6 +8117,7 @@ module Aws::SecurityHub
     #         </p>
     #   @return [String]
     class AwsEc2VpcPeeringConnectionStatusDetails < Struct.new(
+      nil,
       :code,
       :message,
       keyword_init: true
@@ -7940,6 +8156,7 @@ module Aws::SecurityHub
     #         </p>
     #   @return [String]
     class AwsEc2VpcPeeringConnectionVpcInfoDetails < Struct.new(
+      nil,
       :cidr_block,
       :cidr_block_set,
       :ipv6_cidr_block_set,
@@ -8013,6 +8230,7 @@ module Aws::SecurityHub
     #   <p>The identifier of the transit gateway that is associated with the VPN connection.</p>
     #   @return [String]
     class AwsEc2VpnConnectionDetails < Struct.new(
+      nil,
       :vpn_connection_id,
       :state,
       :customer_gateway_id,
@@ -8037,6 +8255,7 @@ module Aws::SecurityHub
     #   <p>The VPN tunnel options.</p>
     #   @return [Array<Types::AwsEc2VpnConnectionOptionsTunnelOptionsDetails>]
     class AwsEc2VpnConnectionOptionsDetails < Struct.new(
+      nil,
       :static_routes_only,
       :tunnel_options,
       keyword_init: true
@@ -8103,6 +8322,7 @@ module Aws::SecurityHub
     #   <p>The range of inside IPv4 addresses for the tunnel.</p>
     #   @return [String]
     class AwsEc2VpnConnectionOptionsTunnelOptionsDetails < Struct.new(
+      nil,
       :dpd_timeout_seconds,
       :ike_versions,
       :outside_ip_address,
@@ -8133,6 +8353,7 @@ module Aws::SecurityHub
     #   <p>The current state of the static route.</p>
     #   @return [String]
     class AwsEc2VpnConnectionRoutesDetails < Struct.new(
+      nil,
       :destination_cidr_block,
       :state,
       keyword_init: true
@@ -8162,6 +8383,7 @@ module Aws::SecurityHub
     #   <p>If an error occurs, a description of the error.</p>
     #   @return [String]
     class AwsEc2VpnConnectionVgwTelemetryDetails < Struct.new(
+      nil,
       :accepted_route_count,
       :certificate_arn,
       :last_status_change,
@@ -8212,6 +8434,7 @@ module Aws::SecurityHub
     #            <p>For more information about the validation and formatting of timestamp fields in Security Hub, see <a href="https://docs.aws.amazon.com/securityhub/1.0/APIReference/Welcome.html#timestamps">Timestamps</a>.</p>
     #   @return [String]
     class AwsEcrContainerImageDetails < Struct.new(
+      nil,
       :registry_id,
       :repository_name,
       :architecture,
@@ -8243,6 +8466,7 @@ module Aws::SecurityHub
     #   <p>The text of the repository policy.</p>
     #   @return [String]
     class AwsEcrRepositoryDetails < Struct.new(
+      nil,
       :arn,
       :image_scanning_configuration,
       :image_tag_mutability,
@@ -8259,6 +8483,7 @@ module Aws::SecurityHub
     #   <p>Whether to scan images after they are pushed to a repository.</p>
     #   @return [Boolean]
     class AwsEcrRepositoryImageScanningConfigurationDetails < Struct.new(
+      nil,
       :scan_on_push,
       keyword_init: true
     )
@@ -8273,6 +8498,7 @@ module Aws::SecurityHub
     #   <p>The Amazon Web Services account identifier that is associated with the registry that contains the repository.</p>
     #   @return [String]
     class AwsEcrRepositoryLifecyclePolicyDetails < Struct.new(
+      nil,
       :lifecycle_policy_text,
       :registry_id,
       keyword_init: true
@@ -8288,6 +8514,7 @@ module Aws::SecurityHub
     #   <p>The value of the setting. Valid values are <code>disabled</code> or <code>enabled</code>.</p>
     #   @return [String]
     class AwsEcsClusterClusterSettingsDetails < Struct.new(
+      nil,
       :name,
       :value,
       keyword_init: true
@@ -8300,6 +8527,7 @@ module Aws::SecurityHub
     #   <p>Contains the run command configuration for the cluster.</p>
     #   @return [Types::AwsEcsClusterConfigurationExecuteCommandConfigurationDetails]
     class AwsEcsClusterConfigurationDetails < Struct.new(
+      nil,
       :execute_command_configuration,
       keyword_init: true
     )
@@ -8317,6 +8545,7 @@ module Aws::SecurityHub
     #   <p>The log setting to use for redirecting logs for run command results.</p>
     #   @return [String]
     class AwsEcsClusterConfigurationExecuteCommandConfigurationDetails < Struct.new(
+      nil,
       :kms_key_id,
       :log_configuration,
       :logging,
@@ -8342,6 +8571,7 @@ module Aws::SecurityHub
     #   <p>Identifies the folder in the S3 bucket to send the logs to.</p>
     #   @return [String]
     class AwsEcsClusterConfigurationExecuteCommandConfigurationLogConfigurationDetails < Struct.new(
+      nil,
       :cloud_watch_encryption_enabled,
       :cloud_watch_log_group_name,
       :s3_bucket_name,
@@ -8363,6 +8593,7 @@ module Aws::SecurityHub
     #   <p>The relative percentage of the total number of tasks launched that should use the capacity provider.</p>
     #   @return [Integer]
     class AwsEcsClusterDefaultCapacityProviderStrategyDetails < Struct.new(
+      nil,
       :base,
       :capacity_provider,
       :weight,
@@ -8411,6 +8642,7 @@ module Aws::SecurityHub
     #         </p>
     #   @return [String]
     class AwsEcsClusterDetails < Struct.new(
+      nil,
       :cluster_arn,
       :active_services_count,
       :capacity_providers,
@@ -8446,6 +8678,7 @@ module Aws::SecurityHub
     #         </p>
     #   @return [Boolean]
     class AwsEcsContainerDetails < Struct.new(
+      nil,
       :name,
       :image,
       :mount_points,
@@ -8469,6 +8702,7 @@ module Aws::SecurityHub
     #            <p>The value can be between 0 and 1000.</p>
     #   @return [Integer]
     class AwsEcsServiceCapacityProviderStrategyDetails < Struct.new(
+      nil,
       :base,
       :capacity_provider,
       :weight,
@@ -8485,6 +8719,7 @@ module Aws::SecurityHub
     #   <p>Whether to roll back the service if a service deployment fails. If rollback is enabled, when a service deployment fails, the service is rolled back to the last deployment that completed successfully.</p>
     #   @return [Boolean]
     class AwsEcsServiceDeploymentConfigurationDeploymentCircuitBreakerDetails < Struct.new(
+      nil,
       :enable,
       :rollback,
       keyword_init: true
@@ -8507,6 +8742,7 @@ module Aws::SecurityHub
     #            <p>For the Fargate launch type, the minimum healthy percent value is not used.</p>
     #   @return [Integer]
     class AwsEcsServiceDeploymentConfigurationDetails < Struct.new(
+      nil,
       :deployment_circuit_breaker,
       :maximum_percent,
       :minimum_healthy_percent,
@@ -8524,6 +8760,7 @@ module Aws::SecurityHub
     #            </p>
     #   @return [String]
     class AwsEcsServiceDeploymentControllerDetails < Struct.new(
+      nil,
       :type,
       keyword_init: true
     )
@@ -8607,6 +8844,7 @@ module Aws::SecurityHub
     #   <p>The task definition to use for tasks in the service.</p>
     #   @return [String]
     class AwsEcsServiceDetails < Struct.new(
+      nil,
       :capacity_provider_strategy,
       :cluster,
       :deployment_configuration,
@@ -8650,6 +8888,7 @@ module Aws::SecurityHub
     #            <p>Only specified when using an Application Load Balancer or a Network Load Balancer. For a Classic Load Balancer, the target group ARN is omitted.</p>
     #   @return [String]
     class AwsEcsServiceLoadBalancersDetails < Struct.new(
+      nil,
       :container_name,
       :container_port,
       :load_balancer_name,
@@ -8674,6 +8913,7 @@ module Aws::SecurityHub
     #            <p>You can provide up to 16 subnets.</p>
     #   @return [Array<String>]
     class AwsEcsServiceNetworkConfigurationAwsVpcConfigurationDetails < Struct.new(
+      nil,
       :assign_public_ip,
       :security_groups,
       :subnets,
@@ -8687,6 +8927,7 @@ module Aws::SecurityHub
     #   <p>The VPC subnet and security group configuration.</p>
     #   @return [Types::AwsEcsServiceNetworkConfigurationAwsVpcConfigurationDetails]
     class AwsEcsServiceNetworkConfigurationDetails < Struct.new(
+      nil,
       :aws_vpc_configuration,
       keyword_init: true
     )
@@ -8703,6 +8944,7 @@ module Aws::SecurityHub
     #            </p>
     #   @return [String]
     class AwsEcsServicePlacementConstraintsDetails < Struct.new(
+      nil,
       :expression,
       :type,
       keyword_init: true
@@ -8726,6 +8968,7 @@ module Aws::SecurityHub
     #            </p>
     #   @return [String]
     class AwsEcsServicePlacementStrategiesDetails < Struct.new(
+      nil,
       :field,
       :type,
       keyword_init: true
@@ -8751,6 +8994,7 @@ module Aws::SecurityHub
     #   <p>The ARN of the service registry.</p>
     #   @return [String]
     class AwsEcsServiceServiceRegistriesDetails < Struct.new(
+      nil,
       :container_name,
       :container_port,
       :port,
@@ -8790,6 +9034,7 @@ module Aws::SecurityHub
     #   <p>The name of the dependent container.</p>
     #   @return [String]
     class AwsEcsTaskDefinitionContainerDefinitionsDependsOnDetails < Struct.new(
+      nil,
       :condition,
       :container_name,
       keyword_init: true
@@ -8971,6 +9216,7 @@ module Aws::SecurityHub
     #   <p>The working directory in which to run commands inside the container.</p>
     #   @return [String]
     class AwsEcsTaskDefinitionContainerDefinitionsDetails < Struct.new(
+      nil,
       :command,
       :cpu,
       :depends_on,
@@ -9023,6 +9269,7 @@ module Aws::SecurityHub
     #   <p>The value of the environment variable.</p>
     #   @return [String]
     class AwsEcsTaskDefinitionContainerDefinitionsEnvironmentDetails < Struct.new(
+      nil,
       :name,
       :value,
       keyword_init: true
@@ -9038,6 +9285,7 @@ module Aws::SecurityHub
     #   <p>The ARN of the S3 object that contains the environment variable file.</p>
     #   @return [String]
     class AwsEcsTaskDefinitionContainerDefinitionsEnvironmentFilesDetails < Struct.new(
+      nil,
       :type,
       :value,
       keyword_init: true
@@ -9053,6 +9301,7 @@ module Aws::SecurityHub
     #   <p>The IP address to use in the <b>/etc/hosts</b> entry.</p>
     #   @return [String]
     class AwsEcsTaskDefinitionContainerDefinitionsExtraHostsDetails < Struct.new(
+      nil,
       :hostname,
       :ip_address,
       keyword_init: true
@@ -9085,6 +9334,7 @@ module Aws::SecurityHub
     #   <p>The log router to use. Valid values are <code>fluentbit</code> or <code>fluentd</code>.</p>
     #   @return [String]
     class AwsEcsTaskDefinitionContainerDefinitionsFirelensConfigurationDetails < Struct.new(
+      nil,
       :options,
       :type,
       keyword_init: true
@@ -9109,6 +9359,7 @@ module Aws::SecurityHub
     #   <p>The time period in seconds to wait for a health check to succeed before it is considered a failure. The default value is 5.</p>
     #   @return [Integer]
     class AwsEcsTaskDefinitionContainerDefinitionsHealthCheckDetails < Struct.new(
+      nil,
       :command,
       :interval,
       :retries,
@@ -9155,6 +9406,7 @@ module Aws::SecurityHub
     #            </p>
     #   @return [Array<String>]
     class AwsEcsTaskDefinitionContainerDefinitionsLinuxParametersCapabilitiesDetails < Struct.new(
+      nil,
       :add,
       :drop,
       keyword_init: true
@@ -9185,6 +9437,7 @@ module Aws::SecurityHub
     #   <p>The container path, mount options, and size (in MiB) of the tmpfs mount.</p>
     #   @return [Array<Types::AwsEcsTaskDefinitionContainerDefinitionsLinuxParametersTmpfsDetails>]
     class AwsEcsTaskDefinitionContainerDefinitionsLinuxParametersDetails < Struct.new(
+      nil,
       :capabilities,
       :devices,
       :init_process_enabled,
@@ -9208,6 +9461,7 @@ module Aws::SecurityHub
     #   <p>The explicit permissions to provide to the container for the device. By default, the container has permissions for read, write, and <code>mknod</code> for the device.</p>
     #   @return [Array<String>]
     class AwsEcsTaskDefinitionContainerDefinitionsLinuxParametersDevicesDetails < Struct.new(
+      nil,
       :container_path,
       :host_path,
       :permissions,
@@ -9240,6 +9494,7 @@ module Aws::SecurityHub
     #   <p>The maximum size (in MiB) of the tmpfs volume.</p>
     #   @return [Integer]
     class AwsEcsTaskDefinitionContainerDefinitionsLinuxParametersTmpfsDetails < Struct.new(
+      nil,
       :container_path,
       :mount_options,
       :size,
@@ -9325,6 +9580,7 @@ module Aws::SecurityHub
     #   <p>The secrets to pass to the log configuration.</p>
     #   @return [Array<Types::AwsEcsTaskDefinitionContainerDefinitionsLogConfigurationSecretOptionsDetails>]
     class AwsEcsTaskDefinitionContainerDefinitionsLogConfigurationDetails < Struct.new(
+      nil,
       :log_driver,
       :options,
       :secret_options,
@@ -9343,6 +9599,7 @@ module Aws::SecurityHub
     #            parameter in the Systems Manager Parameter Store.</p>
     #   @return [String]
     class AwsEcsTaskDefinitionContainerDefinitionsLogConfigurationSecretOptionsDetails < Struct.new(
+      nil,
       :name,
       :value_from,
       keyword_init: true
@@ -9361,6 +9618,7 @@ module Aws::SecurityHub
     #   <p>The name of the volume to mount. Must match the name of a volume listed in <code>VolumeDetails</code> for the task definition.</p>
     #   @return [String]
     class AwsEcsTaskDefinitionContainerDefinitionsMountPointsDetails < Struct.new(
+      nil,
       :container_path,
       :read_only,
       :source_volume,
@@ -9380,6 +9638,7 @@ module Aws::SecurityHub
     #   <p>The protocol used for the port mapping. The default is <code>tcp</code>.</p>
     #   @return [String]
     class AwsEcsTaskDefinitionContainerDefinitionsPortMappingsDetails < Struct.new(
+      nil,
       :container_port,
       :host_port,
       :protocol,
@@ -9393,6 +9652,7 @@ module Aws::SecurityHub
     #   <p>The ARN of the secret that contains the private repository credentials.</p>
     #   @return [String]
     class AwsEcsTaskDefinitionContainerDefinitionsRepositoryCredentialsDetails < Struct.new(
+      nil,
       :credentials_parameter,
       keyword_init: true
     )
@@ -9411,6 +9671,7 @@ module Aws::SecurityHub
     #            attribute of an entry in <code>InferenceAccelerators</code>.</p>
     #   @return [String]
     class AwsEcsTaskDefinitionContainerDefinitionsResourceRequirementsDetails < Struct.new(
+      nil,
       :type,
       :value,
       keyword_init: true
@@ -9427,6 +9688,7 @@ module Aws::SecurityHub
     #            secret or the full ARN of the parameter in the Systems Manager Parameter Store.</p>
     #   @return [String]
     class AwsEcsTaskDefinitionContainerDefinitionsSecretsDetails < Struct.new(
+      nil,
       :name,
       :value_from,
       keyword_init: true
@@ -9442,6 +9704,7 @@ module Aws::SecurityHub
     #   <p>The value of the parameter.</p>
     #   @return [String]
     class AwsEcsTaskDefinitionContainerDefinitionsSystemControlsDetails < Struct.new(
+      nil,
       :namespace,
       :value,
       keyword_init: true
@@ -9537,6 +9800,7 @@ module Aws::SecurityHub
     #   <p>The soft limit for the ulimit type.</p>
     #   @return [Integer]
     class AwsEcsTaskDefinitionContainerDefinitionsUlimitsDetails < Struct.new(
+      nil,
       :hard_limit,
       :name,
       :soft_limit,
@@ -9553,6 +9817,7 @@ module Aws::SecurityHub
     #   <p>The name of another container within the same task definition from which to mount volumes.</p>
     #   @return [String]
     class AwsEcsTaskDefinitionContainerDefinitionsVolumesFromDetails < Struct.new(
+      nil,
       :read_only,
       :source_container,
       keyword_init: true
@@ -9680,6 +9945,7 @@ module Aws::SecurityHub
     #           </p>
     #   @return [String]
     class AwsEcsTaskDefinitionDetails < Struct.new(
+      nil,
       :container_definitions,
       :cpu,
       :execution_role_arn,
@@ -9709,6 +9975,7 @@ module Aws::SecurityHub
     #   <p>The Elastic Inference accelerator type to use.</p>
     #   @return [String]
     class AwsEcsTaskDefinitionInferenceAcceleratorsDetails < Struct.new(
+      nil,
       :device_name,
       :device_type,
       keyword_init: true
@@ -9724,6 +9991,7 @@ module Aws::SecurityHub
     #   <p>The type of constraint.</p>
     #   @return [String]
     class AwsEcsTaskDefinitionPlacementConstraintsDetails < Struct.new(
+      nil,
       :expression,
       :type,
       keyword_init: true
@@ -9743,6 +10011,7 @@ module Aws::SecurityHub
     #   <p>The proxy type.</p>
     #   @return [String]
     class AwsEcsTaskDefinitionProxyConfigurationDetails < Struct.new(
+      nil,
       :container_name,
       :proxy_configuration_properties,
       :type,
@@ -9759,6 +10028,7 @@ module Aws::SecurityHub
     #   <p>The value of the property.</p>
     #   @return [String]
     class AwsEcsTaskDefinitionProxyConfigurationProxyConfigurationPropertiesDetails < Struct.new(
+      nil,
       :name,
       :value,
       keyword_init: true
@@ -9780,6 +10050,7 @@ module Aws::SecurityHub
     #   <p>The name of the data volume.</p>
     #   @return [String]
     class AwsEcsTaskDefinitionVolumesDetails < Struct.new(
+      nil,
       :docker_volume_configuration,
       :efs_volume_configuration,
       :host,
@@ -9807,6 +10078,7 @@ module Aws::SecurityHub
     #   automatically when the task starts and destroyed when the task stops. Docker volumes that are shared persist after the task stops. Valid values are <code>shared</code> or <code>task</code>.</p>
     #   @return [String]
     class AwsEcsTaskDefinitionVolumesDockerVolumeConfigurationDetails < Struct.new(
+      nil,
       :autoprovision,
       :driver,
       :driver_opts,
@@ -9825,6 +10097,7 @@ module Aws::SecurityHub
     #   <p>Whether to use the Amazon ECS task IAM role defined in a task definition when mounting the Amazon EFS file system.</p>
     #   @return [String]
     class AwsEcsTaskDefinitionVolumesEfsVolumeConfigurationAuthorizationConfigDetails < Struct.new(
+      nil,
       :access_point_id,
       :iam,
       keyword_init: true
@@ -9849,6 +10122,7 @@ module Aws::SecurityHub
     #   <p>The port to use when sending encrypted data between the Amazon ECS host and the Amazon EFS server.</p>
     #   @return [Integer]
     class AwsEcsTaskDefinitionVolumesEfsVolumeConfigurationDetails < Struct.new(
+      nil,
       :authorization_config,
       :filesystem_id,
       :root_directory,
@@ -9864,6 +10138,7 @@ module Aws::SecurityHub
     #   <p>The path on the host container instance that is presented to the container.</p>
     #   @return [String]
     class AwsEcsTaskDefinitionVolumesHostDetails < Struct.new(
+      nil,
       :source_path,
       keyword_init: true
     )
@@ -9912,6 +10187,7 @@ module Aws::SecurityHub
     #         </p>
     #   @return [Array<Types::AwsEcsContainerDetails>]
     class AwsEcsTaskDetails < Struct.new(
+      nil,
       :cluster_arn,
       :task_definition_arn,
       :version,
@@ -9939,6 +10215,7 @@ module Aws::SecurityHub
     #         </p>
     #   @return [Types::AwsEcsTaskVolumeHostDetails]
     class AwsEcsTaskVolumeDetails < Struct.new(
+      nil,
       :name,
       :host,
       keyword_init: true
@@ -9954,6 +10231,7 @@ module Aws::SecurityHub
     #         </p>
     #   @return [String]
     class AwsEcsTaskVolumeHostDetails < Struct.new(
+      nil,
       :source_path,
       keyword_init: true
     )
@@ -9988,6 +10266,7 @@ module Aws::SecurityHub
     #         </p>
     #   @return [Types::AwsEfsAccessPointRootDirectoryDetails]
     class AwsEfsAccessPointDetails < Struct.new(
+      nil,
       :access_point_id,
       :arn,
       :client_token,
@@ -10014,6 +10293,7 @@ module Aws::SecurityHub
     #         </p>
     #   @return [String]
     class AwsEfsAccessPointPosixUserDetails < Struct.new(
+      nil,
       :gid,
       :secondary_gids,
       :uid,
@@ -10039,6 +10319,7 @@ module Aws::SecurityHub
     #         </p>
     #   @return [String]
     class AwsEfsAccessPointRootDirectoryCreationInfoDetails < Struct.new(
+      nil,
       :owner_gid,
       :owner_uid,
       :permissions,
@@ -10061,6 +10342,7 @@ module Aws::SecurityHub
     #         </p>
     #   @return [String]
     class AwsEfsAccessPointRootDirectoryDetails < Struct.new(
+      nil,
       :creation_info,
       :path,
       keyword_init: true
@@ -10129,6 +10411,7 @@ module Aws::SecurityHub
     #   <p>The logging configuration for the cluster.</p>
     #   @return [Types::AwsEksClusterLoggingDetails]
     class AwsEksClusterDetails < Struct.new(
+      nil,
       :arn,
       :certificate_authority_data,
       :cluster_status,
@@ -10178,6 +10461,7 @@ module Aws::SecurityHub
     #            </ul>
     #   @return [Array<String>]
     class AwsEksClusterLoggingClusterLoggingDetails < Struct.new(
+      nil,
       :enabled,
       :types,
       keyword_init: true
@@ -10190,6 +10474,7 @@ module Aws::SecurityHub
     #   <p>Cluster logging configurations.</p>
     #   @return [Array<Types::AwsEksClusterLoggingClusterLoggingDetails>]
     class AwsEksClusterLoggingDetails < Struct.new(
+      nil,
       :cluster_logging,
       keyword_init: true
     )
@@ -10211,6 +10496,7 @@ module Aws::SecurityHub
     #         </p>
     #   @return [Boolean]
     class AwsEksClusterResourcesVpcConfigDetails < Struct.new(
+      nil,
       :security_group_ids,
       :subnet_ids,
       :endpoint_public_access,
@@ -10311,6 +10597,7 @@ module Aws::SecurityHub
     #   <p>The application version of the environment.</p>
     #   @return [String]
     class AwsElasticBeanstalkEnvironmentDetails < Struct.new(
+      nil,
       :application_name,
       :cname,
       :date_created,
@@ -10340,6 +10627,7 @@ module Aws::SecurityHub
     #   <p>The name of the environment link.</p>
     #   @return [String]
     class AwsElasticBeanstalkEnvironmentEnvironmentLink < Struct.new(
+      nil,
       :environment_name,
       :link_name,
       keyword_init: true
@@ -10361,6 +10649,7 @@ module Aws::SecurityHub
     #   <p>The value of the configuration setting.</p>
     #   @return [String]
     class AwsElasticBeanstalkEnvironmentOptionSetting < Struct.new(
+      nil,
       :namespace,
       :option_name,
       :resource_name,
@@ -10381,6 +10670,7 @@ module Aws::SecurityHub
     #   <p>The version of the environment tier.</p>
     #   @return [String]
     class AwsElasticBeanstalkEnvironmentTier < Struct.new(
+      nil,
       :name,
       :type,
       :version,
@@ -10438,6 +10728,7 @@ module Aws::SecurityHub
     #            domain.</p>
     #   @return [Types::AwsElasticsearchDomainVPCOptions]
     class AwsElasticsearchDomainDetails < Struct.new(
+      nil,
       :access_policies,
       :domain_endpoint_options,
       :domain_id,
@@ -10477,6 +10768,7 @@ module Aws::SecurityHub
     #            </ul>
     #   @return [String]
     class AwsElasticsearchDomainDomainEndpointOptions < Struct.new(
+      nil,
       :enforce_https,
       :tls_security_policy,
       keyword_init: true
@@ -10509,6 +10801,7 @@ module Aws::SecurityHub
     #   <p>Whether to enable zone awareness for the Elasticsearch domain. When zone awareness is enabled, OpenSearch allocates the cluster's nodes and replica index shards across Availability Zones in the same Region. This prevents data loss and minimizes downtime if a node or data center fails.</p>
     #   @return [Boolean]
     class AwsElasticsearchDomainElasticsearchClusterConfigDetails < Struct.new(
+      nil,
       :dedicated_master_count,
       :dedicated_master_enabled,
       :dedicated_master_type,
@@ -10526,6 +10819,7 @@ module Aws::SecurityHub
     #   <p>he number of Availability Zones that the domain uses. Valid values are 2 and 3. The default is 2.</p>
     #   @return [Integer]
     class AwsElasticsearchDomainElasticsearchClusterConfigZoneAwarenessConfigDetails < Struct.new(
+      nil,
       :availability_zone_count,
       keyword_init: true
     )
@@ -10540,6 +10834,7 @@ module Aws::SecurityHub
     #   <p>The KMS key ID. Takes the form <code>1a2a3a4-1a2a-3a4a-5a6a-1a2a3a4a5a6a</code>.</p>
     #   @return [String]
     class AwsElasticsearchDomainEncryptionAtRestOptions < Struct.new(
+      nil,
       :enabled,
       :kms_key_id,
       keyword_init: true
@@ -10561,6 +10856,7 @@ module Aws::SecurityHub
     #   <p>The log configuration.</p>
     #   @return [Types::AwsElasticsearchDomainLogPublishingOptionsLogConfig]
     class AwsElasticsearchDomainLogPublishingOptions < Struct.new(
+      nil,
       :index_slow_logs,
       :search_slow_logs,
       :audit_logs,
@@ -10577,6 +10873,7 @@ module Aws::SecurityHub
     #   <p>Whether the log publishing is enabled.</p>
     #   @return [Boolean]
     class AwsElasticsearchDomainLogPublishingOptionsLogConfig < Struct.new(
+      nil,
       :cloud_watch_logs_log_group_arn,
       :enabled,
       keyword_init: true
@@ -10589,6 +10886,7 @@ module Aws::SecurityHub
     #   <p>Whether node-to-node encryption is enabled.</p>
     #   @return [Boolean]
     class AwsElasticsearchDomainNodeToNodeEncryptionOptions < Struct.new(
+      nil,
       :enabled,
       keyword_init: true
     )
@@ -10646,6 +10944,7 @@ module Aws::SecurityHub
     #            </ul>
     #   @return [String]
     class AwsElasticsearchDomainServiceSoftwareOptions < Struct.new(
+      nil,
       :automated_update_date,
       :cancellable,
       :current_version,
@@ -10673,6 +10972,7 @@ module Aws::SecurityHub
     #   <p>ID for the VPC.</p>
     #   @return [String]
     class AwsElasticsearchDomainVPCOptions < Struct.new(
+      nil,
       :availability_zones,
       :security_group_ids,
       :subnet_ids,
@@ -10692,6 +10992,7 @@ module Aws::SecurityHub
     #            of policies for the load balancer.</p>
     #   @return [String]
     class AwsElbAppCookieStickinessPolicy < Struct.new(
+      nil,
       :cookie_name,
       :policy_name,
       keyword_init: true
@@ -10711,6 +11012,7 @@ module Aws::SecurityHub
     #            balancer.</p>
     #   @return [String]
     class AwsElbLbCookieStickinessPolicy < Struct.new(
+      nil,
       :cookie_expiration_period,
       :policy_name,
       keyword_init: true
@@ -10734,6 +11036,7 @@ module Aws::SecurityHub
     #            <p>If a prefix is not provided, the log is placed at the root level of the bucket.</p>
     #   @return [String]
     class AwsElbLoadBalancerAccessLog < Struct.new(
+      nil,
       :emit_interval,
       :enabled,
       :s3_bucket_name,
@@ -10751,6 +11054,7 @@ module Aws::SecurityHub
     #   <p>The value of the attribute.</p>
     #   @return [String]
     class AwsElbLoadBalancerAdditionalAttribute < Struct.new(
+      nil,
       :key,
       :value,
       keyword_init: true
@@ -10784,6 +11088,7 @@ module Aws::SecurityHub
     #   <p>Any additional attributes for a load balancer.</p>
     #   @return [Array<Types::AwsElbLoadBalancerAdditionalAttribute>]
     class AwsElbLoadBalancerAttributes < Struct.new(
+      nil,
       :access_log,
       :connection_draining,
       :connection_settings,
@@ -10803,6 +11108,7 @@ module Aws::SecurityHub
     #   <p>The names of the policies that are enabled for the EC2 instance.</p>
     #   @return [Array<String>]
     class AwsElbLoadBalancerBackendServerDescription < Struct.new(
+      nil,
       :instance_port,
       :policy_names,
       keyword_init: true
@@ -10820,6 +11126,7 @@ module Aws::SecurityHub
     #            the instances.</p>
     #   @return [Integer]
     class AwsElbLoadBalancerConnectionDraining < Struct.new(
+      nil,
       :enabled,
       :timeout,
       keyword_init: true
@@ -10833,6 +11140,7 @@ module Aws::SecurityHub
     #            connection) before it is closed by the load balancer.</p>
     #   @return [Integer]
     class AwsElbLoadBalancerConnectionSettings < Struct.new(
+      nil,
       :idle_timeout,
       keyword_init: true
     )
@@ -10844,6 +11152,7 @@ module Aws::SecurityHub
     #   <p>Indicates whether cross-zone load balancing is enabled for the load balancer.</p>
     #   @return [Boolean]
     class AwsElbLoadBalancerCrossZoneLoadBalancing < Struct.new(
+      nil,
       :enabled,
       keyword_init: true
     )
@@ -10910,6 +11219,7 @@ module Aws::SecurityHub
     #   <p>The identifier of the VPC for the load balancer.</p>
     #   @return [String]
     class AwsElbLoadBalancerDetails < Struct.new(
+      nil,
       :availability_zones,
       :backend_server_descriptions,
       :canonical_hosted_zone_name,
@@ -10968,6 +11278,7 @@ module Aws::SecurityHub
     #            moved to the Unhealthy state.</p>
     #   @return [Integer]
     class AwsElbLoadBalancerHealthCheck < Struct.new(
+      nil,
       :healthy_threshold,
       :interval,
       :target,
@@ -10983,6 +11294,7 @@ module Aws::SecurityHub
     #   <p>The instance identifier.</p>
     #   @return [String]
     class AwsElbLoadBalancerInstance < Struct.new(
+      nil,
       :instance_id,
       keyword_init: true
     )
@@ -11015,6 +11327,7 @@ module Aws::SecurityHub
     #   <p>The ARN of the server certificate.</p>
     #   @return [String]
     class AwsElbLoadBalancerListener < Struct.new(
+      nil,
       :instance_port,
       :instance_protocol,
       :load_balancer_port,
@@ -11033,6 +11346,7 @@ module Aws::SecurityHub
     #   <p>The policies enabled for the listener.</p>
     #   @return [Array<String>]
     class AwsElbLoadBalancerListenerDescription < Struct.new(
+      nil,
       :listener,
       :policy_names,
       keyword_init: true
@@ -11053,6 +11367,7 @@ module Aws::SecurityHub
     #   <p>The policies other than the stickiness policies.</p>
     #   @return [Array<String>]
     class AwsElbLoadBalancerPolicies < Struct.new(
+      nil,
       :app_cookie_stickiness_policies,
       :lb_cookie_stickiness_policies,
       :other_policies,
@@ -11069,6 +11384,7 @@ module Aws::SecurityHub
     #   <p>The owner of the security group.</p>
     #   @return [String]
     class AwsElbLoadBalancerSourceSecurityGroup < Struct.new(
+      nil,
       :group_name,
       :owner_alias,
       keyword_init: true
@@ -11084,6 +11400,7 @@ module Aws::SecurityHub
     #   <p>The value of the load balancer attribute.</p>
     #   @return [String]
     class AwsElbv2LoadBalancerAttribute < Struct.new(
+      nil,
       :key,
       :value,
       keyword_init: true
@@ -11129,6 +11446,7 @@ module Aws::SecurityHub
     #   <p>Attributes of the load balancer.</p>
     #   @return [Array<Types::AwsElbv2LoadBalancerAttribute>]
     class AwsElbv2LoadBalancerDetails < Struct.new(
+      nil,
       :availability_zones,
       :canonical_hosted_zone_id,
       :created_time,
@@ -11165,6 +11483,7 @@ module Aws::SecurityHub
     #           </p>
     #   @return [String]
     class AwsEventSchemasRegistryDetails < Struct.new(
+      nil,
       :description,
       :registry_arn,
       :registry_name,
@@ -11227,6 +11546,7 @@ module Aws::SecurityHub
     #               The reason the endpoint is in its current state.</p>
     #   @return [String]
     class AwsEventsEndpointDetails < Struct.new(
+      nil,
       :arn,
       :description,
       :endpoint_id,
@@ -11250,6 +11570,7 @@ module Aws::SecurityHub
     #               The Amazon Resource Name (ARN) of the event bus that the endpoint is associated with.</p>
     #   @return [String]
     class AwsEventsEndpointEventBusesDetails < Struct.new(
+      nil,
       :event_bus_arn,
       keyword_init: true
     )
@@ -11264,6 +11585,7 @@ module Aws::SecurityHub
     #               The state of event replication.</p>
     #   @return [String]
     class AwsEventsEndpointReplicationConfigDetails < Struct.new(
+      nil,
       :state,
       keyword_init: true
     )
@@ -11277,6 +11599,7 @@ module Aws::SecurityHub
     #               The failover configuration for an endpoint. This includes what triggers failover and what happens when it's triggered.</p>
     #   @return [Types::AwsEventsEndpointRoutingConfigFailoverConfigDetails]
     class AwsEventsEndpointRoutingConfigDetails < Struct.new(
+      nil,
       :failover_config,
       keyword_init: true
     )
@@ -11294,6 +11617,7 @@ module Aws::SecurityHub
     #               The Region that events are routed to when failover is triggered or event replication is enabled.</p>
     #   @return [Types::AwsEventsEndpointRoutingConfigFailoverConfigSecondaryDetails]
     class AwsEventsEndpointRoutingConfigFailoverConfigDetails < Struct.new(
+      nil,
       :primary,
       :secondary,
       keyword_init: true
@@ -11308,6 +11632,7 @@ module Aws::SecurityHub
     #               The Amazon Resource Name (ARN) of the health check used by the endpoint to determine whether failover is triggered.</p>
     #   @return [String]
     class AwsEventsEndpointRoutingConfigFailoverConfigPrimaryDetails < Struct.new(
+      nil,
       :health_check,
       keyword_init: true
     )
@@ -11321,6 +11646,7 @@ module Aws::SecurityHub
     #               Defines the secondary Region.</p>
     #   @return [String]
     class AwsEventsEndpointRoutingConfigFailoverConfigSecondaryDetails < Struct.new(
+      nil,
       :route,
       keyword_init: true
     )
@@ -11345,6 +11671,7 @@ module Aws::SecurityHub
     #               The policy that enables the external account to send events to your account.</p>
     #   @return [String]
     class AwsEventsEventbusDetails < Struct.new(
+      nil,
       :arn,
       :name,
       :policy,
@@ -11362,6 +11689,7 @@ module Aws::SecurityHub
     #           </p>
     #   @return [String]
     class AwsGuardDutyDetectorDataSourcesCloudTrailDetails < Struct.new(
+      nil,
       :status,
       keyword_init: true
     )
@@ -11402,6 +11730,7 @@ module Aws::SecurityHub
     #           </p>
     #   @return [Types::AwsGuardDutyDetectorDataSourcesS3LogsDetails]
     class AwsGuardDutyDetectorDataSourcesDetails < Struct.new(
+      nil,
       :cloud_trail,
       :dns_logs,
       :flow_logs,
@@ -11422,6 +11751,7 @@ module Aws::SecurityHub
     #           </p>
     #   @return [String]
     class AwsGuardDutyDetectorDataSourcesDnsLogsDetails < Struct.new(
+      nil,
       :status,
       keyword_init: true
     )
@@ -11437,6 +11767,7 @@ module Aws::SecurityHub
     #           </p>
     #   @return [String]
     class AwsGuardDutyDetectorDataSourcesFlowLogsDetails < Struct.new(
+      nil,
       :status,
       keyword_init: true
     )
@@ -11452,6 +11783,7 @@ module Aws::SecurityHub
     #           </p>
     #   @return [String]
     class AwsGuardDutyDetectorDataSourcesKubernetesAuditLogsDetails < Struct.new(
+      nil,
       :status,
       keyword_init: true
     )
@@ -11467,6 +11799,7 @@ module Aws::SecurityHub
     #           </p>
     #   @return [Types::AwsGuardDutyDetectorDataSourcesKubernetesAuditLogsDetails]
     class AwsGuardDutyDetectorDataSourcesKubernetesDetails < Struct.new(
+      nil,
       :audit_logs,
       keyword_init: true
     )
@@ -11487,6 +11820,7 @@ module Aws::SecurityHub
     #           </p>
     #   @return [String]
     class AwsGuardDutyDetectorDataSourcesMalwareProtectionDetails < Struct.new(
+      nil,
       :scan_ec2_instance_with_findings,
       :service_role,
       keyword_init: true
@@ -11503,6 +11837,7 @@ module Aws::SecurityHub
     #           </p>
     #   @return [Types::AwsGuardDutyDetectorDataSourcesMalwareProtectionScanEc2InstanceWithFindingsEbsVolumesDetails]
     class AwsGuardDutyDetectorDataSourcesMalwareProtectionScanEc2InstanceWithFindingsDetails < Struct.new(
+      nil,
       :ebs_volumes,
       keyword_init: true
     )
@@ -11523,6 +11858,7 @@ module Aws::SecurityHub
     #           </p>
     #   @return [String]
     class AwsGuardDutyDetectorDataSourcesMalwareProtectionScanEc2InstanceWithFindingsEbsVolumesDetails < Struct.new(
+      nil,
       :reason,
       :status,
       keyword_init: true
@@ -11539,6 +11875,7 @@ module Aws::SecurityHub
     #           </p>
     #   @return [String]
     class AwsGuardDutyDetectorDataSourcesS3LogsDetails < Struct.new(
+      nil,
       :status,
       keyword_init: true
     )
@@ -11574,6 +11911,7 @@ module Aws::SecurityHub
     #           </p>
     #   @return [String]
     class AwsGuardDutyDetectorDetails < Struct.new(
+      nil,
       :data_sources,
       :features,
       :finding_publishing_frequency,
@@ -11598,6 +11936,7 @@ module Aws::SecurityHub
     #           </p>
     #   @return [String]
     class AwsGuardDutyDetectorFeaturesDetails < Struct.new(
+      nil,
       :name,
       :status,
       keyword_init: true
@@ -11640,6 +11979,7 @@ module Aws::SecurityHub
     #   <p>Information about the session that the key was used for.</p>
     #   @return [Types::AwsIamAccessKeySessionContext]
     class AwsIamAccessKeyDetails < Struct.new(
+      nil,
       :user_name,
       :status,
       :created_at,
@@ -11662,6 +12002,7 @@ module Aws::SecurityHub
     #   <p>Information about the entity that created the session.</p>
     #   @return [Types::AwsIamAccessKeySessionContextSessionIssuer]
     class AwsIamAccessKeySessionContext < Struct.new(
+      nil,
       :attributes,
       :session_issuer,
       keyword_init: true
@@ -11678,6 +12019,7 @@ module Aws::SecurityHub
     #            <p>For more information about the validation and formatting of timestamp fields in Security Hub, see <a href="https://docs.aws.amazon.com/securityhub/1.0/APIReference/Welcome.html#timestamps">Timestamps</a>.</p>
     #   @return [String]
     class AwsIamAccessKeySessionContextAttributes < Struct.new(
+      nil,
       :mfa_authenticated,
       :creation_date,
       keyword_init: true
@@ -11703,6 +12045,7 @@ module Aws::SecurityHub
     #   <p>The name of the principal that created the session.</p>
     #   @return [String]
     class AwsIamAccessKeySessionContextSessionIssuer < Struct.new(
+      nil,
       :type,
       :principal_id,
       :arn,
@@ -11721,6 +12064,7 @@ module Aws::SecurityHub
     #   <p>The ARN of the policy.</p>
     #   @return [String]
     class AwsIamAttachedManagedPolicy < Struct.new(
+      nil,
       :policy_name,
       :policy_arn,
       keyword_init: true
@@ -11749,6 +12093,7 @@ module Aws::SecurityHub
     #   <p>The path to the group.</p>
     #   @return [String]
     class AwsIamGroupDetails < Struct.new(
+      nil,
       :attached_managed_policies,
       :create_date,
       :group_id,
@@ -11765,6 +12110,7 @@ module Aws::SecurityHub
     #   <p>The name of the policy.</p>
     #   @return [String]
     class AwsIamGroupPolicy < Struct.new(
+      nil,
       :policy_name,
       keyword_init: true
     )
@@ -11792,6 +12138,7 @@ module Aws::SecurityHub
     #   <p>The roles associated with the instance profile.</p>
     #   @return [Array<Types::AwsIamInstanceProfileRole>]
     class AwsIamInstanceProfile < Struct.new(
+      nil,
       :arn,
       :create_date,
       :instance_profile_id,
@@ -11824,6 +12171,7 @@ module Aws::SecurityHub
     #   <p>The name of the role.</p>
     #   @return [String]
     class AwsIamInstanceProfileRole < Struct.new(
+      nil,
       :arn,
       :assume_role_policy_document,
       :create_date,
@@ -11844,6 +12192,7 @@ module Aws::SecurityHub
     #   <p>The usage type for the permissions boundary.</p>
     #   @return [String]
     class AwsIamPermissionsBoundary < Struct.new(
+      nil,
       :permissions_boundary_arn,
       :permissions_boundary_type,
       keyword_init: true
@@ -11889,6 +12238,7 @@ module Aws::SecurityHub
     #            <p>For more information about the validation and formatting of timestamp fields in Security Hub, see <a href="https://docs.aws.amazon.com/securityhub/1.0/APIReference/Welcome.html#timestamps">Timestamps</a>.</p>
     #   @return [String]
     class AwsIamPolicyDetails < Struct.new(
+      nil,
       :attachment_count,
       :create_date,
       :default_version_id,
@@ -11917,6 +12267,7 @@ module Aws::SecurityHub
     #            <p>For more information about the validation and formatting of timestamp fields in Security Hub, see <a href="https://docs.aws.amazon.com/securityhub/1.0/APIReference/Welcome.html#timestamps">Timestamps</a>.</p>
     #   @return [String]
     class AwsIamPolicyVersion < Struct.new(
+      nil,
       :version_id,
       :is_default_version,
       :create_date,
@@ -11959,6 +12310,7 @@ module Aws::SecurityHub
     #   <p>The path to the role.</p>
     #   @return [String]
     class AwsIamRoleDetails < Struct.new(
+      nil,
       :assume_role_policy_document,
       :attached_managed_policies,
       :create_date,
@@ -11979,6 +12331,7 @@ module Aws::SecurityHub
     #   <p>The name of the policy.</p>
     #   @return [String]
     class AwsIamRolePolicy < Struct.new(
+      nil,
       :policy_name,
       keyword_init: true
     )
@@ -12012,6 +12365,7 @@ module Aws::SecurityHub
     #   <p>The list of inline policies that are embedded in the user.</p>
     #   @return [Array<Types::AwsIamUserPolicy>]
     class AwsIamUserDetails < Struct.new(
+      nil,
       :attached_managed_policies,
       :create_date,
       :group_list,
@@ -12030,6 +12384,7 @@ module Aws::SecurityHub
     #   <p>The name of the policy.</p>
     #   @return [String]
     class AwsIamUserPolicy < Struct.new(
+      nil,
       :policy_name,
       keyword_init: true
     )
@@ -12061,6 +12416,7 @@ module Aws::SecurityHub
     #         </p>
     #   @return [Integer]
     class AwsKinesisStreamDetails < Struct.new(
+      nil,
       :name,
       :arn,
       :stream_encryption,
@@ -12081,6 +12437,7 @@ module Aws::SecurityHub
     #   <p>The globally unique identifier for the customer-managed KMS key to use for encryption. </p>
     #   @return [String]
     class AwsKinesisStreamStreamEncryptionDetails < Struct.new(
+      nil,
       :encryption_type,
       :key_id,
       keyword_init: true
@@ -12146,6 +12503,7 @@ module Aws::SecurityHub
     #   <p>Whether the key has key rotation enabled.</p>
     #   @return [Boolean]
     class AwsKmsKeyDetails < Struct.new(
+      nil,
       :aws_account_id,
       :creation_date,
       :key_id,
@@ -12173,6 +12531,7 @@ module Aws::SecurityHub
     #   <p>The base64-encoded contents of the deployment package. Amazon Web Services SDK and Amazon Web Services CLI clients handle the encoding for you.</p>
     #   @return [String]
     class AwsLambdaFunctionCode < Struct.new(
+      nil,
       :s3_bucket,
       :s3_key,
       :s3_object_version,
@@ -12187,6 +12546,7 @@ module Aws::SecurityHub
     #   <p>The ARN of an SQS queue or SNS topic.</p>
     #   @return [String]
     class AwsLambdaFunctionDeadLetterConfig < Struct.new(
+      nil,
       :target_arn,
       keyword_init: true
     )
@@ -12258,6 +12618,7 @@ module Aws::SecurityHub
     #         </p>
     #   @return [String]
     class AwsLambdaFunctionDetails < Struct.new(
+      nil,
       :code,
       :code_sha256,
       :dead_letter_config,
@@ -12291,6 +12652,7 @@ module Aws::SecurityHub
     #   <p>An <code>AwsLambdaFunctionEnvironmentError</code> object.</p>
     #   @return [Types::AwsLambdaFunctionEnvironmentError]
     class AwsLambdaFunctionEnvironment < Struct.new(
+      nil,
       :variables,
       :error,
       keyword_init: true
@@ -12306,6 +12668,7 @@ module Aws::SecurityHub
     #   <p>The error message.</p>
     #   @return [String]
     class AwsLambdaFunctionEnvironmentError < Struct.new(
+      nil,
       :error_code,
       :message,
       keyword_init: true
@@ -12321,6 +12684,7 @@ module Aws::SecurityHub
     #   <p>The size of the layer archive in bytes.</p>
     #   @return [Integer]
     class AwsLambdaFunctionLayer < Struct.new(
+      nil,
       :arn,
       :code_size,
       keyword_init: true
@@ -12333,6 +12697,7 @@ module Aws::SecurityHub
     #   <p>The tracing mode.</p>
     #   @return [String]
     class AwsLambdaFunctionTracingConfig < Struct.new(
+      nil,
       :mode,
       keyword_init: true
     )
@@ -12350,6 +12715,7 @@ module Aws::SecurityHub
     #   <p>The ID of the VPC.</p>
     #   @return [String]
     class AwsLambdaFunctionVpcConfig < Struct.new(
+      nil,
       :security_group_ids,
       :subnet_ids,
       :vpc_id,
@@ -12374,6 +12740,7 @@ module Aws::SecurityHub
     #            <p>For more information about the validation and formatting of timestamp fields in Security Hub, see <a href="https://docs.aws.amazon.com/securityhub/1.0/APIReference/Welcome.html#timestamps">Timestamps</a>.</p>
     #   @return [String]
     class AwsLambdaLayerVersionDetails < Struct.new(
+      nil,
       :version,
       :compatible_runtimes,
       :created_date,
@@ -12394,6 +12761,7 @@ module Aws::SecurityHub
     #         </p>
     #   @return [String]
     class AwsMountPoint < Struct.new(
+      nil,
       :source_volume,
       :container_path,
       keyword_init: true
@@ -12416,6 +12784,7 @@ module Aws::SecurityHub
     #               Provides details for client authentication using TLS.</p>
     #   @return [Types::AwsMskClusterClusterInfoClientAuthenticationTlsDetails]
     class AwsMskClusterClusterInfoClientAuthenticationDetails < Struct.new(
+      nil,
       :sasl,
       :unauthenticated,
       :tls,
@@ -12435,6 +12804,7 @@ module Aws::SecurityHub
     #               Details for SASL client authentication using SCRAM.</p>
     #   @return [Types::AwsMskClusterClusterInfoClientAuthenticationSaslScramDetails]
     class AwsMskClusterClusterInfoClientAuthenticationSaslDetails < Struct.new(
+      nil,
       :iam,
       :scram,
       keyword_init: true
@@ -12449,6 +12819,7 @@ module Aws::SecurityHub
     #               Indicates whether SASL/IAM authentication is enabled or not.</p>
     #   @return [Boolean]
     class AwsMskClusterClusterInfoClientAuthenticationSaslIamDetails < Struct.new(
+      nil,
       :enabled,
       keyword_init: true
     )
@@ -12462,6 +12833,7 @@ module Aws::SecurityHub
     #               Indicates whether SASL/SCRAM authentication is enabled or not.</p>
     #   @return [Boolean]
     class AwsMskClusterClusterInfoClientAuthenticationSaslScramDetails < Struct.new(
+      nil,
       :enabled,
       keyword_init: true
     )
@@ -12481,6 +12853,7 @@ module Aws::SecurityHub
     #               Indicates whether TLS authentication is enabled or not.</p>
     #   @return [Boolean]
     class AwsMskClusterClusterInfoClientAuthenticationTlsDetails < Struct.new(
+      nil,
       :certificate_authority_arn_list,
       :enabled,
       keyword_init: true
@@ -12496,6 +12869,7 @@ module Aws::SecurityHub
     #               Indicates whether unauthenticated is allowed or not.</p>
     #   @return [Boolean]
     class AwsMskClusterClusterInfoClientAuthenticationUnauthenticatedDetails < Struct.new(
+      nil,
       :enabled,
       keyword_init: true
     )
@@ -12531,6 +12905,7 @@ module Aws::SecurityHub
     #           </p>
     #   @return [String]
     class AwsMskClusterClusterInfoDetails < Struct.new(
+      nil,
       :encryption_info,
       :current_version,
       :number_of_broker_nodes,
@@ -12554,6 +12929,7 @@ module Aws::SecurityHub
     #               The data-volume encryption details. You can't update encryption at rest settings for existing clusters.</p>
     #   @return [Types::AwsMskClusterClusterInfoEncryptionInfoEncryptionAtRestDetails]
     class AwsMskClusterClusterInfoEncryptionInfoDetails < Struct.new(
+      nil,
       :encryption_in_transit,
       :encryption_at_rest,
       keyword_init: true
@@ -12569,6 +12945,7 @@ module Aws::SecurityHub
     #   KMS key, MSK creates one for you and uses it.</p>
     #   @return [String]
     class AwsMskClusterClusterInfoEncryptionInfoEncryptionAtRestDetails < Struct.new(
+      nil,
       :data_volume_kms_key_id,
       keyword_init: true
     )
@@ -12588,6 +12965,7 @@ module Aws::SecurityHub
     #               Indicates the encryption setting for data in transit between clients and brokers.</p>
     #   @return [String]
     class AwsMskClusterClusterInfoEncryptionInfoEncryptionInTransitDetails < Struct.new(
+      nil,
       :in_cluster,
       :client_broker,
       keyword_init: true
@@ -12603,6 +12981,7 @@ module Aws::SecurityHub
     #               Provides information about a cluster.</p>
     #   @return [Types::AwsMskClusterClusterInfoDetails]
     class AwsMskClusterDetails < Struct.new(
+      nil,
       :cluster_info,
       keyword_init: true
     )
@@ -12641,6 +13020,7 @@ module Aws::SecurityHub
     #   <p>The identifier of the VPC where the firewall is used.</p>
     #   @return [String]
     class AwsNetworkFirewallFirewallDetails < Struct.new(
+      nil,
       :delete_protection,
       :description,
       :firewall_arn,
@@ -12673,6 +13053,7 @@ module Aws::SecurityHub
     #   <p>A description of the firewall policy.</p>
     #   @return [String]
     class AwsNetworkFirewallFirewallPolicyDetails < Struct.new(
+      nil,
       :firewall_policy,
       :firewall_policy_arn,
       :firewall_policy_id,
@@ -12688,6 +13069,7 @@ module Aws::SecurityHub
     #   <p>The identifier of the subnet</p>
     #   @return [String]
     class AwsNetworkFirewallFirewallSubnetMappingsDetails < Struct.new(
+      nil,
       :subnet_id,
       keyword_init: true
     )
@@ -12719,6 +13101,7 @@ module Aws::SecurityHub
     #   <p>The type of rule group. A rule group can be stateful or stateless.</p>
     #   @return [String]
     class AwsNetworkFirewallRuleGroupDetails < Struct.new(
+      nil,
       :capacity,
       :description,
       :rule_group,
@@ -12746,6 +13129,7 @@ module Aws::SecurityHub
     #         </p>
     #   @return [Types::AwsOpenSearchServiceDomainMasterUserOptionsDetails]
     class AwsOpenSearchServiceDomainAdvancedSecurityOptionsDetails < Struct.new(
+      nil,
       :enabled,
       :internal_user_database_enabled,
       :master_user_options,
@@ -12789,6 +13173,7 @@ module Aws::SecurityHub
     #         </p>
     #   @return [String]
     class AwsOpenSearchServiceDomainClusterConfigDetails < Struct.new(
+      nil,
       :instance_count,
       :warm_enabled,
       :warm_count,
@@ -12809,6 +13194,7 @@ module Aws::SecurityHub
     #   <p>The number of Availability Zones that the domain uses. Valid values are <code>2</code> or <code>3</code>. The default is <code>2</code>.</p>
     #   @return [Integer]
     class AwsOpenSearchServiceDomainClusterConfigZoneAwarenessConfigDetails < Struct.new(
+      nil,
       :availability_zone_count,
       keyword_init: true
     )
@@ -12864,6 +13250,7 @@ module Aws::SecurityHub
     #         </p>
     #   @return [Types::AwsOpenSearchServiceDomainAdvancedSecurityOptionsDetails]
     class AwsOpenSearchServiceDomainDetails < Struct.new(
+      nil,
       :arn,
       :access_policies,
       :domain_name,
@@ -12901,6 +13288,7 @@ module Aws::SecurityHub
     #   <p>The TLS security policy to apply to the HTTPS endpoint of the OpenSearch domain.</p>
     #   @return [String]
     class AwsOpenSearchServiceDomainDomainEndpointOptionsDetails < Struct.new(
+      nil,
       :custom_endpoint_certificate_arn,
       :custom_endpoint_enabled,
       :enforce_https,
@@ -12919,6 +13307,7 @@ module Aws::SecurityHub
     #   <p>The KMS key ID.</p>
     #   @return [String]
     class AwsOpenSearchServiceDomainEncryptionAtRestOptionsDetails < Struct.new(
+      nil,
       :enabled,
       :kms_key_id,
       keyword_init: true
@@ -12934,6 +13323,7 @@ module Aws::SecurityHub
     #   <p>Whether the log publishing is enabled.</p>
     #   @return [Boolean]
     class AwsOpenSearchServiceDomainLogPublishingOption < Struct.new(
+      nil,
       :cloud_watch_logs_log_group_arn,
       :enabled,
       keyword_init: true
@@ -12952,6 +13342,7 @@ module Aws::SecurityHub
     #   <p>Configures the OpenSearch audit logs publishing.</p>
     #   @return [Types::AwsOpenSearchServiceDomainLogPublishingOption]
     class AwsOpenSearchServiceDomainLogPublishingOptionsDetails < Struct.new(
+      nil,
       :index_slow_logs,
       :search_slow_logs,
       :audit_logs,
@@ -12975,6 +13366,7 @@ module Aws::SecurityHub
     #         </p>
     #   @return [String]
     class AwsOpenSearchServiceDomainMasterUserOptionsDetails < Struct.new(
+      nil,
       :master_user_arn,
       :master_user_name,
       :master_user_password,
@@ -12988,6 +13380,7 @@ module Aws::SecurityHub
     #   <p>Whether node-to-node encryption is enabled.</p>
     #   @return [Boolean]
     class AwsOpenSearchServiceDomainNodeToNodeEncryptionOptionsDetails < Struct.new(
+      nil,
       :enabled,
       keyword_init: true
     )
@@ -13047,6 +13440,7 @@ module Aws::SecurityHub
     #   <p>Whether the service software update is optional.</p>
     #   @return [Boolean]
     class AwsOpenSearchServiceDomainServiceSoftwareOptionsDetails < Struct.new(
+      nil,
       :automated_update_date,
       :cancellable,
       :current_version,
@@ -13068,6 +13462,7 @@ module Aws::SecurityHub
     #   <p>A list of subnet IDs that are associated with the VPC endpoints for the domain.</p>
     #   @return [Array<String>]
     class AwsOpenSearchServiceDomainVpcOptionsDetails < Struct.new(
+      nil,
       :security_group_ids,
       :subnet_ids,
       keyword_init: true
@@ -13100,6 +13495,7 @@ module Aws::SecurityHub
     #            </ul>
     #   @return [String]
     class AwsRdsDbClusterAssociatedRole < Struct.new(
+      nil,
       :role_arn,
       :status,
       keyword_init: true
@@ -13308,6 +13704,7 @@ module Aws::SecurityHub
     #               Indicates if minor version upgrades are automatically applied to the cluster.</p>
     #   @return [Boolean]
     class AwsRdsDbClusterDetails < Struct.new(
+      nil,
       :allocated_storage,
       :availability_zones,
       :backup_retention_period,
@@ -13366,6 +13763,7 @@ module Aws::SecurityHub
     #   <p>The status of the DB cluster parameter group for this member of the DB cluster.</p>
     #   @return [String]
     class AwsRdsDbClusterMember < Struct.new(
+      nil,
       :is_cluster_writer,
       :promotion_tier,
       :db_instance_identifier,
@@ -13383,6 +13781,7 @@ module Aws::SecurityHub
     #   <p>The status of the DB cluster option group.</p>
     #   @return [String]
     class AwsRdsDbClusterOptionGroupMembership < Struct.new(
+      nil,
       :db_cluster_option_group_name,
       :status,
       keyword_init: true
@@ -13408,6 +13807,7 @@ module Aws::SecurityHub
     #           </p>
     #   @return [Array<String>]
     class AwsRdsDbClusterSnapshotDbClusterSnapshotAttribute < Struct.new(
+      nil,
       :attribute_name,
       :attribute_values,
       keyword_init: true
@@ -13479,6 +13879,7 @@ module Aws::SecurityHub
     #           </p>
     #   @return [Array<Types::AwsRdsDbClusterSnapshotDbClusterSnapshotAttribute>]
     class AwsRdsDbClusterSnapshotDetails < Struct.new(
+      nil,
       :availability_zones,
       :snapshot_create_time,
       :engine,
@@ -13518,6 +13919,7 @@ module Aws::SecurityHub
     #   <p>The name of the IAM role to use when making API calls to the Directory Service.</p>
     #   @return [String]
     class AwsRdsDbDomainMembership < Struct.new(
+      nil,
       :domain,
       :status,
       :fqdn,
@@ -13558,6 +13960,7 @@ module Aws::SecurityHub
     #            </ul>
     #   @return [String]
     class AwsRdsDbInstanceAssociatedRole < Struct.new(
+      nil,
       :role_arn,
       :feature_name,
       :status,
@@ -13796,6 +14199,7 @@ module Aws::SecurityHub
     #            instance.</p>
     #   @return [Integer]
     class AwsRdsDbInstanceDetails < Struct.new(
+      nil,
       :associated_roles,
       :ca_certificate_identifier,
       :db_cluster_identifier,
@@ -13869,6 +14273,7 @@ module Aws::SecurityHub
     #   <p>Specifies the ID that Amazon Route 53 assigns when you create a hosted zone.</p>
     #   @return [String]
     class AwsRdsDbInstanceEndpoint < Struct.new(
+      nil,
       :address,
       :port,
       :hosted_zone_id,
@@ -13885,6 +14290,7 @@ module Aws::SecurityHub
     #   <p>The status of the VPC security group.</p>
     #   @return [String]
     class AwsRdsDbInstanceVpcSecurityGroup < Struct.new(
+      nil,
       :vpc_security_group_id,
       :status,
       keyword_init: true
@@ -13900,6 +14306,7 @@ module Aws::SecurityHub
     #   <p>The status of the option group membership.</p>
     #   @return [String]
     class AwsRdsDbOptionGroupMembership < Struct.new(
+      nil,
       :option_group_name,
       :status,
       keyword_init: true
@@ -13915,6 +14322,7 @@ module Aws::SecurityHub
     #   <p>The status of parameter updates.</p>
     #   @return [String]
     class AwsRdsDbParameterGroup < Struct.new(
+      nil,
       :db_parameter_group_name,
       :parameter_apply_status,
       keyword_init: true
@@ -13969,6 +14377,7 @@ module Aws::SecurityHub
     #   <p>Processor features that are being updated.</p>
     #   @return [Array<Types::AwsRdsDbProcessorFeature>]
     class AwsRdsDbPendingModifiedValues < Struct.new(
+      nil,
       :db_instance_class,
       :allocated_storage,
       :master_user_password,
@@ -13997,6 +14406,7 @@ module Aws::SecurityHub
     #   <p>The value of the processor feature.</p>
     #   @return [String]
     class AwsRdsDbProcessorFeature < Struct.new(
+      nil,
       :name,
       :value,
       keyword_init: true
@@ -14028,6 +14438,7 @@ module Aws::SecurityHub
     #         </p>
     #   @return [String]
     class AwsRdsDbSecurityGroupDetails < Struct.new(
+      nil,
       :db_security_group_arn,
       :db_security_group_description,
       :db_security_group_name,
@@ -14054,6 +14465,7 @@ module Aws::SecurityHub
     #   <p>Provides the status of the EC2 security group.</p>
     #   @return [String]
     class AwsRdsDbSecurityGroupEc2SecurityGroup < Struct.new(
+      nil,
       :ec2_security_group_id,
       :ec2_security_group_name,
       :ec2_security_group_owner_id,
@@ -14071,6 +14483,7 @@ module Aws::SecurityHub
     #   <p>Specifies the status of the IP range.</p>
     #   @return [String]
     class AwsRdsDbSecurityGroupIpRange < Struct.new(
+      nil,
       :cidr_ip,
       :status,
       keyword_init: true
@@ -14250,6 +14663,7 @@ module Aws::SecurityHub
     #   <p>The identifier for the source DB instance.</p>
     #   @return [String]
     class AwsRdsDbSnapshotDetails < Struct.new(
+      nil,
       :db_snapshot_identifier,
       :db_instance_identifier,
       :snapshot_create_time,
@@ -14296,6 +14710,7 @@ module Aws::SecurityHub
     #   <p>If the read replica is currently in an error state, provides the error details.</p>
     #   @return [String]
     class AwsRdsDbStatusInfo < Struct.new(
+      nil,
       :status_type,
       :normal,
       :status,
@@ -14325,6 +14740,7 @@ module Aws::SecurityHub
     #   <p>The ARN of the subnet group.</p>
     #   @return [String]
     class AwsRdsDbSubnetGroup < Struct.new(
+      nil,
       :db_subnet_group_name,
       :db_subnet_group_description,
       :vpc_id,
@@ -14347,6 +14763,7 @@ module Aws::SecurityHub
     #   <p>The status of a subnet in the subnet group.</p>
     #   @return [String]
     class AwsRdsDbSubnetGroupSubnet < Struct.new(
+      nil,
       :subnet_identifier,
       :subnet_availability_zone,
       :subnet_status,
@@ -14360,6 +14777,7 @@ module Aws::SecurityHub
     #   <p>The name of the Availability Zone for a subnet in the subnet group.</p>
     #   @return [String]
     class AwsRdsDbSubnetGroupSubnetAvailabilityZone < Struct.new(
+      nil,
       :name,
       keyword_init: true
     )
@@ -14401,6 +14819,7 @@ module Aws::SecurityHub
     #            <p>For more information about the validation and formatting of timestamp fields in Security Hub, see <a href="https://docs.aws.amazon.com/securityhub/1.0/APIReference/Welcome.html#timestamps">Timestamps</a>.</p>
     #   @return [String]
     class AwsRdsEventSubscriptionDetails < Struct.new(
+      nil,
       :cust_subscription_id,
       :customer_aws_id,
       :enabled,
@@ -14424,6 +14843,7 @@ module Aws::SecurityHub
     #   <p>A list of log types that are being disabled.</p>
     #   @return [Array<String>]
     class AwsRdsPendingCloudWatchLogsExports < Struct.new(
+      nil,
       :log_types_to_enable,
       :log_types_to_disable,
       keyword_init: true
@@ -14442,6 +14862,7 @@ module Aws::SecurityHub
     #   <p>The public IP address of the node.</p>
     #   @return [String]
     class AwsRedshiftClusterClusterNode < Struct.new(
+      nil,
       :node_role,
       :private_ip_address,
       :public_ip_address,
@@ -14461,6 +14882,7 @@ module Aws::SecurityHub
     #   <p>The name of the parameter group.</p>
     #   @return [String]
     class AwsRedshiftClusterClusterParameterGroup < Struct.new(
+      nil,
       :cluster_parameter_status_list,
       :parameter_apply_status,
       :parameter_group_name,
@@ -14486,6 +14908,7 @@ module Aws::SecurityHub
     #   <p>The error that prevented the parameter from being applied to the database.</p>
     #   @return [String]
     class AwsRedshiftClusterClusterParameterStatus < Struct.new(
+      nil,
       :parameter_name,
       :parameter_apply_status,
       :parameter_apply_error_description,
@@ -14502,6 +14925,7 @@ module Aws::SecurityHub
     #   <p>The status of the cluster security group.</p>
     #   @return [String]
     class AwsRedshiftClusterClusterSecurityGroup < Struct.new(
+      nil,
       :cluster_security_group_name,
       :status,
       keyword_init: true
@@ -14531,6 +14955,7 @@ module Aws::SecurityHub
     #   <p>The name of the snapshot copy grant.</p>
     #   @return [String]
     class AwsRedshiftClusterClusterSnapshotCopyStatus < Struct.new(
+      nil,
       :destination_region,
       :manual_snapshot_retention_period,
       :retention_period,
@@ -14554,6 +14979,7 @@ module Aws::SecurityHub
     #            <p>For more information about the validation and formatting of timestamp fields in Security Hub, see <a href="https://docs.aws.amazon.com/securityhub/1.0/APIReference/Welcome.html#timestamps">Timestamps</a>.</p>
     #   @return [String]
     class AwsRedshiftClusterDeferredMaintenanceWindow < Struct.new(
+      nil,
       :defer_maintenance_end_time,
       :defer_maintenance_identifier,
       :defer_maintenance_start_time,
@@ -14765,6 +15191,7 @@ module Aws::SecurityHub
     #   <p>Information about the logging status of the cluster.</p>
     #   @return [Types::AwsRedshiftClusterLoggingStatus]
     class AwsRedshiftClusterDetails < Struct.new(
+      nil,
       :allow_version_upgrade,
       :automated_snapshot_retention_period,
       :availability_zone,
@@ -14822,6 +15249,7 @@ module Aws::SecurityHub
     #   <p>The status of the elastic IP address.</p>
     #   @return [String]
     class AwsRedshiftClusterElasticIpStatus < Struct.new(
+      nil,
       :elastic_ip,
       :status,
       keyword_init: true
@@ -14837,6 +15265,7 @@ module Aws::SecurityHub
     #   <p>The port that the database engine listens on.</p>
     #   @return [Integer]
     class AwsRedshiftClusterEndpoint < Struct.new(
+      nil,
       :address,
       :port,
       keyword_init: true
@@ -14863,6 +15292,7 @@ module Aws::SecurityHub
     #            </p>
     #   @return [String]
     class AwsRedshiftClusterHsmStatus < Struct.new(
+      nil,
       :hsm_client_certificate_identifier,
       :hsm_configuration_identifier,
       :status,
@@ -14881,6 +15311,7 @@ module Aws::SecurityHub
     #   <p>The ARN of the IAM role.</p>
     #   @return [String]
     class AwsRedshiftClusterIamRole < Struct.new(
+      nil,
       :apply_status,
       :iam_role_arn,
       keyword_init: true
@@ -14910,6 +15341,7 @@ module Aws::SecurityHub
     #   <p>Provides the prefix applied to the log file names.</p>
     #   @return [String]
     class AwsRedshiftClusterLoggingStatus < Struct.new(
+      nil,
       :bucket_name,
       :last_failure_message,
       :last_failure_time,
@@ -14958,6 +15390,7 @@ module Aws::SecurityHub
     #            public network.</p>
     #   @return [Boolean]
     class AwsRedshiftClusterPendingModifiedValues < Struct.new(
+      nil,
       :automated_snapshot_retention_period,
       :cluster_identifier,
       :cluster_type,
@@ -14984,6 +15417,7 @@ module Aws::SecurityHub
     #            </p>
     #   @return [String]
     class AwsRedshiftClusterResizeInfo < Struct.new(
+      nil,
       :allow_cancel_resize,
       :resize_type,
       keyword_init: true
@@ -15023,6 +15457,7 @@ module Aws::SecurityHub
     #            </p>
     #   @return [String]
     class AwsRedshiftClusterRestoreStatus < Struct.new(
+      nil,
       :current_restore_rate_in_mega_bytes_per_second,
       :elapsed_time_in_seconds,
       :estimated_time_to_completion_in_seconds,
@@ -15042,6 +15477,7 @@ module Aws::SecurityHub
     #   <p>The identifier of the VPC security group.</p>
     #   @return [String]
     class AwsRedshiftClusterVpcSecurityGroup < Struct.new(
+      nil,
       :status,
       :vpc_security_group_id,
       keyword_init: true
@@ -15056,6 +15492,7 @@ module Aws::SecurityHub
     #           </p>
     #   @return [String]
     class AwsRoute53HostedZoneConfigDetails < Struct.new(
+      nil,
       :comment,
       keyword_init: true
     )
@@ -15085,6 +15522,7 @@ module Aws::SecurityHub
     #   associated with the current Amazon Web Services account.</p>
     #   @return [Types::AwsRoute53QueryLoggingConfigDetails]
     class AwsRoute53HostedZoneDetails < Struct.new(
+      nil,
       :hosted_zone,
       :vpcs,
       :name_servers,
@@ -15109,6 +15547,7 @@ module Aws::SecurityHub
     #               An object that includes the <code>Comment</code> element.</p>
     #   @return [Types::AwsRoute53HostedZoneConfigDetails]
     class AwsRoute53HostedZoneObjectDetails < Struct.new(
+      nil,
       :id,
       :name,
       :config,
@@ -15129,6 +15568,7 @@ module Aws::SecurityHub
     #               The Amazon Web Services Region that an Amazon VPC was created in.</p>
     #   @return [String]
     class AwsRoute53HostedZoneVpcDetails < Struct.new(
+      nil,
       :id,
       :region,
       keyword_init: true
@@ -15143,6 +15583,7 @@ module Aws::SecurityHub
     #               The Amazon Resource Name (ARN) of the Amazon CloudWatch Logs log group that Route 53 is publishing logs to.</p>
     #   @return [Types::CloudWatchLogsLogGroupArnConfigDetails]
     class AwsRoute53QueryLoggingConfigDetails < Struct.new(
+      nil,
       :cloud_watch_logs_log_group_arn,
       keyword_init: true
     )
@@ -15192,6 +15633,7 @@ module Aws::SecurityHub
     #           </p>
     #   @return [Types::AwsS3AccessPointVpcConfigurationDetails]
     class AwsS3AccessPointDetails < Struct.new(
+      nil,
       :access_point_arn,
       :alias,
       :bucket,
@@ -15214,6 +15656,7 @@ module Aws::SecurityHub
     #           </p>
     #   @return [String]
     class AwsS3AccessPointVpcConfigurationDetails < Struct.new(
+      nil,
       :vpc_id,
       keyword_init: true
     )
@@ -15234,6 +15677,7 @@ module Aws::SecurityHub
     #   <p>Indicates whether to restrict access to an access point or S3 bucket that has a public policy to only Amazon Web Services service principals and authorized users within the S3 bucket owner's account.</p>
     #   @return [Boolean]
     class AwsS3AccountPublicAccessBlockDetails < Struct.new(
+      nil,
       :block_public_acls,
       :block_public_policy,
       :ignore_public_acls,
@@ -15248,6 +15692,7 @@ module Aws::SecurityHub
     #   <p>The lifecycle rules.</p>
     #   @return [Array<Types::AwsS3BucketBucketLifecycleConfigurationRulesDetails>]
     class AwsS3BucketBucketLifecycleConfigurationDetails < Struct.new(
+      nil,
       :rules,
       keyword_init: true
     )
@@ -15260,6 +15705,7 @@ module Aws::SecurityHub
     #   <p>The number of days after which Amazon S3 cancels an incomplete multipart upload.</p>
     #   @return [Integer]
     class AwsS3BucketBucketLifecycleConfigurationRulesAbortIncompleteMultipartUploadDetails < Struct.new(
+      nil,
       :days_after_initiation,
       keyword_init: true
     )
@@ -15307,6 +15753,7 @@ module Aws::SecurityHub
     #   <p>Transition rules that indicate when objects transition to a specified storage class.</p>
     #   @return [Array<Types::AwsS3BucketBucketLifecycleConfigurationRulesTransitionsDetails>]
     class AwsS3BucketBucketLifecycleConfigurationRulesDetails < Struct.new(
+      nil,
       :abort_incomplete_multipart_upload,
       :expiration_date,
       :expiration_in_days,
@@ -15328,6 +15775,7 @@ module Aws::SecurityHub
     #   <p>The configuration for the filter.</p>
     #   @return [Types::AwsS3BucketBucketLifecycleConfigurationRulesFilterPredicateDetails]
     class AwsS3BucketBucketLifecycleConfigurationRulesFilterDetails < Struct.new(
+      nil,
       :predicate,
       keyword_init: true
     )
@@ -15349,6 +15797,7 @@ module Aws::SecurityHub
     #   Valid values are <code>LifecycleAndOperator</code> or <code>LifecycleOrOperator</code>.</p>
     #   @return [String]
     class AwsS3BucketBucketLifecycleConfigurationRulesFilterPredicateDetails < Struct.new(
+      nil,
       :operands,
       :prefix,
       :tag,
@@ -15370,6 +15819,7 @@ module Aws::SecurityHub
     #   Valid values are <code>LifecyclePrefixPredicate</code> or <code>LifecycleTagPredicate</code>.</p>
     #   @return [String]
     class AwsS3BucketBucketLifecycleConfigurationRulesFilterPredicateOperandsDetails < Struct.new(
+      nil,
       :prefix,
       :tag,
       :type,
@@ -15386,6 +15836,7 @@ module Aws::SecurityHub
     #   <p>The tag value.</p>
     #   @return [String]
     class AwsS3BucketBucketLifecycleConfigurationRulesFilterPredicateOperandsTagDetails < Struct.new(
+      nil,
       :key,
       :value,
       keyword_init: true
@@ -15401,6 +15852,7 @@ module Aws::SecurityHub
     #   <p>The tag value</p>
     #   @return [String]
     class AwsS3BucketBucketLifecycleConfigurationRulesFilterPredicateTagDetails < Struct.new(
+      nil,
       :key,
       :value,
       keyword_init: true
@@ -15416,6 +15868,7 @@ module Aws::SecurityHub
     #   <p>The class of storage to change the object to after the object is noncurrent for the specified number of days.</p>
     #   @return [String]
     class AwsS3BucketBucketLifecycleConfigurationRulesNoncurrentVersionTransitionsDetails < Struct.new(
+      nil,
       :days,
       :storage_class,
       keyword_init: true
@@ -15462,6 +15915,7 @@ module Aws::SecurityHub
     #            </ul>
     #   @return [String]
     class AwsS3BucketBucketLifecycleConfigurationRulesTransitionsDetails < Struct.new(
+      nil,
       :date,
       :days,
       :storage_class,
@@ -15478,6 +15932,7 @@ module Aws::SecurityHub
     #   <p>The versioning status of the S3 bucket. Valid values are <code>Enabled</code> or <code>Suspended</code>.</p>
     #   @return [String]
     class AwsS3BucketBucketVersioningConfiguration < Struct.new(
+      nil,
       :is_mfa_delete_enabled,
       :status,
       keyword_init: true
@@ -15534,6 +15989,7 @@ module Aws::SecurityHub
     #           </p>
     #   @return [String]
     class AwsS3BucketDetails < Struct.new(
+      nil,
       :owner_id,
       :owner_name,
       :owner_account_id,
@@ -15562,6 +16018,7 @@ module Aws::SecurityHub
     #   <p>The prefix added to log files for the S3 bucket.</p>
     #   @return [String]
     class AwsS3BucketLoggingConfiguration < Struct.new(
+      nil,
       :destination_bucket_name,
       :log_file_prefix,
       keyword_init: true
@@ -15575,6 +16032,7 @@ module Aws::SecurityHub
     #   <p>Configurations for S3 bucket notifications.</p>
     #   @return [Array<Types::AwsS3BucketNotificationConfigurationDetail>]
     class AwsS3BucketNotificationConfiguration < Struct.new(
+      nil,
       :configurations,
       keyword_init: true
     )
@@ -15614,6 +16072,7 @@ module Aws::SecurityHub
     #            </ul>
     #   @return [String]
     class AwsS3BucketNotificationConfigurationDetail < Struct.new(
+      nil,
       :events,
       :filter,
       :destination,
@@ -15629,6 +16088,7 @@ module Aws::SecurityHub
     #   <p>Details for an Amazon S3 filter.</p>
     #   @return [Types::AwsS3BucketNotificationConfigurationS3KeyFilter]
     class AwsS3BucketNotificationConfigurationFilter < Struct.new(
+      nil,
       :s3_key_filter,
       keyword_init: true
     )
@@ -15640,6 +16100,7 @@ module Aws::SecurityHub
     #   <p>The filter rules for the filter.</p>
     #   @return [Array<Types::AwsS3BucketNotificationConfigurationS3KeyFilterRule>]
     class AwsS3BucketNotificationConfigurationS3KeyFilter < Struct.new(
+      nil,
       :filter_rules,
       keyword_init: true
     )
@@ -15654,6 +16115,7 @@ module Aws::SecurityHub
     #   <p>The filter value.</p>
     #   @return [String]
     class AwsS3BucketNotificationConfigurationS3KeyFilterRule < Struct.new(
+      nil,
       :name,
       :value,
       keyword_init: true
@@ -15675,6 +16137,7 @@ module Aws::SecurityHub
     #         </p>
     #   @return [Types::AwsS3BucketObjectLockConfigurationRuleDetails]
     class AwsS3BucketObjectLockConfiguration < Struct.new(
+      nil,
       :object_lock_enabled,
       :rule,
       keyword_init: true
@@ -15701,6 +16164,7 @@ module Aws::SecurityHub
     #         </p>
     #   @return [Integer]
     class AwsS3BucketObjectLockConfigurationRuleDefaultRetentionDetails < Struct.new(
+      nil,
       :days,
       :mode,
       :years,
@@ -15718,6 +16182,7 @@ module Aws::SecurityHub
     #         </p>
     #   @return [Types::AwsS3BucketObjectLockConfigurationRuleDefaultRetentionDetails]
     class AwsS3BucketObjectLockConfigurationRuleDetails < Struct.new(
+      nil,
       :default_retention,
       keyword_init: true
     )
@@ -15734,6 +16199,7 @@ module Aws::SecurityHub
     #   <p>KMS key ID to use for the default encryption.</p>
     #   @return [String]
     class AwsS3BucketServerSideEncryptionByDefault < Struct.new(
+      nil,
       :sse_algorithm,
       :kms_master_key_id,
       keyword_init: true
@@ -15746,6 +16212,7 @@ module Aws::SecurityHub
     #   <p>The encryption rules that are applied to the S3 bucket.</p>
     #   @return [Array<Types::AwsS3BucketServerSideEncryptionRule>]
     class AwsS3BucketServerSideEncryptionConfiguration < Struct.new(
+      nil,
       :rules,
       keyword_init: true
     )
@@ -15759,6 +16226,7 @@ module Aws::SecurityHub
     #            encryption is applied.</p>
     #   @return [Types::AwsS3BucketServerSideEncryptionByDefault]
     class AwsS3BucketServerSideEncryptionRule < Struct.new(
+      nil,
       :apply_server_side_encryption_by_default,
       keyword_init: true
     )
@@ -15780,6 +16248,7 @@ module Aws::SecurityHub
     #   <p>The rules for applying redirects for requests to the website.</p>
     #   @return [Array<Types::AwsS3BucketWebsiteConfigurationRoutingRule>]
     class AwsS3BucketWebsiteConfiguration < Struct.new(
+      nil,
       :error_document,
       :index_document_suffix,
       :redirect_all_requests_to,
@@ -15799,6 +16268,7 @@ module Aws::SecurityHub
     #            original request. Valid values are <code>http</code> or <code>https</code>.</p>
     #   @return [String]
     class AwsS3BucketWebsiteConfigurationRedirectTo < Struct.new(
+      nil,
       :hostname,
       :protocol,
       keyword_init: true
@@ -15816,6 +16286,7 @@ module Aws::SecurityHub
     #            met.</p>
     #   @return [Types::AwsS3BucketWebsiteConfigurationRoutingRuleRedirect]
     class AwsS3BucketWebsiteConfigurationRoutingRule < Struct.new(
+      nil,
       :condition,
       :redirect,
       keyword_init: true
@@ -15831,6 +16302,7 @@ module Aws::SecurityHub
     #   <p>Indicates to redirect the request if the key prefix matches this value.</p>
     #   @return [String]
     class AwsS3BucketWebsiteConfigurationRoutingRuleCondition < Struct.new(
+      nil,
       :http_error_code_returned_equals,
       :key_prefix_equals,
       keyword_init: true
@@ -15859,6 +16331,7 @@ module Aws::SecurityHub
     #            <p>Cannot be provided if <code>ReplaceKeyPrefixWith</code> is present.</p>
     #   @return [String]
     class AwsS3BucketWebsiteConfigurationRoutingRuleRedirect < Struct.new(
+      nil,
       :hostname,
       :http_redirect_code,
       :protocol,
@@ -15892,6 +16365,7 @@ module Aws::SecurityHub
     #   <p>The identifier of the KMS symmetric customer managed key that was used for the object.</p>
     #   @return [String]
     class AwsS3ObjectDetails < Struct.new(
+      nil,
       :last_modified,
       :e_tag,
       :version_id,
@@ -16010,6 +16484,7 @@ module Aws::SecurityHub
     #         </p>
     #   @return [Integer]
     class AwsSageMakerNotebookInstanceDetails < Struct.new(
+      nil,
       :accelerator_types,
       :additional_code_repositories,
       :default_code_repository,
@@ -16044,6 +16519,7 @@ module Aws::SecurityHub
     #         </p>
     #   @return [String]
     class AwsSageMakerNotebookInstanceMetadataServiceConfigurationDetails < Struct.new(
+      nil,
       :minimum_instance_metadata_service_version,
       keyword_init: true
     )
@@ -16078,6 +16554,7 @@ module Aws::SecurityHub
     #   <p>The user-provided description of the secret.</p>
     #   @return [String]
     class AwsSecretsManagerSecretDetails < Struct.new(
+      nil,
       :rotation_rules,
       :rotation_occurred_within_frequency,
       :kms_key_id,
@@ -16096,6 +16573,7 @@ module Aws::SecurityHub
     #   <p>The number of days after the previous rotation to rotate the secret.</p>
     #   @return [Integer]
     class AwsSecretsManagerSecretRotationRules < Struct.new(
+      nil,
       :automatically_after_days,
       keyword_init: true
     )
@@ -16308,6 +16786,7 @@ module Aws::SecurityHub
     #           </p>
     #   @return [Types::Detection]
     class AwsSecurityFinding < Struct.new(
+      nil,
       :schema_version,
       :id,
       :product_arn,
@@ -16814,6 +17293,7 @@ module Aws::SecurityHub
     #           </p>
     #   @return [Array<Types::StringFilter>]
     class AwsSecurityFindingFilters < Struct.new(
+      nil,
       :product_arn,
       :aws_account_id,
       :id,
@@ -16933,6 +17413,7 @@ module Aws::SecurityHub
     #            a custom integration.</p>
     #   @return [String]
     class AwsSecurityFindingIdentifier < Struct.new(
+      nil,
       :id,
       :product_arn,
       keyword_init: true
@@ -16981,6 +17462,7 @@ module Aws::SecurityHub
     #   <p>Indicates failed message delivery status for an Amazon SNS topic that is subscribed to an HTTP endpoint. </p>
     #   @return [String]
     class AwsSnsTopicDetails < Struct.new(
+      nil,
       :kms_master_key_id,
       :subscription,
       :topic_name,
@@ -17005,6 +17487,7 @@ module Aws::SecurityHub
     #   <p>The subscription's protocol.</p>
     #   @return [String]
     class AwsSnsTopicSubscription < Struct.new(
+      nil,
       :endpoint,
       :protocol,
       keyword_init: true
@@ -17028,6 +17511,7 @@ module Aws::SecurityHub
     #            messages after the value of <code>maxReceiveCount</code> is exceeded. </p>
     #   @return [String]
     class AwsSqsQueueDetails < Struct.new(
+      nil,
       :kms_data_key_reuse_period_seconds,
       :kms_master_key_id,
       :queue_name,
@@ -17157,6 +17641,7 @@ module Aws::SecurityHub
     #            uses tags to group EC2 instances that should have the same patch compliance.</p>
     #   @return [String]
     class AwsSsmComplianceSummary < Struct.new(
+      nil,
       :status,
       :compliant_critical_count,
       :compliant_high_count,
@@ -17185,6 +17670,7 @@ module Aws::SecurityHub
     #   <p>The compliance status details for the patch.</p>
     #   @return [Types::AwsSsmComplianceSummary]
     class AwsSsmPatch < Struct.new(
+      nil,
       :compliance_summary,
       keyword_init: true
     )
@@ -17197,6 +17683,7 @@ module Aws::SecurityHub
     #   <p>Information about the status of a patch.</p>
     #   @return [Types::AwsSsmPatch]
     class AwsSsmPatchComplianceDetails < Struct.new(
+      nil,
       :patch,
       keyword_init: true
     )
@@ -17249,6 +17736,7 @@ module Aws::SecurityHub
     #           </p>
     #   @return [String]
     class AwsStepFunctionStateMachineDetails < Struct.new(
+      nil,
       :label,
       :logging_configuration,
       :name,
@@ -17271,6 +17759,7 @@ module Aws::SecurityHub
     #   <p>The ARN (ends with <code>:*</code>) of the CloudWatch Logs log group to which you want your logs emitted.</p>
     #   @return [String]
     class AwsStepFunctionStateMachineLoggingConfigurationDestinationsCloudWatchLogsLogGroupDetails < Struct.new(
+      nil,
       :log_group_arn,
       keyword_init: true
     )
@@ -17288,6 +17777,7 @@ module Aws::SecurityHub
     #           </p>
     #   @return [Types::AwsStepFunctionStateMachineLoggingConfigurationDestinationsCloudWatchLogsLogGroupDetails]
     class AwsStepFunctionStateMachineLoggingConfigurationDestinationsDetails < Struct.new(
+      nil,
       :cloud_watch_logs_log_group,
       keyword_init: true
     )
@@ -17313,6 +17803,7 @@ module Aws::SecurityHub
     #           </p>
     #   @return [String]
     class AwsStepFunctionStateMachineLoggingConfigurationDetails < Struct.new(
+      nil,
       :destinations,
       :include_execution_data,
       :level,
@@ -17330,6 +17821,7 @@ module Aws::SecurityHub
     #           </p>
     #   @return [Boolean]
     class AwsStepFunctionStateMachineTracingConfigurationDetails < Struct.new(
+      nil,
       :enabled,
       keyword_init: true
     )
@@ -17356,6 +17848,7 @@ module Aws::SecurityHub
     #   <p>The predicates to include in the rate-based rule.</p>
     #   @return [Array<Types::AwsWafRateBasedRuleMatchPredicate>]
     class AwsWafRateBasedRuleDetails < Struct.new(
+      nil,
       :metric_name,
       :name,
       :rate_key,
@@ -17417,6 +17910,7 @@ module Aws::SecurityHub
     #            </ul>
     #   @return [String]
     class AwsWafRateBasedRuleMatchPredicate < Struct.new(
+      nil,
       :data_id,
       :negated,
       :type,
@@ -17445,6 +17939,7 @@ module Aws::SecurityHub
     #   <p>The predicates to include in the rate-based rule.</p>
     #   @return [Array<Types::AwsWafRegionalRateBasedRuleMatchPredicate>]
     class AwsWafRegionalRateBasedRuleDetails < Struct.new(
+      nil,
       :metric_name,
       :name,
       :rate_key,
@@ -17505,6 +18000,7 @@ module Aws::SecurityHub
     #            </ul>
     #   @return [String]
     class AwsWafRegionalRateBasedRuleMatchPredicate < Struct.new(
+      nil,
       :data_id,
       :negated,
       :type,
@@ -17533,6 +18029,7 @@ module Aws::SecurityHub
     #         </p>
     #   @return [String]
     class AwsWafRegionalRuleDetails < Struct.new(
+      nil,
       :metric_name,
       :name,
       :predicate_list,
@@ -17562,6 +18059,7 @@ module Aws::SecurityHub
     #         </p>
     #   @return [Array<Types::AwsWafRegionalRuleGroupRulesDetails>]
     class AwsWafRegionalRuleGroupDetails < Struct.new(
+      nil,
       :metric_name,
       :name,
       :rule_group_id,
@@ -17578,6 +18076,7 @@ module Aws::SecurityHub
     #   <code>GeoMatchSet</code>, and <code>SizeConstraintSet</code> objects that you want to add to a rule and, for each object, indicates whether you want to negate the settings.</p>
     #   @return [String]
     class AwsWafRegionalRuleGroupRulesActionDetails < Struct.new(
+      nil,
       :type,
       keyword_init: true
     )
@@ -17602,6 +18101,7 @@ module Aws::SecurityHub
     #         </p>
     #   @return [String]
     class AwsWafRegionalRuleGroupRulesDetails < Struct.new(
+      nil,
       :action,
       :priority,
       :rule_id,
@@ -17629,6 +18129,7 @@ module Aws::SecurityHub
     #         </p>
     #   @return [String]
     class AwsWafRegionalRulePredicateListDetails < Struct.new(
+      nil,
       :data_id,
       :negated,
       :type,
@@ -17661,6 +18162,7 @@ module Aws::SecurityHub
     #         </p>
     #   @return [String]
     class AwsWafRegionalWebAclDetails < Struct.new(
+      nil,
       :default_action,
       :metric_name,
       :name,
@@ -17678,6 +18180,7 @@ module Aws::SecurityHub
     #         </p>
     #   @return [String]
     class AwsWafRegionalWebAclRulesListActionDetails < Struct.new(
+      nil,
       :type,
       keyword_init: true
     )
@@ -17709,6 +18212,7 @@ module Aws::SecurityHub
     #         </p>
     #   @return [String]
     class AwsWafRegionalWebAclRulesListDetails < Struct.new(
+      nil,
       :action,
       :override_action,
       :priority,
@@ -17727,6 +18231,7 @@ module Aws::SecurityHub
     #         </p>
     #   @return [String]
     class AwsWafRegionalWebAclRulesListOverrideActionDetails < Struct.new(
+      nil,
       :type,
       keyword_init: true
     )
@@ -17754,6 +18259,7 @@ module Aws::SecurityHub
     #         </p>
     #   @return [String]
     class AwsWafRuleDetails < Struct.new(
+      nil,
       :metric_name,
       :name,
       :predicate_list,
@@ -17783,6 +18289,7 @@ module Aws::SecurityHub
     #         </p>
     #   @return [Array<Types::AwsWafRuleGroupRulesDetails>]
     class AwsWafRuleGroupDetails < Struct.new(
+      nil,
       :metric_name,
       :name,
       :rule_group_id,
@@ -17799,6 +18306,7 @@ module Aws::SecurityHub
     #            statement.</p>
     #   @return [String]
     class AwsWafRuleGroupRulesActionDetails < Struct.new(
+      nil,
       :type,
       keyword_init: true
     )
@@ -17825,6 +18333,7 @@ module Aws::SecurityHub
     #         </p>
     #   @return [String]
     class AwsWafRuleGroupRulesDetails < Struct.new(
+      nil,
       :action,
       :priority,
       :rule_id,
@@ -17853,6 +18362,7 @@ module Aws::SecurityHub
     #         </p>
     #   @return [String]
     class AwsWafRulePredicateListDetails < Struct.new(
+      nil,
       :data_id,
       :negated,
       :type,
@@ -17875,6 +18385,7 @@ module Aws::SecurityHub
     #   <p>A unique identifier for a web ACL.</p>
     #   @return [String]
     class AwsWafWebAclDetails < Struct.new(
+      nil,
       :name,
       :default_action,
       :rules,
@@ -17926,6 +18437,7 @@ module Aws::SecurityHub
     #            <p>The default is <code>REGULAR</code>.</p>
     #   @return [String]
     class AwsWafWebAclRule < Struct.new(
+      nil,
       :action,
       :excluded_rules,
       :override_action,
@@ -17947,6 +18459,7 @@ module Aws::SecurityHub
     #         </p>
     #   @return [Types::AwsWafv2CustomRequestHandlingDetails]
     class AwsWafv2ActionAllowDetails < Struct.new(
+      nil,
       :custom_request_handling,
       keyword_init: true
     )
@@ -17963,6 +18476,7 @@ module Aws::SecurityHub
     #         </p>
     #   @return [Types::AwsWafv2CustomResponseDetails]
     class AwsWafv2ActionBlockDetails < Struct.new(
+      nil,
       :custom_response,
       keyword_init: true
     )
@@ -17983,6 +18497,7 @@ module Aws::SecurityHub
     #         </p>
     #   @return [String]
     class AwsWafv2CustomHttpHeader < Struct.new(
+      nil,
       :name,
       :value,
       keyword_init: true
@@ -17999,6 +18514,7 @@ module Aws::SecurityHub
     #         </p>
     #   @return [Array<Types::AwsWafv2CustomHttpHeader>]
     class AwsWafv2CustomRequestHandlingDetails < Struct.new(
+      nil,
       :insert_headers,
       keyword_init: true
     )
@@ -18025,6 +18541,7 @@ module Aws::SecurityHub
     #         </p>
     #   @return [Array<Types::AwsWafv2CustomHttpHeader>]
     class AwsWafv2CustomResponseDetails < Struct.new(
+      nil,
       :custom_response_body_key,
       :response_code,
       :response_headers,
@@ -18081,6 +18598,7 @@ module Aws::SecurityHub
     #         </p>
     #   @return [Types::AwsWafv2VisibilityConfigDetails]
     class AwsWafv2RuleGroupDetails < Struct.new(
+      nil,
       :capacity,
       :description,
       :id,
@@ -18104,6 +18622,7 @@ module Aws::SecurityHub
     #         </p>
     #   @return [Types::AwsWafv2CustomRequestHandlingDetails]
     class AwsWafv2RulesActionCaptchaDetails < Struct.new(
+      nil,
       :custom_request_handling,
       keyword_init: true
     )
@@ -18120,6 +18639,7 @@ module Aws::SecurityHub
     #         </p>
     #   @return [Types::AwsWafv2CustomRequestHandlingDetails]
     class AwsWafv2RulesActionCountDetails < Struct.new(
+      nil,
       :custom_request_handling,
       keyword_init: true
     )
@@ -18151,6 +18671,7 @@ module Aws::SecurityHub
     #         </p>
     #   @return [Types::AwsWafv2RulesActionCountDetails]
     class AwsWafv2RulesActionDetails < Struct.new(
+      nil,
       :allow,
       :block,
       :captcha,
@@ -18190,6 +18711,7 @@ module Aws::SecurityHub
     #         </p>
     #   @return [Types::AwsWafv2VisibilityConfigDetails]
     class AwsWafv2RulesDetails < Struct.new(
+      nil,
       :action,
       :name,
       :override_action,
@@ -18221,6 +18743,7 @@ module Aws::SecurityHub
     #         </p>
     #   @return [Boolean]
     class AwsWafv2VisibilityConfigDetails < Struct.new(
+      nil,
       :cloud_watch_metrics_enabled,
       :metric_name,
       :sampled_requests_enabled,
@@ -18243,6 +18766,7 @@ module Aws::SecurityHub
     #         </p>
     #   @return [Types::AwsWafv2ActionBlockDetails]
     class AwsWafv2WebAclActionDetails < Struct.new(
+      nil,
       :allow,
       :block,
       keyword_init: true
@@ -18259,6 +18783,7 @@ module Aws::SecurityHub
     #         </p>
     #   @return [Types::AwsWafv2WebAclCaptchaConfigImmunityTimePropertyDetails]
     class AwsWafv2WebAclCaptchaConfigDetails < Struct.new(
+      nil,
       :immunity_time_property,
       keyword_init: true
     )
@@ -18274,6 +18799,7 @@ module Aws::SecurityHub
     #         </p>
     #   @return [Integer]
     class AwsWafv2WebAclCaptchaConfigImmunityTimePropertyDetails < Struct.new(
+      nil,
       :immunity_time,
       keyword_init: true
     )
@@ -18337,6 +18863,7 @@ module Aws::SecurityHub
     #         </p>
     #   @return [Types::AwsWafv2VisibilityConfigDetails]
     class AwsWafv2WebAclDetails < Struct.new(
+      nil,
       :name,
       :arn,
       :managedby_firewall_manager,
@@ -18364,6 +18891,7 @@ module Aws::SecurityHub
     #   <p>The type of encryption. <code>KMS</code> indicates that the encryption uses KMS keys. <code>NONE</code> indicates the default encryption.</p>
     #   @return [String]
     class AwsXrayEncryptionConfigDetails < Struct.new(
+      nil,
       :key_id,
       :status,
       :type,
@@ -18378,6 +18906,7 @@ module Aws::SecurityHub
     #         </p>
     #   @return [Array<String>]
     class BatchDeleteAutomationRulesRequest < Struct.new(
+      nil,
       :automation_rules_arns,
       keyword_init: true
     )
@@ -18396,6 +18925,7 @@ module Aws::SecurityHub
     #         </p>
     #   @return [Array<Types::UnprocessedAutomationRule>]
     class BatchDeleteAutomationRulesResponse < Struct.new(
+      nil,
       :processed_automation_rules,
       :unprocessed_automation_rules,
       keyword_init: true
@@ -18407,6 +18937,7 @@ module Aws::SecurityHub
     #   <p>The ARNs of the standards subscriptions to disable.</p>
     #   @return [Array<String>]
     class BatchDisableStandardsRequest < Struct.new(
+      nil,
       :standards_subscription_arns,
       keyword_init: true
     )
@@ -18417,6 +18948,7 @@ module Aws::SecurityHub
     #   <p>The details of the standards subscriptions that were disabled.</p>
     #   @return [Array<Types::StandardsSubscription>]
     class BatchDisableStandardsResponse < Struct.new(
+      nil,
       :standards_subscriptions,
       keyword_init: true
     )
@@ -18427,6 +18959,7 @@ module Aws::SecurityHub
     #   <p>The list of standards checks to enable.</p>
     #   @return [Array<Types::StandardsSubscriptionRequest>]
     class BatchEnableStandardsRequest < Struct.new(
+      nil,
       :standards_subscription_requests,
       keyword_init: true
     )
@@ -18437,6 +18970,7 @@ module Aws::SecurityHub
     #   <p>The details of the standards subscriptions that were enabled.</p>
     #   @return [Array<Types::StandardsSubscription>]
     class BatchEnableStandardsResponse < Struct.new(
+      nil,
       :standards_subscriptions,
       keyword_init: true
     )
@@ -18449,6 +18983,7 @@ module Aws::SecurityHub
     #         </p>
     #   @return [Array<String>]
     class BatchGetAutomationRulesRequest < Struct.new(
+      nil,
       :automation_rules_arns,
       keyword_init: true
     )
@@ -18467,6 +19002,7 @@ module Aws::SecurityHub
     #         </p>
     #   @return [Array<Types::UnprocessedAutomationRule>]
     class BatchGetAutomationRulesResponse < Struct.new(
+      nil,
       :rules,
       :unprocessed_automation_rules,
       keyword_init: true
@@ -18480,6 +19016,7 @@ module Aws::SecurityHub
     #           </p>
     #   @return [Array<Types::ConfigurationPolicyAssociation>]
     class BatchGetConfigurationPolicyAssociationsRequest < Struct.new(
+      nil,
       :configuration_policy_association_identifiers,
       keyword_init: true
     )
@@ -18498,6 +19035,7 @@ module Aws::SecurityHub
     #           </p>
     #   @return [Array<Types::UnprocessedConfigurationPolicyAssociation>]
     class BatchGetConfigurationPolicyAssociationsResponse < Struct.new(
+      nil,
       :configuration_policy_associations,
       :unprocessed_configuration_policy_associations,
       keyword_init: true
@@ -18511,6 +19049,7 @@ module Aws::SecurityHub
     #            or Amazon Resource Name (ARN) is the same across standards. </p>
     #   @return [Array<String>]
     class BatchGetSecurityControlsRequest < Struct.new(
+      nil,
       :security_control_ids,
       keyword_init: true
     )
@@ -18530,6 +19069,7 @@ module Aws::SecurityHub
     #         </p>
     #   @return [Array<Types::UnprocessedSecurityControl>]
     class BatchGetSecurityControlsResponse < Struct.new(
+      nil,
       :security_controls,
       :unprocessed_ids,
       keyword_init: true
@@ -18544,6 +19084,7 @@ module Aws::SecurityHub
     #         </p>
     #   @return [Array<Types::StandardsControlAssociationId>]
     class BatchGetStandardsControlAssociationsRequest < Struct.new(
+      nil,
       :standards_control_association_ids,
       keyword_init: true
     )
@@ -18562,6 +19103,7 @@ module Aws::SecurityHub
     #         </p>
     #   @return [Array<Types::UnprocessedStandardsControlAssociation>]
     class BatchGetStandardsControlAssociationsResponse < Struct.new(
+      nil,
       :standards_control_association_details,
       :unprocessed_associations,
       keyword_init: true
@@ -18574,6 +19116,7 @@ module Aws::SecurityHub
     #               <a href="https://docs.aws.amazon.com/securityhub/latest/userguide/securityhub-findings-format.html">Amazon Web Services Security Finding Format</a>. Maximum of 100 findings per request.</p>
     #   @return [Array<Types::AwsSecurityFinding>]
     class BatchImportFindingsRequest < Struct.new(
+      nil,
       :findings,
       keyword_init: true
     )
@@ -18590,6 +19133,7 @@ module Aws::SecurityHub
     #   <p>The list of findings that failed to import.</p>
     #   @return [Array<Types::ImportFindingsError>]
     class BatchImportFindingsResponse < Struct.new(
+      nil,
       :failed_count,
       :success_count,
       :failed_findings,
@@ -18605,6 +19149,7 @@ module Aws::SecurityHub
     #         </p>
     #   @return [Array<Types::UpdateAutomationRulesRequestItem>]
     class BatchUpdateAutomationRulesRequest < Struct.new(
+      nil,
       :update_automation_rules_request_items,
       keyword_init: true
     )
@@ -18623,6 +19168,7 @@ module Aws::SecurityHub
     #         </p>
     #   @return [Array<Types::UnprocessedAutomationRule>]
     class BatchUpdateAutomationRulesResponse < Struct.new(
+      nil,
       :processed_automation_rules,
       :unprocessed_automation_rules,
       keyword_init: true
@@ -18713,6 +19259,7 @@ module Aws::SecurityHub
     #   <p>A list of findings that are related to the updated findings.</p>
     #   @return [Array<Types::RelatedFinding>]
     class BatchUpdateFindingsRequest < Struct.new(
+      nil,
       :finding_identifiers,
       :note,
       :severity,
@@ -18735,6 +19282,7 @@ module Aws::SecurityHub
     #   <p>The list of findings that were not updated.</p>
     #   @return [Array<Types::BatchUpdateFindingsUnprocessedFinding>]
     class BatchUpdateFindingsResponse < Struct.new(
+      nil,
       :processed_findings,
       :unprocessed_findings,
       keyword_init: true
@@ -18818,6 +19366,7 @@ module Aws::SecurityHub
     #            </ul>
     #   @return [String]
     class BatchUpdateFindingsUnprocessedFinding < Struct.new(
+      nil,
       :finding_identifier,
       :error_code,
       :error_message,
@@ -18834,6 +19383,7 @@ module Aws::SecurityHub
     #   <p>The metadata.uid of a processed finding.</p>
     #   @return [String]
     class BatchUpdateFindingsV2ProcessedFinding < Struct.new(
+      nil,
       :finding_identifier,
       :metadata_uid,
       keyword_init: true
@@ -18865,6 +19415,7 @@ module Aws::SecurityHub
     #            When customer provides the updated status ID, the string sibling status will automatically be updated in the finding.</p>
     #   @return [Integer]
     class BatchUpdateFindingsV2Request < Struct.new(
+      nil,
       :metadata_uids,
       :finding_identifiers,
       :comment,
@@ -18882,6 +19433,7 @@ module Aws::SecurityHub
     #   <p>The list of V2 findings that were not updated.</p>
     #   @return [Array<Types::BatchUpdateFindingsV2UnprocessedFinding>]
     class BatchUpdateFindingsV2Response < Struct.new(
+      nil,
       :processed_findings,
       :unprocessed_findings,
       keyword_init: true
@@ -18903,6 +19455,7 @@ module Aws::SecurityHub
     #   <p>A detailed description of why a finding could not be processed during a batch update operation.</p>
     #   @return [String]
     class BatchUpdateFindingsV2UnprocessedFinding < Struct.new(
+      nil,
       :finding_identifier,
       :metadata_uid,
       :error_code,
@@ -18921,6 +19474,7 @@ module Aws::SecurityHub
     #         </p>
     #   @return [Array<Types::StandardsControlAssociationUpdate>]
     class BatchUpdateStandardsControlAssociationsRequest < Struct.new(
+      nil,
       :standards_control_association_updates,
       keyword_init: true
     )
@@ -18933,6 +19487,7 @@ module Aws::SecurityHub
     #         </p>
     #   @return [Array<Types::UnprocessedStandardsControlAssociationUpdate>]
     class BatchUpdateStandardsControlAssociationsResponse < Struct.new(
+      nil,
       :unprocessed_association_updates,
       keyword_init: true
     )
@@ -18949,6 +19504,7 @@ module Aws::SecurityHub
     #           </p>
     #   @return [Boolean]
     class BooleanConfigurationOptions < Struct.new(
+      nil,
       :default_value,
       keyword_init: true
     )
@@ -18960,6 +19516,7 @@ module Aws::SecurityHub
     #   <p>The value of the boolean.</p>
     #   @return [Boolean]
     class BooleanFilter < Struct.new(
+      nil,
       :value,
       keyword_init: true
     )
@@ -18980,6 +19537,7 @@ module Aws::SecurityHub
     #   <p>For a Microsoft Excel workbook, provides the location of the cell, as an absolute cell reference, that contains the data. For example, Sheet2!C5 for cell C5 on Sheet2.</p>
     #   @return [String]
     class Cell < Struct.new(
+      nil,
       :column,
       :row,
       :column_name,
@@ -19000,6 +19558,7 @@ module Aws::SecurityHub
     #   <p>Information about the state of the IPv4 CIDR block.</p>
     #   @return [String]
     class CidrBlockAssociation < Struct.new(
+      nil,
       :association_id,
       :cidr_block,
       :cidr_block_state,
@@ -19013,6 +19572,7 @@ module Aws::SecurityHub
     #   <p>The name of the city.</p>
     #   @return [String]
     class City < Struct.new(
+      nil,
       :city_name,
       keyword_init: true
     )
@@ -19039,6 +19599,7 @@ module Aws::SecurityHub
     #   <p>Provides details about sensitive data that was identified based on customer-defined configuration.</p>
     #   @return [Types::CustomDataIdentifiersResult]
     class ClassificationResult < Struct.new(
+      nil,
       :mime_type,
       :size_classified,
       :additional_occurrences,
@@ -19058,6 +19619,7 @@ module Aws::SecurityHub
     #   <p>A longer description of the current status of the sensitive data detection.</p>
     #   @return [String]
     class ClassificationStatus < Struct.new(
+      nil,
       :code,
       :reason,
       keyword_init: true
@@ -19082,6 +19644,7 @@ module Aws::SecurityHub
     #           </p>
     #   @return [String]
     class CloudWatchLogsLogGroupArnConfigDetails < Struct.new(
+      nil,
       :cloud_watch_logs_log_group_arn,
       :hosted_zone_id,
       :id,
@@ -19110,6 +19673,7 @@ module Aws::SecurityHub
     #         </p>
     #   @return [String]
     class CodeRepositoryDetails < Struct.new(
+      nil,
       :provider_type,
       :project_name,
       :code_security_integration_arn,
@@ -19142,6 +19706,7 @@ module Aws::SecurityHub
     #           </p>
     #   @return [Integer]
     class CodeVulnerabilitiesFilePath < Struct.new(
+      nil,
       :end_line,
       :file_name,
       :file_path,
@@ -19211,6 +19776,7 @@ module Aws::SecurityHub
     #           </p>
     #   @return [Array<Types::SecurityControlParameter>]
     class Compliance < Struct.new(
+      nil,
       :status,
       :related_requirements,
       :status_reasons,
@@ -19242,6 +19808,7 @@ module Aws::SecurityHub
     #   <p>The logical operator used to combine multiple filter conditions.</p>
     #   @return [String]
     class CompositeFilter < Struct.new(
+      nil,
       :string_filters,
       :date_filters,
       :boolean_filters,
@@ -19333,6 +19900,7 @@ module Aws::SecurityHub
     #           </p>
     #   @return [Types::Target]
     class ConfigurationPolicyAssociation < Struct.new(
+      nil,
       :target,
       keyword_init: true
     )
@@ -19380,6 +19948,7 @@ module Aws::SecurityHub
     #           </p>
     #   @return [String]
     class ConfigurationPolicyAssociationSummary < Struct.new(
+      nil,
       :configuration_policy_id,
       :target_id,
       :target_type,
@@ -19428,6 +19997,7 @@ module Aws::SecurityHub
     #           </p>
     #   @return [Boolean]
     class ConfigurationPolicySummary < Struct.new(
+      nil,
       :arn,
       :id,
       :name,
@@ -19445,6 +20015,7 @@ module Aws::SecurityHub
     # @!attribute code
     #   @return [String]
     class ConflictException < Struct.new(
+      nil,
       :message,
       :code,
       keyword_init: true
@@ -19459,6 +20030,7 @@ module Aws::SecurityHub
     #   <p>The authState retrieved from authUrl to complete the OAuth 2.0 authorization code flow.</p>
     #   @return [String]
     class ConnectorRegistrationsV2Request < Struct.new(
+      nil,
       :auth_code,
       :auth_state,
       keyword_init: true
@@ -19473,6 +20045,7 @@ module Aws::SecurityHub
     #   <p>The UUID of the connectorV2 to identify connectorV2 resource.</p>
     #   @return [String]
     class ConnectorRegistrationsV2Response < Struct.new(
+      nil,
       :connector_arn,
       :connector_id,
       keyword_init: true
@@ -19500,6 +20073,7 @@ module Aws::SecurityHub
     #   <p>ISO 8601 UTC timestamp for the time create the connectorV2.</p>
     #   @return [Time]
     class ConnectorSummary < Struct.new(
+      nil,
       :connector_arn,
       :connector_id,
       :name,
@@ -19539,6 +20113,7 @@ module Aws::SecurityHub
     #         </p>
     #   @return [Boolean]
     class ContainerDetails < Struct.new(
+      nil,
       :container_runtime,
       :name,
       :image_id,
@@ -19559,6 +20134,7 @@ module Aws::SecurityHub
     #   <p>The name of the country.</p>
     #   @return [String]
     class Country < Struct.new(
+      nil,
       :country_code,
       :country_name,
       keyword_init: true
@@ -19576,6 +20152,7 @@ module Aws::SecurityHub
     #   <p>The ID for the custom action target. Can contain up to 20 alphanumeric characters.</p>
     #   @return [String]
     class CreateActionTargetRequest < Struct.new(
+      nil,
       :name,
       :description,
       :id,
@@ -19588,6 +20165,7 @@ module Aws::SecurityHub
     #   <p>The Amazon Resource Name (ARN) for the custom action target.</p>
     #   @return [String]
     class CreateActionTargetResponse < Struct.new(
+      nil,
       :action_target_arn,
       keyword_init: true
     )
@@ -19607,6 +20185,7 @@ module Aws::SecurityHub
     #   <p>A unique identifier used to ensure idempotency.</p>
     #   @return [String]
     class CreateAggregatorV2Request < Struct.new(
+      nil,
       :region_linking_mode,
       :linked_regions,
       :tags,
@@ -19629,6 +20208,7 @@ module Aws::SecurityHub
     #   <p>The list of Regions that are linked to the aggregation Region.</p>
     #   @return [Array<String>]
     class CreateAggregatorV2Response < Struct.new(
+      nil,
       :aggregator_v2_arn,
       :aggregation_region,
       :region_linking_mode,
@@ -19688,6 +20268,7 @@ module Aws::SecurityHub
     #         </p>
     #   @return [Array<Types::AutomationRulesAction>]
     class CreateAutomationRuleRequest < Struct.new(
+      nil,
       :tags,
       :rule_status,
       :rule_order,
@@ -19707,6 +20288,7 @@ module Aws::SecurityHub
     #         </p>
     #   @return [String]
     class CreateAutomationRuleResponse < Struct.new(
+      nil,
       :rule_arn,
       keyword_init: true
     )
@@ -19738,6 +20320,7 @@ module Aws::SecurityHub
     #   <p>A unique identifier used to ensure idempotency.</p>
     #   @return [String]
     class CreateAutomationRuleV2Request < Struct.new(
+      nil,
       :rule_name,
       :rule_status,
       :description,
@@ -19758,6 +20341,7 @@ module Aws::SecurityHub
     #   <p>The ID of the V2 automation rule.</p>
     #   @return [String]
     class CreateAutomationRuleV2Response < Struct.new(
+      nil,
       :rule_arn,
       :rule_id,
       keyword_init: true
@@ -19793,6 +20377,7 @@ module Aws::SecurityHub
     #           </p>
     #   @return [Hash<String, String>]
     class CreateConfigurationPolicyRequest < Struct.new(
+      nil,
       :name,
       :description,
       :configuration_policy,
@@ -19842,6 +20427,7 @@ module Aws::SecurityHub
     #           </p>
     #   @return [Types::Policy]
     class CreateConfigurationPolicyResponse < Struct.new(
+      nil,
       :arn,
       :id,
       :name,
@@ -19873,6 +20459,7 @@ module Aws::SecurityHub
     #   <p>A unique identifier used to ensure idempotency.</p>
     #   @return [String]
     class CreateConnectorV2Request < Struct.new(
+      nil,
       :name,
       :description,
       :provider,
@@ -19894,6 +20481,7 @@ module Aws::SecurityHub
     #   <p>The Url provide to customers for OAuth auth code flow.</p>
     #   @return [String]
     class CreateConnectorV2Response < Struct.new(
+      nil,
       :connector_arn,
       :connector_id,
       :auth_url,
@@ -19937,6 +20525,7 @@ module Aws::SecurityHub
     #              <code>NO_REGIONS</code>.</p>
     #   @return [Array<String>]
     class CreateFindingAggregatorRequest < Struct.new(
+      nil,
       :region_linking_mode,
       :regions,
       keyword_init: true
@@ -19957,6 +20546,7 @@ module Aws::SecurityHub
     #   <p>The list of excluded Regions or included Regions.</p>
     #   @return [Array<String>]
     class CreateFindingAggregatorResponse < Struct.new(
+      nil,
       :finding_aggregator_arn,
       :finding_aggregation_region,
       :region_linking_mode,
@@ -19980,6 +20570,7 @@ module Aws::SecurityHub
     #            identifiers.</p>
     #   @return [String]
     class CreateInsightRequest < Struct.new(
+      nil,
       :name,
       :filters,
       :group_by_attribute,
@@ -19992,6 +20583,7 @@ module Aws::SecurityHub
     #   <p>The ARN of the insight created.</p>
     #   @return [String]
     class CreateInsightResponse < Struct.new(
+      nil,
       :insight_arn,
       keyword_init: true
     )
@@ -20003,6 +20595,7 @@ module Aws::SecurityHub
     #            list includes the account ID and optionally the email address.</p>
     #   @return [Array<Types::AccountDetails>]
     class CreateMembersRequest < Struct.new(
+      nil,
       :account_details,
       keyword_init: true
     )
@@ -20014,6 +20607,7 @@ module Aws::SecurityHub
     #            the account ID and the email address.</p>
     #   @return [Array<Types::Result>]
     class CreateMembersResponse < Struct.new(
+      nil,
       :unprocessed_accounts,
       keyword_init: true
     )
@@ -20030,6 +20624,7 @@ module Aws::SecurityHub
     #   <p>The client idempotency token.</p>
     #   @return [String]
     class CreateTicketV2Request < Struct.new(
+      nil,
       :connector_id,
       :finding_metadata_uid,
       :client_token,
@@ -20045,6 +20640,7 @@ module Aws::SecurityHub
     #   <p>The url to the created ticket.</p>
     #   @return [String]
     class CreateTicketV2Response < Struct.new(
+      nil,
       :ticket_id,
       :ticket_src_url,
       keyword_init: true
@@ -20081,6 +20677,7 @@ module Aws::SecurityHub
     #   <p>Details about the sensitive data that was detected.</p>
     #   @return [Types::Occurrences]
     class CustomDataIdentifiersDetections < Struct.new(
+      nil,
       :count,
       :arn,
       :name,
@@ -20098,6 +20695,7 @@ module Aws::SecurityHub
     #   <p>The total number of occurrences of sensitive data.</p>
     #   @return [Integer]
     class CustomDataIdentifiersResult < Struct.new(
+      nil,
       :detections,
       :total_count,
       keyword_init: true
@@ -20122,6 +20720,7 @@ module Aws::SecurityHub
     #   <p>Adjustments to the CVSS metrics.</p>
     #   @return [Array<Types::Adjustment>]
     class Cvss < Struct.new(
+      nil,
       :version,
       :base_score,
       :base_vector,
@@ -20140,6 +20739,7 @@ module Aws::SecurityHub
     #   <p>The details about the sensitive data that was detected on the resource.</p>
     #   @return [Types::ClassificationResult]
     class DataClassificationDetails < Struct.new(
+      nil,
       :detailed_results_location,
       :result,
       keyword_init: true
@@ -20160,6 +20760,7 @@ module Aws::SecurityHub
     #   <p>A date range for the date filter.</p>
     #   @return [Types::DateRange]
     class DateFilter < Struct.new(
+      nil,
       :start,
       :end,
       :date_range,
@@ -20176,6 +20777,7 @@ module Aws::SecurityHub
     #   <p>A date range unit for the date filter.</p>
     #   @return [String]
     class DateRange < Struct.new(
+      nil,
       :value,
       :unit,
       keyword_init: true
@@ -20187,6 +20789,7 @@ module Aws::SecurityHub
     #   <p>The list of prospective member account IDs for which to decline an invitation.</p>
     #   @return [Array<String>]
     class DeclineInvitationsRequest < Struct.new(
+      nil,
       :account_ids,
       keyword_init: true
     )
@@ -20198,6 +20801,7 @@ module Aws::SecurityHub
     #            the account ID and the email address.</p>
     #   @return [Array<Types::Result>]
     class DeclineInvitationsResponse < Struct.new(
+      nil,
       :unprocessed_accounts,
       keyword_init: true
     )
@@ -20208,6 +20812,7 @@ module Aws::SecurityHub
     #   <p>The Amazon Resource Name (ARN) of the custom action target to delete.</p>
     #   @return [String]
     class DeleteActionTargetRequest < Struct.new(
+      nil,
       :action_target_arn,
       keyword_init: true
     )
@@ -20218,6 +20823,7 @@ module Aws::SecurityHub
     #   <p>The ARN of the custom action target that was deleted.</p>
     #   @return [String]
     class DeleteActionTargetResponse < Struct.new(
+      nil,
       :action_target_arn,
       keyword_init: true
     )
@@ -20228,6 +20834,7 @@ module Aws::SecurityHub
     #   <p>The ARN of the Aggregator V2.</p>
     #   @return [String]
     class DeleteAggregatorV2Request < Struct.new(
+      nil,
       :aggregator_v2_arn,
       keyword_init: true
     )
@@ -20235,6 +20842,7 @@ module Aws::SecurityHub
     end
 
     class DeleteAggregatorV2Response < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -20244,6 +20852,7 @@ module Aws::SecurityHub
     #   <p>The ARN of the V2 automation rule.</p>
     #   @return [String]
     class DeleteAutomationRuleV2Request < Struct.new(
+      nil,
       :identifier,
       keyword_init: true
     )
@@ -20251,6 +20860,7 @@ module Aws::SecurityHub
     end
 
     class DeleteAutomationRuleV2Response < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -20262,6 +20872,7 @@ module Aws::SecurityHub
     #           </p>
     #   @return [String]
     class DeleteConfigurationPolicyRequest < Struct.new(
+      nil,
       :identifier,
       keyword_init: true
     )
@@ -20269,6 +20880,7 @@ module Aws::SecurityHub
     end
 
     class DeleteConfigurationPolicyResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -20278,6 +20890,7 @@ module Aws::SecurityHub
     #   <p>The UUID of the connectorV2 to identify connectorV2 resource.</p>
     #   @return [String]
     class DeleteConnectorV2Request < Struct.new(
+      nil,
       :connector_id,
       keyword_init: true
     )
@@ -20285,6 +20898,7 @@ module Aws::SecurityHub
     end
 
     class DeleteConnectorV2Response < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -20294,6 +20908,7 @@ module Aws::SecurityHub
     #   <p>The ARN of the finding aggregator to delete. To obtain the ARN, use <code>ListFindingAggregators</code>.</p>
     #   @return [String]
     class DeleteFindingAggregatorRequest < Struct.new(
+      nil,
       :finding_aggregator_arn,
       keyword_init: true
     )
@@ -20301,6 +20916,7 @@ module Aws::SecurityHub
     end
 
     class DeleteFindingAggregatorResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -20310,6 +20926,7 @@ module Aws::SecurityHub
     #   <p>The ARN of the insight to delete.</p>
     #   @return [String]
     class DeleteInsightRequest < Struct.new(
+      nil,
       :insight_arn,
       keyword_init: true
     )
@@ -20320,6 +20937,7 @@ module Aws::SecurityHub
     #   <p>The ARN of the insight that was deleted.</p>
     #   @return [String]
     class DeleteInsightResponse < Struct.new(
+      nil,
       :insight_arn,
       keyword_init: true
     )
@@ -20330,6 +20948,7 @@ module Aws::SecurityHub
     #   <p>The list of member account IDs that received the invitations you want to delete.</p>
     #   @return [Array<String>]
     class DeleteInvitationsRequest < Struct.new(
+      nil,
       :account_ids,
       keyword_init: true
     )
@@ -20341,6 +20960,7 @@ module Aws::SecurityHub
     #            the list includes the account ID and the email address.</p>
     #   @return [Array<Types::Result>]
     class DeleteInvitationsResponse < Struct.new(
+      nil,
       :unprocessed_accounts,
       keyword_init: true
     )
@@ -20351,6 +20971,7 @@ module Aws::SecurityHub
     #   <p>The list of account IDs for the member accounts to delete.</p>
     #   @return [Array<String>]
     class DeleteMembersRequest < Struct.new(
+      nil,
       :account_ids,
       keyword_init: true
     )
@@ -20362,6 +20983,7 @@ module Aws::SecurityHub
     #            account ID and the email address.</p>
     #   @return [Array<Types::Result>]
     class DeleteMembersResponse < Struct.new(
+      nil,
       :unprocessed_accounts,
       keyword_init: true
     )
@@ -20382,6 +21004,7 @@ module Aws::SecurityHub
     #   <p>The maximum number of results to return.</p>
     #   @return [Integer]
     class DescribeActionTargetsRequest < Struct.new(
+      nil,
       :action_target_arns,
       :next_token,
       :max_results,
@@ -20399,6 +21022,7 @@ module Aws::SecurityHub
     #   <p>The pagination token to use to request the next page of results.</p>
     #   @return [String]
     class DescribeActionTargetsResponse < Struct.new(
+      nil,
       :action_targets,
       :next_token,
       keyword_init: true
@@ -20410,6 +21034,7 @@ module Aws::SecurityHub
     #   <p>The ARN of the Hub resource to retrieve.</p>
     #   @return [String]
     class DescribeHubRequest < Struct.new(
+      nil,
       :hub_arn,
       keyword_init: true
     )
@@ -20446,6 +21071,7 @@ module Aws::SecurityHub
     #            2023.</p>
     #   @return [String]
     class DescribeHubResponse < Struct.new(
+      nil,
       :hub_arn,
       :subscribed_at,
       :auto_enable_controls,
@@ -20456,6 +21082,7 @@ module Aws::SecurityHub
     end
 
     class DescribeOrganizationConfigurationRequest < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -20489,6 +21116,7 @@ module Aws::SecurityHub
     #           </p>
     #   @return [Types::OrganizationConfiguration]
     class DescribeOrganizationConfigurationResponse < Struct.new(
+      nil,
       :auto_enable,
       :member_account_limit_reached,
       :auto_enable_standards,
@@ -20512,6 +21140,7 @@ module Aws::SecurityHub
     #   <p>The ARN of the integration to return.</p>
     #   @return [String]
     class DescribeProductsRequest < Struct.new(
+      nil,
       :next_token,
       :max_results,
       :product_arn,
@@ -20527,6 +21156,7 @@ module Aws::SecurityHub
     #   <p>The pagination token to use to request the next page of results.</p>
     #   @return [String]
     class DescribeProductsResponse < Struct.new(
+      nil,
       :products,
       :next_token,
       keyword_init: true
@@ -20543,6 +21173,7 @@ module Aws::SecurityHub
     #   <p>The maximum number of results to return.</p>
     #   @return [Integer]
     class DescribeProductsV2Request < Struct.new(
+      nil,
       :next_token,
       :max_results,
       keyword_init: true
@@ -20558,6 +21189,7 @@ module Aws::SecurityHub
     #         Otherwise, this parameter is null.</p>
     #   @return [String]
     class DescribeProductsV2Response < Struct.new(
+      nil,
       :products_v2,
       :next_token,
       keyword_init: true
@@ -20566,6 +21198,7 @@ module Aws::SecurityHub
     end
 
     class DescribeSecurityHubV2Request < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -20578,6 +21211,7 @@ module Aws::SecurityHub
     #   <p>The date and time when the service was enabled in the account.</p>
     #   @return [String]
     class DescribeSecurityHubV2Response < Struct.new(
+      nil,
       :hub_v2_arn,
       :subscribed_at,
       keyword_init: true
@@ -20600,6 +21234,7 @@ module Aws::SecurityHub
     #   <p>The maximum number of security standard controls to return.</p>
     #   @return [Integer]
     class DescribeStandardsControlsRequest < Struct.new(
+      nil,
       :standards_subscription_arn,
       :next_token,
       :max_results,
@@ -20615,6 +21250,7 @@ module Aws::SecurityHub
     #   <p>The pagination token to use to request the next page of results.</p>
     #   @return [String]
     class DescribeStandardsControlsResponse < Struct.new(
+      nil,
       :controls,
       :next_token,
       keyword_init: true
@@ -20633,6 +21269,7 @@ module Aws::SecurityHub
     #   <p>The maximum number of standards to return.</p>
     #   @return [Integer]
     class DescribeStandardsRequest < Struct.new(
+      nil,
       :next_token,
       :max_results,
       keyword_init: true
@@ -20647,6 +21284,7 @@ module Aws::SecurityHub
     #   <p>The pagination token to use to request the next page of results.</p>
     #   @return [String]
     class DescribeStandardsResponse < Struct.new(
+      nil,
       :standards,
       :next_token,
       keyword_init: true
@@ -20664,6 +21302,7 @@ module Aws::SecurityHub
     #           </p>
     #   @return [Types::Sequence]
     class Detection < Struct.new(
+      nil,
       :sequence,
       keyword_init: true
     )
@@ -20674,6 +21313,7 @@ module Aws::SecurityHub
     #   <p>The ARN of the integrated product to disable the integration for.</p>
     #   @return [String]
     class DisableImportFindingsForProductRequest < Struct.new(
+      nil,
       :product_subscription_arn,
       keyword_init: true
     )
@@ -20681,6 +21321,7 @@ module Aws::SecurityHub
     end
 
     class DisableImportFindingsForProductResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -20694,6 +21335,7 @@ module Aws::SecurityHub
     #            Defaults to Security Hub if not specified.</p>
     #   @return [String]
     class DisableOrganizationAdminAccountRequest < Struct.new(
+      nil,
       :admin_account_id,
       :feature,
       keyword_init: true
@@ -20702,54 +21344,63 @@ module Aws::SecurityHub
     end
 
     class DisableOrganizationAdminAccountResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
     end
 
     class DisableSecurityHubRequest < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
     end
 
     class DisableSecurityHubResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
     end
 
     class DisableSecurityHubV2Request < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
     end
 
     class DisableSecurityHubV2Response < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
     end
 
     class DisassociateFromAdministratorAccountRequest < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
     end
 
     class DisassociateFromAdministratorAccountResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
     end
 
     class DisassociateFromMasterAccountRequest < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
     end
 
     class DisassociateFromMasterAccountResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -20759,6 +21410,7 @@ module Aws::SecurityHub
     #   <p>The account IDs of the member accounts to disassociate from the administrator account.</p>
     #   @return [Array<String>]
     class DisassociateMembersRequest < Struct.new(
+      nil,
       :account_ids,
       keyword_init: true
     )
@@ -20766,6 +21418,7 @@ module Aws::SecurityHub
     end
 
     class DisassociateMembersResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -20785,6 +21438,7 @@ module Aws::SecurityHub
     #   <p>Indicates whether the DNS request was blocked.</p>
     #   @return [Boolean]
     class DnsRequestAction < Struct.new(
+      nil,
       :domain,
       :protocol,
       :blocked,
@@ -20812,6 +21466,7 @@ module Aws::SecurityHub
     #           </p>
     #   @return [Float]
     class DoubleConfigurationOptions < Struct.new(
+      nil,
       :default_value,
       :min,
       :max,
@@ -20824,6 +21479,7 @@ module Aws::SecurityHub
     #   <p>The ARN of the product to enable the integration for.</p>
     #   @return [String]
     class EnableImportFindingsForProductRequest < Struct.new(
+      nil,
       :product_arn,
       keyword_init: true
     )
@@ -20834,6 +21490,7 @@ module Aws::SecurityHub
     #   <p>The ARN of your subscription to the product to enable integrations for.</p>
     #   @return [String]
     class EnableImportFindingsForProductResponse < Struct.new(
+      nil,
       :product_subscription_arn,
       keyword_init: true
     )
@@ -20849,6 +21506,7 @@ module Aws::SecurityHub
     #            Defaults to Security Hub if not specified.</p>
     #   @return [String]
     class EnableOrganizationAdminAccountRequest < Struct.new(
+      nil,
       :admin_account_id,
       :feature,
       keyword_init: true
@@ -20864,6 +21522,7 @@ module Aws::SecurityHub
     #         The default is Security Hub CSPM if no delegated administrator is specified in the request.</p>
     #   @return [String]
     class EnableOrganizationAdminAccountResponse < Struct.new(
+      nil,
       :admin_account_id,
       :feature,
       keyword_init: true
@@ -20893,6 +21552,7 @@ module Aws::SecurityHub
     #            2023.</p>
     #   @return [String]
     class EnableSecurityHubRequest < Struct.new(
+      nil,
       :tags,
       :enable_default_standards,
       :control_finding_generator,
@@ -20902,6 +21562,7 @@ module Aws::SecurityHub
     end
 
     class EnableSecurityHubResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -20911,6 +21572,7 @@ module Aws::SecurityHub
     #   <p>The tags to add to the hub V2 resource when you enable Security Hub.</p>
     #   @return [Hash<String, String>]
     class EnableSecurityHubV2Request < Struct.new(
+      nil,
       :tags,
       keyword_init: true
     )
@@ -20921,6 +21583,7 @@ module Aws::SecurityHub
     #   <p>The ARN of the V2 resource that was created.</p>
     #   @return [String]
     class EnableSecurityHubV2Response < Struct.new(
+      nil,
       :hub_v2_arn,
       keyword_init: true
     )
@@ -20941,6 +21604,7 @@ module Aws::SecurityHub
     #           </p>
     #   @return [Array<String>]
     class EnumConfigurationOptions < Struct.new(
+      nil,
       :default_value,
       :allowed_values,
       keyword_init: true
@@ -20967,6 +21631,7 @@ module Aws::SecurityHub
     #           </p>
     #   @return [Array<String>]
     class EnumListConfigurationOptions < Struct.new(
+      nil,
       :default_value,
       :max_items,
       :allowed_values,
@@ -20980,6 +21645,7 @@ module Aws::SecurityHub
     #   <p>The ARN of the connector that establishes the integration.</p>
     #   @return [String]
     class ExternalIntegrationConfiguration < Struct.new(
+      nil,
       :connector_arn,
       keyword_init: true
     )
@@ -21009,6 +21675,7 @@ module Aws::SecurityHub
     #            <p>Length Constraints: Minimum of 1 length. Maximum of 128 length.</p>
     #   @return [String]
     class FilePaths < Struct.new(
+      nil,
       :file_path,
       :file_name,
       :resource_id,
@@ -21024,6 +21691,7 @@ module Aws::SecurityHub
     #   <p>The ARN of the finding aggregator. You use the finding aggregator ARN to retrieve details for, update, and delete the finding aggregator.</p>
     #   @return [String]
     class FindingAggregator < Struct.new(
+      nil,
       :finding_aggregator_arn,
       keyword_init: true
     )
@@ -21073,6 +21741,7 @@ module Aws::SecurityHub
     #         </p>
     #   @return [String]
     class FindingHistoryRecord < Struct.new(
+      nil,
       :finding_identifier,
       :update_time,
       :finding_created,
@@ -21106,6 +21775,7 @@ module Aws::SecurityHub
     #         </p>
     #   @return [String]
     class FindingHistoryUpdate < Struct.new(
+      nil,
       :updated_field,
       :old_value,
       :new_value,
@@ -21132,6 +21802,7 @@ module Aws::SecurityHub
     #         </p>
     #   @return [String]
     class FindingHistoryUpdateSource < Struct.new(
+      nil,
       :type,
       :identity,
       keyword_init: true
@@ -21208,6 +21879,7 @@ module Aws::SecurityHub
     #            Behaviors | Sensitive Data Identifications</p>
     #   @return [Array<String>]
     class FindingProviderFields < Struct.new(
+      nil,
       :confidence,
       :criticality,
       :related_findings,
@@ -21265,6 +21937,7 @@ module Aws::SecurityHub
     #            <p>Length Constraints: Minimum length of 1. Maximum length of 64.</p>
     #   @return [String]
     class FindingProviderSeverity < Struct.new(
+      nil,
       :label,
       :original,
       keyword_init: true
@@ -21293,6 +21966,7 @@ module Aws::SecurityHub
     #   <p>The stateless rule groups that are used in the firewall policy.</p>
     #   @return [Array<Types::FirewallPolicyStatelessRuleGroupReferencesDetails>]
     class FirewallPolicyDetails < Struct.new(
+      nil,
       :stateful_rule_group_references,
       :stateless_custom_actions,
       :stateless_default_actions,
@@ -21308,6 +21982,7 @@ module Aws::SecurityHub
     #   <p>The ARN of the stateful rule group.</p>
     #   @return [String]
     class FirewallPolicyStatefulRuleGroupReferencesDetails < Struct.new(
+      nil,
       :resource_arn,
       keyword_init: true
     )
@@ -21322,6 +21997,7 @@ module Aws::SecurityHub
     #   <p>The name of the custom action.</p>
     #   @return [String]
     class FirewallPolicyStatelessCustomActionsDetails < Struct.new(
+      nil,
       :action_definition,
       :action_name,
       keyword_init: true
@@ -21337,6 +22013,7 @@ module Aws::SecurityHub
     #   <p>The ARN of the stateless rule group.</p>
     #   @return [String]
     class FirewallPolicyStatelessRuleGroupReferencesDetails < Struct.new(
+      nil,
       :priority,
       :resource_arn,
       keyword_init: true
@@ -21367,6 +22044,7 @@ module Aws::SecurityHub
     #            <p>Array Members: Minimum number of 0 items. Maximum number of 10 items.</p>
     #   @return [Array<String>]
     class GeneratorDetails < Struct.new(
+      nil,
       :name,
       :description,
       :labels,
@@ -21383,6 +22061,7 @@ module Aws::SecurityHub
     #   <p>The latitude of the location.</p>
     #   @return [Float]
     class GeoLocation < Struct.new(
+      nil,
       :lon,
       :lat,
       keyword_init: true
@@ -21391,6 +22070,7 @@ module Aws::SecurityHub
     end
 
     class GetAdministratorAccountRequest < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -21400,6 +22080,7 @@ module Aws::SecurityHub
     #   <p>Details about an invitation.</p>
     #   @return [Types::Invitation]
     class GetAdministratorAccountResponse < Struct.new(
+      nil,
       :administrator,
       keyword_init: true
     )
@@ -21410,6 +22091,7 @@ module Aws::SecurityHub
     #   <p>The ARN of the Aggregator V2.</p>
     #   @return [String]
     class GetAggregatorV2Request < Struct.new(
+      nil,
       :aggregator_v2_arn,
       keyword_init: true
     )
@@ -21429,6 +22111,7 @@ module Aws::SecurityHub
     #   <p>The list of Regions that are linked to the aggregation Region.</p>
     #   @return [Array<String>]
     class GetAggregatorV2Response < Struct.new(
+      nil,
       :aggregator_v2_arn,
       :aggregation_region,
       :region_linking_mode,
@@ -21442,6 +22125,7 @@ module Aws::SecurityHub
     #   <p>The ARN of the V2 automation rule.</p>
     #   @return [String]
     class GetAutomationRuleV2Request < Struct.new(
+      nil,
       :identifier,
       keyword_init: true
     )
@@ -21479,6 +22163,7 @@ module Aws::SecurityHub
     #   <p>The timestamp when the V2 automation rule was updated.</p>
     #   @return [Time]
     class GetAutomationRuleV2Response < Struct.new(
+      nil,
       :rule_arn,
       :rule_id,
       :rule_order,
@@ -21500,6 +22185,7 @@ module Aws::SecurityHub
     #           </p>
     #   @return [Types::Target]
     class GetConfigurationPolicyAssociationRequest < Struct.new(
+      nil,
       :target,
       keyword_init: true
     )
@@ -21544,6 +22230,7 @@ module Aws::SecurityHub
     #           </p>
     #   @return [String]
     class GetConfigurationPolicyAssociationResponse < Struct.new(
+      nil,
       :configuration_policy_id,
       :target_id,
       :target_type,
@@ -21562,6 +22249,7 @@ module Aws::SecurityHub
     #           </p>
     #   @return [String]
     class GetConfigurationPolicyRequest < Struct.new(
+      nil,
       :identifier,
       keyword_init: true
     )
@@ -21608,6 +22296,7 @@ module Aws::SecurityHub
     #           </p>
     #   @return [Types::Policy]
     class GetConfigurationPolicyResponse < Struct.new(
+      nil,
       :arn,
       :id,
       :name,
@@ -21624,6 +22313,7 @@ module Aws::SecurityHub
     #   <p>The UUID of the connectorV2 to identify connectorV2 resource.</p>
     #   @return [String]
     class GetConnectorV2Request < Struct.new(
+      nil,
       :connector_id,
       keyword_init: true
     )
@@ -21658,6 +22348,7 @@ module Aws::SecurityHub
     #   <p>The third-party provider detail for a service configuration.</p>
     #   @return [Types::ProviderDetail]
     class GetConnectorV2Response < Struct.new(
+      nil,
       :connector_arn,
       :connector_id,
       :name,
@@ -21686,6 +22377,7 @@ module Aws::SecurityHub
     #   <p>The maximum number of results to return in the response.</p>
     #   @return [Integer]
     class GetEnabledStandardsRequest < Struct.new(
+      nil,
       :standards_subscription_arns,
       :next_token,
       :max_results,
@@ -21702,6 +22394,7 @@ module Aws::SecurityHub
     #   <p>The pagination token to use to request the next page of results.</p>
     #   @return [String]
     class GetEnabledStandardsResponse < Struct.new(
+      nil,
       :standards_subscriptions,
       :next_token,
       keyword_init: true
@@ -21713,6 +22406,7 @@ module Aws::SecurityHub
     #   <p>The ARN of the finding aggregator to return details for. To obtain the ARN, use <code>ListFindingAggregators</code>.</p>
     #   @return [String]
     class GetFindingAggregatorRequest < Struct.new(
+      nil,
       :finding_aggregator_arn,
       keyword_init: true
     )
@@ -21732,6 +22426,7 @@ module Aws::SecurityHub
     #   <p>The list of excluded Regions or included Regions.</p>
     #   @return [Array<String>]
     class GetFindingAggregatorResponse < Struct.new(
+      nil,
       :finding_aggregator_arn,
       :finding_aggregation_region,
       :region_linking_mode,
@@ -21782,6 +22477,7 @@ module Aws::SecurityHub
     #         </p>
     #   @return [Integer]
     class GetFindingHistoryRequest < Struct.new(
+      nil,
       :finding_identifier,
       :start_time,
       :end_time,
@@ -21804,6 +22500,7 @@ module Aws::SecurityHub
     #         </p>
     #   @return [String]
     class GetFindingHistoryResponse < Struct.new(
+      nil,
       :records,
       :next_token,
       keyword_init: true
@@ -21823,6 +22520,7 @@ module Aws::SecurityHub
     #   <p>The maximum number of results to be returned.</p>
     #   @return [Integer]
     class GetFindingStatisticsV2Request < Struct.new(
+      nil,
       :group_by_rules,
       :sort_order,
       :max_statistic_results,
@@ -21835,6 +22533,7 @@ module Aws::SecurityHub
     #   <p>Aggregated statistics about security findings based on specified grouping criteria.</p>
     #   @return [Array<Types::GroupByResult>]
     class GetFindingStatisticsV2Response < Struct.new(
+      nil,
       :group_by_results,
       keyword_init: true
     )
@@ -21863,6 +22562,7 @@ module Aws::SecurityHub
     #   <p>The maximum number of findings to return.</p>
     #   @return [Integer]
     class GetFindingsRequest < Struct.new(
+      nil,
       :filters,
       :sort_criteria,
       :next_token,
@@ -21879,6 +22579,7 @@ module Aws::SecurityHub
     #   <p>The pagination token to use to request the next page of results.</p>
     #   @return [String]
     class GetFindingsResponse < Struct.new(
+      nil,
       :findings,
       :next_token,
       keyword_init: true
@@ -21904,6 +22605,7 @@ module Aws::SecurityHub
     #   <p>The maximum number of results to return.</p>
     #   @return [Integer]
     class GetFindingsV2Request < Struct.new(
+      nil,
       :filters,
       :sort_criteria,
       :next_token,
@@ -21921,6 +22623,7 @@ module Aws::SecurityHub
     #            Otherwise, this parameter is null.</p>
     #   @return [String]
     class GetFindingsV2Response < Struct.new(
+      nil,
       :findings,
       :next_token,
       keyword_init: true
@@ -21932,6 +22635,7 @@ module Aws::SecurityHub
     #   <p>The ARN of the insight for which to return results.</p>
     #   @return [String]
     class GetInsightResultsRequest < Struct.new(
+      nil,
       :insight_arn,
       keyword_init: true
     )
@@ -21942,6 +22646,7 @@ module Aws::SecurityHub
     #   <p>The insight results returned by the operation.</p>
     #   @return [Types::InsightResults]
     class GetInsightResultsResponse < Struct.new(
+      nil,
       :insight_results,
       keyword_init: true
     )
@@ -21964,6 +22669,7 @@ module Aws::SecurityHub
     #   <p>The maximum number of items to return in the response.</p>
     #   @return [Integer]
     class GetInsightsRequest < Struct.new(
+      nil,
       :insight_arns,
       :next_token,
       :max_results,
@@ -21979,6 +22685,7 @@ module Aws::SecurityHub
     #   <p>The pagination token to use to request the next page of results.</p>
     #   @return [String]
     class GetInsightsResponse < Struct.new(
+      nil,
       :insights,
       :next_token,
       keyword_init: true
@@ -21987,6 +22694,7 @@ module Aws::SecurityHub
     end
 
     class GetInvitationsCountRequest < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -21997,6 +22705,7 @@ module Aws::SecurityHub
     #            including the currently accepted invitation.</p>
     #   @return [Integer]
     class GetInvitationsCountResponse < Struct.new(
+      nil,
       :invitations_count,
       keyword_init: true
     )
@@ -22004,6 +22713,7 @@ module Aws::SecurityHub
     end
 
     class GetMasterAccountRequest < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -22014,6 +22724,7 @@ module Aws::SecurityHub
     #         </p>
     #   @return [Types::Invitation]
     class GetMasterAccountResponse < Struct.new(
+      nil,
       :master,
       keyword_init: true
     )
@@ -22024,6 +22735,7 @@ module Aws::SecurityHub
     #   <p>The list of account IDs for the Security Hub member accounts to return the details for. </p>
     #   @return [Array<String>]
     class GetMembersRequest < Struct.new(
+      nil,
       :account_ids,
       keyword_init: true
     )
@@ -22038,6 +22750,7 @@ module Aws::SecurityHub
     #            includes the account ID and the email address.</p>
     #   @return [Array<Types::Result>]
     class GetMembersResponse < Struct.new(
+      nil,
       :members,
       :unprocessed_accounts,
       keyword_init: true
@@ -22055,6 +22768,7 @@ module Aws::SecurityHub
     #   <p>The maximum number of results to be returned.</p>
     #   @return [Integer]
     class GetResourcesStatisticsV2Request < Struct.new(
+      nil,
       :group_by_rules,
       :sort_order,
       :max_statistic_results,
@@ -22067,6 +22781,7 @@ module Aws::SecurityHub
     #   <p>The aggregated statistics about resources based on the specified grouping rule.</p>
     #   @return [Array<Types::GroupByResult>]
     class GetResourcesStatisticsV2Response < Struct.new(
+      nil,
       :group_by_results,
       keyword_init: true
     )
@@ -22088,6 +22803,7 @@ module Aws::SecurityHub
     #   <p>The maximum number of results to return.</p>
     #   @return [Integer]
     class GetResourcesV2Request < Struct.new(
+      nil,
       :filters,
       :sort_criteria,
       :next_token,
@@ -22105,6 +22821,7 @@ module Aws::SecurityHub
     #            Otherwise, this parameter is null.</p>
     #   @return [String]
     class GetResourcesV2Response < Struct.new(
+      nil,
       :resources,
       :next_token,
       keyword_init: true
@@ -22118,6 +22835,7 @@ module Aws::SecurityHub
     #           </p>
     #   @return [String]
     class GetSecurityControlDefinitionRequest < Struct.new(
+      nil,
       :security_control_id,
       keyword_init: true
     )
@@ -22131,6 +22849,7 @@ module Aws::SecurityHub
     #         </p>
     #   @return [Types::SecurityControlDefinition]
     class GetSecurityControlDefinitionResponse < Struct.new(
+      nil,
       :security_control_definition,
       keyword_init: true
     )
@@ -22145,6 +22864,7 @@ module Aws::SecurityHub
     #   <p>An array of grouped values and their respective counts for each <code>GroupByField</code>.</p>
     #   @return [Array<Types::GroupByValue>]
     class GroupByResult < Struct.new(
+      nil,
       :group_by_field,
       :group_by_values,
       keyword_init: true
@@ -22160,6 +22880,7 @@ module Aws::SecurityHub
     #   <p>The attribute by which filtered findings should be grouped.</p>
     #   @return [String]
     class GroupByRule < Struct.new(
+      nil,
       :filters,
       :group_by_field,
       keyword_init: true
@@ -22175,6 +22896,7 @@ module Aws::SecurityHub
     #   <p>The number of findings for a specific <code>FieldValue</code> and <code>GroupByField</code>.</p>
     #   @return [Integer]
     class GroupByValue < Struct.new(
+      nil,
       :field_value,
       :count,
       keyword_init: true
@@ -22193,6 +22915,7 @@ module Aws::SecurityHub
     #   <p>ISO 8601 UTC timestamp for the time check the health status of the connectorV2.</p>
     #   @return [Time]
     class HealthCheck < Struct.new(
+      nil,
       :connector_status,
       :message,
       :last_checked_at,
@@ -22211,6 +22934,7 @@ module Aws::SecurityHub
     #            value <code>-1</code>.</p>
     #   @return [Integer]
     class IcmpTypeCode < Struct.new(
+      nil,
       :code,
       :type,
       keyword_init: true
@@ -22231,6 +22955,7 @@ module Aws::SecurityHub
     #            operation.</p>
     #   @return [String]
     class ImportFindingsError < Struct.new(
+      nil,
       :id,
       :error_code,
       :error_message,
@@ -22266,6 +22991,7 @@ module Aws::SecurityHub
     #           </p>
     #   @return [String]
     class Indicator < Struct.new(
+      nil,
       :key,
       :values,
       :title,
@@ -22293,6 +23019,7 @@ module Aws::SecurityHub
     #            identifiers.</p>
     #   @return [String]
     class Insight < Struct.new(
+      nil,
       :insight_arn,
       :name,
       :filters,
@@ -22312,6 +23039,7 @@ module Aws::SecurityHub
     #   <p>The number of findings returned for each <code>GroupByAttributeValue</code>.</p>
     #   @return [Integer]
     class InsightResultValue < Struct.new(
+      nil,
       :group_by_attribute_value,
       :count,
       keyword_init: true
@@ -22333,6 +23061,7 @@ module Aws::SecurityHub
     #            operation.</p>
     #   @return [Array<Types::InsightResultValue>]
     class InsightResults < Struct.new(
+      nil,
       :insight_arn,
       :group_by_attribute,
       :result_values,
@@ -22360,6 +23089,7 @@ module Aws::SecurityHub
     #           </p>
     #   @return [Integer]
     class IntegerConfigurationOptions < Struct.new(
+      nil,
       :default_value,
       :min,
       :max,
@@ -22392,6 +23122,7 @@ module Aws::SecurityHub
     #           </p>
     #   @return [Integer]
     class IntegerListConfigurationOptions < Struct.new(
+      nil,
       :default_value,
       :min,
       :max,
@@ -22407,6 +23138,7 @@ module Aws::SecurityHub
     # @!attribute code
     #   @return [String]
     class InternalException < Struct.new(
+      nil,
       :message,
       :code,
       keyword_init: true
@@ -22422,6 +23154,7 @@ module Aws::SecurityHub
     # @!attribute code
     #   @return [String]
     class InternalServerException < Struct.new(
+      nil,
       :message,
       :code,
       keyword_init: true
@@ -22435,6 +23168,7 @@ module Aws::SecurityHub
     # @!attribute code
     #   @return [String]
     class InvalidAccessException < Struct.new(
+      nil,
       :message,
       :code,
       keyword_init: true
@@ -22449,6 +23183,7 @@ module Aws::SecurityHub
     # @!attribute code
     #   @return [String]
     class InvalidInputException < Struct.new(
+      nil,
       :message,
       :code,
       keyword_init: true
@@ -22470,6 +23205,7 @@ module Aws::SecurityHub
     #   <p>The current status of the association between the member and administrator accounts.</p>
     #   @return [String]
     class Invitation < Struct.new(
+      nil,
       :account_id,
       :invitation_id,
       :invited_at,
@@ -22483,6 +23219,7 @@ module Aws::SecurityHub
     #   <p>The list of account IDs of the Amazon Web Services accounts to invite to Security Hub as members. </p>
     #   @return [Array<String>]
     class InviteMembersRequest < Struct.new(
+      nil,
       :account_ids,
       keyword_init: true
     )
@@ -22494,6 +23231,7 @@ module Aws::SecurityHub
     #            includes the account ID and the email address.</p>
     #   @return [Array<Types::Result>]
     class InviteMembersResponse < Struct.new(
+      nil,
       :unprocessed_accounts,
       keyword_init: true
     )
@@ -22505,6 +23243,7 @@ module Aws::SecurityHub
     #   <p>A finding's CIDR value.</p>
     #   @return [String]
     class IpFilter < Struct.new(
+      nil,
       :cidr,
       keyword_init: true
     )
@@ -22525,6 +23264,7 @@ module Aws::SecurityHub
     #   <p>The name of the internet provider.</p>
     #   @return [String]
     class IpOrganizationDetails < Struct.new(
+      nil,
       :asn,
       :asn_org,
       :isp,
@@ -22577,6 +23317,7 @@ module Aws::SecurityHub
     #            </ul>
     #   @return [String]
     class Ipv6CidrBlockAssociation < Struct.new(
+      nil,
       :association_id,
       :ipv6_cidr_block,
       :cidr_block_state,
@@ -22602,6 +23343,7 @@ module Aws::SecurityHub
     #   <p>The status of the authorization between Jira Cloud and the service.</p>
     #   @return [String]
     class JiraCloudDetail < Struct.new(
+      nil,
       :cloud_id,
       :project_key,
       :domain,
@@ -22617,6 +23359,7 @@ module Aws::SecurityHub
     #   <p>The project key for a JiraCloud instance.</p>
     #   @return [String]
     class JiraCloudProviderConfiguration < Struct.new(
+      nil,
       :project_key,
       keyword_init: true
     )
@@ -22628,6 +23371,7 @@ module Aws::SecurityHub
     #   <p>The project key for a JiraCloud instance.</p>
     #   @return [String]
     class JiraCloudUpdateConfiguration < Struct.new(
+      nil,
       :project_key,
       keyword_init: true
     )
@@ -22639,6 +23383,7 @@ module Aws::SecurityHub
     #   <p>A value for the keyword.</p>
     #   @return [String]
     class KeywordFilter < Struct.new(
+      nil,
       :value,
       keyword_init: true
     )
@@ -22652,6 +23397,7 @@ module Aws::SecurityHub
     # @!attribute code
     #   @return [String]
     class LimitExceededException < Struct.new(
+      nil,
       :message,
       :code,
       keyword_init: true
@@ -22668,6 +23414,7 @@ module Aws::SecurityHub
     #   <p>The maximum number of results to return.</p>
     #   @return [Integer]
     class ListAggregatorsV2Request < Struct.new(
+      nil,
       :next_token,
       :max_results,
       keyword_init: true
@@ -22683,6 +23430,7 @@ module Aws::SecurityHub
     #            Otherwise, this parameter is null.</p>
     #   @return [String]
     class ListAggregatorsV2Response < Struct.new(
+      nil,
       :aggregators_v2,
       :next_token,
       keyword_init: true
@@ -22702,6 +23450,7 @@ module Aws::SecurityHub
     #            100. </p>
     #   @return [Integer]
     class ListAutomationRulesRequest < Struct.new(
+      nil,
       :next_token,
       :max_results,
       keyword_init: true
@@ -22721,6 +23470,7 @@ module Aws::SecurityHub
     #         </p>
     #   @return [String]
     class ListAutomationRulesResponse < Struct.new(
+      nil,
       :automation_rules_metadata,
       :next_token,
       keyword_init: true
@@ -22737,6 +23487,7 @@ module Aws::SecurityHub
     #   <p>The maximum number of results to return.</p>
     #   @return [Integer]
     class ListAutomationRulesV2Request < Struct.new(
+      nil,
       :next_token,
       :max_results,
       keyword_init: true
@@ -22752,6 +23503,7 @@ module Aws::SecurityHub
     #            Otherwise, this parameter is null.</p>
     #   @return [String]
     class ListAutomationRulesV2Response < Struct.new(
+      nil,
       :rules,
       :next_token,
       keyword_init: true
@@ -22778,6 +23530,7 @@ module Aws::SecurityHub
     #           </p>
     #   @return [Integer]
     class ListConfigurationPoliciesRequest < Struct.new(
+      nil,
       :next_token,
       :max_results,
       keyword_init: true
@@ -22798,6 +23551,7 @@ module Aws::SecurityHub
     #           </p>
     #   @return [String]
     class ListConfigurationPoliciesResponse < Struct.new(
+      nil,
       :configuration_policy_summaries,
       :next_token,
       keyword_init: true
@@ -22829,6 +23583,7 @@ module Aws::SecurityHub
     #           </p>
     #   @return [Types::AssociationFilters]
     class ListConfigurationPolicyAssociationsRequest < Struct.new(
+      nil,
       :next_token,
       :max_results,
       :filters,
@@ -22851,6 +23606,7 @@ module Aws::SecurityHub
     #           </p>
     #   @return [String]
     class ListConfigurationPolicyAssociationsResponse < Struct.new(
+      nil,
       :configuration_policy_association_summaries,
       :next_token,
       keyword_init: true
@@ -22871,6 +23627,7 @@ module Aws::SecurityHub
     #   <p>The status for the connectorV2.</p>
     #   @return [String]
     class ListConnectorsV2Request < Struct.new(
+      nil,
       :next_token,
       :max_results,
       :provider_name,
@@ -22888,6 +23645,7 @@ module Aws::SecurityHub
     #   <p>An array of connectorV2 summaries.</p>
     #   @return [Array<Types::ConnectorSummary>]
     class ListConnectorsV2Response < Struct.new(
+      nil,
       :next_token,
       :connectors,
       keyword_init: true
@@ -22906,6 +23664,7 @@ module Aws::SecurityHub
     #   <p>The maximum number of items to return in the response.</p>
     #   @return [Integer]
     class ListEnabledProductsForImportRequest < Struct.new(
+      nil,
       :next_token,
       :max_results,
       keyword_init: true
@@ -22920,6 +23679,7 @@ module Aws::SecurityHub
     #   <p>The pagination token to use to request the next page of results.</p>
     #   @return [String]
     class ListEnabledProductsForImportResponse < Struct.new(
+      nil,
       :product_subscriptions,
       :next_token,
       keyword_init: true
@@ -22934,6 +23694,7 @@ module Aws::SecurityHub
     #   <p>The maximum number of results to return. This operation currently only returns a single result.</p>
     #   @return [Integer]
     class ListFindingAggregatorsRequest < Struct.new(
+      nil,
       :next_token,
       :max_results,
       keyword_init: true
@@ -22950,6 +23711,7 @@ module Aws::SecurityHub
     #         </p>
     #   @return [String]
     class ListFindingAggregatorsResponse < Struct.new(
+      nil,
       :finding_aggregators,
       :next_token,
       keyword_init: true
@@ -22968,6 +23730,7 @@ module Aws::SecurityHub
     #            parameter to the value returned from the previous response.</p>
     #   @return [String]
     class ListInvitationsRequest < Struct.new(
+      nil,
       :max_results,
       :next_token,
       keyword_init: true
@@ -22982,6 +23745,7 @@ module Aws::SecurityHub
     #   <p>The pagination token to use to request the next page of results.</p>
     #   @return [String]
     class ListInvitationsResponse < Struct.new(
+      nil,
       :invitations,
       :next_token,
       keyword_init: true
@@ -23008,6 +23772,7 @@ module Aws::SecurityHub
     #            parameter to the value returned from the previous response.</p>
     #   @return [String]
     class ListMembersRequest < Struct.new(
+      nil,
       :only_associated,
       :max_results,
       :next_token,
@@ -23023,6 +23788,7 @@ module Aws::SecurityHub
     #   <p>The pagination token to use to request the next page of results.</p>
     #   @return [String]
     class ListMembersResponse < Struct.new(
+      nil,
       :members,
       :next_token,
       keyword_init: true
@@ -23044,6 +23810,7 @@ module Aws::SecurityHub
     #            Defaults to Security Hub if not specified.</p>
     #   @return [String]
     class ListOrganizationAdminAccountsRequest < Struct.new(
+      nil,
       :max_results,
       :next_token,
       :feature,
@@ -23063,6 +23830,7 @@ module Aws::SecurityHub
     #            Defaults to Security Hub CSPM if not specified.</p>
     #   @return [String]
     class ListOrganizationAdminAccountsResponse < Struct.new(
+      nil,
       :admin_accounts,
       :next_token,
       :feature,
@@ -23089,6 +23857,7 @@ module Aws::SecurityHub
     #            next 25 controls. This repeats until all controls for the standard are returned. </p>
     #   @return [Integer]
     class ListSecurityControlDefinitionsRequest < Struct.new(
+      nil,
       :standards_arn,
       :next_token,
       :max_results,
@@ -23107,6 +23876,7 @@ module Aws::SecurityHub
     #            request. </p>
     #   @return [String]
     class ListSecurityControlDefinitionsResponse < Struct.new(
+      nil,
       :security_control_definitions,
       :next_token,
       keyword_init: true
@@ -23135,6 +23905,7 @@ module Aws::SecurityHub
     #            standards that you've enabled in the calling account. </p>
     #   @return [Integer]
     class ListStandardsControlAssociationsRequest < Struct.new(
+      nil,
       :security_control_id,
       :next_token,
       :max_results,
@@ -23152,6 +23923,7 @@ module Aws::SecurityHub
     #            request. </p>
     #   @return [String]
     class ListStandardsControlAssociationsResponse < Struct.new(
+      nil,
       :standards_control_association_summaries,
       :next_token,
       keyword_init: true
@@ -23163,6 +23935,7 @@ module Aws::SecurityHub
     #   <p>The ARN of the resource to retrieve tags for.</p>
     #   @return [String]
     class ListTagsForResourceRequest < Struct.new(
+      nil,
       :resource_arn,
       keyword_init: true
     )
@@ -23173,6 +23946,7 @@ module Aws::SecurityHub
     #   <p>The tags associated with a resource.</p>
     #   @return [Hash<String, String>]
     class ListTagsForResourceResponse < Struct.new(
+      nil,
       :tags,
       keyword_init: true
     )
@@ -23190,6 +23964,7 @@ module Aws::SecurityHub
     #   <p>A description of the state.</p>
     #   @return [String]
     class LoadBalancerState < Struct.new(
+      nil,
       :code,
       :reason,
       keyword_init: true
@@ -23213,6 +23988,7 @@ module Aws::SecurityHub
     #   <p>The state of the malware that was observed.</p>
     #   @return [String]
     class Malware < Struct.new(
+      nil,
       :name,
       :type,
       :path,
@@ -23286,6 +24062,7 @@ module Aws::SecurityHub
     #              see <a href="https://docs.aws.amazon.com/securityhub/latest/userguide/automation-rules.html">Automation rules</a> in the <i>Security Hub User Guide</i>.</p>
     #   @return [String]
     class MapFilter < Struct.new(
+      nil,
       :key,
       :value,
       :comparison,
@@ -23360,6 +24137,7 @@ module Aws::SecurityHub
     #   <p>The timestamp for the date and time when the member account was updated.</p>
     #   @return [Time]
     class Member < Struct.new(
+      nil,
       :account_id,
       :email,
       :master_id,
@@ -23414,6 +24192,7 @@ module Aws::SecurityHub
     #            <p>Length Constraints: Minimum of 1. Maximum of 128.</p>
     #   @return [String]
     class Network < Struct.new(
+      nil,
       :direction,
       :protocol,
       :open_port_range,
@@ -23448,6 +24227,7 @@ module Aws::SecurityHub
     #           </p>
     #   @return [Integer]
     class NetworkAutonomousSystem < Struct.new(
+      nil,
       :name,
       :number,
       keyword_init: true
@@ -23466,6 +24246,7 @@ module Aws::SecurityHub
     #           </p>
     #   @return [String]
     class NetworkConnection < Struct.new(
+      nil,
       :direction,
       keyword_init: true
     )
@@ -23496,6 +24277,7 @@ module Aws::SecurityHub
     #   <p>Indicates whether the network connection attempt was blocked.</p>
     #   @return [Boolean]
     class NetworkConnectionAction < Struct.new(
+      nil,
       :connection_direction,
       :remote_ip_details,
       :remote_port_details,
@@ -23550,6 +24332,7 @@ module Aws::SecurityHub
     #           </p>
     #   @return [Types::NetworkConnection]
     class NetworkEndpoint < Struct.new(
+      nil,
       :id,
       :ip,
       :domain,
@@ -23589,6 +24372,7 @@ module Aws::SecurityHub
     #           </p>
     #   @return [Float]
     class NetworkGeoLocation < Struct.new(
+      nil,
       :city,
       :country,
       :lat,
@@ -23611,6 +24395,7 @@ module Aws::SecurityHub
     #   <p>Information about the origin of the component.</p>
     #   @return [Types::NetworkPathComponentDetails]
     class NetworkHeader < Struct.new(
+      nil,
       :protocol,
       :destination,
       :source,
@@ -23637,6 +24422,7 @@ module Aws::SecurityHub
     #            path.</p>
     #   @return [Types::NetworkHeader]
     class NetworkPathComponent < Struct.new(
+      nil,
       :component_id,
       :component_type,
       :egress,
@@ -23654,6 +24440,7 @@ module Aws::SecurityHub
     #   <p>A list of port ranges for the destination.</p>
     #   @return [Array<Types::PortRange>]
     class NetworkPathComponentDetails < Struct.new(
+      nil,
       :address,
       :port_ranges,
       keyword_init: true
@@ -23674,6 +24461,7 @@ module Aws::SecurityHub
     #            <p>For more information about the validation and formatting of timestamp fields in Security Hub, see <a href="https://docs.aws.amazon.com/securityhub/1.0/APIReference/Welcome.html#timestamps">Timestamps</a>.</p>
     #   @return [String]
     class Note < Struct.new(
+      nil,
       :text,
       :updated_by,
       :updated_at,
@@ -23690,6 +24478,7 @@ module Aws::SecurityHub
     #   <p>The principal that updated the note.</p>
     #   @return [String]
     class NoteUpdate < Struct.new(
+      nil,
       :text,
       :updated_by,
       keyword_init: true
@@ -23721,6 +24510,7 @@ module Aws::SecurityHub
     #           </p>
     #   @return [Float]
     class NumberFilter < Struct.new(
+      nil,
       :gte,
       :lte,
       :eq,
@@ -23748,6 +24538,7 @@ module Aws::SecurityHub
     #   <p>Occurrences of sensitive data detected in Microsoft Excel workbooks, comma-separated value (CSV) files, or tab-separated value (TSV) files.</p>
     #   @return [Array<Types::Cell>]
     class Occurrences < Struct.new(
+      nil,
       :line_ranges,
       :offset_ranges,
       :pages,
@@ -23766,6 +24557,7 @@ module Aws::SecurityHub
     #   <p>Boolean filter for querying findings.</p>
     #   @return [Types::BooleanFilter]
     class OcsfBooleanFilter < Struct.new(
+      nil,
       :field_name,
       :filter,
       keyword_init: true
@@ -23781,6 +24573,7 @@ module Aws::SecurityHub
     #   <p>A date filter for querying findings.</p>
     #   @return [Types::DateFilter]
     class OcsfDateFilter < Struct.new(
+      nil,
       :field_name,
       :filter,
       keyword_init: true
@@ -23796,6 +24589,7 @@ module Aws::SecurityHub
     #   <p>The logical operators used to combine the filtering on multiple <code>CompositeFilters</code>.</p>
     #   @return [String]
     class OcsfFindingFilters < Struct.new(
+      nil,
       :composite_filters,
       :composite_operator,
       keyword_init: true
@@ -23814,6 +24608,7 @@ module Aws::SecurityHub
     #   <p>Finding metadata.product.uid, which is a unique identifier for the product.</p>
     #   @return [String]
     class OcsfFindingIdentifier < Struct.new(
+      nil,
       :cloud_account_uid,
       :finding_info_uid,
       :metadata_product_uid,
@@ -23831,6 +24626,7 @@ module Aws::SecurityHub
     #            value to check for, and the comparison operator.</p>
     #   @return [Types::MapFilter]
     class OcsfMapFilter < Struct.new(
+      nil,
       :field_name,
       :filter,
       keyword_init: true
@@ -23846,6 +24642,7 @@ module Aws::SecurityHub
     #   <p>A number filter for querying findings.</p>
     #   @return [Types::NumberFilter]
     class OcsfNumberFilter < Struct.new(
+      nil,
       :field_name,
       :filter,
       keyword_init: true
@@ -23861,6 +24658,7 @@ module Aws::SecurityHub
     #   <p>A string filter for filtering Security Hub findings.</p>
     #   @return [Types::StringFilter]
     class OcsfStringFilter < Struct.new(
+      nil,
       :field_name,
       :filter,
       keyword_init: true
@@ -23903,6 +24701,7 @@ module Aws::SecurityHub
     #           </p>
     #   @return [String]
     class OrganizationConfiguration < Struct.new(
+      nil,
       :configuration_type,
       :status,
       :status_message,
@@ -23922,6 +24721,7 @@ module Aws::SecurityHub
     #   <p>An occurrence of sensitive data detected in a binary text file.</p>
     #   @return [Types::Range]
     class Page < Struct.new(
+      nil,
       :page_number,
       :line_range,
       :offset_range,
@@ -23949,6 +24749,7 @@ module Aws::SecurityHub
     #           </p>
     #   @return [Types::ParameterValue]
     class ParameterConfiguration < Struct.new(
+      nil,
       :value_type,
       :value,
       keyword_init: true
@@ -23970,6 +24771,7 @@ module Aws::SecurityHub
     #           </p>
     #   @return [Types::ConfigurationOptions]
     class ParameterDefinition < Struct.new(
+      nil,
       :description,
       :configuration_options,
       keyword_init: true
@@ -24098,6 +24900,7 @@ module Aws::SecurityHub
     #            <p>Length Constraints: Minimum length of 1. Maximum length of 256.</p>
     #   @return [String]
     class PatchSummary < Struct.new(
+      nil,
       :id,
       :installed_count,
       :missing_count,
@@ -24147,6 +24950,7 @@ module Aws::SecurityHub
     #   <p>Indicates whether the port probe was blocked.</p>
     #   @return [Boolean]
     class PortProbeAction < Struct.new(
+      nil,
       :port_probe_details,
       :blocked,
       keyword_init: true
@@ -24167,6 +24971,7 @@ module Aws::SecurityHub
     #   <p>Provides information about the remote IP address that performed the scan.</p>
     #   @return [Types::ActionRemoteIpDetails]
     class PortProbeDetail < Struct.new(
+      nil,
       :local_port_details,
       :local_ip_details,
       :remote_ip_details,
@@ -24183,6 +24988,7 @@ module Aws::SecurityHub
     #   <p>The last port in the port range.</p>
     #   @return [Integer]
     class PortRange < Struct.new(
+      nil,
       :begin,
       :end,
       keyword_init: true
@@ -24198,6 +25004,7 @@ module Aws::SecurityHub
     #   <p>The last port in the port range.</p>
     #   @return [Integer]
     class PortRangeFromTo < Struct.new(
+      nil,
       :from,
       :to,
       keyword_init: true
@@ -24229,6 +25036,7 @@ module Aws::SecurityHub
     #            <p>For more information about the validation and formatting of timestamp fields in Security Hub, see <a href="https://docs.aws.amazon.com/securityhub/1.0/APIReference/Welcome.html#timestamps">Timestamps</a>.</p>
     #   @return [String]
     class ProcessDetails < Struct.new(
+      nil,
       :name,
       :path,
       :pid,
@@ -24287,6 +25095,7 @@ module Aws::SecurityHub
     #   <p>The resource policy associated with the product.</p>
     #   @return [String]
     class Product < Struct.new(
+      nil,
       :product_arn,
       :product_name,
       :company_name,
@@ -24324,6 +25133,7 @@ module Aws::SecurityHub
     #   <p>The URL to the serviceV@ or productV2 documentation about the integration, which includes how to activate the integration.</p>
     #   @return [String]
     class ProductV2 < Struct.new(
+      nil,
       :product_v2_name,
       :company_name,
       :description,
@@ -24345,6 +25155,7 @@ module Aws::SecurityHub
     #         </p>
     #   @return [String]
     class PropagatingVgwSetDetails < Struct.new(
+      nil,
       :gateway_id,
       keyword_init: true
     )
@@ -24399,6 +25210,7 @@ module Aws::SecurityHub
     #   <p>The status for the connectorV2.</p>
     #   @return [String]
     class ProviderSummary < Struct.new(
+      nil,
       :provider_name,
       :connector_status,
       keyword_init: true
@@ -24432,6 +25244,7 @@ module Aws::SecurityHub
     #   <p>In the line where the sensitive data starts, the column within the line where the sensitive data starts.</p>
     #   @return [Integer]
     class Range < Struct.new(
+      nil,
       :start,
       :end,
       :start_column,
@@ -24449,6 +25262,7 @@ module Aws::SecurityHub
     #   <p>A URL to a page or site that contains information about how to remediate a finding.</p>
     #   @return [String]
     class Recommendation < Struct.new(
+      nil,
       :text,
       :url,
       keyword_init: true
@@ -24464,6 +25278,7 @@ module Aws::SecurityHub
     #   <p>The record index, starting from 0, for the record that contains the data.</p>
     #   @return [Integer]
     class Record < Struct.new(
+      nil,
       :json_path,
       :record_index,
       keyword_init: true
@@ -24479,6 +25294,7 @@ module Aws::SecurityHub
     #   <p>The product-generated identifier for a related finding.</p>
     #   @return [String]
     class RelatedFinding < Struct.new(
+      nil,
       :product_arn,
       :id,
       keyword_init: true
@@ -24491,6 +25307,7 @@ module Aws::SecurityHub
     #   <p>A recommendation on the steps to take to remediate the issue identified by a finding.</p>
     #   @return [Types::Recommendation]
     class Remediation < Struct.new(
+      nil,
       :recommendation,
       keyword_init: true
     )
@@ -24540,6 +25357,7 @@ module Aws::SecurityHub
     #           </p>
     #   @return [String]
     class Resource < Struct.new(
+      nil,
       :type,
       :id,
       :partition,
@@ -24561,6 +25379,7 @@ module Aws::SecurityHub
     # @!attribute code
     #   @return [String]
     class ResourceConflictException < Struct.new(
+      nil,
       :message,
       :code,
       keyword_init: true
@@ -24953,6 +25772,7 @@ module Aws::SecurityHub
     #         </p>
     #   @return [Types::CodeRepositoryDetails]
     class ResourceDetails < Struct.new(
+      nil,
       :aws_auto_scaling_auto_scaling_group,
       :aws_code_build_project,
       :aws_cloud_front_distribution,
@@ -25072,6 +25892,7 @@ module Aws::SecurityHub
     #   <p>A breakdown of security findings by their severity levels.</p>
     #   @return [Types::ResourceSeverityBreakdown]
     class ResourceFindingsSummary < Struct.new(
+      nil,
       :finding_type,
       :product_name,
       :total_findings,
@@ -25089,6 +25910,7 @@ module Aws::SecurityHub
     #   <p>The criteria used to select resources and associated security findings.</p>
     #   @return [Types::ResourcesFilters]
     class ResourceGroupByRule < Struct.new(
+      nil,
       :group_by_field,
       :filters,
       keyword_init: true
@@ -25105,6 +25927,7 @@ module Aws::SecurityHub
     # @!attribute code
     #   @return [String]
     class ResourceInUseException < Struct.new(
+      nil,
       :message,
       :code,
       keyword_init: true
@@ -25118,6 +25941,7 @@ module Aws::SecurityHub
     # @!attribute code
     #   @return [String]
     class ResourceNotFoundException < Struct.new(
+      nil,
       :message,
       :code,
       keyword_init: true
@@ -25163,6 +25987,7 @@ module Aws::SecurityHub
     #   <p>The configuration details of a resource.</p>
     #   @return [JSON]
     class ResourceResult < Struct.new(
+      nil,
       :resource_arn,
       :resource_id,
       :account_id,
@@ -25206,6 +26031,7 @@ module Aws::SecurityHub
     #   <p>The number of findings with a severity level cannot be determined.</p>
     #   @return [Integer]
     class ResourceSeverityBreakdown < Struct.new(
+      nil,
       :other,
       :fatal,
       :critical,
@@ -25227,6 +26053,7 @@ module Aws::SecurityHub
     #   <p>The data associated with the tag key.</p>
     #   @return [String]
     class ResourceTag < Struct.new(
+      nil,
       :key,
       :value,
       keyword_init: true
@@ -25251,6 +26078,7 @@ module Aws::SecurityHub
     #   <p>The logical operator used to combine multiple filter conditions.</p>
     #   @return [String]
     class ResourcesCompositeFilter < Struct.new(
+      nil,
       :string_filters,
       :date_filters,
       :number_filters,
@@ -25269,6 +26097,7 @@ module Aws::SecurityHub
     #   <p>A date filter for querying findings.</p>
     #   @return [Types::DateFilter]
     class ResourcesDateFilter < Struct.new(
+      nil,
       :field_name,
       :filter,
       keyword_init: true
@@ -25284,6 +26113,7 @@ module Aws::SecurityHub
     #   <p>The logical operator used to combine multiple filter conditions in the structure.</p>
     #   @return [String]
     class ResourcesFilters < Struct.new(
+      nil,
       :composite_filters,
       :composite_operator,
       keyword_init: true
@@ -25300,6 +26130,7 @@ module Aws::SecurityHub
     #            value to check for, and the comparison operator.</p>
     #   @return [Types::MapFilter]
     class ResourcesMapFilter < Struct.new(
+      nil,
       :field_name,
       :filter,
       keyword_init: true
@@ -25315,6 +26146,7 @@ module Aws::SecurityHub
     #   <p>A number filter for querying findings.</p>
     #   @return [Types::NumberFilter]
     class ResourcesNumberFilter < Struct.new(
+      nil,
       :field_name,
       :filter,
       keyword_init: true
@@ -25330,6 +26162,7 @@ module Aws::SecurityHub
     #   <p>A string filter for filtering Security Hub findings.</p>
     #   @return [Types::StringFilter]
     class ResourcesStringFilter < Struct.new(
+      nil,
       :field_name,
       :filter,
       keyword_init: true
@@ -25345,6 +26178,7 @@ module Aws::SecurityHub
     #   <p>The reason that the account was not processed.</p>
     #   @return [String]
     class Result < Struct.new(
+      nil,
       :account_id,
       :processing_result,
       keyword_init: true
@@ -25436,6 +26270,7 @@ module Aws::SecurityHub
     #         </p>
     #   @return [String]
     class RouteSetDetails < Struct.new(
+      nil,
       :carrier_gateway_id,
       :core_network_arn,
       :destination_cidr_block,
@@ -25467,6 +26302,7 @@ module Aws::SecurityHub
     #            <p>For stateless rule groups, contains <code>StatelessRulesAndCustomActions</code>.</p>
     #   @return [Types::RuleGroupSource]
     class RuleGroupDetails < Struct.new(
+      nil,
       :rule_variables,
       :rules_source,
       keyword_init: true
@@ -25488,6 +26324,7 @@ module Aws::SecurityHub
     #   <p>The stateless rules and custom actions used by a stateless rule group.</p>
     #   @return [Types::RuleGroupSourceStatelessRulesAndCustomActionsDetails]
     class RuleGroupSource < Struct.new(
+      nil,
       :rules_source_list,
       :rules_string,
       :stateful_rules,
@@ -25505,6 +26342,7 @@ module Aws::SecurityHub
     #   <p>A descriptive name of the custom action.</p>
     #   @return [String]
     class RuleGroupSourceCustomActionsDetails < Struct.new(
+      nil,
       :action_definition,
       :action_name,
       keyword_init: true
@@ -25523,6 +26361,7 @@ module Aws::SecurityHub
     #   <p>The domains that you want to inspect for in your traffic flows. You can provide full domain names, or use the '.' prefix as a wildcard. For example, <code>.example.com</code> matches all domains that end with <code>example.com</code>.</p>
     #   @return [Array<String>]
     class RuleGroupSourceListDetails < Struct.new(
+      nil,
       :generated_rules_type,
       :target_types,
       :targets,
@@ -25542,6 +26381,7 @@ module Aws::SecurityHub
     #   <p>Additional options for the rule.</p>
     #   @return [Array<Types::RuleGroupSourceStatefulRulesOptionsDetails>]
     class RuleGroupSourceStatefulRulesDetails < Struct.new(
+      nil,
       :action,
       :header,
       :rule_options,
@@ -25570,6 +26410,7 @@ module Aws::SecurityHub
     #   <p>The source port to inspect for. You can specify an individual port, such as <code>1994</code>. You also can specify a port range, such as <code>1990:1994</code>. To match with any port, specify <code>ANY</code>.</p>
     #   @return [String]
     class RuleGroupSourceStatefulRulesHeaderDetails < Struct.new(
+      nil,
       :destination,
       :destination_port,
       :direction,
@@ -25589,6 +26430,7 @@ module Aws::SecurityHub
     #   <p>A list of settings.</p>
     #   @return [Array<String>]
     class RuleGroupSourceStatefulRulesOptionsDetails < Struct.new(
+      nil,
       :keyword,
       :settings,
       keyword_init: true
@@ -25604,6 +26446,7 @@ module Aws::SecurityHub
     #   <p>The criteria for Network Firewall to use to inspect an individual packet in a stateless rule inspection.</p>
     #   @return [Types::RuleGroupSourceStatelessRuleMatchAttributes]
     class RuleGroupSourceStatelessRuleDefinition < Struct.new(
+      nil,
       :actions,
       :match_attributes,
       keyword_init: true
@@ -25631,6 +26474,7 @@ module Aws::SecurityHub
     #   <p>The TCP flags and masks to inspect for.</p>
     #   @return [Array<Types::RuleGroupSourceStatelessRuleMatchAttributesTcpFlags>]
     class RuleGroupSourceStatelessRuleMatchAttributes < Struct.new(
+      nil,
       :destination_ports,
       :destinations,
       :protocols,
@@ -25650,6 +26494,7 @@ module Aws::SecurityHub
     #   <p>The ending port value for the port range.</p>
     #   @return [Integer]
     class RuleGroupSourceStatelessRuleMatchAttributesDestinationPorts < Struct.new(
+      nil,
       :from_port,
       :to_port,
       keyword_init: true
@@ -25662,6 +26507,7 @@ module Aws::SecurityHub
     #   <p>An IP address or a block of IP addresses.</p>
     #   @return [String]
     class RuleGroupSourceStatelessRuleMatchAttributesDestinations < Struct.new(
+      nil,
       :address_definition,
       keyword_init: true
     )
@@ -25676,6 +26522,7 @@ module Aws::SecurityHub
     #   <p>The ending port value for the port range.</p>
     #   @return [Integer]
     class RuleGroupSourceStatelessRuleMatchAttributesSourcePorts < Struct.new(
+      nil,
       :from_port,
       :to_port,
       keyword_init: true
@@ -25688,6 +26535,7 @@ module Aws::SecurityHub
     #   <p>An IP address or a block of IP addresses.</p>
     #   @return [String]
     class RuleGroupSourceStatelessRuleMatchAttributesSources < Struct.new(
+      nil,
       :address_definition,
       keyword_init: true
     )
@@ -25702,6 +26550,7 @@ module Aws::SecurityHub
     #   <p>The set of flags to consider in the inspection. If not specified, then all flags are inspected.</p>
     #   @return [Array<String>]
     class RuleGroupSourceStatelessRuleMatchAttributesTcpFlags < Struct.new(
+      nil,
       :flags,
       :masks,
       keyword_init: true
@@ -25717,6 +26566,7 @@ module Aws::SecurityHub
     #   <p>Stateless rules for the rule group.</p>
     #   @return [Array<Types::RuleGroupSourceStatelessRulesDetails>]
     class RuleGroupSourceStatelessRulesAndCustomActionsDetails < Struct.new(
+      nil,
       :custom_actions,
       :stateless_rules,
       keyword_init: true
@@ -25732,6 +26582,7 @@ module Aws::SecurityHub
     #   <p>Provides the definition of the stateless rule.</p>
     #   @return [Types::RuleGroupSourceStatelessRuleDefinition]
     class RuleGroupSourceStatelessRulesDetails < Struct.new(
+      nil,
       :priority,
       :rule_definition,
       keyword_init: true
@@ -25747,6 +26598,7 @@ module Aws::SecurityHub
     #   <p>A list of port ranges.</p>
     #   @return [Types::RuleGroupVariablesPortSetsDetails]
     class RuleGroupVariables < Struct.new(
+      nil,
       :ip_sets,
       :port_sets,
       keyword_init: true
@@ -25759,6 +26611,7 @@ module Aws::SecurityHub
     #   <p>The list of IP addresses and ranges.</p>
     #   @return [Array<String>]
     class RuleGroupVariablesIpSetsDetails < Struct.new(
+      nil,
       :definition,
       keyword_init: true
     )
@@ -25770,6 +26623,7 @@ module Aws::SecurityHub
     #   <p>The list of port ranges.</p>
     #   @return [Array<String>]
     class RuleGroupVariablesPortSetsDetails < Struct.new(
+      nil,
       :definition,
       keyword_init: true
     )
@@ -25839,6 +26693,7 @@ module Aws::SecurityHub
     #           </p>
     #   @return [String]
     class SecurityControl < Struct.new(
+      nil,
       :security_control_id,
       :security_control_arn,
       :title,
@@ -25868,6 +26723,7 @@ module Aws::SecurityHub
     #           </p>
     #   @return [Hash<String, Types::ParameterConfiguration>]
     class SecurityControlCustomParameter < Struct.new(
+      nil,
       :security_control_id,
       :parameters,
       keyword_init: true
@@ -25927,6 +26783,7 @@ module Aws::SecurityHub
     #           </p>
     #   @return [Hash<String, Types::ParameterDefinition>]
     class SecurityControlDefinition < Struct.new(
+      nil,
       :security_control_id,
       :title,
       :description,
@@ -25954,6 +26811,7 @@ module Aws::SecurityHub
     #           </p>
     #   @return [Array<String>]
     class SecurityControlParameter < Struct.new(
+      nil,
       :name,
       :value,
       keyword_init: true
@@ -25983,6 +26841,7 @@ module Aws::SecurityHub
     #           </p>
     #   @return [Array<Types::SecurityControlCustomParameter>]
     class SecurityControlsConfiguration < Struct.new(
+      nil,
       :enabled_security_control_identifiers,
       :disabled_security_control_identifiers,
       :security_control_custom_parameters,
@@ -26016,6 +26875,7 @@ module Aws::SecurityHub
     #           </p>
     #   @return [Types::SecurityControlsConfiguration]
     class SecurityHubPolicy < Struct.new(
+      nil,
       :service_enabled,
       :enabled_standard_identifiers,
       :security_controls_configuration,
@@ -26035,6 +26895,7 @@ module Aws::SecurityHub
     #   <p>Details about the sensitive data that was detected.</p>
     #   @return [Types::Occurrences]
     class SensitiveDataDetections < Struct.new(
+      nil,
       :count,
       :type,
       :occurrences,
@@ -26054,6 +26915,7 @@ module Aws::SecurityHub
     #   <p>The total number of occurrences of sensitive data.</p>
     #   @return [Integer]
     class SensitiveDataResult < Struct.new(
+      nil,
       :category,
       :detections,
       :total_count,
@@ -26094,6 +26956,7 @@ module Aws::SecurityHub
     #               these fields don't always match 1:1.</p>
     #   @return [Array<Types::Indicator>]
     class Sequence < Struct.new(
+      nil,
       :uid,
       :actors,
       :endpoints,
@@ -26115,6 +26978,7 @@ module Aws::SecurityHub
     #   <p>The status of the authorization between Jira Cloud and the service.</p>
     #   @return [String]
     class ServiceNowDetail < Struct.new(
+      nil,
       :instance_name,
       :client_id,
       :auth_status,
@@ -26134,6 +26998,7 @@ module Aws::SecurityHub
     #   <p>The client secret of ServiceNow ITSM.</p>
     #   @return [String]
     class ServiceNowProviderConfiguration < Struct.new(
+      nil,
       :instance_name,
       :client_id,
       :client_secret,
@@ -26240,6 +27105,7 @@ module Aws::SecurityHub
     #            <p>Length Constraints: Minimum length of 1. Maximum length of 64.</p>
     #   @return [String]
     class Severity < Struct.new(
+      nil,
       :product,
       :label,
       :normalized,
@@ -26309,6 +27175,7 @@ module Aws::SecurityHub
     #            </ul>
     #   @return [String]
     class SeverityUpdate < Struct.new(
+      nil,
       :normalized,
       :product,
       :label,
@@ -26426,6 +27293,7 @@ module Aws::SecurityHub
     #   <p>Information about the endpoint IDs associated with this signal.</p>
     #   @return [Array<String>]
     class Signal < Struct.new(
+      nil,
       :type,
       :id,
       :title,
@@ -26485,6 +27353,7 @@ module Aws::SecurityHub
     #         </p>
     #   @return [String]
     class SoftwarePackage < Struct.new(
+      nil,
       :name,
       :version,
       :epoch,
@@ -26509,6 +27378,7 @@ module Aws::SecurityHub
     #   <p>The order used to sort findings.</p>
     #   @return [String]
     class SortCriterion < Struct.new(
+      nil,
       :field,
       :sort_order,
       keyword_init: true
@@ -26539,6 +27409,7 @@ module Aws::SecurityHub
     #         </p>
     #   @return [Types::StandardsManagedBy]
     class Standard < Struct.new(
+      nil,
       :standards_arn,
       :name,
       :description,
@@ -26587,6 +27458,7 @@ module Aws::SecurityHub
     #   <p>The list of requirements that are related to this control.</p>
     #   @return [Array<String>]
     class StandardsControl < Struct.new(
+      nil,
       :standards_control_arn,
       :control_status,
       :disabled_reason,
@@ -26655,6 +27527,7 @@ module Aws::SecurityHub
     #            in a specified standard. </p>
     #   @return [Array<String>]
     class StandardsControlAssociationDetail < Struct.new(
+      nil,
       :standards_arn,
       :security_control_id,
       :security_control_arn,
@@ -26686,6 +27559,7 @@ module Aws::SecurityHub
     #         </p>
     #   @return [String]
     class StandardsControlAssociationId < Struct.new(
+      nil,
       :security_control_id,
       :standards_arn,
       keyword_init: true
@@ -26739,6 +27613,7 @@ module Aws::SecurityHub
     #         </p>
     #   @return [String]
     class StandardsControlAssociationSummary < Struct.new(
+      nil,
       :standards_arn,
       :security_control_id,
       :security_control_arn,
@@ -26770,6 +27645,7 @@ module Aws::SecurityHub
     #   <p>The reason for updating the control's enablement status in the standard.</p>
     #   @return [String]
     class StandardsControlAssociationUpdate < Struct.new(
+      nil,
       :standards_arn,
       :security_control_id,
       :association_status,
@@ -26790,6 +27666,7 @@ module Aws::SecurityHub
     #            standard.</p>
     #   @return [String]
     class StandardsManagedBy < Struct.new(
+      nil,
       :company,
       :product,
       keyword_init: true
@@ -26802,6 +27679,7 @@ module Aws::SecurityHub
     #   <p>The reason code that represents the reason for the current status of a standard subscription.</p>
     #   @return [String]
     class StandardsStatusReason < Struct.new(
+      nil,
       :status_reason_code,
       keyword_init: true
     )
@@ -26863,6 +27741,7 @@ module Aws::SecurityHub
     #   <p>The reason for the current status.</p>
     #   @return [Types::StandardsStatusReason]
     class StandardsSubscription < Struct.new(
+      nil,
       :standards_subscription_arn,
       :standards_arn,
       :standards_input,
@@ -26883,6 +27762,7 @@ module Aws::SecurityHub
     #   <p>A key-value pair of input for the standard.</p>
     #   @return [Hash<String, String>]
     class StandardsSubscriptionRequest < Struct.new(
+      nil,
       :standards_arn,
       :standards_input,
       keyword_init: true
@@ -26902,6 +27782,7 @@ module Aws::SecurityHub
     #           </p>
     #   @return [Types::Target]
     class StartConfigurationPolicyAssociationRequest < Struct.new(
+      nil,
       :configuration_policy_identifier,
       :target,
       keyword_init: true
@@ -26946,6 +27827,7 @@ module Aws::SecurityHub
     #           </p>
     #   @return [String]
     class StartConfigurationPolicyAssociationResponse < Struct.new(
+      nil,
       :configuration_policy_id,
       :target_id,
       :target_type,
@@ -26970,6 +27852,7 @@ module Aws::SecurityHub
     #           </p>
     #   @return [String]
     class StartConfigurationPolicyDisassociationRequest < Struct.new(
+      nil,
       :target,
       :configuration_policy_identifier,
       keyword_init: true
@@ -26978,6 +27861,7 @@ module Aws::SecurityHub
     end
 
     class StartConfigurationPolicyDisassociationResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -26988,6 +27872,7 @@ module Aws::SecurityHub
     #   <p>Information about metrics to publish to CloudWatch.</p>
     #   @return [Types::StatelessCustomPublishMetricAction]
     class StatelessCustomActionDefinition < Struct.new(
+      nil,
       :publish_metric_action,
       keyword_init: true
     )
@@ -26999,6 +27884,7 @@ module Aws::SecurityHub
     #   <p>Defines CloudWatch dimension values to publish.</p>
     #   @return [Array<Types::StatelessCustomPublishMetricActionDimension>]
     class StatelessCustomPublishMetricAction < Struct.new(
+      nil,
       :dimensions,
       keyword_init: true
     )
@@ -27010,6 +27896,7 @@ module Aws::SecurityHub
     #   <p>The value to use for the custom metric dimension.</p>
     #   @return [String]
     class StatelessCustomPublishMetricActionDimension < Struct.new(
+      nil,
       :value,
       keyword_init: true
     )
@@ -27026,6 +27913,7 @@ module Aws::SecurityHub
     #   <p>The corresponding description for the status reason code.</p>
     #   @return [String]
     class StatusReason < Struct.new(
+      nil,
       :reason_code,
       :description,
       keyword_init: true
@@ -27052,6 +27940,7 @@ module Aws::SecurityHub
     #           </p>
     #   @return [String]
     class StringConfigurationOptions < Struct.new(
+      nil,
       :default_value,
       :re2_expression,
       :expression_description,
@@ -27153,6 +28042,7 @@ module Aws::SecurityHub
     #             For more information, see <a href="https://docs.aws.amazon.com/securityhub/latest/userguide/automation-rules.html">Automation rules</a> in the <i>Security Hub User Guide</i>.</p>
     #   @return [String]
     class StringFilter < Struct.new(
+      nil,
       :value,
       :comparison,
       keyword_init: true
@@ -27185,6 +28075,7 @@ module Aws::SecurityHub
     #           </p>
     #   @return [String]
     class StringListConfigurationOptions < Struct.new(
+      nil,
       :default_value,
       :re2_expression,
       :max_items,
@@ -27201,6 +28092,7 @@ module Aws::SecurityHub
     #   <p>The tags to add to the resource. You can add up to 50 tags at a time. The tag keys can be no longer than 128 characters. The tag values can be no longer than 256 characters.</p>
     #   @return [Hash<String, String>]
     class TagResourceRequest < Struct.new(
+      nil,
       :resource_arn,
       :tags,
       keyword_init: true
@@ -27209,6 +28101,7 @@ module Aws::SecurityHub
     end
 
     class TagResourceResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -27270,6 +28163,7 @@ module Aws::SecurityHub
     #            <p>Array Members: Minimum number of 1 item. Maximum number of 5 items.</p>
     #   @return [Array<Types::FilePaths>]
     class Threat < Struct.new(
+      nil,
       :name,
       :severity,
       :item_count,
@@ -27304,6 +28198,7 @@ module Aws::SecurityHub
     #            intelligence indicator.</p>
     #   @return [String]
     class ThreatIntelIndicator < Struct.new(
+      nil,
       :type,
       :value,
       :category,
@@ -27323,6 +28218,7 @@ module Aws::SecurityHub
     # @!attribute code
     #   @return [String]
     class ThrottlingException < Struct.new(
+      nil,
       :message,
       :code,
       keyword_init: true
@@ -27350,6 +28246,7 @@ module Aws::SecurityHub
     #         </p>
     #   @return [String]
     class UnprocessedAutomationRule < Struct.new(
+      nil,
       :rule_arn,
       :error_code,
       :error_message,
@@ -27380,6 +28277,7 @@ module Aws::SecurityHub
     #           </p>
     #   @return [String]
     class UnprocessedConfigurationPolicyAssociation < Struct.new(
+      nil,
       :configuration_policy_association_identifiers,
       :error_code,
       :error_reason,
@@ -27405,6 +28303,7 @@ module Aws::SecurityHub
     #         </p>
     #   @return [String]
     class UnprocessedSecurityControl < Struct.new(
+      nil,
       :security_control_id,
       :error_code,
       :error_reason,
@@ -27431,6 +28330,7 @@ module Aws::SecurityHub
     #   <p>The reason why the standard and control association was unprocessed. </p>
     #   @return [String]
     class UnprocessedStandardsControlAssociation < Struct.new(
+      nil,
       :standards_control_association_id,
       :error_code,
       :error_reason,
@@ -27455,6 +28355,7 @@ module Aws::SecurityHub
     #   <p>The reason why a control's enablement status in the specified standard couldn't be updated. </p>
     #   @return [String]
     class UnprocessedStandardsControlAssociationUpdate < Struct.new(
+      nil,
       :standards_control_association_update,
       :error_code,
       :error_reason,
@@ -27470,6 +28371,7 @@ module Aws::SecurityHub
     #   <p>The tag keys associated with the tags to remove from the resource. You can remove up to 50 tags at a time.</p>
     #   @return [Array<String>]
     class UntagResourceRequest < Struct.new(
+      nil,
       :resource_arn,
       :tag_keys,
       keyword_init: true
@@ -27478,6 +28380,7 @@ module Aws::SecurityHub
     end
 
     class UntagResourceResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -27493,6 +28396,7 @@ module Aws::SecurityHub
     #   <p>The updated description for the custom action target.</p>
     #   @return [String]
     class UpdateActionTargetRequest < Struct.new(
+      nil,
       :action_target_arn,
       :name,
       :description,
@@ -27502,6 +28406,7 @@ module Aws::SecurityHub
     end
 
     class UpdateActionTargetResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -27517,6 +28422,7 @@ module Aws::SecurityHub
     #   <p>A list of Amazon Web Services Regions linked to the aggegation Region.</p>
     #   @return [Array<String>]
     class UpdateAggregatorV2Request < Struct.new(
+      nil,
       :aggregator_v2_arn,
       :region_linking_mode,
       :linked_regions,
@@ -27538,6 +28444,7 @@ module Aws::SecurityHub
     #   <p>A list of Amazon Web Services Regions linked to the aggegation Region.</p>
     #   @return [Array<String>]
     class UpdateAggregatorV2Response < Struct.new(
+      nil,
       :aggregator_v2_arn,
       :aggregation_region,
       :region_linking_mode,
@@ -27569,6 +28476,7 @@ module Aws::SecurityHub
     #   <p>A list of actions to be performed when the rule criteria is met.</p>
     #   @return [Array<Types::AutomationRulesActionV2>]
     class UpdateAutomationRuleV2Request < Struct.new(
+      nil,
       :identifier,
       :rule_status,
       :rule_order,
@@ -27582,6 +28490,7 @@ module Aws::SecurityHub
     end
 
     class UpdateAutomationRuleV2Response < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -27640,6 +28549,7 @@ module Aws::SecurityHub
     #         </p>
     #   @return [Array<Types::AutomationRulesAction>]
     class UpdateAutomationRulesRequestItem < Struct.new(
+      nil,
       :rule_arn,
       :rule_status,
       :rule_order,
@@ -27686,6 +28596,7 @@ module Aws::SecurityHub
     #               of controls that you want to enable or disable. The updated configuration replaces the current configuration.</p>
     #   @return [Types::Policy]
     class UpdateConfigurationPolicyRequest < Struct.new(
+      nil,
       :identifier,
       :name,
       :description,
@@ -27736,6 +28647,7 @@ module Aws::SecurityHub
     #           </p>
     #   @return [Types::Policy]
     class UpdateConfigurationPolicyResponse < Struct.new(
+      nil,
       :arn,
       :id,
       :name,
@@ -27761,6 +28673,7 @@ module Aws::SecurityHub
     #   <p>The third-party provider’s service configuration.</p>
     #   @return [Types::ProviderUpdateConfiguration]
     class UpdateConnectorV2Request < Struct.new(
+      nil,
       :connector_id,
       :client_secret,
       :description,
@@ -27771,6 +28684,7 @@ module Aws::SecurityHub
     end
 
     class UpdateConnectorV2Response < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -27813,6 +28727,7 @@ module Aws::SecurityHub
     #           <code>NO_REGIONS</code>.</p>
     #   @return [Array<String>]
     class UpdateFindingAggregatorRequest < Struct.new(
+      nil,
       :finding_aggregator_arn,
       :region_linking_mode,
       :regions,
@@ -27834,6 +28749,7 @@ module Aws::SecurityHub
     #   <p>The list of excluded Regions or included Regions.</p>
     #   @return [Array<String>]
     class UpdateFindingAggregatorResponse < Struct.new(
+      nil,
       :finding_aggregator_arn,
       :finding_aggregation_region,
       :region_linking_mode,
@@ -27853,6 +28769,7 @@ module Aws::SecurityHub
     #   <p>The updated record state for the finding.</p>
     #   @return [String]
     class UpdateFindingsRequest < Struct.new(
+      nil,
       :filters,
       :note,
       :record_state,
@@ -27862,6 +28779,7 @@ module Aws::SecurityHub
     end
 
     class UpdateFindingsResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -27880,6 +28798,7 @@ module Aws::SecurityHub
     #   <p>The updated <code>GroupBy</code> attribute that defines this insight.</p>
     #   @return [String]
     class UpdateInsightRequest < Struct.new(
+      nil,
       :insight_arn,
       :name,
       :filters,
@@ -27890,6 +28809,7 @@ module Aws::SecurityHub
     end
 
     class UpdateInsightResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -27920,6 +28840,7 @@ module Aws::SecurityHub
     #           </p>
     #   @return [Types::OrganizationConfiguration]
     class UpdateOrganizationConfigurationRequest < Struct.new(
+      nil,
       :auto_enable,
       :auto_enable_standards,
       :organization_configuration,
@@ -27929,6 +28850,7 @@ module Aws::SecurityHub
     end
 
     class UpdateOrganizationConfigurationResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -27951,6 +28873,7 @@ module Aws::SecurityHub
     #           </p>
     #   @return [String]
     class UpdateSecurityControlRequest < Struct.new(
+      nil,
       :security_control_id,
       :parameters,
       :last_update_reason,
@@ -27960,6 +28883,7 @@ module Aws::SecurityHub
     end
 
     class UpdateSecurityControlResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -27988,6 +28912,7 @@ module Aws::SecurityHub
     #            <p>For accounts that are part of an organization, this value can only be updated in the administrator account.</p>
     #   @return [String]
     class UpdateSecurityHubConfigurationRequest < Struct.new(
+      nil,
       :auto_enable_controls,
       :control_finding_generator,
       keyword_init: true
@@ -27996,6 +28921,7 @@ module Aws::SecurityHub
     end
 
     class UpdateSecurityHubConfigurationResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -28012,6 +28938,7 @@ module Aws::SecurityHub
     #            are disabling a control, then this is required.</p>
     #   @return [String]
     class UpdateStandardsControlRequest < Struct.new(
+      nil,
       :standards_control_arn,
       :control_status,
       :disabled_reason,
@@ -28021,6 +28948,7 @@ module Aws::SecurityHub
     end
 
     class UpdateStandardsControlResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -28042,6 +28970,7 @@ module Aws::SecurityHub
     #           </p>
     #   @return [String]
     class UserAccount < Struct.new(
+      nil,
       :uid,
       :name,
       keyword_init: true
@@ -28055,6 +28984,7 @@ module Aws::SecurityHub
     # @!attribute code
     #   @return [String]
     class ValidationException < Struct.new(
+      nil,
       :message,
       :code,
       keyword_init: true
@@ -28073,6 +29003,7 @@ module Aws::SecurityHub
     #         </p>
     #   @return [String]
     class VolumeMount < Struct.new(
+      nil,
       :name,
       :mount_path,
       keyword_init: true
@@ -28087,6 +29018,7 @@ module Aws::SecurityHub
     #         </p>
     #   @return [String]
     class VpcInfoCidrBlockSetDetails < Struct.new(
+      nil,
       :cidr_block,
       keyword_init: true
     )
@@ -28100,6 +29032,7 @@ module Aws::SecurityHub
     #         </p>
     #   @return [String]
     class VpcInfoIpv6CidrBlockSetDetails < Struct.new(
+      nil,
       :ipv6_cidr_block,
       keyword_init: true
     )
@@ -28121,6 +29054,7 @@ module Aws::SecurityHub
     #         </p>
     #   @return [Boolean]
     class VpcInfoPeeringOptionsDetails < Struct.new(
+      nil,
       :allow_dns_resolution_from_remote_vpc,
       :allow_egress_from_local_classic_link_to_remote_vpc,
       :allow_egress_from_local_vpc_to_remote_classic_link,
@@ -28189,6 +29123,7 @@ module Aws::SecurityHub
     #           </p>
     #   @return [Array<Types::VulnerabilityCodeVulnerabilities>]
     class Vulnerability < Struct.new(
+      nil,
       :id,
       :vulnerable_packages,
       :cvss,
@@ -28224,6 +29159,7 @@ module Aws::SecurityHub
     #           </p>
     #   @return [String]
     class VulnerabilityCodeVulnerabilities < Struct.new(
+      nil,
       :cwes,
       :file_path,
       :source_arn,
@@ -28251,6 +29187,7 @@ module Aws::SecurityHub
     #            <p>For more information about the validation and formatting of timestamp fields in Security Hub, see <a href="https://docs.aws.amazon.com/securityhub/1.0/APIReference/Welcome.html#timestamps">Timestamps</a>.</p>
     #   @return [String]
     class VulnerabilityVendor < Struct.new(
+      nil,
       :name,
       :url,
       :vendor_severity,
@@ -28286,6 +29223,7 @@ module Aws::SecurityHub
     #            </ul>
     #   @return [String]
     class WafAction < Struct.new(
+      nil,
       :type,
       keyword_init: true
     )
@@ -28297,6 +29235,7 @@ module Aws::SecurityHub
     #   <p>The unique identifier for the rule to exclude from the rule group.</p>
     #   @return [String]
     class WafExcludedRule < Struct.new(
+      nil,
       :rule_id,
       keyword_init: true
     )
@@ -28311,6 +29250,7 @@ module Aws::SecurityHub
     #            <p>If set to <code>NONE</code>, the rule's action takes place.</p>
     #   @return [String]
     class WafOverrideAction < Struct.new(
+      nil,
       :type,
       keyword_init: true
     )
@@ -28359,6 +29299,7 @@ module Aws::SecurityHub
     #            </ul>
     #   @return [String]
     class Workflow < Struct.new(
+      nil,
       :status,
       keyword_init: true
     )
@@ -28405,6 +29346,7 @@ module Aws::SecurityHub
     #            </ul>
     #   @return [String]
     class WorkflowUpdate < Struct.new(
+      nil,
       :status,
       keyword_init: true
     )

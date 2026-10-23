@@ -10,6 +10,7 @@ module Aws::PinpointSMSVoice
     # @!attribute message
     #   @return [String]
     class AlreadyExistsException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -20,6 +21,7 @@ module Aws::PinpointSMSVoice
     # @!attribute message
     #   @return [String]
     class BadRequestException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -31,6 +33,7 @@ module Aws::PinpointSMSVoice
     #   The language to use when delivering the message. For a complete list of supported languages, see the Amazon Polly Developer Guide.
     #   @return [String]
     class CallInstructionsMessageType < Struct.new(
+      nil,
       :text,
       keyword_init: true
     )
@@ -45,6 +48,7 @@ module Aws::PinpointSMSVoice
     #   The name of the Amazon CloudWatch Log Group that you want to record events in.
     #   @return [String]
     class CloudWatchLogsDestination < Struct.new(
+      nil,
       :iam_role_arn,
       :log_group_arn,
       keyword_init: true
@@ -63,6 +67,7 @@ module Aws::PinpointSMSVoice
     #   A name that identifies the event destination.
     #   @return [String]
     class CreateConfigurationSetEventDestinationRequest < Struct.new(
+      nil,
       :configuration_set_name,
       :event_destination,
       :event_destination_name,
@@ -73,6 +78,7 @@ module Aws::PinpointSMSVoice
 
     # An empty object that indicates that the event destination was created successfully.
     class CreateConfigurationSetEventDestinationResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -83,6 +89,7 @@ module Aws::PinpointSMSVoice
     #   The name that you want to give the configuration set.
     #   @return [String]
     class CreateConfigurationSetRequest < Struct.new(
+      nil,
       :configuration_set_name,
       keyword_init: true
     )
@@ -91,6 +98,7 @@ module Aws::PinpointSMSVoice
 
     # An empty object that indicates that the configuration set was successfully created.
     class CreateConfigurationSetResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -103,6 +111,7 @@ module Aws::PinpointSMSVoice
     #   EventDestinationName
     #   @return [String]
     class DeleteConfigurationSetEventDestinationRequest < Struct.new(
+      nil,
       :configuration_set_name,
       :event_destination_name,
       keyword_init: true
@@ -112,6 +121,7 @@ module Aws::PinpointSMSVoice
 
     # An empty object that indicates that the event destination was deleted successfully.
     class DeleteConfigurationSetEventDestinationResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -121,6 +131,7 @@ module Aws::PinpointSMSVoice
     #   ConfigurationSetName
     #   @return [String]
     class DeleteConfigurationSetRequest < Struct.new(
+      nil,
       :configuration_set_name,
       keyword_init: true
     )
@@ -129,6 +140,7 @@ module Aws::PinpointSMSVoice
 
     # An empty object that indicates that the configuration set was deleted successfully.
     class DeleteConfigurationSetResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -154,6 +166,7 @@ module Aws::PinpointSMSVoice
     #   An object that contains information about an event destination that sends data to Amazon SNS.
     #   @return [Types::SnsDestination]
     class EventDestination < Struct.new(
+      nil,
       :cloud_watch_logs_destination,
       :enabled,
       :kinesis_firehose_destination,
@@ -182,6 +195,7 @@ module Aws::PinpointSMSVoice
     #   An object that contains information about an event destination that sends data to Amazon SNS.
     #   @return [Types::SnsDestination]
     class EventDestinationDefinition < Struct.new(
+      nil,
       :cloud_watch_logs_destination,
       :enabled,
       :kinesis_firehose_destination,
@@ -196,6 +210,7 @@ module Aws::PinpointSMSVoice
     #   ConfigurationSetName
     #   @return [String]
     class GetConfigurationSetEventDestinationsRequest < Struct.new(
+      nil,
       :configuration_set_name,
       keyword_init: true
     )
@@ -207,6 +222,7 @@ module Aws::PinpointSMSVoice
     #   An array of EventDestination objects. Each EventDestination object includes ARNs and other information that define an event destination.
     #   @return [Array<Types::EventDestination>]
     class GetConfigurationSetEventDestinationsResponse < Struct.new(
+      nil,
       :event_destinations,
       keyword_init: true
     )
@@ -217,6 +233,7 @@ module Aws::PinpointSMSVoice
     # @!attribute message
     #   @return [String]
     class InternalServiceErrorException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -231,6 +248,7 @@ module Aws::PinpointSMSVoice
     #   The Amazon Resource Name (ARN) of the Amazon Kinesis Data Firehose destination that you want to use in the event destination.
     #   @return [String]
     class KinesisFirehoseDestination < Struct.new(
+      nil,
       :delivery_stream_arn,
       :iam_role_arn,
       keyword_init: true
@@ -242,6 +260,7 @@ module Aws::PinpointSMSVoice
     # @!attribute message
     #   @return [String]
     class LimitExceededException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -255,6 +274,7 @@ module Aws::PinpointSMSVoice
     #   Used to specify the number of items that should be returned in the response.
     #   @return [String]
     class ListConfigurationSetsRequest < Struct.new(
+      nil,
       :next_token,
       :page_size,
       keyword_init: true
@@ -270,6 +290,7 @@ module Aws::PinpointSMSVoice
     #   A token returned from a previous call to ListConfigurationSets to indicate the position in the list of configuration sets.
     #   @return [String]
     class ListConfigurationSetsResponse < Struct.new(
+      nil,
       :configuration_sets,
       :next_token,
       keyword_init: true
@@ -281,6 +302,7 @@ module Aws::PinpointSMSVoice
     # @!attribute message
     #   @return [String]
     class NotFoundException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -298,6 +320,7 @@ module Aws::PinpointSMSVoice
     #   The name of the voice that you want to use to deliver the message. For a complete list of supported voices, see the Amazon Polly Developer Guide.
     #   @return [String]
     class PlainTextMessageType < Struct.new(
+      nil,
       :language_code,
       :text,
       :voice_id,
@@ -317,6 +340,7 @@ module Aws::PinpointSMSVoice
     #   The name of the voice that you want to use to deliver the message. For a complete list of supported voices, see the Amazon Polly Developer Guide.
     #   @return [String]
     class SSMLMessageType < Struct.new(
+      nil,
       :language_code,
       :text,
       :voice_id,
@@ -342,6 +366,7 @@ module Aws::PinpointSMSVoice
     #   The phone number that Amazon Pinpoint should use to send the voice message. This isn't necessarily the phone number that appears on recipients' devices when they receive the message, because you can specify a CallerId parameter in the request.
     #   @return [String]
     class SendVoiceMessageRequest < Struct.new(
+      nil,
       :caller_id,
       :configuration_set_name,
       :content,
@@ -357,6 +382,7 @@ module Aws::PinpointSMSVoice
     #   A unique identifier for the voice message.
     #   @return [String]
     class SendVoiceMessageResponse < Struct.new(
+      nil,
       :message_id,
       keyword_init: true
     )
@@ -368,6 +394,7 @@ module Aws::PinpointSMSVoice
     #   The Amazon Resource Name (ARN) of the Amazon SNS topic that you want to publish events to.
     #   @return [String]
     class SnsDestination < Struct.new(
+      nil,
       :topic_arn,
       keyword_init: true
     )
@@ -378,6 +405,7 @@ module Aws::PinpointSMSVoice
     # @!attribute message
     #   @return [String]
     class TooManyRequestsException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -395,6 +423,7 @@ module Aws::PinpointSMSVoice
     #   EventDestinationName
     #   @return [String]
     class UpdateConfigurationSetEventDestinationRequest < Struct.new(
+      nil,
       :configuration_set_name,
       :event_destination,
       :event_destination_name,
@@ -405,6 +434,7 @@ module Aws::PinpointSMSVoice
 
     # An empty object that indicates that the event destination was updated successfully.
     class UpdateConfigurationSetEventDestinationResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -421,6 +451,7 @@ module Aws::PinpointSMSVoice
     #   An object that defines a message that contains SSML-formatted text.
     #   @return [Types::SSMLMessageType]
     class VoiceMessageContent < Struct.new(
+      nil,
       :call_instructions_message,
       :plain_text_message,
       :ssml_message,

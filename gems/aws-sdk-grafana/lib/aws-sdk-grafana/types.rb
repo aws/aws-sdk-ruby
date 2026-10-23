@@ -10,6 +10,7 @@ module Aws::Grafana
     # @!attribute message
     #   @return [String]
     class AccessDeniedException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -42,6 +43,7 @@ module Aws::Grafana
     #               names for the users' organizations.</p>
     #   @return [String]
     class AssertionAttributes < Struct.new(
+      nil,
       :name,
       :login,
       :email,
@@ -67,6 +69,7 @@ module Aws::Grafana
     #               Labs account. For more information, see <a href="https://docs.aws.amazon.com/grafana/latest/userguide/upgrade-to-Grafana-Enterprise.html#AMG-workspace-register-enterprise">Link your account with Grafana Labs</a>.</p>
     #   @return [String]
     class AssociateLicenseInput < Struct.new(
+      nil,
       :workspace_id,
       :license_type,
       :grafana_token,
@@ -79,6 +82,7 @@ module Aws::Grafana
     #   <p>A structure containing data about the workspace.</p>
     #   @return [Types::WorkspaceDescription]
     class AssociateLicenseOutput < Struct.new(
+      nil,
       :workspace,
       keyword_init: true
     )
@@ -101,6 +105,7 @@ module Aws::Grafana
     #   <p>A structure containing information about how this workspace works with IAM Identity Center. </p>
     #   @return [Types::AwsSsoAuthentication]
     class AuthenticationDescription < Struct.new(
+      nil,
       :providers,
       :saml,
       :aws_sso,
@@ -121,6 +126,7 @@ module Aws::Grafana
     #               configured.</p>
     #   @return [String]
     class AuthenticationSummary < Struct.new(
+      nil,
       :providers,
       :saml_configuration_status,
       keyword_init: true
@@ -133,6 +139,7 @@ module Aws::Grafana
     #   <p>The ID of the IAM Identity Center-managed application that is created by Amazon Managed Grafana.</p>
     #   @return [String]
     class AwsSsoAuthentication < Struct.new(
+      nil,
       :sso_client_id,
       keyword_init: true
     )
@@ -150,6 +157,7 @@ module Aws::Grafana
     #   <p>The type of the resource that is associated with the error.</p>
     #   @return [String]
     class ConflictException < Struct.new(
+      nil,
       :message,
       :resource_id,
       :resource_type,
@@ -174,6 +182,7 @@ module Aws::Grafana
     #   <p>The ID of the workspace to create an API key.</p>
     #   @return [String]
     class CreateWorkspaceApiKeyInput < Struct.new(
+      nil,
       :key_name,
       :key_role,
       :seconds_to_live,
@@ -194,6 +203,7 @@ module Aws::Grafana
     #   <p>The ID of the workspace that the key is valid for.</p>
     #   @return [String]
     class CreateWorkspaceApiKeyOutput < Struct.new(
+      nil,
       :key_name,
       :key,
       :workspace_id,
@@ -304,6 +314,7 @@ module Aws::Grafana
     #               operation.</p>
     #   @return [String]
     class CreateWorkspaceInput < Struct.new(
+      nil,
       :account_access_type,
       :client_token,
       :organization_role_name,
@@ -330,6 +341,7 @@ module Aws::Grafana
     #   <p>A structure containing data about the workspace that was created.</p>
     #   @return [Types::WorkspaceDescription]
     class CreateWorkspaceOutput < Struct.new(
+      nil,
       :workspace,
       keyword_init: true
     )
@@ -351,6 +363,7 @@ module Aws::Grafana
     #   <p>The ID of the workspace within which to create the service account.</p>
     #   @return [String]
     class CreateWorkspaceServiceAccountRequest < Struct.new(
+      nil,
       :name,
       :grafana_role,
       :workspace_id,
@@ -372,6 +385,7 @@ module Aws::Grafana
     #   <p>The workspace with which the service account is associated.</p>
     #   @return [String]
     class CreateWorkspaceServiceAccountResponse < Struct.new(
+      nil,
       :id,
       :name,
       :grafana_role,
@@ -395,6 +409,7 @@ module Aws::Grafana
     #   <p>The ID of the workspace the service account resides within.</p>
     #   @return [String]
     class CreateWorkspaceServiceAccountTokenRequest < Struct.new(
+      nil,
       :name,
       :seconds_to_live,
       :service_account_id,
@@ -415,6 +430,7 @@ module Aws::Grafana
     #   <p>The ID of the workspace where the token was created.</p>
     #   @return [String]
     class CreateWorkspaceServiceAccountTokenResponse < Struct.new(
+      nil,
       :service_account_token,
       :service_account_id,
       :workspace_id,
@@ -430,6 +446,7 @@ module Aws::Grafana
     #   <p>The ID of the workspace to delete.</p>
     #   @return [String]
     class DeleteWorkspaceApiKeyInput < Struct.new(
+      nil,
       :key_name,
       :workspace_id,
       keyword_init: true
@@ -444,6 +461,7 @@ module Aws::Grafana
     #   <p>The ID of the workspace where the key was deleted.</p>
     #   @return [String]
     class DeleteWorkspaceApiKeyOutput < Struct.new(
+      nil,
       :key_name,
       :workspace_id,
       keyword_init: true
@@ -455,6 +473,7 @@ module Aws::Grafana
     #   <p>The ID of the workspace to delete.</p>
     #   @return [String]
     class DeleteWorkspaceInput < Struct.new(
+      nil,
       :workspace_id,
       keyword_init: true
     )
@@ -465,6 +484,7 @@ module Aws::Grafana
     #   <p>A structure containing information about the workspace that was deleted.</p>
     #   @return [Types::WorkspaceDescription]
     class DeleteWorkspaceOutput < Struct.new(
+      nil,
       :workspace,
       keyword_init: true
     )
@@ -478,6 +498,7 @@ module Aws::Grafana
     #   <p>The ID of the workspace where the service account resides.</p>
     #   @return [String]
     class DeleteWorkspaceServiceAccountRequest < Struct.new(
+      nil,
       :service_account_id,
       :workspace_id,
       keyword_init: true
@@ -492,6 +513,7 @@ module Aws::Grafana
     #   <p>The ID of the workspace where the service account was deleted.</p>
     #   @return [String]
     class DeleteWorkspaceServiceAccountResponse < Struct.new(
+      nil,
       :service_account_id,
       :workspace_id,
       keyword_init: true
@@ -509,6 +531,7 @@ module Aws::Grafana
     #   <p>The ID of the workspace from which to delete the token.</p>
     #   @return [String]
     class DeleteWorkspaceServiceAccountTokenRequest < Struct.new(
+      nil,
       :token_id,
       :service_account_id,
       :workspace_id,
@@ -527,6 +550,7 @@ module Aws::Grafana
     #   <p>The ID of the workspace where the token was deleted.</p>
     #   @return [String]
     class DeleteWorkspaceServiceAccountTokenResponse < Struct.new(
+      nil,
       :token_id,
       :service_account_id,
       :workspace_id,
@@ -539,6 +563,7 @@ module Aws::Grafana
     #   <p>The ID of the workspace to return authentication information about.</p>
     #   @return [String]
     class DescribeWorkspaceAuthenticationInput < Struct.new(
+      nil,
       :workspace_id,
       keyword_init: true
     )
@@ -550,6 +575,7 @@ module Aws::Grafana
     #               workspace.</p>
     #   @return [Types::AuthenticationDescription]
     class DescribeWorkspaceAuthenticationOutput < Struct.new(
+      nil,
       :authentication,
       keyword_init: true
     )
@@ -560,6 +586,7 @@ module Aws::Grafana
     #   <p>The ID of the workspace to get configuration information for.</p>
     #   @return [String]
     class DescribeWorkspaceConfigurationInput < Struct.new(
+      nil,
       :workspace_id,
       keyword_init: true
     )
@@ -575,6 +602,7 @@ module Aws::Grafana
     #   <p>The supported Grafana version for the workspace.</p>
     #   @return [String]
     class DescribeWorkspaceConfigurationOutput < Struct.new(
+      nil,
       :configuration,
       :grafana_version,
       keyword_init: true
@@ -586,6 +614,7 @@ module Aws::Grafana
     #   <p>The ID of the workspace to display information about.</p>
     #   @return [String]
     class DescribeWorkspaceInput < Struct.new(
+      nil,
       :workspace_id,
       keyword_init: true
     )
@@ -596,6 +625,7 @@ module Aws::Grafana
     #   <p>A structure containing information about the workspace.</p>
     #   @return [Types::WorkspaceDescription]
     class DescribeWorkspaceOutput < Struct.new(
+      nil,
       :workspace,
       keyword_init: true
     )
@@ -609,6 +639,7 @@ module Aws::Grafana
     #   <p>The type of license to remove from the workspace.</p>
     #   @return [String]
     class DisassociateLicenseInput < Struct.new(
+      nil,
       :workspace_id,
       :license_type,
       keyword_init: true
@@ -620,6 +651,7 @@ module Aws::Grafana
     #   <p>A structure containing information about the workspace.</p>
     #   @return [Types::WorkspaceDescription]
     class DisassociateLicenseOutput < Struct.new(
+      nil,
       :workspace,
       keyword_init: true
     )
@@ -658,6 +690,7 @@ module Aws::Grafana
     #   <p>How long to wait before you retry this operation.</p>
     #   @return [Integer]
     class InternalServerException < Struct.new(
+      nil,
       :message,
       :retry_after_seconds,
       keyword_init: true
@@ -686,6 +719,7 @@ module Aws::Grafana
     #   <p>The ID of the workspace to list permissions for. This parameter is required.</p>
     #   @return [String]
     class ListPermissionsInput < Struct.new(
+      nil,
       :max_results,
       :next_token,
       :user_type,
@@ -705,6 +739,7 @@ module Aws::Grafana
     #   <p>The permissions returned by the operation.</p>
     #   @return [Array<Types::PermissionEntry>]
     class ListPermissionsOutput < Struct.new(
+      nil,
       :next_token,
       :permissions,
       keyword_init: true
@@ -716,6 +751,7 @@ module Aws::Grafana
     #   <p>The ARN of the resource the list of tags are associated with.</p>
     #   @return [String]
     class ListTagsForResourceInput < Struct.new(
+      nil,
       :resource_arn,
       keyword_init: true
     )
@@ -726,6 +762,7 @@ module Aws::Grafana
     #   <p>The list of tags that are associated with the resource.</p>
     #   @return [Hash<String, String>]
     class ListTagsForResourceOutput < Struct.new(
+      nil,
       :tags,
       keyword_init: true
     )
@@ -745,6 +782,7 @@ module Aws::Grafana
     #               <code>CreateWorkspace</code>.</p>
     #   @return [String]
     class ListVersionsRequest < Struct.new(
+      nil,
       :max_results,
       :next_token,
       :workspace_id,
@@ -762,6 +800,7 @@ module Aws::Grafana
     #               request, the Grafana versions to which this workspace can be upgraded.</p>
     #   @return [Array<String>]
     class ListVersionsResponse < Struct.new(
+      nil,
       :next_token,
       :grafana_versions,
       keyword_init: true
@@ -783,6 +822,7 @@ module Aws::Grafana
     #   <p>The ID of the workspace for which to return tokens.</p>
     #   @return [String]
     class ListWorkspaceServiceAccountTokensRequest < Struct.new(
+      nil,
       :max_results,
       :next_token,
       :service_account_id,
@@ -805,6 +845,7 @@ module Aws::Grafana
     #   <p>The ID of the workspace where the tokens reside.</p>
     #   @return [String]
     class ListWorkspaceServiceAccountTokensResponse < Struct.new(
+      nil,
       :next_token,
       :service_account_tokens,
       :service_account_id,
@@ -825,6 +866,7 @@ module Aws::Grafana
     #   <p>The workspace for which to list service accounts.</p>
     #   @return [String]
     class ListWorkspaceServiceAccountsRequest < Struct.new(
+      nil,
       :max_results,
       :next_token,
       :workspace_id,
@@ -843,6 +885,7 @@ module Aws::Grafana
     #   <p>The workspace to which the service accounts are associated.</p>
     #   @return [String]
     class ListWorkspaceServiceAccountsResponse < Struct.new(
+      nil,
       :next_token,
       :service_accounts,
       :workspace_id,
@@ -859,6 +902,7 @@ module Aws::Grafana
     #               previous <code>ListWorkspaces</code> operation.)</p>
     #   @return [String]
     class ListWorkspacesInput < Struct.new(
+      nil,
       :max_results,
       :next_token,
       keyword_init: true
@@ -874,6 +918,7 @@ module Aws::Grafana
     #   <p>The token to use when requesting the next set of workspaces.</p>
     #   @return [String]
     class ListWorkspacesOutput < Struct.new(
+      nil,
       :workspaces,
       :next_token,
       keyword_init: true
@@ -928,6 +973,7 @@ module Aws::Grafana
     #            </note>
     #   @return [Array<String>]
     class NetworkAccessConfiguration < Struct.new(
+      nil,
       :prefix_list_ids,
       :vpce_ids,
       keyword_init: true
@@ -945,6 +991,7 @@ module Aws::Grafana
     #               or <code>Viewer</code> role.</p>
     #   @return [String]
     class PermissionEntry < Struct.new(
+      nil,
       :user,
       :role,
       keyword_init: true
@@ -963,6 +1010,7 @@ module Aws::Grafana
     #   <p>The type of the resource that is associated with the error.</p>
     #   @return [String]
     class ResourceNotFoundException < Struct.new(
+      nil,
       :message,
       :resource_id,
       :resource_type,
@@ -984,6 +1032,7 @@ module Aws::Grafana
     #                   <code>Admin</code> role to.</p>
     #   @return [Array<String>]
     class RoleValues < Struct.new(
+      nil,
       :editor,
       :admin,
       keyword_init: true
@@ -999,6 +1048,7 @@ module Aws::Grafana
     #   <p>A structure containing details about how this workspace works with SAML. </p>
     #   @return [Types::SamlConfiguration]
     class SamlAuthentication < Struct.new(
+      nil,
       :status,
       :configuration,
       keyword_init: true
@@ -1029,6 +1079,7 @@ module Aws::Grafana
     #               again.</p>
     #   @return [Integer]
     class SamlConfiguration < Struct.new(
+      nil,
       :idp_metadata,
       :assertion_attributes,
       :role_values,
@@ -1060,6 +1111,7 @@ module Aws::Grafana
     #               Grafana APIs.</p>
     #   @return [String]
     class ServiceAccountSummary < Struct.new(
+      nil,
       :id,
       :name,
       :is_disabled,
@@ -1086,6 +1138,7 @@ module Aws::Grafana
     #   <p>The last time the token was used to authorize a Grafana HTTP API.</p>
     #   @return [Time]
     class ServiceAccountTokenSummary < Struct.new(
+      nil,
       :id,
       :name,
       :created_at,
@@ -1112,6 +1165,7 @@ module Aws::Grafana
     #               APIs to authenticate and authorize the requests.</p>
     #   @return [String]
     class ServiceAccountTokenSummaryWithKey < Struct.new(
+      nil,
       :id,
       :name,
       :key,
@@ -1137,6 +1191,7 @@ module Aws::Grafana
     #   <p>The ID of the service quota that was exceeded.</p>
     #   @return [String]
     class ServiceQuotaExceededException < Struct.new(
+      nil,
       :message,
       :resource_id,
       :resource_type,
@@ -1155,6 +1210,7 @@ module Aws::Grafana
     #               keys only, tags (key and values) only or a combination of tag keys and tags.</p>
     #   @return [Hash<String, String>]
     class TagResourceInput < Struct.new(
+      nil,
       :resource_arn,
       :tags,
       keyword_init: true
@@ -1163,6 +1219,7 @@ module Aws::Grafana
     end
 
     class TagResourceOutput < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1182,6 +1239,7 @@ module Aws::Grafana
     #   <p>The value of a parameter in the request caused an error.</p>
     #   @return [Integer]
     class ThrottlingException < Struct.new(
+      nil,
       :message,
       :service_code,
       :quota_code,
@@ -1198,6 +1256,7 @@ module Aws::Grafana
     #   <p>The key values of the tag to be removed from the resource.</p>
     #   @return [Array<String>]
     class UntagResourceInput < Struct.new(
+      nil,
       :resource_arn,
       :tag_keys,
       keyword_init: true
@@ -1206,6 +1265,7 @@ module Aws::Grafana
     end
 
     class UntagResourceOutput < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1223,6 +1283,7 @@ module Aws::Grafana
     #   <p>Specifies which permission update caused the error.</p>
     #   @return [Types::UpdateInstruction]
     class UpdateError < Struct.new(
+      nil,
       :code,
       :message,
       :caused_by,
@@ -1243,6 +1304,7 @@ module Aws::Grafana
     #   <p>A structure that specifies the user or group to add or revoke the role for.</p>
     #   @return [Array<Types::User>]
     class UpdateInstruction < Struct.new(
+      nil,
       :action,
       :role,
       :users,
@@ -1258,6 +1320,7 @@ module Aws::Grafana
     #   <p>The ID of the workspace to update.</p>
     #   @return [String]
     class UpdatePermissionsInput < Struct.new(
+      nil,
       :update_instruction_batch,
       :workspace_id,
       keyword_init: true
@@ -1269,6 +1332,7 @@ module Aws::Grafana
     #   <p>An array of structures that contain the errors from the operation, if any.</p>
     #   @return [Array<Types::UpdateError>]
     class UpdatePermissionsOutput < Struct.new(
+      nil,
       :errors,
       keyword_init: true
     )
@@ -1290,6 +1354,7 @@ module Aws::Grafana
     #               have the <code>Admin</code> and <code>Editor</code> roles in the workspace.</p>
     #   @return [Types::SamlConfiguration]
     class UpdateWorkspaceAuthenticationInput < Struct.new(
+      nil,
       :workspace_id,
       :authentication_providers,
       :saml_configuration,
@@ -1303,6 +1368,7 @@ module Aws::Grafana
     #               is made.</p>
     #   @return [Types::AuthenticationDescription]
     class UpdateWorkspaceAuthenticationOutput < Struct.new(
+      nil,
       :authentication,
       keyword_init: true
     )
@@ -1326,6 +1392,7 @@ module Aws::Grafana
     #               the <a href="https://docs.aws.amazon.com/grafana/latest/APIReference/API_ListVersions.html">ListVersions</a> operation.</p>
     #   @return [String]
     class UpdateWorkspaceConfigurationInput < Struct.new(
+      nil,
       :configuration,
       :workspace_id,
       :grafana_version,
@@ -1335,6 +1402,7 @@ module Aws::Grafana
     end
 
     class UpdateWorkspaceConfigurationOutput < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1436,6 +1504,7 @@ module Aws::Grafana
     #               authorization will still be required.</p>
     #   @return [Boolean]
     class UpdateWorkspaceInput < Struct.new(
+      nil,
       :account_access_type,
       :organization_role_name,
       :permission_type,
@@ -1460,6 +1529,7 @@ module Aws::Grafana
     #   <p>A structure containing data about the workspace that was created.</p>
     #   @return [Types::WorkspaceDescription]
     class UpdateWorkspaceOutput < Struct.new(
+      nil,
       :workspace,
       keyword_init: true
     )
@@ -1477,6 +1547,7 @@ module Aws::Grafana
     #   <p>Specifies whether this is a single user or a group.</p>
     #   @return [String]
     class User < Struct.new(
+      nil,
       :id,
       :type,
       keyword_init: true
@@ -1495,6 +1566,7 @@ module Aws::Grafana
     #   <p>A list of fields that might be associated with the error.</p>
     #   @return [Array<Types::ValidationExceptionField>]
     class ValidationException < Struct.new(
+      nil,
       :message,
       :reason,
       :field_list,
@@ -1512,6 +1584,7 @@ module Aws::Grafana
     #   <p>A message describing why this field couldn't be validated.</p>
     #   @return [String]
     class ValidationExceptionField < Struct.new(
+      nil,
       :name,
       :message,
       keyword_init: true
@@ -1536,6 +1609,7 @@ module Aws::Grafana
     #               Grafana workspace to connect. Duplicates not allowed.</p>
     #   @return [Array<String>]
     class VpcConfiguration < Struct.new(
+      nil,
       :security_group_ids,
       :subnet_ids,
       keyword_init: true
@@ -1667,6 +1741,7 @@ module Aws::Grafana
     #               see <a href="https://docs.aws.amazon.com/grafana/latest/userguide/upgrade-to-Grafana-Enterprise.html#AMG-workspace-register-enterprise">Link your account with Grafana Labs</a>.</p>
     #   @return [String]
     class WorkspaceDescription < Struct.new(
+      nil,
       :account_access_type,
       :created,
       :data_sources,
@@ -1745,6 +1820,7 @@ module Aws::Grafana
     #               see <a href="https://docs.aws.amazon.com/grafana/latest/userguide/upgrade-to-Grafana-Enterprise.html#AMG-workspace-register-enterprise">Link your account with Grafana Labs</a>.</p>
     #   @return [String]
     class WorkspaceSummary < Struct.new(
+      nil,
       :created,
       :description,
       :endpoint,

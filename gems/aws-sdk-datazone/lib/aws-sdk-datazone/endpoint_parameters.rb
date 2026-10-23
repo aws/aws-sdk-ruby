@@ -14,6 +14,7 @@ module Aws::DataZone
   #   Override the endpoint used to send this request
   #   @return [String]
   EndpointParameters = Struct.new(
+    nil,
     :region,
     :use_fips,
     :endpoint,

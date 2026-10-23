@@ -17,6 +17,7 @@ module Aws::ChimeSDKMessaging
     #   <p>The ID of the SubChannel that the <code>AppInstanceUser</code> is a member of.</p>
     #   @return [String]
     class AppInstanceUserMembershipSummary < Struct.new(
+      nil,
       :type,
       :read_marker_timestamp,
       :sub_channel_id,
@@ -35,6 +36,7 @@ module Aws::ChimeSDKMessaging
     #   <p>The <code>AppInstanceUserArn</code> of the user making the API call.</p>
     #   @return [String]
     class AssociateChannelFlowRequest < Struct.new(
+      nil,
       :channel_arn,
       :channel_flow_arn,
       :chime_bearer,
@@ -49,6 +51,7 @@ module Aws::ChimeSDKMessaging
     # @!attribute message
     #   @return [String]
     class BadRequestException < Struct.new(
+      nil,
       :code,
       :message,
       keyword_init: true
@@ -74,6 +77,7 @@ module Aws::ChimeSDKMessaging
     #   <p>The ID of the SubChannel.</p>
     #   @return [String]
     class BatchChannelMemberships < Struct.new(
+      nil,
       :invited_by,
       :type,
       :members,
@@ -95,6 +99,7 @@ module Aws::ChimeSDKMessaging
     #   <p>The error message.</p>
     #   @return [String]
     class BatchCreateChannelMembershipError < Struct.new(
+      nil,
       :member_arn,
       :error_code,
       :error_message,
@@ -128,6 +133,7 @@ module Aws::ChimeSDKMessaging
     #            </note>
     #   @return [String]
     class BatchCreateChannelMembershipRequest < Struct.new(
+      nil,
       :channel_arn,
       :type,
       :member_arns,
@@ -146,6 +152,7 @@ module Aws::ChimeSDKMessaging
     #            memberships is returned, along with error codes and error messages.</p>
     #   @return [Array<Types::BatchCreateChannelMembershipError>]
     class BatchCreateChannelMembershipResponse < Struct.new(
+      nil,
       :batch_channel_memberships,
       :errors,
       keyword_init: true
@@ -191,6 +198,7 @@ module Aws::ChimeSDKMessaging
     #   <p>Settings that control when a channel expires.</p>
     #   @return [Types::ExpirationSettings]
     class Channel < Struct.new(
+      nil,
       :name,
       :channel_arn,
       :mode,
@@ -225,6 +233,7 @@ module Aws::ChimeSDKMessaging
     #   <p>The channel's metadata.</p>
     #   @return [String]
     class ChannelAssociatedWithFlowSummary < Struct.new(
+      nil,
       :name,
       :channel_arn,
       :mode,
@@ -249,6 +258,7 @@ module Aws::ChimeSDKMessaging
     #   <p>The <code>AppInstanceUser</code> who created the ban.</p>
     #   @return [Types::Identity]
     class ChannelBan < Struct.new(
+      nil,
       :member,
       :channel_arn,
       :created_timestamp,
@@ -263,6 +273,7 @@ module Aws::ChimeSDKMessaging
     #   <p>The member being banned from a channel.</p>
     #   @return [Types::Identity]
     class ChannelBanSummary < Struct.new(
+      nil,
       :member,
       keyword_init: true
     )
@@ -286,6 +297,7 @@ module Aws::ChimeSDKMessaging
     #   <p>The time at which a channel flow was updated.</p>
     #   @return [Time]
     class ChannelFlow < Struct.new(
+      nil,
       :channel_flow_arn,
       :processors,
       :name,
@@ -309,6 +321,7 @@ module Aws::ChimeSDKMessaging
     #   <p>Stores information about the processed message.</p>
     #   @return [Types::ChannelMessageCallback]
     class ChannelFlowCallbackRequest < Struct.new(
+      nil,
       :callback_id,
       :channel_arn,
       :delete_resource,
@@ -325,6 +338,7 @@ module Aws::ChimeSDKMessaging
     #   <p>The call back ID passed in the request.</p>
     #   @return [String]
     class ChannelFlowCallbackResponse < Struct.new(
+      nil,
       :channel_arn,
       :callback_id,
       keyword_init: true
@@ -343,6 +357,7 @@ module Aws::ChimeSDKMessaging
     #   <p>Information about the processor Lambda functions.</p>
     #   @return [Array<Types::Processor>]
     class ChannelFlowSummary < Struct.new(
+      nil,
       :channel_flow_arn,
       :name,
       :processors,
@@ -374,6 +389,7 @@ module Aws::ChimeSDKMessaging
     #   <p>The ID of the SubChannel that a user belongs to.</p>
     #   @return [String]
     class ChannelMembership < Struct.new(
+      nil,
       :invited_by,
       :type,
       :member,
@@ -394,6 +410,7 @@ module Aws::ChimeSDKMessaging
     #   <p>Returns the channel membership data for an <code>AppInstance</code>.</p>
     #   @return [Types::AppInstanceUserMembershipSummary]
     class ChannelMembershipForAppInstanceUserSummary < Struct.new(
+      nil,
       :channel_summary,
       :app_instance_user_membership_summary,
       keyword_init: true
@@ -406,6 +423,7 @@ module Aws::ChimeSDKMessaging
     #   <p>The push notification configuration of a message.</p>
     #   @return [Types::PushNotificationPreferences]
     class ChannelMembershipPreferences < Struct.new(
+      nil,
       :push_notifications,
       keyword_init: true
     )
@@ -417,6 +435,7 @@ module Aws::ChimeSDKMessaging
     #   <p>A member's summary data.</p>
     #   @return [Types::Identity]
     class ChannelMembershipSummary < Struct.new(
+      nil,
       :member,
       keyword_init: true
     )
@@ -481,6 +500,7 @@ module Aws::ChimeSDKMessaging
     #            Only users who can see targeted messages can take actions on them. However, administrators can delete targeted messages that they can’t see.</p>
     #   @return [Array<Types::Target>]
     class ChannelMessage < Struct.new(
+      nil,
       :channel_arn,
       :message_id,
       :content,
@@ -537,6 +557,7 @@ module Aws::ChimeSDKMessaging
     #            <i>Amazon Chime SDK Messaging Developer Guide</i>.</p>
     #   @return [String]
     class ChannelMessageCallback < Struct.new(
+      nil,
       :message_id,
       :content,
       :metadata,
@@ -557,6 +578,7 @@ module Aws::ChimeSDKMessaging
     #   <p>Contains more details about the message status.</p>
     #   @return [String]
     class ChannelMessageStatusStructure < Struct.new(
+      nil,
       :value,
       :detail,
       keyword_init: true
@@ -614,6 +636,7 @@ module Aws::ChimeSDKMessaging
     #            Only users who can see targeted messages can take actions on them. However, administrators can delete targeted messages that they can’t see.</p>
     #   @return [Array<Types::Target>]
     class ChannelMessageSummary < Struct.new(
+      nil,
       :message_id,
       :content,
       :metadata,
@@ -642,6 +665,7 @@ module Aws::ChimeSDKMessaging
     #   <p>Summary of the details of a <code>Channel</code>.</p>
     #   @return [Types::ChannelSummary]
     class ChannelModeratedByAppInstanceUserSummary < Struct.new(
+      nil,
       :channel_summary,
       keyword_init: true
     )
@@ -662,6 +686,7 @@ module Aws::ChimeSDKMessaging
     #   <p>The <code>AppInstanceUser</code> who created the moderator.</p>
     #   @return [Types::Identity]
     class ChannelModerator < Struct.new(
+      nil,
       :moderator,
       :channel_arn,
       :created_timestamp,
@@ -676,6 +701,7 @@ module Aws::ChimeSDKMessaging
     #   <p>The data for a moderator.</p>
     #   @return [Types::Identity]
     class ChannelModeratorSummary < Struct.new(
+      nil,
       :moderator,
       keyword_init: true
     )
@@ -702,6 +728,7 @@ module Aws::ChimeSDKMessaging
     #   <p>The time at which the last persistent message visible to the caller in a channel was sent.</p>
     #   @return [Time]
     class ChannelSummary < Struct.new(
+      nil,
       :name,
       :channel_arn,
       :mode,
@@ -720,6 +747,7 @@ module Aws::ChimeSDKMessaging
     # @!attribute message
     #   @return [String]
     class ConflictException < Struct.new(
+      nil,
       :code,
       :message,
       keyword_init: true
@@ -737,6 +765,7 @@ module Aws::ChimeSDKMessaging
     #   <p>The ARN of the <code>AppInstanceUser</code> or <code>AppInstanceBot</code> that makes the API call.</p>
     #   @return [String]
     class CreateChannelBanRequest < Struct.new(
+      nil,
       :channel_arn,
       :member_arn,
       :chime_bearer,
@@ -753,6 +782,7 @@ module Aws::ChimeSDKMessaging
     #            response.</p>
     #   @return [Types::Identity]
     class CreateChannelBanResponse < Struct.new(
+      nil,
       :channel_arn,
       :member,
       keyword_init: true
@@ -776,6 +806,7 @@ module Aws::ChimeSDKMessaging
     #   <p>The client token for the request. An Idempotency token.</p>
     #   @return [String]
     class CreateChannelFlowRequest < Struct.new(
+      nil,
       :app_instance_arn,
       :processors,
       :name,
@@ -790,6 +821,7 @@ module Aws::ChimeSDKMessaging
     #   <p>The ARN of the channel flow.</p>
     #   @return [String]
     class CreateChannelFlowResponse < Struct.new(
+      nil,
       :channel_flow_arn,
       keyword_init: true
     )
@@ -820,6 +852,7 @@ module Aws::ChimeSDKMessaging
     #            </note>
     #   @return [String]
     class CreateChannelMembershipRequest < Struct.new(
+      nil,
       :channel_arn,
       :member_arn,
       :type,
@@ -840,6 +873,7 @@ module Aws::ChimeSDKMessaging
     #   <p>The ID of the SubChannel in the response.</p>
     #   @return [String]
     class CreateChannelMembershipResponse < Struct.new(
+      nil,
       :channel_arn,
       :member,
       :sub_channel_id,
@@ -859,6 +893,7 @@ module Aws::ChimeSDKMessaging
     #            that makes the API call.</p>
     #   @return [String]
     class CreateChannelModeratorRequest < Struct.new(
+      nil,
       :channel_arn,
       :channel_moderator_arn,
       :chime_bearer,
@@ -874,6 +909,7 @@ module Aws::ChimeSDKMessaging
     #   <p>The ARNs of the channel and the moderator.</p>
     #   @return [Types::Identity]
     class CreateChannelModeratorResponse < Struct.new(
+      nil,
       :channel_arn,
       :channel_moderator,
       keyword_init: true
@@ -925,6 +961,7 @@ module Aws::ChimeSDKMessaging
     #   <p>Settings that control the interval after which the channel is automatically deleted.</p>
     #   @return [Types::ExpirationSettings]
     class CreateChannelRequest < Struct.new(
+      nil,
       :app_instance_arn,
       :name,
       :mode,
@@ -947,6 +984,7 @@ module Aws::ChimeSDKMessaging
     #   <p>The ARN of the channel.</p>
     #   @return [String]
     class CreateChannelResponse < Struct.new(
+      nil,
       :channel_arn,
       keyword_init: true
     )
@@ -964,6 +1002,7 @@ module Aws::ChimeSDKMessaging
     #            API call.</p>
     #   @return [String]
     class DeleteChannelBanRequest < Struct.new(
+      nil,
       :channel_arn,
       :member_arn,
       :chime_bearer,
@@ -976,6 +1015,7 @@ module Aws::ChimeSDKMessaging
     #   <p>The ARN of the channel flow.</p>
     #   @return [String]
     class DeleteChannelFlowRequest < Struct.new(
+      nil,
       :channel_flow_arn,
       keyword_init: true
     )
@@ -999,6 +1039,7 @@ module Aws::ChimeSDKMessaging
     #            </note>
     #   @return [String]
     class DeleteChannelMembershipRequest < Struct.new(
+      nil,
       :channel_arn,
       :member_arn,
       :chime_bearer,
@@ -1025,6 +1066,7 @@ module Aws::ChimeSDKMessaging
     #            </note>
     #   @return [String]
     class DeleteChannelMessageRequest < Struct.new(
+      nil,
       :channel_arn,
       :message_id,
       :chime_bearer,
@@ -1045,6 +1087,7 @@ module Aws::ChimeSDKMessaging
     #            API call.</p>
     #   @return [String]
     class DeleteChannelModeratorRequest < Struct.new(
+      nil,
       :channel_arn,
       :channel_moderator_arn,
       :chime_bearer,
@@ -1061,6 +1104,7 @@ module Aws::ChimeSDKMessaging
     #            that makes the API call.</p>
     #   @return [String]
     class DeleteChannelRequest < Struct.new(
+      nil,
       :channel_arn,
       :chime_bearer,
       keyword_init: true
@@ -1072,6 +1116,7 @@ module Aws::ChimeSDKMessaging
     #   <p>The ARN of the streaming configurations being deleted.</p>
     #   @return [String]
     class DeleteMessagingStreamingConfigurationsRequest < Struct.new(
+      nil,
       :app_instance_arn,
       keyword_init: true
     )
@@ -1089,6 +1134,7 @@ module Aws::ChimeSDKMessaging
     #            API call.</p>
     #   @return [String]
     class DescribeChannelBanRequest < Struct.new(
+      nil,
       :channel_arn,
       :member_arn,
       :chime_bearer,
@@ -1101,6 +1147,7 @@ module Aws::ChimeSDKMessaging
     #   <p>The details of the ban.</p>
     #   @return [Types::ChannelBan]
     class DescribeChannelBanResponse < Struct.new(
+      nil,
       :channel_ban,
       keyword_init: true
     )
@@ -1111,6 +1158,7 @@ module Aws::ChimeSDKMessaging
     #   <p>The ARN of the channel flow.</p>
     #   @return [String]
     class DescribeChannelFlowRequest < Struct.new(
+      nil,
       :channel_flow_arn,
       keyword_init: true
     )
@@ -1121,6 +1169,7 @@ module Aws::ChimeSDKMessaging
     #   <p>The channel flow details.</p>
     #   @return [Types::ChannelFlow]
     class DescribeChannelFlowResponse < Struct.new(
+      nil,
       :channel_flow,
       keyword_init: true
     )
@@ -1138,6 +1187,7 @@ module Aws::ChimeSDKMessaging
     #            that makes the API call.</p>
     #   @return [String]
     class DescribeChannelMembershipForAppInstanceUserRequest < Struct.new(
+      nil,
       :channel_arn,
       :app_instance_user_arn,
       :chime_bearer,
@@ -1150,6 +1200,7 @@ module Aws::ChimeSDKMessaging
     #   <p>The channel to which a user belongs.</p>
     #   @return [Types::ChannelMembershipForAppInstanceUserSummary]
     class DescribeChannelMembershipForAppInstanceUserResponse < Struct.new(
+      nil,
       :channel_membership,
       keyword_init: true
     )
@@ -1173,6 +1224,7 @@ module Aws::ChimeSDKMessaging
     #            </note>
     #   @return [String]
     class DescribeChannelMembershipRequest < Struct.new(
+      nil,
       :channel_arn,
       :member_arn,
       :chime_bearer,
@@ -1186,6 +1238,7 @@ module Aws::ChimeSDKMessaging
     #   <p>The details of the membership.</p>
     #   @return [Types::ChannelMembership]
     class DescribeChannelMembershipResponse < Struct.new(
+      nil,
       :channel_membership,
       keyword_init: true
     )
@@ -1203,6 +1256,7 @@ module Aws::ChimeSDKMessaging
     #            that makes the API call.</p>
     #   @return [String]
     class DescribeChannelModeratedByAppInstanceUserRequest < Struct.new(
+      nil,
       :channel_arn,
       :app_instance_user_arn,
       :chime_bearer,
@@ -1215,6 +1269,7 @@ module Aws::ChimeSDKMessaging
     #   <p>The moderated channel.</p>
     #   @return [Types::ChannelModeratedByAppInstanceUserSummary]
     class DescribeChannelModeratedByAppInstanceUserResponse < Struct.new(
+      nil,
       :channel,
       keyword_init: true
     )
@@ -1232,6 +1287,7 @@ module Aws::ChimeSDKMessaging
     #            that makes the API call.</p>
     #   @return [String]
     class DescribeChannelModeratorRequest < Struct.new(
+      nil,
       :channel_arn,
       :channel_moderator_arn,
       :chime_bearer,
@@ -1244,6 +1300,7 @@ module Aws::ChimeSDKMessaging
     #   <p>The details of the channel moderator.</p>
     #   @return [Types::ChannelModerator]
     class DescribeChannelModeratorResponse < Struct.new(
+      nil,
       :channel_moderator,
       keyword_init: true
     )
@@ -1258,6 +1315,7 @@ module Aws::ChimeSDKMessaging
     #            API call.</p>
     #   @return [String]
     class DescribeChannelRequest < Struct.new(
+      nil,
       :channel_arn,
       :chime_bearer,
       keyword_init: true
@@ -1269,6 +1327,7 @@ module Aws::ChimeSDKMessaging
     #   <p>The channel details.</p>
     #   @return [Types::Channel]
     class DescribeChannelResponse < Struct.new(
+      nil,
       :channel,
       keyword_init: true
     )
@@ -1285,6 +1344,7 @@ module Aws::ChimeSDKMessaging
     #   <p>The <code>AppInstanceUserArn</code> of the user making the API call.</p>
     #   @return [String]
     class DisassociateChannelFlowRequest < Struct.new(
+      nil,
       :channel_arn,
       :channel_flow_arn,
       :chime_bearer,
@@ -1304,6 +1364,7 @@ module Aws::ChimeSDKMessaging
     #   <p>The minimum allowed percentage of TargetMembershipsPerSubChannel users. Ceil of the calculated value is used in balancing members among SubChannels of the elastic channel.</p>
     #   @return [Integer]
     class ElasticChannelConfiguration < Struct.new(
+      nil,
       :maximum_sub_channels,
       :target_memberships_per_sub_channel,
       :minimum_membership_percentage,
@@ -1320,6 +1381,7 @@ module Aws::ChimeSDKMessaging
     #   <p>The conditions that must be met for a channel to expire.</p>
     #   @return [String]
     class ExpirationSettings < Struct.new(
+      nil,
       :expiration_days,
       :expiration_criterion,
       keyword_init: true
@@ -1333,6 +1395,7 @@ module Aws::ChimeSDKMessaging
     # @!attribute message
     #   @return [String]
     class ForbiddenException < Struct.new(
+      nil,
       :code,
       :message,
       keyword_init: true
@@ -1350,6 +1413,7 @@ module Aws::ChimeSDKMessaging
     #   <p>The ARN of the <code>AppInstanceUser</code> or <code>AppInstanceBot</code> that makes the API call.</p>
     #   @return [String]
     class GetChannelMembershipPreferencesRequest < Struct.new(
+      nil,
       :channel_arn,
       :member_arn,
       :chime_bearer,
@@ -1368,6 +1432,7 @@ module Aws::ChimeSDKMessaging
     #   <p>The channel membership preferences for an <code>AppInstanceUser</code> .</p>
     #   @return [Types::ChannelMembershipPreferences]
     class GetChannelMembershipPreferencesResponse < Struct.new(
+      nil,
       :channel_arn,
       :member,
       :preferences,
@@ -1393,6 +1458,7 @@ module Aws::ChimeSDKMessaging
     #            </note>
     #   @return [String]
     class GetChannelMessageRequest < Struct.new(
+      nil,
       :channel_arn,
       :message_id,
       :chime_bearer,
@@ -1406,6 +1472,7 @@ module Aws::ChimeSDKMessaging
     #   <p>The details of and content in the message.</p>
     #   @return [Types::ChannelMessage]
     class GetChannelMessageResponse < Struct.new(
+      nil,
       :channel_message,
       keyword_init: true
     )
@@ -1428,6 +1495,7 @@ module Aws::ChimeSDKMessaging
     #            </note>
     #   @return [String]
     class GetChannelMessageStatusRequest < Struct.new(
+      nil,
       :channel_arn,
       :message_id,
       :chime_bearer,
@@ -1441,6 +1509,7 @@ module Aws::ChimeSDKMessaging
     #   <p>The message status and details.</p>
     #   @return [Types::ChannelMessageStatusStructure]
     class GetChannelMessageStatusResponse < Struct.new(
+      nil,
       :status,
       keyword_init: true
     )
@@ -1451,6 +1520,7 @@ module Aws::ChimeSDKMessaging
     #   <p>The type of network for the messaging session endpoint. Either IPv4 only or dual-stack (IPv4 and IPv6).</p>
     #   @return [String]
     class GetMessagingSessionEndpointRequest < Struct.new(
+      nil,
       :network_type,
       keyword_init: true
     )
@@ -1461,6 +1531,7 @@ module Aws::ChimeSDKMessaging
     #   <p>The endpoint returned in the response.</p>
     #   @return [Types::MessagingSessionEndpoint]
     class GetMessagingSessionEndpointResponse < Struct.new(
+      nil,
       :endpoint,
       keyword_init: true
     )
@@ -1471,6 +1542,7 @@ module Aws::ChimeSDKMessaging
     #   <p>The ARN of the streaming configurations.</p>
     #   @return [String]
     class GetMessagingStreamingConfigurationsRequest < Struct.new(
+      nil,
       :app_instance_arn,
       keyword_init: true
     )
@@ -1481,6 +1553,7 @@ module Aws::ChimeSDKMessaging
     #   <p>The streaming settings.</p>
     #   @return [Array<Types::StreamingConfiguration>]
     class GetMessagingStreamingConfigurationsResponse < Struct.new(
+      nil,
       :streaming_configurations,
       keyword_init: true
     )
@@ -1495,6 +1568,7 @@ module Aws::ChimeSDKMessaging
     #   <p>The name in an Identity.</p>
     #   @return [String]
     class Identity < Struct.new(
+      nil,
       :arn,
       :name,
       keyword_init: true
@@ -1510,6 +1584,7 @@ module Aws::ChimeSDKMessaging
     #   <p>Controls how the Lambda function is invoked.</p>
     #   @return [String]
     class LambdaConfiguration < Struct.new(
+      nil,
       :resource_arn,
       :invocation_type,
       keyword_init: true
@@ -1531,6 +1606,7 @@ module Aws::ChimeSDKMessaging
     #            that makes the API call.</p>
     #   @return [String]
     class ListChannelBansRequest < Struct.new(
+      nil,
       :channel_arn,
       :max_results,
       :next_token,
@@ -1550,6 +1626,7 @@ module Aws::ChimeSDKMessaging
     #   <p>The information for each requested ban.</p>
     #   @return [Array<Types::ChannelBanSummary>]
     class ListChannelBansResponse < Struct.new(
+      nil,
       :channel_arn,
       :next_token,
       :channel_bans,
@@ -1568,6 +1645,7 @@ module Aws::ChimeSDKMessaging
     #   <p>The token passed by previous API calls until all requested channel flows are returned.</p>
     #   @return [String]
     class ListChannelFlowsRequest < Struct.new(
+      nil,
       :app_instance_arn,
       :max_results,
       :next_token,
@@ -1583,6 +1661,7 @@ module Aws::ChimeSDKMessaging
     #   <p>The token passed by previous API calls until all requested channels are returned.</p>
     #   @return [String]
     class ListChannelFlowsResponse < Struct.new(
+      nil,
       :channel_flows,
       :next_token,
       keyword_init: true
@@ -1605,6 +1684,7 @@ module Aws::ChimeSDKMessaging
     #            that makes the API call.</p>
     #   @return [String]
     class ListChannelMembershipsForAppInstanceUserRequest < Struct.new(
+      nil,
       :app_instance_user_arn,
       :max_results,
       :next_token,
@@ -1621,6 +1701,7 @@ module Aws::ChimeSDKMessaging
     #   <p>The token passed by previous API calls until all requested users are returned.</p>
     #   @return [String]
     class ListChannelMembershipsForAppInstanceUserResponse < Struct.new(
+      nil,
       :channel_memberships,
       :next_token,
       keyword_init: true
@@ -1655,6 +1736,7 @@ module Aws::ChimeSDKMessaging
     #            </note>
     #   @return [String]
     class ListChannelMembershipsRequest < Struct.new(
+      nil,
       :channel_arn,
       :type,
       :max_results,
@@ -1677,6 +1759,7 @@ module Aws::ChimeSDKMessaging
     #            returned.</p>
     #   @return [String]
     class ListChannelMembershipsResponse < Struct.new(
+      nil,
       :channel_arn,
       :channel_memberships,
       :next_token,
@@ -1715,6 +1798,7 @@ module Aws::ChimeSDKMessaging
     #            </note>
     #   @return [String]
     class ListChannelMessagesRequest < Struct.new(
+      nil,
       :channel_arn,
       :sort_order,
       :not_before,
@@ -1741,6 +1825,7 @@ module Aws::ChimeSDKMessaging
     #   <p>The ID of the SubChannel in the response.</p>
     #   @return [String]
     class ListChannelMessagesResponse < Struct.new(
+      nil,
       :channel_arn,
       :next_token,
       :channel_messages,
@@ -1765,6 +1850,7 @@ module Aws::ChimeSDKMessaging
     #            that makes the API call.</p>
     #   @return [String]
     class ListChannelModeratorsRequest < Struct.new(
+      nil,
       :channel_arn,
       :max_results,
       :next_token,
@@ -1785,6 +1871,7 @@ module Aws::ChimeSDKMessaging
     #   <p>The information about and names of each moderator.</p>
     #   @return [Array<Types::ChannelModeratorSummary>]
     class ListChannelModeratorsResponse < Struct.new(
+      nil,
       :channel_arn,
       :next_token,
       :channel_moderators,
@@ -1803,6 +1890,7 @@ module Aws::ChimeSDKMessaging
     #   <p>The token passed by previous API calls until all requested channels are returned.</p>
     #   @return [String]
     class ListChannelsAssociatedWithChannelFlowRequest < Struct.new(
+      nil,
       :channel_flow_arn,
       :max_results,
       :next_token,
@@ -1818,6 +1906,7 @@ module Aws::ChimeSDKMessaging
     #   <p>The token passed by previous API calls until all requested channels are returned.</p>
     #   @return [String]
     class ListChannelsAssociatedWithChannelFlowResponse < Struct.new(
+      nil,
       :channels,
       :next_token,
       keyword_init: true
@@ -1840,6 +1929,7 @@ module Aws::ChimeSDKMessaging
     #            that makes the API call.</p>
     #   @return [String]
     class ListChannelsModeratedByAppInstanceUserRequest < Struct.new(
+      nil,
       :app_instance_user_arn,
       :max_results,
       :next_token,
@@ -1857,6 +1947,7 @@ module Aws::ChimeSDKMessaging
     #            the user is reached.</p>
     #   @return [String]
     class ListChannelsModeratedByAppInstanceUserResponse < Struct.new(
+      nil,
       :channels,
       :next_token,
       keyword_init: true
@@ -1883,6 +1974,7 @@ module Aws::ChimeSDKMessaging
     #            that makes the API call.</p>
     #   @return [String]
     class ListChannelsRequest < Struct.new(
+      nil,
       :app_instance_arn,
       :privacy,
       :max_results,
@@ -1901,6 +1993,7 @@ module Aws::ChimeSDKMessaging
     #            reached.</p>
     #   @return [String]
     class ListChannelsResponse < Struct.new(
+      nil,
       :channels,
       :next_token,
       keyword_init: true
@@ -1921,6 +2014,7 @@ module Aws::ChimeSDKMessaging
     #   <p>The token passed by previous API calls until all requested sub-channels are returned.</p>
     #   @return [String]
     class ListSubChannelsRequest < Struct.new(
+      nil,
       :channel_arn,
       :chime_bearer,
       :max_results,
@@ -1940,6 +2034,7 @@ module Aws::ChimeSDKMessaging
     #   <p>The token passed by previous API calls until all requested sub-channels are returned.</p>
     #   @return [String]
     class ListSubChannelsResponse < Struct.new(
+      nil,
       :channel_arn,
       :sub_channels,
       :next_token,
@@ -1952,6 +2047,7 @@ module Aws::ChimeSDKMessaging
     #   <p>The ARN of the resource.</p>
     #   @return [String]
     class ListTagsForResourceRequest < Struct.new(
+      nil,
       :resource_arn,
       keyword_init: true
     )
@@ -1962,6 +2058,7 @@ module Aws::ChimeSDKMessaging
     #   <p>The tag key-value pairs.</p>
     #   @return [Array<Types::Tag>]
     class ListTagsForResourceResponse < Struct.new(
+      nil,
       :tags,
       keyword_init: true
     )
@@ -1973,6 +2070,7 @@ module Aws::ChimeSDKMessaging
     #   <p>The strings in a message attribute value.</p>
     #   @return [Array<String>]
     class MessageAttributeValue < Struct.new(
+      nil,
       :string_values,
       keyword_init: true
     )
@@ -1984,6 +2082,7 @@ module Aws::ChimeSDKMessaging
     #   <p>The endpoint to which you establish a websocket connection.</p>
     #   @return [String]
     class MessagingSessionEndpoint < Struct.new(
+      nil,
       :url,
       keyword_init: true
     )
@@ -1996,6 +2095,7 @@ module Aws::ChimeSDKMessaging
     # @!attribute message
     #   @return [String]
     class NotFoundException < Struct.new(
+      nil,
       :code,
       :message,
       keyword_init: true
@@ -2020,6 +2120,7 @@ module Aws::ChimeSDKMessaging
     #            has a fallback action of <code>CONTINUE</code> and communication with the processor fails, then the message is considered processed and sent to recipients of the channel.</p>
     #   @return [String]
     class Processor < Struct.new(
+      nil,
       :name,
       :configuration,
       :execution_order,
@@ -2034,6 +2135,7 @@ module Aws::ChimeSDKMessaging
     #   <p>Indicates that the processor is of type Lambda.</p>
     #   @return [Types::LambdaConfiguration]
     class ProcessorConfiguration < Struct.new(
+      nil,
       :lambda,
       keyword_init: true
     )
@@ -2053,6 +2155,7 @@ module Aws::ChimeSDKMessaging
     #            <code>VOIP</code>: VOIP mobile push notification.</p>
     #   @return [String]
     class PushNotificationConfiguration < Struct.new(
+      nil,
       :title,
       :body,
       :type,
@@ -2071,6 +2174,7 @@ module Aws::ChimeSDKMessaging
     #   <p>The simple JSON object used to send a subset of a push notification to the requested member.</p>
     #   @return [String]
     class PushNotificationPreferences < Struct.new(
+      nil,
       :allow_notifications,
       :filter_rule,
       keyword_init: true
@@ -2088,6 +2192,7 @@ module Aws::ChimeSDKMessaging
     #   <p>Settings that control the interval after which a channel is deleted.</p>
     #   @return [Types::ExpirationSettings]
     class PutChannelExpirationSettingsRequest < Struct.new(
+      nil,
       :channel_arn,
       :chime_bearer,
       :expiration_settings,
@@ -2103,6 +2208,7 @@ module Aws::ChimeSDKMessaging
     #   <p>Settings that control the interval after which a channel is deleted.</p>
     #   @return [Types::ExpirationSettings]
     class PutChannelExpirationSettingsResponse < Struct.new(
+      nil,
       :channel_arn,
       :expiration_settings,
       keyword_init: true
@@ -2123,6 +2229,7 @@ module Aws::ChimeSDKMessaging
     #   <p>The channel membership preferences of an <code>AppInstanceUser</code> .</p>
     #   @return [Types::ChannelMembershipPreferences]
     class PutChannelMembershipPreferencesRequest < Struct.new(
+      nil,
       :channel_arn,
       :member_arn,
       :chime_bearer,
@@ -2142,6 +2249,7 @@ module Aws::ChimeSDKMessaging
     #   <p>The ARN and metadata of the member being added.</p>
     #   @return [Types::ChannelMembershipPreferences]
     class PutChannelMembershipPreferencesResponse < Struct.new(
+      nil,
       :channel_arn,
       :member,
       :preferences,
@@ -2157,6 +2265,7 @@ module Aws::ChimeSDKMessaging
     #   <p>The streaming configurations.</p>
     #   @return [Array<Types::StreamingConfiguration>]
     class PutMessagingStreamingConfigurationsRequest < Struct.new(
+      nil,
       :app_instance_arn,
       :streaming_configurations,
       keyword_init: true
@@ -2168,6 +2277,7 @@ module Aws::ChimeSDKMessaging
     #   <p>The requested streaming configurations.</p>
     #   @return [Array<Types::StreamingConfiguration>]
     class PutMessagingStreamingConfigurationsResponse < Struct.new(
+      nil,
       :streaming_configurations,
       keyword_init: true
     )
@@ -2188,6 +2298,7 @@ module Aws::ChimeSDKMessaging
     #   <p>The ID of the SubChannel in the request.</p>
     #   @return [String]
     class RedactChannelMessageRequest < Struct.new(
+      nil,
       :channel_arn,
       :message_id,
       :chime_bearer,
@@ -2210,6 +2321,7 @@ module Aws::ChimeSDKMessaging
     #            </note>
     #   @return [String]
     class RedactChannelMessageResponse < Struct.new(
+      nil,
       :channel_arn,
       :message_id,
       :sub_channel_id,
@@ -2224,6 +2336,7 @@ module Aws::ChimeSDKMessaging
     # @!attribute message
     #   @return [String]
     class ResourceLimitExceededException < Struct.new(
+      nil,
       :code,
       :message,
       keyword_init: true
@@ -2244,6 +2357,7 @@ module Aws::ChimeSDKMessaging
     #   <p>The token returned from previous API requests until the number of channels is reached.</p>
     #   @return [String]
     class SearchChannelsRequest < Struct.new(
+      nil,
       :chime_bearer,
       :fields,
       :max_results,
@@ -2260,6 +2374,7 @@ module Aws::ChimeSDKMessaging
     #   <p>The token returned from previous API responses until the number of channels is reached.</p>
     #   @return [String]
     class SearchChannelsResponse < Struct.new(
+      nil,
       :channels,
       :next_token,
       keyword_init: true
@@ -2286,6 +2401,7 @@ module Aws::ChimeSDKMessaging
     #            Use the <code>INCLUDES</code> operator to find channels whose memberships include the specified values.</p>
     #   @return [String]
     class SearchField < Struct.new(
+      nil,
       :key,
       :values,
       :operator,
@@ -2339,6 +2455,7 @@ module Aws::ChimeSDKMessaging
     #         </p>
     #   @return [Array<Types::Target>]
     class SendChannelMessageRequest < Struct.new(
+      nil,
       :channel_arn,
       :content,
       :type,
@@ -2369,6 +2486,7 @@ module Aws::ChimeSDKMessaging
     #   <p>The ID of the SubChannel in the response.</p>
     #   @return [String]
     class SendChannelMessageResponse < Struct.new(
+      nil,
       :channel_arn,
       :message_id,
       :status,
@@ -2384,6 +2502,7 @@ module Aws::ChimeSDKMessaging
     # @!attribute message
     #   @return [String]
     class ServiceFailureException < Struct.new(
+      nil,
       :code,
       :message,
       keyword_init: true
@@ -2397,6 +2516,7 @@ module Aws::ChimeSDKMessaging
     # @!attribute message
     #   @return [String]
     class ServiceUnavailableException < Struct.new(
+      nil,
       :code,
       :message,
       keyword_init: true
@@ -2412,6 +2532,7 @@ module Aws::ChimeSDKMessaging
     #   <p>The ARN of the resource in the configuration. </p>
     #   @return [String]
     class StreamingConfiguration < Struct.new(
+      nil,
       :data_type,
       :resource_arn,
       keyword_init: true
@@ -2427,6 +2548,7 @@ module Aws::ChimeSDKMessaging
     #   <p>The number of members in a SubChannel.</p>
     #   @return [Integer]
     class SubChannelSummary < Struct.new(
+      nil,
       :sub_channel_id,
       :membership_count,
       keyword_init: true
@@ -2442,6 +2564,7 @@ module Aws::ChimeSDKMessaging
     #   <p>The value in a tag.</p>
     #   @return [String]
     class Tag < Struct.new(
+      nil,
       :key,
       :value,
       keyword_init: true
@@ -2456,6 +2579,7 @@ module Aws::ChimeSDKMessaging
     #   <p>The tag key-value pairs.</p>
     #   @return [Array<Types::Tag>]
     class TagResourceRequest < Struct.new(
+      nil,
       :resource_arn,
       :tags,
       keyword_init: true
@@ -2469,6 +2593,7 @@ module Aws::ChimeSDKMessaging
     #   <p>The ARN of the target channel member.</p>
     #   @return [String]
     class Target < Struct.new(
+      nil,
       :member_arn,
       keyword_init: true
     )
@@ -2481,6 +2606,7 @@ module Aws::ChimeSDKMessaging
     # @!attribute message
     #   @return [String]
     class ThrottledClientException < Struct.new(
+      nil,
       :code,
       :message,
       keyword_init: true
@@ -2494,6 +2620,7 @@ module Aws::ChimeSDKMessaging
     # @!attribute message
     #   @return [String]
     class UnauthorizedClientException < Struct.new(
+      nil,
       :code,
       :message,
       keyword_init: true
@@ -2508,6 +2635,7 @@ module Aws::ChimeSDKMessaging
     #   <p>The tag keys.</p>
     #   @return [Array<String>]
     class UntagResourceRequest < Struct.new(
+      nil,
       :resource_arn,
       :tag_keys,
       keyword_init: true
@@ -2525,6 +2653,7 @@ module Aws::ChimeSDKMessaging
     #   <p>The name of the channel flow.</p>
     #   @return [String]
     class UpdateChannelFlowRequest < Struct.new(
+      nil,
       :channel_flow_arn,
       :processors,
       :name,
@@ -2537,6 +2666,7 @@ module Aws::ChimeSDKMessaging
     #   <p>The ARN of the channel flow.</p>
     #   @return [String]
     class UpdateChannelFlowResponse < Struct.new(
+      nil,
       :channel_flow_arn,
       keyword_init: true
     )
@@ -2569,6 +2699,7 @@ module Aws::ChimeSDKMessaging
     #   <p>The content type of the channel message.</p>
     #   @return [String]
     class UpdateChannelMessageRequest < Struct.new(
+      nil,
       :channel_arn,
       :message_id,
       :content,
@@ -2594,6 +2725,7 @@ module Aws::ChimeSDKMessaging
     #   <p>The ID of the SubChannel in the response.</p>
     #   @return [String]
     class UpdateChannelMessageResponse < Struct.new(
+      nil,
       :channel_arn,
       :message_id,
       :status,
@@ -2611,6 +2743,7 @@ module Aws::ChimeSDKMessaging
     #            that makes the API call.</p>
     #   @return [String]
     class UpdateChannelReadMarkerRequest < Struct.new(
+      nil,
       :channel_arn,
       :chime_bearer,
       keyword_init: true
@@ -2622,6 +2755,7 @@ module Aws::ChimeSDKMessaging
     #   <p>The ARN of the channel.</p>
     #   @return [String]
     class UpdateChannelReadMarkerResponse < Struct.new(
+      nil,
       :channel_arn,
       keyword_init: true
     )
@@ -2645,6 +2779,7 @@ module Aws::ChimeSDKMessaging
     #            that makes the API call.</p>
     #   @return [String]
     class UpdateChannelRequest < Struct.new(
+      nil,
       :channel_arn,
       :name,
       :mode,
@@ -2659,6 +2794,7 @@ module Aws::ChimeSDKMessaging
     #   <p>The ARN of the channel.</p>
     #   @return [String]
     class UpdateChannelResponse < Struct.new(
+      nil,
       :channel_arn,
       keyword_init: true
     )

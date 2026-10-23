@@ -10,6 +10,7 @@ module Aws::EntityResolution
     # @!attribute message
     #   @return [String]
     class AccessDeniedException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -35,6 +36,7 @@ module Aws::EntityResolution
     #   <p>A set of condition keys that you can use in key policies.</p>
     #   @return [String]
     class AddPolicyStatementInput < Struct.new(
+      nil,
       :arn,
       :statement_id,
       :effect,
@@ -56,6 +58,7 @@ module Aws::EntityResolution
     #   <p>The resource-based policy.</p>
     #   @return [String]
     class AddPolicyStatementOutput < Struct.new(
+      nil,
       :arn,
       :token,
       :policy,
@@ -74,6 +77,7 @@ module Aws::EntityResolution
     #   <p>The unique IDs to delete.</p>
     #   @return [Array<String>]
     class BatchDeleteUniqueIdInput < Struct.new(
+      nil,
       :workflow_name,
       :input_source,
       :unique_ids,
@@ -95,6 +99,7 @@ module Aws::EntityResolution
     #   <p>The unique IDs that were disconnected.</p>
     #   @return [Array<String>]
     class BatchDeleteUniqueIdOutput < Struct.new(
+      nil,
       :status,
       :errors,
       :deleted,
@@ -108,6 +113,7 @@ module Aws::EntityResolution
     # @!attribute message
     #   @return [String]
     class ConflictException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -139,6 +145,7 @@ module Aws::EntityResolution
     #   <p>The tags used to organize, track, or control access for this resource.</p>
     #   @return [Hash<String, String>]
     class CreateIdMappingWorkflowInput < Struct.new(
+      nil,
       :workflow_name,
       :description,
       :input_source_config,
@@ -177,6 +184,7 @@ module Aws::EntityResolution
     #   <p>The Amazon Resource Name (ARN) of the IAM role. Entity Resolution assumes this role to create resources on your behalf as part of workflow execution.</p>
     #   @return [String]
     class CreateIdMappingWorkflowOutput < Struct.new(
+      nil,
       :workflow_name,
       :workflow_arn,
       :description,
@@ -217,6 +225,7 @@ module Aws::EntityResolution
     #   <p>The tags used to organize, track, or control access for this resource.</p>
     #   @return [Hash<String, String>]
     class CreateIdNamespaceInput < Struct.new(
+      nil,
       :id_namespace_name,
       :description,
       :input_source_config,
@@ -260,6 +269,7 @@ module Aws::EntityResolution
     #   <p>The tags used to organize, track, or control access for this resource.</p>
     #   @return [Hash<String, String>]
     class CreateIdNamespaceOutput < Struct.new(
+      nil,
       :id_namespace_name,
       :id_namespace_arn,
       :description,
@@ -300,6 +310,7 @@ module Aws::EntityResolution
     #   <p>The tags used to organize, track, or control access for this resource.</p>
     #   @return [Hash<String, String>]
     class CreateMatchingWorkflowInput < Struct.new(
+      nil,
       :workflow_name,
       :description,
       :input_source_config,
@@ -338,6 +349,7 @@ module Aws::EntityResolution
     #   <p>The Amazon Resource Name (ARN) of the IAM role. Entity Resolution assumes this role to create resources on your behalf as part of workflow execution.</p>
     #   @return [String]
     class CreateMatchingWorkflowOutput < Struct.new(
+      nil,
       :workflow_name,
       :workflow_arn,
       :description,
@@ -364,6 +376,7 @@ module Aws::EntityResolution
     #   <p>The tags used to organize, track, or control access for this resource.</p>
     #   @return [Hash<String, String>]
     class CreateSchemaMappingInput < Struct.new(
+      nil,
       :schema_name,
       :description,
       :mapped_input_fields,
@@ -386,6 +399,7 @@ module Aws::EntityResolution
     #   <p>A list of <code>MappedInputFields</code>. Each <code>MappedInputField</code> corresponds to a column the source data table, and contains column name plus additional information that Entity Resolution uses for matching.</p>
     #   @return [Array<Types::SchemaInputAttribute>]
     class CreateSchemaMappingOutput < Struct.new(
+      nil,
       :schema_name,
       :schema_arn,
       :description,
@@ -399,6 +413,7 @@ module Aws::EntityResolution
     #   <p>The name of the workflow to be deleted.</p>
     #   @return [String]
     class DeleteIdMappingWorkflowInput < Struct.new(
+      nil,
       :workflow_name,
       keyword_init: true
     )
@@ -409,6 +424,7 @@ module Aws::EntityResolution
     #   <p>A successful operation message.</p>
     #   @return [String]
     class DeleteIdMappingWorkflowOutput < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -419,6 +435,7 @@ module Aws::EntityResolution
     #   <p>The name of the ID namespace.</p>
     #   @return [String]
     class DeleteIdNamespaceInput < Struct.new(
+      nil,
       :id_namespace_name,
       keyword_init: true
     )
@@ -429,6 +446,7 @@ module Aws::EntityResolution
     #   <p>A successful operation message.</p>
     #   @return [String]
     class DeleteIdNamespaceOutput < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -439,6 +457,7 @@ module Aws::EntityResolution
     #   <p>The name of the workflow to be retrieved.</p>
     #   @return [String]
     class DeleteMatchingWorkflowInput < Struct.new(
+      nil,
       :workflow_name,
       keyword_init: true
     )
@@ -449,6 +468,7 @@ module Aws::EntityResolution
     #   <p>A successful operation message.</p>
     #   @return [String]
     class DeleteMatchingWorkflowOutput < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -462,6 +482,7 @@ module Aws::EntityResolution
     #   <p>A statement identifier that differentiates the statement from others in the same policy.</p>
     #   @return [String]
     class DeletePolicyStatementInput < Struct.new(
+      nil,
       :arn,
       :statement_id,
       keyword_init: true
@@ -479,6 +500,7 @@ module Aws::EntityResolution
     #   <p>The resource-based policy.</p>
     #   @return [String]
     class DeletePolicyStatementOutput < Struct.new(
+      nil,
       :arn,
       :token,
       :policy,
@@ -491,6 +513,7 @@ module Aws::EntityResolution
     #   <p>The name of the schema to delete.</p>
     #   @return [String]
     class DeleteSchemaMappingInput < Struct.new(
+      nil,
       :schema_name,
       keyword_init: true
     )
@@ -501,6 +524,7 @@ module Aws::EntityResolution
     #   <p>A successful operation message.</p>
     #   @return [String]
     class DeleteSchemaMappingOutput < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -515,6 +539,7 @@ module Aws::EntityResolution
     #   <p> The error type for the delete unique ID operation.</p> <p>The <code>SERVICE_ERROR</code> value indicates that an internal service-side problem occurred during the deletion operation.</p> <p>The <code>VALIDATION_ERROR</code> value indicates that the deletion operation couldn't complete because of invalid input parameters or data.</p>
     #   @return [String]
     class DeleteUniqueIdError < Struct.new(
+      nil,
       :unique_id,
       :error_type,
       keyword_init: true
@@ -527,6 +552,7 @@ module Aws::EntityResolution
     #   <p> The unique ID of the deleted item.</p>
     #   @return [String]
     class DeletedUniqueId < Struct.new(
+      nil,
       :unique_id,
       keyword_init: true
     )
@@ -538,6 +564,7 @@ module Aws::EntityResolution
     #   <p>The error message from the job, if there is one.</p>
     #   @return [String]
     class ErrorDetails < Struct.new(
+      nil,
       :error_message,
       keyword_init: true
     )
@@ -554,6 +581,7 @@ module Aws::EntityResolution
     #   <p>The current quota value for the customers.</p>
     #   @return [Integer]
     class ExceedsLimitException < Struct.new(
+      nil,
       :message,
       :quota_name,
       :quota_value,
@@ -573,6 +601,7 @@ module Aws::EntityResolution
     #   <p> The error message for the record that didn't generate a Match ID.</p>
     #   @return [String]
     class FailedRecord < Struct.new(
+      nil,
       :input_source_arn,
       :unique_id,
       :error_message,
@@ -591,6 +620,7 @@ module Aws::EntityResolution
     #   <p>The processing mode that determines how Match IDs are generated and results are saved. Each mode provides different levels of accuracy, response time, and completeness of results.</p> <p>If not specified, defaults to <code>CONSISTENT</code>.</p> <p> <code>CONSISTENT</code>: Performs immediate lookup and matching against all existing records, with results saved synchronously. Provides highest accuracy but slower response time.</p> <p> <code>EVENTUAL</code> (shown as <i>Background</i> in the console): Performs initial match ID lookup or generation immediately, with record updates processed asynchronously in the background. Offers faster initial response time, with complete matching results available later in S3. </p> <p> <code>EVENTUAL_NO_LOOKUP</code> (shown as <i>Quick ID generation</i> in the console): Generates new match IDs without checking existing matches, with updates processed asynchronously. Provides fastest response time but should only be used for records known to be unique. </p>
     #   @return [String]
     class GenerateMatchIdInput < Struct.new(
+      nil,
       :workflow_name,
       :records,
       :processing_type,
@@ -606,6 +636,7 @@ module Aws::EntityResolution
     #   <p> The records that didn't receive a generated Match ID.</p>
     #   @return [Array<Types::FailedRecord>]
     class GenerateMatchIdOutput < Struct.new(
+      nil,
       :match_groups,
       :failed_records,
       keyword_init: true
@@ -620,6 +651,7 @@ module Aws::EntityResolution
     #   <p>The ID of the job.</p>
     #   @return [String]
     class GetIdMappingJobInput < Struct.new(
+      nil,
       :workflow_name,
       :job_id,
       keyword_init: true
@@ -652,6 +684,7 @@ module Aws::EntityResolution
     #   <p> The job type of the ID mapping job.</p> <p>A value of <code>INCREMENTAL</code> indicates that only new or changed data was processed since the last job run. This is the default job type if the workflow was created with an <code>incrementalRunConfig</code>.</p> <p>A value of <code>BATCH</code> indicates that all data was processed from the input source, regardless of previous job runs. This is the default job type if the workflow wasn't created with an <code>incrementalRunConfig</code>.</p> <p>A value of <code>DELETE_ONLY</code> indicates that only deletion requests from <code>BatchDeleteUniqueIds</code> were processed.</p>
     #   @return [String]
     class GetIdMappingJobOutput < Struct.new(
+      nil,
       :job_id,
       :status,
       :start_time,
@@ -669,6 +702,7 @@ module Aws::EntityResolution
     #   <p>The name of the workflow.</p>
     #   @return [String]
     class GetIdMappingWorkflowInput < Struct.new(
+      nil,
       :workflow_name,
       keyword_init: true
     )
@@ -709,6 +743,7 @@ module Aws::EntityResolution
     #   <p>The tags used to organize, track, or control access for this resource.</p>
     #   @return [Hash<String, String>]
     class GetIdMappingWorkflowOutput < Struct.new(
+      nil,
       :workflow_name,
       :workflow_arn,
       :description,
@@ -734,6 +769,7 @@ module Aws::EntityResolution
     #   <p>The name of the ID namespace.</p>
     #   @return [String]
     class GetIdNamespaceInput < Struct.new(
+      nil,
       :id_namespace_name,
       keyword_init: true
     )
@@ -771,6 +807,7 @@ module Aws::EntityResolution
     #   <p>The tags used to organize, track, or control access for this resource.</p>
     #   @return [Hash<String, String>]
     class GetIdNamespaceOutput < Struct.new(
+      nil,
       :id_namespace_name,
       :id_namespace_arn,
       :description,
@@ -796,6 +833,7 @@ module Aws::EntityResolution
     #   <p>Normalizes the attributes defined in the schema in the input data. For example, if an attribute has an <code>AttributeType</code> of <code>PHONE_NUMBER</code>, and the data in the input table is in a format of 1234567890, Entity Resolution will normalize this field in the output to (123)-456-7890.</p>
     #   @return [Boolean]
     class GetMatchIdInput < Struct.new(
+      nil,
       :workflow_name,
       :record,
       :apply_normalization,
@@ -811,6 +849,7 @@ module Aws::EntityResolution
     #   <p>The rule the record matched on.</p>
     #   @return [String]
     class GetMatchIdOutput < Struct.new(
+      nil,
       :match_id,
       :match_rule,
       keyword_init: true
@@ -825,6 +864,7 @@ module Aws::EntityResolution
     #   <p>The ID of the job.</p>
     #   @return [String]
     class GetMatchingJobInput < Struct.new(
+      nil,
       :workflow_name,
       :job_id,
       keyword_init: true
@@ -854,6 +894,7 @@ module Aws::EntityResolution
     #   <p>A list of <code>OutputSource</code> objects.</p>
     #   @return [Array<Types::JobOutputSource>]
     class GetMatchingJobOutput < Struct.new(
+      nil,
       :job_id,
       :status,
       :start_time,
@@ -870,6 +911,7 @@ module Aws::EntityResolution
     #   <p>The name of the workflow.</p>
     #   @return [String]
     class GetMatchingWorkflowInput < Struct.new(
+      nil,
       :workflow_name,
       keyword_init: true
     )
@@ -910,6 +952,7 @@ module Aws::EntityResolution
     #   <p>The tags used to organize, track, or control access for this resource.</p>
     #   @return [Hash<String, String>]
     class GetMatchingWorkflowOutput < Struct.new(
+      nil,
       :workflow_name,
       :workflow_arn,
       :description,
@@ -930,6 +973,7 @@ module Aws::EntityResolution
     #   <p>The Amazon Resource Name (ARN) of the resource for which the policy need to be returned.</p>
     #   @return [String]
     class GetPolicyInput < Struct.new(
+      nil,
       :arn,
       keyword_init: true
     )
@@ -946,6 +990,7 @@ module Aws::EntityResolution
     #   <p>The resource-based policy.</p>
     #   @return [String]
     class GetPolicyOutput < Struct.new(
+      nil,
       :arn,
       :token,
       :policy,
@@ -961,6 +1006,7 @@ module Aws::EntityResolution
     #   <p>The ARN (Amazon Resource Name) of the product that the provider service provides.</p>
     #   @return [String]
     class GetProviderServiceInput < Struct.new(
+      nil,
       :provider_name,
       :provider_service_name,
       keyword_init: true
@@ -1008,6 +1054,7 @@ module Aws::EntityResolution
     #   <p>Input schema for the provider service.</p>
     #   @return [Types::ProviderComponentSchema]
     class GetProviderServiceOutput < Struct.new(
+      nil,
       :provider_name,
       :provider_service_name,
       :provider_service_display_name,
@@ -1030,6 +1077,7 @@ module Aws::EntityResolution
     #   <p>The name of the schema to be retrieved.</p>
     #   @return [String]
     class GetSchemaMappingInput < Struct.new(
+      nil,
       :schema_name,
       keyword_init: true
     )
@@ -1061,6 +1109,7 @@ module Aws::EntityResolution
     #   <p>Specifies whether the schema mapping has been applied to a workflow.</p>
     #   @return [Boolean]
     class GetSchemaMappingOutput < Struct.new(
+      nil,
       :schema_name,
       :schema_arn,
       :description,
@@ -1079,6 +1128,7 @@ module Aws::EntityResolution
     #   <p> The incremental run type for an ID mapping workflow.</p> <p>It takes only one value: <code>ON_DEMAND</code>. This setting runs the ID mapping workflow when it's manually triggered through the <code>StartIdMappingJob</code> API.</p>
     #   @return [String]
     class IdMappingIncrementalRunConfig < Struct.new(
+      nil,
       :incremental_run_type,
       keyword_init: true
     )
@@ -1132,6 +1182,7 @@ module Aws::EntityResolution
     #   <p> The number of mapped target records removed.</p>
     #   @return [Integer]
     class IdMappingJobMetrics < Struct.new(
+      nil,
       :input_records,
       :total_records_processed,
       :records_not_processed,
@@ -1163,6 +1214,7 @@ module Aws::EntityResolution
     #   <p>Customer KMS ARN for encryption at rest. If not provided, system will use an Entity Resolution managed KMS key.</p>
     #   @return [String]
     class IdMappingJobOutputSource < Struct.new(
+      nil,
       :role_arn,
       :output_s3_path,
       :kms_arn,
@@ -1185,6 +1237,7 @@ module Aws::EntityResolution
     #   <p> The type of matching record that is allowed to be used in an ID mapping workflow. </p> <p>If the value is set to <code>ONE_SOURCE_TO_ONE_TARGET</code>, only one record in the source can be matched to the same record in the target.</p> <p>If the value is set to <code>MANY_SOURCE_TO_ONE_TARGET</code>, multiple records in the source can be matched to one record in the target.</p>
     #   @return [String]
     class IdMappingRuleBasedProperties < Struct.new(
+      nil,
       :rules,
       :rule_definition_type,
       :attribute_matching_model,
@@ -1205,6 +1258,7 @@ module Aws::EntityResolution
     #   <p>An object which defines any additional configurations required by the provider service.</p>
     #   @return [Types::ProviderProperties]
     class IdMappingTechniques < Struct.new(
+      nil,
       :id_mapping_type,
       :rule_based_properties,
       :provider_properties,
@@ -1224,6 +1278,7 @@ module Aws::EntityResolution
     #   <p>The type of ID namespace. There are two types: <code>SOURCE</code> and <code>TARGET</code>. </p> <p>The <code>SOURCE</code> contains configurations for <code>sourceId</code> data that will be processed in an ID mapping workflow. </p> <p>The <code>TARGET</code> contains a configuration of <code>targetId</code> which all <code>sourceIds</code> will resolve to.</p>
     #   @return [String]
     class IdMappingWorkflowInputSource < Struct.new(
+      nil,
       :input_source_arn,
       :schema_name,
       :type,
@@ -1240,6 +1295,7 @@ module Aws::EntityResolution
     #   <p>Customer KMS ARN for encryption at rest. If not provided, system will use an Entity Resolution managed KMS key.</p>
     #   @return [String]
     class IdMappingWorkflowOutputSource < Struct.new(
+      nil,
       :output_s3_path,
       :kms_arn,
       keyword_init: true
@@ -1261,6 +1317,7 @@ module Aws::EntityResolution
     #   <p>The timestamp of when the workflow was last updated.</p>
     #   @return [Time]
     class IdMappingWorkflowSummary < Struct.new(
+      nil,
       :workflow_name,
       :workflow_arn,
       :created_at,
@@ -1275,6 +1332,7 @@ module Aws::EntityResolution
     #   <p>The type of ID mapping.</p>
     #   @return [String]
     class IdNamespaceIdMappingWorkflowMetadata < Struct.new(
+      nil,
       :id_mapping_type,
       keyword_init: true
     )
@@ -1292,6 +1350,7 @@ module Aws::EntityResolution
     #   <p>An object which defines any additional configurations required by the provider service.</p>
     #   @return [Types::NamespaceProviderProperties]
     class IdNamespaceIdMappingWorkflowProperties < Struct.new(
+      nil,
       :id_mapping_type,
       :rule_based_properties,
       :provider_properties,
@@ -1308,6 +1367,7 @@ module Aws::EntityResolution
     #   <p>The name of the schema.</p>
     #   @return [String]
     class IdNamespaceInputSource < Struct.new(
+      nil,
       :input_source_arn,
       :schema_name,
       keyword_init: true
@@ -1338,6 +1398,7 @@ module Aws::EntityResolution
     #   <p>The timestamp of when the ID namespace was last updated.</p>
     #   @return [Time]
     class IdNamespaceSummary < Struct.new(
+      nil,
       :id_namespace_name,
       :id_namespace_arn,
       :description,
@@ -1355,6 +1416,7 @@ module Aws::EntityResolution
     #   <p>The type of incremental run. The only valid value is <code>IMMEDIATE</code>. This appears as "Automatic" in the console.</p> <important> <p>For workflows where <code>resolutionType</code> is <code>ML_MATCHING</code> or <code>PROVIDER</code>, incremental processing is not supported. </p> </important>
     #   @return [String]
     class IncrementalRunConfig < Struct.new(
+      nil,
       :incremental_run_type,
       keyword_init: true
     )
@@ -1372,6 +1434,7 @@ module Aws::EntityResolution
     #   <p>Normalizes the attributes defined in the schema in the input data. For example, if an attribute has an <code>AttributeType</code> of <code>PHONE_NUMBER</code>, and the data in the input table is in a format of 1234567890, Entity Resolution will normalize this field in the output to (123)-456-7890.</p>
     #   @return [Boolean]
     class InputSource < Struct.new(
+      nil,
       :input_source_arn,
       :schema_name,
       :apply_normalization,
@@ -1385,6 +1448,7 @@ module Aws::EntityResolution
     #   <p>The Amazon S3 location (bucket and prefix). For example: <code>s3://provider_bucket/DOC-EXAMPLE-BUCKET</code> </p>
     #   @return [String]
     class IntermediateSourceConfiguration < Struct.new(
+      nil,
       :intermediate_s3_path,
       keyword_init: true
     )
@@ -1395,6 +1459,7 @@ module Aws::EntityResolution
     # @!attribute message
     #   @return [String]
     class InternalServerException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -1418,6 +1483,7 @@ module Aws::EntityResolution
     #   <p>The total number of <code>matchID</code>s generated.</p>
     #   @return [Integer]
     class JobMetrics < Struct.new(
+      nil,
       :input_records,
       :total_records_processed,
       :records_not_processed,
@@ -1439,6 +1505,7 @@ module Aws::EntityResolution
     #   <p>Customer KMS ARN for encryption at rest. If not provided, system will use an Entity Resolution managed KMS key.</p>
     #   @return [String]
     class JobOutputSource < Struct.new(
+      nil,
       :role_arn,
       :output_s3_path,
       :kms_arn,
@@ -1461,6 +1528,7 @@ module Aws::EntityResolution
     #   <p>The time at which the job has finished.</p>
     #   @return [Time]
     class JobSummary < Struct.new(
+      nil,
       :job_id,
       :status,
       :start_time,
@@ -1480,6 +1548,7 @@ module Aws::EntityResolution
     #   <p>The maximum number of objects returned per page.</p>
     #   @return [Integer]
     class ListIdMappingJobsInput < Struct.new(
+      nil,
       :workflow_name,
       :next_token,
       :max_results,
@@ -1495,6 +1564,7 @@ module Aws::EntityResolution
     #   <p>The pagination token from the previous API call.</p>
     #   @return [String]
     class ListIdMappingJobsOutput < Struct.new(
+      nil,
       :jobs,
       :next_token,
       keyword_init: true
@@ -1509,6 +1579,7 @@ module Aws::EntityResolution
     #   <p>The maximum number of objects returned per page.</p>
     #   @return [Integer]
     class ListIdMappingWorkflowsInput < Struct.new(
+      nil,
       :next_token,
       :max_results,
       keyword_init: true
@@ -1523,6 +1594,7 @@ module Aws::EntityResolution
     #   <p>The pagination token from the previous API call.</p>
     #   @return [String]
     class ListIdMappingWorkflowsOutput < Struct.new(
+      nil,
       :workflow_summaries,
       :next_token,
       keyword_init: true
@@ -1537,6 +1609,7 @@ module Aws::EntityResolution
     #   <p>The maximum number of <code>IdNamespace</code> objects returned per page.</p>
     #   @return [Integer]
     class ListIdNamespacesInput < Struct.new(
+      nil,
       :next_token,
       :max_results,
       keyword_init: true
@@ -1551,6 +1624,7 @@ module Aws::EntityResolution
     #   <p>The pagination token from the previous API call.</p>
     #   @return [String]
     class ListIdNamespacesOutput < Struct.new(
+      nil,
       :id_namespace_summaries,
       :next_token,
       keyword_init: true
@@ -1568,6 +1642,7 @@ module Aws::EntityResolution
     #   <p>The maximum number of objects returned per page.</p>
     #   @return [Integer]
     class ListMatchingJobsInput < Struct.new(
+      nil,
       :workflow_name,
       :next_token,
       :max_results,
@@ -1583,6 +1658,7 @@ module Aws::EntityResolution
     #   <p>The pagination token from the previous API call.</p>
     #   @return [String]
     class ListMatchingJobsOutput < Struct.new(
+      nil,
       :jobs,
       :next_token,
       keyword_init: true
@@ -1597,6 +1673,7 @@ module Aws::EntityResolution
     #   <p>The maximum number of objects returned per page.</p>
     #   @return [Integer]
     class ListMatchingWorkflowsInput < Struct.new(
+      nil,
       :next_token,
       :max_results,
       keyword_init: true
@@ -1611,6 +1688,7 @@ module Aws::EntityResolution
     #   <p>The pagination token from the previous API call.</p>
     #   @return [String]
     class ListMatchingWorkflowsOutput < Struct.new(
+      nil,
       :workflow_summaries,
       :next_token,
       keyword_init: true
@@ -1628,6 +1706,7 @@ module Aws::EntityResolution
     #   <p>The name of the provider. This name is typically the company name.</p>
     #   @return [String]
     class ListProviderServicesInput < Struct.new(
+      nil,
       :next_token,
       :max_results,
       :provider_name,
@@ -1643,6 +1722,7 @@ module Aws::EntityResolution
     #   <p>The pagination token from the previous API call.</p>
     #   @return [String]
     class ListProviderServicesOutput < Struct.new(
+      nil,
       :provider_service_summaries,
       :next_token,
       keyword_init: true
@@ -1657,6 +1737,7 @@ module Aws::EntityResolution
     #   <p>The maximum number of objects returned per page.</p>
     #   @return [Integer]
     class ListSchemaMappingsInput < Struct.new(
+      nil,
       :next_token,
       :max_results,
       keyword_init: true
@@ -1671,6 +1752,7 @@ module Aws::EntityResolution
     #   <p>The pagination token from the previous API call.</p>
     #   @return [String]
     class ListSchemaMappingsOutput < Struct.new(
+      nil,
       :schema_list,
       :next_token,
       keyword_init: true
@@ -1682,6 +1764,7 @@ module Aws::EntityResolution
     #   <p>The ARN of the resource for which you want to view tags.</p>
     #   @return [String]
     class ListTagsForResourceInput < Struct.new(
+      nil,
       :resource_arn,
       keyword_init: true
     )
@@ -1692,6 +1775,7 @@ module Aws::EntityResolution
     #   <p>The tags used to organize, track, or control access for this resource.</p>
     #   @return [Hash<String, String>]
     class ListTagsForResourceOutput < Struct.new(
+      nil,
       :tags,
       keyword_init: true
     )
@@ -1709,6 +1793,7 @@ module Aws::EntityResolution
     #   <p> The match rule of the match group.</p>
     #   @return [String]
     class MatchGroup < Struct.new(
+      nil,
       :records,
       :match_id,
       :match_rule,
@@ -1725,6 +1810,7 @@ module Aws::EntityResolution
     #   <p> The record ID of the matched record.</p>
     #   @return [String]
     class MatchedRecord < Struct.new(
+      nil,
       :input_source_arn,
       :record_id,
       keyword_init: true
@@ -1749,6 +1835,7 @@ module Aws::EntityResolution
     #   <p>The method that has been specified for data matching, either using matching provided by Entity Resolution or through a provider service.</p>
     #   @return [String]
     class MatchingWorkflowSummary < Struct.new(
+      nil,
       :workflow_name,
       :workflow_arn,
       :created_at,
@@ -1767,6 +1854,7 @@ module Aws::EntityResolution
     #   <p>An object which defines any additional configurations required by the provider service.</p>
     #   @return [JSON]
     class NamespaceProviderProperties < Struct.new(
+      nil,
       :provider_service_arn,
       :provider_configuration,
       keyword_init: true
@@ -1788,6 +1876,7 @@ module Aws::EntityResolution
     #   <p> The type of matching record that is allowed to be used in an ID mapping workflow. </p> <p>If the value is set to <code>ONE_SOURCE_TO_ONE_TARGET</code>, only one record in the source is matched to one record in the target. </p> <p>If the value is set to <code>MANY_SOURCE_TO_ONE_TARGET</code>, all matching records in the source are matched to one record in the target.</p>
     #   @return [Array<String>]
     class NamespaceRuleBasedProperties < Struct.new(
+      nil,
       :rules,
       :rule_definition_types,
       :attribute_matching_model,
@@ -1805,6 +1894,7 @@ module Aws::EntityResolution
     #   <p>Enables the ability to hash the column values in the output.</p>
     #   @return [Boolean]
     class OutputAttribute < Struct.new(
+      nil,
       :name,
       :hashed,
       keyword_init: true
@@ -1826,6 +1916,7 @@ module Aws::EntityResolution
     #   <p>Normalizes the attributes defined in the schema in the input data. For example, if an attribute has an <code>AttributeType</code> of <code>PHONE_NUMBER</code>, and the data in the input table is in a format of 1234567890, Entity Resolution will normalize this field in the output to (123)-456-7890.</p>
     #   @return [Boolean]
     class OutputSource < Struct.new(
+      nil,
       :output_s3_path,
       :kms_arn,
       :output,
@@ -1843,6 +1934,7 @@ module Aws::EntityResolution
     #   <p>The provider schema attributes.</p>
     #   @return [Array<Types::ProviderSchemaAttribute>]
     class ProviderComponentSchema < Struct.new(
+      nil,
       :schemas,
       :provider_schema_attributes,
       keyword_init: true
@@ -1876,6 +1968,7 @@ module Aws::EntityResolution
     #   <p>Configurations required for the source ID namespace.</p>
     #   @return [JSON]
     class ProviderIdNameSpaceConfiguration < Struct.new(
+      nil,
       :description,
       :provider_target_configuration_definition,
       :provider_source_configuration_definition,
@@ -1892,6 +1985,7 @@ module Aws::EntityResolution
     #   <p>The S3 bucket actions that the provider requires permission for.</p>
     #   @return [Array<String>]
     class ProviderIntermediateDataAccessConfiguration < Struct.new(
+      nil,
       :aws_account_ids,
       :required_bucket_actions,
       keyword_init: true
@@ -1913,6 +2007,7 @@ module Aws::EntityResolution
     #   <p>The listing ID on Data Exchange.</p>
     #   @return [String]
     class ProviderMarketplaceConfiguration < Struct.new(
+      nil,
       :data_set_id,
       :revision_id,
       :asset_id,
@@ -1933,6 +2028,7 @@ module Aws::EntityResolution
     #   <p>The Amazon S3 location that temporarily stores your data while it processes. Your information won't be saved permanently.</p>
     #   @return [Types::IntermediateSourceConfiguration]
     class ProviderProperties < Struct.new(
+      nil,
       :provider_service_arn,
       :provider_configuration,
       :intermediate_source_configuration,
@@ -1955,6 +2051,7 @@ module Aws::EntityResolution
     #   <p>The hashing attribute of the provider schema.</p>
     #   @return [Boolean]
     class ProviderSchemaAttribute < Struct.new(
+      nil,
       :field_name,
       :type,
       :sub_type,
@@ -1981,6 +2078,7 @@ module Aws::EntityResolution
     #   <p>The type of provider service.</p>
     #   @return [String]
     class ProviderServiceSummary < Struct.new(
+      nil,
       :provider_service_arn,
       :provider_name,
       :provider_service_display_name,
@@ -2001,6 +2099,7 @@ module Aws::EntityResolution
     #   <p>The resource-based policy.</p> <important> <p>If you set the value of the <code>effect</code> parameter in the <code>policy</code> to <code>Deny</code> for the <code>PutPolicy</code> operation, you must also set the value of the <code>effect</code> parameter to <code>Deny</code> for the <code>AddPolicyStatement</code> operation.</p> </important>
     #   @return [String]
     class PutPolicyInput < Struct.new(
+      nil,
       :arn,
       :token,
       :policy,
@@ -2019,6 +2118,7 @@ module Aws::EntityResolution
     #   <p>The resource-based policy.</p>
     #   @return [String]
     class PutPolicyOutput < Struct.new(
+      nil,
       :arn,
       :token,
       :policy,
@@ -2038,6 +2138,7 @@ module Aws::EntityResolution
     #   <p> The record's attribute map.</p>
     #   @return [Hash<String, String>]
     class Record < Struct.new(
+      nil,
       :input_source_arn,
       :unique_id,
       :record_attribute_map,
@@ -2060,6 +2161,7 @@ module Aws::EntityResolution
     #   <p>The properties of the provider service.</p>
     #   @return [Types::ProviderProperties]
     class ResolutionTechniques < Struct.new(
+      nil,
       :resolution_type,
       :rule_based_properties,
       :rule_condition_properties,
@@ -2073,6 +2175,7 @@ module Aws::EntityResolution
     # @!attribute message
     #   @return [String]
     class ResourceNotFoundException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -2087,6 +2190,7 @@ module Aws::EntityResolution
     #   <p>A list of <code>MatchingKeys</code>. The <code>MatchingKeys</code> must have been defined in the <code>SchemaMapping</code>. Two records are considered to match according to this rule if all of the <code>MatchingKeys</code> match.</p>
     #   @return [Array<String>]
     class Rule < Struct.new(
+      nil,
       :rule_name,
       :matching_keys,
       keyword_init: true
@@ -2105,6 +2209,7 @@ module Aws::EntityResolution
     #   <p> An indicator of whether to generate IDs and index the data or not.</p> <p>If you choose <code>IDENTIFIER_GENERATION</code>, the process generates IDs and indexes the data.</p> <p>If you choose <code>INDEXING</code>, the process indexes the data without generating IDs.</p>
     #   @return [String]
     class RuleBasedProperties < Struct.new(
+      nil,
       :rules,
       :attribute_matching_model,
       :match_purpose,
@@ -2121,6 +2226,7 @@ module Aws::EntityResolution
     #   <p>A statement that specifies the conditions for a matching rule.</p> <p>If your data is accurate, use an Exact matching function: <code>Exact</code> or <code>ExactManyToMany</code>. </p> <p>If your data has variations in spelling or pronunciation, use a Fuzzy matching function: <code>Cosine</code>, <code>Levenshtein</code>, or <code>Soundex</code>. </p> <p>Use operators if you want to combine (<code>AND</code>), separate (<code>OR</code>), or group matching functions <code>(...)</code>.</p> <p>For example: <code>(Cosine(a, 10) AND Exact(b, true)) OR ExactManyToMany(c, d)</code> </p>
     #   @return [String]
     class RuleCondition < Struct.new(
+      nil,
       :rule_name,
       :condition,
       keyword_init: true
@@ -2133,6 +2239,7 @@ module Aws::EntityResolution
     #   <p> A list of rule objects, each of which have fields <code>ruleName</code> and <code>condition</code>. </p>
     #   @return [Array<Types::RuleCondition>]
     class RuleConditionProperties < Struct.new(
+      nil,
       :rules,
       keyword_init: true
     )
@@ -2159,6 +2266,7 @@ module Aws::EntityResolution
     #   <p> Indicates if the column values are hashed in the schema input. </p> <p>If the value is set to <code>TRUE</code>, the column values are hashed. </p> <p>If the value is set to <code>FALSE</code>, the column values are cleartext.</p>
     #   @return [Boolean]
     class SchemaInputAttribute < Struct.new(
+      nil,
       :field_name,
       :type,
       :group_name,
@@ -2187,6 +2295,7 @@ module Aws::EntityResolution
     #   <p>Specifies whether the schema mapping has been applied to a workflow.</p>
     #   @return [Boolean]
     class SchemaMappingSummary < Struct.new(
+      nil,
       :schema_name,
       :schema_arn,
       :created_at,
@@ -2207,6 +2316,7 @@ module Aws::EntityResolution
     #   <p> The job type for the ID mapping job.</p> <p>If the <code>jobType</code> value is set to <code>INCREMENTAL</code>, only new or changed data is processed since the last job run. This is the default value if the <code>CreateIdMappingWorkflow</code> API is configured with an <code>incrementalRunConfig</code>.</p> <p>If the <code>jobType</code> value is set to <code>BATCH</code>, all data is processed from the input source, regardless of previous job runs. This is the default value if the <code>CreateIdMappingWorkflow</code> API isn't configured with an <code>incrementalRunConfig</code>.</p> <p>If the <code>jobType</code> value is set to <code>DELETE_ONLY</code>, only deletion requests from <code>BatchDeleteUniqueIds</code> are processed.</p>
     #   @return [String]
     class StartIdMappingJobInput < Struct.new(
+      nil,
       :workflow_name,
       :output_source_config,
       :job_type,
@@ -2225,6 +2335,7 @@ module Aws::EntityResolution
     #   <p> The job type for the started ID mapping job.</p> <p>A value of <code>INCREMENTAL</code> indicates that only new or changed data was processed since the last job run. This is the default job type if the workflow was created with an <code>incrementalRunConfig</code>.</p> <p>A value of <code>BATCH</code> indicates that all data was processed from the input source, regardless of previous job runs. This is the default job type if the workflow wasn't created with an <code>incrementalRunConfig</code>.</p> <p>A value of <code>DELETE_ONLY</code> indicates that only deletion requests from <code>BatchDeleteUniqueIds</code> were processed.</p>
     #   @return [String]
     class StartIdMappingJobOutput < Struct.new(
+      nil,
       :job_id,
       :output_source_config,
       :job_type,
@@ -2237,6 +2348,7 @@ module Aws::EntityResolution
     #   <p>The name of the matching job to be retrieved.</p>
     #   @return [String]
     class StartMatchingJobInput < Struct.new(
+      nil,
       :workflow_name,
       keyword_init: true
     )
@@ -2247,6 +2359,7 @@ module Aws::EntityResolution
     #   <p>The ID of the job.</p>
     #   @return [String]
     class StartMatchingJobOutput < Struct.new(
+      nil,
       :job_id,
       keyword_init: true
     )
@@ -2260,6 +2373,7 @@ module Aws::EntityResolution
     #   <p>The tags used to organize, track, or control access for this resource.</p>
     #   @return [Hash<String, String>]
     class TagResourceInput < Struct.new(
+      nil,
       :resource_arn,
       :tags,
       keyword_init: true
@@ -2268,6 +2382,7 @@ module Aws::EntityResolution
     end
 
     class TagResourceOutput < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -2277,6 +2392,7 @@ module Aws::EntityResolution
     # @!attribute message
     #   @return [String]
     class ThrottlingException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -2290,6 +2406,7 @@ module Aws::EntityResolution
     #   <p>The list of tag keys to remove from the resource.</p>
     #   @return [Array<String>]
     class UntagResourceInput < Struct.new(
+      nil,
       :resource_arn,
       :tag_keys,
       keyword_init: true
@@ -2298,6 +2415,7 @@ module Aws::EntityResolution
     end
 
     class UntagResourceOutput < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -2325,6 +2443,7 @@ module Aws::EntityResolution
     #   <p>The Amazon Resource Name (ARN) of the IAM role. Entity Resolution assumes this role to access Amazon Web Services resources on your behalf.</p>
     #   @return [String]
     class UpdateIdMappingWorkflowInput < Struct.new(
+      nil,
       :workflow_name,
       :description,
       :input_source_config,
@@ -2362,6 +2481,7 @@ module Aws::EntityResolution
     #   <p>The Amazon Resource Name (ARN) of the IAM role. Entity Resolution assumes this role to access Amazon Web Services resources on your behalf.</p>
     #   @return [String]
     class UpdateIdMappingWorkflowOutput < Struct.new(
+      nil,
       :workflow_name,
       :workflow_arn,
       :description,
@@ -2396,6 +2516,7 @@ module Aws::EntityResolution
     #   <p>The Amazon Resource Name (ARN) of the IAM role. Entity Resolution assumes this role to access the resources defined in this <code>IdNamespace</code> on your behalf as part of a workflow run.</p>
     #   @return [String]
     class UpdateIdNamespaceInput < Struct.new(
+      nil,
       :id_namespace_name,
       :description,
       :input_source_config,
@@ -2434,6 +2555,7 @@ module Aws::EntityResolution
     #   <p>The timestamp of when the ID namespace was last updated.</p>
     #   @return [Time]
     class UpdateIdNamespaceOutput < Struct.new(
+      nil,
       :id_namespace_name,
       :id_namespace_arn,
       :description,
@@ -2470,6 +2592,7 @@ module Aws::EntityResolution
     #   <p>The Amazon Resource Name (ARN) of the IAM role. Entity Resolution assumes this role to create resources on your behalf as part of workflow execution.</p>
     #   @return [String]
     class UpdateMatchingWorkflowInput < Struct.new(
+      nil,
       :workflow_name,
       :description,
       :input_source_config,
@@ -2504,6 +2627,7 @@ module Aws::EntityResolution
     #   <p>The Amazon Resource Name (ARN) of the IAM role. Entity Resolution assumes this role to create resources on your behalf as part of workflow execution.</p>
     #   @return [String]
     class UpdateMatchingWorkflowOutput < Struct.new(
+      nil,
       :workflow_name,
       :description,
       :input_source_config,
@@ -2526,6 +2650,7 @@ module Aws::EntityResolution
     #   <p>A list of <code>MappedInputFields</code>. Each <code>MappedInputField</code> corresponds to a column the source data table, and contains column name plus additional information that Entity Resolution uses for matching.</p>
     #   @return [Array<Types::SchemaInputAttribute>]
     class UpdateSchemaMappingInput < Struct.new(
+      nil,
       :schema_name,
       :description,
       :mapped_input_fields,
@@ -2547,6 +2672,7 @@ module Aws::EntityResolution
     #   <p>A list of <code>MappedInputFields</code>. Each <code>MappedInputField</code> corresponds to a column the source data table, and contains column name plus additional information that Entity Resolution uses for matching.</p>
     #   @return [Array<Types::SchemaInputAttribute>]
     class UpdateSchemaMappingOutput < Struct.new(
+      nil,
       :schema_name,
       :schema_arn,
       :description,
@@ -2560,6 +2686,7 @@ module Aws::EntityResolution
     # @!attribute message
     #   @return [String]
     class ValidationException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )

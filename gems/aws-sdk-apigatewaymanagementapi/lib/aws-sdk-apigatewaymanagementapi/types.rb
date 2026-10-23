@@ -9,6 +9,7 @@ module Aws::ApiGatewayManagementApi
     # @!attribute connection_id
     #   @return [String]
     class DeleteConnectionRequest < Struct.new(
+      nil,
       :connection_id,
       keyword_init: true
     )
@@ -17,6 +18,7 @@ module Aws::ApiGatewayManagementApi
 
     # <p>The caller is not authorized to invoke this operation.</p>
     class ForbiddenException < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -25,6 +27,7 @@ module Aws::ApiGatewayManagementApi
     # @!attribute connection_id
     #   @return [String]
     class GetConnectionRequest < Struct.new(
+      nil,
       :connection_id,
       keyword_init: true
     )
@@ -40,6 +43,7 @@ module Aws::ApiGatewayManagementApi
     #   <p>The time in ISO 8601 format for when the connection was last active.</p>
     #   @return [Time]
     class GetConnectionResponse < Struct.new(
+      nil,
       :connected_at,
       :identity,
       :last_active_at,
@@ -50,6 +54,7 @@ module Aws::ApiGatewayManagementApi
 
     # <p>The connection with the provided id no longer exists.</p>
     class GoneException < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -62,6 +67,7 @@ module Aws::ApiGatewayManagementApi
     #   <p>The User Agent of the API caller.</p>
     #   @return [String]
     class Identity < Struct.new(
+      nil,
       :source_ip,
       :user_agent,
       keyword_init: true
@@ -71,6 +77,7 @@ module Aws::ApiGatewayManagementApi
 
     # <p>The client is sending more than the allowed number of requests per unit of time or the WebSocket client side buffer is full.</p>
     class LimitExceededException < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -80,6 +87,7 @@ module Aws::ApiGatewayManagementApi
     # @!attribute message
     #   @return [String]
     class PayloadTooLargeException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -93,6 +101,7 @@ module Aws::ApiGatewayManagementApi
     #   <p>The identifier of the connection that a specific client is using.</p>
     #   @return [String]
     class PostToConnectionRequest < Struct.new(
+      nil,
       :data,
       :connection_id,
       keyword_init: true

@@ -21,6 +21,7 @@ module Aws::NetworkFirewall
     #            </ul>
     #   @return [Types::Attachment]
     class AZSyncState < Struct.new(
+      nil,
       :attachment,
       keyword_init: true
     )
@@ -31,6 +32,7 @@ module Aws::NetworkFirewall
     #   <p>Required. The unique identifier of the transit gateway attachment to accept. This ID is returned in the response when creating a transit gateway-attached firewall.</p>
     #   @return [String]
     class AcceptNetworkFirewallTransitGatewayAttachmentRequest < Struct.new(
+      nil,
       :transit_gateway_attachment_id,
       keyword_init: true
     )
@@ -82,6 +84,7 @@ module Aws::NetworkFirewall
     #            </ul>
     #   @return [String]
     class AcceptNetworkFirewallTransitGatewayAttachmentResponse < Struct.new(
+      nil,
       :transit_gateway_attachment_id,
       :transit_gateway_attachment_status,
       keyword_init: true
@@ -99,6 +102,7 @@ module Aws::NetworkFirewall
     #            publishes metrics for the packet and forwards it. </p>
     #   @return [Types::PublishMetricAction]
     class ActionDefinition < Struct.new(
+      nil,
       :publish_metric_action,
       keyword_init: true
     )
@@ -127,6 +131,7 @@ module Aws::NetworkFirewall
     #            Inter-Domain Routing</a>.</p>
     #   @return [String]
     class Address < Struct.new(
+      nil,
       :address_definition,
       keyword_init: true
     )
@@ -150,6 +155,7 @@ module Aws::NetworkFirewall
     #   <p>The status of the analysis report you specify. Statuses include <code>RUNNING</code>, <code>COMPLETED</code>, or <code>FAILED</code>.</p>
     #   @return [String]
     class AnalysisReport < Struct.new(
+      nil,
       :analysis_report_id,
       :analysis_type,
       :report_time,
@@ -195,6 +201,7 @@ module Aws::NetworkFirewall
     #   <p>Provides analysis details for the identified rule.</p>
     #   @return [String]
     class AnalysisResult < Struct.new(
+      nil,
       :identified_rule_ids,
       :identified_type,
       :analysis_detail,
@@ -224,6 +231,7 @@ module Aws::NetworkFirewall
     #   <p>The number of unique source IP addresses that connected to a domain.</p>
     #   @return [Types::UniqueSources]
     class AnalysisTypeReportResult < Struct.new(
+      nil,
       :protocol,
       :first_accessed,
       :last_accessed,
@@ -252,6 +260,7 @@ module Aws::NetworkFirewall
     #   <p>Required. The Availability Zones where you want to create firewall endpoints. You must specify at least one Availability Zone.</p>
     #   @return [Array<Types::AvailabilityZoneMapping>]
     class AssociateAvailabilityZonesRequest < Struct.new(
+      nil,
       :update_token,
       :firewall_arn,
       :firewall_name,
@@ -276,6 +285,7 @@ module Aws::NetworkFirewall
     #            <p>To make a conditional change to the firewall, provide the token in your update request. Network Firewall uses the token to ensure that the firewall hasn't changed since you last retrieved it. If it has changed, the operation fails with an <code>InvalidTokenException</code>. If this happens, retrieve the firewall again to get a current copy of it with a new token. Reapply your changes as needed, then try the operation again using the new token. </p>
     #   @return [String]
     class AssociateAvailabilityZonesResponse < Struct.new(
+      nil,
       :firewall_arn,
       :firewall_name,
       :availability_zone_mappings,
@@ -302,6 +312,7 @@ module Aws::NetworkFirewall
     #   <p>The Amazon Resource Name (ARN) of the firewall policy.</p>
     #   @return [String]
     class AssociateFirewallPolicyRequest < Struct.new(
+      nil,
       :update_token,
       :firewall_arn,
       :firewall_name,
@@ -326,6 +337,7 @@ module Aws::NetworkFirewall
     #            <p>To make a conditional change to the firewall, provide the token in your update request. Network Firewall uses the token to ensure that the firewall hasn't changed since you last retrieved it. If it has changed, the operation fails with an <code>InvalidTokenException</code>. If this happens, retrieve the firewall again to get a current copy of it with a new token. Reapply your changes as needed, then try the operation again using the new token. </p>
     #   @return [String]
     class AssociateFirewallPolicyResponse < Struct.new(
+      nil,
       :firewall_arn,
       :firewall_name,
       :firewall_policy_arn,
@@ -352,6 +364,7 @@ module Aws::NetworkFirewall
     #   <p>The IDs of the subnets that you want to associate with the firewall. </p>
     #   @return [Array<Types::SubnetMapping>]
     class AssociateSubnetsRequest < Struct.new(
+      nil,
       :update_token,
       :firewall_arn,
       :firewall_name,
@@ -376,6 +389,7 @@ module Aws::NetworkFirewall
     #            <p>To make a conditional change to the firewall, provide the token in your update request. Network Firewall uses the token to ensure that the firewall hasn't changed since you last retrieved it. If it has changed, the operation fails with an <code>InvalidTokenException</code>. If this happens, retrieve the firewall again to get a current copy of it with a new token. Reapply your changes as needed, then try the operation again using the new token. </p>
     #   @return [String]
     class AssociateSubnetsResponse < Struct.new(
+      nil,
       :firewall_arn,
       :firewall_name,
       :subnet_mappings,
@@ -415,6 +429,7 @@ module Aws::NetworkFirewall
     #            Depending on the error, it can take as many as 15 minutes to populate this field. For more information about the causes for failiure or errors and solutions available for this field, see <a href="https://docs.aws.amazon.com/network-firewall/latest/developerguide/firewall-troubleshooting-endpoint-failures.html">Troubleshooting firewall endpoint failures</a> in the <i>Network Firewall Developer Guide</i>.</p>
     #   @return [String]
     class Attachment < Struct.new(
+      nil,
       :subnet_id,
       :endpoint_id,
       :status,
@@ -430,6 +445,7 @@ module Aws::NetworkFirewall
     #   <p>The ID of the Availability Zone where the firewall endpoint is located. For example, <code>us-east-2a</code>. The Availability Zone must be in the same Region as the transit gateway.</p>
     #   @return [String]
     class AvailabilityZoneMapping < Struct.new(
+      nil,
       :availability_zone,
       keyword_init: true
     )
@@ -441,6 +457,7 @@ module Aws::NetworkFirewall
     #   <p>The IP address type of the Firewall subnet in the Availability Zone. You can't change the IP address type after you create the subnet.</p>
     #   @return [String]
     class AvailabilityZoneMetadata < Struct.new(
+      nil,
       :ip_address_type,
       keyword_init: true
     )
@@ -458,6 +475,7 @@ module Aws::NetworkFirewall
     #   <p>The list of the IP set references used by a firewall.</p>
     #   @return [Hash<String, Types::IPSetMetadata>]
     class CIDRSummary < Struct.new(
+      nil,
       :available_cidr_count,
       :utilized_cidr_count,
       :ip_set_references,
@@ -471,6 +489,7 @@ module Aws::NetworkFirewall
     #   <p>Describes the capacity usage of the CIDR blocks used by the IP set references in a firewall.</p>
     #   @return [Types::CIDRSummary]
     class CapacityUsageSummary < Struct.new(
+      nil,
       :cid_rs,
       keyword_init: true
     )
@@ -513,6 +532,7 @@ module Aws::NetworkFirewall
     #            </ul>
     #   @return [String]
     class CheckCertificateRevocationStatusActions < Struct.new(
+      nil,
       :revoked_status_action,
       :unknown_status_action,
       keyword_init: true
@@ -544,6 +564,7 @@ module Aws::NetworkFirewall
     #   <p>A complex type that contains settings for encryption of your firewall policy resources.</p>
     #   @return [Types::EncryptionConfiguration]
     class CreateFirewallPolicyRequest < Struct.new(
+      nil,
       :firewall_policy_name,
       :firewall_policy,
       :description,
@@ -563,6 +584,7 @@ module Aws::NetworkFirewall
     #   <p>The high-level properties of a firewall policy. This, along with the <a>FirewallPolicy</a>, define the policy. You can retrieve all objects for a firewall policy by calling <a>DescribeFirewallPolicy</a>. </p>
     #   @return [Types::FirewallPolicyResponse]
     class CreateFirewallPolicyResponse < Struct.new(
+      nil,
       :update_token,
       :firewall_policy_response,
       keyword_init: true
@@ -630,6 +652,7 @@ module Aws::NetworkFirewall
     #            </p>
     #   @return [Boolean]
     class CreateFirewallRequest < Struct.new(
+      nil,
       :firewall_name,
       :firewall_policy_arn,
       :vpc_id,
@@ -657,6 +680,7 @@ module Aws::NetworkFirewall
     #            <p>The firewall status indicates a combined status. It indicates whether all subnets are up-to-date with the latest firewall configurations, which is based on the sync states config values, and also whether all subnets have their endpoints fully enabled, based on their sync states attachment values. </p>
     #   @return [Types::FirewallStatus]
     class CreateFirewallResponse < Struct.new(
+      nil,
       :firewall,
       :firewall_status,
       keyword_init: true
@@ -772,6 +796,7 @@ module Aws::NetworkFirewall
     #            </ul>
     #   @return [Types::SummaryConfiguration]
     class CreateRuleGroupRequest < Struct.new(
+      nil,
       :rule_group_name,
       :rule_group,
       :rules,
@@ -797,6 +822,7 @@ module Aws::NetworkFirewall
     #   <p>The high-level properties of a rule group. This, along with the <a>RuleGroup</a>, define the rule group. You can retrieve all objects for a rule group by calling <a>DescribeRuleGroup</a>. </p>
     #   @return [Types::RuleGroupResponse]
     class CreateRuleGroupResponse < Struct.new(
+      nil,
       :update_token,
       :rule_group_response,
       keyword_init: true
@@ -824,6 +850,7 @@ module Aws::NetworkFirewall
     #   <p>A complex type that contains optional Amazon Web Services Key Management Service (KMS) encryption settings for your Network Firewall resources. Your data is encrypted by default with an Amazon Web Services owned key that Amazon Web Services owns and manages for you. You can use either the Amazon Web Services owned key, or provide your own customer managed key. To learn more about KMS encryption of your Network Firewall resources, see <a href="https://docs.aws.amazon.com/kms/latest/developerguide/kms-encryption-at-rest.html">Encryption at rest with Amazon Web Services Key Managment Service</a> in the <i>Network Firewall Developer Guide</i>.</p>
     #   @return [Types::EncryptionConfiguration]
     class CreateTLSInspectionConfigurationRequest < Struct.new(
+      nil,
       :tls_inspection_configuration_name,
       :tls_inspection_configuration,
       :description,
@@ -842,6 +869,7 @@ module Aws::NetworkFirewall
     #   <p>The high-level properties of a TLS inspection configuration. This, along with the <a>TLSInspectionConfiguration</a>, define the TLS inspection configuration. You can retrieve all objects for a TLS inspection configuration by calling <a>DescribeTLSInspectionConfiguration</a>. </p>
     #   @return [Types::TLSInspectionConfigurationResponse]
     class CreateTLSInspectionConfigurationResponse < Struct.new(
+      nil,
       :update_token,
       :tls_inspection_configuration_response,
       keyword_init: true
@@ -868,6 +896,7 @@ module Aws::NetworkFirewall
     #   <p>The key:value pairs to associate with the resource.</p>
     #   @return [Array<Types::Tag>]
     class CreateVpcEndpointAssociationRequest < Struct.new(
+      nil,
       :firewall_arn,
       :vpc_id,
       :subnet_mapping,
@@ -886,6 +915,7 @@ module Aws::NetworkFirewall
     #   by calling <a>DescribeVpcEndpointAssociation</a> and providing the VPC endpoint association ARN.</p>
     #   @return [Types::VpcEndpointAssociationStatus]
     class CreateVpcEndpointAssociationResponse < Struct.new(
+      nil,
       :vpc_endpoint_association,
       :vpc_endpoint_association_status,
       keyword_init: true
@@ -921,6 +951,7 @@ module Aws::NetworkFirewall
     #   <p>The custom action associated with the action name.</p>
     #   @return [Types::ActionDefinition]
     class CustomAction < Struct.new(
+      nil,
       :action_name,
       :action_definition,
       keyword_init: true
@@ -937,6 +968,7 @@ module Aws::NetworkFirewall
     #            <p>You must specify the ARN or the name, and you can specify both. </p>
     #   @return [String]
     class DeleteFirewallPolicyRequest < Struct.new(
+      nil,
       :firewall_policy_name,
       :firewall_policy_arn,
       keyword_init: true
@@ -949,6 +981,7 @@ module Aws::NetworkFirewall
     #            that you asked to delete. </p>
     #   @return [Types::FirewallPolicyResponse]
     class DeleteFirewallPolicyResponse < Struct.new(
+      nil,
       :firewall_policy_response,
       keyword_init: true
     )
@@ -964,6 +997,7 @@ module Aws::NetworkFirewall
     #            <p>You must specify the ARN or the name, and you can specify both. </p>
     #   @return [String]
     class DeleteFirewallRequest < Struct.new(
+      nil,
       :firewall_name,
       :firewall_arn,
       keyword_init: true
@@ -983,6 +1017,7 @@ module Aws::NetworkFirewall
     #            <p>The firewall status indicates a combined status. It indicates whether all subnets are up-to-date with the latest firewall configurations, which is based on the sync states config values, and also whether all subnets have their endpoints fully enabled, based on their sync states attachment values. </p>
     #   @return [Types::FirewallStatus]
     class DeleteFirewallResponse < Struct.new(
+      nil,
       :firewall,
       :firewall_status,
       keyword_init: true
@@ -994,6 +1029,7 @@ module Aws::NetworkFirewall
     #   <p>Required. The unique identifier of the transit gateway attachment to delete.</p>
     #   @return [String]
     class DeleteNetworkFirewallTransitGatewayAttachmentRequest < Struct.new(
+      nil,
       :transit_gateway_attachment_id,
       keyword_init: true
     )
@@ -1046,6 +1082,7 @@ module Aws::NetworkFirewall
     #            </ul>
     #   @return [String]
     class DeleteNetworkFirewallTransitGatewayAttachmentResponse < Struct.new(
+      nil,
       :transit_gateway_attachment_id,
       :transit_gateway_attachment_status,
       keyword_init: true
@@ -1057,6 +1094,7 @@ module Aws::NetworkFirewall
     #   <p>The Amazon Resource Name (ARN) of the rule group or firewall policy whose resource policy you want to delete. </p>
     #   @return [String]
     class DeleteResourcePolicyRequest < Struct.new(
+      nil,
       :resource_arn,
       keyword_init: true
     )
@@ -1064,6 +1102,7 @@ module Aws::NetworkFirewall
     end
 
     class DeleteResourcePolicyResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1085,6 +1124,7 @@ module Aws::NetworkFirewall
     #            </note>
     #   @return [String]
     class DeleteRuleGroupRequest < Struct.new(
+      nil,
       :rule_group_name,
       :rule_group_arn,
       :type,
@@ -1097,6 +1137,7 @@ module Aws::NetworkFirewall
     #   <p>The high-level properties of a rule group. This, along with the <a>RuleGroup</a>, define the rule group. You can retrieve all objects for a rule group by calling <a>DescribeRuleGroup</a>. </p>
     #   @return [Types::RuleGroupResponse]
     class DeleteRuleGroupResponse < Struct.new(
+      nil,
       :rule_group_response,
       keyword_init: true
     )
@@ -1112,6 +1153,7 @@ module Aws::NetworkFirewall
     #            <p>You must specify the ARN or the name, and you can specify both. </p>
     #   @return [String]
     class DeleteTLSInspectionConfigurationRequest < Struct.new(
+      nil,
       :tls_inspection_configuration_arn,
       :tls_inspection_configuration_name,
       keyword_init: true
@@ -1123,6 +1165,7 @@ module Aws::NetworkFirewall
     #   <p>The high-level properties of a TLS inspection configuration. This, along with the <a>TLSInspectionConfiguration</a>, define the TLS inspection configuration. You can retrieve all objects for a TLS inspection configuration by calling <a>DescribeTLSInspectionConfiguration</a>. </p>
     #   @return [Types::TLSInspectionConfigurationResponse]
     class DeleteTLSInspectionConfigurationResponse < Struct.new(
+      nil,
       :tls_inspection_configuration_response,
       keyword_init: true
     )
@@ -1133,6 +1176,7 @@ module Aws::NetworkFirewall
     #   <p>The Amazon Resource Name (ARN) of a VPC endpoint association.</p>
     #   @return [String]
     class DeleteVpcEndpointAssociationRequest < Struct.new(
+      nil,
       :vpc_endpoint_association_arn,
       keyword_init: true
     )
@@ -1147,6 +1191,7 @@ module Aws::NetworkFirewall
     #   by calling <a>DescribeVpcEndpointAssociation</a> and providing the VPC endpoint association ARN.</p>
     #   @return [Types::VpcEndpointAssociationStatus]
     class DeleteVpcEndpointAssociationResponse < Struct.new(
+      nil,
       :vpc_endpoint_association,
       :vpc_endpoint_association_status,
       keyword_init: true
@@ -1158,6 +1203,7 @@ module Aws::NetworkFirewall
     #   <p>The Amazon Resource Name (ARN) of the firewall.</p>
     #   @return [String]
     class DescribeFirewallMetadataRequest < Struct.new(
+      nil,
       :firewall_arn,
       keyword_init: true
     )
@@ -1189,6 +1235,7 @@ module Aws::NetworkFirewall
     #   <p>The unique identifier of the transit gateway attachment associated with this firewall. This field is only present for transit gateway-attached firewalls.</p>
     #   @return [String]
     class DescribeFirewallMetadataResponse < Struct.new(
+      nil,
       :firewall_arn,
       :firewall_policy_arn,
       :description,
@@ -1209,6 +1256,7 @@ module Aws::NetworkFirewall
     #            <p>You must specify the ARN or the name, and you can specify both. </p>
     #   @return [String]
     class DescribeFirewallPolicyRequest < Struct.new(
+      nil,
       :firewall_policy_name,
       :firewall_policy_arn,
       keyword_init: true
@@ -1227,6 +1275,7 @@ module Aws::NetworkFirewall
     #   <p>The policy for the specified firewall policy. </p>
     #   @return [Types::FirewallPolicy]
     class DescribeFirewallPolicyResponse < Struct.new(
+      nil,
       :update_token,
       :firewall_policy_response,
       :firewall_policy,
@@ -1244,6 +1293,7 @@ module Aws::NetworkFirewall
     #            <p>You must specify the ARN or the name, and you can specify both. </p>
     #   @return [String]
     class DescribeFirewallRequest < Struct.new(
+      nil,
       :firewall_name,
       :firewall_arn,
       keyword_init: true
@@ -1264,6 +1314,7 @@ module Aws::NetworkFirewall
     #            <p>The firewall status indicates a combined status. It indicates whether all subnets are up-to-date with the latest firewall configurations, which is based on the sync states config values, and also whether all subnets have their endpoints fully enabled, based on their sync states attachment values. </p>
     #   @return [Types::FirewallStatus]
     class DescribeFirewallResponse < Struct.new(
+      nil,
       :update_token,
       :firewall,
       :firewall_status,
@@ -1289,6 +1340,7 @@ module Aws::NetworkFirewall
     #   <p>A unique identifier for the flow operation. This ID is returned in the responses to start and list commands. You provide to describe commands.</p>
     #   @return [String]
     class DescribeFlowOperationRequest < Struct.new(
+      nil,
       :firewall_arn,
       :availability_zone,
       :vpc_endpoint_association_arn,
@@ -1333,6 +1385,7 @@ module Aws::NetworkFirewall
     #   <p>Returns key information about a flow operation, such as related statuses, unique identifiers, and all filters defined in the operation.</p>
     #   @return [Types::FlowOperation]
     class DescribeFlowOperationResponse < Struct.new(
+      nil,
       :firewall_arn,
       :availability_zone,
       :vpc_endpoint_association_arn,
@@ -1357,6 +1410,7 @@ module Aws::NetworkFirewall
     #            <p>You must specify the ARN or the name, and you can specify both. </p>
     #   @return [String]
     class DescribeLoggingConfigurationRequest < Struct.new(
+      nil,
       :firewall_arn,
       :firewall_name,
       keyword_init: true
@@ -1378,6 +1432,7 @@ module Aws::NetworkFirewall
     #         </p>
     #   @return [Boolean]
     class DescribeLoggingConfigurationResponse < Struct.new(
+      nil,
       :firewall_arn,
       :logging_configuration,
       :enable_monitoring_dashboard,
@@ -1390,6 +1445,7 @@ module Aws::NetworkFirewall
     #   <p>The Amazon Resource Name (ARN) of the rule group or firewall policy whose resource policy you want to retrieve. </p>
     #   @return [String]
     class DescribeResourcePolicyRequest < Struct.new(
+      nil,
       :resource_arn,
       keyword_init: true
     )
@@ -1400,6 +1456,7 @@ module Aws::NetworkFirewall
     #   <p>The IAM policy for the resource. </p>
     #   @return [String]
     class DescribeResourcePolicyResponse < Struct.new(
+      nil,
       :policy,
       keyword_init: true
     )
@@ -1422,6 +1479,7 @@ module Aws::NetworkFirewall
     #            </note>
     #   @return [String]
     class DescribeRuleGroupMetadataRequest < Struct.new(
+      nil,
       :rule_group_name,
       :rule_group_arn,
       :type,
@@ -1463,6 +1521,7 @@ module Aws::NetworkFirewall
     #   <p>A timestamp indicating when the rule group was last modified.</p>
     #   @return [Time]
     class DescribeRuleGroupMetadataResponse < Struct.new(
+      nil,
       :rule_group_arn,
       :rule_group_name,
       :description,
@@ -1494,6 +1553,7 @@ module Aws::NetworkFirewall
     #   <p>Indicates whether you want Network Firewall to analyze the stateless rules in the rule group for rule behavior such as asymmetric routing. If set to <code>TRUE</code>, Network Firewall runs the analysis.</p>
     #   @return [Boolean]
     class DescribeRuleGroupRequest < Struct.new(
+      nil,
       :rule_group_name,
       :rule_group_arn,
       :type,
@@ -1519,6 +1579,7 @@ module Aws::NetworkFirewall
     #   <p>The high-level properties of a rule group. This, along with the <a>RuleGroup</a>, define the rule group. You can retrieve all objects for a rule group by calling <a>DescribeRuleGroup</a>. </p>
     #   @return [Types::RuleGroupResponse]
     class DescribeRuleGroupResponse < Struct.new(
+      nil,
       :update_token,
       :rule_group,
       :rule_group_response,
@@ -1542,6 +1603,7 @@ module Aws::NetworkFirewall
     #            <p>Note that <code>STATELESS</code> exists but is not currently supported. If you provide <code>STATELESS</code>, an exception is returned.</p>
     #   @return [String]
     class DescribeRuleGroupSummaryRequest < Struct.new(
+      nil,
       :rule_group_name,
       :rule_group_arn,
       :type,
@@ -1571,6 +1633,7 @@ module Aws::NetworkFirewall
     #            </ul>
     #   @return [Types::Summary]
     class DescribeRuleGroupSummaryResponse < Struct.new(
+      nil,
       :rule_group_name,
       :description,
       :summary,
@@ -1588,6 +1651,7 @@ module Aws::NetworkFirewall
     #            <p>You must specify the ARN or the name, and you can specify both. </p>
     #   @return [String]
     class DescribeTLSInspectionConfigurationRequest < Struct.new(
+      nil,
       :tls_inspection_configuration_arn,
       :tls_inspection_configuration_name,
       keyword_init: true
@@ -1610,6 +1674,7 @@ module Aws::NetworkFirewall
     #   <p>The high-level properties of a TLS inspection configuration. This, along with the <a>TLSInspectionConfiguration</a>, define the TLS inspection configuration. You can retrieve all objects for a TLS inspection configuration by calling <a>DescribeTLSInspectionConfiguration</a>. </p>
     #   @return [Types::TLSInspectionConfigurationResponse]
     class DescribeTLSInspectionConfigurationResponse < Struct.new(
+      nil,
       :update_token,
       :tls_inspection_configuration,
       :tls_inspection_configuration_response,
@@ -1622,6 +1687,7 @@ module Aws::NetworkFirewall
     #   <p>The Amazon Resource Name (ARN) of a VPC endpoint association.</p>
     #   @return [String]
     class DescribeVpcEndpointAssociationRequest < Struct.new(
+      nil,
       :vpc_endpoint_association_arn,
       keyword_init: true
     )
@@ -1636,6 +1702,7 @@ module Aws::NetworkFirewall
     #   by calling <a>DescribeVpcEndpointAssociation</a> and providing the VPC endpoint association ARN.</p>
     #   @return [Types::VpcEndpointAssociationStatus]
     class DescribeVpcEndpointAssociationResponse < Struct.new(
+      nil,
       :vpc_endpoint_association,
       :vpc_endpoint_association_status,
       keyword_init: true
@@ -1655,6 +1722,7 @@ module Aws::NetworkFirewall
     #   <p>The value to use in the custom metric dimension.</p>
     #   @return [String]
     class Dimension < Struct.new(
+      nil,
       :value,
       keyword_init: true
     )
@@ -1678,6 +1746,7 @@ module Aws::NetworkFirewall
     #   <p>Required. The Availability Zones to remove from the firewall's configuration.</p>
     #   @return [Array<Types::AvailabilityZoneMapping>]
     class DisassociateAvailabilityZonesRequest < Struct.new(
+      nil,
       :update_token,
       :firewall_arn,
       :firewall_name,
@@ -1702,6 +1771,7 @@ module Aws::NetworkFirewall
     #            <p>To make a conditional change to the firewall, provide the token in your update request. Network Firewall uses the token to ensure that the firewall hasn't changed since you last retrieved it. If it has changed, the operation fails with an <code>InvalidTokenException</code>. If this happens, retrieve the firewall again to get a current copy of it with a new token. Reapply your changes as needed, then try the operation again using the new token. </p>
     #   @return [String]
     class DisassociateAvailabilityZonesResponse < Struct.new(
+      nil,
       :firewall_arn,
       :firewall_name,
       :availability_zone_mappings,
@@ -1728,6 +1798,7 @@ module Aws::NetworkFirewall
     #   <p>The unique identifiers for the subnets that you want to disassociate. </p>
     #   @return [Array<String>]
     class DisassociateSubnetsRequest < Struct.new(
+      nil,
       :update_token,
       :firewall_arn,
       :firewall_name,
@@ -1752,6 +1823,7 @@ module Aws::NetworkFirewall
     #            <p>To make a conditional change to the firewall, provide the token in your update request. Network Firewall uses the token to ensure that the firewall hasn't changed since you last retrieved it. If it has changed, the operation fails with an <code>InvalidTokenException</code>. If this happens, retrieve the firewall again to get a current copy of it with a new token. Reapply your changes as needed, then try the operation again using the new token. </p>
     #   @return [String]
     class DisassociateSubnetsResponse < Struct.new(
+      nil,
       :firewall_arn,
       :firewall_name,
       :subnet_mappings,
@@ -1769,6 +1841,7 @@ module Aws::NetworkFirewall
     #   <p>The type of Amazon Web Services KMS key to use for encryption of your Network Firewall resources.</p>
     #   @return [String]
     class EncryptionConfiguration < Struct.new(
+      nil,
       :key_id,
       :type,
       keyword_init: true
@@ -1847,6 +1920,7 @@ module Aws::NetworkFirewall
     #   <p>A setting indicating whether the firewall is protected against changes to its Availability Zone configuration. When set to <code>TRUE</code>, you must first disable this protection before adding or removing Availability Zones.</p>
     #   @return [Boolean]
     class Firewall < Struct.new(
+      nil,
       :firewall_name,
       :firewall_arn,
       :firewall_policy_arn,
@@ -1891,6 +1965,7 @@ module Aws::NetworkFirewall
     #   <p>The unique identifier of the transit gateway attachment associated with this firewall. This field is only present for transit gateway-attached firewalls.</p>
     #   @return [String]
     class FirewallMetadata < Struct.new(
+      nil,
       :firewall_name,
       :firewall_arn,
       :transit_gateway_attachment_id,
@@ -1976,6 +2051,7 @@ module Aws::NetworkFirewall
     #   <p>When true, prevents TCP and TLS packets from reaching destination servers until TLS Inspection has evaluated Server Name Indication (SNI) rules. Requires an associated TLS Inspection configuration.</p>
     #   @return [Boolean]
     class FirewallPolicy < Struct.new(
+      nil,
       :stateless_rule_group_references,
       :stateless_default_actions,
       :stateless_fragment_default_actions,
@@ -2001,6 +2077,7 @@ module Aws::NetworkFirewall
     #   <p>The Amazon Resource Name (ARN) of the firewall policy.</p>
     #   @return [String]
     class FirewallPolicyMetadata < Struct.new(
+      nil,
       :name,
       :arn,
       keyword_init: true
@@ -2050,6 +2127,7 @@ module Aws::NetworkFirewall
     #   <p>The last time that the firewall policy was changed.</p>
     #   @return [Time]
     class FirewallPolicyResponse < Struct.new(
+      nil,
       :firewall_policy_name,
       :firewall_policy_arn,
       :firewall_policy_id,
@@ -2100,6 +2178,7 @@ module Aws::NetworkFirewall
     #   <p>The synchronization state of the transit gateway attachment. This indicates whether the firewall's transit gateway configuration is properly synchronized and operational. Use this to verify that your transit gateway configuration changes have been applied.</p>
     #   @return [Types::TransitGatewayAttachmentSyncState]
     class FirewallStatus < Struct.new(
+      nil,
       :status,
       :configuration_sync_state_summary,
       :sync_states,
@@ -2142,6 +2221,7 @@ module Aws::NetworkFirewall
     #   <p>Returns the number of bytes received or transmitted in a specific flow.</p>
     #   @return [Integer]
     class Flow < Struct.new(
+      nil,
       :source_address,
       :destination_address,
       :source_port,
@@ -2182,6 +2262,7 @@ module Aws::NetworkFirewall
     #    for each protocol. If not specified, this matches with any protocol.</p>
     #   @return [Array<String>]
     class FlowFilter < Struct.new(
+      nil,
       :source_address,
       :destination_address,
       :source_port,
@@ -2204,6 +2285,7 @@ module Aws::NetworkFirewall
     #   <p>Defines the scope a flow operation. You can use up to 20 filters to configure a single flow operation.</p>
     #   @return [Array<Types::FlowFilter>]
     class FlowOperation < Struct.new(
+      nil,
       :minimum_flow_age_in_seconds,
       :flow_filters,
       keyword_init: true
@@ -2227,6 +2309,7 @@ module Aws::NetworkFirewall
     #   If the status is <code>FAILED</code>, <code>Flows</code> returned will be empty.</p>
     #   @return [String]
     class FlowOperationMetadata < Struct.new(
+      nil,
       :flow_operation_id,
       :flow_operation_type,
       :flow_request_timestamp,
@@ -2248,6 +2331,7 @@ module Aws::NetworkFirewall
     #         </p>
     #   @return [Integer]
     class FlowTimeouts < Struct.new(
+      nil,
       :tcp_idle_timeout_seconds,
       keyword_init: true
     )
@@ -2276,6 +2360,7 @@ module Aws::NetworkFirewall
     #            <code>NextToken</code> value that you can use in a subsequent call to get the next batch of objects.</p>
     #   @return [Integer]
     class GetAnalysisReportResultsRequest < Struct.new(
+      nil,
       :firewall_name,
       :analysis_report_id,
       :firewall_arn,
@@ -2312,6 +2397,7 @@ module Aws::NetworkFirewall
     #   <p>Retrieves the results of a traffic analysis report.</p>
     #   @return [Array<Types::AnalysisTypeReportResult>]
     class GetAnalysisReportResultsResponse < Struct.new(
+      nil,
       :status,
       :start_time,
       :end_time,
@@ -2391,6 +2477,7 @@ module Aws::NetworkFirewall
     #    To match with any port, specify <code>ANY</code>.</p>
     #   @return [String]
     class Header < Struct.new(
+      nil,
       :protocol,
       :source,
       :source_port,
@@ -2407,6 +2494,7 @@ module Aws::NetworkFirewall
     #   <p>The number of attempts made to access a domain.</p>
     #   @return [Integer]
     class Hits < Struct.new(
+      nil,
       :count,
       keyword_init: true
     )
@@ -2425,6 +2513,7 @@ module Aws::NetworkFirewall
     #         </p>
     #   @return [Array<String>]
     class IPSet < Struct.new(
+      nil,
       :definition,
       keyword_init: true
     )
@@ -2436,6 +2525,7 @@ module Aws::NetworkFirewall
     #   <p>Describes the total number of CIDR blocks currently in use by the IP set references in a firewall. To determine how many CIDR blocks are available for you to use in a firewall, you can call <code>AvailableCIDRCount</code>.</p>
     #   @return [Integer]
     class IPSetMetadata < Struct.new(
+      nil,
       :resolved_cidr_count,
       keyword_init: true
     )
@@ -2450,6 +2540,7 @@ module Aws::NetworkFirewall
     #   <p>The Amazon Resource Name (ARN) of the resource that you are referencing in your rule group.</p>
     #   @return [String]
     class IPSetReference < Struct.new(
+      nil,
       :reference_arn,
       keyword_init: true
     )
@@ -2461,6 +2552,7 @@ module Aws::NetworkFirewall
     # @!attribute message
     #   @return [String]
     class InsufficientCapacityException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -2472,6 +2564,7 @@ module Aws::NetworkFirewall
     # @!attribute message
     #   @return [String]
     class InternalServerError < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -2483,6 +2576,7 @@ module Aws::NetworkFirewall
     # @!attribute message
     #   @return [String]
     class InvalidOperationException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -2506,6 +2600,7 @@ module Aws::NetworkFirewall
     # @!attribute message
     #   @return [String]
     class InvalidRequestException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -2516,6 +2611,7 @@ module Aws::NetworkFirewall
     # @!attribute message
     #   @return [String]
     class InvalidResourcePolicyException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -2526,6 +2622,7 @@ module Aws::NetworkFirewall
     # @!attribute message
     #   @return [String]
     class InvalidTokenException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -2536,6 +2633,7 @@ module Aws::NetworkFirewall
     # @!attribute message
     #   @return [String]
     class LimitExceededException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -2561,6 +2659,7 @@ module Aws::NetworkFirewall
     #            <code>NextToken</code> value that you can use in a subsequent call to get the next batch of objects.</p>
     #   @return [Integer]
     class ListAnalysisReportsRequest < Struct.new(
+      nil,
       :firewall_name,
       :firewall_arn,
       :next_token,
@@ -2579,6 +2678,7 @@ module Aws::NetworkFirewall
     #            value in the response. To retrieve the next batch of objects, use the token returned from the prior request in your next request.</p>
     #   @return [String]
     class ListAnalysisReportsResponse < Struct.new(
+      nil,
       :analysis_reports,
       :next_token,
       keyword_init: true
@@ -2597,6 +2697,7 @@ module Aws::NetworkFirewall
     #            <code>NextToken</code> value that you can use in a subsequent call to get the next batch of objects.</p>
     #   @return [Integer]
     class ListFirewallPoliciesRequest < Struct.new(
+      nil,
       :next_token,
       :max_results,
       keyword_init: true
@@ -2614,6 +2715,7 @@ module Aws::NetworkFirewall
     #            the number of firewall policies that you have, this might not be the full list. </p>
     #   @return [Array<Types::FirewallPolicyMetadata>]
     class ListFirewallPoliciesResponse < Struct.new(
+      nil,
       :next_token,
       :firewall_policies,
       keyword_init: true
@@ -2636,6 +2738,7 @@ module Aws::NetworkFirewall
     #            <code>NextToken</code> value that you can use in a subsequent call to get the next batch of objects.</p>
     #   @return [Integer]
     class ListFirewallsRequest < Struct.new(
+      nil,
       :next_token,
       :vpc_ids,
       :max_results,
@@ -2655,6 +2758,7 @@ module Aws::NetworkFirewall
     #            list. </p>
     #   @return [Array<Types::FirewallMetadata>]
     class ListFirewallsResponse < Struct.new(
+      nil,
       :next_token,
       :firewalls,
       keyword_init: true
@@ -2689,6 +2793,7 @@ module Aws::NetworkFirewall
     #   <p>The Amazon Resource Name (ARN) of a VPC endpoint association.</p>
     #   @return [String]
     class ListFlowOperationResultsRequest < Struct.new(
+      nil,
       :firewall_arn,
       :flow_operation_id,
       :next_token,
@@ -2739,6 +2844,7 @@ module Aws::NetworkFirewall
     #            value in the response. To retrieve the next batch of objects, use the token returned from the prior request in your next request.</p>
     #   @return [String]
     class ListFlowOperationResultsResponse < Struct.new(
+      nil,
       :firewall_arn,
       :availability_zone,
       :vpc_endpoint_association_arn,
@@ -2781,6 +2887,7 @@ module Aws::NetworkFirewall
     #            <code>NextToken</code> value that you can use in a subsequent call to get the next batch of objects.</p>
     #   @return [Integer]
     class ListFlowOperationsRequest < Struct.new(
+      nil,
       :firewall_arn,
       :availability_zone,
       :vpc_endpoint_association_arn,
@@ -2804,6 +2911,7 @@ module Aws::NetworkFirewall
     #            value in the response. To retrieve the next batch of objects, use the token returned from the prior request in your next request.</p>
     #   @return [String]
     class ListFlowOperationsResponse < Struct.new(
+      nil,
       :flow_operations,
       :next_token,
       keyword_init: true
@@ -2833,6 +2941,7 @@ module Aws::NetworkFirewall
     #   <p>Indicates whether the rule group is stateless or stateful. If the rule group is stateless, it contains stateless rules. If it is stateful, it contains stateful rules.</p>
     #   @return [String]
     class ListRuleGroupsRequest < Struct.new(
+      nil,
       :next_token,
       :max_results,
       :scope,
@@ -2853,6 +2962,7 @@ module Aws::NetworkFirewall
     #            results and the number of rule groups, this might not be the full list. </p>
     #   @return [Array<Types::RuleGroupMetadata>]
     class ListRuleGroupsResponse < Struct.new(
+      nil,
       :next_token,
       :rule_groups,
       keyword_init: true
@@ -2871,6 +2981,7 @@ module Aws::NetworkFirewall
     #            <code>NextToken</code> value that you can use in a subsequent call to get the next batch of objects.</p>
     #   @return [Integer]
     class ListTLSInspectionConfigurationsRequest < Struct.new(
+      nil,
       :next_token,
       :max_results,
       keyword_init: true
@@ -2887,6 +2998,7 @@ module Aws::NetworkFirewall
     #   <p>The TLS inspection configuration metadata objects that you've defined. Depending on your setting for max results and the number of TLS inspection configurations, this might not be the full list.</p>
     #   @return [Array<Types::TLSInspectionConfigurationMetadata>]
     class ListTLSInspectionConfigurationsResponse < Struct.new(
+      nil,
       :next_token,
       :tls_inspection_configurations,
       keyword_init: true
@@ -2908,6 +3020,7 @@ module Aws::NetworkFirewall
     #   <p>The Amazon Resource Name (ARN) of the resource.</p>
     #   @return [String]
     class ListTagsForResourceRequest < Struct.new(
+      nil,
       :next_token,
       :max_results,
       :resource_arn,
@@ -2925,6 +3038,7 @@ module Aws::NetworkFirewall
     #   <p>The tags that are associated with the resource. </p>
     #   @return [Array<Types::Tag>]
     class ListTagsForResourceResponse < Struct.new(
+      nil,
       :next_token,
       :tags,
       keyword_init: true
@@ -2947,6 +3061,7 @@ module Aws::NetworkFirewall
     #            <p>If you don't specify this, Network Firewall retrieves all VPC endpoint associations that you have defined.</p>
     #   @return [String]
     class ListVpcEndpointAssociationsRequest < Struct.new(
+      nil,
       :next_token,
       :max_results,
       :firewall_arn,
@@ -2968,6 +3083,7 @@ module Aws::NetworkFirewall
     #            list. </p>
     #   @return [Array<Types::VpcEndpointAssociationMetadata>]
     class ListVpcEndpointAssociationsResponse < Struct.new(
+      nil,
       :next_token,
       :vpc_endpoint_associations,
       keyword_init: true
@@ -3035,6 +3151,7 @@ module Aws::NetworkFirewall
     #            </ul>
     #   @return [Hash<String, String>]
     class LogDestinationConfig < Struct.new(
+      nil,
       :log_type,
       :log_destination_type,
       :log_destination,
@@ -3047,6 +3164,7 @@ module Aws::NetworkFirewall
     # @!attribute message
     #   @return [String]
     class LogDestinationPermissionException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -3059,6 +3177,7 @@ module Aws::NetworkFirewall
     #            logs for stateful rule groups. </p>
     #   @return [Array<Types::LogDestinationConfig>]
     class LoggingConfiguration < Struct.new(
+      nil,
       :log_destination_configs,
       keyword_init: true
     )
@@ -3096,6 +3215,7 @@ module Aws::NetworkFirewall
     #            settings. This setting is only used for protocol 6 (TCP).</p>
     #   @return [Array<Types::TCPFlagField>]
     class MatchAttributes < Struct.new(
+      nil,
       :sources,
       :destinations,
       :source_ports,
@@ -3118,6 +3238,7 @@ module Aws::NetworkFirewall
     #   <p>The current version of the object that is either in sync or pending synchronization. </p>
     #   @return [String]
     class PerObjectStatus < Struct.new(
+      nil,
       :sync_status,
       :update_token,
       keyword_init: true
@@ -3130,6 +3251,7 @@ module Aws::NetworkFirewall
     #   <p>The IPv4 or IPv6 addresses in CIDR notation to use for the Suricata <code>HOME_NET</code> variable. If your firewall uses an inspection VPC, you might want to override the <code>HOME_NET</code> variable with the CIDRs of your home networks. If you don't override <code>HOME_NET</code> with your own CIDRs, Network Firewall by default uses the CIDR of your inspection VPC.</p>
     #   @return [Hash<String, Types::IPSet>]
     class PolicyVariables < Struct.new(
+      nil,
       :rule_variables,
       keyword_init: true
     )
@@ -3148,6 +3270,7 @@ module Aws::NetworkFirewall
     #               <code>FromPort</code> specification. </p>
     #   @return [Integer]
     class PortRange < Struct.new(
+      nil,
       :from_port,
       :to_port,
       keyword_init: true
@@ -3167,6 +3290,7 @@ module Aws::NetworkFirewall
     #         </p>
     #   @return [Array<String>]
     class PortSet < Struct.new(
+      nil,
       :definition,
       keyword_init: true
     )
@@ -3179,6 +3303,7 @@ module Aws::NetworkFirewall
     #   <p></p>
     #   @return [Array<Types::Dimension>]
     class PublishMetricAction < Struct.new(
+      nil,
       :dimensions,
       keyword_init: true
     )
@@ -3227,6 +3352,7 @@ module Aws::NetworkFirewall
     #            <p>In the Resource section of the statement, you specify the ARNs for the Network Firewall resources that you want to share with the account that you specified in <code>Arn</code>.</p>
     #   @return [String]
     class PutResourcePolicyRequest < Struct.new(
+      nil,
       :resource_arn,
       :policy,
       keyword_init: true
@@ -3235,6 +3361,7 @@ module Aws::NetworkFirewall
     end
 
     class PutResourcePolicyResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -3245,6 +3372,7 @@ module Aws::NetworkFirewall
     #   <p>The list of IP set references.</p>
     #   @return [Hash<String, Types::IPSetReference>]
     class ReferenceSets < Struct.new(
+      nil,
       :ip_set_references,
       keyword_init: true
     )
@@ -3255,6 +3383,7 @@ module Aws::NetworkFirewall
     #   <p>Required. The unique identifier of the transit gateway attachment to reject. This ID is returned in the response when creating a transit gateway-attached firewall.</p>
     #   @return [String]
     class RejectNetworkFirewallTransitGatewayAttachmentRequest < Struct.new(
+      nil,
       :transit_gateway_attachment_id,
       keyword_init: true
     )
@@ -3307,6 +3436,7 @@ module Aws::NetworkFirewall
     #            <p>For information about troubleshooting endpoint failures, see <a href="https://docs.aws.amazon.com/network-firewall/latest/developerguide/firewall-troubleshooting-endpoint-failures.html">Troubleshooting firewall endpoint failures</a> in the <i>Network Firewall Developer Guide</i>.</p>
     #   @return [String]
     class RejectNetworkFirewallTransitGatewayAttachmentResponse < Struct.new(
+      nil,
       :transit_gateway_attachment_id,
       :transit_gateway_attachment_status,
       keyword_init: true
@@ -3318,6 +3448,7 @@ module Aws::NetworkFirewall
     # @!attribute message
     #   @return [String]
     class ResourceNotFoundException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -3328,6 +3459,7 @@ module Aws::NetworkFirewall
     # @!attribute message
     #   @return [String]
     class ResourceOwnerCheckException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -3380,6 +3512,7 @@ module Aws::NetworkFirewall
     #               “MyMetricsAction”]</code>. </p>
     #   @return [Array<String>]
     class RuleDefinition < Struct.new(
+      nil,
       :match_attributes,
       :actions,
       keyword_init: true
@@ -3408,6 +3541,7 @@ module Aws::NetworkFirewall
     #          rule group must have stateful rule options settings that are compatible with these settings. Some limitations apply; for more information, see <a href="https://docs.aws.amazon.com/network-firewall/latest/developerguide/suricata-limitations-caveats.html">Strict evaluation order</a> in the <i>Network Firewall Developer Guide</i>.</p>
     #   @return [Types::StatefulRuleOptions]
     class RuleGroup < Struct.new(
+      nil,
       :rule_variables,
       :reference_sets,
       :rules_source,
@@ -3427,6 +3561,7 @@ module Aws::NetworkFirewall
     #   <p>The Amazon Resource Name (ARN) of the rule group.</p>
     #   @return [String]
     class RuleGroupMetadata < Struct.new(
+      nil,
       :name,
       :arn,
       keyword_init: true
@@ -3506,6 +3641,7 @@ module Aws::NetworkFirewall
     #            </ul>
     #   @return [Types::SummaryConfiguration]
     class RuleGroupResponse < Struct.new(
+      nil,
       :rule_group_arn,
       :rule_group_name,
       :rule_group_id,
@@ -3535,6 +3671,7 @@ module Aws::NetworkFirewall
     #   <p>The settings of the Suricata compatible rule option. Rule options have zero or more setting values, and the number of possible and required settings depends on the <code>Keyword</code>. For more information about the settings for specific options, see <a href="https://suricata.readthedocs.io/en/suricata-7.0.3/rules/intro.html#rule-options">Rule options</a>.</p>
     #   @return [Array<String>]
     class RuleOption < Struct.new(
+      nil,
       :keyword,
       :settings,
       keyword_init: true
@@ -3571,6 +3708,7 @@ module Aws::NetworkFirewall
     #   <p>The contents of the rule's metadata.</p>
     #   @return [String]
     class RuleSummary < Struct.new(
+      nil,
       :sid,
       :msg,
       :metadata,
@@ -3588,6 +3726,7 @@ module Aws::NetworkFirewall
     #   <p>A list of port ranges. </p>
     #   @return [Hash<String, Types::PortSet>]
     class RuleVariables < Struct.new(
+      nil,
       :ip_sets,
       :port_sets,
       keyword_init: true
@@ -3621,6 +3760,7 @@ module Aws::NetworkFirewall
     #   <p>Stateless inspection criteria to be used in a stateless rule group. </p>
     #   @return [Types::StatelessRulesAndCustomActions]
     class RulesSource < Struct.new(
+      nil,
       :rules_string,
       :rules_source_list,
       :stateful_rules,
@@ -3656,6 +3796,7 @@ module Aws::NetworkFirewall
     #            </note>
     #   @return [String]
     class RulesSourceList < Struct.new(
+      nil,
       :targets,
       :target_types,
       :generated_rules_type,
@@ -3669,6 +3810,7 @@ module Aws::NetworkFirewall
     #   <p>The Amazon Resource Name (ARN) of the Certificate Manager SSL/TLS server certificate that's used for inbound SSL/TLS inspection.</p>
     #   @return [String]
     class ServerCertificate < Struct.new(
+      nil,
       :resource_arn,
       keyword_init: true
     )
@@ -3703,6 +3845,7 @@ module Aws::NetworkFirewall
     #   <p>When enabled, Network Firewall checks if the server certificate presented by the server in the SSL/TLS connection has a revoked or unkown status. If the certificate has an unknown or revoked status, you must specify the actions that Network Firewall takes on outbound traffic. To check the certificate revocation status, you must also specify a <code>CertificateAuthorityArn</code> in <a>ServerCertificateConfiguration</a>.</p>
     #   @return [Types::CheckCertificateRevocationStatusActions]
     class ServerCertificateConfiguration < Struct.new(
+      nil,
       :server_certificates,
       :scopes,
       :certificate_authority_arn,
@@ -3735,6 +3878,7 @@ module Aws::NetworkFirewall
     #            <p>Network Firewall currently supports only TCP.</p>
     #   @return [Array<Integer>]
     class ServerCertificateScope < Struct.new(
+      nil,
       :sources,
       :destinations,
       :source_ports,
@@ -3753,6 +3897,7 @@ module Aws::NetworkFirewall
     #   <p>The update token of the Amazon Web Services managed rule group that your own rule group is copied from. To determine the update token for the managed rule group, call <a href="https://docs.aws.amazon.com/network-firewall/latest/APIReference/API_DescribeRuleGroup.html#networkfirewall-DescribeRuleGroup-response-UpdateToken">DescribeRuleGroup</a>.</p>
     #   @return [String]
     class SourceMetadata < Struct.new(
+      nil,
       :source_arn,
       :source_update_token,
       keyword_init: true
@@ -3772,6 +3917,7 @@ module Aws::NetworkFirewall
     #   <p>The type of traffic that will be used to generate a report. </p>
     #   @return [String]
     class StartAnalysisReportRequest < Struct.new(
+      nil,
       :firewall_name,
       :firewall_arn,
       :analysis_type,
@@ -3784,6 +3930,7 @@ module Aws::NetworkFirewall
     #   <p>The unique ID of the query that ran when you requested an analysis report. </p>
     #   @return [String]
     class StartAnalysisReportResponse < Struct.new(
+      nil,
       :analysis_report_id,
       keyword_init: true
     )
@@ -3814,6 +3961,7 @@ module Aws::NetworkFirewall
     #   <p>Defines the scope a flow operation. You can use up to 20 filters to configure a single flow operation.</p>
     #   @return [Array<Types::FlowFilter>]
     class StartFlowCaptureRequest < Struct.new(
+      nil,
       :firewall_arn,
       :availability_zone,
       :vpc_endpoint_association_arn,
@@ -3837,6 +3985,7 @@ module Aws::NetworkFirewall
     #   If the status is <code>FAILED</code>, <code>Flows</code> returned will be empty.</p>
     #   @return [String]
     class StartFlowCaptureResponse < Struct.new(
+      nil,
       :firewall_arn,
       :flow_operation_id,
       :flow_operation_status,
@@ -3866,6 +4015,7 @@ module Aws::NetworkFirewall
     #   <p>Defines the scope a flow operation. You can use up to 20 filters to configure a single flow operation.</p>
     #   @return [Array<Types::FlowFilter>]
     class StartFlowFlushRequest < Struct.new(
+      nil,
       :firewall_arn,
       :availability_zone,
       :vpc_endpoint_association_arn,
@@ -3889,6 +4039,7 @@ module Aws::NetworkFirewall
     #   If the status is <code>FAILED</code>, <code>Flows</code> returned will be empty.</p>
     #   @return [String]
     class StartFlowFlushResponse < Struct.new(
+      nil,
       :firewall_arn,
       :flow_operation_id,
       :flow_operation_status,
@@ -3932,6 +4083,7 @@ module Aws::NetworkFirewall
     #           </p>
     #   @return [Types::FlowTimeouts]
     class StatefulEngineOptions < Struct.new(
+      nil,
       :rule_order,
       :stream_exception_policy,
       :flow_timeouts,
@@ -3983,6 +4135,7 @@ module Aws::NetworkFirewall
     #   <p>Additional options for the rule. These are the Suricata <code>RuleOptions</code> settings.</p>
     #   @return [Array<Types::RuleOption>]
     class StatefulRule < Struct.new(
+      nil,
       :action,
       :header,
       :rule_options,
@@ -3997,6 +4150,7 @@ module Aws::NetworkFirewall
     #         managed rule groups.</p>
     #   @return [String]
     class StatefulRuleGroupOverride < Struct.new(
+      nil,
       :action,
       keyword_init: true
     )
@@ -4030,6 +4184,7 @@ module Aws::NetworkFirewall
     #            </note>
     #   @return [Boolean]
     class StatefulRuleGroupReference < Struct.new(
+      nil,
       :resource_arn,
       :priority,
       :override,
@@ -4048,6 +4203,7 @@ module Aws::NetworkFirewall
     #         </p>
     #   @return [String]
     class StatefulRuleOptions < Struct.new(
+      nil,
       :rule_order,
       keyword_init: true
     )
@@ -4074,6 +4230,7 @@ module Aws::NetworkFirewall
     #            200, and so on. </p>
     #   @return [Integer]
     class StatelessRule < Struct.new(
+      nil,
       :rule_definition,
       :priority,
       keyword_init: true
@@ -4093,6 +4250,7 @@ module Aws::NetworkFirewall
     #            that the priority settings are unique within each policy.</p>
     #   @return [Integer]
     class StatelessRuleGroupReference < Struct.new(
+      nil,
       :resource_arn,
       :priority,
       keyword_init: true
@@ -4113,6 +4271,7 @@ module Aws::NetworkFirewall
     #               <code>Actions</code> specification.</p>
     #   @return [Array<Types::CustomAction>]
     class StatelessRulesAndCustomActions < Struct.new(
+      nil,
       :stateless_rules,
       :custom_actions,
       keyword_init: true
@@ -4131,6 +4290,7 @@ module Aws::NetworkFirewall
     #   <p>The subnet's IP address type. You can't change the IP address type after you create the subnet.</p>
     #   @return [String]
     class SubnetMapping < Struct.new(
+      nil,
       :subnet_id,
       :ip_address_type,
       keyword_init: true
@@ -4144,6 +4304,7 @@ module Aws::NetworkFirewall
     #   <p>An array of <a>RuleSummary</a> objects containing individual rule details that had been configured by the rulegroup's SummaryConfiguration.</p>
     #   @return [Array<Types::RuleSummary>]
     class Summary < Struct.new(
+      nil,
       :rule_summaries,
       keyword_init: true
     )
@@ -4162,6 +4323,7 @@ module Aws::NetworkFirewall
     #   <p>Specifies the selected rule options returned by <a>DescribeRuleGroupSummary</a>.</p>
     #   @return [Array<String>]
     class SummaryConfiguration < Struct.new(
+      nil,
       :rule_options,
       keyword_init: true
     )
@@ -4196,6 +4358,7 @@ module Aws::NetworkFirewall
     #             rules in the endpoint, so it can properly filter network traffic. </p>
     #   @return [Hash<String, Types::PerObjectStatus>]
     class SyncState < Struct.new(
+      nil,
       :attachment,
       :config,
       keyword_init: true
@@ -4220,6 +4383,7 @@ module Aws::NetworkFirewall
     #   <p>The set of flags to consider in the inspection. To inspect all flags in the valid values list, leave this with no setting.</p>
     #   @return [Array<String>]
     class TCPFlagField < Struct.new(
+      nil,
       :flags,
       :masks,
       keyword_init: true
@@ -4236,6 +4400,7 @@ module Aws::NetworkFirewall
     #   <p>Lists the server certificate configurations that are associated with the TLS configuration.</p>
     #   @return [Array<Types::ServerCertificateConfiguration>]
     class TLSInspectionConfiguration < Struct.new(
+      nil,
       :server_certificate_configurations,
       keyword_init: true
     )
@@ -4250,6 +4415,7 @@ module Aws::NetworkFirewall
     #   <p>The Amazon Resource Name (ARN) of the TLS inspection configuration.</p>
     #   @return [String]
     class TLSInspectionConfigurationMetadata < Struct.new(
+      nil,
       :name,
       :arn,
       keyword_init: true
@@ -4292,6 +4458,7 @@ module Aws::NetworkFirewall
     #   <p>Contains metadata about an Certificate Manager certificate.</p>
     #   @return [Types::TlsCertificateData]
     class TLSInspectionConfigurationResponse < Struct.new(
+      nil,
       :tls_inspection_configuration_arn,
       :tls_inspection_configuration_name,
       :tls_inspection_configuration_id,
@@ -4322,6 +4489,7 @@ module Aws::NetworkFirewall
     #            case-sensitive.</p>
     #   @return [String]
     class Tag < Struct.new(
+      nil,
       :key,
       :value,
       keyword_init: true
@@ -4336,6 +4504,7 @@ module Aws::NetworkFirewall
     #   <p></p>
     #   @return [Array<Types::Tag>]
     class TagResourceRequest < Struct.new(
+      nil,
       :resource_arn,
       :tags,
       keyword_init: true
@@ -4344,6 +4513,7 @@ module Aws::NetworkFirewall
     end
 
     class TagResourceResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -4353,6 +4523,7 @@ module Aws::NetworkFirewall
     # @!attribute message
     #   @return [String]
     class ThrottlingException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -4373,6 +4544,7 @@ module Aws::NetworkFirewall
     #   <p>Contains details about the certificate status, including information about certificate errors.</p>
     #   @return [String]
     class TlsCertificateData < Struct.new(
+      nil,
       :certificate_arn,
       :certificate_serial,
       :status,
@@ -4472,6 +4644,7 @@ module Aws::NetworkFirewall
     #            <p>For information about troubleshooting endpoint failures, see <a href="https://docs.aws.amazon.com/network-firewall/latest/developerguide/firewall-troubleshooting-endpoint-failures.html">Troubleshooting firewall endpoint failures</a> in the <i>Network Firewall Developer Guide</i>.</p>
     #   @return [String]
     class TransitGatewayAttachmentSyncState < Struct.new(
+      nil,
       :attachment_id,
       :transit_gateway_attachment_status,
       :status_message,
@@ -4485,6 +4658,7 @@ module Aws::NetworkFirewall
     #   <p>The number of unique source IP addresses that connected to a domain.</p>
     #   @return [Integer]
     class UniqueSources < Struct.new(
+      nil,
       :count,
       keyword_init: true
     )
@@ -4500,6 +4674,7 @@ module Aws::NetworkFirewall
     # @!attribute message
     #   @return [String]
     class UnsupportedOperationException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -4513,6 +4688,7 @@ module Aws::NetworkFirewall
     #   <p></p>
     #   @return [Array<String>]
     class UntagResourceRequest < Struct.new(
+      nil,
       :resource_arn,
       :tag_keys,
       keyword_init: true
@@ -4521,6 +4697,7 @@ module Aws::NetworkFirewall
     end
 
     class UntagResourceResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -4545,6 +4722,7 @@ module Aws::NetworkFirewall
     #            accidentally modifying the subnet associations for a firewall that is in use. When you create a firewall, the operation initializes this setting to <code>TRUE</code>.</p>
     #   @return [Boolean]
     class UpdateAvailabilityZoneChangeProtectionRequest < Struct.new(
+      nil,
       :update_token,
       :firewall_arn,
       :firewall_name,
@@ -4571,6 +4749,7 @@ module Aws::NetworkFirewall
     #            accidentally modifying the subnet associations for a firewall that is in use. When you create a firewall, the operation initializes this setting to <code>TRUE</code>.</p>
     #   @return [Boolean]
     class UpdateAvailabilityZoneChangeProtectionResponse < Struct.new(
+      nil,
       :update_token,
       :firewall_arn,
       :firewall_name,
@@ -4602,6 +4781,7 @@ module Aws::NetworkFirewall
     #            <p>To make a conditional change to the firewall, provide the token in your update request. Network Firewall uses the token to ensure that the firewall hasn't changed since you last retrieved it. If it has changed, the operation fails with an <code>InvalidTokenException</code>. If this happens, retrieve the firewall again to get a current copy of it with a new token. Reapply your changes as needed, then try the operation again using the new token. </p>
     #   @return [String]
     class UpdateFirewallAnalysisSettingsRequest < Struct.new(
+      nil,
       :enabled_analysis_types,
       :firewall_arn,
       :firewall_name,
@@ -4628,6 +4808,7 @@ module Aws::NetworkFirewall
     #            <p>To make a conditional change to the firewall, provide the token in your update request. Network Firewall uses the token to ensure that the firewall hasn't changed since you last retrieved it. If it has changed, the operation fails with an <code>InvalidTokenException</code>. If this happens, retrieve the firewall again to get a current copy of it with a new token. Reapply your changes as needed, then try the operation again using the new token. </p>
     #   @return [String]
     class UpdateFirewallAnalysisSettingsResponse < Struct.new(
+      nil,
       :enabled_analysis_types,
       :firewall_arn,
       :firewall_name,
@@ -4656,6 +4837,7 @@ module Aws::NetworkFirewall
     #            accidentally deleting a firewall that is in use. When you create a firewall, the operation initializes this flag to <code>TRUE</code>.</p>
     #   @return [Boolean]
     class UpdateFirewallDeleteProtectionRequest < Struct.new(
+      nil,
       :update_token,
       :firewall_arn,
       :firewall_name,
@@ -4682,6 +4864,7 @@ module Aws::NetworkFirewall
     #            <p>To make a conditional change to the firewall, provide the token in your update request. Network Firewall uses the token to ensure that the firewall hasn't changed since you last retrieved it. If it has changed, the operation fails with an <code>InvalidTokenException</code>. If this happens, retrieve the firewall again to get a current copy of it with a new token. Reapply your changes as needed, then try the operation again using the new token. </p>
     #   @return [String]
     class UpdateFirewallDeleteProtectionResponse < Struct.new(
+      nil,
       :firewall_arn,
       :firewall_name,
       :delete_protection,
@@ -4714,6 +4897,7 @@ module Aws::NetworkFirewall
     #            the description for the firewall.</p>
     #   @return [String]
     class UpdateFirewallDescriptionRequest < Struct.new(
+      nil,
       :update_token,
       :firewall_arn,
       :firewall_name,
@@ -4738,6 +4922,7 @@ module Aws::NetworkFirewall
     #            <p>To make a conditional change to the firewall, provide the token in your update request. Network Firewall uses the token to ensure that the firewall hasn't changed since you last retrieved it. If it has changed, the operation fails with an <code>InvalidTokenException</code>. If this happens, retrieve the firewall again to get a current copy of it with a new token. Reapply your changes as needed, then try the operation again using the new token. </p>
     #   @return [String]
     class UpdateFirewallDescriptionResponse < Struct.new(
+      nil,
       :firewall_arn,
       :firewall_name,
       :description,
@@ -4762,6 +4947,7 @@ module Aws::NetworkFirewall
     #   <p>A complex type that contains optional Amazon Web Services Key Management Service (KMS) encryption settings for your Network Firewall resources. Your data is encrypted by default with an Amazon Web Services owned key that Amazon Web Services owns and manages for you. You can use either the Amazon Web Services owned key, or provide your own customer managed key. To learn more about KMS encryption of your Network Firewall resources, see <a href="https://docs.aws.amazon.com/kms/latest/developerguide/kms-encryption-at-rest.html">Encryption at rest with Amazon Web Services Key Managment Service</a> in the <i>Network Firewall Developer Guide</i>.</p>
     #   @return [Types::EncryptionConfiguration]
     class UpdateFirewallEncryptionConfigurationRequest < Struct.new(
+      nil,
       :update_token,
       :firewall_arn,
       :firewall_name,
@@ -4786,6 +4972,7 @@ module Aws::NetworkFirewall
     #   <p>A complex type that contains optional Amazon Web Services Key Management Service (KMS) encryption settings for your Network Firewall resources. Your data is encrypted by default with an Amazon Web Services owned key that Amazon Web Services owns and manages for you. You can use either the Amazon Web Services owned key, or provide your own customer managed key. To learn more about KMS encryption of your Network Firewall resources, see <a href="https://docs.aws.amazon.com/kms/latest/developerguide/kms-encryption-at-rest.html">Encryption at rest with Amazon Web Services Key Managment Service</a> in the <i>Network Firewall Developer Guide</i>.</p>
     #   @return [Types::EncryptionConfiguration]
     class UpdateFirewallEncryptionConfigurationResponse < Struct.new(
+      nil,
       :firewall_arn,
       :firewall_name,
       :update_token,
@@ -4814,6 +5001,7 @@ module Aws::NetworkFirewall
     #            accidentally modifying the firewall policy for a firewall that is in use. When you create a firewall, the operation initializes this setting to <code>TRUE</code>.</p>
     #   @return [Boolean]
     class UpdateFirewallPolicyChangeProtectionRequest < Struct.new(
+      nil,
       :update_token,
       :firewall_arn,
       :firewall_name,
@@ -4840,6 +5028,7 @@ module Aws::NetworkFirewall
     #            accidentally modifying the firewall policy for a firewall that is in use. When you create a firewall, the operation initializes this setting to <code>TRUE</code>.</p>
     #   @return [Boolean]
     class UpdateFirewallPolicyChangeProtectionResponse < Struct.new(
+      nil,
       :update_token,
       :firewall_arn,
       :firewall_name,
@@ -4884,6 +5073,7 @@ module Aws::NetworkFirewall
     #   <p>A complex type that contains settings for encryption of your firewall policy resources.</p>
     #   @return [Types::EncryptionConfiguration]
     class UpdateFirewallPolicyRequest < Struct.new(
+      nil,
       :update_token,
       :firewall_policy_arn,
       :firewall_policy_name,
@@ -4904,6 +5094,7 @@ module Aws::NetworkFirewall
     #   <p>The high-level properties of a firewall policy. This, along with the <a>FirewallPolicy</a>, define the policy. You can retrieve all objects for a firewall policy by calling <a>DescribeFirewallPolicy</a>. </p>
     #   @return [Types::FirewallPolicyResponse]
     class UpdateFirewallPolicyResponse < Struct.new(
+      nil,
       :update_token,
       :firewall_policy_response,
       keyword_init: true
@@ -4933,6 +5124,7 @@ module Aws::NetworkFirewall
     #         </p>
     #   @return [Boolean]
     class UpdateLoggingConfigurationRequest < Struct.new(
+      nil,
       :firewall_arn,
       :firewall_name,
       :logging_configuration,
@@ -4959,6 +5151,7 @@ module Aws::NetworkFirewall
     #         </p>
     #   @return [Boolean]
     class UpdateLoggingConfigurationResponse < Struct.new(
+      nil,
       :firewall_arn,
       :firewall_name,
       :logging_configuration,
@@ -5027,6 +5220,7 @@ module Aws::NetworkFirewall
     #            <p>Changes affect subsequent responses from <a>DescribeRuleGroupSummary</a>.</p>
     #   @return [Types::SummaryConfiguration]
     class UpdateRuleGroupRequest < Struct.new(
+      nil,
       :update_token,
       :rule_group_arn,
       :rule_group_name,
@@ -5052,6 +5246,7 @@ module Aws::NetworkFirewall
     #   <p>The high-level properties of a rule group. This, along with the <a>RuleGroup</a>, define the rule group. You can retrieve all objects for a rule group by calling <a>DescribeRuleGroup</a>. </p>
     #   @return [Types::RuleGroupResponse]
     class UpdateRuleGroupResponse < Struct.new(
+      nil,
       :update_token,
       :rule_group_response,
       keyword_init: true
@@ -5078,6 +5273,7 @@ module Aws::NetworkFirewall
     #            accidentally modifying the subnet associations for a firewall that is in use. When you create a firewall, the operation initializes this setting to <code>TRUE</code>.</p>
     #   @return [Boolean]
     class UpdateSubnetChangeProtectionRequest < Struct.new(
+      nil,
       :update_token,
       :firewall_arn,
       :firewall_name,
@@ -5104,6 +5300,7 @@ module Aws::NetworkFirewall
     #            accidentally modifying the subnet associations for a firewall that is in use. When you create a firewall, the operation initializes this setting to <code>TRUE</code>.</p>
     #   @return [Boolean]
     class UpdateSubnetChangeProtectionResponse < Struct.new(
+      nil,
       :update_token,
       :firewall_arn,
       :firewall_name,
@@ -5142,6 +5339,7 @@ module Aws::NetworkFirewall
     #            <p>To make changes to the TLS inspection configuration, you provide the token in your request. Network Firewall uses the token to ensure that the TLS inspection configuration hasn't changed since you last retrieved it. If it has changed, the operation fails with an <code>InvalidTokenException</code>. If this happens, retrieve the TLS inspection configuration again to get a current copy of it with a current token. Reapply your changes as needed, then try the operation again using the new token. </p>
     #   @return [String]
     class UpdateTLSInspectionConfigurationRequest < Struct.new(
+      nil,
       :tls_inspection_configuration_arn,
       :tls_inspection_configuration_name,
       :tls_inspection_configuration,
@@ -5161,6 +5359,7 @@ module Aws::NetworkFirewall
     #   <p>The high-level properties of a TLS inspection configuration. This, along with the <a>TLSInspectionConfiguration</a>, define the TLS inspection configuration. You can retrieve all objects for a TLS inspection configuration by calling <a>DescribeTLSInspectionConfiguration</a>. </p>
     #   @return [Types::TLSInspectionConfigurationResponse]
     class UpdateTLSInspectionConfigurationResponse < Struct.new(
+      nil,
       :update_token,
       :tls_inspection_configuration_response,
       keyword_init: true
@@ -5220,6 +5419,7 @@ module Aws::NetworkFirewall
     #   <p>The key:value pairs to associate with the resource.</p>
     #   @return [Array<Types::Tag>]
     class VpcEndpointAssociation < Struct.new(
+      nil,
       :vpc_endpoint_association_id,
       :vpc_endpoint_association_arn,
       :firewall_arn,
@@ -5237,6 +5437,7 @@ module Aws::NetworkFirewall
     #   <p>The Amazon Resource Name (ARN) of a VPC endpoint association.</p>
     #   @return [String]
     class VpcEndpointAssociationMetadata < Struct.new(
+      nil,
       :vpc_endpoint_association_arn,
       keyword_init: true
     )
@@ -5252,6 +5453,7 @@ module Aws::NetworkFirewall
     #   <p>The list of the Availability Zone sync states for all subnets that are defined by the firewall. </p>
     #   @return [Hash<String, Types::AZSyncState>]
     class VpcEndpointAssociationStatus < Struct.new(
+      nil,
       :status,
       :association_sync_state,
       keyword_init: true

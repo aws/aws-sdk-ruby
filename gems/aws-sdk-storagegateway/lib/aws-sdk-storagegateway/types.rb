@@ -116,6 +116,7 @@ module Aws::StorageGateway
     #            </note>
     #   @return [Array<Types::Tag>]
     class ActivateGatewayInput < Struct.new(
+      nil,
       :activation_key,
       :gateway_name,
       :gateway_timezone,
@@ -142,6 +143,7 @@ module Aws::StorageGateway
     #            operation to return a list of gateways for your account and Amazon Web Services Region.</p>
     #   @return [String]
     class ActivateGatewayOutput < Struct.new(
+      nil,
       :gateway_arn,
       keyword_init: true
     )
@@ -158,6 +160,7 @@ module Aws::StorageGateway
     #            from the <a>ListLocalDisks</a> API.</p>
     #   @return [Array<String>]
     class AddCacheInput < Struct.new(
+      nil,
       :gateway_arn,
       :disk_ids,
       keyword_init: true
@@ -170,6 +173,7 @@ module Aws::StorageGateway
     #            operation to return a list of gateways for your account and Amazon Web Services Region.</p>
     #   @return [String]
     class AddCacheOutput < Struct.new(
+      nil,
       :gateway_arn,
       keyword_init: true
     )
@@ -191,6 +195,7 @@ module Aws::StorageGateway
     #            </note>
     #   @return [Array<Types::Tag>]
     class AddTagsToResourceInput < Struct.new(
+      nil,
       :resource_arn,
       :tags,
       keyword_init: true
@@ -203,6 +208,7 @@ module Aws::StorageGateway
     #   <p>The Amazon Resource Name (ARN) of the resource you want to add tags to.</p>
     #   @return [String]
     class AddTagsToResourceOutput < Struct.new(
+      nil,
       :resource_arn,
       keyword_init: true
     )
@@ -219,6 +225,7 @@ module Aws::StorageGateway
     #            from the <a>ListLocalDisks</a> API.</p>
     #   @return [Array<String>]
     class AddUploadBufferInput < Struct.new(
+      nil,
       :gateway_arn,
       :disk_ids,
       keyword_init: true
@@ -231,6 +238,7 @@ module Aws::StorageGateway
     #            operation to return a list of gateways for your account and Amazon Web Services Region.</p>
     #   @return [String]
     class AddUploadBufferOutput < Struct.new(
+      nil,
       :gateway_arn,
       keyword_init: true
     )
@@ -255,6 +263,7 @@ module Aws::StorageGateway
     #            from the <a>ListLocalDisks</a> API.</p>
     #   @return [Array<String>]
     class AddWorkingStorageInput < Struct.new(
+      nil,
       :gateway_arn,
       :disk_ids,
       keyword_init: true
@@ -269,6 +278,7 @@ module Aws::StorageGateway
     #            operation to return a list of gateways for your account and Amazon Web Services Region.</p>
     #   @return [String]
     class AddWorkingStorageOutput < Struct.new(
+      nil,
       :gateway_arn,
       keyword_init: true
     )
@@ -296,6 +306,7 @@ module Aws::StorageGateway
     #            </p>
     #   @return [Boolean]
     class AssignTapePoolInput < Struct.new(
+      nil,
       :tape_arn,
       :pool_id,
       :bypass_governance_retention,
@@ -309,6 +320,7 @@ module Aws::StorageGateway
     #            pool.</p>
     #   @return [String]
     class AssignTapePoolOutput < Struct.new(
+      nil,
       :tape_arn,
       keyword_init: true
     )
@@ -354,6 +366,7 @@ module Aws::StorageGateway
     #            </note>
     #   @return [Types::EndpointNetworkConfiguration]
     class AssociateFileSystemInput < Struct.new(
+      nil,
       :user_name,
       :password,
       :client_token,
@@ -372,6 +385,7 @@ module Aws::StorageGateway
     #   <p>The ARN of the newly created file system association.</p>
     #   @return [String]
     class AssociateFileSystemOutput < Struct.new(
+      nil,
       :file_system_association_arn,
       keyword_init: true
     )
@@ -407,6 +421,7 @@ module Aws::StorageGateway
     #            volume.</p>
     #   @return [String]
     class AttachVolumeInput < Struct.new(
+      nil,
       :gateway_arn,
       :target_name,
       :volume_arn,
@@ -426,6 +441,7 @@ module Aws::StorageGateway
     #            the initiator that was used to connect to the target.</p>
     #   @return [String]
     class AttachVolumeOutput < Struct.new(
+      nil,
       :volume_arn,
       :target_arn,
       keyword_init: true
@@ -445,6 +461,7 @@ module Aws::StorageGateway
     #            operation to return a list of gateways for your account and Amazon Web Services Region.</p>
     #   @return [String]
     class AutomaticTapeCreationPolicyInfo < Struct.new(
+      nil,
       :automatic_tape_creation_rules,
       :gateway_arn,
       keyword_init: true
@@ -485,6 +502,7 @@ module Aws::StorageGateway
     #            tapes.</p>
     #   @return [Boolean]
     class AutomaticTapeCreationRule < Struct.new(
+      nil,
       :tape_barcode_prefix,
       :pool_id,
       :tape_size_in_bytes,
@@ -547,6 +565,7 @@ module Aws::StorageGateway
     #            </note>
     #   @return [Integer]
     class BandwidthRateLimitInterval < Struct.new(
+      nil,
       :start_hour_of_day,
       :start_minute_of_hour,
       :end_hour_of_day,
@@ -568,6 +587,7 @@ module Aws::StorageGateway
     #            <p>Valid Values:0, 300 to 2,592,000 seconds (5 minutes to 30 days)</p>
     #   @return [Integer]
     class CacheAttributes < Struct.new(
+      nil,
       :cache_stale_timeout_in_seconds,
       keyword_init: true
     )
@@ -604,6 +624,7 @@ module Aws::StorageGateway
     #            </p>
     #   @return [Array<String>]
     class CacheReportFilter < Struct.new(
+      nil,
       :name,
       :values,
       keyword_init: true
@@ -654,6 +675,7 @@ module Aws::StorageGateway
     #   <p>The list of key/value tags associated with the report.</p>
     #   @return [Array<Types::Tag>]
     class CacheReportInfo < Struct.new(
+      nil,
       :cache_report_arn,
       :cache_report_status,
       :report_completion_percent,
@@ -741,6 +763,7 @@ module Aws::StorageGateway
     #            used for this volume as the new target name.</p>
     #   @return [String]
     class CachediSCSIVolume < Struct.new(
+      nil,
       :volume_arn,
       :volume_id,
       :volume_type,
@@ -774,6 +797,7 @@ module Aws::StorageGateway
     #            for.</p>
     #   @return [String]
     class CancelArchivalInput < Struct.new(
+      nil,
       :gateway_arn,
       :tape_arn,
       keyword_init: true
@@ -787,6 +811,7 @@ module Aws::StorageGateway
     #            canceled.</p>
     #   @return [String]
     class CancelArchivalOutput < Struct.new(
+      nil,
       :tape_arn,
       keyword_init: true
     )
@@ -797,6 +822,7 @@ module Aws::StorageGateway
     #   <p>The Amazon Resource Name (ARN) of the cache report you want to cancel.</p>
     #   @return [String]
     class CancelCacheReportInput < Struct.new(
+      nil,
       :cache_report_arn,
       keyword_init: true
     )
@@ -807,6 +833,7 @@ module Aws::StorageGateway
     #   <p>The Amazon Resource Name (ARN) of the cache report you want to cancel.</p>
     #   @return [String]
     class CancelCacheReportOutput < Struct.new(
+      nil,
       :cache_report_arn,
       keyword_init: true
     )
@@ -823,6 +850,7 @@ module Aws::StorageGateway
     #            for.</p>
     #   @return [String]
     class CancelRetrievalInput < Struct.new(
+      nil,
       :gateway_arn,
       :tape_arn,
       keyword_init: true
@@ -836,6 +864,7 @@ module Aws::StorageGateway
     #            canceled.</p>
     #   @return [String]
     class CancelRetrievalOutput < Struct.new(
+      nil,
       :tape_arn,
       keyword_init: true
     )
@@ -860,6 +889,7 @@ module Aws::StorageGateway
     #            initiator (e.g., Windows client).</p>
     #   @return [String]
     class ChapInfo < Struct.new(
+      nil,
       :target_arn,
       :secret_to_authenticate_initiator,
       :initiator_name,
@@ -929,6 +959,7 @@ module Aws::StorageGateway
     #            </note>
     #   @return [Array<Types::Tag>]
     class CreateCachediSCSIVolumeInput < Struct.new(
+      nil,
       :gateway_arn,
       :volume_size_in_bytes,
       :snapshot_id,
@@ -952,6 +983,7 @@ module Aws::StorageGateway
     #            initiators can use to connect to the target.</p>
     #   @return [String]
     class CreateCachediSCSIVolumeOutput < Struct.new(
+      nil,
       :volume_arn,
       :target_arn,
       keyword_init: true
@@ -1168,6 +1200,7 @@ module Aws::StorageGateway
     #   <p>The Amazon Resource Name (ARN) of the storage used for audit logs.</p>
     #   @return [String]
     class CreateNFSFileShareInput < Struct.new(
+      nil,
       :client_token,
       :nfs_file_share_defaults,
       :gateway_arn,
@@ -1200,6 +1233,7 @@ module Aws::StorageGateway
     #   <p>The Amazon Resource Name (ARN) of the newly created file share.</p>
     #   @return [String]
     class CreateNFSFileShareOutput < Struct.new(
+      nil,
       :file_share_arn,
       keyword_init: true
     )
@@ -1447,6 +1481,7 @@ module Aws::StorageGateway
     #            </p>
     #   @return [Boolean]
     class CreateSMBFileShareInput < Struct.new(
+      nil,
       :client_token,
       :gateway_arn,
       :encryption_type,
@@ -1484,6 +1519,7 @@ module Aws::StorageGateway
     #   <p>The Amazon Resource Name (ARN) of the newly created file share.</p>
     #   @return [String]
     class CreateSMBFileShareOutput < Struct.new(
+      nil,
       :file_share_arn,
       keyword_init: true
     )
@@ -1511,6 +1547,7 @@ module Aws::StorageGateway
     #            </note>
     #   @return [Array<Types::Tag>]
     class CreateSnapshotFromVolumeRecoveryPointInput < Struct.new(
+      nil,
       :volume_arn,
       :snapshot_description,
       :tags,
@@ -1530,6 +1567,7 @@ module Aws::StorageGateway
     #   <p>The time the volume was created from the recovery point.</p>
     #   @return [String]
     class CreateSnapshotFromVolumeRecoveryPointOutput < Struct.new(
+      nil,
       :snapshot_id,
       :volume_arn,
       :volume_recovery_point_time,
@@ -1572,6 +1610,7 @@ module Aws::StorageGateway
     #            </note>
     #   @return [Array<Types::Tag>]
     class CreateSnapshotInput < Struct.new(
+      nil,
       :volume_arn,
       :snapshot_description,
       :tags,
@@ -1590,6 +1629,7 @@ module Aws::StorageGateway
     #            creating a volume from a snapshot (<a>CreateStorediSCSIVolume</a>).</p>
     #   @return [String]
     class CreateSnapshotOutput < Struct.new(
+      nil,
       :volume_arn,
       :snapshot_id,
       keyword_init: true
@@ -1683,6 +1723,7 @@ module Aws::StorageGateway
     #            </note>
     #   @return [Array<Types::Tag>]
     class CreateStorediSCSIVolumeInput < Struct.new(
+      nil,
       :gateway_arn,
       :disk_id,
       :snapshot_id,
@@ -1709,6 +1750,7 @@ module Aws::StorageGateway
     #            initiators can use to connect to the target.</p>
     #   @return [String]
     class CreateStorediSCSIVolumeOutput < Struct.new(
+      nil,
       :volume_arn,
       :volume_size_in_bytes,
       :target_arn,
@@ -1751,6 +1793,7 @@ module Aws::StorageGateway
     #            </note>
     #   @return [Array<Types::Tag>]
     class CreateTapePoolInput < Struct.new(
+      nil,
       :pool_name,
       :storage_class,
       :retention_lock_type,
@@ -1767,6 +1810,7 @@ module Aws::StorageGateway
     #            account and Amazon Web Services Region.</p>
     #   @return [String]
     class CreateTapePoolOutput < Struct.new(
+      nil,
       :pool_arn,
       keyword_init: true
     )
@@ -1824,6 +1868,7 @@ module Aws::StorageGateway
     #            </note>
     #   @return [Array<Types::Tag>]
     class CreateTapeWithBarcodeInput < Struct.new(
+      nil,
       :gateway_arn,
       :tape_size_in_bytes,
       :tape_barcode,
@@ -1843,6 +1888,7 @@ module Aws::StorageGateway
     #            created.</p>
     #   @return [String]
     class CreateTapeWithBarcodeOutput < Struct.new(
+      nil,
       :tape_arn,
       keyword_init: true
     )
@@ -1912,6 +1958,7 @@ module Aws::StorageGateway
     #            </note>
     #   @return [Array<Types::Tag>]
     class CreateTapesInput < Struct.new(
+      nil,
       :gateway_arn,
       :tape_size_in_bytes,
       :client_token,
@@ -1933,6 +1980,7 @@ module Aws::StorageGateway
     #            were created.</p>
     #   @return [Array<String>]
     class CreateTapesOutput < Struct.new(
+      nil,
       :tape_ar_ns,
       keyword_init: true
     )
@@ -1944,6 +1992,7 @@ module Aws::StorageGateway
     #            operation to return a list of gateways for your account and Amazon Web Services Region.</p>
     #   @return [String]
     class DeleteAutomaticTapeCreationPolicyInput < Struct.new(
+      nil,
       :gateway_arn,
       keyword_init: true
     )
@@ -1955,6 +2004,7 @@ module Aws::StorageGateway
     #            operation to return a list of gateways for your account and Amazon Web Services Region.</p>
     #   @return [String]
     class DeleteAutomaticTapeCreationPolicyOutput < Struct.new(
+      nil,
       :gateway_arn,
       keyword_init: true
     )
@@ -1980,6 +2030,7 @@ module Aws::StorageGateway
     #            </p>
     #   @return [String]
     class DeleteBandwidthRateLimitInput < Struct.new(
+      nil,
       :gateway_arn,
       :bandwidth_type,
       keyword_init: true
@@ -1994,6 +2045,7 @@ module Aws::StorageGateway
     #            operation to return a list of gateways for your account and Amazon Web Services Region.</p>
     #   @return [String]
     class DeleteBandwidthRateLimitOutput < Struct.new(
+      nil,
       :gateway_arn,
       keyword_init: true
     )
@@ -2004,6 +2056,7 @@ module Aws::StorageGateway
     #   <p>The Amazon Resource Name (ARN) of the cache report you want to delete.</p>
     #   @return [String]
     class DeleteCacheReportInput < Struct.new(
+      nil,
       :cache_report_arn,
       keyword_init: true
     )
@@ -2014,6 +2067,7 @@ module Aws::StorageGateway
     #   <p>The Amazon Resource Name (ARN) of the cache report you want to delete.</p>
     #   @return [String]
     class DeleteCacheReportOutput < Struct.new(
+      nil,
       :cache_report_arn,
       keyword_init: true
     )
@@ -2041,6 +2095,7 @@ module Aws::StorageGateway
     #   <p>The iSCSI initiator that connects to the target.</p>
     #   @return [String]
     class DeleteChapCredentialsInput < Struct.new(
+      nil,
       :target_arn,
       :initiator_name,
       keyword_init: true
@@ -2056,6 +2111,7 @@ module Aws::StorageGateway
     #   <p>The iSCSI initiator that connects to the target.</p>
     #   @return [String]
     class DeleteChapCredentialsOutput < Struct.new(
+      nil,
       :target_arn,
       :initiator_name,
       keyword_init: true
@@ -2076,6 +2132,7 @@ module Aws::StorageGateway
     #            </p>
     #   @return [Boolean]
     class DeleteFileShareInput < Struct.new(
+      nil,
       :file_share_arn,
       :force_delete,
       keyword_init: true
@@ -2088,6 +2145,7 @@ module Aws::StorageGateway
     #   <p>The Amazon Resource Name (ARN) of the deleted file share.</p>
     #   @return [String]
     class DeleteFileShareOutput < Struct.new(
+      nil,
       :file_share_arn,
       keyword_init: true
     )
@@ -2100,6 +2158,7 @@ module Aws::StorageGateway
     #            operation to return a list of gateways for your account and Amazon Web Services Region.</p>
     #   @return [String]
     class DeleteGatewayInput < Struct.new(
+      nil,
       :gateway_arn,
       keyword_init: true
     )
@@ -2112,6 +2171,7 @@ module Aws::StorageGateway
     #            operation to return a list of gateways for your account and Amazon Web Services Region.</p>
     #   @return [String]
     class DeleteGatewayOutput < Struct.new(
+      nil,
       :gateway_arn,
       keyword_init: true
     )
@@ -2122,6 +2182,7 @@ module Aws::StorageGateway
     #   <p>The volume which snapshot schedule to delete.</p>
     #   @return [String]
     class DeleteSnapshotScheduleInput < Struct.new(
+      nil,
       :volume_arn,
       keyword_init: true
     )
@@ -2132,6 +2193,7 @@ module Aws::StorageGateway
     #   <p>The volume which snapshot schedule was deleted.</p>
     #   @return [String]
     class DeleteSnapshotScheduleOutput < Struct.new(
+      nil,
       :volume_arn,
       keyword_init: true
     )
@@ -2150,6 +2212,7 @@ module Aws::StorageGateway
     #               <code>compliance</code> can't be deleted.</p>
     #   @return [Boolean]
     class DeleteTapeArchiveInput < Struct.new(
+      nil,
       :tape_arn,
       :bypass_governance_retention,
       keyword_init: true
@@ -2163,6 +2226,7 @@ module Aws::StorageGateway
     #            tape shelf (VTS).</p>
     #   @return [String]
     class DeleteTapeArchiveOutput < Struct.new(
+      nil,
       :tape_arn,
       keyword_init: true
     )
@@ -2185,6 +2249,7 @@ module Aws::StorageGateway
     #               <code>compliance</code> can't be deleted.</p>
     #   @return [Boolean]
     class DeleteTapeInput < Struct.new(
+      nil,
       :gateway_arn,
       :tape_arn,
       :bypass_governance_retention,
@@ -2198,6 +2263,7 @@ module Aws::StorageGateway
     #   <p>The Amazon Resource Name (ARN) of the deleted virtual tape.</p>
     #   @return [String]
     class DeleteTapeOutput < Struct.new(
+      nil,
       :tape_arn,
       keyword_init: true
     )
@@ -2208,6 +2274,7 @@ module Aws::StorageGateway
     #   <p>The Amazon Resource Name (ARN) of the custom tape pool to delete.</p>
     #   @return [String]
     class DeleteTapePoolInput < Struct.new(
+      nil,
       :pool_arn,
       keyword_init: true
     )
@@ -2218,6 +2285,7 @@ module Aws::StorageGateway
     #   <p>The Amazon Resource Name (ARN) of the custom tape pool being deleted.</p>
     #   @return [String]
     class DeleteTapePoolOutput < Struct.new(
+      nil,
       :pool_arn,
       keyword_init: true
     )
@@ -2231,6 +2299,7 @@ module Aws::StorageGateway
     #            operation to return a list of gateway volumes.</p>
     #   @return [String]
     class DeleteVolumeInput < Struct.new(
+      nil,
       :volume_arn,
       keyword_init: true
     )
@@ -2244,6 +2313,7 @@ module Aws::StorageGateway
     #            ARN you provided in the request.</p>
     #   @return [String]
     class DeleteVolumeOutput < Struct.new(
+      nil,
       :volume_arn,
       keyword_init: true
     )
@@ -2255,6 +2325,7 @@ module Aws::StorageGateway
     #            operation to return a list of gateways for your account and Amazon Web Services Region.</p>
     #   @return [String]
     class DescribeAvailabilityMonitorTestInput < Struct.new(
+      nil,
       :gateway_arn,
       keyword_init: true
     )
@@ -2274,6 +2345,7 @@ module Aws::StorageGateway
     #            performed, the value of this field is null.</p>
     #   @return [Time]
     class DescribeAvailabilityMonitorTestOutput < Struct.new(
+      nil,
       :gateway_arn,
       :status,
       :start_time,
@@ -2288,6 +2360,7 @@ module Aws::StorageGateway
     #            operation to return a list of gateways for your account and Amazon Web Services Region.</p>
     #   @return [String]
     class DescribeBandwidthRateLimitInput < Struct.new(
+      nil,
       :gateway_arn,
       keyword_init: true
     )
@@ -2308,6 +2381,7 @@ module Aws::StorageGateway
     #            in the response if the download rate limit is not set.</p>
     #   @return [Integer]
     class DescribeBandwidthRateLimitOutput < Struct.new(
+      nil,
       :gateway_arn,
       :average_upload_rate_limit_in_bits_per_sec,
       :average_download_rate_limit_in_bits_per_sec,
@@ -2321,6 +2395,7 @@ module Aws::StorageGateway
     #            operation to return a list of gateways for your account and Amazon Web Services Region.</p>
     #   @return [String]
     class DescribeBandwidthRateLimitScheduleInput < Struct.new(
+      nil,
       :gateway_arn,
       keyword_init: true
     )
@@ -2335,6 +2410,7 @@ module Aws::StorageGateway
     #   <p> An array that contains the bandwidth rate limit intervals for a tape or volume gateway. </p>
     #   @return [Array<Types::BandwidthRateLimitInterval>]
     class DescribeBandwidthRateLimitScheduleOutput < Struct.new(
+      nil,
       :gateway_arn,
       :bandwidth_rate_limit_intervals,
       keyword_init: true
@@ -2347,6 +2423,7 @@ module Aws::StorageGateway
     #            operation to return a list of gateways for your account and Amazon Web Services Region.</p>
     #   @return [String]
     class DescribeCacheInput < Struct.new(
+      nil,
       :gateway_arn,
       keyword_init: true
     )
@@ -2383,6 +2460,7 @@ module Aws::StorageGateway
     #            cache. The sample is taken at the end of the reporting period.</p>
     #   @return [Float]
     class DescribeCacheOutput < Struct.new(
+      nil,
       :gateway_arn,
       :disk_ids,
       :cache_allocated_in_bytes,
@@ -2408,6 +2486,7 @@ module Aws::StorageGateway
     #   <p>The Amazon Resource Name (ARN) of the cache report you want to describe.</p>
     #   @return [String]
     class DescribeCacheReportInput < Struct.new(
+      nil,
       :cache_report_arn,
       keyword_init: true
     )
@@ -2419,6 +2498,7 @@ module Aws::StorageGateway
     #            tags, status, progress, filters, start time, and end time.</p>
     #   @return [Types::CacheReportInfo]
     class DescribeCacheReportOutput < Struct.new(
+      nil,
       :cache_report_info,
       keyword_init: true
     )
@@ -2430,6 +2510,7 @@ module Aws::StorageGateway
     #            cached volume. All of the specified cached volumes must be from the same gateway. Use <a>ListVolumes</a> to get volume ARNs for a gateway.</p>
     #   @return [Array<String>]
     class DescribeCachediSCSIVolumesInput < Struct.new(
+      nil,
       :volume_ar_ns,
       keyword_init: true
     )
@@ -2441,6 +2522,7 @@ module Aws::StorageGateway
     #   <p>An array of objects where each object contains metadata about one cached volume.</p>
     #   @return [Array<Types::CachediSCSIVolume>]
     class DescribeCachediSCSIVolumesOutput < Struct.new(
+      nil,
       :cachedi_scsi_volumes,
       keyword_init: true
     )
@@ -2454,6 +2536,7 @@ module Aws::StorageGateway
     #            specified VolumeARN.</p>
     #   @return [String]
     class DescribeChapCredentialsInput < Struct.new(
+      nil,
       :target_arn,
       keyword_init: true
     )
@@ -2492,6 +2575,7 @@ module Aws::StorageGateway
     #            </ul>
     #   @return [Array<Types::ChapInfo>]
     class DescribeChapCredentialsOutput < Struct.new(
+      nil,
       :chap_credentials,
       keyword_init: true
     )
@@ -2503,6 +2587,7 @@ module Aws::StorageGateway
     #            described.</p>
     #   @return [Array<String>]
     class DescribeFileSystemAssociationsInput < Struct.new(
+      nil,
       :file_system_association_arn_list,
       keyword_init: true
     )
@@ -2515,6 +2600,7 @@ module Aws::StorageGateway
     #            </p>
     #   @return [Array<Types::FileSystemAssociationInfo>]
     class DescribeFileSystemAssociationsOutput < Struct.new(
+      nil,
       :file_system_association_info_list,
       keyword_init: true
     )
@@ -2527,6 +2613,7 @@ module Aws::StorageGateway
     #            operation to return a list of gateways for your account and Amazon Web Services Region.</p>
     #   @return [String]
     class DescribeGatewayInformationInput < Struct.new(
+      nil,
       :gateway_arn,
       keyword_init: true
     )
@@ -2629,6 +2716,7 @@ module Aws::StorageGateway
     #   <p>The version number of the software running on the gateway appliance.</p>
     #   @return [String]
     class DescribeGatewayInformationOutput < Struct.new(
+      nil,
       :gateway_arn,
       :gateway_id,
       :gateway_name,
@@ -2662,6 +2750,7 @@ module Aws::StorageGateway
     #            operation to return a list of gateways for your account and Amazon Web Services Region.</p>
     #   @return [String]
     class DescribeMaintenanceStartTimeInput < Struct.new(
+      nil,
       :gateway_arn,
       keyword_init: true
     )
@@ -2742,6 +2831,7 @@ module Aws::StorageGateway
     #            scheduled maintenance window.</p>
     #   @return [Types::SoftwareUpdatePreferences]
     class DescribeMaintenanceStartTimeOutput < Struct.new(
+      nil,
       :gateway_arn,
       :hour_of_day,
       :minute_of_hour,
@@ -2760,6 +2850,7 @@ module Aws::StorageGateway
     #            described.</p>
     #   @return [Array<String>]
     class DescribeNFSFileSharesInput < Struct.new(
+      nil,
       :file_share_arn_list,
       keyword_init: true
     )
@@ -2771,6 +2862,7 @@ module Aws::StorageGateway
     #   <p>An array containing a description for each requested file share.</p>
     #   @return [Array<Types::NFSFileShareInfo>]
     class DescribeNFSFileSharesOutput < Struct.new(
+      nil,
       :nfs_file_share_info_list,
       keyword_init: true
     )
@@ -2783,6 +2875,7 @@ module Aws::StorageGateway
     #            described.</p>
     #   @return [Array<String>]
     class DescribeSMBFileSharesInput < Struct.new(
+      nil,
       :file_share_arn_list,
       keyword_init: true
     )
@@ -2794,6 +2887,7 @@ module Aws::StorageGateway
     #   <p>An array containing a description for each requested file share.</p>
     #   @return [Array<Types::SMBFileShareInfo>]
     class DescribeSMBFileSharesOutput < Struct.new(
+      nil,
       :smb_file_share_info_list,
       keyword_init: true
     )
@@ -2805,6 +2899,7 @@ module Aws::StorageGateway
     #            operation to return a list of gateways for your account and Amazon Web Services Region.</p>
     #   @return [String]
     class DescribeSMBSettingsInput < Struct.new(
+      nil,
       :gateway_arn,
       keyword_init: true
     )
@@ -2913,6 +3008,7 @@ module Aws::StorageGateway
     #            shares on the gateway.</p>
     #   @return [Types::SMBLocalGroups]
     class DescribeSMBSettingsOutput < Struct.new(
+      nil,
       :gateway_arn,
       :domain_name,
       :active_directory_status,
@@ -2932,6 +3028,7 @@ module Aws::StorageGateway
     #            operation to return a list of gateway volumes.</p>
     #   @return [String]
     class DescribeSnapshotScheduleInput < Struct.new(
+      nil,
       :volume_arn,
       keyword_init: true
     )
@@ -2961,6 +3058,7 @@ module Aws::StorageGateway
     #            view all tags using the <code>ListTagsForResource</code> API operation.</p>
     #   @return [Array<Types::Tag>]
     class DescribeSnapshotScheduleOutput < Struct.new(
+      nil,
       :volume_arn,
       :start_at,
       :recurrence_in_hours,
@@ -2978,6 +3076,7 @@ module Aws::StorageGateway
     #            stored volume. All of the specified stored volumes must be from the same gateway. Use <a>ListVolumes</a> to get volume ARNs for a gateway.</p>
     #   @return [Array<String>]
     class DescribeStorediSCSIVolumesInput < Struct.new(
+      nil,
       :volume_ar_ns,
       keyword_init: true
     )
@@ -3070,6 +3169,7 @@ module Aws::StorageGateway
     #            </ul>
     #   @return [Array<Types::StorediSCSIVolume>]
     class DescribeStorediSCSIVolumesOutput < Struct.new(
+      nil,
       :storedi_scsi_volumes,
       keyword_init: true
     )
@@ -3090,6 +3190,7 @@ module Aws::StorageGateway
     #            number.</p>
     #   @return [Integer]
     class DescribeTapeArchivesInput < Struct.new(
+      nil,
       :tape_ar_ns,
       :marker,
       :limit,
@@ -3112,6 +3213,7 @@ module Aws::StorageGateway
     #            describe, this field does not appear in the response.</p>
     #   @return [String]
     class DescribeTapeArchivesOutput < Struct.new(
+      nil,
       :tape_archives,
       :marker,
       keyword_init: true
@@ -3133,6 +3235,7 @@ module Aws::StorageGateway
     #            to the specified number.</p>
     #   @return [Integer]
     class DescribeTapeRecoveryPointsInput < Struct.new(
+      nil,
       :gateway_arn,
       :marker,
       :limit,
@@ -3157,6 +3260,7 @@ module Aws::StorageGateway
     #            appear in the response.</p>
     #   @return [String]
     class DescribeTapeRecoveryPointsOutput < Struct.new(
+      nil,
       :gateway_arn,
       :tape_recovery_point_infos,
       :marker,
@@ -3188,6 +3292,7 @@ module Aws::StorageGateway
     #            </note>
     #   @return [Integer]
     class DescribeTapesInput < Struct.new(
+      nil,
       :gateway_arn,
       :tape_ar_ns,
       :marker,
@@ -3208,6 +3313,7 @@ module Aws::StorageGateway
     #            retrieved.</p>
     #   @return [String]
     class DescribeTapesOutput < Struct.new(
+      nil,
       :tapes,
       :marker,
       keyword_init: true
@@ -3220,6 +3326,7 @@ module Aws::StorageGateway
     #            operation to return a list of gateways for your account and Amazon Web Services Region.</p>
     #   @return [String]
     class DescribeUploadBufferInput < Struct.new(
+      nil,
       :gateway_arn,
       keyword_init: true
     )
@@ -3243,6 +3350,7 @@ module Aws::StorageGateway
     #   <p>The total number of bytes allocated in the gateway's as upload buffer.</p>
     #   @return [Integer]
     class DescribeUploadBufferOutput < Struct.new(
+      nil,
       :gateway_arn,
       :disk_ids,
       :upload_buffer_used_in_bytes,
@@ -3280,6 +3388,7 @@ module Aws::StorageGateway
     #            number.</p>
     #   @return [Integer]
     class DescribeVTLDevicesInput < Struct.new(
+      nil,
       :gateway_arn,
       :vtl_device_ar_ns,
       :marker,
@@ -3305,6 +3414,7 @@ module Aws::StorageGateway
     #            appear in the response.</p>
     #   @return [String]
     class DescribeVTLDevicesOutput < Struct.new(
+      nil,
       :gateway_arn,
       :vtl_devices,
       :marker,
@@ -3319,6 +3429,7 @@ module Aws::StorageGateway
     #            operation to return a list of gateways for your account and Amazon Web Services Region.</p>
     #   @return [String]
     class DescribeWorkingStorageInput < Struct.new(
+      nil,
       :gateway_arn,
       keyword_init: true
     )
@@ -3345,6 +3456,7 @@ module Aws::StorageGateway
     #            configured for the gateway, this field returns 0.</p>
     #   @return [Integer]
     class DescribeWorkingStorageOutput < Struct.new(
+      nil,
       :gateway_arn,
       :disk_ids,
       :working_storage_used_in_bytes,
@@ -3373,6 +3485,7 @@ module Aws::StorageGateway
     #            </p>
     #   @return [Boolean]
     class DetachVolumeInput < Struct.new(
+      nil,
       :volume_arn,
       :force_detach,
       keyword_init: true
@@ -3385,6 +3498,7 @@ module Aws::StorageGateway
     #   <p>The Amazon Resource Name (ARN) of the volume that was detached.</p>
     #   @return [String]
     class DetachVolumeOutput < Struct.new(
+      nil,
       :volume_arn,
       keyword_init: true
     )
@@ -3406,6 +3520,7 @@ module Aws::StorageGateway
     #   <p>Indicates whether mutual CHAP is enabled for the iSCSI target.</p>
     #   @return [Boolean]
     class DeviceiSCSIAttributes < Struct.new(
+      nil,
       :target_arn,
       :network_interface_id,
       :network_interface_port,
@@ -3427,6 +3542,7 @@ module Aws::StorageGateway
     #            operation to return a list of gateways for your account and Amazon Web Services Region.</p>
     #   @return [String]
     class DisableGatewayInput < Struct.new(
+      nil,
       :gateway_arn,
       keyword_init: true
     )
@@ -3438,6 +3554,7 @@ module Aws::StorageGateway
     #   <p>The unique Amazon Resource Name (ARN) of the disabled gateway.</p>
     #   @return [String]
     class DisableGatewayOutput < Struct.new(
+      nil,
       :gateway_arn,
       keyword_init: true
     )
@@ -3454,6 +3571,7 @@ module Aws::StorageGateway
     #            the Amazon FSx file system does not disassociate until all data is uploaded.</p>
     #   @return [Boolean]
     class DisassociateFileSystemInput < Struct.new(
+      nil,
       :file_system_association_arn,
       :force_delete,
       keyword_init: true
@@ -3465,6 +3583,7 @@ module Aws::StorageGateway
     #   <p>The Amazon Resource Name (ARN) of the deleted file system association.</p>
     #   @return [String]
     class DisassociateFileSystemOutput < Struct.new(
+      nil,
       :file_system_association_arn,
       keyword_init: true
     )
@@ -3502,6 +3621,7 @@ module Aws::StorageGateway
     #   <p>A list of values that represents attributes of a local disk.</p>
     #   @return [Array<String>]
     class Disk < Struct.new(
+      nil,
       :disk_id,
       :disk_path,
       :disk_node,
@@ -3530,6 +3650,7 @@ module Aws::StorageGateway
     #            </note>
     #   @return [Array<String>]
     class EndpointNetworkConfiguration < Struct.new(
+      nil,
       :ip_addresses,
       keyword_init: true
     )
@@ -3565,6 +3686,7 @@ module Aws::StorageGateway
     #            </ul>
     #   @return [Boolean]
     class EvictFilesFailingUploadInput < Struct.new(
+      nil,
       :file_share_arn,
       :force_remove,
       keyword_init: true
@@ -3577,6 +3699,7 @@ module Aws::StorageGateway
     #            cache clean operation. This ID is in UUID format.</p>
     #   @return [String]
     class EvictFilesFailingUploadOutput < Struct.new(
+      nil,
       :notification_id,
       keyword_init: true
     )
@@ -3604,6 +3727,7 @@ module Aws::StorageGateway
     #            operation to return a list of gateways for your account and Amazon Web Services Region.</p>
     #   @return [String]
     class FileShareInfo < Struct.new(
+      nil,
       :file_share_type,
       :file_share_arn,
       :file_share_id,
@@ -3656,6 +3780,7 @@ module Aws::StorageGateway
     #            detailed information on file system association status.</p>
     #   @return [Array<Types::FileSystemAssociationStatusDetail>]
     class FileSystemAssociationInfo < Struct.new(
+      nil,
       :file_system_association_arn,
       :location_arn,
       :file_system_association_status,
@@ -3675,6 +3800,7 @@ module Aws::StorageGateway
     #   <p>The error code for a given file system association status.</p>
     #   @return [String]
     class FileSystemAssociationStatusDetail < Struct.new(
+      nil,
       :error_code,
       keyword_init: true
     )
@@ -3700,6 +3826,7 @@ module Aws::StorageGateway
     #            operation to return a list of gateways for your account and Amazon Web Services Region.</p>
     #   @return [String]
     class FileSystemAssociationSummary < Struct.new(
+      nil,
       :file_system_association_id,
       :file_system_association_arn,
       :file_system_association_status,
@@ -3760,6 +3887,7 @@ module Aws::StorageGateway
     #   <p>The version number of the software running on the gateway appliance.</p>
     #   @return [String]
     class GatewayInfo < Struct.new(
+      nil,
       :gateway_id,
       :gateway_arn,
       :gateway_type,
@@ -3786,6 +3914,7 @@ module Aws::StorageGateway
     #            of the error.</p>
     #   @return [Types::StorageGatewayError]
     class InternalServerError < Struct.new(
+      nil,
       :message,
       :error,
       keyword_init: true
@@ -3803,6 +3932,7 @@ module Aws::StorageGateway
     #            error.</p>
     #   @return [Types::StorageGatewayError]
     class InvalidGatewayRequestException < Struct.new(
+      nil,
       :message,
       :error,
       keyword_init: true
@@ -3848,6 +3978,7 @@ module Aws::StorageGateway
     #            Directory domain.</p>
     #   @return [String]
     class JoinDomainInput < Struct.new(
+      nil,
       :gateway_arn,
       :domain_name,
       :organizational_unit,
@@ -3915,6 +4046,7 @@ module Aws::StorageGateway
     #            </ul>
     #   @return [String]
     class JoinDomainOutput < Struct.new(
+      nil,
       :gateway_arn,
       :active_directory_status,
       keyword_init: true
@@ -3927,6 +4059,7 @@ module Aws::StorageGateway
     #            operation to return a list of gateways for your account and Amazon Web Services Region.</p>
     #   @return [String]
     class ListAutomaticTapeCreationPoliciesInput < Struct.new(
+      nil,
       :gateway_arn,
       keyword_init: true
     )
@@ -3939,6 +4072,7 @@ module Aws::StorageGateway
     #            policies.</p>
     #   @return [Array<Types::AutomaticTapeCreationPolicyInfo>]
     class ListAutomaticTapeCreationPoliciesOutput < Struct.new(
+      nil,
       :automatic_tape_creation_policy_infos,
       keyword_init: true
     )
@@ -3951,6 +4085,7 @@ module Aws::StorageGateway
     #            a previous call to <code>ListCacheReports</code>. Optional.</p>
     #   @return [String]
     class ListCacheReportsInput < Struct.new(
+      nil,
       :marker,
       keyword_init: true
     )
@@ -3967,6 +4102,7 @@ module Aws::StorageGateway
     #            field.</p>
     #   @return [String]
     class ListCacheReportsOutput < Struct.new(
+      nil,
       :cache_report_list,
       :marker,
       keyword_init: true
@@ -3989,6 +4125,7 @@ module Aws::StorageGateway
     #            ListFileShares. Optional.</p>
     #   @return [String]
     class ListFileSharesInput < Struct.new(
+      nil,
       :gateway_arn,
       :limit,
       :marker,
@@ -4011,6 +4148,7 @@ module Aws::StorageGateway
     #   <p>An array of information about the S3 File Gateway's file shares.</p>
     #   @return [Array<Types::FileShareInfo>]
     class ListFileSharesOutput < Struct.new(
+      nil,
       :marker,
       :next_marker,
       :file_share_info_list,
@@ -4033,6 +4171,7 @@ module Aws::StorageGateway
     #            a previous call to <code>ListFileSystemAssociations</code>. Optional.</p>
     #   @return [String]
     class ListFileSystemAssociationsInput < Struct.new(
+      nil,
       :gateway_arn,
       :limit,
       :marker,
@@ -4055,6 +4194,7 @@ module Aws::StorageGateway
     #            associations.</p>
     #   @return [Array<Types::FileSystemAssociationSummary>]
     class ListFileSystemAssociationsOutput < Struct.new(
+      nil,
       :marker,
       :next_marker,
       :file_system_association_summary_list,
@@ -4085,6 +4225,7 @@ module Aws::StorageGateway
     #            items.</p>
     #   @return [Integer]
     class ListGatewaysInput < Struct.new(
+      nil,
       :marker,
       :limit,
       keyword_init: true
@@ -4100,6 +4241,7 @@ module Aws::StorageGateway
     #            there are no more gateways to list, this field does not appear in the response.</p>
     #   @return [String]
     class ListGatewaysOutput < Struct.new(
+      nil,
       :gateways,
       :marker,
       keyword_init: true
@@ -4113,6 +4255,7 @@ module Aws::StorageGateway
     #            operation to return a list of gateways for your account and Amazon Web Services Region.</p>
     #   @return [String]
     class ListLocalDisksInput < Struct.new(
+      nil,
       :gateway_arn,
       keyword_init: true
     )
@@ -4134,6 +4277,7 @@ module Aws::StorageGateway
     #            </ul>
     #   @return [Array<Types::Disk>]
     class ListLocalDisksOutput < Struct.new(
+      nil,
       :gateway_arn,
       :disks,
       keyword_init: true
@@ -4154,6 +4298,7 @@ module Aws::StorageGateway
     #            items.</p>
     #   @return [Integer]
     class ListTagsForResourceInput < Struct.new(
+      nil,
       :resource_arn,
       :marker,
       :limit,
@@ -4174,6 +4319,7 @@ module Aws::StorageGateway
     #   <p>An array that contains the tags for the specified resource.</p>
     #   @return [Array<Types::Tag>]
     class ListTagsForResourceOutput < Struct.new(
+      nil,
       :resource_arn,
       :marker,
       :tags,
@@ -4194,6 +4340,7 @@ module Aws::StorageGateway
     #   <p>An optional number limit for the tape pools in the list returned by this call.</p>
     #   @return [Integer]
     class ListTapePoolsInput < Struct.new(
+      nil,
       :pool_ar_ns,
       :marker,
       :limit,
@@ -4213,6 +4360,7 @@ module Aws::StorageGateway
     #            more tape pools to list, this element does not appear in the response body. </p>
     #   @return [String]
     class ListTapePoolsOutput < Struct.new(
+      nil,
       :pool_infos,
       :marker,
       keyword_init: true
@@ -4250,6 +4398,7 @@ module Aws::StorageGateway
     #   <p>An optional number limit for the tapes in the list returned by this call.</p>
     #   @return [Integer]
     class ListTapesInput < Struct.new(
+      nil,
       :tape_ar_ns,
       :marker,
       :limit,
@@ -4282,6 +4431,7 @@ module Aws::StorageGateway
     #            tapes to list, this element does not appear in the response body.</p>
     #   @return [String]
     class ListTapesOutput < Struct.new(
+      nil,
       :tape_infos,
       :marker,
       keyword_init: true
@@ -4295,6 +4445,7 @@ module Aws::StorageGateway
     #            operation to return a list of gateway volumes for the gateway.</p>
     #   @return [String]
     class ListVolumeInitiatorsInput < Struct.new(
+      nil,
       :volume_arn,
       keyword_init: true
     )
@@ -4307,6 +4458,7 @@ module Aws::StorageGateway
     #            gateway.</p>
     #   @return [Array<String>]
     class ListVolumeInitiatorsOutput < Struct.new(
+      nil,
       :initiators,
       keyword_init: true
     )
@@ -4318,6 +4470,7 @@ module Aws::StorageGateway
     #            operation to return a list of gateways for your account and Amazon Web Services Region.</p>
     #   @return [String]
     class ListVolumeRecoveryPointsInput < Struct.new(
+      nil,
       :gateway_arn,
       keyword_init: true
     )
@@ -4332,6 +4485,7 @@ module Aws::StorageGateway
     #   <p>An array of <a>VolumeRecoveryPointInfo</a> objects.</p>
     #   @return [Array<Types::VolumeRecoveryPointInfo>]
     class ListVolumeRecoveryPointsOutput < Struct.new(
+      nil,
       :gateway_arn,
       :volume_recovery_point_infos,
       keyword_init: true
@@ -4365,6 +4519,7 @@ module Aws::StorageGateway
     #            items.</p>
     #   @return [Integer]
     class ListVolumesInput < Struct.new(
+      nil,
       :gateway_arn,
       :marker,
       :limit,
@@ -4400,6 +4555,7 @@ module Aws::StorageGateway
     #            empty array "[]".</p>
     #   @return [Array<Types::VolumeInfo>]
     class ListVolumesOutput < Struct.new(
+      nil,
       :gateway_arn,
       :marker,
       :volume_infos,
@@ -4431,6 +4587,7 @@ module Aws::StorageGateway
     #            specified). The default value is <code>nfsnobody</code>.</p>
     #   @return [Integer]
     class NFSFileShareDefaults < Struct.new(
+      nil,
       :file_mode,
       :directory_mode,
       :group_id,
@@ -4657,6 +4814,7 @@ module Aws::StorageGateway
     #   <p>The Amazon Resource Name (ARN) of the storage used for audit logs.</p>
     #   @return [String]
     class NFSFileShareInfo < Struct.new(
+      nil,
       :nfs_file_share_defaults,
       :file_share_arn,
       :file_share_id,
@@ -4710,6 +4868,7 @@ module Aws::StorageGateway
     #            </note>
     #   @return [String]
     class NetworkInterface < Struct.new(
+      nil,
       :ipv4_address,
       :mac_address,
       :ipv6_address,
@@ -4722,6 +4881,7 @@ module Aws::StorageGateway
     #   <p>The Amazon Resource Name (ARN) of the file share.</p>
     #   @return [String]
     class NotifyWhenUploadedInput < Struct.new(
+      nil,
       :file_share_arn,
       keyword_init: true
     )
@@ -4736,6 +4896,7 @@ module Aws::StorageGateway
     #            format.</p>
     #   @return [String]
     class NotifyWhenUploadedOutput < Struct.new(
+      nil,
       :file_share_arn,
       :notification_id,
       keyword_init: true
@@ -4773,6 +4934,7 @@ module Aws::StorageGateway
     #            <code>DELETED</code>.</p>
     #   @return [String]
     class PoolInfo < Struct.new(
+      nil,
       :pool_arn,
       :pool_name,
       :storage_class,
@@ -4807,6 +4969,7 @@ module Aws::StorageGateway
     #            </p>
     #   @return [Boolean]
     class RefreshCacheInput < Struct.new(
+      nil,
       :file_share_arn,
       :folder_list,
       :recursive,
@@ -4824,6 +4987,7 @@ module Aws::StorageGateway
     #            format.</p>
     #   @return [String]
     class RefreshCacheOutput < Struct.new(
+      nil,
       :file_share_arn,
       :notification_id,
       keyword_init: true
@@ -4840,6 +5004,7 @@ module Aws::StorageGateway
     #            of a key-value pair.</p>
     #   @return [Array<String>]
     class RemoveTagsFromResourceInput < Struct.new(
+      nil,
       :resource_arn,
       :tag_keys,
       keyword_init: true
@@ -4852,6 +5017,7 @@ module Aws::StorageGateway
     #   <p>The Amazon Resource Name (ARN) of the resource that the tags were removed from.</p>
     #   @return [String]
     class RemoveTagsFromResourceOutput < Struct.new(
+      nil,
       :resource_arn,
       keyword_init: true
     )
@@ -4863,6 +5029,7 @@ module Aws::StorageGateway
     #            operation to return a list of gateways for your account and Amazon Web Services Region.</p>
     #   @return [String]
     class ResetCacheInput < Struct.new(
+      nil,
       :gateway_arn,
       keyword_init: true
     )
@@ -4874,6 +5041,7 @@ module Aws::StorageGateway
     #            operation to return a list of gateways for your account and Amazon Web Services Region.</p>
     #   @return [String]
     class ResetCacheOutput < Struct.new(
+      nil,
       :gateway_arn,
       keyword_init: true
     )
@@ -4893,6 +5061,7 @@ module Aws::StorageGateway
     #            gateway.</p>
     #   @return [String]
     class RetrieveTapeArchiveInput < Struct.new(
+      nil,
       :tape_arn,
       :gateway_arn,
       keyword_init: true
@@ -4905,6 +5074,7 @@ module Aws::StorageGateway
     #   <p>The Amazon Resource Name (ARN) of the retrieved virtual tape.</p>
     #   @return [String]
     class RetrieveTapeArchiveOutput < Struct.new(
+      nil,
       :tape_arn,
       keyword_init: true
     )
@@ -4921,6 +5091,7 @@ module Aws::StorageGateway
     #            operation to return a list of gateways for your account and Amazon Web Services Region.</p>
     #   @return [String]
     class RetrieveTapeRecoveryPointInput < Struct.new(
+      nil,
       :tape_arn,
       :gateway_arn,
       keyword_init: true
@@ -4934,6 +5105,7 @@ module Aws::StorageGateway
     #            retrieved.</p>
     #   @return [String]
     class RetrieveTapeRecoveryPointOutput < Struct.new(
+      nil,
       :tape_arn,
       keyword_init: true
     )
@@ -5182,6 +5354,7 @@ module Aws::StorageGateway
     #            </p>
     #   @return [Boolean]
     class SMBFileShareInfo < Struct.new(
+      nil,
       :file_share_arn,
       :file_share_id,
       :file_share_status,
@@ -5232,6 +5405,7 @@ module Aws::StorageGateway
     #            force-close files that are open and locked.</p>
     #   @return [Array<String>]
     class SMBLocalGroups < Struct.new(
+      nil,
       :gateway_admins,
       keyword_init: true
     )
@@ -5248,6 +5422,7 @@ module Aws::StorageGateway
     #            of the error.</p>
     #   @return [Types::StorageGatewayError]
     class ServiceUnavailableError < Struct.new(
+      nil,
       :message,
       :error,
       keyword_init: true
@@ -5264,6 +5439,7 @@ module Aws::StorageGateway
     #   <p>The password you want to set for your VM local console.</p>
     #   @return [String]
     class SetLocalConsolePasswordInput < Struct.new(
+      nil,
       :gateway_arn,
       :local_console_password,
       keyword_init: true
@@ -5276,6 +5452,7 @@ module Aws::StorageGateway
     #            operation to return a list of gateways for your account and Amazon Web Services Region.</p>
     #   @return [String]
     class SetLocalConsolePasswordOutput < Struct.new(
+      nil,
       :gateway_arn,
       keyword_init: true
     )
@@ -5291,6 +5468,7 @@ module Aws::StorageGateway
     #   <p>The password that you want to set for your SMB server.</p>
     #   @return [String]
     class SetSMBGuestPasswordInput < Struct.new(
+      nil,
       :gateway_arn,
       :password,
       keyword_init: true
@@ -5303,6 +5481,7 @@ module Aws::StorageGateway
     #            operation to return a list of gateways for your account and Amazon Web Services Region.</p>
     #   @return [String]
     class SetSMBGuestPasswordOutput < Struct.new(
+      nil,
       :gateway_arn,
       keyword_init: true
     )
@@ -5316,6 +5495,7 @@ module Aws::StorageGateway
     #            operation to return a list of gateways for your account and Amazon Web Services Region.</p>
     #   @return [String]
     class ShutdownGatewayInput < Struct.new(
+      nil,
       :gateway_arn,
       keyword_init: true
     )
@@ -5329,6 +5509,7 @@ module Aws::StorageGateway
     #            operation to return a list of gateways for your account and Amazon Web Services Region.</p>
     #   @return [String]
     class ShutdownGatewayOutput < Struct.new(
+      nil,
       :gateway_arn,
       keyword_init: true
     )
@@ -5348,6 +5529,7 @@ module Aws::StorageGateway
     #            scheduled maintenance window.</p>
     #   @return [String]
     class SoftwareUpdatePreferences < Struct.new(
+      nil,
       :automatic_update_policy,
       keyword_init: true
     )
@@ -5359,6 +5541,7 @@ module Aws::StorageGateway
     #            operation to return a list of gateways for your account and Amazon Web Services Region.</p>
     #   @return [String]
     class StartAvailabilityMonitorTestInput < Struct.new(
+      nil,
       :gateway_arn,
       keyword_init: true
     )
@@ -5370,6 +5553,7 @@ module Aws::StorageGateway
     #            operation to return a list of gateways for your account and Amazon Web Services Region.</p>
     #   @return [String]
     class StartAvailabilityMonitorTestOutput < Struct.new(
+      nil,
       :gateway_arn,
       keyword_init: true
     )
@@ -5418,6 +5602,7 @@ module Aws::StorageGateway
     #            can help you categorize your reports and more easily locate them in search results.</p>
     #   @return [Array<Types::Tag>]
     class StartCacheReportInput < Struct.new(
+      nil,
       :file_share_arn,
       :role,
       :location_arn,
@@ -5437,6 +5622,7 @@ module Aws::StorageGateway
     #               <code>StartCacheReport</code> request.</p>
     #   @return [String]
     class StartCacheReportOutput < Struct.new(
+      nil,
       :cache_report_arn,
       keyword_init: true
     )
@@ -5449,6 +5635,7 @@ module Aws::StorageGateway
     #            operation to return a list of gateways for your account and Amazon Web Services Region.</p>
     #   @return [String]
     class StartGatewayInput < Struct.new(
+      nil,
       :gateway_arn,
       keyword_init: true
     )
@@ -5462,6 +5649,7 @@ module Aws::StorageGateway
     #            operation to return a list of gateways for your account and Amazon Web Services Region.</p>
     #   @return [String]
     class StartGatewayOutput < Struct.new(
+      nil,
       :gateway_arn,
       keyword_init: true
     )
@@ -5478,6 +5666,7 @@ module Aws::StorageGateway
     #   <p>Human-readable text that provides detail about the error that occurred.</p>
     #   @return [Hash<String, String>]
     class StorageGatewayError < Struct.new(
+      nil,
       :error_code,
       :error_details,
       keyword_init: true
@@ -5559,6 +5748,7 @@ module Aws::StorageGateway
     #            used for this volume as the new target name.</p>
     #   @return [String]
     class StorediSCSIVolume < Struct.new(
+      nil,
       :volume_arn,
       :volume_id,
       :volume_type,
@@ -5595,6 +5785,7 @@ module Aws::StorageGateway
     #   <p>Value of the tag key.</p>
     #   @return [String]
     class Tag < Struct.new(
+      nil,
       :key,
       :value,
       keyword_init: true
@@ -5655,6 +5846,7 @@ module Aws::StorageGateway
     #   <p>The date that the tape enters a custom tape pool.</p>
     #   @return [Time]
     class Tape < Struct.new(
+      nil,
       :tape_arn,
       :tape_barcode,
       :tape_created_date,
@@ -5734,6 +5926,7 @@ module Aws::StorageGateway
     #            format.</p>
     #   @return [Time]
     class TapeArchive < Struct.new(
+      nil,
       :tape_arn,
       :tape_barcode,
       :tape_created_date,
@@ -5788,6 +5981,7 @@ module Aws::StorageGateway
     #            enabled.</p>
     #   @return [Time]
     class TapeInfo < Struct.new(
+      nil,
       :tape_arn,
       :tape_barcode,
       :tape_size_in_bytes,
@@ -5818,6 +6012,7 @@ module Aws::StorageGateway
     #   <p>The status of the virtual tapes.</p>
     #   @return [String]
     class TapeRecoveryPointInfo < Struct.new(
+      nil,
       :tape_arn,
       :tape_recovery_point_time,
       :tape_size_in_bytes,
@@ -5836,6 +6031,7 @@ module Aws::StorageGateway
     #            operation to return a list of gateways for your account and Amazon Web Services Region.</p>
     #   @return [String]
     class UpdateAutomaticTapeCreationPolicyInput < Struct.new(
+      nil,
       :automatic_tape_creation_rules,
       :gateway_arn,
       keyword_init: true
@@ -5848,6 +6044,7 @@ module Aws::StorageGateway
     #            operation to return a list of gateways for your account and Amazon Web Services Region.</p>
     #   @return [String]
     class UpdateAutomaticTapeCreationPolicyOutput < Struct.new(
+      nil,
       :gateway_arn,
       keyword_init: true
     )
@@ -5878,6 +6075,7 @@ module Aws::StorageGateway
     #   <p>The average download bandwidth rate limit in bits per second.</p>
     #   @return [Integer]
     class UpdateBandwidthRateLimitInput < Struct.new(
+      nil,
       :gateway_arn,
       :average_upload_rate_limit_in_bits_per_sec,
       :average_download_rate_limit_in_bits_per_sec,
@@ -5893,6 +6091,7 @@ module Aws::StorageGateway
     #            operation to return a list of gateways for your account and Amazon Web Services Region.</p>
     #   @return [String]
     class UpdateBandwidthRateLimitOutput < Struct.new(
+      nil,
       :gateway_arn,
       keyword_init: true
     )
@@ -5908,6 +6107,7 @@ module Aws::StorageGateway
     #            bandwidth rate limit intervals have been scheduled, the array is empty. </p>
     #   @return [Array<Types::BandwidthRateLimitInterval>]
     class UpdateBandwidthRateLimitScheduleInput < Struct.new(
+      nil,
       :gateway_arn,
       :bandwidth_rate_limit_intervals,
       keyword_init: true
@@ -5920,6 +6120,7 @@ module Aws::StorageGateway
     #            operation to return a list of gateways for your account and Amazon Web Services Region.</p>
     #   @return [String]
     class UpdateBandwidthRateLimitScheduleOutput < Struct.new(
+      nil,
       :gateway_arn,
       keyword_init: true
     )
@@ -5972,6 +6173,7 @@ module Aws::StorageGateway
     #            </note>
     #   @return [String]
     class UpdateChapCredentialsInput < Struct.new(
+      nil,
       :target_arn,
       :secret_to_authenticate_initiator,
       :initiator_name,
@@ -5991,6 +6193,7 @@ module Aws::StorageGateway
     #            specified in the request.</p>
     #   @return [String]
     class UpdateChapCredentialsOutput < Struct.new(
+      nil,
       :target_arn,
       :initiator_name,
       keyword_init: true
@@ -6017,6 +6220,7 @@ module Aws::StorageGateway
     #   <p>The refresh cache information for the file share or FSx file systems.</p>
     #   @return [Types::CacheAttributes]
     class UpdateFileSystemAssociationInput < Struct.new(
+      nil,
       :file_system_association_arn,
       :user_name,
       :password,
@@ -6031,6 +6235,7 @@ module Aws::StorageGateway
     #   <p>The ARN of the updated file system association.</p>
     #   @return [String]
     class UpdateFileSystemAssociationOutput < Struct.new(
+      nil,
       :file_system_association_arn,
       keyword_init: true
     )
@@ -6060,6 +6265,7 @@ module Aws::StorageGateway
     #            in the <i>Amazon S3 File Gateway User Guide</i>.</p>
     #   @return [String]
     class UpdateGatewayInformationInput < Struct.new(
+      nil,
       :gateway_arn,
       :gateway_name,
       :gateway_timezone,
@@ -6080,6 +6286,7 @@ module Aws::StorageGateway
     #   <p>The name you configured for your gateway.</p>
     #   @return [String]
     class UpdateGatewayInformationOutput < Struct.new(
+      nil,
       :gateway_arn,
       :gateway_name,
       keyword_init: true
@@ -6093,6 +6300,7 @@ module Aws::StorageGateway
     #            operation to return a list of gateways for your account and Amazon Web Services Region.</p>
     #   @return [String]
     class UpdateGatewaySoftwareNowInput < Struct.new(
+      nil,
       :gateway_arn,
       keyword_init: true
     )
@@ -6106,6 +6314,7 @@ module Aws::StorageGateway
     #            operation to return a list of gateways for your account and Amazon Web Services Region.</p>
     #   @return [String]
     class UpdateGatewaySoftwareNowOutput < Struct.new(
+      nil,
       :gateway_arn,
       keyword_init: true
     )
@@ -6176,6 +6385,7 @@ module Aws::StorageGateway
     #            scheduled maintenance window.</p>
     #   @return [Types::SoftwareUpdatePreferences]
     class UpdateMaintenanceStartTimeInput < Struct.new(
+      nil,
       :gateway_arn,
       :hour_of_day,
       :minute_of_hour,
@@ -6194,6 +6404,7 @@ module Aws::StorageGateway
     #            operation to return a list of gateways for your account and Amazon Web Services Region.</p>
     #   @return [String]
     class UpdateMaintenanceStartTimeOutput < Struct.new(
+      nil,
       :gateway_arn,
       keyword_init: true
     )
@@ -6350,6 +6561,7 @@ module Aws::StorageGateway
     #   <p>The Amazon Resource Name (ARN) of the storage used for audit logs.</p>
     #   @return [String]
     class UpdateNFSFileShareInput < Struct.new(
+      nil,
       :file_share_arn,
       :encryption_type,
       :kms_encrypted,
@@ -6376,6 +6588,7 @@ module Aws::StorageGateway
     #   <p>The Amazon Resource Name (ARN) of the updated file share.</p>
     #   @return [String]
     class UpdateNFSFileShareOutput < Struct.new(
+      nil,
       :file_share_arn,
       keyword_init: true
     )
@@ -6556,6 +6769,7 @@ module Aws::StorageGateway
     #            </p>
     #   @return [Boolean]
     class UpdateSMBFileShareInput < Struct.new(
+      nil,
       :file_share_arn,
       :encryption_type,
       :kms_encrypted,
@@ -6586,6 +6800,7 @@ module Aws::StorageGateway
     #   <p>The Amazon Resource Name (ARN) of the updated SMB file share.</p>
     #   @return [String]
     class UpdateSMBFileShareOutput < Struct.new(
+      nil,
       :file_share_arn,
       keyword_init: true
     )
@@ -6600,6 +6815,7 @@ module Aws::StorageGateway
     #   <p>The shares on this gateway appear when listing shares.</p>
     #   @return [Boolean]
     class UpdateSMBFileShareVisibilityInput < Struct.new(
+      nil,
       :gateway_arn,
       :file_shares_visible,
       keyword_init: true
@@ -6612,6 +6828,7 @@ module Aws::StorageGateway
     #            operation to return a list of gateways for your account and Amazon Web Services Region.</p>
     #   @return [String]
     class UpdateSMBFileShareVisibilityOutput < Struct.new(
+      nil,
       :gateway_arn,
       keyword_init: true
     )
@@ -6627,6 +6844,7 @@ module Aws::StorageGateway
     #            for SMB file shares on the gateway.</p>
     #   @return [Types::SMBLocalGroups]
     class UpdateSMBLocalGroupsInput < Struct.new(
+      nil,
       :gateway_arn,
       :smb_local_groups,
       keyword_init: true
@@ -6639,6 +6857,7 @@ module Aws::StorageGateway
     #            operation to return a list of gateways for your account and Amazon Web Services Region.</p>
     #   @return [String]
     class UpdateSMBLocalGroupsOutput < Struct.new(
+      nil,
       :gateway_arn,
       keyword_init: true
     )
@@ -6673,6 +6892,7 @@ module Aws::StorageGateway
     #            later.</p>
     #   @return [String]
     class UpdateSMBSecurityStrategyInput < Struct.new(
+      nil,
       :gateway_arn,
       :smb_security_strategy,
       keyword_init: true
@@ -6685,6 +6905,7 @@ module Aws::StorageGateway
     #            operation to return a list of gateways for your account and Amazon Web Services Region.</p>
     #   @return [String]
     class UpdateSMBSecurityStrategyOutput < Struct.new(
+      nil,
       :gateway_arn,
       keyword_init: true
     )
@@ -6740,6 +6961,7 @@ module Aws::StorageGateway
     #            </note>
     #   @return [Array<Types::Tag>]
     class UpdateSnapshotScheduleInput < Struct.new(
+      nil,
       :volume_arn,
       :start_at,
       :recurrence_in_hours,
@@ -6757,6 +6979,7 @@ module Aws::StorageGateway
     #            operation to return a list of gateway volumes.</p>
     #   @return [String]
     class UpdateSnapshotScheduleOutput < Struct.new(
+      nil,
       :volume_arn,
       keyword_init: true
     )
@@ -6773,6 +6996,7 @@ module Aws::StorageGateway
     #            </p>
     #   @return [String]
     class UpdateVTLDeviceTypeInput < Struct.new(
+      nil,
       :vtl_device_arn,
       :device_type,
       keyword_init: true
@@ -6785,6 +7009,7 @@ module Aws::StorageGateway
     #   <p>The Amazon Resource Name (ARN) of the medium changer you have selected.</p>
     #   @return [String]
     class UpdateVTLDeviceTypeOutput < Struct.new(
+      nil,
       :vtl_device_arn,
       keyword_init: true
     )
@@ -6809,6 +7034,7 @@ module Aws::StorageGateway
     #   <p>A list of iSCSI information about a VTL device.</p>
     #   @return [Types::DeviceiSCSIAttributes]
     class VTLDevice < Struct.new(
+      nil,
       :vtl_device_arn,
       :vtl_device_type,
       :vtl_device_vendor,
@@ -6854,6 +7080,7 @@ module Aws::StorageGateway
     #   <p>One of the VolumeStatus values that indicates the state of the storage volume.</p>
     #   @return [String]
     class VolumeInfo < Struct.new(
+      nil,
       :volume_arn,
       :volume_id,
       :gateway_arn,
@@ -6889,6 +7116,7 @@ module Aws::StorageGateway
     #   <p>The time the recovery point was taken.</p>
     #   @return [String]
     class VolumeRecoveryPointInfo < Struct.new(
+      nil,
       :volume_arn,
       :volume_size_in_bytes,
       :volume_usage_in_bytes,
@@ -6921,6 +7149,7 @@ module Aws::StorageGateway
     #   <p>Indicates whether mutual CHAP is enabled for the iSCSI target.</p>
     #   @return [Boolean]
     class VolumeiSCSIAttributes < Struct.new(
+      nil,
       :target_arn,
       :network_interface_id,
       :network_interface_port,

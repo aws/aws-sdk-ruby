@@ -18,6 +18,7 @@ module Aws::Imagebuilder
     #   			for all of the findings.</p>
     #   @return [Types::SeverityCounts]
     class AccountAggregation < Struct.new(
+      nil,
       :account_id,
       :severity_counts,
       keyword_init: true
@@ -55,6 +56,7 @@ module Aws::Imagebuilder
     #            </note>
     #   @return [String]
     class AdditionalInstanceConfiguration < Struct.new(
+      nil,
       :systems_manager_agent,
       :user_data_override,
       keyword_init: true
@@ -82,6 +84,7 @@ module Aws::Imagebuilder
     #   <p>The account ID of the owner of the AMI.</p>
     #   @return [String]
     class Ami < Struct.new(
+      nil,
       :region,
       :image,
       :name,
@@ -117,6 +120,7 @@ module Aws::Imagebuilder
     #   			launch instances.</p>
     #   @return [Types::LaunchPermissionConfiguration]
     class AmiDistributionConfiguration < Struct.new(
+      nil,
       :name,
       :description,
       :target_account_ids,
@@ -134,6 +138,7 @@ module Aws::Imagebuilder
     #   			automatically disables the pipeline.</p>
     #   @return [Integer]
     class AutoDisablePolicy < Struct.new(
+      nil,
       :failure_count,
       keyword_init: true
     )
@@ -144,6 +149,7 @@ module Aws::Imagebuilder
     # @!attribute message
     #   @return [String]
     class CallRateLimitExceededException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -160,6 +166,7 @@ module Aws::Imagebuilder
     #          in the <i>Amazon EC2 API Reference</i>.</p>
     #   @return [String]
     class CancelImageCreationRequest < Struct.new(
+      nil,
       :image_build_version_arn,
       :client_token,
       keyword_init: true
@@ -177,6 +184,7 @@ module Aws::Imagebuilder
     #   <p>The ARN of the image whose creation this request canceled.</p>
     #   @return [String]
     class CancelImageCreationResponse < Struct.new(
+      nil,
       :request_id,
       :client_token,
       :image_build_version_arn,
@@ -194,6 +202,7 @@ module Aws::Imagebuilder
     #          in the <i>Amazon EC2 API Reference</i>.</p>
     #   @return [String]
     class CancelLifecycleExecutionRequest < Struct.new(
+      nil,
       :lifecycle_execution_id,
       :client_token,
       keyword_init: true
@@ -205,6 +214,7 @@ module Aws::Imagebuilder
     #   <p>The unique identifier for the image lifecycle runtime instance that was canceled.</p>
     #   @return [String]
     class CancelLifecycleExecutionResponse < Struct.new(
+      nil,
       :lifecycle_execution_id,
       keyword_init: true
     )
@@ -217,6 +227,7 @@ module Aws::Imagebuilder
     # @!attribute message
     #   @return [String]
     class ClientException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -290,6 +301,7 @@ module Aws::Imagebuilder
     #   <p>Contains product codes that are used for billing purposes for Amazon Web Services Marketplace components.</p>
     #   @return [Array<Types::ProductCodeListItem>]
     class Component < Struct.new(
+      nil,
       :arn,
       :name,
       :version,
@@ -328,6 +340,7 @@ module Aws::Imagebuilder
     #   			recipe.</p>
     #   @return [Array<Types::ComponentParameter>]
     class ComponentConfiguration < Struct.new(
+      nil,
       :component_arn,
       :parameters,
       keyword_init: true
@@ -343,6 +356,7 @@ module Aws::Imagebuilder
     #   <p>Sets the value for the named component parameter.</p>
     #   @return [Array<String>]
     class ComponentParameter < Struct.new(
+      nil,
       :name,
       :value,
       keyword_init: true
@@ -366,6 +380,7 @@ module Aws::Imagebuilder
     #   <p>Describes this parameter.</p>
     #   @return [String]
     class ComponentParameterDetail < Struct.new(
+      nil,
       :name,
       :type,
       :default_value,
@@ -383,6 +398,7 @@ module Aws::Imagebuilder
     #   <p>Describes how or why the component changed state.</p>
     #   @return [String]
     class ComponentState < Struct.new(
+      nil,
       :status,
       :reason,
       keyword_init: true
@@ -439,6 +455,7 @@ module Aws::Imagebuilder
     #   			component detail results for API, CLI, or SDK operations.</p>
     #   @return [Boolean]
     class ComponentSummary < Struct.new(
+      nil,
       :arn,
       :name,
       :version,
@@ -534,6 +551,7 @@ module Aws::Imagebuilder
     #   <p>Contains product codes that are used for billing purposes for Amazon Web Services Marketplace components.</p>
     #   @return [Array<Types::ProductCodeListItem>]
     class ComponentVersion < Struct.new(
+      nil,
       :arn,
       :name,
       :version,
@@ -559,6 +577,7 @@ module Aws::Imagebuilder
     #   <p>A list of URIs for containers created in the context Region.</p>
     #   @return [Array<String>]
     class Container < Struct.new(
+      nil,
       :region,
       :image_uris,
       keyword_init: true
@@ -578,6 +597,7 @@ module Aws::Imagebuilder
     #   <p>The destination repository for the container distribution configuration.</p>
     #   @return [Types::TargetContainerRepository]
     class ContainerDistributionConfiguration < Struct.new(
+      nil,
       :description,
       :container_tags,
       :target_repository,
@@ -682,6 +702,7 @@ module Aws::Imagebuilder
     #   <p>The destination repository for the container image.</p>
     #   @return [Types::TargetContainerRepository]
     class ContainerRecipe < Struct.new(
+      nil,
       :arn,
       :container_type,
       :name,
@@ -736,6 +757,7 @@ module Aws::Imagebuilder
     #   <p>Tags that are attached to the container recipe.</p>
     #   @return [Hash<String, String>]
     class ContainerRecipeSummary < Struct.new(
+      nil,
       :arn,
       :container_type,
       :name,
@@ -811,6 +833,7 @@ module Aws::Imagebuilder
     #          in the <i>Amazon EC2 API Reference</i>.</p>
     #   @return [String]
     class CreateComponentRequest < Struct.new(
+      nil,
       :name,
       :semantic_version,
       :description,
@@ -837,6 +860,7 @@ module Aws::Imagebuilder
     #   <p>The Amazon Resource Name (ARN) of the component that the request created.</p>
     #   @return [String]
     class CreateComponentResponse < Struct.new(
+      nil,
       :request_id,
       :client_token,
       :component_build_version_arn,
@@ -915,6 +939,7 @@ module Aws::Imagebuilder
     #          in the <i>Amazon EC2 API Reference</i>.</p>
     #   @return [String]
     class CreateContainerRecipeRequest < Struct.new(
+      nil,
       :container_type,
       :name,
       :description,
@@ -947,6 +972,7 @@ module Aws::Imagebuilder
     #   			created.</p>
     #   @return [String]
     class CreateContainerRecipeResponse < Struct.new(
+      nil,
       :request_id,
       :client_token,
       :container_recipe_arn,
@@ -973,6 +999,7 @@ module Aws::Imagebuilder
     #          in the <i>Amazon EC2 API Reference</i>.</p>
     #   @return [String]
     class CreateDistributionConfigurationRequest < Struct.new(
+      nil,
       :name,
       :description,
       :distributions,
@@ -994,6 +1021,7 @@ module Aws::Imagebuilder
     #   			this request.</p>
     #   @return [String]
     class CreateDistributionConfigurationResponse < Struct.new(
+      nil,
       :request_id,
       :client_token,
       :distribution_configuration_arn,
@@ -1060,6 +1088,7 @@ module Aws::Imagebuilder
     #   <p>Define logging configuration for the image build process.</p>
     #   @return [Types::PipelineLoggingConfiguration]
     class CreateImagePipelineRequest < Struct.new(
+      nil,
       :name,
       :description,
       :image_recipe_arn,
@@ -1092,6 +1121,7 @@ module Aws::Imagebuilder
     #   			request.</p>
     #   @return [String]
     class CreateImagePipelineResponse < Struct.new(
+      nil,
       :request_id,
       :client_token,
       :image_pipeline_arn,
@@ -1168,6 +1198,7 @@ module Aws::Imagebuilder
     #          in the <i>Amazon EC2 API Reference</i>.</p>
     #   @return [String]
     class CreateImageRecipeRequest < Struct.new(
+      nil,
       :name,
       :description,
       :semantic_version,
@@ -1195,6 +1226,7 @@ module Aws::Imagebuilder
     #   			request.</p>
     #   @return [String]
     class CreateImageRecipeResponse < Struct.new(
+      nil,
       :request_id,
       :client_token,
       :image_recipe_arn,
@@ -1249,6 +1281,7 @@ module Aws::Imagebuilder
     #   <p>Define logging configuration for the image build process.</p>
     #   @return [Types::ImageLoggingConfiguration]
     class CreateImageRequest < Struct.new(
+      nil,
       :image_recipe_arn,
       :container_recipe_arn,
       :distribution_configuration_arn,
@@ -1276,6 +1309,7 @@ module Aws::Imagebuilder
     #   <p>The Amazon Resource Name (ARN) of the image that the request created.</p>
     #   @return [String]
     class CreateImageResponse < Struct.new(
+      nil,
       :request_id,
       :client_token,
       :image_build_version_arn,
@@ -1349,6 +1383,7 @@ module Aws::Imagebuilder
     #          in the <i>Amazon EC2 API Reference</i>.</p>
     #   @return [String]
     class CreateInfrastructureConfigurationRequest < Struct.new(
+      nil,
       :name,
       :description,
       :instance_types,
@@ -1380,6 +1415,7 @@ module Aws::Imagebuilder
     #   			this request.</p>
     #   @return [String]
     class CreateInfrastructureConfigurationResponse < Struct.new(
+      nil,
       :request_id,
       :client_token,
       :infrastructure_configuration_arn,
@@ -1419,6 +1455,7 @@ module Aws::Imagebuilder
     #          in the <i>Amazon EC2 API Reference</i>.</p>
     #   @return [String]
     class CreateLifecyclePolicyRequest < Struct.new(
+      nil,
       :name,
       :description,
       :status,
@@ -1440,6 +1477,7 @@ module Aws::Imagebuilder
     #   <p>The Amazon Resource Name (ARN) of the lifecycle policy that the request created.</p>
     #   @return [String]
     class CreateLifecyclePolicyResponse < Struct.new(
+      nil,
       :client_token,
       :lifecycle_policy_arn,
       keyword_init: true
@@ -1504,6 +1542,7 @@ module Aws::Imagebuilder
     #   			is responsible.</p>
     #   @return [String]
     class CreateWorkflowRequest < Struct.new(
+      nil,
       :name,
       :semantic_version,
       :description,
@@ -1526,6 +1565,7 @@ module Aws::Imagebuilder
     #   <p>The Amazon Resource Name (ARN) of the workflow resource that the request created.</p>
     #   @return [String]
     class CreateWorkflowResponse < Struct.new(
+      nil,
       :client_token,
       :workflow_build_version_arn,
       keyword_init: true
@@ -1552,6 +1592,7 @@ module Aws::Imagebuilder
     #   <p>The source of the CVSS score.</p>
     #   @return [String]
     class CvssScore < Struct.new(
+      nil,
       :base_score,
       :scoring_vector,
       :version,
@@ -1569,6 +1610,7 @@ module Aws::Imagebuilder
     #   <p>The reason for the CVSS score adjustment.</p>
     #   @return [String]
     class CvssScoreAdjustment < Struct.new(
+      nil,
       :metric,
       :reason,
       keyword_init: true
@@ -1598,6 +1640,7 @@ module Aws::Imagebuilder
     #   			for the finding.</p>
     #   @return [Array<Types::CvssScoreAdjustment>]
     class CvssScoreDetails < Struct.new(
+      nil,
       :score_source,
       :cvss_source,
       :version,
@@ -1613,6 +1656,7 @@ module Aws::Imagebuilder
     #   <p>The Amazon Resource Name (ARN) of the component build version to delete.</p>
     #   @return [String]
     class DeleteComponentRequest < Struct.new(
+      nil,
       :component_build_version_arn,
       keyword_init: true
     )
@@ -1626,6 +1670,7 @@ module Aws::Imagebuilder
     #   <p>The ARN of the component build version that this request deleted.</p>
     #   @return [String]
     class DeleteComponentResponse < Struct.new(
+      nil,
       :request_id,
       :component_build_version_arn,
       keyword_init: true
@@ -1637,6 +1682,7 @@ module Aws::Imagebuilder
     #   <p>The Amazon Resource Name (ARN) of the container recipe to delete.</p>
     #   @return [String]
     class DeleteContainerRecipeRequest < Struct.new(
+      nil,
       :container_recipe_arn,
       keyword_init: true
     )
@@ -1650,6 +1696,7 @@ module Aws::Imagebuilder
     #   <p>The Amazon Resource Name (ARN) of the container recipe that was deleted.</p>
     #   @return [String]
     class DeleteContainerRecipeResponse < Struct.new(
+      nil,
       :request_id,
       :container_recipe_arn,
       keyword_init: true
@@ -1661,6 +1708,7 @@ module Aws::Imagebuilder
     #   <p>The Amazon Resource Name (ARN) of the distribution configuration to delete.</p>
     #   @return [String]
     class DeleteDistributionConfigurationRequest < Struct.new(
+      nil,
       :distribution_configuration_arn,
       keyword_init: true
     )
@@ -1675,6 +1723,7 @@ module Aws::Imagebuilder
     #   			deleted.</p>
     #   @return [String]
     class DeleteDistributionConfigurationResponse < Struct.new(
+      nil,
       :request_id,
       :distribution_configuration_arn,
       keyword_init: true
@@ -1686,6 +1735,7 @@ module Aws::Imagebuilder
     #   <p>The Amazon Resource Name (ARN) of the image pipeline to delete.</p>
     #   @return [String]
     class DeleteImagePipelineRequest < Struct.new(
+      nil,
       :image_pipeline_arn,
       keyword_init: true
     )
@@ -1699,6 +1749,7 @@ module Aws::Imagebuilder
     #   <p>The Amazon Resource Name (ARN) of the image pipeline that was deleted.</p>
     #   @return [String]
     class DeleteImagePipelineResponse < Struct.new(
+      nil,
       :request_id,
       :image_pipeline_arn,
       keyword_init: true
@@ -1710,6 +1761,7 @@ module Aws::Imagebuilder
     #   <p>The Amazon Resource Name (ARN) of the image recipe to delete.</p>
     #   @return [String]
     class DeleteImageRecipeRequest < Struct.new(
+      nil,
       :image_recipe_arn,
       keyword_init: true
     )
@@ -1723,6 +1775,7 @@ module Aws::Imagebuilder
     #   <p>The Amazon Resource Name (ARN) of the image recipe that was deleted.</p>
     #   @return [String]
     class DeleteImageRecipeResponse < Struct.new(
+      nil,
       :request_id,
       :image_recipe_arn,
       keyword_init: true
@@ -1734,6 +1787,7 @@ module Aws::Imagebuilder
     #   <p>The Amazon Resource Name (ARN) of the Image Builder image resource to delete.</p>
     #   @return [String]
     class DeleteImageRequest < Struct.new(
+      nil,
       :image_build_version_arn,
       keyword_init: true
     )
@@ -1747,6 +1801,7 @@ module Aws::Imagebuilder
     #   <p>The ARN of the Image Builder image resource that this request deleted.</p>
     #   @return [String]
     class DeleteImageResponse < Struct.new(
+      nil,
       :request_id,
       :image_build_version_arn,
       keyword_init: true
@@ -1758,6 +1813,7 @@ module Aws::Imagebuilder
     #   <p>The Amazon Resource Name (ARN) of the infrastructure configuration to delete.</p>
     #   @return [String]
     class DeleteInfrastructureConfigurationRequest < Struct.new(
+      nil,
       :infrastructure_configuration_arn,
       keyword_init: true
     )
@@ -1772,6 +1828,7 @@ module Aws::Imagebuilder
     #   			deleted.</p>
     #   @return [String]
     class DeleteInfrastructureConfigurationResponse < Struct.new(
+      nil,
       :request_id,
       :infrastructure_configuration_arn,
       keyword_init: true
@@ -1783,6 +1840,7 @@ module Aws::Imagebuilder
     #   <p>The Amazon Resource Name (ARN) of the lifecycle policy resource to delete.</p>
     #   @return [String]
     class DeleteLifecyclePolicyRequest < Struct.new(
+      nil,
       :lifecycle_policy_arn,
       keyword_init: true
     )
@@ -1793,6 +1851,7 @@ module Aws::Imagebuilder
     #   <p>The ARN of the lifecycle policy that was deleted.</p>
     #   @return [String]
     class DeleteLifecyclePolicyResponse < Struct.new(
+      nil,
       :lifecycle_policy_arn,
       keyword_init: true
     )
@@ -1803,6 +1862,7 @@ module Aws::Imagebuilder
     #   <p>The Amazon Resource Name (ARN) of the workflow resource to delete.</p>
     #   @return [String]
     class DeleteWorkflowRequest < Struct.new(
+      nil,
       :workflow_build_version_arn,
       keyword_init: true
     )
@@ -1813,6 +1873,7 @@ module Aws::Imagebuilder
     #   <p>The ARN of the workflow resource that this request deleted.</p>
     #   @return [String]
     class DeleteWorkflowResponse < Struct.new(
+      nil,
       :workflow_build_version_arn,
       keyword_init: true
     )
@@ -1850,6 +1911,7 @@ module Aws::Imagebuilder
     #   			output AMI IDs from the build by target Region.</p>
     #   @return [Array<Types::SsmParameterConfiguration>]
     class Distribution < Struct.new(
+      nil,
       :region,
       :ami_distribution_configuration,
       :container_distribution_configuration,
@@ -1890,6 +1952,7 @@ module Aws::Imagebuilder
     #   <p>The tags of the distribution configuration.</p>
     #   @return [Hash<String, String>]
     class DistributionConfiguration < Struct.new(
+      nil,
       :arn,
       :name,
       :description,
@@ -1926,6 +1989,7 @@ module Aws::Imagebuilder
     #   <p>A list of Regions where the container image is distributed to.</p>
     #   @return [Array<String>]
     class DistributionConfigurationSummary < Struct.new(
+      nil,
       :arn,
       :name,
       :description,
@@ -1968,6 +2032,7 @@ module Aws::Imagebuilder
     #   			that the volume supports.</p>
     #   @return [Integer]
     class EbsInstanceBlockDeviceSpecification < Struct.new(
+      nil,
       :encrypted,
       :delete_on_termination,
       :iops,
@@ -1995,6 +2060,7 @@ module Aws::Imagebuilder
     #   			help you identify and manage your scanned images.</p>
     #   @return [Array<String>]
     class EcrConfiguration < Struct.new(
+      nil,
       :repository_name,
       :container_tags,
       keyword_init: true
@@ -2024,6 +2090,7 @@ module Aws::Imagebuilder
     #   <p>The owner account ID for the fast-launch enabled Windows AMI.</p>
     #   @return [String]
     class FastLaunchConfiguration < Struct.new(
+      nil,
       :enabled,
       :snapshot_configuration,
       :max_parallel_launches,
@@ -2056,6 +2123,7 @@ module Aws::Imagebuilder
     #   			AMI.</p>
     #   @return [String]
     class FastLaunchLaunchTemplateSpecification < Struct.new(
+      nil,
       :launch_template_id,
       :launch_template_name,
       :launch_template_version,
@@ -2071,6 +2139,7 @@ module Aws::Imagebuilder
     #   			Windows AMI.</p>
     #   @return [Integer]
     class FastLaunchSnapshotConfiguration < Struct.new(
+      nil,
       :target_resource_count,
       keyword_init: true
     )
@@ -2087,6 +2156,7 @@ module Aws::Imagebuilder
     #   <p>The filter values. Filter values are case-sensitive.</p>
     #   @return [Array<String>]
     class Filter < Struct.new(
+      nil,
       :name,
       :values,
       keyword_init: true
@@ -2098,6 +2168,7 @@ module Aws::Imagebuilder
     # @!attribute message
     #   @return [String]
     class ForbiddenException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -2109,6 +2180,7 @@ module Aws::Imagebuilder
     #   			retrieve.</p>
     #   @return [String]
     class GetComponentPolicyRequest < Struct.new(
+      nil,
       :component_arn,
       keyword_init: true
     )
@@ -2122,6 +2194,7 @@ module Aws::Imagebuilder
     #   <p>The component policy.</p>
     #   @return [String]
     class GetComponentPolicyResponse < Struct.new(
+      nil,
       :request_id,
       :policy,
       keyword_init: true
@@ -2134,6 +2207,7 @@ module Aws::Imagebuilder
     #   			the suffix <code>/\d+$</code>.</p>
     #   @return [String]
     class GetComponentRequest < Struct.new(
+      nil,
       :component_build_version_arn,
       keyword_init: true
     )
@@ -2147,6 +2221,7 @@ module Aws::Imagebuilder
     #   <p>The component object specified in the request.</p>
     #   @return [Types::Component]
     class GetComponentResponse < Struct.new(
+      nil,
       :request_id,
       :component,
       keyword_init: true
@@ -2159,6 +2234,7 @@ module Aws::Imagebuilder
     #   			requested.</p>
     #   @return [String]
     class GetContainerRecipePolicyRequest < Struct.new(
+      nil,
       :container_recipe_arn,
       keyword_init: true
     )
@@ -2172,6 +2248,7 @@ module Aws::Imagebuilder
     #   <p>The container recipe policy object that is returned.</p>
     #   @return [String]
     class GetContainerRecipePolicyResponse < Struct.new(
+      nil,
       :request_id,
       :policy,
       keyword_init: true
@@ -2183,6 +2260,7 @@ module Aws::Imagebuilder
     #   <p>The Amazon Resource Name (ARN) of the container recipe to retrieve.</p>
     #   @return [String]
     class GetContainerRecipeRequest < Struct.new(
+      nil,
       :container_recipe_arn,
       keyword_init: true
     )
@@ -2196,6 +2274,7 @@ module Aws::Imagebuilder
     #   <p>The container recipe object that is returned.</p>
     #   @return [Types::ContainerRecipe]
     class GetContainerRecipeResponse < Struct.new(
+      nil,
       :request_id,
       :container_recipe,
       keyword_init: true
@@ -2208,6 +2287,7 @@ module Aws::Imagebuilder
     #   			retrieve.</p>
     #   @return [String]
     class GetDistributionConfigurationRequest < Struct.new(
+      nil,
       :distribution_configuration_arn,
       keyword_init: true
     )
@@ -2221,6 +2301,7 @@ module Aws::Imagebuilder
     #   <p>The distribution configuration object.</p>
     #   @return [Types::DistributionConfiguration]
     class GetDistributionConfigurationResponse < Struct.new(
+      nil,
       :request_id,
       :distribution_configuration,
       keyword_init: true
@@ -2232,6 +2313,7 @@ module Aws::Imagebuilder
     #   <p>The Amazon Resource Name (ARN) of the image pipeline that you want to retrieve.</p>
     #   @return [String]
     class GetImagePipelineRequest < Struct.new(
+      nil,
       :image_pipeline_arn,
       keyword_init: true
     )
@@ -2245,6 +2327,7 @@ module Aws::Imagebuilder
     #   <p>The image pipeline object.</p>
     #   @return [Types::ImagePipeline]
     class GetImagePipelineResponse < Struct.new(
+      nil,
       :request_id,
       :image_pipeline,
       keyword_init: true
@@ -2256,6 +2339,7 @@ module Aws::Imagebuilder
     #   <p>The Amazon Resource Name (ARN) of the image whose policy you want to retrieve.</p>
     #   @return [String]
     class GetImagePolicyRequest < Struct.new(
+      nil,
       :image_arn,
       keyword_init: true
     )
@@ -2269,6 +2353,7 @@ module Aws::Imagebuilder
     #   <p>The image policy object.</p>
     #   @return [String]
     class GetImagePolicyResponse < Struct.new(
+      nil,
       :request_id,
       :policy,
       keyword_init: true
@@ -2281,6 +2366,7 @@ module Aws::Imagebuilder
     #   			retrieve.</p>
     #   @return [String]
     class GetImageRecipePolicyRequest < Struct.new(
+      nil,
       :image_recipe_arn,
       keyword_init: true
     )
@@ -2294,6 +2380,7 @@ module Aws::Imagebuilder
     #   <p>The image recipe policy object.</p>
     #   @return [String]
     class GetImageRecipePolicyResponse < Struct.new(
+      nil,
       :request_id,
       :policy,
       keyword_init: true
@@ -2305,6 +2392,7 @@ module Aws::Imagebuilder
     #   <p>The Amazon Resource Name (ARN) of the image recipe that you want to retrieve.</p>
     #   @return [String]
     class GetImageRecipeRequest < Struct.new(
+      nil,
       :image_recipe_arn,
       keyword_init: true
     )
@@ -2318,6 +2406,7 @@ module Aws::Imagebuilder
     #   <p>The image recipe object.</p>
     #   @return [Types::ImageRecipe]
     class GetImageRecipeResponse < Struct.new(
+      nil,
       :request_id,
       :image_recipe,
       keyword_init: true
@@ -2329,6 +2418,7 @@ module Aws::Imagebuilder
     #   <p>The Amazon Resource Name (ARN) of the image that you want to get.</p>
     #   @return [String]
     class GetImageRequest < Struct.new(
+      nil,
       :image_build_version_arn,
       keyword_init: true
     )
@@ -2342,6 +2432,7 @@ module Aws::Imagebuilder
     #   <p>The image object.</p>
     #   @return [Types::Image]
     class GetImageResponse < Struct.new(
+      nil,
       :request_id,
       :image,
       keyword_init: true
@@ -2355,6 +2446,7 @@ module Aws::Imagebuilder
     #   			retrieve.</p>
     #   @return [String]
     class GetInfrastructureConfigurationRequest < Struct.new(
+      nil,
       :infrastructure_configuration_arn,
       keyword_init: true
     )
@@ -2369,6 +2461,7 @@ module Aws::Imagebuilder
     #   <p>The infrastructure configuration object.</p>
     #   @return [Types::InfrastructureConfiguration]
     class GetInfrastructureConfigurationResponse < Struct.new(
+      nil,
       :request_id,
       :infrastructure_configuration,
       keyword_init: true
@@ -2380,6 +2473,7 @@ module Aws::Imagebuilder
     #   <p>Use the unique identifier for a runtime instance of the lifecycle policy to get runtime details.</p>
     #   @return [String]
     class GetLifecycleExecutionRequest < Struct.new(
+      nil,
       :lifecycle_execution_id,
       keyword_init: true
     )
@@ -2390,6 +2484,7 @@ module Aws::Imagebuilder
     #   <p>Runtime details for the specified runtime instance of the lifecycle policy.</p>
     #   @return [Types::LifecycleExecution]
     class GetLifecycleExecutionResponse < Struct.new(
+      nil,
       :lifecycle_execution,
       keyword_init: true
     )
@@ -2400,6 +2495,7 @@ module Aws::Imagebuilder
     #   <p>Specifies the Amazon Resource Name (ARN) of the image lifecycle policy resource to get.</p>
     #   @return [String]
     class GetLifecyclePolicyRequest < Struct.new(
+      nil,
       :lifecycle_policy_arn,
       keyword_init: true
     )
@@ -2410,6 +2506,7 @@ module Aws::Imagebuilder
     #   <p>The ARN of the image lifecycle policy resource that was returned.</p>
     #   @return [Types::LifecyclePolicy]
     class GetLifecyclePolicyResponse < Struct.new(
+      nil,
       :lifecycle_policy,
       keyword_init: true
     )
@@ -2426,6 +2523,7 @@ module Aws::Imagebuilder
     #   <p>The bucket path that you can specify to download the resource from Amazon S3.</p>
     #   @return [String]
     class GetMarketplaceResourceRequest < Struct.new(
+      nil,
       :resource_type,
       :resource_arn,
       :resource_location,
@@ -2444,6 +2542,7 @@ module Aws::Imagebuilder
     #   <p>Returns obfuscated data that contains the YAML content of the component.</p>
     #   @return [String]
     class GetMarketplaceResourceResponse < Struct.new(
+      nil,
       :resource_arn,
       :url,
       :data,
@@ -2457,6 +2556,7 @@ module Aws::Imagebuilder
     #   			runtime details.</p>
     #   @return [String]
     class GetWorkflowExecutionRequest < Struct.new(
+      nil,
       :workflow_execution_id,
       keyword_init: true
     )
@@ -2515,6 +2615,7 @@ module Aws::Imagebuilder
     #   			is a named group that contains one or more test workflows.</p>
     #   @return [String]
     class GetWorkflowExecutionResponse < Struct.new(
+      nil,
       :request_id,
       :workflow_build_version_arn,
       :workflow_execution_id,
@@ -2546,6 +2647,7 @@ module Aws::Imagebuilder
     #   <p>The Amazon Resource Name (ARN) of the workflow resource that you want to get.</p>
     #   @return [String]
     class GetWorkflowRequest < Struct.new(
+      nil,
       :workflow_build_version_arn,
       keyword_init: true
     )
@@ -2556,6 +2658,7 @@ module Aws::Imagebuilder
     #   <p>The workflow resource specified in the request.</p>
     #   @return [Types::Workflow]
     class GetWorkflowResponse < Struct.new(
+      nil,
       :workflow,
       keyword_init: true
     )
@@ -2567,6 +2670,7 @@ module Aws::Imagebuilder
     #   			get runtime details for that step.</p>
     #   @return [String]
     class GetWorkflowStepExecutionRequest < Struct.new(
+      nil,
       :step_execution_id,
       keyword_init: true
     )
@@ -2631,6 +2735,7 @@ module Aws::Imagebuilder
     #   <p>The maximum duration in seconds for this step to complete its action.</p>
     #   @return [Integer]
     class GetWorkflowStepExecutionResponse < Struct.new(
+      nil,
       :request_id,
       :step_execution_id,
       :workflow_build_version_arn,
@@ -2658,6 +2763,7 @@ module Aws::Imagebuilder
     # @!attribute message
     #   @return [String]
     class IdempotentParameterMismatchException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -2812,6 +2918,7 @@ module Aws::Imagebuilder
     #   			to direct execution log output during image creation.</p>
     #   @return [Types::ImageLoggingConfiguration]
     class Image < Struct.new(
+      nil,
       :arn,
       :type,
       :name,
@@ -2853,6 +2960,7 @@ module Aws::Imagebuilder
     #   			for all of the findings for the specified image.</p>
     #   @return [Types::SeverityCounts]
     class ImageAggregation < Struct.new(
+      nil,
       :image_build_version_arn,
       :severity_counts,
       keyword_init: true
@@ -2867,6 +2975,7 @@ module Aws::Imagebuilder
     #   			name defaults to <code>/aws/imagebuilder/image-name</code>.</p>
     #   @return [String]
     class ImageLoggingConfiguration < Struct.new(
+      nil,
       :log_group_name,
       keyword_init: true
     )
@@ -2884,6 +2993,7 @@ module Aws::Imagebuilder
     #   			manager.</p>
     #   @return [String]
     class ImagePackage < Struct.new(
+      nil,
       :package_name,
       :package_version,
       keyword_init: true
@@ -2995,6 +3105,7 @@ module Aws::Imagebuilder
     #   			scheduled run continues to increment where it left off before.</p>
     #   @return [Integer]
     class ImagePipeline < Struct.new(
+      nil,
       :arn,
       :name,
       :description,
@@ -3033,6 +3144,7 @@ module Aws::Imagebuilder
     #   			for all of the findings for the specified image pipeline.</p>
     #   @return [Types::SeverityCounts]
     class ImagePipelineAggregation < Struct.new(
+      nil,
       :image_pipeline_arn,
       :severity_counts,
       keyword_init: true
@@ -3109,6 +3221,7 @@ module Aws::Imagebuilder
     #   			prior to image distribution.</p>
     #   @return [Hash<String, String>]
     class ImageRecipe < Struct.new(
+      nil,
       :arn,
       :type,
       :name,
@@ -3152,6 +3265,7 @@ module Aws::Imagebuilder
     #   <p>The tags of the image recipe.</p>
     #   @return [Hash<String, String>]
     class ImageRecipeSummary < Struct.new(
+      nil,
       :arn,
       :name,
       :platform,
@@ -3213,6 +3327,7 @@ module Aws::Imagebuilder
     #   			in the finding through a version update.</p>
     #   @return [String]
     class ImageScanFinding < Struct.new(
+      nil,
       :aws_account_id,
       :image_build_version_arn,
       :image_pipeline_arn,
@@ -3248,6 +3363,7 @@ module Aws::Imagebuilder
     #   <p>Returns an object that contains severity counts based on vulnerability ID.</p>
     #   @return [Types::VulnerabilityIdAggregation]
     class ImageScanFindingAggregation < Struct.new(
+      nil,
       :account_aggregation,
       :image_aggregation,
       :image_pipeline_aggregation,
@@ -3266,6 +3382,7 @@ module Aws::Imagebuilder
     #   <p>The filter values. Filter values are case-sensitive.</p>
     #   @return [Array<String>]
     class ImageScanFindingsFilter < Struct.new(
+      nil,
       :name,
       :values,
       keyword_init: true
@@ -3282,6 +3399,7 @@ module Aws::Imagebuilder
     #   <p>The reason for the scan status for the image.</p>
     #   @return [String]
     class ImageScanState < Struct.new(
+      nil,
       :status,
       :reason,
       keyword_init: true
@@ -3298,6 +3416,7 @@ module Aws::Imagebuilder
     #   <p>Contains Amazon ECR settings for vulnerability scans.</p>
     #   @return [Types::EcrConfiguration]
     class ImageScanningConfiguration < Struct.new(
+      nil,
       :image_scanning_enabled,
       :ecr_configuration,
       keyword_init: true
@@ -3313,6 +3432,7 @@ module Aws::Imagebuilder
     #   <p>The reason for the status of the image.</p>
     #   @return [String]
     class ImageState < Struct.new(
+      nil,
       :status,
       :reason,
       keyword_init: true
@@ -3394,6 +3514,7 @@ module Aws::Imagebuilder
     #   <p>The logging configuration that's defined for the image.</p>
     #   @return [Types::ImageLoggingConfiguration]
     class ImageSummary < Struct.new(
+      nil,
       :arn,
       :name,
       :type,
@@ -3429,6 +3550,7 @@ module Aws::Imagebuilder
     #            </note>
     #   @return [Integer]
     class ImageTestsConfiguration < Struct.new(
+      nil,
       :image_tests_enabled,
       :timeout_minutes,
       keyword_init: true
@@ -3527,6 +3649,7 @@ module Aws::Imagebuilder
     #   <p>The origin of the base image that Image Builder used to build this image.</p>
     #   @return [String]
     class ImageVersion < Struct.new(
+      nil,
       :arn,
       :name,
       :type,
@@ -3599,6 +3722,7 @@ module Aws::Imagebuilder
     #          in the <i>Amazon EC2 API Reference</i>.</p>
     #   @return [String]
     class ImportComponentRequest < Struct.new(
+      nil,
       :name,
       :semantic_version,
       :description,
@@ -3626,6 +3750,7 @@ module Aws::Imagebuilder
     #   <p>The Amazon Resource Name (ARN) of the imported component.</p>
     #   @return [String]
     class ImportComponentResponse < Struct.new(
+      nil,
       :request_id,
       :client_token,
       :component_build_version_arn,
@@ -3675,6 +3800,7 @@ module Aws::Imagebuilder
     #          in the <i>Amazon EC2 API Reference</i>.</p>
     #   @return [String]
     class ImportDiskImageRequest < Struct.new(
+      nil,
       :name,
       :semantic_version,
       :description,
@@ -3698,6 +3824,7 @@ module Aws::Imagebuilder
     #   <p>The Amazon Resource Name (ARN) of the output AMI that was created from the ISO disk file.</p>
     #   @return [String]
     class ImportDiskImageResponse < Struct.new(
+      nil,
       :client_token,
       :image_build_version_arn,
       keyword_init: true
@@ -3750,6 +3877,7 @@ module Aws::Imagebuilder
     #          in the <i>Amazon EC2 API Reference</i>.</p>
     #   @return [String]
     class ImportVmImageRequest < Struct.new(
+      nil,
       :name,
       :semantic_version,
       :description,
@@ -3775,6 +3903,7 @@ module Aws::Imagebuilder
     #   <p>The client token that uniquely identifies the request.</p>
     #   @return [String]
     class ImportVmImageResponse < Struct.new(
+      nil,
       :request_id,
       :image_arn,
       :client_token,
@@ -3844,6 +3973,7 @@ module Aws::Imagebuilder
     #   			from your image will run.</p>
     #   @return [Types::Placement]
     class InfrastructureConfiguration < Struct.new(
+      nil,
       :arn,
       :name,
       :description,
@@ -3899,6 +4029,7 @@ module Aws::Imagebuilder
     #   			from your image will run.</p>
     #   @return [Types::Placement]
     class InfrastructureConfigurationSummary < Struct.new(
+      nil,
       :arn,
       :name,
       :description,
@@ -3921,6 +4052,7 @@ module Aws::Imagebuilder
     #   			for the finding.</p>
     #   @return [Types::CvssScoreDetails]
     class InspectorScoreDetails < Struct.new(
+      nil,
       :adjusted_cvss,
       keyword_init: true
     )
@@ -3941,6 +4073,7 @@ module Aws::Imagebuilder
     #   <p>Use to remove a mapping from the base image.</p>
     #   @return [String]
     class InstanceBlockDeviceMapping < Struct.new(
+      nil,
       :device_name,
       :ebs,
       :virtual_name,
@@ -3963,6 +4096,7 @@ module Aws::Imagebuilder
     #   			AMI.</p>
     #   @return [Array<Types::InstanceBlockDeviceMapping>]
     class InstanceConfiguration < Struct.new(
+      nil,
       :image,
       :block_device_mappings,
       keyword_init: true
@@ -4004,6 +4138,7 @@ module Aws::Imagebuilder
     #   			image builds need a minimum of two hops.</p>
     #   @return [Integer]
     class InstanceMetadataOptions < Struct.new(
+      nil,
       :http_tokens,
       :http_put_response_hop_limit,
       keyword_init: true
@@ -4015,6 +4150,7 @@ module Aws::Imagebuilder
     # @!attribute message
     #   @return [String]
     class InvalidPaginationTokenException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -4026,6 +4162,7 @@ module Aws::Imagebuilder
     # @!attribute message
     #   @return [String]
     class InvalidParameterCombinationException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -4037,6 +4174,7 @@ module Aws::Imagebuilder
     # @!attribute message
     #   @return [String]
     class InvalidParameterException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -4047,6 +4185,7 @@ module Aws::Imagebuilder
     # @!attribute message
     #   @return [String]
     class InvalidParameterValueException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -4057,6 +4196,7 @@ module Aws::Imagebuilder
     # @!attribute message
     #   @return [String]
     class InvalidRequestException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -4067,6 +4207,7 @@ module Aws::Imagebuilder
     # @!attribute message
     #   @return [String]
     class InvalidVersionNumberException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -4097,6 +4238,7 @@ module Aws::Imagebuilder
     #   				terminology and concepts</a>.</p>
     #   @return [Array<String>]
     class LaunchPermissionConfiguration < Struct.new(
+      nil,
       :user_ids,
       :user_groups,
       :organization_arns,
@@ -4118,6 +4260,7 @@ module Aws::Imagebuilder
     #   			specified account.</p>
     #   @return [Boolean]
     class LaunchTemplateConfiguration < Struct.new(
+      nil,
       :launch_template_id,
       :account_id,
       :set_default_version,
@@ -4153,6 +4296,7 @@ module Aws::Imagebuilder
     #   <p>The timestamp when the lifecycle runtime instance completed.</p>
     #   @return [Time]
     class LifecycleExecution < Struct.new(
+      nil,
       :lifecycle_execution_id,
       :lifecycle_policy_arn,
       :resources_impacted_summary,
@@ -4208,6 +4352,7 @@ module Aws::Imagebuilder
     #   <p>The ending timestamp from the lifecycle action that was applied to the resource.</p>
     #   @return [Time]
     class LifecycleExecutionResource < Struct.new(
+      nil,
       :account_id,
       :resource_id,
       :state,
@@ -4230,6 +4375,7 @@ module Aws::Imagebuilder
     #   <p>The reason why the lifecycle policy action is taken.</p>
     #   @return [String]
     class LifecycleExecutionResourceAction < Struct.new(
+      nil,
       :name,
       :reason,
       keyword_init: true
@@ -4247,6 +4393,7 @@ module Aws::Imagebuilder
     #   <p>Messaging that clarifies the reason for the assigned status.</p>
     #   @return [String]
     class LifecycleExecutionResourceState < Struct.new(
+      nil,
       :status,
       :reason,
       keyword_init: true
@@ -4260,6 +4407,7 @@ module Aws::Imagebuilder
     #   			associated resources that are also impacted.</p>
     #   @return [Boolean]
     class LifecycleExecutionResourcesImpactedSummary < Struct.new(
+      nil,
       :has_impacted_resources,
       keyword_init: true
     )
@@ -4280,6 +4428,7 @@ module Aws::Imagebuilder
     #   <p>The runtime status of the lifecycle action taken for the snapshot.</p>
     #   @return [Types::LifecycleExecutionResourceState]
     class LifecycleExecutionSnapshotResource < Struct.new(
+      nil,
       :snapshot_id,
       :state,
       keyword_init: true
@@ -4295,6 +4444,7 @@ module Aws::Imagebuilder
     #   <p>The reason for the current status.</p>
     #   @return [String]
     class LifecycleExecutionState < Struct.new(
+      nil,
       :status,
       :reason,
       keyword_init: true
@@ -4343,6 +4493,7 @@ module Aws::Imagebuilder
     #   			an optional value, both of which you define.</p>
     #   @return [Hash<String, String>]
     class LifecyclePolicy < Struct.new(
+      nil,
       :arn,
       :name,
       :description,
@@ -4371,6 +4522,7 @@ module Aws::Imagebuilder
     #   <p>Additional rules to specify resources that should be exempt from policy actions.</p>
     #   @return [Types::LifecyclePolicyDetailExclusionRules]
     class LifecyclePolicyDetail < Struct.new(
+      nil,
       :action,
       :filter,
       :exclusion_rules,
@@ -4387,6 +4539,7 @@ module Aws::Imagebuilder
     #   <p>Specifies the resources that the lifecycle policy applies to.</p>
     #   @return [Types::LifecyclePolicyDetailActionIncludeResources]
     class LifecyclePolicyDetailAction < Struct.new(
+      nil,
       :type,
       :include_resources,
       keyword_init: true
@@ -4405,6 +4558,7 @@ module Aws::Imagebuilder
     #   <p>Specifies whether the lifecycle action should apply to distributed containers.</p>
     #   @return [Boolean]
     class LifecyclePolicyDetailActionIncludeResources < Struct.new(
+      nil,
       :amis,
       :snapshots,
       :containers,
@@ -4430,6 +4584,7 @@ module Aws::Imagebuilder
     #   			from the lifecycle action.</p>
     #   @return [Types::LifecyclePolicyDetailExclusionRulesAmis]
     class LifecyclePolicyDetailExclusionRules < Struct.new(
+      nil,
       :tag_map,
       :amis,
       keyword_init: true
@@ -4455,6 +4610,7 @@ module Aws::Imagebuilder
     #   <p>Lists tags that should be excluded from lifecycle actions for the AMIs that have them.</p>
     #   @return [Hash<String, String>]
     class LifecyclePolicyDetailExclusionRulesAmis < Struct.new(
+      nil,
       :is_public,
       :regions,
       :shared_accounts,
@@ -4480,6 +4636,7 @@ module Aws::Imagebuilder
     #   			since the last instance launched from the AMI. For example: days, weeks, months, or years.</p>
     #   @return [String]
     class LifecyclePolicyDetailExclusionRulesAmisLastLaunched < Struct.new(
+      nil,
       :value,
       :unit,
       keyword_init: true
@@ -4511,6 +4668,7 @@ module Aws::Imagebuilder
     #   			is not deleted.</p>
     #   @return [Integer]
     class LifecyclePolicyDetailFilter < Struct.new(
+      nil,
       :type,
       :value,
       :unit,
@@ -4530,6 +4688,7 @@ module Aws::Imagebuilder
     #   			resources that the lifecycle policy applies to.</p>
     #   @return [Hash<String, String>]
     class LifecyclePolicyResourceSelection < Struct.new(
+      nil,
       :recipes,
       :tag_map,
       keyword_init: true
@@ -4545,6 +4704,7 @@ module Aws::Imagebuilder
     #   <p>The version of the Image Builder recipe specified by the <code>name</code> field.</p>
     #   @return [String]
     class LifecyclePolicyResourceSelectionRecipe < Struct.new(
+      nil,
       :name,
       :semantic_version,
       keyword_init: true
@@ -4586,6 +4746,7 @@ module Aws::Imagebuilder
     #   			an optional value, both of which you define.</p>
     #   @return [Hash<String, String>]
     class LifecyclePolicySummary < Struct.new(
+      nil,
       :arn,
       :name,
       :description,
@@ -4613,6 +4774,7 @@ module Aws::Imagebuilder
     #   	from a previously truncated response.</p>
     #   @return [String]
     class ListComponentBuildVersionsRequest < Struct.new(
+      nil,
       :component_version_arn,
       :max_results,
       :next_token,
@@ -4633,6 +4795,7 @@ module Aws::Imagebuilder
     #   		with the next request to retrieve additional objects.</p>
     #   @return [String]
     class ListComponentBuildVersionsResponse < Struct.new(
+      nil,
       :request_id,
       :component_summary_list,
       :next_token,
@@ -4693,6 +4856,7 @@ module Aws::Imagebuilder
     #   	from a previously truncated response.</p>
     #   @return [String]
     class ListComponentsRequest < Struct.new(
+      nil,
       :owner,
       :filters,
       :by_name,
@@ -4719,6 +4883,7 @@ module Aws::Imagebuilder
     #   		with the next request to retrieve additional objects.</p>
     #   @return [String]
     class ListComponentsResponse < Struct.new(
+      nil,
       :request_id,
       :component_version_list,
       :next_token,
@@ -4765,6 +4930,7 @@ module Aws::Imagebuilder
     #   	from a previously truncated response.</p>
     #   @return [String]
     class ListContainerRecipesRequest < Struct.new(
+      nil,
       :owner,
       :filters,
       :max_results,
@@ -4786,6 +4952,7 @@ module Aws::Imagebuilder
     #   		with the next request to retrieve additional objects.</p>
     #   @return [String]
     class ListContainerRecipesResponse < Struct.new(
+      nil,
       :request_id,
       :container_recipe_summary_list,
       :next_token,
@@ -4805,6 +4972,7 @@ module Aws::Imagebuilder
     #   	from a previously truncated response.</p>
     #   @return [String]
     class ListDistributionConfigurationsRequest < Struct.new(
+      nil,
       :filters,
       :max_results,
       :next_token,
@@ -4825,6 +4993,7 @@ module Aws::Imagebuilder
     #   		with the next request to retrieve additional objects.</p>
     #   @return [String]
     class ListDistributionConfigurationsResponse < Struct.new(
+      nil,
       :request_id,
       :distribution_configuration_summary_list,
       :next_token,
@@ -4875,6 +5044,7 @@ module Aws::Imagebuilder
     #   	from a previously truncated response.</p>
     #   @return [String]
     class ListImageBuildVersionsRequest < Struct.new(
+      nil,
       :image_version_arn,
       :filters,
       :max_results,
@@ -4896,6 +5066,7 @@ module Aws::Imagebuilder
     #   		with the next request to retrieve additional objects.</p>
     #   @return [String]
     class ListImageBuildVersionsResponse < Struct.new(
+      nil,
       :request_id,
       :image_summary_list,
       :next_token,
@@ -4915,6 +5086,7 @@ module Aws::Imagebuilder
     #   	from a previously truncated response.</p>
     #   @return [String]
     class ListImagePackagesRequest < Struct.new(
+      nil,
       :image_build_version_arn,
       :max_results,
       :next_token,
@@ -4935,6 +5107,7 @@ module Aws::Imagebuilder
     #   		with the next request to retrieve additional objects.</p>
     #   @return [String]
     class ListImagePackagesResponse < Struct.new(
+      nil,
       :request_id,
       :image_package_list,
       :next_token,
@@ -4970,6 +5143,7 @@ module Aws::Imagebuilder
     #   	from a previously truncated response.</p>
     #   @return [String]
     class ListImagePipelineImagesRequest < Struct.new(
+      nil,
       :image_pipeline_arn,
       :filters,
       :max_results,
@@ -4991,6 +5165,7 @@ module Aws::Imagebuilder
     #   		with the next request to retrieve additional objects.</p>
     #   @return [String]
     class ListImagePipelineImagesResponse < Struct.new(
+      nil,
       :request_id,
       :image_summary_list,
       :next_token,
@@ -5042,6 +5217,7 @@ module Aws::Imagebuilder
     #   	from a previously truncated response.</p>
     #   @return [String]
     class ListImagePipelinesRequest < Struct.new(
+      nil,
       :filters,
       :max_results,
       :next_token,
@@ -5062,6 +5238,7 @@ module Aws::Imagebuilder
     #   		with the next request to retrieve additional objects.</p>
     #   @return [String]
     class ListImagePipelinesResponse < Struct.new(
+      nil,
       :request_id,
       :image_pipeline_list,
       :next_token,
@@ -5103,6 +5280,7 @@ module Aws::Imagebuilder
     #   	from a previously truncated response.</p>
     #   @return [String]
     class ListImageRecipesRequest < Struct.new(
+      nil,
       :owner,
       :filters,
       :max_results,
@@ -5125,6 +5303,7 @@ module Aws::Imagebuilder
     #   		with the next request to retrieve additional objects.</p>
     #   @return [String]
     class ListImageRecipesResponse < Struct.new(
+      nil,
       :request_id,
       :image_recipe_summary_list,
       :next_token,
@@ -5143,6 +5322,7 @@ module Aws::Imagebuilder
     #   	from a previously truncated response.</p>
     #   @return [String]
     class ListImageScanFindingAggregationsRequest < Struct.new(
+      nil,
       :filter,
       :next_token,
       keyword_init: true
@@ -5186,6 +5366,7 @@ module Aws::Imagebuilder
     #   		with the next request to retrieve additional objects.</p>
     #   @return [String]
     class ListImageScanFindingAggregationsResponse < Struct.new(
+      nil,
       :request_id,
       :aggregation_type,
       :responses,
@@ -5230,6 +5411,7 @@ module Aws::Imagebuilder
     #   	from a previously truncated response.</p>
     #   @return [String]
     class ListImageScanFindingsRequest < Struct.new(
+      nil,
       :filters,
       :max_results,
       :next_token,
@@ -5251,6 +5433,7 @@ module Aws::Imagebuilder
     #   		with the next request to retrieve additional objects.</p>
     #   @return [String]
     class ListImageScanFindingsResponse < Struct.new(
+      nil,
       :request_id,
       :findings,
       :next_token,
@@ -5309,6 +5492,7 @@ module Aws::Imagebuilder
     #   <p>Includes deprecated images in the response list.</p>
     #   @return [Boolean]
     class ListImagesRequest < Struct.new(
+      nil,
       :owner,
       :filters,
       :by_name,
@@ -5341,6 +5525,7 @@ module Aws::Imagebuilder
     #   		with the next request to retrieve additional objects.</p>
     #   @return [String]
     class ListImagesResponse < Struct.new(
+      nil,
       :request_id,
       :image_version_list,
       :next_token,
@@ -5360,6 +5545,7 @@ module Aws::Imagebuilder
     #   	from a previously truncated response.</p>
     #   @return [String]
     class ListInfrastructureConfigurationsRequest < Struct.new(
+      nil,
       :filters,
       :max_results,
       :next_token,
@@ -5380,6 +5566,7 @@ module Aws::Imagebuilder
     #   		with the next request to retrieve additional objects.</p>
     #   @return [String]
     class ListInfrastructureConfigurationsResponse < Struct.new(
+      nil,
       :request_id,
       :infrastructure_configuration_summary_list,
       :next_token,
@@ -5405,6 +5592,7 @@ module Aws::Imagebuilder
     #   	from a previously truncated response.</p>
     #   @return [String]
     class ListLifecycleExecutionResourcesRequest < Struct.new(
+      nil,
       :lifecycle_execution_id,
       :parent_resource_id,
       :max_results,
@@ -5429,6 +5617,7 @@ module Aws::Imagebuilder
     #   		with the next request to retrieve additional objects.</p>
     #   @return [String]
     class ListLifecycleExecutionResourcesResponse < Struct.new(
+      nil,
       :lifecycle_execution_id,
       :lifecycle_execution_state,
       :resources,
@@ -5449,6 +5638,7 @@ module Aws::Imagebuilder
     #   <p>The Amazon Resource Name (ARN) of the resource for which to get a list of lifecycle runtime instances.</p>
     #   @return [String]
     class ListLifecycleExecutionsRequest < Struct.new(
+      nil,
       :max_results,
       :next_token,
       :resource_arn,
@@ -5466,6 +5656,7 @@ module Aws::Imagebuilder
     #   		with the next request to retrieve additional objects.</p>
     #   @return [String]
     class ListLifecycleExecutionsResponse < Struct.new(
+      nil,
       :lifecycle_executions,
       :next_token,
       keyword_init: true
@@ -5485,6 +5676,7 @@ module Aws::Imagebuilder
     #   	from a previously truncated response.</p>
     #   @return [String]
     class ListLifecyclePoliciesRequest < Struct.new(
+      nil,
       :filters,
       :max_results,
       :next_token,
@@ -5503,6 +5695,7 @@ module Aws::Imagebuilder
     #   		with the next request to retrieve additional objects.</p>
     #   @return [String]
     class ListLifecyclePoliciesResponse < Struct.new(
+      nil,
       :lifecycle_policy_summary_list,
       :next_token,
       keyword_init: true
@@ -5514,6 +5707,7 @@ module Aws::Imagebuilder
     #   <p>The Amazon Resource Name (ARN) of the resource whose tags you want to retrieve.</p>
     #   @return [String]
     class ListTagsForResourceRequest < Struct.new(
+      nil,
       :resource_arn,
       keyword_init: true
     )
@@ -5524,6 +5718,7 @@ module Aws::Imagebuilder
     #   <p>The tags for the specified resource.</p>
     #   @return [Hash<String, String>]
     class ListTagsForResourceResponse < Struct.new(
+      nil,
       :tags,
       keyword_init: true
     )
@@ -5538,6 +5733,7 @@ module Aws::Imagebuilder
     #   	from a previously truncated response.</p>
     #   @return [String]
     class ListWaitingWorkflowStepsRequest < Struct.new(
+      nil,
       :max_results,
       :next_token,
       keyword_init: true
@@ -5555,6 +5751,7 @@ module Aws::Imagebuilder
     #   		with the next request to retrieve additional objects.</p>
     #   @return [String]
     class ListWaitingWorkflowStepsResponse < Struct.new(
+      nil,
       :steps,
       :next_token,
       keyword_init: true
@@ -5573,6 +5770,7 @@ module Aws::Imagebuilder
     #   	from a previously truncated response.</p>
     #   @return [String]
     class ListWorkflowBuildVersionsRequest < Struct.new(
+      nil,
       :workflow_version_arn,
       :max_results,
       :next_token,
@@ -5591,6 +5789,7 @@ module Aws::Imagebuilder
     #   		with the next request to retrieve additional objects.</p>
     #   @return [String]
     class ListWorkflowBuildVersionsResponse < Struct.new(
+      nil,
       :workflow_summary_list,
       :next_token,
       keyword_init: true
@@ -5610,6 +5809,7 @@ module Aws::Imagebuilder
     #   			resource ARN.</p>
     #   @return [String]
     class ListWorkflowExecutionsRequest < Struct.new(
+      nil,
       :max_results,
       :next_token,
       :image_build_version_arn,
@@ -5638,6 +5838,7 @@ module Aws::Imagebuilder
     #   		with the next request to retrieve additional objects.</p>
     #   @return [String]
     class ListWorkflowExecutionsResponse < Struct.new(
+      nil,
       :request_id,
       :workflow_executions,
       :image_build_version_arn,
@@ -5660,6 +5861,7 @@ module Aws::Imagebuilder
     #   			when it ran the workflow.</p>
     #   @return [String]
     class ListWorkflowStepExecutionsRequest < Struct.new(
+      nil,
       :max_results,
       :next_token,
       :workflow_execution_id,
@@ -5696,6 +5898,7 @@ module Aws::Imagebuilder
     #   		with the next request to retrieve additional objects.</p>
     #   @return [String]
     class ListWorkflowStepExecutionsResponse < Struct.new(
+      nil,
       :request_id,
       :steps,
       :workflow_build_version_arn,
@@ -5725,6 +5928,7 @@ module Aws::Imagebuilder
     #   	from a previously truncated response.</p>
     #   @return [String]
     class ListWorkflowsRequest < Struct.new(
+      nil,
       :owner,
       :filters,
       :by_name,
@@ -5744,6 +5948,7 @@ module Aws::Imagebuilder
     #   		with the next request to retrieve additional objects.</p>
     #   @return [String]
     class ListWorkflowsResponse < Struct.new(
+      nil,
       :workflow_version_list,
       :next_token,
       keyword_init: true
@@ -5756,6 +5961,7 @@ module Aws::Imagebuilder
     #   <p>The Amazon S3 logging configuration.</p>
     #   @return [Types::S3Logs]
     class Logging < Struct.new(
+      nil,
       :s3_logs,
       keyword_init: true
     )
@@ -5771,6 +5977,7 @@ module Aws::Imagebuilder
     #   			repository.</p>
     #   @return [Array<Types::Container>]
     class OutputResources < Struct.new(
+      nil,
       :amis,
       :containers,
       keyword_init: true
@@ -5814,6 +6021,7 @@ module Aws::Imagebuilder
     #   			identified for the package.</p>
     #   @return [Array<String>]
     class PackageVulnerabilityDetails < Struct.new(
+      nil,
       :vulnerability_id,
       :vulnerable_packages,
       :source,
@@ -5840,6 +6048,7 @@ module Aws::Imagebuilder
     #   			<code>/aws/imagebuilder/pipeline/pipeline-name</code>.</p>
     #   @return [String]
     class PipelineLoggingConfiguration < Struct.new(
+      nil,
       :image_log_group_name,
       :pipeline_log_group_name,
       keyword_init: true
@@ -5875,6 +6084,7 @@ module Aws::Imagebuilder
     #   			group ARN, you must not specify the host ID. If you specify both, Image Builder returns an error.</p>
     #   @return [String]
     class Placement < Struct.new(
+      nil,
       :availability_zone,
       :tenancy,
       :host_id,
@@ -5895,6 +6105,7 @@ module Aws::Imagebuilder
     #   			empty, it might mean that the component is not published.</p>
     #   @return [String]
     class ProductCodeListItem < Struct.new(
+      nil,
       :product_code_id,
       :product_code_type,
       keyword_init: true
@@ -5910,6 +6121,7 @@ module Aws::Imagebuilder
     #   <p>The policy to apply.</p>
     #   @return [String]
     class PutComponentPolicyRequest < Struct.new(
+      nil,
       :component_arn,
       :policy,
       keyword_init: true
@@ -5925,6 +6137,7 @@ module Aws::Imagebuilder
     #   			to.</p>
     #   @return [String]
     class PutComponentPolicyResponse < Struct.new(
+      nil,
       :request_id,
       :component_arn,
       keyword_init: true
@@ -5940,6 +6153,7 @@ module Aws::Imagebuilder
     #   <p>The policy to apply to the container recipe.</p>
     #   @return [String]
     class PutContainerRecipePolicyRequest < Struct.new(
+      nil,
       :container_recipe_arn,
       :policy,
       keyword_init: true
@@ -5955,6 +6169,7 @@ module Aws::Imagebuilder
     #   			to.</p>
     #   @return [String]
     class PutContainerRecipePolicyResponse < Struct.new(
+      nil,
       :request_id,
       :container_recipe_arn,
       keyword_init: true
@@ -5970,6 +6185,7 @@ module Aws::Imagebuilder
     #   <p>The policy to apply.</p>
     #   @return [String]
     class PutImagePolicyRequest < Struct.new(
+      nil,
       :image_arn,
       :policy,
       keyword_init: true
@@ -5984,6 +6200,7 @@ module Aws::Imagebuilder
     #   <p>The Amazon Resource Name (ARN) of the image that this policy was applied to.</p>
     #   @return [String]
     class PutImagePolicyResponse < Struct.new(
+      nil,
       :request_id,
       :image_arn,
       keyword_init: true
@@ -5999,6 +6216,7 @@ module Aws::Imagebuilder
     #   <p>The policy to apply.</p>
     #   @return [String]
     class PutImageRecipePolicyRequest < Struct.new(
+      nil,
       :image_recipe_arn,
       :policy,
       keyword_init: true
@@ -6014,6 +6232,7 @@ module Aws::Imagebuilder
     #   			to.</p>
     #   @return [String]
     class PutImageRecipePolicyResponse < Struct.new(
+      nil,
       :request_id,
       :image_recipe_arn,
       keyword_init: true
@@ -6027,6 +6246,7 @@ module Aws::Imagebuilder
     #   			remediate the finding.</p>
     #   @return [Types::RemediationRecommendation]
     class Remediation < Struct.new(
+      nil,
       :recommendation,
       keyword_init: true
     )
@@ -6042,6 +6262,7 @@ module Aws::Imagebuilder
     #   			vulnerability.</p>
     #   @return [String]
     class RemediationRecommendation < Struct.new(
+      nil,
       :text,
       :url,
       keyword_init: true
@@ -6053,6 +6274,7 @@ module Aws::Imagebuilder
     # @!attribute message
     #   @return [String]
     class ResourceAlreadyExistsException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -6064,6 +6286,7 @@ module Aws::Imagebuilder
     # @!attribute message
     #   @return [String]
     class ResourceDependencyException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -6075,6 +6298,7 @@ module Aws::Imagebuilder
     # @!attribute message
     #   @return [String]
     class ResourceInUseException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -6085,6 +6309,7 @@ module Aws::Imagebuilder
     # @!attribute message
     #   @return [String]
     class ResourceNotFoundException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -6096,6 +6321,7 @@ module Aws::Imagebuilder
     #   <p>Shows the current lifecycle policy action that was applied to an impacted resource.</p>
     #   @return [String]
     class ResourceState < Struct.new(
+      nil,
       :status,
       keyword_init: true
     )
@@ -6107,6 +6333,7 @@ module Aws::Imagebuilder
     #   <p>Defines criteria for AMIs that are excluded from lifecycle actions.</p>
     #   @return [Types::LifecyclePolicyDetailExclusionRulesAmis]
     class ResourceStateUpdateExclusionRules < Struct.new(
+      nil,
       :amis,
       keyword_init: true
     )
@@ -6124,6 +6351,7 @@ module Aws::Imagebuilder
     #   <p>Specifies whether the lifecycle action should apply to distributed containers.</p>
     #   @return [Boolean]
     class ResourceStateUpdateIncludeResources < Struct.new(
+      nil,
       :amis,
       :snapshots,
       :containers,
@@ -6173,6 +6401,7 @@ module Aws::Imagebuilder
     #   			stored.</p>
     #   @return [String]
     class S3ExportConfiguration < Struct.new(
+      nil,
       :role_name,
       :disk_image_format,
       :s3_bucket,
@@ -6190,6 +6419,7 @@ module Aws::Imagebuilder
     #   <p>The Amazon S3 path to the bucket where the logs are stored.</p>
     #   @return [String]
     class S3Logs < Struct.new(
+      nil,
       :s3_bucket_name,
       :s3_key_prefix,
       keyword_init: true
@@ -6236,6 +6466,7 @@ module Aws::Imagebuilder
     #   			is failing.</p>
     #   @return [Types::AutoDisablePolicy]
     class Schedule < Struct.new(
+      nil,
       :schedule_expression,
       :timezone,
       :pipeline_execution_start_condition,
@@ -6264,6 +6495,7 @@ module Aws::Imagebuilder
     #          in the <i>Amazon EC2 API Reference</i>.</p>
     #   @return [String]
     class SendWorkflowStepActionRequest < Struct.new(
+      nil,
       :step_execution_id,
       :image_build_version_arn,
       :action,
@@ -6285,6 +6517,7 @@ module Aws::Imagebuilder
     #   <p>The client token that uniquely identifies the request.</p>
     #   @return [String]
     class SendWorkflowStepActionResponse < Struct.new(
+      nil,
       :step_execution_id,
       :image_build_version_arn,
       :client_token,
@@ -6298,6 +6531,7 @@ module Aws::Imagebuilder
     # @!attribute message
     #   @return [String]
     class ServiceException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -6310,6 +6544,7 @@ module Aws::Imagebuilder
     # @!attribute message
     #   @return [String]
     class ServiceQuotaExceededException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -6320,6 +6555,7 @@ module Aws::Imagebuilder
     # @!attribute message
     #   @return [String]
     class ServiceUnavailableException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -6341,6 +6577,7 @@ module Aws::Imagebuilder
     #   <p>The number of medium severity findings for the specified filter.</p>
     #   @return [Integer]
     class SeverityCounts < Struct.new(
+      nil,
       :all,
       :critical,
       :high,
@@ -6367,6 +6604,7 @@ module Aws::Imagebuilder
     #   			you use data type <code>aws:ec2:image</code>.</p>
     #   @return [String]
     class SsmParameterConfiguration < Struct.new(
+      nil,
       :ami_account_id,
       :parameter_name,
       :data_type,
@@ -6389,6 +6627,7 @@ module Aws::Imagebuilder
     #   			When it starts pipeline execution.</p>
     #   @return [Hash<String, String>]
     class StartImagePipelineExecutionRequest < Struct.new(
+      nil,
       :image_pipeline_arn,
       :client_token,
       :tags,
@@ -6407,6 +6646,7 @@ module Aws::Imagebuilder
     #   <p>The Amazon Resource Name (ARN) of the image that the request created.</p>
     #   @return [String]
     class StartImagePipelineExecutionResponse < Struct.new(
+      nil,
       :request_id,
       :client_token,
       :image_build_version_arn,
@@ -6441,6 +6681,7 @@ module Aws::Imagebuilder
     #          in the <i>Amazon EC2 API Reference</i>.</p>
     #   @return [String]
     class StartResourceStateUpdateRequest < Struct.new(
+      nil,
       :resource_arn,
       :state,
       :execution_role,
@@ -6461,6 +6702,7 @@ module Aws::Imagebuilder
     #   <p>The requested ARN of the Image Builder resource for the asynchronous update.</p>
     #   @return [String]
     class StartResourceStateUpdateResponse < Struct.new(
+      nil,
       :lifecycle_execution_id,
       :resource_arn,
       keyword_init: true
@@ -6477,6 +6719,7 @@ module Aws::Imagebuilder
     #            <p>The default behavior of uninstallAfterBuild is to remove the SSM Agent if it was installed by EC2 Image Builder</p>
     #   @return [Boolean]
     class SystemsManagerAgent < Struct.new(
+      nil,
       :uninstall_after_build,
       keyword_init: true
     )
@@ -6490,6 +6733,7 @@ module Aws::Imagebuilder
     #   <p>The tags to apply to the resource.</p>
     #   @return [Hash<String, String>]
     class TagResourceRequest < Struct.new(
+      nil,
       :resource_arn,
       :tags,
       keyword_init: true
@@ -6498,6 +6742,7 @@ module Aws::Imagebuilder
     end
 
     class TagResourceResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -6513,6 +6758,7 @@ module Aws::Imagebuilder
     #   			<code><repository location url>/repository_name</code>.</p>
     #   @return [String]
     class TargetContainerRepository < Struct.new(
+      nil,
       :service,
       :repository_name,
       keyword_init: true
@@ -6527,6 +6773,7 @@ module Aws::Imagebuilder
     #   <p>The tag keys to remove from the resource.</p>
     #   @return [Array<String>]
     class UntagResourceRequest < Struct.new(
+      nil,
       :resource_arn,
       :tag_keys,
       keyword_init: true
@@ -6535,6 +6782,7 @@ module Aws::Imagebuilder
     end
 
     class UntagResourceResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -6556,6 +6804,7 @@ module Aws::Imagebuilder
     #          in the <i>Amazon EC2 API Reference</i>.</p>
     #   @return [String]
     class UpdateDistributionConfigurationRequest < Struct.new(
+      nil,
       :distribution_configuration_arn,
       :description,
       :distributions,
@@ -6576,6 +6825,7 @@ module Aws::Imagebuilder
     #   			this request.</p>
     #   @return [String]
     class UpdateDistributionConfigurationResponse < Struct.new(
+      nil,
       :request_id,
       :client_token,
       :distribution_configuration_arn,
@@ -6639,6 +6889,7 @@ module Aws::Imagebuilder
     #   			Image Builder access to perform workflow actions.</p>
     #   @return [String]
     class UpdateImagePipelineRequest < Struct.new(
+      nil,
       :image_pipeline_arn,
       :description,
       :image_recipe_arn,
@@ -6670,6 +6921,7 @@ module Aws::Imagebuilder
     #   			request.</p>
     #   @return [String]
     class UpdateImagePipelineResponse < Struct.new(
+      nil,
       :request_id,
       :client_token,
       :image_pipeline_arn,
@@ -6756,6 +7008,7 @@ module Aws::Imagebuilder
     #          in the <i>Amazon EC2 API Reference</i>.</p>
     #   @return [String]
     class UpdateInfrastructureConfigurationRequest < Struct.new(
+      nil,
       :infrastructure_configuration_arn,
       :description,
       :instance_types,
@@ -6786,6 +7039,7 @@ module Aws::Imagebuilder
     #   			this request.</p>
     #   @return [String]
     class UpdateInfrastructureConfigurationResponse < Struct.new(
+      nil,
       :request_id,
       :client_token,
       :infrastructure_configuration_arn,
@@ -6822,6 +7076,7 @@ module Aws::Imagebuilder
     #          in the <i>Amazon EC2 API Reference</i>.</p>
     #   @return [String]
     class UpdateLifecyclePolicyRequest < Struct.new(
+      nil,
       :lifecycle_policy_arn,
       :description,
       :status,
@@ -6839,6 +7094,7 @@ module Aws::Imagebuilder
     #   <p>The ARN of the image lifecycle policy resource that was updated.</p>
     #   @return [String]
     class UpdateLifecyclePolicyResponse < Struct.new(
+      nil,
       :lifecycle_policy_arn,
       keyword_init: true
     )
@@ -6854,6 +7110,7 @@ module Aws::Imagebuilder
     #   			for all of the findings for the specified vulnerability.</p>
     #   @return [Types::SeverityCounts]
     class VulnerabilityIdAggregation < Struct.new(
+      nil,
       :vulnerability_id,
       :severity_counts,
       keyword_init: true
@@ -6893,6 +7150,7 @@ module Aws::Imagebuilder
     #   <p>The code to run in your environment to update packages with a fix available.</p>
     #   @return [String]
     class VulnerablePackage < Struct.new(
+      nil,
       :name,
       :version,
       :source_layer_hash,
@@ -6956,6 +7214,7 @@ module Aws::Imagebuilder
     #   			to control actions or configure settings.</p>
     #   @return [Array<Types::WorkflowParameterDetail>]
     class Workflow < Struct.new(
+      nil,
       :arn,
       :name,
       :version,
@@ -6995,6 +7254,7 @@ module Aws::Imagebuilder
     #   <p>The action to take if the workflow fails.</p>
     #   @return [String]
     class WorkflowConfiguration < Struct.new(
+      nil,
       :workflow_arn,
       :parameters,
       :parallel_group,
@@ -7044,6 +7304,7 @@ module Aws::Imagebuilder
     #   <p>The name of the test group that included the test workflow resource at runtime.</p>
     #   @return [String]
     class WorkflowExecutionMetadata < Struct.new(
+      nil,
       :workflow_build_version_arn,
       :workflow_execution_id,
       :type,
@@ -7077,6 +7338,7 @@ module Aws::Imagebuilder
     #   <p>Sets the value for the named workflow parameter.</p>
     #   @return [Array<String>]
     class WorkflowParameter < Struct.new(
+      nil,
       :name,
       :value,
       keyword_init: true
@@ -7100,6 +7362,7 @@ module Aws::Imagebuilder
     #   <p>Describes this parameter.</p>
     #   @return [String]
     class WorkflowParameterDetail < Struct.new(
+      nil,
       :name,
       :type,
       :default_value,
@@ -7117,6 +7380,7 @@ module Aws::Imagebuilder
     #   <p>Describes how or why the workflow changed state.</p>
     #   @return [String]
     class WorkflowState < Struct.new(
+      nil,
       :status,
       :reason,
       keyword_init: true
@@ -7150,6 +7414,7 @@ module Aws::Imagebuilder
     #   <p>The timestamp when the workflow step started.</p>
     #   @return [String]
     class WorkflowStepExecution < Struct.new(
+      nil,
       :step_execution_id,
       :image_build_version_arn,
       :workflow_execution_id,
@@ -7197,6 +7462,7 @@ module Aws::Imagebuilder
     #   <p>The timestamp when the workflow step finished.</p>
     #   @return [String]
     class WorkflowStepMetadata < Struct.new(
+      nil,
       :step_execution_id,
       :name,
       :description,
@@ -7246,6 +7512,7 @@ module Aws::Imagebuilder
     #   <p>Contains a list of tags that are defined for the workflow.</p>
     #   @return [Hash<String, String>]
     class WorkflowSummary < Struct.new(
+      nil,
       :arn,
       :name,
       :version,
@@ -7285,6 +7552,7 @@ module Aws::Imagebuilder
     #   <p>The timestamp when Image Builder created the workflow version.</p>
     #   @return [String]
     class WorkflowVersion < Struct.new(
+      nil,
       :arn,
       :name,
       :version,

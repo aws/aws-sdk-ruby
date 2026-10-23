@@ -10,6 +10,7 @@ module Aws::ElasticLoadBalancingV2
     # @!attribute message
     #   @return [String]
     class ALPNPolicyNotSupportedException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -57,6 +58,7 @@ module Aws::ElasticLoadBalancingV2
     #           <code>TargetGroupArn</code>.</p>
     #   @return [Types::ForwardActionConfig]
     class Action < Struct.new(
+      nil,
       :type,
       :target_group_arn,
       :authenticate_oidc_config,
@@ -79,6 +81,7 @@ module Aws::ElasticLoadBalancingV2
     #         <code>IsDefault</code>.</p>
     #   @return [Array<Types::Certificate>]
     class AddListenerCertificatesInput < Struct.new(
+      nil,
       :listener_arn,
       :certificates,
       keyword_init: true
@@ -90,6 +93,7 @@ module Aws::ElasticLoadBalancingV2
     #   <p>Information about the certificates in the certificate list.</p>
     #   @return [Array<Types::Certificate>]
     class AddListenerCertificatesOutput < Struct.new(
+      nil,
       :certificates,
       keyword_init: true
     )
@@ -103,6 +107,7 @@ module Aws::ElasticLoadBalancingV2
     #   <p>The tags.</p>
     #   @return [Array<Types::Tag>]
     class AddTagsInput < Struct.new(
+      nil,
       :resource_arns,
       :tags,
       keyword_init: true
@@ -111,6 +116,7 @@ module Aws::ElasticLoadBalancingV2
     end
 
     class AddTagsOutput < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -123,6 +129,7 @@ module Aws::ElasticLoadBalancingV2
     #   <p>The revocation file to add.</p>
     #   @return [Array<Types::RevocationContent>]
     class AddTrustStoreRevocationsInput < Struct.new(
+      nil,
       :trust_store_arn,
       :revocation_contents,
       keyword_init: true
@@ -134,6 +141,7 @@ module Aws::ElasticLoadBalancingV2
     #   <p>Information about the revocation file added to the trust store.</p>
     #   @return [Array<Types::TrustStoreRevocation>]
     class AddTrustStoreRevocationsOutput < Struct.new(
+      nil,
       :trust_store_revocations,
       keyword_init: true
     )
@@ -151,6 +159,7 @@ module Aws::ElasticLoadBalancingV2
     #   <p>A description of the override state that provides additional details.</p>
     #   @return [String]
     class AdministrativeOverride < Struct.new(
+      nil,
       :state,
       :reason,
       :description,
@@ -163,6 +172,7 @@ module Aws::ElasticLoadBalancingV2
     # @!attribute message
     #   @return [String]
     class AllocationIdNotFoundException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -177,6 +187,7 @@ module Aws::ElasticLoadBalancingV2
     #   <p>Indicates whether anomaly mitigation is in progress.</p>
     #   @return [String]
     class AnomalyDetection < Struct.new(
+      nil,
       :result,
       :mitigation_in_effect,
       keyword_init: true
@@ -229,6 +240,7 @@ module Aws::ElasticLoadBalancingV2
     #            </ul>
     #   @return [String]
     class AuthenticateCognitoActionConfig < Struct.new(
+      nil,
       :user_pool_arn,
       :user_pool_client_id,
       :user_pool_domain,
@@ -306,6 +318,7 @@ module Aws::ElasticLoadBalancingV2
     #         creating a rule, you can omit this parameter or set it to false.</p>
     #   @return [Boolean]
     class AuthenticateOidcActionConfig < Struct.new(
+      nil,
       :issuer,
       :authorization_endpoint,
       :token_endpoint,
@@ -346,6 +359,7 @@ module Aws::ElasticLoadBalancingV2
     #         block.</p>
     #   @return [Array<String>]
     class AvailabilityZone < Struct.new(
+      nil,
       :zone_name,
       :subnet_id,
       :outpost_id,
@@ -360,6 +374,7 @@ module Aws::ElasticLoadBalancingV2
     # @!attribute message
     #   @return [String]
     class AvailabilityZoneNotSupportedException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -370,6 +385,7 @@ module Aws::ElasticLoadBalancingV2
     # @!attribute message
     #   @return [String]
     class CaCertificatesBundleNotFoundException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -380,6 +396,7 @@ module Aws::ElasticLoadBalancingV2
     # @!attribute message
     #   @return [String]
     class CapacityDecreaseRequestsLimitExceededException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -390,6 +407,7 @@ module Aws::ElasticLoadBalancingV2
     # @!attribute message
     #   @return [String]
     class CapacityReservationPendingException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -404,6 +422,7 @@ module Aws::ElasticLoadBalancingV2
     #   <p>The reason code for the status.</p>
     #   @return [String]
     class CapacityReservationStatus < Struct.new(
+      nil,
       :code,
       :reason,
       keyword_init: true
@@ -415,6 +434,7 @@ module Aws::ElasticLoadBalancingV2
     # @!attribute message
     #   @return [String]
     class CapacityUnitsLimitExceededException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -431,6 +451,7 @@ module Aws::ElasticLoadBalancingV2
     #         a listener, but is included when describing listener certificates.</p>
     #   @return [Boolean]
     class Certificate < Struct.new(
+      nil,
       :certificate_arn,
       :is_default,
       keyword_init: true
@@ -442,6 +463,7 @@ module Aws::ElasticLoadBalancingV2
     # @!attribute message
     #   @return [String]
     class CertificateNotFoundException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -456,6 +478,7 @@ module Aws::ElasticLoadBalancingV2
     #   <p>The priority of the cipher.</p>
     #   @return [Integer]
     class Cipher < Struct.new(
+      nil,
       :name,
       :priority,
       keyword_init: true
@@ -531,6 +554,7 @@ module Aws::ElasticLoadBalancingV2
     #   <p>The mutual authentication configuration information.</p>
     #   @return [Types::MutualAuthenticationAttributes]
     class CreateListenerInput < Struct.new(
+      nil,
       :load_balancer_arn,
       :protocol,
       :port,
@@ -549,6 +573,7 @@ module Aws::ElasticLoadBalancingV2
     #   <p>Information about the listener.</p>
     #   @return [Array<Types::Listener>]
     class CreateListenerOutput < Struct.new(
+      nil,
       :listeners,
       keyword_init: true
     )
@@ -632,6 +657,7 @@ module Aws::ElasticLoadBalancingV2
     #   <p>[Application Load Balancers] The IPAM pools to use with the load balancer.</p>
     #   @return [Types::IpamPools]
     class CreateLoadBalancerInput < Struct.new(
+      nil,
       :name,
       :subnets,
       :subnet_mappings,
@@ -652,6 +678,7 @@ module Aws::ElasticLoadBalancingV2
     #   <p>Information about the load balancer.</p>
     #   @return [Array<Types::LoadBalancer>]
     class CreateLoadBalancerOutput < Struct.new(
+      nil,
       :load_balancers,
       keyword_init: true
     )
@@ -674,6 +701,7 @@ module Aws::ElasticLoadBalancingV2
     #   <p>The tags to assign to the rule.</p>
     #   @return [Array<Types::Tag>]
     class CreateRuleInput < Struct.new(
+      nil,
       :listener_arn,
       :conditions,
       :priority,
@@ -688,6 +716,7 @@ module Aws::ElasticLoadBalancingV2
     #   <p>Information about the rule.</p>
     #   @return [Array<Types::Rule>]
     class CreateRuleOutput < Struct.new(
+      nil,
       :rules,
       keyword_init: true
     )
@@ -810,6 +839,7 @@ module Aws::ElasticLoadBalancingV2
     #   <p>The IP address type. The default value is <code>ipv4</code>.</p>
     #   @return [String]
     class CreateTargetGroupInput < Struct.new(
+      nil,
       :name,
       :protocol,
       :protocol_version,
@@ -836,6 +866,7 @@ module Aws::ElasticLoadBalancingV2
     #   <p>Information about the target group.</p>
     #   @return [Array<Types::TargetGroup>]
     class CreateTargetGroupOutput < Struct.new(
+      nil,
       :target_groups,
       keyword_init: true
     )
@@ -859,6 +890,7 @@ module Aws::ElasticLoadBalancingV2
     #   <p>The tags to assign to the trust store.</p>
     #   @return [Array<Types::Tag>]
     class CreateTrustStoreInput < Struct.new(
+      nil,
       :name,
       :ca_certificates_bundle_s3_bucket,
       :ca_certificates_bundle_s3_key,
@@ -873,6 +905,7 @@ module Aws::ElasticLoadBalancingV2
     #   <p>Information about the trust store created.</p>
     #   @return [Array<Types::TrustStore>]
     class CreateTrustStoreOutput < Struct.new(
+      nil,
       :trust_stores,
       keyword_init: true
     )
@@ -883,6 +916,7 @@ module Aws::ElasticLoadBalancingV2
     # @!attribute message
     #   @return [String]
     class DeleteAssociationSameAccountException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -893,6 +927,7 @@ module Aws::ElasticLoadBalancingV2
     #   <p>The Amazon Resource Name (ARN) of the listener.</p>
     #   @return [String]
     class DeleteListenerInput < Struct.new(
+      nil,
       :listener_arn,
       keyword_init: true
     )
@@ -900,6 +935,7 @@ module Aws::ElasticLoadBalancingV2
     end
 
     class DeleteListenerOutput < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -909,6 +945,7 @@ module Aws::ElasticLoadBalancingV2
     #   <p>The Amazon Resource Name (ARN) of the load balancer.</p>
     #   @return [String]
     class DeleteLoadBalancerInput < Struct.new(
+      nil,
       :load_balancer_arn,
       keyword_init: true
     )
@@ -916,6 +953,7 @@ module Aws::ElasticLoadBalancingV2
     end
 
     class DeleteLoadBalancerOutput < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -925,6 +963,7 @@ module Aws::ElasticLoadBalancingV2
     #   <p>The Amazon Resource Name (ARN) of the rule.</p>
     #   @return [String]
     class DeleteRuleInput < Struct.new(
+      nil,
       :rule_arn,
       keyword_init: true
     )
@@ -932,6 +971,7 @@ module Aws::ElasticLoadBalancingV2
     end
 
     class DeleteRuleOutput < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -944,6 +984,7 @@ module Aws::ElasticLoadBalancingV2
     #   <p>The Amazon Resource Name (ARN) of the resource.</p>
     #   @return [String]
     class DeleteSharedTrustStoreAssociationInput < Struct.new(
+      nil,
       :trust_store_arn,
       :resource_arn,
       keyword_init: true
@@ -952,6 +993,7 @@ module Aws::ElasticLoadBalancingV2
     end
 
     class DeleteSharedTrustStoreAssociationOutput < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -961,6 +1003,7 @@ module Aws::ElasticLoadBalancingV2
     #   <p>The Amazon Resource Name (ARN) of the target group.</p>
     #   @return [String]
     class DeleteTargetGroupInput < Struct.new(
+      nil,
       :target_group_arn,
       keyword_init: true
     )
@@ -968,6 +1011,7 @@ module Aws::ElasticLoadBalancingV2
     end
 
     class DeleteTargetGroupOutput < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -977,6 +1021,7 @@ module Aws::ElasticLoadBalancingV2
     #   <p>The Amazon Resource Name (ARN) of the trust store.</p>
     #   @return [String]
     class DeleteTrustStoreInput < Struct.new(
+      nil,
       :trust_store_arn,
       keyword_init: true
     )
@@ -984,6 +1029,7 @@ module Aws::ElasticLoadBalancingV2
     end
 
     class DeleteTrustStoreOutput < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -997,6 +1043,7 @@ module Aws::ElasticLoadBalancingV2
     #         specify both the target ID and the port when you deregister it.</p>
     #   @return [Array<Types::TargetDescription>]
     class DeregisterTargetsInput < Struct.new(
+      nil,
       :target_group_arn,
       :targets,
       keyword_init: true
@@ -1005,6 +1052,7 @@ module Aws::ElasticLoadBalancingV2
     end
 
     class DeregisterTargetsOutput < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1018,6 +1066,7 @@ module Aws::ElasticLoadBalancingV2
     #   <p>The maximum number of results to return with this call.</p>
     #   @return [Integer]
     class DescribeAccountLimitsInput < Struct.new(
+      nil,
       :marker,
       :page_size,
       keyword_init: true
@@ -1033,6 +1082,7 @@ module Aws::ElasticLoadBalancingV2
     #         Otherwise, this is null.</p>
     #   @return [String]
     class DescribeAccountLimitsOutput < Struct.new(
+      nil,
       :limits,
       :next_marker,
       keyword_init: true
@@ -1044,6 +1094,7 @@ module Aws::ElasticLoadBalancingV2
     #   <p>The Amazon Resource Name (ARN) of the load balancer.</p>
     #   @return [String]
     class DescribeCapacityReservationInput < Struct.new(
+      nil,
       :load_balancer_arn,
       keyword_init: true
     )
@@ -1063,6 +1114,7 @@ module Aws::ElasticLoadBalancingV2
     #   <p>The state of the capacity reservation.</p>
     #   @return [Array<Types::ZonalCapacityReservationState>]
     class DescribeCapacityReservationOutput < Struct.new(
+      nil,
       :last_modified_time,
       :decrease_requests_remaining,
       :minimum_load_balancer_capacity,
@@ -1076,6 +1128,7 @@ module Aws::ElasticLoadBalancingV2
     #   <p>The Amazon Resource Name (ARN) of the listener.</p>
     #   @return [String]
     class DescribeListenerAttributesInput < Struct.new(
+      nil,
       :listener_arn,
       keyword_init: true
     )
@@ -1086,6 +1139,7 @@ module Aws::ElasticLoadBalancingV2
     #   <p>Information about the listener attributes.</p>
     #   @return [Array<Types::ListenerAttribute>]
     class DescribeListenerAttributesOutput < Struct.new(
+      nil,
       :attributes,
       keyword_init: true
     )
@@ -1103,6 +1157,7 @@ module Aws::ElasticLoadBalancingV2
     #   <p>The maximum number of results to return with this call.</p>
     #   @return [Integer]
     class DescribeListenerCertificatesInput < Struct.new(
+      nil,
       :listener_arn,
       :marker,
       :page_size,
@@ -1119,6 +1174,7 @@ module Aws::ElasticLoadBalancingV2
     #         Otherwise, this is null.</p>
     #   @return [String]
     class DescribeListenerCertificatesOutput < Struct.new(
+      nil,
       :certificates,
       :next_marker,
       keyword_init: true
@@ -1140,6 +1196,7 @@ module Aws::ElasticLoadBalancingV2
     #   <p>The maximum number of results to return with this call.</p>
     #   @return [Integer]
     class DescribeListenersInput < Struct.new(
+      nil,
       :load_balancer_arn,
       :listener_arns,
       :marker,
@@ -1157,6 +1214,7 @@ module Aws::ElasticLoadBalancingV2
     #         Otherwise, this is null.</p>
     #   @return [String]
     class DescribeListenersOutput < Struct.new(
+      nil,
       :listeners,
       :next_marker,
       keyword_init: true
@@ -1168,6 +1226,7 @@ module Aws::ElasticLoadBalancingV2
     #   <p>The Amazon Resource Name (ARN) of the load balancer.</p>
     #   @return [String]
     class DescribeLoadBalancerAttributesInput < Struct.new(
+      nil,
       :load_balancer_arn,
       keyword_init: true
     )
@@ -1178,6 +1237,7 @@ module Aws::ElasticLoadBalancingV2
     #   <p>Information about the load balancer attributes.</p>
     #   @return [Array<Types::LoadBalancerAttribute>]
     class DescribeLoadBalancerAttributesOutput < Struct.new(
+      nil,
       :attributes,
       keyword_init: true
     )
@@ -1199,6 +1259,7 @@ module Aws::ElasticLoadBalancingV2
     #   <p>The maximum number of results to return with this call.</p>
     #   @return [Integer]
     class DescribeLoadBalancersInput < Struct.new(
+      nil,
       :load_balancer_arns,
       :names,
       :marker,
@@ -1216,6 +1277,7 @@ module Aws::ElasticLoadBalancingV2
     #         Otherwise, this is null.</p>
     #   @return [String]
     class DescribeLoadBalancersOutput < Struct.new(
+      nil,
       :load_balancers,
       :next_marker,
       keyword_init: true
@@ -1237,6 +1299,7 @@ module Aws::ElasticLoadBalancingV2
     #   <p>The maximum number of results to return with this call.</p>
     #   @return [Integer]
     class DescribeRulesInput < Struct.new(
+      nil,
       :listener_arn,
       :rule_arns,
       :marker,
@@ -1254,6 +1317,7 @@ module Aws::ElasticLoadBalancingV2
     #         Otherwise, this is null.</p>
     #   @return [String]
     class DescribeRulesOutput < Struct.new(
+      nil,
       :rules,
       :next_marker,
       keyword_init: true
@@ -1276,6 +1340,7 @@ module Aws::ElasticLoadBalancingV2
     #         balancers.</p>
     #   @return [String]
     class DescribeSSLPoliciesInput < Struct.new(
+      nil,
       :names,
       :marker,
       :page_size,
@@ -1293,6 +1358,7 @@ module Aws::ElasticLoadBalancingV2
     #         Otherwise, this is null.</p>
     #   @return [String]
     class DescribeSSLPoliciesOutput < Struct.new(
+      nil,
       :ssl_policies,
       :next_marker,
       keyword_init: true
@@ -1305,6 +1371,7 @@ module Aws::ElasticLoadBalancingV2
     #         single call.</p>
     #   @return [Array<String>]
     class DescribeTagsInput < Struct.new(
+      nil,
       :resource_arns,
       keyword_init: true
     )
@@ -1315,6 +1382,7 @@ module Aws::ElasticLoadBalancingV2
     #   <p>Information about the tags.</p>
     #   @return [Array<Types::TagDescription>]
     class DescribeTagsOutput < Struct.new(
+      nil,
       :tag_descriptions,
       keyword_init: true
     )
@@ -1325,6 +1393,7 @@ module Aws::ElasticLoadBalancingV2
     #   <p>The Amazon Resource Name (ARN) of the target group.</p>
     #   @return [String]
     class DescribeTargetGroupAttributesInput < Struct.new(
+      nil,
       :target_group_arn,
       keyword_init: true
     )
@@ -1335,6 +1404,7 @@ module Aws::ElasticLoadBalancingV2
     #   <p>Information about the target group attributes</p>
     #   @return [Array<Types::TargetGroupAttribute>]
     class DescribeTargetGroupAttributesOutput < Struct.new(
+      nil,
       :attributes,
       keyword_init: true
     )
@@ -1358,6 +1428,7 @@ module Aws::ElasticLoadBalancingV2
     #   <p>The maximum number of results to return with this call.</p>
     #   @return [Integer]
     class DescribeTargetGroupsInput < Struct.new(
+      nil,
       :load_balancer_arn,
       :target_group_arns,
       :names,
@@ -1376,6 +1447,7 @@ module Aws::ElasticLoadBalancingV2
     #         Otherwise, this is null.</p>
     #   @return [String]
     class DescribeTargetGroupsOutput < Struct.new(
+      nil,
       :target_groups,
       :next_marker,
       keyword_init: true
@@ -1393,6 +1465,7 @@ module Aws::ElasticLoadBalancingV2
     #   <p>Used to include anomaly detection information.</p>
     #   @return [Array<String>]
     class DescribeTargetHealthInput < Struct.new(
+      nil,
       :target_group_arn,
       :targets,
       :include,
@@ -1405,6 +1478,7 @@ module Aws::ElasticLoadBalancingV2
     #   <p>Information about the health of the targets.</p>
     #   @return [Array<Types::TargetHealthDescription>]
     class DescribeTargetHealthOutput < Struct.new(
+      nil,
       :target_health_descriptions,
       keyword_init: true
     )
@@ -1421,6 +1495,7 @@ module Aws::ElasticLoadBalancingV2
     #   <p>The maximum number of results to return with this call.</p>
     #   @return [Integer]
     class DescribeTrustStoreAssociationsInput < Struct.new(
+      nil,
       :trust_store_arn,
       :marker,
       :page_size,
@@ -1437,6 +1512,7 @@ module Aws::ElasticLoadBalancingV2
     #         Otherwise, this is null.</p>
     #   @return [String]
     class DescribeTrustStoreAssociationsOutput < Struct.new(
+      nil,
       :trust_store_associations,
       :next_marker,
       keyword_init: true
@@ -1458,6 +1534,7 @@ module Aws::ElasticLoadBalancingV2
     #   <p>The number of revoked certificates.</p>
     #   @return [Integer]
     class DescribeTrustStoreRevocation < Struct.new(
+      nil,
       :trust_store_arn,
       :revocation_id,
       :revocation_type,
@@ -1480,6 +1557,7 @@ module Aws::ElasticLoadBalancingV2
     #   <p>The maximum number of results to return with this call.</p>
     #   @return [Integer]
     class DescribeTrustStoreRevocationsInput < Struct.new(
+      nil,
       :trust_store_arn,
       :revocation_ids,
       :marker,
@@ -1497,6 +1575,7 @@ module Aws::ElasticLoadBalancingV2
     #         Otherwise, this is null.</p>
     #   @return [String]
     class DescribeTrustStoreRevocationsOutput < Struct.new(
+      nil,
       :trust_store_revocations,
       :next_marker,
       keyword_init: true
@@ -1517,6 +1596,7 @@ module Aws::ElasticLoadBalancingV2
     #   <p>The maximum number of results to return with this call.</p>
     #   @return [Integer]
     class DescribeTrustStoresInput < Struct.new(
+      nil,
       :trust_store_arns,
       :names,
       :marker,
@@ -1534,6 +1614,7 @@ module Aws::ElasticLoadBalancingV2
     #         Otherwise, this is null.</p>
     #   @return [String]
     class DescribeTrustStoresOutput < Struct.new(
+      nil,
       :trust_stores,
       :next_marker,
       keyword_init: true
@@ -1545,6 +1626,7 @@ module Aws::ElasticLoadBalancingV2
     # @!attribute message
     #   @return [String]
     class DuplicateListenerException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -1555,6 +1637,7 @@ module Aws::ElasticLoadBalancingV2
     # @!attribute message
     #   @return [String]
     class DuplicateLoadBalancerNameException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -1565,6 +1648,7 @@ module Aws::ElasticLoadBalancingV2
     # @!attribute message
     #   @return [String]
     class DuplicateTagKeysException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -1575,6 +1659,7 @@ module Aws::ElasticLoadBalancingV2
     # @!attribute message
     #   @return [String]
     class DuplicateTargetGroupNameException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -1585,6 +1670,7 @@ module Aws::ElasticLoadBalancingV2
     # @!attribute message
     #   @return [String]
     class DuplicateTrustStoreNameException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -1604,6 +1690,7 @@ module Aws::ElasticLoadBalancingV2
     #         application/json</p>
     #   @return [String]
     class FixedResponseActionConfig < Struct.new(
+      nil,
       :message_body,
       :status_code,
       :content_type,
@@ -1621,6 +1708,7 @@ module Aws::ElasticLoadBalancingV2
     #   <p>The target group stickiness for the rule.</p>
     #   @return [Types::TargetGroupStickinessConfig]
     class ForwardActionConfig < Struct.new(
+      nil,
       :target_groups,
       :target_group_stickiness_config,
       keyword_init: true
@@ -1632,6 +1720,7 @@ module Aws::ElasticLoadBalancingV2
     #   <p>The Amazon Resource Name (ARN) of the resource.</p>
     #   @return [String]
     class GetResourcePolicyInput < Struct.new(
+      nil,
       :resource_arn,
       keyword_init: true
     )
@@ -1642,6 +1731,7 @@ module Aws::ElasticLoadBalancingV2
     #   <p>The content of the resource policy.</p>
     #   @return [String]
     class GetResourcePolicyOutput < Struct.new(
+      nil,
       :policy,
       keyword_init: true
     )
@@ -1652,6 +1742,7 @@ module Aws::ElasticLoadBalancingV2
     #   <p>The Amazon Resource Name (ARN) of the trust store.</p>
     #   @return [String]
     class GetTrustStoreCaCertificatesBundleInput < Struct.new(
+      nil,
       :trust_store_arn,
       keyword_init: true
     )
@@ -1662,6 +1753,7 @@ module Aws::ElasticLoadBalancingV2
     #   <p>The ca certificate bundles Amazon S3 URI.</p>
     #   @return [String]
     class GetTrustStoreCaCertificatesBundleOutput < Struct.new(
+      nil,
       :location,
       keyword_init: true
     )
@@ -1675,6 +1767,7 @@ module Aws::ElasticLoadBalancingV2
     #   <p>The revocation ID of the revocation file.</p>
     #   @return [Integer]
     class GetTrustStoreRevocationContentInput < Struct.new(
+      nil,
       :trust_store_arn,
       :revocation_id,
       keyword_init: true
@@ -1686,6 +1779,7 @@ module Aws::ElasticLoadBalancingV2
     #   <p>The revocation files Amazon S3 URI.</p>
     #   @return [String]
     class GetTrustStoreRevocationContentOutput < Struct.new(
+      nil,
       :location,
       keyword_init: true
     )
@@ -1697,6 +1791,7 @@ module Aws::ElasticLoadBalancingV2
     # @!attribute message
     #   @return [String]
     class HealthUnavailableException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -1713,6 +1808,7 @@ module Aws::ElasticLoadBalancingV2
     #         the host name.</p>
     #   @return [Array<String>]
     class HostHeaderConditionConfig < Struct.new(
+      nil,
       :values,
       keyword_init: true
     )
@@ -1740,6 +1836,7 @@ module Aws::ElasticLoadBalancingV2
     #         condition per string.</p>
     #   @return [Array<String>]
     class HttpHeaderConditionConfig < Struct.new(
+      nil,
       :http_header_name,
       :values,
       keyword_init: true
@@ -1760,6 +1857,7 @@ module Aws::ElasticLoadBalancingV2
     #         because the response to a HEAD request may be cached.</p>
     #   @return [Array<String>]
     class HttpRequestMethodConditionConfig < Struct.new(
+      nil,
       :values,
       keyword_init: true
     )
@@ -1770,6 +1868,7 @@ module Aws::ElasticLoadBalancingV2
     # @!attribute message
     #   @return [String]
     class IncompatibleProtocolsException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -1780,6 +1879,7 @@ module Aws::ElasticLoadBalancingV2
     # @!attribute message
     #   @return [String]
     class InsufficientCapacityException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -1790,6 +1890,7 @@ module Aws::ElasticLoadBalancingV2
     # @!attribute message
     #   @return [String]
     class InvalidCaCertificatesBundleException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -1800,6 +1901,7 @@ module Aws::ElasticLoadBalancingV2
     # @!attribute message
     #   @return [String]
     class InvalidConfigurationRequestException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -1810,6 +1912,7 @@ module Aws::ElasticLoadBalancingV2
     # @!attribute message
     #   @return [String]
     class InvalidLoadBalancerActionException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -1820,6 +1923,7 @@ module Aws::ElasticLoadBalancingV2
     # @!attribute message
     #   @return [String]
     class InvalidRevocationContentException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -1830,6 +1934,7 @@ module Aws::ElasticLoadBalancingV2
     # @!attribute message
     #   @return [String]
     class InvalidSchemeException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -1840,6 +1945,7 @@ module Aws::ElasticLoadBalancingV2
     # @!attribute message
     #   @return [String]
     class InvalidSecurityGroupException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -1850,6 +1956,7 @@ module Aws::ElasticLoadBalancingV2
     # @!attribute message
     #   @return [String]
     class InvalidSubnetException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -1861,6 +1968,7 @@ module Aws::ElasticLoadBalancingV2
     # @!attribute message
     #   @return [String]
     class InvalidTargetException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -1874,6 +1982,7 @@ module Aws::ElasticLoadBalancingV2
     #   <p>The ID of the IPv4 IPAM pool.</p>
     #   @return [String]
     class IpamPools < Struct.new(
+      nil,
       :ipv4_ipam_pool_id,
       keyword_init: true
     )
@@ -1966,6 +2075,7 @@ module Aws::ElasticLoadBalancingV2
     #   <p>The maximum value of the limit.</p>
     #   @return [String]
     class Limit < Struct.new(
+      nil,
       :name,
       :max,
       keyword_init: true
@@ -2004,6 +2114,7 @@ module Aws::ElasticLoadBalancingV2
     #   <p>The mutual authentication configuration information.</p>
     #   @return [Types::MutualAuthenticationAttributes]
     class Listener < Struct.new(
+      nil,
       :listener_arn,
       :load_balancer_arn,
       :port,
@@ -2148,6 +2259,7 @@ module Aws::ElasticLoadBalancingV2
     #   <p>The value of the attribute.</p>
     #   @return [String]
     class ListenerAttribute < Struct.new(
+      nil,
       :key,
       :value,
       keyword_init: true
@@ -2159,6 +2271,7 @@ module Aws::ElasticLoadBalancingV2
     # @!attribute message
     #   @return [String]
     class ListenerNotFoundException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -2231,6 +2344,7 @@ module Aws::ElasticLoadBalancingV2
     #   <p>[Application Load Balancers] The IPAM pool in use by the load balancer, if configured.</p>
     #   @return [Types::IpamPools]
     class LoadBalancer < Struct.new(
+      nil,
       :load_balancer_arn,
       :dns_name,
       :canonical_hosted_zone_id,
@@ -2267,6 +2381,7 @@ module Aws::ElasticLoadBalancingV2
     #   <p>[Network Load Balancers] The IPv6 address.</p>
     #   @return [String]
     class LoadBalancerAddress < Struct.new(
+      nil,
       :ip_address,
       :allocation_id,
       :private_i_pv4_address,
@@ -2460,6 +2575,7 @@ module Aws::ElasticLoadBalancingV2
     #   <p>The value of the attribute.</p>
     #   @return [String]
     class LoadBalancerAttribute < Struct.new(
+      nil,
       :key,
       :value,
       keyword_init: true
@@ -2471,6 +2587,7 @@ module Aws::ElasticLoadBalancingV2
     # @!attribute message
     #   @return [String]
     class LoadBalancerNotFoundException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -2489,6 +2606,7 @@ module Aws::ElasticLoadBalancingV2
     #   <p>A description of the state.</p>
     #   @return [String]
     class LoadBalancerState < Struct.new(
+      nil,
       :code,
       :reason,
       keyword_init: true
@@ -2512,6 +2630,7 @@ module Aws::ElasticLoadBalancingV2
     #         "0,1") or a range of values (for example, "0-5"). The default value is 12.</p>
     #   @return [String]
     class Matcher < Struct.new(
+      nil,
       :http_code,
       :grpc_code,
       keyword_init: true
@@ -2524,6 +2643,7 @@ module Aws::ElasticLoadBalancingV2
     #   <p>The number of capacity units.</p>
     #   @return [Integer]
     class MinimumLoadBalancerCapacity < Struct.new(
+      nil,
       :capacity_units,
       keyword_init: true
     )
@@ -2540,6 +2660,7 @@ module Aws::ElasticLoadBalancingV2
     #   <p>Resets the capacity reservation.</p>
     #   @return [Boolean]
     class ModifyCapacityReservationInput < Struct.new(
+      nil,
       :load_balancer_arn,
       :minimum_load_balancer_capacity,
       :reset_capacity_reservation,
@@ -2561,6 +2682,7 @@ module Aws::ElasticLoadBalancingV2
     #   <p>The state of the capacity reservation.</p>
     #   @return [Array<Types::ZonalCapacityReservationState>]
     class ModifyCapacityReservationOutput < Struct.new(
+      nil,
       :last_modified_time,
       :decrease_requests_remaining,
       :minimum_load_balancer_capacity,
@@ -2580,6 +2702,7 @@ module Aws::ElasticLoadBalancingV2
     #   <p>Remove the IP pools in use by the load balancer.</p>
     #   @return [Array<String>]
     class ModifyIpPoolsInput < Struct.new(
+      nil,
       :load_balancer_arn,
       :ipam_pools,
       :remove_ipam_pools,
@@ -2592,6 +2715,7 @@ module Aws::ElasticLoadBalancingV2
     #   <p>The IPAM pool ID.</p>
     #   @return [Types::IpamPools]
     class ModifyIpPoolsOutput < Struct.new(
+      nil,
       :ipam_pools,
       keyword_init: true
     )
@@ -2605,6 +2729,7 @@ module Aws::ElasticLoadBalancingV2
     #   <p>The listener attributes.</p>
     #   @return [Array<Types::ListenerAttribute>]
     class ModifyListenerAttributesInput < Struct.new(
+      nil,
       :listener_arn,
       :attributes,
       keyword_init: true
@@ -2616,6 +2741,7 @@ module Aws::ElasticLoadBalancingV2
     #   <p>Information about the listener attributes.</p>
     #   @return [Array<Types::ListenerAttribute>]
     class ModifyListenerAttributesOutput < Struct.new(
+      nil,
       :attributes,
       keyword_init: true
     )
@@ -2686,6 +2812,7 @@ module Aws::ElasticLoadBalancingV2
     #   <p>The mutual authentication configuration information.</p>
     #   @return [Types::MutualAuthenticationAttributes]
     class ModifyListenerInput < Struct.new(
+      nil,
       :listener_arn,
       :port,
       :protocol,
@@ -2703,6 +2830,7 @@ module Aws::ElasticLoadBalancingV2
     #   <p>Information about the modified listener.</p>
     #   @return [Array<Types::Listener>]
     class ModifyListenerOutput < Struct.new(
+      nil,
       :listeners,
       keyword_init: true
     )
@@ -2716,6 +2844,7 @@ module Aws::ElasticLoadBalancingV2
     #   <p>The load balancer attributes.</p>
     #   @return [Array<Types::LoadBalancerAttribute>]
     class ModifyLoadBalancerAttributesInput < Struct.new(
+      nil,
       :load_balancer_arn,
       :attributes,
       keyword_init: true
@@ -2727,6 +2856,7 @@ module Aws::ElasticLoadBalancingV2
     #   <p>Information about the load balancer attributes.</p>
     #   @return [Array<Types::LoadBalancerAttribute>]
     class ModifyLoadBalancerAttributesOutput < Struct.new(
+      nil,
       :attributes,
       keyword_init: true
     )
@@ -2743,6 +2873,7 @@ module Aws::ElasticLoadBalancingV2
     #   <p>The actions.</p>
     #   @return [Array<Types::Action>]
     class ModifyRuleInput < Struct.new(
+      nil,
       :rule_arn,
       :conditions,
       :actions,
@@ -2755,6 +2886,7 @@ module Aws::ElasticLoadBalancingV2
     #   <p>Information about the modified rule.</p>
     #   @return [Array<Types::Rule>]
     class ModifyRuleOutput < Struct.new(
+      nil,
       :rules,
       keyword_init: true
     )
@@ -2768,6 +2900,7 @@ module Aws::ElasticLoadBalancingV2
     #   <p>The target group attributes.</p>
     #   @return [Array<Types::TargetGroupAttribute>]
     class ModifyTargetGroupAttributesInput < Struct.new(
+      nil,
       :target_group_arn,
       :attributes,
       keyword_init: true
@@ -2779,6 +2912,7 @@ module Aws::ElasticLoadBalancingV2
     #   <p>Information about the target group attributes.</p>
     #   @return [Array<Types::TargetGroupAttribute>]
     class ModifyTargetGroupAttributesOutput < Struct.new(
+      nil,
       :attributes,
       keyword_init: true
     )
@@ -2830,6 +2964,7 @@ module Aws::ElasticLoadBalancingV2
     #         groups with a protocol of GENEVE, the range is 200-399.</p>
     #   @return [Types::Matcher]
     class ModifyTargetGroupInput < Struct.new(
+      nil,
       :target_group_arn,
       :health_check_protocol,
       :health_check_port,
@@ -2849,6 +2984,7 @@ module Aws::ElasticLoadBalancingV2
     #   <p>Information about the modified target group.</p>
     #   @return [Array<Types::TargetGroup>]
     class ModifyTargetGroupOutput < Struct.new(
+      nil,
       :target_groups,
       keyword_init: true
     )
@@ -2868,6 +3004,7 @@ module Aws::ElasticLoadBalancingV2
     #   <p>The Amazon S3 object version for the ca certificates bundle. If undefined the current version is used.</p>
     #   @return [String]
     class ModifyTrustStoreInput < Struct.new(
+      nil,
       :trust_store_arn,
       :ca_certificates_bundle_s3_bucket,
       :ca_certificates_bundle_s3_key,
@@ -2881,6 +3018,7 @@ module Aws::ElasticLoadBalancingV2
     #   <p>Information about the modified trust store.</p>
     #   @return [Array<Types::TrustStore>]
     class ModifyTrustStoreOutput < Struct.new(
+      nil,
       :trust_stores,
       keyword_init: true
     )
@@ -2906,6 +3044,7 @@ module Aws::ElasticLoadBalancingV2
     #   <p>Indicates whether trust store CA certificate names are advertised.</p>
     #   @return [String]
     class MutualAuthenticationAttributes < Struct.new(
+      nil,
       :mode,
       :trust_store_arn,
       :ignore_client_certificate_expiry,
@@ -2920,6 +3059,7 @@ module Aws::ElasticLoadBalancingV2
     # @!attribute message
     #   @return [String]
     class OperationNotPermittedException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -2936,6 +3076,7 @@ module Aws::ElasticLoadBalancingV2
     #         string. To compare against the query string, use a <a href="https://docs.aws.amazon.com/elasticloadbalancing/latest/application/load-balancer-listeners.html#query-string-conditions">query string condition</a>.</p>
     #   @return [Array<String>]
     class PathPatternConditionConfig < Struct.new(
+      nil,
       :values,
       keyword_init: true
     )
@@ -2946,6 +3087,7 @@ module Aws::ElasticLoadBalancingV2
     # @!attribute message
     #   @return [String]
     class PriorRequestNotCompleteException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -2956,6 +3098,7 @@ module Aws::ElasticLoadBalancingV2
     # @!attribute message
     #   @return [String]
     class PriorityInUseException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -2977,6 +3120,7 @@ module Aws::ElasticLoadBalancingV2
     #         them is found in the query string.</p>
     #   @return [Array<Types::QueryStringKeyValuePair>]
     class QueryStringConditionConfig < Struct.new(
+      nil,
       :values,
       keyword_init: true
     )
@@ -2991,6 +3135,7 @@ module Aws::ElasticLoadBalancingV2
     #   <p>The value.</p>
     #   @return [String]
     class QueryStringKeyValuePair < Struct.new(
+      nil,
       :key,
       :value,
       keyword_init: true
@@ -3047,6 +3192,7 @@ module Aws::ElasticLoadBalancingV2
     #         302).</p>
     #   @return [String]
     class RedirectActionConfig < Struct.new(
+      nil,
       :protocol,
       :port,
       :host,
@@ -3065,6 +3211,7 @@ module Aws::ElasticLoadBalancingV2
     #   <p>The targets.</p>
     #   @return [Array<Types::TargetDescription>]
     class RegisterTargetsInput < Struct.new(
+      nil,
       :target_group_arn,
       :targets,
       keyword_init: true
@@ -3073,6 +3220,7 @@ module Aws::ElasticLoadBalancingV2
     end
 
     class RegisterTargetsOutput < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -3087,6 +3235,7 @@ module Aws::ElasticLoadBalancingV2
     #         <code>IsDefault</code>.</p>
     #   @return [Array<Types::Certificate>]
     class RemoveListenerCertificatesInput < Struct.new(
+      nil,
       :listener_arn,
       :certificates,
       keyword_init: true
@@ -3095,6 +3244,7 @@ module Aws::ElasticLoadBalancingV2
     end
 
     class RemoveListenerCertificatesOutput < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -3107,6 +3257,7 @@ module Aws::ElasticLoadBalancingV2
     #   <p>The tag keys for the tags to remove.</p>
     #   @return [Array<String>]
     class RemoveTagsInput < Struct.new(
+      nil,
       :resource_arns,
       :tag_keys,
       keyword_init: true
@@ -3115,6 +3266,7 @@ module Aws::ElasticLoadBalancingV2
     end
 
     class RemoveTagsOutput < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -3127,6 +3279,7 @@ module Aws::ElasticLoadBalancingV2
     #   <p>The revocation IDs of the revocation files you want to remove.</p>
     #   @return [Array<Integer>]
     class RemoveTrustStoreRevocationsInput < Struct.new(
+      nil,
       :trust_store_arn,
       :revocation_ids,
       keyword_init: true
@@ -3135,6 +3288,7 @@ module Aws::ElasticLoadBalancingV2
     end
 
     class RemoveTrustStoreRevocationsOutput < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -3144,6 +3298,7 @@ module Aws::ElasticLoadBalancingV2
     # @!attribute message
     #   @return [String]
     class ResourceInUseException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -3154,6 +3309,7 @@ module Aws::ElasticLoadBalancingV2
     # @!attribute message
     #   @return [String]
     class ResourceNotFoundException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -3174,6 +3330,7 @@ module Aws::ElasticLoadBalancingV2
     #   <p>The type of revocation file.</p>
     #   @return [String]
     class RevocationContent < Struct.new(
+      nil,
       :s3_bucket,
       :s3_key,
       :s3_object_version,
@@ -3187,6 +3344,7 @@ module Aws::ElasticLoadBalancingV2
     # @!attribute message
     #   @return [String]
     class RevocationContentNotFoundException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -3197,6 +3355,7 @@ module Aws::ElasticLoadBalancingV2
     # @!attribute message
     #   @return [String]
     class RevocationIdNotFoundException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -3225,6 +3384,7 @@ module Aws::ElasticLoadBalancingV2
     #   <p>Indicates whether this is the default rule.</p>
     #   @return [Boolean]
     class Rule < Struct.new(
+      nil,
       :rule_arn,
       :priority,
       :conditions,
@@ -3347,6 +3507,7 @@ module Aws::ElasticLoadBalancingV2
     #           <code>source-ip</code>.</p>
     #   @return [Types::SourceIpConditionConfig]
     class RuleCondition < Struct.new(
+      nil,
       :field,
       :values,
       :host_header_config,
@@ -3364,6 +3525,7 @@ module Aws::ElasticLoadBalancingV2
     # @!attribute message
     #   @return [String]
     class RuleNotFoundException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -3378,6 +3540,7 @@ module Aws::ElasticLoadBalancingV2
     #   <p>The rule priority.</p>
     #   @return [Integer]
     class RulePriorityPair < Struct.new(
+      nil,
       :rule_arn,
       :priority,
       keyword_init: true
@@ -3389,6 +3552,7 @@ module Aws::ElasticLoadBalancingV2
     # @!attribute message
     #   @return [String]
     class SSLPolicyNotFoundException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -3411,6 +3575,7 @@ module Aws::ElasticLoadBalancingV2
     #         (IPv4 addresses) and <code>dualstack</code> (IPv4 and IPv6 addresses).</p>
     #   @return [String]
     class SetIpAddressTypeInput < Struct.new(
+      nil,
       :load_balancer_arn,
       :ip_address_type,
       keyword_init: true
@@ -3422,6 +3587,7 @@ module Aws::ElasticLoadBalancingV2
     #   <p>The IP address type.</p>
     #   @return [String]
     class SetIpAddressTypeOutput < Struct.new(
+      nil,
       :ip_address_type,
       keyword_init: true
     )
@@ -3432,6 +3598,7 @@ module Aws::ElasticLoadBalancingV2
     #   <p>The rule priorities.</p>
     #   @return [Array<Types::RulePriorityPair>]
     class SetRulePrioritiesInput < Struct.new(
+      nil,
       :rule_priorities,
       keyword_init: true
     )
@@ -3442,6 +3609,7 @@ module Aws::ElasticLoadBalancingV2
     #   <p>Information about the rules.</p>
     #   @return [Array<Types::Rule>]
     class SetRulePrioritiesOutput < Struct.new(
+      nil,
       :rules,
       keyword_init: true
     )
@@ -3459,6 +3627,7 @@ module Aws::ElasticLoadBalancingV2
     #         Network Load Balancer through Amazon Web Services PrivateLink. The default is <code>on</code>.</p>
     #   @return [String]
     class SetSecurityGroupsInput < Struct.new(
+      nil,
       :load_balancer_arn,
       :security_groups,
       :enforce_security_group_inbound_rules_on_private_link_traffic,
@@ -3475,6 +3644,7 @@ module Aws::ElasticLoadBalancingV2
     #         Network Load Balancer through Amazon Web Services PrivateLink.</p>
     #   @return [String]
     class SetSecurityGroupsOutput < Struct.new(
+      nil,
       :security_group_ids,
       :enforce_security_group_inbound_rules_on_private_link_traffic,
       keyword_init: true
@@ -3526,6 +3696,7 @@ module Aws::ElasticLoadBalancingV2
     #         The default value is <code>off</code>.</p>
     #   @return [String]
     class SetSubnetsInput < Struct.new(
+      nil,
       :load_balancer_arn,
       :subnets,
       :subnet_mappings,
@@ -3546,6 +3717,7 @@ module Aws::ElasticLoadBalancingV2
     #   <p>[Network Load Balancers] Indicates whether to use an IPv6 prefix from each subnet for source NAT.</p>
     #   @return [String]
     class SetSubnetsOutput < Struct.new(
+      nil,
       :availability_zones,
       :ip_address_type,
       :enable_prefix_for_ipv6_source_nat,
@@ -3568,6 +3740,7 @@ module Aws::ElasticLoadBalancingV2
     #            <p>The total number of values must be less than, or equal to five.</p>
     #   @return [Array<String>]
     class SourceIpConditionConfig < Struct.new(
+      nil,
       :values,
       keyword_init: true
     )
@@ -3588,6 +3761,7 @@ module Aws::ElasticLoadBalancingV2
     #   <p> The supported load balancers. </p>
     #   @return [Array<String>]
     class SslPolicy < Struct.new(
+      nil,
       :ssl_protocols,
       :ciphers,
       :name,
@@ -3617,6 +3791,7 @@ module Aws::ElasticLoadBalancingV2
     #         to use an IPv6 prefix selected at random from the subnet CIDR block.</p>
     #   @return [String]
     class SubnetMapping < Struct.new(
+      nil,
       :subnet_id,
       :allocation_id,
       :private_i_pv4_address,
@@ -3631,6 +3806,7 @@ module Aws::ElasticLoadBalancingV2
     # @!attribute message
     #   @return [String]
     class SubnetNotFoundException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -3645,6 +3821,7 @@ module Aws::ElasticLoadBalancingV2
     #   <p>The value of the tag.</p>
     #   @return [String]
     class Tag < Struct.new(
+      nil,
       :key,
       :value,
       keyword_init: true
@@ -3660,6 +3837,7 @@ module Aws::ElasticLoadBalancingV2
     #   <p>Information about the tags.</p>
     #   @return [Array<Types::Tag>]
     class TagDescription < Struct.new(
+      nil,
       :resource_arn,
       :tags,
       keyword_init: true
@@ -3699,6 +3877,7 @@ module Aws::ElasticLoadBalancingV2
     #         supported value is <code>all</code>.</p>
     #   @return [String]
     class TargetDescription < Struct.new(
+      nil,
       :id,
       :port,
       :availability_zone,
@@ -3776,6 +3955,7 @@ module Aws::ElasticLoadBalancingV2
     #   <p>The IP address type. The default value is <code>ipv4</code>.</p>
     #   @return [String]
     class TargetGroup < Struct.new(
+      nil,
       :target_group_arn,
       :target_group_name,
       :protocol,
@@ -3803,6 +3983,7 @@ module Aws::ElasticLoadBalancingV2
     # @!attribute message
     #   @return [String]
     class TargetGroupAssociationLimitException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -4016,6 +4197,7 @@ module Aws::ElasticLoadBalancingV2
     #   <p>The value of the attribute.</p>
     #   @return [String]
     class TargetGroupAttribute < Struct.new(
+      nil,
       :key,
       :value,
       keyword_init: true
@@ -4027,6 +4209,7 @@ module Aws::ElasticLoadBalancingV2
     # @!attribute message
     #   @return [String]
     class TargetGroupNotFoundException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -4043,6 +4226,7 @@ module Aws::ElasticLoadBalancingV2
     #         enabling target group stickiness.</p>
     #   @return [Integer]
     class TargetGroupStickinessConfig < Struct.new(
+      nil,
       :enabled,
       :duration_seconds,
       keyword_init: true
@@ -4059,6 +4243,7 @@ module Aws::ElasticLoadBalancingV2
     #   <p>The weight. The range is 0 to 999.</p>
     #   @return [Integer]
     class TargetGroupTuple < Struct.new(
+      nil,
       :target_group_arn,
       :weight,
       keyword_init: true
@@ -4165,6 +4350,7 @@ module Aws::ElasticLoadBalancingV2
     #           <code>healthy</code>, a description is not provided.</p>
     #   @return [String]
     class TargetHealth < Struct.new(
+      nil,
       :state,
       :reason,
       :description,
@@ -4192,6 +4378,7 @@ module Aws::ElasticLoadBalancingV2
     #   <p>The administrative override information for the target.</p>
     #   @return [Types::AdministrativeOverride]
     class TargetHealthDescription < Struct.new(
+      nil,
       :target,
       :health_check_port,
       :target_health,
@@ -4206,6 +4393,7 @@ module Aws::ElasticLoadBalancingV2
     # @!attribute message
     #   @return [String]
     class TooManyActionsException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -4216,6 +4404,7 @@ module Aws::ElasticLoadBalancingV2
     # @!attribute message
     #   @return [String]
     class TooManyCertificatesException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -4226,6 +4415,7 @@ module Aws::ElasticLoadBalancingV2
     # @!attribute message
     #   @return [String]
     class TooManyListenersException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -4237,6 +4427,7 @@ module Aws::ElasticLoadBalancingV2
     # @!attribute message
     #   @return [String]
     class TooManyLoadBalancersException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -4248,6 +4439,7 @@ module Aws::ElasticLoadBalancingV2
     # @!attribute message
     #   @return [String]
     class TooManyRegistrationsForTargetIdException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -4258,6 +4450,7 @@ module Aws::ElasticLoadBalancingV2
     # @!attribute message
     #   @return [String]
     class TooManyRulesException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -4268,6 +4461,7 @@ module Aws::ElasticLoadBalancingV2
     # @!attribute message
     #   @return [String]
     class TooManyTagsException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -4279,6 +4473,7 @@ module Aws::ElasticLoadBalancingV2
     # @!attribute message
     #   @return [String]
     class TooManyTargetGroupsException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -4289,6 +4484,7 @@ module Aws::ElasticLoadBalancingV2
     # @!attribute message
     #   @return [String]
     class TooManyTargetsException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -4299,6 +4495,7 @@ module Aws::ElasticLoadBalancingV2
     # @!attribute message
     #   @return [String]
     class TooManyTrustStoreRevocationEntriesException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -4309,6 +4506,7 @@ module Aws::ElasticLoadBalancingV2
     # @!attribute message
     #   @return [String]
     class TooManyTrustStoresException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -4321,6 +4519,7 @@ module Aws::ElasticLoadBalancingV2
     # @!attribute message
     #   @return [String]
     class TooManyUniqueTargetGroupsPerLoadBalancerException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -4344,6 +4543,7 @@ module Aws::ElasticLoadBalancingV2
     #   <p>The number of revoked certificates in the trust store.</p>
     #   @return [Integer]
     class TrustStore < Struct.new(
+      nil,
       :name,
       :trust_store_arn,
       :status,
@@ -4359,6 +4559,7 @@ module Aws::ElasticLoadBalancingV2
     #   <p>The Amazon Resource Name (ARN) of the resource.</p>
     #   @return [String]
     class TrustStoreAssociation < Struct.new(
+      nil,
       :resource_arn,
       keyword_init: true
     )
@@ -4369,6 +4570,7 @@ module Aws::ElasticLoadBalancingV2
     # @!attribute message
     #   @return [String]
     class TrustStoreAssociationNotFoundException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -4379,6 +4581,7 @@ module Aws::ElasticLoadBalancingV2
     # @!attribute message
     #   @return [String]
     class TrustStoreInUseException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -4389,6 +4592,7 @@ module Aws::ElasticLoadBalancingV2
     # @!attribute message
     #   @return [String]
     class TrustStoreNotFoundException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -4399,6 +4603,7 @@ module Aws::ElasticLoadBalancingV2
     # @!attribute message
     #   @return [String]
     class TrustStoreNotReadyException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -4419,6 +4624,7 @@ module Aws::ElasticLoadBalancingV2
     #   <p>The number of revoked certificates.</p>
     #   @return [Integer]
     class TrustStoreRevocation < Struct.new(
+      nil,
       :trust_store_arn,
       :revocation_id,
       :revocation_type,
@@ -4432,6 +4638,7 @@ module Aws::ElasticLoadBalancingV2
     # @!attribute message
     #   @return [String]
     class UnsupportedProtocolException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -4449,6 +4656,7 @@ module Aws::ElasticLoadBalancingV2
     #   <p>The number of effective capacity units.</p>
     #   @return [Float]
     class ZonalCapacityReservationState < Struct.new(
+      nil,
       :state,
       :availability_zone,
       :effective_capacity_units,

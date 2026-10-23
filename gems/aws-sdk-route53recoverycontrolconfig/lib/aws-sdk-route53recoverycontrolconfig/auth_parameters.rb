@@ -10,6 +10,7 @@ module Aws::Route53RecoveryControlConfig
   #   @return [Symbol]
   #
   AuthParameters = Struct.new(
+    nil,
     :operation_name,
     keyword_init: true
   ) do

@@ -10,6 +10,7 @@ module Aws::ElastiCache
     # @!attribute message
     #   @return [String]
     class APICallRateForCustomerExceededFault < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -31,6 +32,7 @@ module Aws::ElastiCache
     #               be accompanied by a tag value, although null is accepted.</p>
     #   @return [Array<Types::Tag>]
     class AddTagsToResourceMessage < Struct.new(
+      nil,
       :resource_name,
       :tags,
       keyword_init: true
@@ -45,6 +47,7 @@ module Aws::ElastiCache
     #   <p>A list of tags as key-value pairs.</p>
     #   @return [Array<Types::Tag>]
     class AddTagsToResourceOutput < Struct.new(
+      nil,
       :tag_list,
       keyword_init: true
     )
@@ -67,6 +70,7 @@ module Aws::ElastiCache
     #               this list for the CacheNodeType parameter. </p>
     #   @return [Array<String>]
     class AllowedNodeTypeModificationsMessage < Struct.new(
+      nil,
       :scale_up_modifications,
       :scale_down_modifications,
       keyword_init: true
@@ -82,6 +86,7 @@ module Aws::ElastiCache
     #   <p>The number of passwords belonging to the user. The maximum is two.</p>
     #   @return [Integer]
     class Authentication < Struct.new(
+      nil,
       :type,
       :password_count,
       keyword_init: true
@@ -99,6 +104,7 @@ module Aws::ElastiCache
     #                   <code>password</code>.</p>
     #   @return [Array<String>]
     class AuthenticationMode < Struct.new(
+      nil,
       :type,
       :passwords,
       keyword_init: true
@@ -111,6 +117,7 @@ module Aws::ElastiCache
     # @!attribute message
     #   @return [String]
     class AuthorizationAlreadyExistsFault < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -122,6 +129,7 @@ module Aws::ElastiCache
     # @!attribute message
     #   @return [String]
     class AuthorizationNotFoundFault < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -142,6 +150,7 @@ module Aws::ElastiCache
     #               number for this parameter.</p>
     #   @return [String]
     class AuthorizeCacheSecurityGroupIngressMessage < Struct.new(
+      nil,
       :cache_security_group_name,
       :ec2_security_group_name,
       :ec2_security_group_owner_id,
@@ -171,6 +180,7 @@ module Aws::ElastiCache
     #            </ul>
     #   @return [Types::CacheSecurityGroup]
     class AuthorizeCacheSecurityGroupIngressResult < Struct.new(
+      nil,
       :cache_security_group,
       keyword_init: true
     )
@@ -182,6 +192,7 @@ module Aws::ElastiCache
     #   <p>The name of the Availability Zone.</p>
     #   @return [String]
     class AvailabilityZone < Struct.new(
+      nil,
       :name,
       keyword_init: true
     )
@@ -198,6 +209,7 @@ module Aws::ElastiCache
     #   <p>The unique ID of the service update</p>
     #   @return [String]
     class BatchApplyUpdateActionMessage < Struct.new(
+      nil,
       :replication_group_ids,
       :cache_cluster_ids,
       :service_update_name,
@@ -213,6 +225,7 @@ module Aws::ElastiCache
     #   <p>Update actions that haven't been processed successfully</p>
     #   @return [Array<Types::UnprocessedUpdateAction>]
     class BatchApplyUpdateActionOutput < Struct.new(
+      nil,
       :processed_update_actions,
       :unprocessed_update_actions,
       keyword_init: true
@@ -230,6 +243,7 @@ module Aws::ElastiCache
     #   <p>The unique ID of the service update</p>
     #   @return [String]
     class BatchStopUpdateActionMessage < Struct.new(
+      nil,
       :replication_group_ids,
       :cache_cluster_ids,
       :service_update_name,
@@ -245,6 +259,7 @@ module Aws::ElastiCache
     #   <p>Update actions that haven't been processed successfully</p>
     #   @return [Array<Types::UnprocessedUpdateAction>]
     class BatchStopUpdateActionOutput < Struct.new(
+      nil,
       :processed_update_actions,
       :unprocessed_update_actions,
       keyword_init: true
@@ -644,6 +659,7 @@ module Aws::ElastiCache
     #               no downtime.</p>
     #   @return [String]
     class CacheCluster < Struct.new(
+      nil,
       :cache_cluster_id,
       :configuration_endpoint,
       :client_download_landing_page,
@@ -686,6 +702,7 @@ module Aws::ElastiCache
     # @!attribute message
     #   @return [String]
     class CacheClusterAlreadyExistsFault < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -701,6 +718,7 @@ module Aws::ElastiCache
     #               cluster.</p>
     #   @return [Array<Types::CacheCluster>]
     class CacheClusterMessage < Struct.new(
+      nil,
       :marker,
       :cache_clusters,
       keyword_init: true
@@ -712,6 +730,7 @@ module Aws::ElastiCache
     # @!attribute message
     #   @return [String]
     class CacheClusterNotFoundFault < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -740,6 +759,7 @@ module Aws::ElastiCache
     #   <p>The description of the cache engine version.</p>
     #   @return [String]
     class CacheEngineVersion < Struct.new(
+      nil,
       :engine,
       :engine_version,
       :cache_parameter_group_family,
@@ -760,6 +780,7 @@ module Aws::ElastiCache
     #               information about one cache engine version.</p>
     #   @return [Array<Types::CacheEngineVersion>]
     class CacheEngineVersionMessage < Struct.new(
+      nil,
       :marker,
       :cache_engine_versions,
       keyword_init: true
@@ -993,6 +1014,7 @@ module Aws::ElastiCache
     #   <p>The customer outpost ARN of the cache node.</p>
     #   @return [String]
     class CacheNode < Struct.new(
+      nil,
       :cache_node_id,
       :cache_node_status,
       :cache_node_create_time,
@@ -1042,6 +1064,7 @@ module Aws::ElastiCache
     #                   Cluster</a>.</p>
     #   @return [String]
     class CacheNodeTypeSpecificParameter < Struct.new(
+      nil,
       :parameter_name,
       :description,
       :source,
@@ -1064,6 +1087,7 @@ module Aws::ElastiCache
     #   <p>The value for the cache node type.</p>
     #   @return [String]
     class CacheNodeTypeSpecificValue < Struct.new(
+      nil,
       :cache_node_type,
       :value,
       keyword_init: true
@@ -1098,6 +1122,7 @@ module Aws::ElastiCache
     #   <p>The date when the NodeUpdateStatus was last modified></p>
     #   @return [Time]
     class CacheNodeUpdateStatus < Struct.new(
+      nil,
       :cache_node_id,
       :node_update_status,
       :node_deletion_date,
@@ -1134,6 +1159,7 @@ module Aws::ElastiCache
     #   <p>The ARN (Amazon Resource Name) of the cache parameter group.</p>
     #   @return [String]
     class CacheParameterGroup < Struct.new(
+      nil,
       :cache_parameter_group_name,
       :cache_parameter_group_family,
       :description,
@@ -1148,6 +1174,7 @@ module Aws::ElastiCache
     # @!attribute message
     #   @return [String]
     class CacheParameterGroupAlreadyExistsFault < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -1159,6 +1186,7 @@ module Aws::ElastiCache
     # @!attribute message
     #   @return [String]
     class CacheParameterGroupNotFoundFault < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -1170,6 +1198,7 @@ module Aws::ElastiCache
     # @!attribute message
     #   @return [String]
     class CacheParameterGroupQuotaExceededFault < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -1188,6 +1217,7 @@ module Aws::ElastiCache
     #               applied. A node ID is a numeric identifier (0001, 0002, etc.).</p>
     #   @return [Array<String>]
     class CacheParameterGroupStatus < Struct.new(
+      nil,
       :cache_parameter_group_name,
       :parameter_apply_status,
       :cache_node_ids_to_reboot,
@@ -1205,6 +1235,7 @@ module Aws::ElastiCache
     #               information about one cache parameter group.</p>
     #   @return [Array<Types::CacheParameterGroup>]
     class CacheParameterGroupsMessage < Struct.new(
+      nil,
       :marker,
       :cache_parameter_groups,
       keyword_init: true
@@ -1247,6 +1278,7 @@ module Aws::ElastiCache
     #   <p>The ARN of the cache security group,</p>
     #   @return [String]
     class CacheSecurityGroup < Struct.new(
+      nil,
       :owner_id,
       :cache_security_group_name,
       :description,
@@ -1261,6 +1293,7 @@ module Aws::ElastiCache
     # @!attribute message
     #   @return [String]
     class CacheSecurityGroupAlreadyExistsFault < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -1277,6 +1310,7 @@ module Aws::ElastiCache
     #               modified.</p>
     #   @return [String]
     class CacheSecurityGroupMembership < Struct.new(
+      nil,
       :cache_security_group_name,
       :status,
       keyword_init: true
@@ -1293,6 +1327,7 @@ module Aws::ElastiCache
     #               information about one group.</p>
     #   @return [Array<Types::CacheSecurityGroup>]
     class CacheSecurityGroupMessage < Struct.new(
+      nil,
       :marker,
       :cache_security_groups,
       keyword_init: true
@@ -1305,6 +1340,7 @@ module Aws::ElastiCache
     # @!attribute message
     #   @return [String]
     class CacheSecurityGroupNotFoundFault < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -1316,6 +1352,7 @@ module Aws::ElastiCache
     # @!attribute message
     #   @return [String]
     class CacheSecurityGroupQuotaExceededFault < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -1356,6 +1393,7 @@ module Aws::ElastiCache
     #               to 7.1 or Memcached engine version 1.6.6 and above on all instances built on the <a href="http://aws.amazon.com/ec2/nitro/">Nitro system</a>.</p>
     #   @return [Array<String>]
     class CacheSubnetGroup < Struct.new(
+      nil,
       :cache_subnet_group_name,
       :cache_subnet_group_description,
       :vpc_id,
@@ -1372,6 +1410,7 @@ module Aws::ElastiCache
     # @!attribute message
     #   @return [String]
     class CacheSubnetGroupAlreadyExistsFault < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -1382,6 +1421,7 @@ module Aws::ElastiCache
     # @!attribute message
     #   @return [String]
     class CacheSubnetGroupInUse < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -1397,6 +1437,7 @@ module Aws::ElastiCache
     #               about one group.</p>
     #   @return [Array<Types::CacheSubnetGroup>]
     class CacheSubnetGroupMessage < Struct.new(
+      nil,
       :marker,
       :cache_subnet_groups,
       keyword_init: true
@@ -1409,6 +1450,7 @@ module Aws::ElastiCache
     # @!attribute message
     #   @return [String]
     class CacheSubnetGroupNotFoundFault < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -1420,6 +1462,7 @@ module Aws::ElastiCache
     # @!attribute message
     #   @return [String]
     class CacheSubnetGroupQuotaExceededFault < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -1431,6 +1474,7 @@ module Aws::ElastiCache
     # @!attribute message
     #   @return [String]
     class CacheSubnetQuotaExceededFault < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -1447,6 +1491,7 @@ module Aws::ElastiCache
     #   <p>The configuration for the number of ElastiCache Processing Units (ECPU) the cache can consume per second.</p>
     #   @return [Types::ECPUPerSecond]
     class CacheUsageLimits < Struct.new(
+      nil,
       :data_storage,
       :ecpu_per_second,
       keyword_init: true
@@ -1459,6 +1504,7 @@ module Aws::ElastiCache
     #   <p>The name of the CloudWatch Logs log group.</p>
     #   @return [String]
     class CloudWatchLogsDestinationDetails < Struct.new(
+      nil,
       :log_group,
       keyword_init: true
     )
@@ -1470,6 +1516,7 @@ module Aws::ElastiCache
     # @!attribute message
     #   @return [String]
     class ClusterQuotaForCustomerExceededFault < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -1485,6 +1532,7 @@ module Aws::ElastiCache
     #               wants to continue migration to ElastiCache.</p>
     #   @return [Boolean]
     class CompleteMigrationMessage < Struct.new(
+      nil,
       :replication_group_id,
       :force,
       keyword_init: true
@@ -1496,6 +1544,7 @@ module Aws::ElastiCache
     #   <p>Contains all of the attributes of a specific Valkey or Redis OSS replication group.</p>
     #   @return [Types::ReplicationGroup]
     class CompleteMigrationResponse < Struct.new(
+      nil,
       :replication_group,
       keyword_init: true
     )
@@ -1545,6 +1594,7 @@ module Aws::ElastiCache
     #   <p>The outpost ARNs in which the cache cluster is created.</p>
     #   @return [Array<String>]
     class ConfigureShard < Struct.new(
+      nil,
       :node_group_id,
       :new_replica_count,
       :preferred_availability_zones,
@@ -1567,6 +1617,7 @@ module Aws::ElastiCache
     #   <p>A list of tags to be added to the target snapshot resource. A tag is a key-value pair. Available for Valkey, Redis OSS and Serverless Memcached only. Default: NULL</p>
     #   @return [Array<Types::Tag>]
     class CopyServerlessCacheSnapshotRequest < Struct.new(
+      nil,
       :source_serverless_cache_snapshot_name,
       :target_serverless_cache_snapshot_name,
       :kms_key_id,
@@ -1580,6 +1631,7 @@ module Aws::ElastiCache
     #   <p>The response for the attempt to copy the serverless cache snapshot. Available for Valkey, Redis OSS and Serverless Memcached only.</p>
     #   @return [Types::ServerlessCacheSnapshot]
     class CopyServerlessCacheSnapshotResponse < Struct.new(
+      nil,
       :serverless_cache_snapshot,
       keyword_init: true
     )
@@ -1612,6 +1664,7 @@ module Aws::ElastiCache
     #               be accompanied by a tag value, although null is accepted.</p>
     #   @return [Array<Types::Tag>]
     class CopySnapshotMessage < Struct.new(
+      nil,
       :source_snapshot_name,
       :target_snapshot_name,
       :target_bucket,
@@ -1627,6 +1680,7 @@ module Aws::ElastiCache
     #               taken.</p>
     #   @return [Types::Snapshot]
     class CopySnapshotResult < Struct.new(
+      nil,
       :snapshot,
       keyword_init: true
     )
@@ -2056,6 +2110,7 @@ module Aws::ElastiCache
     #               to 7.1 and Memcached engine version 1.6.6 and above on all instances built on the <a href="http://aws.amazon.com/ec2/nitro/">Nitro system</a>.</p>
     #   @return [String]
     class CreateCacheClusterMessage < Struct.new(
+      nil,
       :cache_cluster_id,
       :replication_group_id,
       :az_mode,
@@ -2095,6 +2150,7 @@ module Aws::ElastiCache
     #   <p>Contains all of the attributes of a specific cluster.</p>
     #   @return [Types::CacheCluster]
     class CreateCacheClusterResult < Struct.new(
+      nil,
       :cache_cluster,
       keyword_init: true
     )
@@ -2120,6 +2176,7 @@ module Aws::ElastiCache
     #               be accompanied by a tag value, although null is accepted.</p>
     #   @return [Array<Types::Tag>]
     class CreateCacheParameterGroupMessage < Struct.new(
+      nil,
       :cache_parameter_group_name,
       :cache_parameter_group_family,
       :description,
@@ -2133,6 +2190,7 @@ module Aws::ElastiCache
     #   <p>Represents the output of a <code>CreateCacheParameterGroup</code> operation.</p>
     #   @return [Types::CacheParameterGroup]
     class CreateCacheParameterGroupResult < Struct.new(
+      nil,
       :cache_parameter_group,
       keyword_init: true
     )
@@ -2156,6 +2214,7 @@ module Aws::ElastiCache
     #               be accompanied by a tag value, although null is accepted.</p>
     #   @return [Array<Types::Tag>]
     class CreateCacheSecurityGroupMessage < Struct.new(
+      nil,
       :cache_security_group_name,
       :description,
       :tags,
@@ -2185,6 +2244,7 @@ module Aws::ElastiCache
     #            </ul>
     #   @return [Types::CacheSecurityGroup]
     class CreateCacheSecurityGroupResult < Struct.new(
+      nil,
       :cache_security_group,
       keyword_init: true
     )
@@ -2209,6 +2269,7 @@ module Aws::ElastiCache
     #               be accompanied by a tag value, although null is accepted.</p>
     #   @return [Array<Types::Tag>]
     class CreateCacheSubnetGroupMessage < Struct.new(
+      nil,
       :cache_subnet_group_name,
       :cache_subnet_group_description,
       :subnet_ids,
@@ -2234,6 +2295,7 @@ module Aws::ElastiCache
     #            </ul>
     #   @return [Types::CacheSubnetGroup]
     class CreateCacheSubnetGroupResult < Struct.new(
+      nil,
       :cache_subnet_group,
       keyword_init: true
     )
@@ -2258,6 +2320,7 @@ module Aws::ElastiCache
     #               secondary cluster.</p>
     #   @return [String]
     class CreateGlobalReplicationGroupMessage < Struct.new(
+      nil,
       :global_replication_group_id_suffix,
       :global_replication_group_description,
       :primary_replication_group_id,
@@ -2279,6 +2342,7 @@ module Aws::ElastiCache
     #            </ul>
     #   @return [Types::GlobalReplicationGroup]
     class CreateGlobalReplicationGroupResult < Struct.new(
+      nil,
       :global_replication_group,
       keyword_init: true
     )
@@ -2828,6 +2892,7 @@ module Aws::ElastiCache
     #   <p>The name of the snapshot used to create a replication group. Available for Valkey, Redis OSS only.</p>
     #   @return [String]
     class CreateReplicationGroupMessage < Struct.new(
+      nil,
       :replication_group_id,
       :replication_group_description,
       :global_replication_group_id,
@@ -2876,6 +2941,7 @@ module Aws::ElastiCache
     #   <p>Contains all of the attributes of a specific Valkey or Redis OSS replication group.</p>
     #   @return [Types::ReplicationGroup]
     class CreateReplicationGroupResult < Struct.new(
+      nil,
       :replication_group,
       keyword_init: true
     )
@@ -2930,6 +2996,7 @@ module Aws::ElastiCache
     #              0, i.e. no snapshots will be created on an automatic daily basis. Available for Valkey, Redis OSS and Serverless Memcached only.</p>
     #   @return [String]
     class CreateServerlessCacheRequest < Struct.new(
+      nil,
       :serverless_cache_name,
       :description,
       :engine,
@@ -2952,6 +3019,7 @@ module Aws::ElastiCache
     #   <p>The response for the attempt to create the serverless cache.</p>
     #   @return [Types::ServerlessCache]
     class CreateServerlessCacheResponse < Struct.new(
+      nil,
       :serverless_cache,
       keyword_init: true
     )
@@ -2972,6 +3040,7 @@ module Aws::ElastiCache
     #   <p>A list of tags to be added to the snapshot resource. A tag is a key-value pair. Available for Valkey, Redis OSS and Serverless Memcached only.</p>
     #   @return [Array<Types::Tag>]
     class CreateServerlessCacheSnapshotRequest < Struct.new(
+      nil,
       :serverless_cache_snapshot_name,
       :serverless_cache_name,
       :kms_key_id,
@@ -2985,6 +3054,7 @@ module Aws::ElastiCache
     #   <p>The state of a serverless cache snapshot at a specific point in time, to the millisecond. Available for Valkey, Redis OSS and Serverless Memcached only.</p>
     #   @return [Types::ServerlessCacheSnapshot]
     class CreateServerlessCacheSnapshotResponse < Struct.new(
+      nil,
       :serverless_cache_snapshot,
       keyword_init: true
     )
@@ -3011,6 +3081,7 @@ module Aws::ElastiCache
     #               be accompanied by a tag value, although null is accepted.</p>
     #   @return [Array<Types::Tag>]
     class CreateSnapshotMessage < Struct.new(
+      nil,
       :replication_group_id,
       :cache_cluster_id,
       :snapshot_name,
@@ -3026,6 +3097,7 @@ module Aws::ElastiCache
     #               taken.</p>
     #   @return [Types::Snapshot]
     class CreateSnapshotResult < Struct.new(
+      nil,
       :snapshot,
       keyword_init: true
     )
@@ -3046,6 +3118,7 @@ module Aws::ElastiCache
     #               be accompanied by a tag value, although null is accepted. Available for Valkey and Redis OSS only.</p>
     #   @return [Array<Types::Tag>]
     class CreateUserGroupMessage < Struct.new(
+      nil,
       :user_group_id,
       :engine,
       :user_ids,
@@ -3084,6 +3157,7 @@ module Aws::ElastiCache
     #   <p>The Amazon Resource Name (ARN) of the user group.</p>
     #   @return [String]
     class CreateUserGroupOutput < Struct.new(
+      nil,
       :user_group_id,
       :status,
       :engine,
@@ -3124,6 +3198,7 @@ module Aws::ElastiCache
     #   <p>Specifies how to authenticate the user.</p>
     #   @return [Types::AuthenticationMode]
     class CreateUserMessage < Struct.new(
+      nil,
       :user_id,
       :user_name,
       :engine,
@@ -3165,6 +3240,7 @@ module Aws::ElastiCache
     #   <p>The Amazon Resource Name (ARN) of the user.</p>
     #   @return [String]
     class CreateUserOutput < Struct.new(
+      nil,
       :user_id,
       :user_name,
       :status,
@@ -3187,6 +3263,7 @@ module Aws::ElastiCache
     #   <p>The port of the node endpoint</p>
     #   @return [Integer]
     class CustomerNodeEndpoint < Struct.new(
+      nil,
       :address,
       :port,
       keyword_init: true
@@ -3205,6 +3282,7 @@ module Aws::ElastiCache
     #   <p>The unit that the storage is measured in, in GB.</p>
     #   @return [String]
     class DataStorage < Struct.new(
+      nil,
       :maximum,
       :minimum,
       :unit,
@@ -3239,6 +3317,7 @@ module Aws::ElastiCache
     #               only permitted value for this parameter is true. </p>
     #   @return [Boolean]
     class DecreaseNodeGroupsInGlobalReplicationGroupMessage < Struct.new(
+      nil,
       :global_replication_group_id,
       :node_group_count,
       :global_node_groups_to_remove,
@@ -3262,6 +3341,7 @@ module Aws::ElastiCache
     #            </ul>
     #   @return [Types::GlobalReplicationGroup]
     class DecreaseNodeGroupsInGlobalReplicationGroupResult < Struct.new(
+      nil,
       :global_replication_group,
       keyword_init: true
     )
@@ -3310,6 +3390,7 @@ module Aws::ElastiCache
     #                   <code>ApplyImmediately=False</code> is not currently supported.</p>
     #   @return [Boolean]
     class DecreaseReplicaCountMessage < Struct.new(
+      nil,
       :replication_group_id,
       :new_replica_count,
       :replica_configuration,
@@ -3324,6 +3405,7 @@ module Aws::ElastiCache
     #   <p>Contains all of the attributes of a specific Valkey or Redis OSS replication group.</p>
     #   @return [Types::ReplicationGroup]
     class DecreaseReplicaCountResult < Struct.new(
+      nil,
       :replication_group,
       keyword_init: true
     )
@@ -3334,6 +3416,7 @@ module Aws::ElastiCache
     # @!attribute message
     #   @return [String]
     class DefaultUserAssociatedToUserGroupFault < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -3344,6 +3427,7 @@ module Aws::ElastiCache
     # @!attribute message
     #   @return [String]
     class DefaultUserRequired < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -3361,6 +3445,7 @@ module Aws::ElastiCache
     #               immediately afterward.</p>
     #   @return [String]
     class DeleteCacheClusterMessage < Struct.new(
+      nil,
       :cache_cluster_id,
       :final_snapshot_identifier,
       keyword_init: true
@@ -3372,6 +3457,7 @@ module Aws::ElastiCache
     #   <p>Contains all of the attributes of a specific cluster.</p>
     #   @return [Types::CacheCluster]
     class DeleteCacheClusterResult < Struct.new(
+      nil,
       :cache_cluster,
       keyword_init: true
     )
@@ -3387,6 +3473,7 @@ module Aws::ElastiCache
     #            </note>
     #   @return [String]
     class DeleteCacheParameterGroupMessage < Struct.new(
+      nil,
       :cache_parameter_group_name,
       keyword_init: true
     )
@@ -3401,6 +3488,7 @@ module Aws::ElastiCache
     #            </note>
     #   @return [String]
     class DeleteCacheSecurityGroupMessage < Struct.new(
+      nil,
       :cache_security_group_name,
       keyword_init: true
     )
@@ -3413,6 +3501,7 @@ module Aws::ElastiCache
     #            <p>Constraints: Must contain no more than 255 alphanumeric characters or hyphens.</p>
     #   @return [String]
     class DeleteCacheSubnetGroupMessage < Struct.new(
+      nil,
       :cache_subnet_group_name,
       keyword_init: true
     )
@@ -3426,6 +3515,7 @@ module Aws::ElastiCache
     #   <p>The primary replication group is retained as a standalone replication group. </p>
     #   @return [Boolean]
     class DeleteGlobalReplicationGroupMessage < Struct.new(
+      nil,
       :global_replication_group_id,
       :retain_primary_replication_group,
       keyword_init: true
@@ -3446,6 +3536,7 @@ module Aws::ElastiCache
     #            </ul>
     #   @return [Types::GlobalReplicationGroup]
     class DeleteGlobalReplicationGroupResult < Struct.new(
+      nil,
       :global_replication_group,
       keyword_init: true
     )
@@ -3468,6 +3559,7 @@ module Aws::ElastiCache
     #               is immediately deleted.</p>
     #   @return [String]
     class DeleteReplicationGroupMessage < Struct.new(
+      nil,
       :replication_group_id,
       :retain_primary_cluster,
       :final_snapshot_identifier,
@@ -3480,6 +3572,7 @@ module Aws::ElastiCache
     #   <p>Contains all of the attributes of a specific Valkey or Redis OSS replication group.</p>
     #   @return [Types::ReplicationGroup]
     class DeleteReplicationGroupResult < Struct.new(
+      nil,
       :replication_group,
       keyword_init: true
     )
@@ -3494,6 +3587,7 @@ module Aws::ElastiCache
     #              Default: NULL, i.e. a final snapshot is not taken.</p>
     #   @return [String]
     class DeleteServerlessCacheRequest < Struct.new(
+      nil,
       :serverless_cache_name,
       :final_snapshot_name,
       keyword_init: true
@@ -3505,6 +3599,7 @@ module Aws::ElastiCache
     #   <p>Provides the details of the specified serverless cache that is about to be deleted.</p>
     #   @return [Types::ServerlessCache]
     class DeleteServerlessCacheResponse < Struct.new(
+      nil,
       :serverless_cache,
       keyword_init: true
     )
@@ -3515,6 +3610,7 @@ module Aws::ElastiCache
     #   <p>Idenfitier of the snapshot to be deleted. Available for Valkey, Redis OSS and Serverless Memcached only.</p>
     #   @return [String]
     class DeleteServerlessCacheSnapshotRequest < Struct.new(
+      nil,
       :serverless_cache_snapshot_name,
       keyword_init: true
     )
@@ -3525,6 +3621,7 @@ module Aws::ElastiCache
     #   <p>The snapshot to be deleted. Available for Valkey, Redis OSS and Serverless Memcached only.</p>
     #   @return [Types::ServerlessCacheSnapshot]
     class DeleteServerlessCacheSnapshotResponse < Struct.new(
+      nil,
       :serverless_cache_snapshot,
       keyword_init: true
     )
@@ -3536,6 +3633,7 @@ module Aws::ElastiCache
     #   <p>The name of the snapshot to be deleted.</p>
     #   @return [String]
     class DeleteSnapshotMessage < Struct.new(
+      nil,
       :snapshot_name,
       keyword_init: true
     )
@@ -3547,6 +3645,7 @@ module Aws::ElastiCache
     #               taken.</p>
     #   @return [Types::Snapshot]
     class DeleteSnapshotResult < Struct.new(
+      nil,
       :snapshot,
       keyword_init: true
     )
@@ -3557,6 +3656,7 @@ module Aws::ElastiCache
     #   <p>The ID of the user group.</p>
     #   @return [String]
     class DeleteUserGroupMessage < Struct.new(
+      nil,
       :user_group_id,
       keyword_init: true
     )
@@ -3592,6 +3692,7 @@ module Aws::ElastiCache
     #   <p>The Amazon Resource Name (ARN) of the user group.</p>
     #   @return [String]
     class DeleteUserGroupOutput < Struct.new(
+      nil,
       :user_group_id,
       :status,
       :engine,
@@ -3610,6 +3711,7 @@ module Aws::ElastiCache
     #   <p>The ID of the user.</p>
     #   @return [String]
     class DeleteUserMessage < Struct.new(
+      nil,
       :user_id,
       keyword_init: true
     )
@@ -3644,6 +3746,7 @@ module Aws::ElastiCache
     #   <p>The Amazon Resource Name (ARN) of the user.</p>
     #   @return [String]
     class DeleteUserOutput < Struct.new(
+      nil,
       :user_id,
       :user_name,
       :status,
@@ -3685,6 +3788,7 @@ module Aws::ElastiCache
     #               practice, this means Memcached and single node Valkey or Redis OSS clusters.</p>
     #   @return [Boolean]
     class DescribeCacheClustersMessage < Struct.new(
+      nil,
       :cache_cluster_id,
       :max_records,
       :marker,
@@ -3743,6 +3847,7 @@ module Aws::ElastiCache
     #               or engine and major version combination is to be returned.</p>
     #   @return [Boolean]
     class DescribeCacheEngineVersionsMessage < Struct.new(
+      nil,
       :engine,
       :engine_version,
       :cache_parameter_group_family,
@@ -3771,6 +3876,7 @@ module Aws::ElastiCache
     #               records beyond the marker, up to the value specified by <code>MaxRecords</code>.</p>
     #   @return [String]
     class DescribeCacheParameterGroupsMessage < Struct.new(
+      nil,
       :cache_parameter_group_name,
       :max_records,
       :marker,
@@ -3802,6 +3908,7 @@ module Aws::ElastiCache
     #               records beyond the marker, up to the value specified by <code>MaxRecords</code>.</p>
     #   @return [String]
     class DescribeCacheParametersMessage < Struct.new(
+      nil,
       :cache_parameter_group_name,
       :source,
       :max_records,
@@ -3823,6 +3930,7 @@ module Aws::ElastiCache
     #               list contains detailed information about one parameter.</p>
     #   @return [Array<Types::CacheNodeTypeSpecificParameter>]
     class DescribeCacheParametersOutput < Struct.new(
+      nil,
       :marker,
       :parameters,
       :cache_node_type_specific_parameters,
@@ -3848,6 +3956,7 @@ module Aws::ElastiCache
     #               records beyond the marker, up to the value specified by <code>MaxRecords</code>.</p>
     #   @return [String]
     class DescribeCacheSecurityGroupsMessage < Struct.new(
+      nil,
       :cache_security_group_name,
       :max_records,
       :marker,
@@ -3873,6 +3982,7 @@ module Aws::ElastiCache
     #               records beyond the marker, up to the value specified by <code>MaxRecords</code>.</p>
     #   @return [String]
     class DescribeCacheSubnetGroupsMessage < Struct.new(
+      nil,
       :cache_subnet_group_name,
       :max_records,
       :marker,
@@ -3904,6 +4014,7 @@ module Aws::ElastiCache
     #               records beyond the marker, up to the value specified by <code>MaxRecords</code>.</p>
     #   @return [String]
     class DescribeEngineDefaultParametersMessage < Struct.new(
+      nil,
       :cache_parameter_group_family,
       :max_records,
       :marker,
@@ -3917,6 +4028,7 @@ module Aws::ElastiCache
     #               operation.</p>
     #   @return [Types::EngineDefaults]
     class DescribeEngineDefaultParametersResult < Struct.new(
+      nil,
       :engine_defaults,
       keyword_init: true
     )
@@ -3960,6 +4072,7 @@ module Aws::ElastiCache
     #               records beyond the marker, up to the value specified by <code>MaxRecords</code>.</p>
     #   @return [String]
     class DescribeEventsMessage < Struct.new(
+      nil,
       :source_identifier,
       :source_type,
       :start_time,
@@ -3989,6 +4102,7 @@ module Aws::ElastiCache
     #   <p>Returns the list of members that comprise the Global datastore.</p>
     #   @return [Boolean]
     class DescribeGlobalReplicationGroupsMessage < Struct.new(
+      nil,
       :global_replication_group_id,
       :max_records,
       :marker,
@@ -4007,6 +4121,7 @@ module Aws::ElastiCache
     #   <p>Indicates the slot configuration and global identifier for each slice group.</p>
     #   @return [Array<Types::GlobalReplicationGroup>]
     class DescribeGlobalReplicationGroupsResult < Struct.new(
+      nil,
       :marker,
       :global_replication_groups,
       keyword_init: true
@@ -4034,6 +4149,7 @@ module Aws::ElastiCache
     #               records beyond the marker, up to the value specified by <code>MaxRecords</code>.</p>
     #   @return [String]
     class DescribeReplicationGroupsMessage < Struct.new(
+      nil,
       :replication_group_id,
       :max_records,
       :marker,
@@ -4279,6 +4395,7 @@ module Aws::ElastiCache
     #               records beyond the marker, up to the value specified by <code>MaxRecords</code>.</p>
     #   @return [String]
     class DescribeReservedCacheNodesMessage < Struct.new(
+      nil,
       :reserved_cache_node_id,
       :reserved_cache_nodes_offering_id,
       :cache_node_type,
@@ -4528,6 +4645,7 @@ module Aws::ElastiCache
     #               records beyond the marker, up to the value specified by <code>MaxRecords</code>.</p>
     #   @return [String]
     class DescribeReservedCacheNodesOfferingsMessage < Struct.new(
+      nil,
       :reserved_cache_nodes_offering_id,
       :cache_node_type,
       :duration,
@@ -4562,6 +4680,7 @@ module Aws::ElastiCache
     #              can be retrieved. Available for Valkey, Redis OSS and Serverless Memcached only.The default is 50. The Validation Constraints are a maximum of 50.</p>
     #   @return [Integer]
     class DescribeServerlessCacheSnapshotsRequest < Struct.new(
+      nil,
       :serverless_cache_name,
       :serverless_cache_snapshot_name,
       :snapshot_type,
@@ -4581,6 +4700,7 @@ module Aws::ElastiCache
     #   <p>The serverless caches snapshots associated with a given description request. Available for Valkey, Redis OSS and Serverless Memcached only.</p>
     #   @return [Array<Types::ServerlessCacheSnapshot>]
     class DescribeServerlessCacheSnapshotsResponse < Struct.new(
+      nil,
       :next_token,
       :serverless_cache_snapshots,
       keyword_init: true
@@ -4603,6 +4723,7 @@ module Aws::ElastiCache
     #              up to the value specified by MaxResults.</p>
     #   @return [String]
     class DescribeServerlessCachesRequest < Struct.new(
+      nil,
       :serverless_cache_name,
       :max_results,
       :next_token,
@@ -4620,6 +4741,7 @@ module Aws::ElastiCache
     #   <p>The serverless caches associated with a given description request.</p>
     #   @return [Array<Types::ServerlessCache>]
     class DescribeServerlessCachesResponse < Struct.new(
+      nil,
       :next_token,
       :serverless_caches,
       keyword_init: true
@@ -4642,6 +4764,7 @@ module Aws::ElastiCache
     #               records beyond the marker, up to the value specified by <code>MaxRecords</code>.</p>
     #   @return [String]
     class DescribeServiceUpdatesMessage < Struct.new(
+      nil,
       :service_update_name,
       :service_update_status,
       :max_records,
@@ -4662,6 +4785,7 @@ module Aws::ElastiCache
     #               snapshot.</p>
     #   @return [Array<Types::Snapshot>]
     class DescribeSnapshotsListMessage < Struct.new(
+      nil,
       :marker,
       :snapshots,
       keyword_init: true
@@ -4705,6 +4829,7 @@ module Aws::ElastiCache
     #               snapshot description.</p>
     #   @return [Boolean]
     class DescribeSnapshotsMessage < Struct.new(
+      nil,
       :replication_group_id,
       :cache_cluster_id,
       :snapshot_name,
@@ -4751,6 +4876,7 @@ module Aws::ElastiCache
     #               records beyond the marker, up to the value specified by <code>MaxRecords</code>.</p>
     #   @return [String]
     class DescribeUpdateActionsMessage < Struct.new(
+      nil,
       :service_update_name,
       :replication_group_ids,
       :cache_cluster_ids,
@@ -4780,6 +4906,7 @@ module Aws::ElastiCache
     #               records beyond the marker, up to the value specified by MaxRecords. ></p>
     #   @return [String]
     class DescribeUserGroupsMessage < Struct.new(
+      nil,
       :user_group_id,
       :max_records,
       :marker,
@@ -4797,6 +4924,7 @@ module Aws::ElastiCache
     #               records beyond the marker, up to the value specified by MaxRecords.></p>
     #   @return [String]
     class DescribeUserGroupsResult < Struct.new(
+      nil,
       :user_groups,
       :marker,
       keyword_init: true
@@ -4824,6 +4952,7 @@ module Aws::ElastiCache
     #               records beyond the marker, up to the value specified by MaxRecords. ></p>
     #   @return [String]
     class DescribeUsersMessage < Struct.new(
+      nil,
       :engine,
       :user_id,
       :filters,
@@ -4843,6 +4972,7 @@ module Aws::ElastiCache
     #               records beyond the marker, up to the value specified by MaxRecords. ></p>
     #   @return [String]
     class DescribeUsersResult < Struct.new(
+      nil,
       :users,
       :marker,
       keyword_init: true
@@ -4859,6 +4989,7 @@ module Aws::ElastiCache
     #   <p>The configuration details of the Kinesis Data Firehose destination.</p>
     #   @return [Types::KinesisFirehoseDestinationDetails]
     class DestinationDetails < Struct.new(
+      nil,
       :cloud_watch_logs_details,
       :kinesis_firehose_details,
       keyword_init: true
@@ -4877,6 +5008,7 @@ module Aws::ElastiCache
     #               datastore</p>
     #   @return [String]
     class DisassociateGlobalReplicationGroupMessage < Struct.new(
+      nil,
       :global_replication_group_id,
       :replication_group_id,
       :replication_group_region,
@@ -4898,6 +5030,7 @@ module Aws::ElastiCache
     #            </ul>
     #   @return [Types::GlobalReplicationGroup]
     class DisassociateGlobalReplicationGroupResult < Struct.new(
+      nil,
       :global_replication_group,
       keyword_init: true
     )
@@ -4908,6 +5041,7 @@ module Aws::ElastiCache
     # @!attribute message
     #   @return [String]
     class DuplicateUserNameFault < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -4925,6 +5059,7 @@ module Aws::ElastiCache
     #   <p>The Amazon account ID of the Amazon EC2 security group owner.</p>
     #   @return [String]
     class EC2SecurityGroup < Struct.new(
+      nil,
       :status,
       :ec2_security_group_name,
       :ec2_security_group_owner_id,
@@ -4941,6 +5076,7 @@ module Aws::ElastiCache
     #   <p>The configuration for the minimum number of ECPUs the cache should be able consume per second.</p>
     #   @return [Integer]
     class ECPUPerSecond < Struct.new(
+      nil,
       :maximum,
       :minimum,
       keyword_init: true
@@ -4957,6 +5093,7 @@ module Aws::ElastiCache
     #   <p>The port number that the cache engine is listening on.</p>
     #   @return [Integer]
     class Endpoint < Struct.new(
+      nil,
       :address,
       :port,
       keyword_init: true
@@ -4986,6 +5123,7 @@ module Aws::ElastiCache
     #               list contains detailed information about one parameter.</p>
     #   @return [Array<Types::CacheNodeTypeSpecificParameter>]
     class EngineDefaults < Struct.new(
+      nil,
       :cache_parameter_group_family,
       :marker,
       :parameters,
@@ -5013,6 +5151,7 @@ module Aws::ElastiCache
     #   <p>The date and time when the event occurred.</p>
     #   @return [Time]
     class Event < Struct.new(
+      nil,
       :source_identifier,
       :source_type,
       :message,
@@ -5031,6 +5170,7 @@ module Aws::ElastiCache
     #               event.</p>
     #   @return [Array<Types::Event>]
     class EventsMessage < Struct.new(
+      nil,
       :marker,
       :events,
       keyword_init: true
@@ -5046,6 +5186,7 @@ module Aws::ElastiCache
     #              as the snapshot. Available for Valkey and Redis OSS only.</p>
     #   @return [String]
     class ExportServerlessCacheSnapshotRequest < Struct.new(
+      nil,
       :serverless_cache_snapshot_name,
       :s3_bucket_name,
       keyword_init: true
@@ -5057,6 +5198,7 @@ module Aws::ElastiCache
     #   <p>The state of a serverless cache at a specific point in time, to the millisecond. Available for Valkey, Redis OSS and Serverless Memcached only.</p>
     #   @return [Types::ServerlessCacheSnapshot]
     class ExportServerlessCacheSnapshotResponse < Struct.new(
+      nil,
       :serverless_cache_snapshot,
       keyword_init: true
     )
@@ -5073,6 +5215,7 @@ module Aws::ElastiCache
     #   <p>The name of the primary replication group</p>
     #   @return [String]
     class FailoverGlobalReplicationGroupMessage < Struct.new(
+      nil,
       :global_replication_group_id,
       :primary_region,
       :primary_replication_group_id,
@@ -5094,6 +5237,7 @@ module Aws::ElastiCache
     #            </ul>
     #   @return [Types::GlobalReplicationGroup]
     class FailoverGlobalReplicationGroupResult < Struct.new(
+      nil,
       :global_replication_group,
       keyword_init: true
     )
@@ -5108,6 +5252,7 @@ module Aws::ElastiCache
     #   <p>The property values to filter on. For example, "user-123".</p>
     #   @return [Array<String>]
     class Filter < Struct.new(
+      nil,
       :name,
       :values,
       keyword_init: true
@@ -5123,6 +5268,7 @@ module Aws::ElastiCache
     #   <p>The keyspace for this node group</p>
     #   @return [String]
     class GlobalNodeGroup < Struct.new(
+      nil,
       :global_node_group_id,
       :slots,
       keyword_init: true
@@ -5195,6 +5341,7 @@ module Aws::ElastiCache
     #   <p>The ARN (Amazon Resource Name) of the global replication group.</p>
     #   @return [String]
     class GlobalReplicationGroup < Struct.new(
+      nil,
       :global_replication_group_id,
       :global_replication_group_description,
       :status,
@@ -5217,6 +5364,7 @@ module Aws::ElastiCache
     # @!attribute message
     #   @return [String]
     class GlobalReplicationGroupAlreadyExistsFault < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -5233,6 +5381,7 @@ module Aws::ElastiCache
     #               secondary.</p>
     #   @return [String]
     class GlobalReplicationGroupInfo < Struct.new(
+      nil,
       :global_replication_group_id,
       :global_replication_group_member_role,
       keyword_init: true
@@ -5258,6 +5407,7 @@ module Aws::ElastiCache
     #   <p>The status of the membership of the replication group.</p>
     #   @return [String]
     class GlobalReplicationGroupMember < Struct.new(
+      nil,
       :replication_group_id,
       :replication_group_region,
       :role,
@@ -5272,6 +5422,7 @@ module Aws::ElastiCache
     # @!attribute message
     #   @return [String]
     class GlobalReplicationGroupNotFoundFault < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -5293,6 +5444,7 @@ module Aws::ElastiCache
     #               for this parameter is true.</p>
     #   @return [Boolean]
     class IncreaseNodeGroupsInGlobalReplicationGroupMessage < Struct.new(
+      nil,
       :global_replication_group_id,
       :node_group_count,
       :regional_configurations,
@@ -5315,6 +5467,7 @@ module Aws::ElastiCache
     #            </ul>
     #   @return [Types::GlobalReplicationGroup]
     class IncreaseNodeGroupsInGlobalReplicationGroupResult < Struct.new(
+      nil,
       :global_replication_group,
       keyword_init: true
     )
@@ -5340,6 +5493,7 @@ module Aws::ElastiCache
     #                   <code>ApplyImmediately=False</code> is not currently supported.</p>
     #   @return [Boolean]
     class IncreaseReplicaCountMessage < Struct.new(
+      nil,
       :replication_group_id,
       :new_replica_count,
       :replica_configuration,
@@ -5353,6 +5507,7 @@ module Aws::ElastiCache
     #   <p>Contains all of the attributes of a specific Valkey or Redis OSS replication group.</p>
     #   @return [Types::ReplicationGroup]
     class IncreaseReplicaCountResult < Struct.new(
+      nil,
       :replication_group,
       keyword_init: true
     )
@@ -5364,6 +5519,7 @@ module Aws::ElastiCache
     # @!attribute message
     #   @return [String]
     class InsufficientCacheClusterCapacityFault < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -5375,6 +5531,7 @@ module Aws::ElastiCache
     # @!attribute message
     #   @return [String]
     class InvalidARNFault < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -5385,6 +5542,7 @@ module Aws::ElastiCache
     # @!attribute message
     #   @return [String]
     class InvalidCacheClusterStateFault < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -5396,6 +5554,7 @@ module Aws::ElastiCache
     # @!attribute message
     #   @return [String]
     class InvalidCacheParameterGroupStateFault < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -5406,6 +5565,7 @@ module Aws::ElastiCache
     # @!attribute message
     #   @return [String]
     class InvalidCacheSecurityGroupStateFault < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -5416,6 +5576,7 @@ module Aws::ElastiCache
     # @!attribute message
     #   @return [String]
     class InvalidCredentialsException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -5426,6 +5587,7 @@ module Aws::ElastiCache
     # @!attribute message
     #   @return [String]
     class InvalidGlobalReplicationGroupStateFault < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -5436,6 +5598,7 @@ module Aws::ElastiCache
     # @!attribute message
     #   @return [String]
     class InvalidKMSKeyFault < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -5447,6 +5610,7 @@ module Aws::ElastiCache
     #   <p>Two or more parameters that must not be used together were used together.</p>
     #   @return [String]
     class InvalidParameterCombinationException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -5458,6 +5622,7 @@ module Aws::ElastiCache
     #   <p>A parameter value is invalid.</p>
     #   @return [String]
     class InvalidParameterValueException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -5468,6 +5633,7 @@ module Aws::ElastiCache
     # @!attribute message
     #   @return [String]
     class InvalidReplicationGroupStateFault < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -5478,6 +5644,7 @@ module Aws::ElastiCache
     # @!attribute message
     #   @return [String]
     class InvalidServerlessCacheSnapshotStateFault < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -5488,6 +5655,7 @@ module Aws::ElastiCache
     # @!attribute message
     #   @return [String]
     class InvalidServerlessCacheStateFault < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -5499,6 +5667,7 @@ module Aws::ElastiCache
     # @!attribute message
     #   @return [String]
     class InvalidSnapshotStateFault < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -5509,6 +5678,7 @@ module Aws::ElastiCache
     # @!attribute message
     #   @return [String]
     class InvalidSubnet < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -5519,6 +5689,7 @@ module Aws::ElastiCache
     # @!attribute message
     #   @return [String]
     class InvalidUserGroupStateFault < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -5529,6 +5700,7 @@ module Aws::ElastiCache
     # @!attribute message
     #   @return [String]
     class InvalidUserStateFault < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -5539,6 +5711,7 @@ module Aws::ElastiCache
     # @!attribute message
     #   @return [String]
     class InvalidVPCNetworkStateFault < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -5550,6 +5723,7 @@ module Aws::ElastiCache
     #   <p>The name of the Kinesis Data Firehose delivery stream.</p>
     #   @return [String]
     class KinesisFirehoseDestinationDetails < Struct.new(
+      nil,
       :delivery_stream,
       keyword_init: true
     )
@@ -5578,6 +5752,7 @@ module Aws::ElastiCache
     #            </important>
     #   @return [String]
     class ListAllowedNodeTypeModificationsMessage < Struct.new(
+      nil,
       :cache_cluster_id,
       :replication_group_id,
       keyword_init: true
@@ -5595,6 +5770,7 @@ module Aws::ElastiCache
     #                       Services Service Namespaces</a>.</p>
     #   @return [String]
     class ListTagsForResourceMessage < Struct.new(
+      nil,
       :resource_name,
       keyword_init: true
     )
@@ -5608,6 +5784,7 @@ module Aws::ElastiCache
     #   <p>A list of tags as key-value pairs.</p>
     #   @return [Array<Types::Tag>]
     class ListTagsForResourceOutput < Struct.new(
+      nil,
       :tag_list,
       keyword_init: true
     )
@@ -5640,6 +5817,7 @@ module Aws::ElastiCache
     #   <p>Returns an error message for the log delivery configuration.</p>
     #   @return [String]
     class LogDeliveryConfiguration < Struct.new(
+      nil,
       :log_type,
       :destination_type,
       :destination_details,
@@ -5671,6 +5849,7 @@ module Aws::ElastiCache
     #   <p>Specify if log delivery is enabled. Default <code>true</code>.</p>
     #   @return [Boolean]
     class LogDeliveryConfigurationRequest < Struct.new(
+      nil,
       :log_type,
       :destination_type,
       :destination_details,
@@ -6024,6 +6203,7 @@ module Aws::ElastiCache
     #   <p>Configures horizontal or vertical scaling for Memcached clusters, specifying the scaling percentage and interval.</p>
     #   @return [Types::ScaleConfig]
     class ModifyCacheClusterMessage < Struct.new(
+      nil,
       :cache_cluster_id,
       :num_cache_nodes,
       :cache_node_ids_to_remove,
@@ -6056,6 +6236,7 @@ module Aws::ElastiCache
     #   <p>Contains all of the attributes of a specific cluster.</p>
     #   @return [Types::CacheCluster]
     class ModifyCacheClusterResult < Struct.new(
+      nil,
       :cache_cluster,
       keyword_init: true
     )
@@ -6072,6 +6253,7 @@ module Aws::ElastiCache
     #               parameters may be modified per request.</p>
     #   @return [Array<Types::ParameterNameValue>]
     class ModifyCacheParameterGroupMessage < Struct.new(
+      nil,
       :cache_parameter_group_name,
       :parameter_name_values,
       keyword_init: true
@@ -6096,6 +6278,7 @@ module Aws::ElastiCache
     #   <p>The name of the cache parameter group.</p>
     #   @return [String]
     class ModifyCacheParameterGroupOutput < Struct.new(
+      nil,
       :cache_parameter_group_name,
       keyword_init: true
     )
@@ -6117,6 +6300,7 @@ module Aws::ElastiCache
     #   <p>The EC2 subnet IDs for the cache subnet group.</p>
     #   @return [Array<String>]
     class ModifyCacheSubnetGroupMessage < Struct.new(
+      nil,
       :cache_subnet_group_name,
       :cache_subnet_group_description,
       :subnet_ids,
@@ -6141,6 +6325,7 @@ module Aws::ElastiCache
     #            </ul>
     #   @return [Types::CacheSubnetGroup]
     class ModifyCacheSubnetGroupResult < Struct.new(
+      nil,
       :cache_subnet_group,
       keyword_init: true
     )
@@ -6178,6 +6363,7 @@ module Aws::ElastiCache
     #               the existing primary encounters a failure. </p>
     #   @return [Boolean]
     class ModifyGlobalReplicationGroupMessage < Struct.new(
+      nil,
       :global_replication_group_id,
       :apply_immediately,
       :cache_node_type,
@@ -6204,6 +6390,7 @@ module Aws::ElastiCache
     #            </ul>
     #   @return [Types::GlobalReplicationGroup]
     class ModifyGlobalReplicationGroupResult < Struct.new(
+      nil,
       :global_replication_group,
       keyword_init: true
     )
@@ -6446,6 +6633,7 @@ module Aws::ElastiCache
     #               and set the cluster mode to Enabled.</p>
     #   @return [String]
     class ModifyReplicationGroupMessage < Struct.new(
+      nil,
       :replication_group_id,
       :replication_group_description,
       :primary_cluster_id,
@@ -6485,6 +6673,7 @@ module Aws::ElastiCache
     #   <p>Contains all of the attributes of a specific Valkey or Redis OSS replication group.</p>
     #   @return [Types::ReplicationGroup]
     class ModifyReplicationGroupResult < Struct.new(
+      nil,
       :replication_group,
       keyword_init: true
     )
@@ -6532,6 +6721,7 @@ module Aws::ElastiCache
     #                   <code>NodeGroupsToRetain</code> from the cluster.</p>
     #   @return [Array<String>]
     class ModifyReplicationGroupShardConfigurationMessage < Struct.new(
+      nil,
       :replication_group_id,
       :node_group_count,
       :apply_immediately,
@@ -6547,6 +6737,7 @@ module Aws::ElastiCache
     #   <p>Contains all of the attributes of a specific Valkey or Redis OSS replication group.</p>
     #   @return [Types::ReplicationGroup]
     class ModifyReplicationGroupShardConfigurationResult < Struct.new(
+      nil,
       :replication_group,
       keyword_init: true
     )
@@ -6594,6 +6785,7 @@ module Aws::ElastiCache
     #   <p>Modifies the engine vesion listed in a serverless cache request. </p>
     #   @return [String]
     class ModifyServerlessCacheRequest < Struct.new(
+      nil,
       :serverless_cache_name,
       :description,
       :cache_usage_limits,
@@ -6613,6 +6805,7 @@ module Aws::ElastiCache
     #   <p>The response for the attempt to modify the serverless cache.</p>
     #   @return [Types::ServerlessCache]
     class ModifyServerlessCacheResponse < Struct.new(
+      nil,
       :serverless_cache,
       keyword_init: true
     )
@@ -6632,6 +6825,7 @@ module Aws::ElastiCache
     #   <p>Modifies the engine listed in a user group. The options are valkey or redis.</p>
     #   @return [String]
     class ModifyUserGroupMessage < Struct.new(
+      nil,
       :user_group_id,
       :user_ids_to_add,
       :user_ids_to_remove,
@@ -6670,6 +6864,7 @@ module Aws::ElastiCache
     #   <p>The Amazon Resource Name (ARN) of the user group.</p>
     #   @return [String]
     class ModifyUserGroupOutput < Struct.new(
+      nil,
       :user_group_id,
       :status,
       :engine,
@@ -6706,6 +6901,7 @@ module Aws::ElastiCache
     #   <p>Modifies the engine listed for a user. The options are valkey or redis.</p>
     #   @return [String]
     class ModifyUserMessage < Struct.new(
+      nil,
       :user_id,
       :access_string,
       :append_access_string,
@@ -6746,6 +6942,7 @@ module Aws::ElastiCache
     #   <p>The Amazon Resource Name (ARN) of the user.</p>
     #   @return [String]
     class ModifyUserOutput < Struct.new(
+      nil,
       :user_id,
       :user_name,
       :status,
@@ -6764,6 +6961,7 @@ module Aws::ElastiCache
     # @!attribute message
     #   @return [String]
     class NoOperationFault < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -6796,6 +6994,7 @@ module Aws::ElastiCache
     #               (shard).</p>
     #   @return [Array<Types::NodeGroupMember>]
     class NodeGroup < Struct.new(
+      nil,
       :node_group_id,
       :status,
       :primary_endpoint,
@@ -6839,6 +7038,7 @@ module Aws::ElastiCache
     #   <p>The outpost ARN of the node replicas.</p>
     #   @return [Array<String>]
     class NodeGroupConfiguration < Struct.new(
+      nil,
       :node_group_id,
       :slots,
       :replica_count,
@@ -6875,6 +7075,7 @@ module Aws::ElastiCache
     #               disabled) replication groups.</p>
     #   @return [String]
     class NodeGroupMember < Struct.new(
+      nil,
       :cache_cluster_id,
       :cache_node_id,
       :read_endpoint,
@@ -6916,6 +7117,7 @@ module Aws::ElastiCache
     #   <p>The date when the NodeUpdateStatus was last modified</p>
     #   @return [Time]
     class NodeGroupMemberUpdateStatus < Struct.new(
+      nil,
       :cache_cluster_id,
       :cache_node_id,
       :node_update_status,
@@ -6936,6 +7138,7 @@ module Aws::ElastiCache
     # @!attribute message
     #   @return [String]
     class NodeGroupNotFoundFault < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -6950,6 +7153,7 @@ module Aws::ElastiCache
     #   <p>The status of the service update on the node group member</p>
     #   @return [Array<Types::NodeGroupMemberUpdateStatus>]
     class NodeGroupUpdateStatus < Struct.new(
+      nil,
       :node_group_id,
       :node_group_member_update_status,
       keyword_init: true
@@ -6962,6 +7166,7 @@ module Aws::ElastiCache
     # @!attribute message
     #   @return [String]
     class NodeGroupsPerReplicationGroupQuotaExceededFault < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -6973,6 +7178,7 @@ module Aws::ElastiCache
     # @!attribute message
     #   @return [String]
     class NodeQuotaForClusterExceededFault < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -6984,6 +7190,7 @@ module Aws::ElastiCache
     # @!attribute message
     #   @return [String]
     class NodeQuotaForCustomerExceededFault < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -7014,6 +7221,7 @@ module Aws::ElastiCache
     #               the snapshot.</p>
     #   @return [Time]
     class NodeSnapshot < Struct.new(
+      nil,
       :cache_cluster_id,
       :node_group_id,
       :cache_node_id,
@@ -7036,6 +7244,7 @@ module Aws::ElastiCache
     #   <p>The current state of the topic.</p>
     #   @return [String]
     class NotificationConfiguration < Struct.new(
+      nil,
       :topic_arn,
       :topic_status,
       keyword_init: true
@@ -7078,6 +7287,7 @@ module Aws::ElastiCache
     #                   Cluster</a>.</p>
     #   @return [String]
     class Parameter < Struct.new(
+      nil,
       :parameter_name,
       :parameter_value,
       :description,
@@ -7100,6 +7310,7 @@ module Aws::ElastiCache
     #   <p>The value of the parameter.</p>
     #   @return [String]
     class ParameterNameValue < Struct.new(
+      nil,
       :parameter_name,
       :parameter_value,
       keyword_init: true
@@ -7123,6 +7334,7 @@ module Aws::ElastiCache
     #   <p>Returns the log format, either JSON or TEXT</p>
     #   @return [String]
     class PendingLogDeliveryConfiguration < Struct.new(
+      nil,
       :log_type,
       :destination_type,
       :destination_details,
@@ -7166,6 +7378,7 @@ module Aws::ElastiCache
     #   <p>The scaling configuration changes that are pending for the Memcached cluster.</p>
     #   @return [Types::ScaleConfig]
     class PendingModifiedValues < Struct.new(
+      nil,
       :num_cache_nodes,
       :cache_node_ids_to_remove,
       :engine_version,
@@ -7194,6 +7407,7 @@ module Aws::ElastiCache
     #   <p>The status of the update action on the Valkey or Redis OSS cluster</p>
     #   @return [String]
     class ProcessedUpdateAction < Struct.new(
+      nil,
       :replication_group_id,
       :cache_cluster_id,
       :service_update_name,
@@ -7229,6 +7443,7 @@ module Aws::ElastiCache
     #               be accompanied by a tag value, although null is accepted.</p>
     #   @return [Array<Types::Tag>]
     class PurchaseReservedCacheNodesOfferingMessage < Struct.new(
+      nil,
       :reserved_cache_nodes_offering_id,
       :reserved_cache_node_id,
       :cache_node_count,
@@ -7243,6 +7458,7 @@ module Aws::ElastiCache
     #               operation.</p>
     #   @return [Types::ReservedCacheNode]
     class PurchaseReservedCacheNodesOfferingResult < Struct.new(
+      nil,
       :reserved_cache_node,
       keyword_init: true
     )
@@ -7256,6 +7472,7 @@ module Aws::ElastiCache
     #   <p>If <code>True</code>, redistribution is applied immediately.</p>
     #   @return [Boolean]
     class RebalanceSlotsInGlobalReplicationGroupMessage < Struct.new(
+      nil,
       :global_replication_group_id,
       :apply_immediately,
       keyword_init: true
@@ -7276,6 +7493,7 @@ module Aws::ElastiCache
     #            </ul>
     #   @return [Types::GlobalReplicationGroup]
     class RebalanceSlotsInGlobalReplicationGroupResult < Struct.new(
+      nil,
       :global_replication_group,
       keyword_init: true
     )
@@ -7291,6 +7509,7 @@ module Aws::ElastiCache
     #               etc.). To reboot an entire cluster, specify all of the cache node IDs.</p>
     #   @return [Array<String>]
     class RebootCacheClusterMessage < Struct.new(
+      nil,
       :cache_cluster_id,
       :cache_node_ids_to_reboot,
       keyword_init: true
@@ -7302,6 +7521,7 @@ module Aws::ElastiCache
     #   <p>Contains all of the attributes of a specific cluster.</p>
     #   @return [Types::CacheCluster]
     class RebootCacheClusterResult < Struct.new(
+      nil,
       :cache_cluster,
       keyword_init: true
     )
@@ -7317,6 +7537,7 @@ module Aws::ElastiCache
     #   <p>The frequency of the recurring charge.</p>
     #   @return [String]
     class RecurringCharge < Struct.new(
+      nil,
       :recurring_charge_amount,
       :recurring_charge_frequency,
       keyword_init: true
@@ -7336,6 +7557,7 @@ module Aws::ElastiCache
     #               configuration of a node group in the resharded cluster. </p>
     #   @return [Array<Types::ReshardingConfiguration>]
     class RegionalConfiguration < Struct.new(
+      nil,
       :replication_group_id,
       :replication_group_region,
       :resharding_configuration,
@@ -7357,6 +7579,7 @@ module Aws::ElastiCache
     #               resource.</p>
     #   @return [Array<String>]
     class RemoveTagsFromResourceMessage < Struct.new(
+      nil,
       :resource_name,
       :tag_keys,
       keyword_init: true
@@ -7371,6 +7594,7 @@ module Aws::ElastiCache
     #   <p>A list of tags as key-value pairs.</p>
     #   @return [Array<Types::Tag>]
     class RemoveTagsFromResourceOutput < Struct.new(
+      nil,
       :tag_list,
       keyword_init: true
     )
@@ -7537,6 +7761,7 @@ module Aws::ElastiCache
     #   <p>The engine used in a replication group. The options are redis, memcached or valkey.</p>
     #   @return [String]
     class ReplicationGroup < Struct.new(
+      nil,
       :replication_group_id,
       :description,
       :global_replication_group_info,
@@ -7578,6 +7803,7 @@ module Aws::ElastiCache
     # @!attribute message
     #   @return [String]
     class ReplicationGroupAlreadyExistsFault < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -7588,6 +7814,7 @@ module Aws::ElastiCache
     # @!attribute message
     #   @return [String]
     class ReplicationGroupAlreadyUnderMigrationFault < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -7603,6 +7830,7 @@ module Aws::ElastiCache
     #               about one replication group.</p>
     #   @return [Array<Types::ReplicationGroup>]
     class ReplicationGroupMessage < Struct.new(
+      nil,
       :marker,
       :replication_groups,
       keyword_init: true
@@ -7614,6 +7842,7 @@ module Aws::ElastiCache
     # @!attribute message
     #   @return [String]
     class ReplicationGroupNotFoundFault < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -7624,6 +7853,7 @@ module Aws::ElastiCache
     # @!attribute message
     #   @return [String]
     class ReplicationGroupNotUnderMigrationFault < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -7667,6 +7897,7 @@ module Aws::ElastiCache
     #               and set the cluster mode to Enabled.</p>
     #   @return [String]
     class ReplicationGroupPendingModifiedValues < Struct.new(
+      nil,
       :primary_cluster_id,
       :automatic_failover_status,
       :resharding,
@@ -7920,6 +8151,7 @@ module Aws::ElastiCache
     #            </p>
     #   @return [String]
     class ReservedCacheNode < Struct.new(
+      nil,
       :reserved_cache_node_id,
       :reserved_cache_nodes_offering_id,
       :cache_node_type,
@@ -7942,6 +8174,7 @@ module Aws::ElastiCache
     # @!attribute message
     #   @return [String]
     class ReservedCacheNodeAlreadyExistsFault < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -7957,6 +8190,7 @@ module Aws::ElastiCache
     #               about one node.</p>
     #   @return [Array<Types::ReservedCacheNode>]
     class ReservedCacheNodeMessage < Struct.new(
+      nil,
       :marker,
       :reserved_cache_nodes,
       keyword_init: true
@@ -7968,6 +8202,7 @@ module Aws::ElastiCache
     # @!attribute message
     #   @return [String]
     class ReservedCacheNodeNotFoundFault < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -7979,6 +8214,7 @@ module Aws::ElastiCache
     # @!attribute message
     #   @return [String]
     class ReservedCacheNodeQuotaExceededFault < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -8205,6 +8441,7 @@ module Aws::ElastiCache
     #   <p>The recurring price charged to run this reserved cache node.</p>
     #   @return [Array<Types::RecurringCharge>]
     class ReservedCacheNodesOffering < Struct.new(
+      nil,
       :reserved_cache_nodes_offering_id,
       :cache_node_type,
       :duration,
@@ -8228,6 +8465,7 @@ module Aws::ElastiCache
     #               information about one offering.</p>
     #   @return [Array<Types::ReservedCacheNodesOffering>]
     class ReservedCacheNodesOfferingMessage < Struct.new(
+      nil,
       :marker,
       :reserved_cache_nodes_offerings,
       keyword_init: true
@@ -8239,6 +8477,7 @@ module Aws::ElastiCache
     # @!attribute message
     #   @return [String]
     class ReservedCacheNodesOfferingNotFoundFault < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -8264,6 +8503,7 @@ module Aws::ElastiCache
     #               reset.</p>
     #   @return [Array<Types::ParameterNameValue>]
     class ResetCacheParameterGroupMessage < Struct.new(
+      nil,
       :cache_parameter_group_name,
       :reset_all_parameters,
       :parameter_name_values,
@@ -8289,6 +8529,7 @@ module Aws::ElastiCache
     #   <p>The name of the cache parameter group.</p>
     #   @return [String]
     class ResetCacheParameterGroupOutput < Struct.new(
+      nil,
       :cache_parameter_group_name,
       keyword_init: true
     )
@@ -8305,6 +8546,7 @@ module Aws::ElastiCache
     #   <p>A list of preferred availability zones for the nodes in this cluster.</p>
     #   @return [Array<String>]
     class ReshardingConfiguration < Struct.new(
+      nil,
       :node_group_id,
       :preferred_availability_zones,
       keyword_init: true
@@ -8317,6 +8559,7 @@ module Aws::ElastiCache
     #   <p>Represents the progress of an online resharding operation.</p>
     #   @return [Types::SlotMigration]
     class ReshardingStatus < Struct.new(
+      nil,
       :slot_migration,
       keyword_init: true
     )
@@ -8337,6 +8580,7 @@ module Aws::ElastiCache
     #               number for this parameter.</p>
     #   @return [String]
     class RevokeCacheSecurityGroupIngressMessage < Struct.new(
+      nil,
       :cache_security_group_name,
       :ec2_security_group_name,
       :ec2_security_group_owner_id,
@@ -8366,6 +8610,7 @@ module Aws::ElastiCache
     #            </ul>
     #   @return [Types::CacheSecurityGroup]
     class RevokeCacheSecurityGroupIngressResult < Struct.new(
+      nil,
       :cache_security_group,
       keyword_init: true
     )
@@ -8380,6 +8625,7 @@ module Aws::ElastiCache
     #   <p>The time interval in seconds between scaling operations when performing gradual scaling for a Memcached cluster.</p>
     #   @return [Integer]
     class ScaleConfig < Struct.new(
+      nil,
       :scale_percentage,
       :scale_interval_minutes,
       keyword_init: true
@@ -8397,6 +8643,7 @@ module Aws::ElastiCache
     #               modified.</p>
     #   @return [String]
     class SecurityGroupMembership < Struct.new(
+      nil,
       :security_group_id,
       :status,
       keyword_init: true
@@ -8462,6 +8709,7 @@ module Aws::ElastiCache
     #              specific time on a daily basis. Available for Valkey, Redis OSS and Serverless Memcached only.</p>
     #   @return [String]
     class ServerlessCache < Struct.new(
+      nil,
       :serverless_cache_name,
       :description,
       :create_time,
@@ -8488,6 +8736,7 @@ module Aws::ElastiCache
     # @!attribute message
     #   @return [String]
     class ServerlessCacheAlreadyExistsFault < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -8505,6 +8754,7 @@ module Aws::ElastiCache
     #   <p>The engine version number that the serverless cache is configured with.</p>
     #   @return [String]
     class ServerlessCacheConfiguration < Struct.new(
+      nil,
       :serverless_cache_name,
       :engine,
       :major_engine_version,
@@ -8517,6 +8767,7 @@ module Aws::ElastiCache
     # @!attribute message
     #   @return [String]
     class ServerlessCacheNotFoundFault < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -8527,6 +8778,7 @@ module Aws::ElastiCache
     # @!attribute message
     #   @return [String]
     class ServerlessCacheQuotaForCustomerExceededFault < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -8563,6 +8815,7 @@ module Aws::ElastiCache
     #   <p>The configuration of the serverless cache, at the time the snapshot was taken. Available for Valkey, Redis OSS and Serverless Memcached only.</p>
     #   @return [Types::ServerlessCacheConfiguration]
     class ServerlessCacheSnapshot < Struct.new(
+      nil,
       :serverless_cache_snapshot_name,
       :arn,
       :kms_key_id,
@@ -8581,6 +8834,7 @@ module Aws::ElastiCache
     # @!attribute message
     #   @return [String]
     class ServerlessCacheSnapshotAlreadyExistsFault < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -8591,6 +8845,7 @@ module Aws::ElastiCache
     # @!attribute message
     #   @return [String]
     class ServerlessCacheSnapshotNotFoundFault < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -8601,6 +8856,7 @@ module Aws::ElastiCache
     # @!attribute message
     #   @return [String]
     class ServerlessCacheSnapshotQuotaExceededFault < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -8611,6 +8867,7 @@ module Aws::ElastiCache
     # @!attribute message
     #   @return [String]
     class ServiceLinkedRoleNotFoundFault < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -8658,6 +8915,7 @@ module Aws::ElastiCache
     #   <p>The estimated length of time the service update will take</p>
     #   @return [String]
     class ServiceUpdate < Struct.new(
+      nil,
       :service_update_name,
       :service_update_release_date,
       :service_update_end_date,
@@ -8679,6 +8937,7 @@ module Aws::ElastiCache
     # @!attribute message
     #   @return [String]
     class ServiceUpdateNotFoundFault < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -8694,6 +8953,7 @@ module Aws::ElastiCache
     #   <p>A list of service updates</p>
     #   @return [Array<Types::ServiceUpdate>]
     class ServiceUpdatesMessage < Struct.new(
+      nil,
       :marker,
       :service_updates,
       keyword_init: true
@@ -8706,6 +8966,7 @@ module Aws::ElastiCache
     #   <p>The percentage of the slot migration that is complete.</p>
     #   @return [Float]
     class SlotMigration < Struct.new(
+      nil,
       :progress_percentage,
       keyword_init: true
     )
@@ -9060,6 +9321,7 @@ module Aws::ElastiCache
     #               information, see <a href="https://docs.aws.amazon.com/AmazonElastiCache/latest/dg/data-tiering.html">Data tiering</a>.</p>
     #   @return [String]
     class Snapshot < Struct.new(
+      nil,
       :snapshot_name,
       :replication_group_id,
       :replication_group_description,
@@ -9097,6 +9359,7 @@ module Aws::ElastiCache
     # @!attribute message
     #   @return [String]
     class SnapshotAlreadyExistsFault < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -9118,6 +9381,7 @@ module Aws::ElastiCache
     # @!attribute message
     #   @return [String]
     class SnapshotFeatureNotSupportedFault < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -9128,6 +9392,7 @@ module Aws::ElastiCache
     # @!attribute message
     #   @return [String]
     class SnapshotNotFoundFault < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -9139,6 +9404,7 @@ module Aws::ElastiCache
     # @!attribute message
     #   @return [String]
     class SnapshotQuotaExceededFault < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -9153,6 +9419,7 @@ module Aws::ElastiCache
     #               disabled), the list should have only one element.</p>
     #   @return [Array<Types::CustomerNodeEndpoint>]
     class StartMigrationMessage < Struct.new(
+      nil,
       :replication_group_id,
       :customer_node_endpoint_list,
       keyword_init: true
@@ -9164,6 +9431,7 @@ module Aws::ElastiCache
     #   <p>Contains all of the attributes of a specific Valkey or Redis OSS replication group.</p>
     #   @return [Types::ReplicationGroup]
     class StartMigrationResponse < Struct.new(
+      nil,
       :replication_group,
       keyword_init: true
     )
@@ -9187,6 +9455,7 @@ module Aws::ElastiCache
     #               to 7.1 or Memcached engine version 1.6.6 and above on all instances built on the <a href="http://aws.amazon.com/ec2/nitro/">Nitro system</a>.</p>
     #   @return [Array<String>]
     class Subnet < Struct.new(
+      nil,
       :subnet_identifier,
       :subnet_availability_zone,
       :subnet_outpost,
@@ -9200,6 +9469,7 @@ module Aws::ElastiCache
     # @!attribute message
     #   @return [String]
     class SubnetInUse < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -9213,6 +9483,7 @@ module Aws::ElastiCache
     # @!attribute message
     #   @return [String]
     class SubnetNotAllowedFault < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -9224,6 +9495,7 @@ module Aws::ElastiCache
     #   <p>The outpost ARN of the subnet.</p>
     #   @return [String]
     class SubnetOutpost < Struct.new(
+      nil,
       :subnet_outpost_arn,
       keyword_init: true
     )
@@ -9242,6 +9514,7 @@ module Aws::ElastiCache
     #   <p>The tag's value. May be null.</p>
     #   @return [String]
     class Tag < Struct.new(
+      nil,
       :key,
       :value,
       keyword_init: true
@@ -9253,6 +9526,7 @@ module Aws::ElastiCache
     # @!attribute message
     #   @return [String]
     class TagNotFoundFault < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -9265,6 +9539,7 @@ module Aws::ElastiCache
     # @!attribute message
     #   @return [String]
     class TagQuotaPerResourceExceeded < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -9281,6 +9556,7 @@ module Aws::ElastiCache
     #               node groups in any rolling 24-hour period.</p>
     #   @return [String]
     class TestFailoverMessage < Struct.new(
+      nil,
       :replication_group_id,
       :node_group_id,
       keyword_init: true
@@ -9292,6 +9568,7 @@ module Aws::ElastiCache
     # @!attribute message
     #   @return [String]
     class TestFailoverNotAvailableFault < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -9302,6 +9579,7 @@ module Aws::ElastiCache
     #   <p>Contains all of the attributes of a specific Valkey or Redis OSS replication group.</p>
     #   @return [Types::ReplicationGroup]
     class TestFailoverResult < Struct.new(
+      nil,
       :replication_group,
       keyword_init: true
     )
@@ -9316,6 +9594,7 @@ module Aws::ElastiCache
     #               element. </p>
     #   @return [Array<Types::CustomerNodeEndpoint>]
     class TestMigrationMessage < Struct.new(
+      nil,
       :replication_group_id,
       :customer_node_endpoint_list,
       keyword_init: true
@@ -9327,6 +9606,7 @@ module Aws::ElastiCache
     #   <p>Contains all of the attributes of a specific Valkey or Redis OSS replication group.</p>
     #   @return [Types::ReplicationGroup]
     class TestMigrationResponse < Struct.new(
+      nil,
       :replication_group,
       keyword_init: true
     )
@@ -9342,6 +9622,7 @@ module Aws::ElastiCache
     #   <p>The end time of the time range filter</p>
     #   @return [Time]
     class TimeRangeFilter < Struct.new(
+      nil,
       :start_time,
       :end_time,
       keyword_init: true
@@ -9367,6 +9648,7 @@ module Aws::ElastiCache
     #   <p>The error message that describes the reason the request was not processed</p>
     #   @return [String]
     class UnprocessedUpdateAction < Struct.new(
+      nil,
       :replication_group_id,
       :cache_cluster_id,
       :service_update_name,
@@ -9434,6 +9716,7 @@ module Aws::ElastiCache
     #   <p>The Elasticache engine to which the update applies. Either Valkey, Redis OSS or Memcached.</p>
     #   @return [String]
     class UpdateAction < Struct.new(
+      nil,
       :replication_group_id,
       :cache_cluster_id,
       :service_update_name,
@@ -9465,6 +9748,7 @@ module Aws::ElastiCache
     #   <p>Returns a list of update actions</p>
     #   @return [Array<Types::UpdateAction>]
     class UpdateActionsMessage < Struct.new(
+      nil,
       :marker,
       :update_actions,
       keyword_init: true
@@ -9500,6 +9784,7 @@ module Aws::ElastiCache
     #   <p>The Amazon Resource Name (ARN) of the user.</p>
     #   @return [String]
     class User < Struct.new(
+      nil,
       :user_id,
       :user_name,
       :status,
@@ -9518,6 +9803,7 @@ module Aws::ElastiCache
     # @!attribute message
     #   @return [String]
     class UserAlreadyExistsFault < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -9553,6 +9839,7 @@ module Aws::ElastiCache
     #   <p>The Amazon Resource Name (ARN) of the user group.</p>
     #   @return [String]
     class UserGroup < Struct.new(
+      nil,
       :user_group_id,
       :status,
       :engine,
@@ -9571,6 +9858,7 @@ module Aws::ElastiCache
     # @!attribute message
     #   @return [String]
     class UserGroupAlreadyExistsFault < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -9581,6 +9869,7 @@ module Aws::ElastiCache
     # @!attribute message
     #   @return [String]
     class UserGroupNotFoundFault < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -9595,6 +9884,7 @@ module Aws::ElastiCache
     #   <p>The list of user IDs to add.</p>
     #   @return [Array<String>]
     class UserGroupPendingChanges < Struct.new(
+      nil,
       :user_ids_to_remove,
       :user_ids_to_add,
       keyword_init: true
@@ -9606,6 +9896,7 @@ module Aws::ElastiCache
     # @!attribute message
     #   @return [String]
     class UserGroupQuotaExceededFault < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -9620,6 +9911,7 @@ module Aws::ElastiCache
     #   <p>The ID of the user group to remove.</p>
     #   @return [Array<String>]
     class UserGroupsUpdateStatus < Struct.new(
+      nil,
       :user_group_ids_to_add,
       :user_group_ids_to_remove,
       keyword_init: true
@@ -9631,6 +9923,7 @@ module Aws::ElastiCache
     # @!attribute message
     #   @return [String]
     class UserNotFoundFault < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -9641,6 +9934,7 @@ module Aws::ElastiCache
     # @!attribute message
     #   @return [String]
     class UserQuotaExceededFault < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )

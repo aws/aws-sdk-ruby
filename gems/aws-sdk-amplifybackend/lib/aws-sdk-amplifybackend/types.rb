@@ -32,6 +32,7 @@ module Aws::AmplifyBackend
     #   <p>The OpenID provider name, if OpenID was used as an authentication mechanism to access your data models.</p>
     #   @return [String]
     class BackendAPIAppSyncAuthSettings < Struct.new(
+      nil,
       :cognito_user_pool_id,
       :description,
       :expiration_time,
@@ -53,6 +54,7 @@ module Aws::AmplifyBackend
     #   <p>Describes settings for the authentication mode.</p>
     #   @return [Types::BackendAPIAppSyncAuthSettings]
     class BackendAPIAuthType < Struct.new(
+      nil,
       :mode,
       :settings,
       keyword_init: true
@@ -65,6 +67,7 @@ module Aws::AmplifyBackend
     #   <p>The strategy for conflict resolution.</p>
     #   @return [String]
     class BackendAPIConflictResolution < Struct.new(
+      nil,
       :resolution_strategy,
       keyword_init: true
     )
@@ -91,6 +94,7 @@ module Aws::AmplifyBackend
     #   <p>The definition of the data model in the annotated transform of the GraphQL schema.</p>
     #   @return [String]
     class BackendAPIResourceConfig < Struct.new(
+      nil,
       :additional_auth_types,
       :api_name,
       :conflict_resolution,
@@ -117,6 +121,7 @@ module Aws::AmplifyBackend
     #   <p>Describes the team_id that comes from Apple.</p>
     #   @return [String]
     class BackendAuthAppleProviderConfig < Struct.new(
+      nil,
       :client_id,
       :key_id,
       :private_key,
@@ -135,6 +140,7 @@ module Aws::AmplifyBackend
     #   <p>Describes the client_secret, which can be obtained from third-party social federation providers.</p>
     #   @return [String]
     class BackendAuthSocialProviderConfig < Struct.new(
+      nil,
       :client_id,
       :client_secret,
       keyword_init: true
@@ -168,6 +174,7 @@ module Aws::AmplifyBackend
     #   <p>The time when the job was last updated.</p>
     #   @return [String]
     class BackendJobRespObj < Struct.new(
+      nil,
       :app_id,
       :backend_environment_name,
       :create_time,
@@ -189,6 +196,7 @@ module Aws::AmplifyBackend
     #   <p>Lists all unauthenticated user read, write, and delete permissions for your S3 bucket.</p>
     #   @return [Array<String>]
     class BackendStoragePermissions < Struct.new(
+      nil,
       :authenticated,
       :un_authenticated,
       keyword_init: true
@@ -201,6 +209,7 @@ module Aws::AmplifyBackend
     #   <p>An error message to inform that the request failed.</p>
     #   @return [String]
     class BadRequestException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -218,6 +227,7 @@ module Aws::AmplifyBackend
     #   <p>The name of the destination backend environment to be created.</p>
     #   @return [String]
     class CloneBackendRequest < Struct.new(
+      nil,
       :app_id,
       :backend_environment_name,
       :target_environment_name,
@@ -245,6 +255,7 @@ module Aws::AmplifyBackend
     #   <p>The current status of the request.</p>
     #   @return [String]
     class CloneBackendResponse < Struct.new(
+      nil,
       :app_id,
       :backend_environment_name,
       :error,
@@ -270,6 +281,7 @@ module Aws::AmplifyBackend
     #   <p>The name of this resource.</p>
     #   @return [String]
     class CreateBackendAPIRequest < Struct.new(
+      nil,
       :app_id,
       :backend_environment_name,
       :resource_config,
@@ -298,6 +310,7 @@ module Aws::AmplifyBackend
     #   <p>The current status of the request.</p>
     #   @return [String]
     class CreateBackendAPIResponse < Struct.new(
+      nil,
       :app_id,
       :backend_environment_name,
       :error,
@@ -320,6 +333,7 @@ module Aws::AmplifyBackend
     #   <p><b>(DEPRECATED)</b> The configuration for the SMS message sent when an app user forgets their password.</p>
     #   @return [Types::SmsSettings]
     class CreateBackendAuthForgotPasswordConfig < Struct.new(
+      nil,
       :delivery_method,
       :email_settings,
       :sms_settings,
@@ -336,6 +350,7 @@ module Aws::AmplifyBackend
     #   <p>Set to true or false based on whether you want to enable guest authorization to your Amplify app.</p>
     #   @return [Boolean]
     class CreateBackendAuthIdentityPoolConfig < Struct.new(
+      nil,
       :identity_pool_name,
       :unauthenticated_login,
       keyword_init: true
@@ -351,6 +366,7 @@ module Aws::AmplifyBackend
     #   <p>Describes the configuration settings and methods for your Amplify app users to use MFA.</p>
     #   @return [Types::Settings]
     class CreateBackendAuthMFAConfig < Struct.new(
+      nil,
       :mfa_mode,
       :settings,
       keyword_init: true
@@ -378,6 +394,7 @@ module Aws::AmplifyBackend
     #   <p>The settings for using social providers to access your Amplify app.</p>
     #   @return [Types::SocialProviderSettings]
     class CreateBackendAuthOAuthConfig < Struct.new(
+      nil,
       :domain_prefix,
       :o_auth_grant_type,
       :o_auth_scopes,
@@ -397,6 +414,7 @@ module Aws::AmplifyBackend
     #   <p>The minimum length of the password used to access the backend of your Amplify project.</p>
     #   @return [Float]
     class CreateBackendAuthPasswordPolicyConfig < Struct.new(
+      nil,
       :additional_constraints,
       :minimum_length,
       keyword_init: true
@@ -418,6 +436,7 @@ module Aws::AmplifyBackend
     #   <p>The name of this resource.</p>
     #   @return [String]
     class CreateBackendAuthRequest < Struct.new(
+      nil,
       :app_id,
       :backend_environment_name,
       :resource_config,
@@ -441,6 +460,7 @@ module Aws::AmplifyBackend
     #   <p>Describes authentication configuration for the Amazon Cognito user pool, provisioned as a part of your auth resource in the Amplify project.</p>
     #   @return [Types::CreateBackendAuthUserPoolConfig]
     class CreateBackendAuthResourceConfig < Struct.new(
+      nil,
       :auth_resources,
       :identity_pool_configs,
       :service,
@@ -469,6 +489,7 @@ module Aws::AmplifyBackend
     #   <p>The current status of the request.</p>
     #   @return [String]
     class CreateBackendAuthResponse < Struct.new(
+      nil,
       :app_id,
       :backend_environment_name,
       :error,
@@ -506,6 +527,7 @@ module Aws::AmplifyBackend
     #   <p>Describes the email or SMS verification message for your Amazon Cognito user pool, configured as a part of your Amplify project.</p>
     #   @return [Types::CreateBackendAuthVerificationMessageConfig]
     class CreateBackendAuthUserPoolConfig < Struct.new(
+      nil,
       :forgot_password,
       :mfa,
       :o_auth,
@@ -530,6 +552,7 @@ module Aws::AmplifyBackend
     #   <p>The settings for the SMS message.</p>
     #   @return [Types::SmsSettings]
     class CreateBackendAuthVerificationMessageConfig < Struct.new(
+      nil,
       :delivery_method,
       :email_settings,
       :sms_settings,
@@ -546,6 +569,7 @@ module Aws::AmplifyBackend
     #   <p>The app ID for the backend manager.</p>
     #   @return [String]
     class CreateBackendConfigRequest < Struct.new(
+      nil,
       :app_id,
       :backend_manager_app_id,
       keyword_init: true
@@ -566,6 +590,7 @@ module Aws::AmplifyBackend
     #   <p>The current status of the request.</p>
     #   @return [String]
     class CreateBackendConfigResponse < Struct.new(
+      nil,
       :app_id,
       :backend_environment_name,
       :job_id,
@@ -592,6 +617,7 @@ module Aws::AmplifyBackend
     #   <p>The name of the resource.</p>
     #   @return [String]
     class CreateBackendRequest < Struct.new(
+      nil,
       :app_id,
       :app_name,
       :backend_environment_name,
@@ -621,6 +647,7 @@ module Aws::AmplifyBackend
     #   <p>The current status of the request.</p>
     #   @return [String]
     class CreateBackendResponse < Struct.new(
+      nil,
       :app_id,
       :backend_environment_name,
       :error,
@@ -646,6 +673,7 @@ module Aws::AmplifyBackend
     #   <p>The name of the storage resource.</p>
     #   @return [String]
     class CreateBackendStorageRequest < Struct.new(
+      nil,
       :app_id,
       :backend_environment_name,
       :resource_config,
@@ -666,6 +694,7 @@ module Aws::AmplifyBackend
     #   <p>The name of the storage service.</p>
     #   @return [String]
     class CreateBackendStorageResourceConfig < Struct.new(
+      nil,
       :bucket_name,
       :permissions,
       :service_name,
@@ -687,6 +716,7 @@ module Aws::AmplifyBackend
     #   <p>The current status of the request.</p>
     #   @return [String]
     class CreateBackendStorageResponse < Struct.new(
+      nil,
       :app_id,
       :backend_environment_name,
       :job_id,
@@ -700,6 +730,7 @@ module Aws::AmplifyBackend
     #   <p>The app ID.</p>
     #   @return [String]
     class CreateTokenRequest < Struct.new(
+      nil,
       :app_id,
       keyword_init: true
     )
@@ -719,6 +750,7 @@ module Aws::AmplifyBackend
     #   <p>The expiry time for the one-time generated token code.</p>
     #   @return [String]
     class CreateTokenResponse < Struct.new(
+      nil,
       :app_id,
       :challenge_code,
       :session_id,
@@ -742,6 +774,7 @@ module Aws::AmplifyBackend
     #   <p>The name of this resource.</p>
     #   @return [String]
     class DeleteBackendAPIRequest < Struct.new(
+      nil,
       :app_id,
       :backend_environment_name,
       :resource_config,
@@ -770,6 +803,7 @@ module Aws::AmplifyBackend
     #   <p>The current status of the request.</p>
     #   @return [String]
     class DeleteBackendAPIResponse < Struct.new(
+      nil,
       :app_id,
       :backend_environment_name,
       :error,
@@ -792,6 +826,7 @@ module Aws::AmplifyBackend
     #   <p>The name of this resource.</p>
     #   @return [String]
     class DeleteBackendAuthRequest < Struct.new(
+      nil,
       :app_id,
       :backend_environment_name,
       :resource_name,
@@ -819,6 +854,7 @@ module Aws::AmplifyBackend
     #   <p>The current status of the request.</p>
     #   @return [String]
     class DeleteBackendAuthResponse < Struct.new(
+      nil,
       :app_id,
       :backend_environment_name,
       :error,
@@ -837,6 +873,7 @@ module Aws::AmplifyBackend
     #   <p>The name of the backend environment.</p>
     #   @return [String]
     class DeleteBackendRequest < Struct.new(
+      nil,
       :app_id,
       :backend_environment_name,
       keyword_init: true
@@ -863,6 +900,7 @@ module Aws::AmplifyBackend
     #   <p>The current status of the request.</p>
     #   @return [String]
     class DeleteBackendResponse < Struct.new(
+      nil,
       :app_id,
       :backend_environment_name,
       :error,
@@ -888,6 +926,7 @@ module Aws::AmplifyBackend
     #   <p>The name of the storage service.</p>
     #   @return [String]
     class DeleteBackendStorageRequest < Struct.new(
+      nil,
       :app_id,
       :backend_environment_name,
       :resource_name,
@@ -910,6 +949,7 @@ module Aws::AmplifyBackend
     #   <p>The current status of the request.</p>
     #   @return [String]
     class DeleteBackendStorageResponse < Struct.new(
+      nil,
       :app_id,
       :backend_environment_name,
       :job_id,
@@ -926,6 +966,7 @@ module Aws::AmplifyBackend
     #   <p>The session ID.</p>
     #   @return [String]
     class DeleteTokenRequest < Struct.new(
+      nil,
       :app_id,
       :session_id,
       keyword_init: true
@@ -937,6 +978,7 @@ module Aws::AmplifyBackend
     #   <p>Indicates whether the request succeeded or failed.</p>
     #   @return [Boolean]
     class DeleteTokenResponse < Struct.new(
+      nil,
       :is_success,
       keyword_init: true
     )
@@ -952,6 +994,7 @@ module Aws::AmplifyBackend
     #   <p>The contents of the subject line of the email message.</p>
     #   @return [String]
     class EmailSettings < Struct.new(
+      nil,
       :email_message,
       :email_subject,
       keyword_init: true
@@ -964,6 +1007,7 @@ module Aws::AmplifyBackend
     #   <p>An error message to inform that the request failed.</p>
     #   @return [String]
     class GatewayTimeoutException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -981,6 +1025,7 @@ module Aws::AmplifyBackend
     #   <p>The name of this resource.</p>
     #   @return [String]
     class GenerateBackendAPIModelsRequest < Struct.new(
+      nil,
       :app_id,
       :backend_environment_name,
       :resource_name,
@@ -1008,6 +1053,7 @@ module Aws::AmplifyBackend
     #   <p>The current status of the request.</p>
     #   @return [String]
     class GenerateBackendAPIModelsResponse < Struct.new(
+      nil,
       :app_id,
       :backend_environment_name,
       :error,
@@ -1030,6 +1076,7 @@ module Aws::AmplifyBackend
     #   <p>The name of this resource.</p>
     #   @return [String]
     class GetBackendAPIModelsRequest < Struct.new(
+      nil,
       :app_id,
       :backend_environment_name,
       :resource_name,
@@ -1048,6 +1095,7 @@ module Aws::AmplifyBackend
     #   <p>Stringified JSON of the model introspection schema for an existing backend API resource.</p>
     #   @return [String]
     class GetBackendAPIModelsResponse < Struct.new(
+      nil,
       :models,
       :status,
       :model_introspection_schema,
@@ -1070,6 +1118,7 @@ module Aws::AmplifyBackend
     #   <p>The name of this resource.</p>
     #   @return [String]
     class GetBackendAPIRequest < Struct.new(
+      nil,
       :app_id,
       :backend_environment_name,
       :resource_config,
@@ -1095,6 +1144,7 @@ module Aws::AmplifyBackend
     #   <p>The name of this resource.</p>
     #   @return [String]
     class GetBackendAPIResponse < Struct.new(
+      nil,
       :app_id,
       :backend_environment_name,
       :error,
@@ -1116,6 +1166,7 @@ module Aws::AmplifyBackend
     #   <p>The name of this resource.</p>
     #   @return [String]
     class GetBackendAuthRequest < Struct.new(
+      nil,
       :app_id,
       :backend_environment_name,
       :resource_name,
@@ -1140,6 +1191,7 @@ module Aws::AmplifyBackend
     #   <p>The name of this resource.</p>
     #   @return [String]
     class GetBackendAuthResponse < Struct.new(
+      nil,
       :app_id,
       :backend_environment_name,
       :error,
@@ -1160,6 +1212,7 @@ module Aws::AmplifyBackend
     #   <p>The ID for the job.</p>
     #   @return [String]
     class GetBackendJobRequest < Struct.new(
+      nil,
       :app_id,
       :backend_environment_name,
       :job_id,
@@ -1193,6 +1246,7 @@ module Aws::AmplifyBackend
     #   <p>The time when the job was last updated.</p>
     #   @return [String]
     class GetBackendJobResponse < Struct.new(
+      nil,
       :app_id,
       :backend_environment_name,
       :create_time,
@@ -1214,6 +1268,7 @@ module Aws::AmplifyBackend
     #   <p>The name of the backend environment.</p>
     #   @return [String]
     class GetBackendRequest < Struct.new(
+      nil,
       :app_id,
       :backend_environment_name,
       keyword_init: true
@@ -1243,6 +1298,7 @@ module Aws::AmplifyBackend
     #   <p>If the request failed, this is the returned error.</p>
     #   @return [String]
     class GetBackendResponse < Struct.new(
+      nil,
       :amplify_feature_flags,
       :amplify_meta_config,
       :app_id,
@@ -1266,6 +1322,7 @@ module Aws::AmplifyBackend
     #   <p>The name of the storage resource.</p>
     #   @return [String]
     class GetBackendStorageRequest < Struct.new(
+      nil,
       :app_id,
       :backend_environment_name,
       :resource_name,
@@ -1288,6 +1345,7 @@ module Aws::AmplifyBackend
     #   <p>The name of the storage service.</p>
     #   @return [String]
     class GetBackendStorageResourceConfig < Struct.new(
+      nil,
       :bucket_name,
       :imported,
       :permissions,
@@ -1310,6 +1368,7 @@ module Aws::AmplifyBackend
     #   <p>The name of the storage resource.</p>
     #   @return [String]
     class GetBackendStorageResponse < Struct.new(
+      nil,
       :app_id,
       :backend_environment_name,
       :resource_config,
@@ -1326,6 +1385,7 @@ module Aws::AmplifyBackend
     #   <p>The session ID.</p>
     #   @return [String]
     class GetTokenRequest < Struct.new(
+      nil,
       :app_id,
       :session_id,
       keyword_init: true
@@ -1346,6 +1406,7 @@ module Aws::AmplifyBackend
     #   <p>The expiry time for the one-time generated token code.</p>
     #   @return [String]
     class GetTokenResponse < Struct.new(
+      nil,
       :app_id,
       :challenge_code,
       :session_id,
@@ -1375,6 +1436,7 @@ module Aws::AmplifyBackend
     #   <p>The ID of the Amazon Cognito web client.</p>
     #   @return [String]
     class ImportBackendAuthRequest < Struct.new(
+      nil,
       :app_id,
       :backend_environment_name,
       :identity_pool_id,
@@ -1405,6 +1467,7 @@ module Aws::AmplifyBackend
     #   <p>The current status of the request.</p>
     #   @return [String]
     class ImportBackendAuthResponse < Struct.new(
+      nil,
       :app_id,
       :backend_environment_name,
       :error,
@@ -1430,6 +1493,7 @@ module Aws::AmplifyBackend
     #   <p>The name of the storage service.</p>
     #   @return [String]
     class ImportBackendStorageRequest < Struct.new(
+      nil,
       :app_id,
       :backend_environment_name,
       :bucket_name,
@@ -1452,6 +1516,7 @@ module Aws::AmplifyBackend
     #   <p>The current status of the request.</p>
     #   @return [String]
     class ImportBackendStorageResponse < Struct.new(
+      nil,
       :app_id,
       :backend_environment_name,
       :job_id,
@@ -1484,6 +1549,7 @@ module Aws::AmplifyBackend
     #   <p>Filters the list of response objects to include only those with the specified status.</p>
     #   @return [String]
     class ListBackendJobsRequest < Struct.new(
+      nil,
       :app_id,
       :backend_environment_name,
       :job_id,
@@ -1503,6 +1569,7 @@ module Aws::AmplifyBackend
     #   <p>The token for the next set of results.</p>
     #   @return [String]
     class ListBackendJobsResponse < Struct.new(
+      nil,
       :jobs,
       :next_token,
       keyword_init: true
@@ -1515,6 +1582,7 @@ module Aws::AmplifyBackend
     #   <p>Reserved for future use.</p>
     #   @return [String]
     class ListS3BucketsRequest < Struct.new(
+      nil,
       :next_token,
       keyword_init: true
     )
@@ -1528,6 +1596,7 @@ module Aws::AmplifyBackend
     #   <p>Reserved for future use.</p>
     #   @return [String]
     class ListS3BucketsResponse < Struct.new(
+      nil,
       :buckets,
       :next_token,
       keyword_init: true
@@ -1549,6 +1618,7 @@ module Aws::AmplifyBackend
     #   <p>The web client ID for the Amazon Cognito user pools.</p>
     #   @return [String]
     class LoginAuthConfigReqObj < Struct.new(
+      nil,
       :aws_cognito_identity_pool_id,
       :aws_cognito_region,
       :aws_user_pools_id,
@@ -1566,6 +1636,7 @@ module Aws::AmplifyBackend
     #   <p>The type of resource that is not found.</p>
     #   @return [String]
     class NotFoundException < Struct.new(
+      nil,
       :message,
       :resource_type,
       keyword_init: true
@@ -1581,6 +1652,7 @@ module Aws::AmplifyBackend
     #   <p>Cleans up the Amplify Console app if this value is set to true.</p>
     #   @return [Boolean]
     class RemoveAllBackendsRequest < Struct.new(
+      nil,
       :app_id,
       :clean_amplify_app,
       keyword_init: true
@@ -1604,6 +1676,7 @@ module Aws::AmplifyBackend
     #   <p>The current status of the request.</p>
     #   @return [String]
     class RemoveAllBackendsResponse < Struct.new(
+      nil,
       :app_id,
       :error,
       :job_id,
@@ -1618,6 +1691,7 @@ module Aws::AmplifyBackend
     #   <p>The app ID.</p>
     #   @return [String]
     class RemoveBackendConfigRequest < Struct.new(
+      nil,
       :app_id,
       keyword_init: true
     )
@@ -1628,6 +1702,7 @@ module Aws::AmplifyBackend
     #   <p>If the request fails, this error is returned.</p>
     #   @return [String]
     class RemoveBackendConfigResponse < Struct.new(
+      nil,
       :error,
       keyword_init: true
     )
@@ -1636,6 +1711,7 @@ module Aws::AmplifyBackend
 
     # <p>Defines the resource configuration for the data model in your Amplify project.</p>
     class ResourceConfig < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1649,6 +1725,7 @@ module Aws::AmplifyBackend
     #   <p>The name of the S3 bucket.</p>
     #   @return [String]
     class S3BucketInfo < Struct.new(
+      nil,
       :creation_date,
       :name,
       keyword_init: true
@@ -1664,6 +1741,7 @@ module Aws::AmplifyBackend
     #   <p>The body of the SMS message.</p>
     #   @return [String]
     class Settings < Struct.new(
+      nil,
       :mfa_types,
       :sms_message,
       keyword_init: true
@@ -1677,6 +1755,7 @@ module Aws::AmplifyBackend
     #   <p>The contents of the SMS message.</p>
     #   @return [String]
     class SmsSettings < Struct.new(
+      nil,
       :sms_message,
       keyword_init: true
     )
@@ -1697,6 +1776,7 @@ module Aws::AmplifyBackend
     #   <p>Describes Apple social federation configurations for allowing your app users to sign in using OAuth.</p>
     #   @return [Types::BackendAuthAppleProviderConfig]
     class SocialProviderSettings < Struct.new(
+      nil,
       :facebook,
       :google,
       :login_with_amazon,
@@ -1714,6 +1794,7 @@ module Aws::AmplifyBackend
     #   <p>An error message to inform that the request has failed.</p>
     #   @return [String]
     class TooManyRequestsException < Struct.new(
+      nil,
       :limit_type,
       :message,
       keyword_init: true
@@ -1735,6 +1816,7 @@ module Aws::AmplifyBackend
     #   <p>The name of this resource.</p>
     #   @return [String]
     class UpdateBackendAPIRequest < Struct.new(
+      nil,
       :app_id,
       :backend_environment_name,
       :resource_config,
@@ -1763,6 +1845,7 @@ module Aws::AmplifyBackend
     #   <p>The current status of the request.</p>
     #   @return [String]
     class UpdateBackendAPIResponse < Struct.new(
+      nil,
       :app_id,
       :backend_environment_name,
       :error,
@@ -1785,6 +1868,7 @@ module Aws::AmplifyBackend
     #   <p><b>(DEPRECATED)</b> The configuration for the SMS message sent when an Amplify app user forgets their password.</p>
     #   @return [Types::SmsSettings]
     class UpdateBackendAuthForgotPasswordConfig < Struct.new(
+      nil,
       :delivery_method,
       :email_settings,
       :sms_settings,
@@ -1798,6 +1882,7 @@ module Aws::AmplifyBackend
     #   <p>A boolean value that can be set to allow or disallow guest-level authorization into your Amplify app.</p>
     #   @return [Boolean]
     class UpdateBackendAuthIdentityPoolConfig < Struct.new(
+      nil,
       :unauthenticated_login,
       keyword_init: true
     )
@@ -1812,6 +1897,7 @@ module Aws::AmplifyBackend
     #   <p>The settings of your MFA configuration for the backend of your Amplify project.</p>
     #   @return [Types::Settings]
     class UpdateBackendAuthMFAConfig < Struct.new(
+      nil,
       :mfa_mode,
       :settings,
       keyword_init: true
@@ -1839,6 +1925,7 @@ module Aws::AmplifyBackend
     #   <p>Describes third-party social federation configurations for allowing your users to sign in with OAuth.</p>
     #   @return [Types::SocialProviderSettings]
     class UpdateBackendAuthOAuthConfig < Struct.new(
+      nil,
       :domain_prefix,
       :o_auth_grant_type,
       :o_auth_scopes,
@@ -1858,6 +1945,7 @@ module Aws::AmplifyBackend
     #   <p>Describes the minimum length of the password required to sign in to the auth resource, configured as a part of your Amplify project.</p>
     #   @return [Float]
     class UpdateBackendAuthPasswordPolicyConfig < Struct.new(
+      nil,
       :additional_constraints,
       :minimum_length,
       keyword_init: true
@@ -1879,6 +1967,7 @@ module Aws::AmplifyBackend
     #   <p>The name of this resource.</p>
     #   @return [String]
     class UpdateBackendAuthRequest < Struct.new(
+      nil,
       :app_id,
       :backend_environment_name,
       :resource_config,
@@ -1902,6 +1991,7 @@ module Aws::AmplifyBackend
     #   <p>Describes the authentication configuration for the Amazon Cognito user pool, provisioned as a part of your auth resource in the Amplify project.</p>
     #   @return [Types::UpdateBackendAuthUserPoolConfig]
     class UpdateBackendAuthResourceConfig < Struct.new(
+      nil,
       :auth_resources,
       :identity_pool_configs,
       :service,
@@ -1930,6 +2020,7 @@ module Aws::AmplifyBackend
     #   <p>The current status of the request.</p>
     #   @return [String]
     class UpdateBackendAuthResponse < Struct.new(
+      nil,
       :app_id,
       :backend_environment_name,
       :error,
@@ -1958,6 +2049,7 @@ module Aws::AmplifyBackend
     #   <p>Describes the email or SMS verification message for your Amazon Cognito user pool, configured as a part of your Amplify project.</p>
     #   @return [Types::UpdateBackendAuthVerificationMessageConfig]
     class UpdateBackendAuthUserPoolConfig < Struct.new(
+      nil,
       :forgot_password,
       :mfa,
       :o_auth,
@@ -1979,6 +2071,7 @@ module Aws::AmplifyBackend
     #   <p>The settings for the SMS message.</p>
     #   @return [Types::SmsSettings]
     class UpdateBackendAuthVerificationMessageConfig < Struct.new(
+      nil,
       :delivery_method,
       :email_settings,
       :sms_settings,
@@ -1995,6 +2088,7 @@ module Aws::AmplifyBackend
     #   <p>Describes the Amazon Cognito configuration for Admin UI access.</p>
     #   @return [Types::LoginAuthConfigReqObj]
     class UpdateBackendConfigRequest < Struct.new(
+      nil,
       :app_id,
       :login_auth_config,
       keyword_init: true
@@ -2015,6 +2109,7 @@ module Aws::AmplifyBackend
     #   <p>Describes the Amazon Cognito configurations for the Admin UI auth resource to log in with.</p>
     #   @return [Types::LoginAuthConfigReqObj]
     class UpdateBackendConfigResponse < Struct.new(
+      nil,
       :app_id,
       :backend_manager_app_id,
       :error,
@@ -2041,6 +2136,7 @@ module Aws::AmplifyBackend
     #   <p>Filters the list of response objects to include only those with the specified status.</p>
     #   @return [String]
     class UpdateBackendJobRequest < Struct.new(
+      nil,
       :app_id,
       :backend_environment_name,
       :job_id,
@@ -2076,6 +2172,7 @@ module Aws::AmplifyBackend
     #   <p>The time when the job was last updated.</p>
     #   @return [String]
     class UpdateBackendJobResponse < Struct.new(
+      nil,
       :app_id,
       :backend_environment_name,
       :create_time,
@@ -2103,6 +2200,7 @@ module Aws::AmplifyBackend
     #   <p>The name of the storage resource.</p>
     #   @return [String]
     class UpdateBackendStorageRequest < Struct.new(
+      nil,
       :app_id,
       :backend_environment_name,
       :resource_config,
@@ -2120,6 +2218,7 @@ module Aws::AmplifyBackend
     #   <p>The name of the storage service.</p>
     #   @return [String]
     class UpdateBackendStorageResourceConfig < Struct.new(
+      nil,
       :permissions,
       :service_name,
       keyword_init: true
@@ -2140,6 +2239,7 @@ module Aws::AmplifyBackend
     #   <p>The current status of the request.</p>
     #   @return [String]
     class UpdateBackendStorageResponse < Struct.new(
+      nil,
       :app_id,
       :backend_environment_name,
       :job_id,

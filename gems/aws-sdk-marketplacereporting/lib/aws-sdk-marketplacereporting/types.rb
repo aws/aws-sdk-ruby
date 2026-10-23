@@ -10,6 +10,7 @@ module Aws::MarketplaceReporting
     # @!attribute message
     #   @return [String]
     class AccessDeniedException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -20,6 +21,7 @@ module Aws::MarketplaceReporting
     # @!attribute message
     #   @return [String]
     class BadRequestException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -35,6 +37,7 @@ module Aws::MarketplaceReporting
     #         <code>https://aws.amazon.com</code>.</p>
     #   @return [Array<String>]
     class GetBuyerDashboardInput < Struct.new(
+      nil,
       :dashboard_identifier,
       :embedding_domains,
       keyword_init: true
@@ -54,6 +57,7 @@ module Aws::MarketplaceReporting
     #         <code>https://aws.amazon.com</code>.</p>
     #   @return [Array<String>]
     class GetBuyerDashboardOutput < Struct.new(
+      nil,
       :embed_url,
       :dashboard_identifier,
       :embedding_domains,
@@ -66,6 +70,7 @@ module Aws::MarketplaceReporting
     # @!attribute message
     #   @return [String]
     class InternalServerException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -76,6 +81,7 @@ module Aws::MarketplaceReporting
     # @!attribute message
     #   @return [String]
     class UnauthorizedException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )

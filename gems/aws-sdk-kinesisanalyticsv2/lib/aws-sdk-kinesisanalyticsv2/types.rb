@@ -27,6 +27,7 @@ module Aws::KinesisAnalyticsV2
     #         <code>CurrentApplicationVersionId</code>.</p>
     #   @return [String]
     class AddApplicationCloudWatchLoggingOptionRequest < Struct.new(
+      nil,
       :application_name,
       :current_application_version_id,
       :cloud_watch_logging_option,
@@ -51,6 +52,7 @@ module Aws::KinesisAnalyticsV2
     #   <p>The operation ID that can be used to track the request.</p>
     #   @return [String]
     class AddApplicationCloudWatchLoggingOptionResponse < Struct.new(
+      nil,
       :application_arn,
       :application_version_id,
       :cloud_watch_logging_option_descriptions,
@@ -78,6 +80,7 @@ module Aws::KinesisAnalyticsV2
     #   <p>The <a>InputProcessingConfiguration</a> to add to the application.</p>
     #   @return [Types::InputProcessingConfiguration]
     class AddApplicationInputProcessingConfigurationRequest < Struct.new(
+      nil,
       :application_name,
       :current_application_version_id,
       :input_id,
@@ -102,6 +105,7 @@ module Aws::KinesisAnalyticsV2
     #   <p>The description of the preprocessor that executes on records in this input before the application's code is run.</p>
     #   @return [Types::InputProcessingConfigurationDescription]
     class AddApplicationInputProcessingConfigurationResponse < Struct.new(
+      nil,
       :application_arn,
       :application_version_id,
       :input_id,
@@ -123,6 +127,7 @@ module Aws::KinesisAnalyticsV2
     #   <p>The <a>Input</a> to add.</p>
     #   @return [Types::Input]
     class AddApplicationInputRequest < Struct.new(
+      nil,
       :application_name,
       :current_application_version_id,
       :input,
@@ -144,6 +149,7 @@ module Aws::KinesisAnalyticsV2
     #       </p>
     #   @return [Array<Types::InputDescription>]
     class AddApplicationInputResponse < Struct.new(
+      nil,
       :application_arn,
       :application_version_id,
       :input_descriptions,
@@ -168,6 +174,7 @@ module Aws::KinesisAnalyticsV2
     #         record the formation to use when writing to the destination.</p>
     #   @return [Types::Output]
     class AddApplicationOutputRequest < Struct.new(
+      nil,
       :application_name,
       :current_application_version_id,
       :output,
@@ -191,6 +198,7 @@ module Aws::KinesisAnalyticsV2
     #       </p>
     #   @return [Array<Types::OutputDescription>]
     class AddApplicationOutputResponse < Struct.new(
+      nil,
       :application_arn,
       :application_version_id,
       :output_descriptions,
@@ -216,6 +224,7 @@ module Aws::KinesisAnalyticsV2
     #         created. </p>
     #   @return [Types::ReferenceDataSource]
     class AddApplicationReferenceDataSourceRequest < Struct.new(
+      nil,
       :application_name,
       :current_application_version_id,
       :reference_data_source,
@@ -239,6 +248,7 @@ module Aws::KinesisAnalyticsV2
     #       </p>
     #   @return [Array<Types::ReferenceDataSourceDescription>]
     class AddApplicationReferenceDataSourceResponse < Struct.new(
+      nil,
       :application_arn,
       :application_version_id,
       :reference_data_source_descriptions,
@@ -270,6 +280,7 @@ module Aws::KinesisAnalyticsV2
     #         <code>CurrentApplicationVersionId</code>.</p>
     #   @return [String]
     class AddApplicationVpcConfigurationRequest < Struct.new(
+      nil,
       :application_name,
       :current_application_version_id,
       :vpc_configuration,
@@ -293,6 +304,7 @@ module Aws::KinesisAnalyticsV2
     #   <p>The operation ID that can be used to track the request.</p>
     #   @return [String]
     class AddApplicationVpcConfigurationResponse < Struct.new(
+      nil,
       :application_arn,
       :application_version_id,
       :vpc_configuration_description,
@@ -310,6 +322,7 @@ module Aws::KinesisAnalyticsV2
     #   <p>Specifies whether the code content is in text or zip format.</p>
     #   @return [String]
     class ApplicationCodeConfiguration < Struct.new(
+      nil,
       :code_content,
       :code_content_type,
       keyword_init: true
@@ -325,6 +338,7 @@ module Aws::KinesisAnalyticsV2
     #   <p>Describes details about the location and format of the application code.</p>
     #   @return [Types::CodeContentDescription]
     class ApplicationCodeConfigurationDescription < Struct.new(
+      nil,
       :code_content_type,
       :code_content_description,
       keyword_init: true
@@ -340,6 +354,7 @@ module Aws::KinesisAnalyticsV2
     #   <p>Describes updates to the code content of an application.</p>
     #   @return [Types::CodeContentUpdate]
     class ApplicationCodeConfigurationUpdate < Struct.new(
+      nil,
       :code_content_type_update,
       :code_content_update,
       keyword_init: true
@@ -376,6 +391,7 @@ module Aws::KinesisAnalyticsV2
     #   <p>The configuration to manage encryption at rest.</p>
     #   @return [Types::ApplicationEncryptionConfiguration]
     class ApplicationConfiguration < Struct.new(
+      nil,
       :sql_application_configuration,
       :flink_application_configuration,
       :environment_properties,
@@ -422,6 +438,7 @@ module Aws::KinesisAnalyticsV2
     #   <p>Describes the encryption at rest configuration.</p>
     #   @return [Types::ApplicationEncryptionConfigurationDescription]
     class ApplicationConfigurationDescription < Struct.new(
+      nil,
       :sql_application_configuration_description,
       :application_code_configuration_description,
       :run_configuration_description,
@@ -468,6 +485,7 @@ module Aws::KinesisAnalyticsV2
     #   <p>Represents an update for encryption at rest configuration.</p>
     #   @return [Types::ApplicationEncryptionConfigurationUpdate]
     class ApplicationConfigurationUpdate < Struct.new(
+      nil,
       :sql_application_configuration_update,
       :application_code_configuration_update,
       :flink_application_configuration_update,
@@ -542,6 +560,7 @@ module Aws::KinesisAnalyticsV2
     #   <p>To create a Managed Service for Apache Flink Studio notebook, you must set the mode to <code>INTERACTIVE</code>. However, for a Managed Service for Apache Flink application, the mode is optional.</p>
     #   @return [String]
     class ApplicationDetail < Struct.new(
+      nil,
       :application_arn,
       :application_description,
       :application_name,
@@ -573,6 +592,7 @@ module Aws::KinesisAnalyticsV2
     #   <p>Specifies the type of key used for encryption at rest.</p>
     #   @return [String]
     class ApplicationEncryptionConfiguration < Struct.new(
+      nil,
       :key_id,
       :key_type,
       keyword_init: true
@@ -588,6 +608,7 @@ module Aws::KinesisAnalyticsV2
     #   <p>Specifies the type of key used for encryption at rest.</p>
     #   @return [String]
     class ApplicationEncryptionConfigurationDescription < Struct.new(
+      nil,
       :key_id,
       :key_type,
       keyword_init: true
@@ -603,6 +624,7 @@ module Aws::KinesisAnalyticsV2
     #   <p>Specifies the type of key to be used for encryption at rest.</p>
     #   @return [String]
     class ApplicationEncryptionConfigurationUpdate < Struct.new(
+      nil,
       :key_id_update,
       :key_type_update,
       keyword_init: true
@@ -618,6 +640,7 @@ module Aws::KinesisAnalyticsV2
     #   <p>The end time for the maintenance window.</p>
     #   @return [String]
     class ApplicationMaintenanceConfigurationDescription < Struct.new(
+      nil,
       :application_maintenance_window_start_time,
       :application_maintenance_window_end_time,
       keyword_init: true
@@ -630,6 +653,7 @@ module Aws::KinesisAnalyticsV2
     #   <p>The updated start time for the maintenance window.</p>
     #   @return [String]
     class ApplicationMaintenanceConfigurationUpdate < Struct.new(
+      nil,
       :application_maintenance_window_start_time_update,
       keyword_init: true
     )
@@ -653,6 +677,7 @@ module Aws::KinesisAnalyticsV2
     #   <p>The status of the operation.</p>
     #   @return [String]
     class ApplicationOperationInfo < Struct.new(
+      nil,
       :operation,
       :operation_id,
       :start_time,
@@ -683,6 +708,7 @@ module Aws::KinesisAnalyticsV2
     #   <p>Provides a description of the operation failure.</p>
     #   @return [Types::OperationFailureDetails]
     class ApplicationOperationInfoDetails < Struct.new(
+      nil,
       :operation,
       :start_time,
       :end_time,
@@ -704,6 +730,7 @@ module Aws::KinesisAnalyticsV2
     #         <code>ApplicationRestoreType</code>.</p>
     #   @return [String]
     class ApplicationRestoreConfiguration < Struct.new(
+      nil,
       :application_restore_type,
       :snapshot_name,
       keyword_init: true
@@ -716,6 +743,7 @@ module Aws::KinesisAnalyticsV2
     #   <p>Describes whether snapshots are enabled for a Managed Service for Apache Flink application.</p>
     #   @return [Boolean]
     class ApplicationSnapshotConfiguration < Struct.new(
+      nil,
       :snapshots_enabled,
       keyword_init: true
     )
@@ -727,6 +755,7 @@ module Aws::KinesisAnalyticsV2
     #   <p>Describes whether snapshots are enabled for a Managed Service for Apache Flink application.</p>
     #   @return [Boolean]
     class ApplicationSnapshotConfigurationDescription < Struct.new(
+      nil,
       :snapshots_enabled,
       keyword_init: true
     )
@@ -738,6 +767,7 @@ module Aws::KinesisAnalyticsV2
     #   <p>Describes updates to whether snapshots are enabled for an application.</p>
     #   @return [Boolean]
     class ApplicationSnapshotConfigurationUpdate < Struct.new(
+      nil,
       :snapshots_enabled_update,
       keyword_init: true
     )
@@ -764,6 +794,7 @@ module Aws::KinesisAnalyticsV2
     #   <p>For a Managed Service for Apache Flink application, the mode is <code>STREAMING</code>. For a Managed Service for Apache Flink Studio notebook, it is <code>INTERACTIVE</code>.</p>
     #   @return [String]
     class ApplicationSummary < Struct.new(
+      nil,
       :application_name,
       :application_arn,
       :application_status,
@@ -780,6 +811,7 @@ module Aws::KinesisAnalyticsV2
     #   <p>Describes whether system rollbacks are enabled for a Managed Service for Apache Flink application.</p>
     #   @return [Boolean]
     class ApplicationSystemRollbackConfiguration < Struct.new(
+      nil,
       :rollback_enabled,
       keyword_init: true
     )
@@ -791,6 +823,7 @@ module Aws::KinesisAnalyticsV2
     #   <p>Describes whether system rollbacks are enabled for a Managed Service for Apache Flink application.</p>
     #   @return [Boolean]
     class ApplicationSystemRollbackConfigurationDescription < Struct.new(
+      nil,
       :rollback_enabled,
       keyword_init: true
     )
@@ -802,6 +835,7 @@ module Aws::KinesisAnalyticsV2
     #   <p>Describes whether system rollbacks are enabled for a Managed Service for Apache Flink application.</p>
     #   @return [Boolean]
     class ApplicationSystemRollbackConfigurationUpdate < Struct.new(
+      nil,
       :rollback_enabled_update,
       keyword_init: true
     )
@@ -816,6 +850,7 @@ module Aws::KinesisAnalyticsV2
     #   <p>The version that the operation execution applied to the applicartion.</p>
     #   @return [Integer]
     class ApplicationVersionChangeDetails < Struct.new(
+      nil,
       :application_version_updated_from,
       :application_version_updated_to,
       keyword_init: true
@@ -831,6 +866,7 @@ module Aws::KinesisAnalyticsV2
     #   <p>The status of the application.</p>
     #   @return [String]
     class ApplicationVersionSummary < Struct.new(
+      nil,
       :application_version_id,
       :application_status,
       keyword_init: true
@@ -857,6 +893,7 @@ module Aws::KinesisAnalyticsV2
     #         delimiter.</p>
     #   @return [String]
     class CSVMappingParameters < Struct.new(
+      nil,
       :record_row_delimiter,
       :record_column_delimiter,
       keyword_init: true
@@ -869,6 +906,7 @@ module Aws::KinesisAnalyticsV2
     #   <p>The configuration parameters for the default Amazon Glue database. You use this database for Apache Flink SQL queries and table API transforms that you write in a Managed Service for Apache Flink Studio notebook.</p>
     #   @return [Types::GlueDataCatalogConfiguration]
     class CatalogConfiguration < Struct.new(
+      nil,
       :glue_data_catalog_configuration,
       keyword_init: true
     )
@@ -880,6 +918,7 @@ module Aws::KinesisAnalyticsV2
     #   <p>The configuration parameters for the default Amazon Glue database. You use this database for SQL queries that you write in a Managed Service for Apache Flink Studio notebook.</p>
     #   @return [Types::GlueDataCatalogConfigurationDescription]
     class CatalogConfigurationDescription < Struct.new(
+      nil,
       :glue_data_catalog_configuration_description,
       keyword_init: true
     )
@@ -891,6 +930,7 @@ module Aws::KinesisAnalyticsV2
     #   <p>Updates to the configuration parameters for the default Amazon Glue database. You use this database for SQL queries that you write in a Managed Service for Apache Flink Studio notebook.</p>
     #   @return [Types::GlueDataCatalogConfigurationUpdate]
     class CatalogConfigurationUpdate < Struct.new(
+      nil,
       :glue_data_catalog_configuration_update,
       keyword_init: true
     )
@@ -955,6 +995,7 @@ module Aws::KinesisAnalyticsV2
     #            </note>
     #   @return [Integer]
     class CheckpointConfiguration < Struct.new(
+      nil,
       :configuration_type,
       :checkpointing_enabled,
       :checkpoint_interval,
@@ -1013,6 +1054,7 @@ module Aws::KinesisAnalyticsV2
     #            </note>
     #   @return [Integer]
     class CheckpointConfigurationDescription < Struct.new(
+      nil,
       :configuration_type,
       :checkpointing_enabled,
       :checkpoint_interval,
@@ -1074,6 +1116,7 @@ module Aws::KinesisAnalyticsV2
     #            </note>
     #   @return [Integer]
     class CheckpointConfigurationUpdate < Struct.new(
+      nil,
       :configuration_type_update,
       :checkpointing_enabled_update,
       :checkpoint_interval_update,
@@ -1089,6 +1132,7 @@ module Aws::KinesisAnalyticsV2
     #   <p>The ARN of the CloudWatch log to receive application messages.</p>
     #   @return [String]
     class CloudWatchLoggingOption < Struct.new(
+      nil,
       :log_stream_arn,
       keyword_init: true
     )
@@ -1111,6 +1155,7 @@ module Aws::KinesisAnalyticsV2
     #            </note>
     #   @return [String]
     class CloudWatchLoggingOptionDescription < Struct.new(
+      nil,
       :cloud_watch_logging_option_id,
       :log_stream_arn,
       :role_arn,
@@ -1128,6 +1173,7 @@ module Aws::KinesisAnalyticsV2
     #         messages.</p>
     #   @return [String]
     class CloudWatchLoggingOptionUpdate < Struct.new(
+      nil,
       :cloud_watch_logging_option_id,
       :log_stream_arn_update,
       keyword_init: true
@@ -1147,6 +1193,7 @@ module Aws::KinesisAnalyticsV2
     #   <p>Information about the Amazon S3 bucket that contains the application code.</p>
     #   @return [Types::S3ContentLocation]
     class CodeContent < Struct.new(
+      nil,
       :text_content,
       :zip_file_content,
       :s3_content_location,
@@ -1170,6 +1217,7 @@ module Aws::KinesisAnalyticsV2
     #         code stored in Amazon S3.</p>
     #   @return [Types::S3ApplicationCodeLocationDescription]
     class CodeContentDescription < Struct.new(
+      nil,
       :text_content,
       :code_md5,
       :code_size,
@@ -1190,6 +1238,7 @@ module Aws::KinesisAnalyticsV2
     #   <p>Describes an update to the location of code for an application.</p>
     #   @return [Types::S3ContentLocationUpdate]
     class CodeContentUpdate < Struct.new(
+      nil,
       :text_content_update,
       :zip_file_content_update,
       :s3_content_location_update,
@@ -1203,6 +1252,7 @@ module Aws::KinesisAnalyticsV2
     # @!attribute message
     #   @return [String]
     class CodeValidationException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -1215,6 +1265,7 @@ module Aws::KinesisAnalyticsV2
     # @!attribute message
     #   @return [String]
     class ConcurrentModificationException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -1232,6 +1283,7 @@ module Aws::KinesisAnalyticsV2
     #   <p>The duration in seconds for which the returned URL will be valid.</p>
     #   @return [Integer]
     class CreateApplicationPresignedUrlRequest < Struct.new(
+      nil,
       :application_name,
       :url_type,
       :session_expiration_duration_in_seconds,
@@ -1244,6 +1296,7 @@ module Aws::KinesisAnalyticsV2
     #   <p>The URL of the extension.</p>
     #   @return [String]
     class CreateApplicationPresignedUrlResponse < Struct.new(
+      nil,
       :authorized_url,
       keyword_init: true
     )
@@ -1283,6 +1336,7 @@ module Aws::KinesisAnalyticsV2
     #       <code>INTERACTIVE</code> mode.</p>
     #   @return [String]
     class CreateApplicationRequest < Struct.new(
+      nil,
       :application_name,
       :application_description,
       :runtime_environment,
@@ -1301,6 +1355,7 @@ module Aws::KinesisAnalyticsV2
     #         response with details of the application it created.</p>
     #   @return [Types::ApplicationDetail]
     class CreateApplicationResponse < Struct.new(
+      nil,
       :application_detail,
       keyword_init: true
     )
@@ -1314,6 +1369,7 @@ module Aws::KinesisAnalyticsV2
     #   <p>An identifier for the application snapshot.</p>
     #   @return [String]
     class CreateApplicationSnapshotRequest < Struct.new(
+      nil,
       :application_name,
       :snapshot_name,
       keyword_init: true
@@ -1322,6 +1378,7 @@ module Aws::KinesisAnalyticsV2
     end
 
     class CreateApplicationSnapshotResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1342,6 +1399,7 @@ module Aws::KinesisAnalyticsV2
     #   <p>The parameters required to fully specify a Maven reference.</p>
     #   @return [Types::MavenReference]
     class CustomArtifactConfiguration < Struct.new(
+      nil,
       :artifact_type,
       :s3_content_location,
       :maven_reference,
@@ -1365,6 +1423,7 @@ module Aws::KinesisAnalyticsV2
     #   <p>The parameters that are required to specify a Maven dependency.</p>
     #   @return [Types::MavenReference]
     class CustomArtifactConfigurationDescription < Struct.new(
+      nil,
       :artifact_type,
       :s3_content_location_description,
       :maven_reference_description,
@@ -1394,6 +1453,7 @@ module Aws::KinesisAnalyticsV2
     #           <code>CurrentApplicationVersionId</code>.</p>
     #   @return [String]
     class DeleteApplicationCloudWatchLoggingOptionRequest < Struct.new(
+      nil,
       :application_name,
       :current_application_version_id,
       :cloud_watch_logging_option_id,
@@ -1418,6 +1478,7 @@ module Aws::KinesisAnalyticsV2
     #   <p>The operation ID that can be used to track the request.</p>
     #   @return [String]
     class DeleteApplicationCloudWatchLoggingOptionResponse < Struct.new(
+      nil,
       :application_arn,
       :application_version_id,
       :cloud_watch_logging_option_descriptions,
@@ -1442,6 +1503,7 @@ module Aws::KinesisAnalyticsV2
     #         configuration. You can get a list of the input IDs for an application by using the <a>DescribeApplication</a> operation.</p>
     #   @return [String]
     class DeleteApplicationInputProcessingConfigurationRequest < Struct.new(
+      nil,
       :application_name,
       :current_application_version_id,
       :input_id,
@@ -1457,6 +1519,7 @@ module Aws::KinesisAnalyticsV2
     #   <p>The current application version ID.</p>
     #   @return [Integer]
     class DeleteApplicationInputProcessingConfigurationResponse < Struct.new(
+      nil,
       :application_arn,
       :application_version_id,
       keyword_init: true
@@ -1482,6 +1545,7 @@ module Aws::KinesisAnalyticsV2
     #         specific <code>OutputId</code>. </p>
     #   @return [String]
     class DeleteApplicationOutputRequest < Struct.new(
+      nil,
       :application_name,
       :current_application_version_id,
       :output_id,
@@ -1497,6 +1561,7 @@ module Aws::KinesisAnalyticsV2
     #   <p>The current application version ID.</p>
     #   @return [Integer]
     class DeleteApplicationOutputResponse < Struct.new(
+      nil,
       :application_arn,
       :application_version_id,
       keyword_init: true
@@ -1520,6 +1585,7 @@ module Aws::KinesisAnalyticsV2
     #         get the reference ID. </p>
     #   @return [String]
     class DeleteApplicationReferenceDataSourceRequest < Struct.new(
+      nil,
       :application_name,
       :current_application_version_id,
       :reference_id,
@@ -1535,6 +1601,7 @@ module Aws::KinesisAnalyticsV2
     #   <p>The updated version ID of the application.</p>
     #   @return [Integer]
     class DeleteApplicationReferenceDataSourceResponse < Struct.new(
+      nil,
       :application_arn,
       :application_version_id,
       keyword_init: true
@@ -1549,6 +1616,7 @@ module Aws::KinesisAnalyticsV2
     #   <p>Use the <code>DescribeApplication</code> operation to get this value.</p>
     #   @return [Time]
     class DeleteApplicationRequest < Struct.new(
+      nil,
       :application_name,
       :create_timestamp,
       keyword_init: true
@@ -1557,6 +1625,7 @@ module Aws::KinesisAnalyticsV2
     end
 
     class DeleteApplicationResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1574,6 +1643,7 @@ module Aws::KinesisAnalyticsV2
     #         or .</p>
     #   @return [Time]
     class DeleteApplicationSnapshotRequest < Struct.new(
+      nil,
       :application_name,
       :snapshot_name,
       :snapshot_creation_timestamp,
@@ -1583,6 +1653,7 @@ module Aws::KinesisAnalyticsV2
     end
 
     class DeleteApplicationSnapshotResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1608,6 +1679,7 @@ module Aws::KinesisAnalyticsV2
     #           <code>CurrentApplicationVersionId</code>.</p>
     #   @return [String]
     class DeleteApplicationVpcConfigurationRequest < Struct.new(
+      nil,
       :application_name,
       :current_application_version_id,
       :vpc_configuration_id,
@@ -1627,6 +1699,7 @@ module Aws::KinesisAnalyticsV2
     #   <p>The operation ID that can be used to track the request.</p>
     #   @return [String]
     class DeleteApplicationVpcConfigurationResponse < Struct.new(
+      nil,
       :application_arn,
       :application_version_id,
       :operation_id,
@@ -1641,6 +1714,7 @@ module Aws::KinesisAnalyticsV2
     #       </p>
     #   @return [Types::S3ContentBaseLocation]
     class DeployAsApplicationConfiguration < Struct.new(
+      nil,
       :s3_content_location,
       keyword_init: true
     )
@@ -1652,6 +1726,7 @@ module Aws::KinesisAnalyticsV2
     #   <p>The location that holds the data required to specify an Amazon Data Analytics application.</p>
     #   @return [Types::S3ContentBaseLocationDescription]
     class DeployAsApplicationConfigurationDescription < Struct.new(
+      nil,
       :s3_content_location_description,
       keyword_init: true
     )
@@ -1663,6 +1738,7 @@ module Aws::KinesisAnalyticsV2
     #   <p>Updates to the location that holds the data required to specify an Amazon Data Analytics application.</p>
     #   @return [Types::S3ContentBaseLocationUpdate]
     class DeployAsApplicationConfigurationUpdate < Struct.new(
+      nil,
       :s3_content_location_update,
       keyword_init: true
     )
@@ -1677,6 +1753,7 @@ module Aws::KinesisAnalyticsV2
     #   <p>The operation ID of the request.</p>
     #   @return [String]
     class DescribeApplicationOperationRequest < Struct.new(
+      nil,
       :application_name,
       :operation_id,
       keyword_init: true
@@ -1689,6 +1766,7 @@ module Aws::KinesisAnalyticsV2
     #   <p>A description of the application operation that provides information about the updates that were made to the application.</p>
     #   @return [Types::ApplicationOperationInfoDetails]
     class DescribeApplicationOperationResponse < Struct.new(
+      nil,
       :application_operation_info_details,
       keyword_init: true
     )
@@ -1702,6 +1780,7 @@ module Aws::KinesisAnalyticsV2
     #   <p>Displays verbose information about a Managed Service for Apache Flink application, including the application's job plan.</p>
     #   @return [Boolean]
     class DescribeApplicationRequest < Struct.new(
+      nil,
       :application_name,
       :include_additional_details,
       keyword_init: true
@@ -1714,6 +1793,7 @@ module Aws::KinesisAnalyticsV2
     #         (ARN), status, and latest version.</p>
     #   @return [Types::ApplicationDetail]
     class DescribeApplicationResponse < Struct.new(
+      nil,
       :application_detail,
       keyword_init: true
     )
@@ -1728,6 +1808,7 @@ module Aws::KinesisAnalyticsV2
     #         .</p>
     #   @return [String]
     class DescribeApplicationSnapshotRequest < Struct.new(
+      nil,
       :application_name,
       :snapshot_name,
       keyword_init: true
@@ -1739,6 +1820,7 @@ module Aws::KinesisAnalyticsV2
     #   <p>An object containing information about the application snapshot.</p>
     #   @return [Types::SnapshotDetails]
     class DescribeApplicationSnapshotResponse < Struct.new(
+      nil,
       :snapshot_details,
       keyword_init: true
     )
@@ -1752,6 +1834,7 @@ module Aws::KinesisAnalyticsV2
     #   <p>The ID of the application version for which you want to get the description.</p>
     #   @return [Integer]
     class DescribeApplicationVersionRequest < Struct.new(
+      nil,
       :application_name,
       :application_version_id,
       keyword_init: true
@@ -1764,6 +1847,7 @@ module Aws::KinesisAnalyticsV2
     #         latest version, and input and output configurations.</p>
     #   @return [Types::ApplicationDetail]
     class DescribeApplicationVersionResponse < Struct.new(
+      nil,
       :application_version_detail,
       keyword_init: true
     )
@@ -1775,6 +1859,7 @@ module Aws::KinesisAnalyticsV2
     #   <p>Specifies the format of the records on the output stream.</p>
     #   @return [String]
     class DestinationSchema < Struct.new(
+      nil,
       :record_format_type,
       keyword_init: true
     )
@@ -1800,6 +1885,7 @@ module Aws::KinesisAnalyticsV2
     #         before discovering the schema of the records.</p>
     #   @return [Types::InputProcessingConfiguration]
     class DiscoverInputSchemaRequest < Struct.new(
+      nil,
       :resource_arn,
       :service_execution_role,
       :input_starting_position_configuration,
@@ -1827,6 +1913,7 @@ module Aws::KinesisAnalyticsV2
     #   <p>The raw stream data that was sampled to infer the schema.</p>
     #   @return [Array<String>]
     class DiscoverInputSchemaResponse < Struct.new(
+      nil,
       :input_schema,
       :parsed_input_records,
       :processed_input_records,
@@ -1841,6 +1928,7 @@ module Aws::KinesisAnalyticsV2
     #   <p>Describes the execution property groups.</p>
     #   @return [Array<Types::PropertyGroup>]
     class EnvironmentProperties < Struct.new(
+      nil,
       :property_groups,
       keyword_init: true
     )
@@ -1852,6 +1940,7 @@ module Aws::KinesisAnalyticsV2
     #   <p>Describes the execution property groups.</p>
     #   @return [Array<Types::PropertyGroup>]
     class EnvironmentPropertyDescriptions < Struct.new(
+      nil,
       :property_group_descriptions,
       keyword_init: true
     )
@@ -1863,6 +1952,7 @@ module Aws::KinesisAnalyticsV2
     #   <p>Describes updates to the execution property groups.</p>
     #   @return [Array<Types::PropertyGroup>]
     class EnvironmentPropertyUpdates < Struct.new(
+      nil,
       :property_groups,
       keyword_init: true
     )
@@ -1874,6 +1964,7 @@ module Aws::KinesisAnalyticsV2
     #   <p>An error message that is returned when an operation fails.</p>
     #   @return [String]
     class ErrorInfo < Struct.new(
+      nil,
       :error_string,
       keyword_init: true
     )
@@ -1897,6 +1988,7 @@ module Aws::KinesisAnalyticsV2
     #   <p>Describes parameters for how an application executes multiple tasks simultaneously.</p>
     #   @return [Types::ParallelismConfiguration]
     class FlinkApplicationConfiguration < Struct.new(
+      nil,
       :checkpoint_configuration,
       :monitoring_configuration,
       :parallelism_configuration,
@@ -1922,6 +2014,7 @@ module Aws::KinesisAnalyticsV2
     #           Documentation</a>. To retrieve the job plan for the application, use the <a>DescribeApplicationRequest$IncludeAdditionalDetails</a> parameter of the <a>DescribeApplication</a> operation.</p>
     #   @return [String]
     class FlinkApplicationConfigurationDescription < Struct.new(
+      nil,
       :checkpoint_configuration_description,
       :monitoring_configuration_description,
       :parallelism_configuration_description,
@@ -1944,6 +2037,7 @@ module Aws::KinesisAnalyticsV2
     #   <p>Describes updates to the parameters for how an application executes multiple tasks simultaneously.</p>
     #   @return [Types::ParallelismConfigurationUpdate]
     class FlinkApplicationConfigurationUpdate < Struct.new(
+      nil,
       :checkpoint_configuration_update,
       :monitoring_configuration_update,
       :parallelism_configuration_update,
@@ -1969,6 +2063,7 @@ module Aws::KinesisAnalyticsV2
     #            </note>
     #   @return [Boolean]
     class FlinkRunConfiguration < Struct.new(
+      nil,
       :allow_non_restored_state,
       keyword_init: true
     )
@@ -1980,6 +2075,7 @@ module Aws::KinesisAnalyticsV2
     #   <p>The Amazon Resource Name (ARN) of the database.</p>
     #   @return [String]
     class GlueDataCatalogConfiguration < Struct.new(
+      nil,
       :database_arn,
       keyword_init: true
     )
@@ -1991,6 +2087,7 @@ module Aws::KinesisAnalyticsV2
     #   <p>The Amazon Resource Name (ARN) of the database.</p>
     #   @return [String]
     class GlueDataCatalogConfigurationDescription < Struct.new(
+      nil,
       :database_arn,
       keyword_init: true
     )
@@ -2002,6 +2099,7 @@ module Aws::KinesisAnalyticsV2
     #   <p>The updated Amazon Resource Name (ARN) of the database.</p>
     #   @return [String]
     class GlueDataCatalogConfigurationUpdate < Struct.new(
+      nil,
       :database_arn_update,
       keyword_init: true
     )
@@ -2038,6 +2136,7 @@ module Aws::KinesisAnalyticsV2
     #            <p>Also used to describe the format of the reference data source.</p>
     #   @return [Types::SourceSchema]
     class Input < Struct.new(
+      nil,
       :name_prefix,
       :input_processing_configuration,
       :kinesis_streams_input,
@@ -2081,6 +2180,7 @@ module Aws::KinesisAnalyticsV2
     #   <p>The point at which the application is configured to read from the input stream.</p>
     #   @return [Types::InputStartingPositionConfiguration]
     class InputDescription < Struct.new(
+      nil,
       :input_id,
       :name_prefix,
       :in_app_stream_names,
@@ -2105,6 +2205,7 @@ module Aws::KinesisAnalyticsV2
     #            </note>
     #   @return [String]
     class InputLambdaProcessor < Struct.new(
+      nil,
       :resource_arn,
       keyword_init: true
     )
@@ -2131,6 +2232,7 @@ module Aws::KinesisAnalyticsV2
     #            </note>
     #   @return [String]
     class InputLambdaProcessorDescription < Struct.new(
+      nil,
       :resource_arn,
       :role_arn,
       keyword_init: true
@@ -2150,6 +2252,7 @@ module Aws::KinesisAnalyticsV2
     #            </note>
     #   @return [String]
     class InputLambdaProcessorUpdate < Struct.new(
+      nil,
       :resource_arn_update,
       keyword_init: true
     )
@@ -2162,6 +2265,7 @@ module Aws::KinesisAnalyticsV2
     #   <p>The number of in-application streams to create.</p>
     #   @return [Integer]
     class InputParallelism < Struct.new(
+      nil,
       :count,
       keyword_init: true
     )
@@ -2174,6 +2278,7 @@ module Aws::KinesisAnalyticsV2
     #   <p>The number of in-application streams to create for the specified streaming source.</p>
     #   @return [Integer]
     class InputParallelismUpdate < Struct.new(
+      nil,
       :count_update,
       keyword_init: true
     )
@@ -2188,6 +2293,7 @@ module Aws::KinesisAnalyticsV2
     #         in the stream before being processed by your application code.</p>
     #   @return [Types::InputLambdaProcessor]
     class InputProcessingConfiguration < Struct.new(
+      nil,
       :input_lambda_processor,
       keyword_init: true
     )
@@ -2201,6 +2307,7 @@ module Aws::KinesisAnalyticsV2
     #            </p>
     #   @return [Types::InputLambdaProcessorDescription]
     class InputProcessingConfigurationDescription < Struct.new(
+      nil,
       :input_lambda_processor_description,
       keyword_init: true
     )
@@ -2212,6 +2319,7 @@ module Aws::KinesisAnalyticsV2
     #   <p>Provides update information for an <a>InputLambdaProcessor</a>.</p>
     #   @return [Types::InputLambdaProcessorUpdate]
     class InputProcessingConfigurationUpdate < Struct.new(
+      nil,
       :input_lambda_processor_update,
       keyword_init: true
     )
@@ -2231,6 +2339,7 @@ module Aws::KinesisAnalyticsV2
     #         of the streaming source element to the corresponding column in the in-application stream.</p>
     #   @return [Array<Types::RecordColumn>]
     class InputSchemaUpdate < Struct.new(
+      nil,
       :record_format_update,
       :record_encoding_update,
       :record_column_updates,
@@ -2262,6 +2371,7 @@ module Aws::KinesisAnalyticsV2
     #            </ul>
     #   @return [String]
     class InputStartingPositionConfiguration < Struct.new(
+      nil,
       :input_starting_position,
       keyword_init: true
     )
@@ -2296,6 +2406,7 @@ module Aws::KinesisAnalyticsV2
     #   <p>Describes the parallelism updates (the number of in-application streams Kinesis Data Analytics creates for the specific streaming source).</p>
     #   @return [Types::InputParallelismUpdate]
     class InputUpdate < Struct.new(
+      nil,
       :input_id,
       :name_prefix_update,
       :input_processing_configuration_update,
@@ -2312,6 +2423,7 @@ module Aws::KinesisAnalyticsV2
     # @!attribute message
     #   @return [String]
     class InvalidApplicationConfigurationException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -2322,6 +2434,7 @@ module Aws::KinesisAnalyticsV2
     # @!attribute message
     #   @return [String]
     class InvalidArgumentException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -2332,6 +2445,7 @@ module Aws::KinesisAnalyticsV2
     # @!attribute message
     #   @return [String]
     class InvalidRequestException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -2344,6 +2458,7 @@ module Aws::KinesisAnalyticsV2
     #   <p>The path to the top-level parent that contains the records.</p>
     #   @return [String]
     class JSONMappingParameters < Struct.new(
+      nil,
       :record_row_path,
       keyword_init: true
     )
@@ -2357,6 +2472,7 @@ module Aws::KinesisAnalyticsV2
     #   <p>The Amazon Resource Name (ARN) of the delivery stream.</p>
     #   @return [String]
     class KinesisFirehoseInput < Struct.new(
+      nil,
       :resource_arn,
       keyword_init: true
     )
@@ -2377,6 +2493,7 @@ module Aws::KinesisAnalyticsV2
     #            </note>
     #   @return [String]
     class KinesisFirehoseInputDescription < Struct.new(
+      nil,
       :resource_arn,
       :role_arn,
       keyword_init: true
@@ -2391,6 +2508,7 @@ module Aws::KinesisAnalyticsV2
     #   <p>The Amazon Resource Name (ARN) of the input delivery stream to read.</p>
     #   @return [String]
     class KinesisFirehoseInputUpdate < Struct.new(
+      nil,
       :resource_arn_update,
       keyword_init: true
     )
@@ -2404,6 +2522,7 @@ module Aws::KinesisAnalyticsV2
     #   <p>The ARN of the destination delivery stream to write to.</p>
     #   @return [String]
     class KinesisFirehoseOutput < Struct.new(
+      nil,
       :resource_arn,
       keyword_init: true
     )
@@ -2425,6 +2544,7 @@ module Aws::KinesisAnalyticsV2
     #            </note>
     #   @return [String]
     class KinesisFirehoseOutputDescription < Struct.new(
+      nil,
       :resource_arn,
       :role_arn,
       keyword_init: true
@@ -2439,6 +2559,7 @@ module Aws::KinesisAnalyticsV2
     #   <p>The Amazon Resource Name (ARN) of the delivery stream to write to. </p>
     #   @return [String]
     class KinesisFirehoseOutputUpdate < Struct.new(
+      nil,
       :resource_arn_update,
       keyword_init: true
     )
@@ -2451,6 +2572,7 @@ module Aws::KinesisAnalyticsV2
     #   <p>The ARN of the input Kinesis data stream to read.</p>
     #   @return [String]
     class KinesisStreamsInput < Struct.new(
+      nil,
       :resource_arn,
       keyword_init: true
     )
@@ -2472,6 +2594,7 @@ module Aws::KinesisAnalyticsV2
     #            </note>
     #   @return [String]
     class KinesisStreamsInputDescription < Struct.new(
+      nil,
       :resource_arn,
       :role_arn,
       keyword_init: true
@@ -2486,6 +2609,7 @@ module Aws::KinesisAnalyticsV2
     #   <p>The Amazon Resource Name (ARN) of the input Kinesis data stream to read.</p>
     #   @return [String]
     class KinesisStreamsInputUpdate < Struct.new(
+      nil,
       :resource_arn_update,
       keyword_init: true
     )
@@ -2499,6 +2623,7 @@ module Aws::KinesisAnalyticsV2
     #   <p>The ARN of the destination Kinesis data stream to write to.</p>
     #   @return [String]
     class KinesisStreamsOutput < Struct.new(
+      nil,
       :resource_arn,
       keyword_init: true
     )
@@ -2520,6 +2645,7 @@ module Aws::KinesisAnalyticsV2
     #            </note>
     #   @return [String]
     class KinesisStreamsOutputDescription < Struct.new(
+      nil,
       :resource_arn,
       :role_arn,
       keyword_init: true
@@ -2535,6 +2661,7 @@ module Aws::KinesisAnalyticsV2
     #         output.</p>
     #   @return [String]
     class KinesisStreamsOutputUpdate < Struct.new(
+      nil,
       :resource_arn_update,
       keyword_init: true
     )
@@ -2552,6 +2679,7 @@ module Aws::KinesisAnalyticsV2
     #            </note>
     #   @return [String]
     class LambdaOutput < Struct.new(
+      nil,
       :resource_arn,
       keyword_init: true
     )
@@ -2573,6 +2701,7 @@ module Aws::KinesisAnalyticsV2
     #            </note>
     #   @return [String]
     class LambdaOutputDescription < Struct.new(
+      nil,
       :resource_arn,
       :role_arn,
       keyword_init: true
@@ -2591,6 +2720,7 @@ module Aws::KinesisAnalyticsV2
     #            </note>
     #   @return [String]
     class LambdaOutputUpdate < Struct.new(
+      nil,
       :resource_arn_update,
       keyword_init: true
     )
@@ -2601,6 +2731,7 @@ module Aws::KinesisAnalyticsV2
     # @!attribute message
     #   @return [String]
     class LimitExceededException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -2624,6 +2755,7 @@ module Aws::KinesisAnalyticsV2
     #   <p>The status of the operation.</p>
     #   @return [String]
     class ListApplicationOperationsRequest < Struct.new(
+      nil,
       :application_name,
       :limit,
       :next_token,
@@ -2642,6 +2774,7 @@ module Aws::KinesisAnalyticsV2
     #   <p>A pagination token that can be used in a subsequent request.</p>
     #   @return [String]
     class ListApplicationOperationsResponse < Struct.new(
+      nil,
       :application_operation_info_list,
       :next_token,
       keyword_init: true
@@ -2661,6 +2794,7 @@ module Aws::KinesisAnalyticsV2
     #         continue from. </p>
     #   @return [String]
     class ListApplicationSnapshotsRequest < Struct.new(
+      nil,
       :application_name,
       :limit,
       :next_token,
@@ -2676,6 +2810,7 @@ module Aws::KinesisAnalyticsV2
     #   <p>The token for the next set of results, or <code>null</code> if there are no additional results.</p>
     #   @return [String]
     class ListApplicationSnapshotsResponse < Struct.new(
+      nil,
       :snapshot_summaries,
       :next_token,
       keyword_init: true
@@ -2694,6 +2829,7 @@ module Aws::KinesisAnalyticsV2
     #         <a href="https://docs.aws.amazon.com/cli/latest/userguide/pagination.html">Using the Amazon Command Line Interface's Pagination Options</a>.</p>
     #   @return [String]
     class ListApplicationVersionsRequest < Struct.new(
+      nil,
       :application_name,
       :limit,
       :next_token,
@@ -2712,6 +2848,7 @@ module Aws::KinesisAnalyticsV2
     #         <a href="https://docs.aws.amazon.com/cli/latest/userguide/pagination.html">Using the Amazon Command Line Interface's Pagination Options</a>.</p>
     #   @return [String]
     class ListApplicationVersionsResponse < Struct.new(
+      nil,
       :application_version_summaries,
       :next_token,
       keyword_init: true
@@ -2729,6 +2866,7 @@ module Aws::KinesisAnalyticsV2
     #         <a href="https://docs.aws.amazon.com/cli/latest/userguide/pagination.html">Using the Amazon Command Line Interface's Pagination Options</a>.</p>
     #   @return [String]
     class ListApplicationsRequest < Struct.new(
+      nil,
       :limit,
       :next_token,
       keyword_init: true
@@ -2746,6 +2884,7 @@ module Aws::KinesisAnalyticsV2
     #         <a href="https://docs.aws.amazon.com/cli/latest/userguide/pagination.html">Using the Amazon Command Line Interface's Pagination Options</a>.</p>
     #   @return [String]
     class ListApplicationsResponse < Struct.new(
+      nil,
       :application_summaries,
       :next_token,
       keyword_init: true
@@ -2757,6 +2896,7 @@ module Aws::KinesisAnalyticsV2
     #   <p>The ARN of the application for which to retrieve tags.</p>
     #   @return [String]
     class ListTagsForResourceRequest < Struct.new(
+      nil,
       :resource_arn,
       keyword_init: true
     )
@@ -2767,6 +2907,7 @@ module Aws::KinesisAnalyticsV2
     #   <p>The key-value tags assigned to the application.</p>
     #   @return [Array<Types::Tag>]
     class ListTagsForResourceResponse < Struct.new(
+      nil,
       :tags,
       keyword_init: true
     )
@@ -2785,6 +2926,7 @@ module Aws::KinesisAnalyticsV2
     #         (for example, CSV).</p>
     #   @return [Types::CSVMappingParameters]
     class MappingParameters < Struct.new(
+      nil,
       :json_mapping_parameters,
       :csv_mapping_parameters,
       keyword_init: true
@@ -2803,6 +2945,7 @@ module Aws::KinesisAnalyticsV2
     #   <p>The version of the Maven reference.</p>
     #   @return [String]
     class MavenReference < Struct.new(
+      nil,
       :group_id,
       :artifact_id,
       :version,
@@ -2825,6 +2968,7 @@ module Aws::KinesisAnalyticsV2
     #   <p>Describes the verbosity of the CloudWatch Logs for an application.</p>
     #   @return [String]
     class MonitoringConfiguration < Struct.new(
+      nil,
       :configuration_type,
       :metrics_level,
       :log_level,
@@ -2844,6 +2988,7 @@ module Aws::KinesisAnalyticsV2
     #   <p>Describes the verbosity of the CloudWatch Logs for an application.</p>
     #   @return [String]
     class MonitoringConfigurationDescription < Struct.new(
+      nil,
       :configuration_type,
       :metrics_level,
       :log_level,
@@ -2866,6 +3011,7 @@ module Aws::KinesisAnalyticsV2
     #   <p>Describes updates to the verbosity of the CloudWatch Logs for an application.</p>
     #   @return [String]
     class MonitoringConfigurationUpdate < Struct.new(
+      nil,
       :configuration_type_update,
       :metrics_level_update,
       :log_level_update,
@@ -2882,6 +3028,7 @@ module Aws::KinesisAnalyticsV2
     #   <p>A description of the error that caused an operation to fail.</p>
     #   @return [Types::ErrorInfo]
     class OperationFailureDetails < Struct.new(
+      nil,
       :rollback_operation_id,
       :error_info,
       keyword_init: true
@@ -2912,6 +3059,7 @@ module Aws::KinesisAnalyticsV2
     #         </p>
     #   @return [Types::DestinationSchema]
     class Output < Struct.new(
+      nil,
       :name,
       :kinesis_streams_output,
       :kinesis_firehose_output,
@@ -2948,6 +3096,7 @@ module Aws::KinesisAnalyticsV2
     #   <p>The data format used for writing data to the destination.</p>
     #   @return [Types::DestinationSchema]
     class OutputDescription < Struct.new(
+      nil,
       :output_id,
       :name,
       :kinesis_streams_output_description,
@@ -2984,6 +3133,7 @@ module Aws::KinesisAnalyticsV2
     #         </p>
     #   @return [Types::DestinationSchema]
     class OutputUpdate < Struct.new(
+      nil,
       :output_id,
       :name_update,
       :kinesis_streams_output_update,
@@ -3022,6 +3172,7 @@ module Aws::KinesisAnalyticsV2
     #   <p>Describes whether the Managed Service for Apache Flink service can increase the parallelism of the application in response to increased throughput.</p>
     #   @return [Boolean]
     class ParallelismConfiguration < Struct.new(
+      nil,
       :configuration_type,
       :parallelism,
       :parallelism_per_kpu,
@@ -3061,6 +3212,7 @@ module Aws::KinesisAnalyticsV2
     #   <p>Describes whether the Managed Service for Apache Flink service can increase the parallelism of the application in response to increased throughput.</p>
     #   @return [Boolean]
     class ParallelismConfigurationDescription < Struct.new(
+      nil,
       :configuration_type,
       :parallelism,
       :parallelism_per_kpu,
@@ -3091,6 +3243,7 @@ module Aws::KinesisAnalyticsV2
     #   <p>Describes updates to whether the Managed Service for Apache Flink service can increase the parallelism of a Managed Service for Apache Flink application in response to increased throughput.</p>
     #   @return [Boolean]
     class ParallelismConfigurationUpdate < Struct.new(
+      nil,
       :configuration_type_update,
       :parallelism_update,
       :parallelism_per_kpu_update,
@@ -3108,6 +3261,7 @@ module Aws::KinesisAnalyticsV2
     #   <p>Describes the value of an application execution property key-value pair.</p>
     #   @return [Hash<String, String>]
     class PropertyGroup < Struct.new(
+      nil,
       :property_group_id,
       :property_map,
       keyword_init: true
@@ -3131,6 +3285,7 @@ module Aws::KinesisAnalyticsV2
     #   <p>The type of column created in the in-application input stream or reference table.</p>
     #   @return [String]
     class RecordColumn < Struct.new(
+      nil,
       :name,
       :mapping,
       :sql_type,
@@ -3151,6 +3306,7 @@ module Aws::KinesisAnalyticsV2
     #         record fields delimited by some delimiter) on the streaming source.</p>
     #   @return [Types::MappingParameters]
     class RecordFormat < Struct.new(
+      nil,
       :record_format_type,
       :mapping_parameters,
       keyword_init: true
@@ -3174,6 +3330,7 @@ module Aws::KinesisAnalyticsV2
     #   <p>Describes the format of the data in the streaming source, and how each data element maps to corresponding columns created in the in-application stream.</p>
     #   @return [Types::SourceSchema]
     class ReferenceDataSource < Struct.new(
+      nil,
       :table_name,
       :s3_reference_data_source,
       :reference_schema,
@@ -3198,6 +3355,7 @@ module Aws::KinesisAnalyticsV2
     #   <p>Describes the format of the data in the streaming source, and how each data element maps to corresponding columns created in the in-application stream.</p>
     #   @return [Types::SourceSchema]
     class ReferenceDataSourceDescription < Struct.new(
+      nil,
       :reference_id,
       :table_name,
       :s3_reference_data_source_description,
@@ -3227,6 +3385,7 @@ module Aws::KinesisAnalyticsV2
     #         corresponding columns created in the in-application stream. </p>
     #   @return [Types::SourceSchema]
     class ReferenceDataSourceUpdate < Struct.new(
+      nil,
       :reference_id,
       :table_name_update,
       :s3_reference_data_source_update,
@@ -3240,6 +3399,7 @@ module Aws::KinesisAnalyticsV2
     # @!attribute message
     #   @return [String]
     class ResourceInUseException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -3250,6 +3410,7 @@ module Aws::KinesisAnalyticsV2
     # @!attribute message
     #   @return [String]
     class ResourceNotFoundException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -3261,6 +3422,7 @@ module Aws::KinesisAnalyticsV2
     # @!attribute message
     #   @return [String]
     class ResourceProvisionedThroughputExceededException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -3275,6 +3437,7 @@ module Aws::KinesisAnalyticsV2
     #               <a>DescribeApplication</a>.</p>
     #   @return [Integer]
     class RollbackApplicationRequest < Struct.new(
+      nil,
       :application_name,
       :current_application_version_id,
       keyword_init: true
@@ -3290,6 +3453,7 @@ module Aws::KinesisAnalyticsV2
     #   <p>The operation ID that can be used to track the request.</p>
     #   @return [String]
     class RollbackApplicationResponse < Struct.new(
+      nil,
       :application_detail,
       :operation_id,
       keyword_init: true
@@ -3309,6 +3473,7 @@ module Aws::KinesisAnalyticsV2
     #   <p>Describes the restore behavior of a restarting application.</p>
     #   @return [Types::ApplicationRestoreConfiguration]
     class RunConfiguration < Struct.new(
+      nil,
       :flink_run_configuration,
       :sql_run_configurations,
       :application_restore_configuration,
@@ -3325,6 +3490,7 @@ module Aws::KinesisAnalyticsV2
     #   <p>Describes the starting parameters for a Managed Service for Apache Flink application.</p>
     #   @return [Types::FlinkRunConfiguration]
     class RunConfigurationDescription < Struct.new(
+      nil,
       :application_restore_configuration_description,
       :flink_run_configuration_description,
       keyword_init: true
@@ -3340,6 +3506,7 @@ module Aws::KinesisAnalyticsV2
     #   <p>Describes updates to the restore behavior of a restarting application.</p>
     #   @return [Types::ApplicationRestoreConfiguration]
     class RunConfigurationUpdate < Struct.new(
+      nil,
       :flink_run_configuration,
       :application_restore_configuration,
       keyword_init: true
@@ -3358,6 +3525,7 @@ module Aws::KinesisAnalyticsV2
     #   <p>The version of the object containing the application code.</p>
     #   @return [String]
     class S3ApplicationCodeLocationDescription < Struct.new(
+      nil,
       :bucket_arn,
       :file_key,
       :object_version,
@@ -3376,6 +3544,7 @@ module Aws::KinesisAnalyticsV2
     #   <p>The name of the object that contains the data.</p>
     #   @return [String]
     class S3Configuration < Struct.new(
+      nil,
       :bucket_arn,
       :file_key,
       keyword_init: true
@@ -3391,6 +3560,7 @@ module Aws::KinesisAnalyticsV2
     #   <p>The base path for the S3 bucket.</p>
     #   @return [String]
     class S3ContentBaseLocation < Struct.new(
+      nil,
       :bucket_arn,
       :base_path,
       keyword_init: true
@@ -3406,6 +3576,7 @@ module Aws::KinesisAnalyticsV2
     #   <p>The base path for the S3 bucket.</p>
     #   @return [String]
     class S3ContentBaseLocationDescription < Struct.new(
+      nil,
       :bucket_arn,
       :base_path,
       keyword_init: true
@@ -3421,6 +3592,7 @@ module Aws::KinesisAnalyticsV2
     #   <p>The updated S3 bucket path.</p>
     #   @return [String]
     class S3ContentBaseLocationUpdate < Struct.new(
+      nil,
       :bucket_arn_update,
       :base_path_update,
       keyword_init: true
@@ -3442,6 +3614,7 @@ module Aws::KinesisAnalyticsV2
     #   <p>The version of the object containing the application code.</p>
     #   @return [String]
     class S3ContentLocation < Struct.new(
+      nil,
       :bucket_arn,
       :file_key,
       :object_version,
@@ -3461,6 +3634,7 @@ module Aws::KinesisAnalyticsV2
     #   <p>The new version of the object containing the application code.</p>
     #   @return [String]
     class S3ContentLocationUpdate < Struct.new(
+      nil,
       :bucket_arn_update,
       :file_key_update,
       :object_version_update,
@@ -3480,6 +3654,7 @@ module Aws::KinesisAnalyticsV2
     #   <p>The object key name containing the reference data.</p>
     #   @return [String]
     class S3ReferenceDataSource < Struct.new(
+      nil,
       :bucket_arn,
       :file_key,
       keyword_init: true
@@ -3505,6 +3680,7 @@ module Aws::KinesisAnalyticsV2
     #            </note>
     #   @return [String]
     class S3ReferenceDataSourceDescription < Struct.new(
+      nil,
       :bucket_arn,
       :file_key,
       :reference_role_arn,
@@ -3522,6 +3698,7 @@ module Aws::KinesisAnalyticsV2
     #   <p>The object key name.</p>
     #   @return [String]
     class S3ReferenceDataSourceUpdate < Struct.new(
+      nil,
       :bucket_arn_update,
       :file_key_update,
       keyword_init: true
@@ -3533,6 +3710,7 @@ module Aws::KinesisAnalyticsV2
     # @!attribute message
     #   @return [String]
     class ServiceUnavailableException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -3559,6 +3737,7 @@ module Aws::KinesisAnalyticsV2
     #   <p>Specifies the encryption settings of data at rest for the application snapshot.</p>
     #   @return [Types::ApplicationEncryptionConfigurationDescription]
     class SnapshotDetails < Struct.new(
+      nil,
       :snapshot_name,
       :snapshot_status,
       :application_version_id,
@@ -3583,6 +3762,7 @@ module Aws::KinesisAnalyticsV2
     #   <p>A list of <code>RecordColumn</code> objects. </p>
     #   @return [Array<Types::RecordColumn>]
     class SourceSchema < Struct.new(
+      nil,
       :record_format,
       :record_encoding,
       :record_columns,
@@ -3605,6 +3785,7 @@ module Aws::KinesisAnalyticsV2
     #         sources used by the application.</p>
     #   @return [Array<Types::ReferenceDataSource>]
     class SqlApplicationConfiguration < Struct.new(
+      nil,
       :inputs,
       :outputs,
       :reference_data_sources,
@@ -3627,6 +3808,7 @@ module Aws::KinesisAnalyticsV2
     #         reference data sources used by the application.</p>
     #   @return [Array<Types::ReferenceDataSourceDescription>]
     class SqlApplicationConfigurationDescription < Struct.new(
+      nil,
       :input_descriptions,
       :output_descriptions,
       :reference_data_source_descriptions,
@@ -3650,6 +3832,7 @@ module Aws::KinesisAnalyticsV2
     #         reference data sources used by the application.</p>
     #   @return [Array<Types::ReferenceDataSourceUpdate>]
     class SqlApplicationConfigurationUpdate < Struct.new(
+      nil,
       :input_updates,
       :output_updates,
       :reference_data_source_updates,
@@ -3667,6 +3850,7 @@ module Aws::KinesisAnalyticsV2
     #         source. </p>
     #   @return [Types::InputStartingPositionConfiguration]
     class SqlRunConfiguration < Struct.new(
+      nil,
       :input_id,
       :input_starting_position_configuration,
       keyword_init: true
@@ -3681,6 +3865,7 @@ module Aws::KinesisAnalyticsV2
     #   <p>Identifies the run configuration (start parameters) of a Managed Service for Apache Flink application.</p>
     #   @return [Types::RunConfiguration]
     class StartApplicationRequest < Struct.new(
+      nil,
       :application_name,
       :run_configuration,
       keyword_init: true
@@ -3692,6 +3877,7 @@ module Aws::KinesisAnalyticsV2
     #   <p>The operation ID that can be used to track the request.</p>
     #   @return [String]
     class StartApplicationResponse < Struct.new(
+      nil,
       :operation_id,
       keyword_init: true
     )
@@ -3716,6 +3902,7 @@ module Aws::KinesisAnalyticsV2
     #             <code>RUNNING</code> status. </p>
     #   @return [Boolean]
     class StopApplicationRequest < Struct.new(
+      nil,
       :application_name,
       :force,
       keyword_init: true
@@ -3727,6 +3914,7 @@ module Aws::KinesisAnalyticsV2
     #   <p>The operation ID that can be used to track the request.</p>
     #   @return [String]
     class StopApplicationResponse < Struct.new(
+      nil,
       :operation_id,
       keyword_init: true
     )
@@ -3747,6 +3935,7 @@ module Aws::KinesisAnalyticsV2
     #   <p>The value of the key-value tag. The value is optional.</p>
     #   @return [String]
     class Tag < Struct.new(
+      nil,
       :key,
       :value,
       keyword_init: true
@@ -3761,6 +3950,7 @@ module Aws::KinesisAnalyticsV2
     #   <p>The key-value tags to assign to the application.</p>
     #   @return [Array<Types::Tag>]
     class TagResourceRequest < Struct.new(
+      nil,
       :resource_arn,
       :tags,
       keyword_init: true
@@ -3769,6 +3959,7 @@ module Aws::KinesisAnalyticsV2
     end
 
     class TagResourceResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -3779,6 +3970,7 @@ module Aws::KinesisAnalyticsV2
     # @!attribute message
     #   @return [String]
     class TooManyTagsException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -3796,6 +3988,7 @@ module Aws::KinesisAnalyticsV2
     #   <p>Stream data that was modified by the processor specified in the <code>InputProcessingConfiguration</code> parameter. </p>
     #   @return [Array<String>]
     class UnableToDetectSchemaException < Struct.new(
+      nil,
       :message,
       :raw_input_records,
       :processed_input_records,
@@ -3809,6 +4002,7 @@ module Aws::KinesisAnalyticsV2
     # @!attribute message
     #   @return [String]
     class UnsupportedOperationException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -3822,6 +4016,7 @@ module Aws::KinesisAnalyticsV2
     #   <p>A list of keys of tags to remove from the specified application.</p>
     #   @return [Array<String>]
     class UntagResourceRequest < Struct.new(
+      nil,
       :resource_arn,
       :tag_keys,
       keyword_init: true
@@ -3830,6 +4025,7 @@ module Aws::KinesisAnalyticsV2
     end
 
     class UntagResourceResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -3842,6 +4038,7 @@ module Aws::KinesisAnalyticsV2
     #   <p>Describes the application maintenance configuration update.</p>
     #   @return [Types::ApplicationMaintenanceConfigurationUpdate]
     class UpdateApplicationMaintenanceConfigurationRequest < Struct.new(
+      nil,
       :application_name,
       :application_maintenance_configuration_update,
       keyword_init: true
@@ -3856,6 +4053,7 @@ module Aws::KinesisAnalyticsV2
     #   <p>The application maintenance configuration description after the update.</p>
     #   @return [Types::ApplicationMaintenanceConfigurationDescription]
     class UpdateApplicationMaintenanceConfigurationResponse < Struct.new(
+      nil,
       :application_arn,
       :application_maintenance_configuration_description,
       keyword_init: true
@@ -3906,6 +4104,7 @@ module Aws::KinesisAnalyticsV2
     #            </ul>
     #   @return [String]
     class UpdateApplicationRequest < Struct.new(
+      nil,
       :application_name,
       :current_application_version_id,
       :application_configuration_update,
@@ -3926,6 +4125,7 @@ module Aws::KinesisAnalyticsV2
     #   <p>The operation ID that can be used to track the request.</p>
     #   @return [String]
     class UpdateApplicationResponse < Struct.new(
+      nil,
       :application_detail,
       :operation_id,
       keyword_init: true
@@ -3943,6 +4143,7 @@ module Aws::KinesisAnalyticsV2
     #           IDs used by the VPC configuration.</p>
     #   @return [Array<String>]
     class VpcConfiguration < Struct.new(
+      nil,
       :subnet_ids,
       :security_group_ids,
       keyword_init: true
@@ -3966,6 +4167,7 @@ module Aws::KinesisAnalyticsV2
     #           IDs used by the VPC configuration.</p>
     #   @return [Array<String>]
     class VpcConfigurationDescription < Struct.new(
+      nil,
       :vpc_configuration_id,
       :vpc_id,
       :subnet_ids,
@@ -3989,6 +4191,7 @@ module Aws::KinesisAnalyticsV2
     #           <a href="https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_SecurityGroup.html">SecurityGroup</a> IDs used by the VPC configuration.</p>
     #   @return [Array<String>]
     class VpcConfigurationUpdate < Struct.new(
+      nil,
       :vpc_configuration_id,
       :subnet_id_updates,
       :security_group_id_updates,
@@ -4011,6 +4214,7 @@ module Aws::KinesisAnalyticsV2
     #   <p>Custom artifacts are dependency JARs and user-defined functions (UDF).</p>
     #   @return [Array<Types::CustomArtifactConfiguration>]
     class ZeppelinApplicationConfiguration < Struct.new(
+      nil,
       :monitoring_configuration,
       :catalog_configuration,
       :deploy_as_application_configuration,
@@ -4034,6 +4238,7 @@ module Aws::KinesisAnalyticsV2
     #   <p>Custom artifacts are dependency JARs and user-defined functions (UDF).</p>
     #   @return [Array<Types::CustomArtifactConfigurationDescription>]
     class ZeppelinApplicationConfigurationDescription < Struct.new(
+      nil,
       :monitoring_configuration_description,
       :catalog_configuration_description,
       :deploy_as_application_configuration_description,
@@ -4057,6 +4262,7 @@ module Aws::KinesisAnalyticsV2
     #   <p>Updates to the customer artifacts. Custom artifacts are dependency JAR files and user-defined functions (UDF).</p>
     #   @return [Array<Types::CustomArtifactConfiguration>]
     class ZeppelinApplicationConfigurationUpdate < Struct.new(
+      nil,
       :monitoring_configuration_update,
       :catalog_configuration_update,
       :deploy_as_application_configuration_update,
@@ -4071,6 +4277,7 @@ module Aws::KinesisAnalyticsV2
     #   <p>The verbosity of the CloudWatch Logs for an application.</p>
     #   @return [String]
     class ZeppelinMonitoringConfiguration < Struct.new(
+      nil,
       :log_level,
       keyword_init: true
     )
@@ -4082,6 +4289,7 @@ module Aws::KinesisAnalyticsV2
     #   <p>Describes the verbosity of the CloudWatch Logs for an application.</p>
     #   @return [String]
     class ZeppelinMonitoringConfigurationDescription < Struct.new(
+      nil,
       :log_level,
       keyword_init: true
     )
@@ -4093,6 +4301,7 @@ module Aws::KinesisAnalyticsV2
     #   <p>Updates to the logging level for Apache Zeppelin within a Managed Service for Apache Flink Studio notebook.</p>
     #   @return [String]
     class ZeppelinMonitoringConfigurationUpdate < Struct.new(
+      nil,
       :log_level_update,
       keyword_init: true
     )

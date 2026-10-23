@@ -10,6 +10,7 @@ module Aws::CodeConnections
     # @!attribute message
     #   @return [String]
     class AccessDeniedException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -20,6 +21,7 @@ module Aws::CodeConnections
     # @!attribute message
     #   @return [String]
     class ConcurrentModificationException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -30,6 +32,7 @@ module Aws::CodeConnections
     # @!attribute message
     #   @return [String]
     class ConditionalCheckFailedException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -40,6 +43,7 @@ module Aws::CodeConnections
     # @!attribute message
     #   @return [String]
     class ConflictException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -74,6 +78,7 @@ module Aws::CodeConnections
     #   <p>The Amazon Resource Name (ARN) of the host associated with the connection.</p>
     #   @return [String]
     class Connection < Struct.new(
+      nil,
       :connection_name,
       :connection_arn,
       :provider_type,
@@ -99,6 +104,7 @@ module Aws::CodeConnections
     #   <p>The Amazon Resource Name (ARN) of the host associated with the connection to be created.</p>
     #   @return [String]
     class CreateConnectionInput < Struct.new(
+      nil,
       :provider_type,
       :connection_name,
       :tags,
@@ -119,6 +125,7 @@ module Aws::CodeConnections
     #   <p>Specifies the tags applied to the resource.</p>
     #   @return [Array<Types::Tag>]
     class CreateConnectionOutput < Struct.new(
+      nil,
       :connection_arn,
       :tags,
       keyword_init: true
@@ -146,6 +153,7 @@ module Aws::CodeConnections
     #   <p>Tags for the host to be created.</p>
     #   @return [Array<Types::Tag>]
     class CreateHostInput < Struct.new(
+      nil,
       :name,
       :provider_type,
       :provider_endpoint,
@@ -163,6 +171,7 @@ module Aws::CodeConnections
     #   <p>Tags for the created host.</p>
     #   @return [Array<Types::Tag>]
     class CreateHostOutput < Struct.new(
+      nil,
       :host_arn,
       :tags,
       keyword_init: true
@@ -187,6 +196,7 @@ module Aws::CodeConnections
     #   <p>The tags for the repository to be associated with the repository link.</p>
     #   @return [Array<Types::Tag>]
     class CreateRepositoryLinkInput < Struct.new(
+      nil,
       :connection_arn,
       :owner_id,
       :repository_name,
@@ -201,6 +211,7 @@ module Aws::CodeConnections
     #   <p>The returned information about the created repository link.</p>
     #   @return [Types::RepositoryLinkInfo]
     class CreateRepositoryLinkOutput < Struct.new(
+      nil,
       :repository_link_info,
       keyword_init: true
     )
@@ -238,6 +249,7 @@ module Aws::CodeConnections
     #   <p>A toggle that specifies whether to enable or disable pull request comments for the sync configuration to be created.</p>
     #   @return [String]
     class CreateSyncConfigurationInput < Struct.new(
+      nil,
       :branch,
       :config_file,
       :repository_link_id,
@@ -257,6 +269,7 @@ module Aws::CodeConnections
     #         resource. </p>
     #   @return [Types::SyncConfiguration]
     class CreateSyncConfigurationOutput < Struct.new(
+      nil,
       :sync_configuration,
       keyword_init: true
     )
@@ -270,6 +283,7 @@ module Aws::CodeConnections
     #            </note>
     #   @return [String]
     class DeleteConnectionInput < Struct.new(
+      nil,
       :connection_arn,
       keyword_init: true
     )
@@ -277,6 +291,7 @@ module Aws::CodeConnections
     end
 
     class DeleteConnectionOutput < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -286,6 +301,7 @@ module Aws::CodeConnections
     #   <p>The Amazon Resource Name (ARN) of the host to be deleted.</p>
     #   @return [String]
     class DeleteHostInput < Struct.new(
+      nil,
       :host_arn,
       keyword_init: true
     )
@@ -293,6 +309,7 @@ module Aws::CodeConnections
     end
 
     class DeleteHostOutput < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -302,6 +319,7 @@ module Aws::CodeConnections
     #   <p>The ID of the repository link to be deleted.</p>
     #   @return [String]
     class DeleteRepositoryLinkInput < Struct.new(
+      nil,
       :repository_link_id,
       keyword_init: true
     )
@@ -309,6 +327,7 @@ module Aws::CodeConnections
     end
 
     class DeleteRepositoryLinkOutput < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -322,6 +341,7 @@ module Aws::CodeConnections
     #         deleted.</p>
     #   @return [String]
     class DeleteSyncConfigurationInput < Struct.new(
+      nil,
       :sync_type,
       :resource_name,
       keyword_init: true
@@ -330,6 +350,7 @@ module Aws::CodeConnections
     end
 
     class DeleteSyncConfigurationOutput < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -339,6 +360,7 @@ module Aws::CodeConnections
     #   <p>The Amazon Resource Name (ARN) of a connection.</p>
     #   @return [String]
     class GetConnectionInput < Struct.new(
+      nil,
       :connection_arn,
       keyword_init: true
     )
@@ -349,6 +371,7 @@ module Aws::CodeConnections
     #   <p>The connection details, such as status, owner, and provider type.</p>
     #   @return [Types::Connection]
     class GetConnectionOutput < Struct.new(
+      nil,
       :connection,
       keyword_init: true
     )
@@ -359,6 +382,7 @@ module Aws::CodeConnections
     #   <p>The Amazon Resource Name (ARN) of the requested host.</p>
     #   @return [String]
     class GetHostInput < Struct.new(
+      nil,
       :host_arn,
       keyword_init: true
     )
@@ -381,6 +405,7 @@ module Aws::CodeConnections
     #   <p>The VPC configuration of the requested host.</p>
     #   @return [Types::VpcConfiguration]
     class GetHostOutput < Struct.new(
+      nil,
       :name,
       :status,
       :provider_type,
@@ -395,6 +420,7 @@ module Aws::CodeConnections
     #   <p>The ID of the repository link to get.</p>
     #   @return [String]
     class GetRepositoryLinkInput < Struct.new(
+      nil,
       :repository_link_id,
       keyword_init: true
     )
@@ -405,6 +431,7 @@ module Aws::CodeConnections
     #   <p>The information returned for a specified repository link.</p>
     #   @return [Types::RepositoryLinkInfo]
     class GetRepositoryLinkOutput < Struct.new(
+      nil,
       :repository_link_info,
       keyword_init: true
     )
@@ -421,6 +448,7 @@ module Aws::CodeConnections
     #   <p>The sync type of the requested sync status.</p>
     #   @return [String]
     class GetRepositorySyncStatusInput < Struct.new(
+      nil,
       :branch,
       :repository_link_id,
       :sync_type,
@@ -433,6 +461,7 @@ module Aws::CodeConnections
     #   <p>The status of the latest sync returned for a specified repository and branch.</p>
     #   @return [Types::RepositorySyncAttempt]
     class GetRepositorySyncStatusOutput < Struct.new(
+      nil,
       :latest_sync,
       keyword_init: true
     )
@@ -447,6 +476,7 @@ module Aws::CodeConnections
     #   <p>The sync type for the sync status with the Git repository.</p>
     #   @return [String]
     class GetResourceSyncStatusInput < Struct.new(
+      nil,
       :resource_name,
       :sync_type,
       keyword_init: true
@@ -465,6 +495,7 @@ module Aws::CodeConnections
     #   <p>The latest sync for the sync status with the Git repository, whether successful or not.</p>
     #   @return [Types::ResourceSyncAttempt]
     class GetResourceSyncStatusOutput < Struct.new(
+      nil,
       :desired_state,
       :latest_successful_sync,
       :latest_sync,
@@ -480,6 +511,7 @@ module Aws::CodeConnections
     #   <p>The name of the Amazon Web Services resource currently blocked from automatically being synced from a Git repository.</p>
     #   @return [String]
     class GetSyncBlockerSummaryInput < Struct.new(
+      nil,
       :sync_type,
       :resource_name,
       keyword_init: true
@@ -491,6 +523,7 @@ module Aws::CodeConnections
     #   <p>The list of sync blockers for a specified resource.</p>
     #   @return [Types::SyncBlockerSummary]
     class GetSyncBlockerSummaryOutput < Struct.new(
+      nil,
       :sync_blocker_summary,
       keyword_init: true
     )
@@ -505,6 +538,7 @@ module Aws::CodeConnections
     #         want to retrieve information.</p>
     #   @return [String]
     class GetSyncConfigurationInput < Struct.new(
+      nil,
       :sync_type,
       :resource_name,
       keyword_init: true
@@ -516,6 +550,7 @@ module Aws::CodeConnections
     #   <p>The details about the sync configuration for which you want to retrieve information.</p>
     #   @return [Types::SyncConfiguration]
     class GetSyncConfigurationOutput < Struct.new(
+      nil,
       :sync_configuration,
       keyword_init: true
     )
@@ -553,6 +588,7 @@ module Aws::CodeConnections
     #   <p>The status description for the host.</p>
     #   @return [String]
     class Host < Struct.new(
+      nil,
       :name,
       :host_arn,
       :provider_type,
@@ -569,6 +605,7 @@ module Aws::CodeConnections
     # @!attribute message
     #   @return [String]
     class InternalServerException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -579,6 +616,7 @@ module Aws::CodeConnections
     # @!attribute message
     #   @return [String]
     class InvalidInputException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -589,6 +627,7 @@ module Aws::CodeConnections
     # @!attribute message
     #   @return [String]
     class LimitExceededException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -611,6 +650,7 @@ module Aws::CodeConnections
     #         can be used to return the next set of connections in the list.</p>
     #   @return [String]
     class ListConnectionsInput < Struct.new(
+      nil,
       :provider_type_filter,
       :host_arn_filter,
       :max_results,
@@ -630,6 +670,7 @@ module Aws::CodeConnections
     #         <code>nextToken</code> values are returned.</p>
     #   @return [String]
     class ListConnectionsOutput < Struct.new(
+      nil,
       :connections,
       :next_token,
       keyword_init: true
@@ -646,6 +687,7 @@ module Aws::CodeConnections
     #         used to return the next set of hosts in the list.</p>
     #   @return [String]
     class ListHostsInput < Struct.new(
+      nil,
       :max_results,
       :next_token,
       keyword_init: true
@@ -663,6 +705,7 @@ module Aws::CodeConnections
     #         <code>nextToken</code> values are returned.</p>
     #   @return [String]
     class ListHostsOutput < Struct.new(
+      nil,
       :hosts,
       :next_token,
       keyword_init: true
@@ -679,6 +722,7 @@ module Aws::CodeConnections
     #   An enumeration token that, when provided in a request, returns the next batch of the results.</p>
     #   @return [String]
     class ListRepositoryLinksInput < Struct.new(
+      nil,
       :max_results,
       :next_token,
       keyword_init: true
@@ -693,6 +737,7 @@ module Aws::CodeConnections
     #   <p>An enumeration token that allows the operation to batch the results of the operation. </p>
     #   @return [String]
     class ListRepositoryLinksOutput < Struct.new(
+      nil,
       :repository_links,
       :next_token,
       keyword_init: true
@@ -707,6 +752,7 @@ module Aws::CodeConnections
     #   <p>The sync type of the repository link for the the sync definition for which you want to retrieve information.</p>
     #   @return [String]
     class ListRepositorySyncDefinitionsInput < Struct.new(
+      nil,
       :repository_link_id,
       :sync_type,
       keyword_init: true
@@ -724,6 +770,7 @@ module Aws::CodeConnections
     #         results.</p>
     #   @return [String]
     class ListRepositorySyncDefinitionsOutput < Struct.new(
+      nil,
       :repository_sync_definitions,
       :next_token,
       keyword_init: true
@@ -744,6 +791,7 @@ module Aws::CodeConnections
     #   <p>The sync type for the requested list of sync configurations.</p>
     #   @return [String]
     class ListSyncConfigurationsInput < Struct.new(
+      nil,
       :max_results,
       :next_token,
       :repository_link_id,
@@ -760,6 +808,7 @@ module Aws::CodeConnections
     #   <p>An enumeration token that allows the operation to batch the next results of the operation.</p>
     #   @return [String]
     class ListSyncConfigurationsOutput < Struct.new(
+      nil,
       :sync_configurations,
       :next_token,
       keyword_init: true
@@ -771,6 +820,7 @@ module Aws::CodeConnections
     #   <p>The Amazon Resource Name (ARN) of the resource for which you want to get information about tags, if any.</p>
     #   @return [String]
     class ListTagsForResourceInput < Struct.new(
+      nil,
       :resource_arn,
       keyword_init: true
     )
@@ -781,6 +831,7 @@ module Aws::CodeConnections
     #   <p>A list of tag key and value pairs associated with the specified resource.</p>
     #   @return [Array<Types::Tag>]
     class ListTagsForResourceOutput < Struct.new(
+      nil,
       :tags,
       keyword_init: true
     )
@@ -811,6 +862,7 @@ module Aws::CodeConnections
     #   <p>The name of the repository associated with the repository link.</p>
     #   @return [String]
     class RepositoryLinkInfo < Struct.new(
+      nil,
       :connection_arn,
       :encryption_key_arn,
       :owner_id,
@@ -852,6 +904,7 @@ module Aws::CodeConnections
     #   <p>The events associated with a specific sync attempt.</p>
     #   @return [Array<Types::RepositorySyncEvent>]
     class RepositorySyncAttempt < Struct.new(
+      nil,
       :started_at,
       :status,
       :events,
@@ -875,6 +928,7 @@ module Aws::CodeConnections
     #   <p>The target resource specified for a repository sync definition. In some cases, such as CFN_STACK_SYNC, the parent and target resource are the same.</p>
     #   @return [String]
     class RepositorySyncDefinition < Struct.new(
+      nil,
       :branch,
       :directory,
       :parent,
@@ -898,6 +952,7 @@ module Aws::CodeConnections
     #   <p>The event type for a repository sync event.</p>
     #   @return [String]
     class RepositorySyncEvent < Struct.new(
+      nil,
       :event,
       :external_id,
       :time,
@@ -911,6 +966,7 @@ module Aws::CodeConnections
     # @!attribute message
     #   @return [String]
     class ResourceAlreadyExistsException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -921,6 +977,7 @@ module Aws::CodeConnections
     # @!attribute message
     #   @return [String]
     class ResourceNotFoundException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -963,6 +1020,7 @@ module Aws::CodeConnections
     #   <p>The name of the Amazon Web Services resource that is attempted to be synchronized.</p>
     #   @return [String]
     class ResourceSyncAttempt < Struct.new(
+      nil,
       :events,
       :initial_revision,
       :started_at,
@@ -988,6 +1046,7 @@ module Aws::CodeConnections
     #   <p>The type of resource sync event.</p>
     #   @return [String]
     class ResourceSyncEvent < Struct.new(
+      nil,
       :event,
       :external_id,
       :time,
@@ -1001,6 +1060,7 @@ module Aws::CodeConnections
     # @!attribute message
     #   @return [String]
     class ResourceUnavailableException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -1011,6 +1071,7 @@ module Aws::CodeConnections
     # @!attribute message
     #   @return [String]
     class RetryLatestCommitFailedException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -1037,6 +1098,7 @@ module Aws::CodeConnections
     #   <p>The SHA, such as the commit ID, for a specific revision.</p>
     #   @return [String]
     class Revision < Struct.new(
+      nil,
       :branch,
       :directory,
       :owner_id,
@@ -1074,6 +1136,7 @@ module Aws::CodeConnections
     #   <p>The time that a specific sync blocker was resolved.</p>
     #   @return [Time]
     class SyncBlocker < Struct.new(
+      nil,
       :id,
       :type,
       :status,
@@ -1095,6 +1158,7 @@ module Aws::CodeConnections
     #   <p>The value provided for a context key-value pair for a specific sync blocker.</p>
     #   @return [String]
     class SyncBlockerContext < Struct.new(
+      nil,
       :key,
       :value,
       keyword_init: true
@@ -1106,6 +1170,7 @@ module Aws::CodeConnections
     # @!attribute message
     #   @return [String]
     class SyncBlockerDoesNotExistException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -1123,6 +1188,7 @@ module Aws::CodeConnections
     #   <p>The latest events for a sync blocker summary.</p>
     #   @return [Array<Types::SyncBlocker>]
     class SyncBlockerSummary < Struct.new(
+      nil,
       :resource_name,
       :parent_resource_name,
       :latest_blockers,
@@ -1171,6 +1237,7 @@ module Aws::CodeConnections
     #   <p>A toggle that specifies whether to enable or disable pull request comments for the sync configuration to be created.</p>
     #   @return [String]
     class SyncConfiguration < Struct.new(
+      nil,
       :branch,
       :config_file,
       :owner_id,
@@ -1192,6 +1259,7 @@ module Aws::CodeConnections
     # @!attribute message
     #   @return [String]
     class SyncConfigurationStillExistsException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -1207,6 +1275,7 @@ module Aws::CodeConnections
     #   <p>The tag's value.</p>
     #   @return [String]
     class Tag < Struct.new(
+      nil,
       :key,
       :value,
       keyword_init: true
@@ -1221,6 +1290,7 @@ module Aws::CodeConnections
     #   <p>The tags you want to modify or add to the resource.</p>
     #   @return [Array<Types::Tag>]
     class TagResourceInput < Struct.new(
+      nil,
       :resource_arn,
       :tags,
       keyword_init: true
@@ -1229,6 +1299,7 @@ module Aws::CodeConnections
     end
 
     class TagResourceOutput < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1238,6 +1309,7 @@ module Aws::CodeConnections
     # @!attribute message
     #   @return [String]
     class ThrottlingException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -1248,6 +1320,7 @@ module Aws::CodeConnections
     # @!attribute message
     #   @return [String]
     class UnsupportedOperationException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -1258,6 +1331,7 @@ module Aws::CodeConnections
     # @!attribute message
     #   @return [String]
     class UnsupportedProviderTypeException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -1271,6 +1345,7 @@ module Aws::CodeConnections
     #   <p>The list of keys for the tags to be removed from the resource.</p>
     #   @return [Array<String>]
     class UntagResourceInput < Struct.new(
+      nil,
       :resource_arn,
       :tag_keys,
       keyword_init: true
@@ -1279,6 +1354,7 @@ module Aws::CodeConnections
     end
 
     class UntagResourceOutput < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1295,6 +1371,7 @@ module Aws::CodeConnections
     #         infrastructure to be represented by the host must already be connected to the VPC.</p>
     #   @return [Types::VpcConfiguration]
     class UpdateHostInput < Struct.new(
+      nil,
       :host_arn,
       :provider_endpoint,
       :vpc_configuration,
@@ -1304,6 +1381,7 @@ module Aws::CodeConnections
     end
 
     class UpdateHostOutput < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1313,6 +1391,7 @@ module Aws::CodeConnections
     # @!attribute message
     #   @return [String]
     class UpdateOutOfSyncException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -1329,6 +1408,7 @@ module Aws::CodeConnections
     #   <p>The ID of the repository link to be updated.</p>
     #   @return [String]
     class UpdateRepositoryLinkInput < Struct.new(
+      nil,
       :connection_arn,
       :encryption_key_arn,
       :repository_link_id,
@@ -1341,6 +1421,7 @@ module Aws::CodeConnections
     #   <p>Information about the repository link to be updated.</p>
     #   @return [Types::RepositoryLinkInfo]
     class UpdateRepositoryLinkOutput < Struct.new(
+      nil,
       :repository_link_info,
       keyword_init: true
     )
@@ -1360,6 +1441,7 @@ module Aws::CodeConnections
     #   <p>The reason for resolving the sync blocker.</p>
     #   @return [String]
     class UpdateSyncBlockerInput < Struct.new(
+      nil,
       :id,
       :sync_type,
       :resource_name,
@@ -1379,6 +1461,7 @@ module Aws::CodeConnections
     #   <p>Information about the sync blocker to be updated.</p>
     #   @return [Types::SyncBlocker]
     class UpdateSyncBlockerOutput < Struct.new(
+      nil,
       :resource_name,
       :parent_resource_name,
       :sync_blocker,
@@ -1416,6 +1499,7 @@ module Aws::CodeConnections
     #   <p>TA toggle that specifies whether to enable or disable pull request comments for the sync configuration to be updated.</p>
     #   @return [String]
     class UpdateSyncConfigurationInput < Struct.new(
+      nil,
       :branch,
       :config_file,
       :repository_link_id,
@@ -1434,6 +1518,7 @@ module Aws::CodeConnections
     #   <p>The information returned for the sync configuration to be updated.</p>
     #   @return [Types::SyncConfiguration]
     class UpdateSyncConfigurationOutput < Struct.new(
+      nil,
       :sync_configuration,
       keyword_init: true
     )
@@ -1457,6 +1542,7 @@ module Aws::CodeConnections
     #   <p>The value of the Transport Layer Security (TLS) certificate associated with the infrastructure where your provider type is installed.</p>
     #   @return [String]
     class VpcConfiguration < Struct.new(
+      nil,
       :vpc_id,
       :subnet_ids,
       :security_group_ids,

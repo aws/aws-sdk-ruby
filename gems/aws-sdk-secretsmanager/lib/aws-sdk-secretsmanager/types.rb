@@ -17,6 +17,7 @@ module Aws::SecretsManager
     #   <p>A message describing the error.</p>
     #   @return [String]
     class APIErrorType < Struct.new(
+      nil,
       :secret_id,
       :error_code,
       :message,
@@ -43,6 +44,7 @@ module Aws::SecretsManager
     #       with this value.</p>
     #   @return [String]
     class BatchGetSecretValueRequest < Struct.new(
+      nil,
       :secret_id_list,
       :filters,
       :max_results,
@@ -66,6 +68,7 @@ module Aws::SecretsManager
     #   <p>A list of errors Secrets Manager encountered while attempting to retrieve individual secrets.</p>
     #   @return [Array<Types::APIErrorType>]
     class BatchGetSecretValueResponse < Struct.new(
+      nil,
       :secret_values,
       :next_token,
       :errors,
@@ -80,6 +83,7 @@ module Aws::SecretsManager
     #         than a partial ARN. See <a href="https://docs.aws.amazon.com/secretsmanager/latest/userguide/troubleshoot.html#ARN_secretnamehyphen">Finding a secret from a partial ARN</a>.</p>
     #   @return [String]
     class CancelRotateSecretRequest < Struct.new(
+      nil,
       :secret_id,
       keyword_init: true
     )
@@ -100,6 +104,7 @@ module Aws::SecretsManager
     #         starting future rotations.</p>
     #   @return [String]
     class CancelRotateSecretResponse < Struct.new(
+      nil,
       :arn,
       :name,
       :version_id,
@@ -207,6 +212,7 @@ module Aws::SecretsManager
     #         destination Region. By default, secrets aren't overwritten.</p>
     #   @return [Boolean]
     class CreateSecretRequest < Struct.new(
+      nil,
       :name,
       :client_request_token,
       :description,
@@ -251,6 +257,7 @@ module Aws::SecretsManager
     #            </ul>
     #   @return [Array<Types::ReplicationStatusType>]
     class CreateSecretResponse < Struct.new(
+      nil,
       :arn,
       :name,
       :version_id,
@@ -264,6 +271,7 @@ module Aws::SecretsManager
     # @!attribute message
     #   @return [String]
     class DecryptionFailure < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -276,6 +284,7 @@ module Aws::SecretsManager
     #         than a partial ARN. See <a href="https://docs.aws.amazon.com/secretsmanager/latest/userguide/troubleshoot.html#ARN_secretnamehyphen">Finding a secret from a partial ARN</a>.</p>
     #   @return [String]
     class DeleteResourcePolicyRequest < Struct.new(
+      nil,
       :secret_id,
       keyword_init: true
     )
@@ -289,6 +298,7 @@ module Aws::SecretsManager
     #   <p>The name of the secret that the resource-based policy was deleted for.</p>
     #   @return [String]
     class DeleteResourcePolicyResponse < Struct.new(
+      nil,
       :arn,
       :name,
       keyword_init: true
@@ -323,6 +333,7 @@ module Aws::SecretsManager
     #            </important>
     #   @return [Boolean]
     class DeleteSecretRequest < Struct.new(
+      nil,
       :secret_id,
       :recovery_window_in_days,
       :force_delete_without_recovery,
@@ -343,6 +354,7 @@ module Aws::SecretsManager
     #         plus the number of days in <code>RecoveryWindowInDays</code>.</p>
     #   @return [Time]
     class DeleteSecretResponse < Struct.new(
+      nil,
       :arn,
       :name,
       :deletion_date,
@@ -357,6 +369,7 @@ module Aws::SecretsManager
     #         than a partial ARN. See <a href="https://docs.aws.amazon.com/secretsmanager/latest/userguide/troubleshoot.html#ARN_secretnamehyphen">Finding a secret from a partial ARN</a>.</p>
     #   @return [String]
     class DescribeSecretRequest < Struct.new(
+      nil,
       :secret_id,
       keyword_init: true
     )
@@ -471,6 +484,7 @@ module Aws::SecretsManager
     #            </ul>
     #   @return [Array<Types::ReplicationStatusType>]
     class DescribeSecretResponse < Struct.new(
+      nil,
       :arn,
       :name,
       :description,
@@ -505,6 +519,7 @@ module Aws::SecretsManager
     # @!attribute message
     #   @return [String]
     class EncryptionFailure < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -550,6 +565,7 @@ module Aws::SecretsManager
     #            <p>You can prefix your search value with an exclamation mark (<code>!</code>) in order to perform negation filters. </p>
     #   @return [Array<String>]
     class Filter < Struct.new(
+      nil,
       :key,
       :values,
       keyword_init: true
@@ -590,6 +606,7 @@ module Aws::SecretsManager
     #         If you don't include this switch, the password contains at least one of every character type.</p>
     #   @return [Boolean]
     class GetRandomPasswordRequest < Struct.new(
+      nil,
       :password_length,
       :exclude_characters,
       :exclude_numbers,
@@ -607,6 +624,7 @@ module Aws::SecretsManager
     #   <p>A string with the password.</p>
     #   @return [String]
     class GetRandomPasswordResponse < Struct.new(
+      nil,
       :random_password,
       keyword_init: true
     )
@@ -619,6 +637,7 @@ module Aws::SecretsManager
     #         than a partial ARN. See <a href="https://docs.aws.amazon.com/secretsmanager/latest/userguide/troubleshoot.html#ARN_secretnamehyphen">Finding a secret from a partial ARN</a>.</p>
     #   @return [String]
     class GetResourcePolicyRequest < Struct.new(
+      nil,
       :secret_id,
       keyword_init: true
     )
@@ -637,6 +656,7 @@ module Aws::SecretsManager
     #           Secrets Manager</a>.</p>
     #   @return [String]
     class GetResourcePolicyResponse < Struct.new(
+      nil,
       :arn,
       :name,
       :resource_policy,
@@ -666,6 +686,7 @@ module Aws::SecretsManager
     #         <code>VersionId</code>, Secrets Manager returns the <code>AWSCURRENT</code> version.</p>
     #   @return [String]
     class GetSecretValueRequest < Struct.new(
+      nil,
       :secret_id,
       :version_id,
       :version_stage,
@@ -708,6 +729,7 @@ module Aws::SecretsManager
     #         <code>AWSCURRENT</code> version.</p>
     #   @return [Time]
     class GetSecretValueResponse < Struct.new(
+      nil,
       :arn,
       :name,
       :version_id,
@@ -724,6 +746,7 @@ module Aws::SecretsManager
     # @!attribute message
     #   @return [String]
     class InternalServiceError < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -734,6 +757,7 @@ module Aws::SecretsManager
     # @!attribute message
     #   @return [String]
     class InvalidNextTokenException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -744,6 +768,7 @@ module Aws::SecretsManager
     # @!attribute message
     #   @return [String]
     class InvalidParameterException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -769,6 +794,7 @@ module Aws::SecretsManager
     # @!attribute message
     #   @return [String]
     class InvalidRequestException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -779,6 +805,7 @@ module Aws::SecretsManager
     # @!attribute message
     #   @return [String]
     class LimitExceededException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -806,6 +833,7 @@ module Aws::SecretsManager
     #         deletion by Secrets Manager. By default, versions without staging labels aren't included.</p>
     #   @return [Boolean]
     class ListSecretVersionIdsRequest < Struct.new(
+      nil,
       :secret_id,
       :max_results,
       :next_token,
@@ -831,6 +859,7 @@ module Aws::SecretsManager
     #   <p>The name of the secret.</p>
     #   @return [String]
     class ListSecretVersionIdsResponse < Struct.new(
+      nil,
       :versions,
       :next_token,
       :arn,
@@ -861,6 +890,7 @@ module Aws::SecretsManager
     #   <p>Secrets are listed by <code>CreatedDate</code>. </p>
     #   @return [String]
     class ListSecretsRequest < Struct.new(
+      nil,
       :include_planned_deletion,
       :max_results,
       :next_token,
@@ -882,6 +912,7 @@ module Aws::SecretsManager
     #         with this value.</p>
     #   @return [String]
     class ListSecretsResponse < Struct.new(
+      nil,
       :secret_list,
       :next_token,
       keyword_init: true
@@ -893,6 +924,7 @@ module Aws::SecretsManager
     # @!attribute message
     #   @return [String]
     class MalformedPolicyDocumentException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -903,6 +935,7 @@ module Aws::SecretsManager
     # @!attribute message
     #   @return [String]
     class PreconditionNotMetException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -913,6 +946,7 @@ module Aws::SecretsManager
     # @!attribute message
     #   @return [String]
     class PublicPolicyException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -945,6 +979,7 @@ module Aws::SecretsManager
     #            </important>
     #   @return [Boolean]
     class PutResourcePolicyRequest < Struct.new(
+      nil,
       :secret_id,
       :resource_policy,
       :block_public_policy,
@@ -960,6 +995,7 @@ module Aws::SecretsManager
     #   <p>The name of the secret.</p>
     #   @return [String]
     class PutResourcePolicyResponse < Struct.new(
+      nil,
       :arn,
       :name,
       keyword_init: true
@@ -1031,6 +1067,7 @@ module Aws::SecretsManager
     #            <p>Sensitive: This field contains sensitive information, so the service does not include it in CloudTrail log entries. If you create your own log entries, you must also avoid logging the information in this field.</p>
     #   @return [String]
     class PutSecretValueRequest < Struct.new(
+      nil,
       :secret_id,
       :client_request_token,
       :secret_binary,
@@ -1057,6 +1094,7 @@ module Aws::SecretsManager
     #         process.</p>
     #   @return [Array<String>]
     class PutSecretValueResponse < Struct.new(
+      nil,
       :arn,
       :name,
       :version_id,
@@ -1073,6 +1111,7 @@ module Aws::SecretsManager
     #   <p>The Regions of the replicas to remove.</p>
     #   @return [Array<String>]
     class RemoveRegionsFromReplicationRequest < Struct.new(
+      nil,
       :secret_id,
       :remove_replica_regions,
       keyword_init: true
@@ -1087,6 +1126,7 @@ module Aws::SecretsManager
     #   <p>The status of replicas for this secret after you remove Regions.</p>
     #   @return [Array<Types::ReplicationStatusType>]
     class RemoveRegionsFromReplicationResponse < Struct.new(
+      nil,
       :arn,
       :replication_status,
       keyword_init: true
@@ -1102,6 +1142,7 @@ module Aws::SecretsManager
     #   <p>The ARN, key ID, or alias of the KMS key to encrypt the secret. If you don't include this field, Secrets Manager uses <code>aws/secretsmanager</code>.</p>
     #   @return [String]
     class ReplicaRegionType < Struct.new(
+      nil,
       :region,
       :kms_key_id,
       keyword_init: true
@@ -1119,6 +1160,7 @@ module Aws::SecretsManager
     #   <p>Specifies whether to overwrite a secret with the same name in the destination Region. By default, secrets aren't overwritten.</p>
     #   @return [Boolean]
     class ReplicateSecretToRegionsRequest < Struct.new(
+      nil,
       :secret_id,
       :add_replica_regions,
       :force_overwrite_replica_secret,
@@ -1134,6 +1176,7 @@ module Aws::SecretsManager
     #   <p>The status of replication.</p>
     #   @return [Array<Types::ReplicationStatusType>]
     class ReplicateSecretToRegionsResponse < Struct.new(
+      nil,
       :arn,
       :replication_status,
       keyword_init: true
@@ -1159,6 +1202,7 @@ module Aws::SecretsManager
     #   <p>The date that the secret was last accessed in the Region. This field is omitted if the secret has never been retrieved in the Region.</p>
     #   @return [Time]
     class ReplicationStatusType < Struct.new(
+      nil,
       :region,
       :kms_key_id,
       :status,
@@ -1173,6 +1217,7 @@ module Aws::SecretsManager
     # @!attribute message
     #   @return [String]
     class ResourceExistsException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -1183,6 +1228,7 @@ module Aws::SecretsManager
     # @!attribute message
     #   @return [String]
     class ResourceNotFoundException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -1195,6 +1241,7 @@ module Aws::SecretsManager
     #         than a partial ARN. See <a href="https://docs.aws.amazon.com/secretsmanager/latest/userguide/troubleshoot.html#ARN_secretnamehyphen">Finding a secret from a partial ARN</a>.</p>
     #   @return [String]
     class RestoreSecretRequest < Struct.new(
+      nil,
       :secret_id,
       keyword_init: true
     )
@@ -1208,6 +1255,7 @@ module Aws::SecretsManager
     #   <p>The name of the secret that was restored.</p>
     #   @return [String]
     class RestoreSecretResponse < Struct.new(
+      nil,
       :arn,
       :name,
       keyword_init: true
@@ -1246,6 +1294,7 @@ module Aws::SecretsManager
     #            <p>By default, Secrets Manager rotates the secret immediately.</p>
     #   @return [Boolean]
     class RotateSecretRequest < Struct.new(
+      nil,
       :secret_id,
       :client_request_token,
       :rotation_lambda_arn,
@@ -1266,6 +1315,7 @@ module Aws::SecretsManager
     #   <p>The ID of the new version of the secret.</p>
     #   @return [String]
     class RotateSecretResponse < Struct.new(
+      nil,
       :arn,
       :name,
       :version_id,
@@ -1318,6 +1368,7 @@ module Aws::SecretsManager
     #         rotation window must not extend into the next UTC day or into the next rotation window.</p>
     #   @return [String]
     class RotationRulesType < Struct.new(
+      nil,
       :automatically_after_days,
       :duration,
       :schedule_expression,
@@ -1402,6 +1453,7 @@ module Aws::SecretsManager
     #   <p>The Region where Secrets Manager originated the secret.</p>
     #   @return [String]
     class SecretListEntry < Struct.new(
+      nil,
       :arn,
       :name,
       :description,
@@ -1457,6 +1509,7 @@ module Aws::SecretsManager
     #   <p>The date the secret was created.</p>
     #   @return [Time]
     class SecretValueEntry < Struct.new(
+      nil,
       :arn,
       :name,
       :version_id,
@@ -1488,6 +1541,7 @@ module Aws::SecretsManager
     #   <p>The KMS keys used to encrypt the secret version.</p>
     #   @return [Array<String>]
     class SecretVersionsListEntry < Struct.new(
+      nil,
       :version_id,
       :version_stages,
       :last_accessed_date,
@@ -1502,6 +1556,7 @@ module Aws::SecretsManager
     #   <p>The ARN of the primary secret. </p>
     #   @return [String]
     class StopReplicationToReplicaRequest < Struct.new(
+      nil,
       :secret_id,
       keyword_init: true
     )
@@ -1512,6 +1567,7 @@ module Aws::SecretsManager
     #   <p>The ARN of the promoted secret. The ARN is the same as the original primary secret except the Region is changed.</p>
     #   @return [String]
     class StopReplicationToReplicaResponse < Struct.new(
+      nil,
       :arn,
       keyword_init: true
     )
@@ -1526,6 +1582,7 @@ module Aws::SecretsManager
     #   <p>The string value associated with the key of the tag.</p>
     #   @return [String]
     class Tag < Struct.new(
+      nil,
       :key,
       :value,
       keyword_init: true
@@ -1547,6 +1604,7 @@ module Aws::SecretsManager
     #       in the Amazon Web Services CLI User Guide.</p>
     #   @return [Array<Types::Tag>]
     class TagResourceRequest < Struct.new(
+      nil,
       :secret_id,
       :tags,
       keyword_init: true
@@ -1568,6 +1626,7 @@ module Aws::SecretsManager
     #       in the Amazon Web Services CLI User Guide.</p>
     #   @return [Array<String>]
     class UntagResourceRequest < Struct.new(
+      nil,
       :secret_id,
       :tag_keys,
       keyword_init: true
@@ -1630,6 +1689,7 @@ module Aws::SecretsManager
     #            <p>Sensitive: This field contains sensitive information, so the service does not include it in CloudTrail log entries. If you create your own log entries, you must also avoid logging the information in this field.</p>
     #   @return [String]
     class UpdateSecretRequest < Struct.new(
+      nil,
       :secret_id,
       :client_request_token,
       :description,
@@ -1652,6 +1712,7 @@ module Aws::SecretsManager
     #         contains the unique identifier of the new version.</p>
     #   @return [String]
     class UpdateSecretResponse < Struct.new(
+      nil,
       :arn,
       :name,
       :version_id,
@@ -1682,6 +1743,7 @@ module Aws::SecretsManager
     #         must also specify the <code>RemoveFromVersionId</code> parameter. </p>
     #   @return [String]
     class UpdateSecretVersionStageRequest < Struct.new(
+      nil,
       :secret_id,
       :version_stage,
       :remove_from_version_id,
@@ -1698,6 +1760,7 @@ module Aws::SecretsManager
     #   <p>The name of the secret that was updated.</p>
     #   @return [String]
     class UpdateSecretVersionStageResponse < Struct.new(
+      nil,
       :arn,
       :name,
       keyword_init: true
@@ -1714,6 +1777,7 @@ module Aws::SecretsManager
     #         secret and its versions. For example policies, see <a href="https://docs.aws.amazon.com/secretsmanager/latest/userguide/auth-and-access_examples.html">Permissions policy examples</a>.</p>
     #   @return [String]
     class ValidateResourcePolicyRequest < Struct.new(
+      nil,
       :secret_id,
       :resource_policy,
       keyword_init: true
@@ -1728,6 +1792,7 @@ module Aws::SecretsManager
     #   <p>Validation errors if your policy didn't pass validation.</p>
     #   @return [Array<Types::ValidationErrorsEntry>]
     class ValidateResourcePolicyResponse < Struct.new(
+      nil,
       :policy_validation_passed,
       :validation_errors,
       keyword_init: true
@@ -1748,6 +1813,7 @@ module Aws::SecretsManager
     #   <p>Displays error messages if validation encounters problems during validation of the resource policy.</p>
     #   @return [String]
     class ValidationErrorsEntry < Struct.new(
+      nil,
       :check_name,
       :error_message,
       keyword_init: true

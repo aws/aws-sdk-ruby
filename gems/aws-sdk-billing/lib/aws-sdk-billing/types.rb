@@ -10,6 +10,7 @@ module Aws::Billing
     # @!attribute message
     #   @return [String]
     class AccessDeniedException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -24,6 +25,7 @@ module Aws::Billing
     #   <p> The inclusive time range end date. </p>
     #   @return [Time]
     class ActiveTimeRange < Struct.new(
+      nil,
       :active_after_inclusive,
       :active_before_inclusive,
       keyword_init: true
@@ -38,6 +40,7 @@ module Aws::Billing
     #   <p> A list of ARNs of the source billing views to associate. </p>
     #   @return [Array<String>]
     class AssociateSourceViewsRequest < Struct.new(
+      nil,
       :arn,
       :source_views,
       keyword_init: true
@@ -49,6 +52,7 @@ module Aws::Billing
     #   <p> The ARN of the billing view that the source views were associated with. </p>
     #   @return [String]
     class AssociateSourceViewsResponse < Struct.new(
+      nil,
       :arn,
       keyword_init: true
     )
@@ -96,6 +100,7 @@ module Aws::Billing
     #   <p> The current health status of the billing view. </p>
     #   @return [Types::BillingViewHealthStatus]
     class BillingViewElement < Struct.new(
+      nil,
       :arn,
       :name,
       :description,
@@ -122,6 +127,7 @@ module Aws::Billing
     #   <p>A list of reasons explaining the current health status, if applicable.</p>
     #   @return [Array<String>]
     class BillingViewHealthStatus < Struct.new(
+      nil,
       :status_code,
       :status_reasons,
       keyword_init: true
@@ -133,6 +139,7 @@ module Aws::Billing
     # @!attribute message
     #   @return [String]
     class BillingViewHealthStatusException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -162,6 +169,7 @@ module Aws::Billing
     #   <p> The current health status of the billing view. </p>
     #   @return [Types::BillingViewHealthStatus]
     class BillingViewListElement < Struct.new(
+      nil,
       :arn,
       :name,
       :description,
@@ -184,6 +192,7 @@ module Aws::Billing
     #   <p> The type of resource associated with the request. </p>
     #   @return [String]
     class ConflictException < Struct.new(
+      nil,
       :message,
       :resource_id,
       :resource_type,
@@ -211,6 +220,7 @@ module Aws::Billing
     #   <p>A list of key value map specifying tags associated to the billing view being created. </p>
     #   @return [Array<Types::ResourceTag>]
     class CreateBillingViewRequest < Struct.new(
+      nil,
       :name,
       :description,
       :source_views,
@@ -229,6 +239,7 @@ module Aws::Billing
     #   <p> The time when the billing view was created. </p>
     #   @return [Time]
     class CreateBillingViewResponse < Struct.new(
+      nil,
       :arn,
       :created_at,
       keyword_init: true
@@ -243,6 +254,7 @@ module Aws::Billing
     #   <p> If set to true, forces deletion of the billing view even if it has derived resources (e.g. other billing views or budgets). Use with caution as this may break dependent resources. </p>
     #   @return [Boolean]
     class DeleteBillingViewRequest < Struct.new(
+      nil,
       :arn,
       :force,
       keyword_init: true
@@ -254,6 +266,7 @@ module Aws::Billing
     #   <p> The Amazon Resource Name (ARN) that can be used to uniquely identify the billing view. </p>
     #   @return [String]
     class DeleteBillingViewResponse < Struct.new(
+      nil,
       :arn,
       keyword_init: true
     )
@@ -268,6 +281,7 @@ module Aws::Billing
     #   <p> The metadata values that you can use to filter and group your results. </p>
     #   @return [Array<String>]
     class DimensionValues < Struct.new(
+      nil,
       :key,
       :values,
       keyword_init: true
@@ -282,6 +296,7 @@ module Aws::Billing
     #   <p> A list of ARNs of the source billing views to disassociate. </p>
     #   @return [Array<String>]
     class DisassociateSourceViewsRequest < Struct.new(
+      nil,
       :arn,
       :source_views,
       keyword_init: true
@@ -293,6 +308,7 @@ module Aws::Billing
     #   <p> The ARN of the billing view that the source views were disassociated from. </p>
     #   @return [String]
     class DisassociateSourceViewsResponse < Struct.new(
+      nil,
       :arn,
       keyword_init: true
     )
@@ -310,6 +326,7 @@ module Aws::Billing
     #   <p> Specifies a time range filter for the billing view data. </p>
     #   @return [Types::TimeRange]
     class Expression < Struct.new(
+      nil,
       :dimensions,
       :tags,
       :time_range,
@@ -322,6 +339,7 @@ module Aws::Billing
     #   <p> The Amazon Resource Name (ARN) that can be used to uniquely identify the billing view. </p>
     #   @return [String]
     class GetBillingViewRequest < Struct.new(
+      nil,
       :arn,
       keyword_init: true
     )
@@ -332,6 +350,7 @@ module Aws::Billing
     #   <p>The billing view element associated with the specified ARN. </p>
     #   @return [Types::BillingViewElement]
     class GetBillingViewResponse < Struct.new(
+      nil,
       :billing_view,
       keyword_init: true
     )
@@ -342,6 +361,7 @@ module Aws::Billing
     #   <p>The Amazon Resource Name (ARN) of the billing view resource to which the policy is attached to. </p>
     #   @return [String]
     class GetResourcePolicyRequest < Struct.new(
+      nil,
       :resource_arn,
       keyword_init: true
     )
@@ -355,6 +375,7 @@ module Aws::Billing
     #   <p>The resource-based policy document attached to the resource in <code>JSON</code> format. </p>
     #   @return [String]
     class GetResourcePolicyResponse < Struct.new(
+      nil,
       :resource_arn,
       :policy,
       keyword_init: true
@@ -366,6 +387,7 @@ module Aws::Billing
     # @!attribute message
     #   @return [String]
     class InternalServerException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -394,6 +416,7 @@ module Aws::Billing
     #   <p>The pagination token that is used on subsequent calls to list billing views.</p>
     #   @return [String]
     class ListBillingViewsRequest < Struct.new(
+      nil,
       :active_time_range,
       :arns,
       :billing_view_types,
@@ -413,6 +436,7 @@ module Aws::Billing
     #   <p>The pagination token to use on subsequent calls to list billing views. </p>
     #   @return [String]
     class ListBillingViewsResponse < Struct.new(
+      nil,
       :billing_views,
       :next_token,
       keyword_init: true
@@ -430,6 +454,7 @@ module Aws::Billing
     #   <p> The pagination token that is used on subsequent calls to list billing views. </p>
     #   @return [String]
     class ListSourceViewsForBillingViewRequest < Struct.new(
+      nil,
       :arn,
       :max_results,
       :next_token,
@@ -445,6 +470,7 @@ module Aws::Billing
     #   <p> The pagination token that is used on subsequent calls to list billing views. </p>
     #   @return [String]
     class ListSourceViewsForBillingViewResponse < Struct.new(
+      nil,
       :source_views,
       :next_token,
       keyword_init: true
@@ -456,6 +482,7 @@ module Aws::Billing
     #   <p> The Amazon Resource Name (ARN) of the resource. </p>
     #   @return [String]
     class ListTagsForResourceRequest < Struct.new(
+      nil,
       :resource_arn,
       keyword_init: true
     )
@@ -466,6 +493,7 @@ module Aws::Billing
     #   <p> A list of tag key value pairs that are associated with the resource. </p>
     #   @return [Array<Types::ResourceTag>]
     class ListTagsForResourceResponse < Struct.new(
+      nil,
       :resource_tags,
       keyword_init: true
     )
@@ -482,6 +510,7 @@ module Aws::Billing
     #   <p> Value is the type of resource that was not found. </p>
     #   @return [String]
     class ResourceNotFoundException < Struct.new(
+      nil,
       :message,
       :resource_id,
       :resource_type,
@@ -498,6 +527,7 @@ module Aws::Billing
     #   <p> The value that's associated with the tag. </p>
     #   @return [String]
     class ResourceTag < Struct.new(
+      nil,
       :key,
       :value,
       keyword_init: true
@@ -521,6 +551,7 @@ module Aws::Billing
     #   <p> The container for the <code>quotaCode</code>. </p>
     #   @return [String]
     class ServiceQuotaExceededException < Struct.new(
+      nil,
       :message,
       :resource_id,
       :resource_type,
@@ -538,6 +569,7 @@ module Aws::Billing
     #   <p> A list of tag key value pairs that are associated with the resource. </p>
     #   @return [Array<Types::ResourceTag>]
     class TagResourceRequest < Struct.new(
+      nil,
       :resource_arn,
       :resource_tags,
       keyword_init: true
@@ -546,6 +578,7 @@ module Aws::Billing
     end
 
     class TagResourceResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -559,6 +592,7 @@ module Aws::Billing
     #   <p> The specific value of the tag. </p>
     #   @return [Array<String>]
     class TagValues < Struct.new(
+      nil,
       :key,
       :values,
       keyword_init: true
@@ -570,6 +604,7 @@ module Aws::Billing
     # @!attribute message
     #   @return [String]
     class ThrottlingException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -584,6 +619,7 @@ module Aws::Billing
     #   <p> The inclusive end date of the time range. </p>
     #   @return [Time]
     class TimeRange < Struct.new(
+      nil,
       :begin_date_inclusive,
       :end_date_inclusive,
       keyword_init: true
@@ -598,6 +634,7 @@ module Aws::Billing
     #   <p> A list of tag key value pairs that are associated with the resource. </p>
     #   @return [Array<String>]
     class UntagResourceRequest < Struct.new(
+      nil,
       :resource_arn,
       :resource_tag_keys,
       keyword_init: true
@@ -606,6 +643,7 @@ module Aws::Billing
     end
 
     class UntagResourceResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -624,6 +662,7 @@ module Aws::Billing
     #   <p>See <a href="https://docs.aws.amazon.com/aws-cost-management/latest/APIReference/API_billing_Expression.html">Expression</a>. Billing view only supports <code>LINKED_ACCOUNT</code> and <code>Tags</code>. </p>
     #   @return [Types::Expression]
     class UpdateBillingViewRequest < Struct.new(
+      nil,
       :arn,
       :name,
       :description,
@@ -640,6 +679,7 @@ module Aws::Billing
     #   <p> The time when the billing view was last updated. </p>
     #   @return [Time]
     class UpdateBillingViewResponse < Struct.new(
+      nil,
       :arn,
       :updated_at,
       keyword_init: true
@@ -657,6 +697,7 @@ module Aws::Billing
     #   <p>The input fails to satisfy the constraints specified by an Amazon Web Services service.</p>
     #   @return [Array<Types::ValidationExceptionField>]
     class ValidationException < Struct.new(
+      nil,
       :message,
       :reason,
       :field_list,
@@ -673,6 +714,7 @@ module Aws::Billing
     #   <p>The message describing why the field failed validation.</p>
     #   @return [String]
     class ValidationExceptionField < Struct.new(
+      nil,
       :name,
       :message,
       keyword_init: true

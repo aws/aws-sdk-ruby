@@ -10,6 +10,7 @@ module Aws::MedicalImaging
     # @!attribute message
     #   @return [String]
     class AccessDeniedException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -20,6 +21,7 @@ module Aws::MedicalImaging
     # @!attribute message
     #   @return [String]
     class ConflictException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -34,6 +36,7 @@ module Aws::MedicalImaging
     #   <p>The latest version identifier for the destination image set.</p>
     #   @return [String]
     class CopyDestinationImageSet < Struct.new(
+      nil,
       :image_set_id,
       :latest_version_id,
       keyword_init: true
@@ -64,6 +67,7 @@ module Aws::MedicalImaging
     #   <p>The Amazon Resource Name (ARN) assigned to the destination image set.</p>
     #   @return [String]
     class CopyDestinationImageSetProperties < Struct.new(
+      nil,
       :image_set_id,
       :latest_version_id,
       :image_set_state,
@@ -84,6 +88,7 @@ module Aws::MedicalImaging
     #   <p>The destination image set.</p>
     #   @return [Types::CopyDestinationImageSet]
     class CopyImageSetInformation < Struct.new(
+      nil,
       :source_image_set,
       :destination_image_set,
       keyword_init: true
@@ -107,6 +112,7 @@ module Aws::MedicalImaging
     #   <p>Providing this parameter will configure the <code>CopyImageSet</code> operation to promote the given image set to the primary DICOM hierarchy. If successful, a new primary image set ID will be returned as the destination image set.</p>
     #   @return [Boolean]
     class CopyImageSetRequest < Struct.new(
+      nil,
       :datastore_id,
       :source_image_set_id,
       :copy_image_set_information,
@@ -127,6 +133,7 @@ module Aws::MedicalImaging
     #   <p>The properties of the destination image set.</p>
     #   @return [Types::CopyDestinationImageSetProperties]
     class CopyImageSetResponse < Struct.new(
+      nil,
       :datastore_id,
       :source_image_set_properties,
       :destination_image_set_properties,
@@ -143,6 +150,7 @@ module Aws::MedicalImaging
     #   <p>Contains <code>MetadataCopies</code> structure and wraps information related to specific copy use cases. For example, when copying subsets.</p>
     #   @return [Types::MetadataCopies]
     class CopySourceImageSetInformation < Struct.new(
+      nil,
       :latest_version_id,
       :dicom_copies,
       keyword_init: true
@@ -173,6 +181,7 @@ module Aws::MedicalImaging
     #   <p>The Amazon Resource Name (ARN) assigned to the source image set.</p>
     #   @return [String]
     class CopySourceImageSetProperties < Struct.new(
+      nil,
       :image_set_id,
       :latest_version_id,
       :image_set_state,
@@ -201,6 +210,7 @@ module Aws::MedicalImaging
     #   <p>The ARN of the authorizer's Lambda function.</p>
     #   @return [String]
     class CreateDatastoreRequest < Struct.new(
+      nil,
       :datastore_name,
       :client_token,
       :tags,
@@ -218,6 +228,7 @@ module Aws::MedicalImaging
     #   <p>The data store status.</p>
     #   @return [String]
     class CreateDatastoreResponse < Struct.new(
+      nil,
       :datastore_id,
       :datastore_status,
       keyword_init: true
@@ -257,6 +268,7 @@ module Aws::MedicalImaging
     #   <p>The error message thrown if an import job fails.</p>
     #   @return [String]
     class DICOMImportJobProperties < Struct.new(
+      nil,
       :job_id,
       :job_name,
       :job_status,
@@ -298,6 +310,7 @@ module Aws::MedicalImaging
     #   <p>The error message thrown if an import job fails.</p>
     #   @return [String]
     class DICOMImportJobSummary < Struct.new(
+      nil,
       :job_id,
       :job_name,
       :job_status,
@@ -319,6 +332,7 @@ module Aws::MedicalImaging
     #   <p>The DICOM study time provided in <code>HHmmss.FFFFFF</code> format.</p>
     #   @return [String]
     class DICOMStudyDateAndTime < Struct.new(
+      nil,
       :dicom_study_date,
       :dicom_study_time,
       keyword_init: true
@@ -376,6 +390,7 @@ module Aws::MedicalImaging
     #   <p>The study time.</p>
     #   @return [String]
     class DICOMTags < Struct.new(
+      nil,
       :dicom_patient_id,
       :dicom_patient_name,
       :dicom_patient_birth_date,
@@ -411,6 +426,7 @@ module Aws::MedicalImaging
     #   <p>The DICOM tags that need to be updated in <code>ImageSetMetadata</code>.</p>
     #   @return [String]
     class DICOMUpdates < Struct.new(
+      nil,
       :removable_attributes,
       :updatable_attributes,
       keyword_init: true
@@ -444,6 +460,7 @@ module Aws::MedicalImaging
     #   <p>The timestamp when the data store was last updated.</p>
     #   @return [Time]
     class DatastoreProperties < Struct.new(
+      nil,
       :datastore_id,
       :datastore_name,
       :datastore_status,
@@ -477,6 +494,7 @@ module Aws::MedicalImaging
     #   <p>The timestamp when the data store was last updated.</p>
     #   @return [Time]
     class DatastoreSummary < Struct.new(
+      nil,
       :datastore_id,
       :datastore_name,
       :datastore_status,
@@ -492,6 +510,7 @@ module Aws::MedicalImaging
     #   <p>The data store identifier.</p>
     #   @return [String]
     class DeleteDatastoreRequest < Struct.new(
+      nil,
       :datastore_id,
       keyword_init: true
     )
@@ -505,6 +524,7 @@ module Aws::MedicalImaging
     #   <p>The data store status.</p>
     #   @return [String]
     class DeleteDatastoreResponse < Struct.new(
+      nil,
       :datastore_id,
       :datastore_status,
       keyword_init: true
@@ -519,6 +539,7 @@ module Aws::MedicalImaging
     #   <p>The image set identifier.</p>
     #   @return [String]
     class DeleteImageSetRequest < Struct.new(
+      nil,
       :datastore_id,
       :image_set_id,
       keyword_init: true
@@ -539,6 +560,7 @@ module Aws::MedicalImaging
     #   <p>The image set workflow status.</p>
     #   @return [String]
     class DeleteImageSetResponse < Struct.new(
+      nil,
       :datastore_id,
       :image_set_id,
       :image_set_state,
@@ -555,6 +577,7 @@ module Aws::MedicalImaging
     #   <p>The import job identifier.</p>
     #   @return [String]
     class GetDICOMImportJobRequest < Struct.new(
+      nil,
       :datastore_id,
       :job_id,
       keyword_init: true
@@ -566,6 +589,7 @@ module Aws::MedicalImaging
     #   <p>The properties of the import job.</p>
     #   @return [Types::DICOMImportJobProperties]
     class GetDICOMImportJobResponse < Struct.new(
+      nil,
       :job_properties,
       keyword_init: true
     )
@@ -576,6 +600,7 @@ module Aws::MedicalImaging
     #   <p>The data store identifier.</p>
     #   @return [String]
     class GetDatastoreRequest < Struct.new(
+      nil,
       :datastore_id,
       keyword_init: true
     )
@@ -586,6 +611,7 @@ module Aws::MedicalImaging
     #   <p>The data store properties.</p>
     #   @return [Types::DatastoreProperties]
     class GetDatastoreResponse < Struct.new(
+      nil,
       :datastore_properties,
       keyword_init: true
     )
@@ -602,6 +628,7 @@ module Aws::MedicalImaging
     #   <p>Information about the image frame (pixel data) identifier.</p>
     #   @return [Types::ImageFrameInformation]
     class GetImageFrameRequest < Struct.new(
+      nil,
       :datastore_id,
       :image_set_id,
       :image_frame_information,
@@ -617,6 +644,7 @@ module Aws::MedicalImaging
     #   <p>The format in which the image frame information is returned to the customer. Default is <code>application/octet-stream</code>.</p> <note> <ul> <li> <p>If the stored transfer syntax is <code>1.2.840.10008.1.2.1</code>, the returned <code>contentType</code> is <code>application/octet-stream</code>.</p> </li> </ul> <ul> <li> <p>If the stored transfer syntax is <code>1.2.840.10008.1.2.4.50</code>, the returned <code>contentType</code> is <code>image/jpeg</code>.</p> </li> </ul> <ul> <li> <p>If the stored transfer syntax is <code>1.2.840.10008.1.2.4.91</code>, the returned <code>contentType</code> is <code>image/j2c</code>.</p> </li> </ul> <ul> <li> <p>If the stored transfer syntax is MPEG2, <code>1.2.840.10008.1.2.4.100</code>, <code>1.2.840.10008.1.2.4.100.1</code>, <code>1.2.840.10008.1.2.4.101</code>, or <code>1.2.840.10008.1.2.4.101.1</code>, the returned <code>contentType</code> is <code>video/mpeg</code>.</p> </li> </ul> <ul> <li> <p>If the stored transfer syntax is MPEG-4 AVC/H.264, UID <code>1.2.840.10008.1.2.4.102</code>, <code>1.2.840.10008.1.2.4.102.1</code>, <code>1.2.840.10008.1.2.4.103</code>, <code>1.2.840.10008.1.2.4.103.1</code>, <code>1.2.840.10008.1.2.4.104</code>, <code>1.2.840.10008.1.2.4.104.1</code>, <code>1.2.840.10008.1.2.4.105</code>, <code>1.2.840.10008.1.2.4.105.1</code>, <code>1.2.840.10008.1.2.4.106</code>, or <code>1.2.840.10008.1.2.4.106.1</code>, the returned <code>contentType</code> is <code>video/mp4</code>.</p> </li> </ul> <ul> <li> <p>If the stored transfer syntax is HEVC/H.265, UID <code>1.2.840.10008.1.2.4.107</code> or <code>1.2.840.10008.1.2.4.108</code>, the returned <code>contentType</code> is <code>video/H256</code>.</p> </li> </ul> <ul> <li> <p>If the stored transfer syntax is <code>1.2.840.10008.1.2.4.202</code> or if the stored transfer syntax is <i>missing</i>, the returned <code>contentType</code> is <code>image/jph</code>.</p> </li> </ul> <ul> <li> <p>If the stored transfer syntax is <code>1.2.840.10008.1.2.4.203</code>, the returned contentType is <code>image/jphc</code>.</p> </li> </ul> </note>
     #   @return [String]
     class GetImageFrameResponse < Struct.new(
+      nil,
       :image_frame_blob,
       :content_type,
       keyword_init: true
@@ -634,6 +662,7 @@ module Aws::MedicalImaging
     #   <p>The image set version identifier.</p>
     #   @return [String]
     class GetImageSetMetadataRequest < Struct.new(
+      nil,
       :datastore_id,
       :image_set_id,
       :version_id,
@@ -652,6 +681,7 @@ module Aws::MedicalImaging
     #   <p>The compression format in which image set metadata attributes are returned.</p>
     #   @return [String]
     class GetImageSetMetadataResponse < Struct.new(
+      nil,
       :image_set_metadata_blob,
       :content_type,
       :content_encoding,
@@ -670,6 +700,7 @@ module Aws::MedicalImaging
     #   <p>The image set version identifier.</p>
     #   @return [String]
     class GetImageSetRequest < Struct.new(
+      nil,
       :datastore_id,
       :image_set_id,
       :version_id,
@@ -715,6 +746,7 @@ module Aws::MedicalImaging
     #   <p>The flag to determine whether the image set is primary or not.</p>
     #   @return [Boolean]
     class GetImageSetResponse < Struct.new(
+      nil,
       :datastore_id,
       :image_set_id,
       :version_id,
@@ -737,6 +769,7 @@ module Aws::MedicalImaging
     #   <p>The image frame (pixel data) identifier.</p>
     #   @return [String]
     class ImageFrameInformation < Struct.new(
+      nil,
       :image_frame_id,
       keyword_init: true
     )
@@ -775,6 +808,7 @@ module Aws::MedicalImaging
     #   <p>The flag to determine whether the image set is primary or not.</p>
     #   @return [Boolean]
     class ImageSetProperties < Struct.new(
+      nil,
       :image_set_id,
       :version_id,
       :image_set_state,
@@ -810,6 +844,7 @@ module Aws::MedicalImaging
     #   <p>The flag to determine whether the image set is primary or not.</p>
     #   @return [Boolean]
     class ImageSetsMetadataSummary < Struct.new(
+      nil,
       :image_set_id,
       :version,
       :created_at,
@@ -825,6 +860,7 @@ module Aws::MedicalImaging
     # @!attribute message
     #   @return [String]
     class InternalServerException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -844,6 +880,7 @@ module Aws::MedicalImaging
     #   <p>The max results count. The upper bound is determined by load testing.</p>
     #   @return [Integer]
     class ListDICOMImportJobsRequest < Struct.new(
+      nil,
       :datastore_id,
       :job_status,
       :next_token,
@@ -860,6 +897,7 @@ module Aws::MedicalImaging
     #   <p>The pagination token used to retrieve the list of import jobs on the next page.</p>
     #   @return [String]
     class ListDICOMImportJobsResponse < Struct.new(
+      nil,
       :job_summaries,
       :next_token,
       keyword_init: true
@@ -877,6 +915,7 @@ module Aws::MedicalImaging
     #   <p>Valid Range: Minimum value of 1. Maximum value of 50.</p>
     #   @return [Integer]
     class ListDatastoresRequest < Struct.new(
+      nil,
       :datastore_status,
       :next_token,
       :max_results,
@@ -892,6 +931,7 @@ module Aws::MedicalImaging
     #   <p>The pagination token used to retrieve the list of data stores on the next page.</p>
     #   @return [String]
     class ListDatastoresResponse < Struct.new(
+      nil,
       :datastore_summaries,
       :next_token,
       keyword_init: true
@@ -912,6 +952,7 @@ module Aws::MedicalImaging
     #   <p>The max results count.</p>
     #   @return [Integer]
     class ListImageSetVersionsRequest < Struct.new(
+      nil,
       :datastore_id,
       :image_set_id,
       :next_token,
@@ -928,6 +969,7 @@ module Aws::MedicalImaging
     #   <p>The pagination token used to retrieve the list of image set versions on the next page.</p>
     #   @return [String]
     class ListImageSetVersionsResponse < Struct.new(
+      nil,
       :image_set_properties_list,
       :next_token,
       keyword_init: true
@@ -939,6 +981,7 @@ module Aws::MedicalImaging
     #   <p>The Amazon Resource Name (ARN) of the medical imaging resource to list tags for.</p>
     #   @return [String]
     class ListTagsForResourceRequest < Struct.new(
+      nil,
       :resource_arn,
       keyword_init: true
     )
@@ -949,6 +992,7 @@ module Aws::MedicalImaging
     #   <p>A list of all tags associated with a medical imaging resource.</p>
     #   @return [Hash<String, String>]
     class ListTagsForResourceResponse < Struct.new(
+      nil,
       :tags,
       keyword_init: true
     )
@@ -960,6 +1004,7 @@ module Aws::MedicalImaging
     #   <p>The JSON string used to specify a subset of SOP Instances to copy from source to destination image set.</p>
     #   @return [String]
     class MetadataCopies < Struct.new(
+      nil,
       :copiable_attributes,
       keyword_init: true
     )
@@ -991,6 +1036,7 @@ module Aws::MedicalImaging
     #   <p>Providing this parameter will force completion of the <code>CopyImageSet</code> and <code>UpdateImageSetMetadata</code> actions, even if metadata is inconsistent at the Patient, Study, and/or Series levels.</p>
     #   @return [Boolean]
     class Overrides < Struct.new(
+      nil,
       :forced,
       keyword_init: true
     )
@@ -1001,6 +1047,7 @@ module Aws::MedicalImaging
     # @!attribute message
     #   @return [String]
     class ResourceNotFoundException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -1071,6 +1118,7 @@ module Aws::MedicalImaging
     #   <p>The sort input for search criteria.</p>
     #   @return [Types::Sort]
     class SearchCriteria < Struct.new(
+      nil,
       :filters,
       :sort,
       keyword_init: true
@@ -1086,6 +1134,7 @@ module Aws::MedicalImaging
     #   <p>The search filter operator for <code>imageSetDateTime</code>.</p>
     #   @return [String]
     class SearchFilter < Struct.new(
+      nil,
       :values,
       :operator,
       keyword_init: true
@@ -1106,6 +1155,7 @@ module Aws::MedicalImaging
     #   <p>The token used for pagination of results returned in the response. Use the token returned from the previous request to continue results where the previous request ended.</p>
     #   @return [String]
     class SearchImageSetsRequest < Struct.new(
+      nil,
       :datastore_id,
       :search_criteria,
       :max_results,
@@ -1125,6 +1175,7 @@ module Aws::MedicalImaging
     #   <p>The token for pagination results.</p>
     #   @return [String]
     class SearchImageSetsResponse < Struct.new(
+      nil,
       :image_sets_metadata_summaries,
       :sort,
       :next_token,
@@ -1137,6 +1188,7 @@ module Aws::MedicalImaging
     # @!attribute message
     #   @return [String]
     class ServiceQuotaExceededException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -1151,6 +1203,7 @@ module Aws::MedicalImaging
     #   <p>The sort field for search criteria.</p>
     #   @return [String]
     class Sort < Struct.new(
+      nil,
       :sort_order,
       :sort_field,
       keyword_init: true
@@ -1180,6 +1233,7 @@ module Aws::MedicalImaging
     #   <p>The account ID of the source S3 bucket owner.</p>
     #   @return [String]
     class StartDICOMImportJobRequest < Struct.new(
+      nil,
       :job_name,
       :data_access_role_arn,
       :client_token,
@@ -1205,6 +1259,7 @@ module Aws::MedicalImaging
     #   <p>The timestamp when the import job was submitted.</p>
     #   @return [Time]
     class StartDICOMImportJobResponse < Struct.new(
+      nil,
       :datastore_id,
       :job_id,
       :job_status,
@@ -1221,6 +1276,7 @@ module Aws::MedicalImaging
     #   <p>The user-specified key and value tag pairs added to a medical imaging resource.</p>
     #   @return [Hash<String, String>]
     class TagResourceRequest < Struct.new(
+      nil,
       :resource_arn,
       :tags,
       keyword_init: true
@@ -1229,6 +1285,7 @@ module Aws::MedicalImaging
     end
 
     class TagResourceResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1238,6 +1295,7 @@ module Aws::MedicalImaging
     # @!attribute message
     #   @return [String]
     class ThrottlingException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -1251,6 +1309,7 @@ module Aws::MedicalImaging
     #   <p>The keys for the tags to be removed from the medical imaging resource.</p>
     #   @return [Array<String>]
     class UntagResourceRequest < Struct.new(
+      nil,
       :resource_arn,
       :tag_keys,
       keyword_init: true
@@ -1259,6 +1318,7 @@ module Aws::MedicalImaging
     end
 
     class UntagResourceResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1280,6 +1340,7 @@ module Aws::MedicalImaging
     #   <p>Update image set metadata updates.</p>
     #   @return [Types::MetadataUpdates]
     class UpdateImageSetMetadataRequest < Struct.new(
+      nil,
       :datastore_id,
       :image_set_id,
       :latest_version_id,
@@ -1315,6 +1376,7 @@ module Aws::MedicalImaging
     #   <p>The error message thrown if an update image set metadata action fails.</p>
     #   @return [String]
     class UpdateImageSetMetadataResponse < Struct.new(
+      nil,
       :datastore_id,
       :image_set_id,
       :latest_version_id,
@@ -1332,6 +1394,7 @@ module Aws::MedicalImaging
     # @!attribute message
     #   @return [String]
     class ValidationException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )

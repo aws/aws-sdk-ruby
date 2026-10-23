@@ -66,7 +66,8 @@ module Aws
           end
         end
 
-        handler(Handler, step: :sign, priority: 75)
+        # Run after ResolveAuth (75) and before SignRequests (50).
+        handler(Handler, step: :sign, priority: 70)
       end
     end
   end

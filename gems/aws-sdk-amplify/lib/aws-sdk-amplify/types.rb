@@ -124,6 +124,7 @@ module Aws::Amplify
     #   <p>The configuration details that apply to the jobs for an Amplify app.</p>
     #   @return [Types::JobConfig]
     class App < Struct.new(
+      nil,
       :app_id,
       :app_arn,
       :name,
@@ -166,6 +167,7 @@ module Aws::Amplify
     #   <p>The unique ID for the artifact. </p>
     #   @return [String]
     class Artifact < Struct.new(
+      nil,
       :artifact_file_name,
       :artifact_id,
       keyword_init: true
@@ -210,6 +212,7 @@ module Aws::Amplify
     #   <p>The Amplify environment name for the pull request. </p>
     #   @return [String]
     class AutoBranchCreationConfig < Struct.new(
+      nil,
       :stage,
       :framework,
       :enable_auto_build,
@@ -234,6 +237,7 @@ module Aws::Amplify
     #   <p>The Amazon Resource Name (ARN) for the CloudFormation stack.</p>
     #   @return [String]
     class Backend < Struct.new(
+      nil,
       :stack_arn,
       keyword_init: true
     )
@@ -266,6 +270,7 @@ module Aws::Amplify
     #               app. </p>
     #   @return [Time]
     class BackendEnvironment < Struct.new(
+      nil,
       :backend_environment_arn,
       :environment_name,
       :stack_name,
@@ -281,6 +286,7 @@ module Aws::Amplify
     # @!attribute message
     #   @return [String]
     class BadRequestException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -402,6 +408,7 @@ module Aws::Amplify
     #                   role</a> in the <i>Amplify User Guide</i>.</p>
     #   @return [String]
     class Branch < Struct.new(
+      nil,
       :branch_arn,
       :branch_name,
       :description,
@@ -451,6 +458,7 @@ module Aws::Amplify
     #               key. This is the default setting.</p>
     #   @return [String]
     class CacheConfig < Struct.new(
+      nil,
       :type,
       keyword_init: true
     )
@@ -480,6 +488,7 @@ module Aws::Amplify
     #   <p>The DNS record for certificate verification.</p>
     #   @return [String]
     class Certificate < Struct.new(
+      nil,
       :type,
       :custom_certificate_arn,
       :certificate_verification_dns_record,
@@ -508,6 +517,7 @@ module Aws::Amplify
     #            <p>This field is required only when the certificate type is <code>CUSTOM</code>.</p>
     #   @return [String]
     class CertificateSettings < Struct.new(
+      nil,
       :type,
       :custom_certificate_arn,
       keyword_init: true
@@ -624,6 +634,7 @@ module Aws::Amplify
     #   <p>The cache configuration for the Amplify app.</p>
     #   @return [Types::CacheConfig]
     class CreateAppRequest < Struct.new(
+      nil,
       :name,
       :description,
       :repository,
@@ -656,6 +667,7 @@ module Aws::Amplify
     #               an Amplify app. </p>
     #   @return [Types::App]
     class CreateAppResult < Struct.new(
+      nil,
       :app,
       keyword_init: true
     )
@@ -676,6 +688,7 @@ module Aws::Amplify
     #   <p>The name of deployment artifacts. </p>
     #   @return [String]
     class CreateBackendEnvironmentRequest < Struct.new(
+      nil,
       :app_id,
       :environment_name,
       :stack_name,
@@ -690,6 +703,7 @@ module Aws::Amplify
     #   <p>Describes the backend environment for an Amplify app. </p>
     #   @return [Types::BackendEnvironment]
     class CreateBackendEnvironmentResult < Struct.new(
+      nil,
       :backend_environment,
       keyword_init: true
     )
@@ -784,6 +798,7 @@ module Aws::Amplify
     #                   Guide</i>.</p>
     #   @return [String]
     class CreateBranchRequest < Struct.new(
+      nil,
       :app_id,
       :branch_name,
       :description,
@@ -816,6 +831,7 @@ module Aws::Amplify
     #               branch. </p>
     #   @return [Types::Branch]
     class CreateBranchResult < Struct.new(
+      nil,
       :branch,
       keyword_init: true
     )
@@ -836,6 +852,7 @@ module Aws::Amplify
     #               the zipped files. </p>
     #   @return [Hash<String, String>]
     class CreateDeploymentRequest < Struct.new(
+      nil,
       :app_id,
       :branch_name,
       :file_map,
@@ -857,6 +874,7 @@ module Aws::Amplify
     #                   <code>zipUploadUrl</code> is returned. </p>
     #   @return [String]
     class CreateDeploymentResult < Struct.new(
+      nil,
       :job_id,
       :file_upload_urls,
       :zip_upload_url,
@@ -891,6 +909,7 @@ module Aws::Amplify
     #               for you.</p>
     #   @return [Types::CertificateSettings]
     class CreateDomainAssociationRequest < Struct.new(
+      nil,
       :app_id,
       :domain_name,
       :enable_auto_sub_domain,
@@ -909,6 +928,7 @@ module Aws::Amplify
     #               with an Amplify app. </p>
     #   @return [Types::DomainAssociation]
     class CreateDomainAssociationResult < Struct.new(
+      nil,
       :domain_association,
       keyword_init: true
     )
@@ -926,6 +946,7 @@ module Aws::Amplify
     #   <p>The description for a webhook. </p>
     #   @return [String]
     class CreateWebhookRequest < Struct.new(
+      nil,
       :app_id,
       :branch_name,
       :description,
@@ -939,6 +960,7 @@ module Aws::Amplify
     #   <p>Describes a webhook that connects repository events to an Amplify app. </p>
     #   @return [Types::Webhook]
     class CreateWebhookResult < Struct.new(
+      nil,
       :webhook,
       keyword_init: true
     )
@@ -982,6 +1004,7 @@ module Aws::Amplify
     #   <p>The condition for a URL rewrite or redirect rule, such as a country code. </p>
     #   @return [String]
     class CustomRule < Struct.new(
+      nil,
       :source,
       :target,
       :status,
@@ -996,6 +1019,7 @@ module Aws::Amplify
     #   <p>The unique ID for an Amplify app. </p>
     #   @return [String]
     class DeleteAppRequest < Struct.new(
+      nil,
       :app_id,
       keyword_init: true
     )
@@ -1008,6 +1032,7 @@ module Aws::Amplify
     #               an Amplify app. </p>
     #   @return [Types::App]
     class DeleteAppResult < Struct.new(
+      nil,
       :app,
       keyword_init: true
     )
@@ -1022,6 +1047,7 @@ module Aws::Amplify
     #   <p>The name of a backend environment of an Amplify app. </p>
     #   @return [String]
     class DeleteBackendEnvironmentRequest < Struct.new(
+      nil,
       :app_id,
       :environment_name,
       keyword_init: true
@@ -1034,6 +1060,7 @@ module Aws::Amplify
     #   <p>Describes the backend environment for an Amplify app. </p>
     #   @return [Types::BackendEnvironment]
     class DeleteBackendEnvironmentResult < Struct.new(
+      nil,
       :backend_environment,
       keyword_init: true
     )
@@ -1048,6 +1075,7 @@ module Aws::Amplify
     #   <p>The name of the branch. </p>
     #   @return [String]
     class DeleteBranchRequest < Struct.new(
+      nil,
       :app_id,
       :branch_name,
       keyword_init: true
@@ -1060,6 +1088,7 @@ module Aws::Amplify
     #   <p>The branch for an Amplify app, which maps to a third-party repository branch. </p>
     #   @return [Types::Branch]
     class DeleteBranchResult < Struct.new(
+      nil,
       :branch,
       keyword_init: true
     )
@@ -1074,6 +1103,7 @@ module Aws::Amplify
     #   <p> The name of the domain. </p>
     #   @return [String]
     class DeleteDomainAssociationRequest < Struct.new(
+      nil,
       :app_id,
       :domain_name,
       keyword_init: true
@@ -1085,6 +1115,7 @@ module Aws::Amplify
     #   <p>Describes the association between a custom domain and an Amplify app. </p>
     #   @return [Types::DomainAssociation]
     class DeleteDomainAssociationResult < Struct.new(
+      nil,
       :domain_association,
       keyword_init: true
     )
@@ -1102,6 +1133,7 @@ module Aws::Amplify
     #   <p> The unique ID for the job. </p>
     #   @return [String]
     class DeleteJobRequest < Struct.new(
+      nil,
       :app_id,
       :branch_name,
       :job_id,
@@ -1115,6 +1147,7 @@ module Aws::Amplify
     #   <p> Describes the summary for an execution job for an Amplify app. </p>
     #   @return [Types::JobSummary]
     class DeleteJobResult < Struct.new(
+      nil,
       :job_summary,
       keyword_init: true
     )
@@ -1126,6 +1159,7 @@ module Aws::Amplify
     #   <p>The unique ID for a webhook. </p>
     #   @return [String]
     class DeleteWebhookRequest < Struct.new(
+      nil,
       :webhook_id,
       keyword_init: true
     )
@@ -1137,6 +1171,7 @@ module Aws::Amplify
     #   <p>Describes a webhook that connects repository events to an Amplify app. </p>
     #   @return [Types::Webhook]
     class DeleteWebhookResult < Struct.new(
+      nil,
       :webhook,
       keyword_init: true
     )
@@ -1147,6 +1182,7 @@ module Aws::Amplify
     # @!attribute message
     #   @return [String]
     class DependentServiceFailureException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -1240,6 +1276,7 @@ module Aws::Amplify
     #               current active certificate.</p>
     #   @return [Types::Certificate]
     class DomainAssociation < Struct.new(
+      nil,
       :domain_association_arn,
       :domain_name,
       :enable_auto_sub_domain,
@@ -1272,6 +1309,7 @@ module Aws::Amplify
     #   <p>The unique ID for an Amplify app. </p>
     #   @return [String]
     class GenerateAccessLogsRequest < Struct.new(
+      nil,
       :start_time,
       :end_time,
       :domain_name,
@@ -1286,6 +1324,7 @@ module Aws::Amplify
     #   <p>The pre-signed URL for the requested access logs. </p>
     #   @return [String]
     class GenerateAccessLogsResult < Struct.new(
+      nil,
       :log_url,
       keyword_init: true
     )
@@ -1297,6 +1336,7 @@ module Aws::Amplify
     #   <p>The unique ID for an Amplify app. </p>
     #   @return [String]
     class GetAppRequest < Struct.new(
+      nil,
       :app_id,
       keyword_init: true
     )
@@ -1308,6 +1348,7 @@ module Aws::Amplify
     #               an Amplify app. </p>
     #   @return [Types::App]
     class GetAppResult < Struct.new(
+      nil,
       :app,
       keyword_init: true
     )
@@ -1319,6 +1360,7 @@ module Aws::Amplify
     #   <p>The unique ID for an artifact. </p>
     #   @return [String]
     class GetArtifactUrlRequest < Struct.new(
+      nil,
       :artifact_id,
       keyword_init: true
     )
@@ -1333,6 +1375,7 @@ module Aws::Amplify
     #   <p>The presigned URL for the artifact. </p>
     #   @return [String]
     class GetArtifactUrlResult < Struct.new(
+      nil,
       :artifact_id,
       :artifact_url,
       keyword_init: true
@@ -1348,6 +1391,7 @@ module Aws::Amplify
     #   <p>The name for the backend environment. </p>
     #   @return [String]
     class GetBackendEnvironmentRequest < Struct.new(
+      nil,
       :app_id,
       :environment_name,
       keyword_init: true
@@ -1360,6 +1404,7 @@ module Aws::Amplify
     #   <p>Describes the backend environment for an Amplify app. </p>
     #   @return [Types::BackendEnvironment]
     class GetBackendEnvironmentResult < Struct.new(
+      nil,
       :backend_environment,
       keyword_init: true
     )
@@ -1374,6 +1419,7 @@ module Aws::Amplify
     #   <p>The name of the branch. </p>
     #   @return [String]
     class GetBranchRequest < Struct.new(
+      nil,
       :app_id,
       :branch_name,
       keyword_init: true
@@ -1385,6 +1431,7 @@ module Aws::Amplify
     #   <p> The branch for an Amplify app, which maps to a third-party repository branch. </p>
     #   @return [Types::Branch]
     class GetBranchResult < Struct.new(
+      nil,
       :branch,
       keyword_init: true
     )
@@ -1399,6 +1446,7 @@ module Aws::Amplify
     #   <p> The name of the domain. </p>
     #   @return [String]
     class GetDomainAssociationRequest < Struct.new(
+      nil,
       :app_id,
       :domain_name,
       keyword_init: true
@@ -1412,6 +1460,7 @@ module Aws::Amplify
     #               with an Amplify app. </p>
     #   @return [Types::DomainAssociation]
     class GetDomainAssociationResult < Struct.new(
+      nil,
       :domain_association,
       keyword_init: true
     )
@@ -1429,6 +1478,7 @@ module Aws::Amplify
     #   <p>The unique ID for the job. </p>
     #   @return [String]
     class GetJobRequest < Struct.new(
+      nil,
       :app_id,
       :branch_name,
       :job_id,
@@ -1441,6 +1491,7 @@ module Aws::Amplify
     #   <p> Describes an execution job for an Amplify app. </p>
     #   @return [Types::Job]
     class GetJobResult < Struct.new(
+      nil,
       :job,
       keyword_init: true
     )
@@ -1452,6 +1503,7 @@ module Aws::Amplify
     #   <p>The unique ID for a webhook. </p>
     #   @return [String]
     class GetWebhookRequest < Struct.new(
+      nil,
       :webhook_id,
       keyword_init: true
     )
@@ -1463,6 +1515,7 @@ module Aws::Amplify
     #   <p>Describes the structure of a webhook. </p>
     #   @return [Types::Webhook]
     class GetWebhookResult < Struct.new(
+      nil,
       :webhook,
       keyword_init: true
     )
@@ -1473,6 +1526,7 @@ module Aws::Amplify
     # @!attribute message
     #   @return [String]
     class InternalFailureException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -1487,6 +1541,7 @@ module Aws::Amplify
     #   <p> The execution steps for an execution job, for an Amplify app. </p>
     #   @return [Array<Types::Step>]
     class Job < Struct.new(
+      nil,
       :summary,
       :steps,
       keyword_init: true
@@ -1551,6 +1606,7 @@ module Aws::Amplify
     #            </dl>
     #   @return [String]
     class JobConfig < Struct.new(
+      nil,
       :build_compute_type,
       keyword_init: true
     )
@@ -1604,6 +1660,7 @@ module Aws::Amplify
     #               no value is specified, the default is <code>ZIP</code>.</p>
     #   @return [String]
     class JobSummary < Struct.new(
+      nil,
       :job_arn,
       :job_id,
       :commit_id,
@@ -1624,6 +1681,7 @@ module Aws::Amplify
     # @!attribute message
     #   @return [String]
     class LimitExceededException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -1639,6 +1697,7 @@ module Aws::Amplify
     #   <p>The maximum number of records to list in a single response. </p>
     #   @return [Integer]
     class ListAppsRequest < Struct.new(
+      nil,
       :next_token,
       :max_results,
       keyword_init: true
@@ -1656,6 +1715,7 @@ module Aws::Amplify
     #           </p>
     #   @return [String]
     class ListAppsResult < Struct.new(
+      nil,
       :apps,
       :next_token,
       keyword_init: true
@@ -1682,6 +1742,7 @@ module Aws::Amplify
     #   <p>The maximum number of records to list in a single response. </p>
     #   @return [Integer]
     class ListArtifactsRequest < Struct.new(
+      nil,
       :app_id,
       :branch_name,
       :job_id,
@@ -1701,6 +1762,7 @@ module Aws::Amplify
     #               value in another request to retrieve more entries. </p>
     #   @return [String]
     class ListArtifactsResult < Struct.new(
+      nil,
       :artifacts,
       :next_token,
       keyword_init: true
@@ -1724,6 +1786,7 @@ module Aws::Amplify
     #   <p>The maximum number of records to list in a single response. </p>
     #   @return [Integer]
     class ListBackendEnvironmentsRequest < Struct.new(
+      nil,
       :app_id,
       :environment_name,
       :next_token,
@@ -1742,6 +1805,7 @@ module Aws::Amplify
     #               value in another request to retrieve more entries. </p>
     #   @return [String]
     class ListBackendEnvironmentsResult < Struct.new(
+      nil,
       :backend_environments,
       :next_token,
       keyword_init: true
@@ -1762,6 +1826,7 @@ module Aws::Amplify
     #   <p> The maximum number of records to list in a single response. </p>
     #   @return [Integer]
     class ListBranchesRequest < Struct.new(
+      nil,
       :app_id,
       :next_token,
       :max_results,
@@ -1779,6 +1844,7 @@ module Aws::Amplify
     #               value in another request to retrieve more entries. </p>
     #   @return [String]
     class ListBranchesResult < Struct.new(
+      nil,
       :branches,
       :next_token,
       keyword_init: true
@@ -1799,6 +1865,7 @@ module Aws::Amplify
     #   <p> The maximum number of records to list in a single response. </p>
     #   @return [Integer]
     class ListDomainAssociationsRequest < Struct.new(
+      nil,
       :app_id,
       :next_token,
       :max_results,
@@ -1816,6 +1883,7 @@ module Aws::Amplify
     #               value in another request to retrieve more entries. </p>
     #   @return [String]
     class ListDomainAssociationsResult < Struct.new(
+      nil,
       :domain_associations,
       :next_token,
       keyword_init: true
@@ -1839,6 +1907,7 @@ module Aws::Amplify
     #   <p>The maximum number of records to list in a single response. </p>
     #   @return [Integer]
     class ListJobsRequest < Struct.new(
+      nil,
       :app_id,
       :branch_name,
       :next_token,
@@ -1857,6 +1926,7 @@ module Aws::Amplify
     #               value in another request to retrieve more entries. </p>
     #   @return [String]
     class ListJobsResult < Struct.new(
+      nil,
       :job_summaries,
       :next_token,
       keyword_init: true
@@ -1869,6 +1939,7 @@ module Aws::Amplify
     #   <p>The Amazon Resource Name (ARN) to use to list tags. </p>
     #   @return [String]
     class ListTagsForResourceRequest < Struct.new(
+      nil,
       :resource_arn,
       keyword_init: true
     )
@@ -1880,6 +1951,7 @@ module Aws::Amplify
     #   <p>A list of tags for the specified The Amazon Resource Name (ARN). </p>
     #   @return [Hash<String, String>]
     class ListTagsForResourceResponse < Struct.new(
+      nil,
       :tags,
       keyword_init: true
     )
@@ -1899,6 +1971,7 @@ module Aws::Amplify
     #   <p>The maximum number of records to list in a single response. </p>
     #   @return [Integer]
     class ListWebhooksRequest < Struct.new(
+      nil,
       :app_id,
       :next_token,
       :max_results,
@@ -1916,6 +1989,7 @@ module Aws::Amplify
     #               its value in another request to retrieve more entries. </p>
     #   @return [String]
     class ListWebhooksResult < Struct.new(
+      nil,
       :webhooks,
       :next_token,
       keyword_init: true
@@ -1927,6 +2001,7 @@ module Aws::Amplify
     # @!attribute message
     #   @return [String]
     class NotFoundException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -1947,6 +2022,7 @@ module Aws::Amplify
     #   <p>The branch name for the production branch. </p>
     #   @return [String]
     class ProductionBranch < Struct.new(
+      nil,
       :last_deploy_time,
       :status,
       :thumbnail_url,
@@ -1962,6 +2038,7 @@ module Aws::Amplify
     # @!attribute message
     #   @return [String]
     class ResourceNotFoundException < Struct.new(
+      nil,
       :code,
       :message,
       keyword_init: true
@@ -1993,6 +2070,7 @@ module Aws::Amplify
     #               no value is specified, the default is <code>ZIP</code>.</p>
     #   @return [String]
     class StartDeploymentRequest < Struct.new(
+      nil,
       :app_id,
       :branch_name,
       :job_id,
@@ -2008,6 +2086,7 @@ module Aws::Amplify
     #   <p>The summary for the job. </p>
     #   @return [Types::JobSummary]
     class StartDeploymentResult < Struct.new(
+      nil,
       :job_summary,
       keyword_init: true
     )
@@ -2045,6 +2124,7 @@ module Aws::Amplify
     #   <p> The commit date and time for the job. </p>
     #   @return [Time]
     class StartJobRequest < Struct.new(
+      nil,
       :app_id,
       :branch_name,
       :job_id,
@@ -2063,6 +2143,7 @@ module Aws::Amplify
     #   <p> The summary for the job. </p>
     #   @return [Types::JobSummary]
     class StartJobResult < Struct.new(
+      nil,
       :job_summary,
       keyword_init: true
     )
@@ -2105,6 +2186,7 @@ module Aws::Amplify
     #           </p>
     #   @return [String]
     class Step < Struct.new(
+      nil,
       :step_name,
       :start_time,
       :status,
@@ -2132,6 +2214,7 @@ module Aws::Amplify
     #   <p> The unique id for the job. </p>
     #   @return [String]
     class StopJobRequest < Struct.new(
+      nil,
       :app_id,
       :branch_name,
       :job_id,
@@ -2145,6 +2228,7 @@ module Aws::Amplify
     #   <p> The summary for the job. </p>
     #   @return [Types::JobSummary]
     class StopJobResult < Struct.new(
+      nil,
       :job_summary,
       keyword_init: true
     )
@@ -2162,6 +2246,7 @@ module Aws::Amplify
     #   <p> The DNS record for the subdomain. </p>
     #   @return [String]
     class SubDomain < Struct.new(
+      nil,
       :sub_domain_setting,
       :verified,
       :dns_record,
@@ -2178,6 +2263,7 @@ module Aws::Amplify
     #   <p> The branch name setting for the subdomain. </p>
     #   @return [String]
     class SubDomainSetting < Struct.new(
+      nil,
       :prefix,
       :branch_name,
       keyword_init: true
@@ -2193,6 +2279,7 @@ module Aws::Amplify
     #   <p>The tags used to tag the resource. </p>
     #   @return [Hash<String, String>]
     class TagResourceRequest < Struct.new(
+      nil,
       :resource_arn,
       :tags,
       keyword_init: true
@@ -2202,6 +2289,7 @@ module Aws::Amplify
 
     # <p>The response for the tag resource request. </p>
     class TagResourceResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -2211,6 +2299,7 @@ module Aws::Amplify
     # @!attribute message
     #   @return [String]
     class UnauthorizedException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -2225,6 +2314,7 @@ module Aws::Amplify
     #   <p>The tag keys to use to untag a resource. </p>
     #   @return [Array<String>]
     class UntagResourceRequest < Struct.new(
+      nil,
       :resource_arn,
       :tag_keys,
       keyword_init: true
@@ -2234,6 +2324,7 @@ module Aws::Amplify
 
     # <p>The response for the untag resource request. </p>
     class UntagResourceResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -2341,6 +2432,7 @@ module Aws::Amplify
     #   <p>The cache configuration for the Amplify app.</p>
     #   @return [Types::CacheConfig]
     class UpdateAppRequest < Struct.new(
+      nil,
       :app_id,
       :name,
       :description,
@@ -2373,6 +2465,7 @@ module Aws::Amplify
     #   <p>Represents the updated Amplify app. </p>
     #   @return [Types::App]
     class UpdateAppResult < Struct.new(
+      nil,
       :app,
       keyword_init: true
     )
@@ -2464,6 +2557,7 @@ module Aws::Amplify
     #                   Guide</i>.</p>
     #   @return [String]
     class UpdateBranchRequest < Struct.new(
+      nil,
       :app_id,
       :branch_name,
       :description,
@@ -2494,6 +2588,7 @@ module Aws::Amplify
     #   <p> The branch for an Amplify app, which maps to a third-party repository branch. </p>
     #   @return [Types::Branch]
     class UpdateBranchResult < Struct.new(
+      nil,
       :branch,
       keyword_init: true
     )
@@ -2524,6 +2619,7 @@ module Aws::Amplify
     #   <p>The type of SSL/TLS certificate to use for your custom domain.</p>
     #   @return [Types::CertificateSettings]
     class UpdateDomainAssociationRequest < Struct.new(
+      nil,
       :app_id,
       :domain_name,
       :enable_auto_sub_domain,
@@ -2542,6 +2638,7 @@ module Aws::Amplify
     #           </p>
     #   @return [Types::DomainAssociation]
     class UpdateDomainAssociationResult < Struct.new(
+      nil,
       :domain_association,
       keyword_init: true
     )
@@ -2559,6 +2656,7 @@ module Aws::Amplify
     #   <p>The description for a webhook. </p>
     #   @return [String]
     class UpdateWebhookRequest < Struct.new(
+      nil,
       :webhook_id,
       :branch_name,
       :description,
@@ -2572,6 +2670,7 @@ module Aws::Amplify
     #   <p>Describes a webhook that connects repository events to an Amplify app. </p>
     #   @return [Types::Webhook]
     class UpdateWebhookResult < Struct.new(
+      nil,
       :webhook,
       keyword_init: true
     )
@@ -2593,6 +2692,7 @@ module Aws::Amplify
     #   <p>The reason for the current status of the Firewall configuration.</p>
     #   @return [String]
     class WafConfiguration < Struct.new(
+      nil,
       :web_acl_arn,
       :waf_status,
       :status_reason,
@@ -2629,6 +2729,7 @@ module Aws::Amplify
     #               repository.</p>
     #   @return [Time]
     class Webhook < Struct.new(
+      nil,
       :webhook_arn,
       :webhook_id,
       :webhook_url,

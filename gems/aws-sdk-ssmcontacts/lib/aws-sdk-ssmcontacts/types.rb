@@ -32,6 +32,7 @@ module Aws::SSMContacts
     #            Incident Manager to accept any value entered for the <code>AcceptCode</code>.</p>
     #   @return [String]
     class AcceptPageRequest < Struct.new(
+      nil,
       :page_id,
       :contact_channel_id,
       :accept_type,
@@ -44,6 +45,7 @@ module Aws::SSMContacts
     end
 
     class AcceptPageResult < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -53,6 +55,7 @@ module Aws::SSMContacts
     # @!attribute message
     #   @return [String]
     class AccessDeniedException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -66,6 +69,7 @@ module Aws::SSMContacts
     #   <p>The code sent to the contact channel when it was created in the contact.</p>
     #   @return [String]
     class ActivateContactChannelRequest < Struct.new(
+      nil,
       :contact_channel_id,
       :activation_code,
       keyword_init: true
@@ -74,6 +78,7 @@ module Aws::SSMContacts
     end
 
     class ActivateContactChannelResult < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -89,6 +94,7 @@ module Aws::SSMContacts
     #            initially failed.</p>
     #   @return [Integer]
     class ChannelTargetInfo < Struct.new(
+      nil,
       :contact_channel_id,
       :retry_interval_in_minutes,
       keyword_init: true
@@ -109,6 +115,7 @@ module Aws::SSMContacts
     #   List of dependent entities containing information on relation type and resourceArns linked to the resource in use
     #   @return [Array<Types::DependentEntity>]
     class ConflictException < Struct.new(
+      nil,
       :message,
       :resource_id,
       :resource_type,
@@ -147,6 +154,7 @@ module Aws::SSMContacts
     #            </ul>
     #   @return [String]
     class Contact < Struct.new(
+      nil,
       :contact_arn,
       :alias,
       :display_name,
@@ -188,6 +196,7 @@ module Aws::SSMContacts
     #            contact channel isn't activated, Incident Manager can't engage the contact through it.</p>
     #   @return [String]
     class ContactChannel < Struct.new(
+      nil,
       :contact_channel_arn,
       :contact_arn,
       :name,
@@ -216,6 +225,7 @@ module Aws::SSMContacts
     #            </ul>
     #   @return [String]
     class ContactChannelAddress < Struct.new(
+      nil,
       :simple_address,
       keyword_init: true
     )
@@ -231,6 +241,7 @@ module Aws::SSMContacts
     #            stages in the plan.</p>
     #   @return [Boolean]
     class ContactTargetInfo < Struct.new(
+      nil,
       :contact_id,
       :is_essential,
       keyword_init: true
@@ -246,6 +257,7 @@ module Aws::SSMContacts
     #   <p>Information about when the on-call rotation shift ends.</p>
     #   @return [Types::HandOffTime]
     class CoverageTime < Struct.new(
+      nil,
       :start,
       :end,
       keyword_init: true
@@ -305,6 +317,7 @@ module Aws::SSMContacts
     #            details.</p>
     #   @return [String]
     class CreateContactChannelRequest < Struct.new(
+      nil,
       :contact_id,
       :name,
       :type,
@@ -320,6 +333,7 @@ module Aws::SSMContacts
     #   <p>The Amazon Resource Name (ARN) of the contact channel.</p>
     #   @return [String]
     class CreateContactChannelResult < Struct.new(
+      nil,
       :contact_channel_arn,
       keyword_init: true
     )
@@ -363,6 +377,7 @@ module Aws::SSMContacts
     #            details.</p>
     #   @return [String]
     class CreateContactRequest < Struct.new(
+      nil,
       :alias,
       :display_name,
       :type,
@@ -378,6 +393,7 @@ module Aws::SSMContacts
     #   <p>The Amazon Resource Name (ARN) of the created contact or escalation plan.</p>
     #   @return [String]
     class CreateContactResult < Struct.new(
+      nil,
       :contact_arn,
       keyword_init: true
     )
@@ -404,6 +420,7 @@ module Aws::SSMContacts
     #            details.</p>
     #   @return [String]
     class CreateRotationOverrideRequest < Struct.new(
+      nil,
       :rotation_id,
       :new_contact_ids,
       :start_time,
@@ -418,6 +435,7 @@ module Aws::SSMContacts
     #   <p>The Amazon Resource Name (ARN) of the created rotation override.</p>
     #   @return [String]
     class CreateRotationOverrideResult < Struct.new(
+      nil,
       :rotation_override_id,
       keyword_init: true
     )
@@ -465,6 +483,7 @@ module Aws::SSMContacts
     #            details.</p>
     #   @return [String]
     class CreateRotationRequest < Struct.new(
+      nil,
       :name,
       :contact_ids,
       :start_time,
@@ -481,6 +500,7 @@ module Aws::SSMContacts
     #   <p>The Amazon Resource Name (ARN) of the created rotation.</p>
     #   @return [String]
     class CreateRotationResult < Struct.new(
+      nil,
       :rotation_arn,
       keyword_init: true
     )
@@ -491,6 +511,7 @@ module Aws::SSMContacts
     # @!attribute message
     #   @return [String]
     class DataEncryptionException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -501,6 +522,7 @@ module Aws::SSMContacts
     #   <p>The Amazon Resource Name (ARN) of the contact channel you're deactivating.</p>
     #   @return [String]
     class DeactivateContactChannelRequest < Struct.new(
+      nil,
       :contact_channel_id,
       keyword_init: true
     )
@@ -508,6 +530,7 @@ module Aws::SSMContacts
     end
 
     class DeactivateContactChannelResult < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -517,6 +540,7 @@ module Aws::SSMContacts
     #   <p>The Amazon Resource Name (ARN) of the contact channel.</p>
     #   @return [String]
     class DeleteContactChannelRequest < Struct.new(
+      nil,
       :contact_channel_id,
       keyword_init: true
     )
@@ -524,6 +548,7 @@ module Aws::SSMContacts
     end
 
     class DeleteContactChannelResult < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -533,6 +558,7 @@ module Aws::SSMContacts
     #   <p>The Amazon Resource Name (ARN) of the contact that you're deleting.</p>
     #   @return [String]
     class DeleteContactRequest < Struct.new(
+      nil,
       :contact_id,
       keyword_init: true
     )
@@ -540,6 +566,7 @@ module Aws::SSMContacts
     end
 
     class DeleteContactResult < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -552,6 +579,7 @@ module Aws::SSMContacts
     #   <p>The Amazon Resource Name (ARN) of the on-call rotation override to delete.</p>
     #   @return [String]
     class DeleteRotationOverrideRequest < Struct.new(
+      nil,
       :rotation_id,
       :rotation_override_id,
       keyword_init: true
@@ -560,6 +588,7 @@ module Aws::SSMContacts
     end
 
     class DeleteRotationOverrideResult < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -569,6 +598,7 @@ module Aws::SSMContacts
     #   <p>The Amazon Resource Name (ARN) of the on-call rotation to delete.</p>
     #   @return [String]
     class DeleteRotationRequest < Struct.new(
+      nil,
       :rotation_id,
       keyword_init: true
     )
@@ -576,6 +606,7 @@ module Aws::SSMContacts
     end
 
     class DeleteRotationResult < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -592,6 +623,7 @@ module Aws::SSMContacts
     #   <p>The Amazon Resource Names (ARNs) of the dependent resources.</p>
     #   @return [Array<String>]
     class DependentEntity < Struct.new(
+      nil,
       :relation_type,
       :dependent_resource_ids,
       keyword_init: true
@@ -603,6 +635,7 @@ module Aws::SSMContacts
     #   <p>The Amazon Resource Name (ARN) of the engagement you want the details of.</p>
     #   @return [String]
     class DescribeEngagementRequest < Struct.new(
+      nil,
       :engagement_id,
       keyword_init: true
     )
@@ -644,6 +677,7 @@ module Aws::SSMContacts
     #   <p>The time that the engagement ended.</p>
     #   @return [Time]
     class DescribeEngagementResult < Struct.new(
+      nil,
       :contact_arn,
       :engagement_arn,
       :sender,
@@ -663,6 +697,7 @@ module Aws::SSMContacts
     #   <p>The ID of the engagement to a contact channel.</p>
     #   @return [String]
     class DescribePageRequest < Struct.new(
+      nil,
       :page_id,
       keyword_init: true
     )
@@ -710,6 +745,7 @@ module Aws::SSMContacts
     #   <p>The time that the contact channel received the engagement.</p>
     #   @return [Time]
     class DescribePageResult < Struct.new(
+      nil,
       :page_arn,
       :engagement_arn,
       :contact_arn,
@@ -748,6 +784,7 @@ module Aws::SSMContacts
     #   <p>The time that the engagement ended.</p>
     #   @return [Time]
     class Engagement < Struct.new(
+      nil,
       :engagement_arn,
       :contact_arn,
       :sender,
@@ -763,6 +800,7 @@ module Aws::SSMContacts
     #   <p>The Amazon Resource Name (ARN) of the contact channel you want information about.</p>
     #   @return [String]
     class GetContactChannelRequest < Struct.new(
+      nil,
       :contact_channel_id,
       keyword_init: true
     )
@@ -789,6 +827,7 @@ module Aws::SSMContacts
     #   <p>A Boolean value indicating if the contact channel has been activated or not.</p>
     #   @return [String]
     class GetContactChannelResult < Struct.new(
+      nil,
       :contact_arn,
       :contact_channel_arn,
       :name,
@@ -804,6 +843,7 @@ module Aws::SSMContacts
     #   <p>The Amazon Resource Name (ARN) of the contact or escalation plan.</p>
     #   @return [String]
     class GetContactPolicyRequest < Struct.new(
+      nil,
       :contact_arn,
       keyword_init: true
     )
@@ -817,6 +857,7 @@ module Aws::SSMContacts
     #   <p>Details about the resource policy attached to the contact or escalation plan.</p>
     #   @return [String]
     class GetContactPolicyResult < Struct.new(
+      nil,
       :contact_arn,
       :policy,
       keyword_init: true
@@ -828,6 +869,7 @@ module Aws::SSMContacts
     #   <p>The Amazon Resource Name (ARN) of the contact or escalation plan.</p>
     #   @return [String]
     class GetContactRequest < Struct.new(
+      nil,
       :contact_id,
       keyword_init: true
     )
@@ -852,6 +894,7 @@ module Aws::SSMContacts
     #            engagement plan.</p>
     #   @return [Types::Plan]
     class GetContactResult < Struct.new(
+      nil,
       :contact_arn,
       :alias,
       :display_name,
@@ -871,6 +914,7 @@ module Aws::SSMContacts
     #            about.</p>
     #   @return [String]
     class GetRotationOverrideRequest < Struct.new(
+      nil,
       :rotation_id,
       :rotation_override_id,
       keyword_init: true
@@ -898,6 +942,7 @@ module Aws::SSMContacts
     #   <p>The date and time when the override was created.</p>
     #   @return [Time]
     class GetRotationOverrideResult < Struct.new(
+      nil,
       :rotation_override_id,
       :rotation_arn,
       :new_contact_ids,
@@ -914,6 +959,7 @@ module Aws::SSMContacts
     #            about.</p>
     #   @return [String]
     class GetRotationRequest < Struct.new(
+      nil,
       :rotation_id,
       keyword_init: true
     )
@@ -942,6 +988,7 @@ module Aws::SSMContacts
     #            order.</p>
     #   @return [Types::RecurrenceSettings]
     class GetRotationResult < Struct.new(
+      nil,
       :rotation_arn,
       :name,
       :contact_ids,
@@ -961,6 +1008,7 @@ module Aws::SSMContacts
     #   <p>The minute when an on-call rotation shift begins or ends.</p>
     #   @return [Integer]
     class HandOffTime < Struct.new(
+      nil,
       :hour_of_day,
       :minute_of_hour,
       keyword_init: true
@@ -981,6 +1029,7 @@ module Aws::SSMContacts
     #   Advice to clients on when the call can be safely retried
     #   @return [Integer]
     class InternalServerException < Struct.new(
+      nil,
       :message,
       :retry_after_seconds,
       keyword_init: true
@@ -1003,6 +1052,7 @@ module Aws::SSMContacts
     #   <p>The maximum number of contact channels per page.</p>
     #   @return [Integer]
     class ListContactChannelsRequest < Struct.new(
+      nil,
       :contact_id,
       :next_token,
       :max_results,
@@ -1018,6 +1068,7 @@ module Aws::SSMContacts
     #   <p>A list of contact channels related to the specified contact.</p>
     #   @return [Array<Types::ContactChannel>]
     class ListContactChannelsResult < Struct.new(
+      nil,
       :next_token,
       :contact_channels,
       keyword_init: true
@@ -1038,6 +1089,7 @@ module Aws::SSMContacts
     #   <p>The type of contact.</p>
     #   @return [String]
     class ListContactsRequest < Struct.new(
+      nil,
       :next_token,
       :max_results,
       :alias_prefix,
@@ -1054,6 +1106,7 @@ module Aws::SSMContacts
     #   <p>A list of the contacts and escalation plans in your Incident Manager account.</p>
     #   @return [Array<Types::Contact>]
     class ListContactsResult < Struct.new(
+      nil,
       :next_token,
       :contacts,
       keyword_init: true
@@ -1074,6 +1127,7 @@ module Aws::SSMContacts
     #   <p>The time range to lists engagements for an incident.</p>
     #   @return [Types::TimeRange]
     class ListEngagementsRequest < Struct.new(
+      nil,
       :next_token,
       :max_results,
       :incident_id,
@@ -1091,6 +1145,7 @@ module Aws::SSMContacts
     #            incident.</p>
     #   @return [Array<Types::Engagement>]
     class ListEngagementsResult < Struct.new(
+      nil,
       :next_token,
       :engagements,
       keyword_init: true
@@ -1108,6 +1163,7 @@ module Aws::SSMContacts
     #   <p>The maximum number of acknowledgements per page of results.</p>
     #   @return [Integer]
     class ListPageReceiptsRequest < Struct.new(
+      nil,
       :page_id,
       :next_token,
       :max_results,
@@ -1123,6 +1179,7 @@ module Aws::SSMContacts
     #   <p>A list of each acknowledgement.</p>
     #   @return [Array<Types::Receipt>]
     class ListPageReceiptsResult < Struct.new(
+      nil,
       :next_token,
       :receipts,
       keyword_init: true
@@ -1137,6 +1194,7 @@ module Aws::SSMContacts
     #   <p>The Amazon Resource Name (ARN) of the contact engaged for the incident.</p>
     #   @return [String]
     class ListPageResolutionsRequest < Struct.new(
+      nil,
       :next_token,
       :page_id,
       keyword_init: true
@@ -1152,6 +1210,7 @@ module Aws::SSMContacts
     #   <p>Information about the resolution for an engagement.</p>
     #   @return [Array<Types::ResolutionContact>]
     class ListPageResolutionsResult < Struct.new(
+      nil,
       :next_token,
       :page_resolutions,
       keyword_init: true
@@ -1170,6 +1229,7 @@ module Aws::SSMContacts
     #         </p>
     #   @return [Integer]
     class ListPagesByContactRequest < Struct.new(
+      nil,
       :contact_id,
       :next_token,
       :max_results,
@@ -1185,6 +1245,7 @@ module Aws::SSMContacts
     #   <p>The list of engagements to a contact's contact channel.</p>
     #   @return [Array<Types::Page>]
     class ListPagesByContactResult < Struct.new(
+      nil,
       :next_token,
       :pages,
       keyword_init: true
@@ -1203,6 +1264,7 @@ module Aws::SSMContacts
     #            results.</p>
     #   @return [Integer]
     class ListPagesByEngagementRequest < Struct.new(
+      nil,
       :engagement_id,
       :next_token,
       :max_results,
@@ -1218,6 +1280,7 @@ module Aws::SSMContacts
     #   <p>The list of engagements to contact channels.</p>
     #   @return [Array<Types::Page>]
     class ListPagesByEngagementResult < Struct.new(
+      nil,
       :next_token,
       :pages,
       keyword_init: true
@@ -1259,6 +1322,7 @@ module Aws::SSMContacts
     #            can be specified in a subsequent call to get the next set of results.</p>
     #   @return [Integer]
     class ListPreviewRotationShiftsRequest < Struct.new(
+      nil,
       :rotation_start_time,
       :start_time,
       :end_time,
@@ -1281,6 +1345,7 @@ module Aws::SSMContacts
     #            results.</p>
     #   @return [String]
     class ListPreviewRotationShiftsResult < Struct.new(
+      nil,
       :rotation_shifts,
       :next_token,
       keyword_init: true
@@ -1305,6 +1370,7 @@ module Aws::SSMContacts
     #            you can specify in a subsequent call to get the next set of results.</p>
     #   @return [Integer]
     class ListRotationOverridesRequest < Struct.new(
+      nil,
       :rotation_id,
       :start_time,
       :end_time,
@@ -1323,6 +1389,7 @@ module Aws::SSMContacts
     #            results.</p>
     #   @return [String]
     class ListRotationOverridesResult < Struct.new(
+      nil,
       :rotation_overrides,
       :next_token,
       keyword_init: true
@@ -1348,6 +1415,7 @@ module Aws::SSMContacts
     #            you can specify in a subsequent call to get the next set of results.</p>
     #   @return [Integer]
     class ListRotationShiftsRequest < Struct.new(
+      nil,
       :rotation_id,
       :start_time,
       :end_time,
@@ -1366,6 +1434,7 @@ module Aws::SSMContacts
     #            results.</p>
     #   @return [String]
     class ListRotationShiftsResult < Struct.new(
+      nil,
       :rotation_shifts,
       :next_token,
       keyword_init: true
@@ -1386,6 +1455,7 @@ module Aws::SSMContacts
     #            you can specify in a subsequent call to get the next set of results.</p>
     #   @return [Integer]
     class ListRotationsRequest < Struct.new(
+      nil,
       :rotation_name_prefix,
       :next_token,
       :max_results,
@@ -1402,6 +1472,7 @@ module Aws::SSMContacts
     #   <p>Information about rotations that meet the filter criteria.</p>
     #   @return [Array<Types::Rotation>]
     class ListRotationsResult < Struct.new(
+      nil,
       :next_token,
       :rotations,
       keyword_init: true
@@ -1414,6 +1485,7 @@ module Aws::SSMContacts
     #            schedule.</p>
     #   @return [String]
     class ListTagsForResourceRequest < Struct.new(
+      nil,
       :resource_arn,
       keyword_init: true
     )
@@ -1424,6 +1496,7 @@ module Aws::SSMContacts
     #   <p>The tags related to the contact or escalation plan.</p>
     #   @return [Array<Types::Tag>]
     class ListTagsForResourceResult < Struct.new(
+      nil,
       :tags,
       keyword_init: true
     )
@@ -1438,6 +1511,7 @@ module Aws::SSMContacts
     #   <p>The time of day when a monthly recurring on-call shift rotation begins.</p>
     #   @return [Types::HandOffTime]
     class MonthlySetting < Struct.new(
+      nil,
       :day_of_month,
       :hand_off_time,
       keyword_init: true
@@ -1471,6 +1545,7 @@ module Aws::SSMContacts
     #   <p>The time that the contact channel acknowledged engagement.</p>
     #   @return [Time]
     class Page < Struct.new(
+      nil,
       :page_arn,
       :engagement_arn,
       :contact_arn,
@@ -1496,6 +1571,7 @@ module Aws::SSMContacts
     #         </p>
     #   @return [Array<String>]
     class Plan < Struct.new(
+      nil,
       :stages,
       :rotation_ids,
       keyword_init: true
@@ -1514,6 +1590,7 @@ module Aws::SSMContacts
     #   <p>Information about the time a rotation override would end.</p>
     #   @return [Time]
     class PreviewOverride < Struct.new(
+      nil,
       :new_members,
       :start_time,
       :end_time,
@@ -1529,6 +1606,7 @@ module Aws::SSMContacts
     #   <p>Details of the resource policy.</p>
     #   @return [String]
     class PutContactPolicyRequest < Struct.new(
+      nil,
       :contact_arn,
       :policy,
       keyword_init: true
@@ -1537,6 +1615,7 @@ module Aws::SSMContacts
     end
 
     class PutContactPolicyResult < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1558,6 +1637,7 @@ module Aws::SSMContacts
     #            <code>READ</code>.</p>
     #   @return [Time]
     class Receipt < Struct.new(
+      nil,
       :contact_channel_arn,
       :receipt_type,
       :receipt_info,
@@ -1591,6 +1671,7 @@ module Aws::SSMContacts
     #   <p>The number of days, weeks, or months a single rotation lasts.</p>
     #   @return [Integer]
     class RecurrenceSettings < Struct.new(
+      nil,
       :monthly_settings,
       :weekly_settings,
       :daily_settings,
@@ -1619,6 +1700,7 @@ module Aws::SSMContacts
     #   <p>The stage in the escalation plan that resolves to this contact.</p>
     #   @return [Integer]
     class ResolutionContact < Struct.new(
+      nil,
       :contact_arn,
       :type,
       :stage_index,
@@ -1642,6 +1724,7 @@ module Aws::SSMContacts
     #   Hypothetical resource type that was not found
     #   @return [String]
     class ResourceNotFoundException < Struct.new(
+      nil,
       :message,
       :resource_id,
       :resource_type,
@@ -1673,6 +1756,7 @@ module Aws::SSMContacts
     #            lasts.</p>
     #   @return [Types::RecurrenceSettings]
     class Rotation < Struct.new(
+      nil,
       :rotation_arn,
       :name,
       :contact_ids,
@@ -1702,6 +1786,7 @@ module Aws::SSMContacts
     #   <p>The time a rotation override was created.</p>
     #   @return [Time]
     class RotationOverride < Struct.new(
+      nil,
       :rotation_override_id,
       :new_contact_ids,
       :start_time,
@@ -1730,6 +1815,7 @@ module Aws::SSMContacts
     #   <p>Additional information about an on-call rotation shift.</p>
     #   @return [Types::ShiftDetails]
     class RotationShift < Struct.new(
+      nil,
       :contact_ids,
       :start_time,
       :end_time,
@@ -1744,6 +1830,7 @@ module Aws::SSMContacts
     #   <p>The Amazon Resource Name (ARN) of the contact channel.</p>
     #   @return [String]
     class SendActivationCodeRequest < Struct.new(
+      nil,
       :contact_channel_id,
       keyword_init: true
     )
@@ -1751,6 +1838,7 @@ module Aws::SSMContacts
     end
 
     class SendActivationCodeResult < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1772,6 +1860,7 @@ module Aws::SSMContacts
     #   Service Quotas requirement to identify originating quota
     #   @return [String]
     class ServiceQuotaExceededException < Struct.new(
+      nil,
       :message,
       :resource_id,
       :resource_type,
@@ -1789,6 +1878,7 @@ module Aws::SSMContacts
     #            shift.</p>
     #   @return [Array<String>]
     class ShiftDetails < Struct.new(
+      nil,
       :overridden_contact_ids,
       keyword_init: true
     )
@@ -1806,6 +1896,7 @@ module Aws::SSMContacts
     #            engaging.</p>
     #   @return [Array<Types::Target>]
     class Stage < Struct.new(
+      nil,
       :duration_in_minutes,
       :targets,
       keyword_init: true
@@ -1843,6 +1934,7 @@ module Aws::SSMContacts
     #            details.</p>
     #   @return [String]
     class StartEngagementRequest < Struct.new(
+      nil,
       :contact_id,
       :sender,
       :subject,
@@ -1860,6 +1952,7 @@ module Aws::SSMContacts
     #   <p>The ARN of the engagement.</p>
     #   @return [String]
     class StartEngagementResult < Struct.new(
+      nil,
       :engagement_arn,
       keyword_init: true
     )
@@ -1873,6 +1966,7 @@ module Aws::SSMContacts
     #   <p>The reason that you're stopping the engagement.</p>
     #   @return [String]
     class StopEngagementRequest < Struct.new(
+      nil,
       :engagement_id,
       :reason,
       keyword_init: true
@@ -1881,6 +1975,7 @@ module Aws::SSMContacts
     end
 
     class StopEngagementResult < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1894,6 +1989,7 @@ module Aws::SSMContacts
     #   <p>Value of the tag.</p>
     #   @return [String]
     class Tag < Struct.new(
+      nil,
       :key,
       :value,
       keyword_init: true
@@ -1908,6 +2004,7 @@ module Aws::SSMContacts
     #   <p>A list of tags that you are adding to the contact or escalation plan.</p>
     #   @return [Array<Types::Tag>]
     class TagResourceRequest < Struct.new(
+      nil,
       :resource_arn,
       :tags,
       keyword_init: true
@@ -1916,6 +2013,7 @@ module Aws::SSMContacts
     end
 
     class TagResourceResult < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1929,6 +2027,7 @@ module Aws::SSMContacts
     #   <p>Information about the contact that Incident Manager engages.</p>
     #   @return [Types::ContactTargetInfo]
     class Target < Struct.new(
+      nil,
       :channel_target_info,
       :contact_target_info,
       keyword_init: true
@@ -1949,6 +2048,7 @@ module Aws::SSMContacts
     #   Advice to clients on when the call can be safely retried
     #   @return [Integer]
     class ThrottlingException < Struct.new(
+      nil,
       :message,
       :quota_code,
       :service_code,
@@ -1971,6 +2071,7 @@ module Aws::SSMContacts
     #   <p>The end of the time range.</p>
     #   @return [Time]
     class TimeRange < Struct.new(
+      nil,
       :start_time,
       :end_time,
       keyword_init: true
@@ -1985,6 +2086,7 @@ module Aws::SSMContacts
     #   <p>The key of the tag that you want to remove.</p>
     #   @return [Array<String>]
     class UntagResourceRequest < Struct.new(
+      nil,
       :resource_arn,
       :tag_keys,
       keyword_init: true
@@ -1993,6 +2095,7 @@ module Aws::SSMContacts
     end
 
     class UntagResourceResult < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -2008,6 +2111,7 @@ module Aws::SSMContacts
     #   <p>The details that Incident Manager uses when trying to engage the contact channel.</p>
     #   @return [Types::ContactChannelAddress]
     class UpdateContactChannelRequest < Struct.new(
+      nil,
       :contact_channel_id,
       :name,
       :delivery_address,
@@ -2017,6 +2121,7 @@ module Aws::SSMContacts
     end
 
     class UpdateContactChannelResult < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -2033,6 +2138,7 @@ module Aws::SSMContacts
     #            channels. An escalation plan uses these stages to contact specified contacts.</p>
     #   @return [Types::Plan]
     class UpdateContactRequest < Struct.new(
+      nil,
       :contact_id,
       :display_name,
       :plan,
@@ -2042,6 +2148,7 @@ module Aws::SSMContacts
     end
 
     class UpdateContactResult < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -2078,6 +2185,7 @@ module Aws::SSMContacts
     #            of the shift order.</p>
     #   @return [Types::RecurrenceSettings]
     class UpdateRotationRequest < Struct.new(
+      nil,
       :rotation_id,
       :contact_ids,
       :start_time,
@@ -2089,6 +2197,7 @@ module Aws::SSMContacts
     end
 
     class UpdateRotationResult < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -2105,6 +2214,7 @@ module Aws::SSMContacts
     #   The fields that caused the error
     #   @return [Array<Types::ValidationExceptionField>]
     class ValidationException < Struct.new(
+      nil,
       :message,
       :reason,
       :fields,
@@ -2121,6 +2231,7 @@ module Aws::SSMContacts
     #   <p>Information about what caused the field to cause an exception.</p>
     #   @return [String]
     class ValidationExceptionField < Struct.new(
+      nil,
       :name,
       :message,
       keyword_init: true
@@ -2136,6 +2247,7 @@ module Aws::SSMContacts
     #   <p>The time of day when a weekly recurring on-call shift rotation begins.</p>
     #   @return [Types::HandOffTime]
     class WeeklySetting < Struct.new(
+      nil,
       :day_of_week,
       :hand_off_time,
       keyword_init: true

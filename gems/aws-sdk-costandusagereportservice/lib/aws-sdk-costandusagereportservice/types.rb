@@ -11,6 +11,7 @@ module Aws::CostandUsageReportService
     #   <p>The name of the report that you want to delete. The name must be unique, is case sensitive, and can't include spaces.</p>
     #   @return [String]
     class DeleteReportDefinitionRequest < Struct.new(
+      nil,
       :report_name,
       keyword_init: true
     )
@@ -22,6 +23,7 @@ module Aws::CostandUsageReportService
     #   <p>Whether the deletion was successful or not.</p>
     #   @return [String]
     class DeleteReportDefinitionResponse < Struct.new(
+      nil,
       :response_message,
       keyword_init: true
     )
@@ -36,6 +38,7 @@ module Aws::CostandUsageReportService
     #   <p>A generic string.</p>
     #   @return [String]
     class DescribeReportDefinitionsRequest < Struct.new(
+      nil,
       :max_results,
       :next_token,
       keyword_init: true
@@ -51,6 +54,7 @@ module Aws::CostandUsageReportService
     #   <p>A generic string.</p>
     #   @return [String]
     class DescribeReportDefinitionsResponse < Struct.new(
+      nil,
       :report_definitions,
       :next_token,
       keyword_init: true
@@ -63,6 +67,7 @@ module Aws::CostandUsageReportService
     #   <p>A message to show the detail of the exception.</p>
     #   @return [String]
     class DuplicateReportNameException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -74,6 +79,7 @@ module Aws::CostandUsageReportService
     #   <p>A message to show the detail of the exception.</p>
     #   @return [String]
     class InternalErrorException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -84,6 +90,7 @@ module Aws::CostandUsageReportService
     #   <p>The report name of the report definition that tags are to be returned for.</p>
     #   @return [String]
     class ListTagsForResourceRequest < Struct.new(
+      nil,
       :report_name,
       keyword_init: true
     )
@@ -94,6 +101,7 @@ module Aws::CostandUsageReportService
     #   <p>The tags assigned to the report definition resource.</p>
     #   @return [Array<Types::Tag>]
     class ListTagsForResourceResponse < Struct.new(
+      nil,
       :tags,
       keyword_init: true
     )
@@ -111,6 +119,7 @@ module Aws::CostandUsageReportService
     #       </p>
     #   @return [Types::ReportDefinition]
     class ModifyReportDefinitionRequest < Struct.new(
+      nil,
       :report_name,
       :report_definition,
       keyword_init: true
@@ -119,6 +128,7 @@ module Aws::CostandUsageReportService
     end
 
     class ModifyReportDefinitionResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -133,6 +143,7 @@ module Aws::CostandUsageReportService
     #   <p>The tags to be assigned to the report definition resource.</p>
     #   @return [Array<Types::Tag>]
     class PutReportDefinitionRequest < Struct.new(
+      nil,
       :report_definition,
       :tags,
       keyword_init: true
@@ -142,6 +153,7 @@ module Aws::CostandUsageReportService
 
     # <p>If the action is successful, the service sends back an HTTP 200 response with an empty HTTP body.</p>
     class PutReportDefinitionResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -197,6 +209,7 @@ module Aws::CostandUsageReportService
     #   <p>The status of the report.</p>
     #   @return [Types::ReportStatus]
     class ReportDefinition < Struct.new(
+      nil,
       :report_name,
       :time_unit,
       :format,
@@ -220,6 +233,7 @@ module Aws::CostandUsageReportService
     #   <p>A message to show the detail of the exception.</p>
     #   @return [String]
     class ReportLimitReachedException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -236,6 +250,7 @@ module Aws::CostandUsageReportService
     #   <p>An enum that gives the status of a report delivery.</p>
     #   @return [String]
     class ReportStatus < Struct.new(
+      nil,
       :last_delivery,
       :last_status,
       keyword_init: true
@@ -248,6 +263,7 @@ module Aws::CostandUsageReportService
     #   <p>A message to show the detail of the exception.</p>
     #   @return [String]
     class ResourceNotFoundException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -265,6 +281,7 @@ module Aws::CostandUsageReportService
     #   <p>The value of the tag. Tag values are case-sensitive. This can be an empty string.</p>
     #   @return [String]
     class Tag < Struct.new(
+      nil,
       :key,
       :value,
       keyword_init: true
@@ -279,6 +296,7 @@ module Aws::CostandUsageReportService
     #   <p>The tags to be assigned to the report definition resource.</p>
     #   @return [Array<Types::Tag>]
     class TagResourceRequest < Struct.new(
+      nil,
       :report_name,
       :tags,
       keyword_init: true
@@ -287,6 +305,7 @@ module Aws::CostandUsageReportService
     end
 
     class TagResourceResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -300,6 +319,7 @@ module Aws::CostandUsageReportService
     #   <p>The tags to be disassociated from the report definition resource.</p>
     #   @return [Array<String>]
     class UntagResourceRequest < Struct.new(
+      nil,
       :report_name,
       :tag_keys,
       keyword_init: true
@@ -308,6 +328,7 @@ module Aws::CostandUsageReportService
     end
 
     class UntagResourceResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -318,6 +339,7 @@ module Aws::CostandUsageReportService
     #   <p>A message to show the detail of the exception.</p>
     #   @return [String]
     class ValidationException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )

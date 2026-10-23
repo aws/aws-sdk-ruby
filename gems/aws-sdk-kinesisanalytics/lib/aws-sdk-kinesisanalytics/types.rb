@@ -18,6 +18,7 @@ module Aws::KinesisAnalytics
     #               the <code>PutLogEvents</code> policy action enabled.</p>
     #   @return [Types::CloudWatchLoggingOption]
     class AddApplicationCloudWatchLoggingOptionRequest < Struct.new(
+      nil,
       :application_name,
       :current_application_version_id,
       :cloud_watch_logging_option,
@@ -27,6 +28,7 @@ module Aws::KinesisAnalytics
     end
 
     class AddApplicationCloudWatchLoggingOptionResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -48,6 +50,7 @@ module Aws::KinesisAnalytics
     #   <p>The <a href="https://docs.aws.amazon.com/kinesisanalytics/latest/dev/API_InputProcessingConfiguration.html">InputProcessingConfiguration</a> to add to the application.</p>
     #   @return [Types::InputProcessingConfiguration]
     class AddApplicationInputProcessingConfigurationRequest < Struct.new(
+      nil,
       :application_name,
       :current_application_version_id,
       :input_id,
@@ -58,6 +61,7 @@ module Aws::KinesisAnalytics
     end
 
     class AddApplicationInputProcessingConfigurationResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -75,6 +79,7 @@ module Aws::KinesisAnalytics
     #   <p>The <a href="https://docs.aws.amazon.com/kinesisanalytics/latest/dev/API_Input.html">Input</a> to add.</p>
     #   @return [Types::Input]
     class AddApplicationInputRequest < Struct.new(
+      nil,
       :application_name,
       :current_application_version_id,
       :input,
@@ -85,6 +90,7 @@ module Aws::KinesisAnalytics
 
     # <p></p>
     class AddApplicationInputResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -107,6 +113,7 @@ module Aws::KinesisAnalytics
     #               function), and record the formation to use when writing to the destination.</p>
     #   @return [Types::Output]
     class AddApplicationOutputRequest < Struct.new(
+      nil,
       :application_name,
       :current_application_version_id,
       :output,
@@ -117,6 +124,7 @@ module Aws::KinesisAnalytics
 
     # <p></p>
     class AddApplicationOutputResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -136,6 +144,7 @@ module Aws::KinesisAnalytics
     #   <p>The reference data source can be an object in your Amazon S3 bucket. Amazon Kinesis Analytics reads the object and copies the data into the in-application table that is created. You provide an S3 bucket, object key name, and the resulting in-application table that is created. You must also provide an IAM role with the necessary permissions that Amazon Kinesis Analytics can assume to read the object from your S3 bucket on your behalf.</p>
     #   @return [Types::ReferenceDataSource]
     class AddApplicationReferenceDataSourceRequest < Struct.new(
+      nil,
       :application_name,
       :current_application_version_id,
       :reference_data_source,
@@ -146,6 +155,7 @@ module Aws::KinesisAnalytics
 
     # <p></p>
     class AddApplicationReferenceDataSourceResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -208,6 +218,7 @@ module Aws::KinesisAnalytics
     #   <p>Provides the current application version.</p>
     #   @return [Integer]
     class ApplicationDetail < Struct.new(
+      nil,
       :application_name,
       :application_description,
       :application_arn,
@@ -239,6 +250,7 @@ module Aws::KinesisAnalytics
     #   <p>Status of the application.</p>
     #   @return [String]
     class ApplicationSummary < Struct.new(
+      nil,
       :application_name,
       :application_arn,
       :application_status,
@@ -264,6 +276,7 @@ module Aws::KinesisAnalytics
     #   <p>Describes application CloudWatch logging option updates.</p>
     #   @return [Array<Types::CloudWatchLoggingOptionUpdate>]
     class ApplicationUpdate < Struct.new(
+      nil,
       :input_updates,
       :application_code_update,
       :output_updates,
@@ -292,6 +305,7 @@ module Aws::KinesisAnalytics
     #   <p>Column delimiter. For example, in a CSV format, a comma (",") is the typical column delimiter.</p>
     #   @return [String]
     class CSVMappingParameters < Struct.new(
+      nil,
       :record_row_delimiter,
       :record_column_delimiter,
       keyword_init: true
@@ -310,6 +324,7 @@ module Aws::KinesisAnalytics
     #               <code>PutLogEvents</code> policy action enabled.</p>
     #   @return [String]
     class CloudWatchLoggingOption < Struct.new(
+      nil,
       :log_stream_arn,
       :role_arn,
       keyword_init: true
@@ -328,6 +343,7 @@ module Aws::KinesisAnalytics
     #   <p>IAM ARN of the role to use to send application messages. Note: To write application messages to CloudWatch, the IAM role used must have the <code>PutLogEvents</code> policy action enabled.</p>
     #   @return [String]
     class CloudWatchLoggingOptionDescription < Struct.new(
+      nil,
       :cloud_watch_logging_option_id,
       :log_stream_arn,
       :role_arn,
@@ -347,6 +363,7 @@ module Aws::KinesisAnalytics
     #   <p>IAM ARN of the role to use to send application messages. Note: To write application messages to CloudWatch, the IAM role used must have the <code>PutLogEvents</code> policy action enabled.</p>
     #   @return [String]
     class CloudWatchLoggingOptionUpdate < Struct.new(
+      nil,
       :cloud_watch_logging_option_id,
       :log_stream_arn_update,
       :role_arn_update,
@@ -360,6 +377,7 @@ module Aws::KinesisAnalytics
     #   <p>Test</p>
     #   @return [String]
     class CodeValidationException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -371,6 +389,7 @@ module Aws::KinesisAnalytics
     #   <p></p>
     #   @return [String]
     class ConcurrentModificationException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -431,6 +450,7 @@ module Aws::KinesisAnalytics
     #           For more information, see <a href="https://docs.aws.amazon.com/kinesisanalytics/latest/dev/how-tagging.html">Using Tagging</a>.</p>
     #   @return [Array<Types::Tag>]
     class CreateApplicationRequest < Struct.new(
+      nil,
       :application_name,
       :application_description,
       :inputs,
@@ -450,6 +470,7 @@ module Aws::KinesisAnalytics
     #               name, and status.</p>
     #   @return [Types::ApplicationSummary]
     class CreateApplicationResponse < Struct.new(
+      nil,
       :application_summary,
       keyword_init: true
     )
@@ -467,6 +488,7 @@ module Aws::KinesisAnalytics
     #               delete. You can get the <code>CloudWatchLoggingOptionId</code> by using the <a href="https://docs.aws.amazon.com/kinesisanalytics/latest/dev/API_DescribeApplication.html">DescribeApplication</a> operation. </p>
     #   @return [String]
     class DeleteApplicationCloudWatchLoggingOptionRequest < Struct.new(
+      nil,
       :application_name,
       :current_application_version_id,
       :cloud_watch_logging_option_id,
@@ -476,6 +498,7 @@ module Aws::KinesisAnalytics
     end
 
     class DeleteApplicationCloudWatchLoggingOptionResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -492,6 +515,7 @@ module Aws::KinesisAnalytics
     #               configuration. You can get a list of the input IDs for an application by using the <a href="https://docs.aws.amazon.com/kinesisanalytics/latest/dev/API_DescribeApplication.html">DescribeApplication</a> operation.</p>
     #   @return [String]
     class DeleteApplicationInputProcessingConfigurationRequest < Struct.new(
+      nil,
       :application_name,
       :current_application_version_id,
       :input_id,
@@ -501,6 +525,7 @@ module Aws::KinesisAnalytics
     end
 
     class DeleteApplicationInputProcessingConfigurationResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -528,6 +553,7 @@ module Aws::KinesisAnalytics
     #           </p>
     #   @return [String]
     class DeleteApplicationOutputRequest < Struct.new(
+      nil,
       :application_name,
       :current_application_version_id,
       :output_id,
@@ -538,6 +564,7 @@ module Aws::KinesisAnalytics
 
     # <p></p>
     class DeleteApplicationOutputResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -560,6 +587,7 @@ module Aws::KinesisAnalytics
     #           </p>
     #   @return [String]
     class DeleteApplicationReferenceDataSourceRequest < Struct.new(
+      nil,
       :application_name,
       :current_application_version_id,
       :reference_id,
@@ -569,6 +597,7 @@ module Aws::KinesisAnalytics
     end
 
     class DeleteApplicationReferenceDataSourceResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -584,6 +613,7 @@ module Aws::KinesisAnalytics
     #           </p>
     #   @return [Time]
     class DeleteApplicationRequest < Struct.new(
+      nil,
       :application_name,
       :create_timestamp,
       keyword_init: true
@@ -593,6 +623,7 @@ module Aws::KinesisAnalytics
 
     # <p></p>
     class DeleteApplicationResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -603,6 +634,7 @@ module Aws::KinesisAnalytics
     #   <p>Name of the application.</p>
     #   @return [String]
     class DescribeApplicationRequest < Struct.new(
+      nil,
       :application_name,
       keyword_init: true
     )
@@ -614,6 +646,7 @@ module Aws::KinesisAnalytics
     #   <p>Provides a description of the application, such as the application Amazon Resource Name (ARN), status, latest version, and input and output configuration details.</p>
     #   @return [Types::ApplicationDetail]
     class DescribeApplicationResponse < Struct.new(
+      nil,
       :application_detail,
       keyword_init: true
     )
@@ -630,6 +663,7 @@ module Aws::KinesisAnalytics
     #   <p>Specifies the format of the records on the output stream.</p>
     #   @return [String]
     class DestinationSchema < Struct.new(
+      nil,
       :record_format_type,
       keyword_init: true
     )
@@ -653,6 +687,7 @@ module Aws::KinesisAnalytics
     #   <p>The <a href="https://docs.aws.amazon.com/kinesisanalytics/latest/dev/API_InputProcessingConfiguration.html">InputProcessingConfiguration</a> to use to preprocess the records before discovering the schema of the records.</p>
     #   @return [Types::InputProcessingConfiguration]
     class DiscoverInputSchemaRequest < Struct.new(
+      nil,
       :resource_arn,
       :role_arn,
       :input_starting_position_configuration,
@@ -677,6 +712,7 @@ module Aws::KinesisAnalytics
     #   <p>Raw stream data that was sampled to infer the schema.</p>
     #   @return [Array<String>]
     class DiscoverInputSchemaResponse < Struct.new(
+      nil,
       :input_schema,
       :parsed_input_records,
       :processed_input_records,
@@ -724,6 +760,7 @@ module Aws::KinesisAnalytics
     #           <p>Also used to describe the format of the reference data source.</p>
     #   @return [Types::SourceSchema]
     class Input < Struct.new(
+      nil,
       :name_prefix,
       :input_processing_configuration,
       :kinesis_streams_input,
@@ -747,6 +784,7 @@ module Aws::KinesisAnalytics
     #               records from the streaming source.</p>
     #   @return [Types::InputStartingPositionConfiguration]
     class InputConfiguration < Struct.new(
+      nil,
       :id,
       :input_starting_position_configuration,
       keyword_init: true
@@ -795,6 +833,7 @@ module Aws::KinesisAnalytics
     #   <p>Point at which the application is configured to read from the input stream.</p>
     #   @return [Types::InputStartingPositionConfiguration]
     class InputDescription < Struct.new(
+      nil,
       :input_id,
       :name_prefix,
       :in_app_stream_names,
@@ -824,6 +863,7 @@ module Aws::KinesisAnalytics
     #   <p>The ARN of the IAM role that is used to access the AWS Lambda function.</p>
     #   @return [String]
     class InputLambdaProcessor < Struct.new(
+      nil,
       :resource_arn,
       :role_arn,
       keyword_init: true
@@ -841,6 +881,7 @@ module Aws::KinesisAnalytics
     #   <p>The ARN of the IAM role that is used to access the AWS Lambda function.</p>
     #   @return [String]
     class InputLambdaProcessorDescription < Struct.new(
+      nil,
       :resource_arn,
       :role_arn,
       keyword_init: true
@@ -862,6 +903,7 @@ module Aws::KinesisAnalytics
     #               function.</p>
     #   @return [String]
     class InputLambdaProcessorUpdate < Struct.new(
+      nil,
       :resource_arn_update,
       :role_arn_update,
       keyword_init: true
@@ -879,6 +921,7 @@ module Aws::KinesisAnalytics
     #           </p>
     #   @return [Integer]
     class InputParallelism < Struct.new(
+      nil,
       :count,
       keyword_init: true
     )
@@ -891,6 +934,7 @@ module Aws::KinesisAnalytics
     #               streaming source.</p>
     #   @return [Integer]
     class InputParallelismUpdate < Struct.new(
+      nil,
       :count_update,
       keyword_init: true
     )
@@ -906,6 +950,7 @@ module Aws::KinesisAnalytics
     #               in the stream before being processed by your application code.</p>
     #   @return [Types::InputLambdaProcessor]
     class InputProcessingConfiguration < Struct.new(
+      nil,
       :input_lambda_processor,
       keyword_init: true
     )
@@ -918,6 +963,7 @@ module Aws::KinesisAnalytics
     #   <p>Provides configuration information about the associated <a href="https://docs.aws.amazon.com/kinesisanalytics/latest/dev/API_InputLambdaProcessorDescription.html">InputLambdaProcessorDescription</a>.</p>
     #   @return [Types::InputLambdaProcessorDescription]
     class InputProcessingConfigurationDescription < Struct.new(
+      nil,
       :input_lambda_processor_description,
       keyword_init: true
     )
@@ -929,6 +975,7 @@ module Aws::KinesisAnalytics
     #   <p>Provides update information for an <a href="https://docs.aws.amazon.com/kinesisanalytics/latest/dev/API_InputLambdaProcessor.html">InputLambdaProcessor</a>.</p>
     #   @return [Types::InputLambdaProcessorUpdate]
     class InputProcessingConfigurationUpdate < Struct.new(
+      nil,
       :input_lambda_processor_update,
       keyword_init: true
     )
@@ -947,6 +994,7 @@ module Aws::KinesisAnalytics
     #               of the streaming source element to the corresponding column in the in-application stream. </p>
     #   @return [Array<Types::RecordColumn>]
     class InputSchemaUpdate < Struct.new(
+      nil,
       :record_format_update,
       :record_encoding_update,
       :record_column_updates,
@@ -980,6 +1028,7 @@ module Aws::KinesisAnalytics
     #            </ul>
     #   @return [String]
     class InputStartingPositionConfiguration < Struct.new(
+      nil,
       :input_starting_position,
       keyword_init: true
     )
@@ -1015,6 +1064,7 @@ module Aws::KinesisAnalytics
     #               streams Amazon Kinesis Analytics creates for the specific streaming source).</p>
     #   @return [Types::InputParallelismUpdate]
     class InputUpdate < Struct.new(
+      nil,
       :input_id,
       :name_prefix_update,
       :input_processing_configuration_update,
@@ -1032,6 +1082,7 @@ module Aws::KinesisAnalytics
     #   <p>test</p>
     #   @return [String]
     class InvalidApplicationConfigurationException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -1043,6 +1094,7 @@ module Aws::KinesisAnalytics
     #   <p></p>
     #   @return [String]
     class InvalidArgumentException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -1054,6 +1106,7 @@ module Aws::KinesisAnalytics
     #   <p>Path to the top-level parent that contains the records.</p>
     #   @return [String]
     class JSONMappingParameters < Struct.new(
+      nil,
       :record_row_path,
       keyword_init: true
     )
@@ -1072,6 +1125,7 @@ module Aws::KinesisAnalytics
     #               access the stream.</p>
     #   @return [String]
     class KinesisFirehoseInput < Struct.new(
+      nil,
       :resource_arn,
       :role_arn,
       keyword_init: true
@@ -1090,6 +1144,7 @@ module Aws::KinesisAnalytics
     #   <p>ARN of the IAM role that Amazon Kinesis Analytics assumes to access the stream.</p>
     #   @return [String]
     class KinesisFirehoseInputDescription < Struct.new(
+      nil,
       :resource_arn,
       :role_arn,
       keyword_init: true
@@ -1108,6 +1163,7 @@ module Aws::KinesisAnalytics
     #               on your behalf. You need to grant the necessary permissions to this role.</p>
     #   @return [String]
     class KinesisFirehoseInputUpdate < Struct.new(
+      nil,
       :resource_arn_update,
       :role_arn_update,
       keyword_init: true
@@ -1126,6 +1182,7 @@ module Aws::KinesisAnalytics
     #   <p>ARN of the IAM role that Amazon Kinesis Analytics can assume to write to the destination stream on your behalf. You need to grant the necessary permissions to this role.</p>
     #   @return [String]
     class KinesisFirehoseOutput < Struct.new(
+      nil,
       :resource_arn,
       :role_arn,
       keyword_init: true
@@ -1144,6 +1201,7 @@ module Aws::KinesisAnalytics
     #   <p>ARN of the IAM role that Amazon Kinesis Analytics can assume to access the stream.</p>
     #   @return [String]
     class KinesisFirehoseOutputDescription < Struct.new(
+      nil,
       :resource_arn,
       :role_arn,
       keyword_init: true
@@ -1165,6 +1223,7 @@ module Aws::KinesisAnalytics
     #               on your behalf. You need to grant the necessary permissions to this role.</p>
     #   @return [String]
     class KinesisFirehoseOutputUpdate < Struct.new(
+      nil,
       :resource_arn_update,
       :role_arn_update,
       keyword_init: true
@@ -1182,6 +1241,7 @@ module Aws::KinesisAnalytics
     #   <p>ARN of the IAM role that Amazon Kinesis Analytics can assume to access the stream on your behalf. You need to grant the necessary permissions to this role.</p>
     #   @return [String]
     class KinesisStreamsInput < Struct.new(
+      nil,
       :resource_arn,
       :role_arn,
       keyword_init: true
@@ -1200,6 +1260,7 @@ module Aws::KinesisAnalytics
     #   <p>ARN of the IAM role that Amazon Kinesis Analytics can assume to access the stream.</p>
     #   @return [String]
     class KinesisStreamsInputDescription < Struct.new(
+      nil,
       :resource_arn,
       :role_arn,
       keyword_init: true
@@ -1216,6 +1277,7 @@ module Aws::KinesisAnalytics
     #   <p>ARN of the IAM role that Amazon Kinesis Analytics can assume to access the stream on your behalf. You need to grant the necessary permissions to this role.</p>
     #   @return [String]
     class KinesisStreamsInputUpdate < Struct.new(
+      nil,
       :resource_arn_update,
       :role_arn_update,
       keyword_init: true
@@ -1233,6 +1295,7 @@ module Aws::KinesisAnalytics
     #   <p>ARN of the IAM role that Amazon Kinesis Analytics can assume to write to the destination stream on your behalf. You need to grant the necessary permissions to this role.</p>
     #   @return [String]
     class KinesisStreamsOutput < Struct.new(
+      nil,
       :resource_arn,
       :role_arn,
       keyword_init: true
@@ -1251,6 +1314,7 @@ module Aws::KinesisAnalytics
     #   <p>ARN of the IAM role that Amazon Kinesis Analytics can assume to access the stream.</p>
     #   @return [String]
     class KinesisStreamsOutputDescription < Struct.new(
+      nil,
       :resource_arn,
       :role_arn,
       keyword_init: true
@@ -1271,6 +1335,7 @@ module Aws::KinesisAnalytics
     #   <p>ARN of the IAM role that Amazon Kinesis Analytics can assume to access the stream on your behalf. You need to grant the necessary permissions to this role.</p>
     #   @return [String]
     class KinesisStreamsOutputUpdate < Struct.new(
+      nil,
       :resource_arn_update,
       :role_arn_update,
       keyword_init: true
@@ -1293,6 +1358,7 @@ module Aws::KinesisAnalytics
     #   <p>ARN of the IAM role that Amazon Kinesis Analytics can assume to write to the destination function on your behalf. You need to grant the necessary permissions to this role. </p>
     #   @return [String]
     class LambdaOutput < Struct.new(
+      nil,
       :resource_arn,
       :role_arn,
       keyword_init: true
@@ -1309,6 +1375,7 @@ module Aws::KinesisAnalytics
     #   <p>ARN of the IAM role that Amazon Kinesis Analytics can assume to write to the destination function.</p>
     #   @return [String]
     class LambdaOutputDescription < Struct.new(
+      nil,
       :resource_arn,
       :role_arn,
       keyword_init: true
@@ -1330,6 +1397,7 @@ module Aws::KinesisAnalytics
     #   <p>ARN of the IAM role that Amazon Kinesis Analytics can assume to write to the destination function on your behalf. You need to grant the necessary permissions to this role. </p>
     #   @return [String]
     class LambdaOutputUpdate < Struct.new(
+      nil,
       :resource_arn_update,
       :role_arn_update,
       keyword_init: true
@@ -1342,6 +1410,7 @@ module Aws::KinesisAnalytics
     #   <p></p>
     #   @return [String]
     class LimitExceededException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -1356,6 +1425,7 @@ module Aws::KinesisAnalytics
     #   <p>Name of the application to start the list with. When using pagination to retrieve the list, you don't need to specify this parameter in the first request. However, in subsequent requests, you add the last application name from the previous response to get the next page of applications.</p>
     #   @return [String]
     class ListApplicationsRequest < Struct.new(
+      nil,
       :limit,
       :exclusive_start_application_name,
       keyword_init: true
@@ -1371,6 +1441,7 @@ module Aws::KinesisAnalytics
     #   <p>Returns true if there are more applications to retrieve.</p>
     #   @return [Boolean]
     class ListApplicationsResponse < Struct.new(
+      nil,
       :application_summaries,
       :has_more_applications,
       keyword_init: true
@@ -1382,6 +1453,7 @@ module Aws::KinesisAnalytics
     #   <p>The ARN of the application for which to retrieve tags.</p>
     #   @return [String]
     class ListTagsForResourceRequest < Struct.new(
+      nil,
       :resource_arn,
       keyword_init: true
     )
@@ -1392,6 +1464,7 @@ module Aws::KinesisAnalytics
     #   <p>The key-value tags assigned to the application.</p>
     #   @return [Array<Types::Tag>]
     class ListTagsForResourceResponse < Struct.new(
+      nil,
       :tags,
       keyword_init: true
     )
@@ -1411,6 +1484,7 @@ module Aws::KinesisAnalytics
     #               (for example, CSV).</p>
     #   @return [Types::CSVMappingParameters]
     class MappingParameters < Struct.new(
+      nil,
       :json_mapping_parameters,
       :csv_mapping_parameters,
       keyword_init: true
@@ -1447,6 +1521,7 @@ module Aws::KinesisAnalytics
     #   <p>Describes the data format when records are written to the destination. For more information, see <a href="https://docs.aws.amazon.com/kinesisanalytics/latest/dev/how-it-works-output.html">Configuring Application Output</a>.</p>
     #   @return [Types::DestinationSchema]
     class Output < Struct.new(
+      nil,
       :name,
       :kinesis_streams_output,
       :kinesis_firehose_output,
@@ -1484,6 +1559,7 @@ module Aws::KinesisAnalytics
     #   <p>Data format used for writing data to the destination.</p>
     #   @return [Types::DestinationSchema]
     class OutputDescription < Struct.new(
+      nil,
       :output_id,
       :name,
       :kinesis_streams_output_description,
@@ -1521,6 +1597,7 @@ module Aws::KinesisAnalytics
     #   <p>Describes the data format when records are written to the destination. For more information, see <a href="https://docs.aws.amazon.com/kinesisanalytics/latest/dev/how-it-works-output.html">Configuring Application Output</a>.</p>
     #   @return [Types::DestinationSchema]
     class OutputUpdate < Struct.new(
+      nil,
       :output_id,
       :name_update,
       :kinesis_streams_output_update,
@@ -1546,6 +1623,7 @@ module Aws::KinesisAnalytics
     #   <p>Type of column created in the in-application input stream or reference table.</p>
     #   @return [String]
     class RecordColumn < Struct.new(
+      nil,
       :name,
       :mapping,
       :sql_type,
@@ -1565,6 +1643,7 @@ module Aws::KinesisAnalytics
     #   <p>When configuring application input at the time of creating or updating an application, provides additional mapping information specific to the record format (such as JSON, CSV, or record fields delimited by some delimiter) on the streaming source.</p>
     #   @return [Types::MappingParameters]
     class RecordFormat < Struct.new(
+      nil,
       :record_format_type,
       :mapping_parameters,
       keyword_init: true
@@ -1585,6 +1664,7 @@ module Aws::KinesisAnalytics
     #   <p>Describes the format of the data in the streaming source, and how each data element maps to corresponding columns created in the in-application stream.</p>
     #   @return [Types::SourceSchema]
     class ReferenceDataSource < Struct.new(
+      nil,
       :table_name,
       :s3_reference_data_source,
       :reference_schema,
@@ -1609,6 +1689,7 @@ module Aws::KinesisAnalytics
     #   <p>Describes the format of the data in the streaming source, and how each data element maps to corresponding columns created in the in-application stream.</p>
     #   @return [Types::SourceSchema]
     class ReferenceDataSourceDescription < Struct.new(
+      nil,
       :reference_id,
       :table_name,
       :s3_reference_data_source_description,
@@ -1633,6 +1714,7 @@ module Aws::KinesisAnalytics
     #   <p>Describes the format of the data in the streaming source, and how each data element maps to corresponding columns created in the in-application stream. </p>
     #   @return [Types::SourceSchema]
     class ReferenceDataSourceUpdate < Struct.new(
+      nil,
       :reference_id,
       :table_name_update,
       :s3_reference_data_source_update,
@@ -1647,6 +1729,7 @@ module Aws::KinesisAnalytics
     #   <p></p>
     #   @return [String]
     class ResourceInUseException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -1658,6 +1741,7 @@ module Aws::KinesisAnalytics
     #   <p></p>
     #   @return [String]
     class ResourceNotFoundException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -1672,6 +1756,7 @@ module Aws::KinesisAnalytics
     # @!attribute message
     #   @return [String]
     class ResourceProvisionedThroughputExceededException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -1691,6 +1776,7 @@ module Aws::KinesisAnalytics
     #   <p>The name of the object that contains the data.</p>
     #   @return [String]
     class S3Configuration < Struct.new(
+      nil,
       :role_arn,
       :bucket_arn,
       :file_key,
@@ -1713,6 +1799,7 @@ module Aws::KinesisAnalytics
     #   <p>ARN of the IAM role that the service can assume to read data on your behalf. This role must have permission for the <code>s3:GetObject</code> action on the object and trust policy that allows Amazon Kinesis Analytics service principal to assume this role.</p>
     #   @return [String]
     class S3ReferenceDataSource < Struct.new(
+      nil,
       :bucket_arn,
       :file_key,
       :reference_role_arn,
@@ -1732,6 +1819,7 @@ module Aws::KinesisAnalytics
     #   <p>ARN of the IAM role that Amazon Kinesis Analytics can assume to read the Amazon S3 object on your behalf to populate the in-application reference table.</p>
     #   @return [String]
     class S3ReferenceDataSourceDescription < Struct.new(
+      nil,
       :bucket_arn,
       :file_key,
       :reference_role_arn,
@@ -1751,6 +1839,7 @@ module Aws::KinesisAnalytics
     #   <p>ARN of the IAM role that Amazon Kinesis Analytics can assume to read the Amazon S3 object and populate the in-application.</p>
     #   @return [String]
     class S3ReferenceDataSourceUpdate < Struct.new(
+      nil,
       :bucket_arn_update,
       :file_key_update,
       :reference_role_arn_update,
@@ -1763,6 +1852,7 @@ module Aws::KinesisAnalytics
     # @!attribute message
     #   @return [String]
     class ServiceUnavailableException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -1780,6 +1870,7 @@ module Aws::KinesisAnalytics
     #   <p>A list of <code>RecordColumn</code> objects.</p>
     #   @return [Array<Types::RecordColumn>]
     class SourceSchema < Struct.new(
+      nil,
       :record_format,
       :record_encoding,
       :record_columns,
@@ -1796,6 +1887,7 @@ module Aws::KinesisAnalytics
     #   <p>Identifies the specific input, by ID, that the application starts consuming. Amazon Kinesis Analytics starts reading the streaming source associated with the input. You can also specify where in the streaming source you want Amazon Kinesis Analytics to start reading.</p>
     #   @return [Array<Types::InputConfiguration>]
     class StartApplicationRequest < Struct.new(
+      nil,
       :application_name,
       :input_configurations,
       keyword_init: true
@@ -1805,6 +1897,7 @@ module Aws::KinesisAnalytics
 
     # <p></p>
     class StartApplicationResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1815,6 +1908,7 @@ module Aws::KinesisAnalytics
     #   <p>Name of the running application to stop.</p>
     #   @return [String]
     class StopApplicationRequest < Struct.new(
+      nil,
       :application_name,
       keyword_init: true
     )
@@ -1823,6 +1917,7 @@ module Aws::KinesisAnalytics
 
     # <p></p>
     class StopApplicationResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1838,6 +1933,7 @@ module Aws::KinesisAnalytics
     #   <p>The value of the key-value tag. The value is optional.</p>
     #   @return [String]
     class Tag < Struct.new(
+      nil,
       :key,
       :value,
       keyword_init: true
@@ -1852,6 +1948,7 @@ module Aws::KinesisAnalytics
     #   <p>The key-value tags to assign to the application.</p>
     #   @return [Array<Types::Tag>]
     class TagResourceRequest < Struct.new(
+      nil,
       :resource_arn,
       :tags,
       keyword_init: true
@@ -1860,6 +1957,7 @@ module Aws::KinesisAnalytics
     end
 
     class TagResourceResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1869,6 +1967,7 @@ module Aws::KinesisAnalytics
     # @!attribute message
     #   @return [String]
     class TooManyTagsException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -1884,6 +1983,7 @@ module Aws::KinesisAnalytics
     # @!attribute processed_input_records
     #   @return [Array<String>]
     class UnableToDetectSchemaException < Struct.new(
+      nil,
       :message,
       :raw_input_records,
       :processed_input_records,
@@ -1896,6 +1996,7 @@ module Aws::KinesisAnalytics
     # @!attribute message
     #   @return [String]
     class UnsupportedOperationException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -1909,6 +2010,7 @@ module Aws::KinesisAnalytics
     #   <p>A list of keys of tags to remove from the specified application.</p>
     #   @return [Array<String>]
     class UntagResourceRequest < Struct.new(
+      nil,
       :resource_arn,
       :tag_keys,
       keyword_init: true
@@ -1917,6 +2019,7 @@ module Aws::KinesisAnalytics
     end
 
     class UntagResourceResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1933,6 +2036,7 @@ module Aws::KinesisAnalytics
     #   <p>Describes application updates.</p>
     #   @return [Types::ApplicationUpdate]
     class UpdateApplicationRequest < Struct.new(
+      nil,
       :application_name,
       :current_application_version_id,
       :application_update,
@@ -1942,6 +2046,7 @@ module Aws::KinesisAnalytics
     end
 
     class UpdateApplicationResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure

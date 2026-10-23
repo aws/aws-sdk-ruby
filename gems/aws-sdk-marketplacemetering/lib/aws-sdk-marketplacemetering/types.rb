@@ -17,6 +17,7 @@ module Aws::MarketplaceMetering
     #               be the same as the one used during the publishing of a new product.</p>
     #   @return [String]
     class BatchMeterUsageRequest < Struct.new(
+      nil,
       :usage_records,
       :product_code,
       keyword_init: true
@@ -38,6 +39,7 @@ module Aws::MarketplaceMetering
     #               list as input in the <code>BatchMeterUsageRequest</code>.</p>
     #   @return [Array<Types::UsageRecord>]
     class BatchMeterUsageResult < Struct.new(
+      nil,
       :results,
       :unprocessed_records,
       keyword_init: true
@@ -50,6 +52,7 @@ module Aws::MarketplaceMetering
     # @!attribute message
     #   @return [String]
     class CustomerNotEntitledException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -60,6 +63,7 @@ module Aws::MarketplaceMetering
     # @!attribute message
     #   @return [String]
     class DisabledApiException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -72,6 +76,7 @@ module Aws::MarketplaceMetering
     # @!attribute message
     #   @return [String]
     class DuplicateRequestException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -86,6 +91,7 @@ module Aws::MarketplaceMetering
     # @!attribute message
     #   @return [String]
     class ExpiredTokenException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -97,6 +103,7 @@ module Aws::MarketplaceMetering
     # @!attribute message
     #   @return [String]
     class InternalServiceErrorException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -108,6 +115,7 @@ module Aws::MarketplaceMetering
     # @!attribute message
     #   @return [String]
     class InvalidCustomerIdentifierException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -120,6 +128,7 @@ module Aws::MarketplaceMetering
     # @!attribute message
     #   @return [String]
     class InvalidEndpointRegionException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -131,6 +140,7 @@ module Aws::MarketplaceMetering
     # @!attribute message
     #   @return [String]
     class InvalidProductCodeException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -141,6 +151,7 @@ module Aws::MarketplaceMetering
     # @!attribute message
     #   @return [String]
     class InvalidPublicKeyVersionException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -154,6 +165,7 @@ module Aws::MarketplaceMetering
     # @!attribute message
     #   @return [String]
     class InvalidRegionException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -164,6 +176,7 @@ module Aws::MarketplaceMetering
     # @!attribute message
     #   @return [String]
     class InvalidTagException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -174,6 +187,7 @@ module Aws::MarketplaceMetering
     # @!attribute message
     #   @return [String]
     class InvalidTokenException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -184,6 +198,7 @@ module Aws::MarketplaceMetering
     # @!attribute message
     #   @return [String]
     class InvalidUsageAllocationsException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -195,6 +210,7 @@ module Aws::MarketplaceMetering
     # @!attribute message
     #   @return [String]
     class InvalidUsageDimensionException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -231,6 +247,7 @@ module Aws::MarketplaceMetering
     #               tags).</p>
     #   @return [Array<Types::UsageAllocation>]
     class MeterUsageRequest < Struct.new(
+      nil,
       :product_code,
       :timestamp,
       :usage_dimension,
@@ -246,6 +263,7 @@ module Aws::MarketplaceMetering
     #   <p>Metering record id.</p>
     #   @return [String]
     class MeterUsageResult < Struct.new(
+      nil,
       :metering_record_id,
       keyword_init: true
     )
@@ -256,6 +274,7 @@ module Aws::MarketplaceMetering
     # @!attribute message
     #   @return [String]
     class PlatformNotSupportedException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -274,6 +293,7 @@ module Aws::MarketplaceMetering
     #               guard against replay attacks.</p>
     #   @return [String]
     class RegisterUsageRequest < Struct.new(
+      nil,
       :product_code,
       :public_key_version,
       :nonce,
@@ -289,6 +309,7 @@ module Aws::MarketplaceMetering
     #   <p>JWT Token</p>
     #   @return [String]
     class RegisterUsageResult < Struct.new(
+      nil,
       :public_key_rotation_timestamp,
       :signature,
       keyword_init: true
@@ -304,6 +325,7 @@ module Aws::MarketplaceMetering
     #                   <code>ProductCode</code>.</p>
     #   @return [String]
     class ResolveCustomerRequest < Struct.new(
+      nil,
       :registration_token,
       keyword_init: true
     )
@@ -328,6 +350,7 @@ module Aws::MarketplaceMetering
     #               the <code>CustomerIdentifier</code> for the individual customer.</p>
     #   @return [String]
     class ResolveCustomerResult < Struct.new(
+      nil,
       :customer_identifier,
       :product_code,
       :customer_aws_account_id,
@@ -347,6 +370,7 @@ module Aws::MarketplaceMetering
     #               acts as a descriptor within a tag category (key). The value can be empty or null.</p>
     #   @return [String]
     class Tag < Struct.new(
+      nil,
       :key,
       :value,
       keyword_init: true
@@ -358,6 +382,7 @@ module Aws::MarketplaceMetering
     # @!attribute message
     #   @return [String]
     class ThrottlingException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -372,6 +397,7 @@ module Aws::MarketplaceMetering
     # @!attribute message
     #   @return [String]
     class TimestampOutOfBoundsException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -389,6 +415,7 @@ module Aws::MarketplaceMetering
     #               this parameter can be left out.</p>
     #   @return [Array<Types::Tag>]
     class UsageAllocation < Struct.new(
+      nil,
       :allocated_usage_quantity,
       :tags,
       keyword_init: true
@@ -429,6 +456,7 @@ module Aws::MarketplaceMetering
     #           </p>
     #   @return [String]
     class UsageRecord < Struct.new(
+      nil,
       :timestamp,
       :customer_identifier,
       :dimension,
@@ -495,6 +523,7 @@ module Aws::MarketplaceMetering
     #            </ul>
     #   @return [String]
     class UsageRecordResult < Struct.new(
+      nil,
       :usage_record,
       :metering_record_id,
       :status,

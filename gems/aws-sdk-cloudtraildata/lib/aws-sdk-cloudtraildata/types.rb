@@ -23,6 +23,7 @@ module Aws::CloudTrailData
     #            </p>
     #   @return [String]
     class AuditEvent < Struct.new(
+      nil,
       :id,
       :event_data,
       :event_data_checksum,
@@ -39,6 +40,7 @@ module Aws::CloudTrailData
     #   <p>The event ID assigned by CloudTrail.</p>
     #   @return [String]
     class AuditEventResultEntry < Struct.new(
+      nil,
       :id,
       :event_id,
       keyword_init: true
@@ -50,6 +52,7 @@ module Aws::CloudTrailData
     # @!attribute message
     #   @return [String]
     class ChannelInsufficientPermission < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -60,6 +63,7 @@ module Aws::CloudTrailData
     # @!attribute message
     #   @return [String]
     class ChannelNotFound < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -70,6 +74,7 @@ module Aws::CloudTrailData
     # @!attribute message
     #   @return [String]
     class ChannelUnsupportedSchema < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -80,6 +85,7 @@ module Aws::CloudTrailData
     # @!attribute message
     #   @return [String]
     class DuplicatedAuditEventId < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -91,6 +97,7 @@ module Aws::CloudTrailData
     # @!attribute message
     #   @return [String]
     class InvalidChannelARN < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -110,6 +117,7 @@ module Aws::CloudTrailData
     #            such as a passphrase or account number.</p>
     #   @return [String]
     class PutAuditEventsInput < Struct.new(
+      nil,
       :audit_events,
       :channel_arn,
       :external_id,
@@ -128,6 +136,7 @@ module Aws::CloudTrailData
     #            returned for events that could not be ingested.</p>
     #   @return [Array<Types::ResultErrorEntry>]
     class PutAuditEventsOutput < Struct.new(
+      nil,
       :successful,
       :failed,
       keyword_init: true
@@ -148,6 +157,7 @@ module Aws::CloudTrailData
     #   <p>The message that describes the error for events that could not be ingested by CloudTrail.</p>
     #   @return [String]
     class ResultErrorEntry < Struct.new(
+      nil,
       :id,
       :error_code,
       :error_message,
@@ -160,6 +170,7 @@ module Aws::CloudTrailData
     # @!attribute message
     #   @return [String]
     class UnsupportedOperationException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )

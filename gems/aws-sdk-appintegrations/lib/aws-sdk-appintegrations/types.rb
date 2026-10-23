@@ -10,6 +10,7 @@ module Aws::AppIntegrations
     # @!attribute message
     #   @return [String]
     class AccessDeniedException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -27,6 +28,7 @@ module Aws::AppIntegrations
     #   <p>The identifier for the client that is associated with the Application Association.</p>
     #   @return [String]
     class ApplicationAssociationSummary < Struct.new(
+      nil,
       :application_association_arn,
       :application_arn,
       :client_id,
@@ -40,6 +42,7 @@ module Aws::AppIntegrations
     #   <p>The contact handling configuration for the application.</p>
     #   @return [Types::ContactHandling]
     class ApplicationConfig < Struct.new(
+      nil,
       :contact_handling,
       keyword_init: true
     )
@@ -51,6 +54,7 @@ module Aws::AppIntegrations
     #   <p>The external URL source for the application.</p>
     #   @return [Types::ExternalUrlConfig]
     class ApplicationSourceConfig < Struct.new(
+      nil,
       :external_url_config,
       keyword_init: true
     )
@@ -80,6 +84,7 @@ module Aws::AppIntegrations
     #   <p>Indicates whether the application is a service.</p>
     #   @return [Boolean]
     class ApplicationSummary < Struct.new(
+      nil,
       :arn,
       :id,
       :name,
@@ -102,6 +107,7 @@ module Aws::AppIntegrations
     #   <p>Indicates whether the application refreshes for each contact or refreshes only with each new browser session.</p>
     #   @return [String]
     class ContactHandling < Struct.new(
+      nil,
       :scope,
       keyword_init: true
     )
@@ -155,6 +161,7 @@ module Aws::AppIntegrations
     #   <p>The iframe configuration for the application.</p>
     #   @return [Types::IframeConfig]
     class CreateApplicationRequest < Struct.new(
+      nil,
       :name,
       :namespace,
       :description,
@@ -180,6 +187,7 @@ module Aws::AppIntegrations
     #   <p>A unique identifier for the Application.</p>
     #   @return [String]
     class CreateApplicationResponse < Struct.new(
+      nil,
       :arn,
       :id,
       keyword_init: true
@@ -213,6 +221,7 @@ module Aws::AppIntegrations
     #   <p>The configuration for how the files should be pulled from the source.</p>
     #   @return [Types::ExecutionConfiguration]
     class CreateDataIntegrationAssociationRequest < Struct.new(
+      nil,
       :data_integration_identifier,
       :client_id,
       :object_configuration,
@@ -232,6 +241,7 @@ module Aws::AppIntegrations
     #   <p>The Amazon Resource Name (ARN) for the DataIntegration.</p>
     #   @return [String]
     class CreateDataIntegrationAssociationResponse < Struct.new(
+      nil,
       :data_integration_association_id,
       :data_integration_arn,
       keyword_init: true
@@ -270,6 +280,7 @@ module Aws::AppIntegrations
     #   <p>The configuration for what data should be pulled from the source.</p>
     #   @return [Hash<String, Hash<String, Array<String>>>]
     class CreateDataIntegrationRequest < Struct.new(
+      nil,
       :name,
       :description,
       :kms_key,
@@ -321,6 +332,7 @@ module Aws::AppIntegrations
     #   <p>The configuration for what data should be pulled from the source.</p>
     #   @return [Hash<String, Hash<String, Array<String>>>]
     class CreateDataIntegrationResponse < Struct.new(
+      nil,
       :arn,
       :id,
       :name,
@@ -359,6 +371,7 @@ module Aws::AppIntegrations
     #   <p>The tags used to organize, track, or control access for this resource. For example, { "tags": {"key1":"value1", "key2":"value2"} }.</p>
     #   @return [Hash<String, String>]
     class CreateEventIntegrationRequest < Struct.new(
+      nil,
       :name,
       :description,
       :event_filter,
@@ -374,6 +387,7 @@ module Aws::AppIntegrations
     #   <p>The Amazon Resource Name (ARN) of the event integration. </p>
     #   @return [String]
     class CreateEventIntegrationResponse < Struct.new(
+      nil,
       :event_integration_arn,
       keyword_init: true
     )
@@ -401,6 +415,7 @@ module Aws::AppIntegrations
     #   <p>The configuration for how the files should be pulled from the source.</p>
     #   @return [Types::ExecutionConfiguration]
     class DataIntegrationAssociationSummary < Struct.new(
+      nil,
       :data_integration_association_arn,
       :data_integration_arn,
       :client_id,
@@ -423,6 +438,7 @@ module Aws::AppIntegrations
     #   <p>The URI of the data source.</p>
     #   @return [String]
     class DataIntegrationSummary < Struct.new(
+      nil,
       :arn,
       :name,
       :source_uri,
@@ -435,6 +451,7 @@ module Aws::AppIntegrations
     #   <p>The Amazon Resource Name (ARN) of the Application.</p>
     #   @return [String]
     class DeleteApplicationRequest < Struct.new(
+      nil,
       :arn,
       keyword_init: true
     )
@@ -442,6 +459,7 @@ module Aws::AppIntegrations
     end
 
     class DeleteApplicationResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -451,6 +469,7 @@ module Aws::AppIntegrations
     #   <p>A unique identifier for the DataIntegration.</p>
     #   @return [String]
     class DeleteDataIntegrationRequest < Struct.new(
+      nil,
       :data_integration_identifier,
       keyword_init: true
     )
@@ -458,6 +477,7 @@ module Aws::AppIntegrations
     end
 
     class DeleteDataIntegrationResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -467,6 +487,7 @@ module Aws::AppIntegrations
     #   <p>The name of the event integration.</p>
     #   @return [String]
     class DeleteEventIntegrationRequest < Struct.new(
+      nil,
       :name,
       keyword_init: true
     )
@@ -474,6 +495,7 @@ module Aws::AppIntegrations
     end
 
     class DeleteEventIntegrationResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -483,6 +505,7 @@ module Aws::AppIntegrations
     # @!attribute message
     #   @return [String]
     class DuplicateResourceException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -494,6 +517,7 @@ module Aws::AppIntegrations
     #   <p>The source of the events.</p>
     #   @return [String]
     class EventFilter < Struct.new(
+      nil,
       :source,
       keyword_init: true
     )
@@ -520,6 +544,7 @@ module Aws::AppIntegrations
     #   <p>The tags used to organize, track, or control access for this resource. For example, { "tags": {"key1":"value1", "key2":"value2"} }.</p>
     #   @return [Hash<String, String>]
     class EventIntegration < Struct.new(
+      nil,
       :event_integration_arn,
       :name,
       :description,
@@ -551,6 +576,7 @@ module Aws::AppIntegrations
     #   <p>The metadata associated with the client.</p>
     #   @return [Hash<String, String>]
     class EventIntegrationAssociation < Struct.new(
+      nil,
       :event_integration_association_arn,
       :event_integration_association_id,
       :event_integration_name,
@@ -573,6 +599,7 @@ module Aws::AppIntegrations
     #   <p>The name of the data and how often it should be pulled from the source.</p>
     #   @return [Types::ScheduleConfiguration]
     class ExecutionConfiguration < Struct.new(
+      nil,
       :execution_mode,
       :on_demand_configuration,
       :schedule_configuration,
@@ -589,6 +616,7 @@ module Aws::AppIntegrations
     #   <p>Additional URLs to allow list if different than the access URL.</p>
     #   @return [Array<String>]
     class ExternalUrlConfig < Struct.new(
+      nil,
       :access_url,
       :approved_origins,
       keyword_init: true
@@ -604,6 +632,7 @@ module Aws::AppIntegrations
     #   <p>Restrictions for what files should be pulled from the source.</p>
     #   @return [Hash<String, Array<String>>]
     class FileConfiguration < Struct.new(
+      nil,
       :folders,
       :filters,
       keyword_init: true
@@ -615,6 +644,7 @@ module Aws::AppIntegrations
     #   <p>The Amazon Resource Name (ARN) of the Application.</p>
     #   @return [String]
     class GetApplicationRequest < Struct.new(
+      nil,
       :arn,
       keyword_init: true
     )
@@ -674,6 +704,7 @@ module Aws::AppIntegrations
     #   <p>The iframe configuration for the application.</p>
     #   @return [Types::IframeConfig]
     class GetApplicationResponse < Struct.new(
+      nil,
       :arn,
       :id,
       :name,
@@ -704,6 +735,7 @@ module Aws::AppIntegrations
     #   <p>A unique identifier.</p>
     #   @return [String]
     class GetDataIntegrationRequest < Struct.new(
+      nil,
       :identifier,
       keyword_init: true
     )
@@ -741,6 +773,7 @@ module Aws::AppIntegrations
     #   <p>The configuration for what data should be pulled from the source.</p>
     #   @return [Hash<String, Hash<String, Array<String>>>]
     class GetDataIntegrationResponse < Struct.new(
+      nil,
       :arn,
       :id,
       :name,
@@ -760,6 +793,7 @@ module Aws::AppIntegrations
     #   <p>The name of the event integration. </p>
     #   @return [String]
     class GetEventIntegrationRequest < Struct.new(
+      nil,
       :name,
       keyword_init: true
     )
@@ -785,6 +819,7 @@ module Aws::AppIntegrations
     #   <p>The tags used to organize, track, or control access for this resource. For example, { "tags": {"key1":"value1", "key2":"value2"} }.</p>
     #   @return [Hash<String, String>]
     class GetEventIntegrationResponse < Struct.new(
+      nil,
       :name,
       :description,
       :event_integration_arn,
@@ -804,6 +839,7 @@ module Aws::AppIntegrations
     #   <p>The list of sandbox attributes for the iframe.</p>
     #   @return [Array<String>]
     class IframeConfig < Struct.new(
+      nil,
       :allow,
       :sandbox,
       keyword_init: true
@@ -815,6 +851,7 @@ module Aws::AppIntegrations
     # @!attribute message
     #   @return [String]
     class InternalServiceError < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -825,6 +862,7 @@ module Aws::AppIntegrations
     # @!attribute message
     #   @return [String]
     class InvalidRequestException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -839,6 +877,7 @@ module Aws::AppIntegrations
     #   <p>The status message of a job.</p>
     #   @return [String]
     class LastExecutionStatus < Struct.new(
+      nil,
       :execution_status,
       :status_message,
       keyword_init: true
@@ -857,6 +896,7 @@ module Aws::AppIntegrations
     #   <p>The maximum number of results to return per page.</p>
     #   @return [Integer]
     class ListApplicationAssociationsRequest < Struct.new(
+      nil,
       :application_id,
       :next_token,
       :max_results,
@@ -872,6 +912,7 @@ module Aws::AppIntegrations
     #   <p>If there are additional results, this is the token for the next set of results.</p>
     #   @return [String]
     class ListApplicationAssociationsResponse < Struct.new(
+      nil,
       :application_associations,
       :next_token,
       keyword_init: true
@@ -887,6 +928,7 @@ module Aws::AppIntegrations
     #   <p>The maximum number of results to return per page.</p>
     #   @return [Integer]
     class ListApplicationsRequest < Struct.new(
+      nil,
       :next_token,
       :max_results,
       keyword_init: true
@@ -901,6 +943,7 @@ module Aws::AppIntegrations
     #   <p>If there are additional results, this is the token for the next set of results.</p>
     #   @return [String]
     class ListApplicationsResponse < Struct.new(
+      nil,
       :applications,
       :next_token,
       keyword_init: true
@@ -919,6 +962,7 @@ module Aws::AppIntegrations
     #   <p>The maximum number of results to return per page.</p>
     #   @return [Integer]
     class ListDataIntegrationAssociationsRequest < Struct.new(
+      nil,
       :data_integration_identifier,
       :next_token,
       :max_results,
@@ -934,6 +978,7 @@ module Aws::AppIntegrations
     #   <p>If there are additional results, this is the token for the next set of results.</p>
     #   @return [String]
     class ListDataIntegrationAssociationsResponse < Struct.new(
+      nil,
       :data_integration_associations,
       :next_token,
       keyword_init: true
@@ -949,6 +994,7 @@ module Aws::AppIntegrations
     #   <p>The maximum number of results to return per page.</p>
     #   @return [Integer]
     class ListDataIntegrationsRequest < Struct.new(
+      nil,
       :next_token,
       :max_results,
       keyword_init: true
@@ -963,6 +1009,7 @@ module Aws::AppIntegrations
     #   <p>If there are additional results, this is the token for the next set of results.</p>
     #   @return [String]
     class ListDataIntegrationsResponse < Struct.new(
+      nil,
       :data_integrations,
       :next_token,
       keyword_init: true
@@ -981,6 +1028,7 @@ module Aws::AppIntegrations
     #   <p>The maximum number of results to return per page.</p>
     #   @return [Integer]
     class ListEventIntegrationAssociationsRequest < Struct.new(
+      nil,
       :event_integration_name,
       :next_token,
       :max_results,
@@ -996,6 +1044,7 @@ module Aws::AppIntegrations
     #   <p>If there are additional results, this is the token for the next set of results.</p>
     #   @return [String]
     class ListEventIntegrationAssociationsResponse < Struct.new(
+      nil,
       :event_integration_associations,
       :next_token,
       keyword_init: true
@@ -1011,6 +1060,7 @@ module Aws::AppIntegrations
     #   <p>The maximum number of results to return per page.</p>
     #   @return [Integer]
     class ListEventIntegrationsRequest < Struct.new(
+      nil,
       :next_token,
       :max_results,
       keyword_init: true
@@ -1025,6 +1075,7 @@ module Aws::AppIntegrations
     #   <p>If there are additional results, this is the token for the next set of results.</p>
     #   @return [String]
     class ListEventIntegrationsResponse < Struct.new(
+      nil,
       :event_integrations,
       :next_token,
       keyword_init: true
@@ -1036,6 +1087,7 @@ module Aws::AppIntegrations
     #   <p>The Amazon Resource Name (ARN) of the resource. </p>
     #   @return [String]
     class ListTagsForResourceRequest < Struct.new(
+      nil,
       :resource_arn,
       keyword_init: true
     )
@@ -1046,6 +1098,7 @@ module Aws::AppIntegrations
     #   <p>Information about the tags.</p>
     #   @return [Hash<String, String>]
     class ListTagsForResourceResponse < Struct.new(
+      nil,
       :tags,
       keyword_init: true
     )
@@ -1062,6 +1115,7 @@ module Aws::AppIntegrations
     #         milliseconds</p>
     #   @return [String]
     class OnDemandConfiguration < Struct.new(
+      nil,
       :start_time,
       :end_time,
       keyword_init: true
@@ -1080,6 +1134,7 @@ module Aws::AppIntegrations
     #   <p>The description of the publication.</p>
     #   @return [String]
     class Publication < Struct.new(
+      nil,
       :event,
       :schema,
       :description,
@@ -1092,6 +1147,7 @@ module Aws::AppIntegrations
     # @!attribute message
     #   @return [String]
     class ResourceNotFoundException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -1102,6 +1158,7 @@ module Aws::AppIntegrations
     # @!attribute message
     #   @return [String]
     class ResourceQuotaExceededException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -1120,6 +1177,7 @@ module Aws::AppIntegrations
     #   <p>How often the data should be pulled from data source.</p>
     #   @return [String]
     class ScheduleConfiguration < Struct.new(
+      nil,
       :first_execution_from,
       :object,
       :schedule_expression,
@@ -1136,6 +1194,7 @@ module Aws::AppIntegrations
     #   <p>The description of the subscription.</p>
     #   @return [String]
     class Subscription < Struct.new(
+      nil,
       :event,
       :description,
       keyword_init: true
@@ -1150,6 +1209,7 @@ module Aws::AppIntegrations
     #   <p>The tags used to organize, track, or control access for this resource. For example, { "tags": {"key1":"value1", "key2":"value2"} }.</p>
     #   @return [Hash<String, String>]
     class TagResourceRequest < Struct.new(
+      nil,
       :resource_arn,
       :tags,
       keyword_init: true
@@ -1158,6 +1218,7 @@ module Aws::AppIntegrations
     end
 
     class TagResourceResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1167,6 +1228,7 @@ module Aws::AppIntegrations
     # @!attribute message
     #   @return [String]
     class ThrottlingException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -1177,6 +1239,7 @@ module Aws::AppIntegrations
     # @!attribute message
     #   @return [String]
     class UnsupportedOperationException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -1190,6 +1253,7 @@ module Aws::AppIntegrations
     #   <p>The tag keys.</p>
     #   @return [Array<String>]
     class UntagResourceRequest < Struct.new(
+      nil,
       :resource_arn,
       :tag_keys,
       keyword_init: true
@@ -1198,6 +1262,7 @@ module Aws::AppIntegrations
     end
 
     class UntagResourceResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1241,6 +1306,7 @@ module Aws::AppIntegrations
     #   <p>The iframe configuration for the application.</p>
     #   @return [Types::IframeConfig]
     class UpdateApplicationRequest < Struct.new(
+      nil,
       :arn,
       :name,
       :description,
@@ -1258,6 +1324,7 @@ module Aws::AppIntegrations
     end
 
     class UpdateApplicationResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1273,6 +1340,7 @@ module Aws::AppIntegrations
     #   <p>The configuration for how the files should be pulled from the source.</p>
     #   @return [Types::ExecutionConfiguration]
     class UpdateDataIntegrationAssociationRequest < Struct.new(
+      nil,
       :data_integration_identifier,
       :data_integration_association_identifier,
       :execution_configuration,
@@ -1282,6 +1350,7 @@ module Aws::AppIntegrations
     end
 
     class UpdateDataIntegrationAssociationResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1297,6 +1366,7 @@ module Aws::AppIntegrations
     #   <p>A description of the DataIntegration.</p>
     #   @return [String]
     class UpdateDataIntegrationRequest < Struct.new(
+      nil,
       :identifier,
       :name,
       :description,
@@ -1306,6 +1376,7 @@ module Aws::AppIntegrations
     end
 
     class UpdateDataIntegrationResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1318,6 +1389,7 @@ module Aws::AppIntegrations
     #   <p>The description of the event integration.</p>
     #   @return [String]
     class UpdateEventIntegrationRequest < Struct.new(
+      nil,
       :name,
       :description,
       keyword_init: true
@@ -1326,6 +1398,7 @@ module Aws::AppIntegrations
     end
 
     class UpdateEventIntegrationResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure

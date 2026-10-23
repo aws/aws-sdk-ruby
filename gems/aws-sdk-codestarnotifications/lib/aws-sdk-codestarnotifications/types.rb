@@ -11,6 +11,7 @@ module Aws::Codestarnotifications
     # @!attribute message
     #   @return [String]
     class AccessDeniedException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -22,6 +23,7 @@ module Aws::Codestarnotifications
     # @!attribute message
     #   @return [String]
     class ConcurrentModificationException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -32,6 +34,7 @@ module Aws::Codestarnotifications
     # @!attribute message
     #   @return [String]
     class ConfigurationException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -76,6 +79,7 @@ module Aws::Codestarnotifications
     #               set to <code>DISABLED</code>, notifications aren't sent for the notification rule.</p>
     #   @return [String]
     class CreateNotificationRuleRequest < Struct.new(
+      nil,
       :name,
       :event_type_ids,
       :resource,
@@ -93,6 +97,7 @@ module Aws::Codestarnotifications
     #   <p>The Amazon Resource Name (ARN) of the notification rule.</p>
     #   @return [String]
     class CreateNotificationRuleResult < Struct.new(
+      nil,
       :arn,
       keyword_init: true
     )
@@ -103,6 +108,7 @@ module Aws::Codestarnotifications
     #   <p>The Amazon Resource Name (ARN) of the notification rule you want to delete.</p>
     #   @return [String]
     class DeleteNotificationRuleRequest < Struct.new(
+      nil,
       :arn,
       keyword_init: true
     )
@@ -113,6 +119,7 @@ module Aws::Codestarnotifications
     #   <p>The Amazon Resource Name (ARN) of the deleted notification rule.</p>
     #   @return [String]
     class DeleteNotificationRuleResult < Struct.new(
+      nil,
       :arn,
       keyword_init: true
     )
@@ -128,6 +135,7 @@ module Aws::Codestarnotifications
     #               notification rule in your Amazon Web Services account are deleted.</p>
     #   @return [Boolean]
     class DeleteTargetRequest < Struct.new(
+      nil,
       :target_address,
       :force_unsubscribe_all,
       keyword_init: true
@@ -136,6 +144,7 @@ module Aws::Codestarnotifications
     end
 
     class DeleteTargetResult < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -145,6 +154,7 @@ module Aws::Codestarnotifications
     #   <p>The Amazon Resource Name (ARN) of the notification rule.</p>
     #   @return [String]
     class DescribeNotificationRuleRequest < Struct.new(
+      nil,
       :arn,
       keyword_init: true
     )
@@ -190,6 +200,7 @@ module Aws::Codestarnotifications
     #   <p>The tags associated with the notification rule.</p>
     #   @return [Hash<String, String>]
     class DescribeNotificationRuleResult < Struct.new(
+      nil,
       :arn,
       :name,
       :event_types,
@@ -222,6 +233,7 @@ module Aws::Codestarnotifications
     #   <p>The resource type of the event.</p>
     #   @return [String]
     class EventTypeSummary < Struct.new(
+      nil,
       :event_type_id,
       :service_name,
       :event_type_name,
@@ -235,6 +247,7 @@ module Aws::Codestarnotifications
     # @!attribute message
     #   @return [String]
     class InvalidNextTokenException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -247,6 +260,7 @@ module Aws::Codestarnotifications
     # @!attribute message
     #   @return [String]
     class LimitExceededException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -263,6 +277,7 @@ module Aws::Codestarnotifications
     #         CodePipeline) that you want to filter by.</p>
     #   @return [String]
     class ListEventTypesFilter < Struct.new(
+      nil,
       :name,
       :value,
       keyword_init: true
@@ -282,6 +297,7 @@ module Aws::Codestarnotifications
     #         results that can be returned is 100.</p>
     #   @return [Integer]
     class ListEventTypesRequest < Struct.new(
+      nil,
       :filters,
       :next_token,
       :max_results,
@@ -298,6 +314,7 @@ module Aws::Codestarnotifications
     #   <p>An enumeration token that can be used in a request to return the next batch of the results.</p>
     #   @return [String]
     class ListEventTypesResult < Struct.new(
+      nil,
       :event_types,
       :next_token,
       keyword_init: true
@@ -315,6 +332,7 @@ module Aws::Codestarnotifications
     #             in Name, you might specify the ARN of a pipeline in CodePipeline for the value.</p>
     #   @return [String]
     class ListNotificationRulesFilter < Struct.new(
+      nil,
       :name,
       :value,
       keyword_init: true
@@ -338,6 +356,7 @@ module Aws::Codestarnotifications
     #         results that can be returned is 100.</p>
     #   @return [Integer]
     class ListNotificationRulesRequest < Struct.new(
+      nil,
       :filters,
       :next_token,
       :max_results,
@@ -353,6 +372,7 @@ module Aws::Codestarnotifications
     #   <p>The list of notification rules for the Amazon Web Services account, by Amazon Resource Name (ARN) and ID. </p>
     #   @return [Array<Types::NotificationRuleSummary>]
     class ListNotificationRulesResult < Struct.new(
+      nil,
       :next_token,
       :notification_rules,
       keyword_init: true
@@ -364,6 +384,7 @@ module Aws::Codestarnotifications
     #   <p>The Amazon Resource Name (ARN) for the notification rule.</p>
     #   @return [String]
     class ListTagsForResourceRequest < Struct.new(
+      nil,
       :arn,
       keyword_init: true
     )
@@ -374,6 +395,7 @@ module Aws::Codestarnotifications
     #   <p>The tags associated with the notification rule.</p>
     #   @return [Hash<String, String>]
     class ListTagsForResourceResult < Struct.new(
+      nil,
       :tags,
       keyword_init: true
     )
@@ -394,6 +416,7 @@ module Aws::Codestarnotifications
     #               Resource Name (ARN) for a topic as the value.</p>
     #   @return [String]
     class ListTargetsFilter < Struct.new(
+      nil,
       :name,
       :value,
       keyword_init: true
@@ -417,6 +440,7 @@ module Aws::Codestarnotifications
     #         results that can be returned is 100.</p>
     #   @return [Integer]
     class ListTargetsRequest < Struct.new(
+      nil,
       :filters,
       :next_token,
       :max_results,
@@ -433,6 +457,7 @@ module Aws::Codestarnotifications
     #               results.</p>
     #   @return [String]
     class ListTargetsResult < Struct.new(
+      nil,
       :targets,
       :next_token,
       keyword_init: true
@@ -448,6 +473,7 @@ module Aws::Codestarnotifications
     #   <p>The Amazon Resource Name (ARN) of the notification rule.</p>
     #   @return [String]
     class NotificationRuleSummary < Struct.new(
+      nil,
       :id,
       :arn,
       keyword_init: true
@@ -460,6 +486,7 @@ module Aws::Codestarnotifications
     # @!attribute message
     #   @return [String]
     class ResourceAlreadyExistsException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -470,6 +497,7 @@ module Aws::Codestarnotifications
     # @!attribute message
     #   @return [String]
     class ResourceNotFoundException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -487,6 +515,7 @@ module Aws::Codestarnotifications
     #               results.</p>
     #   @return [String]
     class SubscribeRequest < Struct.new(
+      nil,
       :arn,
       :target,
       :client_request_token,
@@ -499,6 +528,7 @@ module Aws::Codestarnotifications
     #   <p>The Amazon Resource Name (ARN) of the notification rule for which you have created assocations.</p>
     #   @return [String]
     class SubscribeResult < Struct.new(
+      nil,
       :arn,
       keyword_init: true
     )
@@ -512,6 +542,7 @@ module Aws::Codestarnotifications
     #   <p>The list of tags to associate with the resource. Tag key names cannot start with "<code>aws</code>".</p>
     #   @return [Hash<String, String>]
     class TagResourceRequest < Struct.new(
+      nil,
       :arn,
       :tags,
       keyword_init: true
@@ -523,6 +554,7 @@ module Aws::Codestarnotifications
     #   <p>The list of tags associated with the resource.</p>
     #   @return [Hash<String, String>]
     class TagResourceResult < Struct.new(
+      nil,
       :tags,
       keyword_init: true
     )
@@ -545,6 +577,7 @@ module Aws::Codestarnotifications
     #   <p>The Amazon Resource Name (ARN) of the Amazon Q Developer in chat applications topic or Amazon Q Developer in chat applications client.</p>
     #   @return [String]
     class Target < Struct.new(
+      nil,
       :target_type,
       :target_address,
       keyword_init: true
@@ -571,6 +604,7 @@ module Aws::Codestarnotifications
     #   <p>The status of the target.</p>
     #   @return [String]
     class TargetSummary < Struct.new(
+      nil,
       :target_address,
       :target_type,
       :target_status,
@@ -586,6 +620,7 @@ module Aws::Codestarnotifications
     #   <p>The ARN of the Amazon Q Developer in chat applications topic to unsubscribe from the notification rule.</p>
     #   @return [String]
     class UnsubscribeRequest < Struct.new(
+      nil,
       :arn,
       :target_address,
       keyword_init: true
@@ -597,6 +632,7 @@ module Aws::Codestarnotifications
     #   <p>The Amazon Resource Name (ARN) of the the notification rule from which you have removed a subscription.</p>
     #   @return [String]
     class UnsubscribeResult < Struct.new(
+      nil,
       :arn,
       keyword_init: true
     )
@@ -611,6 +647,7 @@ module Aws::Codestarnotifications
     #   <p>The key names of the tags to remove.</p>
     #   @return [Array<String>]
     class UntagResourceRequest < Struct.new(
+      nil,
       :arn,
       :tag_keys,
       keyword_init: true
@@ -619,6 +656,7 @@ module Aws::Codestarnotifications
     end
 
     class UntagResourceResult < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -649,6 +687,7 @@ module Aws::Codestarnotifications
     #               provided by CodeStar Notifications and/or the service for the resource for which the notification is created.</p>
     #   @return [String]
     class UpdateNotificationRuleRequest < Struct.new(
+      nil,
       :arn,
       :name,
       :status,
@@ -661,6 +700,7 @@ module Aws::Codestarnotifications
     end
 
     class UpdateNotificationRuleResult < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -670,6 +710,7 @@ module Aws::Codestarnotifications
     # @!attribute message
     #   @return [String]
     class ValidationException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )

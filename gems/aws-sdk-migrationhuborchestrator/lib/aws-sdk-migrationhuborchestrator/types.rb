@@ -10,6 +10,7 @@ module Aws::MigrationHubOrchestrator
     # @!attribute message
     #   @return [String]
     class AccessDeniedException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -21,6 +22,7 @@ module Aws::MigrationHubOrchestrator
     # @!attribute message
     #   @return [String]
     class ConflictException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -44,6 +46,7 @@ module Aws::MigrationHubOrchestrator
     #   <p>The tags to add to the migration workflow template.</p>
     #   @return [Hash<String, String>]
     class CreateTemplateRequest < Struct.new(
+      nil,
       :template_name,
       :template_description,
       :template_source,
@@ -68,6 +71,7 @@ module Aws::MigrationHubOrchestrator
     #   <p>The tags added to the migration workflow template.</p>
     #   @return [Hash<String, String>]
     class CreateTemplateResponse < Struct.new(
+      nil,
       :template_id,
       :template_arn,
       :tags,
@@ -98,6 +102,7 @@ module Aws::MigrationHubOrchestrator
     #   <p>The tags to add on a migration workflow.</p>
     #   @return [Hash<String, String>]
     class CreateWorkflowInput < Struct.new(
+      nil,
       :name,
       :description,
       :template_id,
@@ -144,6 +149,7 @@ module Aws::MigrationHubOrchestrator
     #   <p>The tags to add on a migration workflow.</p>
     #   @return [Hash<String, String>]
     class CreateWorkflowOutput < Struct.new(
+      nil,
       :id,
       :arn,
       :name,
@@ -176,6 +182,7 @@ module Aws::MigrationHubOrchestrator
     #   <p>The previous step group.</p>
     #   @return [Array<String>]
     class CreateWorkflowStepGroupInput < Struct.new(
+      nil,
       :workflow_id,
       :name,
       :description,
@@ -211,6 +218,7 @@ module Aws::MigrationHubOrchestrator
     #   <p>The time at which the step group is created.</p>
     #   @return [Time]
     class CreateWorkflowStepGroupOutput < Struct.new(
+      nil,
       :workflow_id,
       :name,
       :id,
@@ -256,6 +264,7 @@ module Aws::MigrationHubOrchestrator
     #   <p>The next step.</p>
     #   @return [Array<String>]
     class CreateWorkflowStepInput < Struct.new(
+      nil,
       :name,
       :step_group_id,
       :workflow_id,
@@ -284,6 +293,7 @@ module Aws::MigrationHubOrchestrator
     #   <p>The name of the step.</p>
     #   @return [String]
     class CreateWorkflowStepOutput < Struct.new(
+      nil,
       :id,
       :step_group_id,
       :workflow_id,
@@ -297,6 +307,7 @@ module Aws::MigrationHubOrchestrator
     #   <p>The ID of the request to delete a migration workflow template.</p>
     #   @return [String]
     class DeleteTemplateRequest < Struct.new(
+      nil,
       :id,
       keyword_init: true
     )
@@ -304,6 +315,7 @@ module Aws::MigrationHubOrchestrator
     end
 
     class DeleteTemplateResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -313,6 +325,7 @@ module Aws::MigrationHubOrchestrator
     #   <p>The ID of the migration workflow you want to delete.</p>
     #   @return [String]
     class DeleteWorkflowInput < Struct.new(
+      nil,
       :id,
       keyword_init: true
     )
@@ -329,6 +342,7 @@ module Aws::MigrationHubOrchestrator
     #   <p>The status of the migration workflow.</p>
     #   @return [String]
     class DeleteWorkflowOutput < Struct.new(
+      nil,
       :id,
       :arn,
       :status,
@@ -344,6 +358,7 @@ module Aws::MigrationHubOrchestrator
     #   <p>The ID of the step group you want to delete.</p>
     #   @return [String]
     class DeleteWorkflowStepGroupInput < Struct.new(
+      nil,
       :workflow_id,
       :id,
       keyword_init: true
@@ -352,6 +367,7 @@ module Aws::MigrationHubOrchestrator
     end
 
     class DeleteWorkflowStepGroupOutput < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -367,6 +383,7 @@ module Aws::MigrationHubOrchestrator
     #   <p>The ID of the migration workflow.</p>
     #   @return [String]
     class DeleteWorkflowStepInput < Struct.new(
+      nil,
       :id,
       :step_group_id,
       :workflow_id,
@@ -376,6 +393,7 @@ module Aws::MigrationHubOrchestrator
     end
 
     class DeleteWorkflowStepOutput < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -385,6 +403,7 @@ module Aws::MigrationHubOrchestrator
     #   <p>The ID of the template.</p>
     #   @return [String]
     class GetTemplateInput < Struct.new(
+      nil,
       :id,
       keyword_init: true
     )
@@ -453,6 +472,7 @@ module Aws::MigrationHubOrchestrator
     #   <p>The tags added to the migration workflow template.</p>
     #   @return [Hash<String, String>]
     class GetTemplateOutput < Struct.new(
+      nil,
       :id,
       :template_arn,
       :name,
@@ -477,6 +497,7 @@ module Aws::MigrationHubOrchestrator
     #   <p>The ID of the step group.</p>
     #   @return [String]
     class GetTemplateStepGroupInput < Struct.new(
+      nil,
       :template_id,
       :id,
       keyword_init: true
@@ -515,6 +536,7 @@ module Aws::MigrationHubOrchestrator
     #   <p>The next step group.</p>
     #   @return [Array<String>]
     class GetTemplateStepGroupOutput < Struct.new(
+      nil,
       :template_id,
       :id,
       :name,
@@ -540,6 +562,7 @@ module Aws::MigrationHubOrchestrator
     #   <p>The ID of the step group.</p>
     #   @return [String]
     class GetTemplateStepInput < Struct.new(
+      nil,
       :id,
       :template_id,
       :step_group_id,
@@ -583,6 +606,7 @@ module Aws::MigrationHubOrchestrator
     #   <p>The custom script to run tests on source or target environments.</p>
     #   @return [Types::StepAutomationConfiguration]
     class GetTemplateStepOutput < Struct.new(
+      nil,
       :id,
       :step_group_id,
       :template_id,
@@ -603,6 +627,7 @@ module Aws::MigrationHubOrchestrator
     #   <p>The ID of the migration workflow.</p>
     #   @return [String]
     class GetWorkflowInput < Struct.new(
+      nil,
       :id,
       keyword_init: true
     )
@@ -670,6 +695,7 @@ module Aws::MigrationHubOrchestrator
     #   <p>The Amazon S3 bucket where the migration logs are stored.</p>
     #   @return [String]
     class GetWorkflowOutput < Struct.new(
+      nil,
       :id,
       :arn,
       :name,
@@ -702,6 +728,7 @@ module Aws::MigrationHubOrchestrator
     #   <p>The ID of the migration workflow.</p>
     #   @return [String]
     class GetWorkflowStepGroupInput < Struct.new(
+      nil,
       :id,
       :workflow_id,
       keyword_init: true
@@ -746,6 +773,7 @@ module Aws::MigrationHubOrchestrator
     #   <p>The next step group.</p>
     #   @return [Array<String>]
     class GetWorkflowStepGroupOutput < Struct.new(
+      nil,
       :id,
       :workflow_id,
       :name,
@@ -773,6 +801,7 @@ module Aws::MigrationHubOrchestrator
     #   <p>The ID of the step.</p>
     #   @return [String]
     class GetWorkflowStepInput < Struct.new(
+      nil,
       :workflow_id,
       :step_group_id,
       :id,
@@ -846,6 +875,7 @@ module Aws::MigrationHubOrchestrator
     #   <p>The total number of servers that have been migrated.</p>
     #   @return [Integer]
     class GetWorkflowStepOutput < Struct.new(
+      nil,
       :name,
       :step_group_id,
       :workflow_id,
@@ -876,6 +906,7 @@ module Aws::MigrationHubOrchestrator
     # @!attribute message
     #   @return [String]
     class InternalServerException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -889,6 +920,7 @@ module Aws::MigrationHubOrchestrator
     #   <p>The pagination token.</p>
     #   @return [String]
     class ListPluginsInput < Struct.new(
+      nil,
       :max_results,
       :next_token,
       keyword_init: true
@@ -903,6 +935,7 @@ module Aws::MigrationHubOrchestrator
     #   <p>Migration Hub Orchestrator plugins.</p>
     #   @return [Array<Types::PluginSummary>]
     class ListPluginsOutput < Struct.new(
+      nil,
       :next_token,
       :plugins,
       keyword_init: true
@@ -914,6 +947,7 @@ module Aws::MigrationHubOrchestrator
     #   <p>The Amazon Resource Name (ARN) of the resource.</p>
     #   @return [String]
     class ListTagsForResourceInput < Struct.new(
+      nil,
       :resource_arn,
       keyword_init: true
     )
@@ -924,6 +958,7 @@ module Aws::MigrationHubOrchestrator
     #   <p>The tags added to a resource.</p>
     #   @return [Hash<String, String>]
     class ListTagsForResourceOutput < Struct.new(
+      nil,
       :tags,
       keyword_init: true
     )
@@ -940,6 +975,7 @@ module Aws::MigrationHubOrchestrator
     #   <p>The ID of the template.</p>
     #   @return [String]
     class ListTemplateStepGroupsInput < Struct.new(
+      nil,
       :max_results,
       :next_token,
       :template_id,
@@ -955,6 +991,7 @@ module Aws::MigrationHubOrchestrator
     #   <p>The summary of the step group in the template.</p>
     #   @return [Array<Types::TemplateStepGroupSummary>]
     class ListTemplateStepGroupsOutput < Struct.new(
+      nil,
       :next_token,
       :template_step_group_summary,
       keyword_init: true
@@ -975,6 +1012,7 @@ module Aws::MigrationHubOrchestrator
     #   <p>The ID of the step group.</p>
     #   @return [String]
     class ListTemplateStepsInput < Struct.new(
+      nil,
       :max_results,
       :next_token,
       :template_id,
@@ -991,6 +1029,7 @@ module Aws::MigrationHubOrchestrator
     #   <p>The list of summaries of steps in a template.</p>
     #   @return [Array<Types::TemplateStepSummary>]
     class ListTemplateStepsOutput < Struct.new(
+      nil,
       :next_token,
       :template_step_summary_list,
       keyword_init: true
@@ -1008,6 +1047,7 @@ module Aws::MigrationHubOrchestrator
     #   <p>The name of the template.</p>
     #   @return [String]
     class ListTemplatesInput < Struct.new(
+      nil,
       :max_results,
       :next_token,
       :name,
@@ -1023,6 +1063,7 @@ module Aws::MigrationHubOrchestrator
     #   <p>The summary of the template.</p>
     #   @return [Array<Types::TemplateSummary>]
     class ListTemplatesOutput < Struct.new(
+      nil,
       :next_token,
       :template_summary,
       keyword_init: true
@@ -1040,6 +1081,7 @@ module Aws::MigrationHubOrchestrator
     #   <p>The ID of the migration workflow.</p>
     #   @return [String]
     class ListWorkflowStepGroupsInput < Struct.new(
+      nil,
       :next_token,
       :max_results,
       :workflow_id,
@@ -1055,6 +1097,7 @@ module Aws::MigrationHubOrchestrator
     #   <p>The summary of step groups in a migration workflow.</p>
     #   @return [Array<Types::WorkflowStepGroupSummary>]
     class ListWorkflowStepGroupsOutput < Struct.new(
+      nil,
       :next_token,
       :workflow_step_groups_summary,
       keyword_init: true
@@ -1075,6 +1118,7 @@ module Aws::MigrationHubOrchestrator
     #   <p>The ID of the step group.</p>
     #   @return [String]
     class ListWorkflowStepsInput < Struct.new(
+      nil,
       :next_token,
       :max_results,
       :workflow_id,
@@ -1091,6 +1135,7 @@ module Aws::MigrationHubOrchestrator
     #   <p>The summary of steps in a migration workflow.</p>
     #   @return [Array<Types::WorkflowStepSummary>]
     class ListWorkflowStepsOutput < Struct.new(
+      nil,
       :next_token,
       :workflow_steps_summary,
       keyword_init: true
@@ -1117,6 +1162,7 @@ module Aws::MigrationHubOrchestrator
     #   <p>The name of the migration workflow.</p>
     #   @return [String]
     class ListWorkflowsInput < Struct.new(
+      nil,
       :max_results,
       :next_token,
       :template_id,
@@ -1135,6 +1181,7 @@ module Aws::MigrationHubOrchestrator
     #   <p>The summary of the migration workflow.</p>
     #   @return [Array<Types::MigrationWorkflowSummary>]
     class ListWorkflowsOutput < Struct.new(
+      nil,
       :next_token,
       :migration_workflow_summary,
       keyword_init: true
@@ -1174,6 +1221,7 @@ module Aws::MigrationHubOrchestrator
     #   <p>All the steps in a migration workflow.</p>
     #   @return [Integer]
     class MigrationWorkflowSummary < Struct.new(
+      nil,
       :id,
       :name,
       :template_id,
@@ -1197,6 +1245,7 @@ module Aws::MigrationHubOrchestrator
     #   <p>Command for Windows.</p>
     #   @return [String]
     class PlatformCommand < Struct.new(
+      nil,
       :linux,
       :windows,
       keyword_init: true
@@ -1212,6 +1261,7 @@ module Aws::MigrationHubOrchestrator
     #   <p>The script location for Windows.</p>
     #   @return [String]
     class PlatformScriptKey < Struct.new(
+      nil,
       :linux,
       :windows,
       keyword_init: true
@@ -1239,6 +1289,7 @@ module Aws::MigrationHubOrchestrator
     #   <p>The time at which the plugin was registered.</p>
     #   @return [String]
     class PluginSummary < Struct.new(
+      nil,
       :plugin_id,
       :hostname,
       :status,
@@ -1254,6 +1305,7 @@ module Aws::MigrationHubOrchestrator
     # @!attribute message
     #   @return [String]
     class ResourceNotFoundException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -1270,6 +1322,7 @@ module Aws::MigrationHubOrchestrator
     #   <p>The ID of the step.</p>
     #   @return [String]
     class RetryWorkflowStepInput < Struct.new(
+      nil,
       :workflow_id,
       :step_group_id,
       :id,
@@ -1291,6 +1344,7 @@ module Aws::MigrationHubOrchestrator
     #   <p>The status of the step.</p>
     #   @return [String]
     class RetryWorkflowStepOutput < Struct.new(
+      nil,
       :step_group_id,
       :workflow_id,
       :id,
@@ -1304,6 +1358,7 @@ module Aws::MigrationHubOrchestrator
     #   <p>The ID of the migration workflow.</p>
     #   @return [String]
     class StartWorkflowInput < Struct.new(
+      nil,
       :id,
       keyword_init: true
     )
@@ -1326,6 +1381,7 @@ module Aws::MigrationHubOrchestrator
     #   <p>The time at which the migration workflow was last started.</p>
     #   @return [Time]
     class StartWorkflowOutput < Struct.new(
+      nil,
       :id,
       :arn,
       :status,
@@ -1353,6 +1409,7 @@ module Aws::MigrationHubOrchestrator
     #   <p>The servers on which to run the script.</p>
     #   @return [String]
     class StepAutomationConfiguration < Struct.new(
+      nil,
       :script_location_s3_bucket,
       :script_location_s3_key,
       :command,
@@ -1405,6 +1462,7 @@ module Aws::MigrationHubOrchestrator
     #   <p>Determine if an output is required from a step.</p>
     #   @return [Boolean]
     class StepOutput < Struct.new(
+      nil,
       :name,
       :data_type,
       :required,
@@ -1417,6 +1475,7 @@ module Aws::MigrationHubOrchestrator
     #   <p>The ID of the migration workflow.</p>
     #   @return [String]
     class StopWorkflowInput < Struct.new(
+      nil,
       :id,
       keyword_init: true
     )
@@ -1439,6 +1498,7 @@ module Aws::MigrationHubOrchestrator
     #   <p>The time at which the migration workflow was stopped.</p>
     #   @return [Time]
     class StopWorkflowOutput < Struct.new(
+      nil,
       :id,
       :arn,
       :status,
@@ -1457,6 +1517,7 @@ module Aws::MigrationHubOrchestrator
     #               resource.</p>
     #   @return [Hash<String, String>]
     class TagResourceInput < Struct.new(
+      nil,
       :resource_arn,
       :tags,
       keyword_init: true
@@ -1465,6 +1526,7 @@ module Aws::MigrationHubOrchestrator
     end
 
     class TagResourceOutput < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1481,6 +1543,7 @@ module Aws::MigrationHubOrchestrator
     #   <p>Determine if an input is required from the template.</p>
     #   @return [Boolean]
     class TemplateInput < Struct.new(
+      nil,
       :input_name,
       :data_type,
       :required,
@@ -1518,6 +1581,7 @@ module Aws::MigrationHubOrchestrator
     #   <p>The next step group.</p>
     #   @return [Array<String>]
     class TemplateStepGroupSummary < Struct.new(
+      nil,
       :id,
       :name,
       :previous,
@@ -1557,6 +1621,7 @@ module Aws::MigrationHubOrchestrator
     #   <p>The next step.</p>
     #   @return [Array<String>]
     class TemplateStepSummary < Struct.new(
+      nil,
       :id,
       :step_group_id,
       :template_id,
@@ -1585,6 +1650,7 @@ module Aws::MigrationHubOrchestrator
     #   <p>The description of the template.</p>
     #   @return [String]
     class TemplateSummary < Struct.new(
+      nil,
       :id,
       :name,
       :arn,
@@ -1598,6 +1664,7 @@ module Aws::MigrationHubOrchestrator
     # @!attribute message
     #   @return [String]
     class ThrottlingException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -1612,6 +1679,7 @@ module Aws::MigrationHubOrchestrator
     #   <p>The URL of an AWS service.</p>
     #   @return [String]
     class Tool < Struct.new(
+      nil,
       :name,
       :url,
       keyword_init: true
@@ -1627,6 +1695,7 @@ module Aws::MigrationHubOrchestrator
     #   <p>One or more tag keys. Specify only the tag keys, not the tag values.</p>
     #   @return [Array<String>]
     class UntagResourceInput < Struct.new(
+      nil,
       :resource_arn,
       :tag_keys,
       keyword_init: true
@@ -1635,6 +1704,7 @@ module Aws::MigrationHubOrchestrator
     end
 
     class UntagResourceOutput < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1654,6 +1724,7 @@ module Aws::MigrationHubOrchestrator
     #               idempotency of the request.</p>
     #   @return [String]
     class UpdateTemplateRequest < Struct.new(
+      nil,
       :id,
       :template_name,
       :template_description,
@@ -1677,6 +1748,7 @@ module Aws::MigrationHubOrchestrator
     #   <p>The tags added to the migration workflow template.</p>
     #   @return [Hash<String, String>]
     class UpdateTemplateResponse < Struct.new(
+      nil,
       :template_id,
       :template_arn,
       :tags,
@@ -1701,6 +1773,7 @@ module Aws::MigrationHubOrchestrator
     #   <p>The servers on which a step will be run.</p>
     #   @return [Array<String>]
     class UpdateWorkflowInput < Struct.new(
+      nil,
       :id,
       :name,
       :description,
@@ -1748,6 +1821,7 @@ module Aws::MigrationHubOrchestrator
     #   <p>The tags added to the migration workflow.</p>
     #   @return [Hash<String, String>]
     class UpdateWorkflowOutput < Struct.new(
+      nil,
       :id,
       :arn,
       :name,
@@ -1784,6 +1858,7 @@ module Aws::MigrationHubOrchestrator
     #   <p>The previous step group.</p>
     #   @return [Array<String>]
     class UpdateWorkflowStepGroupInput < Struct.new(
+      nil,
       :workflow_id,
       :id,
       :name,
@@ -1820,6 +1895,7 @@ module Aws::MigrationHubOrchestrator
     #   <p>The time at which the step group was last modified.</p>
     #   @return [Time]
     class UpdateWorkflowStepGroupOutput < Struct.new(
+      nil,
       :workflow_id,
       :name,
       :id,
@@ -1871,6 +1947,7 @@ module Aws::MigrationHubOrchestrator
     #   <p>The status of the step.</p>
     #   @return [String]
     class UpdateWorkflowStepInput < Struct.new(
+      nil,
       :id,
       :step_group_id,
       :workflow_id,
@@ -1901,6 +1978,7 @@ module Aws::MigrationHubOrchestrator
     #   <p>The name of the step.</p>
     #   @return [String]
     class UpdateWorkflowStepOutput < Struct.new(
+      nil,
       :id,
       :step_group_id,
       :workflow_id,
@@ -1914,6 +1992,7 @@ module Aws::MigrationHubOrchestrator
     # @!attribute message
     #   @return [String]
     class ValidationException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -1937,6 +2016,7 @@ module Aws::MigrationHubOrchestrator
     #   <p>The servers on which to run the script.</p>
     #   @return [String]
     class WorkflowStepAutomationConfiguration < Struct.new(
+      nil,
       :script_location_s3_bucket,
       :script_location_s3_key,
       :command,
@@ -1967,6 +2047,7 @@ module Aws::MigrationHubOrchestrator
     #   <p>The next step group.</p>
     #   @return [Array<String>]
     class WorkflowStepGroupSummary < Struct.new(
+      nil,
       :id,
       :name,
       :owner,
@@ -1992,6 +2073,7 @@ module Aws::MigrationHubOrchestrator
     #   <p>The value of the output.</p>
     #   @return [Types::WorkflowStepOutputUnion]
     class WorkflowStepOutput < Struct.new(
+      nil,
       :name,
       :data_type,
       :required,
@@ -2068,6 +2150,7 @@ module Aws::MigrationHubOrchestrator
     #   <p>The location of the script.</p>
     #   @return [String]
     class WorkflowStepSummary < Struct.new(
+      nil,
       :step_id,
       :name,
       :step_action_type,

@@ -10,6 +10,7 @@ module Aws::RUM
     # @!attribute message
     #   @return [String]
     class AccessDeniedException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -64,6 +65,7 @@ module Aws::RUM
     #         </p>
     #   @return [Types::DeobfuscationConfiguration]
     class AppMonitor < Struct.new(
+      nil,
       :name,
       :domain,
       :domain_list,
@@ -162,6 +164,7 @@ module Aws::RUM
     #            </p>
     #   @return [Boolean]
     class AppMonitorConfiguration < Struct.new(
+      nil,
       :identity_pool_id,
       :excluded_pages,
       :included_pages,
@@ -192,6 +195,7 @@ module Aws::RUM
     #   <p>The version of the app monitor.</p>
     #   @return [String]
     class AppMonitorDetails < Struct.new(
+      nil,
       :name,
       :id,
       :version,
@@ -217,6 +221,7 @@ module Aws::RUM
     #   <p>The current state of this app monitor.</p>
     #   @return [String]
     class AppMonitorSummary < Struct.new(
+      nil,
       :name,
       :id,
       :created,
@@ -240,6 +245,7 @@ module Aws::RUM
     #   <p>The error message for this metric definition.</p>
     #   @return [String]
     class BatchCreateRumMetricDefinitionsError < Struct.new(
+      nil,
       :metric_definition,
       :error_code,
       :error_message,
@@ -268,6 +274,7 @@ module Aws::RUM
     #   <p>An array of structures which define the metrics that you want to send.</p>
     #   @return [Array<Types::MetricDefinitionRequest>]
     class BatchCreateRumMetricDefinitionsInput < Struct.new(
+      nil,
       :app_monitor_name,
       :destination,
       :destination_arn,
@@ -284,6 +291,7 @@ module Aws::RUM
     #   <p>An array of structures that define the extended metrics.</p>
     #   @return [Array<Types::MetricDefinition>]
     class BatchCreateRumMetricDefinitionsOutput < Struct.new(
+      nil,
       :errors,
       :metric_definitions,
       keyword_init: true
@@ -304,6 +312,7 @@ module Aws::RUM
     #   <p>The error message for this metric definition.</p>
     #   @return [String]
     class BatchDeleteRumMetricDefinitionsError < Struct.new(
+      nil,
       :metric_definition_id,
       :error_code,
       :error_message,
@@ -331,6 +340,7 @@ module Aws::RUM
     #   <p>An array of structures which define the metrics that you want to stop sending.</p>
     #   @return [Array<String>]
     class BatchDeleteRumMetricDefinitionsInput < Struct.new(
+      nil,
       :app_monitor_name,
       :destination,
       :destination_arn,
@@ -347,6 +357,7 @@ module Aws::RUM
     #   <p>The IDs of the metric definitions that were deleted.</p>
     #   @return [Array<String>]
     class BatchDeleteRumMetricDefinitionsOutput < Struct.new(
+      nil,
       :errors,
       :metric_definition_ids,
       keyword_init: true
@@ -377,6 +388,7 @@ module Aws::RUM
     #   <p>Use the token returned by the previous operation to request the next page of results.</p>
     #   @return [String]
     class BatchGetRumMetricDefinitionsInput < Struct.new(
+      nil,
       :app_monitor_name,
       :destination,
       :destination_arn,
@@ -396,6 +408,7 @@ module Aws::RUM
     #            retrieve the next set of results.</p>
     #   @return [String]
     class BatchGetRumMetricDefinitionsOutput < Struct.new(
+      nil,
       :metric_definitions,
       :next_token,
       keyword_init: true
@@ -413,6 +426,7 @@ module Aws::RUM
     #   <p>The type of the resource that is associated with the error.</p>
     #   @return [String]
     class ConflictException < Struct.new(
+      nil,
       :message,
       :resource_name,
       :resource_type,
@@ -469,6 +483,7 @@ module Aws::RUM
     #         </p>
     #   @return [Types::DeobfuscationConfiguration]
     class CreateAppMonitorInput < Struct.new(
+      nil,
       :name,
       :domain,
       :domain_list,
@@ -486,6 +501,7 @@ module Aws::RUM
     #   <p>The unique ID of the new app monitor.</p>
     #   @return [String]
     class CreateAppMonitorOutput < Struct.new(
+      nil,
       :id,
       keyword_init: true
     )
@@ -498,6 +514,7 @@ module Aws::RUM
     #            custom events. The default is for custom events to be <code>DISABLED</code>.</p>
     #   @return [String]
     class CustomEvents < Struct.new(
+      nil,
       :status,
       keyword_init: true
     )
@@ -514,6 +531,7 @@ module Aws::RUM
     #   <p>The name of the log group where the copies are stored.</p>
     #   @return [String]
     class CwLog < Struct.new(
+      nil,
       :cw_log_enabled,
       :cw_log_group,
       keyword_init: true
@@ -528,6 +546,7 @@ module Aws::RUM
     #            that RUM collects in CloudWatch Logs. If it does, this structure also contains the name of the log group.</p>
     #   @return [Types::CwLog]
     class DataStorage < Struct.new(
+      nil,
       :cw_log,
       keyword_init: true
     )
@@ -538,6 +557,7 @@ module Aws::RUM
     #   <p>The name of the app monitor to delete.</p>
     #   @return [String]
     class DeleteAppMonitorInput < Struct.new(
+      nil,
       :name,
       keyword_init: true
     )
@@ -545,6 +565,7 @@ module Aws::RUM
     end
 
     class DeleteAppMonitorOutput < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -558,6 +579,7 @@ module Aws::RUM
     #            If the revision ID that you provide doesn't match the latest policy revision ID, the request will be rejected with an <code>InvalidPolicyRevisionIdException</code> error.</p>
     #   @return [String]
     class DeleteResourcePolicyRequest < Struct.new(
+      nil,
       :name,
       :policy_revision_id,
       keyword_init: true
@@ -569,6 +591,7 @@ module Aws::RUM
     #   <p>The revision ID of the policy that was removed, if it had one.</p>
     #   @return [String]
     class DeleteResourcePolicyResponse < Struct.new(
+      nil,
       :policy_revision_id,
       keyword_init: true
     )
@@ -587,6 +610,7 @@ module Aws::RUM
     #            specifies the ARN of the Evidently experiment that corresponds to the destination to delete.</p>
     #   @return [String]
     class DeleteRumMetricsDestinationInput < Struct.new(
+      nil,
       :app_monitor_name,
       :destination,
       :destination_arn,
@@ -596,6 +620,7 @@ module Aws::RUM
     end
 
     class DeleteRumMetricsDestinationOutput < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -610,6 +635,7 @@ module Aws::RUM
     #         </p>
     #   @return [Types::JavaScriptSourceMaps]
     class DeobfuscationConfiguration < Struct.new(
+      nil,
       :java_script_source_maps,
       keyword_init: true
     )
@@ -633,6 +659,7 @@ module Aws::RUM
     #   <p>Use the token returned by the previous operation to request the next page of results.</p>
     #   @return [String]
     class GetAppMonitorDataInput < Struct.new(
+      nil,
       :name,
       :time_range,
       :filters,
@@ -651,6 +678,7 @@ module Aws::RUM
     #            results.</p>
     #   @return [String]
     class GetAppMonitorDataOutput < Struct.new(
+      nil,
       :events,
       :next_token,
       keyword_init: true
@@ -662,6 +690,7 @@ module Aws::RUM
     #   <p>The app monitor to retrieve information for.</p>
     #   @return [String]
     class GetAppMonitorInput < Struct.new(
+      nil,
       :name,
       keyword_init: true
     )
@@ -672,6 +701,7 @@ module Aws::RUM
     #   <p>A structure containing all the configuration information for the app monitor.</p>
     #   @return [Types::AppMonitor]
     class GetAppMonitorOutput < Struct.new(
+      nil,
       :app_monitor,
       keyword_init: true
     )
@@ -682,6 +712,7 @@ module Aws::RUM
     #   <p>The name of the app monitor that is associated with the resource-based policy that you want to view.</p>
     #   @return [String]
     class GetResourcePolicyRequest < Struct.new(
+      nil,
       :name,
       keyword_init: true
     )
@@ -695,6 +726,7 @@ module Aws::RUM
     #   <p>The revision ID information for this version of the policy document that you requested.</p>
     #   @return [String]
     class GetResourcePolicyResponse < Struct.new(
+      nil,
       :policy_document,
       :policy_revision_id,
       keyword_init: true
@@ -709,6 +741,7 @@ module Aws::RUM
     #   <p>The value of a parameter in the request caused an error.</p>
     #   @return [Integer]
     class InternalServerException < Struct.new(
+      nil,
       :message,
       :retry_after_seconds,
       keyword_init: true
@@ -720,6 +753,7 @@ module Aws::RUM
     # @!attribute message
     #   @return [String]
     class InvalidPolicyRevisionIdException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -740,6 +774,7 @@ module Aws::RUM
     #         </p>
     #   @return [String]
     class JavaScriptSourceMaps < Struct.new(
+      nil,
       :status,
       :s3_uri,
       keyword_init: true
@@ -755,6 +790,7 @@ module Aws::RUM
     #   <p>Use the token returned by the previous operation to request the next page of results.</p>
     #   @return [String]
     class ListAppMonitorsInput < Struct.new(
+      nil,
       :max_results,
       :next_token,
       keyword_init: true
@@ -770,6 +806,7 @@ module Aws::RUM
     #   <p>An array of structures that contain information about the returned app monitors.</p>
     #   @return [Array<Types::AppMonitorSummary>]
     class ListAppMonitorsOutput < Struct.new(
+      nil,
       :next_token,
       :app_monitor_summaries,
       keyword_init: true
@@ -790,6 +827,7 @@ module Aws::RUM
     #   <p>Use the token returned by the previous operation to request the next page of results.</p>
     #   @return [String]
     class ListRumMetricsDestinationsInput < Struct.new(
+      nil,
       :app_monitor_name,
       :max_results,
       :next_token,
@@ -807,6 +845,7 @@ module Aws::RUM
     #            retrieve the next set of results.</p>
     #   @return [String]
     class ListRumMetricsDestinationsOutput < Struct.new(
+      nil,
       :destinations,
       :next_token,
       keyword_init: true
@@ -818,6 +857,7 @@ module Aws::RUM
     #   <p>The ARN of the resource that you want to see the tags of.</p>
     #   @return [String]
     class ListTagsForResourceInput < Struct.new(
+      nil,
       :resource_arn,
       keyword_init: true
     )
@@ -831,6 +871,7 @@ module Aws::RUM
     #   <p>The list of tag keys and values associated with the resource you specified.</p>
     #   @return [Hash<String, String>]
     class ListTagsForResourceOutput < Struct.new(
+      nil,
       :resource_arn,
       :tags,
       keyword_init: true
@@ -842,6 +883,7 @@ module Aws::RUM
     # @!attribute message
     #   @return [String]
     class MalformedPolicyDocumentException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -882,6 +924,7 @@ module Aws::RUM
     #         the metric namespace that the custom metric is published to.</p>
     #   @return [String]
     class MetricDefinition < Struct.new(
+      nil,
       :metric_definition_id,
       :name,
       :value_key,
@@ -1304,6 +1347,7 @@ module Aws::RUM
     #            <p>You cannot use any string that starts with <code>AWS/</code> for your namespace.</p>
     #   @return [String]
     class MetricDefinitionRequest < Struct.new(
+      nil,
       :name,
       :value_key,
       :unit_label,
@@ -1329,6 +1373,7 @@ module Aws::RUM
     #            the ARN of the IAM role that is used to write to the Evidently experiment that receives the metrics.</p>
     #   @return [String]
     class MetricDestinationSummary < Struct.new(
+      nil,
       :destination,
       :destination_arn,
       :iam_role_arn,
@@ -1341,6 +1386,7 @@ module Aws::RUM
     # @!attribute message
     #   @return [String]
     class PolicyNotFoundException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -1351,6 +1397,7 @@ module Aws::RUM
     # @!attribute message
     #   @return [String]
     class PolicySizeLimitExceededException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -1371,6 +1418,7 @@ module Aws::RUM
     #            if they don't provide the correct current revision ID.</p>
     #   @return [String]
     class PutResourcePolicyRequest < Struct.new(
+      nil,
       :name,
       :policy_document,
       :policy_revision_id,
@@ -1386,6 +1434,7 @@ module Aws::RUM
     #   <p>The policy revision ID information that you specified.</p>
     #   @return [String]
     class PutResourcePolicyResponse < Struct.new(
+      nil,
       :policy_document,
       :policy_revision_id,
       keyword_init: true
@@ -1413,6 +1462,7 @@ module Aws::RUM
     #            specify that alias here. This alias will be compared to the <code>rum:alias</code> context key in the resource-based policy.  For more information, see <a href="https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch-RUM-resource-policies.html">Using resource-based policies with CloudWatch RUM</a>.</p>
     #   @return [String]
     class PutRumEventsInput < Struct.new(
+      nil,
       :id,
       :batch_id,
       :app_monitor_details,
@@ -1425,6 +1475,7 @@ module Aws::RUM
     end
 
     class PutRumEventsOutput < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1456,6 +1507,7 @@ module Aws::RUM
     #            permissions.</p>
     #   @return [String]
     class PutRumMetricsDestinationInput < Struct.new(
+      nil,
       :app_monitor_name,
       :destination,
       :destination_arn,
@@ -1466,6 +1518,7 @@ module Aws::RUM
     end
 
     class PutRumMetricsDestinationOutput < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1494,6 +1547,7 @@ module Aws::RUM
     #   <p>The values of the <code>Name</code> that are to be be included in the returned results.</p>
     #   @return [Array<String>]
     class QueryFilter < Struct.new(
+      nil,
       :name,
       :values,
       keyword_init: true
@@ -1511,6 +1565,7 @@ module Aws::RUM
     #   <p>The type of the resource that is associated with the error.</p>
     #   @return [String]
     class ResourceNotFoundException < Struct.new(
+      nil,
       :message,
       :resource_name,
       :resource_type,
@@ -1539,6 +1594,7 @@ module Aws::RUM
     #   <p>A string containing details about the event.</p>
     #   @return [String]
     class RumEvent < Struct.new(
+      nil,
       :id,
       :timestamp,
       :type,
@@ -1553,6 +1609,7 @@ module Aws::RUM
     # @!attribute message
     #   @return [String]
     class ServiceQuotaExceededException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -1566,6 +1623,7 @@ module Aws::RUM
     #   <p>The list of key-value pairs to associate with the resource.</p>
     #   @return [Hash<String, String>]
     class TagResourceInput < Struct.new(
+      nil,
       :resource_arn,
       :tags,
       keyword_init: true
@@ -1574,6 +1632,7 @@ module Aws::RUM
     end
 
     class TagResourceOutput < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1592,6 +1651,7 @@ module Aws::RUM
     #   <p>The value of a parameter in the request caused an error.</p>
     #   @return [Integer]
     class ThrottlingException < Struct.new(
+      nil,
       :message,
       :service_code,
       :quota_code,
@@ -1610,6 +1670,7 @@ module Aws::RUM
     #         range extends to the time that this operation is performed.</p>
     #   @return [Integer]
     class TimeRange < Struct.new(
+      nil,
       :after,
       :before,
       keyword_init: true
@@ -1630,6 +1691,7 @@ module Aws::RUM
     #   <p>The list of tag keys to remove from the resource.</p>
     #   @return [Array<String>]
     class UntagResourceInput < Struct.new(
+      nil,
       :resource_arn,
       :tag_keys,
       keyword_init: true
@@ -1638,6 +1700,7 @@ module Aws::RUM
     end
 
     class UntagResourceOutput < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1680,6 +1743,7 @@ module Aws::RUM
     #         </p>
     #   @return [Types::DeobfuscationConfiguration]
     class UpdateAppMonitorInput < Struct.new(
+      nil,
       :name,
       :domain,
       :domain_list,
@@ -1693,6 +1757,7 @@ module Aws::RUM
     end
 
     class UpdateAppMonitorOutput < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1720,6 +1785,7 @@ module Aws::RUM
     #   <p>The ID of the metric definition to update.</p>
     #   @return [String]
     class UpdateRumMetricDefinitionInput < Struct.new(
+      nil,
       :app_monitor_name,
       :destination,
       :destination_arn,
@@ -1731,6 +1797,7 @@ module Aws::RUM
     end
 
     class UpdateRumMetricDefinitionOutput < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1745,6 +1812,7 @@ module Aws::RUM
     #   <p>The session ID that the performance events are from.</p>
     #   @return [String]
     class UserDetails < Struct.new(
+      nil,
       :user_id,
       :session_id,
       keyword_init: true
@@ -1756,6 +1824,7 @@ module Aws::RUM
     # @!attribute message
     #   @return [String]
     class ValidationException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )

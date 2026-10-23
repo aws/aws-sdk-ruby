@@ -10,6 +10,7 @@ module Aws::LexRuntimeV2
     # @!attribute message
     #   @return [String]
     class AccessDeniedException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -41,6 +42,7 @@ module Aws::LexRuntimeV2
     #            contexts for the session are cleared. </p>
     #   @return [Hash<String, String>]
     class ActiveContext < Struct.new(
+      nil,
       :name,
       :time_to_live,
       :context_attributes,
@@ -60,6 +62,7 @@ module Aws::LexRuntimeV2
     #            to 20 turns. Each request and response from the bot is a turn.</p>
     #   @return [Integer]
     class ActiveContextTimeToLive < Struct.new(
+      nil,
       :time_to_live_in_seconds,
       :turns_to_live,
       keyword_init: true
@@ -92,6 +95,7 @@ module Aws::LexRuntimeV2
     #            was sent to Amazon Lex V2.</p>
     #   @return [Integer]
     class AudioInputEvent < Struct.new(
+      nil,
       :audio_chunk,
       :content_type,
       :event_id,
@@ -123,6 +127,7 @@ module Aws::LexRuntimeV2
     #            session.</p>
     #   @return [String]
     class AudioResponseEvent < Struct.new(
+      nil,
       :audio_chunk,
       :content_type,
       :event_id,
@@ -135,6 +140,7 @@ module Aws::LexRuntimeV2
     # @!attribute message
     #   @return [String]
     class BadGatewayException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -149,6 +155,7 @@ module Aws::LexRuntimeV2
     #   <p>The value returned to Amazon Lex V2 when a user chooses the button.</p>
     #   @return [String]
     class Button < Struct.new(
+      nil,
       :text,
       :value,
       keyword_init: true
@@ -164,6 +171,7 @@ module Aws::LexRuntimeV2
     #            scores indicate higher confidence.</p>
     #   @return [Float]
     class ConfidenceScore < Struct.new(
+      nil,
       :score,
       keyword_init: true
     )
@@ -258,6 +266,7 @@ module Aws::LexRuntimeV2
     #            was sent to Amazon Lex V2.</p>
     #   @return [Integer]
     class ConfigurationEvent < Struct.new(
+      nil,
       :request_attributes,
       :response_content_type,
       :session_state,
@@ -280,6 +289,7 @@ module Aws::LexRuntimeV2
     # @!attribute message
     #   @return [String]
     class ConflictException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -303,6 +313,7 @@ module Aws::LexRuntimeV2
     #            was sent to Amazon Lex V2.</p>
     #   @return [Integer]
     class DTMFInputEvent < Struct.new(
+      nil,
       :input_character,
       :event_id,
       :client_timestamp_millis,
@@ -330,6 +341,7 @@ module Aws::LexRuntimeV2
     #   <p>The identifier of the session to delete.</p>
     #   @return [String]
     class DeleteSessionRequest < Struct.new(
+      nil,
       :bot_id,
       :bot_alias_id,
       :locale_id,
@@ -353,6 +365,7 @@ module Aws::LexRuntimeV2
     #   <p>The identifier of the deleted session.</p>
     #   @return [String]
     class DeleteSessionResponse < Struct.new(
+      nil,
       :bot_id,
       :bot_alias_id,
       :locale_id,
@@ -366,6 +379,7 @@ module Aws::LexRuntimeV2
     # @!attribute message
     #   @return [String]
     class DependencyFailedException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -430,6 +444,7 @@ module Aws::LexRuntimeV2
     #         specified in slotToElicit that should be elicited from the user.</p>
     #   @return [Types::ElicitSubSlot]
     class DialogAction < Struct.new(
+      nil,
       :type,
       :slot_to_elicit,
       :slot_elicitation_style,
@@ -451,6 +466,7 @@ module Aws::LexRuntimeV2
     #            was sent to Amazon Lex V2.</p>
     #   @return [Integer]
     class DisconnectionEvent < Struct.new(
+      nil,
       :event_id,
       :client_timestamp_millis,
       keyword_init: true
@@ -471,6 +487,7 @@ module Aws::LexRuntimeV2
     #   <p>The field is not supported.</p>
     #   @return [Types::ElicitSubSlot]
     class ElicitSubSlot < Struct.new(
+      nil,
       :name,
       :sub_slot_to_elicit,
       keyword_init: true
@@ -492,6 +509,7 @@ module Aws::LexRuntimeV2
     #   <p>The identifier of the session to return.</p>
     #   @return [String]
     class GetSessionRequest < Struct.new(
+      nil,
       :bot_id,
       :bot_alias_id,
       :locale_id,
@@ -525,6 +543,7 @@ module Aws::LexRuntimeV2
     #            what the next action might be.</p>
     #   @return [Types::SessionState]
     class GetSessionResponse < Struct.new(
+      nil,
       :session_id,
       :messages,
       :interpretations,
@@ -543,6 +562,7 @@ module Aws::LexRuntimeV2
     #            session.</p>
     #   @return [String]
     class HeartbeatEvent < Struct.new(
+      nil,
       :event_id,
       keyword_init: true
     )
@@ -573,6 +593,7 @@ module Aws::LexRuntimeV2
     #               the button.</p>
     #   @return [Array<Types::Button>]
     class ImageResponseCard < Struct.new(
+      nil,
       :title,
       :subtitle,
       :image_url,
@@ -624,6 +645,7 @@ module Aws::LexRuntimeV2
     #   <p>Indicates whether the intent has been <code>Confirmed</code>, <code>Denied</code>, or <code>None</code> if the confirmation stage has not yet been reached.</p>
     #   @return [String]
     class Intent < Struct.new(
+      nil,
       :name,
       :slots,
       :state,
@@ -665,6 +687,7 @@ module Aws::LexRuntimeV2
     #   <p>The bot member that is processing the intent.</p>
     #   @return [Types::RecognizedBotMember]
     class IntentResultEvent < Struct.new(
+      nil,
       :input_mode,
       :interpretations,
       :session_state,
@@ -681,6 +704,7 @@ module Aws::LexRuntimeV2
     # @!attribute message
     #   @return [String]
     class InternalServerException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -711,6 +735,7 @@ module Aws::LexRuntimeV2
     #   <p>Specifies the service that interpreted the input.</p>
     #   @return [String]
     class Interpretation < Struct.new(
+      nil,
       :nlu_confidence,
       :sentiment_response,
       :intent,
@@ -734,6 +759,7 @@ module Aws::LexRuntimeV2
     #               constrained to the text associated with a button on the card.</p>
     #   @return [Types::ImageResponseCard]
     class Message < Struct.new(
+      nil,
       :content,
       :content_type,
       :image_response_card,
@@ -754,6 +780,7 @@ module Aws::LexRuntimeV2
     #            was sent to Amazon Lex V2.</p>
     #   @return [Integer]
     class PlaybackCompletionEvent < Struct.new(
+      nil,
       :event_id,
       :client_timestamp_millis,
       keyword_init: true
@@ -786,6 +813,7 @@ module Aws::LexRuntimeV2
     #            session.</p>
     #   @return [String]
     class PlaybackInterruptionEvent < Struct.new(
+      nil,
       :event_reason,
       :caused_by_event_id,
       :event_id,
@@ -835,6 +863,7 @@ module Aws::LexRuntimeV2
     #            </ul>
     #   @return [String]
     class PutSessionRequest < Struct.new(
+      nil,
       :bot_id,
       :bot_alias_id,
       :locale_id,
@@ -876,6 +905,7 @@ module Aws::LexRuntimeV2
     #            message to convey to the user.</p>
     #   @return [String]
     class PutSessionResponse < Struct.new(
+      nil,
       :content_type,
       :messages,
       :session_state,
@@ -920,6 +950,7 @@ module Aws::LexRuntimeV2
     #               <code>x-amz-lex:</code>.</p>
     #   @return [Hash<String, String>]
     class RecognizeTextRequest < Struct.new(
+      nil,
       :bot_id,
       :bot_alias_id,
       :locale_id,
@@ -961,6 +992,7 @@ module Aws::LexRuntimeV2
     #   <p>The bot member that recognized the text.</p>
     #   @return [Types::RecognizedBotMember]
     class RecognizeTextResponse < Struct.new(
+      nil,
       :messages,
       :session_state,
       :interpretations,
@@ -1088,6 +1120,7 @@ module Aws::LexRuntimeV2
     #            in the <code>requestContentType</code> parameter.</p>
     #   @return [String]
     class RecognizeUtteranceRequest < Struct.new(
+      nil,
       :bot_id,
       :bot_alias_id,
       :locale_id,
@@ -1178,6 +1211,7 @@ module Aws::LexRuntimeV2
     #   <p>The bot member that recognized the utterance.</p>
     #   @return [String]
     class RecognizeUtteranceResponse < Struct.new(
+      nil,
       :input_mode,
       :content_type,
       :messages,
@@ -1206,6 +1240,7 @@ module Aws::LexRuntimeV2
     #   <p>The name of the bot member that processes the request.</p>
     #   @return [String]
     class RecognizedBotMember < Struct.new(
+      nil,
       :bot_id,
       :bot_name,
       keyword_init: true
@@ -1217,6 +1252,7 @@ module Aws::LexRuntimeV2
     # @!attribute message
     #   @return [String]
     class ResourceNotFoundException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -1237,6 +1273,7 @@ module Aws::LexRuntimeV2
     #         The intent name, composite slot name and the constituent sub slot names must exist.</p>
     #   @return [Hash<String, Types::RuntimeHintDetails>]
     class RuntimeHintDetails < Struct.new(
+      nil,
       :runtime_hint_values,
       :sub_slot_hints,
       keyword_init: true
@@ -1251,6 +1288,7 @@ module Aws::LexRuntimeV2
     #            bot.</p>
     #   @return [String]
     class RuntimeHintValue < Struct.new(
+      nil,
       :phrase,
       keyword_init: true
     )
@@ -1276,6 +1314,7 @@ module Aws::LexRuntimeV2
     #            <p>The intent name and slot name must exist.</p>
     #   @return [Hash<String, Hash<String, Types::RuntimeHintDetails>>]
     class RuntimeHints < Struct.new(
+      nil,
       :slot_hints,
       keyword_init: true
     )
@@ -1298,6 +1337,7 @@ module Aws::LexRuntimeV2
     #   <p>The individual sentiment responses for the utterance.</p>
     #   @return [Types::SentimentScore]
     class SentimentResponse < Struct.new(
+      nil,
       :sentiment,
       :sentiment_score,
       keyword_init: true
@@ -1323,6 +1363,7 @@ module Aws::LexRuntimeV2
     #            of its detection of the <code>MIXED</code> sentiment.</p>
     #   @return [Float]
     class SentimentScore < Struct.new(
+      nil,
       :positive,
       :negative,
       :neutral,
@@ -1366,6 +1407,7 @@ module Aws::LexRuntimeV2
     #            uses the hints to help determine the correct value of a slot.</p>
     #   @return [Types::RuntimeHints]
     class SessionState < Struct.new(
+      nil,
       :dialog_action,
       :intent,
       :active_contexts,
@@ -1396,6 +1438,7 @@ module Aws::LexRuntimeV2
     #   <p>The constituent sub slots of a composite slot.</p>
     #   @return [Hash<String, Types::Slot>]
     class Slot < Struct.new(
+      nil,
       :value,
       :shape,
       :values,
@@ -1430,6 +1473,7 @@ module Aws::LexRuntimeV2
     #            events are encoded as HTTP/2 data frames.</p>
     #   @return [Types::StartConversationRequestEventStream]
     class StartConversationRequest < Struct.new(
+      nil,
       :bot_id,
       :bot_alias_id,
       :locale_id,
@@ -1510,6 +1554,7 @@ module Aws::LexRuntimeV2
     #            events are encoded as HTTP/2 data frames.</p>
     #   @return [Types::StartConversationResponseEventStream]
     class StartConversationResponse < Struct.new(
+      nil,
       :response_event_stream,
       keyword_init: true
     )
@@ -1631,6 +1676,7 @@ module Aws::LexRuntimeV2
     #            was sent to Amazon Lex V2.</p>
     #   @return [Integer]
     class TextInputEvent < Struct.new(
+      nil,
       :text,
       :event_id,
       :client_timestamp_millis,
@@ -1658,6 +1704,7 @@ module Aws::LexRuntimeV2
     #            session.</p>
     #   @return [String]
     class TextResponseEvent < Struct.new(
+      nil,
       :messages,
       :event_id,
       keyword_init: true
@@ -1669,6 +1716,7 @@ module Aws::LexRuntimeV2
     # @!attribute message
     #   @return [String]
     class ThrottlingException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -1687,6 +1735,7 @@ module Aws::LexRuntimeV2
     #            session.</p>
     #   @return [String]
     class TranscriptEvent < Struct.new(
+      nil,
       :transcript,
       :event_id,
       keyword_init: true
@@ -1698,6 +1747,7 @@ module Aws::LexRuntimeV2
     # @!attribute message
     #   @return [String]
     class ValidationException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -1715,6 +1765,7 @@ module Aws::LexRuntimeV2
     #   <p>A list of values that Amazon Lex V2 determines are possible resolutions for the user input. The first value matches the <code>interpretedValue</code>.</p>
     #   @return [Array<String>]
     class Value < Struct.new(
+      nil,
       :original_value,
       :interpreted_value,
       :resolved_values,

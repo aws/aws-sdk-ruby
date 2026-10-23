@@ -14,6 +14,7 @@ module Aws::MediaTailor
     #   <p>AWS Secrets Manager access token configuration parameters.</p>
     #   @return [Types::SecretsManagerAccessTokenConfiguration]
     class AccessConfiguration < Struct.new(
+      nil,
       :access_type,
       :secrets_manager_access_token_configuration,
       keyword_init: true
@@ -41,6 +42,7 @@ module Aws::MediaTailor
     #   <p>Defines a list of key/value pairs that MediaTailor generates within the <code>EXT-X-ASSET</code>tag for <code>SCTE35_ENHANCED</code> output.</p>
     #   @return [Array<Types::KeyValuePair>]
     class AdBreak < Struct.new(
+      nil,
       :message_type,
       :offset_millis,
       :slate,
@@ -62,6 +64,7 @@ module Aws::MediaTailor
     #   <p>The offset in milliseconds from the start of the VOD source at which an ad marker was detected.</p>
     #   @return [Integer]
     class AdBreakOpportunity < Struct.new(
+      nil,
       :offset_millis,
       keyword_init: true
     )
@@ -78,6 +81,7 @@ module Aws::MediaTailor
     #   <p>For ads that have media files with streaming delivery and supported file extensions, indicates what transcoding action MediaTailor takes when it first receives these ads from the ADS. <code>TRANSCODE</code> indicates that MediaTailor must transcode the ads. <code>NONE</code> indicates that you have already transcoded the ads outside of MediaTailor and don't need them transcoded as part of the ad insertion workflow. For more information about ad conditioning see <a href="https://docs.aws.amazon.com/mediatailor/latest/ug/precondition-ads.html">Using preconditioned ads</a> in the Elemental MediaTailor user guide.</p>
     #   @return [String]
     class AdConditioningConfiguration < Struct.new(
+      nil,
       :streaming_media_file_conditioning,
       keyword_init: true
     )
@@ -89,6 +93,7 @@ module Aws::MediaTailor
     #   <p>Enables ad marker passthrough for your configuration.</p>
     #   @return [Boolean]
     class AdMarkerPassthrough < Struct.new(
+      nil,
       :enabled,
       keyword_init: true
     )
@@ -108,6 +113,7 @@ module Aws::MediaTailor
     #   <p>Indicates that MediaTailor won't emit the selected events in the logs for playback sessions that are initialized with this configuration.</p>
     #   @return [Array<String>]
     class AdsInteractionLog < Struct.new(
+      nil,
       :publish_opt_in_event_types,
       :exclude_event_types,
       keyword_init: true
@@ -135,6 +141,7 @@ module Aws::MediaTailor
     #   <p>The category that MediaTailor assigns to the alert.</p>
     #   @return [String]
     class Alert < Struct.new(
+      nil,
       :alert_code,
       :alert_message,
       :last_modified_time,
@@ -169,6 +176,7 @@ module Aws::MediaTailor
     #   <p>The duration of the alternateMedia in milliseconds.</p>
     #   @return [Integer]
     class AlternateMedia < Struct.new(
+      nil,
       :source_location_name,
       :live_source_name,
       :vod_source_name,
@@ -189,6 +197,7 @@ module Aws::MediaTailor
     #   <p>The list of AlternateMedia defined in AudienceMedia.</p>
     #   @return [Array<Types::AlternateMedia>]
     class AudienceMedia < Struct.new(
+      nil,
       :audience,
       :alternate_media,
       keyword_init: true
@@ -204,6 +213,7 @@ module Aws::MediaTailor
     #   <p>For the <code>DynamicVariable</code> specified in <code>AvailMatchingCriteria</code>, the Operator that is used for the comparison.</p>
     #   @return [String]
     class AvailMatchingCriteria < Struct.new(
+      nil,
       :dynamic_variable,
       :operator,
       keyword_init: true
@@ -222,6 +232,7 @@ module Aws::MediaTailor
     #   <p>Defines the policy to apply to the avail suppression mode. <code>BEHIND_LIVE_EDGE</code> will always use the full avail suppression policy. <code>AFTER_LIVE_EDGE</code> mode can be used to invoke partial ad break fills when a session starts mid-break.</p>
     #   @return [String]
     class AvailSuppression < Struct.new(
+      nil,
       :mode,
       :value,
       :fill_policy,
@@ -234,6 +245,7 @@ module Aws::MediaTailor
     # @!attribute message
     #   @return [String]
     class BadRequestException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -248,6 +260,7 @@ module Aws::MediaTailor
     #   <p>The URL for the start bumper asset.</p>
     #   @return [String]
     class Bumper < Struct.new(
+      nil,
       :end_url,
       :start_url,
       keyword_init: true
@@ -263,6 +276,7 @@ module Aws::MediaTailor
     #   <p>A content delivery network (CDN) to cache content segments, so that content requests don’t always have to go to the origin server. First, create a rule in your CDN for the content segment origin server. Then specify the rule's name in this <code>ContentSegmentUrlPrefix</code>. When AWS Elemental MediaTailor serves a manifest, it reports your CDN as the source for content segments.</p>
     #   @return [String]
     class CdnConfiguration < Struct.new(
+      nil,
       :ad_segment_url_prefix,
       :content_segment_url_prefix,
       keyword_init: true
@@ -308,6 +322,7 @@ module Aws::MediaTailor
     #   <p>The list of audiences defined in channel.</p>
     #   @return [Array<String>]
     class Channel < Struct.new(
+      nil,
       :arn,
       :channel_name,
       :channel_state,
@@ -333,6 +348,7 @@ module Aws::MediaTailor
     #   <p>The start offset of the clip range, in milliseconds. This offset truncates the start at the number of milliseconds into the duration of the VOD source.</p>
     #   @return [Integer]
     class ClipRange < Struct.new(
+      nil,
       :end_offset_millis,
       :start_offset_millis,
       keyword_init: true
@@ -352,6 +368,7 @@ module Aws::MediaTailor
     #   <p>The types of logs to collect.</p>
     #   @return [Array<String>]
     class ConfigureLogsForChannelInput < Struct.new(
+      nil,
       :channel_name,
       :log_types,
       keyword_init: true
@@ -366,6 +383,7 @@ module Aws::MediaTailor
     #   <p>The types of logs collected.</p>
     #   @return [Array<String>]
     class ConfigureLogsForChannelOutput < Struct.new(
+      nil,
       :channel_name,
       :log_types,
       keyword_init: true
@@ -390,6 +408,7 @@ module Aws::MediaTailor
     #   <p>The event types that MediaTailor emits in logs for interactions with the origin server.</p>
     #   @return [Types::ManifestServiceInteractionLog]
     class ConfigureLogsForPlaybackConfigurationInput < Struct.new(
+      nil,
       :percent_enabled,
       :playback_configuration_name,
       :enabled_logging_strategies,
@@ -416,6 +435,7 @@ module Aws::MediaTailor
     #   <p>The event types that MediaTailor emits in logs for interactions with the origin server.</p>
     #   @return [Types::ManifestServiceInteractionLog]
     class ConfigureLogsForPlaybackConfigurationOutput < Struct.new(
+      nil,
       :percent_enabled,
       :playback_configuration_name,
       :enabled_logging_strategies,
@@ -456,6 +476,7 @@ module Aws::MediaTailor
     #   <p>The list of audiences defined in channel.</p>
     #   @return [Array<String>]
     class CreateChannelInput < Struct.new(
+      nil,
       :channel_name,
       :filler_slate,
       :outputs,
@@ -509,6 +530,7 @@ module Aws::MediaTailor
     #   <p>The list of audiences defined in channel.</p>
     #   @return [Array<String>]
     class CreateChannelOutput < Struct.new(
+      nil,
       :arn,
       :channel_name,
       :channel_state,
@@ -539,6 +561,7 @@ module Aws::MediaTailor
     #   <p>The tags to assign to the live source. Tags are key-value pairs that you can associate with Amazon resources to help with organization, access control, and cost tracking. For more information, see <a href="https://docs.aws.amazon.com/mediatailor/latest/ug/tagging.html">Tagging AWS Elemental MediaTailor Resources</a>.</p>
     #   @return [Hash<String, String>]
     class CreateLiveSourceInput < Struct.new(
+      nil,
       :http_package_configurations,
       :live_source_name,
       :source_location_name,
@@ -570,6 +593,7 @@ module Aws::MediaTailor
     #   <p>The tags to assign to the live source. Tags are key-value pairs that you can associate with Amazon resources to help with organization, access control, and cost tracking. For more information, see <a href="https://docs.aws.amazon.com/mediatailor/latest/ug/tagging.html">Tagging AWS Elemental MediaTailor Resources</a>.</p>
     #   @return [Hash<String, String>]
     class CreateLiveSourceOutput < Struct.new(
+      nil,
       :arn,
       :creation_time,
       :http_package_configurations,
@@ -604,6 +628,7 @@ module Aws::MediaTailor
     #   <p>An optional stream identifier that MediaTailor uses to prefetch ads for multiple streams that use the same playback configuration. If <code>StreamId</code> is specified, MediaTailor returns all of the prefetch schedules with an exact match on <code>StreamId</code>. If not specified, MediaTailor returns all of the prefetch schedules for the playback configuration, regardless of <code>StreamId</code>.</p>
     #   @return [String]
     class CreatePrefetchScheduleInput < Struct.new(
+      nil,
       :consumption,
       :name,
       :playback_configuration_name,
@@ -641,6 +666,7 @@ module Aws::MediaTailor
     #   <p>An optional stream identifier that MediaTailor uses to prefetch ads for multiple streams that use the same playback configuration. If <code>StreamId</code> is specified, MediaTailor returns all of the prefetch schedules with an exact match on <code>StreamId</code>. If not specified, MediaTailor returns all of the prefetch schedules for the playback configuration, regardless of <code>StreamId</code>.</p>
     #   @return [String]
     class CreatePrefetchScheduleOutput < Struct.new(
+      nil,
       :arn,
       :consumption,
       :name,
@@ -679,6 +705,7 @@ module Aws::MediaTailor
     #   <p>The list of AudienceMedia defined in program.</p>
     #   @return [Array<Types::AudienceMedia>]
     class CreateProgramInput < Struct.new(
+      nil,
       :ad_breaks,
       :channel_name,
       :live_source_name,
@@ -729,6 +756,7 @@ module Aws::MediaTailor
     #   <p>The list of AudienceMedia defined in program.</p>
     #   @return [Array<Types::AudienceMedia>]
     class CreateProgramOutput < Struct.new(
+      nil,
       :ad_breaks,
       :arn,
       :channel_name,
@@ -765,6 +793,7 @@ module Aws::MediaTailor
     #   <p>The tags to assign to the source location. Tags are key-value pairs that you can associate with Amazon resources to help with organization, access control, and cost tracking. For more information, see <a href="https://docs.aws.amazon.com/mediatailor/latest/ug/tagging.html">Tagging AWS Elemental MediaTailor Resources</a>.</p>
     #   @return [Hash<String, String>]
     class CreateSourceLocationInput < Struct.new(
+      nil,
       :access_configuration,
       :default_segment_delivery_configuration,
       :http_configuration,
@@ -804,6 +833,7 @@ module Aws::MediaTailor
     #   <p>The tags to assign to the source location. Tags are key-value pairs that you can associate with Amazon resources to help with organization, access control, and cost tracking. For more information, see <a href="https://docs.aws.amazon.com/mediatailor/latest/ug/tagging.html">Tagging AWS Elemental MediaTailor Resources</a>.</p>
     #   @return [Hash<String, String>]
     class CreateSourceLocationOutput < Struct.new(
+      nil,
       :access_configuration,
       :arn,
       :creation_time,
@@ -831,6 +861,7 @@ module Aws::MediaTailor
     #   <p>The name associated with the VOD source.&gt;</p>
     #   @return [String]
     class CreateVodSourceInput < Struct.new(
+      nil,
       :http_package_configurations,
       :source_location_name,
       :tags,
@@ -862,6 +893,7 @@ module Aws::MediaTailor
     #   <p>The name to assign to the VOD source.</p>
     #   @return [String]
     class CreateVodSourceOutput < Struct.new(
+      nil,
       :arn,
       :creation_time,
       :http_package_configurations,
@@ -885,6 +917,7 @@ module Aws::MediaTailor
     #   <p>The setting that controls whether MediaTailor handles manifests from the origin server as multi-period manifests or single-period manifests. If your origin server produces single-period manifests, set this to <code>SINGLE_PERIOD</code>. The default setting is <code>MULTI_PERIOD</code>. For multi-period manifests, omit this setting or set it to <code>MULTI_PERIOD</code>.</p>
     #   @return [String]
     class DashConfiguration < Struct.new(
+      nil,
       :manifest_endpoint_prefix,
       :mpd_location,
       :origin_manifest_type,
@@ -901,6 +934,7 @@ module Aws::MediaTailor
     #   <p>The setting that controls whether MediaTailor handles manifests from the origin server as multi-period manifests or single-period manifests. If your origin server produces single-period manifests, set this to <code>SINGLE_PERIOD</code>. The default setting is <code>MULTI_PERIOD</code>. For multi-period manifests, omit this setting or set it to <code>MULTI_PERIOD</code>.</p>
     #   @return [String]
     class DashConfigurationForPut < Struct.new(
+      nil,
       :mpd_location,
       :origin_manifest_type,
       keyword_init: true
@@ -922,6 +956,7 @@ module Aws::MediaTailor
     #   <p>Amount of time (in seconds) that the player should be from the live point at the end of the manifest. Minimum value: <code>2</code> seconds. Maximum value: <code>60</code> seconds.</p>
     #   @return [Integer]
     class DashPlaylistSettings < Struct.new(
+      nil,
       :manifest_window_seconds,
       :min_buffer_time_seconds,
       :min_update_period_seconds,
@@ -936,6 +971,7 @@ module Aws::MediaTailor
     #   <p>The hostname of the server that will be used to serve segments. This string must include the protocol, such as <b>https://</b>.</p>
     #   @return [String]
     class DefaultSegmentDeliveryConfiguration < Struct.new(
+      nil,
       :base_url,
       keyword_init: true
     )
@@ -946,6 +982,7 @@ module Aws::MediaTailor
     #   <p>The name of the channel.</p>
     #   @return [String]
     class DeleteChannelInput < Struct.new(
+      nil,
       :channel_name,
       keyword_init: true
     )
@@ -953,6 +990,7 @@ module Aws::MediaTailor
     end
 
     class DeleteChannelOutput < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -962,6 +1000,7 @@ module Aws::MediaTailor
     #   <p>The name of the channel associated with this channel policy.</p>
     #   @return [String]
     class DeleteChannelPolicyInput < Struct.new(
+      nil,
       :channel_name,
       keyword_init: true
     )
@@ -969,6 +1008,7 @@ module Aws::MediaTailor
     end
 
     class DeleteChannelPolicyOutput < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -981,6 +1021,7 @@ module Aws::MediaTailor
     #   <p>The name of the source location associated with this Live Source.</p>
     #   @return [String]
     class DeleteLiveSourceInput < Struct.new(
+      nil,
       :live_source_name,
       :source_location_name,
       keyword_init: true
@@ -989,6 +1030,7 @@ module Aws::MediaTailor
     end
 
     class DeleteLiveSourceOutput < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -998,6 +1040,7 @@ module Aws::MediaTailor
     #   <p>The name of the playback configuration.</p>
     #   @return [String]
     class DeletePlaybackConfigurationInput < Struct.new(
+      nil,
       :name,
       keyword_init: true
     )
@@ -1005,6 +1048,7 @@ module Aws::MediaTailor
     end
 
     class DeletePlaybackConfigurationOutput < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1017,6 +1061,7 @@ module Aws::MediaTailor
     #   <p>The name of the playback configuration for this prefetch schedule.</p>
     #   @return [String]
     class DeletePrefetchScheduleInput < Struct.new(
+      nil,
       :name,
       :playback_configuration_name,
       keyword_init: true
@@ -1025,6 +1070,7 @@ module Aws::MediaTailor
     end
 
     class DeletePrefetchScheduleOutput < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1037,6 +1083,7 @@ module Aws::MediaTailor
     #   <p>The name of the program.</p>
     #   @return [String]
     class DeleteProgramInput < Struct.new(
+      nil,
       :channel_name,
       :program_name,
       keyword_init: true
@@ -1045,6 +1092,7 @@ module Aws::MediaTailor
     end
 
     class DeleteProgramOutput < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1054,6 +1102,7 @@ module Aws::MediaTailor
     #   <p>The name of the source location.</p>
     #   @return [String]
     class DeleteSourceLocationInput < Struct.new(
+      nil,
       :source_location_name,
       keyword_init: true
     )
@@ -1061,6 +1110,7 @@ module Aws::MediaTailor
     end
 
     class DeleteSourceLocationOutput < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1073,6 +1123,7 @@ module Aws::MediaTailor
     #   <p>The name of the VOD source.</p>
     #   @return [String]
     class DeleteVodSourceInput < Struct.new(
+      nil,
       :source_location_name,
       :vod_source_name,
       keyword_init: true
@@ -1081,6 +1132,7 @@ module Aws::MediaTailor
     end
 
     class DeleteVodSourceOutput < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1090,6 +1142,7 @@ module Aws::MediaTailor
     #   <p>The name of the channel.</p>
     #   @return [String]
     class DescribeChannelInput < Struct.new(
+      nil,
       :channel_name,
       keyword_init: true
     )
@@ -1139,6 +1192,7 @@ module Aws::MediaTailor
     #   <p>The list of audiences defined in channel.</p>
     #   @return [Array<String>]
     class DescribeChannelOutput < Struct.new(
+      nil,
       :arn,
       :channel_name,
       :channel_state,
@@ -1164,6 +1218,7 @@ module Aws::MediaTailor
     #   <p>The name of the source location associated with this Live Source.</p>
     #   @return [String]
     class DescribeLiveSourceInput < Struct.new(
+      nil,
       :live_source_name,
       :source_location_name,
       keyword_init: true
@@ -1193,6 +1248,7 @@ module Aws::MediaTailor
     #   <p>The tags assigned to the live source. Tags are key-value pairs that you can associate with Amazon resources to help with organization, access control, and cost tracking. For more information, see <a href="https://docs.aws.amazon.com/mediatailor/latest/ug/tagging.html">Tagging AWS Elemental MediaTailor Resources</a>.</p>
     #   @return [Hash<String, String>]
     class DescribeLiveSourceOutput < Struct.new(
+      nil,
       :arn,
       :creation_time,
       :http_package_configurations,
@@ -1212,6 +1268,7 @@ module Aws::MediaTailor
     #   <p>The name of the program.</p>
     #   @return [String]
     class DescribeProgramInput < Struct.new(
+      nil,
       :channel_name,
       :program_name,
       keyword_init: true
@@ -1256,6 +1313,7 @@ module Aws::MediaTailor
     #   <p>The list of AudienceMedia defined in program.</p>
     #   @return [Array<Types::AudienceMedia>]
     class DescribeProgramOutput < Struct.new(
+      nil,
       :ad_breaks,
       :arn,
       :channel_name,
@@ -1277,6 +1335,7 @@ module Aws::MediaTailor
     #   <p>The name of the source location.</p>
     #   @return [String]
     class DescribeSourceLocationInput < Struct.new(
+      nil,
       :source_location_name,
       keyword_init: true
     )
@@ -1311,6 +1370,7 @@ module Aws::MediaTailor
     #   <p>The tags assigned to the source location. Tags are key-value pairs that you can associate with Amazon resources to help with organization, access control, and cost tracking. For more information, see <a href="https://docs.aws.amazon.com/mediatailor/latest/ug/tagging.html">Tagging AWS Elemental MediaTailor Resources</a>.</p>
     #   @return [Hash<String, String>]
     class DescribeSourceLocationOutput < Struct.new(
+      nil,
       :access_configuration,
       :arn,
       :creation_time,
@@ -1332,6 +1392,7 @@ module Aws::MediaTailor
     #   <p>The name of the VOD Source.</p>
     #   @return [String]
     class DescribeVodSourceInput < Struct.new(
+      nil,
       :source_location_name,
       :vod_source_name,
       keyword_init: true
@@ -1364,6 +1425,7 @@ module Aws::MediaTailor
     #   <p>The name of the VOD source.</p>
     #   @return [String]
     class DescribeVodSourceOutput < Struct.new(
+      nil,
       :ad_break_opportunities,
       :arn,
       :creation_time,
@@ -1381,6 +1443,7 @@ module Aws::MediaTailor
     #   <p>The name of the channel associated with this Channel Policy.</p>
     #   @return [String]
     class GetChannelPolicyInput < Struct.new(
+      nil,
       :channel_name,
       keyword_init: true
     )
@@ -1391,6 +1454,7 @@ module Aws::MediaTailor
     #   <p>The IAM policy for the channel. IAM policies are used to control access to your channel.</p>
     #   @return [String]
     class GetChannelPolicyOutput < Struct.new(
+      nil,
       :policy,
       keyword_init: true
     )
@@ -1413,6 +1477,7 @@ module Aws::MediaTailor
     #   <p>The single audience for GetChannelScheduleRequest.</p>
     #   @return [String]
     class GetChannelScheduleInput < Struct.new(
+      nil,
       :channel_name,
       :duration_minutes,
       :max_results,
@@ -1430,6 +1495,7 @@ module Aws::MediaTailor
     #   <p>Pagination token returned by the list request when results exceed the maximum allowed. Use the token to fetch the next page of results.</p>
     #   @return [String]
     class GetChannelScheduleOutput < Struct.new(
+      nil,
       :items,
       :next_token,
       keyword_init: true
@@ -1441,6 +1507,7 @@ module Aws::MediaTailor
     #   <p>The identifier for the playback configuration.</p>
     #   @return [String]
     class GetPlaybackConfigurationInput < Struct.new(
+      nil,
       :name,
       keyword_init: true
     )
@@ -1511,6 +1578,7 @@ module Aws::MediaTailor
     #   <p>The setting that indicates what conditioning MediaTailor will perform on ads that the ad decision server (ADS) returns, and what priority MediaTailor uses when inserting ads. </p>
     #   @return [Types::AdConditioningConfiguration]
     class GetPlaybackConfigurationOutput < Struct.new(
+      nil,
       :ad_decision_server_url,
       :avail_suppression,
       :bumper,
@@ -1549,6 +1617,7 @@ module Aws::MediaTailor
     #   <p>Returns information about the prefetch schedule for a specific playback configuration. If you call <code>GetPrefetchSchedule</code> on an expired prefetch schedule, MediaTailor returns an HTTP 404 status code.</p>
     #   @return [String]
     class GetPrefetchScheduleInput < Struct.new(
+      nil,
       :name,
       :playback_configuration_name,
       keyword_init: true
@@ -1581,6 +1650,7 @@ module Aws::MediaTailor
     #   <p>An optional stream identifier that you can specify in order to prefetch for multiple streams that use the same playback configuration.</p>
     #   @return [String]
     class GetPrefetchScheduleOutput < Struct.new(
+      nil,
       :arn,
       :consumption,
       :name,
@@ -1599,6 +1669,7 @@ module Aws::MediaTailor
     #   <p>The URL that is used to initiate a playback session for devices that support Apple HLS. The session uses server-side reporting.</p>
     #   @return [String]
     class HlsConfiguration < Struct.new(
+      nil,
       :manifest_endpoint_prefix,
       keyword_init: true
     )
@@ -1613,6 +1684,7 @@ module Aws::MediaTailor
     #   <p>Determines the type of SCTE 35 tags to use in ad markup. Specify <code>DATERANGE</code> to use <code>DATERANGE</code> tags (for live or VOD content). Specify <code>SCTE35_ENHANCED</code> to use <code>EXT-X-CUE-OUT</code> and <code>EXT-X-CUE-IN</code> tags (for VOD content only).</p>
     #   @return [Array<String>]
     class HlsPlaylistSettings < Struct.new(
+      nil,
       :manifest_window_seconds,
       :ad_markup_type,
       keyword_init: true
@@ -1625,6 +1697,7 @@ module Aws::MediaTailor
     #   <p>The base URL for the source location host server. This string must include the protocol, such as <b>https://</b>.</p>
     #   @return [String]
     class HttpConfiguration < Struct.new(
+      nil,
       :base_url,
       keyword_init: true
     )
@@ -1642,6 +1715,7 @@ module Aws::MediaTailor
     #   <p>The streaming protocol for this package configuration. Supported values are <code>HLS</code> and <code>DASH</code>.</p>
     #   @return [String]
     class HttpPackageConfiguration < Struct.new(
+      nil,
       :path,
       :source_group,
       :type,
@@ -1658,6 +1732,7 @@ module Aws::MediaTailor
     #   <p>For <code>SCTE35_ENHANCED</code> output, defines a value. MediaTailor; takes this value, and its associated key, and generates the key/value pair within the <code>EXT-X-ASSET</code>tag. If you specify a value, you must also specify a corresponding key.</p>
     #   @return [String]
     class KeyValuePair < Struct.new(
+      nil,
       :key,
       :value,
       keyword_init: true
@@ -1675,6 +1750,7 @@ module Aws::MediaTailor
     #   <p>The Amazon Resource Name (ARN) of the resource.</p>
     #   @return [String]
     class ListAlertsInput < Struct.new(
+      nil,
       :max_results,
       :next_token,
       :resource_arn,
@@ -1690,6 +1766,7 @@ module Aws::MediaTailor
     #   <p>Pagination token returned by the list request when results exceed the maximum allowed. Use the token to fetch the next page of results.</p>
     #   @return [String]
     class ListAlertsOutput < Struct.new(
+      nil,
       :items,
       :next_token,
       keyword_init: true
@@ -1704,6 +1781,7 @@ module Aws::MediaTailor
     #   <p>Pagination token returned by the list request when results exceed the maximum allowed. Use the token to fetch the next page of results.</p> <p>For the first <code>ListChannels</code> request, omit this value. For subsequent requests, get the value of <code>NextToken</code> from the previous response and specify that value for <code>NextToken</code> in the request. Continue making requests until the response no longer includes a <code>NextToken</code> value, which indicates that all results have been retrieved.</p>
     #   @return [String]
     class ListChannelsInput < Struct.new(
+      nil,
       :max_results,
       :next_token,
       keyword_init: true
@@ -1718,6 +1796,7 @@ module Aws::MediaTailor
     #   <p>Pagination token returned by the list request when results exceed the maximum allowed. Use the token to fetch the next page of results.</p>
     #   @return [String]
     class ListChannelsOutput < Struct.new(
+      nil,
       :items,
       :next_token,
       keyword_init: true
@@ -1735,6 +1814,7 @@ module Aws::MediaTailor
     #   <p>The name of the source location associated with this Live Sources list.</p>
     #   @return [String]
     class ListLiveSourcesInput < Struct.new(
+      nil,
       :max_results,
       :next_token,
       :source_location_name,
@@ -1750,6 +1830,7 @@ module Aws::MediaTailor
     #   <p>Pagination token returned by the list request when results exceed the maximum allowed. Use the token to fetch the next page of results.</p>
     #   @return [String]
     class ListLiveSourcesOutput < Struct.new(
+      nil,
       :items,
       :next_token,
       keyword_init: true
@@ -1764,6 +1845,7 @@ module Aws::MediaTailor
     #   <p>Pagination token returned by the list request when results exceed the maximum allowed. Use the token to fetch the next page of results.</p> <p>For the first <code>ListPlaybackConfigurations</code> request, omit this value. For subsequent requests, get the value of <code>NextToken</code> from the previous response and specify that value for <code>NextToken</code> in the request. Continue making requests until the response no longer includes a <code>NextToken</code> value, which indicates that all results have been retrieved.</p>
     #   @return [String]
     class ListPlaybackConfigurationsInput < Struct.new(
+      nil,
       :max_results,
       :next_token,
       keyword_init: true
@@ -1778,6 +1860,7 @@ module Aws::MediaTailor
     #   <p>Pagination token returned by the GET list request when results exceed the maximum allowed. Use the token to fetch the next page of results.</p>
     #   @return [String]
     class ListPlaybackConfigurationsOutput < Struct.new(
+      nil,
       :items,
       :next_token,
       keyword_init: true
@@ -1801,6 +1884,7 @@ module Aws::MediaTailor
     #   <p>An optional filtering parameter whereby MediaTailor filters the prefetch schedules to include only specific streams.</p>
     #   @return [String]
     class ListPrefetchSchedulesInput < Struct.new(
+      nil,
       :max_results,
       :next_token,
       :playback_configuration_name,
@@ -1818,6 +1902,7 @@ module Aws::MediaTailor
     #   <p>Pagination token returned by the list request when results exceed the maximum allowed. Use the token to fetch the next page of results.</p>
     #   @return [String]
     class ListPrefetchSchedulesOutput < Struct.new(
+      nil,
       :items,
       :next_token,
       keyword_init: true
@@ -1832,6 +1917,7 @@ module Aws::MediaTailor
     #   <p>Pagination token returned by the list request when results exceed the maximum allowed. Use the token to fetch the next page of results.</p> <p>For the first <code>ListSourceLocations</code> request, omit this value. For subsequent requests, get the value of <code>NextToken</code> from the previous response and specify that value for <code>NextToken</code> in the request. Continue making requests until the response no longer includes a <code>NextToken</code> value, which indicates that all results have been retrieved.</p>
     #   @return [String]
     class ListSourceLocationsInput < Struct.new(
+      nil,
       :max_results,
       :next_token,
       keyword_init: true
@@ -1846,6 +1932,7 @@ module Aws::MediaTailor
     #   <p>Pagination token returned by the list request when results exceed the maximum allowed. Use the token to fetch the next page of results.</p>
     #   @return [String]
     class ListSourceLocationsOutput < Struct.new(
+      nil,
       :items,
       :next_token,
       keyword_init: true
@@ -1857,6 +1944,7 @@ module Aws::MediaTailor
     #   <p>The Amazon Resource Name (ARN) associated with this resource.</p>
     #   @return [String]
     class ListTagsForResourceInput < Struct.new(
+      nil,
       :resource_arn,
       keyword_init: true
     )
@@ -1867,6 +1955,7 @@ module Aws::MediaTailor
     #   <p>The tags associated with this resource. Tags are key-value pairs that you can associate with Amazon resources to help with organization, access control, and cost tracking. For more information, see <a href="https://docs.aws.amazon.com/mediatailor/latest/ug/tagging.html">Tagging AWS Elemental MediaTailor Resources</a>.</p>
     #   @return [Hash<String, String>]
     class ListTagsForResourceOutput < Struct.new(
+      nil,
       :tags,
       keyword_init: true
     )
@@ -1883,6 +1972,7 @@ module Aws::MediaTailor
     #   <p>The name of the source location associated with this VOD Source list.</p>
     #   @return [String]
     class ListVodSourcesInput < Struct.new(
+      nil,
       :max_results,
       :next_token,
       :source_location_name,
@@ -1898,6 +1988,7 @@ module Aws::MediaTailor
     #   <p>Pagination token returned by the list request when results exceed the maximum allowed. Use the token to fetch the next page of results.</p>
     #   @return [String]
     class ListVodSourcesOutput < Struct.new(
+      nil,
       :items,
       :next_token,
       keyword_init: true
@@ -1913,6 +2004,7 @@ module Aws::MediaTailor
     #   <p>The maximum allowed duration for the pre-roll ad avail. AWS Elemental MediaTailor won't play pre-roll ads to exceed this duration, regardless of the total duration of ads that the ADS returns.</p>
     #   @return [Integer]
     class LivePreRollConfiguration < Struct.new(
+      nil,
       :ad_decision_server_url,
       :max_duration_seconds,
       keyword_init: true
@@ -1943,6 +2035,7 @@ module Aws::MediaTailor
     #   <p>The tags assigned to the live source. Tags are key-value pairs that you can associate with Amazon resources to help with organization, access control, and cost tracking. For more information, see <a href="https://docs.aws.amazon.com/mediatailor/latest/ug/tagging.html">Tagging AWS Elemental MediaTailor Resources</a>.</p>
     #   @return [Hash<String, String>]
     class LiveSource < Struct.new(
+      nil,
       :arn,
       :creation_time,
       :http_package_configurations,
@@ -1969,6 +2062,7 @@ module Aws::MediaTailor
     #   <p>Settings for customizing what events are included in logs for interactions with the origin server.</p>
     #   @return [Types::ManifestServiceInteractionLog]
     class LogConfiguration < Struct.new(
+      nil,
       :percent_enabled,
       :enabled_logging_strategies,
       :ads_interaction_log,
@@ -1988,6 +2082,7 @@ module Aws::MediaTailor
     #   <p>The log types.</p>
     #   @return [Array<String>]
     class LogConfigurationForChannel < Struct.new(
+      nil,
       :log_types,
       keyword_init: true
     )
@@ -1999,6 +2094,7 @@ module Aws::MediaTailor
     #   <p>For HLS, when set to <code>true</code>, MediaTailor passes through <code>EXT-X-CUE-IN</code>, <code>EXT-X-CUE-OUT</code>, and <code>EXT-X-SPLICEPOINT-SCTE35</code> ad markers from the origin manifest to the MediaTailor personalized manifest.</p> <p>No logic is applied to these ad markers. For example, if <code>EXT-X-CUE-OUT</code> has a value of <code>60</code>, but no ads are filled for that ad break, MediaTailor will not set the value to <code>0</code>.</p>
     #   @return [Types::AdMarkerPassthrough]
     class ManifestProcessingRules < Struct.new(
+      nil,
       :ad_marker_passthrough,
       keyword_init: true
     )
@@ -2010,6 +2106,7 @@ module Aws::MediaTailor
     #   <p>Indicates that MediaTailor won't emit the selected events in the logs for playback sessions that are initialized with this configuration.</p>
     #   @return [Array<String>]
     class ManifestServiceInteractionLog < Struct.new(
+      nil,
       :exclude_event_types,
       keyword_init: true
     )
@@ -2081,6 +2178,7 @@ module Aws::MediaTailor
     #   <p>The setting that indicates what conditioning MediaTailor will perform on ads that the ad decision server (ADS) returns, and what priority MediaTailor uses when inserting ads.</p>
     #   @return [Types::AdConditioningConfiguration]
     class PlaybackConfiguration < Struct.new(
+      nil,
       :ad_decision_server_url,
       :avail_suppression,
       :bumper,
@@ -2123,6 +2221,7 @@ module Aws::MediaTailor
     #   <p>The time when prefetched ads are considered for use in an ad break. If you don't specify <code>StartTime</code>, the prefetched ads are available after MediaTailor retrieves them from the ad decision server.</p>
     #   @return [Time]
     class PrefetchConsumption < Struct.new(
+      nil,
       :avail_matching_criteria,
       :end_time,
       :start_time,
@@ -2151,6 +2250,7 @@ module Aws::MediaTailor
     #   <p>The configuration for TPS-based traffic shaping that limits the number of requests to the ad decision server (ADS) based on transactions per second instead of time windows.</p>
     #   @return [Types::TrafficShapingTpsConfiguration]
     class PrefetchRetrieval < Struct.new(
+      nil,
       :dynamic_variables,
       :end_time,
       :start_time,
@@ -2188,6 +2288,7 @@ module Aws::MediaTailor
     #   <p>An optional stream identifier that you can specify in order to prefetch for multiple streams that use the same playback configuration.</p>
     #   @return [String]
     class PrefetchSchedule < Struct.new(
+      nil,
       :arn,
       :consumption,
       :name,
@@ -2208,6 +2309,7 @@ module Aws::MediaTailor
     #   <p>Adds an IAM role that determines the permissions of your channel.</p>
     #   @return [String]
     class PutChannelPolicyInput < Struct.new(
+      nil,
       :channel_name,
       :policy,
       keyword_init: true
@@ -2216,6 +2318,7 @@ module Aws::MediaTailor
     end
 
     class PutChannelPolicyOutput < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -2270,6 +2373,7 @@ module Aws::MediaTailor
     #   <p>The setting that indicates what conditioning MediaTailor will perform on ads that the ad decision server (ADS) returns, and what priority MediaTailor uses when inserting ads. </p>
     #   @return [Types::AdConditioningConfiguration]
     class PutPlaybackConfigurationInput < Struct.new(
+      nil,
       :ad_decision_server_url,
       :avail_suppression,
       :bumper,
@@ -2355,6 +2459,7 @@ module Aws::MediaTailor
     #   <p>The setting that indicates what conditioning MediaTailor will perform on ads that the ad decision server (ADS) returns, and what priority MediaTailor uses when inserting ads. </p>
     #   @return [Types::AdConditioningConfiguration]
     class PutPlaybackConfigurationOutput < Struct.new(
+      nil,
       :ad_decision_server_url,
       :avail_suppression,
       :bumper,
@@ -2394,6 +2499,7 @@ module Aws::MediaTailor
     #   <p>The configuration for the dynamic variables that determine which ad breaks that MediaTailor inserts prefetched ads in.</p>
     #   @return [Array<Types::AvailMatchingCriteria>]
     class RecurringConsumption < Struct.new(
+      nil,
       :retrieved_ad_expiration_seconds,
       :avail_matching_criteria,
       keyword_init: true
@@ -2415,6 +2521,7 @@ module Aws::MediaTailor
     #   <p>The configuration for prefetch ad retrieval from the ADS.</p>
     #   @return [Types::RecurringRetrieval]
     class RecurringPrefetchConfiguration < Struct.new(
+      nil,
       :start_time,
       :end_time,
       :recurring_consumption,
@@ -2441,6 +2548,7 @@ module Aws::MediaTailor
     #   <p>The configuration for TPS-based traffic shaping that limits the number of requests to the ad decision server (ADS) based on transactions per second instead of time windows.</p>
     #   @return [Types::TrafficShapingTpsConfiguration]
     class RecurringRetrieval < Struct.new(
+      nil,
       :dynamic_variables,
       :delay_after_avail_end_seconds,
       :traffic_shaping_type,
@@ -2465,6 +2573,7 @@ module Aws::MediaTailor
     #   <p>A string used to match which <code>HttpPackageConfiguration</code> is used for each <code>VodSource</code>.</p>
     #   @return [String]
     class RequestOutputItem < Struct.new(
+      nil,
       :dash_playlist_settings,
       :hls_playlist_settings,
       :manifest_name,
@@ -2491,6 +2600,7 @@ module Aws::MediaTailor
     #   <p>A string used to associate a package configuration source group with a channel output.</p>
     #   @return [String]
     class ResponseOutputItem < Struct.new(
+      nil,
       :dash_playlist_settings,
       :hls_playlist_settings,
       :manifest_name,
@@ -2515,6 +2625,7 @@ module Aws::MediaTailor
     #   <p>The name of the VOD source used for the ad break.</p>
     #   @return [String]
     class ScheduleAdBreak < Struct.new(
+      nil,
       :approximate_duration_seconds,
       :approximate_start_time,
       :source_location_name,
@@ -2532,6 +2643,7 @@ module Aws::MediaTailor
     #   <p>Program clip range configuration.</p>
     #   @return [Types::ClipRange]
     class ScheduleConfiguration < Struct.new(
+      nil,
       :transition,
       :clip_range,
       keyword_init: true
@@ -2574,6 +2686,7 @@ module Aws::MediaTailor
     #   <p>The list of audiences defined in ScheduleEntry.</p>
     #   @return [Array<String>]
     class ScheduleEntry < Struct.new(
+      nil,
       :approximate_duration_seconds,
       :approximate_start_time,
       :arn,
@@ -2601,6 +2714,7 @@ module Aws::MediaTailor
     #   <p>The AWS Secrets Manager <a href="https://docs.aws.amazon.com/secretsmanager/latest/apireference/API_CreateSecret.html#SecretsManager-CreateSecret-request-SecretString.html">SecretString</a> key associated with the access token. MediaTailor uses the key to look up SecretString key and value pair containing the access token.</p>
     #   @return [String]
     class SecretsManagerAccessTokenConfiguration < Struct.new(
+      nil,
       :header_name,
       :secret_arn,
       :secret_string_key,
@@ -2617,6 +2731,7 @@ module Aws::MediaTailor
     #   <p>A unique identifier used to distinguish between multiple segment delivery configurations in a source location.</p>
     #   @return [String]
     class SegmentDeliveryConfiguration < Struct.new(
+      nil,
       :base_url,
       :name,
       keyword_init: true
@@ -2650,6 +2765,7 @@ module Aws::MediaTailor
     #   <p>The number of sub-segments expected, which is assigned to the <code>segmentation_descriptor.sub_segments_expected</code> message, as defined in section 10.3.3.1 of the 2022 SCTE-35 specification. Values must be between 0 and 256, inclusive. The default value is null.</p>
     #   @return [Integer]
     class SegmentationDescriptor < Struct.new(
+      nil,
       :segmentation_event_id,
       :segmentation_upid_type,
       :segmentation_upid,
@@ -2671,6 +2787,7 @@ module Aws::MediaTailor
     #   <p>The slate VOD source name. The VOD source must already exist in a source location before it can be used for slate.</p>
     #   @return [String]
     class SlateSource < Struct.new(
+      nil,
       :source_location_name,
       :vod_source_name,
       keyword_init: true
@@ -2707,6 +2824,7 @@ module Aws::MediaTailor
     #   <p>The tags assigned to the source location. Tags are key-value pairs that you can associate with Amazon resources to help with organization, access control, and cost tracking. For more information, see <a href="https://docs.aws.amazon.com/mediatailor/latest/ug/tagging.html">Tagging AWS Elemental MediaTailor Resources</a>.</p>
     #   @return [Hash<String, String>]
     class SourceLocation < Struct.new(
+      nil,
       :access_configuration,
       :arn,
       :creation_time,
@@ -2735,6 +2853,7 @@ module Aws::MediaTailor
     #   <p>This is written to <code>splice_insert.unique_program_id</code>, as defined in section 9.7.3.1 of the SCTE-35 specification. The default value is <code>0</code>. Values must be between <code>0</code> and <code>256</code>, inclusive.</p>
     #   @return [Integer]
     class SpliceInsertMessage < Struct.new(
+      nil,
       :avail_num,
       :avails_expected,
       :splice_event_id,
@@ -2748,6 +2867,7 @@ module Aws::MediaTailor
     #   <p>The name of the channel.</p>
     #   @return [String]
     class StartChannelInput < Struct.new(
+      nil,
       :channel_name,
       keyword_init: true
     )
@@ -2755,6 +2875,7 @@ module Aws::MediaTailor
     end
 
     class StartChannelOutput < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -2764,6 +2885,7 @@ module Aws::MediaTailor
     #   <p>The name of the channel.</p>
     #   @return [String]
     class StopChannelInput < Struct.new(
+      nil,
       :channel_name,
       keyword_init: true
     )
@@ -2771,6 +2893,7 @@ module Aws::MediaTailor
     end
 
     class StopChannelOutput < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -2783,6 +2906,7 @@ module Aws::MediaTailor
     #   <p>The tags to assign to the resource. Tags are key-value pairs that you can associate with Amazon resources to help with organization, access control, and cost tracking. For more information, see <a href="https://docs.aws.amazon.com/mediatailor/latest/ug/tagging.html">Tagging AWS Elemental MediaTailor Resources</a>.</p>
     #   @return [Hash<String, String>]
     class TagResourceInput < Struct.new(
+      nil,
       :resource_arn,
       :tags,
       keyword_init: true
@@ -2795,6 +2919,7 @@ module Aws::MediaTailor
     #   <p> The maximum time delay for time-shifted viewing. The minimum allowed maximum time delay is 0 seconds, and the maximum allowed maximum time delay is 21600 seconds (6 hours). </p>
     #   @return [Integer]
     class TimeShiftConfiguration < Struct.new(
+      nil,
       :max_time_delay_seconds,
       keyword_init: true
     )
@@ -2806,6 +2931,7 @@ module Aws::MediaTailor
     #   <p>The configurations for the SCTE-35 <code>segmentation_descriptor</code> message(s) sent with the <code>time_signal</code> message.</p>
     #   @return [Array<Types::SegmentationDescriptor>]
     class TimeSignalMessage < Struct.new(
+      nil,
       :segmentation_descriptors,
       keyword_init: true
     )
@@ -2817,6 +2943,7 @@ module Aws::MediaTailor
     #   <p>The amount of time, in seconds, that MediaTailor spreads prefetch requests to the ADS. </p>
     #   @return [Integer]
     class TrafficShapingRetrievalWindow < Struct.new(
+      nil,
       :retrieval_window_duration_seconds,
       keyword_init: true
     )
@@ -2831,6 +2958,7 @@ module Aws::MediaTailor
     #   <p>The expected peak number of concurrent viewers for your content. MediaTailor uses this value along with peak TPS to determine how to distribute prefetch requests across the available capacity without exceeding your ADS limits.</p>
     #   @return [Integer]
     class TrafficShapingTpsConfiguration < Struct.new(
+      nil,
       :peak_tps,
       :peak_concurrent_users,
       keyword_init: true
@@ -2855,6 +2983,7 @@ module Aws::MediaTailor
     #   <p>Defines when the program plays in the schedule. You can set the value to <code>ABSOLUTE</code> or <code>RELATIVE</code>.</p> <p> <code>ABSOLUTE</code> - The program plays at a specific wall clock time. This setting can only be used for channels using the <code>LINEAR</code> <code>PlaybackMode</code>.</p> <p>Note the following considerations when using <code>ABSOLUTE</code> transitions:</p> <p>If the preceding program in the schedule has a duration that extends past the wall clock time, MediaTailor truncates the preceding program on a common segment boundary.</p> <p>If there are gaps in playback, MediaTailor plays the <code>FillerSlate</code> you configured for your linear channel.</p> <p> <code>RELATIVE</code> - The program is inserted into the schedule either before or after a program that you specify via <code>RelativePosition</code>.</p>
     #   @return [String]
     class Transition < Struct.new(
+      nil,
       :duration_millis,
       :relative_position,
       :relative_program,
@@ -2872,6 +3001,7 @@ module Aws::MediaTailor
     #   <p>The tag keys associated with the resource.</p>
     #   @return [Array<String>]
     class UntagResourceInput < Struct.new(
+      nil,
       :resource_arn,
       :tag_keys,
       keyword_init: true
@@ -2895,6 +3025,7 @@ module Aws::MediaTailor
     #   <p>The list of audiences defined in channel.</p>
     #   @return [Array<String>]
     class UpdateChannelInput < Struct.new(
+      nil,
       :channel_name,
       :filler_slate,
       :outputs,
@@ -2945,6 +3076,7 @@ module Aws::MediaTailor
     #   <p>The list of audiences defined in channel.</p>
     #   @return [Array<String>]
     class UpdateChannelOutput < Struct.new(
+      nil,
       :arn,
       :channel_name,
       :channel_state,
@@ -2972,6 +3104,7 @@ module Aws::MediaTailor
     #   <p>The name of the source location associated with this Live Source.</p>
     #   @return [String]
     class UpdateLiveSourceInput < Struct.new(
+      nil,
       :http_package_configurations,
       :live_source_name,
       :source_location_name,
@@ -3002,6 +3135,7 @@ module Aws::MediaTailor
     #   <p>The tags to assign to the live source. Tags are key-value pairs that you can associate with Amazon resources to help with organization, access control, and cost tracking. For more information, see <a href="https://docs.aws.amazon.com/mediatailor/latest/ug/tagging.html">Tagging AWS Elemental MediaTailor Resources</a>.</p>
     #   @return [Hash<String, String>]
     class UpdateLiveSourceOutput < Struct.new(
+      nil,
       :arn,
       :creation_time,
       :http_package_configurations,
@@ -3030,6 +3164,7 @@ module Aws::MediaTailor
     #   <p>The list of AudienceMedia defined in program.</p>
     #   @return [Array<Types::AudienceMedia>]
     class UpdateProgramInput < Struct.new(
+      nil,
       :ad_breaks,
       :channel_name,
       :program_name,
@@ -3077,6 +3212,7 @@ module Aws::MediaTailor
     #   <p>The list of AudienceMedia defined in program.</p>
     #   @return [Array<Types::AudienceMedia>]
     class UpdateProgramOutput < Struct.new(
+      nil,
       :ad_breaks,
       :arn,
       :channel_name,
@@ -3102,6 +3238,7 @@ module Aws::MediaTailor
     #   <p>Program clip range configuration.</p>
     #   @return [Types::ClipRange]
     class UpdateProgramScheduleConfiguration < Struct.new(
+      nil,
       :transition,
       :clip_range,
       keyword_init: true
@@ -3117,6 +3254,7 @@ module Aws::MediaTailor
     #   <p>The duration of the live program in seconds.</p>
     #   @return [Integer]
     class UpdateProgramTransition < Struct.new(
+      nil,
       :scheduled_start_time_millis,
       :duration_millis,
       keyword_init: true
@@ -3140,6 +3278,7 @@ module Aws::MediaTailor
     #   <p>The name of the source location.</p>
     #   @return [String]
     class UpdateSourceLocationInput < Struct.new(
+      nil,
       :access_configuration,
       :default_segment_delivery_configuration,
       :http_configuration,
@@ -3178,6 +3317,7 @@ module Aws::MediaTailor
     #   <p>The tags to assign to the source location. Tags are key-value pairs that you can associate with Amazon resources to help with organization, access control, and cost tracking. For more information, see <a href="https://docs.aws.amazon.com/mediatailor/latest/ug/tagging.html">Tagging AWS Elemental MediaTailor Resources</a>.</p>
     #   @return [Hash<String, String>]
     class UpdateSourceLocationOutput < Struct.new(
+      nil,
       :access_configuration,
       :arn,
       :creation_time,
@@ -3202,6 +3342,7 @@ module Aws::MediaTailor
     #   <p>The name of the VOD source.</p>
     #   @return [String]
     class UpdateVodSourceInput < Struct.new(
+      nil,
       :http_package_configurations,
       :source_location_name,
       :vod_source_name,
@@ -3232,6 +3373,7 @@ module Aws::MediaTailor
     #   <p>The name of the VOD source.</p>
     #   @return [String]
     class UpdateVodSourceOutput < Struct.new(
+      nil,
       :arn,
       :creation_time,
       :http_package_configurations,
@@ -3267,6 +3409,7 @@ module Aws::MediaTailor
     #   <p>The name of the VOD source.</p>
     #   @return [String]
     class VodSource < Struct.new(
+      nil,
       :arn,
       :creation_time,
       :http_package_configurations,

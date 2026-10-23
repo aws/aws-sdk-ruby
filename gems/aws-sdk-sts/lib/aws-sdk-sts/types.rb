@@ -201,6 +201,7 @@ module Aws::STS
     #            </p>
     #   @return [Array<Types::ProvidedContext>]
     class AssumeRoleRequest < Struct.new(
+      nil,
       :role_arn,
       :role_session_name,
       :policy_arns,
@@ -256,6 +257,7 @@ module Aws::STS
     #            any of the following characters: =,.@-</p>
     #   @return [String]
     class AssumeRoleResponse < Struct.new(
+      nil,
       :credentials,
       :assumed_role_user,
       :packed_policy_size,
@@ -349,6 +351,7 @@ module Aws::STS
     #            </note>
     #   @return [Integer]
     class AssumeRoleWithSAMLRequest < Struct.new(
+      nil,
       :role_arn,
       :principal_arn,
       :saml_assertion,
@@ -440,6 +443,7 @@ module Aws::STS
     #       also include underscores or any of the following characters: =,.@-</p>
     #   @return [String]
     class AssumeRoleWithSAMLResponse < Struct.new(
+      nil,
       :credentials,
       :assumed_role_user,
       :packed_policy_size,
@@ -567,6 +571,7 @@ module Aws::STS
     #            </note>
     #   @return [Integer]
     class AssumeRoleWithWebIdentityRequest < Struct.new(
+      nil,
       :role_arn,
       :role_session_name,
       :web_identity_token,
@@ -640,6 +645,7 @@ module Aws::STS
     #       also include underscores or any of the following characters: =,.@-</p>
     #   @return [String]
     class AssumeRoleWithWebIdentityResponse < Struct.new(
+      nil,
       :credentials,
       :subject_from_web_identity_token,
       :assumed_role_user,
@@ -694,6 +700,7 @@ module Aws::STS
     #            <p>By default, the value is set to <code>900</code> seconds.</p>
     #   @return [Integer]
     class AssumeRootRequest < Struct.new(
+      nil,
       :target_principal,
       :task_policy_arn,
       :duration_seconds,
@@ -722,6 +729,7 @@ module Aws::STS
     #            any of the following characters: =,.@-</p>
     #   @return [String]
     class AssumeRootResponse < Struct.new(
+      nil,
       :credentials,
       :source_identity,
       keyword_init: true
@@ -741,6 +749,7 @@ module Aws::STS
     #               <i>IAM User Guide</i>.</p>
     #   @return [String]
     class AssumedRoleUser < Struct.new(
+      nil,
       :assumed_role_id,
       :arn,
       keyword_init: true
@@ -763,6 +772,7 @@ module Aws::STS
     #   <p>The date on which the current credentials expire.</p>
     #   @return [Time]
     class Credentials < Struct.new(
+      nil,
       :access_key_id,
       :secret_access_key,
       :session_token,
@@ -776,6 +786,7 @@ module Aws::STS
     #   <p>The encoded message that was returned with the response.</p>
     #   @return [String]
     class DecodeAuthorizationMessageRequest < Struct.new(
+      nil,
       :encoded_message,
       keyword_init: true
     )
@@ -788,6 +799,7 @@ module Aws::STS
     #   <p>The API returns a response with the decoded message.</p>
     #   @return [String]
     class DecodeAuthorizationMessageResponse < Struct.new(
+      nil,
       :decoded_message,
       keyword_init: true
     )
@@ -799,6 +811,7 @@ module Aws::STS
     # @!attribute message
     #   @return [String]
     class ExpiredTokenException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -816,6 +829,7 @@ module Aws::STS
     #               Identifiers</a> in the <i>IAM User Guide</i>. </p>
     #   @return [String]
     class FederatedUser < Struct.new(
+      nil,
       :federated_user_id,
       :arn,
       keyword_init: true
@@ -829,6 +843,7 @@ module Aws::STS
     #            consist of any upper- or lowercase letter or digit.</p>
     #   @return [String]
     class GetAccessKeyInfoRequest < Struct.new(
+      nil,
       :access_key_id,
       keyword_init: true
     )
@@ -839,6 +854,7 @@ module Aws::STS
     #   <p>The number used to identify the Amazon Web Services account.</p>
     #   @return [String]
     class GetAccessKeyInfoResponse < Struct.new(
+      nil,
       :account,
       keyword_init: true
     )
@@ -846,6 +862,7 @@ module Aws::STS
     end
 
     class GetCallerIdentityRequest < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -867,6 +884,7 @@ module Aws::STS
     #   <p>The Amazon Web Services ARN associated with the calling entity.</p>
     #   @return [String]
     class GetCallerIdentityResponse < Struct.new(
+      nil,
       :user_id,
       :account,
       :arn,
@@ -979,6 +997,7 @@ module Aws::STS
     #            the request takes precedence over the role tag.</p>
     #   @return [Array<Types::Tag>]
     class GetFederationTokenRequest < Struct.new(
+      nil,
       :name,
       :policy,
       :policy_arns,
@@ -1011,6 +1030,7 @@ module Aws::STS
     #         which means the policies and tags exceeded the allowed space.</p>
     #   @return [Integer]
     class GetFederationTokenResponse < Struct.new(
+      nil,
       :credentials,
       :federated_user,
       :packed_policy_size,
@@ -1046,6 +1066,7 @@ module Aws::STS
     #            numeric digits.</p>
     #   @return [String]
     class GetSessionTokenRequest < Struct.new(
+      nil,
       :duration_seconds,
       :serial_number,
       :token_code,
@@ -1065,6 +1086,7 @@ module Aws::STS
     #            </note>
     #   @return [Types::Credentials]
     class GetSessionTokenResponse < Struct.new(
+      nil,
       :credentials,
       keyword_init: true
     )
@@ -1079,6 +1101,7 @@ module Aws::STS
     # @!attribute message
     #   @return [String]
     class IDPCommunicationErrorException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -1092,6 +1115,7 @@ module Aws::STS
     # @!attribute message
     #   @return [String]
     class IDPRejectedClaimException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -1104,6 +1128,7 @@ module Aws::STS
     # @!attribute message
     #   @return [String]
     class InvalidAuthorizationMessageException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -1115,6 +1140,7 @@ module Aws::STS
     # @!attribute message
     #   @return [String]
     class InvalidIdentityTokenException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -1126,6 +1152,7 @@ module Aws::STS
     # @!attribute message
     #   @return [String]
     class MalformedPolicyDocumentException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -1144,6 +1171,7 @@ module Aws::STS
     # @!attribute message
     #   @return [String]
     class PackedPolicyTooLargeException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -1158,6 +1186,7 @@ module Aws::STS
     #               Service Namespaces</a> in the <i>Amazon Web Services General Reference</i>.</p>
     #   @return [String]
     class PolicyDescriptorType < Struct.new(
+      nil,
       :arn,
       keyword_init: true
     )
@@ -1175,6 +1204,7 @@ module Aws::STS
     #            The trusted context assertion is signed and encrypted by Amazon Web Services STS.</p>
     #   @return [String]
     class ProvidedContext < Struct.new(
+      nil,
       :provider_arn,
       :context_assertion,
       keyword_init: true
@@ -1190,6 +1220,7 @@ module Aws::STS
     # @!attribute message
     #   @return [String]
     class RegionDisabledException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -1213,6 +1244,7 @@ module Aws::STS
     #               and STS Character Limits</a> in the <i>IAM User Guide</i>.</p>
     #   @return [String]
     class Tag < Struct.new(
+      nil,
       :key,
       :value,
       keyword_init: true

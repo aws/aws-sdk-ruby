@@ -117,6 +117,7 @@ module Aws::DynamoDBStreams
     #               <code>DescribeStream</code> API.</p>
     #   @return [Types::ShardFilter]
     class DescribeStreamInput < Struct.new(
+      nil,
       :stream_arn,
       :limit,
       :exclusive_start_shard_id,
@@ -131,6 +132,7 @@ module Aws::DynamoDBStreams
     #   <p>A complete description of the stream, including its creation date and time, the DynamoDB table associated with the stream, the shard IDs within the stream, and the beginning and ending sequence numbers of stream records within the shards.</p>
     #   @return [Types::StreamDescription]
     class DescribeStreamOutput < Struct.new(
+      nil,
       :stream_description,
       keyword_init: true
     )
@@ -144,6 +146,7 @@ module Aws::DynamoDBStreams
     #   <p>The provided iterator exceeds the maximum age allowed.</p>
     #   @return [String]
     class ExpiredIteratorException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -158,6 +161,7 @@ module Aws::DynamoDBStreams
     #   <p>The maximum number of records to return from the shard. The upper limit is 1000.</p>
     #   @return [Integer]
     class GetRecordsInput < Struct.new(
+      nil,
       :shard_iterator,
       :limit,
       keyword_init: true
@@ -175,6 +179,7 @@ module Aws::DynamoDBStreams
     #         any more data.</p>
     #   @return [String]
     class GetRecordsOutput < Struct.new(
+      nil,
       :records,
       :next_shard_iterator,
       keyword_init: true
@@ -220,6 +225,7 @@ module Aws::DynamoDBStreams
     #   <p>The sequence number of a stream record in the shard from which to start reading.</p>
     #   @return [String]
     class GetShardIteratorInput < Struct.new(
+      nil,
       :stream_arn,
       :shard_id,
       :shard_iterator_type,
@@ -234,6 +240,7 @@ module Aws::DynamoDBStreams
     #   <p>The position in the shard from which to start reading stream records sequentially. A shard iterator specifies this position using the sequence number of a stream record in a shard.</p>
     #   @return [String]
     class GetShardIteratorOutput < Struct.new(
+      nil,
       :shard_iterator,
       keyword_init: true
     )
@@ -249,6 +256,7 @@ module Aws::DynamoDBStreams
     #   <p>The type of the identity. For Time To Live, the type is "Service".</p>
     #   @return [String]
     class Identity < Struct.new(
+      nil,
       :principal_id,
       :type,
       keyword_init: true
@@ -261,6 +269,7 @@ module Aws::DynamoDBStreams
     #   <p>The server encountered an internal error trying to fulfill the request.</p>
     #   @return [String]
     class InternalServerError < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -305,6 +314,7 @@ module Aws::DynamoDBStreams
     #            </note>
     #   @return [String]
     class KeySchemaElement < Struct.new(
+      nil,
       :attribute_name,
       :key_type,
       keyword_init: true
@@ -330,6 +340,7 @@ module Aws::DynamoDBStreams
     #   <p>Too many operations for a given subscriber.</p>
     #   @return [String]
     class LimitExceededException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -349,6 +360,7 @@ module Aws::DynamoDBStreams
     #       </p>
     #   @return [String]
     class ListStreamsInput < Struct.new(
+      nil,
       :table_name,
       :limit,
       :exclusive_start_stream_arn,
@@ -370,6 +382,7 @@ module Aws::DynamoDBStreams
     #         result set is when <code>LastEvaluatedStreamArn</code> is empty.</p>
     #   @return [String]
     class ListStreamsOutput < Struct.new(
+      nil,
       :streams,
       :last_evaluated_stream_arn,
       keyword_init: true
@@ -427,6 +440,7 @@ module Aws::DynamoDBStreams
     #            </ul>
     #   @return [Types::Identity]
     class Record < Struct.new(
+      nil,
       :event_id,
       :event_name,
       :event_version,
@@ -446,6 +460,7 @@ module Aws::DynamoDBStreams
     #   <p>The resource which is being requested does not exist.</p>
     #   @return [String]
     class ResourceNotFoundException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -460,6 +475,7 @@ module Aws::DynamoDBStreams
     #   <p>The last sequence number for the stream records contained within a shard. String contains numeric characters only.</p>
     #   @return [String]
     class SequenceNumberRange < Struct.new(
+      nil,
       :starting_sequence_number,
       :ending_sequence_number,
       keyword_init: true
@@ -478,6 +494,7 @@ module Aws::DynamoDBStreams
     #   <p>The shard ID of the current shard's parent.</p>
     #   @return [String]
     class Shard < Struct.new(
+      nil,
       :shard_id,
       :sequence_number_range,
       :parent_shard_id,
@@ -499,6 +516,7 @@ module Aws::DynamoDBStreams
     #            </p>
     #   @return [String]
     class ShardFilter < Struct.new(
+      nil,
       :type,
       :shard_id,
       keyword_init: true
@@ -532,6 +550,7 @@ module Aws::DynamoDBStreams
     #            </ul>
     #   @return [String]
     class Stream < Struct.new(
+      nil,
       :stream_arn,
       :table_name,
       :stream_label,
@@ -625,6 +644,7 @@ module Aws::DynamoDBStreams
     #         set is when <code>LastEvaluatedShardId</code> is empty.</p>
     #   @return [String]
     class StreamDescription < Struct.new(
+      nil,
       :stream_arn,
       :stream_label,
       :stream_status,
@@ -680,6 +700,7 @@ module Aws::DynamoDBStreams
     #            </ul>
     #   @return [String]
     class StreamRecord < Struct.new(
+      nil,
       :approximate_creation_date_time,
       :keys,
       :new_image,
@@ -708,6 +729,7 @@ module Aws::DynamoDBStreams
     #   <p>"The data you are trying to access has been trimmed.</p>
     #   @return [String]
     class TrimmedDataAccessException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )

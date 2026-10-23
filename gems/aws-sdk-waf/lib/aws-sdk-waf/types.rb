@@ -110,6 +110,7 @@ module Aws::WAF
     #            </ol>
     #   @return [Array<Types::ExcludedRule>]
     class ActivatedRule < Struct.new(
+      nil,
       :priority,
       :rule_id,
       :action,
@@ -150,6 +151,7 @@ module Aws::WAF
     #   <p>Specifies the bytes (typically a string that corresponds with ASCII characters) that you want AWS WAF to search for in web requests, the location in requests that you want AWS WAF to search, and other settings.</p>
     #   @return [Array<Types::ByteMatchTuple>]
     class ByteMatchSet < Struct.new(
+      nil,
       :byte_match_set_id,
       :name,
       :byte_match_tuples,
@@ -178,6 +180,7 @@ module Aws::WAF
     #   <p>A friendly name or description of the <a>ByteMatchSet</a>. You can't change <code>Name</code> after you create a <code>ByteMatchSet</code>.</p>
     #   @return [String]
     class ByteMatchSetSummary < Struct.new(
+      nil,
       :byte_match_set_id,
       :name,
       keyword_init: true
@@ -204,6 +207,7 @@ module Aws::WAF
     #   			exactly match the values in the <code>ByteMatchTuple</code> that you want to delete from the <code>ByteMatchSet</code>.</p>
     #   @return [Types::ByteMatchTuple]
     class ByteMatchSetUpdate < Struct.new(
+      nil,
       :action,
       :byte_match_tuple,
       keyword_init: true
@@ -432,6 +436,7 @@ module Aws::WAF
     #   		       <p>The value of <code>TargetString</code> must appear at the end of the specified part of the web request.</p>
     #   @return [String]
     class ByteMatchTuple < Struct.new(
+      nil,
       :field_to_match,
       :target_string,
       :text_transformation,
@@ -449,6 +454,7 @@ module Aws::WAF
     #   <p>The value returned by the most recent call to <a>GetChangeToken</a>.</p>
     #   @return [String]
     class CreateByteMatchSetRequest < Struct.new(
+      nil,
       :name,
       :change_token,
       keyword_init: true
@@ -464,6 +470,7 @@ module Aws::WAF
     #   			to query the status of the request. For more information, see <a>GetChangeTokenStatus</a>.</p>
     #   @return [String]
     class CreateByteMatchSetResponse < Struct.new(
+      nil,
       :byte_match_set,
       :change_token,
       keyword_init: true
@@ -478,6 +485,7 @@ module Aws::WAF
     #   <p>The value returned by the most recent call to <a>GetChangeToken</a>.</p>
     #   @return [String]
     class CreateGeoMatchSetRequest < Struct.new(
+      nil,
       :name,
       :change_token,
       keyword_init: true
@@ -493,6 +501,7 @@ module Aws::WAF
     #   			to query the status of the request. For more information, see <a>GetChangeTokenStatus</a>.</p>
     #   @return [String]
     class CreateGeoMatchSetResponse < Struct.new(
+      nil,
       :geo_match_set,
       :change_token,
       keyword_init: true
@@ -507,6 +516,7 @@ module Aws::WAF
     #   <p>The value returned by the most recent call to <a>GetChangeToken</a>.</p>
     #   @return [String]
     class CreateIPSetRequest < Struct.new(
+      nil,
       :name,
       :change_token,
       keyword_init: true
@@ -522,6 +532,7 @@ module Aws::WAF
     #   			to query the status of the request. For more information, see <a>GetChangeTokenStatus</a>.</p>
     #   @return [String]
     class CreateIPSetResponse < Struct.new(
+      nil,
       :ip_set,
       :change_token,
       keyword_init: true
@@ -561,6 +572,7 @@ module Aws::WAF
     #   <p></p>
     #   @return [Array<Types::Tag>]
     class CreateRateBasedRuleRequest < Struct.new(
+      nil,
       :name,
       :metric_name,
       :rate_key,
@@ -582,6 +594,7 @@ module Aws::WAF
     #            status of the request. For more information, see <a>GetChangeTokenStatus</a>.</p>
     #   @return [String]
     class CreateRateBasedRuleResponse < Struct.new(
+      nil,
       :rule,
       :change_token,
       keyword_init: true
@@ -597,6 +610,7 @@ module Aws::WAF
     #   <p>The value returned by the most recent call to <a>GetChangeToken</a>.</p>
     #   @return [String]
     class CreateRegexMatchSetRequest < Struct.new(
+      nil,
       :name,
       :change_token,
       keyword_init: true
@@ -612,6 +626,7 @@ module Aws::WAF
     #   			to query the status of the request. For more information, see <a>GetChangeTokenStatus</a>.</p>
     #   @return [String]
     class CreateRegexMatchSetResponse < Struct.new(
+      nil,
       :regex_match_set,
       :change_token,
       keyword_init: true
@@ -627,6 +642,7 @@ module Aws::WAF
     #   <p>The value returned by the most recent call to <a>GetChangeToken</a>.</p>
     #   @return [String]
     class CreateRegexPatternSetRequest < Struct.new(
+      nil,
       :name,
       :change_token,
       keyword_init: true
@@ -642,6 +658,7 @@ module Aws::WAF
     #   			to query the status of the request. For more information, see <a>GetChangeTokenStatus</a>.</p>
     #   @return [String]
     class CreateRegexPatternSetResponse < Struct.new(
+      nil,
       :regex_pattern_set,
       :change_token,
       keyword_init: true
@@ -664,6 +681,7 @@ module Aws::WAF
     #   <p></p>
     #   @return [Array<Types::Tag>]
     class CreateRuleGroupRequest < Struct.new(
+      nil,
       :name,
       :metric_name,
       :change_token,
@@ -681,6 +699,7 @@ module Aws::WAF
     #            to query the status of the request. For more information, see <a>GetChangeTokenStatus</a>.</p>
     #   @return [String]
     class CreateRuleGroupResponse < Struct.new(
+      nil,
       :rule_group,
       :change_token,
       keyword_init: true
@@ -703,6 +722,7 @@ module Aws::WAF
     #   <p></p>
     #   @return [Array<Types::Tag>]
     class CreateRuleRequest < Struct.new(
+      nil,
       :name,
       :metric_name,
       :change_token,
@@ -720,6 +740,7 @@ module Aws::WAF
     #   			to query the status of the request. For more information, see <a>GetChangeTokenStatus</a>.</p>
     #   @return [String]
     class CreateRuleResponse < Struct.new(
+      nil,
       :rule,
       :change_token,
       keyword_init: true
@@ -735,6 +756,7 @@ module Aws::WAF
     #   <p>The value returned by the most recent call to <a>GetChangeToken</a>.</p>
     #   @return [String]
     class CreateSizeConstraintSetRequest < Struct.new(
+      nil,
       :name,
       :change_token,
       keyword_init: true
@@ -750,6 +772,7 @@ module Aws::WAF
     #   			to query the status of the request. For more information, see <a>GetChangeTokenStatus</a>.</p>
     #   @return [String]
     class CreateSizeConstraintSetResponse < Struct.new(
+      nil,
       :size_constraint_set,
       :change_token,
       keyword_init: true
@@ -766,6 +789,7 @@ module Aws::WAF
     #   <p>The value returned by the most recent call to <a>GetChangeToken</a>.</p>
     #   @return [String]
     class CreateSqlInjectionMatchSetRequest < Struct.new(
+      nil,
       :name,
       :change_token,
       keyword_init: true
@@ -782,6 +806,7 @@ module Aws::WAF
     #   			to query the status of the request. For more information, see <a>GetChangeTokenStatus</a>.</p>
     #   @return [String]
     class CreateSqlInjectionMatchSetResponse < Struct.new(
+      nil,
       :sql_injection_match_set,
       :change_token,
       keyword_init: true
@@ -814,6 +839,7 @@ module Aws::WAF
     #              entities, it stops the process and throws an exception. </p>
     #   @return [Boolean]
     class CreateWebACLMigrationStackRequest < Struct.new(
+      nil,
       :web_acl_id,
       :s3_bucket_name,
       :ignore_unsupported_type,
@@ -826,6 +852,7 @@ module Aws::WAF
     #   <p>The URL of the template created in Amazon S3. </p>
     #   @return [String]
     class CreateWebACLMigrationStackResponse < Struct.new(
+      nil,
       :s3_object_url,
       keyword_init: true
     )
@@ -851,6 +878,7 @@ module Aws::WAF
     #   <p></p>
     #   @return [Array<Types::Tag>]
     class CreateWebACLRequest < Struct.new(
+      nil,
       :name,
       :metric_name,
       :default_action,
@@ -869,6 +897,7 @@ module Aws::WAF
     #   			to query the status of the request. For more information, see <a>GetChangeTokenStatus</a>.</p>
     #   @return [String]
     class CreateWebACLResponse < Struct.new(
+      nil,
       :web_acl,
       :change_token,
       keyword_init: true
@@ -885,6 +914,7 @@ module Aws::WAF
     #   <p>The value returned by the most recent call to <a>GetChangeToken</a>.</p>
     #   @return [String]
     class CreateXssMatchSetRequest < Struct.new(
+      nil,
       :name,
       :change_token,
       keyword_init: true
@@ -901,6 +931,7 @@ module Aws::WAF
     #   			to query the status of the request. For more information, see <a>GetChangeTokenStatus</a>.</p>
     #   @return [String]
     class CreateXssMatchSetResponse < Struct.new(
+      nil,
       :xss_match_set,
       :change_token,
       keyword_init: true
@@ -916,6 +947,7 @@ module Aws::WAF
     #   <p>The value returned by the most recent call to <a>GetChangeToken</a>.</p>
     #   @return [String]
     class DeleteByteMatchSetRequest < Struct.new(
+      nil,
       :byte_match_set_id,
       :change_token,
       keyword_init: true
@@ -928,6 +960,7 @@ module Aws::WAF
     #   			to query the status of the request. For more information, see <a>GetChangeTokenStatus</a>.</p>
     #   @return [String]
     class DeleteByteMatchSetResponse < Struct.new(
+      nil,
       :change_token,
       keyword_init: true
     )
@@ -942,6 +975,7 @@ module Aws::WAF
     #   <p>The value returned by the most recent call to <a>GetChangeToken</a>.</p>
     #   @return [String]
     class DeleteGeoMatchSetRequest < Struct.new(
+      nil,
       :geo_match_set_id,
       :change_token,
       keyword_init: true
@@ -954,6 +988,7 @@ module Aws::WAF
     #   			to query the status of the request. For more information, see <a>GetChangeTokenStatus</a>.</p>
     #   @return [String]
     class DeleteGeoMatchSetResponse < Struct.new(
+      nil,
       :change_token,
       keyword_init: true
     )
@@ -968,6 +1003,7 @@ module Aws::WAF
     #   <p>The value returned by the most recent call to <a>GetChangeToken</a>.</p>
     #   @return [String]
     class DeleteIPSetRequest < Struct.new(
+      nil,
       :ip_set_id,
       :change_token,
       keyword_init: true
@@ -980,6 +1016,7 @@ module Aws::WAF
     #   			to query the status of the request. For more information, see <a>GetChangeTokenStatus</a>.</p>
     #   @return [String]
     class DeleteIPSetResponse < Struct.new(
+      nil,
       :change_token,
       keyword_init: true
     )
@@ -990,6 +1027,7 @@ module Aws::WAF
     #   <p>The Amazon Resource Name (ARN) of the web ACL from which you want to delete the <a>LoggingConfiguration</a>.</p>
     #   @return [String]
     class DeleteLoggingConfigurationRequest < Struct.new(
+      nil,
       :resource_arn,
       keyword_init: true
     )
@@ -997,6 +1035,7 @@ module Aws::WAF
     end
 
     class DeleteLoggingConfigurationResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1007,6 +1046,7 @@ module Aws::WAF
     #            <p>The user making the request must be the owner of the RuleGroup.</p>
     #   @return [String]
     class DeletePermissionPolicyRequest < Struct.new(
+      nil,
       :resource_arn,
       keyword_init: true
     )
@@ -1014,6 +1054,7 @@ module Aws::WAF
     end
 
     class DeletePermissionPolicyResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1028,6 +1069,7 @@ module Aws::WAF
     #   <p>The value returned by the most recent call to <a>GetChangeToken</a>.</p>
     #   @return [String]
     class DeleteRateBasedRuleRequest < Struct.new(
+      nil,
       :rule_id,
       :change_token,
       keyword_init: true
@@ -1041,6 +1083,7 @@ module Aws::WAF
     #            status of the request. For more information, see <a>GetChangeTokenStatus</a>.</p>
     #   @return [String]
     class DeleteRateBasedRuleResponse < Struct.new(
+      nil,
       :change_token,
       keyword_init: true
     )
@@ -1055,6 +1098,7 @@ module Aws::WAF
     #   <p>The value returned by the most recent call to <a>GetChangeToken</a>.</p>
     #   @return [String]
     class DeleteRegexMatchSetRequest < Struct.new(
+      nil,
       :regex_match_set_id,
       :change_token,
       keyword_init: true
@@ -1067,6 +1111,7 @@ module Aws::WAF
     #   			to query the status of the request. For more information, see <a>GetChangeTokenStatus</a>.</p>
     #   @return [String]
     class DeleteRegexMatchSetResponse < Struct.new(
+      nil,
       :change_token,
       keyword_init: true
     )
@@ -1081,6 +1126,7 @@ module Aws::WAF
     #   <p>The value returned by the most recent call to <a>GetChangeToken</a>.</p>
     #   @return [String]
     class DeleteRegexPatternSetRequest < Struct.new(
+      nil,
       :regex_pattern_set_id,
       :change_token,
       keyword_init: true
@@ -1093,6 +1139,7 @@ module Aws::WAF
     #   			to query the status of the request. For more information, see <a>GetChangeTokenStatus</a>.</p>
     #   @return [String]
     class DeleteRegexPatternSetResponse < Struct.new(
+      nil,
       :change_token,
       keyword_init: true
     )
@@ -1107,6 +1154,7 @@ module Aws::WAF
     #   <p>The value returned by the most recent call to <a>GetChangeToken</a>.</p>
     #   @return [String]
     class DeleteRuleGroupRequest < Struct.new(
+      nil,
       :rule_group_id,
       :change_token,
       keyword_init: true
@@ -1119,6 +1167,7 @@ module Aws::WAF
     #            to query the status of the request. For more information, see <a>GetChangeTokenStatus</a>.</p>
     #   @return [String]
     class DeleteRuleGroupResponse < Struct.new(
+      nil,
       :change_token,
       keyword_init: true
     )
@@ -1133,6 +1182,7 @@ module Aws::WAF
     #   <p>The value returned by the most recent call to <a>GetChangeToken</a>.</p>
     #   @return [String]
     class DeleteRuleRequest < Struct.new(
+      nil,
       :rule_id,
       :change_token,
       keyword_init: true
@@ -1145,6 +1195,7 @@ module Aws::WAF
     #   			to query the status of the request. For more information, see <a>GetChangeTokenStatus</a>.</p>
     #   @return [String]
     class DeleteRuleResponse < Struct.new(
+      nil,
       :change_token,
       keyword_init: true
     )
@@ -1159,6 +1210,7 @@ module Aws::WAF
     #   <p>The value returned by the most recent call to <a>GetChangeToken</a>.</p>
     #   @return [String]
     class DeleteSizeConstraintSetRequest < Struct.new(
+      nil,
       :size_constraint_set_id,
       :change_token,
       keyword_init: true
@@ -1171,6 +1223,7 @@ module Aws::WAF
     #   			to query the status of the request. For more information, see <a>GetChangeTokenStatus</a>.</p>
     #   @return [String]
     class DeleteSizeConstraintSetResponse < Struct.new(
+      nil,
       :change_token,
       keyword_init: true
     )
@@ -1186,6 +1239,7 @@ module Aws::WAF
     #   <p>The value returned by the most recent call to <a>GetChangeToken</a>.</p>
     #   @return [String]
     class DeleteSqlInjectionMatchSetRequest < Struct.new(
+      nil,
       :sql_injection_match_set_id,
       :change_token,
       keyword_init: true
@@ -1199,6 +1253,7 @@ module Aws::WAF
     #   			to query the status of the request. For more information, see <a>GetChangeTokenStatus</a>.</p>
     #   @return [String]
     class DeleteSqlInjectionMatchSetResponse < Struct.new(
+      nil,
       :change_token,
       keyword_init: true
     )
@@ -1213,6 +1268,7 @@ module Aws::WAF
     #   <p>The value returned by the most recent call to <a>GetChangeToken</a>.</p>
     #   @return [String]
     class DeleteWebACLRequest < Struct.new(
+      nil,
       :web_acl_id,
       :change_token,
       keyword_init: true
@@ -1225,6 +1281,7 @@ module Aws::WAF
     #   			to query the status of the request. For more information, see <a>GetChangeTokenStatus</a>.</p>
     #   @return [String]
     class DeleteWebACLResponse < Struct.new(
+      nil,
       :change_token,
       keyword_init: true
     )
@@ -1240,6 +1297,7 @@ module Aws::WAF
     #   <p>The value returned by the most recent call to <a>GetChangeToken</a>.</p>
     #   @return [String]
     class DeleteXssMatchSetRequest < Struct.new(
+      nil,
       :xss_match_set_id,
       :change_token,
       keyword_init: true
@@ -1253,6 +1311,7 @@ module Aws::WAF
     #   			to query the status of the request. For more information, see <a>GetChangeTokenStatus</a>.</p>
     #   @return [String]
     class DeleteXssMatchSetResponse < Struct.new(
+      nil,
       :change_token,
       keyword_init: true
     )
@@ -1274,6 +1333,7 @@ module Aws::WAF
     #   <p>The unique identifier for the rule to exclude from the rule group.</p>
     #   @return [String]
     class ExcludedRule < Struct.new(
+      nil,
       :rule_id,
       keyword_init: true
     )
@@ -1338,6 +1398,7 @@ module Aws::WAF
     #   	        <p>If the value of <code>Type</code> is any other value, omit <code>Data</code>.</p>
     #   @return [String]
     class FieldToMatch < Struct.new(
+      nil,
       :type,
       :data,
       keyword_init: true
@@ -1361,6 +1422,7 @@ module Aws::WAF
     #   <p>The country that you want AWS WAF to search for.</p>
     #   @return [String]
     class GeoMatchConstraint < Struct.new(
+      nil,
       :type,
       :value,
       keyword_init: true
@@ -1390,6 +1452,7 @@ module Aws::WAF
     #   <p>An array of <a>GeoMatchConstraint</a> objects, which contain the country that you want AWS WAF to search for.</p>
     #   @return [Array<Types::GeoMatchConstraint>]
     class GeoMatchSet < Struct.new(
+      nil,
       :geo_match_set_id,
       :name,
       :geo_match_constraints,
@@ -1414,6 +1477,7 @@ module Aws::WAF
     #   <p>A friendly name or description of the <a>GeoMatchSet</a>. You can't change the name of an <code>GeoMatchSet</code> after you create it.</p>
     #   @return [String]
     class GeoMatchSetSummary < Struct.new(
+      nil,
       :geo_match_set_id,
       :name,
       keyword_init: true
@@ -1437,6 +1501,7 @@ module Aws::WAF
     #   <p>The country from which web requests originate that you want AWS WAF to search for.</p>
     #   @return [Types::GeoMatchConstraint]
     class GeoMatchSetUpdate < Struct.new(
+      nil,
       :action,
       :geo_match_constraint,
       keyword_init: true
@@ -1449,6 +1514,7 @@ module Aws::WAF
     #   			<a>CreateByteMatchSet</a> and by <a>ListByteMatchSets</a>.</p>
     #   @return [String]
     class GetByteMatchSetRequest < Struct.new(
+      nil,
       :byte_match_set_id,
       keyword_init: true
     )
@@ -1479,6 +1545,7 @@ module Aws::WAF
     #            </ul>
     #   @return [Types::ByteMatchSet]
     class GetByteMatchSetResponse < Struct.new(
+      nil,
       :byte_match_set,
       keyword_init: true
     )
@@ -1486,6 +1553,7 @@ module Aws::WAF
     end
 
     class GetChangeTokenRequest < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1496,6 +1564,7 @@ module Aws::WAF
     #   			to get the current status of the request. </p>
     #   @return [String]
     class GetChangeTokenResponse < Struct.new(
+      nil,
       :change_token,
       keyword_init: true
     )
@@ -1506,6 +1575,7 @@ module Aws::WAF
     #   <p>The change token for which you want to get the status. This change token was previously returned in the <code>GetChangeToken</code> response.</p>
     #   @return [String]
     class GetChangeTokenStatusRequest < Struct.new(
+      nil,
       :change_token,
       keyword_init: true
     )
@@ -1516,6 +1586,7 @@ module Aws::WAF
     #   <p>The status of the change token.</p>
     #   @return [String]
     class GetChangeTokenStatusResponse < Struct.new(
+      nil,
       :change_token_status,
       keyword_init: true
     )
@@ -1527,6 +1598,7 @@ module Aws::WAF
     #   			<a>ListGeoMatchSets</a>.</p>
     #   @return [String]
     class GetGeoMatchSetRequest < Struct.new(
+      nil,
       :geo_match_set_id,
       keyword_init: true
     )
@@ -1537,6 +1609,7 @@ module Aws::WAF
     #   <p>Information about the <a>GeoMatchSet</a> that you specified in the <code>GetGeoMatchSet</code> request. This includes the <code>Type</code>, which for a <code>GeoMatchContraint</code> is always <code>Country</code>, as well as the <code>Value</code>, which is the identifier for a specific country.</p>
     #   @return [Types::GeoMatchSet]
     class GetGeoMatchSetResponse < Struct.new(
+      nil,
       :geo_match_set,
       keyword_init: true
     )
@@ -1548,6 +1621,7 @@ module Aws::WAF
     #   			<a>ListIPSets</a>.</p>
     #   @return [String]
     class GetIPSetRequest < Struct.new(
+      nil,
       :ip_set_id,
       keyword_init: true
     )
@@ -1572,6 +1646,7 @@ module Aws::WAF
     #            </ul>
     #   @return [Types::IPSet]
     class GetIPSetResponse < Struct.new(
+      nil,
       :ip_set,
       keyword_init: true
     )
@@ -1582,6 +1657,7 @@ module Aws::WAF
     #   <p>The Amazon Resource Name (ARN) of the web ACL for which you want to get the <a>LoggingConfiguration</a>.</p>
     #   @return [String]
     class GetLoggingConfigurationRequest < Struct.new(
+      nil,
       :resource_arn,
       keyword_init: true
     )
@@ -1592,6 +1668,7 @@ module Aws::WAF
     #   <p>The <a>LoggingConfiguration</a> for the specified web ACL.</p>
     #   @return [Types::LoggingConfiguration]
     class GetLoggingConfigurationResponse < Struct.new(
+      nil,
       :logging_configuration,
       keyword_init: true
     )
@@ -1602,6 +1679,7 @@ module Aws::WAF
     #   <p>The Amazon Resource Name (ARN) of the RuleGroup for which you want to get the policy.</p>
     #   @return [String]
     class GetPermissionPolicyRequest < Struct.new(
+      nil,
       :resource_arn,
       keyword_init: true
     )
@@ -1612,6 +1690,7 @@ module Aws::WAF
     #   <p>The IAM policy attached to the specified RuleGroup.</p>
     #   @return [String]
     class GetPermissionPolicyResponse < Struct.new(
+      nil,
       :policy,
       keyword_init: true
     )
@@ -1626,6 +1705,7 @@ module Aws::WAF
     #   <p>A null value and not currently used. Do not include this in your request.</p>
     #   @return [String]
     class GetRateBasedRuleManagedKeysRequest < Struct.new(
+      nil,
       :rule_id,
       :next_marker,
       keyword_init: true
@@ -1640,6 +1720,7 @@ module Aws::WAF
     #   <p>A null value and not currently used.</p>
     #   @return [String]
     class GetRateBasedRuleManagedKeysResponse < Struct.new(
+      nil,
       :managed_keys,
       :next_marker,
       keyword_init: true
@@ -1652,6 +1733,7 @@ module Aws::WAF
     #               <code>RuleId</code> is returned by <a>CreateRateBasedRule</a> and by <a>ListRateBasedRules</a>.</p>
     #   @return [String]
     class GetRateBasedRuleRequest < Struct.new(
+      nil,
       :rule_id,
       keyword_init: true
     )
@@ -1663,6 +1745,7 @@ module Aws::WAF
     #               <code>GetRateBasedRule</code> request.</p>
     #   @return [Types::RateBasedRule]
     class GetRateBasedRuleResponse < Struct.new(
+      nil,
       :rule,
       keyword_init: true
     )
@@ -1674,6 +1757,7 @@ module Aws::WAF
     #   			<a>CreateRegexMatchSet</a> and by <a>ListRegexMatchSets</a>.</p>
     #   @return [String]
     class GetRegexMatchSetRequest < Struct.new(
+      nil,
       :regex_match_set_id,
       keyword_init: true
     )
@@ -1684,6 +1768,7 @@ module Aws::WAF
     #   <p>Information about the <a>RegexMatchSet</a> that you specified in the <code>GetRegexMatchSet</code> request. For more information, see <a>RegexMatchTuple</a>.</p>
     #   @return [Types::RegexMatchSet]
     class GetRegexMatchSetResponse < Struct.new(
+      nil,
       :regex_match_set,
       keyword_init: true
     )
@@ -1695,6 +1780,7 @@ module Aws::WAF
     #   			<a>CreateRegexPatternSet</a> and by <a>ListRegexPatternSets</a>.</p>
     #   @return [String]
     class GetRegexPatternSetRequest < Struct.new(
+      nil,
       :regex_pattern_set_id,
       keyword_init: true
     )
@@ -1705,6 +1791,7 @@ module Aws::WAF
     #   <p>Information about the <a>RegexPatternSet</a> that you specified in the <code>GetRegexPatternSet</code> request, including the identifier of the pattern set and the regular expression patterns you want AWS WAF to search for. </p>
     #   @return [Types::RegexPatternSet]
     class GetRegexPatternSetResponse < Struct.new(
+      nil,
       :regex_pattern_set,
       keyword_init: true
     )
@@ -1716,6 +1803,7 @@ module Aws::WAF
     #            <a>ListRuleGroups</a>.</p>
     #   @return [String]
     class GetRuleGroupRequest < Struct.new(
+      nil,
       :rule_group_id,
       keyword_init: true
     )
@@ -1726,6 +1814,7 @@ module Aws::WAF
     #   <p>Information about the <a>RuleGroup</a> that you specified in the <code>GetRuleGroup</code> request. </p>
     #   @return [Types::RuleGroup]
     class GetRuleGroupResponse < Struct.new(
+      nil,
       :rule_group,
       keyword_init: true
     )
@@ -1737,6 +1826,7 @@ module Aws::WAF
     #   			<a>ListRules</a>.</p>
     #   @return [String]
     class GetRuleRequest < Struct.new(
+      nil,
       :rule_id,
       keyword_init: true
     )
@@ -1762,6 +1852,7 @@ module Aws::WAF
     #            </ul>
     #   @return [Types::Rule]
     class GetRuleResponse < Struct.new(
+      nil,
       :rule,
       keyword_init: true
     )
@@ -1796,6 +1887,7 @@ module Aws::WAF
     #   			returns information about all of them. </p>
     #   @return [Integer]
     class GetSampledRequestsRequest < Struct.new(
+      nil,
       :web_acl_id,
       :rule_id,
       :time_window,
@@ -1819,6 +1911,7 @@ module Aws::WAF
     #   			<code>GetSampledRequests</code> returns the time range for the first 5,000 requests. Times are in Coordinated Universal Time (UTC) format.</p>
     #   @return [Types::TimeWindow]
     class GetSampledRequestsResponse < Struct.new(
+      nil,
       :sampled_requests,
       :population_size,
       :time_window,
@@ -1837,6 +1930,7 @@ module Aws::WAF
     #   			<a>CreateSizeConstraintSet</a> and by <a>ListSizeConstraintSets</a>.</p>
     #   @return [String]
     class GetSizeConstraintSetRequest < Struct.new(
+      nil,
       :size_constraint_set_id,
       keyword_init: true
     )
@@ -1867,6 +1961,7 @@ module Aws::WAF
     #            </ul>
     #   @return [Types::SizeConstraintSet]
     class GetSizeConstraintSetResponse < Struct.new(
+      nil,
       :size_constraint_set,
       keyword_init: true
     )
@@ -1879,6 +1974,7 @@ module Aws::WAF
     #   			is returned by <a>CreateSqlInjectionMatchSet</a> and by <a>ListSqlInjectionMatchSets</a>.</p>
     #   @return [String]
     class GetSqlInjectionMatchSetRequest < Struct.new(
+      nil,
       :sql_injection_match_set_id,
       keyword_init: true
     )
@@ -1909,6 +2005,7 @@ module Aws::WAF
     #            </ul>
     #   @return [Types::SqlInjectionMatchSet]
     class GetSqlInjectionMatchSetResponse < Struct.new(
+      nil,
       :sql_injection_match_set,
       keyword_init: true
     )
@@ -1920,6 +2017,7 @@ module Aws::WAF
     #   			<a>ListWebACLs</a>.</p>
     #   @return [String]
     class GetWebACLRequest < Struct.new(
+      nil,
       :web_acl_id,
       keyword_init: true
     )
@@ -1955,6 +2053,7 @@ module Aws::WAF
     #            </ul>
     #   @return [Types::WebACL]
     class GetWebACLResponse < Struct.new(
+      nil,
       :web_acl,
       keyword_init: true
     )
@@ -1967,6 +2066,7 @@ module Aws::WAF
     #   			is returned by <a>CreateXssMatchSet</a> and by <a>ListXssMatchSets</a>.</p>
     #   @return [String]
     class GetXssMatchSetRequest < Struct.new(
+      nil,
       :xss_match_set_id,
       keyword_init: true
     )
@@ -1997,6 +2097,7 @@ module Aws::WAF
     #            </ul>
     #   @return [Types::XssMatchSet]
     class GetXssMatchSetResponse < Struct.new(
+      nil,
       :xss_match_set,
       keyword_init: true
     )
@@ -2021,6 +2122,7 @@ module Aws::WAF
     #   <p>The value of one of the headers in the sampled web request.</p>
     #   @return [String]
     class HTTPHeader < Struct.new(
+      nil,
       :name,
       :value,
       keyword_init: true
@@ -2071,6 +2173,7 @@ module Aws::WAF
     #   <p>A complex type that contains two values for each header in the sampled web request: the name of the header and the value of the header.</p>
     #   @return [Array<Types::HTTPHeader>]
     class HTTPRequest < Struct.new(
+      nil,
       :client_ip,
       :country,
       :uri,
@@ -2112,6 +2215,7 @@ module Aws::WAF
     #   			If the <code>WebACL</code> is associated with a CloudFront distribution and the viewer did not use an HTTP proxy or a load balancer to send the request, this is the value of the c-ip field in the CloudFront access logs.</p>
     #   @return [Array<Types::IPSetDescriptor>]
     class IPSet < Struct.new(
+      nil,
       :ip_set_id,
       :name,
       :ip_set_descriptors,
@@ -2157,6 +2261,7 @@ module Aws::WAF
     #            </ul>
     #   @return [String]
     class IPSetDescriptor < Struct.new(
+      nil,
       :type,
       :value,
       keyword_init: true
@@ -2181,6 +2286,7 @@ module Aws::WAF
     #   <p>A friendly name or description of the <a>IPSet</a>. You can't change the name of an <code>IPSet</code> after you create it.</p>
     #   @return [String]
     class IPSetSummary < Struct.new(
+      nil,
       :ip_set_id,
       :name,
       keyword_init: true
@@ -2204,6 +2310,7 @@ module Aws::WAF
     #   <p>The IP address type (<code>IPV4</code> or <code>IPV6</code>) and the IP address range (in CIDR notation) that web requests originate from.</p>
     #   @return [Types::IPSetDescriptor]
     class IPSetUpdate < Struct.new(
+      nil,
       :action,
       :ip_set_descriptor,
       keyword_init: true
@@ -2225,6 +2332,7 @@ module Aws::WAF
     #            <code>NextMarker</code> value that you can use to get another batch of <code>ActivatedRules</code>.</p>
     #   @return [Integer]
     class ListActivatedRulesInRuleGroupRequest < Struct.new(
+      nil,
       :rule_group_id,
       :next_marker,
       :limit,
@@ -2240,6 +2348,7 @@ module Aws::WAF
     #   <p>An array of <code>ActivatedRules</code> objects.</p>
     #   @return [Array<Types::ActivatedRule>]
     class ListActivatedRulesInRuleGroupResponse < Struct.new(
+      nil,
       :next_marker,
       :activated_rules,
       keyword_init: true
@@ -2259,6 +2368,7 @@ module Aws::WAF
     #   			<code>NextMarker</code> value that you can use to get another batch of <code>ByteMatchSet</code> objects.</p>
     #   @return [Integer]
     class ListByteMatchSetsRequest < Struct.new(
+      nil,
       :next_marker,
       :limit,
       keyword_init: true
@@ -2276,6 +2386,7 @@ module Aws::WAF
     #   <p>An array of <a>ByteMatchSetSummary</a> objects.</p>
     #   @return [Array<Types::ByteMatchSetSummary>]
     class ListByteMatchSetsResponse < Struct.new(
+      nil,
       :next_marker,
       :byte_match_sets,
       keyword_init: true
@@ -2295,6 +2406,7 @@ module Aws::WAF
     #   			<code>NextMarker</code> value that you can use to get another batch of <code>GeoMatchSet</code> objects.</p>
     #   @return [Integer]
     class ListGeoMatchSetsRequest < Struct.new(
+      nil,
       :next_marker,
       :limit,
       keyword_init: true
@@ -2312,6 +2424,7 @@ module Aws::WAF
     #   <p>An array of <a>GeoMatchSetSummary</a> objects.</p>
     #   @return [Array<Types::GeoMatchSetSummary>]
     class ListGeoMatchSetsResponse < Struct.new(
+      nil,
       :next_marker,
       :geo_match_sets,
       keyword_init: true
@@ -2331,6 +2444,7 @@ module Aws::WAF
     #   			<code>NextMarker</code> value that you can use to get another batch of <code>IPSet</code> objects.</p>
     #   @return [Integer]
     class ListIPSetsRequest < Struct.new(
+      nil,
       :next_marker,
       :limit,
       keyword_init: true
@@ -2347,6 +2461,7 @@ module Aws::WAF
     #   <p>An array of <a>IPSetSummary</a> objects.</p>
     #   @return [Array<Types::IPSetSummary>]
     class ListIPSetsResponse < Struct.new(
+      nil,
       :next_marker,
       :ip_sets,
       keyword_init: true
@@ -2364,6 +2479,7 @@ module Aws::WAF
     #   <p>Specifies the number of <code>LoggingConfigurations</code> that you want AWS WAF to return for this request. If you have more <code>LoggingConfigurations</code> than the number that you specify for <code>Limit</code>, the response includes a <code>NextMarker</code> value that you can use to get another batch of <code>LoggingConfigurations</code>.</p>
     #   @return [Integer]
     class ListLoggingConfigurationsRequest < Struct.new(
+      nil,
       :next_marker,
       :limit,
       keyword_init: true
@@ -2378,6 +2494,7 @@ module Aws::WAF
     #   <p>If you have more <code>LoggingConfigurations</code> than the number that you specified for <code>Limit</code> in the request, the response includes a <code>NextMarker</code> value. To list more <code>LoggingConfigurations</code>, submit another <code>ListLoggingConfigurations</code> request, and specify the <code>NextMarker</code> value from the response in the <code>NextMarker</code> value in the next request.</p>
     #   @return [String]
     class ListLoggingConfigurationsResponse < Struct.new(
+      nil,
       :logging_configurations,
       :next_marker,
       keyword_init: true
@@ -2400,6 +2517,7 @@ module Aws::WAF
     #            use to get another batch of <code>Rules</code>.</p>
     #   @return [Integer]
     class ListRateBasedRulesRequest < Struct.new(
+      nil,
       :next_marker,
       :limit,
       keyword_init: true
@@ -2418,6 +2536,7 @@ module Aws::WAF
     #   <p>An array of <a>RuleSummary</a> objects.</p>
     #   @return [Array<Types::RuleSummary>]
     class ListRateBasedRulesResponse < Struct.new(
+      nil,
       :next_marker,
       :rules,
       keyword_init: true
@@ -2437,6 +2556,7 @@ module Aws::WAF
     #   			<code>NextMarker</code> value that you can use to get another batch of <code>RegexMatchSet</code> objects.</p>
     #   @return [Integer]
     class ListRegexMatchSetsRequest < Struct.new(
+      nil,
       :next_marker,
       :limit,
       keyword_init: true
@@ -2454,6 +2574,7 @@ module Aws::WAF
     #   <p>An array of <a>RegexMatchSetSummary</a> objects.</p>
     #   @return [Array<Types::RegexMatchSetSummary>]
     class ListRegexMatchSetsResponse < Struct.new(
+      nil,
       :next_marker,
       :regex_match_sets,
       keyword_init: true
@@ -2473,6 +2594,7 @@ module Aws::WAF
     #   			<code>NextMarker</code> value that you can use to get another batch of <code>RegexPatternSet</code> objects.</p>
     #   @return [Integer]
     class ListRegexPatternSetsRequest < Struct.new(
+      nil,
       :next_marker,
       :limit,
       keyword_init: true
@@ -2490,6 +2612,7 @@ module Aws::WAF
     #   <p>An array of <a>RegexPatternSetSummary</a> objects.</p>
     #   @return [Array<Types::RegexPatternSetSummary>]
     class ListRegexPatternSetsResponse < Struct.new(
+      nil,
       :next_marker,
       :regex_pattern_sets,
       keyword_init: true
@@ -2507,6 +2630,7 @@ module Aws::WAF
     #   <p>Specifies the number of <code>RuleGroups</code> that you want AWS WAF to return for this request. If you have more <code>RuleGroups</code> than the number that you specify for <code>Limit</code>, the response includes a <code>NextMarker</code> value that you can use to get another batch of <code>RuleGroups</code>.</p>
     #   @return [Integer]
     class ListRuleGroupsRequest < Struct.new(
+      nil,
       :next_marker,
       :limit,
       keyword_init: true
@@ -2521,6 +2645,7 @@ module Aws::WAF
     #   <p>An array of <a>RuleGroup</a> objects.</p>
     #   @return [Array<Types::RuleGroupSummary>]
     class ListRuleGroupsResponse < Struct.new(
+      nil,
       :next_marker,
       :rule_groups,
       keyword_init: true
@@ -2539,6 +2664,7 @@ module Aws::WAF
     #   			<code>NextMarker</code> value that you can use to get another batch of <code>Rules</code>.</p>
     #   @return [Integer]
     class ListRulesRequest < Struct.new(
+      nil,
       :next_marker,
       :limit,
       keyword_init: true
@@ -2555,6 +2681,7 @@ module Aws::WAF
     #   <p>An array of <a>RuleSummary</a> objects.</p>
     #   @return [Array<Types::RuleSummary>]
     class ListRulesResponse < Struct.new(
+      nil,
       :next_marker,
       :rules,
       keyword_init: true
@@ -2573,6 +2700,7 @@ module Aws::WAF
     #   			<code>NextMarker</code> value that you can use to get another batch of <code>SizeConstraintSet</code> objects.</p>
     #   @return [Integer]
     class ListSizeConstraintSetsRequest < Struct.new(
+      nil,
       :next_marker,
       :limit,
       keyword_init: true
@@ -2590,6 +2718,7 @@ module Aws::WAF
     #   <p>An array of <a>SizeConstraintSetSummary</a> objects.</p>
     #   @return [Array<Types::SizeConstraintSetSummary>]
     class ListSizeConstraintSetsResponse < Struct.new(
+      nil,
       :next_marker,
       :size_constraint_sets,
       keyword_init: true
@@ -2610,6 +2739,7 @@ module Aws::WAF
     #   			<code>NextMarker</code> value that you can use to get another batch of <code>Rules</code>.</p>
     #   @return [Integer]
     class ListSqlInjectionMatchSetsRequest < Struct.new(
+      nil,
       :next_marker,
       :limit,
       keyword_init: true
@@ -2628,6 +2758,7 @@ module Aws::WAF
     #   <p>An array of <a>SqlInjectionMatchSetSummary</a> objects.</p>
     #   @return [Array<Types::SqlInjectionMatchSetSummary>]
     class ListSqlInjectionMatchSetsResponse < Struct.new(
+      nil,
       :next_marker,
       :sql_injection_match_sets,
       keyword_init: true
@@ -2647,6 +2778,7 @@ module Aws::WAF
     #   			<code>NextMarker</code> value that you can use to get another batch of objects.</p>
     #   @return [Integer]
     class ListSubscribedRuleGroupsRequest < Struct.new(
+      nil,
       :next_marker,
       :limit,
       keyword_init: true
@@ -2664,6 +2796,7 @@ module Aws::WAF
     #   <p>An array of <a>RuleGroup</a> objects.</p>
     #   @return [Array<Types::SubscribedRuleGroupSummary>]
     class ListSubscribedRuleGroupsResponse < Struct.new(
+      nil,
       :next_marker,
       :rule_groups,
       keyword_init: true
@@ -2681,6 +2814,7 @@ module Aws::WAF
     #   <p></p>
     #   @return [String]
     class ListTagsForResourceRequest < Struct.new(
+      nil,
       :next_marker,
       :limit,
       :resource_arn,
@@ -2696,6 +2830,7 @@ module Aws::WAF
     #   <p></p>
     #   @return [Types::TagInfoForResource]
     class ListTagsForResourceResponse < Struct.new(
+      nil,
       :next_marker,
       :tag_info_for_resource,
       keyword_init: true
@@ -2715,6 +2850,7 @@ module Aws::WAF
     #   			<code>NextMarker</code> value that you can use to get another batch of <code>WebACL</code> objects.</p>
     #   @return [Integer]
     class ListWebACLsRequest < Struct.new(
+      nil,
       :next_marker,
       :limit,
       keyword_init: true
@@ -2732,6 +2868,7 @@ module Aws::WAF
     #   <p>An array of <a>WebACLSummary</a> objects.</p>
     #   @return [Array<Types::WebACLSummary>]
     class ListWebACLsResponse < Struct.new(
+      nil,
       :next_marker,
       :web_ac_ls,
       keyword_init: true
@@ -2752,6 +2889,7 @@ module Aws::WAF
     #   			<code>NextMarker</code> value that you can use to get another batch of <code>Rules</code>.</p>
     #   @return [Integer]
     class ListXssMatchSetsRequest < Struct.new(
+      nil,
       :next_marker,
       :limit,
       keyword_init: true
@@ -2770,6 +2908,7 @@ module Aws::WAF
     #   <p>An array of <a>XssMatchSetSummary</a> objects.</p>
     #   @return [Array<Types::XssMatchSetSummary>]
     class ListXssMatchSetsResponse < Struct.new(
+      nil,
       :next_marker,
       :xss_match_sets,
       keyword_init: true
@@ -2801,6 +2940,7 @@ module Aws::WAF
     #               <code>xxx</code>. </p>
     #   @return [Array<Types::FieldToMatch>]
     class LoggingConfiguration < Struct.new(
+      nil,
       :resource_arn,
       :log_destination_configs,
       :redacted_fields,
@@ -2838,6 +2978,7 @@ module Aws::WAF
     #   			The ID is returned by the corresponding <code>Create</code> or <code>List</code> command.</p>
     #   @return [String]
     class Predicate < Struct.new(
+      nil,
       :negated,
       :type,
       :data_id,
@@ -2857,6 +2998,7 @@ module Aws::WAF
     #            </note>
     #   @return [Types::LoggingConfiguration]
     class PutLoggingConfigurationRequest < Struct.new(
+      nil,
       :logging_configuration,
       keyword_init: true
     )
@@ -2867,6 +3009,7 @@ module Aws::WAF
     #   <p>The <a>LoggingConfiguration</a> that you submitted in the request.</p>
     #   @return [Types::LoggingConfiguration]
     class PutLoggingConfigurationResponse < Struct.new(
+      nil,
       :logging_configuration,
       keyword_init: true
     )
@@ -2880,6 +3023,7 @@ module Aws::WAF
     #   <p>The policy to attach to the specified RuleGroup.</p>
     #   @return [String]
     class PutPermissionPolicyRequest < Struct.new(
+      nil,
       :resource_arn,
       :policy,
       keyword_init: true
@@ -2888,6 +3032,7 @@ module Aws::WAF
     end
 
     class PutPermissionPolicyResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -2952,6 +3097,7 @@ module Aws::WAF
     #            met, AWS WAF triggers the action that is specified for this rule.</p>
     #   @return [Integer]
     class RateBasedRule < Struct.new(
+      nil,
       :rule_id,
       :name,
       :metric_name,
@@ -3004,6 +3150,7 @@ module Aws::WAF
     #            </ul>
     #   @return [Array<Types::RegexMatchTuple>]
     class RegexMatchSet < Struct.new(
+      nil,
       :regex_match_set_id,
       :name,
       :regex_match_tuples,
@@ -3032,6 +3179,7 @@ module Aws::WAF
     #   <p>A friendly name or description of the <a>RegexMatchSet</a>. You can't change <code>Name</code> after you create a <code>RegexMatchSet</code>.</p>
     #   @return [String]
     class RegexMatchSetSummary < Struct.new(
+      nil,
       :regex_match_set_id,
       :name,
       keyword_init: true
@@ -3058,6 +3206,7 @@ module Aws::WAF
     #            exactly match the values in the <code>RegexMatchTuple</code> that you want to delete from the <code>RegexMatchSet</code>.</p>
     #   @return [Types::RegexMatchTuple]
     class RegexMatchSetUpdate < Struct.new(
+      nil,
       :action,
       :regex_match_tuple,
       keyword_init: true
@@ -3191,6 +3340,7 @@ module Aws::WAF
     #   		          <code>RegexPatternSetId</code> is returned by <a>CreateRegexPatternSet</a> and by <a>ListRegexPatternSets</a>.</p>
     #   @return [String]
     class RegexMatchTuple < Struct.new(
+      nil,
       :field_to_match,
       :text_transformation,
       :regex_pattern_set_id,
@@ -3221,6 +3371,7 @@ module Aws::WAF
     #   <p>Specifies the regular expression (regex) patterns that you want AWS WAF to search for, such as <code>B[a@]dB[o0]t</code>.</p>
     #   @return [Array<String>]
     class RegexPatternSet < Struct.new(
+      nil,
       :regex_pattern_set_id,
       :name,
       :regex_pattern_strings,
@@ -3249,6 +3400,7 @@ module Aws::WAF
     #   <p>A friendly name or description of the <a>RegexPatternSet</a>. You can't change <code>Name</code> after you create a <code>RegexPatternSet</code>.</p>
     #   @return [String]
     class RegexPatternSetSummary < Struct.new(
+      nil,
       :regex_pattern_set_id,
       :name,
       keyword_init: true
@@ -3273,6 +3425,7 @@ module Aws::WAF
     #   <p>Specifies the regular expression (regex) pattern that you want AWS WAF to search for, such as <code>B[a@]dB[o0]t</code>.</p>
     #   @return [String]
     class RegexPatternSetUpdate < Struct.new(
+      nil,
       :action,
       :regex_pattern_string,
       keyword_init: true
@@ -3321,6 +3474,7 @@ module Aws::WAF
     #   			<a>SqlInjectionMatchSet</a> object that you want to include in a <code>Rule</code>.</p>
     #   @return [Array<Types::Predicate>]
     class Rule < Struct.new(
+      nil,
       :rule_id,
       :name,
       :metric_name,
@@ -3366,6 +3520,7 @@ module Aws::WAF
     #            whitespace or metric names reserved for AWS WAF, including "All" and "Default_Action." You can't change the name of the metric after you create the <code>RuleGroup</code>.</p>
     #   @return [String]
     class RuleGroup < Struct.new(
+      nil,
       :rule_group_id,
       :name,
       :metric_name,
@@ -3394,6 +3549,7 @@ module Aws::WAF
     #   <p>A friendly name or description of the <a>RuleGroup</a>. You can't change the name of a <code>RuleGroup</code> after you create it.</p>
     #   @return [String]
     class RuleGroupSummary < Struct.new(
+      nil,
       :rule_group_id,
       :name,
       keyword_init: true
@@ -3421,6 +3577,7 @@ module Aws::WAF
     #            (<code>ALLOW</code>, <code>BLOCK</code>, or <code>COUNT</code>).</p>
     #   @return [Types::ActivatedRule]
     class RuleGroupUpdate < Struct.new(
+      nil,
       :action,
       :activated_rule,
       keyword_init: true
@@ -3448,6 +3605,7 @@ module Aws::WAF
     #   <p>A friendly name or description of the <a>Rule</a>. You can't change the name of a <code>Rule</code> after you create it.</p>
     #   @return [String]
     class RuleSummary < Struct.new(
+      nil,
       :rule_id,
       :name,
       keyword_init: true
@@ -3473,6 +3631,7 @@ module Aws::WAF
     #   <p>The ID of the <code>Predicate</code> (such as an <code>IPSet</code>) that you want to add to a <code>Rule</code>.</p>
     #   @return [Types::Predicate]
     class RuleUpdate < Struct.new(
+      nil,
       :action,
       :predicate,
       keyword_init: true
@@ -3509,6 +3668,7 @@ module Aws::WAF
     #   <p>This value is returned if the <code>GetSampledRequests</code>  request specifies the ID of a <code>RuleGroup</code> rather than the ID of an individual rule. <code>RuleWithinRuleGroup</code> is the rule within the specified <code>RuleGroup</code> that matched the request listed in the response.</p>
     #   @return [String]
     class SampledHTTPRequest < Struct.new(
+      nil,
       :request,
       :weight,
       :timestamp,
@@ -3668,6 +3828,7 @@ module Aws::WAF
     #   			For example, the URI <code>/logo.jpg</code> is nine characters long.</p>
     #   @return [Integer]
     class SizeConstraint < Struct.new(
+      nil,
       :field_to_match,
       :text_transformation,
       :comparison_operator,
@@ -3709,6 +3870,7 @@ module Aws::WAF
     #   <p>Specifies the parts of web requests that you want to inspect the size of.</p>
     #   @return [Array<Types::SizeConstraint>]
     class SizeConstraintSet < Struct.new(
+      nil,
       :size_constraint_set_id,
       :name,
       :size_constraints,
@@ -3739,6 +3901,7 @@ module Aws::WAF
     #   <p>The name of the <code>SizeConstraintSet</code>, if any.</p>
     #   @return [String]
     class SizeConstraintSetSummary < Struct.new(
+      nil,
       :size_constraint_set_id,
       :name,
       keyword_init: true
@@ -3767,6 +3930,7 @@ module Aws::WAF
     #   			<code>SizeConstraint</code> is considered to match.</p>
     #   @return [Types::SizeConstraint]
     class SizeConstraintSetUpdate < Struct.new(
+      nil,
       :action,
       :size_constraint,
       keyword_init: true
@@ -3802,6 +3966,7 @@ module Aws::WAF
     #   <p>Specifies the parts of web requests that you want to inspect for snippets of malicious SQL code.</p>
     #   @return [Array<Types::SqlInjectionMatchTuple>]
     class SqlInjectionMatchSet < Struct.new(
+      nil,
       :sql_injection_match_set_id,
       :name,
       :sql_injection_match_tuples,
@@ -3832,6 +3997,7 @@ module Aws::WAF
     #   <p>The name of the <code>SqlInjectionMatchSet</code>, if any, specified by <code>Id</code>.</p>
     #   @return [String]
     class SqlInjectionMatchSetSummary < Struct.new(
+      nil,
       :sql_injection_match_set_id,
       :name,
       keyword_init: true
@@ -3857,6 +4023,7 @@ module Aws::WAF
     #   <p>Specifies the part of a web request that you want AWS WAF to inspect for snippets of malicious SQL code and, if you want AWS WAF to inspect a header, the name of the header.</p>
     #   @return [Types::SqlInjectionMatchTuple]
     class SqlInjectionMatchSetUpdate < Struct.new(
+      nil,
       :action,
       :sql_injection_match_tuple,
       keyword_init: true
@@ -3972,6 +4139,7 @@ module Aws::WAF
     #   		       <p>Specify <code>NONE</code> if you don't want to perform any text transformations.</p>
     #   @return [String]
     class SqlInjectionMatchTuple < Struct.new(
+      nil,
       :field_to_match,
       :text_transformation,
       keyword_init: true
@@ -3999,6 +4167,7 @@ module Aws::WAF
     #            whitespace or metric names reserved for AWS WAF, including "All" and "Default_Action." You can't change the name of the metric after you create the <code>RuleGroup</code>.</p>
     #   @return [String]
     class SubscribedRuleGroupSummary < Struct.new(
+      nil,
       :rule_group_id,
       :name,
       :metric_name,
@@ -4024,6 +4193,7 @@ module Aws::WAF
     #   <p></p>
     #   @return [String]
     class Tag < Struct.new(
+      nil,
       :key,
       :value,
       keyword_init: true
@@ -4048,6 +4218,7 @@ module Aws::WAF
     #   <p></p>
     #   @return [Array<Types::Tag>]
     class TagInfoForResource < Struct.new(
+      nil,
       :resource_arn,
       :tag_list,
       keyword_init: true
@@ -4062,6 +4233,7 @@ module Aws::WAF
     #   <p></p>
     #   @return [Array<Types::Tag>]
     class TagResourceRequest < Struct.new(
+      nil,
       :resource_arn,
       :tags,
       keyword_init: true
@@ -4070,6 +4242,7 @@ module Aws::WAF
     end
 
     class TagResourceResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -4105,6 +4278,7 @@ module Aws::WAF
     #                         You can specify any time range in the previous three hours.</p>
     #   @return [Time]
     class TimeWindow < Struct.new(
+      nil,
       :start_time,
       :end_time,
       keyword_init: true
@@ -4119,6 +4293,7 @@ module Aws::WAF
     #   <p></p>
     #   @return [Array<String>]
     class UntagResourceRequest < Struct.new(
+      nil,
       :resource_arn,
       :tag_keys,
       keyword_init: true
@@ -4127,6 +4302,7 @@ module Aws::WAF
     end
 
     class UntagResourceResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -4162,6 +4338,7 @@ module Aws::WAF
     #            </ul>
     #   @return [Array<Types::ByteMatchSetUpdate>]
     class UpdateByteMatchSetRequest < Struct.new(
+      nil,
       :byte_match_set_id,
       :change_token,
       :updates,
@@ -4175,6 +4352,7 @@ module Aws::WAF
     #   			to query the status of the request. For more information, see <a>GetChangeTokenStatus</a>.</p>
     #   @return [String]
     class UpdateByteMatchSetResponse < Struct.new(
+      nil,
       :change_token,
       keyword_init: true
     )
@@ -4206,6 +4384,7 @@ module Aws::WAF
     #            </ul>
     #   @return [Array<Types::GeoMatchSetUpdate>]
     class UpdateGeoMatchSetRequest < Struct.new(
+      nil,
       :geo_match_set_id,
       :change_token,
       :updates,
@@ -4219,6 +4398,7 @@ module Aws::WAF
     #   			to query the status of the request. For more information, see <a>GetChangeTokenStatus</a>.</p>
     #   @return [String]
     class UpdateGeoMatchSetResponse < Struct.new(
+      nil,
       :change_token,
       keyword_init: true
     )
@@ -4250,6 +4430,7 @@ module Aws::WAF
     #   	        <p>You can insert a maximum of 1000 addresses in a single request.</p>
     #   @return [Array<Types::IPSetUpdate>]
     class UpdateIPSetRequest < Struct.new(
+      nil,
       :ip_set_id,
       :change_token,
       :updates,
@@ -4263,6 +4444,7 @@ module Aws::WAF
     #   			to query the status of the request. For more information, see <a>GetChangeTokenStatus</a>.</p>
     #   @return [String]
     class UpdateIPSetResponse < Struct.new(
+      nil,
       :change_token,
       keyword_init: true
     )
@@ -4287,6 +4469,7 @@ module Aws::WAF
     #            AWS WAF triggers the action that is specified for this rule.</p>
     #   @return [Integer]
     class UpdateRateBasedRuleRequest < Struct.new(
+      nil,
       :rule_id,
       :change_token,
       :updates,
@@ -4302,6 +4485,7 @@ module Aws::WAF
     #            status of the request. For more information, see <a>GetChangeTokenStatus</a>.</p>
     #   @return [String]
     class UpdateRateBasedRuleResponse < Struct.new(
+      nil,
       :change_token,
       keyword_init: true
     )
@@ -4320,6 +4504,7 @@ module Aws::WAF
     #   <p>The value returned by the most recent call to <a>GetChangeToken</a>.</p>
     #   @return [String]
     class UpdateRegexMatchSetRequest < Struct.new(
+      nil,
       :regex_match_set_id,
       :updates,
       :change_token,
@@ -4333,6 +4518,7 @@ module Aws::WAF
     #   			to query the status of the request. For more information, see <a>GetChangeTokenStatus</a>.</p>
     #   @return [String]
     class UpdateRegexMatchSetResponse < Struct.new(
+      nil,
       :change_token,
       keyword_init: true
     )
@@ -4350,6 +4536,7 @@ module Aws::WAF
     #   <p>The value returned by the most recent call to <a>GetChangeToken</a>.</p>
     #   @return [String]
     class UpdateRegexPatternSetRequest < Struct.new(
+      nil,
       :regex_pattern_set_id,
       :updates,
       :change_token,
@@ -4363,6 +4550,7 @@ module Aws::WAF
     #   			to query the status of the request. For more information, see <a>GetChangeTokenStatus</a>.</p>
     #   @return [String]
     class UpdateRegexPatternSetResponse < Struct.new(
+      nil,
       :change_token,
       keyword_init: true
     )
@@ -4384,6 +4572,7 @@ module Aws::WAF
     #   <p>The value returned by the most recent call to <a>GetChangeToken</a>.</p>
     #   @return [String]
     class UpdateRuleGroupRequest < Struct.new(
+      nil,
       :rule_group_id,
       :updates,
       :change_token,
@@ -4397,6 +4586,7 @@ module Aws::WAF
     #            to query the status of the request. For more information, see <a>GetChangeTokenStatus</a>.</p>
     #   @return [String]
     class UpdateRuleGroupResponse < Struct.new(
+      nil,
       :change_token,
       keyword_init: true
     )
@@ -4432,6 +4622,7 @@ module Aws::WAF
     #            </ul>
     #   @return [Array<Types::RuleUpdate>]
     class UpdateRuleRequest < Struct.new(
+      nil,
       :rule_id,
       :change_token,
       :updates,
@@ -4445,6 +4636,7 @@ module Aws::WAF
     #   			to query the status of the request. For more information, see <a>GetChangeTokenStatus</a>.</p>
     #   @return [String]
     class UpdateRuleResponse < Struct.new(
+      nil,
       :change_token,
       keyword_init: true
     )
@@ -4481,6 +4673,7 @@ module Aws::WAF
     #            </ul>
     #   @return [Array<Types::SizeConstraintSetUpdate>]
     class UpdateSizeConstraintSetRequest < Struct.new(
+      nil,
       :size_constraint_set_id,
       :change_token,
       :updates,
@@ -4494,6 +4687,7 @@ module Aws::WAF
     #   			to query the status of the request. For more information, see <a>GetChangeTokenStatus</a>.</p>
     #   @return [String]
     class UpdateSizeConstraintSetResponse < Struct.new(
+      nil,
       :change_token,
       keyword_init: true
     )
@@ -4530,6 +4724,7 @@ module Aws::WAF
     #            </ul>
     #   @return [Array<Types::SqlInjectionMatchSetUpdate>]
     class UpdateSqlInjectionMatchSetRequest < Struct.new(
+      nil,
       :sql_injection_match_set_id,
       :change_token,
       :updates,
@@ -4544,6 +4739,7 @@ module Aws::WAF
     #   			to query the status of the request. For more information, see <a>GetChangeTokenStatus</a>.</p>
     #   @return [String]
     class UpdateSqlInjectionMatchSetResponse < Struct.new(
+      nil,
       :change_token,
       keyword_init: true
     )
@@ -4590,6 +4786,7 @@ module Aws::WAF
     #            action if a request doesn't match the criteria in any of the rules in a web ACL.</p>
     #   @return [Types::WafAction]
     class UpdateWebACLRequest < Struct.new(
+      nil,
       :web_acl_id,
       :change_token,
       :updates,
@@ -4604,6 +4801,7 @@ module Aws::WAF
     #   			to query the status of the request. For more information, see <a>GetChangeTokenStatus</a>.</p>
     #   @return [String]
     class UpdateWebACLResponse < Struct.new(
+      nil,
       :change_token,
       keyword_init: true
     )
@@ -4642,6 +4840,7 @@ module Aws::WAF
     #            </ul>
     #   @return [Array<Types::XssMatchSetUpdate>]
     class UpdateXssMatchSetRequest < Struct.new(
+      nil,
       :xss_match_set_id,
       :change_token,
       :updates,
@@ -4656,6 +4855,7 @@ module Aws::WAF
     #   			to query the status of the request. For more information, see <a>GetChangeTokenStatus</a>.</p>
     #   @return [String]
     class UpdateXssMatchSetResponse < Struct.new(
+      nil,
       :change_token,
       keyword_init: true
     )
@@ -4666,6 +4866,7 @@ module Aws::WAF
     # @!attribute message
     #   @return [String]
     class WAFBadRequestException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -4676,6 +4877,7 @@ module Aws::WAF
     # @!attribute message
     #   @return [String]
     class WAFDisallowedNameException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -4720,6 +4922,7 @@ module Aws::WAF
     # @!attribute migration_error_reason
     #   @return [String]
     class WAFEntityMigrationException < Struct.new(
+      nil,
       :message,
       :migration_error_type,
       :migration_error_reason,
@@ -4732,6 +4935,7 @@ module Aws::WAF
     # @!attribute message
     #   @return [String]
     class WAFInternalErrorException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -4740,6 +4944,7 @@ module Aws::WAF
 
     # <p>The operation failed because you tried to create, update, or delete an object by using an invalid account identifier.</p>
     class WAFInvalidAccountException < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -4769,6 +4974,7 @@ module Aws::WAF
     # @!attribute message
     #   @return [String]
     class WAFInvalidOperationException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -4820,6 +5026,7 @@ module Aws::WAF
     # @!attribute reason
     #   @return [String]
     class WAFInvalidParameterException < Struct.new(
+      nil,
       :field,
       :parameter,
       :reason,
@@ -4861,6 +5068,7 @@ module Aws::WAF
     # @!attribute message
     #   @return [String]
     class WAFInvalidPermissionPolicyException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -4871,6 +5079,7 @@ module Aws::WAF
     # @!attribute message
     #   @return [String]
     class WAFInvalidRegexPatternException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -4883,6 +5092,7 @@ module Aws::WAF
     # @!attribute message
     #   @return [String]
     class WAFLimitsExceededException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -4908,6 +5118,7 @@ module Aws::WAF
     # @!attribute message
     #   @return [String]
     class WAFNonEmptyEntityException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -4933,6 +5144,7 @@ module Aws::WAF
     # @!attribute message
     #   @return [String]
     class WAFNonexistentContainerException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -4943,6 +5155,7 @@ module Aws::WAF
     # @!attribute message
     #   @return [String]
     class WAFNonexistentItemException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -4961,6 +5174,7 @@ module Aws::WAF
     # @!attribute message
     #   @return [String]
     class WAFReferencedItemException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -4971,6 +5185,7 @@ module Aws::WAF
     # @!attribute message
     #   @return [String]
     class WAFServiceLinkedRoleErrorException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -4981,6 +5196,7 @@ module Aws::WAF
     # @!attribute message
     #   @return [String]
     class WAFStaleDataException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -4991,6 +5207,7 @@ module Aws::WAF
     # @!attribute message
     #   @return [String]
     class WAFSubscriptionNotFoundException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -5001,6 +5218,7 @@ module Aws::WAF
     # @!attribute message
     #   @return [String]
     class WAFTagOperationException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -5011,6 +5229,7 @@ module Aws::WAF
     # @!attribute message
     #   @return [String]
     class WAFTagOperationInternalErrorException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -5048,6 +5267,7 @@ module Aws::WAF
     #            </ul>
     #   @return [String]
     class WafAction < Struct.new(
+      nil,
       :type,
       keyword_init: true
     )
@@ -5068,6 +5288,7 @@ module Aws::WAF
     #               <code>COUNT</code> overrides the action specified by the individual rule within a <code>RuleGroup</code> . If set to <code>NONE</code>, the rule's action will take place.</p>
     #   @return [String]
     class WafOverrideAction < Struct.new(
+      nil,
       :type,
       keyword_init: true
     )
@@ -5114,6 +5335,7 @@ module Aws::WAF
     #   <p>Tha Amazon Resource Name (ARN) of the web ACL.</p>
     #   @return [String]
     class WebACL < Struct.new(
+      nil,
       :web_acl_id,
       :name,
       :metric_name,
@@ -5145,6 +5367,7 @@ module Aws::WAF
     #   <p>A friendly name or description of the <a>WebACL</a>. You can't change the name of a <code>WebACL</code> after you create it.</p>
     #   @return [String]
     class WebACLSummary < Struct.new(
+      nil,
       :web_acl_id,
       :name,
       keyword_init: true
@@ -5170,6 +5393,7 @@ module Aws::WAF
     #            (<code>ALLOW</code>, <code>BLOCK</code>, or <code>COUNT</code>).</p>
     #   @return [Types::ActivatedRule]
     class WebACLUpdate < Struct.new(
+      nil,
       :action,
       :activated_rule,
       keyword_init: true
@@ -5205,6 +5429,7 @@ module Aws::WAF
     #   <p>Specifies the parts of web requests that you want to inspect for cross-site scripting attacks.</p>
     #   @return [Array<Types::XssMatchTuple>]
     class XssMatchSet < Struct.new(
+      nil,
       :xss_match_set_id,
       :name,
       :xss_match_tuples,
@@ -5235,6 +5460,7 @@ module Aws::WAF
     #   <p>The name of the <code>XssMatchSet</code>, if any, specified by <code>Id</code>.</p>
     #   @return [String]
     class XssMatchSetSummary < Struct.new(
+      nil,
       :xss_match_set_id,
       :name,
       keyword_init: true
@@ -5262,6 +5488,7 @@ module Aws::WAF
     #   <p>Specifies the part of a web request that you want AWS WAF to inspect for cross-site scripting attacks and, if you want AWS WAF to inspect a header, the name of the header.</p>
     #   @return [Types::XssMatchTuple]
     class XssMatchSetUpdate < Struct.new(
+      nil,
       :action,
       :xss_match_tuple,
       keyword_init: true
@@ -5377,6 +5604,7 @@ module Aws::WAF
     #   		       <p>Specify <code>NONE</code> if you don't want to perform any text transformations.</p>
     #   @return [String]
     class XssMatchTuple < Struct.new(
+      nil,
       :field_to_match,
       :text_transformation,
       keyword_init: true

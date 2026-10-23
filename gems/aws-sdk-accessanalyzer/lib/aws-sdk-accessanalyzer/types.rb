@@ -14,6 +14,7 @@ module Aws::AccessAnalyzer
     #   <p>A list of resources for the access permissions. Any strings that can be used as an Amazon Resource Name (ARN) in an IAM policy can be used in the list of resources to check. You can only use a wildcard in the portion of the ARN that specifies the resource ID.</p>
     #   @return [Array<String>]
     class Access < Struct.new(
+      nil,
       :actions,
       :resources,
       keyword_init: true
@@ -31,6 +32,7 @@ module Aws::AccessAnalyzer
     # @!attribute message
     #   @return [String]
     class AccessDeniedException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -57,6 +59,7 @@ module Aws::AccessAnalyzer
     #   <p>Provides more details about the current status of the access preview.</p> <p>For example, if the creation of the access preview fails, a <code>Failed</code> status is returned. This failure can be due to an internal issue with the analysis or due to an invalid resource configuration.</p>
     #   @return [Types::AccessPreviewStatusReason]
     class AccessPreview < Struct.new(
+      nil,
       :id,
       :analyzer_arn,
       :configurations,
@@ -118,6 +121,7 @@ module Aws::AccessAnalyzer
     #   <p>The type of restriction applied to the finding by the resource owner with an Organizations resource control policy (RCP).</p>
     #   @return [String]
     class AccessPreviewFinding < Struct.new(
+      nil,
       :id,
       :existing_finding_id,
       :existing_finding_status,
@@ -144,6 +148,7 @@ module Aws::AccessAnalyzer
     #   <p>The reason code for the current status of the access preview.</p>
     #   @return [String]
     class AccessPreviewStatusReason < Struct.new(
+      nil,
       :code,
       keyword_init: true
     )
@@ -167,6 +172,7 @@ module Aws::AccessAnalyzer
     #   <p>Provides more details about the current status of the access preview. For example, if the creation of the access preview fails, a <code>Failed</code> status is returned. This failure can be due to an internal issue with the analysis or due to an invalid proposed resource configuration.</p>
     #   @return [Types::AccessPreviewStatusReason]
     class AccessPreviewSummary < Struct.new(
+      nil,
       :id,
       :analyzer_arn,
       :created_at,
@@ -202,6 +208,7 @@ module Aws::AccessAnalyzer
     #   <p>A list of rules for the analyzer containing criteria to exclude from analysis. Entities that meet the rule criteria will not generate findings.</p>
     #   @return [Array<Types::AnalysisRuleCriteria>]
     class AnalysisRule < Struct.new(
+      nil,
       :exclusions,
       keyword_init: true
     )
@@ -216,6 +223,7 @@ module Aws::AccessAnalyzer
     #   <p>An array of key-value pairs to match for your resources. You can use the set of Unicode letters, digits, whitespace, <code>_</code>, <code>.</code>, <code>/</code>, <code>=</code>, <code>+</code>, and <code>-</code>.</p> <p>For the tag key, you can specify a value that is 1 to 128 characters in length and cannot be prefixed with <code>aws:</code>.</p> <p>For the tag value, you can specify a value that is 0 to 256 characters in length. If the specified tag value is 0 characters, the rule is applied to all principals with the specified tag key.</p>
     #   @return [Array<Hash<String, String>>]
     class AnalysisRuleCriteria < Struct.new(
+      nil,
       :account_ids,
       :resource_tags,
       keyword_init: true
@@ -258,6 +266,7 @@ module Aws::AccessAnalyzer
     #   <p>An error message.</p>
     #   @return [String]
     class AnalyzedResource < Struct.new(
+      nil,
       :resource_arn,
       :resource_type,
       :created_at,
@@ -285,6 +294,7 @@ module Aws::AccessAnalyzer
     #   <p>The type of resource that was analyzed.</p>
     #   @return [String]
     class AnalyzedResourceSummary < Struct.new(
+      nil,
       :resource_arn,
       :resource_owner_account,
       :resource_type,
@@ -345,6 +355,7 @@ module Aws::AccessAnalyzer
     #   <p>Specifies if the analyzer is an external access, unused access, or internal access analyzer.</p>
     #   @return [Types::AnalyzerConfiguration]
     class AnalyzerSummary < Struct.new(
+      nil,
       :arn,
       :name,
       :type,
@@ -371,6 +382,7 @@ module Aws::AccessAnalyzer
     #   <p>A client token.</p>
     #   @return [String]
     class ApplyArchiveRuleInput < Struct.new(
+      nil,
       :analyzer_arn,
       :rule_name,
       :client_token,
@@ -393,6 +405,7 @@ module Aws::AccessAnalyzer
     #   <p>The time at which the archive rule was last updated.</p>
     #   @return [Time]
     class ArchiveRuleSummary < Struct.new(
+      nil,
       :rule_name,
       :filter,
       :created_at,
@@ -406,6 +419,7 @@ module Aws::AccessAnalyzer
     #   <p>The <code>JobId</code> that is returned by the <code>StartPolicyGeneration</code> operation. The <code>JobId</code> can be used with <code>GetGeneratedPolicy</code> to retrieve the generated policies or used with <code>CancelPolicyGeneration</code> to cancel the policy generation request.</p>
     #   @return [String]
     class CancelPolicyGenerationInput < Struct.new(
+      nil,
       :job_id,
       keyword_init: true
     )
@@ -413,6 +427,7 @@ module Aws::AccessAnalyzer
     end
 
     class CancelPolicyGenerationOutput < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -428,6 +443,7 @@ module Aws::AccessAnalyzer
     #   <p>The type of policy. Identity policies grant permissions to IAM principals. Identity policies include managed and inline policies for IAM roles, users, and groups.</p> <p>Resource policies grant permissions on Amazon Web Services resources. Resource policies include trust policies for IAM roles and bucket policies for Amazon S3 buckets.</p>
     #   @return [String]
     class CheckAccessNotGrantedRequest < Struct.new(
+      nil,
       :policy_document,
       :access,
       :policy_type,
@@ -446,6 +462,7 @@ module Aws::AccessAnalyzer
     #   <p>A description of the reasoning of the result.</p>
     #   @return [Array<Types::ReasonSummary>]
     class CheckAccessNotGrantedResponse < Struct.new(
+      nil,
       :result,
       :message,
       :reasons,
@@ -464,6 +481,7 @@ module Aws::AccessAnalyzer
     #   <p>The type of policy to compare. Identity policies grant permissions to IAM principals. Identity policies include managed and inline policies for IAM roles, users, and groups.</p> <p>Resource policies grant permissions on Amazon Web Services resources. Resource policies include trust policies for IAM roles and bucket policies for Amazon S3 buckets. You can provide a generic input such as identity policy or resource policy or a specific input such as managed policy or Amazon S3 bucket policy.</p>
     #   @return [String]
     class CheckNoNewAccessRequest < Struct.new(
+      nil,
       :new_policy_document,
       :existing_policy_document,
       :policy_type,
@@ -482,6 +500,7 @@ module Aws::AccessAnalyzer
     #   <p>A description of the reasoning of the result.</p>
     #   @return [Array<Types::ReasonSummary>]
     class CheckNoNewAccessResponse < Struct.new(
+      nil,
       :result,
       :message,
       :reasons,
@@ -497,6 +516,7 @@ module Aws::AccessAnalyzer
     #   <p>The type of resource to evaluate for public access. For example, to check for public access to Amazon S3 buckets, you can choose <code>AWS::S3::Bucket</code> for the resource type.</p> <p>For resource types not supported as valid values, IAM Access Analyzer will return an error.</p>
     #   @return [String]
     class CheckNoPublicAccessRequest < Struct.new(
+      nil,
       :policy_document,
       :resource_type,
       keyword_init: true
@@ -514,6 +534,7 @@ module Aws::AccessAnalyzer
     #   <p>A list of reasons why the specified resource policy grants public access for the resource type.</p>
     #   @return [Array<Types::ReasonSummary>]
     class CheckNoPublicAccessResponse < Struct.new(
+      nil,
       :result,
       :message,
       :reasons,
@@ -536,6 +557,7 @@ module Aws::AccessAnalyzer
     #   <p>The end of the time range for which IAM Access Analyzer reviews your CloudTrail events. Events with a timestamp after this time are not considered to generate a policy. If this is not included in the request, the default value is the current time.</p>
     #   @return [Time]
     class CloudTrailDetails < Struct.new(
+      nil,
       :trails,
       :access_role,
       :start_time,
@@ -556,6 +578,7 @@ module Aws::AccessAnalyzer
     #   <p>The end of the time range for which IAM Access Analyzer reviews your CloudTrail events. Events with a timestamp after this time are not considered to generate a policy. If this is not included in the request, the default value is the current time.</p>
     #   @return [Time]
     class CloudTrailProperties < Struct.new(
+      nil,
       :trail_properties,
       :start_time,
       :end_time,
@@ -654,6 +677,7 @@ module Aws::AccessAnalyzer
     #   <p>The resource type.</p>
     #   @return [String]
     class ConflictException < Struct.new(
+      nil,
       :message,
       :resource_id,
       :resource_type,
@@ -672,6 +696,7 @@ module Aws::AccessAnalyzer
     #   <p>A client token.</p>
     #   @return [String]
     class CreateAccessPreviewInput < Struct.new(
+      nil,
       :analyzer_arn,
       :configurations,
       :client_token,
@@ -684,6 +709,7 @@ module Aws::AccessAnalyzer
     #   <p>The unique ID for the access preview.</p>
     #   @return [String]
     class CreateAccessPreviewOutput < Struct.new(
+      nil,
       :id,
       keyword_init: true
     )
@@ -710,6 +736,7 @@ module Aws::AccessAnalyzer
     #   <p>Specifies the configuration of the analyzer. If the analyzer is an unused access analyzer, the specified scope of unused access is used for the configuration. If the analyzer is an internal access analyzer, the specified internal access analysis rules are used for the configuration.</p>
     #   @return [Types::AnalyzerConfiguration]
     class CreateAnalyzerInput < Struct.new(
+      nil,
       :analyzer_name,
       :type,
       :archive_rules,
@@ -726,6 +753,7 @@ module Aws::AccessAnalyzer
     #   <p>The ARN of the analyzer that was created by the request.</p>
     #   @return [String]
     class CreateAnalyzerOutput < Struct.new(
+      nil,
       :arn,
       keyword_init: true
     )
@@ -746,6 +774,7 @@ module Aws::AccessAnalyzer
     #   <p>A client token.</p>
     #   @return [String]
     class CreateArchiveRuleInput < Struct.new(
+      nil,
       :analyzer_name,
       :rule_name,
       :filter,
@@ -769,6 +798,7 @@ module Aws::AccessAnalyzer
     #   <p>An "exists" operator to match for the filter used to create the rule. </p>
     #   @return [Boolean]
     class Criterion < Struct.new(
+      nil,
       :eq,
       :neq,
       :contains,
@@ -786,6 +816,7 @@ module Aws::AccessAnalyzer
     #   <p>A client token.</p>
     #   @return [String]
     class DeleteAnalyzerInput < Struct.new(
+      nil,
       :analyzer_name,
       :client_token,
       keyword_init: true
@@ -804,6 +835,7 @@ module Aws::AccessAnalyzer
     #   <p>A client token.</p>
     #   @return [String]
     class DeleteArchiveRuleInput < Struct.new(
+      nil,
       :analyzer_name,
       :rule_name,
       :client_token,
@@ -817,6 +849,7 @@ module Aws::AccessAnalyzer
     #   <p>The proposed resource policy defining who can access or manage the DynamoDB stream.</p>
     #   @return [String]
     class DynamodbStreamConfiguration < Struct.new(
+      nil,
       :stream_policy,
       keyword_init: true
     )
@@ -828,6 +861,7 @@ module Aws::AccessAnalyzer
     #   <p>The proposed resource policy defining who can access or manage the DynamoDB table.</p>
     #   @return [String]
     class DynamodbTableConfiguration < Struct.new(
+      nil,
       :table_policy,
       keyword_init: true
     )
@@ -845,6 +879,7 @@ module Aws::AccessAnalyzer
     #   <p>The KMS key identifier for an encrypted Amazon EBS volume snapshot. The KMS key identifier is the key ARN, key ID, alias ARN, or alias name for the KMS key.</p> <ul> <li> <p>If the configuration is for an existing Amazon EBS volume snapshot and you do not specify the <code>kmsKeyId</code>, or you specify an empty string, then the access preview uses the existing <code>kmsKeyId</code> of the snapshot.</p> </li> <li> <p>If the access preview is for a new resource and you do not specify the <code>kmsKeyId</code>, the access preview considers the snapshot as unencrypted.</p> </li> </ul>
     #   @return [String]
     class EbsSnapshotConfiguration < Struct.new(
+      nil,
       :user_ids,
       :groups,
       :kms_key_id,
@@ -858,6 +893,7 @@ module Aws::AccessAnalyzer
     #   <p>The JSON repository policy text to apply to the Amazon ECR repository. For more information, see <a href="https://docs.aws.amazon.com/AmazonECR/latest/userguide/repository-policy-examples.html">Private repository policy examples</a> in the <i>Amazon ECR User Guide</i>.</p>
     #   @return [String]
     class EcrRepositoryConfiguration < Struct.new(
+      nil,
       :repository_policy,
       keyword_init: true
     )
@@ -869,6 +905,7 @@ module Aws::AccessAnalyzer
     #   <p>The JSON policy definition to apply to the Amazon EFS file system. For more information on the elements that make up a file system policy, see <a href="https://docs.aws.amazon.com/efs/latest/ug/access-control-overview.html#access-control-manage-access-intro-resource-policies">Amazon EFS Resource-based policies</a>.</p>
     #   @return [String]
     class EfsFileSystemConfiguration < Struct.new(
+      nil,
       :file_system_policy,
       keyword_init: true
     )
@@ -895,6 +932,7 @@ module Aws::AccessAnalyzer
     #   <p>The type of restriction applied to the finding by the resource owner with an Organizations resource control policy (RCP).</p> <ul> <li> <p> <code>APPLICABLE</code>: There is an RCP present in the organization but IAM Access Analyzer does not include it in the evaluation of effective permissions. For example, if <code>s3:DeleteObject</code> is blocked by the RCP and the restriction is <code>APPLICABLE</code>, then <code>s3:DeleteObject</code> would still be included in the list of actions for the finding.</p> </li> <li> <p> <code>FAILED_TO_EVALUATE_RCP</code>: There was an error evaluating the RCP.</p> </li> <li> <p> <code>NOT_APPLICABLE</code>: There was no RCP present in the organization, or there was no RCP applicable to the resource. For example, the resource being analyzed is an Amazon RDS snapshot and there is an RCP in the organization, but the RCP only impacts Amazon S3 buckets.</p> </li> <li> <p> <code>APPLIED</code>: This restriction is not currently available for external access findings. </p> </li> </ul>
     #   @return [String]
     class ExternalAccessDetails < Struct.new(
+      nil,
       :action,
       :condition,
       :is_public,
@@ -920,6 +958,7 @@ module Aws::AccessAnalyzer
     #   <p>The number of resolved findings for the specified external access analyzer.</p>
     #   @return [Integer]
     class ExternalAccessFindingsStatistics < Struct.new(
+      nil,
       :resource_type_statistics,
       :total_active_findings,
       :total_archived_findings,
@@ -976,6 +1015,7 @@ module Aws::AccessAnalyzer
     #   <p>The type of restriction applied to the finding by the resource owner with an Organizations resource control policy (RCP).</p>
     #   @return [String]
     class Finding < Struct.new(
+      nil,
       :id,
       :principal,
       :action,
@@ -1007,6 +1047,7 @@ module Aws::AccessAnalyzer
     #   <p>Provides the number of active findings for each type of unused access for the specified Amazon Web Services account.</p>
     #   @return [Hash<String, Integer>]
     class FindingAggregationAccountDetails < Struct.new(
+      nil,
       :account,
       :number_of_active_findings,
       :details,
@@ -1063,6 +1104,7 @@ module Aws::AccessAnalyzer
     #   <p>Includes details about how the access that generated the finding is granted. This is populated for Amazon S3 bucket findings.</p>
     #   @return [Types::FindingSourceDetail]
     class FindingSource < Struct.new(
+      nil,
       :type,
       :detail,
       keyword_init: true
@@ -1078,6 +1120,7 @@ module Aws::AccessAnalyzer
     #   <p>The account of the cross-account access point that generated the finding.</p>
     #   @return [String]
     class FindingSourceDetail < Struct.new(
+      nil,
       :access_point_arn,
       :access_point_account,
       keyword_init: true
@@ -1132,6 +1175,7 @@ module Aws::AccessAnalyzer
     #   <p>The type of restriction applied to the finding by the resource owner with an Organizations resource control policy (RCP).</p>
     #   @return [String]
     class FindingSummary < Struct.new(
+      nil,
       :id,
       :principal,
       :action,
@@ -1184,6 +1228,7 @@ module Aws::AccessAnalyzer
     #   <p>The type of the access finding. For external access analyzers, the type is <code>ExternalAccess</code>. For unused access analyzers, the type can be <code>UnusedIAMRole</code>, <code>UnusedIAMUserAccessKey</code>, <code>UnusedIAMUserPassword</code>, or <code>UnusedPermission</code>. For internal access analyzers, the type is <code>InternalAccess</code>.</p>
     #   @return [String]
     class FindingSummaryV2 < Struct.new(
+      nil,
       :analyzed_at,
       :created_at,
       :error,
@@ -1231,6 +1276,7 @@ module Aws::AccessAnalyzer
     #   <p>The unique ID for the finding recommendation.</p>
     #   @return [String]
     class GenerateFindingRecommendationRequest < Struct.new(
+      nil,
       :analyzer_arn,
       :id,
       keyword_init: true
@@ -1243,6 +1289,7 @@ module Aws::AccessAnalyzer
     #   <p>The text to use as the content for the new policy. The policy is created using the <a href="https://docs.aws.amazon.com/IAM/latest/APIReference/API_CreatePolicy.html">CreatePolicy</a> action.</p>
     #   @return [String]
     class GeneratedPolicy < Struct.new(
+      nil,
       :policy,
       keyword_init: true
     )
@@ -1260,6 +1307,7 @@ module Aws::AccessAnalyzer
     #   <p>Lists details about the <code>Trail</code> used to generated policy.</p>
     #   @return [Types::CloudTrailProperties]
     class GeneratedPolicyProperties < Struct.new(
+      nil,
       :is_complete,
       :principal_arn,
       :cloud_trail_properties,
@@ -1276,6 +1324,7 @@ module Aws::AccessAnalyzer
     #   <p>The text to use as the content for the new policy. The policy is created using the <a href="https://docs.aws.amazon.com/IAM/latest/APIReference/API_CreatePolicy.html">CreatePolicy</a> action.</p>
     #   @return [Array<Types::GeneratedPolicy>]
     class GeneratedPolicyResult < Struct.new(
+      nil,
       :properties,
       :generated_policies,
       keyword_init: true
@@ -1290,6 +1339,7 @@ module Aws::AccessAnalyzer
     #   <p>The <a href="https://docs.aws.amazon.com/IAM/latest/UserGuide/access-analyzer-getting-started.html#permission-resources">ARN of the analyzer</a> used to generate the access preview.</p>
     #   @return [String]
     class GetAccessPreviewInput < Struct.new(
+      nil,
       :access_preview_id,
       :analyzer_arn,
       keyword_init: true
@@ -1301,6 +1351,7 @@ module Aws::AccessAnalyzer
     #   <p>An object that contains information about the access preview.</p>
     #   @return [Types::AccessPreview]
     class GetAccessPreviewOutput < Struct.new(
+      nil,
       :access_preview,
       keyword_init: true
     )
@@ -1315,6 +1366,7 @@ module Aws::AccessAnalyzer
     #   <p>The ARN of the resource to retrieve information about.</p>
     #   @return [String]
     class GetAnalyzedResourceInput < Struct.new(
+      nil,
       :analyzer_arn,
       :resource_arn,
       keyword_init: true
@@ -1327,6 +1379,7 @@ module Aws::AccessAnalyzer
     #   <p>An <code>AnalyzedResource</code> object that contains information that IAM Access Analyzer found when it analyzed the resource.</p>
     #   @return [Types::AnalyzedResource]
     class GetAnalyzedResourceOutput < Struct.new(
+      nil,
       :resource,
       keyword_init: true
     )
@@ -1338,6 +1391,7 @@ module Aws::AccessAnalyzer
     #   <p>The name of the analyzer retrieved.</p>
     #   @return [String]
     class GetAnalyzerInput < Struct.new(
+      nil,
       :analyzer_name,
       keyword_init: true
     )
@@ -1349,6 +1403,7 @@ module Aws::AccessAnalyzer
     #   <p>An <code>AnalyzerSummary</code> object that contains information about the analyzer.</p>
     #   @return [Types::AnalyzerSummary]
     class GetAnalyzerOutput < Struct.new(
+      nil,
       :analyzer,
       keyword_init: true
     )
@@ -1363,6 +1418,7 @@ module Aws::AccessAnalyzer
     #   <p>The name of the rule to retrieve.</p>
     #   @return [String]
     class GetArchiveRuleInput < Struct.new(
+      nil,
       :analyzer_name,
       :rule_name,
       keyword_init: true
@@ -1375,6 +1431,7 @@ module Aws::AccessAnalyzer
     #   <p>Contains information about an archive rule. Archive rules automatically archive new findings that meet the criteria you define when you create the rule.</p>
     #   @return [Types::ArchiveRuleSummary]
     class GetArchiveRuleOutput < Struct.new(
+      nil,
       :archive_rule,
       keyword_init: true
     )
@@ -1389,6 +1446,7 @@ module Aws::AccessAnalyzer
     #   <p>The ID of the finding to retrieve.</p>
     #   @return [String]
     class GetFindingInput < Struct.new(
+      nil,
       :analyzer_arn,
       :id,
       keyword_init: true
@@ -1401,6 +1459,7 @@ module Aws::AccessAnalyzer
     #   <p>A <code>finding</code> object that contains finding details.</p>
     #   @return [Types::Finding]
     class GetFindingOutput < Struct.new(
+      nil,
       :finding,
       keyword_init: true
     )
@@ -1420,6 +1479,7 @@ module Aws::AccessAnalyzer
     #   <p>A token used for pagination of results returned.</p>
     #   @return [String]
     class GetFindingRecommendationRequest < Struct.new(
+      nil,
       :analyzer_arn,
       :id,
       :max_results,
@@ -1454,6 +1514,7 @@ module Aws::AccessAnalyzer
     #   <p>The status of the retrieval of the finding recommendation.</p>
     #   @return [String]
     class GetFindingRecommendationResponse < Struct.new(
+      nil,
       :started_at,
       :completed_at,
       :next_token,
@@ -1480,6 +1541,7 @@ module Aws::AccessAnalyzer
     #   <p>A token used for pagination of results returned.</p>
     #   @return [String]
     class GetFindingV2Request < Struct.new(
+      nil,
       :analyzer_arn,
       :id,
       :max_results,
@@ -1526,6 +1588,7 @@ module Aws::AccessAnalyzer
     #   <p>The type of the finding. For external access analyzers, the type is <code>ExternalAccess</code>. For unused access analyzers, the type can be <code>UnusedIAMRole</code>, <code>UnusedIAMUserAccessKey</code>, <code>UnusedIAMUserPassword</code>, or <code>UnusedPermission</code>. For internal access analyzers, the type is <code>InternalAccess</code>.</p>
     #   @return [String]
     class GetFindingV2Response < Struct.new(
+      nil,
       :analyzed_at,
       :created_at,
       :error,
@@ -1547,6 +1610,7 @@ module Aws::AccessAnalyzer
     #   <p>The <a href="https://docs.aws.amazon.com/IAM/latest/UserGuide/access-analyzer-getting-started.html#permission-resources">ARN of the analyzer</a> used to generate the statistics.</p>
     #   @return [String]
     class GetFindingsStatisticsRequest < Struct.new(
+      nil,
       :analyzer_arn,
       keyword_init: true
     )
@@ -1560,6 +1624,7 @@ module Aws::AccessAnalyzer
     #   <p>The time at which the retrieval of the findings statistics was last updated. If the findings statistics have not been previously retrieved for the specified analyzer, this field will not be populated.</p>
     #   @return [Time]
     class GetFindingsStatisticsResponse < Struct.new(
+      nil,
       :findings_statistics,
       :last_updated_at,
       keyword_init: true
@@ -1577,6 +1642,7 @@ module Aws::AccessAnalyzer
     #   <p>The level of detail that you want to generate. You can specify whether to generate service-level policies. </p> <p>IAM Access Analyzer uses <code>iam:servicelastaccessed</code> to identify services that have been used recently to create this service-level template.</p>
     #   @return [Boolean]
     class GetGeneratedPolicyInput < Struct.new(
+      nil,
       :job_id,
       :include_resource_placeholders,
       :include_service_level_template,
@@ -1592,6 +1658,7 @@ module Aws::AccessAnalyzer
     #   <p>A <code>GeneratedPolicyResult</code> object that contains the generated policies and associated details.</p>
     #   @return [Types::GeneratedPolicyResult]
     class GetGeneratedPolicyOutput < Struct.new(
+      nil,
       :job_details,
       :generated_policy_result,
       keyword_init: true
@@ -1604,6 +1671,7 @@ module Aws::AccessAnalyzer
     #   <p>The proposed trust policy for the IAM role.</p>
     #   @return [String]
     class IamRoleConfiguration < Struct.new(
+      nil,
       :trust_policy,
       keyword_init: true
     )
@@ -1618,6 +1686,7 @@ module Aws::AccessAnalyzer
     #   <p>The condition and values for a criterion.</p>
     #   @return [Hash<String, Types::Criterion>]
     class InlineArchiveRule < Struct.new(
+      nil,
       :rule_name,
       :filter,
       keyword_init: true
@@ -1630,6 +1699,7 @@ module Aws::AccessAnalyzer
     #   <p>A list of rules for the internal access analyzer containing criteria to include in analysis. Only resources that meet the rule criteria will generate findings.</p>
     #   @return [Array<Types::InternalAccessAnalysisRuleCriteria>]
     class InternalAccessAnalysisRule < Struct.new(
+      nil,
       :inclusions,
       keyword_init: true
     )
@@ -1647,6 +1717,7 @@ module Aws::AccessAnalyzer
     #   <p>A list of resource ARNs to apply to the internal access analysis rule criteria. The analyzer will only generate findings for resources that match these ARNs.</p>
     #   @return [Array<String>]
     class InternalAccessAnalysisRuleCriteria < Struct.new(
+      nil,
       :account_ids,
       :resource_types,
       :resource_arns,
@@ -1660,6 +1731,7 @@ module Aws::AccessAnalyzer
     #   <p>Contains information about analysis rules for the internal access analyzer. These rules determine which resources and access patterns will be analyzed.</p>
     #   @return [Types::InternalAccessAnalysisRule]
     class InternalAccessConfiguration < Struct.new(
+      nil,
       :analysis_rule,
       keyword_init: true
     )
@@ -1695,6 +1767,7 @@ module Aws::AccessAnalyzer
     #   <p>The type of restriction applied to the finding by an Organizations service control policy (SCP).</p> <ul> <li> <p> <code>APPLICABLE</code>: There is an SCP present in the organization but IAM Access Analyzer does not include it in the evaluation of effective permissions. Only applicable to internal access findings with the account as the zone of trust. </p> </li> <li> <p> <code>FAILED_TO_EVALUATE_SCP</code>: There was an error evaluating the SCP.</p> </li> <li> <p> <code>NOT_APPLICABLE</code>: There was no SCP present in the organization. For internal access findings with the account as the zone of trust, <code>NOT_APPLICABLE</code> could also indicate that there was no SCP applicable to the principal.</p> </li> <li> <p> <code>APPLIED</code>: An SCP is present in the organization and IAM Access Analyzer included it in the evaluation of effective permissions. Only applicable to internal access findings with the organization as the zone of trust. </p> </li> </ul>
     #   @return [String]
     class InternalAccessDetails < Struct.new(
+      nil,
       :action,
       :condition,
       :principal,
@@ -1723,6 +1796,7 @@ module Aws::AccessAnalyzer
     #   <p>The number of resolved findings for the specified internal access analyzer.</p>
     #   @return [Integer]
     class InternalAccessFindingsStatistics < Struct.new(
+      nil,
       :resource_type_statistics,
       :total_active_findings,
       :total_archived_findings,
@@ -1743,6 +1817,7 @@ module Aws::AccessAnalyzer
     #   <p>The total number of archived findings for the resource type in the internal access analyzer.</p>
     #   @return [Integer]
     class InternalAccessResourceTypeDetails < Struct.new(
+      nil,
       :total_active_findings,
       :total_resolved_findings,
       :total_archived_findings,
@@ -1758,6 +1833,7 @@ module Aws::AccessAnalyzer
     #   <p>The seconds to wait to retry.</p>
     #   @return [Integer]
     class InternalServerException < Struct.new(
+      nil,
       :message,
       :retry_after_seconds,
       keyword_init: true
@@ -1767,6 +1843,7 @@ module Aws::AccessAnalyzer
 
     # <p>This configuration sets the network origin for the Amazon S3 access point or multi-region access point to <code>Internet</code>.</p>
     class InternetConfiguration < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1776,6 +1853,7 @@ module Aws::AccessAnalyzer
     # @!attribute message
     #   @return [String]
     class InvalidParameterException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -1799,6 +1877,7 @@ module Aws::AccessAnalyzer
     #   <p>The job error for the policy generation request.</p>
     #   @return [Types::JobError]
     class JobDetails < Struct.new(
+      nil,
       :job_id,
       :status,
       :started_on,
@@ -1817,6 +1896,7 @@ module Aws::AccessAnalyzer
     #   <p>Specific information about the error. For example, which service quota was exceeded or which resource was not found.</p>
     #   @return [String]
     class JobError < Struct.new(
+      nil,
       :code,
       :message,
       keyword_init: true
@@ -1841,6 +1921,7 @@ module Aws::AccessAnalyzer
     #   <p> The Amazon Web Services account under which the grant was issued. The account is used to propose KMS grants issued by accounts other than the owner of the key.</p>
     #   @return [String]
     class KmsGrantConfiguration < Struct.new(
+      nil,
       :operations,
       :grantee_principal,
       :retiring_principal,
@@ -1859,6 +1940,7 @@ module Aws::AccessAnalyzer
     #   <p>A list of key-value pairs that must be included in the encryption context of the <a href="https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#cryptographic-operations">cryptographic operation</a> request. The grant allows the cryptographic operation only when the encryption context in the request includes the key-value pairs specified in this constraint, although it can include additional key-value pairs.</p>
     #   @return [Hash<String, String>]
     class KmsGrantConstraints < Struct.new(
+      nil,
       :encryption_context_equals,
       :encryption_context_subset,
       keyword_init: true
@@ -1874,6 +1956,7 @@ module Aws::AccessAnalyzer
     #   <p>A list of proposed grant configurations for the KMS key. If the proposed grant configuration is for an existing key, the access preview uses the proposed list of grant configurations in place of the existing grants. Otherwise, the access preview uses the existing grants for the key.</p>
     #   @return [Array<Types::KmsGrantConfiguration>]
     class KmsKeyConfiguration < Struct.new(
+      nil,
       :key_policies,
       :grants,
       keyword_init: true
@@ -1897,6 +1980,7 @@ module Aws::AccessAnalyzer
     #   <p>The maximum number of results to return in the response.</p>
     #   @return [Integer]
     class ListAccessPreviewFindingsInput < Struct.new(
+      nil,
       :access_preview_id,
       :analyzer_arn,
       :filter,
@@ -1914,6 +1998,7 @@ module Aws::AccessAnalyzer
     #   <p>A token used for pagination of results returned.</p>
     #   @return [String]
     class ListAccessPreviewFindingsOutput < Struct.new(
+      nil,
       :findings,
       :next_token,
       keyword_init: true
@@ -1931,6 +2016,7 @@ module Aws::AccessAnalyzer
     #   <p>The maximum number of results to return in the response.</p>
     #   @return [Integer]
     class ListAccessPreviewsInput < Struct.new(
+      nil,
       :analyzer_arn,
       :next_token,
       :max_results,
@@ -1946,6 +2032,7 @@ module Aws::AccessAnalyzer
     #   <p>A token used for pagination of results returned.</p>
     #   @return [String]
     class ListAccessPreviewsOutput < Struct.new(
+      nil,
       :access_previews,
       :next_token,
       keyword_init: true
@@ -1967,6 +2054,7 @@ module Aws::AccessAnalyzer
     #   <p>The maximum number of results to return in the response.</p>
     #   @return [Integer]
     class ListAnalyzedResourcesInput < Struct.new(
+      nil,
       :analyzer_arn,
       :resource_type,
       :next_token,
@@ -1984,6 +2072,7 @@ module Aws::AccessAnalyzer
     #   <p>A token used for pagination of results returned.</p>
     #   @return [String]
     class ListAnalyzedResourcesOutput < Struct.new(
+      nil,
       :analyzed_resources,
       :next_token,
       keyword_init: true
@@ -2002,6 +2091,7 @@ module Aws::AccessAnalyzer
     #   <p>The type of analyzer.</p>
     #   @return [String]
     class ListAnalyzersInput < Struct.new(
+      nil,
       :next_token,
       :max_results,
       :type,
@@ -2018,6 +2108,7 @@ module Aws::AccessAnalyzer
     #   <p>A token used for pagination of results returned.</p>
     #   @return [String]
     class ListAnalyzersOutput < Struct.new(
+      nil,
       :analyzers,
       :next_token,
       keyword_init: true
@@ -2036,6 +2127,7 @@ module Aws::AccessAnalyzer
     #   <p>The maximum number of results to return in the request.</p>
     #   @return [Integer]
     class ListArchiveRulesInput < Struct.new(
+      nil,
       :analyzer_name,
       :next_token,
       :max_results,
@@ -2052,6 +2144,7 @@ module Aws::AccessAnalyzer
     #   <p>A token used for pagination of results returned.</p>
     #   @return [String]
     class ListArchiveRulesOutput < Struct.new(
+      nil,
       :archive_rules,
       :next_token,
       keyword_init: true
@@ -2076,6 +2169,7 @@ module Aws::AccessAnalyzer
     #   <p>The maximum number of results to return in the response.</p>
     #   @return [Integer]
     class ListFindingsInput < Struct.new(
+      nil,
       :analyzer_arn,
       :filter,
       :sort,
@@ -2094,6 +2188,7 @@ module Aws::AccessAnalyzer
     #   <p>A token used for pagination of results returned.</p>
     #   @return [String]
     class ListFindingsOutput < Struct.new(
+      nil,
       :findings,
       :next_token,
       keyword_init: true
@@ -2117,6 +2212,7 @@ module Aws::AccessAnalyzer
     #   <p>The criteria used to sort.</p>
     #   @return [Types::SortCriteria]
     class ListFindingsV2Request < Struct.new(
+      nil,
       :analyzer_arn,
       :filter,
       :max_results,
@@ -2134,6 +2230,7 @@ module Aws::AccessAnalyzer
     #   <p>A token used for pagination of results returned.</p>
     #   @return [String]
     class ListFindingsV2Response < Struct.new(
+      nil,
       :findings,
       :next_token,
       keyword_init: true
@@ -2151,6 +2248,7 @@ module Aws::AccessAnalyzer
     #   <p>A token used for pagination of results returned.</p>
     #   @return [String]
     class ListPolicyGenerationsInput < Struct.new(
+      nil,
       :principal_arn,
       :max_results,
       :next_token,
@@ -2166,6 +2264,7 @@ module Aws::AccessAnalyzer
     #   <p>A token used for pagination of results returned.</p>
     #   @return [String]
     class ListPolicyGenerationsOutput < Struct.new(
+      nil,
       :policy_generations,
       :next_token,
       keyword_init: true
@@ -2178,6 +2277,7 @@ module Aws::AccessAnalyzer
     #   <p>The ARN of the resource to retrieve tags from.</p>
     #   @return [String]
     class ListTagsForResourceInput < Struct.new(
+      nil,
       :resource_arn,
       keyword_init: true
     )
@@ -2189,6 +2289,7 @@ module Aws::AccessAnalyzer
     #   <p>The tags that are applied to the specified resource.</p>
     #   @return [Hash<String, String>]
     class ListTagsForResourceOutput < Struct.new(
+      nil,
       :tags,
       keyword_init: true
     )
@@ -2203,6 +2304,7 @@ module Aws::AccessAnalyzer
     #   <p>A span in a policy.</p>
     #   @return [Types::Span]
     class Location < Struct.new(
+      nil,
       :path,
       :span,
       keyword_init: true
@@ -2277,6 +2379,7 @@ module Aws::AccessAnalyzer
     #   <p>A timestamp of when the policy generation was completed.</p>
     #   @return [Time]
     class PolicyGeneration < Struct.new(
+      nil,
       :job_id,
       :principal_arn,
       :status,
@@ -2292,6 +2395,7 @@ module Aws::AccessAnalyzer
     #   <p>The ARN of the IAM entity (user or role) for which you are generating a policy.</p>
     #   @return [String]
     class PolicyGenerationDetails < Struct.new(
+      nil,
       :principal_arn,
       keyword_init: true
     )
@@ -2309,6 +2413,7 @@ module Aws::AccessAnalyzer
     #   <p>The offset within the policy that corresponds to the position, starting from 0.</p>
     #   @return [Integer]
     class Position < Struct.new(
+      nil,
       :line,
       :column,
       :offset,
@@ -2340,6 +2445,7 @@ module Aws::AccessAnalyzer
     #   <p>The KMS key identifier for an encrypted Amazon RDS DB cluster snapshot. The KMS key identifier is the key ARN, key ID, alias ARN, or alias name for the KMS key.</p> <ul> <li> <p>If the configuration is for an existing Amazon RDS DB cluster snapshot and you do not specify the <code>kmsKeyId</code>, or you specify an empty string, then the access preview uses the existing <code>kmsKeyId</code> of the snapshot.</p> </li> <li> <p>If the access preview is for a new resource and you do not specify the specify the <code>kmsKeyId</code>, then the access preview considers the snapshot as unencrypted.</p> </li> </ul>
     #   @return [String]
     class RdsDbClusterSnapshotConfiguration < Struct.new(
+      nil,
       :attributes,
       :kms_key_id,
       keyword_init: true
@@ -2370,6 +2476,7 @@ module Aws::AccessAnalyzer
     #   <p>The KMS key identifier for an encrypted Amazon RDS DB snapshot. The KMS key identifier is the key ARN, key ID, alias ARN, or alias name for the KMS key.</p> <ul> <li> <p>If the configuration is for an existing Amazon RDS DB snapshot and you do not specify the <code>kmsKeyId</code>, or you specify an empty string, then the access preview uses the existing <code>kmsKeyId</code> of the snapshot.</p> </li> <li> <p>If the access preview is for a new resource and you do not specify the specify the <code>kmsKeyId</code>, then the access preview considers the snapshot as unencrypted.</p> </li> </ul>
     #   @return [String]
     class RdsDbSnapshotConfiguration < Struct.new(
+      nil,
       :attributes,
       :kms_key_id,
       keyword_init: true
@@ -2388,6 +2495,7 @@ module Aws::AccessAnalyzer
     #   <p>The identifier for the reason statement.</p>
     #   @return [String]
     class ReasonSummary < Struct.new(
+      nil,
       :description,
       :statement_index,
       :statement_id,
@@ -2404,6 +2512,7 @@ module Aws::AccessAnalyzer
     #   <p>The error message for a failed retrieval of a recommendation for a finding.</p>
     #   @return [String]
     class RecommendationError < Struct.new(
+      nil,
       :code,
       :message,
       keyword_init: true
@@ -2436,6 +2545,7 @@ module Aws::AccessAnalyzer
     #   <p>The type of the resource.</p>
     #   @return [String]
     class ResourceNotFoundException < Struct.new(
+      nil,
       :message,
       :resource_id,
       :resource_type,
@@ -2452,6 +2562,7 @@ module Aws::AccessAnalyzer
     #   <p>The total number of active cross-account findings for the resource type.</p>
     #   @return [Integer]
     class ResourceTypeDetails < Struct.new(
+      nil,
       :total_active_public,
       :total_active_cross_account,
       keyword_init: true
@@ -2470,6 +2581,7 @@ module Aws::AccessAnalyzer
     #   <p>The proposed <code>Internet</code> and <code>VpcConfiguration</code> to apply to this Amazon S3 access point. <code>VpcConfiguration</code> does not apply to multi-region access points. If the access preview is for a new resource and neither is specified, the access preview uses <code>Internet</code> for the network origin. If the access preview is for an existing resource and neither is specified, the access preview uses the existing network origin.</p>
     #   @return [Types::NetworkOriginConfiguration]
     class S3AccessPointConfiguration < Struct.new(
+      nil,
       :access_point_policy,
       :public_access_block,
       :network_origin,
@@ -2486,6 +2598,7 @@ module Aws::AccessAnalyzer
     #   <p>The grantee to whom you’re assigning access rights.</p>
     #   @return [Types::AclGrantee]
     class S3BucketAclGrantConfiguration < Struct.new(
+      nil,
       :permission,
       :grantee,
       keyword_init: true
@@ -2507,6 +2620,7 @@ module Aws::AccessAnalyzer
     #   <p>The configuration of Amazon S3 access points or multi-region access points for the bucket. You can propose up to 10 new access points per bucket.</p>
     #   @return [Hash<String, Types::S3AccessPointConfiguration>]
     class S3BucketConfiguration < Struct.new(
+      nil,
       :bucket_policy,
       :bucket_acl_grants,
       :bucket_public_access_block,
@@ -2524,6 +2638,7 @@ module Aws::AccessAnalyzer
     #   <p>The proposed <code>InternetConfiguration</code> or <code>VpcConfiguration</code> to apply to the Amazon S3 access point. You can make the access point accessible from the internet, or you can specify that all requests made through that access point must originate from a specific virtual private cloud (VPC). You can specify only one type of network configuration. For more information, see <a href="https://docs.aws.amazon.com/AmazonS3/latest/dev/creating-access-points.html">Creating access points</a>.</p>
     #   @return [Types::NetworkOriginConfiguration]
     class S3ExpressDirectoryAccessPointConfiguration < Struct.new(
+      nil,
       :access_point_policy,
       :network_origin,
       keyword_init: true
@@ -2539,6 +2654,7 @@ module Aws::AccessAnalyzer
     #   <p>The proposed access points for the Amazon S3 directory bucket.</p>
     #   @return [Hash<String, Types::S3ExpressDirectoryAccessPointConfiguration>]
     class S3ExpressDirectoryBucketConfiguration < Struct.new(
+      nil,
       :bucket_policy,
       :access_points,
       keyword_init: true
@@ -2554,6 +2670,7 @@ module Aws::AccessAnalyzer
     #   <p> Specifies whether Amazon S3 should restrict public bucket policies for this bucket. </p>
     #   @return [Boolean]
     class S3PublicAccessBlockConfiguration < Struct.new(
+      nil,
       :ignore_public_acls,
       :restrict_public_buckets,
       keyword_init: true
@@ -2569,6 +2686,7 @@ module Aws::AccessAnalyzer
     #   <p>The proposed resource policy defining who can access or manage the secret.</p>
     #   @return [String]
     class SecretsManagerSecretConfiguration < Struct.new(
+      nil,
       :kms_key_id,
       :secret_policy,
       keyword_init: true
@@ -2586,6 +2704,7 @@ module Aws::AccessAnalyzer
     #   <p>The resource type.</p>
     #   @return [String]
     class ServiceQuotaExceededException < Struct.new(
+      nil,
       :message,
       :resource_id,
       :resource_type,
@@ -2599,6 +2718,7 @@ module Aws::AccessAnalyzer
     #   <p>The JSON policy text that defines who can access an Amazon SNS topic. For more information, see <a href="https://docs.aws.amazon.com/sns/latest/dg/sns-access-policy-use-cases.html">Example cases for Amazon SNS access control</a> in the <i>Amazon SNS Developer Guide</i>.</p>
     #   @return [String]
     class SnsTopicConfiguration < Struct.new(
+      nil,
       :topic_policy,
       keyword_init: true
     )
@@ -2613,6 +2733,7 @@ module Aws::AccessAnalyzer
     #   <p>The sort order, ascending or descending.</p>
     #   @return [String]
     class SortCriteria < Struct.new(
+      nil,
       :attribute_name,
       :order_by,
       keyword_init: true
@@ -2628,6 +2749,7 @@ module Aws::AccessAnalyzer
     #   <p>The end position of the span (exclusive).</p>
     #   @return [Types::Position]
     class Span < Struct.new(
+      nil,
       :start,
       :end,
       keyword_init: true
@@ -2640,6 +2762,7 @@ module Aws::AccessAnalyzer
     #   <p> The proposed resource policy for the Amazon SQS queue. </p>
     #   @return [String]
     class SqsQueueConfiguration < Struct.new(
+      nil,
       :queue_policy,
       keyword_init: true
     )
@@ -2656,6 +2779,7 @@ module Aws::AccessAnalyzer
     #   <p>A unique, case-sensitive identifier that you provide to ensure the idempotency of the request. Idempotency ensures that an API request completes only once. With an idempotent request, if the original request completes successfully, the subsequent retries with the same client token return the result from the original successful request and they have no additional effect.</p> <p>If you do not specify a client token, one is automatically generated by the Amazon Web Services SDK.</p>
     #   @return [String]
     class StartPolicyGenerationInput < Struct.new(
+      nil,
       :policy_generation_details,
       :cloud_trail_details,
       :client_token,
@@ -2668,6 +2792,7 @@ module Aws::AccessAnalyzer
     #   <p>The <code>JobId</code> that is returned by the <code>StartPolicyGeneration</code> operation. The <code>JobId</code> can be used with <code>GetGeneratedPolicy</code> to retrieve the generated policies or used with <code>CancelPolicyGeneration</code> to cancel the policy generation request.</p>
     #   @return [String]
     class StartPolicyGenerationOutput < Struct.new(
+      nil,
       :job_id,
       keyword_init: true
     )
@@ -2685,6 +2810,7 @@ module Aws::AccessAnalyzer
     #   <p>The Amazon Web Services account ID that owns the resource. For most Amazon Web Services resources, the owning account is the account in which the resource was created.</p>
     #   @return [String]
     class StartResourceScanInput < Struct.new(
+      nil,
       :analyzer_arn,
       :resource_arn,
       :resource_owner_account,
@@ -2698,6 +2824,7 @@ module Aws::AccessAnalyzer
     #   <p>The reason code for the current status of the analyzer.</p>
     #   @return [String]
     class StatusReason < Struct.new(
+      nil,
       :code,
       keyword_init: true
     )
@@ -2712,6 +2839,7 @@ module Aws::AccessAnalyzer
     #   <p>The length of the substring.</p>
     #   @return [Integer]
     class Substring < Struct.new(
+      nil,
       :start,
       :length,
       keyword_init: true
@@ -2727,6 +2855,7 @@ module Aws::AccessAnalyzer
     #   <p>The tags to add to the resource.</p>
     #   @return [Hash<String, String>]
     class TagResourceInput < Struct.new(
+      nil,
       :resource_arn,
       :tags,
       keyword_init: true
@@ -2736,6 +2865,7 @@ module Aws::AccessAnalyzer
 
     # <p>The response to the request.</p>
     class TagResourceOutput < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -2748,6 +2878,7 @@ module Aws::AccessAnalyzer
     #   <p>The seconds to wait to retry.</p>
     #   @return [Integer]
     class ThrottlingException < Struct.new(
+      nil,
       :message,
       :retry_after_seconds,
       keyword_init: true
@@ -2766,6 +2897,7 @@ module Aws::AccessAnalyzer
     #   <p>Possible values are <code>true</code> or <code>false</code>. If set to <code>true</code>, IAM Access Analyzer retrieves CloudTrail data from all regions to analyze and generate a policy.</p>
     #   @return [Boolean]
     class Trail < Struct.new(
+      nil,
       :cloud_trail_arn,
       :regions,
       :all_regions,
@@ -2785,6 +2917,7 @@ module Aws::AccessAnalyzer
     #   <p>Possible values are <code>true</code> or <code>false</code>. If set to <code>true</code>, IAM Access Analyzer retrieves CloudTrail data from all regions to analyze and generate a policy.</p>
     #   @return [Boolean]
     class TrailProperties < Struct.new(
+      nil,
       :cloud_trail_arn,
       :regions,
       :all_regions,
@@ -2797,6 +2930,7 @@ module Aws::AccessAnalyzer
     # @!attribute message
     #   @return [String]
     class UnprocessableEntityException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -2811,6 +2945,7 @@ module Aws::AccessAnalyzer
     #   <p>The key for the tag to add.</p>
     #   @return [Array<String>]
     class UntagResourceInput < Struct.new(
+      nil,
       :resource_arn,
       :tag_keys,
       keyword_init: true
@@ -2820,6 +2955,7 @@ module Aws::AccessAnalyzer
 
     # <p>The response to the request.</p>
     class UntagResourceOutput < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -2833,6 +2969,7 @@ module Aws::AccessAnalyzer
     #   <p>Contains information about analysis rules for the analyzer. Analysis rules determine which entities will generate findings based on the criteria you define when you create the rule.</p>
     #   @return [Types::AnalysisRule]
     class UnusedAccessConfiguration < Struct.new(
+      nil,
       :unused_access_age,
       :analysis_rule,
       keyword_init: true
@@ -2857,6 +2994,7 @@ module Aws::AccessAnalyzer
     #   <p>The total number of resolved findings for the unused access analyzer.</p>
     #   @return [Integer]
     class UnusedAccessFindingsStatistics < Struct.new(
+      nil,
       :unused_access_type_statistics,
       :top_accounts,
       :total_active_findings,
@@ -2875,6 +3013,7 @@ module Aws::AccessAnalyzer
     #   <p>The total number of findings for the specified unused access type.</p>
     #   @return [Integer]
     class UnusedAccessTypeStatistics < Struct.new(
+      nil,
       :unused_access_type,
       :total,
       keyword_init: true
@@ -2890,6 +3029,7 @@ module Aws::AccessAnalyzer
     #   <p>The time at which the action was last accessed.</p>
     #   @return [Time]
     class UnusedAction < Struct.new(
+      nil,
       :action,
       :last_accessed,
       keyword_init: true
@@ -2902,6 +3042,7 @@ module Aws::AccessAnalyzer
     #   <p>The time at which the role was last accessed.</p>
     #   @return [Time]
     class UnusedIamRoleDetails < Struct.new(
+      nil,
       :last_accessed,
       keyword_init: true
     )
@@ -2916,6 +3057,7 @@ module Aws::AccessAnalyzer
     #   <p>The time at which the access key was last accessed.</p>
     #   @return [Time]
     class UnusedIamUserAccessKeyDetails < Struct.new(
+      nil,
       :access_key_id,
       :last_accessed,
       keyword_init: true
@@ -2928,6 +3070,7 @@ module Aws::AccessAnalyzer
     #   <p>The time at which the password was last accessed.</p>
     #   @return [Time]
     class UnusedIamUserPasswordDetails < Struct.new(
+      nil,
       :last_accessed,
       keyword_init: true
     )
@@ -2945,6 +3088,7 @@ module Aws::AccessAnalyzer
     #   <p>The time at which the permission was last accessed.</p>
     #   @return [Time]
     class UnusedPermissionDetails < Struct.new(
+      nil,
       :actions,
       :service_namespace,
       :last_accessed,
@@ -2967,6 +3111,7 @@ module Aws::AccessAnalyzer
     #   <p>If the recommended action for the unused permissions finding is to detach a policy, the ID of an existing policy to be detached.</p>
     #   @return [String]
     class UnusedPermissionsRecommendedStep < Struct.new(
+      nil,
       :policy_updated_at,
       :recommended_action,
       :recommended_policy,
@@ -2983,6 +3128,7 @@ module Aws::AccessAnalyzer
     #   <p>Contains information about the configuration of an analyzer for an Amazon Web Services organization or account.</p>
     #   @return [Types::AnalyzerConfiguration]
     class UpdateAnalyzerRequest < Struct.new(
+      nil,
       :analyzer_name,
       :configuration,
       keyword_init: true
@@ -2994,6 +3140,7 @@ module Aws::AccessAnalyzer
     #   <p>Contains information about the configuration of an analyzer for an Amazon Web Services organization or account.</p>
     #   @return [Types::AnalyzerConfiguration]
     class UpdateAnalyzerResponse < Struct.new(
+      nil,
       :configuration,
       keyword_init: true
     )
@@ -3014,6 +3161,7 @@ module Aws::AccessAnalyzer
     #   <p>A client token.</p>
     #   @return [String]
     class UpdateArchiveRuleInput < Struct.new(
+      nil,
       :analyzer_name,
       :rule_name,
       :filter,
@@ -3040,6 +3188,7 @@ module Aws::AccessAnalyzer
     #   <p>A client token.</p>
     #   @return [String]
     class UpdateFindingsInput < Struct.new(
+      nil,
       :analyzer_arn,
       :status,
       :ids,
@@ -3067,6 +3216,7 @@ module Aws::AccessAnalyzer
     #   <p>The list of locations in the policy document that are related to the finding. The issue code provides a summary of an issue identified by the finding.</p>
     #   @return [Array<Types::Location>]
     class ValidatePolicyFinding < Struct.new(
+      nil,
       :finding_details,
       :finding_type,
       :issue_code,
@@ -3096,6 +3246,7 @@ module Aws::AccessAnalyzer
     #   <p>The type of resource to attach to your resource policy. Specify a value for the policy validation resource type only if the policy type is <code>RESOURCE_POLICY</code>. For example, to validate a resource policy to attach to an Amazon S3 bucket, you can choose <code>AWS::S3::Bucket</code> for the policy validation resource type.</p> <p>For resource types not supported as valid values, IAM Access Analyzer runs policy checks that apply to all resource policies. For example, to validate a resource policy to attach to a KMS key, do not specify a value for the policy validation resource type and IAM Access Analyzer will run policy checks that apply to all resource policies.</p>
     #   @return [String]
     class ValidatePolicyInput < Struct.new(
+      nil,
       :locale,
       :max_results,
       :next_token,
@@ -3114,6 +3265,7 @@ module Aws::AccessAnalyzer
     #   <p>A token used for pagination of results returned.</p>
     #   @return [String]
     class ValidatePolicyOutput < Struct.new(
+      nil,
       :findings,
       :next_token,
       keyword_init: true
@@ -3131,6 +3283,7 @@ module Aws::AccessAnalyzer
     #   <p>A list of fields that didn't validate.</p>
     #   @return [Array<Types::ValidationExceptionField>]
     class ValidationException < Struct.new(
+      nil,
       :message,
       :reason,
       :field_list,
@@ -3147,6 +3300,7 @@ module Aws::AccessAnalyzer
     #   <p>A message about the validation exception.</p>
     #   @return [String]
     class ValidationExceptionField < Struct.new(
+      nil,
       :name,
       :message,
       keyword_init: true
@@ -3159,6 +3313,7 @@ module Aws::AccessAnalyzer
     #   <p> If this field is specified, this access point will only allow connections from the specified VPC ID. </p>
     #   @return [String]
     class VpcConfiguration < Struct.new(
+      nil,
       :vpc_id,
       keyword_init: true
     )

@@ -187,8 +187,9 @@ module Aws::CodeCatalyst
     #  The transport used to send requests. Defaults to an HTTP/1.1 transport based on
     #  Net::HTTP ({Smithy::Client::NetHTTP::Transport}), constructed with the resolved
     #  common client transport options. Supply a custom object responding to
-    #  `#transmit(request)` (returning a stream) to swap the transport, or a
-    #  directly-constructed `NetHTTP::Transport` to set Net::HTTP-specific knobs. A
+    #  `#transmit(request, sink)` and `#transmit_background(request, sink)` (both push
+    #  the response into the sink; see {Smithy::Client::Transport}) to swap the transport,
+    #  or a directly-constructed `NetHTTP::Transport` to set Net::HTTP-specific knobs. A
     #  caller-supplied transport instance is used as-is.
     # @option options [Boolean] :use_dualstack_endpoint
     #  When set to `true`, dualstack enabled endpoints (with `.aws` TLD) will be used if available.

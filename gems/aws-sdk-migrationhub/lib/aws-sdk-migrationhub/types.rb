@@ -10,6 +10,7 @@ module Aws::MigrationHub
     # @!attribute message
     #   @return [String]
     class AccessDeniedException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -29,6 +30,7 @@ module Aws::MigrationHub
     #   <p>The timestamp when the application status was last updated.</p>
     #   @return [Time]
     class ApplicationState < Struct.new(
+      nil,
       :application_id,
       :application_status,
       :last_updated_time,
@@ -54,6 +56,7 @@ module Aws::MigrationHub
     #            the caller has permission to make the call.</p>
     #   @return [Boolean]
     class AssociateCreatedArtifactRequest < Struct.new(
+      nil,
       :progress_update_stream,
       :migration_task_name,
       :created_artifact,
@@ -64,6 +67,7 @@ module Aws::MigrationHub
     end
 
     class AssociateCreatedArtifactResult < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -85,6 +89,7 @@ module Aws::MigrationHub
     #            the caller has permission to make the call.</p>
     #   @return [Boolean]
     class AssociateDiscoveredResourceRequest < Struct.new(
+      nil,
       :progress_update_stream,
       :migration_task_name,
       :discovered_resource,
@@ -95,6 +100,7 @@ module Aws::MigrationHub
     end
 
     class AssociateDiscoveredResourceResult < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -122,6 +128,7 @@ module Aws::MigrationHub
     #            correctly.</p>
     #   @return [Boolean]
     class AssociateSourceResourceRequest < Struct.new(
+      nil,
       :progress_update_stream,
       :migration_task_name,
       :source_resource,
@@ -132,6 +139,7 @@ module Aws::MigrationHub
     end
 
     class AssociateSourceResourceResult < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -147,6 +155,7 @@ module Aws::MigrationHub
     #            the caller has permission to make the call.</p>
     #   @return [Boolean]
     class CreateProgressUpdateStreamRequest < Struct.new(
+      nil,
       :progress_update_stream_name,
       :dry_run,
       keyword_init: true
@@ -155,6 +164,7 @@ module Aws::MigrationHub
     end
 
     class CreateProgressUpdateStreamResult < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -170,6 +180,7 @@ module Aws::MigrationHub
     #            for clarity or for later reference.</p>
     #   @return [String]
     class CreatedArtifact < Struct.new(
+      nil,
       :name,
       :description,
       keyword_init: true
@@ -187,6 +198,7 @@ module Aws::MigrationHub
     #            the caller has permission to make the call.</p>
     #   @return [Boolean]
     class DeleteProgressUpdateStreamRequest < Struct.new(
+      nil,
       :progress_update_stream_name,
       :dry_run,
       keyword_init: true
@@ -195,6 +207,7 @@ module Aws::MigrationHub
     end
 
     class DeleteProgressUpdateStreamResult < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -205,6 +218,7 @@ module Aws::MigrationHub
     #            grouped application.</p>
     #   @return [String]
     class DescribeApplicationStateRequest < Struct.new(
+      nil,
       :application_id,
       keyword_init: true
     )
@@ -218,6 +232,7 @@ module Aws::MigrationHub
     #   <p>The timestamp when the application status was last updated.</p>
     #   @return [Time]
     class DescribeApplicationStateResult < Struct.new(
+      nil,
       :application_status,
       :last_updated_time,
       keyword_init: true
@@ -234,6 +249,7 @@ module Aws::MigrationHub
     #            </p>
     #   @return [String]
     class DescribeMigrationTaskRequest < Struct.new(
+      nil,
       :progress_update_stream,
       :migration_task_name,
       keyword_init: true
@@ -245,6 +261,7 @@ module Aws::MigrationHub
     #   <p>Object encapsulating information about the migration task.</p>
     #   @return [Types::MigrationTask]
     class DescribeMigrationTaskResult < Struct.new(
+      nil,
       :migration_task,
       keyword_init: true
     )
@@ -268,6 +285,7 @@ module Aws::MigrationHub
     #            the caller has permission to make the call.</p>
     #   @return [Boolean]
     class DisassociateCreatedArtifactRequest < Struct.new(
+      nil,
       :progress_update_stream,
       :migration_task_name,
       :created_artifact_name,
@@ -278,6 +296,7 @@ module Aws::MigrationHub
     end
 
     class DisassociateCreatedArtifactResult < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -300,6 +319,7 @@ module Aws::MigrationHub
     #            the caller has permission to make the call.</p>
     #   @return [Boolean]
     class DisassociateDiscoveredResourceRequest < Struct.new(
+      nil,
       :progress_update_stream,
       :migration_task_name,
       :configuration_id,
@@ -310,6 +330,7 @@ module Aws::MigrationHub
     end
 
     class DisassociateDiscoveredResourceResult < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -337,6 +358,7 @@ module Aws::MigrationHub
     #            correctly.</p>
     #   @return [Boolean]
     class DisassociateSourceResourceRequest < Struct.new(
+      nil,
       :progress_update_stream,
       :migration_task_name,
       :source_resource_name,
@@ -347,6 +369,7 @@ module Aws::MigrationHub
     end
 
     class DisassociateSourceResourceResult < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -362,6 +385,7 @@ module Aws::MigrationHub
     #            discovered resource for clarity or later reference.</p>
     #   @return [String]
     class DiscoveredResource < Struct.new(
+      nil,
       :configuration_id,
       :description,
       keyword_init: true
@@ -374,6 +398,7 @@ module Aws::MigrationHub
     # @!attribute message
     #   @return [String]
     class DryRunOperation < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -384,6 +409,7 @@ module Aws::MigrationHub
     # @!attribute message
     #   @return [String]
     class HomeRegionNotSetException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -403,6 +429,7 @@ module Aws::MigrationHub
     #            the caller has permission to make the call.</p>
     #   @return [Boolean]
     class ImportMigrationTaskRequest < Struct.new(
+      nil,
       :progress_update_stream,
       :migration_task_name,
       :dry_run,
@@ -412,6 +439,7 @@ module Aws::MigrationHub
     end
 
     class ImportMigrationTaskResult < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -422,6 +450,7 @@ module Aws::MigrationHub
     # @!attribute message
     #   @return [String]
     class InternalServerError < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -433,6 +462,7 @@ module Aws::MigrationHub
     # @!attribute message
     #   @return [String]
     class InvalidInputException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -452,6 +482,7 @@ module Aws::MigrationHub
     #   <p>Maximum number of results to be returned per page.</p>
     #   @return [Integer]
     class ListApplicationStatesRequest < Struct.new(
+      nil,
       :application_ids,
       :next_token,
       :max_results,
@@ -469,6 +500,7 @@ module Aws::MigrationHub
     #            token in <code>NextToken</code>.</p>
     #   @return [String]
     class ListApplicationStatesResult < Struct.new(
+      nil,
       :application_state_list,
       :next_token,
       keyword_init: true
@@ -493,6 +525,7 @@ module Aws::MigrationHub
     #   <p>Maximum number of results to be returned per page.</p>
     #   @return [Integer]
     class ListCreatedArtifactsRequest < Struct.new(
+      nil,
       :progress_update_stream,
       :migration_task_name,
       :next_token,
@@ -511,6 +544,7 @@ module Aws::MigrationHub
     #            request.</p>
     #   @return [Array<Types::CreatedArtifact>]
     class ListCreatedArtifactsResult < Struct.new(
+      nil,
       :next_token,
       :created_artifact_list,
       keyword_init: true
@@ -535,6 +569,7 @@ module Aws::MigrationHub
     #   <p>The maximum number of results returned per page.</p>
     #   @return [Integer]
     class ListDiscoveredResourcesRequest < Struct.new(
+      nil,
       :progress_update_stream,
       :migration_task_name,
       :next_token,
@@ -552,6 +587,7 @@ module Aws::MigrationHub
     #   <p>Returned list of discovered resources associated with the given MigrationTask.</p>
     #   @return [Array<Types::DiscoveredResource>]
     class ListDiscoveredResourcesResult < Struct.new(
+      nil,
       :next_token,
       :discovered_resource_list,
       keyword_init: true
@@ -585,6 +621,7 @@ module Aws::MigrationHub
     #            that you can use to retrieve the next set of results.</p>
     #   @return [Integer]
     class ListMigrationTaskUpdatesRequest < Struct.new(
+      nil,
       :progress_update_stream,
       :migration_task_name,
       :next_token,
@@ -606,6 +643,7 @@ module Aws::MigrationHub
     #   <p>The list of migration-task updates.</p>
     #   @return [Array<Types::MigrationTaskUpdate>]
     class ListMigrationTaskUpdatesResult < Struct.new(
+      nil,
       :next_token,
       :migration_task_update_list,
       keyword_init: true
@@ -625,6 +663,7 @@ module Aws::MigrationHub
     #   <p>Filter migration tasks by discovered resource name.</p>
     #   @return [String]
     class ListMigrationTasksRequest < Struct.new(
+      nil,
       :next_token,
       :max_results,
       :resource_name,
@@ -643,6 +682,7 @@ module Aws::MigrationHub
     #            and the <code>UpdateDateTime</code> for each task.</p>
     #   @return [Array<Types::MigrationTaskSummary>]
     class ListMigrationTasksResult < Struct.new(
+      nil,
       :next_token,
       :migration_task_summary_list,
       keyword_init: true
@@ -659,6 +699,7 @@ module Aws::MigrationHub
     #   <p>Filter to limit the maximum number of results to list per page.</p>
     #   @return [Integer]
     class ListProgressUpdateStreamsRequest < Struct.new(
+      nil,
       :next_token,
       :max_results,
       keyword_init: true
@@ -675,6 +716,7 @@ module Aws::MigrationHub
     #            passed to the next call as a bookmark of where to start from.</p>
     #   @return [String]
     class ListProgressUpdateStreamsResult < Struct.new(
+      nil,
       :progress_update_stream_summary_list,
       :next_token,
       keyword_init: true
@@ -708,6 +750,7 @@ module Aws::MigrationHub
     #            that you can use to retrieve the next set of results.</p>
     #   @return [Integer]
     class ListSourceResourcesRequest < Struct.new(
+      nil,
       :progress_update_stream,
       :migration_task_name,
       :next_token,
@@ -729,6 +772,7 @@ module Aws::MigrationHub
     #   <p>The list of source resources.</p>
     #   @return [Array<Types::SourceResource>]
     class ListSourceResourcesResult < Struct.new(
+      nil,
       :next_token,
       :source_resource_list,
       keyword_init: true
@@ -756,6 +800,7 @@ module Aws::MigrationHub
     #            task to a resource in the Application Discovery Service repository.</p>
     #   @return [Array<Types::ResourceAttribute>]
     class MigrationTask < Struct.new(
+      nil,
       :progress_update_stream,
       :migration_task_name,
       :task,
@@ -791,6 +836,7 @@ module Aws::MigrationHub
     #   <p>The timestamp when the task was gathered.</p>
     #   @return [Time]
     class MigrationTaskSummary < Struct.new(
+      nil,
       :progress_update_stream,
       :migration_task_name,
       :status,
@@ -813,6 +859,7 @@ module Aws::MigrationHub
     #   <p>Task object encapsulating task information.</p>
     #   @return [Types::Task]
     class MigrationTaskUpdate < Struct.new(
+      nil,
       :update_date_time,
       :update_type,
       :migration_task_state,
@@ -836,6 +883,7 @@ module Aws::MigrationHub
     #            the caller has permission to make the call.</p>
     #   @return [Boolean]
     class NotifyApplicationStateRequest < Struct.new(
+      nil,
       :application_id,
       :status,
       :update_date_time,
@@ -846,6 +894,7 @@ module Aws::MigrationHub
     end
 
     class NotifyApplicationStateResult < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -875,6 +924,7 @@ module Aws::MigrationHub
     #            the caller has permission to make the call.</p>
     #   @return [Boolean]
     class NotifyMigrationTaskStateRequest < Struct.new(
+      nil,
       :progress_update_stream,
       :migration_task_name,
       :task,
@@ -887,6 +937,7 @@ module Aws::MigrationHub
     end
 
     class NotifyMigrationTaskStateResult < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -898,6 +949,7 @@ module Aws::MigrationHub
     # @!attribute message
     #   @return [String]
     class PolicyErrorException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -912,6 +964,7 @@ module Aws::MigrationHub
     #            </p>
     #   @return [String]
     class ProgressUpdateStreamSummary < Struct.new(
+      nil,
       :progress_update_stream_name,
       keyword_init: true
     )
@@ -960,6 +1013,7 @@ module Aws::MigrationHub
     #            the caller has permission to make the call.</p>
     #   @return [Boolean]
     class PutResourceAttributesRequest < Struct.new(
+      nil,
       :progress_update_stream,
       :migration_task_name,
       :resource_attribute_list,
@@ -970,6 +1024,7 @@ module Aws::MigrationHub
     end
 
     class PutResourceAttributesResult < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1017,6 +1072,7 @@ module Aws::MigrationHub
     #   <p>Value of the resource type.</p>
     #   @return [String]
     class ResourceAttribute < Struct.new(
+      nil,
       :type,
       :value,
       keyword_init: true
@@ -1030,6 +1086,7 @@ module Aws::MigrationHub
     # @!attribute message
     #   @return [String]
     class ResourceNotFoundException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -1041,6 +1098,7 @@ module Aws::MigrationHub
     # @!attribute message
     #   @return [String]
     class ServiceUnavailableException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -1061,6 +1119,7 @@ module Aws::MigrationHub
     #   <p>A free-form description of the status of the resource.</p>
     #   @return [String]
     class SourceResource < Struct.new(
+      nil,
       :name,
       :description,
       :status_detail,
@@ -1082,6 +1141,7 @@ module Aws::MigrationHub
     #   <p>Indication of the percentage completion of the task.</p>
     #   @return [Integer]
     class Task < Struct.new(
+      nil,
       :status,
       :status_detail,
       :progress_percent,
@@ -1098,6 +1158,7 @@ module Aws::MigrationHub
     #   <p>The number of seconds the caller should wait before retrying.</p>
     #   @return [Integer]
     class ThrottlingException < Struct.new(
+      nil,
       :message,
       :retry_after_seconds,
       keyword_init: true
@@ -1115,6 +1176,7 @@ module Aws::MigrationHub
     # @!attribute message
     #   @return [String]
     class UnauthorizedOperation < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )

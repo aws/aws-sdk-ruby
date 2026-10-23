@@ -14,6 +14,7 @@ module Aws::IoTSecureTunneling
     #   			immediately.</p>
     #   @return [Boolean]
     class CloseTunnelRequest < Struct.new(
+      nil,
       :tunnel_id,
       :delete,
       keyword_init: true
@@ -22,6 +23,7 @@ module Aws::IoTSecureTunneling
     end
 
     class CloseTunnelResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -36,6 +38,7 @@ module Aws::IoTSecureTunneling
     #   <p>The last time the connection status was updated.</p>
     #   @return [Time]
     class ConnectionState < Struct.new(
+      nil,
       :status,
       :last_updated_at,
       keyword_init: true
@@ -47,6 +50,7 @@ module Aws::IoTSecureTunneling
     #   <p>The tunnel to describe.</p>
     #   @return [String]
     class DescribeTunnelRequest < Struct.new(
+      nil,
       :tunnel_id,
       keyword_init: true
     )
@@ -57,6 +61,7 @@ module Aws::IoTSecureTunneling
     #   <p>The tunnel being described.</p>
     #   @return [Types::Tunnel]
     class DescribeTunnelResponse < Struct.new(
+      nil,
       :tunnel,
       keyword_init: true
     )
@@ -74,6 +79,7 @@ module Aws::IoTSecureTunneling
     #   			information to connect to the destination application.</p>
     #   @return [Array<String>]
     class DestinationConfig < Struct.new(
+      nil,
       :thing_name,
       :services,
       keyword_init: true
@@ -85,6 +91,7 @@ module Aws::IoTSecureTunneling
     # @!attribute message
     #   @return [String]
     class LimitExceededException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -95,6 +102,7 @@ module Aws::IoTSecureTunneling
     #   <p>The resource ARN.</p>
     #   @return [String]
     class ListTagsForResourceRequest < Struct.new(
+      nil,
       :resource_arn,
       keyword_init: true
     )
@@ -105,6 +113,7 @@ module Aws::IoTSecureTunneling
     #   <p>The tags for the specified resource.</p>
     #   @return [Array<Types::Tag>]
     class ListTagsForResourceResponse < Struct.new(
+      nil,
       :tags,
       keyword_init: true
     )
@@ -122,6 +131,7 @@ module Aws::IoTSecureTunneling
     #   			otherwise null to receive the first set of results.</p>
     #   @return [String]
     class ListTunnelsRequest < Struct.new(
+      nil,
       :thing_name,
       :max_results,
       :next_token,
@@ -138,6 +148,7 @@ module Aws::IoTSecureTunneling
     #   			results.</p>
     #   @return [String]
     class ListTunnelsResponse < Struct.new(
+      nil,
       :tunnel_summaries,
       :next_token,
       keyword_init: true
@@ -158,6 +169,7 @@ module Aws::IoTSecureTunneling
     #   <p>Timeout configuration for a tunnel.</p>
     #   @return [Types::TimeoutConfig]
     class OpenTunnelRequest < Struct.new(
+      nil,
       :description,
       :tags,
       :destination_config,
@@ -182,6 +194,7 @@ module Aws::IoTSecureTunneling
     #   			Tunneling.</p>
     #   @return [String]
     class OpenTunnelResponse < Struct.new(
+      nil,
       :tunnel_id,
       :tunnel_arn,
       :source_access_token,
@@ -195,6 +208,7 @@ module Aws::IoTSecureTunneling
     # @!attribute message
     #   @return [String]
     class ResourceNotFoundException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -212,6 +226,7 @@ module Aws::IoTSecureTunneling
     #   <p>The destination configuration.</p>
     #   @return [Types::DestinationConfig]
     class RotateTunnelAccessTokenRequest < Struct.new(
+      nil,
       :tunnel_id,
       :client_mode,
       :destination_config,
@@ -232,6 +247,7 @@ module Aws::IoTSecureTunneling
     #   			Secure Tunneling.</p>
     #   @return [String]
     class RotateTunnelAccessTokenResponse < Struct.new(
+      nil,
       :tunnel_arn,
       :source_access_token,
       :destination_access_token,
@@ -249,6 +265,7 @@ module Aws::IoTSecureTunneling
     #   <p>The value of the tag.</p>
     #   @return [String]
     class Tag < Struct.new(
+      nil,
       :key,
       :value,
       keyword_init: true
@@ -263,6 +280,7 @@ module Aws::IoTSecureTunneling
     #   <p>The tags for the resource.</p>
     #   @return [Array<Types::Tag>]
     class TagResourceRequest < Struct.new(
+      nil,
       :resource_arn,
       :tags,
       keyword_init: true
@@ -271,6 +289,7 @@ module Aws::IoTSecureTunneling
     end
 
     class TagResourceResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -283,6 +302,7 @@ module Aws::IoTSecureTunneling
     #   			hours (720 minutes) </p>
     #   @return [Integer]
     class TimeoutConfig < Struct.new(
+      nil,
       :max_lifetime_timeout_minutes,
       keyword_init: true
     )
@@ -326,6 +346,7 @@ module Aws::IoTSecureTunneling
     #   <p>The last time the tunnel was updated.</p>
     #   @return [Time]
     class Tunnel < Struct.new(
+      nil,
       :tunnel_id,
       :tunnel_arn,
       :status,
@@ -362,6 +383,7 @@ module Aws::IoTSecureTunneling
     #   <p>The time the tunnel was last updated.</p>
     #   @return [Time]
     class TunnelSummary < Struct.new(
+      nil,
       :tunnel_id,
       :tunnel_arn,
       :status,
@@ -380,6 +402,7 @@ module Aws::IoTSecureTunneling
     #   <p>The keys of the tags to remove.</p>
     #   @return [Array<String>]
     class UntagResourceRequest < Struct.new(
+      nil,
       :resource_arn,
       :tag_keys,
       keyword_init: true
@@ -388,6 +411,7 @@ module Aws::IoTSecureTunneling
     end
 
     class UntagResourceResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure

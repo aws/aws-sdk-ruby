@@ -11,6 +11,7 @@ module Aws::BedrockDataAutomation
     #   Non Blank String
     #   @return [String]
     class AccessDeniedException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -28,6 +29,7 @@ module Aws::BedrockDataAutomation
     #   Configuration for different audio extraction category types
     #   @return [Types::AudioExtractionCategoryTypeConfiguration]
     class AudioExtractionCategory < Struct.new(
+      nil,
       :state,
       :types,
       :type_configuration,
@@ -41,6 +43,7 @@ module Aws::BedrockDataAutomation
     #   Configuration for transcript related features
     #   @return [Types::TranscriptConfiguration]
     class AudioExtractionCategoryTypeConfiguration < Struct.new(
+      nil,
       :transcript,
       keyword_init: true
     )
@@ -52,6 +55,7 @@ module Aws::BedrockDataAutomation
     #   Configuration to enable/disable processing of modality
     #   @return [Types::ModalityProcessingConfiguration]
     class AudioOverrideConfiguration < Struct.new(
+      nil,
       :modality_processing,
       keyword_init: true
     )
@@ -63,6 +67,7 @@ module Aws::BedrockDataAutomation
     #   Category of Audio Extraction
     #   @return [Types::AudioExtractionCategory]
     class AudioStandardExtraction < Struct.new(
+      nil,
       :category,
       keyword_init: true
     )
@@ -77,6 +82,7 @@ module Aws::BedrockDataAutomation
     #   List of Audio Standard Generative Field Type
     #   @return [Array<String>]
     class AudioStandardGenerativeField < Struct.new(
+      nil,
       :state,
       :types,
       keyword_init: true
@@ -92,6 +98,7 @@ module Aws::BedrockDataAutomation
     #   Standard Generative Field Configuration of Audio
     #   @return [Types::AudioStandardGenerativeField]
     class AudioStandardOutputConfiguration < Struct.new(
+      nil,
       :extraction,
       :generative_field,
       keyword_init: true
@@ -131,6 +138,7 @@ module Aws::BedrockDataAutomation
     #   KMS Encryption Context
     #   @return [Hash<String, String>]
     class Blueprint < Struct.new(
+      nil,
       :blueprint_arn,
       :schema,
       :type,
@@ -157,6 +165,7 @@ module Aws::BedrockDataAutomation
     #   Stage of the Blueprint
     #   @return [String]
     class BlueprintFilter < Struct.new(
+      nil,
       :blueprint_arn,
       :blueprint_version,
       :blueprint_stage,
@@ -176,6 +185,7 @@ module Aws::BedrockDataAutomation
     #   Stage of the Blueprint
     #   @return [String]
     class BlueprintItem < Struct.new(
+      nil,
       :blueprint_arn,
       :blueprint_version,
       :blueprint_stage,
@@ -204,6 +214,7 @@ module Aws::BedrockDataAutomation
     #   Time Stamp
     #   @return [Time]
     class BlueprintSummary < Struct.new(
+      nil,
       :blueprint_arn,
       :blueprint_version,
       :blueprint_stage,
@@ -220,6 +231,7 @@ module Aws::BedrockDataAutomation
     #   State
     #   @return [String]
     class ChannelLabelingConfiguration < Struct.new(
+      nil,
       :state,
       keyword_init: true
     )
@@ -231,6 +243,7 @@ module Aws::BedrockDataAutomation
     #   Non Blank String
     #   @return [String]
     class ConflictException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -260,6 +273,7 @@ module Aws::BedrockDataAutomation
     #   List of tags
     #   @return [Array<Types::Tag>]
     class CreateBlueprintRequest < Struct.new(
+      nil,
       :blueprint_name,
       :type,
       :blueprint_stage,
@@ -277,6 +291,7 @@ module Aws::BedrockDataAutomation
     #   Contains the information of a Blueprint.
     #   @return [Types::Blueprint]
     class CreateBlueprintResponse < Struct.new(
+      nil,
       :blueprint,
       keyword_init: true
     )
@@ -291,6 +306,7 @@ module Aws::BedrockDataAutomation
     #   Client specified token used for idempotency checks
     #   @return [String]
     class CreateBlueprintVersionRequest < Struct.new(
+      nil,
       :blueprint_arn,
       :client_token,
       keyword_init: true
@@ -303,6 +319,7 @@ module Aws::BedrockDataAutomation
     #   Contains the information of a Blueprint.
     #   @return [Types::Blueprint]
     class CreateBlueprintVersionResponse < Struct.new(
+      nil,
       :blueprint,
       keyword_init: true
     )
@@ -338,6 +355,7 @@ module Aws::BedrockDataAutomation
     #   List of tags
     #   @return [Array<Types::Tag>]
     class CreateDataAutomationProjectRequest < Struct.new(
+      nil,
       :project_name,
       :project_description,
       :project_stage,
@@ -363,6 +381,7 @@ module Aws::BedrockDataAutomation
     #   Status of Data Automation Project
     #   @return [String]
     class CreateDataAutomationProjectResponse < Struct.new(
+      nil,
       :project_arn,
       :project_stage,
       :status,
@@ -376,6 +395,7 @@ module Aws::BedrockDataAutomation
     #   List of Blueprint Item
     #   @return [Array<Types::BlueprintItem>]
     class CustomOutputConfiguration < Struct.new(
+      nil,
       :blueprints,
       keyword_init: true
     )
@@ -420,6 +440,7 @@ module Aws::BedrockDataAutomation
     #   KMS Encryption Context
     #   @return [Hash<String, String>]
     class DataAutomationProject < Struct.new(
+      nil,
       :project_arn,
       :creation_time,
       :last_modified_time,
@@ -445,6 +466,7 @@ module Aws::BedrockDataAutomation
     #   Stage of the Project
     #   @return [String]
     class DataAutomationProjectFilter < Struct.new(
+      nil,
       :project_arn,
       :project_stage,
       keyword_init: true
@@ -466,6 +488,7 @@ module Aws::BedrockDataAutomation
     #   Time Stamp
     #   @return [Time]
     class DataAutomationProjectSummary < Struct.new(
+      nil,
       :project_arn,
       :project_stage,
       :project_name,
@@ -483,6 +506,7 @@ module Aws::BedrockDataAutomation
     #   Optional field to delete a specific Blueprint version
     #   @return [String]
     class DeleteBlueprintRequest < Struct.new(
+      nil,
       :blueprint_arn,
       :blueprint_version,
       keyword_init: true
@@ -492,6 +516,7 @@ module Aws::BedrockDataAutomation
 
     # Delete Blueprint Response
     class DeleteBlueprintResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -502,6 +527,7 @@ module Aws::BedrockDataAutomation
     #   ARN generated at the server side when a DataAutomationProject is created
     #   @return [String]
     class DeleteDataAutomationProjectRequest < Struct.new(
+      nil,
       :project_arn,
       keyword_init: true
     )
@@ -516,6 +542,7 @@ module Aws::BedrockDataAutomation
     #   Status of Data Automation Project
     #   @return [String]
     class DeleteDataAutomationProjectResponse < Struct.new(
+      nil,
       :project_arn,
       :status,
       keyword_init: true
@@ -528,6 +555,7 @@ module Aws::BedrockDataAutomation
     #   State
     #   @return [String]
     class DocumentBoundingBox < Struct.new(
+      nil,
       :state,
       keyword_init: true
     )
@@ -539,6 +567,7 @@ module Aws::BedrockDataAutomation
     #   List of Document Extraction Granularity Type
     #   @return [Array<String>]
     class DocumentExtractionGranularity < Struct.new(
+      nil,
       :types,
       keyword_init: true
     )
@@ -550,6 +579,7 @@ module Aws::BedrockDataAutomation
     #   State
     #   @return [String]
     class DocumentOutputAdditionalFileFormat < Struct.new(
+      nil,
       :state,
       keyword_init: true
     )
@@ -564,6 +594,7 @@ module Aws::BedrockDataAutomation
     #   Additional File Format of Document Output
     #   @return [Types::DocumentOutputAdditionalFileFormat]
     class DocumentOutputFormat < Struct.new(
+      nil,
       :text_format,
       :additional_file_format,
       keyword_init: true
@@ -576,6 +607,7 @@ module Aws::BedrockDataAutomation
     #   List of Document Output Text Format Type
     #   @return [Array<String>]
     class DocumentOutputTextFormat < Struct.new(
+      nil,
       :types,
       keyword_init: true
     )
@@ -590,6 +622,7 @@ module Aws::BedrockDataAutomation
     #   Configuration to enable/disable processing of modality
     #   @return [Types::ModalityProcessingConfiguration]
     class DocumentOverrideConfiguration < Struct.new(
+      nil,
       :splitter,
       :modality_processing,
       keyword_init: true
@@ -605,6 +638,7 @@ module Aws::BedrockDataAutomation
     #   Bounding Box Configuration of Document Extraction
     #   @return [Types::DocumentBoundingBox]
     class DocumentStandardExtraction < Struct.new(
+      nil,
       :granularity,
       :bounding_box,
       keyword_init: true
@@ -617,6 +651,7 @@ module Aws::BedrockDataAutomation
     #   State
     #   @return [String]
     class DocumentStandardGenerativeField < Struct.new(
+      nil,
       :state,
       keyword_init: true
     )
@@ -634,6 +669,7 @@ module Aws::BedrockDataAutomation
     #   Output Format of Document
     #   @return [Types::DocumentOutputFormat]
     class DocumentStandardOutputConfiguration < Struct.new(
+      nil,
       :extraction,
       :generative_field,
       :output_format,
@@ -650,6 +686,7 @@ module Aws::BedrockDataAutomation
     #   KMS Encryption Context
     #   @return [Hash<String, String>]
     class EncryptionConfiguration < Struct.new(
+      nil,
       :kms_key_id,
       :kms_encryption_context,
       keyword_init: true
@@ -668,6 +705,7 @@ module Aws::BedrockDataAutomation
     #   Optional field to get a specific Blueprint stage
     #   @return [String]
     class GetBlueprintRequest < Struct.new(
+      nil,
       :blueprint_arn,
       :blueprint_version,
       :blueprint_stage,
@@ -681,6 +719,7 @@ module Aws::BedrockDataAutomation
     #   Contains the information of a Blueprint.
     #   @return [Types::Blueprint]
     class GetBlueprintResponse < Struct.new(
+      nil,
       :blueprint,
       keyword_init: true
     )
@@ -695,6 +734,7 @@ module Aws::BedrockDataAutomation
     #   Optional field to delete a specific DataAutomationProject stage
     #   @return [String]
     class GetDataAutomationProjectRequest < Struct.new(
+      nil,
       :project_arn,
       :project_stage,
       keyword_init: true
@@ -707,6 +747,7 @@ module Aws::BedrockDataAutomation
     #   Contains the information of a DataAutomationProject.
     #   @return [Types::DataAutomationProject]
     class GetDataAutomationProjectResponse < Struct.new(
+      nil,
       :project,
       keyword_init: true
     )
@@ -718,6 +759,7 @@ module Aws::BedrockDataAutomation
     #   State
     #   @return [String]
     class ImageBoundingBox < Struct.new(
+      nil,
       :state,
       keyword_init: true
     )
@@ -732,6 +774,7 @@ module Aws::BedrockDataAutomation
     #   List of Image Extraction Category
     #   @return [Array<String>]
     class ImageExtractionCategory < Struct.new(
+      nil,
       :state,
       :types,
       keyword_init: true
@@ -744,6 +787,7 @@ module Aws::BedrockDataAutomation
     #   Configuration to enable/disable processing of modality
     #   @return [Types::ModalityProcessingConfiguration]
     class ImageOverrideConfiguration < Struct.new(
+      nil,
       :modality_processing,
       keyword_init: true
     )
@@ -758,6 +802,7 @@ module Aws::BedrockDataAutomation
     #   Bounding Box Configuration of Image Extraction
     #   @return [Types::ImageBoundingBox]
     class ImageStandardExtraction < Struct.new(
+      nil,
       :category,
       :bounding_box,
       keyword_init: true
@@ -773,6 +818,7 @@ module Aws::BedrockDataAutomation
     #   List of Image Standard Generative Field Type
     #   @return [Array<String>]
     class ImageStandardGenerativeField < Struct.new(
+      nil,
       :state,
       :types,
       keyword_init: true
@@ -788,6 +834,7 @@ module Aws::BedrockDataAutomation
     #   Standard Generative Field Configuration of Image
     #   @return [Types::ImageStandardGenerativeField]
     class ImageStandardOutputConfiguration < Struct.new(
+      nil,
       :extraction,
       :generative_field,
       keyword_init: true
@@ -800,6 +847,7 @@ module Aws::BedrockDataAutomation
     #   Non Blank String
     #   @return [String]
     class InternalServerException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -826,6 +874,7 @@ module Aws::BedrockDataAutomation
     #   Data Automation Project Filter
     #   @return [Types::DataAutomationProjectFilter]
     class ListBlueprintsRequest < Struct.new(
+      nil,
       :blueprint_arn,
       :resource_owner,
       :blueprint_stage_filter,
@@ -845,6 +894,7 @@ module Aws::BedrockDataAutomation
     #   Pagination token
     #   @return [String]
     class ListBlueprintsResponse < Struct.new(
+      nil,
       :blueprints,
       :next_token,
       keyword_init: true
@@ -869,6 +919,7 @@ module Aws::BedrockDataAutomation
     #   Resource Owner
     #   @return [String]
     class ListDataAutomationProjectsRequest < Struct.new(
+      nil,
       :max_results,
       :next_token,
       :project_stage_filter,
@@ -887,6 +938,7 @@ module Aws::BedrockDataAutomation
     #   Pagination token
     #   @return [String]
     class ListDataAutomationProjectsResponse < Struct.new(
+      nil,
       :projects,
       :next_token,
       keyword_init: true
@@ -898,6 +950,7 @@ module Aws::BedrockDataAutomation
     #   ARN of a taggable resource
     #   @return [String]
     class ListTagsForResourceRequest < Struct.new(
+      nil,
       :resource_arn,
       keyword_init: true
     )
@@ -908,6 +961,7 @@ module Aws::BedrockDataAutomation
     #   List of tags
     #   @return [Array<Types::Tag>]
     class ListTagsForResourceResponse < Struct.new(
+      nil,
       :tags,
       keyword_init: true
     )
@@ -919,6 +973,7 @@ module Aws::BedrockDataAutomation
     #   State
     #   @return [String]
     class ModalityProcessingConfiguration < Struct.new(
+      nil,
       :state,
       keyword_init: true
     )
@@ -939,6 +994,7 @@ module Aws::BedrockDataAutomation
     #   Desired Modality types
     #   @return [String]
     class ModalityRoutingConfiguration < Struct.new(
+      nil,
       :jpeg,
       :png,
       :mp4,
@@ -965,6 +1021,7 @@ module Aws::BedrockDataAutomation
     #   Configuration for routing file type to desired modality
     #   @return [Types::ModalityRoutingConfiguration]
     class OverrideConfiguration < Struct.new(
+      nil,
       :document,
       :image,
       :video,
@@ -980,6 +1037,7 @@ module Aws::BedrockDataAutomation
     #   Non Blank String
     #   @return [String]
     class ResourceNotFoundException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -991,6 +1049,7 @@ module Aws::BedrockDataAutomation
     #   Non Blank String
     #   @return [String]
     class ServiceQuotaExceededException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -1002,6 +1061,7 @@ module Aws::BedrockDataAutomation
     #   State
     #   @return [String]
     class SpeakerLabelingConfiguration < Struct.new(
+      nil,
       :state,
       keyword_init: true
     )
@@ -1013,6 +1073,7 @@ module Aws::BedrockDataAutomation
     #   State
     #   @return [String]
     class SplitterConfiguration < Struct.new(
+      nil,
       :state,
       keyword_init: true
     )
@@ -1033,6 +1094,7 @@ module Aws::BedrockDataAutomation
     #   Standard Output Configuration of Audio
     #   @return [Types::AudioStandardOutputConfiguration]
     class StandardOutputConfiguration < Struct.new(
+      nil,
       :document,
       :image,
       :video,
@@ -1050,6 +1112,7 @@ module Aws::BedrockDataAutomation
     #   Defines the value within the context. e.g. <key=reason, value=training>.
     #   @return [String]
     class Tag < Struct.new(
+      nil,
       :key,
       :value,
       keyword_init: true
@@ -1064,6 +1127,7 @@ module Aws::BedrockDataAutomation
     #   List of tags
     #   @return [Array<Types::Tag>]
     class TagResourceRequest < Struct.new(
+      nil,
       :resource_arn,
       :tags,
       keyword_init: true
@@ -1072,6 +1136,7 @@ module Aws::BedrockDataAutomation
     end
 
     class TagResourceResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1082,6 +1147,7 @@ module Aws::BedrockDataAutomation
     #   Non Blank String
     #   @return [String]
     class ThrottlingException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -1096,6 +1162,7 @@ module Aws::BedrockDataAutomation
     #   Channel labeling configuration
     #   @return [Types::ChannelLabelingConfiguration]
     class TranscriptConfiguration < Struct.new(
+      nil,
       :speaker_labeling,
       :channel_labeling,
       keyword_init: true
@@ -1110,6 +1177,7 @@ module Aws::BedrockDataAutomation
     #   List of tag keys
     #   @return [Array<String>]
     class UntagResourceRequest < Struct.new(
+      nil,
       :resource_arn,
       :tag_keys,
       keyword_init: true
@@ -1118,6 +1186,7 @@ module Aws::BedrockDataAutomation
     end
 
     class UntagResourceResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1137,6 +1206,7 @@ module Aws::BedrockDataAutomation
     #   KMS Encryption Configuration
     #   @return [Types::EncryptionConfiguration]
     class UpdateBlueprintRequest < Struct.new(
+      nil,
       :blueprint_arn,
       :schema,
       :blueprint_stage,
@@ -1151,6 +1221,7 @@ module Aws::BedrockDataAutomation
     #   Contains the information of a Blueprint.
     #   @return [Types::Blueprint]
     class UpdateBlueprintResponse < Struct.new(
+      nil,
       :blueprint,
       keyword_init: true
     )
@@ -1180,6 +1251,7 @@ module Aws::BedrockDataAutomation
     #   KMS Encryption Configuration
     #   @return [Types::EncryptionConfiguration]
     class UpdateDataAutomationProjectRequest < Struct.new(
+      nil,
       :project_arn,
       :project_stage,
       :project_description,
@@ -1203,6 +1275,7 @@ module Aws::BedrockDataAutomation
     #   Status of Data Automation Project
     #   @return [String]
     class UpdateDataAutomationProjectResponse < Struct.new(
+      nil,
       :project_arn,
       :project_stage,
       :status,
@@ -1219,6 +1292,7 @@ module Aws::BedrockDataAutomation
     #   list of ValidationExceptionField
     #   @return [Array<Types::ValidationExceptionField>]
     class ValidationException < Struct.new(
+      nil,
       :message,
       :field_list,
       keyword_init: true
@@ -1234,6 +1308,7 @@ module Aws::BedrockDataAutomation
     #   Non Blank String
     #   @return [String]
     class ValidationExceptionField < Struct.new(
+      nil,
       :name,
       :message,
       keyword_init: true
@@ -1246,6 +1321,7 @@ module Aws::BedrockDataAutomation
     #   State
     #   @return [String]
     class VideoBoundingBox < Struct.new(
+      nil,
       :state,
       keyword_init: true
     )
@@ -1260,6 +1336,7 @@ module Aws::BedrockDataAutomation
     #   List of Video Extraction Category Type
     #   @return [Array<String>]
     class VideoExtractionCategory < Struct.new(
+      nil,
       :state,
       :types,
       keyword_init: true
@@ -1272,6 +1349,7 @@ module Aws::BedrockDataAutomation
     #   Configuration to enable/disable processing of modality
     #   @return [Types::ModalityProcessingConfiguration]
     class VideoOverrideConfiguration < Struct.new(
+      nil,
       :modality_processing,
       keyword_init: true
     )
@@ -1286,6 +1364,7 @@ module Aws::BedrockDataAutomation
     #   Bounding Box Configuration of Video Extraction
     #   @return [Types::VideoBoundingBox]
     class VideoStandardExtraction < Struct.new(
+      nil,
       :category,
       :bounding_box,
       keyword_init: true
@@ -1301,6 +1380,7 @@ module Aws::BedrockDataAutomation
     #   List of Video Standard Generative Field Type
     #   @return [Array<String>]
     class VideoStandardGenerativeField < Struct.new(
+      nil,
       :state,
       :types,
       keyword_init: true
@@ -1316,6 +1396,7 @@ module Aws::BedrockDataAutomation
     #   Standard Generative Field Configuration of Video
     #   @return [Types::VideoStandardGenerativeField]
     class VideoStandardOutputConfiguration < Struct.new(
+      nil,
       :extraction,
       :generative_field,
       keyword_init: true

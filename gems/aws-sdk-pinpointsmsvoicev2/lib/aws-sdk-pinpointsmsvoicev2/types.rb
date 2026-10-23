@@ -13,6 +13,7 @@ module Aws::PinpointSMSVoiceV2
     #   <p>The reason for the exception.</p>
     #   @return [String]
     class AccessDeniedException < Struct.new(
+      nil,
       :message,
       :reason,
       keyword_init: true
@@ -28,6 +29,7 @@ module Aws::PinpointSMSVoiceV2
     #   <p>The value associated with the account attribute name.</p>
     #   @return [String]
     class AccountAttribute < Struct.new(
+      nil,
       :name,
       :value,
       keyword_init: true
@@ -46,6 +48,7 @@ module Aws::PinpointSMSVoiceV2
     #   <p>The Amazon Web Services set limit for that resource type, in US dollars.</p>
     #   @return [Integer]
     class AccountLimit < Struct.new(
+      nil,
       :name,
       :used,
       :max,
@@ -73,6 +76,7 @@ module Aws::PinpointSMSVoiceV2
     #   <p>Unique, case-sensitive identifier that you provide to ensure the idempotency of the request. If you don't specify a client token, a randomly generated token is used for the request to ensure idempotency.</p>
     #   @return [String]
     class AssociateOriginationIdentityRequest < Struct.new(
+      nil,
       :pool_id,
       :origination_identity,
       :iso_country_code,
@@ -98,6 +102,7 @@ module Aws::PinpointSMSVoiceV2
     #   <p>The two-character code, in ISO 3166-1 alpha-2 format, for the country or region. </p>
     #   @return [String]
     class AssociateOriginationIdentityResult < Struct.new(
+      nil,
       :pool_arn,
       :pool_id,
       :origination_identity_arn,
@@ -115,6 +120,7 @@ module Aws::PinpointSMSVoiceV2
     #   <p>The name of the ConfigurationSet.</p>
     #   @return [String]
     class AssociateProtectConfigurationRequest < Struct.new(
+      nil,
       :protect_configuration_id,
       :configuration_set_name,
       keyword_init: true
@@ -135,6 +141,7 @@ module Aws::PinpointSMSVoiceV2
     #   <p>The unique identifier for the protect configuration.</p>
     #   @return [String]
     class AssociateProtectConfigurationResult < Struct.new(
+      nil,
       :configuration_set_arn,
       :configuration_set_name,
       :protect_configuration_arn,
@@ -152,6 +159,7 @@ module Aws::PinpointSMSVoiceV2
     #   <p>The name of the Amazon CloudWatch log group that you want to record events in. </p>
     #   @return [String]
     class CloudWatchLogsDestination < Struct.new(
+      nil,
       :iam_role_arn,
       :log_group_arn,
       keyword_init: true
@@ -167,6 +175,7 @@ module Aws::PinpointSMSVoiceV2
     #   <p>An array values to filter for.</p>
     #   @return [Array<String>]
     class ConfigurationSetFilter < Struct.new(
+      nil,
       :name,
       :values,
       keyword_init: true
@@ -200,6 +209,7 @@ module Aws::PinpointSMSVoiceV2
     #   <p>The unique identifier for the protect configuration.</p>
     #   @return [String]
     class ConfigurationSetInformation < Struct.new(
+      nil,
       :configuration_set_arn,
       :configuration_set_name,
       :event_destinations,
@@ -226,6 +236,7 @@ module Aws::PinpointSMSVoiceV2
     #   <p>The unique identifier of the request.</p>
     #   @return [String]
     class ConflictException < Struct.new(
+      nil,
       :message,
       :reason,
       :resource_type,
@@ -245,6 +256,7 @@ module Aws::PinpointSMSVoiceV2
     #   <p>Unique, case-sensitive identifier that you provide to ensure the idempotency of the request. If you don't specify a client token, a randomly generated token is used for the request to ensure idempotency.</p>
     #   @return [String]
     class CreateConfigurationSetRequest < Struct.new(
+      nil,
       :configuration_set_name,
       :tags,
       :client_token,
@@ -266,6 +278,7 @@ module Aws::PinpointSMSVoiceV2
     #   <p>The time when the configuration set was created, in <a href="https://www.epochconverter.com/">UNIX epoch time</a> format.</p>
     #   @return [Time]
     class CreateConfigurationSetResult < Struct.new(
+      nil,
       :configuration_set_arn,
       :configuration_set_name,
       :tags,
@@ -297,6 +310,7 @@ module Aws::PinpointSMSVoiceV2
     #   <p>Unique, case-sensitive identifier that you provide to ensure the idempotency of the request. If you don't specify a client token, a randomly generated token is used for the request to ensure idempotency.</p>
     #   @return [String]
     class CreateEventDestinationRequest < Struct.new(
+      nil,
       :configuration_set_name,
       :event_destination_name,
       :matching_event_types,
@@ -319,6 +333,7 @@ module Aws::PinpointSMSVoiceV2
     #   <p>The details of the destination where events are logged.</p>
     #   @return [Types::EventDestination]
     class CreateEventDestinationResult < Struct.new(
+      nil,
       :configuration_set_arn,
       :configuration_set_name,
       :event_destination,
@@ -337,6 +352,7 @@ module Aws::PinpointSMSVoiceV2
     #   <p>Unique, case-sensitive identifier that you provide to ensure the idempotency of the request. If you don't specify a client token, a randomly generated token is used for the request to ensure idempotency.</p>
     #   @return [String]
     class CreateOptOutListRequest < Struct.new(
+      nil,
       :opt_out_list_name,
       :tags,
       :client_token,
@@ -358,6 +374,7 @@ module Aws::PinpointSMSVoiceV2
     #   <p>The time when the pool was created, in <a href="https://www.epochconverter.com/">UNIX epoch time</a> format.</p>
     #   @return [Time]
     class CreateOptOutListResult < Struct.new(
+      nil,
       :opt_out_list_arn,
       :opt_out_list_name,
       :tags,
@@ -386,6 +403,7 @@ module Aws::PinpointSMSVoiceV2
     #   <p>Unique, case-sensitive identifier that you provide to ensure the idempotency of the request. If you don't specify a client token, a randomly generated token is used for the request to ensure idempotency.</p>
     #   @return [String]
     class CreatePoolRequest < Struct.new(
+      nil,
       :origination_identity,
       :iso_country_code,
       :message_type,
@@ -437,6 +455,7 @@ module Aws::PinpointSMSVoiceV2
     #   <p>The time when the pool was created, in <a href="https://www.epochconverter.com/">UNIX epoch time</a> format.</p>
     #   @return [Time]
     class CreatePoolResult < Struct.new(
+      nil,
       :pool_arn,
       :pool_id,
       :status,
@@ -473,6 +492,7 @@ module Aws::PinpointSMSVoiceV2
     #   <p>An array of key and value pair tags that are associated with the resource.</p>
     #   @return [Array<Types::Tag>]
     class CreateProtectConfigurationRequest < Struct.new(
+      nil,
       :client_token,
       :deletion_protection_enabled,
       :tags,
@@ -500,6 +520,7 @@ module Aws::PinpointSMSVoiceV2
     #   <p>An array of key and value pair tags that are associated with the resource.</p>
     #   @return [Array<Types::Tag>]
     class CreateProtectConfigurationResult < Struct.new(
+      nil,
       :protect_configuration_arn,
       :protect_configuration_id,
       :created_timestamp,
@@ -524,6 +545,7 @@ module Aws::PinpointSMSVoiceV2
     #   <p>The unique identifier for the origination identity. For example this could be a <b>PhoneNumberId</b> or <b>SenderId</b>.</p>
     #   @return [String]
     class CreateRegistrationAssociationRequest < Struct.new(
+      nil,
       :registration_id,
       :resource_id,
       keyword_init: true
@@ -556,6 +578,7 @@ module Aws::PinpointSMSVoiceV2
     #   <p>The phone number associated with the registration in E.164 format.</p>
     #   @return [String]
     class CreateRegistrationAssociationResult < Struct.new(
+      nil,
       :registration_arn,
       :registration_id,
       :registration_type,
@@ -582,6 +605,7 @@ module Aws::PinpointSMSVoiceV2
     #   <p>Unique, case-sensitive identifier that you provide to ensure the idempotency of the request. If you don't specify a client token, a randomly generated token is used for the request to ensure idempotency.</p>
     #   @return [String]
     class CreateRegistrationAttachmentRequest < Struct.new(
+      nil,
       :attachment_body,
       :attachment_url,
       :tags,
@@ -607,6 +631,7 @@ module Aws::PinpointSMSVoiceV2
     #   <p>The time when the registration attachment was created, in <a href="https://www.epochconverter.com/">UNIX epoch time</a> format.</p>
     #   @return [Time]
     class CreateRegistrationAttachmentResult < Struct.new(
+      nil,
       :registration_attachment_arn,
       :registration_attachment_id,
       :attachment_status,
@@ -627,6 +652,7 @@ module Aws::PinpointSMSVoiceV2
     #   <p>Unique, case-sensitive identifier that you provide to ensure the idempotency of the request. If you don't specify a client token, a randomly generated token is used for the request to ensure idempotency.</p>
     #   @return [String]
     class CreateRegistrationRequest < Struct.new(
+      nil,
       :registration_type,
       :tags,
       :client_token,
@@ -660,6 +686,7 @@ module Aws::PinpointSMSVoiceV2
     #   <p>The time when the registration was created, in <a href="https://www.epochconverter.com/">UNIX epoch time</a> format.</p>
     #   @return [Time]
     class CreateRegistrationResult < Struct.new(
+      nil,
       :registration_arn,
       :registration_id,
       :registration_type,
@@ -677,6 +704,7 @@ module Aws::PinpointSMSVoiceV2
     #   <p>The unique identifier for the registration.</p>
     #   @return [String]
     class CreateRegistrationVersionRequest < Struct.new(
+      nil,
       :registration_id,
       keyword_init: true
     )
@@ -699,6 +727,7 @@ module Aws::PinpointSMSVoiceV2
     #   <p>A <b>RegistrationVersionStatusHistory</b> object that contains timestamps for the registration.</p>
     #   @return [Types::RegistrationVersionStatusHistory]
     class CreateRegistrationVersionResult < Struct.new(
+      nil,
       :registration_arn,
       :registration_id,
       :version_number,
@@ -719,6 +748,7 @@ module Aws::PinpointSMSVoiceV2
     #   <p>Unique, case-sensitive identifier that you provide to ensure the idempotency of the request. If you don't specify a client token, a randomly generated token is used for the request to ensure idempotency.</p>
     #   @return [String]
     class CreateVerifiedDestinationNumberRequest < Struct.new(
+      nil,
       :destination_phone_number,
       :tags,
       :client_token,
@@ -746,6 +776,7 @@ module Aws::PinpointSMSVoiceV2
     #   <p>The time when the verified phone number was created, in <a href="https://www.epochconverter.com/">UNIX epoch time</a> format.</p>
     #   @return [Time]
     class CreateVerifiedDestinationNumberResult < Struct.new(
+      nil,
       :verified_destination_number_arn,
       :verified_destination_number_id,
       :destination_phone_number,
@@ -758,6 +789,7 @@ module Aws::PinpointSMSVoiceV2
     end
 
     class DeleteAccountDefaultProtectConfigurationRequest < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -770,6 +802,7 @@ module Aws::PinpointSMSVoiceV2
     #   <p>The unique identifier of the account default protect configuration.</p>
     #   @return [String]
     class DeleteAccountDefaultProtectConfigurationResult < Struct.new(
+      nil,
       :default_protect_configuration_arn,
       :default_protect_configuration_id,
       keyword_init: true
@@ -781,6 +814,7 @@ module Aws::PinpointSMSVoiceV2
     #   <p>The name of the configuration set or the configuration set ARN that you want to delete. The ConfigurationSetName and ConfigurationSetArn can be found using the <a>DescribeConfigurationSets</a> action.</p>
     #   @return [String]
     class DeleteConfigurationSetRequest < Struct.new(
+      nil,
       :configuration_set_name,
       keyword_init: true
     )
@@ -809,6 +843,7 @@ module Aws::PinpointSMSVoiceV2
     #   <p>The time that the deleted configuration set was created in <a href="https://www.epochconverter.com/">UNIX epoch time</a> format.</p>
     #   @return [Time]
     class DeleteConfigurationSetResult < Struct.new(
+      nil,
       :configuration_set_arn,
       :configuration_set_name,
       :event_destinations,
@@ -825,6 +860,7 @@ module Aws::PinpointSMSVoiceV2
     #   <p>The name of the configuration set or the configuration set Amazon Resource Name (ARN) to delete the default message type from. The ConfigurationSetName and ConfigurationSetArn can be found using the <a>DescribeConfigurationSets</a> action.</p>
     #   @return [String]
     class DeleteDefaultMessageTypeRequest < Struct.new(
+      nil,
       :configuration_set_name,
       keyword_init: true
     )
@@ -841,6 +877,7 @@ module Aws::PinpointSMSVoiceV2
     #   <p>The current message type for the configuration set.</p>
     #   @return [String]
     class DeleteDefaultMessageTypeResult < Struct.new(
+      nil,
       :configuration_set_arn,
       :configuration_set_name,
       :message_type,
@@ -853,6 +890,7 @@ module Aws::PinpointSMSVoiceV2
     #   <p>The name of the configuration set or the configuration set Amazon Resource Name (ARN) to delete the default sender ID from. The ConfigurationSetName and ConfigurationSetArn can be found using the <a>DescribeConfigurationSets</a> action.</p>
     #   @return [String]
     class DeleteDefaultSenderIdRequest < Struct.new(
+      nil,
       :configuration_set_name,
       keyword_init: true
     )
@@ -869,6 +907,7 @@ module Aws::PinpointSMSVoiceV2
     #   <p>The current sender ID for the configuration set.</p>
     #   @return [String]
     class DeleteDefaultSenderIdResult < Struct.new(
+      nil,
       :configuration_set_arn,
       :configuration_set_name,
       :sender_id,
@@ -884,6 +923,7 @@ module Aws::PinpointSMSVoiceV2
     #   <p>The name of the event destination to delete.</p>
     #   @return [String]
     class DeleteEventDestinationRequest < Struct.new(
+      nil,
       :configuration_set_name,
       :event_destination_name,
       keyword_init: true
@@ -901,6 +941,7 @@ module Aws::PinpointSMSVoiceV2
     #   <p>The event destination object that was deleted.</p>
     #   @return [Types::EventDestination]
     class DeleteEventDestinationResult < Struct.new(
+      nil,
       :configuration_set_arn,
       :configuration_set_name,
       :event_destination,
@@ -916,6 +957,7 @@ module Aws::PinpointSMSVoiceV2
     #   <p>The keyword to delete.</p>
     #   @return [String]
     class DeleteKeywordRequest < Struct.new(
+      nil,
       :origination_identity,
       :keyword,
       keyword_init: true
@@ -939,6 +981,7 @@ module Aws::PinpointSMSVoiceV2
     #   <p>The action that was associated with the deleted keyword.</p>
     #   @return [String]
     class DeleteKeywordResult < Struct.new(
+      nil,
       :origination_identity_arn,
       :origination_identity,
       :keyword,
@@ -950,6 +993,7 @@ module Aws::PinpointSMSVoiceV2
     end
 
     class DeleteMediaMessageSpendLimitOverrideRequest < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -959,6 +1003,7 @@ module Aws::PinpointSMSVoiceV2
     #   <p>The current monthly limit, in US dollars.</p>
     #   @return [Integer]
     class DeleteMediaMessageSpendLimitOverrideResult < Struct.new(
+      nil,
       :monthly_limit,
       keyword_init: true
     )
@@ -969,6 +1014,7 @@ module Aws::PinpointSMSVoiceV2
     #   <p>The OptOutListName or OptOutListArn of the OptOutList to delete. You can use <a>DescribeOptOutLists</a> to find the values for OptOutListName and OptOutListArn.</p> <important> <p>If you are using a shared AWS End User Messaging SMS and Voice resource then you must use the full Amazon Resource Name(ARN).</p> </important>
     #   @return [String]
     class DeleteOptOutListRequest < Struct.new(
+      nil,
       :opt_out_list_name,
       keyword_init: true
     )
@@ -985,6 +1031,7 @@ module Aws::PinpointSMSVoiceV2
     #   <p>The time when the OptOutList was created, in <a href="https://www.epochconverter.com/">UNIX epoch time</a> format.</p>
     #   @return [Time]
     class DeleteOptOutListResult < Struct.new(
+      nil,
       :opt_out_list_arn,
       :opt_out_list_name,
       :created_timestamp,
@@ -1000,6 +1047,7 @@ module Aws::PinpointSMSVoiceV2
     #   <p>The phone number, in E.164 format, to remove from the OptOutList.</p>
     #   @return [String]
     class DeleteOptedOutNumberRequest < Struct.new(
+      nil,
       :opt_out_list_name,
       :opted_out_number,
       keyword_init: true
@@ -1023,6 +1071,7 @@ module Aws::PinpointSMSVoiceV2
     #   <p>This is true if it was the end user who requested their phone number be removed. </p>
     #   @return [Boolean]
     class DeleteOptedOutNumberResult < Struct.new(
+      nil,
       :opt_out_list_arn,
       :opt_out_list_name,
       :opted_out_number,
@@ -1042,6 +1091,7 @@ module Aws::PinpointSMSVoiceV2
     #   <p>The PoolId or PoolArn of the pool to delete. You can use <a>DescribePools</a> to find the values for PoolId and PoolArn .</p> <important> <p>If you are using a shared AWS End User Messaging SMS and Voice resource then you must use the full Amazon Resource Name(ARN).</p> </important>
     #   @return [String]
     class DeletePoolRequest < Struct.new(
+      nil,
       :pool_id,
       keyword_init: true
     )
@@ -1082,6 +1132,7 @@ module Aws::PinpointSMSVoiceV2
     #   <p>The time when the pool was created, in <a href="https://www.epochconverter.com/">UNIX epoch time</a> format.</p>
     #   @return [Time]
     class DeletePoolResult < Struct.new(
+      nil,
       :pool_arn,
       :pool_id,
       :status,
@@ -1109,6 +1160,7 @@ module Aws::PinpointSMSVoiceV2
     #   <p>The unique identifier for the protect configuration.</p>
     #   @return [String]
     class DeleteProtectConfigurationRequest < Struct.new(
+      nil,
       :protect_configuration_id,
       keyword_init: true
     )
@@ -1131,6 +1183,7 @@ module Aws::PinpointSMSVoiceV2
     #   <p>The status of deletion protection for the protect configuration. When set to true deletion protection is enabled. By default this is set to false. </p>
     #   @return [Boolean]
     class DeleteProtectConfigurationResult < Struct.new(
+      nil,
       :protect_configuration_arn,
       :protect_configuration_id,
       :created_timestamp,
@@ -1154,6 +1207,7 @@ module Aws::PinpointSMSVoiceV2
     #   <p>The destination phone number in E.164 format.</p>
     #   @return [String]
     class DeleteProtectConfigurationRuleSetNumberOverrideRequest < Struct.new(
+      nil,
       :protect_configuration_id,
       :destination_phone_number,
       keyword_init: true
@@ -1183,6 +1237,7 @@ module Aws::PinpointSMSVoiceV2
     #   <p>The time when the resource-based policy was created, in <a href="https://www.epochconverter.com/">UNIX epoch time</a> format.</p>
     #   @return [Time]
     class DeleteProtectConfigurationRuleSetNumberOverrideResult < Struct.new(
+      nil,
       :protect_configuration_arn,
       :protect_configuration_id,
       :destination_phone_number,
@@ -1199,6 +1254,7 @@ module Aws::PinpointSMSVoiceV2
     #   <p>The unique identifier for the registration attachment.</p>
     #   @return [String]
     class DeleteRegistrationAttachmentRequest < Struct.new(
+      nil,
       :registration_attachment_id,
       keyword_init: true
     )
@@ -1221,6 +1277,7 @@ module Aws::PinpointSMSVoiceV2
     #   <p>The time when the registration attachment was created, in <a href="https://www.epochconverter.com/">UNIX epoch time</a> format.</p>
     #   @return [Time]
     class DeleteRegistrationAttachmentResult < Struct.new(
+      nil,
       :registration_attachment_arn,
       :registration_attachment_id,
       :attachment_status,
@@ -1238,6 +1295,7 @@ module Aws::PinpointSMSVoiceV2
     #   <p>The path to the registration form field. You can use <a>DescribeRegistrationFieldDefinitions</a> for a list of <b>FieldPaths</b>.</p>
     #   @return [String]
     class DeleteRegistrationFieldValueRequest < Struct.new(
+      nil,
       :registration_id,
       :field_path,
       keyword_init: true
@@ -1267,6 +1325,7 @@ module Aws::PinpointSMSVoiceV2
     #   <p>The unique identifier for the registration attachment.</p>
     #   @return [String]
     class DeleteRegistrationFieldValueResult < Struct.new(
+      nil,
       :registration_arn,
       :registration_id,
       :version_number,
@@ -1283,6 +1342,7 @@ module Aws::PinpointSMSVoiceV2
     #   <p>The unique identifier for the registration.</p>
     #   @return [String]
     class DeleteRegistrationRequest < Struct.new(
+      nil,
       :registration_id,
       keyword_init: true
     )
@@ -1317,6 +1377,7 @@ module Aws::PinpointSMSVoiceV2
     #   <p>The time when the registration was created, in <a href="https://www.epochconverter.com/">UNIX epoch time</a> format.</p>
     #   @return [Time]
     class DeleteRegistrationResult < Struct.new(
+      nil,
       :registration_arn,
       :registration_id,
       :registration_type,
@@ -1335,6 +1396,7 @@ module Aws::PinpointSMSVoiceV2
     #   <p>The Amazon Resource Name (ARN) of the AWS End User Messaging SMS and Voice resource you're deleting the resource-based policy from.</p>
     #   @return [String]
     class DeleteResourcePolicyRequest < Struct.new(
+      nil,
       :resource_arn,
       keyword_init: true
     )
@@ -1351,6 +1413,7 @@ module Aws::PinpointSMSVoiceV2
     #   <p>The time when the resource-based policy was created, in <a href="https://www.epochconverter.com/">UNIX epoch time</a> format.</p>
     #   @return [Time]
     class DeleteResourcePolicyResult < Struct.new(
+      nil,
       :resource_arn,
       :policy,
       :created_timestamp,
@@ -1360,6 +1423,7 @@ module Aws::PinpointSMSVoiceV2
     end
 
     class DeleteTextMessageSpendLimitOverrideRequest < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1369,6 +1433,7 @@ module Aws::PinpointSMSVoiceV2
     #   <p>The current monthly limit, in US dollars.</p>
     #   @return [Integer]
     class DeleteTextMessageSpendLimitOverrideResult < Struct.new(
+      nil,
       :monthly_limit,
       keyword_init: true
     )
@@ -1379,6 +1444,7 @@ module Aws::PinpointSMSVoiceV2
     #   <p>The unique identifier for the verified destination phone number.</p>
     #   @return [String]
     class DeleteVerifiedDestinationNumberRequest < Struct.new(
+      nil,
       :verified_destination_number_id,
       keyword_init: true
     )
@@ -1398,6 +1464,7 @@ module Aws::PinpointSMSVoiceV2
     #   <p>The time when the destination phone number was created, in <a href="https://www.epochconverter.com/">UNIX epoch time</a> format.</p>
     #   @return [Time]
     class DeleteVerifiedDestinationNumberResult < Struct.new(
+      nil,
       :verified_destination_number_arn,
       :verified_destination_number_id,
       :destination_phone_number,
@@ -1408,6 +1475,7 @@ module Aws::PinpointSMSVoiceV2
     end
 
     class DeleteVoiceMessageSpendLimitOverrideRequest < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1417,6 +1485,7 @@ module Aws::PinpointSMSVoiceV2
     #   <p>The current monthly limit, in US dollars.</p>
     #   @return [Integer]
     class DeleteVoiceMessageSpendLimitOverrideResult < Struct.new(
+      nil,
       :monthly_limit,
       keyword_init: true
     )
@@ -1430,6 +1499,7 @@ module Aws::PinpointSMSVoiceV2
     #   <p>The maximum number of results to return per each request.</p>
     #   @return [Integer]
     class DescribeAccountAttributesRequest < Struct.new(
+      nil,
       :next_token,
       :max_results,
       keyword_init: true
@@ -1444,6 +1514,7 @@ module Aws::PinpointSMSVoiceV2
     #   <p>The token to be used for the next set of paginated results. If this field is empty then there are no more results.</p>
     #   @return [String]
     class DescribeAccountAttributesResult < Struct.new(
+      nil,
       :account_attributes,
       :next_token,
       keyword_init: true
@@ -1458,6 +1529,7 @@ module Aws::PinpointSMSVoiceV2
     #   <p>The maximum number of results to return per each request.</p>
     #   @return [Integer]
     class DescribeAccountLimitsRequest < Struct.new(
+      nil,
       :next_token,
       :max_results,
       keyword_init: true
@@ -1472,6 +1544,7 @@ module Aws::PinpointSMSVoiceV2
     #   <p>The token to be used for the next set of paginated results. If this field is empty then there are no more results.</p>
     #   @return [String]
     class DescribeAccountLimitsResult < Struct.new(
+      nil,
       :account_limits,
       :next_token,
       keyword_init: true
@@ -1492,6 +1565,7 @@ module Aws::PinpointSMSVoiceV2
     #   <p>The maximum number of results to return per each request.</p>
     #   @return [Integer]
     class DescribeConfigurationSetsRequest < Struct.new(
+      nil,
       :configuration_set_names,
       :filters,
       :next_token,
@@ -1508,6 +1582,7 @@ module Aws::PinpointSMSVoiceV2
     #   <p>The token to be used for the next set of paginated results. If this field is empty then there are no more results.</p>
     #   @return [String]
     class DescribeConfigurationSetsResult < Struct.new(
+      nil,
       :configuration_sets,
       :next_token,
       keyword_init: true
@@ -1531,6 +1606,7 @@ module Aws::PinpointSMSVoiceV2
     #   <p>The maximum number of results to return per each request.</p>
     #   @return [Integer]
     class DescribeKeywordsRequest < Struct.new(
+      nil,
       :origination_identity,
       :keywords,
       :filters,
@@ -1554,6 +1630,7 @@ module Aws::PinpointSMSVoiceV2
     #   <p>The token to be used for the next set of paginated results. If this field is empty then there are no more results.</p>
     #   @return [String]
     class DescribeKeywordsResult < Struct.new(
+      nil,
       :origination_identity_arn,
       :origination_identity,
       :keywords,
@@ -1576,6 +1653,7 @@ module Aws::PinpointSMSVoiceV2
     #   <p>Use <code>SELF</code> to filter the list of Opt-Out List to ones your account owns or use <code>SHARED</code> to filter on Opt-Out List shared with your account. The <code>Owner</code> and <code>OptOutListNames</code> parameters can't be used at the same time.</p>
     #   @return [String]
     class DescribeOptOutListsRequest < Struct.new(
+      nil,
       :opt_out_list_names,
       :next_token,
       :max_results,
@@ -1592,6 +1670,7 @@ module Aws::PinpointSMSVoiceV2
     #   <p>The token to be used for the next set of paginated results. If this field is empty then there are no more results.</p>
     #   @return [String]
     class DescribeOptOutListsResult < Struct.new(
+      nil,
       :opt_out_lists,
       :next_token,
       keyword_init: true
@@ -1615,6 +1694,7 @@ module Aws::PinpointSMSVoiceV2
     #   <p>The maximum number of results to return per each request.</p>
     #   @return [Integer]
     class DescribeOptedOutNumbersRequest < Struct.new(
+      nil,
       :opt_out_list_name,
       :opted_out_numbers,
       :filters,
@@ -1638,6 +1718,7 @@ module Aws::PinpointSMSVoiceV2
     #   <p>The token to be used for the next set of paginated results. If this field is empty then there are no more results.</p>
     #   @return [String]
     class DescribeOptedOutNumbersResult < Struct.new(
+      nil,
       :opt_out_list_arn,
       :opt_out_list_name,
       :opted_out_numbers,
@@ -1663,6 +1744,7 @@ module Aws::PinpointSMSVoiceV2
     #   <p>Use <code>SELF</code> to filter the list of phone numbers to ones your account owns or use <code>SHARED</code> to filter on phone numbers shared with your account. The <code>Owner</code> and <code>PhoneNumberIds</code> parameters can't be used at the same time.</p>
     #   @return [String]
     class DescribePhoneNumbersRequest < Struct.new(
+      nil,
       :phone_number_ids,
       :filters,
       :next_token,
@@ -1680,6 +1762,7 @@ module Aws::PinpointSMSVoiceV2
     #   <p>The token to be used for the next set of paginated results. If this field is empty then there are no more results.</p>
     #   @return [String]
     class DescribePhoneNumbersResult < Struct.new(
+      nil,
       :phone_numbers,
       :next_token,
       keyword_init: true
@@ -1703,6 +1786,7 @@ module Aws::PinpointSMSVoiceV2
     #   <p>Use <code>SELF</code> to filter the list of Pools to ones your account owns or use <code>SHARED</code> to filter on Pools shared with your account. The <code>Owner</code> and <code>PoolIds</code> parameters can't be used at the same time.</p>
     #   @return [String]
     class DescribePoolsRequest < Struct.new(
+      nil,
       :pool_ids,
       :filters,
       :next_token,
@@ -1720,6 +1804,7 @@ module Aws::PinpointSMSVoiceV2
     #   <p>The token to be used for the next set of paginated results. If this field is empty then there are no more results.</p>
     #   @return [String]
     class DescribePoolsResult < Struct.new(
+      nil,
       :pools,
       :next_token,
       keyword_init: true
@@ -1740,6 +1825,7 @@ module Aws::PinpointSMSVoiceV2
     #   <p>The maximum number of results to return per each request.</p>
     #   @return [Integer]
     class DescribeProtectConfigurationsRequest < Struct.new(
+      nil,
       :protect_configuration_ids,
       :filters,
       :next_token,
@@ -1756,6 +1842,7 @@ module Aws::PinpointSMSVoiceV2
     #   <p>The token to be used for the next set of paginated results. You don't need to supply a value for this field in the initial request.</p>
     #   @return [String]
     class DescribeProtectConfigurationsResult < Struct.new(
+      nil,
       :protect_configurations,
       :next_token,
       keyword_init: true
@@ -1776,6 +1863,7 @@ module Aws::PinpointSMSVoiceV2
     #   <p>The maximum number of results to return per each request.</p>
     #   @return [Integer]
     class DescribeRegistrationAttachmentsRequest < Struct.new(
+      nil,
       :registration_attachment_ids,
       :filters,
       :next_token,
@@ -1792,6 +1880,7 @@ module Aws::PinpointSMSVoiceV2
     #   <p>The token to be used for the next set of paginated results. You don't need to supply a value for this field in the initial request.</p>
     #   @return [String]
     class DescribeRegistrationAttachmentsResult < Struct.new(
+      nil,
       :registration_attachments,
       :next_token,
       keyword_init: true
@@ -1815,6 +1904,7 @@ module Aws::PinpointSMSVoiceV2
     #   <p>The maximum number of results to return per each request.</p>
     #   @return [Integer]
     class DescribeRegistrationFieldDefinitionsRequest < Struct.new(
+      nil,
       :registration_type,
       :section_path,
       :field_paths,
@@ -1835,6 +1925,7 @@ module Aws::PinpointSMSVoiceV2
     #   <p>The token to be used for the next set of paginated results. You don't need to supply a value for this field in the initial request.</p>
     #   @return [String]
     class DescribeRegistrationFieldDefinitionsResult < Struct.new(
+      nil,
       :registration_type,
       :registration_field_definitions,
       :next_token,
@@ -1862,6 +1953,7 @@ module Aws::PinpointSMSVoiceV2
     #   <p>The maximum number of results to return per each request.</p>
     #   @return [Integer]
     class DescribeRegistrationFieldValuesRequest < Struct.new(
+      nil,
       :registration_id,
       :version_number,
       :section_path,
@@ -1889,6 +1981,7 @@ module Aws::PinpointSMSVoiceV2
     #   <p>The token to be used for the next set of paginated results. You don't need to supply a value for this field in the initial request.</p>
     #   @return [String]
     class DescribeRegistrationFieldValuesResult < Struct.new(
+      nil,
       :registration_arn,
       :registration_id,
       :version_number,
@@ -1912,6 +2005,7 @@ module Aws::PinpointSMSVoiceV2
     #   <p>The maximum number of results to return per each request.</p>
     #   @return [Integer]
     class DescribeRegistrationSectionDefinitionsRequest < Struct.new(
+      nil,
       :registration_type,
       :section_paths,
       :next_token,
@@ -1931,6 +2025,7 @@ module Aws::PinpointSMSVoiceV2
     #   <p>The token to be used for the next set of paginated results. You don't need to supply a value for this field in the initial request.</p>
     #   @return [String]
     class DescribeRegistrationSectionDefinitionsResult < Struct.new(
+      nil,
       :registration_type,
       :registration_section_definitions,
       :next_token,
@@ -1952,6 +2047,7 @@ module Aws::PinpointSMSVoiceV2
     #   <p>The maximum number of results to return per each request.</p>
     #   @return [Integer]
     class DescribeRegistrationTypeDefinitionsRequest < Struct.new(
+      nil,
       :registration_types,
       :filters,
       :next_token,
@@ -1968,6 +2064,7 @@ module Aws::PinpointSMSVoiceV2
     #   <p>The token to be used for the next set of paginated results. You don't need to supply a value for this field in the initial request.</p>
     #   @return [String]
     class DescribeRegistrationTypeDefinitionsResult < Struct.new(
+      nil,
       :registration_type_definitions,
       :next_token,
       keyword_init: true
@@ -1991,6 +2088,7 @@ module Aws::PinpointSMSVoiceV2
     #   <p>The maximum number of results to return per each request.</p>
     #   @return [Integer]
     class DescribeRegistrationVersionsRequest < Struct.new(
+      nil,
       :registration_id,
       :version_numbers,
       :filters,
@@ -2014,6 +2112,7 @@ module Aws::PinpointSMSVoiceV2
     #   <p>The token to be used for the next set of paginated results. You don't need to supply a value for this field in the initial request.</p>
     #   @return [String]
     class DescribeRegistrationVersionsResult < Struct.new(
+      nil,
       :registration_arn,
       :registration_id,
       :registration_versions,
@@ -2036,6 +2135,7 @@ module Aws::PinpointSMSVoiceV2
     #   <p>The maximum number of results to return per each request.</p>
     #   @return [Integer]
     class DescribeRegistrationsRequest < Struct.new(
+      nil,
       :registration_ids,
       :filters,
       :next_token,
@@ -2052,6 +2152,7 @@ module Aws::PinpointSMSVoiceV2
     #   <p>The token to be used for the next set of paginated results. You don't need to supply a value for this field in the initial request.</p>
     #   @return [String]
     class DescribeRegistrationsResult < Struct.new(
+      nil,
       :registrations,
       :next_token,
       keyword_init: true
@@ -2075,6 +2176,7 @@ module Aws::PinpointSMSVoiceV2
     #   <p>Use <code>SELF</code> to filter the list of Sender Ids to ones your account owns or use <code>SHARED</code> to filter on Sender Ids shared with your account. The <code>Owner</code> and <code>SenderIds</code> parameters can't be used at the same time. </p>
     #   @return [String]
     class DescribeSenderIdsRequest < Struct.new(
+      nil,
       :sender_ids,
       :filters,
       :next_token,
@@ -2092,6 +2194,7 @@ module Aws::PinpointSMSVoiceV2
     #   <p>The token to be used for the next set of paginated results. If this field is empty then there are no more results.</p>
     #   @return [String]
     class DescribeSenderIdsResult < Struct.new(
+      nil,
       :sender_ids,
       :next_token,
       keyword_init: true
@@ -2106,6 +2209,7 @@ module Aws::PinpointSMSVoiceV2
     #   <p>The maximum number of results to return per each request.</p>
     #   @return [Integer]
     class DescribeSpendLimitsRequest < Struct.new(
+      nil,
       :next_token,
       :max_results,
       keyword_init: true
@@ -2120,6 +2224,7 @@ module Aws::PinpointSMSVoiceV2
     #   <p>The token to be used for the next set of paginated results. If this field is empty then there are no more results.</p>
     #   @return [String]
     class DescribeSpendLimitsResult < Struct.new(
+      nil,
       :spend_limits,
       :next_token,
       keyword_init: true
@@ -2143,6 +2248,7 @@ module Aws::PinpointSMSVoiceV2
     #   <p>The maximum number of results to return per each request.</p>
     #   @return [Integer]
     class DescribeVerifiedDestinationNumbersRequest < Struct.new(
+      nil,
       :verified_destination_number_ids,
       :destination_phone_numbers,
       :filters,
@@ -2160,6 +2266,7 @@ module Aws::PinpointSMSVoiceV2
     #   <p>The token to be used for the next set of paginated results. You don't need to supply a value for this field in the initial request.</p>
     #   @return [String]
     class DescribeVerifiedDestinationNumbersResult < Struct.new(
+      nil,
       :verified_destination_numbers,
       :next_token,
       keyword_init: true
@@ -2180,6 +2287,7 @@ module Aws::PinpointSMSVoiceV2
     #   <p>Unique, case-sensitive identifier you provide to ensure the idempotency of the request. If you don't specify a client token, a randomly generated token is used for the request to ensure idempotency.</p>
     #   @return [String]
     class DisassociateOriginationIdentityRequest < Struct.new(
+      nil,
       :pool_id,
       :origination_identity,
       :iso_country_code,
@@ -2205,6 +2313,7 @@ module Aws::PinpointSMSVoiceV2
     #   <p>The two-character code, in ISO 3166-1 alpha-2 format, for the country or region.</p>
     #   @return [String]
     class DisassociateOriginationIdentityResult < Struct.new(
+      nil,
       :pool_arn,
       :pool_id,
       :origination_identity_arn,
@@ -2222,6 +2331,7 @@ module Aws::PinpointSMSVoiceV2
     #   <p>The name of the ConfigurationSet.</p>
     #   @return [String]
     class DisassociateProtectConfigurationRequest < Struct.new(
+      nil,
       :protect_configuration_id,
       :configuration_set_name,
       keyword_init: true
@@ -2242,6 +2352,7 @@ module Aws::PinpointSMSVoiceV2
     #   <p>The unique identifier for the protect configuration.</p>
     #   @return [String]
     class DisassociateProtectConfigurationResult < Struct.new(
+      nil,
       :configuration_set_arn,
       :configuration_set_name,
       :protect_configuration_arn,
@@ -2255,6 +2366,7 @@ module Aws::PinpointSMSVoiceV2
     #   <p>The unique identifier for the registration.</p>
     #   @return [String]
     class DiscardRegistrationVersionRequest < Struct.new(
+      nil,
       :registration_id,
       keyword_init: true
     )
@@ -2277,6 +2389,7 @@ module Aws::PinpointSMSVoiceV2
     #   <p>The <b>RegistrationVersionStatusHistory</b> object contains the time stamps for when the reservations status changes.</p>
     #   @return [Types::RegistrationVersionStatusHistory]
     class DiscardRegistrationVersionResult < Struct.new(
+      nil,
       :registration_arn,
       :registration_id,
       :version_number,
@@ -2307,6 +2420,7 @@ module Aws::PinpointSMSVoiceV2
     #   <p>An object that contains information about an event destination that sends logging events to Amazon SNS.</p>
     #   @return [Types::SnsDestination]
     class EventDestination < Struct.new(
+      nil,
       :event_destination_name,
       :enabled,
       :matching_event_types,
@@ -2325,6 +2439,7 @@ module Aws::PinpointSMSVoiceV2
     #   <p>The capability type to return the CountryRuleSet for. Valid values are <code>SMS</code>, <code>VOICE</code>, or <code>MMS</code>.</p>
     #   @return [String]
     class GetProtectConfigurationCountryRuleSetRequest < Struct.new(
+      nil,
       :protect_configuration_id,
       :number_capability,
       keyword_init: true
@@ -2345,6 +2460,7 @@ module Aws::PinpointSMSVoiceV2
     #   <p>A map of ProtectConfigurationCountryRuleSetInformation objects that contain the details for the requested NumberCapability. The Key is the two-letter ISO country code. For a list of supported ISO country codes, see <a href="https://docs.aws.amazon.com/sms-voice/latest/userguide/phone-numbers-sms-by-country.html">Supported countries and regions (SMS channel)</a> in the AWS End User Messaging SMS User Guide.</p>
     #   @return [Hash<String, Types::ProtectConfigurationCountryRuleSetInformation>]
     class GetProtectConfigurationCountryRuleSetResult < Struct.new(
+      nil,
       :protect_configuration_arn,
       :protect_configuration_id,
       :number_capability,
@@ -2358,6 +2474,7 @@ module Aws::PinpointSMSVoiceV2
     #   <p>The Amazon Resource Name (ARN) of the AWS End User Messaging SMS and Voice resource attached to the resource-based policy.</p>
     #   @return [String]
     class GetResourcePolicyRequest < Struct.new(
+      nil,
       :resource_arn,
       keyword_init: true
     )
@@ -2374,6 +2491,7 @@ module Aws::PinpointSMSVoiceV2
     #   <p>The time when the resource-based policy was created, in <a href="https://www.epochconverter.com/">UNIX epoch time</a> format.</p>
     #   @return [Time]
     class GetResourcePolicyResult < Struct.new(
+      nil,
       :resource_arn,
       :policy,
       :created_timestamp,
@@ -2389,6 +2507,7 @@ module Aws::PinpointSMSVoiceV2
     #   <p>The unique identifier of the request.</p>
     #   @return [String]
     class InternalServerException < Struct.new(
+      nil,
       :message,
       :request_id,
       keyword_init: true
@@ -2404,6 +2523,7 @@ module Aws::PinpointSMSVoiceV2
     #   <p>An array values to filter for.</p>
     #   @return [Array<String>]
     class KeywordFilter < Struct.new(
+      nil,
       :name,
       :values,
       keyword_init: true
@@ -2422,6 +2542,7 @@ module Aws::PinpointSMSVoiceV2
     #   <p>The action to perform for the keyword.</p>
     #   @return [String]
     class KeywordInformation < Struct.new(
+      nil,
       :keyword,
       :keyword_message,
       :keyword_action,
@@ -2438,6 +2559,7 @@ module Aws::PinpointSMSVoiceV2
     #   <p>The Amazon Resource Name (ARN) of the delivery stream.</p>
     #   @return [String]
     class KinesisFirehoseDestination < Struct.new(
+      nil,
       :iam_role_arn,
       :delivery_stream_arn,
       keyword_init: true
@@ -2458,6 +2580,7 @@ module Aws::PinpointSMSVoiceV2
     #   <p>The maximum number of results to return per each request.</p>
     #   @return [Integer]
     class ListPoolOriginationIdentitiesRequest < Struct.new(
+      nil,
       :pool_id,
       :filters,
       :next_token,
@@ -2480,6 +2603,7 @@ module Aws::PinpointSMSVoiceV2
     #   <p>The token to be used for the next set of paginated results. If this field is empty then there are no more results.</p>
     #   @return [String]
     class ListPoolOriginationIdentitiesResult < Struct.new(
+      nil,
       :pool_arn,
       :pool_id,
       :origination_identities,
@@ -2502,6 +2626,7 @@ module Aws::PinpointSMSVoiceV2
     #   <p>The maximum number of results to return per each request.</p>
     #   @return [Integer]
     class ListProtectConfigurationRuleSetNumberOverridesRequest < Struct.new(
+      nil,
       :protect_configuration_id,
       :filters,
       :next_token,
@@ -2524,6 +2649,7 @@ module Aws::PinpointSMSVoiceV2
     #   <p>The token to be used for the next set of paginated results. You don't need to supply a value for this field in the initial request.</p>
     #   @return [String]
     class ListProtectConfigurationRuleSetNumberOverridesResult < Struct.new(
+      nil,
       :protect_configuration_arn,
       :protect_configuration_id,
       :rule_set_number_overrides,
@@ -2546,6 +2672,7 @@ module Aws::PinpointSMSVoiceV2
     #   <p>The maximum number of results to return per each request.</p>
     #   @return [Integer]
     class ListRegistrationAssociationsRequest < Struct.new(
+      nil,
       :registration_id,
       :filters,
       :next_token,
@@ -2571,6 +2698,7 @@ module Aws::PinpointSMSVoiceV2
     #   <p>The token to be used for the next set of paginated results. You don't need to supply a value for this field in the initial request.</p>
     #   @return [String]
     class ListRegistrationAssociationsResult < Struct.new(
+      nil,
       :registration_arn,
       :registration_id,
       :registration_type,
@@ -2585,6 +2713,7 @@ module Aws::PinpointSMSVoiceV2
     #   <p>The Amazon Resource Name (ARN) of the resource to query for.</p>
     #   @return [String]
     class ListTagsForResourceRequest < Struct.new(
+      nil,
       :resource_arn,
       keyword_init: true
     )
@@ -2598,6 +2727,7 @@ module Aws::PinpointSMSVoiceV2
     #   <p>An array of key and value pair tags that are associated with the resource.</p>
     #   @return [Array<Types::Tag>]
     class ListTagsForResourceResult < Struct.new(
+      nil,
       :resource_arn,
       :tags,
       keyword_init: true
@@ -2616,6 +2746,7 @@ module Aws::PinpointSMSVoiceV2
     #   <p>The time when the OutOutList was created, in <a href="https://www.epochconverter.com/">UNIX epoch time</a> format.</p>
     #   @return [Time]
     class OptOutListInformation < Struct.new(
+      nil,
       :opt_out_list_arn,
       :opt_out_list_name,
       :created_timestamp,
@@ -2632,6 +2763,7 @@ module Aws::PinpointSMSVoiceV2
     #   <p>An array of values to filter for.</p>
     #   @return [Array<String>]
     class OptedOutFilter < Struct.new(
+      nil,
       :name,
       :values,
       keyword_init: true
@@ -2650,6 +2782,7 @@ module Aws::PinpointSMSVoiceV2
     #   <p>This is set to true if it was the end recipient that opted out.</p>
     #   @return [Boolean]
     class OptedOutNumberInformation < Struct.new(
+      nil,
       :opted_out_number,
       :opted_out_timestamp,
       :end_user_opted_out,
@@ -2680,6 +2813,7 @@ module Aws::PinpointSMSVoiceV2
     #   <p>The phone number in E.164 format.</p>
     #   @return [String]
     class OriginationIdentityMetadata < Struct.new(
+      nil,
       :origination_identity_arn,
       :origination_identity,
       :iso_country_code,
@@ -2698,6 +2832,7 @@ module Aws::PinpointSMSVoiceV2
     #   <p>An array values to filter for.</p>
     #   @return [Array<String>]
     class PhoneNumberFilter < Struct.new(
+      nil,
       :name,
       :values,
       keyword_init: true
@@ -2764,6 +2899,7 @@ module Aws::PinpointSMSVoiceV2
     #   <p>The time when the phone number was created, in <a href="https://www.epochconverter.com/">UNIX epoch time</a> format.</p>
     #   @return [Time]
     class PhoneNumberInformation < Struct.new(
+      nil,
       :phone_number_arn,
       :phone_number_id,
       :phone_number,
@@ -2804,6 +2940,7 @@ module Aws::PinpointSMSVoiceV2
     #   <p>An array values to filter for.</p>
     #   @return [Array<String>]
     class PoolFilter < Struct.new(
+      nil,
       :name,
       :values,
       keyword_init: true
@@ -2849,6 +2986,7 @@ module Aws::PinpointSMSVoiceV2
     #   <p>The time when the pool was created, in <a href="https://www.epochconverter.com/">UNIX epoch time</a> format.</p>
     #   @return [Time]
     class PoolInformation < Struct.new(
+      nil,
       :pool_arn,
       :pool_id,
       :status,
@@ -2882,6 +3020,7 @@ module Aws::PinpointSMSVoiceV2
     #   <p>An array values to filter for.</p>
     #   @return [Array<String>]
     class PoolOriginationIdentitiesFilter < Struct.new(
+      nil,
       :name,
       :values,
       keyword_init: true
@@ -2894,6 +3033,7 @@ module Aws::PinpointSMSVoiceV2
     #   <p>The types of protection that can be used.</p>
     #   @return [String]
     class ProtectConfigurationCountryRuleSetInformation < Struct.new(
+      nil,
       :protect_status,
       keyword_init: true
     )
@@ -2908,6 +3048,7 @@ module Aws::PinpointSMSVoiceV2
     #   <p>An array of values to filter for.</p>
     #   @return [Array<String>]
     class ProtectConfigurationFilter < Struct.new(
+      nil,
       :name,
       :values,
       keyword_init: true
@@ -2932,6 +3073,7 @@ module Aws::PinpointSMSVoiceV2
     #   <p>The status of deletion protection for the protect configuration. When set to true deletion protection is enabled. By default this is set to false. </p>
     #   @return [Boolean]
     class ProtectConfigurationInformation < Struct.new(
+      nil,
       :protect_configuration_arn,
       :protect_configuration_id,
       :created_timestamp,
@@ -2965,6 +3107,7 @@ module Aws::PinpointSMSVoiceV2
     #   <p>The time the rule will expire at. If <code>ExpirationTimestamp</code> is not set then the rule will not expire.</p>
     #   @return [Time]
     class ProtectConfigurationRuleSetNumberOverride < Struct.new(
+      nil,
       :destination_phone_number,
       :created_timestamp,
       :action,
@@ -2983,6 +3126,7 @@ module Aws::PinpointSMSVoiceV2
     #   <p>An array values to filter for.</p>
     #   @return [Array<String>]
     class ProtectConfigurationRuleSetNumberOverrideFilterItem < Struct.new(
+      nil,
       :name,
       :values,
       keyword_init: true
@@ -3003,6 +3147,7 @@ module Aws::PinpointSMSVoiceV2
     #   <p>The action to perform for the new keyword when it is received.</p> <ul> <li> <p>AUTOMATIC_RESPONSE: A message is sent to the recipient.</p> </li> <li> <p>OPT_OUT: Keeps the recipient from receiving future messages.</p> </li> <li> <p>OPT_IN: The recipient wants to receive future messages.</p> </li> </ul>
     #   @return [String]
     class PutKeywordRequest < Struct.new(
+      nil,
       :origination_identity,
       :keyword,
       :keyword_message,
@@ -3028,6 +3173,7 @@ module Aws::PinpointSMSVoiceV2
     #   <p>The action to perform when the keyword is used.</p>
     #   @return [String]
     class PutKeywordResult < Struct.new(
+      nil,
       :origination_identity_arn,
       :origination_identity,
       :keyword,
@@ -3045,6 +3191,7 @@ module Aws::PinpointSMSVoiceV2
     #   <p>Set the message feedback to be either <code>RECEIVED</code> or <code>FAILED</code>.</p>
     #   @return [String]
     class PutMessageFeedbackRequest < Struct.new(
+      nil,
       :message_id,
       :message_feedback_status,
       keyword_init: true
@@ -3059,6 +3206,7 @@ module Aws::PinpointSMSVoiceV2
     #   <p>The current status of the message.</p>
     #   @return [String]
     class PutMessageFeedbackResult < Struct.new(
+      nil,
       :message_id,
       :message_feedback_status,
       keyword_init: true
@@ -3073,6 +3221,7 @@ module Aws::PinpointSMSVoiceV2
     #   <p>The phone number to add to the OptOutList in E.164 format.</p>
     #   @return [String]
     class PutOptedOutNumberRequest < Struct.new(
+      nil,
       :opt_out_list_name,
       :opted_out_number,
       keyword_init: true
@@ -3096,6 +3245,7 @@ module Aws::PinpointSMSVoiceV2
     #   <p>This is true if it was the end user who requested their phone number be removed. </p>
     #   @return [Boolean]
     class PutOptedOutNumberResult < Struct.new(
+      nil,
       :opt_out_list_arn,
       :opt_out_list_name,
       :opted_out_number,
@@ -3127,6 +3277,7 @@ module Aws::PinpointSMSVoiceV2
     #   <p>The time the rule will expire at. If <code>ExpirationTimestamp</code> is not set then the rule does not expire.</p>
     #   @return [Time]
     class PutProtectConfigurationRuleSetNumberOverrideRequest < Struct.new(
+      nil,
       :client_token,
       :protect_configuration_id,
       :destination_phone_number,
@@ -3159,6 +3310,7 @@ module Aws::PinpointSMSVoiceV2
     #   <p>The time the rule will expire at.</p>
     #   @return [Time]
     class PutProtectConfigurationRuleSetNumberOverrideResult < Struct.new(
+      nil,
       :protect_configuration_arn,
       :protect_configuration_id,
       :destination_phone_number,
@@ -3187,6 +3339,7 @@ module Aws::PinpointSMSVoiceV2
     #   <p>The unique identifier for the registration attachment.</p>
     #   @return [String]
     class PutRegistrationFieldValueRequest < Struct.new(
+      nil,
       :registration_id,
       :field_path,
       :select_choices,
@@ -3219,6 +3372,7 @@ module Aws::PinpointSMSVoiceV2
     #   <p>The unique identifier for the registration attachment.</p>
     #   @return [String]
     class PutRegistrationFieldValueResult < Struct.new(
+      nil,
       :registration_arn,
       :registration_id,
       :version_number,
@@ -3238,6 +3392,7 @@ module Aws::PinpointSMSVoiceV2
     #   <p>The JSON formatted resource-based policy to attach.</p>
     #   @return [String]
     class PutResourcePolicyRequest < Struct.new(
+      nil,
       :resource_arn,
       :policy,
       keyword_init: true
@@ -3255,6 +3410,7 @@ module Aws::PinpointSMSVoiceV2
     #   <p>The time when the resource-based policy was created, in <a href="https://www.epochconverter.com/">UNIX epoch time</a> format.</p>
     #   @return [Time]
     class PutResourcePolicyResult < Struct.new(
+      nil,
       :resource_arn,
       :policy,
       :created_timestamp,
@@ -3271,6 +3427,7 @@ module Aws::PinpointSMSVoiceV2
     #   <p>An array of values to filter for.</p>
     #   @return [Array<String>]
     class RegistrationAssociationFilter < Struct.new(
+      nil,
       :name,
       :values,
       keyword_init: true
@@ -3295,6 +3452,7 @@ module Aws::PinpointSMSVoiceV2
     #   <p>The phone number associated with the registration in E.164 format.</p>
     #   @return [String]
     class RegistrationAssociationMetadata < Struct.new(
+      nil,
       :resource_arn,
       :resource_id,
       :resource_type,
@@ -3313,6 +3471,7 @@ module Aws::PinpointSMSVoiceV2
     #   <p>An array of values to filter on.</p>
     #   @return [Array<String>]
     class RegistrationAttachmentFilter < Struct.new(
+      nil,
       :name,
       :values,
       keyword_init: true
@@ -3337,6 +3496,7 @@ module Aws::PinpointSMSVoiceV2
     #   <p>The time when the registration attachment was created, in <a href="https://www.epochconverter.com/">UNIX epoch time</a> format.</p>
     #   @return [Time]
     class RegistrationAttachmentsInformation < Struct.new(
+      nil,
       :registration_attachment_arn,
       :registration_attachment_id,
       :attachment_status,
@@ -3364,6 +3524,7 @@ module Aws::PinpointSMSVoiceV2
     #   <p>The link to the document.</p>
     #   @return [String]
     class RegistrationDeniedReasonInformation < Struct.new(
+      nil,
       :reason,
       :short_description,
       :long_description,
@@ -3397,6 +3558,7 @@ module Aws::PinpointSMSVoiceV2
     #   <p>An array of RegistrationFieldDisplayHints objects for the field.</p>
     #   @return [Types::RegistrationFieldDisplayHints]
     class RegistrationFieldDefinition < Struct.new(
+      nil,
       :section_path,
       :field_path,
       :field_type,
@@ -3435,6 +3597,7 @@ module Aws::PinpointSMSVoiceV2
     #   <p>Example text of what the value of a field should contain.</p>
     #   @return [String]
     class RegistrationFieldDisplayHints < Struct.new(
+      nil,
       :title,
       :short_description,
       :long_description,
@@ -3465,6 +3628,7 @@ module Aws::PinpointSMSVoiceV2
     #   <p>A description of why the registration was denied.</p>
     #   @return [String]
     class RegistrationFieldValueInformation < Struct.new(
+      nil,
       :field_path,
       :select_choices,
       :text_value,
@@ -3483,6 +3647,7 @@ module Aws::PinpointSMSVoiceV2
     #   <p>An array of values to filter on.</p>
     #   @return [Array<String>]
     class RegistrationFilter < Struct.new(
+      nil,
       :name,
       :values,
       keyword_init: true
@@ -3519,6 +3684,7 @@ module Aws::PinpointSMSVoiceV2
     #   <p>The time when the registration was created, in <a href="https://www.epochconverter.com/">UNIX epoch time</a> format.</p>
     #   @return [Time]
     class RegistrationInformation < Struct.new(
+      nil,
       :registration_arn,
       :registration_id,
       :registration_type,
@@ -3541,6 +3707,7 @@ module Aws::PinpointSMSVoiceV2
     #   <p>The path to the section of the registration.</p>
     #   @return [Types::RegistrationSectionDisplayHints]
     class RegistrationSectionDefinition < Struct.new(
+      nil,
       :section_path,
       :display_hints,
       keyword_init: true
@@ -3565,6 +3732,7 @@ module Aws::PinpointSMSVoiceV2
     #   <p>The link to the document the display hint is associated with.</p>
     #   @return [String]
     class RegistrationSectionDisplayHints < Struct.new(
+      nil,
       :title,
       :short_description,
       :long_description,
@@ -3586,6 +3754,7 @@ module Aws::PinpointSMSVoiceV2
     #   <p>Provides help information on the registration.</p>
     #   @return [Types::RegistrationTypeDisplayHints]
     class RegistrationTypeDefinition < Struct.new(
+      nil,
       :registration_type,
       :supported_associations,
       :display_hints,
@@ -3611,6 +3780,7 @@ module Aws::PinpointSMSVoiceV2
     #   <p>The link to the document the display hint is associated with.</p>
     #   @return [String]
     class RegistrationTypeDisplayHints < Struct.new(
+      nil,
       :title,
       :short_description,
       :long_description,
@@ -3629,6 +3799,7 @@ module Aws::PinpointSMSVoiceV2
     #   <p>An array of values to filter on.</p>
     #   @return [Array<String>]
     class RegistrationTypeFilter < Struct.new(
+      nil,
       :name,
       :values,
       keyword_init: true
@@ -3644,6 +3815,7 @@ module Aws::PinpointSMSVoiceV2
     #   <p>An array of values to filter on.</p>
     #   @return [Array<String>]
     class RegistrationVersionFilter < Struct.new(
+      nil,
       :name,
       :values,
       keyword_init: true
@@ -3665,6 +3837,7 @@ module Aws::PinpointSMSVoiceV2
     #   <p>An array of RegistrationDeniedReasonInformation objects. </p>
     #   @return [Array<Types::RegistrationDeniedReasonInformation>]
     class RegistrationVersionInformation < Struct.new(
+      nil,
       :version_number,
       :registration_version_status,
       :registration_version_status_history,
@@ -3703,6 +3876,7 @@ module Aws::PinpointSMSVoiceV2
     #   <p>The time when the registration was in the archived state, in <a href="https://www.epochconverter.com/">UNIX epoch time</a> format.</p>
     #   @return [Time]
     class RegistrationVersionStatusHistory < Struct.new(
+      nil,
       :draft_timestamp,
       :submitted_timestamp,
       :reviewing_timestamp,
@@ -3721,6 +3895,7 @@ module Aws::PinpointSMSVoiceV2
     #   <p>The PhoneNumberId or PhoneNumberArn of the phone number to release. You can use <a>DescribePhoneNumbers</a> to get the values for PhoneNumberId and PhoneNumberArn.</p> <important> <p>If you are using a shared AWS End User Messaging SMS and Voice resource then you must use the full Amazon Resource Name(ARN).</p> </important>
     #   @return [String]
     class ReleasePhoneNumberRequest < Struct.new(
+      nil,
       :phone_number_id,
       keyword_init: true
     )
@@ -3776,6 +3951,7 @@ module Aws::PinpointSMSVoiceV2
     #   <p>The time when the phone number was created, in <a href="https://www.epochconverter.com/">UNIX epoch time</a> format.</p>
     #   @return [Time]
     class ReleasePhoneNumberResult < Struct.new(
+      nil,
       :phone_number_arn,
       :phone_number_id,
       :phone_number,
@@ -3810,6 +3986,7 @@ module Aws::PinpointSMSVoiceV2
     #   <p>The two-character code, in ISO 3166-1 alpha-2 format, for the country or region.</p>
     #   @return [String]
     class ReleaseSenderIdRequest < Struct.new(
+      nil,
       :sender_id,
       :iso_country_code,
       keyword_init: true
@@ -3839,6 +4016,7 @@ module Aws::PinpointSMSVoiceV2
     #   <p>The unique identifier for the registration.</p>
     #   @return [String]
     class ReleaseSenderIdResult < Struct.new(
+      nil,
       :sender_id_arn,
       :sender_id,
       :iso_country_code,
@@ -3890,6 +4068,7 @@ module Aws::PinpointSMSVoiceV2
     #   <p>Unique, case-sensitive identifier that you provide to ensure the idempotency of the request. If you don't specify a client token, a randomly generated token is used for the request to ensure idempotency.</p>
     #   @return [String]
     class RequestPhoneNumberRequest < Struct.new(
+      nil,
       :iso_country_code,
       :message_type,
       :number_capabilities,
@@ -3967,6 +4146,7 @@ module Aws::PinpointSMSVoiceV2
     #   <p>The time when the phone number was created, in <a href="https://www.epochconverter.com/">UNIX epoch time</a> format.</p>
     #   @return [Time]
     class RequestPhoneNumberResult < Struct.new(
+      nil,
       :phone_number_arn,
       :phone_number_id,
       :phone_number,
@@ -4019,6 +4199,7 @@ module Aws::PinpointSMSVoiceV2
     #   <p>Unique, case-sensitive identifier that you provide to ensure the idempotency of the request. If you don't specify a client token, a randomly generated token is used for the request to ensure idempotency.</p>
     #   @return [String]
     class RequestSenderIdRequest < Struct.new(
+      nil,
       :sender_id,
       :iso_country_code,
       :message_types,
@@ -4055,6 +4236,7 @@ module Aws::PinpointSMSVoiceV2
     #   <p>An array of tags (key and value pairs) to associate with the sender ID.</p>
     #   @return [Array<Types::Tag>]
     class RequestSenderIdResult < Struct.new(
+      nil,
       :sender_id_arn,
       :sender_id,
       :iso_country_code,
@@ -4084,6 +4266,7 @@ module Aws::PinpointSMSVoiceV2
     #   <p>The unique identifier of the resource.</p>
     #   @return [String]
     class ResourceNotFoundException < Struct.new(
+      nil,
       :message,
       :resource_type,
       :resource_id,
@@ -4103,6 +4286,7 @@ module Aws::PinpointSMSVoiceV2
     #   <p>A description of the option meaning.</p>
     #   @return [String]
     class SelectOptionDescription < Struct.new(
+      nil,
       :option,
       :title,
       :description,
@@ -4122,6 +4306,7 @@ module Aws::PinpointSMSVoiceV2
     #   <p>An array of strings for the possible selection options. </p>
     #   @return [Array<String>]
     class SelectValidation < Struct.new(
+      nil,
       :min_choices,
       :max_choices,
       :options,
@@ -4152,6 +4337,7 @@ module Aws::PinpointSMSVoiceV2
     #   <p>This field is used for any country-specific registration requirements. Currently, this setting is only used when you send messages to recipients in India using a sender ID. For more information see <a href="https://docs.aws.amazon.com/pinpoint/latest/userguide/channels-sms-senderid-india.html">Special requirements for sending SMS messages to recipients in India</a>. </p>
     #   @return [Hash<String, String>]
     class SendDestinationNumberVerificationCodeRequest < Struct.new(
+      nil,
       :verified_destination_number_id,
       :verification_channel,
       :language_code,
@@ -4168,6 +4354,7 @@ module Aws::PinpointSMSVoiceV2
     #   <p>The unique identifier for the message.</p>
     #   @return [String]
     class SendDestinationNumberVerificationCodeResult < Struct.new(
+      nil,
       :message_id,
       keyword_init: true
     )
@@ -4208,6 +4395,7 @@ module Aws::PinpointSMSVoiceV2
     #   <p>Set to true to enable message feedback for the message. When a user receives the message you need to update the message status using <a>PutMessageFeedback</a>.</p>
     #   @return [Boolean]
     class SendMediaMessageRequest < Struct.new(
+      nil,
       :destination_phone_number,
       :origination_identity,
       :message_body,
@@ -4228,6 +4416,7 @@ module Aws::PinpointSMSVoiceV2
     #   <p>The unique identifier for the message.</p>
     #   @return [String]
     class SendMediaMessageResult < Struct.new(
+      nil,
       :message_id,
       keyword_init: true
     )
@@ -4274,6 +4463,7 @@ module Aws::PinpointSMSVoiceV2
     #   <p>Set to true to enable message feedback for the message. When a user receives the message you need to update the message status using <a>PutMessageFeedback</a>.</p>
     #   @return [Boolean]
     class SendTextMessageRequest < Struct.new(
+      nil,
       :destination_phone_number,
       :origination_identity,
       :message_body,
@@ -4296,6 +4486,7 @@ module Aws::PinpointSMSVoiceV2
     #   <p>The unique identifier for the message.</p>
     #   @return [String]
     class SendTextMessageResult < Struct.new(
+      nil,
       :message_id,
       keyword_init: true
     )
@@ -4339,6 +4530,7 @@ module Aws::PinpointSMSVoiceV2
     #   <p>Set to true to enable message feedback for the message. When a user receives the message you need to update the message status using <a>PutMessageFeedback</a>.</p>
     #   @return [Boolean]
     class SendVoiceMessageRequest < Struct.new(
+      nil,
       :destination_phone_number,
       :origination_identity,
       :message_body,
@@ -4360,6 +4552,7 @@ module Aws::PinpointSMSVoiceV2
     #   <p>The unique identifier for the message.</p>
     #   @return [String]
     class SendVoiceMessageResult < Struct.new(
+      nil,
       :message_id,
       keyword_init: true
     )
@@ -4374,6 +4567,7 @@ module Aws::PinpointSMSVoiceV2
     #   <p>The two-character code, in ISO 3166-1 alpha-2 format, for the country or region. </p>
     #   @return [String]
     class SenderIdAndCountry < Struct.new(
+      nil,
       :sender_id,
       :iso_country_code,
       keyword_init: true
@@ -4389,6 +4583,7 @@ module Aws::PinpointSMSVoiceV2
     #   <p>An array of values to filter for.</p>
     #   @return [Array<String>]
     class SenderIdFilter < Struct.new(
+      nil,
       :name,
       :values,
       keyword_init: true
@@ -4422,6 +4617,7 @@ module Aws::PinpointSMSVoiceV2
     #   <p>The unique identifier for the registration.</p>
     #   @return [String]
     class SenderIdInformation < Struct.new(
+      nil,
       :sender_id_arn,
       :sender_id,
       :iso_country_code,
@@ -4448,6 +4644,7 @@ module Aws::PinpointSMSVoiceV2
     #   <p>The reason for the exception.</p>
     #   @return [String]
     class ServiceQuotaExceededException < Struct.new(
+      nil,
       :message,
       :reason,
       keyword_init: true
@@ -4459,6 +4656,7 @@ module Aws::PinpointSMSVoiceV2
     #   <p>The unique identifier for the protect configuration.</p>
     #   @return [String]
     class SetAccountDefaultProtectConfigurationRequest < Struct.new(
+      nil,
       :protect_configuration_id,
       keyword_init: true
     )
@@ -4472,6 +4670,7 @@ module Aws::PinpointSMSVoiceV2
     #   <p>The unique identifier of the account default protect configuration.</p>
     #   @return [String]
     class SetAccountDefaultProtectConfigurationResult < Struct.new(
+      nil,
       :default_protect_configuration_arn,
       :default_protect_configuration_id,
       keyword_init: true
@@ -4486,6 +4685,7 @@ module Aws::PinpointSMSVoiceV2
     #   <p>Set to true to enable message feedback.</p>
     #   @return [Boolean]
     class SetDefaultMessageFeedbackEnabledRequest < Struct.new(
+      nil,
       :configuration_set_name,
       :message_feedback_enabled,
       keyword_init: true
@@ -4503,6 +4703,7 @@ module Aws::PinpointSMSVoiceV2
     #   <p>True if message feedback is enabled.</p>
     #   @return [Boolean]
     class SetDefaultMessageFeedbackEnabledResult < Struct.new(
+      nil,
       :configuration_set_arn,
       :configuration_set_name,
       :message_feedback_enabled,
@@ -4518,6 +4719,7 @@ module Aws::PinpointSMSVoiceV2
     #   <p>The type of message. Valid values are TRANSACTIONAL for messages that are critical or time-sensitive and PROMOTIONAL for messages that aren't critical or time-sensitive.</p>
     #   @return [String]
     class SetDefaultMessageTypeRequest < Struct.new(
+      nil,
       :configuration_set_name,
       :message_type,
       keyword_init: true
@@ -4535,6 +4737,7 @@ module Aws::PinpointSMSVoiceV2
     #   <p>The new default message type of the configuration set.</p>
     #   @return [String]
     class SetDefaultMessageTypeResult < Struct.new(
+      nil,
       :configuration_set_arn,
       :configuration_set_name,
       :message_type,
@@ -4550,6 +4753,7 @@ module Aws::PinpointSMSVoiceV2
     #   <p>The current sender ID for the configuration set. When sending a text message to a destination country which supports SenderIds, the default sender ID on the configuration set specified on <a>SendTextMessage</a> will be used if no dedicated origination phone numbers or registered SenderIds are available in your account, instead of a generic sender ID, such as 'NOTICE'.</p>
     #   @return [String]
     class SetDefaultSenderIdRequest < Struct.new(
+      nil,
       :configuration_set_name,
       :sender_id,
       keyword_init: true
@@ -4567,6 +4771,7 @@ module Aws::PinpointSMSVoiceV2
     #   <p>The default sender ID to set for the ConfigurationSet.</p>
     #   @return [String]
     class SetDefaultSenderIdResult < Struct.new(
+      nil,
       :configuration_set_arn,
       :configuration_set_name,
       :sender_id,
@@ -4579,6 +4784,7 @@ module Aws::PinpointSMSVoiceV2
     #   <p>The new monthly limit to enforce on text messages.</p>
     #   @return [Integer]
     class SetMediaMessageSpendLimitOverrideRequest < Struct.new(
+      nil,
       :monthly_limit,
       keyword_init: true
     )
@@ -4589,6 +4795,7 @@ module Aws::PinpointSMSVoiceV2
     #   <p>The current monthly limit to enforce on sending text messages.</p>
     #   @return [Integer]
     class SetMediaMessageSpendLimitOverrideResult < Struct.new(
+      nil,
       :monthly_limit,
       keyword_init: true
     )
@@ -4599,6 +4806,7 @@ module Aws::PinpointSMSVoiceV2
     #   <p>The new monthly limit to enforce on text messages.</p>
     #   @return [Integer]
     class SetTextMessageSpendLimitOverrideRequest < Struct.new(
+      nil,
       :monthly_limit,
       keyword_init: true
     )
@@ -4609,6 +4817,7 @@ module Aws::PinpointSMSVoiceV2
     #   <p>The current monthly limit to enforce on sending text messages.</p>
     #   @return [Integer]
     class SetTextMessageSpendLimitOverrideResult < Struct.new(
+      nil,
       :monthly_limit,
       keyword_init: true
     )
@@ -4619,6 +4828,7 @@ module Aws::PinpointSMSVoiceV2
     #   <p>The new monthly limit to enforce on voice messages.</p>
     #   @return [Integer]
     class SetVoiceMessageSpendLimitOverrideRequest < Struct.new(
+      nil,
       :monthly_limit,
       keyword_init: true
     )
@@ -4629,6 +4839,7 @@ module Aws::PinpointSMSVoiceV2
     #   <p>The current monthly limit to enforce on sending voice messages.</p>
     #   @return [Integer]
     class SetVoiceMessageSpendLimitOverrideResult < Struct.new(
+      nil,
       :monthly_limit,
       keyword_init: true
     )
@@ -4640,6 +4851,7 @@ module Aws::PinpointSMSVoiceV2
     #   <p>The Amazon Resource Name (ARN) of the Amazon SNS topic that you want to publish events to.</p>
     #   @return [String]
     class SnsDestination < Struct.new(
+      nil,
       :topic_arn,
       keyword_init: true
     )
@@ -4660,6 +4872,7 @@ module Aws::PinpointSMSVoiceV2
     #   <p>When set to <code>True</code>, the value that has been specified in the <code>EnforcedLimit</code> is used to determine the maximum amount in US dollars that can be spent to send messages each month, in US dollars.</p>
     #   @return [Boolean]
     class SpendLimit < Struct.new(
+      nil,
       :name,
       :enforced_limit,
       :max_limit,
@@ -4680,6 +4893,7 @@ module Aws::PinpointSMSVoiceV2
     #   <p>The unique identifier for the registration.</p>
     #   @return [String]
     class SubmitRegistrationVersionRequest < Struct.new(
+      nil,
       :registration_id,
       keyword_init: true
     )
@@ -4702,6 +4916,7 @@ module Aws::PinpointSMSVoiceV2
     #   <p>The <b>RegistrationVersionStatusHistory</b> object contains the time stamps for when the reservations status changes.</p>
     #   @return [Types::RegistrationVersionStatusHistory]
     class SubmitRegistrationVersionResult < Struct.new(
+      nil,
       :registration_arn,
       :registration_id,
       :version_number,
@@ -4726,6 +4941,7 @@ module Aws::PinpointSMSVoiceV2
     #   <p>The disassociation behavior.</p> <ul> <li> <p> <code>DISASSOCIATE_ALL_CLOSES_REGISTRATION</code> All origination identities must be disassociated from the registration before the registration can be closed.</p> </li> <li> <p> <code>DISASSOCIATE_ALL_ALLOWS_DELETE_REGISTRATION</code> All origination identities must be disassociated from the registration before the registration can be deleted.</p> </li> <li> <p> <code>DELETE_REGISTRATION_DISASSOCIATES</code> The registration can be deleted and all origination identities will be disasscoiated.</p> </li> </ul>
     #   @return [String]
     class SupportedAssociation < Struct.new(
+      nil,
       :resource_type,
       :iso_country_code,
       :association_behavior,
@@ -4743,6 +4959,7 @@ module Aws::PinpointSMSVoiceV2
     #   <p>The string value associated with the key of the tag.</p>
     #   @return [String]
     class Tag < Struct.new(
+      nil,
       :key,
       :value,
       keyword_init: true
@@ -4757,6 +4974,7 @@ module Aws::PinpointSMSVoiceV2
     #   <p>An array of key and value pair tags that are associated with the resource.</p>
     #   @return [Array<Types::Tag>]
     class TagResourceRequest < Struct.new(
+      nil,
       :resource_arn,
       :tags,
       keyword_init: true
@@ -4765,6 +4983,7 @@ module Aws::PinpointSMSVoiceV2
     end
 
     class TagResourceResult < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -4781,6 +5000,7 @@ module Aws::PinpointSMSVoiceV2
     #   <p>The regular expression used to validate the text field.</p>
     #   @return [String]
     class TextValidation < Struct.new(
+      nil,
       :min_length,
       :max_length,
       :pattern,
@@ -4793,6 +5013,7 @@ module Aws::PinpointSMSVoiceV2
     # @!attribute message
     #   @return [String]
     class ThrottlingException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -4806,6 +5027,7 @@ module Aws::PinpointSMSVoiceV2
     #   <p>An array of tag key values to unassociate with the resource.</p>
     #   @return [Array<String>]
     class UntagResourceRequest < Struct.new(
+      nil,
       :resource_arn,
       :tag_keys,
       keyword_init: true
@@ -4814,6 +5036,7 @@ module Aws::PinpointSMSVoiceV2
     end
 
     class UntagResourceResult < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -4841,6 +5064,7 @@ module Aws::PinpointSMSVoiceV2
     #   <p>An object that contains information about an event destination that sends data to Amazon SNS.</p>
     #   @return [Types::SnsDestination]
     class UpdateEventDestinationRequest < Struct.new(
+      nil,
       :configuration_set_name,
       :event_destination_name,
       :enabled,
@@ -4863,6 +5087,7 @@ module Aws::PinpointSMSVoiceV2
     #   <p>An EventDestination object containing the details of where events will be logged. </p>
     #   @return [Types::EventDestination]
     class UpdateEventDestinationResult < Struct.new(
+      nil,
       :configuration_set_arn,
       :configuration_set_name,
       :event_destination,
@@ -4896,6 +5121,7 @@ module Aws::PinpointSMSVoiceV2
     #   <p>By default this is set to false. When set to true the phone number can't be deleted. </p>
     #   @return [Boolean]
     class UpdatePhoneNumberRequest < Struct.new(
+      nil,
       :phone_number_id,
       :two_way_enabled,
       :two_way_channel_arn,
@@ -4964,6 +5190,7 @@ module Aws::PinpointSMSVoiceV2
     #   <p>The time when the phone number was created, in <a href="https://www.epochconverter.com/">UNIX epoch time</a> format.</p>
     #   @return [Time]
     class UpdatePhoneNumberResult < Struct.new(
+      nil,
       :phone_number_arn,
       :phone_number_id,
       :phone_number,
@@ -5020,6 +5247,7 @@ module Aws::PinpointSMSVoiceV2
     #   <p>When set to true the pool can't be deleted.</p>
     #   @return [Boolean]
     class UpdatePoolRequest < Struct.new(
+      nil,
       :pool_id,
       :two_way_enabled,
       :two_way_channel_arn,
@@ -5070,6 +5298,7 @@ module Aws::PinpointSMSVoiceV2
     #   <p>The time when the pool was created, in <a href="https://www.epochconverter.com/">UNIX epoch time</a> format.</p>
     #   @return [Time]
     class UpdatePoolResult < Struct.new(
+      nil,
       :pool_arn,
       :pool_id,
       :status,
@@ -5105,6 +5334,7 @@ module Aws::PinpointSMSVoiceV2
     #   <p>A map of ProtectConfigurationCountryRuleSetInformation objects that contain the details for the requested NumberCapability. The Key is the two-letter ISO country code. For a list of supported ISO country codes, see <a href="https://docs.aws.amazon.com/sms-voice/latest/userguide/phone-numbers-sms-by-country.html">Supported countries and regions (SMS channel)</a> in the AWS End User Messaging SMS User Guide.</p> <p>For example, to set the United States as allowed and Canada as blocked, the <code>CountryRuleSetUpdates</code> would be formatted as: <code>"CountryRuleSetUpdates": { "US" : { "ProtectStatus": "ALLOW" } "CA" : { "ProtectStatus": "BLOCK" } }</code> </p>
     #   @return [Hash<String, Types::ProtectConfigurationCountryRuleSetInformation>]
     class UpdateProtectConfigurationCountryRuleSetRequest < Struct.new(
+      nil,
       :protect_configuration_id,
       :number_capability,
       :country_rule_set_updates,
@@ -5126,6 +5356,7 @@ module Aws::PinpointSMSVoiceV2
     #   <p>An array of ProtectConfigurationCountryRuleSetInformation containing the rules for the NumberCapability.</p>
     #   @return [Hash<String, Types::ProtectConfigurationCountryRuleSetInformation>]
     class UpdateProtectConfigurationCountryRuleSetResult < Struct.new(
+      nil,
       :protect_configuration_arn,
       :protect_configuration_id,
       :number_capability,
@@ -5142,6 +5373,7 @@ module Aws::PinpointSMSVoiceV2
     #   <p>When set to true deletion protection is enabled. By default this is set to false. </p>
     #   @return [Boolean]
     class UpdateProtectConfigurationRequest < Struct.new(
+      nil,
       :protect_configuration_id,
       :deletion_protection_enabled,
       keyword_init: true
@@ -5165,6 +5397,7 @@ module Aws::PinpointSMSVoiceV2
     #   <p>The status of deletion protection for the protect configuration. When set to true deletion protection is enabled. By default this is set to false. </p>
     #   @return [Boolean]
     class UpdateProtectConfigurationResult < Struct.new(
+      nil,
       :protect_configuration_arn,
       :protect_configuration_id,
       :created_timestamp,
@@ -5191,6 +5424,7 @@ module Aws::PinpointSMSVoiceV2
     #   <p>By default this is set to false. When set to true the sender ID can't be deleted.</p>
     #   @return [Boolean]
     class UpdateSenderIdRequest < Struct.new(
+      nil,
       :sender_id,
       :iso_country_code,
       :deletion_protection_enabled,
@@ -5224,6 +5458,7 @@ module Aws::PinpointSMSVoiceV2
     #   <p>The unique identifier for the registration.</p>
     #   @return [String]
     class UpdateSenderIdResult < Struct.new(
+      nil,
       :sender_id_arn,
       :sender_id,
       :iso_country_code,
@@ -5253,6 +5488,7 @@ module Aws::PinpointSMSVoiceV2
     #   <p>The field that failed validation.</p>
     #   @return [Array<Types::ValidationExceptionField>]
     class ValidationException < Struct.new(
+      nil,
       :message,
       :reason,
       :fields,
@@ -5269,6 +5505,7 @@ module Aws::PinpointSMSVoiceV2
     #   <p>The message associated with the validation exception with information to help determine its cause.</p>
     #   @return [String]
     class ValidationExceptionField < Struct.new(
+      nil,
       :name,
       :message,
       keyword_init: true
@@ -5284,6 +5521,7 @@ module Aws::PinpointSMSVoiceV2
     #   <p>An array of values to filter on.</p>
     #   @return [Array<String>]
     class VerifiedDestinationNumberFilter < Struct.new(
+      nil,
       :name,
       :values,
       keyword_init: true
@@ -5308,6 +5546,7 @@ module Aws::PinpointSMSVoiceV2
     #   <p>The time when the destination phone number was created, in <a href="https://www.epochconverter.com/">UNIX epoch time</a> format.</p>
     #   @return [Time]
     class VerifiedDestinationNumberInformation < Struct.new(
+      nil,
       :verified_destination_number_arn,
       :verified_destination_number_id,
       :destination_phone_number,
@@ -5325,6 +5564,7 @@ module Aws::PinpointSMSVoiceV2
     #   <p>The verification code that was received by the verified destination phone number.</p>
     #   @return [String]
     class VerifyDestinationNumberRequest < Struct.new(
+      nil,
       :verified_destination_number_id,
       :verification_code,
       keyword_init: true
@@ -5348,6 +5588,7 @@ module Aws::PinpointSMSVoiceV2
     #   <p>The time when the destination phone number was created, in <a href="https://www.epochconverter.com/">UNIX epoch time</a> format.</p>
     #   @return [Time]
     class VerifyDestinationNumberResult < Struct.new(
+      nil,
       :verified_destination_number_arn,
       :verified_destination_number_id,
       :destination_phone_number,

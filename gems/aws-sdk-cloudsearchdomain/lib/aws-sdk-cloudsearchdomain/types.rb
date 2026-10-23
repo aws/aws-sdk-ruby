@@ -14,6 +14,7 @@ module Aws::CloudSearchDomain
     #   <p>The number of hits that contain the facet value in the specified facet field.</p>
     #   @return [Integer]
     class Bucket < Struct.new(
+      nil,
       :value,
       :count,
       keyword_init: true
@@ -31,6 +32,7 @@ module Aws::CloudSearchDomain
     #   <p>A list of the calculated facet values and counts.</p>
     #   @return [Array<Types::Bucket>]
     class BucketInfo < Struct.new(
+      nil,
       :buckets,
       keyword_init: true
     )
@@ -45,6 +47,7 @@ module Aws::CloudSearchDomain
     #   <p>The description of the errors returned by the document service.</p>
     #   @return [String]
     class DocumentServiceException < Struct.new(
+      nil,
       :status,
       :message,
       keyword_init: true
@@ -57,6 +60,7 @@ module Aws::CloudSearchDomain
     #   <p>The description for a warning returned by the document service.</p>
     #   @return [String]
     class DocumentServiceWarning < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -92,6 +96,7 @@ module Aws::CloudSearchDomain
     #   <p>The standard deviation of the values in the specified field in the result set.</p>
     #   @return [Float]
     class FieldStats < Struct.new(
+      nil,
       :min,
       :max,
       :count,
@@ -128,6 +133,7 @@ module Aws::CloudSearchDomain
     #   <p>The highlights returned from a document that matches the search request.</p>
     #   @return [Hash<String, String>]
     class Hit < Struct.new(
+      nil,
       :id,
       :fields,
       :exprs,
@@ -151,6 +157,7 @@ module Aws::CloudSearchDomain
     #   <p>A document that matches the search request.</p>
     #   @return [Array<Types::Hit>]
     class Hits < Struct.new(
+      nil,
       :found,
       :start,
       :cursor,
@@ -171,6 +178,7 @@ module Aws::CloudSearchDomain
     #   <p>A description of the error returned by the search service.</p>
     #   @return [String]
     class SearchException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -432,6 +440,7 @@ module Aws::CloudSearchDomain
     #         <p>There are currently no options supported for statistics.</p>
     #   @return [String]
     class SearchRequest < Struct.new(
+      nil,
       :cursor,
       :expr,
       :facet,
@@ -465,6 +474,7 @@ module Aws::CloudSearchDomain
     #   <p>The requested field statistics information.</p>
     #   @return [Hash<String, Types::FieldStats>]
     class SearchResponse < Struct.new(
+      nil,
       :status,
       :hits,
       :facets,
@@ -482,6 +492,7 @@ module Aws::CloudSearchDomain
     #   <p>The encrypted resource ID for the request.</p>
     #   @return [String]
     class SearchStatus < Struct.new(
+      nil,
       :timems,
       :rid,
       keyword_init: true
@@ -505,6 +516,7 @@ module Aws::CloudSearchDomain
     #   <p>The documents that match the query string.</p>
     #   @return [Array<Types::SuggestionMatch>]
     class SuggestModel < Struct.new(
+      nil,
       :query,
       :found,
       :suggestions,
@@ -529,6 +541,7 @@ module Aws::CloudSearchDomain
     #   <p>Specifies the maximum number of suggestions to return. </p>
     #   @return [Integer]
     class SuggestRequest < Struct.new(
+      nil,
       :query,
       :suggester,
       :size,
@@ -545,6 +558,7 @@ module Aws::CloudSearchDomain
     #   <p>Container for the matching search suggestion information.</p>
     #   @return [Types::SuggestModel]
     class SuggestResponse < Struct.new(
+      nil,
       :status,
       :suggest,
       keyword_init: true
@@ -560,6 +574,7 @@ module Aws::CloudSearchDomain
     #   <p>The encrypted resource ID for the request.</p>
     #   @return [String]
     class SuggestStatus < Struct.new(
+      nil,
       :timems,
       :rid,
       keyword_init: true
@@ -583,6 +598,7 @@ module Aws::CloudSearchDomain
     #   <p>The document ID of the suggested document.</p>
     #   @return [String]
     class SuggestionMatch < Struct.new(
+      nil,
       :suggestion,
       :score,
       :id,
@@ -608,6 +624,7 @@ module Aws::CloudSearchDomain
     #         </ul>
     #   @return [String]
     class UploadDocumentsRequest < Struct.new(
+      nil,
       :documents,
       :content_type,
       keyword_init: true
@@ -629,6 +646,7 @@ module Aws::CloudSearchDomain
     #   <p>Any warnings returned by the document service about the documents being uploaded.</p>
     #   @return [Array<Types::DocumentServiceWarning>]
     class UploadDocumentsResponse < Struct.new(
+      nil,
       :status,
       :adds,
       :deletes,

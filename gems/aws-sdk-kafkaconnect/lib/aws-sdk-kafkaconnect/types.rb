@@ -15,6 +15,7 @@ module Aws::KafkaConnect
     #            cluster.</p>
     #   @return [Types::Vpc]
     class ApacheKafkaCluster < Struct.new(
+      nil,
       :bootstrap_servers,
       :vpc,
       keyword_init: true
@@ -31,6 +32,7 @@ module Aws::KafkaConnect
     #            cluster.</p>
     #   @return [Types::VpcDescription]
     class ApacheKafkaClusterDescription < Struct.new(
+      nil,
       :bootstrap_servers,
       :vpc,
       keyword_init: true
@@ -56,6 +58,7 @@ module Aws::KafkaConnect
     #   <p>The sacle-out policy for the connector.</p>
     #   @return [Types::ScaleOutPolicy]
     class AutoScaling < Struct.new(
+      nil,
       :max_worker_count,
       :mcu_count,
       :min_worker_count,
@@ -91,6 +94,7 @@ module Aws::KafkaConnect
     #   <p>The sacle-out policy for the connector.&gt;</p>
     #   @return [Types::ScaleOutPolicyDescription]
     class AutoScalingDescription < Struct.new(
+      nil,
       :max_worker_count,
       :mcu_count,
       :min_worker_count,
@@ -126,6 +130,7 @@ module Aws::KafkaConnect
     #   <p>The target sacle-out policy for the connector.</p>
     #   @return [Types::ScaleOutPolicyUpdate]
     class AutoScalingUpdate < Struct.new(
+      nil,
       :max_worker_count,
       :mcu_count,
       :min_worker_count,
@@ -148,6 +153,7 @@ module Aws::KafkaConnect
     # @!attribute message
     #   @return [String]
     class BadRequestException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -163,6 +169,7 @@ module Aws::KafkaConnect
     #   <p>Details about a fixed capacity allocated to a connector.</p>
     #   @return [Types::ProvisionedCapacity]
     class Capacity < Struct.new(
+      nil,
       :auto_scaling,
       :provisioned_capacity,
       keyword_init: true
@@ -178,6 +185,7 @@ module Aws::KafkaConnect
     #   <p>Describes a connector's provisioned capacity.</p>
     #   @return [Types::ProvisionedCapacityDescription]
     class CapacityDescription < Struct.new(
+      nil,
       :auto_scaling,
       :provisioned_capacity,
       keyword_init: true
@@ -194,6 +202,7 @@ module Aws::KafkaConnect
     #   <p>The target settings for provisioned capacity.</p>
     #   @return [Types::ProvisionedCapacityUpdate]
     class CapacityUpdate < Struct.new(
+      nil,
       :auto_scaling,
       :provisioned_capacity,
       keyword_init: true
@@ -209,6 +218,7 @@ module Aws::KafkaConnect
     #   <p>The name of the CloudWatch log group that is the destination for log delivery.</p>
     #   @return [String]
     class CloudWatchLogsLogDelivery < Struct.new(
+      nil,
       :enabled,
       :log_group,
       keyword_init: true
@@ -229,6 +239,7 @@ module Aws::KafkaConnect
     #   <p>The name of the CloudWatch log group that is the destination for log delivery.</p>
     #   @return [String]
     class CloudWatchLogsLogDeliveryDescription < Struct.new(
+      nil,
       :enabled,
       :log_group,
       keyword_init: true
@@ -246,6 +257,7 @@ module Aws::KafkaConnect
     # @!attribute message
     #   @return [String]
     class ConflictException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -260,6 +272,7 @@ module Aws::KafkaConnect
     #   <p>The step state of the operation.</p>
     #   @return [String]
     class ConnectorOperationStep < Struct.new(
+      nil,
       :step_type,
       :step_state,
       keyword_init: true
@@ -284,6 +297,7 @@ module Aws::KafkaConnect
     #   <p>The time when operation ended.</p>
     #   @return [Time]
     class ConnectorOperationSummary < Struct.new(
+      nil,
       :connector_operation_arn,
       :connector_operation_type,
       :connector_operation_state,
@@ -344,6 +358,7 @@ module Aws::KafkaConnect
     #   <p>The worker configurations that are in use with the connector.</p>
     #   @return [Types::WorkerConfigurationDescription]
     class ConnectorSummary < Struct.new(
+      nil,
       :capacity,
       :connector_arn,
       :connector_description,
@@ -374,6 +389,7 @@ module Aws::KafkaConnect
     #   <p>The state of the connector.</p>
     #   @return [String]
     class CreateConnectorOutput < Struct.new(
+      nil,
       :connector_arn,
       :connector_name,
       :connector_state,
@@ -430,6 +446,7 @@ module Aws::KafkaConnect
     #   <p>The tags you want to attach to the connector.</p>
     #   @return [Hash<String, String>]
     class CreateConnectorRequest < Struct.new(
+      nil,
       :capacity,
       :connector_configuration,
       :connector_description,
@@ -461,6 +478,7 @@ module Aws::KafkaConnect
     #   <p>The revision of the custom plugin.</p>
     #   @return [Integer]
     class CreateCustomPluginOutput < Struct.new(
+      nil,
       :custom_plugin_arn,
       :custom_plugin_state,
       :name,
@@ -491,6 +509,7 @@ module Aws::KafkaConnect
     #   <p>The tags you want to attach to the custom plugin.</p>
     #   @return [Hash<String, String>]
     class CreateCustomPluginRequest < Struct.new(
+      nil,
       :content_type,
       :description,
       :location,
@@ -517,6 +536,7 @@ module Aws::KafkaConnect
     #   <p>The state of the worker configuration.</p>
     #   @return [String]
     class CreateWorkerConfigurationOutput < Struct.new(
+      nil,
       :creation_time,
       :latest_revision,
       :name,
@@ -540,6 +560,7 @@ module Aws::KafkaConnect
     #   <p>The tags you want to attach to the worker configuration.</p>
     #   @return [Hash<String, String>]
     class CreateWorkerConfigurationRequest < Struct.new(
+      nil,
       :description,
       :name,
       :properties_file_content,
@@ -557,6 +578,7 @@ module Aws::KafkaConnect
     #   <p>The revision of the custom plugin.</p>
     #   @return [Integer]
     class CustomPlugin < Struct.new(
+      nil,
       :custom_plugin_arn,
       :revision,
       keyword_init: true
@@ -577,6 +599,7 @@ module Aws::KafkaConnect
     #   <p>The revision of the custom plugin.</p>
     #   @return [Integer]
     class CustomPluginDescription < Struct.new(
+      nil,
       :custom_plugin_arn,
       :revision,
       keyword_init: true
@@ -598,6 +621,7 @@ module Aws::KafkaConnect
     #   <p>The size in bytes of the custom plugin file. You can use it to validate the file.</p>
     #   @return [Integer]
     class CustomPluginFileDescription < Struct.new(
+      nil,
       :file_md5,
       :file_size,
       keyword_init: true
@@ -616,6 +640,7 @@ module Aws::KafkaConnect
     #            file stored in Amazon S3.</p>
     #   @return [Types::S3Location]
     class CustomPluginLocation < Struct.new(
+      nil,
       :s3_location,
       keyword_init: true
     )
@@ -628,6 +653,7 @@ module Aws::KafkaConnect
     #            file stored in Amazon S3.</p>
     #   @return [Types::S3LocationDescription]
     class CustomPluginLocationDescription < Struct.new(
+      nil,
       :s3_location,
       keyword_init: true
     )
@@ -654,6 +680,7 @@ module Aws::KafkaConnect
     #   <p>The revision of the custom plugin.</p>
     #   @return [Integer]
     class CustomPluginRevisionSummary < Struct.new(
+      nil,
       :content_type,
       :creation_time,
       :description,
@@ -690,6 +717,7 @@ module Aws::KafkaConnect
     #   <p>The name of the custom plugin.</p>
     #   @return [String]
     class CustomPluginSummary < Struct.new(
+      nil,
       :creation_time,
       :custom_plugin_arn,
       :custom_plugin_state,
@@ -708,6 +736,7 @@ module Aws::KafkaConnect
     #   <p>The state of the connector that you requested to delete.</p>
     #   @return [String]
     class DeleteConnectorOutput < Struct.new(
+      nil,
       :connector_arn,
       :connector_state,
       keyword_init: true
@@ -722,6 +751,7 @@ module Aws::KafkaConnect
     #   <p>The current version of the connector that you want to delete.</p>
     #   @return [String]
     class DeleteConnectorRequest < Struct.new(
+      nil,
       :connector_arn,
       :current_version,
       keyword_init: true
@@ -736,6 +766,7 @@ module Aws::KafkaConnect
     #   <p>The state of the custom plugin.</p>
     #   @return [String]
     class DeleteCustomPluginOutput < Struct.new(
+      nil,
       :custom_plugin_arn,
       :custom_plugin_state,
       keyword_init: true
@@ -747,6 +778,7 @@ module Aws::KafkaConnect
     #   <p>The Amazon Resource Name (ARN) of the custom plugin that you want to delete.</p>
     #   @return [String]
     class DeleteCustomPluginRequest < Struct.new(
+      nil,
       :custom_plugin_arn,
       keyword_init: true
     )
@@ -760,6 +792,7 @@ module Aws::KafkaConnect
     #   <p>The state of the worker configuration.</p>
     #   @return [String]
     class DeleteWorkerConfigurationOutput < Struct.new(
+      nil,
       :worker_configuration_arn,
       :worker_configuration_state,
       keyword_init: true
@@ -771,6 +804,7 @@ module Aws::KafkaConnect
     #   <p>The Amazon Resource Name (ARN) of the worker configuration that you want to delete.</p>
     #   @return [String]
     class DeleteWorkerConfigurationRequest < Struct.new(
+      nil,
       :worker_configuration_arn,
       keyword_init: true
     )
@@ -781,6 +815,7 @@ module Aws::KafkaConnect
     #   <p>ARN of the connector operation to be described.</p>
     #   @return [String]
     class DescribeConnectorOperationRequest < Struct.new(
+      nil,
       :connector_operation_arn,
       keyword_init: true
     )
@@ -824,6 +859,7 @@ module Aws::KafkaConnect
     #   <p>The time when the operation ended.</p>
     #   @return [Time]
     class DescribeConnectorOperationResponse < Struct.new(
+      nil,
       :connector_arn,
       :connector_operation_arn,
       :connector_operation_state,
@@ -897,6 +933,7 @@ module Aws::KafkaConnect
     #   <p>Details about the state of a connector.</p>
     #   @return [Types::StateDescription]
     class DescribeConnectorOutput < Struct.new(
+      nil,
       :capacity,
       :connector_arn,
       :connector_configuration,
@@ -923,6 +960,7 @@ module Aws::KafkaConnect
     #   <p>The Amazon Resource Name (ARN) of the connector that you want to describe.</p>
     #   @return [String]
     class DescribeConnectorRequest < Struct.new(
+      nil,
       :connector_arn,
       keyword_init: true
     )
@@ -952,6 +990,7 @@ module Aws::KafkaConnect
     #   <p>Details about the state of a custom plugin.</p>
     #   @return [Types::StateDescription]
     class DescribeCustomPluginOutput < Struct.new(
+      nil,
       :creation_time,
       :custom_plugin_arn,
       :custom_plugin_state,
@@ -968,6 +1007,7 @@ module Aws::KafkaConnect
     #   <p>Returns information about a custom plugin.</p>
     #   @return [String]
     class DescribeCustomPluginRequest < Struct.new(
+      nil,
       :custom_plugin_arn,
       keyword_init: true
     )
@@ -993,6 +1033,7 @@ module Aws::KafkaConnect
     #   <p>The state of the worker configuration.</p>
     #   @return [String]
     class DescribeWorkerConfigurationOutput < Struct.new(
+      nil,
       :creation_time,
       :description,
       :latest_revision,
@@ -1009,6 +1050,7 @@ module Aws::KafkaConnect
     #            information about.</p>
     #   @return [String]
     class DescribeWorkerConfigurationRequest < Struct.new(
+      nil,
       :worker_configuration_arn,
       keyword_init: true
     )
@@ -1024,6 +1066,7 @@ module Aws::KafkaConnect
     #   <p>Specifies whether connector logs get delivered to Amazon Kinesis Data Firehose.</p>
     #   @return [Boolean]
     class FirehoseLogDelivery < Struct.new(
+      nil,
       :delivery_stream,
       :enabled,
       keyword_init: true
@@ -1046,6 +1089,7 @@ module Aws::KafkaConnect
     #   <p>Specifies whether connector logs get delivered to Amazon Kinesis Data Firehose.</p>
     #   @return [Boolean]
     class FirehoseLogDeliveryDescription < Struct.new(
+      nil,
       :delivery_stream,
       :enabled,
       keyword_init: true
@@ -1063,6 +1107,7 @@ module Aws::KafkaConnect
     # @!attribute message
     #   @return [String]
     class ForbiddenException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -1074,6 +1119,7 @@ module Aws::KafkaConnect
     # @!attribute message
     #   @return [String]
     class InternalServerErrorException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -1085,6 +1131,7 @@ module Aws::KafkaConnect
     #   <p>The Apache Kafka cluster to which the connector is connected.</p>
     #   @return [Types::ApacheKafkaCluster]
     class KafkaCluster < Struct.new(
+      nil,
       :apache_kafka_cluster,
       keyword_init: true
     )
@@ -1098,6 +1145,7 @@ module Aws::KafkaConnect
     #            NONE means that no client authentication is used.</p>
     #   @return [String]
     class KafkaClusterClientAuthentication < Struct.new(
+      nil,
       :authentication_type,
       keyword_init: true
     )
@@ -1111,6 +1159,7 @@ module Aws::KafkaConnect
     #            NONE means that no client authentication is used.</p>
     #   @return [String]
     class KafkaClusterClientAuthenticationDescription < Struct.new(
+      nil,
       :authentication_type,
       keyword_init: true
     )
@@ -1122,6 +1171,7 @@ module Aws::KafkaConnect
     #   <p>The Apache Kafka cluster to which the connector is connected.</p>
     #   @return [Types::ApacheKafkaClusterDescription]
     class KafkaClusterDescription < Struct.new(
+      nil,
       :apache_kafka_cluster,
       keyword_init: true
     )
@@ -1133,6 +1183,7 @@ module Aws::KafkaConnect
     #   <p>The type of encryption in transit to the Apache Kafka cluster.</p>
     #   @return [String]
     class KafkaClusterEncryptionInTransit < Struct.new(
+      nil,
       :encryption_type,
       keyword_init: true
     )
@@ -1144,6 +1195,7 @@ module Aws::KafkaConnect
     #   <p>The type of encryption in transit to the Apache Kafka cluster.</p>
     #   @return [String]
     class KafkaClusterEncryptionInTransitDescription < Struct.new(
+      nil,
       :encryption_type,
       keyword_init: true
     )
@@ -1160,6 +1212,7 @@ module Aws::KafkaConnect
     #   <p>If the response is truncated, it includes a NextToken. Send this NextToken in a subsequent request to continue listing from where it left off.</p>
     #   @return [String]
     class ListConnectorOperationsRequest < Struct.new(
+      nil,
       :connector_arn,
       :max_results,
       :next_token,
@@ -1175,6 +1228,7 @@ module Aws::KafkaConnect
     #   <p>If the response is truncated, it includes a NextToken. Send this NextToken in a subsequent request to continue listing from where it left off.</p>
     #   @return [String]
     class ListConnectorOperationsResponse < Struct.new(
+      nil,
       :connector_operations,
       :next_token,
       keyword_init: true
@@ -1191,6 +1245,7 @@ module Aws::KafkaConnect
     #            off.</p>
     #   @return [String]
     class ListConnectorsOutput < Struct.new(
+      nil,
       :connectors,
       :next_token,
       keyword_init: true
@@ -1210,6 +1265,7 @@ module Aws::KafkaConnect
     #            operation left off.</p>
     #   @return [String]
     class ListConnectorsRequest < Struct.new(
+      nil,
       :connector_name_prefix,
       :max_results,
       :next_token,
@@ -1227,6 +1283,7 @@ module Aws::KafkaConnect
     #            previous operation left off.</p>
     #   @return [String]
     class ListCustomPluginsOutput < Struct.new(
+      nil,
       :custom_plugins,
       :next_token,
       keyword_init: true
@@ -1246,6 +1303,7 @@ module Aws::KafkaConnect
     #   <p>Lists custom plugin names that start with the specified text string.</p>
     #   @return [String]
     class ListCustomPluginsRequest < Struct.new(
+      nil,
       :max_results,
       :next_token,
       :name_prefix,
@@ -1258,6 +1316,7 @@ module Aws::KafkaConnect
     #   <p>Lists the tags attached to the specified resource in the corresponding request.</p>
     #   @return [Hash<String, String>]
     class ListTagsForResourceOutput < Struct.new(
+      nil,
       :tags,
       keyword_init: true
     )
@@ -1268,6 +1327,7 @@ module Aws::KafkaConnect
     #   <p>The Amazon Resource Name (ARN) of the resource for which you want to list all attached tags.</p>
     #   @return [String]
     class ListTagsForResourceRequest < Struct.new(
+      nil,
       :resource_arn,
       keyword_init: true
     )
@@ -1283,6 +1343,7 @@ module Aws::KafkaConnect
     #   <p>An array of worker configuration descriptions.</p>
     #   @return [Array<Types::WorkerConfigurationSummary>]
     class ListWorkerConfigurationsOutput < Struct.new(
+      nil,
       :next_token,
       :worker_configurations,
       keyword_init: true
@@ -1302,6 +1363,7 @@ module Aws::KafkaConnect
     #   <p>Lists worker configuration names that start with the specified text string.</p>
     #   @return [String]
     class ListWorkerConfigurationsRequest < Struct.new(
+      nil,
       :max_results,
       :next_token,
       :name_prefix,
@@ -1316,6 +1378,7 @@ module Aws::KafkaConnect
     #            specifies the details of these destinations.</p>
     #   @return [Types::WorkerLogDelivery]
     class LogDelivery < Struct.new(
+      nil,
       :worker_log_delivery,
       keyword_init: true
     )
@@ -1328,6 +1391,7 @@ module Aws::KafkaConnect
     #            specifies the details of these destinations.</p>
     #   @return [Types::WorkerLogDeliveryDescription]
     class LogDeliveryDescription < Struct.new(
+      nil,
       :worker_log_delivery,
       keyword_init: true
     )
@@ -1339,6 +1403,7 @@ module Aws::KafkaConnect
     # @!attribute message
     #   @return [String]
     class NotFoundException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -1350,6 +1415,7 @@ module Aws::KafkaConnect
     #   <p>Details about a custom plugin.</p>
     #   @return [Types::CustomPlugin]
     class Plugin < Struct.new(
+      nil,
       :custom_plugin,
       keyword_init: true
     )
@@ -1361,6 +1427,7 @@ module Aws::KafkaConnect
     #   <p>Details about a custom plugin.</p>
     #   @return [Types::CustomPluginDescription]
     class PluginDescription < Struct.new(
+      nil,
       :custom_plugin,
       keyword_init: true
     )
@@ -1376,6 +1443,7 @@ module Aws::KafkaConnect
     #   <p>The number of workers that are allocated to the connector.</p>
     #   @return [Integer]
     class ProvisionedCapacity < Struct.new(
+      nil,
       :mcu_count,
       :worker_count,
       keyword_init: true
@@ -1398,6 +1466,7 @@ module Aws::KafkaConnect
     #   <p>The number of workers that are allocated to the connector.</p>
     #   @return [Integer]
     class ProvisionedCapacityDescription < Struct.new(
+      nil,
       :mcu_count,
       :worker_count,
       keyword_init: true
@@ -1420,6 +1489,7 @@ module Aws::KafkaConnect
     #   <p>The number of workers that are allocated to the connector.</p>
     #   @return [Integer]
     class ProvisionedCapacityUpdate < Struct.new(
+      nil,
       :mcu_count,
       :worker_count,
       keyword_init: true
@@ -1444,6 +1514,7 @@ module Aws::KafkaConnect
     #   <p>The version of an object in an S3 bucket.</p>
     #   @return [String]
     class S3Location < Struct.new(
+      nil,
       :bucket_arn,
       :file_key,
       :object_version,
@@ -1463,6 +1534,7 @@ module Aws::KafkaConnect
     #   <p>The version of an object in an S3 bucket.</p>
     #   @return [String]
     class S3LocationDescription < Struct.new(
+      nil,
       :bucket_arn,
       :file_key,
       :object_version,
@@ -1482,6 +1554,7 @@ module Aws::KafkaConnect
     #   <p>The S3 prefix that is the destination for log delivery.</p>
     #   @return [String]
     class S3LogDelivery < Struct.new(
+      nil,
       :bucket,
       :enabled,
       :prefix,
@@ -1506,6 +1579,7 @@ module Aws::KafkaConnect
     #   <p>The S3 prefix that is the destination for log delivery.</p>
     #   @return [String]
     class S3LogDeliveryDescription < Struct.new(
+      nil,
       :bucket,
       :enabled,
       :prefix,
@@ -1525,6 +1599,7 @@ module Aws::KafkaConnect
     #            to be triggered.</p>
     #   @return [Integer]
     class ScaleInPolicy < Struct.new(
+      nil,
       :cpu_utilization_percentage,
       keyword_init: true
     )
@@ -1542,6 +1617,7 @@ module Aws::KafkaConnect
     #            to be triggered.</p>
     #   @return [Integer]
     class ScaleInPolicyDescription < Struct.new(
+      nil,
       :cpu_utilization_percentage,
       keyword_init: true
     )
@@ -1559,6 +1635,7 @@ module Aws::KafkaConnect
     #            be triggered.</p>
     #   @return [Integer]
     class ScaleInPolicyUpdate < Struct.new(
+      nil,
       :cpu_utilization_percentage,
       keyword_init: true
     )
@@ -1576,6 +1653,7 @@ module Aws::KafkaConnect
     #            triggered.</p>
     #   @return [Integer]
     class ScaleOutPolicy < Struct.new(
+      nil,
       :cpu_utilization_percentage,
       keyword_init: true
     )
@@ -1593,6 +1671,7 @@ module Aws::KafkaConnect
     #            triggered.</p>
     #   @return [Integer]
     class ScaleOutPolicyDescription < Struct.new(
+      nil,
       :cpu_utilization_percentage,
       keyword_init: true
     )
@@ -1610,6 +1689,7 @@ module Aws::KafkaConnect
     #            be triggered.</p>
     #   @return [Integer]
     class ScaleOutPolicyUpdate < Struct.new(
+      nil,
       :cpu_utilization_percentage,
       keyword_init: true
     )
@@ -1626,6 +1706,7 @@ module Aws::KafkaConnect
     # @!attribute message
     #   @return [String]
     class ServiceUnavailableException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -1640,6 +1721,7 @@ module Aws::KafkaConnect
     #   <p>A message that describes the state of a resource.</p>
     #   @return [String]
     class StateDescription < Struct.new(
+      nil,
       :code,
       :message,
       keyword_init: true
@@ -1648,6 +1730,7 @@ module Aws::KafkaConnect
     end
 
     class TagResourceOutput < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1660,6 +1743,7 @@ module Aws::KafkaConnect
     #   <p>The tags that you want to attach to the resource.</p>
     #   @return [Hash<String, String>]
     class TagResourceRequest < Struct.new(
+      nil,
       :resource_arn,
       :tags,
       keyword_init: true
@@ -1671,6 +1755,7 @@ module Aws::KafkaConnect
     # @!attribute message
     #   @return [String]
     class TooManyRequestsException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -1682,6 +1767,7 @@ module Aws::KafkaConnect
     # @!attribute message
     #   @return [String]
     class UnauthorizedException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -1689,6 +1775,7 @@ module Aws::KafkaConnect
     end
 
     class UntagResourceOutput < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1701,6 +1788,7 @@ module Aws::KafkaConnect
     #   <p>The keys of the tags that you want to remove from the resource.</p>
     #   @return [Array<String>]
     class UntagResourceRequest < Struct.new(
+      nil,
       :resource_arn,
       :tag_keys,
       keyword_init: true
@@ -1718,6 +1806,7 @@ module Aws::KafkaConnect
     #   <p>The Amazon Resource Name (ARN) of the connector operation.</p>
     #   @return [String]
     class UpdateConnectorOutput < Struct.new(
+      nil,
       :connector_arn,
       :connector_state,
       :connector_operation_arn,
@@ -1739,6 +1828,7 @@ module Aws::KafkaConnect
     #   <p>The current version of the connector that you want to update.</p>
     #   @return [String]
     class UpdateConnectorRequest < Struct.new(
+      nil,
       :capacity,
       :connector_configuration,
       :connector_arn,
@@ -1756,6 +1846,7 @@ module Aws::KafkaConnect
     #   <p>The subnets for the connector.</p>
     #   @return [Array<String>]
     class Vpc < Struct.new(
+      nil,
       :security_groups,
       :subnets,
       keyword_init: true
@@ -1771,6 +1862,7 @@ module Aws::KafkaConnect
     #   <p>The subnets for the connector.</p>
     #   @return [Array<String>]
     class VpcDescription < Struct.new(
+      nil,
       :security_groups,
       :subnets,
       keyword_init: true
@@ -1787,6 +1879,7 @@ module Aws::KafkaConnect
     #   <p>The Amazon Resource Name (ARN) of the worker configuration.</p>
     #   @return [String]
     class WorkerConfiguration < Struct.new(
+      nil,
       :revision,
       :worker_configuration_arn,
       keyword_init: true
@@ -1807,6 +1900,7 @@ module Aws::KafkaConnect
     #   <p>The Amazon Resource Name (ARN) of the worker configuration.</p>
     #   @return [String]
     class WorkerConfigurationDescription < Struct.new(
+      nil,
       :revision,
       :worker_configuration_arn,
       keyword_init: true
@@ -1833,6 +1927,7 @@ module Aws::KafkaConnect
     #   <p>The description of a revision of the worker configuration.</p>
     #   @return [Integer]
     class WorkerConfigurationRevisionDescription < Struct.new(
+      nil,
       :creation_time,
       :description,
       :properties_file_content,
@@ -1858,6 +1953,7 @@ module Aws::KafkaConnect
     #   <p>The revision of a worker configuration.</p>
     #   @return [Integer]
     class WorkerConfigurationRevisionSummary < Struct.new(
+      nil,
       :creation_time,
       :description,
       :revision,
@@ -1891,6 +1987,7 @@ module Aws::KafkaConnect
     #   <p>The state of the worker configuration.</p>
     #   @return [String]
     class WorkerConfigurationSummary < Struct.new(
+      nil,
       :creation_time,
       :description,
       :latest_revision,
@@ -1914,6 +2011,7 @@ module Aws::KafkaConnect
     #   <p>Details about delivering logs to Amazon S3.</p>
     #   @return [Types::S3LogDelivery]
     class WorkerLogDelivery < Struct.new(
+      nil,
       :cloud_watch_logs,
       :firehose,
       :s3,
@@ -1934,6 +2032,7 @@ module Aws::KafkaConnect
     #   <p>Details about delivering logs to Amazon S3.</p>
     #   @return [Types::S3LogDeliveryDescription]
     class WorkerLogDeliveryDescription < Struct.new(
+      nil,
       :cloud_watch_logs,
       :firehose,
       :s3,
@@ -1947,6 +2046,7 @@ module Aws::KafkaConnect
     #   <p>A description of the connector's capacity.</p>
     #   @return [Types::CapacityDescription]
     class WorkerSetting < Struct.new(
+      nil,
       :capacity,
       keyword_init: true
     )

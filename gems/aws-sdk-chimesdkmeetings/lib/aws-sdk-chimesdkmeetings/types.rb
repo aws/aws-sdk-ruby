@@ -72,6 +72,7 @@ module Aws::ChimeSDKMeetings
     #            </ul>
     #   @return [Types::AttendeeCapabilities]
     class Attendee < Struct.new(
+      nil,
       :external_user_id,
       :attendee_id,
       :join_token,
@@ -129,6 +130,7 @@ module Aws::ChimeSDKMeetings
     #   <p>The content capability assigned to an attendee.</p>
     #   @return [String]
     class AttendeeCapabilities < Struct.new(
+      nil,
       :audio,
       :video,
       :content,
@@ -146,6 +148,7 @@ module Aws::ChimeSDKMeetings
     #   <p>The maximum number of attendees allowed into the meeting.</p>
     #   @return [Integer]
     class AttendeeFeatures < Struct.new(
+      nil,
       :max_count,
       keyword_init: true
     )
@@ -157,6 +160,7 @@ module Aws::ChimeSDKMeetings
     #   <p>A list of one or more attendee IDs.</p>
     #   @return [String]
     class AttendeeIdItem < Struct.new(
+      nil,
       :attendee_id,
       keyword_init: true
     )
@@ -168,6 +172,7 @@ module Aws::ChimeSDKMeetings
     #   <p>Makes echo reduction available to clients who connect to the meeting.</p>
     #   @return [String]
     class AudioFeatures < Struct.new(
+      nil,
       :echo_reduction,
       keyword_init: true
     )
@@ -183,6 +188,7 @@ module Aws::ChimeSDKMeetings
     #   <p>The request id associated with the call responsible for the exception.</p>
     #   @return [String]
     class BadRequestException < Struct.new(
+      nil,
       :code,
       :message,
       :request_id,
@@ -198,6 +204,7 @@ module Aws::ChimeSDKMeetings
     #   <p>The attendee information, including attendees' IDs and join tokens.</p>
     #   @return [Array<Types::CreateAttendeeRequestItem>]
     class BatchCreateAttendeeRequest < Struct.new(
+      nil,
       :meeting_id,
       :attendees,
       keyword_init: true
@@ -212,6 +219,7 @@ module Aws::ChimeSDKMeetings
     #   <p>If the action fails for one or more of the attendees in the request, a list of the attendees is returned, along with error codes and error messages.</p>
     #   @return [Array<Types::CreateAttendeeError>]
     class BatchCreateAttendeeResponse < Struct.new(
+      nil,
       :attendees,
       :errors,
       keyword_init: true
@@ -229,6 +237,7 @@ module Aws::ChimeSDKMeetings
     #   <p>The capabilities (<code>audio</code>, <code>video</code>, or <code>content</code>) that you want to update.</p>
     #   @return [Types::AttendeeCapabilities]
     class BatchUpdateAttendeeCapabilitiesExceptRequest < Struct.new(
+      nil,
       :meeting_id,
       :excluded_attendee_ids,
       :capabilities,
@@ -246,6 +255,7 @@ module Aws::ChimeSDKMeetings
     #   <p>The ID of the request involved in the conflict.</p>
     #   @return [String]
     class ConflictException < Struct.new(
+      nil,
       :code,
       :message,
       :request_id,
@@ -267,6 +277,7 @@ module Aws::ChimeSDKMeetings
     #            </note>
     #   @return [String]
     class ContentFeatures < Struct.new(
+      nil,
       :max_resolution,
       keyword_init: true
     )
@@ -288,6 +299,7 @@ module Aws::ChimeSDKMeetings
     #   <p>The error message.</p>
     #   @return [String]
     class CreateAttendeeError < Struct.new(
+      nil,
       :external_user_id,
       :error_code,
       :error_message,
@@ -348,6 +360,7 @@ module Aws::ChimeSDKMeetings
     #            </ul>
     #   @return [Types::AttendeeCapabilities]
     class CreateAttendeeRequest < Struct.new(
+      nil,
       :meeting_id,
       :external_user_id,
       :capabilities,
@@ -368,6 +381,7 @@ module Aws::ChimeSDKMeetings
     #   <p>A list of one or more capabilities.</p>
     #   @return [Types::AttendeeCapabilities]
     class CreateAttendeeRequestItem < Struct.new(
+      nil,
       :external_user_id,
       :capabilities,
       keyword_init: true
@@ -379,6 +393,7 @@ module Aws::ChimeSDKMeetings
     #   <p>The attendee information, including attendee ID and join token.</p>
     #   @return [Types::Attendee]
     class CreateAttendeeResponse < Struct.new(
+      nil,
       :attendee,
       keyword_init: true
     )
@@ -479,6 +494,7 @@ module Aws::ChimeSDKMeetings
     #   <p>The type of network for the media placement. Either IPv4 only or dual-stack (IPv4 and IPv6).</p>
     #   @return [String]
     class CreateMeetingRequest < Struct.new(
+      nil,
       :client_request_token,
       :media_region,
       :meeting_host_id,
@@ -499,6 +515,7 @@ module Aws::ChimeSDKMeetings
     #              <code>MediaPlacement</code>.</p>
     #   @return [Types::Meeting]
     class CreateMeetingResponse < Struct.new(
+      nil,
       :meeting,
       keyword_init: true
     )
@@ -565,6 +582,7 @@ module Aws::ChimeSDKMeetings
     #   <p>The type of network for the media placement. Either IPv4 only or dual-stack (IPv4 and IPv6).</p>
     #   @return [String]
     class CreateMeetingWithAttendeesRequest < Struct.new(
+      nil,
       :client_request_token,
       :media_region,
       :meeting_host_id,
@@ -592,6 +610,7 @@ module Aws::ChimeSDKMeetings
     #   <p>If the action fails for one or more of the attendees in the request, a list of the attendees is returned, along with error codes and error messages.</p>
     #   @return [Array<Types::CreateAttendeeError>]
     class CreateMeetingWithAttendeesResponse < Struct.new(
+      nil,
       :meeting,
       :attendees,
       :errors,
@@ -607,6 +626,7 @@ module Aws::ChimeSDKMeetings
     #   <p>The Amazon Chime SDK attendee ID.</p>
     #   @return [String]
     class DeleteAttendeeRequest < Struct.new(
+      nil,
       :meeting_id,
       :attendee_id,
       keyword_init: true
@@ -618,6 +638,7 @@ module Aws::ChimeSDKMeetings
     #   <p>The Amazon Chime SDK meeting ID.</p>
     #   @return [String]
     class DeleteMeetingRequest < Struct.new(
+      nil,
       :meeting_id,
       keyword_init: true
     )
@@ -644,6 +665,7 @@ module Aws::ChimeSDKMeetings
     #   <p>Set this field to <code>PHI</code> to identify personal health information in the transcription output.</p>
     #   @return [String]
     class EngineTranscribeMedicalSettings < Struct.new(
+      nil,
       :language_code,
       :specialty,
       :type,
@@ -755,6 +777,7 @@ module Aws::ChimeSDKMeetings
     #               parameter instead.</p>
     #   @return [String]
     class EngineTranscribeSettings < Struct.new(
+      nil,
       :language_code,
       :vocabulary_filter_method,
       :vocabulary_filter_name,
@@ -791,6 +814,7 @@ module Aws::ChimeSDKMeetings
     #   <p>The request id associated with the call responsible for the exception.</p>
     #   @return [String]
     class ForbiddenException < Struct.new(
+      nil,
       :code,
       :message,
       :request_id,
@@ -806,6 +830,7 @@ module Aws::ChimeSDKMeetings
     #   <p>The Amazon Chime SDK attendee ID.</p>
     #   @return [String]
     class GetAttendeeRequest < Struct.new(
+      nil,
       :meeting_id,
       :attendee_id,
       keyword_init: true
@@ -817,6 +842,7 @@ module Aws::ChimeSDKMeetings
     #   <p>The Amazon Chime SDK attendee information.</p>
     #   @return [Types::Attendee]
     class GetAttendeeResponse < Struct.new(
+      nil,
       :attendee,
       keyword_init: true
     )
@@ -827,6 +853,7 @@ module Aws::ChimeSDKMeetings
     #   <p>The Amazon Chime SDK meeting ID.</p>
     #   @return [String]
     class GetMeetingRequest < Struct.new(
+      nil,
       :meeting_id,
       keyword_init: true
     )
@@ -837,6 +864,7 @@ module Aws::ChimeSDKMeetings
     #   <p>The Amazon Chime SDK meeting information.</p>
     #   @return [Types::Meeting]
     class GetMeetingResponse < Struct.new(
+      nil,
       :meeting,
       keyword_init: true
     )
@@ -852,6 +880,7 @@ module Aws::ChimeSDKMeetings
     #   <p>The request id associated with the call responsible for the exception.</p>
     #   @return [String]
     class LimitExceededException < Struct.new(
+      nil,
       :code,
       :message,
       :request_id,
@@ -870,6 +899,7 @@ module Aws::ChimeSDKMeetings
     #   <p>The maximum number of results to return in a single call.</p>
     #   @return [Integer]
     class ListAttendeesRequest < Struct.new(
+      nil,
       :meeting_id,
       :next_token,
       :max_results,
@@ -885,6 +915,7 @@ module Aws::ChimeSDKMeetings
     #   <p>The token to use to retrieve the next page of results.</p>
     #   @return [String]
     class ListAttendeesResponse < Struct.new(
+      nil,
       :attendees,
       :next_token,
       keyword_init: true
@@ -896,6 +927,7 @@ module Aws::ChimeSDKMeetings
     #   <p>The ARN of the resource.</p>
     #   @return [String]
     class ListTagsForResourceRequest < Struct.new(
+      nil,
       :resource_arn,
       keyword_init: true
     )
@@ -906,6 +938,7 @@ module Aws::ChimeSDKMeetings
     #   <p>The tags requested for the specified resource.</p>
     #   @return [Array<Types::Tag>]
     class ListTagsForResourceResponse < Struct.new(
+      nil,
       :tags,
       keyword_init: true
     )
@@ -958,6 +991,7 @@ module Aws::ChimeSDKMeetings
     #   <p>The event ingestion URL.</p>
     #   @return [String]
     class MediaPlacement < Struct.new(
+      nil,
       :audio_host_url,
       :audio_fallback_url,
       :signaling_url,
@@ -1010,6 +1044,7 @@ module Aws::ChimeSDKMeetings
     #   <p>The ARN of the meeting.</p>
     #   @return [String]
     class Meeting < Struct.new(
+      nil,
       :meeting_id,
       :meeting_host_id,
       :external_meeting_id,
@@ -1038,6 +1073,7 @@ module Aws::ChimeSDKMeetings
     #   <p>The configuration settings for the attendee features available to a meeting.</p>
     #   @return [Types::AttendeeFeatures]
     class MeetingFeaturesConfiguration < Struct.new(
+      nil,
       :audio,
       :video,
       :content,
@@ -1056,6 +1092,7 @@ module Aws::ChimeSDKMeetings
     #   <p>The request ID associated with the call responsible for the exception.</p>
     #   @return [String]
     class NotFoundException < Struct.new(
+      nil,
       :code,
       :message,
       :request_id,
@@ -1075,6 +1112,7 @@ module Aws::ChimeSDKMeetings
     #   <p>The ARN of the SQS queue.</p>
     #   @return [String]
     class NotificationsConfiguration < Struct.new(
+      nil,
       :lambda_function_arn,
       :sns_topic_arn,
       :sqs_queue_arn,
@@ -1095,6 +1133,7 @@ module Aws::ChimeSDKMeetings
     #   <p>The name of the resource that couldn't be found.</p>
     #   @return [String]
     class ResourceNotFoundException < Struct.new(
+      nil,
       :code,
       :message,
       :request_id,
@@ -1113,6 +1152,7 @@ module Aws::ChimeSDKMeetings
     #   <p>The ID of the failed request.</p>
     #   @return [String]
     class ServiceFailureException < Struct.new(
+      nil,
       :code,
       :message,
       :request_id,
@@ -1133,6 +1173,7 @@ module Aws::ChimeSDKMeetings
     #   <p>The number of seconds the caller should wait before retrying.</p>
     #   @return [String]
     class ServiceUnavailableException < Struct.new(
+      nil,
       :code,
       :message,
       :request_id,
@@ -1150,6 +1191,7 @@ module Aws::ChimeSDKMeetings
     #               <code>EngineTranscribeMedicalSettings</code>.</p>
     #   @return [Types::TranscriptionConfiguration]
     class StartMeetingTranscriptionRequest < Struct.new(
+      nil,
       :meeting_id,
       :transcription_configuration,
       keyword_init: true
@@ -1161,6 +1203,7 @@ module Aws::ChimeSDKMeetings
     #   <p>The unique ID of the meeting for which you stop transcription.</p>
     #   @return [String]
     class StopMeetingTranscriptionRequest < Struct.new(
+      nil,
       :meeting_id,
       keyword_init: true
     )
@@ -1175,6 +1218,7 @@ module Aws::ChimeSDKMeetings
     #   <p>The tag's value.</p>
     #   @return [String]
     class Tag < Struct.new(
+      nil,
       :key,
       :value,
       keyword_init: true
@@ -1189,6 +1233,7 @@ module Aws::ChimeSDKMeetings
     #   <p>Lists the requested tags.</p>
     #   @return [Array<Types::Tag>]
     class TagResourceRequest < Struct.new(
+      nil,
       :resource_arn,
       :tags,
       keyword_init: true
@@ -1197,6 +1242,7 @@ module Aws::ChimeSDKMeetings
     end
 
     class TagResourceResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1211,6 +1257,7 @@ module Aws::ChimeSDKMeetings
     #   <p>The ID of the request that exceeded the throttling limit.</p>
     #   @return [String]
     class ThrottlingException < Struct.new(
+      nil,
       :code,
       :message,
       :request_id,
@@ -1231,6 +1278,7 @@ module Aws::ChimeSDKMeetings
     #   <p>The name of the resource that received too many tags.</p>
     #   @return [String]
     class TooManyTagsException < Struct.new(
+      nil,
       :code,
       :message,
       :request_id,
@@ -1248,6 +1296,7 @@ module Aws::ChimeSDKMeetings
     #   <p>The transcription configuration settings passed to Amazon Transcribe Medical.</p>
     #   @return [Types::EngineTranscribeMedicalSettings]
     class TranscriptionConfiguration < Struct.new(
+      nil,
       :engine_transcribe_settings,
       :engine_transcribe_medical_settings,
       keyword_init: true
@@ -1264,6 +1313,7 @@ module Aws::ChimeSDKMeetings
     #   <p>The request id associated with the call responsible for the exception.</p>
     #   @return [String]
     class UnauthorizedException < Struct.new(
+      nil,
       :code,
       :message,
       :request_id,
@@ -1281,6 +1331,7 @@ module Aws::ChimeSDKMeetings
     #   <p>The request id associated with the call responsible for the exception.</p>
     #   @return [String]
     class UnprocessableEntityException < Struct.new(
+      nil,
       :code,
       :message,
       :request_id,
@@ -1296,6 +1347,7 @@ module Aws::ChimeSDKMeetings
     #   <p>The tag keys being removed from the resources.</p>
     #   @return [Array<String>]
     class UntagResourceRequest < Struct.new(
+      nil,
       :resource_arn,
       :tag_keys,
       keyword_init: true
@@ -1304,6 +1356,7 @@ module Aws::ChimeSDKMeetings
     end
 
     class UntagResourceResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1319,6 +1372,7 @@ module Aws::ChimeSDKMeetings
     #   <p>The capabilities that you want to update.</p>
     #   @return [Types::AttendeeCapabilities]
     class UpdateAttendeeCapabilitiesRequest < Struct.new(
+      nil,
       :meeting_id,
       :attendee_id,
       :capabilities,
@@ -1331,6 +1385,7 @@ module Aws::ChimeSDKMeetings
     #   <p>The updated attendee data.</p>
     #   @return [Types::Attendee]
     class UpdateAttendeeCapabilitiesResponse < Struct.new(
+      nil,
       :attendee,
       keyword_init: true
     )
@@ -1350,6 +1405,7 @@ module Aws::ChimeSDKMeetings
     #            </note>
     #   @return [String]
     class VideoFeatures < Struct.new(
+      nil,
       :max_resolution,
       keyword_init: true
     )

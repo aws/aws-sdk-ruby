@@ -22,6 +22,7 @@ module Aws::ElasticLoadBalancing
     #               If the prefix is not provided, the log is placed at the root level of the bucket.</p>
     #   @return [String]
     class AccessLog < Struct.new(
+      nil,
       :enabled,
       :s3_bucket_name,
       :emit_interval,
@@ -40,6 +41,7 @@ module Aws::ElasticLoadBalancing
     # @!attribute message
     #   @return [String]
     class AccessPointNotFoundException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -54,6 +56,7 @@ module Aws::ElasticLoadBalancing
     #   <p>The Availability Zones. These must be in the same region as the load balancer.</p>
     #   @return [Array<String>]
     class AddAvailabilityZonesInput < Struct.new(
+      nil,
       :load_balancer_name,
       :availability_zones,
       keyword_init: true
@@ -66,6 +69,7 @@ module Aws::ElasticLoadBalancing
     #   <p>The updated list of Availability Zones for the load balancer.</p>
     #   @return [Array<String>]
     class AddAvailabilityZonesOutput < Struct.new(
+      nil,
       :availability_zones,
       keyword_init: true
     )
@@ -80,6 +84,7 @@ module Aws::ElasticLoadBalancing
     #   <p>The tags.</p>
     #   @return [Array<Types::Tag>]
     class AddTagsInput < Struct.new(
+      nil,
       :load_balancer_names,
       :tags,
       keyword_init: true
@@ -89,6 +94,7 @@ module Aws::ElasticLoadBalancing
 
     # <p>Contains the output of AddTags.</p>
     class AddTagsOutput < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -111,6 +117,7 @@ module Aws::ElasticLoadBalancing
     #   <p>This value of the attribute.</p>
     #   @return [String]
     class AdditionalAttribute < Struct.new(
+      nil,
       :key,
       :value,
       keyword_init: true
@@ -126,6 +133,7 @@ module Aws::ElasticLoadBalancing
     #   <p>The name of the application cookie used for stickiness.</p>
     #   @return [String]
     class AppCookieStickinessPolicy < Struct.new(
+      nil,
       :policy_name,
       :cookie_name,
       keyword_init: true
@@ -141,6 +149,7 @@ module Aws::ElasticLoadBalancing
     #   <p>The IDs of the security groups to associate with the load balancer. Note that you cannot specify the name of the security group.</p>
     #   @return [Array<String>]
     class ApplySecurityGroupsToLoadBalancerInput < Struct.new(
+      nil,
       :load_balancer_name,
       :security_groups,
       keyword_init: true
@@ -153,6 +162,7 @@ module Aws::ElasticLoadBalancing
     #   <p>The IDs of the security groups associated with the load balancer.</p>
     #   @return [Array<String>]
     class ApplySecurityGroupsToLoadBalancerOutput < Struct.new(
+      nil,
       :security_groups,
       keyword_init: true
     )
@@ -167,6 +177,7 @@ module Aws::ElasticLoadBalancing
     #   <p>The IDs of the subnets to add. You can add only one subnet per Availability Zone.</p>
     #   @return [Array<String>]
     class AttachLoadBalancerToSubnetsInput < Struct.new(
+      nil,
       :load_balancer_name,
       :subnets,
       keyword_init: true
@@ -179,6 +190,7 @@ module Aws::ElasticLoadBalancing
     #   <p>The IDs of the subnets attached to the load balancer.</p>
     #   @return [Array<String>]
     class AttachLoadBalancerToSubnetsOutput < Struct.new(
+      nil,
       :subnets,
       keyword_init: true
     )
@@ -193,6 +205,7 @@ module Aws::ElasticLoadBalancing
     #   <p>The names of the policies enabled for the EC2 instance.</p>
     #   @return [Array<String>]
     class BackendServerDescription < Struct.new(
+      nil,
       :instance_port,
       :policy_names,
       keyword_init: true
@@ -206,6 +219,7 @@ module Aws::ElasticLoadBalancing
     # @!attribute message
     #   @return [String]
     class CertificateNotFoundException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -220,6 +234,7 @@ module Aws::ElasticLoadBalancing
     #   <p>The configuration information.</p>
     #   @return [Types::HealthCheck]
     class ConfigureHealthCheckInput < Struct.new(
+      nil,
       :load_balancer_name,
       :health_check,
       keyword_init: true
@@ -232,6 +247,7 @@ module Aws::ElasticLoadBalancing
     #   <p>The updated health check.</p>
     #   @return [Types::HealthCheck]
     class ConfigureHealthCheckOutput < Struct.new(
+      nil,
       :health_check,
       keyword_init: true
     )
@@ -246,6 +262,7 @@ module Aws::ElasticLoadBalancing
     #   <p>The maximum time, in seconds, to keep the existing connections open before deregistering the instances.</p>
     #   @return [Integer]
     class ConnectionDraining < Struct.new(
+      nil,
       :enabled,
       :timeout,
       keyword_init: true
@@ -263,6 +280,7 @@ module Aws::ElasticLoadBalancing
     #   <p>The time, in seconds, that the connection is allowed to be idle (no data has been sent over the connection) before it is closed by the load balancer.</p>
     #   @return [Integer]
     class ConnectionSettings < Struct.new(
+      nil,
       :idle_timeout,
       keyword_init: true
     )
@@ -305,6 +323,7 @@ module Aws::ElasticLoadBalancing
     #               in the <i>Classic Load Balancers Guide</i>.</p>
     #   @return [Array<Types::Tag>]
     class CreateAccessPointInput < Struct.new(
+      nil,
       :load_balancer_name,
       :listeners,
       :availability_zones,
@@ -322,6 +341,7 @@ module Aws::ElasticLoadBalancing
     #   <p>The DNS name of the load balancer.</p>
     #   @return [String]
     class CreateAccessPointOutput < Struct.new(
+      nil,
       :dns_name,
       keyword_init: true
     )
@@ -339,6 +359,7 @@ module Aws::ElasticLoadBalancing
     #   <p>The name of the application cookie used for stickiness.</p>
     #   @return [String]
     class CreateAppCookieStickinessPolicyInput < Struct.new(
+      nil,
       :load_balancer_name,
       :policy_name,
       :cookie_name,
@@ -349,6 +370,7 @@ module Aws::ElasticLoadBalancing
 
     # <p>Contains the output for CreateAppCookieStickinessPolicy.</p>
     class CreateAppCookieStickinessPolicyOutput < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -365,6 +387,7 @@ module Aws::ElasticLoadBalancing
     #   <p>The time period, in seconds, after which the cookie should be considered stale. If you do not specify this parameter, the default value is 0, which indicates that the sticky session should last for the duration of the browser session.</p>
     #   @return [Integer]
     class CreateLBCookieStickinessPolicyInput < Struct.new(
+      nil,
       :load_balancer_name,
       :policy_name,
       :cookie_expiration_period,
@@ -375,6 +398,7 @@ module Aws::ElasticLoadBalancing
 
     # <p>Contains the output for CreateLBCookieStickinessPolicy.</p>
     class CreateLBCookieStickinessPolicyOutput < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -388,6 +412,7 @@ module Aws::ElasticLoadBalancing
     #   <p>The listeners.</p>
     #   @return [Array<Types::Listener>]
     class CreateLoadBalancerListenerInput < Struct.new(
+      nil,
       :load_balancer_name,
       :listeners,
       keyword_init: true
@@ -397,6 +422,7 @@ module Aws::ElasticLoadBalancing
 
     # <p>Contains the parameters for CreateLoadBalancerListener.</p>
     class CreateLoadBalancerListenerOutput < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -417,6 +443,7 @@ module Aws::ElasticLoadBalancing
     #   <p>The policy attributes.</p>
     #   @return [Array<Types::PolicyAttribute>]
     class CreateLoadBalancerPolicyInput < Struct.new(
+      nil,
       :load_balancer_name,
       :policy_name,
       :policy_type_name,
@@ -428,6 +455,7 @@ module Aws::ElasticLoadBalancing
 
     # <p>Contains the output of CreateLoadBalancerPolicy.</p>
     class CreateLoadBalancerPolicyOutput < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -438,6 +466,7 @@ module Aws::ElasticLoadBalancing
     #   <p>Specifies whether cross-zone load balancing is enabled for the load balancer.</p>
     #   @return [Boolean]
     class CrossZoneLoadBalancing < Struct.new(
+      nil,
       :enabled,
       keyword_init: true
     )
@@ -454,6 +483,7 @@ module Aws::ElasticLoadBalancing
     #   <p>The name of the load balancer.</p>
     #   @return [String]
     class DeleteAccessPointInput < Struct.new(
+      nil,
       :load_balancer_name,
       keyword_init: true
     )
@@ -462,6 +492,7 @@ module Aws::ElasticLoadBalancing
 
     # <p>Contains the output of DeleteLoadBalancer.</p>
     class DeleteAccessPointOutput < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -475,6 +506,7 @@ module Aws::ElasticLoadBalancing
     #   <p>The client port numbers of the listeners.</p>
     #   @return [Array<Integer>]
     class DeleteLoadBalancerListenerInput < Struct.new(
+      nil,
       :load_balancer_name,
       :load_balancer_ports,
       keyword_init: true
@@ -484,6 +516,7 @@ module Aws::ElasticLoadBalancing
 
     # <p>Contains the output of DeleteLoadBalancerListeners.</p>
     class DeleteLoadBalancerListenerOutput < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -497,6 +530,7 @@ module Aws::ElasticLoadBalancing
     #   <p>The name of the policy.</p>
     #   @return [String]
     class DeleteLoadBalancerPolicyInput < Struct.new(
+      nil,
       :load_balancer_name,
       :policy_name,
       keyword_init: true
@@ -506,6 +540,7 @@ module Aws::ElasticLoadBalancing
 
     # <p>Contains the output of DeleteLoadBalancerPolicy.</p>
     class DeleteLoadBalancerPolicyOutput < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -515,6 +550,7 @@ module Aws::ElasticLoadBalancing
     # @!attribute message
     #   @return [String]
     class DependencyThrottleException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -529,6 +565,7 @@ module Aws::ElasticLoadBalancing
     #   <p>The IDs of the instances.</p>
     #   @return [Array<Types::Instance>]
     class DeregisterEndPointsInput < Struct.new(
+      nil,
       :load_balancer_name,
       :instances,
       keyword_init: true
@@ -541,6 +578,7 @@ module Aws::ElasticLoadBalancing
     #   <p>The remaining instances registered with the load balancer.</p>
     #   @return [Array<Types::Instance>]
     class DeregisterEndPointsOutput < Struct.new(
+      nil,
       :instances,
       keyword_init: true
     )
@@ -558,6 +596,7 @@ module Aws::ElasticLoadBalancing
     #   <p>The maximum number of results to return with this call (a number from 1 to 400). The default is 400.</p>
     #   @return [Integer]
     class DescribeAccessPointsInput < Struct.new(
+      nil,
       :load_balancer_names,
       :marker,
       :page_size,
@@ -574,6 +613,7 @@ module Aws::ElasticLoadBalancing
     #   <p>The marker to use when requesting the next set of results. If there are no additional results, the string is empty.</p>
     #   @return [String]
     class DescribeAccessPointsOutput < Struct.new(
+      nil,
       :load_balancer_descriptions,
       :next_marker,
       keyword_init: true
@@ -588,6 +628,7 @@ module Aws::ElasticLoadBalancing
     #   <p>The maximum number of results to return with this call.</p>
     #   @return [Integer]
     class DescribeAccountLimitsInput < Struct.new(
+      nil,
       :marker,
       :page_size,
       keyword_init: true
@@ -602,6 +643,7 @@ module Aws::ElasticLoadBalancing
     #   <p>The marker to use when requesting the next set of results. If there are no additional results, the string is empty.</p>
     #   @return [String]
     class DescribeAccountLimitsOutput < Struct.new(
+      nil,
       :limits,
       :next_marker,
       keyword_init: true
@@ -617,6 +659,7 @@ module Aws::ElasticLoadBalancing
     #   <p>The IDs of the instances.</p>
     #   @return [Array<Types::Instance>]
     class DescribeEndPointStateInput < Struct.new(
+      nil,
       :load_balancer_name,
       :instances,
       keyword_init: true
@@ -629,6 +672,7 @@ module Aws::ElasticLoadBalancing
     #   <p>Information about the health of the instances.</p>
     #   @return [Array<Types::InstanceState>]
     class DescribeEndPointStateOutput < Struct.new(
+      nil,
       :instance_states,
       keyword_init: true
     )
@@ -640,6 +684,7 @@ module Aws::ElasticLoadBalancing
     #   <p>The name of the load balancer.</p>
     #   @return [String]
     class DescribeLoadBalancerAttributesInput < Struct.new(
+      nil,
       :load_balancer_name,
       keyword_init: true
     )
@@ -651,6 +696,7 @@ module Aws::ElasticLoadBalancing
     #   <p>Information about the load balancer attributes.</p>
     #   @return [Types::LoadBalancerAttributes]
     class DescribeLoadBalancerAttributesOutput < Struct.new(
+      nil,
       :load_balancer_attributes,
       keyword_init: true
     )
@@ -665,6 +711,7 @@ module Aws::ElasticLoadBalancing
     #   <p>The names of the policies.</p>
     #   @return [Array<String>]
     class DescribeLoadBalancerPoliciesInput < Struct.new(
+      nil,
       :load_balancer_name,
       :policy_names,
       keyword_init: true
@@ -677,6 +724,7 @@ module Aws::ElasticLoadBalancing
     #   <p>Information about the policies.</p>
     #   @return [Array<Types::PolicyDescription>]
     class DescribeLoadBalancerPoliciesOutput < Struct.new(
+      nil,
       :policy_descriptions,
       keyword_init: true
     )
@@ -688,6 +736,7 @@ module Aws::ElasticLoadBalancing
     #   <p>The names of the policy types. If no names are specified, describes all policy types defined by Elastic Load Balancing.</p>
     #   @return [Array<String>]
     class DescribeLoadBalancerPolicyTypesInput < Struct.new(
+      nil,
       :policy_type_names,
       keyword_init: true
     )
@@ -699,6 +748,7 @@ module Aws::ElasticLoadBalancing
     #   <p>Information about the policy types.</p>
     #   @return [Array<Types::PolicyTypeDescription>]
     class DescribeLoadBalancerPolicyTypesOutput < Struct.new(
+      nil,
       :policy_type_descriptions,
       keyword_init: true
     )
@@ -710,6 +760,7 @@ module Aws::ElasticLoadBalancing
     #   <p>The names of the load balancers.</p>
     #   @return [Array<String>]
     class DescribeTagsInput < Struct.new(
+      nil,
       :load_balancer_names,
       keyword_init: true
     )
@@ -721,6 +772,7 @@ module Aws::ElasticLoadBalancing
     #   <p>Information about the tags.</p>
     #   @return [Array<Types::TagDescription>]
     class DescribeTagsOutput < Struct.new(
+      nil,
       :tag_descriptions,
       keyword_init: true
     )
@@ -735,6 +787,7 @@ module Aws::ElasticLoadBalancing
     #   <p>The IDs of the subnets.</p>
     #   @return [Array<String>]
     class DetachLoadBalancerFromSubnetsInput < Struct.new(
+      nil,
       :load_balancer_name,
       :subnets,
       keyword_init: true
@@ -747,6 +800,7 @@ module Aws::ElasticLoadBalancing
     #   <p>The IDs of the remaining subnets for the load balancer.</p>
     #   @return [Array<String>]
     class DetachLoadBalancerFromSubnetsOutput < Struct.new(
+      nil,
       :subnets,
       keyword_init: true
     )
@@ -757,6 +811,7 @@ module Aws::ElasticLoadBalancing
     # @!attribute message
     #   @return [String]
     class DuplicateAccessPointNameException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -767,6 +822,7 @@ module Aws::ElasticLoadBalancing
     # @!attribute message
     #   @return [String]
     class DuplicateListenerException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -777,6 +833,7 @@ module Aws::ElasticLoadBalancing
     # @!attribute message
     #   @return [String]
     class DuplicatePolicyNameException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -787,6 +844,7 @@ module Aws::ElasticLoadBalancing
     # @!attribute message
     #   @return [String]
     class DuplicateTagKeysException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -815,6 +873,7 @@ module Aws::ElasticLoadBalancing
     #   <p>The number of consecutive health checks successes required before moving the instance to the <code>Healthy</code> state.</p>
     #   @return [Integer]
     class HealthCheck < Struct.new(
+      nil,
       :target,
       :interval,
       :timeout,
@@ -830,6 +889,7 @@ module Aws::ElasticLoadBalancing
     #   <p>The instance ID.</p>
     #   @return [String]
     class Instance < Struct.new(
+      nil,
       :instance_id,
       keyword_init: true
     )
@@ -917,6 +977,7 @@ module Aws::ElasticLoadBalancing
     #            </ul>
     #   @return [String]
     class InstanceState < Struct.new(
+      nil,
       :instance_id,
       :state,
       :reason_code,
@@ -930,6 +991,7 @@ module Aws::ElasticLoadBalancing
     # @!attribute message
     #   @return [String]
     class InvalidConfigurationRequestException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -940,6 +1002,7 @@ module Aws::ElasticLoadBalancing
     # @!attribute message
     #   @return [String]
     class InvalidEndPointException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -950,6 +1013,7 @@ module Aws::ElasticLoadBalancing
     # @!attribute message
     #   @return [String]
     class InvalidSchemeException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -960,6 +1024,7 @@ module Aws::ElasticLoadBalancing
     # @!attribute message
     #   @return [String]
     class InvalidSecurityGroupException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -970,6 +1035,7 @@ module Aws::ElasticLoadBalancing
     # @!attribute message
     #   @return [String]
     class InvalidSubnetException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -984,6 +1050,7 @@ module Aws::ElasticLoadBalancing
     #   <p>The time period, in seconds, after which the cookie should be considered stale. If this parameter is not specified, the stickiness session lasts for the duration of the browser session.</p>
     #   @return [Integer]
     class LBCookieStickinessPolicy < Struct.new(
+      nil,
       :policy_name,
       :cookie_expiration_period,
       keyword_init: true
@@ -1010,6 +1077,7 @@ module Aws::ElasticLoadBalancing
     #   <p>The maximum value of the limit.</p>
     #   @return [String]
     class Limit < Struct.new(
+      nil,
       :name,
       :max,
       keyword_init: true
@@ -1042,6 +1110,7 @@ module Aws::ElasticLoadBalancing
     #   <p>The Amazon Resource Name (ARN) of the server certificate.</p>
     #   @return [String]
     class Listener < Struct.new(
+      nil,
       :protocol,
       :load_balancer_port,
       :instance_protocol,
@@ -1065,6 +1134,7 @@ module Aws::ElasticLoadBalancing
     #   <p>The policies. If there are no policies enabled, the list is empty.</p>
     #   @return [Array<String>]
     class ListenerDescription < Struct.new(
+      nil,
       :listener,
       :policy_names,
       keyword_init: true
@@ -1076,6 +1146,7 @@ module Aws::ElasticLoadBalancing
     # @!attribute message
     #   @return [String]
     class ListenerNotFoundException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -1086,6 +1157,7 @@ module Aws::ElasticLoadBalancing
     # @!attribute message
     #   @return [String]
     class LoadBalancerAttributeNotFoundException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -1118,6 +1190,7 @@ module Aws::ElasticLoadBalancing
     #   <p>Any additional attributes.</p>
     #   @return [Array<Types::AdditionalAttribute>]
     class LoadBalancerAttributes < Struct.new(
+      nil,
       :cross_zone_load_balancing,
       :access_log,
       :connection_draining,
@@ -1185,6 +1258,7 @@ module Aws::ElasticLoadBalancing
     #              DNS name that resolves to a private IP address.</p>
     #   @return [String]
     class LoadBalancerDescription < Struct.new(
+      nil,
       :load_balancer_name,
       :dns_name,
       :canonical_hosted_zone_name,
@@ -1214,6 +1288,7 @@ module Aws::ElasticLoadBalancing
     #   <p>The attributes for the load balancer.</p>
     #   @return [Types::LoadBalancerAttributes]
     class ModifyLoadBalancerAttributesInput < Struct.new(
+      nil,
       :load_balancer_name,
       :load_balancer_attributes,
       keyword_init: true
@@ -1229,6 +1304,7 @@ module Aws::ElasticLoadBalancing
     #   <p>Information about the load balancer attributes.</p>
     #   @return [Types::LoadBalancerAttributes]
     class ModifyLoadBalancerAttributesOutput < Struct.new(
+      nil,
       :load_balancer_name,
       :load_balancer_attributes,
       keyword_init: true
@@ -1240,6 +1316,7 @@ module Aws::ElasticLoadBalancing
     # @!attribute message
     #   @return [String]
     class OperationNotPermittedException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -1257,6 +1334,7 @@ module Aws::ElasticLoadBalancing
     #   <p>The policies other than the stickiness policies.</p>
     #   @return [Array<String>]
     class Policies < Struct.new(
+      nil,
       :app_cookie_stickiness_policies,
       :lb_cookie_stickiness_policies,
       :other_policies,
@@ -1273,6 +1351,7 @@ module Aws::ElasticLoadBalancing
     #   <p>The value of the attribute.</p>
     #   @return [String]
     class PolicyAttribute < Struct.new(
+      nil,
       :attribute_name,
       :attribute_value,
       keyword_init: true
@@ -1288,6 +1367,7 @@ module Aws::ElasticLoadBalancing
     #   <p>The value of the attribute.</p>
     #   @return [String]
     class PolicyAttributeDescription < Struct.new(
+      nil,
       :attribute_name,
       :attribute_value,
       keyword_init: true
@@ -1327,6 +1407,7 @@ module Aws::ElasticLoadBalancing
     #            </ul>
     #   @return [String]
     class PolicyAttributeTypeDescription < Struct.new(
+      nil,
       :attribute_name,
       :attribute_type,
       :description,
@@ -1348,6 +1429,7 @@ module Aws::ElasticLoadBalancing
     #   <p>The policy attributes.</p>
     #   @return [Array<Types::PolicyAttributeDescription>]
     class PolicyDescription < Struct.new(
+      nil,
       :policy_name,
       :policy_type_name,
       :policy_attribute_descriptions,
@@ -1360,6 +1442,7 @@ module Aws::ElasticLoadBalancing
     # @!attribute message
     #   @return [String]
     class PolicyNotFoundException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -1377,6 +1460,7 @@ module Aws::ElasticLoadBalancing
     #   <p>The description of the policy attributes associated with the policies defined by Elastic Load Balancing.</p>
     #   @return [Array<Types::PolicyAttributeTypeDescription>]
     class PolicyTypeDescription < Struct.new(
+      nil,
       :policy_type_name,
       :description,
       :policy_attribute_type_descriptions,
@@ -1389,6 +1473,7 @@ module Aws::ElasticLoadBalancing
     # @!attribute message
     #   @return [String]
     class PolicyTypeNotFoundException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -1403,6 +1488,7 @@ module Aws::ElasticLoadBalancing
     #   <p>The IDs of the instances.</p>
     #   @return [Array<Types::Instance>]
     class RegisterEndPointsInput < Struct.new(
+      nil,
       :load_balancer_name,
       :instances,
       keyword_init: true
@@ -1415,6 +1501,7 @@ module Aws::ElasticLoadBalancing
     #   <p>The updated list of instances for the load balancer.</p>
     #   @return [Array<Types::Instance>]
     class RegisterEndPointsOutput < Struct.new(
+      nil,
       :instances,
       keyword_init: true
     )
@@ -1429,6 +1516,7 @@ module Aws::ElasticLoadBalancing
     #   <p>The Availability Zones.</p>
     #   @return [Array<String>]
     class RemoveAvailabilityZonesInput < Struct.new(
+      nil,
       :load_balancer_name,
       :availability_zones,
       keyword_init: true
@@ -1441,6 +1529,7 @@ module Aws::ElasticLoadBalancing
     #   <p>The remaining Availability Zones for the load balancer.</p>
     #   @return [Array<String>]
     class RemoveAvailabilityZonesOutput < Struct.new(
+      nil,
       :availability_zones,
       keyword_init: true
     )
@@ -1455,6 +1544,7 @@ module Aws::ElasticLoadBalancing
     #   <p>The list of tag keys to remove.</p>
     #   @return [Array<Types::TagKeyOnly>]
     class RemoveTagsInput < Struct.new(
+      nil,
       :load_balancer_names,
       :tags,
       keyword_init: true
@@ -1464,6 +1554,7 @@ module Aws::ElasticLoadBalancing
 
     # <p>Contains the output of RemoveTags.</p>
     class RemoveTagsOutput < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1480,6 +1571,7 @@ module Aws::ElasticLoadBalancing
     #   <p>The Amazon Resource Name (ARN) of the SSL certificate.</p>
     #   @return [String]
     class SetLoadBalancerListenerSSLCertificateInput < Struct.new(
+      nil,
       :load_balancer_name,
       :load_balancer_port,
       :ssl_certificate_id,
@@ -1490,6 +1582,7 @@ module Aws::ElasticLoadBalancing
 
     # <p>Contains the output of SetLoadBalancerListenerSSLCertificate.</p>
     class SetLoadBalancerListenerSSLCertificateOutput < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1506,6 +1599,7 @@ module Aws::ElasticLoadBalancing
     #   <p>The names of the policies. If the list is empty, then all current polices are removed from the EC2 instance.</p>
     #   @return [Array<String>]
     class SetLoadBalancerPoliciesForBackendServerInput < Struct.new(
+      nil,
       :load_balancer_name,
       :instance_port,
       :policy_names,
@@ -1516,6 +1610,7 @@ module Aws::ElasticLoadBalancing
 
     # <p>Contains the output of SetLoadBalancerPoliciesForBackendServer.</p>
     class SetLoadBalancerPoliciesForBackendServerOutput < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1532,6 +1627,7 @@ module Aws::ElasticLoadBalancing
     #   <p>The names of the policies. This list must include all policies to be enabled. If you omit a policy that is currently enabled, it is disabled. If the list is empty, all current policies are disabled.</p>
     #   @return [Array<String>]
     class SetLoadBalancerPoliciesOfListenerInput < Struct.new(
+      nil,
       :load_balancer_name,
       :load_balancer_port,
       :policy_names,
@@ -1542,6 +1638,7 @@ module Aws::ElasticLoadBalancing
 
     # <p>Contains the output of SetLoadBalancePoliciesOfListener.</p>
     class SetLoadBalancerPoliciesOfListenerOutput < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1555,6 +1652,7 @@ module Aws::ElasticLoadBalancing
     #   <p>The name of the security group.</p>
     #   @return [String]
     class SourceSecurityGroup < Struct.new(
+      nil,
       :owner_alias,
       :group_name,
       keyword_init: true
@@ -1566,6 +1664,7 @@ module Aws::ElasticLoadBalancing
     # @!attribute message
     #   @return [String]
     class SubnetNotFoundException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -1580,6 +1679,7 @@ module Aws::ElasticLoadBalancing
     #   <p>The value of the tag.</p>
     #   @return [String]
     class Tag < Struct.new(
+      nil,
       :key,
       :value,
       keyword_init: true
@@ -1595,6 +1695,7 @@ module Aws::ElasticLoadBalancing
     #   <p>The tags.</p>
     #   @return [Array<Types::Tag>]
     class TagDescription < Struct.new(
+      nil,
       :load_balancer_name,
       :tags,
       keyword_init: true
@@ -1607,6 +1708,7 @@ module Aws::ElasticLoadBalancing
     #   <p>The name of the key.</p>
     #   @return [String]
     class TagKeyOnly < Struct.new(
+      nil,
       :key,
       keyword_init: true
     )
@@ -1617,6 +1719,7 @@ module Aws::ElasticLoadBalancing
     # @!attribute message
     #   @return [String]
     class TooManyAccessPointsException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -1627,6 +1730,7 @@ module Aws::ElasticLoadBalancing
     # @!attribute message
     #   @return [String]
     class TooManyPoliciesException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -1637,6 +1741,7 @@ module Aws::ElasticLoadBalancing
     # @!attribute message
     #   @return [String]
     class TooManyTagsException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -1647,6 +1752,7 @@ module Aws::ElasticLoadBalancing
     # @!attribute message
     #   @return [String]
     class UnsupportedProtocolException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )

@@ -14,6 +14,7 @@ module Aws::Mq
     #   <p>Information about the action required to resolve your broker issue.</p>
     #   @return [String]
     class ActionRequired < Struct.new(
+      nil,
       :action_required_code,
       :action_required_info,
       keyword_init: true
@@ -26,6 +27,7 @@ module Aws::Mq
     #   <p>Id for the availability zone.</p>
     #   @return [String]
     class AvailabilityZone < Struct.new(
+      nil,
       :name,
       keyword_init: true
     )
@@ -40,6 +42,7 @@ module Aws::Mq
     #   <p>The explanation of the error.</p>
     #   @return [String]
     class BadRequestException < Struct.new(
+      nil,
       :error_attribute,
       :message,
       keyword_init: true
@@ -55,6 +58,7 @@ module Aws::Mq
     #   <p>The list of engine versions.</p>
     #   @return [Array<Types::EngineVersion>]
     class BrokerEngineType < Struct.new(
+      nil,
       :engine_type,
       :engine_versions,
       keyword_init: true
@@ -73,6 +77,7 @@ module Aws::Mq
     #   <p>The IP address of the Elastic Network Interface (ENI) attached to the broker. Does not apply to RabbitMQ brokers.</p>
     #   @return [String]
     class BrokerInstance < Struct.new(
+      nil,
       :console_url,
       :endpoints,
       :ip_address,
@@ -101,6 +106,7 @@ module Aws::Mq
     #   <p>The list of supported engine versions.</p>
     #   @return [Array<String>]
     class BrokerInstanceOption < Struct.new(
+      nil,
       :availability_zones,
       :engine_type,
       :host_instance_type,
@@ -138,6 +144,7 @@ module Aws::Mq
     #   <p>The broker's instance type.</p>
     #   @return [String]
     class BrokerSummary < Struct.new(
+      nil,
       :broker_arn,
       :broker_id,
       :broker_name,
@@ -183,6 +190,7 @@ module Aws::Mq
     #   <p>The list of all tags associated with this configuration.</p>
     #   @return [Hash<String, String>]
     class Configuration < Struct.new(
+      nil,
       :arn,
       :authentication_strategy,
       :created,
@@ -206,6 +214,7 @@ module Aws::Mq
     #   <p>The revision number of the configuration.</p>
     #   @return [Integer]
     class ConfigurationId < Struct.new(
+      nil,
       :id,
       :revision,
       keyword_init: true
@@ -224,6 +233,7 @@ module Aws::Mq
     #   <p>Required. The revision number of the configuration.</p>
     #   @return [Integer]
     class ConfigurationRevision < Struct.new(
+      nil,
       :created,
       :description,
       :revision,
@@ -243,6 +253,7 @@ module Aws::Mq
     #   <p>The broker's pending configuration.</p>
     #   @return [Types::ConfigurationId]
     class Configurations < Struct.new(
+      nil,
       :current,
       :history,
       :pending,
@@ -259,6 +270,7 @@ module Aws::Mq
     #   <p>The explanation of the error.</p>
     #   @return [String]
     class ConflictException < Struct.new(
+      nil,
       :error_attribute,
       :message,
       keyword_init: true
@@ -331,6 +343,7 @@ module Aws::Mq
     #   <p>The Amazon Resource Name (ARN) of the primary broker that is used to replicate data from in a data replication pair, and is applied to the replica broker. Must be set when dataReplicationMode is set to CRDR.</p>
     #   @return [String]
     class CreateBrokerRequest < Struct.new(
+      nil,
       :authentication_strategy,
       :auto_minor_version_upgrade,
       :broker_name,
@@ -364,6 +377,7 @@ module Aws::Mq
     #   <p>The unique ID that Amazon MQ generates for the broker.</p>
     #   @return [String]
     class CreateBrokerResponse < Struct.new(
+      nil,
       :broker_arn,
       :broker_id,
       keyword_init: true
@@ -388,6 +402,7 @@ module Aws::Mq
     #   <p>Create tags when creating the configuration.</p>
     #   @return [Hash<String, String>]
     class CreateConfigurationRequest < Struct.new(
+      nil,
       :authentication_strategy,
       :engine_type,
       :engine_version,
@@ -417,6 +432,7 @@ module Aws::Mq
     #   <p>Required. The name of the configuration. This value can contain only alphanumeric characters, dashes, periods, underscores, and tildes (- . _ ~). This value must be 1-150 characters long.</p>
     #   @return [String]
     class CreateConfigurationResponse < Struct.new(
+      nil,
       :arn,
       :authentication_strategy,
       :created,
@@ -436,6 +452,7 @@ module Aws::Mq
     #   <p>The key-value pair for the resource tag.</p>
     #   @return [Hash<String, String>]
     class CreateTagsRequest < Struct.new(
+      nil,
       :resource_arn,
       :tags,
       keyword_init: true
@@ -463,6 +480,7 @@ module Aws::Mq
     #   <p>Defines if this user is intended for CRDR replication purposes.</p>
     #   @return [Boolean]
     class CreateUserRequest < Struct.new(
+      nil,
       :broker_id,
       :console_access,
       :groups,
@@ -475,6 +493,7 @@ module Aws::Mq
     end
 
     class CreateUserResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -488,6 +507,7 @@ module Aws::Mq
     #   <p>Required. The region of the broker.</p>
     #   @return [String]
     class DataReplicationCounterpart < Struct.new(
+      nil,
       :broker_id,
       :region,
       keyword_init: true
@@ -503,6 +523,7 @@ module Aws::Mq
     #   <p>Defines the role of this broker in a data replication pair. When a replica broker is promoted to primary, this role is interchanged.</p>
     #   @return [String]
     class DataReplicationMetadataOutput < Struct.new(
+      nil,
       :data_replication_counterpart,
       :data_replication_role,
       keyword_init: true
@@ -514,6 +535,7 @@ module Aws::Mq
     #   <p>The unique ID that Amazon MQ generates for the broker.</p>
     #   @return [String]
     class DeleteBrokerRequest < Struct.new(
+      nil,
       :broker_id,
       keyword_init: true
     )
@@ -524,6 +546,7 @@ module Aws::Mq
     #   <p>The unique ID that Amazon MQ generates for the broker.</p>
     #   @return [String]
     class DeleteBrokerResponse < Struct.new(
+      nil,
       :broker_id,
       keyword_init: true
     )
@@ -534,6 +557,7 @@ module Aws::Mq
     #   <p>The unique ID that Amazon MQ generates for the configuration.</p>
     #   @return [String]
     class DeleteConfigurationRequest < Struct.new(
+      nil,
       :configuration_id,
       keyword_init: true
     )
@@ -544,6 +568,7 @@ module Aws::Mq
     #   <p>The unique ID that Amazon MQ generates for the configuration.</p>
     #   @return [String]
     class DeleteConfigurationResponse < Struct.new(
+      nil,
       :configuration_id,
       keyword_init: true
     )
@@ -557,6 +582,7 @@ module Aws::Mq
     #   <p>An array of tag keys to delete</p>
     #   @return [Array<String>]
     class DeleteTagsRequest < Struct.new(
+      nil,
       :resource_arn,
       :tag_keys,
       keyword_init: true
@@ -571,6 +597,7 @@ module Aws::Mq
     #   <p>The username of the ActiveMQ user. This value can contain only alphanumeric characters, dashes, periods, underscores, and tildes (- . _ ~). This value must be 2-100 characters long.</p>
     #   @return [String]
     class DeleteUserRequest < Struct.new(
+      nil,
       :broker_id,
       :username,
       keyword_init: true
@@ -579,6 +606,7 @@ module Aws::Mq
     end
 
     class DeleteUserResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -594,6 +622,7 @@ module Aws::Mq
     #   <p>The token that specifies the next page of results Amazon MQ should return. To request the first page, leave nextToken empty.</p>
     #   @return [String]
     class DescribeBrokerEngineTypesRequest < Struct.new(
+      nil,
       :engine_type,
       :max_results,
       :next_token,
@@ -612,6 +641,7 @@ module Aws::Mq
     #   <p>The token that specifies the next page of results Amazon MQ should return. To request the first page, leave nextToken empty.</p>
     #   @return [String]
     class DescribeBrokerEngineTypesResponse < Struct.new(
+      nil,
       :broker_engine_types,
       :max_results,
       :next_token,
@@ -636,6 +666,7 @@ module Aws::Mq
     #   <p>Filter response by storage type.</p>
     #   @return [String]
     class DescribeBrokerInstanceOptionsRequest < Struct.new(
+      nil,
       :engine_type,
       :host_instance_type,
       :max_results,
@@ -656,6 +687,7 @@ module Aws::Mq
     #   <p>The token that specifies the next page of results Amazon MQ should return. To request the first page, leave nextToken empty.</p>
     #   @return [String]
     class DescribeBrokerInstanceOptionsResponse < Struct.new(
+      nil,
       :broker_instance_options,
       :max_results,
       :next_token,
@@ -668,6 +700,7 @@ module Aws::Mq
     #   <p>The unique ID that Amazon MQ generates for the broker.</p>
     #   @return [String]
     class DescribeBrokerRequest < Struct.new(
+      nil,
       :broker_id,
       keyword_init: true
     )
@@ -774,6 +807,7 @@ module Aws::Mq
     #   <p>Describes whether this broker will be a part of a data replication pair after reboot.</p>
     #   @return [String]
     class DescribeBrokerResponse < Struct.new(
+      nil,
       :actions_required,
       :authentication_strategy,
       :auto_minor_version_upgrade,
@@ -816,6 +850,7 @@ module Aws::Mq
     #   <p>The unique ID that Amazon MQ generates for the configuration.</p>
     #   @return [String]
     class DescribeConfigurationRequest < Struct.new(
+      nil,
       :configuration_id,
       keyword_init: true
     )
@@ -853,6 +888,7 @@ module Aws::Mq
     #   <p>The list of all tags associated with this configuration.</p>
     #   @return [Hash<String, String>]
     class DescribeConfigurationResponse < Struct.new(
+      nil,
       :arn,
       :authentication_strategy,
       :created,
@@ -875,6 +911,7 @@ module Aws::Mq
     #   <p>The revision of the configuration.</p>
     #   @return [String]
     class DescribeConfigurationRevisionRequest < Struct.new(
+      nil,
       :configuration_id,
       :configuration_revision,
       keyword_init: true
@@ -895,6 +932,7 @@ module Aws::Mq
     #   <p>The description of the configuration.</p>
     #   @return [String]
     class DescribeConfigurationRevisionResponse < Struct.new(
+      nil,
       :configuration_id,
       :created,
       :data,
@@ -911,6 +949,7 @@ module Aws::Mq
     #   <p>The username of the ActiveMQ user. This value can contain only alphanumeric characters, dashes, periods, underscores, and tildes (- . _ ~). This value must be 2-100 characters long.</p>
     #   @return [String]
     class DescribeUserRequest < Struct.new(
+      nil,
       :broker_id,
       :username,
       keyword_init: true
@@ -937,6 +976,7 @@ module Aws::Mq
     #   <p>Describes whether the user is intended for data replication</p>
     #   @return [Boolean]
     class DescribeUserResponse < Struct.new(
+      nil,
       :broker_id,
       :console_access,
       :groups,
@@ -956,6 +996,7 @@ module Aws::Mq
     #   <p>Enables the use of an Amazon Web Services owned CMK using KMS (KMS). Set to true by default, if no value is provided, for example, for RabbitMQ brokers.</p>
     #   @return [Boolean]
     class EncryptionOptions < Struct.new(
+      nil,
       :kms_key_id,
       :use_aws_owned_key,
       keyword_init: true
@@ -968,6 +1009,7 @@ module Aws::Mq
     #   <p>Id for the version.</p>
     #   @return [String]
     class EngineVersion < Struct.new(
+      nil,
       :name,
       keyword_init: true
     )
@@ -982,6 +1024,7 @@ module Aws::Mq
     #   <p>The explanation of the error.</p>
     #   @return [String]
     class ForbiddenException < Struct.new(
+      nil,
       :error_attribute,
       :message,
       keyword_init: true
@@ -997,6 +1040,7 @@ module Aws::Mq
     #   <p>The explanation of the error.</p>
     #   @return [String]
     class InternalServerErrorException < Struct.new(
+      nil,
       :error_attribute,
       :message,
       keyword_init: true
@@ -1044,6 +1088,7 @@ module Aws::Mq
     #   <p>The directory search scope for the user. If set to true, scope is to search the entire subtree.</p>
     #   @return [Boolean]
     class LdapServerMetadataInput < Struct.new(
+      nil,
       :hosts,
       :role_base,
       :role_name,
@@ -1096,6 +1141,7 @@ module Aws::Mq
     #   <p>The directory search scope for the user. If set to true, scope is to search the entire subtree.</p>
     #   @return [Boolean]
     class LdapServerMetadataOutput < Struct.new(
+      nil,
       :hosts,
       :role_base,
       :role_name,
@@ -1118,6 +1164,7 @@ module Aws::Mq
     #   <p>The token that specifies the next page of results Amazon MQ should return. To request the first page, leave nextToken empty.</p>
     #   @return [String]
     class ListBrokersRequest < Struct.new(
+      nil,
       :max_results,
       :next_token,
       keyword_init: true
@@ -1132,6 +1179,7 @@ module Aws::Mq
     #   <p>The token that specifies the next page of results Amazon MQ should return. To request the first page, leave nextToken empty.</p>
     #   @return [String]
     class ListBrokersResponse < Struct.new(
+      nil,
       :broker_summaries,
       :next_token,
       keyword_init: true
@@ -1149,6 +1197,7 @@ module Aws::Mq
     #   <p>The token that specifies the next page of results Amazon MQ should return. To request the first page, leave nextToken empty.</p>
     #   @return [String]
     class ListConfigurationRevisionsRequest < Struct.new(
+      nil,
       :configuration_id,
       :max_results,
       :next_token,
@@ -1170,6 +1219,7 @@ module Aws::Mq
     #   <p>The list of all revisions for the specified configuration.</p>
     #   @return [Array<Types::ConfigurationRevision>]
     class ListConfigurationRevisionsResponse < Struct.new(
+      nil,
       :configuration_id,
       :max_results,
       :next_token,
@@ -1186,6 +1236,7 @@ module Aws::Mq
     #   <p>The token that specifies the next page of results Amazon MQ should return. To request the first page, leave nextToken empty.</p>
     #   @return [String]
     class ListConfigurationsRequest < Struct.new(
+      nil,
       :max_results,
       :next_token,
       keyword_init: true
@@ -1203,6 +1254,7 @@ module Aws::Mq
     #   <p>The token that specifies the next page of results Amazon MQ should return. To request the first page, leave nextToken empty.</p>
     #   @return [String]
     class ListConfigurationsResponse < Struct.new(
+      nil,
       :configurations,
       :max_results,
       :next_token,
@@ -1215,6 +1267,7 @@ module Aws::Mq
     #   <p>The Amazon Resource Name (ARN) of the resource tag.</p>
     #   @return [String]
     class ListTagsRequest < Struct.new(
+      nil,
       :resource_arn,
       keyword_init: true
     )
@@ -1225,6 +1278,7 @@ module Aws::Mq
     #   <p>The key-value pair for the resource tag.</p>
     #   @return [Hash<String, String>]
     class ListTagsResponse < Struct.new(
+      nil,
       :tags,
       keyword_init: true
     )
@@ -1241,6 +1295,7 @@ module Aws::Mq
     #   <p>The token that specifies the next page of results Amazon MQ should return. To request the first page, leave nextToken empty.</p>
     #   @return [String]
     class ListUsersRequest < Struct.new(
+      nil,
       :broker_id,
       :max_results,
       :next_token,
@@ -1262,6 +1317,7 @@ module Aws::Mq
     #   <p>Required. The list of all ActiveMQ usernames for the specified broker. Does not apply to RabbitMQ brokers.</p>
     #   @return [Array<Types::UserSummary>]
     class ListUsersResponse < Struct.new(
+      nil,
       :broker_id,
       :max_results,
       :next_token,
@@ -1279,6 +1335,7 @@ module Aws::Mq
     #   <p>Enables general logging.</p>
     #   @return [Boolean]
     class Logs < Struct.new(
+      nil,
       :audit,
       :general,
       keyword_init: true
@@ -1303,6 +1360,7 @@ module Aws::Mq
     #   <p>The list of information about logs pending to be deployed for the specified broker.</p>
     #   @return [Types::PendingLogs]
     class LogsSummary < Struct.new(
+      nil,
       :audit,
       :audit_log_group,
       :general,
@@ -1321,6 +1379,7 @@ module Aws::Mq
     #   <p>The explanation of the error.</p>
     #   @return [String]
     class NotFoundException < Struct.new(
+      nil,
       :error_attribute,
       :message,
       keyword_init: true
@@ -1336,6 +1395,7 @@ module Aws::Mq
     #   <p>Enables general logging.</p>
     #   @return [Boolean]
     class PendingLogs < Struct.new(
+      nil,
       :audit,
       :general,
       keyword_init: true
@@ -1351,6 +1411,7 @@ module Aws::Mq
     #   <p>The Promote mode requested. Note: Valid values for the parameter are SWITCHOVER, FAILOVER.</p>
     #   @return [String]
     class PromoteRequest < Struct.new(
+      nil,
       :broker_id,
       :mode,
       keyword_init: true
@@ -1362,6 +1423,7 @@ module Aws::Mq
     #   <p>The unique ID that Amazon MQ generates for the broker.</p>
     #   @return [String]
     class PromoteResponse < Struct.new(
+      nil,
       :broker_id,
       keyword_init: true
     )
@@ -1372,6 +1434,7 @@ module Aws::Mq
     #   <p>The unique ID that Amazon MQ generates for the broker.</p>
     #   @return [String]
     class RebootBrokerRequest < Struct.new(
+      nil,
       :broker_id,
       keyword_init: true
     )
@@ -1379,6 +1442,7 @@ module Aws::Mq
     end
 
     class RebootBrokerResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1395,6 +1459,7 @@ module Aws::Mq
     #   <p>The reason for which the configuration elements or attributes were sanitized.</p>
     #   @return [String]
     class SanitizationWarning < Struct.new(
+      nil,
       :attribute_name,
       :element_name,
       :reason,
@@ -1411,6 +1476,7 @@ module Aws::Mq
     #   <p>The explanation of the error.</p>
     #   @return [String]
     class UnauthorizedException < Struct.new(
+      nil,
       :error_attribute,
       :message,
       keyword_init: true
@@ -1453,6 +1519,7 @@ module Aws::Mq
     #   <p>Defines whether this broker is a part of a data replication pair.</p>
     #   @return [String]
     class UpdateBrokerRequest < Struct.new(
+      nil,
       :authentication_strategy,
       :auto_minor_version_upgrade,
       :broker_id,
@@ -1512,6 +1579,7 @@ module Aws::Mq
     #   <p>Describes whether this broker will be a part of a data replication pair after reboot.</p>
     #   @return [String]
     class UpdateBrokerResponse < Struct.new(
+      nil,
       :authentication_strategy,
       :auto_minor_version_upgrade,
       :broker_id,
@@ -1542,6 +1610,7 @@ module Aws::Mq
     #   <p>The description of the configuration.</p>
     #   @return [String]
     class UpdateConfigurationRequest < Struct.new(
+      nil,
       :configuration_id,
       :data,
       :description,
@@ -1569,6 +1638,7 @@ module Aws::Mq
     #   <p>The list of the first 20 warnings about the configuration elements or attributes that were sanitized.</p>
     #   @return [Array<Types::SanitizationWarning>]
     class UpdateConfigurationResponse < Struct.new(
+      nil,
       :arn,
       :created,
       :id,
@@ -1600,6 +1670,7 @@ module Aws::Mq
     #   <p>Defines whether the user is intended for data replication.</p>
     #   @return [Boolean]
     class UpdateUserRequest < Struct.new(
+      nil,
       :broker_id,
       :console_access,
       :groups,
@@ -1612,6 +1683,7 @@ module Aws::Mq
     end
 
     class UpdateUserResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1634,6 +1706,7 @@ module Aws::Mq
     #   <p>Defines if this user is intended for CRDR replication purposes.</p>
     #   @return [Boolean]
     class User < Struct.new(
+      nil,
       :console_access,
       :groups,
       :password,
@@ -1655,6 +1728,7 @@ module Aws::Mq
     #   <p>Required. The type of change pending for the ActiveMQ user.</p>
     #   @return [String]
     class UserPendingChanges < Struct.new(
+      nil,
       :console_access,
       :groups,
       :pending_change,
@@ -1671,6 +1745,7 @@ module Aws::Mq
     #   <p>Required. The username of the broker user. This value can contain only alphanumeric characters, dashes, periods, underscores, and tildes (- . _ ~). This value must be 2-100 characters long.</p>
     #   @return [String]
     class UserSummary < Struct.new(
+      nil,
       :pending_change,
       :username,
       keyword_init: true
@@ -1689,6 +1764,7 @@ module Aws::Mq
     #   <p>The time zone, UTC by default, in either the Country/City format, or the UTC offset format.</p>
     #   @return [String]
     class WeeklyStartTime < Struct.new(
+      nil,
       :day_of_week,
       :time_of_day,
       :time_zone,

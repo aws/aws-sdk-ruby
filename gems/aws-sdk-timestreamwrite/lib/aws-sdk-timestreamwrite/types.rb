@@ -10,6 +10,7 @@ module Aws::TimestreamWrite
     # @!attribute message
     #   @return [String]
     class AccessDeniedException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -36,6 +37,7 @@ module Aws::TimestreamWrite
     #   <p></p>
     #   @return [Integer]
     class BatchLoadProgressReport < Struct.new(
+      nil,
       :records_processed,
       :records_ingested,
       :parse_failures,
@@ -81,6 +83,7 @@ module Aws::TimestreamWrite
     #         </p>
     #   @return [Time]
     class BatchLoadTask < Struct.new(
+      nil,
       :task_id,
       :task_status,
       :database_name,
@@ -137,6 +140,7 @@ module Aws::TimestreamWrite
     #         </p>
     #   @return [Time]
     class BatchLoadTaskDescription < Struct.new(
+      nil,
       :task_id,
       :error_message,
       :data_source_configuration,
@@ -165,6 +169,7 @@ module Aws::TimestreamWrite
     # @!attribute message
     #   @return [String]
     class ConflictException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -194,6 +199,7 @@ module Aws::TimestreamWrite
     #   <p></p>
     #   @return [Integer]
     class CreateBatchLoadTaskRequest < Struct.new(
+      nil,
       :client_token,
       :data_model_configuration,
       :data_source_configuration,
@@ -210,6 +216,7 @@ module Aws::TimestreamWrite
     #   <p>The ID of the batch load task.</p>
     #   @return [String]
     class CreateBatchLoadTaskResponse < Struct.new(
+      nil,
       :task_id,
       keyword_init: true
     )
@@ -227,6 +234,7 @@ module Aws::TimestreamWrite
     #   <p> A list of key-value pairs to label the table. </p>
     #   @return [Array<Types::Tag>]
     class CreateDatabaseRequest < Struct.new(
+      nil,
       :database_name,
       :kms_key_id,
       :tags,
@@ -239,6 +247,7 @@ module Aws::TimestreamWrite
     #   <p>The newly created Timestream database.</p>
     #   @return [Types::Database]
     class CreateDatabaseResponse < Struct.new(
+      nil,
       :database,
       keyword_init: true
     )
@@ -265,6 +274,7 @@ module Aws::TimestreamWrite
     #   <p> The schema of the table. </p>
     #   @return [Types::Schema]
     class CreateTableRequest < Struct.new(
+      nil,
       :database_name,
       :table_name,
       :retention_properties,
@@ -280,6 +290,7 @@ module Aws::TimestreamWrite
     #   <p>The newly created Timestream table.</p>
     #   @return [Types::Table]
     class CreateTableResponse < Struct.new(
+      nil,
       :table,
       keyword_init: true
     )
@@ -305,6 +316,7 @@ module Aws::TimestreamWrite
     #   <p>Specifies to trim leading and trailing white space.</p>
     #   @return [Boolean]
     class CsvConfiguration < Struct.new(
+      nil,
       :column_separator,
       :escape_char,
       :quote_char,
@@ -337,6 +349,7 @@ module Aws::TimestreamWrite
     #   <p></p>
     #   @return [String]
     class DataModel < Struct.new(
+      nil,
       :time_column,
       :time_unit,
       :dimension_mappings,
@@ -356,6 +369,7 @@ module Aws::TimestreamWrite
     #   <p></p>
     #   @return [Types::DataModelS3Configuration]
     class DataModelConfiguration < Struct.new(
+      nil,
       :data_model,
       :data_model_s3_configuration,
       keyword_init: true
@@ -371,6 +385,7 @@ module Aws::TimestreamWrite
     #   <p></p>
     #   @return [String]
     class DataModelS3Configuration < Struct.new(
+      nil,
       :bucket_name,
       :object_key,
       keyword_init: true
@@ -390,6 +405,7 @@ module Aws::TimestreamWrite
     #   <p>This is currently CSV.</p>
     #   @return [String]
     class DataSourceConfiguration < Struct.new(
+      nil,
       :data_source_s3_configuration,
       :csv_configuration,
       :data_format,
@@ -408,6 +424,7 @@ module Aws::TimestreamWrite
     #         </p>
     #   @return [String]
     class DataSourceS3Configuration < Struct.new(
+      nil,
       :bucket_name,
       :object_key_prefix,
       keyword_init: true
@@ -438,6 +455,7 @@ module Aws::TimestreamWrite
     #   <p> The last time that this database was updated. </p>
     #   @return [Time]
     class Database < Struct.new(
+      nil,
       :arn,
       :database_name,
       :table_count,
@@ -458,6 +476,7 @@ module Aws::TimestreamWrite
     #   <p>The name of the Timestream database to be deleted.</p>
     #   @return [String]
     class DeleteDatabaseRequest < Struct.new(
+      nil,
       :database_name,
       keyword_init: true
     )
@@ -471,6 +490,7 @@ module Aws::TimestreamWrite
     #   <p>The name of the Timestream table to be deleted.</p>
     #   @return [String]
     class DeleteTableRequest < Struct.new(
+      nil,
       :database_name,
       :table_name,
       keyword_init: true
@@ -482,6 +502,7 @@ module Aws::TimestreamWrite
     #   <p>The ID of the batch load task.</p>
     #   @return [String]
     class DescribeBatchLoadTaskRequest < Struct.new(
+      nil,
       :task_id,
       keyword_init: true
     )
@@ -492,6 +513,7 @@ module Aws::TimestreamWrite
     #   <p>Description of the batch load task.</p>
     #   @return [Types::BatchLoadTaskDescription]
     class DescribeBatchLoadTaskResponse < Struct.new(
+      nil,
       :batch_load_task_description,
       keyword_init: true
     )
@@ -502,6 +524,7 @@ module Aws::TimestreamWrite
     #   <p>The name of the Timestream database.</p>
     #   @return [String]
     class DescribeDatabaseRequest < Struct.new(
+      nil,
       :database_name,
       keyword_init: true
     )
@@ -512,6 +535,7 @@ module Aws::TimestreamWrite
     #   <p>The name of the Timestream table.</p>
     #   @return [Types::Database]
     class DescribeDatabaseResponse < Struct.new(
+      nil,
       :database,
       keyword_init: true
     )
@@ -519,6 +543,7 @@ module Aws::TimestreamWrite
     end
 
     class DescribeEndpointsRequest < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -529,6 +554,7 @@ module Aws::TimestreamWrite
     #            request is made.</p>
     #   @return [Array<Types::Endpoint>]
     class DescribeEndpointsResponse < Struct.new(
+      nil,
       :endpoints,
       keyword_init: true
     )
@@ -542,6 +568,7 @@ module Aws::TimestreamWrite
     #   <p>The name of the Timestream table.</p>
     #   @return [String]
     class DescribeTableRequest < Struct.new(
+      nil,
       :database_name,
       :table_name,
       keyword_init: true
@@ -553,6 +580,7 @@ module Aws::TimestreamWrite
     #   <p>The Timestream table.</p>
     #   @return [Types::Table]
     class DescribeTableResponse < Struct.new(
+      nil,
       :table,
       keyword_init: true
     )
@@ -576,6 +604,7 @@ module Aws::TimestreamWrite
     #   <p>The data type of the dimension for the time-series data point.</p>
     #   @return [String]
     class Dimension < Struct.new(
+      nil,
       :name,
       :value,
       :dimension_value_type,
@@ -593,6 +622,7 @@ module Aws::TimestreamWrite
     #         </p>
     #   @return [String]
     class DimensionMapping < Struct.new(
+      nil,
       :source_column,
       :destination_column,
       keyword_init: true
@@ -609,6 +639,7 @@ module Aws::TimestreamWrite
     #   <p>The TTL for the endpoint, in minutes.</p>
     #   @return [Integer]
     class Endpoint < Struct.new(
+      nil,
       :address,
       :cache_period_in_minutes,
       keyword_init: true
@@ -627,6 +658,7 @@ module Aws::TimestreamWrite
     # @!attribute message
     #   @return [String]
     class InternalServerException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -637,6 +669,7 @@ module Aws::TimestreamWrite
     # @!attribute message
     #   @return [String]
     class InvalidEndpointException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -657,6 +690,7 @@ module Aws::TimestreamWrite
     #   <p>Status of the batch load task.</p>
     #   @return [String]
     class ListBatchLoadTasksRequest < Struct.new(
+      nil,
       :next_token,
       :max_results,
       :task_status,
@@ -673,6 +707,7 @@ module Aws::TimestreamWrite
     #   <p>A list of batch load task details.</p>
     #   @return [Array<Types::BatchLoadTask>]
     class ListBatchLoadTasksResponse < Struct.new(
+      nil,
       :next_token,
       :batch_load_tasks,
       keyword_init: true
@@ -691,6 +726,7 @@ module Aws::TimestreamWrite
     #            invocation.</p>
     #   @return [Integer]
     class ListDatabasesRequest < Struct.new(
+      nil,
       :next_token,
       :max_results,
       keyword_init: true
@@ -705,6 +741,7 @@ module Aws::TimestreamWrite
     #   <p>The pagination token. This parameter is returned when the response is truncated.</p>
     #   @return [String]
     class ListDatabasesResponse < Struct.new(
+      nil,
       :databases,
       :next_token,
       keyword_init: true
@@ -726,6 +763,7 @@ module Aws::TimestreamWrite
     #            invocation.</p>
     #   @return [Integer]
     class ListTablesRequest < Struct.new(
+      nil,
       :database_name,
       :next_token,
       :max_results,
@@ -742,6 +780,7 @@ module Aws::TimestreamWrite
     #            truncated response.</p>
     #   @return [String]
     class ListTablesResponse < Struct.new(
+      nil,
       :tables,
       :next_token,
       keyword_init: true
@@ -754,6 +793,7 @@ module Aws::TimestreamWrite
     #            Resource Name (ARN). </p>
     #   @return [String]
     class ListTagsForResourceRequest < Struct.new(
+      nil,
       :resource_arn,
       keyword_init: true
     )
@@ -764,6 +804,7 @@ module Aws::TimestreamWrite
     #   <p> The tags currently associated with the Timestream resource. </p>
     #   @return [Array<Types::Tag>]
     class ListTagsForResourceResponse < Struct.new(
+      nil,
       :tags,
       keyword_init: true
     )
@@ -777,6 +818,7 @@ module Aws::TimestreamWrite
     #            asynchronously, during magnetic store writes.</p>
     #   @return [Types::S3Configuration]
     class MagneticStoreRejectedDataLocation < Struct.new(
+      nil,
       :s3_configuration,
       keyword_init: true
     )
@@ -792,6 +834,7 @@ module Aws::TimestreamWrite
     #            store writes.</p>
     #   @return [Types::MagneticStoreRejectedDataLocation]
     class MagneticStoreWriteProperties < Struct.new(
+      nil,
       :enable_magnetic_store_writes,
       :magnetic_store_rejected_data_location,
       keyword_init: true
@@ -817,6 +860,7 @@ module Aws::TimestreamWrite
     #   <p>Contains the data type of the MeasureValue for the time-series data point.</p>
     #   @return [String]
     class MeasureValue < Struct.new(
+      nil,
       :name,
       :value,
       :type,
@@ -842,6 +886,7 @@ module Aws::TimestreamWrite
     #   <p></p>
     #   @return [Array<Types::MultiMeasureAttributeMapping>]
     class MixedMeasureMapping < Struct.new(
+      nil,
       :measure_name,
       :source_column,
       :target_measure_name,
@@ -863,6 +908,7 @@ module Aws::TimestreamWrite
     #   <p></p>
     #   @return [String]
     class MultiMeasureAttributeMapping < Struct.new(
+      nil,
       :source_column,
       :target_multi_measure_attribute_name,
       :measure_value_type,
@@ -879,6 +925,7 @@ module Aws::TimestreamWrite
     #   <p></p>
     #   @return [Array<Types::MultiMeasureAttributeMapping>]
     class MultiMeasureMappings < Struct.new(
+      nil,
       :target_multi_measure_name,
       :multi_measure_attribute_mappings,
       keyword_init: true
@@ -903,6 +950,7 @@ module Aws::TimestreamWrite
     #            have to be specified). </p>
     #   @return [String]
     class PartitionKey < Struct.new(
+      nil,
       :type,
       :name,
       :enforcement_in_record,
@@ -968,6 +1016,7 @@ module Aws::TimestreamWrite
     #               <code>MeasureValue</code> attribute of the record directly. </p>
     #   @return [Array<Types::MeasureValue>]
     class Record < Struct.new(
+      nil,
       :dimensions,
       :measure_name,
       :measure_value,
@@ -997,6 +1046,7 @@ module Aws::TimestreamWrite
     #   <p>Count of records ingested into the magnetic store.</p>
     #   @return [Integer]
     class RecordsIngested < Struct.new(
+      nil,
       :total,
       :memory_store,
       :magnetic_store,
@@ -1067,6 +1117,7 @@ module Aws::TimestreamWrite
     #            identical record exists with a higher version than the version in the write request.</p>
     #   @return [Integer]
     class RejectedRecord < Struct.new(
+      nil,
       :record_index,
       :reason,
       :existing_version,
@@ -1118,6 +1169,7 @@ module Aws::TimestreamWrite
     #         </p>
     #   @return [Array<Types::RejectedRecord>]
     class RejectedRecordsException < Struct.new(
+      nil,
       :message,
       :rejected_records,
       keyword_init: true
@@ -1132,6 +1184,7 @@ module Aws::TimestreamWrite
     #            load.</p>
     #   @return [Types::ReportS3Configuration]
     class ReportConfiguration < Struct.new(
+      nil,
       :report_s3_configuration,
       keyword_init: true
     )
@@ -1152,6 +1205,7 @@ module Aws::TimestreamWrite
     #   <p></p>
     #   @return [String]
     class ReportS3Configuration < Struct.new(
+      nil,
       :bucket_name,
       :object_key_prefix,
       :encryption_option,
@@ -1166,6 +1220,7 @@ module Aws::TimestreamWrite
     # @!attribute message
     #   @return [String]
     class ResourceNotFoundException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -1176,6 +1231,7 @@ module Aws::TimestreamWrite
     #   <p>The ID of the batch load task to resume.</p>
     #   @return [String]
     class ResumeBatchLoadTaskRequest < Struct.new(
+      nil,
       :task_id,
       keyword_init: true
     )
@@ -1183,6 +1239,7 @@ module Aws::TimestreamWrite
     end
 
     class ResumeBatchLoadTaskResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1197,6 +1254,7 @@ module Aws::TimestreamWrite
     #   <p>The duration for which data must be stored in the magnetic store. </p>
     #   @return [Integer]
     class RetentionProperties < Struct.new(
+      nil,
       :memory_store_retention_period_in_hours,
       :magnetic_store_retention_period_in_days,
       keyword_init: true
@@ -1220,6 +1278,7 @@ module Aws::TimestreamWrite
     #               Amazon Web Services managed key.</p>
     #   @return [String]
     class S3Configuration < Struct.new(
+      nil,
       :bucket_name,
       :object_key_prefix,
       :encryption_option,
@@ -1237,6 +1296,7 @@ module Aws::TimestreamWrite
     #            created. However, the enforcement level of each partition key can be changed. </p>
     #   @return [Array<Types::PartitionKey>]
     class Schema < Struct.new(
+      nil,
       :composite_partition_key,
       keyword_init: true
     )
@@ -1247,6 +1307,7 @@ module Aws::TimestreamWrite
     # @!attribute message
     #   @return [String]
     class ServiceQuotaExceededException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -1294,6 +1355,7 @@ module Aws::TimestreamWrite
     #   <p> The schema of the table. </p>
     #   @return [Types::Schema]
     class Table < Struct.new(
+      nil,
       :arn,
       :table_name,
       :database_name,
@@ -1318,6 +1380,7 @@ module Aws::TimestreamWrite
     #   <p> The value of the tag. Tag values are case-sensitive and can be null. </p>
     #   @return [String]
     class Tag < Struct.new(
+      nil,
       :key,
       :value,
       keyword_init: true
@@ -1333,6 +1396,7 @@ module Aws::TimestreamWrite
     #   <p> The tags to be assigned to the Timestream resource. </p>
     #   @return [Array<Types::Tag>]
     class TagResourceRequest < Struct.new(
+      nil,
       :resource_arn,
       :tags,
       keyword_init: true
@@ -1341,6 +1405,7 @@ module Aws::TimestreamWrite
     end
 
     class TagResourceResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1351,6 +1416,7 @@ module Aws::TimestreamWrite
     # @!attribute message
     #   @return [String]
     class ThrottlingException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -1366,6 +1432,7 @@ module Aws::TimestreamWrite
     #            will be removed from the Timestream resource. </p>
     #   @return [Array<String>]
     class UntagResourceRequest < Struct.new(
+      nil,
       :resource_arn,
       :tag_keys,
       keyword_init: true
@@ -1374,6 +1441,7 @@ module Aws::TimestreamWrite
     end
 
     class UntagResourceResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1410,6 +1478,7 @@ module Aws::TimestreamWrite
     #            </ul>
     #   @return [String]
     class UpdateDatabaseRequest < Struct.new(
+      nil,
       :database_name,
       :kms_key_id,
       keyword_init: true
@@ -1423,6 +1492,7 @@ module Aws::TimestreamWrite
     #            same KMS key.</p>
     #   @return [Types::Database]
     class UpdateDatabaseResponse < Struct.new(
+      nil,
       :database,
       keyword_init: true
     )
@@ -1445,6 +1515,7 @@ module Aws::TimestreamWrite
     #   <p> The schema of the table. </p>
     #   @return [Types::Schema]
     class UpdateTableRequest < Struct.new(
+      nil,
       :database_name,
       :table_name,
       :retention_properties,
@@ -1459,6 +1530,7 @@ module Aws::TimestreamWrite
     #   <p>The updated Timestream table.</p>
     #   @return [Types::Table]
     class UpdateTableResponse < Struct.new(
+      nil,
       :table,
       keyword_init: true
     )
@@ -1469,6 +1541,7 @@ module Aws::TimestreamWrite
     # @!attribute message
     #   @return [String]
     class ValidationException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -1494,6 +1567,7 @@ module Aws::TimestreamWrite
     #            attributes for each time-series data point. </p>
     #   @return [Array<Types::Record>]
     class WriteRecordsRequest < Struct.new(
+      nil,
       :database_name,
       :table_name,
       :common_attributes,
@@ -1507,6 +1581,7 @@ module Aws::TimestreamWrite
     #   <p>Information on the records ingested by this request.</p>
     #   @return [Types::RecordsIngested]
     class WriteRecordsResponse < Struct.new(
+      nil,
       :records_ingested,
       keyword_init: true
     )

@@ -13,6 +13,7 @@ module Aws::Rbin
     #   <p>The reason for the exception.</p>
     #   @return [String]
     class ConflictException < Struct.new(
+      nil,
       :message,
       :reason,
       keyword_init: true
@@ -54,6 +55,7 @@ module Aws::Rbin
     #            <p>You can't specify exclusion tags for tag-level retention rules.</p>
     #   @return [Array<Types::ResourceTag>]
     class CreateRuleRequest < Struct.new(
+      nil,
       :retention_period,
       :description,
       :tags,
@@ -126,6 +128,7 @@ module Aws::Rbin
     #   excluded, or ignored, by the retention rule.</p>
     #   @return [Array<Types::ResourceTag>]
     class CreateRuleResponse < Struct.new(
+      nil,
       :identifier,
       :retention_period,
       :description,
@@ -146,6 +149,7 @@ module Aws::Rbin
     #   <p>The unique ID of the retention rule.</p>
     #   @return [String]
     class DeleteRuleRequest < Struct.new(
+      nil,
       :identifier,
       keyword_init: true
     )
@@ -153,6 +157,7 @@ module Aws::Rbin
     end
 
     class DeleteRuleResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -162,6 +167,7 @@ module Aws::Rbin
     #   <p>The unique ID of the retention rule.</p>
     #   @return [String]
     class GetRuleRequest < Struct.new(
+      nil,
       :identifier,
       keyword_init: true
     )
@@ -230,6 +236,7 @@ module Aws::Rbin
     #   excluded, or ignored, by the retention rule.</p>
     #   @return [Array<Types::ResourceTag>]
     class GetRuleResponse < Struct.new(
+      nil,
       :identifier,
       :description,
       :resource_type,
@@ -250,6 +257,7 @@ module Aws::Rbin
     # @!attribute message
     #   @return [String]
     class InternalServerException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -283,6 +291,7 @@ module Aws::Rbin
     #   excluded, or ignored, by the retention rule.</p>
     #   @return [Array<Types::ResourceTag>]
     class ListRulesRequest < Struct.new(
+      nil,
       :max_results,
       :next_token,
       :resource_type,
@@ -301,6 +310,7 @@ module Aws::Rbin
     #   <p>The token to use to retrieve the next page of results. This value is <code>null</code> when there are no more results to return.</p>
     #   @return [String]
     class ListRulesResponse < Struct.new(
+      nil,
       :rules,
       :next_token,
       keyword_init: true
@@ -312,6 +322,7 @@ module Aws::Rbin
     #   <p>The Amazon Resource Name (ARN) of the retention rule.</p>
     #   @return [String]
     class ListTagsForResourceRequest < Struct.new(
+      nil,
       :resource_arn,
       keyword_init: true
     )
@@ -322,6 +333,7 @@ module Aws::Rbin
     #   <p>Information about the tags assigned to the retention rule.</p>
     #   @return [Array<Types::Tag>]
     class ListTagsForResourceResponse < Struct.new(
+      nil,
       :tags,
       keyword_init: true
     )
@@ -333,6 +345,7 @@ module Aws::Rbin
     #   <p>Information about the retention rule unlock delay.</p>
     #   @return [Types::UnlockDelay]
     class LockConfiguration < Struct.new(
+      nil,
       :unlock_delay,
       keyword_init: true
     )
@@ -346,6 +359,7 @@ module Aws::Rbin
     #   <p>Information about the retention rule lock configuration.</p>
     #   @return [Types::LockConfiguration]
     class LockRuleRequest < Struct.new(
+      nil,
       :identifier,
       :lock_configuration,
       keyword_init: true
@@ -410,6 +424,7 @@ module Aws::Rbin
     #   excluded, or ignored, by the retention rule.</p>
     #   @return [Array<Types::ResourceTag>]
     class LockRuleResponse < Struct.new(
+      nil,
       :identifier,
       :description,
       :resource_type,
@@ -432,6 +447,7 @@ module Aws::Rbin
     #   <p>The reason for the exception.</p>
     #   @return [String]
     class ResourceNotFoundException < Struct.new(
+      nil,
       :message,
       :reason,
       keyword_init: true
@@ -448,6 +464,7 @@ module Aws::Rbin
     #   <p>The tag value.</p>
     #   @return [String]
     class ResourceTag < Struct.new(
+      nil,
       :resource_tag_key,
       :resource_tag_value,
       keyword_init: true
@@ -465,6 +482,7 @@ module Aws::Rbin
     #         is supported.</p>
     #   @return [String]
     class RetentionPeriod < Struct.new(
+      nil,
       :retention_period_value,
       :retention_period_unit,
       keyword_init: true
@@ -512,6 +530,7 @@ module Aws::Rbin
     #   <p>The Amazon Resource Name (ARN) of the retention rule.</p>
     #   @return [String]
     class RuleSummary < Struct.new(
+      nil,
       :identifier,
       :description,
       :retention_period,
@@ -529,6 +548,7 @@ module Aws::Rbin
     #   <p>The reason for the exception.</p>
     #   @return [String]
     class ServiceQuotaExceededException < Struct.new(
+      nil,
       :message,
       :reason,
       keyword_init: true
@@ -544,6 +564,7 @@ module Aws::Rbin
     #   <p>The tag value.</p>
     #   @return [String]
     class Tag < Struct.new(
+      nil,
       :key,
       :value,
       keyword_init: true
@@ -558,6 +579,7 @@ module Aws::Rbin
     #   <p>Information about the tags to assign to the retention rule.</p>
     #   @return [Array<Types::Tag>]
     class TagResourceRequest < Struct.new(
+      nil,
       :resource_arn,
       :tags,
       keyword_init: true
@@ -566,6 +588,7 @@ module Aws::Rbin
     end
 
     class TagResourceResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -583,6 +606,7 @@ module Aws::Rbin
     #         be measure only in days.</p>
     #   @return [String]
     class UnlockDelay < Struct.new(
+      nil,
       :unlock_delay_value,
       :unlock_delay_unit,
       keyword_init: true
@@ -594,6 +618,7 @@ module Aws::Rbin
     #   <p>The unique ID of the retention rule.</p>
     #   @return [String]
     class UnlockRuleRequest < Struct.new(
+      nil,
       :identifier,
       keyword_init: true
     )
@@ -662,6 +687,7 @@ module Aws::Rbin
     #   excluded, or ignored, by the retention rule.</p>
     #   @return [Array<Types::ResourceTag>]
     class UnlockRuleResponse < Struct.new(
+      nil,
       :identifier,
       :description,
       :resource_type,
@@ -685,6 +711,7 @@ module Aws::Rbin
     #   <p>The tag keys of the tags to unassign. All tags that have the specified tag key are unassigned.</p>
     #   @return [Array<String>]
     class UntagResourceRequest < Struct.new(
+      nil,
       :resource_arn,
       :tag_keys,
       keyword_init: true
@@ -693,6 +720,7 @@ module Aws::Rbin
     end
 
     class UntagResourceResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -730,6 +758,7 @@ module Aws::Rbin
     #            <p>You can't specify exclusion tags for tag-level retention rules.</p>
     #   @return [Array<Types::ResourceTag>]
     class UpdateRuleRequest < Struct.new(
+      nil,
       :identifier,
       :retention_period,
       :description,
@@ -800,6 +829,7 @@ module Aws::Rbin
     #   excluded, or ignored, by the retention rule.</p>
     #   @return [Array<Types::ResourceTag>]
     class UpdateRuleResponse < Struct.new(
+      nil,
       :identifier,
       :retention_period,
       :description,
@@ -822,6 +852,7 @@ module Aws::Rbin
     #   <p>The reason for the exception.</p>
     #   @return [String]
     class ValidationException < Struct.new(
+      nil,
       :message,
       :reason,
       keyword_init: true

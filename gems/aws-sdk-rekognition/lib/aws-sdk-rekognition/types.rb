@@ -15,6 +15,7 @@ module Aws::Rekognition
     #   <p>A universally unique identifier (UUID) for the request.</p>
     #   @return [String]
     class AccessDeniedException < Struct.new(
+      nil,
       :message,
       :code,
       :logref,
@@ -34,6 +35,7 @@ module Aws::Rekognition
     #   <p>The highest estimated age.</p>
     #   @return [Integer]
     class AgeRange < Struct.new(
+      nil,
       :low,
       :high,
       keyword_init: true
@@ -49,6 +51,7 @@ module Aws::Rekognition
     #   </p>
     #   @return [Types::GroundTruthManifest]
     class Asset < Struct.new(
+      nil,
       :ground_truth_manifest,
       keyword_init: true
     )
@@ -75,6 +78,7 @@ module Aws::Rekognition
     #         once.</p>
     #   @return [String]
     class AssociateFacesRequest < Struct.new(
+      nil,
       :collection_id,
       :user_id,
       :face_ids,
@@ -98,6 +102,7 @@ module Aws::Rekognition
     #         every requested change.</p>
     #   @return [String]
     class AssociateFacesResponse < Struct.new(
+      nil,
       :associated_faces,
       :unsuccessful_face_associations,
       :user_status,
@@ -111,6 +116,7 @@ module Aws::Rekognition
     #   <p>Unique identifier assigned to the face.</p>
     #   @return [String]
     class AssociatedFace < Struct.new(
+      nil,
       :face_id,
       keyword_init: true
     )
@@ -132,6 +138,7 @@ module Aws::Rekognition
     #   <p>The number of audio channels in the segment.</p>
     #   @return [Integer]
     class AudioMetadata < Struct.new(
+      nil,
       :codec,
       :duration_millis,
       :sample_rate,
@@ -176,6 +183,7 @@ module Aws::Rekognition
     #            </note>
     #   @return [Types::BoundingBox]
     class AuditImage < Struct.new(
+      nil,
       :bytes,
       :s3_object,
       :bounding_box,
@@ -193,6 +201,7 @@ module Aws::Rekognition
     #   <p>Level of confidence in the determination.</p>
     #   @return [Float]
     class Beard < Struct.new(
+      nil,
       :value,
       :confidence,
       keyword_init: true
@@ -230,6 +239,7 @@ module Aws::Rekognition
     #         set. You can reduce this value to allow more noise on the black frame.</p>
     #   @return [Float]
     class BlackFrame < Struct.new(
+      nil,
       :max_pixel_threshold,
       :min_coverage_percentage,
       keyword_init: true
@@ -268,6 +278,7 @@ module Aws::Rekognition
     #   <p>Top coordinate of the bounding box as a ratio of overall image height.</p>
     #   @return [Float]
     class BoundingBox < Struct.new(
+      nil,
       :width,
       :height,
       :left,
@@ -301,6 +312,7 @@ module Aws::Rekognition
     #         gender identity can be Male, Female, Nonbinary, or Unlisted.</p>
     #   @return [Types::KnownGender]
     class Celebrity < Struct.new(
+      nil,
       :urls,
       :name,
       :id,
@@ -335,6 +347,7 @@ module Aws::Rekognition
     #   <p>Retrieves the known gender for the celebrity.</p>
     #   @return [Types::KnownGender]
     class CelebrityDetail < Struct.new(
+      nil,
       :urls,
       :name,
       :id,
@@ -357,6 +370,7 @@ module Aws::Rekognition
     #   <p>Information about a recognized celebrity.</p>
     #   @return [Types::CelebrityDetail]
     class CelebrityRecognition < Struct.new(
+      nil,
       :timestamp,
       :celebrity,
       keyword_init: true
@@ -377,6 +391,7 @@ module Aws::Rekognition
     #   <p>The version of the challenge being used for the Face Liveness session.</p>
     #   @return [String]
     class Challenge < Struct.new(
+      nil,
       :type,
       :version,
       keyword_init: true
@@ -392,6 +407,7 @@ module Aws::Rekognition
     #   <p>The version of the challenges that have been selected for the Face Liveness session.</p>
     #   @return [Types::Versions]
     class ChallengePreference < Struct.new(
+      nil,
       :type,
       :versions,
       keyword_init: true
@@ -411,6 +427,7 @@ module Aws::Rekognition
     #         contains a face).</p>
     #   @return [Types::ComparedFace]
     class CompareFacesMatch < Struct.new(
+      nil,
       :similarity,
       :face,
       keyword_init: true
@@ -450,6 +467,7 @@ module Aws::Rekognition
     #         of the face model or higher.</p>
     #   @return [String]
     class CompareFacesRequest < Struct.new(
+      nil,
       :source_image,
       :target_image,
       :similarity_threshold,
@@ -495,6 +513,7 @@ module Aws::Rekognition
     #         aren't translated and represent the object locations before the image is rotated. </p>
     #   @return [String]
     class CompareFacesResponse < Struct.new(
+      nil,
       :source_image_face,
       :face_matches,
       :unmatched_faces,
@@ -532,6 +551,7 @@ module Aws::Rekognition
     #         determination. </p>
     #   @return [Types::Smile]
     class ComparedFace < Struct.new(
+      nil,
       :bounding_box,
       :confidence,
       :landmarks,
@@ -555,6 +575,7 @@ module Aws::Rekognition
     #   <p>Confidence level that the selected bounding box contains a face.</p>
     #   @return [Float]
     class ComparedSourceImageFace < Struct.new(
+      nil,
       :bounding_box,
       :confidence,
       keyword_init: true
@@ -572,6 +593,7 @@ module Aws::Rekognition
     #   <p>A universally unique identifier (UUID) for the request.</p>
     #   @return [String]
     class ConflictException < Struct.new(
+      nil,
       :message,
       :code,
       :logref,
@@ -598,6 +620,7 @@ module Aws::Rekognition
     #           </p>
     #   @return [Float]
     class ConnectedHomeSettings < Struct.new(
+      nil,
       :labels,
       :min_confidence,
       keyword_init: true
@@ -619,6 +642,7 @@ module Aws::Rekognition
     #           </p>
     #   @return [Float]
     class ConnectedHomeSettingsForUpdate < Struct.new(
+      nil,
       :labels,
       :min_confidence,
       keyword_init: true
@@ -651,6 +675,7 @@ module Aws::Rekognition
     #         the image content might be from animation, sports, or a video game.</p>
     #   @return [Array<Types::ContentType>]
     class ContentModerationDetection < Struct.new(
+      nil,
       :timestamp,
       :moderation_label,
       :start_timestamp_millis,
@@ -675,6 +700,7 @@ module Aws::Rekognition
     #   <p>The name of the label</p>
     #   @return [String]
     class ContentType < Struct.new(
+      nil,
       :confidence,
       :name,
       keyword_init: true
@@ -725,6 +751,7 @@ module Aws::Rekognition
     #            using a key that AWS owns and manages.</p>
     #   @return [String]
     class CopyProjectVersionRequest < Struct.new(
+      nil,
       :source_project_arn,
       :source_project_version_arn,
       :destination_project_arn,
@@ -741,6 +768,7 @@ module Aws::Rekognition
     #   <p>The ARN of the copied model version in the destination project. </p>
     #   @return [String]
     class CopyProjectVersionResponse < Struct.new(
+      nil,
       :project_version_arn,
       keyword_init: true
     )
@@ -756,6 +784,7 @@ module Aws::Rekognition
     #   <p>True if the PPE covers the corresponding body part, otherwise false.</p>
     #   @return [Boolean]
     class CoversBodyPart < Struct.new(
+      nil,
       :confidence,
       :value,
       keyword_init: true
@@ -775,6 +804,7 @@ module Aws::Rekognition
     #   <p> A set of tags (key-value pairs) that you want to attach to the collection. </p>
     #   @return [Hash<String, String>]
     class CreateCollectionRequest < Struct.new(
+      nil,
       :collection_id,
       :tags,
       keyword_init: true
@@ -794,6 +824,7 @@ module Aws::Rekognition
     #         creating.</p>
     #   @return [String]
     class CreateCollectionResponse < Struct.new(
+      nil,
       :status_code,
       :collection_arn,
       :face_model_version,
@@ -825,6 +856,7 @@ module Aws::Rekognition
     #   <p>A set of tags (key-value pairs) that you want to attach to the dataset.</p>
     #   @return [Hash<String, String>]
     class CreateDatasetRequest < Struct.new(
+      nil,
       :dataset_source,
       :dataset_type,
       :project_arn,
@@ -840,6 +872,7 @@ module Aws::Rekognition
     #   </p>
     #   @return [String]
     class CreateDatasetResponse < Struct.new(
+      nil,
       :dataset_arn,
       keyword_init: true
     )
@@ -861,6 +894,7 @@ module Aws::Rekognition
     #         times.</p>
     #   @return [String]
     class CreateFaceLivenessSessionRequest < Struct.new(
+      nil,
       :kms_key_id,
       :settings,
       :client_request_token,
@@ -888,6 +922,7 @@ module Aws::Rekognition
     #   <p>Indicates preferred challenge types and versions for the Face Liveness session to be created.</p>
     #   @return [Array<Types::ChallengePreference>]
     class CreateFaceLivenessSessionRequestSettings < Struct.new(
+      nil,
       :output_config,
       :audit_images_limit,
       :challenge_preferences,
@@ -904,6 +939,7 @@ module Aws::Rekognition
     #       </p>
     #   @return [String]
     class CreateFaceLivenessSessionResponse < Struct.new(
+      nil,
       :session_id,
       keyword_init: true
     )
@@ -925,6 +961,7 @@ module Aws::Rekognition
     #   <p>A set of tags (key-value pairs) that you want to attach to the project.</p>
     #   @return [Hash<String, String>]
     class CreateProjectRequest < Struct.new(
+      nil,
       :project_name,
       :feature,
       :auto_update,
@@ -939,6 +976,7 @@ module Aws::Rekognition
     #         configure IAM access to the project. </p>
     #   @return [String]
     class CreateProjectResponse < Struct.new(
+      nil,
       :project_arn,
       keyword_init: true
     )
@@ -1002,6 +1040,7 @@ module Aws::Rekognition
     #   <p>Feature-specific configuration of the training job. If the job configuration does not match the feature type associated with the project, an InvalidParameterException is returned.</p>
     #   @return [Types::CustomizationFeatureConfig]
     class CreateProjectVersionRequest < Struct.new(
+      nil,
       :project_arn,
       :version_name,
       :output_config,
@@ -1022,6 +1061,7 @@ module Aws::Rekognition
     #            operation.</p>
     #   @return [String]
     class CreateProjectVersionResponse < Struct.new(
+      nil,
       :project_version_arn,
       keyword_init: true
     )
@@ -1080,6 +1120,7 @@ module Aws::Rekognition
     #           </p>
     #   @return [Types::StreamProcessorDataSharingPreference]
     class CreateStreamProcessorRequest < Struct.new(
+      nil,
       :input,
       :output,
       :name,
@@ -1099,6 +1140,7 @@ module Aws::Rekognition
     #   <p>Amazon Resource Number for the newly created stream processor.</p>
     #   @return [String]
     class CreateStreamProcessorResponse < Struct.new(
+      nil,
       :stream_processor_arn,
       keyword_init: true
     )
@@ -1117,6 +1159,7 @@ module Aws::Rekognition
     #         ClientRequestToken to prevent the same request from being processed more than once.</p>
     #   @return [String]
     class CreateUserRequest < Struct.new(
+      nil,
       :collection_id,
       :user_id,
       :client_request_token,
@@ -1126,6 +1169,7 @@ module Aws::Rekognition
     end
 
     class CreateUserResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1145,6 +1189,7 @@ module Aws::Rekognition
     #            for more accurate spatial information.</p>
     #   @return [Types::Geometry]
     class CustomLabel < Struct.new(
+      nil,
       :name,
       :confidence,
       :geometry,
@@ -1160,6 +1205,7 @@ module Aws::Rekognition
     #   <p>Configuration options for Custom Moderation training.</p>
     #   @return [Types::CustomizationFeatureContentModerationConfig]
     class CustomizationFeatureConfig < Struct.new(
+      nil,
       :content_moderation,
       keyword_init: true
     )
@@ -1171,6 +1217,7 @@ module Aws::Rekognition
     #   <p>The confidence level you plan to use to identify if unsafe content is present during inference.</p>
     #   @return [Float]
     class CustomizationFeatureContentModerationConfig < Struct.new(
+      nil,
       :confidence_threshold,
       keyword_init: true
     )
@@ -1194,6 +1241,7 @@ module Aws::Rekognition
     #      </p>
     #   @return [String]
     class DatasetChanges < Struct.new(
+      nil,
       :ground_truth,
       keyword_init: true
     )
@@ -1238,6 +1286,7 @@ module Aws::Rekognition
     #   </p>
     #   @return [Types::DatasetStats]
     class DatasetDescription < Struct.new(
+      nil,
       :creation_timestamp,
       :last_updated_timestamp,
       :status,
@@ -1263,6 +1312,7 @@ module Aws::Rekognition
     #   </p>
     #   @return [Types::DatasetLabelStats]
     class DatasetLabelDescription < Struct.new(
+      nil,
       :label_name,
       :label_stats,
       keyword_init: true
@@ -1284,6 +1334,7 @@ module Aws::Rekognition
     #   </p>
     #   @return [Integer]
     class DatasetLabelStats < Struct.new(
+      nil,
       :entry_count,
       :bounding_box_count,
       keyword_init: true
@@ -1328,6 +1379,7 @@ module Aws::Rekognition
     #   </p>
     #   @return [String]
     class DatasetMetadata < Struct.new(
+      nil,
       :creation_timestamp,
       :dataset_type,
       :dataset_arn,
@@ -1359,6 +1411,7 @@ module Aws::Rekognition
     #   </p>
     #   @return [String]
     class DatasetSource < Struct.new(
+      nil,
       :ground_truth_manifest,
       :dataset_arn,
       keyword_init: true
@@ -1391,6 +1444,7 @@ module Aws::Rekognition
     #         </p>
     #   @return [Integer]
     class DatasetStats < Struct.new(
+      nil,
       :labeled_entries,
       :total_entries,
       :total_labels,
@@ -1404,6 +1458,7 @@ module Aws::Rekognition
     #   <p>ID of the collection to delete.</p>
     #   @return [String]
     class DeleteCollectionRequest < Struct.new(
+      nil,
       :collection_id,
       keyword_init: true
     )
@@ -1414,6 +1469,7 @@ module Aws::Rekognition
     #   <p>HTTP status code that indicates the result of the operation.</p>
     #   @return [Integer]
     class DeleteCollectionResponse < Struct.new(
+      nil,
       :status_code,
       keyword_init: true
     )
@@ -1426,6 +1482,7 @@ module Aws::Rekognition
     #   </p>
     #   @return [String]
     class DeleteDatasetRequest < Struct.new(
+      nil,
       :dataset_arn,
       keyword_init: true
     )
@@ -1433,6 +1490,7 @@ module Aws::Rekognition
     end
 
     class DeleteDatasetResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1445,6 +1503,7 @@ module Aws::Rekognition
     #   <p>An array of face IDs to delete.</p>
     #   @return [Array<String>]
     class DeleteFacesRequest < Struct.new(
+      nil,
       :collection_id,
       :face_ids,
       keyword_init: true
@@ -1459,6 +1518,7 @@ module Aws::Rekognition
     #   <p>An array of any faces that weren't deleted.</p>
     #   @return [Array<Types::UnsuccessfulFaceDeletion>]
     class DeleteFacesResponse < Struct.new(
+      nil,
       :deleted_faces,
       :unsuccessful_face_deletions,
       keyword_init: true
@@ -1476,6 +1536,7 @@ module Aws::Rekognition
     #   <p>The ID of the project policy revision that you want to delete.</p>
     #   @return [String]
     class DeleteProjectPolicyRequest < Struct.new(
+      nil,
       :project_arn,
       :policy_name,
       :policy_revision_id,
@@ -1485,6 +1546,7 @@ module Aws::Rekognition
     end
 
     class DeleteProjectPolicyResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1494,6 +1556,7 @@ module Aws::Rekognition
     #   <p>The Amazon Resource Name (ARN) of the project that you want to delete.</p>
     #   @return [String]
     class DeleteProjectRequest < Struct.new(
+      nil,
       :project_arn,
       keyword_init: true
     )
@@ -1504,6 +1567,7 @@ module Aws::Rekognition
     #   <p>The current status of the delete project operation.</p>
     #   @return [String]
     class DeleteProjectResponse < Struct.new(
+      nil,
       :status,
       keyword_init: true
     )
@@ -1515,6 +1579,7 @@ module Aws::Rekognition
     #            delete.</p>
     #   @return [String]
     class DeleteProjectVersionRequest < Struct.new(
+      nil,
       :project_version_arn,
       keyword_init: true
     )
@@ -1525,6 +1590,7 @@ module Aws::Rekognition
     #   <p>The status of the deletion operation.</p>
     #   @return [String]
     class DeleteProjectVersionResponse < Struct.new(
+      nil,
       :status,
       keyword_init: true
     )
@@ -1535,6 +1601,7 @@ module Aws::Rekognition
     #   <p>The name of the stream processor you want to delete.</p>
     #   @return [String]
     class DeleteStreamProcessorRequest < Struct.new(
+      nil,
       :name,
       keyword_init: true
     )
@@ -1542,6 +1609,7 @@ module Aws::Rekognition
     end
 
     class DeleteStreamProcessorResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1559,6 +1627,7 @@ module Aws::Rekognition
     #         ClientRequestToken to prevent the same request from being processed more than once.</p>
     #   @return [String]
     class DeleteUserRequest < Struct.new(
+      nil,
       :collection_id,
       :user_id,
       :client_request_token,
@@ -1568,6 +1637,7 @@ module Aws::Rekognition
     end
 
     class DeleteUserResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1577,6 +1647,7 @@ module Aws::Rekognition
     #   <p>The ID of the collection to describe.</p>
     #   @return [String]
     class DescribeCollectionRequest < Struct.new(
+      nil,
       :collection_id,
       keyword_init: true
     )
@@ -1603,6 +1674,7 @@ module Aws::Rekognition
     #   <p>The number of UserIDs assigned to the specified colleciton.</p>
     #   @return [Integer]
     class DescribeCollectionResponse < Struct.new(
+      nil,
       :face_count,
       :face_model_version,
       :collection_arn,
@@ -1619,6 +1691,7 @@ module Aws::Rekognition
     #   </p>
     #   @return [String]
     class DescribeDatasetRequest < Struct.new(
+      nil,
       :dataset_arn,
       keyword_init: true
     )
@@ -1631,6 +1704,7 @@ module Aws::Rekognition
     #   </p>
     #   @return [Types::DatasetDescription]
     class DescribeDatasetResponse < Struct.new(
+      nil,
       :dataset_description,
       keyword_init: true
     )
@@ -1659,6 +1733,7 @@ module Aws::Rekognition
     #             error occurs. The default value is 100. </p>
     #   @return [Integer]
     class DescribeProjectVersionsRequest < Struct.new(
+      nil,
       :project_arn,
       :version_names,
       :next_token,
@@ -1678,6 +1753,7 @@ module Aws::Rekognition
     #            You can use this pagination token to retrieve the next set of results. </p>
     #   @return [String]
     class DescribeProjectVersionsResponse < Struct.new(
+      nil,
       :project_version_descriptions,
       :next_token,
       keyword_init: true
@@ -1704,6 +1780,7 @@ module Aws::Rekognition
     #            CUSTOM_LABELS is used as a default.</p>
     #   @return [Array<String>]
     class DescribeProjectsRequest < Struct.new(
+      nil,
       :next_token,
       :max_results,
       :project_names,
@@ -1722,6 +1799,7 @@ module Aws::Rekognition
     #            You can use this pagination token to retrieve the next set of results. </p>
     #   @return [String]
     class DescribeProjectsResponse < Struct.new(
+      nil,
       :project_descriptions,
       :next_token,
       keyword_init: true
@@ -1733,6 +1811,7 @@ module Aws::Rekognition
     #   <p>Name of the stream processor for which you want information.</p>
     #   @return [String]
     class DescribeStreamProcessorRequest < Struct.new(
+      nil,
       :name,
       keyword_init: true
     )
@@ -1795,6 +1874,7 @@ module Aws::Rekognition
     #           </p>
     #   @return [Types::StreamProcessorDataSharingPreference]
     class DescribeStreamProcessorResponse < Struct.new(
+      nil,
       :name,
       :stream_processor_arn,
       :status,
@@ -1856,6 +1936,7 @@ module Aws::Rekognition
     #            returns labels based on the assumed threshold of each label.</p>
     #   @return [Float]
     class DetectCustomLabelsRequest < Struct.new(
+      nil,
       :project_version_arn,
       :image,
       :max_results,
@@ -1869,6 +1950,7 @@ module Aws::Rekognition
     #   <p>An array of custom labels detected in the input image.</p>
     #   @return [Array<Types::CustomLabel>]
     class DetectCustomLabelsResponse < Struct.new(
+      nil,
       :custom_labels,
       keyword_init: true
     )
@@ -1897,6 +1979,7 @@ module Aws::Rekognition
     #           <code>StartFaceDetection</code> and <code>GetFaceDetection</code>.</p>
     #   @return [Array<String>]
     class DetectFacesRequest < Struct.new(
+      nil,
       :image,
       :attributes,
       keyword_init: true
@@ -1919,6 +2002,7 @@ module Aws::Rekognition
     #         aren't translated and represent the object locations before the image is rotated. </p>
     #   @return [String]
     class DetectFacesResponse < Struct.new(
+      nil,
       :face_details,
       :orientation_correction,
       keyword_init: true
@@ -1936,6 +2020,7 @@ module Aws::Rekognition
     #         have a particular color).</p>
     #   @return [Array<Types::DominantColor>]
     class DetectLabelsImageBackground < Struct.new(
+      nil,
       :quality,
       :dominant_colors,
       keyword_init: true
@@ -1953,6 +2038,7 @@ module Aws::Rekognition
     #         have a particular color).</p>
     #   @return [Array<Types::DominantColor>]
     class DetectLabelsImageForeground < Struct.new(
+      nil,
       :quality,
       :dominant_colors,
       keyword_init: true
@@ -1981,6 +2067,7 @@ module Aws::Rekognition
     #         quality and dominant colors, including the quality and dominant colors of the image.</p>
     #   @return [Types::DetectLabelsImageBackground]
     class DetectLabelsImageProperties < Struct.new(
+      nil,
       :quality,
       :dominant_colors,
       :foreground,
@@ -1996,6 +2083,7 @@ module Aws::Rekognition
     #         default value is 10.</p>
     #   @return [Integer]
     class DetectLabelsImagePropertiesSettings < Struct.new(
+      nil,
       :max_dominant_colors,
       keyword_init: true
     )
@@ -2019,6 +2107,7 @@ module Aws::Rekognition
     #   <p>The contrast of an image provided for label detection.</p>
     #   @return [Float]
     class DetectLabelsImageQuality < Struct.new(
+      nil,
       :brightness,
       :sharpness,
       :contrast,
@@ -2059,6 +2148,7 @@ module Aws::Rekognition
     #         supplied. For a full list of labels and label categories, see <a href="https://docs.aws.amazon.com/rekognition/latest/dg/labels.html">Detecting labels</a>.</p>
     #   @return [Types::DetectLabelsSettings]
     class DetectLabelsRequest < Struct.new(
+      nil,
       :image,
       :max_labels,
       :min_confidence,
@@ -2091,6 +2181,7 @@ module Aws::Rekognition
     #         contrast, and dominant colors.</p>
     #   @return [Types::DetectLabelsImageProperties]
     class DetectLabelsResponse < Struct.new(
+      nil,
       :labels,
       :orientation_correction,
       :label_model_version,
@@ -2111,6 +2202,7 @@ module Aws::Rekognition
     #   <p>Contains the chosen number of maximum dominant colors in an image.</p>
     #   @return [Types::DetectLabelsImagePropertiesSettings]
     class DetectLabelsSettings < Struct.new(
+      nil,
       :general_labels,
       :image_properties,
       keyword_init: true
@@ -2140,6 +2232,7 @@ module Aws::Rekognition
     #            Use the CreateProject or CreateProjectVersion APIs to create a custom adapter.</p>
     #   @return [String]
     class DetectModerationLabelsRequest < Struct.new(
+      nil,
       :image,
       :min_confidence,
       :human_loop_config,
@@ -2170,6 +2263,7 @@ module Aws::Rekognition
     #         the image content might be from animation, sports, or a video game.</p>
     #   @return [Array<Types::ContentType>]
     class DetectModerationLabelsResponse < Struct.new(
+      nil,
       :moderation_labels,
       :moderation_model_version,
       :human_loop_activation_output,
@@ -2188,6 +2282,7 @@ module Aws::Rekognition
     #   <p>An array of PPE types that you want to summarize.</p>
     #   @return [Types::ProtectiveEquipmentSummarizationAttributes]
     class DetectProtectiveEquipmentRequest < Struct.new(
+      nil,
       :image,
       :summarization_attributes,
       keyword_init: true
@@ -2206,6 +2301,7 @@ module Aws::Rekognition
     #         parameter.</p>
     #   @return [Types::ProtectiveEquipmentSummary]
     class DetectProtectiveEquipmentResponse < Struct.new(
+      nil,
       :protective_equipment_model_version,
       :persons,
       :summary,
@@ -2226,6 +2322,7 @@ module Aws::Rekognition
     #         to set the region of the image.</p>
     #   @return [Array<Types::RegionOfInterest>]
     class DetectTextFilters < Struct.new(
+      nil,
       :word_filter,
       :regions_of_interest,
       keyword_init: true
@@ -2245,6 +2342,7 @@ module Aws::Rekognition
     #         in your response.</p>
     #   @return [Types::DetectTextFilters]
     class DetectTextRequest < Struct.new(
+      nil,
       :image,
       :filters,
       keyword_init: true
@@ -2259,6 +2357,7 @@ module Aws::Rekognition
     #   <p>The model version used to detect text.</p>
     #   @return [String]
     class DetectTextResponse < Struct.new(
+      nil,
       :text_detections,
       :text_model_version,
       keyword_init: true
@@ -2281,6 +2380,7 @@ module Aws::Rekognition
     #         this value will be excluded from the result. Value is relative to the video frame width.</p>
     #   @return [Float]
     class DetectionFilter < Struct.new(
+      nil,
       :min_confidence,
       :min_bounding_box_height,
       :min_bounding_box_width,
@@ -2305,6 +2405,7 @@ module Aws::Rekognition
     #   <p>An array of face IDs to disassociate from the UserID. </p>
     #   @return [Array<String>]
     class DisassociateFacesRequest < Struct.new(
+      nil,
       :collection_id,
       :user_id,
       :client_request_token,
@@ -2328,6 +2429,7 @@ module Aws::Rekognition
     #         requested change.</p>
     #   @return [String]
     class DisassociateFacesResponse < Struct.new(
+      nil,
       :disassociated_faces,
       :unsuccessful_face_disassociations,
       :user_status,
@@ -2341,6 +2443,7 @@ module Aws::Rekognition
     #   <p>Unique identifier assigned to the face.</p>
     #   @return [String]
     class DisassociatedFace < Struct.new(
+      nil,
       :face_id,
       keyword_init: true
     )
@@ -2356,6 +2459,7 @@ module Aws::Rekognition
     #         </p>
     #   @return [String]
     class DistributeDataset < Struct.new(
+      nil,
       :arn,
       keyword_init: true
     )
@@ -2368,6 +2472,7 @@ module Aws::Rekognition
     #            </p>
     #   @return [Array<Types::DistributeDataset>]
     class DistributeDatasetEntriesRequest < Struct.new(
+      nil,
       :datasets,
       keyword_init: true
     )
@@ -2375,6 +2480,7 @@ module Aws::Rekognition
     end
 
     class DistributeDatasetEntriesResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -2403,6 +2509,7 @@ module Aws::Rekognition
     #   <p>The percentage of image pixels that have a given dominant color.</p>
     #   @return [Float]
     class DominantColor < Struct.new(
+      nil,
       :red,
       :blue,
       :green,
@@ -2427,6 +2534,7 @@ module Aws::Rekognition
     #   <p>Level of confidence in the determination.</p>
     #   @return [Float]
     class Emotion < Struct.new(
+      nil,
       :type,
       :confidence,
       keyword_init: true
@@ -2450,6 +2558,7 @@ module Aws::Rekognition
     #   <p>Information about the body part covered by the detected PPE.</p>
     #   @return [Types::CoversBodyPart]
     class EquipmentDetection < Struct.new(
+      nil,
       :bounding_box,
       :confidence,
       :type,
@@ -2471,6 +2580,7 @@ module Aws::Rekognition
     #   <p>The S3 bucket that contains the training summary.</p>
     #   @return [Types::Summary]
     class EvaluationResult < Struct.new(
+      nil,
       :f1_score,
       :summary,
       keyword_init: true
@@ -2490,6 +2600,7 @@ module Aws::Rekognition
     #   <p>The confidence that the service has in its predicted eye direction.</p>
     #   @return [Float]
     class EyeDirection < Struct.new(
+      nil,
       :yaw,
       :pitch,
       :confidence,
@@ -2507,6 +2618,7 @@ module Aws::Rekognition
     #   <p>Level of confidence in the determination.</p>
     #   @return [Float]
     class EyeOpen < Struct.new(
+      nil,
       :value,
       :confidence,
       keyword_init: true
@@ -2528,6 +2640,7 @@ module Aws::Rekognition
     #   <p>Level of confidence in the determination.</p>
     #   @return [Float]
     class Eyeglasses < Struct.new(
+      nil,
       :value,
       :confidence,
       keyword_init: true
@@ -2566,6 +2679,7 @@ module Aws::Rekognition
     #   <p>Unique identifier assigned to the user.</p>
     #   @return [String]
     class Face < Struct.new(
+      nil,
       :face_id,
       :bounding_box,
       :image_id,
@@ -2676,6 +2790,7 @@ module Aws::Rekognition
     #   <p>Indicates the direction the eyes are gazing in, as defined by pitch and yaw.</p>
     #   @return [Types::EyeDirection]
     class FaceDetail < Struct.new(
+      nil,
       :bounding_box,
       :age_range,
       :smile,
@@ -2707,6 +2822,7 @@ module Aws::Rekognition
     #   <p>The face properties for the detected face.</p>
     #   @return [Types::FaceDetail]
     class FaceDetection < Struct.new(
+      nil,
       :timestamp,
       :face,
       keyword_init: true
@@ -2729,6 +2845,7 @@ module Aws::Rekognition
     #         image, and external image ID that you assigned.</p>
     #   @return [Types::Face]
     class FaceMatch < Struct.new(
+      nil,
       :similarity,
       :face,
       keyword_init: true
@@ -2755,6 +2872,7 @@ module Aws::Rekognition
     #   <p>The confidence that the service has detected the presence of a face occlusion.</p>
     #   @return [Float]
     class FaceOccluded < Struct.new(
+      nil,
       :value,
       :confidence,
       keyword_init: true
@@ -2777,6 +2895,7 @@ module Aws::Rekognition
     #   <p>Structure containing attributes of the face that the algorithm detected.</p>
     #   @return [Types::FaceDetail]
     class FaceRecord < Struct.new(
+      nil,
       :face,
       :face_detail,
       keyword_init: true
@@ -2795,6 +2914,7 @@ module Aws::Rekognition
     #           0 is the lowest confidence. 100 is the highest confidence. Values between 0 and 100 are accepted, and values lower than 80 are set to 80.</p>
     #   @return [Float]
     class FaceSearchSettings < Struct.new(
+      nil,
       :collection_id,
       :face_match_threshold,
       keyword_init: true
@@ -2823,6 +2943,7 @@ module Aws::Rekognition
     #   <p>Level of confidence in the prediction.</p>
     #   @return [Float]
     class Gender < Struct.new(
+      nil,
       :value,
       :confidence,
       keyword_init: true
@@ -2846,6 +2967,7 @@ module Aws::Rekognition
     #   <p>The label categories that should be excluded from the return from DetectLabels.</p>
     #   @return [Array<String>]
     class GeneralLabelsSettings < Struct.new(
+      nil,
       :label_inclusion_filters,
       :label_exclusion_filters,
       :label_category_inclusion_filters,
@@ -2864,6 +2986,7 @@ module Aws::Rekognition
     #   <p>Within the bounding box, a fine-grained polygon around the detected item.</p>
     #   @return [Array<Types::Point>]
     class Geometry < Struct.new(
+      nil,
       :bounding_box,
       :polygon,
       keyword_init: true
@@ -2876,6 +2999,7 @@ module Aws::Rekognition
     #       </p>
     #   @return [String]
     class GetCelebrityInfoRequest < Struct.new(
+      nil,
       :id,
       keyword_init: true
     )
@@ -2892,6 +3016,7 @@ module Aws::Rekognition
     #   <p>Retrieves the known gender for the celebrity.</p>
     #   @return [Types::KnownGender]
     class GetCelebrityInfoResponse < Struct.new(
+      nil,
       :urls,
       :name,
       :known_gender,
@@ -2918,6 +3043,7 @@ module Aws::Rekognition
     #           specify <code>TIMESTAMP</code> to sort by the time the celebrity was recognized.</p>
     #   @return [String]
     class GetCelebrityRecognitionRequest < Struct.new(
+      nil,
       :job_id,
       :max_results,
       :next_token,
@@ -2957,6 +3083,7 @@ module Aws::Rekognition
     #         job completion notification sent to your Amazon Simple Notification Service topic.</p>
     #   @return [String]
     class GetCelebrityRecognitionResponse < Struct.new(
+      nil,
       :job_status,
       :status_message,
       :video_metadata,
@@ -2996,6 +3123,7 @@ module Aws::Rekognition
     #         aggregation option is TIMESTAMPS. SEGMENTS mode aggregates moderation labels over time.</p>
     #   @return [String]
     class GetContentModerationRequest < Struct.new(
+      nil,
       :job_id,
       :max_results,
       :next_token,
@@ -3015,6 +3143,7 @@ module Aws::Rekognition
     #   <p>The aggregation method chosen for a GetContentModeration request.</p>
     #   @return [String]
     class GetContentModerationRequestMetadata < Struct.new(
+      nil,
       :sort_by,
       :aggregate_by,
       keyword_init: true
@@ -3059,6 +3188,7 @@ module Aws::Rekognition
     #         aggregation and sorting methods.</p>
     #   @return [Types::GetContentModerationRequestMetadata]
     class GetContentModerationResponse < Struct.new(
+      nil,
       :job_status,
       :status_message,
       :video_metadata,
@@ -3087,6 +3217,7 @@ module Aws::Rekognition
     #          token in the response. You can use this pagination token to retrieve the next set of faces.</p>
     #   @return [String]
     class GetFaceDetectionRequest < Struct.new(
+      nil,
       :job_id,
       :max_results,
       :next_token,
@@ -3125,6 +3256,7 @@ module Aws::Rekognition
     #         completion notification sent to your Amazon Simple Notification Service topic.</p>
     #   @return [String]
     class GetFaceDetectionResponse < Struct.new(
+      nil,
       :job_status,
       :status_message,
       :video_metadata,
@@ -3143,6 +3275,7 @@ module Aws::Rekognition
     #         idempotency token for all operations associated with the session.</p>
     #   @return [String]
     class GetFaceLivenessSessionResultsRequest < Struct.new(
+      nil,
       :session_id,
       keyword_init: true
     )
@@ -3178,6 +3311,7 @@ module Aws::Rekognition
     #   <p>Contains information regarding the challenge type used for the Face Liveness check.</p>
     #   @return [Types::Challenge]
     class GetFaceLivenessSessionResultsResponse < Struct.new(
+      nil,
       :session_id,
       :status,
       :confidence,
@@ -3206,6 +3340,7 @@ module Aws::Rekognition
     #         that they are recognized. Use <code>INDEX</code> to sort by recognized faces. </p>
     #   @return [String]
     class GetFaceSearchRequest < Struct.new(
+      nil,
       :job_id,
       :max_results,
       :next_token,
@@ -3250,6 +3385,7 @@ module Aws::Rekognition
     #         completion notification sent to your Amazon Simple Notification Service topic.</p>
     #   @return [String]
     class GetFaceSearchResponse < Struct.new(
+      nil,
       :job_status,
       :status_message,
       :next_token,
@@ -3287,6 +3423,7 @@ module Aws::Rekognition
     #   <p>Defines how to aggregate the returned results. Results can be aggregated by timestamps or segments.</p>
     #   @return [String]
     class GetLabelDetectionRequest < Struct.new(
+      nil,
       :job_id,
       :max_results,
       :next_token,
@@ -3306,6 +3443,7 @@ module Aws::Rekognition
     #   <p>The aggregation method chosen for a GetLabelDetection request.</p>
     #   @return [String]
     class GetLabelDetectionRequestMetadata < Struct.new(
+      nil,
       :sort_by,
       :aggregate_by,
       keyword_init: true
@@ -3351,6 +3489,7 @@ module Aws::Rekognition
     #         aggregation and sorting methods.</p>
     #   @return [Types::GetLabelDetectionRequestMetadata]
     class GetLabelDetectionResponse < Struct.new(
+      nil,
       :job_status,
       :status_message,
       :video_metadata,
@@ -3370,6 +3509,7 @@ module Aws::Rekognition
     #   <p>Unique identifier for the media analysis job for which you want to retrieve results.</p>
     #   @return [String]
     class GetMediaAnalysisJobRequest < Struct.new(
+      nil,
       :job_id,
       keyword_init: true
     )
@@ -3413,6 +3553,7 @@ module Aws::Rekognition
     #   <p>The summary manifest provides statistics on input manifest and errors identified in the input manifest.</p>
     #   @return [Types::MediaAnalysisManifestSummary]
     class GetMediaAnalysisJobResponse < Struct.new(
+      nil,
       :job_id,
       :job_name,
       :operations_config,
@@ -3450,6 +3591,7 @@ module Aws::Rekognition
     #          The default sort is by <code>TIMESTAMP</code>.</p>
     #   @return [String]
     class GetPersonTrackingRequest < Struct.new(
+      nil,
       :job_id,
       :max_results,
       :next_token,
@@ -3489,6 +3631,7 @@ module Aws::Rekognition
     #         job completion notification sent to your Amazon Simple Notification Service topic.</p>
     #   @return [String]
     class GetPersonTrackingResponse < Struct.new(
+      nil,
       :job_status,
       :status_message,
       :video_metadata,
@@ -3514,6 +3657,7 @@ module Aws::Rekognition
     #         request to retrieve the next set of text.</p>
     #   @return [String]
     class GetSegmentDetectionRequest < Struct.new(
+      nil,
       :job_id,
       :max_results,
       :next_token,
@@ -3570,6 +3714,7 @@ module Aws::Rekognition
     #         completion notification sent to your Amazon Simple Notification Service topic.</p>
     #   @return [String]
     class GetSegmentDetectionResponse < Struct.new(
+      nil,
       :job_status,
       :status_message,
       :video_metadata,
@@ -3597,6 +3742,7 @@ module Aws::Rekognition
     #         a pagination token in the response. You can use this pagination token to retrieve the next set of text.</p>
     #   @return [String]
     class GetTextDetectionRequest < Struct.new(
+      nil,
       :job_id,
       :max_results,
       :next_token,
@@ -3639,6 +3785,7 @@ module Aws::Rekognition
     #         completion notification sent to your Amazon Simple Notification Service topic.</p>
     #   @return [String]
     class GetTextDetectionResponse < Struct.new(
+      nil,
       :job_status,
       :status_message,
       :video_metadata,
@@ -3664,6 +3811,7 @@ module Aws::Rekognition
     #         Amazon Rekognition Developer Guide. </p>
     #   @return [Types::S3Object]
     class GroundTruthManifest < Struct.new(
+      nil,
       :s3_object,
       keyword_init: true
     )
@@ -3683,6 +3831,7 @@ module Aws::Rekognition
     #         human review.</p>
     #   @return [String]
     class HumanLoopActivationOutput < Struct.new(
+      nil,
       :human_loop_arn,
       :human_loop_activation_reasons,
       :human_loop_activation_conditions_evaluation_results,
@@ -3705,6 +3854,7 @@ module Aws::Rekognition
     #   <p>Sets attributes of the input data.</p>
     #   @return [Types::HumanLoopDataAttributes]
     class HumanLoopConfig < Struct.new(
+      nil,
       :human_loop_name,
       :flow_definition_arn,
       :data_attributes,
@@ -3719,6 +3869,7 @@ module Aws::Rekognition
     #   <p>Sets whether the input image is free of personally identifiable information.</p>
     #   @return [Array<String>]
     class HumanLoopDataAttributes < Struct.new(
+      nil,
       :content_classifiers,
       keyword_init: true
     )
@@ -3743,6 +3894,7 @@ module Aws::Rekognition
     #   <p>A universally unique identifier (UUID) for the request.</p>
     #   @return [String]
     class HumanLoopQuotaExceededException < Struct.new(
+      nil,
       :resource_type,
       :quota_code,
       :service_code,
@@ -3764,6 +3916,7 @@ module Aws::Rekognition
     #   <p>A universally unique identifier (UUID) for the request.</p>
     #   @return [String]
     class IdempotentParameterMismatchException < Struct.new(
+      nil,
       :message,
       :code,
       :logref,
@@ -3799,6 +3952,7 @@ module Aws::Rekognition
     #   <p>Identifies an S3 object as the image source.</p>
     #   @return [Types::S3Object]
     class Image < Struct.new(
+      nil,
       :bytes,
       :s3_object,
       keyword_init: true
@@ -3816,6 +3970,7 @@ module Aws::Rekognition
     #         (inclusive). A higher value indicates a sharper face image.</p>
     #   @return [Float]
     class ImageQuality < Struct.new(
+      nil,
       :brightness,
       :sharpness,
       keyword_init: true
@@ -3835,6 +3990,7 @@ module Aws::Rekognition
     #   <p>A universally unique identifier (UUID) for the request.</p>
     #   @return [String]
     class ImageTooLargeException < Struct.new(
+      nil,
       :message,
       :code,
       :logref,
@@ -3897,6 +4053,7 @@ module Aws::Rekognition
     #         of the face model or higher.</p>
     #   @return [String]
     class IndexFacesRequest < Struct.new(
+      nil,
       :collection_id,
       :image,
       :external_image_id,
@@ -3948,6 +4105,7 @@ module Aws::Rekognition
     #         specify the <code>QualityFilter</code> request parameter.</p>
     #   @return [Array<Types::UnindexedFace>]
     class IndexFacesResponse < Struct.new(
+      nil,
       :face_records,
       :orientation_correction,
       :face_model_version,
@@ -3969,6 +4127,7 @@ module Aws::Rekognition
     #   <p>The dominant colors found in an individual instance of a label.</p>
     #   @return [Array<Types::DominantColor>]
     class Instance < Struct.new(
+      nil,
       :bounding_box,
       :confidence,
       :dominant_colors,
@@ -3986,6 +4145,7 @@ module Aws::Rekognition
     #   <p>A universally unique identifier (UUID) for the request.</p>
     #   @return [String]
     class InternalServerError < Struct.new(
+      nil,
       :message,
       :code,
       :logref,
@@ -4003,6 +4163,7 @@ module Aws::Rekognition
     #   <p>A universally unique identifier (UUID) for the request.</p>
     #   @return [String]
     class InvalidImageFormatException < Struct.new(
+      nil,
       :message,
       :code,
       :logref,
@@ -4020,6 +4181,7 @@ module Aws::Rekognition
     #   <p>A universally unique identifier (UUID) for the request.</p>
     #   @return [String]
     class InvalidManifestException < Struct.new(
+      nil,
       :message,
       :code,
       :logref,
@@ -4037,6 +4199,7 @@ module Aws::Rekognition
     #   <p>A universally unique identifier (UUID) for the request.</p>
     #   @return [String]
     class InvalidPaginationTokenException < Struct.new(
+      nil,
       :message,
       :code,
       :logref,
@@ -4055,6 +4218,7 @@ module Aws::Rekognition
     #   <p>A universally unique identifier (UUID) for the request.</p>
     #   @return [String]
     class InvalidParameterException < Struct.new(
+      nil,
       :message,
       :code,
       :logref,
@@ -4072,6 +4236,7 @@ module Aws::Rekognition
     #   <p>A universally unique identifier (UUID) for the request.</p>
     #   @return [String]
     class InvalidPolicyRevisionIdException < Struct.new(
+      nil,
       :message,
       :code,
       :logref,
@@ -4089,6 +4254,7 @@ module Aws::Rekognition
     #   <p>A universally unique identifier (UUID) for the request.</p>
     #   @return [String]
     class InvalidS3ObjectException < Struct.new(
+      nil,
       :message,
       :code,
       :logref,
@@ -4103,6 +4269,7 @@ module Aws::Rekognition
     #   <p>ARN of the output Amazon Kinesis Data Streams stream.</p>
     #   @return [String]
     class KinesisDataStream < Struct.new(
+      nil,
       :arn,
       keyword_init: true
     )
@@ -4115,6 +4282,7 @@ module Aws::Rekognition
     #   <p>ARN of the Kinesis video stream stream that streams the source video.</p>
     #   @return [String]
     class KinesisVideoStream < Struct.new(
+      nil,
       :arn,
       keyword_init: true
     )
@@ -4135,6 +4303,7 @@ module Aws::Rekognition
     #           </p>
     #   @return [String]
     class KinesisVideoStreamStartSelector < Struct.new(
+      nil,
       :producer_timestamp,
       :fragment_number,
       keyword_init: true
@@ -4148,6 +4317,7 @@ module Aws::Rekognition
     #   <p>A string value of the KnownGender info about the Celebrity.</p>
     #   @return [String]
     class KnownGender < Struct.new(
+      nil,
       :type,
       keyword_init: true
     )
@@ -4178,6 +4348,7 @@ module Aws::Rekognition
     #   <p>A list of the categories associated with a given label.</p>
     #   @return [Array<Types::LabelCategory>]
     class Label < Struct.new(
+      nil,
       :name,
       :confidence,
       :instances,
@@ -4194,6 +4365,7 @@ module Aws::Rekognition
     #   <p>The name of an alias for a given label.</p>
     #   @return [String]
     class LabelAlias < Struct.new(
+      nil,
       :name,
       keyword_init: true
     )
@@ -4205,6 +4377,7 @@ module Aws::Rekognition
     #   <p>The name of a category that applies to a given label.</p>
     #   @return [String]
     class LabelCategory < Struct.new(
+      nil,
       :name,
       keyword_init: true
     )
@@ -4229,6 +4402,7 @@ module Aws::Rekognition
     #   <p>The time duration of a segment in milliseconds, I.e. time elapsed from StartTimestampMillis to EndTimestampMillis.</p>
     #   @return [Integer]
     class LabelDetection < Struct.new(
+      nil,
       :timestamp,
       :label,
       :start_timestamp_millis,
@@ -4251,6 +4425,7 @@ module Aws::Rekognition
     #         categories. To see a list of label categories, see <a href="https://docs.aws.amazon.com/rekognition/latest/dg/labels.html">Detecting Labels</a>.</p>
     #   @return [Types::GeneralLabelsSettings]
     class LabelDetectionSettings < Struct.new(
+      nil,
       :general_labels,
       keyword_init: true
     )
@@ -4273,6 +4448,7 @@ module Aws::Rekognition
     #         pixels and the y-coordinate of the landmark is at 50 pixels, this value is 0.25.</p>
     #   @return [Float]
     class Landmark < Struct.new(
+      nil,
       :type,
       :x,
       :y,
@@ -4294,6 +4470,7 @@ module Aws::Rekognition
     #   <p>A universally unique identifier (UUID) for the request.</p>
     #   @return [String]
     class LimitExceededException < Struct.new(
+      nil,
       :message,
       :code,
       :logref,
@@ -4309,6 +4486,7 @@ module Aws::Rekognition
     #   <p>Maximum number of collection IDs to return. </p>
     #   @return [Integer]
     class ListCollectionsRequest < Struct.new(
+      nil,
       :next_token,
       :max_results,
       keyword_init: true
@@ -4330,6 +4508,7 @@ module Aws::Rekognition
     #           <code>CollectionId[2]</code>.</p>
     #   @return [Array<String>]
     class ListCollectionsResponse < Struct.new(
+      nil,
       :collection_ids,
       :next_token,
       :face_model_versions,
@@ -4375,6 +4554,7 @@ module Aws::Rekognition
     #         error occurs. The default value is 100. </p>
     #   @return [Integer]
     class ListDatasetEntriesRequest < Struct.new(
+      nil,
       :dataset_arn,
       :contains_labels,
       :labeled,
@@ -4398,6 +4578,7 @@ module Aws::Rekognition
     #         token to retrieve the next set of results. </p>
     #   @return [String]
     class ListDatasetEntriesResponse < Struct.new(
+      nil,
       :dataset_entries,
       :next_token,
       keyword_init: true
@@ -4421,6 +4602,7 @@ module Aws::Rekognition
     #         error occurs. The default value is 100. </p>
     #   @return [Integer]
     class ListDatasetLabelsRequest < Struct.new(
+      nil,
       :dataset_arn,
       :next_token,
       :max_results,
@@ -4440,6 +4622,7 @@ module Aws::Rekognition
     #         token to retrieve the next set of results. </p>
     #   @return [String]
     class ListDatasetLabelsResponse < Struct.new(
+      nil,
       :dataset_label_descriptions,
       :next_token,
       keyword_init: true
@@ -4465,6 +4648,7 @@ module Aws::Rekognition
     #   <p>An array of face IDs to filter results with when listing faces in a collection.</p>
     #   @return [Array<String>]
     class ListFacesRequest < Struct.new(
+      nil,
       :collection_id,
       :next_token,
       :max_results,
@@ -4487,6 +4671,7 @@ module Aws::Rekognition
     #           (<code>CollectionId</code>).</p>
     #   @return [String]
     class ListFacesResponse < Struct.new(
+      nil,
       :faces,
       :next_token,
       :face_model_version,
@@ -4503,6 +4688,7 @@ module Aws::Rekognition
     #           If user specifies a value greater than 100, an <code>InvalidParameterException</code> error occurs. The default value is 100.</p>
     #   @return [Integer]
     class ListMediaAnalysisJobsRequest < Struct.new(
+      nil,
       :next_token,
       :max_results,
       keyword_init: true
@@ -4517,6 +4703,7 @@ module Aws::Rekognition
     #   <p>Contains a list of all media analysis jobs.</p>
     #   @return [Array<Types::MediaAnalysisJobDescription>]
     class ListMediaAnalysisJobsResponse < Struct.new(
+      nil,
       :next_token,
       :media_analysis_jobs,
       keyword_init: true
@@ -4538,6 +4725,7 @@ module Aws::Rekognition
     #            occurs. The default value is 5. </p>
     #   @return [Integer]
     class ListProjectPoliciesRequest < Struct.new(
+      nil,
       :project_arn,
       :next_token,
       :max_results,
@@ -4554,6 +4742,7 @@ module Aws::Rekognition
     #         subsequent request to retrieve the next set of project policies.</p>
     #   @return [String]
     class ListProjectPoliciesResponse < Struct.new(
+      nil,
       :project_policies,
       :next_token,
       keyword_init: true
@@ -4569,6 +4758,7 @@ module Aws::Rekognition
     #   <p>Maximum number of stream processors you want Amazon Rekognition Video to return in the response. The default is 1000. </p>
     #   @return [Integer]
     class ListStreamProcessorsRequest < Struct.new(
+      nil,
       :next_token,
       :max_results,
       keyword_init: true
@@ -4584,6 +4774,7 @@ module Aws::Rekognition
     #   <p>List of stream processors that you have created.</p>
     #   @return [Array<Types::StreamProcessor>]
     class ListStreamProcessorsResponse < Struct.new(
+      nil,
       :next_token,
       :stream_processors,
       keyword_init: true
@@ -4596,6 +4787,7 @@ module Aws::Rekognition
     #         the tags that you want a list of. </p>
     #   @return [String]
     class ListTagsForResourceRequest < Struct.new(
+      nil,
       :resource_arn,
       keyword_init: true
     )
@@ -4606,6 +4798,7 @@ module Aws::Rekognition
     #   <p> A list of key-value tags assigned to the resource. </p>
     #   @return [Hash<String, String>]
     class ListTagsForResourceResponse < Struct.new(
+      nil,
       :tags,
       keyword_init: true
     )
@@ -4622,6 +4815,7 @@ module Aws::Rekognition
     #   <p>Pagingation token to receive the next set of UsersID.</p>
     #   @return [String]
     class ListUsersRequest < Struct.new(
+      nil,
       :collection_id,
       :max_results,
       :next_token,
@@ -4638,6 +4832,7 @@ module Aws::Rekognition
     #         truncated.</p>
     #   @return [String]
     class ListUsersResponse < Struct.new(
+      nil,
       :users,
       :next_token,
       keyword_init: true
@@ -4656,6 +4851,7 @@ module Aws::Rekognition
     #   <p>The prefix prepended to the output files for the Face Liveness session results.</p>
     #   @return [String]
     class LivenessOutputConfig < Struct.new(
+      nil,
       :s3_bucket,
       :s3_key_prefix,
       keyword_init: true
@@ -4673,6 +4869,7 @@ module Aws::Rekognition
     #   <p>A universally unique identifier (UUID) for the request.</p>
     #   @return [String]
     class MalformedPolicyDocumentException < Struct.new(
+      nil,
       :message,
       :code,
       :logref,
@@ -4689,6 +4886,7 @@ module Aws::Rekognition
     #   <p>The status of the user matched to a provided FaceID.</p>
     #   @return [String]
     class MatchedUser < Struct.new(
+      nil,
       :user_id,
       :user_status,
       keyword_init: true
@@ -4707,6 +4905,7 @@ module Aws::Rekognition
     #           If not provided the pre-trained model is used.</p>
     #   @return [String]
     class MediaAnalysisDetectModerationLabelsConfig < Struct.new(
+      nil,
       :min_confidence,
       :project_version,
       keyword_init: true
@@ -4724,6 +4923,7 @@ module Aws::Rekognition
     #         Amazon Rekognition Developer Guide. </p>
     #   @return [Types::S3Object]
     class MediaAnalysisInput < Struct.new(
+      nil,
       :s3_object,
       keyword_init: true
     )
@@ -4768,6 +4968,7 @@ module Aws::Rekognition
     #   <p>Provides statistics on input manifest and errors identified in the input manifest.</p>
     #   @return [Types::MediaAnalysisManifestSummary]
     class MediaAnalysisJobDescription < Struct.new(
+      nil,
       :job_id,
       :job_name,
       :operations_config,
@@ -4793,6 +4994,7 @@ module Aws::Rekognition
     #   <p>Human readable error message.</p>
     #   @return [String]
     class MediaAnalysisJobFailureDetails < Struct.new(
+      nil,
       :code,
       :message,
       keyword_init: true
@@ -4810,6 +5012,7 @@ module Aws::Rekognition
     #         Amazon Rekognition Developer Guide. </p>
     #   @return [Types::S3Object]
     class MediaAnalysisManifestSummary < Struct.new(
+      nil,
       :s3_object,
       keyword_init: true
     )
@@ -4821,6 +5024,7 @@ module Aws::Rekognition
     #   <p>The Moderation base model version.</p>
     #   @return [String]
     class MediaAnalysisModelVersions < Struct.new(
+      nil,
       :moderation,
       keyword_init: true
     )
@@ -4832,6 +5036,7 @@ module Aws::Rekognition
     #   <p>Contains configuration options for a DetectModerationLabels job.</p>
     #   @return [Types::MediaAnalysisDetectModerationLabelsConfig]
     class MediaAnalysisOperationsConfig < Struct.new(
+      nil,
       :detect_moderation_labels,
       keyword_init: true
     )
@@ -4847,6 +5052,7 @@ module Aws::Rekognition
     #               designated for storage.</p>
     #   @return [String]
     class MediaAnalysisOutputConfig < Struct.new(
+      nil,
       :s3_bucket,
       :s3_key_prefix,
       keyword_init: true
@@ -4867,6 +5073,7 @@ module Aws::Rekognition
     #   <p>Information about the model versions for the features selected in a given job.</p>
     #   @return [Types::MediaAnalysisModelVersions]
     class MediaAnalysisResults < Struct.new(
+      nil,
       :s3_object,
       :model_versions,
       keyword_init: true
@@ -4896,6 +5103,7 @@ module Aws::Rekognition
     #   <p>The level of the moderation label with regard to its taxonomy, from 1 to 3.</p>
     #   @return [Integer]
     class ModerationLabel < Struct.new(
+      nil,
       :confidence,
       :name,
       :parent_name,
@@ -4914,6 +5122,7 @@ module Aws::Rekognition
     #   <p>Level of confidence in the determination.</p>
     #   @return [Float]
     class MouthOpen < Struct.new(
+      nil,
       :value,
       :confidence,
       keyword_init: true
@@ -4935,6 +5144,7 @@ module Aws::Rekognition
     #   <p>Level of confidence in the determination.</p>
     #   @return [Float]
     class Mustache < Struct.new(
+      nil,
       :value,
       :confidence,
       keyword_init: true
@@ -4957,6 +5167,7 @@ module Aws::Rekognition
     #   <p>The ARN of an IAM role that gives Amazon Rekognition publishing permissions to the Amazon SNS topic. </p>
     #   @return [String]
     class NotificationChannel < Struct.new(
+      nil,
       :sns_topic_arn,
       :role_arn,
       keyword_init: true
@@ -4972,6 +5183,7 @@ module Aws::Rekognition
     #   <p>The prefix applied to the training output files. </p>
     #   @return [String]
     class OutputConfig < Struct.new(
+      nil,
       :s3_bucket,
       :s3_key_prefix,
       keyword_init: true
@@ -4984,6 +5196,7 @@ module Aws::Rekognition
     #   <p>The name of the parent label.</p>
     #   @return [String]
     class Parent < Struct.new(
+      nil,
       :name,
       keyword_init: true
     )
@@ -5001,6 +5214,7 @@ module Aws::Rekognition
     #   <p>Face details for the detected person.</p>
     #   @return [Types::FaceDetail]
     class PersonDetail < Struct.new(
+      nil,
       :index,
       :bounding_box,
       :face,
@@ -5026,6 +5240,7 @@ module Aws::Rekognition
     #   <p>Details about a person whose path was tracked in a video.</p>
     #   @return [Types::PersonDetail]
     class PersonDetection < Struct.new(
+      nil,
       :timestamp,
       :person,
       keyword_init: true
@@ -5054,6 +5269,7 @@ module Aws::Rekognition
     #         video.</p>
     #   @return [Array<Types::FaceMatch>]
     class PersonMatch < Struct.new(
+      nil,
       :timestamp,
       :person,
       :face_matches,
@@ -5082,6 +5298,7 @@ module Aws::Rekognition
     #   <p>The value of the Y coordinate for a point on a <code>Polygon</code>.</p>
     #   @return [Float]
     class Point < Struct.new(
+      nil,
       :x,
       :y,
       keyword_init: true
@@ -5100,6 +5317,7 @@ module Aws::Rekognition
     #   <p>Value representing the face rotation on the pitch axis.</p>
     #   @return [Float]
     class Pose < Struct.new(
+      nil,
       :roll,
       :yaw,
       :pitch,
@@ -5130,6 +5348,7 @@ module Aws::Rekognition
     #   <p>Indicates whether automatic retraining will be attempted for the versions of the project. Applies only to adapters. </p>
     #   @return [String]
     class ProjectDescription < Struct.new(
+      nil,
       :project_arn,
       :creation_timestamp,
       :status,
@@ -5162,6 +5381,7 @@ module Aws::Rekognition
     #   <p>The Unix datetime for when the project policy was last updated. </p>
     #   @return [Time]
     class ProjectPolicy < Struct.new(
+      nil,
       :project_arn,
       :policy_name,
       :policy_revision_id,
@@ -5236,6 +5456,7 @@ module Aws::Rekognition
     #   <p>Feature specific configuration that was applied during training.</p>
     #   @return [Types::CustomizationFeatureConfig]
     class ProjectVersionDescription < Struct.new(
+      nil,
       :project_version_arn,
       :creation_timestamp,
       :min_inference_units,
@@ -5274,6 +5495,7 @@ module Aws::Rekognition
     #   <p>An array of Personal Protective Equipment items detected around a body part.</p>
     #   @return [Array<Types::EquipmentDetection>]
     class ProtectiveEquipmentBodyPart < Struct.new(
+      nil,
       :name,
       :confidence,
       :equipment_detections,
@@ -5299,6 +5521,7 @@ module Aws::Rekognition
     #            <code>DetectProtectiveEquipment</code>.</p>
     #   @return [Integer]
     class ProtectiveEquipmentPerson < Struct.new(
+      nil,
       :body_parts,
       :bounding_box,
       :confidence,
@@ -5333,6 +5556,7 @@ module Aws::Rekognition
     #            by <code>DetectProtectiveEquipment</code>.  </p>
     #   @return [Array<String>]
     class ProtectiveEquipmentSummarizationAttributes < Struct.new(
+      nil,
       :min_confidence,
       :required_equipment_types,
       keyword_init: true
@@ -5370,6 +5594,7 @@ module Aws::Rekognition
     #         </p>
     #   @return [Array<Integer>]
     class ProtectiveEquipmentSummary < Struct.new(
+      nil,
       :persons_with_required_equipment,
       :persons_without_required_equipment,
       :persons_indeterminate,
@@ -5388,6 +5613,7 @@ module Aws::Rekognition
     #   <p>A universally unique identifier (UUID) for the request.</p>
     #   @return [String]
     class ProvisionedThroughputExceededException < Struct.new(
+      nil,
       :message,
       :code,
       :logref,
@@ -5415,6 +5641,7 @@ module Aws::Rekognition
     #            <a href="https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies.html">IAM JSON policy reference</a>. </p>
     #   @return [String]
     class PutProjectPolicyRequest < Struct.new(
+      nil,
       :project_arn,
       :policy_name,
       :policy_revision_id,
@@ -5428,6 +5655,7 @@ module Aws::Rekognition
     #   <p>The ID of the project policy.</p>
     #   @return [String]
     class PutProjectPolicyResponse < Struct.new(
+      nil,
       :policy_revision_id,
       keyword_init: true
     )
@@ -5442,6 +5670,7 @@ module Aws::Rekognition
     #         Images in the Amazon Rekognition developer guide.</p>
     #   @return [Types::Image]
     class RecognizeCelebritiesRequest < Struct.new(
+      nil,
       :image,
       keyword_init: true
     )
@@ -5479,6 +5708,7 @@ module Aws::Rekognition
     #            </note>
     #   @return [String]
     class RecognizeCelebritiesResponse < Struct.new(
+      nil,
       :celebrity_faces,
       :unrecognized_faces,
       :orientation_correction,
@@ -5501,6 +5731,7 @@ module Aws::Rekognition
     #           </p>
     #   @return [Array<Types::Point>]
     class RegionOfInterest < Struct.new(
+      nil,
       :bounding_box,
       :polygon,
       keyword_init: true
@@ -5517,6 +5748,7 @@ module Aws::Rekognition
     #   <p>A universally unique identifier (UUID) for the request.</p>
     #   @return [String]
     class ResourceAlreadyExistsException < Struct.new(
+      nil,
       :message,
       :code,
       :logref,
@@ -5534,6 +5766,7 @@ module Aws::Rekognition
     #   <p>A universally unique identifier (UUID) for the request.</p>
     #   @return [String]
     class ResourceInUseException < Struct.new(
+      nil,
       :message,
       :code,
       :logref,
@@ -5551,6 +5784,7 @@ module Aws::Rekognition
     #   <p>A universally unique identifier (UUID) for the request.</p>
     #   @return [String]
     class ResourceNotFoundException < Struct.new(
+      nil,
       :message,
       :code,
       :logref,
@@ -5570,6 +5804,7 @@ module Aws::Rekognition
     #   <p>A universally unique identifier (UUID) for the request.</p>
     #   @return [String]
     class ResourceNotReadyException < Struct.new(
+      nil,
       :message,
       :code,
       :logref,
@@ -5595,6 +5830,7 @@ module Aws::Rekognition
     #           </p>
     #   @return [String]
     class S3Destination < Struct.new(
+      nil,
       :bucket,
       :key_prefix,
       keyword_init: true
@@ -5618,6 +5854,7 @@ module Aws::Rekognition
     #   <p>If the bucket is versioning enabled, you can specify the object version. </p>
     #   @return [String]
     class S3Object < Struct.new(
+      nil,
       :bucket,
       :name,
       :version,
@@ -5659,6 +5896,7 @@ module Aws::Rekognition
     #         of the face model or higher.</p>
     #   @return [String]
     class SearchFacesByImageRequest < Struct.new(
+      nil,
       :collection_id,
       :image,
       :max_faces,
@@ -5686,6 +5924,7 @@ module Aws::Rekognition
     #           (<code>CollectionId</code>).</p>
     #   @return [String]
     class SearchFacesByImageResponse < Struct.new(
+      nil,
       :searched_face_bounding_box,
       :searched_face_confidence,
       :face_matches,
@@ -5711,6 +5950,7 @@ module Aws::Rekognition
     #         value is 80%. </p>
     #   @return [Float]
     class SearchFacesRequest < Struct.new(
+      nil,
       :collection_id,
       :face_id,
       :max_faces,
@@ -5732,6 +5972,7 @@ module Aws::Rekognition
     #           (<code>CollectionId</code>).</p>
     #   @return [String]
     class SearchFacesResponse < Struct.new(
+      nil,
       :searched_face_id,
       :face_matches,
       :face_model_version,
@@ -5776,6 +6017,7 @@ module Aws::Rekognition
     #         Filtered faces aren't searched for in the collection. The default value is NONE.</p>
     #   @return [String]
     class SearchUsersByImageRequest < Struct.new(
+      nil,
       :collection_id,
       :image,
       :user_match_threshold,
@@ -5806,6 +6048,7 @@ module Aws::Rekognition
     #       </p>
     #   @return [Array<Types::UnsearchedFace>]
     class SearchUsersByImageResponse < Struct.new(
+      nil,
       :user_matches,
       :face_model_version,
       :searched_face,
@@ -5833,6 +6076,7 @@ module Aws::Rekognition
     #   <p>Maximum number of identities to return.</p>
     #   @return [Integer]
     class SearchUsersRequest < Struct.new(
+      nil,
       :collection_id,
       :user_id,
       :face_id,
@@ -5857,6 +6101,7 @@ module Aws::Rekognition
     #   <p>Contains the ID of the UserID that was used to search for matches in a collection.</p>
     #   @return [Types::SearchedUser]
     class SearchUsersResponse < Struct.new(
+      nil,
       :user_matches,
       :face_model_version,
       :searched_face,
@@ -5872,6 +6117,7 @@ module Aws::Rekognition
     #   <p> Unique identifier assigned to the face.</p>
     #   @return [String]
     class SearchedFace < Struct.new(
+      nil,
       :face_id,
       keyword_init: true
     )
@@ -5908,6 +6154,7 @@ module Aws::Rekognition
     #           <code>IndexFaces</code>, use the <code>DetectAttributes</code> input parameter.</p>
     #   @return [Types::FaceDetail]
     class SearchedFaceDetails < Struct.new(
+      nil,
       :face_detail,
       keyword_init: true
     )
@@ -5919,6 +6166,7 @@ module Aws::Rekognition
     #   <p> A provided ID for the UserID. Unique within the collection. </p>
     #   @return [String]
     class SearchedUser < Struct.new(
+      nil,
       :user_id,
       keyword_init: true
     )
@@ -5979,6 +6227,7 @@ module Aws::Rekognition
     #       </p>
     #   @return [Integer]
     class SegmentDetection < Struct.new(
+      nil,
       :type,
       :start_timestamp_millis,
       :end_timestamp_millis,
@@ -6011,6 +6260,7 @@ module Aws::Rekognition
     #   <p>The version of the model used to detect segments.</p>
     #   @return [String]
     class SegmentTypeInfo < Struct.new(
+      nil,
       :type,
       :model_version,
       keyword_init: true
@@ -6029,6 +6279,7 @@ module Aws::Rekognition
     #   <p>A universally unique identifier (UUID) for the request.</p>
     #   @return [String]
     class ServiceQuotaExceededException < Struct.new(
+      nil,
       :message,
       :code,
       :logref,
@@ -6046,6 +6297,7 @@ module Aws::Rekognition
     #   <p>A universally unique identifier (UUID) for the request.</p>
     #   @return [String]
     class SessionNotFoundException < Struct.new(
+      nil,
       :message,
       :code,
       :logref,
@@ -6063,6 +6315,7 @@ module Aws::Rekognition
     #   <p>The confidence that Amazon Rekognition Video has in the accuracy of the detected segment.</p>
     #   @return [Float]
     class ShotSegment < Struct.new(
+      nil,
       :index,
       :confidence,
       keyword_init: true
@@ -6079,6 +6332,7 @@ module Aws::Rekognition
     #   <p>Level of confidence in the determination.</p>
     #   @return [Float]
     class Smile < Struct.new(
+      nil,
       :value,
       :confidence,
       keyword_init: true
@@ -6109,6 +6363,7 @@ module Aws::Rekognition
     #         For example, you can use <code>JobTag</code> to group related jobs and identify them in the completion notification.</p>
     #   @return [String]
     class StartCelebrityRecognitionRequest < Struct.new(
+      nil,
       :video,
       :client_request_token,
       :notification_channel,
@@ -6123,6 +6378,7 @@ module Aws::Rekognition
     #         a subsequent call to <code>GetCelebrityRecognition</code>.</p>
     #   @return [String]
     class StartCelebrityRecognitionResponse < Struct.new(
+      nil,
       :job_id,
       keyword_init: true
     )
@@ -6154,6 +6410,7 @@ module Aws::Rekognition
     #         For example, you can use <code>JobTag</code> to group related jobs and identify them in the completion notification.</p>
     #   @return [String]
     class StartContentModerationRequest < Struct.new(
+      nil,
       :video,
       :min_confidence,
       :client_request_token,
@@ -6169,6 +6426,7 @@ module Aws::Rekognition
     #         a subsequent call to <code>GetContentModeration</code>.</p>
     #   @return [String]
     class StartContentModerationResponse < Struct.new(
+      nil,
       :job_id,
       keyword_init: true
     )
@@ -6200,6 +6458,7 @@ module Aws::Rekognition
     #         For example, you can use <code>JobTag</code> to group related jobs and identify them in the completion notification.</p>
     #   @return [String]
     class StartFaceDetectionRequest < Struct.new(
+      nil,
       :video,
       :client_request_token,
       :notification_channel,
@@ -6215,6 +6474,7 @@ module Aws::Rekognition
     #       a subsequent call to <code>GetFaceDetection</code>.</p>
     #   @return [String]
     class StartFaceDetectionResponse < Struct.new(
+      nil,
       :job_id,
       keyword_init: true
     )
@@ -6244,6 +6504,7 @@ module Aws::Rekognition
     #         For example, you can use <code>JobTag</code> to group related jobs and identify them in the completion notification.</p>
     #   @return [String]
     class StartFaceSearchRequest < Struct.new(
+      nil,
       :video,
       :client_request_token,
       :face_match_threshold,
@@ -6259,6 +6520,7 @@ module Aws::Rekognition
     #   <p>The identifier for the search job. Use <code>JobId</code> to identify the job in a subsequent call to <code>GetFaceSearch</code>. </p>
     #   @return [String]
     class StartFaceSearchResponse < Struct.new(
+      nil,
       :job_id,
       keyword_init: true
     )
@@ -6299,6 +6561,7 @@ module Aws::Rekognition
     #         Settings can include filters for GENERAL_LABELS.</p>
     #   @return [Types::LabelDetectionSettings]
     class StartLabelDetectionRequest < Struct.new(
+      nil,
       :video,
       :client_request_token,
       :min_confidence,
@@ -6316,6 +6579,7 @@ module Aws::Rekognition
     #       a subsequent call to <code>GetLabelDetection</code>. </p>
     #   @return [String]
     class StartLabelDetectionResponse < Struct.new(
+      nil,
       :job_id,
       keyword_init: true
     )
@@ -6346,6 +6610,7 @@ module Aws::Rekognition
     #           to encrypt results and manifest files written to the output Amazon S3 bucket.</p>
     #   @return [String]
     class StartMediaAnalysisJobRequest < Struct.new(
+      nil,
       :client_request_token,
       :job_name,
       :operations_config,
@@ -6361,6 +6626,7 @@ module Aws::Rekognition
     #   <p>Identifier for the created job.</p>
     #   @return [String]
     class StartMediaAnalysisJobResponse < Struct.new(
+      nil,
       :job_id,
       keyword_init: true
     )
@@ -6385,6 +6651,7 @@ module Aws::Rekognition
     #         For example, you can use <code>JobTag</code> to group related jobs and identify them in the completion notification.</p>
     #   @return [String]
     class StartPersonTrackingRequest < Struct.new(
+      nil,
       :video,
       :client_request_token,
       :notification_channel,
@@ -6399,6 +6666,7 @@ module Aws::Rekognition
     #       a subsequent call to <code>GetPersonTracking</code>.</p>
     #   @return [String]
     class StartPersonTrackingResponse < Struct.new(
+      nil,
       :job_id,
       keyword_init: true
     )
@@ -6420,6 +6688,7 @@ module Aws::Rekognition
     #            specify a value, Amazon Rekognition Custom Labels doesn't auto-scale the model.</p>
     #   @return [Integer]
     class StartProjectVersionRequest < Struct.new(
+      nil,
       :project_version_arn,
       :min_inference_units,
       :max_inference_units,
@@ -6432,6 +6701,7 @@ module Aws::Rekognition
     #   <p>The current running status of the model. </p>
     #   @return [String]
     class StartProjectVersionResponse < Struct.new(
+      nil,
       :status,
       keyword_init: true
     )
@@ -6448,6 +6718,7 @@ module Aws::Rekognition
     #   <p>Filters that are specific to shot detections.</p>
     #   @return [Types::StartShotDetectionFilter]
     class StartSegmentDetectionFilters < Struct.new(
+      nil,
       :technical_cue_filter,
       :shot_filter,
       keyword_init: true
@@ -6479,6 +6750,7 @@ module Aws::Rekognition
     #   <p>An array of segment types to detect in the video. Valid values are TECHNICAL_CUE and SHOT.</p>
     #   @return [Array<String>]
     class StartSegmentDetectionRequest < Struct.new(
+      nil,
       :video,
       :client_request_token,
       :notification_channel,
@@ -6495,6 +6767,7 @@ module Aws::Rekognition
     #       </p>
     #   @return [String]
     class StartSegmentDetectionResponse < Struct.new(
+      nil,
       :job_id,
       keyword_init: true
     )
@@ -6512,6 +6785,7 @@ module Aws::Rekognition
     #           segments with confidence values greater than or equal to 50 percent.</p>
     #   @return [Float]
     class StartShotDetectionFilter < Struct.new(
+      nil,
       :min_segment_confidence,
       keyword_init: true
     )
@@ -6537,6 +6811,7 @@ module Aws::Rekognition
     #            <p>This is a required parameter for label detection stream processors and should not be used to start a face search stream processor.</p>
     #   @return [Types::StreamProcessingStopSelector]
     class StartStreamProcessorRequest < Struct.new(
+      nil,
       :name,
       :start_selector,
       :stop_selector,
@@ -6551,6 +6826,7 @@ module Aws::Rekognition
     #           </p>
     #   @return [String]
     class StartStreamProcessorResponse < Struct.new(
+      nil,
       :session_id,
       keyword_init: true
     )
@@ -6574,6 +6850,7 @@ module Aws::Rekognition
     #       </p>
     #   @return [Types::BlackFrame]
     class StartTechnicalCueDetectionFilter < Struct.new(
+      nil,
       :min_segment_confidence,
       :black_frame,
       keyword_init: true
@@ -6592,6 +6869,7 @@ module Aws::Rekognition
     #         of the screen.</p>
     #   @return [Array<Types::RegionOfInterest>]
     class StartTextDetectionFilters < Struct.new(
+      nil,
       :word_filter,
       :regions_of_interest,
       keyword_init: true
@@ -6621,6 +6899,7 @@ module Aws::Rekognition
     #   <p>Optional parameters that let you set criteria the text must meet to be included in your response.</p>
     #   @return [Types::StartTextDetectionFilters]
     class StartTextDetectionRequest < Struct.new(
+      nil,
       :video,
       :client_request_token,
       :notification_channel,
@@ -6635,6 +6914,7 @@ module Aws::Rekognition
     #   <p>Identifier for the text detection job.  Use <code>JobId</code> to identify the job in a subsequent call to <code>GetTextDetection</code>.</p>
     #   @return [String]
     class StartTextDetectionResponse < Struct.new(
+      nil,
       :job_id,
       keyword_init: true
     )
@@ -6646,6 +6926,7 @@ module Aws::Rekognition
     #            <p>This operation requires permissions to perform the <code>rekognition:StopProjectVersion</code> action.</p>
     #   @return [String]
     class StopProjectVersionRequest < Struct.new(
+      nil,
       :project_version_arn,
       keyword_init: true
     )
@@ -6656,6 +6937,7 @@ module Aws::Rekognition
     #   <p>The current status of the stop operation. </p>
     #   @return [String]
     class StopProjectVersionResponse < Struct.new(
+      nil,
       :status,
       keyword_init: true
     )
@@ -6666,6 +6948,7 @@ module Aws::Rekognition
     #   <p>The name of a stream processor created by <a>CreateStreamProcessor</a>.</p>
     #   @return [String]
     class StopStreamProcessorRequest < Struct.new(
+      nil,
       :name,
       keyword_init: true
     )
@@ -6673,6 +6956,7 @@ module Aws::Rekognition
     end
 
     class StopStreamProcessorResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -6686,6 +6970,7 @@ module Aws::Rekognition
     #           </p>
     #   @return [Types::KinesisVideoStreamStartSelector]
     class StreamProcessingStartSelector < Struct.new(
+      nil,
       :kvs_stream_start_selector,
       keyword_init: true
     )
@@ -6702,6 +6987,7 @@ module Aws::Rekognition
     #           </p>
     #   @return [Integer]
     class StreamProcessingStopSelector < Struct.new(
+      nil,
       :max_duration_in_seconds,
       keyword_init: true
     )
@@ -6719,6 +7005,7 @@ module Aws::Rekognition
     #   <p>Current status of the Amazon Rekognition stream processor.</p>
     #   @return [String]
     class StreamProcessor < Struct.new(
+      nil,
       :name,
       :status,
       keyword_init: true
@@ -6737,6 +7024,7 @@ module Aws::Rekognition
     #           </p>
     #   @return [Boolean]
     class StreamProcessorDataSharingPreference < Struct.new(
+      nil,
       :opt_in,
       keyword_init: true
     )
@@ -6753,6 +7041,7 @@ module Aws::Rekognition
     #   <p>The Kinesis video stream input stream for the source streaming video.</p>
     #   @return [Types::KinesisVideoStream]
     class StreamProcessorInput < Struct.new(
+      nil,
       :kinesis_video_stream,
       keyword_init: true
     )
@@ -6770,6 +7059,7 @@ module Aws::Rekognition
     #           </p>
     #   @return [String]
     class StreamProcessorNotificationChannel < Struct.new(
+      nil,
       :sns_topic_arn,
       keyword_init: true
     )
@@ -6787,6 +7077,7 @@ module Aws::Rekognition
     #           </p>
     #   @return [Types::S3Destination]
     class StreamProcessorOutput < Struct.new(
+      nil,
       :kinesis_data_stream,
       :s3_destination,
       keyword_init: true
@@ -6809,6 +7100,7 @@ module Aws::Rekognition
     #           </p>
     #   @return [Types::ConnectedHomeSettings]
     class StreamProcessorSettings < Struct.new(
+      nil,
       :face_search,
       :connected_home,
       keyword_init: true
@@ -6825,6 +7117,7 @@ module Aws::Rekognition
     #           </p>
     #   @return [Types::ConnectedHomeSettingsForUpdate]
     class StreamProcessorSettingsForUpdate < Struct.new(
+      nil,
       :connected_home_for_update,
       keyword_init: true
     )
@@ -6845,6 +7138,7 @@ module Aws::Rekognition
     #         Amazon Rekognition Developer Guide. </p>
     #   @return [Types::S3Object]
     class Summary < Struct.new(
+      nil,
       :s3_object,
       keyword_init: true
     )
@@ -6860,6 +7154,7 @@ module Aws::Rekognition
     #   <p>Level of confidence in the determination.</p>
     #   @return [Float]
     class Sunglasses < Struct.new(
+      nil,
       :value,
       :confidence,
       keyword_init: true
@@ -6880,6 +7175,7 @@ module Aws::Rekognition
     #   <p> The key-value tags to assign to the resource. </p>
     #   @return [Hash<String, String>]
     class TagResourceRequest < Struct.new(
+      nil,
       :resource_arn,
       :tags,
       keyword_init: true
@@ -6888,6 +7184,7 @@ module Aws::Rekognition
     end
 
     class TagResourceResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -6901,6 +7198,7 @@ module Aws::Rekognition
     #   <p>The confidence that Amazon Rekognition Video has in the accuracy of the detected segment.</p>
     #   @return [Float]
     class TechnicalCueSegment < Struct.new(
+      nil,
       :type,
       :confidence,
       keyword_init: true
@@ -6918,6 +7216,7 @@ module Aws::Rekognition
     #            the training job.</p>
     #   @return [Boolean]
     class TestingData < Struct.new(
+      nil,
       :assets,
       :auto_create,
       keyword_init: true
@@ -6943,6 +7242,7 @@ module Aws::Rekognition
     #   <p>The location of the data validation manifest. The data validation manifest is created for the test dataset during model training.</p>
     #   @return [Types::ValidationData]
     class TestingDataResult < Struct.new(
+      nil,
       :input,
       :output,
       :validation,
@@ -6985,6 +7285,7 @@ module Aws::Rekognition
     #         information.</p>
     #   @return [Types::Geometry]
     class TextDetection < Struct.new(
+      nil,
       :detected_text,
       :type,
       :id,
@@ -7006,6 +7307,7 @@ module Aws::Rekognition
     #   <p>Details about text detected in a video.</p>
     #   @return [Types::TextDetection]
     class TextDetectionResult < Struct.new(
+      nil,
       :timestamp,
       :text_detection,
       keyword_init: true
@@ -7027,6 +7329,7 @@ module Aws::Rekognition
     #   <p>A universally unique identifier (UUID) for the request.</p>
     #   @return [String]
     class ThrottlingException < Struct.new(
+      nil,
       :message,
       :code,
       :logref,
@@ -7041,6 +7344,7 @@ module Aws::Rekognition
     #            annotations.</p>
     #   @return [Array<Types::Asset>]
     class TrainingData < Struct.new(
+      nil,
       :assets,
       keyword_init: true
     )
@@ -7061,6 +7365,7 @@ module Aws::Rekognition
     #            line.</p>
     #   @return [Types::ValidationData]
     class TrainingDataResult < Struct.new(
+      nil,
       :input,
       :output,
       :validation,
@@ -7102,6 +7407,7 @@ module Aws::Rekognition
     #         <code>IndexFaces</code>detected, but didn't index. </p>
     #   @return [Types::FaceDetail]
     class UnindexedFace < Struct.new(
+      nil,
       :reasons,
       :face_detail,
       keyword_init: true
@@ -7143,6 +7449,7 @@ module Aws::Rekognition
     #   <p> Reasons why a face wasn't used for Search. </p>
     #   @return [Array<String>]
     class UnsearchedFace < Struct.new(
+      nil,
       :face_details,
       :reasons,
       keyword_init: true
@@ -7166,6 +7473,7 @@ module Aws::Rekognition
     #   <p> The reason why the association was unsuccessful. </p>
     #   @return [Array<String>]
     class UnsuccessfulFaceAssociation < Struct.new(
+      nil,
       :face_id,
       :user_id,
       :confidence,
@@ -7187,6 +7495,7 @@ module Aws::Rekognition
     #   <p>The reason why the deletion was unsuccessful. </p>
     #   @return [Array<String>]
     class UnsuccessfulFaceDeletion < Struct.new(
+      nil,
       :face_id,
       :user_id,
       :reasons,
@@ -7207,6 +7516,7 @@ module Aws::Rekognition
     #   <p>The reason why the deletion was unsuccessful. </p>
     #   @return [Array<String>]
     class UnsuccessfulFaceDisassociation < Struct.new(
+      nil,
       :face_id,
       :user_id,
       :reasons,
@@ -7223,6 +7533,7 @@ module Aws::Rekognition
     #   <p> A list of the tags that you want to remove. </p>
     #   @return [Array<String>]
     class UntagResourceRequest < Struct.new(
+      nil,
       :resource_arn,
       :tag_keys,
       keyword_init: true
@@ -7231,6 +7542,7 @@ module Aws::Rekognition
     end
 
     class UntagResourceResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -7247,6 +7559,7 @@ module Aws::Rekognition
     #   </p>
     #   @return [Types::DatasetChanges]
     class UpdateDatasetEntriesRequest < Struct.new(
+      nil,
       :dataset_arn,
       :changes,
       keyword_init: true
@@ -7255,6 +7568,7 @@ module Aws::Rekognition
     end
 
     class UpdateDatasetEntriesResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -7287,6 +7601,7 @@ module Aws::Rekognition
     #           </p>
     #   @return [Array<String>]
     class UpdateStreamProcessorRequest < Struct.new(
+      nil,
       :name,
       :settings_for_update,
       :regions_of_interest_for_update,
@@ -7298,6 +7613,7 @@ module Aws::Rekognition
     end
 
     class UpdateStreamProcessorResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -7312,6 +7628,7 @@ module Aws::Rekognition
     #         with the UserID. </p>
     #   @return [String]
     class User < Struct.new(
+      nil,
       :user_id,
       :user_status,
       keyword_init: true
@@ -7328,6 +7645,7 @@ module Aws::Rekognition
     #   <p> Confidence in the match of this UserID with the input face. </p>
     #   @return [Types::MatchedUser]
     class UserMatch < Struct.new(
+      nil,
       :similarity,
       :user,
       keyword_init: true
@@ -7349,6 +7667,7 @@ module Aws::Rekognition
     #   <p>The assets that comprise the validation data. </p>
     #   @return [Array<Types::Asset>]
     class ValidationData < Struct.new(
+      nil,
       :assets,
       keyword_init: true
     )
@@ -7363,6 +7682,7 @@ module Aws::Rekognition
     #   <p>The desired maximum version for the challenge.</p>
     #   @return [String]
     class Versions < Struct.new(
+      nil,
       :minimum,
       :maximum,
       keyword_init: true
@@ -7376,6 +7696,7 @@ module Aws::Rekognition
     #   <p>The Amazon S3 bucket name and file name for the video.</p>
     #   @return [Types::S3Object]
     class Video < Struct.new(
+      nil,
       :s3_object,
       keyword_init: true
     )
@@ -7408,6 +7729,7 @@ module Aws::Rekognition
     #       </p>
     #   @return [String]
     class VideoMetadata < Struct.new(
+      nil,
       :codec,
       :duration_millis,
       :format,
@@ -7430,6 +7752,7 @@ module Aws::Rekognition
     #   <p>A universally unique identifier (UUID) for the request.</p>
     #   @return [String]
     class VideoTooLargeException < Struct.new(
+      nil,
       :message,
       :code,
       :logref,

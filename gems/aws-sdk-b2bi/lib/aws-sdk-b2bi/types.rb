@@ -10,6 +10,7 @@ module Aws::B2bi
     # @!attribute message
     #   @return [String]
     class AccessDeniedException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -21,6 +22,7 @@ module Aws::B2bi
     #   <p>A structure that contains X12-specific advanced options, such as split options for processing X12 EDI files.</p>
     #   @return [Types::X12AdvancedOptions]
     class AdvancedOptions < Struct.new(
+      nil,
       :x12,
       keyword_init: true
     )
@@ -50,6 +52,7 @@ module Aws::B2bi
     #   <p>A structure that contains the inbound EDI options for the capability.</p>
     #   @return [Types::InboundEdiOptions]
     class CapabilityOptions < Struct.new(
+      nil,
       :outbound_edi,
       :inbound_edi,
       keyword_init: true
@@ -74,6 +77,7 @@ module Aws::B2bi
     #   <p>Returns a timestamp that identifies the most recent date and time that the capability was modified.</p>
     #   @return [Time]
     class CapabilitySummary < Struct.new(
+      nil,
       :capability_id,
       :name,
       :type,
@@ -88,6 +92,7 @@ module Aws::B2bi
     # @!attribute message
     #   @return [String]
     class ConflictException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -102,6 +107,7 @@ module Aws::B2bi
     #   File to be converted
     #   @return [Types::InputFileSource]
     class ConversionSource < Struct.new(
+      nil,
       :file_format,
       :input_file,
       keyword_init: true
@@ -124,6 +130,7 @@ module Aws::B2bi
     #   <p>A structure that contains advanced options for EDI processing. Currently, only X12 advanced options are supported.</p>
     #   @return [Types::AdvancedOptions]
     class ConversionTarget < Struct.new(
+      nil,
       :file_format,
       :format_details,
       :output_sample_file,
@@ -167,6 +174,7 @@ module Aws::B2bi
     #   <p>Specifies the key-value pairs assigned to ARNs that you can use to group and search for resources by type. You can attach this metadata to resources (capabilities, partnerships, and so on) for any purpose.</p>
     #   @return [Array<Types::Tag>]
     class CreateCapabilityRequest < Struct.new(
+      nil,
       :name,
       :type,
       :configuration,
@@ -200,6 +208,7 @@ module Aws::B2bi
     #   <p>Returns a timestamp for creation date and time of the capability.</p>
     #   @return [Time]
     class CreateCapabilityResponse < Struct.new(
+      nil,
       :capability_id,
       :capability_arn,
       :name,
@@ -237,6 +246,7 @@ module Aws::B2bi
     #   <p>Specifies the key-value pairs assigned to ARNs that you can use to group and search for resources by type. You can attach this metadata to resources (capabilities, partnerships, and so on) for any purpose.</p>
     #   @return [Array<Types::Tag>]
     class CreatePartnershipRequest < Struct.new(
+      nil,
       :profile_id,
       :name,
       :email,
@@ -281,6 +291,7 @@ module Aws::B2bi
     #   <p>Returns a timestamp for creation date and time of the partnership.</p>
     #   @return [Time]
     class CreatePartnershipResponse < Struct.new(
+      nil,
       :profile_id,
       :partnership_id,
       :partnership_arn,
@@ -318,6 +329,7 @@ module Aws::B2bi
     #   <p>Specifies the key-value pairs assigned to ARNs that you can use to group and search for resources by type. You can attach this metadata to resources (capabilities, partnerships, and so on) for any purpose.</p>
     #   @return [Array<Types::Tag>]
     class CreateProfileRequest < Struct.new(
+      nil,
       :name,
       :email,
       :phone,
@@ -358,6 +370,7 @@ module Aws::B2bi
     #   <p>Returns a timestamp representing the time the profile was created.</p>
     #   @return [Time]
     class CreateProfileResponse < Struct.new(
+      nil,
       :profile_id,
       :profile_arn,
       :name,
@@ -382,6 +395,7 @@ module Aws::B2bi
     #   <p> Describes the details needed for generating the template. Specify the X12 transaction set and version for which the template is used: currently, we only support X12. </p>
     #   @return [Types::TemplateDetails]
     class CreateStarterMappingTemplateRequest < Struct.new(
+      nil,
       :output_sample_location,
       :mapping_type,
       :template_details,
@@ -394,6 +408,7 @@ module Aws::B2bi
     #   <p>Returns a string that represents the mapping template.</p>
     #   @return [String]
     class CreateStarterMappingTemplateResponse < Struct.new(
+      nil,
       :mapping_template,
       keyword_init: true
     )
@@ -442,6 +457,7 @@ module Aws::B2bi
     #   <p>Specify a structure that contains the Amazon S3 bucket and an array of the corresponding keys used to identify the location for your sample documents.</p>
     #   @return [Types::SampleDocuments]
     class CreateTransformerRequest < Struct.new(
+      nil,
       :name,
       :client_token,
       :tags,
@@ -506,6 +522,7 @@ module Aws::B2bi
     #   <p>Returns a structure that contains the Amazon S3 bucket and an array of the corresponding keys used to identify the location for your sample documents.</p>
     #   @return [Types::SampleDocuments]
     class CreateTransformerResponse < Struct.new(
+      nil,
       :transformer_id,
       :transformer_arn,
       :name,
@@ -534,6 +551,7 @@ module Aws::B2bi
     #   <p>Specifies a system-assigned unique identifier for the capability.</p>
     #   @return [String]
     class DeleteCapabilityRequest < Struct.new(
+      nil,
       :capability_id,
       keyword_init: true
     )
@@ -544,6 +562,7 @@ module Aws::B2bi
     #   <p>Specifies the unique, system-generated identifier for a partnership.</p>
     #   @return [String]
     class DeletePartnershipRequest < Struct.new(
+      nil,
       :partnership_id,
       keyword_init: true
     )
@@ -554,6 +573,7 @@ module Aws::B2bi
     #   <p>Specifies the unique, system-generated identifier for the profile.</p>
     #   @return [String]
     class DeleteProfileRequest < Struct.new(
+      nil,
       :profile_id,
       keyword_init: true
     )
@@ -564,6 +584,7 @@ module Aws::B2bi
     #   <p>Specifies the system-assigned unique identifier for the transformer.</p>
     #   @return [String]
     class DeleteTransformerRequest < Struct.new(
+      nil,
       :transformer_id,
       keyword_init: true
     )
@@ -587,6 +608,7 @@ module Aws::B2bi
     #   <p>Returns the system-assigned unique identifier for the transformer.</p>
     #   @return [String]
     class EdiConfiguration < Struct.new(
+      nil,
       :capability_direction,
       :type,
       :input_location,
@@ -637,6 +659,7 @@ module Aws::B2bi
     #   <p>Specify the mapping type: either <code>JSONATA</code> or <code>XSLT.</code> </p>
     #   @return [String]
     class GenerateMappingRequest < Struct.new(
+      nil,
       :input_file_content,
       :output_file_content,
       :mapping_type,
@@ -652,6 +675,7 @@ module Aws::B2bi
     #   <p>Returns a percentage that estimates the accuracy of the generated mapping.</p>
     #   @return [Float]
     class GenerateMappingResponse < Struct.new(
+      nil,
       :mapping_template,
       :mapping_accuracy,
       keyword_init: true
@@ -663,6 +687,7 @@ module Aws::B2bi
     #   <p>Specifies a system-assigned unique identifier for the capability.</p>
     #   @return [String]
     class GetCapabilityRequest < Struct.new(
+      nil,
       :capability_id,
       keyword_init: true
     )
@@ -694,6 +719,7 @@ module Aws::B2bi
     #   <p>Returns a timestamp for last time the capability was modified.</p>
     #   @return [Time]
     class GetCapabilityResponse < Struct.new(
+      nil,
       :capability_id,
       :capability_arn,
       :name,
@@ -711,6 +737,7 @@ module Aws::B2bi
     #   <p>Specifies the unique, system-generated identifier for a partnership.</p>
     #   @return [String]
     class GetPartnershipRequest < Struct.new(
+      nil,
       :partnership_id,
       keyword_init: true
     )
@@ -751,6 +778,7 @@ module Aws::B2bi
     #   <p>Returns a timestamp that identifies the most recent date and time that the partnership was modified.</p>
     #   @return [Time]
     class GetPartnershipResponse < Struct.new(
+      nil,
       :profile_id,
       :partnership_id,
       :partnership_arn,
@@ -771,6 +799,7 @@ module Aws::B2bi
     #   <p>Specifies the unique, system-generated identifier for the profile.</p>
     #   @return [String]
     class GetProfileRequest < Struct.new(
+      nil,
       :profile_id,
       keyword_init: true
     )
@@ -808,6 +837,7 @@ module Aws::B2bi
     #   <p>Returns a timestamp for last time the profile was modified.</p>
     #   @return [Time]
     class GetProfileResponse < Struct.new(
+      nil,
       :profile_id,
       :profile_arn,
       :name,
@@ -830,6 +860,7 @@ module Aws::B2bi
     #   <p>Specifies the system-assigned unique identifier for the transformer.</p>
     #   @return [String]
     class GetTransformerJobRequest < Struct.new(
+      nil,
       :transformer_job_id,
       :transformer_id,
       keyword_init: true
@@ -847,6 +878,7 @@ module Aws::B2bi
     #   <p>Returns an optional error message, which gets populated when the job is not run successfully.</p>
     #   @return [String]
     class GetTransformerJobResponse < Struct.new(
+      nil,
       :status,
       :output_files,
       :message,
@@ -859,6 +891,7 @@ module Aws::B2bi
     #   <p>Specifies the system-assigned unique identifier for the transformer.</p>
     #   @return [String]
     class GetTransformerRequest < Struct.new(
+      nil,
       :transformer_id,
       keyword_init: true
     )
@@ -916,6 +949,7 @@ module Aws::B2bi
     #   <p>Returns a structure that contains the Amazon S3 bucket and an array of the corresponding keys used to identify the location for your sample documents.</p>
     #   @return [Types::SampleDocuments]
     class GetTransformerResponse < Struct.new(
+      nil,
       :transformer_id,
       :transformer_arn,
       :name,
@@ -946,6 +980,7 @@ module Aws::B2bi
     #   <p>A structure that contains X12-specific options for processing inbound X12 EDI files.</p>
     #   @return [Types::X12InboundEdiOptions]
     class InboundEdiOptions < Struct.new(
+      nil,
       :x12,
       keyword_init: true
     )
@@ -963,6 +998,7 @@ module Aws::B2bi
     #   <p>Specifies advanced options for the input conversion process. These options provide additional control over how EDI files are processed during transformation.</p>
     #   @return [Types::AdvancedOptions]
     class InputConversion < Struct.new(
+      nil,
       :from_format,
       :format_options,
       :advanced_options,
@@ -993,6 +1029,7 @@ module Aws::B2bi
     #   <p>The server attempts to retry a failed command.</p>
     #   @return [Integer]
     class InternalServerException < Struct.new(
+      nil,
       :message,
       :retry_after_seconds,
       keyword_init: true
@@ -1007,6 +1044,7 @@ module Aws::B2bi
     #   <p>Specifies the maximum number of capabilities to return.</p>
     #   @return [Integer]
     class ListCapabilitiesRequest < Struct.new(
+      nil,
       :next_token,
       :max_results,
       keyword_init: true
@@ -1021,6 +1059,7 @@ module Aws::B2bi
     #   <p>When additional results are obtained from the command, a <code>NextToken</code> parameter is returned in the output. You can then pass the <code>NextToken</code> parameter in a subsequent command to continue listing additional resources.</p>
     #   @return [String]
     class ListCapabilitiesResponse < Struct.new(
+      nil,
       :capabilities,
       :next_token,
       keyword_init: true
@@ -1038,6 +1077,7 @@ module Aws::B2bi
     #   <p>Specifies the maximum number of capabilities to return.</p>
     #   @return [Integer]
     class ListPartnershipsRequest < Struct.new(
+      nil,
       :profile_id,
       :next_token,
       :max_results,
@@ -1053,6 +1093,7 @@ module Aws::B2bi
     #   <p>When additional results are obtained from the command, a <code>NextToken</code> parameter is returned in the output. You can then pass the <code>NextToken</code> parameter in a subsequent command to continue listing additional resources.</p>
     #   @return [String]
     class ListPartnershipsResponse < Struct.new(
+      nil,
       :partnerships,
       :next_token,
       keyword_init: true
@@ -1067,6 +1108,7 @@ module Aws::B2bi
     #   <p>Specifies the maximum number of profiles to return.</p>
     #   @return [Integer]
     class ListProfilesRequest < Struct.new(
+      nil,
       :next_token,
       :max_results,
       keyword_init: true
@@ -1081,6 +1123,7 @@ module Aws::B2bi
     #   <p>When additional results are obtained from the command, a <code>NextToken</code> parameter is returned in the output. You can then pass the <code>NextToken</code> parameter in a subsequent command to continue listing additional resources.</p>
     #   @return [String]
     class ListProfilesResponse < Struct.new(
+      nil,
       :profiles,
       :next_token,
       keyword_init: true
@@ -1092,6 +1135,7 @@ module Aws::B2bi
     #   <p>Requests the tags associated with a particular Amazon Resource Name (ARN). An ARN is an identifier for a specific Amazon Web Services resource, such as a capability, partnership, profile, or transformer.</p>
     #   @return [String]
     class ListTagsForResourceRequest < Struct.new(
+      nil,
       :resource_arn,
       keyword_init: true
     )
@@ -1102,6 +1146,7 @@ module Aws::B2bi
     #   <p>Returns the key-value pairs assigned to ARNs that you can use to group and search for resources by type. You can attach this metadata to resources (capabilities, partnerships, and so on) for any purpose.</p>
     #   @return [Array<Types::Tag>]
     class ListTagsForResourceResponse < Struct.new(
+      nil,
       :tags,
       keyword_init: true
     )
@@ -1115,6 +1160,7 @@ module Aws::B2bi
     #   <p>Specifies the number of items to return for the API response.</p>
     #   @return [Integer]
     class ListTransformersRequest < Struct.new(
+      nil,
       :next_token,
       :max_results,
       keyword_init: true
@@ -1129,6 +1175,7 @@ module Aws::B2bi
     #   <p>When additional results are obtained from the command, a <code>NextToken</code> parameter is returned in the output. You can then pass the <code>NextToken</code> parameter in a subsequent command to continue listing additional resources.</p>
     #   @return [String]
     class ListTransformersResponse < Struct.new(
+      nil,
       :transformers,
       :next_token,
       keyword_init: true
@@ -1144,6 +1191,7 @@ module Aws::B2bi
     #   <p>A string that represents the mapping template, in the transformation language specified in <code>templateLanguage</code>.</p>
     #   @return [String]
     class Mapping < Struct.new(
+      nil,
       :template_language,
       :template,
       keyword_init: true
@@ -1177,6 +1225,7 @@ module Aws::B2bi
     #   <p>A structure that contains advanced options for EDI processing. Currently, only X12 advanced options are supported.</p>
     #   @return [Types::AdvancedOptions]
     class OutputConversion < Struct.new(
+      nil,
       :to_format,
       :format_options,
       :advanced_options,
@@ -1226,6 +1275,7 @@ module Aws::B2bi
     #   <p>Returns a timestamp that identifies the most recent date and time that the partnership was modified.</p>
     #   @return [Time]
     class PartnershipSummary < Struct.new(
+      nil,
       :profile_id,
       :partnership_id,
       :name,
@@ -1262,6 +1312,7 @@ module Aws::B2bi
     #   <p>Returns the timestamp that identifies the most recent date and time that the profile was modified.</p>
     #   @return [Time]
     class ProfileSummary < Struct.new(
+      nil,
       :profile_id,
       :name,
       :business_name,
@@ -1278,6 +1329,7 @@ module Aws::B2bi
     # @!attribute message
     #   @return [String]
     class ResourceNotFoundException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -1292,6 +1344,7 @@ module Aws::B2bi
     #   <p>Specifies the Amazon S3 key for the file location.</p>
     #   @return [String]
     class S3Location < Struct.new(
+      nil,
       :bucket_name,
       :key,
       keyword_init: true
@@ -1307,6 +1360,7 @@ module Aws::B2bi
     #   <p>An array of keys for your output sample documents.</p>
     #   @return [String]
     class SampleDocumentKeys < Struct.new(
+      nil,
       :input,
       :output,
       keyword_init: true
@@ -1322,6 +1376,7 @@ module Aws::B2bi
     #   <p>Contains an array of the Amazon S3 keys used to identify the location for your sample documents.</p>
     #   @return [Array<Types::SampleDocumentKeys>]
     class SampleDocuments < Struct.new(
+      nil,
       :bucket_name,
       :keys,
       keyword_init: true
@@ -1345,6 +1400,7 @@ module Aws::B2bi
     #   <p>The quota that was exceeded, which caused the exception.</p>
     #   @return [String]
     class ServiceQuotaExceededException < Struct.new(
+      nil,
       :message,
       :resource_id,
       :resource_type,
@@ -1368,6 +1424,7 @@ module Aws::B2bi
     #   <p>Reserved for future use.</p>
     #   @return [String]
     class StartTransformerJobRequest < Struct.new(
+      nil,
       :input_file,
       :output_location,
       :transformer_id,
@@ -1381,6 +1438,7 @@ module Aws::B2bi
     #   <p>Returns the unique, system-generated identifier for a transformer run.</p>
     #   @return [String]
     class StartTransformerJobResponse < Struct.new(
+      nil,
       :transformer_job_id,
       keyword_init: true
     )
@@ -1395,6 +1453,7 @@ module Aws::B2bi
     #   <p>Contains one or more values that you assigned to the key name that you create.</p>
     #   @return [String]
     class Tag < Struct.new(
+      nil,
       :key,
       :value,
       keyword_init: true
@@ -1409,6 +1468,7 @@ module Aws::B2bi
     #   <p>Specifies the key-value pairs assigned to ARNs that you can use to group and search for resources by type. You can attach this metadata to resources (capabilities, partnerships, and so on) for any purpose.</p>
     #   @return [Array<Types::Tag>]
     class TagResourceRequest < Struct.new(
+      nil,
       :resource_arn,
       :tags,
       keyword_init: true
@@ -1438,6 +1498,7 @@ module Aws::B2bi
     #   <p>Specify the format (X12 is the only currently supported format), and other details for the conversion target.</p>
     #   @return [Types::ConversionTarget]
     class TestConversionRequest < Struct.new(
+      nil,
       :source,
       :target,
       keyword_init: true
@@ -1452,6 +1513,7 @@ module Aws::B2bi
     #   <p>Returns an array of validation messages that Amazon Web Services B2B Data Interchange generates during the conversion process. These messages include both standard EDI validation results and custom validation messages when custom validation rules are configured. Custom validation messages provide detailed feedback on element length constraints, code list validations, and element requirement checks applied during the outbound EDI generation process.</p>
     #   @return [Array<String>]
     class TestConversionResponse < Struct.new(
+      nil,
       :converted_file_content,
       :validation_messages,
       keyword_init: true
@@ -1469,6 +1531,7 @@ module Aws::B2bi
     #   <p>Specifies that the currently supported file formats for EDI transformations are <code>JSON</code> and <code>XML</code>.</p>
     #   @return [String]
     class TestMappingRequest < Struct.new(
+      nil,
       :input_file_content,
       :mapping_template,
       :file_format,
@@ -1481,6 +1544,7 @@ module Aws::B2bi
     #   <p>Returns a string for the mapping that can be used to identify the mapping. Similar to a fingerprint</p>
     #   @return [String]
     class TestMappingResponse < Struct.new(
+      nil,
       :mapped_file_content,
       keyword_init: true
     )
@@ -1500,6 +1564,7 @@ module Aws::B2bi
     #   <p>Specifies advanced options for parsing the input EDI file. These options allow for more granular control over the parsing process, including split options for X12 files.</p>
     #   @return [Types::AdvancedOptions]
     class TestParsingRequest < Struct.new(
+      nil,
       :input_file,
       :file_format,
       :edi_type,
@@ -1519,6 +1584,7 @@ module Aws::B2bi
     #   <p>Returns an array of validation messages generated during EDI validation. These messages provide detailed information about validation errors, warnings, or confirmations based on the configured X12 validation rules such as element length constraints, code list validations, and element requirement checks. This field is populated when the <code>TestParsing</code> API validates EDI documents.</p>
     #   @return [Array<String>]
     class TestParsingResponse < Struct.new(
+      nil,
       :parsed_file_content,
       :parsed_split_file_contents,
       :validation_messages,
@@ -1534,6 +1600,7 @@ module Aws::B2bi
     #   <p>The server attempts to retry a command that was throttled.</p>
     #   @return [Integer]
     class ThrottlingException < Struct.new(
+      nil,
       :message,
       :retry_after_seconds,
       keyword_init: true
@@ -1590,6 +1657,7 @@ module Aws::B2bi
     #   <p>Returns a structure that contains the Amazon S3 bucket and an array of the corresponding keys used to identify the location for your sample documents.</p>
     #   @return [Types::SampleDocuments]
     class TransformerSummary < Struct.new(
+      nil,
       :transformer_id,
       :name,
       :status,
@@ -1621,6 +1689,7 @@ module Aws::B2bi
     #   <p>Specifies the key-value pairs assigned to ARNs that you can use to group and search for resources by type. You can attach this metadata to resources (capabilities, partnerships, and so on) for any purpose.</p>
     #   @return [Array<String>]
     class UntagResourceRequest < Struct.new(
+      nil,
       :resource_arn,
       :tag_keys,
       keyword_init: true
@@ -1641,6 +1710,7 @@ module Aws::B2bi
     #   <p>Specifies one or more locations in Amazon S3, each specifying an EDI document that can be used with this capability. Each item contains the name of the bucket and the key, to identify the document's location.</p>
     #   @return [Array<Types::S3Location>]
     class UpdateCapabilityRequest < Struct.new(
+      nil,
       :capability_id,
       :name,
       :configuration,
@@ -1675,6 +1745,7 @@ module Aws::B2bi
     #   <p>Returns a timestamp for last time the capability was modified.</p>
     #   @return [Time]
     class UpdateCapabilityResponse < Struct.new(
+      nil,
       :capability_id,
       :capability_arn,
       :name,
@@ -1701,6 +1772,7 @@ module Aws::B2bi
     #   <p>To update, specify the structure that contains the details for the associated capabilities.</p>
     #   @return [Types::CapabilityOptions]
     class UpdatePartnershipRequest < Struct.new(
+      nil,
       :partnership_id,
       :name,
       :capabilities,
@@ -1744,6 +1816,7 @@ module Aws::B2bi
     #   <p>Returns a timestamp that identifies the most recent date and time that the partnership was modified.</p>
     #   @return [Time]
     class UpdatePartnershipResponse < Struct.new(
+      nil,
       :profile_id,
       :partnership_id,
       :partnership_arn,
@@ -1776,6 +1849,7 @@ module Aws::B2bi
     #   <p>Specifies the name for the business associated with this profile.</p>
     #   @return [String]
     class UpdateProfileRequest < Struct.new(
+      nil,
       :profile_id,
       :name,
       :email,
@@ -1817,6 +1891,7 @@ module Aws::B2bi
     #   <p>Returns a timestamp for last time the profile was modified.</p>
     #   @return [Time]
     class UpdateProfileResponse < Struct.new(
+      nil,
       :profile_id,
       :profile_arn,
       :name,
@@ -1874,6 +1949,7 @@ module Aws::B2bi
     #   <p>Specify a structure that contains the Amazon S3 bucket and an array of the corresponding keys used to identify the location for your sample documents.</p>
     #   @return [Types::SampleDocuments]
     class UpdateTransformerRequest < Struct.new(
+      nil,
       :transformer_id,
       :name,
       :status,
@@ -1941,6 +2017,7 @@ module Aws::B2bi
     #   <p>Returns a structure that contains the Amazon S3 bucket and an array of the corresponding keys used to identify the location for your sample documents.</p>
     #   @return [Types::SampleDocuments]
     class UpdateTransformerResponse < Struct.new(
+      nil,
       :transformer_id,
       :transformer_arn,
       :name,
@@ -1970,6 +2047,7 @@ module Aws::B2bi
     # @!attribute message
     #   @return [String]
     class ValidationException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -1987,6 +2065,7 @@ module Aws::B2bi
     #   <p>Specifies the maximum length of a line before wrapping occurs. This value is used when <code>wrapBy</code> is set to <code>LINE_LENGTH</code>.</p>
     #   @return [Integer]
     class WrapOptions < Struct.new(
+      nil,
       :wrap_by,
       :line_terminator,
       :line_length,
@@ -2003,6 +2082,7 @@ module Aws::B2bi
     #   <p>Specifies whether technical acknowledgments (TA1) should be generated for incoming X12 interchanges. Valid values are <code>DO_NOT_GENERATE</code> and <code>GENERATE_ALL_SEGMENTS</code> and.</p>
     #   @return [String]
     class X12AcknowledgmentOptions < Struct.new(
+      nil,
       :functional_acknowledgment,
       :technical_acknowledgment,
       keyword_init: true
@@ -2018,6 +2098,7 @@ module Aws::B2bi
     #   <p>Specifies validation options for X12 EDI processing. These options control how validation rules are applied during EDI document processing, including custom validation rules for element length constraints, code list validations, and element requirement checks.</p>
     #   @return [Types::X12ValidationOptions]
     class X12AdvancedOptions < Struct.new(
+      nil,
       :split_options,
       :validation_options,
       keyword_init: true
@@ -2036,6 +2117,7 @@ module Aws::B2bi
     #   <p>Specifies a list of code values to remove from the element's allowed values. These codes will be considered invalid for the specified element, even if they are part of the standard codes defined by the X12 specification.</p>
     #   @return [Array<String>]
     class X12CodeListValidationRule < Struct.new(
+      nil,
       :element_id,
       :codes_to_add,
       :codes_to_remove,
@@ -2055,6 +2137,7 @@ module Aws::B2bi
     #   <p>Specifies the starting transaction set control number (ST02) to use for X12 EDI generation. This number is incremented for each new transaction set.</p>
     #   @return [Integer]
     class X12ControlNumbers < Struct.new(
+      nil,
       :starting_interchange_control_number,
       :starting_functional_group_control_number,
       :starting_transaction_set_control_number,
@@ -2074,6 +2157,7 @@ module Aws::B2bi
     #   <p>The segment terminator. The default value is <code>~</code> (tilde).</p>
     #   @return [String]
     class X12Delimiters < Struct.new(
+      nil,
       :component_separator,
       :data_element_separator,
       :segment_terminator,
@@ -2090,6 +2174,7 @@ module Aws::B2bi
     #   <p>Returns the version to use for the specified X12 transaction set.</p>
     #   @return [String]
     class X12Details < Struct.new(
+      nil,
       :transaction_set,
       :version,
       keyword_init: true
@@ -2108,6 +2193,7 @@ module Aws::B2bi
     #   <p>Specifies the minimum required length for the identified element. This value must be between 1 and 200 characters and defines the lower limit for the element's content length.</p>
     #   @return [Integer]
     class X12ElementLengthValidationRule < Struct.new(
+      nil,
       :element_id,
       :max_length,
       :min_length,
@@ -2124,6 +2210,7 @@ module Aws::B2bi
     #   <p>Specifies the requirement status for the element at the specified position. Valid values are OPTIONAL (the element may be omitted) or MANDATORY (the element must be present).</p>
     #   @return [String]
     class X12ElementRequirementValidationRule < Struct.new(
+      nil,
       :element_position,
       :requirement,
       keyword_init: true
@@ -2139,6 +2226,7 @@ module Aws::B2bi
     #   <p>Contains options for wrapping (line folding) in X12 EDI files. Wrapping controls how long lines are handled in the EDI output.</p>
     #   @return [Types::WrapOptions]
     class X12Envelope < Struct.new(
+      nil,
       :common,
       :wrap_options,
       keyword_init: true
@@ -2157,6 +2245,7 @@ module Aws::B2bi
     #   <p>A code that identifies the issuer of the standard, at position GS-07.</p>
     #   @return [String]
     class X12FunctionalGroupHeaders < Struct.new(
+      nil,
       :application_sender_code,
       :application_receiver_code,
       :responsible_agency_code,
@@ -2170,6 +2259,7 @@ module Aws::B2bi
     #   <p>Specifies acknowledgment options for inbound X12 EDI files. These options control how functional and technical acknowledgments are handled.</p>
     #   @return [Types::X12AcknowledgmentOptions]
     class X12InboundEdiOptions < Struct.new(
+      nil,
       :acknowledgment_options,
       keyword_init: true
     )
@@ -2199,6 +2289,7 @@ module Aws::B2bi
     #   <p>Located at position ISA-15 in the header. Specifies how this interchange is being used:</p> <ul> <li> <p> <code>T</code> indicates this interchange is for testing.</p> </li> <li> <p> <code>P</code> indicates this interchange is for production.</p> </li> <li> <p> <code>I</code> indicates this interchange is informational.</p> </li> </ul>
     #   @return [String]
     class X12InterchangeControlHeaders < Struct.new(
+      nil,
       :sender_id_qualifier,
       :sender_id,
       :receiver_id_qualifier,
@@ -2231,6 +2322,7 @@ module Aws::B2bi
     #   <p>Specifies the time format in the GS05 element (time) of the functional group header. The following formats use 24-hour clock time:</p> <ul> <li> <p> <code>HHMM</code> - Hours and minutes</p> </li> <li> <p> <code>HHMMSS</code> - Hours, minutes, and seconds</p> </li> <li> <p> <code>HHMMSSDD</code> - Hours, minutes, seconds, and decimal seconds</p> </li> </ul> <p>Where:</p> <ul> <li> <p> <code>HH</code> - Hours (00-23)</p> </li> <li> <p> <code>MM</code> - Minutes (00-59)</p> </li> <li> <p> <code>SS</code> - Seconds (00-59)</p> </li> <li> <p> <code>DD</code> - Hundredths of seconds (00-99)</p> </li> </ul>
     #   @return [String]
     class X12OutboundEdiHeaders < Struct.new(
+      nil,
       :interchange_control_headers,
       :functional_group_headers,
       :delimiters,
@@ -2247,6 +2339,7 @@ module Aws::B2bi
     #   <p>Specifies the method used to split X12 EDI files. Valid values include <code>TRANSACTION</code> (split by individual transaction sets), or <code>NONE</code> (no splitting).</p>
     #   @return [String]
     class X12SplitOptions < Struct.new(
+      nil,
       :split_by,
       keyword_init: true
     )
@@ -2258,6 +2351,7 @@ module Aws::B2bi
     #   <p>Specifies a list of validation rules to apply during EDI document processing. These rules can include code list modifications, element length constraints, and element requirement changes.</p>
     #   @return [Array<Types::X12ValidationRule>]
     class X12ValidationOptions < Struct.new(
+      nil,
       :validation_rules,
       keyword_init: true
     )

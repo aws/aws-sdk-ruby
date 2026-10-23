@@ -13,6 +13,7 @@ module Aws::DevOpsGuru
     # @!attribute message
     #   @return [String]
     class AccessDeniedException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -31,6 +32,7 @@ module Aws::DevOpsGuru
     #   		</p>
     #   @return [Types::AccountInsightHealth]
     class AccountHealth < Struct.new(
+      nil,
       :account_id,
       :insight,
       keyword_init: true
@@ -49,6 +51,7 @@ module Aws::DevOpsGuru
     #   			account.</p>
     #   @return [Integer]
     class AccountInsightHealth < Struct.new(
+      nil,
       :open_proactive_insights,
       :open_reactive_insights,
       keyword_init: true
@@ -68,6 +71,7 @@ module Aws::DevOpsGuru
     #         	supported notification channel is Amazon Simple Notification Service (Amazon SNS). </p>
     #   @return [Types::NotificationChannelConfig]
     class AddNotificationChannelRequest < Struct.new(
+      nil,
       :config,
       keyword_init: true
     )
@@ -78,6 +82,7 @@ module Aws::DevOpsGuru
     #   <p> The ID of the added notification channel. </p>
     #   @return [String]
     class AddNotificationChannelResponse < Struct.new(
+      nil,
       :id,
       keyword_init: true
     )
@@ -92,6 +97,7 @@ module Aws::DevOpsGuru
     #   			consume recommendations that are generated from Amazon CodeGuru Profiler.</p>
     #   @return [String]
     class AmazonCodeGuruProfilerIntegration < Struct.new(
+      nil,
       :status,
       keyword_init: true
     )
@@ -127,6 +133,7 @@ module Aws::DevOpsGuru
     #   		</p>
     #   @return [Array<Types::LogAnomalyShowcase>]
     class AnomalousLogGroup < Struct.new(
+      nil,
       :log_group_name,
       :impact_start_time,
       :impact_end_time,
@@ -152,6 +159,7 @@ module Aws::DevOpsGuru
     #   <p> The time when an anomaly is closed. </p>
     #   @return [Time]
     class AnomalyReportedTimeRange < Struct.new(
+      nil,
       :open_time,
       :close_time,
       keyword_init: true
@@ -170,6 +178,7 @@ module Aws::DevOpsGuru
     #   <p>The type of the Amazon Web Services resource.</p>
     #   @return [String]
     class AnomalyResource < Struct.new(
+      nil,
       :name,
       :type,
       keyword_init: true
@@ -188,6 +197,7 @@ module Aws::DevOpsGuru
     #   			information about analyzed Performance Insights metrics that show anomalous behavior.</p>
     #   @return [Array<Types::PerformanceInsightsMetricsDetail>]
     class AnomalySourceDetails < Struct.new(
+      nil,
       :cloud_watch_metrics,
       :performance_insights_metrics,
       keyword_init: true
@@ -207,6 +217,7 @@ module Aws::DevOpsGuru
     #   <p>The anomaly's resource type.</p>
     #   @return [String]
     class AnomalySourceMetadata < Struct.new(
+      nil,
       :source,
       :source_resource_name,
       :source_resource_type,
@@ -225,6 +236,7 @@ module Aws::DevOpsGuru
     #   <p> The time when the anomalous behavior ended. </p>
     #   @return [Time]
     class AnomalyTimeRange < Struct.new(
+      nil,
       :start_time,
       :end_time,
       keyword_init: true
@@ -240,6 +252,7 @@ module Aws::DevOpsGuru
     #   <p> An array of CloudFormation stack names. </p>
     #   @return [Array<String>]
     class CloudFormationCollection < Struct.new(
+      nil,
       :stack_names,
       keyword_init: true
     )
@@ -254,6 +267,7 @@ module Aws::DevOpsGuru
     #   <p> An array of CloudFormation stack names. </p>
     #   @return [Array<String>]
     class CloudFormationCollectionFilter < Struct.new(
+      nil,
       :stack_names,
       keyword_init: true
     )
@@ -269,6 +283,7 @@ module Aws::DevOpsGuru
     #   <p>An array of CloudFormation stack names. Its size is fixed at 1 item.</p>
     #   @return [Array<String>]
     class CloudFormationCostEstimationResourceCollectionFilter < Struct.new(
+      nil,
       :stack_names,
       keyword_init: true
     )
@@ -291,6 +306,7 @@ module Aws::DevOpsGuru
     #   		</p>
     #   @return [Integer]
     class CloudFormationHealth < Struct.new(
+      nil,
       :stack_name,
       :insight,
       :analyzed_resource_count,
@@ -309,6 +325,7 @@ module Aws::DevOpsGuru
     #   			or complete data, or if there was an error.</p>
     #   @return [String]
     class CloudWatchMetricsDataSummary < Struct.new(
+      nil,
       :timestamp_metric_value_pair_list,
       :status_code,
       keyword_init: true
@@ -342,6 +359,7 @@ module Aws::DevOpsGuru
     #   <p>This object returns anomaly metric data.</p>
     #   @return [Types::CloudWatchMetricsDataSummary]
     class CloudWatchMetricsDetail < Struct.new(
+      nil,
       :metric_name,
       :namespace,
       :dimensions,
@@ -370,6 +388,7 @@ module Aws::DevOpsGuru
     #   <p> The value of the CloudWatch dimension. </p>
     #   @return [String]
     class CloudWatchMetricsDimension < Struct.new(
+      nil,
       :name,
       :value,
       keyword_init: true
@@ -387,6 +406,7 @@ module Aws::DevOpsGuru
     #   <p> The type of the Amazon Web Services resource in which a conflict occurred. </p>
     #   @return [String]
     class ConflictException < Struct.new(
+      nil,
       :message,
       :resource_id,
       :resource_type,
@@ -442,6 +462,7 @@ module Aws::DevOpsGuru
     #            </important>
     #   @return [Array<Types::TagCostEstimationResourceCollectionFilter>]
     class CostEstimationResourceCollectionFilter < Struct.new(
+      nil,
       :cloud_formation,
       :tags,
       keyword_init: true
@@ -457,6 +478,7 @@ module Aws::DevOpsGuru
     #   <p>The end time of the cost estimation.</p>
     #   @return [Time]
     class CostEstimationTimeRange < Struct.new(
+      nil,
       :start_time,
       :end_time,
       keyword_init: true
@@ -468,6 +490,7 @@ module Aws::DevOpsGuru
     #   <p>The ID of the insight.</p>
     #   @return [String]
     class DeleteInsightRequest < Struct.new(
+      nil,
       :id,
       keyword_init: true
     )
@@ -475,12 +498,14 @@ module Aws::DevOpsGuru
     end
 
     class DeleteInsightResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
     end
 
     class DescribeAccountHealthRequest < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -508,6 +533,7 @@ module Aws::DevOpsGuru
     #   		</p>
     #   @return [Integer]
     class DescribeAccountHealthResponse < Struct.new(
+      nil,
       :open_reactive_insights,
       :open_proactive_insights,
       :metrics_analyzed,
@@ -536,6 +562,7 @@ module Aws::DevOpsGuru
     #   			this is not specified, then the current day is used. </p>
     #   @return [Time]
     class DescribeAccountOverviewRequest < Struct.new(
+      nil,
       :from_time,
       :to_time,
       keyword_init: true
@@ -556,6 +583,7 @@ module Aws::DevOpsGuru
     #   		</p>
     #   @return [Integer]
     class DescribeAccountOverviewResponse < Struct.new(
+      nil,
       :reactive_insights,
       :proactive_insights,
       :mean_time_to_recover_in_milliseconds,
@@ -577,6 +605,7 @@ module Aws::DevOpsGuru
     #   <p>The ID of the member account.</p>
     #   @return [String]
     class DescribeAnomalyRequest < Struct.new(
+      nil,
       :id,
       :account_id,
       keyword_init: true
@@ -591,6 +620,7 @@ module Aws::DevOpsGuru
     #   <p> A <code>ReactiveAnomaly</code> object that represents the requested anomaly. </p>
     #   @return [Types::ReactiveAnomaly]
     class DescribeAnomalyResponse < Struct.new(
+      nil,
       :proactive_anomaly,
       :reactive_anomaly,
       keyword_init: true
@@ -599,6 +629,7 @@ module Aws::DevOpsGuru
     end
 
     class DescribeEventSourcesConfigRequest < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -608,6 +639,7 @@ module Aws::DevOpsGuru
     #   <p>Lists the event sources in the configuration.</p>
     #   @return [Types::EventSourcesConfig]
     class DescribeEventSourcesConfigResponse < Struct.new(
+      nil,
       :event_sources,
       keyword_init: true
     )
@@ -618,6 +650,7 @@ module Aws::DevOpsGuru
     #   <p> The ID of the insight for which the feedback was provided. </p>
     #   @return [String]
     class DescribeFeedbackRequest < Struct.new(
+      nil,
       :insight_id,
       keyword_init: true
     )
@@ -628,6 +661,7 @@ module Aws::DevOpsGuru
     #   <p> Information about insight feedback received from a customer. </p>
     #   @return [Types::InsightFeedback]
     class DescribeFeedbackResponse < Struct.new(
+      nil,
       :insight_feedback,
       keyword_init: true
     )
@@ -641,6 +675,7 @@ module Aws::DevOpsGuru
     #   <p>The ID of the member account in the organization.</p>
     #   @return [String]
     class DescribeInsightRequest < Struct.new(
+      nil,
       :id,
       :account_id,
       keyword_init: true
@@ -655,6 +690,7 @@ module Aws::DevOpsGuru
     #   <p> A <code>ReactiveInsight</code> object that represents the requested insight. </p>
     #   @return [Types::ReactiveInsight]
     class DescribeInsightResponse < Struct.new(
+      nil,
       :proactive_insight,
       :reactive_insight,
       keyword_init: true
@@ -669,6 +705,7 @@ module Aws::DevOpsGuru
     #   <p>The ID of the organizational unit.</p>
     #   @return [Array<String>]
     class DescribeOrganizationHealthRequest < Struct.new(
+      nil,
       :account_ids,
       :organizational_unit_ids,
       keyword_init: true
@@ -693,6 +730,7 @@ module Aws::DevOpsGuru
     #   			the last hour. </p>
     #   @return [Integer]
     class DescribeOrganizationHealthResponse < Struct.new(
+      nil,
       :open_reactive_insights,
       :open_proactive_insights,
       :metrics_analyzed,
@@ -726,6 +764,7 @@ module Aws::DevOpsGuru
     #   <p>The ID of the organizational unit.</p>
     #   @return [Array<String>]
     class DescribeOrganizationOverviewRequest < Struct.new(
+      nil,
       :from_time,
       :to_time,
       :account_ids,
@@ -744,6 +783,7 @@ module Aws::DevOpsGuru
     #   			account.</p>
     #   @return [Integer]
     class DescribeOrganizationOverviewResponse < Struct.new(
+      nil,
       :reactive_insights,
       :proactive_insights,
       keyword_init: true
@@ -778,6 +818,7 @@ module Aws::DevOpsGuru
     #   	To retrieve the remaining results, make another call with the returned <code>nextToken</code> value.</p>
     #   @return [Integer]
     class DescribeOrganizationResourceCollectionHealthRequest < Struct.new(
+      nil,
       :organization_resource_collection_type,
       :account_ids,
       :organizational_unit_ids,
@@ -840,6 +881,7 @@ module Aws::DevOpsGuru
     #            </important>
     #   @return [Array<Types::TagHealth>]
     class DescribeOrganizationResourceCollectionHealthResponse < Struct.new(
+      nil,
       :cloud_formation,
       :service,
       :account,
@@ -861,6 +903,7 @@ module Aws::DevOpsGuru
     #      the next page of results for this operation. If this value is null, it retrieves the first page.</p>
     #   @return [String]
     class DescribeResourceCollectionHealthRequest < Struct.new(
+      nil,
       :resource_collection_type,
       :next_token,
       keyword_init: true
@@ -918,6 +961,7 @@ module Aws::DevOpsGuru
     #            </important>
     #   @return [Array<Types::TagHealth>]
     class DescribeResourceCollectionHealthResponse < Struct.new(
+      nil,
       :cloud_formation,
       :service,
       :next_token,
@@ -928,6 +972,7 @@ module Aws::DevOpsGuru
     end
 
     class DescribeServiceIntegrationRequest < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -938,6 +983,7 @@ module Aws::DevOpsGuru
     #   			Amazon Web Services Systems Manager. </p>
     #   @return [Types::ServiceIntegrationConfig]
     class DescribeServiceIntegrationResponse < Struct.new(
+      nil,
       :service_integration,
       keyword_init: true
     )
@@ -953,6 +999,7 @@ module Aws::DevOpsGuru
     #   <p> The latest end time in the time range. </p>
     #   @return [Time]
     class EndTimeRange < Struct.new(
+      nil,
       :from_time,
       :to_time,
       keyword_init: true
@@ -994,6 +1041,7 @@ module Aws::DevOpsGuru
     #   			that emitted the event. </p>
     #   @return [Array<Types::EventResource>]
     class Event < Struct.new(
+      nil,
       :resource_collection,
       :id,
       :time,
@@ -1020,6 +1068,7 @@ module Aws::DevOpsGuru
     #   <p> The Amazon Resource Name (ARN) of the resource that emitted an event. </p>
     #   @return [String]
     class EventResource < Struct.new(
+      nil,
       :type,
       :name,
       :arn,
@@ -1035,6 +1084,7 @@ module Aws::DevOpsGuru
     #   			are generated from AWS CodeGuru Profiler.</p>
     #   @return [Types::AmazonCodeGuruProfilerIntegration]
     class EventSourcesConfig < Struct.new(
+      nil,
       :amazon_code_guru_profiler,
       keyword_init: true
     )
@@ -1051,6 +1101,7 @@ module Aws::DevOpsGuru
     #   <p> The time when the event ended. </p>
     #   @return [Time]
     class EventTimeRange < Struct.new(
+      nil,
       :from_time,
       :to_time,
       keyword_init: true
@@ -1063,6 +1114,7 @@ module Aws::DevOpsGuru
     #      the next page of results for this operation. If this value is null, it retrieves the first page.</p>
     #   @return [String]
     class GetCostEstimationRequest < Struct.new(
+      nil,
       :next_token,
       keyword_init: true
     )
@@ -1095,6 +1147,7 @@ module Aws::DevOpsGuru
     #      the next page of results for this operation. If there are no more pages, this value is null.</p>
     #   @return [String]
     class GetCostEstimationResponse < Struct.new(
+      nil,
       :resource_collection,
       :status,
       :costs,
@@ -1120,6 +1173,7 @@ module Aws::DevOpsGuru
     #      the next page of results for this operation. If this value is null, it retrieves the first page.</p>
     #   @return [String]
     class GetResourceCollectionRequest < Struct.new(
+      nil,
       :resource_collection_type,
       :next_token,
       keyword_init: true
@@ -1138,6 +1192,7 @@ module Aws::DevOpsGuru
     #      the next page of results for this operation. If there are no more pages, this value is null.</p>
     #   @return [String]
     class GetResourceCollectionResponse < Struct.new(
+      nil,
       :resource_collection,
       :next_token,
       keyword_init: true
@@ -1153,6 +1208,7 @@ module Aws::DevOpsGuru
     #   <p> The feedback provided by the customer. </p>
     #   @return [String]
     class InsightFeedback < Struct.new(
+      nil,
       :id,
       :feedback,
       keyword_init: true
@@ -1172,6 +1228,7 @@ module Aws::DevOpsGuru
     #   <p> The Meant Time to Recover (MTTR) for the insight. </p>
     #   @return [Integer]
     class InsightHealth < Struct.new(
+      nil,
       :open_proactive_insights,
       :open_reactive_insights,
       :mean_time_to_recover_in_milliseconds,
@@ -1195,6 +1252,7 @@ module Aws::DevOpsGuru
     #   <p> The time when the behavior described in an insight ended. </p>
     #   @return [Time]
     class InsightTimeRange < Struct.new(
+      nil,
       :start_time,
       :end_time,
       keyword_init: true
@@ -1210,6 +1268,7 @@ module Aws::DevOpsGuru
     #   			exception can be retried. </p>
     #   @return [Integer]
     class InternalServerException < Struct.new(
+      nil,
       :message,
       :retry_after_seconds,
       keyword_init: true
@@ -1252,6 +1311,7 @@ module Aws::DevOpsGuru
     #   		</p>
     #   @return [String]
     class KMSServerSideEncryptionIntegration < Struct.new(
+      nil,
       :kms_key_id,
       :opt_in_status,
       :type,
@@ -1289,6 +1349,7 @@ module Aws::DevOpsGuru
     #   		</p>
     #   @return [String]
     class KMSServerSideEncryptionIntegrationConfig < Struct.new(
+      nil,
       :kms_key_id,
       :opt_in_status,
       :type,
@@ -1304,6 +1365,7 @@ module Aws::DevOpsGuru
     #   <p>A collection of the names of Amazon Web Services services.</p>
     #   @return [Types::ServiceCollection]
     class ListAnomaliesForInsightFilters < Struct.new(
+      nil,
       :service_collection,
       keyword_init: true
     )
@@ -1334,6 +1396,7 @@ module Aws::DevOpsGuru
     #   		</p>
     #   @return [Types::ListAnomaliesForInsightFilters]
     class ListAnomaliesForInsightRequest < Struct.new(
+      nil,
       :insight_id,
       :start_time_range,
       :max_results,
@@ -1358,6 +1421,7 @@ module Aws::DevOpsGuru
     #      the next page of results for this operation. If there are no more pages, this value is null.</p>
     #   @return [String]
     class ListAnomaliesForInsightResponse < Struct.new(
+      nil,
       :proactive_anomalies,
       :reactive_anomalies,
       :next_token,
@@ -1380,6 +1444,7 @@ module Aws::DevOpsGuru
     #      the next page of results for this operation. If this value is null, it retrieves the first page.</p>
     #   @return [String]
     class ListAnomalousLogGroupsRequest < Struct.new(
+      nil,
       :insight_id,
       :max_results,
       :next_token,
@@ -1403,6 +1468,7 @@ module Aws::DevOpsGuru
     #      the next page of results for this operation. If there are no more pages, this value is null.</p>
     #   @return [String]
     class ListAnomalousLogGroupsResponse < Struct.new(
+      nil,
       :insight_id,
       :anomalous_log_groups,
       :next_token,
@@ -1437,6 +1503,7 @@ module Aws::DevOpsGuru
     #         	the Amazon Web Services resources that are defined in the stacks or that are tagged using the same tag <i>key</i>. You can specify up to 500 Amazon Web Services CloudFormation stacks. </p>
     #   @return [Types::ResourceCollection]
     class ListEventsFilters < Struct.new(
+      nil,
       :insight_id,
       :event_time_range,
       :event_class,
@@ -1464,6 +1531,7 @@ module Aws::DevOpsGuru
     #   <p>The ID of the Amazon Web Services account. </p>
     #   @return [String]
     class ListEventsRequest < Struct.new(
+      nil,
       :filters,
       :max_results,
       :next_token,
@@ -1481,6 +1549,7 @@ module Aws::DevOpsGuru
     #      the next page of results for this operation. If there are no more pages, this value is null.</p>
     #   @return [String]
     class ListEventsResponse < Struct.new(
+      nil,
       :events,
       :next_token,
       keyword_init: true
@@ -1498,6 +1567,7 @@ module Aws::DevOpsGuru
     #   		</p>
     #   @return [Types::StartTimeRange]
     class ListInsightsAnyStatusFilter < Struct.new(
+      nil,
       :type,
       :start_time_range,
       keyword_init: true
@@ -1515,6 +1585,7 @@ module Aws::DevOpsGuru
     #   		</p>
     #   @return [Types::EndTimeRange]
     class ListInsightsClosedStatusFilter < Struct.new(
+      nil,
       :type,
       :end_time_range,
       keyword_init: true
@@ -1528,6 +1599,7 @@ module Aws::DevOpsGuru
     #   		</p>
     #   @return [String]
     class ListInsightsOngoingStatusFilter < Struct.new(
+      nil,
       :type,
       keyword_init: true
     )
@@ -1547,6 +1619,7 @@ module Aws::DevOpsGuru
     #      the next page of results for this operation. If this value is null, it retrieves the first page.</p>
     #   @return [String]
     class ListInsightsRequest < Struct.new(
+      nil,
       :status_filter,
       :max_results,
       :next_token,
@@ -1566,6 +1639,7 @@ module Aws::DevOpsGuru
     #      the next page of results for this operation. If there are no more pages, this value is null.</p>
     #   @return [String]
     class ListInsightsResponse < Struct.new(
+      nil,
       :proactive_insights,
       :reactive_insights,
       :next_token,
@@ -1589,6 +1663,7 @@ module Aws::DevOpsGuru
     #   			are either <code>REACTIVE</code> or <code>PROACTIVE</code>. </p>
     #   @return [Types::ListInsightsAnyStatusFilter]
     class ListInsightsStatusFilter < Struct.new(
+      nil,
       :ongoing,
       :closed,
       :any,
@@ -1611,6 +1686,7 @@ module Aws::DevOpsGuru
     #   		</p>
     #   @return [Array<String>]
     class ListMonitoredResourcesFilters < Struct.new(
+      nil,
       :resource_permission,
       :resource_type_filters,
       keyword_init: true
@@ -1632,6 +1708,7 @@ module Aws::DevOpsGuru
     #      the next page of results for this operation. If this value is null, it retrieves the first page.</p>
     #   @return [String]
     class ListMonitoredResourcesRequest < Struct.new(
+      nil,
       :filters,
       :max_results,
       :next_token,
@@ -1650,6 +1727,7 @@ module Aws::DevOpsGuru
     #      the next page of results for this operation. If there are no more pages, this value is null.</p>
     #   @return [String]
     class ListMonitoredResourcesResponse < Struct.new(
+      nil,
       :monitored_resource_identifiers,
       :next_token,
       keyword_init: true
@@ -1662,6 +1740,7 @@ module Aws::DevOpsGuru
     #      the next page of results for this operation. If this value is null, it retrieves the first page.</p>
     #   @return [String]
     class ListNotificationChannelsRequest < Struct.new(
+      nil,
       :next_token,
       keyword_init: true
     )
@@ -1676,6 +1755,7 @@ module Aws::DevOpsGuru
     #      the next page of results for this operation. If there are no more pages, this value is null.</p>
     #   @return [String]
     class ListNotificationChannelsResponse < Struct.new(
+      nil,
       :channels,
       :next_token,
       keyword_init: true
@@ -1702,6 +1782,7 @@ module Aws::DevOpsGuru
     #      the next page of results for this operation. If this value is null, it retrieves the first page.</p>
     #   @return [String]
     class ListOrganizationInsightsRequest < Struct.new(
+      nil,
       :status_filter,
       :max_results,
       :account_ids,
@@ -1725,6 +1806,7 @@ module Aws::DevOpsGuru
     #      the next page of results for this operation. If there are no more pages, this value is null.</p>
     #   @return [String]
     class ListOrganizationInsightsResponse < Struct.new(
+      nil,
       :proactive_insights,
       :reactive_insights,
       :next_token,
@@ -1747,6 +1829,7 @@ module Aws::DevOpsGuru
     #   <p>The ID of the Amazon Web Services account. </p>
     #   @return [String]
     class ListRecommendationsRequest < Struct.new(
+      nil,
       :insight_id,
       :next_token,
       :locale,
@@ -1764,6 +1847,7 @@ module Aws::DevOpsGuru
     #      the next page of results for this operation. If there are no more pages, this value is null.</p>
     #   @return [String]
     class ListRecommendationsResponse < Struct.new(
+      nil,
       :recommendations,
       :next_token,
       keyword_init: true
@@ -1810,6 +1894,7 @@ module Aws::DevOpsGuru
     #   		</p>
     #   @return [Time]
     class LogAnomalyClass < Struct.new(
+      nil,
       :log_stream_name,
       :log_anomaly_type,
       :log_anomaly_token,
@@ -1836,6 +1921,7 @@ module Aws::DevOpsGuru
     #   		</p>
     #   @return [Array<Types::LogAnomalyClass>]
     class LogAnomalyShowcase < Struct.new(
+      nil,
       :log_anomaly_classes,
       keyword_init: true
     )
@@ -1849,6 +1935,7 @@ module Aws::DevOpsGuru
     #   <p>Specifies if DevOps Guru is configured to perform log anomaly detection on CloudWatch log groups.</p>
     #   @return [String]
     class LogsAnomalyDetectionIntegration < Struct.new(
+      nil,
       :opt_in_status,
       keyword_init: true
     )
@@ -1862,6 +1949,7 @@ module Aws::DevOpsGuru
     #   <p>Specifies if DevOps Guru is configured to perform log anomaly detection on CloudWatch log groups.</p>
     #   @return [String]
     class LogsAnomalyDetectionIntegrationConfig < Struct.new(
+      nil,
       :opt_in_status,
       keyword_init: true
     )
@@ -1898,6 +1986,7 @@ module Aws::DevOpsGuru
     #         	the Amazon Web Services resources that are defined in the stacks or that are tagged using the same tag <i>key</i>. You can specify up to 500 Amazon Web Services CloudFormation stacks. </p>
     #   @return [Types::ResourceCollection]
     class MonitoredResourceIdentifier < Struct.new(
+      nil,
       :monitored_resource_name,
       :type,
       :resource_permission,
@@ -1926,6 +2015,7 @@ module Aws::DevOpsGuru
     #   			configured notification channels. </p>
     #   @return [Types::NotificationChannelConfig]
     class NotificationChannel < Struct.new(
+      nil,
       :id,
       :config,
       keyword_init: true
@@ -1954,6 +2044,7 @@ module Aws::DevOpsGuru
     #   		</p>
     #   @return [Types::NotificationFilterConfig]
     class NotificationChannelConfig < Struct.new(
+      nil,
       :sns,
       :filters,
       keyword_init: true
@@ -1977,6 +2068,7 @@ module Aws::DevOpsGuru
     #   		</p>
     #   @return [Array<String>]
     class NotificationFilterConfig < Struct.new(
+      nil,
       :severities,
       :message_types,
       keyword_init: true
@@ -1991,6 +2083,7 @@ module Aws::DevOpsGuru
     #   			insight. </p>
     #   @return [String]
     class OpsCenterIntegration < Struct.new(
+      nil,
       :opt_in_status,
       keyword_init: true
     )
@@ -2004,6 +2097,7 @@ module Aws::DevOpsGuru
     #   			insight. </p>
     #   @return [String]
     class OpsCenterIntegrationConfig < Struct.new(
+      nil,
       :opt_in_status,
       keyword_init: true
     )
@@ -2178,6 +2272,7 @@ module Aws::DevOpsGuru
     #   <p>The maximum number of items to fetch for this dimension group.</p>
     #   @return [Integer]
     class PerformanceInsightsMetricDimensionGroup < Struct.new(
+      nil,
       :group,
       :dimensions,
       :limit,
@@ -2254,6 +2349,7 @@ module Aws::DevOpsGuru
     #            </ul>
     #   @return [Hash<String, String>]
     class PerformanceInsightsMetricQuery < Struct.new(
+      nil,
       :metric,
       :group_by,
       :filter,
@@ -2305,6 +2401,7 @@ module Aws::DevOpsGuru
     #   			anomalous.</p>
     #   @return [Array<Types::PerformanceInsightsStat>]
     class PerformanceInsightsMetricsDetail < Struct.new(
+      nil,
       :metric_display_name,
       :unit,
       :metric_query,
@@ -2330,6 +2427,7 @@ module Aws::DevOpsGuru
     #   			determine if an actual metric should be considered anomalous.</p>
     #   @return [Types::PerformanceInsightsReferenceMetric]
     class PerformanceInsightsReferenceComparisonValues < Struct.new(
+      nil,
       :reference_scalar,
       :reference_metric,
       keyword_init: true
@@ -2349,6 +2447,7 @@ module Aws::DevOpsGuru
     #               </code>. </p>
     #   @return [Types::PerformanceInsightsReferenceComparisonValues]
     class PerformanceInsightsReferenceData < Struct.new(
+      nil,
       :name,
       :comparison_values,
       keyword_init: true
@@ -2361,6 +2460,7 @@ module Aws::DevOpsGuru
     #   <p>A query to be processed on the metric.</p>
     #   @return [Types::PerformanceInsightsMetricQuery]
     class PerformanceInsightsReferenceMetric < Struct.new(
+      nil,
       :metric_query,
       keyword_init: true
     )
@@ -2373,6 +2473,7 @@ module Aws::DevOpsGuru
     #   <p>The reference value.</p>
     #   @return [Float]
     class PerformanceInsightsReferenceScalar < Struct.new(
+      nil,
       :value,
       keyword_init: true
     )
@@ -2387,6 +2488,7 @@ module Aws::DevOpsGuru
     #   <p>The value of the statistic.</p>
     #   @return [Float]
     class PerformanceInsightsStat < Struct.new(
+      nil,
       :type,
       :value,
       keyword_init: true
@@ -2404,6 +2506,7 @@ module Aws::DevOpsGuru
     #   <p> The time when the behavior in a proactive insight is expected to end. </p>
     #   @return [Time]
     class PredictionTimeRange < Struct.new(
+      nil,
       :start_time,
       :end_time,
       keyword_init: true
@@ -2472,6 +2575,7 @@ module Aws::DevOpsGuru
     #   		</p>
     #   @return [String]
     class ProactiveAnomaly < Struct.new(
+      nil,
       :id,
       :severity,
       :status,
@@ -2553,6 +2657,7 @@ module Aws::DevOpsGuru
     #   		</p>
     #   @return [String]
     class ProactiveAnomalySummary < Struct.new(
+      nil,
       :id,
       :severity,
       :status,
@@ -2610,6 +2715,7 @@ module Aws::DevOpsGuru
     #   <p>Describes the proactive insight.</p>
     #   @return [String]
     class ProactiveInsight < Struct.new(
+      nil,
       :id,
       :name,
       :severity,
@@ -2663,6 +2769,7 @@ module Aws::DevOpsGuru
     #   	of the Amazon Web Services resources that generated this insight.</p>
     #   @return [Array<String>]
     class ProactiveInsightSummary < Struct.new(
+      nil,
       :id,
       :name,
       :severity,
@@ -2718,6 +2825,7 @@ module Aws::DevOpsGuru
     #   <p>A collection of the names of Amazon Web Services services.</p>
     #   @return [Types::ServiceCollection]
     class ProactiveOrganizationInsightSummary < Struct.new(
+      nil,
       :id,
       :account_id,
       :organizational_unit_id,
@@ -2737,6 +2845,7 @@ module Aws::DevOpsGuru
     #   <p> The feedback from customers is about the recommendations in this insight. </p>
     #   @return [Types::InsightFeedback]
     class PutFeedbackRequest < Struct.new(
+      nil,
       :insight_feedback,
       keyword_init: true
     )
@@ -2744,6 +2853,7 @@ module Aws::DevOpsGuru
     end
 
     class PutFeedbackResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -2814,6 +2924,7 @@ module Aws::DevOpsGuru
     #   <p>The Amazon Web Services resources in which anomalous behavior was detected by DevOps Guru.</p>
     #   @return [Array<Types::AnomalyResource>]
     class ReactiveAnomaly < Struct.new(
+      nil,
       :id,
       :severity,
       :status,
@@ -2898,6 +3009,7 @@ module Aws::DevOpsGuru
     #   <p>The Amazon Web Services resources in which anomalous behavior was detected by DevOps Guru.</p>
     #   @return [Array<Types::AnomalyResource>]
     class ReactiveAnomalySummary < Struct.new(
+      nil,
       :id,
       :severity,
       :status,
@@ -2950,6 +3062,7 @@ module Aws::DevOpsGuru
     #   <p>Describes the reactive insight.</p>
     #   @return [String]
     class ReactiveInsight < Struct.new(
+      nil,
       :id,
       :name,
       :severity,
@@ -2998,6 +3111,7 @@ module Aws::DevOpsGuru
     #   	of the Amazon Web Services resources that generated this insight.</p>
     #   @return [Array<String>]
     class ReactiveInsightSummary < Struct.new(
+      nil,
       :id,
       :name,
       :severity,
@@ -3048,6 +3162,7 @@ module Aws::DevOpsGuru
     #   <p>A collection of the names of Amazon Web Services services.</p>
     #   @return [Types::ServiceCollection]
     class ReactiveOrganizationInsightSummary < Struct.new(
+      nil,
       :id,
       :account_id,
       :organizational_unit_id,
@@ -3088,6 +3203,7 @@ module Aws::DevOpsGuru
     #   <p>The category type of the recommendation.</p>
     #   @return [String]
     class Recommendation < Struct.new(
+      nil,
       :description,
       :link,
       :name,
@@ -3113,6 +3229,7 @@ module Aws::DevOpsGuru
     #   <p>The ID of an anomaly that generated the insight with this recommendation.</p>
     #   @return [String]
     class RecommendationRelatedAnomaly < Struct.new(
+      nil,
       :resources,
       :source_details,
       :anomaly_id,
@@ -3133,6 +3250,7 @@ module Aws::DevOpsGuru
     #   				Guide</i>.</p>
     #   @return [String]
     class RecommendationRelatedAnomalyResource < Struct.new(
+      nil,
       :name,
       :type,
       keyword_init: true
@@ -3147,6 +3265,7 @@ module Aws::DevOpsGuru
     #   			about the analyzed metrics that displayed anomalous behavior. </p>
     #   @return [Array<Types::RecommendationRelatedCloudWatchMetricsSourceDetail>]
     class RecommendationRelatedAnomalySourceDetail < Struct.new(
+      nil,
       :cloud_watch_metrics,
       keyword_init: true
     )
@@ -3162,6 +3281,7 @@ module Aws::DevOpsGuru
     #   <p>The namespace of the CloudWatch metric. A namespace is a container for CloudWatch metrics.</p>
     #   @return [String]
     class RecommendationRelatedCloudWatchMetricsSourceDetail < Struct.new(
+      nil,
       :metric_name,
       :namespace,
       keyword_init: true
@@ -3179,6 +3299,7 @@ module Aws::DevOpsGuru
     #   			CloudFormation stacks. You can specify up to 500 Amazon Web Services CloudFormation stacks. </p>
     #   @return [Array<Types::RecommendationRelatedEventResource>]
     class RecommendationRelatedEvent < Struct.new(
+      nil,
       :name,
       :resources,
       keyword_init: true
@@ -3197,6 +3318,7 @@ module Aws::DevOpsGuru
     #   				<code>Type</code> field in an <code>EventResource</code> object. </p>
     #   @return [String]
     class RecommendationRelatedEventResource < Struct.new(
+      nil,
       :name,
       :type,
       keyword_init: true
@@ -3208,6 +3330,7 @@ module Aws::DevOpsGuru
     #   <p> The ID of the notification channel to be removed. </p>
     #   @return [String]
     class RemoveNotificationChannelRequest < Struct.new(
+      nil,
       :id,
       keyword_init: true
     )
@@ -3215,6 +3338,7 @@ module Aws::DevOpsGuru
     end
 
     class RemoveNotificationChannelResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -3265,6 +3389,7 @@ module Aws::DevOpsGuru
     #            </important>
     #   @return [Array<Types::TagCollection>]
     class ResourceCollection < Struct.new(
+      nil,
       :cloud_formation,
       :tags,
       keyword_init: true
@@ -3317,6 +3442,7 @@ module Aws::DevOpsGuru
     #            </important>
     #   @return [Array<Types::TagCollectionFilter>]
     class ResourceCollectionFilter < Struct.new(
+      nil,
       :cloud_formation,
       :tags,
       keyword_init: true
@@ -3334,6 +3460,7 @@ module Aws::DevOpsGuru
     #   <p> The type of the Amazon Web Services resource that could not be found. </p>
     #   @return [String]
     class ResourceNotFoundException < Struct.new(
+      nil,
       :message,
       :resource_id,
       :resource_type,
@@ -3362,6 +3489,7 @@ module Aws::DevOpsGuru
     #   <p>A collection of the names of Amazon Web Services services.</p>
     #   @return [Types::ServiceCollection]
     class SearchInsightsFilters < Struct.new(
+      nil,
       :severities,
       :statuses,
       :resource_collection,
@@ -3392,6 +3520,7 @@ module Aws::DevOpsGuru
     #   				<code>PROACTIVE</code>). </p>
     #   @return [String]
     class SearchInsightsRequest < Struct.new(
+      nil,
       :start_time_range,
       :filters,
       :max_results,
@@ -3413,6 +3542,7 @@ module Aws::DevOpsGuru
     #      the next page of results for this operation. If there are no more pages, this value is null.</p>
     #   @return [String]
     class SearchInsightsResponse < Struct.new(
+      nil,
       :proactive_insights,
       :reactive_insights,
       :next_token,
@@ -3439,6 +3569,7 @@ module Aws::DevOpsGuru
     #   <p>A collection of the names of Amazon Web Services services.</p>
     #   @return [Types::ServiceCollection]
     class SearchOrganizationInsightsFilters < Struct.new(
+      nil,
       :severities,
       :statuses,
       :resource_collection,
@@ -3472,6 +3603,7 @@ module Aws::DevOpsGuru
     #   				<code>PROACTIVE</code>). </p>
     #   @return [String]
     class SearchOrganizationInsightsRequest < Struct.new(
+      nil,
       :account_ids,
       :start_time_range,
       :filters,
@@ -3496,6 +3628,7 @@ module Aws::DevOpsGuru
     #      the next page of results for this operation. If there are no more pages, this value is null.</p>
     #   @return [String]
     class SearchOrganizationInsightsResponse < Struct.new(
+      nil,
       :proactive_insights,
       :reactive_insights,
       :next_token,
@@ -3509,6 +3642,7 @@ module Aws::DevOpsGuru
     #   <p>An array of strings that each specifies the name of an Amazon Web Services service.</p>
     #   @return [Array<String>]
     class ServiceCollection < Struct.new(
+      nil,
       :service_names,
       keyword_init: true
     )
@@ -3530,6 +3664,7 @@ module Aws::DevOpsGuru
     #   		</p>
     #   @return [Integer]
     class ServiceHealth < Struct.new(
+      nil,
       :service_name,
       :insight,
       :analyzed_resource_count,
@@ -3547,6 +3682,7 @@ module Aws::DevOpsGuru
     #   <p>The number of open reactive insights in the Amazon Web Services service</p>
     #   @return [Integer]
     class ServiceInsightHealth < Struct.new(
+      nil,
       :open_proactive_insights,
       :open_reactive_insights,
       keyword_init: true
@@ -3577,6 +3713,7 @@ module Aws::DevOpsGuru
     #   		</p>
     #   @return [Types::KMSServerSideEncryptionIntegration]
     class ServiceIntegrationConfig < Struct.new(
+      nil,
       :ops_center,
       :logs_anomaly_detection,
       :kms_server_side_encryption,
@@ -3589,6 +3726,7 @@ module Aws::DevOpsGuru
     # @!attribute message
     #   @return [String]
     class ServiceQuotaExceededException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -3625,6 +3763,7 @@ module Aws::DevOpsGuru
     #   			resource.</p>
     #   @return [Float]
     class ServiceResourceCost < Struct.new(
+      nil,
       :type,
       :state,
       :count,
@@ -3654,6 +3793,7 @@ module Aws::DevOpsGuru
     #   <p> The Amazon Resource Name (ARN) of an Amazon Simple Notification Service topic. </p>
     #   @return [String]
     class SnsChannelConfig < Struct.new(
+      nil,
       :topic_arn,
       keyword_init: true
     )
@@ -3667,6 +3807,7 @@ module Aws::DevOpsGuru
     #   <p>The idempotency token used to identify each cost estimate request.</p>
     #   @return [String]
     class StartCostEstimationRequest < Struct.new(
+      nil,
       :resource_collection,
       :client_token,
       keyword_init: true
@@ -3675,6 +3816,7 @@ module Aws::DevOpsGuru
     end
 
     class StartCostEstimationResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -3689,6 +3831,7 @@ module Aws::DevOpsGuru
     #   <p> The end time of the time range. </p>
     #   @return [Time]
     class StartTimeRange < Struct.new(
+      nil,
       :from_time,
       :to_time,
       keyword_init: true
@@ -3756,6 +3899,7 @@ module Aws::DevOpsGuru
     #      				case-sensitive. You can specify a maximum of 256 characters for a tag value.</p>
     #   @return [Array<String>]
     class TagCollection < Struct.new(
+      nil,
       :app_boundary_key,
       :tag_values,
       keyword_init: true
@@ -3791,6 +3935,7 @@ module Aws::DevOpsGuru
     #      				case-sensitive. You can specify a maximum of 256 characters for a tag value.</p>
     #   @return [Array<String>]
     class TagCollectionFilter < Struct.new(
+      nil,
       :app_boundary_key,
       :tag_values,
       keyword_init: true
@@ -3830,6 +3975,7 @@ module Aws::DevOpsGuru
     #      				case-sensitive. You can specify a maximum of 256 characters for a tag value.</p>
     #   @return [Array<String>]
     class TagCostEstimationResourceCollectionFilter < Struct.new(
+      nil,
       :app_boundary_key,
       :tag_values,
       keyword_init: true
@@ -3875,6 +4021,7 @@ module Aws::DevOpsGuru
     #   		</p>
     #   @return [Integer]
     class TagHealth < Struct.new(
+      nil,
       :app_boundary_key,
       :tag_value,
       :insight,
@@ -3898,6 +4045,7 @@ module Aws::DevOpsGuru
     #   			be retried. </p>
     #   @return [Integer]
     class ThrottlingException < Struct.new(
+      nil,
       :message,
       :quota_code,
       :service_code,
@@ -3920,6 +4068,7 @@ module Aws::DevOpsGuru
     #   <p>Value of the anomalous metric data point at respective Timestamp.</p>
     #   @return [Float]
     class TimestampMetricValuePair < Struct.new(
+      nil,
       :timestamp,
       :metric_value,
       keyword_init: true
@@ -3934,6 +4083,7 @@ module Aws::DevOpsGuru
     #   		</p>
     #   @return [Array<String>]
     class UpdateCloudFormationCollectionFilter < Struct.new(
+      nil,
       :stack_names,
       keyword_init: true
     )
@@ -3945,6 +4095,7 @@ module Aws::DevOpsGuru
     #   			EventBridge with another AWS Service.</p>
     #   @return [Types::EventSourcesConfig]
     class UpdateEventSourcesConfigRequest < Struct.new(
+      nil,
       :event_sources,
       keyword_init: true
     )
@@ -3952,6 +4103,7 @@ module Aws::DevOpsGuru
     end
 
     class UpdateEventSourcesConfigResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -3998,6 +4150,7 @@ module Aws::DevOpsGuru
     #            </important>
     #   @return [Array<Types::UpdateTagCollectionFilter>]
     class UpdateResourceCollectionFilter < Struct.new(
+      nil,
       :cloud_formation,
       :tags,
       keyword_init: true
@@ -4013,6 +4166,7 @@ module Aws::DevOpsGuru
     #   <p> Contains information used to update a collection of Amazon Web Services resources. </p>
     #   @return [Types::UpdateResourceCollectionFilter]
     class UpdateResourceCollectionRequest < Struct.new(
+      nil,
       :action,
       :resource_collection,
       keyword_init: true
@@ -4021,6 +4175,7 @@ module Aws::DevOpsGuru
     end
 
     class UpdateResourceCollectionResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -4043,6 +4198,7 @@ module Aws::DevOpsGuru
     #   		</p>
     #   @return [Types::KMSServerSideEncryptionIntegrationConfig]
     class UpdateServiceIntegrationConfig < Struct.new(
+      nil,
       :ops_center,
       :logs_anomaly_detection,
       :kms_server_side_encryption,
@@ -4056,6 +4212,7 @@ module Aws::DevOpsGuru
     #   			you want to update, and whether you want to update it to enabled or disabled. </p>
     #   @return [Types::UpdateServiceIntegrationConfig]
     class UpdateServiceIntegrationRequest < Struct.new(
+      nil,
       :service_integration,
       keyword_init: true
     )
@@ -4063,6 +4220,7 @@ module Aws::DevOpsGuru
     end
 
     class UpdateServiceIntegrationResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -4096,6 +4254,7 @@ module Aws::DevOpsGuru
     #      				case-sensitive. You can specify a maximum of 256 characters for a tag value.</p>
     #   @return [Array<String>]
     class UpdateTagCollectionFilter < Struct.new(
+      nil,
       :app_boundary_key,
       :tag_values,
       keyword_init: true
@@ -4115,6 +4274,7 @@ module Aws::DevOpsGuru
     #   <p> An array of fields that are associated with the validation exception. </p>
     #   @return [Array<Types::ValidationExceptionField>]
     class ValidationException < Struct.new(
+      nil,
       :message,
       :reason,
       :fields,
@@ -4132,6 +4292,7 @@ module Aws::DevOpsGuru
     #   			determine its cause. </p>
     #   @return [String]
     class ValidationExceptionField < Struct.new(
+      nil,
       :name,
       :message,
       keyword_init: true

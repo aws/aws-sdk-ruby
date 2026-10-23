@@ -22,8 +22,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        # TODO: Only one version for now, add more later
-        ruby: [3.4]
+        ruby: ['3.1', '3.2', '3.3', '3.4', '4.0', jruby-9.4, jruby-10.0]
 
     steps:
       - uses: actions/checkout@v4
@@ -42,6 +41,8 @@ jobs:
         run: bundle exec rake build
 
       - name: Test
+        env:
+          JRUBY_OPTS: -J-Xmx4g
         run: bundle exec rake test:spec
 
   protocol-test:
@@ -49,8 +50,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        # Only one version for now
-        ruby: [3.4]
+        ruby: ['3.1', '3.2', '3.3', '3.4', '4.0', jruby-9.4, jruby-10.0]
 
     steps:
       - uses: actions/checkout@v4
@@ -82,7 +82,7 @@ jobs:
       - name: Setup Ruby
         uses: ruby/setup-ruby@v1
         with:
-          ruby-version: 3.4
+          ruby-version: '4.0'
           bundler-cache: true
 
       - name: Rubocop

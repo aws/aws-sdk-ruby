@@ -13,6 +13,7 @@ module Aws::WorkSpaces
     #   <p>A string of up to 64 ASCII characters that Amazon WorkSpaces uses to ensure idempotent creation.</p>
     #   @return [String]
     class AcceptAccountLinkInvitationRequest < Struct.new(
+      nil,
       :link_id,
       :client_token,
       keyword_init: true
@@ -24,6 +25,7 @@ module Aws::WorkSpaces
     #   <p>Information about the account link.</p>
     #   @return [Types::AccountLink]
     class AcceptAccountLinkInvitationResult < Struct.new(
+      nil,
       :account_link,
       keyword_init: true
     )
@@ -34,6 +36,7 @@ module Aws::WorkSpaces
     # @!attribute message
     #   @return [String]
     class AccessDeniedException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -48,6 +51,7 @@ module Aws::WorkSpaces
     #   <p>Indicates the VPC endpoint to use for access.</p>
     #   @return [String]
     class AccessEndpoint < Struct.new(
+      nil,
       :access_endpoint_type,
       :vpc_endpoint_id,
       keyword_init: true
@@ -63,6 +67,7 @@ module Aws::WorkSpaces
     #   <p>Indicates a list of protocols that fallback to using the public Internet when streaming over a VPC endpoint is not available.</p>
     #   @return [Array<String>]
     class AccessEndpointConfig < Struct.new(
+      nil,
       :access_endpoints,
       :internet_fallback_protocols,
       keyword_init: true
@@ -84,6 +89,7 @@ module Aws::WorkSpaces
     #   <p>The identifier of the target account.</p>
     #   @return [String]
     class AccountLink < Struct.new(
+      nil,
       :account_link_id,
       :account_link_status,
       :source_account_id,
@@ -116,6 +122,7 @@ module Aws::WorkSpaces
     #            modified.</p>
     #   @return [String]
     class AccountModification < Struct.new(
+      nil,
       :modification_state,
       :dedicated_tenancy_support,
       :dedicated_tenancy_management_cidr_range,
@@ -135,6 +142,7 @@ module Aws::WorkSpaces
     #   <p>Indicates the secret ARN on the service account.</p>
     #   @return [String]
     class ActiveDirectoryConfig < Struct.new(
+      nil,
       :domain_name,
       :service_account_secret_arn,
       keyword_init: true
@@ -144,6 +152,7 @@ module Aws::WorkSpaces
 
     # <p>The specified application is not supported.</p>
     class ApplicationNotSupportedException < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -172,6 +181,7 @@ module Aws::WorkSpaces
     #   <p>The reason the association deployment failed.</p>
     #   @return [Types::AssociationStateReason]
     class ApplicationResourceAssociation < Struct.new(
+      nil,
       :application_id,
       :associated_resource_id,
       :associated_resource_type,
@@ -194,6 +204,7 @@ module Aws::WorkSpaces
     #            the same settings group for each pool.</p>
     #   @return [String]
     class ApplicationSettingsRequest < Struct.new(
+      nil,
       :status,
       :settings_group,
       keyword_init: true
@@ -214,6 +225,7 @@ module Aws::WorkSpaces
     #            an S3 bucket is created. The bucket is unique to the Amazon Web Services account and the Region.</p>
     #   @return [String]
     class ApplicationSettingsResponse < Struct.new(
+      nil,
       :status,
       :settings_group,
       :s3_bucket_name,
@@ -229,6 +241,7 @@ module Aws::WorkSpaces
     #   <p>The identifier of the directory to associate the connection alias with.</p>
     #   @return [String]
     class AssociateConnectionAliasRequest < Struct.new(
+      nil,
       :alias_id,
       :resource_id,
       keyword_init: true
@@ -241,6 +254,7 @@ module Aws::WorkSpaces
     #            the DNS TXT record when you're configuring your DNS routing policies. </p>
     #   @return [String]
     class AssociateConnectionAliasResult < Struct.new(
+      nil,
       :connection_identifier,
       keyword_init: true
     )
@@ -254,6 +268,7 @@ module Aws::WorkSpaces
     #   <p>The identifiers of one or more IP access control groups.</p>
     #   @return [Array<String>]
     class AssociateIpGroupsRequest < Struct.new(
+      nil,
       :directory_id,
       :group_ids,
       keyword_init: true
@@ -262,6 +277,7 @@ module Aws::WorkSpaces
     end
 
     class AssociateIpGroupsResult < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -274,6 +290,7 @@ module Aws::WorkSpaces
     #   <p>The identifier of the application.</p>
     #   @return [String]
     class AssociateWorkspaceApplicationRequest < Struct.new(
+      nil,
       :workspace_id,
       :application_id,
       keyword_init: true
@@ -285,6 +302,7 @@ module Aws::WorkSpaces
     #   <p>Information about the association between the specified WorkSpace and the specified application.</p>
     #   @return [Types::WorkspaceResourceAssociation]
     class AssociateWorkspaceApplicationResult < Struct.new(
+      nil,
       :association,
       keyword_init: true
     )
@@ -299,6 +317,7 @@ module Aws::WorkSpaces
     #   <p>The error message of the association deployment failure.</p>
     #   @return [String]
     class AssociationStateReason < Struct.new(
+      nil,
       :error_code,
       :error_message,
       keyword_init: true
@@ -313,6 +332,7 @@ module Aws::WorkSpaces
     #   <p>The rules to add to the group.</p>
     #   @return [Array<Types::IpRuleItem>]
     class AuthorizeIpRulesRequest < Struct.new(
+      nil,
       :group_id,
       :user_rules,
       keyword_init: true
@@ -321,6 +341,7 @@ module Aws::WorkSpaces
     end
 
     class AuthorizeIpRulesResult < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -349,6 +370,7 @@ module Aws::WorkSpaces
     #   <p>The reason the association deployment failed.</p>
     #   @return [Types::AssociationStateReason]
     class BundleResourceAssociation < Struct.new(
+      nil,
       :associated_resource_id,
       :associated_resource_type,
       :bundle_id,
@@ -366,6 +388,7 @@ module Aws::WorkSpaces
     #   <p>The desired number of user sessions for the WorkSpaces in the pool.</p>
     #   @return [Integer]
     class Capacity < Struct.new(
+      nil,
       :desired_user_sessions,
       keyword_init: true
     )
@@ -391,6 +414,7 @@ module Aws::WorkSpaces
     #   <p>The number of user sessions currently being used for your pool.</p>
     #   @return [Integer]
     class CapacityStatus < Struct.new(
+      nil,
       :available_user_sessions,
       :desired_user_sessions,
       :actual_user_sessions,
@@ -409,6 +433,7 @@ module Aws::WorkSpaces
     #   <p>The Amazon Resource Name (ARN) of the Amazon Web Services Certificate Manager Private CA resource.</p>
     #   @return [String]
     class CertificateBasedAuthProperties < Struct.new(
+      nil,
       :status,
       :certificate_authority_arn,
       keyword_init: true
@@ -429,6 +454,7 @@ module Aws::WorkSpaces
     #            users in the specified directory.</p>
     #   @return [String]
     class ClientProperties < Struct.new(
+      nil,
       :reconnect_enabled,
       :log_upload_enabled,
       keyword_init: true
@@ -444,6 +470,7 @@ module Aws::WorkSpaces
     #   <p>Information about the Amazon WorkSpaces client.</p>
     #   @return [Types::ClientProperties]
     class ClientPropertiesResult < Struct.new(
+      nil,
       :resource_id,
       :client_properties,
       keyword_init: true
@@ -453,6 +480,7 @@ module Aws::WorkSpaces
 
     # <p>The compute type of the WorkSpace is not compatible with the application.</p>
     class ComputeNotCompatibleException < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -463,6 +491,7 @@ module Aws::WorkSpaces
     #   <p>The compute type.</p>
     #   @return [String]
     class ComputeType < Struct.new(
+      nil,
       :name,
       keyword_init: true
     )
@@ -473,6 +502,7 @@ module Aws::WorkSpaces
     # @!attribute message
     #   @return [String]
     class ConflictException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -493,6 +523,7 @@ module Aws::WorkSpaces
     #   <p>The endpoint URL of the client add-in.</p>
     #   @return [String]
     class ConnectClientAddIn < Struct.new(
+      nil,
       :add_in_id,
       :resource_id,
       :name,
@@ -523,6 +554,7 @@ module Aws::WorkSpaces
     #   <p>The association status of the connection alias.</p>
     #   @return [Array<Types::ConnectionAliasAssociation>]
     class ConnectionAlias < Struct.new(
+      nil,
       :connection_string,
       :alias_id,
       :state,
@@ -551,6 +583,7 @@ module Aws::WorkSpaces
     #            the DNS TXT record when you're configuring your DNS routing policies.</p>
     #   @return [String]
     class ConnectionAliasAssociation < Struct.new(
+      nil,
       :association_status,
       :associated_account_id,
       :resource_id,
@@ -572,6 +605,7 @@ module Aws::WorkSpaces
     #            connection alias with a directory.</p>
     #   @return [Boolean]
     class ConnectionAliasPermission < Struct.new(
+      nil,
       :shared_account_id,
       :allow_association,
       keyword_init: true
@@ -595,6 +629,7 @@ module Aws::WorkSpaces
     #   <p>The tags for the image.</p>
     #   @return [Array<Types::Tag>]
     class CopyWorkspaceImageRequest < Struct.new(
+      nil,
       :name,
       :description,
       :source_image_id,
@@ -609,6 +644,7 @@ module Aws::WorkSpaces
     #   <p>The identifier of the image.</p>
     #   @return [String]
     class CopyWorkspaceImageResult < Struct.new(
+      nil,
       :image_id,
       keyword_init: true
     )
@@ -622,6 +658,7 @@ module Aws::WorkSpaces
     #   <p>A string of up to 64 ASCII characters that Amazon WorkSpaces uses to ensure idempotent creation.</p>
     #   @return [String]
     class CreateAccountLinkInvitationRequest < Struct.new(
+      nil,
       :target_account_id,
       :client_token,
       keyword_init: true
@@ -633,6 +670,7 @@ module Aws::WorkSpaces
     #   <p>Information about the account link.</p>
     #   @return [Types::AccountLink]
     class CreateAccountLinkInvitationResult < Struct.new(
+      nil,
       :account_link,
       keyword_init: true
     )
@@ -649,6 +687,7 @@ module Aws::WorkSpaces
     #   <p>The endpoint URL of the Amazon Connect client add-in.</p>
     #   @return [String]
     class CreateConnectClientAddInRequest < Struct.new(
+      nil,
       :resource_id,
       :name,
       :url,
@@ -661,6 +700,7 @@ module Aws::WorkSpaces
     #   <p>The client add-in identifier.</p>
     #   @return [String]
     class CreateConnectClientAddInResult < Struct.new(
+      nil,
       :add_in_id,
       keyword_init: true
     )
@@ -680,6 +720,7 @@ module Aws::WorkSpaces
     #   <p>The tags to associate with the connection alias.</p>
     #   @return [Array<Types::Tag>]
     class CreateConnectionAliasRequest < Struct.new(
+      nil,
       :connection_string,
       :tags,
       keyword_init: true
@@ -691,6 +732,7 @@ module Aws::WorkSpaces
     #   <p>The identifier of the connection alias.</p>
     #   @return [String]
     class CreateConnectionAliasResult < Struct.new(
+      nil,
       :alias_id,
       keyword_init: true
     )
@@ -710,6 +752,7 @@ module Aws::WorkSpaces
     #   <p>The tags. Each WorkSpaces resource can have a maximum of 50 tags.</p>
     #   @return [Array<Types::Tag>]
     class CreateIpGroupRequest < Struct.new(
+      nil,
       :group_name,
       :group_desc,
       :user_rules,
@@ -723,6 +766,7 @@ module Aws::WorkSpaces
     #   <p>The identifier of the group.</p>
     #   @return [String]
     class CreateIpGroupResult < Struct.new(
+      nil,
       :group_id,
       keyword_init: true
     )
@@ -736,6 +780,7 @@ module Aws::WorkSpaces
     #   <p>Information about the standby WorkSpace to be created.</p>
     #   @return [Array<Types::StandbyWorkspace>]
     class CreateStandbyWorkspacesRequest < Struct.new(
+      nil,
       :primary_region,
       :standby_workspaces,
       keyword_init: true
@@ -750,6 +795,7 @@ module Aws::WorkSpaces
     #   <p>Information about the standby WorkSpace that was created.</p>
     #   @return [Array<Types::PendingCreateStandbyWorkspacesRequest>]
     class CreateStandbyWorkspacesResult < Struct.new(
+      nil,
       :failed_standby_requests,
       :pending_standby_requests,
       keyword_init: true
@@ -766,6 +812,7 @@ module Aws::WorkSpaces
     #   <p>The tags. Each WorkSpaces resource can have a maximum of 50 tags.</p>
     #   @return [Array<Types::Tag>]
     class CreateTagsRequest < Struct.new(
+      nil,
       :resource_id,
       :tags,
       keyword_init: true
@@ -774,6 +821,7 @@ module Aws::WorkSpaces
     end
 
     class CreateTagsResult < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -797,6 +845,7 @@ module Aws::WorkSpaces
     #            </note>
     #   @return [Array<Types::Tag>]
     class CreateUpdatedWorkspaceImageRequest < Struct.new(
+      nil,
       :name,
       :description,
       :source_image_id,
@@ -810,6 +859,7 @@ module Aws::WorkSpaces
     #   <p>The identifier of the new updated WorkSpace image.</p>
     #   @return [String]
     class CreateUpdatedWorkspaceImageResult < Struct.new(
+      nil,
       :image_id,
       keyword_init: true
     )
@@ -842,6 +892,7 @@ module Aws::WorkSpaces
     #            </note>
     #   @return [Array<Types::Tag>]
     class CreateWorkspaceBundleRequest < Struct.new(
+      nil,
       :bundle_name,
       :bundle_description,
       :image_id,
@@ -858,6 +909,7 @@ module Aws::WorkSpaces
     #   <p>Describes a WorkSpace bundle.</p>
     #   @return [Types::WorkspaceBundle]
     class CreateWorkspaceBundleResult < Struct.new(
+      nil,
       :workspace_bundle,
       keyword_init: true
     )
@@ -879,6 +931,7 @@ module Aws::WorkSpaces
     #            your IAM user permission to use <code>workspaces:CreateTags</code>.</p>
     #   @return [Array<Types::Tag>]
     class CreateWorkspaceImageRequest < Struct.new(
+      nil,
       :name,
       :description,
       :workspace_id,
@@ -917,6 +970,7 @@ module Aws::WorkSpaces
     #   <p>The identifier of the Amazon Web Services account that owns the image.</p>
     #   @return [String]
     class CreateWorkspaceImageResult < Struct.new(
+      nil,
       :image_id,
       :name,
       :description,
@@ -958,6 +1012,7 @@ module Aws::WorkSpaces
     #   <p>The running mode for the pool.</p>
     #   @return [String]
     class CreateWorkspacesPoolRequest < Struct.new(
+      nil,
       :pool_name,
       :description,
       :bundle_id,
@@ -976,6 +1031,7 @@ module Aws::WorkSpaces
     #   <p>Indicates the pool to create.</p>
     #   @return [Types::WorkspacesPool]
     class CreateWorkspacesPoolResult < Struct.new(
+      nil,
       :workspaces_pool,
       keyword_init: true
     )
@@ -986,6 +1042,7 @@ module Aws::WorkSpaces
     #   <p>The WorkSpaces to create. You can specify up to 25 WorkSpaces.</p>
     #   @return [Array<Types::WorkspaceRequest>]
     class CreateWorkspacesRequest < Struct.new(
+      nil,
       :workspaces,
       keyword_init: true
     )
@@ -1002,6 +1059,7 @@ module Aws::WorkSpaces
     #            can be incomplete.</p>
     #   @return [Array<Types::Workspace>]
     class CreateWorkspacesResult < Struct.new(
+      nil,
       :failed_requests,
       :pending_requests,
       keyword_init: true
@@ -1018,6 +1076,7 @@ module Aws::WorkSpaces
     #   <p>The text of the error message that is returned for the image import.</p>
     #   @return [String]
     class CustomWorkspaceImageImportErrorDetails < Struct.new(
+      nil,
       :error_code,
       :error_message,
       keyword_init: true
@@ -1034,6 +1093,7 @@ module Aws::WorkSpaces
     #            primary WorkSpace used for replicating data.</p>
     #   @return [Time]
     class DataReplicationSettings < Struct.new(
+      nil,
       :data_replication,
       :recovery_snapshot_time,
       keyword_init: true
@@ -1092,6 +1152,7 @@ module Aws::WorkSpaces
     #               i, li, ol, p, pre, q, small, span, strike, strong, sub, sup, u, ul</code>.</p>
     #   @return [Hash<String, String>]
     class DefaultClientBrandingAttributes < Struct.new(
+      nil,
       :logo_url,
       :support_email,
       :support_link,
@@ -1153,6 +1214,7 @@ module Aws::WorkSpaces
     #               i, li, ol, p, pre, q, small, span, strike, strong, sub, sup, u, ul</code>.</p>
     #   @return [Hash<String, String>]
     class DefaultImportClientBrandingAttributes < Struct.new(
+      nil,
       :logo,
       :support_email,
       :support_link,
@@ -1197,6 +1259,7 @@ module Aws::WorkSpaces
     #   <p>Indicates the IAM role ARN of the instance.</p>
     #   @return [String]
     class DefaultWorkspaceCreationProperties < Struct.new(
+      nil,
       :enable_internet_access,
       :default_ou,
       :custom_security_group_id,
@@ -1215,6 +1278,7 @@ module Aws::WorkSpaces
     #   <p>A string of up to 64 ASCII characters that Amazon WorkSpaces uses to ensure idempotent creation.</p>
     #   @return [String]
     class DeleteAccountLinkInvitationRequest < Struct.new(
+      nil,
       :link_id,
       :client_token,
       keyword_init: true
@@ -1226,6 +1290,7 @@ module Aws::WorkSpaces
     #   <p>Information about the account link.</p>
     #   @return [Types::AccountLink]
     class DeleteAccountLinkInvitationResult < Struct.new(
+      nil,
       :account_link,
       keyword_init: true
     )
@@ -1240,6 +1305,7 @@ module Aws::WorkSpaces
     #   <p>The device type for which you want to delete client branding.</p>
     #   @return [Array<String>]
     class DeleteClientBrandingRequest < Struct.new(
+      nil,
       :resource_id,
       :platforms,
       keyword_init: true
@@ -1248,6 +1314,7 @@ module Aws::WorkSpaces
     end
 
     class DeleteClientBrandingResult < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1260,6 +1327,7 @@ module Aws::WorkSpaces
     #   <p>The directory identifier for which the client add-in is configured.</p>
     #   @return [String]
     class DeleteConnectClientAddInRequest < Struct.new(
+      nil,
       :add_in_id,
       :resource_id,
       keyword_init: true
@@ -1268,6 +1336,7 @@ module Aws::WorkSpaces
     end
 
     class DeleteConnectClientAddInResult < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1277,6 +1346,7 @@ module Aws::WorkSpaces
     #   <p>The identifier of the connection alias to delete.</p>
     #   @return [String]
     class DeleteConnectionAliasRequest < Struct.new(
+      nil,
       :alias_id,
       keyword_init: true
     )
@@ -1284,6 +1354,7 @@ module Aws::WorkSpaces
     end
 
     class DeleteConnectionAliasResult < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1293,6 +1364,7 @@ module Aws::WorkSpaces
     #   <p>The identifier of the IP access control group.</p>
     #   @return [String]
     class DeleteIpGroupRequest < Struct.new(
+      nil,
       :group_id,
       keyword_init: true
     )
@@ -1300,6 +1372,7 @@ module Aws::WorkSpaces
     end
 
     class DeleteIpGroupResult < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1314,6 +1387,7 @@ module Aws::WorkSpaces
     #   <p>The tag keys.</p>
     #   @return [Array<String>]
     class DeleteTagsRequest < Struct.new(
+      nil,
       :resource_id,
       :tag_keys,
       keyword_init: true
@@ -1322,6 +1396,7 @@ module Aws::WorkSpaces
     end
 
     class DeleteTagsResult < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1331,6 +1406,7 @@ module Aws::WorkSpaces
     #   <p>The identifier of the bundle.</p>
     #   @return [String]
     class DeleteWorkspaceBundleRequest < Struct.new(
+      nil,
       :bundle_id,
       keyword_init: true
     )
@@ -1338,6 +1414,7 @@ module Aws::WorkSpaces
     end
 
     class DeleteWorkspaceBundleResult < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1347,6 +1424,7 @@ module Aws::WorkSpaces
     #   <p>The identifier of the image.</p>
     #   @return [String]
     class DeleteWorkspaceImageRequest < Struct.new(
+      nil,
       :image_id,
       keyword_init: true
     )
@@ -1354,6 +1432,7 @@ module Aws::WorkSpaces
     end
 
     class DeleteWorkspaceImageResult < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1367,6 +1446,7 @@ module Aws::WorkSpaces
     #            it allows previously failed deployments to be retried.</p>
     #   @return [Boolean]
     class DeployWorkspaceApplicationsRequest < Struct.new(
+      nil,
       :workspace_id,
       :force,
       keyword_init: true
@@ -1378,6 +1458,7 @@ module Aws::WorkSpaces
     #   <p>The list of deployed associations and information about them.</p>
     #   @return [Types::WorkSpaceApplicationDeployment]
     class DeployWorkspaceApplicationsResult < Struct.new(
+      nil,
       :deployment,
       keyword_init: true
     )
@@ -1390,6 +1471,7 @@ module Aws::WorkSpaces
     #            OperationNotSupportedException error.</p>
     #   @return [String]
     class DeregisterWorkspaceDirectoryRequest < Struct.new(
+      nil,
       :directory_id,
       keyword_init: true
     )
@@ -1397,6 +1479,7 @@ module Aws::WorkSpaces
     end
 
     class DeregisterWorkspaceDirectoryResult < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1407,6 +1490,7 @@ module Aws::WorkSpaces
     #            provide this token to receive the next set of results.</p>
     #   @return [String]
     class DescribeAccountModificationsRequest < Struct.new(
+      nil,
       :next_token,
       keyword_init: true
     )
@@ -1421,6 +1505,7 @@ module Aws::WorkSpaces
     #            no more results to return. </p>
     #   @return [String]
     class DescribeAccountModificationsResult < Struct.new(
+      nil,
       :account_modifications,
       :next_token,
       keyword_init: true
@@ -1429,6 +1514,7 @@ module Aws::WorkSpaces
     end
 
     class DescribeAccountRequest < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1451,6 +1537,7 @@ module Aws::WorkSpaces
     #   <p>The text message to describe the status of BYOL.</p>
     #   @return [String]
     class DescribeAccountResult < Struct.new(
+      nil,
       :dedicated_tenancy_support,
       :dedicated_tenancy_management_cidr_range,
       :dedicated_tenancy_account_type,
@@ -1473,6 +1560,7 @@ module Aws::WorkSpaces
     #   <p>The resource type of the associated resources.</p>
     #   @return [Array<String>]
     class DescribeApplicationAssociationsRequest < Struct.new(
+      nil,
       :max_results,
       :next_token,
       :application_id,
@@ -1489,6 +1577,7 @@ module Aws::WorkSpaces
     #   <p>If you received a <code>NextToken</code> from a previous call that was paginated, provide this token to receive the next set of results.</p>
     #   @return [String]
     class DescribeApplicationAssociationsResult < Struct.new(
+      nil,
       :associations,
       :next_token,
       keyword_init: true
@@ -1518,6 +1607,7 @@ module Aws::WorkSpaces
     #   <p>If you received a <code>NextToken</code> from a previous call that was paginated, provide this token to receive the next set of results.</p>
     #   @return [String]
     class DescribeApplicationsRequest < Struct.new(
+      nil,
       :application_ids,
       :compute_type_names,
       :license_type,
@@ -1537,6 +1627,7 @@ module Aws::WorkSpaces
     #   <p>If you received a <code>NextToken</code> from a previous call that was paginated, provide this token to receive the next set of results.</p>
     #   @return [String]
     class DescribeApplicationsResult < Struct.new(
+      nil,
       :applications,
       :next_token,
       keyword_init: true
@@ -1551,6 +1642,7 @@ module Aws::WorkSpaces
     #   <p>The resource types of the associated resource.</p>
     #   @return [Array<String>]
     class DescribeBundleAssociationsRequest < Struct.new(
+      nil,
       :bundle_id,
       :associated_resource_types,
       keyword_init: true
@@ -1562,6 +1654,7 @@ module Aws::WorkSpaces
     #   <p>List of information about the specified associations.</p>
     #   @return [Array<Types::BundleResourceAssociation>]
     class DescribeBundleAssociationsResult < Struct.new(
+      nil,
       :associations,
       keyword_init: true
     )
@@ -1573,6 +1666,7 @@ module Aws::WorkSpaces
     #            information.</p>
     #   @return [String]
     class DescribeClientBrandingRequest < Struct.new(
+      nil,
       :resource_id,
       keyword_init: true
     )
@@ -1598,6 +1692,7 @@ module Aws::WorkSpaces
     #   <p>The branding information for Web access.</p>
     #   @return [Types::DefaultClientBrandingAttributes]
     class DescribeClientBrandingResult < Struct.new(
+      nil,
       :device_type_windows,
       :device_type_osx,
       :device_type_android,
@@ -1613,6 +1708,7 @@ module Aws::WorkSpaces
     #   <p>The resource identifier, in the form of directory IDs.</p>
     #   @return [Array<String>]
     class DescribeClientPropertiesRequest < Struct.new(
+      nil,
       :resource_ids,
       keyword_init: true
     )
@@ -1623,6 +1719,7 @@ module Aws::WorkSpaces
     #   <p>Information about the specified Amazon WorkSpaces clients.</p>
     #   @return [Array<Types::ClientPropertiesResult>]
     class DescribeClientPropertiesResult < Struct.new(
+      nil,
       :client_properties_list,
       keyword_init: true
     )
@@ -1640,6 +1737,7 @@ module Aws::WorkSpaces
     #   <p>The maximum number of items to return.</p>
     #   @return [Integer]
     class DescribeConnectClientAddInsRequest < Struct.new(
+      nil,
       :resource_id,
       :next_token,
       :max_results,
@@ -1656,6 +1754,7 @@ module Aws::WorkSpaces
     #            no more results to return. </p>
     #   @return [String]
     class DescribeConnectClientAddInsResult < Struct.new(
+      nil,
       :add_ins,
       :next_token,
       keyword_init: true
@@ -1674,6 +1773,7 @@ module Aws::WorkSpaces
     #   <p>The maximum number of results to return.</p>
     #   @return [Integer]
     class DescribeConnectionAliasPermissionsRequest < Struct.new(
+      nil,
       :alias_id,
       :next_token,
       :max_results,
@@ -1693,6 +1793,7 @@ module Aws::WorkSpaces
     #            no more results to return. </p>
     #   @return [String]
     class DescribeConnectionAliasPermissionsResult < Struct.new(
+      nil,
       :alias_id,
       :connection_alias_permissions,
       :next_token,
@@ -1715,6 +1816,7 @@ module Aws::WorkSpaces
     #            provide this token to receive the next set of results. </p>
     #   @return [String]
     class DescribeConnectionAliasesRequest < Struct.new(
+      nil,
       :alias_ids,
       :resource_id,
       :limit,
@@ -1732,6 +1834,7 @@ module Aws::WorkSpaces
     #            no more results to return. </p>
     #   @return [String]
     class DescribeConnectionAliasesResult < Struct.new(
+      nil,
       :connection_aliases,
       :next_token,
       keyword_init: true
@@ -1743,6 +1846,7 @@ module Aws::WorkSpaces
     #   <p>The identifier of the WorkSpace image.</p>
     #   @return [String]
     class DescribeCustomWorkspaceImageImportRequest < Struct.new(
+      nil,
       :image_id,
       keyword_init: true
     )
@@ -1775,6 +1879,7 @@ module Aws::WorkSpaces
     #            possible causes of the error and troubleshooting information.</p>
     #   @return [Array<Types::CustomWorkspaceImageImportErrorDetails>]
     class DescribeCustomWorkspaceImageImportResult < Struct.new(
+      nil,
       :image_id,
       :infrastructure_configuration_arn,
       :state,
@@ -1795,6 +1900,7 @@ module Aws::WorkSpaces
     #   <p>The resource types of the associated resource.</p>
     #   @return [Array<String>]
     class DescribeImageAssociationsRequest < Struct.new(
+      nil,
       :image_id,
       :associated_resource_types,
       keyword_init: true
@@ -1806,6 +1912,7 @@ module Aws::WorkSpaces
     #   <p>List of information about the specified associations.</p>
     #   @return [Array<Types::ImageResourceAssociation>]
     class DescribeImageAssociationsResult < Struct.new(
+      nil,
       :associations,
       keyword_init: true
     )
@@ -1823,6 +1930,7 @@ module Aws::WorkSpaces
     #   <p>The maximum number of items to return.</p>
     #   @return [Integer]
     class DescribeIpGroupsRequest < Struct.new(
+      nil,
       :group_ids,
       :next_token,
       :max_results,
@@ -1839,6 +1947,7 @@ module Aws::WorkSpaces
     #            no more results to return. </p>
     #   @return [String]
     class DescribeIpGroupsResult < Struct.new(
+      nil,
       :result,
       :next_token,
       keyword_init: true
@@ -1852,6 +1961,7 @@ module Aws::WorkSpaces
     #            aliases.</p>
     #   @return [String]
     class DescribeTagsRequest < Struct.new(
+      nil,
       :resource_id,
       keyword_init: true
     )
@@ -1862,6 +1972,7 @@ module Aws::WorkSpaces
     #   <p>The tags.</p>
     #   @return [Array<Types::Tag>]
     class DescribeTagsResult < Struct.new(
+      nil,
       :tag_list,
       keyword_init: true
     )
@@ -1875,6 +1986,7 @@ module Aws::WorkSpaces
     #   <p>The resource types of the associated resources.</p>
     #   @return [Array<String>]
     class DescribeWorkspaceAssociationsRequest < Struct.new(
+      nil,
       :workspace_id,
       :associated_resource_types,
       keyword_init: true
@@ -1886,6 +1998,7 @@ module Aws::WorkSpaces
     #   <p>List of information about the specified associations.</p>
     #   @return [Array<Types::WorkspaceResourceAssociation>]
     class DescribeWorkspaceAssociationsResult < Struct.new(
+      nil,
       :associations,
       keyword_init: true
     )
@@ -1904,6 +2017,7 @@ module Aws::WorkSpaces
     #   <p>The token for the next set of results. (You received this token from a previous call.)</p>
     #   @return [String]
     class DescribeWorkspaceBundlesRequest < Struct.new(
+      nil,
       :bundle_ids,
       :owner,
       :next_token,
@@ -1921,6 +2035,7 @@ module Aws::WorkSpaces
     #            frame.</p>
     #   @return [String]
     class DescribeWorkspaceBundlesResult < Struct.new(
+      nil,
       :bundles,
       :next_token,
       keyword_init: true
@@ -1936,6 +2051,7 @@ module Aws::WorkSpaces
     #   <p>The values for filtering WorkSpaces</p>
     #   @return [Array<String>]
     class DescribeWorkspaceDirectoriesFilter < Struct.new(
+      nil,
       :name,
       :values,
       keyword_init: true
@@ -1961,6 +2077,7 @@ module Aws::WorkSpaces
     #   <p>The filter condition for the WorkSpaces.</p>
     #   @return [Array<Types::DescribeWorkspaceDirectoriesFilter>]
     class DescribeWorkspaceDirectoriesRequest < Struct.new(
+      nil,
       :directory_ids,
       :workspace_directory_names,
       :limit,
@@ -1979,6 +2096,7 @@ module Aws::WorkSpaces
     #            no more results to return. </p>
     #   @return [String]
     class DescribeWorkspaceDirectoriesResult < Struct.new(
+      nil,
       :directories,
       :next_token,
       keyword_init: true
@@ -1997,6 +2115,7 @@ module Aws::WorkSpaces
     #   <p>The maximum number of items to return.</p>
     #   @return [Integer]
     class DescribeWorkspaceImagePermissionsRequest < Struct.new(
+      nil,
       :image_id,
       :next_token,
       :max_results,
@@ -2017,6 +2136,7 @@ module Aws::WorkSpaces
     #            no more results to return. </p>
     #   @return [String]
     class DescribeWorkspaceImagePermissionsResult < Struct.new(
+      nil,
       :image_id,
       :image_permissions,
       :next_token,
@@ -2039,6 +2159,7 @@ module Aws::WorkSpaces
     #   <p>The maximum number of items to return.</p>
     #   @return [Integer]
     class DescribeWorkspaceImagesRequest < Struct.new(
+      nil,
       :image_ids,
       :image_type,
       :next_token,
@@ -2056,6 +2177,7 @@ module Aws::WorkSpaces
     #            no more results to return. </p>
     #   @return [String]
     class DescribeWorkspaceImagesResult < Struct.new(
+      nil,
       :images,
       :next_token,
       keyword_init: true
@@ -2067,6 +2189,7 @@ module Aws::WorkSpaces
     #   <p>The identifier of the WorkSpace.</p>
     #   @return [String]
     class DescribeWorkspaceSnapshotsRequest < Struct.new(
+      nil,
       :workspace_id,
       keyword_init: true
     )
@@ -2082,6 +2205,7 @@ module Aws::WorkSpaces
     #            include both the root volume and the user volume.</p>
     #   @return [Array<Types::Snapshot>]
     class DescribeWorkspaceSnapshotsResult < Struct.new(
+      nil,
       :rebuild_snapshots,
       :restore_snapshots,
       keyword_init: true
@@ -2097,6 +2221,7 @@ module Aws::WorkSpaces
     #            provide this token to receive the next set of results.</p>
     #   @return [String]
     class DescribeWorkspacesConnectionStatusRequest < Struct.new(
+      nil,
       :workspace_ids,
       :next_token,
       keyword_init: true
@@ -2112,6 +2237,7 @@ module Aws::WorkSpaces
     #            no more results to return. </p>
     #   @return [String]
     class DescribeWorkspacesConnectionStatusResult < Struct.new(
+      nil,
       :workspaces_connection_status,
       :next_token,
       keyword_init: true
@@ -2134,6 +2260,7 @@ module Aws::WorkSpaces
     #            provide this token to receive the next set of results.</p>
     #   @return [String]
     class DescribeWorkspacesPoolSessionsRequest < Struct.new(
+      nil,
       :pool_id,
       :user_id,
       :limit,
@@ -2151,6 +2278,7 @@ module Aws::WorkSpaces
     #            provide this token to receive the next set of results.</p>
     #   @return [String]
     class DescribeWorkspacesPoolSessionsResult < Struct.new(
+      nil,
       :sessions,
       :next_token,
       keyword_init: true
@@ -2169,6 +2297,7 @@ module Aws::WorkSpaces
     #   <p>The operator values for filtering WorkSpaces Pools.</p>
     #   @return [String]
     class DescribeWorkspacesPoolsFilter < Struct.new(
+      nil,
       :name,
       :values,
       :operator,
@@ -2191,6 +2320,7 @@ module Aws::WorkSpaces
     #            provide this token to receive the next set of results.</p>
     #   @return [String]
     class DescribeWorkspacesPoolsRequest < Struct.new(
+      nil,
       :pool_ids,
       :filters,
       :limit,
@@ -2208,6 +2338,7 @@ module Aws::WorkSpaces
     #            provide this token to receive the next set of results.</p>
     #   @return [String]
     class DescribeWorkspacesPoolsResult < Struct.new(
+      nil,
       :workspaces_pools,
       :next_token,
       keyword_init: true
@@ -2245,6 +2376,7 @@ module Aws::WorkSpaces
     #   <p>The name of the user-decoupled WorkSpace.</p>
     #   @return [String]
     class DescribeWorkspacesRequest < Struct.new(
+      nil,
       :workspace_ids,
       :directory_id,
       :user_name,
@@ -2267,6 +2399,7 @@ module Aws::WorkSpaces
     #            no more results to return. </p>
     #   @return [String]
     class DescribeWorkspacesResult < Struct.new(
+      nil,
       :workspaces,
       :next_token,
       keyword_init: true
@@ -2278,6 +2411,7 @@ module Aws::WorkSpaces
     #   <p>The identifier of the connection alias to disassociate.</p>
     #   @return [String]
     class DisassociateConnectionAliasRequest < Struct.new(
+      nil,
       :alias_id,
       keyword_init: true
     )
@@ -2285,6 +2419,7 @@ module Aws::WorkSpaces
     end
 
     class DisassociateConnectionAliasResult < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -2297,6 +2432,7 @@ module Aws::WorkSpaces
     #   <p>The identifiers of one or more IP access control groups.</p>
     #   @return [Array<String>]
     class DisassociateIpGroupsRequest < Struct.new(
+      nil,
       :directory_id,
       :group_ids,
       keyword_init: true
@@ -2305,6 +2441,7 @@ module Aws::WorkSpaces
     end
 
     class DisassociateIpGroupsResult < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -2317,6 +2454,7 @@ module Aws::WorkSpaces
     #   <p>The identifier of the application.</p>
     #   @return [String]
     class DisassociateWorkspaceApplicationRequest < Struct.new(
+      nil,
       :workspace_id,
       :application_id,
       keyword_init: true
@@ -2328,6 +2466,7 @@ module Aws::WorkSpaces
     #   <p>Information about the targeted association.</p>
     #   @return [Types::WorkspaceResourceAssociation]
     class DisassociateWorkspaceApplicationResult < Struct.new(
+      nil,
       :association,
       keyword_init: true
     )
@@ -2343,6 +2482,7 @@ module Aws::WorkSpaces
     #   <p>The text of the error message related the error code.</p>
     #   @return [String]
     class ErrorDetails < Struct.new(
+      nil,
       :error_code,
       :error_message,
       keyword_init: true
@@ -2361,6 +2501,7 @@ module Aws::WorkSpaces
     #   <p>The text of the error message that is returned if the standby WorkSpace could not be created.</p>
     #   @return [String]
     class FailedCreateStandbyWorkspacesRequest < Struct.new(
+      nil,
       :standby_workspace_request,
       :error_code,
       :error_message,
@@ -2381,6 +2522,7 @@ module Aws::WorkSpaces
     #            created.</p>
     #   @return [String]
     class FailedCreateWorkspaceRequest < Struct.new(
+      nil,
       :workspace_request,
       :error_code,
       :error_message,
@@ -2402,6 +2544,7 @@ module Aws::WorkSpaces
     #            rebooted.</p>
     #   @return [String]
     class FailedWorkspaceChangeRequest < Struct.new(
+      nil,
       :workspace_id,
       :error_code,
       :error_message,
@@ -2417,6 +2560,7 @@ module Aws::WorkSpaces
     #   <p>The identifier of the account link</p>
     #   @return [String]
     class GetAccountLinkRequest < Struct.new(
+      nil,
       :link_id,
       :linked_account_id,
       keyword_init: true
@@ -2428,6 +2572,7 @@ module Aws::WorkSpaces
     #   <p>The account link of the account link to retrieve.</p>
     #   @return [Types::AccountLink]
     class GetAccountLinkResult < Struct.new(
+      nil,
       :account_link,
       keyword_init: true
     )
@@ -2442,6 +2587,7 @@ module Aws::WorkSpaces
     #   <p>Indicates the preferred protocol for Global Accelerator.</p>
     #   @return [String]
     class GlobalAcceleratorForDirectory < Struct.new(
+      nil,
       :mode,
       :preferred_protocol,
       keyword_init: true
@@ -2458,6 +2604,7 @@ module Aws::WorkSpaces
     #   <p>Indicates the preferred protocol for Global Accelerator.</p>
     #   @return [String]
     class GlobalAcceleratorForWorkSpace < Struct.new(
+      nil,
       :mode,
       :preferred_protocol,
       keyword_init: true
@@ -2473,6 +2620,7 @@ module Aws::WorkSpaces
     #   <p>The Amazon Resource Name (ARN) of the application.</p>
     #   @return [String]
     class IDCConfig < Struct.new(
+      nil,
       :instance_arn,
       :application_arn,
       keyword_init: true
@@ -2488,6 +2636,7 @@ module Aws::WorkSpaces
     #            with.</p>
     #   @return [String]
     class ImagePermission < Struct.new(
+      nil,
       :shared_account_id,
       keyword_init: true
     )
@@ -2517,6 +2666,7 @@ module Aws::WorkSpaces
     #   <p>The reason the association deployment failed.</p>
     #   @return [Types::AssociationStateReason]
     class ImageResourceAssociation < Struct.new(
+      nil,
       :associated_resource_id,
       :associated_resource_type,
       :created,
@@ -2577,6 +2727,7 @@ module Aws::WorkSpaces
     #   <p>The branding information to import for web access.</p>
     #   @return [Types::DefaultImportClientBrandingAttributes]
     class ImportClientBrandingRequest < Struct.new(
+      nil,
       :resource_id,
       :device_type_windows,
       :device_type_osx,
@@ -2608,6 +2759,7 @@ module Aws::WorkSpaces
     #   <p>The branding information configured for web access.</p>
     #   @return [Types::DefaultClientBrandingAttributes]
     class ImportClientBrandingResult < Struct.new(
+      nil,
       :device_type_windows,
       :device_type_osx,
       :device_type_android,
@@ -2647,6 +2799,7 @@ module Aws::WorkSpaces
     #   <p>The resource tags. Each WorkSpaces resource can have a maximum of 50 tags.</p>
     #   @return [Array<Types::Tag>]
     class ImportCustomWorkspaceImageRequest < Struct.new(
+      nil,
       :image_name,
       :image_description,
       :compute_type,
@@ -2668,6 +2821,7 @@ module Aws::WorkSpaces
     #   <p>The state of the WorkSpace image.</p>
     #   @return [String]
     class ImportCustomWorkspaceImageResult < Struct.new(
+      nil,
       :image_id,
       :state,
       keyword_init: true
@@ -2721,6 +2875,7 @@ module Aws::WorkSpaces
     #            </note>
     #   @return [Array<String>]
     class ImportWorkspaceImageRequest < Struct.new(
+      nil,
       :ec2_image_id,
       :ingestion_process,
       :image_name,
@@ -2736,6 +2891,7 @@ module Aws::WorkSpaces
     #   <p>The identifier of the WorkSpace image.</p>
     #   @return [String]
     class ImportWorkspaceImageResult < Struct.new(
+      nil,
       :image_id,
       keyword_init: true
     )
@@ -2744,6 +2900,7 @@ module Aws::WorkSpaces
 
     # <p>The specified application is not compatible with the resource.</p>
     class IncompatibleApplicationsException < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -2753,6 +2910,7 @@ module Aws::WorkSpaces
     # @!attribute message
     #   @return [String]
     class InternalServerException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -2764,6 +2922,7 @@ module Aws::WorkSpaces
     #   <p>The exception error message.</p>
     #   @return [String]
     class InvalidParameterCombinationException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -2775,6 +2934,7 @@ module Aws::WorkSpaces
     #   <p>The exception error message.</p>
     #   @return [String]
     class InvalidParameterValuesException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -2785,6 +2945,7 @@ module Aws::WorkSpaces
     # @!attribute message
     #   @return [String]
     class InvalidResourceStateException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -2863,6 +3024,7 @@ module Aws::WorkSpaces
     #               i, li, ol, p, pre, q, small, span, strike, strong, sub, sup, u, ul</code>.</p>
     #   @return [Hash<String, String>]
     class IosClientBrandingAttributes < Struct.new(
+      nil,
       :logo_url,
       :logo2x_url,
       :logo3x_url,
@@ -2947,6 +3109,7 @@ module Aws::WorkSpaces
     #               i, li, ol, p, pre, q, small, span, strike, strong, sub, sup, u, ul</code>.</p>
     #   @return [Hash<String, String>]
     class IosImportClientBrandingAttributes < Struct.new(
+      nil,
       :logo,
       :logo2x,
       :logo3x,
@@ -2967,6 +3130,7 @@ module Aws::WorkSpaces
     #   <p>The description.</p>
     #   @return [String]
     class IpRuleItem < Struct.new(
+      nil,
       :ip_rule,
       :rule_desc,
       keyword_init: true
@@ -2984,6 +3148,7 @@ module Aws::WorkSpaces
     #   <p>The maximum number of accounts to return.</p>
     #   @return [Integer]
     class ListAccountLinksRequest < Struct.new(
+      nil,
       :link_status_filter,
       :next_token,
       :max_results,
@@ -2999,6 +3164,7 @@ module Aws::WorkSpaces
     #   <p>The token to use to retrieve the next page of results. This value is null when there are no more results to return.</p>
     #   @return [String]
     class ListAccountLinksResult < Struct.new(
+      nil,
       :account_links,
       :next_token,
       keyword_init: true
@@ -3018,6 +3184,7 @@ module Aws::WorkSpaces
     #            provide this token to receive the next set of results.</p>
     #   @return [String]
     class ListAvailableManagementCidrRangesRequest < Struct.new(
+      nil,
       :management_cidr_range_constraint,
       :max_results,
       :next_token,
@@ -3034,6 +3201,7 @@ module Aws::WorkSpaces
     #            no more results to return. </p>
     #   @return [String]
     class ListAvailableManagementCidrRangesResult < Struct.new(
+      nil,
       :management_cidr_ranges,
       :next_token,
       keyword_init: true
@@ -3049,6 +3217,7 @@ module Aws::WorkSpaces
     #   <p>The Amazon Resource Name (ARN) of the application config.</p>
     #   @return [String]
     class MicrosoftEntraConfig < Struct.new(
+      nil,
       :tenant_id,
       :application_config_secret_arn,
       keyword_init: true
@@ -3063,6 +3232,7 @@ module Aws::WorkSpaces
     #   <p>The identifier of the target bundle type to migrate the WorkSpace to.</p>
     #   @return [String]
     class MigrateWorkspaceRequest < Struct.new(
+      nil,
       :source_workspace_id,
       :bundle_id,
       keyword_init: true
@@ -3079,6 +3249,7 @@ module Aws::WorkSpaces
     #            original WorkSpace ID.</p>
     #   @return [String]
     class MigrateWorkspaceResult < Struct.new(
+      nil,
       :source_workspace_id,
       :target_workspace_id,
       keyword_init: true
@@ -3094,6 +3265,7 @@ module Aws::WorkSpaces
     #   <p>The modification state.</p>
     #   @return [String]
     class ModificationState < Struct.new(
+      nil,
       :resource,
       :state,
       keyword_init: true
@@ -3112,6 +3284,7 @@ module Aws::WorkSpaces
     #               <code>ListAvailableManagementCidrRanges</code> operation.</p>
     #   @return [String]
     class ModifyAccountRequest < Struct.new(
+      nil,
       :dedicated_tenancy_support,
       :dedicated_tenancy_management_cidr_range,
       keyword_init: true
@@ -3123,6 +3296,7 @@ module Aws::WorkSpaces
     #   <p>The text message to describe the status of BYOL modification.</p>
     #   @return [String]
     class ModifyAccountResult < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -3139,6 +3313,7 @@ module Aws::WorkSpaces
     #   <p>The properties of the certificate-based authentication you want to delete.</p>
     #   @return [Array<String>]
     class ModifyCertificateBasedAuthPropertiesRequest < Struct.new(
+      nil,
       :resource_id,
       :certificate_based_auth_properties,
       :properties_to_delete,
@@ -3148,6 +3323,7 @@ module Aws::WorkSpaces
     end
 
     class ModifyCertificateBasedAuthPropertiesResult < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -3160,6 +3336,7 @@ module Aws::WorkSpaces
     #   <p>Information about the Amazon WorkSpaces client.</p>
     #   @return [Types::ClientProperties]
     class ModifyClientPropertiesRequest < Struct.new(
+      nil,
       :resource_id,
       :client_properties,
       keyword_init: true
@@ -3168,6 +3345,7 @@ module Aws::WorkSpaces
     end
 
     class ModifyClientPropertiesResult < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -3181,6 +3359,7 @@ module Aws::WorkSpaces
     #            or WorkSpace Pools.</p>
     #   @return [String]
     class ModifyEndpointEncryptionModeRequest < Struct.new(
+      nil,
       :directory_id,
       :endpoint_encryption_mode,
       keyword_init: true
@@ -3189,6 +3368,7 @@ module Aws::WorkSpaces
     end
 
     class ModifyEndpointEncryptionModeResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -3216,6 +3396,7 @@ module Aws::WorkSpaces
     #            </ul>
     #   @return [Array<String>]
     class ModifySamlPropertiesRequest < Struct.new(
+      nil,
       :resource_id,
       :saml_properties,
       :properties_to_delete,
@@ -3225,6 +3406,7 @@ module Aws::WorkSpaces
     end
 
     class ModifySamlPropertiesResult < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -3237,6 +3419,7 @@ module Aws::WorkSpaces
     #   <p>The permissions to enable or disable self-service capabilities.</p>
     #   @return [Types::SelfservicePermissions]
     class ModifySelfservicePermissionsRequest < Struct.new(
+      nil,
       :resource_id,
       :selfservice_permissions,
       keyword_init: true
@@ -3245,6 +3428,7 @@ module Aws::WorkSpaces
     end
 
     class ModifySelfservicePermissionsResult < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -3257,6 +3441,7 @@ module Aws::WorkSpaces
     #   <p>The streaming properties to configure.</p>
     #   @return [Types::StreamingProperties]
     class ModifyStreamingPropertiesRequest < Struct.new(
+      nil,
       :resource_id,
       :streaming_properties,
       keyword_init: true
@@ -3265,6 +3450,7 @@ module Aws::WorkSpaces
     end
 
     class ModifyStreamingPropertiesResult < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -3277,6 +3463,7 @@ module Aws::WorkSpaces
     #   <p>The device types and operating systems to enable or disable for access.</p>
     #   @return [Types::WorkspaceAccessProperties]
     class ModifyWorkspaceAccessPropertiesRequest < Struct.new(
+      nil,
       :resource_id,
       :workspace_access_properties,
       keyword_init: true
@@ -3285,6 +3472,7 @@ module Aws::WorkSpaces
     end
 
     class ModifyWorkspaceAccessPropertiesResult < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -3297,6 +3485,7 @@ module Aws::WorkSpaces
     #   <p>The default properties for creating WorkSpaces.</p>
     #   @return [Types::WorkspaceCreationProperties]
     class ModifyWorkspaceCreationPropertiesRequest < Struct.new(
+      nil,
       :resource_id,
       :workspace_creation_properties,
       keyword_init: true
@@ -3305,6 +3494,7 @@ module Aws::WorkSpaces
     end
 
     class ModifyWorkspaceCreationPropertiesResult < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -3320,6 +3510,7 @@ module Aws::WorkSpaces
     #   <p>Indicates the data replication status.</p>
     #   @return [String]
     class ModifyWorkspacePropertiesRequest < Struct.new(
+      nil,
       :workspace_id,
       :workspace_properties,
       :data_replication,
@@ -3329,6 +3520,7 @@ module Aws::WorkSpaces
     end
 
     class ModifyWorkspacePropertiesResult < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -3341,6 +3533,7 @@ module Aws::WorkSpaces
     #   <p>The WorkSpace state.</p>
     #   @return [String]
     class ModifyWorkspaceStateRequest < Struct.new(
+      nil,
       :workspace_id,
       :workspace_state,
       keyword_init: true
@@ -3349,6 +3542,7 @@ module Aws::WorkSpaces
     end
 
     class ModifyWorkspaceStateResult < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -3363,6 +3557,7 @@ module Aws::WorkSpaces
     #            VPC. All network interfaces have the eni-xxxxxxxx resource identifier.</p>
     #   @return [String]
     class NetworkAccessConfiguration < Struct.new(
+      nil,
       :eni_private_ip_address,
       :eni_id,
       keyword_init: true
@@ -3375,6 +3570,7 @@ module Aws::WorkSpaces
     #   <p>The operating system.</p>
     #   @return [String]
     class OperatingSystem < Struct.new(
+      nil,
       :type,
       keyword_init: true
     )
@@ -3383,6 +3579,7 @@ module Aws::WorkSpaces
 
     # <p>The operating system of the WorkSpace is not compatible with the application.</p>
     class OperatingSystemNotCompatibleException < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -3392,6 +3589,7 @@ module Aws::WorkSpaces
     # @!attribute message
     #   @return [String]
     class OperationInProgressException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -3406,6 +3604,7 @@ module Aws::WorkSpaces
     #   <p>The exception error reason.</p>
     #   @return [String]
     class OperationNotSupportedException < Struct.new(
+      nil,
       :message,
       :reason,
       keyword_init: true
@@ -3432,6 +3631,7 @@ module Aws::WorkSpaces
     #   <p>The identifier of the standby WorkSpace.</p>
     #   @return [String]
     class PendingCreateStandbyWorkspacesRequest < Struct.new(
+      nil,
       :user_name,
       :directory_id,
       :state,
@@ -3446,6 +3646,7 @@ module Aws::WorkSpaces
     #   <p>The identifier of the WorkSpace.</p>
     #   @return [String]
     class RebootRequest < Struct.new(
+      nil,
       :workspace_id,
       keyword_init: true
     )
@@ -3456,6 +3657,7 @@ module Aws::WorkSpaces
     #   <p>The WorkSpaces to reboot. You can specify up to 25 WorkSpaces.</p>
     #   @return [Array<Types::RebootRequest>]
     class RebootWorkspacesRequest < Struct.new(
+      nil,
       :reboot_workspace_requests,
       keyword_init: true
     )
@@ -3466,6 +3668,7 @@ module Aws::WorkSpaces
     #   <p>Information about the WorkSpaces that could not be rebooted.</p>
     #   @return [Array<Types::FailedWorkspaceChangeRequest>]
     class RebootWorkspacesResult < Struct.new(
+      nil,
       :failed_requests,
       keyword_init: true
     )
@@ -3477,6 +3680,7 @@ module Aws::WorkSpaces
     #   <p>The identifier of the WorkSpace.</p>
     #   @return [String]
     class RebuildRequest < Struct.new(
+      nil,
       :workspace_id,
       keyword_init: true
     )
@@ -3487,6 +3691,7 @@ module Aws::WorkSpaces
     #   <p>The WorkSpace to rebuild. You can specify a single WorkSpace.</p>
     #   @return [Array<Types::RebuildRequest>]
     class RebuildWorkspacesRequest < Struct.new(
+      nil,
       :rebuild_workspace_requests,
       keyword_init: true
     )
@@ -3497,6 +3702,7 @@ module Aws::WorkSpaces
     #   <p>Information about the WorkSpace that could not be rebuilt.</p>
     #   @return [Array<Types::FailedWorkspaceChangeRequest>]
     class RebuildWorkspacesResult < Struct.new(
+      nil,
       :failed_requests,
       keyword_init: true
     )
@@ -3552,6 +3758,7 @@ module Aws::WorkSpaces
     #   <p>The active directory config of the directory.</p>
     #   @return [Types::ActiveDirectoryConfig]
     class RegisterWorkspaceDirectoryRequest < Struct.new(
+      nil,
       :directory_id,
       :subnet_ids,
       :enable_self_service,
@@ -3576,6 +3783,7 @@ module Aws::WorkSpaces
     #   <p>The registration status of the WorkSpace directory.</p>
     #   @return [String]
     class RegisterWorkspaceDirectoryResult < Struct.new(
+      nil,
       :directory_id,
       :state,
       keyword_init: true
@@ -3590,6 +3798,7 @@ module Aws::WorkSpaces
     #   <p>The client token of the account link invitation to reject.</p>
     #   @return [String]
     class RejectAccountLinkInvitationRequest < Struct.new(
+      nil,
       :link_id,
       :client_token,
       keyword_init: true
@@ -3601,6 +3810,7 @@ module Aws::WorkSpaces
     #   <p>Information about the account link.</p>
     #   @return [Types::AccountLink]
     class RejectAccountLinkInvitationResult < Struct.new(
+      nil,
       :account_link,
       keyword_init: true
     )
@@ -3622,6 +3832,7 @@ module Aws::WorkSpaces
     #   <p>Indicates the type of WorkSpace.</p>
     #   @return [String]
     class RelatedWorkspaceProperties < Struct.new(
+      nil,
       :workspace_id,
       :region,
       :state,
@@ -3635,6 +3846,7 @@ module Aws::WorkSpaces
     # @!attribute message
     #   @return [String]
     class ResourceAlreadyExistsException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -3645,6 +3857,7 @@ module Aws::WorkSpaces
     # @!attribute message
     #   @return [String]
     class ResourceAssociatedException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -3655,6 +3868,7 @@ module Aws::WorkSpaces
     # @!attribute message
     #   @return [String]
     class ResourceCreationFailedException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -3668,6 +3882,7 @@ module Aws::WorkSpaces
     #   <p>The ID of the resource that is in use.</p>
     #   @return [String]
     class ResourceInUseException < Struct.new(
+      nil,
       :message,
       :resource_id,
       keyword_init: true
@@ -3680,6 +3895,7 @@ module Aws::WorkSpaces
     #   <p>The exception error message.</p>
     #   @return [String]
     class ResourceLimitExceededException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -3694,6 +3910,7 @@ module Aws::WorkSpaces
     #   <p>The ID of the resource that could not be found.</p>
     #   @return [String]
     class ResourceNotFoundException < Struct.new(
+      nil,
       :message,
       :resource_id,
       keyword_init: true
@@ -3709,6 +3926,7 @@ module Aws::WorkSpaces
     #   <p>The identifier of the resource that is not available.</p>
     #   @return [String]
     class ResourceUnavailableException < Struct.new(
+      nil,
       :message,
       :resource_id,
       keyword_init: true
@@ -3720,6 +3938,7 @@ module Aws::WorkSpaces
     #   <p>The identifier of the WorkSpace.</p>
     #   @return [String]
     class RestoreWorkspaceRequest < Struct.new(
+      nil,
       :workspace_id,
       keyword_init: true
     )
@@ -3727,6 +3946,7 @@ module Aws::WorkSpaces
     end
 
     class RestoreWorkspaceResult < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -3739,6 +3959,7 @@ module Aws::WorkSpaces
     #   <p>The rules to remove from the group.</p>
     #   @return [Array<String>]
     class RevokeIpRulesRequest < Struct.new(
+      nil,
       :group_id,
       :user_rules,
       keyword_init: true
@@ -3747,6 +3968,7 @@ module Aws::WorkSpaces
     end
 
     class RevokeIpRulesResult < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -3757,6 +3979,7 @@ module Aws::WorkSpaces
     #   <p>The size of the root volume.</p>
     #   @return [String]
     class RootStorage < Struct.new(
+      nil,
       :capacity,
       keyword_init: true
     )
@@ -3796,6 +4019,7 @@ module Aws::WorkSpaces
     #            URL. Consult your IdP documentation for more information.</p>
     #   @return [String]
     class SamlProperties < Struct.new(
+      nil,
       :status,
       :user_access_url,
       :relay_state_parameter_name,
@@ -3823,6 +4047,7 @@ module Aws::WorkSpaces
     #            state.</p>
     #   @return [String]
     class SelfservicePermissions < Struct.new(
+      nil,
       :restart_workspace,
       :increase_volume_size,
       :change_compute_type,
@@ -3838,6 +4063,7 @@ module Aws::WorkSpaces
     #   <p>The time when the snapshot was created.</p>
     #   @return [Time]
     class Snapshot < Struct.new(
+      nil,
       :snapshot_time,
       keyword_init: true
     )
@@ -3861,6 +4087,7 @@ module Aws::WorkSpaces
     #   <p>Indicates whether data replication is enabled, and if enabled, the type of data replication.</p>
     #   @return [String]
     class StandbyWorkspace < Struct.new(
+      nil,
       :primary_workspace_id,
       :volume_encryption_key,
       :directory_id,
@@ -3883,6 +4110,7 @@ module Aws::WorkSpaces
     #            primary WorkSpace used for replicating data.</p>
     #   @return [Time]
     class StandbyWorkspacesProperties < Struct.new(
+      nil,
       :standby_workspace_id,
       :data_replication,
       :recovery_snapshot_time,
@@ -3896,6 +4124,7 @@ module Aws::WorkSpaces
     #   <p>The identifier of the WorkSpace.</p>
     #   @return [String]
     class StartRequest < Struct.new(
+      nil,
       :workspace_id,
       keyword_init: true
     )
@@ -3906,6 +4135,7 @@ module Aws::WorkSpaces
     #   <p>The identifier of the pool.</p>
     #   @return [String]
     class StartWorkspacesPoolRequest < Struct.new(
+      nil,
       :pool_id,
       keyword_init: true
     )
@@ -3913,6 +4143,7 @@ module Aws::WorkSpaces
     end
 
     class StartWorkspacesPoolResult < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -3922,6 +4153,7 @@ module Aws::WorkSpaces
     #   <p>The WorkSpaces to start. You can specify up to 25 WorkSpaces.</p>
     #   @return [Array<Types::StartRequest>]
     class StartWorkspacesRequest < Struct.new(
+      nil,
       :start_workspace_requests,
       keyword_init: true
     )
@@ -3932,6 +4164,7 @@ module Aws::WorkSpaces
     #   <p>Information about the WorkSpaces that could not be started.</p>
     #   @return [Array<Types::FailedWorkspaceChangeRequest>]
     class StartWorkspacesResult < Struct.new(
+      nil,
       :failed_requests,
       keyword_init: true
     )
@@ -3943,6 +4176,7 @@ module Aws::WorkSpaces
     #   <p>The identifier of the WorkSpace.</p>
     #   @return [String]
     class StopRequest < Struct.new(
+      nil,
       :workspace_id,
       keyword_init: true
     )
@@ -3953,6 +4187,7 @@ module Aws::WorkSpaces
     #   <p>The identifier of the pool.</p>
     #   @return [String]
     class StopWorkspacesPoolRequest < Struct.new(
+      nil,
       :pool_id,
       keyword_init: true
     )
@@ -3960,6 +4195,7 @@ module Aws::WorkSpaces
     end
 
     class StopWorkspacesPoolResult < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -3969,6 +4205,7 @@ module Aws::WorkSpaces
     #   <p>The WorkSpaces to stop. You can specify up to 25 WorkSpaces.</p>
     #   @return [Array<Types::StopRequest>]
     class StopWorkspacesRequest < Struct.new(
+      nil,
       :stop_workspace_requests,
       keyword_init: true
     )
@@ -3979,6 +4216,7 @@ module Aws::WorkSpaces
     #   <p>Information about the WorkSpaces that could not be stopped.</p>
     #   @return [Array<Types::FailedWorkspaceChangeRequest>]
     class StopWorkspacesResult < Struct.new(
+      nil,
       :failed_requests,
       keyword_init: true
     )
@@ -3993,6 +4231,7 @@ module Aws::WorkSpaces
     #   <p>Indicates if the storage connetor is enabled or disabled.</p>
     #   @return [String]
     class StorageConnector < Struct.new(
+      nil,
       :connector_type,
       :status,
       keyword_init: true
@@ -4014,6 +4253,7 @@ module Aws::WorkSpaces
     #   <p>Indicates the Global Accelerator properties.</p>
     #   @return [Types::GlobalAcceleratorForDirectory]
     class StreamingProperties < Struct.new(
+      nil,
       :streaming_experience_preferred_protocol,
       :user_settings,
       :storage_connectors,
@@ -4031,6 +4271,7 @@ module Aws::WorkSpaces
     #   <p>The value of the tag.</p>
     #   @return [String]
     class Tag < Struct.new(
+      nil,
       :key,
       :value,
       keyword_init: true
@@ -4043,6 +4284,7 @@ module Aws::WorkSpaces
     #   <p>The identifier of the WorkSpace.</p>
     #   @return [String]
     class TerminateRequest < Struct.new(
+      nil,
       :workspace_id,
       keyword_init: true
     )
@@ -4053,6 +4295,7 @@ module Aws::WorkSpaces
     #   <p>The identifier of the pool.</p>
     #   @return [String]
     class TerminateWorkspacesPoolRequest < Struct.new(
+      nil,
       :pool_id,
       keyword_init: true
     )
@@ -4060,6 +4303,7 @@ module Aws::WorkSpaces
     end
 
     class TerminateWorkspacesPoolResult < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -4069,6 +4313,7 @@ module Aws::WorkSpaces
     #   <p>The identifier of the pool session.</p>
     #   @return [String]
     class TerminateWorkspacesPoolSessionRequest < Struct.new(
+      nil,
       :session_id,
       keyword_init: true
     )
@@ -4076,6 +4321,7 @@ module Aws::WorkSpaces
     end
 
     class TerminateWorkspacesPoolSessionResult < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -4085,6 +4331,7 @@ module Aws::WorkSpaces
     #   <p>The WorkSpaces to terminate. You can specify up to 25 WorkSpaces.</p>
     #   @return [Array<Types::TerminateRequest>]
     class TerminateWorkspacesRequest < Struct.new(
+      nil,
       :terminate_workspace_requests,
       keyword_init: true
     )
@@ -4095,6 +4342,7 @@ module Aws::WorkSpaces
     #   <p>Information about the WorkSpaces that could not be terminated.</p>
     #   @return [Array<Types::FailedWorkspaceChangeRequest>]
     class TerminateWorkspacesResult < Struct.new(
+      nil,
       :failed_requests,
       keyword_init: true
     )
@@ -4118,6 +4366,7 @@ module Aws::WorkSpaces
     #            the instance is terminated and replaced by a new instance.</p>
     #   @return [Integer]
     class TimeoutSettings < Struct.new(
+      nil,
       :disconnect_timeout_in_seconds,
       :idle_disconnect_timeout_in_seconds,
       :max_user_duration_in_seconds,
@@ -4133,6 +4382,7 @@ module Aws::WorkSpaces
     # @!attribute message
     #   @return [String]
     class UnsupportedNetworkConfigurationException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -4145,6 +4395,7 @@ module Aws::WorkSpaces
     # @!attribute message
     #   @return [String]
     class UnsupportedWorkspaceConfigurationException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -4164,6 +4415,7 @@ module Aws::WorkSpaces
     #   <p>The endpoint URL of the Amazon Connect client add-in.</p>
     #   @return [String]
     class UpdateConnectClientAddInRequest < Struct.new(
+      nil,
       :add_in_id,
       :resource_id,
       :name,
@@ -4174,6 +4426,7 @@ module Aws::WorkSpaces
     end
 
     class UpdateConnectClientAddInResult < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -4186,6 +4439,7 @@ module Aws::WorkSpaces
     #   <p>Indicates whether to share or unshare the connection alias with the specified Amazon Web Services account.</p>
     #   @return [Types::ConnectionAliasPermission]
     class UpdateConnectionAliasPermissionRequest < Struct.new(
+      nil,
       :alias_id,
       :connection_alias_permission,
       keyword_init: true
@@ -4194,6 +4448,7 @@ module Aws::WorkSpaces
     end
 
     class UpdateConnectionAliasPermissionResult < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -4213,6 +4468,7 @@ module Aws::WorkSpaces
     #            available.</p>
     #   @return [String]
     class UpdateResult < Struct.new(
+      nil,
       :update_available,
       :description,
       keyword_init: true
@@ -4227,6 +4483,7 @@ module Aws::WorkSpaces
     #   <p>One or more rules.</p>
     #   @return [Array<Types::IpRuleItem>]
     class UpdateRulesOfIpGroupRequest < Struct.new(
+      nil,
       :group_id,
       :user_rules,
       keyword_init: true
@@ -4235,6 +4492,7 @@ module Aws::WorkSpaces
     end
 
     class UpdateRulesOfIpGroupResult < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -4247,6 +4505,7 @@ module Aws::WorkSpaces
     #   <p>The identifier of the image.</p>
     #   @return [String]
     class UpdateWorkspaceBundleRequest < Struct.new(
+      nil,
       :bundle_id,
       :image_id,
       keyword_init: true
@@ -4255,6 +4514,7 @@ module Aws::WorkSpaces
     end
 
     class UpdateWorkspaceBundleResult < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -4275,6 +4535,7 @@ module Aws::WorkSpaces
     #            </important>
     #   @return [String]
     class UpdateWorkspaceImagePermissionRequest < Struct.new(
+      nil,
       :image_id,
       :allow_copy_image,
       :shared_account_id,
@@ -4284,6 +4545,7 @@ module Aws::WorkSpaces
     end
 
     class UpdateWorkspaceImagePermissionResult < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -4314,6 +4576,7 @@ module Aws::WorkSpaces
     #   <p>The desired running mode for the pool. The running mode can only be updated when the pool is in a stopped state.</p>
     #   @return [String]
     class UpdateWorkspacesPoolRequest < Struct.new(
+      nil,
       :pool_id,
       :description,
       :bundle_id,
@@ -4331,6 +4594,7 @@ module Aws::WorkSpaces
     #   <p>Describes the specified pool.</p>
     #   @return [Types::WorkspacesPool]
     class UpdateWorkspacesPoolResult < Struct.new(
+      nil,
       :workspaces_pool,
       keyword_init: true
     )
@@ -4348,6 +4612,7 @@ module Aws::WorkSpaces
     #   <p>Indicates the maximum character length for the specified user setting.</p>
     #   @return [Integer]
     class UserSetting < Struct.new(
+      nil,
       :action,
       :permission,
       :maximum_length,
@@ -4361,6 +4626,7 @@ module Aws::WorkSpaces
     #   <p>The size of the user volume.</p>
     #   @return [String]
     class UserStorage < Struct.new(
+      nil,
       :capacity,
       keyword_init: true
     )
@@ -4372,6 +4638,7 @@ module Aws::WorkSpaces
     # @!attribute message
     #   @return [String]
     class ValidationException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -4407,6 +4674,7 @@ module Aws::WorkSpaces
     #   <p>The supported operating systems of the WorkSpace application.</p>
     #   @return [Array<String>]
     class WorkSpaceApplication < Struct.new(
+      nil,
       :application_id,
       :created,
       :description,
@@ -4426,6 +4694,7 @@ module Aws::WorkSpaces
     #   <p>The associations between the applications and the associated resources.</p>
     #   @return [Array<Types::WorkspaceResourceAssociation>]
     class WorkSpaceApplicationDeployment < Struct.new(
+      nil,
       :associations,
       keyword_init: true
     )
@@ -4573,6 +4842,7 @@ module Aws::WorkSpaces
     #   <p>The properties of the standby WorkSpace</p>
     #   @return [Array<Types::StandbyWorkspacesProperties>]
     class Workspace < Struct.new(
+      nil,
       :workspace_id,
       :directory_id,
       :user_name,
@@ -4632,6 +4902,7 @@ module Aws::WorkSpaces
     #   <p>Specifies the configuration for accessing the WorkSpace.</p>
     #   @return [Types::AccessEndpointConfig]
     class WorkspaceAccessProperties < Struct.new(
+      nil,
       :device_type_windows,
       :device_type_osx,
       :device_type_web,
@@ -4687,6 +4958,7 @@ module Aws::WorkSpaces
     #   <p>The type of WorkSpace bundle.</p>
     #   @return [String]
     class WorkspaceBundle < Struct.new(
+      nil,
       :bundle_id,
       :name,
       :owner,
@@ -4719,6 +4991,7 @@ module Aws::WorkSpaces
     #   <p>The timestamp of the last known user connection.</p>
     #   @return [Time]
     class WorkspaceConnectionStatus < Struct.new(
+      nil,
       :workspace_id,
       :connection_state,
       :connection_state_check_timestamp,
@@ -4769,6 +5042,7 @@ module Aws::WorkSpaces
     #   <p>Indicates the IAM role ARN of the instance.</p>
     #   @return [String]
     class WorkspaceCreationProperties < Struct.new(
+      nil,
       :enable_internet_access,
       :default_ou,
       :custom_security_group_id,
@@ -4878,6 +5152,7 @@ module Aws::WorkSpaces
     #   <p>The error message returned.</p>
     #   @return [String]
     class WorkspaceDirectory < Struct.new(
+      nil,
       :directory_id,
       :alias,
       :directory_name,
@@ -4954,6 +5229,7 @@ module Aws::WorkSpaces
     #            possible causes of the errors and troubleshooting information.</p>
     #   @return [Array<Types::ErrorDetails>]
     class WorkspaceImage < Struct.new(
+      nil,
       :image_id,
       :name,
       :description,
@@ -5028,6 +5304,7 @@ module Aws::WorkSpaces
     #   <p>Indicates the Global Accelerator properties.</p>
     #   @return [Types::GlobalAcceleratorForWorkSpace]
     class WorkspaceProperties < Struct.new(
+      nil,
       :running_mode,
       :running_mode_auto_stop_timeout_in_minutes,
       :root_volume_size_gib,
@@ -5080,6 +5357,7 @@ module Aws::WorkSpaces
     #            </note>
     #   @return [String]
     class WorkspaceRequest < Struct.new(
+      nil,
       :directory_id,
       :user_name,
       :bundle_id,
@@ -5117,6 +5395,7 @@ module Aws::WorkSpaces
     #   <p>The identifier of the WorkSpace.</p>
     #   @return [String]
     class WorkspaceResourceAssociation < Struct.new(
+      nil,
       :associated_resource_id,
       :associated_resource_type,
       :created,
@@ -5134,6 +5413,7 @@ module Aws::WorkSpaces
     # @!attribute message
     #   @return [String]
     class WorkspacesDefaultRoleNotFoundException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -5154,6 +5434,7 @@ module Aws::WorkSpaces
     #   <p>The rules.</p>
     #   @return [Array<Types::IpRuleItem>]
     class WorkspacesIpGroup < Struct.new(
+      nil,
       :group_id,
       :group_name,
       :group_desc,
@@ -5207,6 +5488,7 @@ module Aws::WorkSpaces
     #   <p>The running mode of the pool.</p>
     #   @return [String]
     class WorkspacesPool < Struct.new(
+      nil,
       :pool_id,
       :pool_arn,
       :capacity_status,
@@ -5238,6 +5520,7 @@ module Aws::WorkSpaces
     #   <p>The error message.</p>
     #   @return [String]
     class WorkspacesPoolError < Struct.new(
+      nil,
       :error_code,
       :error_message,
       keyword_init: true
@@ -5275,6 +5558,7 @@ module Aws::WorkSpaces
     #   <p>The identifier of the user.</p>
     #   @return [String]
     class WorkspacesPoolSession < Struct.new(
+      nil,
       :authentication_type,
       :connection_state,
       :session_id,

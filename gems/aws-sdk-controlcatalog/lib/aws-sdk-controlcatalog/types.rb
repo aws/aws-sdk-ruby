@@ -10,6 +10,7 @@ module Aws::ControlCatalog
     # @!attribute message
     #   @return [String]
     class AccessDeniedException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -24,6 +25,7 @@ module Aws::ControlCatalog
     #   <p>The name of the related domain.</p>
     #   @return [String]
     class AssociatedDomainSummary < Struct.new(
+      nil,
       :arn,
       :name,
       keyword_init: true
@@ -39,6 +41,7 @@ module Aws::ControlCatalog
     #   <p>The name of the related objective.</p>
     #   @return [String]
     class AssociatedObjectiveSummary < Struct.new(
+      nil,
       :arn,
       :name,
       keyword_init: true
@@ -51,6 +54,7 @@ module Aws::ControlCatalog
     #   <p>The objective that's used as filter criteria.</p> <p>You can use this parameter to specify one objective ARN at a time. Passing multiple ARNs in the <code>CommonControlFilter</code> isn’t supported.</p>
     #   @return [Array<Types::ObjectiveResourceFilter>]
     class CommonControlFilter < Struct.new(
+      nil,
       :objectives,
       keyword_init: true
     )
@@ -62,6 +66,7 @@ module Aws::ControlCatalog
     #   <p>The Amazon Resource Name (ARN) that identifies the common control in the mapping.</p>
     #   @return [String]
     class CommonControlMappingDetails < Struct.new(
+      nil,
       :common_control_arn,
       keyword_init: true
     )
@@ -91,6 +96,7 @@ module Aws::ControlCatalog
     #   <p>The time when the common control was most recently updated.</p>
     #   @return [Time]
     class CommonControlSummary < Struct.new(
+      nil,
       :arn,
       :name,
       :description,
@@ -108,6 +114,7 @@ module Aws::ControlCatalog
     #   <p>A filter that narrows the results to controls with specific implementation types or identifiers. This field allows you to find controls that are implemented by specific Amazon Web Services services or with specific service identifiers.</p>
     #   @return [Types::ImplementationFilter]
     class ControlFilter < Struct.new(
+      nil,
       :implementations,
       keyword_init: true
     )
@@ -125,6 +132,7 @@ module Aws::ControlCatalog
     #   <p>The details of the mapping relationship, containing either framework or common control information.</p>
     #   @return [Types::Mapping]
     class ControlMapping < Struct.new(
+      nil,
       :control_arn,
       :mapping_type,
       :mapping,
@@ -144,6 +152,7 @@ module Aws::ControlCatalog
     #   <p>A list of mapping types to filter the mappings. When specified, only mappings of these types are returned.</p>
     #   @return [Array<String>]
     class ControlMappingFilter < Struct.new(
+      nil,
       :control_arns,
       :common_control_arns,
       :mapping_types,
@@ -157,6 +166,7 @@ module Aws::ControlCatalog
     #   <p>The parameter name. This name is the parameter <code>key</code> when you call <a href="https://docs.aws.amazon.com/controltower/latest/APIReference/API_EnableControl.html"> <code>EnableControl</code> </a> or <a href="https://docs.aws.amazon.com/controltower/latest/APIReference/API_UpdateEnabledControl.html"> <code>UpdateEnabledControl</code> </a>.</p>
     #   @return [String]
     class ControlParameter < Struct.new(
+      nil,
       :name,
       keyword_init: true
     )
@@ -192,6 +202,7 @@ module Aws::ControlCatalog
     #   <p>A list of Amazon Web Services resource types that are governed by this control. This information helps you understand which controls can govern certain types of resources, and conversely, which resources are affected when the control is implemented. The resources are represented as Amazon Web Services CloudFormation resource types. If <code>GovernedResources</code> cannot be represented by available CloudFormation resource types, it’s returned as an empty list.</p>
     #   @return [Array<String>]
     class ControlSummary < Struct.new(
+      nil,
       :arn,
       :aliases,
       :name,
@@ -211,6 +222,7 @@ module Aws::ControlCatalog
     #   <p>The Amazon Resource Name (ARN) of the domain.</p>
     #   @return [String]
     class DomainResourceFilter < Struct.new(
+      nil,
       :arn,
       keyword_init: true
     )
@@ -234,6 +246,7 @@ module Aws::ControlCatalog
     #   <p>The time when the domain was most recently updated.</p>
     #   @return [Time]
     class DomainSummary < Struct.new(
+      nil,
       :arn,
       :name,
       :description,
@@ -252,6 +265,7 @@ module Aws::ControlCatalog
     #   <p>The specific item or requirement within the framework that the control maps to.</p>
     #   @return [String]
     class FrameworkMappingDetails < Struct.new(
+      nil,
       :name,
       :item,
       keyword_init: true
@@ -263,6 +277,7 @@ module Aws::ControlCatalog
     #   <p>The Amazon Resource Name (ARN) of the control. It has one of the following formats:</p> <p> <i>Global format</i> </p> <p> <code>arn:{PARTITION}:controlcatalog:::control/{CONTROL_CATALOG_OPAQUE_ID}</code> </p> <p> <i>Or Regional format</i> </p> <p> <code>arn:{PARTITION}:controltower:{REGION}::control/{CONTROL_TOWER_OPAQUE_ID}</code> </p> <p>Here is a more general pattern that covers Amazon Web Services Control Tower and Control Catalog ARNs:</p> <p> <code>^arn:(aws(?:[-a-z]*)?):(controlcatalog|controltower):[a-zA-Z0-9-]*::control/[0-9a-zA-Z_\\-]+$</code> </p>
     #   @return [String]
     class GetControlRequest < Struct.new(
+      nil,
       :control_arn,
       keyword_init: true
     )
@@ -303,6 +318,7 @@ module Aws::ControlCatalog
     #   <p>A list of Amazon Web Services resource types that are governed by this control. This information helps you understand which controls can govern certain types of resources, and conversely, which resources are affected when the control is implemented. The resources are represented as Amazon Web Services CloudFormation resource types. If <code>GovernedResources</code> cannot be represented by available CloudFormation resource types, it’s returned as an empty list.</p>
     #   @return [Array<String>]
     class GetControlResponse < Struct.new(
+      nil,
       :arn,
       :aliases,
       :name,
@@ -327,6 +343,7 @@ module Aws::ControlCatalog
     #   <p>A service-specific identifier for the control, assigned by the service that implemented the control. For example, this identifier could be an Amazon Web Services Config Rule ID or a Security Hub Control ID.</p>
     #   @return [String]
     class ImplementationDetails < Struct.new(
+      nil,
       :type,
       :identifier,
       keyword_init: true
@@ -342,6 +359,7 @@ module Aws::ControlCatalog
     #   <p>A list of service-specific identifiers that can serve as filters. For example, you can filter for controls with specific Amazon Web Services Config Rule IDs or Security Hub Control IDs.</p>
     #   @return [Array<String>]
     class ImplementationFilter < Struct.new(
+      nil,
       :types,
       :identifiers,
       keyword_init: true
@@ -357,6 +375,7 @@ module Aws::ControlCatalog
     #   <p>The identifier originally assigned by the Amazon Web Services service that implements the control. For example, <code>CODEPIPELINE_DEPLOYMENT_COUNT_CHECK</code>.</p>
     #   @return [String]
     class ImplementationSummary < Struct.new(
+      nil,
       :type,
       :identifier,
       keyword_init: true
@@ -368,6 +387,7 @@ module Aws::ControlCatalog
     # @!attribute message
     #   @return [String]
     class InternalServerException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -384,6 +404,7 @@ module Aws::ControlCatalog
     #   <p>An optional filter that narrows the results to a specific objective.</p> <p>This filter allows you to specify one objective ARN at a time. Passing multiple ARNs in the <code>CommonControlFilter</code> isn’t supported.</p>
     #   @return [Types::CommonControlFilter]
     class ListCommonControlsRequest < Struct.new(
+      nil,
       :max_results,
       :next_token,
       :common_control_filter,
@@ -399,6 +420,7 @@ module Aws::ControlCatalog
     #   <p>The pagination token that's used to fetch the next set of results.</p>
     #   @return [String]
     class ListCommonControlsResponse < Struct.new(
+      nil,
       :common_controls,
       :next_token,
       keyword_init: true
@@ -416,6 +438,7 @@ module Aws::ControlCatalog
     #   <p>An optional filter that narrows the results to specific control mappings based on control ARNs, common control ARNs, or mapping types.</p>
     #   @return [Types::ControlMappingFilter]
     class ListControlMappingsRequest < Struct.new(
+      nil,
       :next_token,
       :max_results,
       :filter,
@@ -431,6 +454,7 @@ module Aws::ControlCatalog
     #   <p>The pagination token that's used to fetch the next set of results.</p>
     #   @return [String]
     class ListControlMappingsResponse < Struct.new(
+      nil,
       :control_mappings,
       :next_token,
       keyword_init: true
@@ -448,6 +472,7 @@ module Aws::ControlCatalog
     #   <p>An optional filter that narrows the results to controls with specific implementation types or identifiers. If you don't provide a filter, the operation returns all available controls.</p>
     #   @return [Types::ControlFilter]
     class ListControlsRequest < Struct.new(
+      nil,
       :next_token,
       :max_results,
       :filter,
@@ -463,6 +488,7 @@ module Aws::ControlCatalog
     #   <p>The pagination token that's used to fetch the next set of results.</p>
     #   @return [String]
     class ListControlsResponse < Struct.new(
+      nil,
       :controls,
       :next_token,
       keyword_init: true
@@ -477,6 +503,7 @@ module Aws::ControlCatalog
     #   <p>The pagination token that's used to fetch the next set of results.</p>
     #   @return [String]
     class ListDomainsRequest < Struct.new(
+      nil,
       :max_results,
       :next_token,
       keyword_init: true
@@ -491,6 +518,7 @@ module Aws::ControlCatalog
     #   <p>The pagination token that's used to fetch the next set of results.</p>
     #   @return [String]
     class ListDomainsResponse < Struct.new(
+      nil,
       :domains,
       :next_token,
       keyword_init: true
@@ -508,6 +536,7 @@ module Aws::ControlCatalog
     #   <p>An optional filter that narrows the results to a specific domain.</p> <p>This filter allows you to specify one domain ARN at a time. Passing multiple ARNs in the <code>ObjectiveFilter</code> isn’t supported.</p>
     #   @return [Types::ObjectiveFilter]
     class ListObjectivesRequest < Struct.new(
+      nil,
       :max_results,
       :next_token,
       :objective_filter,
@@ -523,6 +552,7 @@ module Aws::ControlCatalog
     #   <p>The pagination token that's used to fetch the next set of results.</p>
     #   @return [String]
     class ListObjectivesResponse < Struct.new(
+      nil,
       :objectives,
       :next_token,
       keyword_init: true
@@ -555,6 +585,7 @@ module Aws::ControlCatalog
     #   <p>The domain that's used as filter criteria.</p> <p>You can use this parameter to specify one domain ARN at a time. Passing multiple ARNs in the <code>ObjectiveFilter</code> isn’t supported.</p>
     #   @return [Array<Types::DomainResourceFilter>]
     class ObjectiveFilter < Struct.new(
+      nil,
       :domains,
       keyword_init: true
     )
@@ -566,6 +597,7 @@ module Aws::ControlCatalog
     #   <p>The Amazon Resource Name (ARN) of the objective.</p>
     #   @return [String]
     class ObjectiveResourceFilter < Struct.new(
+      nil,
       :arn,
       keyword_init: true
     )
@@ -592,6 +624,7 @@ module Aws::ControlCatalog
     #   <p>The time when the objective was most recently updated.</p>
     #   @return [Time]
     class ObjectiveSummary < Struct.new(
+      nil,
       :arn,
       :name,
       :description,
@@ -611,6 +644,7 @@ module Aws::ControlCatalog
     #   <p>Regions in which the control is available to be deployed.</p>
     #   @return [Array<String>]
     class RegionConfiguration < Struct.new(
+      nil,
       :scope,
       :deployable_regions,
       keyword_init: true
@@ -622,6 +656,7 @@ module Aws::ControlCatalog
     # @!attribute message
     #   @return [String]
     class ResourceNotFoundException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -632,6 +667,7 @@ module Aws::ControlCatalog
     # @!attribute message
     #   @return [String]
     class ThrottlingException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -642,6 +678,7 @@ module Aws::ControlCatalog
     # @!attribute message
     #   @return [String]
     class ValidationException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )

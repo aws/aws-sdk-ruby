@@ -10,6 +10,7 @@ module Aws::Route53RecoveryControlConfig
     # @!attribute message
     #   @return [String]
     class AccessDeniedException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -42,6 +43,7 @@ module Aws::Route53RecoveryControlConfig
     #   <p>The Amazon Web Services account ID of the assertion rule owner.</p>
     #   @return [String]
     class AssertionRule < Struct.new(
+      nil,
       :asserted_controls,
       :control_panel_arn,
       :name,
@@ -66,6 +68,7 @@ module Aws::Route53RecoveryControlConfig
     #   <p>An evaluation period, in milliseconds (ms), during which any request against the target routing controls will fail. This helps prevent "flapping" of state. The wait period is 5000 ms by default, but you can choose a custom value.</p>
     #   @return [Integer]
     class AssertionRuleUpdate < Struct.new(
+      nil,
       :name,
       :safety_rule_arn,
       :wait_period_ms,
@@ -94,6 +97,7 @@ module Aws::Route53RecoveryControlConfig
     #   <p>The network type of the cluster. NetworkType can be one of the following: IPV4, DUALSTACK.</p>
     #   @return [String]
     class Cluster < Struct.new(
+      nil,
       :cluster_arn,
       :cluster_endpoints,
       :name,
@@ -113,6 +117,7 @@ module Aws::Route53RecoveryControlConfig
     #   <p>The Amazon Web Services Region for a cluster endpoint.</p>
     #   @return [String]
     class ClusterEndpoint < Struct.new(
+      nil,
       :endpoint,
       :region,
       keyword_init: true
@@ -124,6 +129,7 @@ module Aws::Route53RecoveryControlConfig
     # @!attribute message
     #   @return [String]
     class ConflictException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -153,6 +159,7 @@ module Aws::Route53RecoveryControlConfig
     #   <p>The Amazon Web Services account ID of the control panel owner.</p>
     #   @return [String]
     class ControlPanel < Struct.new(
+      nil,
       :cluster_arn,
       :control_panel_arn,
       :default_control_panel,
@@ -179,6 +186,7 @@ module Aws::Route53RecoveryControlConfig
     #   <p>The network type of the cluster. NetworkType can be one of the following: IPV4, DUALSTACK.</p>
     #   @return [String]
     class CreateClusterRequest < Struct.new(
+      nil,
       :client_token,
       :cluster_name,
       :tags,
@@ -192,6 +200,7 @@ module Aws::Route53RecoveryControlConfig
     #   <p>The cluster that was created.</p>
     #   @return [Types::Cluster]
     class CreateClusterResponse < Struct.new(
+      nil,
       :cluster,
       keyword_init: true
     )
@@ -212,6 +221,7 @@ module Aws::Route53RecoveryControlConfig
     #   <p>The tags associated with the control panel.</p>
     #   @return [Hash<String, String>]
     class CreateControlPanelRequest < Struct.new(
+      nil,
       :client_token,
       :cluster_arn,
       :control_panel_name,
@@ -225,6 +235,7 @@ module Aws::Route53RecoveryControlConfig
     #   <p>Information about a control panel.</p>
     #   @return [Types::ControlPanel]
     class CreateControlPanelResponse < Struct.new(
+      nil,
       :control_panel,
       keyword_init: true
     )
@@ -245,6 +256,7 @@ module Aws::Route53RecoveryControlConfig
     #   <p>The name of the routing control.</p>
     #   @return [String]
     class CreateRoutingControlRequest < Struct.new(
+      nil,
       :client_token,
       :cluster_arn,
       :control_panel_arn,
@@ -258,6 +270,7 @@ module Aws::Route53RecoveryControlConfig
     #   <p>The routing control that is created.</p>
     #   @return [Types::RoutingControl]
     class CreateRoutingControlResponse < Struct.new(
+      nil,
       :routing_control,
       keyword_init: true
     )
@@ -278,6 +291,7 @@ module Aws::Route53RecoveryControlConfig
     #   <p>The tags associated with the safety rule.</p>
     #   @return [Hash<String, String>]
     class CreateSafetyRuleRequest < Struct.new(
+      nil,
       :assertion_rule,
       :client_token,
       :gating_rule,
@@ -294,6 +308,7 @@ module Aws::Route53RecoveryControlConfig
     #   <p>The gating rule created.</p>
     #   @return [Types::GatingRule]
     class CreateSafetyRuleResponse < Struct.new(
+      nil,
       :assertion_rule,
       :gating_rule,
       keyword_init: true
@@ -305,6 +320,7 @@ module Aws::Route53RecoveryControlConfig
     #   <p>The Amazon Resource Name (ARN) of the cluster that you're deleting.</p>
     #   @return [String]
     class DeleteClusterRequest < Struct.new(
+      nil,
       :cluster_arn,
       keyword_init: true
     )
@@ -312,6 +328,7 @@ module Aws::Route53RecoveryControlConfig
     end
 
     class DeleteClusterResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -321,6 +338,7 @@ module Aws::Route53RecoveryControlConfig
     #   <p>The Amazon Resource Name (ARN) of the control panel.</p>
     #   @return [String]
     class DeleteControlPanelRequest < Struct.new(
+      nil,
       :control_panel_arn,
       keyword_init: true
     )
@@ -328,6 +346,7 @@ module Aws::Route53RecoveryControlConfig
     end
 
     class DeleteControlPanelResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -337,6 +356,7 @@ module Aws::Route53RecoveryControlConfig
     #   <p>The Amazon Resource Name (ARN) of the routing control that you're deleting.</p>
     #   @return [String]
     class DeleteRoutingControlRequest < Struct.new(
+      nil,
       :routing_control_arn,
       keyword_init: true
     )
@@ -344,6 +364,7 @@ module Aws::Route53RecoveryControlConfig
     end
 
     class DeleteRoutingControlResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -353,6 +374,7 @@ module Aws::Route53RecoveryControlConfig
     #   <p>The ARN of the safety rule.</p>
     #   @return [String]
     class DeleteSafetyRuleRequest < Struct.new(
+      nil,
       :safety_rule_arn,
       keyword_init: true
     )
@@ -360,6 +382,7 @@ module Aws::Route53RecoveryControlConfig
     end
 
     class DeleteSafetyRuleResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -369,6 +392,7 @@ module Aws::Route53RecoveryControlConfig
     #   <p>The Amazon Resource Name (ARN) of the cluster.</p>
     #   @return [String]
     class DescribeClusterRequest < Struct.new(
+      nil,
       :cluster_arn,
       keyword_init: true
     )
@@ -379,6 +403,7 @@ module Aws::Route53RecoveryControlConfig
     #   <p>The cluster for the DescribeCluster request.</p>
     #   @return [Types::Cluster]
     class DescribeClusterResponse < Struct.new(
+      nil,
       :cluster,
       keyword_init: true
     )
@@ -389,6 +414,7 @@ module Aws::Route53RecoveryControlConfig
     #   <p>The Amazon Resource Name (ARN) of the control panel.</p>
     #   @return [String]
     class DescribeControlPanelRequest < Struct.new(
+      nil,
       :control_panel_arn,
       keyword_init: true
     )
@@ -399,6 +425,7 @@ module Aws::Route53RecoveryControlConfig
     #   <p>Information about the control panel.</p>
     #   @return [Types::ControlPanel]
     class DescribeControlPanelResponse < Struct.new(
+      nil,
       :control_panel,
       keyword_init: true
     )
@@ -409,6 +436,7 @@ module Aws::Route53RecoveryControlConfig
     #   <p>The Amazon Resource Name (ARN) of the routing control.</p>
     #   @return [String]
     class DescribeRoutingControlRequest < Struct.new(
+      nil,
       :routing_control_arn,
       keyword_init: true
     )
@@ -419,6 +447,7 @@ module Aws::Route53RecoveryControlConfig
     #   <p>Information about the routing control.</p>
     #   @return [Types::RoutingControl]
     class DescribeRoutingControlResponse < Struct.new(
+      nil,
       :routing_control,
       keyword_init: true
     )
@@ -429,6 +458,7 @@ module Aws::Route53RecoveryControlConfig
     #   <p>The ARN of the safety rule.</p>
     #   @return [String]
     class DescribeSafetyRuleRequest < Struct.new(
+      nil,
       :safety_rule_arn,
       keyword_init: true
     )
@@ -442,6 +472,7 @@ module Aws::Route53RecoveryControlConfig
     #   <p>The gating rule in the response.</p>
     #   @return [Types::GatingRule]
     class DescribeSafetyRuleResponse < Struct.new(
+      nil,
       :assertion_rule,
       :gating_rule,
       keyword_init: true
@@ -478,6 +509,7 @@ module Aws::Route53RecoveryControlConfig
     #   <p>The Amazon Web Services account ID of the gating rule owner.</p>
     #   @return [String]
     class GatingRule < Struct.new(
+      nil,
       :control_panel_arn,
       :gating_controls,
       :name,
@@ -503,6 +535,7 @@ module Aws::Route53RecoveryControlConfig
     #   <p>An evaluation period, in milliseconds (ms), during which any request against the target routing controls will fail. This helps prevent "flapping" of state. The wait period is 5000 ms by default, but you can choose a custom value.</p>
     #   @return [Integer]
     class GatingRuleUpdate < Struct.new(
+      nil,
       :name,
       :safety_rule_arn,
       :wait_period_ms,
@@ -515,6 +548,7 @@ module Aws::Route53RecoveryControlConfig
     #   <p>The Amazon Resource Name (ARN) of the resource.</p>
     #   @return [String]
     class GetResourcePolicyRequest < Struct.new(
+      nil,
       :resource_arn,
       keyword_init: true
     )
@@ -525,6 +559,7 @@ module Aws::Route53RecoveryControlConfig
     #   <p>The resource policy.</p>
     #   @return [String]
     class GetResourcePolicyResponse < Struct.new(
+      nil,
       :policy,
       keyword_init: true
     )
@@ -535,6 +570,7 @@ module Aws::Route53RecoveryControlConfig
     # @!attribute message
     #   @return [String]
     class InternalServerException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -551,6 +587,7 @@ module Aws::Route53RecoveryControlConfig
     #   <p>The Amazon Resource Name (ARN) of the routing control.</p>
     #   @return [String]
     class ListAssociatedRoute53HealthChecksRequest < Struct.new(
+      nil,
       :max_results,
       :next_token,
       :routing_control_arn,
@@ -566,6 +603,7 @@ module Aws::Route53RecoveryControlConfig
     #   <p>Next token for listing health checks.</p>
     #   @return [String]
     class ListAssociatedRoute53HealthChecksResponse < Struct.new(
+      nil,
       :health_check_ids,
       :next_token,
       keyword_init: true
@@ -580,6 +618,7 @@ module Aws::Route53RecoveryControlConfig
     #   <p>The token that identifies which batch of results you want to see.</p>
     #   @return [String]
     class ListClustersRequest < Struct.new(
+      nil,
       :max_results,
       :next_token,
       keyword_init: true
@@ -594,6 +633,7 @@ module Aws::Route53RecoveryControlConfig
     #   <p>The token that identifies which batch of results you want to see.</p>
     #   @return [String]
     class ListClustersResponse < Struct.new(
+      nil,
       :clusters,
       :next_token,
       keyword_init: true
@@ -611,6 +651,7 @@ module Aws::Route53RecoveryControlConfig
     #   <p>The token that identifies which batch of results you want to see.</p>
     #   @return [String]
     class ListControlPanelsRequest < Struct.new(
+      nil,
       :cluster_arn,
       :max_results,
       :next_token,
@@ -626,6 +667,7 @@ module Aws::Route53RecoveryControlConfig
     #   <p>The token that identifies which batch of results you want to see.</p>
     #   @return [String]
     class ListControlPanelsResponse < Struct.new(
+      nil,
       :control_panels,
       :next_token,
       keyword_init: true
@@ -643,6 +685,7 @@ module Aws::Route53RecoveryControlConfig
     #   <p>The token that identifies which batch of results you want to see.</p>
     #   @return [String]
     class ListRoutingControlsRequest < Struct.new(
+      nil,
       :control_panel_arn,
       :max_results,
       :next_token,
@@ -658,6 +701,7 @@ module Aws::Route53RecoveryControlConfig
     #   <p>An array of routing controls.</p>
     #   @return [Array<Types::RoutingControl>]
     class ListRoutingControlsResponse < Struct.new(
+      nil,
       :next_token,
       :routing_controls,
       keyword_init: true
@@ -675,6 +719,7 @@ module Aws::Route53RecoveryControlConfig
     #   <p>The token that identifies which batch of results you want to see.</p>
     #   @return [String]
     class ListSafetyRulesRequest < Struct.new(
+      nil,
       :control_panel_arn,
       :max_results,
       :next_token,
@@ -690,6 +735,7 @@ module Aws::Route53RecoveryControlConfig
     #   <p>The list of safety rules in a control panel.</p>
     #   @return [Array<Types::Rule>]
     class ListSafetyRulesResponse < Struct.new(
+      nil,
       :next_token,
       :safety_rules,
       keyword_init: true
@@ -701,6 +747,7 @@ module Aws::Route53RecoveryControlConfig
     #   <p>The Amazon Resource Name (ARN) for the resource that's tagged.</p>
     #   @return [String]
     class ListTagsForResourceRequest < Struct.new(
+      nil,
       :resource_arn,
       keyword_init: true
     )
@@ -711,6 +758,7 @@ module Aws::Route53RecoveryControlConfig
     #   <p>The tags associated with the resource.</p>
     #   @return [Hash<String, String>]
     class ListTagsForResourceResponse < Struct.new(
+      nil,
       :tags,
       keyword_init: true
     )
@@ -734,6 +782,7 @@ module Aws::Route53RecoveryControlConfig
     #   <p>An evaluation period, in milliseconds (ms), during which any request against the target routing controls will fail. This helps prevent "flapping" of state. The wait period is 5000 ms by default, but you can choose a custom value.</p>
     #   @return [Integer]
     class NewAssertionRule < Struct.new(
+      nil,
       :asserted_controls,
       :control_panel_arn,
       :name,
@@ -764,6 +813,7 @@ module Aws::Route53RecoveryControlConfig
     #   <p>An evaluation period, in milliseconds (ms), during which any request against the target routing controls will fail. This helps prevent "flapping" of state. The wait period is 5000 ms by default, but you can choose a custom value.</p>
     #   @return [Integer]
     class NewGatingRule < Struct.new(
+      nil,
       :control_panel_arn,
       :gating_controls,
       :name,
@@ -779,6 +829,7 @@ module Aws::Route53RecoveryControlConfig
     # @!attribute message
     #   @return [String]
     class ResourceNotFoundException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -802,6 +853,7 @@ module Aws::Route53RecoveryControlConfig
     #   <p>The Amazon Web Services account ID of the routing control owner.</p>
     #   @return [String]
     class RoutingControl < Struct.new(
+      nil,
       :control_panel_arn,
       :name,
       :routing_control_arn,
@@ -820,6 +872,7 @@ module Aws::Route53RecoveryControlConfig
     #   <p>A gating rule verifies that a gating routing control or set of gating routing controls, evaluates as true, based on a rule configuration that you specify, which allows a set of routing control state changes to complete.</p> <p>For example, if you specify one gating routing control and you set the Type in the rule configuration to OR, that indicates that you must set the gating routing control to On for the rule to evaluate as true; that is, for the gating control "switch" to be "On". When you do that, then you can update the routing control states for the target routing controls that you specify in the gating rule.</p>
     #   @return [Types::GatingRule]
     class Rule < Struct.new(
+      nil,
       :assertion,
       :gating,
       keyword_init: true
@@ -838,6 +891,7 @@ module Aws::Route53RecoveryControlConfig
     #   <p>A rule can be one of the following: ATLEAST, AND, or OR.</p>
     #   @return [String]
     class RuleConfig < Struct.new(
+      nil,
       :inverted,
       :threshold,
       :type,
@@ -850,6 +904,7 @@ module Aws::Route53RecoveryControlConfig
     # @!attribute message
     #   @return [String]
     class ServiceQuotaExceededException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -864,6 +919,7 @@ module Aws::Route53RecoveryControlConfig
     #   <p>The tags associated with the resource.</p>
     #   @return [Hash<String, String>]
     class TagResourceRequest < Struct.new(
+      nil,
       :resource_arn,
       :tags,
       keyword_init: true
@@ -872,6 +928,7 @@ module Aws::Route53RecoveryControlConfig
     end
 
     class TagResourceResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -881,6 +938,7 @@ module Aws::Route53RecoveryControlConfig
     # @!attribute message
     #   @return [String]
     class ThrottlingException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -894,6 +952,7 @@ module Aws::Route53RecoveryControlConfig
     #   <p>Keys for the tags to be removed.</p>
     #   @return [Array<String>]
     class UntagResourceRequest < Struct.new(
+      nil,
       :resource_arn,
       :tag_keys,
       keyword_init: true
@@ -902,6 +961,7 @@ module Aws::Route53RecoveryControlConfig
     end
 
     class UntagResourceResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -915,6 +975,7 @@ module Aws::Route53RecoveryControlConfig
     #   <p>The network type of the cluster. NetworkType can be one of the following: IPV4, DUALSTACK.</p>
     #   @return [String]
     class UpdateClusterRequest < Struct.new(
+      nil,
       :cluster_arn,
       :network_type,
       keyword_init: true
@@ -926,6 +987,7 @@ module Aws::Route53RecoveryControlConfig
     #   <p>The cluster that was updated.</p>
     #   @return [Types::Cluster]
     class UpdateClusterResponse < Struct.new(
+      nil,
       :cluster,
       keyword_init: true
     )
@@ -940,6 +1002,7 @@ module Aws::Route53RecoveryControlConfig
     #   <p>The name of the control panel.</p>
     #   @return [String]
     class UpdateControlPanelRequest < Struct.new(
+      nil,
       :control_panel_arn,
       :control_panel_name,
       keyword_init: true
@@ -951,6 +1014,7 @@ module Aws::Route53RecoveryControlConfig
     #   <p>The control panel to update.</p>
     #   @return [Types::ControlPanel]
     class UpdateControlPanelResponse < Struct.new(
+      nil,
       :control_panel,
       keyword_init: true
     )
@@ -965,6 +1029,7 @@ module Aws::Route53RecoveryControlConfig
     #   <p>The name of the routing control.</p>
     #   @return [String]
     class UpdateRoutingControlRequest < Struct.new(
+      nil,
       :routing_control_arn,
       :routing_control_name,
       keyword_init: true
@@ -976,6 +1041,7 @@ module Aws::Route53RecoveryControlConfig
     #   <p>The routing control that was updated.</p>
     #   @return [Types::RoutingControl]
     class UpdateRoutingControlResponse < Struct.new(
+      nil,
       :routing_control,
       keyword_init: true
     )
@@ -990,6 +1056,7 @@ module Aws::Route53RecoveryControlConfig
     #   <p>The gating rule to update.</p>
     #   @return [Types::GatingRuleUpdate]
     class UpdateSafetyRuleRequest < Struct.new(
+      nil,
       :assertion_rule_update,
       :gating_rule_update,
       keyword_init: true
@@ -1004,6 +1071,7 @@ module Aws::Route53RecoveryControlConfig
     #   <p>The gating rule updated.</p>
     #   @return [Types::GatingRule]
     class UpdateSafetyRuleResponse < Struct.new(
+      nil,
       :assertion_rule,
       :gating_rule,
       keyword_init: true
@@ -1015,6 +1083,7 @@ module Aws::Route53RecoveryControlConfig
     # @!attribute message
     #   @return [String]
     class ValidationException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )

@@ -60,6 +60,7 @@ module Aws::CloudFormation
     #      operation.</p>
     #   @return [String]
     class AccountGateResult < Struct.new(
+      nil,
       :status,
       :status_reason,
       keyword_init: true
@@ -92,6 +93,7 @@ module Aws::CloudFormation
     #   <p>The value that's associated with the account limit name.</p>
     #   @return [Integer]
     class AccountLimit < Struct.new(
+      nil,
       :name,
       :value,
       keyword_init: true
@@ -100,12 +102,14 @@ module Aws::CloudFormation
     end
 
     class ActivateOrganizationsAccessInput < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
     end
 
     class ActivateOrganizationsAccessOutput < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -177,6 +181,7 @@ module Aws::CloudFormation
     #         both.</p>
     #   @return [Integer]
     class ActivateTypeInput < Struct.new(
+      nil,
       :type,
       :public_type_arn,
       :publisher_id,
@@ -197,6 +202,7 @@ module Aws::CloudFormation
     #         Region.</p>
     #   @return [String]
     class ActivateTypeOutput < Struct.new(
+      nil,
       :arn,
       keyword_init: true
     )
@@ -207,6 +213,7 @@ module Aws::CloudFormation
     # @!attribute message
     #   @return [String]
     class AlreadyExistsException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -229,6 +236,7 @@ module Aws::CloudFormation
     #      only if <code>Enabled</code> is set to <code>True</code>.</p>
     #   @return [Boolean]
     class AutoDeployment < Struct.new(
+      nil,
       :enabled,
       :retain_stacks_on_account_removal,
       keyword_init: true
@@ -248,6 +256,7 @@ module Aws::CloudFormation
     #   <p>Identifying information for the configuration of a CloudFormation extension.</p>
     #   @return [Types::TypeConfigurationIdentifier]
     class BatchDescribeTypeConfigurationsError < Struct.new(
+      nil,
       :error_code,
       :error_message,
       :type_configuration_identifier,
@@ -260,6 +269,7 @@ module Aws::CloudFormation
     #   <p>The list of identifiers for the desired extension configurations.</p>
     #   @return [Array<Types::TypeConfigurationIdentifier>]
     class BatchDescribeTypeConfigurationsInput < Struct.new(
+      nil,
       :type_configuration_identifiers,
       keyword_init: true
     )
@@ -279,6 +289,7 @@ module Aws::CloudFormation
     #         registry.</p>
     #   @return [Array<Types::TypeConfigurationDetails>]
     class BatchDescribeTypeConfigurationsOutput < Struct.new(
+      nil,
       :errors,
       :unprocessed_type_configurations,
       :type_configurations,
@@ -292,6 +303,7 @@ module Aws::CloudFormation
     #   <p>A message with details about the error that occurred.</p>
     #   @return [String]
     class CFNRegistryException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -321,6 +333,7 @@ module Aws::CloudFormation
     #         to ensure that CloudFormation successfully received them.</p>
     #   @return [String]
     class CancelUpdateStackInput < Struct.new(
+      nil,
       :stack_name,
       :client_request_token,
       keyword_init: true
@@ -348,6 +361,7 @@ module Aws::CloudFormation
     #      CloudFormation will perform.</p>
     #   @return [Types::ResourceChange]
     class Change < Struct.new(
+      nil,
       :type,
       :hook_invocation_count,
       :resource_change,
@@ -430,6 +444,7 @@ module Aws::CloudFormation
     #   <p>Specifies details about the target that the Hook will run against.</p>
     #   @return [Types::ChangeSetHookTargetDetails]
     class ChangeSetHook < Struct.new(
+      nil,
       :invocation_point,
       :failure_mode,
       :type_name,
@@ -452,6 +467,7 @@ module Aws::CloudFormation
     #   <p>Specifies the action of the resource.</p>
     #   @return [String]
     class ChangeSetHookResourceTargetDetails < Struct.new(
+      nil,
       :logical_resource_id,
       :resource_type,
       :resource_action,
@@ -468,6 +484,7 @@ module Aws::CloudFormation
     #   <p>Required if <code>TargetType</code> is <code>RESOURCE</code>.</p>
     #   @return [Types::ChangeSetHookResourceTargetDetails]
     class ChangeSetHookTargetDetails < Struct.new(
+      nil,
       :target_type,
       :resource_target_details,
       keyword_init: true
@@ -480,6 +497,7 @@ module Aws::CloudFormation
     # @!attribute message
     #   @return [String]
     class ChangeSetNotFoundException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -533,6 +551,7 @@ module Aws::CloudFormation
     #   <p>Indicates if the change set imports resources that already exist.</p>
     #   @return [Boolean]
     class ChangeSetSummary < Struct.new(
+      nil,
       :stack_id,
       :stack_name,
       :change_set_id,
@@ -557,6 +576,7 @@ module Aws::CloudFormation
     # @!attribute message
     #   @return [String]
     class ConcurrentResourcesLimitExceededException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -621,6 +641,7 @@ module Aws::CloudFormation
     #         them.</p>
     #   @return [String]
     class ContinueUpdateRollbackInput < Struct.new(
+      nil,
       :stack_name,
       :role_arn,
       :resources_to_skip,
@@ -632,6 +653,7 @@ module Aws::CloudFormation
 
     # <p>The output for a <a>ContinueUpdateRollback</a> operation.</p>
     class ContinueUpdateRollbackOutput < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -886,6 +908,7 @@ module Aws::CloudFormation
     #            </note>
     #   @return [Boolean]
     class CreateChangeSetInput < Struct.new(
+      nil,
       :stack_name,
       :template_body,
       :template_url,
@@ -918,6 +941,7 @@ module Aws::CloudFormation
     #   <p>The unique ID of the stack.</p>
     #   @return [String]
     class CreateChangeSetOutput < Struct.new(
+      nil,
       :id,
       :stack_id,
       keyword_init: true
@@ -943,6 +967,7 @@ module Aws::CloudFormation
     #           <code>DeletionPolicy</code> and <code>UpdateReplacePolicy</code>.</p>
     #   @return [Types::TemplateConfiguration]
     class CreateGeneratedTemplateInput < Struct.new(
+      nil,
       :resources,
       :generated_template_name,
       :stack_name,
@@ -956,6 +981,7 @@ module Aws::CloudFormation
     #   <p>The ID of the generated template.</p>
     #   @return [String]
     class CreateGeneratedTemplateOutput < Struct.new(
+      nil,
       :generated_template_id,
       keyword_init: true
     )
@@ -1210,6 +1236,7 @@ module Aws::CloudFormation
     #            </p>
     #   @return [Boolean]
     class CreateStackInput < Struct.new(
+      nil,
       :stack_name,
       :template_body,
       :template_url,
@@ -1317,6 +1344,7 @@ module Aws::CloudFormation
     #            </ul>
     #   @return [String]
     class CreateStackInstancesInput < Struct.new(
+      nil,
       :stack_set_name,
       :accounts,
       :deployment_targets,
@@ -1334,6 +1362,7 @@ module Aws::CloudFormation
     #   <p>The unique identifier for this StackSet operation.</p>
     #   @return [String]
     class CreateStackInstancesOutput < Struct.new(
+      nil,
       :operation_id,
       keyword_init: true
     )
@@ -1345,6 +1374,7 @@ module Aws::CloudFormation
     #   <p>Unique identifier of the stack.</p>
     #   @return [String]
     class CreateStackOutput < Struct.new(
+      nil,
       :stack_id,
       keyword_init: true
     )
@@ -1365,6 +1395,7 @@ module Aws::CloudFormation
     #   <p>The stacks being refactored.</p>
     #   @return [Array<Types::StackDefinition>]
     class CreateStackRefactorInput < Struct.new(
+      nil,
       :description,
       :enable_stack_creation,
       :resource_mappings,
@@ -1378,6 +1409,7 @@ module Aws::CloudFormation
     #   <p>The ID associated with the stack refactor created from the <a>CreateStackRefactor</a> action.</p>
     #   @return [String]
     class CreateStackRefactorOutput < Struct.new(
+      nil,
       :stack_refactor_id,
       keyword_init: true
     )
@@ -1583,6 +1615,7 @@ module Aws::CloudFormation
     #         conflicting operations.</p>
     #   @return [Types::ManagedExecution]
     class CreateStackSetInput < Struct.new(
+      nil,
       :stack_set_name,
       :description,
       :template_body,
@@ -1607,6 +1640,7 @@ module Aws::CloudFormation
     #   <p>The ID of the StackSet that you're creating.</p>
     #   @return [String]
     class CreateStackSetOutput < Struct.new(
+      nil,
       :stack_set_id,
       keyword_init: true
     )
@@ -1617,6 +1651,7 @@ module Aws::CloudFormation
     # @!attribute message
     #   @return [String]
     class CreatedButModifiedException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -1624,12 +1659,14 @@ module Aws::CloudFormation
     end
 
     class DeactivateOrganizationsAccessInput < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
     end
 
     class DeactivateOrganizationsAccessOutput < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1652,6 +1689,7 @@ module Aws::CloudFormation
     #           <code>Type</code>.</p>
     #   @return [String]
     class DeactivateTypeInput < Struct.new(
+      nil,
       :type_name,
       :type,
       :arn,
@@ -1661,6 +1699,7 @@ module Aws::CloudFormation
     end
 
     class DeactivateTypeOutput < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1675,6 +1714,7 @@ module Aws::CloudFormation
     #         Resource Name (ARN) that's associated with it.</p>
     #   @return [String]
     class DeleteChangeSetInput < Struct.new(
+      nil,
       :change_set_name,
       :stack_name,
       keyword_init: true
@@ -1684,6 +1724,7 @@ module Aws::CloudFormation
 
     # <p>The output for the <a>DeleteChangeSet</a> action.</p>
     class DeleteChangeSetOutput < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1693,6 +1734,7 @@ module Aws::CloudFormation
     #   <p>The name or Amazon Resource Name (ARN) of a generated template.</p>
     #   @return [String]
     class DeleteGeneratedTemplateInput < Struct.new(
+      nil,
       :generated_template_name,
       keyword_init: true
     )
@@ -1750,6 +1792,7 @@ module Aws::CloudFormation
     #            </ul>
     #   @return [String]
     class DeleteStackInput < Struct.new(
+      nil,
       :stack_name,
       :retain_resources,
       :role_arn,
@@ -1818,6 +1861,7 @@ module Aws::CloudFormation
     #            </ul>
     #   @return [String]
     class DeleteStackInstancesInput < Struct.new(
+      nil,
       :stack_set_name,
       :accounts,
       :deployment_targets,
@@ -1835,6 +1879,7 @@ module Aws::CloudFormation
     #   <p>The unique identifier for this StackSet operation.</p>
     #   @return [String]
     class DeleteStackInstancesOutput < Struct.new(
+      nil,
       :operation_id,
       keyword_init: true
     )
@@ -1865,6 +1910,7 @@ module Aws::CloudFormation
     #            </ul>
     #   @return [String]
     class DeleteStackSetInput < Struct.new(
+      nil,
       :stack_set_name,
       :call_as,
       keyword_init: true
@@ -1873,6 +1919,7 @@ module Aws::CloudFormation
     end
 
     class DeleteStackSetOutput < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1937,6 +1984,7 @@ module Aws::CloudFormation
     #            </ul>
     #   @return [String]
     class DeploymentTargets < Struct.new(
+      nil,
       :accounts,
       :accounts_url,
       :organizational_unit_ids,
@@ -1966,6 +2014,7 @@ module Aws::CloudFormation
     #         the Amazon Resource Name (ARN) assigned to the extension version when it is registered.</p>
     #   @return [String]
     class DeregisterTypeInput < Struct.new(
+      nil,
       :arn,
       :type,
       :type_name,
@@ -1976,6 +2025,7 @@ module Aws::CloudFormation
     end
 
     class DeregisterTypeOutput < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1986,6 +2036,7 @@ module Aws::CloudFormation
     #   <p>A string that identifies the next page of limits that you want to retrieve.</p>
     #   @return [String]
     class DescribeAccountLimitsInput < Struct.new(
+      nil,
       :next_token,
       keyword_init: true
     )
@@ -2002,6 +2053,7 @@ module Aws::CloudFormation
     #         no additional page exists, this value is null.</p>
     #   @return [String]
     class DescribeAccountLimitsOutput < Struct.new(
+      nil,
       :account_limits,
       :next_token,
       keyword_init: true
@@ -2025,6 +2077,7 @@ module Aws::CloudFormation
     #           <code>LogicalResourceId</code>.</p>
     #   @return [String]
     class DescribeChangeSetHooksInput < Struct.new(
+      nil,
       :change_set_name,
       :stack_name,
       :next_token,
@@ -2056,6 +2109,7 @@ module Aws::CloudFormation
     #   <p>The stack name.</p>
     #   @return [String]
     class DescribeChangeSetHooksOutput < Struct.new(
+      nil,
       :change_set_id,
       :change_set_name,
       :hooks,
@@ -2085,6 +2139,7 @@ module Aws::CloudFormation
     #         values.</p>
     #   @return [Boolean]
     class DescribeChangeSetInput < Struct.new(
+      nil,
       :change_set_name,
       :stack_name,
       :next_token,
@@ -2200,6 +2255,7 @@ module Aws::CloudFormation
     #            </note>
     #   @return [Boolean]
     class DescribeChangeSetOutput < Struct.new(
+      nil,
       :change_set_name,
       :change_set_id,
       :stack_id,
@@ -2230,6 +2286,7 @@ module Aws::CloudFormation
     #   <p>The name or Amazon Resource Name (ARN) of a generated template.</p>
     #   @return [String]
     class DescribeGeneratedTemplateInput < Struct.new(
+      nil,
       :generated_template_name,
       keyword_init: true
     )
@@ -2313,6 +2370,7 @@ module Aws::CloudFormation
     #         of each of the resources in the template.</p>
     #   @return [Integer]
     class DescribeGeneratedTemplateOutput < Struct.new(
+      nil,
       :generated_template_id,
       :generated_template_name,
       :resources,
@@ -2348,6 +2406,7 @@ module Aws::CloudFormation
     #            </ul>
     #   @return [String]
     class DescribeOrganizationsAccessInput < Struct.new(
+      nil,
       :call_as,
       keyword_init: true
     )
@@ -2358,6 +2417,7 @@ module Aws::CloudFormation
     #   <p>Presents the status of the <code>OrganizationAccess</code>.</p>
     #   @return [String]
     class DescribeOrganizationsAccessOutput < Struct.new(
+      nil,
       :status,
       keyword_init: true
     )
@@ -2371,6 +2431,7 @@ module Aws::CloudFormation
     #         account.</p>
     #   @return [String]
     class DescribePublisherInput < Struct.new(
+      nil,
       :publisher_id,
       keyword_init: true
     )
@@ -2392,6 +2453,7 @@ module Aws::CloudFormation
     #   <p>The URL to the publisher's profile with the identity provider.</p>
     #   @return [String]
     class DescribePublisherOutput < Struct.new(
+      nil,
       :publisher_id,
       :publisher_status,
       :identity_provider,
@@ -2405,6 +2467,7 @@ module Aws::CloudFormation
     #   <p>The Amazon Resource Name (ARN) of the resource scan.</p>
     #   @return [String]
     class DescribeResourceScanInput < Struct.new(
+      nil,
       :resource_scan_id,
       keyword_init: true
     )
@@ -2490,6 +2553,7 @@ module Aws::CloudFormation
     #   <p>The scan filters that were used.</p>
     #   @return [Array<Types::ScanFilter>]
     class DescribeResourceScanOutput < Struct.new(
+      nil,
       :resource_scan_id,
       :status,
       :status_reason,
@@ -2512,6 +2576,7 @@ module Aws::CloudFormation
     #         how long, may vary.</p>
     #   @return [String]
     class DescribeStackDriftDetectionStatusInput < Struct.new(
+      nil,
       :stack_drift_detection_id,
       keyword_init: true
     )
@@ -2589,6 +2654,7 @@ module Aws::CloudFormation
     #   <p>Time at which the stack drift detection operation was initiated.</p>
     #   @return [Time]
     class DescribeStackDriftDetectionStatusOutput < Struct.new(
+      nil,
       :stack_id,
       :stack_drift_detection_id,
       :stack_drift_status,
@@ -2618,6 +2684,7 @@ module Aws::CloudFormation
     #   <p>A string that identifies the next page of events that you want to retrieve.</p>
     #   @return [String]
     class DescribeStackEventsInput < Struct.new(
+      nil,
       :stack_name,
       :next_token,
       keyword_init: true
@@ -2634,6 +2701,7 @@ module Aws::CloudFormation
     #         no additional page exists, this value is null.</p>
     #   @return [String]
     class DescribeStackEventsOutput < Struct.new(
+      nil,
       :stack_events,
       :next_token,
       keyword_init: true
@@ -2671,6 +2739,7 @@ module Aws::CloudFormation
     #            </ul>
     #   @return [String]
     class DescribeStackInstanceInput < Struct.new(
+      nil,
       :stack_set_name,
       :stack_instance_account,
       :stack_instance_region,
@@ -2684,6 +2753,7 @@ module Aws::CloudFormation
     #   <p>The stack instance that matches the specified request parameters.</p>
     #   @return [Types::StackInstance]
     class DescribeStackInstanceOutput < Struct.new(
+      nil,
       :stack_instance,
       keyword_init: true
     )
@@ -2694,6 +2764,7 @@ module Aws::CloudFormation
     #   <p>The ID associated with the stack refactor created from the <a>CreateStackRefactor</a> action.</p>
     #   @return [String]
     class DescribeStackRefactorInput < Struct.new(
+      nil,
       :stack_refactor_id,
       keyword_init: true
     )
@@ -2722,6 +2793,7 @@ module Aws::CloudFormation
     #   <p>A detailed explanation for the stack refactor operation <code>Status</code>.</p>
     #   @return [String]
     class DescribeStackRefactorOutput < Struct.new(
+      nil,
       :description,
       :stack_refactor_id,
       :stack_ids,
@@ -2777,6 +2849,7 @@ module Aws::CloudFormation
     #         results.</p>
     #   @return [Integer]
     class DescribeStackResourceDriftsInput < Struct.new(
+      nil,
       :stack_name,
       :stack_resource_drift_status_filters,
       :next_token,
@@ -2803,6 +2876,7 @@ module Aws::CloudFormation
     #         request returns all results, <code>NextToken</code> is set to <code>null</code>.</p>
     #   @return [String]
     class DescribeStackResourceDriftsOutput < Struct.new(
+      nil,
       :stack_resource_drifts,
       :next_token,
       keyword_init: true
@@ -2827,6 +2901,7 @@ module Aws::CloudFormation
     #   <p>The logical name of the resource as specified in the template.</p>
     #   @return [String]
     class DescribeStackResourceInput < Struct.new(
+      nil,
       :stack_name,
       :logical_resource_id,
       keyword_init: true
@@ -2840,6 +2915,7 @@ module Aws::CloudFormation
     #         specified resource in the specified stack.</p>
     #   @return [Types::StackResourceDetail]
     class DescribeStackResourceOutput < Struct.new(
+      nil,
       :stack_resource_detail,
       keyword_init: true
     )
@@ -2875,6 +2951,7 @@ module Aws::CloudFormation
     #         specify <code>StackName</code>.</p>
     #   @return [String]
     class DescribeStackResourcesInput < Struct.new(
+      nil,
       :stack_name,
       :logical_resource_id,
       :physical_resource_id,
@@ -2888,6 +2965,7 @@ module Aws::CloudFormation
     #   <p>A list of <code>StackResource</code> structures.</p>
     #   @return [Array<Types::StackResource>]
     class DescribeStackResourcesOutput < Struct.new(
+      nil,
       :stack_resources,
       keyword_init: true
     )
@@ -2917,6 +2995,7 @@ module Aws::CloudFormation
     #            </ul>
     #   @return [String]
     class DescribeStackSetInput < Struct.new(
+      nil,
       :stack_set_name,
       :call_as,
       keyword_init: true
@@ -2950,6 +3029,7 @@ module Aws::CloudFormation
     #            </ul>
     #   @return [String]
     class DescribeStackSetOperationInput < Struct.new(
+      nil,
       :stack_set_name,
       :operation_id,
       :call_as,
@@ -2962,6 +3042,7 @@ module Aws::CloudFormation
     #   <p>The specified StackSet operation.</p>
     #   @return [Types::StackSetOperation]
     class DescribeStackSetOperationOutput < Struct.new(
+      nil,
       :stack_set_operation,
       keyword_init: true
     )
@@ -2972,6 +3053,7 @@ module Aws::CloudFormation
     #   <p>The specified StackSet.</p>
     #   @return [Types::StackSet]
     class DescribeStackSetOutput < Struct.new(
+      nil,
       :stack_set,
       keyword_init: true
     )
@@ -3008,6 +3090,7 @@ module Aws::CloudFormation
     #   <p>A string that identifies the next page of stacks that you want to retrieve.</p>
     #   @return [String]
     class DescribeStacksInput < Struct.new(
+      nil,
       :stack_name,
       :next_token,
       keyword_init: true
@@ -3024,6 +3107,7 @@ module Aws::CloudFormation
     #         no additional page exists, this value is null.</p>
     #   @return [String]
     class DescribeStacksOutput < Struct.new(
+      nil,
       :stacks,
       :next_token,
       keyword_init: true
@@ -3061,6 +3145,7 @@ module Aws::CloudFormation
     #   <p>The version number of a public third-party extension.</p>
     #   @return [String]
     class DescribeTypeInput < Struct.new(
+      nil,
       :type,
       :type_name,
       :arn,
@@ -3300,6 +3385,7 @@ module Aws::CloudFormation
     #           <i>CloudFormation User Guide</i>.</p>
     #   @return [Boolean]
     class DescribeTypeOutput < Struct.new(
+      nil,
       :arn,
       :type,
       :type_name,
@@ -3338,6 +3424,7 @@ module Aws::CloudFormation
     #         request using <a>RegisterType</a>.</p>
     #   @return [String]
     class DescribeTypeRegistrationInput < Struct.new(
+      nil,
       :registration_token,
       keyword_init: true
     )
@@ -3362,6 +3449,7 @@ module Aws::CloudFormation
     #           <code>COMPLETE</code>, this will be <code>null</code>.</p>
     #   @return [String]
     class DescribeTypeRegistrationOutput < Struct.new(
+      nil,
       :progress_status,
       :description,
       :type_arn,
@@ -3378,6 +3466,7 @@ module Aws::CloudFormation
     #   <p>The logical names of any resources you want to use as filters.</p>
     #   @return [Array<String>]
     class DetectStackDriftInput < Struct.new(
+      nil,
       :stack_name,
       :logical_resource_ids,
       keyword_init: true
@@ -3392,6 +3481,7 @@ module Aws::CloudFormation
     #         how long, may vary.</p>
     #   @return [String]
     class DetectStackDriftOutput < Struct.new(
+      nil,
       :stack_drift_detection_id,
       keyword_init: true
     )
@@ -3405,6 +3495,7 @@ module Aws::CloudFormation
     #   <p>The logical name of the resource for which to return drift information.</p>
     #   @return [String]
     class DetectStackResourceDriftInput < Struct.new(
+      nil,
       :stack_name,
       :logical_resource_id,
       keyword_init: true
@@ -3418,6 +3509,7 @@ module Aws::CloudFormation
     #         differences detected.</p>
     #   @return [Types::StackResourceDrift]
     class DetectStackResourceDriftOutput < Struct.new(
+      nil,
       :stack_resource_drift,
       keyword_init: true
     )
@@ -3456,6 +3548,7 @@ module Aws::CloudFormation
     #            </ul>
     #   @return [String]
     class DetectStackSetDriftInput < Struct.new(
+      nil,
       :stack_set_name,
       :operation_preferences,
       :operation_id,
@@ -3471,6 +3564,7 @@ module Aws::CloudFormation
     #         the progress of the drift detection operation.</p>
     #   @return [String]
     class DetectStackSetDriftOutput < Struct.new(
+      nil,
       :operation_id,
       keyword_init: true
     )
@@ -3495,6 +3589,7 @@ module Aws::CloudFormation
     #   <p>A list of <code>Parameter</code> structures that specify input parameters.</p>
     #   @return [Array<Types::Parameter>]
     class EstimateTemplateCostInput < Struct.new(
+      nil,
       :template_body,
       :template_url,
       :parameters,
@@ -3509,6 +3604,7 @@ module Aws::CloudFormation
     #         required to run the template.</p>
     #   @return [String]
     class EstimateTemplateCostOutput < Struct.new(
+      nil,
       :url,
       keyword_init: true
     )
@@ -3558,6 +3654,7 @@ module Aws::CloudFormation
     #            </p>
     #   @return [Boolean]
     class ExecuteChangeSetInput < Struct.new(
+      nil,
       :change_set_name,
       :stack_name,
       :client_request_token,
@@ -3570,6 +3667,7 @@ module Aws::CloudFormation
 
     # <p>The output for the <a>ExecuteChangeSet</a> action.</p>
     class ExecuteChangeSetOutput < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -3579,6 +3677,7 @@ module Aws::CloudFormation
     #   <p>The ID associated with the stack refactor created from the <a>CreateStackRefactor</a> action.</p>
     #   @return [String]
     class ExecuteStackRefactorInput < Struct.new(
+      nil,
       :stack_refactor_id,
       keyword_init: true
     )
@@ -3601,6 +3700,7 @@ module Aws::CloudFormation
     #      the <code>Export</code> field in the associated stack's <code>Outputs</code> section.</p>
     #   @return [String]
     class Export < Struct.new(
+      nil,
       :exporting_stack_id,
       :name,
       :value,
@@ -3613,6 +3713,7 @@ module Aws::CloudFormation
     # @!attribute message
     #   @return [String]
     class GeneratedTemplateNotFoundException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -3642,6 +3743,7 @@ module Aws::CloudFormation
     #               </code>.</p>
     #   @return [String]
     class GetGeneratedTemplateInput < Struct.new(
+      nil,
       :format,
       :generated_template_name,
       keyword_init: true
@@ -3691,6 +3793,7 @@ module Aws::CloudFormation
     #           <code>Language</code> parameter.</p>
     #   @return [String]
     class GetGeneratedTemplateOutput < Struct.new(
+      nil,
       :status,
       :template_body,
       keyword_init: true
@@ -3704,6 +3807,7 @@ module Aws::CloudFormation
     #         get.</p>
     #   @return [String]
     class GetStackPolicyInput < Struct.new(
+      nil,
       :stack_name,
       keyword_init: true
     )
@@ -3716,6 +3820,7 @@ module Aws::CloudFormation
     #         <i>CloudFormation User Guide</i>.)</p>
     #   @return [String]
     class GetStackPolicyOutput < Struct.new(
+      nil,
       :stack_policy_body,
       keyword_init: true
     )
@@ -3749,6 +3854,7 @@ module Aws::CloudFormation
     #           <code>Processed</code>.</p>
     #   @return [String]
     class GetTemplateInput < Struct.new(
+      nil,
       :stack_name,
       :change_set_name,
       :template_stage,
@@ -3769,6 +3875,7 @@ module Aws::CloudFormation
     #         change set, the <code>Processed</code> template becomes available.</p>
     #   @return [Array<String>]
     class GetTemplateOutput < Struct.new(
+      nil,
       :template_body,
       :stages_available,
       keyword_init: true
@@ -3829,6 +3936,7 @@ module Aws::CloudFormation
     #   <p>Specifies options for the <code>GetTemplateSummary</code> API action.</p>
     #   @return [Types::TemplateSummaryConfig]
     class GetTemplateSummaryInput < Struct.new(
+      nil,
       :template_body,
       :template_url,
       :stack_name,
@@ -3885,6 +3993,7 @@ module Aws::CloudFormation
     #   <p>An object that contains any warnings returned.</p>
     #   @return [Types::Warnings]
     class GetTemplateSummaryOutput < Struct.new(
+      nil,
       :parameters,
       :description,
       :capabilities,
@@ -3904,6 +4013,7 @@ module Aws::CloudFormation
     # @!attribute message
     #   @return [String]
     class HookResultNotFoundException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -3975,6 +4085,7 @@ module Aws::CloudFormation
     #       <code>TargetId</code> filters.</p>
     #   @return [String]
     class HookResultSummary < Struct.new(
+      nil,
       :hook_result_id,
       :invocation_point,
       :failure_mode,
@@ -4031,6 +4142,7 @@ module Aws::CloudFormation
     #            </ul>
     #   @return [String]
     class ImportStacksToStackSetInput < Struct.new(
+      nil,
       :stack_set_name,
       :stack_ids,
       :stack_ids_url,
@@ -4047,6 +4159,7 @@ module Aws::CloudFormation
     #   <p>The unique identifier for the StackSet operation.</p>
     #   @return [String]
     class ImportStacksToStackSetOutput < Struct.new(
+      nil,
       :operation_id,
       keyword_init: true
     )
@@ -4057,6 +4170,7 @@ module Aws::CloudFormation
     # @!attribute message
     #   @return [String]
     class InsufficientCapabilitiesException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -4068,6 +4182,7 @@ module Aws::CloudFormation
     # @!attribute message
     #   @return [String]
     class InvalidChangeSetStatusException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -4078,6 +4193,7 @@ module Aws::CloudFormation
     # @!attribute message
     #   @return [String]
     class InvalidOperationException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -4089,6 +4205,7 @@ module Aws::CloudFormation
     # @!attribute message
     #   @return [String]
     class InvalidStateTransitionException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -4101,6 +4218,7 @@ module Aws::CloudFormation
     # @!attribute message
     #   @return [String]
     class LimitExceededException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -4117,6 +4235,7 @@ module Aws::CloudFormation
     #         identifies the next page of change sets that you want to retrieve.</p>
     #   @return [String]
     class ListChangeSetsInput < Struct.new(
+      nil,
       :stack_name,
       :next_token,
       keyword_init: true
@@ -4134,6 +4253,7 @@ module Aws::CloudFormation
     #         there is no additional page, this value is <code>null</code>.</p>
     #   @return [String]
     class ListChangeSetsOutput < Struct.new(
+      nil,
       :summaries,
       :next_token,
       keyword_init: true
@@ -4146,6 +4266,7 @@ module Aws::CloudFormation
     #         the next page of exported output values that you asked to retrieve.</p>
     #   @return [String]
     class ListExportsInput < Struct.new(
+      nil,
       :next_token,
       keyword_init: true
     )
@@ -4160,6 +4281,7 @@ module Aws::CloudFormation
     #         of exports. If there is no additional page, this value is null.</p>
     #   @return [String]
     class ListExportsOutput < Struct.new(
+      nil,
       :exports,
       :next_token,
       keyword_init: true
@@ -4177,6 +4299,7 @@ module Aws::CloudFormation
     #         will return at most 50 results in each response. The maximum value is 100.</p>
     #   @return [Integer]
     class ListGeneratedTemplatesInput < Struct.new(
+      nil,
       :next_token,
       :max_results,
       keyword_init: true
@@ -4194,6 +4317,7 @@ module Aws::CloudFormation
     #         results, <code>NextToken</code> is set to an empty string.</p>
     #   @return [String]
     class ListGeneratedTemplatesOutput < Struct.new(
+      nil,
       :summaries,
       :next_token,
       keyword_init: true
@@ -4247,6 +4371,7 @@ module Aws::CloudFormation
     #   <p>A string that identifies the next page of events that you want to retrieve.</p>
     #   @return [String]
     class ListHookResultsInput < Struct.new(
+      nil,
       :target_type,
       :target_id,
       :type_arn,
@@ -4272,6 +4397,7 @@ module Aws::CloudFormation
     #   <p>Pagination token, <code>null</code> or empty if no more results.</p>
     #   @return [String]
     class ListHookResultsOutput < Struct.new(
+      nil,
       :target_type,
       :target_id,
       :hook_results,
@@ -4290,6 +4416,7 @@ module Aws::CloudFormation
     #         the next page of stacks that are importing the specified exported output value.</p>
     #   @return [String]
     class ListImportsInput < Struct.new(
+      nil,
       :export_name,
       :next_token,
       keyword_init: true
@@ -4305,6 +4432,7 @@ module Aws::CloudFormation
     #         value is null.</p>
     #   @return [String]
     class ListImportsOutput < Struct.new(
+      nil,
       :imports,
       :next_token,
       keyword_init: true
@@ -4329,6 +4457,7 @@ module Aws::CloudFormation
     #         action will return up to 100 results in each response. The maximum value is 100.</p>
     #   @return [Integer]
     class ListResourceScanRelatedResourcesInput < Struct.new(
+      nil,
       :resource_scan_id,
       :resources,
       :next_token,
@@ -4350,6 +4479,7 @@ module Aws::CloudFormation
     #         is set to an empty string.</p>
     #   @return [String]
     class ListResourceScanRelatedResourcesOutput < Struct.new(
+      nil,
       :related_resources,
       :next_token,
       keyword_init: true
@@ -4384,6 +4514,7 @@ module Aws::CloudFormation
     #         will return at most 100 results in each response. The maximum value is 100.</p>
     #   @return [Integer]
     class ListResourceScanResourcesInput < Struct.new(
+      nil,
       :resource_scan_id,
       :resource_identifier,
       :resource_type_prefix,
@@ -4407,6 +4538,7 @@ module Aws::CloudFormation
     #         results, <code>NextToken</code> is set to an empty string.</p>
     #   @return [String]
     class ListResourceScanResourcesOutput < Struct.new(
+      nil,
       :resources,
       :next_token,
       keyword_init: true
@@ -4427,6 +4559,7 @@ module Aws::CloudFormation
     #           <code>FULL</code>.</p>
     #   @return [String]
     class ListResourceScansInput < Struct.new(
+      nil,
       :next_token,
       :max_results,
       :scan_type_filter,
@@ -4445,6 +4578,7 @@ module Aws::CloudFormation
     #           <code>NextToken</code> is set to an empty string.</p>
     #   @return [String]
     class ListResourceScansOutput < Struct.new(
+      nil,
       :resource_scan_summaries,
       :next_token,
       keyword_init: true
@@ -4521,6 +4655,7 @@ module Aws::CloudFormation
     #            </ul>
     #   @return [String]
     class ListStackInstanceResourceDriftsInput < Struct.new(
+      nil,
       :stack_set_name,
       :next_token,
       :max_results,
@@ -4546,6 +4681,7 @@ module Aws::CloudFormation
     #         object's <code>NextToken</code> parameter is set to <code>null</code>.</p>
     #   @return [String]
     class ListStackInstanceResourceDriftsOutput < Struct.new(
+      nil,
       :summaries,
       :next_token,
       keyword_init: true
@@ -4598,6 +4734,7 @@ module Aws::CloudFormation
     #            </ul>
     #   @return [String]
     class ListStackInstancesInput < Struct.new(
+      nil,
       :stack_set_name,
       :next_token,
       :max_results,
@@ -4621,6 +4758,7 @@ module Aws::CloudFormation
     #         returns all results, <code>NextToken</code> is set to <code>null</code>.</p>
     #   @return [String]
     class ListStackInstancesOutput < Struct.new(
+      nil,
       :summaries,
       :next_token,
       keyword_init: true
@@ -4644,6 +4782,7 @@ module Aws::CloudFormation
     #         results.</p>
     #   @return [Integer]
     class ListStackRefactorActionsInput < Struct.new(
+      nil,
       :stack_refactor_id,
       :next_token,
       :max_results,
@@ -4662,6 +4801,7 @@ module Aws::CloudFormation
     #           <code>NextToken</code> is set to <code>null</code>.</p>
     #   @return [String]
     class ListStackRefactorActionsOutput < Struct.new(
+      nil,
       :stack_refactor_actions,
       :next_token,
       keyword_init: true
@@ -4686,6 +4826,7 @@ module Aws::CloudFormation
     #         results.</p>
     #   @return [Integer]
     class ListStackRefactorsInput < Struct.new(
+      nil,
       :execution_status_filter,
       :next_token,
       :max_results,
@@ -4736,6 +4877,7 @@ module Aws::CloudFormation
     #           <code>NextToken</code> is set to <code>null</code>.</p>
     #   @return [String]
     class ListStackRefactorsOutput < Struct.new(
+      nil,
       :stack_refactor_summaries,
       :next_token,
       keyword_init: true
@@ -4761,6 +4903,7 @@ module Aws::CloudFormation
     #         retrieve.</p>
     #   @return [String]
     class ListStackResourcesInput < Struct.new(
+      nil,
       :stack_name,
       :next_token,
       keyword_init: true
@@ -4777,6 +4920,7 @@ module Aws::CloudFormation
     #         no additional page exists, this value is null.</p>
     #   @return [String]
     class ListStackResourcesOutput < Struct.new(
+      nil,
       :stack_resource_summaries,
       :next_token,
       keyword_init: true
@@ -4816,6 +4960,7 @@ module Aws::CloudFormation
     #            </ul>
     #   @return [String]
     class ListStackSetAutoDeploymentTargetsInput < Struct.new(
+      nil,
       :stack_set_name,
       :next_token,
       :max_results,
@@ -4835,6 +4980,7 @@ module Aws::CloudFormation
     #         is set to an empty string.</p>
     #   @return [String]
     class ListStackSetAutoDeploymentTargetsOutput < Struct.new(
+      nil,
       :summaries,
       :next_token,
       keyword_init: true
@@ -4885,6 +5031,7 @@ module Aws::CloudFormation
     #   <p>The filter to apply to operation results.</p>
     #   @return [Array<Types::OperationResultFilter>]
     class ListStackSetOperationResultsInput < Struct.new(
+      nil,
       :stack_set_name,
       :operation_id,
       :next_token,
@@ -4908,6 +5055,7 @@ module Aws::CloudFormation
     #         results, <code>NextToken</code> is set to <code>null</code>.</p>
     #   @return [String]
     class ListStackSetOperationResultsOutput < Struct.new(
+      nil,
       :summaries,
       :next_token,
       keyword_init: true
@@ -4951,6 +5099,7 @@ module Aws::CloudFormation
     #            </ul>
     #   @return [String]
     class ListStackSetOperationsInput < Struct.new(
+      nil,
       :stack_set_name,
       :next_token,
       :max_results,
@@ -4971,6 +5120,7 @@ module Aws::CloudFormation
     #         results, <code>NextToken</code> is set to <code>null</code>.</p>
     #   @return [String]
     class ListStackSetOperationsOutput < Struct.new(
+      nil,
       :summaries,
       :next_token,
       keyword_init: true
@@ -5014,6 +5164,7 @@ module Aws::CloudFormation
     #            </ul>
     #   @return [String]
     class ListStackSetsInput < Struct.new(
+      nil,
       :next_token,
       :max_results,
       :status,
@@ -5034,6 +5185,7 @@ module Aws::CloudFormation
     #         returns all results, <code>NextToken</code> is set to <code>null</code>.</p>
     #   @return [String]
     class ListStackSetsOutput < Struct.new(
+      nil,
       :summaries,
       :next_token,
       keyword_init: true
@@ -5051,6 +5203,7 @@ module Aws::CloudFormation
     #           <code>StackStatus</code> parameter of the <a>Stack</a> data type.</p>
     #   @return [Array<String>]
     class ListStacksInput < Struct.new(
+      nil,
       :next_token,
       :stack_status_filter,
       keyword_init: true
@@ -5068,6 +5221,7 @@ module Aws::CloudFormation
     #         no additional page exists, this value is null.</p>
     #   @return [String]
     class ListStacksOutput < Struct.new(
+      nil,
       :stack_summaries,
       :next_token,
       keyword_init: true
@@ -5108,6 +5262,7 @@ module Aws::CloudFormation
     #         object's <code>NextToken</code> parameter is set to <code>null</code>.</p>
     #   @return [String]
     class ListTypeRegistrationsInput < Struct.new(
+      nil,
       :type,
       :type_name,
       :type_arn,
@@ -5131,6 +5286,7 @@ module Aws::CloudFormation
     #           <code>NextToken</code> is set to <code>null</code>.</p>
     #   @return [String]
     class ListTypeRegistrationsOutput < Struct.new(
+      nil,
       :registration_token_list,
       :next_token,
       keyword_init: true
@@ -5190,6 +5346,7 @@ module Aws::CloudFormation
     #            <p>Extensions published by Amazon aren't assigned a publisher ID.</p>
     #   @return [String]
     class ListTypeVersionsInput < Struct.new(
+      nil,
       :type,
       :type_name,
       :arn,
@@ -5213,6 +5370,7 @@ module Aws::CloudFormation
     #           <code>NextToken</code> is set to <code>null</code>.</p>
     #   @return [String]
     class ListTypeVersionsOutput < Struct.new(
+      nil,
       :type_version_summaries,
       :next_token,
       keyword_init: true
@@ -5311,6 +5469,7 @@ module Aws::CloudFormation
     #         object's <code>NextToken</code> parameter is set to <code>null</code>.</p>
     #   @return [String]
     class ListTypesInput < Struct.new(
+      nil,
       :visibility,
       :provisioning_type,
       :deprecated_status,
@@ -5334,6 +5493,7 @@ module Aws::CloudFormation
     #           <code>NextToken</code> is set to <code>null</code>.</p>
     #   @return [String]
     class ListTypesOutput < Struct.new(
+      nil,
       :type_summaries,
       :next_token,
       keyword_init: true
@@ -5351,6 +5511,7 @@ module Aws::CloudFormation
     #      extension's handlers.</p>
     #   @return [String]
     class LoggingConfig < Struct.new(
+      nil,
       :log_role_arn,
       :log_group_name,
       keyword_init: true
@@ -5374,6 +5535,7 @@ module Aws::CloudFormation
     #      order.</p>
     #   @return [Boolean]
     class ManagedExecution < Struct.new(
+      nil,
       :active,
       keyword_init: true
     )
@@ -5408,6 +5570,7 @@ module Aws::CloudFormation
     #       CloudFormation templates</a> in the <i>CloudFormation User Guide</i>.</p>
     #   @return [String]
     class ModuleInfo < Struct.new(
+      nil,
       :type_hierarchy,
       :logical_id_hierarchy,
       keyword_init: true
@@ -5419,6 +5582,7 @@ module Aws::CloudFormation
     # @!attribute message
     #   @return [String]
     class NameAlreadyExistsException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -5429,6 +5593,7 @@ module Aws::CloudFormation
     # @!attribute message
     #   @return [String]
     class OperationIdAlreadyExistsException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -5440,6 +5605,7 @@ module Aws::CloudFormation
     # @!attribute message
     #   @return [String]
     class OperationInProgressException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -5450,6 +5616,7 @@ module Aws::CloudFormation
     # @!attribute message
     #   @return [String]
     class OperationNotFoundException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -5464,6 +5631,7 @@ module Aws::CloudFormation
     #   <p>The value to filter by.</p>
     #   @return [String]
     class OperationResultFilter < Struct.new(
+      nil,
       :name,
       :values,
       keyword_init: true
@@ -5476,6 +5644,7 @@ module Aws::CloudFormation
     # @!attribute message
     #   @return [String]
     class OperationStatusCheckFailedException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -5496,6 +5665,7 @@ module Aws::CloudFormation
     #   <p>The name of the export associated with the output.</p>
     #   @return [String]
     class Output < Struct.new(
+      nil,
       :output_key,
       :output_value,
       :description,
@@ -5524,6 +5694,7 @@ module Aws::CloudFormation
     #       <i>CloudFormation User Guide</i>.</p>
     #   @return [String]
     class Parameter < Struct.new(
+      nil,
       :parameter_key,
       :parameter_value,
       :use_previous_value,
@@ -5540,6 +5711,7 @@ module Aws::CloudFormation
     #   <p>A list of values that are permitted for a parameter.</p>
     #   @return [Array<String>]
     class ParameterConstraints < Struct.new(
+      nil,
       :allowed_values,
       keyword_init: true
     )
@@ -5567,6 +5739,7 @@ module Aws::CloudFormation
     #   <p>The criteria that CloudFormation uses to validate parameter values.</p>
     #   @return [Types::ParameterConstraints]
     class ParameterDeclaration < Struct.new(
+      nil,
       :parameter_key,
       :default_value,
       :parameter_type,
@@ -5589,6 +5762,7 @@ module Aws::CloudFormation
     #   <p>The resource context value.</p>
     #   @return [String]
     class PhysicalResourceIdContextKeyValuePair < Struct.new(
+      nil,
       :key,
       :value,
       keyword_init: true
@@ -5632,6 +5806,7 @@ module Aws::CloudFormation
     #            </ul>
     #   @return [String]
     class PropertyDifference < Struct.new(
+      nil,
       :property_path,
       :expected_value,
       :actual_value,
@@ -5671,6 +5846,7 @@ module Aws::CloudFormation
     #         automatically sets the first version number to be <code>1.0.0</code>.</p>
     #   @return [String]
     class PublishTypeInput < Struct.new(
+      nil,
       :type,
       :arn,
       :type_name,
@@ -5684,6 +5860,7 @@ module Aws::CloudFormation
     #   <p>The Amazon Resource Name (ARN) assigned to the public extension upon publication.</p>
     #   @return [String]
     class PublishTypeOutput < Struct.new(
+      nil,
       :public_type_arn,
       keyword_init: true
     )
@@ -5719,6 +5896,7 @@ module Aws::CloudFormation
     #           CLI</a>.</p>
     #   @return [String]
     class RecordHandlerProgressInput < Struct.new(
+      nil,
       :bearer_token,
       :operation_status,
       :current_operation_status,
@@ -5732,6 +5910,7 @@ module Aws::CloudFormation
     end
 
     class RecordHandlerProgressOutput < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -5750,6 +5929,7 @@ module Aws::CloudFormation
     #           <i>CloudFormation Command Line Interface (CLI) User Guide</i>.</p>
     #   @return [String]
     class RegisterPublisherInput < Struct.new(
+      nil,
       :accept_terms_and_conditions,
       :connection_arn,
       keyword_init: true
@@ -5761,6 +5941,7 @@ module Aws::CloudFormation
     #   <p>The ID assigned this account by CloudFormation for publishing extensions.</p>
     #   @return [String]
     class RegisterPublisherOutput < Struct.new(
+      nil,
       :publisher_id,
       keyword_init: true
     )
@@ -5862,6 +6043,7 @@ module Aws::CloudFormation
     #         times.</p>
     #   @return [String]
     class RegisterTypeInput < Struct.new(
+      nil,
       :type,
       :type_name,
       :schema_handler_package,
@@ -5879,6 +6061,7 @@ module Aws::CloudFormation
     #         returns information about the status and IDs of the extension registration.</p>
     #   @return [String]
     class RegisterTypeOutput < Struct.new(
+      nil,
       :registration_token,
       keyword_init: true
     )
@@ -5909,6 +6092,7 @@ module Aws::CloudFormation
     #   <p>A list of the major versions of the extension type that the macro supports.</p>
     #   @return [Array<Integer>]
     class RequiredActivatedType < Struct.new(
+      nil,
       :type_name_alias,
       :original_type_name,
       :publisher_id,
@@ -6006,6 +6190,7 @@ module Aws::CloudFormation
     #      executed.</p>
     #   @return [String]
     class ResourceChange < Struct.new(
+      nil,
       :policy_action,
       :action,
       :logical_resource_id,
@@ -6088,6 +6273,7 @@ module Aws::CloudFormation
     #      for <code>CausingEntity</code>.</p>
     #   @return [String]
     class ResourceChangeDetail < Struct.new(
+      nil,
       :target,
       :evaluation,
       :change_source,
@@ -6119,6 +6305,7 @@ module Aws::CloudFormation
     #       "MyDDBTable"</code>. For more information, see <a href="https://docs.aws.amazon.com/cloudformation-cli/latest/userguide/resource-type-schema.html#schema-properties-primaryidentifier">primaryIdentifier</a> in the <i>CloudFormation Command Line Interface (CLI) User Guide</i>.</p>
     #   @return [Hash<String, String>]
     class ResourceDefinition < Struct.new(
+      nil,
       :resource_type,
       :logical_resource_id,
       :resource_identifier,
@@ -6190,6 +6377,7 @@ module Aws::CloudFormation
     #   <p>The warnings generated for this resource.</p>
     #   @return [Array<Types::WarningDetail>]
     class ResourceDetail < Struct.new(
+      nil,
       :resource_type,
       :logical_resource_id,
       :resource_identifier,
@@ -6218,6 +6406,7 @@ module Aws::CloudFormation
     #           <code>AWS::S3::Bucket</code> resources.</p>
     #   @return [Array<String>]
     class ResourceIdentifierSummary < Struct.new(
+      nil,
       :resource_type,
       :logical_resource_ids,
       :resource_identifiers,
@@ -6234,6 +6423,7 @@ module Aws::CloudFormation
     #   <p>The logical name of the resource specified in the template.</p>
     #   @return [String]
     class ResourceLocation < Struct.new(
+      nil,
       :stack_name,
       :logical_resource_id,
       keyword_init: true
@@ -6252,6 +6442,7 @@ module Aws::CloudFormation
     #      resource being refactored.</p>
     #   @return [Types::ResourceLocation]
     class ResourceMapping < Struct.new(
+      nil,
       :source,
       :destination,
       keyword_init: true
@@ -6263,6 +6454,7 @@ module Aws::CloudFormation
     # @!attribute message
     #   @return [String]
     class ResourceScanInProgressException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -6285,6 +6477,7 @@ module Aws::CloudFormation
     # @!attribute message
     #   @return [String]
     class ResourceScanLimitExceededException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -6295,6 +6488,7 @@ module Aws::CloudFormation
     # @!attribute message
     #   @return [String]
     class ResourceScanNotFoundException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -6360,6 +6554,7 @@ module Aws::CloudFormation
     #   <p>The scan type that has been completed.</p>
     #   @return [String]
     class ResourceScanSummary < Struct.new(
+      nil,
       :resource_scan_id,
       :status,
       :status_reason,
@@ -6418,6 +6613,7 @@ module Aws::CloudFormation
     #            </ul>
     #   @return [String]
     class ResourceTargetDefinition < Struct.new(
+      nil,
       :attribute,
       :name,
       :requires_recreation,
@@ -6446,6 +6642,7 @@ module Aws::CloudFormation
     #      actual property value (for example, <code>MyS3Bucket</code>).</p>
     #   @return [Hash<String, String>]
     class ResourceToImport < Struct.new(
+      nil,
       :resource_type,
       :logical_resource_id,
       :resource_identifier,
@@ -6497,6 +6694,7 @@ module Aws::CloudFormation
     #      disposing of old resources immediately once the operation completes.</p>
     #   @return [Integer]
     class RollbackConfiguration < Struct.new(
+      nil,
       :rollback_triggers,
       :monitoring_time_in_minutes,
       keyword_init: true
@@ -6522,6 +6720,7 @@ module Aws::CloudFormation
     #            </p>
     #   @return [Boolean]
     class RollbackStackInput < Struct.new(
+      nil,
       :stack_name,
       :role_arn,
       :client_request_token,
@@ -6535,6 +6734,7 @@ module Aws::CloudFormation
     #   <p>Unique identifier of the stack.</p>
     #   @return [String]
     class RollbackStackOutput < Struct.new(
+      nil,
       :stack_id,
       keyword_init: true
     )
@@ -6553,6 +6753,7 @@ module Aws::CloudFormation
     #   <p>The resource type of the rollback trigger. Specify either <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/TemplateReference/aws-resource-cloudwatch-alarm.html">AWS::CloudWatch::Alarm</a> or <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/TemplateReference/aws-resource-cloudwatch-compositealarm.html">AWS::CloudWatch::CompositeAlarm</a> resource types.</p>
     #   @return [String]
     class RollbackTrigger < Struct.new(
+      nil,
       :arn,
       :type,
       keyword_init: true
@@ -6572,6 +6773,7 @@ module Aws::CloudFormation
     #       <code>AWS::S3::*</code>.</p>
     #   @return [Array<String>]
     class ScanFilter < Struct.new(
+      nil,
       :types,
       keyword_init: true
     )
@@ -6599,6 +6801,7 @@ module Aws::CloudFormation
     #   <p>If <code>true</code>, the resource is managed by a CloudFormation stack.</p>
     #   @return [Boolean]
     class ScannedResource < Struct.new(
+      nil,
       :resource_type,
       :resource_identifier,
       :managed_by_stack,
@@ -6624,6 +6827,7 @@ module Aws::CloudFormation
     #       "MyDDBTable"</code>. For more information, see <a href="https://docs.aws.amazon.com/cloudformation-cli/latest/userguide/resource-type-schema.html#schema-properties-primaryidentifier">primaryIdentifier</a> in the <i>CloudFormation Command Line Interface (CLI) User Guide</i>.</p>
     #   @return [Hash<String, String>]
     class ScannedResourceIdentifier < Struct.new(
+      nil,
       :resource_type,
       :resource_identifier,
       keyword_init: true
@@ -6649,6 +6853,7 @@ module Aws::CloudFormation
     #         parameter, but not both.</p>
     #   @return [String]
     class SetStackPolicyInput < Struct.new(
+      nil,
       :stack_name,
       :stack_policy_body,
       :stack_policy_url,
@@ -6686,6 +6891,7 @@ module Aws::CloudFormation
     #           <code>TypeName</code>.</p>
     #   @return [String]
     class SetTypeConfigurationInput < Struct.new(
+      nil,
       :type_arn,
       :configuration,
       :configuration_alias,
@@ -6703,6 +6909,7 @@ module Aws::CloudFormation
     #           <code>TypeName</code>.</p>
     #   @return [String]
     class SetTypeConfigurationOutput < Struct.new(
+      nil,
       :configuration_arn,
       keyword_init: true
     )
@@ -6730,6 +6937,7 @@ module Aws::CloudFormation
     #         the Amazon Resource Name (ARN) assigned to the extension version when it is registered.</p>
     #   @return [String]
     class SetTypeDefaultVersionInput < Struct.new(
+      nil,
       :arn,
       :type,
       :type_name,
@@ -6740,6 +6948,7 @@ module Aws::CloudFormation
     end
 
     class SetTypeDefaultVersionOutput < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -6765,6 +6974,7 @@ module Aws::CloudFormation
     #         CloudFormation to immediately fail the stack creation or update.</p>
     #   @return [String]
     class SignalResourceInput < Struct.new(
+      nil,
       :stack_name,
       :logical_resource_id,
       :unique_id,
@@ -6897,6 +7107,7 @@ module Aws::CloudFormation
     #       CloudFormation stack creation events</a> in the <i>CloudFormation User Guide</i>.</p>
     #   @return [String]
     class Stack < Struct.new(
+      nil,
       :stack_id,
       :stack_name,
       :change_set_id,
@@ -6938,6 +7149,7 @@ module Aws::CloudFormation
     #   <p>The desired final state of the stack template.</p>
     #   @return [String]
     class StackDefinition < Struct.new(
+      nil,
       :stack_name,
       :template_body,
       :template_url,
@@ -6981,6 +7193,7 @@ module Aws::CloudFormation
     #      individual resources that support drift detection.</p>
     #   @return [Time]
     class StackDriftInformation < Struct.new(
+      nil,
       :stack_drift_status,
       :last_check_timestamp,
       keyword_init: true
@@ -7023,6 +7236,7 @@ module Aws::CloudFormation
     #      individual resources that support drift detection.</p>
     #   @return [Time]
     class StackDriftInformationSummary < Struct.new(
+      nil,
       :stack_drift_status,
       :last_check_timestamp,
       keyword_init: true
@@ -7125,6 +7339,7 @@ module Aws::CloudFormation
     #            </ul>
     #   @return [String]
     class StackEvent < Struct.new(
+      nil,
       :stack_id,
       :event_id,
       :stack_name,
@@ -7254,6 +7469,7 @@ module Aws::CloudFormation
     #   <p>The last unique ID of a StackSet operation performed on a stack instance.</p>
     #   @return [String]
     class StackInstance < Struct.new(
+      nil,
       :stack_set_id,
       :region,
       :account,
@@ -7325,6 +7541,7 @@ module Aws::CloudFormation
     #            </ul>
     #   @return [String]
     class StackInstanceComprehensiveStatus < Struct.new(
+      nil,
       :detailed_status,
       keyword_init: true
     )
@@ -7339,6 +7556,7 @@ module Aws::CloudFormation
     #   <p>The status to filter by.</p>
     #   @return [String]
     class StackInstanceFilter < Struct.new(
+      nil,
       :name,
       :values,
       keyword_init: true
@@ -7350,6 +7568,7 @@ module Aws::CloudFormation
     # @!attribute message
     #   @return [String]
     class StackInstanceNotFoundException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -7411,6 +7630,7 @@ module Aws::CloudFormation
     #   <p>Time at which the stack instance drift detection operation was initiated.</p>
     #   @return [Time]
     class StackInstanceResourceDriftsSummary < Struct.new(
+      nil,
       :stack_id,
       :logical_resource_id,
       :physical_resource_id,
@@ -7521,6 +7741,7 @@ module Aws::CloudFormation
     #   <p>The last unique ID of a StackSet operation performed on a stack instance.</p>
     #   @return [String]
     class StackInstanceSummary < Struct.new(
+      nil,
       :stack_set_id,
       :region,
       :account,
@@ -7541,6 +7762,7 @@ module Aws::CloudFormation
     # @!attribute message
     #   @return [String]
     class StackNotFoundException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -7605,6 +7827,7 @@ module Aws::CloudFormation
     #       <code>Destination</code>.</p>
     #   @return [Types::ResourceMapping]
     class StackRefactorAction < Struct.new(
+      nil,
       :action,
       :entity,
       :physical_resource_id,
@@ -7624,6 +7847,7 @@ module Aws::CloudFormation
     # @!attribute message
     #   @return [String]
     class StackRefactorNotFoundException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -7650,6 +7874,7 @@ module Aws::CloudFormation
     #   <p>A detailed explanation for the stack refactor <code>Status</code>.</p>
     #   @return [String]
     class StackRefactorSummary < Struct.new(
+      nil,
       :stack_refactor_id,
       :description,
       :execution_status,
@@ -7702,6 +7927,7 @@ module Aws::CloudFormation
     #      was created from a module included in the stack template.</p>
     #   @return [Types::ModuleInfo]
     class StackResource < Struct.new(
+      nil,
       :stack_name,
       :stack_id,
       :logical_resource_id,
@@ -7764,6 +7990,7 @@ module Aws::CloudFormation
     #      was created from a module included in the stack template.</p>
     #   @return [Types::ModuleInfo]
     class StackResourceDetail < Struct.new(
+      nil,
       :stack_name,
       :stack_id,
       :logical_resource_id,
@@ -7867,6 +8094,7 @@ module Aws::CloudFormation
     #   <p>The reason for the drift status. </p>
     #   @return [String]
     class StackResourceDrift < Struct.new(
+      nil,
       :stack_id,
       :logical_resource_id,
       :physical_resource_id,
@@ -7918,6 +8146,7 @@ module Aws::CloudFormation
     #      configuration.</p>
     #   @return [Time]
     class StackResourceDriftInformation < Struct.new(
+      nil,
       :stack_resource_drift_status,
       :last_check_timestamp,
       keyword_init: true
@@ -7961,6 +8190,7 @@ module Aws::CloudFormation
     #      configuration.</p>
     #   @return [Time]
     class StackResourceDriftInformationSummary < Struct.new(
+      nil,
       :stack_resource_drift_status,
       :last_check_timestamp,
       keyword_init: true
@@ -8000,6 +8230,7 @@ module Aws::CloudFormation
     #      was created from a module included in the stack template.</p>
     #   @return [Types::ModuleInfo]
     class StackResourceSummary < Struct.new(
+      nil,
       :logical_resource_id,
       :physical_resource_id,
       :resource_type,
@@ -8100,6 +8331,7 @@ module Aws::CloudFormation
     #      Amazon Web Services Regions list output is in no particular order.</p>
     #   @return [Array<String>]
     class StackSet < Struct.new(
+      nil,
       :stack_set_name,
       :stack_set_id,
       :description,
@@ -8131,6 +8363,7 @@ module Aws::CloudFormation
     #   <p>The list of Regions targeted for this organization or OU.</p>
     #   @return [Array<String>]
     class StackSetAutoDeploymentTargetSummary < Struct.new(
+      nil,
       :organizational_unit_id,
       :regions,
       keyword_init: true
@@ -8235,6 +8468,7 @@ module Aws::CloudFormation
     #   <p>The number of stack instances for which the drift detection operation failed.</p>
     #   @return [Integer]
     class StackSetDriftDetectionDetails < Struct.new(
+      nil,
       :drift_status,
       :drift_detection_status,
       :last_drift_check_timestamp,
@@ -8253,6 +8487,7 @@ module Aws::CloudFormation
     # @!attribute message
     #   @return [String]
     class StackSetNotEmptyException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -8263,6 +8498,7 @@ module Aws::CloudFormation
     # @!attribute message
     #   @return [String]
     class StackSetNotFoundException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -8370,6 +8606,7 @@ module Aws::CloudFormation
     #   <p>Detailed information about the StackSet operation.</p>
     #   @return [Types::StackSetOperationStatusDetails]
     class StackSetOperation < Struct.new(
+      nil,
       :operation_id,
       :stack_set_id,
       :action,
@@ -8470,6 +8707,7 @@ module Aws::CloudFormation
     #            </ul>
     #   @return [String]
     class StackSetOperationPreferences < Struct.new(
+      nil,
       :region_concurrency_type,
       :region_order,
       :failure_tolerance_count,
@@ -8535,6 +8773,7 @@ module Aws::CloudFormation
     #      you specified for <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/APIReference/API_DeploymentTargets.html">DeploymentTargets</a>.</p>
     #   @return [String]
     class StackSetOperationResultSummary < Struct.new(
+      nil,
       :account,
       :region,
       :status,
@@ -8551,6 +8790,7 @@ module Aws::CloudFormation
     #   <p>The number of stack instances for which the StackSet operation failed.</p>
     #   @return [Integer]
     class StackSetOperationStatusDetails < Struct.new(
+      nil,
       :failed_stack_instances_count,
       keyword_init: true
     )
@@ -8628,6 +8868,7 @@ module Aws::CloudFormation
     #       operation options</a>.</p>
     #   @return [Types::StackSetOperationPreferences]
     class StackSetOperationSummary < Struct.new(
+      nil,
       :operation_id,
       :action,
       :status,
@@ -8709,6 +8950,7 @@ module Aws::CloudFormation
     #      conflicting operations.</p>
     #   @return [Types::ManagedExecution]
     class StackSetSummary < Struct.new(
+      nil,
       :stack_set_name,
       :stack_set_id,
       :description,
@@ -8768,6 +9010,7 @@ module Aws::CloudFormation
     #       unmanaged configuration changes to stacks and resources with drift detection</a>.</p>
     #   @return [Types::StackDriftInformationSummary]
     class StackSummary < Struct.new(
+      nil,
       :stack_id,
       :stack_name,
       :template_description,
@@ -8788,6 +9031,7 @@ module Aws::CloudFormation
     # @!attribute message
     #   @return [String]
     class StaleRequestException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -8803,6 +9047,7 @@ module Aws::CloudFormation
     #   <p>The scan filters to use.</p>
     #   @return [Array<Types::ScanFilter>]
     class StartResourceScanInput < Struct.new(
+      nil,
       :client_request_token,
       :scan_filters,
       keyword_init: true
@@ -8818,6 +9063,7 @@ module Aws::CloudFormation
     #               </code>.</p>
     #   @return [String]
     class StartResourceScanOutput < Struct.new(
+      nil,
       :resource_scan_id,
       keyword_init: true
     )
@@ -8849,6 +9095,7 @@ module Aws::CloudFormation
     #            </ul>
     #   @return [String]
     class StopStackSetOperationInput < Struct.new(
+      nil,
       :stack_set_name,
       :operation_id,
       :call_as,
@@ -8858,6 +9105,7 @@ module Aws::CloudFormation
     end
 
     class StopStackSetOperationOutput < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -8875,6 +9123,7 @@ module Aws::CloudFormation
     #      maximum of 256 characters for a tag value.</p>
     #   @return [String]
     class Tag < Struct.new(
+      nil,
       :key,
       :value,
       keyword_init: true
@@ -8917,6 +9166,7 @@ module Aws::CloudFormation
     #            <p>For more information, see <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-attribute-updatereplacepolicy.html">UpdateReplacePolicy attribute</a> in the <i>CloudFormation User Guide</i>.</p>
     #   @return [String]
     class TemplateConfiguration < Struct.new(
+      nil,
       :deletion_policy,
       :update_replace_policy,
       keyword_init: true
@@ -8939,6 +9189,7 @@ module Aws::CloudFormation
     #   <p>User defined description associated with the parameter.</p>
     #   @return [String]
     class TemplateParameter < Struct.new(
+      nil,
       :parameter_key,
       :default_value,
       :no_echo,
@@ -8962,6 +9213,7 @@ module Aws::CloudFormation
     #   <p>The number of resources that are still pending the template generation.</p>
     #   @return [Integer]
     class TemplateProgress < Struct.new(
+      nil,
       :resources_succeeded,
       :resources_failed,
       :resources_processing,
@@ -9034,6 +9286,7 @@ module Aws::CloudFormation
     #      in-progress, completed, and failed states.</p>
     #   @return [Integer]
     class TemplateSummary < Struct.new(
+      nil,
       :generated_template_id,
       :generated_template_name,
       :status,
@@ -9053,6 +9306,7 @@ module Aws::CloudFormation
     #      parameter.</p>
     #   @return [Boolean]
     class TemplateSummaryConfig < Struct.new(
+      nil,
       :treat_unrecognized_resource_types_as_warnings,
       keyword_init: true
     )
@@ -9103,6 +9357,7 @@ module Aws::CloudFormation
     #           Condition Keys for Amazon S3</a> in the <i>Identity and Access Management User Guide</i>.</p>
     #   @return [String]
     class TestTypeInput < Struct.new(
+      nil,
       :arn,
       :type,
       :type_name,
@@ -9117,6 +9372,7 @@ module Aws::CloudFormation
     #   <p>The Amazon Resource Name (ARN) of the extension.</p>
     #   @return [String]
     class TestTypeOutput < Struct.new(
+      nil,
       :type_version_arn,
       keyword_init: true
     )
@@ -9127,6 +9383,7 @@ module Aws::CloudFormation
     # @!attribute message
     #   @return [String]
     class TokenAlreadyExistsException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -9168,6 +9425,7 @@ module Aws::CloudFormation
     #   <p>Whether this configuration data is the default configuration for the extension.</p>
     #   @return [Boolean]
     class TypeConfigurationDetails < Struct.new(
+      nil,
       :arn,
       :alias,
       :configuration,
@@ -9201,6 +9459,7 @@ module Aws::CloudFormation
     #   <p>The name of the extension type to which this configuration applies.</p>
     #   @return [String]
     class TypeConfigurationIdentifier < Struct.new(
+      nil,
       :type_arn,
       :type_configuration_alias,
       :type_configuration_arn,
@@ -9216,6 +9475,7 @@ module Aws::CloudFormation
     #   <p>A message with details about the error that occurred.</p>
     #   @return [String]
     class TypeConfigurationNotFoundException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -9264,6 +9524,7 @@ module Aws::CloudFormation
     #   <p>A prefix to use as a filter for results.</p>
     #   @return [String]
     class TypeFilters < Struct.new(
+      nil,
       :category,
       :publisher_id,
       :type_name_prefix,
@@ -9277,6 +9538,7 @@ module Aws::CloudFormation
     #   <p>A message with details about the error that occurred.</p>
     #   @return [String]
     class TypeNotFoundException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -9363,6 +9625,7 @@ module Aws::CloudFormation
     #      activated by default.</p>
     #   @return [Boolean]
     class TypeSummary < Struct.new(
+      nil,
       :type,
       :type_name,
       :default_version_id,
@@ -9418,6 +9681,7 @@ module Aws::CloudFormation
     #       <i>CloudFormation User Guide</i>.</p>
     #   @return [String]
     class TypeVersionSummary < Struct.new(
+      nil,
       :type,
       :type_name,
       :version_id,
@@ -9454,6 +9718,7 @@ module Aws::CloudFormation
     #           <code>DeletionPolicy</code> and <code>UpdateReplacePolicy</code>.</p>
     #   @return [Types::TemplateConfiguration]
     class UpdateGeneratedTemplateInput < Struct.new(
+      nil,
       :generated_template_name,
       :new_generated_template_name,
       :add_resources,
@@ -9473,6 +9738,7 @@ module Aws::CloudFormation
     #               </code>.</p>
     #   @return [String]
     class UpdateGeneratedTemplateOutput < Struct.new(
+      nil,
       :generated_template_id,
       keyword_init: true
     )
@@ -9724,6 +9990,7 @@ module Aws::CloudFormation
     #            </p>
     #   @return [Boolean]
     class UpdateStackInput < Struct.new(
+      nil,
       :stack_name,
       :template_body,
       :template_url,
@@ -9838,6 +10105,7 @@ module Aws::CloudFormation
     #            </ul>
     #   @return [String]
     class UpdateStackInstancesInput < Struct.new(
+      nil,
       :stack_set_name,
       :accounts,
       :deployment_targets,
@@ -9855,6 +10123,7 @@ module Aws::CloudFormation
     #   <p>The unique identifier for this StackSet operation.</p>
     #   @return [String]
     class UpdateStackInstancesOutput < Struct.new(
+      nil,
       :operation_id,
       keyword_init: true
     )
@@ -9866,6 +10135,7 @@ module Aws::CloudFormation
     #   <p>Unique identifier of the stack.</p>
     #   @return [String]
     class UpdateStackOutput < Struct.new(
+      nil,
       :stack_id,
       keyword_init: true
     )
@@ -10144,6 +10414,7 @@ module Aws::CloudFormation
     #         conflicting operations.</p>
     #   @return [Types::ManagedExecution]
     class UpdateStackSetInput < Struct.new(
+      nil,
       :stack_set_name,
       :description,
       :template_body,
@@ -10172,6 +10443,7 @@ module Aws::CloudFormation
     #   <p>The unique ID for this StackSet operation.</p>
     #   @return [String]
     class UpdateStackSetOutput < Struct.new(
+      nil,
       :operation_id,
       keyword_init: true
     )
@@ -10186,6 +10458,7 @@ module Aws::CloudFormation
     #         protection.</p>
     #   @return [String]
     class UpdateTerminationProtectionInput < Struct.new(
+      nil,
       :enable_termination_protection,
       :stack_name,
       keyword_init: true
@@ -10197,6 +10470,7 @@ module Aws::CloudFormation
     #   <p>The unique ID of the stack.</p>
     #   @return [String]
     class UpdateTerminationProtectionOutput < Struct.new(
+      nil,
       :stack_id,
       keyword_init: true
     )
@@ -10218,6 +10492,7 @@ module Aws::CloudFormation
     #         are passed, only <code>TemplateBody</code> is used.</p>
     #   @return [String]
     class ValidateTemplateInput < Struct.new(
+      nil,
       :template_body,
       :template_url,
       keyword_init: true
@@ -10247,6 +10522,7 @@ module Aws::CloudFormation
     #   <p>A list of the transforms that are declared in the template.</p>
     #   @return [Array<String>]
     class ValidateTemplateOutput < Struct.new(
+      nil,
       :parameters,
       :description,
       :capabilities,
@@ -10293,6 +10569,7 @@ module Aws::CloudFormation
     #   <p>The properties of the resource that are impacted by this warning.</p>
     #   @return [Array<Types::WarningProperty>]
     class WarningDetail < Struct.new(
+      nil,
       :type,
       :properties,
       keyword_init: true
@@ -10312,6 +10589,7 @@ module Aws::CloudFormation
     #   <p>The description of the property from the resource provider schema.</p>
     #   @return [String]
     class WarningProperty < Struct.new(
+      nil,
       :property_path,
       :required,
       :description,
@@ -10328,6 +10606,7 @@ module Aws::CloudFormation
     #      <code>True</code>.</p>
     #   @return [Array<String>]
     class Warnings < Struct.new(
+      nil,
       :unrecognized_resource_types,
       keyword_init: true
     )

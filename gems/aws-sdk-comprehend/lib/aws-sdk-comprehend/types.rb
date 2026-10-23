@@ -55,6 +55,7 @@ module Aws::Comprehend
     #            </ul>
     #   @return [String]
     class AugmentedManifestsListItem < Struct.new(
+      nil,
       :s3_uri,
       :split,
       :attribute_names,
@@ -77,6 +78,7 @@ module Aws::Comprehend
     #         languages in the document.</p>
     #   @return [Array<Types::DominantLanguage>]
     class BatchDetectDominantLanguageItemResult < Struct.new(
+      nil,
       :index,
       :languages,
       keyword_init: true
@@ -89,6 +91,7 @@ module Aws::Comprehend
     #         documents. Each document should contain at least 20 characters. The maximum size of each document is 5 KB.</p>
     #   @return [Array<String>]
     class BatchDetectDominantLanguageRequest < Struct.new(
+      nil,
       :text_list,
       keyword_init: true
     )
@@ -109,6 +112,7 @@ module Aws::Comprehend
     #         batch, the <code>ErrorList</code> is empty.</p>
     #   @return [Array<Types::BatchItemError>]
     class BatchDetectDominantLanguageResponse < Struct.new(
+      nil,
       :result_list,
       :error_list,
       keyword_init: true
@@ -127,6 +131,7 @@ module Aws::Comprehend
     #         document.</p>
     #   @return [Array<Types::Entity>]
     class BatchDetectEntitiesItemResult < Struct.new(
+      nil,
       :index,
       :entities,
       keyword_init: true
@@ -143,6 +148,7 @@ module Aws::Comprehend
     #         supported by Amazon Comprehend. All documents must be in the same language.</p>
     #   @return [String]
     class BatchDetectEntitiesRequest < Struct.new(
+      nil,
       :text_list,
       :language_code,
       keyword_init: true
@@ -164,6 +170,7 @@ module Aws::Comprehend
     #         batch, the <code>ErrorList</code> is empty.</p>
     #   @return [Array<Types::BatchItemError>]
     class BatchDetectEntitiesResponse < Struct.new(
+      nil,
       :result_list,
       :error_list,
       keyword_init: true
@@ -182,6 +189,7 @@ module Aws::Comprehend
     #         the document.</p>
     #   @return [Array<Types::KeyPhrase>]
     class BatchDetectKeyPhrasesItemResult < Struct.new(
+      nil,
       :index,
       :key_phrases,
       keyword_init: true
@@ -198,6 +206,7 @@ module Aws::Comprehend
     #         supported by Amazon Comprehend. All documents must be in the same language.</p>
     #   @return [String]
     class BatchDetectKeyPhrasesRequest < Struct.new(
+      nil,
       :text_list,
       :language_code,
       keyword_init: true
@@ -219,6 +228,7 @@ module Aws::Comprehend
     #         batch, the <code>ErrorList</code> is empty.</p>
     #   @return [Array<Types::BatchItemError>]
     class BatchDetectKeyPhrasesResponse < Struct.new(
+      nil,
       :result_list,
       :error_list,
       keyword_init: true
@@ -240,6 +250,7 @@ module Aws::Comprehend
     #         detection.</p>
     #   @return [Types::SentimentScore]
     class BatchDetectSentimentItemResult < Struct.new(
+      nil,
       :index,
       :sentiment,
       :sentiment_score,
@@ -257,6 +268,7 @@ module Aws::Comprehend
     #         supported by Amazon Comprehend. All documents must be in the same language.</p>
     #   @return [String]
     class BatchDetectSentimentRequest < Struct.new(
+      nil,
       :text_list,
       :language_code,
       keyword_init: true
@@ -278,6 +290,7 @@ module Aws::Comprehend
     #         batch, the <code>ErrorList</code> is empty.</p>
     #   @return [Array<Types::BatchItemError>]
     class BatchDetectSentimentResponse < Struct.new(
+      nil,
       :result_list,
       :error_list,
       keyword_init: true
@@ -294,6 +307,7 @@ module Aws::Comprehend
     #   <p>The syntax tokens for the words in the document, one token for each word.</p>
     #   @return [Array<Types::SyntaxToken>]
     class BatchDetectSyntaxItemResult < Struct.new(
+      nil,
       :index,
       :syntax_tokens,
       keyword_init: true
@@ -311,6 +325,7 @@ module Aws::Comprehend
     #         Italian ("it"), or Portuguese ("pt"). All documents must be in the same language.</p>
     #   @return [String]
     class BatchDetectSyntaxRequest < Struct.new(
+      nil,
       :text_list,
       :language_code,
       keyword_init: true
@@ -332,6 +347,7 @@ module Aws::Comprehend
     #         the <code>ErrorList</code> is empty.</p>
     #   @return [Array<Types::BatchItemError>]
     class BatchDetectSyntaxResponse < Struct.new(
+      nil,
       :result_list,
       :error_list,
       keyword_init: true
@@ -347,6 +363,7 @@ module Aws::Comprehend
     #   <p>An array of targeted sentiment entities.</p>
     #   @return [Array<Types::TargetedSentimentEntity>]
     class BatchDetectTargetedSentimentItemResult < Struct.new(
+      nil,
       :index,
       :entities,
       keyword_init: true
@@ -362,6 +379,7 @@ module Aws::Comprehend
     #   <p>The language of the input documents. Currently, English is the only supported language.</p>
     #   @return [String]
     class BatchDetectTargetedSentimentRequest < Struct.new(
+      nil,
       :text_list,
       :language_code,
       keyword_init: true
@@ -379,6 +397,7 @@ module Aws::Comprehend
     #   <p>List of errors that the operation can return.</p>
     #   @return [Array<Types::BatchItemError>]
     class BatchDetectTargetedSentimentResponse < Struct.new(
+      nil,
       :result_list,
       :error_list,
       keyword_init: true
@@ -399,6 +418,7 @@ module Aws::Comprehend
     #   <p>A text description of the error.</p>
     #   @return [String]
     class BatchItemError < Struct.new(
+      nil,
       :index,
       :error_code,
       :error_message,
@@ -412,6 +432,7 @@ module Aws::Comprehend
     # @!attribute message
     #   @return [String]
     class BatchSizeLimitExceededException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -450,6 +471,7 @@ module Aws::Comprehend
     #         For example, a LINE object has child blocks for each WORD block that's part of the line of text. </p>
     #   @return [Array<Types::RelationshipsListItem>]
     class Block < Struct.new(
+      nil,
       :id,
       :block_type,
       :text,
@@ -475,6 +497,7 @@ module Aws::Comprehend
     #   <p>List of child blocks within this block.</p>
     #   @return [Array<Types::ChildBlock>]
     class BlockReference < Struct.new(
+      nil,
       :block_id,
       :begin_offset,
       :end_offset,
@@ -503,6 +526,7 @@ module Aws::Comprehend
     #   <p>The width of the bounding box as a ratio of the overall document page width.</p>
     #   @return [Float]
     class BoundingBox < Struct.new(
+      nil,
       :height,
       :left,
       :top,
@@ -523,6 +547,7 @@ module Aws::Comprehend
     #   <p>Offset of the end of the child block within its parent block.</p>
     #   @return [Integer]
     class ChildBlock < Struct.new(
+      nil,
       :child_block_id,
       :begin_offset,
       :end_offset,
@@ -578,6 +603,7 @@ module Aws::Comprehend
     #         better.</p>
     #   @return [Float]
     class ClassifierEvaluationMetrics < Struct.new(
+      nil,
       :accuracy,
       :precision,
       :recall,
@@ -609,6 +635,7 @@ module Aws::Comprehend
     #         classifier.</p>
     #   @return [Types::ClassifierEvaluationMetrics]
     class ClassifierMetadata < Struct.new(
+      nil,
       :number_of_labels,
       :number_of_trained_documents,
       :number_of_test_documents,
@@ -647,6 +674,7 @@ module Aws::Comprehend
     #         from PDF documents and image files.</p>
     #   @return [Types::DocumentReaderConfig]
     class ClassifyDocumentRequest < Struct.new(
+      nil,
       :text,
       :endpoint_arn,
       :bytes,
@@ -691,6 +719,7 @@ module Aws::Comprehend
     #            <p>The field is empty if the system generated no warnings.</p>
     #   @return [Array<Types::WarningsListItem>]
     class ClassifyDocumentResponse < Struct.new(
+      nil,
       :classes,
       :labels,
       :document_metadata,
@@ -707,6 +736,7 @@ module Aws::Comprehend
     # @!attribute message
     #   @return [String]
     class ConcurrentModificationException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -720,6 +750,7 @@ module Aws::Comprehend
     #   <p>The language of the input documents.</p>
     #   @return [String]
     class ContainsPiiEntitiesRequest < Struct.new(
+      nil,
       :text,
       :language_code,
       keyword_init: true
@@ -732,6 +763,7 @@ module Aws::Comprehend
     #         identifiable information (PII) entity types.</p>
     #   @return [Array<Types::EntityLabel>]
     class ContainsPiiEntitiesResponse < Struct.new(
+      nil,
       :labels,
       keyword_init: true
     )
@@ -763,6 +795,7 @@ module Aws::Comprehend
     #   <p>Tags for the dataset.</p>
     #   @return [Array<Types::Tag>]
     class CreateDatasetRequest < Struct.new(
+      nil,
       :flywheel_arn,
       :dataset_name,
       :dataset_type,
@@ -779,6 +812,7 @@ module Aws::Comprehend
     #   <p>The ARN of the dataset.</p>
     #   @return [String]
     class CreateDatasetResponse < Struct.new(
+      nil,
       :dataset_arn,
       keyword_init: true
     )
@@ -879,6 +913,7 @@ module Aws::Comprehend
     #            </p>
     #   @return [String]
     class CreateDocumentClassifierRequest < Struct.new(
+      nil,
       :document_classifier_name,
       :version_name,
       :data_access_role_arn,
@@ -901,6 +936,7 @@ module Aws::Comprehend
     #   <p>The Amazon Resource Name (ARN) that identifies the document classifier.</p>
     #   @return [String]
     class CreateDocumentClassifierResponse < Struct.new(
+      nil,
       :document_classifier_arn,
       keyword_init: true
     )
@@ -940,6 +976,7 @@ module Aws::Comprehend
     #         attached.</p>
     #   @return [String]
     class CreateEndpointRequest < Struct.new(
+      nil,
       :endpoint_name,
       :model_arn,
       :desired_inference_units,
@@ -960,6 +997,7 @@ module Aws::Comprehend
     #         attached.</p>
     #   @return [String]
     class CreateEndpointResponse < Struct.new(
+      nil,
       :endpoint_arn,
       :model_arn,
       keyword_init: true
@@ -1056,6 +1094,7 @@ module Aws::Comprehend
     #            </p>
     #   @return [String]
     class CreateEntityRecognizerRequest < Struct.new(
+      nil,
       :recognizer_name,
       :version_name,
       :data_access_role_arn,
@@ -1076,6 +1115,7 @@ module Aws::Comprehend
     #   <p>The Amazon Resource Name (ARN) that identifies the entity recognizer.</p>
     #   @return [String]
     class CreateEntityRecognizerResponse < Struct.new(
+      nil,
       :entity_recognizer_arn,
       keyword_init: true
     )
@@ -1115,6 +1155,7 @@ module Aws::Comprehend
     #   <p>The tags to associate with this flywheel.</p>
     #   @return [Array<Types::Tag>]
     class CreateFlywheelRequest < Struct.new(
+      nil,
       :flywheel_name,
       :active_model_arn,
       :data_access_role_arn,
@@ -1136,6 +1177,7 @@ module Aws::Comprehend
     #   <p>The Amazon Resource Number (ARN) of the active model version.</p>
     #   @return [String]
     class CreateFlywheelResponse < Struct.new(
+      nil,
       :flywheel_arn,
       :active_model_arn,
       keyword_init: true
@@ -1171,6 +1213,7 @@ module Aws::Comprehend
     #           VPC</a>. </p>
     #   @return [Types::VpcConfig]
     class DataSecurityConfig < Struct.new(
+      nil,
       :model_kms_key_id,
       :volume_kms_key_id,
       :data_lake_kms_key_id,
@@ -1210,6 +1253,7 @@ module Aws::Comprehend
     #         is encoded in UTF-8.</p>
     #   @return [String]
     class DatasetAugmentedManifestsListItem < Struct.new(
+      nil,
       :attribute_names,
       :s3_uri,
       :annotation_data_s3_uri,
@@ -1242,6 +1286,7 @@ module Aws::Comprehend
     #         LABELLABELLABEL.</p>
     #   @return [String]
     class DatasetDocumentClassifierInputDataConfig < Struct.new(
+      nil,
       :s3_uri,
       :label_delimiter,
       keyword_init: true
@@ -1256,6 +1301,7 @@ module Aws::Comprehend
     #         calling.</p>
     #   @return [String]
     class DatasetEntityRecognizerAnnotations < Struct.new(
+      nil,
       :s3_uri,
       keyword_init: true
     )
@@ -1275,6 +1321,7 @@ module Aws::Comprehend
     #         Use this option when you are processing many short documents, such as text messages.</p>
     #   @return [String]
     class DatasetEntityRecognizerDocuments < Struct.new(
+      nil,
       :s3_uri,
       :input_format,
       keyword_init: true
@@ -1289,6 +1336,7 @@ module Aws::Comprehend
     #   <p>Specifies the Amazon S3 location where the entity list is located.</p>
     #   @return [String]
     class DatasetEntityRecognizerEntityList < Struct.new(
+      nil,
       :s3_uri,
       keyword_init: true
     )
@@ -1308,6 +1356,7 @@ module Aws::Comprehend
     #   <p>The S3 location of the entity list for your custom entity recognizer.</p>
     #   @return [Types::DatasetEntityRecognizerEntityList]
     class DatasetEntityRecognizerInputDataConfig < Struct.new(
+      nil,
       :annotations,
       :documents,
       :entity_list,
@@ -1330,6 +1379,7 @@ module Aws::Comprehend
     #   <p>Filter the datasets to include datasets created before the specified time.</p>
     #   @return [Time]
     class DatasetFilter < Struct.new(
+      nil,
       :status,
       :dataset_type,
       :creation_time_after,
@@ -1361,6 +1411,7 @@ module Aws::Comprehend
     #   <p>The input properties for training an entity recognizer model.</p>
     #   @return [Types::DatasetEntityRecognizerInputDataConfig]
     class DatasetInputDataConfig < Struct.new(
+      nil,
       :augmented_manifests,
       :data_format,
       :document_classifier_input_data_config,
@@ -1403,6 +1454,7 @@ module Aws::Comprehend
     #   <p>Time when the data from the dataset becomes available in the data lake.</p>
     #   @return [Time]
     class DatasetProperties < Struct.new(
+      nil,
       :dataset_arn,
       :dataset_name,
       :dataset_type,
@@ -1422,6 +1474,7 @@ module Aws::Comprehend
     #   <p>The Amazon Resource Name (ARN) that identifies the document classifier. </p>
     #   @return [String]
     class DeleteDocumentClassifierRequest < Struct.new(
+      nil,
       :document_classifier_arn,
       keyword_init: true
     )
@@ -1429,6 +1482,7 @@ module Aws::Comprehend
     end
 
     class DeleteDocumentClassifierResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1438,6 +1492,7 @@ module Aws::Comprehend
     #   <p>The Amazon Resource Number (ARN) of the endpoint being deleted.</p>
     #   @return [String]
     class DeleteEndpointRequest < Struct.new(
+      nil,
       :endpoint_arn,
       keyword_init: true
     )
@@ -1445,6 +1500,7 @@ module Aws::Comprehend
     end
 
     class DeleteEndpointResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1454,6 +1510,7 @@ module Aws::Comprehend
     #   <p>The Amazon Resource Name (ARN) that identifies the entity recognizer.</p>
     #   @return [String]
     class DeleteEntityRecognizerRequest < Struct.new(
+      nil,
       :entity_recognizer_arn,
       keyword_init: true
     )
@@ -1461,6 +1518,7 @@ module Aws::Comprehend
     end
 
     class DeleteEntityRecognizerResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1470,6 +1528,7 @@ module Aws::Comprehend
     #   <p>The Amazon Resource Number (ARN) of the flywheel to delete.</p>
     #   @return [String]
     class DeleteFlywheelRequest < Struct.new(
+      nil,
       :flywheel_arn,
       keyword_init: true
     )
@@ -1477,6 +1536,7 @@ module Aws::Comprehend
     end
 
     class DeleteFlywheelResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1489,6 +1549,7 @@ module Aws::Comprehend
     #   <p>The revision ID of the policy to delete.</p>
     #   @return [String]
     class DeleteResourcePolicyRequest < Struct.new(
+      nil,
       :resource_arn,
       :policy_revision_id,
       keyword_init: true
@@ -1497,6 +1558,7 @@ module Aws::Comprehend
     end
 
     class DeleteResourcePolicyResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1506,6 +1568,7 @@ module Aws::Comprehend
     #   <p>The ARN of the dataset.</p>
     #   @return [String]
     class DescribeDatasetRequest < Struct.new(
+      nil,
       :dataset_arn,
       keyword_init: true
     )
@@ -1516,6 +1579,7 @@ module Aws::Comprehend
     #   <p>The dataset properties.</p>
     #   @return [Types::DatasetProperties]
     class DescribeDatasetResponse < Struct.new(
+      nil,
       :dataset_properties,
       keyword_init: true
     )
@@ -1527,6 +1591,7 @@ module Aws::Comprehend
     #         <code>StartDocumentClassificationJob</code> operation returns this identifier in its response.</p>
     #   @return [String]
     class DescribeDocumentClassificationJobRequest < Struct.new(
+      nil,
       :job_id,
       keyword_init: true
     )
@@ -1538,6 +1603,7 @@ module Aws::Comprehend
     #         job.</p>
     #   @return [Types::DocumentClassificationJobProperties]
     class DescribeDocumentClassificationJobResponse < Struct.new(
+      nil,
       :document_classification_job_properties,
       keyword_init: true
     )
@@ -1549,6 +1615,7 @@ module Aws::Comprehend
     #         <code>CreateDocumentClassifier</code> operation returns this identifier in its response.</p>
     #   @return [String]
     class DescribeDocumentClassifierRequest < Struct.new(
+      nil,
       :document_classifier_arn,
       keyword_init: true
     )
@@ -1559,6 +1626,7 @@ module Aws::Comprehend
     #   <p>An object that contains the properties associated with a document classifier.</p>
     #   @return [Types::DocumentClassifierProperties]
     class DescribeDocumentClassifierResponse < Struct.new(
+      nil,
       :document_classifier_properties,
       keyword_init: true
     )
@@ -1570,6 +1638,7 @@ module Aws::Comprehend
     #         <code>StartDominantLanguageDetectionJob</code> operation returns this identifier in its response.</p>
     #   @return [String]
     class DescribeDominantLanguageDetectionJobRequest < Struct.new(
+      nil,
       :job_id,
       keyword_init: true
     )
@@ -1581,6 +1650,7 @@ module Aws::Comprehend
     #         job.</p>
     #   @return [Types::DominantLanguageDetectionJobProperties]
     class DescribeDominantLanguageDetectionJobResponse < Struct.new(
+      nil,
       :dominant_language_detection_job_properties,
       keyword_init: true
     )
@@ -1591,6 +1661,7 @@ module Aws::Comprehend
     #   <p>The Amazon Resource Number (ARN) of the endpoint being described.</p>
     #   @return [String]
     class DescribeEndpointRequest < Struct.new(
+      nil,
       :endpoint_arn,
       keyword_init: true
     )
@@ -1601,6 +1672,7 @@ module Aws::Comprehend
     #   <p>Describes information associated with the specific endpoint.</p>
     #   @return [Types::EndpointProperties]
     class DescribeEndpointResponse < Struct.new(
+      nil,
       :endpoint_properties,
       keyword_init: true
     )
@@ -1612,6 +1684,7 @@ module Aws::Comprehend
     #           <code>StartEntitiesDetectionJob</code> operation returns this identifier in its response.</p>
     #   @return [String]
     class DescribeEntitiesDetectionJobRequest < Struct.new(
+      nil,
       :job_id,
       keyword_init: true
     )
@@ -1622,6 +1695,7 @@ module Aws::Comprehend
     #   <p>An object that contains the properties associated with an entities detection job.</p>
     #   @return [Types::EntitiesDetectionJobProperties]
     class DescribeEntitiesDetectionJobResponse < Struct.new(
+      nil,
       :entities_detection_job_properties,
       keyword_init: true
     )
@@ -1632,6 +1706,7 @@ module Aws::Comprehend
     #   <p>The Amazon Resource Name (ARN) that identifies the entity recognizer.</p>
     #   @return [String]
     class DescribeEntityRecognizerRequest < Struct.new(
+      nil,
       :entity_recognizer_arn,
       keyword_init: true
     )
@@ -1642,6 +1717,7 @@ module Aws::Comprehend
     #   <p>Describes information associated with an entity recognizer.</p>
     #   @return [Types::EntityRecognizerProperties]
     class DescribeEntityRecognizerResponse < Struct.new(
+      nil,
       :entity_recognizer_properties,
       keyword_init: true
     )
@@ -1652,6 +1728,7 @@ module Aws::Comprehend
     #   <p>The identifier of the events detection job.</p>
     #   @return [String]
     class DescribeEventsDetectionJobRequest < Struct.new(
+      nil,
       :job_id,
       keyword_init: true
     )
@@ -1662,6 +1739,7 @@ module Aws::Comprehend
     #   <p>An object that contains the properties associated with an event detection job.</p>
     #   @return [Types::EventsDetectionJobProperties]
     class DescribeEventsDetectionJobResponse < Struct.new(
+      nil,
       :events_detection_job_properties,
       keyword_init: true
     )
@@ -1675,6 +1753,7 @@ module Aws::Comprehend
     #   <p></p>
     #   @return [String]
     class DescribeFlywheelIterationRequest < Struct.new(
+      nil,
       :flywheel_arn,
       :flywheel_iteration_id,
       keyword_init: true
@@ -1686,6 +1765,7 @@ module Aws::Comprehend
     #   <p>The configuration properties of a flywheel iteration.</p>
     #   @return [Types::FlywheelIterationProperties]
     class DescribeFlywheelIterationResponse < Struct.new(
+      nil,
       :flywheel_iteration_properties,
       keyword_init: true
     )
@@ -1696,6 +1776,7 @@ module Aws::Comprehend
     #   <p>The Amazon Resource Number (ARN) of the flywheel.</p>
     #   @return [String]
     class DescribeFlywheelRequest < Struct.new(
+      nil,
       :flywheel_arn,
       keyword_init: true
     )
@@ -1706,6 +1787,7 @@ module Aws::Comprehend
     #   <p>The flywheel properties.</p>
     #   @return [Types::FlywheelProperties]
     class DescribeFlywheelResponse < Struct.new(
+      nil,
       :flywheel_properties,
       keyword_init: true
     )
@@ -1718,6 +1800,7 @@ module Aws::Comprehend
     #         response.</p>
     #   @return [String]
     class DescribeKeyPhrasesDetectionJobRequest < Struct.new(
+      nil,
       :job_id,
       keyword_init: true
     )
@@ -1729,6 +1812,7 @@ module Aws::Comprehend
     #       </p>
     #   @return [Types::KeyPhrasesDetectionJobProperties]
     class DescribeKeyPhrasesDetectionJobResponse < Struct.new(
+      nil,
       :key_phrases_detection_job_properties,
       keyword_init: true
     )
@@ -1740,6 +1824,7 @@ module Aws::Comprehend
     #         response.</p>
     #   @return [String]
     class DescribePiiEntitiesDetectionJobRequest < Struct.new(
+      nil,
       :job_id,
       keyword_init: true
     )
@@ -1750,6 +1835,7 @@ module Aws::Comprehend
     #   <p>Provides information about a PII entities detection job.</p>
     #   @return [Types::PiiEntitiesDetectionJobProperties]
     class DescribePiiEntitiesDetectionJobResponse < Struct.new(
+      nil,
       :pii_entities_detection_job_properties,
       keyword_init: true
     )
@@ -1760,6 +1846,7 @@ module Aws::Comprehend
     #   <p>The Amazon Resource Name (ARN) of the custom model version that has the resource policy.</p>
     #   @return [String]
     class DescribeResourcePolicyRequest < Struct.new(
+      nil,
       :resource_arn,
       keyword_init: true
     )
@@ -1780,6 +1867,7 @@ module Aws::Comprehend
     #         new revision ID, and it deletes the prior version of the policy.</p>
     #   @return [String]
     class DescribeResourcePolicyResponse < Struct.new(
+      nil,
       :resource_policy,
       :creation_time,
       :last_modified_time,
@@ -1794,6 +1882,7 @@ module Aws::Comprehend
     #         response.</p>
     #   @return [String]
     class DescribeSentimentDetectionJobRequest < Struct.new(
+      nil,
       :job_id,
       keyword_init: true
     )
@@ -1804,6 +1893,7 @@ module Aws::Comprehend
     #   <p>An object that contains the properties associated with a sentiment detection job.</p>
     #   @return [Types::SentimentDetectionJobProperties]
     class DescribeSentimentDetectionJobResponse < Struct.new(
+      nil,
       :sentiment_detection_job_properties,
       keyword_init: true
     )
@@ -1816,6 +1906,7 @@ module Aws::Comprehend
     #         response.</p>
     #   @return [String]
     class DescribeTargetedSentimentDetectionJobRequest < Struct.new(
+      nil,
       :job_id,
       keyword_init: true
     )
@@ -1826,6 +1917,7 @@ module Aws::Comprehend
     #   <p>An object that contains the properties associated with a targeted sentiment detection job.</p>
     #   @return [Types::TargetedSentimentDetectionJobProperties]
     class DescribeTargetedSentimentDetectionJobResponse < Struct.new(
+      nil,
       :targeted_sentiment_detection_job_properties,
       keyword_init: true
     )
@@ -1836,6 +1928,7 @@ module Aws::Comprehend
     #   <p>The identifier assigned by the user to the detection job.</p>
     #   @return [String]
     class DescribeTopicsDetectionJobRequest < Struct.new(
+      nil,
       :job_id,
       keyword_init: true
     )
@@ -1846,6 +1939,7 @@ module Aws::Comprehend
     #   <p>The list of properties for the requested job.</p>
     #   @return [Types::TopicsDetectionJobProperties]
     class DescribeTopicsDetectionJobResponse < Struct.new(
+      nil,
       :topics_detection_job_properties,
       keyword_init: true
     )
@@ -1856,6 +1950,7 @@ module Aws::Comprehend
     #   <p>A UTF-8 text string. The string must contain at least 20 characters. The maximum string size is 100 KB.</p>
     #   @return [String]
     class DetectDominantLanguageRequest < Struct.new(
+      nil,
       :text,
       keyword_init: true
     )
@@ -1873,6 +1968,7 @@ module Aws::Comprehend
     #           <i>IETF Tools</i> web site.</p>
     #   @return [Array<Types::DominantLanguage>]
     class DetectDominantLanguageResponse < Struct.new(
+      nil,
       :languages,
       keyword_init: true
     )
@@ -1921,6 +2017,7 @@ module Aws::Comprehend
     #         from PDF documents and image files.</p>
     #   @return [Types::DocumentReaderConfig]
     class DetectEntitiesRequest < Struct.new(
+      nil,
       :text,
       :language_code,
       :endpoint_arn,
@@ -1962,6 +2059,7 @@ module Aws::Comprehend
     #         The field is empty if the system encountered no errors.</p>
     #   @return [Array<Types::ErrorsListItem>]
     class DetectEntitiesResponse < Struct.new(
+      nil,
       :entities,
       :document_metadata,
       :document_type,
@@ -1981,6 +2079,7 @@ module Aws::Comprehend
     #         supported by Amazon Comprehend. All documents must be in the same language.</p>
     #   @return [String]
     class DetectKeyPhrasesRequest < Struct.new(
+      nil,
       :text,
       :language_code,
       keyword_init: true
@@ -1996,6 +2095,7 @@ module Aws::Comprehend
     #         detection. </p>
     #   @return [Array<Types::KeyPhrase>]
     class DetectKeyPhrasesResponse < Struct.new(
+      nil,
       :key_phrases,
       keyword_init: true
     )
@@ -2010,6 +2110,7 @@ module Aws::Comprehend
     #         Enter the language code for English (en) or Spanish (es).</p>
     #   @return [String]
     class DetectPiiEntitiesRequest < Struct.new(
+      nil,
       :text,
       :language_code,
       keyword_init: true
@@ -2023,6 +2124,7 @@ module Aws::Comprehend
     #         that Amazon Comprehend has in the detection.</p>
     #   @return [Array<Types::PiiEntity>]
     class DetectPiiEntitiesResponse < Struct.new(
+      nil,
       :entities,
       keyword_init: true
     )
@@ -2037,6 +2139,7 @@ module Aws::Comprehend
     #         supported by Amazon Comprehend. All documents must be in the same language.</p>
     #   @return [String]
     class DetectSentimentRequest < Struct.new(
+      nil,
       :text,
       :language_code,
       keyword_init: true
@@ -2054,6 +2157,7 @@ module Aws::Comprehend
     #         levels.</p>
     #   @return [Types::SentimentScore]
     class DetectSentimentResponse < Struct.new(
+      nil,
       :sentiment,
       :sentiment_score,
       keyword_init: true
@@ -2070,6 +2174,7 @@ module Aws::Comprehend
     #         Italian ("it"), or Portuguese ("pt").</p>
     #   @return [String]
     class DetectSyntaxRequest < Struct.new(
+      nil,
       :text,
       :language_code,
       keyword_init: true
@@ -2086,6 +2191,7 @@ module Aws::Comprehend
     #       </p>
     #   @return [Array<Types::SyntaxToken>]
     class DetectSyntaxResponse < Struct.new(
+      nil,
       :syntax_tokens,
       keyword_init: true
     )
@@ -2099,6 +2205,7 @@ module Aws::Comprehend
     #   <p>The language of the input documents. Currently, English is the only supported language.</p>
     #   @return [String]
     class DetectTargetedSentimentRequest < Struct.new(
+      nil,
       :text,
       :language_code,
       keyword_init: true
@@ -2111,6 +2218,7 @@ module Aws::Comprehend
     #   <p>Targeted sentiment analysis for each of the entities identified in the input text.</p>
     #   @return [Array<Types::TargetedSentimentEntity>]
     class DetectTargetedSentimentResponse < Struct.new(
+      nil,
       :entities,
       keyword_init: true
     )
@@ -2125,6 +2233,7 @@ module Aws::Comprehend
     #   <p>The language of the input text. Currently, English is the only supported language.</p>
     #   @return [String]
     class DetectToxicContentRequest < Struct.new(
+      nil,
       :text_segments,
       :language_code,
       keyword_init: true
@@ -2140,6 +2249,7 @@ module Aws::Comprehend
     #       </p>
     #   @return [Array<Types::ToxicLabels>]
     class DetectToxicContentResponse < Struct.new(
+      nil,
       :result_list,
       keyword_init: true
     )
@@ -2158,6 +2268,7 @@ module Aws::Comprehend
     #         in the response only if your request includes the <code>Byte</code> parameter. </p>
     #   @return [Integer]
     class DocumentClass < Struct.new(
+      nil,
       :name,
       :score,
       :page,
@@ -2174,6 +2285,7 @@ module Aws::Comprehend
     #   <p>One or more labels to associate with the custom classifier.</p>
     #   @return [Array<String>]
     class DocumentClassificationConfig < Struct.new(
+      nil,
       :mode,
       :labels,
       keyword_init: true
@@ -2201,6 +2313,7 @@ module Aws::Comprehend
     #         newest to oldest.</p>
     #   @return [Time]
     class DocumentClassificationJobFilter < Struct.new(
+      nil,
       :job_name,
       :job_status,
       :submit_time_before,
@@ -2282,6 +2395,7 @@ module Aws::Comprehend
     #   <p>The Amazon Resource Number (ARN) of the flywheel</p>
     #   @return [String]
     class DocumentClassificationJobProperties < Struct.new(
+      nil,
       :job_id,
       :job_arn,
       :job_name,
@@ -2310,6 +2424,7 @@ module Aws::Comprehend
     #         This field is not required if you do not specify a test CSV file.</p>
     #   @return [String]
     class DocumentClassifierDocuments < Struct.new(
+      nil,
       :s3_uri,
       :test_s3_uri,
       keyword_init: true
@@ -2337,6 +2452,7 @@ module Aws::Comprehend
     #         returned in descending order, newest to oldest.</p>
     #   @return [Time]
     class DocumentClassifierFilter < Struct.new(
+      nil,
       :status,
       :document_classifier_name,
       :submit_time_before,
@@ -2435,6 +2551,7 @@ module Aws::Comprehend
     #       </p>
     #   @return [Types::DocumentReaderConfig]
     class DocumentClassifierInputDataConfig < Struct.new(
+      nil,
       :data_format,
       :s3_uri,
       :test_s3_uri,
@@ -2489,6 +2606,7 @@ module Aws::Comprehend
     #   <p>The Amazon S3 prefix for the data lake location of the flywheel statistics.</p>
     #   @return [String]
     class DocumentClassifierOutputDataConfig < Struct.new(
+      nil,
       :s3_uri,
       :kms_key_id,
       :flywheel_stats_s3_prefix,
@@ -2599,6 +2717,7 @@ module Aws::Comprehend
     #   <p>The Amazon Resource Number (ARN) of the flywheel</p>
     #   @return [String]
     class DocumentClassifierProperties < Struct.new(
+      nil,
       :document_classifier_arn,
       :language_code,
       :status,
@@ -2640,6 +2759,7 @@ module Aws::Comprehend
     #   <p>Provides the status of the latest document classifier version.</p>
     #   @return [String]
     class DocumentClassifierSummary < Struct.new(
+      nil,
       :document_classifier_name,
       :number_of_versions,
       :latest_version_created_at,
@@ -2662,6 +2782,7 @@ module Aws::Comprehend
     #         in the response only if your request includes the <code>Byte</code> parameter. </p>
     #   @return [Integer]
     class DocumentLabel < Struct.new(
+      nil,
       :name,
       :score,
       :page,
@@ -2678,6 +2799,7 @@ module Aws::Comprehend
     #   <p>List of pages in the document, with the number of characters extracted from each page.</p>
     #   @return [Array<Types::ExtractedCharactersListItem>]
     class DocumentMetadata < Struct.new(
+      nil,
       :pages,
       :extracted_characters,
       keyword_init: true
@@ -2754,6 +2876,7 @@ module Aws::Comprehend
     #            </ul>
     #   @return [Array<String>]
     class DocumentReaderConfig < Struct.new(
+      nil,
       :document_read_action,
       :document_read_mode,
       :feature_types,
@@ -2770,6 +2893,7 @@ module Aws::Comprehend
     #   <p>Document type.</p>
     #   @return [String]
     class DocumentTypeListItem < Struct.new(
+      nil,
       :page,
       :type,
       keyword_init: true
@@ -2789,6 +2913,7 @@ module Aws::Comprehend
     #         detection.</p>
     #   @return [Float]
     class DominantLanguage < Struct.new(
+      nil,
       :language_code,
       :score,
       keyword_init: true
@@ -2817,6 +2942,7 @@ module Aws::Comprehend
     #         newest to oldest.</p>
     #   @return [Time]
     class DominantLanguageDetectionJobFilter < Struct.new(
+      nil,
       :job_name,
       :job_status,
       :submit_time_before,
@@ -2893,6 +3019,7 @@ module Aws::Comprehend
     #           VPC</a>. </p>
     #   @return [Types::VpcConfig]
     class DominantLanguageDetectionJobProperties < Struct.new(
+      nil,
       :job_id,
       :job_arn,
       :job_name,
@@ -2927,6 +3054,7 @@ module Aws::Comprehend
     #   <p>Specifies a date after which the returned endpoint or endpoints were created.</p>
     #   @return [Time]
     class EndpointFilter < Struct.new(
+      nil,
       :model_arn,
       :status,
       :creation_time_before,
@@ -2983,6 +3111,7 @@ module Aws::Comprehend
     #   <p>The Amazon Resource Number (ARN) of the flywheel</p>
     #   @return [String]
     class EndpointProperties < Struct.new(
+      nil,
       :endpoint_arn,
       :status,
       :message,
@@ -3020,6 +3149,7 @@ module Aws::Comprehend
     #         newest to oldest.</p>
     #   @return [Time]
     class EntitiesDetectionJobFilter < Struct.new(
+      nil,
       :job_name,
       :job_status,
       :submit_time_before,
@@ -3104,6 +3234,7 @@ module Aws::Comprehend
     #   <p>The Amazon Resource Name (ARN) of the flywheel associated with this job.</p>
     #   @return [String]
     class EntitiesDetectionJobProperties < Struct.new(
+      nil,
       :job_id,
       :job_arn,
       :job_name,
@@ -3153,6 +3284,7 @@ module Aws::Comprehend
     #   <p>A reference to each block for this entity. This field is empty for plain-text input.</p>
     #   @return [Array<Types::BlockReference>]
     class Entity < Struct.new(
+      nil,
       :score,
       :type,
       :text,
@@ -3174,6 +3306,7 @@ module Aws::Comprehend
     #         detection.</p>
     #   @return [Float]
     class EntityLabel < Struct.new(
+      nil,
       :name,
       :score,
       keyword_init: true
@@ -3186,6 +3319,7 @@ module Aws::Comprehend
     #   <p>Up to 25 entity types that the model is trained to recognize.</p>
     #   @return [Array<Types::EntityTypesListItem>]
     class EntityRecognitionConfig < Struct.new(
+      nil,
       :entity_types,
       keyword_init: true
     )
@@ -3202,6 +3336,7 @@ module Aws::Comprehend
     #         located. The URI must be in the same Region as the API endpoint that you are calling.</p>
     #   @return [String]
     class EntityRecognizerAnnotations < Struct.new(
+      nil,
       :s3_uri,
       :test_s3_uri,
       keyword_init: true
@@ -3228,6 +3363,7 @@ module Aws::Comprehend
     #         Use this option when you are processing many short documents, such as text messages.</p>
     #   @return [String]
     class EntityRecognizerDocuments < Struct.new(
+      nil,
       :s3_uri,
       :test_s3_uri,
       :input_format,
@@ -3242,6 +3378,7 @@ module Aws::Comprehend
     #         same Region as the API endpoint that you are calling.</p>
     #   @return [String]
     class EntityRecognizerEntityList < Struct.new(
+      nil,
       :s3_uri,
       keyword_init: true
     )
@@ -3267,6 +3404,7 @@ module Aws::Comprehend
     #       </p>
     #   @return [Float]
     class EntityRecognizerEvaluationMetrics < Struct.new(
+      nil,
       :precision,
       :recall,
       :f1_score,
@@ -3295,6 +3433,7 @@ module Aws::Comprehend
     #         oldest to newest.</p>
     #   @return [Time]
     class EntityRecognizerFilter < Struct.new(
+      nil,
       :status,
       :recognizer_name,
       :submit_time_before,
@@ -3360,6 +3499,7 @@ module Aws::Comprehend
     #           <code>AUGMENTED_MANIFEST</code>.</p>
     #   @return [Array<Types::AugmentedManifestsListItem>]
     class EntityRecognizerInputDataConfig < Struct.new(
+      nil,
       :data_format,
       :entity_types,
       :documents,
@@ -3388,6 +3528,7 @@ module Aws::Comprehend
     #   <p>Entity types from the metadata of an entity recognizer.</p>
     #   @return [Array<Types::EntityRecognizerMetadataEntityTypesListItem>]
     class EntityRecognizerMetadata < Struct.new(
+      nil,
       :number_of_trained_documents,
       :number_of_test_documents,
       :evaluation_metrics,
@@ -3411,6 +3552,7 @@ module Aws::Comprehend
     #   <p>Indicates the number of times the given entity type was seen in the training data. </p>
     #   @return [Integer]
     class EntityRecognizerMetadataEntityTypesListItem < Struct.new(
+      nil,
       :type,
       :evaluation_metrics,
       :number_of_train_mentions,
@@ -3424,6 +3566,7 @@ module Aws::Comprehend
     #   <p>The Amazon S3 prefix for the data lake location of the flywheel statistics.</p>
     #   @return [String]
     class EntityRecognizerOutputDataConfig < Struct.new(
+      nil,
       :flywheel_stats_s3_prefix,
       keyword_init: true
     )
@@ -3516,6 +3659,7 @@ module Aws::Comprehend
     #   <p>Output data configuration.</p>
     #   @return [Types::EntityRecognizerOutputDataConfig]
     class EntityRecognizerProperties < Struct.new(
+      nil,
       :entity_recognizer_arn,
       :language_code,
       :status,
@@ -3556,6 +3700,7 @@ module Aws::Comprehend
     #   <p> Provides the status of the latest entity recognizer version.</p>
     #   @return [String]
     class EntityRecognizerSummary < Struct.new(
+      nil,
       :recognizer_name,
       :number_of_versions,
       :latest_version_created_at,
@@ -3584,6 +3729,7 @@ module Aws::Comprehend
     #         the worst score is 0. </p>
     #   @return [Float]
     class EntityTypesEvaluationMetrics < Struct.new(
+      nil,
       :precision,
       :recall,
       :f1_score,
@@ -3602,6 +3748,7 @@ module Aws::Comprehend
     #         (escaped tab), and , (comma).</p>
     #   @return [String]
     class EntityTypesListItem < Struct.new(
+      nil,
       :type,
       keyword_init: true
     )
@@ -3641,6 +3788,7 @@ module Aws::Comprehend
     #   <p>Text message explaining the reason for the error.</p>
     #   @return [String]
     class ErrorsListItem < Struct.new(
+      nil,
       :page,
       :error_code,
       :error_message,
@@ -3668,6 +3816,7 @@ module Aws::Comprehend
     #         newest to oldest.</p>
     #   @return [Time]
     class EventsDetectionJobFilter < Struct.new(
+      nil,
       :job_name,
       :job_status,
       :submit_time_before,
@@ -3727,6 +3876,7 @@ module Aws::Comprehend
     #   <p>The types of events that are detected by the job.</p>
     #   @return [Array<String>]
     class EventsDetectionJobProperties < Struct.new(
+      nil,
       :job_id,
       :job_arn,
       :job_name,
@@ -3752,6 +3902,7 @@ module Aws::Comprehend
     #   <p>Number of characters extracted from each page.</p>
     #   @return [Integer]
     class ExtractedCharactersListItem < Struct.new(
+      nil,
       :page,
       :count,
       keyword_init: true
@@ -3770,6 +3921,7 @@ module Aws::Comprehend
     #   <p>Filter the flywheels to include flywheels created before the specified time.</p>
     #   @return [Time]
     class FlywheelFilter < Struct.new(
+      nil,
       :status,
       :creation_time_after,
       :creation_time_before,
@@ -3786,6 +3938,7 @@ module Aws::Comprehend
     #   <p>Filter the flywheel iterations to include iterations created before the specified time.</p>
     #   @return [Time]
     class FlywheelIterationFilter < Struct.new(
+      nil,
       :creation_time_after,
       :creation_time_before,
       keyword_init: true
@@ -3828,6 +3981,7 @@ module Aws::Comprehend
     #   <p></p>
     #   @return [String]
     class FlywheelIterationProperties < Struct.new(
+      nil,
       :flywheel_arn,
       :flywheel_iteration_id,
       :creation_time,
@@ -3858,6 +4012,7 @@ module Aws::Comprehend
     #   <p>Average accuracy metric for the model.</p>
     #   @return [Float]
     class FlywheelModelEvaluationMetrics < Struct.new(
+      nil,
       :average_f1_score,
       :average_precision,
       :average_recall,
@@ -3906,6 +4061,7 @@ module Aws::Comprehend
     #   <p>The most recent flywheel iteration.</p>
     #   @return [String]
     class FlywheelProperties < Struct.new(
+      nil,
       :flywheel_arn,
       :active_model_arn,
       :data_access_role_arn,
@@ -3952,6 +4108,7 @@ module Aws::Comprehend
     #   <p>The most recent flywheel iteration.</p>
     #   @return [String]
     class FlywheelSummary < Struct.new(
+      nil,
       :flywheel_arn,
       :active_model_arn,
       :data_lake_s3_uri,
@@ -3976,6 +4133,7 @@ module Aws::Comprehend
     #   <p>Within the bounding box, a fine-grained polygon around the recognized item.</p>
     #   @return [Array<Types::Point>]
     class Geometry < Struct.new(
+      nil,
       :bounding_box,
       :polygon,
       keyword_init: true
@@ -4023,6 +4181,7 @@ module Aws::Comprehend
     #         department.</p>
     #   @return [Array<Types::Tag>]
     class ImportModelRequest < Struct.new(
+      nil,
       :source_model_arn,
       :model_name,
       :version_name,
@@ -4038,6 +4197,7 @@ module Aws::Comprehend
     #   <p>The Amazon Resource Name (ARN) of the custom model being imported.</p>
     #   @return [String]
     class ImportModelResponse < Struct.new(
+      nil,
       :model_arn,
       keyword_init: true
     )
@@ -4076,6 +4236,7 @@ module Aws::Comprehend
     #         from PDF documents and image files.</p>
     #   @return [Types::DocumentReaderConfig]
     class InputDataConfig < Struct.new(
+      nil,
       :s3_uri,
       :input_format,
       :document_reader_config,
@@ -4088,6 +4249,7 @@ module Aws::Comprehend
     # @!attribute message
     #   @return [String]
     class InternalServerException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -4099,6 +4261,7 @@ module Aws::Comprehend
     # @!attribute message
     #   @return [String]
     class InvalidFilterException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -4133,6 +4296,7 @@ module Aws::Comprehend
     #            </ul>
     #   @return [String]
     class InvalidRequestDetail < Struct.new(
+      nil,
       :reason,
       keyword_init: true
     )
@@ -4148,6 +4312,7 @@ module Aws::Comprehend
     #   <p>Provides additional detail about why the request failed.</p>
     #   @return [Types::InvalidRequestDetail]
     class InvalidRequestException < Struct.new(
+      nil,
       :message,
       :reason,
       :detail,
@@ -4160,6 +4325,7 @@ module Aws::Comprehend
     # @!attribute message
     #   @return [String]
     class JobNotFoundException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -4183,6 +4349,7 @@ module Aws::Comprehend
     #         key phrase.</p>
     #   @return [Integer]
     class KeyPhrase < Struct.new(
+      nil,
       :score,
       :text,
       :begin_offset,
@@ -4212,6 +4379,7 @@ module Aws::Comprehend
     #         newest to oldest.</p>
     #   @return [Time]
     class KeyPhrasesDetectionJobFilter < Struct.new(
+      nil,
       :job_name,
       :job_status,
       :submit_time_before,
@@ -4290,6 +4458,7 @@ module Aws::Comprehend
     #           VPC</a>. </p>
     #   @return [Types::VpcConfig]
     class KeyPhrasesDetectionJobProperties < Struct.new(
+      nil,
       :job_id,
       :job_arn,
       :job_name,
@@ -4313,6 +4482,7 @@ module Aws::Comprehend
     # @!attribute message
     #   @return [String]
     class KmsKeyValidationException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -4332,6 +4502,7 @@ module Aws::Comprehend
     #   <p>Maximum number of results to return in a response. The default is 100.</p>
     #   @return [Integer]
     class ListDatasetsRequest < Struct.new(
+      nil,
       :flywheel_arn,
       :filter,
       :next_token,
@@ -4348,6 +4519,7 @@ module Aws::Comprehend
     #   <p>Identifies the next page of results to return.</p>
     #   @return [String]
     class ListDatasetsResponse < Struct.new(
+      nil,
       :dataset_properties_list,
       :next_token,
       keyword_init: true
@@ -4366,6 +4538,7 @@ module Aws::Comprehend
     #   <p>The maximum number of results to return in each page. The default is 100.</p>
     #   @return [Integer]
     class ListDocumentClassificationJobsRequest < Struct.new(
+      nil,
       :filter,
       :next_token,
       :max_results,
@@ -4381,6 +4554,7 @@ module Aws::Comprehend
     #   <p>Identifies the next page of results to return.</p>
     #   @return [String]
     class ListDocumentClassificationJobsResponse < Struct.new(
+      nil,
       :document_classification_job_properties_list,
       :next_token,
       keyword_init: true
@@ -4395,6 +4569,7 @@ module Aws::Comprehend
     #   <p>The maximum number of results to return on each page. The default is 100.</p>
     #   @return [Integer]
     class ListDocumentClassifierSummariesRequest < Struct.new(
+      nil,
       :next_token,
       :max_results,
       keyword_init: true
@@ -4409,6 +4584,7 @@ module Aws::Comprehend
     #   <p>Identifies the next page of results to return.</p>
     #   @return [String]
     class ListDocumentClassifierSummariesResponse < Struct.new(
+      nil,
       :document_classifier_summaries_list,
       :next_token,
       keyword_init: true
@@ -4427,6 +4603,7 @@ module Aws::Comprehend
     #   <p>The maximum number of results to return in each page. The default is 100.</p>
     #   @return [Integer]
     class ListDocumentClassifiersRequest < Struct.new(
+      nil,
       :filter,
       :next_token,
       :max_results,
@@ -4442,6 +4619,7 @@ module Aws::Comprehend
     #   <p>Identifies the next page of results to return.</p>
     #   @return [String]
     class ListDocumentClassifiersResponse < Struct.new(
+      nil,
       :document_classifier_properties_list,
       :next_token,
       keyword_init: true
@@ -4460,6 +4638,7 @@ module Aws::Comprehend
     #   <p>The maximum number of results to return in each page. The default is 100.</p>
     #   @return [Integer]
     class ListDominantLanguageDetectionJobsRequest < Struct.new(
+      nil,
       :filter,
       :next_token,
       :max_results,
@@ -4475,6 +4654,7 @@ module Aws::Comprehend
     #   <p>Identifies the next page of results to return.</p>
     #   @return [String]
     class ListDominantLanguageDetectionJobsResponse < Struct.new(
+      nil,
       :dominant_language_detection_job_properties_list,
       :next_token,
       keyword_init: true
@@ -4494,6 +4674,7 @@ module Aws::Comprehend
     #   <p>The maximum number of results to return in each page. The default is 100.</p>
     #   @return [Integer]
     class ListEndpointsRequest < Struct.new(
+      nil,
       :filter,
       :next_token,
       :max_results,
@@ -4510,6 +4691,7 @@ module Aws::Comprehend
     #   <p>Identifies the next page of results to return.</p>
     #   @return [String]
     class ListEndpointsResponse < Struct.new(
+      nil,
       :endpoint_properties_list,
       :next_token,
       keyword_init: true
@@ -4528,6 +4710,7 @@ module Aws::Comprehend
     #   <p>The maximum number of results to return in each page. The default is 100.</p>
     #   @return [Integer]
     class ListEntitiesDetectionJobsRequest < Struct.new(
+      nil,
       :filter,
       :next_token,
       :max_results,
@@ -4543,6 +4726,7 @@ module Aws::Comprehend
     #   <p>Identifies the next page of results to return.</p>
     #   @return [String]
     class ListEntitiesDetectionJobsResponse < Struct.new(
+      nil,
       :entities_detection_job_properties_list,
       :next_token,
       keyword_init: true
@@ -4557,6 +4741,7 @@ module Aws::Comprehend
     #   <p>The maximum number of results to return on each page. The default is 100.</p>
     #   @return [Integer]
     class ListEntityRecognizerSummariesRequest < Struct.new(
+      nil,
       :next_token,
       :max_results,
       keyword_init: true
@@ -4571,6 +4756,7 @@ module Aws::Comprehend
     #   <p>Identifies the next page of results to return.</p>
     #   @return [String]
     class ListEntityRecognizerSummariesResponse < Struct.new(
+      nil,
       :entity_recognizer_summaries_list,
       :next_token,
       keyword_init: true
@@ -4590,6 +4776,7 @@ module Aws::Comprehend
     #   <p> The maximum number of results to return on each page. The default is 100.</p>
     #   @return [Integer]
     class ListEntityRecognizersRequest < Struct.new(
+      nil,
       :filter,
       :next_token,
       :max_results,
@@ -4605,6 +4792,7 @@ module Aws::Comprehend
     #   <p>Identifies the next page of results to return.</p>
     #   @return [String]
     class ListEntityRecognizersResponse < Struct.new(
+      nil,
       :entity_recognizer_properties_list,
       :next_token,
       keyword_init: true
@@ -4623,6 +4811,7 @@ module Aws::Comprehend
     #   <p>The maximum number of results to return in each page.</p>
     #   @return [Integer]
     class ListEventsDetectionJobsRequest < Struct.new(
+      nil,
       :filter,
       :next_token,
       :max_results,
@@ -4638,6 +4827,7 @@ module Aws::Comprehend
     #   <p>Identifies the next page of results to return.</p>
     #   @return [String]
     class ListEventsDetectionJobsResponse < Struct.new(
+      nil,
       :events_detection_job_properties_list,
       :next_token,
       keyword_init: true
@@ -4658,6 +4848,7 @@ module Aws::Comprehend
     #   <p>Maximum number of iteration history results to return</p>
     #   @return [Integer]
     class ListFlywheelIterationHistoryRequest < Struct.new(
+      nil,
       :flywheel_arn,
       :filter,
       :next_token,
@@ -4674,6 +4865,7 @@ module Aws::Comprehend
     #   <p>Next token</p>
     #   @return [String]
     class ListFlywheelIterationHistoryResponse < Struct.new(
+      nil,
       :flywheel_iteration_properties_list,
       :next_token,
       keyword_init: true
@@ -4693,6 +4885,7 @@ module Aws::Comprehend
     #   <p>Maximum number of results to return in a response. The default is 100.</p>
     #   @return [Integer]
     class ListFlywheelsRequest < Struct.new(
+      nil,
       :filter,
       :next_token,
       :max_results,
@@ -4709,6 +4902,7 @@ module Aws::Comprehend
     #   <p>Identifies the next page of results to return.</p>
     #   @return [String]
     class ListFlywheelsResponse < Struct.new(
+      nil,
       :flywheel_summary_list,
       :next_token,
       keyword_init: true
@@ -4727,6 +4921,7 @@ module Aws::Comprehend
     #   <p>The maximum number of results to return in each page. The default is 100.</p>
     #   @return [Integer]
     class ListKeyPhrasesDetectionJobsRequest < Struct.new(
+      nil,
       :filter,
       :next_token,
       :max_results,
@@ -4742,6 +4937,7 @@ module Aws::Comprehend
     #   <p>Identifies the next page of results to return.</p>
     #   @return [String]
     class ListKeyPhrasesDetectionJobsResponse < Struct.new(
+      nil,
       :key_phrases_detection_job_properties_list,
       :next_token,
       keyword_init: true
@@ -4760,6 +4956,7 @@ module Aws::Comprehend
     #   <p>The maximum number of results to return in each page.</p>
     #   @return [Integer]
     class ListPiiEntitiesDetectionJobsRequest < Struct.new(
+      nil,
       :filter,
       :next_token,
       :max_results,
@@ -4775,6 +4972,7 @@ module Aws::Comprehend
     #   <p>Identifies the next page of results to return.</p>
     #   @return [String]
     class ListPiiEntitiesDetectionJobsResponse < Struct.new(
+      nil,
       :pii_entities_detection_job_properties_list,
       :next_token,
       keyword_init: true
@@ -4793,6 +4991,7 @@ module Aws::Comprehend
     #   <p>The maximum number of results to return in each page. The default is 100.</p>
     #   @return [Integer]
     class ListSentimentDetectionJobsRequest < Struct.new(
+      nil,
       :filter,
       :next_token,
       :max_results,
@@ -4808,6 +5007,7 @@ module Aws::Comprehend
     #   <p>Identifies the next page of results to return.</p>
     #   @return [String]
     class ListSentimentDetectionJobsResponse < Struct.new(
+      nil,
       :sentiment_detection_job_properties_list,
       :next_token,
       keyword_init: true
@@ -4820,6 +5020,7 @@ module Aws::Comprehend
     #       </p>
     #   @return [String]
     class ListTagsForResourceRequest < Struct.new(
+      nil,
       :resource_arn,
       keyword_init: true
     )
@@ -4837,6 +5038,7 @@ module Aws::Comprehend
     #       </p>
     #   @return [Array<Types::Tag>]
     class ListTagsForResourceResponse < Struct.new(
+      nil,
       :resource_arn,
       :tags,
       keyword_init: true
@@ -4855,6 +5057,7 @@ module Aws::Comprehend
     #   <p>The maximum number of results to return in each page. The default is 100.</p>
     #   @return [Integer]
     class ListTargetedSentimentDetectionJobsRequest < Struct.new(
+      nil,
       :filter,
       :next_token,
       :max_results,
@@ -4870,6 +5073,7 @@ module Aws::Comprehend
     #   <p>Identifies the next page of results to return.</p>
     #   @return [String]
     class ListTargetedSentimentDetectionJobsResponse < Struct.new(
+      nil,
       :targeted_sentiment_detection_job_properties_list,
       :next_token,
       keyword_init: true
@@ -4888,6 +5092,7 @@ module Aws::Comprehend
     #   <p>The maximum number of results to return in each page. The default is 100.</p>
     #   @return [Integer]
     class ListTopicsDetectionJobsRequest < Struct.new(
+      nil,
       :filter,
       :next_token,
       :max_results,
@@ -4903,6 +5108,7 @@ module Aws::Comprehend
     #   <p>Identifies the next page of results to return.</p>
     #   @return [String]
     class ListTopicsDetectionJobsResponse < Struct.new(
+      nil,
       :topics_detection_job_properties_list,
       :next_token,
       keyword_init: true
@@ -4920,6 +5126,7 @@ module Aws::Comprehend
     #         detection of sentiments.</p>
     #   @return [Types::SentimentScore]
     class MentionSentiment < Struct.new(
+      nil,
       :sentiment,
       :sentiment_score,
       keyword_init: true
@@ -4970,6 +5177,7 @@ module Aws::Comprehend
     #            </ul>
     #   @return [String]
     class OutputDataConfig < Struct.new(
+      nil,
       :s3_uri,
       :kms_key_id,
       keyword_init: true
@@ -4990,6 +5198,7 @@ module Aws::Comprehend
     #         identified.</p>
     #   @return [Float]
     class PartOfSpeechTag < Struct.new(
+      nil,
       :tag,
       :score,
       keyword_init: true
@@ -5016,6 +5225,7 @@ module Aws::Comprehend
     #         newest to oldest.</p>
     #   @return [Time]
     class PiiEntitiesDetectionJobFilter < Struct.new(
+      nil,
       :job_name,
       :job_status,
       :submit_time_before,
@@ -5082,6 +5292,7 @@ module Aws::Comprehend
     #         which PII entities are redacted.</p>
     #   @return [String]
     class PiiEntitiesDetectionJobProperties < Struct.new(
+      nil,
       :job_id,
       :job_arn,
       :job_name,
@@ -5117,6 +5328,7 @@ module Aws::Comprehend
     #         entity.</p>
     #   @return [Integer]
     class PiiEntity < Struct.new(
+      nil,
       :score,
       :type,
       :begin_offset,
@@ -5140,6 +5352,7 @@ module Aws::Comprehend
     #         output results from an analysis job.</p>
     #   @return [String]
     class PiiOutputDataConfig < Struct.new(
+      nil,
       :s3_uri,
       :kms_key_id,
       keyword_init: true
@@ -5156,6 +5369,7 @@ module Aws::Comprehend
     #   <p>The value of the Y coordinate for a point on a polygon</p>
     #   @return [Float]
     class Point < Struct.new(
+      nil,
       :x,
       :y,
       keyword_init: true
@@ -5186,6 +5400,7 @@ module Aws::Comprehend
     #         Comprehend creates the revision ID for you.</p>
     #   @return [String]
     class PutResourcePolicyRequest < Struct.new(
+      nil,
       :resource_arn,
       :resource_policy,
       :policy_revision_id,
@@ -5199,6 +5414,7 @@ module Aws::Comprehend
     #         new revision ID, and it deletes the prior version of the policy.</p>
     #   @return [String]
     class PutResourcePolicyResponse < Struct.new(
+      nil,
       :policy_revision_id,
       keyword_init: true
     )
@@ -5218,6 +5434,7 @@ module Aws::Comprehend
     #   <p>A character that replaces each character in the redacted PII entity.</p>
     #   @return [String]
     class RedactionConfig < Struct.new(
+      nil,
       :pii_entity_types,
       :mask_mode,
       :mask_character,
@@ -5234,6 +5451,7 @@ module Aws::Comprehend
     #   <p>Only supported relationship is a child relationship.</p>
     #   @return [String]
     class RelationshipsListItem < Struct.new(
+      nil,
       :ids,
       :type,
       keyword_init: true
@@ -5246,6 +5464,7 @@ module Aws::Comprehend
     # @!attribute message
     #   @return [String]
     class ResourceInUseException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -5257,6 +5476,7 @@ module Aws::Comprehend
     # @!attribute message
     #   @return [String]
     class ResourceLimitExceededException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -5267,6 +5487,7 @@ module Aws::Comprehend
     # @!attribute message
     #   @return [String]
     class ResourceNotFoundException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -5278,6 +5499,7 @@ module Aws::Comprehend
     # @!attribute message
     #   @return [String]
     class ResourceUnavailableException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -5304,6 +5526,7 @@ module Aws::Comprehend
     #         newest to oldest.</p>
     #   @return [Time]
     class SentimentDetectionJobFilter < Struct.new(
+      nil,
       :job_name,
       :job_status,
       :submit_time_before,
@@ -5382,6 +5605,7 @@ module Aws::Comprehend
     #           VPC</a>. </p>
     #   @return [Types::VpcConfig]
     class SentimentDetectionJobProperties < Struct.new(
+      nil,
       :job_id,
       :job_arn,
       :job_name,
@@ -5419,6 +5643,7 @@ module Aws::Comprehend
     #         the <code>MIXED</code> sentiment.</p>
     #   @return [Float]
     class SentimentScore < Struct.new(
+      nil,
       :positive,
       :negative,
       :neutral,
@@ -5480,6 +5705,7 @@ module Aws::Comprehend
     #   <p>The Amazon Resource Number (ARN) of the flywheel associated with the model to use.</p>
     #   @return [String]
     class StartDocumentClassificationJobRequest < Struct.new(
+      nil,
       :job_name,
       :document_classifier_arn,
       :input_data_config,
@@ -5540,6 +5766,7 @@ module Aws::Comprehend
     #   <p>The ARN of the custom classification model.</p>
     #   @return [String]
     class StartDocumentClassificationJobResponse < Struct.new(
+      nil,
       :job_id,
       :job_arn,
       :job_status,
@@ -5593,6 +5820,7 @@ module Aws::Comprehend
     #         the key might be added to a resource to indicate its use by the sales department.</p>
     #   @return [Array<Types::Tag>]
     class StartDominantLanguageDetectionJobRequest < Struct.new(
+      nil,
       :input_data_config,
       :output_data_config,
       :data_access_role_arn,
@@ -5640,6 +5868,7 @@ module Aws::Comprehend
     #            </ul>
     #   @return [String]
     class StartDominantLanguageDetectionJobResponse < Struct.new(
+      nil,
       :job_id,
       :job_arn,
       :job_status,
@@ -5706,6 +5935,7 @@ module Aws::Comprehend
     #   <p>The Amazon Resource Number (ARN) of the flywheel associated with the model to use.</p>
     #   @return [String]
     class StartEntitiesDetectionJobRequest < Struct.new(
+      nil,
       :input_data_config,
       :output_data_config,
       :data_access_role_arn,
@@ -5766,6 +5996,7 @@ module Aws::Comprehend
     #   <p>The ARN of the custom entity recognition model.</p>
     #   @return [String]
     class StartEntitiesDetectionJobResponse < Struct.new(
+      nil,
       :job_id,
       :job_arn,
       :job_status,
@@ -5804,6 +6035,7 @@ module Aws::Comprehend
     #         might be added to a resource to indicate its use by the sales department.</p>
     #   @return [Array<Types::Tag>]
     class StartEventsDetectionJobRequest < Struct.new(
+      nil,
       :input_data_config,
       :output_data_config,
       :data_access_role_arn,
@@ -5837,6 +6069,7 @@ module Aws::Comprehend
     #   <p>The status of the events detection job.</p>
     #   @return [String]
     class StartEventsDetectionJobResponse < Struct.new(
+      nil,
       :job_id,
       :job_arn,
       :job_status,
@@ -5853,6 +6086,7 @@ module Aws::Comprehend
     #         Comprehend generates one.</p>
     #   @return [String]
     class StartFlywheelIterationRequest < Struct.new(
+      nil,
       :flywheel_arn,
       :client_request_token,
       keyword_init: true
@@ -5867,6 +6101,7 @@ module Aws::Comprehend
     #   <p></p>
     #   @return [String]
     class StartFlywheelIterationResponse < Struct.new(
+      nil,
       :flywheel_arn,
       :flywheel_iteration_id,
       keyword_init: true
@@ -5923,6 +6158,7 @@ module Aws::Comprehend
     #         key might be added to a resource to indicate its use by the sales department.</p>
     #   @return [Array<Types::Tag>]
     class StartKeyPhrasesDetectionJobRequest < Struct.new(
+      nil,
       :input_data_config,
       :output_data_config,
       :data_access_role_arn,
@@ -5971,6 +6207,7 @@ module Aws::Comprehend
     #            </ul>
     #   @return [String]
     class StartKeyPhrasesDetectionJobResponse < Struct.new(
+      nil,
       :job_id,
       :job_arn,
       :job_status,
@@ -6016,6 +6253,7 @@ module Aws::Comprehend
     #         key might be added to a resource to indicate its use by the sales department.</p>
     #   @return [Array<Types::Tag>]
     class StartPiiEntitiesDetectionJobRequest < Struct.new(
+      nil,
       :input_data_config,
       :output_data_config,
       :mode,
@@ -6049,6 +6287,7 @@ module Aws::Comprehend
     #   <p>The status of the job.</p>
     #   @return [String]
     class StartPiiEntitiesDetectionJobResponse < Struct.new(
+      nil,
       :job_id,
       :job_arn,
       :job_status,
@@ -6105,6 +6344,7 @@ module Aws::Comprehend
     #         key might be added to a resource to indicate its use by the sales department.</p>
     #   @return [Array<Types::Tag>]
     class StartSentimentDetectionJobRequest < Struct.new(
+      nil,
       :input_data_config,
       :output_data_config,
       :data_access_role_arn,
@@ -6153,6 +6393,7 @@ module Aws::Comprehend
     #            </ul>
     #   @return [String]
     class StartSentimentDetectionJobResponse < Struct.new(
+      nil,
       :job_id,
       :job_arn,
       :job_status,
@@ -6209,6 +6450,7 @@ module Aws::Comprehend
     #         key might be added to a resource to indicate its use by the sales department.</p>
     #   @return [Array<Types::Tag>]
     class StartTargetedSentimentDetectionJobRequest < Struct.new(
+      nil,
       :input_data_config,
       :output_data_config,
       :data_access_role_arn,
@@ -6258,6 +6500,7 @@ module Aws::Comprehend
     #            </ul>
     #   @return [String]
     class StartTargetedSentimentDetectionJobResponse < Struct.new(
+      nil,
       :job_id,
       :job_arn,
       :job_status,
@@ -6315,6 +6558,7 @@ module Aws::Comprehend
     #         might be added to a resource to indicate its use by the sales department.</p>
     #   @return [Array<Types::Tag>]
     class StartTopicsDetectionJobRequest < Struct.new(
+      nil,
       :input_data_config,
       :output_data_config,
       :data_access_role_arn,
@@ -6365,6 +6609,7 @@ module Aws::Comprehend
     #            </ul>
     #   @return [String]
     class StartTopicsDetectionJobResponse < Struct.new(
+      nil,
       :job_id,
       :job_arn,
       :job_status,
@@ -6377,6 +6622,7 @@ module Aws::Comprehend
     #   <p>The identifier of the dominant language detection job to stop.</p>
     #   @return [String]
     class StopDominantLanguageDetectionJobRequest < Struct.new(
+      nil,
       :job_id,
       keyword_init: true
     )
@@ -6392,6 +6638,7 @@ module Aws::Comprehend
     #           <code>StopDominantLanguageDetectionJob</code> operation.</p>
     #   @return [String]
     class StopDominantLanguageDetectionJobResponse < Struct.new(
+      nil,
       :job_id,
       :job_status,
       keyword_init: true
@@ -6403,6 +6650,7 @@ module Aws::Comprehend
     #   <p>The identifier of the entities detection job to stop.</p>
     #   @return [String]
     class StopEntitiesDetectionJobRequest < Struct.new(
+      nil,
       :job_id,
       keyword_init: true
     )
@@ -6418,6 +6666,7 @@ module Aws::Comprehend
     #           <code>StopEntitiesDetectionJob</code> operation.</p>
     #   @return [String]
     class StopEntitiesDetectionJobResponse < Struct.new(
+      nil,
       :job_id,
       :job_status,
       keyword_init: true
@@ -6429,6 +6678,7 @@ module Aws::Comprehend
     #   <p>The identifier of the events detection job to stop.</p>
     #   @return [String]
     class StopEventsDetectionJobRequest < Struct.new(
+      nil,
       :job_id,
       keyword_init: true
     )
@@ -6442,6 +6692,7 @@ module Aws::Comprehend
     #   <p>The status of the events detection job.</p>
     #   @return [String]
     class StopEventsDetectionJobResponse < Struct.new(
+      nil,
       :job_id,
       :job_status,
       keyword_init: true
@@ -6453,6 +6704,7 @@ module Aws::Comprehend
     #   <p>The identifier of the key phrases detection job to stop.</p>
     #   @return [String]
     class StopKeyPhrasesDetectionJobRequest < Struct.new(
+      nil,
       :job_id,
       keyword_init: true
     )
@@ -6468,6 +6720,7 @@ module Aws::Comprehend
     #           <code>StopKeyPhrasesDetectionJob</code> operation.</p>
     #   @return [String]
     class StopKeyPhrasesDetectionJobResponse < Struct.new(
+      nil,
       :job_id,
       :job_status,
       keyword_init: true
@@ -6479,6 +6732,7 @@ module Aws::Comprehend
     #   <p>The identifier of the PII entities detection job to stop.</p>
     #   @return [String]
     class StopPiiEntitiesDetectionJobRequest < Struct.new(
+      nil,
       :job_id,
       keyword_init: true
     )
@@ -6492,6 +6746,7 @@ module Aws::Comprehend
     #   <p>The status of the PII entities detection job.</p>
     #   @return [String]
     class StopPiiEntitiesDetectionJobResponse < Struct.new(
+      nil,
       :job_id,
       :job_status,
       keyword_init: true
@@ -6503,6 +6758,7 @@ module Aws::Comprehend
     #   <p>The identifier of the sentiment detection job to stop.</p>
     #   @return [String]
     class StopSentimentDetectionJobRequest < Struct.new(
+      nil,
       :job_id,
       keyword_init: true
     )
@@ -6518,6 +6774,7 @@ module Aws::Comprehend
     #           <code>StopSentimentDetectionJob</code> operation.</p>
     #   @return [String]
     class StopSentimentDetectionJobResponse < Struct.new(
+      nil,
       :job_id,
       :job_status,
       keyword_init: true
@@ -6529,6 +6786,7 @@ module Aws::Comprehend
     #   <p>The identifier of the targeted sentiment detection job to stop.</p>
     #   @return [String]
     class StopTargetedSentimentDetectionJobRequest < Struct.new(
+      nil,
       :job_id,
       keyword_init: true
     )
@@ -6544,6 +6802,7 @@ module Aws::Comprehend
     #         <code>StopSentimentDetectionJob</code> operation.</p>
     #   @return [String]
     class StopTargetedSentimentDetectionJobResponse < Struct.new(
+      nil,
       :job_id,
       :job_status,
       keyword_init: true
@@ -6556,6 +6815,7 @@ module Aws::Comprehend
     #         trained.</p>
     #   @return [String]
     class StopTrainingDocumentClassifierRequest < Struct.new(
+      nil,
       :document_classifier_arn,
       keyword_init: true
     )
@@ -6563,6 +6823,7 @@ module Aws::Comprehend
     end
 
     class StopTrainingDocumentClassifierResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -6573,6 +6834,7 @@ module Aws::Comprehend
     #         trained.</p>
     #   @return [String]
     class StopTrainingEntityRecognizerRequest < Struct.new(
+      nil,
       :entity_recognizer_arn,
       keyword_init: true
     )
@@ -6580,6 +6842,7 @@ module Aws::Comprehend
     end
 
     class StopTrainingEntityRecognizerResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -6608,6 +6871,7 @@ module Aws::Comprehend
     #       </p>
     #   @return [Types::PartOfSpeechTag]
     class SyntaxToken < Struct.new(
+      nil,
       :token_id,
       :text,
       :begin_offset,
@@ -6634,6 +6898,7 @@ module Aws::Comprehend
     #         sales department. </p>
     #   @return [String]
     class Tag < Struct.new(
+      nil,
       :key,
       :value,
       keyword_init: true
@@ -6650,6 +6915,7 @@ module Aws::Comprehend
     #         of 50 tags (both existing and pending) associated with a specific resource. </p>
     #   @return [Array<Types::Tag>]
     class TagResourceRequest < Struct.new(
+      nil,
       :resource_arn,
       :tags,
       keyword_init: true
@@ -6658,6 +6924,7 @@ module Aws::Comprehend
     end
 
     class TagResourceResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -6683,6 +6950,7 @@ module Aws::Comprehend
     #         newest to oldest.</p>
     #   @return [Time]
     class TargetedSentimentDetectionJobFilter < Struct.new(
+      nil,
       :job_name,
       :job_status,
       :submit_time_before,
@@ -6761,6 +7029,7 @@ module Aws::Comprehend
     #           VPC</a>. </p>
     #   @return [Types::VpcConfig]
     class TargetedSentimentDetectionJobProperties < Struct.new(
+      nil,
       :job_id,
       :job_arn,
       :job_name,
@@ -6790,6 +7059,7 @@ module Aws::Comprehend
     #           Co-reference group</a> for an example. </p>
     #   @return [Array<Types::TargetedSentimentMention>]
     class TargetedSentimentEntity < Struct.new(
+      nil,
       :descriptive_mention_index,
       :mentions,
       keyword_init: true
@@ -6822,6 +7092,7 @@ module Aws::Comprehend
     #   <p>The offset into the document text where the mention ends.</p>
     #   @return [Integer]
     class TargetedSentimentMention < Struct.new(
+      nil,
       :score,
       :group_score,
       :text,
@@ -6845,6 +7116,7 @@ module Aws::Comprehend
     #   <p>Configuration required for an entity recognition model.</p>
     #   @return [Types::EntityRecognitionConfig]
     class TaskConfig < Struct.new(
+      nil,
       :language_code,
       :document_classification_config,
       :entity_recognition_config,
@@ -6858,6 +7130,7 @@ module Aws::Comprehend
     #   <p>The text content.</p>
     #   @return [String]
     class TextSegment < Struct.new(
+      nil,
       :text,
       keyword_init: true
     )
@@ -6868,6 +7141,7 @@ module Aws::Comprehend
     # @!attribute message
     #   @return [String]
     class TextSizeLimitExceededException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -6878,6 +7152,7 @@ module Aws::Comprehend
     # @!attribute message
     #   @return [String]
     class TooManyRequestsException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -6889,6 +7164,7 @@ module Aws::Comprehend
     # @!attribute message
     #   @return [String]
     class TooManyTagKeysException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -6901,6 +7177,7 @@ module Aws::Comprehend
     # @!attribute message
     #   @return [String]
     class TooManyTagsException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -6927,6 +7204,7 @@ module Aws::Comprehend
     #         oldest to newest.</p>
     #   @return [Time]
     class TopicsDetectionJobFilter < Struct.new(
+      nil,
       :job_name,
       :job_status,
       :submit_time_before,
@@ -7006,6 +7284,7 @@ module Aws::Comprehend
     #           VPC</a>. </p>
     #   @return [Types::VpcConfig]
     class TopicsDetectionJobProperties < Struct.new(
+      nil,
       :job_id,
       :job_arn,
       :job_name,
@@ -7034,6 +7313,7 @@ module Aws::Comprehend
     #         Model confidence in the detected content type. Value range is zero to one, where one is highest confidence.</p>
     #   @return [Float]
     class ToxicContent < Struct.new(
+      nil,
       :name,
       :score,
       keyword_init: true
@@ -7049,6 +7329,7 @@ module Aws::Comprehend
     #   <p>Overall toxicity score for the string. Value range is zero to one, where one is the highest confidence.</p>
     #   @return [Float]
     class ToxicLabels < Struct.new(
+      nil,
       :labels,
       :toxicity,
       keyword_init: true
@@ -7062,6 +7343,7 @@ module Aws::Comprehend
     # @!attribute message
     #   @return [String]
     class UnsupportedLanguageException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -7079,6 +7361,7 @@ module Aws::Comprehend
     #       </p>
     #   @return [Array<String>]
     class UntagResourceRequest < Struct.new(
+      nil,
       :resource_arn,
       :tag_keys,
       keyword_init: true
@@ -7087,6 +7370,7 @@ module Aws::Comprehend
     end
 
     class UntagResourceResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -7117,6 +7401,7 @@ module Aws::Comprehend
     #           VPC</a>. </p>
     #   @return [Types::VpcConfig]
     class UpdateDataSecurityConfig < Struct.new(
+      nil,
       :model_kms_key_id,
       :volume_kms_key_id,
       :vpc_config,
@@ -7143,6 +7428,7 @@ module Aws::Comprehend
     #   <p>The Amazon Resource Number (ARN) of the flywheel</p>
     #   @return [String]
     class UpdateEndpointRequest < Struct.new(
+      nil,
       :endpoint_arn,
       :desired_model_arn,
       :desired_inference_units,
@@ -7157,6 +7443,7 @@ module Aws::Comprehend
     #   <p>The Amazon Resource Number (ARN) of the new model.</p>
     #   @return [String]
     class UpdateEndpointResponse < Struct.new(
+      nil,
       :desired_model_arn,
       keyword_init: true
     )
@@ -7177,6 +7464,7 @@ module Aws::Comprehend
     #   <p>Flywheel data security configuration.</p>
     #   @return [Types::UpdateDataSecurityConfig]
     class UpdateFlywheelRequest < Struct.new(
+      nil,
       :flywheel_arn,
       :active_model_arn,
       :data_access_role_arn,
@@ -7190,6 +7478,7 @@ module Aws::Comprehend
     #   <p>The flywheel properties.</p>
     #   @return [Types::FlywheelProperties]
     class UpdateFlywheelResponse < Struct.new(
+      nil,
       :flywheel_properties,
       keyword_init: true
     )
@@ -7214,6 +7503,7 @@ module Aws::Comprehend
     #           Subnets</a>. </p>
     #   @return [Array<String>]
     class VpcConfig < Struct.new(
+      nil,
       :security_group_ids,
       :subnets,
       keyword_init: true
@@ -7240,6 +7530,7 @@ module Aws::Comprehend
     #   <p>Text message associated with the warning.</p>
     #   @return [String]
     class WarningsListItem < Struct.new(
+      nil,
       :page,
       :warn_code,
       :warn_message,

@@ -22,6 +22,7 @@ module Aws::EFS
     # @!attribute access_point_id
     #   @return [String]
     class AccessPointAlreadyExists < Struct.new(
+      nil,
       :error_code,
       :message,
       :access_point_id,
@@ -65,6 +66,7 @@ module Aws::EFS
     #   <p>Identifies the lifecycle phase of the access point.</p>
     #   @return [String]
     class AccessPointDescription < Struct.new(
+      nil,
       :client_token,
       :name,
       :tags,
@@ -94,6 +96,7 @@ module Aws::EFS
     #           more likely to ignore the error message.</p>
     #   @return [String]
     class AccessPointLimitExceeded < Struct.new(
+      nil,
       :error_code,
       :message,
       keyword_init: true
@@ -115,6 +118,7 @@ module Aws::EFS
     #           more likely to ignore the error message.</p>
     #   @return [String]
     class AccessPointNotFound < Struct.new(
+      nil,
       :error_code,
       :message,
       keyword_init: true
@@ -137,6 +141,7 @@ module Aws::EFS
     #           more likely to ignore the error message.</p>
     #   @return [String]
     class AvailabilityZonesMismatch < Struct.new(
+      nil,
       :error_code,
       :message,
       keyword_init: true
@@ -180,6 +185,7 @@ module Aws::EFS
     #            </ul>
     #   @return [String]
     class BackupPolicy < Struct.new(
+      nil,
       :status,
       keyword_init: true
     )
@@ -200,6 +206,7 @@ module Aws::EFS
     #           more likely to ignore the error message.</p>
     #   @return [String]
     class BadRequest < Struct.new(
+      nil,
       :error_code,
       :message,
       keyword_init: true
@@ -220,6 +227,7 @@ module Aws::EFS
     #           more likely to ignore the error message.</p>
     #   @return [String]
     class ConflictException < Struct.new(
+      nil,
       :error_code,
       :message,
       keyword_init: true
@@ -262,6 +270,7 @@ module Aws::EFS
     #   <p>Identifies the lifecycle phase of the access point.</p>
     #   @return [String]
     class CreateAccessPointOutput < Struct.new(
+      nil,
       :client_token,
       :name,
       :tags,
@@ -305,6 +314,7 @@ module Aws::EFS
     #         using the access point will fail.</p>
     #   @return [Types::RootDirectory]
     class CreateAccessPointRequest < Struct.new(
+      nil,
       :client_token,
       :tags,
       :file_system_id,
@@ -398,6 +408,7 @@ module Aws::EFS
     #   <p>Describes the protection on the file system. </p>
     #   @return [Types::FileSystemProtectionDescription]
     class CreateFileSystemOutput < Struct.new(
+      nil,
       :owner_id,
       :creation_token,
       :file_system_id,
@@ -526,6 +537,7 @@ module Aws::EFS
     #           in the <i>Amazon Web Services General Reference Guide</i>.</p>
     #   @return [Array<Types::Tag>]
     class CreateFileSystemRequest < Struct.new(
+      nil,
       :creation_token,
       :performance_mode,
       :encrypted,
@@ -581,6 +593,7 @@ module Aws::EFS
     #   <p>The virtual private cloud (VPC) ID that the mount target is configured in.</p>
     #   @return [String]
     class CreateMountTargetOutput < Struct.new(
+      nil,
       :owner_id,
       :mount_target_id,
       :file_system_id,
@@ -640,6 +653,7 @@ module Aws::EFS
     #       </p>
     #   @return [Array<String>]
     class CreateMountTargetRequest < Struct.new(
+      nil,
       :file_system_id,
       :subnet_id,
       :ip_address,
@@ -677,6 +691,7 @@ module Aws::EFS
     #   <p>ID of the Amazon Web Services account in which the source file system resides.</p>
     #   @return [String]
     class CreateReplicationConfigurationOutput < Struct.new(
+      nil,
       :source_file_system_id,
       :source_file_system_region,
       :source_file_system_arn,
@@ -697,6 +712,7 @@ module Aws::EFS
     #   <p>An array of destination configuration objects. Only one destination configuration object is supported.</p>
     #   @return [Array<Types::DestinationToCreate>]
     class CreateReplicationConfigurationRequest < Struct.new(
+      nil,
       :source_file_system_id,
       :destinations,
       keyword_init: true
@@ -714,6 +730,7 @@ module Aws::EFS
     #         pair. </p>
     #   @return [Array<Types::Tag>]
     class CreateTagsRequest < Struct.new(
+      nil,
       :file_system_id,
       :tags,
       keyword_init: true
@@ -743,6 +760,7 @@ module Aws::EFS
     #   <p>Specifies the POSIX permissions to apply to the <code>RootDirectory</code>, in the format of an octal number representing the file's mode bits.</p>
     #   @return [String]
     class CreationInfo < Struct.new(
+      nil,
       :owner_uid,
       :owner_gid,
       :permissions,
@@ -755,6 +773,7 @@ module Aws::EFS
     #   <p>The ID of the access point that you want to delete.</p>
     #   @return [String]
     class DeleteAccessPointRequest < Struct.new(
+      nil,
       :access_point_id,
       keyword_init: true
     )
@@ -766,6 +785,7 @@ module Aws::EFS
     #           <code>FileSystemPolicy</code>.</p>
     #   @return [String]
     class DeleteFileSystemPolicyRequest < Struct.new(
+      nil,
       :file_system_id,
       keyword_init: true
     )
@@ -777,6 +797,7 @@ module Aws::EFS
     #   <p>The ID of the file system you want to delete.</p>
     #   @return [String]
     class DeleteFileSystemRequest < Struct.new(
+      nil,
       :file_system_id,
       keyword_init: true
     )
@@ -788,6 +809,7 @@ module Aws::EFS
     #   <p>The ID of the mount target to delete (String).</p>
     #   @return [String]
     class DeleteMountTargetRequest < Struct.new(
+      nil,
       :mount_target_id,
       keyword_init: true
     )
@@ -815,6 +837,7 @@ module Aws::EFS
     #            </note>
     #   @return [String]
     class DeleteReplicationConfigurationRequest < Struct.new(
+      nil,
       :source_file_system_id,
       :deletion_mode,
       keyword_init: true
@@ -830,6 +853,7 @@ module Aws::EFS
     #   <p>A list of tag keys to delete.</p>
     #   @return [Array<String>]
     class DeleteTagsRequest < Struct.new(
+      nil,
       :file_system_id,
       :tag_keys,
       keyword_init: true
@@ -851,6 +875,7 @@ module Aws::EFS
     #           more likely to ignore the error message.</p>
     #   @return [String]
     class DependencyTimeout < Struct.new(
+      nil,
       :error_code,
       :message,
       keyword_init: true
@@ -877,6 +902,7 @@ module Aws::EFS
     #         points for that file system; mutually exclusive with <code>AccessPointId</code>.</p>
     #   @return [String]
     class DescribeAccessPointsRequest < Struct.new(
+      nil,
       :max_results,
       :next_token,
       :access_point_id,
@@ -894,6 +920,7 @@ module Aws::EFS
     #         You can use the NextMarker in the subsequent request to fetch the additional descriptions.</p>
     #   @return [String]
     class DescribeAccessPointsResponse < Struct.new(
+      nil,
       :access_points,
       :next_token,
       keyword_init: true
@@ -911,6 +938,7 @@ module Aws::EFS
     #         The default value is 100. </p>
     #   @return [Integer]
     class DescribeAccountPreferencesRequest < Struct.new(
+      nil,
       :next_token,
       :max_results,
       keyword_init: true
@@ -926,6 +954,7 @@ module Aws::EFS
     #         You can use the <code>NextToken</code> in the subsequent request to fetch the additional descriptions.</p>
     #   @return [String]
     class DescribeAccountPreferencesResponse < Struct.new(
+      nil,
       :resource_id_preference,
       :next_token,
       keyword_init: true
@@ -938,6 +967,7 @@ module Aws::EFS
     #         turned on or off.</p>
     #   @return [Types::BackupPolicy]
     class DescribeBackupPolicyOutput < Struct.new(
+      nil,
       :backup_policy,
       keyword_init: true
     )
@@ -949,6 +979,7 @@ module Aws::EFS
     #           <code>BackupPolicy</code>.</p>
     #   @return [String]
     class DescribeBackupPolicyRequest < Struct.new(
+      nil,
       :file_system_id,
       keyword_init: true
     )
@@ -964,6 +995,7 @@ module Aws::EFS
     #         system.</p>
     #   @return [String]
     class DescribeFileSystemPolicyOutput < Struct.new(
+      nil,
       :file_system_id,
       :policy,
       keyword_init: true
@@ -976,6 +1008,7 @@ module Aws::EFS
     #         for.</p>
     #   @return [String]
     class DescribeFileSystemPolicyRequest < Struct.new(
+      nil,
       :file_system_id,
       keyword_init: true
     )
@@ -1002,6 +1035,7 @@ module Aws::EFS
     #         (String).</p>
     #   @return [String]
     class DescribeFileSystemsRequest < Struct.new(
+      nil,
       :max_items,
       :marker,
       :creation_token,
@@ -1022,6 +1056,7 @@ module Aws::EFS
     #         use the <code>NextMarker</code> in the subsequent request to fetch the descriptions.</p>
     #   @return [String]
     class DescribeFileSystemsResponse < Struct.new(
+      nil,
       :marker,
       :file_systems,
       :next_marker,
@@ -1035,6 +1070,7 @@ module Aws::EFS
     #         policy per file system.</p>
     #   @return [Array<Types::LifecyclePolicy>]
     class DescribeLifecycleConfigurationOutput < Struct.new(
+      nil,
       :lifecycle_policies,
       keyword_init: true
     )
@@ -1046,6 +1082,7 @@ module Aws::EFS
     #         retrieve (String).</p>
     #   @return [String]
     class DescribeLifecycleConfigurationRequest < Struct.new(
+      nil,
       :file_system_id,
       keyword_init: true
     )
@@ -1057,6 +1094,7 @@ module Aws::EFS
     #   <p>The ID of the mount target whose security groups you want to retrieve.</p>
     #   @return [String]
     class DescribeMountTargetSecurityGroupsRequest < Struct.new(
+      nil,
       :mount_target_id,
       keyword_init: true
     )
@@ -1067,6 +1105,7 @@ module Aws::EFS
     #   <p>An array of security groups.</p>
     #   @return [Array<String>]
     class DescribeMountTargetSecurityGroupsResponse < Struct.new(
+      nil,
       :security_groups,
       keyword_init: true
     )
@@ -1097,6 +1136,7 @@ module Aws::EFS
     #         <code>FileSystemId</code> or <code>MountTargetId</code> is not included in your request. Accepts either an access point ID or ARN as input.</p>
     #   @return [String]
     class DescribeMountTargetsRequest < Struct.new(
+      nil,
       :max_items,
       :marker,
       :file_system_id,
@@ -1122,6 +1162,7 @@ module Aws::EFS
     #         of mount targets.</p>
     #   @return [String]
     class DescribeMountTargetsResponse < Struct.new(
+      nil,
       :marker,
       :mount_targets,
       :next_marker,
@@ -1146,6 +1187,7 @@ module Aws::EFS
     #           <code>MaxItems</code> parameter. The default value is 100. </p>
     #   @return [Integer]
     class DescribeReplicationConfigurationsRequest < Struct.new(
+      nil,
       :file_system_id,
       :next_token,
       :max_results,
@@ -1162,6 +1204,7 @@ module Aws::EFS
     #         request to fetch the additional descriptions.</p>
     #   @return [String]
     class DescribeReplicationConfigurationsResponse < Struct.new(
+      nil,
       :replications,
       :next_token,
       keyword_init: true
@@ -1184,6 +1227,7 @@ module Aws::EFS
     #   <p>The ID of the file system whose tag set you want to retrieve.</p>
     #   @return [String]
     class DescribeTagsRequest < Struct.new(
+      nil,
       :max_items,
       :marker,
       :file_system_id,
@@ -1207,6 +1251,7 @@ module Aws::EFS
     #         in your next request to retrieve the next set of tags.</p>
     #   @return [String]
     class DescribeTagsResponse < Struct.new(
+      nil,
       :marker,
       :tags,
       :next_marker,
@@ -1250,6 +1295,7 @@ module Aws::EFS
     #         replication and required for cross-account replication.</p>
     #   @return [String]
     class Destination < Struct.new(
+      nil,
       :status,
       :file_system_id,
       :region,
@@ -1343,6 +1389,7 @@ module Aws::EFS
     #         replication and required for cross-account replication.</p>
     #   @return [String]
     class DestinationToCreate < Struct.new(
+      nil,
       :region,
       :availability_zone_name,
       :kms_key_id,
@@ -1369,6 +1416,7 @@ module Aws::EFS
     # @!attribute file_system_id
     #   @return [String]
     class FileSystemAlreadyExists < Struct.new(
+      nil,
       :error_code,
       :message,
       :file_system_id,
@@ -1460,6 +1508,7 @@ module Aws::EFS
     #   <p>Describes the protection on the file system. </p>
     #   @return [Types::FileSystemProtectionDescription]
     class FileSystemDescription < Struct.new(
+      nil,
       :owner_id,
       :creation_token,
       :file_system_id,
@@ -1501,6 +1550,7 @@ module Aws::EFS
     #           more likely to ignore the error message.</p>
     #   @return [String]
     class FileSystemInUse < Struct.new(
+      nil,
       :error_code,
       :message,
       keyword_init: true
@@ -1522,6 +1572,7 @@ module Aws::EFS
     #           more likely to ignore the error message.</p>
     #   @return [String]
     class FileSystemLimitExceeded < Struct.new(
+      nil,
       :error_code,
       :message,
       keyword_init: true
@@ -1543,6 +1594,7 @@ module Aws::EFS
     #           more likely to ignore the error message.</p>
     #   @return [String]
     class FileSystemNotFound < Struct.new(
+      nil,
       :error_code,
       :message,
       keyword_init: true
@@ -1577,6 +1629,7 @@ module Aws::EFS
     #         protection is re-enabled, the file system becomes writeable.</p>
     #   @return [String]
     class FileSystemProtectionDescription < Struct.new(
+      nil,
       :replication_overwrite_protection,
       keyword_init: true
     )
@@ -1610,6 +1663,7 @@ module Aws::EFS
     #         storage class.</p>
     #   @return [Integer]
     class FileSystemSize < Struct.new(
+      nil,
       :value,
       :timestamp,
       :value_in_ia,
@@ -1638,6 +1692,7 @@ module Aws::EFS
     #           more likely to ignore the error message.</p>
     #   @return [String]
     class IncorrectFileSystemLifeCycleState < Struct.new(
+      nil,
       :error_code,
       :message,
       keyword_init: true
@@ -1659,6 +1714,7 @@ module Aws::EFS
     #           more likely to ignore the error message.</p>
     #   @return [String]
     class IncorrectMountTargetState < Struct.new(
+      nil,
       :error_code,
       :message,
       keyword_init: true
@@ -1683,6 +1739,7 @@ module Aws::EFS
     #           more likely to ignore the error message.</p>
     #   @return [String]
     class InsufficientThroughputCapacity < Struct.new(
+      nil,
       :error_code,
       :message,
       keyword_init: true
@@ -1703,6 +1760,7 @@ module Aws::EFS
     #           more likely to ignore the error message.</p>
     #   @return [String]
     class InternalServerError < Struct.new(
+      nil,
       :error_code,
       :message,
       keyword_init: true
@@ -1725,6 +1783,7 @@ module Aws::EFS
     #           more likely to ignore the error message.</p>
     #   @return [String]
     class InvalidPolicyException < Struct.new(
+      nil,
       :error_code,
       :message,
       keyword_init: true
@@ -1746,6 +1805,7 @@ module Aws::EFS
     #           more likely to ignore the error message.</p>
     #   @return [String]
     class IpAddressInUse < Struct.new(
+      nil,
       :error_code,
       :message,
       keyword_init: true
@@ -1782,6 +1842,7 @@ module Aws::EFS
     #         file access events.</p>
     #   @return [String]
     class LifecyclePolicy < Struct.new(
+      nil,
       :transition_to_ia,
       :transition_to_primary_storage_class,
       :transition_to_archive,
@@ -1801,6 +1862,7 @@ module Aws::EFS
     #   <p>(Optional) You can use <code>NextToken</code> in a subsequent request to fetch the next page of access point descriptions if the response payload was paginated.</p>
     #   @return [String]
     class ListTagsForResourceRequest < Struct.new(
+      nil,
       :resource_id,
       :max_results,
       :next_token,
@@ -1817,6 +1879,7 @@ module Aws::EFS
     #               <code>NextToken</code> is present if the response payload is paginated. You can use <code>NextToken</code> in a subsequent request to fetch the next page of access point descriptions.</p>
     #   @return [String]
     class ListTagsForResourceResponse < Struct.new(
+      nil,
       :tags,
       :next_token,
       keyword_init: true
@@ -1832,6 +1895,7 @@ module Aws::EFS
     #   <p>An array of VPC security group IDs. </p>
     #   @return [Array<String>]
     class ModifyMountTargetSecurityGroupsRequest < Struct.new(
+      nil,
       :mount_target_id,
       :security_groups,
       keyword_init: true
@@ -1853,6 +1917,7 @@ module Aws::EFS
     #           more likely to ignore the error message.</p>
     #   @return [String]
     class MountTargetConflict < Struct.new(
+      nil,
       :error_code,
       :message,
       keyword_init: true
@@ -1901,6 +1966,7 @@ module Aws::EFS
     #   <p>The virtual private cloud (VPC) ID that the mount target is configured in.</p>
     #   @return [String]
     class MountTargetDescription < Struct.new(
+      nil,
       :owner_id,
       :mount_target_id,
       :file_system_id,
@@ -1931,6 +1997,7 @@ module Aws::EFS
     #           more likely to ignore the error message.</p>
     #   @return [String]
     class MountTargetNotFound < Struct.new(
+      nil,
       :error_code,
       :message,
       keyword_init: true
@@ -1956,6 +2023,7 @@ module Aws::EFS
     #           more likely to ignore the error message.</p>
     #   @return [String]
     class NetworkInterfaceLimitExceeded < Struct.new(
+      nil,
       :error_code,
       :message,
       keyword_init: true
@@ -1977,6 +2045,7 @@ module Aws::EFS
     #           more likely to ignore the error message.</p>
     #   @return [String]
     class NoFreeAddressesInSubnet < Struct.new(
+      nil,
       :error_code,
       :message,
       keyword_init: true
@@ -1997,6 +2066,7 @@ module Aws::EFS
     #           more likely to ignore the error message.</p>
     #   @return [String]
     class PolicyNotFound < Struct.new(
+      nil,
       :error_code,
       :message,
       keyword_init: true
@@ -2016,6 +2086,7 @@ module Aws::EFS
     #   <p>Secondary POSIX group IDs used for all file system operations using this access point.</p>
     #   @return [Array<Integer>]
     class PosixUser < Struct.new(
+      nil,
       :uid,
       :gid,
       :secondary_gids,
@@ -2034,6 +2105,7 @@ module Aws::EFS
     #            </note>
     #   @return [String]
     class PutAccountPreferencesRequest < Struct.new(
+      nil,
       :resource_id_type,
       keyword_init: true
     )
@@ -2044,6 +2116,7 @@ module Aws::EFS
     #   <p>Describes the resource type and its ID preference for the user's Amazon Web Services account, in the current Amazon Web Services Region.</p>
     #   @return [Types::ResourceIdPreference]
     class PutAccountPreferencesResponse < Struct.new(
+      nil,
       :resource_id_preference,
       keyword_init: true
     )
@@ -2055,6 +2128,7 @@ module Aws::EFS
     #         turned on or off.</p>
     #   @return [Types::BackupPolicy]
     class PutBackupPolicyOutput < Struct.new(
+      nil,
       :backup_policy,
       keyword_init: true
     )
@@ -2068,6 +2142,7 @@ module Aws::EFS
     #   <p>The backup policy included in the <code>PutBackupPolicy</code> request.</p>
     #   @return [Types::BackupPolicy]
     class PutBackupPolicyRequest < Struct.new(
+      nil,
       :file_system_id,
       :backup_policy,
       keyword_init: true
@@ -2084,6 +2159,7 @@ module Aws::EFS
     #         system.</p>
     #   @return [String]
     class PutFileSystemPolicyOutput < Struct.new(
+      nil,
       :file_system_id,
       :policy,
       keyword_init: true
@@ -2109,6 +2185,7 @@ module Aws::EFS
     #       </p>
     #   @return [Boolean]
     class PutFileSystemPolicyRequest < Struct.new(
+      nil,
       :file_system_id,
       :policy,
       :bypass_policy_lockout_safety_check,
@@ -2122,6 +2199,7 @@ module Aws::EFS
     #         policy per file system.</p>
     #   @return [Array<Types::LifecyclePolicy>]
     class PutLifecycleConfigurationOutput < Struct.new(
+      nil,
       :lifecycle_policies,
       keyword_init: true
     )
@@ -2177,6 +2255,7 @@ module Aws::EFS
     #            </note>
     #   @return [Array<Types::LifecyclePolicy>]
     class PutLifecycleConfigurationRequest < Struct.new(
+      nil,
       :file_system_id,
       :lifecycle_policies,
       keyword_init: true
@@ -2197,6 +2276,7 @@ module Aws::EFS
     #           more likely to ignore the error message.</p>
     #   @return [String]
     class ReplicationAlreadyExists < Struct.new(
+      nil,
       :error_code,
       :message,
       keyword_init: true
@@ -2230,6 +2310,7 @@ module Aws::EFS
     #   <p>ID of the Amazon Web Services account in which the source file system resides.</p>
     #   @return [String]
     class ReplicationConfigurationDescription < Struct.new(
+      nil,
       :source_file_system_id,
       :source_file_system_region,
       :source_file_system_arn,
@@ -2255,6 +2336,7 @@ module Aws::EFS
     #           more likely to ignore the error message.</p>
     #   @return [String]
     class ReplicationNotFound < Struct.new(
+      nil,
       :error_code,
       :message,
       keyword_init: true
@@ -2271,6 +2353,7 @@ module Aws::EFS
     #   <p>Identifies the Amazon EFS resources to which the ID preference setting applies, <code>FILE_SYSTEM</code> and <code>MOUNT_TARGET</code>.</p>
     #   @return [Array<String>]
     class ResourceIdPreference < Struct.new(
+      nil,
       :resource_id_type,
       :resources,
       keyword_init: true
@@ -2301,6 +2384,7 @@ module Aws::EFS
     #            </important>
     #   @return [Types::CreationInfo]
     class RootDirectory < Struct.new(
+      nil,
       :path,
       :creation_info,
       keyword_init: true
@@ -2326,6 +2410,7 @@ module Aws::EFS
     #           more likely to ignore the error message.</p>
     #   @return [String]
     class SecurityGroupLimitExceeded < Struct.new(
+      nil,
       :error_code,
       :message,
       keyword_init: true
@@ -2347,6 +2432,7 @@ module Aws::EFS
     #           more likely to ignore the error message.</p>
     #   @return [String]
     class SecurityGroupNotFound < Struct.new(
+      nil,
       :error_code,
       :message,
       keyword_init: true
@@ -2368,6 +2454,7 @@ module Aws::EFS
     #           more likely to ignore the error message.</p>
     #   @return [String]
     class SubnetNotFound < Struct.new(
+      nil,
       :error_code,
       :message,
       keyword_init: true
@@ -2384,6 +2471,7 @@ module Aws::EFS
     #   <p>The value of the tag key.</p>
     #   @return [String]
     class Tag < Struct.new(
+      nil,
       :key,
       :value,
       keyword_init: true
@@ -2399,6 +2487,7 @@ module Aws::EFS
     #         pair.</p>
     #   @return [Array<Types::Tag>]
     class TagResourceRequest < Struct.new(
+      nil,
       :resource_id,
       :tags,
       keyword_init: true
@@ -2421,6 +2510,7 @@ module Aws::EFS
     #           more likely to ignore the error message.</p>
     #   @return [String]
     class ThrottlingException < Struct.new(
+      nil,
       :error_code,
       :message,
       keyword_init: true
@@ -2442,6 +2532,7 @@ module Aws::EFS
     #           more likely to ignore the error message.</p>
     #   @return [String]
     class ThroughputLimitExceeded < Struct.new(
+      nil,
       :error_code,
       :message,
       keyword_init: true
@@ -2463,6 +2554,7 @@ module Aws::EFS
     #           more likely to ignore the error message.</p>
     #   @return [String]
     class TooManyRequests < Struct.new(
+      nil,
       :error_code,
       :message,
       keyword_init: true
@@ -2483,6 +2575,7 @@ module Aws::EFS
     #           more likely to ignore the error message.</p>
     #   @return [String]
     class UnsupportedAvailabilityZone < Struct.new(
+      nil,
       :error_code,
       :message,
       keyword_init: true
@@ -2498,6 +2591,7 @@ module Aws::EFS
     #         EFS resource.</p>
     #   @return [Array<String>]
     class UntagResourceRequest < Struct.new(
+      nil,
       :resource_id,
       :tag_keys,
       keyword_init: true
@@ -2588,6 +2682,7 @@ module Aws::EFS
     #   <p>Describes the protection on the file system. </p>
     #   @return [Types::FileSystemProtectionDescription]
     class UpdateFileSystemOutput < Struct.new(
+      nil,
       :owner_id,
       :creation_token,
       :file_system_id,
@@ -2643,6 +2738,7 @@ module Aws::EFS
     #         protection is re-enabled, the file system becomes writeable.</p>
     #   @return [String]
     class UpdateFileSystemProtectionOutput < Struct.new(
+      nil,
       :replication_overwrite_protection,
       keyword_init: true
     )
@@ -2678,6 +2774,7 @@ module Aws::EFS
     #         protection is re-enabled and the file system becomes writeable.</p>
     #   @return [String]
     class UpdateFileSystemProtectionRequest < Struct.new(
+      nil,
       :file_system_id,
       :replication_overwrite_protection,
       keyword_init: true
@@ -2704,6 +2801,7 @@ module Aws::EFS
     #           Guide</i>.</p>
     #   @return [Float]
     class UpdateFileSystemRequest < Struct.new(
+      nil,
       :file_system_id,
       :throughput_mode,
       :provisioned_throughput_in_mibps,
@@ -2725,6 +2823,7 @@ module Aws::EFS
     #           more likely to ignore the error message.</p>
     #   @return [String]
     class ValidationException < Struct.new(
+      nil,
       :error_code,
       :message,
       keyword_init: true

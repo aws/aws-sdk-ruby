@@ -14,6 +14,7 @@ module Aws::ECR
     #   <p>The value assigned to the attribute key.</p>
     #   @return [String]
     class Attribute < Struct.new(
+      nil,
       :key,
       :value,
       keyword_init: true
@@ -39,6 +40,7 @@ module Aws::ECR
     #           <code>https://012345678910.dkr.ecr.us-east-1.amazonaws.com</code>.. </p>
     #   @return [String]
     class AuthorizationData < Struct.new(
+      nil,
       :authorization_token,
       :expires_at,
       :proxy_endpoint,
@@ -80,6 +82,7 @@ module Aws::ECR
     #   <p>The name of the repository the Amazon ECR container image resides in.</p>
     #   @return [String]
     class AwsEcrContainerImageDetails < Struct.new(
+      nil,
       :architecture,
       :author,
       :image_hash,
@@ -106,6 +109,7 @@ module Aws::ECR
     #   <p>The digests of the image layers to check.</p>
     #   @return [Array<String>]
     class BatchCheckLayerAvailabilityRequest < Struct.new(
+      nil,
       :registry_id,
       :repository_name,
       :layer_digests,
@@ -122,6 +126,7 @@ module Aws::ECR
     #   <p>Any failures associated with the call.</p>
     #   @return [Array<Types::LayerFailure>]
     class BatchCheckLayerAvailabilityResponse < Struct.new(
+      nil,
       :layers,
       :failures,
       keyword_init: true
@@ -144,6 +149,7 @@ module Aws::ECR
     #                   <code>imageDigest=digest</code>.</p>
     #   @return [Array<Types::ImageIdentifier>]
     class BatchDeleteImageRequest < Struct.new(
+      nil,
       :registry_id,
       :repository_name,
       :image_ids,
@@ -159,6 +165,7 @@ module Aws::ECR
     #   <p>Any failures associated with the call.</p>
     #   @return [Array<Types::ImageFailure>]
     class BatchDeleteImageResponse < Struct.new(
+      nil,
       :image_ids,
       :failures,
       keyword_init: true
@@ -186,6 +193,7 @@ module Aws::ECR
     #            </p>
     #   @return [Array<String>]
     class BatchGetImageRequest < Struct.new(
+      nil,
       :registry_id,
       :repository_name,
       :image_ids,
@@ -202,6 +210,7 @@ module Aws::ECR
     #   <p>Any failures associated with the call.</p>
     #   @return [Array<Types::ImageFailure>]
     class BatchGetImageResponse < Struct.new(
+      nil,
       :images,
       :failures,
       keyword_init: true
@@ -213,6 +222,7 @@ module Aws::ECR
     #   <p>One or more repository names to get the scanning configuration for.</p>
     #   @return [Array<String>]
     class BatchGetRepositoryScanningConfigurationRequest < Struct.new(
+      nil,
       :repository_names,
       keyword_init: true
     )
@@ -226,6 +236,7 @@ module Aws::ECR
     #   <p>Any failures associated with the call.</p>
     #   @return [Array<Types::RepositoryScanningConfigurationFailure>]
     class BatchGetRepositoryScanningConfigurationResponse < Struct.new(
+      nil,
       :scanning_configurations,
       :failures,
       keyword_init: true
@@ -248,6 +259,7 @@ module Aws::ECR
     #   <p>The <code>sha256</code> digest of the image layer.</p>
     #   @return [Array<String>]
     class CompleteLayerUploadRequest < Struct.new(
+      nil,
       :registry_id,
       :repository_name,
       :upload_id,
@@ -270,6 +282,7 @@ module Aws::ECR
     #   <p>The <code>sha256</code> digest of the image layer.</p>
     #   @return [String]
     class CompleteLayerUploadResponse < Struct.new(
+      nil,
       :registry_id,
       :repository_name,
       :upload_id,
@@ -353,6 +366,7 @@ module Aws::ECR
     #               <code>ROOT</code>.</p>
     #   @return [String]
     class CreatePullThroughCacheRuleRequest < Struct.new(
+      nil,
       :ecr_repository_prefix,
       :upstream_registry_url,
       :registry_id,
@@ -392,6 +406,7 @@ module Aws::ECR
     #   <p>The upstream repository prefix associated with the pull through cache rule.</p>
     #   @return [String]
     class CreatePullThroughCacheRuleResponse < Struct.new(
+      nil,
       :ecr_repository_prefix,
       :upstream_registry_url,
       :created_at,
@@ -463,6 +478,7 @@ module Aws::ECR
     #               service-linked role for the repository creation template.</p>
     #   @return [String]
     class CreateRepositoryCreationTemplateRequest < Struct.new(
+      nil,
       :prefix,
       :description,
       :encryption_configuration,
@@ -485,6 +501,7 @@ module Aws::ECR
     #   <p>The details of the repository creation template associated with the request.</p>
     #   @return [Types::RepositoryCreationTemplate]
     class CreateRepositoryCreationTemplateResponse < Struct.new(
+      nil,
       :registry_id,
       :repository_creation_template,
       keyword_init: true
@@ -527,6 +544,7 @@ module Aws::ECR
     #               your repository are encrypted at rest.</p>
     #   @return [Types::EncryptionConfiguration]
     class CreateRepositoryRequest < Struct.new(
+      nil,
       :registry_id,
       :repository_name,
       :tags,
@@ -543,6 +561,7 @@ module Aws::ECR
     #   <p>The repository that was created.</p>
     #   @return [Types::Repository]
     class CreateRepositoryResponse < Struct.new(
+      nil,
       :repository,
       keyword_init: true
     )
@@ -563,6 +582,7 @@ module Aws::ECR
     #   <p>The version of CVSS used for the score.</p>
     #   @return [String]
     class CvssScore < Struct.new(
+      nil,
       :base_score,
       :scoring_vector,
       :source,
@@ -585,6 +605,7 @@ module Aws::ECR
     #   <p>The reason the CVSS score has been adjustment.</p>
     #   @return [String]
     class CvssScoreAdjustment < Struct.new(
+      nil,
       :metric,
       :reason,
       keyword_init: true
@@ -609,6 +630,7 @@ module Aws::ECR
     #   <p>The CVSS version used in scoring.</p>
     #   @return [String]
     class CvssScoreDetails < Struct.new(
+      nil,
       :adjustments,
       :score,
       :score_source,
@@ -632,6 +654,7 @@ module Aws::ECR
     #   <p>The name of the repository.</p>
     #   @return [String]
     class DeleteLifecyclePolicyRequest < Struct.new(
+      nil,
       :registry_id,
       :repository_name,
       keyword_init: true
@@ -652,6 +675,7 @@ module Aws::ECR
     #   <p>The time stamp of the last time that the lifecycle policy was run.</p>
     #   @return [Time]
     class DeleteLifecyclePolicyResponse < Struct.new(
+      nil,
       :registry_id,
       :repository_name,
       :lifecycle_policy_text,
@@ -670,6 +694,7 @@ module Aws::ECR
     #               rule. If you do not specify a registry, the default registry is assumed.</p>
     #   @return [String]
     class DeletePullThroughCacheRuleRequest < Struct.new(
+      nil,
       :ecr_repository_prefix,
       :registry_id,
       keyword_init: true
@@ -700,6 +725,7 @@ module Aws::ECR
     #   <p>The upstream repository prefix associated with the pull through cache rule.</p>
     #   @return [String]
     class DeletePullThroughCacheRuleResponse < Struct.new(
+      nil,
       :ecr_repository_prefix,
       :upstream_registry_url,
       :created_at,
@@ -713,6 +739,7 @@ module Aws::ECR
     end
 
     class DeleteRegistryPolicyRequest < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -725,6 +752,7 @@ module Aws::ECR
     #   <p>The contents of the registry permissions policy that was deleted.</p>
     #   @return [String]
     class DeleteRegistryPolicyResponse < Struct.new(
+      nil,
       :registry_id,
       :policy_text,
       keyword_init: true
@@ -737,6 +765,7 @@ module Aws::ECR
     #               template.</p>
     #   @return [String]
     class DeleteRepositoryCreationTemplateRequest < Struct.new(
+      nil,
       :prefix,
       keyword_init: true
     )
@@ -750,6 +779,7 @@ module Aws::ECR
     #   <p>The details of the repository creation template that was deleted.</p>
     #   @return [Types::RepositoryCreationTemplate]
     class DeleteRepositoryCreationTemplateResponse < Struct.new(
+      nil,
       :registry_id,
       :repository_creation_template,
       keyword_init: true
@@ -766,6 +796,7 @@ module Aws::ECR
     #               delete.</p>
     #   @return [String]
     class DeleteRepositoryPolicyRequest < Struct.new(
+      nil,
       :registry_id,
       :repository_name,
       keyword_init: true
@@ -783,6 +814,7 @@ module Aws::ECR
     #   <p>The JSON repository policy that was deleted from the repository.</p>
     #   @return [String]
     class DeleteRepositoryPolicyResponse < Struct.new(
+      nil,
       :registry_id,
       :repository_name,
       :policy_text,
@@ -803,6 +835,7 @@ module Aws::ECR
     #               false, the repository must be empty before attempting to delete it.</p>
     #   @return [Boolean]
     class DeleteRepositoryRequest < Struct.new(
+      nil,
       :registry_id,
       :repository_name,
       :force,
@@ -815,6 +848,7 @@ module Aws::ECR
     #   <p>The repository that was deleted.</p>
     #   @return [Types::Repository]
     class DeleteRepositoryResponse < Struct.new(
+      nil,
       :repository,
       keyword_init: true
     )
@@ -831,6 +865,7 @@ module Aws::ECR
     #   <p>The Amazon Web Services account ID associated with the registry. If you do not specify a registry, the default registry is assumed.</p>
     #   @return [String]
     class DescribeImageReplicationStatusRequest < Struct.new(
+      nil,
       :repository_name,
       :image_id,
       :registry_id,
@@ -849,6 +884,7 @@ module Aws::ECR
     #   <p>The replication status details for the images in the specified repository.</p>
     #   @return [Array<Types::ImageReplicationStatus>]
     class DescribeImageReplicationStatusResponse < Struct.new(
+      nil,
       :repository_name,
       :image_id,
       :replication_statuses,
@@ -886,6 +922,7 @@ module Aws::ECR
     #               results and a <code>nextToken</code> value, if applicable.</p>
     #   @return [Integer]
     class DescribeImageScanFindingsRequest < Struct.new(
+      nil,
       :registry_id,
       :repository_name,
       :image_id,
@@ -919,6 +956,7 @@ module Aws::ECR
     #               are no more results to return.</p>
     #   @return [String]
     class DescribeImageScanFindingsResponse < Struct.new(
+      nil,
       :registry_id,
       :repository_name,
       :image_id,
@@ -938,6 +976,7 @@ module Aws::ECR
     #                   <code>UNTAGGED</code>.</p>
     #   @return [String]
     class DescribeImagesFilter < Struct.new(
+      nil,
       :tag_status,
       keyword_init: true
     )
@@ -978,6 +1017,7 @@ module Aws::ECR
     #               results.</p>
     #   @return [Types::DescribeImagesFilter]
     class DescribeImagesRequest < Struct.new(
+      nil,
       :registry_id,
       :repository_name,
       :image_ids,
@@ -1001,6 +1041,7 @@ module Aws::ECR
     #               return.</p>
     #   @return [String]
     class DescribeImagesResponse < Struct.new(
+      nil,
       :image_details,
       :next_token,
       keyword_init: true
@@ -1037,6 +1078,7 @@ module Aws::ECR
     #               to 100 results and a <code>nextToken</code> value, if applicable.</p>
     #   @return [Integer]
     class DescribePullThroughCacheRulesRequest < Struct.new(
+      nil,
       :registry_id,
       :ecr_repository_prefixes,
       :next_token,
@@ -1057,6 +1099,7 @@ module Aws::ECR
     #               results. This value is null when there are no more results to return.</p>
     #   @return [String]
     class DescribePullThroughCacheRulesResponse < Struct.new(
+      nil,
       :pull_through_cache_rules,
       :next_token,
       keyword_init: true
@@ -1065,6 +1108,7 @@ module Aws::ECR
     end
 
     class DescribeRegistryRequest < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1077,6 +1121,7 @@ module Aws::ECR
     #   <p>The replication configuration for the registry.</p>
     #   @return [Types::ReplicationConfiguration]
     class DescribeRegistryResponse < Struct.new(
+      nil,
       :registry_id,
       :replication_configuration,
       keyword_init: true
@@ -1117,6 +1162,7 @@ module Aws::ECR
     #               specify repositories with <code>repositoryNames</code>.</p>
     #   @return [Integer]
     class DescribeRepositoriesRequest < Struct.new(
+      nil,
       :registry_id,
       :repository_names,
       :next_token,
@@ -1137,6 +1183,7 @@ module Aws::ECR
     #               there are no more results to return.</p>
     #   @return [String]
     class DescribeRepositoriesResponse < Struct.new(
+      nil,
       :repositories,
       :next_token,
       keyword_init: true
@@ -1175,6 +1222,7 @@ module Aws::ECR
     #               100 results and a <code>nextToken</code> value, if applicable.</p>
     #   @return [Integer]
     class DescribeRepositoryCreationTemplatesRequest < Struct.new(
+      nil,
       :prefixes,
       :next_token,
       :max_results,
@@ -1198,6 +1246,7 @@ module Aws::ECR
     #               return.</p>
     #   @return [String]
     class DescribeRepositoryCreationTemplatesResponse < Struct.new(
+      nil,
       :registry_id,
       :repository_creation_templates,
       :next_token,
@@ -1211,6 +1260,7 @@ module Aws::ECR
     #   <p>The error message associated with the exception.</p>
     #   @return [String]
     class EmptyUploadException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -1251,6 +1301,7 @@ module Aws::ECR
     #               Amazon Web Services managed KMS key for Amazon ECR will be used.</p>
     #   @return [String]
     class EncryptionConfiguration < Struct.new(
+      nil,
       :encryption_type,
       :kms_key,
       keyword_init: true
@@ -1282,6 +1333,7 @@ module Aws::ECR
     #               key for Amazon ECR will be used.</p>
     #   @return [String]
     class EncryptionConfigurationForRepositoryCreationTemplate < Struct.new(
+      nil,
       :encryption_type,
       :kms_key,
       keyword_init: true
@@ -1346,6 +1398,7 @@ module Aws::ECR
     #   <p>If a finding discovered in your environment has an exploit available.</p>
     #   @return [String]
     class EnhancedImageScanFinding < Struct.new(
+      nil,
       :aws_account_id,
       :description,
       :finding_arn,
@@ -1378,6 +1431,7 @@ module Aws::ECR
     #                   <code>REGISTRY_POLICY_SCOPE</code>. </p>
     #   @return [String]
     class GetAccountSettingRequest < Struct.new(
+      nil,
       :name,
       keyword_init: true
     )
@@ -1394,6 +1448,7 @@ module Aws::ECR
     #                   <code>V2</code>.</p>
     #   @return [String]
     class GetAccountSettingResponse < Struct.new(
+      nil,
       :name,
       :value,
       keyword_init: true
@@ -1408,6 +1463,7 @@ module Aws::ECR
     #     This field is deprecated. The returned authorization token can be used to access any Amazon ECR registry that the IAM principal has access to, specifying a registry ID doesn't change the permissions scope of the authorization token.
     #   @return [Array<String>]
     class GetAuthorizationTokenRequest < Struct.new(
+      nil,
       :registry_ids,
       keyword_init: true
     )
@@ -1423,6 +1479,7 @@ module Aws::ECR
     #            </note>
     #   @return [Array<Types::AuthorizationData>]
     class GetAuthorizationTokenResponse < Struct.new(
+      nil,
       :authorization_data,
       keyword_init: true
     )
@@ -1440,6 +1497,7 @@ module Aws::ECR
     #   <p>The digest of the image layer to download.</p>
     #   @return [String]
     class GetDownloadUrlForLayerRequest < Struct.new(
+      nil,
       :registry_id,
       :repository_name,
       :layer_digest,
@@ -1455,6 +1513,7 @@ module Aws::ECR
     #   <p>The digest of the image layer to download.</p>
     #   @return [String]
     class GetDownloadUrlForLayerResponse < Struct.new(
+      nil,
       :download_url,
       :layer_digest,
       keyword_init: true
@@ -1498,6 +1557,7 @@ module Aws::ECR
     #               tagged.</p>
     #   @return [Types::LifecyclePolicyPreviewFilter]
     class GetLifecyclePolicyPreviewRequest < Struct.new(
+      nil,
       :registry_id,
       :repository_name,
       :image_ids,
@@ -1535,6 +1595,7 @@ module Aws::ECR
     #   <p>The list of images that is returned as a result of the action.</p>
     #   @return [Types::LifecyclePolicyPreviewSummary]
     class GetLifecyclePolicyPreviewResponse < Struct.new(
+      nil,
       :registry_id,
       :repository_name,
       :lifecycle_policy_text,
@@ -1555,6 +1616,7 @@ module Aws::ECR
     #   <p>The name of the repository.</p>
     #   @return [String]
     class GetLifecyclePolicyRequest < Struct.new(
+      nil,
       :registry_id,
       :repository_name,
       keyword_init: true
@@ -1575,6 +1637,7 @@ module Aws::ECR
     #   <p>The time stamp of the last time that the lifecycle policy was run.</p>
     #   @return [Time]
     class GetLifecyclePolicyResponse < Struct.new(
+      nil,
       :registry_id,
       :repository_name,
       :lifecycle_policy_text,
@@ -1585,6 +1648,7 @@ module Aws::ECR
     end
 
     class GetRegistryPolicyRequest < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1597,6 +1661,7 @@ module Aws::ECR
     #   <p>The JSON text of the permissions policy for a registry.</p>
     #   @return [String]
     class GetRegistryPolicyResponse < Struct.new(
+      nil,
       :registry_id,
       :policy_text,
       keyword_init: true
@@ -1605,6 +1670,7 @@ module Aws::ECR
     end
 
     class GetRegistryScanningConfigurationRequest < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1617,6 +1683,7 @@ module Aws::ECR
     #   <p>The scanning configuration for the registry.</p>
     #   @return [Types::RegistryScanningConfiguration]
     class GetRegistryScanningConfigurationResponse < Struct.new(
+      nil,
       :registry_id,
       :scanning_configuration,
       keyword_init: true
@@ -1632,6 +1699,7 @@ module Aws::ECR
     #   <p>The name of the repository with the policy to retrieve.</p>
     #   @return [String]
     class GetRepositoryPolicyRequest < Struct.new(
+      nil,
       :registry_id,
       :repository_name,
       keyword_init: true
@@ -1649,6 +1717,7 @@ module Aws::ECR
     #   <p>The JSON repository policy text associated with the repository.</p>
     #   @return [String]
     class GetRepositoryPolicyResponse < Struct.new(
+      nil,
       :registry_id,
       :repository_name,
       :policy_text,
@@ -1674,6 +1743,7 @@ module Aws::ECR
     #   <p>The manifest media type of the image.</p>
     #   @return [String]
     class Image < Struct.new(
+      nil,
       :registry_id,
       :repository_name,
       :image_id,
@@ -1690,6 +1760,7 @@ module Aws::ECR
     #   <p>The error message associated with the exception.</p>
     #   @return [String]
     class ImageAlreadyExistsException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -1750,6 +1821,7 @@ module Aws::ECR
     #            </note>
     #   @return [Time]
     class ImageDetail < Struct.new(
+      nil,
       :registry_id,
       :repository_name,
       :image_digest,
@@ -1771,6 +1843,7 @@ module Aws::ECR
     # @!attribute message
     #   @return [String]
     class ImageDigestDoesNotMatchException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -1788,6 +1861,7 @@ module Aws::ECR
     #   <p>The reason for the failure.</p>
     #   @return [String]
     class ImageFailure < Struct.new(
+      nil,
       :image_id,
       :failure_code,
       :failure_reason,
@@ -1804,6 +1878,7 @@ module Aws::ECR
     #   <p>The tag used for the image.</p>
     #   @return [String]
     class ImageIdentifier < Struct.new(
+      nil,
       :image_digest,
       :image_tag,
       keyword_init: true
@@ -1815,6 +1890,7 @@ module Aws::ECR
     # @!attribute message
     #   @return [String]
     class ImageNotFoundException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -1835,6 +1911,7 @@ module Aws::ECR
     #   <p>The failure code for a replication that has failed.</p>
     #   @return [String]
     class ImageReplicationStatus < Struct.new(
+      nil,
       :region,
       :registry_id,
       :status,
@@ -1861,6 +1938,7 @@ module Aws::ECR
     #   <p>A collection of attributes of the host from which the finding is generated.</p>
     #   @return [Array<Types::Attribute>]
     class ImageScanFinding < Struct.new(
+      nil,
       :name,
       :description,
       :uri,
@@ -1888,6 +1966,7 @@ module Aws::ECR
     #   <p>Details about the enhanced scan findings from Amazon Inspector.</p>
     #   @return [Array<Types::EnhancedImageScanFinding>]
     class ImageScanFindings < Struct.new(
+      nil,
       :image_scan_completed_at,
       :vulnerability_source_updated_at,
       :finding_severity_counts,
@@ -1909,6 +1988,7 @@ module Aws::ECR
     #   <p>The image vulnerability counts, sorted by severity.</p>
     #   @return [Hash<String, Integer>]
     class ImageScanFindingsSummary < Struct.new(
+      nil,
       :image_scan_completed_at,
       :vulnerability_source_updated_at,
       :finding_severity_counts,
@@ -1925,6 +2005,7 @@ module Aws::ECR
     #   <p>The description of the image scan status.</p>
     #   @return [String]
     class ImageScanStatus < Struct.new(
+      nil,
       :status,
       :description,
       keyword_init: true
@@ -1940,6 +2021,7 @@ module Aws::ECR
     #               not be scanned unless a scan is manually started with the <a href="https://docs.aws.amazon.com/AmazonECR/latest/APIReference/API_StartImageScan.html">API_StartImageScan</a> API.</p>
     #   @return [Boolean]
     class ImageScanningConfiguration < Struct.new(
+      nil,
       :scan_on_push,
       keyword_init: true
     )
@@ -1956,6 +2038,7 @@ module Aws::ECR
     # @!attribute message
     #   @return [String]
     class ImageTagAlreadyExistsException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -1970,6 +2053,7 @@ module Aws::ECR
     #   <p>The value to use when filtering image tags. Must be either a regular expression pattern or a tag prefix value based on the specified filter type.</p>
     #   @return [String]
     class ImageTagMutabilityExclusionFilter < Struct.new(
+      nil,
       :filter_type,
       :filter,
       keyword_init: true
@@ -1985,6 +2069,7 @@ module Aws::ECR
     #   <p>The name of the repository to which you intend to upload layers.</p>
     #   @return [String]
     class InitiateLayerUploadRequest < Struct.new(
+      nil,
       :registry_id,
       :repository_name,
       keyword_init: true
@@ -2000,6 +2085,7 @@ module Aws::ECR
     #   <p>The size, in bytes, that Amazon ECR expects future layer part uploads to be.</p>
     #   @return [Integer]
     class InitiateLayerUploadResponse < Struct.new(
+      nil,
       :upload_id,
       :part_size,
       keyword_init: true
@@ -2013,6 +2099,7 @@ module Aws::ECR
     #   <p>The error message associated with the exception.</p>
     #   @return [String]
     class InvalidLayerException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -2038,6 +2125,7 @@ module Aws::ECR
     #   <p>The error message associated with the exception.</p>
     #   @return [String]
     class InvalidLayerPartException < Struct.new(
+      nil,
       :registry_id,
       :repository_name,
       :upload_id,
@@ -2054,6 +2142,7 @@ module Aws::ECR
     #   <p>The error message associated with the exception.</p>
     #   @return [String]
     class InvalidParameterException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -2065,6 +2154,7 @@ module Aws::ECR
     # @!attribute message
     #   @return [String]
     class InvalidTagParameterException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -2078,6 +2168,7 @@ module Aws::ECR
     #   <p>The error code returned by KMS.</p>
     #   @return [String]
     class KmsException < Struct.new(
+      nil,
       :message,
       :kms_error,
       keyword_init: true
@@ -2101,6 +2192,7 @@ module Aws::ECR
     #                   <code>application/vnd.oci.image.layer.v1.tar+gzip</code>.</p>
     #   @return [String]
     class Layer < Struct.new(
+      nil,
       :layer_digest,
       :layer_availability,
       :layer_size,
@@ -2115,6 +2207,7 @@ module Aws::ECR
     #   <p>The error message associated with the exception.</p>
     #   @return [String]
     class LayerAlreadyExistsException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -2132,6 +2225,7 @@ module Aws::ECR
     #   <p>The reason for the failure.</p>
     #   @return [String]
     class LayerFailure < Struct.new(
+      nil,
       :layer_digest,
       :failure_code,
       :failure_reason,
@@ -2146,6 +2240,7 @@ module Aws::ECR
     #   <p>The error message associated with the exception.</p>
     #   @return [String]
     class LayerInaccessibleException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -2157,6 +2252,7 @@ module Aws::ECR
     #   <p>The error message associated with the exception.</p>
     #   @return [String]
     class LayerPartTooSmallException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -2169,6 +2265,7 @@ module Aws::ECR
     #   <p>The error message associated with the exception.</p>
     #   @return [String]
     class LayersNotFoundException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -2180,6 +2277,7 @@ module Aws::ECR
     # @!attribute message
     #   @return [String]
     class LifecyclePolicyNotFoundException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -2191,6 +2289,7 @@ module Aws::ECR
     #   <p>The tag status of the image.</p>
     #   @return [String]
     class LifecyclePolicyPreviewFilter < Struct.new(
+      nil,
       :tag_status,
       keyword_init: true
     )
@@ -2202,6 +2301,7 @@ module Aws::ECR
     # @!attribute message
     #   @return [String]
     class LifecyclePolicyPreviewInProgressException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -2212,6 +2312,7 @@ module Aws::ECR
     # @!attribute message
     #   @return [String]
     class LifecyclePolicyPreviewNotFoundException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -2236,6 +2337,7 @@ module Aws::ECR
     #   <p>The priority of the applied rule.</p>
     #   @return [Integer]
     class LifecyclePolicyPreviewResult < Struct.new(
+      nil,
       :image_tags,
       :image_digest,
       :image_pushed_at,
@@ -2251,6 +2353,7 @@ module Aws::ECR
     #   <p>The number of expiring images.</p>
     #   @return [Integer]
     class LifecyclePolicyPreviewSummary < Struct.new(
+      nil,
       :expiring_image_total_count,
       keyword_init: true
     )
@@ -2262,6 +2365,7 @@ module Aws::ECR
     #   <p>The type of action to be taken.</p>
     #   @return [String]
     class LifecyclePolicyRuleAction < Struct.new(
+      nil,
       :type,
       keyword_init: true
     )
@@ -2275,6 +2379,7 @@ module Aws::ECR
     #   <p>The error message associated with the exception.</p>
     #   @return [String]
     class LimitExceededException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -2288,6 +2393,7 @@ module Aws::ECR
     #               <code>UNTAGGED</code>.</p>
     #   @return [String]
     class ListImagesFilter < Struct.new(
+      nil,
       :tag_status,
       keyword_init: true
     )
@@ -2327,6 +2433,7 @@ module Aws::ECR
     #               results.</p>
     #   @return [Types::ListImagesFilter]
     class ListImagesRequest < Struct.new(
+      nil,
       :registry_id,
       :repository_name,
       :next_token,
@@ -2348,6 +2455,7 @@ module Aws::ECR
     #               return.</p>
     #   @return [String]
     class ListImagesResponse < Struct.new(
+      nil,
       :image_ids,
       :next_token,
       keyword_init: true
@@ -2360,6 +2468,7 @@ module Aws::ECR
     #               only supported resource is an Amazon ECR repository.</p>
     #   @return [String]
     class ListTagsForResourceRequest < Struct.new(
+      nil,
       :resource_arn,
       keyword_init: true
     )
@@ -2370,6 +2479,7 @@ module Aws::ECR
     #   <p>The tags for the resource.</p>
     #   @return [Array<Types::Tag>]
     class ListTagsForResourceResponse < Struct.new(
+      nil,
       :tags,
       keyword_init: true
     )
@@ -2409,6 +2519,7 @@ module Aws::ECR
     #   <p>The packages impacted by this vulnerability.</p>
     #   @return [Array<Types::VulnerablePackage>]
     class PackageVulnerabilityDetails < Struct.new(
+      nil,
       :cvss,
       :reference_urls,
       :related_vulnerabilities,
@@ -2456,6 +2567,7 @@ module Aws::ECR
     #               last updated.</p>
     #   @return [Time]
     class PullThroughCacheRule < Struct.new(
+      nil,
       :ecr_repository_prefix,
       :upstream_registry_url,
       :created_at,
@@ -2475,6 +2587,7 @@ module Aws::ECR
     # @!attribute message
     #   @return [String]
     class PullThroughCacheRuleAlreadyExistsException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -2486,6 +2599,7 @@ module Aws::ECR
     # @!attribute message
     #   @return [String]
     class PullThroughCacheRuleNotFoundException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -2503,6 +2617,7 @@ module Aws::ECR
     #               <code>V2</code>.</p>
     #   @return [String]
     class PutAccountSettingRequest < Struct.new(
+      nil,
       :name,
       :value,
       keyword_init: true
@@ -2517,6 +2632,7 @@ module Aws::ECR
     #   <p>Retrieves the value of the specified account setting.</p>
     #   @return [String]
     class PutAccountSettingResponse < Struct.new(
+      nil,
       :name,
       :value,
       keyword_init: true
@@ -2547,6 +2663,7 @@ module Aws::ECR
     #   <p>The image digest of the image manifest corresponding to the image.</p>
     #   @return [String]
     class PutImageRequest < Struct.new(
+      nil,
       :registry_id,
       :repository_name,
       :image_manifest,
@@ -2562,6 +2679,7 @@ module Aws::ECR
     #   <p>Details of the image uploaded.</p>
     #   @return [Types::Image]
     class PutImageResponse < Struct.new(
+      nil,
       :image,
       keyword_init: true
     )
@@ -2583,6 +2701,7 @@ module Aws::ECR
     #               repository.</p>
     #   @return [Types::ImageScanningConfiguration]
     class PutImageScanningConfigurationRequest < Struct.new(
+      nil,
       :registry_id,
       :repository_name,
       :image_scanning_configuration,
@@ -2601,6 +2720,7 @@ module Aws::ECR
     #   <p>The image scanning configuration setting for the repository.</p>
     #   @return [Types::ImageScanningConfiguration]
     class PutImageScanningConfigurationResponse < Struct.new(
+      nil,
       :registry_id,
       :repository_name,
       :image_scanning_configuration,
@@ -2627,6 +2747,7 @@ module Aws::ECR
     #   <p>Creates or updates a repository with filters that define which image tags can override the default image tag mutability setting.</p>
     #   @return [Array<Types::ImageTagMutabilityExclusionFilter>]
     class PutImageTagMutabilityRequest < Struct.new(
+      nil,
       :registry_id,
       :repository_name,
       :image_tag_mutability,
@@ -2649,6 +2770,7 @@ module Aws::ECR
     #   <p>Returns a list of filters that were defined for a repository. These filters determine which image tags can override the default image tag mutability setting of the repository.</p>
     #   @return [Array<Types::ImageTagMutabilityExclusionFilter>]
     class PutImageTagMutabilityResponse < Struct.new(
+      nil,
       :registry_id,
       :repository_name,
       :image_tag_mutability,
@@ -2669,6 +2791,7 @@ module Aws::ECR
     #   <p>The JSON repository policy text to apply to the repository.</p>
     #   @return [String]
     class PutLifecyclePolicyRequest < Struct.new(
+      nil,
       :registry_id,
       :repository_name,
       :lifecycle_policy_text,
@@ -2687,6 +2810,7 @@ module Aws::ECR
     #   <p>The JSON repository policy text.</p>
     #   @return [String]
     class PutLifecyclePolicyResponse < Struct.new(
+      nil,
       :registry_id,
       :repository_name,
       :lifecycle_policy_text,
@@ -2701,6 +2825,7 @@ module Aws::ECR
     #                   permissions</a> in the <i>Amazon Elastic Container Registry User Guide</i>.</p>
     #   @return [String]
     class PutRegistryPolicyRequest < Struct.new(
+      nil,
       :policy_text,
       keyword_init: true
     )
@@ -2714,6 +2839,7 @@ module Aws::ECR
     #   <p>The JSON policy text for your registry.</p>
     #   @return [String]
     class PutRegistryPolicyResponse < Struct.new(
+      nil,
       :registry_id,
       :policy_text,
       keyword_init: true
@@ -2738,6 +2864,7 @@ module Aws::ECR
     #               repository filters are used and at what frequency scanning will occur.</p>
     #   @return [Array<Types::RegistryScanningRule>]
     class PutRegistryScanningConfigurationRequest < Struct.new(
+      nil,
       :scan_type,
       :rules,
       keyword_init: true
@@ -2749,6 +2876,7 @@ module Aws::ECR
     #   <p>The scanning configuration for your registry.</p>
     #   @return [Types::RegistryScanningConfiguration]
     class PutRegistryScanningConfigurationResponse < Struct.new(
+      nil,
       :registry_scanning_configuration,
       keyword_init: true
     )
@@ -2759,6 +2887,7 @@ module Aws::ECR
     #   <p>An object representing the replication configuration for a registry.</p>
     #   @return [Types::ReplicationConfiguration]
     class PutReplicationConfigurationRequest < Struct.new(
+      nil,
       :replication_configuration,
       keyword_init: true
     )
@@ -2769,6 +2898,7 @@ module Aws::ECR
     #   <p>The contents of the replication configuration for the registry.</p>
     #   @return [Types::ReplicationConfiguration]
     class PutReplicationConfigurationResponse < Struct.new(
+      nil,
       :replication_configuration,
       keyword_init: true
     )
@@ -2783,6 +2913,7 @@ module Aws::ECR
     #   <p>The recommended course of action to remediate the finding.</p>
     #   @return [String]
     class Recommendation < Struct.new(
+      nil,
       :url,
       :text,
       keyword_init: true
@@ -2794,6 +2925,7 @@ module Aws::ECR
     # @!attribute message
     #   @return [String]
     class ReferencedImagesNotFoundException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -2804,6 +2936,7 @@ module Aws::ECR
     # @!attribute message
     #   @return [String]
     class RegistryPolicyNotFoundException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -2818,6 +2951,7 @@ module Aws::ECR
     #   <p>The scanning rules associated with the registry.</p>
     #   @return [Array<Types::RegistryScanningRule>]
     class RegistryScanningConfiguration < Struct.new(
+      nil,
       :scan_type,
       :rules,
       keyword_init: true
@@ -2839,6 +2973,7 @@ module Aws::ECR
     #               registry.</p>
     #   @return [Array<Types::ScanningRepositoryFilter>]
     class RegistryScanningRule < Struct.new(
+      nil,
       :scan_frequency,
       :repository_filters,
       keyword_init: true
@@ -2852,6 +2987,7 @@ module Aws::ECR
     #               remediate the finding.</p>
     #   @return [Types::Recommendation]
     class Remediation < Struct.new(
+      nil,
       :recommendation,
       keyword_init: true
     )
@@ -2864,6 +3000,7 @@ module Aws::ECR
     #               for a replication configuration.</p>
     #   @return [Array<Types::ReplicationRule>]
     class ReplicationConfiguration < Struct.new(
+      nil,
       :rules,
       keyword_init: true
     )
@@ -2879,6 +3016,7 @@ module Aws::ECR
     #               cross-Region replication within your own registry, specify your own account ID.</p>
     #   @return [String]
     class ReplicationDestination < Struct.new(
+      nil,
       :region,
       :registry_id,
       keyword_init: true
@@ -2897,6 +3035,7 @@ module Aws::ECR
     #               repositories in a private registry are replicated.</p>
     #   @return [Array<Types::RepositoryFilter>]
     class ReplicationRule < Struct.new(
+      nil,
       :destinations,
       :repository_filters,
       keyword_init: true
@@ -2937,6 +3076,7 @@ module Aws::ECR
     #               your repository are encrypted at rest.</p>
     #   @return [Types::EncryptionConfiguration]
     class Repository < Struct.new(
+      nil,
       :repository_arn,
       :registry_id,
       :repository_name,
@@ -2956,6 +3096,7 @@ module Aws::ECR
     #   <p>The error message associated with the exception.</p>
     #   @return [String]
     class RepositoryAlreadyExistsException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -3014,6 +3155,7 @@ module Aws::ECR
     #               was last updated.</p>
     #   @return [Time]
     class RepositoryCreationTemplate < Struct.new(
+      nil,
       :prefix,
       :description,
       :encryption_configuration,
@@ -3046,6 +3188,7 @@ module Aws::ECR
     #               parameter.</p>
     #   @return [String]
     class RepositoryFilter < Struct.new(
+      nil,
       :filter,
       :filter_type,
       keyword_init: true
@@ -3059,6 +3202,7 @@ module Aws::ECR
     #   <p>The error message associated with the exception.</p>
     #   @return [String]
     class RepositoryNotEmptyException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -3071,6 +3215,7 @@ module Aws::ECR
     #   <p>The error message associated with the exception.</p>
     #   @return [String]
     class RepositoryNotFoundException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -3083,6 +3228,7 @@ module Aws::ECR
     #   <p>The error message associated with the exception.</p>
     #   @return [String]
     class RepositoryPolicyNotFoundException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -3106,6 +3252,7 @@ module Aws::ECR
     #   <p>The scan filters applied to the repository.</p>
     #   @return [Array<Types::ScanningRepositoryFilter>]
     class RepositoryScanningConfiguration < Struct.new(
+      nil,
       :repository_arn,
       :repository_name,
       :scan_on_push,
@@ -3133,6 +3280,7 @@ module Aws::ECR
     #   <p>The reason for the failure.</p>
     #   @return [String]
     class RepositoryScanningConfigurationFailure < Struct.new(
+      nil,
       :repository_name,
       :failure_code,
       :failure_reason,
@@ -3155,6 +3303,7 @@ module Aws::ECR
     #   <p>The type of resource.</p>
     #   @return [String]
     class Resource < Struct.new(
+      nil,
       :details,
       :id,
       :tags,
@@ -3170,6 +3319,7 @@ module Aws::ECR
     #               finding.</p>
     #   @return [Types::AwsEcrContainerImageDetails]
     class ResourceDetails < Struct.new(
+      nil,
       :aws_ecr_container_image,
       keyword_init: true
     )
@@ -3181,6 +3331,7 @@ module Aws::ECR
     # @!attribute message
     #   @return [String]
     class ScanNotFoundException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -3197,6 +3348,7 @@ module Aws::ECR
     #   <p>The type associated with the filter.</p>
     #   @return [String]
     class ScanningRepositoryFilter < Struct.new(
+      nil,
       :filter,
       :filter_type,
       keyword_init: true
@@ -3209,6 +3361,7 @@ module Aws::ECR
     #   <p>An object that contains details about the CVSS score given to a finding.</p>
     #   @return [Types::CvssScoreDetails]
     class ScoreDetails < Struct.new(
+      nil,
       :cvss,
       keyword_init: true
     )
@@ -3220,6 +3373,7 @@ module Aws::ECR
     # @!attribute message
     #   @return [String]
     class SecretNotFoundException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -3231,6 +3385,7 @@ module Aws::ECR
     #   <p>The error message associated with the exception.</p>
     #   @return [String]
     class ServerException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -3255,6 +3410,7 @@ module Aws::ECR
     #               repository lock outs.</p>
     #   @return [Boolean]
     class SetRepositoryPolicyRequest < Struct.new(
+      nil,
       :registry_id,
       :repository_name,
       :policy_text,
@@ -3274,6 +3430,7 @@ module Aws::ECR
     #   <p>The JSON repository policy text applied to the repository.</p>
     #   @return [String]
     class SetRepositoryPolicyResponse < Struct.new(
+      nil,
       :registry_id,
       :repository_name,
       :policy_text,
@@ -3293,6 +3450,7 @@ module Aws::ECR
     #   <p>An object with identifying information for an image in an Amazon ECR repository.</p>
     #   @return [Types::ImageIdentifier]
     class StartImageScanRequest < Struct.new(
+      nil,
       :registry_id,
       :repository_name,
       :image_id,
@@ -3314,6 +3472,7 @@ module Aws::ECR
     #   <p>The current state of the scan.</p>
     #   @return [Types::ImageScanStatus]
     class StartImageScanResponse < Struct.new(
+      nil,
       :registry_id,
       :repository_name,
       :image_id,
@@ -3335,6 +3494,7 @@ module Aws::ECR
     #               for the repository is used.</p>
     #   @return [String]
     class StartLifecyclePolicyPreviewRequest < Struct.new(
+      nil,
       :registry_id,
       :repository_name,
       :lifecycle_policy_text,
@@ -3356,6 +3516,7 @@ module Aws::ECR
     #   <p>The status of the lifecycle policy preview request.</p>
     #   @return [String]
     class StartLifecyclePolicyPreviewResponse < Struct.new(
+      nil,
       :registry_id,
       :repository_name,
       :lifecycle_policy_text,
@@ -3376,6 +3537,7 @@ module Aws::ECR
     #   <p>A <code>value</code> acts as a descriptor within a tag category (key).</p>
     #   @return [String]
     class Tag < Struct.new(
+      nil,
       :key,
       :value,
       keyword_init: true
@@ -3393,6 +3555,7 @@ module Aws::ECR
     #               a maximum length of 256 characters.</p>
     #   @return [Array<Types::Tag>]
     class TagResourceRequest < Struct.new(
+      nil,
       :resource_arn,
       :tags,
       keyword_init: true
@@ -3401,6 +3564,7 @@ module Aws::ECR
     end
 
     class TagResourceResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -3411,6 +3575,7 @@ module Aws::ECR
     # @!attribute message
     #   @return [String]
     class TemplateAlreadyExistsException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -3422,6 +3587,7 @@ module Aws::ECR
     # @!attribute message
     #   @return [String]
     class TemplateNotFoundException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -3433,6 +3599,7 @@ module Aws::ECR
     # @!attribute message
     #   @return [String]
     class TooManyTagsException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -3444,6 +3611,7 @@ module Aws::ECR
     # @!attribute message
     #   @return [String]
     class UnableToAccessSecretException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -3455,6 +3623,7 @@ module Aws::ECR
     # @!attribute message
     #   @return [String]
     class UnableToDecryptSecretValueException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -3467,6 +3636,7 @@ module Aws::ECR
     # @!attribute message
     #   @return [String]
     class UnableToGetUpstreamImageException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -3478,6 +3648,7 @@ module Aws::ECR
     # @!attribute message
     #   @return [String]
     class UnableToGetUpstreamLayerException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -3488,6 +3659,7 @@ module Aws::ECR
     # @!attribute message
     #   @return [String]
     class UnsupportedImageTypeException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -3498,6 +3670,7 @@ module Aws::ECR
     # @!attribute message
     #   @return [String]
     class UnsupportedUpstreamRegistryException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -3512,6 +3685,7 @@ module Aws::ECR
     #   <p>The keys of the tags to be removed.</p>
     #   @return [Array<String>]
     class UntagResourceRequest < Struct.new(
+      nil,
       :resource_arn,
       :tag_keys,
       keyword_init: true
@@ -3520,6 +3694,7 @@ module Aws::ECR
     end
 
     class UntagResourceResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -3542,6 +3717,7 @@ module Aws::ECR
     #               are configuring.</p>
     #   @return [String]
     class UpdatePullThroughCacheRuleRequest < Struct.new(
+      nil,
       :registry_id,
       :ecr_repository_prefix,
       :credential_arn,
@@ -3572,6 +3748,7 @@ module Aws::ECR
     #   <p>The upstream repository prefix associated with the pull through cache rule.</p>
     #   @return [String]
     class UpdatePullThroughCacheRuleResponse < Struct.new(
+      nil,
       :ecr_repository_prefix,
       :registry_id,
       :updated_at,
@@ -3635,6 +3812,7 @@ module Aws::ECR
     #               service-linked role for the repository creation template.</p>
     #   @return [String]
     class UpdateRepositoryCreationTemplateRequest < Struct.new(
+      nil,
       :prefix,
       :description,
       :encryption_configuration,
@@ -3657,6 +3835,7 @@ module Aws::ECR
     #   <p>The details of the repository creation template associated with the request.</p>
     #   @return [Types::RepositoryCreationTemplate]
     class UpdateRepositoryCreationTemplateResponse < Struct.new(
+      nil,
       :registry_id,
       :repository_creation_template,
       keyword_init: true
@@ -3685,6 +3864,7 @@ module Aws::ECR
     #   <p>The base64-encoded layer part payload.</p>
     #   @return [String]
     class UploadLayerPartRequest < Struct.new(
+      nil,
       :registry_id,
       :repository_name,
       :upload_id,
@@ -3709,6 +3889,7 @@ module Aws::ECR
     #   <p>The integer value of the last byte received in the request.</p>
     #   @return [Integer]
     class UploadLayerPartResponse < Struct.new(
+      nil,
       :registry_id,
       :repository_name,
       :upload_id,
@@ -3724,6 +3905,7 @@ module Aws::ECR
     #   <p>The error message associated with the exception.</p>
     #   @return [String]
     class UploadNotFoundException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -3738,6 +3920,7 @@ module Aws::ECR
     #               If you do not specify a registry, the default registry is assumed.</p>
     #   @return [String]
     class ValidatePullThroughCacheRuleRequest < Struct.new(
+      nil,
       :ecr_repository_prefix,
       :registry_id,
       keyword_init: true
@@ -3776,6 +3959,7 @@ module Aws::ECR
     #                   rules</a> in the <i>Amazon Elastic Container Registry User Guide</i>.</p>
     #   @return [String]
     class ValidatePullThroughCacheRuleResponse < Struct.new(
+      nil,
       :ecr_repository_prefix,
       :registry_id,
       :upstream_registry_url,
@@ -3798,6 +3982,7 @@ module Aws::ECR
     # @!attribute message
     #   @return [String]
     class ValidationException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -3833,6 +4018,7 @@ module Aws::ECR
     #   <p>The version of the package that contains the vulnerability fix.</p>
     #   @return [String]
     class VulnerablePackage < Struct.new(
+      nil,
       :arch,
       :epoch,
       :file_path,

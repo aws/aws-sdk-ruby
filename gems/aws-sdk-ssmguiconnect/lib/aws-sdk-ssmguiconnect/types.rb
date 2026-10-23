@@ -10,6 +10,7 @@ module Aws::SSMGuiConnect
     # @!attribute message
     #   @return [String]
     class AccessDeniedException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -20,6 +21,7 @@ module Aws::SSMGuiConnect
     # @!attribute message
     #   @return [String]
     class ConflictException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -34,6 +36,7 @@ module Aws::SSMGuiConnect
     #   <p>The ARN of a KMS key that is used to encrypt data while it is being processed by the service. This key must exist in the same Amazon Web Services Region as the node you start an RDP connection to.</p>
     #   @return [String]
     class ConnectionRecordingPreferences < Struct.new(
+      nil,
       :recording_destinations,
       :kms_key_arn,
       keyword_init: true
@@ -45,6 +48,7 @@ module Aws::SSMGuiConnect
     #   <p>User-provided idempotency token.</p>
     #   @return [String]
     class DeleteConnectionRecordingPreferencesRequest < Struct.new(
+      nil,
       :client_token,
       keyword_init: true
     )
@@ -55,6 +59,7 @@ module Aws::SSMGuiConnect
     #   <p>Service-provided idempotency token.</p>
     #   @return [String]
     class DeleteConnectionRecordingPreferencesResponse < Struct.new(
+      nil,
       :client_token,
       keyword_init: true
     )
@@ -68,6 +73,7 @@ module Aws::SSMGuiConnect
     #   <p>The set of preferences used for recording RDP connections in the requesting Amazon Web Services account and Amazon Web Services Region. This includes details such as which S3 bucket recordings are stored in.</p>
     #   @return [Types::ConnectionRecordingPreferences]
     class GetConnectionRecordingPreferencesResponse < Struct.new(
+      nil,
       :client_token,
       :connection_recording_preferences,
       keyword_init: true
@@ -79,6 +85,7 @@ module Aws::SSMGuiConnect
     # @!attribute message
     #   @return [String]
     class InternalServerException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -90,6 +97,7 @@ module Aws::SSMGuiConnect
     #   <p>The S3 bucket where RDP connection recordings are stored.</p>
     #   @return [Array<Types::S3Bucket>]
     class RecordingDestinations < Struct.new(
+      nil,
       :s3_buckets,
       keyword_init: true
     )
@@ -100,6 +108,7 @@ module Aws::SSMGuiConnect
     # @!attribute message
     #   @return [String]
     class ResourceNotFoundException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -114,6 +123,7 @@ module Aws::SSMGuiConnect
     #   <p>The name of the S3 bucket where RDP connection recordings are stored.</p>
     #   @return [String]
     class S3Bucket < Struct.new(
+      nil,
       :bucket_owner,
       :bucket_name,
       keyword_init: true
@@ -125,6 +135,7 @@ module Aws::SSMGuiConnect
     # @!attribute message
     #   @return [String]
     class ServiceQuotaExceededException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -135,6 +146,7 @@ module Aws::SSMGuiConnect
     # @!attribute message
     #   @return [String]
     class ThrottlingException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -148,6 +160,7 @@ module Aws::SSMGuiConnect
     #   <p>User-provided idempotency token.</p>
     #   @return [String]
     class UpdateConnectionRecordingPreferencesRequest < Struct.new(
+      nil,
       :connection_recording_preferences,
       :client_token,
       keyword_init: true
@@ -162,6 +175,7 @@ module Aws::SSMGuiConnect
     #   <p>The set of preferences used for recording RDP connections in the requesting Amazon Web Services account and Amazon Web Services Region. This includes details such as which S3 bucket recordings are stored in.</p>
     #   @return [Types::ConnectionRecordingPreferences]
     class UpdateConnectionRecordingPreferencesResponse < Struct.new(
+      nil,
       :client_token,
       :connection_recording_preferences,
       keyword_init: true
@@ -173,6 +187,7 @@ module Aws::SSMGuiConnect
     # @!attribute message
     #   @return [String]
     class ValidationException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )

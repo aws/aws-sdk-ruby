@@ -10,6 +10,7 @@ module Aws::OSIS
     # @!attribute message
     #   @return [String]
     class AccessDeniedException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -22,6 +23,7 @@ module Aws::OSIS
     #   <p>Whether persistent buffering should be enabled.</p>
     #   @return [Boolean]
     class BufferOptions < Struct.new(
+      nil,
       :persistent_buffer_enabled,
       keyword_init: true
     )
@@ -42,6 +44,7 @@ module Aws::OSIS
     #   <p>The most recent updated timestamp of the stage.</p>
     #   @return [Time]
     class ChangeProgressStage < Struct.new(
+      nil,
       :name,
       :status,
       :description,
@@ -65,6 +68,7 @@ module Aws::OSIS
     #   <p>Information about the stages that the pipeline is going through to perform the configuration change.</p>
     #   @return [Array<Types::ChangeProgressStage>]
     class ChangeProgressStatus < Struct.new(
+      nil,
       :start_time,
       :status,
       :total_number_of_stages,
@@ -86,6 +90,7 @@ module Aws::OSIS
     #      <code>/aws/vendedlogs/OpenSearchService/pipelines</code>.</p>
     #   @return [String]
     class CloudWatchLogDestination < Struct.new(
+      nil,
       :log_group,
       keyword_init: true
     )
@@ -96,6 +101,7 @@ module Aws::OSIS
     # @!attribute message
     #   @return [String]
     class ConflictException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -110,6 +116,7 @@ module Aws::OSIS
     #      security group IDs.</p>
     #   @return [Types::PipelineEndpointVpcOptions]
     class CreatePipelineEndpointRequest < Struct.new(
+      nil,
       :pipeline_arn,
       :vpc_options,
       keyword_init: true
@@ -130,6 +137,7 @@ module Aws::OSIS
     #   <p>The ID of the VPC where the pipeline endpoint was created.</p>
     #   @return [String]
     class CreatePipelineEndpointResponse < Struct.new(
+      nil,
       :pipeline_arn,
       :endpoint_id,
       :status,
@@ -176,6 +184,7 @@ module Aws::OSIS
     #       Amazon Web Services resources.</p>
     #   @return [String]
     class CreatePipelineRequest < Struct.new(
+      nil,
       :pipeline_name,
       :min_units,
       :max_units,
@@ -195,6 +204,7 @@ module Aws::OSIS
     #   <p>Container for information about the created pipeline.</p>
     #   @return [Types::Pipeline]
     class CreatePipelineResponse < Struct.new(
+      nil,
       :pipeline,
       keyword_init: true
     )
@@ -205,6 +215,7 @@ module Aws::OSIS
     #   <p>The unique identifier of the pipeline endpoint to delete.</p>
     #   @return [String]
     class DeletePipelineEndpointRequest < Struct.new(
+      nil,
       :endpoint_id,
       keyword_init: true
     )
@@ -212,6 +223,7 @@ module Aws::OSIS
     end
 
     class DeletePipelineEndpointResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -221,6 +233,7 @@ module Aws::OSIS
     #   <p>The name of the pipeline to delete.</p>
     #   @return [String]
     class DeletePipelineRequest < Struct.new(
+      nil,
       :pipeline_name,
       keyword_init: true
     )
@@ -228,6 +241,7 @@ module Aws::OSIS
     end
 
     class DeletePipelineResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -237,6 +251,7 @@ module Aws::OSIS
     #   <p>The Amazon Resource Name (ARN) of the resource from which to delete the policy.</p>
     #   @return [String]
     class DeleteResourcePolicyRequest < Struct.new(
+      nil,
       :resource_arn,
       keyword_init: true
     )
@@ -244,6 +259,7 @@ module Aws::OSIS
     end
 
     class DeleteResourcePolicyResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -253,6 +269,7 @@ module Aws::OSIS
     # @!attribute message
     #   @return [String]
     class DisabledOperationException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -265,6 +282,7 @@ module Aws::OSIS
     #      By default, data is encrypted using an Amazon Web Services owned key.</p>
     #   @return [String]
     class EncryptionAtRestOptions < Struct.new(
+      nil,
       :kms_key_arn,
       keyword_init: true
     )
@@ -278,6 +296,7 @@ module Aws::OSIS
     #   <p>The format format of the blueprint to retrieve.</p>
     #   @return [String]
     class GetPipelineBlueprintRequest < Struct.new(
+      nil,
       :blueprint_name,
       :format,
       keyword_init: true
@@ -292,6 +311,7 @@ module Aws::OSIS
     #   <p>The format of the blueprint.</p>
     #   @return [String]
     class GetPipelineBlueprintResponse < Struct.new(
+      nil,
       :blueprint,
       :format,
       keyword_init: true
@@ -303,6 +323,7 @@ module Aws::OSIS
     #   <p>The name of the pipeline.</p>
     #   @return [String]
     class GetPipelineChangeProgressRequest < Struct.new(
+      nil,
       :pipeline_name,
       keyword_init: true
     )
@@ -313,6 +334,7 @@ module Aws::OSIS
     #   <p>The current status of the change happening on the pipeline.</p>
     #   @return [Array<Types::ChangeProgressStatus>]
     class GetPipelineChangeProgressResponse < Struct.new(
+      nil,
       :change_progress_statuses,
       keyword_init: true
     )
@@ -323,6 +345,7 @@ module Aws::OSIS
     #   <p>The name of the pipeline.</p>
     #   @return [String]
     class GetPipelineRequest < Struct.new(
+      nil,
       :pipeline_name,
       keyword_init: true
     )
@@ -333,6 +356,7 @@ module Aws::OSIS
     #   <p>Detailed information about the requested pipeline.</p>
     #   @return [Types::Pipeline]
     class GetPipelineResponse < Struct.new(
+      nil,
       :pipeline,
       keyword_init: true
     )
@@ -343,6 +367,7 @@ module Aws::OSIS
     #   <p>The Amazon Resource Name (ARN) of the resource for which to retrieve the policy.</p>
     #   @return [String]
     class GetResourcePolicyRequest < Struct.new(
+      nil,
       :resource_arn,
       keyword_init: true
     )
@@ -356,6 +381,7 @@ module Aws::OSIS
     #   <p>The resource-based policy document in JSON format.</p>
     #   @return [String]
     class GetResourcePolicyResponse < Struct.new(
+      nil,
       :resource_arn,
       :policy,
       keyword_init: true
@@ -368,6 +394,7 @@ module Aws::OSIS
     # @!attribute message
     #   @return [String]
     class InternalException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -378,6 +405,7 @@ module Aws::OSIS
     # @!attribute message
     #   @return [String]
     class InvalidPaginationTokenException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -388,6 +416,7 @@ module Aws::OSIS
     # @!attribute message
     #   @return [String]
     class LimitExceededException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -395,6 +424,7 @@ module Aws::OSIS
     end
 
     class ListPipelineBlueprintsRequest < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -404,6 +434,7 @@ module Aws::OSIS
     #   <p>A list of available blueprints for Data Prepper.</p>
     #   @return [Array<Types::PipelineBlueprintSummary>]
     class ListPipelineBlueprintsResponse < Struct.new(
+      nil,
       :blueprints,
       keyword_init: true
     )
@@ -420,6 +451,7 @@ module Aws::OSIS
     #      page.</p>
     #   @return [String]
     class ListPipelineEndpointConnectionsRequest < Struct.new(
+      nil,
       :max_results,
       :next_token,
       keyword_init: true
@@ -436,6 +468,7 @@ module Aws::OSIS
     #   <p>A list of pipeline endpoint connections.</p>
     #   @return [Array<Types::PipelineEndpointConnection>]
     class ListPipelineEndpointConnectionsResponse < Struct.new(
+      nil,
       :next_token,
       :pipeline_endpoint_connections,
       keyword_init: true
@@ -452,6 +485,7 @@ module Aws::OSIS
     #       <code>ListPipelineEndpoints</code> operations, which returns results in the next page.</p>
     #   @return [String]
     class ListPipelineEndpointsRequest < Struct.new(
+      nil,
       :max_results,
       :next_token,
       keyword_init: true
@@ -468,6 +502,7 @@ module Aws::OSIS
     #   <p>A list of pipeline endpoints.</p>
     #   @return [Array<Types::PipelineEndpoint>]
     class ListPipelineEndpointsResponse < Struct.new(
+      nil,
       :next_token,
       :pipeline_endpoints,
       keyword_init: true
@@ -485,6 +520,7 @@ module Aws::OSIS
     #      operations, which returns results in the next page.</p>
     #   @return [String]
     class ListPipelinesRequest < Struct.new(
+      nil,
       :max_results,
       :next_token,
       keyword_init: true
@@ -501,6 +537,7 @@ module Aws::OSIS
     #   <p>A list of all existing Data Prepper pipelines.</p>
     #   @return [Array<Types::PipelineSummary>]
     class ListPipelinesResponse < Struct.new(
+      nil,
       :next_token,
       :pipelines,
       keyword_init: true
@@ -512,6 +549,7 @@ module Aws::OSIS
     #   <p>The Amazon Resource Name (ARN) of the pipeline to retrieve tags for.</p>
     #   @return [String]
     class ListTagsForResourceRequest < Struct.new(
+      nil,
       :arn,
       keyword_init: true
     )
@@ -522,6 +560,7 @@ module Aws::OSIS
     #   <p>A list of tags associated with the given pipeline.</p>
     #   @return [Array<Types::Tag>]
     class ListTagsForResourceResponse < Struct.new(
+      nil,
       :tags,
       keyword_init: true
     )
@@ -539,6 +578,7 @@ module Aws::OSIS
     #      parameter is required if <code>IsLoggingEnabled</code> is set to <code>true</code>.</p>
     #   @return [Types::CloudWatchLogDestination]
     class LogPublishingOptions < Struct.new(
+      nil,
       :is_logging_enabled,
       :cloud_watch_log_destination,
       keyword_init: true
@@ -607,6 +647,7 @@ module Aws::OSIS
     #      resources.</p>
     #   @return [String]
     class Pipeline < Struct.new(
+      nil,
       :pipeline_name,
       :pipeline_arn,
       :min_units,
@@ -657,6 +698,7 @@ module Aws::OSIS
     #   <p>The use case that the blueprint relates to.</p>
     #   @return [String]
     class PipelineBlueprint < Struct.new(
+      nil,
       :blueprint_name,
       :pipeline_configuration_body,
       :display_name,
@@ -685,6 +727,7 @@ module Aws::OSIS
     #   <p>The use case that the blueprint relates to.</p>
     #   @return [String]
     class PipelineBlueprintSummary < Struct.new(
+      nil,
       :blueprint_name,
       :display_name,
       :display_description,
@@ -703,6 +746,7 @@ module Aws::OSIS
     #   <p>The endpoint receiving data from the pipeline.</p>
     #   @return [String]
     class PipelineDestination < Struct.new(
+      nil,
       :service_name,
       :endpoint,
       keyword_init: true
@@ -732,6 +776,7 @@ module Aws::OSIS
     #   <p>The URL used to ingest data to the pipeline through the VPC endpoint.</p>
     #   @return [String]
     class PipelineEndpoint < Struct.new(
+      nil,
       :pipeline_arn,
       :endpoint_id,
       :status,
@@ -758,6 +803,7 @@ module Aws::OSIS
     #   <p>The Amazon Web Services account ID that owns the VPC endpoint used in this connection.</p>
     #   @return [String]
     class PipelineEndpointConnection < Struct.new(
+      nil,
       :pipeline_arn,
       :endpoint_id,
       :status,
@@ -775,6 +821,7 @@ module Aws::OSIS
     #   <p>A list of security group IDs that control network access to the pipeline endpoint.</p>
     #   @return [Array<String>]
     class PipelineEndpointVpcOptions < Struct.new(
+      nil,
       :subnet_ids,
       :security_group_ids,
       keyword_init: true
@@ -787,6 +834,7 @@ module Aws::OSIS
     #   <p>A description of why a pipeline has a certain status.</p>
     #   @return [String]
     class PipelineStatusReason < Struct.new(
+      nil,
       :description,
       keyword_init: true
     )
@@ -825,6 +873,7 @@ module Aws::OSIS
     #   <p>A list of tags associated with the given pipeline.</p>
     #   @return [Array<Types::Tag>]
     class PipelineSummary < Struct.new(
+      nil,
       :status,
       :status_reason,
       :pipeline_name,
@@ -847,6 +896,7 @@ module Aws::OSIS
     #   <p>The resource-based policy document in JSON format.</p>
     #   @return [String]
     class PutResourcePolicyRequest < Struct.new(
+      nil,
       :resource_arn,
       :policy,
       keyword_init: true
@@ -861,6 +911,7 @@ module Aws::OSIS
     #   <p>The resource-based policy document that was attached to the resource.</p>
     #   @return [String]
     class PutResourcePolicyResponse < Struct.new(
+      nil,
       :resource_arn,
       :policy,
       keyword_init: true
@@ -872,6 +923,7 @@ module Aws::OSIS
     # @!attribute message
     #   @return [String]
     class ResourceAlreadyExistsException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -882,6 +934,7 @@ module Aws::OSIS
     # @!attribute message
     #   @return [String]
     class ResourceNotFoundException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -896,6 +949,7 @@ module Aws::OSIS
     #   <p>A list of endpoint IDs for which to revoke access to the pipeline.</p>
     #   @return [Array<String>]
     class RevokePipelineEndpointConnectionsRequest < Struct.new(
+      nil,
       :pipeline_arn,
       :endpoint_ids,
       keyword_init: true
@@ -908,6 +962,7 @@ module Aws::OSIS
     #      revoked.</p>
     #   @return [String]
     class RevokePipelineEndpointConnectionsResponse < Struct.new(
+      nil,
       :pipeline_arn,
       keyword_init: true
     )
@@ -922,6 +977,7 @@ module Aws::OSIS
     #   <p>The unique identifier of the VPC endpoint that was created.</p>
     #   @return [String]
     class ServiceVpcEndpoint < Struct.new(
+      nil,
       :service_name,
       :vpc_endpoint_id,
       keyword_init: true
@@ -933,6 +989,7 @@ module Aws::OSIS
     #   <p>The name of the pipeline to start.</p>
     #   @return [String]
     class StartPipelineRequest < Struct.new(
+      nil,
       :pipeline_name,
       keyword_init: true
     )
@@ -943,6 +1000,7 @@ module Aws::OSIS
     #   <p>Information about an existing OpenSearch Ingestion pipeline.</p>
     #   @return [Types::Pipeline]
     class StartPipelineResponse < Struct.new(
+      nil,
       :pipeline,
       keyword_init: true
     )
@@ -953,6 +1011,7 @@ module Aws::OSIS
     #   <p>The name of the pipeline to stop.</p>
     #   @return [String]
     class StopPipelineRequest < Struct.new(
+      nil,
       :pipeline_name,
       keyword_init: true
     )
@@ -963,6 +1022,7 @@ module Aws::OSIS
     #   <p>Information about an existing OpenSearch Ingestion pipeline.</p>
     #   @return [Types::Pipeline]
     class StopPipelineResponse < Struct.new(
+      nil,
       :pipeline,
       keyword_init: true
     )
@@ -980,6 +1040,7 @@ module Aws::OSIS
     #            </p>
     #   @return [String]
     class Tag < Struct.new(
+      nil,
       :key,
       :value,
       keyword_init: true
@@ -994,6 +1055,7 @@ module Aws::OSIS
     #   <p>The list of key-value tags to add to the pipeline.</p>
     #   @return [Array<Types::Tag>]
     class TagResourceRequest < Struct.new(
+      nil,
       :arn,
       :tags,
       keyword_init: true
@@ -1002,6 +1064,7 @@ module Aws::OSIS
     end
 
     class TagResourceResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1014,6 +1077,7 @@ module Aws::OSIS
     #   <p>The tag keys to remove.</p>
     #   @return [Array<String>]
     class UntagResourceRequest < Struct.new(
+      nil,
       :arn,
       :tag_keys,
       keyword_init: true
@@ -1022,6 +1086,7 @@ module Aws::OSIS
     end
 
     class UntagResourceResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1056,6 +1121,7 @@ module Aws::OSIS
     #      Amazon Web Services resources.</p>
     #   @return [String]
     class UpdatePipelineRequest < Struct.new(
+      nil,
       :pipeline_name,
       :min_units,
       :max_units,
@@ -1073,6 +1139,7 @@ module Aws::OSIS
     #   <p>Container for information about the updated pipeline.</p>
     #   @return [Types::Pipeline]
     class UpdatePipelineResponse < Struct.new(
+      nil,
       :pipeline,
       keyword_init: true
     )
@@ -1085,6 +1152,7 @@ module Aws::OSIS
     #      be escaped with <code>\n</code>.</p>
     #   @return [String]
     class ValidatePipelineRequest < Struct.new(
+      nil,
       :pipeline_configuration_body,
       keyword_init: true
     )
@@ -1098,6 +1166,7 @@ module Aws::OSIS
     #   <p>A list of errors if the configuration is invalid.</p>
     #   @return [Array<Types::ValidationMessage>]
     class ValidatePipelineResponse < Struct.new(
+      nil,
       :is_valid,
       :errors,
       keyword_init: true
@@ -1109,6 +1178,7 @@ module Aws::OSIS
     # @!attribute message
     #   @return [String]
     class ValidationException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -1121,6 +1191,7 @@ module Aws::OSIS
     #   <p>The validation message.</p>
     #   @return [String]
     class ValidationMessage < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -1135,6 +1206,7 @@ module Aws::OSIS
     #   <p>The CIDR block to be reserved for OpenSearch Ingestion to create elastic network interfaces (ENIs).</p>
     #   @return [String]
     class VpcAttachmentOptions < Struct.new(
+      nil,
       :attach_to_vpc,
       :cidr_block,
       keyword_init: true
@@ -1155,6 +1227,7 @@ module Aws::OSIS
     #   <p>Information about the VPC, including associated subnets and security groups.</p>
     #   @return [Types::VpcOptions]
     class VpcEndpoint < Struct.new(
+      nil,
       :vpc_endpoint_id,
       :vpc_id,
       :vpc_options,
@@ -1178,6 +1251,7 @@ module Aws::OSIS
     #   <p>Defines whether you or Amazon OpenSearch Ingestion service create and manage the VPC endpoint configured for the pipeline.</p>
     #   @return [String]
     class VpcOptions < Struct.new(
+      nil,
       :subnet_ids,
       :security_group_ids,
       :vpc_attachment_options,

@@ -10,6 +10,7 @@ module Aws::BedrockDataAutomationRuntime
     # @!attribute message
     #   @return [String]
     class AccessDeniedException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -21,6 +22,7 @@ module Aws::BedrockDataAutomationRuntime
     #   Video asset processing configuration
     #   @return [Types::VideoAssetProcessingConfiguration]
     class AssetProcessingConfiguration < Struct.new(
+      nil,
       :video,
       keyword_init: true
     )
@@ -38,6 +40,7 @@ module Aws::BedrockDataAutomationRuntime
     #   Stage of blueprint.
     #   @return [String]
     class Blueprint < Struct.new(
+      nil,
       :blueprint_arn,
       :version,
       :stage,
@@ -54,6 +57,7 @@ module Aws::BedrockDataAutomationRuntime
     #   Data automation stage.
     #   @return [String]
     class DataAutomationConfiguration < Struct.new(
+      nil,
       :data_automation_project_arn,
       :stage,
       keyword_init: true
@@ -69,6 +73,7 @@ module Aws::BedrockDataAutomationRuntime
     #   KMS encryption context.
     #   @return [Hash<String, String>]
     class EncryptionConfiguration < Struct.new(
+      nil,
       :kms_key_id,
       :kms_encryption_context,
       keyword_init: true
@@ -81,6 +86,7 @@ module Aws::BedrockDataAutomationRuntime
     #   Event bridge flag.
     #   @return [Boolean]
     class EventBridgeConfiguration < Struct.new(
+      nil,
       :event_bridge_enabled,
       keyword_init: true
     )
@@ -92,6 +98,7 @@ module Aws::BedrockDataAutomationRuntime
     #   Invocation arn.
     #   @return [String]
     class GetDataAutomationStatusRequest < Struct.new(
+      nil,
       :invocation_arn,
       keyword_init: true
     )
@@ -112,6 +119,7 @@ module Aws::BedrockDataAutomationRuntime
     #   Output configuration.
     #   @return [Types::OutputConfiguration]
     class GetDataAutomationStatusResponse < Struct.new(
+      nil,
       :status,
       :error_type,
       :error_message,
@@ -129,6 +137,7 @@ module Aws::BedrockDataAutomationRuntime
     #   Asset processing configuration
     #   @return [Types::AssetProcessingConfiguration]
     class InputConfiguration < Struct.new(
+      nil,
       :s3_uri,
       :asset_processing_configuration,
       keyword_init: true
@@ -140,6 +149,7 @@ module Aws::BedrockDataAutomationRuntime
     # @!attribute message
     #   @return [String]
     class InternalServerException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -175,6 +185,7 @@ module Aws::BedrockDataAutomationRuntime
     #   List of tags.
     #   @return [Array<Types::Tag>]
     class InvokeDataAutomationAsyncRequest < Struct.new(
+      nil,
       :client_token,
       :input_configuration,
       :output_configuration,
@@ -194,6 +205,7 @@ module Aws::BedrockDataAutomationRuntime
     #   ARN of the automation job
     #   @return [String]
     class InvokeDataAutomationAsyncResponse < Struct.new(
+      nil,
       :invocation_arn,
       keyword_init: true
     )
@@ -204,6 +216,7 @@ module Aws::BedrockDataAutomationRuntime
     #   ARN of a taggable resource
     #   @return [String]
     class ListTagsForResourceRequest < Struct.new(
+      nil,
       :resource_arn,
       keyword_init: true
     )
@@ -214,6 +227,7 @@ module Aws::BedrockDataAutomationRuntime
     #   List of tags
     #   @return [Array<Types::Tag>]
     class ListTagsForResourceResponse < Struct.new(
+      nil,
       :tags,
       keyword_init: true
     )
@@ -225,6 +239,7 @@ module Aws::BedrockDataAutomationRuntime
     #   Event bridge configuration.
     #   @return [Types::EventBridgeConfiguration]
     class NotificationConfiguration < Struct.new(
+      nil,
       :event_bridge_configuration,
       keyword_init: true
     )
@@ -236,6 +251,7 @@ module Aws::BedrockDataAutomationRuntime
     #   S3 uri.
     #   @return [String]
     class OutputConfiguration < Struct.new(
+      nil,
       :s3_uri,
       keyword_init: true
     )
@@ -246,6 +262,7 @@ module Aws::BedrockDataAutomationRuntime
     # @!attribute message
     #   @return [String]
     class ResourceNotFoundException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -256,6 +273,7 @@ module Aws::BedrockDataAutomationRuntime
     # @!attribute message
     #   @return [String]
     class ServiceQuotaExceededException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -270,6 +288,7 @@ module Aws::BedrockDataAutomationRuntime
     #   Defines the value within the context. e.g. <key=reason, value=training>.
     #   @return [String]
     class Tag < Struct.new(
+      nil,
       :key,
       :value,
       keyword_init: true
@@ -284,6 +303,7 @@ module Aws::BedrockDataAutomationRuntime
     #   List of tags
     #   @return [Array<Types::Tag>]
     class TagResourceRequest < Struct.new(
+      nil,
       :resource_arn,
       :tags,
       keyword_init: true
@@ -292,6 +312,7 @@ module Aws::BedrockDataAutomationRuntime
     end
 
     class TagResourceResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -301,6 +322,7 @@ module Aws::BedrockDataAutomationRuntime
     # @!attribute message
     #   @return [String]
     class ThrottlingException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -315,6 +337,7 @@ module Aws::BedrockDataAutomationRuntime
     #   End timestamp in milliseconds
     #   @return [Integer]
     class TimestampSegment < Struct.new(
+      nil,
       :start_time_millis,
       :end_time_millis,
       keyword_init: true
@@ -329,6 +352,7 @@ module Aws::BedrockDataAutomationRuntime
     #   List of tag keys
     #   @return [Array<String>]
     class UntagResourceRequest < Struct.new(
+      nil,
       :resource_arn,
       :tag_keys,
       keyword_init: true
@@ -337,6 +361,7 @@ module Aws::BedrockDataAutomationRuntime
     end
 
     class UntagResourceResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -346,6 +371,7 @@ module Aws::BedrockDataAutomationRuntime
     # @!attribute message
     #   @return [String]
     class ValidationException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -357,6 +383,7 @@ module Aws::BedrockDataAutomationRuntime
     #   Delimits the segment of the input that will be processed
     #   @return [Types::VideoSegmentConfiguration]
     class VideoAssetProcessingConfiguration < Struct.new(
+      nil,
       :segment_configuration,
       keyword_init: true
     )

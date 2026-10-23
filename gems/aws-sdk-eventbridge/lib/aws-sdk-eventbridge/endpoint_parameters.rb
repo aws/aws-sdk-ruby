@@ -20,6 +20,7 @@ module Aws::EventBridge
   #   Operation parameter for EndpointId
   #   @return [String]
   EndpointParameters = Struct.new(
+    nil,
     :region,
     :use_dual_stack,
     :use_fips,

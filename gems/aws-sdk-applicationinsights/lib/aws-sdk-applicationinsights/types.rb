@@ -10,6 +10,7 @@ module Aws::ApplicationInsights
     # @!attribute message
     #   @return [String]
     class AccessDeniedException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -26,6 +27,7 @@ module Aws::ApplicationInsights
     #   <p>The configuration settings of the workload. The value is the escaped JSON of the configuration.</p>
     #   @return [Types::WorkloadConfiguration]
     class AddWorkloadRequest < Struct.new(
+      nil,
       :resource_group_name,
       :component_name,
       :workload_configuration,
@@ -41,6 +43,7 @@ module Aws::ApplicationInsights
     #   <p>The configuration settings of the workload. The value is the escaped JSON of the configuration.</p>
     #   @return [Types::WorkloadConfiguration]
     class AddWorkloadResponse < Struct.new(
+      nil,
       :workload_id,
       :workload_configuration,
       keyword_init: true
@@ -74,6 +77,7 @@ module Aws::ApplicationInsights
     #   <p> Workloads detected in the application component. </p>
     #   @return [Hash<String, Hash<String, String>>]
     class ApplicationComponent < Struct.new(
+      nil,
       :component_name,
       :component_remarks,
       :resource_type,
@@ -136,6 +140,7 @@ module Aws::ApplicationInsights
     #   <p>If set to true, the managed policies for SSM and CW will be attached to the instance roles if they are missing.</p>
     #   @return [Boolean]
     class ApplicationInfo < Struct.new(
+      nil,
       :account_id,
       :resource_group_name,
       :life_cycle,
@@ -156,6 +161,7 @@ module Aws::ApplicationInsights
     # @!attribute message
     #   @return [String]
     class BadRequestException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -190,6 +196,7 @@ module Aws::ApplicationInsights
     #   <p> The name of the resource Application Insights attempted to configure. </p>
     #   @return [String]
     class ConfigurationEvent < Struct.new(
+      nil,
       :resource_group_name,
       :account_id,
       :monitored_resource_arn,
@@ -246,6 +253,7 @@ module Aws::ApplicationInsights
     #   <p>If set to true, the managed policies for SSM and CW will be attached to the instance roles if they are missing.</p>
     #   @return [Boolean]
     class CreateApplicationRequest < Struct.new(
+      nil,
       :resource_group_name,
       :ops_center_enabled,
       :cwe_monitor_enabled,
@@ -265,6 +273,7 @@ module Aws::ApplicationInsights
     #   <p>Information about the application.</p>
     #   @return [Types::ApplicationInfo]
     class CreateApplicationResponse < Struct.new(
+      nil,
       :application_info,
       keyword_init: true
     )
@@ -281,6 +290,7 @@ module Aws::ApplicationInsights
     #   <p>The list of resource ARNs that belong to the component.</p>
     #   @return [Array<String>]
     class CreateComponentRequest < Struct.new(
+      nil,
       :resource_group_name,
       :component_name,
       :resource_list,
@@ -290,6 +300,7 @@ module Aws::ApplicationInsights
     end
 
     class CreateComponentResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -321,6 +332,7 @@ module Aws::ApplicationInsights
     #            Amazon Web Services provided patterns. </p>
     #   @return [Integer]
     class CreateLogPatternRequest < Struct.new(
+      nil,
       :resource_group_name,
       :pattern_set_name,
       :pattern_name,
@@ -338,6 +350,7 @@ module Aws::ApplicationInsights
     #   <p>The name of the resource group.</p>
     #   @return [String]
     class CreateLogPatternResponse < Struct.new(
+      nil,
       :log_pattern,
       :resource_group_name,
       keyword_init: true
@@ -349,6 +362,7 @@ module Aws::ApplicationInsights
     #   <p>The name of the resource group.</p>
     #   @return [String]
     class DeleteApplicationRequest < Struct.new(
+      nil,
       :resource_group_name,
       keyword_init: true
     )
@@ -356,6 +370,7 @@ module Aws::ApplicationInsights
     end
 
     class DeleteApplicationResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -368,6 +383,7 @@ module Aws::ApplicationInsights
     #   <p>The name of the component.</p>
     #   @return [String]
     class DeleteComponentRequest < Struct.new(
+      nil,
       :resource_group_name,
       :component_name,
       keyword_init: true
@@ -376,6 +392,7 @@ module Aws::ApplicationInsights
     end
 
     class DeleteComponentResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -391,6 +408,7 @@ module Aws::ApplicationInsights
     #   <p>The name of the log pattern.</p>
     #   @return [String]
     class DeleteLogPatternRequest < Struct.new(
+      nil,
       :resource_group_name,
       :pattern_set_name,
       :pattern_name,
@@ -400,6 +418,7 @@ module Aws::ApplicationInsights
     end
 
     class DeleteLogPatternResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -412,6 +431,7 @@ module Aws::ApplicationInsights
     #   <p>The Amazon Web Services account ID for the resource group owner.</p>
     #   @return [String]
     class DescribeApplicationRequest < Struct.new(
+      nil,
       :resource_group_name,
       :account_id,
       keyword_init: true
@@ -423,6 +443,7 @@ module Aws::ApplicationInsights
     #   <p>Information about the application.</p>
     #   @return [Types::ApplicationInfo]
     class DescribeApplicationResponse < Struct.new(
+      nil,
       :application_info,
       keyword_init: true
     )
@@ -446,6 +467,7 @@ module Aws::ApplicationInsights
     #   <p>The recommended configuration type.</p>
     #   @return [String]
     class DescribeComponentConfigurationRecommendationRequest < Struct.new(
+      nil,
       :resource_group_name,
       :component_name,
       :tier,
@@ -461,6 +483,7 @@ module Aws::ApplicationInsights
     #            of the configuration.</p>
     #   @return [String]
     class DescribeComponentConfigurationRecommendationResponse < Struct.new(
+      nil,
       :component_configuration,
       keyword_init: true
     )
@@ -477,6 +500,7 @@ module Aws::ApplicationInsights
     #   <p>The Amazon Web Services account ID for the resource group owner.</p>
     #   @return [String]
     class DescribeComponentConfigurationRequest < Struct.new(
+      nil,
       :resource_group_name,
       :component_name,
       :account_id,
@@ -499,6 +523,7 @@ module Aws::ApplicationInsights
     #            configuration.</p>
     #   @return [String]
     class DescribeComponentConfigurationResponse < Struct.new(
+      nil,
       :monitor,
       :tier,
       :component_configuration,
@@ -517,6 +542,7 @@ module Aws::ApplicationInsights
     #   <p>The Amazon Web Services account ID for the resource group owner.</p>
     #   @return [String]
     class DescribeComponentRequest < Struct.new(
+      nil,
       :resource_group_name,
       :component_name,
       :account_id,
@@ -533,6 +559,7 @@ module Aws::ApplicationInsights
     #   <p>The list of resource ARNs that belong to the component.</p>
     #   @return [Array<String>]
     class DescribeComponentResponse < Struct.new(
+      nil,
       :application_component,
       :resource_list,
       keyword_init: true
@@ -553,6 +580,7 @@ module Aws::ApplicationInsights
     #   <p>The Amazon Web Services account ID for the resource group owner.</p>
     #   @return [String]
     class DescribeLogPatternRequest < Struct.new(
+      nil,
       :resource_group_name,
       :pattern_set_name,
       :pattern_name,
@@ -572,6 +600,7 @@ module Aws::ApplicationInsights
     #   <p>The successfully created log pattern.</p>
     #   @return [Types::LogPattern]
     class DescribeLogPatternResponse < Struct.new(
+      nil,
       :resource_group_name,
       :account_id,
       :log_pattern,
@@ -587,6 +616,7 @@ module Aws::ApplicationInsights
     #   <p>The Amazon Web Services account ID for the resource group owner.</p>
     #   @return [String]
     class DescribeObservationRequest < Struct.new(
+      nil,
       :observation_id,
       :account_id,
       keyword_init: true
@@ -598,6 +628,7 @@ module Aws::ApplicationInsights
     #   <p>Information about the observation.</p>
     #   @return [Types::Observation]
     class DescribeObservationResponse < Struct.new(
+      nil,
       :observation,
       keyword_init: true
     )
@@ -611,6 +642,7 @@ module Aws::ApplicationInsights
     #   <p>The Amazon Web Services account ID for the resource group owner.</p>
     #   @return [String]
     class DescribeProblemObservationsRequest < Struct.new(
+      nil,
       :problem_id,
       :account_id,
       keyword_init: true
@@ -622,6 +654,7 @@ module Aws::ApplicationInsights
     #   <p>Observations related to the problem.</p>
     #   @return [Types::RelatedObservations]
     class DescribeProblemObservationsResponse < Struct.new(
+      nil,
       :related_observations,
       keyword_init: true
     )
@@ -635,6 +668,7 @@ module Aws::ApplicationInsights
     #   <p>The Amazon Web Services account ID for the owner of the resource group affected by the problem.</p>
     #   @return [String]
     class DescribeProblemRequest < Struct.new(
+      nil,
       :problem_id,
       :account_id,
       keyword_init: true
@@ -651,6 +685,7 @@ module Aws::ApplicationInsights
     #         </p>
     #   @return [String]
     class DescribeProblemResponse < Struct.new(
+      nil,
       :problem,
       :sns_notification_arn,
       keyword_init: true
@@ -671,6 +706,7 @@ module Aws::ApplicationInsights
     #   <p>The Amazon Web Services account ID for the workload owner.</p>
     #   @return [String]
     class DescribeWorkloadRequest < Struct.new(
+      nil,
       :resource_group_name,
       :component_name,
       :workload_id,
@@ -690,6 +726,7 @@ module Aws::ApplicationInsights
     #   <p>The configuration settings of the workload. The value is the escaped JSON of the configuration.</p>
     #   @return [Types::WorkloadConfiguration]
     class DescribeWorkloadResponse < Struct.new(
+      nil,
       :workload_id,
       :workload_remarks,
       :workload_configuration,
@@ -702,6 +739,7 @@ module Aws::ApplicationInsights
     # @!attribute message
     #   @return [String]
     class InternalServerException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -719,6 +757,7 @@ module Aws::ApplicationInsights
     #   <p>The Amazon Web Services account ID for the resource group owner.</p>
     #   @return [String]
     class ListApplicationsRequest < Struct.new(
+      nil,
       :max_results,
       :next_token,
       :account_id,
@@ -735,6 +774,7 @@ module Aws::ApplicationInsights
     #            when there are no more results to return. </p>
     #   @return [String]
     class ListApplicationsResponse < Struct.new(
+      nil,
       :application_info_list,
       :next_token,
       keyword_init: true
@@ -756,6 +796,7 @@ module Aws::ApplicationInsights
     #   <p>The Amazon Web Services account ID for the resource group owner.</p>
     #   @return [String]
     class ListComponentsRequest < Struct.new(
+      nil,
       :resource_group_name,
       :max_results,
       :next_token,
@@ -772,6 +813,7 @@ module Aws::ApplicationInsights
     #   <p>The token to request the next page of results.</p>
     #   @return [String]
     class ListComponentsResponse < Struct.new(
+      nil,
       :application_component_list,
       :next_token,
       keyword_init: true
@@ -812,6 +854,7 @@ module Aws::ApplicationInsights
     #   <p>The Amazon Web Services account ID for the resource group owner.</p>
     #   @return [String]
     class ListConfigurationHistoryRequest < Struct.new(
+      nil,
       :resource_group_name,
       :start_time,
       :end_time,
@@ -835,6 +878,7 @@ module Aws::ApplicationInsights
     #            there are no more results to return.</p>
     #   @return [String]
     class ListConfigurationHistoryResponse < Struct.new(
+      nil,
       :event_list,
       :next_token,
       keyword_init: true
@@ -856,6 +900,7 @@ module Aws::ApplicationInsights
     #   <p>The Amazon Web Services account ID for the resource group owner.</p>
     #   @return [String]
     class ListLogPatternSetsRequest < Struct.new(
+      nil,
       :resource_group_name,
       :max_results,
       :next_token,
@@ -879,6 +924,7 @@ module Aws::ApplicationInsights
     #            when there are no more results to return. </p>
     #   @return [String]
     class ListLogPatternSetsResponse < Struct.new(
+      nil,
       :resource_group_name,
       :account_id,
       :log_pattern_sets,
@@ -905,6 +951,7 @@ module Aws::ApplicationInsights
     #   <p>The Amazon Web Services account ID for the resource group owner.</p>
     #   @return [String]
     class ListLogPatternsRequest < Struct.new(
+      nil,
       :resource_group_name,
       :pattern_set_name,
       :max_results,
@@ -929,6 +976,7 @@ module Aws::ApplicationInsights
     #            when there are no more results to return. </p>
     #   @return [String]
     class ListLogPatternsResponse < Struct.new(
+      nil,
       :resource_group_name,
       :account_id,
       :log_patterns,
@@ -967,6 +1015,7 @@ module Aws::ApplicationInsights
     #            ignored problems are returned.</p>
     #   @return [String]
     class ListProblemsRequest < Struct.new(
+      nil,
       :account_id,
       :resource_group_name,
       :start_time,
@@ -994,6 +1043,7 @@ module Aws::ApplicationInsights
     #   <p>The Amazon Web Services account ID for the resource group owner.</p>
     #   @return [String]
     class ListProblemsResponse < Struct.new(
+      nil,
       :problem_list,
       :next_token,
       :resource_group_name,
@@ -1008,6 +1058,7 @@ module Aws::ApplicationInsights
     #            information for.</p>
     #   @return [String]
     class ListTagsForResourceRequest < Struct.new(
+      nil,
       :resource_arn,
       keyword_init: true
     )
@@ -1020,6 +1071,7 @@ module Aws::ApplicationInsights
     #               (<code>Value</code>).</p>
     #   @return [Array<Types::Tag>]
     class ListTagsForResourceResponse < Struct.new(
+      nil,
       :tags,
       keyword_init: true
     )
@@ -1043,6 +1095,7 @@ module Aws::ApplicationInsights
     #   <p>The Amazon Web Services account ID of the owner of the workload.</p>
     #   @return [String]
     class ListWorkloadsRequest < Struct.new(
+      nil,
       :resource_group_name,
       :component_name,
       :max_results,
@@ -1060,6 +1113,7 @@ module Aws::ApplicationInsights
     #   <p>The token to request the next page of results.</p>
     #   @return [String]
     class ListWorkloadsResponse < Struct.new(
+      nil,
       :workload_list,
       :next_token,
       keyword_init: true
@@ -1097,6 +1151,7 @@ module Aws::ApplicationInsights
     #            Amazon Web Services provided patterns. </p>
     #   @return [Integer]
     class LogPattern < Struct.new(
+      nil,
       :pattern_set_name,
       :pattern_name,
       :pattern,
@@ -1259,6 +1314,7 @@ module Aws::ApplicationInsights
     #   <p> The type of the X-Ray node. </p>
     #   @return [String]
     class Observation < Struct.new(
+      nil,
       :id,
       :start_time,
       :end_time,
@@ -1365,6 +1421,7 @@ module Aws::ApplicationInsights
     #            problem. If the value is <code>UNRESOLVED</code>, then the problem is not resolved.</p>
     #   @return [String]
     class Problem < Struct.new(
+      nil,
       :id,
       :title,
       :short_name,
@@ -1391,6 +1448,7 @@ module Aws::ApplicationInsights
     #   <p>The list of observations related to the problem.</p>
     #   @return [Array<Types::Observation>]
     class RelatedObservations < Struct.new(
+      nil,
       :observation_list,
       keyword_init: true
     )
@@ -1407,6 +1465,7 @@ module Aws::ApplicationInsights
     #   <p>The ID of the workload.</p>
     #   @return [String]
     class RemoveWorkloadRequest < Struct.new(
+      nil,
       :resource_group_name,
       :component_name,
       :workload_id,
@@ -1416,6 +1475,7 @@ module Aws::ApplicationInsights
     end
 
     class RemoveWorkloadResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1425,6 +1485,7 @@ module Aws::ApplicationInsights
     # @!attribute message
     #   @return [String]
     class ResourceInUseException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -1435,6 +1496,7 @@ module Aws::ApplicationInsights
     # @!attribute message
     #   @return [String]
     class ResourceNotFoundException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -1476,6 +1538,7 @@ module Aws::ApplicationInsights
     #            application to have a specific tag value, don't specify a value for this parameter.</p>
     #   @return [String]
     class Tag < Struct.new(
+      nil,
       :key,
       :value,
       keyword_init: true
@@ -1493,6 +1556,7 @@ module Aws::ApplicationInsights
     #            of a tag key is 128 characters. The maximum length of a tag value is 256 characters.</p>
     #   @return [Array<Types::Tag>]
     class TagResourceRequest < Struct.new(
+      nil,
       :resource_arn,
       :tags,
       keyword_init: true
@@ -1501,6 +1565,7 @@ module Aws::ApplicationInsights
     end
 
     class TagResourceResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1510,6 +1575,7 @@ module Aws::ApplicationInsights
     # @!attribute message
     #   @return [String]
     class TagsAlreadyExistException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -1524,6 +1590,7 @@ module Aws::ApplicationInsights
     #   <p>The name of the resource with too many tags.</p>
     #   @return [String]
     class TooManyTagsException < Struct.new(
+      nil,
       :message,
       :resource_name,
       keyword_init: true
@@ -1543,6 +1610,7 @@ module Aws::ApplicationInsights
     #         </p>
     #   @return [Array<String>]
     class UntagResourceRequest < Struct.new(
+      nil,
       :resource_arn,
       :tag_keys,
       keyword_init: true
@@ -1551,6 +1619,7 @@ module Aws::ApplicationInsights
     end
 
     class UntagResourceResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1587,6 +1656,7 @@ module Aws::ApplicationInsights
     #   <p>If set to true, the managed policies for SSM and CW will be attached to the instance roles if they are missing.</p>
     #   @return [Boolean]
     class UpdateApplicationRequest < Struct.new(
+      nil,
       :resource_group_name,
       :ops_center_enabled,
       :cwe_monitor_enabled,
@@ -1604,6 +1674,7 @@ module Aws::ApplicationInsights
     #   <p>Information about the application. </p>
     #   @return [Types::ApplicationInfo]
     class UpdateApplicationResponse < Struct.new(
+      nil,
       :application_info,
       keyword_init: true
     )
@@ -1634,6 +1705,7 @@ module Aws::ApplicationInsights
     #         </p>
     #   @return [Boolean]
     class UpdateComponentConfigurationRequest < Struct.new(
+      nil,
       :resource_group_name,
       :component_name,
       :monitor,
@@ -1646,6 +1718,7 @@ module Aws::ApplicationInsights
     end
 
     class UpdateComponentConfigurationResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1664,6 +1737,7 @@ module Aws::ApplicationInsights
     #   <p>The list of resource ARNs that belong to the component.</p>
     #   @return [Array<String>]
     class UpdateComponentRequest < Struct.new(
+      nil,
       :resource_group_name,
       :component_name,
       :new_component_name,
@@ -1674,6 +1748,7 @@ module Aws::ApplicationInsights
     end
 
     class UpdateComponentResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1705,6 +1780,7 @@ module Aws::ApplicationInsights
     #            Amazon Web Services provided patterns. </p>
     #   @return [Integer]
     class UpdateLogPatternRequest < Struct.new(
+      nil,
       :resource_group_name,
       :pattern_set_name,
       :pattern_name,
@@ -1722,6 +1798,7 @@ module Aws::ApplicationInsights
     #   <p>The successfully created log pattern.</p>
     #   @return [Types::LogPattern]
     class UpdateLogPatternResponse < Struct.new(
+      nil,
       :resource_group_name,
       :log_pattern,
       keyword_init: true
@@ -1742,6 +1819,7 @@ module Aws::ApplicationInsights
     #            <code>VISIBLE</code> is passed, the <code>IGNORED</code> action is reversed.</p>
     #   @return [String]
     class UpdateProblemRequest < Struct.new(
+      nil,
       :problem_id,
       :update_status,
       :visibility,
@@ -1751,6 +1829,7 @@ module Aws::ApplicationInsights
     end
 
     class UpdateProblemResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1769,6 +1848,7 @@ module Aws::ApplicationInsights
     #   <p>The configuration settings of the workload. The value is the escaped JSON of the configuration.</p>
     #   @return [Types::WorkloadConfiguration]
     class UpdateWorkloadRequest < Struct.new(
+      nil,
       :resource_group_name,
       :component_name,
       :workload_id,
@@ -1785,6 +1865,7 @@ module Aws::ApplicationInsights
     #   <p>The configuration settings of the workload. The value is the escaped JSON of the configuration.</p>
     #   @return [Types::WorkloadConfiguration]
     class UpdateWorkloadResponse < Struct.new(
+      nil,
       :workload_id,
       :workload_configuration,
       keyword_init: true
@@ -1796,6 +1877,7 @@ module Aws::ApplicationInsights
     # @!attribute message
     #   @return [String]
     class ValidationException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -1822,6 +1904,7 @@ module Aws::ApplicationInsights
     #   <p>Indicates whether all of the component configurations required to monitor a workload were provided.</p>
     #   @return [Boolean]
     class Workload < Struct.new(
+      nil,
       :workload_id,
       :component_name,
       :workload_name,
@@ -1844,6 +1927,7 @@ module Aws::ApplicationInsights
     #   <p>The configuration settings of the workload.</p>
     #   @return [String]
     class WorkloadConfiguration < Struct.new(
+      nil,
       :workload_name,
       :tier,
       :configuration,

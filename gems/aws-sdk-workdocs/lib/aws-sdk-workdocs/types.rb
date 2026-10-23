@@ -16,6 +16,7 @@ module Aws::WorkDocs
     #   <p>The ID of the version.</p>
     #   @return [String]
     class AbortDocumentVersionUploadRequest < Struct.new(
+      nil,
       :authentication_token,
       :document_id,
       :version_id,
@@ -31,6 +32,7 @@ module Aws::WorkDocs
     #   <p>Amazon WorkDocs authentication token. Not required when using Amazon Web Services administrator credentials to access the API.</p>
     #   @return [String]
     class ActivateUserRequest < Struct.new(
+      nil,
       :user_id,
       :authentication_token,
       keyword_init: true
@@ -42,6 +44,7 @@ module Aws::WorkDocs
     #   <p>The user information.</p>
     #   @return [Types::User]
     class ActivateUserResponse < Struct.new(
+      nil,
       :user,
       keyword_init: true
     )
@@ -84,6 +87,7 @@ module Aws::WorkDocs
     #               commenting activities.</p>
     #   @return [Types::CommentMetadata]
     class Activity < Struct.new(
+      nil,
       :type,
       :time_stamp,
       :is_indirect_activity,
@@ -116,6 +120,7 @@ module Aws::WorkDocs
     #   <p>The notification options.</p>
     #   @return [Types::NotificationOptions]
     class AddResourcePermissionsRequest < Struct.new(
+      nil,
       :authentication_token,
       :resource_id,
       :principals,
@@ -129,6 +134,7 @@ module Aws::WorkDocs
     #   <p>The share results.</p>
     #   @return [Array<Types::ShareResult>]
     class AddResourcePermissionsResponse < Struct.new(
+      nil,
       :share_results,
       keyword_init: true
     )
@@ -167,6 +173,7 @@ module Aws::WorkDocs
     #               ID of the user being replied to.</p>
     #   @return [String]
     class Comment < Struct.new(
+      nil,
       :comment_id,
       :parent_id,
       :thread_id,
@@ -201,6 +208,7 @@ module Aws::WorkDocs
     #   <p>The ID of the user who made the comment.</p>
     #   @return [String]
     class CommentMetadata < Struct.new(
+      nil,
       :comment_id,
       :contributor,
       :created_timestamp,
@@ -216,6 +224,7 @@ module Aws::WorkDocs
     # @!attribute message
     #   @return [String]
     class ConcurrentModificationException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -226,6 +235,7 @@ module Aws::WorkDocs
     # @!attribute message
     #   @return [String]
     class ConflictingOperationException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -260,6 +270,7 @@ module Aws::WorkDocs
     #               the comment is created.</p>
     #   @return [Boolean]
     class CreateCommentRequest < Struct.new(
+      nil,
       :authentication_token,
       :document_id,
       :version_id,
@@ -277,6 +288,7 @@ module Aws::WorkDocs
     #   <p>The comment that has been created.</p>
     #   @return [Types::Comment]
     class CreateCommentResponse < Struct.new(
+      nil,
       :comment,
       keyword_init: true
     )
@@ -297,6 +309,7 @@ module Aws::WorkDocs
     #   <p>Custom metadata in the form of name-value pairs.</p>
     #   @return [Hash<String, String>]
     class CreateCustomMetadataRequest < Struct.new(
+      nil,
       :authentication_token,
       :resource_id,
       :version_id,
@@ -307,6 +320,7 @@ module Aws::WorkDocs
     end
 
     class CreateCustomMetadataResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -322,6 +336,7 @@ module Aws::WorkDocs
     #   <p>The ID of the parent folder.</p>
     #   @return [String]
     class CreateFolderRequest < Struct.new(
+      nil,
       :authentication_token,
       :name,
       :parent_folder_id,
@@ -334,6 +349,7 @@ module Aws::WorkDocs
     #   <p>The metadata of the folder.</p>
     #   @return [Types::FolderMetadata]
     class CreateFolderResponse < Struct.new(
+      nil,
       :metadata,
       keyword_init: true
     )
@@ -350,6 +366,7 @@ module Aws::WorkDocs
     #   <p>Amazon WorkDocs authentication token. Not required when using Amazon Web Services administrator credentials to access the API.</p>
     #   @return [String]
     class CreateLabelsRequest < Struct.new(
+      nil,
       :resource_id,
       :labels,
       :authentication_token,
@@ -359,6 +376,7 @@ module Aws::WorkDocs
     end
 
     class CreateLabelsResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -379,6 +397,7 @@ module Aws::WorkDocs
     #   <p>The notification type.</p>
     #   @return [String]
     class CreateNotificationSubscriptionRequest < Struct.new(
+      nil,
       :organization_id,
       :endpoint,
       :protocol,
@@ -392,6 +411,7 @@ module Aws::WorkDocs
     #   <p>The subscription.</p>
     #   @return [Types::Subscription]
     class CreateNotificationSubscriptionResponse < Struct.new(
+      nil,
       :subscription,
       keyword_init: true
     )
@@ -426,6 +446,7 @@ module Aws::WorkDocs
     #   <p>Amazon WorkDocs authentication token. Not required when using Amazon Web Services administrator credentials to access the API.</p>
     #   @return [String]
     class CreateUserRequest < Struct.new(
+      nil,
       :organization_id,
       :username,
       :email_address,
@@ -444,6 +465,7 @@ module Aws::WorkDocs
     #   <p>The user information.</p>
     #   @return [Types::User]
     class CreateUserResponse < Struct.new(
+      nil,
       :user,
       keyword_init: true
     )
@@ -455,6 +477,7 @@ module Aws::WorkDocs
     # @!attribute message
     #   @return [String]
     class CustomMetadataLimitExceededException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -469,6 +492,7 @@ module Aws::WorkDocs
     #   <p>Timestamp range end value (in epochs).</p>
     #   @return [Time]
     class DateRangeType < Struct.new(
+      nil,
       :start_value,
       :end_value,
       keyword_init: true
@@ -483,6 +507,7 @@ module Aws::WorkDocs
     #   <p>Amazon WorkDocs authentication token. Not required when using Amazon Web Services administrator credentials to access the API.</p>
     #   @return [String]
     class DeactivateUserRequest < Struct.new(
+      nil,
       :user_id,
       :authentication_token,
       keyword_init: true
@@ -496,6 +521,7 @@ module Aws::WorkDocs
     # @!attribute code
     #   @return [String]
     class DeactivatingLastSystemUserException < Struct.new(
+      nil,
       :message,
       :code,
       keyword_init: true
@@ -516,6 +542,7 @@ module Aws::WorkDocs
     #   <p>The ID of the comment.</p>
     #   @return [String]
     class DeleteCommentRequest < Struct.new(
+      nil,
       :authentication_token,
       :document_id,
       :version_id,
@@ -543,6 +570,7 @@ module Aws::WorkDocs
     #               resource.</p>
     #   @return [Boolean]
     class DeleteCustomMetadataRequest < Struct.new(
+      nil,
       :authentication_token,
       :resource_id,
       :version_id,
@@ -554,6 +582,7 @@ module Aws::WorkDocs
     end
 
     class DeleteCustomMetadataResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -566,6 +595,7 @@ module Aws::WorkDocs
     #   <p>The ID of the document.</p>
     #   @return [String]
     class DeleteDocumentRequest < Struct.new(
+      nil,
       :authentication_token,
       :document_id,
       keyword_init: true
@@ -586,6 +616,7 @@ module Aws::WorkDocs
     #   <p>Deletes all versions of a document prior to the current version.</p>
     #   @return [Boolean]
     class DeleteDocumentVersionRequest < Struct.new(
+      nil,
       :authentication_token,
       :document_id,
       :version_id,
@@ -602,6 +633,7 @@ module Aws::WorkDocs
     #   <p>The ID of the folder.</p>
     #   @return [String]
     class DeleteFolderContentsRequest < Struct.new(
+      nil,
       :authentication_token,
       :folder_id,
       keyword_init: true
@@ -616,6 +648,7 @@ module Aws::WorkDocs
     #   <p>The ID of the folder.</p>
     #   @return [String]
     class DeleteFolderRequest < Struct.new(
+      nil,
       :authentication_token,
       :folder_id,
       keyword_init: true
@@ -636,6 +669,7 @@ module Aws::WorkDocs
     #   <p>Flag to request removal of all labels from the specified resource.</p>
     #   @return [Boolean]
     class DeleteLabelsRequest < Struct.new(
+      nil,
       :resource_id,
       :authentication_token,
       :labels,
@@ -646,6 +680,7 @@ module Aws::WorkDocs
     end
 
     class DeleteLabelsResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -658,6 +693,7 @@ module Aws::WorkDocs
     #   <p>The ID of the organization.</p>
     #   @return [String]
     class DeleteNotificationSubscriptionRequest < Struct.new(
+      nil,
       :subscription_id,
       :organization_id,
       keyword_init: true
@@ -673,6 +709,7 @@ module Aws::WorkDocs
     #   <p>The ID of the user.</p>
     #   @return [String]
     class DeleteUserRequest < Struct.new(
+      nil,
       :authentication_token,
       :user_id,
       keyword_init: true
@@ -720,6 +757,7 @@ module Aws::WorkDocs
     #   <p>The marker for the next set of results.</p>
     #   @return [String]
     class DescribeActivitiesRequest < Struct.new(
+      nil,
       :authentication_token,
       :start_time,
       :end_time,
@@ -742,6 +780,7 @@ module Aws::WorkDocs
     #   <p>The marker for the next set of results.</p>
     #   @return [String]
     class DescribeActivitiesResponse < Struct.new(
+      nil,
       :user_activities,
       :marker,
       keyword_init: true
@@ -766,6 +805,7 @@ module Aws::WorkDocs
     #               call.</p>
     #   @return [String]
     class DescribeCommentsRequest < Struct.new(
+      nil,
       :authentication_token,
       :document_id,
       :version_id,
@@ -784,6 +824,7 @@ module Aws::WorkDocs
     #               call.</p>
     #   @return [String]
     class DescribeCommentsResponse < Struct.new(
+      nil,
       :comments,
       :marker,
       keyword_init: true
@@ -813,6 +854,7 @@ module Aws::WorkDocs
     #               document.</p>
     #   @return [String]
     class DescribeDocumentVersionsRequest < Struct.new(
+      nil,
       :authentication_token,
       :document_id,
       :marker,
@@ -832,6 +874,7 @@ module Aws::WorkDocs
     #               additional results, the string is empty.</p>
     #   @return [String]
     class DescribeDocumentVersionsResponse < Struct.new(
+      nil,
       :document_versions,
       :marker,
       keyword_init: true
@@ -866,6 +909,7 @@ module Aws::WorkDocs
     #               documents.</p>
     #   @return [String]
     class DescribeFolderContentsRequest < Struct.new(
+      nil,
       :authentication_token,
       :folder_id,
       :sort,
@@ -890,6 +934,7 @@ module Aws::WorkDocs
     #               additional results, the string is empty.</p>
     #   @return [String]
     class DescribeFolderContentsResponse < Struct.new(
+      nil,
       :folders,
       :documents,
       :marker,
@@ -915,6 +960,7 @@ module Aws::WorkDocs
     #   <p>The maximum number of items to return with this call.</p>
     #   @return [Integer]
     class DescribeGroupsRequest < Struct.new(
+      nil,
       :authentication_token,
       :search_query,
       :organization_id,
@@ -933,6 +979,7 @@ module Aws::WorkDocs
     #               results, the string is empty.</p>
     #   @return [String]
     class DescribeGroupsResponse < Struct.new(
+      nil,
       :groups,
       :marker,
       keyword_init: true
@@ -951,6 +998,7 @@ module Aws::WorkDocs
     #   <p>The maximum number of items to return with this call.</p>
     #   @return [Integer]
     class DescribeNotificationSubscriptionsRequest < Struct.new(
+      nil,
       :organization_id,
       :marker,
       :limit,
@@ -967,6 +1015,7 @@ module Aws::WorkDocs
     #               additional results, the string is empty.</p>
     #   @return [String]
     class DescribeNotificationSubscriptionsResponse < Struct.new(
+      nil,
       :subscriptions,
       :marker,
       keyword_init: true
@@ -991,6 +1040,7 @@ module Aws::WorkDocs
     #               call)</p>
     #   @return [String]
     class DescribeResourcePermissionsRequest < Struct.new(
+      nil,
       :authentication_token,
       :resource_id,
       :principal_id,
@@ -1009,6 +1059,7 @@ module Aws::WorkDocs
     #               additional results, the string is empty.</p>
     #   @return [String]
     class DescribeResourcePermissionsResponse < Struct.new(
+      nil,
       :principals,
       :marker,
       keyword_init: true
@@ -1027,6 +1078,7 @@ module Aws::WorkDocs
     #               call.)</p>
     #   @return [String]
     class DescribeRootFoldersRequest < Struct.new(
+      nil,
       :authentication_token,
       :limit,
       :marker,
@@ -1042,6 +1094,7 @@ module Aws::WorkDocs
     #   <p>The marker for the next set of results.</p>
     #   @return [String]
     class DescribeRootFoldersResponse < Struct.new(
+      nil,
       :folders,
       :marker,
       keyword_init: true
@@ -1099,6 +1152,7 @@ module Aws::WorkDocs
     #               storage quota and utilization information.</p>
     #   @return [String]
     class DescribeUsersRequest < Struct.new(
+      nil,
       :authentication_token,
       :organization_id,
       :user_ids,
@@ -1126,6 +1180,7 @@ module Aws::WorkDocs
     #               additional results, the string is empty.</p>
     #   @return [String]
     class DescribeUsersResponse < Struct.new(
+      nil,
       :users,
       :total_number_of_users,
       :marker,
@@ -1139,6 +1194,7 @@ module Aws::WorkDocs
     # @!attribute message
     #   @return [String]
     class DocumentLockedForCommentsException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -1171,6 +1227,7 @@ module Aws::WorkDocs
     #   <p>List of labels on the document.</p>
     #   @return [Array<String>]
     class DocumentMetadata < Struct.new(
+      nil,
       :id,
       :creator_id,
       :parent_folder_id,
@@ -1225,6 +1282,7 @@ module Aws::WorkDocs
     #   <p>The source of the document.</p>
     #   @return [Hash<String, String>]
     class DocumentVersionMetadata < Struct.new(
+      nil,
       :id,
       :name,
       :content_type,
@@ -1248,6 +1306,7 @@ module Aws::WorkDocs
     # @!attribute message
     #   @return [String]
     class DraftUploadOutOfSyncException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -1258,6 +1317,7 @@ module Aws::WorkDocs
     # @!attribute message
     #   @return [String]
     class EntityAlreadyExistsException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -1271,6 +1331,7 @@ module Aws::WorkDocs
     #   <p>The IDs of the non-existent resources.</p>
     #   @return [Array<String>]
     class EntityNotExistsException < Struct.new(
+      nil,
       :message,
       :entity_ids,
       keyword_init: true
@@ -1284,6 +1345,7 @@ module Aws::WorkDocs
     # @!attribute message
     #   @return [String]
     class FailedDependencyException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -1322,6 +1384,7 @@ module Aws::WorkDocs
     #   <p>Filter based on resource’s modified timestamp.</p>
     #   @return [Types::DateRangeType]
     class Filters < Struct.new(
+      nil,
       :text_locales,
       :content_categories,
       :resource_types,
@@ -1373,6 +1436,7 @@ module Aws::WorkDocs
     #   <p>The size of the latest version of the folder metadata.</p>
     #   @return [Integer]
     class FolderMetadata < Struct.new(
+      nil,
       :id,
       :name,
       :creator_id,
@@ -1393,6 +1457,7 @@ module Aws::WorkDocs
     #   <p>Amazon WorkDocs authentication token.</p>
     #   @return [String]
     class GetCurrentUserRequest < Struct.new(
+      nil,
       :authentication_token,
       keyword_init: true
     )
@@ -1403,6 +1468,7 @@ module Aws::WorkDocs
     #   <p>Metadata of the user.</p>
     #   @return [Types::User]
     class GetCurrentUserResponse < Struct.new(
+      nil,
       :user,
       keyword_init: true
     )
@@ -1426,6 +1492,7 @@ module Aws::WorkDocs
     #   <p>This value is not supported.</p>
     #   @return [String]
     class GetDocumentPathRequest < Struct.new(
+      nil,
       :authentication_token,
       :document_id,
       :limit,
@@ -1440,6 +1507,7 @@ module Aws::WorkDocs
     #   <p>The path information.</p>
     #   @return [Types::ResourcePath]
     class GetDocumentPathResponse < Struct.new(
+      nil,
       :path,
       keyword_init: true
     )
@@ -1456,6 +1524,7 @@ module Aws::WorkDocs
     #   <p>Set this to <code>TRUE</code> to include custom metadata in the response.</p>
     #   @return [Boolean]
     class GetDocumentRequest < Struct.new(
+      nil,
       :authentication_token,
       :document_id,
       :include_custom_metadata,
@@ -1471,6 +1540,7 @@ module Aws::WorkDocs
     #   <p>The custom metadata on the document.</p>
     #   @return [Hash<String, String>]
     class GetDocumentResponse < Struct.new(
+      nil,
       :metadata,
       :custom_metadata,
       keyword_init: true
@@ -1495,6 +1565,7 @@ module Aws::WorkDocs
     #   <p>Set this to TRUE to include custom metadata in the response.</p>
     #   @return [Boolean]
     class GetDocumentVersionRequest < Struct.new(
+      nil,
       :authentication_token,
       :document_id,
       :version_id,
@@ -1512,6 +1583,7 @@ module Aws::WorkDocs
     #   <p>The custom metadata on the document version.</p>
     #   @return [Hash<String, String>]
     class GetDocumentVersionResponse < Struct.new(
+      nil,
       :metadata,
       :custom_metadata,
       keyword_init: true
@@ -1536,6 +1608,7 @@ module Aws::WorkDocs
     #   <p>This value is not supported.</p>
     #   @return [String]
     class GetFolderPathRequest < Struct.new(
+      nil,
       :authentication_token,
       :folder_id,
       :limit,
@@ -1550,6 +1623,7 @@ module Aws::WorkDocs
     #   <p>The path information.</p>
     #   @return [Types::ResourcePath]
     class GetFolderPathResponse < Struct.new(
+      nil,
       :path,
       keyword_init: true
     )
@@ -1566,6 +1640,7 @@ module Aws::WorkDocs
     #   <p>Set to TRUE to include custom metadata in the response.</p>
     #   @return [Boolean]
     class GetFolderRequest < Struct.new(
+      nil,
       :authentication_token,
       :folder_id,
       :include_custom_metadata,
@@ -1581,6 +1656,7 @@ module Aws::WorkDocs
     #   <p>The custom metadata on the folder.</p>
     #   @return [Hash<String, String>]
     class GetFolderResponse < Struct.new(
+      nil,
       :metadata,
       :custom_metadata,
       keyword_init: true
@@ -1605,6 +1681,7 @@ module Aws::WorkDocs
     #   <p>The marker for the next set of results. This marker was received from a previous call.</p>
     #   @return [String]
     class GetResourcesRequest < Struct.new(
+      nil,
       :authentication_token,
       :user_id,
       :collection_type,
@@ -1625,6 +1702,7 @@ module Aws::WorkDocs
     #   <p>The marker to use when requesting the next set of results. If there are no additional results, the string is empty.</p>
     #   @return [String]
     class GetResourcesResponse < Struct.new(
+      nil,
       :folders,
       :documents,
       :marker,
@@ -1641,6 +1719,7 @@ module Aws::WorkDocs
     #   <p>The name of the group.</p>
     #   @return [String]
     class GroupMetadata < Struct.new(
+      nil,
       :id,
       :name,
       keyword_init: true
@@ -1652,6 +1731,7 @@ module Aws::WorkDocs
     # @!attribute message
     #   @return [String]
     class IllegalUserStateException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -1683,6 +1763,7 @@ module Aws::WorkDocs
     #   <p>The ID of the parent folder.</p>
     #   @return [String]
     class InitiateDocumentVersionUploadRequest < Struct.new(
+      nil,
       :authentication_token,
       :id,
       :name,
@@ -1703,6 +1784,7 @@ module Aws::WorkDocs
     #   <p>The upload metadata.</p>
     #   @return [Types::UploadMetadata]
     class InitiateDocumentVersionUploadResponse < Struct.new(
+      nil,
       :metadata,
       :upload_metadata,
       keyword_init: true
@@ -1714,6 +1796,7 @@ module Aws::WorkDocs
     # @!attribute message
     #   @return [String]
     class InvalidArgumentException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -1724,6 +1807,7 @@ module Aws::WorkDocs
     # @!attribute message
     #   @return [String]
     class InvalidCommentOperationException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -1734,6 +1818,7 @@ module Aws::WorkDocs
     # @!attribute message
     #   @return [String]
     class InvalidOperationException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -1744,6 +1829,7 @@ module Aws::WorkDocs
     # @!attribute message
     #   @return [String]
     class InvalidPasswordException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -1754,6 +1840,7 @@ module Aws::WorkDocs
     # @!attribute message
     #   @return [String]
     class LimitExceededException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -1768,6 +1855,7 @@ module Aws::WorkDocs
     #   <p>The size end range (in bytes).</p>
     #   @return [Integer]
     class LongRangeType < Struct.new(
+      nil,
       :start_value,
       :end_value,
       keyword_init: true
@@ -1784,6 +1872,7 @@ module Aws::WorkDocs
     #   <p>Text value to be included in the email body.</p>
     #   @return [String]
     class NotificationOptions < Struct.new(
+      nil,
       :send_email,
       :email_message,
       keyword_init: true
@@ -1804,6 +1893,7 @@ module Aws::WorkDocs
     #   <p>The list of user groups.</p>
     #   @return [Array<Types::GroupMetadata>]
     class Participants < Struct.new(
+      nil,
       :users,
       :groups,
       keyword_init: true
@@ -1819,6 +1909,7 @@ module Aws::WorkDocs
     #   <p>The type of permissions.</p>
     #   @return [String]
     class PermissionInfo < Struct.new(
+      nil,
       :role,
       :type,
       keyword_init: true
@@ -1837,6 +1928,7 @@ module Aws::WorkDocs
     #   <p>The permission information for the resource.</p>
     #   @return [Array<Types::PermissionInfo>]
     class Principal < Struct.new(
+      nil,
       :id,
       :type,
       :roles,
@@ -1849,6 +1941,7 @@ module Aws::WorkDocs
     # @!attribute message
     #   @return [String]
     class ProhibitedStateException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -1862,6 +1955,7 @@ module Aws::WorkDocs
     #   <p>The ID of the resource.</p>
     #   @return [String]
     class RemoveAllResourcePermissionsRequest < Struct.new(
+      nil,
       :authentication_token,
       :resource_id,
       keyword_init: true
@@ -1882,6 +1976,7 @@ module Aws::WorkDocs
     #   <p>The principal type of the resource.</p>
     #   @return [String]
     class RemoveResourcePermissionRequest < Struct.new(
+      nil,
       :authentication_token,
       :resource_id,
       :principal_id,
@@ -1895,6 +1990,7 @@ module Aws::WorkDocs
     # @!attribute message
     #   @return [String]
     class RequestedEntityTooLargeException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -1905,6 +2001,7 @@ module Aws::WorkDocs
     # @!attribute message
     #   @return [String]
     class ResourceAlreadyCheckedOutException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -1935,6 +2032,7 @@ module Aws::WorkDocs
     #   <p>The parent ID of the resource before a rename operation.</p>
     #   @return [String]
     class ResourceMetadata < Struct.new(
+      nil,
       :type,
       :name,
       :original_name,
@@ -1952,6 +2050,7 @@ module Aws::WorkDocs
     #   <p>The components of the resource path.</p>
     #   @return [Array<Types::ResourcePathComponent>]
     class ResourcePath < Struct.new(
+      nil,
       :components,
       keyword_init: true
     )
@@ -1966,6 +2065,7 @@ module Aws::WorkDocs
     #   <p>The name of the resource path.</p>
     #   @return [String]
     class ResourcePathComponent < Struct.new(
+      nil,
       :id,
       :name,
       keyword_init: true
@@ -1993,6 +2093,7 @@ module Aws::WorkDocs
     #   <p>The document version that matches the metadata.</p>
     #   @return [Types::DocumentVersionMetadata]
     class ResponseItem < Struct.new(
+      nil,
       :resource_type,
       :web_url,
       :document_metadata,
@@ -2011,6 +2112,7 @@ module Aws::WorkDocs
     #   <p>The ID of the document.</p>
     #   @return [String]
     class RestoreDocumentVersionsRequest < Struct.new(
+      nil,
       :authentication_token,
       :document_id,
       keyword_init: true
@@ -2026,6 +2128,7 @@ module Aws::WorkDocs
     #   <p>The Role of a User or Group.</p>
     #   @return [Array<String>]
     class SearchPrincipalType < Struct.new(
+      nil,
       :id,
       :roles,
       keyword_init: true
@@ -2062,6 +2165,7 @@ module Aws::WorkDocs
     #   <p>The marker for the next set of results.</p>
     #   @return [String]
     class SearchResourcesRequest < Struct.new(
+      nil,
       :authentication_token,
       :query_text,
       :query_scopes,
@@ -2083,6 +2187,7 @@ module Aws::WorkDocs
     #   <p>The marker to use when requesting the next set of results. If there are no additional results, the string is empty.</p>
     #   @return [String]
     class SearchResourcesResponse < Struct.new(
+      nil,
       :items,
       :marker,
       keyword_init: true
@@ -2098,6 +2203,7 @@ module Aws::WorkDocs
     #   <p>Sort direction.</p>
     #   @return [String]
     class SearchSortResult < Struct.new(
+      nil,
       :field,
       :order,
       keyword_init: true
@@ -2109,6 +2215,7 @@ module Aws::WorkDocs
     # @!attribute message
     #   @return [String]
     class ServiceUnavailableException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -2126,6 +2233,7 @@ module Aws::WorkDocs
     #   <p>The role of the recipient.</p>
     #   @return [String]
     class SharePrincipal < Struct.new(
+      nil,
       :id,
       :type,
       :role,
@@ -2154,6 +2262,7 @@ module Aws::WorkDocs
     #   <p>The status message.</p>
     #   @return [String]
     class ShareResult < Struct.new(
+      nil,
       :principal_id,
       :invitee_principal_id,
       :role,
@@ -2169,6 +2278,7 @@ module Aws::WorkDocs
     # @!attribute message
     #   @return [String]
     class StorageLimitExceededException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -2179,6 +2289,7 @@ module Aws::WorkDocs
     # @!attribute message
     #   @return [String]
     class StorageLimitWillExceedException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -2193,6 +2304,7 @@ module Aws::WorkDocs
     #   <p>The type of storage.</p>
     #   @return [String]
     class StorageRuleType < Struct.new(
+      nil,
       :storage_allocated_in_bytes,
       :storage_type,
       keyword_init: true
@@ -2211,6 +2323,7 @@ module Aws::WorkDocs
     #   <p>The protocol of the subscription.</p>
     #   @return [String]
     class Subscription < Struct.new(
+      nil,
       :subscription_id,
       :end_point,
       :protocol,
@@ -2224,6 +2337,7 @@ module Aws::WorkDocs
     # @!attribute message
     #   @return [String]
     class TooManyLabelsException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -2235,6 +2349,7 @@ module Aws::WorkDocs
     # @!attribute message
     #   @return [String]
     class TooManySubscriptionsException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -2247,6 +2362,7 @@ module Aws::WorkDocs
     # @!attribute code
     #   @return [String]
     class UnauthorizedOperationException < Struct.new(
+      nil,
       :message,
       :code,
       keyword_init: true
@@ -2258,6 +2374,7 @@ module Aws::WorkDocs
     # @!attribute message
     #   @return [String]
     class UnauthorizedResourceAccessException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -2281,6 +2398,7 @@ module Aws::WorkDocs
     #               supported.</p>
     #   @return [String]
     class UpdateDocumentRequest < Struct.new(
+      nil,
       :authentication_token,
       :document_id,
       :name,
@@ -2304,6 +2422,7 @@ module Aws::WorkDocs
     #   <p>The status of the version.</p>
     #   @return [String]
     class UpdateDocumentVersionRequest < Struct.new(
+      nil,
       :authentication_token,
       :document_id,
       :version_id,
@@ -2330,6 +2449,7 @@ module Aws::WorkDocs
     #               the API.</p>
     #   @return [String]
     class UpdateFolderRequest < Struct.new(
+      nil,
       :authentication_token,
       :folder_id,
       :name,
@@ -2368,6 +2488,7 @@ module Aws::WorkDocs
     #   <p>Boolean value to determine whether the user is granted Power user privileges.</p>
     #   @return [String]
     class UpdateUserRequest < Struct.new(
+      nil,
       :authentication_token,
       :user_id,
       :given_name,
@@ -2386,6 +2507,7 @@ module Aws::WorkDocs
     #   <p>The user information.</p>
     #   @return [Types::User]
     class UpdateUserResponse < Struct.new(
+      nil,
       :user,
       keyword_init: true
     )
@@ -2400,6 +2522,7 @@ module Aws::WorkDocs
     #   <p>The signed headers.</p>
     #   @return [Hash<String, String>]
     class UploadMetadata < Struct.new(
+      nil,
       :upload_url,
       :signed_headers,
       keyword_init: true
@@ -2454,6 +2577,7 @@ module Aws::WorkDocs
     #   <p>The storage for the user.</p>
     #   @return [Types::UserStorageMetadata]
     class User < Struct.new(
+      nil,
       :id,
       :username,
       :email_address,
@@ -2491,6 +2615,7 @@ module Aws::WorkDocs
     #   <p>The email address of the user.</p>
     #   @return [String]
     class UserMetadata < Struct.new(
+      nil,
       :id,
       :username,
       :given_name,
@@ -2509,6 +2634,7 @@ module Aws::WorkDocs
     #   <p>The storage for a user.</p>
     #   @return [Types::StorageRuleType]
     class UserStorageMetadata < Struct.new(
+      nil,
       :storage_utilized_in_bytes,
       :storage_rule,
       keyword_init: true

@@ -10,6 +10,7 @@ module Aws::WorkMailMessageFlow
     #   <p>The identifier of the email message to retrieve.</p>
     #   @return [String]
     class GetRawMessageContentRequest < Struct.new(
+      nil,
       :message_id,
       keyword_init: true
     )
@@ -20,6 +21,7 @@ module Aws::WorkMailMessageFlow
     #   <p>The raw content of the email message, in MIME format.</p>
     #   @return [String]
     class GetRawMessageContentResponse < Struct.new(
+      nil,
       :message_content,
       keyword_init: true
     )
@@ -46,6 +48,7 @@ module Aws::WorkMailMessageFlow
     # @!attribute message
     #   @return [String]
     class InvalidContentLocation < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -56,6 +59,7 @@ module Aws::WorkMailMessageFlow
     # @!attribute message
     #   @return [String]
     class MessageFrozen < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -67,6 +71,7 @@ module Aws::WorkMailMessageFlow
     # @!attribute message
     #   @return [String]
     class MessageRejected < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -80,6 +85,7 @@ module Aws::WorkMailMessageFlow
     #   <p>Describes the raw message content of the updated email message.</p>
     #   @return [Types::RawMessageContent]
     class PutRawMessageContentRequest < Struct.new(
+      nil,
       :message_id,
       :content,
       keyword_init: true
@@ -88,6 +94,7 @@ module Aws::WorkMailMessageFlow
     end
 
     class PutRawMessageContentResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -124,6 +131,7 @@ module Aws::WorkMailMessageFlow
     #   <p>The S3 reference of an email message.</p>
     #   @return [Types::S3Reference]
     class RawMessageContent < Struct.new(
+      nil,
       :s3_reference,
       keyword_init: true
     )
@@ -134,6 +142,7 @@ module Aws::WorkMailMessageFlow
     # @!attribute message
     #   @return [String]
     class ResourceNotFoundException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -157,6 +166,7 @@ module Aws::WorkMailMessageFlow
     #   <p>If you enable versioning for the bucket, you can specify the object version.</p>
     #   @return [String]
     class S3Reference < Struct.new(
+      nil,
       :bucket,
       :key,
       :object_version,

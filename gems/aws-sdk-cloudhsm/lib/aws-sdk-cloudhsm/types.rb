@@ -13,6 +13,7 @@ module Aws::CloudHSM
     #   <p>One or more tags.</p>
     #   @return [Array<Types::Tag>]
     class AddTagsToResourceRequest < Struct.new(
+      nil,
       :resource_arn,
       :tag_list,
       keyword_init: true
@@ -24,6 +25,7 @@ module Aws::CloudHSM
     #   <p>The status of the operation.</p>
     #   @return [String]
     class AddTagsToResourceResponse < Struct.new(
+      nil,
       :status,
       keyword_init: true
     )
@@ -38,6 +40,7 @@ module Aws::CloudHSM
     #   <p>Indicates if the action can be retried.</p>
     #   @return [Boolean]
     class CloudHsmInternalException < Struct.new(
+      nil,
       :message,
       :retryable,
       keyword_init: true
@@ -58,6 +61,7 @@ module Aws::CloudHSM
     #   <p>Indicates if the action can be retried.</p>
     #   @return [Boolean]
     class CloudHsmServiceException < Struct.new(
+      nil,
       :message,
       :retryable,
       keyword_init: true
@@ -75,6 +79,7 @@ module Aws::CloudHSM
     #   <p>The label of the new high-availability partition group.</p>
     #   @return [String]
     class CreateHapgRequest < Struct.new(
+      nil,
       :label,
       keyword_init: true
     )
@@ -86,6 +91,7 @@ module Aws::CloudHSM
     #   <p>The ARN of the high-availability partition group.</p>
     #   @return [String]
     class CreateHapgResponse < Struct.new(
+      nil,
       :hapg_arn,
       keyword_init: true
     )
@@ -135,6 +141,7 @@ module Aws::CloudHSM
     #         syslog monitoring server.</p>
     #   @return [String]
     class CreateHsmRequest < Struct.new(
+      nil,
       :subnet_id,
       :ssh_key,
       :eni_ip,
@@ -153,6 +160,7 @@ module Aws::CloudHSM
     #   <p>The ARN of the HSM.</p>
     #   @return [String]
     class CreateHsmResponse < Struct.new(
+      nil,
       :hsm_arn,
       keyword_init: true
     )
@@ -168,6 +176,7 @@ module Aws::CloudHSM
     #         by this client.</p>
     #   @return [String]
     class CreateLunaClientRequest < Struct.new(
+      nil,
       :label,
       :certificate,
       keyword_init: true
@@ -180,6 +189,7 @@ module Aws::CloudHSM
     #   <p>The ARN of the client.</p>
     #   @return [String]
     class CreateLunaClientResponse < Struct.new(
+      nil,
       :client_arn,
       keyword_init: true
     )
@@ -191,6 +201,7 @@ module Aws::CloudHSM
     #   <p>The ARN of the high-availability partition group to delete.</p>
     #   @return [String]
     class DeleteHapgRequest < Struct.new(
+      nil,
       :hapg_arn,
       keyword_init: true
     )
@@ -202,6 +213,7 @@ module Aws::CloudHSM
     #   <p>The status of the action.</p>
     #   @return [String]
     class DeleteHapgResponse < Struct.new(
+      nil,
       :status,
       keyword_init: true
     )
@@ -213,6 +225,7 @@ module Aws::CloudHSM
     #   <p>The ARN of the HSM to delete.</p>
     #   @return [String]
     class DeleteHsmRequest < Struct.new(
+      nil,
       :hsm_arn,
       keyword_init: true
     )
@@ -224,6 +237,7 @@ module Aws::CloudHSM
     #   <p>The status of the operation.</p>
     #   @return [String]
     class DeleteHsmResponse < Struct.new(
+      nil,
       :status,
       keyword_init: true
     )
@@ -234,6 +248,7 @@ module Aws::CloudHSM
     #   <p>The ARN of the client to delete.</p>
     #   @return [String]
     class DeleteLunaClientRequest < Struct.new(
+      nil,
       :client_arn,
       keyword_init: true
     )
@@ -244,6 +259,7 @@ module Aws::CloudHSM
     #   <p>The status of the action.</p>
     #   @return [String]
     class DeleteLunaClientResponse < Struct.new(
+      nil,
       :status,
       keyword_init: true
     )
@@ -255,6 +271,7 @@ module Aws::CloudHSM
     #   <p>The ARN of the high-availability partition group to describe.</p>
     #   @return [String]
     class DescribeHapgRequest < Struct.new(
+      nil,
       :hapg_arn,
       keyword_init: true
     )
@@ -291,6 +308,7 @@ module Aws::CloudHSM
     #   <p>The state of the high-availability partition group.</p>
     #   @return [String]
     class DescribeHapgResponse < Struct.new(
+      nil,
       :hapg_arn,
       :hapg_serial,
       :hsms_last_action_failed,
@@ -315,6 +333,7 @@ module Aws::CloudHSM
     #           <code>HsmSerialNumber</code> parameter must be specified.</p>
     #   @return [String]
     class DescribeHsmRequest < Struct.new(
+      nil,
       :hsm_arn,
       :hsm_serial_number,
       keyword_init: true
@@ -399,6 +418,7 @@ module Aws::CloudHSM
     #   <p>The list of partitions on the HSM.</p>
     #   @return [Array<String>]
     class DescribeHsmResponse < Struct.new(
+      nil,
       :hsm_arn,
       :status,
       :status_details,
@@ -432,6 +452,7 @@ module Aws::CloudHSM
     #   <p>The certificate fingerprint.</p>
     #   @return [String]
     class DescribeLunaClientRequest < Struct.new(
+      nil,
       :client_arn,
       :certificate_fingerprint,
       keyword_init: true
@@ -455,6 +476,7 @@ module Aws::CloudHSM
     #   <p>The label of the client.</p>
     #   @return [String]
     class DescribeLunaClientResponse < Struct.new(
+      nil,
       :client_arn,
       :certificate,
       :certificate_fingerprint,
@@ -476,6 +498,7 @@ module Aws::CloudHSM
     #         with the client.</p>
     #   @return [Array<String>]
     class GetConfigRequest < Struct.new(
+      nil,
       :client_arn,
       :client_version,
       :hapg_list,
@@ -494,6 +517,7 @@ module Aws::CloudHSM
     #   <p>The certificate file containing the server.pem files of the HSMs.</p>
     #   @return [String]
     class GetConfigResponse < Struct.new(
+      nil,
       :config_type,
       :config_file,
       :config_cred,
@@ -510,6 +534,7 @@ module Aws::CloudHSM
     #   <p>Indicates if the action can be retried.</p>
     #   @return [Boolean]
     class InvalidRequestException < Struct.new(
+      nil,
       :message,
       :retryable,
       keyword_init: true
@@ -524,6 +549,7 @@ module Aws::CloudHSM
 
     # <p>Contains the inputs for the <a>ListAvailableZones</a> action.</p>
     class ListAvailableZonesRequest < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -533,6 +559,7 @@ module Aws::CloudHSM
     #   <p>The list of Availability Zones that have available AWS CloudHSM capacity.</p>
     #   @return [Array<String>]
     class ListAvailableZonesResponse < Struct.new(
+      nil,
       :az_list,
       keyword_init: true
     )
@@ -544,6 +571,7 @@ module Aws::CloudHSM
     #         null if this is the first call.</p>
     #   @return [String]
     class ListHapgsRequest < Struct.new(
+      nil,
       :next_token,
       keyword_init: true
     )
@@ -558,6 +586,7 @@ module Aws::CloudHSM
     #         retrieve the next set of items.</p>
     #   @return [String]
     class ListHapgsResponse < Struct.new(
+      nil,
       :hapg_list,
       :next_token,
       keyword_init: true
@@ -570,6 +599,7 @@ module Aws::CloudHSM
     #         null if this is the first call.</p>
     #   @return [String]
     class ListHsmsRequest < Struct.new(
+      nil,
       :next_token,
       keyword_init: true
     )
@@ -585,6 +615,7 @@ module Aws::CloudHSM
     #         retrieve the next set of items.</p>
     #   @return [String]
     class ListHsmsResponse < Struct.new(
+      nil,
       :hsm_list,
       :next_token,
       keyword_init: true
@@ -597,6 +628,7 @@ module Aws::CloudHSM
     #         Pass null if this is the first call.</p>
     #   @return [String]
     class ListLunaClientsRequest < Struct.new(
+      nil,
       :next_token,
       keyword_init: true
     )
@@ -611,6 +643,7 @@ module Aws::CloudHSM
     #         retrieve the next set of items.</p>
     #   @return [String]
     class ListLunaClientsResponse < Struct.new(
+      nil,
       :client_list,
       :next_token,
       keyword_init: true
@@ -622,6 +655,7 @@ module Aws::CloudHSM
     #   <p>The Amazon Resource Name (ARN) of the AWS CloudHSM resource.</p>
     #   @return [String]
     class ListTagsForResourceRequest < Struct.new(
+      nil,
       :resource_arn,
       keyword_init: true
     )
@@ -632,6 +666,7 @@ module Aws::CloudHSM
     #   <p>One or more tags.</p>
     #   @return [Array<Types::Tag>]
     class ListTagsForResourceResponse < Struct.new(
+      nil,
       :tag_list,
       keyword_init: true
     )
@@ -649,6 +684,7 @@ module Aws::CloudHSM
     #         group.</p>
     #   @return [Array<String>]
     class ModifyHapgRequest < Struct.new(
+      nil,
       :hapg_arn,
       :label,
       :partition_serial_list,
@@ -661,6 +697,7 @@ module Aws::CloudHSM
     #   <p>The ARN of the high-availability partition group.</p>
     #   @return [String]
     class ModifyHapgResponse < Struct.new(
+      nil,
       :hapg_arn,
       keyword_init: true
     )
@@ -692,6 +729,7 @@ module Aws::CloudHSM
     #         one syslog monitoring server.</p>
     #   @return [String]
     class ModifyHsmRequest < Struct.new(
+      nil,
       :hsm_arn,
       :subnet_id,
       :eni_ip,
@@ -708,6 +746,7 @@ module Aws::CloudHSM
     #   <p>The ARN of the HSM.</p>
     #   @return [String]
     class ModifyHsmResponse < Struct.new(
+      nil,
       :hsm_arn,
       keyword_init: true
     )
@@ -721,6 +760,7 @@ module Aws::CloudHSM
     #   <p>The new certificate for the client.</p>
     #   @return [String]
     class ModifyLunaClientRequest < Struct.new(
+      nil,
       :client_arn,
       :certificate,
       keyword_init: true
@@ -732,6 +772,7 @@ module Aws::CloudHSM
     #   <p>The ARN of the client.</p>
     #   @return [String]
     class ModifyLunaClientResponse < Struct.new(
+      nil,
       :client_arn,
       keyword_init: true
     )
@@ -747,6 +788,7 @@ module Aws::CloudHSM
     #         existing tag, use <a>AddTagsToResource</a>.</p>
     #   @return [Array<String>]
     class RemoveTagsFromResourceRequest < Struct.new(
+      nil,
       :resource_arn,
       :tag_key_list,
       keyword_init: true
@@ -758,6 +800,7 @@ module Aws::CloudHSM
     #   <p>The status of the operation.</p>
     #   @return [String]
     class RemoveTagsFromResourceResponse < Struct.new(
+      nil,
       :status,
       keyword_init: true
     )
@@ -773,6 +816,7 @@ module Aws::CloudHSM
     #   <p>The value of the tag.</p>
     #   @return [String]
     class Tag < Struct.new(
+      nil,
       :key,
       :value,
       keyword_init: true

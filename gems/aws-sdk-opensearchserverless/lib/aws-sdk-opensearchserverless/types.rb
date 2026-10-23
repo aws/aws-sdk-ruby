@@ -29,6 +29,7 @@ module Aws::OpenSearchServerless
     #   <p>The timestamp of when the policy was last modified.</p>
     #   @return [Integer]
     class AccessPolicyDetail < Struct.new(
+      nil,
       :type,
       :name,
       :policy_version,
@@ -46,6 +47,7 @@ module Aws::OpenSearchServerless
     #   <p>The number of data access policies in the current account.</p>
     #   @return [Integer]
     class AccessPolicyStats < Struct.new(
+      nil,
       :data_policy_count,
       keyword_init: true
     )
@@ -72,6 +74,7 @@ module Aws::OpenSearchServerless
     #   <p>The date and time when the collection was last modified.</p>
     #   @return [Integer]
     class AccessPolicySummary < Struct.new(
+      nil,
       :type,
       :name,
       :policy_version,
@@ -88,6 +91,7 @@ module Aws::OpenSearchServerless
     #   <p>The maximum capacity limits for all OpenSearch Serverless collections, in OpenSearch Compute Units (OCUs). These limits are used to scale your collections based on the current workload. For more information, see <a href="https://docs.aws.amazon.com/opensearch-service/latest/developerguide/serverless-scaling.html">Managing capacity limits for Amazon OpenSearch Serverless</a>.</p>
     #   @return [Types::CapacityLimits]
     class AccountSettingsDetail < Struct.new(
+      nil,
       :capacity_limits,
       keyword_init: true
     )
@@ -101,6 +105,7 @@ module Aws::OpenSearchServerless
     #   <p>A list of collection names. You can't provide names and IDs in the same request.</p>
     #   @return [Array<String>]
     class BatchGetCollectionInput < Struct.new(
+      nil,
       :ids,
       :names,
       keyword_init: true
@@ -115,6 +120,7 @@ module Aws::OpenSearchServerless
     #   <p>Error information for the request.</p>
     #   @return [Array<Types::CollectionErrorDetail>]
     class BatchGetCollectionOutput < Struct.new(
+      nil,
       :collection_details,
       :collection_error_details,
       keyword_init: true
@@ -126,6 +132,7 @@ module Aws::OpenSearchServerless
     #   <p>The unique identifiers of policy types and resource names.</p>
     #   @return [Array<Types::LifecyclePolicyResourceIdentifier>]
     class BatchGetEffectiveLifecyclePolicyRequest < Struct.new(
+      nil,
       :resource_identifiers,
       keyword_init: true
     )
@@ -139,6 +146,7 @@ module Aws::OpenSearchServerless
     #   <p>A list of resources for which retrieval failed.</p>
     #   @return [Array<Types::EffectiveLifecyclePolicyErrorDetail>]
     class BatchGetEffectiveLifecyclePolicyResponse < Struct.new(
+      nil,
       :effective_lifecycle_policy_details,
       :effective_lifecycle_policy_error_details,
       keyword_init: true
@@ -150,6 +158,7 @@ module Aws::OpenSearchServerless
     #   <p>The unique identifiers of policy types and policy names.</p>
     #   @return [Array<Types::LifecyclePolicyIdentifier>]
     class BatchGetLifecyclePolicyRequest < Struct.new(
+      nil,
       :identifiers,
       keyword_init: true
     )
@@ -163,6 +172,7 @@ module Aws::OpenSearchServerless
     #   <p>A list of lifecycle policy names and policy types for which retrieval failed.</p>
     #   @return [Array<Types::LifecyclePolicyErrorDetail>]
     class BatchGetLifecyclePolicyResponse < Struct.new(
+      nil,
       :lifecycle_policy_details,
       :lifecycle_policy_error_details,
       keyword_init: true
@@ -174,6 +184,7 @@ module Aws::OpenSearchServerless
     #   <p>A list of VPC endpoint identifiers.</p>
     #   @return [Array<String>]
     class BatchGetVpcEndpointInput < Struct.new(
+      nil,
       :ids,
       keyword_init: true
     )
@@ -187,6 +198,7 @@ module Aws::OpenSearchServerless
     #   <p>Error information for a failed request.</p>
     #   @return [Array<Types::VpcEndpointErrorDetail>]
     class BatchGetVpcEndpointOutput < Struct.new(
+      nil,
       :vpc_endpoint_details,
       :vpc_endpoint_error_details,
       keyword_init: true
@@ -202,6 +214,7 @@ module Aws::OpenSearchServerless
     #   <p>The maximum search capacity for collections.</p>
     #   @return [Integer]
     class CapacityLimits < Struct.new(
+      nil,
       :max_indexing_capacity_in_ocu,
       :max_search_capacity_in_ocu,
       keyword_init: true
@@ -256,6 +269,7 @@ module Aws::OpenSearchServerless
     #   <p>A message associated with the failure code.</p>
     #   @return [String]
     class CollectionDetail < Struct.new(
+      nil,
       :id,
       :name,
       :status,
@@ -290,6 +304,7 @@ module Aws::OpenSearchServerless
     #   <p>The error code for the request. For example, <code>NOT_FOUND</code>.</p>
     #   @return [String]
     class CollectionErrorDetail < Struct.new(
+      nil,
       :id,
       :name,
       :error_message,
@@ -307,6 +322,7 @@ module Aws::OpenSearchServerless
     #   <p>The current status of the collection.</p>
     #   @return [String]
     class CollectionFilters < Struct.new(
+      nil,
       :name,
       :status,
       keyword_init: true
@@ -328,6 +344,7 @@ module Aws::OpenSearchServerless
     #   <p>The Amazon Resource Name (ARN) of the collection.</p>
     #   @return [String]
     class CollectionSummary < Struct.new(
+      nil,
       :id,
       :name,
       :status,
@@ -341,6 +358,7 @@ module Aws::OpenSearchServerless
     # @!attribute message
     #   @return [String]
     class ConflictException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -363,6 +381,7 @@ module Aws::OpenSearchServerless
     #   <p>Unique, case-sensitive identifier to ensure idempotency of the request.</p>
     #   @return [String]
     class CreateAccessPolicyInput < Struct.new(
+      nil,
       :type,
       :name,
       :description,
@@ -377,6 +396,7 @@ module Aws::OpenSearchServerless
     #   <p>Details about the created access policy.</p>
     #   @return [Types::AccessPolicyDetail]
     class CreateAccessPolicyOutput < Struct.new(
+      nil,
       :access_policy_detail,
       keyword_init: true
     )
@@ -415,6 +435,7 @@ module Aws::OpenSearchServerless
     #   <p>The date and time when the collection was last modified.</p>
     #   @return [Integer]
     class CreateCollectionDetail < Struct.new(
+      nil,
       :id,
       :name,
       :status,
@@ -449,6 +470,7 @@ module Aws::OpenSearchServerless
     #   <p>Unique, case-sensitive identifier to ensure idempotency of the request.</p>
     #   @return [String]
     class CreateCollectionInput < Struct.new(
+      nil,
       :name,
       :type,
       :description,
@@ -464,6 +486,7 @@ module Aws::OpenSearchServerless
     #   <p>Details about the collection.</p>
     #   @return [Types::CreateCollectionDetail]
     class CreateCollectionOutput < Struct.new(
+      nil,
       :create_collection_detail,
       keyword_init: true
     )
@@ -481,6 +504,7 @@ module Aws::OpenSearchServerless
     #   <p>The group attribute for this IAM Identity Center integration. Defaults to <code>GroupId</code>.</p>
     #   @return [String]
     class CreateIamIdentityCenterConfigOptions < Struct.new(
+      nil,
       :instance_arn,
       :user_attribute,
       :group_attribute,
@@ -499,6 +523,7 @@ module Aws::OpenSearchServerless
     #   <p>The JSON schema definition for the index, including field mappings and settings.</p>
     #   @return [JSON]
     class CreateIndexRequest < Struct.new(
+      nil,
       :id,
       :index_name,
       :index_schema,
@@ -508,6 +533,7 @@ module Aws::OpenSearchServerless
     end
 
     class CreateIndexResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -529,6 +555,7 @@ module Aws::OpenSearchServerless
     #   <p>A unique, case-sensitive identifier to ensure idempotency of the request.</p>
     #   @return [String]
     class CreateLifecyclePolicyRequest < Struct.new(
+      nil,
       :type,
       :name,
       :description,
@@ -543,6 +570,7 @@ module Aws::OpenSearchServerless
     #   <p>Details about the created lifecycle policy.</p>
     #   @return [Types::LifecyclePolicyDetail]
     class CreateLifecyclePolicyResponse < Struct.new(
+      nil,
       :lifecycle_policy_detail,
       keyword_init: true
     )
@@ -571,6 +599,7 @@ module Aws::OpenSearchServerless
     #   <p>Unique, case-sensitive identifier to ensure idempotency of the request.</p>
     #   @return [String]
     class CreateSecurityConfigInput < Struct.new(
+      nil,
       :type,
       :name,
       :description,
@@ -587,6 +616,7 @@ module Aws::OpenSearchServerless
     #   <p>Details about the created security configuration.</p>
     #   @return [Types::SecurityConfigDetail]
     class CreateSecurityConfigOutput < Struct.new(
+      nil,
       :security_config_detail,
       keyword_init: true
     )
@@ -609,6 +639,7 @@ module Aws::OpenSearchServerless
     #   <p>Unique, case-sensitive identifier to ensure idempotency of the request.</p>
     #   @return [String]
     class CreateSecurityPolicyInput < Struct.new(
+      nil,
       :type,
       :name,
       :description,
@@ -623,6 +654,7 @@ module Aws::OpenSearchServerless
     #   <p>Details about the created security policy.</p>
     #   @return [Types::SecurityPolicyDetail]
     class CreateSecurityPolicyOutput < Struct.new(
+      nil,
       :security_policy_detail,
       keyword_init: true
     )
@@ -640,6 +672,7 @@ module Aws::OpenSearchServerless
     #   <p>The current status in the endpoint creation process.</p>
     #   @return [String]
     class CreateVpcEndpointDetail < Struct.new(
+      nil,
       :id,
       :name,
       :status,
@@ -664,6 +697,7 @@ module Aws::OpenSearchServerless
     #   <p>Unique, case-sensitive identifier to ensure idempotency of the request.</p>
     #   @return [String]
     class CreateVpcEndpointInput < Struct.new(
+      nil,
       :name,
       :vpc_id,
       :subnet_ids,
@@ -678,6 +712,7 @@ module Aws::OpenSearchServerless
     #   <p>Details about the created interface VPC endpoint.</p>
     #   @return [Types::CreateVpcEndpointDetail]
     class CreateVpcEndpointOutput < Struct.new(
+      nil,
       :create_vpc_endpoint_detail,
       keyword_init: true
     )
@@ -694,6 +729,7 @@ module Aws::OpenSearchServerless
     #   <p>Unique, case-sensitive identifier to ensure idempotency of the request.</p>
     #   @return [String]
     class DeleteAccessPolicyInput < Struct.new(
+      nil,
       :type,
       :name,
       :client_token,
@@ -703,6 +739,7 @@ module Aws::OpenSearchServerless
     end
 
     class DeleteAccessPolicyOutput < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -719,6 +756,7 @@ module Aws::OpenSearchServerless
     #   <p>The current status of the collection.</p>
     #   @return [String]
     class DeleteCollectionDetail < Struct.new(
+      nil,
       :id,
       :name,
       :status,
@@ -734,6 +772,7 @@ module Aws::OpenSearchServerless
     #   <p>A unique, case-sensitive identifier to ensure idempotency of the request.</p>
     #   @return [String]
     class DeleteCollectionInput < Struct.new(
+      nil,
       :id,
       :client_token,
       keyword_init: true
@@ -745,6 +784,7 @@ module Aws::OpenSearchServerless
     #   <p>Details of the deleted collection.</p>
     #   @return [Types::DeleteCollectionDetail]
     class DeleteCollectionOutput < Struct.new(
+      nil,
       :delete_collection_detail,
       keyword_init: true
     )
@@ -758,6 +798,7 @@ module Aws::OpenSearchServerless
     #   <p>The name of the index to delete.</p>
     #   @return [String]
     class DeleteIndexRequest < Struct.new(
+      nil,
       :id,
       :index_name,
       keyword_init: true
@@ -766,6 +807,7 @@ module Aws::OpenSearchServerless
     end
 
     class DeleteIndexResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -781,6 +823,7 @@ module Aws::OpenSearchServerless
     #   <p>Unique, case-sensitive identifier to ensure idempotency of the request.</p>
     #   @return [String]
     class DeleteLifecyclePolicyRequest < Struct.new(
+      nil,
       :type,
       :name,
       :client_token,
@@ -790,6 +833,7 @@ module Aws::OpenSearchServerless
     end
 
     class DeleteLifecyclePolicyResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -802,6 +846,7 @@ module Aws::OpenSearchServerless
     #   <p>Unique, case-sensitive identifier to ensure idempotency of the request.</p>
     #   @return [String]
     class DeleteSecurityConfigInput < Struct.new(
+      nil,
       :id,
       :client_token,
       keyword_init: true
@@ -810,6 +855,7 @@ module Aws::OpenSearchServerless
     end
 
     class DeleteSecurityConfigOutput < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -825,6 +871,7 @@ module Aws::OpenSearchServerless
     #   <p>Unique, case-sensitive identifier to ensure idempotency of the request.</p>
     #   @return [String]
     class DeleteSecurityPolicyInput < Struct.new(
+      nil,
       :type,
       :name,
       :client_token,
@@ -834,6 +881,7 @@ module Aws::OpenSearchServerless
     end
 
     class DeleteSecurityPolicyOutput < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -850,6 +898,7 @@ module Aws::OpenSearchServerless
     #   <p>The current status of the endpoint deletion process.</p>
     #   @return [String]
     class DeleteVpcEndpointDetail < Struct.new(
+      nil,
       :id,
       :name,
       :status,
@@ -865,6 +914,7 @@ module Aws::OpenSearchServerless
     #   <p>Unique, case-sensitive identifier to ensure idempotency of the request.</p>
     #   @return [String]
     class DeleteVpcEndpointInput < Struct.new(
+      nil,
       :id,
       :client_token,
       keyword_init: true
@@ -876,6 +926,7 @@ module Aws::OpenSearchServerless
     #   <p>Details about the deleted endpoint.</p>
     #   @return [Types::DeleteVpcEndpointDetail]
     class DeleteVpcEndpointOutput < Struct.new(
+      nil,
       :delete_vpc_endpoint_detail,
       keyword_init: true
     )
@@ -902,6 +953,7 @@ module Aws::OpenSearchServerless
     #   <p>The minimum number of index retention days set. That is an optional param that will return as <code>true</code> if the minimum number of days or hours is not set to a index resource.</p>
     #   @return [Boolean]
     class EffectiveLifecyclePolicyDetail < Struct.new(
+      nil,
       :type,
       :resource,
       :policy_name,
@@ -927,6 +979,7 @@ module Aws::OpenSearchServerless
     #   <p>The error code for the request.</p>
     #   @return [String]
     class EffectiveLifecyclePolicyErrorDetail < Struct.new(
+      nil,
       :type,
       :resource,
       :error_message,
@@ -944,6 +997,7 @@ module Aws::OpenSearchServerless
     #   <p>FIPS-compliant endpoint used to access OpenSearch Dashboards. This endpoint uses FIPS 140-3 validated cryptography and is required for federal government workloads that need dashboard visualization capabilities.</p>
     #   @return [String]
     class FipsEndpoints < Struct.new(
+      nil,
       :collection_endpoint,
       :dashboard_endpoint,
       keyword_init: true
@@ -958,6 +1012,7 @@ module Aws::OpenSearchServerless
     #   <p>The name of the access policy.</p>
     #   @return [String]
     class GetAccessPolicyInput < Struct.new(
+      nil,
       :type,
       :name,
       keyword_init: true
@@ -969,6 +1024,7 @@ module Aws::OpenSearchServerless
     #   <p>Details about the requested access policy.</p>
     #   @return [Types::AccessPolicyDetail]
     class GetAccessPolicyOutput < Struct.new(
+      nil,
       :access_policy_detail,
       keyword_init: true
     )
@@ -976,6 +1032,7 @@ module Aws::OpenSearchServerless
     end
 
     class GetAccountSettingsInput < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -985,6 +1042,7 @@ module Aws::OpenSearchServerless
     #   <p>OpenSearch Serverless-related details for the current account.</p>
     #   @return [Types::AccountSettingsDetail]
     class GetAccountSettingsOutput < Struct.new(
+      nil,
       :account_settings_detail,
       keyword_init: true
     )
@@ -998,6 +1056,7 @@ module Aws::OpenSearchServerless
     #   <p>The name of the index to retrieve information about.</p>
     #   @return [String]
     class GetIndexRequest < Struct.new(
+      nil,
       :id,
       :index_name,
       keyword_init: true
@@ -1009,6 +1068,7 @@ module Aws::OpenSearchServerless
     #   <p>The JSON schema definition for the index, including field mappings and settings.</p>
     #   @return [JSON]
     class GetIndexResponse < Struct.new(
+      nil,
       :index_schema,
       keyword_init: true
     )
@@ -1016,6 +1076,7 @@ module Aws::OpenSearchServerless
     end
 
     class GetPoliciesStatsInput < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1037,6 +1098,7 @@ module Aws::OpenSearchServerless
     #   <p>The total number of OpenSearch Serverless security policies and configurations in your account.</p>
     #   @return [Integer]
     class GetPoliciesStatsOutput < Struct.new(
+      nil,
       :access_policy_stats,
       :security_policy_stats,
       :security_config_stats,
@@ -1051,6 +1113,7 @@ module Aws::OpenSearchServerless
     #   <p>The unique identifier of the security configuration.</p>
     #   @return [String]
     class GetSecurityConfigInput < Struct.new(
+      nil,
       :id,
       keyword_init: true
     )
@@ -1061,6 +1124,7 @@ module Aws::OpenSearchServerless
     #   <p>Details of the requested security configuration.</p>
     #   @return [Types::SecurityConfigDetail]
     class GetSecurityConfigOutput < Struct.new(
+      nil,
       :security_config_detail,
       keyword_init: true
     )
@@ -1074,6 +1138,7 @@ module Aws::OpenSearchServerless
     #   <p>The name of the security policy.</p>
     #   @return [String]
     class GetSecurityPolicyInput < Struct.new(
+      nil,
       :type,
       :name,
       keyword_init: true
@@ -1085,6 +1150,7 @@ module Aws::OpenSearchServerless
     #   <p>Details about the requested security policy.</p>
     #   @return [Types::SecurityPolicyDetail]
     class GetSecurityPolicyOutput < Struct.new(
+      nil,
       :security_policy_detail,
       keyword_init: true
     )
@@ -1099,6 +1165,7 @@ module Aws::OpenSearchServerless
     #   <p>The user attribute for this IAM federation integration. This attribute is used to identify users in the federated authentication process.</p>
     #   @return [String]
     class IamFederationConfigOptions < Struct.new(
+      nil,
       :group_attribute,
       :user_attribute,
       keyword_init: true
@@ -1126,6 +1193,7 @@ module Aws::OpenSearchServerless
     #   <p>The group attribute for this IAM Identity Center integration. Defaults to <code>GroupId</code>.</p>
     #   @return [String]
     class IamIdentityCenterConfigOptions < Struct.new(
+      nil,
       :instance_arn,
       :application_arn,
       :application_name,
@@ -1141,6 +1209,7 @@ module Aws::OpenSearchServerless
     # @!attribute message
     #   @return [String]
     class InternalServerException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -1170,6 +1239,7 @@ module Aws::OpenSearchServerless
     #   <p>The timestamp of when the lifecycle policy was last modified.</p>
     #   @return [Integer]
     class LifecyclePolicyDetail < Struct.new(
+      nil,
       :type,
       :name,
       :policy_version,
@@ -1196,6 +1266,7 @@ module Aws::OpenSearchServerless
     #   <p>The error code for the request. For example, <code>NOT_FOUND</code>.</p>
     #   @return [String]
     class LifecyclePolicyErrorDetail < Struct.new(
+      nil,
       :type,
       :name,
       :error_message,
@@ -1213,6 +1284,7 @@ module Aws::OpenSearchServerless
     #   <p>The name of the lifecycle policy.</p>
     #   @return [String]
     class LifecyclePolicyIdentifier < Struct.new(
+      nil,
       :type,
       :name,
       keyword_init: true
@@ -1228,6 +1300,7 @@ module Aws::OpenSearchServerless
     #   <p>The name of the OpenSearch Serverless ilndex resource.</p>
     #   @return [String]
     class LifecyclePolicyResourceIdentifier < Struct.new(
+      nil,
       :type,
       :resource,
       keyword_init: true
@@ -1240,6 +1313,7 @@ module Aws::OpenSearchServerless
     #   <p>The number of retention lifecycle policies in the current account.</p>
     #   @return [Integer]
     class LifecyclePolicyStats < Struct.new(
+      nil,
       :retention_policy_count,
       keyword_init: true
     )
@@ -1266,6 +1340,7 @@ module Aws::OpenSearchServerless
     #   <p>The date and time when the lifecycle policy was last modified.</p>
     #   @return [Integer]
     class LifecyclePolicySummary < Struct.new(
+      nil,
       :type,
       :name,
       :policy_version,
@@ -1290,6 +1365,7 @@ module Aws::OpenSearchServerless
     #   <p>An optional parameter that specifies the maximum number of results to return. You can use <code>nextToken</code> to get the next page of results. The default is 20.</p>
     #   @return [Integer]
     class ListAccessPoliciesInput < Struct.new(
+      nil,
       :type,
       :resource,
       :next_token,
@@ -1306,6 +1382,7 @@ module Aws::OpenSearchServerless
     #   <p>When <code>nextToken</code> is returned, there are more results available. The value of <code>nextToken</code> is a unique pagination token for each page. Make the call again using the returned token to retrieve the next page.</p>
     #   @return [String]
     class ListAccessPoliciesOutput < Struct.new(
+      nil,
       :access_policy_summaries,
       :next_token,
       keyword_init: true
@@ -1323,6 +1400,7 @@ module Aws::OpenSearchServerless
     #   <p>The maximum number of results to return. Default is 20. You can use <code>nextToken</code> to get the next page of results.</p>
     #   @return [Integer]
     class ListCollectionsInput < Struct.new(
+      nil,
       :collection_filters,
       :next_token,
       :max_results,
@@ -1338,6 +1416,7 @@ module Aws::OpenSearchServerless
     #   <p>When <code>nextToken</code> is returned, there are more results available. The value of <code>nextToken</code> is a unique pagination token for each page. Make the call again using the returned token to retrieve the next page.</p>
     #   @return [String]
     class ListCollectionsOutput < Struct.new(
+      nil,
       :collection_summaries,
       :next_token,
       keyword_init: true
@@ -1358,6 +1437,7 @@ module Aws::OpenSearchServerless
     #   <p>An optional parameter that specifies the maximum number of results to return. You can use use <code>nextToken</code> to get the next page of results. The default is 10.</p>
     #   @return [Integer]
     class ListLifecyclePoliciesRequest < Struct.new(
+      nil,
       :type,
       :resources,
       :next_token,
@@ -1374,6 +1454,7 @@ module Aws::OpenSearchServerless
     #   <p>When <code>nextToken</code> is returned, there are more results available. The value of <code>nextToken</code> is a unique pagination token for each page. Make the call again using the returned token to retrieve the next page.</p>
     #   @return [String]
     class ListLifecyclePoliciesResponse < Struct.new(
+      nil,
       :lifecycle_policy_summaries,
       :next_token,
       keyword_init: true
@@ -1391,6 +1472,7 @@ module Aws::OpenSearchServerless
     #   <p>An optional parameter that specifies the maximum number of results to return. You can use <code>nextToken</code> to get the next page of results. The default is 20.</p>
     #   @return [Integer]
     class ListSecurityConfigsInput < Struct.new(
+      nil,
       :type,
       :next_token,
       :max_results,
@@ -1406,6 +1488,7 @@ module Aws::OpenSearchServerless
     #   <p>When <code>nextToken</code> is returned, there are more results available. The value of <code>nextToken</code> is a unique pagination token for each page. Make the call again using the returned token to retrieve the next page.</p>
     #   @return [String]
     class ListSecurityConfigsOutput < Struct.new(
+      nil,
       :security_config_summaries,
       :next_token,
       keyword_init: true
@@ -1426,6 +1509,7 @@ module Aws::OpenSearchServerless
     #   <p>An optional parameter that specifies the maximum number of results to return. You can use <code>nextToken</code> to get the next page of results. The default is 20.</p>
     #   @return [Integer]
     class ListSecurityPoliciesInput < Struct.new(
+      nil,
       :type,
       :resource,
       :next_token,
@@ -1442,6 +1526,7 @@ module Aws::OpenSearchServerless
     #   <p>When <code>nextToken</code> is returned, there are more results available. The value of <code>nextToken</code> is a unique pagination token for each page. Make the call again using the returned token to retrieve the next page.</p>
     #   @return [String]
     class ListSecurityPoliciesOutput < Struct.new(
+      nil,
       :security_policy_summaries,
       :next_token,
       keyword_init: true
@@ -1453,6 +1538,7 @@ module Aws::OpenSearchServerless
     #   <p>The Amazon Resource Name (ARN) of the resource. The resource must be active (not in the <code>DELETING</code> state), and must be owned by the account ID included in the request.</p>
     #   @return [String]
     class ListTagsForResourceInput < Struct.new(
+      nil,
       :resource_arn,
       keyword_init: true
     )
@@ -1463,6 +1549,7 @@ module Aws::OpenSearchServerless
     #   <p>The tags associated with the resource.</p>
     #   @return [Array<Types::Tag>]
     class ListTagsForResourceOutput < Struct.new(
+      nil,
       :tags,
       keyword_init: true
     )
@@ -1479,6 +1566,7 @@ module Aws::OpenSearchServerless
     #   <p>An optional parameter that specifies the maximum number of results to return. You can use <code>nextToken</code> to get the next page of results. The default is 20.</p>
     #   @return [Integer]
     class ListVpcEndpointsInput < Struct.new(
+      nil,
       :vpc_endpoint_filters,
       :next_token,
       :max_results,
@@ -1494,6 +1582,7 @@ module Aws::OpenSearchServerless
     #   <p>When <code>nextToken</code> is returned, there are more results available. The value of <code>nextToken</code> is a unique pagination token for each page. Make the call again using the returned token to retrieve the next page.</p>
     #   @return [String]
     class ListVpcEndpointsOutput < Struct.new(
+      nil,
       :vpc_endpoint_summaries,
       :next_token,
       keyword_init: true
@@ -1506,6 +1595,7 @@ module Aws::OpenSearchServerless
     #   Description of the error.
     #   @return [String]
     class OcuLimitExceededException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -1516,6 +1606,7 @@ module Aws::OpenSearchServerless
     # @!attribute message
     #   @return [String]
     class ResourceNotFoundException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -1539,6 +1630,7 @@ module Aws::OpenSearchServerless
     #   <p>The session timeout, in minutes. Default is 60 minutes (12 hours).</p>
     #   @return [Integer]
     class SamlConfigOptions < Struct.new(
+      nil,
       :metadata,
       :user_attribute,
       :group_attribute,
@@ -1578,6 +1670,7 @@ module Aws::OpenSearchServerless
     #   <p>The timestamp of when the configuration was last modified.</p>
     #   @return [Integer]
     class SecurityConfigDetail < Struct.new(
+      nil,
       :id,
       :type,
       :config_version,
@@ -1597,6 +1690,7 @@ module Aws::OpenSearchServerless
     #   <p>The number of security configurations in the current account.</p>
     #   @return [Integer]
     class SecurityConfigStats < Struct.new(
+      nil,
       :saml_config_count,
       keyword_init: true
     )
@@ -1623,6 +1717,7 @@ module Aws::OpenSearchServerless
     #   <p>The timestamp of when the configuration was last modified.</p>
     #   @return [Integer]
     class SecurityConfigSummary < Struct.new(
+      nil,
       :id,
       :type,
       :config_version,
@@ -1657,6 +1752,7 @@ module Aws::OpenSearchServerless
     #   <p>The timestamp of when the policy was last modified.</p>
     #   @return [Integer]
     class SecurityPolicyDetail < Struct.new(
+      nil,
       :type,
       :name,
       :policy_version,
@@ -1677,6 +1773,7 @@ module Aws::OpenSearchServerless
     #   <p>The number of network policies in the current account.</p>
     #   @return [Integer]
     class SecurityPolicyStats < Struct.new(
+      nil,
       :encryption_policy_count,
       :network_policy_count,
       keyword_init: true
@@ -1704,6 +1801,7 @@ module Aws::OpenSearchServerless
     #   <p>The timestamp of when the policy was last modified.</p>
     #   @return [Integer]
     class SecurityPolicySummary < Struct.new(
+      nil,
       :type,
       :name,
       :policy_version,
@@ -1732,6 +1830,7 @@ module Aws::OpenSearchServerless
     #   Service Quotas requirement to identify originating quota.
     #   @return [String]
     class ServiceQuotaExceededException < Struct.new(
+      nil,
       :message,
       :resource_id,
       :resource_type,
@@ -1750,6 +1849,7 @@ module Aws::OpenSearchServerless
     #   <p>The value of the tag.</p>
     #   @return [String]
     class Tag < Struct.new(
+      nil,
       :key,
       :value,
       keyword_init: true
@@ -1764,6 +1864,7 @@ module Aws::OpenSearchServerless
     #   <p>A list of tags (key-value pairs) to add to the resource. All tag keys in the request must be unique.</p>
     #   @return [Array<Types::Tag>]
     class TagResourceInput < Struct.new(
+      nil,
       :resource_arn,
       :tags,
       keyword_init: true
@@ -1772,6 +1873,7 @@ module Aws::OpenSearchServerless
     end
 
     class TagResourceOutput < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1784,6 +1886,7 @@ module Aws::OpenSearchServerless
     #   <p>The tag or set of tags to remove from the resource. All tag keys in the request must be unique.</p>
     #   @return [Array<String>]
     class UntagResourceInput < Struct.new(
+      nil,
       :resource_arn,
       :tag_keys,
       keyword_init: true
@@ -1792,6 +1895,7 @@ module Aws::OpenSearchServerless
     end
 
     class UntagResourceOutput < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1816,6 +1920,7 @@ module Aws::OpenSearchServerless
     #   <p>Unique, case-sensitive identifier to ensure idempotency of the request.</p>
     #   @return [String]
     class UpdateAccessPolicyInput < Struct.new(
+      nil,
       :type,
       :name,
       :policy_version,
@@ -1831,6 +1936,7 @@ module Aws::OpenSearchServerless
     #   <p>Details about the updated access policy.</p>
     #   @return [Types::AccessPolicyDetail]
     class UpdateAccessPolicyOutput < Struct.new(
+      nil,
       :access_policy_detail,
       keyword_init: true
     )
@@ -1841,6 +1947,7 @@ module Aws::OpenSearchServerless
     #   <p>The maximum capacity limits for all OpenSearch Serverless collections, in OpenSearch Compute Units (OCUs). These limits are used to scale your collections based on the current workload. For more information, see <a href="https://docs.aws.amazon.com/opensearch-service/latest/developerguide/serverless-scaling.html">Managing capacity limits for Amazon OpenSearch Serverless</a>.</p>
     #   @return [Types::CapacityLimits]
     class UpdateAccountSettingsInput < Struct.new(
+      nil,
       :capacity_limits,
       keyword_init: true
     )
@@ -1851,6 +1958,7 @@ module Aws::OpenSearchServerless
     #   <p>OpenSearch Serverless-related settings for the current Amazon Web Services account.</p>
     #   @return [Types::AccountSettingsDetail]
     class UpdateAccountSettingsOutput < Struct.new(
+      nil,
       :account_settings_detail,
       keyword_init: true
     )
@@ -1883,6 +1991,7 @@ module Aws::OpenSearchServerless
     #   <p>The date and time when the collection was last modified.</p>
     #   @return [Integer]
     class UpdateCollectionDetail < Struct.new(
+      nil,
       :id,
       :name,
       :status,
@@ -1906,6 +2015,7 @@ module Aws::OpenSearchServerless
     #   <p>Unique, case-sensitive identifier to ensure idempotency of the request.</p>
     #   @return [String]
     class UpdateCollectionInput < Struct.new(
+      nil,
       :id,
       :description,
       :client_token,
@@ -1918,6 +2028,7 @@ module Aws::OpenSearchServerless
     #   <p>Details about the updated collection.</p>
     #   @return [Types::UpdateCollectionDetail]
     class UpdateCollectionOutput < Struct.new(
+      nil,
       :update_collection_detail,
       keyword_init: true
     )
@@ -1932,6 +2043,7 @@ module Aws::OpenSearchServerless
     #   <p>The group attribute for this IAM Identity Center integration. Defaults to <code>GroupId</code>.</p>
     #   @return [String]
     class UpdateIamIdentityCenterConfigOptions < Struct.new(
+      nil,
       :user_attribute,
       :group_attribute,
       keyword_init: true
@@ -1949,6 +2061,7 @@ module Aws::OpenSearchServerless
     #   <p>The updated JSON schema definition for the index, including field mappings and settings. </p>
     #   @return [JSON]
     class UpdateIndexRequest < Struct.new(
+      nil,
       :id,
       :index_name,
       :index_schema,
@@ -1958,6 +2071,7 @@ module Aws::OpenSearchServerless
     end
 
     class UpdateIndexResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1982,6 +2096,7 @@ module Aws::OpenSearchServerless
     #   <p>A unique, case-sensitive identifier to ensure idempotency of the request.</p>
     #   @return [String]
     class UpdateLifecyclePolicyRequest < Struct.new(
+      nil,
       :type,
       :name,
       :policy_version,
@@ -1997,6 +2112,7 @@ module Aws::OpenSearchServerless
     #   <p>Details about the updated lifecycle policy.</p>
     #   @return [Types::LifecyclePolicyDetail]
     class UpdateLifecyclePolicyResponse < Struct.new(
+      nil,
       :lifecycle_policy_detail,
       keyword_init: true
     )
@@ -2025,6 +2141,7 @@ module Aws::OpenSearchServerless
     #   <p>Unique, case-sensitive identifier to ensure idempotency of the request.</p>
     #   @return [String]
     class UpdateSecurityConfigInput < Struct.new(
+      nil,
       :id,
       :config_version,
       :description,
@@ -2041,6 +2158,7 @@ module Aws::OpenSearchServerless
     #   <p>Details about the updated security configuration. </p>
     #   @return [Types::SecurityConfigDetail]
     class UpdateSecurityConfigOutput < Struct.new(
+      nil,
       :security_config_detail,
       keyword_init: true
     )
@@ -2066,6 +2184,7 @@ module Aws::OpenSearchServerless
     #   <p>Unique, case-sensitive identifier to ensure idempotency of the request.</p>
     #   @return [String]
     class UpdateSecurityPolicyInput < Struct.new(
+      nil,
       :type,
       :name,
       :policy_version,
@@ -2081,6 +2200,7 @@ module Aws::OpenSearchServerless
     #   <p>Details about the updated security policy.</p>
     #   @return [Types::SecurityPolicyDetail]
     class UpdateSecurityPolicyOutput < Struct.new(
+      nil,
       :security_policy_detail,
       keyword_init: true
     )
@@ -2107,6 +2227,7 @@ module Aws::OpenSearchServerless
     #   <p>The timestamp of when the endpoint was last modified.</p>
     #   @return [Integer]
     class UpdateVpcEndpointDetail < Struct.new(
+      nil,
       :id,
       :name,
       :status,
@@ -2137,6 +2258,7 @@ module Aws::OpenSearchServerless
     #   <p>Unique, case-sensitive identifier to ensure idempotency of the request.</p>
     #   @return [String]
     class UpdateVpcEndpointInput < Struct.new(
+      nil,
       :id,
       :add_subnet_ids,
       :remove_subnet_ids,
@@ -2152,6 +2274,7 @@ module Aws::OpenSearchServerless
     #   <p>Details about the updated VPC endpoint.</p>
     #   @return [Types::UpdateVpcEndpointDetail]
     class UpdateVpcEndpointOutput < Struct.new(
+      nil,
       :update_vpc_endpoint_detail,
       keyword_init: true
     )
@@ -2162,6 +2285,7 @@ module Aws::OpenSearchServerless
     # @!attribute message
     #   @return [String]
     class ValidationException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -2197,6 +2321,7 @@ module Aws::OpenSearchServerless
     #   <p>A message associated with the failure code.</p>
     #   @return [String]
     class VpcEndpointDetail < Struct.new(
+      nil,
       :id,
       :name,
       :vpc_id,
@@ -2222,6 +2347,7 @@ module Aws::OpenSearchServerless
     #   <p>The error code for the failed request.</p>
     #   @return [String]
     class VpcEndpointErrorDetail < Struct.new(
+      nil,
       :id,
       :error_message,
       :error_code,
@@ -2235,6 +2361,7 @@ module Aws::OpenSearchServerless
     #   <p>The current status of the endpoint.</p>
     #   @return [String]
     class VpcEndpointFilters < Struct.new(
+      nil,
       :status,
       keyword_init: true
     )
@@ -2252,6 +2379,7 @@ module Aws::OpenSearchServerless
     #   <p>The current status of the endpoint.</p>
     #   @return [String]
     class VpcEndpointSummary < Struct.new(
+      nil,
       :id,
       :name,
       :status,

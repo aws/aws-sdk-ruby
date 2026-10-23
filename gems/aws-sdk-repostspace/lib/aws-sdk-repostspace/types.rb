@@ -10,6 +10,7 @@ module Aws::Repostspace
     # @!attribute message
     #   @return [String]
     class AccessDeniedException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -29,6 +30,7 @@ module Aws::Repostspace
     #   <p>The channel role to add to the users or groups.</p>
     #   @return [String]
     class BatchAddChannelRoleToAccessorsInput < Struct.new(
+      nil,
       :space_id,
       :channel_id,
       :accessor_ids,
@@ -45,6 +47,7 @@ module Aws::Repostspace
     #   <p>An array of errors that occurred when roles were added.</p>
     #   @return [Array<Types::BatchError>]
     class BatchAddChannelRoleToAccessorsOutput < Struct.new(
+      nil,
       :added_accessor_ids,
       :errors,
       keyword_init: true
@@ -62,6 +65,7 @@ module Aws::Repostspace
     #   <p>The role to add to the users or groups.</p>
     #   @return [String]
     class BatchAddRoleInput < Struct.new(
+      nil,
       :space_id,
       :accessor_ids,
       :role,
@@ -77,6 +81,7 @@ module Aws::Repostspace
     #   <p>An array of errors that occurred when roles were added.</p>
     #   @return [Array<Types::BatchError>]
     class BatchAddRoleOutput < Struct.new(
+      nil,
       :added_accessor_ids,
       :errors,
       keyword_init: true
@@ -95,6 +100,7 @@ module Aws::Repostspace
     #   <p>Description of the error.</p>
     #   @return [String]
     class BatchError < Struct.new(
+      nil,
       :accessor_id,
       :error,
       :message,
@@ -116,6 +122,7 @@ module Aws::Repostspace
     #   <p>The channel role to remove from the users or groups.</p>
     #   @return [String]
     class BatchRemoveChannelRoleFromAccessorsInput < Struct.new(
+      nil,
       :space_id,
       :channel_id,
       :accessor_ids,
@@ -132,6 +139,7 @@ module Aws::Repostspace
     #   <p>An array of errors that occurred when roles were removed.</p>
     #   @return [Array<Types::BatchError>]
     class BatchRemoveChannelRoleFromAccessorsOutput < Struct.new(
+      nil,
       :removed_accessor_ids,
       :errors,
       keyword_init: true
@@ -149,6 +157,7 @@ module Aws::Repostspace
     #   <p>The role to remove from the users or groups.</p>
     #   @return [String]
     class BatchRemoveRoleInput < Struct.new(
+      nil,
       :space_id,
       :accessor_ids,
       :role,
@@ -164,6 +173,7 @@ module Aws::Repostspace
     #   <p>An array of errors that occurred when roles were removed.</p>
     #   @return [Array<Types::BatchError>]
     class BatchRemoveRoleOutput < Struct.new(
+      nil,
       :removed_accessor_ids,
       :errors,
       keyword_init: true
@@ -200,6 +210,7 @@ module Aws::Repostspace
     #   <p>The number of groups that are part of the channel.</p>
     #   @return [Integer]
     class ChannelData < Struct.new(
+      nil,
       :space_id,
       :channel_id,
       :channel_name,
@@ -224,6 +235,7 @@ module Aws::Repostspace
     #   <p>The type of the resource.</p>
     #   @return [String]
     class ConflictException < Struct.new(
+      nil,
       :message,
       :resource_id,
       :resource_type,
@@ -242,6 +254,7 @@ module Aws::Repostspace
     #   <p>A description for the channel. This is used only to help you identify this channel.</p>
     #   @return [String]
     class CreateChannelInput < Struct.new(
+      nil,
       :space_id,
       :channel_name,
       :channel_description,
@@ -254,6 +267,7 @@ module Aws::Repostspace
     #   <p>The unique ID of the private re:Post channel.</p>
     #   @return [String]
     class CreateChannelOutput < Struct.new(
+      nil,
       :channel_id,
       keyword_init: true
     )
@@ -285,6 +299,7 @@ module Aws::Repostspace
     #   <p/>
     #   @return [Types::SupportedEmailDomainsParameters]
     class CreateSpaceInput < Struct.new(
+      nil,
       :name,
       :subdomain,
       :tier,
@@ -302,6 +317,7 @@ module Aws::Repostspace
     #   <p>The unique ID of the private re:Post.</p>
     #   @return [String]
     class CreateSpaceOutput < Struct.new(
+      nil,
       :space_id,
       keyword_init: true
     )
@@ -312,6 +328,7 @@ module Aws::Repostspace
     #   <p>The unique ID of the private re:Post.</p>
     #   @return [String]
     class DeleteSpaceInput < Struct.new(
+      nil,
       :space_id,
       keyword_init: true
     )
@@ -325,6 +342,7 @@ module Aws::Repostspace
     #   <p>The ID of the admin to remove.</p>
     #   @return [String]
     class DeregisterAdminInput < Struct.new(
+      nil,
       :space_id,
       :admin_id,
       keyword_init: true
@@ -339,6 +357,7 @@ module Aws::Repostspace
     #   <p>The unique ID of the private re:Post channel.</p>
     #   @return [String]
     class GetChannelInput < Struct.new(
+      nil,
       :space_id,
       :channel_id,
       keyword_init: true
@@ -371,6 +390,7 @@ module Aws::Repostspace
     #   <p>The status pf the channel.</p>
     #   @return [String]
     class GetChannelOutput < Struct.new(
+      nil,
       :space_id,
       :channel_id,
       :channel_name,
@@ -388,6 +408,7 @@ module Aws::Repostspace
     #   <p>The ID of the private re:Post.</p>
     #   @return [String]
     class GetSpaceInput < Struct.new(
+      nil,
       :space_id,
       keyword_init: true
     )
@@ -471,6 +492,7 @@ module Aws::Repostspace
     #   <p/>
     #   @return [Types::SupportedEmailDomainsStatus]
     class GetSpaceOutput < Struct.new(
+      nil,
       :space_id,
       :arn,
       :name,
@@ -507,6 +529,7 @@ module Aws::Repostspace
     #   <p>Advice to clients on when the call can be safely retried.</p>
     #   @return [Integer]
     class InternalServerException < Struct.new(
+      nil,
       :message,
       :retry_after_seconds,
       keyword_init: true
@@ -524,6 +547,7 @@ module Aws::Repostspace
     #   <p>The maximum number of channels to include in the results.</p>
     #   @return [Integer]
     class ListChannelsInput < Struct.new(
+      nil,
       :space_id,
       :next_token,
       :max_results,
@@ -539,6 +563,7 @@ module Aws::Repostspace
     #   <p>The token that you use when you request the next set of channels.</p>
     #   @return [String]
     class ListChannelsOutput < Struct.new(
+      nil,
       :channels,
       :next_token,
       keyword_init: true
@@ -553,6 +578,7 @@ module Aws::Repostspace
     #   <p>The maximum number of private re:Posts to include in the results.</p>
     #   @return [Integer]
     class ListSpacesInput < Struct.new(
+      nil,
       :next_token,
       :max_results,
       keyword_init: true
@@ -567,6 +593,7 @@ module Aws::Repostspace
     #   <p>The token that you use when you request the next set of private re:Posts.</p>
     #   @return [String]
     class ListSpacesOutput < Struct.new(
+      nil,
       :spaces,
       :next_token,
       keyword_init: true
@@ -578,6 +605,7 @@ module Aws::Repostspace
     #   <p>The ARN of the resource that the tags are associated with.</p>
     #   @return [String]
     class ListTagsForResourceRequest < Struct.new(
+      nil,
       :resource_arn,
       keyword_init: true
     )
@@ -588,6 +616,7 @@ module Aws::Repostspace
     #   <p>The list of tags that are associated with the resource.</p>
     #   @return [Hash<String, String>]
     class ListTagsForResourceResponse < Struct.new(
+      nil,
       :tags,
       keyword_init: true
     )
@@ -601,6 +630,7 @@ module Aws::Repostspace
     #   <p>The ID of the administrator.</p>
     #   @return [String]
     class RegisterAdminInput < Struct.new(
+      nil,
       :space_id,
       :admin_id,
       keyword_init: true
@@ -618,6 +648,7 @@ module Aws::Repostspace
     #   <p>The type of the resource.</p>
     #   @return [String]
     class ResourceNotFoundException < Struct.new(
+      nil,
       :message,
       :resource_id,
       :resource_type,
@@ -639,6 +670,7 @@ module Aws::Repostspace
     #   <p>The body of the invite.</p>
     #   @return [String]
     class SendInvitesInput < Struct.new(
+      nil,
       :space_id,
       :accessor_ids,
       :title,
@@ -664,6 +696,7 @@ module Aws::Repostspace
     #   <p>The code to identify the quota.</p>
     #   @return [String]
     class ServiceQuotaExceededException < Struct.new(
+      nil,
       :message,
       :resource_id,
       :resource_type,
@@ -727,6 +760,7 @@ module Aws::Repostspace
     #   <p/>
     #   @return [Types::SupportedEmailDomainsStatus]
     class SpaceData < Struct.new(
+      nil,
       :space_id,
       :arn,
       :name,
@@ -757,6 +791,7 @@ module Aws::Repostspace
     #   <p/>
     #   @return [Array<String>]
     class SupportedEmailDomainsParameters < Struct.new(
+      nil,
       :enabled,
       :allowed_domains,
       keyword_init: true
@@ -772,6 +807,7 @@ module Aws::Repostspace
     #   <p/>
     #   @return [Array<String>]
     class SupportedEmailDomainsStatus < Struct.new(
+      nil,
       :enabled,
       :allowed_domains,
       keyword_init: true
@@ -786,6 +822,7 @@ module Aws::Repostspace
     #   <p>The list of tag keys and values that must be associated with the resource. You can associate tag keys only, tags (key and values) only, or a combination of tag keys and tags.</p>
     #   @return [Hash<String, String>]
     class TagResourceRequest < Struct.new(
+      nil,
       :resource_arn,
       :tags,
       keyword_init: true
@@ -794,6 +831,7 @@ module Aws::Repostspace
     end
 
     class TagResourceResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -812,6 +850,7 @@ module Aws::Repostspace
     #   <p> Advice to clients on when the call can be safely retried.</p>
     #   @return [Integer]
     class ThrottlingException < Struct.new(
+      nil,
       :message,
       :service_code,
       :quota_code,
@@ -828,6 +867,7 @@ module Aws::Repostspace
     #   <p>The key values of the tag.</p>
     #   @return [Array<String>]
     class UntagResourceRequest < Struct.new(
+      nil,
       :resource_arn,
       :tag_keys,
       keyword_init: true
@@ -836,6 +876,7 @@ module Aws::Repostspace
     end
 
     class UntagResourceResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -854,6 +895,7 @@ module Aws::Repostspace
     #   <p>A description for the channel. This is used only to help you identify this channel.</p>
     #   @return [String]
     class UpdateChannelInput < Struct.new(
+      nil,
       :space_id,
       :channel_id,
       :channel_name,
@@ -864,6 +906,7 @@ module Aws::Repostspace
     end
 
     class UpdateChannelOutput < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -885,6 +928,7 @@ module Aws::Repostspace
     #   <p/>
     #   @return [Types::SupportedEmailDomainsParameters]
     class UpdateSpaceInput < Struct.new(
+      nil,
       :space_id,
       :description,
       :tier,
@@ -905,6 +949,7 @@ module Aws::Repostspace
     #   <p>The field that caused the error, if applicable.</p>
     #   @return [Array<Types::ValidationExceptionField>]
     class ValidationException < Struct.new(
+      nil,
       :message,
       :reason,
       :field_list,
@@ -921,6 +966,7 @@ module Aws::Repostspace
     #   <p>The name of the field.</p>
     #   @return [String]
     class ValidationExceptionField < Struct.new(
+      nil,
       :name,
       :message,
       keyword_init: true

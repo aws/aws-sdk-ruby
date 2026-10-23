@@ -10,6 +10,7 @@ module Aws::S3Vectors
     # @!attribute message
     #   @return [String]
     class AccessDeniedException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -20,6 +21,7 @@ module Aws::S3Vectors
     # @!attribute message
     #   @return [String]
     class ConflictException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -48,6 +50,7 @@ module Aws::S3Vectors
     #   <p>The metadata configuration for the vector index. </p>
     #   @return [Types::MetadataConfiguration]
     class CreateIndexInput < Struct.new(
+      nil,
       :vector_bucket_name,
       :vector_bucket_arn,
       :index_name,
@@ -61,6 +64,7 @@ module Aws::S3Vectors
     end
 
     class CreateIndexOutput < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -73,6 +77,7 @@ module Aws::S3Vectors
     #   <p>The encryption configuration for the vector bucket. By default, if you don't specify, all new vectors in Amazon S3 vector buckets use server-side encryption with Amazon S3 managed keys (SSE-S3), specifically <code>AES256</code>. </p>
     #   @return [Types::EncryptionConfiguration]
     class CreateVectorBucketInput < Struct.new(
+      nil,
       :vector_bucket_name,
       :encryption_configuration,
       keyword_init: true
@@ -81,6 +86,7 @@ module Aws::S3Vectors
     end
 
     class CreateVectorBucketOutput < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -96,6 +102,7 @@ module Aws::S3Vectors
     #   <p>The ARN of the vector index to delete.</p>
     #   @return [String]
     class DeleteIndexInput < Struct.new(
+      nil,
       :vector_bucket_name,
       :index_name,
       :index_arn,
@@ -105,6 +112,7 @@ module Aws::S3Vectors
     end
 
     class DeleteIndexOutput < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -117,6 +125,7 @@ module Aws::S3Vectors
     #   <p>The ARN of the vector bucket to delete.</p>
     #   @return [String]
     class DeleteVectorBucketInput < Struct.new(
+      nil,
       :vector_bucket_name,
       :vector_bucket_arn,
       keyword_init: true
@@ -125,6 +134,7 @@ module Aws::S3Vectors
     end
 
     class DeleteVectorBucketOutput < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -137,6 +147,7 @@ module Aws::S3Vectors
     #   <p>The ARN of the vector bucket to delete the policy from.</p>
     #   @return [String]
     class DeleteVectorBucketPolicyInput < Struct.new(
+      nil,
       :vector_bucket_name,
       :vector_bucket_arn,
       keyword_init: true
@@ -145,6 +156,7 @@ module Aws::S3Vectors
     end
 
     class DeleteVectorBucketPolicyOutput < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -163,6 +175,7 @@ module Aws::S3Vectors
     #   <p>The keys of the vectors to delete. </p>
     #   @return [Array<String>]
     class DeleteVectorsInput < Struct.new(
+      nil,
       :vector_bucket_name,
       :index_name,
       :index_arn,
@@ -173,6 +186,7 @@ module Aws::S3Vectors
     end
 
     class DeleteVectorsOutput < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -186,6 +200,7 @@ module Aws::S3Vectors
     #   <p>Amazon Web Services Key Management Service (KMS) customer managed key ID to use for the encryption configuration. This parameter is allowed if and only if <code>sseType</code> is set to <code>aws:kms</code>.</p> <p>To specify the KMS key, you must use the format of the KMS key Amazon Resource Name (ARN).</p> <p>For example, specify Key ARN in the following format: <code>arn:aws:kms:us-east-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab</code> </p>
     #   @return [String]
     class EncryptionConfiguration < Struct.new(
+      nil,
       :sse_type,
       :kms_key_arn,
       keyword_init: true
@@ -208,6 +223,7 @@ module Aws::S3Vectors
     #   <p>The ARN of the vector index.</p>
     #   @return [String]
     class GetIndexInput < Struct.new(
+      nil,
       :vector_bucket_name,
       :index_name,
       :index_arn,
@@ -220,6 +236,7 @@ module Aws::S3Vectors
     #   <p>The attributes of the vector index.</p>
     #   @return [Types::Index]
     class GetIndexOutput < Struct.new(
+      nil,
       :index,
       keyword_init: true
     )
@@ -237,6 +254,7 @@ module Aws::S3Vectors
     #   <p>Metadata about the vector. </p>
     #   @return [JSON]
     class GetOutputVector < Struct.new(
+      nil,
       :key,
       :data,
       :metadata,
@@ -252,6 +270,7 @@ module Aws::S3Vectors
     #   <p>The ARN of the vector bucket to retrieve information about.</p>
     #   @return [String]
     class GetVectorBucketInput < Struct.new(
+      nil,
       :vector_bucket_name,
       :vector_bucket_arn,
       keyword_init: true
@@ -263,6 +282,7 @@ module Aws::S3Vectors
     #   <p>The attributes of the vector bucket.</p>
     #   @return [Types::VectorBucket]
     class GetVectorBucketOutput < Struct.new(
+      nil,
       :vector_bucket,
       keyword_init: true
     )
@@ -276,6 +296,7 @@ module Aws::S3Vectors
     #   <p>The ARN of the vector bucket.</p>
     #   @return [String]
     class GetVectorBucketPolicyInput < Struct.new(
+      nil,
       :vector_bucket_name,
       :vector_bucket_arn,
       keyword_init: true
@@ -287,6 +308,7 @@ module Aws::S3Vectors
     #   <p>The <code>JSON</code> that defines the policy.</p>
     #   @return [String]
     class GetVectorBucketPolicyOutput < Struct.new(
+      nil,
       :policy,
       keyword_init: true
     )
@@ -312,6 +334,7 @@ module Aws::S3Vectors
     #   <p>Indicates whether to include metadata in the response. The default value is <code>false</code>.</p>
     #   @return [Boolean]
     class GetVectorsInput < Struct.new(
+      nil,
       :vector_bucket_name,
       :index_name,
       :index_arn,
@@ -327,6 +350,7 @@ module Aws::S3Vectors
     #   <p>The attributes of the vectors.</p>
     #   @return [Array<Types::GetOutputVector>]
     class GetVectorsOutput < Struct.new(
+      nil,
       :vectors,
       keyword_init: true
     )
@@ -359,6 +383,7 @@ module Aws::S3Vectors
     #   <p>The metadata configuration for the vector index. </p>
     #   @return [Types::MetadataConfiguration]
     class Index < Struct.new(
+      nil,
       :vector_bucket_name,
       :index_name,
       :index_arn,
@@ -386,6 +411,7 @@ module Aws::S3Vectors
     #   <p>Date and time when the vector index was created. </p>
     #   @return [Time]
     class IndexSummary < Struct.new(
+      nil,
       :vector_bucket_name,
       :index_name,
       :index_arn,
@@ -399,6 +425,7 @@ module Aws::S3Vectors
     # @!attribute message
     #   @return [String]
     class InternalServerException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -409,6 +436,7 @@ module Aws::S3Vectors
     # @!attribute message
     #   @return [String]
     class KmsDisabledException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -419,6 +447,7 @@ module Aws::S3Vectors
     # @!attribute message
     #   @return [String]
     class KmsInvalidKeyUsageException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -429,6 +458,7 @@ module Aws::S3Vectors
     # @!attribute message
     #   @return [String]
     class KmsInvalidStateException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -439,6 +469,7 @@ module Aws::S3Vectors
     # @!attribute message
     #   @return [String]
     class KmsNotFoundException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -461,6 +492,7 @@ module Aws::S3Vectors
     #   <p>Limits the response to vector indexes that begin with the specified prefix.</p>
     #   @return [String]
     class ListIndexesInput < Struct.new(
+      nil,
       :vector_bucket_name,
       :vector_bucket_arn,
       :max_results,
@@ -478,6 +510,7 @@ module Aws::S3Vectors
     #   <p>The attributes of the vector indexes</p>
     #   @return [Array<Types::IndexSummary>]
     class ListIndexesOutput < Struct.new(
+      nil,
       :next_token,
       :indexes,
       keyword_init: true
@@ -496,6 +529,7 @@ module Aws::S3Vectors
     #   <p>Metadata about the vector. </p>
     #   @return [JSON]
     class ListOutputVector < Struct.new(
+      nil,
       :key,
       :data,
       :metadata,
@@ -514,6 +548,7 @@ module Aws::S3Vectors
     #   <p>Limits the response to vector buckets that begin with the specified prefix.</p>
     #   @return [String]
     class ListVectorBucketsInput < Struct.new(
+      nil,
       :max_results,
       :next_token,
       :prefix,
@@ -529,6 +564,7 @@ module Aws::S3Vectors
     #   <p>The list of vector buckets owned by the requester. </p>
     #   @return [Array<Types::VectorBucketSummary>]
     class ListVectorBucketsOutput < Struct.new(
+      nil,
       :next_token,
       :vector_buckets,
       keyword_init: true
@@ -564,6 +600,7 @@ module Aws::S3Vectors
     #   <p>If true, the metadata associated with each vector will be included in the response. The default value is <code>false</code>.</p>
     #   @return [Boolean]
     class ListVectorsInput < Struct.new(
+      nil,
       :vector_bucket_name,
       :index_name,
       :index_arn,
@@ -585,6 +622,7 @@ module Aws::S3Vectors
     #   <p>Vectors in the current segment.</p>
     #   @return [Array<Types::ListOutputVector>]
     class ListVectorsOutput < Struct.new(
+      nil,
       :next_token,
       :vectors,
       keyword_init: true
@@ -597,6 +635,7 @@ module Aws::S3Vectors
     #   <p>Non-filterable metadata keys allow you to enrich vectors with additional context during storage and retrieval. Unlike default metadata keys, these keys can’t be used as query filters. Non-filterable metadata keys can be retrieved but can’t be searched, queried, or filtered. You can access non-filterable metadata keys of your vectors after finding the vectors. For more information about non-filterable metadata keys, see <a href="https://docs.aws.amazon.com/AmazonS3/latest/userguide/s3-vectors-vectors.html">Vectors</a> and <a href="https://docs.aws.amazon.com/AmazonS3/latest/userguide/s3-vectors-limitations.html">Limitations and restrictions</a> in the <i>Amazon S3 User Guide</i>. </p>
     #   @return [Array<String>]
     class MetadataConfiguration < Struct.new(
+      nil,
       :non_filterable_metadata_keys,
       keyword_init: true
     )
@@ -607,6 +646,7 @@ module Aws::S3Vectors
     # @!attribute message
     #   @return [String]
     class NotFoundException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -624,6 +664,7 @@ module Aws::S3Vectors
     #   <p>Metadata about the vector. All metadata entries undergo validation to ensure they meet the format requirements for size and data types.</p>
     #   @return [JSON]
     class PutInputVector < Struct.new(
+      nil,
       :key,
       :data,
       :metadata,
@@ -647,6 +688,7 @@ module Aws::S3Vectors
     #   <p>The <code>JSON</code> that defines the policy. For more information about bucket policies for S3 Vectors, see <a href="https://docs.aws.amazon.com/AmazonS3/latest/userguide/s3-vectors-bucket-policy.html">Managing vector bucket policies</a> in the <i>Amazon S3 User Guide</i>.</p>
     #   @return [String]
     class PutVectorBucketPolicyInput < Struct.new(
+      nil,
       :vector_bucket_name,
       :vector_bucket_arn,
       :policy,
@@ -656,6 +698,7 @@ module Aws::S3Vectors
     end
 
     class PutVectorBucketPolicyOutput < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -674,6 +717,7 @@ module Aws::S3Vectors
     #   <p>The vectors to add to a vector index. The number of vectors in a single request must not exceed the resource capacity, otherwise the request will be rejected with the error <code>ServiceUnavailableException</code> with the error message "Currently unable to handle the request".</p>
     #   @return [Array<Types::PutInputVector>]
     class PutVectorsInput < Struct.new(
+      nil,
       :vector_bucket_name,
       :index_name,
       :index_arn,
@@ -684,6 +728,7 @@ module Aws::S3Vectors
     end
 
     class PutVectorsOutput < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -703,6 +748,7 @@ module Aws::S3Vectors
     #   <p>The measure of similarity between the vector in the response and the query vector.</p>
     #   @return [Float]
     class QueryOutputVector < Struct.new(
+      nil,
       :key,
       :data,
       :metadata,
@@ -737,6 +783,7 @@ module Aws::S3Vectors
     #   <p>Indicates whether to include the computed distance in the response. The default value is <code>false</code>.</p>
     #   @return [Boolean]
     class QueryVectorsInput < Struct.new(
+      nil,
       :vector_bucket_name,
       :index_name,
       :index_arn,
@@ -754,6 +801,7 @@ module Aws::S3Vectors
     #   <p>The vectors in the approximate nearest neighbor search.</p>
     #   @return [Array<Types::QueryOutputVector>]
     class QueryVectorsOutput < Struct.new(
+      nil,
       :vectors,
       keyword_init: true
     )
@@ -764,6 +812,7 @@ module Aws::S3Vectors
     # @!attribute message
     #   @return [String]
     class ServiceQuotaExceededException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -774,6 +823,7 @@ module Aws::S3Vectors
     # @!attribute message
     #   @return [String]
     class ServiceUnavailableException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -784,6 +834,7 @@ module Aws::S3Vectors
     # @!attribute message
     #   @return [String]
     class TooManyRequestsException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -797,6 +848,7 @@ module Aws::S3Vectors
     #   <p>A list of specific validation failures that are encountered during input processing. Each entry in the list contains a path to the field that failed validation and a detailed message that explains why the validation failed. To satisfy multiple constraints, a field can appear multiple times in this list if it failed. You can use the information to identify and fix the specific validation issues in your request.</p>
     #   @return [Array<Types::ValidationExceptionField>]
     class ValidationException < Struct.new(
+      nil,
       :message,
       :field_list,
       keyword_init: true
@@ -812,6 +864,7 @@ module Aws::S3Vectors
     #   <p>A message about the validation exception.</p>
     #   @return [String]
     class ValidationExceptionField < Struct.new(
+      nil,
       :path,
       :message,
       keyword_init: true
@@ -833,6 +886,7 @@ module Aws::S3Vectors
     #   <p>The encryption configuration for the vector bucket.</p>
     #   @return [Types::EncryptionConfiguration]
     class VectorBucket < Struct.new(
+      nil,
       :vector_bucket_name,
       :vector_bucket_arn,
       :creation_time,
@@ -853,6 +907,7 @@ module Aws::S3Vectors
     #   <p>Date and time when the vector bucket was created. </p>
     #   @return [Time]
     class VectorBucketSummary < Struct.new(
+      nil,
       :vector_bucket_name,
       :vector_bucket_arn,
       :creation_time,

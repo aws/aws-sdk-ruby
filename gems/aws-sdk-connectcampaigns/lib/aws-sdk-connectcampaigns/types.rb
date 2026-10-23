@@ -13,6 +13,7 @@ module Aws::ConnectCampaigns
     #   A header that defines the error encountered while processing the request.
     #   @return [String]
     class AccessDeniedException < Struct.new(
+      nil,
       :message,
       :x_amz_error_type,
       keyword_init: true
@@ -25,6 +26,7 @@ module Aws::ConnectCampaigns
     #   Allocates dialing capacity for this campaign between multiple active campaigns
     #   @return [Float]
     class AgentlessDialerConfig < Struct.new(
+      nil,
       :dialing_capacity,
       keyword_init: true
     )
@@ -39,6 +41,7 @@ module Aws::ConnectCampaigns
     #   Enable or disable await answer machine prompt
     #   @return [Boolean]
     class AnswerMachineDetectionConfig < Struct.new(
+      nil,
       :enable_answer_machine_detection,
       :await_answer_machine_prompt,
       keyword_init: true
@@ -74,6 +77,7 @@ module Aws::ConnectCampaigns
     #   Tag map with key and value.
     #   @return [Hash<String, String>]
     class Campaign < Struct.new(
+      nil,
       :id,
       :arn,
       :name,
@@ -91,6 +95,7 @@ module Aws::ConnectCampaigns
     #   Connect instance identifier filter
     #   @return [Types::InstanceIdFilter]
     class CampaignFilters < Struct.new(
+      nil,
       :instance_id_filter,
       keyword_init: true
     )
@@ -111,6 +116,7 @@ module Aws::ConnectCampaigns
     #   Amazon Connect Instance Id
     #   @return [String]
     class CampaignSummary < Struct.new(
+      nil,
       :id,
       :arn,
       :name,
@@ -127,6 +133,7 @@ module Aws::ConnectCampaigns
     #   A header that defines the error encountered while processing the request.
     #   @return [String]
     class ConflictException < Struct.new(
+      nil,
       :message,
       :x_amz_error_type,
       keyword_init: true
@@ -151,6 +158,7 @@ module Aws::ConnectCampaigns
     #   Tag map with key and value.
     #   @return [Hash<String, String>]
     class CreateCampaignInput < Struct.new(
+      nil,
       :name,
       :connect_instance_id,
       :dialer_config,
@@ -172,6 +180,7 @@ module Aws::ConnectCampaigns
     #   Tag map with key and value.
     #   @return [Hash<String, String>]
     class CreateCampaignOutput < Struct.new(
+      nil,
       :id,
       :arn,
       :tags,
@@ -185,6 +194,7 @@ module Aws::ConnectCampaigns
     #   Identifier representing a Campaign
     #   @return [String]
     class DeleteCampaignInput < Struct.new(
+      nil,
       :id,
       keyword_init: true
     )
@@ -196,6 +206,7 @@ module Aws::ConnectCampaigns
     #   Amazon Connect Instance Id
     #   @return [String]
     class DeleteConnectInstanceConfigInput < Struct.new(
+      nil,
       :connect_instance_id,
       keyword_init: true
     )
@@ -207,6 +218,7 @@ module Aws::ConnectCampaigns
     #   Amazon Connect Instance Id
     #   @return [String]
     class DeleteInstanceOnboardingJobInput < Struct.new(
+      nil,
       :connect_instance_id,
       keyword_init: true
     )
@@ -218,6 +230,7 @@ module Aws::ConnectCampaigns
     #   Identifier representing a Campaign
     #   @return [String]
     class DescribeCampaignInput < Struct.new(
+      nil,
       :id,
       keyword_init: true
     )
@@ -229,6 +242,7 @@ module Aws::ConnectCampaigns
     #   An Amazon Connect campaign.
     #   @return [Types::Campaign]
     class DescribeCampaignOutput < Struct.new(
+      nil,
       :campaign,
       keyword_init: true
     )
@@ -249,6 +263,7 @@ module Aws::ConnectCampaigns
     #   A custom key-value pair using an attribute map. The attributes are standard Amazon Connect attributes, and can be accessed in contact flows just like any other contact attributes.
     #   @return [Hash<String, String>]
     class DialRequest < Struct.new(
+      nil,
       :client_token,
       :phone_number,
       :expiration_time,
@@ -297,6 +312,7 @@ module Aws::ConnectCampaigns
     #   KMS key id/arn for encryption config.
     #   @return [String]
     class EncryptionConfig < Struct.new(
+      nil,
       :enabled,
       :encryption_type,
       :key_arn,
@@ -318,6 +334,7 @@ module Aws::ConnectCampaigns
     #   A predefined code indicating the error that caused the failure in getting state of campaigns
     #   @return [String]
     class FailedCampaignStateResponse < Struct.new(
+      nil,
       :campaign_id,
       :failure_code,
       keyword_init: true
@@ -336,6 +353,7 @@ module Aws::ConnectCampaigns
     #   A predefined code indicating the error that caused the failure.
     #   @return [String]
     class FailedRequest < Struct.new(
+      nil,
       :client_token,
       :id,
       :failure_code,
@@ -349,6 +367,7 @@ module Aws::ConnectCampaigns
     #   List of CampaignId
     #   @return [Array<String>]
     class GetCampaignStateBatchInput < Struct.new(
+      nil,
       :campaign_ids,
       keyword_init: true
     )
@@ -363,6 +382,7 @@ module Aws::ConnectCampaigns
     #   List of failed requests of campaign state
     #   @return [Array<Types::FailedCampaignStateResponse>]
     class GetCampaignStateBatchOutput < Struct.new(
+      nil,
       :successful_requests,
       :failed_requests,
       keyword_init: true
@@ -375,6 +395,7 @@ module Aws::ConnectCampaigns
     #   Identifier representing a Campaign
     #   @return [String]
     class GetCampaignStateInput < Struct.new(
+      nil,
       :id,
       keyword_init: true
     )
@@ -386,6 +407,7 @@ module Aws::ConnectCampaigns
     #   State of a campaign
     #   @return [String]
     class GetCampaignStateOutput < Struct.new(
+      nil,
       :state,
       keyword_init: true
     )
@@ -397,6 +419,7 @@ module Aws::ConnectCampaigns
     #   Amazon Connect Instance Id
     #   @return [String]
     class GetConnectInstanceConfigInput < Struct.new(
+      nil,
       :connect_instance_id,
       keyword_init: true
     )
@@ -408,6 +431,7 @@ module Aws::ConnectCampaigns
     #   Instance config object
     #   @return [Types::InstanceConfig]
     class GetConnectInstanceConfigOutput < Struct.new(
+      nil,
       :connect_instance_config,
       keyword_init: true
     )
@@ -419,6 +443,7 @@ module Aws::ConnectCampaigns
     #   Amazon Connect Instance Id
     #   @return [String]
     class GetInstanceOnboardingJobStatusInput < Struct.new(
+      nil,
       :connect_instance_id,
       keyword_init: true
     )
@@ -430,6 +455,7 @@ module Aws::ConnectCampaigns
     #   Instance onboarding job status object
     #   @return [Types::InstanceOnboardingJobStatus]
     class GetInstanceOnboardingJobStatusOutput < Struct.new(
+      nil,
       :connect_instance_onboarding_job_status,
       keyword_init: true
     )
@@ -450,6 +476,7 @@ module Aws::ConnectCampaigns
     #   KMS is only type supported
     #   @return [Types::EncryptionConfig]
     class InstanceConfig < Struct.new(
+      nil,
       :connect_instance_id,
       :service_linked_role_arn,
       :encryption_config,
@@ -466,6 +493,7 @@ module Aws::ConnectCampaigns
     #   Operators for Connect instance identifier filter
     #   @return [String]
     class InstanceIdFilter < Struct.new(
+      nil,
       :value,
       :operator,
       keyword_init: true
@@ -484,6 +512,7 @@ module Aws::ConnectCampaigns
     #   Enumeration of the possible failure codes for instance onboarding job
     #   @return [String]
     class InstanceOnboardingJobStatus < Struct.new(
+      nil,
       :connect_instance_id,
       :status,
       :failure_code,
@@ -499,6 +528,7 @@ module Aws::ConnectCampaigns
     #   A header that defines the error encountered while processing the request.
     #   @return [String]
     class InternalServerException < Struct.new(
+      nil,
       :message,
       :x_amz_error_type,
       keyword_init: true
@@ -516,6 +546,7 @@ module Aws::ConnectCampaigns
     #   A header that defines the error encountered while processing the request.
     #   @return [String]
     class InvalidCampaignStateException < Struct.new(
+      nil,
       :state,
       :message,
       :x_amz_error_type,
@@ -531,6 +562,7 @@ module Aws::ConnectCampaigns
     #   A header that defines the error encountered while processing the request.
     #   @return [String]
     class InvalidStateException < Struct.new(
+      nil,
       :message,
       :x_amz_error_type,
       keyword_init: true
@@ -549,6 +581,7 @@ module Aws::ConnectCampaigns
     #   Filter model by type
     #   @return [Types::CampaignFilters]
     class ListCampaignsInput < Struct.new(
+      nil,
       :max_results,
       :next_token,
       :filters,
@@ -565,6 +598,7 @@ module Aws::ConnectCampaigns
     #   A list of Amazon Connect campaigns.
     #   @return [Array<Types::CampaignSummary>]
     class ListCampaignsOutput < Struct.new(
+      nil,
       :next_token,
       :campaign_summary_list,
       keyword_init: true
@@ -577,6 +611,7 @@ module Aws::ConnectCampaigns
     #   Arn
     #   @return [String]
     class ListTagsForResourceInput < Struct.new(
+      nil,
       :arn,
       keyword_init: true
     )
@@ -588,6 +623,7 @@ module Aws::ConnectCampaigns
     #   Tag map with key and value.
     #   @return [Hash<String, String>]
     class ListTagsForResourceOutput < Struct.new(
+      nil,
       :tags,
       keyword_init: true
     )
@@ -608,6 +644,7 @@ module Aws::ConnectCampaigns
     #   Answering Machine Detection config
     #   @return [Types::AnswerMachineDetectionConfig]
     class OutboundCallConfig < Struct.new(
+      nil,
       :connect_contact_flow_id,
       :connect_source_phone_number,
       :connect_queue_id,
@@ -622,6 +659,7 @@ module Aws::ConnectCampaigns
     #   Identifier representing a Campaign
     #   @return [String]
     class PauseCampaignInput < Struct.new(
+      nil,
       :id,
       keyword_init: true
     )
@@ -636,6 +674,7 @@ module Aws::ConnectCampaigns
     #   Allocates dialing capacity for this campaign between multiple active campaigns
     #   @return [Float]
     class PredictiveDialerConfig < Struct.new(
+      nil,
       :bandwidth_allocation,
       :dialing_capacity,
       keyword_init: true
@@ -651,6 +690,7 @@ module Aws::ConnectCampaigns
     #   Allocates dialing capacity for this campaign between multiple active campaigns
     #   @return [Float]
     class ProgressiveDialerConfig < Struct.new(
+      nil,
       :bandwidth_allocation,
       :dialing_capacity,
       keyword_init: true
@@ -666,6 +706,7 @@ module Aws::ConnectCampaigns
     #   A list of dial requests.
     #   @return [Array<Types::DialRequest>]
     class PutDialRequestBatchInput < Struct.new(
+      nil,
       :id,
       :dial_requests,
       keyword_init: true
@@ -681,6 +722,7 @@ module Aws::ConnectCampaigns
     #   A list of failed requests.
     #   @return [Array<Types::FailedRequest>]
     class PutDialRequestBatchOutput < Struct.new(
+      nil,
       :successful_requests,
       :failed_requests,
       keyword_init: true
@@ -695,6 +737,7 @@ module Aws::ConnectCampaigns
     #   A header that defines the error encountered while processing the request.
     #   @return [String]
     class ResourceNotFoundException < Struct.new(
+      nil,
       :message,
       :x_amz_error_type,
       keyword_init: true
@@ -707,6 +750,7 @@ module Aws::ConnectCampaigns
     #   Identifier representing a Campaign
     #   @return [String]
     class ResumeCampaignInput < Struct.new(
+      nil,
       :id,
       keyword_init: true
     )
@@ -720,6 +764,7 @@ module Aws::ConnectCampaigns
     #   A header that defines the error encountered while processing the request.
     #   @return [String]
     class ServiceQuotaExceededException < Struct.new(
+      nil,
       :message,
       :x_amz_error_type,
       keyword_init: true
@@ -732,6 +777,7 @@ module Aws::ConnectCampaigns
     #   Identifier representing a Campaign
     #   @return [String]
     class StartCampaignInput < Struct.new(
+      nil,
       :id,
       keyword_init: true
     )
@@ -749,6 +795,7 @@ module Aws::ConnectCampaigns
     #   KMS is only type supported
     #   @return [Types::EncryptionConfig]
     class StartInstanceOnboardingJobInput < Struct.new(
+      nil,
       :connect_instance_id,
       :encryption_config,
       keyword_init: true
@@ -761,6 +808,7 @@ module Aws::ConnectCampaigns
     #   Instance onboarding job status object
     #   @return [Types::InstanceOnboardingJobStatus]
     class StartInstanceOnboardingJobOutput < Struct.new(
+      nil,
       :connect_instance_onboarding_job_status,
       keyword_init: true
     )
@@ -772,6 +820,7 @@ module Aws::ConnectCampaigns
     #   Identifier representing a Campaign
     #   @return [String]
     class StopCampaignInput < Struct.new(
+      nil,
       :id,
       keyword_init: true
     )
@@ -786,6 +835,7 @@ module Aws::ConnectCampaigns
     #   State of a campaign
     #   @return [String]
     class SuccessfulCampaignStateResponse < Struct.new(
+      nil,
       :campaign_id,
       :state,
       keyword_init: true
@@ -801,6 +851,7 @@ module Aws::ConnectCampaigns
     #   Identifier representing a Dial request
     #   @return [String]
     class SuccessfulRequest < Struct.new(
+      nil,
       :client_token,
       :id,
       keyword_init: true
@@ -816,6 +867,7 @@ module Aws::ConnectCampaigns
     #   Tag map with key and value.
     #   @return [Hash<String, String>]
     class TagResourceInput < Struct.new(
+      nil,
       :arn,
       :tags,
       keyword_init: true
@@ -830,6 +882,7 @@ module Aws::ConnectCampaigns
     #   A header that defines the error encountered while processing the request.
     #   @return [String]
     class ThrottlingException < Struct.new(
+      nil,
       :message,
       :x_amz_error_type,
       keyword_init: true
@@ -845,6 +898,7 @@ module Aws::ConnectCampaigns
     #   List of tag keys.
     #   @return [Array<String>]
     class UntagResourceInput < Struct.new(
+      nil,
       :arn,
       :tag_keys,
       keyword_init: true
@@ -860,6 +914,7 @@ module Aws::ConnectCampaigns
     #   The possible types of dialer config parameters
     #   @return [Types::DialerConfig]
     class UpdateCampaignDialerConfigInput < Struct.new(
+      nil,
       :id,
       :dialer_config,
       keyword_init: true
@@ -875,6 +930,7 @@ module Aws::ConnectCampaigns
     #   The name of an Amazon Connect Campaign name.
     #   @return [String]
     class UpdateCampaignNameInput < Struct.new(
+      nil,
       :id,
       :name,
       keyword_init: true
@@ -896,6 +952,7 @@ module Aws::ConnectCampaigns
     #   Answering Machine Detection config
     #   @return [Types::AnswerMachineDetectionConfig]
     class UpdateCampaignOutboundCallConfigInput < Struct.new(
+      nil,
       :id,
       :connect_contact_flow_id,
       :connect_source_phone_number,
@@ -912,6 +969,7 @@ module Aws::ConnectCampaigns
     #   A header that defines the error encountered while processing the request.
     #   @return [String]
     class ValidationException < Struct.new(
+      nil,
       :message,
       :x_amz_error_type,
       keyword_init: true

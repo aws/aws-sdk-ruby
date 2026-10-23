@@ -12,7 +12,7 @@ Gem::Specification.new do |spec| # rubocop:disable Metrics/BlockLength
   spec.files       = Dir['CHANGELOG.md', 'VERSION', 'lib/**/*.rb']
   spec.executables = ['aws-rb-v4.rb']
 
-  spec.required_ruby_version = '>= 3.3'
+  spec.required_ruby_version = '>= 3.1'
 
   # rubocop:disable Gemspec/OrderedDependencies
   # START_AWS_SDK_SERVICE_GEMS_DEPENDENCIES

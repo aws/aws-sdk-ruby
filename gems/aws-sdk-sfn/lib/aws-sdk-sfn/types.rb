@@ -10,6 +10,7 @@ module Aws::SFN
     # @!attribute message
     #   @return [String]
     class ActivityAlreadyExists < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -20,6 +21,7 @@ module Aws::SFN
     # @!attribute message
     #   @return [String]
     class ActivityDoesNotExist < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -34,6 +36,7 @@ module Aws::SFN
     #   <p>A more detailed explanation of the cause of the failure.</p>
     #   @return [String]
     class ActivityFailedEventDetails < Struct.new(
+      nil,
       :error,
       :cause,
       keyword_init: true
@@ -46,6 +49,7 @@ module Aws::SFN
     # @!attribute message
     #   @return [String]
     class ActivityLimitExceeded < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -91,6 +95,7 @@ module Aws::SFN
     #   <p>The date the activity is created.</p>
     #   @return [Time]
     class ActivityListItem < Struct.new(
+      nil,
       :activity_arn,
       :name,
       :creation_date,
@@ -108,6 +113,7 @@ module Aws::SFN
     #   <p>A more detailed explanation of the cause of the failure.</p>
     #   @return [String]
     class ActivityScheduleFailedEventDetails < Struct.new(
+      nil,
       :error,
       :cause,
       keyword_init: true
@@ -132,6 +138,7 @@ module Aws::SFN
     #   <p>The maximum allowed duration between two heartbeats for the activity task.</p>
     #   @return [Integer]
     class ActivityScheduledEventDetails < Struct.new(
+      nil,
       :resource,
       :input,
       :input_details,
@@ -154,6 +161,7 @@ module Aws::SFN
     #         workers when calling <a>GetActivityTask</a>.</p>
     #   @return [String]
     class ActivityStartedEventDetails < Struct.new(
+      nil,
       :worker_name,
       keyword_init: true
     )
@@ -169,6 +177,7 @@ module Aws::SFN
     #   <p>Contains details about the output of an execution history event.</p>
     #   @return [Types::HistoryEventExecutionDataDetails]
     class ActivitySucceededEventDetails < Struct.new(
+      nil,
       :output,
       :output_details,
       keyword_init: true
@@ -184,6 +193,7 @@ module Aws::SFN
     #   <p>A more detailed explanation of the cause of the timeout.</p>
     #   @return [String]
     class ActivityTimedOutEventDetails < Struct.new(
+      nil,
       :error,
       :cause,
       keyword_init: true
@@ -196,6 +206,7 @@ module Aws::SFN
     # @!attribute message
     #   @return [String]
     class ActivityWorkerLimitExceeded < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -208,6 +219,7 @@ module Aws::SFN
     #       for API calls. In CloudWatch logs, the value will be true if the data is truncated due to size limits.</p>
     #   @return [Boolean]
     class AssignedVariablesDetails < Struct.new(
+      nil,
       :truncated,
       keyword_init: true
     )
@@ -227,6 +239,7 @@ module Aws::SFN
     #   <p>Billed duration of your workflow, in milliseconds.</p>
     #   @return [Integer]
     class BillingDetails < Struct.new(
+      nil,
       :billed_memory_used_in_mb,
       :billed_duration_in_milliseconds,
       keyword_init: true
@@ -246,6 +259,7 @@ module Aws::SFN
     #         for API calls. </p>
     #   @return [Boolean]
     class CloudWatchEventsExecutionDataDetails < Struct.new(
+      nil,
       :included,
       keyword_init: true
     )
@@ -264,6 +278,7 @@ module Aws::SFN
     #            </p>
     #   @return [String]
     class CloudWatchLogsLogGroup < Struct.new(
+      nil,
       :log_group_arn,
       keyword_init: true
     )
@@ -275,6 +290,7 @@ module Aws::SFN
     # @!attribute message
     #   @return [String]
     class ConflictException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -326,6 +342,7 @@ module Aws::SFN
     #   <p>Settings to configure server-side encryption.</p>
     #   @return [Types::EncryptionConfiguration]
     class CreateActivityInput < Struct.new(
+      nil,
       :name,
       :tags,
       :encryption_configuration,
@@ -341,6 +358,7 @@ module Aws::SFN
     #   <p>The date the activity is created.</p>
     #   @return [Time]
     class CreateActivityOutput < Struct.new(
+      nil,
       :activity_arn,
       :creation_date,
       keyword_init: true
@@ -363,6 +381,7 @@ module Aws::SFN
     #         on the weight assigned to each <code>RoutingConfig</code>.</p>
     #   @return [Array<Types::RoutingConfigurationListItem>]
     class CreateStateMachineAliasInput < Struct.new(
+      nil,
       :description,
       :name,
       :routing_configuration,
@@ -378,6 +397,7 @@ module Aws::SFN
     #   <p>The date the state machine alias was created.</p>
     #   @return [Time]
     class CreateStateMachineAliasOutput < Struct.new(
+      nil,
       :state_machine_alias_arn,
       :creation_date,
       keyword_init: true
@@ -456,6 +476,7 @@ module Aws::SFN
     #   <p>Settings to configure server-side encryption.</p>
     #   @return [Types::EncryptionConfiguration]
     class CreateStateMachineInput < Struct.new(
+      nil,
       :name,
       :definition,
       :role_arn,
@@ -481,6 +502,7 @@ module Aws::SFN
     #   <p>The Amazon Resource Name (ARN) that identifies the created state machine version. If you do not set the <code>publish</code> parameter to <code>true</code>, this field returns null value.</p>
     #   @return [String]
     class CreateStateMachineOutput < Struct.new(
+      nil,
       :state_machine_arn,
       :creation_date,
       :state_machine_version_arn,
@@ -493,6 +515,7 @@ module Aws::SFN
     #   <p>The Amazon Resource Name (ARN) of the activity to delete.</p>
     #   @return [String]
     class DeleteActivityInput < Struct.new(
+      nil,
       :activity_arn,
       keyword_init: true
     )
@@ -500,6 +523,7 @@ module Aws::SFN
     end
 
     class DeleteActivityOutput < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -509,6 +533,7 @@ module Aws::SFN
     #   <p>The Amazon Resource Name (ARN) of the state machine alias to delete.</p>
     #   @return [String]
     class DeleteStateMachineAliasInput < Struct.new(
+      nil,
       :state_machine_alias_arn,
       keyword_init: true
     )
@@ -516,6 +541,7 @@ module Aws::SFN
     end
 
     class DeleteStateMachineAliasOutput < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -525,6 +551,7 @@ module Aws::SFN
     #   <p>The Amazon Resource Name (ARN) of the state machine to delete.</p>
     #   @return [String]
     class DeleteStateMachineInput < Struct.new(
+      nil,
       :state_machine_arn,
       keyword_init: true
     )
@@ -532,6 +559,7 @@ module Aws::SFN
     end
 
     class DeleteStateMachineOutput < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -541,6 +569,7 @@ module Aws::SFN
     #   <p>The Amazon Resource Name (ARN) of the state machine version to delete.</p>
     #   @return [String]
     class DeleteStateMachineVersionInput < Struct.new(
+      nil,
       :state_machine_version_arn,
       keyword_init: true
     )
@@ -548,6 +577,7 @@ module Aws::SFN
     end
 
     class DeleteStateMachineVersionOutput < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -557,6 +587,7 @@ module Aws::SFN
     #   <p>The Amazon Resource Name (ARN) of the activity to describe.</p>
     #   @return [String]
     class DescribeActivityInput < Struct.new(
+      nil,
       :activity_arn,
       keyword_init: true
     )
@@ -604,6 +635,7 @@ module Aws::SFN
     #   <p>Settings for configured server-side encryption.</p>
     #   @return [Types::EncryptionConfiguration]
     class DescribeActivityOutput < Struct.new(
+      nil,
       :activity_arn,
       :name,
       :creation_date,
@@ -620,6 +652,7 @@ module Aws::SFN
     #   <p>If your state machine definition is encrypted with a KMS key, callers must have <code>kms:Decrypt</code> permission to decrypt the definition. Alternatively, you can call DescribeStateMachine API with <code>includedData = METADATA_ONLY</code> to get a successful response without the encrypted definition.</p>
     #   @return [String]
     class DescribeExecutionInput < Struct.new(
+      nil,
       :execution_arn,
       :included_data,
       keyword_init: true
@@ -780,6 +813,7 @@ module Aws::SFN
     #            </ul>
     #   @return [String]
     class DescribeExecutionOutput < Struct.new(
+      nil,
       :execution_arn,
       :state_machine_arn,
       :name,
@@ -809,6 +843,7 @@ module Aws::SFN
     #   <p>The Amazon Resource Name (ARN) that identifies a Map Run.</p>
     #   @return [String]
     class DescribeMapRunInput < Struct.new(
+      nil,
       :map_run_arn,
       keyword_init: true
     )
@@ -852,6 +887,7 @@ module Aws::SFN
     #   <p>The date a Map Run was last redriven. If you have not yet redriven a Map Run, the <code>redriveDate</code> is null.</p>
     #   @return [Time]
     class DescribeMapRunOutput < Struct.new(
+      nil,
       :map_run_arn,
       :execution_arn,
       :status,
@@ -880,6 +916,7 @@ module Aws::SFN
     #   <p>The Amazon Resource Name (ARN) of the state machine alias.</p>
     #   @return [String]
     class DescribeStateMachineAliasInput < Struct.new(
+      nil,
       :state_machine_alias_arn,
       keyword_init: true
     )
@@ -906,6 +943,7 @@ module Aws::SFN
     #            <p>For a newly created state machine, this is the same as the creation date.</p>
     #   @return [Time]
     class DescribeStateMachineAliasOutput < Struct.new(
+      nil,
       :state_machine_alias_arn,
       :name,
       :description,
@@ -924,6 +962,7 @@ module Aws::SFN
     #   <p>If your state machine definition is encrypted with a KMS key, callers must have <code>kms:Decrypt</code> permission to decrypt the definition. Alternatively, you can call the API with <code>includedData = METADATA_ONLY</code> to get a successful response without the encrypted definition.</p>
     #   @return [String]
     class DescribeStateMachineForExecutionInput < Struct.new(
+      nil,
       :execution_arn,
       :included_data,
       keyword_init: true
@@ -971,6 +1010,7 @@ module Aws::SFN
     #   <p>A map of <b>state name</b> to a list of variables referenced by that state. States that do not use variable references will not be shown in the response.</p>
     #   @return [Hash<String, Array<String>>]
     class DescribeStateMachineForExecutionOutput < Struct.new(
+      nil,
       :state_machine_arn,
       :name,
       :definition,
@@ -1001,6 +1041,7 @@ module Aws::SFN
     #            </note>
     #   @return [String]
     class DescribeStateMachineInput < Struct.new(
+      nil,
       :state_machine_arn,
       :included_data,
       keyword_init: true
@@ -1088,6 +1129,7 @@ module Aws::SFN
     #   <p>A map of <b>state name</b> to a list of variables referenced by that state. States that do not use variable references will not be shown in the response.</p>
     #   @return [Hash<String, Array<String>>]
     class DescribeStateMachineOutput < Struct.new(
+      nil,
       :state_machine_arn,
       :name,
       :status,
@@ -1126,6 +1168,7 @@ module Aws::SFN
     #   <p>Encryption type</p>
     #   @return [String]
     class EncryptionConfiguration < Struct.new(
+      nil,
       :kms_key_id,
       :kms_data_key_reuse_period_seconds,
       :type,
@@ -1148,6 +1191,7 @@ module Aws::SFN
     #   <p>The name of the state in which the evaluation error occurred.</p>
     #   @return [String]
     class EvaluationFailedEventDetails < Struct.new(
+      nil,
       :error,
       :cause,
       :location,
@@ -1165,6 +1209,7 @@ module Aws::SFN
     #   <p>A more detailed explanation of the cause of the failure.</p>
     #   @return [String]
     class ExecutionAbortedEventDetails < Struct.new(
+      nil,
       :error,
       :cause,
       keyword_init: true
@@ -1181,6 +1226,7 @@ module Aws::SFN
     # @!attribute message
     #   @return [String]
     class ExecutionAlreadyExists < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -1191,6 +1237,7 @@ module Aws::SFN
     # @!attribute message
     #   @return [String]
     class ExecutionDoesNotExist < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -1205,6 +1252,7 @@ module Aws::SFN
     #   <p>A more detailed explanation of the cause of the failure.</p>
     #   @return [String]
     class ExecutionFailedEventDetails < Struct.new(
+      nil,
       :error,
       :cause,
       keyword_init: true
@@ -1217,6 +1265,7 @@ module Aws::SFN
     # @!attribute message
     #   @return [String]
     class ExecutionLimitExceeded < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -1292,6 +1341,7 @@ module Aws::SFN
     #   <p>The date the execution was last redriven.</p>
     #   @return [Time]
     class ExecutionListItem < Struct.new(
+      nil,
       :execution_arn,
       :state_machine_arn,
       :name,
@@ -1318,6 +1368,7 @@ module Aws::SFN
     # @!attribute message
     #   @return [String]
     class ExecutionNotRedrivable < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -1329,6 +1380,7 @@ module Aws::SFN
     #   <p>The number of times you've redriven an execution. If you have not yet redriven an execution, the <code>redriveCount</code> is 0. This count is not updated for redrives that failed to start or are pending to be redriven.</p>
     #   @return [Integer]
     class ExecutionRedrivenEventDetails < Struct.new(
+      nil,
       :redrive_count,
       keyword_init: true
     )
@@ -1352,6 +1404,7 @@ module Aws::SFN
     #   <p>The Amazon Resource Name (ARN) that identifies a state machine version used for starting the state machine execution.</p>
     #   @return [String]
     class ExecutionStartedEventDetails < Struct.new(
+      nil,
       :input,
       :input_details,
       :role_arn,
@@ -1370,6 +1423,7 @@ module Aws::SFN
     #   <p>Contains details about the output of an execution history event.</p>
     #   @return [Types::HistoryEventExecutionDataDetails]
     class ExecutionSucceededEventDetails < Struct.new(
+      nil,
       :output,
       :output_details,
       keyword_init: true
@@ -1385,6 +1439,7 @@ module Aws::SFN
     #   <p>A more detailed explanation of the cause of the timeout.</p>
     #   @return [String]
     class ExecutionTimedOutEventDetails < Struct.new(
+      nil,
       :error,
       :cause,
       keyword_init: true
@@ -1401,6 +1456,7 @@ module Aws::SFN
     #         assigned to. This name is used when it is logged in the execution history.</p>
     #   @return [String]
     class GetActivityTaskInput < Struct.new(
+      nil,
       :activity_arn,
       :worker_name,
       keyword_init: true
@@ -1418,6 +1474,7 @@ module Aws::SFN
     #   <p>The string that contains the JSON input data for the task. Length constraints apply to the payload size, and are expressed as bytes in UTF-8 encoding.</p>
     #   @return [String]
     class GetActivityTaskOutput < Struct.new(
+      nil,
       :task_token,
       :input,
       keyword_init: true
@@ -1445,6 +1502,7 @@ module Aws::SFN
     #         The default is <code>true</code>.</p>
     #   @return [Boolean]
     class GetExecutionHistoryInput < Struct.new(
+      nil,
       :execution_arn,
       :max_results,
       :reverse_order,
@@ -1463,6 +1521,7 @@ module Aws::SFN
     #       Make the call again using the returned token to retrieve the next page. Keep all other arguments unchanged. Each pagination token expires after 24 hours. Using an expired pagination token will return an <i>HTTP 400 InvalidToken</i> error.</p>
     #   @return [String]
     class GetExecutionHistoryOutput < Struct.new(
+      nil,
       :events,
       :next_token,
       keyword_init: true
@@ -1598,6 +1657,7 @@ module Aws::SFN
     #   <p>Contains details about an evaluation failure that occurred while processing a state.</p>
     #   @return [Types::EvaluationFailedEventDetails]
     class HistoryEvent < Struct.new(
+      nil,
       :timestamp,
       :type,
       :id,
@@ -1656,6 +1716,7 @@ module Aws::SFN
     #         for API calls. In CloudWatch logs, the value will be true if the data is truncated due to size limits.</p>
     #   @return [Boolean]
     class HistoryEventExecutionDataDetails < Struct.new(
+      nil,
       :truncated,
       keyword_init: true
     )
@@ -1700,6 +1761,7 @@ module Aws::SFN
     #   <p>JSON string that contains the set of workflow variables after execution of the state. The set will include variables assigned in the state and variables set up as test state input.</p>
     #   @return [String]
     class InspectionData < Struct.new(
+      nil,
       :input,
       :after_arguments,
       :after_input_path,
@@ -1732,6 +1794,7 @@ module Aws::SFN
     #   <p>The request body for the HTTP request.</p>
     #   @return [String]
     class InspectionDataRequest < Struct.new(
+      nil,
       :protocol,
       :method,
       :url,
@@ -1759,6 +1822,7 @@ module Aws::SFN
     #   <p>The HTTP response returned.</p>
     #   @return [String]
     class InspectionDataResponse < Struct.new(
+      nil,
       :protocol,
       :status_code,
       :status_message,
@@ -1773,6 +1837,7 @@ module Aws::SFN
     # @!attribute message
     #   @return [String]
     class InvalidArn < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -1783,6 +1848,7 @@ module Aws::SFN
     # @!attribute message
     #   @return [String]
     class InvalidDefinition < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -1793,6 +1859,7 @@ module Aws::SFN
     # @!attribute message
     #   @return [String]
     class InvalidEncryptionConfiguration < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -1803,6 +1870,7 @@ module Aws::SFN
     # @!attribute message
     #   @return [String]
     class InvalidExecutionInput < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -1813,6 +1881,7 @@ module Aws::SFN
     # @!attribute message
     #   @return [String]
     class InvalidLoggingConfiguration < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -1823,6 +1892,7 @@ module Aws::SFN
     # @!attribute message
     #   @return [String]
     class InvalidName < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -1833,6 +1903,7 @@ module Aws::SFN
     # @!attribute message
     #   @return [String]
     class InvalidOutput < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -1843,6 +1914,7 @@ module Aws::SFN
     # @!attribute message
     #   @return [String]
     class InvalidToken < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -1854,6 +1926,7 @@ module Aws::SFN
     # @!attribute message
     #   @return [String]
     class InvalidTracingConfiguration < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -1864,6 +1937,7 @@ module Aws::SFN
     # @!attribute message
     #   @return [String]
     class KmsAccessDeniedException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -1877,6 +1951,7 @@ module Aws::SFN
     # @!attribute message
     #   @return [String]
     class KmsInvalidStateException < Struct.new(
+      nil,
       :kms_key_state,
       :message,
       keyword_init: true
@@ -1888,6 +1963,7 @@ module Aws::SFN
     # @!attribute message
     #   @return [String]
     class KmsThrottlingException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -1902,6 +1978,7 @@ module Aws::SFN
     #   <p>A more detailed explanation of the cause of the failure.</p>
     #   @return [String]
     class LambdaFunctionFailedEventDetails < Struct.new(
+      nil,
       :error,
       :cause,
       keyword_init: true
@@ -1918,6 +1995,7 @@ module Aws::SFN
     #   <p>A more detailed explanation of the cause of the failure.</p>
     #   @return [String]
     class LambdaFunctionScheduleFailedEventDetails < Struct.new(
+      nil,
       :error,
       :cause,
       keyword_init: true
@@ -1942,6 +2020,7 @@ module Aws::SFN
     #   <p>The credentials that Step Functions uses for the task.</p>
     #   @return [Types::TaskCredentials]
     class LambdaFunctionScheduledEventDetails < Struct.new(
+      nil,
       :resource,
       :input,
       :input_details,
@@ -1965,6 +2044,7 @@ module Aws::SFN
     #   <p>A more detailed explanation of the cause of the failure.</p>
     #   @return [String]
     class LambdaFunctionStartFailedEventDetails < Struct.new(
+      nil,
       :error,
       :cause,
       keyword_init: true
@@ -1981,6 +2061,7 @@ module Aws::SFN
     #   <p>Contains details about the output of an execution history event.</p>
     #   @return [Types::HistoryEventExecutionDataDetails]
     class LambdaFunctionSucceededEventDetails < Struct.new(
+      nil,
       :output,
       :output_details,
       keyword_init: true
@@ -1996,6 +2077,7 @@ module Aws::SFN
     #   <p>A more detailed explanation of the cause of the timeout.</p>
     #   @return [String]
     class LambdaFunctionTimedOutEventDetails < Struct.new(
+      nil,
       :error,
       :cause,
       keyword_init: true
@@ -2013,6 +2095,7 @@ module Aws::SFN
     #       Make the call again using the returned token to retrieve the next page. Keep all other arguments unchanged. Each pagination token expires after 24 hours. Using an expired pagination token will return an <i>HTTP 400 InvalidToken</i> error.</p>
     #   @return [String]
     class ListActivitiesInput < Struct.new(
+      nil,
       :max_results,
       :next_token,
       keyword_init: true
@@ -2028,6 +2111,7 @@ module Aws::SFN
     #       Make the call again using the returned token to retrieve the next page. Keep all other arguments unchanged. Each pagination token expires after 24 hours. Using an expired pagination token will return an <i>HTTP 400 InvalidToken</i> error.</p>
     #   @return [String]
     class ListActivitiesOutput < Struct.new(
+      nil,
       :activities,
       :next_token,
       keyword_init: true
@@ -2069,6 +2153,7 @@ module Aws::SFN
     #            <p>If you provide a state machine ARN in <code>redriveFilter</code>, the API returns a validation exception.</p>
     #   @return [String]
     class ListExecutionsInput < Struct.new(
+      nil,
       :state_machine_arn,
       :status_filter,
       :max_results,
@@ -2088,6 +2173,7 @@ module Aws::SFN
     #       Make the call again using the returned token to retrieve the next page. Keep all other arguments unchanged. Each pagination token expires after 24 hours. Using an expired pagination token will return an <i>HTTP 400 InvalidToken</i> error.</p>
     #   @return [String]
     class ListExecutionsOutput < Struct.new(
+      nil,
       :executions,
       :next_token,
       keyword_init: true
@@ -2108,6 +2194,7 @@ module Aws::SFN
     #       Make the call again using the returned token to retrieve the next page. Keep all other arguments unchanged. Each pagination token expires after 24 hours. Using an expired pagination token will return an <i>HTTP 400 InvalidToken</i> error.</p>
     #   @return [String]
     class ListMapRunsInput < Struct.new(
+      nil,
       :execution_arn,
       :max_results,
       :next_token,
@@ -2124,6 +2211,7 @@ module Aws::SFN
     #       Make the call again using the returned token to retrieve the next page. Keep all other arguments unchanged. Each pagination token expires after 24 hours. Using an expired pagination token will return an <i>HTTP 400 InvalidToken</i> error.</p>
     #   @return [String]
     class ListMapRunsOutput < Struct.new(
+      nil,
       :map_runs,
       :next_token,
       keyword_init: true
@@ -2145,6 +2233,7 @@ module Aws::SFN
     #            <p>This is only an upper limit. The actual number of results returned per call might be fewer than the specified maximum.</p>
     #   @return [Integer]
     class ListStateMachineAliasesInput < Struct.new(
+      nil,
       :state_machine_arn,
       :next_token,
       :max_results,
@@ -2161,6 +2250,7 @@ module Aws::SFN
     #       Make the call again using the returned token to retrieve the next page. Keep all other arguments unchanged. Each pagination token expires after 24 hours. Using an expired pagination token will return an <i>HTTP 400 InvalidToken</i> error.</p>
     #   @return [String]
     class ListStateMachineAliasesOutput < Struct.new(
+      nil,
       :state_machine_aliases,
       :next_token,
       keyword_init: true
@@ -2181,6 +2271,7 @@ module Aws::SFN
     #            <p>This is only an upper limit. The actual number of results returned per call might be fewer than the specified maximum.</p>
     #   @return [Integer]
     class ListStateMachineVersionsInput < Struct.new(
+      nil,
       :state_machine_arn,
       :next_token,
       :max_results,
@@ -2197,6 +2288,7 @@ module Aws::SFN
     #       Make the call again using the returned token to retrieve the next page. Keep all other arguments unchanged. Each pagination token expires after 24 hours. Using an expired pagination token will return an <i>HTTP 400 InvalidToken</i> error.</p>
     #   @return [String]
     class ListStateMachineVersionsOutput < Struct.new(
+      nil,
       :state_machine_versions,
       :next_token,
       keyword_init: true
@@ -2214,6 +2306,7 @@ module Aws::SFN
     #       Make the call again using the returned token to retrieve the next page. Keep all other arguments unchanged. Each pagination token expires after 24 hours. Using an expired pagination token will return an <i>HTTP 400 InvalidToken</i> error.</p>
     #   @return [String]
     class ListStateMachinesInput < Struct.new(
+      nil,
       :max_results,
       :next_token,
       keyword_init: true
@@ -2228,6 +2321,7 @@ module Aws::SFN
     #       Make the call again using the returned token to retrieve the next page. Keep all other arguments unchanged. Each pagination token expires after 24 hours. Using an expired pagination token will return an <i>HTTP 400 InvalidToken</i> error.</p>
     #   @return [String]
     class ListStateMachinesOutput < Struct.new(
+      nil,
       :state_machines,
       :next_token,
       keyword_init: true
@@ -2239,6 +2333,7 @@ module Aws::SFN
     #   <p>The Amazon Resource Name (ARN) for the Step Functions state machine or activity.</p>
     #   @return [String]
     class ListTagsForResourceInput < Struct.new(
+      nil,
       :resource_arn,
       keyword_init: true
     )
@@ -2249,6 +2344,7 @@ module Aws::SFN
     #   <p>An array of tags associated with the resource.</p>
     #   @return [Array<Types::Tag>]
     class ListTagsForResourceOutput < Struct.new(
+      nil,
       :tags,
       keyword_init: true
     )
@@ -2260,6 +2356,7 @@ module Aws::SFN
     #   <p>An object describing a CloudWatch log group. For more information, see <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-logs-loggroup.html">AWS::Logs::LogGroup</a> in the CloudFormation User Guide.</p>
     #   @return [Types::CloudWatchLogsLogGroup]
     class LogDestination < Struct.new(
+      nil,
       :cloud_watch_logs_log_group,
       keyword_init: true
     )
@@ -2280,6 +2377,7 @@ module Aws::SFN
     #         Limited to size 1. Required, if your log level is not set to <code>OFF</code>.</p>
     #   @return [Array<Types::LogDestination>]
     class LoggingConfiguration < Struct.new(
+      nil,
       :level,
       :include_execution_data,
       :destinations,
@@ -2301,6 +2399,7 @@ module Aws::SFN
     #   <p>The index of the array belonging to the Map state iteration.</p>
     #   @return [Integer]
     class MapIterationEventDetails < Struct.new(
+      nil,
       :name,
       :index,
       keyword_init: true
@@ -2345,6 +2444,7 @@ module Aws::SFN
     #   <p>The number of unsuccessful child workflow executions currently waiting to be redriven. The status of these child workflow executions could be <code>FAILED</code>, <code>ABORTED</code>, or <code>TIMED_OUT</code> in the original execution attempt or a previous redrive attempt.</p>
     #   @return [Integer]
     class MapRunExecutionCounts < Struct.new(
+      nil,
       :pending,
       :running,
       :succeeded,
@@ -2380,6 +2480,7 @@ module Aws::SFN
     #   <p>A more detailed explanation of the cause of the failure.</p>
     #   @return [String]
     class MapRunFailedEventDetails < Struct.new(
+      nil,
       :error,
       :cause,
       keyword_init: true
@@ -2419,6 +2520,7 @@ module Aws::SFN
     #   <p>The number of unsuccessful items in child workflow executions currently waiting to be redriven.</p>
     #   @return [Integer]
     class MapRunItemCounts < Struct.new(
+      nil,
       :pending,
       :running,
       :succeeded,
@@ -2463,6 +2565,7 @@ module Aws::SFN
     #   <p>The date on which the Map Run stopped.</p>
     #   @return [Time]
     class MapRunListItem < Struct.new(
+      nil,
       :execution_arn,
       :map_run_arn,
       :state_machine_arn,
@@ -2481,6 +2584,7 @@ module Aws::SFN
     #   <p>The number of times the Map Run has been redriven at this point in the execution's history including this event. The redrive count for a redriven Map Run is always greater than 0.</p>
     #   @return [Integer]
     class MapRunRedrivenEventDetails < Struct.new(
+      nil,
       :map_run_arn,
       :redrive_count,
       keyword_init: true
@@ -2493,6 +2597,7 @@ module Aws::SFN
     #   <p>The Amazon Resource Name (ARN) of a Map Run that was started.</p>
     #   @return [String]
     class MapRunStartedEventDetails < Struct.new(
+      nil,
       :map_run_arn,
       keyword_init: true
     )
@@ -2504,6 +2609,7 @@ module Aws::SFN
     #   <p>The size of the array for Map state iterations.</p>
     #   @return [Integer]
     class MapStateStartedEventDetails < Struct.new(
+      nil,
       :length,
       keyword_init: true
     )
@@ -2520,6 +2626,7 @@ module Aws::SFN
     # @!attribute message
     #   @return [String]
     class MissingRequiredParameter < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -2545,6 +2652,7 @@ module Aws::SFN
     #   <p>An optional description of the state machine version.</p>
     #   @return [String]
     class PublishStateMachineVersionInput < Struct.new(
+      nil,
       :state_machine_arn,
       :revision_id,
       :description,
@@ -2560,6 +2668,7 @@ module Aws::SFN
     #   <p>The Amazon Resource Name (ARN) (ARN) that identifies the state machine version.</p>
     #   @return [String]
     class PublishStateMachineVersionOutput < Struct.new(
+      nil,
       :creation_date,
       :state_machine_version_arn,
       keyword_init: true
@@ -2574,6 +2683,7 @@ module Aws::SFN
     #   <p>A unique, case-sensitive identifier that you provide to ensure the idempotency of the request. If you don’t specify a client token, the Amazon Web Services SDK automatically generates a client token and uses it for the request to ensure idempotency. The API will return idempotent responses for the last 10 client tokens used to successfully redrive the execution. These client tokens are valid for up to 15 minutes after they are first used.</p>
     #   @return [String]
     class RedriveExecutionInput < Struct.new(
+      nil,
       :execution_arn,
       :client_token,
       keyword_init: true
@@ -2585,6 +2695,7 @@ module Aws::SFN
     #   <p>The date the execution was last redriven.</p>
     #   @return [Time]
     class RedriveExecutionOutput < Struct.new(
+      nil,
       :redrive_date,
       keyword_init: true
     )
@@ -2597,6 +2708,7 @@ module Aws::SFN
     # @!attribute resource_name
     #   @return [String]
     class ResourceNotFound < Struct.new(
+      nil,
       :message,
       :resource_name,
       keyword_init: true
@@ -2616,6 +2728,7 @@ module Aws::SFN
     #         weights in the routing configuration must be equal to 100.</p>
     #   @return [Integer]
     class RoutingConfigurationListItem < Struct.new(
+      nil,
       :state_machine_version_arn,
       :weight,
       keyword_init: true
@@ -2640,6 +2753,7 @@ module Aws::SFN
     #   <p>A more detailed explanation of the cause of the failure.</p>
     #   @return [String]
     class SendTaskFailureInput < Struct.new(
+      nil,
       :task_token,
       :error,
       :cause,
@@ -2649,6 +2763,7 @@ module Aws::SFN
     end
 
     class SendTaskFailureOutput < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -2660,6 +2775,7 @@ module Aws::SFN
     #         workflow enters a task state. See <a>GetActivityTaskOutput$taskToken</a>.</p>
     #   @return [String]
     class SendTaskHeartbeatInput < Struct.new(
+      nil,
       :task_token,
       keyword_init: true
     )
@@ -2667,6 +2783,7 @@ module Aws::SFN
     end
 
     class SendTaskHeartbeatOutput < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -2681,6 +2798,7 @@ module Aws::SFN
     #   <p>The JSON output of the task. Length constraints apply to the payload size, and are expressed as bytes in UTF-8 encoding.</p>
     #   @return [String]
     class SendTaskSuccessInput < Struct.new(
+      nil,
       :task_token,
       :output,
       keyword_init: true
@@ -2689,6 +2807,7 @@ module Aws::SFN
     end
 
     class SendTaskSuccessOutput < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -2699,6 +2818,7 @@ module Aws::SFN
     # @!attribute message
     #   @return [String]
     class ServiceQuotaExceededException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -2793,6 +2913,7 @@ module Aws::SFN
     #            </note>
     #   @return [String]
     class StartExecutionInput < Struct.new(
+      nil,
       :state_machine_arn,
       :name,
       :input,
@@ -2809,6 +2930,7 @@ module Aws::SFN
     #   <p>The date the execution is started.</p>
     #   @return [Time]
     class StartExecutionOutput < Struct.new(
+      nil,
       :execution_arn,
       :start_date,
       keyword_init: true
@@ -2847,6 +2969,7 @@ module Aws::SFN
     #   <p>If your state machine definition is encrypted with a KMS key, callers must have <code>kms:Decrypt</code> permission to decrypt the definition. Alternatively, you can call the API with <code>includedData = METADATA_ONLY</code> to get a successful response without the encrypted definition.</p>
     #   @return [String]
     class StartSyncExecutionInput < Struct.new(
+      nil,
       :state_machine_arn,
       :name,
       :input,
@@ -2910,6 +3033,7 @@ module Aws::SFN
     #         use.</p>
     #   @return [Types::BillingDetails]
     class StartSyncExecutionOutput < Struct.new(
+      nil,
       :execution_arn,
       :state_machine_arn,
       :name,
@@ -2940,6 +3064,7 @@ module Aws::SFN
     #   <p>Contains details about the input for an execution history event.</p>
     #   @return [Types::HistoryEventExecutionDataDetails]
     class StateEnteredEventDetails < Struct.new(
+      nil,
       :name,
       :input,
       :input_details,
@@ -2993,6 +3118,7 @@ module Aws::SFN
     #   <p>Provides details about input or output in an execution history event.</p>
     #   @return [Types::AssignedVariablesDetails]
     class StateExitedEventDetails < Struct.new(
+      nil,
       :name,
       :output,
       :output_details,
@@ -3011,6 +3137,7 @@ module Aws::SFN
     #   <p>The creation date of a state machine alias.</p>
     #   @return [Time]
     class StateMachineAliasListItem < Struct.new(
+      nil,
       :state_machine_alias_arn,
       :creation_date,
       keyword_init: true
@@ -3023,6 +3150,7 @@ module Aws::SFN
     # @!attribute message
     #   @return [String]
     class StateMachineAlreadyExists < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -3033,6 +3161,7 @@ module Aws::SFN
     # @!attribute message
     #   @return [String]
     class StateMachineDeleting < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -3043,6 +3172,7 @@ module Aws::SFN
     # @!attribute message
     #   @return [String]
     class StateMachineDoesNotExist < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -3054,6 +3184,7 @@ module Aws::SFN
     # @!attribute message
     #   @return [String]
     class StateMachineLimitExceeded < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -3102,6 +3233,7 @@ module Aws::SFN
     #   <p>The date the state machine is created.</p>
     #   @return [Time]
     class StateMachineListItem < Struct.new(
+      nil,
       :state_machine_arn,
       :name,
       :type,
@@ -3115,6 +3247,7 @@ module Aws::SFN
     # @!attribute message
     #   @return [String]
     class StateMachineTypeNotSupported < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -3129,6 +3262,7 @@ module Aws::SFN
     #   <p>The creation date of a state machine version.</p>
     #   @return [Time]
     class StateMachineVersionListItem < Struct.new(
+      nil,
       :state_machine_version_arn,
       :creation_date,
       keyword_init: true
@@ -3146,6 +3280,7 @@ module Aws::SFN
     #   <p>A more detailed explanation of the cause of the failure.</p>
     #   @return [String]
     class StopExecutionInput < Struct.new(
+      nil,
       :execution_arn,
       :error,
       :cause,
@@ -3158,6 +3293,7 @@ module Aws::SFN
     #   <p>The date the execution is stopped.</p>
     #   @return [Time]
     class StopExecutionOutput < Struct.new(
+      nil,
       :stop_date,
       keyword_init: true
     )
@@ -3178,6 +3314,7 @@ module Aws::SFN
     #   <p>The value of a tag.</p>
     #   @return [String]
     class Tag < Struct.new(
+      nil,
       :key,
       :value,
       keyword_init: true
@@ -3193,6 +3330,7 @@ module Aws::SFN
     #            <p>Tags may only contain Unicode letters, digits, white space, or these symbols: <code>_ . : / = + - @</code>.</p>
     #   @return [Array<Types::Tag>]
     class TagResourceInput < Struct.new(
+      nil,
       :resource_arn,
       :tags,
       keyword_init: true
@@ -3201,6 +3339,7 @@ module Aws::SFN
     end
 
     class TagResourceOutput < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -3211,6 +3350,7 @@ module Aws::SFN
     #   <p>The ARN of an IAM role that Step Functions assumes for the task. The role can allow cross-account access to resources.</p>
     #   @return [String]
     class TaskCredentials < Struct.new(
+      nil,
       :role_arn,
       keyword_init: true
     )
@@ -3221,6 +3361,7 @@ module Aws::SFN
     # @!attribute message
     #   @return [String]
     class TaskDoesNotExist < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -3241,6 +3382,7 @@ module Aws::SFN
     #   <p>A more detailed explanation of the cause of the failure.</p>
     #   @return [String]
     class TaskFailedEventDetails < Struct.new(
+      nil,
       :resource_type,
       :resource,
       :error,
@@ -3274,6 +3416,7 @@ module Aws::SFN
     #   <p>The credentials that Step Functions uses for the task.</p>
     #   @return [Types::TaskCredentials]
     class TaskScheduledEventDetails < Struct.new(
+      nil,
       :resource_type,
       :resource,
       :region,
@@ -3306,6 +3449,7 @@ module Aws::SFN
     #   <p>A more detailed explanation of the cause of the failure.</p>
     #   @return [String]
     class TaskStartFailedEventDetails < Struct.new(
+      nil,
       :resource_type,
       :resource,
       :error,
@@ -3323,6 +3467,7 @@ module Aws::SFN
     #   <p>The action of the resource called by a task state.</p>
     #   @return [String]
     class TaskStartedEventDetails < Struct.new(
+      nil,
       :resource_type,
       :resource,
       keyword_init: true
@@ -3344,6 +3489,7 @@ module Aws::SFN
     #   <p>A more detailed explanation of the cause of the failure.</p>
     #   @return [String]
     class TaskSubmitFailedEventDetails < Struct.new(
+      nil,
       :resource_type,
       :resource,
       :error,
@@ -3367,6 +3513,7 @@ module Aws::SFN
     #   <p>Contains details about the output of an execution history event.</p>
     #   @return [Types::HistoryEventExecutionDataDetails]
     class TaskSubmittedEventDetails < Struct.new(
+      nil,
       :resource_type,
       :resource,
       :output,
@@ -3391,6 +3538,7 @@ module Aws::SFN
     #   <p>Contains details about the output of an execution history event.</p>
     #   @return [Types::HistoryEventExecutionDataDetails]
     class TaskSucceededEventDetails < Struct.new(
+      nil,
       :resource_type,
       :resource,
       :output,
@@ -3404,6 +3552,7 @@ module Aws::SFN
     # @!attribute message
     #   @return [String]
     class TaskTimedOut < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -3424,6 +3573,7 @@ module Aws::SFN
     #   <p>A more detailed explanation of the cause of the failure.</p>
     #   @return [String]
     class TaskTimedOutEventDetails < Struct.new(
+      nil,
       :resource_type,
       :resource,
       :error,
@@ -3469,6 +3619,7 @@ module Aws::SFN
     #   <p>JSON object literal that sets variables used in the state under test. Object keys are the variable names and values are the variable values.</p>
     #   @return [String]
     class TestStateInput < Struct.new(
+      nil,
       :definition,
       :role_arn,
       :input,
@@ -3499,6 +3650,7 @@ module Aws::SFN
     #   <p>The execution status of the state.</p>
     #   @return [String]
     class TestStateOutput < Struct.new(
+      nil,
       :output,
       :error,
       :cause,
@@ -3517,6 +3669,7 @@ module Aws::SFN
     # @!attribute resource_name
     #   @return [String]
     class TooManyTags < Struct.new(
+      nil,
       :message,
       :resource_name,
       keyword_init: true
@@ -3531,6 +3684,7 @@ module Aws::SFN
     #   <p>When set to <code>true</code>, X-Ray tracing is enabled.</p>
     #   @return [Boolean]
     class TracingConfiguration < Struct.new(
+      nil,
       :enabled,
       keyword_init: true
     )
@@ -3549,6 +3703,7 @@ module Aws::SFN
     #   <p>The list of tags to remove from the resource.</p>
     #   @return [Array<String>]
     class UntagResourceInput < Struct.new(
+      nil,
       :resource_arn,
       :tag_keys,
       keyword_init: true
@@ -3557,6 +3712,7 @@ module Aws::SFN
     end
 
     class UntagResourceOutput < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -3575,6 +3731,7 @@ module Aws::SFN
     #   <p>The maximum number of failed items before the Map Run fails.</p>
     #   @return [Integer]
     class UpdateMapRunInput < Struct.new(
+      nil,
       :map_run_arn,
       :max_concurrency,
       :tolerated_failure_percentage,
@@ -3585,6 +3742,7 @@ module Aws::SFN
     end
 
     class UpdateMapRunOutput < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -3601,6 +3759,7 @@ module Aws::SFN
     #            <p>An array of <code>RoutingConfig</code> objects that specifies up to two state machine versions that the alias starts executions for.</p>
     #   @return [Array<Types::RoutingConfigurationListItem>]
     class UpdateStateMachineAliasInput < Struct.new(
+      nil,
       :state_machine_alias_arn,
       :description,
       :routing_configuration,
@@ -3613,6 +3772,7 @@ module Aws::SFN
     #   <p>The date and time the state machine alias was updated.</p>
     #   @return [Time]
     class UpdateStateMachineAliasOutput < Struct.new(
+      nil,
       :update_date,
       keyword_init: true
     )
@@ -3648,6 +3808,7 @@ module Aws::SFN
     #   <p>Settings to configure server-side encryption. </p>
     #   @return [Types::EncryptionConfiguration]
     class UpdateStateMachineInput < Struct.new(
+      nil,
       :state_machine_arn,
       :definition,
       :role_arn,
@@ -3672,6 +3833,7 @@ module Aws::SFN
     #            <p>If the <code>publish</code> parameter isn't set to <code>true</code>, this field returns null.</p>
     #   @return [String]
     class UpdateStateMachineOutput < Struct.new(
+      nil,
       :update_date,
       :revision_id,
       :state_machine_version_arn,
@@ -3787,6 +3949,7 @@ module Aws::SFN
     #            <p>For errors specific to a field, the location could be in the format: <code>/States/<StateName>/<FieldName></code>, for example: <code>/States/FailState/ErrorPath</code>.</p>
     #   @return [String]
     class ValidateStateMachineDefinitionDiagnostic < Struct.new(
+      nil,
       :severity,
       :code,
       :message,
@@ -3811,6 +3974,7 @@ module Aws::SFN
     #            <p>If the number of diagnostics returned in the response exceeds <code>maxResults</code>, the value of the <code>truncated</code> field in the response will be set to <code>true</code>.</p>
     #   @return [Integer]
     class ValidateStateMachineDefinitionInput < Struct.new(
+      nil,
       :definition,
       :type,
       :severity,
@@ -3831,6 +3995,7 @@ module Aws::SFN
     #   <p>The result value will be <code>true</code> if the number of diagnostics found in the workflow definition exceeds <code>maxResults</code>. When all diagnostics results are returned, the value will be <code>false</code>.</p>
     #   @return [Boolean]
     class ValidateStateMachineDefinitionOutput < Struct.new(
+      nil,
       :result,
       :diagnostics,
       :truncated,
@@ -3846,6 +4011,7 @@ module Aws::SFN
     #   <p>The input does not satisfy the constraints specified by an Amazon Web Services service.</p>
     #   @return [String]
     class ValidationException < Struct.new(
+      nil,
       :message,
       :reason,
       keyword_init: true

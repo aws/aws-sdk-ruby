@@ -10,6 +10,7 @@ module Aws::WorkSpacesWeb
     # @!attribute message
     #   @return [String]
     class AccessDeniedException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -23,6 +24,7 @@ module Aws::WorkSpacesWeb
     #   <p>The ARN of the browser settings.</p>
     #   @return [String]
     class AssociateBrowserSettingsRequest < Struct.new(
+      nil,
       :portal_arn,
       :browser_settings_arn,
       keyword_init: true
@@ -37,6 +39,7 @@ module Aws::WorkSpacesWeb
     #   <p>The ARN of the browser settings.</p>
     #   @return [String]
     class AssociateBrowserSettingsResponse < Struct.new(
+      nil,
       :portal_arn,
       :browser_settings_arn,
       keyword_init: true
@@ -51,6 +54,7 @@ module Aws::WorkSpacesWeb
     #   <p>The ARN of the data protection settings.</p>
     #   @return [String]
     class AssociateDataProtectionSettingsRequest < Struct.new(
+      nil,
       :portal_arn,
       :data_protection_settings_arn,
       keyword_init: true
@@ -65,6 +69,7 @@ module Aws::WorkSpacesWeb
     #   <p>The ARN of the data protection settings resource.</p>
     #   @return [String]
     class AssociateDataProtectionSettingsResponse < Struct.new(
+      nil,
       :portal_arn,
       :data_protection_settings_arn,
       keyword_init: true
@@ -79,6 +84,7 @@ module Aws::WorkSpacesWeb
     #   <p>The ARN of the IP access settings.</p>
     #   @return [String]
     class AssociateIpAccessSettingsRequest < Struct.new(
+      nil,
       :portal_arn,
       :ip_access_settings_arn,
       keyword_init: true
@@ -93,6 +99,7 @@ module Aws::WorkSpacesWeb
     #   <p>The ARN of the IP access settings resource.</p>
     #   @return [String]
     class AssociateIpAccessSettingsResponse < Struct.new(
+      nil,
       :portal_arn,
       :ip_access_settings_arn,
       keyword_init: true
@@ -107,6 +114,7 @@ module Aws::WorkSpacesWeb
     #   <p>The ARN of the network settings.</p>
     #   @return [String]
     class AssociateNetworkSettingsRequest < Struct.new(
+      nil,
       :portal_arn,
       :network_settings_arn,
       keyword_init: true
@@ -121,6 +129,7 @@ module Aws::WorkSpacesWeb
     #   <p>The ARN of the network settings.</p>
     #   @return [String]
     class AssociateNetworkSettingsResponse < Struct.new(
+      nil,
       :portal_arn,
       :network_settings_arn,
       keyword_init: true
@@ -135,6 +144,7 @@ module Aws::WorkSpacesWeb
     #   <p>The ARN of the session logger to associate to the portal ARN.</p>
     #   @return [String]
     class AssociateSessionLoggerRequest < Struct.new(
+      nil,
       :portal_arn,
       :session_logger_arn,
       keyword_init: true
@@ -149,6 +159,7 @@ module Aws::WorkSpacesWeb
     #   <p>The ARN of the session logger.</p>
     #   @return [String]
     class AssociateSessionLoggerResponse < Struct.new(
+      nil,
       :portal_arn,
       :session_logger_arn,
       keyword_init: true
@@ -163,6 +174,7 @@ module Aws::WorkSpacesWeb
     #   <p>The ARN of the trust store.</p>
     #   @return [String]
     class AssociateTrustStoreRequest < Struct.new(
+      nil,
       :portal_arn,
       :trust_store_arn,
       keyword_init: true
@@ -177,6 +189,7 @@ module Aws::WorkSpacesWeb
     #   <p>The ARN of the trust store.</p>
     #   @return [String]
     class AssociateTrustStoreResponse < Struct.new(
+      nil,
       :portal_arn,
       :trust_store_arn,
       keyword_init: true
@@ -191,6 +204,7 @@ module Aws::WorkSpacesWeb
     #   <p>The ARN of the user access logging settings.</p>
     #   @return [String]
     class AssociateUserAccessLoggingSettingsRequest < Struct.new(
+      nil,
       :portal_arn,
       :user_access_logging_settings_arn,
       keyword_init: true
@@ -205,6 +219,7 @@ module Aws::WorkSpacesWeb
     #   <p>The ARN of the user access logging settings.</p>
     #   @return [String]
     class AssociateUserAccessLoggingSettingsResponse < Struct.new(
+      nil,
       :portal_arn,
       :user_access_logging_settings_arn,
       keyword_init: true
@@ -219,6 +234,7 @@ module Aws::WorkSpacesWeb
     #   <p>The ARN of the user settings.</p>
     #   @return [String]
     class AssociateUserSettingsRequest < Struct.new(
+      nil,
       :portal_arn,
       :user_settings_arn,
       keyword_init: true
@@ -233,6 +249,7 @@ module Aws::WorkSpacesWeb
     #   <p>The ARN of the user settings.</p>
     #   @return [String]
     class AssociateUserSettingsResponse < Struct.new(
+      nil,
       :portal_arn,
       :user_settings_arn,
       keyword_init: true
@@ -261,6 +278,7 @@ module Aws::WorkSpacesWeb
     #   <p>The additional encryption context of the browser settings.</p>
     #   @return [Hash<String, String>]
     class BrowserSettings < Struct.new(
+      nil,
       :browser_settings_arn,
       :associated_portal_arns,
       :browser_policy,
@@ -276,6 +294,7 @@ module Aws::WorkSpacesWeb
     #   <p>The ARN of the browser settings.</p>
     #   @return [String]
     class BrowserSettingsSummary < Struct.new(
+      nil,
       :browser_settings_arn,
       keyword_init: true
     )
@@ -302,6 +321,7 @@ module Aws::WorkSpacesWeb
     #   <p>The body of the certificate.</p>
     #   @return [String]
     class Certificate < Struct.new(
+      nil,
       :thumbprint,
       :subject,
       :issuer,
@@ -330,6 +350,7 @@ module Aws::WorkSpacesWeb
     #   <p>The certificate is not valid after this date.</p>
     #   @return [Time]
     class CertificateSummary < Struct.new(
+      nil,
       :thumbprint,
       :subject,
       :issuer,
@@ -350,6 +371,7 @@ module Aws::WorkSpacesWeb
     #   <p>Type of the resource affected.</p>
     #   @return [String]
     class ConflictException < Struct.new(
+      nil,
       :message,
       :resource_id,
       :resource_type,
@@ -369,6 +391,7 @@ module Aws::WorkSpacesWeb
     #   <p>The path of the cookie.</p>
     #   @return [String]
     class CookieSpecification < Struct.new(
+      nil,
       :domain,
       :name,
       :path,
@@ -389,6 +412,7 @@ module Aws::WorkSpacesWeb
     #            browser.</p>
     #   @return [Array<Types::CookieSpecification>]
     class CookieSynchronizationConfiguration < Struct.new(
+      nil,
       :allowlist,
       :blocklist,
       keyword_init: true
@@ -418,6 +442,7 @@ module Aws::WorkSpacesWeb
     #         </p>
     #   @return [String]
     class CreateBrowserSettingsRequest < Struct.new(
+      nil,
       :tags,
       :customer_managed_key,
       :additional_encryption_context,
@@ -432,6 +457,7 @@ module Aws::WorkSpacesWeb
     #   <p>The ARN of the browser settings.</p>
     #   @return [String]
     class CreateBrowserSettingsResponse < Struct.new(
+      nil,
       :browser_settings_arn,
       keyword_init: true
     )
@@ -465,6 +491,7 @@ module Aws::WorkSpacesWeb
     #            SDK.</p>
     #   @return [String]
     class CreateDataProtectionSettingsRequest < Struct.new(
+      nil,
       :display_name,
       :description,
       :tags,
@@ -481,6 +508,7 @@ module Aws::WorkSpacesWeb
     #   <p>The ARN of the data protection settings resource.</p>
     #   @return [String]
     class CreateDataProtectionSettingsResponse < Struct.new(
+      nil,
       :data_protection_settings_arn,
       keyword_init: true
     )
@@ -678,6 +706,7 @@ module Aws::WorkSpacesWeb
     #   <p>The tags to add to the identity provider resource. A tag is a key-value pair.</p>
     #   @return [Array<Types::Tag>]
     class CreateIdentityProviderRequest < Struct.new(
+      nil,
       :portal_arn,
       :identity_provider_name,
       :identity_provider_type,
@@ -693,6 +722,7 @@ module Aws::WorkSpacesWeb
     #   <p>The ARN of the identity provider.</p>
     #   @return [String]
     class CreateIdentityProviderResponse < Struct.new(
+      nil,
       :identity_provider_arn,
       keyword_init: true
     )
@@ -726,6 +756,7 @@ module Aws::WorkSpacesWeb
     #            SDK.</p>
     #   @return [String]
     class CreateIpAccessSettingsRequest < Struct.new(
+      nil,
       :display_name,
       :description,
       :tags,
@@ -742,6 +773,7 @@ module Aws::WorkSpacesWeb
     #   <p>The ARN of the IP access settings resource.</p>
     #   @return [String]
     class CreateIpAccessSettingsResponse < Struct.new(
+      nil,
       :ip_access_settings_arn,
       keyword_init: true
     )
@@ -771,6 +803,7 @@ module Aws::WorkSpacesWeb
     #            SDK.</p>
     #   @return [String]
     class CreateNetworkSettingsRequest < Struct.new(
+      nil,
       :vpc_id,
       :subnet_ids,
       :security_group_ids,
@@ -785,6 +818,7 @@ module Aws::WorkSpacesWeb
     #   <p>The ARN of the network settings.</p>
     #   @return [String]
     class CreateNetworkSettingsResponse < Struct.new(
+      nil,
       :network_settings_arn,
       keyword_init: true
     )
@@ -832,6 +866,7 @@ module Aws::WorkSpacesWeb
     #   <p>The maximum number of concurrent sessions for the portal.</p>
     #   @return [Integer]
     class CreatePortalRequest < Struct.new(
+      nil,
       :display_name,
       :tags,
       :customer_managed_key,
@@ -853,6 +888,7 @@ module Aws::WorkSpacesWeb
     #            sessions.</p>
     #   @return [String]
     class CreatePortalResponse < Struct.new(
+      nil,
       :portal_arn,
       :portal_endpoint,
       keyword_init: true
@@ -882,6 +918,7 @@ module Aws::WorkSpacesWeb
     #   <p>A unique, case-sensitive identifier that you provide to ensure the idempotency of the request. Idempotency ensures that an API request completes only once. With an idempotent request, if the original request completes successfully, subsequent retries with the same client token returns the result from the original successful request. If you do not specify a client token, one is automatically generated by the AWS SDK.</p>
     #   @return [String]
     class CreateSessionLoggerRequest < Struct.new(
+      nil,
       :event_filter,
       :log_configuration,
       :display_name,
@@ -898,6 +935,7 @@ module Aws::WorkSpacesWeb
     #   <p>The ARN of the session logger.</p>
     #   @return [String]
     class CreateSessionLoggerResponse < Struct.new(
+      nil,
       :session_logger_arn,
       keyword_init: true
     )
@@ -919,6 +957,7 @@ module Aws::WorkSpacesWeb
     #            SDK.</p>
     #   @return [String]
     class CreateTrustStoreRequest < Struct.new(
+      nil,
       :certificate_list,
       :tags,
       :client_token,
@@ -931,6 +970,7 @@ module Aws::WorkSpacesWeb
     #   <p>The ARN of the trust store.</p>
     #   @return [String]
     class CreateTrustStoreResponse < Struct.new(
+      nil,
       :trust_store_arn,
       keyword_init: true
     )
@@ -952,6 +992,7 @@ module Aws::WorkSpacesWeb
     #            SDK.</p>
     #   @return [String]
     class CreateUserAccessLoggingSettingsRequest < Struct.new(
+      nil,
       :kinesis_stream_arn,
       :tags,
       :client_token,
@@ -964,6 +1005,7 @@ module Aws::WorkSpacesWeb
     #   <p>The ARN of the user access logging settings.</p>
     #   @return [String]
     class CreateUserAccessLoggingSettingsResponse < Struct.new(
+      nil,
       :user_access_logging_settings_arn,
       keyword_init: true
     )
@@ -1027,6 +1069,7 @@ module Aws::WorkSpacesWeb
     #   <p>The configuration of the toolbar. This allows administrators to select the toolbar type and visual mode, set maximum display resolution for sessions, and choose which items are visible to end users during their sessions. If administrators do not modify these settings, end users retain control over their toolbar preferences.</p>
     #   @return [Types::ToolbarConfiguration]
     class CreateUserSettingsRequest < Struct.new(
+      nil,
       :copy_allowed,
       :paste_allowed,
       :download_allowed,
@@ -1050,6 +1093,7 @@ module Aws::WorkSpacesWeb
     #   <p>The ARN of the user settings.</p>
     #   @return [String]
     class CreateUserSettingsResponse < Struct.new(
+      nil,
       :user_settings_arn,
       keyword_init: true
     )
@@ -1070,6 +1114,7 @@ module Aws::WorkSpacesWeb
     #   <p>The keyword regex for the customer pattern. After there is a match to the pattern regex, the keyword regex is used to search within the proximity of the match. If there is a keyword match, then the match is confirmed. If no keyword regex is provided, the pattern regex match will automatically be confirmed. The format must follow JavaScript regex format. The pattern must be enclosed between slashes, and can have flags behind the second slash. For example, “/ab+c/gi”</p>
     #   @return [String]
     class CustomPattern < Struct.new(
+      nil,
       :pattern_name,
       :pattern_regex,
       :pattern_description,
@@ -1107,6 +1152,7 @@ module Aws::WorkSpacesWeb
     #   <p>The additional encryption context of the data protection settings.</p>
     #   @return [Hash<String, String>]
     class DataProtectionSettings < Struct.new(
+      nil,
       :data_protection_settings_arn,
       :inline_redaction_configuration,
       :associated_portal_arns,
@@ -1134,6 +1180,7 @@ module Aws::WorkSpacesWeb
     #   <p>The creation date timestamp of the data protection settings.</p>
     #   @return [Time]
     class DataProtectionSettingsSummary < Struct.new(
+      nil,
       :data_protection_settings_arn,
       :display_name,
       :description,
@@ -1147,6 +1194,7 @@ module Aws::WorkSpacesWeb
     #   <p>The ARN of the browser settings.</p>
     #   @return [String]
     class DeleteBrowserSettingsRequest < Struct.new(
+      nil,
       :browser_settings_arn,
       keyword_init: true
     )
@@ -1154,6 +1202,7 @@ module Aws::WorkSpacesWeb
     end
 
     class DeleteBrowserSettingsResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1163,6 +1212,7 @@ module Aws::WorkSpacesWeb
     #   <p>The ARN of the data protection settings.</p>
     #   @return [String]
     class DeleteDataProtectionSettingsRequest < Struct.new(
+      nil,
       :data_protection_settings_arn,
       keyword_init: true
     )
@@ -1170,6 +1220,7 @@ module Aws::WorkSpacesWeb
     end
 
     class DeleteDataProtectionSettingsResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1179,6 +1230,7 @@ module Aws::WorkSpacesWeb
     #   <p>The ARN of the identity provider.</p>
     #   @return [String]
     class DeleteIdentityProviderRequest < Struct.new(
+      nil,
       :identity_provider_arn,
       keyword_init: true
     )
@@ -1186,6 +1238,7 @@ module Aws::WorkSpacesWeb
     end
 
     class DeleteIdentityProviderResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1195,6 +1248,7 @@ module Aws::WorkSpacesWeb
     #   <p>The ARN of the IP access settings.</p>
     #   @return [String]
     class DeleteIpAccessSettingsRequest < Struct.new(
+      nil,
       :ip_access_settings_arn,
       keyword_init: true
     )
@@ -1202,6 +1256,7 @@ module Aws::WorkSpacesWeb
     end
 
     class DeleteIpAccessSettingsResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1211,6 +1266,7 @@ module Aws::WorkSpacesWeb
     #   <p>The ARN of the network settings.</p>
     #   @return [String]
     class DeleteNetworkSettingsRequest < Struct.new(
+      nil,
       :network_settings_arn,
       keyword_init: true
     )
@@ -1218,6 +1274,7 @@ module Aws::WorkSpacesWeb
     end
 
     class DeleteNetworkSettingsResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1227,6 +1284,7 @@ module Aws::WorkSpacesWeb
     #   <p>The ARN of the web portal.</p>
     #   @return [String]
     class DeletePortalRequest < Struct.new(
+      nil,
       :portal_arn,
       keyword_init: true
     )
@@ -1234,6 +1292,7 @@ module Aws::WorkSpacesWeb
     end
 
     class DeletePortalResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1243,6 +1302,7 @@ module Aws::WorkSpacesWeb
     #   <p>The ARN of the session logger.</p>
     #   @return [String]
     class DeleteSessionLoggerRequest < Struct.new(
+      nil,
       :session_logger_arn,
       keyword_init: true
     )
@@ -1250,6 +1310,7 @@ module Aws::WorkSpacesWeb
     end
 
     class DeleteSessionLoggerResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1259,6 +1320,7 @@ module Aws::WorkSpacesWeb
     #   <p>The ARN of the trust store.</p>
     #   @return [String]
     class DeleteTrustStoreRequest < Struct.new(
+      nil,
       :trust_store_arn,
       keyword_init: true
     )
@@ -1266,6 +1328,7 @@ module Aws::WorkSpacesWeb
     end
 
     class DeleteTrustStoreResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1275,6 +1338,7 @@ module Aws::WorkSpacesWeb
     #   <p>The ARN of the user access logging settings.</p>
     #   @return [String]
     class DeleteUserAccessLoggingSettingsRequest < Struct.new(
+      nil,
       :user_access_logging_settings_arn,
       keyword_init: true
     )
@@ -1282,6 +1346,7 @@ module Aws::WorkSpacesWeb
     end
 
     class DeleteUserAccessLoggingSettingsResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1291,6 +1356,7 @@ module Aws::WorkSpacesWeb
     #   <p>The ARN of the user settings.</p>
     #   @return [String]
     class DeleteUserSettingsRequest < Struct.new(
+      nil,
       :user_settings_arn,
       keyword_init: true
     )
@@ -1298,6 +1364,7 @@ module Aws::WorkSpacesWeb
     end
 
     class DeleteUserSettingsResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1307,6 +1374,7 @@ module Aws::WorkSpacesWeb
     #   <p>The ARN of the web portal.</p>
     #   @return [String]
     class DisassociateBrowserSettingsRequest < Struct.new(
+      nil,
       :portal_arn,
       keyword_init: true
     )
@@ -1314,6 +1382,7 @@ module Aws::WorkSpacesWeb
     end
 
     class DisassociateBrowserSettingsResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1323,6 +1392,7 @@ module Aws::WorkSpacesWeb
     #   <p>The ARN of the web portal.</p>
     #   @return [String]
     class DisassociateDataProtectionSettingsRequest < Struct.new(
+      nil,
       :portal_arn,
       keyword_init: true
     )
@@ -1330,6 +1400,7 @@ module Aws::WorkSpacesWeb
     end
 
     class DisassociateDataProtectionSettingsResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1339,6 +1410,7 @@ module Aws::WorkSpacesWeb
     #   <p>The ARN of the web portal.</p>
     #   @return [String]
     class DisassociateIpAccessSettingsRequest < Struct.new(
+      nil,
       :portal_arn,
       keyword_init: true
     )
@@ -1346,6 +1418,7 @@ module Aws::WorkSpacesWeb
     end
 
     class DisassociateIpAccessSettingsResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1355,6 +1428,7 @@ module Aws::WorkSpacesWeb
     #   <p>The ARN of the web portal.</p>
     #   @return [String]
     class DisassociateNetworkSettingsRequest < Struct.new(
+      nil,
       :portal_arn,
       keyword_init: true
     )
@@ -1362,6 +1436,7 @@ module Aws::WorkSpacesWeb
     end
 
     class DisassociateNetworkSettingsResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1371,6 +1446,7 @@ module Aws::WorkSpacesWeb
     #   <p>The ARN of the portal to disassociate from the a session logger.</p>
     #   @return [String]
     class DisassociateSessionLoggerRequest < Struct.new(
+      nil,
       :portal_arn,
       keyword_init: true
     )
@@ -1378,6 +1454,7 @@ module Aws::WorkSpacesWeb
     end
 
     class DisassociateSessionLoggerResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1387,6 +1464,7 @@ module Aws::WorkSpacesWeb
     #   <p>The ARN of the web portal.</p>
     #   @return [String]
     class DisassociateTrustStoreRequest < Struct.new(
+      nil,
       :portal_arn,
       keyword_init: true
     )
@@ -1394,6 +1472,7 @@ module Aws::WorkSpacesWeb
     end
 
     class DisassociateTrustStoreResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1403,6 +1482,7 @@ module Aws::WorkSpacesWeb
     #   <p>The ARN of the web portal.</p>
     #   @return [String]
     class DisassociateUserAccessLoggingSettingsRequest < Struct.new(
+      nil,
       :portal_arn,
       keyword_init: true
     )
@@ -1410,6 +1490,7 @@ module Aws::WorkSpacesWeb
     end
 
     class DisassociateUserAccessLoggingSettingsResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1419,6 +1500,7 @@ module Aws::WorkSpacesWeb
     #   <p>The ARN of the web portal.</p>
     #   @return [String]
     class DisassociateUserSettingsRequest < Struct.new(
+      nil,
       :portal_arn,
       keyword_init: true
     )
@@ -1426,6 +1508,7 @@ module Aws::WorkSpacesWeb
     end
 
     class DisassociateUserSettingsResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1458,6 +1541,7 @@ module Aws::WorkSpacesWeb
     #   <p>The ID of the session to expire.</p>
     #   @return [String]
     class ExpireSessionRequest < Struct.new(
+      nil,
       :portal_id,
       :session_id,
       keyword_init: true
@@ -1466,6 +1550,7 @@ module Aws::WorkSpacesWeb
     end
 
     class ExpireSessionResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1475,6 +1560,7 @@ module Aws::WorkSpacesWeb
     #   <p>The ARN of the browser settings.</p>
     #   @return [String]
     class GetBrowserSettingsRequest < Struct.new(
+      nil,
       :browser_settings_arn,
       keyword_init: true
     )
@@ -1485,6 +1571,7 @@ module Aws::WorkSpacesWeb
     #   <p>The browser settings.</p>
     #   @return [Types::BrowserSettings]
     class GetBrowserSettingsResponse < Struct.new(
+      nil,
       :browser_settings,
       keyword_init: true
     )
@@ -1495,6 +1582,7 @@ module Aws::WorkSpacesWeb
     #   <p>The ARN of the data protection settings.</p>
     #   @return [String]
     class GetDataProtectionSettingsRequest < Struct.new(
+      nil,
       :data_protection_settings_arn,
       keyword_init: true
     )
@@ -1505,6 +1593,7 @@ module Aws::WorkSpacesWeb
     #   <p>The data protection settings.</p>
     #   @return [Types::DataProtectionSettings]
     class GetDataProtectionSettingsResponse < Struct.new(
+      nil,
       :data_protection_settings,
       keyword_init: true
     )
@@ -1515,6 +1604,7 @@ module Aws::WorkSpacesWeb
     #   <p>The ARN of the identity provider.</p>
     #   @return [String]
     class GetIdentityProviderRequest < Struct.new(
+      nil,
       :identity_provider_arn,
       keyword_init: true
     )
@@ -1525,6 +1615,7 @@ module Aws::WorkSpacesWeb
     #   <p>The identity provider.</p>
     #   @return [Types::IdentityProvider]
     class GetIdentityProviderResponse < Struct.new(
+      nil,
       :identity_provider,
       keyword_init: true
     )
@@ -1535,6 +1626,7 @@ module Aws::WorkSpacesWeb
     #   <p>The ARN of the IP access settings.</p>
     #   @return [String]
     class GetIpAccessSettingsRequest < Struct.new(
+      nil,
       :ip_access_settings_arn,
       keyword_init: true
     )
@@ -1545,6 +1637,7 @@ module Aws::WorkSpacesWeb
     #   <p>The IP access settings.</p>
     #   @return [Types::IpAccessSettings]
     class GetIpAccessSettingsResponse < Struct.new(
+      nil,
       :ip_access_settings,
       keyword_init: true
     )
@@ -1555,6 +1648,7 @@ module Aws::WorkSpacesWeb
     #   <p>The ARN of the network settings.</p>
     #   @return [String]
     class GetNetworkSettingsRequest < Struct.new(
+      nil,
       :network_settings_arn,
       keyword_init: true
     )
@@ -1565,6 +1659,7 @@ module Aws::WorkSpacesWeb
     #   <p>The network settings.</p>
     #   @return [Types::NetworkSettings]
     class GetNetworkSettingsResponse < Struct.new(
+      nil,
       :network_settings,
       keyword_init: true
     )
@@ -1575,6 +1670,7 @@ module Aws::WorkSpacesWeb
     #   <p>The ARN of the web portal.</p>
     #   @return [String]
     class GetPortalRequest < Struct.new(
+      nil,
       :portal_arn,
       keyword_init: true
     )
@@ -1585,6 +1681,7 @@ module Aws::WorkSpacesWeb
     #   <p>The web portal.</p>
     #   @return [Types::Portal]
     class GetPortalResponse < Struct.new(
+      nil,
       :portal,
       keyword_init: true
     )
@@ -1595,6 +1692,7 @@ module Aws::WorkSpacesWeb
     #   <p>The ARN of the web portal.</p>
     #   @return [String]
     class GetPortalServiceProviderMetadataRequest < Struct.new(
+      nil,
       :portal_arn,
       keyword_init: true
     )
@@ -1608,6 +1706,7 @@ module Aws::WorkSpacesWeb
     #   <p>The service provider SAML metadata.</p>
     #   @return [String]
     class GetPortalServiceProviderMetadataResponse < Struct.new(
+      nil,
       :portal_arn,
       :service_provider_saml_metadata,
       keyword_init: true
@@ -1619,6 +1718,7 @@ module Aws::WorkSpacesWeb
     #   <p>The ARN of the session logger.</p>
     #   @return [String]
     class GetSessionLoggerRequest < Struct.new(
+      nil,
       :session_logger_arn,
       keyword_init: true
     )
@@ -1629,6 +1729,7 @@ module Aws::WorkSpacesWeb
     #   <p>The session logger details.</p>
     #   @return [Types::SessionLogger]
     class GetSessionLoggerResponse < Struct.new(
+      nil,
       :session_logger,
       keyword_init: true
     )
@@ -1642,6 +1743,7 @@ module Aws::WorkSpacesWeb
     #   <p>The ID of the session.</p>
     #   @return [String]
     class GetSessionRequest < Struct.new(
+      nil,
       :portal_id,
       :session_id,
       keyword_init: true
@@ -1653,6 +1755,7 @@ module Aws::WorkSpacesWeb
     #   <p>The sessions in a list.</p>
     #   @return [Types::Session]
     class GetSessionResponse < Struct.new(
+      nil,
       :session,
       keyword_init: true
     )
@@ -1666,6 +1769,7 @@ module Aws::WorkSpacesWeb
     #   <p>The thumbprint of the trust store certificate.</p>
     #   @return [String]
     class GetTrustStoreCertificateRequest < Struct.new(
+      nil,
       :trust_store_arn,
       :thumbprint,
       keyword_init: true
@@ -1680,6 +1784,7 @@ module Aws::WorkSpacesWeb
     #   <p>The certificate of the trust store certificate.</p>
     #   @return [Types::Certificate]
     class GetTrustStoreCertificateResponse < Struct.new(
+      nil,
       :trust_store_arn,
       :certificate,
       keyword_init: true
@@ -1691,6 +1796,7 @@ module Aws::WorkSpacesWeb
     #   <p>The ARN of the trust store.</p>
     #   @return [String]
     class GetTrustStoreRequest < Struct.new(
+      nil,
       :trust_store_arn,
       keyword_init: true
     )
@@ -1701,6 +1807,7 @@ module Aws::WorkSpacesWeb
     #   <p>The trust store.</p>
     #   @return [Types::TrustStore]
     class GetTrustStoreResponse < Struct.new(
+      nil,
       :trust_store,
       keyword_init: true
     )
@@ -1711,6 +1818,7 @@ module Aws::WorkSpacesWeb
     #   <p>The ARN of the user access logging settings.</p>
     #   @return [String]
     class GetUserAccessLoggingSettingsRequest < Struct.new(
+      nil,
       :user_access_logging_settings_arn,
       keyword_init: true
     )
@@ -1721,6 +1829,7 @@ module Aws::WorkSpacesWeb
     #   <p>The user access logging settings.</p>
     #   @return [Types::UserAccessLoggingSettings]
     class GetUserAccessLoggingSettingsResponse < Struct.new(
+      nil,
       :user_access_logging_settings,
       keyword_init: true
     )
@@ -1731,6 +1840,7 @@ module Aws::WorkSpacesWeb
     #   <p>The ARN of the user settings.</p>
     #   @return [String]
     class GetUserSettingsRequest < Struct.new(
+      nil,
       :user_settings_arn,
       keyword_init: true
     )
@@ -1741,6 +1851,7 @@ module Aws::WorkSpacesWeb
     #   <p>The user settings.</p>
     #   @return [Types::UserSettings]
     class GetUserSettingsResponse < Struct.new(
+      nil,
       :user_settings,
       keyword_init: true
     )
@@ -1928,6 +2039,7 @@ module Aws::WorkSpacesWeb
     #            </ul>
     #   @return [Hash<String, String>]
     class IdentityProvider < Struct.new(
+      nil,
       :identity_provider_arn,
       :identity_provider_name,
       :identity_provider_type,
@@ -1948,6 +2060,7 @@ module Aws::WorkSpacesWeb
     #   <p>The identity provider type.</p>
     #   @return [String]
     class IdentityProviderSummary < Struct.new(
+      nil,
       :identity_provider_arn,
       :identity_provider_name,
       :identity_provider_type,
@@ -1977,6 +2090,7 @@ module Aws::WorkSpacesWeb
     #            confidence level. Defaults to confidence level 2.</p>
     #   @return [Integer]
     class InlineRedactionConfiguration < Struct.new(
+      nil,
       :inline_redaction_patterns,
       :global_enforced_urls,
       :global_exempt_urls,
@@ -2012,6 +2126,7 @@ module Aws::WorkSpacesWeb
     #            This overrides the global confidence level.</p>
     #   @return [Integer]
     class InlineRedactionPattern < Struct.new(
+      nil,
       :built_in_pattern_id,
       :custom_pattern,
       :redaction_place_holder,
@@ -2030,6 +2145,7 @@ module Aws::WorkSpacesWeb
     #   <p>Advice to clients on when the call can be safely retried.</p>
     #   @return [Integer]
     class InternalServerException < Struct.new(
+      nil,
       :message,
       :retry_after_seconds,
       keyword_init: true
@@ -2070,6 +2186,7 @@ module Aws::WorkSpacesWeb
     #   <p>The additional encryption context of the IP access settings.</p>
     #   @return [Hash<String, String>]
     class IpAccessSettings < Struct.new(
+      nil,
       :ip_access_settings_arn,
       :associated_portal_arns,
       :ip_rules,
@@ -2097,6 +2214,7 @@ module Aws::WorkSpacesWeb
     #   <p>The creation date timestamp of the IP access settings.</p>
     #   @return [Time]
     class IpAccessSettingsSummary < Struct.new(
+      nil,
       :ip_access_settings_arn,
       :display_name,
       :description,
@@ -2114,6 +2232,7 @@ module Aws::WorkSpacesWeb
     #   <p>The description of the IP rule.</p>
     #   @return [String]
     class IpRule < Struct.new(
+      nil,
       :ip_range,
       :description,
       keyword_init: true
@@ -2129,6 +2248,7 @@ module Aws::WorkSpacesWeb
     #   <p>The maximum number of results to be included in the next page.</p>
     #   @return [Integer]
     class ListBrowserSettingsRequest < Struct.new(
+      nil,
       :next_token,
       :max_results,
       keyword_init: true
@@ -2144,6 +2264,7 @@ module Aws::WorkSpacesWeb
     #            operation.</p>
     #   @return [String]
     class ListBrowserSettingsResponse < Struct.new(
+      nil,
       :browser_settings,
       :next_token,
       keyword_init: true
@@ -2159,6 +2280,7 @@ module Aws::WorkSpacesWeb
     #   <p>The maximum number of results to be included in the next page.</p>
     #   @return [Integer]
     class ListDataProtectionSettingsRequest < Struct.new(
+      nil,
       :next_token,
       :max_results,
       keyword_init: true
@@ -2174,6 +2296,7 @@ module Aws::WorkSpacesWeb
     #            operation.</p>
     #   @return [String]
     class ListDataProtectionSettingsResponse < Struct.new(
+      nil,
       :data_protection_settings,
       :next_token,
       keyword_init: true
@@ -2192,6 +2315,7 @@ module Aws::WorkSpacesWeb
     #   <p>The ARN of the web portal.</p>
     #   @return [String]
     class ListIdentityProvidersRequest < Struct.new(
+      nil,
       :next_token,
       :max_results,
       :portal_arn,
@@ -2208,6 +2332,7 @@ module Aws::WorkSpacesWeb
     #   <p>The identity providers.</p>
     #   @return [Array<Types::IdentityProviderSummary>]
     class ListIdentityProvidersResponse < Struct.new(
+      nil,
       :next_token,
       :identity_providers,
       keyword_init: true
@@ -2223,6 +2348,7 @@ module Aws::WorkSpacesWeb
     #   <p>The maximum number of results to be included in the next page.</p>
     #   @return [Integer]
     class ListIpAccessSettingsRequest < Struct.new(
+      nil,
       :next_token,
       :max_results,
       keyword_init: true
@@ -2238,6 +2364,7 @@ module Aws::WorkSpacesWeb
     #            operation.</p>
     #   @return [String]
     class ListIpAccessSettingsResponse < Struct.new(
+      nil,
       :ip_access_settings,
       :next_token,
       keyword_init: true
@@ -2253,6 +2380,7 @@ module Aws::WorkSpacesWeb
     #   <p>The maximum number of results to be included in the next page.</p>
     #   @return [Integer]
     class ListNetworkSettingsRequest < Struct.new(
+      nil,
       :next_token,
       :max_results,
       keyword_init: true
@@ -2268,6 +2396,7 @@ module Aws::WorkSpacesWeb
     #            operation.</p>
     #   @return [String]
     class ListNetworkSettingsResponse < Struct.new(
+      nil,
       :network_settings,
       :next_token,
       keyword_init: true
@@ -2283,6 +2412,7 @@ module Aws::WorkSpacesWeb
     #   <p>The maximum number of results to be included in the next page.</p>
     #   @return [Integer]
     class ListPortalsRequest < Struct.new(
+      nil,
       :next_token,
       :max_results,
       keyword_init: true
@@ -2298,6 +2428,7 @@ module Aws::WorkSpacesWeb
     #         </p>
     #   @return [String]
     class ListPortalsResponse < Struct.new(
+      nil,
       :portals,
       :next_token,
       keyword_init: true
@@ -2312,6 +2443,7 @@ module Aws::WorkSpacesWeb
     #   <p>The maximum number of results to be included in the next page.</p>
     #   @return [Integer]
     class ListSessionLoggersRequest < Struct.new(
+      nil,
       :next_token,
       :max_results,
       keyword_init: true
@@ -2326,6 +2458,7 @@ module Aws::WorkSpacesWeb
     #   <p>The pagination token used to retrieve the next page of results for this operation.</p>
     #   @return [String]
     class ListSessionLoggersResponse < Struct.new(
+      nil,
       :session_loggers,
       :next_token,
       keyword_init: true
@@ -2356,6 +2489,7 @@ module Aws::WorkSpacesWeb
     #            operation.</p>
     #   @return [String]
     class ListSessionsRequest < Struct.new(
+      nil,
       :portal_id,
       :username,
       :session_id,
@@ -2376,6 +2510,7 @@ module Aws::WorkSpacesWeb
     #            operation.</p>
     #   @return [String]
     class ListSessionsResponse < Struct.new(
+      nil,
       :sessions,
       :next_token,
       keyword_init: true
@@ -2387,6 +2522,7 @@ module Aws::WorkSpacesWeb
     #   <p>The ARN of the resource.</p>
     #   @return [String]
     class ListTagsForResourceRequest < Struct.new(
+      nil,
       :resource_arn,
       keyword_init: true
     )
@@ -2397,6 +2533,7 @@ module Aws::WorkSpacesWeb
     #   <p>The tags of the resource.</p>
     #   @return [Array<Types::Tag>]
     class ListTagsForResourceResponse < Struct.new(
+      nil,
       :tags,
       keyword_init: true
     )
@@ -2414,6 +2551,7 @@ module Aws::WorkSpacesWeb
     #   <p>The maximum number of results to be included in the next page.</p>
     #   @return [Integer]
     class ListTrustStoreCertificatesRequest < Struct.new(
+      nil,
       :trust_store_arn,
       :next_token,
       :max_results,
@@ -2433,6 +2571,7 @@ module Aws::WorkSpacesWeb
     #            operation.&gt;</p>
     #   @return [String]
     class ListTrustStoreCertificatesResponse < Struct.new(
+      nil,
       :certificate_list,
       :trust_store_arn,
       :next_token,
@@ -2449,6 +2588,7 @@ module Aws::WorkSpacesWeb
     #   <p>The maximum number of results to be included in the next page.</p>
     #   @return [Integer]
     class ListTrustStoresRequest < Struct.new(
+      nil,
       :next_token,
       :max_results,
       keyword_init: true
@@ -2464,6 +2604,7 @@ module Aws::WorkSpacesWeb
     #            operation.</p>
     #   @return [String]
     class ListTrustStoresResponse < Struct.new(
+      nil,
       :trust_stores,
       :next_token,
       keyword_init: true
@@ -2479,6 +2620,7 @@ module Aws::WorkSpacesWeb
     #   <p>The maximum number of results to be included in the next page.</p>
     #   @return [Integer]
     class ListUserAccessLoggingSettingsRequest < Struct.new(
+      nil,
       :next_token,
       :max_results,
       keyword_init: true
@@ -2494,6 +2636,7 @@ module Aws::WorkSpacesWeb
     #            operation.</p>
     #   @return [String]
     class ListUserAccessLoggingSettingsResponse < Struct.new(
+      nil,
       :user_access_logging_settings,
       :next_token,
       keyword_init: true
@@ -2509,6 +2652,7 @@ module Aws::WorkSpacesWeb
     #   <p>The maximum number of results to be included in the next page.</p>
     #   @return [Integer]
     class ListUserSettingsRequest < Struct.new(
+      nil,
       :next_token,
       :max_results,
       keyword_init: true
@@ -2524,6 +2668,7 @@ module Aws::WorkSpacesWeb
     #         </p>
     #   @return [String]
     class ListUserSettingsResponse < Struct.new(
+      nil,
       :user_settings,
       :next_token,
       keyword_init: true
@@ -2536,6 +2681,7 @@ module Aws::WorkSpacesWeb
     #   <p>The configuration for delivering the logs to S3.</p>
     #   @return [Types::S3LogConfiguration]
     class LogConfiguration < Struct.new(
+      nil,
       :s3,
       keyword_init: true
     )
@@ -2563,6 +2709,7 @@ module Aws::WorkSpacesWeb
     #         </p>
     #   @return [Array<String>]
     class NetworkSettings < Struct.new(
+      nil,
       :network_settings_arn,
       :associated_portal_arns,
       :vpc_id,
@@ -2581,6 +2728,7 @@ module Aws::WorkSpacesWeb
     #   <p>The VPC ID of the network settings.</p>
     #   @return [String]
     class NetworkSettingsSummary < Struct.new(
+      nil,
       :network_settings_arn,
       :vpc_id,
       keyword_init: true
@@ -2665,6 +2813,7 @@ module Aws::WorkSpacesWeb
     #   <p>The maximum number of concurrent sessions for the portal.</p>
     #   @return [Integer]
     class Portal < Struct.new(
+      nil,
       :portal_arn,
       :renderer_type,
       :browser_type,
@@ -2759,6 +2908,7 @@ module Aws::WorkSpacesWeb
     #   <p>The maximum number of concurrent sessions for the portal.</p>
     #   @return [Integer]
     class PortalSummary < Struct.new(
+      nil,
       :portal_arn,
       :renderer_type,
       :browser_type,
@@ -2790,6 +2940,7 @@ module Aws::WorkSpacesWeb
     #   <p>The redaction placeholder text that will replace the redacted text in session for the custom text redaction placeholder type.</p>
     #   @return [String]
     class RedactionPlaceHolder < Struct.new(
+      nil,
       :redaction_place_holder_type,
       :redaction_place_holder_text,
       keyword_init: true
@@ -2807,6 +2958,7 @@ module Aws::WorkSpacesWeb
     #   <p>Hypothetical type of the resource affected.</p>
     #   @return [String]
     class ResourceNotFoundException < Struct.new(
+      nil,
       :message,
       :resource_id,
       :resource_type,
@@ -2832,6 +2984,7 @@ module Aws::WorkSpacesWeb
     #   <p>The folder structure that defines the organizational structure for log files in S3.</p>
     #   @return [String]
     class S3LogConfiguration < Struct.new(
+      nil,
       :bucket,
       :key_prefix,
       :bucket_owner,
@@ -2858,6 +3011,7 @@ module Aws::WorkSpacesWeb
     #   <p>The originating quota.</p>
     #   @return [String]
     class ServiceQuotaExceededException < Struct.new(
+      nil,
       :message,
       :resource_id,
       :resource_type,
@@ -2891,6 +3045,7 @@ module Aws::WorkSpacesWeb
     #   <p>The end time of the session.</p>
     #   @return [Time]
     class Session < Struct.new(
+      nil,
       :portal_arn,
       :session_id,
       :username,
@@ -2929,6 +3084,7 @@ module Aws::WorkSpacesWeb
     #   <p>The date the session logger resource was created.</p>
     #   @return [Time]
     class SessionLogger < Struct.new(
+      nil,
       :session_logger_arn,
       :event_filter,
       :log_configuration,
@@ -2956,6 +3112,7 @@ module Aws::WorkSpacesWeb
     #   <p>The date the session logger resource was created.</p>
     #   @return [Time]
     class SessionLoggerSummary < Struct.new(
+      nil,
       :session_logger_arn,
       :log_configuration,
       :display_name,
@@ -2985,6 +3142,7 @@ module Aws::WorkSpacesWeb
     #   <p>The end time of the session.</p>
     #   @return [Time]
     class SessionSummary < Struct.new(
+      nil,
       :portal_arn,
       :session_id,
       :username,
@@ -3005,6 +3163,7 @@ module Aws::WorkSpacesWeb
     #   <p>The value of the tag</p>
     #   @return [String]
     class Tag < Struct.new(
+      nil,
       :key,
       :value,
       keyword_init: true
@@ -3027,6 +3186,7 @@ module Aws::WorkSpacesWeb
     #            SDK.</p>
     #   @return [String]
     class TagResourceRequest < Struct.new(
+      nil,
       :resource_arn,
       :tags,
       :client_token,
@@ -3036,6 +3196,7 @@ module Aws::WorkSpacesWeb
     end
 
     class TagResourceResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -3054,6 +3215,7 @@ module Aws::WorkSpacesWeb
     #   <p>Advice to clients on when the call can be safely retried.</p>
     #   @return [Integer]
     class ThrottlingException < Struct.new(
+      nil,
       :message,
       :service_code,
       :quota_code,
@@ -3075,6 +3237,7 @@ module Aws::WorkSpacesWeb
     #   <p>Name of the resource affected.</p>
     #   @return [String]
     class TooManyTagsException < Struct.new(
+      nil,
       :message,
       :resource_name,
       keyword_init: true
@@ -3096,6 +3259,7 @@ module Aws::WorkSpacesWeb
     #   <p>The maximum display resolution that is allowed for the session.</p>
     #   @return [String]
     class ToolbarConfiguration < Struct.new(
+      nil,
       :toolbar_type,
       :visual_mode,
       :hidden_toolbar_items,
@@ -3117,6 +3281,7 @@ module Aws::WorkSpacesWeb
     #   <p>The ARN of the trust store.</p>
     #   @return [String]
     class TrustStore < Struct.new(
+      nil,
       :associated_portal_arns,
       :trust_store_arn,
       keyword_init: true
@@ -3129,6 +3294,7 @@ module Aws::WorkSpacesWeb
     #   <p>The ARN of the trust store.</p>
     #   @return [String]
     class TrustStoreSummary < Struct.new(
+      nil,
       :trust_store_arn,
       keyword_init: true
     )
@@ -3142,6 +3308,7 @@ module Aws::WorkSpacesWeb
     #   <p>The list of tag keys to remove from the resource.</p>
     #   @return [Array<String>]
     class UntagResourceRequest < Struct.new(
+      nil,
       :resource_arn,
       :tag_keys,
       keyword_init: true
@@ -3150,6 +3317,7 @@ module Aws::WorkSpacesWeb
     end
 
     class UntagResourceResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -3171,6 +3339,7 @@ module Aws::WorkSpacesWeb
     #            SDK.</p>
     #   @return [String]
     class UpdateBrowserSettingsRequest < Struct.new(
+      nil,
       :browser_settings_arn,
       :browser_policy,
       :client_token,
@@ -3183,6 +3352,7 @@ module Aws::WorkSpacesWeb
     #   <p>The browser settings.</p>
     #   @return [Types::BrowserSettings]
     class UpdateBrowserSettingsResponse < Struct.new(
+      nil,
       :browser_settings,
       keyword_init: true
     )
@@ -3210,6 +3380,7 @@ module Aws::WorkSpacesWeb
     #            SDK.</p>
     #   @return [String]
     class UpdateDataProtectionSettingsRequest < Struct.new(
+      nil,
       :data_protection_settings_arn,
       :inline_redaction_configuration,
       :display_name,
@@ -3224,6 +3395,7 @@ module Aws::WorkSpacesWeb
     #   <p>The data protection settings.</p>
     #   @return [Types::DataProtectionSettings]
     class UpdateDataProtectionSettingsResponse < Struct.new(
+      nil,
       :data_protection_settings,
       keyword_init: true
     )
@@ -3418,6 +3590,7 @@ module Aws::WorkSpacesWeb
     #            SDK.</p>
     #   @return [String]
     class UpdateIdentityProviderRequest < Struct.new(
+      nil,
       :identity_provider_arn,
       :identity_provider_name,
       :identity_provider_type,
@@ -3432,6 +3605,7 @@ module Aws::WorkSpacesWeb
     #   <p>The identity provider.</p>
     #   @return [Types::IdentityProvider]
     class UpdateIdentityProviderResponse < Struct.new(
+      nil,
       :identity_provider,
       keyword_init: true
     )
@@ -3459,6 +3633,7 @@ module Aws::WorkSpacesWeb
     #            SDK.</p>
     #   @return [String]
     class UpdateIpAccessSettingsRequest < Struct.new(
+      nil,
       :ip_access_settings_arn,
       :display_name,
       :description,
@@ -3473,6 +3648,7 @@ module Aws::WorkSpacesWeb
     #   <p>The IP access settings.</p>
     #   @return [Types::IpAccessSettings]
     class UpdateIpAccessSettingsResponse < Struct.new(
+      nil,
       :ip_access_settings,
       keyword_init: true
     )
@@ -3502,6 +3678,7 @@ module Aws::WorkSpacesWeb
     #            SDK.</p>
     #   @return [String]
     class UpdateNetworkSettingsRequest < Struct.new(
+      nil,
       :network_settings_arn,
       :vpc_id,
       :subnet_ids,
@@ -3516,6 +3693,7 @@ module Aws::WorkSpacesWeb
     #   <p>The network settings.</p>
     #   @return [Types::NetworkSettings]
     class UpdateNetworkSettingsResponse < Struct.new(
+      nil,
       :network_settings,
       keyword_init: true
     )
@@ -3549,6 +3727,7 @@ module Aws::WorkSpacesWeb
     #   <p>The maximum number of concurrent sessions for the portal.</p>
     #   @return [Integer]
     class UpdatePortalRequest < Struct.new(
+      nil,
       :portal_arn,
       :display_name,
       :authentication_type,
@@ -3563,6 +3742,7 @@ module Aws::WorkSpacesWeb
     #   <p>The web portal.</p>
     #   @return [Types::Portal]
     class UpdatePortalResponse < Struct.new(
+      nil,
       :portal,
       keyword_init: true
     )
@@ -3582,6 +3762,7 @@ module Aws::WorkSpacesWeb
     #   <p>The updated display name.</p>
     #   @return [String]
     class UpdateSessionLoggerRequest < Struct.new(
+      nil,
       :session_logger_arn,
       :event_filter,
       :log_configuration,
@@ -3595,6 +3776,7 @@ module Aws::WorkSpacesWeb
     #   <p>The updated details of the session logger.</p>
     #   @return [Types::SessionLogger]
     class UpdateSessionLoggerResponse < Struct.new(
+      nil,
       :session_logger,
       keyword_init: true
     )
@@ -3619,6 +3801,7 @@ module Aws::WorkSpacesWeb
     #            SDK.</p>
     #   @return [String]
     class UpdateTrustStoreRequest < Struct.new(
+      nil,
       :trust_store_arn,
       :certificates_to_add,
       :certificates_to_delete,
@@ -3632,6 +3815,7 @@ module Aws::WorkSpacesWeb
     #   <p>The ARN of the trust store.</p>
     #   @return [String]
     class UpdateTrustStoreResponse < Struct.new(
+      nil,
       :trust_store_arn,
       keyword_init: true
     )
@@ -3653,6 +3837,7 @@ module Aws::WorkSpacesWeb
     #            SDK.</p>
     #   @return [String]
     class UpdateUserAccessLoggingSettingsRequest < Struct.new(
+      nil,
       :user_access_logging_settings_arn,
       :kinesis_stream_arn,
       :client_token,
@@ -3665,6 +3850,7 @@ module Aws::WorkSpacesWeb
     #   <p>The user access logging settings.</p>
     #   @return [Types::UserAccessLoggingSettings]
     class UpdateUserAccessLoggingSettingsResponse < Struct.new(
+      nil,
       :user_access_logging_settings,
       keyword_init: true
     )
@@ -3722,6 +3908,7 @@ module Aws::WorkSpacesWeb
     #   <p>The configuration of the toolbar. This allows administrators to select the toolbar type and visual mode, set maximum display resolution for sessions, and choose which items are visible to end users during their sessions. If administrators do not modify these settings, end users retain control over their toolbar preferences.</p>
     #   @return [Types::ToolbarConfiguration]
     class UpdateUserSettingsRequest < Struct.new(
+      nil,
       :user_settings_arn,
       :copy_allowed,
       :paste_allowed,
@@ -3743,6 +3930,7 @@ module Aws::WorkSpacesWeb
     #   <p>The user settings.</p>
     #   @return [Types::UserSettings]
     class UpdateUserSettingsResponse < Struct.new(
+      nil,
       :user_settings,
       keyword_init: true
     )
@@ -3761,6 +3949,7 @@ module Aws::WorkSpacesWeb
     #   <p>The ARN of the Kinesis stream.</p>
     #   @return [String]
     class UserAccessLoggingSettings < Struct.new(
+      nil,
       :user_access_logging_settings_arn,
       :associated_portal_arns,
       :kinesis_stream_arn,
@@ -3777,6 +3966,7 @@ module Aws::WorkSpacesWeb
     #   <p>The ARN of the Kinesis stream.</p>
     #   @return [String]
     class UserAccessLoggingSettingsSummary < Struct.new(
+      nil,
       :user_access_logging_settings_arn,
       :kinesis_stream_arn,
       keyword_init: true
@@ -3839,6 +4029,7 @@ module Aws::WorkSpacesWeb
     #   <p>The configuration of the toolbar. This allows administrators to select the toolbar type and visual mode, set maximum display resolution for sessions, and choose which items are visible to end users during their sessions. If administrators do not modify these settings, end users retain control over their toolbar preferences.</p>
     #   @return [Types::ToolbarConfiguration]
     class UserSettings < Struct.new(
+      nil,
       :user_settings_arn,
       :associated_portal_arns,
       :copy_allowed,
@@ -3907,6 +4098,7 @@ module Aws::WorkSpacesWeb
     #   <p>The configuration of the toolbar. This allows administrators to select the toolbar type and visual mode, set maximum display resolution for sessions, and choose which items are visible to end users during their sessions. If administrators do not modify these settings, end users retain control over their toolbar preferences.</p>
     #   @return [Types::ToolbarConfiguration]
     class UserSettingsSummary < Struct.new(
+      nil,
       :user_settings_arn,
       :copy_allowed,
       :paste_allowed,
@@ -3939,6 +4131,7 @@ module Aws::WorkSpacesWeb
     #   <p>The field that caused the error.</p>
     #   @return [Array<Types::ValidationExceptionField>]
     class ValidationException < Struct.new(
+      nil,
       :message,
       :reason,
       :field_list,
@@ -3955,6 +4148,7 @@ module Aws::WorkSpacesWeb
     #   <p>The message describing why the field failed validation.</p>
     #   @return [String]
     class ValidationExceptionField < Struct.new(
+      nil,
       :name,
       :message,
       keyword_init: true

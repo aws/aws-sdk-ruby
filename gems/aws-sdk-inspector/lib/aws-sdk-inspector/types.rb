@@ -17,6 +17,7 @@ module Aws::Inspector
     #   <p>You can immediately retry your request.</p>
     #   @return [Boolean]
     class AccessDeniedException < Struct.new(
+      nil,
       :message,
       :error_code,
       :can_retry,
@@ -32,6 +33,7 @@ module Aws::Inspector
     #   <p>The array of attributes that you want to assign to specified findings.</p>
     #   @return [Array<Types::Attribute>]
     class AddAttributesToFindingsRequest < Struct.new(
+      nil,
       :finding_arns,
       :attributes,
       keyword_init: true
@@ -44,6 +46,7 @@ module Aws::Inspector
     #            item.</p>
     #   @return [Hash<String, Types::FailedItemDetails>]
     class AddAttributesToFindingsResponse < Struct.new(
+      nil,
       :failed_items,
       keyword_init: true
     )
@@ -61,6 +64,7 @@ module Aws::Inspector
     #   <p>The ARN of the assessment run that has already been started.</p>
     #   @return [String]
     class AgentAlreadyRunningAssessment < Struct.new(
+      nil,
       :agent_id,
       :assessment_run_arn,
       keyword_init: true
@@ -77,6 +81,7 @@ module Aws::Inspector
     #   <p>The detailed health state of the agent. Values can be set to <b>IDLE</b>, <b>RUNNING</b>, <b>SHUTDOWN</b>, <b>UNHEALTHY</b>, <b>THROTTLED</b>, and <b>UNKNOWN</b>. </p>
     #   @return [Array<String>]
     class AgentFilter < Struct.new(
+      nil,
       :agent_healths,
       :agent_health_codes,
       keyword_init: true
@@ -114,6 +119,7 @@ module Aws::Inspector
     #            installed.</p>
     #   @return [String]
     class AgentPreview < Struct.new(
+      nil,
       :hostname,
       :agent_id,
       :auto_scaling_group,
@@ -142,6 +148,7 @@ module Aws::Inspector
     #   <p>You can immediately retry your request.</p>
     #   @return [Boolean]
     class AgentsAlreadyRunningAssessmentException < Struct.new(
+      nil,
       :message,
       :agents,
       :agents_truncated,
@@ -205,6 +212,7 @@ module Aws::Inspector
     #   <p>Provides a total count of generated findings per severity.</p>
     #   @return [Hash<String, Integer>]
     class AssessmentRun < Struct.new(
+      nil,
       :arn,
       :name,
       :assessment_template_arn,
@@ -251,6 +259,7 @@ module Aws::Inspector
     #            agent.</p>
     #   @return [Array<Types::TelemetryMetadata>]
     class AssessmentRunAgent < Struct.new(
+      nil,
       :agent_id,
       :assessment_run_arn,
       :agent_health,
@@ -301,6 +310,7 @@ module Aws::Inspector
     #               <a>AssessmentRun</a> data type.</p>
     #   @return [Types::TimestampRange]
     class AssessmentRunFilter < Struct.new(
+      nil,
       :name_pattern,
       :states,
       :duration_range,
@@ -329,6 +339,7 @@ module Aws::Inspector
     #   <p>You can immediately retry your request.</p>
     #   @return [Boolean]
     class AssessmentRunInProgressException < Struct.new(
+      nil,
       :message,
       :assessment_run_arns,
       :assessment_run_arns_truncated,
@@ -360,6 +371,7 @@ module Aws::Inspector
     #   <p>The status code of the SNS notification.</p>
     #   @return [String]
     class AssessmentRunNotification < Struct.new(
+      nil,
       :date,
       :event,
       :message,
@@ -380,6 +392,7 @@ module Aws::Inspector
     #   <p>The assessment run state.</p>
     #   @return [String]
     class AssessmentRunStateChange < Struct.new(
+      nil,
       :state_changed_at,
       :state,
       keyword_init: true
@@ -406,6 +419,7 @@ module Aws::Inspector
     #   <p>The time at which <a>UpdateAssessmentTarget</a> is called.</p>
     #   @return [Time]
     class AssessmentTarget < Struct.new(
+      nil,
       :arn,
       :name,
       :resource_group_arn,
@@ -424,6 +438,7 @@ module Aws::Inspector
     #               <b>assessmentTargetName</b> property of the <a>AssessmentTarget</a> data type.</p>
     #   @return [String]
     class AssessmentTargetFilter < Struct.new(
+      nil,
       :assessment_target_name_pattern,
       keyword_init: true
     )
@@ -467,6 +482,7 @@ module Aws::Inspector
     #   <p>The time at which the assessment template is created.</p>
     #   @return [Time]
     class AssessmentTemplate < Struct.new(
+      nil,
       :arn,
       :name,
       :assessment_target_arn,
@@ -499,6 +515,7 @@ module Aws::Inspector
     #            type.</p>
     #   @return [Array<String>]
     class AssessmentTemplateFilter < Struct.new(
+      nil,
       :name_pattern,
       :duration_range,
       :rules_package_arns,
@@ -537,6 +554,7 @@ module Aws::Inspector
     #            finding is generated.</p>
     #   @return [Array<Types::NetworkInterface>]
     class AssetAttributes < Struct.new(
+      nil,
       :schema_version,
       :agent_id,
       :auto_scaling_group,
@@ -564,6 +582,7 @@ module Aws::Inspector
     #   <p>The value assigned to the attribute key.</p>
     #   @return [String]
     class Attribute < Struct.new(
+      nil,
       :key,
       :value,
       keyword_init: true
@@ -581,6 +600,7 @@ module Aws::Inspector
     #            and region are included in the assessment target.</p>
     #   @return [String]
     class CreateAssessmentTargetRequest < Struct.new(
+      nil,
       :assessment_target_name,
       :resource_group_arn,
       keyword_init: true
@@ -592,6 +612,7 @@ module Aws::Inspector
     #   <p>The ARN that specifies the assessment target that is created.</p>
     #   @return [String]
     class CreateAssessmentTargetResponse < Struct.new(
+      nil,
       :assessment_target_arn,
       keyword_init: true
     )
@@ -622,6 +643,7 @@ module Aws::Inspector
     #            unique.</p>
     #   @return [Array<Types::Attribute>]
     class CreateAssessmentTemplateRequest < Struct.new(
+      nil,
       :assessment_target_arn,
       :assessment_template_name,
       :duration_in_seconds,
@@ -636,6 +658,7 @@ module Aws::Inspector
     #   <p>The ARN that specifies the assessment template that is created.</p>
     #   @return [String]
     class CreateAssessmentTemplateResponse < Struct.new(
+      nil,
       :assessment_template_arn,
       keyword_init: true
     )
@@ -647,6 +670,7 @@ module Aws::Inspector
     #            exclusions preview.</p>
     #   @return [String]
     class CreateExclusionsPreviewRequest < Struct.new(
+      nil,
       :assessment_template_arn,
       keyword_init: true
     )
@@ -659,6 +683,7 @@ module Aws::Inspector
     #            API.</p>
     #   @return [String]
     class CreateExclusionsPreviewResponse < Struct.new(
+      nil,
       :preview_token,
       keyword_init: true
     )
@@ -671,6 +696,7 @@ module Aws::Inspector
     #            <p>For example,'[{"key":"Name","values":["TestEC2Instance"]}]'.</p>
     #   @return [Array<Types::ResourceGroupTag>]
     class CreateResourceGroupRequest < Struct.new(
+      nil,
       :resource_group_tags,
       keyword_init: true
     )
@@ -681,6 +707,7 @@ module Aws::Inspector
     #   <p>The ARN that specifies the resource group that is created.</p>
     #   @return [String]
     class CreateResourceGroupResponse < Struct.new(
+      nil,
       :resource_group_arn,
       keyword_init: true
     )
@@ -691,6 +718,7 @@ module Aws::Inspector
     #   <p>The ARN that specifies the assessment run that you want to delete.</p>
     #   @return [String]
     class DeleteAssessmentRunRequest < Struct.new(
+      nil,
       :assessment_run_arn,
       keyword_init: true
     )
@@ -701,6 +729,7 @@ module Aws::Inspector
     #   <p>The ARN that specifies the assessment target that you want to delete.</p>
     #   @return [String]
     class DeleteAssessmentTargetRequest < Struct.new(
+      nil,
       :assessment_target_arn,
       keyword_init: true
     )
@@ -711,6 +740,7 @@ module Aws::Inspector
     #   <p>The ARN that specifies the assessment template that you want to delete.</p>
     #   @return [String]
     class DeleteAssessmentTemplateRequest < Struct.new(
+      nil,
       :assessment_template_arn,
       keyword_init: true
     )
@@ -721,6 +751,7 @@ module Aws::Inspector
     #   <p>The ARN that specifies the assessment run that you want to describe.</p>
     #   @return [Array<String>]
     class DescribeAssessmentRunsRequest < Struct.new(
+      nil,
       :assessment_run_arns,
       keyword_init: true
     )
@@ -735,6 +766,7 @@ module Aws::Inspector
     #            failed item.</p>
     #   @return [Hash<String, Types::FailedItemDetails>]
     class DescribeAssessmentRunsResponse < Struct.new(
+      nil,
       :assessment_runs,
       :failed_items,
       keyword_init: true
@@ -746,6 +778,7 @@ module Aws::Inspector
     #   <p>The ARNs that specifies the assessment targets that you want to describe.</p>
     #   @return [Array<String>]
     class DescribeAssessmentTargetsRequest < Struct.new(
+      nil,
       :assessment_target_arns,
       keyword_init: true
     )
@@ -760,6 +793,7 @@ module Aws::Inspector
     #            each failed item.</p>
     #   @return [Hash<String, Types::FailedItemDetails>]
     class DescribeAssessmentTargetsResponse < Struct.new(
+      nil,
       :assessment_targets,
       :failed_items,
       keyword_init: true
@@ -770,6 +804,7 @@ module Aws::Inspector
     # @!attribute assessment_template_arns
     #   @return [Array<String>]
     class DescribeAssessmentTemplatesRequest < Struct.new(
+      nil,
       :assessment_template_arns,
       keyword_init: true
     )
@@ -784,6 +819,7 @@ module Aws::Inspector
     #            each failed item.</p>
     #   @return [Hash<String, Types::FailedItemDetails>]
     class DescribeAssessmentTemplatesResponse < Struct.new(
+      nil,
       :assessment_templates,
       :failed_items,
       keyword_init: true
@@ -803,6 +839,7 @@ module Aws::Inspector
     #   <p>The date when the cross-account access role was registered.</p>
     #   @return [Time]
     class DescribeCrossAccountAccessRoleResponse < Struct.new(
+      nil,
       :role_arn,
       :valid,
       :registered_at,
@@ -819,6 +856,7 @@ module Aws::Inspector
     #            recommendation.</p>
     #   @return [String]
     class DescribeExclusionsRequest < Struct.new(
+      nil,
       :exclusion_arns,
       :locale,
       keyword_init: true
@@ -834,6 +872,7 @@ module Aws::Inspector
     #            item.</p>
     #   @return [Hash<String, Types::FailedItemDetails>]
     class DescribeExclusionsResponse < Struct.new(
+      nil,
       :exclusions,
       :failed_items,
       keyword_init: true
@@ -849,6 +888,7 @@ module Aws::Inspector
     #            and the short description that identifies the finding.</p>
     #   @return [String]
     class DescribeFindingsRequest < Struct.new(
+      nil,
       :finding_arns,
       :locale,
       keyword_init: true
@@ -864,6 +904,7 @@ module Aws::Inspector
     #            item.</p>
     #   @return [Hash<String, Types::FailedItemDetails>]
     class DescribeFindingsResponse < Struct.new(
+      nil,
       :findings,
       :failed_items,
       keyword_init: true
@@ -875,6 +916,7 @@ module Aws::Inspector
     #   <p>The ARN that specifies the resource group that you want to describe.</p>
     #   @return [Array<String>]
     class DescribeResourceGroupsRequest < Struct.new(
+      nil,
       :resource_group_arns,
       keyword_init: true
     )
@@ -889,6 +931,7 @@ module Aws::Inspector
     #            failed item.</p>
     #   @return [Hash<String, Types::FailedItemDetails>]
     class DescribeResourceGroupsResponse < Struct.new(
+      nil,
       :resource_groups,
       :failed_items,
       keyword_init: true
@@ -903,6 +946,7 @@ module Aws::Inspector
     #   <p>The locale that you want to translate a rules package description into.</p>
     #   @return [String]
     class DescribeRulesPackagesRequest < Struct.new(
+      nil,
       :rules_package_arns,
       :locale,
       keyword_init: true
@@ -918,6 +962,7 @@ module Aws::Inspector
     #            failed item.</p>
     #   @return [Hash<String, Types::FailedItemDetails>]
     class DescribeRulesPackagesResponse < Struct.new(
+      nil,
       :rules_packages,
       :failed_items,
       keyword_init: true
@@ -935,6 +980,7 @@ module Aws::Inspector
     #            (1 week).</p>
     #   @return [Integer]
     class DurationRange < Struct.new(
+      nil,
       :min_seconds,
       :max_seconds,
       keyword_init: true
@@ -951,6 +997,7 @@ module Aws::Inspector
     #   <p>The time at which <a>SubscribeToEvent</a> is called.</p>
     #   @return [Time]
     class EventSubscription < Struct.new(
+      nil,
       :event,
       :subscribed_at,
       keyword_init: true
@@ -978,6 +1025,7 @@ module Aws::Inspector
     #   <p>The system-defined attributes for the exclusion.</p>
     #   @return [Array<Types::Attribute>]
     class Exclusion < Struct.new(
+      nil,
       :arn,
       :title,
       :description,
@@ -1007,6 +1055,7 @@ module Aws::Inspector
     #   <p>The system-defined attributes for the exclusion preview.</p>
     #   @return [Array<Types::Attribute>]
     class ExclusionPreview < Struct.new(
+      nil,
       :title,
       :description,
       :recommendation,
@@ -1026,6 +1075,7 @@ module Aws::Inspector
     #            resource.</p>
     #   @return [Boolean]
     class FailedItemDetails < Struct.new(
+      nil,
       :failure_code,
       :retryable,
       keyword_init: true
@@ -1091,6 +1141,7 @@ module Aws::Inspector
     #   <p>The time when <a>AddAttributesToFindings</a> is called.</p>
     #   @return [Time]
     class Finding < Struct.new(
+      nil,
       :arn,
       :schema_version,
       :service,
@@ -1158,6 +1209,7 @@ module Aws::Inspector
     #   <p>The time range during which the finding is generated.</p>
     #   @return [Types::TimestampRange]
     class FindingFilter < Struct.new(
+      nil,
       :agent_ids,
       :auto_scaling_groups,
       :rule_names,
@@ -1185,6 +1237,7 @@ module Aws::Inspector
     #               <a href="https://docs.aws.amazon.com/inspector/latest/userguide/inspector_reports.html">Assessment Reports</a>. </p>
     #   @return [String]
     class GetAssessmentReportRequest < Struct.new(
+      nil,
       :assessment_run_arn,
       :report_file_format,
       :report_type,
@@ -1201,6 +1254,7 @@ module Aws::Inspector
     #            is only returned if the report is successfully generated.</p>
     #   @return [String]
     class GetAssessmentReportResponse < Struct.new(
+      nil,
       :status,
       :url,
       keyword_init: true
@@ -1230,6 +1284,7 @@ module Aws::Inspector
     #            recommendation.</p>
     #   @return [String]
     class GetExclusionsPreviewRequest < Struct.new(
+      nil,
       :assessment_template_arn,
       :preview_token,
       :next_token,
@@ -1253,6 +1308,7 @@ module Aws::Inspector
     #            to null.</p>
     #   @return [String]
     class GetExclusionsPreviewResponse < Struct.new(
+      nil,
       :preview_status,
       :exclusion_previews,
       :next_token,
@@ -1266,6 +1322,7 @@ module Aws::Inspector
     #            to obtain.</p>
     #   @return [String]
     class GetTelemetryMetadataRequest < Struct.new(
+      nil,
       :assessment_run_arn,
       keyword_init: true
     )
@@ -1276,6 +1333,7 @@ module Aws::Inspector
     #   <p>Telemetry details.</p>
     #   @return [Array<Types::TelemetryMetadata>]
     class GetTelemetryMetadataResponse < Struct.new(
+      nil,
       :telemetry_metadata,
       keyword_init: true
     )
@@ -1293,6 +1351,7 @@ module Aws::Inspector
     #   <p>The ARN of the rules package that is used to generate the finding.</p>
     #   @return [String]
     class InspectorServiceAttributes < Struct.new(
+      nil,
       :schema_version,
       :assessment_run_arn,
       :rules_package_arn,
@@ -1314,6 +1373,7 @@ module Aws::Inspector
     #   <p>You can immediately retry your request.</p>
     #   @return [Boolean]
     class InternalException < Struct.new(
+      nil,
       :message,
       :can_retry,
       keyword_init: true
@@ -1333,6 +1393,7 @@ module Aws::Inspector
     #   <p>You can immediately retry your request.</p>
     #   @return [Boolean]
     class InvalidCrossAccountRoleException < Struct.new(
+      nil,
       :message,
       :error_code,
       :can_retry,
@@ -1353,6 +1414,7 @@ module Aws::Inspector
     #   <p>You can immediately retry your request.</p>
     #   @return [Boolean]
     class InvalidInputException < Struct.new(
+      nil,
       :message,
       :error_code,
       :can_retry,
@@ -1373,6 +1435,7 @@ module Aws::Inspector
     #   <p>You can immediately retry your request.</p>
     #   @return [Boolean]
     class LimitExceededException < Struct.new(
+      nil,
       :message,
       :error_code,
       :can_retry,
@@ -1403,6 +1466,7 @@ module Aws::Inspector
     #            the response. The default value is 10. The maximum value is 500.</p>
     #   @return [Integer]
     class ListAssessmentRunAgentsRequest < Struct.new(
+      nil,
       :assessment_run_arn,
       :filter,
       :next_token,
@@ -1421,6 +1485,7 @@ module Aws::Inspector
     #            data to be listed, this parameter is set to null.</p>
     #   @return [String]
     class ListAssessmentRunAgentsResponse < Struct.new(
+      nil,
       :assessment_run_agents,
       :next_token,
       keyword_init: true
@@ -1451,6 +1516,7 @@ module Aws::Inspector
     #            the response. The default value is 10. The maximum value is 500.</p>
     #   @return [Integer]
     class ListAssessmentRunsRequest < Struct.new(
+      nil,
       :assessment_template_arns,
       :filter,
       :next_token,
@@ -1470,6 +1536,7 @@ module Aws::Inspector
     #            data to be listed, this parameter is set to null.</p>
     #   @return [String]
     class ListAssessmentRunsResponse < Struct.new(
+      nil,
       :assessment_run_arns,
       :next_token,
       keyword_init: true
@@ -1496,6 +1563,7 @@ module Aws::Inspector
     #            response. The default value is 10. The maximum value is 500.</p>
     #   @return [Integer]
     class ListAssessmentTargetsRequest < Struct.new(
+      nil,
       :filter,
       :next_token,
       :max_results,
@@ -1514,6 +1582,7 @@ module Aws::Inspector
     #            data to be listed, this parameter is set to null.</p>
     #   @return [String]
     class ListAssessmentTargetsResponse < Struct.new(
+      nil,
       :assessment_target_arns,
       :next_token,
       keyword_init: true
@@ -1544,6 +1613,7 @@ module Aws::Inspector
     #            response. The default value is 10. The maximum value is 500.</p>
     #   @return [Integer]
     class ListAssessmentTemplatesRequest < Struct.new(
+      nil,
       :assessment_target_arns,
       :filter,
       :next_token,
@@ -1563,6 +1633,7 @@ module Aws::Inspector
     #            data to be listed, this parameter is set to null.</p>
     #   @return [String]
     class ListAssessmentTemplatesResponse < Struct.new(
+      nil,
       :assessment_template_arns,
       :next_token,
       keyword_init: true
@@ -1586,6 +1657,7 @@ module Aws::Inspector
     #            response. The default value is 10. The maximum value is 500.</p>
     #   @return [Integer]
     class ListEventSubscriptionsRequest < Struct.new(
+      nil,
       :resource_arn,
       :next_token,
       :max_results,
@@ -1603,6 +1675,7 @@ module Aws::Inspector
     #            data to be listed, this parameter is set to null.</p>
     #   @return [String]
     class ListEventSubscriptionsResponse < Struct.new(
+      nil,
       :subscriptions,
       :next_token,
       keyword_init: true
@@ -1625,6 +1698,7 @@ module Aws::Inspector
     #            response. The default value is 100. The maximum value is 500.</p>
     #   @return [Integer]
     class ListExclusionsRequest < Struct.new(
+      nil,
       :assessment_run_arn,
       :next_token,
       :max_results,
@@ -1643,6 +1717,7 @@ module Aws::Inspector
     #            to null.</p>
     #   @return [String]
     class ListExclusionsResponse < Struct.new(
+      nil,
       :exclusion_arns,
       :next_token,
       keyword_init: true
@@ -1673,6 +1748,7 @@ module Aws::Inspector
     #            response. The default value is 10. The maximum value is 500.</p>
     #   @return [Integer]
     class ListFindingsRequest < Struct.new(
+      nil,
       :assessment_run_arns,
       :filter,
       :next_token,
@@ -1691,6 +1767,7 @@ module Aws::Inspector
     #            data to be listed, this parameter is set to null.</p>
     #   @return [String]
     class ListFindingsResponse < Struct.new(
+      nil,
       :finding_arns,
       :next_token,
       keyword_init: true
@@ -1710,6 +1787,7 @@ module Aws::Inspector
     #            response. The default value is 10. The maximum value is 500.</p>
     #   @return [Integer]
     class ListRulesPackagesRequest < Struct.new(
+      nil,
       :next_token,
       :max_results,
       keyword_init: true
@@ -1726,6 +1804,7 @@ module Aws::Inspector
     #            data to be listed, this parameter is set to null.</p>
     #   @return [String]
     class ListRulesPackagesResponse < Struct.new(
+      nil,
       :rules_package_arns,
       :next_token,
       keyword_init: true
@@ -1737,6 +1816,7 @@ module Aws::Inspector
     #   <p>The ARN that specifies the assessment template whose tags you want to list.</p>
     #   @return [String]
     class ListTagsForResourceRequest < Struct.new(
+      nil,
       :resource_arn,
       keyword_init: true
     )
@@ -1747,6 +1827,7 @@ module Aws::Inspector
     #   <p>A collection of key and value pairs.</p>
     #   @return [Array<Types::Tag>]
     class ListTagsForResourceResponse < Struct.new(
+      nil,
       :tags,
       keyword_init: true
     )
@@ -1789,6 +1870,7 @@ module Aws::Inspector
     #            groupId and groupName.</p>
     #   @return [Array<Types::SecurityGroup>]
     class NetworkInterface < Struct.new(
+      nil,
       :network_interface_id,
       :subnet_id,
       :vpc_id,
@@ -1816,6 +1898,7 @@ module Aws::Inspector
     #   <p>You can immediately retry your request.</p>
     #   @return [Boolean]
     class NoSuchEntityException < Struct.new(
+      nil,
       :message,
       :error_code,
       :can_retry,
@@ -1839,6 +1922,7 @@ module Aws::Inspector
     #            response. The default value is 10. The maximum value is 500.</p>
     #   @return [Integer]
     class PreviewAgentsRequest < Struct.new(
+      nil,
       :preview_agents_arn,
       :next_token,
       :max_results,
@@ -1856,6 +1940,7 @@ module Aws::Inspector
     #            data to be listed, this parameter is set to null.</p>
     #   @return [String]
     class PreviewAgentsResponse < Struct.new(
+      nil,
       :agent_previews,
       :next_token,
       keyword_init: true
@@ -1868,6 +1953,7 @@ module Aws::Inspector
     # @!attribute message
     #   @return [String]
     class PreviewGenerationInProgressException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -1884,6 +1970,7 @@ module Aws::Inspector
     #   <p>The full IP address of the network inteface.</p>
     #   @return [String]
     class PrivateIp < Struct.new(
+      nil,
       :private_dns_name,
       :private_ip_address,
       keyword_init: true
@@ -1896,6 +1983,7 @@ module Aws::Inspector
     #            perform security assessments. </p>
     #   @return [String]
     class RegisterCrossAccountAccessRoleRequest < Struct.new(
+      nil,
       :role_arn,
       keyword_init: true
     )
@@ -1910,6 +1998,7 @@ module Aws::Inspector
     #            findings.</p>
     #   @return [Array<String>]
     class RemoveAttributesFromFindingsRequest < Struct.new(
+      nil,
       :finding_arns,
       :attribute_keys,
       keyword_init: true
@@ -1922,6 +2011,7 @@ module Aws::Inspector
     #            failed item.</p>
     #   @return [Hash<String, Types::FailedItemDetails>]
     class RemoveAttributesFromFindingsResponse < Struct.new(
+      nil,
       :failed_items,
       keyword_init: true
     )
@@ -1943,6 +2033,7 @@ module Aws::Inspector
     #   <p>The time at which resource group is created.</p>
     #   @return [Time]
     class ResourceGroup < Struct.new(
+      nil,
       :arn,
       :tags,
       :created_at,
@@ -1960,6 +2051,7 @@ module Aws::Inspector
     #   <p>The value assigned to a tag key.</p>
     #   @return [String]
     class ResourceGroupTag < Struct.new(
+      nil,
       :key,
       :value,
       keyword_init: true
@@ -1985,6 +2077,7 @@ module Aws::Inspector
     #   <p>The description of the rules package.</p>
     #   @return [String]
     class RulesPackage < Struct.new(
+      nil,
       :arn,
       :name,
       :version,
@@ -2004,6 +2097,7 @@ module Aws::Inspector
     #   <p>The resource identifier for the specified scope type.</p>
     #   @return [String]
     class Scope < Struct.new(
+      nil,
       :key,
       :value,
       keyword_init: true
@@ -2021,6 +2115,7 @@ module Aws::Inspector
     #   <p>The ID of the security group.</p>
     #   @return [String]
     class SecurityGroup < Struct.new(
+      nil,
       :group_name,
       :group_id,
       keyword_init: true
@@ -2036,6 +2131,7 @@ module Aws::Inspector
     #   <p>You can wait and then retry your request.</p>
     #   @return [Boolean]
     class ServiceTemporarilyUnavailableException < Struct.new(
+      nil,
       :message,
       :can_retry,
       keyword_init: true
@@ -2051,6 +2147,7 @@ module Aws::Inspector
     #            template.</p>
     #   @return [Array<Types::Tag>]
     class SetTagsForResourceRequest < Struct.new(
+      nil,
       :resource_arn,
       :tags,
       keyword_init: true
@@ -2067,6 +2164,7 @@ module Aws::Inspector
     #            assessment template whose ARN is used to start the assessment run.</p>
     #   @return [String]
     class StartAssessmentRunRequest < Struct.new(
+      nil,
       :assessment_template_arn,
       :assessment_run_name,
       keyword_init: true
@@ -2078,6 +2176,7 @@ module Aws::Inspector
     #   <p>The ARN of the assessment run that has been started.</p>
     #   @return [String]
     class StartAssessmentRunResponse < Struct.new(
+      nil,
       :assessment_run_arn,
       keyword_init: true
     )
@@ -2094,6 +2193,7 @@ module Aws::Inspector
     #            assessment run immediately, after which no findings are generated.</p>
     #   @return [String]
     class StopAssessmentRunRequest < Struct.new(
+      nil,
       :assessment_run_arn,
       :stop_action,
       keyword_init: true
@@ -2112,6 +2212,7 @@ module Aws::Inspector
     #   <p>The ARN of the SNS topic to which the SNS notifications are sent.</p>
     #   @return [String]
     class SubscribeToEventRequest < Struct.new(
+      nil,
       :resource_arn,
       :event,
       :topic_arn,
@@ -2133,6 +2234,7 @@ module Aws::Inspector
     #   <p>The list of existing event subscriptions.</p>
     #   @return [Array<Types::EventSubscription>]
     class Subscription < Struct.new(
+      nil,
       :resource_arn,
       :topic_arn,
       :event_subscriptions,
@@ -2149,6 +2251,7 @@ module Aws::Inspector
     #   <p>A value assigned to a tag key.</p>
     #   @return [String]
     class Tag < Struct.new(
+      nil,
       :key,
       :value,
       keyword_init: true
@@ -2169,6 +2272,7 @@ module Aws::Inspector
     #            service.</p>
     #   @return [Integer]
     class TelemetryMetadata < Struct.new(
+      nil,
       :message_type,
       :count,
       :data_size,
@@ -2186,6 +2290,7 @@ module Aws::Inspector
     #   <p>The maximum value of the timestamp range.</p>
     #   @return [Time]
     class TimestampRange < Struct.new(
+      nil,
       :begin_date,
       :end_date,
       keyword_init: true
@@ -2204,6 +2309,7 @@ module Aws::Inspector
     #   <p>The ARN of the SNS topic to which SNS notifications are sent.</p>
     #   @return [String]
     class UnsubscribeFromEventRequest < Struct.new(
+      nil,
       :resource_arn,
       :event,
       :topic_arn,
@@ -2222,6 +2328,7 @@ module Aws::Inspector
     # @!attribute can_retry
     #   @return [Boolean]
     class UnsupportedFeatureException < Struct.new(
+      nil,
       :message,
       :can_retry,
       keyword_init: true
@@ -2240,6 +2347,7 @@ module Aws::Inspector
     #            associate with the assessment target.</p>
     #   @return [String]
     class UpdateAssessmentTargetRequest < Struct.new(
+      nil,
       :assessment_target_arn,
       :assessment_target_name,
       :resource_group_arn,

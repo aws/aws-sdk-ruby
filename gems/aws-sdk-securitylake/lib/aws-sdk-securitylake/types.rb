@@ -16,6 +16,7 @@ module Aws::SecurityLake
     #   <p>A coded string to provide more information about the access denied exception. You can use the error code to check the exception type.</p>
     #   @return [String]
     class AccessDeniedException < Struct.new(
+      nil,
       :message,
       :error_code,
       keyword_init: true
@@ -31,6 +32,7 @@ module Aws::SecurityLake
     #   <p>The external ID used to establish trust relationship with the Amazon Web Services identity.</p>
     #   @return [String]
     class AwsIdentity < Struct.new(
+      nil,
       :principal,
       :external_id,
       keyword_init: true
@@ -53,6 +55,7 @@ module Aws::SecurityLake
     #   <p>The version for a Amazon Web Services source. </p>
     #   @return [String]
     class AwsLogSourceConfiguration < Struct.new(
+      nil,
       :accounts,
       :regions,
       :source_name,
@@ -76,6 +79,7 @@ module Aws::SecurityLake
     #   <p>The version for a Amazon Web Services source. This must be a Regionally unique value.</p>
     #   @return [String]
     class AwsLogSourceResource < Struct.new(
+      nil,
       :source_name,
       :source_version,
       keyword_init: true
@@ -87,6 +91,7 @@ module Aws::SecurityLake
     # @!attribute message
     #   @return [String]
     class BadRequestException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -106,6 +111,7 @@ module Aws::SecurityLake
     #   <p>The resource type.</p>
     #   @return [String]
     class ConflictException < Struct.new(
+      nil,
       :message,
       :resource_name,
       :resource_type,
@@ -118,6 +124,7 @@ module Aws::SecurityLake
     #   <p>Specify the natively-supported Amazon Web Services service to add as a source in Security Lake.</p>
     #   @return [Array<Types::AwsLogSourceConfiguration>]
     class CreateAwsLogSourceRequest < Struct.new(
+      nil,
       :sources,
       keyword_init: true
     )
@@ -130,6 +137,7 @@ module Aws::SecurityLake
     #            organization.</p>
     #   @return [Array<String>]
     class CreateAwsLogSourceResponse < Struct.new(
+      nil,
       :failed,
       keyword_init: true
     )
@@ -157,6 +165,7 @@ module Aws::SecurityLake
     #   <p>The configuration used for the third-party custom source.</p>
     #   @return [Types::CustomLogSourceConfiguration]
     class CreateCustomLogSourceRequest < Struct.new(
+      nil,
       :source_name,
       :source_version,
       :event_classes,
@@ -170,6 +179,7 @@ module Aws::SecurityLake
     #   <p>The third-party custom source that was created.</p>
     #   @return [Types::CustomLogSourceResource]
     class CreateCustomLogSourceResponse < Struct.new(
+      nil,
       :source,
       keyword_init: true
     )
@@ -186,6 +196,7 @@ module Aws::SecurityLake
     #   <p>The expiration period and time-to-live (TTL). It is the duration of time until which the exception message remains.</p>
     #   @return [Integer]
     class CreateDataLakeExceptionSubscriptionRequest < Struct.new(
+      nil,
       :subscription_protocol,
       :notification_endpoint,
       :exception_time_to_live,
@@ -195,6 +206,7 @@ module Aws::SecurityLake
     end
 
     class CreateDataLakeExceptionSubscriptionResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -205,6 +217,7 @@ module Aws::SecurityLake
     #            data for new accounts in your organization.</p>
     #   @return [Array<Types::DataLakeAutoEnableNewAccountConfiguration>]
     class CreateDataLakeOrganizationConfigurationRequest < Struct.new(
+      nil,
       :auto_enable_new_account,
       keyword_init: true
     )
@@ -212,6 +225,7 @@ module Aws::SecurityLake
     end
 
     class CreateDataLakeOrganizationConfigurationResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -230,6 +244,7 @@ module Aws::SecurityLake
     #            value cannot be null, but it can be an empty string.</p>
     #   @return [Array<Types::Tag>]
     class CreateDataLakeRequest < Struct.new(
+      nil,
       :configurations,
       :meta_store_manager_role_arn,
       :tags,
@@ -242,6 +257,7 @@ module Aws::SecurityLake
     #   <p>The created Security Lake configuration object.</p>
     #   @return [Array<Types::DataLakeResource>]
     class CreateDataLakeResponse < Struct.new(
+      nil,
       :data_lakes,
       keyword_init: true
     )
@@ -256,6 +272,7 @@ module Aws::SecurityLake
     #            notification.</p>
     #   @return [Types::NotificationConfiguration]
     class CreateSubscriberNotificationRequest < Struct.new(
+      nil,
       :subscriber_id,
       :configuration,
       keyword_init: true
@@ -267,6 +284,7 @@ module Aws::SecurityLake
     #   <p>The subscriber endpoint to which exception messages are posted.</p>
     #   @return [String]
     class CreateSubscriberNotificationResponse < Struct.new(
+      nil,
       :subscriber_endpoint,
       keyword_init: true
     )
@@ -294,6 +312,7 @@ module Aws::SecurityLake
     #            value cannot be null, but it can be an empty string.</p>
     #   @return [Array<Types::Tag>]
     class CreateSubscriberRequest < Struct.new(
+      nil,
       :subscriber_identity,
       :subscriber_name,
       :subscriber_description,
@@ -310,6 +329,7 @@ module Aws::SecurityLake
     #               <code>CreateSubscriber</code> API.</p>
     #   @return [Types::SubscriberResource]
     class CreateSubscriberResponse < Struct.new(
+      nil,
       :subscriber,
       keyword_init: true
     )
@@ -328,6 +348,7 @@ module Aws::SecurityLake
     #   <p>The ARN of the Glue table.</p>
     #   @return [String]
     class CustomLogSourceAttributes < Struct.new(
+      nil,
       :crawler_arn,
       :database_arn,
       :table_arn,
@@ -344,6 +365,7 @@ module Aws::SecurityLake
     #   <p>The identity of the log provider for the third-party custom source.</p>
     #   @return [Types::AwsIdentity]
     class CustomLogSourceConfiguration < Struct.new(
+      nil,
       :crawler_configuration,
       :provider_identity,
       keyword_init: true
@@ -367,6 +389,7 @@ module Aws::SecurityLake
     #            </ul>
     #   @return [String]
     class CustomLogSourceCrawlerConfiguration < Struct.new(
+      nil,
       :role_arn,
       keyword_init: true
     )
@@ -385,6 +408,7 @@ module Aws::SecurityLake
     #   <p>The location of the partition in the Amazon S3 bucket for Security Lake.</p>
     #   @return [String]
     class CustomLogSourceProvider < Struct.new(
+      nil,
       :role_arn,
       :location,
       keyword_init: true
@@ -406,6 +430,7 @@ module Aws::SecurityLake
     #   <p>The attributes of a third-party custom source.</p>
     #   @return [Types::CustomLogSourceAttributes]
     class CustomLogSourceResource < Struct.new(
+      nil,
       :source_name,
       :source_version,
       :provider,
@@ -424,6 +449,7 @@ module Aws::SecurityLake
     #   <p>The Amazon Web Services sources that are automatically enabled in Security Lake.</p>
     #   @return [Array<Types::AwsLogSourceResource>]
     class DataLakeAutoEnableNewAccountConfiguration < Struct.new(
+      nil,
       :region,
       :sources,
       keyword_init: true
@@ -445,6 +471,7 @@ module Aws::SecurityLake
     #   <p>Provides replication details of Amazon Security Lake object.</p>
     #   @return [Types::DataLakeReplicationConfiguration]
     class DataLakeConfiguration < Struct.new(
+      nil,
       :region,
       :encryption_configuration,
       :lifecycle_configuration,
@@ -460,6 +487,7 @@ module Aws::SecurityLake
     #            object.</p>
     #   @return [String]
     class DataLakeEncryptionConfiguration < Struct.new(
+      nil,
       :kms_key_id,
       keyword_init: true
     )
@@ -480,6 +508,7 @@ module Aws::SecurityLake
     #   <p>This error can occur if you configure the wrong timestamp format, or if the subset of entries used for validation had errors or missing values.</p>
     #   @return [Time]
     class DataLakeException < Struct.new(
+      nil,
       :region,
       :exception,
       :remediation,
@@ -497,6 +526,7 @@ module Aws::SecurityLake
     #   <p>Provides data storage transition details of Amazon Security Lake object.</p>
     #   @return [Array<Types::DataLakeLifecycleTransition>]
     class DataLakeLifecycleConfiguration < Struct.new(
+      nil,
       :expiration,
       :transitions,
       keyword_init: true
@@ -509,6 +539,7 @@ module Aws::SecurityLake
     #   <p>Number of days before data expires in the Amazon Security Lake object.</p>
     #   @return [Integer]
     class DataLakeLifecycleExpiration < Struct.new(
+      nil,
       :days,
       keyword_init: true
     )
@@ -524,6 +555,7 @@ module Aws::SecurityLake
     #   <p>Number of days before data transitions to a different S3 Storage Class in the Amazon Security Lake object.</p>
     #   @return [Integer]
     class DataLakeLifecycleTransition < Struct.new(
+      nil,
       :storage_class,
       :days,
       keyword_init: true
@@ -552,6 +584,7 @@ module Aws::SecurityLake
     #            ensure the replication setting is correct.</p>
     #   @return [String]
     class DataLakeReplicationConfiguration < Struct.new(
+      nil,
       :regions,
       :role_arn,
       keyword_init: true
@@ -586,6 +619,7 @@ module Aws::SecurityLake
     #            request.</p>
     #   @return [Types::DataLakeUpdateStatus]
     class DataLakeResource < Struct.new(
+      nil,
       :data_lake_arn,
       :region,
       :s3_bucket_arn,
@@ -616,6 +650,7 @@ module Aws::SecurityLake
     #   <p>The log status for the Security Lake account.</p>
     #   @return [Array<Types::DataLakeSourceStatus>]
     class DataLakeSource < Struct.new(
+      nil,
       :account,
       :source_name,
       :event_classes,
@@ -634,6 +669,7 @@ module Aws::SecurityLake
     #   <p>The health status of services, including error codes and patterns.</p>
     #   @return [String]
     class DataLakeSourceStatus < Struct.new(
+      nil,
       :resource,
       :status,
       keyword_init: true
@@ -652,6 +688,7 @@ module Aws::SecurityLake
     #            <code>DeleteDataLake</code> API request.</p>
     #   @return [String]
     class DataLakeUpdateException < Struct.new(
+      nil,
       :reason,
       :code,
       keyword_init: true
@@ -675,6 +712,7 @@ module Aws::SecurityLake
     #            request which failed.</p>
     #   @return [Types::DataLakeUpdateException]
     class DataLakeUpdateStatus < Struct.new(
+      nil,
       :request_id,
       :status,
       :exception,
@@ -688,6 +726,7 @@ module Aws::SecurityLake
     #            Security Lake.</p>
     #   @return [Array<Types::AwsLogSourceConfiguration>]
     class DeleteAwsLogSourceRequest < Struct.new(
+      nil,
       :sources,
       keyword_init: true
     )
@@ -698,6 +737,7 @@ module Aws::SecurityLake
     #   <p>Deletion of the Amazon Web Services sources failed as the account is not a part of the organization.</p>
     #   @return [Array<String>]
     class DeleteAwsLogSourceResponse < Struct.new(
+      nil,
       :failed,
       keyword_init: true
     )
@@ -712,6 +752,7 @@ module Aws::SecurityLake
     #            removal to the specified source version.</p>
     #   @return [String]
     class DeleteCustomLogSourceRequest < Struct.new(
+      nil,
       :source_name,
       :source_version,
       keyword_init: true
@@ -720,18 +761,21 @@ module Aws::SecurityLake
     end
 
     class DeleteCustomLogSourceResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
     end
 
     class DeleteDataLakeExceptionSubscriptionRequest < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
     end
 
     class DeleteDataLakeExceptionSubscriptionResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -741,6 +785,7 @@ module Aws::SecurityLake
     #   <p>Turns off automatic enablement of Security Lake for member accounts that are added to an organization.</p>
     #   @return [Array<Types::DataLakeAutoEnableNewAccountConfiguration>]
     class DeleteDataLakeOrganizationConfigurationRequest < Struct.new(
+      nil,
       :auto_enable_new_account,
       keyword_init: true
     )
@@ -748,6 +793,7 @@ module Aws::SecurityLake
     end
 
     class DeleteDataLakeOrganizationConfigurationResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -757,6 +803,7 @@ module Aws::SecurityLake
     #   <p>The list of Regions where Security Lake is enabled.</p>
     #   @return [Array<String>]
     class DeleteDataLakeRequest < Struct.new(
+      nil,
       :regions,
       keyword_init: true
     )
@@ -764,6 +811,7 @@ module Aws::SecurityLake
     end
 
     class DeleteDataLakeResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -773,6 +821,7 @@ module Aws::SecurityLake
     #   <p>The ID of the Security Lake subscriber account.</p>
     #   @return [String]
     class DeleteSubscriberNotificationRequest < Struct.new(
+      nil,
       :subscriber_id,
       keyword_init: true
     )
@@ -780,6 +829,7 @@ module Aws::SecurityLake
     end
 
     class DeleteSubscriberNotificationResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -789,6 +839,7 @@ module Aws::SecurityLake
     #   <p>A value created by Security Lake that uniquely identifies your <code>DeleteSubscriber</code> API request.</p>
     #   @return [String]
     class DeleteSubscriberRequest < Struct.new(
+      nil,
       :subscriber_id,
       keyword_init: true
     )
@@ -796,24 +847,28 @@ module Aws::SecurityLake
     end
 
     class DeleteSubscriberResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
     end
 
     class DeregisterDataLakeDelegatedAdministratorRequest < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
     end
 
     class DeregisterDataLakeDelegatedAdministratorResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
     end
 
     class GetDataLakeExceptionSubscriptionRequest < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -829,6 +884,7 @@ module Aws::SecurityLake
     #   <p>The expiration period and time-to-live (TTL). It is the duration of time until which the exception message remains.</p>
     #   @return [Integer]
     class GetDataLakeExceptionSubscriptionResponse < Struct.new(
+      nil,
       :subscription_protocol,
       :notification_endpoint,
       :exception_time_to_live,
@@ -838,6 +894,7 @@ module Aws::SecurityLake
     end
 
     class GetDataLakeOrganizationConfigurationRequest < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -847,6 +904,7 @@ module Aws::SecurityLake
     #   <p>The configuration used for new accounts in Security Lake.</p>
     #   @return [Array<Types::DataLakeAutoEnableNewAccountConfiguration>]
     class GetDataLakeOrganizationConfigurationResponse < Struct.new(
+      nil,
       :auto_enable_new_account,
       keyword_init: true
     )
@@ -868,6 +926,7 @@ module Aws::SecurityLake
     #            return an HTTP 400 InvalidToken error.</p>
     #   @return [String]
     class GetDataLakeSourcesRequest < Struct.new(
+      nil,
       :accounts,
       :max_results,
       :next_token,
@@ -890,6 +949,7 @@ module Aws::SecurityLake
     #            return an HTTP 400 InvalidToken error.</p>
     #   @return [String]
     class GetDataLakeSourcesResponse < Struct.new(
+      nil,
       :data_lake_arn,
       :data_lake_sources,
       :next_token,
@@ -903,6 +963,7 @@ module Aws::SecurityLake
     #               <code>GetSubscriber</code> API request.</p>
     #   @return [String]
     class GetSubscriberRequest < Struct.new(
+      nil,
       :subscriber_id,
       keyword_init: true
     )
@@ -913,6 +974,7 @@ module Aws::SecurityLake
     #   <p>The subscriber information for the specified subscriber ID.</p>
     #   @return [Types::SubscriberResource]
     class GetSubscriberResponse < Struct.new(
+      nil,
       :subscriber,
       keyword_init: true
     )
@@ -939,6 +1001,7 @@ module Aws::SecurityLake
     #               Managed Policies</a> in the <i>Amazon Security Lake User Guide</i>.</p>
     #   @return [String]
     class HttpsNotificationConfiguration < Struct.new(
+      nil,
       :endpoint,
       :authorization_api_key_name,
       :authorization_api_key_value,
@@ -954,6 +1017,7 @@ module Aws::SecurityLake
     # @!attribute message
     #   @return [String]
     class InternalServerException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -974,6 +1038,7 @@ module Aws::SecurityLake
     #            return an HTTP 400 InvalidToken error.</p>
     #   @return [String]
     class ListDataLakeExceptionsRequest < Struct.new(
+      nil,
       :regions,
       :max_results,
       :next_token,
@@ -993,6 +1058,7 @@ module Aws::SecurityLake
     #            return an HTTP 400 InvalidToken error.</p>
     #   @return [String]
     class ListDataLakeExceptionsResponse < Struct.new(
+      nil,
       :exceptions,
       :next_token,
       keyword_init: true
@@ -1004,6 +1070,7 @@ module Aws::SecurityLake
     #   <p>The list of Regions where Security Lake is enabled.</p>
     #   @return [Array<String>]
     class ListDataLakesRequest < Struct.new(
+      nil,
       :regions,
       keyword_init: true
     )
@@ -1014,6 +1081,7 @@ module Aws::SecurityLake
     #   <p>Retrieves the Security Lake configuration object.</p>
     #   @return [Array<Types::DataLakeResource>]
     class ListDataLakesResponse < Struct.new(
+      nil,
       :data_lakes,
       keyword_init: true
     )
@@ -1037,6 +1105,7 @@ module Aws::SecurityLake
     #            using the returned token to retrieve the next page.</p>
     #   @return [String]
     class ListLogSourcesRequest < Struct.new(
+      nil,
       :accounts,
       :regions,
       :sources,
@@ -1055,6 +1124,7 @@ module Aws::SecurityLake
     #         using the returned token to retrieve the next page.</p>
     #   @return [String]
     class ListLogSourcesResponse < Struct.new(
+      nil,
       :sources,
       :next_token,
       keyword_init: true
@@ -1070,6 +1140,7 @@ module Aws::SecurityLake
     #   <p>The maximum number of accounts for which the configuration is displayed.</p>
     #   @return [Integer]
     class ListSubscribersRequest < Struct.new(
+      nil,
       :next_token,
       :max_results,
       keyword_init: true
@@ -1085,6 +1156,7 @@ module Aws::SecurityLake
     #            using the returned token to retrieve the next page.</p>
     #   @return [String]
     class ListSubscribersResponse < Struct.new(
+      nil,
       :subscribers,
       :next_token,
       keyword_init: true
@@ -1096,6 +1168,7 @@ module Aws::SecurityLake
     #   <p>The Amazon Resource Name (ARN) of the Amazon Security Lake resource for which you want to retrieve the tags.</p>
     #   @return [String]
     class ListTagsForResourceRequest < Struct.new(
+      nil,
       :resource_arn,
       keyword_init: true
     )
@@ -1106,6 +1179,7 @@ module Aws::SecurityLake
     #   <p>An array of objects, one for each tag (key and value) that’s associated with the Amazon Security Lake resource.</p>
     #   @return [Array<Types::Tag>]
     class ListTagsForResourceResponse < Struct.new(
+      nil,
       :tags,
       keyword_init: true
     )
@@ -1123,6 +1197,7 @@ module Aws::SecurityLake
     #   <p>Specify the sources from which you want to collect logs.</p>
     #   @return [Array<Types::LogSourceResource>]
     class LogSource < Struct.new(
+      nil,
       :account,
       :region,
       :sources,
@@ -1178,6 +1253,7 @@ module Aws::SecurityLake
     #   <p>The Amazon Web Services account ID of the Security Lake delegated administrator.</p>
     #   @return [String]
     class RegisterDataLakeDelegatedAdministratorRequest < Struct.new(
+      nil,
       :account_id,
       keyword_init: true
     )
@@ -1185,6 +1261,7 @@ module Aws::SecurityLake
     end
 
     class RegisterDataLakeDelegatedAdministratorResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1200,6 +1277,7 @@ module Aws::SecurityLake
     #   <p>The type of the resource that could not be found.</p>
     #   @return [String]
     class ResourceNotFoundException < Struct.new(
+      nil,
       :message,
       :resource_name,
       :resource_type,
@@ -1210,6 +1288,7 @@ module Aws::SecurityLake
 
     # <p>The configurations used for EventBridge subscriber notification.</p>
     class SqsNotificationConfiguration < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1274,6 +1353,7 @@ module Aws::SecurityLake
     #   <p>The date and time when the subscriber was last updated.</p>
     #   @return [Time]
     class SubscriberResource < Struct.new(
+      nil,
       :subscriber_id,
       :subscriber_arn,
       :subscriber_identity,
@@ -1311,6 +1391,7 @@ module Aws::SecurityLake
     #            null, but it can be an empty string.</p>
     #   @return [String]
     class Tag < Struct.new(
+      nil,
       :key,
       :value,
       keyword_init: true
@@ -1326,6 +1407,7 @@ module Aws::SecurityLake
     #            specify both a tag key and a tag value. A tag value cannot be null, but it can be an empty string.</p>
     #   @return [Array<Types::Tag>]
     class TagResourceRequest < Struct.new(
+      nil,
       :resource_arn,
       :tags,
       keyword_init: true
@@ -1334,6 +1416,7 @@ module Aws::SecurityLake
     end
 
     class TagResourceResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1352,6 +1435,7 @@ module Aws::SecurityLake
     #   <p>Retry the request after the specified time.</p>
     #   @return [Integer]
     class ThrottlingException < Struct.new(
+      nil,
       :message,
       :service_code,
       :quota_code,
@@ -1368,6 +1452,7 @@ module Aws::SecurityLake
     #   <p>A list of one or more tag keys. For each value in the list, specify the tag key for a tag to remove from the Amazon Security Lake resource.</p>
     #   @return [Array<String>]
     class UntagResourceRequest < Struct.new(
+      nil,
       :resource_arn,
       :tag_keys,
       keyword_init: true
@@ -1376,6 +1461,7 @@ module Aws::SecurityLake
     end
 
     class UntagResourceResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1391,6 +1477,7 @@ module Aws::SecurityLake
     #   <p>The time-to-live (TTL) for the exception message to remain. It is the duration of time until which the exception message remains. </p>
     #   @return [Integer]
     class UpdateDataLakeExceptionSubscriptionRequest < Struct.new(
+      nil,
       :subscription_protocol,
       :notification_endpoint,
       :exception_time_to_live,
@@ -1400,6 +1487,7 @@ module Aws::SecurityLake
     end
 
     class UpdateDataLakeExceptionSubscriptionResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1414,6 +1502,7 @@ module Aws::SecurityLake
     #            Amazon Web Services log sources and custom sources.</p>
     #   @return [String]
     class UpdateDataLakeRequest < Struct.new(
+      nil,
       :configurations,
       :meta_store_manager_role_arn,
       keyword_init: true
@@ -1425,6 +1514,7 @@ module Aws::SecurityLake
     #   <p>The created Security Lake configuration object.</p>
     #   @return [Array<Types::DataLakeResource>]
     class UpdateDataLakeResponse < Struct.new(
+      nil,
       :data_lakes,
       keyword_init: true
     )
@@ -1438,6 +1528,7 @@ module Aws::SecurityLake
     #   <p>The configuration for subscriber notification.</p>
     #   @return [Types::NotificationConfiguration]
     class UpdateSubscriberNotificationRequest < Struct.new(
+      nil,
       :subscriber_id,
       :configuration,
       keyword_init: true
@@ -1449,6 +1540,7 @@ module Aws::SecurityLake
     #   <p>The subscriber endpoint to which exception messages are posted.</p>
     #   @return [String]
     class UpdateSubscriberNotificationResponse < Struct.new(
+      nil,
       :subscriber_endpoint,
       keyword_init: true
     )
@@ -1472,6 +1564,7 @@ module Aws::SecurityLake
     #            the list of supported Amazon Web Services services, see the <a href="https://docs.aws.amazon.com/security-lake/latest/userguide/internal-sources.html">Amazon Security Lake User Guide</a>.</p>
     #   @return [Array<Types::LogSourceResource>]
     class UpdateSubscriberRequest < Struct.new(
+      nil,
       :subscriber_id,
       :subscriber_identity,
       :subscriber_name,
@@ -1486,6 +1579,7 @@ module Aws::SecurityLake
     #   <p>The updated subscriber information.</p>
     #   @return [Types::SubscriberResource]
     class UpdateSubscriberResponse < Struct.new(
+      nil,
       :subscriber,
       keyword_init: true
     )

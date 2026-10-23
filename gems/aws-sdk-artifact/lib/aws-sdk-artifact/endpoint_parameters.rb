@@ -17,6 +17,7 @@ module Aws::Artifact
   #   The AWS region used to dispatch the request.
   #   @return [String]
   EndpointParameters = Struct.new(
+    nil,
     :use_dual_stack,
     :use_fips,
     :endpoint,

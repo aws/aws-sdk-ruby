@@ -10,6 +10,7 @@ module Aws::VerifiedPermissions
     # @!attribute message
     #   @return [String]
     class AccessDeniedException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -24,6 +25,7 @@ module Aws::VerifiedPermissions
     #   <p>The ID of an action.</p>
     #   @return [String]
     class ActionIdentifier < Struct.new(
+      nil,
       :action_type,
       :action_id,
       keyword_init: true
@@ -105,6 +107,7 @@ module Aws::VerifiedPermissions
     #   <p>A detailed error message.</p>
     #   @return [String]
     class BatchGetPolicyErrorItem < Struct.new(
+      nil,
       :code,
       :policy_store_id,
       :policy_id,
@@ -118,6 +121,7 @@ module Aws::VerifiedPermissions
     #   <p>An array of up to 100 policies you want information about.</p>
     #   @return [Array<Types::BatchGetPolicyInputItem>]
     class BatchGetPolicyInput < Struct.new(
+      nil,
       :requests,
       keyword_init: true
     )
@@ -132,6 +136,7 @@ module Aws::VerifiedPermissions
     #   <p>The identifier of the policy you want information about.</p>
     #   @return [String]
     class BatchGetPolicyInputItem < Struct.new(
+      nil,
       :policy_store_id,
       :policy_id,
       keyword_init: true
@@ -146,6 +151,7 @@ module Aws::VerifiedPermissions
     #   <p>Information about the policies from the request that resulted in an error. These results are returned in the order they were requested.</p>
     #   @return [Array<Types::BatchGetPolicyErrorItem>]
     class BatchGetPolicyOutput < Struct.new(
+      nil,
       :results,
       :errors,
       keyword_init: true
@@ -173,6 +179,7 @@ module Aws::VerifiedPermissions
     #   <p>The date and time the policy was most recently updated.</p>
     #   @return [Time]
     class BatchGetPolicyOutputItem < Struct.new(
+      nil,
       :policy_store_id,
       :policy_id,
       :policy_type,
@@ -194,6 +201,7 @@ module Aws::VerifiedPermissions
     #   <p>An array of up to 30 requests that you want Verified Permissions to evaluate.</p>
     #   @return [Array<Types::BatchIsAuthorizedInputItem>]
     class BatchIsAuthorizedInput < Struct.new(
+      nil,
       :policy_store_id,
       :entities,
       :requests,
@@ -216,6 +224,7 @@ module Aws::VerifiedPermissions
     #   <p>Specifies additional context that can be used to make more granular authorization decisions.</p>
     #   @return [Types::ContextDefinition]
     class BatchIsAuthorizedInputItem < Struct.new(
+      nil,
       :principal,
       :action,
       :resource,
@@ -229,6 +238,7 @@ module Aws::VerifiedPermissions
     #   <p>A series of <code>Allow</code> or <code>Deny</code> decisions for each request, and the policies that produced them. These results are returned in the order they were requested.</p>
     #   @return [Array<Types::BatchIsAuthorizedOutputItem>]
     class BatchIsAuthorizedOutput < Struct.new(
+      nil,
       :results,
       keyword_init: true
     )
@@ -249,6 +259,7 @@ module Aws::VerifiedPermissions
     #   <p>Errors that occurred while making an authorization decision. For example, a policy might reference an entity or attribute that doesn't exist in the request.</p>
     #   @return [Array<Types::EvaluationErrorItem>]
     class BatchIsAuthorizedOutputItem < Struct.new(
+      nil,
       :request,
       :decision,
       :determining_policies,
@@ -274,6 +285,7 @@ module Aws::VerifiedPermissions
     #   <p>An array of up to 30 requests that you want Verified Permissions to evaluate.</p>
     #   @return [Array<Types::BatchIsAuthorizedWithTokenInputItem>]
     class BatchIsAuthorizedWithTokenInput < Struct.new(
+      nil,
       :policy_store_id,
       :identity_token,
       :access_token,
@@ -295,6 +307,7 @@ module Aws::VerifiedPermissions
     #   <p>Specifies additional context that can be used to make more granular authorization decisions.</p>
     #   @return [Types::ContextDefinition]
     class BatchIsAuthorizedWithTokenInputItem < Struct.new(
+      nil,
       :action,
       :resource,
       :context,
@@ -310,6 +323,7 @@ module Aws::VerifiedPermissions
     #   <p>A series of <code>Allow</code> or <code>Deny</code> decisions for each request, and the policies that produced them. These results are returned in the order they were requested.</p>
     #   @return [Array<Types::BatchIsAuthorizedWithTokenOutputItem>]
     class BatchIsAuthorizedWithTokenOutput < Struct.new(
+      nil,
       :principal,
       :results,
       keyword_init: true
@@ -331,6 +345,7 @@ module Aws::VerifiedPermissions
     #   <p>Errors that occurred while making an authorization decision. For example, a policy might reference an entity or attribute that doesn't exist in the request.</p>
     #   @return [Array<Types::EvaluationErrorItem>]
     class BatchIsAuthorizedWithTokenOutputItem < Struct.new(
+      nil,
       :request,
       :decision,
       :determining_policies,
@@ -345,6 +360,7 @@ module Aws::VerifiedPermissions
     #   <p>The name of the schema entity type that's mapped to the user pool group. Defaults to <code>AWS::CognitoGroup</code>.</p>
     #   @return [String]
     class CognitoGroupConfiguration < Struct.new(
+      nil,
       :group_entity_type,
       keyword_init: true
     )
@@ -356,6 +372,7 @@ module Aws::VerifiedPermissions
     #   <p>The name of the schema entity type that's mapped to the user pool group. Defaults to <code>AWS::CognitoGroup</code>.</p>
     #   @return [String]
     class CognitoGroupConfigurationDetail < Struct.new(
+      nil,
       :group_entity_type,
       keyword_init: true
     )
@@ -367,6 +384,7 @@ module Aws::VerifiedPermissions
     #   <p>The name of the schema entity type that's mapped to the user pool group. Defaults to <code>AWS::CognitoGroup</code>.</p>
     #   @return [String]
     class CognitoGroupConfigurationItem < Struct.new(
+      nil,
       :group_entity_type,
       keyword_init: true
     )
@@ -384,6 +402,7 @@ module Aws::VerifiedPermissions
     #   <p>The type of entity that a policy store maps to groups from an Amazon Cognito user pool identity source.</p>
     #   @return [Types::CognitoGroupConfiguration]
     class CognitoUserPoolConfiguration < Struct.new(
+      nil,
       :user_pool_arn,
       :client_ids,
       :group_configuration,
@@ -406,6 +425,7 @@ module Aws::VerifiedPermissions
     #   <p>The type of entity that a policy store maps to groups from an Amazon Cognito user pool identity source.</p>
     #   @return [Types::CognitoGroupConfigurationDetail]
     class CognitoUserPoolConfigurationDetail < Struct.new(
+      nil,
       :user_pool_arn,
       :client_ids,
       :issuer,
@@ -429,6 +449,7 @@ module Aws::VerifiedPermissions
     #   <p>The type of entity that a policy store maps to groups from an Amazon Cognito user pool identity source.</p>
     #   @return [Types::CognitoGroupConfigurationItem]
     class CognitoUserPoolConfigurationItem < Struct.new(
+      nil,
       :user_pool_arn,
       :client_ids,
       :issuer,
@@ -505,6 +526,7 @@ module Aws::VerifiedPermissions
     #   <p>The list of resources referenced with this failed request.</p>
     #   @return [Array<Types::ResourceConflict>]
     class ConflictException < Struct.new(
+      nil,
       :message,
       :resources,
       keyword_init: true
@@ -545,6 +567,7 @@ module Aws::VerifiedPermissions
     #   <p>Specifies the namespace and data type of the principals generated for identities authenticated by the new identity source.</p>
     #   @return [String]
     class CreateIdentitySourceInput < Struct.new(
+      nil,
       :client_token,
       :policy_store_id,
       :configuration,
@@ -567,6 +590,7 @@ module Aws::VerifiedPermissions
     #   <p>The ID of the policy store that contains the identity source.</p>
     #   @return [String]
     class CreateIdentitySourceOutput < Struct.new(
+      nil,
       :created_date,
       :identity_source_id,
       :last_updated_date,
@@ -586,6 +610,7 @@ module Aws::VerifiedPermissions
     #   <p>A structure that specifies the policy type and content to use for the new policy. You must include either a static or a templateLinked element. The policy content must be written in the Cedar policy language.</p>
     #   @return [Types::PolicyDefinition]
     class CreatePolicyInput < Struct.new(
+      nil,
       :client_token,
       :policy_store_id,
       :definition,
@@ -622,6 +647,7 @@ module Aws::VerifiedPermissions
     #   <p>The effect of the decision that a policy returns to an authorization request. For example, <code>"effect": "Permit"</code>.</p>
     #   @return [String]
     class CreatePolicyOutput < Struct.new(
+      nil,
       :policy_store_id,
       :policy_id,
       :policy_type,
@@ -652,6 +678,7 @@ module Aws::VerifiedPermissions
     #   <p>The list of key-value pairs to associate with the policy store.</p>
     #   @return [Hash<String, String>]
     class CreatePolicyStoreInput < Struct.new(
+      nil,
       :client_token,
       :validation_settings,
       :description,
@@ -675,6 +702,7 @@ module Aws::VerifiedPermissions
     #   <p>The date and time the policy store was last updated.</p>
     #   @return [Time]
     class CreatePolicyStoreOutput < Struct.new(
+      nil,
       :policy_store_id,
       :arn,
       :created_date,
@@ -697,6 +725,7 @@ module Aws::VerifiedPermissions
     #   <p>Specifies the content that you want to use for the new policy template, written in the Cedar policy language.</p>
     #   @return [String]
     class CreatePolicyTemplateInput < Struct.new(
+      nil,
       :client_token,
       :policy_store_id,
       :description,
@@ -719,6 +748,7 @@ module Aws::VerifiedPermissions
     #   <p>The date and time the policy template was most recently updated.</p>
     #   @return [Time]
     class CreatePolicyTemplateOutput < Struct.new(
+      nil,
       :policy_store_id,
       :policy_template_id,
       :created_date,
@@ -735,6 +765,7 @@ module Aws::VerifiedPermissions
     #   <p>Specifies the ID of the identity source that you want to delete.</p>
     #   @return [String]
     class DeleteIdentitySourceInput < Struct.new(
+      nil,
       :policy_store_id,
       :identity_source_id,
       keyword_init: true
@@ -743,6 +774,7 @@ module Aws::VerifiedPermissions
     end
 
     class DeleteIdentitySourceOutput < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -755,6 +787,7 @@ module Aws::VerifiedPermissions
     #   <p>Specifies the ID of the policy that you want to delete.</p>
     #   @return [String]
     class DeletePolicyInput < Struct.new(
+      nil,
       :policy_store_id,
       :policy_id,
       keyword_init: true
@@ -763,6 +796,7 @@ module Aws::VerifiedPermissions
     end
 
     class DeletePolicyOutput < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -772,6 +806,7 @@ module Aws::VerifiedPermissions
     #   <p>Specifies the ID of the policy store that you want to delete.</p>
     #   @return [String]
     class DeletePolicyStoreInput < Struct.new(
+      nil,
       :policy_store_id,
       keyword_init: true
     )
@@ -779,6 +814,7 @@ module Aws::VerifiedPermissions
     end
 
     class DeletePolicyStoreOutput < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -791,6 +827,7 @@ module Aws::VerifiedPermissions
     #   <p>Specifies the ID of the policy template that you want to delete.</p>
     #   @return [String]
     class DeletePolicyTemplateInput < Struct.new(
+      nil,
       :policy_store_id,
       :policy_template_id,
       keyword_init: true
@@ -799,6 +836,7 @@ module Aws::VerifiedPermissions
     end
 
     class DeletePolicyTemplateOutput < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -809,6 +847,7 @@ module Aws::VerifiedPermissions
     #   <p>The Id of a policy that determined to an authorization decision.</p> <p>Example: <code>"policyId":"SPEXAMPLEabcdefg111111"</code> </p>
     #   @return [String]
     class DeterminingPolicyItem < Struct.new(
+      nil,
       :policy_id,
       keyword_init: true
     )
@@ -843,6 +882,7 @@ module Aws::VerifiedPermissions
     #   <p>The identifier of an entity.</p> <p> <code>"entityId":"<i>identifier</i>"</code> </p>
     #   @return [String]
     class EntityIdentifier < Struct.new(
+      nil,
       :entity_type,
       :entity_id,
       keyword_init: true
@@ -861,6 +901,7 @@ module Aws::VerifiedPermissions
     #   <p>The parent entities in the hierarchy that contains the entity. A principal or resource entity can be defined with at most 99 <i>transitive parents</i> per authorization request. </p> <p>A transitive parent is an entity in the hierarchy of entities including all direct parents, and parents of parents. For example, a user can be a member of 91 groups if one of those groups is a member of eight groups, for a total of 100: one entity, 91 entity parents, and eight parents of parents. </p>
     #   @return [Array<Types::EntityIdentifier>]
     class EntityItem < Struct.new(
+      nil,
       :identifier,
       :attributes,
       :parents,
@@ -895,6 +936,7 @@ module Aws::VerifiedPermissions
     #   <p>The error description.</p>
     #   @return [String]
     class EvaluationErrorItem < Struct.new(
+      nil,
       :error_description,
       keyword_init: true
     )
@@ -908,6 +950,7 @@ module Aws::VerifiedPermissions
     #   <p>Specifies the ID of the identity source you want information about.</p>
     #   @return [String]
     class GetIdentitySourceInput < Struct.new(
+      nil,
       :policy_store_id,
       :identity_source_id,
       keyword_init: true
@@ -939,6 +982,7 @@ module Aws::VerifiedPermissions
     #   <p>Contains configuration information about an identity source.</p>
     #   @return [Types::ConfigurationDetail]
     class GetIdentitySourceOutput < Struct.new(
+      nil,
       :created_date,
       :details,
       :identity_source_id,
@@ -958,6 +1002,7 @@ module Aws::VerifiedPermissions
     #   <p>Specifies the ID of the policy you want information about.</p>
     #   @return [String]
     class GetPolicyInput < Struct.new(
+      nil,
       :policy_store_id,
       :policy_id,
       keyword_init: true
@@ -996,6 +1041,7 @@ module Aws::VerifiedPermissions
     #   <p>The effect of the decision that a policy returns to an authorization request. For example, <code>"effect": "Permit"</code>.</p>
     #   @return [String]
     class GetPolicyOutput < Struct.new(
+      nil,
       :policy_store_id,
       :policy_id,
       :policy_type,
@@ -1018,6 +1064,7 @@ module Aws::VerifiedPermissions
     #   <p>Specifies whether to return the tags that are attached to the policy store. If this parameter is included in the API call, the tags are returned, otherwise they are not returned.</p> <note> <p>If this parameter is included in the API call but there are no tags attached to the policy store, the <code>tags</code> response parameter is omitted from the response.</p> </note>
     #   @return [Boolean]
     class GetPolicyStoreInput < Struct.new(
+      nil,
       :policy_store_id,
       :tags,
       keyword_init: true
@@ -1053,6 +1100,7 @@ module Aws::VerifiedPermissions
     #   <p>The list of tags associated with the policy store.</p>
     #   @return [Hash<String, String>]
     class GetPolicyStoreOutput < Struct.new(
+      nil,
       :policy_store_id,
       :arn,
       :validation_settings,
@@ -1074,6 +1122,7 @@ module Aws::VerifiedPermissions
     #   <p>Specifies the ID of the policy template that you want information about.</p>
     #   @return [String]
     class GetPolicyTemplateInput < Struct.new(
+      nil,
       :policy_store_id,
       :policy_template_id,
       keyword_init: true
@@ -1100,6 +1149,7 @@ module Aws::VerifiedPermissions
     #   <p>The date and time that the policy template was most recently updated.</p>
     #   @return [Time]
     class GetPolicyTemplateOutput < Struct.new(
+      nil,
       :policy_store_id,
       :policy_template_id,
       :description,
@@ -1115,6 +1165,7 @@ module Aws::VerifiedPermissions
     #   <p>Specifies the ID of the policy store that contains the schema.</p>
     #   @return [String]
     class GetSchemaInput < Struct.new(
+      nil,
       :policy_store_id,
       keyword_init: true
     )
@@ -1137,6 +1188,7 @@ module Aws::VerifiedPermissions
     #   <p>The namespaces of the entities referenced by this schema.</p>
     #   @return [Array<String>]
     class GetSchemaOutput < Struct.new(
+      nil,
       :policy_store_id,
       :schema,
       :created_date,
@@ -1171,6 +1223,7 @@ module Aws::VerifiedPermissions
     #     This attribute has been replaced by configuration
     #   @return [String]
     class IdentitySourceDetails < Struct.new(
+      nil,
       :client_ids,
       :user_pool_arn,
       :discovery_url,
@@ -1185,6 +1238,7 @@ module Aws::VerifiedPermissions
     #   <p>The Cedar entity type of the principals returned by the identity provider (IdP) associated with this identity source.</p>
     #   @return [String]
     class IdentitySourceFilter < Struct.new(
+      nil,
       :principal_entity_type,
       keyword_init: true
     )
@@ -1216,6 +1270,7 @@ module Aws::VerifiedPermissions
     #   <p>Contains configuration information about an identity source.</p>
     #   @return [Types::ConfigurationItem]
     class IdentitySourceItem < Struct.new(
+      nil,
       :created_date,
       :details,
       :identity_source_id,
@@ -1252,6 +1307,7 @@ module Aws::VerifiedPermissions
     #     This attribute has been replaced by configuration
     #   @return [String]
     class IdentitySourceItemDetails < Struct.new(
+      nil,
       :client_ids,
       :user_pool_arn,
       :discovery_url,
@@ -1265,6 +1321,7 @@ module Aws::VerifiedPermissions
     # @!attribute message
     #   @return [String]
     class InternalServerException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -1275,6 +1332,7 @@ module Aws::VerifiedPermissions
     # @!attribute message
     #   @return [String]
     class InvalidStateException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -1300,6 +1358,7 @@ module Aws::VerifiedPermissions
     #   <p>(Optional) Specifies the list of resources and principals and their associated attributes that Verified Permissions can examine when evaluating the policies. These additional entities and their attributes can be referenced and checked by conditional elements in the policies in the specified policy store.</p> <note> <p>You can include only principal and resource entities in this parameter; you can't include actions. You must specify actions in the schema.</p> </note>
     #   @return [Types::EntitiesDefinition]
     class IsAuthorizedInput < Struct.new(
+      nil,
       :policy_store_id,
       :principal,
       :action,
@@ -1321,6 +1380,7 @@ module Aws::VerifiedPermissions
     #   <p>Errors that occurred while making an authorization decision, for example, a policy references an Entity or entity Attribute that does not exist in the slice.</p>
     #   @return [Array<Types::EvaluationErrorItem>]
     class IsAuthorizedOutput < Struct.new(
+      nil,
       :decision,
       :determining_policies,
       :errors,
@@ -1351,6 +1411,7 @@ module Aws::VerifiedPermissions
     #   <p>(Optional) Specifies the list of resources and their associated attributes that Verified Permissions can examine when evaluating the policies. These additional entities and their attributes can be referenced and checked by conditional elements in the policies in the specified policy store.</p> <important> <p>You can't include principals in this parameter, only resource and action entities. This parameter can't include any entities of a type that matches the user or group entity types that you defined in your identity source.</p> <ul> <li> <p>The <code>IsAuthorizedWithToken</code> operation takes principal attributes from <b> <i>only</i> </b> the <code>identityToken</code> or <code>accessToken</code> passed to the operation.</p> </li> <li> <p>For action entities, you can include only their <code>Identifier</code> and <code>EntityType</code>. </p> </li> </ul> </important>
     #   @return [Types::EntitiesDefinition]
     class IsAuthorizedWithTokenInput < Struct.new(
+      nil,
       :policy_store_id,
       :identity_token,
       :access_token,
@@ -1376,6 +1437,7 @@ module Aws::VerifiedPermissions
     #   <p>The identifier of the principal in the ID or access token.</p>
     #   @return [Types::EntityIdentifier]
     class IsAuthorizedWithTokenOutput < Struct.new(
+      nil,
       :decision,
       :determining_policies,
       :errors,
@@ -1398,6 +1460,7 @@ module Aws::VerifiedPermissions
     #   <p>Specifies characteristics of an identity source that you can use to limit the output to matching identity sources.</p>
     #   @return [Array<Types::IdentitySourceFilter>]
     class ListIdentitySourcesInput < Struct.new(
+      nil,
       :policy_store_id,
       :next_token,
       :max_results,
@@ -1414,6 +1477,7 @@ module Aws::VerifiedPermissions
     #   <p>The list of identity sources stored in the specified policy store.</p>
     #   @return [Array<Types::IdentitySourceItem>]
     class ListIdentitySourcesOutput < Struct.new(
+      nil,
       :next_token,
       :identity_sources,
       keyword_init: true
@@ -1434,6 +1498,7 @@ module Aws::VerifiedPermissions
     #   <p>Specifies a filter that limits the response to only policies that match the specified criteria. For example, you list only the policies that reference a specified principal.</p>
     #   @return [Types::PolicyFilter]
     class ListPoliciesInput < Struct.new(
+      nil,
       :policy_store_id,
       :next_token,
       :max_results,
@@ -1450,6 +1515,7 @@ module Aws::VerifiedPermissions
     #   <p>Lists all policies that are available in the specified policy store.</p>
     #   @return [Array<Types::PolicyItem>]
     class ListPoliciesOutput < Struct.new(
+      nil,
       :next_token,
       :policies,
       keyword_init: true
@@ -1464,6 +1530,7 @@ module Aws::VerifiedPermissions
     #   <p>Specifies the total number of results that you want included in each response. If additional items exist beyond the number you specify, the <code>NextToken</code> response element is returned with a value (not null). Include the specified value as the <code>NextToken</code> request parameter in the next call to the operation to get the next set of results. Note that the service might return fewer results than the maximum even when there are more results available. You should check <code>NextToken</code> after every operation to ensure that you receive all of the results.</p> <p>If you do not specify this parameter, the operation defaults to 10 policy stores per response. You can specify a maximum of 50 policy stores per response.</p>
     #   @return [Integer]
     class ListPolicyStoresInput < Struct.new(
+      nil,
       :next_token,
       :max_results,
       keyword_init: true
@@ -1478,6 +1545,7 @@ module Aws::VerifiedPermissions
     #   <p>The list of policy stores in the account.</p>
     #   @return [Array<Types::PolicyStoreItem>]
     class ListPolicyStoresOutput < Struct.new(
+      nil,
       :next_token,
       :policy_stores,
       keyword_init: true
@@ -1495,6 +1563,7 @@ module Aws::VerifiedPermissions
     #   <p>Specifies the total number of results that you want included in each response. If additional items exist beyond the number you specify, the <code>NextToken</code> response element is returned with a value (not null). Include the specified value as the <code>NextToken</code> request parameter in the next call to the operation to get the next set of results. Note that the service might return fewer results than the maximum even when there are more results available. You should check <code>NextToken</code> after every operation to ensure that you receive all of the results.</p> <p>If you do not specify this parameter, the operation defaults to 10 policy templates per response. You can specify a maximum of 50 policy templates per response.</p>
     #   @return [Integer]
     class ListPolicyTemplatesInput < Struct.new(
+      nil,
       :policy_store_id,
       :next_token,
       :max_results,
@@ -1510,6 +1579,7 @@ module Aws::VerifiedPermissions
     #   <p>The list of the policy templates in the specified policy store.</p>
     #   @return [Array<Types::PolicyTemplateItem>]
     class ListPolicyTemplatesOutput < Struct.new(
+      nil,
       :next_token,
       :policy_templates,
       keyword_init: true
@@ -1521,6 +1591,7 @@ module Aws::VerifiedPermissions
     #   <p>The ARN of the resource for which you want to view tags.</p>
     #   @return [String]
     class ListTagsForResourceInput < Struct.new(
+      nil,
       :resource_arn,
       keyword_init: true
     )
@@ -1531,6 +1602,7 @@ module Aws::VerifiedPermissions
     #   <p>The list of tags associated with the resource.</p>
     #   @return [Hash<String, String>]
     class ListTagsForResourceOutput < Struct.new(
+      nil,
       :tags,
       keyword_init: true
     )
@@ -1545,6 +1617,7 @@ module Aws::VerifiedPermissions
     #   <p>The access token <code>aud</code> claim values that you want to accept in your policy store. For example, <code>https://myapp.example.com, https://myapp2.example.com</code>.</p>
     #   @return [Array<String>]
     class OpenIdConnectAccessTokenConfiguration < Struct.new(
+      nil,
       :principal_id_claim,
       :audiences,
       keyword_init: true
@@ -1565,6 +1638,7 @@ module Aws::VerifiedPermissions
     #   <p>The access token <code>aud</code> claim values that you want to accept in your policy store. For example, <code>https://myapp.example.com, https://myapp2.example.com</code>.</p>
     #   @return [Array<String>]
     class OpenIdConnectAccessTokenConfigurationDetail < Struct.new(
+      nil,
       :principal_id_claim,
       :audiences,
       keyword_init: true
@@ -1585,6 +1659,7 @@ module Aws::VerifiedPermissions
     #   <p>The access token <code>aud</code> claim values that you want to accept in your policy store. For example, <code>https://myapp.example.com, https://myapp2.example.com</code>.</p>
     #   @return [Array<String>]
     class OpenIdConnectAccessTokenConfigurationItem < Struct.new(
+      nil,
       :principal_id_claim,
       :audiences,
       keyword_init: true
@@ -1611,6 +1686,7 @@ module Aws::VerifiedPermissions
     #   <p>The token type that you want to process from your OIDC identity provider. Your policy store can process either identity (ID) or access tokens from a given OIDC identity source.</p>
     #   @return [Types::OpenIdConnectTokenSelection]
     class OpenIdConnectConfiguration < Struct.new(
+      nil,
       :issuer,
       :entity_id_prefix,
       :group_configuration,
@@ -1634,6 +1710,7 @@ module Aws::VerifiedPermissions
     #   <p>The token type that you want to process from your OIDC identity provider. Your policy store can process either identity (ID) or access tokens from a given OIDC identity source.</p>
     #   @return [Types::OpenIdConnectTokenSelectionDetail]
     class OpenIdConnectConfigurationDetail < Struct.new(
+      nil,
       :issuer,
       :entity_id_prefix,
       :group_configuration,
@@ -1657,6 +1734,7 @@ module Aws::VerifiedPermissions
     #   <p>The token type that you want to process from your OIDC identity provider. Your policy store can process either identity (ID) or access tokens from a given OIDC identity source.</p>
     #   @return [Types::OpenIdConnectTokenSelectionItem]
     class OpenIdConnectConfigurationItem < Struct.new(
+      nil,
       :issuer,
       :entity_id_prefix,
       :group_configuration,
@@ -1674,6 +1752,7 @@ module Aws::VerifiedPermissions
     #   <p>The policy store entity type that you want to map your users' group claim to. For example, <code>MyCorp::UserGroup</code>. A group entity type is an entity that can have a user entity type as a member.</p>
     #   @return [String]
     class OpenIdConnectGroupConfiguration < Struct.new(
+      nil,
       :group_claim,
       :group_entity_type,
       keyword_init: true
@@ -1689,6 +1768,7 @@ module Aws::VerifiedPermissions
     #   <p>The policy store entity type that you want to map your users' group claim to. For example, <code>MyCorp::UserGroup</code>. A group entity type is an entity that can have a user entity type as a member.</p>
     #   @return [String]
     class OpenIdConnectGroupConfigurationDetail < Struct.new(
+      nil,
       :group_claim,
       :group_entity_type,
       keyword_init: true
@@ -1704,6 +1784,7 @@ module Aws::VerifiedPermissions
     #   <p>The policy store entity type that you want to map your users' group claim to. For example, <code>MyCorp::UserGroup</code>. A group entity type is an entity that can have a user entity type as a member.</p>
     #   @return [String]
     class OpenIdConnectGroupConfigurationItem < Struct.new(
+      nil,
       :group_claim,
       :group_entity_type,
       keyword_init: true
@@ -1719,6 +1800,7 @@ module Aws::VerifiedPermissions
     #   <p>The ID token audience, or client ID, claim values that you want to accept in your policy store from an OIDC identity provider. For example, <code>1example23456789, 2example10111213</code>.</p>
     #   @return [Array<String>]
     class OpenIdConnectIdentityTokenConfiguration < Struct.new(
+      nil,
       :principal_id_claim,
       :client_ids,
       keyword_init: true
@@ -1739,6 +1821,7 @@ module Aws::VerifiedPermissions
     #   <p>The ID token audience, or client ID, claim values that you want to accept in your policy store from an OIDC identity provider. For example, <code>1example23456789, 2example10111213</code>.</p>
     #   @return [Array<String>]
     class OpenIdConnectIdentityTokenConfigurationDetail < Struct.new(
+      nil,
       :principal_id_claim,
       :client_ids,
       keyword_init: true
@@ -1759,6 +1842,7 @@ module Aws::VerifiedPermissions
     #   <p>The ID token audience, or client ID, claim values that you want to accept in your policy store from an OIDC identity provider. For example, <code>1example23456789, 2example10111213</code>.</p>
     #   @return [Array<String>]
     class OpenIdConnectIdentityTokenConfigurationItem < Struct.new(
+      nil,
       :principal_id_claim,
       :client_ids,
       keyword_init: true
@@ -1905,6 +1989,7 @@ module Aws::VerifiedPermissions
     #   <p>Filters the output to only template-linked policies that were instantiated from the specified policy template.</p>
     #   @return [String]
     class PolicyFilter < Struct.new(
+      nil,
       :principal,
       :resource,
       :policy_type,
@@ -1946,6 +2031,7 @@ module Aws::VerifiedPermissions
     #   <p>The effect of the decision that a policy returns to an authorization request. For example, <code>"effect": "Permit"</code>.</p>
     #   @return [String]
     class PolicyItem < Struct.new(
+      nil,
       :policy_store_id,
       :policy_id,
       :policy_type,
@@ -1978,6 +2064,7 @@ module Aws::VerifiedPermissions
     #   <p>Descriptive text that you can provide to help with identification of the current policy store.</p>
     #   @return [String]
     class PolicyStoreItem < Struct.new(
+      nil,
       :policy_store_id,
       :arn,
       :created_date,
@@ -2005,6 +2092,7 @@ module Aws::VerifiedPermissions
     #   <p>The date and time that the policy template was most recently updated.</p>
     #   @return [Time]
     class PolicyTemplateItem < Struct.new(
+      nil,
       :policy_store_id,
       :policy_template_id,
       :description,
@@ -2022,6 +2110,7 @@ module Aws::VerifiedPermissions
     #   <p>Specifies the definition of the schema to be stored. The schema definition must be written in Cedar schema JSON.</p>
     #   @return [Types::SchemaDefinition]
     class PutSchemaInput < Struct.new(
+      nil,
       :policy_store_id,
       :definition,
       keyword_init: true
@@ -2042,6 +2131,7 @@ module Aws::VerifiedPermissions
     #   <p>The date and time that the schema was last updated.</p>
     #   @return [Time]
     class PutSchemaOutput < Struct.new(
+      nil,
       :policy_store_id,
       :namespaces,
       :created_date,
@@ -2059,6 +2149,7 @@ module Aws::VerifiedPermissions
     #   <p>The type of the resource involved in a conflict.</p>
     #   @return [String]
     class ResourceConflict < Struct.new(
+      nil,
       :resource_id,
       :resource_type,
       keyword_init: true
@@ -2076,6 +2167,7 @@ module Aws::VerifiedPermissions
     #   <p>The resource type of the resource referenced in the failed request.</p>
     #   @return [String]
     class ResourceNotFoundException < Struct.new(
+      nil,
       :message,
       :resource_id,
       :resource_type,
@@ -2115,6 +2207,7 @@ module Aws::VerifiedPermissions
     #   <p>The quota code recognized by the Amazon Web Services Service Quotas service.</p>
     #   @return [String]
     class ServiceQuotaExceededException < Struct.new(
+      nil,
       :message,
       :resource_id,
       :resource_type,
@@ -2133,6 +2226,7 @@ module Aws::VerifiedPermissions
     #   <p>The policy content of the static policy, written in the Cedar policy language.</p>
     #   @return [String]
     class StaticPolicyDefinition < Struct.new(
+      nil,
       :description,
       :statement,
       keyword_init: true
@@ -2148,6 +2242,7 @@ module Aws::VerifiedPermissions
     #   <p>The content of the static policy written in the Cedar policy language.</p>
     #   @return [String]
     class StaticPolicyDefinitionDetail < Struct.new(
+      nil,
       :description,
       :statement,
       keyword_init: true
@@ -2160,6 +2255,7 @@ module Aws::VerifiedPermissions
     #   <p>A description of the static policy.</p>
     #   @return [String]
     class StaticPolicyDefinitionItem < Struct.new(
+      nil,
       :description,
       keyword_init: true
     )
@@ -2173,6 +2269,7 @@ module Aws::VerifiedPermissions
     #   <p>The list of key-value pairs to associate with the resource.</p>
     #   @return [Hash<String, String>]
     class TagResourceInput < Struct.new(
+      nil,
       :resource_arn,
       :tags,
       keyword_init: true
@@ -2181,6 +2278,7 @@ module Aws::VerifiedPermissions
     end
 
     class TagResourceOutput < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -2197,6 +2295,7 @@ module Aws::VerifiedPermissions
     #   <p>The resource associated with this template-linked policy. Verified Permissions substitutes this resource for the <code>?resource</code> placeholder in the policy template when it evaluates an authorization request.</p>
     #   @return [Types::EntityIdentifier]
     class TemplateLinkedPolicyDefinition < Struct.new(
+      nil,
       :policy_template_id,
       :principal,
       :resource,
@@ -2216,6 +2315,7 @@ module Aws::VerifiedPermissions
     #   <p>The resource associated with this template-linked policy. Verified Permissions substitutes this resource for the <code>?resource</code> placeholder in the policy template when it evaluates an authorization request.</p>
     #   @return [Types::EntityIdentifier]
     class TemplateLinkedPolicyDefinitionDetail < Struct.new(
+      nil,
       :policy_template_id,
       :principal,
       :resource,
@@ -2235,6 +2335,7 @@ module Aws::VerifiedPermissions
     #   <p>The resource associated with this template-linked policy. Verified Permissions substitutes this resource for the <code>?resource</code> placeholder in the policy template when it evaluates an authorization request.</p>
     #   @return [Types::EntityIdentifier]
     class TemplateLinkedPolicyDefinitionItem < Struct.new(
+      nil,
       :policy_template_id,
       :principal,
       :resource,
@@ -2253,6 +2354,7 @@ module Aws::VerifiedPermissions
     #   <p>The quota code recognized by the Amazon Web Services Service Quotas service.</p>
     #   @return [String]
     class ThrottlingException < Struct.new(
+      nil,
       :message,
       :service_code,
       :quota_code,
@@ -2268,6 +2370,7 @@ module Aws::VerifiedPermissions
     #   An Amazon Resource Name (ARN) uniquely identifies an AWS resource.
     #   @return [String]
     class TooManyTagsException < Struct.new(
+      nil,
       :message,
       :resource_name,
       keyword_init: true
@@ -2282,6 +2385,7 @@ module Aws::VerifiedPermissions
     #   <p>The list of tag keys to remove from the resource.</p>
     #   @return [Array<String>]
     class UntagResourceInput < Struct.new(
+      nil,
       :resource_arn,
       :tag_keys,
       keyword_init: true
@@ -2290,6 +2394,7 @@ module Aws::VerifiedPermissions
     end
 
     class UntagResourceOutput < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -2300,6 +2405,7 @@ module Aws::VerifiedPermissions
     #   <p>The name of the schema entity type that's mapped to the user pool group. Defaults to <code>AWS::CognitoGroup</code>.</p>
     #   @return [String]
     class UpdateCognitoGroupConfiguration < Struct.new(
+      nil,
       :group_entity_type,
       keyword_init: true
     )
@@ -2317,6 +2423,7 @@ module Aws::VerifiedPermissions
     #   <p>The configuration of the user groups from an Amazon Cognito user pool identity source.</p>
     #   @return [Types::UpdateCognitoGroupConfiguration]
     class UpdateCognitoUserPoolConfiguration < Struct.new(
+      nil,
       :user_pool_arn,
       :client_ids,
       :group_configuration,
@@ -2358,6 +2465,7 @@ module Aws::VerifiedPermissions
     #   <p>Specifies the data type of principals generated for identities authenticated by the identity source.</p>
     #   @return [String]
     class UpdateIdentitySourceInput < Struct.new(
+      nil,
       :policy_store_id,
       :identity_source_id,
       :update_configuration,
@@ -2380,6 +2488,7 @@ module Aws::VerifiedPermissions
     #   <p>The ID of the policy store that contains the updated identity source.</p>
     #   @return [String]
     class UpdateIdentitySourceOutput < Struct.new(
+      nil,
       :created_date,
       :identity_source_id,
       :last_updated_date,
@@ -2397,6 +2506,7 @@ module Aws::VerifiedPermissions
     #   <p>The access token <code>aud</code> claim values that you want to accept in your policy store. For example, <code>https://myapp.example.com, https://myapp2.example.com</code>.</p>
     #   @return [Array<String>]
     class UpdateOpenIdConnectAccessTokenConfiguration < Struct.new(
+      nil,
       :principal_id_claim,
       :audiences,
       keyword_init: true
@@ -2423,6 +2533,7 @@ module Aws::VerifiedPermissions
     #   <p>The token type that you want to process from your OIDC identity provider. Your policy store can process either identity (ID) or access tokens from a given OIDC identity source.</p>
     #   @return [Types::UpdateOpenIdConnectTokenSelection]
     class UpdateOpenIdConnectConfiguration < Struct.new(
+      nil,
       :issuer,
       :entity_id_prefix,
       :group_configuration,
@@ -2440,6 +2551,7 @@ module Aws::VerifiedPermissions
     #   <p>The policy store entity type that you want to map your users' group claim to. For example, <code>MyCorp::UserGroup</code>. A group entity type is an entity that can have a user entity type as a member.</p>
     #   @return [String]
     class UpdateOpenIdConnectGroupConfiguration < Struct.new(
+      nil,
       :group_claim,
       :group_entity_type,
       keyword_init: true
@@ -2455,6 +2567,7 @@ module Aws::VerifiedPermissions
     #   <p>The ID token audience, or client ID, claim values that you want to accept in your policy store from an OIDC identity provider. For example, <code>1example23456789, 2example10111213</code>.</p>
     #   @return [Array<String>]
     class UpdateOpenIdConnectIdentityTokenConfiguration < Struct.new(
+      nil,
       :principal_id_claim,
       :client_ids,
       keyword_init: true
@@ -2512,6 +2625,7 @@ module Aws::VerifiedPermissions
     #   <p>Specifies the updated policy content that you want to replace on the specified policy. The content must be valid Cedar policy language text.</p> <p>You can change only the following elements from the policy definition:</p> <ul> <li> <p>The <code>action</code> referenced by the policy.</p> </li> <li> <p>Any conditional clauses, such as <code>when</code> or <code>unless</code> clauses.</p> </li> </ul> <p>You <b>can't</b> change the following elements:</p> <ul> <li> <p>Changing from <code>static</code> to <code>templateLinked</code>.</p> </li> <li> <p>Changing the effect of the policy from <code>permit</code> or <code>forbid</code>.</p> </li> <li> <p>The <code>principal</code> referenced by the policy.</p> </li> <li> <p>The <code>resource</code> referenced by the policy.</p> </li> </ul>
     #   @return [Types::UpdatePolicyDefinition]
     class UpdatePolicyInput < Struct.new(
+      nil,
       :policy_store_id,
       :policy_id,
       :definition,
@@ -2548,6 +2662,7 @@ module Aws::VerifiedPermissions
     #   <p>The effect of the decision that a policy returns to an authorization request. For example, <code>"effect": "Permit"</code>.</p>
     #   @return [String]
     class UpdatePolicyOutput < Struct.new(
+      nil,
       :policy_store_id,
       :policy_id,
       :policy_type,
@@ -2575,6 +2690,7 @@ module Aws::VerifiedPermissions
     #   <p>Descriptive text that you can provide to help with identification of the current policy store.</p>
     #   @return [String]
     class UpdatePolicyStoreInput < Struct.new(
+      nil,
       :policy_store_id,
       :validation_settings,
       :deletion_protection,
@@ -2597,6 +2713,7 @@ module Aws::VerifiedPermissions
     #   <p>The date and time that the policy store was most recently updated.</p>
     #   @return [Time]
     class UpdatePolicyStoreOutput < Struct.new(
+      nil,
       :policy_store_id,
       :arn,
       :created_date,
@@ -2619,6 +2736,7 @@ module Aws::VerifiedPermissions
     #   <p>Specifies new statement content written in Cedar policy language to replace the current body of the policy template.</p> <p>You can change only the following elements of the policy body:</p> <ul> <li> <p>The <code>action</code> referenced by the policy template.</p> </li> <li> <p>Any conditional clauses, such as <code>when</code> or <code>unless</code> clauses.</p> </li> </ul> <p>You <b>can't</b> change the following elements:</p> <ul> <li> <p>The effect (<code>permit</code> or <code>forbid</code>) of the policy template.</p> </li> <li> <p>The <code>principal</code> referenced by the policy template.</p> </li> <li> <p>The <code>resource</code> referenced by the policy template.</p> </li> </ul>
     #   @return [String]
     class UpdatePolicyTemplateInput < Struct.new(
+      nil,
       :policy_store_id,
       :policy_template_id,
       :description,
@@ -2641,6 +2759,7 @@ module Aws::VerifiedPermissions
     #   <p>The date and time that the policy template was most recently updated.</p>
     #   @return [Time]
     class UpdatePolicyTemplateOutput < Struct.new(
+      nil,
       :policy_store_id,
       :policy_template_id,
       :created_date,
@@ -2658,6 +2777,7 @@ module Aws::VerifiedPermissions
     #   <p>Specifies the Cedar policy language text to be added to or replaced on the static policy.</p> <important> <p>You can change only the following elements from the original content:</p> <ul> <li> <p>The <code>action</code> referenced by the policy.</p> </li> <li> <p>Any conditional clauses, such as <code>when</code> or <code>unless</code> clauses.</p> </li> </ul> <p>You <b>can't</b> change the following elements:</p> <ul> <li> <p>Changing from <code>StaticPolicy</code> to <code>TemplateLinkedPolicy</code>.</p> </li> <li> <p>The effect (<code>permit</code> or <code>forbid</code>) of the policy.</p> </li> <li> <p>The <code>principal</code> referenced by the policy.</p> </li> <li> <p>The <code>resource</code> referenced by the policy.</p> </li> </ul> </important>
     #   @return [String]
     class UpdateStaticPolicyDefinition < Struct.new(
+      nil,
       :description,
       :statement,
       keyword_init: true
@@ -2672,6 +2792,7 @@ module Aws::VerifiedPermissions
     #   <p>The list of fields that aren't valid.</p>
     #   @return [Array<Types::ValidationExceptionField>]
     class ValidationException < Struct.new(
+      nil,
       :message,
       :field_list,
       keyword_init: true
@@ -2687,6 +2808,7 @@ module Aws::VerifiedPermissions
     #   <p>Describes the policy validation error.</p>
     #   @return [String]
     class ValidationExceptionField < Struct.new(
+      nil,
       :path,
       :message,
       keyword_init: true
@@ -2699,6 +2821,7 @@ module Aws::VerifiedPermissions
     #   <p>The validation mode currently configured for this policy store. The valid values are:</p> <ul> <li> <p> <b>OFF</b> – Neither Verified Permissions nor Cedar perform any validation on policies. No validation errors are reported by either service.</p> </li> <li> <p> <b>STRICT</b> – Requires a schema to be present in the policy store. Cedar performs validation on all submitted new or updated static policies and policy templates. Any that fail validation are rejected and Cedar doesn't store them in the policy store.</p> </li> </ul> <important> <p>If <code>Mode=STRICT</code> and the policy store doesn't contain a schema, Verified Permissions rejects all static policies and policy templates because there is no schema to validate against. </p> <p>To submit a static policy or policy template without a schema, you must turn off validation.</p> </important>
     #   @return [String]
     class ValidationSettings < Struct.new(
+      nil,
       :mode,
       keyword_init: true
     )

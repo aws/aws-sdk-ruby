@@ -17,6 +17,7 @@ module Aws::IoTTwinMaker
   #   Override the endpoint used to send this request
   #   @return [String]
   EndpointParameters = Struct.new(
+    nil,
     :region,
     :use_dual_stack,
     :use_fips,

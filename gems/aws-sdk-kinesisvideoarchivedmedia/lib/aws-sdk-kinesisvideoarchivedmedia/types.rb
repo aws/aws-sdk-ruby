@@ -10,6 +10,7 @@ module Aws::KinesisVideoArchivedMedia
     # @!attribute message
     #   @return [String]
     class ClientLimitExceededException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -30,6 +31,7 @@ module Aws::KinesisVideoArchivedMedia
     #   <p>The range of timestamps to return.</p>
     #   @return [Types::ClipTimestampRange]
     class ClipFragmentSelector < Struct.new(
+      nil,
       :fragment_selector_type,
       :timestamp_range,
       keyword_init: true
@@ -57,6 +59,7 @@ module Aws::KinesisVideoArchivedMedia
     #               value and continue past it are included in the session. </p>
     #   @return [Time]
     class ClipTimestampRange < Struct.new(
+      nil,
       :start_timestamp,
       :end_timestamp,
       keyword_init: true
@@ -95,6 +98,7 @@ module Aws::KinesisVideoArchivedMedia
     #               <code>LIVE</code>.</p>
     #   @return [Types::DASHTimestampRange]
     class DASHFragmentSelector < Struct.new(
+      nil,
       :fragment_selector_type,
       :timestamp_range,
       keyword_init: true
@@ -136,6 +140,7 @@ module Aws::KinesisVideoArchivedMedia
     #            </note>
     #   @return [Time]
     class DASHTimestampRange < Struct.new(
+      nil,
       :start_timestamp,
       :end_timestamp,
       keyword_init: true
@@ -162,6 +167,7 @@ module Aws::KinesisVideoArchivedMedia
     #   <p>The playback duration or other time value associated with the fragment.</p>
     #   @return [Integer]
     class Fragment < Struct.new(
+      nil,
       :fragment_number,
       :fragment_size_in_bytes,
       :producer_timestamp,
@@ -205,6 +211,7 @@ module Aws::KinesisVideoArchivedMedia
     #   <p>The range of timestamps to return.</p>
     #   @return [Types::TimestampRange]
     class FragmentSelector < Struct.new(
+      nil,
       :fragment_selector_type,
       :timestamp_range,
       keyword_init: true
@@ -224,6 +231,7 @@ module Aws::KinesisVideoArchivedMedia
     #   <p>The time range of the requested clip and the source of the timestamps.</p>
     #   @return [Types::ClipFragmentSelector]
     class GetClipInput < Struct.new(
+      nil,
       :stream_name,
       :stream_arn,
       :clip_fragment_selector,
@@ -242,6 +250,7 @@ module Aws::KinesisVideoArchivedMedia
     #                   Video Streams Limits</a>. </p>
     #   @return [String]
     class GetClipOutput < Struct.new(
+      nil,
       :content_type,
       :payload,
       keyword_init: true
@@ -389,6 +398,7 @@ module Aws::KinesisVideoArchivedMedia
     #               10-second fragments.</p>
     #   @return [Integer]
     class GetDASHStreamingSessionURLInput < Struct.new(
+      nil,
       :stream_name,
       :stream_arn,
       :playback_mode,
@@ -407,6 +417,7 @@ module Aws::KinesisVideoArchivedMedia
     #               MPEG-DASH manifest.</p>
     #   @return [String]
     class GetDASHStreamingSessionURLOutput < Struct.new(
+      nil,
       :dash_streaming_session_url,
       keyword_init: true
     )
@@ -587,6 +598,7 @@ module Aws::KinesisVideoArchivedMedia
     #               10-second fragments.</p>
     #   @return [Integer]
     class GetHLSStreamingSessionURLInput < Struct.new(
+      nil,
       :stream_name,
       :stream_arn,
       :playback_mode,
@@ -606,6 +618,7 @@ module Aws::KinesisVideoArchivedMedia
     #               master playlist.</p>
     #   @return [String]
     class GetHLSStreamingSessionURLOutput < Struct.new(
+      nil,
       :hls_streaming_session_url,
       keyword_init: true
     )
@@ -659,6 +672,7 @@ module Aws::KinesisVideoArchivedMedia
     #   <p>A token that specifies where to start paginating the next set of Images. This is the <code>GetImages:NextToken</code> from a previously truncated response.</p>
     #   @return [String]
     class GetImagesInput < Struct.new(
+      nil,
       :stream_name,
       :stream_arn,
       :image_selector_type,
@@ -684,6 +698,7 @@ module Aws::KinesisVideoArchivedMedia
     #   <p>The encrypted token that was  used in the request to get more images.</p>
     #   @return [String]
     class GetImagesOutput < Struct.new(
+      nil,
       :images,
       :next_token,
       keyword_init: true
@@ -702,6 +717,7 @@ module Aws::KinesisVideoArchivedMedia
     #               values with <a>ListFragments</a>.</p>
     #   @return [Array<String>]
     class GetMediaForFragmentListInput < Struct.new(
+      nil,
       :stream_name,
       :stream_arn,
       :fragments,
@@ -749,6 +765,7 @@ module Aws::KinesisVideoArchivedMedia
     #            </ul>
     #   @return [String]
     class GetMediaForFragmentListOutput < Struct.new(
+      nil,
       :content_type,
       :payload,
       keyword_init: true
@@ -792,6 +809,7 @@ module Aws::KinesisVideoArchivedMedia
     #               <code>LIVE</code>.</p>
     #   @return [Types::HLSTimestampRange]
     class HLSFragmentSelector < Struct.new(
+      nil,
       :fragment_selector_type,
       :timestamp_range,
       keyword_init: true
@@ -830,6 +848,7 @@ module Aws::KinesisVideoArchivedMedia
     #            </note>
     #   @return [Time]
     class HLSTimestampRange < Struct.new(
+      nil,
       :start_timestamp,
       :end_timestamp,
       keyword_init: true
@@ -860,6 +879,7 @@ module Aws::KinesisVideoArchivedMedia
     #   <p>An attribute of the <code>Image</code> object that is Base64 encoded.</p>
     #   @return [String]
     class Image < Struct.new(
+      nil,
       :time_stamp,
       :error,
       :image_content,
@@ -873,6 +893,7 @@ module Aws::KinesisVideoArchivedMedia
     # @!attribute message
     #   @return [String]
     class InvalidArgumentException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -884,6 +905,7 @@ module Aws::KinesisVideoArchivedMedia
     # @!attribute message
     #   @return [String]
     class InvalidCodecPrivateDataException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -895,6 +917,7 @@ module Aws::KinesisVideoArchivedMedia
     # @!attribute message
     #   @return [String]
     class InvalidMediaFrameException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -924,6 +947,7 @@ module Aws::KinesisVideoArchivedMedia
     #            </note>
     #   @return [Types::FragmentSelector]
     class ListFragmentsInput < Struct.new(
+      nil,
       :stream_name,
       :stream_arn,
       :max_results,
@@ -944,6 +968,7 @@ module Aws::KinesisVideoArchivedMedia
     #               to return.</p>
     #   @return [String]
     class ListFragmentsOutput < Struct.new(
+      nil,
       :fragments,
       :next_token,
       keyword_init: true
@@ -955,6 +980,7 @@ module Aws::KinesisVideoArchivedMedia
     # @!attribute message
     #   @return [String]
     class MissingCodecPrivateDataException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -967,6 +993,7 @@ module Aws::KinesisVideoArchivedMedia
     # @!attribute message
     #   @return [String]
     class NoDataRetentionException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -978,6 +1005,7 @@ module Aws::KinesisVideoArchivedMedia
     # @!attribute message
     #   @return [String]
     class NotAuthorizedException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -997,6 +1025,7 @@ module Aws::KinesisVideoArchivedMedia
     # @!attribute message
     #   @return [String]
     class ResourceNotFoundException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -1012,6 +1041,7 @@ module Aws::KinesisVideoArchivedMedia
     #   <p>The ending timestamp in the range of timestamps for which to return fragments.</p>
     #   @return [Time]
     class TimestampRange < Struct.new(
+      nil,
       :start_timestamp,
       :end_timestamp,
       keyword_init: true
@@ -1026,6 +1056,7 @@ module Aws::KinesisVideoArchivedMedia
     # @!attribute message
     #   @return [String]
     class UnsupportedStreamMediaTypeException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )

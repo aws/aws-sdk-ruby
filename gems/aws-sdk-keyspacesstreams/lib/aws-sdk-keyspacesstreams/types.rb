@@ -11,6 +11,7 @@ module Aws::KeyspacesStreams
     #   <p>You don't have sufficient permissions to perform this action.</p>
     #   @return [String]
     class AccessDeniedException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -24,6 +25,7 @@ module Aws::KeyspacesStreams
     #   <p> The maximum number of records to return in a single <code>GetRecords</code> request. Default value is 1000. You can specify a limit between 1 and 1000, but the actual number returned might be less than the specified maximum if the size of the data for the returned records exceeds the internal size limit. </p>
     #   @return [Integer]
     class GetRecordsInput < Struct.new(
+      nil,
       :shard_iterator,
       :max_results,
       keyword_init: true
@@ -38,6 +40,7 @@ module Aws::KeyspacesStreams
     #   <p> The next position in the shard from which to start sequentially reading data records. If null, the shard has been closed and the requested iterator doesn't return any more data. </p>
     #   @return [String]
     class GetRecordsOutput < Struct.new(
+      nil,
       :change_records,
       :next_shard_iterator,
       keyword_init: true
@@ -58,6 +61,7 @@ module Aws::KeyspacesStreams
     #   <p> The sequence number of the data record in the shard from which to start reading. Required if <code>ShardIteratorType</code> is <code>AT_SEQUENCE_NUMBER</code> or <code>AFTER_SEQUENCE_NUMBER</code>. This parameter is ignored for other iterator types. </p>
     #   @return [String]
     class GetShardIteratorInput < Struct.new(
+      nil,
       :stream_arn,
       :shard_id,
       :shard_iterator_type,
@@ -71,6 +75,7 @@ module Aws::KeyspacesStreams
     #   <p> The unique identifier for the shard iterator. This value is used in the <code>GetRecords</code> operation to retrieve data records from the specified shard. Each shard iterator expires 15 minutes after it is returned to the requester. </p>
     #   @return [String]
     class GetShardIteratorOutput < Struct.new(
+      nil,
       :shard_iterator,
       keyword_init: true
     )
@@ -90,6 +95,7 @@ module Aws::KeyspacesStreams
     #   <p> An optional pagination token provided by a previous <code>GetStream</code> operation. If this parameter is specified, the response includes only records beyond the token, up to the value specified by <code>maxResults</code>. </p>
     #   @return [String]
     class GetStreamInput < Struct.new(
+      nil,
       :stream_arn,
       :max_results,
       :shard_filter,
@@ -127,6 +133,7 @@ module Aws::KeyspacesStreams
     #   <p> A pagination token that can be used in a subsequent <code>GetStream</code> request. This token is returned if the response contains more shards than can be returned in a single response. </p>
     #   @return [String]
     class GetStreamOutput < Struct.new(
+      nil,
       :stream_arn,
       :stream_label,
       :stream_status,
@@ -146,6 +153,7 @@ module Aws::KeyspacesStreams
     #   <p>The service encountered an internal error. Try your request again.</p>
     #   @return [String]
     class InternalServerException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -160,6 +168,7 @@ module Aws::KeyspacesStreams
     #   <p>Metadata associated with this cell, such as time-to-live (TTL) expiration time and write timestamp.</p>
     #   @return [Types::KeyspacesMetadata]
     class KeyspacesCell < Struct.new(
+      nil,
       :value,
       :metadata,
       keyword_init: true
@@ -178,6 +187,7 @@ module Aws::KeyspacesStreams
     #   <p>Metadata for this specific key-value pair within the map, such as timestamps and TTL information.</p>
     #   @return [Types::KeyspacesMetadata]
     class KeyspacesCellMapDefinition < Struct.new(
+      nil,
       :key,
       :value,
       :metadata,
@@ -329,6 +339,7 @@ module Aws::KeyspacesStreams
     #   <p>The timestamp at which the associated data was written to the database.</p>
     #   @return [String]
     class KeyspacesMetadata < Struct.new(
+      nil,
       :expiration_time,
       :write_time,
       keyword_init: true
@@ -347,6 +358,7 @@ module Aws::KeyspacesStreams
     #   <p>Metadata that applies to the entire row, such as timestamps and TTL information.</p>
     #   @return [Types::KeyspacesMetadata]
     class KeyspacesRow < Struct.new(
+      nil,
       :value_cells,
       :static_cells,
       :row_metadata,
@@ -368,6 +380,7 @@ module Aws::KeyspacesStreams
     #   <p> An optional pagination token provided by a previous <code>ListStreams</code> operation. If this parameter is specified, the response includes only records beyond the token, up to the value specified by <code>maxResults</code>. </p>
     #   @return [String]
     class ListStreamsInput < Struct.new(
+      nil,
       :keyspace_name,
       :table_name,
       :max_results,
@@ -384,6 +397,7 @@ module Aws::KeyspacesStreams
     #   <p> A pagination token that can be used in a subsequent <code>ListStreams</code> request. This token is returned if the response contains more streams than can be returned in a single response based on the <code>MaxResults</code> parameter. </p>
     #   @return [String]
     class ListStreamsOutput < Struct.new(
+      nil,
       :streams,
       :next_token,
       keyword_init: true
@@ -417,6 +431,7 @@ module Aws::KeyspacesStreams
     #   <p>A unique identifier assigned to this record within the shard, used for ordering and tracking purposes.</p>
     #   @return [String]
     class Record < Struct.new(
+      nil,
       :event_version,
       :created_at,
       :origin,
@@ -435,6 +450,7 @@ module Aws::KeyspacesStreams
     #   <p>The requested resource wasn't found. Verify that the resource exists and try again.</p>
     #   @return [String]
     class ResourceNotFoundException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -449,6 +465,7 @@ module Aws::KeyspacesStreams
     #   <p>The ending sequence number of the range, which may be null for open-ended ranges.</p>
     #   @return [String]
     class SequenceNumberRange < Struct.new(
+      nil,
       :starting_sequence_number,
       :ending_sequence_number,
       keyword_init: true
@@ -467,6 +484,7 @@ module Aws::KeyspacesStreams
     #   <p>The identifiers of parent shards that this shard evolved from, if this shard was created through resharding.</p>
     #   @return [Array<String>]
     class Shard < Struct.new(
+      nil,
       :shard_id,
       :sequence_number_range,
       :parent_shard_ids,
@@ -483,6 +501,7 @@ module Aws::KeyspacesStreams
     #   <p>The identifier of a specific shard used to filter results based on the specified filter type.</p>
     #   @return [String]
     class ShardFilter < Struct.new(
+      nil,
       :type,
       :shard_id,
       keyword_init: true
@@ -504,6 +523,7 @@ module Aws::KeyspacesStreams
     #   <p>A unique identifier for this stream that can be used in stream operations.</p>
     #   @return [String]
     class Stream < Struct.new(
+      nil,
       :stream_arn,
       :keyspace_name,
       :table_name,
@@ -518,6 +538,7 @@ module Aws::KeyspacesStreams
     #   <p>The request was denied due to request throttling. Reduce the frequency of requests and try again.</p>
     #   @return [String]
     class ThrottlingException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -532,6 +553,7 @@ module Aws::KeyspacesStreams
     #   <p>An error occurred validating your request. See the error message for details.</p>
     #   @return [String]
     class ValidationException < Struct.new(
+      nil,
       :message,
       :error_code,
       keyword_init: true

@@ -35,6 +35,7 @@ module Aws::IVSRealTime
     #   <p>User does not have sufficient access to perform this action.</p>
     #   @return [String]
     class AccessDeniedException < Struct.new(
+      nil,
       :access_control_allow_origin,
       :access_control_expose_headers,
       :cache_control,
@@ -79,6 +80,7 @@ module Aws::IVSRealTime
     #   	  participant is a replica, replica participants are not recorded. Default: <code>true</code>.</p>
     #   @return [Boolean]
     class AutoParticipantRecordingConfiguration < Struct.new(
+      nil,
       :storage_configuration_arn,
       :media_types,
       :thumbnail_configuration,
@@ -106,6 +108,7 @@ module Aws::IVSRealTime
     #            and stage resources must be in the same AWS account and region.</p>
     #   @return [String]
     class ChannelDestinationConfiguration < Struct.new(
+      nil,
       :channel_arn,
       :encoder_configuration_arn,
       keyword_init: true
@@ -147,6 +150,7 @@ module Aws::IVSRealTime
     #               is returned as a string</i>.</p>
     #   @return [Time]
     class Composition < Struct.new(
+      nil,
       :arn,
       :stage_arn,
       :state,
@@ -165,6 +169,7 @@ module Aws::IVSRealTime
     #   <p>Defines the target duration for recorded segments generated when using composite recording. Default: 2.</p>
     #   @return [Integer]
     class CompositionRecordingHlsConfiguration < Struct.new(
+      nil,
       :target_segment_duration_seconds,
       keyword_init: true
     )
@@ -205,6 +210,7 @@ module Aws::IVSRealTime
     #               is returned as a string</i>.</p>
     #   @return [Time]
     class CompositionSummary < Struct.new(
+      nil,
       :arn,
       :stage_arn,
       :destinations,
@@ -232,6 +238,7 @@ module Aws::IVSRealTime
     #            <code>SEQUENTIAL</code>.</p>
     #   @return [Array<String>]
     class CompositionThumbnailConfiguration < Struct.new(
+      nil,
       :target_interval_seconds,
       :storage,
       keyword_init: true
@@ -268,6 +275,7 @@ module Aws::IVSRealTime
     #   <p>Updating or deleting a resource can cause an inconsistent state.</p>
     #   @return [String]
     class ConflictException < Struct.new(
+      nil,
       :access_control_allow_origin,
       :access_control_expose_headers,
       :cache_control,
@@ -297,6 +305,7 @@ module Aws::IVSRealTime
     #            there.</p>
     #   @return [Hash<String, String>]
     class CreateEncoderConfigurationRequest < Struct.new(
+      nil,
       :name,
       :video,
       :tags,
@@ -309,6 +318,7 @@ module Aws::IVSRealTime
     #   <p>The EncoderConfiguration that was created.</p>
     #   @return [Types::EncoderConfiguration]
     class CreateEncoderConfigurationResponse < Struct.new(
+      nil,
       :encoder_configuration,
       keyword_init: true
     )
@@ -345,6 +355,7 @@ module Aws::IVSRealTime
     #   	 there.</p>
     #   @return [Hash<String, String>]
     class CreateIngestConfigurationRequest < Struct.new(
+      nil,
       :name,
       :stage_arn,
       :user_id,
@@ -361,6 +372,7 @@ module Aws::IVSRealTime
     #   <p>The IngestConfiguration that was created.</p>
     #   @return [Types::IngestConfiguration]
     class CreateIngestConfigurationResponse < Struct.new(
+      nil,
       :ingest_configuration,
       keyword_init: true
     )
@@ -391,6 +403,7 @@ module Aws::IVSRealTime
     #               <code>PUBLISH, SUBSCRIBE</code>.</p>
     #   @return [Array<String>]
     class CreateParticipantTokenInput < Struct.new(
+      nil,
       :stage_arn,
       :duration,
       :user_id,
@@ -405,6 +418,7 @@ module Aws::IVSRealTime
     #   <p>The participant token that was created.</p>
     #   @return [Types::ParticipantToken]
     class CreateParticipantTokenOutput < Struct.new(
+      nil,
       :participant_token,
       keyword_init: true
     )
@@ -428,6 +442,7 @@ module Aws::IVSRealTime
     #   <p>Configuration object for individual participant recording, to attach to the new stage.</p>
     #   @return [Types::AutoParticipantRecordingConfiguration]
     class CreateStageInput < Struct.new(
+      nil,
       :name,
       :participant_token_configurations,
       :tags,
@@ -445,6 +460,7 @@ module Aws::IVSRealTime
     #               <code>participants</code> in the request.</p>
     #   @return [Array<Types::ParticipantToken>]
     class CreateStageOutput < Struct.new(
+      nil,
       :stage,
       :participant_tokens,
       keyword_init: true
@@ -466,6 +482,7 @@ module Aws::IVSRealTime
     #            there.</p>
     #   @return [Hash<String, String>]
     class CreateStorageConfigurationRequest < Struct.new(
+      nil,
       :name,
       :s3,
       :tags,
@@ -478,6 +495,7 @@ module Aws::IVSRealTime
     #   <p>The StorageConfiguration that was created.</p>
     #   @return [Types::StorageConfiguration]
     class CreateStorageConfigurationResponse < Struct.new(
+      nil,
       :storage_configuration,
       keyword_init: true
     )
@@ -488,6 +506,7 @@ module Aws::IVSRealTime
     #   <p>ARN of the EncoderConfiguration.</p>
     #   @return [String]
     class DeleteEncoderConfigurationRequest < Struct.new(
+      nil,
       :arn,
       keyword_init: true
     )
@@ -495,6 +514,7 @@ module Aws::IVSRealTime
     end
 
     class DeleteEncoderConfigurationResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -507,6 +527,7 @@ module Aws::IVSRealTime
     #   <p>Optional field to force deletion of the IngestConfiguration. If this is set to <code>true</code> when a participant is actively publishing, the participant is disconnected from the stage, followed by deletion of the IngestConfiguration. Default: <code>false</code>.</p>
     #   @return [Boolean]
     class DeleteIngestConfigurationRequest < Struct.new(
+      nil,
       :arn,
       :force,
       keyword_init: true
@@ -515,6 +536,7 @@ module Aws::IVSRealTime
     end
 
     class DeleteIngestConfigurationResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -524,6 +546,7 @@ module Aws::IVSRealTime
     #   <p>ARN of the public key to be deleted.</p>
     #   @return [String]
     class DeletePublicKeyRequest < Struct.new(
+      nil,
       :arn,
       keyword_init: true
     )
@@ -531,6 +554,7 @@ module Aws::IVSRealTime
     end
 
     class DeletePublicKeyResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -540,6 +564,7 @@ module Aws::IVSRealTime
     #   <p>ARN of the stage to be deleted.</p>
     #   @return [String]
     class DeleteStageInput < Struct.new(
+      nil,
       :arn,
       keyword_init: true
     )
@@ -547,6 +572,7 @@ module Aws::IVSRealTime
     end
 
     class DeleteStageOutput < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -556,6 +582,7 @@ module Aws::IVSRealTime
     #   <p>ARN of the storage configuration to be deleted.</p>
     #   @return [String]
     class DeleteStorageConfigurationRequest < Struct.new(
+      nil,
       :arn,
       keyword_init: true
     )
@@ -563,6 +590,7 @@ module Aws::IVSRealTime
     end
 
     class DeleteStorageConfigurationResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -590,6 +618,7 @@ module Aws::IVSRealTime
     #   <p>Optional details regarding the status of the destination.</p>
     #   @return [Types::DestinationDetail]
     class Destination < Struct.new(
+      nil,
       :id,
       :state,
       :start_time,
@@ -614,6 +643,7 @@ module Aws::IVSRealTime
     #               <code>channel</code> or an <code>s3</code> must be specified.</p>
     #   @return [Types::S3DestinationConfiguration]
     class DestinationConfiguration < Struct.new(
+      nil,
       :name,
       :channel,
       :s3,
@@ -627,6 +657,7 @@ module Aws::IVSRealTime
     #   <p>An S3 detail object to return information about the S3 destination.</p>
     #   @return [Types::S3Detail]
     class DestinationDetail < Struct.new(
+      nil,
       :s3,
       keyword_init: true
     )
@@ -649,6 +680,7 @@ module Aws::IVSRealTime
     #               is returned as a string</i>.</p>
     #   @return [Time]
     class DestinationSummary < Struct.new(
+      nil,
       :id,
       :state,
       :start_time,
@@ -670,6 +702,7 @@ module Aws::IVSRealTime
     #   <p>Description of why this participant is being disconnected.</p>
     #   @return [String]
     class DisconnectParticipantInput < Struct.new(
+      nil,
       :stage_arn,
       :participant_id,
       :reason,
@@ -679,6 +712,7 @@ module Aws::IVSRealTime
     end
 
     class DisconnectParticipantOutput < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -703,6 +737,7 @@ module Aws::IVSRealTime
     #            there.</p>
     #   @return [Hash<String, String>]
     class EncoderConfiguration < Struct.new(
+      nil,
       :arn,
       :name,
       :video,
@@ -727,6 +762,7 @@ module Aws::IVSRealTime
     #            there.</p>
     #   @return [Hash<String, String>]
     class EncoderConfigurationSummary < Struct.new(
+      nil,
       :arn,
       :name,
       :tags,
@@ -851,6 +887,7 @@ module Aws::IVSRealTime
     #   	  If this is a subscribe event, then this flag refers to <code>remoteParticipantId</code>. Default: <code>false</code>.</p>
     #   @return [Boolean]
     class Event < Struct.new(
+      nil,
       :name,
       :participant_id,
       :event_time,
@@ -873,6 +910,7 @@ module Aws::IVSRealTime
     #   <p>ARN of the Composition resource.</p>
     #   @return [String]
     class GetCompositionRequest < Struct.new(
+      nil,
       :arn,
       keyword_init: true
     )
@@ -883,6 +921,7 @@ module Aws::IVSRealTime
     #   <p>The Composition that was returned.</p>
     #   @return [Types::Composition]
     class GetCompositionResponse < Struct.new(
+      nil,
       :composition,
       keyword_init: true
     )
@@ -893,6 +932,7 @@ module Aws::IVSRealTime
     #   <p>ARN of the EncoderConfiguration resource.</p>
     #   @return [String]
     class GetEncoderConfigurationRequest < Struct.new(
+      nil,
       :arn,
       keyword_init: true
     )
@@ -903,6 +943,7 @@ module Aws::IVSRealTime
     #   <p>The EncoderConfiguration that was returned.</p>
     #   @return [Types::EncoderConfiguration]
     class GetEncoderConfigurationResponse < Struct.new(
+      nil,
       :encoder_configuration,
       keyword_init: true
     )
@@ -913,6 +954,7 @@ module Aws::IVSRealTime
     #   <p>ARN of the ingest for which the information is to be retrieved.</p>
     #   @return [String]
     class GetIngestConfigurationRequest < Struct.new(
+      nil,
       :arn,
       keyword_init: true
     )
@@ -923,6 +965,7 @@ module Aws::IVSRealTime
     #   <p>The IngestConfiguration that was returned.</p>
     #   @return [Types::IngestConfiguration]
     class GetIngestConfigurationResponse < Struct.new(
+      nil,
       :ingest_configuration,
       keyword_init: true
     )
@@ -939,6 +982,7 @@ module Aws::IVSRealTime
     #   <p>Unique identifier for the participant. This is assigned by IVS and returned by <a>CreateParticipantToken</a>.</p>
     #   @return [String]
     class GetParticipantRequest < Struct.new(
+      nil,
       :stage_arn,
       :session_id,
       :participant_id,
@@ -951,6 +995,7 @@ module Aws::IVSRealTime
     #   <p>The participant that is returned.</p>
     #   @return [Types::Participant]
     class GetParticipantResponse < Struct.new(
+      nil,
       :participant,
       keyword_init: true
     )
@@ -961,6 +1006,7 @@ module Aws::IVSRealTime
     #   <p>ARN of the public key for which the information is to be retrieved.</p>
     #   @return [String]
     class GetPublicKeyRequest < Struct.new(
+      nil,
       :arn,
       keyword_init: true
     )
@@ -971,6 +1017,7 @@ module Aws::IVSRealTime
     #   <p>The public key that is returned.</p>
     #   @return [Types::PublicKey]
     class GetPublicKeyResponse < Struct.new(
+      nil,
       :public_key,
       keyword_init: true
     )
@@ -981,6 +1028,7 @@ module Aws::IVSRealTime
     #   <p>ARN of the stage for which the information is to be retrieved.</p>
     #   @return [String]
     class GetStageInput < Struct.new(
+      nil,
       :arn,
       keyword_init: true
     )
@@ -991,6 +1039,7 @@ module Aws::IVSRealTime
     #   <p>The stage that is returned.</p>
     #   @return [Types::Stage]
     class GetStageOutput < Struct.new(
+      nil,
       :stage,
       keyword_init: true
     )
@@ -1004,6 +1053,7 @@ module Aws::IVSRealTime
     #   <p>ID of a session within the stage.</p>
     #   @return [String]
     class GetStageSessionRequest < Struct.new(
+      nil,
       :stage_arn,
       :session_id,
       keyword_init: true
@@ -1015,6 +1065,7 @@ module Aws::IVSRealTime
     #   <p>The stage session that is returned.</p>
     #   @return [Types::StageSession]
     class GetStageSessionResponse < Struct.new(
+      nil,
       :stage_session,
       keyword_init: true
     )
@@ -1025,6 +1076,7 @@ module Aws::IVSRealTime
     #   <p>ARN of the storage configuration to be retrieved.</p>
     #   @return [String]
     class GetStorageConfigurationRequest < Struct.new(
+      nil,
       :arn,
       keyword_init: true
     )
@@ -1035,6 +1087,7 @@ module Aws::IVSRealTime
     #   <p>The StorageConfiguration that was returned.</p>
     #   @return [Types::StorageConfiguration]
     class GetStorageConfigurationResponse < Struct.new(
+      nil,
       :storage_configuration,
       keyword_init: true
     )
@@ -1074,6 +1127,7 @@ module Aws::IVSRealTime
     #   	on their arrival time into the stage.</p>
     #   @return [String]
     class GridConfiguration < Struct.new(
+      nil,
       :featured_participant_attribute,
       :omit_stopped_video,
       :video_aspect_ratio,
@@ -1105,6 +1159,7 @@ module Aws::IVSRealTime
     #            there.</p>
     #   @return [Hash<String, String>]
     class ImportPublicKeyRequest < Struct.new(
+      nil,
       :public_key_material,
       :name,
       :tags,
@@ -1117,6 +1172,7 @@ module Aws::IVSRealTime
     #   <p>The public key that was imported.</p>
     #   @return [Types::PublicKey]
     class ImportPublicKeyResponse < Struct.new(
+      nil,
       :public_key,
       keyword_init: true
     )
@@ -1170,6 +1226,7 @@ module Aws::IVSRealTime
     #            there.</p>
     #   @return [Hash<String, String>]
     class IngestConfiguration < Struct.new(
+      nil,
       :name,
       :arn,
       :ingest_protocol,
@@ -1214,6 +1271,7 @@ module Aws::IVSRealTime
     #            </p>
     #   @return [String]
     class IngestConfigurationSummary < Struct.new(
+      nil,
       :name,
       :arn,
       :ingest_protocol,
@@ -1255,6 +1313,7 @@ module Aws::IVSRealTime
     #   <p>Unexpected error during processing of request.</p>
     #   @return [String]
     class InternalServerException < Struct.new(
+      nil,
       :access_control_allow_origin,
       :access_control_expose_headers,
       :cache_control,
@@ -1277,6 +1336,7 @@ module Aws::IVSRealTime
     #   <p>Configuration related to PiP layout.</p>
     #   @return [Types::PipConfiguration]
     class LayoutConfiguration < Struct.new(
+      nil,
       :grid,
       :pip,
       keyword_init: true
@@ -1299,6 +1359,7 @@ module Aws::IVSRealTime
     #   <p>Maximum number of results to return. Default: 100.</p>
     #   @return [Integer]
     class ListCompositionsRequest < Struct.new(
+      nil,
       :filter_by_stage_arn,
       :filter_by_encoder_configuration_arn,
       :next_token,
@@ -1316,6 +1377,7 @@ module Aws::IVSRealTime
     #            in the request to get the next set.</p>
     #   @return [String]
     class ListCompositionsResponse < Struct.new(
+      nil,
       :compositions,
       :next_token,
       keyword_init: true
@@ -1331,6 +1393,7 @@ module Aws::IVSRealTime
     #   <p>Maximum number of results to return. Default: 100.</p>
     #   @return [Integer]
     class ListEncoderConfigurationsRequest < Struct.new(
+      nil,
       :next_token,
       :max_results,
       keyword_init: true
@@ -1346,6 +1409,7 @@ module Aws::IVSRealTime
     #               <code>nextToken</code> in the request to get the next set.</p>
     #   @return [String]
     class ListEncoderConfigurationsResponse < Struct.new(
+      nil,
       :encoder_configurations,
       :next_token,
       keyword_init: true
@@ -1366,6 +1430,7 @@ module Aws::IVSRealTime
     #   <p>Maximum number of results to return. Default: 50.</p>
     #   @return [Integer]
     class ListIngestConfigurationsRequest < Struct.new(
+      nil,
       :filter_by_stage_arn,
       :filter_by_state,
       :next_token,
@@ -1382,6 +1447,7 @@ module Aws::IVSRealTime
     #   <p>If there are more IngestConfigurations than <code>maxResults</code>, use <code>nextToken</code> in the request to get the next set.</p>
     #   @return [String]
     class ListIngestConfigurationsResponse < Struct.new(
+      nil,
       :ingest_configurations,
       :next_token,
       keyword_init: true
@@ -1406,6 +1472,7 @@ module Aws::IVSRealTime
     #   <p>Maximum number of results to return. Default: 50.</p>
     #   @return [Integer]
     class ListParticipantEventsRequest < Struct.new(
+      nil,
       :stage_arn,
       :session_id,
       :participant_id,
@@ -1424,6 +1491,7 @@ module Aws::IVSRealTime
     #            request to get the next set. </p>
     #   @return [String]
     class ListParticipantEventsResponse < Struct.new(
+      nil,
       :events,
       :next_token,
       keyword_init: true
@@ -1446,6 +1514,7 @@ module Aws::IVSRealTime
     #   <p>Maximum number of results to return. Default: 50.</p>
     #   @return [Integer]
     class ListParticipantReplicasRequest < Struct.new(
+      nil,
       :source_stage_arn,
       :participant_id,
       :next_token,
@@ -1462,6 +1531,7 @@ module Aws::IVSRealTime
     #   <p>If there are more participants than <code>maxResults</code>, use <code>nextToken</code> in the request to get the next set.</p>
     #   @return [String]
     class ListParticipantReplicasResponse < Struct.new(
+      nil,
       :replicas,
       :next_token,
       keyword_init: true
@@ -1506,6 +1576,7 @@ module Aws::IVSRealTime
     #               <code>filterByState</code>, or <code>filterByRecordingState</code> can be provided per request.</p>
     #   @return [String]
     class ListParticipantsRequest < Struct.new(
+      nil,
       :stage_arn,
       :session_id,
       :filter_by_user_id,
@@ -1527,6 +1598,7 @@ module Aws::IVSRealTime
     #            in the request to get the next set.</p>
     #   @return [String]
     class ListParticipantsResponse < Struct.new(
+      nil,
       :participants,
       :next_token,
       keyword_init: true
@@ -1541,6 +1613,7 @@ module Aws::IVSRealTime
     #   <p>Maximum number of results to return. Default: 50.</p>
     #   @return [Integer]
     class ListPublicKeysRequest < Struct.new(
+      nil,
       :next_token,
       :max_results,
       keyword_init: true
@@ -1555,6 +1628,7 @@ module Aws::IVSRealTime
     #   <p>If there are more public keys than <code>maxResults</code>, use <code>nextToken</code> in the request to get the next set.</p>
     #   @return [String]
     class ListPublicKeysResponse < Struct.new(
+      nil,
       :public_keys,
       :next_token,
       keyword_init: true
@@ -1573,6 +1647,7 @@ module Aws::IVSRealTime
     #   <p>Maximum number of results to return. Default: 50.</p>
     #   @return [Integer]
     class ListStageSessionsRequest < Struct.new(
+      nil,
       :stage_arn,
       :next_token,
       :max_results,
@@ -1589,6 +1664,7 @@ module Aws::IVSRealTime
     #               <code>nextToken</code> in the request to get the next set.</p>
     #   @return [String]
     class ListStageSessionsResponse < Struct.new(
+      nil,
       :stage_sessions,
       :next_token,
       keyword_init: true
@@ -1604,6 +1680,7 @@ module Aws::IVSRealTime
     #   <p>Maximum number of results to return. Default: 50.</p>
     #   @return [Integer]
     class ListStagesInput < Struct.new(
+      nil,
       :next_token,
       :max_results,
       keyword_init: true
@@ -1619,6 +1696,7 @@ module Aws::IVSRealTime
     #            request to get the next set.</p>
     #   @return [String]
     class ListStagesOutput < Struct.new(
+      nil,
       :stages,
       :next_token,
       keyword_init: true
@@ -1635,6 +1713,7 @@ module Aws::IVSRealTime
     #   	  whichever is smaller.</p>
     #   @return [Integer]
     class ListStorageConfigurationsRequest < Struct.new(
+      nil,
       :next_token,
       :max_results,
       keyword_init: true
@@ -1650,6 +1729,7 @@ module Aws::IVSRealTime
     #        in the request to get the next set.</p>
     #   @return [String]
     class ListStorageConfigurationsResponse < Struct.new(
+      nil,
       :storage_configurations,
       :next_token,
       keyword_init: true
@@ -1661,6 +1741,7 @@ module Aws::IVSRealTime
     #   <p>The ARN of the resource to be retrieved. The ARN must be URL-encoded.</p>
     #   @return [String]
     class ListTagsForResourceInput < Struct.new(
+      nil,
       :resource_arn,
       keyword_init: true
     )
@@ -1672,6 +1753,7 @@ module Aws::IVSRealTime
     #               (key:value)</code>.</p>
     #   @return [Hash<String, String>]
     class ListTagsForResourceOutput < Struct.new(
+      nil,
       :tags,
       keyword_init: true
     )
@@ -1756,6 +1838,7 @@ module Aws::IVSRealTime
     #   <p>ID of the session within the source stage, if <code>replicationType</code> is <code>REPLICA</code>.</p>
     #   @return [String]
     class Participant < Struct.new(
+      nil,
       :participant_id,
       :user_id,
       :state,
@@ -1793,6 +1876,7 @@ module Aws::IVSRealTime
     #   	  Default: 6.</p>
     #   @return [Integer]
     class ParticipantRecordingHlsConfiguration < Struct.new(
+      nil,
       :target_segment_duration_seconds,
       keyword_init: true
     )
@@ -1827,6 +1911,7 @@ module Aws::IVSRealTime
     #   <p>Replica’s current replication state.</p>
     #   @return [String]
     class ParticipantReplica < Struct.new(
+      nil,
       :source_stage_arn,
       :participant_id,
       :source_session_id,
@@ -1874,6 +1959,7 @@ module Aws::IVSRealTime
     #   <p>ID of the session within the source stage, if <code>replicationType</code> is <code>REPLICA</code>.</p>
     #   @return [String]
     class ParticipantSummary < Struct.new(
+      nil,
       :participant_id,
       :user_id,
       :state,
@@ -1912,6 +1998,7 @@ module Aws::IVSRealTime
     #   <p>Thumbnail recording mode. Default: <code>DISABLED</code>.</p>
     #   @return [String]
     class ParticipantThumbnailConfiguration < Struct.new(
+      nil,
       :target_interval_seconds,
       :storage,
       :recording_mode,
@@ -1955,6 +2042,7 @@ module Aws::IVSRealTime
     #   <p>ISO 8601 timestamp (returned as a string) for when this token expires.</p>
     #   @return [Time]
     class ParticipantToken < Struct.new(
+      nil,
       :participant_id,
       :token,
       :user_id,
@@ -1991,6 +2079,7 @@ module Aws::IVSRealTime
     #   <p>Set of capabilities that the user is allowed to perform in the stage.</p>
     #   @return [Array<String>]
     class ParticipantTokenConfiguration < Struct.new(
+      nil,
       :duration,
       :user_id,
       :attributes,
@@ -2029,6 +2118,7 @@ module Aws::IVSRealTime
     #   <p> Your account is pending verification. </p>
     #   @return [String]
     class PendingVerification < Struct.new(
+      nil,
       :access_control_allow_origin,
       :access_control_expose_headers,
       :cache_control,
@@ -2095,6 +2185,7 @@ module Aws::IVSRealTime
     #   	on their arrival time into the stage.</p>
     #   @return [String]
     class PipConfiguration < Struct.new(
+      nil,
       :featured_participant_attribute,
       :omit_stopped_video,
       :video_fill_mode,
@@ -2140,6 +2231,7 @@ module Aws::IVSRealTime
     #            there.</p>
     #   @return [Hash<String, String>]
     class PublicKey < Struct.new(
+      nil,
       :arn,
       :name,
       :public_key_material,
@@ -2165,6 +2257,7 @@ module Aws::IVSRealTime
     #            there.</p>
     #   @return [Hash<String, String>]
     class PublicKeySummary < Struct.new(
+      nil,
       :arn,
       :name,
       :tags,
@@ -2181,6 +2274,7 @@ module Aws::IVSRealTime
     #   <p>The recording format for storing a recording in Amazon S3.</p>
     #   @return [String]
     class RecordingConfiguration < Struct.new(
+      nil,
       :hls_configuration,
       :format,
       keyword_init: true
@@ -2217,6 +2311,7 @@ module Aws::IVSRealTime
     #   <p>Request references a resource which does not exist.</p>
     #   @return [String]
     class ResourceNotFoundException < Struct.new(
+      nil,
       :access_control_allow_origin,
       :access_control_expose_headers,
       :cache_control,
@@ -2251,6 +2346,7 @@ module Aws::IVSRealTime
     #            the live session.</p>
     #   @return [Array<Types::CompositionThumbnailConfiguration>]
     class S3DestinationConfiguration < Struct.new(
+      nil,
       :storage_configuration_arn,
       :encoder_configuration_arns,
       :recording_configuration,
@@ -2265,6 +2361,7 @@ module Aws::IVSRealTime
     #   <p>The S3 bucket prefix under which the recording is stored.</p>
     #   @return [String]
     class S3Detail < Struct.new(
+      nil,
       :recording_prefix,
       keyword_init: true
     )
@@ -2278,6 +2375,7 @@ module Aws::IVSRealTime
     #            StorageConfiguration and S3 bucket must be in the same region as the Composition.</p>
     #   @return [String]
     class S3StorageConfiguration < Struct.new(
+      nil,
       :bucket_name,
       keyword_init: true
     )
@@ -2313,6 +2411,7 @@ module Aws::IVSRealTime
     #   <p>Request would cause a service quota to be exceeded.</p>
     #   @return [String]
     class ServiceQuotaExceededException < Struct.new(
+      nil,
       :access_control_allow_origin,
       :access_control_expose_headers,
       :cache_control,
@@ -2351,6 +2450,7 @@ module Aws::IVSRealTime
     #   <p>Summary information about various endpoints for a stage.</p>
     #   @return [Types::StageEndpoints]
     class Stage < Struct.new(
+      nil,
       :arn,
       :name,
       :active_session_id,
@@ -2377,6 +2477,7 @@ module Aws::IVSRealTime
     #   <p>The endpoint to be used for IVS real-time streaming using the RTMPS protocol.</p>
     #   @return [String]
     class StageEndpoints < Struct.new(
+      nil,
       :events,
       :whip,
       :rtmp,
@@ -2401,6 +2502,7 @@ module Aws::IVSRealTime
     #            the stage is active.</p>
     #   @return [Time]
     class StageSession < Struct.new(
+      nil,
       :session_id,
       :start_time,
       :end_time,
@@ -2421,6 +2523,7 @@ module Aws::IVSRealTime
     #            the stage is active.</p>
     #   @return [Time]
     class StageSessionSummary < Struct.new(
+      nil,
       :session_id,
       :start_time,
       :end_time,
@@ -2447,6 +2550,7 @@ module Aws::IVSRealTime
     #            there.</p>
     #   @return [Hash<String, String>]
     class StageSummary < Struct.new(
+      nil,
       :arn,
       :name,
       :active_session_id,
@@ -2476,6 +2580,7 @@ module Aws::IVSRealTime
     #            there.</p>
     #   @return [Hash<String, String>]
     class StartCompositionRequest < Struct.new(
+      nil,
       :stage_arn,
       :idempotency_token,
       :layout,
@@ -2490,6 +2595,7 @@ module Aws::IVSRealTime
     #   <p>The Composition that was created.</p>
     #   @return [Types::Composition]
     class StartCompositionResponse < Struct.new(
+      nil,
       :composition,
       keyword_init: true
     )
@@ -2522,6 +2628,7 @@ module Aws::IVSRealTime
     #   	  If there is overlap in keys, the values in these attributes are replaced.</p>
     #   @return [Hash<String, String>]
     class StartParticipantReplicationRequest < Struct.new(
+      nil,
       :source_stage_arn,
       :destination_stage_arn,
       :participant_id,
@@ -2554,6 +2661,7 @@ module Aws::IVSRealTime
     #   <p/>
     #   @return [String]
     class StartParticipantReplicationResponse < Struct.new(
+      nil,
       :access_control_allow_origin,
       :access_control_expose_headers,
       :cache_control,
@@ -2570,6 +2678,7 @@ module Aws::IVSRealTime
     #   <p>ARN of the Composition.</p>
     #   @return [String]
     class StopCompositionRequest < Struct.new(
+      nil,
       :arn,
       keyword_init: true
     )
@@ -2577,6 +2686,7 @@ module Aws::IVSRealTime
     end
 
     class StopCompositionResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -2595,6 +2705,7 @@ module Aws::IVSRealTime
     #   				  create a self signed token</a>.</p>
     #   @return [String]
     class StopParticipantReplicationRequest < Struct.new(
+      nil,
       :source_stage_arn,
       :destination_stage_arn,
       :participant_id,
@@ -2625,6 +2736,7 @@ module Aws::IVSRealTime
     #   <p/>
     #   @return [String]
     class StopParticipantReplicationResponse < Struct.new(
+      nil,
       :access_control_allow_origin,
       :access_control_expose_headers,
       :cache_control,
@@ -2655,6 +2767,7 @@ module Aws::IVSRealTime
     #            there.</p>
     #   @return [Hash<String, String>]
     class StorageConfiguration < Struct.new(
+      nil,
       :arn,
       :name,
       :s3,
@@ -2682,6 +2795,7 @@ module Aws::IVSRealTime
     #            there.</p>
     #   @return [Hash<String, String>]
     class StorageConfigurationSummary < Struct.new(
+      nil,
       :arn,
       :name,
       :s3,
@@ -2702,6 +2816,7 @@ module Aws::IVSRealTime
     #            there.</p>
     #   @return [Hash<String, String>]
     class TagResourceInput < Struct.new(
+      nil,
       :resource_arn,
       :tags,
       keyword_init: true
@@ -2710,6 +2825,7 @@ module Aws::IVSRealTime
     end
 
     class TagResourceOutput < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -2726,6 +2842,7 @@ module Aws::IVSRealTime
     #            there.</p>
     #   @return [Array<String>]
     class UntagResourceInput < Struct.new(
+      nil,
       :resource_arn,
       :tag_keys,
       keyword_init: true
@@ -2734,6 +2851,7 @@ module Aws::IVSRealTime
     end
 
     class UntagResourceOutput < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -2746,6 +2864,7 @@ module Aws::IVSRealTime
     #   <p>Stage ARN that needs to be updated.</p>
     #   @return [String]
     class UpdateIngestConfigurationRequest < Struct.new(
+      nil,
       :arn,
       :stage_arn,
       keyword_init: true
@@ -2757,6 +2876,7 @@ module Aws::IVSRealTime
     #   <p>The updated IngestConfiguration.</p>
     #   @return [Types::IngestConfiguration]
     class UpdateIngestConfigurationResponse < Struct.new(
+      nil,
       :ingest_configuration,
       keyword_init: true
     )
@@ -2773,6 +2893,7 @@ module Aws::IVSRealTime
     #   <p>Configuration object for individual participant recording, to attach to the stage. Note that this cannot be updated while recording is active.</p>
     #   @return [Types::AutoParticipantRecordingConfiguration]
     class UpdateStageInput < Struct.new(
+      nil,
       :arn,
       :name,
       :auto_participant_recording_configuration,
@@ -2785,6 +2906,7 @@ module Aws::IVSRealTime
     #   <p>The updated stage.</p>
     #   @return [Types::Stage]
     class UpdateStageOutput < Struct.new(
+      nil,
       :stage,
       keyword_init: true
     )
@@ -2820,6 +2942,7 @@ module Aws::IVSRealTime
     #   <p>The input fails to satisfy the constraints specified by an Amazon Web Services service.</p>
     #   @return [String]
     class ValidationException < Struct.new(
+      nil,
       :access_control_allow_origin,
       :access_control_expose_headers,
       :cache_control,
@@ -2852,6 +2975,7 @@ module Aws::IVSRealTime
     #   <p>Bitrate for generated output, in bps. Default: 2500000.</p>
     #   @return [Integer]
     class Video < Struct.new(
+      nil,
       :width,
       :height,
       :framerate,

@@ -10,6 +10,7 @@ module Aws::GreengrassV2
     # @!attribute message
     #   @return [String]
     class AccessDeniedException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -22,6 +23,7 @@ module Aws::GreengrassV2
     #   <p>The name of the IoT thing that represents the client device to associate.</p>
     #   @return [String]
     class AssociateClientDeviceWithCoreDeviceEntry < Struct.new(
+      nil,
       :thing_name,
       keyword_init: true
     )
@@ -41,6 +43,7 @@ module Aws::GreengrassV2
     #   <p>A message that provides additional information about the error.</p>
     #   @return [String]
     class AssociateClientDeviceWithCoreDeviceErrorEntry < Struct.new(
+      nil,
       :thing_name,
       :code,
       :message,
@@ -54,6 +57,7 @@ module Aws::GreengrassV2
     #         Amazon Web Services account in this Amazon Web Services Region.</p>
     #   @return [String]
     class AssociateServiceRoleToAccountRequest < Struct.new(
+      nil,
       :role_arn,
       keyword_init: true
     )
@@ -65,6 +69,7 @@ module Aws::GreengrassV2
     #         Amazon Web Services Region.</p>
     #   @return [String]
     class AssociateServiceRoleToAccountResponse < Struct.new(
+      nil,
       :associated_at,
       keyword_init: true
     )
@@ -80,6 +85,7 @@ module Aws::GreengrassV2
     #   <p>The time that the client device was associated, expressed in ISO 8601 format.</p>
     #   @return [Time]
     class AssociatedClientDevice < Struct.new(
+      nil,
       :thing_name,
       :association_timestamp,
       keyword_init: true
@@ -94,6 +100,7 @@ module Aws::GreengrassV2
     #   <p>The name of the core device. This is also the name of the IoT thing.</p>
     #   @return [String]
     class BatchAssociateClientDeviceWithCoreDeviceRequest < Struct.new(
+      nil,
       :entries,
       :core_device_thing_name,
       keyword_init: true
@@ -106,6 +113,7 @@ module Aws::GreengrassV2
     #         of the IoT thing that failed to associate.</p>
     #   @return [Array<Types::AssociateClientDeviceWithCoreDeviceErrorEntry>]
     class BatchAssociateClientDeviceWithCoreDeviceResponse < Struct.new(
+      nil,
       :error_entries,
       keyword_init: true
     )
@@ -119,6 +127,7 @@ module Aws::GreengrassV2
     #   <p>The name of the core device. This is also the name of the IoT thing.</p>
     #   @return [String]
     class BatchDisassociateClientDeviceFromCoreDeviceRequest < Struct.new(
+      nil,
       :entries,
       :core_device_thing_name,
       keyword_init: true
@@ -131,6 +140,7 @@ module Aws::GreengrassV2
     #         of the IoT thing that failed to disassociate.</p>
     #   @return [Array<Types::DisassociateClientDeviceFromCoreDeviceErrorEntry>]
     class BatchDisassociateClientDeviceFromCoreDeviceResponse < Struct.new(
+      nil,
       :error_entries,
       keyword_init: true
     )
@@ -141,6 +151,7 @@ module Aws::GreengrassV2
     #   <p>The ID of the deployment.</p>
     #   @return [String]
     class CancelDeploymentRequest < Struct.new(
+      nil,
       :deployment_id,
       keyword_init: true
     )
@@ -151,6 +162,7 @@ module Aws::GreengrassV2
     #   <p>A message that communicates if the cancel was successful.</p>
     #   @return [String]
     class CancelDeploymentResponse < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -196,6 +208,7 @@ module Aws::GreengrassV2
     #       of the component version. This message communicates why a component version is discontinued or deleted.</p>
     #   @return [String]
     class CloudComponentStatus < Struct.new(
+      nil,
       :component_state,
       :message,
       :errors,
@@ -217,6 +230,7 @@ module Aws::GreengrassV2
     #   <p>The latest version of the component and its details.</p>
     #   @return [Types::ComponentLatestVersion]
     class Component < Struct.new(
+      nil,
       :arn,
       :component_name,
       :latest_version,
@@ -239,6 +253,7 @@ module Aws::GreengrassV2
     #            <p>IoT Greengrass V2 uses semantic version constraints. For more information, see <a href="https://semver.org/">Semantic Versioning</a>.</p>
     #   @return [Hash<String, String>]
     class ComponentCandidate < Struct.new(
+      nil,
       :component_name,
       :component_version,
       :version_requirements,
@@ -268,6 +283,7 @@ module Aws::GreengrassV2
     #         Guide</i>.</p>
     #   @return [Array<String>]
     class ComponentConfigurationUpdate < Struct.new(
+      nil,
       :merge,
       :reset,
       keyword_init: true
@@ -298,6 +314,7 @@ module Aws::GreengrassV2
     #            </p>
     #   @return [String]
     class ComponentDependencyRequirement < Struct.new(
+      nil,
       :version_requirement,
       :dependency_type,
       keyword_init: true
@@ -325,6 +342,7 @@ module Aws::GreengrassV2
     #           Guide</i>.</p>
     #   @return [Types::ComponentRunWith]
     class ComponentDeploymentSpecification < Struct.new(
+      nil,
       :component_version,
       :configuration_update,
       :run_with,
@@ -353,6 +371,7 @@ module Aws::GreengrassV2
     #   <p>The platforms that the component version supports.</p>
     #   @return [Array<Types::ComponentPlatform>]
     class ComponentLatestVersion < Struct.new(
+      nil,
       :arn,
       :component_version,
       :creation_timestamp,
@@ -378,6 +397,7 @@ module Aws::GreengrassV2
     #           component</a> in the <i>IoT Greengrass V2 Developer Guide</i>.</p>
     #   @return [Hash<String, String>]
     class ComponentPlatform < Struct.new(
+      nil,
       :name,
       :attributes,
       keyword_init: true
@@ -411,6 +431,7 @@ module Aws::GreengrassV2
     #         configure on the Greengrass nucleus component. For more information, see <a href="https://docs.aws.amazon.com/greengrass/v2/developerguide/configure-greengrass-core-v2.html#configure-component-user">Configure the user and group that run components</a>.</p>
     #   @return [String]
     class ComponentRunWith < Struct.new(
+      nil,
       :posix_user,
       :system_resource_limits,
       :windows_user,
@@ -430,6 +451,7 @@ module Aws::GreengrassV2
     #   <p>The <a href="https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html">ARN</a> of the component version.</p>
     #   @return [String]
     class ComponentVersionListItem < Struct.new(
+      nil,
       :component_name,
       :component_version,
       :arn,
@@ -449,6 +471,7 @@ module Aws::GreengrassV2
     #   <p>The type of the resource that conflicts with the request.</p>
     #   @return [String]
     class ConflictException < Struct.new(
+      nil,
       :message,
       :resource_id,
       :resource_type,
@@ -474,6 +497,7 @@ module Aws::GreengrassV2
     #   <p>Additional metadata to provide to client devices that connect to this core device.</p>
     #   @return [String]
     class ConnectivityInfo < Struct.new(
+      nil,
       :id,
       :host_address,
       :port_number,
@@ -534,6 +558,7 @@ module Aws::GreengrassV2
     #            </ul>
     #   @return [String]
     class CoreDevice < Struct.new(
+      nil,
       :core_device_thing_name,
       :status,
       :last_status_update_timestamp,
@@ -567,6 +592,7 @@ module Aws::GreengrassV2
     #       idempotent requests for up to 8 hours.</p>
     #   @return [String]
     class CreateComponentVersionRequest < Struct.new(
+      nil,
       :inline_recipe,
       :lambda_function,
       :tags,
@@ -593,6 +619,7 @@ module Aws::GreengrassV2
     #         is different from the status of the component on a core device.</p>
     #   @return [Types::CloudComponentStatus]
     class CreateComponentVersionResponse < Struct.new(
+      nil,
       :arn,
       :component_name,
       :component_version,
@@ -637,6 +664,7 @@ module Aws::GreengrassV2
     #       idempotent requests for up to 8 hours.</p>
     #   @return [String]
     class CreateDeploymentRequest < Struct.new(
+      nil,
       :target_arn,
       :deployment_name,
       :components,
@@ -660,6 +688,7 @@ module Aws::GreengrassV2
     #   <p>The <a href="https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html">ARN</a> of the IoT job that applies the deployment to target devices.</p>
     #   @return [String]
     class CreateDeploymentResponse < Struct.new(
+      nil,
       :deployment_id,
       :iot_job_id,
       :iot_job_arn,
@@ -672,6 +701,7 @@ module Aws::GreengrassV2
     #   <p>The <a href="https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html">ARN</a> of the component version.</p>
     #   @return [String]
     class DeleteComponentRequest < Struct.new(
+      nil,
       :arn,
       keyword_init: true
     )
@@ -682,6 +712,7 @@ module Aws::GreengrassV2
     #   <p>The name of the core device. This is also the name of the IoT thing.</p>
     #   @return [String]
     class DeleteCoreDeviceRequest < Struct.new(
+      nil,
       :core_device_thing_name,
       keyword_init: true
     )
@@ -692,6 +723,7 @@ module Aws::GreengrassV2
     #   <p>The ID of the deployment.</p>
     #   @return [String]
     class DeleteDeploymentRequest < Struct.new(
+      nil,
       :deployment_id,
       keyword_init: true
     )
@@ -724,6 +756,7 @@ module Aws::GreengrassV2
     #   <p>The parent deployment's target <a href="https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html">ARN</a> within a subdeployment.</p>
     #   @return [String]
     class Deployment < Struct.new(
+      nil,
       :target_arn,
       :revision_id,
       :deployment_id,
@@ -777,6 +810,7 @@ module Aws::GreengrassV2
     #            </p>
     #   @return [String]
     class DeploymentComponentUpdatePolicy < Struct.new(
+      nil,
       :timeout_in_seconds,
       :action,
       keyword_init: true
@@ -800,6 +834,7 @@ module Aws::GreengrassV2
     #            </p>
     #   @return [Integer]
     class DeploymentConfigurationValidationPolicy < Struct.new(
+      nil,
       :timeout_in_seconds,
       keyword_init: true
     )
@@ -825,6 +860,7 @@ module Aws::GreengrassV2
     #         device has to complete the job.</p>
     #   @return [Types::IoTJobTimeoutConfig]
     class DeploymentIoTJobConfiguration < Struct.new(
+      nil,
       :job_executions_rollout_config,
       :abort_config,
       :timeout_config,
@@ -850,6 +886,7 @@ module Aws::GreengrassV2
     #         how long each component has to validate its configure updates.</p>
     #   @return [Types::DeploymentConfigurationValidationPolicy]
     class DeploymentPolicies < Struct.new(
+      nil,
       :failure_handling_policy,
       :component_update_policy,
       :configuration_validation_policy,
@@ -862,6 +899,7 @@ module Aws::GreengrassV2
     #   <p>The <a href="https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html">ARN</a> of the component version.</p>
     #   @return [String]
     class DescribeComponentRequest < Struct.new(
+      nil,
       :arn,
       keyword_init: true
     )
@@ -899,6 +937,7 @@ module Aws::GreengrassV2
     #           resources</a> in the <i>IoT Greengrass V2 Developer Guide</i>.</p>
     #   @return [Hash<String, String>]
     class DescribeComponentResponse < Struct.new(
+      nil,
       :arn,
       :component_name,
       :component_version,
@@ -919,6 +958,7 @@ module Aws::GreengrassV2
     #   <p>The name of the IoT thing that represents the client device to disassociate.</p>
     #   @return [String]
     class DisassociateClientDeviceFromCoreDeviceEntry < Struct.new(
+      nil,
       :thing_name,
       keyword_init: true
     )
@@ -938,6 +978,7 @@ module Aws::GreengrassV2
     #   <p>A message that provides additional information about the error.</p>
     #   @return [String]
     class DisassociateClientDeviceFromCoreDeviceErrorEntry < Struct.new(
+      nil,
       :thing_name,
       :code,
       :message,
@@ -947,6 +988,7 @@ module Aws::GreengrassV2
     end
 
     class DisassociateServiceRoleFromAccountRequest < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -957,6 +999,7 @@ module Aws::GreengrassV2
     #         Amazon Web Services Region.</p>
     #   @return [String]
     class DisassociateServiceRoleFromAccountResponse < Struct.new(
+      nil,
       :disassociated_at,
       keyword_init: true
     )
@@ -1040,6 +1083,7 @@ module Aws::GreengrassV2
     #         if the deployment is in a success state.</p>
     #   @return [Types::EffectiveDeploymentStatusDetails]
     class EffectiveDeployment < Struct.new(
+      nil,
       :deployment_id,
       :deployment_name,
       :iot_job_id,
@@ -1075,6 +1119,7 @@ module Aws::GreengrassV2
     #         error.</p>
     #   @return [Array<String>]
     class EffectiveDeploymentStatusDetails < Struct.new(
+      nil,
       :error_stack,
       :error_types,
       keyword_init: true
@@ -1089,6 +1134,7 @@ module Aws::GreengrassV2
     #   <p>The <a href="https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html">ARN</a> of the component version.</p>
     #   @return [String]
     class GetComponentRequest < Struct.new(
+      nil,
       :recipe_output_format,
       :arn,
       keyword_init: true
@@ -1108,6 +1154,7 @@ module Aws::GreengrassV2
     #           resources</a> in the <i>IoT Greengrass V2 Developer Guide</i>.</p>
     #   @return [Hash<String, String>]
     class GetComponentResponse < Struct.new(
+      nil,
       :recipe_output_format,
       :recipe,
       :tags,
@@ -1139,6 +1186,7 @@ module Aws::GreengrassV2
     #         an Amazon S3 FIPS endpoint. If you don't specify a value, the default is <code>standard</code>.</p>
     #   @return [String]
     class GetComponentVersionArtifactRequest < Struct.new(
+      nil,
       :arn,
       :artifact_name,
       :s3_endpoint_type,
@@ -1152,6 +1200,7 @@ module Aws::GreengrassV2
     #   <p>The URL of the artifact.</p>
     #   @return [String]
     class GetComponentVersionArtifactResponse < Struct.new(
+      nil,
       :pre_signed_url,
       keyword_init: true
     )
@@ -1162,6 +1211,7 @@ module Aws::GreengrassV2
     #   <p>The name of the core device. This is also the name of the IoT thing.</p>
     #   @return [String]
     class GetConnectivityInfoRequest < Struct.new(
+      nil,
       :thing_name,
       keyword_init: true
     )
@@ -1175,6 +1225,7 @@ module Aws::GreengrassV2
     #   <p>A message about the connectivity information request.</p>
     #   @return [String]
     class GetConnectivityInfoResponse < Struct.new(
+      nil,
       :connectivity_info,
       :message,
       keyword_init: true
@@ -1186,6 +1237,7 @@ module Aws::GreengrassV2
     #   <p>The name of the core device. This is also the name of the IoT thing.</p>
     #   @return [String]
     class GetCoreDeviceRequest < Struct.new(
+      nil,
       :core_device_thing_name,
       keyword_init: true
     )
@@ -1246,6 +1298,7 @@ module Aws::GreengrassV2
     #           resources</a> in the <i>IoT Greengrass V2 Developer Guide</i>.</p>
     #   @return [Hash<String, String>]
     class GetCoreDeviceResponse < Struct.new(
+      nil,
       :core_device_thing_name,
       :core_version,
       :platform,
@@ -1263,6 +1316,7 @@ module Aws::GreengrassV2
     #   <p>The ID of the deployment.</p>
     #   @return [String]
     class GetDeploymentRequest < Struct.new(
+      nil,
       :deployment_id,
       keyword_init: true
     )
@@ -1317,6 +1371,7 @@ module Aws::GreengrassV2
     #           resources</a> in the <i>IoT Greengrass V2 Developer Guide</i>.</p>
     #   @return [Hash<String, String>]
     class GetDeploymentResponse < Struct.new(
+      nil,
       :target_arn,
       :revision_id,
       :deployment_id,
@@ -1342,6 +1397,7 @@ module Aws::GreengrassV2
     end
 
     class GetServiceRoleForAccountRequest < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1356,6 +1412,7 @@ module Aws::GreengrassV2
     #         Amazon Web Services Region.</p>
     #   @return [String]
     class GetServiceRoleForAccountResponse < Struct.new(
+      nil,
       :associated_at,
       :role_arn,
       keyword_init: true
@@ -1410,6 +1467,7 @@ module Aws::GreengrassV2
     #            </note>
     #   @return [Array<String>]
     class InstalledComponent < Struct.new(
+      nil,
       :component_name,
       :component_version,
       :lifecycle_state,
@@ -1436,6 +1494,7 @@ module Aws::GreengrassV2
     #   <p>The amount of time to wait before you retry the request.</p>
     #   @return [Integer]
     class InternalServerException < Struct.new(
+      nil,
       :message,
       :retry_after_seconds,
       keyword_init: true
@@ -1455,6 +1514,7 @@ module Aws::GreengrassV2
     #         deployment.</p>
     #   @return [Array<Types::IoTJobAbortCriteria>]
     class IoTJobAbortConfig < Struct.new(
+      nil,
       :criteria_list,
       keyword_init: true
     )
@@ -1490,6 +1550,7 @@ module Aws::GreengrassV2
     #         cancel.</p>
     #   @return [Integer]
     class IoTJobAbortCriteria < Struct.new(
+      nil,
       :failure_type,
       :action,
       :threshold_percentage,
@@ -1513,6 +1574,7 @@ module Aws::GreengrassV2
     #   <p>The maximum number of devices that receive a pending job notification, per minute.</p>
     #   @return [Integer]
     class IoTJobExecutionsRolloutConfig < Struct.new(
+      nil,
       :exponential_rate,
       :maximum_per_minute,
       keyword_init: true
@@ -1535,6 +1597,7 @@ module Aws::GreengrassV2
     #   <p>The criteria to increase the rollout rate for the job.</p>
     #   @return [Types::IoTJobRateIncreaseCriteria]
     class IoTJobExponentialRolloutRate < Struct.new(
+      nil,
       :base_rate_per_minute,
       :increment_factor,
       :rate_increase_criteria,
@@ -1555,6 +1618,7 @@ module Aws::GreengrassV2
     #         increases.</p>
     #   @return [Integer]
     class IoTJobRateIncreaseCriteria < Struct.new(
+      nil,
       :number_of_notified_things,
       :number_of_succeeded_things,
       keyword_init: true
@@ -1571,6 +1635,7 @@ module Aws::GreengrassV2
     #            <p>The timeout interval must be between 1 minute and 7 days (10080 minutes).</p>
     #   @return [Integer]
     class IoTJobTimeoutConfig < Struct.new(
+      nil,
       :in_progress_timeout_in_minutes,
       keyword_init: true
     )
@@ -1601,6 +1666,7 @@ module Aws::GreengrassV2
     #   <p>The list of system devices that the container can access.</p>
     #   @return [Array<Types::LambdaDeviceMount>]
     class LambdaContainerParams < Struct.new(
+      nil,
       :memory_size_in_kb,
       :mount_ro_sysfs,
       :volumes,
@@ -1632,6 +1698,7 @@ module Aws::GreengrassV2
     #            </p>
     #   @return [Boolean]
     class LambdaDeviceMount < Struct.new(
+      nil,
       :path,
       :permission,
       :add_group_owner,
@@ -1669,6 +1736,7 @@ module Aws::GreengrassV2
     #            </ul>
     #   @return [String]
     class LambdaEventSource < Struct.new(
+      nil,
       :topic,
       :type,
       keyword_init: true
@@ -1735,6 +1803,7 @@ module Aws::GreengrassV2
     #   <p>The parameters for the Linux process that contains the Lambda function.</p>
     #   @return [Types::LambdaLinuxProcessParams]
     class LambdaExecutionParameters < Struct.new(
+      nil,
       :event_sources,
       :max_queue_size,
       :max_instances_count,
@@ -1786,6 +1855,7 @@ module Aws::GreengrassV2
     #         device.</p>
     #   @return [Types::LambdaExecutionParameters]
     class LambdaFunctionRecipeSource < Struct.new(
+      nil,
       :lambda_arn,
       :component_name,
       :component_version,
@@ -1809,6 +1879,7 @@ module Aws::GreengrassV2
     #   <p>The parameters for the container in which the Lambda function runs.</p>
     #   @return [Types::LambdaContainerParams]
     class LambdaLinuxProcessParams < Struct.new(
+      nil,
       :isolation_mode,
       :container_params,
       keyword_init: true
@@ -1837,6 +1908,7 @@ module Aws::GreengrassV2
     #            </p>
     #   @return [Boolean]
     class LambdaVolumeMount < Struct.new(
+      nil,
       :source_path,
       :destination_path,
       :permission,
@@ -1861,6 +1933,7 @@ module Aws::GreengrassV2
     #   <p>The token to be used for the next set of paginated results.</p>
     #   @return [String]
     class ListClientDevicesAssociatedWithCoreDeviceRequest < Struct.new(
+      nil,
       :core_device_thing_name,
       :max_results,
       :next_token,
@@ -1876,6 +1949,7 @@ module Aws::GreengrassV2
     #   <p>The token for the next set of results, or null if there are no additional results.</p>
     #   @return [String]
     class ListClientDevicesAssociatedWithCoreDeviceResponse < Struct.new(
+      nil,
       :associated_client_devices,
       :next_token,
       keyword_init: true
@@ -1893,6 +1967,7 @@ module Aws::GreengrassV2
     #   <p>The token to be used for the next set of paginated results.</p>
     #   @return [String]
     class ListComponentVersionsRequest < Struct.new(
+      nil,
       :arn,
       :max_results,
       :next_token,
@@ -1908,6 +1983,7 @@ module Aws::GreengrassV2
     #   <p>The token for the next set of results, or null if there are no additional results.</p>
     #   @return [String]
     class ListComponentVersionsResponse < Struct.new(
+      nil,
       :component_versions,
       :next_token,
       keyword_init: true
@@ -1927,6 +2003,7 @@ module Aws::GreengrassV2
     #   <p>The token to be used for the next set of paginated results.</p>
     #   @return [String]
     class ListComponentsRequest < Struct.new(
+      nil,
       :scope,
       :max_results,
       :next_token,
@@ -1942,6 +2019,7 @@ module Aws::GreengrassV2
     #   <p>The token for the next set of results, or null if there are no additional results.</p>
     #   @return [String]
     class ListComponentsResponse < Struct.new(
+      nil,
       :components,
       :next_token,
       keyword_init: true
@@ -1992,6 +2070,7 @@ module Aws::GreengrassV2
     #            </ul>
     #   @return [String]
     class ListCoreDevicesRequest < Struct.new(
+      nil,
       :thing_group_arn,
       :status,
       :max_results,
@@ -2009,6 +2088,7 @@ module Aws::GreengrassV2
     #   <p>The token for the next set of results, or null if there are no additional results.</p>
     #   @return [String]
     class ListCoreDevicesResponse < Struct.new(
+      nil,
       :core_devices,
       :next_token,
       keyword_init: true
@@ -2047,6 +2127,7 @@ module Aws::GreengrassV2
     #   <p>The token to be used for the next set of paginated results.</p>
     #   @return [String]
     class ListDeploymentsRequest < Struct.new(
+      nil,
       :target_arn,
       :history_filter,
       :parent_target_arn,
@@ -2064,6 +2145,7 @@ module Aws::GreengrassV2
     #   <p>The token for the next set of results, or null if there are no additional results.</p>
     #   @return [String]
     class ListDeploymentsResponse < Struct.new(
+      nil,
       :deployments,
       :next_token,
       keyword_init: true
@@ -2081,6 +2163,7 @@ module Aws::GreengrassV2
     #   <p>The token to be used for the next set of paginated results.</p>
     #   @return [String]
     class ListEffectiveDeploymentsRequest < Struct.new(
+      nil,
       :core_device_thing_name,
       :max_results,
       :next_token,
@@ -2096,6 +2179,7 @@ module Aws::GreengrassV2
     #   <p>The token for the next set of results, or null if there are no additional results.</p>
     #   @return [String]
     class ListEffectiveDeploymentsResponse < Struct.new(
+      nil,
       :effective_deployments,
       :next_token,
       keyword_init: true
@@ -2132,6 +2216,7 @@ module Aws::GreengrassV2
     #            </p>
     #   @return [String]
     class ListInstalledComponentsRequest < Struct.new(
+      nil,
       :core_device_thing_name,
       :max_results,
       :next_token,
@@ -2158,6 +2243,7 @@ module Aws::GreengrassV2
     #   <p>The token for the next set of results, or null if there are no additional results.</p>
     #   @return [String]
     class ListInstalledComponentsResponse < Struct.new(
+      nil,
       :installed_components,
       :next_token,
       keyword_init: true
@@ -2169,6 +2255,7 @@ module Aws::GreengrassV2
     #   <p>The <a href="https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html">ARN</a> of the resource.</p>
     #   @return [String]
     class ListTagsForResourceRequest < Struct.new(
+      nil,
       :resource_arn,
       keyword_init: true
     )
@@ -2181,6 +2268,7 @@ module Aws::GreengrassV2
     #           resources</a> in the <i>IoT Greengrass V2 Developer Guide</i>.</p>
     #   @return [Hash<String, String>]
     class ListTagsForResourceResponse < Struct.new(
+      nil,
       :tags,
       keyword_init: true
     )
@@ -2193,6 +2281,7 @@ module Aws::GreengrassV2
     # @!attribute message
     #   @return [String]
     class RequestAlreadyInProgressException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -2206,6 +2295,7 @@ module Aws::GreengrassV2
     #   <p>The list of components to resolve.</p>
     #   @return [Array<Types::ComponentCandidate>]
     class ResolveComponentCandidatesRequest < Struct.new(
+      nil,
       :platform,
       :component_candidates,
       keyword_init: true
@@ -2218,6 +2308,7 @@ module Aws::GreengrassV2
     #         includes each component's recipe that you can use to install the component.</p>
     #   @return [Array<Types::ResolvedComponentVersion>]
     class ResolveComponentCandidatesResponse < Struct.new(
+      nil,
       :resolved_component_versions,
       keyword_init: true
     )
@@ -2263,6 +2354,7 @@ module Aws::GreengrassV2
     #       of the component version. This message communicates why a component version is discontinued or deleted.</p>
     #   @return [String]
     class ResolvedComponentVersion < Struct.new(
+      nil,
       :arn,
       :component_name,
       :component_version,
@@ -2284,6 +2376,7 @@ module Aws::GreengrassV2
     #   <p>The type of the resource that isn't found.</p>
     #   @return [String]
     class ResourceNotFoundException < Struct.new(
+      nil,
       :message,
       :resource_id,
       :resource_type,
@@ -2309,6 +2402,7 @@ module Aws::GreengrassV2
     #   <p>The code for the service in <a href="https://docs.aws.amazon.com/servicequotas/latest/userguide/intro.html">Service Quotas</a>.</p>
     #   @return [String]
     class ServiceQuotaExceededException < Struct.new(
+      nil,
       :message,
       :resource_id,
       :resource_type,
@@ -2335,6 +2429,7 @@ module Aws::GreengrassV2
     #         software doesn't limit the component's CPU usage.</p>
     #   @return [Float]
     class SystemResourceLimits < Struct.new(
+      nil,
       :memory,
       :cpus,
       keyword_init: true
@@ -2357,6 +2452,7 @@ module Aws::GreengrassV2
     #           resources</a> in the <i>IoT Greengrass V2 Developer Guide</i>.</p>
     #   @return [Hash<String, String>]
     class TagResourceRequest < Struct.new(
+      nil,
       :resource_arn,
       :tags,
       keyword_init: true
@@ -2365,6 +2461,7 @@ module Aws::GreengrassV2
     end
 
     class TagResourceResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -2384,6 +2481,7 @@ module Aws::GreengrassV2
     #   <p>The amount of time to wait before you retry the request.</p>
     #   @return [Integer]
     class ThrottlingException < Struct.new(
+      nil,
       :message,
       :quota_code,
       :service_code,
@@ -2405,6 +2503,7 @@ module Aws::GreengrassV2
     #   <p>A list of keys for tags to remove from the resource.</p>
     #   @return [Array<String>]
     class UntagResourceRequest < Struct.new(
+      nil,
       :resource_arn,
       :tag_keys,
       keyword_init: true
@@ -2413,6 +2512,7 @@ module Aws::GreengrassV2
     end
 
     class UntagResourceResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -2425,6 +2525,7 @@ module Aws::GreengrassV2
     #   <p>The connectivity information for the core device.</p>
     #   @return [Array<Types::ConnectivityInfo>]
     class UpdateConnectivityInfoRequest < Struct.new(
+      nil,
       :thing_name,
       :connectivity_info,
       keyword_init: true
@@ -2439,6 +2540,7 @@ module Aws::GreengrassV2
     #   <p>A message about the connectivity information update request.</p>
     #   @return [String]
     class UpdateConnectivityInfoResponse < Struct.new(
+      nil,
       :version,
       :message,
       keyword_init: true
@@ -2457,6 +2559,7 @@ module Aws::GreengrassV2
     #   <p>The list of fields that failed to validate.</p>
     #   @return [Array<Types::ValidationExceptionField>]
     class ValidationException < Struct.new(
+      nil,
       :message,
       :reason,
       :fields,
@@ -2473,6 +2576,7 @@ module Aws::GreengrassV2
     #   <p>The message of the exception field.</p>
     #   @return [String]
     class ValidationExceptionField < Struct.new(
+      nil,
       :name,
       :message,
       keyword_init: true

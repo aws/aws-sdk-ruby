@@ -10,6 +10,7 @@ module Aws::SSM
     # @!attribute message
     #   @return [String]
     class AccessDeniedException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -25,6 +26,7 @@ module Aws::SSM
     #   <p>The version of the current document shared with the account.</p>
     #   @return [String]
     class AccountSharingInfo < Struct.new(
+      nil,
       :account_id,
       :shared_document_version,
       keyword_init: true
@@ -66,6 +68,7 @@ module Aws::SSM
     #   <p>Tags assigned to the activation.</p>
     #   @return [Array<Types::Tag>]
     class Activation < Struct.new(
+      nil,
       :activation_id,
       :description,
       :default_instance_name,
@@ -136,6 +139,7 @@ module Aws::SSM
     #            </important>
     #   @return [Array<Types::Tag>]
     class AddTagsToResourceRequest < Struct.new(
+      nil,
       :resource_type,
       :resource_id,
       :tags,
@@ -145,6 +149,7 @@ module Aws::SSM
     end
 
     class AddTagsToResourceResult < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -155,6 +160,7 @@ module Aws::SSM
     #   <p>The name of your CloudWatch alarm.</p>
     #   @return [String]
     class Alarm < Struct.new(
+      nil,
       :name,
       keyword_init: true
     )
@@ -173,6 +179,7 @@ module Aws::SSM
     #   <p>The name of the CloudWatch alarm specified in the configuration.</p>
     #   @return [Array<Types::Alarm>]
     class AlarmConfiguration < Struct.new(
+      nil,
       :ignore_poll_alarm_failure,
       :alarms,
       keyword_init: true
@@ -193,6 +200,7 @@ module Aws::SSM
     #   <p>The state of your CloudWatch alarm.</p>
     #   @return [String]
     class AlarmStateInformation < Struct.new(
+      nil,
       :name,
       :state,
       keyword_init: true
@@ -205,6 +213,7 @@ module Aws::SSM
     # @!attribute message
     #   @return [String]
     class AlreadyExistsException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -231,6 +240,7 @@ module Aws::SSM
     #      OpsItem.</p>
     #   @return [String]
     class AssociateOpsItemRelatedItemRequest < Struct.new(
+      nil,
       :ops_item_id,
       :association_type,
       :resource_type,
@@ -244,6 +254,7 @@ module Aws::SSM
     #   <p>The association ID.</p>
     #   @return [String]
     class AssociateOpsItemRelatedItemResponse < Struct.new(
+      nil,
       :association_id,
       keyword_init: true
     )
@@ -252,6 +263,7 @@ module Aws::SSM
 
     # <p>You must disassociate a document from all managed nodes before you can delete it.</p>
     class AssociatedInstances < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -314,6 +326,7 @@ module Aws::SSM
     #      can't be specified together.</p>
     #   @return [Array<Hash<String, Array<String>>>]
     class Association < Struct.new(
+      nil,
       :name,
       :instance_id,
       :association_id,
@@ -334,6 +347,7 @@ module Aws::SSM
 
     # <p>The specified association already exists.</p>
     class AssociationAlreadyExists < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -465,6 +479,7 @@ module Aws::SSM
     #   <p>The CloudWatch alarm that was invoked during the association.</p>
     #   @return [Array<Types::AlarmStateInformation>]
     class AssociationDescription < Struct.new(
+      nil,
       :name,
       :instance_id,
       :association_version,
@@ -508,6 +523,7 @@ module Aws::SSM
     # @!attribute message
     #   @return [String]
     class AssociationDoesNotExist < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -547,6 +563,7 @@ module Aws::SSM
     #   <p>The CloudWatch alarms that were invoked by the association.</p>
     #   @return [Array<Types::AlarmStateInformation>]
     class AssociationExecution < Struct.new(
+      nil,
       :association_id,
       :association_version,
       :execution_id,
@@ -566,6 +583,7 @@ module Aws::SSM
     # @!attribute message
     #   @return [String]
     class AssociationExecutionDoesNotExist < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -583,6 +601,7 @@ module Aws::SSM
     #   <p>The filter type specified in the request.</p>
     #   @return [String]
     class AssociationExecutionFilter < Struct.new(
+      nil,
       :key,
       :value,
       :type,
@@ -620,6 +639,7 @@ module Aws::SSM
     #   <p>The location where the association details are saved.</p>
     #   @return [Types::OutputSource]
     class AssociationExecutionTarget < Struct.new(
+      nil,
       :association_id,
       :association_version,
       :execution_id,
@@ -642,6 +662,7 @@ module Aws::SSM
     #   <p>The value specified for the key.</p>
     #   @return [String]
     class AssociationExecutionTargetsFilter < Struct.new(
+      nil,
       :key,
       :value,
       keyword_init: true
@@ -661,6 +682,7 @@ module Aws::SSM
     #   <p>The filter value.</p>
     #   @return [String]
     class AssociationFilter < Struct.new(
+      nil,
       :key,
       :value,
       keyword_init: true
@@ -670,6 +692,7 @@ module Aws::SSM
 
     # <p>You can have at most 2,000 active associations.</p>
     class AssociationLimitExceeded < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -688,6 +711,7 @@ module Aws::SSM
     #      of managed nodes by status.</p>
     #   @return [Hash<String, Integer>]
     class AssociationOverview < Struct.new(
+      nil,
       :status,
       :detailed_status,
       :association_status_aggregated_count,
@@ -710,6 +734,7 @@ module Aws::SSM
     #   <p>A user-defined string.</p>
     #   @return [String]
     class AssociationStatus < Struct.new(
+      nil,
       :date,
       :name,
       :message,
@@ -819,6 +844,7 @@ module Aws::SSM
     #      can't be specified together.</p>
     #   @return [Array<Hash<String, Array<String>>>]
     class AssociationVersionInfo < Struct.new(
+      nil,
       :association_id,
       :association_version,
       :created_date,
@@ -854,6 +880,7 @@ module Aws::SSM
     # @!attribute message
     #   @return [String]
     class AssociationVersionLimitExceeded < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -877,6 +904,7 @@ module Aws::SSM
     #   <p>The URL location of the attachment content.</p>
     #   @return [String]
     class AttachmentContent < Struct.new(
+      nil,
       :name,
       :size,
       :hash,
@@ -897,6 +925,7 @@ module Aws::SSM
     #   <p>The name of the attachment.</p>
     #   @return [String]
     class AttachmentInformation < Struct.new(
+      nil,
       :name,
       keyword_init: true
     )
@@ -949,6 +978,7 @@ module Aws::SSM
     #   <p>The name of the document attachment file.</p>
     #   @return [String]
     class AttachmentsSource < Struct.new(
+      nil,
       :key,
       :values,
       :name,
@@ -962,6 +992,7 @@ module Aws::SSM
     # @!attribute message
     #   @return [String]
     class AutomationDefinitionNotApprovedException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -972,6 +1003,7 @@ module Aws::SSM
     # @!attribute message
     #   @return [String]
     class AutomationDefinitionNotFoundException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -982,6 +1014,7 @@ module Aws::SSM
     # @!attribute message
     #   @return [String]
     class AutomationDefinitionVersionNotFoundException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -1107,6 +1140,7 @@ module Aws::SSM
     #   <p>Variables defined for the automation.</p>
     #   @return [Hash<String, Array<String>>]
     class AutomationExecution < Struct.new(
+      nil,
       :automation_execution_id,
       :document_name,
       :document_version,
@@ -1161,6 +1195,7 @@ module Aws::SSM
     #   <p>The values used to limit the execution information associated with the filter's key.</p>
     #   @return [Array<String>]
     class AutomationExecutionFilter < Struct.new(
+      nil,
       :key,
       :values,
       keyword_init: true
@@ -1195,6 +1230,7 @@ module Aws::SSM
     #      Currently, only files in presigned Amazon S3 buckets are supported.</p>
     #   @return [String]
     class AutomationExecutionInputs < Struct.new(
+      nil,
       :parameters,
       :target_parameter_name,
       :targets,
@@ -1211,6 +1247,7 @@ module Aws::SSM
     # @!attribute message
     #   @return [String]
     class AutomationExecutionLimitExceededException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -1324,6 +1361,7 @@ module Aws::SSM
     #   <p>The name of the Change Manager change request.</p>
     #   @return [String]
     class AutomationExecutionMetadata < Struct.new(
+      nil,
       :automation_execution_id,
       :document_name,
       :document_version,
@@ -1365,6 +1403,7 @@ module Aws::SSM
     # @!attribute message
     #   @return [String]
     class AutomationExecutionNotFoundException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -1406,6 +1445,7 @@ module Aws::SSM
     #      preview.</p>
     #   @return [Integer]
     class AutomationExecutionPreview < Struct.new(
+      nil,
       :step_previews,
       :regions,
       :target_previews,
@@ -1425,6 +1465,7 @@ module Aws::SSM
     # @!attribute message
     #   @return [String]
     class AutomationStepNotFoundException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -1479,6 +1520,7 @@ module Aws::SSM
     #            <p>Applies to Windows Server managed nodes only.</p>
     #   @return [String]
     class BaselineOverride < Struct.new(
+      nil,
       :operating_system,
       :global_filters,
       :approval_rules,
@@ -1508,6 +1550,7 @@ module Aws::SSM
     #      provided, the command is canceled on every node on which it was requested.</p>
     #   @return [Array<String>]
     class CancelCommandRequest < Struct.new(
+      nil,
       :command_id,
       :instance_ids,
       keyword_init: true
@@ -1518,6 +1561,7 @@ module Aws::SSM
     # <p>Whether or not the command was successfully canceled. There is no guarantee that a request
     #    can be canceled.</p>
     class CancelCommandResult < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1527,6 +1571,7 @@ module Aws::SSM
     #   <p>The ID of the maintenance window execution to stop.</p>
     #   @return [String]
     class CancelMaintenanceWindowExecutionRequest < Struct.new(
+      nil,
       :window_execution_id,
       keyword_init: true
     )
@@ -1537,6 +1582,7 @@ module Aws::SSM
     #   <p>The ID of the maintenance window execution that has been stopped.</p>
     #   @return [String]
     class CancelMaintenanceWindowExecutionResult < Struct.new(
+      nil,
       :window_execution_id,
       keyword_init: true
     )
@@ -1557,6 +1603,7 @@ module Aws::SSM
     #   <p>Enables Systems Manager to send command output to CloudWatch Logs.</p>
     #   @return [Boolean]
     class CloudWatchOutputConfig < Struct.new(
+      nil,
       :cloud_watch_log_group_name,
       :cloud_watch_output_enabled,
       keyword_init: true
@@ -1719,6 +1766,7 @@ module Aws::SSM
     #   <p>The CloudWatch alarm that was invoked by the command.</p>
     #   @return [Array<Types::AlarmStateInformation>]
     class Command < Struct.new(
+      nil,
       :command_id,
       :document_name,
       :document_version,
@@ -1946,6 +1994,7 @@ module Aws::SSM
     #            </ul>
     #   @return [String]
     class CommandFilter < Struct.new(
+      nil,
       :key,
       :value,
       keyword_init: true
@@ -2071,6 +2120,7 @@ module Aws::SSM
     #      output.</p>
     #   @return [Types::CloudWatchOutputConfig]
     class CommandInvocation < Struct.new(
+      nil,
       :command_id,
       :instance_id,
       :instance_name,
@@ -2211,6 +2261,7 @@ module Aws::SSM
     #               <code>awsrunShellScript</code> is the name of the plugin.</p>
     #   @return [String]
     class CommandPlugin < Struct.new(
+      nil,
       :name,
       :status,
       :status_details,
@@ -2256,6 +2307,7 @@ module Aws::SSM
     #   <p>The type of execution. For example, <code>Command</code> is a valid execution type.</p>
     #   @return [String]
     class ComplianceExecutionSummary < Struct.new(
+      nil,
       :execution_time,
       :execution_id,
       :execution_type,
@@ -2311,6 +2363,7 @@ module Aws::SSM
     #   <p>A "Key": "Value" tag combination for the compliance item.</p>
     #   @return [Hash<String, String>]
     class ComplianceItem < Struct.new(
+      nil,
       :compliance_type,
       :resource_type,
       :resource_id,
@@ -2346,6 +2399,7 @@ module Aws::SSM
     #   <p>A "Key": "Value" tag combination for the compliance item.</p>
     #   @return [Hash<String, String>]
     class ComplianceItemEntry < Struct.new(
+      nil,
       :id,
       :title,
       :severity,
@@ -2368,6 +2422,7 @@ module Aws::SSM
     #      LessThan, or GreaterThan.</p>
     #   @return [String]
     class ComplianceStringFilter < Struct.new(
+      nil,
       :key,
       :values,
       :type,
@@ -2388,6 +2443,7 @@ module Aws::SSM
     #   <p>A list of NON_COMPLIANT items for the specified compliance type.</p>
     #   @return [Types::NonCompliantSummary]
     class ComplianceSummaryItem < Struct.new(
+      nil,
       :compliance_type,
       :compliant_summary,
       :non_compliant_summary,
@@ -2401,6 +2457,7 @@ module Aws::SSM
     # @!attribute message
     #   @return [String]
     class ComplianceTypeCountLimitExceededException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -2416,6 +2473,7 @@ module Aws::SSM
     #   <p>A summary of the compliance severity by compliance type.</p>
     #   @return [Types::SeveritySummary]
     class CompliantSummary < Struct.new(
+      nil,
       :compliant_count,
       :severity_summary,
       keyword_init: true
@@ -2492,6 +2550,7 @@ module Aws::SSM
     #   <p>Reserved for internal use.</p>
     #   @return [Array<Types::RegistrationMetadataItem>]
     class CreateActivationRequest < Struct.new(
+      nil,
       :description,
       :default_instance_name,
       :iam_role,
@@ -2513,6 +2572,7 @@ module Aws::SSM
     #      functions like a password to validate the activation ID. </p>
     #   @return [String]
     class CreateActivationResult < Struct.new(
+      nil,
       :activation_id,
       :activation_code,
       keyword_init: true
@@ -2524,6 +2584,7 @@ module Aws::SSM
     #   <p>One or more associations.</p>
     #   @return [Array<Types::CreateAssociationBatchRequestEntry>]
     class CreateAssociationBatchRequest < Struct.new(
+      nil,
       :entries,
       keyword_init: true
     )
@@ -2673,6 +2734,7 @@ module Aws::SSM
     #      command.</p>
     #   @return [Types::AlarmConfiguration]
     class CreateAssociationBatchRequestEntry < Struct.new(
+      nil,
       :name,
       :instance_id,
       :parameters,
@@ -2710,6 +2772,7 @@ module Aws::SSM
     #   <p>Information about the associations that failed.</p>
     #   @return [Array<Types::FailedCreateAssociation>]
     class CreateAssociationBatchResult < Struct.new(
+      nil,
       :successful,
       :failed,
       keyword_init: true
@@ -2891,6 +2954,7 @@ module Aws::SSM
     #      command.</p>
     #   @return [Types::AlarmConfiguration]
     class CreateAssociationRequest < Struct.new(
+      nil,
       :name,
       :document_version,
       :instance_id,
@@ -2921,6 +2985,7 @@ module Aws::SSM
     #   <p>Information about the association.</p>
     #   @return [Types::AssociationDescription]
     class CreateAssociationResult < Struct.new(
+      nil,
       :association_description,
       keyword_init: true
     )
@@ -3057,6 +3122,7 @@ module Aws::SSM
     #            </note>
     #   @return [Array<Types::Tag>]
     class CreateDocumentRequest < Struct.new(
+      nil,
       :content,
       :requires,
       :attachments,
@@ -3076,6 +3142,7 @@ module Aws::SSM
     #   <p>Information about the SSM document.</p>
     #   @return [Types::DocumentDescription]
     class CreateDocumentResult < Struct.new(
+      nil,
       :document_description,
       keyword_init: true
     )
@@ -3168,6 +3235,7 @@ module Aws::SSM
     #            </note>
     #   @return [Array<Types::Tag>]
     class CreateMaintenanceWindowRequest < Struct.new(
+      nil,
       :name,
       :description,
       :start_date,
@@ -3189,6 +3257,7 @@ module Aws::SSM
     #   <p>The ID of the created maintenance window.</p>
     #   @return [String]
     class CreateMaintenanceWindowResult < Struct.new(
+      nil,
       :window_id,
       keyword_init: true
     )
@@ -3311,6 +3380,7 @@ module Aws::SSM
     #       OpsCenter</a> in the <i>Amazon Web Services Systems Manager User Guide</i>.</p>
     #   @return [String]
     class CreateOpsItemRequest < Struct.new(
+      nil,
       :description,
       :ops_item_type,
       :operational_data,
@@ -3339,6 +3409,7 @@ module Aws::SSM
     #   <p>The OpsItem Amazon Resource Name (ARN).</p>
     #   @return [String]
     class CreateOpsItemResponse < Struct.new(
+      nil,
       :ops_item_id,
       :ops_item_arn,
       keyword_init: true
@@ -3372,6 +3443,7 @@ module Aws::SSM
     #            </ul>
     #   @return [Array<Types::Tag>]
     class CreateOpsMetadataRequest < Struct.new(
+      nil,
       :resource_id,
       :metadata,
       :tags,
@@ -3384,6 +3456,7 @@ module Aws::SSM
     #   <p>The Amazon Resource Name (ARN) of the OpsMetadata Object or blob created by the call.</p>
     #   @return [String]
     class CreateOpsMetadataResult < Struct.new(
+      nil,
       :ops_metadata_arn,
       keyword_init: true
     )
@@ -3514,6 +3587,7 @@ module Aws::SSM
     #            </note>
     #   @return [Array<Types::Tag>]
     class CreatePatchBaselineRequest < Struct.new(
+      nil,
       :operating_system,
       :name,
       :global_filters,
@@ -3537,6 +3611,7 @@ module Aws::SSM
     #   <p>The ID of the created patch baseline.</p>
     #   @return [String]
     class CreatePatchBaselineResult < Struct.new(
+      nil,
       :baseline_id,
       keyword_init: true
     )
@@ -3563,6 +3638,7 @@ module Aws::SSM
     #       <code>SyncType</code> value is SyncFromSource.</p>
     #   @return [Types::ResourceDataSyncSource]
     class CreateResourceDataSyncRequest < Struct.new(
+      nil,
       :sync_name,
       :s3_destination,
       :sync_type,
@@ -3573,6 +3649,7 @@ module Aws::SSM
     end
 
     class CreateResourceDataSyncResult < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -3593,6 +3670,7 @@ module Aws::SSM
     #   <p>The datetime on which the current credentials expire.</p>
     #   @return [Time]
     class Credentials < Struct.new(
+      nil,
       :access_key_id,
       :secret_access_key,
       :session_token,
@@ -3607,6 +3685,7 @@ module Aws::SSM
     # @!attribute message
     #   @return [String]
     class CustomSchemaCountLimitExceededException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -3617,6 +3696,7 @@ module Aws::SSM
     #   <p>The ID of the activation that you want to delete.</p>
     #   @return [String]
     class DeleteActivationRequest < Struct.new(
+      nil,
       :activation_id,
       keyword_init: true
     )
@@ -3624,6 +3704,7 @@ module Aws::SSM
     end
 
     class DeleteActivationResult < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -3650,6 +3731,7 @@ module Aws::SSM
     #   <p>The association ID that you want to delete.</p>
     #   @return [String]
     class DeleteAssociationRequest < Struct.new(
+      nil,
       :name,
       :instance_id,
       :association_id,
@@ -3659,6 +3741,7 @@ module Aws::SSM
     end
 
     class DeleteAssociationResult < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -3682,6 +3765,7 @@ module Aws::SSM
     #       <code>Force</code> flag in an Identity and Access Management (IAM) policy.</p>
     #   @return [Boolean]
     class DeleteDocumentRequest < Struct.new(
+      nil,
       :name,
       :document_version,
       :version_name,
@@ -3692,6 +3776,7 @@ module Aws::SSM
     end
 
     class DeleteDocumentResult < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -3721,6 +3806,7 @@ module Aws::SSM
     #   <p>User-provided idempotency token.</p>
     #   @return [String]
     class DeleteInventoryRequest < Struct.new(
+      nil,
       :type_name,
       :schema_delete_option,
       :dry_run,
@@ -3742,6 +3828,7 @@ module Aws::SSM
     #   <p>A summary of the delete operation. For more information about this summary, see <a href="https://docs.aws.amazon.com/systems-manager/latest/userguide/inventory-custom.html#delete-custom-inventory-summary">Deleting custom inventory</a> in the <i>Amazon Web Services Systems Manager User Guide</i>.</p>
     #   @return [Types::InventoryDeletionSummary]
     class DeleteInventoryResult < Struct.new(
+      nil,
       :deletion_id,
       :type_name,
       :deletion_summary,
@@ -3754,6 +3841,7 @@ module Aws::SSM
     #   <p>The ID of the maintenance window to delete.</p>
     #   @return [String]
     class DeleteMaintenanceWindowRequest < Struct.new(
+      nil,
       :window_id,
       keyword_init: true
     )
@@ -3764,6 +3852,7 @@ module Aws::SSM
     #   <p>The ID of the deleted maintenance window.</p>
     #   @return [String]
     class DeleteMaintenanceWindowResult < Struct.new(
+      nil,
       :window_id,
       keyword_init: true
     )
@@ -3774,6 +3863,7 @@ module Aws::SSM
     #   <p>The ID of the OpsItem that you want to delete.</p>
     #   @return [String]
     class DeleteOpsItemRequest < Struct.new(
+      nil,
       :ops_item_id,
       keyword_init: true
     )
@@ -3781,6 +3871,7 @@ module Aws::SSM
     end
 
     class DeleteOpsItemResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -3790,6 +3881,7 @@ module Aws::SSM
     #   <p>The Amazon Resource Name (ARN) of an OpsMetadata Object to delete.</p>
     #   @return [String]
     class DeleteOpsMetadataRequest < Struct.new(
+      nil,
       :ops_metadata_arn,
       keyword_init: true
     )
@@ -3797,6 +3889,7 @@ module Aws::SSM
     end
 
     class DeleteOpsMetadataResult < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -3810,6 +3903,7 @@ module Aws::SSM
     #            </note>
     #   @return [String]
     class DeleteParameterRequest < Struct.new(
+      nil,
       :name,
       keyword_init: true
     )
@@ -3817,6 +3911,7 @@ module Aws::SSM
     end
 
     class DeleteParameterResult < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -3831,6 +3926,7 @@ module Aws::SSM
     #            </note>
     #   @return [Array<String>]
     class DeleteParametersRequest < Struct.new(
+      nil,
       :names,
       keyword_init: true
     )
@@ -3844,6 +3940,7 @@ module Aws::SSM
     #   <p>The names of parameters that weren't deleted because the parameters aren't valid.</p>
     #   @return [Array<String>]
     class DeleteParametersResult < Struct.new(
+      nil,
       :deleted_parameters,
       :invalid_parameters,
       keyword_init: true
@@ -3855,6 +3952,7 @@ module Aws::SSM
     #   <p>The ID of the patch baseline to delete.</p>
     #   @return [String]
     class DeletePatchBaselineRequest < Struct.new(
+      nil,
       :baseline_id,
       keyword_init: true
     )
@@ -3865,6 +3963,7 @@ module Aws::SSM
     #   <p>The ID of the deleted patch baseline.</p>
     #   @return [String]
     class DeletePatchBaselineResult < Struct.new(
+      nil,
       :baseline_id,
       keyword_init: true
     )
@@ -3878,6 +3977,7 @@ module Aws::SSM
     #   <p>Specify the type of resource data sync to delete.</p>
     #   @return [String]
     class DeleteResourceDataSyncRequest < Struct.new(
+      nil,
       :sync_name,
       :sync_type,
       keyword_init: true
@@ -3886,6 +3986,7 @@ module Aws::SSM
     end
 
     class DeleteResourceDataSyncResult < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -3902,6 +4003,7 @@ module Aws::SSM
     #      to overwrite a policy.</p>
     #   @return [String]
     class DeleteResourcePolicyRequest < Struct.new(
+      nil,
       :resource_arn,
       :policy_id,
       :policy_hash,
@@ -3911,6 +4013,7 @@ module Aws::SSM
     end
 
     class DeleteResourcePolicyResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -3921,6 +4024,7 @@ module Aws::SSM
     #     </p>
     #   @return [String]
     class DeregisterManagedInstanceRequest < Struct.new(
+      nil,
       :instance_id,
       keyword_init: true
     )
@@ -3928,6 +4032,7 @@ module Aws::SSM
     end
 
     class DeregisterManagedInstanceResult < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -3940,6 +4045,7 @@ module Aws::SSM
     #   <p>The name of the patch group that should be deregistered from the patch baseline.</p>
     #   @return [String]
     class DeregisterPatchBaselineForPatchGroupRequest < Struct.new(
+      nil,
       :baseline_id,
       :patch_group,
       keyword_init: true
@@ -3954,6 +4060,7 @@ module Aws::SSM
     #   <p>The name of the patch group deregistered from the patch baseline.</p>
     #   @return [String]
     class DeregisterPatchBaselineForPatchGroupResult < Struct.new(
+      nil,
       :baseline_id,
       :patch_group,
       keyword_init: true
@@ -3973,6 +4080,7 @@ module Aws::SSM
     #      window.</p>
     #   @return [Boolean]
     class DeregisterTargetFromMaintenanceWindowRequest < Struct.new(
+      nil,
       :window_id,
       :window_target_id,
       :safe,
@@ -3988,6 +4096,7 @@ module Aws::SSM
     #   <p>The ID of the removed target definition.</p>
     #   @return [String]
     class DeregisterTargetFromMaintenanceWindowResult < Struct.new(
+      nil,
       :window_id,
       :window_target_id,
       keyword_init: true
@@ -4002,6 +4111,7 @@ module Aws::SSM
     #   <p>The ID of the task to remove from the maintenance window.</p>
     #   @return [String]
     class DeregisterTaskFromMaintenanceWindowRequest < Struct.new(
+      nil,
       :window_id,
       :window_task_id,
       keyword_init: true
@@ -4016,6 +4126,7 @@ module Aws::SSM
     #   <p>The ID of the task removed from the maintenance window.</p>
     #   @return [String]
     class DeregisterTaskFromMaintenanceWindowResult < Struct.new(
+      nil,
       :window_id,
       :window_task_id,
       keyword_init: true
@@ -4031,6 +4142,7 @@ module Aws::SSM
     #   <p>The filter values.</p>
     #   @return [Array<String>]
     class DescribeActivationsFilter < Struct.new(
+      nil,
       :filter_key,
       :filter_values,
       keyword_init: true
@@ -4049,6 +4161,7 @@ module Aws::SSM
     #   <p>A token to start the list. Use this token to get the next set of results. </p>
     #   @return [String]
     class DescribeActivationsRequest < Struct.new(
+      nil,
       :filters,
       :max_results,
       :next_token,
@@ -4065,6 +4178,7 @@ module Aws::SSM
     #      results. </p>
     #   @return [String]
     class DescribeActivationsResult < Struct.new(
+      nil,
       :activation_list,
       :next_token,
       keyword_init: true
@@ -4092,6 +4206,7 @@ module Aws::SSM
     #   <p>A token to start the list. Use this token to get the next set of results. </p>
     #   @return [String]
     class DescribeAssociationExecutionTargetsRequest < Struct.new(
+      nil,
       :association_id,
       :execution_id,
       :filters,
@@ -4110,6 +4225,7 @@ module Aws::SSM
     #      results.</p>
     #   @return [String]
     class DescribeAssociationExecutionTargetsResult < Struct.new(
+      nil,
       :association_execution_targets,
       :next_token,
       keyword_init: true
@@ -4134,6 +4250,7 @@ module Aws::SSM
     #   <p>A token to start the list. Use this token to get the next set of results. </p>
     #   @return [String]
     class DescribeAssociationExecutionsRequest < Struct.new(
+      nil,
       :association_id,
       :filters,
       :max_results,
@@ -4151,6 +4268,7 @@ module Aws::SSM
     #      results.</p>
     #   @return [String]
     class DescribeAssociationExecutionsResult < Struct.new(
+      nil,
       :association_executions,
       :next_token,
       keyword_init: true
@@ -4174,6 +4292,7 @@ module Aws::SSM
     #      versions for a specific association, use <a>ListAssociationVersions</a>. </p>
     #   @return [String]
     class DescribeAssociationRequest < Struct.new(
+      nil,
       :name,
       :instance_id,
       :association_id,
@@ -4187,6 +4306,7 @@ module Aws::SSM
     #   <p>Information about the association.</p>
     #   @return [Types::AssociationDescription]
     class DescribeAssociationResult < Struct.new(
+      nil,
       :association_description,
       keyword_init: true
     )
@@ -4205,6 +4325,7 @@ module Aws::SSM
     #      call.)</p>
     #   @return [String]
     class DescribeAutomationExecutionsRequest < Struct.new(
+      nil,
       :filters,
       :max_results,
       :next_token,
@@ -4222,6 +4343,7 @@ module Aws::SSM
     #      return, the string is empty.</p>
     #   @return [String]
     class DescribeAutomationExecutionsResult < Struct.new(
+      nil,
       :automation_execution_metadata_list,
       :next_token,
       keyword_init: true
@@ -4248,6 +4370,7 @@ module Aws::SSM
     #      is 'false'.</p>
     #   @return [Boolean]
     class DescribeAutomationStepExecutionsRequest < Struct.new(
+      nil,
       :automation_execution_id,
       :filters,
       :next_token,
@@ -4266,6 +4389,7 @@ module Aws::SSM
     #      return, the string is empty.</p>
     #   @return [String]
     class DescribeAutomationStepExecutionsResult < Struct.new(
+      nil,
       :step_executions,
       :next_token,
       keyword_init: true
@@ -4465,6 +4589,7 @@ module Aws::SSM
     #      call.)</p>
     #   @return [String]
     class DescribeAvailablePatchesRequest < Struct.new(
+      nil,
       :filters,
       :max_results,
       :next_token,
@@ -4481,6 +4606,7 @@ module Aws::SSM
     #      return, the string is empty.</p>
     #   @return [String]
     class DescribeAvailablePatchesResult < Struct.new(
+      nil,
       :patches,
       :next_token,
       keyword_init: true
@@ -4504,6 +4630,7 @@ module Aws::SSM
     #      call.)</p>
     #   @return [String]
     class DescribeDocumentPermissionRequest < Struct.new(
+      nil,
       :name,
       :permission_type,
       :max_results,
@@ -4526,6 +4653,7 @@ module Aws::SSM
     #      results.</p>
     #   @return [String]
     class DescribeDocumentPermissionResponse < Struct.new(
+      nil,
       :account_ids,
       :account_sharing_info_list,
       :next_token,
@@ -4551,6 +4679,7 @@ module Aws::SSM
     #      changed.</p>
     #   @return [String]
     class DescribeDocumentRequest < Struct.new(
+      nil,
       :name,
       :document_version,
       :version_name,
@@ -4563,6 +4692,7 @@ module Aws::SSM
     #   <p>Information about the SSM document.</p>
     #   @return [Types::DocumentDescription]
     class DescribeDocumentResult < Struct.new(
+      nil,
       :document,
       keyword_init: true
     )
@@ -4581,6 +4711,7 @@ module Aws::SSM
     #      call.)</p>
     #   @return [String]
     class DescribeEffectiveInstanceAssociationsRequest < Struct.new(
+      nil,
       :instance_id,
       :max_results,
       :next_token,
@@ -4597,6 +4728,7 @@ module Aws::SSM
     #      return, the string is empty.</p>
     #   @return [String]
     class DescribeEffectiveInstanceAssociationsResult < Struct.new(
+      nil,
       :associations,
       :next_token,
       keyword_init: true
@@ -4615,6 +4747,7 @@ module Aws::SSM
     #      call.)</p>
     #   @return [String]
     class DescribeEffectivePatchesForPatchBaselineRequest < Struct.new(
+      nil,
       :baseline_id,
       :max_results,
       :next_token,
@@ -4631,6 +4764,7 @@ module Aws::SSM
     #      return, the string is empty.</p>
     #   @return [String]
     class DescribeEffectivePatchesForPatchBaselineResult < Struct.new(
+      nil,
       :effective_patches,
       :next_token,
       keyword_init: true
@@ -4650,6 +4784,7 @@ module Aws::SSM
     #      call.)</p>
     #   @return [String]
     class DescribeInstanceAssociationsStatusRequest < Struct.new(
+      nil,
       :instance_id,
       :max_results,
       :next_token,
@@ -4666,6 +4801,7 @@ module Aws::SSM
     #      return, the string is empty.</p>
     #   @return [String]
     class DescribeInstanceAssociationsStatusResult < Struct.new(
+      nil,
       :instance_association_status_infos,
       :next_token,
       keyword_init: true
@@ -4698,6 +4834,7 @@ module Aws::SSM
     #      call.)</p>
     #   @return [String]
     class DescribeInstanceInformationRequest < Struct.new(
+      nil,
       :instance_information_filter_list,
       :filters,
       :max_results,
@@ -4715,6 +4852,7 @@ module Aws::SSM
     #      return, the string is empty. </p>
     #   @return [String]
     class DescribeInstanceInformationResult < Struct.new(
+      nil,
       :instance_information_list,
       :next_token,
       keyword_init: true
@@ -4748,6 +4886,7 @@ module Aws::SSM
     #   <p>The maximum number of patches to return (per page).</p>
     #   @return [Integer]
     class DescribeInstancePatchStatesForPatchGroupRequest < Struct.new(
+      nil,
       :patch_group,
       :filters,
       :next_token,
@@ -4765,6 +4904,7 @@ module Aws::SSM
     #      return, the string is empty.</p>
     #   @return [String]
     class DescribeInstancePatchStatesForPatchGroupResult < Struct.new(
+      nil,
       :instance_patch_states,
       :next_token,
       keyword_init: true
@@ -4783,6 +4923,7 @@ module Aws::SSM
     #   <p>The maximum number of managed nodes to return (per page).</p>
     #   @return [Integer]
     class DescribeInstancePatchStatesRequest < Struct.new(
+      nil,
       :instance_ids,
       :next_token,
       :max_results,
@@ -4799,6 +4940,7 @@ module Aws::SSM
     #      return, the string is empty.</p>
     #   @return [String]
     class DescribeInstancePatchStatesResult < Struct.new(
+      nil,
       :instance_patch_states,
       :next_token,
       keyword_init: true
@@ -4862,6 +5004,7 @@ module Aws::SSM
     #   <p>The maximum number of patches to return (per page).</p>
     #   @return [Integer]
     class DescribeInstancePatchesRequest < Struct.new(
+      nil,
       :instance_id,
       :filters,
       :next_token,
@@ -4902,6 +5045,7 @@ module Aws::SSM
     #      return, the string is empty.</p>
     #   @return [String]
     class DescribeInstancePatchesResult < Struct.new(
+      nil,
       :patches,
       :next_token,
       keyword_init: true
@@ -4923,6 +5067,7 @@ module Aws::SSM
     #   <p>The token provided by a previous request to use to return the next set of properties.</p>
     #   @return [String]
     class DescribeInstancePropertiesRequest < Struct.new(
+      nil,
       :instance_property_filter_list,
       :filters_with_operator,
       :max_results,
@@ -4940,6 +5085,7 @@ module Aws::SSM
     #      results.</p>
     #   @return [String]
     class DescribeInstancePropertiesResult < Struct.new(
+      nil,
       :instance_properties,
       :next_token,
       keyword_init: true
@@ -4959,6 +5105,7 @@ module Aws::SSM
     #      can specify in a subsequent call to get the next set of results.</p>
     #   @return [Integer]
     class DescribeInventoryDeletionsRequest < Struct.new(
+      nil,
       :deletion_id,
       :next_token,
       :max_results,
@@ -4975,6 +5122,7 @@ module Aws::SSM
     #      results.</p>
     #   @return [String]
     class DescribeInventoryDeletionsResult < Struct.new(
+      nil,
       :inventory_deletions,
       :next_token,
       keyword_init: true
@@ -5003,6 +5151,7 @@ module Aws::SSM
     #      call.)</p>
     #   @return [String]
     class DescribeMaintenanceWindowExecutionTaskInvocationsRequest < Struct.new(
+      nil,
       :window_execution_id,
       :task_id,
       :filters,
@@ -5021,6 +5170,7 @@ module Aws::SSM
     #      return, the string is empty.</p>
     #   @return [String]
     class DescribeMaintenanceWindowExecutionTaskInvocationsResult < Struct.new(
+      nil,
       :window_execution_task_invocation_identities,
       :next_token,
       keyword_init: true
@@ -5046,6 +5196,7 @@ module Aws::SSM
     #      call.)</p>
     #   @return [String]
     class DescribeMaintenanceWindowExecutionTasksRequest < Struct.new(
+      nil,
       :window_execution_id,
       :filters,
       :max_results,
@@ -5063,6 +5214,7 @@ module Aws::SSM
     #      return, the string is empty.</p>
     #   @return [String]
     class DescribeMaintenanceWindowExecutionTasksResult < Struct.new(
+      nil,
       :window_execution_task_identities,
       :next_token,
       keyword_init: true
@@ -5096,6 +5248,7 @@ module Aws::SSM
     #      call.)</p>
     #   @return [String]
     class DescribeMaintenanceWindowExecutionsRequest < Struct.new(
+      nil,
       :window_id,
       :filters,
       :max_results,
@@ -5113,6 +5266,7 @@ module Aws::SSM
     #      return, the string is empty.</p>
     #   @return [String]
     class DescribeMaintenanceWindowExecutionsResult < Struct.new(
+      nil,
       :window_executions,
       :next_token,
       keyword_init: true
@@ -5143,6 +5297,7 @@ module Aws::SSM
     #      call.)</p>
     #   @return [String]
     class DescribeMaintenanceWindowScheduleRequest < Struct.new(
+      nil,
       :window_id,
       :targets,
       :resource_type,
@@ -5162,6 +5317,7 @@ module Aws::SSM
     #   <p>The token for the next set of items to return. (You use this token in the next call.)</p>
     #   @return [String]
     class DescribeMaintenanceWindowScheduleResult < Struct.new(
+      nil,
       :scheduled_window_executions,
       :next_token,
       keyword_init: true
@@ -5186,6 +5342,7 @@ module Aws::SSM
     #      call.)</p>
     #   @return [String]
     class DescribeMaintenanceWindowTargetsRequest < Struct.new(
+      nil,
       :window_id,
       :filters,
       :max_results,
@@ -5203,6 +5360,7 @@ module Aws::SSM
     #      return, the string is empty.</p>
     #   @return [String]
     class DescribeMaintenanceWindowTargetsResult < Struct.new(
+      nil,
       :targets,
       :next_token,
       keyword_init: true
@@ -5227,6 +5385,7 @@ module Aws::SSM
     #      call.)</p>
     #   @return [String]
     class DescribeMaintenanceWindowTasksRequest < Struct.new(
+      nil,
       :window_id,
       :filters,
       :max_results,
@@ -5244,6 +5403,7 @@ module Aws::SSM
     #      return, the string is empty.</p>
     #   @return [String]
     class DescribeMaintenanceWindowTasksResult < Struct.new(
+      nil,
       :tasks,
       :next_token,
       keyword_init: true
@@ -5267,6 +5427,7 @@ module Aws::SSM
     #      call.)</p>
     #   @return [String]
     class DescribeMaintenanceWindowsForTargetRequest < Struct.new(
+      nil,
       :targets,
       :resource_type,
       :max_results,
@@ -5284,6 +5445,7 @@ module Aws::SSM
     #   <p>The token for the next set of items to return. (You use this token in the next call.)</p>
     #   @return [String]
     class DescribeMaintenanceWindowsForTargetResult < Struct.new(
+      nil,
       :window_identities,
       :next_token,
       keyword_init: true
@@ -5305,6 +5467,7 @@ module Aws::SSM
     #      call.)</p>
     #   @return [String]
     class DescribeMaintenanceWindowsRequest < Struct.new(
+      nil,
       :filters,
       :max_results,
       :next_token,
@@ -5321,6 +5484,7 @@ module Aws::SSM
     #      return, the string is empty.</p>
     #   @return [String]
     class DescribeMaintenanceWindowsResult < Struct.new(
+      nil,
       :window_identities,
       :next_token,
       keyword_init: true
@@ -5402,6 +5566,7 @@ module Aws::SSM
     #   <p>A token to start the list. Use this token to get the next set of results.</p>
     #   @return [String]
     class DescribeOpsItemsRequest < Struct.new(
+      nil,
       :ops_item_filters,
       :max_results,
       :next_token,
@@ -5418,6 +5583,7 @@ module Aws::SSM
     #   <p>A list of OpsItems.</p>
     #   @return [Array<Types::OpsItemSummary>]
     class DescribeOpsItemsResponse < Struct.new(
+      nil,
       :next_token,
       :ops_item_summaries,
       keyword_init: true
@@ -5453,6 +5619,7 @@ module Aws::SSM
     #            </note>
     #   @return [Boolean]
     class DescribeParametersRequest < Struct.new(
+      nil,
       :filters,
       :parameter_filters,
       :max_results,
@@ -5470,6 +5637,7 @@ module Aws::SSM
     #   <p>The token to use when requesting the next set of items.</p>
     #   @return [String]
     class DescribeParametersResult < Struct.new(
+      nil,
       :parameters,
       :next_token,
       keyword_init: true
@@ -5518,6 +5686,7 @@ module Aws::SSM
     #      call.)</p>
     #   @return [String]
     class DescribePatchBaselinesRequest < Struct.new(
+      nil,
       :filters,
       :max_results,
       :next_token,
@@ -5534,6 +5703,7 @@ module Aws::SSM
     #      return, the string is empty.</p>
     #   @return [String]
     class DescribePatchBaselinesResult < Struct.new(
+      nil,
       :baseline_identities,
       :next_token,
       keyword_init: true
@@ -5545,6 +5715,7 @@ module Aws::SSM
     #   <p>The name of the patch group whose patch snapshot should be retrieved.</p>
     #   @return [String]
     class DescribePatchGroupStateRequest < Struct.new(
+      nil,
       :patch_group,
       keyword_init: true
     )
@@ -5615,6 +5786,7 @@ module Aws::SSM
     #            <p>Applies to Windows Server managed nodes only.</p>
     #   @return [Integer]
     class DescribePatchGroupStateResult < Struct.new(
+      nil,
       :instances,
       :instances_with_installed_patches,
       :instances_with_installed_other_patches,
@@ -5681,6 +5853,7 @@ module Aws::SSM
     #      call.)</p>
     #   @return [String]
     class DescribePatchGroupsRequest < Struct.new(
+      nil,
       :max_results,
       :filters,
       :next_token,
@@ -5709,6 +5882,7 @@ module Aws::SSM
     #      return, the string is empty.</p>
     #   @return [String]
     class DescribePatchGroupsResult < Struct.new(
+      nil,
       :mappings,
       :next_token,
       keyword_init: true
@@ -5735,6 +5909,7 @@ module Aws::SSM
     #      call.)</p>
     #   @return [String]
     class DescribePatchPropertiesRequest < Struct.new(
+      nil,
       :operating_system,
       :property,
       :patch_set,
@@ -5752,6 +5927,7 @@ module Aws::SSM
     #   <p>The token for the next set of items to return. (You use this token in the next call.)</p>
     #   @return [String]
     class DescribePatchPropertiesResult < Struct.new(
+      nil,
       :properties,
       :next_token,
       keyword_init: true
@@ -5774,6 +5950,7 @@ module Aws::SSM
     #   <p>One or more filters to limit the type of sessions returned by the request.</p>
     #   @return [Array<Types::SessionFilter>]
     class DescribeSessionsRequest < Struct.new(
+      nil,
       :state,
       :max_results,
       :next_token,
@@ -5791,6 +5968,7 @@ module Aws::SSM
     #      call.)</p>
     #   @return [String]
     class DescribeSessionsResponse < Struct.new(
+      nil,
       :sessions,
       :next_token,
       keyword_init: true
@@ -5807,6 +5985,7 @@ module Aws::SSM
     #      and a related item.</p>
     #   @return [String]
     class DisassociateOpsItemRelatedItemRequest < Struct.new(
+      nil,
       :ops_item_id,
       :association_id,
       keyword_init: true
@@ -5815,6 +5994,7 @@ module Aws::SSM
     end
 
     class DisassociateOpsItemRelatedItemResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -5824,6 +6004,7 @@ module Aws::SSM
     # @!attribute message
     #   @return [String]
     class DocumentAlreadyExists < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -5841,6 +6022,7 @@ module Aws::SSM
     #   <p>The default version of the artifact associated with the document.</p>
     #   @return [String]
     class DocumentDefaultVersionDescription < Struct.new(
+      nil,
       :name,
       :default_version,
       :default_version_name,
@@ -5955,6 +6137,7 @@ module Aws::SSM
     #   <p>The value that identifies a document's category.</p>
     #   @return [Array<String>]
     class DocumentDescription < Struct.new(
+      nil,
       :sha1,
       :hash,
       :hash_type,
@@ -5998,6 +6181,7 @@ module Aws::SSM
     #   <p>The value of the filter.</p>
     #   @return [String]
     class DocumentFilter < Struct.new(
+      nil,
       :key,
       :value,
       keyword_init: true
@@ -6059,6 +6243,7 @@ module Aws::SSM
     #   <p>The user in your organization who created the document.</p>
     #   @return [String]
     class DocumentIdentifier < Struct.new(
+      nil,
       :name,
       :created_date,
       :display_name,
@@ -6205,6 +6390,7 @@ module Aws::SSM
     #   <p>The value for the filter key.</p>
     #   @return [Array<String>]
     class DocumentKeyValuesFilter < Struct.new(
+      nil,
       :key,
       :values,
       keyword_init: true
@@ -6216,6 +6402,7 @@ module Aws::SSM
     # @!attribute message
     #   @return [String]
     class DocumentLimitExceeded < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -6227,6 +6414,7 @@ module Aws::SSM
     #   <p>Details about a reviewer's response to a document review request.</p>
     #   @return [Array<Types::DocumentReviewerResponseSource>]
     class DocumentMetadataResponseInfo < Struct.new(
+      nil,
       :reviewer_response,
       keyword_init: true
     )
@@ -6250,6 +6438,7 @@ module Aws::SSM
     #      required. Parameters with a default value are optional.</p>
     #   @return [String]
     class DocumentParameter < Struct.new(
+      nil,
       :name,
       :type,
       :description,
@@ -6268,6 +6457,7 @@ module Aws::SSM
     # @!attribute message
     #   @return [String]
     class DocumentPermissionLimit < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -6290,6 +6480,7 @@ module Aws::SSM
     #      changed.</p>
     #   @return [String]
     class DocumentRequires < Struct.new(
+      nil,
       :name,
       :version,
       :require_type,
@@ -6309,6 +6500,7 @@ module Aws::SSM
     #      or who reviews the new version.</p>
     #   @return [String]
     class DocumentReviewCommentSource < Struct.new(
+      nil,
       :type,
       :content,
       keyword_init: true
@@ -6338,6 +6530,7 @@ module Aws::SSM
     #   <p>The user in your organization assigned to review a document request.</p>
     #   @return [String]
     class DocumentReviewerResponseSource < Struct.new(
+      nil,
       :create_time,
       :updated_time,
       :review_status,
@@ -6356,6 +6549,7 @@ module Aws::SSM
     #   <p>A comment entered by a user in your organization about the document review request.</p>
     #   @return [Array<Types::DocumentReviewCommentSource>]
     class DocumentReviews < Struct.new(
+      nil,
       :action,
       :comment,
       keyword_init: true
@@ -6400,6 +6594,7 @@ module Aws::SSM
     #   <p>The current status of the approval review for the latest version of the document.</p>
     #   @return [String]
     class DocumentVersionInfo < Struct.new(
+      nil,
       :name,
       :display_name,
       :document_version,
@@ -6425,6 +6620,7 @@ module Aws::SSM
     # @!attribute message
     #   @return [String]
     class DocumentVersionLimitExceeded < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -6438,6 +6634,7 @@ module Aws::SSM
     # @!attribute message
     #   @return [String]
     class DoesNotExistException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -6449,6 +6646,7 @@ module Aws::SSM
     # @!attribute message
     #   @return [String]
     class DuplicateDocumentContent < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -6460,6 +6658,7 @@ module Aws::SSM
     # @!attribute message
     #   @return [String]
     class DuplicateDocumentVersionName < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -6468,6 +6667,7 @@ module Aws::SSM
 
     # <p>You can't specify a managed node ID in more than one association.</p>
     class DuplicateInstanceId < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -6488,6 +6688,7 @@ module Aws::SSM
     #      rejected and the date the patch was or will be approved.</p>
     #   @return [Types::PatchStatus]
     class EffectivePatch < Struct.new(
+      nil,
       :patch,
       :patch_status,
       keyword_init: true
@@ -6537,6 +6738,7 @@ module Aws::SSM
     #   <p>The source of the failure.</p>
     #   @return [String]
     class FailedCreateAssociation < Struct.new(
+      nil,
       :entry,
       :message,
       :fault,
@@ -6558,6 +6760,7 @@ module Aws::SSM
     #   <p>Detailed information about the Automation step failure.</p>
     #   @return [Hash<String, Array<String>>]
     class FailureDetails < Struct.new(
+      nil,
       :failure_stage,
       :failure_type,
       :details,
@@ -6571,6 +6774,7 @@ module Aws::SSM
     # @!attribute message
     #   @return [String]
     class FeatureNotAvailableException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -6581,6 +6785,7 @@ module Aws::SSM
     #   <p>The ID of a just-in-time node access request.</p>
     #   @return [String]
     class GetAccessTokenRequest < Struct.new(
+      nil,
       :access_request_id,
       keyword_init: true
     )
@@ -6595,6 +6800,7 @@ module Aws::SSM
     #   <p>The status of the access request.</p>
     #   @return [String]
     class GetAccessTokenResponse < Struct.new(
+      nil,
       :credentials,
       :access_request_status,
       keyword_init: true
@@ -6608,6 +6814,7 @@ module Aws::SSM
     #      initiated.</p>
     #   @return [String]
     class GetAutomationExecutionRequest < Struct.new(
+      nil,
       :automation_execution_id,
       keyword_init: true
     )
@@ -6618,6 +6825,7 @@ module Aws::SSM
     #   <p>Detailed information about the current state of an automation execution.</p>
     #   @return [Types::AutomationExecution]
     class GetAutomationExecutionResult < Struct.new(
+      nil,
       :automation_execution,
       keyword_init: true
     )
@@ -6633,6 +6841,7 @@ module Aws::SSM
     #      value or <code>AtTime</code>, the current time is used.</p>
     #   @return [String]
     class GetCalendarStateRequest < Struct.new(
+      nil,
       :calendar_names,
       :at_time,
       keyword_init: true
@@ -6657,6 +6866,7 @@ module Aws::SSM
     #      <code>CLOSED</code>, and vice-versa.</p>
     #   @return [String]
     class GetCalendarStateResponse < Struct.new(
+      nil,
       :state,
       :at_time,
       :next_transition_time,
@@ -6686,6 +6896,7 @@ module Aws::SSM
     #       <code>CommandPlugins</code> list.</p>
     #   @return [String]
     class GetCommandInvocationRequest < Struct.new(
+      nil,
       :command_id,
       :instance_id,
       :plugin_name,
@@ -6822,6 +7033,7 @@ module Aws::SSM
     #   <p>Amazon CloudWatch Logs information where Systems Manager sent the command output.</p>
     #   @return [Types::CloudWatchOutputConfig]
     class GetCommandInvocationResult < Struct.new(
+      nil,
       :command_id,
       :instance_id,
       :comment,
@@ -6853,6 +7065,7 @@ module Aws::SSM
     #   <p>The managed node ID.</p>
     #   @return [String]
     class GetConnectionStatusRequest < Struct.new(
+      nil,
       :target,
       keyword_init: true
     )
@@ -6866,6 +7079,7 @@ module Aws::SSM
     #   <p>The status of the connection to the managed node.</p>
     #   @return [String]
     class GetConnectionStatusResponse < Struct.new(
+      nil,
       :target,
       :status,
       keyword_init: true
@@ -6877,6 +7091,7 @@ module Aws::SSM
     #   <p>Returns the default patch baseline for the specified operating system.</p>
     #   @return [String]
     class GetDefaultPatchBaselineRequest < Struct.new(
+      nil,
       :operating_system,
       keyword_init: true
     )
@@ -6890,6 +7105,7 @@ module Aws::SSM
     #   <p>The operating system for the returned patch baseline. </p>
     #   @return [String]
     class GetDefaultPatchBaselineResult < Struct.new(
+      nil,
       :baseline_id,
       :operating_system,
       keyword_init: true
@@ -6915,6 +7131,7 @@ module Aws::SSM
     #      IPv6-only environments. </p>
     #   @return [Boolean]
     class GetDeployablePatchSnapshotForInstanceRequest < Struct.new(
+      nil,
       :instance_id,
       :snapshot_id,
       :baseline_override,
@@ -6939,6 +7156,7 @@ module Aws::SSM
     #      2015.09) on the managed node for the specified patch snapshot.</p>
     #   @return [String]
     class GetDeployablePatchSnapshotForInstanceResult < Struct.new(
+      nil,
       :instance_id,
       :snapshot_id,
       :snapshot_download_url,
@@ -6964,6 +7182,7 @@ module Aws::SSM
     #      YAML. JSON is the default format.</p>
     #   @return [String]
     class GetDocumentRequest < Struct.new(
+      nil,
       :name,
       :version_name,
       :document_version,
@@ -7025,6 +7244,7 @@ module Aws::SSM
     #            <p>Only one version of an SSM document can be in review, or PENDING, at a time.</p>
     #   @return [String]
     class GetDocumentResult < Struct.new(
+      nil,
       :name,
       :created_date,
       :display_name,
@@ -7047,6 +7267,7 @@ module Aws::SSM
     #   <p>The ID of the existing execution preview.</p>
     #   @return [String]
     class GetExecutionPreviewRequest < Struct.new(
+      nil,
       :execution_preview_id,
       keyword_init: true
     )
@@ -7069,6 +7290,7 @@ module Aws::SSM
     #   <p>Information about the changes that would be made if an execution were run.</p>
     #   @return [Types::ExecutionPreview]
     class GetExecutionPreviewResponse < Struct.new(
+      nil,
       :execution_preview_id,
       :ended_at,
       :status,
@@ -7100,6 +7322,7 @@ module Aws::SSM
     #      can specify in a subsequent call to get the next set of results.</p>
     #   @return [Integer]
     class GetInventoryRequest < Struct.new(
+      nil,
       :filters,
       :aggregators,
       :result_attributes,
@@ -7118,6 +7341,7 @@ module Aws::SSM
     #      return, the string is empty.</p>
     #   @return [String]
     class GetInventoryResult < Struct.new(
+      nil,
       :entities,
       :next_token,
       keyword_init: true
@@ -7146,6 +7370,7 @@ module Aws::SSM
     #   <p>Returns the sub-type schema for a specified inventory type.</p>
     #   @return [Boolean]
     class GetInventorySchemaRequest < Struct.new(
+      nil,
       :type_name,
       :next_token,
       :max_results,
@@ -7164,6 +7389,7 @@ module Aws::SSM
     #      return, the string is empty.</p>
     #   @return [String]
     class GetInventorySchemaResult < Struct.new(
+      nil,
       :schemas,
       :next_token,
       keyword_init: true
@@ -7175,6 +7401,7 @@ module Aws::SSM
     #   <p>The ID of the maintenance window execution that includes the task.</p>
     #   @return [String]
     class GetMaintenanceWindowExecutionRequest < Struct.new(
+      nil,
       :window_execution_id,
       keyword_init: true
     )
@@ -7200,6 +7427,7 @@ module Aws::SSM
     #   <p>The time the maintenance window finished running.</p>
     #   @return [Time]
     class GetMaintenanceWindowExecutionResult < Struct.new(
+      nil,
       :window_execution_id,
       :task_ids,
       :status,
@@ -7221,6 +7449,7 @@ module Aws::SSM
     #   <p>The invocation ID to retrieve.</p>
     #   @return [String]
     class GetMaintenanceWindowExecutionTaskInvocationRequest < Struct.new(
+      nil,
       :window_execution_id,
       :task_id,
       :invocation_id,
@@ -7268,6 +7497,7 @@ module Aws::SSM
     #   <p>The maintenance window target ID.</p>
     #   @return [String]
     class GetMaintenanceWindowExecutionTaskInvocationResult < Struct.new(
+      nil,
       :window_execution_id,
       :task_execution_id,
       :invocation_id,
@@ -7293,6 +7523,7 @@ module Aws::SSM
     #      retrieved.</p>
     #   @return [String]
     class GetMaintenanceWindowExecutionTaskRequest < Struct.new(
+      nil,
       :window_execution_id,
       :task_id,
       keyword_init: true
@@ -7367,6 +7598,7 @@ module Aws::SSM
     #   <p>The CloudWatch alarms that were invoked by the maintenance window task.</p>
     #   @return [Array<Types::AlarmStateInformation>]
     class GetMaintenanceWindowExecutionTaskResult < Struct.new(
+      nil,
       :window_execution_id,
       :task_execution_id,
       :task_arn,
@@ -7396,6 +7628,7 @@ module Aws::SSM
     #   <p>The ID of the maintenance window for which you want to retrieve information.</p>
     #   @return [String]
     class GetMaintenanceWindowRequest < Struct.new(
+      nil,
       :window_id,
       keyword_init: true
     )
@@ -7457,6 +7690,7 @@ module Aws::SSM
     #   <p>The date the maintenance window was last modified.</p>
     #   @return [Time]
     class GetMaintenanceWindowResult < Struct.new(
+      nil,
       :window_id,
       :name,
       :description,
@@ -7491,6 +7725,7 @@ module Aws::SSM
     #   <p>The maintenance window task ID to retrieve.</p>
     #   @return [String]
     class GetMaintenanceWindowTaskRequest < Struct.new(
+      nil,
       :window_id,
       :window_task_id,
       keyword_init: true
@@ -7592,6 +7827,7 @@ module Aws::SSM
     #      task.</p>
     #   @return [Types::AlarmConfiguration]
     class GetMaintenanceWindowTaskResult < Struct.new(
+      nil,
       :window_id,
       :window_task_id,
       :targets,
@@ -7625,6 +7861,7 @@ module Aws::SSM
     #   <p>The OpsItem Amazon Resource Name (ARN).</p>
     #   @return [String]
     class GetOpsItemRequest < Struct.new(
+      nil,
       :ops_item_id,
       :ops_item_arn,
       keyword_init: true
@@ -7636,6 +7873,7 @@ module Aws::SSM
     #   <p>The OpsItem.</p>
     #   @return [Types::OpsItem]
     class GetOpsItemResponse < Struct.new(
+      nil,
       :ops_item,
       keyword_init: true
     )
@@ -7653,6 +7891,7 @@ module Aws::SSM
     #   <p>A token to start the list. Use this token to get the next set of results.</p>
     #   @return [String]
     class GetOpsMetadataRequest < Struct.new(
+      nil,
       :ops_metadata_arn,
       :max_results,
       :next_token,
@@ -7672,6 +7911,7 @@ module Aws::SSM
     #      results.</p>
     #   @return [String]
     class GetOpsMetadataResult < Struct.new(
+      nil,
       :resource_id,
       :metadata,
       :next_token,
@@ -7700,6 +7940,7 @@ module Aws::SSM
     #      can specify in a subsequent call to get the next set of results.</p>
     #   @return [Integer]
     class GetOpsSummaryRequest < Struct.new(
+      nil,
       :sync_name,
       :filters,
       :aggregators,
@@ -7719,6 +7960,7 @@ module Aws::SSM
     #      results.</p>
     #   @return [String]
     class GetOpsSummaryResult < Struct.new(
+      nil,
       :entities,
       :next_token,
       keyword_init: true
@@ -7743,6 +7985,7 @@ module Aws::SSM
     #      call.)</p>
     #   @return [String]
     class GetParameterHistoryRequest < Struct.new(
+      nil,
       :name,
       :with_decryption,
       :max_results,
@@ -7760,6 +8003,7 @@ module Aws::SSM
     #      return, the string is empty.</p>
     #   @return [String]
     class GetParameterHistoryResult < Struct.new(
+      nil,
       :parameters,
       :next_token,
       keyword_init: true
@@ -7780,6 +8024,7 @@ module Aws::SSM
     #       <code>String</code> and <code>StringList</code> parameter types.</p>
     #   @return [Boolean]
     class GetParameterRequest < Struct.new(
+      nil,
       :name,
       :with_decryption,
       keyword_init: true
@@ -7791,6 +8036,7 @@ module Aws::SSM
     #   <p>Information about a parameter.</p>
     #   @return [Types::Parameter]
     class GetParameterResult < Struct.new(
+      nil,
       :parameter,
       keyword_init: true
     )
@@ -7836,6 +8082,7 @@ module Aws::SSM
     #   <p>A token to start the list. Use this token to get the next set of results. </p>
     #   @return [String]
     class GetParametersByPathRequest < Struct.new(
+      nil,
       :path,
       :recursive,
       :parameter_filters,
@@ -7855,6 +8102,7 @@ module Aws::SSM
     #      results.</p>
     #   @return [String]
     class GetParametersByPathResult < Struct.new(
+      nil,
       :parameters,
       :next_token,
       keyword_init: true
@@ -7879,6 +8127,7 @@ module Aws::SSM
     #      This flag is ignored for <code>String</code> and <code>StringList</code> parameter types.</p>
     #   @return [Boolean]
     class GetParametersRequest < Struct.new(
+      nil,
       :names,
       :with_decryption,
       keyword_init: true
@@ -7894,6 +8143,7 @@ module Aws::SSM
     #      execution.</p>
     #   @return [Array<String>]
     class GetParametersResult < Struct.new(
+      nil,
       :parameters,
       :invalid_parameters,
       keyword_init: true
@@ -7909,6 +8159,7 @@ module Aws::SSM
     #      baseline.</p>
     #   @return [String]
     class GetPatchBaselineForPatchGroupRequest < Struct.new(
+      nil,
       :patch_group,
       :operating_system,
       keyword_init: true
@@ -7926,6 +8177,7 @@ module Aws::SSM
     #   <p>The operating system rule specified for patch groups using the patch baseline.</p>
     #   @return [String]
     class GetPatchBaselineForPatchGroupResult < Struct.new(
+      nil,
       :baseline_id,
       :patch_group,
       :operating_system,
@@ -7945,6 +8197,7 @@ module Aws::SSM
     #            </note>
     #   @return [String]
     class GetPatchBaselineRequest < Struct.new(
+      nil,
       :baseline_id,
       keyword_init: true
     )
@@ -8009,6 +8262,7 @@ module Aws::SSM
     #            <p>Applies to Windows Server managed nodes only.</p>
     #   @return [String]
     class GetPatchBaselineResult < Struct.new(
+      nil,
       :baseline_id,
       :name,
       :operating_system,
@@ -8046,6 +8300,7 @@ module Aws::SSM
     #      can specify in a subsequent call to get the next set of results.</p>
     #   @return [Integer]
     class GetResourcePoliciesRequest < Struct.new(
+      nil,
       :resource_arn,
       :next_token,
       :max_results,
@@ -8062,6 +8317,7 @@ module Aws::SSM
     #   <p>An array of the <code>Policy</code> object.</p>
     #   @return [Array<Types::GetResourcePoliciesResponseEntry>]
     class GetResourcePoliciesResponse < Struct.new(
+      nil,
       :next_token,
       :policies,
       keyword_init: true
@@ -8090,6 +8346,7 @@ module Aws::SSM
     #      work items (OpsItems).</p>
     #   @return [String]
     class GetResourcePoliciesResponseEntry < Struct.new(
+      nil,
       :policy_id,
       :policy_hash,
       :policy,
@@ -8153,6 +8410,7 @@ module Aws::SSM
     #            </ul>
     #   @return [String]
     class GetServiceSettingRequest < Struct.new(
+      nil,
       :setting_id,
       keyword_init: true
     )
@@ -8164,6 +8422,7 @@ module Aws::SSM
     #   <p>The query result of the current service setting.</p>
     #   @return [Types::ServiceSetting]
     class GetServiceSettingResult < Struct.new(
+      nil,
       :service_setting,
       keyword_init: true
     )
@@ -8177,6 +8436,7 @@ module Aws::SSM
     #       <i>Amazon Web Services Systems Manager User Guide</i>. </p>
     #   @return [String]
     class HierarchyLevelLimitExceededException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -8192,6 +8452,7 @@ module Aws::SSM
     #      must create a new, unique parameter.</p>
     #   @return [String]
     class HierarchyTypeMismatchException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -8203,6 +8464,7 @@ module Aws::SSM
     # @!attribute message
     #   @return [String]
     class IdempotentParameterMismatch < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -8214,6 +8476,7 @@ module Aws::SSM
     # @!attribute message
     #   @return [String]
     class IncompatiblePolicyException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -8228,6 +8491,7 @@ module Aws::SSM
     #   <p>The number of associations for the managed nodes.</p>
     #   @return [Hash<String, Integer>]
     class InstanceAggregatedAssociationOverview < Struct.new(
+      nil,
       :detailed_status,
       :instance_association_status_aggregated_count,
       keyword_init: true
@@ -8249,6 +8513,7 @@ module Aws::SSM
     #   <p>Version information for the association on the managed node.</p>
     #   @return [String]
     class InstanceAssociation < Struct.new(
+      nil,
       :association_id,
       :instance_id,
       :content,
@@ -8265,6 +8530,7 @@ module Aws::SSM
     #   <p>An S3 bucket where you want to store the results of this request.</p>
     #   @return [Types::S3OutputLocation]
     class InstanceAssociationOutputLocation < Struct.new(
+      nil,
       :s3_location,
       keyword_init: true
     )
@@ -8276,6 +8542,7 @@ module Aws::SSM
     #   <p>The URL of S3 bucket where you want to store the results of this request.</p>
     #   @return [Types::S3OutputUrl]
     class InstanceAssociationOutputUrl < Struct.new(
+      nil,
       :s3_output_url,
       keyword_init: true
     )
@@ -8320,6 +8587,7 @@ module Aws::SSM
     #   <p>The name of the association applied to the managed node.</p>
     #   @return [String]
     class InstanceAssociationStatusInfo < Struct.new(
+      nil,
       :association_id,
       :name,
       :document_version,
@@ -8370,6 +8638,7 @@ module Aws::SSM
     #      fleet.</p>
     #   @return [String]
     class InstanceInfo < Struct.new(
+      nil,
       :agent_type,
       :agent_version,
       :computer_name,
@@ -8475,6 +8744,7 @@ module Aws::SSM
     #      is <code>AWS::IoT::Thing</code>. </p>
     #   @return [String]
     class InstanceInformation < Struct.new(
+      nil,
       :instance_id,
       :ping_status,
       :last_ping_date_time,
@@ -8518,6 +8788,7 @@ module Aws::SSM
     #   <p>The filter values.</p>
     #   @return [Array<String>]
     class InstanceInformationFilter < Struct.new(
+      nil,
       :key,
       :value_set,
       keyword_init: true
@@ -8562,6 +8833,7 @@ module Aws::SSM
     #   <p>The filter values.</p>
     #   @return [Array<String>]
     class InstanceInformationStringFilter < Struct.new(
+      nil,
       :key,
       :values,
       keyword_init: true
@@ -8708,6 +8980,7 @@ module Aws::SSM
     #      nodes is <code>NON_COMPLIANT</code>.</p>
     #   @return [Integer]
     class InstancePatchState < Struct.new(
+      nil,
       :instance_id,
       :patch_group,
       :baseline_id,
@@ -8824,6 +9097,7 @@ module Aws::SSM
     #   <p>The type of comparison that should be performed for the value.</p>
     #   @return [String]
     class InstancePatchStateFilter < Struct.new(
+      nil,
       :key,
       :values,
       :type,
@@ -8919,6 +9193,7 @@ module Aws::SSM
     #   <p>The type of the source resource.</p>
     #   @return [String]
     class InstanceProperty < Struct.new(
+      nil,
       :name,
       :instance_id,
       :instance_type,
@@ -8959,6 +9234,7 @@ module Aws::SSM
     #   <p>The filter values.</p>
     #   @return [Array<String>]
     class InstancePropertyFilter < Struct.new(
+      nil,
       :key,
       :value_set,
       keyword_init: true
@@ -8977,6 +9253,7 @@ module Aws::SSM
     #   <p>The operator used by the filter call.</p>
     #   @return [String]
     class InstancePropertyStringFilter < Struct.new(
+      nil,
       :key,
       :values,
       :operator,
@@ -8989,6 +9266,7 @@ module Aws::SSM
     # @!attribute message
     #   @return [String]
     class InternalServerError < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -9000,6 +9278,7 @@ module Aws::SSM
     # @!attribute message
     #   @return [String]
     class InvalidActivation < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -9011,6 +9290,7 @@ module Aws::SSM
     # @!attribute message
     #   @return [String]
     class InvalidActivationId < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -9022,6 +9302,7 @@ module Aws::SSM
     # @!attribute message
     #   @return [String]
     class InvalidAggregatorException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -9033,6 +9314,7 @@ module Aws::SSM
     #   <p>The request doesn't meet the regular expression requirement.</p>
     #   @return [String]
     class InvalidAllowedPatternException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -9043,6 +9325,7 @@ module Aws::SSM
     # @!attribute message
     #   @return [String]
     class InvalidAssociation < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -9055,6 +9338,7 @@ module Aws::SSM
     # @!attribute message
     #   @return [String]
     class InvalidAssociationVersion < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -9067,6 +9351,7 @@ module Aws::SSM
     # @!attribute message
     #   @return [String]
     class InvalidAutomationExecutionParametersException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -9077,6 +9362,7 @@ module Aws::SSM
     # @!attribute message
     #   @return [String]
     class InvalidAutomationSignalException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -9087,6 +9373,7 @@ module Aws::SSM
     # @!attribute message
     #   @return [String]
     class InvalidAutomationStatusUpdateException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -9095,6 +9382,7 @@ module Aws::SSM
 
     # <p>The specified command ID isn't valid. Verify the ID and try again.</p>
     class InvalidCommandId < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -9105,6 +9393,7 @@ module Aws::SSM
     # @!attribute message
     #   @return [String]
     class InvalidDeleteInventoryParametersException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -9116,6 +9405,7 @@ module Aws::SSM
     # @!attribute message
     #   @return [String]
     class InvalidDeletionIdException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -9128,6 +9418,7 @@ module Aws::SSM
     #      can be issued by various API operations. </p>
     #   @return [String]
     class InvalidDocument < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -9139,6 +9430,7 @@ module Aws::SSM
     #   <p>A description of the validation error.</p>
     #   @return [String]
     class InvalidDocumentContent < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -9150,6 +9442,7 @@ module Aws::SSM
     # @!attribute message
     #   @return [String]
     class InvalidDocumentOperation < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -9160,6 +9453,7 @@ module Aws::SSM
     # @!attribute message
     #   @return [String]
     class InvalidDocumentSchemaVersion < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -9171,6 +9465,7 @@ module Aws::SSM
     # @!attribute message
     #   @return [String]
     class InvalidDocumentType < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -9181,6 +9476,7 @@ module Aws::SSM
     # @!attribute message
     #   @return [String]
     class InvalidDocumentVersion < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -9191,6 +9487,7 @@ module Aws::SSM
     # @!attribute message
     #   @return [String]
     class InvalidFilter < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -9199,6 +9496,7 @@ module Aws::SSM
 
     # <p>The specified key isn't valid.</p>
     class InvalidFilterKey < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -9211,6 +9509,7 @@ module Aws::SSM
     #      filter, valid options are Recursive and OneLevel.</p>
     #   @return [String]
     class InvalidFilterOption < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -9221,6 +9520,7 @@ module Aws::SSM
     # @!attribute message
     #   @return [String]
     class InvalidFilterValue < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -9248,6 +9548,7 @@ module Aws::SSM
     # @!attribute message
     #   @return [String]
     class InvalidInstanceId < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -9258,6 +9559,7 @@ module Aws::SSM
     # @!attribute message
     #   @return [String]
     class InvalidInstanceInformationFilterValue < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -9268,6 +9570,7 @@ module Aws::SSM
     # @!attribute message
     #   @return [String]
     class InvalidInstancePropertyFilterValue < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -9278,6 +9581,7 @@ module Aws::SSM
     # @!attribute message
     #   @return [String]
     class InvalidInventoryGroupException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -9289,6 +9593,7 @@ module Aws::SSM
     # @!attribute message
     #   @return [String]
     class InvalidInventoryItemContextException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -9299,6 +9604,7 @@ module Aws::SSM
     # @!attribute message
     #   @return [String]
     class InvalidInventoryRequestException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -9311,6 +9617,7 @@ module Aws::SSM
     # @!attribute message
     #   @return [String]
     class InvalidItemContentException < Struct.new(
+      nil,
       :type_name,
       :message,
       keyword_init: true
@@ -9322,6 +9629,7 @@ module Aws::SSM
     # @!attribute message
     #   @return [String]
     class InvalidKeyId < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -9332,6 +9640,7 @@ module Aws::SSM
     # @!attribute message
     #   @return [String]
     class InvalidNextToken < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -9343,6 +9652,7 @@ module Aws::SSM
     # @!attribute message
     #   @return [String]
     class InvalidNotificationConfig < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -9353,6 +9663,7 @@ module Aws::SSM
     # @!attribute message
     #   @return [String]
     class InvalidOptionException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -9361,6 +9672,7 @@ module Aws::SSM
 
     # <p>The S3 bucket doesn't exist.</p>
     class InvalidOutputFolder < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -9368,6 +9680,7 @@ module Aws::SSM
 
     # <p>The output location isn't valid or doesn't exist.</p>
     class InvalidOutputLocation < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -9378,6 +9691,7 @@ module Aws::SSM
     # @!attribute message
     #   @return [String]
     class InvalidParameters < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -9389,6 +9703,7 @@ module Aws::SSM
     # @!attribute message
     #   @return [String]
     class InvalidPermissionType < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -9397,6 +9712,7 @@ module Aws::SSM
 
     # <p>The plugin name isn't valid.</p>
     class InvalidPluginName < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -9406,6 +9722,7 @@ module Aws::SSM
     # @!attribute message
     #   @return [String]
     class InvalidPolicyAttributeException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -9417,6 +9734,7 @@ module Aws::SSM
     # @!attribute message
     #   @return [String]
     class InvalidPolicyTypeException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -9425,6 +9743,7 @@ module Aws::SSM
 
     # <p>The resource ID isn't valid. Verify that you entered the correct ID and try again.</p>
     class InvalidResourceId < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -9433,6 +9752,7 @@ module Aws::SSM
     # <p>The resource type isn't valid. For example, if you are attempting to tag an EC2 instance,
     #    the instance must be a registered managed node.</p>
     class InvalidResourceType < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -9442,6 +9762,7 @@ module Aws::SSM
     # @!attribute message
     #   @return [String]
     class InvalidResultAttributeException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -9454,6 +9775,7 @@ module Aws::SSM
     # @!attribute message
     #   @return [String]
     class InvalidRole < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -9464,6 +9786,7 @@ module Aws::SSM
     # @!attribute message
     #   @return [String]
     class InvalidSchedule < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -9474,6 +9797,7 @@ module Aws::SSM
     # @!attribute message
     #   @return [String]
     class InvalidTag < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -9485,6 +9809,7 @@ module Aws::SSM
     # @!attribute message
     #   @return [String]
     class InvalidTarget < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -9495,6 +9820,7 @@ module Aws::SSM
     # @!attribute message
     #   @return [String]
     class InvalidTargetMaps < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -9505,6 +9831,7 @@ module Aws::SSM
     # @!attribute message
     #   @return [String]
     class InvalidTypeNameException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -9515,6 +9842,7 @@ module Aws::SSM
     # @!attribute message
     #   @return [String]
     class InvalidUpdate < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -9533,6 +9861,7 @@ module Aws::SSM
     #      return a count of resources that match and don't match the specified criteria.</p>
     #   @return [Array<Types::InventoryGroup>]
     class InventoryAggregator < Struct.new(
+      nil,
       :expression,
       :aggregators,
       :groups,
@@ -9565,6 +9894,7 @@ module Aws::SSM
     #   <p>The UTC timestamp of when the last status report.</p>
     #   @return [Time]
     class InventoryDeletionStatusItem < Struct.new(
+      nil,
       :deletion_id,
       :type_name,
       :deletion_start_time,
@@ -9589,6 +9919,7 @@ module Aws::SSM
     #   <p>A list of counts and versions for deleted items.</p>
     #   @return [Array<Types::InventoryDeletionSummaryItem>]
     class InventoryDeletionSummary < Struct.new(
+      nil,
       :total_count,
       :remaining_count,
       :summary_items,
@@ -9614,6 +9945,7 @@ module Aws::SSM
     #   <p>The remaining number of items to delete.</p>
     #   @return [Integer]
     class InventoryDeletionSummaryItem < Struct.new(
+      nil,
       :version,
       :count,
       :remaining_count,
@@ -9687,6 +10019,7 @@ module Aws::SSM
     #            </note>
     #   @return [String]
     class InventoryFilter < Struct.new(
+      nil,
       :key,
       :values,
       :type,
@@ -9706,6 +10039,7 @@ module Aws::SSM
     #      number of resources that don't match the criteria. </p>
     #   @return [Array<Types::InventoryFilter>]
     class InventoryGroup < Struct.new(
+      nil,
       :name,
       :filters,
       keyword_init: true
@@ -9741,6 +10075,7 @@ module Aws::SSM
     #       <code>ComplianceType</code> properties of the <code>AWS:ComplianceItem</code> type.</p>
     #   @return [Hash<String, String>]
     class InventoryItem < Struct.new(
+      nil,
       :type_name,
       :schema_version,
       :capture_time,
@@ -9761,6 +10096,7 @@ module Aws::SSM
     #   <p>The data type of the inventory item attribute. </p>
     #   @return [String]
     class InventoryItemAttribute < Struct.new(
+      nil,
       :name,
       :data_type,
       keyword_init: true
@@ -9787,6 +10123,7 @@ module Aws::SSM
     #   <p>The alias name of the inventory type. The alias name is used for display purposes.</p>
     #   @return [String]
     class InventoryItemSchema < Struct.new(
+      nil,
       :type_name,
       :version,
       :attributes,
@@ -9805,6 +10142,7 @@ module Aws::SSM
     #   <p>The data section in the inventory result entity JSON.</p>
     #   @return [Hash<String, Types::InventoryResultItem>]
     class InventoryResultEntity < Struct.new(
+      nil,
       :id,
       :data,
       keyword_init: true
@@ -9832,6 +10170,7 @@ module Aws::SSM
     #      values. </p>
     #   @return [Array<Hash<String, String>>]
     class InventoryResultItem < Struct.new(
+      nil,
       :type_name,
       :schema_version,
       :capture_time,
@@ -9845,6 +10184,7 @@ module Aws::SSM
     # <p>The command ID and managed node ID you specified didn't match any invocations. Verify the
     #    command ID and the managed node ID and try again. </p>
     class InvocationDoesNotExist < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -9856,6 +10196,7 @@ module Aws::SSM
     # @!attribute message
     #   @return [String]
     class ItemContentMismatchException < Struct.new(
+      nil,
       :type_name,
       :message,
       keyword_init: true
@@ -9869,6 +10210,7 @@ module Aws::SSM
     # @!attribute message
     #   @return [String]
     class ItemSizeLimitExceededException < Struct.new(
+      nil,
       :type_name,
       :message,
       keyword_init: true
@@ -9891,6 +10233,7 @@ module Aws::SSM
     #   <p>One or more labels to attach to the specified parameter version.</p>
     #   @return [Array<String>]
     class LabelParameterVersionRequest < Struct.new(
+      nil,
       :name,
       :parameter_version,
       :labels,
@@ -9908,6 +10251,7 @@ module Aws::SSM
     #   <p>The version of the parameter that has been labeled.</p>
     #   @return [Integer]
     class LabelParameterVersionResult < Struct.new(
+      nil,
       :invalid_labels,
       :parameter_version,
       keyword_init: true
@@ -9931,6 +10275,7 @@ module Aws::SSM
     #   <p>A token to start the list. Use this token to get the next set of results. </p>
     #   @return [String]
     class ListAssociationVersionsRequest < Struct.new(
+      nil,
       :association_id,
       :max_results,
       :next_token,
@@ -9947,6 +10292,7 @@ module Aws::SSM
     #      results.</p>
     #   @return [String]
     class ListAssociationVersionsResult < Struct.new(
+      nil,
       :association_versions,
       :next_token,
       keyword_init: true
@@ -9972,6 +10318,7 @@ module Aws::SSM
     #      call.)</p>
     #   @return [String]
     class ListAssociationsRequest < Struct.new(
+      nil,
       :association_filter_list,
       :max_results,
       :next_token,
@@ -9988,6 +10335,7 @@ module Aws::SSM
     #      return, the string is empty.</p>
     #   @return [String]
     class ListAssociationsResult < Struct.new(
+      nil,
       :associations,
       :next_token,
       keyword_init: true
@@ -10018,6 +10366,7 @@ module Aws::SSM
     #      output. The default value is <code>false</code>. </p>
     #   @return [Boolean]
     class ListCommandInvocationsRequest < Struct.new(
+      nil,
       :command_id,
       :instance_id,
       :max_results,
@@ -10037,6 +10386,7 @@ module Aws::SSM
     #      previous call.)</p>
     #   @return [String]
     class ListCommandInvocationsResult < Struct.new(
+      nil,
       :command_invocations,
       :next_token,
       keyword_init: true
@@ -10068,6 +10418,7 @@ module Aws::SSM
     #     </p>
     #   @return [Array<Types::CommandFilter>]
     class ListCommandsRequest < Struct.new(
+      nil,
       :command_id,
       :instance_id,
       :max_results,
@@ -10086,6 +10437,7 @@ module Aws::SSM
     #      previous call.)</p>
     #   @return [String]
     class ListCommandsResult < Struct.new(
+      nil,
       :commands,
       :next_token,
       keyword_init: true
@@ -10113,6 +10465,7 @@ module Aws::SSM
     #      can specify in a subsequent call to get the next set of results.</p>
     #   @return [Integer]
     class ListComplianceItemsRequest < Struct.new(
+      nil,
       :filters,
       :resource_ids,
       :resource_types,
@@ -10131,6 +10484,7 @@ module Aws::SSM
     #      results.</p>
     #   @return [String]
     class ListComplianceItemsResult < Struct.new(
+      nil,
       :compliance_items,
       :next_token,
       keyword_init: true
@@ -10151,6 +10505,7 @@ module Aws::SSM
     #      results.</p>
     #   @return [Integer]
     class ListComplianceSummariesRequest < Struct.new(
+      nil,
       :filters,
       :next_token,
       :max_results,
@@ -10169,6 +10524,7 @@ module Aws::SSM
     #      results.</p>
     #   @return [String]
     class ListComplianceSummariesResult < Struct.new(
+      nil,
       :compliance_summary_items,
       :next_token,
       keyword_init: true
@@ -10195,6 +10551,7 @@ module Aws::SSM
     #      can specify in a subsequent call to get the next set of results.</p>
     #   @return [Integer]
     class ListDocumentMetadataHistoryRequest < Struct.new(
+      nil,
       :name,
       :document_version,
       :metadata,
@@ -10223,6 +10580,7 @@ module Aws::SSM
     #      can specify in a subsequent call to get the next set of results.</p>
     #   @return [String]
     class ListDocumentMetadataHistoryResponse < Struct.new(
+      nil,
       :name,
       :document_version,
       :author,
@@ -10245,6 +10603,7 @@ module Aws::SSM
     #      call.)</p>
     #   @return [String]
     class ListDocumentVersionsRequest < Struct.new(
+      nil,
       :name,
       :max_results,
       :next_token,
@@ -10261,6 +10620,7 @@ module Aws::SSM
     #      return, the string is empty.</p>
     #   @return [String]
     class ListDocumentVersionsResult < Struct.new(
+      nil,
       :document_versions,
       :next_token,
       keyword_init: true
@@ -10293,6 +10653,7 @@ module Aws::SSM
     #      call.)</p>
     #   @return [String]
     class ListDocumentsRequest < Struct.new(
+      nil,
       :document_filter_list,
       :filters,
       :max_results,
@@ -10310,6 +10671,7 @@ module Aws::SSM
     #      return, the string is empty.</p>
     #   @return [String]
     class ListDocumentsResult < Struct.new(
+      nil,
       :document_identifiers,
       :next_token,
       keyword_init: true
@@ -10335,6 +10697,7 @@ module Aws::SSM
     #      can specify in a subsequent call to get the next set of results.</p>
     #   @return [Integer]
     class ListInventoryEntriesRequest < Struct.new(
+      nil,
       :instance_id,
       :type_name,
       :filters,
@@ -10365,6 +10728,7 @@ module Aws::SSM
     #      return, the string is empty.</p>
     #   @return [String]
     class ListInventoryEntriesResult < Struct.new(
+      nil,
       :type_name,
       :instance_id,
       :schema_version,
@@ -10394,6 +10758,7 @@ module Aws::SSM
     #      can specify in a subsequent call to get the next set of results.</p>
     #   @return [Integer]
     class ListNodesRequest < Struct.new(
+      nil,
       :sync_name,
       :filters,
       :next_token,
@@ -10411,6 +10776,7 @@ module Aws::SSM
     #      return, the string is empty.</p>
     #   @return [String]
     class ListNodesResult < Struct.new(
+      nil,
       :nodes,
       :next_token,
       keyword_init: true
@@ -10442,6 +10808,7 @@ module Aws::SSM
     #      can specify in a subsequent call to get the next set of results.</p>
     #   @return [Integer]
     class ListNodesSummaryRequest < Struct.new(
+      nil,
       :sync_name,
       :filters,
       :aggregators,
@@ -10461,6 +10828,7 @@ module Aws::SSM
     #      return, the string is empty.</p>
     #   @return [String]
     class ListNodesSummaryResult < Struct.new(
+      nil,
       :summary,
       :next_token,
       keyword_init: true
@@ -10479,6 +10847,7 @@ module Aws::SSM
     #   <p>A token to start the list. Use this token to get the next set of results. </p>
     #   @return [String]
     class ListOpsItemEventsRequest < Struct.new(
+      nil,
       :filters,
       :max_results,
       :next_token,
@@ -10495,6 +10864,7 @@ module Aws::SSM
     #   <p>A list of event information for the specified OpsItems.</p>
     #   @return [Array<Types::OpsItemEventSummary>]
     class ListOpsItemEventsResponse < Struct.new(
+      nil,
       :next_token,
       :summaries,
       keyword_init: true
@@ -10517,6 +10887,7 @@ module Aws::SSM
     #      call.)</p>
     #   @return [String]
     class ListOpsItemRelatedItemsRequest < Struct.new(
+      nil,
       :ops_item_id,
       :filters,
       :max_results,
@@ -10534,6 +10905,7 @@ module Aws::SSM
     #   <p>A list of related-item resources for the specified OpsItem.</p>
     #   @return [Array<Types::OpsItemRelatedItemSummary>]
     class ListOpsItemRelatedItemsResponse < Struct.new(
+      nil,
       :next_token,
       :summaries,
       keyword_init: true
@@ -10552,6 +10924,7 @@ module Aws::SSM
     #   <p>A token to start the list. Use this token to get the next set of results.</p>
     #   @return [String]
     class ListOpsMetadataRequest < Struct.new(
+      nil,
       :filters,
       :max_results,
       :next_token,
@@ -10568,6 +10941,7 @@ module Aws::SSM
     #      results.</p>
     #   @return [String]
     class ListOpsMetadataResult < Struct.new(
+      nil,
       :ops_metadata_list,
       :next_token,
       keyword_init: true
@@ -10586,6 +10960,7 @@ module Aws::SSM
     #      can specify in a subsequent call to get the next set of results.</p>
     #   @return [Integer]
     class ListResourceComplianceSummariesRequest < Struct.new(
+      nil,
       :filters,
       :next_token,
       :max_results,
@@ -10604,6 +10979,7 @@ module Aws::SSM
     #      results.</p>
     #   @return [String]
     class ListResourceComplianceSummariesResult < Struct.new(
+      nil,
       :resource_compliance_summary_items,
       :next_token,
       keyword_init: true
@@ -10624,6 +11000,7 @@ module Aws::SSM
     #      can specify in a subsequent call to get the next set of results.</p>
     #   @return [Integer]
     class ListResourceDataSyncRequest < Struct.new(
+      nil,
       :sync_type,
       :next_token,
       :max_results,
@@ -10640,6 +11017,7 @@ module Aws::SSM
     #      results.</p>
     #   @return [String]
     class ListResourceDataSyncResult < Struct.new(
+      nil,
       :resource_data_sync_items,
       :next_token,
       keyword_init: true
@@ -10654,6 +11032,7 @@ module Aws::SSM
     #   <p>The resource ID for which you want to see a list of tags.</p>
     #   @return [String]
     class ListTagsForResourceRequest < Struct.new(
+      nil,
       :resource_type,
       :resource_id,
       keyword_init: true
@@ -10665,6 +11044,7 @@ module Aws::SSM
     #   <p>A list of tags.</p>
     #   @return [Array<Types::Tag>]
     class ListTagsForResourceResult < Struct.new(
+      nil,
       :tag_list,
       keyword_init: true
     )
@@ -10690,6 +11070,7 @@ module Aws::SSM
     #   <p>The Amazon Web Services Region where the S3 bucket is located.</p>
     #   @return [String]
     class LoggingInfo < Struct.new(
+      nil,
       :s3_bucket_name,
       :s3_key_prefix,
       :s3_region,
@@ -10721,6 +11102,7 @@ module Aws::SSM
     #            </note>
     #   @return [Hash<String, Array<String>>]
     class MaintenanceWindowAutomationParameters < Struct.new(
+      nil,
       :document_version,
       :parameters,
       keyword_init: true
@@ -10748,6 +11130,7 @@ module Aws::SSM
     #   <p>The time the execution finished.</p>
     #   @return [Time]
     class MaintenanceWindowExecution < Struct.new(
+      nil,
       :window_id,
       :window_execution_id,
       :status,
@@ -10793,6 +11176,7 @@ module Aws::SSM
     #   <p>The CloudWatch alarm that was invoked by the maintenance window task.</p>
     #   @return [Array<Types::AlarmStateInformation>]
     class MaintenanceWindowExecutionTaskIdentity < Struct.new(
+      nil,
       :window_execution_id,
       :task_execution_id,
       :status,
@@ -10852,6 +11236,7 @@ module Aws::SSM
     #      for.</p>
     #   @return [String]
     class MaintenanceWindowExecutionTaskInvocationIdentity < Struct.new(
+      nil,
       :window_execution_id,
       :task_execution_id,
       :invocation_id,
@@ -10911,6 +11296,7 @@ module Aws::SSM
     #   <p>The filter values.</p>
     #   @return [Array<String>]
     class MaintenanceWindowFilter < Struct.new(
+      nil,
       :key,
       :values,
       keyword_init: true
@@ -10962,6 +11348,7 @@ module Aws::SSM
     #      times for the maintenance window to become active or inactive.</p>
     #   @return [String]
     class MaintenanceWindowIdentity < Struct.new(
+      nil,
       :window_id,
       :name,
       :description,
@@ -10993,6 +11380,7 @@ module Aws::SSM
     #   <p>The name of the maintenance window.</p>
     #   @return [String]
     class MaintenanceWindowIdentityForTarget < Struct.new(
+      nil,
       :window_id,
       :name,
       keyword_init: true
@@ -11031,6 +11419,7 @@ module Aws::SSM
     #   <p>JSON to provide to your Lambda function as input.</p>
     #   @return [String]
     class MaintenanceWindowLambdaParameters < Struct.new(
+      nil,
       :client_context,
       :qualifier,
       :payload,
@@ -11114,6 +11503,7 @@ module Aws::SSM
     #      run.</p>
     #   @return [Integer]
     class MaintenanceWindowRunCommandParameters < Struct.new(
+      nil,
       :comment,
       :cloud_watch_output_config,
       :document_hash,
@@ -11153,6 +11543,7 @@ module Aws::SSM
     #   <p>The name of the <code>STEP_FUNCTIONS</code> task.</p>
     #   @return [String]
     class MaintenanceWindowStepFunctionsParameters < Struct.new(
+      nil,
       :input,
       :name,
       keyword_init: true
@@ -11191,6 +11582,7 @@ module Aws::SSM
     #   <p>A description for the target.</p>
     #   @return [String]
     class MaintenanceWindowTarget < Struct.new(
+      nil,
       :window_id,
       :window_target_id,
       :resource_type,
@@ -11296,6 +11688,7 @@ module Aws::SSM
     #   <p>The details for the CloudWatch alarm applied to your maintenance window task.</p>
     #   @return [Types::AlarmConfiguration]
     class MaintenanceWindowTask < Struct.new(
+      nil,
       :window_id,
       :window_task_id,
       :task_arn,
@@ -11335,6 +11728,7 @@ module Aws::SSM
     #   <p>The parameters for a <code>LAMBDA</code> task type.</p>
     #   @return [Types::MaintenanceWindowLambdaParameters]
     class MaintenanceWindowTaskInvocationParameters < Struct.new(
+      nil,
       :run_command,
       :automation,
       :step_functions,
@@ -11351,6 +11745,7 @@ module Aws::SSM
     #      length.</p>
     #   @return [Array<String>]
     class MaintenanceWindowTaskParameterValueExpression < Struct.new(
+      nil,
       :values,
       keyword_init: true
     )
@@ -11362,6 +11757,7 @@ module Aws::SSM
     # @!attribute message
     #   @return [String]
     class MalformedResourcePolicyDocumentException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -11372,6 +11768,7 @@ module Aws::SSM
     # @!attribute message
     #   @return [String]
     class MaxDocumentSizeExceeded < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -11383,6 +11780,7 @@ module Aws::SSM
     #   <p>Metadata value to assign to an Application Manager application.</p>
     #   @return [String]
     class MetadataValue < Struct.new(
+      nil,
       :value,
       keyword_init: true
     )
@@ -11413,6 +11811,7 @@ module Aws::SSM
     #      the <code>Default</code> version to share.</p>
     #   @return [String]
     class ModifyDocumentPermissionRequest < Struct.new(
+      nil,
       :name,
       :permission_type,
       :account_ids_to_add,
@@ -11424,6 +11823,7 @@ module Aws::SSM
     end
 
     class ModifyDocumentPermissionResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -11446,6 +11846,7 @@ module Aws::SSM
     #   <p>Information about the type of node.</p>
     #   @return [Types::NodeType]
     class Node < Struct.new(
+      nil,
       :capture_time,
       :id,
       :owner,
@@ -11473,6 +11874,7 @@ module Aws::SSM
     #   <p>Information about aggregators used to refine a node summary.</p>
     #   @return [Array<Types::NodeAggregator>]
     class NodeAggregator < Struct.new(
+      nil,
       :aggregator_type,
       :type_name,
       :attribute_name,
@@ -11495,6 +11897,7 @@ module Aws::SSM
     #   <p>The type of filter operator.</p>
     #   @return [String]
     class NodeFilter < Struct.new(
+      nil,
       :key,
       :values,
       :type,
@@ -11519,6 +11922,7 @@ module Aws::SSM
     #            </p>
     #   @return [String]
     class NodeOwnerInfo < Struct.new(
+      nil,
       :account_id,
       :organizational_unit_id,
       :organizational_unit_path,
@@ -11551,6 +11955,7 @@ module Aws::SSM
     #   <p>A summary of the non-compliance severity by compliance type</p>
     #   @return [Types::SeveritySummary]
     class NonCompliantSummary < Struct.new(
+      nil,
       :non_compliant_count,
       :severity_summary,
       keyword_init: true
@@ -11589,6 +11994,7 @@ module Aws::SSM
     #            </ul>
     #   @return [String]
     class NotificationConfig < Struct.new(
+      nil,
       :notification_arn,
       :notification_events,
       :notification_type,
@@ -11620,6 +12026,7 @@ module Aws::SSM
     #   <p>A nested aggregator for viewing counts of OpsData.</p>
     #   @return [Array<Types::OpsAggregator>]
     class OpsAggregator < Struct.new(
+      nil,
       :aggregator_type,
       :type_name,
       :attribute_name,
@@ -11639,6 +12046,7 @@ module Aws::SSM
     #   <p>The data returned by the query.</p>
     #   @return [Hash<String, Types::OpsEntityItem>]
     class OpsEntity < Struct.new(
+      nil,
       :id,
       :data,
       keyword_init: true
@@ -11654,6 +12062,7 @@ module Aws::SSM
     #   <p>The details of an OpsData summary.</p>
     #   @return [Array<Hash<String, String>>]
     class OpsEntityItem < Struct.new(
+      nil,
       :capture_time,
       :content,
       keyword_init: true
@@ -11672,6 +12081,7 @@ module Aws::SSM
     #   <p>The type of filter.</p>
     #   @return [String]
     class OpsFilter < Struct.new(
+      nil,
       :key,
       :values,
       :type,
@@ -11811,6 +12221,7 @@ module Aws::SSM
     #   <p>The OpsItem Amazon Resource Name (ARN).</p>
     #   @return [String]
     class OpsItem < Struct.new(
+      nil,
       :created_by,
       :ops_item_type,
       :created_time,
@@ -11844,6 +12255,7 @@ module Aws::SSM
     # @!attribute message
     #   @return [String]
     class OpsItemAccessDeniedException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -11856,6 +12268,7 @@ module Aws::SSM
     # @!attribute ops_item_id
     #   @return [String]
     class OpsItemAlreadyExistsException < Struct.new(
+      nil,
       :message,
       :ops_item_id,
       keyword_init: true
@@ -11867,6 +12280,7 @@ module Aws::SSM
     # @!attribute message
     #   @return [String]
     class OpsItemConflictException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -11882,6 +12296,7 @@ module Aws::SSM
     #       <code>String</code>.</p>
     #   @return [String]
     class OpsItemDataValue < Struct.new(
+      nil,
       :value,
       :type,
       keyword_init: true
@@ -11903,6 +12318,7 @@ module Aws::SSM
     #       <code>Equal</code>.</p>
     #   @return [String]
     class OpsItemEventFilter < Struct.new(
+      nil,
       :key,
       :values,
       :operator,
@@ -11935,6 +12351,7 @@ module Aws::SSM
     #   <p>The date and time the OpsItem event was created.</p>
     #   @return [Time]
     class OpsItemEventSummary < Struct.new(
+      nil,
       :ops_item_id,
       :event_id,
       :source,
@@ -11958,6 +12375,7 @@ module Aws::SSM
     #   <p>The operator used by the filter call.</p>
     #   @return [String]
     class OpsItemFilter < Struct.new(
+      nil,
       :key,
       :values,
       :operator,
@@ -11972,6 +12390,7 @@ module Aws::SSM
     #      event.</p>
     #   @return [String]
     class OpsItemIdentity < Struct.new(
+      nil,
       :arn,
       keyword_init: true
     )
@@ -11985,6 +12404,7 @@ module Aws::SSM
     # @!attribute message
     #   @return [String]
     class OpsItemInvalidParameterException < Struct.new(
+      nil,
       :parameter_names,
       :message,
       keyword_init: true
@@ -12002,6 +12422,7 @@ module Aws::SSM
     # @!attribute message
     #   @return [String]
     class OpsItemLimitExceededException < Struct.new(
+      nil,
       :resource_types,
       :limit,
       :limit_type,
@@ -12020,6 +12441,7 @@ module Aws::SSM
     # @!attribute message
     #   @return [String]
     class OpsItemNotFoundException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -12032,6 +12454,7 @@ module Aws::SSM
     #      notifications are sent when this OpsItem is edited or changed.</p>
     #   @return [String]
     class OpsItemNotification < Struct.new(
+      nil,
       :arn,
       keyword_init: true
     )
@@ -12046,6 +12469,7 @@ module Aws::SSM
     # @!attribute ops_item_id
     #   @return [String]
     class OpsItemRelatedItemAlreadyExistsException < Struct.new(
+      nil,
       :message,
       :resource_uri,
       :ops_item_id,
@@ -12059,6 +12483,7 @@ module Aws::SSM
     # @!attribute message
     #   @return [String]
     class OpsItemRelatedItemAssociationNotFoundException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -12094,6 +12519,7 @@ module Aws::SSM
     #   <p>The time the related-item association was last updated.</p>
     #   @return [Time]
     class OpsItemRelatedItemSummary < Struct.new(
+      nil,
       :ops_item_id,
       :association_id,
       :resource_type,
@@ -12121,6 +12547,7 @@ module Aws::SSM
     #      <code>EQUAL</code>.</p>
     #   @return [String]
     class OpsItemRelatedItemsFilter < Struct.new(
+      nil,
       :key,
       :values,
       :operator,
@@ -12211,6 +12638,7 @@ module Aws::SSM
     #      only for the OpsItem type <code>/aws/changerequest</code>.</p>
     #   @return [Time]
     class OpsItemSummary < Struct.new(
+      nil,
       :created_by,
       :created_time,
       :last_modified_by,
@@ -12250,6 +12678,7 @@ module Aws::SSM
     #   <p>The date the OpsMetadata objects was created.</p>
     #   @return [Time]
     class OpsMetadata < Struct.new(
+      nil,
       :resource_id,
       :ops_metadata_arn,
       :last_modified_date,
@@ -12264,6 +12693,7 @@ module Aws::SSM
     # @!attribute message
     #   @return [String]
     class OpsMetadataAlreadyExistsException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -12278,6 +12708,7 @@ module Aws::SSM
     #   <p>A filter value.</p>
     #   @return [Array<String>]
     class OpsMetadataFilter < Struct.new(
+      nil,
       :key,
       :values,
       keyword_init: true
@@ -12289,6 +12720,7 @@ module Aws::SSM
     # @!attribute message
     #   @return [String]
     class OpsMetadataInvalidArgumentException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -12300,6 +12732,7 @@ module Aws::SSM
     # @!attribute message
     #   @return [String]
     class OpsMetadataKeyLimitExceededException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -12311,6 +12744,7 @@ module Aws::SSM
     # @!attribute message
     #   @return [String]
     class OpsMetadataLimitExceededException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -12321,6 +12755,7 @@ module Aws::SSM
     # @!attribute message
     #   @return [String]
     class OpsMetadataNotFoundException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -12332,6 +12767,7 @@ module Aws::SSM
     # @!attribute message
     #   @return [String]
     class OpsMetadataTooManyUpdatesException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -12345,6 +12781,7 @@ module Aws::SSM
     #       <code>AWS:ComplianceSummary</code>.</p>
     #   @return [String]
     class OpsResultAttribute < Struct.new(
+      nil,
       :type_name,
       keyword_init: true
     )
@@ -12359,6 +12796,7 @@ module Aws::SSM
     #   <p>The type of source where the association execution details are stored, for example, Amazon S3.</p>
     #   @return [String]
     class OutputSource < Struct.new(
+      nil,
       :output_source_id,
       :output_source_type,
       keyword_init: true
@@ -12409,6 +12847,7 @@ module Aws::SSM
     #      default is <code>text</code>.</p>
     #   @return [String]
     class Parameter < Struct.new(
+      nil,
       :name,
       :type,
       :value,
@@ -12432,6 +12871,7 @@ module Aws::SSM
     # @!attribute message
     #   @return [String]
     class ParameterAlreadyExists < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -12485,6 +12925,7 @@ module Aws::SSM
     #      default is <code>text</code>.</p>
     #   @return [String]
     class ParameterHistory < Struct.new(
+      nil,
       :name,
       :type,
       :key_id,
@@ -12522,6 +12963,7 @@ module Aws::SSM
     #      applied), or InProgress (the policy is being applied now). </p>
     #   @return [String]
     class ParameterInlinePolicy < Struct.new(
+      nil,
       :policy_text,
       :policy_type,
       :policy_status,
@@ -12535,6 +12977,7 @@ module Aws::SSM
     # @!attribute message
     #   @return [String]
     class ParameterLimitExceeded < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -12560,6 +13003,7 @@ module Aws::SSM
     # @!attribute message
     #   @return [String]
     class ParameterMaxVersionLimitExceeded < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -12609,6 +13053,7 @@ module Aws::SSM
     #      default is <code>text</code>.</p>
     #   @return [String]
     class ParameterMetadata < Struct.new(
+      nil,
       :name,
       :arn,
       :type,
@@ -12640,6 +13085,7 @@ module Aws::SSM
     # @!attribute message
     #   @return [String]
     class ParameterNotFound < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -12651,6 +13097,7 @@ module Aws::SSM
     #   <p>The parameter name isn't valid.</p>
     #   @return [String]
     class ParameterPatternMismatchException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -12685,6 +13132,7 @@ module Aws::SSM
     #   <p>The value you want to search for.</p>
     #   @return [Array<String>]
     class ParameterStringFilter < Struct.new(
+      nil,
       :key,
       :option,
       :values,
@@ -12697,6 +13145,7 @@ module Aws::SSM
     # @!attribute message
     #   @return [String]
     class ParameterVersionLabelLimitExceeded < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -12708,6 +13157,7 @@ module Aws::SSM
     # @!attribute message
     #   @return [String]
     class ParameterVersionNotFound < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -12722,6 +13172,7 @@ module Aws::SSM
     #   <p>The filter values.</p>
     #   @return [Array<String>]
     class ParametersFilter < Struct.new(
+      nil,
       :key,
       :values,
       keyword_init: true
@@ -12746,6 +13197,7 @@ module Aws::SSM
     #   <p>The current value of the specified iterator in the loop.</p>
     #   @return [String]
     class ParentStepDetails < Struct.new(
+      nil,
       :step_execution_id,
       :step_name,
       :action,
@@ -12854,6 +13306,7 @@ module Aws::SSM
     #      Ubuntu Server 20.04 LTE. Applies to Linux-based managed nodes only.</p>
     #   @return [String]
     class Patch < Struct.new(
+      nil,
       :id,
       :release_date,
       :title,
@@ -12907,6 +13360,7 @@ module Aws::SSM
     #      system.</p>
     #   @return [Boolean]
     class PatchBaselineIdentity < Struct.new(
+      nil,
       :baseline_id,
       :baseline_name,
       :operating_system,
@@ -12956,6 +13410,7 @@ module Aws::SSM
     #            </note>
     #   @return [String]
     class PatchComplianceData < Struct.new(
+      nil,
       :title,
       :kb_id,
       :classification,
@@ -12992,6 +13447,7 @@ module Aws::SSM
     #      each key based on operating system type.</p>
     #   @return [Array<String>]
     class PatchFilter < Struct.new(
+      nil,
       :key,
       :values,
       keyword_init: true
@@ -13004,6 +13460,7 @@ module Aws::SSM
     #   <p>The set of patch filters that make up the group.</p>
     #   @return [Array<Types::PatchFilter>]
     class PatchFilterGroup < Struct.new(
+      nil,
       :patch_filters,
       keyword_init: true
     )
@@ -13019,6 +13476,7 @@ module Aws::SSM
     #   <p>The patch baseline the patch group is registered with.</p>
     #   @return [Types::PatchBaselineIdentity]
     class PatchGroupPatchBaselineMapping < Struct.new(
+      nil,
       :patch_group,
       :baseline_identity,
       keyword_init: true
@@ -13058,6 +13516,7 @@ module Aws::SSM
     #   <p>The value for the filter.</p>
     #   @return [Array<String>]
     class PatchOrchestratorFilter < Struct.new(
+      nil,
       :key,
       :values,
       keyword_init: true
@@ -13109,6 +13568,7 @@ module Aws::SSM
     #       <code>false</code>. Applies to Linux managed nodes only.</p>
     #   @return [Boolean]
     class PatchRule < Struct.new(
+      nil,
       :patch_filter_group,
       :compliance_level,
       :approve_after_days,
@@ -13130,6 +13590,7 @@ module Aws::SSM
     #   <p>The rules that make up the rule group.</p>
     #   @return [Array<Types::PatchRule>]
     class PatchRuleGroup < Struct.new(
+      nil,
       :patch_rules,
       keyword_init: true
     )
@@ -13181,6 +13642,7 @@ module Aws::SSM
     #       <i>Debian Wiki</i>.</p>
     #   @return [String]
     class PatchSource < Struct.new(
+      nil,
       :name,
       :products,
       :configuration,
@@ -13201,6 +13663,7 @@ module Aws::SSM
     #       <code>PENDING_APPROVAL</code>).</p>
     #   @return [Time]
     class PatchStatus < Struct.new(
+      nil,
       :deployment_status,
       :compliance_level,
       :approval_date,
@@ -13214,6 +13677,7 @@ module Aws::SSM
     # @!attribute message
     #   @return [String]
     class PoliciesLimitExceededException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -13243,6 +13707,7 @@ module Aws::SSM
     #      for the current Automation execution.</p>
     #   @return [Integer]
     class ProgressCounters < Struct.new(
+      nil,
       :total_steps,
       :success_steps,
       :failed_steps,
@@ -13302,6 +13767,7 @@ module Aws::SSM
     #            </note>
     #   @return [String]
     class PutComplianceItemsRequest < Struct.new(
+      nil,
       :resource_id,
       :resource_type,
       :compliance_type,
@@ -13315,6 +13781,7 @@ module Aws::SSM
     end
 
     class PutComplianceItemsResult < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -13327,6 +13794,7 @@ module Aws::SSM
     #   <p>The inventory items that you want to add or update on managed nodes.</p>
     #   @return [Array<Types::InventoryItem>]
     class PutInventoryRequest < Struct.new(
+      nil,
       :instance_id,
       :items,
       keyword_init: true
@@ -13338,6 +13806,7 @@ module Aws::SSM
     #   <p>Information about the request.</p>
     #   @return [String]
     class PutInventoryResult < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -13591,6 +14060,7 @@ module Aws::SSM
     #            </note>
     #   @return [String]
     class PutParameterRequest < Struct.new(
+      nil,
       :name,
       :description,
       :value,
@@ -13618,6 +14088,7 @@ module Aws::SSM
     #   <p>The tier assigned to the parameter.</p>
     #   @return [String]
     class PutParameterResult < Struct.new(
+      nil,
       :version,
       :tier,
       keyword_init: true
@@ -13645,6 +14116,7 @@ module Aws::SSM
     #      policy.</p>
     #   @return [String]
     class PutResourcePolicyRequest < Struct.new(
+      nil,
       :resource_arn,
       :policy,
       :policy_id,
@@ -13662,6 +14134,7 @@ module Aws::SSM
     #   <p>ID of the current policy version.</p>
     #   @return [String]
     class PutResourcePolicyResponse < Struct.new(
+      nil,
       :policy_id,
       :policy_hash,
       keyword_init: true
@@ -13673,6 +14146,7 @@ module Aws::SSM
     #   <p>The ID of the patch baseline that should be the default patch baseline.</p>
     #   @return [String]
     class RegisterDefaultPatchBaselineRequest < Struct.new(
+      nil,
       :baseline_id,
       keyword_init: true
     )
@@ -13683,6 +14157,7 @@ module Aws::SSM
     #   <p>The ID of the default patch baseline.</p>
     #   @return [String]
     class RegisterDefaultPatchBaselineResult < Struct.new(
+      nil,
       :baseline_id,
       keyword_init: true
     )
@@ -13696,6 +14171,7 @@ module Aws::SSM
     #   <p>The name of the patch group to be registered with the patch baseline.</p>
     #   @return [String]
     class RegisterPatchBaselineForPatchGroupRequest < Struct.new(
+      nil,
       :baseline_id,
       :patch_group,
       keyword_init: true
@@ -13710,6 +14186,7 @@ module Aws::SSM
     #   <p>The name of the patch group registered with the patch baseline.</p>
     #   @return [String]
     class RegisterPatchBaselineForPatchGroupResult < Struct.new(
+      nil,
       :baseline_id,
       :patch_group,
       keyword_init: true
@@ -13785,6 +14262,7 @@ module Aws::SSM
     #   <p>User-provided idempotency token.</p>
     #   @return [String]
     class RegisterTargetWithMaintenanceWindowRequest < Struct.new(
+      nil,
       :window_id,
       :resource_type,
       :targets,
@@ -13801,6 +14279,7 @@ module Aws::SSM
     #   <p>The ID of the target definition in this maintenance window.</p>
     #   @return [String]
     class RegisterTargetWithMaintenanceWindowResult < Struct.new(
+      nil,
       :window_target_id,
       keyword_init: true
     )
@@ -13940,6 +14419,7 @@ module Aws::SSM
     #   <p>The CloudWatch alarm you want to apply to your maintenance window task.</p>
     #   @return [Types::AlarmConfiguration]
     class RegisterTaskWithMaintenanceWindowRequest < Struct.new(
+      nil,
       :window_id,
       :targets,
       :task_arn,
@@ -13965,6 +14445,7 @@ module Aws::SSM
     #   <p>The ID of the task in the maintenance window.</p>
     #   @return [String]
     class RegisterTaskWithMaintenanceWindowResult < Struct.new(
+      nil,
       :window_task_id,
       keyword_init: true
     )
@@ -13979,6 +14460,7 @@ module Aws::SSM
     #   <p>Reserved for internal use.</p>
     #   @return [String]
     class RegistrationMetadataItem < Struct.new(
+      nil,
       :key,
       :value,
       keyword_init: true
@@ -13993,6 +14475,7 @@ module Aws::SSM
     #   <p>The ID of an OpsItem related to the current OpsItem.</p>
     #   @return [String]
     class RelatedOpsItem < Struct.new(
+      nil,
       :ops_item_id,
       keyword_init: true
     )
@@ -14034,6 +14517,7 @@ module Aws::SSM
     #   <p>Tag keys that you want to remove from the specified resource.</p>
     #   @return [Array<String>]
     class RemoveTagsFromResourceRequest < Struct.new(
+      nil,
       :resource_type,
       :resource_id,
       :tag_keys,
@@ -14043,6 +14527,7 @@ module Aws::SSM
     end
 
     class RemoveTagsFromResourceResult < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -14104,6 +14589,7 @@ module Aws::SSM
     #            </ul>
     #   @return [String]
     class ResetServiceSettingRequest < Struct.new(
+      nil,
       :setting_id,
       keyword_init: true
     )
@@ -14116,6 +14602,7 @@ module Aws::SSM
     #      operation.</p>
     #   @return [Types::ServiceSetting]
     class ResetServiceSettingResult < Struct.new(
+      nil,
       :service_setting,
       keyword_init: true
     )
@@ -14131,6 +14618,7 @@ module Aws::SSM
     #   <p>A boolean value indicating whether the resolved target list is truncated.</p>
     #   @return [Boolean]
     class ResolvedTargets < Struct.new(
+      nil,
       :parameter_values,
       :truncated,
       keyword_init: true
@@ -14170,6 +14658,7 @@ module Aws::SSM
     #   <p>A list of items that aren't compliant for the resource.</p>
     #   @return [Types::NonCompliantSummary]
     class ResourceComplianceSummaryItem < Struct.new(
+      nil,
       :compliance_type,
       :resource_type,
       :resource_id,
@@ -14187,6 +14676,7 @@ module Aws::SSM
     # @!attribute sync_name
     #   @return [String]
     class ResourceDataSyncAlreadyExistsException < Struct.new(
+      nil,
       :sync_name,
       keyword_init: true
     )
@@ -14206,6 +14696,7 @@ module Aws::SSM
     #   <p>The Organizations organization units included in the sync.</p>
     #   @return [Array<Types::ResourceDataSyncOrganizationalUnit>]
     class ResourceDataSyncAwsOrganizationsSource < Struct.new(
+      nil,
       :organization_source_type,
       :organizational_units,
       keyword_init: true
@@ -14218,6 +14709,7 @@ module Aws::SSM
     # @!attribute message
     #   @return [String]
     class ResourceDataSyncConflictException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -14228,6 +14720,7 @@ module Aws::SSM
     # @!attribute message
     #   @return [String]
     class ResourceDataSyncCountExceededException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -14241,6 +14734,7 @@ module Aws::SSM
     #   <p>The sharing data type. Only <code>Organization</code> is supported.</p>
     #   @return [String]
     class ResourceDataSyncDestinationDataSharing < Struct.new(
+      nil,
       :destination_data_sharing_type,
       keyword_init: true
     )
@@ -14251,6 +14745,7 @@ module Aws::SSM
     # @!attribute message
     #   @return [String]
     class ResourceDataSyncInvalidConfigurationException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -14293,6 +14788,7 @@ module Aws::SSM
     #   <p>The status message details reported by the last sync.</p>
     #   @return [String]
     class ResourceDataSyncItem < Struct.new(
+      nil,
       :sync_name,
       :sync_type,
       :sync_source,
@@ -14316,6 +14812,7 @@ module Aws::SSM
     # @!attribute message
     #   @return [String]
     class ResourceDataSyncNotFoundException < Struct.new(
+      nil,
       :sync_name,
       :sync_type,
       :message,
@@ -14329,6 +14826,7 @@ module Aws::SSM
     #   <p>The Organizations unit ID data source for the sync.</p>
     #   @return [String]
     class ResourceDataSyncOrganizationalUnit < Struct.new(
+      nil,
       :organizational_unit_id,
       keyword_init: true
     )
@@ -14356,6 +14854,7 @@ module Aws::SSM
     #   <p>Enables destination data sharing. By default, this field is <code>null</code>.</p>
     #   @return [Types::ResourceDataSyncDestinationDataSharing]
     class ResourceDataSyncS3Destination < Struct.new(
+      nil,
       :bucket_name,
       :prefix,
       :sync_format,
@@ -14391,6 +14890,7 @@ module Aws::SSM
     #      the <i>Amazon Web Services Systems Manager User Guide</i>.</p>
     #   @return [Boolean]
     class ResourceDataSyncSource < Struct.new(
+      nil,
       :source_type,
       :aws_organizations_source,
       :source_regions,
@@ -14458,6 +14958,7 @@ module Aws::SSM
     #      the <i>Amazon Web Services Systems Manager User Guide</i>.</p>
     #   @return [Boolean]
     class ResourceDataSyncSourceWithState < Struct.new(
+      nil,
       :source_type,
       :aws_organizations_source,
       :source_regions,
@@ -14480,6 +14981,7 @@ module Aws::SSM
     # @!attribute message
     #   @return [String]
     class ResourceInUseException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -14493,6 +14995,7 @@ module Aws::SSM
     # @!attribute message
     #   @return [String]
     class ResourceLimitExceededException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -14503,6 +15006,7 @@ module Aws::SSM
     # @!attribute message
     #   @return [String]
     class ResourceNotFoundException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -14515,6 +15019,7 @@ module Aws::SSM
     # @!attribute message
     #   @return [String]
     class ResourcePolicyConflictException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -14528,6 +15033,7 @@ module Aws::SSM
     # @!attribute message
     #   @return [String]
     class ResourcePolicyInvalidParameterException < Struct.new(
+      nil,
       :parameter_names,
       :message,
       keyword_init: true
@@ -14545,6 +15051,7 @@ module Aws::SSM
     # @!attribute message
     #   @return [String]
     class ResourcePolicyLimitExceededException < Struct.new(
+      nil,
       :limit,
       :limit_type,
       :message,
@@ -14562,6 +15069,7 @@ module Aws::SSM
     # @!attribute message
     #   @return [String]
     class ResourcePolicyNotFoundException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -14574,6 +15082,7 @@ module Aws::SSM
     #      Value: <code>AWS:InstanceInformation</code>.</p>
     #   @return [String]
     class ResultAttribute < Struct.new(
+      nil,
       :type_name,
       keyword_init: true
     )
@@ -14584,6 +15093,7 @@ module Aws::SSM
     #   <p>The ID of the disconnected session to resume.</p>
     #   @return [String]
     class ResumeSessionRequest < Struct.new(
+      nil,
       :session_id,
       keyword_init: true
     )
@@ -14610,6 +15120,7 @@ module Aws::SSM
     #       <code>1a2b3c4dEXAMPLE</code>.</p>
     #   @return [String]
     class ResumeSessionResponse < Struct.new(
+      nil,
       :session_id,
       :token_value,
       :stream_url,
@@ -14629,6 +15140,7 @@ module Aws::SSM
     #   <p>The reviewer assigned to take action on the document review request.</p>
     #   @return [String]
     class ReviewInformation < Struct.new(
+      nil,
       :reviewed_time,
       :status,
       :reviewer,
@@ -14679,6 +15191,7 @@ module Aws::SSM
     #      operation.</p>
     #   @return [Array<Types::TargetLocation>]
     class Runbook < Struct.new(
+      nil,
       :document_name,
       :document_version,
       :parameters,
@@ -14704,6 +15217,7 @@ module Aws::SSM
     #   <p>The S3 bucket subfolder.</p>
     #   @return [String]
     class S3OutputLocation < Struct.new(
+      nil,
       :output_s3_region,
       :output_s3_bucket_name,
       :output_s3_key_prefix,
@@ -14718,6 +15232,7 @@ module Aws::SSM
     #   <p>A URL for an S3 bucket where you want to store the results of this request.</p>
     #   @return [String]
     class S3OutputUrl < Struct.new(
+      nil,
       :output_url,
       keyword_init: true
     )
@@ -14736,6 +15251,7 @@ module Aws::SSM
     #      run.</p>
     #   @return [String]
     class ScheduledWindowExecution < Struct.new(
+      nil,
       :window_id,
       :name,
       :execution_time,
@@ -14771,6 +15287,7 @@ module Aws::SSM
     #            </p>
     #   @return [Hash<String, Array<String>>]
     class SendAutomationSignalRequest < Struct.new(
+      nil,
       :automation_execution_id,
       :signal_type,
       :payload,
@@ -14780,6 +15297,7 @@ module Aws::SSM
     end
 
     class SendAutomationSignalResult < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -14889,6 +15407,7 @@ module Aws::SSM
     #   <p>The CloudWatch alarm you want to apply to your command.</p>
     #   @return [Types::AlarmConfiguration]
     class SendCommandRequest < Struct.new(
+      nil,
       :instance_ids,
       :targets,
       :document_name,
@@ -14917,6 +15436,7 @@ module Aws::SSM
     #      future references to this request.</p>
     #   @return [Types::Command]
     class SendCommandResult < Struct.new(
+      nil,
       :command,
       keyword_init: true
     )
@@ -14940,6 +15460,7 @@ module Aws::SSM
     #   <p>The code for the Amazon Web Services service that owns the quota.</p>
     #   @return [String]
     class ServiceQuotaExceededException < Struct.new(
+      nil,
       :message,
       :resource_id,
       :resource_type,
@@ -14998,6 +15519,7 @@ module Aws::SSM
     #            </ul>
     #   @return [String]
     class ServiceSetting < Struct.new(
+      nil,
       :setting_id,
       :setting_value,
       :last_modified_date,
@@ -15014,6 +15536,7 @@ module Aws::SSM
     # @!attribute message
     #   @return [String]
     class ServiceSettingNotFound < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -15061,6 +15584,7 @@ module Aws::SSM
     #       <code>JustInTime</code> is the access type for <a href="https://docs.aws.amazon.com/systems-manager/latest/userguide/systems-manager-just-in-time-node-access.html">Just-in-time node access</a>.</p>
     #   @return [String]
     class Session < Struct.new(
+      nil,
       :session_id,
       :target,
       :status,
@@ -15129,6 +15653,7 @@ module Aws::SSM
     #            </ul>
     #   @return [String]
     class SessionFilter < Struct.new(
+      nil,
       :key,
       :value,
       keyword_init: true
@@ -15144,6 +15669,7 @@ module Aws::SSM
     #   <p>Reserved for future use.</p>
     #   @return [String]
     class SessionManagerOutputUrl < Struct.new(
+      nil,
       :s3_output_url,
       :cloud_watch_output_url,
       keyword_init: true
@@ -15181,6 +15707,7 @@ module Aws::SSM
     #      items.</p>
     #   @return [Integer]
     class SeveritySummary < Struct.new(
+      nil,
       :critical_count,
       :high_count,
       :medium_count,
@@ -15212,6 +15739,7 @@ module Aws::SSM
     #   <p>Key-value pairs of metadata you want to assign to the access request.</p>
     #   @return [Array<Types::Tag>]
     class StartAccessRequestRequest < Struct.new(
+      nil,
       :reason,
       :targets,
       :tags,
@@ -15224,6 +15752,7 @@ module Aws::SSM
     #   <p>The ID of the access request.</p>
     #   @return [String]
     class StartAccessRequestResponse < Struct.new(
+      nil,
       :access_request_id,
       keyword_init: true
     )
@@ -15234,6 +15763,7 @@ module Aws::SSM
     #   <p>The association IDs that you want to run immediately and only one time.</p>
     #   @return [Array<String>]
     class StartAssociationsOnceRequest < Struct.new(
+      nil,
       :association_ids,
       keyword_init: true
     )
@@ -15241,6 +15771,7 @@ module Aws::SSM
     end
 
     class StartAssociationsOnceResult < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -15341,6 +15872,7 @@ module Aws::SSM
     #      body. Currently, only files in presigned Amazon S3 buckets are supported. </p>
     #   @return [String]
     class StartAutomationExecutionRequest < Struct.new(
+      nil,
       :document_name,
       :document_version,
       :parameters,
@@ -15364,6 +15896,7 @@ module Aws::SSM
     #   <p>The unique ID of a newly scheduled automation execution.</p>
     #   @return [String]
     class StartAutomationExecutionResult < Struct.new(
+      nil,
       :automation_execution_id,
       keyword_init: true
     )
@@ -15450,6 +15983,7 @@ module Aws::SSM
     #      is added.</p>
     #   @return [String]
     class StartChangeRequestExecutionRequest < Struct.new(
+      nil,
       :scheduled_time,
       :document_name,
       :document_version,
@@ -15471,6 +16005,7 @@ module Aws::SSM
     #      operation.) </p>
     #   @return [String]
     class StartChangeRequestExecutionResult < Struct.new(
+      nil,
       :automation_execution_id,
       keyword_init: true
     )
@@ -15490,6 +16025,7 @@ module Aws::SSM
     #      </p>
     #   @return [Types::ExecutionInputs]
     class StartExecutionPreviewRequest < Struct.new(
+      nil,
       :document_name,
       :document_version,
       :execution_inputs,
@@ -15502,6 +16038,7 @@ module Aws::SSM
     #   <p>The ID of the execution preview generated by the system.</p>
     #   @return [String]
     class StartExecutionPreviewResponse < Struct.new(
+      nil,
       :execution_preview_id,
       keyword_init: true
     )
@@ -15530,6 +16067,7 @@ module Aws::SSM
     #      <i>Amazon Web Services Systems Manager User Guide</i>.</p>
     #   @return [Hash<String, Array<String>>]
     class StartSessionRequest < Struct.new(
+      nil,
       :target,
       :document_name,
       :reason,
@@ -15561,6 +16099,7 @@ module Aws::SSM
     #       <code>1a2b3c4dEXAMPLE</code>.</p>
     #   @return [String]
     class StartSessionResponse < Struct.new(
+      nil,
       :session_id,
       :token_value,
       :stream_url,
@@ -15571,6 +16110,7 @@ module Aws::SSM
 
     # <p>The updated status is the same as the current status.</p>
     class StatusUnchanged < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -15659,6 +16199,7 @@ module Aws::SSM
     #   <p>Information about the parent step.</p>
     #   @return [Types::ParentStepDetails]
     class StepExecution < Struct.new(
+      nil,
       :step_name,
       :action,
       :timeout_seconds,
@@ -15704,6 +16245,7 @@ module Aws::SSM
     #   <p>The values of the filter key.</p>
     #   @return [Array<String>]
     class StepExecutionFilter < Struct.new(
+      nil,
       :key,
       :values,
       keyword_init: true
@@ -15719,6 +16261,7 @@ module Aws::SSM
     #      type is Cancel.</p>
     #   @return [String]
     class StopAutomationExecutionRequest < Struct.new(
+      nil,
       :automation_execution_id,
       :type,
       keyword_init: true
@@ -15727,6 +16270,7 @@ module Aws::SSM
     end
 
     class StopAutomationExecutionResult < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -15736,6 +16280,7 @@ module Aws::SSM
     # @!attribute message
     #   @return [String]
     class SubTypeCountLimitExceededException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -15753,6 +16298,7 @@ module Aws::SSM
     #   <p>The value of the tag.</p>
     #   @return [String]
     class Tag < Struct.new(
+      nil,
       :key,
       :value,
       keyword_init: true
@@ -15885,6 +16431,7 @@ module Aws::SSM
     #      the global maximum of 50.</p>
     #   @return [Array<String>]
     class Target < Struct.new(
+      nil,
       :key,
       :values,
       keyword_init: true
@@ -15897,6 +16444,7 @@ module Aws::SSM
     # @!attribute message
     #   @return [String]
     class TargetInUseException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -15955,6 +16503,7 @@ module Aws::SSM
     #       <code>StartAutomationExecution:MaxErrors</code> parameter if both are supplied.</p>
     #   @return [String]
     class TargetLocation < Struct.new(
+      nil,
       :accounts,
       :regions,
       :target_location_max_concurrency,
@@ -15984,6 +16533,7 @@ module Aws::SSM
     # @!attribute message
     #   @return [String]
     class TargetNotConnected < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -15999,6 +16549,7 @@ module Aws::SSM
     #   <p>A type of resource that was included in the execution preview.</p>
     #   @return [String]
     class TargetPreview < Struct.new(
+      nil,
       :count,
       :target_type,
       keyword_init: true
@@ -16015,6 +16566,7 @@ module Aws::SSM
     #   <p>The ID of the session to terminate.</p>
     #   @return [String]
     class TerminateSessionRequest < Struct.new(
+      nil,
       :session_id,
       keyword_init: true
     )
@@ -16025,6 +16577,7 @@ module Aws::SSM
     #   <p>The ID of the session that has been terminated.</p>
     #   @return [String]
     class TerminateSessionResponse < Struct.new(
+      nil,
       :session_id,
       keyword_init: true
     )
@@ -16042,6 +16595,7 @@ module Aws::SSM
     #   <p>The code for the Amazon Web Services service that owns the quota.</p>
     #   @return [String]
     class ThrottlingException < Struct.new(
+      nil,
       :message,
       :quota_code,
       :service_code,
@@ -16053,6 +16607,7 @@ module Aws::SSM
     # <p>The <code>Targets</code> parameter includes too many tags. Remove one or more tags and try
     #    the command again.</p>
     class TooManyTagsError < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -16062,6 +16617,7 @@ module Aws::SSM
     # @!attribute message
     #   @return [String]
     class TooManyUpdates < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -16072,6 +16628,7 @@ module Aws::SSM
     # @!attribute message
     #   @return [String]
     class TotalSizeLimitExceededException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -16093,6 +16650,7 @@ module Aws::SSM
     #   <p>One or more labels to delete from the specified parameter version.</p>
     #   @return [Array<String>]
     class UnlabelParameterVersionRequest < Struct.new(
+      nil,
       :name,
       :parameter_version,
       :labels,
@@ -16108,6 +16666,7 @@ module Aws::SSM
     #   <p>The labels that aren't attached to the given parameter version.</p>
     #   @return [Array<String>]
     class UnlabelParameterVersionResult < Struct.new(
+      nil,
       :removed_labels,
       :invalid_labels,
       keyword_init: true
@@ -16119,6 +16678,7 @@ module Aws::SSM
     # @!attribute message
     #   @return [String]
     class UnsupportedCalendarException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -16132,6 +16692,7 @@ module Aws::SSM
     # @!attribute message
     #   @return [String]
     class UnsupportedFeatureRequiredException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -16146,6 +16707,7 @@ module Aws::SSM
     # @!attribute message
     #   @return [String]
     class UnsupportedInventoryItemContextException < Struct.new(
+      nil,
       :type_name,
       :message,
       keyword_init: true
@@ -16158,6 +16720,7 @@ module Aws::SSM
     # @!attribute message
     #   @return [String]
     class UnsupportedInventorySchemaVersionException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -16169,6 +16732,7 @@ module Aws::SSM
     # @!attribute message
     #   @return [String]
     class UnsupportedOperatingSystem < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -16179,6 +16743,7 @@ module Aws::SSM
     # @!attribute message
     #   @return [String]
     class UnsupportedOperationException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -16189,6 +16754,7 @@ module Aws::SSM
     # @!attribute message
     #   @return [String]
     class UnsupportedParameterType < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -16200,6 +16766,7 @@ module Aws::SSM
     # @!attribute message
     #   @return [String]
     class UnsupportedPlatformType < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -16376,6 +16943,7 @@ module Aws::SSM
     #      command.</p>
     #   @return [Types::AlarmConfiguration]
     class UpdateAssociationRequest < Struct.new(
+      nil,
       :association_id,
       :parameters,
       :document_version,
@@ -16406,6 +16974,7 @@ module Aws::SSM
     #   <p>The description of the association that was updated.</p>
     #   @return [Types::AssociationDescription]
     class UpdateAssociationResult < Struct.new(
+      nil,
       :association_description,
       keyword_init: true
     )
@@ -16422,6 +16991,7 @@ module Aws::SSM
     #   <p>The association status.</p>
     #   @return [Types::AssociationStatus]
     class UpdateAssociationStatusRequest < Struct.new(
+      nil,
       :name,
       :instance_id,
       :association_status,
@@ -16434,6 +17004,7 @@ module Aws::SSM
     #   <p>Information about the association.</p>
     #   @return [Types::AssociationDescription]
     class UpdateAssociationStatusResult < Struct.new(
+      nil,
       :association_description,
       keyword_init: true
     )
@@ -16447,6 +17018,7 @@ module Aws::SSM
     #   <p>The version of a custom document that you want to set as the default version.</p>
     #   @return [String]
     class UpdateDocumentDefaultVersionRequest < Struct.new(
+      nil,
       :name,
       :document_version,
       keyword_init: true
@@ -16458,6 +17030,7 @@ module Aws::SSM
     #   <p>The description of a custom document that you want to set as the default version.</p>
     #   @return [Types::DocumentDefaultVersionDescription]
     class UpdateDocumentDefaultVersionResult < Struct.new(
+      nil,
       :description,
       keyword_init: true
     )
@@ -16474,6 +17047,7 @@ module Aws::SSM
     #   <p>The change template review details to update.</p>
     #   @return [Types::DocumentReviews]
     class UpdateDocumentMetadataRequest < Struct.new(
+      nil,
       :name,
       :document_version,
       :document_reviews,
@@ -16483,6 +17057,7 @@ module Aws::SSM
     end
 
     class UpdateDocumentMetadataResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -16525,6 +17100,7 @@ module Aws::SSM
     #   <p>Specify a new target type for the document.</p>
     #   @return [String]
     class UpdateDocumentRequest < Struct.new(
+      nil,
       :content,
       :attachments,
       :name,
@@ -16542,6 +17118,7 @@ module Aws::SSM
     #   <p>A description of the document that was updated.</p>
     #   @return [Types::DocumentDescription]
     class UpdateDocumentResult < Struct.new(
+      nil,
       :document_description,
       keyword_init: true
     )
@@ -16610,6 +17187,7 @@ module Aws::SSM
     #      fields that aren't specified are set to null. </p>
     #   @return [Boolean]
     class UpdateMaintenanceWindowRequest < Struct.new(
+      nil,
       :window_id,
       :name,
       :description,
@@ -16673,6 +17251,7 @@ module Aws::SSM
     #   <p>Whether the maintenance window is enabled.</p>
     #   @return [Boolean]
     class UpdateMaintenanceWindowResult < Struct.new(
+      nil,
       :window_id,
       :name,
       :description,
@@ -16721,6 +17300,7 @@ module Aws::SSM
     #      request. Optional fields that aren't specified are set to null.</p>
     #   @return [Boolean]
     class UpdateMaintenanceWindowTargetRequest < Struct.new(
+      nil,
       :window_id,
       :window_target_id,
       :targets,
@@ -16752,6 +17332,7 @@ module Aws::SSM
     #   <p>The updated description.</p>
     #   @return [String]
     class UpdateMaintenanceWindowTargetResult < Struct.new(
+      nil,
       :window_id,
       :window_target_id,
       :targets,
@@ -16904,6 +17485,7 @@ module Aws::SSM
     #   <p>The CloudWatch alarm you want to apply to your maintenance window task.</p>
     #   @return [Types::AlarmConfiguration]
     class UpdateMaintenanceWindowTaskRequest < Struct.new(
+      nil,
       :window_id,
       :window_task_id,
       :targets,
@@ -16996,6 +17578,7 @@ module Aws::SSM
     #      task.</p>
     #   @return [Types::AlarmConfiguration]
     class UpdateMaintenanceWindowTaskResult < Struct.new(
+      nil,
       :window_id,
       :window_task_id,
       :targets,
@@ -17035,6 +17618,7 @@ module Aws::SSM
     #            </note>
     #   @return [String]
     class UpdateManagedInstanceRoleRequest < Struct.new(
+      nil,
       :instance_id,
       :iam_role,
       keyword_init: true
@@ -17043,6 +17627,7 @@ module Aws::SSM
     end
 
     class UpdateManagedInstanceRoleResult < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -17124,6 +17709,7 @@ module Aws::SSM
     #   <p>The OpsItem Amazon Resource Name (ARN).</p>
     #   @return [String]
     class UpdateOpsItemRequest < Struct.new(
+      nil,
       :description,
       :operational_data,
       :operational_data_to_delete,
@@ -17146,6 +17732,7 @@ module Aws::SSM
     end
 
     class UpdateOpsItemResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -17161,6 +17748,7 @@ module Aws::SSM
     #   <p>The metadata keys to delete from the OpsMetadata object. </p>
     #   @return [Array<String>]
     class UpdateOpsMetadataRequest < Struct.new(
+      nil,
       :ops_metadata_arn,
       :metadata_to_update,
       :keys_to_delete,
@@ -17173,6 +17761,7 @@ module Aws::SSM
     #   <p>The Amazon Resource Name (ARN) of the OpsMetadata Object that was updated.</p>
     #   @return [String]
     class UpdateOpsMetadataResult < Struct.new(
+      nil,
       :ops_metadata_arn,
       keyword_init: true
     )
@@ -17279,6 +17868,7 @@ module Aws::SSM
     #      to null.</p>
     #   @return [Boolean]
     class UpdatePatchBaselineRequest < Struct.new(
+      nil,
       :baseline_id,
       :name,
       :global_filters,
@@ -17352,6 +17942,7 @@ module Aws::SSM
     #            <p>Applies to Windows Server managed nodes only.</p>
     #   @return [String]
     class UpdatePatchBaselineResult < Struct.new(
+      nil,
       :baseline_id,
       :name,
       :operating_system,
@@ -17388,6 +17979,7 @@ module Aws::SSM
     #   <p>Specify information about the data sources to synchronize.</p>
     #   @return [Types::ResourceDataSyncSource]
     class UpdateResourceDataSyncRequest < Struct.new(
+      nil,
       :sync_name,
       :sync_type,
       :sync_source,
@@ -17397,6 +17989,7 @@ module Aws::SSM
     end
 
     class UpdateResourceDataSyncResult < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -17507,6 +18100,7 @@ module Aws::SSM
     #            </ul>
     #   @return [String]
     class UpdateServiceSettingRequest < Struct.new(
+      nil,
       :setting_id,
       :setting_value,
       keyword_init: true
@@ -17516,6 +18110,7 @@ module Aws::SSM
 
     # <p>The result body of the UpdateServiceSetting API operation.</p>
     class UpdateServiceSettingResult < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -17529,6 +18124,7 @@ module Aws::SSM
     #   <p>The reason code for the invalid request.</p>
     #   @return [String]
     class ValidationException < Struct.new(
+      nil,
       :message,
       :reason_code,
       keyword_init: true

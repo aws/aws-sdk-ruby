@@ -11,6 +11,7 @@ module Aws::DocDBElastic
     #   <p>An error message explaining why access was denied.</p>
     #   @return [String]
     class AccessDeniedException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -60,6 +61,7 @@ module Aws::DocDBElastic
     #            </p>
     #   @return [String]
     class ApplyPendingMaintenanceActionInput < Struct.new(
+      nil,
       :resource_arn,
       :apply_action,
       :opt_in_type,
@@ -73,6 +75,7 @@ module Aws::DocDBElastic
     #   <p>The output of the pending maintenance action being applied.</p>
     #   @return [Types::ResourcePendingMaintenanceAction]
     class ApplyPendingMaintenanceActionOutput < Struct.new(
+      nil,
       :resource_pending_maintenance_action,
       keyword_init: true
     )
@@ -137,6 +140,7 @@ module Aws::DocDBElastic
     #         A <code>shardInstanceCount</code> value of 1 means there is one writer instance, and any additional instances are replicas that can be used for reads and to improve availability.</p>
     #   @return [Integer]
     class Cluster < Struct.new(
+      nil,
       :cluster_name,
       :cluster_arn,
       :status,
@@ -170,6 +174,7 @@ module Aws::DocDBElastic
     #   <p>The status of the elastic cluster.</p>
     #   @return [String]
     class ClusterInList < Struct.new(
+      nil,
       :cluster_name,
       :cluster_arn,
       :status,
@@ -228,6 +233,7 @@ module Aws::DocDBElastic
     #            </ul>
     #   @return [String]
     class ClusterSnapshot < Struct.new(
+      nil,
       :subnet_ids,
       :snapshot_name,
       :snapshot_arn,
@@ -261,6 +267,7 @@ module Aws::DocDBElastic
     #   <p>The time when the elastic cluster snapshot was created in Universal Coordinated Time (UTC).</p>
     #   @return [String]
     class ClusterSnapshotInList < Struct.new(
+      nil,
       :snapshot_name,
       :snapshot_arn,
       :cluster_arn,
@@ -281,6 +288,7 @@ module Aws::DocDBElastic
     #   <p>The type of the resource where there was an access conflict.</p>
     #   @return [String]
     class ConflictException < Struct.new(
+      nil,
       :message,
       :resource_id,
       :resource_type,
@@ -327,6 +335,7 @@ module Aws::DocDBElastic
     #   <p>The tags to be assigned to the elastic cluster snapshot.</p>
     #   @return [Hash<String, String>]
     class CopyClusterSnapshotInput < Struct.new(
+      nil,
       :snapshot_arn,
       :target_snapshot_name,
       :kms_key_id,
@@ -341,6 +350,7 @@ module Aws::DocDBElastic
     #   <p>Returns information about a specific elastic cluster snapshot.</p>
     #   @return [Types::ClusterSnapshot]
     class CopyClusterSnapshotOutput < Struct.new(
+      nil,
       :snapshot,
       keyword_init: true
     )
@@ -453,6 +463,7 @@ module Aws::DocDBElastic
     #         A <code>shardInstanceCount</code> value of 1 means there is one writer instance, and any additional instances are replicas that can be used for reads and to improve availability.</p>
     #   @return [Integer]
     class CreateClusterOperationInput < Struct.new(
+      nil,
       :cluster_name,
       :auth_type,
       :admin_user_name,
@@ -477,6 +488,7 @@ module Aws::DocDBElastic
     #   <p>The new elastic cluster that has been created.</p>
     #   @return [Types::Cluster]
     class CreateClusterOperationOutput < Struct.new(
+      nil,
       :cluster,
       keyword_init: true
     )
@@ -493,6 +505,7 @@ module Aws::DocDBElastic
     #   <p>The tags to be assigned to the new elastic cluster snapshot.</p>
     #   @return [Hash<String, String>]
     class CreateClusterSnapshotOperationInput < Struct.new(
+      nil,
       :cluster_arn,
       :snapshot_name,
       :tags,
@@ -505,6 +518,7 @@ module Aws::DocDBElastic
     #   <p>Returns information about the new elastic cluster snapshot.</p>
     #   @return [Types::ClusterSnapshot]
     class CreateClusterSnapshotOperationOutput < Struct.new(
+      nil,
       :snapshot,
       keyword_init: true
     )
@@ -515,6 +529,7 @@ module Aws::DocDBElastic
     #   <p>The ARN identifier of the elastic cluster that is to be deleted.</p>
     #   @return [String]
     class DeleteClusterOperationInput < Struct.new(
+      nil,
       :cluster_arn,
       keyword_init: true
     )
@@ -525,6 +540,7 @@ module Aws::DocDBElastic
     #   <p>Returns information about the newly deleted elastic cluster.</p>
     #   @return [Types::Cluster]
     class DeleteClusterOperationOutput < Struct.new(
+      nil,
       :cluster,
       keyword_init: true
     )
@@ -535,6 +551,7 @@ module Aws::DocDBElastic
     #   <p>The ARN identifier of the elastic cluster snapshot that is to be deleted.</p>
     #   @return [String]
     class DeleteClusterSnapshotOperationInput < Struct.new(
+      nil,
       :snapshot_arn,
       keyword_init: true
     )
@@ -545,6 +562,7 @@ module Aws::DocDBElastic
     #   <p>Returns information about the newly deleted elastic cluster snapshot.</p>
     #   @return [Types::ClusterSnapshot]
     class DeleteClusterSnapshotOperationOutput < Struct.new(
+      nil,
       :snapshot,
       keyword_init: true
     )
@@ -555,6 +573,7 @@ module Aws::DocDBElastic
     #   <p>The ARN identifier of the elastic cluster.</p>
     #   @return [String]
     class GetClusterOperationInput < Struct.new(
+      nil,
       :cluster_arn,
       keyword_init: true
     )
@@ -565,6 +584,7 @@ module Aws::DocDBElastic
     #   <p>Returns information about a specific elastic cluster.</p>
     #   @return [Types::Cluster]
     class GetClusterOperationOutput < Struct.new(
+      nil,
       :cluster,
       keyword_init: true
     )
@@ -575,6 +595,7 @@ module Aws::DocDBElastic
     #   <p>The ARN identifier of the elastic cluster snapshot.</p>
     #   @return [String]
     class GetClusterSnapshotOperationInput < Struct.new(
+      nil,
       :snapshot_arn,
       keyword_init: true
     )
@@ -585,6 +606,7 @@ module Aws::DocDBElastic
     #   <p>Returns information about a specific elastic cluster snapshot.</p>
     #   @return [Types::ClusterSnapshot]
     class GetClusterSnapshotOperationOutput < Struct.new(
+      nil,
       :snapshot,
       keyword_init: true
     )
@@ -595,6 +617,7 @@ module Aws::DocDBElastic
     #   <p>Retrieves pending maintenance actions for a specific Amazon Resource Name (ARN).</p>
     #   @return [String]
     class GetPendingMaintenanceActionInput < Struct.new(
+      nil,
       :resource_arn,
       keyword_init: true
     )
@@ -605,6 +628,7 @@ module Aws::DocDBElastic
     #   <p>Provides information about a pending maintenance action for a resource.</p>
     #   @return [Types::ResourcePendingMaintenanceAction]
     class GetPendingMaintenanceActionOutput < Struct.new(
+      nil,
       :resource_pending_maintenance_action,
       keyword_init: true
     )
@@ -615,6 +639,7 @@ module Aws::DocDBElastic
     # @!attribute message
     #   @return [String]
     class InternalServerException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -646,6 +671,7 @@ module Aws::DocDBElastic
     #            </ul>
     #   @return [String]
     class ListClusterSnapshotsOperationInput < Struct.new(
+      nil,
       :cluster_arn,
       :next_token,
       :max_results,
@@ -664,6 +690,7 @@ module Aws::DocDBElastic
     #            <p>If there is no more data in the responce, the <code>nextToken</code> will not be returned.</p>
     #   @return [String]
     class ListClusterSnapshotsOperationOutput < Struct.new(
+      nil,
       :snapshots,
       :next_token,
       keyword_init: true
@@ -680,6 +707,7 @@ module Aws::DocDBElastic
     #   <p>The maximum number of elastic cluster snapshot results to receive in the response.</p>
     #   @return [Integer]
     class ListClustersOperationInput < Struct.new(
+      nil,
       :next_token,
       :max_results,
       keyword_init: true
@@ -696,6 +724,7 @@ module Aws::DocDBElastic
     #            <p>If there is no more data in the responce, the <code>nextToken</code> will not be returned.</p>
     #   @return [String]
     class ListClustersOperationOutput < Struct.new(
+      nil,
       :clusters,
       :next_token,
       keyword_init: true
@@ -711,6 +740,7 @@ module Aws::DocDBElastic
     #         If more records exist than the specified <code>maxResults</code> value, a pagination token (marker) is included in the response so that the remaining results can be retrieved.</p>
     #   @return [Integer]
     class ListPendingMaintenanceActionsInput < Struct.new(
+      nil,
       :next_token,
       :max_results,
       keyword_init: true
@@ -725,6 +755,7 @@ module Aws::DocDBElastic
     #   <p>An optional pagination token provided by a previous request. If this parameter is displayed, the responses will include only records beyond the marker, up to the value specified by <code>maxResults</code>.</p>
     #   @return [String]
     class ListPendingMaintenanceActionsOutput < Struct.new(
+      nil,
       :resource_pending_maintenance_actions,
       :next_token,
       keyword_init: true
@@ -736,6 +767,7 @@ module Aws::DocDBElastic
     #   <p>The ARN identifier of the elastic cluster resource.</p>
     #   @return [String]
     class ListTagsForResourceInput < Struct.new(
+      nil,
       :resource_arn,
       keyword_init: true
     )
@@ -746,6 +778,7 @@ module Aws::DocDBElastic
     #   <p>The list of tags for the specified elastic cluster resource.</p>
     #   @return [Hash<String, String>]
     class ListTagsForResourceOutput < Struct.new(
+      nil,
       :tags,
       keyword_init: true
     )
@@ -778,6 +811,7 @@ module Aws::DocDBElastic
     #   <p>Displays a description providing more detail about the maintenance action.</p>
     #   @return [String]
     class PendingMaintenanceActionDetails < Struct.new(
+      nil,
       :action,
       :auto_applied_after_date,
       :forced_apply_date,
@@ -800,6 +834,7 @@ module Aws::DocDBElastic
     #   <p>The type of the resource that could not be found.</p>
     #   @return [String]
     class ResourceNotFoundException < Struct.new(
+      nil,
       :message,
       :resource_id,
       :resource_type,
@@ -816,6 +851,7 @@ module Aws::DocDBElastic
     #   <p>Provides information about a pending maintenance action for a resource.</p>
     #   @return [Array<Types::PendingMaintenanceActionDetails>]
     class ResourcePendingMaintenanceAction < Struct.new(
+      nil,
       :resource_arn,
       :pending_maintenance_action_details,
       keyword_init: true
@@ -856,6 +892,7 @@ module Aws::DocDBElastic
     #         A <code>shardInstanceCount</code> value of 1 means there is one writer instance, and any additional instances are replicas that can be used for reads and to improve availability.</p>
     #   @return [Integer]
     class RestoreClusterFromSnapshotOperationInput < Struct.new(
+      nil,
       :cluster_name,
       :snapshot_arn,
       :vpc_security_group_ids,
@@ -873,6 +910,7 @@ module Aws::DocDBElastic
     #   <p>Returns information about a the restored elastic cluster.</p>
     #   @return [Types::Cluster]
     class RestoreClusterFromSnapshotOperationOutput < Struct.new(
+      nil,
       :cluster,
       keyword_init: true
     )
@@ -883,6 +921,7 @@ module Aws::DocDBElastic
     # @!attribute message
     #   @return [String]
     class ServiceQuotaExceededException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -900,6 +939,7 @@ module Aws::DocDBElastic
     #   <p>The current status of the shard.</p>
     #   @return [String]
     class Shard < Struct.new(
+      nil,
       :shard_id,
       :create_time,
       :status,
@@ -912,6 +952,7 @@ module Aws::DocDBElastic
     #   <p>The ARN identifier of the elastic cluster.</p>
     #   @return [String]
     class StartClusterInput < Struct.new(
+      nil,
       :cluster_arn,
       keyword_init: true
     )
@@ -922,6 +963,7 @@ module Aws::DocDBElastic
     #   <p>Returns information about a specific elastic cluster.</p>
     #   @return [Types::Cluster]
     class StartClusterOutput < Struct.new(
+      nil,
       :cluster,
       keyword_init: true
     )
@@ -932,6 +974,7 @@ module Aws::DocDBElastic
     #   <p>The ARN identifier of the elastic cluster.</p>
     #   @return [String]
     class StopClusterInput < Struct.new(
+      nil,
       :cluster_arn,
       keyword_init: true
     )
@@ -942,6 +985,7 @@ module Aws::DocDBElastic
     #   <p>Returns information about a specific elastic cluster.</p>
     #   @return [Types::Cluster]
     class StopClusterOutput < Struct.new(
+      nil,
       :cluster,
       keyword_init: true
     )
@@ -955,6 +999,7 @@ module Aws::DocDBElastic
     #   <p>The tags that are assigned to the elastic cluster resource.</p>
     #   @return [Hash<String, String>]
     class TagResourceInput < Struct.new(
+      nil,
       :resource_arn,
       :tags,
       keyword_init: true
@@ -963,6 +1008,7 @@ module Aws::DocDBElastic
     end
 
     class TagResourceOutput < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -975,6 +1021,7 @@ module Aws::DocDBElastic
     #   <p>The number of seconds to wait before retrying the operation.</p>
     #   @return [Integer]
     class ThrottlingException < Struct.new(
+      nil,
       :message,
       :retry_after_seconds,
       keyword_init: true
@@ -989,6 +1036,7 @@ module Aws::DocDBElastic
     #   <p>The tag keys to be removed from the elastic cluster resource.</p>
     #   @return [Array<String>]
     class UntagResourceInput < Struct.new(
+      nil,
       :resource_arn,
       :tag_keys,
       keyword_init: true
@@ -997,6 +1045,7 @@ module Aws::DocDBElastic
     end
 
     class UntagResourceOutput < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1054,6 +1103,7 @@ module Aws::DocDBElastic
     #         A <code>shardInstanceCount</code> value of 1 means there is one writer instance, and any additional instances are replicas that can be used for reads and to improve availability.</p>
     #   @return [Integer]
     class UpdateClusterOperationInput < Struct.new(
+      nil,
       :cluster_arn,
       :auth_type,
       :shard_capacity,
@@ -1075,6 +1125,7 @@ module Aws::DocDBElastic
     #   <p>Returns information about the updated elastic cluster.</p>
     #   @return [Types::Cluster]
     class UpdateClusterOperationOutput < Struct.new(
+      nil,
       :cluster,
       keyword_init: true
     )
@@ -1093,6 +1144,7 @@ module Aws::DocDBElastic
     #   <p>A list of the fields in which the validation exception occurred.</p>
     #   @return [Array<Types::ValidationExceptionField>]
     class ValidationException < Struct.new(
+      nil,
       :message,
       :reason,
       :field_list,
@@ -1109,6 +1161,7 @@ module Aws::DocDBElastic
     #   <p>An error message describing the validation exception in this field.</p>
     #   @return [String]
     class ValidationExceptionField < Struct.new(
+      nil,
       :name,
       :message,
       keyword_init: true

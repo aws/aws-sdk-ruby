@@ -10,6 +10,7 @@ module Aws::RolesAnywhere
     # @!attribute message
     #   @return [String]
     class AccessDeniedException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -24,6 +25,7 @@ module Aws::RolesAnywhere
     #   <p>A list of mapping entries for every supported specifier or sub-field.</p>
     #   @return [Array<Types::MappingRule>]
     class AttributeMapping < Struct.new(
+      nil,
       :certificate_field,
       :mapping_rules,
       keyword_init: true
@@ -61,6 +63,7 @@ module Aws::RolesAnywhere
     #   <p>Used to determine if a custom role session name will be accepted in a temporary credential request.</p>
     #   @return [Boolean]
     class CreateProfileInput < Struct.new(
+      nil,
       :name,
       :require_instance_properties,
       :session_policy,
@@ -79,6 +82,7 @@ module Aws::RolesAnywhere
     #   <p>The state of the profile after a read or write operation.</p>
     #   @return [Types::ProfileDetail]
     class CreateProfileOutput < Struct.new(
+      nil,
       :profile,
       keyword_init: true
     )
@@ -101,6 +105,7 @@ module Aws::RolesAnywhere
     #   <p>A list of notification settings to be associated to the trust anchor.</p>
     #   @return [Array<Types::NotificationSetting>]
     class CreateTrustAnchorInput < Struct.new(
+      nil,
       :name,
       :source,
       :enabled,
@@ -115,6 +120,7 @@ module Aws::RolesAnywhere
     #   <p>The state of the trust anchor after a read or write operation. </p>
     #   @return [Types::TrustAnchorDetail]
     class CreateTrustAnchorOutput < Struct.new(
+      nil,
       :trust_anchor,
       keyword_init: true
     )
@@ -141,6 +147,7 @@ module Aws::RolesAnywhere
     #   <p>Indicates whether the temporary credential request was successful. </p>
     #   @return [Boolean]
     class CredentialSummary < Struct.new(
+      nil,
       :seen_at,
       :serial_number,
       :issuer,
@@ -178,6 +185,7 @@ module Aws::RolesAnywhere
     #   <p>The ISO-8601 timestamp when the certificate revocation list (CRL) was last updated. </p>
     #   @return [Time]
     class CrlDetail < Struct.new(
+      nil,
       :crl_id,
       :crl_arn,
       :name,
@@ -201,6 +209,7 @@ module Aws::RolesAnywhere
     #   <p>A list of specifiers of a certificate field; for example, CN, OU, UID from a Subject.</p>
     #   @return [Array<String>]
     class DeleteAttributeMappingRequest < Struct.new(
+      nil,
       :profile_id,
       :certificate_field,
       :specifiers,
@@ -213,6 +222,7 @@ module Aws::RolesAnywhere
     #   <p>The state of the profile after a read or write operation.</p>
     #   @return [Types::ProfileDetail]
     class DeleteAttributeMappingResponse < Struct.new(
+      nil,
       :profile,
       keyword_init: true
     )
@@ -223,6 +233,7 @@ module Aws::RolesAnywhere
     #   <p>The unique identifier of the certificate revocation list (CRL).</p>
     #   @return [String]
     class DeleteCrlInput < Struct.new(
+      nil,
       :crl_id,
       keyword_init: true
     )
@@ -233,6 +244,7 @@ module Aws::RolesAnywhere
     #   <p>The state of the certificate revocation list (CRL) after a read or write operation.</p>
     #   @return [Types::CrlDetail]
     class DeleteCrlOutput < Struct.new(
+      nil,
       :crl,
       keyword_init: true
     )
@@ -243,6 +255,7 @@ module Aws::RolesAnywhere
     #   <p>The unique identifier of the profile.</p>
     #   @return [String]
     class DeleteProfileInput < Struct.new(
+      nil,
       :profile_id,
       keyword_init: true
     )
@@ -253,6 +266,7 @@ module Aws::RolesAnywhere
     #   <p>The state of the profile after a read or write operation.</p>
     #   @return [Types::ProfileDetail]
     class DeleteProfileOutput < Struct.new(
+      nil,
       :profile,
       keyword_init: true
     )
@@ -263,6 +277,7 @@ module Aws::RolesAnywhere
     #   <p>The unique identifier of the trust anchor.</p>
     #   @return [String]
     class DeleteTrustAnchorInput < Struct.new(
+      nil,
       :trust_anchor_id,
       keyword_init: true
     )
@@ -273,6 +288,7 @@ module Aws::RolesAnywhere
     #   <p>The state of the trust anchor after a read or write operation. </p>
     #   @return [Types::TrustAnchorDetail]
     class DeleteTrustAnchorOutput < Struct.new(
+      nil,
       :trust_anchor,
       keyword_init: true
     )
@@ -283,6 +299,7 @@ module Aws::RolesAnywhere
     #   <p>The unique identifier of the certificate revocation list (CRL).</p>
     #   @return [String]
     class DisableCrlInput < Struct.new(
+      nil,
       :crl_id,
       keyword_init: true
     )
@@ -293,6 +310,7 @@ module Aws::RolesAnywhere
     #   <p>The state of the certificate revocation list (CRL) after a read or write operation.</p>
     #   @return [Types::CrlDetail]
     class DisableCrlOutput < Struct.new(
+      nil,
       :crl,
       keyword_init: true
     )
@@ -303,6 +321,7 @@ module Aws::RolesAnywhere
     #   <p>The unique identifier of the profile.</p>
     #   @return [String]
     class DisableProfileInput < Struct.new(
+      nil,
       :profile_id,
       keyword_init: true
     )
@@ -313,6 +332,7 @@ module Aws::RolesAnywhere
     #   <p>The state of the profile after a read or write operation.</p>
     #   @return [Types::ProfileDetail]
     class DisableProfileOutput < Struct.new(
+      nil,
       :profile,
       keyword_init: true
     )
@@ -323,6 +343,7 @@ module Aws::RolesAnywhere
     #   <p>The unique identifier of the trust anchor.</p>
     #   @return [String]
     class DisableTrustAnchorInput < Struct.new(
+      nil,
       :trust_anchor_id,
       keyword_init: true
     )
@@ -333,6 +354,7 @@ module Aws::RolesAnywhere
     #   <p>The state of the trust anchor after a read or write operation. </p>
     #   @return [Types::TrustAnchorDetail]
     class DisableTrustAnchorOutput < Struct.new(
+      nil,
       :trust_anchor,
       keyword_init: true
     )
@@ -343,6 +365,7 @@ module Aws::RolesAnywhere
     #   <p>The unique identifier of the certificate revocation list (CRL).</p>
     #   @return [String]
     class EnableCrlInput < Struct.new(
+      nil,
       :crl_id,
       keyword_init: true
     )
@@ -353,6 +376,7 @@ module Aws::RolesAnywhere
     #   <p>The state of the certificate revocation list (CRL) after a read or write operation.</p>
     #   @return [Types::CrlDetail]
     class EnableCrlOutput < Struct.new(
+      nil,
       :crl,
       keyword_init: true
     )
@@ -363,6 +387,7 @@ module Aws::RolesAnywhere
     #   <p>The unique identifier of the profile.</p>
     #   @return [String]
     class EnableProfileInput < Struct.new(
+      nil,
       :profile_id,
       keyword_init: true
     )
@@ -373,6 +398,7 @@ module Aws::RolesAnywhere
     #   <p>The state of the profile after a read or write operation.</p>
     #   @return [Types::ProfileDetail]
     class EnableProfileOutput < Struct.new(
+      nil,
       :profile,
       keyword_init: true
     )
@@ -383,6 +409,7 @@ module Aws::RolesAnywhere
     #   <p>The unique identifier of the trust anchor.</p>
     #   @return [String]
     class EnableTrustAnchorInput < Struct.new(
+      nil,
       :trust_anchor_id,
       keyword_init: true
     )
@@ -393,6 +420,7 @@ module Aws::RolesAnywhere
     #   <p>The state of the trust anchor after a read or write operation. </p>
     #   @return [Types::TrustAnchorDetail]
     class EnableTrustAnchorOutput < Struct.new(
+      nil,
       :trust_anchor,
       keyword_init: true
     )
@@ -403,6 +431,7 @@ module Aws::RolesAnywhere
     #   <p>The unique identifier of the certificate revocation list (CRL).</p>
     #   @return [String]
     class GetCrlInput < Struct.new(
+      nil,
       :crl_id,
       keyword_init: true
     )
@@ -413,6 +442,7 @@ module Aws::RolesAnywhere
     #   <p>The state of the certificate revocation list (CRL) after a read or write operation.</p>
     #   @return [Types::CrlDetail]
     class GetCrlOutput < Struct.new(
+      nil,
       :crl,
       keyword_init: true
     )
@@ -423,6 +453,7 @@ module Aws::RolesAnywhere
     #   <p>The unique identifier of the profile.</p>
     #   @return [String]
     class GetProfileInput < Struct.new(
+      nil,
       :profile_id,
       keyword_init: true
     )
@@ -433,6 +464,7 @@ module Aws::RolesAnywhere
     #   <p>The state of the profile after a read or write operation.</p>
     #   @return [Types::ProfileDetail]
     class GetProfileOutput < Struct.new(
+      nil,
       :profile,
       keyword_init: true
     )
@@ -443,6 +475,7 @@ module Aws::RolesAnywhere
     #   <p>The unique identifier of the subject. </p>
     #   @return [String]
     class GetSubjectInput < Struct.new(
+      nil,
       :subject_id,
       keyword_init: true
     )
@@ -453,6 +486,7 @@ module Aws::RolesAnywhere
     #   <p>The state of the subject after a read or write operation.</p>
     #   @return [Types::SubjectDetail]
     class GetSubjectOutput < Struct.new(
+      nil,
       :subject,
       keyword_init: true
     )
@@ -463,6 +497,7 @@ module Aws::RolesAnywhere
     #   <p>The unique identifier of the trust anchor.</p>
     #   @return [String]
     class GetTrustAnchorInput < Struct.new(
+      nil,
       :trust_anchor_id,
       keyword_init: true
     )
@@ -473,6 +508,7 @@ module Aws::RolesAnywhere
     #   <p>The state of the trust anchor after a read or write operation. </p>
     #   @return [Types::TrustAnchorDetail]
     class GetTrustAnchorOutput < Struct.new(
+      nil,
       :trust_anchor,
       keyword_init: true
     )
@@ -495,6 +531,7 @@ module Aws::RolesAnywhere
     #   <p>The ARN of the TrustAnchor the certificate revocation list (CRL) will provide revocation for.</p>
     #   @return [String]
     class ImportCrlInput < Struct.new(
+      nil,
       :name,
       :crl_data,
       :enabled,
@@ -509,6 +546,7 @@ module Aws::RolesAnywhere
     #   <p>The state of the certificate revocation list (CRL) after a read or write operation.</p>
     #   @return [Types::CrlDetail]
     class ImportCrlOutput < Struct.new(
+      nil,
       :crl,
       keyword_init: true
     )
@@ -526,6 +564,7 @@ module Aws::RolesAnywhere
     #   <p>Indicates whether the temporary credential request was successful. </p>
     #   @return [Boolean]
     class InstanceProperty < Struct.new(
+      nil,
       :seen_at,
       :properties,
       :failed,
@@ -541,6 +580,7 @@ module Aws::RolesAnywhere
     #   <p>The number of resources in the paginated list. </p>
     #   @return [Integer]
     class ListCrlsInput < Struct.new(
+      nil,
       :next_token,
       :page_size,
       keyword_init: true
@@ -555,6 +595,7 @@ module Aws::RolesAnywhere
     #   <p>A list of certificate revocation lists (CRL). </p>
     #   @return [Array<Types::CrlDetail>]
     class ListCrlsOutput < Struct.new(
+      nil,
       :next_token,
       :crls,
       keyword_init: true
@@ -569,6 +610,7 @@ module Aws::RolesAnywhere
     #   <p>The number of resources in the paginated list. </p>
     #   @return [Integer]
     class ListProfilesInput < Struct.new(
+      nil,
       :next_token,
       :page_size,
       keyword_init: true
@@ -583,6 +625,7 @@ module Aws::RolesAnywhere
     #   <p>A list of profiles.</p>
     #   @return [Array<Types::ProfileDetail>]
     class ListProfilesOutput < Struct.new(
+      nil,
       :next_token,
       :profiles,
       keyword_init: true
@@ -597,6 +640,7 @@ module Aws::RolesAnywhere
     #   <p>The number of resources in the paginated list. </p>
     #   @return [Integer]
     class ListSubjectsInput < Struct.new(
+      nil,
       :next_token,
       :page_size,
       keyword_init: true
@@ -611,6 +655,7 @@ module Aws::RolesAnywhere
     #   <p>A token that indicates where the output should continue from, if a previous request did not show all results. To get the next results, make the request again with this value.</p>
     #   @return [String]
     class ListSubjectsOutput < Struct.new(
+      nil,
       :subjects,
       :next_token,
       keyword_init: true
@@ -622,6 +667,7 @@ module Aws::RolesAnywhere
     #   <p>The ARN of the resource.</p>
     #   @return [String]
     class ListTagsForResourceInput < Struct.new(
+      nil,
       :resource_arn,
       keyword_init: true
     )
@@ -632,6 +678,7 @@ module Aws::RolesAnywhere
     #   <p>A list of tags attached to the resource.</p>
     #   @return [Array<Types::Tag>]
     class ListTagsForResourceOutput < Struct.new(
+      nil,
       :tags,
       keyword_init: true
     )
@@ -645,6 +692,7 @@ module Aws::RolesAnywhere
     #   <p>The number of resources in the paginated list. </p>
     #   @return [Integer]
     class ListTrustAnchorsInput < Struct.new(
+      nil,
       :next_token,
       :page_size,
       keyword_init: true
@@ -659,6 +707,7 @@ module Aws::RolesAnywhere
     #   <p>A list of trust anchors.</p>
     #   @return [Array<Types::TrustAnchorDetail>]
     class ListTrustAnchorsOutput < Struct.new(
+      nil,
       :next_token,
       :trust_anchors,
       keyword_init: true
@@ -671,6 +720,7 @@ module Aws::RolesAnywhere
     #   <p>Specifier within a certificate field, such as CN, OU, or UID from the Subject field.</p>
     #   @return [String]
     class MappingRule < Struct.new(
+      nil,
       :specifier,
       keyword_init: true
     )
@@ -698,6 +748,7 @@ module Aws::RolesAnywhere
     #            </note>
     #   @return [String]
     class NotificationSetting < Struct.new(
+      nil,
       :enabled,
       :event,
       :threshold,
@@ -734,6 +785,7 @@ module Aws::RolesAnywhere
     #         </p>
     #   @return [String]
     class NotificationSettingDetail < Struct.new(
+      nil,
       :enabled,
       :event,
       :threshold,
@@ -754,6 +806,7 @@ module Aws::RolesAnywhere
     #   <p>The specified channel of notification.</p>
     #   @return [String]
     class NotificationSettingKey < Struct.new(
+      nil,
       :event,
       :channel,
       keyword_init: true
@@ -807,6 +860,7 @@ module Aws::RolesAnywhere
     #   <p>A mapping applied to the authenticating end-entity certificate.</p>
     #   @return [Array<Types::AttributeMapping>]
     class ProfileDetail < Struct.new(
+      nil,
       :profile_id,
       :profile_arn,
       :name,
@@ -836,6 +890,7 @@ module Aws::RolesAnywhere
     #   <p>A list of mapping entries for every supported specifier or sub-field.</p>
     #   @return [Array<Types::MappingRule>]
     class PutAttributeMappingRequest < Struct.new(
+      nil,
       :profile_id,
       :certificate_field,
       :mapping_rules,
@@ -848,6 +903,7 @@ module Aws::RolesAnywhere
     #   <p>The state of the profile after a read or write operation.</p>
     #   @return [Types::ProfileDetail]
     class PutAttributeMappingResponse < Struct.new(
+      nil,
       :profile,
       keyword_init: true
     )
@@ -861,6 +917,7 @@ module Aws::RolesAnywhere
     #   <p>A list of notification settings to be associated to the trust anchor.</p>
     #   @return [Array<Types::NotificationSetting>]
     class PutNotificationSettingsRequest < Struct.new(
+      nil,
       :trust_anchor_id,
       :notification_settings,
       keyword_init: true
@@ -872,6 +929,7 @@ module Aws::RolesAnywhere
     #   <p>The state of the trust anchor after a read or write operation. </p>
     #   @return [Types::TrustAnchorDetail]
     class PutNotificationSettingsResponse < Struct.new(
+      nil,
       :trust_anchor,
       keyword_init: true
     )
@@ -887,6 +945,7 @@ module Aws::RolesAnywhere
     #         </p>
     #   @return [Array<Types::NotificationSettingKey>]
     class ResetNotificationSettingsRequest < Struct.new(
+      nil,
       :trust_anchor_id,
       :notification_setting_keys,
       keyword_init: true
@@ -898,6 +957,7 @@ module Aws::RolesAnywhere
     #   <p>The state of the trust anchor after a read or write operation. </p>
     #   @return [Types::TrustAnchorDetail]
     class ResetNotificationSettingsResponse < Struct.new(
+      nil,
       :trust_anchor,
       keyword_init: true
     )
@@ -908,6 +968,7 @@ module Aws::RolesAnywhere
     # @!attribute message
     #   @return [String]
     class ResourceNotFoundException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -922,6 +983,7 @@ module Aws::RolesAnywhere
     #   <p>The data field of the trust anchor depending on its type. </p>
     #   @return [Types::SourceData]
     class Source < Struct.new(
+      nil,
       :source_type,
       :source_data,
       keyword_init: true
@@ -981,6 +1043,7 @@ module Aws::RolesAnywhere
     #   <p>The specified instance properties associated with the request.</p>
     #   @return [Array<Types::InstanceProperty>]
     class SubjectDetail < Struct.new(
+      nil,
       :subject_arn,
       :subject_id,
       :enabled,
@@ -1018,6 +1081,7 @@ module Aws::RolesAnywhere
     #   <p>The ISO-8601 timestamp when the subject was last updated. </p>
     #   @return [Time]
     class SubjectSummary < Struct.new(
+      nil,
       :subject_arn,
       :subject_id,
       :enabled,
@@ -1038,6 +1102,7 @@ module Aws::RolesAnywhere
     #   <p>The tag value.</p>
     #   @return [String]
     class Tag < Struct.new(
+      nil,
       :key,
       :value,
       keyword_init: true
@@ -1052,6 +1117,7 @@ module Aws::RolesAnywhere
     #   <p>The tags to attach to the resource.</p>
     #   @return [Array<Types::Tag>]
     class TagResourceInput < Struct.new(
+      nil,
       :resource_arn,
       :tags,
       keyword_init: true
@@ -1060,6 +1126,7 @@ module Aws::RolesAnywhere
     end
 
     class TagResourceOutput < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1069,6 +1136,7 @@ module Aws::RolesAnywhere
     # @!attribute message
     #   @return [String]
     class TooManyTagsException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -1101,6 +1169,7 @@ module Aws::RolesAnywhere
     #   <p>A list of notification settings to be associated to the trust anchor.</p>
     #   @return [Array<Types::NotificationSettingDetail>]
     class TrustAnchorDetail < Struct.new(
+      nil,
       :trust_anchor_id,
       :trust_anchor_arn,
       :name,
@@ -1121,6 +1190,7 @@ module Aws::RolesAnywhere
     #   <p>A list of keys. Tag keys are the unique identifiers of tags. </p>
     #   @return [Array<String>]
     class UntagResourceInput < Struct.new(
+      nil,
       :resource_arn,
       :tag_keys,
       keyword_init: true
@@ -1129,6 +1199,7 @@ module Aws::RolesAnywhere
     end
 
     class UntagResourceOutput < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1144,6 +1215,7 @@ module Aws::RolesAnywhere
     #   <p>The x509 v3 specified certificate revocation list (CRL).</p>
     #   @return [String]
     class UpdateCrlInput < Struct.new(
+      nil,
       :crl_id,
       :name,
       :crl_data,
@@ -1156,6 +1228,7 @@ module Aws::RolesAnywhere
     #   <p>The state of the certificate revocation list (CRL) after a read or write operation.</p>
     #   @return [Types::CrlDetail]
     class UpdateCrlOutput < Struct.new(
+      nil,
       :crl,
       keyword_init: true
     )
@@ -1186,6 +1259,7 @@ module Aws::RolesAnywhere
     #   <p>Used to determine if a custom role session name will be accepted in a temporary credential request.</p>
     #   @return [Boolean]
     class UpdateProfileInput < Struct.new(
+      nil,
       :profile_id,
       :name,
       :session_policy,
@@ -1202,6 +1276,7 @@ module Aws::RolesAnywhere
     #   <p>The state of the profile after a read or write operation.</p>
     #   @return [Types::ProfileDetail]
     class UpdateProfileOutput < Struct.new(
+      nil,
       :profile,
       keyword_init: true
     )
@@ -1218,6 +1293,7 @@ module Aws::RolesAnywhere
     #   <p>The trust anchor type and its related certificate data.</p>
     #   @return [Types::Source]
     class UpdateTrustAnchorInput < Struct.new(
+      nil,
       :trust_anchor_id,
       :name,
       :source,
@@ -1230,6 +1306,7 @@ module Aws::RolesAnywhere
     #   <p>The state of the trust anchor after a read or write operation. </p>
     #   @return [Types::TrustAnchorDetail]
     class UpdateTrustAnchorOutput < Struct.new(
+      nil,
       :trust_anchor,
       keyword_init: true
     )
@@ -1240,6 +1317,7 @@ module Aws::RolesAnywhere
     # @!attribute message
     #   @return [String]
     class ValidationException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )

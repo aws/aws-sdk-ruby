@@ -17,6 +17,7 @@ module Aws::SSO
     #   <p>The email address of the AWS account that is assigned to the user.</p>
     #   @return [String]
     class AccountInfo < Struct.new(
+      nil,
       :account_id,
       :account_name,
       :email_address,
@@ -36,6 +37,7 @@ module Aws::SSO
     #           <a href="https://docs.aws.amazon.com/singlesignon/latest/OIDCAPIReference/API_CreateToken.html">CreateToken</a> in the <i>IAM Identity Center OIDC API Reference Guide</i>.</p>
     #   @return [String]
     class GetRoleCredentialsRequest < Struct.new(
+      nil,
       :role_name,
       :account_id,
       :access_token,
@@ -48,6 +50,7 @@ module Aws::SSO
     #   <p>The credentials for the role that is assigned to the user.</p>
     #   @return [Types::RoleCredentials]
     class GetRoleCredentialsResponse < Struct.new(
+      nil,
       :role_credentials,
       keyword_init: true
     )
@@ -59,6 +62,7 @@ module Aws::SSO
     # @!attribute message
     #   @return [String]
     class InvalidRequestException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -79,6 +83,7 @@ module Aws::SSO
     #   <p>The identifier for the AWS account that is assigned to the user.</p>
     #   @return [String]
     class ListAccountRolesRequest < Struct.new(
+      nil,
       :next_token,
       :max_results,
       :access_token,
@@ -96,6 +101,7 @@ module Aws::SSO
     #         available.</p>
     #   @return [Array<Types::RoleInfo>]
     class ListAccountRolesResponse < Struct.new(
+      nil,
       :next_token,
       :role_list,
       keyword_init: true
@@ -115,6 +121,7 @@ module Aws::SSO
     #           <a href="https://docs.aws.amazon.com/singlesignon/latest/OIDCAPIReference/API_CreateToken.html">CreateToken</a> in the <i>IAM Identity Center OIDC API Reference Guide</i>.</p>
     #   @return [String]
     class ListAccountsRequest < Struct.new(
+      nil,
       :next_token,
       :max_results,
       :access_token,
@@ -131,6 +138,7 @@ module Aws::SSO
     #         results are available.</p>
     #   @return [Array<Types::AccountInfo>]
     class ListAccountsResponse < Struct.new(
+      nil,
       :next_token,
       :account_list,
       keyword_init: true
@@ -143,6 +151,7 @@ module Aws::SSO
     #           <a href="https://docs.aws.amazon.com/singlesignon/latest/OIDCAPIReference/API_CreateToken.html">CreateToken</a> in the <i>IAM Identity Center OIDC API Reference Guide</i>.</p>
     #   @return [String]
     class LogoutRequest < Struct.new(
+      nil,
       :access_token,
       keyword_init: true
     )
@@ -153,6 +162,7 @@ module Aws::SSO
     # @!attribute message
     #   @return [String]
     class ResourceNotFoundException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -177,6 +187,7 @@ module Aws::SSO
     #   <p>The date on which temporary security credentials expire.</p>
     #   @return [Integer]
     class RoleCredentials < Struct.new(
+      nil,
       :access_key_id,
       :secret_access_key,
       :session_token,
@@ -199,6 +210,7 @@ module Aws::SSO
     #   <p>The identifier of the AWS account assigned to the user.</p>
     #   @return [String]
     class RoleInfo < Struct.new(
+      nil,
       :role_name,
       :account_id,
       keyword_init: true
@@ -211,6 +223,7 @@ module Aws::SSO
     # @!attribute message
     #   @return [String]
     class TooManyRequestsException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -222,6 +235,7 @@ module Aws::SSO
     # @!attribute message
     #   @return [String]
     class UnauthorizedException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )

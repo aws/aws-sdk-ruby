@@ -14,6 +14,7 @@ module Aws::PcaConnectorScep
     # @!attribute message
     #   @return [String]
     class AccessDeniedException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -24,6 +25,7 @@ module Aws::PcaConnectorScep
     # @!attribute message
     #   @return [String]
     class BadRequestException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -47,6 +49,7 @@ module Aws::PcaConnectorScep
     #   <p>The SCEP challenge password, in UUID format.</p>
     #   @return [String]
     class Challenge < Struct.new(
+      nil,
       :arn,
       :connector_arn,
       :created_at,
@@ -71,6 +74,7 @@ module Aws::PcaConnectorScep
     #   <p>The date and time that the connector was updated.</p>
     #   @return [Time]
     class ChallengeMetadata < Struct.new(
+      nil,
       :arn,
       :connector_arn,
       :created_at,
@@ -94,6 +98,7 @@ module Aws::PcaConnectorScep
     #   <p>The date and time that the challenge was updated.</p>
     #   @return [Time]
     class ChallengeMetadataSummary < Struct.new(
+      nil,
       :arn,
       :connector_arn,
       :created_at,
@@ -114,6 +119,7 @@ module Aws::PcaConnectorScep
     #   <p>The resource type, which can be either <code>Connector</code> or <code>Challenge</code>.</p>
     #   @return [String]
     class ConflictException < Struct.new(
+      nil,
       :message,
       :resource_id,
       :resource_type,
@@ -154,6 +160,7 @@ module Aws::PcaConnectorScep
     #   <p>The date and time that the connector was updated.</p>
     #   @return [Time]
     class Connector < Struct.new(
+      nil,
       :arn,
       :certificate_authority_arn,
       :type,
@@ -201,6 +208,7 @@ module Aws::PcaConnectorScep
     #   <p>The date and time that the challenge was updated.</p>
     #   @return [Time]
     class ConnectorSummary < Struct.new(
+      nil,
       :arn,
       :certificate_authority_arn,
       :type,
@@ -226,6 +234,7 @@ module Aws::PcaConnectorScep
     #   <p>The key-value pairs to associate with the resource.</p>
     #   @return [Hash<String, String>]
     class CreateChallengeRequest < Struct.new(
+      nil,
       :connector_arn,
       :client_token,
       :tags,
@@ -238,6 +247,7 @@ module Aws::PcaConnectorScep
     #   <p>Returns the challenge details for the specified connector.</p>
     #   @return [Types::Challenge]
     class CreateChallengeResponse < Struct.new(
+      nil,
       :challenge,
       keyword_init: true
     )
@@ -259,6 +269,7 @@ module Aws::PcaConnectorScep
     #   <p>The key-value pairs to associate with the resource.</p>
     #   @return [Hash<String, String>]
     class CreateConnectorRequest < Struct.new(
+      nil,
       :certificate_authority_arn,
       :mobile_device_management,
       :client_token,
@@ -272,6 +283,7 @@ module Aws::PcaConnectorScep
     #   <p>Returns the Amazon Resource Name (ARN) of the connector.</p>
     #   @return [String]
     class CreateConnectorResponse < Struct.new(
+      nil,
       :connector_arn,
       keyword_init: true
     )
@@ -282,6 +294,7 @@ module Aws::PcaConnectorScep
     #   <p>The Amazon Resource Name (ARN) of the challenge password to delete.</p>
     #   @return [String]
     class DeleteChallengeRequest < Struct.new(
+      nil,
       :challenge_arn,
       keyword_init: true
     )
@@ -292,6 +305,7 @@ module Aws::PcaConnectorScep
     #   <p>The Amazon Resource Name (ARN) of the connector to delete.</p>
     #   @return [String]
     class DeleteConnectorRequest < Struct.new(
+      nil,
       :connector_arn,
       keyword_init: true
     )
@@ -302,6 +316,7 @@ module Aws::PcaConnectorScep
     #   <p>The Amazon Resource Name (ARN) of the challenge.</p>
     #   @return [String]
     class GetChallengeMetadataRequest < Struct.new(
+      nil,
       :challenge_arn,
       keyword_init: true
     )
@@ -312,6 +327,7 @@ module Aws::PcaConnectorScep
     #   <p>The metadata for the challenge.</p>
     #   @return [Types::ChallengeMetadata]
     class GetChallengeMetadataResponse < Struct.new(
+      nil,
       :challenge_metadata,
       keyword_init: true
     )
@@ -322,6 +338,7 @@ module Aws::PcaConnectorScep
     #   <p>The Amazon Resource Name (ARN) of the challenge.</p>
     #   @return [String]
     class GetChallengePasswordRequest < Struct.new(
+      nil,
       :challenge_arn,
       keyword_init: true
     )
@@ -332,6 +349,7 @@ module Aws::PcaConnectorScep
     #   <p>The SCEP challenge password.</p>
     #   @return [String]
     class GetChallengePasswordResponse < Struct.new(
+      nil,
       :password,
       keyword_init: true
     )
@@ -342,6 +360,7 @@ module Aws::PcaConnectorScep
     #   <p>The Amazon Resource Name (ARN) of the connector.</p>
     #   @return [String]
     class GetConnectorRequest < Struct.new(
+      nil,
       :connector_arn,
       keyword_init: true
     )
@@ -352,6 +371,7 @@ module Aws::PcaConnectorScep
     #   <p>The properties of the connector.</p>
     #   @return [Types::Connector]
     class GetConnectorResponse < Struct.new(
+      nil,
       :connector,
       keyword_init: true
     )
@@ -363,6 +383,7 @@ module Aws::PcaConnectorScep
     # @!attribute message
     #   @return [String]
     class InternalServerException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -378,6 +399,7 @@ module Aws::PcaConnectorScep
     #   <p>The primary domain from your Microsoft Entra ID app registration.</p>
     #   @return [String]
     class IntuneConfiguration < Struct.new(
+      nil,
       :azure_application_id,
       :domain,
       keyword_init: true
@@ -399,6 +421,7 @@ module Aws::PcaConnectorScep
     #   <p>The Amazon Resource Name (ARN) of the connector.</p>
     #   @return [String]
     class ListChallengeMetadataRequest < Struct.new(
+      nil,
       :max_results,
       :next_token,
       :connector_arn,
@@ -416,6 +439,7 @@ module Aws::PcaConnectorScep
     #    value in the response. To retrieve the next batch of objects, use the token returned from the prior request in your next request.</p>
     #   @return [String]
     class ListChallengeMetadataResponse < Struct.new(
+      nil,
       :challenges,
       :next_token,
       keyword_init: true
@@ -434,6 +458,7 @@ module Aws::PcaConnectorScep
     #    value in the response. To retrieve the next batch of objects, use the token returned from the prior request in your next request.</p>
     #   @return [String]
     class ListConnectorsRequest < Struct.new(
+      nil,
       :max_results,
       :next_token,
       keyword_init: true
@@ -450,6 +475,7 @@ module Aws::PcaConnectorScep
     #    value in the response. To retrieve the next batch of objects, use the token returned from the prior request in your next request.</p>
     #   @return [String]
     class ListConnectorsResponse < Struct.new(
+      nil,
       :connectors,
       :next_token,
       keyword_init: true
@@ -461,6 +487,7 @@ module Aws::PcaConnectorScep
     #   <p>The Amazon Resource Name (ARN) of the resource.</p>
     #   @return [String]
     class ListTagsForResourceRequest < Struct.new(
+      nil,
       :resource_arn,
       keyword_init: true
     )
@@ -471,6 +498,7 @@ module Aws::PcaConnectorScep
     #   <p>The key-value pairs to associate with the resource.</p>
     #   @return [Hash<String, String>]
     class ListTagsForResourceResponse < Struct.new(
+      nil,
       :tags,
       keyword_init: true
     )
@@ -504,6 +532,7 @@ module Aws::PcaConnectorScep
     #   <p>The audience value to copy into your Microsoft Entra app registration's OIDC.</p>
     #   @return [String]
     class OpenIdConfiguration < Struct.new(
+      nil,
       :issuer,
       :subject,
       :audience,
@@ -522,6 +551,7 @@ module Aws::PcaConnectorScep
     #   <p>The resource type, which can be either <code>Connector</code> or <code>Challenge</code>.</p>
     #   @return [String]
     class ResourceNotFoundException < Struct.new(
+      nil,
       :message,
       :resource_id,
       :resource_type,
@@ -543,6 +573,7 @@ module Aws::PcaConnectorScep
     #   <p>The quota identifier.</p>
     #   @return [String]
     class ServiceQuotaExceededException < Struct.new(
+      nil,
       :message,
       :resource_type,
       :service_code,
@@ -559,6 +590,7 @@ module Aws::PcaConnectorScep
     #   <p>The key-value pairs to associate with the resource.</p>
     #   @return [Hash<String, String>]
     class TagResourceRequest < Struct.new(
+      nil,
       :resource_arn,
       :tags,
       keyword_init: true
@@ -570,6 +602,7 @@ module Aws::PcaConnectorScep
     # @!attribute message
     #   @return [String]
     class ThrottlingException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -583,6 +616,7 @@ module Aws::PcaConnectorScep
     #   <p>Specifies a list of tag keys that you want to remove from the specified resources.</p>
     #   @return [Array<String>]
     class UntagResourceRequest < Struct.new(
+      nil,
       :resource_arn,
       :tag_keys,
       keyword_init: true
@@ -597,6 +631,7 @@ module Aws::PcaConnectorScep
     #   <p>The reason for the validation error, if available. The service doesn't return a reason for every validation exception.</p>
     #   @return [String]
     class ValidationException < Struct.new(
+      nil,
       :message,
       :reason,
       keyword_init: true

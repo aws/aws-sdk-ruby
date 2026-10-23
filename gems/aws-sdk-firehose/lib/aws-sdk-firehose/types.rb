@@ -20,6 +20,7 @@ module Aws::Firehose
     #            ingest data at 1 MB/sec, the value should be 10 MB or higher.</p>
     #   @return [Integer]
     class AmazonOpenSearchServerlessBufferingHints < Struct.new(
+      nil,
       :interval_in_seconds,
       :size_in_m_bs,
       keyword_init: true
@@ -72,6 +73,7 @@ module Aws::Firehose
     #            destination.</p>
     #   @return [Types::VpcConfiguration]
     class AmazonOpenSearchServerlessDestinationConfiguration < Struct.new(
+      nil,
       :role_arn,
       :collection_endpoint,
       :index_name,
@@ -121,6 +123,7 @@ module Aws::Firehose
     #   <p>The details of the VPC of the Amazon OpenSearch Service destination.</p>
     #   @return [Types::VpcConfigurationDescription]
     class AmazonOpenSearchServerlessDestinationDescription < Struct.new(
+      nil,
       :role_arn,
       :collection_endpoint,
       :index_name,
@@ -169,6 +172,7 @@ module Aws::Firehose
     #   <p>Describes the Amazon CloudWatch logging options for your Firehose stream.</p>
     #   @return [Types::CloudWatchLoggingOptions]
     class AmazonOpenSearchServerlessDestinationUpdate < Struct.new(
+      nil,
       :role_arn,
       :collection_endpoint,
       :index_name,
@@ -192,6 +196,7 @@ module Aws::Firehose
     #            in no retries.</p>
     #   @return [Integer]
     class AmazonOpenSearchServerlessRetryOptions < Struct.new(
+      nil,
       :duration_in_seconds,
       keyword_init: true
     )
@@ -212,6 +217,7 @@ module Aws::Firehose
     #            ingest data at 1 MB/sec, the value should be 10 MB or higher. </p>
     #   @return [Integer]
     class AmazonopensearchserviceBufferingHints < Struct.new(
+      nil,
       :interval_in_seconds,
       :size_in_m_bs,
       keyword_init: true
@@ -279,6 +285,7 @@ module Aws::Firehose
     #   <p>Indicates the method for setting up document ID. The supported methods are Firehose generated document ID and OpenSearch Service generated document ID.</p>
     #   @return [Types::DocumentIdOptions]
     class AmazonopensearchserviceDestinationConfiguration < Struct.new(
+      nil,
       :role_arn,
       :domain_arn,
       :cluster_endpoint,
@@ -345,6 +352,7 @@ module Aws::Firehose
     #   <p>Indicates the method for setting up document ID. The supported methods are Firehose generated document ID and OpenSearch Service generated document ID.</p>
     #   @return [Types::DocumentIdOptions]
     class AmazonopensearchserviceDestinationDescription < Struct.new(
+      nil,
       :role_arn,
       :domain_arn,
       :cluster_endpoint,
@@ -416,6 +424,7 @@ module Aws::Firehose
     #   <p>Indicates the method for setting up document ID. The supported methods are Firehose generated document ID and OpenSearch Service generated document ID.</p>
     #   @return [Types::DocumentIdOptions]
     class AmazonopensearchserviceDestinationUpdate < Struct.new(
+      nil,
       :role_arn,
       :domain_arn,
       :cluster_endpoint,
@@ -442,6 +451,7 @@ module Aws::Firehose
     #            is 300 seconds (5 minutes). A value of 0 (zero) results in no retries. </p>
     #   @return [Integer]
     class AmazonopensearchserviceRetryOptions < Struct.new(
+      nil,
       :duration_in_seconds,
       keyword_init: true
     )
@@ -456,6 +466,7 @@ module Aws::Firehose
     #   <p>The type of connectivity used to access the Amazon MSK cluster.</p>
     #   @return [String]
     class AuthenticationConfiguration < Struct.new(
+      nil,
       :role_arn,
       :connectivity,
       keyword_init: true
@@ -484,6 +495,7 @@ module Aws::Firehose
     #            versa.</p>
     #   @return [Integer]
     class BufferingHints < Struct.new(
+      nil,
       :size_in_m_bs,
       :interval_in_seconds,
       keyword_init: true
@@ -505,6 +517,7 @@ module Aws::Firehose
     #            <p>Amazon Data Firehose is in preview release and is subject to change.</p>
     #   @return [String]
     class CatalogConfiguration < Struct.new(
+      nil,
       :catalog_arn,
       :warehouse_location,
       keyword_init: true
@@ -525,6 +538,7 @@ module Aws::Firehose
     #            logging is enabled.</p>
     #   @return [String]
     class CloudWatchLoggingOptions < Struct.new(
+      nil,
       :enabled,
       :log_group_name,
       :log_stream_name,
@@ -539,6 +553,7 @@ module Aws::Firehose
     #   <p>A message that provides information about the error.</p>
     #   @return [String]
     class ConcurrentModificationException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -575,6 +590,7 @@ module Aws::Firehose
     #               examples</a>.</p>
     #   @return [String]
     class CopyCommand < Struct.new(
+      nil,
       :data_table_name,
       :data_table_columns,
       :copy_options,
@@ -686,6 +702,7 @@ module Aws::Firehose
     #            <p>Amazon Data Firehose is in preview release and is subject to change.</p>
     #   @return [Types::DatabaseSourceConfiguration]
     class CreateDeliveryStreamInput < Struct.new(
+      nil,
       :delivery_stream_name,
       :delivery_stream_type,
       :direct_put_source_configuration,
@@ -713,6 +730,7 @@ module Aws::Firehose
     #   <p>The ARN of the Firehose stream.</p>
     #   @return [String]
     class CreateDeliveryStreamOutput < Struct.new(
+      nil,
       :delivery_stream_arn,
       keyword_init: true
     )
@@ -743,6 +761,7 @@ module Aws::Firehose
     #            format conversion while preserving the configuration details.</p>
     #   @return [Boolean]
     class DataFormatConversionConfiguration < Struct.new(
+      nil,
       :schema_configuration,
       :input_format_configuration,
       :output_format_configuration,
@@ -768,6 +787,7 @@ module Aws::Firehose
     #            <p>Amazon Data Firehose is in preview release and is subject to change.</p>
     #   @return [Array<String>]
     class DatabaseColumnList < Struct.new(
+      nil,
       :include,
       :exclude,
       keyword_init: true
@@ -789,6 +809,7 @@ module Aws::Firehose
     #            <p>Amazon Data Firehose is in preview release and is subject to change.</p>
     #   @return [Array<String>]
     class DatabaseList < Struct.new(
+      nil,
       :include,
       :exclude,
       keyword_init: true
@@ -836,6 +857,7 @@ module Aws::Firehose
     #               <a>StartDeliveryStreamEncryption</a>, <a>StopDeliveryStreamEncryption</a>.</p>
     #   @return [Types::FailureDescription]
     class DatabaseSnapshotInfo < Struct.new(
+      nil,
       :id,
       :table,
       :request_timestamp,
@@ -855,6 +877,7 @@ module Aws::Firehose
     #   <p>The structure that defines how Firehose accesses the secret.</p>
     #   @return [Types::SecretsManagerConfiguration]
     class DatabaseSourceAuthenticationConfiguration < Struct.new(
+      nil,
       :secrets_manager_configuration,
       keyword_init: true
     )
@@ -944,6 +967,7 @@ module Aws::Firehose
     #            <p>Amazon Data Firehose is in preview release and is subject to change.</p>
     #   @return [Types::DatabaseSourceVPCConfiguration]
     class DatabaseSourceConfiguration < Struct.new(
+      nil,
       :type,
       :endpoint,
       :port,
@@ -1049,6 +1073,7 @@ module Aws::Firehose
     #            <p>Amazon Data Firehose is in preview release and is subject to change.</p>
     #   @return [Types::DatabaseSourceVPCConfiguration]
     class DatabaseSourceDescription < Struct.new(
+      nil,
       :type,
       :endpoint,
       :port,
@@ -1077,6 +1102,7 @@ module Aws::Firehose
     #            <p>Amazon Data Firehose is in preview release and is subject to change.</p>
     #   @return [String]
     class DatabaseSourceVPCConfiguration < Struct.new(
+      nil,
       :vpc_endpoint_service_name,
       keyword_init: true
     )
@@ -1097,6 +1123,7 @@ module Aws::Firehose
     #            <p>Amazon Data Firehose is in preview release and is subject to change.</p>
     #   @return [Array<String>]
     class DatabaseTableList < Struct.new(
+      nil,
       :include,
       :exclude,
       keyword_init: true
@@ -1118,6 +1145,7 @@ module Aws::Firehose
     #            <p>The default value is false.</p>
     #   @return [Boolean]
     class DeleteDeliveryStreamInput < Struct.new(
+      nil,
       :delivery_stream_name,
       :allow_force_delete,
       keyword_init: true
@@ -1126,6 +1154,7 @@ module Aws::Firehose
     end
 
     class DeleteDeliveryStreamOutput < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1192,6 +1221,7 @@ module Aws::Firehose
     #   <p>Indicates whether there are more destinations available to list.</p>
     #   @return [Boolean]
     class DeliveryStreamDescription < Struct.new(
+      nil,
       :delivery_stream_name,
       :delivery_stream_arn,
       :delivery_stream_status,
@@ -1234,6 +1264,7 @@ module Aws::Firehose
     #               <a>StartDeliveryStreamEncryption</a>, <a>StopDeliveryStreamEncryption</a>.</p>
     #   @return [Types::FailureDescription]
     class DeliveryStreamEncryptionConfiguration < Struct.new(
+      nil,
       :key_arn,
       :key_type,
       :status,
@@ -1272,6 +1303,7 @@ module Aws::Firehose
     #            </important>
     #   @return [String]
     class DeliveryStreamEncryptionConfigurationInput < Struct.new(
+      nil,
       :key_arn,
       :key_type,
       keyword_init: true
@@ -1290,6 +1322,7 @@ module Aws::Firehose
     #   <p>The ID of the destination to start returning the destination information. Firehose supports one destination per Firehose stream.</p>
     #   @return [String]
     class DescribeDeliveryStreamInput < Struct.new(
+      nil,
       :delivery_stream_name,
       :limit,
       :exclusive_start_destination_id,
@@ -1302,6 +1335,7 @@ module Aws::Firehose
     #   <p>Information about the Firehose stream.</p>
     #   @return [Types::DeliveryStreamDescription]
     class DescribeDeliveryStreamOutput < Struct.new(
+      nil,
       :delivery_stream_description,
       keyword_init: true
     )
@@ -1325,6 +1359,7 @@ module Aws::Firehose
     #            which one offers the functionality you need. The other option is the OpenX SerDe.</p>
     #   @return [Types::HiveJsonSerDe]
     class Deserializer < Struct.new(
+      nil,
       :open_x_json_ser_de,
       :hive_json_ser_de,
       keyword_init: true
@@ -1369,6 +1404,7 @@ module Aws::Firehose
     #         </p>
     #   @return [Types::IcebergDestinationDescription]
     class DestinationDescription < Struct.new(
+      nil,
       :destination_id,
       :s3_destination_description,
       :extended_s3_destination_description,
@@ -1415,6 +1451,7 @@ module Aws::Firehose
     #          </p>
     #   @return [String]
     class DestinationTableConfiguration < Struct.new(
+      nil,
       :destination_table_name,
       :destination_database_name,
       :unique_keys,
@@ -1432,6 +1469,7 @@ module Aws::Firehose
     #            does not affect Firehose delivery throughput limit. You can use the <a href="https://support.console.aws.amazon.com/support/home#/case/create%3FissueType=service-limit-increase%26limitType=kinesis-firehose-limits">Firehose Limits form</a> to request a throughput limit increase. </p>
     #   @return [Integer]
     class DirectPutSourceConfiguration < Struct.new(
+      nil,
       :throughput_hint_in_m_bs,
       keyword_init: true
     )
@@ -1445,6 +1483,7 @@ module Aws::Firehose
     #            does not affect Firehose delivery throughput limit. You can use the <a href="https://support.console.aws.amazon.com/support/home#/case/create%3FissueType=service-limit-increase%26limitType=kinesis-firehose-limits">Firehose Limits form</a> to request a throughput limit increase. </p>
     #   @return [Integer]
     class DirectPutSourceDescription < Struct.new(
+      nil,
       :throughput_hint_in_m_bs,
       keyword_init: true
     )
@@ -1467,6 +1506,7 @@ module Aws::Firehose
     #            domain, resulting in improved performance.</p>
     #   @return [String]
     class DocumentIdOptions < Struct.new(
+      nil,
       :default_document_id_format,
       keyword_init: true
     )
@@ -1485,6 +1525,7 @@ module Aws::Firehose
     #   <p>Specifies that the dynamic partitioning is enabled for this Firehose stream.</p>
     #   @return [Boolean]
     class DynamicPartitioningConfiguration < Struct.new(
+      nil,
       :retry_options,
       :enabled,
       keyword_init: true
@@ -1506,6 +1547,7 @@ module Aws::Firehose
     #            ingest data at 1 MB/sec, the value should be 10 MB or higher.</p>
     #   @return [Integer]
     class ElasticsearchBufferingHints < Struct.new(
+      nil,
       :interval_in_seconds,
       :size_in_m_bs,
       keyword_init: true
@@ -1582,6 +1624,7 @@ module Aws::Firehose
     #   <p>Indicates the method for setting up document ID. The supported methods are Firehose generated document ID and OpenSearch Service generated document ID.</p>
     #   @return [Types::DocumentIdOptions]
     class ElasticsearchDestinationConfiguration < Struct.new(
+      nil,
       :role_arn,
       :domain_arn,
       :cluster_endpoint,
@@ -1655,6 +1698,7 @@ module Aws::Firehose
     #   <p>Indicates the method for setting up document ID. The supported methods are Firehose generated document ID and OpenSearch Service generated document ID.</p>
     #   @return [Types::DocumentIdOptions]
     class ElasticsearchDestinationDescription < Struct.new(
+      nil,
       :role_arn,
       :domain_arn,
       :cluster_endpoint,
@@ -1732,6 +1776,7 @@ module Aws::Firehose
     #   <p>Indicates the method for setting up document ID. The supported methods are Firehose generated document ID and OpenSearch Service generated document ID.</p>
     #   @return [Types::DocumentIdOptions]
     class ElasticsearchDestinationUpdate < Struct.new(
+      nil,
       :role_arn,
       :domain_arn,
       :cluster_endpoint,
@@ -1758,6 +1803,7 @@ module Aws::Firehose
     #            minutes). A value of 0 (zero) results in no retries.</p>
     #   @return [Integer]
     class ElasticsearchRetryOptions < Struct.new(
+      nil,
       :duration_in_seconds,
       keyword_init: true
     )
@@ -1773,6 +1819,7 @@ module Aws::Firehose
     #   <p>The encryption key.</p>
     #   @return [Types::KMSEncryptionConfig]
     class EncryptionConfiguration < Struct.new(
+      nil,
       :no_encryption_config,
       :kms_encryption_config,
       keyword_init: true
@@ -1843,6 +1890,7 @@ module Aws::Firehose
     #   <p>The time zone you prefer. UTC is the default.</p>
     #   @return [String]
     class ExtendedS3DestinationConfiguration < Struct.new(
+      nil,
       :role_arn,
       :bucket_arn,
       :prefix,
@@ -1924,6 +1972,7 @@ module Aws::Firehose
     #   <p>The time zone you prefer. UTC is the default.</p>
     #   @return [String]
     class ExtendedS3DestinationDescription < Struct.new(
+      nil,
       :role_arn,
       :bucket_arn,
       :prefix,
@@ -2006,6 +2055,7 @@ module Aws::Firehose
     #   <p>The time zone you prefer. UTC is the default.</p>
     #   @return [String]
     class ExtendedS3DestinationUpdate < Struct.new(
+      nil,
       :role_arn,
       :bucket_arn,
       :prefix,
@@ -2036,6 +2086,7 @@ module Aws::Firehose
     #   <p>A message providing details about the error that caused the failure.</p>
     #   @return [String]
     class FailureDescription < Struct.new(
+      nil,
       :type,
       :details,
       keyword_init: true
@@ -2054,6 +2105,7 @@ module Aws::Firehose
     #            parse timestamps in epoch milliseconds. If you don't specify a format, Firehose uses <code>java.sql.Timestamp::valueOf</code> by default.</p>
     #   @return [Array<String>]
     class HiveJsonSerDe < Struct.new(
+      nil,
       :timestamp_formats,
       keyword_init: true
     )
@@ -2077,6 +2129,7 @@ module Aws::Firehose
     #            to the destination. The default value is 300 (5 minutes). </p>
     #   @return [Integer]
     class HttpEndpointBufferingHints < Struct.new(
+      nil,
       :size_in_m_bs,
       :interval_in_seconds,
       keyword_init: true
@@ -2093,6 +2146,7 @@ module Aws::Firehose
     #   <p>The value of the HTTP endpoint common attribute.</p>
     #   @return [String]
     class HttpEndpointCommonAttribute < Struct.new(
+      nil,
       :attribute_name,
       :attribute_value,
       keyword_init: true
@@ -2118,6 +2172,7 @@ module Aws::Firehose
     #            selected as the destination.</p>
     #   @return [String]
     class HttpEndpointConfiguration < Struct.new(
+      nil,
       :url,
       :name,
       :access_key,
@@ -2134,6 +2189,7 @@ module Aws::Firehose
     #   <p>The name of the HTTP endpoint selected as the destination.</p>
     #   @return [String]
     class HttpEndpointDescription < Struct.new(
+      nil,
       :url,
       :name,
       keyword_init: true
@@ -2186,6 +2242,7 @@ module Aws::Firehose
     #         </p>
     #   @return [Types::SecretsManagerConfiguration]
     class HttpEndpointDestinationConfiguration < Struct.new(
+      nil,
       :endpoint_configuration,
       :buffering_hints,
       :cloud_watch_logging_options,
@@ -2246,6 +2303,7 @@ module Aws::Firehose
     #         </p>
     #   @return [Types::SecretsManagerConfiguration]
     class HttpEndpointDestinationDescription < Struct.new(
+      nil,
       :endpoint_configuration,
       :buffering_hints,
       :cloud_watch_logging_options,
@@ -2306,6 +2364,7 @@ module Aws::Firehose
     #         </p>
     #   @return [Types::SecretsManagerConfiguration]
     class HttpEndpointDestinationUpdate < Struct.new(
+      nil,
       :endpoint_configuration,
       :buffering_hints,
       :cloud_watch_logging_options,
@@ -2330,6 +2389,7 @@ module Aws::Firehose
     #   <p>Describes the metadata sent to the HTTP endpoint destination.</p>
     #   @return [Array<Types::HttpEndpointCommonAttribute>]
     class HttpEndpointRequestConfiguration < Struct.new(
+      nil,
       :content_encoding,
       :common_attributes,
       keyword_init: true
@@ -2347,6 +2407,7 @@ module Aws::Firehose
     #            acknowledgment from the specified destination after each attempt. </p>
     #   @return [Integer]
     class HttpEndpointRetryOptions < Struct.new(
+      nil,
       :duration_in_seconds,
       keyword_init: true
     )
@@ -2411,6 +2472,7 @@ module Aws::Firehose
     #   <p>Describes the configuration of a destination in Amazon S3.</p>
     #   @return [Types::S3DestinationConfiguration]
     class IcebergDestinationConfiguration < Struct.new(
+      nil,
       :destination_table_configuration_list,
       :schema_evolution_configuration,
       :table_creation_configuration,
@@ -2489,6 +2551,7 @@ module Aws::Firehose
     #   <p>Describes a destination in Amazon S3.</p>
     #   @return [Types::S3DestinationDescription]
     class IcebergDestinationDescription < Struct.new(
+      nil,
       :destination_table_configuration_list,
       :schema_evolution_configuration,
       :table_creation_configuration,
@@ -2568,6 +2631,7 @@ module Aws::Firehose
     #   <p>Describes the configuration of a destination in Amazon S3.</p>
     #   @return [Types::S3DestinationConfiguration]
     class IcebergDestinationUpdate < Struct.new(
+      nil,
       :destination_table_configuration_list,
       :schema_evolution_configuration,
       :table_creation_configuration,
@@ -2592,6 +2656,7 @@ module Aws::Firehose
     #            or the OpenX JSON SerDe. If both are non-null, the server rejects the request.</p>
     #   @return [Types::Deserializer]
     class InputFormatConfiguration < Struct.new(
+      nil,
       :deserializer,
       keyword_init: true
     )
@@ -2603,6 +2668,7 @@ module Aws::Firehose
     #   <p>A message that provides information about the error.</p>
     #   @return [String]
     class InvalidArgumentException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -2619,6 +2685,7 @@ module Aws::Firehose
     # @!attribute message
     #   @return [String]
     class InvalidKMSResourceException < Struct.new(
+      nil,
       :code,
       :message,
       keyword_init: true
@@ -2632,6 +2699,7 @@ module Aws::Firehose
     # @!attribute message
     #   @return [String]
     class InvalidSourceException < Struct.new(
+      nil,
       :code,
       :message,
       keyword_init: true
@@ -2645,6 +2713,7 @@ module Aws::Firehose
     #               Resource Names (ARNs) and Amazon Web Services Service Namespaces</a>.</p>
     #   @return [String]
     class KMSEncryptionConfig < Struct.new(
+      nil,
       :awskms_key_arn,
       keyword_init: true
     )
@@ -2663,6 +2732,7 @@ module Aws::Firehose
     #               Identity and Access Management (IAM) ARN Format</a>.</p>
     #   @return [String]
     class KinesisStreamSourceConfiguration < Struct.new(
+      nil,
       :kinesis_stream_arn,
       :role_arn,
       keyword_init: true
@@ -2687,6 +2757,7 @@ module Aws::Firehose
     #            with this timestamp.</p>
     #   @return [Time]
     class KinesisStreamSourceDescription < Struct.new(
+      nil,
       :kinesis_stream_arn,
       :role_arn,
       :delivery_start_timestamp,
@@ -2700,6 +2771,7 @@ module Aws::Firehose
     #   <p>A message that provides information about the error.</p>
     #   @return [String]
     class LimitExceededException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -2733,6 +2805,7 @@ module Aws::Firehose
     #               <code>ExclusiveStartDeliveryStreamName</code>.</p>
     #   @return [String]
     class ListDeliveryStreamsInput < Struct.new(
+      nil,
       :limit,
       :delivery_stream_type,
       :exclusive_start_delivery_stream_name,
@@ -2748,6 +2821,7 @@ module Aws::Firehose
     #   <p>Indicates whether there are more Firehose streams available to list.</p>
     #   @return [Boolean]
     class ListDeliveryStreamsOutput < Struct.new(
+      nil,
       :delivery_stream_names,
       :has_more_delivery_streams,
       keyword_init: true
@@ -2770,6 +2844,7 @@ module Aws::Firehose
     #            key in the response. </p>
     #   @return [Integer]
     class ListTagsForDeliveryStreamInput < Struct.new(
+      nil,
       :delivery_stream_name,
       :exclusive_start_tag_key,
       :limit,
@@ -2789,6 +2864,7 @@ module Aws::Firehose
     #            and call <code>ListTagsForDeliveryStream</code> again.</p>
     #   @return [Boolean]
     class ListTagsForDeliveryStreamOutput < Struct.new(
+      nil,
       :tags,
       :has_more_tags,
       keyword_init: true
@@ -2815,6 +2891,7 @@ module Aws::Firehose
     #            (1970-01-01T00:00:00Z). </p>
     #   @return [Time]
     class MSKSourceConfiguration < Struct.new(
+      nil,
       :msk_cluster_arn,
       :topic_name,
       :authentication_configuration,
@@ -2846,6 +2923,7 @@ module Aws::Firehose
     #            (1970-01-01T00:00:00Z). </p>
     #   @return [Time]
     class MSKSourceDescription < Struct.new(
+      nil,
       :msk_cluster_arn,
       :topic_name,
       :authentication_configuration,
@@ -2880,6 +2958,7 @@ module Aws::Firehose
     #            this key to a column named <code>ts</code>.</p>
     #   @return [Hash<String, String>]
     class OpenXJsonSerDe < Struct.new(
+      nil,
       :convert_dots_in_json_keys_to_underscores,
       :case_insensitive,
       :column_to_json_key_mappings,
@@ -2941,6 +3020,7 @@ module Aws::Firehose
     #               <code>V0_12</code>. The default is <code>V0_12</code>.</p>
     #   @return [String]
     class OrcSerDe < Struct.new(
+      nil,
       :stripe_size_bytes,
       :block_size_bytes,
       :row_index_stride,
@@ -2964,6 +3044,7 @@ module Aws::Firehose
     #            SerDe. If both are non-null, the server rejects the request.</p>
     #   @return [Types::Serializer]
     class OutputFormatConfiguration < Struct.new(
+      nil,
       :serializer,
       keyword_init: true
     )
@@ -3000,6 +3081,7 @@ module Aws::Firehose
     #            and <code>V2</code>. The default is <code>V1</code>.</p>
     #   @return [String]
     class ParquetSerDe < Struct.new(
+      nil,
       :block_size_bytes,
       :page_size_bytes,
       :compression,
@@ -3020,6 +3102,7 @@ module Aws::Firehose
     #            <p>Amazon Data Firehose is in preview release and is subject to change.</p>
     #   @return [String]
     class PartitionField < Struct.new(
+      nil,
       :source_name,
       keyword_init: true
     )
@@ -3041,6 +3124,7 @@ module Aws::Firehose
     #            <p>Amazon Data Firehose is in preview release and is subject to change.</p>
     #   @return [Array<Types::PartitionField>]
     class PartitionSpec < Struct.new(
+      nil,
       :identity,
       keyword_init: true
     )
@@ -3055,6 +3139,7 @@ module Aws::Firehose
     #   <p>The data processors.</p>
     #   @return [Array<Types::Processor>]
     class ProcessingConfiguration < Struct.new(
+      nil,
       :enabled,
       :processors,
       keyword_init: true
@@ -3073,6 +3158,7 @@ module Aws::Firehose
     #   <p>The processor parameters.</p>
     #   @return [Array<Types::ProcessorParameter>]
     class Processor < Struct.new(
+      nil,
       :type,
       :parameters,
       keyword_init: true
@@ -3092,6 +3178,7 @@ module Aws::Firehose
     #   <p>The parameter value.</p>
     #   @return [String]
     class ProcessorParameter < Struct.new(
+      nil,
       :parameter_name,
       :parameter_value,
       keyword_init: true
@@ -3106,6 +3193,7 @@ module Aws::Firehose
     #   <p>One or more records.</p>
     #   @return [Array<Types::Record>]
     class PutRecordBatchInput < Struct.new(
+      nil,
       :delivery_stream_name,
       :records,
       keyword_init: true
@@ -3127,6 +3215,7 @@ module Aws::Firehose
     #            the index used in the request array.</p>
     #   @return [Array<Types::PutRecordBatchResponseEntry>]
     class PutRecordBatchOutput < Struct.new(
+      nil,
       :failed_put_count,
       :encrypted,
       :request_responses,
@@ -3149,6 +3238,7 @@ module Aws::Firehose
     #   <p>The error message for an individual record result.</p>
     #   @return [String]
     class PutRecordBatchResponseEntry < Struct.new(
+      nil,
       :record_id,
       :error_code,
       :error_message,
@@ -3164,6 +3254,7 @@ module Aws::Firehose
     #   <p>The record.</p>
     #   @return [Types::Record]
     class PutRecordInput < Struct.new(
+      nil,
       :delivery_stream_name,
       :record,
       keyword_init: true
@@ -3178,6 +3269,7 @@ module Aws::Firehose
     #   <p>Indicates whether server-side encryption (SSE) was enabled during this operation.</p>
     #   @return [Boolean]
     class PutRecordOutput < Struct.new(
+      nil,
       :record_id,
       :encrypted,
       keyword_init: true
@@ -3191,6 +3283,7 @@ module Aws::Firehose
     #            of the data blob, before base64-encoding, is 1,000 KiB.</p>
     #   @return [String]
     class Record < Struct.new(
+      nil,
       :data,
       keyword_init: true
     )
@@ -3247,6 +3340,7 @@ module Aws::Firehose
     #         </p>
     #   @return [Types::SecretsManagerConfiguration]
     class RedshiftDestinationConfiguration < Struct.new(
+      nil,
       :role_arn,
       :cluster_jdbcurl,
       :copy_command,
@@ -3304,6 +3398,7 @@ module Aws::Firehose
     #         </p>
     #   @return [Types::SecretsManagerConfiguration]
     class RedshiftDestinationDescription < Struct.new(
+      nil,
       :role_arn,
       :cluster_jdbcurl,
       :copy_command,
@@ -3368,6 +3463,7 @@ module Aws::Firehose
     #         </p>
     #   @return [Types::SecretsManagerConfiguration]
     class RedshiftDestinationUpdate < Struct.new(
+      nil,
       :role_arn,
       :cluster_jdbcurl,
       :copy_command,
@@ -3395,6 +3491,7 @@ module Aws::Firehose
     #            than the current value.</p>
     #   @return [Integer]
     class RedshiftRetryOptions < Struct.new(
+      nil,
       :duration_in_seconds,
       keyword_init: true
     )
@@ -3406,6 +3503,7 @@ module Aws::Firehose
     #   <p>A message that provides information about the error.</p>
     #   @return [String]
     class ResourceInUseException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -3417,6 +3515,7 @@ module Aws::Firehose
     #   <p>A message that provides information about the error.</p>
     #   @return [String]
     class ResourceNotFoundException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -3429,6 +3528,7 @@ module Aws::Firehose
     #            specified destination.</p>
     #   @return [Integer]
     class RetryOptions < Struct.new(
+      nil,
       :duration_in_seconds,
       keyword_init: true
     )
@@ -3475,6 +3575,7 @@ module Aws::Firehose
     #   <p>The CloudWatch logging options for your Firehose stream.</p>
     #   @return [Types::CloudWatchLoggingOptions]
     class S3DestinationConfiguration < Struct.new(
+      nil,
       :role_arn,
       :bucket_arn,
       :prefix,
@@ -3525,6 +3626,7 @@ module Aws::Firehose
     #   <p>The Amazon CloudWatch logging options for your Firehose stream.</p>
     #   @return [Types::CloudWatchLoggingOptions]
     class S3DestinationDescription < Struct.new(
+      nil,
       :role_arn,
       :bucket_arn,
       :prefix,
@@ -3578,6 +3680,7 @@ module Aws::Firehose
     #   <p>The CloudWatch logging options for your Firehose stream.</p>
     #   @return [Types::CloudWatchLoggingOptions]
     class S3DestinationUpdate < Struct.new(
+      nil,
       :role_arn,
       :bucket_arn,
       :prefix,
@@ -3637,6 +3740,7 @@ module Aws::Firehose
     #            up.</p>
     #   @return [String]
     class SchemaConfiguration < Struct.new(
+      nil,
       :role_arn,
       :catalog_id,
       :database_name,
@@ -3657,6 +3761,7 @@ module Aws::Firehose
     #            <p>Amazon Data Firehose is in preview release and is subject to change.</p>
     #   @return [Boolean]
     class SchemaEvolutionConfiguration < Struct.new(
+      nil,
       :enabled,
       keyword_init: true
     )
@@ -3680,6 +3785,7 @@ module Aws::Firehose
     #            the credentials in the destination configuration.</p>
     #   @return [Boolean]
     class SecretsManagerConfiguration < Struct.new(
+      nil,
       :secret_arn,
       :role_arn,
       :enabled,
@@ -3701,6 +3807,7 @@ module Aws::Firehose
     #            ORC</a>.</p>
     #   @return [Types::OrcSerDe]
     class Serializer < Struct.new(
+      nil,
       :parquet_ser_de,
       :orc_ser_de,
       keyword_init: true
@@ -3716,6 +3823,7 @@ module Aws::Firehose
     #   <p>A message that provides information about the error.</p>
     #   @return [String]
     class ServiceUnavailableException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -3735,6 +3843,7 @@ module Aws::Firehose
     #         </p>
     #   @return [Integer]
     class SnowflakeBufferingHints < Struct.new(
+      nil,
       :size_in_m_bs,
       :interval_in_seconds,
       keyword_init: true
@@ -3824,6 +3933,7 @@ module Aws::Firehose
     #         </p>
     #   @return [Types::SnowflakeBufferingHints]
     class SnowflakeDestinationConfiguration < Struct.new(
+      nil,
       :account_url,
       :private_key,
       :key_passphrase,
@@ -3912,6 +4022,7 @@ module Aws::Firehose
     #         </p>
     #   @return [Types::SnowflakeBufferingHints]
     class SnowflakeDestinationDescription < Struct.new(
+      nil,
       :account_url,
       :user,
       :database,
@@ -4008,6 +4119,7 @@ module Aws::Firehose
     #         </p>
     #   @return [Types::SnowflakeBufferingHints]
     class SnowflakeDestinationUpdate < Struct.new(
+      nil,
       :account_url,
       :private_key,
       :key_passphrase,
@@ -4045,6 +4157,7 @@ module Aws::Firehose
     #   <p>the time period where Firehose will retry sending data to the chosen HTTP endpoint.</p>
     #   @return [Integer]
     class SnowflakeRetryOptions < Struct.new(
+      nil,
       :duration_in_seconds,
       keyword_init: true
     )
@@ -4059,6 +4172,7 @@ module Aws::Firehose
     #   <p>The Snowflake role you wish to configure</p>
     #   @return [String]
     class SnowflakeRoleConfiguration < Struct.new(
+      nil,
       :enabled,
       :snowflake_role,
       keyword_init: true
@@ -4073,6 +4187,7 @@ module Aws::Firehose
     #            </p>
     #   @return [String]
     class SnowflakeVpcConfiguration < Struct.new(
+      nil,
       :private_link_vpce_id,
       keyword_init: true
     )
@@ -4098,6 +4213,7 @@ module Aws::Firehose
     #            <p>Amazon Data Firehose is in preview release and is subject to change.</p>
     #   @return [Types::DatabaseSourceDescription]
     class SourceDescription < Struct.new(
+      nil,
       :direct_put_source_description,
       :kinesis_stream_source_description,
       :msk_source_description,
@@ -4117,6 +4233,7 @@ module Aws::Firehose
     #            </p>
     #   @return [Integer]
     class SplunkBufferingHints < Struct.new(
+      nil,
       :interval_in_seconds,
       :size_in_m_bs,
       keyword_init: true
@@ -4174,6 +4291,7 @@ module Aws::Firehose
     #         </p>
     #   @return [Types::SecretsManagerConfiguration]
     class SplunkDestinationConfiguration < Struct.new(
+      nil,
       :hec_endpoint,
       :hec_endpoint_type,
       :hec_token,
@@ -4237,6 +4355,7 @@ module Aws::Firehose
     #         </p>
     #   @return [Types::SecretsManagerConfiguration]
     class SplunkDestinationDescription < Struct.new(
+      nil,
       :hec_endpoint,
       :hec_endpoint_type,
       :hec_token,
@@ -4303,6 +4422,7 @@ module Aws::Firehose
     #         </p>
     #   @return [Types::SecretsManagerConfiguration]
     class SplunkDestinationUpdate < Struct.new(
+      nil,
       :hec_endpoint,
       :hec_endpoint_type,
       :hec_token,
@@ -4328,6 +4448,7 @@ module Aws::Firehose
     #            attempt.</p>
     #   @return [Integer]
     class SplunkRetryOptions < Struct.new(
+      nil,
       :duration_in_seconds,
       keyword_init: true
     )
@@ -4343,6 +4464,7 @@ module Aws::Firehose
     #            Server-Side Encryption (SSE).</p>
     #   @return [Types::DeliveryStreamEncryptionConfigurationInput]
     class StartDeliveryStreamEncryptionInput < Struct.new(
+      nil,
       :delivery_stream_name,
       :delivery_stream_encryption_configuration_input,
       keyword_init: true
@@ -4351,6 +4473,7 @@ module Aws::Firehose
     end
 
     class StartDeliveryStreamEncryptionOutput < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -4361,6 +4484,7 @@ module Aws::Firehose
     #            (SSE).</p>
     #   @return [String]
     class StopDeliveryStreamEncryptionInput < Struct.new(
+      nil,
       :delivery_stream_name,
       keyword_init: true
     )
@@ -4368,6 +4492,7 @@ module Aws::Firehose
     end
 
     class StopDeliveryStreamEncryptionOutput < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -4382,6 +4507,7 @@ module Aws::Firehose
     #            <p>Amazon Data Firehose is in preview release and is subject to change.</p>
     #   @return [Boolean]
     class TableCreationConfiguration < Struct.new(
+      nil,
       :enabled,
       keyword_init: true
     )
@@ -4400,6 +4526,7 @@ module Aws::Firehose
     #            @</p>
     #   @return [String]
     class Tag < Struct.new(
+      nil,
       :key,
       :value,
       keyword_init: true
@@ -4414,6 +4541,7 @@ module Aws::Firehose
     #   <p>A set of key-value pairs to use to create the tags.</p>
     #   @return [Array<Types::Tag>]
     class TagDeliveryStreamInput < Struct.new(
+      nil,
       :delivery_stream_name,
       :tags,
       keyword_init: true
@@ -4422,6 +4550,7 @@ module Aws::Firehose
     end
 
     class TagDeliveryStreamOutput < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -4435,6 +4564,7 @@ module Aws::Firehose
     #            stream.</p>
     #   @return [Array<String>]
     class UntagDeliveryStreamInput < Struct.new(
+      nil,
       :delivery_stream_name,
       :tag_keys,
       keyword_init: true
@@ -4443,6 +4573,7 @@ module Aws::Firehose
     end
 
     class UntagDeliveryStreamOutput < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -4496,6 +4627,7 @@ module Aws::Firehose
     #         </p>
     #   @return [Types::IcebergDestinationUpdate]
     class UpdateDestinationInput < Struct.new(
+      nil,
       :delivery_stream_name,
       :current_delivery_stream_version_id,
       :destination_id,
@@ -4515,6 +4647,7 @@ module Aws::Firehose
     end
 
     class UpdateDestinationOutput < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -4599,6 +4732,7 @@ module Aws::Firehose
     #               rules</a> in the Amazon VPC documentation.</p>
     #   @return [Array<String>]
     class VpcConfiguration < Struct.new(
+      nil,
       :subnet_ids,
       :role_arn,
       :security_group_ids,
@@ -4686,6 +4820,7 @@ module Aws::Firehose
     #   <p>The ID of the Amazon OpenSearch Service destination's VPC.</p>
     #   @return [String]
     class VpcConfigurationDescription < Struct.new(
+      nil,
       :subnet_ids,
       :role_arn,
       :security_group_ids,

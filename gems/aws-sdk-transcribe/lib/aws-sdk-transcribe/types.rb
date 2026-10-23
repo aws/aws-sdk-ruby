@@ -39,6 +39,7 @@ module Aws::Transcribe
     #               Amazon Transcribe searches for your specified criteria in this time segment.</p>
     #   @return [Integer]
     class AbsoluteTimeRange < Struct.new(
+      nil,
       :start_time,
       :end_time,
       :first,
@@ -55,6 +56,7 @@ module Aws::Transcribe
     # @!attribute message
     #   @return [String]
     class BadRequestException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -202,6 +204,7 @@ module Aws::Transcribe
     #               call analytics job.</p>
     #   @return [Array<Types::Tag>]
     class CallAnalyticsJob < Struct.new(
+      nil,
       :call_analytics_job_name,
       :call_analytics_job_status,
       :call_analytics_job_details,
@@ -230,6 +233,7 @@ module Aws::Transcribe
     #            <p>This array lists all the analytics features that were skipped, along with their corresponding reason code and message.</p>
     #   @return [Array<Types::CallAnalyticsSkippedFeature>]
     class CallAnalyticsJobDetails < Struct.new(
+      nil,
       :skipped,
       keyword_init: true
     )
@@ -313,6 +317,7 @@ module Aws::Transcribe
     #   	    want to enable Generative call summarization in your Call Analytics request.</p>
     #   @return [Types::Summarization]
     class CallAnalyticsJobSettings < Struct.new(
+      nil,
       :vocabulary_name,
       :vocabulary_filter_name,
       :vocabulary_filter_method,
@@ -369,6 +374,7 @@ module Aws::Transcribe
     #               failed. See also: <a href="https://docs.aws.amazon.com/transcribe/latest/APIReference/CommonErrors.html">Common Errors</a>.</p>
     #   @return [String]
     class CallAnalyticsJobSummary < Struct.new(
+      nil,
       :call_analytics_job_name,
       :creation_time,
       :start_time,
@@ -396,6 +402,7 @@ module Aws::Transcribe
     #   <p>Contains additional information or a message explaining why a specific analytics feature was skipped during the analysis of a call analytics job.</p>
     #   @return [String]
     class CallAnalyticsSkippedFeature < Struct.new(
+      nil,
       :feature,
       :reason_code,
       :message,
@@ -436,6 +443,7 @@ module Aws::Transcribe
     #               refers to a category that is applied to streaming transcriptions.</p>
     #   @return [String]
     class CategoryProperties < Struct.new(
+      nil,
       :category_name,
       :rules,
       :create_time,
@@ -459,6 +467,7 @@ module Aws::Transcribe
     #               specifying both participants.</p>
     #   @return [String]
     class ChannelDefinition < Struct.new(
+      nil,
       :channel_id,
       :participant_role,
       keyword_init: true
@@ -501,6 +510,7 @@ module Aws::Transcribe
     #            </ul>
     #   @return [String]
     class ClinicalNoteGenerationSettings < Struct.new(
+      nil,
       :note_template,
       keyword_init: true
     )
@@ -512,6 +522,7 @@ module Aws::Transcribe
     # @!attribute message
     #   @return [String]
     class ConflictException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -545,6 +556,7 @@ module Aws::Transcribe
     #               redacted.</p>
     #   @return [Array<String>]
     class ContentRedaction < Struct.new(
+      nil,
       :redaction_type,
       :redaction_output,
       :pii_entity_types,
@@ -584,6 +596,7 @@ module Aws::Transcribe
     #               category by default.</p>
     #   @return [String]
     class CreateCallAnalyticsCategoryRequest < Struct.new(
+      nil,
       :category_name,
       :rules,
       :tags,
@@ -598,6 +611,7 @@ module Aws::Transcribe
     #               rules.</p>
     #   @return [Types::CategoryProperties]
     class CreateCallAnalyticsCategoryResponse < Struct.new(
+      nil,
       :category_properties,
       keyword_init: true
     )
@@ -649,6 +663,7 @@ module Aws::Transcribe
     #                   resources</a>.</p>
     #   @return [Array<Types::Tag>]
     class CreateLanguageModelRequest < Struct.new(
+      nil,
       :language_code,
       :base_model_name,
       :model_name,
@@ -679,6 +694,7 @@ module Aws::Transcribe
     #                   <code>COMPLETED</code>, your model is ready to use.</p>
     #   @return [String]
     class CreateLanguageModelResponse < Struct.new(
+      nil,
       :language_code,
       :base_model_name,
       :model_name,
@@ -715,6 +731,7 @@ module Aws::Transcribe
     #                   resources</a>.</p>
     #   @return [Array<Types::Tag>]
     class CreateMedicalVocabularyRequest < Struct.new(
+      nil,
       :vocabulary_name,
       :language_code,
       :vocabulary_file_uri,
@@ -749,6 +766,7 @@ module Aws::Transcribe
     #                   <a href="https://docs.aws.amazon.com/transcribe/latest/APIReference/CommonErrors.html">Common Errors</a>.</p>
     #   @return [String]
     class CreateMedicalVocabularyResponse < Struct.new(
+      nil,
       :vocabulary_name,
       :language_code,
       :vocabulary_state,
@@ -817,6 +835,7 @@ module Aws::Transcribe
     #               ARNs</a>.</p>
     #   @return [String]
     class CreateVocabularyFilterRequest < Struct.new(
+      nil,
       :vocabulary_filter_name,
       :language_code,
       :words,
@@ -841,6 +860,7 @@ module Aws::Transcribe
     #               4, 2022.</p>
     #   @return [Time]
     class CreateVocabularyFilterResponse < Struct.new(
+      nil,
       :vocabulary_filter_name,
       :language_code,
       :last_modified_time,
@@ -907,6 +927,7 @@ module Aws::Transcribe
     #               ARNs</a>.</p>
     #   @return [String]
     class CreateVocabularyRequest < Struct.new(
+      nil,
       :vocabulary_name,
       :language_code,
       :phrases,
@@ -941,6 +962,7 @@ module Aws::Transcribe
     #                   Errors</a>.</p>
     #   @return [String]
     class CreateVocabularyResponse < Struct.new(
+      nil,
       :vocabulary_name,
       :language_code,
       :vocabulary_state,
@@ -956,6 +978,7 @@ module Aws::Transcribe
     #               sensitive.</p>
     #   @return [String]
     class DeleteCallAnalyticsCategoryRequest < Struct.new(
+      nil,
       :category_name,
       keyword_init: true
     )
@@ -963,6 +986,7 @@ module Aws::Transcribe
     end
 
     class DeleteCallAnalyticsCategoryResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -973,6 +997,7 @@ module Aws::Transcribe
     #               sensitive.</p>
     #   @return [String]
     class DeleteCallAnalyticsJobRequest < Struct.new(
+      nil,
       :call_analytics_job_name,
       keyword_init: true
     )
@@ -980,6 +1005,7 @@ module Aws::Transcribe
     end
 
     class DeleteCallAnalyticsJobResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -990,6 +1016,7 @@ module Aws::Transcribe
     #               sensitive.</p>
     #   @return [String]
     class DeleteLanguageModelRequest < Struct.new(
+      nil,
       :model_name,
       keyword_init: true
     )
@@ -1001,6 +1028,7 @@ module Aws::Transcribe
     #               sensitive.</p>
     #   @return [String]
     class DeleteMedicalScribeJobRequest < Struct.new(
+      nil,
       :medical_scribe_job_name,
       keyword_init: true
     )
@@ -1012,6 +1040,7 @@ module Aws::Transcribe
     #               sensitive.</p>
     #   @return [String]
     class DeleteMedicalTranscriptionJobRequest < Struct.new(
+      nil,
       :medical_transcription_job_name,
       keyword_init: true
     )
@@ -1023,6 +1052,7 @@ module Aws::Transcribe
     #               vocabulary names are case sensitive.</p>
     #   @return [String]
     class DeleteMedicalVocabularyRequest < Struct.new(
+      nil,
       :vocabulary_name,
       keyword_init: true
     )
@@ -1034,6 +1064,7 @@ module Aws::Transcribe
     #               sensitive.</p>
     #   @return [String]
     class DeleteTranscriptionJobRequest < Struct.new(
+      nil,
       :transcription_job_name,
       keyword_init: true
     )
@@ -1045,6 +1076,7 @@ module Aws::Transcribe
     #               names are case sensitive.</p>
     #   @return [String]
     class DeleteVocabularyFilterRequest < Struct.new(
+      nil,
       :vocabulary_filter_name,
       keyword_init: true
     )
@@ -1056,6 +1088,7 @@ module Aws::Transcribe
     #               sensitive.</p>
     #   @return [String]
     class DeleteVocabularyRequest < Struct.new(
+      nil,
       :vocabulary_name,
       keyword_init: true
     )
@@ -1067,6 +1100,7 @@ module Aws::Transcribe
     #               sensitive.</p>
     #   @return [String]
     class DescribeLanguageModelRequest < Struct.new(
+      nil,
       :model_name,
       keyword_init: true
     )
@@ -1083,6 +1117,7 @@ module Aws::Transcribe
     #               failure.</p>
     #   @return [Types::LanguageModel]
     class DescribeLanguageModelResponse < Struct.new(
+      nil,
       :language_model,
       keyword_init: true
     )
@@ -1094,6 +1129,7 @@ module Aws::Transcribe
     #               case sensitive.</p>
     #   @return [String]
     class GetCallAnalyticsCategoryRequest < Struct.new(
+      nil,
       :category_name,
       keyword_init: true
     )
@@ -1105,6 +1141,7 @@ module Aws::Transcribe
     #                   <code>GetCallAnalyticsCategory</code> request.</p>
     #   @return [Types::CategoryProperties]
     class GetCallAnalyticsCategoryResponse < Struct.new(
+      nil,
       :category_properties,
       keyword_init: true
     )
@@ -1116,6 +1153,7 @@ module Aws::Transcribe
     #               sensitive.</p>
     #   @return [String]
     class GetCallAnalyticsJobRequest < Struct.new(
+      nil,
       :call_analytics_job_name,
       keyword_init: true
     )
@@ -1127,6 +1165,7 @@ module Aws::Transcribe
     #               status and, if applicable, failure reason.</p>
     #   @return [Types::CallAnalyticsJob]
     class GetCallAnalyticsJobResponse < Struct.new(
+      nil,
       :call_analytics_job,
       keyword_init: true
     )
@@ -1138,6 +1177,7 @@ module Aws::Transcribe
     #               case sensitive.</p>
     #   @return [String]
     class GetMedicalScribeJobRequest < Struct.new(
+      nil,
       :medical_scribe_job_name,
       keyword_init: true
     )
@@ -1149,6 +1189,7 @@ module Aws::Transcribe
     #               job status and, if applicable, failure reason</p>
     #   @return [Types::MedicalScribeJob]
     class GetMedicalScribeJobResponse < Struct.new(
+      nil,
       :medical_scribe_job,
       keyword_init: true
     )
@@ -1160,6 +1201,7 @@ module Aws::Transcribe
     #               case sensitive.</p>
     #   @return [String]
     class GetMedicalTranscriptionJobRequest < Struct.new(
+      nil,
       :medical_transcription_job_name,
       keyword_init: true
     )
@@ -1171,6 +1213,7 @@ module Aws::Transcribe
     #               job status and, if applicable, failure reason.</p>
     #   @return [Types::MedicalTranscriptionJob]
     class GetMedicalTranscriptionJobResponse < Struct.new(
+      nil,
       :medical_transcription_job,
       keyword_init: true
     )
@@ -1182,6 +1225,7 @@ module Aws::Transcribe
     #               vocabulary names are case sensitive.</p>
     #   @return [String]
     class GetMedicalVocabularyRequest < Struct.new(
+      nil,
       :vocabulary_name,
       keyword_init: true
     )
@@ -1217,6 +1261,7 @@ module Aws::Transcribe
     #               to view or download the custom vocabulary.</p>
     #   @return [String]
     class GetMedicalVocabularyResponse < Struct.new(
+      nil,
       :vocabulary_name,
       :language_code,
       :vocabulary_state,
@@ -1233,6 +1278,7 @@ module Aws::Transcribe
     #               sensitive.</p>
     #   @return [String]
     class GetTranscriptionJobRequest < Struct.new(
+      nil,
       :transcription_job_name,
       keyword_init: true
     )
@@ -1244,6 +1290,7 @@ module Aws::Transcribe
     #               status and, if applicable, failure reason.</p>
     #   @return [Types::TranscriptionJob]
     class GetTranscriptionJobResponse < Struct.new(
+      nil,
       :transcription_job,
       keyword_init: true
     )
@@ -1255,6 +1302,7 @@ module Aws::Transcribe
     #               filter names are case sensitive.</p>
     #   @return [String]
     class GetVocabularyFilterRequest < Struct.new(
+      nil,
       :vocabulary_filter_name,
       keyword_init: true
     )
@@ -1278,6 +1326,7 @@ module Aws::Transcribe
     #               URI to view or download the custom vocabulary filter.</p>
     #   @return [String]
     class GetVocabularyFilterResponse < Struct.new(
+      nil,
       :vocabulary_filter_name,
       :language_code,
       :last_modified_time,
@@ -1292,6 +1341,7 @@ module Aws::Transcribe
     #               are case sensitive.</p>
     #   @return [String]
     class GetVocabularyRequest < Struct.new(
+      nil,
       :vocabulary_name,
       keyword_init: true
     )
@@ -1325,6 +1375,7 @@ module Aws::Transcribe
     #               download the custom vocabulary.</p>
     #   @return [String]
     class GetVocabularyResponse < Struct.new(
+      nil,
       :vocabulary_name,
       :language_code,
       :vocabulary_state,
@@ -1367,6 +1418,7 @@ module Aws::Transcribe
     #                   ARNs</a>.</p>
     #   @return [String]
     class InputDataConfig < Struct.new(
+      nil,
       :s3_uri,
       :tuning_data_s3_uri,
       :data_access_role_arn,
@@ -1380,6 +1432,7 @@ module Aws::Transcribe
     # @!attribute message
     #   @return [String]
     class InternalFailureException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -1426,6 +1479,7 @@ module Aws::Transcribe
     #                   <code>FALSE</code> to flag speech that contains interruptions.</p>
     #   @return [Boolean]
     class InterruptionFilter < Struct.new(
+      nil,
       :threshold,
       :participant_role,
       :absolute_time_range,
@@ -1465,6 +1519,7 @@ module Aws::Transcribe
     #               include <code>AllowDeferredExecution</code>.</p>
     #   @return [String]
     class JobExecutionSettings < Struct.new(
+      nil,
       :allow_deferred_execution,
       :data_access_role_arn,
       keyword_init: true
@@ -1484,6 +1539,7 @@ module Aws::Transcribe
     #               media.</p>
     #   @return [Float]
     class LanguageCodeItem < Struct.new(
+      nil,
       :language_code,
       :duration_in_seconds,
       keyword_init: true
@@ -1546,6 +1602,7 @@ module Aws::Transcribe
     #               mismatch.</p>
     #   @return [String]
     class LanguageIdSettings < Struct.new(
+      nil,
       :vocabulary_name,
       :vocabulary_filter_name,
       :language_model_name,
@@ -1636,6 +1693,7 @@ module Aws::Transcribe
     #               permissions to access these data.</p>
     #   @return [Types::InputDataConfig]
     class LanguageModel < Struct.new(
+      nil,
       :model_name,
       :create_time,
       :last_modified_time,
@@ -1655,6 +1713,7 @@ module Aws::Transcribe
     # @!attribute message
     #   @return [String]
     class LimitExceededException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -1674,6 +1733,7 @@ module Aws::Transcribe
     #               returned. If you do not specify a value, a default of 5 is used.</p>
     #   @return [Integer]
     class ListCallAnalyticsCategoriesRequest < Struct.new(
+      nil,
       :next_token,
       :max_results,
       keyword_init: true
@@ -1693,6 +1753,7 @@ module Aws::Transcribe
     #               rules associated with each category.</p>
     #   @return [Array<Types::CategoryProperties>]
     class ListCallAnalyticsCategoriesResponse < Struct.new(
+      nil,
       :next_token,
       :categories,
       keyword_init: true
@@ -1722,6 +1783,7 @@ module Aws::Transcribe
     #               If you do not specify a value, a default of 5 is used.</p>
     #   @return [Integer]
     class ListCallAnalyticsJobsRequest < Struct.new(
+      nil,
       :status,
       :job_name_contains,
       :next_token,
@@ -1746,6 +1808,7 @@ module Aws::Transcribe
     #   <p>Provides a summary of information about each result.</p>
     #   @return [Array<Types::CallAnalyticsJobSummary>]
     class ListCallAnalyticsJobsResponse < Struct.new(
+      nil,
       :status,
       :next_token,
       :call_analytics_job_summaries,
@@ -1776,6 +1839,7 @@ module Aws::Transcribe
     #               returned. If you do not specify a value, a default of 5 is used.</p>
     #   @return [Integer]
     class ListLanguageModelsRequest < Struct.new(
+      nil,
       :status_equals,
       :name_contains,
       :next_token,
@@ -1797,6 +1861,7 @@ module Aws::Transcribe
     #               specified in your request.</p>
     #   @return [Array<Types::LanguageModel>]
     class ListLanguageModelsResponse < Struct.new(
+      nil,
       :next_token,
       :models,
       keyword_init: true
@@ -1826,6 +1891,7 @@ module Aws::Transcribe
     #               returned. If you do not specify a value, a default of 5 is used.</p>
     #   @return [Integer]
     class ListMedicalScribeJobsRequest < Struct.new(
+      nil,
       :status,
       :job_name_contains,
       :next_token,
@@ -1850,6 +1916,7 @@ module Aws::Transcribe
     #   <p>Provides a summary of information about each result.</p>
     #   @return [Array<Types::MedicalScribeJobSummary>]
     class ListMedicalScribeJobsResponse < Struct.new(
+      nil,
       :status,
       :next_token,
       :medical_scribe_job_summaries,
@@ -1880,6 +1947,7 @@ module Aws::Transcribe
     #               returned. If you do not specify a value, a default of 5 is used.</p>
     #   @return [Integer]
     class ListMedicalTranscriptionJobsRequest < Struct.new(
+      nil,
       :status,
       :job_name_contains,
       :next_token,
@@ -1904,6 +1972,7 @@ module Aws::Transcribe
     #   <p>Provides a summary of information about each result.</p>
     #   @return [Array<Types::MedicalTranscriptionJobSummary>]
     class ListMedicalTranscriptionJobsResponse < Struct.new(
+      nil,
       :status,
       :next_token,
       :medical_transcription_job_summaries,
@@ -1934,6 +2003,7 @@ module Aws::Transcribe
     #               search is not case sensitive.</p>
     #   @return [String]
     class ListMedicalVocabulariesRequest < Struct.new(
+      nil,
       :next_token,
       :max_results,
       :state_equals,
@@ -1960,6 +2030,7 @@ module Aws::Transcribe
     #               specified in your request.</p>
     #   @return [Array<Types::VocabularyInfo>]
     class ListMedicalVocabulariesResponse < Struct.new(
+      nil,
       :status,
       :next_token,
       :vocabularies,
@@ -1980,6 +2051,7 @@ module Aws::Transcribe
     #                   <code>language-model</code>.</p>
     #   @return [String]
     class ListTagsForResourceRequest < Struct.new(
+      nil,
       :resource_arn,
       keyword_init: true
     )
@@ -1994,6 +2066,7 @@ module Aws::Transcribe
     #               resource.</p>
     #   @return [Array<Types::Tag>]
     class ListTagsForResourceResponse < Struct.new(
+      nil,
       :resource_arn,
       :tags,
       keyword_init: true
@@ -2023,6 +2096,7 @@ module Aws::Transcribe
     #               If you do not specify a value, a default of 5 is used.</p>
     #   @return [Integer]
     class ListTranscriptionJobsRequest < Struct.new(
+      nil,
       :status,
       :job_name_contains,
       :next_token,
@@ -2047,6 +2121,7 @@ module Aws::Transcribe
     #   <p>Provides a summary of information about each result.</p>
     #   @return [Array<Types::TranscriptionJobSummary>]
     class ListTranscriptionJobsResponse < Struct.new(
+      nil,
       :status,
       :next_token,
       :transcription_job_summaries,
@@ -2077,6 +2152,7 @@ module Aws::Transcribe
     #               not case sensitive.</p>
     #   @return [String]
     class ListVocabulariesRequest < Struct.new(
+      nil,
       :next_token,
       :max_results,
       :state_equals,
@@ -2102,6 +2178,7 @@ module Aws::Transcribe
     #               in your request.</p>
     #   @return [Array<Types::VocabularyInfo>]
     class ListVocabulariesResponse < Struct.new(
+      nil,
       :status,
       :next_token,
       :vocabularies,
@@ -2127,6 +2204,7 @@ module Aws::Transcribe
     #               search is not case sensitive.</p>
     #   @return [String]
     class ListVocabularyFiltersRequest < Struct.new(
+      nil,
       :next_token,
       :max_results,
       :name_contains,
@@ -2147,6 +2225,7 @@ module Aws::Transcribe
     #               specified in your request.</p>
     #   @return [Array<Types::VocabularyFilterInfo>]
     class ListVocabularyFiltersResponse < Struct.new(
+      nil,
       :next_token,
       :vocabulary_filters,
       keyword_init: true
@@ -2204,6 +2283,7 @@ module Aws::Transcribe
     #            </important>
     #   @return [String]
     class Media < Struct.new(
+      nil,
       :media_file_uri,
       :redacted_media_file_uri,
       keyword_init: true
@@ -2223,6 +2303,7 @@ module Aws::Transcribe
     #            </p>
     #   @return [String]
     class MedicalScribeChannelDefinition < Struct.new(
+      nil,
       :channel_id,
       :participant_role,
       keyword_init: true
@@ -2241,6 +2322,7 @@ module Aws::Transcribe
     #   <p>Contains patient-specific information.</p>
     #   @return [Types::MedicalScribePatientContext]
     class MedicalScribeContext < Struct.new(
+      nil,
       :patient_context,
       keyword_init: true
     )
@@ -2344,6 +2426,7 @@ module Aws::Transcribe
     #                   resources</a>.</p>
     #   @return [Array<Types::Tag>]
     class MedicalScribeJob < Struct.new(
+      nil,
       :medical_scribe_job_name,
       :medical_scribe_job_status,
       :language_code,
@@ -2403,6 +2486,7 @@ module Aws::Transcribe
     #               failed. See also: <a href="https://docs.aws.amazon.com/transcribe/latest/APIReference/CommonErrors.html">Common Errors</a>.</p>
     #   @return [String]
     class MedicalScribeJobSummary < Struct.new(
+      nil,
       :medical_scribe_job_name,
       :creation_time,
       :start_time,
@@ -2425,6 +2509,7 @@ module Aws::Transcribe
     #   <p>Holds the Amazon S3 URI for the Clinical Document.</p>
     #   @return [String]
     class MedicalScribeOutput < Struct.new(
+      nil,
       :transcript_file_uri,
       :clinical_document_uri,
       keyword_init: true
@@ -2437,6 +2522,7 @@ module Aws::Transcribe
     #   <p>The patient's preferred pronouns that the user wants to provide as a context for clinical note generation.</p>
     #   @return [String]
     class MedicalScribePatientContext < Struct.new(
+      nil,
       :pronouns,
       keyword_init: true
     )
@@ -2493,6 +2579,7 @@ module Aws::Transcribe
     #   <p>Specify settings for the clinical note generation.</p>
     #   @return [Types::ClinicalNoteGenerationSettings]
     class MedicalScribeSettings < Struct.new(
+      nil,
       :show_speaker_labels,
       :max_speaker_labels,
       :channel_identification,
@@ -2514,6 +2601,7 @@ module Aws::Transcribe
     #               <code>OutputBucketName</code> parameter.</p>
     #   @return [String]
     class MedicalTranscript < Struct.new(
+      nil,
       :transcript_file_uri,
       keyword_init: true
     )
@@ -2650,6 +2738,7 @@ module Aws::Transcribe
     #               transcription job.</p>
     #   @return [Array<Types::Tag>]
     class MedicalTranscriptionJob < Struct.new(
+      nil,
       :medical_transcription_job_name,
       :transcription_job_status,
       :language_code,
@@ -2732,6 +2821,7 @@ module Aws::Transcribe
     #               the <code>StartMedicalTranscriptionJob</code> request.</p>
     #   @return [String]
     class MedicalTranscriptionJobSummary < Struct.new(
+      nil,
       :medical_transcription_job_name,
       :creation_time,
       :start_time,
@@ -2805,6 +2895,7 @@ module Aws::Transcribe
     #               mismatch. US English (<code>en-US</code>) is the only valid language for Amazon Transcribe Medical.</p>
     #   @return [String]
     class MedicalTranscriptionSetting < Struct.new(
+      nil,
       :show_speaker_labels,
       :max_speaker_labels,
       :channel_identification,
@@ -2832,6 +2923,7 @@ module Aws::Transcribe
     #               mismatch.</p>
     #   @return [String]
     class ModelSettings < Struct.new(
+      nil,
       :language_model_name,
       keyword_init: true
     )
@@ -2868,6 +2960,7 @@ module Aws::Transcribe
     #               periods of silence</p>
     #   @return [Boolean]
     class NonTalkTimeFilter < Struct.new(
+      nil,
       :threshold,
       :absolute_time_range,
       :relative_time_range,
@@ -2882,6 +2975,7 @@ module Aws::Transcribe
     # @!attribute message
     #   @return [String]
     class NotFoundException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -2919,6 +3013,7 @@ module Aws::Transcribe
     #               Amazon Transcribe searches for your specified criteria in this time segment.</p>
     #   @return [Integer]
     class RelativeTimeRange < Struct.new(
+      nil,
       :start_percentage,
       :end_percentage,
       :first,
@@ -3016,6 +3111,7 @@ module Aws::Transcribe
     #               request.</p>
     #   @return [Boolean]
     class SentimentFilter < Struct.new(
+      nil,
       :sentiments,
       :absolute_time_range,
       :relative_time_range,
@@ -3093,6 +3189,7 @@ module Aws::Transcribe
     #            <p>To flag words without changing them, choose <code>tag</code>.</p>
     #   @return [String]
     class Settings < Struct.new(
+      nil,
       :vocabulary_name,
       :show_speaker_labels,
       :max_speaker_labels,
@@ -3212,6 +3309,7 @@ module Aws::Transcribe
     #                   <code>AGENT</code> (to indicate that it's the agent speaking).</p>
     #   @return [Array<Types::ChannelDefinition>]
     class StartCallAnalyticsJobRequest < Struct.new(
+      nil,
       :call_analytics_job_name,
       :media,
       :output_location,
@@ -3230,6 +3328,7 @@ module Aws::Transcribe
     #               status and, if applicable, failure reason.</p>
     #   @return [Types::CallAnalyticsJob]
     class StartCallAnalyticsJobResponse < Struct.new(
+      nil,
       :call_analytics_job,
       keyword_init: true
     )
@@ -3345,6 +3444,7 @@ module Aws::Transcribe
     #               clinical note generation to add relevant context to the note.</p>
     #   @return [Types::MedicalScribeContext]
     class StartMedicalScribeJobRequest < Struct.new(
+      nil,
       :medical_scribe_job_name,
       :media,
       :output_bucket_name,
@@ -3365,6 +3465,7 @@ module Aws::Transcribe
     #               job status and, if applicable, failure reason.</p>
     #   @return [Types::MedicalScribeJob]
     class StartMedicalScribeJobResponse < Struct.new(
+      nil,
       :medical_scribe_job,
       keyword_init: true
     )
@@ -3532,6 +3633,7 @@ module Aws::Transcribe
     #                   resources</a>.</p>
     #   @return [Array<Types::Tag>]
     class StartMedicalTranscriptionJobRequest < Struct.new(
+      nil,
       :medical_transcription_job_name,
       :language_code,
       :media_sample_rate_hertz,
@@ -3556,6 +3658,7 @@ module Aws::Transcribe
     #               job status and, if applicable, failure reason.</p>
     #   @return [Types::MedicalTranscriptionJob]
     class StartMedicalTranscriptionJobResponse < Struct.new(
+      nil,
       :medical_transcription_job,
       keyword_init: true
     )
@@ -3838,6 +3941,7 @@ module Aws::Transcribe
     #                   speech</a>.</p>
     #   @return [Array<Types::ToxicityDetectionSettings>]
     class StartTranscriptionJobRequest < Struct.new(
+      nil,
       :transcription_job_name,
       :language_code,
       :media_sample_rate_hertz,
@@ -3868,6 +3972,7 @@ module Aws::Transcribe
     #               status and, if applicable, failure reason.</p>
     #   @return [Types::TranscriptionJob]
     class StartTranscriptionJobResponse < Struct.new(
+      nil,
       :transcription_job,
       keyword_init: true
     )
@@ -3892,6 +3997,7 @@ module Aws::Transcribe
     #               services.</p>
     #   @return [Integer]
     class Subtitles < Struct.new(
+      nil,
       :formats,
       :output_start_index,
       keyword_init: true
@@ -3930,6 +4036,7 @@ module Aws::Transcribe
     #               in your request, the default value of <code>0</code> is used.</p>
     #   @return [Integer]
     class SubtitlesOutput < Struct.new(
+      nil,
       :formats,
       :subtitle_file_uris,
       :output_start_index,
@@ -3948,6 +4055,7 @@ module Aws::Transcribe
     #   	        summarization</a>.</p>
     #   @return [Boolean]
     class Summarization < Struct.new(
+      nil,
       :generate_abstractive_summary,
       keyword_init: true
     )
@@ -3971,6 +4079,7 @@ module Aws::Transcribe
     #               string.</p>
     #   @return [String]
     class Tag < Struct.new(
+      nil,
       :key,
       :value,
       keyword_init: true
@@ -3995,6 +4104,7 @@ module Aws::Transcribe
     #                   resources</a>.</p>
     #   @return [Array<Types::Tag>]
     class TagResourceRequest < Struct.new(
+      nil,
       :resource_arn,
       :tags,
       keyword_init: true
@@ -4003,6 +4113,7 @@ module Aws::Transcribe
     end
 
     class TagResourceResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -4017,6 +4128,7 @@ module Aws::Transcribe
     #               parameter is <code>ALL</code>.</p>
     #   @return [Array<String>]
     class ToxicityDetectionSettings < Struct.new(
+      nil,
       :toxicity_categories,
       keyword_init: true
     )
@@ -4060,6 +4172,7 @@ module Aws::Transcribe
     #            </note>
     #   @return [String]
     class Transcript < Struct.new(
+      nil,
       :transcript_file_uri,
       :redacted_transcript_file_uri,
       keyword_init: true
@@ -4114,6 +4227,7 @@ module Aws::Transcribe
     #   <p>Specify the phrases that you want to flag.</p>
     #   @return [Array<String>]
     class TranscriptFilter < Struct.new(
+      nil,
       :transcript_filter_type,
       :absolute_time_range,
       :relative_time_range,
@@ -4287,6 +4401,7 @@ module Aws::Transcribe
     #   <p>Provides information about the toxicity detection settings applied to your transcription.</p>
     #   @return [Array<Types::ToxicityDetectionSettings>]
     class TranscriptionJob < Struct.new(
+      nil,
       :transcription_job_name,
       :transcription_job_status,
       :language_code,
@@ -4402,6 +4517,7 @@ module Aws::Transcribe
     #               job.</p>
     #   @return [Array<Types::ToxicityDetectionSettings>]
     class TranscriptionJobSummary < Struct.new(
+      nil,
       :transcription_job_name,
       :creation_time,
       :start_time,
@@ -4437,6 +4553,7 @@ module Aws::Transcribe
     #   <p>Removes the specified tag keys from the specified Amazon Transcribe resource.</p>
     #   @return [Array<String>]
     class UntagResourceRequest < Struct.new(
+      nil,
       :resource_arn,
       :tag_keys,
       keyword_init: true
@@ -4445,6 +4562,7 @@ module Aws::Transcribe
     end
 
     class UntagResourceResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -4465,6 +4583,7 @@ module Aws::Transcribe
     #               use <code>POST_CALL</code> as the input type when updating this category.</p>
     #   @return [String]
     class UpdateCallAnalyticsCategoryRequest < Struct.new(
+      nil,
       :category_name,
       :rules,
       :input_type,
@@ -4478,6 +4597,7 @@ module Aws::Transcribe
     #                   <code>UpdateCallAnalyticsCategory</code> request.</p>
     #   @return [Types::CategoryProperties]
     class UpdateCallAnalyticsCategoryResponse < Struct.new(
+      nil,
       :category_properties,
       keyword_init: true
     )
@@ -4502,6 +4622,7 @@ module Aws::Transcribe
     #            </p>
     #   @return [String]
     class UpdateMedicalVocabularyRequest < Struct.new(
+      nil,
       :vocabulary_name,
       :language_code,
       :vocabulary_file_uri,
@@ -4530,6 +4651,7 @@ module Aws::Transcribe
     #                   <code>StartMedicalTranscriptionJob</code> request.</p>
     #   @return [String]
     class UpdateMedicalVocabularyResponse < Struct.new(
+      nil,
       :vocabulary_name,
       :language_code,
       :last_modified_time,
@@ -4578,6 +4700,7 @@ module Aws::Transcribe
     #               ARNs</a>.</p>
     #   @return [String]
     class UpdateVocabularyFilterRequest < Struct.new(
+      nil,
       :vocabulary_filter_name,
       :words,
       :vocabulary_filter_file_uri,
@@ -4600,6 +4723,7 @@ module Aws::Transcribe
     #               4, 2022.</p>
     #   @return [Time]
     class UpdateVocabularyFilterResponse < Struct.new(
+      nil,
       :vocabulary_filter_name,
       :language_code,
       :last_modified_time,
@@ -4658,6 +4782,7 @@ module Aws::Transcribe
     #               ARNs</a>.</p>
     #   @return [String]
     class UpdateVocabularyRequest < Struct.new(
+      nil,
       :vocabulary_name,
       :language_code,
       :phrases,
@@ -4686,6 +4811,7 @@ module Aws::Transcribe
     #               request.</p>
     #   @return [String]
     class UpdateVocabularyResponse < Struct.new(
+      nil,
       :vocabulary_name,
       :language_code,
       :last_modified_time,
@@ -4718,6 +4844,7 @@ module Aws::Transcribe
     #               4, 2022.</p>
     #   @return [Time]
     class VocabularyFilterInfo < Struct.new(
+      nil,
       :vocabulary_filter_name,
       :language_code,
       :last_modified_time,
@@ -4752,6 +4879,7 @@ module Aws::Transcribe
     #               request.</p>
     #   @return [String]
     class VocabularyInfo < Struct.new(
+      nil,
       :vocabulary_name,
       :language_code,
       :last_modified_time,

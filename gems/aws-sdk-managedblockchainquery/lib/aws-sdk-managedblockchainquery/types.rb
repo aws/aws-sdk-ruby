@@ -11,6 +11,7 @@ module Aws::ManagedBlockchainQuery
     #   <p>The container for the exception message.</p>
     #   @return [String]
     class AccessDeniedException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -22,6 +23,7 @@ module Aws::ManagedBlockchainQuery
     #   <p>The container for the recipient address of the transaction. </p>
     #   @return [Array<String>]
     class AddressIdentifierFilter < Struct.new(
+      nil,
       :transaction_event_to_address,
       keyword_init: true
     )
@@ -40,6 +42,7 @@ module Aws::ManagedBlockchainQuery
     #   <p>The address of the contract deployer.</p>
     #   @return [String]
     class AssetContract < Struct.new(
+      nil,
       :contract_identifier,
       :token_standard,
       :deployer_address,
@@ -72,6 +75,7 @@ module Aws::ManagedBlockchainQuery
     #   <p>The type of error.</p>
     #   @return [String]
     class BatchGetTokenBalanceErrorItem < Struct.new(
+      nil,
       :token_identifier,
       :owner_identifier,
       :at_blockchain_instant,
@@ -87,6 +91,7 @@ module Aws::ManagedBlockchainQuery
     #   <p>An array of <code>BatchGetTokenBalanceInputItem</code> objects whose balance is being requested.</p>
     #   @return [Array<Types::BatchGetTokenBalanceInputItem>]
     class BatchGetTokenBalanceInput < Struct.new(
+      nil,
       :get_token_balance_inputs,
       keyword_init: true
     )
@@ -108,6 +113,7 @@ module Aws::ManagedBlockchainQuery
     #   <p>The container for time.</p>
     #   @return [Types::BlockchainInstant]
     class BatchGetTokenBalanceInputItem < Struct.new(
+      nil,
       :token_identifier,
       :owner_identifier,
       :at_blockchain_instant,
@@ -123,6 +129,7 @@ module Aws::ManagedBlockchainQuery
     #   <p>An array of <code>BatchGetTokenBalanceErrorItem</code> objects returned from the request.</p>
     #   @return [Array<Types::BatchGetTokenBalanceErrorItem>]
     class BatchGetTokenBalanceOutput < Struct.new(
+      nil,
       :token_balances,
       :errors,
       keyword_init: true
@@ -151,6 +158,7 @@ module Aws::ManagedBlockchainQuery
     #   <p>The container for time.</p>
     #   @return [Types::BlockchainInstant]
     class BatchGetTokenBalanceOutputItem < Struct.new(
+      nil,
       :owner_identifier,
       :token_identifier,
       :balance,
@@ -170,6 +178,7 @@ module Aws::ManagedBlockchainQuery
     #            </note>
     #   @return [Time]
     class BlockchainInstant < Struct.new(
+      nil,
       :time,
       keyword_init: true
     )
@@ -186,6 +195,7 @@ module Aws::ManagedBlockchainQuery
     #            that have reached finality are always part of the response.</p>
     #   @return [Array<String>]
     class ConfirmationStatusFilter < Struct.new(
+      nil,
       :include,
       keyword_init: true
     )
@@ -203,6 +213,7 @@ module Aws::ManagedBlockchainQuery
     #   <p>The network address of the deployer.</p>
     #   @return [String]
     class ContractFilter < Struct.new(
+      nil,
       :network,
       :token_standard,
       :deployer_address,
@@ -219,6 +230,7 @@ module Aws::ManagedBlockchainQuery
     #   <p>Container for the blockchain address about a contract.</p>
     #   @return [String]
     class ContractIdentifier < Struct.new(
+      nil,
       :network,
       :contract_address,
       keyword_init: true
@@ -237,6 +249,7 @@ module Aws::ManagedBlockchainQuery
     #   <p>The decimals used by the token contract.</p>
     #   @return [Integer]
     class ContractMetadata < Struct.new(
+      nil,
       :name,
       :symbol,
       :decimals,
@@ -249,6 +262,7 @@ module Aws::ManagedBlockchainQuery
     #   <p>Contains the blockchain address and network information about the contract.</p>
     #   @return [Types::ContractIdentifier]
     class GetAssetContractInput < Struct.new(
+      nil,
       :contract_identifier,
       keyword_init: true
     )
@@ -268,6 +282,7 @@ module Aws::ManagedBlockchainQuery
     #   <p>The metadata of the contract.</p>
     #   @return [Types::ContractMetadata]
     class GetAssetContractOutput < Struct.new(
+      nil,
       :contract_identifier,
       :token_standard,
       :deployer_address,
@@ -292,6 +307,7 @@ module Aws::ManagedBlockchainQuery
     #            </note>
     #   @return [Types::BlockchainInstant]
     class GetTokenBalanceInput < Struct.new(
+      nil,
       :token_identifier,
       :owner_identifier,
       :at_blockchain_instant,
@@ -320,6 +336,7 @@ module Aws::ManagedBlockchainQuery
     #   <p>The container for time.</p>
     #   @return [Types::BlockchainInstant]
     class GetTokenBalanceOutput < Struct.new(
+      nil,
       :owner_identifier,
       :token_identifier,
       :balance,
@@ -344,6 +361,7 @@ module Aws::ManagedBlockchainQuery
     #   <p>The blockchain network where the transaction occurred.</p>
     #   @return [String]
     class GetTransactionInput < Struct.new(
+      nil,
       :transaction_hash,
       :transaction_id,
       :network,
@@ -356,6 +374,7 @@ module Aws::ManagedBlockchainQuery
     #   <p>Contains the details of the transaction.</p>
     #   @return [Types::Transaction]
     class GetTransactionOutput < Struct.new(
+      nil,
       :transaction,
       keyword_init: true
     )
@@ -370,6 +389,7 @@ module Aws::ManagedBlockchainQuery
     #   <p>Specifies the <code>retryAfterSeconds</code> value.</p>
     #   @return [Integer]
     class InternalServerException < Struct.new(
+      nil,
       :message,
       :retry_after_seconds,
       keyword_init: true
@@ -396,6 +416,7 @@ module Aws::ManagedBlockchainQuery
     #            </note>
     #   @return [Integer]
     class ListAssetContractsInput < Struct.new(
+      nil,
       :contract_filter,
       :next_token,
       :max_results,
@@ -411,6 +432,7 @@ module Aws::ManagedBlockchainQuery
     #   <p>The pagination token that indicates the next set of results to retrieve. </p>
     #   @return [String]
     class ListAssetContractsOutput < Struct.new(
+      nil,
       :contracts,
       :next_token,
       keyword_init: true
@@ -456,6 +478,7 @@ module Aws::ManagedBlockchainQuery
     #            </note>
     #   @return [Integer]
     class ListFilteredTransactionEventsInput < Struct.new(
+      nil,
       :network,
       :address_identifier_filter,
       :time_filter,
@@ -476,6 +499,7 @@ module Aws::ManagedBlockchainQuery
     #   <p>The pagination token that indicates the next set of results to retrieve.</p>
     #   @return [String]
     class ListFilteredTransactionEventsOutput < Struct.new(
+      nil,
       :events,
       :next_token,
       keyword_init: true
@@ -497,6 +521,7 @@ module Aws::ManagedBlockchainQuery
     #            to <code>ASCENDING</code>.</p>
     #   @return [String]
     class ListFilteredTransactionEventsSort < Struct.new(
+      nil,
       :sort_by,
       :sort_order,
       keyword_init: true
@@ -534,6 +559,7 @@ module Aws::ManagedBlockchainQuery
     #            </note>
     #   @return [Integer]
     class ListTokenBalancesInput < Struct.new(
+      nil,
       :owner_filter,
       :token_filter,
       :next_token,
@@ -551,6 +577,7 @@ module Aws::ManagedBlockchainQuery
     #   <p>The pagination token that indicates the next set of results to retrieve.</p>
     #   @return [String]
     class ListTokenBalancesOutput < Struct.new(
+      nil,
       :token_balances,
       :next_token,
       keyword_init: true
@@ -587,6 +614,7 @@ module Aws::ManagedBlockchainQuery
     #            </note>
     #   @return [Integer]
     class ListTransactionEventsInput < Struct.new(
+      nil,
       :transaction_hash,
       :transaction_id,
       :network,
@@ -605,6 +633,7 @@ module Aws::ManagedBlockchainQuery
     #   <p>The pagination token that indicates the next set of results to retrieve.</p>
     #   @return [String]
     class ListTransactionEventsOutput < Struct.new(
+      nil,
       :events,
       :next_token,
       keyword_init: true
@@ -649,6 +678,7 @@ module Aws::ManagedBlockchainQuery
     #            part of the response.</p>
     #   @return [Types::ConfirmationStatusFilter]
     class ListTransactionsInput < Struct.new(
+      nil,
       :address,
       :network,
       :from_blockchain_instant,
@@ -669,6 +699,7 @@ module Aws::ManagedBlockchainQuery
     #   <p>The pagination token that indicates the next set of results to retrieve.</p>
     #   @return [String]
     class ListTransactionsOutput < Struct.new(
+      nil,
       :transactions,
       :next_token,
       keyword_init: true
@@ -688,6 +719,7 @@ module Aws::ManagedBlockchainQuery
     #                to <code>ASCENDING</code>.</p>
     #   @return [String]
     class ListTransactionsSort < Struct.new(
+      nil,
       :sort_by,
       :sort_order,
       keyword_init: true
@@ -700,6 +732,7 @@ module Aws::ManagedBlockchainQuery
     #   <p>The contract or wallet address.</p>
     #   @return [String]
     class OwnerFilter < Struct.new(
+      nil,
       :address,
       keyword_init: true
     )
@@ -711,6 +744,7 @@ module Aws::ManagedBlockchainQuery
     #   <p>The contract or wallet address for the owner.</p>
     #   @return [String]
     class OwnerIdentifier < Struct.new(
+      nil,
       :address,
       keyword_init: true
     )
@@ -728,6 +762,7 @@ module Aws::ManagedBlockchainQuery
     #   <p>The <code>resourceType</code> of the resource that caused the exception.</p>
     #   @return [String]
     class ResourceNotFoundException < Struct.new(
+      nil,
       :message,
       :resource_id,
       :resource_type,
@@ -753,6 +788,7 @@ module Aws::ManagedBlockchainQuery
     #   <p>The container for the <code>quotaCode</code>.</p>
     #   @return [String]
     class ServiceQuotaExceededException < Struct.new(
+      nil,
       :message,
       :resource_id,
       :resource_type,
@@ -780,6 +816,7 @@ module Aws::ManagedBlockchainQuery
     #   <p>The container of the <code>retryAfterSeconds</code> value.</p>
     #   @return [Integer]
     class ThrottlingException < Struct.new(
+      nil,
       :message,
       :service_code,
       :quota_code,
@@ -797,6 +834,7 @@ module Aws::ManagedBlockchainQuery
     #   <p>The container for time.</p>
     #   @return [Types::BlockchainInstant]
     class TimeFilter < Struct.new(
+      nil,
       :from,
       :to,
       keyword_init: true
@@ -825,6 +863,7 @@ module Aws::ManagedBlockchainQuery
     #   <p>The <code>Timestamp</code> of the last transaction at which the balance for the token in the wallet was updated.</p>
     #   @return [Types::BlockchainInstant]
     class TokenBalance < Struct.new(
+      nil,
       :owner_identifier,
       :token_identifier,
       :balance,
@@ -852,6 +891,7 @@ module Aws::ManagedBlockchainQuery
     #   <p>The unique identifier of the token.</p>
     #   @return [String]
     class TokenFilter < Struct.new(
+      nil,
       :network,
       :contract_address,
       :token_id,
@@ -880,6 +920,7 @@ module Aws::ManagedBlockchainQuery
     #            </note>
     #   @return [String]
     class TokenIdentifier < Struct.new(
+      nil,
       :network,
       :contract_address,
       :token_id,
@@ -965,6 +1006,7 @@ module Aws::ManagedBlockchainQuery
     #   <p>Identifies whether the transaction has succeeded or failed.</p>
     #   @return [String]
     class Transaction < Struct.new(
+      nil,
       :network,
       :block_hash,
       :transaction_hash,
@@ -1052,6 +1094,7 @@ module Aws::ManagedBlockchainQuery
     #   <p>This container specifies whether the transaction has reached Finality.</p>
     #   @return [String]
     class TransactionEvent < Struct.new(
+      nil,
       :network,
       :transaction_hash,
       :event_type,
@@ -1090,6 +1133,7 @@ module Aws::ManagedBlockchainQuery
     #   <p>Specifies whether to list transactions that have not reached Finality.</p>
     #   @return [String]
     class TransactionOutputItem < Struct.new(
+      nil,
       :transaction_hash,
       :transaction_id,
       :network,
@@ -1111,6 +1155,7 @@ module Aws::ManagedBlockchainQuery
     #   <p>The container for the <code>fieldList</code> of the exception.</p>
     #   @return [Array<Types::ValidationExceptionField>]
     class ValidationException < Struct.new(
+      nil,
       :message,
       :reason,
       :field_list,
@@ -1127,6 +1172,7 @@ module Aws::ManagedBlockchainQuery
     #   <p>The <code>ValidationException</code> message.</p>
     #   @return [String]
     class ValidationExceptionField < Struct.new(
+      nil,
       :name,
       :message,
       keyword_init: true
@@ -1139,6 +1185,7 @@ module Aws::ManagedBlockchainQuery
     #   <p>Specifies if the transaction output is spent or unspent.</p>
     #   @return [Boolean]
     class VoutFilter < Struct.new(
+      nil,
       :vout_spent,
       keyword_init: true
     )

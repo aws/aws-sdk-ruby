@@ -12,6 +12,7 @@ module Aws::Signer
     # @!attribute code
     #   @return [String]
     class AccessDeniedException < Struct.new(
+      nil,
       :message,
       :code,
       keyword_init: true
@@ -59,6 +60,7 @@ module Aws::Signer
     #   <p>A unique identifier for the cross-account permission statement.</p>
     #   @return [String]
     class AddProfilePermissionRequest < Struct.new(
+      nil,
       :profile_name,
       :profile_version,
       :action,
@@ -74,6 +76,7 @@ module Aws::Signer
     #   <p>A unique identifier for the current profile revision.</p>
     #   @return [String]
     class AddProfilePermissionResponse < Struct.new(
+      nil,
       :revision_id,
       keyword_init: true
     )
@@ -87,6 +90,7 @@ module Aws::Signer
     # @!attribute code
     #   @return [String]
     class BadRequestException < Struct.new(
+      nil,
       :message,
       :code,
       keyword_init: true
@@ -98,6 +102,7 @@ module Aws::Signer
     #   <p>The name of the signing profile to be canceled.</p>
     #   @return [String]
     class CancelSigningProfileRequest < Struct.new(
+      nil,
       :profile_name,
       keyword_init: true
     )
@@ -110,6 +115,7 @@ module Aws::Signer
     # @!attribute code
     #   @return [String]
     class ConflictException < Struct.new(
+      nil,
       :message,
       :code,
       keyword_init: true
@@ -121,6 +127,7 @@ module Aws::Signer
     #   <p>The ID of the signing job on input.</p>
     #   @return [String]
     class DescribeSigningJobRequest < Struct.new(
+      nil,
       :job_id,
       keyword_init: true
     )
@@ -188,6 +195,7 @@ module Aws::Signer
     #   <p>The IAM entity that initiated the signing job.</p>
     #   @return [String]
     class DescribeSigningJobResponse < Struct.new(
+      nil,
       :job_id,
       :source,
       :signing_material,
@@ -218,6 +226,7 @@ module Aws::Signer
     #   <p>The <code>S3Destination</code> object.</p>
     #   @return [Types::S3Destination]
     class Destination < Struct.new(
+      nil,
       :s3,
       keyword_init: true
     )
@@ -232,6 +241,7 @@ module Aws::Signer
     #   <p>The default encryption algorithm that is used by a code-signing job.</p>
     #   @return [String]
     class EncryptionAlgorithmOptions < Struct.new(
+      nil,
       :allowed_values,
       :default_value,
       keyword_init: true
@@ -278,6 +288,7 @@ module Aws::Signer
     #            </p>
     #   @return [Array<String>]
     class GetRevocationStatusRequest < Struct.new(
+      nil,
       :signature_timestamp,
       :platform_id,
       :profile_version_arn,
@@ -293,6 +304,7 @@ module Aws::Signer
     #   			ARN, and certificate hashes) supplied as input to the API.</p>
     #   @return [Array<String>]
     class GetRevocationStatusResponse < Struct.new(
+      nil,
       :revoked_entities,
       keyword_init: true
     )
@@ -303,6 +315,7 @@ module Aws::Signer
     #   <p>The ID of the target signing platform.</p>
     #   @return [String]
     class GetSigningPlatformRequest < Struct.new(
+      nil,
       :platform_id,
       keyword_init: true
     )
@@ -339,6 +352,7 @@ module Aws::Signer
     #   			revoked.</p>
     #   @return [Boolean]
     class GetSigningPlatformResponse < Struct.new(
+      nil,
       :platform_id,
       :display_name,
       :partner,
@@ -366,6 +380,7 @@ module Aws::Signer
     #   <p>The AWS account ID of the profile owner.</p>
     #   @return [String]
     class GetSigningProfileRequest < Struct.new(
+      nil,
       :profile_name,
       :profile_owner,
       keyword_init: true
@@ -419,6 +434,7 @@ module Aws::Signer
     #   <p>A list of tags associated with the signing profile.</p>
     #   @return [Hash<String, String>]
     class GetSigningProfileResponse < Struct.new(
+      nil,
       :profile_name,
       :profile_version,
       :profile_version_arn,
@@ -446,6 +462,7 @@ module Aws::Signer
     #   <p>The default hash algorithm that is used in a code-signing job.</p>
     #   @return [String]
     class HashAlgorithmOptions < Struct.new(
+      nil,
       :allowed_values,
       :default_value,
       keyword_init: true
@@ -459,6 +476,7 @@ module Aws::Signer
     # @!attribute code
     #   @return [String]
     class InternalServiceErrorException < Struct.new(
+      nil,
       :message,
       :code,
       keyword_init: true
@@ -473,6 +491,7 @@ module Aws::Signer
     #   <p>String for specifying the next set of paginated results.</p>
     #   @return [String]
     class ListProfilePermissionsRequest < Struct.new(
+      nil,
       :profile_name,
       :next_token,
       keyword_init: true
@@ -493,6 +512,7 @@ module Aws::Signer
     #   <p>String for specifying the next set of paginated results.</p>
     #   @return [String]
     class ListProfilePermissionsResponse < Struct.new(
+      nil,
       :revision_id,
       :policy_size_bytes,
       :permissions,
@@ -545,6 +565,7 @@ module Aws::Signer
     #   			entity.</p>
     #   @return [String]
     class ListSigningJobsRequest < Struct.new(
+      nil,
       :status,
       :platform_id,
       :requested_by,
@@ -566,6 +587,7 @@ module Aws::Signer
     #   <p>String for specifying the next set of paginated results.</p>
     #   @return [String]
     class ListSigningJobsResponse < Struct.new(
+      nil,
       :jobs,
       :next_token,
       keyword_init: true
@@ -591,6 +613,7 @@ module Aws::Signer
     #   			the value of <code>nextToken</code> from the response that you just received.</p>
     #   @return [String]
     class ListSigningPlatformsRequest < Struct.new(
+      nil,
       :category,
       :partner,
       :target,
@@ -608,6 +631,7 @@ module Aws::Signer
     #   <p>Value for specifying the next set of paginated results to return.</p>
     #   @return [String]
     class ListSigningPlatformsResponse < Struct.new(
+      nil,
       :platforms,
       :next_token,
       keyword_init: true
@@ -636,6 +660,7 @@ module Aws::Signer
     #   			list.</p>
     #   @return [Array<String>]
     class ListSigningProfilesRequest < Struct.new(
+      nil,
       :include_canceled,
       :max_results,
       :next_token,
@@ -655,6 +680,7 @@ module Aws::Signer
     #   <p>Value for specifying the next set of paginated results to return.</p>
     #   @return [String]
     class ListSigningProfilesResponse < Struct.new(
+      nil,
       :profiles,
       :next_token,
       keyword_init: true
@@ -666,6 +692,7 @@ module Aws::Signer
     #   <p>The Amazon Resource Name (ARN) for the signing profile.</p>
     #   @return [String]
     class ListTagsForResourceRequest < Struct.new(
+      nil,
       :resource_arn,
       keyword_init: true
     )
@@ -676,6 +703,7 @@ module Aws::Signer
     #   <p>A list of tags associated with the signing profile.</p>
     #   @return [Hash<String, String>]
     class ListTagsForResourceResponse < Struct.new(
+      nil,
       :tags,
       keyword_init: true
     )
@@ -688,6 +716,7 @@ module Aws::Signer
     # @!attribute code
     #   @return [String]
     class NotFoundException < Struct.new(
+      nil,
       :message,
       :code,
       keyword_init: true
@@ -709,6 +738,7 @@ module Aws::Signer
     #   <p>The signing profile version that a permission applies to.</p>
     #   @return [String]
     class Permission < Struct.new(
+      nil,
       :action,
       :principal,
       :statement_id,
@@ -745,6 +775,7 @@ module Aws::Signer
     #   <p>Tags to be associated with the signing profile that is being created.</p>
     #   @return [Hash<String, String>]
     class PutSigningProfileRequest < Struct.new(
+      nil,
       :profile_name,
       :signing_material,
       :signature_validity_period,
@@ -767,6 +798,7 @@ module Aws::Signer
     #   <p>The signing profile ARN, including the profile version.</p>
     #   @return [String]
     class PutSigningProfileResponse < Struct.new(
+      nil,
       :arn,
       :profile_version,
       :profile_version_arn,
@@ -785,6 +817,7 @@ module Aws::Signer
     #   <p>A unique identifier for the cross-account permissions statement.</p>
     #   @return [String]
     class RemoveProfilePermissionRequest < Struct.new(
+      nil,
       :profile_name,
       :revision_id,
       :statement_id,
@@ -797,6 +830,7 @@ module Aws::Signer
     #   <p>An identifier for the current revision of the profile permissions.</p>
     #   @return [String]
     class RemoveProfilePermissionResponse < Struct.new(
+      nil,
       :revision_id,
       keyword_init: true
     )
@@ -809,6 +843,7 @@ module Aws::Signer
     # @!attribute code
     #   @return [String]
     class ResourceNotFoundException < Struct.new(
+      nil,
       :message,
       :code,
       keyword_init: true
@@ -826,6 +861,7 @@ module Aws::Signer
     #   <p>The reason for revoking the signing job.</p>
     #   @return [String]
     class RevokeSignatureRequest < Struct.new(
+      nil,
       :job_id,
       :job_owner,
       :reason,
@@ -849,6 +885,7 @@ module Aws::Signer
     #   			trusted.</p>
     #   @return [Time]
     class RevokeSigningProfileRequest < Struct.new(
+      nil,
       :profile_name,
       :profile_version,
       :reason,
@@ -867,6 +904,7 @@ module Aws::Signer
     #   			prefix.</p>
     #   @return [String]
     class S3Destination < Struct.new(
+      nil,
       :bucket_name,
       :prefix,
       keyword_init: true
@@ -882,6 +920,7 @@ module Aws::Signer
     #   <p>Key name that uniquely identifies a signed code image in your bucket.</p>
     #   @return [String]
     class S3SignedObject < Struct.new(
+      nil,
       :bucket_name,
       :key,
       keyword_init: true
@@ -900,6 +939,7 @@ module Aws::Signer
     #   <p>Version of your source image in your version enabled S3 bucket.</p>
     #   @return [String]
     class S3Source < Struct.new(
+      nil,
       :bucket_name,
       :key,
       :version,
@@ -914,6 +954,7 @@ module Aws::Signer
     # @!attribute code
     #   @return [String]
     class ServiceLimitExceededException < Struct.new(
+      nil,
       :message,
       :code,
       keyword_init: true
@@ -935,6 +976,7 @@ module Aws::Signer
     #   				<code>application/vnd.cncf.notary.payload.v1+json</code>.</p>
     #   @return [String]
     class SignPayloadRequest < Struct.new(
+      nil,
       :profile_name,
       :profile_owner,
       :payload,
@@ -957,6 +999,7 @@ module Aws::Signer
     #   <p>A cryptographic signature.</p>
     #   @return [String]
     class SignPayloadResponse < Struct.new(
+      nil,
       :job_id,
       :job_owner,
       :metadata,
@@ -974,6 +1017,7 @@ module Aws::Signer
     #   <p>The time unit for signature validity.</p>
     #   @return [String]
     class SignatureValidityPeriod < Struct.new(
+      nil,
       :value,
       :type,
       keyword_init: true
@@ -992,6 +1036,7 @@ module Aws::Signer
     #   <p>The <code>S3SignedObject</code>.</p>
     #   @return [Types::S3SignedObject]
     class SignedObject < Struct.new(
+      nil,
       :s3,
       keyword_init: true
     )
@@ -1006,6 +1051,7 @@ module Aws::Signer
     #   <p>The hash algorithm options that are available for a code-signing job.</p>
     #   @return [Types::HashAlgorithmOptions]
     class SigningConfiguration < Struct.new(
+      nil,
       :encryption_algorithm_options,
       :hash_algorithm_options,
       keyword_init: true
@@ -1024,6 +1070,7 @@ module Aws::Signer
     #   			job.</p>
     #   @return [String]
     class SigningConfigurationOverrides < Struct.new(
+      nil,
       :encryption_algorithm,
       :hash_algorithm,
       keyword_init: true
@@ -1039,6 +1086,7 @@ module Aws::Signer
     #   <p>The default format of a signing image.</p>
     #   @return [String]
     class SigningImageFormat < Struct.new(
+      nil,
       :supported_formats,
       :default_format,
       keyword_init: true
@@ -1093,6 +1141,7 @@ module Aws::Signer
     #   <p>The AWS account ID of the job invoker.</p>
     #   @return [String]
     class SigningJob < Struct.new(
+      nil,
       :job_id,
       :source,
       :signed_object,
@@ -1128,6 +1177,7 @@ module Aws::Signer
     #   <p>The identity of the revoker.</p>
     #   @return [String]
     class SigningJobRevocationRecord < Struct.new(
+      nil,
       :reason,
       :revoked_at,
       :revoked_by,
@@ -1142,6 +1192,7 @@ module Aws::Signer
     #   			code.</p>
     #   @return [String]
     class SigningMaterial < Struct.new(
+      nil,
       :certificate_arn,
       keyword_init: true
     )
@@ -1179,6 +1230,7 @@ module Aws::Signer
     #   <p>Indicates whether revocation is supported for the platform.</p>
     #   @return [Boolean]
     class SigningPlatform < Struct.new(
+      nil,
       :platform_id,
       :display_name,
       :partner,
@@ -1213,6 +1265,7 @@ module Aws::Signer
     #   			payload is not be embedded in the signing image.</p>
     #   @return [String]
     class SigningPlatformOverrides < Struct.new(
+      nil,
       :signing_configuration,
       :signing_image_format,
       keyword_init: true
@@ -1256,6 +1309,7 @@ module Aws::Signer
     #   <p>A list of tags associated with the signing profile.</p>
     #   @return [Hash<String, String>]
     class SigningProfile < Struct.new(
+      nil,
       :profile_name,
       :profile_version,
       :profile_version_arn,
@@ -1283,6 +1337,7 @@ module Aws::Signer
     #   <p>The identity of the revoker.</p>
     #   @return [String]
     class SigningProfileRevocationRecord < Struct.new(
+      nil,
       :revocation_effective_from,
       :revoked_at,
       :revoked_by,
@@ -1297,6 +1352,7 @@ module Aws::Signer
     #   <p>The <code>S3Source</code> object.</p>
     #   @return [Types::S3Source]
     class Source < Struct.new(
+      nil,
       :s3,
       keyword_init: true
     )
@@ -1322,6 +1378,7 @@ module Aws::Signer
     #   <p>The AWS account ID of the signing profile owner.</p>
     #   @return [String]
     class StartSigningJobRequest < Struct.new(
+      nil,
       :source,
       :destination,
       :profile_name,
@@ -1339,6 +1396,7 @@ module Aws::Signer
     #   <p>The AWS account ID of the signing job owner.</p>
     #   @return [String]
     class StartSigningJobResponse < Struct.new(
+      nil,
       :job_id,
       :job_owner,
       keyword_init: true
@@ -1353,6 +1411,7 @@ module Aws::Signer
     #   <p>One or more tags to be associated with the signing profile.</p>
     #   @return [Hash<String, String>]
     class TagResourceRequest < Struct.new(
+      nil,
       :resource_arn,
       :tags,
       keyword_init: true
@@ -1361,6 +1420,7 @@ module Aws::Signer
     end
 
     class TagResourceResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1375,6 +1435,7 @@ module Aws::Signer
     # @!attribute code
     #   @return [String]
     class ThrottlingException < Struct.new(
+      nil,
       :message,
       :code,
       keyword_init: true
@@ -1389,6 +1450,7 @@ module Aws::Signer
     # @!attribute code
     #   @return [String]
     class TooManyRequestsException < Struct.new(
+      nil,
       :message,
       :code,
       keyword_init: true
@@ -1403,6 +1465,7 @@ module Aws::Signer
     #   <p>A list of tag keys to be removed from the signing profile.</p>
     #   @return [Array<String>]
     class UntagResourceRequest < Struct.new(
+      nil,
       :resource_arn,
       :tag_keys,
       keyword_init: true
@@ -1411,6 +1474,7 @@ module Aws::Signer
     end
 
     class UntagResourceResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1422,6 +1486,7 @@ module Aws::Signer
     # @!attribute code
     #   @return [String]
     class ValidationException < Struct.new(
+      nil,
       :message,
       :code,
       keyword_init: true

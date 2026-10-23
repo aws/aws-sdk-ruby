@@ -17,6 +17,7 @@ module Aws::CloudFrontKeyValueStore
   #   Override the endpoint used to send this request
   #   @return [String]
   EndpointParameters = Struct.new(
+    nil,
     :kvs_arn,
     :region,
     :use_fips,

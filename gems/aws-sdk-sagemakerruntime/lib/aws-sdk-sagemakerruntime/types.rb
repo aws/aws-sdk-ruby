@@ -11,6 +11,7 @@ module Aws::SageMakerRuntime
     # @!attribute message
     #   @return [String]
     class InternalDependencyException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -21,6 +22,7 @@ module Aws::SageMakerRuntime
     # @!attribute message
     #   @return [String]
     class InternalFailure < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -31,6 +33,7 @@ module Aws::SageMakerRuntime
     # @!attribute message
     #   @return [String]
     class InternalStreamFailure < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -79,6 +82,7 @@ module Aws::SageMakerRuntime
     #               expired. The default is 15 minutes, or 900 seconds.</p>
     #   @return [Integer]
     class InvokeEndpointAsyncInput < Struct.new(
+      nil,
       :endpoint_name,
       :content_type,
       :accept,
@@ -105,6 +109,7 @@ module Aws::SageMakerRuntime
     #               stored.</p>
     #   @return [String]
     class InvokeEndpointAsyncOutput < Struct.new(
+      nil,
       :inference_id,
       :output_location,
       :failure_location,
@@ -195,6 +200,7 @@ module Aws::SageMakerRuntime
     #               parameter. For any subsequent request where you specify that session ID, SageMaker AI routes the request to the same instance that supports the session.</p>
     #   @return [String]
     class InvokeEndpointInput < Struct.new(
+      nil,
       :endpoint_name,
       :body,
       :content_type,
@@ -252,6 +258,7 @@ module Aws::SageMakerRuntime
     #   <p>If you closed a stateful session with your request, the ID of that session.</p>
     #   @return [String]
     class InvokeEndpointOutput < Struct.new(
+      nil,
       :body,
       :content_type,
       :invoked_production_variant,
@@ -327,6 +334,7 @@ module Aws::SageMakerRuntime
     #               response parameter.</p>
     #   @return [String]
     class InvokeEndpointWithResponseStreamInput < Struct.new(
+      nil,
       :endpoint_name,
       :body,
       :content_type,
@@ -371,6 +379,7 @@ module Aws::SageMakerRuntime
     #           Python SDK.</p>
     #   @return [String]
     class InvokeEndpointWithResponseStreamOutput < Struct.new(
+      nil,
       :body,
       :content_type,
       :invoked_production_variant,
@@ -394,6 +403,7 @@ module Aws::SageMakerRuntime
     #   <p> The Amazon Resource Name (ARN) of the log stream. </p>
     #   @return [String]
     class ModelError < Struct.new(
+      nil,
       :message,
       :original_status_code,
       :original_message,
@@ -409,6 +419,7 @@ module Aws::SageMakerRuntime
     # @!attribute message
     #   @return [String]
     class ModelNotReadyException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -446,6 +457,7 @@ module Aws::SageMakerRuntime
     #            </dl>
     #   @return [String]
     class ModelStreamError < Struct.new(
+      nil,
       :message,
       :error_code,
       keyword_init: true
@@ -460,6 +472,7 @@ module Aws::SageMakerRuntime
     #   <p>A blob that contains part of the response for your streaming inference request.</p>
     #   @return [String]
     class PayloadPart < Struct.new(
+      nil,
       :bytes,
       keyword_init: true
     )
@@ -510,6 +523,7 @@ module Aws::SageMakerRuntime
     # @!attribute message
     #   @return [String]
     class ServiceUnavailable < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -520,6 +534,7 @@ module Aws::SageMakerRuntime
     # @!attribute message
     #   @return [String]
     class ValidationError < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )

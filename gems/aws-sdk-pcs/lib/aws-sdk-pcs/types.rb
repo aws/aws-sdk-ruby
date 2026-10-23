@@ -10,6 +10,7 @@ module Aws::PCS
     # @!attribute message
     #   @return [String]
     class AccessDeniedException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -24,6 +25,7 @@ module Aws::PCS
     #   <p>The default value for <code>mode</code> is <code>STANDARD</code>. A value of <code>STANDARD</code> means Slurm accounting is enabled.</p>
     #   @return [String]
     class Accounting < Struct.new(
+      nil,
       :default_purge_time_in_days,
       :mode,
       keyword_init: true
@@ -39,6 +41,7 @@ module Aws::PCS
     #   <p>The default value for <code>mode</code> is <code>STANDARD</code>. A value of <code>STANDARD</code> means Slurm accounting is enabled.</p>
     #   @return [String]
     class AccountingRequest < Struct.new(
+      nil,
       :default_purge_time_in_days,
       :mode,
       keyword_init: true
@@ -84,6 +87,7 @@ module Aws::PCS
     #   <p>The list of errors that occurred during cluster provisioning.</p>
     #   @return [Array<Types::ErrorInfo>]
     class Cluster < Struct.new(
+      nil,
       :name,
       :id,
       :arn,
@@ -115,6 +119,7 @@ module Aws::PCS
     #   <p>The accounting configuration includes configurable settings for Slurm accounting.</p>
     #   @return [Types::Accounting]
     class ClusterSlurmConfiguration < Struct.new(
+      nil,
       :scale_down_idle_time_in_seconds,
       :slurm_custom_settings,
       :auth_key,
@@ -135,6 +140,7 @@ module Aws::PCS
     #   <p>The accounting configuration includes configurable settings for Slurm accounting.</p>
     #   @return [Types::AccountingRequest]
     class ClusterSlurmConfigurationRequest < Struct.new(
+      nil,
       :scale_down_idle_time_in_seconds,
       :slurm_custom_settings,
       :accounting,
@@ -163,6 +169,7 @@ module Aws::PCS
     #   <p>The provisioning status of the cluster.</p> <note> <p>The provisioning status doesn't indicate the overall health of the cluster.</p> </note> <important> <p>The resource enters the <code>SUSPENDING</code> and <code>SUSPENDED</code> states when the scheduler is beyond end of life and we have suspended the cluster. When in these states, you can't use the cluster. The cluster controller is down and all compute instances are terminated. The resources still count toward your service quotas. You can delete a resource if its status is <code>SUSPENDED</code>. For more information, see <a href="https://docs.aws.amazon.com/pcs/latest/userguide/slurm-versions_faq.html">Frequently asked questions about Slurm versions in PCS</a> in the <i>PCS User Guide</i>.</p> </important>
     #   @return [String]
     class ClusterSummary < Struct.new(
+      nil,
       :name,
       :id,
       :arn,
@@ -227,6 +234,7 @@ module Aws::PCS
     #   <p>The list of errors that occurred during compute node group provisioning.</p>
     #   @return [Array<Types::ErrorInfo>]
     class ComputeNodeGroup < Struct.new(
+      nil,
       :name,
       :id,
       :arn,
@@ -254,6 +262,7 @@ module Aws::PCS
     #   <p>The compute node group ID for the compute node group configuration.</p>
     #   @return [String]
     class ComputeNodeGroupConfiguration < Struct.new(
+      nil,
       :compute_node_group_id,
       keyword_init: true
     )
@@ -265,6 +274,7 @@ module Aws::PCS
     #   <p>Additional Slurm-specific configuration that directly maps to Slurm settings.</p>
     #   @return [Array<Types::SlurmCustomSetting>]
     class ComputeNodeGroupSlurmConfiguration < Struct.new(
+      nil,
       :slurm_custom_settings,
       keyword_init: true
     )
@@ -276,6 +286,7 @@ module Aws::PCS
     #   <p>Additional Slurm-specific configuration that directly maps to Slurm settings.</p>
     #   @return [Array<Types::SlurmCustomSetting>]
     class ComputeNodeGroupSlurmConfigurationRequest < Struct.new(
+      nil,
       :slurm_custom_settings,
       keyword_init: true
     )
@@ -305,6 +316,7 @@ module Aws::PCS
     #   <p>The provisioning status of the compute node group.</p> <note> <p>The provisioning status doesn't indicate the overall health of the compute node group.</p> </note> <important> <p>The resource enters the <code>SUSPENDING</code> and <code>SUSPENDED</code> states when the scheduler is beyond end of life and we have suspended the cluster. When in these states, you can't use the cluster. The cluster controller is down and all compute instances are terminated. The resources still count toward your service quotas. You can delete a resource if its status is <code>SUSPENDED</code>. For more information, see <a href="https://docs.aws.amazon.com/pcs/latest/userguide/slurm-versions_faq.html">Frequently asked questions about Slurm versions in PCS</a> in the <i>PCS User Guide</i>.</p> </important>
     #   @return [String]
     class ComputeNodeGroupSummary < Struct.new(
+      nil,
       :name,
       :id,
       :arn,
@@ -327,6 +339,7 @@ module Aws::PCS
     #   <p> The type or category of the resource that caused the conflict exception." </p>
     #   @return [String]
     class ConflictException < Struct.new(
+      nil,
       :message,
       :resource_id,
       :resource_type,
@@ -357,6 +370,7 @@ module Aws::PCS
     #   <p>1 or more tags added to the resource. Each tag consists of a tag key and tag value. The tag value is optional and can be an empty string.</p>
     #   @return [Hash<String, String>]
     class CreateClusterRequest < Struct.new(
+      nil,
       :cluster_name,
       :scheduler,
       :size,
@@ -373,6 +387,7 @@ module Aws::PCS
     #   <p>The cluster resource.</p>
     #   @return [Types::Cluster]
     class CreateClusterResponse < Struct.new(
+      nil,
       :cluster,
       keyword_init: true
     )
@@ -419,6 +434,7 @@ module Aws::PCS
     #   <p>1 or more tags added to the resource. Each tag consists of a tag key and tag value. The tag value is optional and can be an empty string.</p>
     #   @return [Hash<String, String>]
     class CreateComputeNodeGroupRequest < Struct.new(
+      nil,
       :cluster_identifier,
       :compute_node_group_name,
       :ami_id,
@@ -441,6 +457,7 @@ module Aws::PCS
     #   <p>A compute node group associated with a cluster.</p>
     #   @return [Types::ComputeNodeGroup]
     class CreateComputeNodeGroupResponse < Struct.new(
+      nil,
       :compute_node_group,
       keyword_init: true
     )
@@ -466,6 +483,7 @@ module Aws::PCS
     #   <p>1 or more tags added to the resource. Each tag consists of a tag key and tag value. The tag value is optional and can be an empty string.</p>
     #   @return [Hash<String, String>]
     class CreateQueueRequest < Struct.new(
+      nil,
       :cluster_identifier,
       :queue_name,
       :compute_node_group_configurations,
@@ -481,6 +499,7 @@ module Aws::PCS
     #   <p>A queue resource.</p>
     #   @return [Types::Queue]
     class CreateQueueResponse < Struct.new(
+      nil,
       :queue,
       keyword_init: true
     )
@@ -495,6 +514,7 @@ module Aws::PCS
     #   <p>The version of the EC2 launch template to use to provision instances.</p>
     #   @return [String]
     class CustomLaunchTemplate < Struct.new(
+      nil,
       :id,
       :version,
       keyword_init: true
@@ -509,6 +529,7 @@ module Aws::PCS
     #   <p>A unique, case-sensitive identifier that you provide to ensure the idempotency of the request. Idempotency ensures that an API request completes only once. With an idempotent request, if the original request completes successfully, the subsequent retries with the same client token return the result from the original successful request and they have no additional effect. If you don't specify a client token, the CLI and SDK automatically generate 1 for you.</p>
     #   @return [String]
     class DeleteClusterRequest < Struct.new(
+      nil,
       :cluster_identifier,
       :client_token,
       keyword_init: true
@@ -517,6 +538,7 @@ module Aws::PCS
     end
 
     class DeleteClusterResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -532,6 +554,7 @@ module Aws::PCS
     #   <p>A unique, case-sensitive identifier that you provide to ensure the idempotency of the request. Idempotency ensures that an API request completes only once. With an idempotent request, if the original request completes successfully, the subsequent retries with the same client token return the result from the original successful request and they have no additional effect. If you don't specify a client token, the CLI and SDK automatically generate 1 for you.</p>
     #   @return [String]
     class DeleteComputeNodeGroupRequest < Struct.new(
+      nil,
       :cluster_identifier,
       :compute_node_group_identifier,
       :client_token,
@@ -541,6 +564,7 @@ module Aws::PCS
     end
 
     class DeleteComputeNodeGroupResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -556,6 +580,7 @@ module Aws::PCS
     #   <p>A unique, case-sensitive identifier that you provide to ensure the idempotency of the request. Idempotency ensures that an API request completes only once. With an idempotent request, if the original request completes successfully, the subsequent retries with the same client token return the result from the original successful request and they have no additional effect. If you don't specify a client token, the CLI and SDK automatically generate 1 for you.</p>
     #   @return [String]
     class DeleteQueueRequest < Struct.new(
+      nil,
       :cluster_identifier,
       :queue_identifier,
       :client_token,
@@ -565,6 +590,7 @@ module Aws::PCS
     end
 
     class DeleteQueueResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -587,6 +613,7 @@ module Aws::PCS
     #   <p>The endpoint's connection port number.</p> <p> Example: <code>1234</code> </p>
     #   @return [String]
     class Endpoint < Struct.new(
+      nil,
       :type,
       :private_ip_address,
       :public_ip_address,
@@ -605,6 +632,7 @@ module Aws::PCS
     #   <p>The detailed error information.</p>
     #   @return [String]
     class ErrorInfo < Struct.new(
+      nil,
       :code,
       :message,
       keyword_init: true
@@ -616,6 +644,7 @@ module Aws::PCS
     #   <p>The name or ID of the cluster.</p>
     #   @return [String]
     class GetClusterRequest < Struct.new(
+      nil,
       :cluster_identifier,
       keyword_init: true
     )
@@ -626,6 +655,7 @@ module Aws::PCS
     #   <p>The cluster resource.</p>
     #   @return [Types::Cluster]
     class GetClusterResponse < Struct.new(
+      nil,
       :cluster,
       keyword_init: true
     )
@@ -639,6 +669,7 @@ module Aws::PCS
     #   <p>The name or ID of the compute node group.</p>
     #   @return [String]
     class GetComputeNodeGroupRequest < Struct.new(
+      nil,
       :cluster_identifier,
       :compute_node_group_identifier,
       keyword_init: true
@@ -650,6 +681,7 @@ module Aws::PCS
     #   <p>A compute node group associated with a cluster.</p>
     #   @return [Types::ComputeNodeGroup]
     class GetComputeNodeGroupResponse < Struct.new(
+      nil,
       :compute_node_group,
       keyword_init: true
     )
@@ -663,6 +695,7 @@ module Aws::PCS
     #   <p>The name or ID of the queue.</p>
     #   @return [String]
     class GetQueueRequest < Struct.new(
+      nil,
       :cluster_identifier,
       :queue_identifier,
       keyword_init: true
@@ -674,6 +707,7 @@ module Aws::PCS
     #   <p>A queue resource.</p>
     #   @return [Types::Queue]
     class GetQueueResponse < Struct.new(
+      nil,
       :queue,
       keyword_init: true
     )
@@ -685,6 +719,7 @@ module Aws::PCS
     #   <p>The EC2 instance type that PCS can provision in the compute node group.</p> <p> Example: <code>t2.xlarge</code> </p>
     #   @return [String]
     class InstanceConfig < Struct.new(
+      nil,
       :instance_type,
       keyword_init: true
     )
@@ -695,6 +730,7 @@ module Aws::PCS
     # @!attribute message
     #   @return [String]
     class InternalServerException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -708,6 +744,7 @@ module Aws::PCS
     #   <p>The maximum number of results that are returned per call. You can use <code>nextToken</code> to obtain further pages of results. The default is 10 results, and the maximum allowed page size is 100 results. A value of 0 uses the default.</p>
     #   @return [Integer]
     class ListClustersRequest < Struct.new(
+      nil,
       :next_token,
       :max_results,
       keyword_init: true
@@ -722,6 +759,7 @@ module Aws::PCS
     #   <p>The value of <code>nextToken</code> is a unique pagination token for each page of results returned. If <code>nextToken</code> is returned, there are more results available. Make the call again using the returned token to retrieve the next page. Keep all other arguments unchanged. Each pagination token expires after 24 hours. Using an expired pagination token returns an <code>HTTP 400 InvalidToken</code> error.</p>
     #   @return [String]
     class ListClustersResponse < Struct.new(
+      nil,
       :clusters,
       :next_token,
       keyword_init: true
@@ -739,6 +777,7 @@ module Aws::PCS
     #   <p>The maximum number of results that are returned per call. You can use <code>nextToken</code> to obtain further pages of results. The default is 10 results, and the maximum allowed page size is 100 results. A value of 0 uses the default.</p>
     #   @return [Integer]
     class ListComputeNodeGroupsRequest < Struct.new(
+      nil,
       :cluster_identifier,
       :next_token,
       :max_results,
@@ -754,6 +793,7 @@ module Aws::PCS
     #   <p>The value of <code>nextToken</code> is a unique pagination token for each page of results returned. If <code>nextToken</code> is returned, there are more results available. Make the call again using the returned token to retrieve the next page. Keep all other arguments unchanged. Each pagination token expires after 24 hours. Using an expired pagination token returns an <code>HTTP 400 InvalidToken</code> error.</p>
     #   @return [String]
     class ListComputeNodeGroupsResponse < Struct.new(
+      nil,
       :compute_node_groups,
       :next_token,
       keyword_init: true
@@ -771,6 +811,7 @@ module Aws::PCS
     #   <p>The maximum number of results that are returned per call. You can use <code>nextToken</code> to obtain further pages of results. The default is 10 results, and the maximum allowed page size is 100 results. A value of 0 uses the default.</p>
     #   @return [Integer]
     class ListQueuesRequest < Struct.new(
+      nil,
       :cluster_identifier,
       :next_token,
       :max_results,
@@ -786,6 +827,7 @@ module Aws::PCS
     #   <p>The value of <code>nextToken</code> is a unique pagination token for each page of results returned. If <code>nextToken</code> is returned, there are more results available. Make the call again using the returned token to retrieve the next page. Keep all other arguments unchanged. Each pagination token expires after 24 hours. Using an expired pagination token returns an <code>HTTP 400 InvalidToken</code> error.</p>
     #   @return [String]
     class ListQueuesResponse < Struct.new(
+      nil,
       :queues,
       :next_token,
       keyword_init: true
@@ -797,6 +839,7 @@ module Aws::PCS
     #   <p>The Amazon Resource Name (ARN) of the resource for which to list tags.</p>
     #   @return [String]
     class ListTagsForResourceRequest < Struct.new(
+      nil,
       :resource_arn,
       keyword_init: true
     )
@@ -807,6 +850,7 @@ module Aws::PCS
     #   <p>1 or more tags added to the resource. Each tag consists of a tag key and tag value. The tag value is optional and can be an empty string.</p>
     #   @return [Hash<String, String>]
     class ListTagsForResourceResponse < Struct.new(
+      nil,
       :tags,
       keyword_init: true
     )
@@ -824,6 +868,7 @@ module Aws::PCS
     #   <p>The IP address version the cluster uses. The default is <code>IPV4</code>.</p>
     #   @return [String]
     class Networking < Struct.new(
+      nil,
       :subnet_ids,
       :security_group_ids,
       :network_type,
@@ -843,6 +888,7 @@ module Aws::PCS
     #   <p>The IP address version the cluster uses. The default is <code>IPV4</code>.</p>
     #   @return [String]
     class NetworkingRequest < Struct.new(
+      nil,
       :subnet_ids,
       :security_group_ids,
       :network_type,
@@ -883,6 +929,7 @@ module Aws::PCS
     #   <p>The list of errors that occurred during queue provisioning.</p>
     #   @return [Array<Types::ErrorInfo>]
     class Queue < Struct.new(
+      nil,
       :name,
       :id,
       :arn,
@@ -903,6 +950,7 @@ module Aws::PCS
     #   <p>Additional Slurm-specific configuration that directly maps to Slurm settings.</p>
     #   @return [Array<Types::SlurmCustomSetting>]
     class QueueSlurmConfiguration < Struct.new(
+      nil,
       :slurm_custom_settings,
       keyword_init: true
     )
@@ -914,6 +962,7 @@ module Aws::PCS
     #   <p>Additional Slurm-specific configuration that directly maps to Slurm settings.</p>
     #   @return [Array<Types::SlurmCustomSetting>]
     class QueueSlurmConfigurationRequest < Struct.new(
+      nil,
       :slurm_custom_settings,
       keyword_init: true
     )
@@ -943,6 +992,7 @@ module Aws::PCS
     #   <p>The provisioning status of the queue.</p> <note> <p> The provisioning status doesn't indicate the overall health of the queue.</p> </note> <important> <p>The resource enters the <code>SUSPENDING</code> and <code>SUSPENDED</code> states when the scheduler is beyond end of life and we have suspended the cluster. When in these states, you can't use the cluster. The cluster controller is down and all compute instances are terminated. The resources still count toward your service quotas. You can delete a resource if its status is <code>SUSPENDED</code>. For more information, see <a href="https://docs.aws.amazon.com/pcs/latest/userguide/slurm-versions_faq.html">Frequently asked questions about Slurm versions in PCS</a> in the <i>PCS User Guide</i>.</p> </important>
     #   @return [String]
     class QueueSummary < Struct.new(
+      nil,
       :name,
       :id,
       :arn,
@@ -962,6 +1012,7 @@ module Aws::PCS
     #   <p>The client-generated token to allow for retries.</p>
     #   @return [String]
     class RegisterComputeNodeGroupInstanceRequest < Struct.new(
+      nil,
       :cluster_identifier,
       :bootstrap_id,
       keyword_init: true
@@ -979,6 +1030,7 @@ module Aws::PCS
     #   <p>The list of endpoints available for interaction with the scheduler.</p>
     #   @return [Array<Types::Endpoint>]
     class RegisterComputeNodeGroupInstanceResponse < Struct.new(
+      nil,
       :node_id,
       :shared_secret,
       :endpoints,
@@ -997,6 +1049,7 @@ module Aws::PCS
     #   <p> The type or category of the resource that was not found. </p>
     #   @return [String]
     class ResourceNotFoundException < Struct.new(
+      nil,
       :message,
       :resource_id,
       :resource_type,
@@ -1013,6 +1066,7 @@ module Aws::PCS
     #   <p>The upper bound of the number of instances allowed in the compute fleet.</p>
     #   @return [Integer]
     class ScalingConfiguration < Struct.new(
+      nil,
       :min_instance_count,
       :max_instance_count,
       keyword_init: true
@@ -1034,6 +1088,7 @@ module Aws::PCS
     #   <p>The upper bound of the number of instances allowed in the compute fleet.</p>
     #   @return [Integer]
     class ScalingConfigurationRequest < Struct.new(
+      nil,
       :min_instance_count,
       :max_instance_count,
       keyword_init: true
@@ -1055,6 +1110,7 @@ module Aws::PCS
     #   <p>The version of the specified scheduling software that PCS uses to manage cluster scaling and job scheduling. For more information, see <a href="https://docs.aws.amazon.com/pcs/latest/userguide/slurm-versions.html">Slurm versions in PCS</a> in the <i>PCS User Guide</i>.</p> <p>Valid Values: <code>23.11 | 24.05 | 24.11</code> </p>
     #   @return [String]
     class Scheduler < Struct.new(
+      nil,
       :type,
       :version,
       keyword_init: true
@@ -1070,6 +1126,7 @@ module Aws::PCS
     #   <p>The version of the specified scheduling software that PCS uses to manage cluster scaling and job scheduling. For more information, see <a href="https://docs.aws.amazon.com/pcs/latest/userguide/slurm-versions.html">Slurm versions in PCS</a> in the <i>PCS User Guide</i>.</p> <p>Valid Values: <code>23.11 | 24.05 | 24.11</code> </p>
     #   @return [String]
     class SchedulerRequest < Struct.new(
+      nil,
       :type,
       :version,
       keyword_init: true
@@ -1093,6 +1150,7 @@ module Aws::PCS
     #   <p> The <b>quota code</b> of the service quota that was exceeded. </p>
     #   @return [String]
     class ServiceQuotaExceededException < Struct.new(
+      nil,
       :message,
       :service_code,
       :resource_id,
@@ -1111,6 +1169,7 @@ module Aws::PCS
     #   <p>The version of the shared Slurm key.</p>
     #   @return [String]
     class SlurmAuthKey < Struct.new(
+      nil,
       :secret_arn,
       :secret_version,
       keyword_init: true
@@ -1126,6 +1185,7 @@ module Aws::PCS
     #   <p>The values for the configured Slurm settings.</p>
     #   @return [String]
     class SlurmCustomSetting < Struct.new(
+      nil,
       :parameter_name,
       :parameter_value,
       keyword_init: true
@@ -1138,6 +1198,7 @@ module Aws::PCS
     #   <p>The Amazon EC2 allocation strategy PCS uses to provision EC2 instances. PCS supports <b>lowest price</b>, <b>capacity optimized</b>, and <b>price capacity optimized</b>. For more information, see <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/spot-fleet-allocation-strategy.html">Use allocation strategies to determine how EC2 Fleet or Spot Fleet fulfills Spot and On-Demand capacity</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>. If you don't provide this option, it defaults to <b>price capacity optimized</b>.</p>
     #   @return [String]
     class SpotOptions < Struct.new(
+      nil,
       :allocation_strategy,
       keyword_init: true
     )
@@ -1151,6 +1212,7 @@ module Aws::PCS
     #   <p>1 or more tags added to the resource. Each tag consists of a tag key and tag value. The tag value is optional and can be an empty string.</p>
     #   @return [Hash<String, String>]
     class TagResourceRequest < Struct.new(
+      nil,
       :resource_arn,
       :tags,
       keyword_init: true
@@ -1165,6 +1227,7 @@ module Aws::PCS
     #   <p> The number of seconds to wait before retrying the request. </p>
     #   @return [Integer]
     class ThrottlingException < Struct.new(
+      nil,
       :message,
       :retry_after_seconds,
       keyword_init: true
@@ -1179,6 +1242,7 @@ module Aws::PCS
     #   <p>1 or more tag keys to remove from the resource. Specify only tag keys and not tag values.</p>
     #   @return [Array<String>]
     class UntagResourceRequest < Struct.new(
+      nil,
       :resource_arn,
       :tag_keys,
       keyword_init: true
@@ -1194,6 +1258,7 @@ module Aws::PCS
     #   <p>The default value for <code>mode</code> is <code>STANDARD</code>. A value of <code>STANDARD</code> means Slurm accounting is enabled.</p>
     #   @return [String]
     class UpdateAccountingRequest < Struct.new(
+      nil,
       :default_purge_time_in_days,
       :mode,
       keyword_init: true
@@ -1211,6 +1276,7 @@ module Aws::PCS
     #   <p>Additional options related to the Slurm scheduler.</p>
     #   @return [Types::UpdateClusterSlurmConfigurationRequest]
     class UpdateClusterRequest < Struct.new(
+      nil,
       :cluster_identifier,
       :client_token,
       :slurm_configuration,
@@ -1223,6 +1289,7 @@ module Aws::PCS
     #   <p>The cluster resource and configuration.</p>
     #   @return [Types::Cluster]
     class UpdateClusterResponse < Struct.new(
+      nil,
       :cluster,
       keyword_init: true
     )
@@ -1240,6 +1307,7 @@ module Aws::PCS
     #   <p>The accounting configuration includes configurable settings for Slurm accounting.</p>
     #   @return [Types::UpdateAccountingRequest]
     class UpdateClusterSlurmConfigurationRequest < Struct.new(
+      nil,
       :scale_down_idle_time_in_seconds,
       :slurm_custom_settings,
       :accounting,
@@ -1282,6 +1350,7 @@ module Aws::PCS
     #   <p>A unique, case-sensitive identifier that you provide to ensure the idempotency of the request. Idempotency ensures that an API request completes only once. With an idempotent request, if the original request completes successfully, the subsequent retries with the same client token return the result from the original successful request and they have no additional effect. If you don't specify a client token, the CLI and SDK automatically generate 1 for you.</p>
     #   @return [String]
     class UpdateComputeNodeGroupRequest < Struct.new(
+      nil,
       :cluster_identifier,
       :compute_node_group_identifier,
       :ami_id,
@@ -1302,6 +1371,7 @@ module Aws::PCS
     #   <p>A compute node group associated with a cluster.</p>
     #   @return [Types::ComputeNodeGroup]
     class UpdateComputeNodeGroupResponse < Struct.new(
+      nil,
       :compute_node_group,
       keyword_init: true
     )
@@ -1313,6 +1383,7 @@ module Aws::PCS
     #   <p>Additional Slurm-specific configuration that directly maps to Slurm settings.</p>
     #   @return [Array<Types::SlurmCustomSetting>]
     class UpdateComputeNodeGroupSlurmConfigurationRequest < Struct.new(
+      nil,
       :slurm_custom_settings,
       keyword_init: true
     )
@@ -1335,6 +1406,7 @@ module Aws::PCS
     #   <p>A unique, case-sensitive identifier that you provide to ensure the idempotency of the request. Idempotency ensures that an API request completes only once. With an idempotent request, if the original request completes successfully, the subsequent retries with the same client token return the result from the original successful request and they have no additional effect. If you don't specify a client token, the CLI and SDK automatically generate 1 for you.</p>
     #   @return [String]
     class UpdateQueueRequest < Struct.new(
+      nil,
       :cluster_identifier,
       :queue_identifier,
       :compute_node_group_configurations,
@@ -1349,6 +1421,7 @@ module Aws::PCS
     #   <p>A queue resource.</p>
     #   @return [Types::Queue]
     class UpdateQueueResponse < Struct.new(
+      nil,
       :queue,
       keyword_init: true
     )
@@ -1360,6 +1433,7 @@ module Aws::PCS
     #   <p>Additional Slurm-specific configuration that directly maps to Slurm settings.</p>
     #   @return [Array<Types::SlurmCustomSetting>]
     class UpdateQueueSlurmConfigurationRequest < Struct.new(
+      nil,
       :slurm_custom_settings,
       keyword_init: true
     )
@@ -1376,6 +1450,7 @@ module Aws::PCS
     #   <p> A list of fields or properties that failed validation. </p>
     #   @return [Array<Types::ValidationExceptionField>]
     class ValidationException < Struct.new(
+      nil,
       :message,
       :reason,
       :field_list,
@@ -1392,6 +1467,7 @@ module Aws::PCS
     #   <p>The message body of the exception.</p>
     #   @return [String]
     class ValidationExceptionField < Struct.new(
+      nil,
       :name,
       :message,
       keyword_init: true

@@ -10,6 +10,7 @@ module Aws::MailManager
     # @!attribute message
     #   @return [String]
     class AccessDeniedException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -24,6 +25,7 @@ module Aws::MailManager
     #   <p>The value of the header to add to the email.</p>
     #   @return [String]
     class AddHeaderAction < Struct.new(
+      nil,
       :header_name,
       :header_value,
       keyword_init: true
@@ -48,6 +50,7 @@ module Aws::MailManager
     #   <p>The timestamp of when the Add On instance was created.</p>
     #   @return [Time]
     class AddonInstance < Struct.new(
+      nil,
       :addon_instance_id,
       :addon_subscription_id,
       :addon_name,
@@ -72,6 +75,7 @@ module Aws::MailManager
     #   <p>The timestamp of when the Add On subscription was created.</p>
     #   @return [Time]
     class AddonSubscription < Struct.new(
+      nil,
       :addon_subscription_id,
       :addon_name,
       :addon_subscription_arn,
@@ -86,6 +90,7 @@ module Aws::MailManager
     #   <p>Filter to limit the results to addresses having the provided prefix.</p>
     #   @return [String]
     class AddressFilter < Struct.new(
+      nil,
       :address_prefix,
       keyword_init: true
     )
@@ -109,6 +114,7 @@ module Aws::MailManager
     #   <p>The timestamp of when the address list was last updated.</p>
     #   @return [Time]
     class AddressList < Struct.new(
+      nil,
       :address_list_id,
       :address_list_arn,
       :address_list_name,
@@ -127,6 +133,7 @@ module Aws::MailManager
     #   <p>The returned value from an Add On.</p>
     #   @return [String]
     class Analysis < Struct.new(
+      nil,
       :analyzer,
       :result_field,
       keyword_init: true
@@ -148,6 +155,7 @@ module Aws::MailManager
     #   <p>The timestamp of when the archive was last updated.</p>
     #   @return [Time]
     class Archive < Struct.new(
+      nil,
       :archive_id,
       :archive_name,
       :archive_state,
@@ -165,6 +173,7 @@ module Aws::MailManager
     #   <p>The identifier of the archive to send the email to.</p>
     #   @return [String]
     class ArchiveAction < Struct.new(
+      nil,
       :action_failure_policy,
       :target_archive,
       keyword_init: true
@@ -180,6 +189,7 @@ module Aws::MailManager
     #   <p>The boolean operator to use for evaluation.</p>
     #   @return [String]
     class ArchiveBooleanExpression < Struct.new(
+      nil,
       :evaluate,
       :operator,
       keyword_init: true
@@ -230,6 +240,7 @@ module Aws::MailManager
     #   <p>The filter conditions for emails to exclude.</p>
     #   @return [Array<Types::ArchiveFilterCondition>]
     class ArchiveFilters < Struct.new(
+      nil,
       :include,
       :unless,
       keyword_init: true
@@ -263,6 +274,7 @@ module Aws::MailManager
     #   <p>The list of string values to evaluate the email attribute against.</p>
     #   @return [Array<String>]
     class ArchiveStringExpression < Struct.new(
+      nil,
       :evaluate,
       :operator,
       :values,
@@ -290,6 +302,7 @@ module Aws::MailManager
     # @!attribute message
     #   @return [String]
     class ConflictException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -306,6 +319,7 @@ module Aws::MailManager
     #   <p>The tags used to organize, track, or control access for the resource. For example, { "tags": {"key1":"value1", "key2":"value2"} }.</p>
     #   @return [Array<Types::Tag>]
     class CreateAddonInstanceRequest < Struct.new(
+      nil,
       :client_token,
       :addon_subscription_id,
       :tags,
@@ -318,6 +332,7 @@ module Aws::MailManager
     #   <p>The unique ID of the Add On instance created by this API.</p>
     #   @return [String]
     class CreateAddonInstanceResponse < Struct.new(
+      nil,
       :addon_instance_id,
       keyword_init: true
     )
@@ -334,6 +349,7 @@ module Aws::MailManager
     #   <p>The tags used to organize, track, or control access for the resource. For example, { "tags": {"key1":"value1", "key2":"value2"} }.</p>
     #   @return [Array<Types::Tag>]
     class CreateAddonSubscriptionRequest < Struct.new(
+      nil,
       :client_token,
       :addon_name,
       :tags,
@@ -346,6 +362,7 @@ module Aws::MailManager
     #   <p>The unique ID of the Add On subscription created by this API.</p>
     #   @return [String]
     class CreateAddonSubscriptionResponse < Struct.new(
+      nil,
       :addon_subscription_id,
       keyword_init: true
     )
@@ -365,6 +382,7 @@ module Aws::MailManager
     #   <p>The format of the input for an import job.</p>
     #   @return [Types::ImportDataFormat]
     class CreateAddressListImportJobRequest < Struct.new(
+      nil,
       :client_token,
       :address_list_id,
       :name,
@@ -381,6 +399,7 @@ module Aws::MailManager
     #   <p>The pre-signed URL target for uploading the input file.</p>
     #   @return [String]
     class CreateAddressListImportJobResponse < Struct.new(
+      nil,
       :job_id,
       :pre_signed_url,
       keyword_init: true
@@ -398,6 +417,7 @@ module Aws::MailManager
     #   <p>The tags used to organize, track, or control access for the resource. For example, { "tags": {"key1":"value1", "key2":"value2"} }.</p>
     #   @return [Array<Types::Tag>]
     class CreateAddressListRequest < Struct.new(
+      nil,
       :client_token,
       :address_list_name,
       :tags,
@@ -410,6 +430,7 @@ module Aws::MailManager
     #   <p>The identifier of the created address list.</p>
     #   @return [String]
     class CreateAddressListResponse < Struct.new(
+      nil,
       :address_list_id,
       keyword_init: true
     )
@@ -433,6 +454,7 @@ module Aws::MailManager
     #   <p>The tags used to organize, track, or control access for the resource. For example, { "tags": {"key1":"value1", "key2":"value2"} }.</p>
     #   @return [Array<Types::Tag>]
     class CreateArchiveRequest < Struct.new(
+      nil,
       :client_token,
       :archive_name,
       :retention,
@@ -448,6 +470,7 @@ module Aws::MailManager
     #   <p>The unique identifier for the newly created archive.</p>
     #   @return [String]
     class CreateArchiveResponse < Struct.new(
+      nil,
       :archive_id,
       keyword_init: true
     )
@@ -479,6 +502,7 @@ module Aws::MailManager
     #   <p>The tags used to organize, track, or control access for the resource. For example, { "tags": {"key1":"value1", "key2":"value2"} }.</p>
     #   @return [Array<Types::Tag>]
     class CreateIngressPointRequest < Struct.new(
+      nil,
       :client_token,
       :ingress_point_name,
       :type,
@@ -496,6 +520,7 @@ module Aws::MailManager
     #   <p>The unique identifier for a previously created ingress endpoint.</p>
     #   @return [String]
     class CreateIngressPointResponse < Struct.new(
+      nil,
       :ingress_point_id,
       keyword_init: true
     )
@@ -521,6 +546,7 @@ module Aws::MailManager
     #   <p>The tags used to organize, track, or control access for the resource. For example, { "tags": {"key1":"value1", "key2":"value2"} }.</p>
     #   @return [Array<Types::Tag>]
     class CreateRelayRequest < Struct.new(
+      nil,
       :client_token,
       :relay_name,
       :server_name,
@@ -536,6 +562,7 @@ module Aws::MailManager
     #   <p>A unique identifier of the created relay resource.</p>
     #   @return [String]
     class CreateRelayResponse < Struct.new(
+      nil,
       :relay_id,
       keyword_init: true
     )
@@ -555,6 +582,7 @@ module Aws::MailManager
     #   <p>The tags used to organize, track, or control access for the resource. For example, { "tags": {"key1":"value1", "key2":"value2"} }.</p>
     #   @return [Array<Types::Tag>]
     class CreateRuleSetRequest < Struct.new(
+      nil,
       :client_token,
       :rule_set_name,
       :rules,
@@ -568,6 +596,7 @@ module Aws::MailManager
     #   <p>The identifier of the created rule set.</p>
     #   @return [String]
     class CreateRuleSetResponse < Struct.new(
+      nil,
       :rule_set_id,
       keyword_init: true
     )
@@ -593,6 +622,7 @@ module Aws::MailManager
     #   <p>The tags used to organize, track, or control access for the resource. For example, { "tags": {"key1":"value1", "key2":"value2"} }.</p>
     #   @return [Array<Types::Tag>]
     class CreateTrafficPolicyRequest < Struct.new(
+      nil,
       :client_token,
       :traffic_policy_name,
       :policy_statements,
@@ -608,6 +638,7 @@ module Aws::MailManager
     #   <p>The identifier of the traffic policy resource.</p>
     #   @return [String]
     class CreateTrafficPolicyResponse < Struct.new(
+      nil,
       :traffic_policy_id,
       keyword_init: true
     )
@@ -618,6 +649,7 @@ module Aws::MailManager
     #   <p>The Add On instance ID to delete.</p>
     #   @return [String]
     class DeleteAddonInstanceRequest < Struct.new(
+      nil,
       :addon_instance_id,
       keyword_init: true
     )
@@ -625,6 +657,7 @@ module Aws::MailManager
     end
 
     class DeleteAddonInstanceResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -634,6 +667,7 @@ module Aws::MailManager
     #   <p>The Add On subscription ID to delete.</p>
     #   @return [String]
     class DeleteAddonSubscriptionRequest < Struct.new(
+      nil,
       :addon_subscription_id,
       keyword_init: true
     )
@@ -641,6 +675,7 @@ module Aws::MailManager
     end
 
     class DeleteAddonSubscriptionResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -650,6 +685,7 @@ module Aws::MailManager
     #   <p>The identifier of an existing address list resource to delete.</p>
     #   @return [String]
     class DeleteAddressListRequest < Struct.new(
+      nil,
       :address_list_id,
       keyword_init: true
     )
@@ -657,6 +693,7 @@ module Aws::MailManager
     end
 
     class DeleteAddressListResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -667,6 +704,7 @@ module Aws::MailManager
     #   <p>The identifier of the archive to delete.</p>
     #   @return [String]
     class DeleteArchiveRequest < Struct.new(
+      nil,
       :archive_id,
       keyword_init: true
     )
@@ -675,6 +713,7 @@ module Aws::MailManager
 
     # <p>The response indicating if the archive deletion was successfully initiated.</p> <p>On success, returns an HTTP 200 status code. On failure, returns an error message.</p>
     class DeleteArchiveResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -684,6 +723,7 @@ module Aws::MailManager
     #   <p>The identifier of the ingress endpoint resource that you want to delete.</p>
     #   @return [String]
     class DeleteIngressPointRequest < Struct.new(
+      nil,
       :ingress_point_id,
       keyword_init: true
     )
@@ -691,6 +731,7 @@ module Aws::MailManager
     end
 
     class DeleteIngressPointResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -700,6 +741,7 @@ module Aws::MailManager
     #   <p>The unique relay identifier.</p>
     #   @return [String]
     class DeleteRelayRequest < Struct.new(
+      nil,
       :relay_id,
       keyword_init: true
     )
@@ -707,6 +749,7 @@ module Aws::MailManager
     end
 
     class DeleteRelayResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -716,6 +759,7 @@ module Aws::MailManager
     #   <p>The identifier of an existing rule set resource to delete.</p>
     #   @return [String]
     class DeleteRuleSetRequest < Struct.new(
+      nil,
       :rule_set_id,
       keyword_init: true
     )
@@ -723,6 +767,7 @@ module Aws::MailManager
     end
 
     class DeleteRuleSetResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -732,6 +777,7 @@ module Aws::MailManager
     #   <p>The identifier of the traffic policy that you want to delete.</p>
     #   @return [String]
     class DeleteTrafficPolicyRequest < Struct.new(
+      nil,
       :traffic_policy_id,
       keyword_init: true
     )
@@ -739,6 +785,7 @@ module Aws::MailManager
     end
 
     class DeleteTrafficPolicyResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -755,6 +802,7 @@ module Aws::MailManager
     #   <p>The Amazon Resource Name (ARN) of an IAM role to use to execute this action. The role must have access to the workmail:DeliverToMailbox API.</p>
     #   @return [String]
     class DeliverToMailboxAction < Struct.new(
+      nil,
       :action_failure_policy,
       :mailbox_arn,
       :role_arn,
@@ -777,6 +825,7 @@ module Aws::MailManager
     #   <p>The Amazon Resource Name (ARN) of the IAM Role to use while delivering to Amazon Q Business. This role must have access to the <code>qbusiness:BatchPutDocument</code> API for the given application and index.</p>
     #   @return [String]
     class DeliverToQBusinessAction < Struct.new(
+      nil,
       :action_failure_policy,
       :application_id,
       :index_id,
@@ -793,6 +842,7 @@ module Aws::MailManager
     #   <p>The address to be removed from the address list.</p>
     #   @return [String]
     class DeregisterMemberFromAddressListRequest < Struct.new(
+      nil,
       :address_list_id,
       :address,
       keyword_init: true
@@ -801,6 +851,7 @@ module Aws::MailManager
     end
 
     class DeregisterMemberFromAddressListResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -808,6 +859,7 @@ module Aws::MailManager
 
     # <p>This action causes processing to stop and the email to be dropped. If the action applies only to certain recipients, only those recipients are dropped, and processing continues for other recipients.</p>
     class DropAction < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -824,6 +876,7 @@ module Aws::MailManager
     #   <p>All SMTP TO entries given by the host from which the email was received.</p>
     #   @return [Array<String>]
     class Envelope < Struct.new(
+      nil,
       :helo,
       :from,
       :to,
@@ -861,6 +914,7 @@ module Aws::MailManager
     #   <p>An error message if the export job failed.</p>
     #   @return [String]
     class ExportStatus < Struct.new(
+      nil,
       :submission_timestamp,
       :completion_timestamp,
       :state,
@@ -878,6 +932,7 @@ module Aws::MailManager
     #   <p>The current status of the export job.</p>
     #   @return [Types::ExportStatus]
     class ExportSummary < Struct.new(
+      nil,
       :export_id,
       :status,
       keyword_init: true
@@ -889,6 +944,7 @@ module Aws::MailManager
     #   <p>The Add On instance ID to retrieve information for.</p>
     #   @return [String]
     class GetAddonInstanceRequest < Struct.new(
+      nil,
       :addon_instance_id,
       keyword_init: true
     )
@@ -908,6 +964,7 @@ module Aws::MailManager
     #   <p>The timestamp of when the Add On instance was created.</p>
     #   @return [Time]
     class GetAddonInstanceResponse < Struct.new(
+      nil,
       :addon_subscription_id,
       :addon_name,
       :addon_instance_arn,
@@ -921,6 +978,7 @@ module Aws::MailManager
     #   <p>The Add On subscription ID to retrieve information for.</p>
     #   @return [String]
     class GetAddonSubscriptionRequest < Struct.new(
+      nil,
       :addon_subscription_id,
       keyword_init: true
     )
@@ -937,6 +995,7 @@ module Aws::MailManager
     #   <p>The timestamp of when the Add On subscription was created.</p>
     #   @return [Time]
     class GetAddonSubscriptionResponse < Struct.new(
+      nil,
       :addon_name,
       :addon_subscription_arn,
       :created_timestamp,
@@ -949,6 +1008,7 @@ module Aws::MailManager
     #   <p>The identifier of the import job that needs to be retrieved.</p>
     #   @return [String]
     class GetAddressListImportJobRequest < Struct.new(
+      nil,
       :job_id,
       keyword_init: true
     )
@@ -992,6 +1052,7 @@ module Aws::MailManager
     #   <p>The reason for failure of an import job.</p>
     #   @return [String]
     class GetAddressListImportJobResponse < Struct.new(
+      nil,
       :job_id,
       :name,
       :status,
@@ -1013,6 +1074,7 @@ module Aws::MailManager
     #   <p>The identifier of an existing address list resource to be retrieved.</p>
     #   @return [String]
     class GetAddressListRequest < Struct.new(
+      nil,
       :address_list_id,
       keyword_init: true
     )
@@ -1035,6 +1097,7 @@ module Aws::MailManager
     #   <p>The date of when the address list was last updated.</p>
     #   @return [Time]
     class GetAddressListResponse < Struct.new(
+      nil,
       :address_list_id,
       :address_list_arn,
       :address_list_name,
@@ -1050,6 +1113,7 @@ module Aws::MailManager
     #   <p>The identifier of the export job to get details for.</p>
     #   @return [String]
     class GetArchiveExportRequest < Struct.new(
+      nil,
       :export_id,
       keyword_init: true
     )
@@ -1079,6 +1143,7 @@ module Aws::MailManager
     #   <p>The current status of the export job.</p>
     #   @return [Types::ExportStatus]
     class GetArchiveExportResponse < Struct.new(
+      nil,
       :archive_id,
       :filters,
       :from_timestamp,
@@ -1096,6 +1161,7 @@ module Aws::MailManager
     #   <p>The unique identifier of the archived email message.</p>
     #   @return [String]
     class GetArchiveMessageContentRequest < Struct.new(
+      nil,
       :archived_message_id,
       keyword_init: true
     )
@@ -1107,6 +1173,7 @@ module Aws::MailManager
     #   <p>The textual body content of the email message.</p>
     #   @return [Types::MessageBody]
     class GetArchiveMessageContentResponse < Struct.new(
+      nil,
       :body,
       keyword_init: true
     )
@@ -1118,6 +1185,7 @@ module Aws::MailManager
     #   <p>The unique identifier of the archived email message.</p>
     #   @return [String]
     class GetArchiveMessageRequest < Struct.new(
+      nil,
       :archived_message_id,
       keyword_init: true
     )
@@ -1135,6 +1203,7 @@ module Aws::MailManager
     #   <p>The SMTP envelope information of the email.</p>
     #   @return [Types::Envelope]
     class GetArchiveMessageResponse < Struct.new(
+      nil,
       :message_download_link,
       :metadata,
       :envelope,
@@ -1148,6 +1217,7 @@ module Aws::MailManager
     #   <p>The identifier of the archive to retrieve.</p>
     #   @return [String]
     class GetArchiveRequest < Struct.new(
+      nil,
       :archive_id,
       keyword_init: true
     )
@@ -1180,6 +1250,7 @@ module Aws::MailManager
     #   <p>The Amazon Resource Name (ARN) of the KMS key used to encrypt the archive.</p>
     #   @return [String]
     class GetArchiveResponse < Struct.new(
+      nil,
       :archive_id,
       :archive_name,
       :archive_arn,
@@ -1198,6 +1269,7 @@ module Aws::MailManager
     #   <p>The identifier of the search job to get details for.</p>
     #   @return [String]
     class GetArchiveSearchRequest < Struct.new(
+      nil,
       :search_id,
       keyword_init: true
     )
@@ -1224,6 +1296,7 @@ module Aws::MailManager
     #   <p>The current status of the search job.</p>
     #   @return [Types::SearchStatus]
     class GetArchiveSearchResponse < Struct.new(
+      nil,
       :archive_id,
       :filters,
       :from_timestamp,
@@ -1240,6 +1313,7 @@ module Aws::MailManager
     #   <p>The identifier of the completed search job.</p>
     #   @return [String]
     class GetArchiveSearchResultsRequest < Struct.new(
+      nil,
       :search_id,
       keyword_init: true
     )
@@ -1251,6 +1325,7 @@ module Aws::MailManager
     #   <p>The list of email result objects matching the search criteria.</p>
     #   @return [Array<Types::Row>]
     class GetArchiveSearchResultsResponse < Struct.new(
+      nil,
       :rows,
       keyword_init: true
     )
@@ -1261,6 +1336,7 @@ module Aws::MailManager
     #   <p>The identifier of an ingress endpoint.</p>
     #   @return [String]
     class GetIngressPointRequest < Struct.new(
+      nil,
       :ingress_point_id,
       keyword_init: true
     )
@@ -1304,6 +1380,7 @@ module Aws::MailManager
     #   <p>The timestamp of when the ingress endpoint was last updated.</p>
     #   @return [Time]
     class GetIngressPointResponse < Struct.new(
+      nil,
       :ingress_point_id,
       :ingress_point_name,
       :ingress_point_arn,
@@ -1328,6 +1405,7 @@ module Aws::MailManager
     #   <p>The address to be retrieved from the address list.</p>
     #   @return [String]
     class GetMemberOfAddressListRequest < Struct.new(
+      nil,
       :address_list_id,
       :address,
       keyword_init: true
@@ -1342,6 +1420,7 @@ module Aws::MailManager
     #   <p>The timestamp of when the address was created.</p>
     #   @return [Time]
     class GetMemberOfAddressListResponse < Struct.new(
+      nil,
       :address,
       :created_timestamp,
       keyword_init: true
@@ -1353,6 +1432,7 @@ module Aws::MailManager
     #   <p>A unique relay identifier.</p>
     #   @return [String]
     class GetRelayRequest < Struct.new(
+      nil,
       :relay_id,
       keyword_init: true
     )
@@ -1384,6 +1464,7 @@ module Aws::MailManager
     #   <p>The timestamp of when relay was last updated.</p>
     #   @return [Time]
     class GetRelayResponse < Struct.new(
+      nil,
       :relay_id,
       :relay_arn,
       :relay_name,
@@ -1401,6 +1482,7 @@ module Aws::MailManager
     #   <p>The identifier of an existing rule set to be retrieved.</p>
     #   @return [String]
     class GetRuleSetRequest < Struct.new(
+      nil,
       :rule_set_id,
       keyword_init: true
     )
@@ -1426,6 +1508,7 @@ module Aws::MailManager
     #   <p>The rules contained in the rule set.</p>
     #   @return [Array<Types::Rule>]
     class GetRuleSetResponse < Struct.new(
+      nil,
       :rule_set_id,
       :rule_set_arn,
       :rule_set_name,
@@ -1441,6 +1524,7 @@ module Aws::MailManager
     #   <p>The identifier of the traffic policy resource.</p>
     #   @return [String]
     class GetTrafficPolicyRequest < Struct.new(
+      nil,
       :traffic_policy_id,
       keyword_init: true
     )
@@ -1472,6 +1556,7 @@ module Aws::MailManager
     #   <p>The timestamp of when the traffic policy was last updated.</p>
     #   @return [Time]
     class GetTrafficPolicyResponse < Struct.new(
+      nil,
       :traffic_policy_name,
       :traffic_policy_id,
       :traffic_policy_arn,
@@ -1490,6 +1575,7 @@ module Aws::MailManager
     #   <p>The type of file that would be passed as an input for the address list import job.</p>
     #   @return [String]
     class ImportDataFormat < Struct.new(
+      nil,
       :import_data_type,
       keyword_init: true
     )
@@ -1534,6 +1620,7 @@ module Aws::MailManager
     #   <p>The reason for failure of an import job.</p>
     #   @return [String]
     class ImportJob < Struct.new(
+      nil,
       :job_id,
       :name,
       :status,
@@ -1559,6 +1646,7 @@ module Aws::MailManager
     #   <p>The returned value from an Add On.</p>
     #   @return [String]
     class IngressAnalysis < Struct.new(
+      nil,
       :analyzer,
       :result_field,
       keyword_init: true
@@ -1574,6 +1662,7 @@ module Aws::MailManager
     #   <p>The matching operator for a boolean condition expression.</p>
     #   @return [String]
     class IngressBooleanExpression < Struct.new(
+      nil,
       :evaluate,
       :operator,
       keyword_init: true
@@ -1627,6 +1716,7 @@ module Aws::MailManager
     #   <p>The right hand side argument of an IP condition expression.</p>
     #   @return [Array<String>]
     class IngressIpv4Expression < Struct.new(
+      nil,
       :evaluate,
       :operator,
       :values,
@@ -1646,6 +1736,7 @@ module Aws::MailManager
     #   <p>The right hand side argument of an IPv6 condition expression.</p>
     #   @return [Array<String>]
     class IngressIpv6Expression < Struct.new(
+      nil,
       :evaluate,
       :operator,
       :values,
@@ -1677,6 +1768,7 @@ module Aws::MailManager
     #   <p>The address lists that will be used for evaluation.</p>
     #   @return [Array<String>]
     class IngressIsInAddressList < Struct.new(
+      nil,
       :attribute,
       :address_lists,
       keyword_init: true
@@ -1701,6 +1793,7 @@ module Aws::MailManager
     #   <p> The DNS A Record that identifies your ingress endpoint. Configure your DNS Mail Exchange (MX) record with this value to route emails to Mail Manager. </p>
     #   @return [String]
     class IngressPoint < Struct.new(
+      nil,
       :ingress_point_name,
       :ingress_point_id,
       :status,
@@ -1719,6 +1812,7 @@ module Aws::MailManager
     #   <p>The ingress endpoint SecretsManager::Secret ARN configuration for the ingress endpoint resource.</p>
     #   @return [String]
     class IngressPointAuthConfiguration < Struct.new(
+      nil,
       :ingress_point_password_configuration,
       :secret_arn,
       keyword_init: true
@@ -1757,6 +1851,7 @@ module Aws::MailManager
     #   <p>The previous password expiry timestamp of the ingress endpoint resource.</p>
     #   @return [Time]
     class IngressPointPasswordConfiguration < Struct.new(
+      nil,
       :smtp_password_version,
       :previous_smtp_password_version,
       :previous_smtp_password_expiry_timestamp,
@@ -1776,6 +1871,7 @@ module Aws::MailManager
     #   <p>The right hand side argument of a string condition expression.</p>
     #   @return [Array<String>]
     class IngressStringExpression < Struct.new(
+      nil,
       :evaluate,
       :operator,
       :values,
@@ -1815,6 +1911,7 @@ module Aws::MailManager
     #   <p>The right hand side argument of a TLS condition expression.</p>
     #   @return [String]
     class IngressTlsProtocolExpression < Struct.new(
+      nil,
       :evaluate,
       :operator,
       :value,
@@ -1845,6 +1942,7 @@ module Aws::MailManager
     #   <p>The maximum number of ingress endpoint resources that are returned per call. You can use NextToken to obtain further ingress endpoints. </p>
     #   @return [Integer]
     class ListAddonInstancesRequest < Struct.new(
+      nil,
       :next_token,
       :page_size,
       keyword_init: true
@@ -1859,6 +1957,7 @@ module Aws::MailManager
     #   <p>If NextToken is returned, there are more results available. The value of NextToken is a unique pagination token for each page. Make the call again using the returned token to retrieve the next page.</p>
     #   @return [String]
     class ListAddonInstancesResponse < Struct.new(
+      nil,
       :addon_instances,
       :next_token,
       keyword_init: true
@@ -1873,6 +1972,7 @@ module Aws::MailManager
     #   <p>The maximum number of ingress endpoint resources that are returned per call. You can use NextToken to obtain further ingress endpoints. </p>
     #   @return [Integer]
     class ListAddonSubscriptionsRequest < Struct.new(
+      nil,
       :next_token,
       :page_size,
       keyword_init: true
@@ -1887,6 +1987,7 @@ module Aws::MailManager
     #   <p>If NextToken is returned, there are more results available. The value of NextToken is a unique pagination token for each page. Make the call again using the returned token to retrieve the next page.</p>
     #   @return [String]
     class ListAddonSubscriptionsResponse < Struct.new(
+      nil,
       :addon_subscriptions,
       :next_token,
       keyword_init: true
@@ -1904,6 +2005,7 @@ module Aws::MailManager
     #   <p>The maximum number of import jobs that are returned per call. You can use NextToken to retrieve the next page of jobs.</p>
     #   @return [Integer]
     class ListAddressListImportJobsRequest < Struct.new(
+      nil,
       :address_list_id,
       :next_token,
       :page_size,
@@ -1919,6 +2021,7 @@ module Aws::MailManager
     #   <p>If NextToken is returned, there are more results available. The value of NextToken is a unique pagination token for each page. Make the call again using the returned token to retrieve the next page.</p>
     #   @return [String]
     class ListAddressListImportJobsResponse < Struct.new(
+      nil,
       :import_jobs,
       :next_token,
       keyword_init: true
@@ -1933,6 +2036,7 @@ module Aws::MailManager
     #   <p>The maximum number of address list resources that are returned per call. You can use NextToken to retrieve the next page of address lists.</p>
     #   @return [Integer]
     class ListAddressListsRequest < Struct.new(
+      nil,
       :next_token,
       :page_size,
       keyword_init: true
@@ -1947,6 +2051,7 @@ module Aws::MailManager
     #   <p>If NextToken is returned, there are more results available. The value of NextToken is a unique pagination token for each page. Make the call again using the returned token to retrieve the next page.</p>
     #   @return [String]
     class ListAddressListsResponse < Struct.new(
+      nil,
       :address_lists,
       :next_token,
       keyword_init: true
@@ -1965,6 +2070,7 @@ module Aws::MailManager
     #   <p>The maximum number of archive export jobs that are returned per call. You can use NextToken to obtain further pages of archives. </p>
     #   @return [Integer]
     class ListArchiveExportsRequest < Struct.new(
+      nil,
       :archive_id,
       :next_token,
       :page_size,
@@ -1981,6 +2087,7 @@ module Aws::MailManager
     #   <p>If present, use to retrieve the next page of results.</p>
     #   @return [String]
     class ListArchiveExportsResponse < Struct.new(
+      nil,
       :exports,
       :next_token,
       keyword_init: true
@@ -1999,6 +2106,7 @@ module Aws::MailManager
     #   <p>The maximum number of archive search jobs that are returned per call. You can use NextToken to obtain further pages of archives. </p>
     #   @return [Integer]
     class ListArchiveSearchesRequest < Struct.new(
+      nil,
       :archive_id,
       :next_token,
       :page_size,
@@ -2015,6 +2123,7 @@ module Aws::MailManager
     #   <p>If present, use to retrieve the next page of results.</p>
     #   @return [String]
     class ListArchiveSearchesResponse < Struct.new(
+      nil,
       :searches,
       :next_token,
       keyword_init: true
@@ -2030,6 +2139,7 @@ module Aws::MailManager
     #   <p>The maximum number of archives that are returned per call. You can use NextToken to obtain further pages of archives. </p>
     #   @return [Integer]
     class ListArchivesRequest < Struct.new(
+      nil,
       :next_token,
       :page_size,
       keyword_init: true
@@ -2045,6 +2155,7 @@ module Aws::MailManager
     #   <p>If present, use to retrieve the next page of results.</p>
     #   @return [String]
     class ListArchivesResponse < Struct.new(
+      nil,
       :archives,
       :next_token,
       keyword_init: true
@@ -2059,6 +2170,7 @@ module Aws::MailManager
     #   <p>If you received a pagination token from a previous call to this API, you can provide it here to continue paginating through the next page of results.</p>
     #   @return [String]
     class ListIngressPointsRequest < Struct.new(
+      nil,
       :page_size,
       :next_token,
       keyword_init: true
@@ -2073,6 +2185,7 @@ module Aws::MailManager
     #   <p>If NextToken is returned, there are more results available. The value of NextToken is a unique pagination token for each page. Make the call again using the returned token to retrieve the next page.</p>
     #   @return [String]
     class ListIngressPointsResponse < Struct.new(
+      nil,
       :ingress_points,
       :next_token,
       keyword_init: true
@@ -2093,6 +2206,7 @@ module Aws::MailManager
     #   <p>The maximum number of address list members that are returned per call. You can use NextToken to retrieve the next page of members.</p>
     #   @return [Integer]
     class ListMembersOfAddressListRequest < Struct.new(
+      nil,
       :address_list_id,
       :filter,
       :next_token,
@@ -2109,6 +2223,7 @@ module Aws::MailManager
     #   <p>If NextToken is returned, there are more results available. The value of NextToken is a unique pagination token for each page. Make the call again using the returned token to retrieve the next page.</p>
     #   @return [String]
     class ListMembersOfAddressListResponse < Struct.new(
+      nil,
       :addresses,
       :next_token,
       keyword_init: true
@@ -2123,6 +2238,7 @@ module Aws::MailManager
     #   <p>If you received a pagination token from a previous call to this API, you can provide it here to continue paginating through the next page of results.</p>
     #   @return [String]
     class ListRelaysRequest < Struct.new(
+      nil,
       :page_size,
       :next_token,
       keyword_init: true
@@ -2137,6 +2253,7 @@ module Aws::MailManager
     #   <p>If NextToken is returned, there are more results available. The value of NextToken is a unique pagination token for each page. Make the call again using the returned token to retrieve the next page.</p>
     #   @return [String]
     class ListRelaysResponse < Struct.new(
+      nil,
       :relays,
       :next_token,
       keyword_init: true
@@ -2151,6 +2268,7 @@ module Aws::MailManager
     #   <p>The maximum number of rule set resources that are returned per call. You can use NextToken to obtain further rule sets.</p>
     #   @return [Integer]
     class ListRuleSetsRequest < Struct.new(
+      nil,
       :next_token,
       :page_size,
       keyword_init: true
@@ -2165,6 +2283,7 @@ module Aws::MailManager
     #   <p>If NextToken is returned, there are more results available. The value of NextToken is a unique pagination token for each page. Make the call again using the returned token to retrieve the next page.</p>
     #   @return [String]
     class ListRuleSetsResponse < Struct.new(
+      nil,
       :rule_sets,
       :next_token,
       keyword_init: true
@@ -2176,6 +2295,7 @@ module Aws::MailManager
     #   <p>The Amazon Resource Name (ARN) of the resource to retrieve tags from.</p>
     #   @return [String]
     class ListTagsForResourceRequest < Struct.new(
+      nil,
       :resource_arn,
       keyword_init: true
     )
@@ -2186,6 +2306,7 @@ module Aws::MailManager
     #   <p>The tags used to organize, track, or control access for the resource. For example, { "tags": {"key1":"value1", "key2":"value2"} }.</p>
     #   @return [Array<Types::Tag>]
     class ListTagsForResourceResponse < Struct.new(
+      nil,
       :tags,
       keyword_init: true
     )
@@ -2199,6 +2320,7 @@ module Aws::MailManager
     #   <p>If you received a pagination token from a previous call to this API, you can provide it here to continue paginating through the next page of results.</p>
     #   @return [String]
     class ListTrafficPoliciesRequest < Struct.new(
+      nil,
       :page_size,
       :next_token,
       keyword_init: true
@@ -2213,6 +2335,7 @@ module Aws::MailManager
     #   <p>If NextToken is returned, there are more results available. The value of NextToken is a unique pagination token for each page. Make the call again using the returned token to retrieve the next page.</p>
     #   @return [String]
     class ListTrafficPoliciesResponse < Struct.new(
+      nil,
       :traffic_policies,
       :next_token,
       keyword_init: true
@@ -2231,6 +2354,7 @@ module Aws::MailManager
     #   <p>A flag indicating if the email was malformed.</p>
     #   @return [Boolean]
     class MessageBody < Struct.new(
+      nil,
       :text,
       :html,
       :message_malformed,
@@ -2280,6 +2404,7 @@ module Aws::MailManager
     #   <p>Specifies the archived email source, identified by either a Rule Set's ARN with an Archive action, or a Configuration Set's Archive ARN.</p>
     #   @return [String]
     class Metadata < Struct.new(
+      nil,
       :timestamp,
       :ingress_point_id,
       :traffic_policy_id,
@@ -2320,6 +2445,7 @@ module Aws::MailManager
 
     # <p>Explicitly indicate that the relay destination server does not require SMTP credential authentication.</p>
     class NoAuthentication < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -2368,6 +2494,7 @@ module Aws::MailManager
     #   <p>The action that informs a traffic policy resource to either allow or block the email if it matches a condition in the policy statement.</p>
     #   @return [String]
     class PolicyStatement < Struct.new(
+      nil,
       :conditions,
       :action,
       keyword_init: true
@@ -2380,6 +2507,7 @@ module Aws::MailManager
     #   <p>The identifier of the VPC endpoint to associate with this private ingress point.</p>
     #   @return [String]
     class PrivateNetworkConfiguration < Struct.new(
+      nil,
       :vpc_endpoint_id,
       keyword_init: true
     )
@@ -2391,6 +2519,7 @@ module Aws::MailManager
     #   <p>The IP address type for the public ingress point. Valid values are IPV4 and DUAL_STACK.</p>
     #   @return [String]
     class PublicNetworkConfiguration < Struct.new(
+      nil,
       :ip_type,
       keyword_init: true
     )
@@ -2409,6 +2538,7 @@ module Aws::MailManager
     #   <p>The address to be added to the address list.</p>
     #   @return [String]
     class RegisterMemberToAddressListRequest < Struct.new(
+      nil,
       :address_list_id,
       :address,
       keyword_init: true
@@ -2417,6 +2547,7 @@ module Aws::MailManager
     end
 
     class RegisterMemberToAddressListResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -2433,6 +2564,7 @@ module Aws::MailManager
     #   <p>The timestamp of when the relay was last modified.</p>
     #   @return [Time]
     class Relay < Struct.new(
+      nil,
       :relay_id,
       :relay_name,
       :last_modified_timestamp,
@@ -2452,6 +2584,7 @@ module Aws::MailManager
     #   <p>This action specifies whether to preserve or replace original mail from address while relaying received emails to a destination server.</p>
     #   @return [String]
     class RelayAction < Struct.new(
+      nil,
       :action_failure_policy,
       :relay,
       :mail_from,
@@ -2485,6 +2618,7 @@ module Aws::MailManager
     #   <p>This action specifies the replacement recipient email addresses to insert.</p>
     #   @return [Array<String>]
     class ReplaceRecipientAction < Struct.new(
+      nil,
       :replace_with,
       keyword_init: true
     )
@@ -2495,6 +2629,7 @@ module Aws::MailManager
     # @!attribute message
     #   @return [String]
     class ResourceNotFoundException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -2560,6 +2695,7 @@ module Aws::MailManager
     #   <p>Specifies the archived email source, identified by either a Rule Set's ARN with an Archive action, or a Configuration Set's Archive ARN.</p>
     #   @return [String]
     class Row < Struct.new(
+      nil,
       :archived_message_id,
       :received_timestamp,
       :date,
@@ -2598,6 +2734,7 @@ module Aws::MailManager
     #   <p>The list of actions to execute when the conditions match the incoming email, and none of the "unless conditions" match.</p>
     #   @return [Array<Types::RuleAction>]
     class Rule < Struct.new(
+      nil,
       :name,
       :conditions,
       :unless,
@@ -2675,6 +2812,7 @@ module Aws::MailManager
     #   <p>The matching operator for a boolean condition expression.</p>
     #   @return [String]
     class RuleBooleanExpression < Struct.new(
+      nil,
       :evaluate,
       :operator,
       keyword_init: true
@@ -2755,6 +2893,7 @@ module Aws::MailManager
     #   <p>The values to use for the given DMARC policy operator. For the operator EQUALS, if multiple values are given, they are evaluated as an OR. That is, if any of the given values match, the condition is deemed to match. For the operator NOT_EQUALS, if multiple values are given, they are evaluated as an AND. That is, only if the email's DMARC policy is not equal to any of the given values, then the condition is deemed to match.</p>
     #   @return [Array<String>]
     class RuleDmarcExpression < Struct.new(
+      nil,
       :operator,
       :values,
       keyword_init: true
@@ -2773,6 +2912,7 @@ module Aws::MailManager
     #   <p>The IP CIDR blocks in format "x.y.z.w/n" (eg 10.0.0.0/8) to match with the email's IP address. For the operator CIDR_MATCHES, if multiple values are given, they are evaluated as an OR. That is, if the IP address is contained within any of the given CIDR ranges, the condition is deemed to match. For NOT_CIDR_MATCHES, if multiple CIDR ranges are given, the condition is deemed to match if the IP address is not contained in any of the given CIDR ranges.</p>
     #   @return [Array<String>]
     class RuleIpExpression < Struct.new(
+      nil,
       :evaluate,
       :operator,
       :values,
@@ -2804,6 +2944,7 @@ module Aws::MailManager
     #   <p>The address lists that will be used for evaluation.</p>
     #   @return [Array<String>]
     class RuleIsInAddressList < Struct.new(
+      nil,
       :attribute,
       :address_lists,
       keyword_init: true
@@ -2822,6 +2963,7 @@ module Aws::MailManager
     #   <p>The value to evaluate in a numeric condition expression.</p>
     #   @return [Float]
     class RuleNumberExpression < Struct.new(
+      nil,
       :evaluate,
       :operator,
       :value,
@@ -2856,6 +2998,7 @@ module Aws::MailManager
     #   <p>The last modification date of the rule set.</p>
     #   @return [Time]
     class RuleSet < Struct.new(
+      nil,
       :rule_set_id,
       :rule_set_name,
       :last_modification_date,
@@ -2875,6 +3018,7 @@ module Aws::MailManager
     #   <p>The string(s) to be evaluated in a string condition expression. For all operators, except for NOT_EQUALS, if multiple values are given, the values are processed as an OR. That is, if any of the values match the email's string using the given operator, the condition is deemed to match. However, for NOT_EQUALS, the condition is only deemed to match if none of the given strings match the email's string.</p>
     #   @return [Array<String>]
     class RuleStringExpression < Struct.new(
+      nil,
       :evaluate,
       :operator,
       :values,
@@ -2919,6 +3063,7 @@ module Aws::MailManager
     #   <p>The values to match with the email's verdict using the given operator. For the EQUALS operator, if multiple values are given, the condition is deemed to match if any of the given verdicts match that of the email. For the NOT_EQUALS operator, if multiple values are given, the condition is deemed to match of none of the given verdicts match the verdict of the email.</p>
     #   @return [Array<String>]
     class RuleVerdictExpression < Struct.new(
+      nil,
       :evaluate,
       :operator,
       :values,
@@ -2964,6 +3109,7 @@ module Aws::MailManager
     #   <p>The KMS Key ID to use to encrypt the message in S3.</p>
     #   @return [String]
     class S3Action < Struct.new(
+      nil,
       :action_failure_policy,
       :role_arn,
       :s3_bucket,
@@ -2979,6 +3125,7 @@ module Aws::MailManager
     #   <p>The S3 location to deliver the exported email data.</p>
     #   @return [String]
     class S3ExportDestinationConfiguration < Struct.new(
+      nil,
       :s3_location,
       keyword_init: true
     )
@@ -2993,6 +3140,7 @@ module Aws::MailManager
     #   <p>The timestamp of when the address was added to the address list.</p>
     #   @return [Time]
     class SavedAddress < Struct.new(
+      nil,
       :address,
       :created_timestamp,
       keyword_init: true
@@ -3014,6 +3162,7 @@ module Aws::MailManager
     #   <p>An error message if the search failed.</p>
     #   @return [String]
     class SearchStatus < Struct.new(
+      nil,
       :submission_timestamp,
       :completion_timestamp,
       :state,
@@ -3031,6 +3180,7 @@ module Aws::MailManager
     #   <p>The current status of the search job.</p>
     #   @return [Types::SearchStatus]
     class SearchSummary < Struct.new(
+      nil,
       :search_id,
       :status,
       keyword_init: true
@@ -3046,6 +3196,7 @@ module Aws::MailManager
     #   <p>The Amazon Resource Name (ARN) of the role to use for this action. This role must have access to the ses:SendRawEmail API.</p>
     #   @return [String]
     class SendAction < Struct.new(
+      nil,
       :action_failure_policy,
       :role_arn,
       keyword_init: true
@@ -3057,6 +3208,7 @@ module Aws::MailManager
     # @!attribute message
     #   @return [String]
     class ServiceQuotaExceededException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -3080,6 +3232,7 @@ module Aws::MailManager
     #   <p>The expected payload type within the Amazon SNS notification. <code>CONTENT</code> attempts to publish the full email content with 20KB of headers content. <code>HEADERS</code> extracts up to 100KB of header content to include in the notification, email content will not be included to the notification. The default value is <code>CONTENT</code>.</p>
     #   @return [String]
     class SnsAction < Struct.new(
+      nil,
       :action_failure_policy,
       :topic_arn,
       :role_arn,
@@ -3100,6 +3253,7 @@ module Aws::MailManager
     #   <p>The identifier of the import job that needs to be started.</p>
     #   @return [String]
     class StartAddressListImportJobRequest < Struct.new(
+      nil,
       :job_id,
       keyword_init: true
     )
@@ -3107,6 +3261,7 @@ module Aws::MailManager
     end
 
     class StartAddressListImportJobResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -3135,6 +3290,7 @@ module Aws::MailManager
     #   <p>Whether to include message metadata as JSON files in the export.</p>
     #   @return [Boolean]
     class StartArchiveExportRequest < Struct.new(
+      nil,
       :archive_id,
       :filters,
       :from_timestamp,
@@ -3152,6 +3308,7 @@ module Aws::MailManager
     #   <p>The unique identifier for the initiated export job.</p>
     #   @return [String]
     class StartArchiveExportResponse < Struct.new(
+      nil,
       :export_id,
       keyword_init: true
     )
@@ -3175,6 +3332,7 @@ module Aws::MailManager
     #   <p>The maximum number of search results to return.</p>
     #   @return [Integer]
     class StartArchiveSearchRequest < Struct.new(
+      nil,
       :archive_id,
       :filters,
       :from_timestamp,
@@ -3190,6 +3348,7 @@ module Aws::MailManager
     #   <p>The unique identifier for the initiated search job.</p>
     #   @return [String]
     class StartArchiveSearchResponse < Struct.new(
+      nil,
       :search_id,
       keyword_init: true
     )
@@ -3200,6 +3359,7 @@ module Aws::MailManager
     #   <p>The identifier of the import job that needs to be stopped.</p>
     #   @return [String]
     class StopAddressListImportJobRequest < Struct.new(
+      nil,
       :job_id,
       keyword_init: true
     )
@@ -3207,6 +3367,7 @@ module Aws::MailManager
     end
 
     class StopAddressListImportJobResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -3217,6 +3378,7 @@ module Aws::MailManager
     #   <p>The identifier of the export job to stop.</p>
     #   @return [String]
     class StopArchiveExportRequest < Struct.new(
+      nil,
       :export_id,
       keyword_init: true
     )
@@ -3225,6 +3387,7 @@ module Aws::MailManager
 
     # <p>The response indicating if the request to stop the export job succeeded.</p> <p>On success, returns an HTTP 200 status code. On failure, returns an error message.</p>
     class StopArchiveExportResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -3235,6 +3398,7 @@ module Aws::MailManager
     #   <p>The identifier of the search job to stop.</p>
     #   @return [String]
     class StopArchiveSearchRequest < Struct.new(
+      nil,
       :search_id,
       keyword_init: true
     )
@@ -3243,6 +3407,7 @@ module Aws::MailManager
 
     # <p>The response indicating if the request to stop the search job succeeded.</p> <p>On success, returns an HTTP 200 status code. On failure, returns an error message.</p>
     class StopArchiveSearchResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -3256,6 +3421,7 @@ module Aws::MailManager
     #   <p>The value of the key-value tag.</p>
     #   @return [String]
     class Tag < Struct.new(
+      nil,
       :key,
       :value,
       keyword_init: true
@@ -3270,6 +3436,7 @@ module Aws::MailManager
     #   <p> The tags used to organize, track, or control access for the resource. For example, { "tags": {"key1":"value1", "key2":"value2"} }. </p>
     #   @return [Array<Types::Tag>]
     class TagResourceRequest < Struct.new(
+      nil,
       :resource_arn,
       :tags,
       keyword_init: true
@@ -3278,6 +3445,7 @@ module Aws::MailManager
     end
 
     class TagResourceResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -3287,6 +3455,7 @@ module Aws::MailManager
     # @!attribute message
     #   @return [String]
     class ThrottlingException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -3304,6 +3473,7 @@ module Aws::MailManager
     #   <p>Default action instructs the traﬃc policy to either Allow or Deny (block) messages that fall outside of (or not addressed by) the conditions of your policy statements</p>
     #   @return [String]
     class TrafficPolicy < Struct.new(
+      nil,
       :traffic_policy_name,
       :traffic_policy_id,
       :default_action,
@@ -3319,6 +3489,7 @@ module Aws::MailManager
     #   <p> The keys of the key-value pairs for the tag or tags you want to remove from the specified resource. </p>
     #   @return [Array<String>]
     class UntagResourceRequest < Struct.new(
+      nil,
       :resource_arn,
       :tag_keys,
       keyword_init: true
@@ -3327,6 +3498,7 @@ module Aws::MailManager
     end
 
     class UntagResourceResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -3343,6 +3515,7 @@ module Aws::MailManager
     #   <p>A new retention period for emails in the archive.</p>
     #   @return [Types::ArchiveRetention]
     class UpdateArchiveRequest < Struct.new(
+      nil,
       :archive_id,
       :archive_name,
       :retention,
@@ -3353,6 +3526,7 @@ module Aws::MailManager
 
     # <p>The response indicating if the archive update succeeded or failed.</p> <p>On success, returns an HTTP 200 status code. On failure, returns an error message.</p>
     class UpdateArchiveResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -3377,6 +3551,7 @@ module Aws::MailManager
     #   <p>If you choose an Authenticated ingress endpoint, you must configure either an SMTP password or a secret ARN.</p>
     #   @return [Types::IngressPointConfiguration]
     class UpdateIngressPointRequest < Struct.new(
+      nil,
       :ingress_point_id,
       :ingress_point_name,
       :status_to_update,
@@ -3389,6 +3564,7 @@ module Aws::MailManager
     end
 
     class UpdateIngressPointResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -3410,6 +3586,7 @@ module Aws::MailManager
     #   <p>Authentication for the relay destination server—specify the secretARN where the SMTP credentials are stored.</p>
     #   @return [Types::RelayAuthentication]
     class UpdateRelayRequest < Struct.new(
+      nil,
       :relay_id,
       :relay_name,
       :server_name,
@@ -3421,6 +3598,7 @@ module Aws::MailManager
     end
 
     class UpdateRelayResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -3436,6 +3614,7 @@ module Aws::MailManager
     #   <p>A new set of rules to replace the current rules of the rule set—these rules will override all the rules of the rule set.</p>
     #   @return [Array<Types::Rule>]
     class UpdateRuleSetRequest < Struct.new(
+      nil,
       :rule_set_id,
       :rule_set_name,
       :rules,
@@ -3445,6 +3624,7 @@ module Aws::MailManager
     end
 
     class UpdateRuleSetResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -3466,6 +3646,7 @@ module Aws::MailManager
     #   <p>The maximum message size in bytes of email which is allowed in by this traffic policy—anything larger will be blocked.</p>
     #   @return [Integer]
     class UpdateTrafficPolicyRequest < Struct.new(
+      nil,
       :traffic_policy_id,
       :traffic_policy_name,
       :policy_statements,
@@ -3477,6 +3658,7 @@ module Aws::MailManager
     end
 
     class UpdateTrafficPolicyResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -3486,6 +3668,7 @@ module Aws::MailManager
     # @!attribute message
     #   @return [String]
     class ValidationException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )

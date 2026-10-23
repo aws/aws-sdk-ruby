@@ -10,6 +10,7 @@ module Aws::Pricing
     # @!attribute message
     #   @return [String]
     class AccessDeniedException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -23,6 +24,7 @@ module Aws::Pricing
     #   <p>The specific value of an <code>attributeName</code>.</p>
     #   @return [String]
     class AttributeValue < Struct.new(
+      nil,
       :value,
       keyword_init: true
     )
@@ -47,6 +49,7 @@ module Aws::Pricing
     #   <p>The maximum number of results that you want returned in the response.</p>
     #   @return [Integer]
     class DescribeServicesRequest < Struct.new(
+      nil,
       :service_code,
       :format_version,
       :next_token,
@@ -66,6 +69,7 @@ module Aws::Pricing
     #   <p>The pagination token for the next set of retrievable results.</p>
     #   @return [String]
     class DescribeServicesResponse < Struct.new(
+      nil,
       :services,
       :format_version,
       :next_token,
@@ -78,6 +82,7 @@ module Aws::Pricing
     # @!attribute message
     #   @return [String]
     class ExpiredNextTokenException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -129,6 +134,7 @@ module Aws::Pricing
     #            <p>For <code>ANY_OF</code> and <code>NONE_OF</code> filter types, you can provide multiple values as a comma-separated string. For example, <code>t2.micro,t2.small,t2.medium</code> or <code>Compute optimized, GPU instance, Micro instances</code>.</p>
     #   @return [String]
     class Filter < Struct.new(
+      nil,
       :type,
       :field,
       :value,
@@ -151,6 +157,7 @@ module Aws::Pricing
     #   <p>The maximum number of results to return in response.</p>
     #   @return [Integer]
     class GetAttributeValuesRequest < Struct.new(
+      nil,
       :service_code,
       :attribute_name,
       :next_token,
@@ -169,6 +176,7 @@ module Aws::Pricing
     #   <p>The pagination token that indicates the next set of results to retrieve.</p>
     #   @return [String]
     class GetAttributeValuesResponse < Struct.new(
+      nil,
       :attribute_values,
       :next_token,
       keyword_init: true
@@ -185,6 +193,7 @@ module Aws::Pricing
     #               <code>FileFormat</code> can be obtained from the <a href="https://docs.aws.amazon.com/aws-cost-management/latest/APIReference/API_pricing_ListPriceLists.html">ListPriceLists</a> response. </p>
     #   @return [String]
     class GetPriceListFileUrlRequest < Struct.new(
+      nil,
       :price_list_arn,
       :file_format,
       keyword_init: true
@@ -196,6 +205,7 @@ module Aws::Pricing
     #   <p>The URL to download your Price List file from. </p>
     #   @return [String]
     class GetPriceListFileUrlResponse < Struct.new(
+      nil,
       :url,
       keyword_init: true
     )
@@ -221,6 +231,7 @@ module Aws::Pricing
     #   <p>The maximum number of results to return in the response.</p>
     #   @return [Integer]
     class GetProductsRequest < Struct.new(
+      nil,
       :service_code,
       :filters,
       :format_version,
@@ -242,6 +253,7 @@ module Aws::Pricing
     #   <p>The pagination token that indicates the next set of results to retrieve.</p>
     #   @return [String]
     class GetProductsResponse < Struct.new(
+      nil,
       :format_version,
       :price_list,
       :next_token,
@@ -254,6 +266,7 @@ module Aws::Pricing
     # @!attribute message
     #   @return [String]
     class InternalErrorException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -264,6 +277,7 @@ module Aws::Pricing
     # @!attribute message
     #   @return [String]
     class InvalidNextTokenException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -274,6 +288,7 @@ module Aws::Pricing
     # @!attribute message
     #   @return [String]
     class InvalidParameterException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -311,6 +326,7 @@ module Aws::Pricing
     #         </p>
     #   @return [Integer]
     class ListPriceListsRequest < Struct.new(
+      nil,
       :service_code,
       :effective_date,
       :region_code,
@@ -329,6 +345,7 @@ module Aws::Pricing
     #   <p>The pagination token that indicates the next set of results to retrieve. </p>
     #   @return [String]
     class ListPriceListsResponse < Struct.new(
+      nil,
       :price_lists,
       :next_token,
       keyword_init: true
@@ -340,6 +357,7 @@ module Aws::Pricing
     # @!attribute message
     #   @return [String]
     class NotFoundException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -377,6 +395,7 @@ module Aws::Pricing
     #               </a> response. </p>
     #   @return [Array<String>]
     class PriceList < Struct.new(
+      nil,
       :price_list_arn,
       :region_code,
       :currency_code,
@@ -390,6 +409,7 @@ module Aws::Pricing
     # @!attribute message
     #   @return [String]
     class ResourceNotFoundException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -404,6 +424,7 @@ module Aws::Pricing
     #   <p>The attributes that are available for this service.</p>
     #   @return [Array<String>]
     class Service < Struct.new(
+      nil,
       :service_code,
       :attribute_names,
       keyword_init: true
@@ -416,6 +437,7 @@ module Aws::Pricing
     # @!attribute message
     #   @return [String]
     class ThrottlingException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )

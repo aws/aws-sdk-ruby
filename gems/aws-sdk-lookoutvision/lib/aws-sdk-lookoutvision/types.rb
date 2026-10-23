@@ -10,6 +10,7 @@ module Aws::LookoutVision
     # @!attribute message
     #   @return [String]
     class AccessDeniedException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -27,6 +28,7 @@ module Aws::LookoutVision
     #   <p>Information about the pixel mask that covers an anomaly type.</p>
     #   @return [Types::PixelAnomaly]
     class Anomaly < Struct.new(
+      nil,
       :name,
       :pixel_anomaly,
       keyword_init: true
@@ -44,6 +46,7 @@ module Aws::LookoutVision
     #   <p>The type of the resource.</p>
     #   @return [String]
     class ConflictException < Struct.new(
+      nil,
       :message,
       :resource_id,
       :resource_type,
@@ -84,6 +87,7 @@ module Aws::LookoutVision
     #       </p>
     #   @return [String]
     class CreateDatasetRequest < Struct.new(
+      nil,
       :project_name,
       :dataset_type,
       :dataset_source,
@@ -97,6 +101,7 @@ module Aws::LookoutVision
     #   <p>Information about the dataset.</p>
     #   @return [Types::DatasetMetadata]
     class CreateDatasetResponse < Struct.new(
+      nil,
       :dataset_metadata,
       keyword_init: true
     )
@@ -135,6 +140,7 @@ module Aws::LookoutVision
     #   <p>A set of tags (key-value pairs) that you want to attach to the model.</p>
     #   @return [Array<Types::Tag>]
     class CreateModelRequest < Struct.new(
+      nil,
       :project_name,
       :description,
       :client_token,
@@ -150,6 +156,7 @@ module Aws::LookoutVision
     #   <p>The response from a call to <code>CreateModel</code>.</p>
     #   @return [Types::ModelMetadata]
     class CreateModelResponse < Struct.new(
+      nil,
       :model_metadata,
       keyword_init: true
     )
@@ -174,6 +181,7 @@ module Aws::LookoutVision
     #          token is active for 8 hours.</p>
     #   @return [String]
     class CreateProjectRequest < Struct.new(
+      nil,
       :project_name,
       :client_token,
       keyword_init: true
@@ -185,6 +193,7 @@ module Aws::LookoutVision
     #   <p>Information about the project.</p>
     #   @return [Types::ProjectMetadata]
     class CreateProjectResponse < Struct.new(
+      nil,
       :project_metadata,
       keyword_init: true
     )
@@ -215,6 +224,7 @@ module Aws::LookoutVision
     #   <p>Statistics about the images in a dataset.</p>
     #   @return [Types::DatasetImageStats]
     class DatasetDescription < Struct.new(
+      nil,
       :project_name,
       :dataset_type,
       :creation_timestamp,
@@ -233,6 +243,7 @@ module Aws::LookoutVision
     #   <p>The S3 bucket location for the manifest file.</p>
     #   @return [Types::InputS3Object]
     class DatasetGroundTruthManifest < Struct.new(
+      nil,
       :s3_object,
       keyword_init: true
     )
@@ -253,6 +264,7 @@ module Aws::LookoutVision
     #   <p>the total number of images labeled as an anomaly.</p>
     #   @return [Integer]
     class DatasetImageStats < Struct.new(
+      nil,
       :total,
       :labeled,
       :normal,
@@ -277,6 +289,7 @@ module Aws::LookoutVision
     #   <p>The status message for the dataset.</p>
     #   @return [String]
     class DatasetMetadata < Struct.new(
+      nil,
       :dataset_type,
       :creation_timestamp,
       :status,
@@ -291,6 +304,7 @@ module Aws::LookoutVision
     #   <p>Location information for the manifest file.</p>
     #   @return [Types::DatasetGroundTruthManifest]
     class DatasetSource < Struct.new(
+      nil,
       :ground_truth_manifest,
       keyword_init: true
     )
@@ -318,6 +332,7 @@ module Aws::LookoutVision
     #          token is active for 8 hours.</p>
     #   @return [String]
     class DeleteDatasetRequest < Struct.new(
+      nil,
       :project_name,
       :dataset_type,
       :client_token,
@@ -327,6 +342,7 @@ module Aws::LookoutVision
     end
 
     class DeleteDatasetResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -352,6 +368,7 @@ module Aws::LookoutVision
     #          token is active for 8 hours.</p>
     #   @return [String]
     class DeleteModelRequest < Struct.new(
+      nil,
       :project_name,
       :model_version,
       :client_token,
@@ -364,6 +381,7 @@ module Aws::LookoutVision
     #   <p>The Amazon Resource Name (ARN) of the model that was deleted.</p>
     #   @return [String]
     class DeleteModelResponse < Struct.new(
+      nil,
       :model_arn,
       keyword_init: true
     )
@@ -387,6 +405,7 @@ module Aws::LookoutVision
     #            token is active for 8 hours.</p>
     #   @return [String]
     class DeleteProjectRequest < Struct.new(
+      nil,
       :project_name,
       :client_token,
       keyword_init: true
@@ -398,6 +417,7 @@ module Aws::LookoutVision
     #   <p>The Amazon Resource Name (ARN) of the project that was deleted.</p>
     #   @return [String]
     class DeleteProjectResponse < Struct.new(
+      nil,
       :project_arn,
       keyword_init: true
     )
@@ -414,6 +434,7 @@ module Aws::LookoutVision
     #            </p>
     #   @return [String]
     class DescribeDatasetRequest < Struct.new(
+      nil,
       :project_name,
       :dataset_type,
       keyword_init: true
@@ -425,6 +446,7 @@ module Aws::LookoutVision
     #   <p>The description of the requested dataset. </p>
     #   @return [Types::DatasetDescription]
     class DescribeDatasetResponse < Struct.new(
+      nil,
       :dataset_description,
       keyword_init: true
     )
@@ -441,6 +463,7 @@ module Aws::LookoutVision
     #   </p>
     #   @return [String]
     class DescribeModelPackagingJobRequest < Struct.new(
+      nil,
       :project_name,
       :job_name,
       keyword_init: true
@@ -453,6 +476,7 @@ module Aws::LookoutVision
     #   </p>
     #   @return [Types::ModelPackagingDescription]
     class DescribeModelPackagingJobResponse < Struct.new(
+      nil,
       :model_packaging_description,
       keyword_init: true
     )
@@ -466,6 +490,7 @@ module Aws::LookoutVision
     #   <p>The version of the model that you want to describe.</p>
     #   @return [String]
     class DescribeModelRequest < Struct.new(
+      nil,
       :project_name,
       :model_version,
       keyword_init: true
@@ -477,6 +502,7 @@ module Aws::LookoutVision
     #   <p>Contains the description of the model.</p>
     #   @return [Types::ModelDescription]
     class DescribeModelResponse < Struct.new(
+      nil,
       :model_description,
       keyword_init: true
     )
@@ -487,6 +513,7 @@ module Aws::LookoutVision
     #   <p>The name of the project that you want to describe.</p>
     #   @return [String]
     class DescribeProjectRequest < Struct.new(
+      nil,
       :project_name,
       keyword_init: true
     )
@@ -497,6 +524,7 @@ module Aws::LookoutVision
     #   <p>The description of the project.</p>
     #   @return [Types::ProjectDescription]
     class DescribeProjectResponse < Struct.new(
+      nil,
       :project_description,
       keyword_init: true
     )
@@ -517,6 +545,7 @@ module Aws::LookoutVision
     #            Valid values are <code>image/png</code> (PNG format images) and <code>image/jpeg</code> (JPG format images). </p>
     #   @return [String]
     class DetectAnomaliesRequest < Struct.new(
+      nil,
       :project_name,
       :model_version,
       :body,
@@ -530,6 +559,7 @@ module Aws::LookoutVision
     #   <p>The results of the <code>DetectAnomalies</code> operation.</p>
     #   @return [Types::DetectAnomalyResult]
     class DetectAnomaliesResponse < Struct.new(
+      nil,
       :detect_anomaly_result,
       keyword_init: true
     )
@@ -570,6 +600,7 @@ module Aws::LookoutVision
     #            <p>An image classification model doesn't return an <code>Anomalies</code> list. </p>
     #   @return [String]
     class DetectAnomalyResult < Struct.new(
+      nil,
       :source,
       :is_anomalous,
       :confidence,
@@ -633,6 +664,7 @@ module Aws::LookoutVision
     #   </p>
     #   @return [Array<Types::Tag>]
     class GreengrassConfiguration < Struct.new(
+      nil,
       :compiler_options,
       :target_device,
       :target_platform,
@@ -665,6 +697,7 @@ module Aws::LookoutVision
     #   </p>
     #   @return [String]
     class GreengrassOutputDetails < Struct.new(
+      nil,
       :component_version_arn,
       :component_name,
       :component_version,
@@ -678,6 +711,7 @@ module Aws::LookoutVision
     #   <p>The type of the image.</p>
     #   @return [String]
     class ImageSource < Struct.new(
+      nil,
       :type,
       keyword_init: true
     )
@@ -695,6 +729,7 @@ module Aws::LookoutVision
     #   <p>The version ID of the bucket.</p>
     #   @return [String]
     class InputS3Object < Struct.new(
+      nil,
       :bucket,
       :key,
       :version_id,
@@ -710,6 +745,7 @@ module Aws::LookoutVision
     #   <p>The period of time, in seconds, before the operation can be retried.</p>
     #   @return [Integer]
     class InternalServerException < Struct.new(
+      nil,
       :message,
       :retry_after_seconds,
       keyword_init: true
@@ -754,6 +790,7 @@ module Aws::LookoutVision
     #            For example a value of "IMG_17"  returns all JSON Lines where the <code>source-ref</code> key value matches <i>*IMG_17*</i>.</p>
     #   @return [String]
     class ListDatasetEntriesRequest < Struct.new(
+      nil,
       :project_name,
       :dataset_type,
       :labeled,
@@ -776,6 +813,7 @@ module Aws::LookoutVision
     #            that you can use in the subsequent request to retrieve the next set ofdataset entries.</p>
     #   @return [String]
     class ListDatasetEntriesResponse < Struct.new(
+      nil,
       :dataset_entries,
       :next_token,
       keyword_init: true
@@ -799,6 +837,7 @@ module Aws::LookoutVision
     #         error occurs. The default value is 100. </p>
     #   @return [Integer]
     class ListModelPackagingJobsRequest < Struct.new(
+      nil,
       :project_name,
       :next_token,
       :max_results,
@@ -819,6 +858,7 @@ module Aws::LookoutVision
     #   </p>
     #   @return [String]
     class ListModelPackagingJobsResponse < Struct.new(
+      nil,
       :model_packaging_jobs,
       :next_token,
       keyword_init: true
@@ -840,6 +880,7 @@ module Aws::LookoutVision
     #            error occurs. The default value is 100.</p>
     #   @return [Integer]
     class ListModelsRequest < Struct.new(
+      nil,
       :project_name,
       :next_token,
       :max_results,
@@ -856,6 +897,7 @@ module Aws::LookoutVision
     #            that you can use in the subsequent request to retrieve the next set of models. </p>
     #   @return [String]
     class ListModelsResponse < Struct.new(
+      nil,
       :models,
       :next_token,
       keyword_init: true
@@ -874,6 +916,7 @@ module Aws::LookoutVision
     #            error occurs. The default value is 100.</p>
     #   @return [Integer]
     class ListProjectsRequest < Struct.new(
+      nil,
       :next_token,
       :max_results,
       keyword_init: true
@@ -889,6 +932,7 @@ module Aws::LookoutVision
     #            that you can use in the subsequent request to retrieve the next set of projects.</p>
     #   @return [String]
     class ListProjectsResponse < Struct.new(
+      nil,
       :projects,
       :next_token,
       keyword_init: true
@@ -900,6 +944,7 @@ module Aws::LookoutVision
     #   <p>The Amazon Resource Name (ARN) of the model for which you want to list tags. </p>
     #   @return [String]
     class ListTagsForResourceRequest < Struct.new(
+      nil,
       :resource_arn,
       keyword_init: true
     )
@@ -910,6 +955,7 @@ module Aws::LookoutVision
     #   <p>A map of tag keys and values attached to the specified model.</p>
     #   @return [Array<Types::Tag>]
     class ListTagsForResourceResponse < Struct.new(
+      nil,
       :tags,
       keyword_init: true
     )
@@ -965,6 +1011,7 @@ module Aws::LookoutVision
     #            For more information, see <a>StartModel</a>.</p>
     #   @return [Integer]
     class ModelDescription < Struct.new(
+      nil,
       :model_version,
       :model_arn,
       :creation_timestamp,
@@ -1007,6 +1054,7 @@ module Aws::LookoutVision
     #   <p>Performance metrics for the model. Not available until training has successfully completed.</p>
     #   @return [Types::ModelPerformance]
     class ModelMetadata < Struct.new(
+      nil,
       :creation_timestamp,
       :model_version,
       :model_arn,
@@ -1029,6 +1077,7 @@ module Aws::LookoutVision
     #   </p>
     #   @return [Types::GreengrassConfiguration]
     class ModelPackagingConfiguration < Struct.new(
+      nil,
       :greengrass,
       keyword_init: true
     )
@@ -1095,6 +1144,7 @@ module Aws::LookoutVision
     #   </p>
     #   @return [Time]
     class ModelPackagingDescription < Struct.new(
+      nil,
       :job_name,
       :project_name,
       :model_version,
@@ -1155,6 +1205,7 @@ module Aws::LookoutVision
     #   <p>The Unix timestamp for the time and date that the model packaging job was last updated.</p>
     #   @return [Time]
     class ModelPackagingJobMetadata < Struct.new(
+      nil,
       :job_name,
       :project_name,
       :model_version,
@@ -1178,6 +1229,7 @@ module Aws::LookoutVision
     #   </p>
     #   @return [Types::GreengrassOutputDetails]
     class ModelPackagingOutputDetails < Struct.new(
+      nil,
       :greengrass,
       keyword_init: true
     )
@@ -1195,6 +1247,7 @@ module Aws::LookoutVision
     #   <p>The overall precision metric value for the trained model.</p>
     #   @return [Float]
     class ModelPerformance < Struct.new(
+      nil,
       :f1_score,
       :recall,
       :precision,
@@ -1208,6 +1261,7 @@ module Aws::LookoutVision
     #   <p>The S3 location for the output.</p>
     #   @return [Types::S3Location]
     class OutputConfig < Struct.new(
+      nil,
       :s3_location,
       keyword_init: true
     )
@@ -1222,6 +1276,7 @@ module Aws::LookoutVision
     #   <p>The location of the training output in the bucket.</p>
     #   @return [String]
     class OutputS3Object < Struct.new(
+      nil,
       :bucket,
       :key,
       keyword_init: true
@@ -1240,6 +1295,7 @@ module Aws::LookoutVision
     #            training dataset. </p>
     #   @return [String]
     class PixelAnomaly < Struct.new(
+      nil,
       :total_percentage_area,
       :color,
       keyword_init: true
@@ -1261,6 +1317,7 @@ module Aws::LookoutVision
     #   <p>A list of datasets in the project.</p>
     #   @return [Array<Types::DatasetMetadata>]
     class ProjectDescription < Struct.new(
+      nil,
       :project_arn,
       :project_name,
       :creation_timestamp,
@@ -1281,6 +1338,7 @@ module Aws::LookoutVision
     #   <p>The unix timestamp for the date and time that the project was created. </p>
     #   @return [Time]
     class ProjectMetadata < Struct.new(
+      nil,
       :project_arn,
       :project_name,
       :creation_timestamp,
@@ -1299,6 +1357,7 @@ module Aws::LookoutVision
     #   <p>The type of the resource.</p>
     #   @return [String]
     class ResourceNotFoundException < Struct.new(
+      nil,
       :message,
       :resource_id,
       :resource_type,
@@ -1317,6 +1376,7 @@ module Aws::LookoutVision
     #   <p>The path of the folder, within the S3 bucket, that contains the output.</p>
     #   @return [String]
     class S3Location < Struct.new(
+      nil,
       :bucket,
       :prefix,
       keyword_init: true
@@ -1341,6 +1401,7 @@ module Aws::LookoutVision
     #   <p>The service code. </p>
     #   @return [String]
     class ServiceQuotaExceededException < Struct.new(
+      nil,
       :message,
       :resource_id,
       :resource_type,
@@ -1389,6 +1450,7 @@ module Aws::LookoutVision
     #      </p>
     #   @return [String]
     class StartModelPackagingJobRequest < Struct.new(
+      nil,
       :project_name,
       :model_version,
       :job_name,
@@ -1407,6 +1469,7 @@ module Aws::LookoutVision
     #   </p>
     #   @return [String]
     class StartModelPackagingJobResponse < Struct.new(
+      nil,
       :job_name,
       keyword_init: true
     )
@@ -1445,6 +1508,7 @@ module Aws::LookoutVision
     #            specify a value, Amazon Lookout for Vision doesn't auto-scale the model.</p>
     #   @return [Integer]
     class StartModelRequest < Struct.new(
+      nil,
       :project_name,
       :model_version,
       :min_inference_units,
@@ -1459,6 +1523,7 @@ module Aws::LookoutVision
     #   <p>The current running status of the model.</p>
     #   @return [String]
     class StartModelResponse < Struct.new(
+      nil,
       :status,
       keyword_init: true
     )
@@ -1488,6 +1553,7 @@ module Aws::LookoutVision
     #         </p>
     #   @return [String]
     class StopModelRequest < Struct.new(
+      nil,
       :project_name,
       :model_version,
       :client_token,
@@ -1500,6 +1566,7 @@ module Aws::LookoutVision
     #   <p>The status of the model.</p>
     #   @return [String]
     class StopModelResponse < Struct.new(
+      nil,
       :status,
       keyword_init: true
     )
@@ -1514,6 +1581,7 @@ module Aws::LookoutVision
     #   <p>The value of the tag that is attached to the specified model.</p>
     #   @return [String]
     class Tag < Struct.new(
+      nil,
       :key,
       :value,
       keyword_init: true
@@ -1528,6 +1596,7 @@ module Aws::LookoutVision
     #   <p>The key-value tags to assign to the model.</p>
     #   @return [Array<Types::Tag>]
     class TagResourceRequest < Struct.new(
+      nil,
       :resource_arn,
       :tags,
       keyword_init: true
@@ -1536,6 +1605,7 @@ module Aws::LookoutVision
     end
 
     class TagResourceResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1571,6 +1641,7 @@ module Aws::LookoutVision
     #            </ul>
     #   @return [String]
     class TargetPlatform < Struct.new(
+      nil,
       :os,
       :arch,
       :accelerator,
@@ -1592,6 +1663,7 @@ module Aws::LookoutVision
     #   <p>The period of time, in seconds, before the operation can be retried. </p>
     #   @return [Integer]
     class ThrottlingException < Struct.new(
+      nil,
       :message,
       :quota_code,
       :service_code,
@@ -1608,6 +1680,7 @@ module Aws::LookoutVision
     #   <p>A list of the keys of the tags that you want to remove.</p>
     #   @return [Array<String>]
     class UntagResourceRequest < Struct.new(
+      nil,
       :resource_arn,
       :tag_keys,
       keyword_init: true
@@ -1616,6 +1689,7 @@ module Aws::LookoutVision
     end
 
     class UntagResourceResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1648,6 +1722,7 @@ module Aws::LookoutVision
     #         </p>
     #   @return [String]
     class UpdateDatasetEntriesRequest < Struct.new(
+      nil,
       :project_name,
       :dataset_type,
       :changes,
@@ -1661,6 +1736,7 @@ module Aws::LookoutVision
     #   <p>The status of the dataset update.</p>
     #   @return [String]
     class UpdateDatasetEntriesResponse < Struct.new(
+      nil,
       :status,
       keyword_init: true
     )
@@ -1672,6 +1748,7 @@ module Aws::LookoutVision
     # @!attribute message
     #   @return [String]
     class ValidationException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )

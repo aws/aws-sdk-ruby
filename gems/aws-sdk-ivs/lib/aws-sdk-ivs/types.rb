@@ -11,6 +11,7 @@ module Aws::Ivs
     #   <p>User does not have sufficient access to perform this action.</p>
     #   @return [String]
     class AccessDeniedException < Struct.new(
+      nil,
       :exception_message,
       keyword_init: true
     )
@@ -34,6 +35,7 @@ module Aws::Ivs
     #   <p>Name of the audio track (if the stream has an audio track). If multitrack is not enabled, this is track0 (the sole track).</p>
     #   @return [String]
     class AudioConfiguration < Struct.new(
+      nil,
       :codec,
       :target_bitrate,
       :sample_rate,
@@ -62,6 +64,7 @@ module Aws::Ivs
     #   <p>Error message, determined by the application.</p>
     #   @return [String]
     class BatchError < Struct.new(
+      nil,
       :arn,
       :code,
       :message,
@@ -74,6 +77,7 @@ module Aws::Ivs
     #   <p>Array of ARNs, one per channel.</p>
     #   @return [Array<String>]
     class BatchGetChannelInput < Struct.new(
+      nil,
       :arns,
       keyword_init: true
     )
@@ -87,6 +91,7 @@ module Aws::Ivs
     #   <p>Each error object is related to a specific ARN in the request.</p>
     #   @return [Array<Types::BatchError>]
     class BatchGetChannelOutput < Struct.new(
+      nil,
       :channels,
       :errors,
       keyword_init: true
@@ -98,6 +103,7 @@ module Aws::Ivs
     #   <p>Array of ARNs, one per stream key.</p>
     #   @return [Array<String>]
     class BatchGetStreamKeyInput < Struct.new(
+      nil,
       :arns,
       keyword_init: true
     )
@@ -111,6 +117,7 @@ module Aws::Ivs
     #   <p/>
     #   @return [Array<Types::BatchError>]
     class BatchGetStreamKeyOutput < Struct.new(
+      nil,
       :stream_keys,
       :errors,
       keyword_init: true
@@ -133,6 +140,7 @@ module Aws::Ivs
     #   <p>Error message, determined by the application.</p>
     #   @return [String]
     class BatchStartViewerSessionRevocationError < Struct.new(
+      nil,
       :channel_arn,
       :viewer_id,
       :code,
@@ -146,6 +154,7 @@ module Aws::Ivs
     #   <p>Array of viewer sessions, one per channel-ARN and viewer-ID pair.</p>
     #   @return [Array<Types::BatchStartViewerSessionRevocationViewerSession>]
     class BatchStartViewerSessionRevocationInput < Struct.new(
+      nil,
       :viewer_sessions,
       keyword_init: true
     )
@@ -157,6 +166,7 @@ module Aws::Ivs
     #           <code>viewerId</code> pair in the request.</p>
     #   @return [Array<Types::BatchStartViewerSessionRevocationError>]
     class BatchStartViewerSessionRevocationOutput < Struct.new(
+      nil,
       :errors,
       keyword_init: true
     )
@@ -176,6 +186,7 @@ module Aws::Ivs
     #         than or equal to the specified version will be revoked. Default: 0.</p>
     #   @return [Integer]
     class BatchStartViewerSessionRevocationViewerSession < Struct.new(
+      nil,
       :channel_arn,
       :viewer_id,
       :viewer_session_versions_less_than_or_equal_to,
@@ -252,6 +263,7 @@ module Aws::Ivs
     #   <p>Indicates which content-packaging format is used (MPEG-TS or fMP4). If <code>multitrackInputConfiguration</code> is specified and <code>enabled</code> is <code>true</code>, then <code>containerFormat</code> is required and must be set to <code>FRAGMENTED_MP4</code>. Otherwise, <code>containerFormat</code> may be set to <code>TS</code> or <code>FRAGMENTED_MP4</code>. Default: <code>TS</code>.</p>
     #   @return [String]
     class Channel < Struct.new(
+      nil,
       :arn,
       :name,
       :latency_mode,
@@ -283,6 +295,7 @@ module Aws::Ivs
     #   <p>The stream is offline for the given channel ARN.</p>
     #   @return [String]
     class ChannelNotBroadcasting < Struct.new(
+      nil,
       :exception_message,
       keyword_init: true
     )
@@ -336,6 +349,7 @@ module Aws::Ivs
     #         applied).</p>
     #   @return [String]
     class ChannelSummary < Struct.new(
+      nil,
       :arn,
       :name,
       :latency_mode,
@@ -362,6 +376,7 @@ module Aws::Ivs
     #   <p>Updating or deleting a resource can cause an inconsistent state.</p>
     #   @return [String]
     class ConflictException < Struct.new(
+      nil,
       :exception_message,
       keyword_init: true
     )
@@ -414,6 +429,7 @@ module Aws::Ivs
     #   <p>Indicates which content-packaging format is used (MPEG-TS or fMP4). If <code>multitrackInputConfiguration</code> is specified and <code>enabled</code> is <code>true</code>, then <code>containerFormat</code> is required and must be set to <code>FRAGMENTED_MP4</code>. Otherwise, <code>containerFormat</code> may be set to <code>TS</code> or <code>FRAGMENTED_MP4</code>. Default: <code>TS</code>.</p>
     #   @return [String]
     class CreateChannelInput < Struct.new(
+      nil,
       :name,
       :latency_mode,
       :type,
@@ -437,6 +453,7 @@ module Aws::Ivs
     #   <p/>
     #   @return [Types::StreamKey]
     class CreateChannelOutput < Struct.new(
+      nil,
       :channel,
       :stream_key,
       keyword_init: true
@@ -466,6 +483,7 @@ module Aws::Ivs
     #         documented there.</p>
     #   @return [Hash<String, String>]
     class CreatePlaybackRestrictionPolicyRequest < Struct.new(
+      nil,
       :allowed_countries,
       :allowed_origins,
       :enable_strict_origin_enforcement,
@@ -480,6 +498,7 @@ module Aws::Ivs
     #   <p/>
     #   @return [Types::PlaybackRestrictionPolicy]
     class CreatePlaybackRestrictionPolicyResponse < Struct.new(
+      nil,
       :playback_restriction_policy,
       keyword_init: true
     )
@@ -509,6 +528,7 @@ module Aws::Ivs
     #   <p>Object that describes which renditions should be recorded for a stream.</p>
     #   @return [Types::RenditionConfiguration]
     class CreateRecordingConfigurationInput < Struct.new(
+      nil,
       :name,
       :destination_configuration,
       :tags,
@@ -524,6 +544,7 @@ module Aws::Ivs
     #   <p>An object representing a configuration to record a channel stream.</p>
     #   @return [Types::RecordingConfiguration]
     class CreateRecordingConfigurationOutput < Struct.new(
+      nil,
       :recording_configuration,
       keyword_init: true
     )
@@ -538,6 +559,7 @@ module Aws::Ivs
     #         documented there.</p>
     #   @return [Hash<String, String>]
     class CreateStreamKeyInput < Struct.new(
+      nil,
       :channel_arn,
       :tags,
       keyword_init: true
@@ -549,6 +571,7 @@ module Aws::Ivs
     #   <p>Stream key used to authenticate an RTMPS stream for ingestion.</p>
     #   @return [Types::StreamKey]
     class CreateStreamKeyOutput < Struct.new(
+      nil,
       :stream_key,
       keyword_init: true
     )
@@ -559,6 +582,7 @@ module Aws::Ivs
     #   <p>ARN of the channel to be deleted.</p>
     #   @return [String]
     class DeleteChannelInput < Struct.new(
+      nil,
       :arn,
       keyword_init: true
     )
@@ -569,6 +593,7 @@ module Aws::Ivs
     #   <p>ARN of the key pair to be deleted.</p>
     #   @return [String]
     class DeletePlaybackKeyPairInput < Struct.new(
+      nil,
       :arn,
       keyword_init: true
     )
@@ -576,6 +601,7 @@ module Aws::Ivs
     end
 
     class DeletePlaybackKeyPairOutput < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -585,6 +611,7 @@ module Aws::Ivs
     #   <p>ARN of the playback restriction policy to be deleted.</p>
     #   @return [String]
     class DeletePlaybackRestrictionPolicyRequest < Struct.new(
+      nil,
       :arn,
       keyword_init: true
     )
@@ -595,6 +622,7 @@ module Aws::Ivs
     #   <p>ARN of the recording configuration to be deleted.</p>
     #   @return [String]
     class DeleteRecordingConfigurationInput < Struct.new(
+      nil,
       :arn,
       keyword_init: true
     )
@@ -605,6 +633,7 @@ module Aws::Ivs
     #   <p>ARN of the stream key to be deleted.</p>
     #   @return [String]
     class DeleteStreamKeyInput < Struct.new(
+      nil,
       :arn,
       keyword_init: true
     )
@@ -618,6 +647,7 @@ module Aws::Ivs
     #   <p>An S3 destination configuration where recorded videos will be stored.</p>
     #   @return [Types::S3DestinationConfiguration]
     class DestinationConfiguration < Struct.new(
+      nil,
       :s3,
       keyword_init: true
     )
@@ -628,6 +658,7 @@ module Aws::Ivs
     #   <p>ARN of the channel for which the configuration is to be retrieved.</p>
     #   @return [String]
     class GetChannelInput < Struct.new(
+      nil,
       :arn,
       keyword_init: true
     )
@@ -638,6 +669,7 @@ module Aws::Ivs
     #   <p/>
     #   @return [Types::Channel]
     class GetChannelOutput < Struct.new(
+      nil,
       :channel,
       keyword_init: true
     )
@@ -648,6 +680,7 @@ module Aws::Ivs
     #   <p>ARN of the key pair to be returned.</p>
     #   @return [String]
     class GetPlaybackKeyPairInput < Struct.new(
+      nil,
       :arn,
       keyword_init: true
     )
@@ -658,6 +691,7 @@ module Aws::Ivs
     #   <p>A key pair used to sign and validate a playback authorization token.</p>
     #   @return [Types::PlaybackKeyPair]
     class GetPlaybackKeyPairOutput < Struct.new(
+      nil,
       :key_pair,
       keyword_init: true
     )
@@ -668,6 +702,7 @@ module Aws::Ivs
     #   <p>ARN of the playback restriction policy to be returned.</p>
     #   @return [String]
     class GetPlaybackRestrictionPolicyRequest < Struct.new(
+      nil,
       :arn,
       keyword_init: true
     )
@@ -678,6 +713,7 @@ module Aws::Ivs
     #   <p/>
     #   @return [Types::PlaybackRestrictionPolicy]
     class GetPlaybackRestrictionPolicyResponse < Struct.new(
+      nil,
       :playback_restriction_policy,
       keyword_init: true
     )
@@ -688,6 +724,7 @@ module Aws::Ivs
     #   <p>ARN of the recording configuration to be retrieved.</p>
     #   @return [String]
     class GetRecordingConfigurationInput < Struct.new(
+      nil,
       :arn,
       keyword_init: true
     )
@@ -698,6 +735,7 @@ module Aws::Ivs
     #   <p>An object representing a configuration to record a channel stream.</p>
     #   @return [Types::RecordingConfiguration]
     class GetRecordingConfigurationOutput < Struct.new(
+      nil,
       :recording_configuration,
       keyword_init: true
     )
@@ -708,6 +746,7 @@ module Aws::Ivs
     #   <p>Channel ARN for stream to be accessed.</p>
     #   @return [String]
     class GetStreamInput < Struct.new(
+      nil,
       :channel_arn,
       keyword_init: true
     )
@@ -718,6 +757,7 @@ module Aws::Ivs
     #   <p>ARN for the stream key to be retrieved.</p>
     #   @return [String]
     class GetStreamKeyInput < Struct.new(
+      nil,
       :arn,
       keyword_init: true
     )
@@ -728,6 +768,7 @@ module Aws::Ivs
     #   <p>Object specifying a stream key.</p>
     #   @return [Types::StreamKey]
     class GetStreamKeyOutput < Struct.new(
+      nil,
       :stream_key,
       keyword_init: true
     )
@@ -738,6 +779,7 @@ module Aws::Ivs
     #   <p/>
     #   @return [Types::Stream]
     class GetStreamOutput < Struct.new(
+      nil,
       :stream,
       keyword_init: true
     )
@@ -753,6 +795,7 @@ module Aws::Ivs
     #         channel, if it exists.</p>
     #   @return [String]
     class GetStreamSessionInput < Struct.new(
+      nil,
       :channel_arn,
       :stream_id,
       keyword_init: true
@@ -764,6 +807,7 @@ module Aws::Ivs
     #   <p>List of stream details.</p>
     #   @return [Types::StreamSession]
     class GetStreamSessionOutput < Struct.new(
+      nil,
       :stream_session,
       keyword_init: true
     )
@@ -781,6 +825,7 @@ module Aws::Ivs
     #         documented there.</p>
     #   @return [Hash<String, String>]
     class ImportPlaybackKeyPairInput < Struct.new(
+      nil,
       :public_key_material,
       :name,
       :tags,
@@ -793,6 +838,7 @@ module Aws::Ivs
     #   <p/>
     #   @return [Types::PlaybackKeyPair]
     class ImportPlaybackKeyPairOutput < Struct.new(
+      nil,
       :key_pair,
       keyword_init: true
     )
@@ -810,6 +856,7 @@ module Aws::Ivs
     #   <p>Encoder settings for audio.</p>
     #   @return [Types::AudioConfiguration]
     class IngestConfiguration < Struct.new(
+      nil,
       :video,
       :audio,
       keyword_init: true
@@ -827,6 +874,7 @@ module Aws::Ivs
     #   <p>Encoder settings for audio.</p>
     #   @return [Array<Types::AudioConfiguration>]
     class IngestConfigurations < Struct.new(
+      nil,
       :video_configurations,
       :audio_configurations,
       keyword_init: true
@@ -839,6 +887,7 @@ module Aws::Ivs
     #   <p>Unexpected error during processing of request.</p>
     #   @return [String]
     class InternalServerException < Struct.new(
+      nil,
       :exception_message,
       keyword_init: true
     )
@@ -862,6 +911,7 @@ module Aws::Ivs
     #   <p>Maximum number of channels to return. Default: 100.</p>
     #   @return [Integer]
     class ListChannelsInput < Struct.new(
+      nil,
       :filter_by_name,
       :filter_by_recording_configuration_arn,
       :filter_by_playback_restriction_policy_arn,
@@ -880,6 +930,7 @@ module Aws::Ivs
     #         request to get the next set.</p>
     #   @return [String]
     class ListChannelsOutput < Struct.new(
+      nil,
       :channels,
       :next_token,
       keyword_init: true
@@ -896,6 +947,7 @@ module Aws::Ivs
     #         smaller.</p>
     #   @return [Integer]
     class ListPlaybackKeyPairsInput < Struct.new(
+      nil,
       :next_token,
       :max_results,
       keyword_init: true
@@ -911,6 +963,7 @@ module Aws::Ivs
     #         the request to get the next set.</p>
     #   @return [String]
     class ListPlaybackKeyPairsOutput < Struct.new(
+      nil,
       :key_pairs,
       :next_token,
       keyword_init: true
@@ -926,6 +979,7 @@ module Aws::Ivs
     #   <p>Maximum number of policies to return. Default: 1.</p>
     #   @return [Integer]
     class ListPlaybackRestrictionPoliciesRequest < Struct.new(
+      nil,
       :next_token,
       :max_results,
       keyword_init: true
@@ -941,6 +995,7 @@ module Aws::Ivs
     #         request to get the next set.</p>
     #   @return [String]
     class ListPlaybackRestrictionPoliciesResponse < Struct.new(
+      nil,
       :playback_restriction_policies,
       :next_token,
       keyword_init: true
@@ -957,6 +1012,7 @@ module Aws::Ivs
     #         whichever is smaller. </p>
     #   @return [Integer]
     class ListRecordingConfigurationsInput < Struct.new(
+      nil,
       :next_token,
       :max_results,
       keyword_init: true
@@ -972,6 +1028,7 @@ module Aws::Ivs
     #           <code>nextToken</code> in the request to get the next set.</p>
     #   @return [String]
     class ListRecordingConfigurationsOutput < Struct.new(
+      nil,
       :recording_configurations,
       :next_token,
       keyword_init: true
@@ -990,6 +1047,7 @@ module Aws::Ivs
     #   <p>Maximum number of streamKeys to return. Default: 1.</p>
     #   @return [Integer]
     class ListStreamKeysInput < Struct.new(
+      nil,
       :channel_arn,
       :next_token,
       :max_results,
@@ -1006,6 +1064,7 @@ module Aws::Ivs
     #         the request to get the next set.</p>
     #   @return [String]
     class ListStreamKeysOutput < Struct.new(
+      nil,
       :stream_keys,
       :next_token,
       keyword_init: true
@@ -1024,6 +1083,7 @@ module Aws::Ivs
     #   <p>Maximum number of streams to return. Default: 100.</p>
     #   @return [Integer]
     class ListStreamSessionsInput < Struct.new(
+      nil,
       :channel_arn,
       :next_token,
       :max_results,
@@ -1040,6 +1100,7 @@ module Aws::Ivs
     #         request to get the next set.</p>
     #   @return [String]
     class ListStreamSessionsOutput < Struct.new(
+      nil,
       :stream_sessions,
       :next_token,
       keyword_init: true
@@ -1058,6 +1119,7 @@ module Aws::Ivs
     #   <p>Maximum number of streams to return. Default: 100.</p>
     #   @return [Integer]
     class ListStreamsInput < Struct.new(
+      nil,
       :filter_by,
       :next_token,
       :max_results,
@@ -1074,6 +1136,7 @@ module Aws::Ivs
     #         request to get the next set.</p>
     #   @return [String]
     class ListStreamsOutput < Struct.new(
+      nil,
       :streams,
       :next_token,
       keyword_init: true
@@ -1085,6 +1148,7 @@ module Aws::Ivs
     #   <p>The ARN of the resource to be retrieved. The ARN must be URL-encoded.</p>
     #   @return [String]
     class ListTagsForResourceInput < Struct.new(
+      nil,
       :resource_arn,
       keyword_init: true
     )
@@ -1096,6 +1160,7 @@ module Aws::Ivs
     #           (key:value)</code>.</p>
     #   @return [Hash<String, String>]
     class ListTagsForResourceOutput < Struct.new(
+      nil,
       :tags,
       keyword_init: true
     )
@@ -1113,6 +1178,7 @@ module Aws::Ivs
     #   <p>Maximum resolution for multitrack input. Required if <code>enabled</code> is <code>true</code>.</p>
     #   @return [String]
     class MultitrackInputConfiguration < Struct.new(
+      nil,
       :enabled,
       :policy,
       :maximum_resolution,
@@ -1131,6 +1197,7 @@ module Aws::Ivs
     #   <p> Your account is pending verification. </p>
     #   @return [String]
     class PendingVerification < Struct.new(
+      nil,
       :exception_message,
       keyword_init: true
     )
@@ -1153,6 +1220,7 @@ module Aws::Ivs
     #         service-specific constraints beyond what is documented there.</p>
     #   @return [Hash<String, String>]
     class PlaybackKeyPair < Struct.new(
+      nil,
       :arn,
       :name,
       :fingerprint,
@@ -1175,6 +1243,7 @@ module Aws::Ivs
     #         service-specific constraints beyond what is documented there.</p>
     #   @return [Hash<String, String>]
     class PlaybackKeyPairSummary < Struct.new(
+      nil,
       :arn,
       :name,
       :tags,
@@ -1211,6 +1280,7 @@ module Aws::Ivs
     #         service-specific constraints beyond what is documented there.</p>
     #   @return [Hash<String, String>]
     class PlaybackRestrictionPolicy < Struct.new(
+      nil,
       :arn,
       :allowed_countries,
       :allowed_origins,
@@ -1249,6 +1319,7 @@ module Aws::Ivs
     #         service-specific constraints beyond what is documented there.</p>
     #   @return [Hash<String, String>]
     class PlaybackRestrictionPolicySummary < Struct.new(
+      nil,
       :arn,
       :allowed_countries,
       :allowed_origins,
@@ -1268,6 +1339,7 @@ module Aws::Ivs
     #   <p>Metadata to insert into the stream. Maximum: 1 KB per request.</p>
     #   @return [String]
     class PutMetadataInput < Struct.new(
+      nil,
       :channel_arn,
       :metadata,
       keyword_init: true
@@ -1306,6 +1378,7 @@ module Aws::Ivs
     #   <p>Object that describes which renditions should be recorded for a stream.</p>
     #   @return [Types::RenditionConfiguration]
     class RecordingConfiguration < Struct.new(
+      nil,
       :arn,
       :name,
       :destination_configuration,
@@ -1344,6 +1417,7 @@ module Aws::Ivs
     #         service-specific constraints beyond what is documented there.</p>
     #   @return [Hash<String, String>]
     class RecordingConfigurationSummary < Struct.new(
+      nil,
       :arn,
       :name,
       :destination_configuration,
@@ -1369,6 +1443,7 @@ module Aws::Ivs
     #         rendition, see <a href="https://docs.aws.amazon.com/ivs/latest/userguide/record-to-s3.html">Auto-Record to Amazon S3</a>.</p>
     #   @return [Array<String>]
     class RenditionConfiguration < Struct.new(
+      nil,
       :rendition_selection,
       :renditions,
       keyword_init: true
@@ -1381,6 +1456,7 @@ module Aws::Ivs
     #   <p>Request references a resource which does not exist.</p>
     #   @return [String]
     class ResourceNotFoundException < Struct.new(
+      nil,
       :exception_message,
       keyword_init: true
     )
@@ -1392,6 +1468,7 @@ module Aws::Ivs
     #   <p>Location (S3 bucket name) where recorded videos will be stored.</p>
     #   @return [String]
     class S3DestinationConfiguration < Struct.new(
+      nil,
       :bucket_name,
       keyword_init: true
     )
@@ -1403,6 +1480,7 @@ module Aws::Ivs
     #   <p>Request would cause a service quota to be exceeded.</p>
     #   @return [String]
     class ServiceQuotaExceededException < Struct.new(
+      nil,
       :exception_message,
       keyword_init: true
     )
@@ -1419,6 +1497,7 @@ module Aws::Ivs
     #         channel.</p>
     #   @return [String]
     class Srt < Struct.new(
+      nil,
       :endpoint,
       :passphrase,
       keyword_init: true
@@ -1438,6 +1517,7 @@ module Aws::Ivs
     #         than or equal to the specified version will be revoked. Default: 0.</p>
     #   @return [Integer]
     class StartViewerSessionRevocationInput < Struct.new(
+      nil,
       :channel_arn,
       :viewer_id,
       :viewer_session_versions_less_than_or_equal_to,
@@ -1447,6 +1527,7 @@ module Aws::Ivs
     end
 
     class StartViewerSessionRevocationOutput < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1456,6 +1537,7 @@ module Aws::Ivs
     #   <p>ARN of the channel for which the stream is to be stopped.</p>
     #   @return [String]
     class StopStreamInput < Struct.new(
+      nil,
       :channel_arn,
       keyword_init: true
     )
@@ -1463,6 +1545,7 @@ module Aws::Ivs
     end
 
     class StopStreamOutput < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1497,6 +1580,7 @@ module Aws::Ivs
     #         -1 indicates that the request timed out; in this case, retry.</p>
     #   @return [Integer]
     class Stream < Struct.new(
+      nil,
       :channel_arn,
       :stream_id,
       :playback_url,
@@ -1566,6 +1650,7 @@ module Aws::Ivs
     #            </ul>
     #   @return [String]
     class StreamEvent < Struct.new(
+      nil,
       :name,
       :type,
       :event_time,
@@ -1580,6 +1665,7 @@ module Aws::Ivs
     #   <p>The stream’s health.</p>
     #   @return [String]
     class StreamFilters < Struct.new(
+      nil,
       :health,
       keyword_init: true
     )
@@ -1602,6 +1688,7 @@ module Aws::Ivs
     #         service-specific constraints beyond what is documented there.</p>
     #   @return [Hash<String, String>]
     class StreamKey < Struct.new(
+      nil,
       :arn,
       :value,
       :channel_arn,
@@ -1624,6 +1711,7 @@ module Aws::Ivs
     #         service-specific constraints beyond what is documented there.</p>
     #   @return [Hash<String, String>]
     class StreamKeySummary < Struct.new(
+      nil,
       :arn,
       :channel_arn,
       :tags,
@@ -1667,6 +1755,7 @@ module Aws::Ivs
     #         IVS</a>.</p>
     #   @return [Array<Types::StreamEvent>]
     class StreamSession < Struct.new(
+      nil,
       :stream_id,
       :start_time,
       :end_time,
@@ -1696,6 +1785,7 @@ module Aws::Ivs
     #   <p>If <code>true</code>, this stream encountered a quota breach or failure.</p>
     #   @return [Boolean]
     class StreamSessionSummary < Struct.new(
+      nil,
       :stream_id,
       :start_time,
       :end_time,
@@ -1736,6 +1826,7 @@ module Aws::Ivs
     #           returned as a string</i>. </p>
     #   @return [Time]
     class StreamSummary < Struct.new(
+      nil,
       :channel_arn,
       :stream_id,
       :state,
@@ -1757,6 +1848,7 @@ module Aws::Ivs
     #   <p>The stream is temporarily unavailable.</p>
     #   @return [String]
     class StreamUnavailable < Struct.new(
+      nil,
       :exception_message,
       keyword_init: true
     )
@@ -1773,6 +1865,7 @@ module Aws::Ivs
     #         service-specific constraints beyond what is documented there.</p>
     #   @return [Hash<String, String>]
     class TagResourceInput < Struct.new(
+      nil,
       :resource_arn,
       :tags,
       keyword_init: true
@@ -1781,6 +1874,7 @@ module Aws::Ivs
     end
 
     class TagResourceOutput < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1791,6 +1885,7 @@ module Aws::Ivs
     #   <p>Request was denied due to request throttling.</p>
     #   @return [String]
     class ThrottlingException < Struct.new(
+      nil,
       :exception_message,
       keyword_init: true
     )
@@ -1829,6 +1924,7 @@ module Aws::Ivs
     #         both <code>SEQUENTIAL</code> and <code>LATEST</code>. Default: <code>SEQUENTIAL</code>.</p>
     #   @return [Array<String>]
     class ThumbnailConfiguration < Struct.new(
+      nil,
       :recording_mode,
       :target_interval_seconds,
       :resolution,
@@ -1847,6 +1943,7 @@ module Aws::Ivs
     #         service-specific constraints beyond what is documented there.</p>
     #   @return [Array<String>]
     class UntagResourceInput < Struct.new(
+      nil,
       :resource_arn,
       :tag_keys,
       keyword_init: true
@@ -1855,6 +1952,7 @@ module Aws::Ivs
     end
 
     class UntagResourceOutput < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1904,6 +2002,7 @@ module Aws::Ivs
     #   <p>Indicates which content-packaging format is used (MPEG-TS or fMP4). If <code>multitrackInputConfiguration</code> is specified and <code>enabled</code> is <code>true</code>, then <code>containerFormat</code> is required and must be set to <code>FRAGMENTED_MP4</code>. Otherwise, <code>containerFormat</code> may be set to <code>TS</code> or <code>FRAGMENTED_MP4</code>. Default: <code>TS</code>.</p>
     #   @return [String]
     class UpdateChannelInput < Struct.new(
+      nil,
       :arn,
       :name,
       :latency_mode,
@@ -1924,6 +2023,7 @@ module Aws::Ivs
     #   <p>Object specifying the updated channel.</p>
     #   @return [Types::Channel]
     class UpdateChannelOutput < Struct.new(
+      nil,
       :channel,
       keyword_init: true
     )
@@ -1951,6 +2051,7 @@ module Aws::Ivs
     #   <p>Playback-restriction-policy name. The value does not need to be unique.</p>
     #   @return [String]
     class UpdatePlaybackRestrictionPolicyRequest < Struct.new(
+      nil,
       :arn,
       :allowed_countries,
       :allowed_origins,
@@ -1965,6 +2066,7 @@ module Aws::Ivs
     #   <p>Object specifying the updated policy.</p>
     #   @return [Types::PlaybackRestrictionPolicy]
     class UpdatePlaybackRestrictionPolicyResponse < Struct.new(
+      nil,
       :playback_restriction_policy,
       keyword_init: true
     )
@@ -1976,6 +2078,7 @@ module Aws::Ivs
     #   <p>The input fails to satisfy the constraints specified by an Amazon Web Services service.</p>
     #   @return [String]
     class ValidationException < Struct.new(
+      nil,
       :exception_message,
       keyword_init: true
     )
@@ -2022,6 +2125,7 @@ module Aws::Ivs
     #   <p>Indicates to the decoder the requirements for decoding the stream. When an AVC codec is used, this field has the same value as <code>avcProfile</code>.</p>
     #   @return [String]
     class VideoConfiguration < Struct.new(
+      nil,
       :avc_profile,
       :avc_level,
       :codec,

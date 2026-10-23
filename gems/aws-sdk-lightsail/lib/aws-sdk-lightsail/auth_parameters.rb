@@ -10,6 +10,7 @@ module Aws::Lightsail
   #   @return [Symbol]
   #
   AuthParameters = Struct.new(
+    nil,
     :operation_name,
     keyword_init: true
   ) do

@@ -11,6 +11,7 @@ module Aws::IotDeviceAdvisor
     #   <p>Sends a Conflict Exception message.</p>
     #   @return [String]
     class ConflictException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -29,6 +30,7 @@ module Aws::IotDeviceAdvisor
     #               using retries and obtaining its status. This parameter is optional.</p>
     #   @return [String]
     class CreateSuiteDefinitionRequest < Struct.new(
+      nil,
       :suite_definition_configuration,
       :tags,
       :client_token,
@@ -50,6 +52,7 @@ module Aws::IotDeviceAdvisor
     #   <p>The timestamp of when the test suite was created.</p>
     #   @return [Time]
     class CreateSuiteDefinitionResponse < Struct.new(
+      nil,
       :suite_definition_id,
       :suite_definition_arn,
       :suite_definition_name,
@@ -63,6 +66,7 @@ module Aws::IotDeviceAdvisor
     #   <p>Suite definition ID of the test suite to be deleted.</p>
     #   @return [String]
     class DeleteSuiteDefinitionRequest < Struct.new(
+      nil,
       :suite_definition_id,
       keyword_init: true
     )
@@ -70,6 +74,7 @@ module Aws::IotDeviceAdvisor
     end
 
     class DeleteSuiteDefinitionResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -87,6 +92,7 @@ module Aws::IotDeviceAdvisor
     #   <p>Lists device's role ARN.</p>
     #   @return [String]
     class DeviceUnderTest < Struct.new(
+      nil,
       :thing_arn,
       :certificate_arn,
       :device_role_arn,
@@ -108,6 +114,7 @@ module Aws::IotDeviceAdvisor
     #   <p>The authentication method used during the device connection.</p>
     #   @return [String]
     class GetEndpointRequest < Struct.new(
+      nil,
       :thing_arn,
       :certificate_arn,
       :device_role_arn,
@@ -121,6 +128,7 @@ module Aws::IotDeviceAdvisor
     #   <p>The response of an Device Advisor endpoint.</p>
     #   @return [String]
     class GetEndpointResponse < Struct.new(
+      nil,
       :endpoint,
       keyword_init: true
     )
@@ -134,6 +142,7 @@ module Aws::IotDeviceAdvisor
     #   <p>Suite definition version of the test suite to get.</p>
     #   @return [String]
     class GetSuiteDefinitionRequest < Struct.new(
+      nil,
       :suite_definition_id,
       :suite_definition_version,
       keyword_init: true
@@ -166,6 +175,7 @@ module Aws::IotDeviceAdvisor
     #   <p>Tags attached to the suite definition.</p>
     #   @return [Hash<String, String>]
     class GetSuiteDefinitionResponse < Struct.new(
+      nil,
       :suite_definition_id,
       :suite_definition_arn,
       :suite_definition_version,
@@ -186,6 +196,7 @@ module Aws::IotDeviceAdvisor
     #   <p>Suite run ID of the test suite run.</p>
     #   @return [String]
     class GetSuiteRunReportRequest < Struct.new(
+      nil,
       :suite_definition_id,
       :suite_run_id,
       keyword_init: true
@@ -197,6 +208,7 @@ module Aws::IotDeviceAdvisor
     #   <p>Download URL of the qualification report.</p>
     #   @return [String]
     class GetSuiteRunReportResponse < Struct.new(
+      nil,
       :qualification_report_download_url,
       keyword_init: true
     )
@@ -210,6 +222,7 @@ module Aws::IotDeviceAdvisor
     #   <p>Suite run ID for the test suite run.</p>
     #   @return [String]
     class GetSuiteRunRequest < Struct.new(
+      nil,
       :suite_definition_id,
       :suite_run_id,
       keyword_init: true
@@ -251,6 +264,7 @@ module Aws::IotDeviceAdvisor
     #   <p>The tags attached to the suite run.</p>
     #   @return [Hash<String, String>]
     class GetSuiteRunResponse < Struct.new(
+      nil,
       :suite_definition_id,
       :suite_definition_version,
       :suite_run_id,
@@ -278,6 +292,7 @@ module Aws::IotDeviceAdvisor
     #   <p>Tests under Group Result.</p>
     #   @return [Array<Types::TestCaseRun>]
     class GroupResult < Struct.new(
+      nil,
       :group_id,
       :group_name,
       :tests,
@@ -291,6 +306,7 @@ module Aws::IotDeviceAdvisor
     #   <p>Sends an Internal Failure Exception message.</p>
     #   @return [String]
     class InternalServerException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -304,6 +320,7 @@ module Aws::IotDeviceAdvisor
     #   <p>A token used to get the next set of results.</p>
     #   @return [String]
     class ListSuiteDefinitionsRequest < Struct.new(
+      nil,
       :max_results,
       :next_token,
       keyword_init: true
@@ -319,6 +336,7 @@ module Aws::IotDeviceAdvisor
     #   <p>A token used to get the next set of results.</p>
     #   @return [String]
     class ListSuiteDefinitionsResponse < Struct.new(
+      nil,
       :suite_definition_information_list,
       :next_token,
       keyword_init: true
@@ -341,6 +359,7 @@ module Aws::IotDeviceAdvisor
     #   <p>A token to retrieve the next set of results.</p>
     #   @return [String]
     class ListSuiteRunsRequest < Struct.new(
+      nil,
       :suite_definition_id,
       :suite_definition_version,
       :max_results,
@@ -358,6 +377,7 @@ module Aws::IotDeviceAdvisor
     #   <p>A token to retrieve the next set of results.</p>
     #   @return [String]
     class ListSuiteRunsResponse < Struct.new(
+      nil,
       :suite_runs_list,
       :next_token,
       keyword_init: true
@@ -370,6 +390,7 @@ module Aws::IotDeviceAdvisor
     #               SuiteRun ARN.</p>
     #   @return [String]
     class ListTagsForResourceRequest < Struct.new(
+      nil,
       :resource_arn,
       keyword_init: true
     )
@@ -380,6 +401,7 @@ module Aws::IotDeviceAdvisor
     #   <p>The tags attached to the IoT Device Advisor resource.</p>
     #   @return [Hash<String, String>]
     class ListTagsForResourceResponse < Struct.new(
+      nil,
       :tags,
       keyword_init: true
     )
@@ -391,6 +413,7 @@ module Aws::IotDeviceAdvisor
     #   <p>Sends a Resource Not Found Exception message.</p>
     #   @return [String]
     class ResourceNotFoundException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -410,6 +433,7 @@ module Aws::IotDeviceAdvisor
     #   <p>The tags to be attached to the suite run.</p>
     #   @return [Hash<String, String>]
     class StartSuiteRunRequest < Struct.new(
+      nil,
       :suite_definition_id,
       :suite_definition_version,
       :suite_run_configuration,
@@ -432,6 +456,7 @@ module Aws::IotDeviceAdvisor
     #   <p>The response of an Device Advisor test endpoint.</p>
     #   @return [String]
     class StartSuiteRunResponse < Struct.new(
+      nil,
       :suite_run_id,
       :suite_run_arn,
       :created_at,
@@ -448,6 +473,7 @@ module Aws::IotDeviceAdvisor
     #   <p>Suite run ID of the test suite run to be stopped.</p>
     #   @return [String]
     class StopSuiteRunRequest < Struct.new(
+      nil,
       :suite_definition_id,
       :suite_run_id,
       keyword_init: true
@@ -456,6 +482,7 @@ module Aws::IotDeviceAdvisor
     end
 
     class StopSuiteRunResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -495,6 +522,7 @@ module Aws::IotDeviceAdvisor
     #   <p>Sets the MQTT protocol that is configured in the suite definition.</p>
     #   @return [String]
     class SuiteDefinitionConfiguration < Struct.new(
+      nil,
       :suite_definition_name,
       :devices,
       :intended_for_qualification,
@@ -530,6 +558,7 @@ module Aws::IotDeviceAdvisor
     #   <p>Date (in Unix epoch time) when the test suite was created.</p>
     #   @return [Time]
     class SuiteDefinitionInformation < Struct.new(
+      nil,
       :suite_definition_id,
       :suite_definition_name,
       :default_devices,
@@ -554,6 +583,7 @@ module Aws::IotDeviceAdvisor
     #   <p>TRUE if multiple test suites run in parallel.</p>
     #   @return [Boolean]
     class SuiteRunConfiguration < Struct.new(
+      nil,
       :primary_device,
       :selected_test_list,
       :parallel_run,
@@ -595,6 +625,7 @@ module Aws::IotDeviceAdvisor
     #   <p>Number of test cases that failed in the suite run.</p>
     #   @return [Integer]
     class SuiteRunInformation < Struct.new(
+      nil,
       :suite_definition_id,
       :suite_definition_version,
       :suite_definition_name,
@@ -618,6 +649,7 @@ module Aws::IotDeviceAdvisor
     #   <p>The tags to be attached to the IoT Device Advisor resource.</p>
     #   @return [Hash<String, String>]
     class TagResourceRequest < Struct.new(
+      nil,
       :resource_arn,
       :tags,
       keyword_init: true
@@ -626,6 +658,7 @@ module Aws::IotDeviceAdvisor
     end
 
     class TagResourceResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -700,6 +733,7 @@ module Aws::IotDeviceAdvisor
     #   <p> Provides the test scenarios for the test case run. </p>
     #   @return [Array<Types::TestCaseScenario>]
     class TestCaseRun < Struct.new(
+      nil,
       :test_case_run_id,
       :test_case_definition_id,
       :test_case_definition_name,
@@ -777,6 +811,7 @@ module Aws::IotDeviceAdvisor
     #   <p>Provides test case scenario system messages if any.</p>
     #   @return [String]
     class TestCaseScenario < Struct.new(
+      nil,
       :test_case_scenario_id,
       :test_case_scenario_type,
       :status,
@@ -792,6 +827,7 @@ module Aws::IotDeviceAdvisor
     #   <p>Show each group of test results.</p>
     #   @return [Array<Types::GroupResult>]
     class TestResult < Struct.new(
+      nil,
       :groups,
       keyword_init: true
     )
@@ -806,6 +842,7 @@ module Aws::IotDeviceAdvisor
     #   <p>List of tag keys to remove from the IoT Device Advisor resource.</p>
     #   @return [Array<String>]
     class UntagResourceRequest < Struct.new(
+      nil,
       :resource_arn,
       :tag_keys,
       keyword_init: true
@@ -814,6 +851,7 @@ module Aws::IotDeviceAdvisor
     end
 
     class UntagResourceResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -826,6 +864,7 @@ module Aws::IotDeviceAdvisor
     #   <p>Updates a Device Advisor test suite with suite definition configuration.</p>
     #   @return [Types::SuiteDefinitionConfiguration]
     class UpdateSuiteDefinitionRequest < Struct.new(
+      nil,
       :suite_definition_id,
       :suite_definition_configuration,
       keyword_init: true
@@ -852,6 +891,7 @@ module Aws::IotDeviceAdvisor
     #   <p>Timestamp of when the test suite was updated.</p>
     #   @return [Time]
     class UpdateSuiteDefinitionResponse < Struct.new(
+      nil,
       :suite_definition_id,
       :suite_definition_arn,
       :suite_definition_name,
@@ -868,6 +908,7 @@ module Aws::IotDeviceAdvisor
     #   <p>Sends a Validation Exception message.</p>
     #   @return [String]
     class ValidationException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )

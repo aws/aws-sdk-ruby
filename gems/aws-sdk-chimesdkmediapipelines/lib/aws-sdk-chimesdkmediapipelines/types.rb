@@ -11,6 +11,7 @@ module Aws::ChimeSDKMediaPipelines
     #   <p>The position of the <code>ActiveSpeakerOnly</code> video tile.</p>
     #   @return [String]
     class ActiveSpeakerOnlyConfiguration < Struct.new(
+      nil,
       :active_speaker_position,
       keyword_init: true
     )
@@ -95,6 +96,7 @@ module Aws::ChimeSDKMediaPipelines
     #   <p>By default, all <code>CategoryEvents</code> are sent to the insights target. If this parameter is specified, only included categories are sent to the insights target. </p>
     #   @return [Array<String>]
     class AmazonTranscribeCallAnalyticsProcessorConfiguration < Struct.new(
+      nil,
       :language_code,
       :vocabulary_name,
       :vocabulary_filter_name,
@@ -220,6 +222,7 @@ module Aws::ChimeSDKMediaPipelines
     #   <p>The names of the custom vocabulary filter or filters using during transcription.</p>
     #   @return [String]
     class AmazonTranscribeProcessorConfiguration < Struct.new(
+      nil,
       :language_code,
       :vocabulary_name,
       :vocabulary_filter_name,
@@ -275,6 +278,7 @@ module Aws::ChimeSDKMediaPipelines
     #   <p>The configuration for the composited video artifacts concatenation.</p>
     #   @return [Types::CompositedVideoConcatenationConfiguration]
     class ArtifactsConcatenationConfiguration < Struct.new(
+      nil,
       :audio,
       :video,
       :content,
@@ -301,6 +305,7 @@ module Aws::ChimeSDKMediaPipelines
     #   <p>Enables video compositing.</p>
     #   @return [Types::CompositedVideoArtifactsConfiguration]
     class ArtifactsConfiguration < Struct.new(
+      nil,
       :audio,
       :video,
       :content,
@@ -315,6 +320,7 @@ module Aws::ChimeSDKMediaPipelines
     #   <p>The MUX type of the audio artifact configuration object.</p>
     #   @return [String]
     class AudioArtifactsConfiguration < Struct.new(
+      nil,
       :mux_type,
       keyword_init: true
     )
@@ -326,6 +332,7 @@ module Aws::ChimeSDKMediaPipelines
     #   <p>Enables or disables the configuration object.</p>
     #   @return [String]
     class AudioConcatenationConfiguration < Struct.new(
+      nil,
       :state,
       keyword_init: true
     )
@@ -341,6 +348,7 @@ module Aws::ChimeSDKMediaPipelines
     #   <p>The request ID associated with the call responsible for the exception.</p>
     #   @return [String]
     class BadRequestException < Struct.new(
+      nil,
       :code,
       :message,
       :request_id,
@@ -357,6 +365,7 @@ module Aws::ChimeSDKMediaPipelines
     #   <p>Specifies whether the audio in a channel belongs to the <code>AGENT</code> or <code>CUSTOMER</code>.</p>
     #   @return [String]
     class ChannelDefinition < Struct.new(
+      nil,
       :channel_id,
       :participant_role,
       keyword_init: true
@@ -375,6 +384,7 @@ module Aws::ChimeSDKMediaPipelines
     #   <p>The configuration for the artifacts in an Amazon Chime SDK meeting concatenation.</p>
     #   @return [Types::ArtifactsConcatenationConfiguration]
     class ChimeSdkMeetingConcatenationConfiguration < Struct.new(
+      nil,
       :artifacts_configuration,
       keyword_init: true
     )
@@ -389,6 +399,7 @@ module Aws::ChimeSDKMediaPipelines
     #   <p>The configuration for the artifacts in an Amazon Chime SDK meeting.</p>
     #   @return [Types::ArtifactsConfiguration]
     class ChimeSdkMeetingConfiguration < Struct.new(
+      nil,
       :source_configuration,
       :artifacts_configuration,
       keyword_init: true
@@ -410,6 +421,7 @@ module Aws::ChimeSDKMediaPipelines
     #   <p>The source configuration settings of the media pipeline's configuration object.</p>
     #   @return [Types::SourceConfiguration]
     class ChimeSdkMeetingLiveConnectorConfiguration < Struct.new(
+      nil,
       :arn,
       :mux_type,
       :composited_video,
@@ -430,6 +442,7 @@ module Aws::ChimeSDKMediaPipelines
     #   <p>The <code>GridView</code> configuration setting.</p>
     #   @return [Types::GridViewConfiguration]
     class CompositedVideoArtifactsConfiguration < Struct.new(
+      nil,
       :layout,
       :resolution,
       :grid_view_configuration,
@@ -445,6 +458,7 @@ module Aws::ChimeSDKMediaPipelines
     #   <p>Enables or disables the configuration object.</p>
     #   @return [String]
     class CompositedVideoConcatenationConfiguration < Struct.new(
+      nil,
       :state,
       keyword_init: true
     )
@@ -459,6 +473,7 @@ module Aws::ChimeSDKMediaPipelines
     #   <p>The configuration settings for an Amazon S3 bucket sink.</p>
     #   @return [Types::S3BucketSinkConfiguration]
     class ConcatenationSink < Struct.new(
+      nil,
       :type,
       :s3_bucket_sink_configuration,
       keyword_init: true
@@ -474,6 +489,7 @@ module Aws::ChimeSDKMediaPipelines
     #   <p>The concatenation settings for the media pipeline in a configuration object.</p>
     #   @return [Types::MediaCapturePipelineSourceConfiguration]
     class ConcatenationSource < Struct.new(
+      nil,
       :type,
       :media_capture_pipeline_source_configuration,
       keyword_init: true
@@ -491,6 +507,7 @@ module Aws::ChimeSDKMediaPipelines
     #   <p>The request ID associated with the call responsible for the exception.</p>
     #   @return [String]
     class ConflictException < Struct.new(
+      nil,
       :code,
       :message,
       :request_id,
@@ -507,6 +524,7 @@ module Aws::ChimeSDKMediaPipelines
     #   <p>The MUX type of the artifact configuration.</p>
     #   @return [String]
     class ContentArtifactsConfiguration < Struct.new(
+      nil,
       :state,
       :mux_type,
       keyword_init: true
@@ -520,6 +538,7 @@ module Aws::ChimeSDKMediaPipelines
     #   <p>Enables or disables the configuration object.</p>
     #   @return [String]
     class ContentConcatenationConfiguration < Struct.new(
+      nil,
       :state,
       keyword_init: true
     )
@@ -566,6 +585,7 @@ module Aws::ChimeSDKMediaPipelines
     #   <p>The tag key-value pairs.</p>
     #   @return [Array<Types::Tag>]
     class CreateMediaCapturePipelineRequest < Struct.new(
+      nil,
       :source_type,
       :source_arn,
       :sink_type,
@@ -585,6 +605,7 @@ module Aws::ChimeSDKMediaPipelines
     #            ARN of a media pipeline object.</p>
     #   @return [Types::MediaCapturePipeline]
     class CreateMediaCapturePipelineResponse < Struct.new(
+      nil,
       :media_capture_pipeline,
       keyword_init: true
     )
@@ -605,6 +626,7 @@ module Aws::ChimeSDKMediaPipelines
     #   <p>The tags associated with the media concatenation pipeline.</p>
     #   @return [Array<Types::Tag>]
     class CreateMediaConcatenationPipelineRequest < Struct.new(
+      nil,
       :sources,
       :sinks,
       :client_request_token,
@@ -619,6 +641,7 @@ module Aws::ChimeSDKMediaPipelines
     #            media concatenation pipeline object.</p>
     #   @return [Types::MediaConcatenationPipeline]
     class CreateMediaConcatenationPipelineResponse < Struct.new(
+      nil,
       :media_concatenation_pipeline,
       keyword_init: true
     )
@@ -646,6 +669,7 @@ module Aws::ChimeSDKMediaPipelines
     #   <p>The unique identifier for the media insights pipeline configuration request.</p>
     #   @return [String]
     class CreateMediaInsightsPipelineConfigurationRequest < Struct.new(
+      nil,
       :media_insights_pipeline_configuration_name,
       :resource_access_role_arn,
       :real_time_alert_configuration,
@@ -661,6 +685,7 @@ module Aws::ChimeSDKMediaPipelines
     #   <p>The configuration settings for the media insights pipeline.</p>
     #   @return [Types::MediaInsightsPipelineConfiguration]
     class CreateMediaInsightsPipelineConfigurationResponse < Struct.new(
+      nil,
       :media_insights_pipeline_configuration,
       keyword_init: true
     )
@@ -690,6 +715,7 @@ module Aws::ChimeSDKMediaPipelines
     #   <p>The unique identifier for the media insights pipeline request.</p>
     #   @return [String]
     class CreateMediaInsightsPipelineRequest < Struct.new(
+      nil,
       :media_insights_pipeline_configuration_arn,
       :kinesis_video_stream_source_runtime_configuration,
       :media_insights_runtime_metadata,
@@ -706,6 +732,7 @@ module Aws::ChimeSDKMediaPipelines
     #   <p>The media insights pipeline object.</p>
     #   @return [Types::MediaInsightsPipeline]
     class CreateMediaInsightsPipelineResponse < Struct.new(
+      nil,
       :media_insights_pipeline,
       keyword_init: true
     )
@@ -725,6 +752,7 @@ module Aws::ChimeSDKMediaPipelines
     #   <p>The tags associated with the media live connector pipeline.</p>
     #   @return [Array<Types::Tag>]
     class CreateMediaLiveConnectorPipelineRequest < Struct.new(
+      nil,
       :sources,
       :sinks,
       :client_request_token,
@@ -738,6 +766,7 @@ module Aws::ChimeSDKMediaPipelines
     #   <p>The new media live connector pipeline.</p>
     #   @return [Types::MediaLiveConnectorPipeline]
     class CreateMediaLiveConnectorPipelineResponse < Struct.new(
+      nil,
       :media_live_connector_pipeline,
       keyword_init: true
     )
@@ -757,6 +786,7 @@ module Aws::ChimeSDKMediaPipelines
     #   <p>The tags assigned to the stream pool.</p>
     #   @return [Array<Types::Tag>]
     class CreateMediaPipelineKinesisVideoStreamPoolRequest < Struct.new(
+      nil,
       :stream_configuration,
       :pool_name,
       :client_request_token,
@@ -773,6 +803,7 @@ module Aws::ChimeSDKMediaPipelines
     #            </note>
     #   @return [Types::KinesisVideoStreamPoolConfiguration]
     class CreateMediaPipelineKinesisVideoStreamPoolResponse < Struct.new(
+      nil,
       :kinesis_video_stream_pool_configuration,
       keyword_init: true
     )
@@ -792,6 +823,7 @@ module Aws::ChimeSDKMediaPipelines
     #   <p>The tags assigned to the media pipeline.</p>
     #   @return [Array<Types::Tag>]
     class CreateMediaStreamPipelineRequest < Struct.new(
+      nil,
       :sources,
       :sinks,
       :client_request_token,
@@ -805,6 +837,7 @@ module Aws::ChimeSDKMediaPipelines
     #   <p>The requested media pipeline.</p>
     #   @return [Types::MediaStreamPipeline]
     class CreateMediaStreamPipelineResponse < Struct.new(
+      nil,
       :media_stream_pipeline,
       keyword_init: true
     )
@@ -816,6 +849,7 @@ module Aws::ChimeSDKMediaPipelines
     #   <p>Enables or disables the configuration object.</p>
     #   @return [String]
     class DataChannelConcatenationConfiguration < Struct.new(
+      nil,
       :state,
       keyword_init: true
     )
@@ -826,6 +860,7 @@ module Aws::ChimeSDKMediaPipelines
     #   <p>The ID of the media pipeline being deleted. </p>
     #   @return [String]
     class DeleteMediaCapturePipelineRequest < Struct.new(
+      nil,
       :media_pipeline_id,
       keyword_init: true
     )
@@ -836,6 +871,7 @@ module Aws::ChimeSDKMediaPipelines
     #   <p>The unique identifier of the resource to be deleted. Valid values include the name and ARN of the media insights pipeline configuration.</p>
     #   @return [String]
     class DeleteMediaInsightsPipelineConfigurationRequest < Struct.new(
+      nil,
       :identifier,
       keyword_init: true
     )
@@ -846,6 +882,7 @@ module Aws::ChimeSDKMediaPipelines
     #   <p>The unique identifier of the requested resource. Valid values include the name and ARN of the media pipeline Kinesis Video Stream pool.</p>
     #   @return [String]
     class DeleteMediaPipelineKinesisVideoStreamPoolRequest < Struct.new(
+      nil,
       :identifier,
       keyword_init: true
     )
@@ -856,6 +893,7 @@ module Aws::ChimeSDKMediaPipelines
     #   <p>The ID of the media pipeline to delete.</p>
     #   @return [String]
     class DeleteMediaPipelineRequest < Struct.new(
+      nil,
       :media_pipeline_id,
       keyword_init: true
     )
@@ -871,6 +909,7 @@ module Aws::ChimeSDKMediaPipelines
     #   <p>The request id associated with the call responsible for the exception.</p>
     #   @return [String]
     class ForbiddenException < Struct.new(
+      nil,
       :code,
       :message,
       :request_id,
@@ -905,6 +944,7 @@ module Aws::ChimeSDKMediaPipelines
     #   <p>The range of timestamps to return.</p>
     #   @return [Types::TimestampRange]
     class FragmentSelector < Struct.new(
+      nil,
       :fragment_selector_type,
       :timestamp_range,
       keyword_init: true
@@ -916,6 +956,7 @@ module Aws::ChimeSDKMediaPipelines
     #   <p>The ID of the pipeline that you want to get.</p>
     #   @return [String]
     class GetMediaCapturePipelineRequest < Struct.new(
+      nil,
       :media_pipeline_id,
       keyword_init: true
     )
@@ -926,6 +967,7 @@ module Aws::ChimeSDKMediaPipelines
     #   <p>The media pipeline object.</p>
     #   @return [Types::MediaCapturePipeline]
     class GetMediaCapturePipelineResponse < Struct.new(
+      nil,
       :media_capture_pipeline,
       keyword_init: true
     )
@@ -936,6 +978,7 @@ module Aws::ChimeSDKMediaPipelines
     #   <p>The unique identifier of the requested resource.  Valid values include the name and ARN of the media insights pipeline configuration.</p>
     #   @return [String]
     class GetMediaInsightsPipelineConfigurationRequest < Struct.new(
+      nil,
       :identifier,
       keyword_init: true
     )
@@ -946,6 +989,7 @@ module Aws::ChimeSDKMediaPipelines
     #   <p>The requested media insights pipeline configuration.</p>
     #   @return [Types::MediaInsightsPipelineConfiguration]
     class GetMediaInsightsPipelineConfigurationResponse < Struct.new(
+      nil,
       :media_insights_pipeline_configuration,
       keyword_init: true
     )
@@ -956,6 +1000,7 @@ module Aws::ChimeSDKMediaPipelines
     #   <p>The unique identifier of the requested resource. Valid values include the name and ARN of the media pipeline Kinesis Video Stream pool.</p>
     #   @return [String]
     class GetMediaPipelineKinesisVideoStreamPoolRequest < Struct.new(
+      nil,
       :identifier,
       keyword_init: true
     )
@@ -966,6 +1011,7 @@ module Aws::ChimeSDKMediaPipelines
     #   <p>The video stream pool configuration object.</p>
     #   @return [Types::KinesisVideoStreamPoolConfiguration]
     class GetMediaPipelineKinesisVideoStreamPoolResponse < Struct.new(
+      nil,
       :kinesis_video_stream_pool_configuration,
       keyword_init: true
     )
@@ -976,6 +1022,7 @@ module Aws::ChimeSDKMediaPipelines
     #   <p>The ID of the pipeline that you want to get.</p>
     #   @return [String]
     class GetMediaPipelineRequest < Struct.new(
+      nil,
       :media_pipeline_id,
       keyword_init: true
     )
@@ -986,6 +1033,7 @@ module Aws::ChimeSDKMediaPipelines
     #   <p>The media pipeline object.</p>
     #   @return [Types::MediaPipeline]
     class GetMediaPipelineResponse < Struct.new(
+      nil,
       :media_pipeline,
       keyword_init: true
     )
@@ -999,6 +1047,7 @@ module Aws::ChimeSDKMediaPipelines
     #   <p>The ID of the speaker search task.</p>
     #   @return [String]
     class GetSpeakerSearchTaskRequest < Struct.new(
+      nil,
       :identifier,
       :speaker_search_task_id,
       keyword_init: true
@@ -1010,6 +1059,7 @@ module Aws::ChimeSDKMediaPipelines
     #   <p>The details of the speaker search task.</p>
     #   @return [Types::SpeakerSearchTask]
     class GetSpeakerSearchTaskResponse < Struct.new(
+      nil,
       :speaker_search_task,
       keyword_init: true
     )
@@ -1023,6 +1073,7 @@ module Aws::ChimeSDKMediaPipelines
     #   <p>The ID of the voice tone analysis task.</p>
     #   @return [String]
     class GetVoiceToneAnalysisTaskRequest < Struct.new(
+      nil,
       :identifier,
       :voice_tone_analysis_task_id,
       keyword_init: true
@@ -1034,6 +1085,7 @@ module Aws::ChimeSDKMediaPipelines
     #   <p>The details of the voice tone analysis task.</p>
     #   @return [Types::VoiceToneAnalysisTask]
     class GetVoiceToneAnalysisTaskResponse < Struct.new(
+      nil,
       :voice_tone_analysis_task,
       keyword_init: true
     )
@@ -1063,6 +1115,7 @@ module Aws::ChimeSDKMediaPipelines
     #   <p>The orientation setting, horizontal or vertical.</p>
     #   @return [String]
     class GridViewConfiguration < Struct.new(
+      nil,
       :content_share_layout,
       :presenter_only_configuration,
       :active_speaker_only_configuration,
@@ -1089,6 +1142,7 @@ module Aws::ChimeSDKMediaPipelines
     #   <p>Specifies the aspect ratio of all video tiles.</p>
     #   @return [String]
     class HorizontalLayoutConfiguration < Struct.new(
+      nil,
       :tile_order,
       :tile_position,
       :tile_count,
@@ -1103,6 +1157,7 @@ module Aws::ChimeSDKMediaPipelines
     #   <p>The name of the issue detection rule.</p>
     #   @return [String]
     class IssueDetectionConfiguration < Struct.new(
+      nil,
       :rule_name,
       keyword_init: true
     )
@@ -1121,6 +1176,7 @@ module Aws::ChimeSDKMediaPipelines
     #            the specified keywords or phrases are absent. Default: <code>FALSE</code>.</p>
     #   @return [Boolean]
     class KeywordMatchConfiguration < Struct.new(
+      nil,
       :rule_name,
       :keywords,
       :negate,
@@ -1139,6 +1195,7 @@ module Aws::ChimeSDKMediaPipelines
     #   <p>The ARN of the sink.</p>
     #   @return [String]
     class KinesisDataStreamSinkConfiguration < Struct.new(
+      nil,
       :insights_target,
       keyword_init: true
     )
@@ -1167,6 +1224,7 @@ module Aws::ChimeSDKMediaPipelines
     #   <p>The amount of time that data is retained.</p>
     #   @return [Integer]
     class KinesisVideoStreamConfiguration < Struct.new(
+      nil,
       :region,
       :data_retention_in_hours,
       keyword_init: true
@@ -1179,6 +1237,7 @@ module Aws::ChimeSDKMediaPipelines
     #   <p>The updated time that data is retained.</p>
     #   @return [Integer]
     class KinesisVideoStreamConfigurationUpdate < Struct.new(
+      nil,
       :data_retention_in_hours,
       keyword_init: true
     )
@@ -1211,6 +1270,7 @@ module Aws::ChimeSDKMediaPipelines
     #   <p>The time at which the configuration was updated.</p>
     #   @return [Time]
     class KinesisVideoStreamPoolConfiguration < Struct.new(
+      nil,
       :pool_arn,
       :pool_name,
       :pool_id,
@@ -1235,6 +1295,7 @@ module Aws::ChimeSDKMediaPipelines
     #   <p>The ARN of the video stream pool.</p>
     #   @return [String]
     class KinesisVideoStreamPoolSummary < Struct.new(
+      nil,
       :pool_name,
       :pool_id,
       :pool_arn,
@@ -1251,6 +1312,7 @@ module Aws::ChimeSDKMediaPipelines
     #   <p>Describes the timestamp range and timestamp origin of a range of fragments in the Kinesis video stream.</p>
     #   @return [Types::FragmentSelector]
     class KinesisVideoStreamRecordingSourceRuntimeConfiguration < Struct.new(
+      nil,
       :streams,
       :fragment_selector,
       keyword_init: true
@@ -1273,6 +1335,7 @@ module Aws::ChimeSDKMediaPipelines
     #            <p>Valid Range: Minimum value of 8000. Maximum value of 48000.</p>
     #   @return [Integer]
     class KinesisVideoStreamSourceRuntimeConfiguration < Struct.new(
+      nil,
       :streams,
       :media_encoding,
       :media_sample_rate,
@@ -1292,6 +1355,7 @@ module Aws::ChimeSDKMediaPipelines
     #   <p>The unique identifier of the fragment to begin processing.</p>
     #   @return [String]
     class KinesisVideoStreamSourceTaskConfiguration < Struct.new(
+      nil,
       :stream_arn,
       :channel_id,
       :fragment_number,
@@ -1310,6 +1374,7 @@ module Aws::ChimeSDKMediaPipelines
     #   <p>The ARN of the sink.</p>
     #   @return [String]
     class LambdaFunctionSinkConfiguration < Struct.new(
+      nil,
       :insights_target,
       keyword_init: true
     )
@@ -1323,6 +1388,7 @@ module Aws::ChimeSDKMediaPipelines
     #   <p>The maximum number of results to return in a single call. Valid Range: 1 - 99.</p>
     #   @return [Integer]
     class ListMediaCapturePipelinesRequest < Struct.new(
+      nil,
       :next_token,
       :max_results,
       keyword_init: true
@@ -1337,6 +1403,7 @@ module Aws::ChimeSDKMediaPipelines
     #   <p>The token used to retrieve the next page of results. </p>
     #   @return [String]
     class ListMediaCapturePipelinesResponse < Struct.new(
+      nil,
       :media_capture_pipelines,
       :next_token,
       keyword_init: true
@@ -1351,6 +1418,7 @@ module Aws::ChimeSDKMediaPipelines
     #   <p>The maximum number of results to return in a single call.</p>
     #   @return [Integer]
     class ListMediaInsightsPipelineConfigurationsRequest < Struct.new(
+      nil,
       :next_token,
       :max_results,
       keyword_init: true
@@ -1365,6 +1433,7 @@ module Aws::ChimeSDKMediaPipelines
     #   <p>The token used to return the next page of results. </p>
     #   @return [String]
     class ListMediaInsightsPipelineConfigurationsResponse < Struct.new(
+      nil,
       :media_insights_pipeline_configurations,
       :next_token,
       keyword_init: true
@@ -1379,6 +1448,7 @@ module Aws::ChimeSDKMediaPipelines
     #   <p>The maximum number of results to return in a single call.</p>
     #   @return [Integer]
     class ListMediaPipelineKinesisVideoStreamPoolsRequest < Struct.new(
+      nil,
       :next_token,
       :max_results,
       keyword_init: true
@@ -1393,6 +1463,7 @@ module Aws::ChimeSDKMediaPipelines
     #   <p>The token used to return the next page of results.</p>
     #   @return [String]
     class ListMediaPipelineKinesisVideoStreamPoolsResponse < Struct.new(
+      nil,
       :kinesis_video_stream_pools,
       :next_token,
       keyword_init: true
@@ -1407,6 +1478,7 @@ module Aws::ChimeSDKMediaPipelines
     #   <p>The maximum number of results to return in a single call. Valid Range: 1 - 99.</p>
     #   @return [Integer]
     class ListMediaPipelinesRequest < Struct.new(
+      nil,
       :next_token,
       :max_results,
       keyword_init: true
@@ -1421,6 +1493,7 @@ module Aws::ChimeSDKMediaPipelines
     #   <p>The token used to retrieve the next page of results. </p>
     #   @return [String]
     class ListMediaPipelinesResponse < Struct.new(
+      nil,
       :media_pipelines,
       :next_token,
       keyword_init: true
@@ -1432,6 +1505,7 @@ module Aws::ChimeSDKMediaPipelines
     #   <p>The ARN of the media pipeline associated with any tags. The ARN consists of the pipeline's region, resource ID, and pipeline ID.</p>
     #   @return [String]
     class ListTagsForResourceRequest < Struct.new(
+      nil,
       :resource_arn,
       keyword_init: true
     )
@@ -1442,6 +1516,7 @@ module Aws::ChimeSDKMediaPipelines
     #   <p>The tags associated with the specified media pipeline.</p>
     #   @return [Array<Types::Tag>]
     class ListTagsForResourceResponse < Struct.new(
+      nil,
       :tags,
       keyword_init: true
     )
@@ -1459,6 +1534,7 @@ module Aws::ChimeSDKMediaPipelines
     #   <p>The audio sample rate set for the RTMP configuration. Default: 48000.</p>
     #   @return [String]
     class LiveConnectorRTMPConfiguration < Struct.new(
+      nil,
       :url,
       :audio_channels,
       :audio_sample_rate,
@@ -1475,6 +1551,7 @@ module Aws::ChimeSDKMediaPipelines
     #   <p>The sink configuration's RTMP configuration settings.</p>
     #   @return [Types::LiveConnectorRTMPConfiguration]
     class LiveConnectorSinkConfiguration < Struct.new(
+      nil,
       :sink_type,
       :rtmp_configuration,
       keyword_init: true
@@ -1490,6 +1567,7 @@ module Aws::ChimeSDKMediaPipelines
     #   <p>The configuration settings of the connector pipeline.</p>
     #   @return [Types::ChimeSdkMeetingLiveConnectorConfiguration]
     class LiveConnectorSourceConfiguration < Struct.new(
+      nil,
       :source_type,
       :chime_sdk_meeting_live_connector_configuration,
       keyword_init: true
@@ -1542,6 +1620,7 @@ module Aws::ChimeSDKMediaPipelines
     #            in <code>SseAwsKeyManagementParams</code>.</p>
     #   @return [String]
     class MediaCapturePipeline < Struct.new(
+      nil,
       :media_pipeline_id,
       :media_pipeline_arn,
       :source_type,
@@ -1567,6 +1646,7 @@ module Aws::ChimeSDKMediaPipelines
     #   <p>The meeting configuration settings in a media capture pipeline configuration object. </p>
     #   @return [Types::ChimeSdkMeetingConcatenationConfiguration]
     class MediaCapturePipelineSourceConfiguration < Struct.new(
+      nil,
       :media_pipeline_arn,
       :chime_sdk_meeting_configuration,
       keyword_init: true
@@ -1582,6 +1662,7 @@ module Aws::ChimeSDKMediaPipelines
     #   <p>The ARN of the media pipeline in the summary.</p>
     #   @return [String]
     class MediaCapturePipelineSummary < Struct.new(
+      nil,
       :media_pipeline_id,
       :media_pipeline_arn,
       keyword_init: true
@@ -1612,6 +1693,7 @@ module Aws::ChimeSDKMediaPipelines
     #   <p>The time at which the concatenation pipeline was last updated.</p>
     #   @return [Time]
     class MediaConcatenationPipeline < Struct.new(
+      nil,
       :media_pipeline_id,
       :media_pipeline_arn,
       :sources,
@@ -1656,6 +1738,7 @@ module Aws::ChimeSDKMediaPipelines
     #   <p>The statuses that the elements in a media insights pipeline can have during data processing.</p>
     #   @return [Array<Types::MediaInsightsPipelineElementStatus>]
     class MediaInsightsPipeline < Struct.new(
+      nil,
       :media_pipeline_id,
       :media_pipeline_arn,
       :media_insights_pipeline_configuration_arn,
@@ -1697,6 +1780,7 @@ module Aws::ChimeSDKMediaPipelines
     #   <p>The time at which the configuration was last updated.</p>
     #   @return [Time]
     class MediaInsightsPipelineConfiguration < Struct.new(
+      nil,
       :media_insights_pipeline_configuration_name,
       :media_insights_pipeline_configuration_arn,
       :resource_access_role_arn,
@@ -1743,6 +1827,7 @@ module Aws::ChimeSDKMediaPipelines
     #   <p>The configuration settings for voice enhancement sink in a media insights pipeline configuration element.</p>
     #   @return [Types::VoiceEnhancementSinkConfiguration]
     class MediaInsightsPipelineConfigurationElement < Struct.new(
+      nil,
       :type,
       :amazon_transcribe_call_analytics_processor_configuration,
       :amazon_transcribe_processor_configuration,
@@ -1769,6 +1854,7 @@ module Aws::ChimeSDKMediaPipelines
     #   <p>The ARN of the media insights pipeline configuration.</p>
     #   @return [String]
     class MediaInsightsPipelineConfigurationSummary < Struct.new(
+      nil,
       :media_insights_pipeline_configuration_name,
       :media_insights_pipeline_configuration_id,
       :media_insights_pipeline_configuration_arn,
@@ -1785,6 +1871,7 @@ module Aws::ChimeSDKMediaPipelines
     #   <p>The element's status.</p>
     #   @return [String]
     class MediaInsightsPipelineElementStatus < Struct.new(
+      nil,
       :type,
       :status,
       keyword_init: true
@@ -1815,6 +1902,7 @@ module Aws::ChimeSDKMediaPipelines
     #   <p>The time at which the connector pipeline was last updated.</p>
     #   @return [Time]
     class MediaLiveConnectorPipeline < Struct.new(
+      nil,
       :sources,
       :sinks,
       :media_pipeline_id,
@@ -1844,6 +1932,7 @@ module Aws::ChimeSDKMediaPipelines
     #   <p>Designates a media pipeline as a media stream pipeline.</p>
     #   @return [Types::MediaStreamPipeline]
     class MediaPipeline < Struct.new(
+      nil,
       :media_capture_pipeline,
       :media_live_connector_pipeline,
       :media_concatenation_pipeline,
@@ -1862,6 +1951,7 @@ module Aws::ChimeSDKMediaPipelines
     #   <p>The ARN of the media pipeline in the summary.</p>
     #   @return [String]
     class MediaPipelineSummary < Struct.new(
+      nil,
       :media_pipeline_id,
       :media_pipeline_arn,
       keyword_init: true
@@ -1892,6 +1982,7 @@ module Aws::ChimeSDKMediaPipelines
     #   <p>The media stream pipeline's data sinks.</p>
     #   @return [Array<Types::MediaStreamSink>]
     class MediaStreamPipeline < Struct.new(
+      nil,
       :media_pipeline_id,
       :media_pipeline_arn,
       :created_timestamp,
@@ -1918,6 +2009,7 @@ module Aws::ChimeSDKMediaPipelines
     #   <p>The media stream sink's media stream type.</p>
     #   @return [String]
     class MediaStreamSink < Struct.new(
+      nil,
       :sink_arn,
       :sink_type,
       :reserved_stream_capacity,
@@ -1935,6 +2027,7 @@ module Aws::ChimeSDKMediaPipelines
     #   <p>The ARN of the meeting.</p>
     #   @return [String]
     class MediaStreamSource < Struct.new(
+      nil,
       :source_type,
       :source_arn,
       keyword_init: true
@@ -1947,6 +2040,7 @@ module Aws::ChimeSDKMediaPipelines
     #   <p>Enables or disables the configuration object.</p>
     #   @return [String]
     class MeetingEventsConcatenationConfiguration < Struct.new(
+      nil,
       :state,
       keyword_init: true
     )
@@ -1962,6 +2056,7 @@ module Aws::ChimeSDKMediaPipelines
     #   <p>The request ID associated with the call responsible for the exception.</p>
     #   @return [String]
     class NotFoundException < Struct.new(
+      nil,
       :code,
       :message,
       :request_id,
@@ -1990,6 +2085,7 @@ module Aws::ChimeSDKMediaPipelines
     #   <p>The ID of the KMS (Key Management Service) key used to encrypt the output.</p>
     #   @return [String]
     class PostCallAnalyticsSettings < Struct.new(
+      nil,
       :output_location,
       :data_access_role_arn,
       :content_redaction_output,
@@ -2004,6 +2100,7 @@ module Aws::ChimeSDKMediaPipelines
     #   <p>Defines the position of the presenter video tile. Default: <code>TopRight</code>.</p>
     #   @return [String]
     class PresenterOnlyConfiguration < Struct.new(
+      nil,
       :presenter_position,
       keyword_init: true
     )
@@ -2018,6 +2115,7 @@ module Aws::ChimeSDKMediaPipelines
     #   <p>The rules in the alert. Rules specify the words or phrases that you want to be notified about.</p>
     #   @return [Array<Types::RealTimeAlertRule>]
     class RealTimeAlertConfiguration < Struct.new(
+      nil,
       :disabled,
       :rules,
       keyword_init: true
@@ -2044,6 +2142,7 @@ module Aws::ChimeSDKMediaPipelines
     #   <p>Specifies the issue detection settings for a real-time alert rule.</p>
     #   @return [Types::IssueDetectionConfiguration]
     class RealTimeAlertRule < Struct.new(
+      nil,
       :type,
       :keyword_match_configuration,
       :sentiment_configuration,
@@ -2058,6 +2157,7 @@ module Aws::ChimeSDKMediaPipelines
     #   <p>The ARN of the recording stream.</p>
     #   @return [String]
     class RecordingStreamConfiguration < Struct.new(
+      nil,
       :stream_arn,
       keyword_init: true
     )
@@ -2073,6 +2173,7 @@ module Aws::ChimeSDKMediaPipelines
     #   <p>The request ID associated with the call responsible for the exception.</p>
     #   @return [String]
     class ResourceLimitExceededException < Struct.new(
+      nil,
       :code,
       :message,
       :request_id,
@@ -2086,6 +2187,7 @@ module Aws::ChimeSDKMediaPipelines
     #   <p>The destination URL of the S3 bucket.</p>
     #   @return [String]
     class S3BucketSinkConfiguration < Struct.new(
+      nil,
       :destination,
       keyword_init: true
     )
@@ -2100,6 +2202,7 @@ module Aws::ChimeSDKMediaPipelines
     #   <p>The default file format for the media files sent to the Amazon S3 bucket.</p>
     #   @return [String]
     class S3RecordingSinkConfiguration < Struct.new(
+      nil,
       :destination,
       :recording_file_format,
       keyword_init: true
@@ -2115,6 +2218,7 @@ module Aws::ChimeSDKMediaPipelines
     #   <p>The file format for the media files sent to the Amazon S3 bucket.</p>
     #   @return [String]
     class S3RecordingSinkRuntimeConfiguration < Struct.new(
+      nil,
       :destination,
       :recording_file_format,
       keyword_init: true
@@ -2131,6 +2235,7 @@ module Aws::ChimeSDKMediaPipelines
     #   <p>The external user IDs of the streams selected for a media pipeline.</p>
     #   @return [Array<String>]
     class SelectedVideoStreams < Struct.new(
+      nil,
       :attendee_ids,
       :external_user_ids,
       keyword_init: true
@@ -2149,6 +2254,7 @@ module Aws::ChimeSDKMediaPipelines
     #   <p>Specifies the analysis interval.</p>
     #   @return [Integer]
     class SentimentConfiguration < Struct.new(
+      nil,
       :rule_name,
       :sentiment_type,
       :time_period,
@@ -2166,6 +2272,7 @@ module Aws::ChimeSDKMediaPipelines
     #   <p>The request ID associated with the call responsible for the exception.</p>
     #   @return [String]
     class ServiceFailureException < Struct.new(
+      nil,
       :code,
       :message,
       :request_id,
@@ -2183,6 +2290,7 @@ module Aws::ChimeSDKMediaPipelines
     #   <p>The request ID associated with the call responsible for the exception.</p>
     #   @return [String]
     class ServiceUnavailableException < Struct.new(
+      nil,
       :code,
       :message,
       :request_id,
@@ -2196,6 +2304,7 @@ module Aws::ChimeSDKMediaPipelines
     #   <p>The ARN of the SNS sink.</p>
     #   @return [String]
     class SnsTopicSinkConfiguration < Struct.new(
+      nil,
       :insights_target,
       keyword_init: true
     )
@@ -2208,6 +2317,7 @@ module Aws::ChimeSDKMediaPipelines
     #            of video streams can't exceed 25.</p>
     #   @return [Types::SelectedVideoStreams]
     class SourceConfiguration < Struct.new(
+      nil,
       :selected_video_streams,
       keyword_init: true
     )
@@ -2229,6 +2339,7 @@ module Aws::ChimeSDKMediaPipelines
     #   <p>The time at which a speaker search task was updated.</p>
     #   @return [Time]
     class SpeakerSearchTask < Struct.new(
+      nil,
       :speaker_search_task_id,
       :speaker_search_task_status,
       :created_timestamp,
@@ -2243,6 +2354,7 @@ module Aws::ChimeSDKMediaPipelines
     #   <p>The ARN of the SQS sink.</p>
     #   @return [String]
     class SqsQueueSinkConfiguration < Struct.new(
+      nil,
       :insights_target,
       keyword_init: true
     )
@@ -2301,6 +2413,7 @@ module Aws::ChimeSDKMediaPipelines
     #                        Guide</i>.</p>
     #   @return [String]
     class SseAwsKeyManagementParams < Struct.new(
+      nil,
       :aws_kms_key_id,
       :aws_kms_encryption_context,
       keyword_init: true
@@ -2322,6 +2435,7 @@ module Aws::ChimeSDKMediaPipelines
     #   <p>The unique identifier for the client request. Use a different token for different speaker search tasks.</p>
     #   @return [String]
     class StartSpeakerSearchTaskRequest < Struct.new(
+      nil,
       :identifier,
       :voice_profile_domain_arn,
       :kinesis_video_stream_source_task_configuration,
@@ -2335,6 +2449,7 @@ module Aws::ChimeSDKMediaPipelines
     #   <p>The details of the speaker search task.</p>
     #   @return [Types::SpeakerSearchTask]
     class StartSpeakerSearchTaskResponse < Struct.new(
+      nil,
       :speaker_search_task,
       keyword_init: true
     )
@@ -2355,6 +2470,7 @@ module Aws::ChimeSDKMediaPipelines
     #   <p>The unique identifier for the client request. Use a different token for different voice tone analysis tasks.</p>
     #   @return [String]
     class StartVoiceToneAnalysisTaskRequest < Struct.new(
+      nil,
       :identifier,
       :language_code,
       :kinesis_video_stream_source_task_configuration,
@@ -2368,6 +2484,7 @@ module Aws::ChimeSDKMediaPipelines
     #   <p>The details of the voice tone analysis task.</p>
     #   @return [Types::VoiceToneAnalysisTask]
     class StartVoiceToneAnalysisTaskResponse < Struct.new(
+      nil,
       :voice_tone_analysis_task,
       keyword_init: true
     )
@@ -2381,6 +2498,7 @@ module Aws::ChimeSDKMediaPipelines
     #   <p>The speaker search task ID.</p>
     #   @return [String]
     class StopSpeakerSearchTaskRequest < Struct.new(
+      nil,
       :identifier,
       :speaker_search_task_id,
       keyword_init: true
@@ -2395,6 +2513,7 @@ module Aws::ChimeSDKMediaPipelines
     #   <p>The ID of the voice tone analysis task.</p>
     #   @return [String]
     class StopVoiceToneAnalysisTaskRequest < Struct.new(
+      nil,
       :identifier,
       :voice_tone_analysis_task_id,
       keyword_init: true
@@ -2410,6 +2529,7 @@ module Aws::ChimeSDKMediaPipelines
     #   <p>The definitions of the channels in a streaming channel.</p>
     #   @return [Array<Types::ChannelDefinition>]
     class StreamChannelDefinition < Struct.new(
+      nil,
       :number_of_channels,
       :channel_definitions,
       keyword_init: true
@@ -2428,6 +2548,7 @@ module Aws::ChimeSDKMediaPipelines
     #   <p>The streaming channel definition in the stream configuration.</p>
     #   @return [Types::StreamChannelDefinition]
     class StreamConfiguration < Struct.new(
+      nil,
       :stream_arn,
       :fragment_number,
       :stream_channel_definition,
@@ -2444,6 +2565,7 @@ module Aws::ChimeSDKMediaPipelines
     #   <p>The value half of a tag.</p>
     #   @return [String]
     class Tag < Struct.new(
+      nil,
       :key,
       :value,
       keyword_init: true
@@ -2458,6 +2580,7 @@ module Aws::ChimeSDKMediaPipelines
     #   <p>The tags associated with the specified media pipeline.</p>
     #   @return [Array<Types::Tag>]
     class TagResourceRequest < Struct.new(
+      nil,
       :resource_arn,
       :tags,
       keyword_init: true
@@ -2466,6 +2589,7 @@ module Aws::ChimeSDKMediaPipelines
     end
 
     class TagResourceResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -2480,6 +2604,7 @@ module Aws::ChimeSDKMediaPipelines
     #   <p>The request ID associated with the call responsible for the exception.</p>
     #   @return [String]
     class ThrottledClientException < Struct.new(
+      nil,
       :code,
       :message,
       :request_id,
@@ -2496,6 +2621,7 @@ module Aws::ChimeSDKMediaPipelines
     #   <p>The ending timestamp for the specified range.</p>
     #   @return [Time]
     class TimestampRange < Struct.new(
+      nil,
       :start_timestamp,
       :end_timestamp,
       keyword_init: true
@@ -2508,6 +2634,7 @@ module Aws::ChimeSDKMediaPipelines
     #   <p>Enables or disables the configuration object.</p>
     #   @return [String]
     class TranscriptionMessagesConcatenationConfiguration < Struct.new(
+      nil,
       :state,
       keyword_init: true
     )
@@ -2523,6 +2650,7 @@ module Aws::ChimeSDKMediaPipelines
     #   <p>The request ID associated with the call responsible for the exception.</p>
     #   @return [String]
     class UnauthorizedClientException < Struct.new(
+      nil,
       :code,
       :message,
       :request_id,
@@ -2538,6 +2666,7 @@ module Aws::ChimeSDKMediaPipelines
     #   <p>The key/value pairs in the tag that you want to remove.</p>
     #   @return [Array<String>]
     class UntagResourceRequest < Struct.new(
+      nil,
       :resource_arn,
       :tag_keys,
       keyword_init: true
@@ -2546,6 +2675,7 @@ module Aws::ChimeSDKMediaPipelines
     end
 
     class UntagResourceResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -2564,6 +2694,7 @@ module Aws::ChimeSDKMediaPipelines
     #   <p>The elements in the request, such as a processor for Amazon Transcribe or a sink for a Kinesis Data Stream..</p>
     #   @return [Array<Types::MediaInsightsPipelineConfigurationElement>]
     class UpdateMediaInsightsPipelineConfigurationRequest < Struct.new(
+      nil,
       :identifier,
       :resource_access_role_arn,
       :real_time_alert_configuration,
@@ -2577,6 +2708,7 @@ module Aws::ChimeSDKMediaPipelines
     #   <p>The updated configuration settings.</p>
     #   @return [Types::MediaInsightsPipelineConfiguration]
     class UpdateMediaInsightsPipelineConfigurationResponse < Struct.new(
+      nil,
       :media_insights_pipeline_configuration,
       keyword_init: true
     )
@@ -2590,6 +2722,7 @@ module Aws::ChimeSDKMediaPipelines
     #   <p>The requested status of the media insights pipeline.</p>
     #   @return [String]
     class UpdateMediaInsightsPipelineStatusRequest < Struct.new(
+      nil,
       :identifier,
       :update_status,
       keyword_init: true
@@ -2604,6 +2737,7 @@ module Aws::ChimeSDKMediaPipelines
     #   <p>The configuration settings for the video stream.</p>
     #   @return [Types::KinesisVideoStreamConfigurationUpdate]
     class UpdateMediaPipelineKinesisVideoStreamPoolRequest < Struct.new(
+      nil,
       :identifier,
       :stream_configuration,
       keyword_init: true
@@ -2615,6 +2749,7 @@ module Aws::ChimeSDKMediaPipelines
     #   <p>The video stream pool configuration object.</p>
     #   @return [Types::KinesisVideoStreamPoolConfiguration]
     class UpdateMediaPipelineKinesisVideoStreamPoolResponse < Struct.new(
+      nil,
       :kinesis_video_stream_pool_configuration,
       keyword_init: true
     )
@@ -2635,6 +2770,7 @@ module Aws::ChimeSDKMediaPipelines
     #   <p>Sets the aspect ratio of the video tiles, such as 16:9.</p>
     #   @return [String]
     class VerticalLayoutConfiguration < Struct.new(
+      nil,
       :tile_order,
       :tile_position,
       :tile_count,
@@ -2652,6 +2788,7 @@ module Aws::ChimeSDKMediaPipelines
     #   <p>The MUX type of the video artifact configuration object.</p>
     #   @return [String]
     class VideoArtifactsConfiguration < Struct.new(
+      nil,
       :state,
       :mux_type,
       keyword_init: true
@@ -2673,6 +2810,7 @@ module Aws::ChimeSDKMediaPipelines
     #   <p>Defines the border thickness for all video tiles.</p>
     #   @return [Integer]
     class VideoAttribute < Struct.new(
+      nil,
       :corner_radius,
       :border_color,
       :highlight_color,
@@ -2687,6 +2825,7 @@ module Aws::ChimeSDKMediaPipelines
     #   <p>Enables or disables the configuration object.</p>
     #   @return [String]
     class VideoConcatenationConfiguration < Struct.new(
+      nil,
       :state,
       keyword_init: true
     )
@@ -2701,6 +2840,7 @@ module Aws::ChimeSDKMediaPipelines
     #   <p>The status of the voice tone analysis task.</p>
     #   @return [String]
     class VoiceAnalyticsProcessorConfiguration < Struct.new(
+      nil,
       :speaker_search_status,
       :voice_tone_analysis_status,
       keyword_init: true
@@ -2713,6 +2853,7 @@ module Aws::ChimeSDKMediaPipelines
     #   <p>Disables the <code>VoiceEnhancementSinkConfiguration</code> element.</p>
     #   @return [Boolean]
     class VoiceEnhancementSinkConfiguration < Struct.new(
+      nil,
       :disabled,
       keyword_init: true
     )
@@ -2738,6 +2879,7 @@ module Aws::ChimeSDKMediaPipelines
     #   <p>The time at which a voice tone analysis task was updated.</p>
     #   @return [Time]
     class VoiceToneAnalysisTask < Struct.new(
+      nil,
       :voice_tone_analysis_task_id,
       :voice_tone_analysis_task_status,
       :created_timestamp,

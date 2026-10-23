@@ -59,6 +59,7 @@ module Aws::CloudHSMV2
     #   <p>The mode of the cluster that was backed up.</p>
     #   @return [String]
     class Backup < Struct.new(
+      nil,
       :backup_id,
       :backup_arn,
       :backup_state,
@@ -87,6 +88,7 @@ module Aws::CloudHSMV2
     #   <p>Use a value between 7 - 379.</p>
     #   @return [String]
     class BackupRetentionPolicy < Struct.new(
+      nil,
       :type,
       :value,
       keyword_init: true
@@ -113,6 +115,7 @@ module Aws::CloudHSMV2
     #         the cluster's owner.</p>
     #   @return [String]
     class Certificates < Struct.new(
+      nil,
       :cluster_csr,
       :hsm_certificate,
       :aws_hardware_certificate,
@@ -128,6 +131,7 @@ module Aws::CloudHSMV2
     # @!attribute message
     #   @return [String]
     class CloudHsmAccessDeniedException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -139,6 +143,7 @@ module Aws::CloudHSMV2
     # @!attribute message
     #   @return [String]
     class CloudHsmInternalFailureException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -149,6 +154,7 @@ module Aws::CloudHSMV2
     # @!attribute message
     #   @return [String]
     class CloudHsmInvalidRequestException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -159,6 +165,7 @@ module Aws::CloudHSMV2
     # @!attribute message
     #   @return [String]
     class CloudHsmResourceLimitExceededException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -170,6 +177,7 @@ module Aws::CloudHSMV2
     # @!attribute message
     #   @return [String]
     class CloudHsmResourceNotFoundException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -180,6 +188,7 @@ module Aws::CloudHSMV2
     # @!attribute message
     #   @return [String]
     class CloudHsmServiceException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -190,6 +199,7 @@ module Aws::CloudHSMV2
     # @!attribute message
     #   @return [String]
     class CloudHsmTagException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -258,6 +268,7 @@ module Aws::CloudHSMV2
     #   <p>The mode of the cluster.</p>
     #   @return [String]
     class Cluster < Struct.new(
+      nil,
       :backup_policy,
       :backup_retention_policy,
       :cluster_id,
@@ -291,6 +302,7 @@ module Aws::CloudHSMV2
     #   <p>Tags to apply to the destination backup during creation. If you specify tags, only these tags will be applied to the destination backup. If you do not specify tags, the service copies tags from the source backup to the destination backup.</p>
     #   @return [Array<Types::Tag>]
     class CopyBackupToRegionRequest < Struct.new(
+      nil,
       :destination_region,
       :backup_id,
       :tag_list,
@@ -308,6 +320,7 @@ module Aws::CloudHSMV2
     #         destination region.</p>
     #   @return [Types::DestinationBackup]
     class CopyBackupToRegionResponse < Struct.new(
+      nil,
       :destination_backup,
       keyword_init: true
     )
@@ -352,6 +365,7 @@ module Aws::CloudHSMV2
     #         <code>FIPS</code> and <code>NON_FIPS</code>.</p>
     #   @return [String]
     class CreateClusterRequest < Struct.new(
+      nil,
       :backup_retention_policy,
       :hsm_type,
       :source_backup_id,
@@ -368,6 +382,7 @@ module Aws::CloudHSMV2
     #   <p>Information about the cluster that was created.</p>
     #   @return [Types::Cluster]
     class CreateClusterResponse < Struct.new(
+      nil,
       :cluster,
       keyword_init: true
     )
@@ -387,6 +402,7 @@ module Aws::CloudHSMV2
     #         an IP address, one is chosen for you from that subnet.</p>
     #   @return [String]
     class CreateHsmRequest < Struct.new(
+      nil,
       :cluster_id,
       :availability_zone,
       :ip_address,
@@ -399,6 +415,7 @@ module Aws::CloudHSMV2
     #   <p>Information about the HSM that was created.</p>
     #   @return [Types::Hsm]
     class CreateHsmResponse < Struct.new(
+      nil,
       :hsm,
       keyword_init: true
     )
@@ -409,6 +426,7 @@ module Aws::CloudHSMV2
     #   <p>The ID of the backup to be deleted. To find the ID of a backup, use the <a>DescribeBackups</a> operation.</p>
     #   @return [String]
     class DeleteBackupRequest < Struct.new(
+      nil,
       :backup_id,
       keyword_init: true
     )
@@ -419,6 +437,7 @@ module Aws::CloudHSMV2
     #   <p>Information on the <code>Backup</code> object deleted.</p>
     #   @return [Types::Backup]
     class DeleteBackupResponse < Struct.new(
+      nil,
       :backup,
       keyword_init: true
     )
@@ -430,6 +449,7 @@ module Aws::CloudHSMV2
     #         <a>DescribeClusters</a>.</p>
     #   @return [String]
     class DeleteClusterRequest < Struct.new(
+      nil,
       :cluster_id,
       keyword_init: true
     )
@@ -440,6 +460,7 @@ module Aws::CloudHSMV2
     #   <p>Information about the cluster that was deleted.</p>
     #   @return [Types::Cluster]
     class DeleteClusterResponse < Struct.new(
+      nil,
       :cluster,
       keyword_init: true
     )
@@ -462,6 +483,7 @@ module Aws::CloudHSMV2
     #         deleting.</p>
     #   @return [String]
     class DeleteHsmRequest < Struct.new(
+      nil,
       :cluster_id,
       :hsm_id,
       :eni_id,
@@ -475,6 +497,7 @@ module Aws::CloudHSMV2
     #   <p>The identifier (ID) of the HSM that was deleted.</p>
     #   @return [String]
     class DeleteHsmResponse < Struct.new(
+      nil,
       :hsm_id,
       keyword_init: true
     )
@@ -485,6 +508,7 @@ module Aws::CloudHSMV2
     #   <p>Amazon Resource Name (ARN) of the resource from which the policy will be removed. </p>
     #   @return [String]
     class DeleteResourcePolicyRequest < Struct.new(
+      nil,
       :resource_arn,
       keyword_init: true
     )
@@ -498,6 +522,7 @@ module Aws::CloudHSMV2
     #   <p>The policy previously attached to the resource.</p>
     #   @return [String]
     class DeleteResourcePolicyResponse < Struct.new(
+      nil,
       :resource_arn,
       :policy,
       keyword_init: true
@@ -543,6 +568,7 @@ module Aws::CloudHSMV2
     #         of generation.</p>
     #   @return [Boolean]
     class DescribeBackupsRequest < Struct.new(
+      nil,
       :next_token,
       :max_results,
       :filters,
@@ -562,6 +588,7 @@ module Aws::CloudHSMV2
     #         backups.</p>
     #   @return [String]
     class DescribeBackupsResponse < Struct.new(
+      nil,
       :backups,
       :next_token,
       keyword_init: true
@@ -587,6 +614,7 @@ module Aws::CloudHSMV2
     #         than the number you specify, the response contains a <code>NextToken</code> value.</p>
     #   @return [Integer]
     class DescribeClustersRequest < Struct.new(
+      nil,
       :filters,
       :next_token,
       :max_results,
@@ -604,6 +632,7 @@ module Aws::CloudHSMV2
     #         clusters.</p>
     #   @return [String]
     class DescribeClustersResponse < Struct.new(
+      nil,
       :clusters,
       :next_token,
       keyword_init: true
@@ -625,6 +654,7 @@ module Aws::CloudHSMV2
     #   <p>The identifier (ID) of the cluster containing the source backup from which the new backup was copied.</p>
     #   @return [String]
     class DestinationBackup < Struct.new(
+      nil,
       :create_timestamp,
       :source_region,
       :source_backup,
@@ -638,6 +668,7 @@ module Aws::CloudHSMV2
     #   <p>Amazon Resource Name (ARN) of the resource to which a policy is attached.</p>
     #   @return [String]
     class GetResourcePolicyRequest < Struct.new(
+      nil,
       :resource_arn,
       keyword_init: true
     )
@@ -648,6 +679,7 @@ module Aws::CloudHSMV2
     #   <p>The policy attached to a resource.</p>
     #   @return [String]
     class GetResourcePolicyResponse < Struct.new(
+      nil,
       :policy,
       keyword_init: true
     )
@@ -687,6 +719,7 @@ module Aws::CloudHSMV2
     #   <p>A description of the HSM's state.</p>
     #   @return [String]
     class Hsm < Struct.new(
+      nil,
       :availability_zone,
       :cluster_id,
       :subnet_id,
@@ -717,6 +750,7 @@ module Aws::CloudHSMV2
     #         maximum of 5000 characters.</p>
     #   @return [String]
     class InitializeClusterRequest < Struct.new(
+      nil,
       :cluster_id,
       :signed_cert,
       :trust_anchor,
@@ -732,6 +766,7 @@ module Aws::CloudHSMV2
     #   <p>A description of the cluster's state.</p>
     #   @return [String]
     class InitializeClusterResponse < Struct.new(
+      nil,
       :state,
       :state_message,
       keyword_init: true
@@ -752,6 +787,7 @@ module Aws::CloudHSMV2
     #         number you specify, the response contains a <code>NextToken</code> value.</p>
     #   @return [Integer]
     class ListTagsRequest < Struct.new(
+      nil,
       :resource_id,
       :next_token,
       :max_results,
@@ -768,6 +804,7 @@ module Aws::CloudHSMV2
     #         this value in a subsequent <code>ListTags</code> request to get more tags.</p>
     #   @return [String]
     class ListTagsResponse < Struct.new(
+      nil,
       :tag_list,
       :next_token,
       keyword_init: true
@@ -783,6 +820,7 @@ module Aws::CloudHSMV2
     #       a backup from the retention policy. <code>False</code> means the service applies the backup retention policy defined at the cluster.</p>
     #   @return [Boolean]
     class ModifyBackupAttributesRequest < Struct.new(
+      nil,
       :backup_id,
       :never_expires,
       keyword_init: true
@@ -799,6 +837,7 @@ module Aws::CloudHSMV2
     #         pending deletion will include the <code>DeleteTimestamp</code> parameter.</p>
     #   @return [Types::Backup]
     class ModifyBackupAttributesResponse < Struct.new(
+      nil,
       :backup,
       keyword_init: true
     )
@@ -816,6 +855,7 @@ module Aws::CloudHSMV2
     #           <a>DescribeClusters</a>.</p>
     #   @return [String]
     class ModifyClusterRequest < Struct.new(
+      nil,
       :hsm_type,
       :backup_retention_policy,
       :cluster_id,
@@ -828,6 +868,7 @@ module Aws::CloudHSMV2
     #   <p>Contains information about an CloudHSM cluster.</p>
     #   @return [Types::Cluster]
     class ModifyClusterResponse < Struct.new(
+      nil,
       :cluster,
       keyword_init: true
     )
@@ -842,6 +883,7 @@ module Aws::CloudHSMV2
     #            <p>For an example policy, see <a href="https://docs.aws.amazon.com/cloudhsm/latest/userguide/sharing.html"> Working with shared backups</a> in the CloudHSM User Guide</p>
     #   @return [String]
     class PutResourcePolicyRequest < Struct.new(
+      nil,
       :resource_arn,
       :policy,
       keyword_init: true
@@ -856,6 +898,7 @@ module Aws::CloudHSMV2
     #   <p>The policy attached to a resource.</p>
     #   @return [String]
     class PutResourcePolicyResponse < Struct.new(
+      nil,
       :resource_arn,
       :policy,
       keyword_init: true
@@ -867,6 +910,7 @@ module Aws::CloudHSMV2
     #   <p>The ID of the backup to be restored. To find the ID of a backup, use the <a>DescribeBackups</a> operation.</p>
     #   @return [String]
     class RestoreBackupRequest < Struct.new(
+      nil,
       :backup_id,
       keyword_init: true
     )
@@ -877,6 +921,7 @@ module Aws::CloudHSMV2
     #   <p>Information on the <code>Backup</code> object created.</p>
     #   @return [Types::Backup]
     class RestoreBackupResponse < Struct.new(
+      nil,
       :backup,
       keyword_init: true
     )
@@ -891,6 +936,7 @@ module Aws::CloudHSMV2
     #   <p>The value of the tag.</p>
     #   @return [String]
     class Tag < Struct.new(
+      nil,
       :key,
       :value,
       keyword_init: true
@@ -906,6 +952,7 @@ module Aws::CloudHSMV2
     #   <p>A list of one or more tags.</p>
     #   @return [Array<Types::Tag>]
     class TagResourceRequest < Struct.new(
+      nil,
       :resource_id,
       :tag_list,
       keyword_init: true
@@ -914,6 +961,7 @@ module Aws::CloudHSMV2
     end
 
     class TagResourceResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -928,6 +976,7 @@ module Aws::CloudHSMV2
     #         keys, not the tag values.</p>
     #   @return [Array<String>]
     class UntagResourceRequest < Struct.new(
+      nil,
       :resource_id,
       :tag_key_list,
       keyword_init: true
@@ -936,6 +985,7 @@ module Aws::CloudHSMV2
     end
 
     class UntagResourceResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure

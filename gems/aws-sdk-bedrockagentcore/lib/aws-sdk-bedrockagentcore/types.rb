@@ -10,6 +10,7 @@ module Aws::BedrockAgentCore
     # @!attribute message
     #   @return [String]
     class AccessDeniedException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -21,6 +22,7 @@ module Aws::BedrockAgentCore
     #   <p>The unique identifier of the actor.</p>
     #   @return [String]
     class ActorSummary < Struct.new(
+      nil,
       :actor_id,
       keyword_init: true
     )
@@ -35,6 +37,7 @@ module Aws::BedrockAgentCore
     #   <p>The current status of the automation stream. This indicates whether the stream is available for use. Possible values include ACTIVE, CONNECTING, and DISCONNECTED.</p>
     #   @return [String]
     class AutomationStream < Struct.new(
+      nil,
       :stream_endpoint,
       :stream_status,
       keyword_init: true
@@ -47,6 +50,7 @@ module Aws::BedrockAgentCore
     #   <p>The status of the automation stream.</p>
     #   @return [String]
     class AutomationStreamUpdate < Struct.new(
+      nil,
       :stream_status,
       keyword_init: true
     )
@@ -61,6 +65,7 @@ module Aws::BedrockAgentCore
     #   <p>The name of the branch.</p>
     #   @return [String]
     class Branch < Struct.new(
+      nil,
       :root_event_id,
       :name,
       keyword_init: true
@@ -76,6 +81,7 @@ module Aws::BedrockAgentCore
     #   <p>Specifies whether to include parent branches in the results. Set to true to include parent branches, or false to exclude them.</p>
     #   @return [Boolean]
     class BranchFilter < Struct.new(
+      nil,
       :name,
       :include_parent_branches,
       keyword_init: true
@@ -96,6 +102,7 @@ module Aws::BedrockAgentCore
     #   <p>The stream that provides a visual representation of the browser content. This stream allows agents to observe the current state of the browser, including rendered web pages and visual elements.</p>
     #   @return [Types::LiveViewStream]
     class BrowserSessionStream < Struct.new(
+      nil,
       :automation_stream,
       :live_view_stream,
       keyword_init: true
@@ -123,6 +130,7 @@ module Aws::BedrockAgentCore
     #   <p>The timestamp when the browser session was last updated. This value is in ISO 8601 format.</p>
     #   @return [Time]
     class BrowserSessionSummary < Struct.new(
+      nil,
       :browser_identifier,
       :session_id,
       :name,
@@ -145,6 +153,7 @@ module Aws::BedrockAgentCore
     #   <p>Indicates whether the result represents an error. If true, the content contains error messages or exception information. If false, the content contains successful execution results.</p>
     #   @return [Boolean]
     class CodeInterpreterResult < Struct.new(
+      nil,
       :content,
       :structured_content,
       :is_error,
@@ -173,6 +182,7 @@ module Aws::BedrockAgentCore
     #   <p>The timestamp when the code interpreter session was last updated. This value is in ISO 8601 format.</p>
     #   @return [Time]
     class CodeInterpreterSessionSummary < Struct.new(
+      nil,
       :code_interpreter_identifier,
       :session_id,
       :name,
@@ -238,6 +248,7 @@ module Aws::BedrockAgentCore
     # @!attribute message
     #   @return [String]
     class ConflictException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -288,6 +299,7 @@ module Aws::BedrockAgentCore
     #   <p>The resource associated with the content block.</p>
     #   @return [Types::ResourceContent]
     class ContentBlock < Struct.new(
+      nil,
       :type,
       :text,
       :data,
@@ -310,6 +322,7 @@ module Aws::BedrockAgentCore
     #   <p>The role of the participant in the conversation (for example, "user" or "assistant").</p>
     #   @return [String]
     class Conversational < Struct.new(
+      nil,
       :content,
       :role,
       keyword_init: true
@@ -339,6 +352,7 @@ module Aws::BedrockAgentCore
     #   <p>A unique, case-sensitive identifier to ensure that the operation completes no more than one time. If this token matches a previous request, AgentCore ignores the request, but does not return an error.</p>
     #   @return [String]
     class CreateEventInput < Struct.new(
+      nil,
       :memory_id,
       :actor_id,
       :session_id,
@@ -355,6 +369,7 @@ module Aws::BedrockAgentCore
     #   <p>The event that was created.</p>
     #   @return [Types::Event]
     class CreateEventOutput < Struct.new(
+      nil,
       :event,
       keyword_init: true
     )
@@ -374,6 +389,7 @@ module Aws::BedrockAgentCore
     #   <p>The identifier of the actor associated with the event to delete.</p>
     #   @return [String]
     class DeleteEventInput < Struct.new(
+      nil,
       :memory_id,
       :session_id,
       :event_id,
@@ -387,6 +403,7 @@ module Aws::BedrockAgentCore
     #   <p>The identifier of the event that was deleted.</p>
     #   @return [String]
     class DeleteEventOutput < Struct.new(
+      nil,
       :event_id,
       keyword_init: true
     )
@@ -400,6 +417,7 @@ module Aws::BedrockAgentCore
     #   <p>The identifier of the memory record to delete.</p>
     #   @return [String]
     class DeleteMemoryRecordInput < Struct.new(
+      nil,
       :memory_id,
       :memory_record_id,
       keyword_init: true
@@ -411,6 +429,7 @@ module Aws::BedrockAgentCore
     #   <p>The identifier of the memory record that was deleted.</p>
     #   @return [String]
     class DeleteMemoryRecordOutput < Struct.new(
+      nil,
       :memory_record_id,
       keyword_init: true
     )
@@ -440,6 +459,7 @@ module Aws::BedrockAgentCore
     #   <p>The branch information for the event.</p>
     #   @return [Types::Branch]
     class Event < Struct.new(
+      nil,
       :memory_id,
       :actor_id,
       :session_id,
@@ -457,6 +477,7 @@ module Aws::BedrockAgentCore
     #   <p>The branch filter criteria to apply when listing events.</p>
     #   @return [Types::BranchFilter]
     class FilterInput < Struct.new(
+      nil,
       :branch,
       keyword_init: true
     )
@@ -470,6 +491,7 @@ module Aws::BedrockAgentCore
     #   <p>The unique identifier of the browser session to retrieve.</p>
     #   @return [String]
     class GetBrowserSessionRequest < Struct.new(
+      nil,
       :browser_identifier,
       :session_id,
       keyword_init: true
@@ -508,6 +530,7 @@ module Aws::BedrockAgentCore
     #   <p>The time at which the browser session was last updated.</p>
     #   @return [Time]
     class GetBrowserSessionResponse < Struct.new(
+      nil,
       :browser_identifier,
       :session_id,
       :name,
@@ -530,6 +553,7 @@ module Aws::BedrockAgentCore
     #   <p>The unique identifier of the code interpreter session to retrieve.</p>
     #   @return [String]
     class GetCodeInterpreterSessionRequest < Struct.new(
+      nil,
       :code_interpreter_identifier,
       :session_id,
       keyword_init: true
@@ -556,6 +580,7 @@ module Aws::BedrockAgentCore
     #   <p>The current status of the code interpreter session. Possible values include ACTIVE, STOPPING, and STOPPED.</p>
     #   @return [String]
     class GetCodeInterpreterSessionResponse < Struct.new(
+      nil,
       :code_interpreter_identifier,
       :session_id,
       :name,
@@ -580,6 +605,7 @@ module Aws::BedrockAgentCore
     #   <p>The identifier of the event to retrieve.</p>
     #   @return [String]
     class GetEventInput < Struct.new(
+      nil,
       :memory_id,
       :session_id,
       :actor_id,
@@ -593,6 +619,7 @@ module Aws::BedrockAgentCore
     #   <p>The requested event information.</p>
     #   @return [Types::Event]
     class GetEventOutput < Struct.new(
+      nil,
       :event,
       keyword_init: true
     )
@@ -606,6 +633,7 @@ module Aws::BedrockAgentCore
     #   <p>The identifier of the memory record to retrieve.</p>
     #   @return [String]
     class GetMemoryRecordInput < Struct.new(
+      nil,
       :memory_id,
       :memory_record_id,
       keyword_init: true
@@ -617,6 +645,7 @@ module Aws::BedrockAgentCore
     #   <p>The requested memory record.</p>
     #   @return [Types::MemoryRecord]
     class GetMemoryRecordOutput < Struct.new(
+      nil,
       :memory_record,
       keyword_init: true
     )
@@ -630,6 +659,7 @@ module Aws::BedrockAgentCore
     #   <p>The credential provider name of the resource you are retrieving the API Key of.</p>
     #   @return [String]
     class GetResourceApiKeyRequest < Struct.new(
+      nil,
       :workload_identity_token,
       :resource_credential_provider_name,
       keyword_init: true
@@ -641,6 +671,7 @@ module Aws::BedrockAgentCore
     #   <p>The API Key associated with the resource requested.</p>
     #   @return [String]
     class GetResourceApiKeyResponse < Struct.new(
+      nil,
       :api_key,
       keyword_init: true
     )
@@ -669,6 +700,7 @@ module Aws::BedrockAgentCore
     #   <p>Gives the ability to send extra/custom parameters to the resource credentials provider during the authorization process. Standard OAuth2 flow parameters will not be overriden.</p>
     #   @return [Hash<String, String>]
     class GetResourceOauth2TokenRequest < Struct.new(
+      nil,
       :workload_identity_token,
       :resource_credential_provider_name,
       :scopes,
@@ -688,6 +720,7 @@ module Aws::BedrockAgentCore
     #   <p>OAuth2 token ready for use</p>
     #   @return [String]
     class GetResourceOauth2TokenResponse < Struct.new(
+      nil,
       :authorization_url,
       :access_token,
       keyword_init: true
@@ -702,6 +735,7 @@ module Aws::BedrockAgentCore
     #   <p>OAuth2 token issued by the user's identity provider</p>
     #   @return [String]
     class GetWorkloadAccessTokenForJWTRequest < Struct.new(
+      nil,
       :workload_name,
       :user_token,
       keyword_init: true
@@ -713,6 +747,7 @@ module Aws::BedrockAgentCore
     #   <p>Opaque token representing both agent and user identity</p>
     #   @return [String]
     class GetWorkloadAccessTokenForJWTResponse < Struct.new(
+      nil,
       :workload_access_token,
       keyword_init: true
     )
@@ -726,6 +761,7 @@ module Aws::BedrockAgentCore
     #   <p>The user id of the user you are retrieving the access token for.</p>
     #   @return [String]
     class GetWorkloadAccessTokenForUserIdRequest < Struct.new(
+      nil,
       :workload_name,
       :user_id,
       keyword_init: true
@@ -737,6 +773,7 @@ module Aws::BedrockAgentCore
     #   <p>The workload access token of the named workload.</p>
     #   @return [String]
     class GetWorkloadAccessTokenForUserIdResponse < Struct.new(
+      nil,
       :workload_access_token,
       keyword_init: true
     )
@@ -747,6 +784,7 @@ module Aws::BedrockAgentCore
     #   <p>Unique identifier for the registered agent</p>
     #   @return [String]
     class GetWorkloadAccessTokenRequest < Struct.new(
+      nil,
       :workload_name,
       keyword_init: true
     )
@@ -757,6 +795,7 @@ module Aws::BedrockAgentCore
     #   <p>Opaque token representing both agent and user identity</p>
     #   @return [String]
     class GetWorkloadAccessTokenResponse < Struct.new(
+      nil,
       :workload_access_token,
       keyword_init: true
     )
@@ -774,6 +813,7 @@ module Aws::BedrockAgentCore
     #   <p>The binary input content.</p>
     #   @return [String]
     class InputContentBlock < Struct.new(
+      nil,
       :path,
       :text,
       :blob,
@@ -786,6 +826,7 @@ module Aws::BedrockAgentCore
     # @!attribute message
     #   @return [String]
     class InternalServerException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -796,6 +837,7 @@ module Aws::BedrockAgentCore
     # @!attribute message
     #   @return [String]
     class InvalidInputException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -842,6 +884,7 @@ module Aws::BedrockAgentCore
     #   <p>The input data to send to the agent runtime. The format of this data depends on the specific agent configuration and must match the specified content type. For most agents, this is a JSON object containing the user's request.</p>
     #   @return [String]
     class InvokeAgentRuntimeRequest < Struct.new(
+      nil,
       :content_type,
       :accept,
       :mcp_session_id,
@@ -891,6 +934,7 @@ module Aws::BedrockAgentCore
     #   <p>The HTTP status code of the response. A status code of 200 indicates a successful operation. Other status codes indicate various error conditions.</p>
     #   @return [Integer]
     class InvokeAgentRuntimeResponse < Struct.new(
+      nil,
       :runtime_session_id,
       :mcp_session_id,
       :mcp_protocol_version,
@@ -924,6 +968,7 @@ module Aws::BedrockAgentCore
     #   <p>The arguments for the code interpreter. This includes the code to execute and any additional parameters such as the programming language, whether to clear the execution context, and other execution options. The structure of this parameter depends on the specific code interpreter being used.</p>
     #   @return [Types::ToolArguments]
     class InvokeCodeInterpreterRequest < Struct.new(
+      nil,
       :code_interpreter_identifier,
       :session_id,
       :name,
@@ -940,6 +985,7 @@ module Aws::BedrockAgentCore
     #   <p>The stream containing the results of the code execution. This includes output, errors, and execution status.</p>
     #   @return [Types::CodeInterpreterStreamOutput]
     class InvokeCodeInterpreterResponse < Struct.new(
+      nil,
       :session_id,
       :stream,
       keyword_init: true
@@ -957,6 +1003,7 @@ module Aws::BedrockAgentCore
     #   <p>The token for the next set of results. Use the value returned in the previous response in the next request to retrieve the next set of results.</p>
     #   @return [String]
     class ListActorsInput < Struct.new(
+      nil,
       :memory_id,
       :max_results,
       :next_token,
@@ -972,6 +1019,7 @@ module Aws::BedrockAgentCore
     #   <p>The token to use in a subsequent request to get the next set of results. This value is null when there are no more results to return.</p>
     #   @return [String]
     class ListActorsOutput < Struct.new(
+      nil,
       :actor_summaries,
       :next_token,
       keyword_init: true
@@ -992,6 +1040,7 @@ module Aws::BedrockAgentCore
     #   <p>The status of the browser sessions to list. Valid values include ACTIVE, STOPPING, and STOPPED. If not specified, sessions with any status are returned.</p>
     #   @return [String]
     class ListBrowserSessionsRequest < Struct.new(
+      nil,
       :browser_identifier,
       :max_results,
       :next_token,
@@ -1008,6 +1057,7 @@ module Aws::BedrockAgentCore
     #   <p>The token to use in a subsequent <code>ListBrowserSessions</code> request to get the next set of results.</p>
     #   @return [String]
     class ListBrowserSessionsResponse < Struct.new(
+      nil,
       :items,
       :next_token,
       keyword_init: true
@@ -1028,6 +1078,7 @@ module Aws::BedrockAgentCore
     #   <p>The status of the code interpreter sessions to list. Valid values include ACTIVE, STOPPING, and STOPPED. If not specified, sessions with any status are returned.</p>
     #   @return [String]
     class ListCodeInterpreterSessionsRequest < Struct.new(
+      nil,
       :code_interpreter_identifier,
       :max_results,
       :next_token,
@@ -1044,6 +1095,7 @@ module Aws::BedrockAgentCore
     #   <p>The token to use in a subsequent <code>ListCodeInterpreterSessions</code> request to get the next set of results.</p>
     #   @return [String]
     class ListCodeInterpreterSessionsResponse < Struct.new(
+      nil,
       :items,
       :next_token,
       keyword_init: true
@@ -1073,6 +1125,7 @@ module Aws::BedrockAgentCore
     #   <p>The token for the next set of results. Use the value returned in the previous response in the next request to retrieve the next set of results.</p>
     #   @return [String]
     class ListEventsInput < Struct.new(
+      nil,
       :memory_id,
       :session_id,
       :actor_id,
@@ -1092,6 +1145,7 @@ module Aws::BedrockAgentCore
     #   <p>The token to use in a subsequent request to get the next set of results. This value is null when there are no more results to return.</p>
     #   @return [String]
     class ListEventsOutput < Struct.new(
+      nil,
       :events,
       :next_token,
       keyword_init: true
@@ -1115,6 +1169,7 @@ module Aws::BedrockAgentCore
     #   <p>The token for the next set of results. Use the value returned in the previous response in the next request to retrieve the next set of results.</p>
     #   @return [String]
     class ListMemoryRecordsInput < Struct.new(
+      nil,
       :memory_id,
       :namespace,
       :memory_strategy_id,
@@ -1132,6 +1187,7 @@ module Aws::BedrockAgentCore
     #   <p>The token to use in a subsequent request to get the next set of results. This value is null when there are no more results to return.</p>
     #   @return [String]
     class ListMemoryRecordsOutput < Struct.new(
+      nil,
       :memory_record_summaries,
       :next_token,
       keyword_init: true
@@ -1152,6 +1208,7 @@ module Aws::BedrockAgentCore
     #   <p>The token for the next set of results. Use the value returned in the previous response in the next request to retrieve the next set of results.</p>
     #   @return [String]
     class ListSessionsInput < Struct.new(
+      nil,
       :memory_id,
       :actor_id,
       :max_results,
@@ -1168,6 +1225,7 @@ module Aws::BedrockAgentCore
     #   <p>The token to use in a subsequent request to get the next set of results. This value is null when there are no more results to return.</p>
     #   @return [String]
     class ListSessionsOutput < Struct.new(
+      nil,
       :session_summaries,
       :next_token,
       keyword_init: true
@@ -1180,6 +1238,7 @@ module Aws::BedrockAgentCore
     #   <p>The endpoint URL for the live view stream. This URL is used to establish a connection to receive visual updates from the browser session.</p>
     #   @return [String]
     class LiveViewStream < Struct.new(
+      nil,
       :stream_endpoint,
       keyword_init: true
     )
@@ -1218,6 +1277,7 @@ module Aws::BedrockAgentCore
     #   <p>The timestamp when the memory record was created.</p>
     #   @return [Time]
     class MemoryRecord < Struct.new(
+      nil,
       :memory_record_id,
       :content,
       :memory_strategy_id,
@@ -1248,6 +1308,7 @@ module Aws::BedrockAgentCore
     #   <p>The relevance score of the memory record when returned as part of a search result. Higher values indicate greater relevance to the search query.</p>
     #   @return [Float]
     class MemoryRecordSummary < Struct.new(
+      nil,
       :memory_record_id,
       :content,
       :memory_strategy_id,
@@ -1296,6 +1357,7 @@ module Aws::BedrockAgentCore
     #   <p>The binary resource content.</p>
     #   @return [String]
     class ResourceContent < Struct.new(
+      nil,
       :type,
       :uri,
       :mime_type,
@@ -1310,6 +1372,7 @@ module Aws::BedrockAgentCore
     # @!attribute message
     #   @return [String]
     class ResourceNotFoundException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -1332,6 +1395,7 @@ module Aws::BedrockAgentCore
     #   <p>The maximum number of results to return in a single call. Minimum value of 1, maximum value of 100. Default is 20.</p>
     #   @return [Integer]
     class RetrieveMemoryRecordsInput < Struct.new(
+      nil,
       :memory_id,
       :namespace,
       :search_criteria,
@@ -1349,6 +1413,7 @@ module Aws::BedrockAgentCore
     #   <p>The token to use in a subsequent request to get the next set of results. This value is null when there are no more results to return.</p>
     #   @return [String]
     class RetrieveMemoryRecordsOutput < Struct.new(
+      nil,
       :memory_record_summaries,
       :next_token,
       keyword_init: true
@@ -1360,6 +1425,7 @@ module Aws::BedrockAgentCore
     # @!attribute message
     #   @return [String]
     class RuntimeClientError < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -1377,6 +1443,7 @@ module Aws::BedrockAgentCore
     #   <p>The maximum number of top-scoring memory records to return. This value is used for semantic search ranking.</p>
     #   @return [Integer]
     class SearchCriteria < Struct.new(
+      nil,
       :search_query,
       :memory_strategy_id,
       :top_k,
@@ -1394,6 +1461,7 @@ module Aws::BedrockAgentCore
     # @!attribute message
     #   @return [String]
     class ServiceException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -1404,6 +1472,7 @@ module Aws::BedrockAgentCore
     # @!attribute message
     #   @return [String]
     class ServiceQuotaExceededException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -1421,6 +1490,7 @@ module Aws::BedrockAgentCore
     #   <p>The timestamp when the session was created.</p>
     #   @return [Time]
     class SessionSummary < Struct.new(
+      nil,
       :session_id,
       :actor_id,
       :created_at,
@@ -1445,6 +1515,7 @@ module Aws::BedrockAgentCore
     #   <p>A unique, case-sensitive identifier to ensure that the API request completes no more than one time. If this token matches a previous request, Amazon Bedrock ignores the request, but does not return an error. This parameter helps prevent the creation of duplicate sessions if there are temporary network issues.</p>
     #   @return [String]
     class StartBrowserSessionRequest < Struct.new(
+      nil,
       :browser_identifier,
       :name,
       :session_timeout_seconds,
@@ -1468,6 +1539,7 @@ module Aws::BedrockAgentCore
     #   <p>The streams associated with this browser session. These include the automation stream and live view stream.</p>
     #   @return [Types::BrowserSessionStream]
     class StartBrowserSessionResponse < Struct.new(
+      nil,
       :browser_identifier,
       :session_id,
       :created_at,
@@ -1490,6 +1562,7 @@ module Aws::BedrockAgentCore
     #   <p>A unique, case-sensitive identifier to ensure that the API request completes no more than one time. If this token matches a previous request, Amazon Bedrock ignores the request, but does not return an error. This parameter helps prevent the creation of duplicate sessions if there are temporary network issues.</p>
     #   @return [String]
     class StartCodeInterpreterSessionRequest < Struct.new(
+      nil,
       :code_interpreter_identifier,
       :name,
       :session_timeout_seconds,
@@ -1509,6 +1582,7 @@ module Aws::BedrockAgentCore
     #   <p>The time at which the code interpreter session was created.</p>
     #   @return [Time]
     class StartCodeInterpreterSessionResponse < Struct.new(
+      nil,
       :code_interpreter_identifier,
       :session_id,
       :created_at,
@@ -1527,6 +1601,7 @@ module Aws::BedrockAgentCore
     #   <p>A unique, case-sensitive identifier to ensure that the API request completes no more than one time. If this token matches a previous request, Amazon Bedrock ignores the request, but does not return an error.</p>
     #   @return [String]
     class StopBrowserSessionRequest < Struct.new(
+      nil,
       :browser_identifier,
       :session_id,
       :client_token,
@@ -1545,6 +1620,7 @@ module Aws::BedrockAgentCore
     #   <p>The time at which the browser session was last updated.</p>
     #   @return [Time]
     class StopBrowserSessionResponse < Struct.new(
+      nil,
       :browser_identifier,
       :session_id,
       :last_updated_at,
@@ -1563,6 +1639,7 @@ module Aws::BedrockAgentCore
     #   <p>A unique, case-sensitive identifier to ensure that the API request completes no more than one time. If this token matches a previous request, Amazon Bedrock ignores the request, but does not return an error.</p>
     #   @return [String]
     class StopCodeInterpreterSessionRequest < Struct.new(
+      nil,
       :code_interpreter_identifier,
       :session_id,
       :client_token,
@@ -1581,6 +1658,7 @@ module Aws::BedrockAgentCore
     #   <p>The timestamp when the code interpreter session was last updated.</p>
     #   @return [Time]
     class StopCodeInterpreterSessionResponse < Struct.new(
+      nil,
       :code_interpreter_identifier,
       :session_id,
       :last_updated_at,
@@ -1608,6 +1686,7 @@ module Aws::BedrockAgentCore
     # @!attribute message
     #   @return [String]
     class ThrottledException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -1618,6 +1697,7 @@ module Aws::BedrockAgentCore
     # @!attribute message
     #   @return [String]
     class ThrottlingException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -1653,6 +1733,7 @@ module Aws::BedrockAgentCore
     #   <p>The identifier of the task for the tool operation.</p>
     #   @return [String]
     class ToolArguments < Struct.new(
+      nil,
       :code,
       :language,
       :clear_context,
@@ -1687,6 +1768,7 @@ module Aws::BedrockAgentCore
     #   <p>The execution time of the tool operation in milliseconds.</p>
     #   @return [Float]
     class ToolResultStructuredContent < Struct.new(
+      nil,
       :task_id,
       :task_status,
       :stdout,
@@ -1702,6 +1784,7 @@ module Aws::BedrockAgentCore
     # @!attribute message
     #   @return [String]
     class UnauthorizedException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -1721,6 +1804,7 @@ module Aws::BedrockAgentCore
     #   <p>A unique, case-sensitive identifier to ensure that the operation completes no more than one time. If this token matches a previous request, Amazon Bedrock ignores the request, but does not return an error.</p>
     #   @return [String]
     class UpdateBrowserStreamRequest < Struct.new(
+      nil,
       :browser_identifier,
       :session_id,
       :stream_update,
@@ -1743,6 +1827,7 @@ module Aws::BedrockAgentCore
     #   <p>The time at which the browser stream was updated.</p>
     #   @return [Time]
     class UpdateBrowserStreamResponse < Struct.new(
+      nil,
       :browser_identifier,
       :session_id,
       :streams,
@@ -1760,6 +1845,7 @@ module Aws::BedrockAgentCore
     # @!attribute field_list
     #   @return [Array<Types::ValidationExceptionField>]
     class ValidationException < Struct.new(
+      nil,
       :message,
       :reason,
       :field_list,
@@ -1776,6 +1862,7 @@ module Aws::BedrockAgentCore
     #   <p>A message describing why this field failed validation.</p>
     #   @return [String]
     class ValidationExceptionField < Struct.new(
+      nil,
       :name,
       :message,
       keyword_init: true
@@ -1791,6 +1878,7 @@ module Aws::BedrockAgentCore
     #   <p>The height of the viewport in pixels. This value determines the vertical dimension of the visible area. Valid values range from 600 to 1080 pixels.</p>
     #   @return [Integer]
     class ViewPort < Struct.new(
+      nil,
       :width,
       :height,
       keyword_init: true

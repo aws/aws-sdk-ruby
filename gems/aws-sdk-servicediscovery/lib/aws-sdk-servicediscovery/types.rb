@@ -24,6 +24,7 @@ module Aws::ServiceDiscovery
     #                                  characters in length.</p>
     #   @return [Array<Types::Tag>]
     class CreateHttpNamespaceRequest < Struct.new(
+      nil,
       :name,
       :creator_request_id,
       :description,
@@ -38,6 +39,7 @@ module Aws::ServiceDiscovery
     #                                   To get the status of the operation, see <a href="https://docs.aws.amazon.com/cloud-map/latest/api/API_GetOperation.html">GetOperation</a>.</p>
     #   @return [String]
     class CreateHttpNamespaceResponse < Struct.new(
+      nil,
       :operation_id,
       keyword_init: true
     )
@@ -71,6 +73,7 @@ module Aws::ServiceDiscovery
     #      private DNS namespace.</p>
     #   @return [Types::PrivateDnsNamespaceProperties]
     class CreatePrivateDnsNamespaceRequest < Struct.new(
+      nil,
       :name,
       :creator_request_id,
       :description,
@@ -87,6 +90,7 @@ module Aws::ServiceDiscovery
     #                                   To get the status of the operation, see <a href="https://docs.aws.amazon.com/cloud-map/latest/api/API_GetOperation.html">GetOperation</a>.</p>
     #   @return [String]
     class CreatePrivateDnsNamespaceResponse < Struct.new(
+      nil,
       :operation_id,
       keyword_init: true
     )
@@ -119,6 +123,7 @@ module Aws::ServiceDiscovery
     #      public DNS namespace.</p>
     #   @return [Types::PublicDnsNamespaceProperties]
     class CreatePublicDnsNamespaceRequest < Struct.new(
+      nil,
       :name,
       :creator_request_id,
       :description,
@@ -134,6 +139,7 @@ module Aws::ServiceDiscovery
     #      status of the operation, see <a href="https://docs.aws.amazon.com/cloud-map/latest/api/API_GetOperation.html">GetOperation</a>.</p>
     #   @return [String]
     class CreatePublicDnsNamespaceResponse < Struct.new(
+      nil,
       :operation_id,
       keyword_init: true
     )
@@ -219,6 +225,7 @@ module Aws::ServiceDiscovery
     #      instances. The only valid value is <code>HTTP</code>.</p>
     #   @return [String]
     class CreateServiceRequest < Struct.new(
+      nil,
       :name,
       :namespace_id,
       :creator_request_id,
@@ -237,6 +244,7 @@ module Aws::ServiceDiscovery
     #   <p>A complex type that contains information about the new service.</p>
     #   @return [Types::Service]
     class CreateServiceResponse < Struct.new(
+      nil,
       :service,
       keyword_init: true
     )
@@ -248,6 +256,7 @@ module Aws::ServiceDiscovery
     # @!attribute message
     #   @return [String]
     class CustomHealthNotFound < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -258,6 +267,7 @@ module Aws::ServiceDiscovery
     #   <p>The ID or Amazon Resource Name (ARN) of the namespace that you want to delete.</p>
     #   @return [String]
     class DeleteNamespaceRequest < Struct.new(
+      nil,
       :id,
       keyword_init: true
     )
@@ -269,6 +279,7 @@ module Aws::ServiceDiscovery
     #                                   To get the status of the operation, see <a href="https://docs.aws.amazon.com/cloud-map/latest/api/API_GetOperation.html">GetOperation</a>.</p>
     #   @return [String]
     class DeleteNamespaceResponse < Struct.new(
+      nil,
       :operation_id,
       keyword_init: true
     )
@@ -285,6 +296,7 @@ module Aws::ServiceDiscovery
     #   <p>A list of keys corresponding to each attribute that you want to delete.</p>
     #   @return [Array<String>]
     class DeleteServiceAttributesRequest < Struct.new(
+      nil,
       :service_id,
       :attributes,
       keyword_init: true
@@ -293,6 +305,7 @@ module Aws::ServiceDiscovery
     end
 
     class DeleteServiceAttributesResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -305,6 +318,7 @@ module Aws::ServiceDiscovery
     #      sharing</a>.</p>
     #   @return [String]
     class DeleteServiceRequest < Struct.new(
+      nil,
       :id,
       keyword_init: true
     )
@@ -312,6 +326,7 @@ module Aws::ServiceDiscovery
     end
 
     class DeleteServiceResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -327,6 +342,7 @@ module Aws::ServiceDiscovery
     #   <p>The value that you specified for <code>Id</code> in the <a href="https://docs.aws.amazon.com/cloud-map/latest/api/API_RegisterInstance.html">RegisterInstance</a> request.</p>
     #   @return [String]
     class DeregisterInstanceRequest < Struct.new(
+      nil,
       :service_id,
       :instance_id,
       keyword_init: true
@@ -339,6 +355,7 @@ module Aws::ServiceDiscovery
     #                                   To get the status of the operation, see <a href="https://docs.aws.amazon.com/cloud-map/latest/api/API_GetOperation.html">GetOperation</a>.</p>
     #   @return [String]
     class DeregisterInstanceResponse < Struct.new(
+      nil,
       :operation_id,
       keyword_init: true
     )
@@ -402,6 +419,7 @@ module Aws::ServiceDiscovery
     #      instances associated with namespaces that are shared with your account, you must specify an <code>OwnerAccount</code>.</p>
     #   @return [String]
     class DiscoverInstancesRequest < Struct.new(
+      nil,
       :namespace_name,
       :service_name,
       :max_results,
@@ -424,6 +442,7 @@ module Aws::ServiceDiscovery
     #      don't update <code>InstancesRevision</code>.</p>
     #   @return [Integer]
     class DiscoverInstancesResponse < Struct.new(
+      nil,
       :instances,
       :instances_revision,
       keyword_init: true
@@ -446,6 +465,7 @@ module Aws::ServiceDiscovery
     #      <i>Cloud Map Developer Guide</i>.</p>
     #   @return [String]
     class DiscoverInstancesRevisionRequest < Struct.new(
+      nil,
       :namespace_name,
       :service_name,
       :owner_account,
@@ -460,6 +480,7 @@ module Aws::ServiceDiscovery
     #      don't update <code>InstancesRevision</code>.</p>
     #   @return [Integer]
     class DiscoverInstancesRevisionResponse < Struct.new(
+      nil,
       :instances_revision,
       keyword_init: true
     )
@@ -527,6 +548,7 @@ module Aws::ServiceDiscovery
     #            </important>
     #   @return [Array<Types::DnsRecord>]
     class DnsConfig < Struct.new(
+      nil,
       :namespace_id,
       :routing_policy,
       :dns_records,
@@ -542,6 +564,7 @@ module Aws::ServiceDiscovery
     #      Cloud Map to create when you register an instance.</p>
     #   @return [Array<Types::DnsRecord>]
     class DnsConfigChange < Struct.new(
+      nil,
       :dns_records,
       keyword_init: true
     )
@@ -557,6 +580,7 @@ module Aws::ServiceDiscovery
     #   <p>Start of Authority (SOA) record for the hosted zone.</p>
     #   @return [Types::SOA]
     class DnsProperties < Struct.new(
+      nil,
       :hosted_zone_id,
       :soa,
       keyword_init: true
@@ -716,6 +740,7 @@ module Aws::ServiceDiscovery
     #            </note>
     #   @return [Integer]
     class DnsRecord < Struct.new(
+      nil,
       :type,
       :ttl,
       keyword_init: true
@@ -730,6 +755,7 @@ module Aws::ServiceDiscovery
     #   <p>The ID of the operation that's already in progress.</p>
     #   @return [String]
     class DuplicateRequest < Struct.new(
+      nil,
       :message,
       :duplicate_operation_id,
       keyword_init: true
@@ -747,6 +773,7 @@ module Aws::ServiceDiscovery
     #   <p>The ID of the instance that you want to get information about.</p>
     #   @return [String]
     class GetInstanceRequest < Struct.new(
+      nil,
       :service_id,
       :instance_id,
       keyword_init: true
@@ -763,6 +790,7 @@ module Aws::ServiceDiscovery
     #   <p>A complex type that contains information about a specified instance.</p>
     #   @return [Types::Instance]
     class GetInstanceResponse < Struct.new(
+      nil,
       :resource_owner,
       :instance,
       keyword_init: true
@@ -798,6 +826,7 @@ module Aws::ServiceDiscovery
     #      the value of <code>NextToken</code> from the previous response in the next request.</p>
     #   @return [String]
     class GetInstancesHealthStatusRequest < Struct.new(
+      nil,
       :service_id,
       :instances,
       :max_results,
@@ -817,6 +846,7 @@ module Aws::ServiceDiscovery
     #      the value of <code>NextToken</code> from the previous response in the next request.</p>
     #   @return [String]
     class GetInstancesHealthStatusResponse < Struct.new(
+      nil,
       :status,
       :next_token,
       keyword_init: true
@@ -832,6 +862,7 @@ module Aws::ServiceDiscovery
     #            </p>
     #   @return [String]
     class GetNamespaceRequest < Struct.new(
+      nil,
       :id,
       keyword_init: true
     )
@@ -842,6 +873,7 @@ module Aws::ServiceDiscovery
     #   <p>A complex type that contains information about the specified namespace.</p>
     #   @return [Types::Namespace]
     class GetNamespaceResponse < Struct.new(
+      nil,
       :namespace,
       keyword_init: true
     )
@@ -856,6 +888,7 @@ module Aws::ServiceDiscovery
     #      operations associated with namespaces that are shared with your account, you must specify an <code>OwnerAccount</code>.</p>
     #   @return [String]
     class GetOperationRequest < Struct.new(
+      nil,
       :operation_id,
       :owner_account,
       keyword_init: true
@@ -867,6 +900,7 @@ module Aws::ServiceDiscovery
     #   <p>A complex type that contains information about the operation.</p>
     #   @return [Types::Operation]
     class GetOperationResponse < Struct.new(
+      nil,
       :operation,
       keyword_init: true
     )
@@ -880,6 +914,7 @@ module Aws::ServiceDiscovery
     #       <i>Cloud Map Developer Guide</i>.</p>
     #   @return [String]
     class GetServiceAttributesRequest < Struct.new(
+      nil,
       :service_id,
       keyword_init: true
     )
@@ -891,6 +926,7 @@ module Aws::ServiceDiscovery
     #      associated with the service.</p>
     #   @return [Types::ServiceAttributes]
     class GetServiceAttributesResponse < Struct.new(
+      nil,
       :service_attributes,
       keyword_init: true
     )
@@ -904,6 +940,7 @@ module Aws::ServiceDiscovery
     #      <i>Cloud Map Developer Guide</i>.</p>
     #   @return [String]
     class GetServiceRequest < Struct.new(
+      nil,
       :id,
       keyword_init: true
     )
@@ -914,6 +951,7 @@ module Aws::ServiceDiscovery
     #   <p>A complex type that contains information about the service.</p>
     #   @return [Types::Service]
     class GetServiceResponse < Struct.new(
+      nil,
       :service,
       keyword_init: true
     )
@@ -1034,6 +1072,7 @@ module Aws::ServiceDiscovery
     #      <i>Route 53 Developer Guide</i>.</p>
     #   @return [Integer]
     class HealthCheckConfig < Struct.new(
+      nil,
       :type,
       :resource_path,
       :failure_threshold,
@@ -1112,6 +1151,7 @@ module Aws::ServiceDiscovery
     #     Configurable FailureThreshold of HealthCheckCustomConfig is deprecated.  It will always have value 1.
     #   @return [Integer]
     class HealthCheckCustomConfig < Struct.new(
+      nil,
       :failure_threshold,
       keyword_init: true
     )
@@ -1141,6 +1181,7 @@ module Aws::ServiceDiscovery
     #      attributes.</p>
     #   @return [Hash<String, String>]
     class HttpInstanceSummary < Struct.new(
+      nil,
       :instance_id,
       :namespace_name,
       :service_name,
@@ -1158,6 +1199,7 @@ module Aws::ServiceDiscovery
     #      description for the HTTP namespace.</p>
     #   @return [String]
     class HttpNamespaceChange < Struct.new(
+      nil,
       :description,
       keyword_init: true
     )
@@ -1169,6 +1211,7 @@ module Aws::ServiceDiscovery
     #   <p>The name of an HTTP namespace.</p>
     #   @return [String]
     class HttpProperties < Struct.new(
+      nil,
       :http_name,
       keyword_init: true
     )
@@ -1318,6 +1361,7 @@ module Aws::ServiceDiscovery
     #       Cloud Map namespace sharing</a> in the <i>Cloud Map Developer Guide</i>.</p>
     #   @return [String]
     class Instance < Struct.new(
+      nil,
       :id,
       :creator_request_id,
       :attributes,
@@ -1332,6 +1376,7 @@ module Aws::ServiceDiscovery
     # @!attribute message
     #   @return [String]
     class InstanceNotFound < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -1404,6 +1449,7 @@ module Aws::ServiceDiscovery
     #       Cloud Map namespace sharing</a> in the <i>Cloud Map Developer Guide</i>.</p>
     #   @return [String]
     class InstanceSummary < Struct.new(
+      nil,
       :id,
       :attributes,
       :created_by_account,
@@ -1418,6 +1464,7 @@ module Aws::ServiceDiscovery
     # @!attribute message
     #   @return [String]
     class InvalidInput < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -1442,6 +1489,7 @@ module Aws::ServiceDiscovery
     #      Cloud Map returns up to 100 instances.</p>
     #   @return [Integer]
     class ListInstancesRequest < Struct.new(
+      nil,
       :service_id,
       :next_token,
       :max_results,
@@ -1465,6 +1513,7 @@ module Aws::ServiceDiscovery
     #       <code>NextToken</code> from the previous response in the next request.</p>
     #   @return [String]
     class ListInstancesResponse < Struct.new(
+      nil,
       :resource_owner,
       :instances,
       :next_token,
@@ -1496,6 +1545,7 @@ module Aws::ServiceDiscovery
     #       <code>ListNamespaces</code>.</p>
     #   @return [Array<Types::NamespaceFilter>]
     class ListNamespacesRequest < Struct.new(
+      nil,
       :next_token,
       :max_results,
       :filters,
@@ -1520,6 +1570,7 @@ module Aws::ServiceDiscovery
     #            </note>
     #   @return [String]
     class ListNamespacesResponse < Struct.new(
+      nil,
       :namespaces,
       :next_token,
       keyword_init: true
@@ -1551,6 +1602,7 @@ module Aws::ServiceDiscovery
     #       <code>ListOperations</code>.</p>
     #   @return [Array<Types::OperationFilter>]
     class ListOperationsRequest < Struct.new(
+      nil,
       :next_token,
       :max_results,
       :filters,
@@ -1574,6 +1626,7 @@ module Aws::ServiceDiscovery
     #            </note>
     #   @return [String]
     class ListOperationsResponse < Struct.new(
+      nil,
       :operations,
       :next_token,
       keyword_init: true
@@ -1605,6 +1658,7 @@ module Aws::ServiceDiscovery
     #       <code>ListServices</code>.</p>
     #   @return [Array<Types::ServiceFilter>]
     class ListServicesRequest < Struct.new(
+      nil,
       :next_token,
       :max_results,
       :filters,
@@ -1629,6 +1683,7 @@ module Aws::ServiceDiscovery
     #            </note>
     #   @return [String]
     class ListServicesResponse < Struct.new(
+      nil,
       :services,
       :next_token,
       keyword_init: true
@@ -1640,6 +1695,7 @@ module Aws::ServiceDiscovery
     #   <p>The Amazon Resource Name (ARN) of the resource that you want to retrieve tags for.</p>
     #   @return [String]
     class ListTagsForResourceRequest < Struct.new(
+      nil,
       :resource_arn,
       keyword_init: true
     )
@@ -1650,6 +1706,7 @@ module Aws::ServiceDiscovery
     #   <p>The tags that are assigned to the resource.</p>
     #   @return [Array<Types::Tag>]
     class ListTagsForResourceResponse < Struct.new(
+      nil,
       :tags,
       keyword_init: true
     )
@@ -1713,6 +1770,7 @@ module Aws::ServiceDiscovery
     #      without the risk of running an operation twice. </p>
     #   @return [String]
     class Namespace < Struct.new(
+      nil,
       :id,
       :arn,
       :resource_owner,
@@ -1738,6 +1796,7 @@ module Aws::ServiceDiscovery
     #   <p>The ID of the existing namespace.</p>
     #   @return [String]
     class NamespaceAlreadyExists < Struct.new(
+      nil,
       :message,
       :creator_request_id,
       :namespace_id,
@@ -1820,6 +1879,7 @@ module Aws::ServiceDiscovery
     #            </ul>
     #   @return [String]
     class NamespaceFilter < Struct.new(
+      nil,
       :name,
       :values,
       :condition,
@@ -1832,6 +1892,7 @@ module Aws::ServiceDiscovery
     # @!attribute message
     #   @return [String]
     class NamespaceNotFound < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -1847,6 +1908,7 @@ module Aws::ServiceDiscovery
     #   <p>A complex type that contains the name of an HTTP namespace.</p>
     #   @return [Types::HttpProperties]
     class NamespaceProperties < Struct.new(
+      nil,
       :dns_properties,
       :http_properties,
       keyword_init: true
@@ -1887,6 +1949,7 @@ module Aws::ServiceDiscovery
     #   <p>The date and time that the namespace was created.</p>
     #   @return [Time]
     class NamespaceSummary < Struct.new(
+      nil,
       :id,
       :arn,
       :resource_owner,
@@ -2007,6 +2070,7 @@ module Aws::ServiceDiscovery
     #            </dl>
     #   @return [Hash<String, String>]
     class Operation < Struct.new(
+      nil,
       :id,
       :owner_account,
       :type,
@@ -2110,6 +2174,7 @@ module Aws::ServiceDiscovery
     #            </ul>
     #   @return [String]
     class OperationFilter < Struct.new(
+      nil,
       :name,
       :values,
       :condition,
@@ -2122,6 +2187,7 @@ module Aws::ServiceDiscovery
     # @!attribute message
     #   @return [String]
     class OperationNotFound < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -2157,6 +2223,7 @@ module Aws::ServiceDiscovery
     #            </ul>
     #   @return [String]
     class OperationSummary < Struct.new(
+      nil,
       :id,
       :status,
       keyword_init: true
@@ -2175,6 +2242,7 @@ module Aws::ServiceDiscovery
     #      updated in the private DNS namespace.</p>
     #   @return [Types::PrivateDnsNamespacePropertiesChange]
     class PrivateDnsNamespaceChange < Struct.new(
+      nil,
       :description,
       :properties,
       keyword_init: true
@@ -2189,6 +2257,7 @@ module Aws::ServiceDiscovery
     #      the private DNS namespace.</p>
     #   @return [Types::PrivateDnsPropertiesMutable]
     class PrivateDnsNamespaceProperties < Struct.new(
+      nil,
       :dns_properties,
       keyword_init: true
     )
@@ -2202,6 +2271,7 @@ module Aws::ServiceDiscovery
     #      properties for the private DNS namespace.</p>
     #   @return [Types::PrivateDnsPropertiesMutableChange]
     class PrivateDnsNamespacePropertiesChange < Struct.new(
+      nil,
       :dns_properties,
       keyword_init: true
     )
@@ -2216,6 +2286,7 @@ module Aws::ServiceDiscovery
     #      namespace.</p>
     #   @return [Types::SOA]
     class PrivateDnsPropertiesMutable < Struct.new(
+      nil,
       :soa,
       keyword_init: true
     )
@@ -2230,6 +2301,7 @@ module Aws::ServiceDiscovery
     #      namespace.</p>
     #   @return [Types::SOAChange]
     class PrivateDnsPropertiesMutableChange < Struct.new(
+      nil,
       :soa,
       keyword_init: true
     )
@@ -2247,6 +2319,7 @@ module Aws::ServiceDiscovery
     #      updated in the public DNS namespace.</p>
     #   @return [Types::PublicDnsNamespacePropertiesChange]
     class PublicDnsNamespaceChange < Struct.new(
+      nil,
       :description,
       :properties,
       keyword_init: true
@@ -2261,6 +2334,7 @@ module Aws::ServiceDiscovery
     #      the public DNS namespace.</p>
     #   @return [Types::PublicDnsPropertiesMutable]
     class PublicDnsNamespaceProperties < Struct.new(
+      nil,
       :dns_properties,
       keyword_init: true
     )
@@ -2274,6 +2348,7 @@ module Aws::ServiceDiscovery
     #      properties for the hosted zone for the public DNS namespace.</p>
     #   @return [Types::PublicDnsPropertiesMutableChange]
     class PublicDnsNamespacePropertiesChange < Struct.new(
+      nil,
       :dns_properties,
       keyword_init: true
     )
@@ -2287,6 +2362,7 @@ module Aws::ServiceDiscovery
     #      (SOA) record for the hosted zone for the public DNS namespace.</p>
     #   @return [Types::SOA]
     class PublicDnsPropertiesMutable < Struct.new(
+      nil,
       :soa,
       keyword_init: true
     )
@@ -2301,6 +2377,7 @@ module Aws::ServiceDiscovery
     #      namespace.</p>
     #   @return [Types::SOAChange]
     class PublicDnsPropertiesMutableChange < Struct.new(
+      nil,
       :soa,
       keyword_init: true
     )
@@ -2468,6 +2545,7 @@ module Aws::ServiceDiscovery
     #            </dl>
     #   @return [Hash<String, String>]
     class RegisterInstanceRequest < Struct.new(
+      nil,
       :service_id,
       :instance_id,
       :creator_request_id,
@@ -2482,6 +2560,7 @@ module Aws::ServiceDiscovery
     #                                   To get the status of the operation, see <a href="https://docs.aws.amazon.com/cloud-map/latest/api/API_GetOperation.html">GetOperation</a>.</p>
     #   @return [String]
     class RegisterInstanceResponse < Struct.new(
+      nil,
       :operation_id,
       keyword_init: true
     )
@@ -2494,6 +2573,7 @@ module Aws::ServiceDiscovery
     # @!attribute message
     #   @return [String]
     class RequestLimitExceeded < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -2505,6 +2585,7 @@ module Aws::ServiceDiscovery
     # @!attribute message
     #   @return [String]
     class ResourceInUse < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -2516,6 +2597,7 @@ module Aws::ServiceDiscovery
     # @!attribute message
     #   @return [String]
     class ResourceLimitExceeded < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -2526,6 +2608,7 @@ module Aws::ServiceDiscovery
     # @!attribute message
     #   @return [String]
     class ResourceNotFoundException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -2539,6 +2622,7 @@ module Aws::ServiceDiscovery
     #      (TTL) for purposes of negative caching.</p>
     #   @return [Integer]
     class SOA < Struct.new(
+      nil,
       :ttl,
       keyword_init: true
     )
@@ -2552,6 +2636,7 @@ module Aws::ServiceDiscovery
     #      live (TTL) for purposes of negative caching.</p>
     #   @return [Integer]
     class SOAChange < Struct.new(
+      nil,
       :ttl,
       keyword_init: true
     )
@@ -2643,6 +2728,7 @@ module Aws::ServiceDiscovery
     #       namespace sharing</a> in the <i>Cloud Map Developer Guide</i>.</p>
     #   @return [String]
     class Service < Struct.new(
+      nil,
       :id,
       :arn,
       :resource_owner,
@@ -2675,6 +2761,7 @@ module Aws::ServiceDiscovery
     #   <p>The ARN of the existing service.</p>
     #   @return [String]
     class ServiceAlreadyExists < Struct.new(
+      nil,
       :message,
       :creator_request_id,
       :service_id,
@@ -2709,6 +2796,7 @@ module Aws::ServiceDiscovery
     #            <p>You can specify a total of 30 attributes.</p>
     #   @return [Hash<String, String>]
     class ServiceAttributes < Struct.new(
+      nil,
       :service_arn,
       :resource_owner,
       :attributes,
@@ -2722,6 +2810,7 @@ module Aws::ServiceDiscovery
     # @!attribute message
     #   @return [String]
     class ServiceAttributesLimitExceededException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -2743,6 +2832,7 @@ module Aws::ServiceDiscovery
     #      the records that you specify in <code>DnsConfig</code>.</p>
     #   @return [Types::HealthCheckConfig]
     class ServiceChange < Struct.new(
+      nil,
       :description,
       :dns_config,
       :health_check_config,
@@ -2800,6 +2890,7 @@ module Aws::ServiceDiscovery
     #            </ul>
     #   @return [String]
     class ServiceFilter < Struct.new(
+      nil,
       :name,
       :values,
       :condition,
@@ -2812,6 +2903,7 @@ module Aws::ServiceDiscovery
     # @!attribute message
     #   @return [String]
     class ServiceNotFound < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -2902,6 +2994,7 @@ module Aws::ServiceDiscovery
     #       namespace sharing</a> in the <i>Cloud Map Developer Guide</i>.</p>
     #   @return [String]
     class ServiceSummary < Struct.new(
+      nil,
       :id,
       :arn,
       :resource_owner,
@@ -2928,6 +3021,7 @@ module Aws::ServiceDiscovery
     #      to an empty string, but you can't set the value of a tag to null.</p>
     #   @return [String]
     class Tag < Struct.new(
+      nil,
       :key,
       :value,
       keyword_init: true
@@ -2943,6 +3037,7 @@ module Aws::ServiceDiscovery
     #      the value of a tag to an empty string, but you can't set the value of a tag to null.</p>
     #   @return [Array<Types::Tag>]
     class TagResourceRequest < Struct.new(
+      nil,
       :resource_arn,
       :tags,
       keyword_init: true
@@ -2951,6 +3046,7 @@ module Aws::ServiceDiscovery
     end
 
     class TagResourceResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -2964,6 +3060,7 @@ module Aws::ServiceDiscovery
     #   <p>The name of the resource.</p>
     #   @return [String]
     class TooManyTagsException < Struct.new(
+      nil,
       :message,
       :resource_name,
       keyword_init: true
@@ -2978,6 +3075,7 @@ module Aws::ServiceDiscovery
     #   <p>The tag keys to remove from the specified resource.</p>
     #   @return [Array<String>]
     class UntagResourceRequest < Struct.new(
+      nil,
       :resource_arn,
       :tag_keys,
       keyword_init: true
@@ -2986,6 +3084,7 @@ module Aws::ServiceDiscovery
     end
 
     class UntagResourceResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -3004,6 +3103,7 @@ module Aws::ServiceDiscovery
     #   <p>Updated properties for the the HTTP namespace.</p>
     #   @return [Types::HttpNamespaceChange]
     class UpdateHttpNamespaceRequest < Struct.new(
+      nil,
       :id,
       :updater_request_id,
       :namespace,
@@ -3017,6 +3117,7 @@ module Aws::ServiceDiscovery
     #                                   To get the status of the operation, see <a href="https://docs.aws.amazon.com/cloud-map/latest/api/API_GetOperation.html">GetOperation</a>.</p>
     #   @return [String]
     class UpdateHttpNamespaceResponse < Struct.new(
+      nil,
       :operation_id,
       keyword_init: true
     )
@@ -3036,6 +3137,7 @@ module Aws::ServiceDiscovery
     #   <p>The new status of the instance, <code>HEALTHY</code> or <code>UNHEALTHY</code>.</p>
     #   @return [String]
     class UpdateInstanceCustomHealthStatusRequest < Struct.new(
+      nil,
       :service_id,
       :instance_id,
       :status,
@@ -3057,6 +3159,7 @@ module Aws::ServiceDiscovery
     #   <p>Updated properties for the private DNS namespace.</p>
     #   @return [Types::PrivateDnsNamespaceChange]
     class UpdatePrivateDnsNamespaceRequest < Struct.new(
+      nil,
       :id,
       :updater_request_id,
       :namespace,
@@ -3070,6 +3173,7 @@ module Aws::ServiceDiscovery
     #                                   To get the status of the operation, see <a href="https://docs.aws.amazon.com/cloud-map/latest/api/API_GetOperation.html">GetOperation</a>.</p>
     #   @return [String]
     class UpdatePrivateDnsNamespaceResponse < Struct.new(
+      nil,
       :operation_id,
       keyword_init: true
     )
@@ -3089,6 +3193,7 @@ module Aws::ServiceDiscovery
     #   <p>Updated properties for the public DNS namespace.</p>
     #   @return [Types::PublicDnsNamespaceChange]
     class UpdatePublicDnsNamespaceRequest < Struct.new(
+      nil,
       :id,
       :updater_request_id,
       :namespace,
@@ -3102,6 +3207,7 @@ module Aws::ServiceDiscovery
     #                                   To get the status of the operation, see <a href="https://docs.aws.amazon.com/cloud-map/latest/api/API_GetOperation.html">GetOperation</a>.</p>
     #   @return [String]
     class UpdatePublicDnsNamespaceResponse < Struct.new(
+      nil,
       :operation_id,
       keyword_init: true
     )
@@ -3116,6 +3222,7 @@ module Aws::ServiceDiscovery
     #   <p>A string map that contains attribute key-value pairs.</p>
     #   @return [Hash<String, String>]
     class UpdateServiceAttributesRequest < Struct.new(
+      nil,
       :service_id,
       :attributes,
       keyword_init: true
@@ -3124,6 +3231,7 @@ module Aws::ServiceDiscovery
     end
 
     class UpdateServiceAttributesResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -3141,6 +3249,7 @@ module Aws::ServiceDiscovery
     #      30 attributes (key-value pairs).</p>
     #   @return [Types::ServiceChange]
     class UpdateServiceRequest < Struct.new(
+      nil,
       :id,
       :service,
       keyword_init: true
@@ -3153,6 +3262,7 @@ module Aws::ServiceDiscovery
     #                                   To get the status of the operation, see <a href="https://docs.aws.amazon.com/cloud-map/latest/api/API_GetOperation.html">GetOperation</a>.</p>
     #   @return [String]
     class UpdateServiceResponse < Struct.new(
+      nil,
       :operation_id,
       keyword_init: true
     )

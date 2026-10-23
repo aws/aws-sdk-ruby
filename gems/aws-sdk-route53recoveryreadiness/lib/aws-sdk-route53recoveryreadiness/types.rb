@@ -10,6 +10,7 @@ module Aws::Route53RecoveryReadiness
     # @!attribute message
     #   @return [String]
     class AccessDeniedException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -33,6 +34,7 @@ module Aws::Route53RecoveryReadiness
     #   <p>Tags on the resources.</p>
     #   @return [Hash<String, String>]
     class CellOutput < Struct.new(
+      nil,
       :cell_arn,
       :cell_name,
       :cells,
@@ -47,6 +49,7 @@ module Aws::Route53RecoveryReadiness
     # @!attribute message
     #   @return [String]
     class ConflictException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -63,6 +66,7 @@ module Aws::Route53RecoveryReadiness
     #   <p>A collection of tags associated with a resource.</p>
     #   @return [Hash<String, String>]
     class CreateCellRequest < Struct.new(
+      nil,
       :cell_name,
       :cells,
       :tags,
@@ -87,6 +91,7 @@ module Aws::Route53RecoveryReadiness
     #   <p>Tags on the resources.</p>
     #   @return [Hash<String, String>]
     class CreateCellResponse < Struct.new(
+      nil,
       :cell_arn,
       :cell_name,
       :cells,
@@ -101,6 +106,7 @@ module Aws::Route53RecoveryReadiness
     #   <p>The cross-account authorization.</p>
     #   @return [String]
     class CreateCrossAccountAuthorizationRequest < Struct.new(
+      nil,
       :cross_account_authorization,
       keyword_init: true
     )
@@ -111,6 +117,7 @@ module Aws::Route53RecoveryReadiness
     #   <p>The cross-account authorization.</p>
     #   @return [String]
     class CreateCrossAccountAuthorizationResponse < Struct.new(
+      nil,
       :cross_account_authorization,
       keyword_init: true
     )
@@ -127,6 +134,7 @@ module Aws::Route53RecoveryReadiness
     #   <p>A collection of tags associated with a resource.</p>
     #   @return [Hash<String, String>]
     class CreateReadinessCheckRequest < Struct.new(
+      nil,
       :readiness_check_name,
       :resource_set_name,
       :tags,
@@ -148,6 +156,7 @@ module Aws::Route53RecoveryReadiness
     #   <p>A collection of tags associated with a resource.</p>
     #   @return [Hash<String, String>]
     class CreateReadinessCheckResponse < Struct.new(
+      nil,
       :readiness_check_arn,
       :readiness_check_name,
       :resource_set,
@@ -167,6 +176,7 @@ module Aws::Route53RecoveryReadiness
     #   <p>A collection of tags associated with a resource.</p>
     #   @return [Hash<String, String>]
     class CreateRecoveryGroupRequest < Struct.new(
+      nil,
       :cells,
       :recovery_group_name,
       :tags,
@@ -188,6 +198,7 @@ module Aws::Route53RecoveryReadiness
     #   <p>The tags associated with the recovery group.</p>
     #   @return [Hash<String, String>]
     class CreateRecoveryGroupResponse < Struct.new(
+      nil,
       :cells,
       :recovery_group_arn,
       :recovery_group_name,
@@ -210,6 +221,7 @@ module Aws::Route53RecoveryReadiness
     #   <p>A tag to associate with the parameters for a resource set.</p>
     #   @return [Hash<String, String>]
     class CreateResourceSetRequest < Struct.new(
+      nil,
       :resource_set_name,
       :resource_set_type,
       :resources,
@@ -235,6 +247,7 @@ module Aws::Route53RecoveryReadiness
     #   <p>A collection of tags associated with a resource.</p>
     #   @return [Hash<String, String>]
     class CreateResourceSetResponse < Struct.new(
+      nil,
       :resource_set_arn,
       :resource_set_name,
       :resource_set_type,
@@ -262,6 +275,7 @@ module Aws::Route53RecoveryReadiness
     #   <p>The target resource of the DNS target resource.</p>
     #   @return [Types::TargetResource]
     class DNSTargetResource < Struct.new(
+      nil,
       :domain_name,
       :hosted_zone_arn,
       :record_set_id,
@@ -276,6 +290,7 @@ module Aws::Route53RecoveryReadiness
     #   <p>The name of the cell.</p>
     #   @return [String]
     class DeleteCellRequest < Struct.new(
+      nil,
       :cell_name,
       keyword_init: true
     )
@@ -286,6 +301,7 @@ module Aws::Route53RecoveryReadiness
     #   <p>The cross-account authorization.</p>
     #   @return [String]
     class DeleteCrossAccountAuthorizationRequest < Struct.new(
+      nil,
       :cross_account_authorization,
       keyword_init: true
     )
@@ -293,6 +309,7 @@ module Aws::Route53RecoveryReadiness
     end
 
     class DeleteCrossAccountAuthorizationResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -302,6 +319,7 @@ module Aws::Route53RecoveryReadiness
     #   <p>Name of a readiness check.</p>
     #   @return [String]
     class DeleteReadinessCheckRequest < Struct.new(
+      nil,
       :readiness_check_name,
       keyword_init: true
     )
@@ -312,6 +330,7 @@ module Aws::Route53RecoveryReadiness
     #   <p>The name of a recovery group.</p>
     #   @return [String]
     class DeleteRecoveryGroupRequest < Struct.new(
+      nil,
       :recovery_group_name,
       keyword_init: true
     )
@@ -322,6 +341,7 @@ module Aws::Route53RecoveryReadiness
     #   <p>Name of a resource set.</p>
     #   @return [String]
     class DeleteResourceSetRequest < Struct.new(
+      nil,
       :resource_set_name,
       keyword_init: true
     )
@@ -338,6 +358,7 @@ module Aws::Route53RecoveryReadiness
     #   <p>The name of a recovery group.</p>
     #   @return [String]
     class GetArchitectureRecommendationsRequest < Struct.new(
+      nil,
       :max_results,
       :next_token,
       :recovery_group_name,
@@ -356,6 +377,7 @@ module Aws::Route53RecoveryReadiness
     #   <p>A list of the recommendations for the customer's application.</p>
     #   @return [Array<Types::Recommendation>]
     class GetArchitectureRecommendationsResponse < Struct.new(
+      nil,
       :last_audit_timestamp,
       :next_token,
       :recommendations,
@@ -374,6 +396,7 @@ module Aws::Route53RecoveryReadiness
     #   <p>The token that identifies which batch of results you want to see.</p>
     #   @return [String]
     class GetCellReadinessSummaryRequest < Struct.new(
+      nil,
       :cell_name,
       :max_results,
       :next_token,
@@ -392,6 +415,7 @@ module Aws::Route53RecoveryReadiness
     #   <p>Summaries for the readiness checks that make up the cell.</p>
     #   @return [Array<Types::ReadinessCheckSummary>]
     class GetCellReadinessSummaryResponse < Struct.new(
+      nil,
       :next_token,
       :readiness,
       :readiness_checks,
@@ -404,6 +428,7 @@ module Aws::Route53RecoveryReadiness
     #   <p>The name of the cell.</p>
     #   @return [String]
     class GetCellRequest < Struct.new(
+      nil,
       :cell_name,
       keyword_init: true
     )
@@ -426,6 +451,7 @@ module Aws::Route53RecoveryReadiness
     #   <p>Tags on the resources.</p>
     #   @return [Hash<String, String>]
     class GetCellResponse < Struct.new(
+      nil,
       :cell_arn,
       :cell_name,
       :cells,
@@ -440,6 +466,7 @@ module Aws::Route53RecoveryReadiness
     #   <p>Name of a readiness check.</p>
     #   @return [String]
     class GetReadinessCheckRequest < Struct.new(
+      nil,
       :readiness_check_name,
       keyword_init: true
     )
@@ -459,6 +486,7 @@ module Aws::Route53RecoveryReadiness
     #   <p>The resource identifier, which is the Amazon Resource Name (ARN) or the identifier generated for the resource by Application Recovery Controller (for example, for a DNS target resource).</p>
     #   @return [String]
     class GetReadinessCheckResourceStatusRequest < Struct.new(
+      nil,
       :max_results,
       :next_token,
       :readiness_check_name,
@@ -478,6 +506,7 @@ module Aws::Route53RecoveryReadiness
     #   <p>Details of the rule's results.</p>
     #   @return [Array<Types::RuleResult>]
     class GetReadinessCheckResourceStatusResponse < Struct.new(
+      nil,
       :next_token,
       :readiness,
       :rules,
@@ -499,6 +528,7 @@ module Aws::Route53RecoveryReadiness
     #   <p>A collection of tags associated with a resource.</p>
     #   @return [Hash<String, String>]
     class GetReadinessCheckResponse < Struct.new(
+      nil,
       :readiness_check_arn,
       :readiness_check_name,
       :resource_set,
@@ -518,6 +548,7 @@ module Aws::Route53RecoveryReadiness
     #   <p>Name of a readiness check.</p>
     #   @return [String]
     class GetReadinessCheckStatusRequest < Struct.new(
+      nil,
       :max_results,
       :next_token,
       :readiness_check_name,
@@ -539,6 +570,7 @@ module Aws::Route53RecoveryReadiness
     #   <p>Summary of the readiness of resources.</p>
     #   @return [Array<Types::ResourceResult>]
     class GetReadinessCheckStatusResponse < Struct.new(
+      nil,
       :messages,
       :next_token,
       :readiness,
@@ -558,6 +590,7 @@ module Aws::Route53RecoveryReadiness
     #   <p>The name of a recovery group.</p>
     #   @return [String]
     class GetRecoveryGroupReadinessSummaryRequest < Struct.new(
+      nil,
       :max_results,
       :next_token,
       :recovery_group_name,
@@ -576,6 +609,7 @@ module Aws::Route53RecoveryReadiness
     #   <p>Summaries of the readiness checks for the recovery group.</p>
     #   @return [Array<Types::ReadinessCheckSummary>]
     class GetRecoveryGroupReadinessSummaryResponse < Struct.new(
+      nil,
       :next_token,
       :readiness,
       :readiness_checks,
@@ -588,6 +622,7 @@ module Aws::Route53RecoveryReadiness
     #   <p>The name of a recovery group.</p>
     #   @return [String]
     class GetRecoveryGroupRequest < Struct.new(
+      nil,
       :recovery_group_name,
       keyword_init: true
     )
@@ -607,6 +642,7 @@ module Aws::Route53RecoveryReadiness
     #   <p>The tags associated with the recovery group.</p>
     #   @return [Hash<String, String>]
     class GetRecoveryGroupResponse < Struct.new(
+      nil,
       :cells,
       :recovery_group_arn,
       :recovery_group_name,
@@ -620,6 +656,7 @@ module Aws::Route53RecoveryReadiness
     #   <p>Name of a resource set.</p>
     #   @return [String]
     class GetResourceSetRequest < Struct.new(
+      nil,
       :resource_set_name,
       keyword_init: true
     )
@@ -642,6 +679,7 @@ module Aws::Route53RecoveryReadiness
     #   <p>A collection of tags associated with a resource.</p>
     #   @return [Hash<String, String>]
     class GetResourceSetResponse < Struct.new(
+      nil,
       :resource_set_arn,
       :resource_set_name,
       :resource_set_type,
@@ -656,6 +694,7 @@ module Aws::Route53RecoveryReadiness
     # @!attribute message
     #   @return [String]
     class InternalServerException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -669,6 +708,7 @@ module Aws::Route53RecoveryReadiness
     #   <p>The token that identifies which batch of results you want to see.</p>
     #   @return [String]
     class ListCellsRequest < Struct.new(
+      nil,
       :max_results,
       :next_token,
       keyword_init: true
@@ -683,6 +723,7 @@ module Aws::Route53RecoveryReadiness
     #   <p>The token that identifies which batch of results you want to see.</p>
     #   @return [String]
     class ListCellsResponse < Struct.new(
+      nil,
       :cells,
       :next_token,
       keyword_init: true
@@ -697,6 +738,7 @@ module Aws::Route53RecoveryReadiness
     #   <p>The token that identifies which batch of results you want to see.</p>
     #   @return [String]
     class ListCrossAccountAuthorizationsRequest < Struct.new(
+      nil,
       :max_results,
       :next_token,
       keyword_init: true
@@ -711,6 +753,7 @@ module Aws::Route53RecoveryReadiness
     #   <p>The token that identifies which batch of results you want to see.</p>
     #   @return [String]
     class ListCrossAccountAuthorizationsResponse < Struct.new(
+      nil,
       :cross_account_authorizations,
       :next_token,
       keyword_init: true
@@ -725,6 +768,7 @@ module Aws::Route53RecoveryReadiness
     #   <p>The token that identifies which batch of results you want to see.</p>
     #   @return [String]
     class ListReadinessChecksRequest < Struct.new(
+      nil,
       :max_results,
       :next_token,
       keyword_init: true
@@ -739,6 +783,7 @@ module Aws::Route53RecoveryReadiness
     #   <p>A list of readiness checks associated with the account.</p>
     #   @return [Array<Types::ReadinessCheckOutput>]
     class ListReadinessChecksResponse < Struct.new(
+      nil,
       :next_token,
       :readiness_checks,
       keyword_init: true
@@ -753,6 +798,7 @@ module Aws::Route53RecoveryReadiness
     #   <p>The token that identifies which batch of results you want to see.</p>
     #   @return [String]
     class ListRecoveryGroupsRequest < Struct.new(
+      nil,
       :max_results,
       :next_token,
       keyword_init: true
@@ -767,6 +813,7 @@ module Aws::Route53RecoveryReadiness
     #   <p>A list of recovery groups.</p>
     #   @return [Array<Types::RecoveryGroupOutput>]
     class ListRecoveryGroupsResponse < Struct.new(
+      nil,
       :next_token,
       :recovery_groups,
       keyword_init: true
@@ -781,6 +828,7 @@ module Aws::Route53RecoveryReadiness
     #   <p>The token that identifies which batch of results you want to see.</p>
     #   @return [String]
     class ListResourceSetsRequest < Struct.new(
+      nil,
       :max_results,
       :next_token,
       keyword_init: true
@@ -795,6 +843,7 @@ module Aws::Route53RecoveryReadiness
     #   <p>A list of resource sets associated with the account.</p>
     #   @return [Array<Types::ResourceSetOutput>]
     class ListResourceSetsResponse < Struct.new(
+      nil,
       :next_token,
       :resource_sets,
       keyword_init: true
@@ -813,6 +862,7 @@ module Aws::Route53RecoveryReadiness
     #   <p>The ID for the readiness rule.</p>
     #   @return [String]
     class ListRulesOutput < Struct.new(
+      nil,
       :resource_type,
       :rule_description,
       :rule_id,
@@ -831,6 +881,7 @@ module Aws::Route53RecoveryReadiness
     #   <p>The resource type that a readiness rule applies to.</p>
     #   @return [String]
     class ListRulesRequest < Struct.new(
+      nil,
       :max_results,
       :next_token,
       :resource_type,
@@ -846,6 +897,7 @@ module Aws::Route53RecoveryReadiness
     #   <p>A list of readiness rules for a specific resource type.</p>
     #   @return [Array<Types::ListRulesOutput>]
     class ListRulesResponse < Struct.new(
+      nil,
       :next_token,
       :rules,
       keyword_init: true
@@ -857,6 +909,7 @@ module Aws::Route53RecoveryReadiness
     #   <p>The Amazon Resource Name (ARN) for a resource.</p>
     #   @return [String]
     class ListTagsForResourcesRequest < Struct.new(
+      nil,
       :resource_arn,
       keyword_init: true
     )
@@ -867,6 +920,7 @@ module Aws::Route53RecoveryReadiness
     #   <p></p>
     #   @return [Hash<String, String>]
     class ListTagsForResourcesResponse < Struct.new(
+      nil,
       :tags,
       keyword_init: true
     )
@@ -878,6 +932,7 @@ module Aws::Route53RecoveryReadiness
     #   <p>The text of a readiness check message.</p>
     #   @return [String]
     class Message < Struct.new(
+      nil,
       :message_text,
       keyword_init: true
     )
@@ -889,6 +944,7 @@ module Aws::Route53RecoveryReadiness
     #   <p>The Network Load Balancer resource Amazon Resource Name (ARN).</p>
     #   @return [String]
     class NLBResource < Struct.new(
+      nil,
       :arn,
       keyword_init: true
     )
@@ -903,6 +959,7 @@ module Aws::Route53RecoveryReadiness
     #   <p>The Route 53 Resource Record Set ID.</p>
     #   @return [String]
     class R53ResourceRecord < Struct.new(
+      nil,
       :domain_name,
       :record_set_id,
       keyword_init: true
@@ -924,6 +981,7 @@ module Aws::Route53RecoveryReadiness
     #   <p>A collection of tags associated with a resource.</p>
     #   @return [Hash<String, String>]
     class ReadinessCheckOutput < Struct.new(
+      nil,
       :readiness_check_arn,
       :readiness_check_name,
       :resource_set,
@@ -941,6 +999,7 @@ module Aws::Route53RecoveryReadiness
     #   <p>The name of a readiness check.</p>
     #   @return [String]
     class ReadinessCheckSummary < Struct.new(
+      nil,
       :readiness,
       :readiness_check_name,
       keyword_init: true
@@ -953,6 +1012,7 @@ module Aws::Route53RecoveryReadiness
     #   <p>Text of the recommendations that are provided to make an application more recovery resilient.</p>
     #   @return [String]
     class Recommendation < Struct.new(
+      nil,
       :recommendation_text,
       keyword_init: true
     )
@@ -973,6 +1033,7 @@ module Aws::Route53RecoveryReadiness
     #   <p>The tags associated with the recovery group.</p>
     #   @return [Hash<String, String>]
     class RecoveryGroupOutput < Struct.new(
+      nil,
       :cells,
       :recovery_group_arn,
       :recovery_group_name,
@@ -996,6 +1057,7 @@ module Aws::Route53RecoveryReadiness
     #   <p>The Amazon Resource Name (ARN) of the Amazon Web Services resource.</p>
     #   @return [String]
     class Resource < Struct.new(
+      nil,
       :component_id,
       :dns_target_resource,
       :readiness_scopes,
@@ -1009,6 +1071,7 @@ module Aws::Route53RecoveryReadiness
     # @!attribute message
     #   @return [String]
     class ResourceNotFoundException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -1029,6 +1092,7 @@ module Aws::Route53RecoveryReadiness
     #   <p>The Amazon Resource Name (ARN) of the resource.</p>
     #   @return [String]
     class ResourceResult < Struct.new(
+      nil,
       :component_id,
       :last_checked_timestamp,
       :readiness,
@@ -1055,6 +1119,7 @@ module Aws::Route53RecoveryReadiness
     #   <p>A collection of tags associated with a resource.</p>
     #   @return [Hash<String, String>]
     class ResourceSetOutput < Struct.new(
+      nil,
       :resource_set_arn,
       :resource_set_name,
       :resource_set_type,
@@ -1079,6 +1144,7 @@ module Aws::Route53RecoveryReadiness
     #   <p>The identifier of the rule.</p>
     #   @return [String]
     class RuleResult < Struct.new(
+      nil,
       :last_checked_timestamp,
       :messages,
       :readiness,
@@ -1095,6 +1161,7 @@ module Aws::Route53RecoveryReadiness
     #   <p></p>
     #   @return [Hash<String, String>]
     class TagResourceRequest < Struct.new(
+      nil,
       :resource_arn,
       :tags,
       keyword_init: true
@@ -1103,6 +1170,7 @@ module Aws::Route53RecoveryReadiness
     end
 
     class TagResourceResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1116,6 +1184,7 @@ module Aws::Route53RecoveryReadiness
     #   <p>The Route 53 resource.</p>
     #   @return [Types::R53ResourceRecord]
     class TargetResource < Struct.new(
+      nil,
       :nlb_resource,
       :r53_resource,
       keyword_init: true
@@ -1127,6 +1196,7 @@ module Aws::Route53RecoveryReadiness
     # @!attribute message
     #   @return [String]
     class ThrottlingException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -1140,6 +1210,7 @@ module Aws::Route53RecoveryReadiness
     #   <p>The keys for tags you add to resources.</p>
     #   @return [Array<String>]
     class UntagResourceRequest < Struct.new(
+      nil,
       :resource_arn,
       :tag_keys,
       keyword_init: true
@@ -1154,6 +1225,7 @@ module Aws::Route53RecoveryReadiness
     #   <p>A list of cell Amazon Resource Names (ARNs), which completely replaces the previous list.</p>
     #   @return [Array<String>]
     class UpdateCellRequest < Struct.new(
+      nil,
       :cell_name,
       :cells,
       keyword_init: true
@@ -1177,6 +1249,7 @@ module Aws::Route53RecoveryReadiness
     #   <p>Tags on the resources.</p>
     #   @return [Hash<String, String>]
     class UpdateCellResponse < Struct.new(
+      nil,
       :cell_arn,
       :cell_name,
       :cells,
@@ -1195,6 +1268,7 @@ module Aws::Route53RecoveryReadiness
     #   <p>The name of the resource set to be checked.</p>
     #   @return [String]
     class UpdateReadinessCheckRequest < Struct.new(
+      nil,
       :readiness_check_name,
       :resource_set_name,
       keyword_init: true
@@ -1215,6 +1289,7 @@ module Aws::Route53RecoveryReadiness
     #   <p>A collection of tags associated with a resource.</p>
     #   @return [Hash<String, String>]
     class UpdateReadinessCheckResponse < Struct.new(
+      nil,
       :readiness_check_arn,
       :readiness_check_name,
       :resource_set,
@@ -1232,6 +1307,7 @@ module Aws::Route53RecoveryReadiness
     #   <p>The name of a recovery group.</p>
     #   @return [String]
     class UpdateRecoveryGroupRequest < Struct.new(
+      nil,
       :cells,
       :recovery_group_name,
       keyword_init: true
@@ -1252,6 +1328,7 @@ module Aws::Route53RecoveryReadiness
     #   <p>The tags associated with the recovery group.</p>
     #   @return [Hash<String, String>]
     class UpdateRecoveryGroupResponse < Struct.new(
+      nil,
       :cells,
       :recovery_group_arn,
       :recovery_group_name,
@@ -1272,6 +1349,7 @@ module Aws::Route53RecoveryReadiness
     #   <p>A list of resource objects.</p>
     #   @return [Array<Types::Resource>]
     class UpdateResourceSetRequest < Struct.new(
+      nil,
       :resource_set_name,
       :resource_set_type,
       :resources,
@@ -1296,6 +1374,7 @@ module Aws::Route53RecoveryReadiness
     #   <p>A collection of tags associated with a resource.</p>
     #   @return [Hash<String, String>]
     class UpdateResourceSetResponse < Struct.new(
+      nil,
       :resource_set_arn,
       :resource_set_name,
       :resource_set_type,
@@ -1310,6 +1389,7 @@ module Aws::Route53RecoveryReadiness
     # @!attribute message
     #   @return [String]
     class ValidationException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )

@@ -11,6 +11,7 @@ module Aws::ElasticsearchService
     #   <p>The id of the inbound connection that you want to accept.</p>
     #   @return [String]
     class AcceptInboundCrossClusterSearchConnectionRequest < Struct.new(
+      nil,
       :cross_cluster_search_connection_id,
       keyword_init: true
     )
@@ -22,6 +23,7 @@ module Aws::ElasticsearchService
     #   <p>Specifies the <code><a>InboundCrossClusterSearchConnection</a></code> of accepted inbound connection. </p>
     #   @return [Types::InboundCrossClusterSearchConnection]
     class AcceptInboundCrossClusterSearchConnectionResponse < Struct.new(
+      nil,
       :cross_cluster_search_connection,
       keyword_init: true
     )
@@ -33,6 +35,7 @@ module Aws::ElasticsearchService
     #   <p>A description of the error.</p>
     #   @return [String]
     class AccessDeniedException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -48,6 +51,7 @@ module Aws::ElasticsearchService
     #   <p>The status of the access policy for the Elasticsearch domain. See <code>OptionStatus</code> for the status information that's included. </p>
     #   @return [Types::OptionStatus]
     class AccessPoliciesStatus < Struct.new(
+      nil,
       :options,
       :status,
       keyword_init: true
@@ -63,6 +67,7 @@ module Aws::ElasticsearchService
     #   <p> List of <code>Tag</code> that need to be added for the Elasticsearch domain. </p>
     #   @return [Array<Types::Tag>]
     class AddTagsRequest < Struct.new(
+      nil,
       :arn,
       :tag_list,
       keyword_init: true
@@ -115,6 +120,7 @@ module Aws::ElasticsearchService
     #     </p>
     #   @return [Array<String>]
     class AdditionalLimit < Struct.new(
+      nil,
       :limit_name,
       :limit_values,
       keyword_init: true
@@ -136,6 +142,7 @@ module Aws::ElasticsearchService
     #   <p> Specifies the status of <code>OptionStatus</code> for advanced options for the specified Elasticsearch domain.</p>
     #   @return [Types::OptionStatus]
     class AdvancedOptionsStatus < Struct.new(
+      nil,
       :options,
       :status,
       keyword_init: true
@@ -160,6 +167,7 @@ module Aws::ElasticsearchService
     #   <p>True if Anonymous auth is enabled. Anonymous auth can be enabled only when AdvancedSecurity is enabled on existing domains.</p>
     #   @return [Boolean]
     class AdvancedSecurityOptions < Struct.new(
+      nil,
       :enabled,
       :internal_user_database_enabled,
       :saml_options,
@@ -187,6 +195,7 @@ module Aws::ElasticsearchService
     #   <p>True if Anonymous auth is enabled. Anonymous auth can be enabled only when AdvancedSecurity is enabled on existing domains.</p>
     #   @return [Boolean]
     class AdvancedSecurityOptionsInput < Struct.new(
+      nil,
       :enabled,
       :internal_user_database_enabled,
       :master_user_options,
@@ -205,6 +214,7 @@ module Aws::ElasticsearchService
     #   <p> Status of the advanced security options for the specified Elasticsearch domain.</p>
     #   @return [Types::OptionStatus]
     class AdvancedSecurityOptionsStatus < Struct.new(
+      nil,
       :options,
       :status,
       keyword_init: true
@@ -226,6 +236,7 @@ module Aws::ElasticsearchService
     #   <p>Name of the domain that you want to associate the package with.</p>
     #   @return [String]
     class AssociatePackageRequest < Struct.new(
+      nil,
       :package_id,
       :domain_name,
       keyword_init: true
@@ -244,6 +255,7 @@ module Aws::ElasticsearchService
     #   <p><code>DomainPackageDetails</code></p>
     #   @return [Types::DomainPackageDetails]
     class AssociatePackageResponse < Struct.new(
+      nil,
       :domain_package_details,
       keyword_init: true
     )
@@ -259,6 +271,7 @@ module Aws::ElasticsearchService
     #   <p>The account ID to grant access to.</p>
     #   @return [String]
     class AuthorizeVpcEndpointAccessRequest < Struct.new(
+      nil,
       :domain_name,
       :account,
       keyword_init: true
@@ -273,6 +286,7 @@ module Aws::ElasticsearchService
     #      domain.</p>
     #   @return [Types::AuthorizedPrincipal]
     class AuthorizeVpcEndpointAccessResponse < Struct.new(
+      nil,
       :authorized_principal,
       keyword_init: true
     )
@@ -288,6 +302,7 @@ module Aws::ElasticsearchService
     #   <p>The IAM principal that is allowed access to the domain.</p>
     #   @return [String]
     class AuthorizedPrincipal < Struct.new(
+      nil,
       :principal_type,
       :principal,
       keyword_init: true
@@ -303,6 +318,7 @@ module Aws::ElasticsearchService
     #   <p>Specifies details of the Auto-Tune action. See the <a href="https://docs.aws.amazon.com/elasticsearch-service/latest/developerguide/auto-tune.html" target="_blank">Developer Guide</a> for more information. </p>
     #   @return [Types::AutoTuneDetails]
     class AutoTune < Struct.new(
+      nil,
       :auto_tune_type,
       :auto_tune_details,
       keyword_init: true
@@ -315,6 +331,7 @@ module Aws::ElasticsearchService
     #   <p>Specifies details of the scheduled Auto-Tune action. See the <a href="https://docs.aws.amazon.com/elasticsearch-service/latest/developerguide/auto-tune.html" target="_blank">Developer Guide</a> for more information. </p>
     #   @return [Types::ScheduledAutoTuneDetails]
     class AutoTuneDetails < Struct.new(
+      nil,
       :scheduled_auto_tune_details,
       keyword_init: true
     )
@@ -332,6 +349,7 @@ module Aws::ElasticsearchService
     #   <p>Specifies cron expression for a recurring maintenance schedule. See the <a href="https://docs.aws.amazon.com/elasticsearch-service/latest/developerguide/auto-tune.html" target="_blank">Developer Guide</a> for more information.</p>
     #   @return [String]
     class AutoTuneMaintenanceSchedule < Struct.new(
+      nil,
       :start_at,
       :duration,
       :cron_expression_for_recurrence,
@@ -351,6 +369,7 @@ module Aws::ElasticsearchService
     #   <p>Specifies list of maitenance schedules. See the <a href="https://docs.aws.amazon.com/elasticsearch-service/latest/developerguide/auto-tune.html" target="_blank">Developer Guide</a> for more information.</p>
     #   @return [Array<Types::AutoTuneMaintenanceSchedule>]
     class AutoTuneOptions < Struct.new(
+      nil,
       :desired_state,
       :rollback_on_disable,
       :maintenance_schedules,
@@ -367,6 +386,7 @@ module Aws::ElasticsearchService
     #   <p>Specifies list of maitenance schedules. See the <a href="https://docs.aws.amazon.com/elasticsearch-service/latest/developerguide/auto-tune.html" target="_blank">Developer Guide</a> for more information.</p>
     #   @return [Array<Types::AutoTuneMaintenanceSchedule>]
     class AutoTuneOptionsInput < Struct.new(
+      nil,
       :desired_state,
       :maintenance_schedules,
       keyword_init: true
@@ -382,6 +402,7 @@ module Aws::ElasticsearchService
     #   <p>Specifies the error message while enabling or disabling the Auto-Tune.</p>
     #   @return [String]
     class AutoTuneOptionsOutput < Struct.new(
+      nil,
       :state,
       :error_message,
       keyword_init: true
@@ -397,6 +418,7 @@ module Aws::ElasticsearchService
     #   <p> Specifies Status of the Auto-Tune options for the specified Elasticsearch domain.</p>
     #   @return [Types::AutoTuneStatus]
     class AutoTuneOptionsStatus < Struct.new(
+      nil,
       :options,
       :status,
       keyword_init: true
@@ -424,6 +446,7 @@ module Aws::ElasticsearchService
     #   <p>Indicates whether the Elasticsearch domain is being deleted.</p>
     #   @return [Boolean]
     class AutoTuneStatus < Struct.new(
+      nil,
       :creation_date,
       :update_date,
       :update_version,
@@ -445,6 +468,7 @@ module Aws::ElasticsearchService
     #   <p>A description of the error.</p>
     #   @return [String]
     class BaseException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -459,6 +483,7 @@ module Aws::ElasticsearchService
     #   <p>When set to <b>True</b>, returns the list of change IDs and properties that will be cancelled without actually cancelling the change.</p>
     #   @return [Boolean]
     class CancelDomainConfigChangeRequest < Struct.new(
+      nil,
       :domain_name,
       :dry_run,
       keyword_init: true
@@ -477,6 +502,7 @@ module Aws::ElasticsearchService
     #   <p>The domain change properties that were cancelled.</p>
     #   @return [Array<Types::CancelledChangeProperty>]
     class CancelDomainConfigChangeResponse < Struct.new(
+      nil,
       :dry_run,
       :cancelled_change_ids,
       :cancelled_change_properties,
@@ -490,6 +516,7 @@ module Aws::ElasticsearchService
     #   <p>The name of the domain that you want to stop the latest service software update on.</p>
     #   @return [String]
     class CancelElasticsearchServiceSoftwareUpdateRequest < Struct.new(
+      nil,
       :domain_name,
       keyword_init: true
     )
@@ -501,6 +528,7 @@ module Aws::ElasticsearchService
     #   <p>The current status of the Elasticsearch service software update.</p>
     #   @return [Types::ServiceSoftwareOptions]
     class CancelElasticsearchServiceSoftwareUpdateResponse < Struct.new(
+      nil,
       :service_software_options,
       keyword_init: true
     )
@@ -518,6 +546,7 @@ module Aws::ElasticsearchService
     #   <p>The current value of the property, after the change was cancelled.</p>
     #   @return [String]
     class CancelledChangeProperty < Struct.new(
+      nil,
       :property_name,
       :cancelled_value,
       :active_value,
@@ -546,6 +575,7 @@ module Aws::ElasticsearchService
     #   <p>The IAM principal who initiated the configuration change.</p>
     #   @return [String]
     class ChangeProgressDetails < Struct.new(
+      nil,
       :change_id,
       :message,
       :config_change_status,
@@ -571,6 +601,7 @@ module Aws::ElasticsearchService
     #   <p>The last updated timestamp of the progress stage.</p>
     #   @return [Time]
     class ChangeProgressStage < Struct.new(
+      nil,
       :name,
       :status,
       :description,
@@ -612,6 +643,7 @@ module Aws::ElasticsearchService
     #   <p>The IAM principal who initiated the configuration change.</p>
     #   @return [String]
     class ChangeProgressStatusDetails < Struct.new(
+      nil,
       :change_id,
       :start_time,
       :status,
@@ -646,6 +678,7 @@ module Aws::ElasticsearchService
     #   <p>Specifies the role ARN that provides Elasticsearch permissions for accessing Cognito resources.</p>
     #   @return [String]
     class CognitoOptions < Struct.new(
+      nil,
       :enabled,
       :user_pool_id,
       :identity_pool_id,
@@ -663,6 +696,7 @@ module Aws::ElasticsearchService
     #   <p>Specifies the status of the Cognito options for the specified Elasticsearch domain.</p>
     #   @return [Types::OptionStatus]
     class CognitoOptionsStatus < Struct.new(
+      nil,
       :options,
       :status,
       keyword_init: true
@@ -675,6 +709,7 @@ module Aws::ElasticsearchService
     #   <p>Enable cold storage option. Accepted values true or false</p>
     #   @return [Boolean]
     class ColdStorageOptions < Struct.new(
+      nil,
       :enabled,
       keyword_init: true
     )
@@ -700,6 +735,7 @@ module Aws::ElasticsearchService
     #       </p>
     #   @return [Array<String>]
     class CompatibleVersionsMap < Struct.new(
+      nil,
       :source_version,
       :target_versions,
       keyword_init: true
@@ -712,6 +748,7 @@ module Aws::ElasticsearchService
     #   <p>A description of the error.</p>
     #   @return [String]
     class ConflictException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -769,6 +806,7 @@ module Aws::ElasticsearchService
     #   <p>A list of <code>Tag</code> added during domain creation.</p>
     #   @return [Array<Types::Tag>]
     class CreateElasticsearchDomainRequest < Struct.new(
+      nil,
       :domain_name,
       :elasticsearch_version,
       :elasticsearch_cluster_config,
@@ -795,6 +833,7 @@ module Aws::ElasticsearchService
     #   <p>The status of the newly created Elasticsearch domain. </p>
     #   @return [Types::ElasticsearchDomainStatus]
     class CreateElasticsearchDomainResponse < Struct.new(
+      nil,
       :domain_status,
       keyword_init: true
     )
@@ -812,6 +851,7 @@ module Aws::ElasticsearchService
     #   <p>Specifies the connection alias that will be used by the customer for this connection.</p>
     #   @return [String]
     class CreateOutboundCrossClusterSearchConnectionRequest < Struct.new(
+      nil,
       :source_domain_info,
       :destination_domain_info,
       :connection_alias,
@@ -837,6 +877,7 @@ module Aws::ElasticsearchService
     #   <p>Unique id for the created outbound connection, which is used for subsequent operations on connection.</p>
     #   @return [String]
     class CreateOutboundCrossClusterSearchConnectionResponse < Struct.new(
+      nil,
       :source_domain_info,
       :destination_domain_info,
       :connection_alias,
@@ -867,6 +908,7 @@ module Aws::ElasticsearchService
     #   <p>The customer S3 location <code>PackageSource</code> for importing the package.</p>
     #   @return [Types::PackageSource]
     class CreatePackageRequest < Struct.new(
+      nil,
       :package_name,
       :package_type,
       :package_description,
@@ -887,6 +929,7 @@ module Aws::ElasticsearchService
     #   <p>Information about the package <code>PackageDetails</code>.</p>
     #   @return [Types::PackageDetails]
     class CreatePackageResponse < Struct.new(
+      nil,
       :package_details,
       keyword_init: true
     )
@@ -904,6 +947,7 @@ module Aws::ElasticsearchService
     #   <p>Unique, case-sensitive identifier to ensure idempotency of the request.</p>
     #   @return [String]
     class CreateVpcEndpointRequest < Struct.new(
+      nil,
       :domain_arn,
       :vpc_options,
       :client_token,
@@ -917,6 +961,7 @@ module Aws::ElasticsearchService
     #   <p>Information about the newly created VPC endpoint.</p>
     #   @return [Types::VpcEndpoint]
     class CreateVpcEndpointResponse < Struct.new(
+      nil,
       :vpc_endpoint,
       keyword_init: true
     )
@@ -928,6 +973,7 @@ module Aws::ElasticsearchService
     #   <p>The name of the Elasticsearch domain that you want to permanently delete.</p>
     #   @return [String]
     class DeleteElasticsearchDomainRequest < Struct.new(
+      nil,
       :domain_name,
       keyword_init: true
     )
@@ -939,6 +985,7 @@ module Aws::ElasticsearchService
     #   <p>The status of the Elasticsearch domain being deleted.</p>
     #   @return [Types::ElasticsearchDomainStatus]
     class DeleteElasticsearchDomainResponse < Struct.new(
+      nil,
       :domain_status,
       keyword_init: true
     )
@@ -950,6 +997,7 @@ module Aws::ElasticsearchService
     #   <p>The id of the inbound connection that you want to permanently delete.</p>
     #   @return [String]
     class DeleteInboundCrossClusterSearchConnectionRequest < Struct.new(
+      nil,
       :cross_cluster_search_connection_id,
       keyword_init: true
     )
@@ -961,6 +1009,7 @@ module Aws::ElasticsearchService
     #   <p>Specifies the <code><a>InboundCrossClusterSearchConnection</a></code> of deleted inbound connection. </p>
     #   @return [Types::InboundCrossClusterSearchConnection]
     class DeleteInboundCrossClusterSearchConnectionResponse < Struct.new(
+      nil,
       :cross_cluster_search_connection,
       keyword_init: true
     )
@@ -972,6 +1021,7 @@ module Aws::ElasticsearchService
     #   <p>The id of the outbound connection that you want to permanently delete.</p>
     #   @return [String]
     class DeleteOutboundCrossClusterSearchConnectionRequest < Struct.new(
+      nil,
       :cross_cluster_search_connection_id,
       keyword_init: true
     )
@@ -983,6 +1033,7 @@ module Aws::ElasticsearchService
     #   <p>Specifies the <code><a>OutboundCrossClusterSearchConnection</a></code> of deleted outbound connection. </p>
     #   @return [Types::OutboundCrossClusterSearchConnection]
     class DeleteOutboundCrossClusterSearchConnectionResponse < Struct.new(
+      nil,
       :cross_cluster_search_connection,
       keyword_init: true
     )
@@ -1000,6 +1051,7 @@ module Aws::ElasticsearchService
     #   <p>Internal ID of the package that you want to delete. Use <code>DescribePackages</code> to find this value.</p>
     #   @return [String]
     class DeletePackageRequest < Struct.new(
+      nil,
       :package_id,
       keyword_init: true
     )
@@ -1017,6 +1069,7 @@ module Aws::ElasticsearchService
     #   <p><code>PackageDetails</code></p>
     #   @return [Types::PackageDetails]
     class DeletePackageResponse < Struct.new(
+      nil,
       :package_details,
       keyword_init: true
     )
@@ -1028,6 +1081,7 @@ module Aws::ElasticsearchService
     #   <p>The unique identifier of the endpoint to be deleted.</p>
     #   @return [String]
     class DeleteVpcEndpointRequest < Struct.new(
+      nil,
       :vpc_endpoint_id,
       keyword_init: true
     )
@@ -1040,6 +1094,7 @@ module Aws::ElasticsearchService
     #      or <code>DELETE_FAILED</code>).</p>
     #   @return [Types::VpcEndpointSummary]
     class DeleteVpcEndpointResponse < Struct.new(
+      nil,
       :vpc_endpoint_summary,
       keyword_init: true
     )
@@ -1057,6 +1112,7 @@ module Aws::ElasticsearchService
     #   <p>NextToken is sent in case the earlier API call results contain the NextToken. It is used for pagination.</p>
     #   @return [String]
     class DescribeDomainAutoTunesRequest < Struct.new(
+      nil,
       :domain_name,
       :max_results,
       :next_token,
@@ -1073,6 +1129,7 @@ module Aws::ElasticsearchService
     #   <p>Specifies an identifier to allow retrieval of paginated results.</p>
     #   @return [String]
     class DescribeDomainAutoTunesResponse < Struct.new(
+      nil,
       :auto_tunes,
       :next_token,
       keyword_init: true
@@ -1092,6 +1149,7 @@ module Aws::ElasticsearchService
     #         </p>
     #   @return [String]
     class DescribeDomainChangeProgressRequest < Struct.new(
+      nil,
       :domain_name,
       :change_id,
       keyword_init: true
@@ -1107,6 +1165,7 @@ module Aws::ElasticsearchService
     #         </p>
     #   @return [Types::ChangeProgressStatusDetails]
     class DescribeDomainChangeProgressResponse < Struct.new(
+      nil,
       :change_progress_status,
       keyword_init: true
     )
@@ -1118,6 +1177,7 @@ module Aws::ElasticsearchService
     #   <p>The Elasticsearch domain that you want to get information about.</p>
     #   @return [String]
     class DescribeElasticsearchDomainConfigRequest < Struct.new(
+      nil,
       :domain_name,
       keyword_init: true
     )
@@ -1129,6 +1189,7 @@ module Aws::ElasticsearchService
     #   <p>The configuration information of the domain requested in the <code>DescribeElasticsearchDomainConfig</code> request.</p>
     #   @return [Types::ElasticsearchDomainConfig]
     class DescribeElasticsearchDomainConfigResponse < Struct.new(
+      nil,
       :domain_config,
       keyword_init: true
     )
@@ -1140,6 +1201,7 @@ module Aws::ElasticsearchService
     #   <p>The name of the Elasticsearch domain for which you want information.</p>
     #   @return [String]
     class DescribeElasticsearchDomainRequest < Struct.new(
+      nil,
       :domain_name,
       keyword_init: true
     )
@@ -1151,6 +1213,7 @@ module Aws::ElasticsearchService
     #   <p>The current status of the Elasticsearch domain.</p>
     #   @return [Types::ElasticsearchDomainStatus]
     class DescribeElasticsearchDomainResponse < Struct.new(
+      nil,
       :domain_status,
       keyword_init: true
     )
@@ -1162,6 +1225,7 @@ module Aws::ElasticsearchService
     #   <p>The Elasticsearch domains for which you want information.</p>
     #   @return [Array<String>]
     class DescribeElasticsearchDomainsRequest < Struct.new(
+      nil,
       :domain_names,
       keyword_init: true
     )
@@ -1173,6 +1237,7 @@ module Aws::ElasticsearchService
     #   <p>The status of the domains requested in the <code>DescribeElasticsearchDomains</code> request.</p>
     #   @return [Array<Types::ElasticsearchDomainStatus>]
     class DescribeElasticsearchDomainsResponse < Struct.new(
+      nil,
       :domain_status_list,
       keyword_init: true
     )
@@ -1216,6 +1281,7 @@ module Aws::ElasticsearchService
     #       </p>
     #   @return [String]
     class DescribeElasticsearchInstanceTypeLimitsRequest < Struct.new(
+      nil,
       :domain_name,
       :instance_type,
       :elasticsearch_version,
@@ -1244,6 +1310,7 @@ module Aws::ElasticsearchService
     #       </p>
     #   @return [Hash<String, Types::Limits>]
     class DescribeElasticsearchInstanceTypeLimitsResponse < Struct.new(
+      nil,
       :limits_by_role,
       keyword_init: true
     )
@@ -1271,6 +1338,7 @@ module Aws::ElasticsearchService
     #   <p> NextToken is sent in case the earlier API call results contain the NextToken. It is used for pagination.</p>
     #   @return [String]
     class DescribeInboundCrossClusterSearchConnectionsRequest < Struct.new(
+      nil,
       :filters,
       :max_results,
       :next_token,
@@ -1288,6 +1356,7 @@ module Aws::ElasticsearchService
     #       </p>
     #   @return [String]
     class DescribeInboundCrossClusterSearchConnectionsResponse < Struct.new(
+      nil,
       :cross_cluster_search_connections,
       :next_token,
       keyword_init: true
@@ -1316,6 +1385,7 @@ module Aws::ElasticsearchService
     #   <p> NextToken is sent in case the earlier API call results contain the NextToken. It is used for pagination.</p>
     #   @return [String]
     class DescribeOutboundCrossClusterSearchConnectionsRequest < Struct.new(
+      nil,
       :filters,
       :max_results,
       :next_token,
@@ -1333,6 +1403,7 @@ module Aws::ElasticsearchService
     #       </p>
     #   @return [String]
     class DescribeOutboundCrossClusterSearchConnectionsResponse < Struct.new(
+      nil,
       :cross_cluster_search_connections,
       :next_token,
       keyword_init: true
@@ -1348,6 +1419,7 @@ module Aws::ElasticsearchService
     #   <p>A non-empty list of values for the specified field.</p>
     #   @return [Array<String>]
     class DescribePackagesFilter < Struct.new(
+      nil,
       :name,
       :value,
       keyword_init: true
@@ -1372,6 +1444,7 @@ module Aws::ElasticsearchService
     #   <p>Used for pagination. Only necessary if a previous API call includes a non-null NextToken value. If provided, returns results for the next page.</p>
     #   @return [String]
     class DescribePackagesRequest < Struct.new(
+      nil,
       :filters,
       :max_results,
       :next_token,
@@ -1393,6 +1466,7 @@ module Aws::ElasticsearchService
     # @!attribute next_token
     #   @return [String]
     class DescribePackagesResponse < Struct.new(
+      nil,
       :package_details_list,
       :next_token,
       keyword_init: true
@@ -1412,6 +1486,7 @@ module Aws::ElasticsearchService
     #   		containing NextToken. It is used for pagination.</p>
     #   @return [String]
     class DescribeReservedElasticsearchInstanceOfferingsRequest < Struct.new(
+      nil,
       :reserved_elasticsearch_instance_offering_id,
       :max_results,
       :next_token,
@@ -1428,6 +1503,7 @@ module Aws::ElasticsearchService
     #   <p>List of reserved Elasticsearch instance offerings</p>
     #   @return [Array<Types::ReservedElasticsearchInstanceOffering>]
     class DescribeReservedElasticsearchInstanceOfferingsResponse < Struct.new(
+      nil,
       :next_token,
       :reserved_elasticsearch_instance_offerings,
       keyword_init: true
@@ -1447,6 +1523,7 @@ module Aws::ElasticsearchService
     #   		containing NextToken. It is used for pagination.</p>
     #   @return [String]
     class DescribeReservedElasticsearchInstancesRequest < Struct.new(
+      nil,
       :reserved_elasticsearch_instance_id,
       :max_results,
       :next_token,
@@ -1463,6 +1540,7 @@ module Aws::ElasticsearchService
     #   <p>List of reserved Elasticsearch instances.</p>
     #   @return [Array<Types::ReservedElasticsearchInstance>]
     class DescribeReservedElasticsearchInstancesResponse < Struct.new(
+      nil,
       :next_token,
       :reserved_elasticsearch_instances,
       keyword_init: true
@@ -1475,6 +1553,7 @@ module Aws::ElasticsearchService
     #   <p>The unique identifiers of the endpoints to get information about.</p>
     #   @return [Array<String>]
     class DescribeVpcEndpointsRequest < Struct.new(
+      nil,
       :vpc_endpoint_ids,
       keyword_init: true
     )
@@ -1490,6 +1569,7 @@ module Aws::ElasticsearchService
     #   <p>Any errors associated with the request.</p>
     #   @return [Array<Types::VpcEndpointError>]
     class DescribeVpcEndpointsResponse < Struct.new(
+      nil,
       :vpc_endpoints,
       :vpc_endpoint_errors,
       keyword_init: true
@@ -1502,6 +1582,7 @@ module Aws::ElasticsearchService
     #   <p>A description of the error.</p>
     #   @return [String]
     class DisabledOperationException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -1522,6 +1603,7 @@ module Aws::ElasticsearchService
     #   <p>Name of the domain that you want to associate the package with.</p>
     #   @return [String]
     class DissociatePackageRequest < Struct.new(
+      nil,
       :package_id,
       :domain_name,
       keyword_init: true
@@ -1540,6 +1622,7 @@ module Aws::ElasticsearchService
     #   <p><code>DomainPackageDetails</code></p>
     #   @return [Types::DomainPackageDetails]
     class DissociatePackageResponse < Struct.new(
+      nil,
       :domain_package_details,
       keyword_init: true
     )
@@ -1570,6 +1653,7 @@ module Aws::ElasticsearchService
     #   <p>Specify ACM certificate ARN for your custom endpoint.</p>
     #   @return [String]
     class DomainEndpointOptions < Struct.new(
+      nil,
       :enforce_https,
       :tls_security_policy,
       :custom_endpoint_enabled,
@@ -1588,6 +1672,7 @@ module Aws::ElasticsearchService
     #   <p>The status of the endpoint options for the Elasticsearch domain. See <code>OptionStatus</code> for the status information that's included. </p>
     #   @return [Types::OptionStatus]
     class DomainEndpointOptionsStatus < Struct.new(
+      nil,
       :options,
       :status,
       keyword_init: true
@@ -1602,6 +1687,7 @@ module Aws::ElasticsearchService
     #   <p> Specifies the <code>EngineType</code> of the domain.</p>
     #   @return [String]
     class DomainInfo < Struct.new(
+      nil,
       :domain_name,
       :engine_type,
       keyword_init: true
@@ -1617,6 +1703,7 @@ module Aws::ElasticsearchService
     # @!attribute region
     #   @return [String]
     class DomainInformation < Struct.new(
+      nil,
       :owner_id,
       :domain_name,
       :region,
@@ -1653,6 +1740,7 @@ module Aws::ElasticsearchService
     #   <p>Additional information if the package is in an error state. Null otherwise.</p>
     #   @return [Types::ErrorDetails]
     class DomainPackageDetails < Struct.new(
+      nil,
       :package_id,
       :package_name,
       :package_type,
@@ -1681,6 +1769,7 @@ module Aws::ElasticsearchService
     #   <p>Contains an optional message associated with the DryRunResults.</p>
     #   @return [String]
     class DryRunResults < Struct.new(
+      nil,
       :deployment_type,
       :message,
       keyword_init: true
@@ -1696,6 +1785,7 @@ module Aws::ElasticsearchService
     #   <p>Specifies the unit of a maintenance schedule duration. Valid value is HOURS. See the <a href="https://docs.aws.amazon.com/elasticsearch-service/latest/developerguide/auto-tune.html" target="_blank">Developer Guide</a> for more information.</p>
     #   @return [String]
     class Duration < Struct.new(
+      nil,
       :value,
       :unit,
       keyword_init: true
@@ -1720,6 +1810,7 @@ module Aws::ElasticsearchService
     #   <p>Specifies the Throughput for GP3 EBS volume (SSD).</p>
     #   @return [Integer]
     class EBSOptions < Struct.new(
+      nil,
       :ebs_enabled,
       :volume_type,
       :volume_size,
@@ -1738,6 +1829,7 @@ module Aws::ElasticsearchService
     #   <p> Specifies the status of the EBS options for the specified Elasticsearch domain.</p>
     #   @return [Types::OptionStatus]
     class EBSOptionsStatus < Struct.new(
+      nil,
       :options,
       :status,
       keyword_init: true
@@ -1780,6 +1872,7 @@ module Aws::ElasticsearchService
     #   <p>Specifies the <code>ColdStorageOptions</code> config for Elasticsearch Domain</p>
     #   @return [Types::ColdStorageOptions]
     class ElasticsearchClusterConfig < Struct.new(
+      nil,
       :instance_type,
       :instance_count,
       :dedicated_master_enabled,
@@ -1804,6 +1897,7 @@ module Aws::ElasticsearchService
     #   <p> Specifies the status of the configuration for the specified Elasticsearch domain.</p>
     #   @return [Types::OptionStatus]
     class ElasticsearchClusterConfigStatus < Struct.new(
+      nil,
       :options,
       :status,
       keyword_init: true
@@ -1861,6 +1955,7 @@ module Aws::ElasticsearchService
     #   <p>Information about the domain properties that are currently being modified.</p>
     #   @return [Array<Types::ModifyingProperties>]
     class ElasticsearchDomainConfig < Struct.new(
+      nil,
       :elasticsearch_version,
       :elasticsearch_cluster_config,
       :ebs_options,
@@ -1964,6 +2059,7 @@ module Aws::ElasticsearchService
     #   <p>Information about the domain properties that are currently being modified.</p>
     #   @return [Array<Types::ModifyingProperties>]
     class ElasticsearchDomainStatus < Struct.new(
+      nil,
       :domain_id,
       :domain_name,
       :arn,
@@ -2004,6 +2100,7 @@ module Aws::ElasticsearchService
     #   <p> Specifies the status of the Elasticsearch version options for the specified Elasticsearch domain.</p>
     #   @return [Types::OptionStatus]
     class ElasticsearchVersionStatus < Struct.new(
+      nil,
       :options,
       :status,
       keyword_init: true
@@ -2019,6 +2116,7 @@ module Aws::ElasticsearchService
     #   <p> Specifies the KMS Key ID for Encryption At Rest options.</p>
     #   @return [String]
     class EncryptionAtRestOptions < Struct.new(
+      nil,
       :enabled,
       :kms_key_id,
       keyword_init: true
@@ -2034,6 +2132,7 @@ module Aws::ElasticsearchService
     #   <p> Specifies the status of the Encryption At Rest options for the specified Elasticsearch domain.</p>
     #   @return [Types::OptionStatus]
     class EncryptionAtRestOptionsStatus < Struct.new(
+      nil,
       :options,
       :status,
       keyword_init: true
@@ -2046,6 +2145,7 @@ module Aws::ElasticsearchService
     # @!attribute error_message
     #   @return [String]
     class ErrorDetails < Struct.new(
+      nil,
       :error_type,
       :error_message,
       keyword_init: true
@@ -2070,6 +2170,7 @@ module Aws::ElasticsearchService
     #       </p>
     #   @return [Array<String>]
     class Filter < Struct.new(
+      nil,
       :name,
       :values,
       keyword_init: true
@@ -2088,6 +2189,7 @@ module Aws::ElasticsearchService
     #   <p>The name of an Elasticsearch domain. Domain names are unique across the domains owned by an account within an AWS region. Domain names start with a letter or number and can contain the following characters: a-z (lowercase), 0-9, and - (hyphen).</p>
     #   @return [String]
     class GetCompatibleElasticsearchVersionsRequest < Struct.new(
+      nil,
       :domain_name,
       keyword_init: true
     )
@@ -2111,6 +2213,7 @@ module Aws::ElasticsearchService
     #       </p>
     #   @return [Array<Types::CompatibleVersionsMap>]
     class GetCompatibleElasticsearchVersionsResponse < Struct.new(
+      nil,
       :compatible_elasticsearch_versions,
       keyword_init: true
     )
@@ -2134,6 +2237,7 @@ module Aws::ElasticsearchService
     #   <p>Used for pagination. Only necessary if a previous API call includes a non-null NextToken value. If provided, returns results for the next page.</p>
     #   @return [String]
     class GetPackageVersionHistoryRequest < Struct.new(
+      nil,
       :package_id,
       :max_results,
       :next_token,
@@ -2157,6 +2261,7 @@ module Aws::ElasticsearchService
     # @!attribute next_token
     #   @return [String]
     class GetPackageVersionHistoryResponse < Struct.new(
+      nil,
       :package_id,
       :package_version_history_list,
       :next_token,
@@ -2187,6 +2292,7 @@ module Aws::ElasticsearchService
     #       </p>
     #   @return [String]
     class GetUpgradeHistoryRequest < Struct.new(
+      nil,
       :domain_name,
       :max_results,
       :next_token,
@@ -2219,6 +2325,7 @@ module Aws::ElasticsearchService
     #   <p>Pagination token that needs to be supplied to the next call to get the next page of results</p>
     #   @return [String]
     class GetUpgradeHistoryResponse < Struct.new(
+      nil,
       :upgrade_histories,
       :next_token,
       keyword_init: true
@@ -2237,6 +2344,7 @@ module Aws::ElasticsearchService
     #   <p>The name of an Elasticsearch domain. Domain names are unique across the domains owned by an account within an AWS region. Domain names start with a letter or number and can contain the following characters: a-z (lowercase), 0-9, and - (hyphen).</p>
     #   @return [String]
     class GetUpgradeStatusRequest < Struct.new(
+      nil,
       :domain_name,
       keyword_init: true
     )
@@ -2279,6 +2387,7 @@ module Aws::ElasticsearchService
     #   <p>A string that describes the update briefly</p>
     #   @return [String]
     class GetUpgradeStatusResponse < Struct.new(
+      nil,
       :upgrade_step,
       :step_status,
       :upgrade_name,
@@ -2301,6 +2410,7 @@ module Aws::ElasticsearchService
     #   <p>Specifies the <code><a>InboundCrossClusterSearchConnectionStatus</a></code> for the outbound connection.</p>
     #   @return [Types::InboundCrossClusterSearchConnectionStatus]
     class InboundCrossClusterSearchConnection < Struct.new(
+      nil,
       :source_domain_info,
       :destination_domain_info,
       :cross_cluster_search_connection_id,
@@ -2326,6 +2436,7 @@ module Aws::ElasticsearchService
     #   <p>Specifies verbose information for the inbound connection status.</p>
     #   @return [String]
     class InboundCrossClusterSearchConnectionStatus < Struct.new(
+      nil,
       :status_code,
       :message,
       keyword_init: true
@@ -2348,6 +2459,7 @@ module Aws::ElasticsearchService
     #       </p>
     #   @return [Integer]
     class InstanceCountLimits < Struct.new(
+      nil,
       :minimum_instance_count,
       :maximum_instance_count,
       keyword_init: true
@@ -2370,6 +2482,7 @@ module Aws::ElasticsearchService
     #       </p>
     #   @return [Types::InstanceCountLimits]
     class InstanceLimits < Struct.new(
+      nil,
       :instance_count_limits,
       keyword_init: true
     )
@@ -2381,6 +2494,7 @@ module Aws::ElasticsearchService
     #   <p>A description of the error.</p>
     #   @return [String]
     class InternalException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -2392,6 +2506,7 @@ module Aws::ElasticsearchService
     #   <p>A description of the error.</p>
     #   @return [String]
     class InvalidPaginationTokenException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -2403,6 +2518,7 @@ module Aws::ElasticsearchService
     #   <p>A description of the error.</p>
     #   @return [String]
     class InvalidTypeException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -2414,6 +2530,7 @@ module Aws::ElasticsearchService
     #   <p>A description of the error.</p>
     #   @return [String]
     class LimitExceededException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -2454,6 +2571,7 @@ module Aws::ElasticsearchService
     #       </p>
     #   @return [Array<Types::AdditionalLimit>]
     class Limits < Struct.new(
+      nil,
       :storage_types,
       :instance_limits,
       :additional_limits,
@@ -2467,6 +2585,7 @@ module Aws::ElasticsearchService
     #   <p> Optional parameter to filter the output by domain engine type. Acceptable values are 'Elasticsearch' and 'OpenSearch'. </p>
     #   @return [String]
     class ListDomainNamesRequest < Struct.new(
+      nil,
       :engine_type,
       keyword_init: true
     )
@@ -2478,6 +2597,7 @@ module Aws::ElasticsearchService
     #   <p>List of domain names and respective engine types.</p>
     #   @return [Array<Types::DomainInfo>]
     class ListDomainNamesResponse < Struct.new(
+      nil,
       :domain_names,
       keyword_init: true
     )
@@ -2501,6 +2621,7 @@ module Aws::ElasticsearchService
     #   <p>Used for pagination. Only necessary if a previous API call includes a non-null NextToken value. If provided, returns results for the next page.</p>
     #   @return [String]
     class ListDomainsForPackageRequest < Struct.new(
+      nil,
       :package_id,
       :max_results,
       :next_token,
@@ -2522,6 +2643,7 @@ module Aws::ElasticsearchService
     # @!attribute next_token
     #   @return [String]
     class ListDomainsForPackageResponse < Struct.new(
+      nil,
       :domain_package_details_list,
       :next_token,
       keyword_init: true
@@ -2558,6 +2680,7 @@ module Aws::ElasticsearchService
     #       </p>
     #   @return [String]
     class ListElasticsearchInstanceTypesRequest < Struct.new(
+      nil,
       :elasticsearch_version,
       :domain_name,
       :max_results,
@@ -2590,6 +2713,7 @@ module Aws::ElasticsearchService
     #       </p>
     #   @return [String]
     class ListElasticsearchInstanceTypesResponse < Struct.new(
+      nil,
       :elasticsearch_instance_types,
       :next_token,
       keyword_init: true
@@ -2633,6 +2757,7 @@ module Aws::ElasticsearchService
     #       </p>
     #   @return [String]
     class ListElasticsearchVersionsRequest < Struct.new(
+      nil,
       :max_results,
       :next_token,
       keyword_init: true
@@ -2658,6 +2783,7 @@ module Aws::ElasticsearchService
     #       </p>
     #   @return [String]
     class ListElasticsearchVersionsResponse < Struct.new(
+      nil,
       :elasticsearch_versions,
       :next_token,
       keyword_init: true
@@ -2682,6 +2808,7 @@ module Aws::ElasticsearchService
     #   <p>Used for pagination. Only necessary if a previous API call includes a non-null NextToken value. If provided, returns results for the next page.</p>
     #   @return [String]
     class ListPackagesForDomainRequest < Struct.new(
+      nil,
       :domain_name,
       :max_results,
       :next_token,
@@ -2704,6 +2831,7 @@ module Aws::ElasticsearchService
     #   <p>Pagination token that needs to be supplied to the next call to get the next page of results.</p>
     #   @return [String]
     class ListPackagesForDomainResponse < Struct.new(
+      nil,
       :domain_package_details_list,
       :next_token,
       keyword_init: true
@@ -2716,6 +2844,7 @@ module Aws::ElasticsearchService
     #   <p> Specify the <code>ARN</code> for the Elasticsearch domain to which the tags are attached that you want to view.</p>
     #   @return [String]
     class ListTagsRequest < Struct.new(
+      nil,
       :arn,
       keyword_init: true
     )
@@ -2727,6 +2856,7 @@ module Aws::ElasticsearchService
     #   <p> List of <code>Tag</code> for the requested Elasticsearch domain.</p>
     #   @return [Array<Types::Tag>]
     class ListTagsResponse < Struct.new(
+      nil,
       :tag_list,
       keyword_init: true
     )
@@ -2742,6 +2872,7 @@ module Aws::ElasticsearchService
     #   <p>Provides an identifier to allow retrieval of paginated results.</p>
     #   @return [String]
     class ListVpcEndpointAccessRequest < Struct.new(
+      nil,
       :domain_name,
       :next_token,
       keyword_init: true
@@ -2758,6 +2889,7 @@ module Aws::ElasticsearchService
     #   <p>Provides an identifier to allow retrieval of paginated results.</p>
     #   @return [String]
     class ListVpcEndpointAccessResponse < Struct.new(
+      nil,
       :authorized_principal_list,
       :next_token,
       keyword_init: true
@@ -2773,6 +2905,7 @@ module Aws::ElasticsearchService
     #   <p>Provides an identifier to allow retrieval of paginated results.</p>
     #   @return [String]
     class ListVpcEndpointsForDomainRequest < Struct.new(
+      nil,
       :domain_name,
       :next_token,
       keyword_init: true
@@ -2788,6 +2921,7 @@ module Aws::ElasticsearchService
     #   <p>Information about each endpoint associated with the domain.</p>
     #   @return [String]
     class ListVpcEndpointsForDomainResponse < Struct.new(
+      nil,
       :vpc_endpoint_summary_list,
       :next_token,
       keyword_init: true
@@ -2800,6 +2934,7 @@ module Aws::ElasticsearchService
     #   <p>Identifier to allow retrieval of paginated results.</p>
     #   @return [String]
     class ListVpcEndpointsRequest < Struct.new(
+      nil,
       :next_token,
       keyword_init: true
     )
@@ -2814,6 +2949,7 @@ module Aws::ElasticsearchService
     #   <p>Provides an identifier to allow retrieval of paginated results.</p>
     #   @return [String]
     class ListVpcEndpointsResponse < Struct.new(
+      nil,
       :vpc_endpoint_summary_list,
       :next_token,
       keyword_init: true
@@ -2835,6 +2971,7 @@ module Aws::ElasticsearchService
     #   <p> Specifies whether given log publishing option is enabled or not.</p>
     #   @return [Boolean]
     class LogPublishingOption < Struct.new(
+      nil,
       :cloud_watch_logs_log_group_arn,
       :enabled,
       keyword_init: true
@@ -2850,6 +2987,7 @@ module Aws::ElasticsearchService
     #   <p>The status of the log publishing options for the Elasticsearch domain. See <code>OptionStatus</code> for the status information that's included. </p>
     #   @return [Types::OptionStatus]
     class LogPublishingOptionsStatus < Struct.new(
+      nil,
       :options,
       :status,
       keyword_init: true
@@ -2868,6 +3006,7 @@ module Aws::ElasticsearchService
     #   <p>The master user's password, which is stored in the Amazon Elasticsearch Service domain's internal database.</p>
     #   @return [String]
     class MasterUserOptions < Struct.new(
+      nil,
       :master_user_arn,
       :master_user_name,
       :master_user_password,
@@ -2894,6 +3033,7 @@ module Aws::ElasticsearchService
     #       </ul>
     #   @return [String]
     class ModifyingProperties < Struct.new(
+      nil,
       :name,
       :active_value,
       :pending_value,
@@ -2908,6 +3048,7 @@ module Aws::ElasticsearchService
     #   <p>Specify true to enable node-to-node encryption.</p>
     #   @return [Boolean]
     class NodeToNodeEncryptionOptions < Struct.new(
+      nil,
       :enabled,
       keyword_init: true
     )
@@ -2922,6 +3063,7 @@ module Aws::ElasticsearchService
     #   <p>Specifies the status of the node-to-node encryption options for the specified Elasticsearch domain.</p>
     #   @return [Types::OptionStatus]
     class NodeToNodeEncryptionOptionsStatus < Struct.new(
+      nil,
       :options,
       :status,
       keyword_init: true
@@ -2946,6 +3088,7 @@ module Aws::ElasticsearchService
     #   <p>Indicates whether the Elasticsearch domain is being deleted.</p>
     #   @return [Boolean]
     class OptionStatus < Struct.new(
+      nil,
       :creation_date,
       :update_date,
       :update_version,
@@ -2978,6 +3121,7 @@ module Aws::ElasticsearchService
     #   <p>Specifies the <code><a>OutboundCrossClusterSearchConnectionStatus</a></code> for the outbound connection.</p>
     #   @return [Types::OutboundCrossClusterSearchConnectionStatus]
     class OutboundCrossClusterSearchConnection < Struct.new(
+      nil,
       :source_domain_info,
       :destination_domain_info,
       :cross_cluster_search_connection_id,
@@ -3006,6 +3150,7 @@ module Aws::ElasticsearchService
     #   <p>Specifies verbose information for the outbound connection status.</p>
     #   @return [String]
     class OutboundCrossClusterSearchConnectionStatus < Struct.new(
+      nil,
       :status_code,
       :message,
       keyword_init: true
@@ -3040,6 +3185,7 @@ module Aws::ElasticsearchService
     #   <p>Additional information if the package is in an error state. Null otherwise.</p>
     #   @return [Types::ErrorDetails]
     class PackageDetails < Struct.new(
+      nil,
       :package_id,
       :package_name,
       :package_type,
@@ -3062,6 +3208,7 @@ module Aws::ElasticsearchService
     #   <p>Key (file name) of the package.</p>
     #   @return [String]
     class PackageSource < Struct.new(
+      nil,
       :s3_bucket_name,
       :s3_key,
       keyword_init: true
@@ -3080,6 +3227,7 @@ module Aws::ElasticsearchService
     #   <p>Timestamp which tells creation time of the package version.</p>
     #   @return [Time]
     class PackageVersionHistory < Struct.new(
+      nil,
       :package_version,
       :commit_message,
       :created_at,
@@ -3099,6 +3247,7 @@ module Aws::ElasticsearchService
     #   <p>The number of Elasticsearch instances to reserve.</p>
     #   @return [Integer]
     class PurchaseReservedElasticsearchInstanceOfferingRequest < Struct.new(
+      nil,
       :reserved_elasticsearch_instance_offering_id,
       :reservation_name,
       :instance_count,
@@ -3115,6 +3264,7 @@ module Aws::ElasticsearchService
     #   <p>The customer-specified identifier used to track this reservation.</p>
     #   @return [String]
     class PurchaseReservedElasticsearchInstanceOfferingResponse < Struct.new(
+      nil,
       :reserved_elasticsearch_instance_id,
       :reservation_name,
       keyword_init: true
@@ -3130,6 +3280,7 @@ module Aws::ElasticsearchService
     #   <p>The frequency of the recurring charge.</p>
     #   @return [String]
     class RecurringCharge < Struct.new(
+      nil,
       :recurring_charge_amount,
       :recurring_charge_frequency,
       keyword_init: true
@@ -3142,6 +3293,7 @@ module Aws::ElasticsearchService
     #   <p>The id of the inbound connection that you want to reject.</p>
     #   @return [String]
     class RejectInboundCrossClusterSearchConnectionRequest < Struct.new(
+      nil,
       :cross_cluster_search_connection_id,
       keyword_init: true
     )
@@ -3153,6 +3305,7 @@ module Aws::ElasticsearchService
     #   <p>Specifies the <code><a>InboundCrossClusterSearchConnection</a></code> of rejected inbound connection. </p>
     #   @return [Types::InboundCrossClusterSearchConnection]
     class RejectInboundCrossClusterSearchConnectionResponse < Struct.new(
+      nil,
       :cross_cluster_search_connection,
       keyword_init: true
     )
@@ -3167,6 +3320,7 @@ module Aws::ElasticsearchService
     #   <p>Specifies the <code>TagKey</code> list which you want to remove from the Elasticsearch domain.</p>
     #   @return [Array<String>]
     class RemoveTagsRequest < Struct.new(
+      nil,
       :arn,
       :tag_keys,
       keyword_init: true
@@ -3215,6 +3369,7 @@ module Aws::ElasticsearchService
     #   <p>The charge to your account regardless of whether you are creating any domains using the instance offering.</p>
     #   @return [Array<Types::RecurringCharge>]
     class ReservedElasticsearchInstance < Struct.new(
+      nil,
       :reservation_name,
       :reserved_elasticsearch_instance_id,
       :reserved_elasticsearch_instance_offering_id,
@@ -3265,6 +3420,7 @@ module Aws::ElasticsearchService
     #   <p>The charge to your account regardless of whether you are creating any domains using the instance offering.</p>
     #   @return [Array<Types::RecurringCharge>]
     class ReservedElasticsearchInstanceOffering < Struct.new(
+      nil,
       :reserved_elasticsearch_instance_offering_id,
       :elasticsearch_instance_type,
       :duration,
@@ -3288,6 +3444,7 @@ module Aws::ElasticsearchService
     #   <p>A description of the error.</p>
     #   @return [String]
     class ResourceAlreadyExistsException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -3299,6 +3456,7 @@ module Aws::ElasticsearchService
     #   <p>A description of the error.</p>
     #   @return [String]
     class ResourceNotFoundException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -3314,6 +3472,7 @@ module Aws::ElasticsearchService
     #   <p>The account ID to revoke access from.</p>
     #   @return [String]
     class RevokeVpcEndpointAccessRequest < Struct.new(
+      nil,
       :domain_name,
       :account,
       keyword_init: true
@@ -3323,6 +3482,7 @@ module Aws::ElasticsearchService
 
     # <p>Container for response parameters to the <code><a>RevokeVpcEndpointAccess</a></code> operation. The response body for this operation is empty.</p>
     class RevokeVpcEndpointAccessResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -3336,6 +3496,7 @@ module Aws::ElasticsearchService
     #   <p>The unique Entity ID of the application in SAML Identity Provider.</p>
     #   @return [String]
     class SAMLIdp < Struct.new(
+      nil,
       :metadata_content,
       :entity_id,
       keyword_init: true
@@ -3366,6 +3527,7 @@ module Aws::ElasticsearchService
     #   <p>The duration, in minutes, after which a user session becomes inactive. Acceptable values are between 1 and 1440, and the default value is 60.</p>
     #   @return [Integer]
     class SAMLOptionsInput < Struct.new(
+      nil,
       :enabled,
       :idp,
       :master_user_name,
@@ -3395,6 +3557,7 @@ module Aws::ElasticsearchService
     #   <p>The duration, in minutes, after which a user session becomes inactive.</p>
     #   @return [Integer]
     class SAMLOptionsOutput < Struct.new(
+      nil,
       :enabled,
       :idp,
       :subject_key,
@@ -3419,6 +3582,7 @@ module Aws::ElasticsearchService
     #   <p>Specifies Auto-Tune action severity. Valid values are LOW, MEDIUM and HIGH. </p>
     #   @return [String]
     class ScheduledAutoTuneDetails < Struct.new(
+      nil,
       :date,
       :action_type,
       :action,
@@ -3454,6 +3618,7 @@ module Aws::ElasticsearchService
     #   <p><code>True</code> if a service software is never automatically updated. <code>False</code> if a service software is automatically updated after <code>AutomatedUpdateDate</code>.  </p>
     #   @return [Boolean]
     class ServiceSoftwareOptions < Struct.new(
+      nil,
       :current_version,
       :new_version,
       :update_available,
@@ -3472,6 +3637,7 @@ module Aws::ElasticsearchService
     #   <p>Specifies the time, in UTC format, when the service takes a daily automated snapshot of the specified Elasticsearch domain. Default value is <code>0</code> hours.</p>
     #   @return [Integer]
     class SnapshotOptions < Struct.new(
+      nil,
       :automated_snapshot_start_hour,
       keyword_init: true
     )
@@ -3486,6 +3652,7 @@ module Aws::ElasticsearchService
     #   <p>Specifies the status of a daily automated snapshot.</p>
     #   @return [Types::OptionStatus]
     class SnapshotOptionsStatus < Struct.new(
+      nil,
       :options,
       :status,
       keyword_init: true
@@ -3498,6 +3665,7 @@ module Aws::ElasticsearchService
     #   <p>The name of the domain that you want to update to the latest service software.</p>
     #   @return [String]
     class StartElasticsearchServiceSoftwareUpdateRequest < Struct.new(
+      nil,
       :domain_name,
       keyword_init: true
     )
@@ -3509,6 +3677,7 @@ module Aws::ElasticsearchService
     #   <p>The current status of the Elasticsearch service software update.</p>
     #   @return [Types::ServiceSoftwareOptions]
     class StartElasticsearchServiceSoftwareUpdateResponse < Struct.new(
+      nil,
       :service_software_options,
       keyword_init: true
     )
@@ -3548,6 +3717,7 @@ module Aws::ElasticsearchService
     #       </p>
     #   @return [Array<Types::StorageTypeLimit>]
     class StorageType < Struct.new(
+      nil,
       :storage_type_name,
       :storage_sub_type_name,
       :storage_type_limits,
@@ -3592,6 +3762,7 @@ module Aws::ElasticsearchService
     #       </p>
     #   @return [Array<String>]
     class StorageTypeLimit < Struct.new(
+      nil,
       :limit_name,
       :limit_values,
       keyword_init: true
@@ -3608,6 +3779,7 @@ module Aws::ElasticsearchService
     #          pair in a tag set of <code>project : Trinity</code> and <code>cost-center : Trinity</code></p>
     #   @return [String]
     class Tag < Struct.new(
+      nil,
       :key,
       :value,
       keyword_init: true
@@ -3667,6 +3839,7 @@ module Aws::ElasticsearchService
     #          </p>
     #   @return [Boolean]
     class UpdateElasticsearchDomainConfigRequest < Struct.new(
+      nil,
       :domain_name,
       :elasticsearch_cluster_config,
       :ebs_options,
@@ -3695,6 +3868,7 @@ module Aws::ElasticsearchService
     #   <p>Contains result of DryRun. </p>
     #   @return [Types::DryRunResults]
     class UpdateElasticsearchDomainConfigResponse < Struct.new(
+      nil,
       :domain_config,
       :dry_run_results,
       keyword_init: true
@@ -3722,6 +3896,7 @@ module Aws::ElasticsearchService
     #   <p>An info message for the new version which will be shown as part of <code>GetPackageVersionHistoryResponse</code>.</p>
     #   @return [String]
     class UpdatePackageRequest < Struct.new(
+      nil,
       :package_id,
       :package_source,
       :package_description,
@@ -3742,6 +3917,7 @@ module Aws::ElasticsearchService
     #   <p>Information about the package <code>PackageDetails</code>.</p>
     #   @return [Types::PackageDetails]
     class UpdatePackageResponse < Struct.new(
+      nil,
       :package_details,
       keyword_init: true
     )
@@ -3756,6 +3932,7 @@ module Aws::ElasticsearchService
     #   <p>The security groups and/or subnets to add, remove, or modify.</p>
     #   @return [Types::VPCOptions]
     class UpdateVpcEndpointRequest < Struct.new(
+      nil,
       :vpc_endpoint_id,
       :vpc_options,
       keyword_init: true
@@ -3768,6 +3945,7 @@ module Aws::ElasticsearchService
     #   <p>The endpoint to be updated.</p>
     #   @return [Types::VpcEndpoint]
     class UpdateVpcEndpointResponse < Struct.new(
+      nil,
       :vpc_endpoint,
       keyword_init: true
     )
@@ -3794,6 +3972,7 @@ module Aws::ElasticsearchService
     #       </p>
     #   @return [Boolean]
     class UpgradeElasticsearchDomainRequest < Struct.new(
+      nil,
       :domain_name,
       :target_version,
       :perform_check_only,
@@ -3825,6 +4004,7 @@ module Aws::ElasticsearchService
     #   <p>Specifies change details of the domain configuration change.</p>
     #   @return [Types::ChangeProgressDetails]
     class UpgradeElasticsearchDomainResponse < Struct.new(
+      nil,
       :domain_name,
       :target_version,
       :perform_check_only,
@@ -3862,6 +4042,7 @@ module Aws::ElasticsearchService
     #       </p>
     #   @return [Array<Types::UpgradeStepItem>]
     class UpgradeHistory < Struct.new(
+      nil,
       :upgrade_name,
       :start_timestamp,
       :upgrade_status,
@@ -3900,6 +4081,7 @@ module Aws::ElasticsearchService
     #   <p>The Floating point value representing progress percentage of a particular step.</p>
     #   @return [Float]
     class UpgradeStepItem < Struct.new(
+      nil,
       :upgrade_step,
       :upgrade_step_status,
       :issues,
@@ -3923,6 +4105,7 @@ module Aws::ElasticsearchService
     #   <p>Specifies the security groups for VPC endpoint.</p>
     #   @return [Array<String>]
     class VPCDerivedInfo < Struct.new(
+      nil,
       :vpc_id,
       :subnet_ids,
       :availability_zones,
@@ -3940,6 +4123,7 @@ module Aws::ElasticsearchService
     #   <p> Specifies the status of the VPC options for the specified Elasticsearch domain.</p>
     #   @return [Types::OptionStatus]
     class VPCDerivedInfoStatus < Struct.new(
+      nil,
       :options,
       :status,
       keyword_init: true
@@ -3955,6 +4139,7 @@ module Aws::ElasticsearchService
     #   <p>Specifies the security groups for VPC endpoint.</p>
     #   @return [Array<String>]
     class VPCOptions < Struct.new(
+      nil,
       :subnet_ids,
       :security_group_ids,
       keyword_init: true
@@ -3967,6 +4152,7 @@ module Aws::ElasticsearchService
     #   <p>A description of the error.</p>
     #   @return [String]
     class ValidationException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -3995,6 +4181,7 @@ module Aws::ElasticsearchService
     #   <p>The connection endpoint ID for connecting to the domain.</p>
     #   @return [String]
     class VpcEndpoint < Struct.new(
+      nil,
       :vpc_endpoint_id,
       :vpc_endpoint_owner,
       :domain_arn,
@@ -4018,6 +4205,7 @@ module Aws::ElasticsearchService
     #   <p>A message describing the error.</p>
     #   @return [String]
     class VpcEndpointError < Struct.new(
+      nil,
       :vpc_endpoint_id,
       :error_code,
       :error_message,
@@ -4040,6 +4228,7 @@ module Aws::ElasticsearchService
     #   <p>The current status of the endpoint.</p>
     #   @return [String]
     class VpcEndpointSummary < Struct.new(
+      nil,
       :vpc_endpoint_id,
       :vpc_endpoint_owner,
       :domain_arn,
@@ -4054,6 +4243,7 @@ module Aws::ElasticsearchService
     #   <p>An integer value to indicate the number of availability zones for a domain when zone awareness is enabled. This should be equal to number of subnets if VPC endpoints is enabled</p>
     #   @return [Integer]
     class ZoneAwarenessConfig < Struct.new(
+      nil,
       :availability_zone_count,
       keyword_init: true
     )

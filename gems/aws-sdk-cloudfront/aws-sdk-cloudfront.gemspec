@@ -16,5 +16,5 @@ Gem::Specification.new do |spec|
   spec.add_dependency('json', '~> 2')
   spec.add_dependency('smithy-xml', '1.0.0.pre1')
 
-  spec.required_ruby_version = '>= 3.3'
+  spec.required_ruby_version = '>= 3.1'
 end

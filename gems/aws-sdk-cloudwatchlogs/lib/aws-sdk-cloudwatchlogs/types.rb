@@ -10,6 +10,7 @@ module Aws::CloudWatchLogs
     # @!attribute message
     #   @return [String]
     class AccessDeniedException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -40,6 +41,7 @@ module Aws::CloudWatchLogs
     #   <p>The Amazon Web Services account ID that the policy applies to.</p>
     #   @return [String]
     class AccountPolicy < Struct.new(
+      nil,
       :policy_name,
       :policy_document,
       :last_updated_time,
@@ -64,6 +66,7 @@ module Aws::CloudWatchLogs
     #         you omit this, the default is <code>false</code>.</p>
     #   @return [Boolean]
     class AddKeyEntry < Struct.new(
+      nil,
       :key,
       :value,
       :overwrite_if_exists,
@@ -84,6 +87,7 @@ module Aws::CloudWatchLogs
     #         the log event. </p>
     #   @return [Array<Types::AddKeyEntry>]
     class AddKeys < Struct.new(
+      nil,
       :entries,
       keyword_init: true
     )
@@ -169,6 +173,7 @@ module Aws::CloudWatchLogs
     #         suppressed.</p>
     #   @return [Boolean]
     class Anomaly < Struct.new(
+      nil,
       :anomaly_id,
       :pattern_id,
       :anomaly_detector_arn,
@@ -238,6 +243,7 @@ module Aws::CloudWatchLogs
     #         event as normal. </p>
     #   @return [Integer]
     class AnomalyDetector < Struct.new(
+      nil,
       :anomaly_detector_arn,
       :detector_name,
       :log_group_arn_list,
@@ -297,6 +303,7 @@ module Aws::CloudWatchLogs
     #         can't specify both.</p>
     #   @return [String]
     class AssociateKmsKeyRequest < Struct.new(
+      nil,
       :log_group_name,
       :kms_key_id,
       :resource_identifier,
@@ -327,6 +334,7 @@ module Aws::CloudWatchLogs
     #         If you omit this value, the whole log message is processed.</p>
     #   @return [String]
     class CSV < Struct.new(
+      nil,
       :quote_character,
       :delimiter,
       :columns,
@@ -340,6 +348,7 @@ module Aws::CloudWatchLogs
     #   <p>The ID of the export task.</p>
     #   @return [String]
     class CancelExportTaskRequest < Struct.new(
+      nil,
       :task_id,
       keyword_init: true
     )
@@ -389,6 +398,7 @@ module Aws::CloudWatchLogs
     #         delivers to an S3 bucket.</p>
     #   @return [Array<String>]
     class ConfigurationTemplate < Struct.new(
+      nil,
       :service,
       :log_type,
       :resource_type,
@@ -421,6 +431,7 @@ module Aws::CloudWatchLogs
     #         that is an S3 Bucket.</p>
     #   @return [Types::S3DeliveryConfiguration]
     class ConfigurationTemplateDeliveryConfigValues < Struct.new(
+      nil,
       :record_fields,
       :field_delimiter,
       :s3_delivery_configuration,
@@ -433,6 +444,7 @@ module Aws::CloudWatchLogs
     # @!attribute message
     #   @return [String]
     class ConflictException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -449,6 +461,7 @@ module Aws::CloudWatchLogs
     #         information about one field value to copy. </p>
     #   @return [Array<Types::CopyValueEntry>]
     class CopyValue < Struct.new(
+      nil,
       :entries,
       keyword_init: true
     )
@@ -467,6 +480,7 @@ module Aws::CloudWatchLogs
     #         omit this, the default is <code>false</code>.</p>
     #   @return [Boolean]
     class CopyValueEntry < Struct.new(
+      nil,
       :source,
       :target,
       :overwrite_if_exists,
@@ -504,6 +518,7 @@ module Aws::CloudWatchLogs
     #            </p>
     #   @return [Hash<String, String>]
     class CreateDeliveryRequest < Struct.new(
+      nil,
       :delivery_source_name,
       :delivery_destination_arn,
       :record_fields,
@@ -519,6 +534,7 @@ module Aws::CloudWatchLogs
     #   <p>A structure that contains information about the delivery that you just created.</p>
     #   @return [Types::Delivery]
     class CreateDeliveryResponse < Struct.new(
+      nil,
       :delivery,
       keyword_init: true
     )
@@ -557,6 +573,7 @@ module Aws::CloudWatchLogs
     #         1,024 bytes.</p>
     #   @return [String]
     class CreateExportTaskRequest < Struct.new(
+      nil,
       :task_name,
       :log_group_name,
       :log_stream_name_prefix,
@@ -573,6 +590,7 @@ module Aws::CloudWatchLogs
     #   <p>The ID of the export task.</p>
     #   @return [String]
     class CreateExportTaskResponse < Struct.new(
+      nil,
       :task_id,
       keyword_init: true
     )
@@ -620,6 +638,7 @@ module Aws::CloudWatchLogs
     #            </p>
     #   @return [Hash<String, String>]
     class CreateLogAnomalyDetectorRequest < Struct.new(
+      nil,
       :log_group_arn_list,
       :detector_name,
       :evaluation_frequency,
@@ -636,6 +655,7 @@ module Aws::CloudWatchLogs
     #   <p>The ARN of the log anomaly detector that you just created.</p>
     #   @return [String]
     class CreateLogAnomalyDetectorResponse < Struct.new(
+      nil,
       :anomaly_detector_arn,
       keyword_init: true
     )
@@ -688,6 +708,7 @@ module Aws::CloudWatchLogs
     #            </p>
     #   @return [String]
     class CreateLogGroupRequest < Struct.new(
+      nil,
       :log_group_name,
       :kms_key_id,
       :tags,
@@ -704,6 +725,7 @@ module Aws::CloudWatchLogs
     #   <p>The name of the log stream.</p>
     #   @return [String]
     class CreateLogStreamRequest < Struct.new(
+      nil,
       :log_group_name,
       :log_stream_name,
       keyword_init: true
@@ -723,6 +745,7 @@ module Aws::CloudWatchLogs
     # @!attribute message
     #   @return [String]
     class DataAlreadyAcceptedException < Struct.new(
+      nil,
       :expected_sequence_token,
       :message,
       keyword_init: true
@@ -759,6 +782,7 @@ module Aws::CloudWatchLogs
     #         is used.</p>
     #   @return [String]
     class DateTimeConverter < Struct.new(
+      nil,
       :source,
       :target,
       :target_format,
@@ -778,6 +802,7 @@ module Aws::CloudWatchLogs
     #   <p>The type of policy to delete.</p>
     #   @return [String]
     class DeleteAccountPolicyRequest < Struct.new(
+      nil,
       :policy_name,
       :policy_type,
       keyword_init: true
@@ -790,6 +815,7 @@ module Aws::CloudWatchLogs
     #         for.</p>
     #   @return [String]
     class DeleteDataProtectionPolicyRequest < Struct.new(
+      nil,
       :log_group_identifier,
       keyword_init: true
     )
@@ -800,6 +826,7 @@ module Aws::CloudWatchLogs
     #   <p>The name of the delivery destination that you want to delete the policy for.</p>
     #   @return [String]
     class DeleteDeliveryDestinationPolicyRequest < Struct.new(
+      nil,
       :delivery_destination_name,
       keyword_init: true
     )
@@ -811,6 +838,7 @@ module Aws::CloudWatchLogs
     #         delivery destination names by using the <a href="https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_DescribeDeliveryDestinations.html">DescribeDeliveryDestinations</a> operation.</p>
     #   @return [String]
     class DeleteDeliveryDestinationRequest < Struct.new(
+      nil,
       :name,
       keyword_init: true
     )
@@ -821,6 +849,7 @@ module Aws::CloudWatchLogs
     #   <p>The unique ID of the delivery to delete. You can find the ID of a delivery with the <a href="https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_DescribeDeliveries.html">DescribeDeliveries</a> operation.</p>
     #   @return [String]
     class DeleteDeliveryRequest < Struct.new(
+      nil,
       :id,
       keyword_init: true
     )
@@ -831,6 +860,7 @@ module Aws::CloudWatchLogs
     #   <p>The name of the delivery source that you want to delete.</p>
     #   @return [String]
     class DeleteDeliverySourceRequest < Struct.new(
+      nil,
       :name,
       keyword_init: true
     )
@@ -841,6 +871,7 @@ module Aws::CloudWatchLogs
     #   <p>The name of the destination.</p>
     #   @return [String]
     class DeleteDestinationRequest < Struct.new(
+      nil,
       :destination_name,
       keyword_init: true
     )
@@ -852,6 +883,7 @@ module Aws::CloudWatchLogs
     #         of the log group.</p>
     #   @return [String]
     class DeleteIndexPolicyRequest < Struct.new(
+      nil,
       :log_group_identifier,
       keyword_init: true
     )
@@ -859,6 +891,7 @@ module Aws::CloudWatchLogs
     end
 
     class DeleteIndexPolicyResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -873,6 +906,7 @@ module Aws::CloudWatchLogs
     #            <p>The default is <code>false</code>.</p>
     #   @return [Boolean]
     class DeleteIntegrationRequest < Struct.new(
+      nil,
       :integration_name,
       :force,
       keyword_init: true
@@ -881,6 +915,7 @@ module Aws::CloudWatchLogs
     end
 
     class DeleteIntegrationResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -892,6 +927,7 @@ module Aws::CloudWatchLogs
     #   <p>The list of keys to delete.</p>
     #   @return [Array<String>]
     class DeleteKeys < Struct.new(
+      nil,
       :with_keys,
       keyword_init: true
     )
@@ -903,6 +939,7 @@ module Aws::CloudWatchLogs
     #         in your account by using the <a href="https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_ListLogAnomalyDetectors.html">ListLogAnomalyDetectors</a> operation.</p>
     #   @return [String]
     class DeleteLogAnomalyDetectorRequest < Struct.new(
+      nil,
       :anomaly_detector_arn,
       keyword_init: true
     )
@@ -913,6 +950,7 @@ module Aws::CloudWatchLogs
     #   <p>The name of the log group.</p>
     #   @return [String]
     class DeleteLogGroupRequest < Struct.new(
+      nil,
       :log_group_name,
       keyword_init: true
     )
@@ -926,6 +964,7 @@ module Aws::CloudWatchLogs
     #   <p>The name of the log stream.</p>
     #   @return [String]
     class DeleteLogStreamRequest < Struct.new(
+      nil,
       :log_group_name,
       :log_stream_name,
       keyword_init: true
@@ -940,6 +979,7 @@ module Aws::CloudWatchLogs
     #   <p>The name of the metric filter.</p>
     #   @return [String]
     class DeleteMetricFilterRequest < Struct.new(
+      nil,
       :log_group_name,
       :filter_name,
       keyword_init: true
@@ -952,6 +992,7 @@ module Aws::CloudWatchLogs
     #         definitions.</p>
     #   @return [String]
     class DeleteQueryDefinitionRequest < Struct.new(
+      nil,
       :query_definition_id,
       keyword_init: true
     )
@@ -963,6 +1004,7 @@ module Aws::CloudWatchLogs
     #         failed.</p>
     #   @return [Boolean]
     class DeleteQueryDefinitionResponse < Struct.new(
+      nil,
       :success,
       keyword_init: true
     )
@@ -986,6 +1028,7 @@ module Aws::CloudWatchLogs
     #         policy to prevent concurrent modifications.</p>
     #   @return [String]
     class DeleteResourcePolicyRequest < Struct.new(
+      nil,
       :policy_name,
       :resource_arn,
       :expected_revision_id,
@@ -998,6 +1041,7 @@ module Aws::CloudWatchLogs
     #   <p>The name of the log group.</p>
     #   @return [String]
     class DeleteRetentionPolicyRequest < Struct.new(
+      nil,
       :log_group_name,
       keyword_init: true
     )
@@ -1011,6 +1055,7 @@ module Aws::CloudWatchLogs
     #   <p>The name of the subscription filter.</p>
     #   @return [String]
     class DeleteSubscriptionFilterRequest < Struct.new(
+      nil,
       :log_group_name,
       :filter_name,
       keyword_init: true
@@ -1024,6 +1069,7 @@ module Aws::CloudWatchLogs
     #         group ARN.</p>
     #   @return [String]
     class DeleteTransformerRequest < Struct.new(
+      nil,
       :log_group_identifier,
       keyword_init: true
     )
@@ -1066,6 +1112,7 @@ module Aws::CloudWatchLogs
     #   <p>The tags that have been assigned to this delivery.</p>
     #   @return [Hash<String, String>]
     class Delivery < Struct.new(
+      nil,
       :id,
       :arn,
       :delivery_source_name,
@@ -1128,6 +1175,7 @@ module Aws::CloudWatchLogs
     #   <p>The tags that have been assigned to this delivery destination.</p>
     #   @return [Hash<String, String>]
     class DeliveryDestination < Struct.new(
+      nil,
       :name,
       :arn,
       :delivery_destination_type,
@@ -1145,6 +1193,7 @@ module Aws::CloudWatchLogs
     #         That Amazon Web Services destination can be a log group in CloudWatch Logs, an Amazon S3 bucket, or a delivery stream in Firehose.</p>
     #   @return [String]
     class DeliveryDestinationConfiguration < Struct.new(
+      nil,
       :destination_resource_arn,
       keyword_init: true
     )
@@ -1203,6 +1252,7 @@ module Aws::CloudWatchLogs
     #   <p>The tags that have been assigned to this delivery source.</p>
     #   @return [Hash<String, String>]
     class DeliverySource < Struct.new(
+      nil,
       :name,
       :arn,
       :resource_arns,
@@ -1234,6 +1284,7 @@ module Aws::CloudWatchLogs
     #         call.)</p>
     #   @return [String]
     class DescribeAccountPoliciesRequest < Struct.new(
+      nil,
       :policy_type,
       :policy_name,
       :account_identifiers,
@@ -1252,6 +1303,7 @@ module Aws::CloudWatchLogs
     #         hours.</p>
     #   @return [String]
     class DescribeAccountPoliciesResponse < Struct.new(
+      nil,
       :account_policies,
       :next_token,
       keyword_init: true
@@ -1284,6 +1336,7 @@ module Aws::CloudWatchLogs
     #         response.</p>
     #   @return [Integer]
     class DescribeConfigurationTemplatesRequest < Struct.new(
+      nil,
       :service,
       :log_types,
       :resource_types,
@@ -1304,6 +1357,7 @@ module Aws::CloudWatchLogs
     #         hours.</p>
     #   @return [String]
     class DescribeConfigurationTemplatesResponse < Struct.new(
+      nil,
       :configuration_templates,
       :next_token,
       keyword_init: true
@@ -1319,6 +1373,7 @@ module Aws::CloudWatchLogs
     #   <p>Optionally specify the maximum number of deliveries to return in the response.</p>
     #   @return [Integer]
     class DescribeDeliveriesRequest < Struct.new(
+      nil,
       :next_token,
       :limit,
       keyword_init: true
@@ -1335,6 +1390,7 @@ module Aws::CloudWatchLogs
     #         hours.</p>
     #   @return [String]
     class DescribeDeliveriesResponse < Struct.new(
+      nil,
       :deliveries,
       :next_token,
       keyword_init: true
@@ -1351,6 +1407,7 @@ module Aws::CloudWatchLogs
     #         response.</p>
     #   @return [Integer]
     class DescribeDeliveryDestinationsRequest < Struct.new(
+      nil,
       :next_token,
       :limit,
       keyword_init: true
@@ -1367,6 +1424,7 @@ module Aws::CloudWatchLogs
     #         hours.</p>
     #   @return [String]
     class DescribeDeliveryDestinationsResponse < Struct.new(
+      nil,
       :delivery_destinations,
       :next_token,
       keyword_init: true
@@ -1383,6 +1441,7 @@ module Aws::CloudWatchLogs
     #         response.</p>
     #   @return [Integer]
     class DescribeDeliverySourcesRequest < Struct.new(
+      nil,
       :next_token,
       :limit,
       keyword_init: true
@@ -1399,6 +1458,7 @@ module Aws::CloudWatchLogs
     #         hours.</p>
     #   @return [String]
     class DescribeDeliverySourcesResponse < Struct.new(
+      nil,
       :delivery_sources,
       :next_token,
       keyword_init: true
@@ -1419,6 +1479,7 @@ module Aws::CloudWatchLogs
     #         value of 50 items is used.</p>
     #   @return [Integer]
     class DescribeDestinationsRequest < Struct.new(
+      nil,
       :destination_name_prefix,
       :next_token,
       :limit,
@@ -1435,6 +1496,7 @@ module Aws::CloudWatchLogs
     #         hours.</p>
     #   @return [String]
     class DescribeDestinationsResponse < Struct.new(
+      nil,
       :destinations,
       :next_token,
       keyword_init: true
@@ -1459,6 +1521,7 @@ module Aws::CloudWatchLogs
     #         to 50 items.</p>
     #   @return [Integer]
     class DescribeExportTasksRequest < Struct.new(
+      nil,
       :task_id,
       :status_code,
       :next_token,
@@ -1476,6 +1539,7 @@ module Aws::CloudWatchLogs
     #         hours.</p>
     #   @return [String]
     class DescribeExportTasksResponse < Struct.new(
+      nil,
       :export_tasks,
       :next_token,
       keyword_init: true
@@ -1492,6 +1556,7 @@ module Aws::CloudWatchLogs
     #         hours.</p>
     #   @return [String]
     class DescribeFieldIndexesRequest < Struct.new(
+      nil,
       :log_group_identifiers,
       :next_token,
       keyword_init: true
@@ -1507,6 +1572,7 @@ module Aws::CloudWatchLogs
     #         hours.</p>
     #   @return [String]
     class DescribeFieldIndexesResponse < Struct.new(
+      nil,
       :field_indexes,
       :next_token,
       keyword_init: true
@@ -1523,6 +1589,7 @@ module Aws::CloudWatchLogs
     #         hours.</p>
     #   @return [String]
     class DescribeIndexPoliciesRequest < Struct.new(
+      nil,
       :log_group_identifiers,
       :next_token,
       keyword_init: true
@@ -1538,6 +1605,7 @@ module Aws::CloudWatchLogs
     #         hours.</p>
     #   @return [String]
     class DescribeIndexPoliciesResponse < Struct.new(
+      nil,
       :index_policies,
       :next_token,
       keyword_init: true
@@ -1623,6 +1691,7 @@ module Aws::CloudWatchLogs
     #         log group names in the same account as the operation.</p>
     #   @return [Array<String>]
     class DescribeLogGroupsRequest < Struct.new(
+      nil,
       :account_identifiers,
       :log_group_name_prefix,
       :log_group_name_pattern,
@@ -1645,6 +1714,7 @@ module Aws::CloudWatchLogs
     #         hours.</p>
     #   @return [String]
     class DescribeLogGroupsResponse < Struct.new(
+      nil,
       :log_groups,
       :next_token,
       keyword_init: true
@@ -1698,6 +1768,7 @@ module Aws::CloudWatchLogs
     #         to 50 items.</p>
     #   @return [Integer]
     class DescribeLogStreamsRequest < Struct.new(
+      nil,
       :log_group_name,
       :log_group_identifier,
       :log_stream_name_prefix,
@@ -1718,6 +1789,7 @@ module Aws::CloudWatchLogs
     #         hours.</p>
     #   @return [String]
     class DescribeLogStreamsResponse < Struct.new(
+      nil,
       :log_streams,
       :next_token,
       keyword_init: true
@@ -1751,6 +1823,7 @@ module Aws::CloudWatchLogs
     #         parameter.</p>
     #   @return [String]
     class DescribeMetricFiltersRequest < Struct.new(
+      nil,
       :log_group_name,
       :filter_name_prefix,
       :next_token,
@@ -1770,6 +1843,7 @@ module Aws::CloudWatchLogs
     #         hours.</p>
     #   @return [String]
     class DescribeMetricFiltersResponse < Struct.new(
+      nil,
       :metric_filters,
       :next_token,
       keyword_init: true
@@ -1797,6 +1871,7 @@ module Aws::CloudWatchLogs
     #         language.</p>
     #   @return [String]
     class DescribeQueriesRequest < Struct.new(
+      nil,
       :log_group_name,
       :status,
       :max_results,
@@ -1815,6 +1890,7 @@ module Aws::CloudWatchLogs
     #         hours.</p>
     #   @return [String]
     class DescribeQueriesResponse < Struct.new(
+      nil,
       :queries,
       :next_token,
       keyword_init: true
@@ -1839,6 +1915,7 @@ module Aws::CloudWatchLogs
     #         hours.</p>
     #   @return [String]
     class DescribeQueryDefinitionsRequest < Struct.new(
+      nil,
       :query_language,
       :query_definition_name_prefix,
       :max_results,
@@ -1856,6 +1933,7 @@ module Aws::CloudWatchLogs
     #         hours.</p>
     #   @return [String]
     class DescribeQueryDefinitionsResponse < Struct.new(
+      nil,
       :query_definitions,
       :next_token,
       keyword_init: true
@@ -1879,6 +1957,7 @@ module Aws::CloudWatchLogs
     #           <code>RESOURCE</code>. When not specified, defaults to <code>ACCOUNT</code>.</p>
     #   @return [String]
     class DescribeResourcePoliciesRequest < Struct.new(
+      nil,
       :next_token,
       :limit,
       :resource_arn,
@@ -1896,6 +1975,7 @@ module Aws::CloudWatchLogs
     #         hours.</p>
     #   @return [String]
     class DescribeResourcePoliciesResponse < Struct.new(
+      nil,
       :resource_policies,
       :next_token,
       keyword_init: true
@@ -1919,6 +1999,7 @@ module Aws::CloudWatchLogs
     #         to 50 items.</p>
     #   @return [Integer]
     class DescribeSubscriptionFiltersRequest < Struct.new(
+      nil,
       :log_group_name,
       :filter_name_prefix,
       :next_token,
@@ -1936,6 +2017,7 @@ module Aws::CloudWatchLogs
     #         hours.</p>
     #   @return [String]
     class DescribeSubscriptionFiltersResponse < Struct.new(
+      nil,
       :subscription_filters,
       :next_token,
       keyword_init: true
@@ -1966,6 +2048,7 @@ module Aws::CloudWatchLogs
     #         1, 1970 00:00:00 UTC.</p>
     #   @return [Integer]
     class Destination < Struct.new(
+      nil,
       :destination_name,
       :target_arn,
       :role_arn,
@@ -2012,6 +2095,7 @@ module Aws::CloudWatchLogs
     #         can't specify both.</p>
     #   @return [String]
     class DisassociateKmsKeyRequest < Struct.new(
+      nil,
       :log_group_name,
       :resource_identifier,
       keyword_init: true
@@ -2039,6 +2123,7 @@ module Aws::CloudWatchLogs
     #           Guide</i>.</p>
     #   @return [Hash<String, String>]
     class Entity < Struct.new(
+      nil,
       :key_attributes,
       :attributes,
       keyword_init: true
@@ -2078,6 +2163,7 @@ module Aws::CloudWatchLogs
     #   <p>Execution information about the export task.</p>
     #   @return [Types::ExportTaskExecutionInfo]
     class ExportTask < Struct.new(
+      nil,
       :task_id,
       :task_name,
       :log_group_name,
@@ -2102,6 +2188,7 @@ module Aws::CloudWatchLogs
     #           <code>Jan 1, 1970 00:00:00 UTC</code>.</p>
     #   @return [Integer]
     class ExportTaskExecutionInfo < Struct.new(
+      nil,
       :creation_time,
       :completion_time,
       keyword_init: true
@@ -2117,6 +2204,7 @@ module Aws::CloudWatchLogs
     #   <p>The status message related to the status code.</p>
     #   @return [String]
     class ExportTaskStatus < Struct.new(
+      nil,
       :code,
       :message,
       keyword_init: true
@@ -2146,6 +2234,7 @@ module Aws::CloudWatchLogs
     #   <p>The time and date of the most recent log event that matches this field index. </p>
     #   @return [Integer]
     class FieldIndex < Struct.new(
+      nil,
       :log_group_identifier,
       :field_index_name,
       :last_scan_time,
@@ -2164,6 +2253,7 @@ module Aws::CloudWatchLogs
     #         client.</p>
     #   @return [String]
     class FieldsData < Struct.new(
+      nil,
       :data,
       keyword_init: true
     )
@@ -2240,6 +2330,7 @@ module Aws::CloudWatchLogs
     #           <code>logs:Unmask</code> permission.</p>
     #   @return [Boolean]
     class FilterLogEventsRequest < Struct.new(
+      nil,
       :log_group_name,
       :log_group_identifier,
       :log_stream_names,
@@ -2273,6 +2364,7 @@ module Aws::CloudWatchLogs
     #       </p>
     #   @return [String]
     class FilterLogEventsResponse < Struct.new(
+      nil,
       :events,
       :searched_log_streams,
       :next_token,
@@ -2300,6 +2392,7 @@ module Aws::CloudWatchLogs
     #   <p>The ID of the event.</p>
     #   @return [String]
     class FilteredLogEvent < Struct.new(
+      nil,
       :log_stream_name,
       :timestamp,
       :message,
@@ -2315,6 +2408,7 @@ module Aws::CloudWatchLogs
     #         see.</p>
     #   @return [String]
     class GetDataProtectionPolicyRequest < Struct.new(
+      nil,
       :log_group_identifier,
       keyword_init: true
     )
@@ -2331,6 +2425,7 @@ module Aws::CloudWatchLogs
     #   <p>The date and time that this policy was most recently updated.</p>
     #   @return [Integer]
     class GetDataProtectionPolicyResponse < Struct.new(
+      nil,
       :log_group_identifier,
       :policy_document,
       :last_updated_time,
@@ -2343,6 +2438,7 @@ module Aws::CloudWatchLogs
     #   <p>The name of the delivery destination that you want to retrieve the policy of.</p>
     #   @return [String]
     class GetDeliveryDestinationPolicyRequest < Struct.new(
+      nil,
       :delivery_destination_name,
       keyword_init: true
     )
@@ -2353,6 +2449,7 @@ module Aws::CloudWatchLogs
     #   <p>The IAM policy for this delivery destination.</p>
     #   @return [Types::Policy]
     class GetDeliveryDestinationPolicyResponse < Struct.new(
+      nil,
       :policy,
       keyword_init: true
     )
@@ -2363,6 +2460,7 @@ module Aws::CloudWatchLogs
     #   <p>The name of the delivery destination that you want to retrieve.</p>
     #   @return [String]
     class GetDeliveryDestinationRequest < Struct.new(
+      nil,
       :name,
       keyword_init: true
     )
@@ -2373,6 +2471,7 @@ module Aws::CloudWatchLogs
     #   <p>A structure containing information about the delivery destination.</p>
     #   @return [Types::DeliveryDestination]
     class GetDeliveryDestinationResponse < Struct.new(
+      nil,
       :delivery_destination,
       keyword_init: true
     )
@@ -2383,6 +2482,7 @@ module Aws::CloudWatchLogs
     #   <p>The ID of the delivery that you want to retrieve.</p>
     #   @return [String]
     class GetDeliveryRequest < Struct.new(
+      nil,
       :id,
       keyword_init: true
     )
@@ -2393,6 +2493,7 @@ module Aws::CloudWatchLogs
     #   <p>A structure that contains information about the delivery.</p>
     #   @return [Types::Delivery]
     class GetDeliveryResponse < Struct.new(
+      nil,
       :delivery,
       keyword_init: true
     )
@@ -2403,6 +2504,7 @@ module Aws::CloudWatchLogs
     #   <p>The name of the delivery source that you want to retrieve.</p>
     #   @return [String]
     class GetDeliverySourceRequest < Struct.new(
+      nil,
       :name,
       keyword_init: true
     )
@@ -2413,6 +2515,7 @@ module Aws::CloudWatchLogs
     #   <p>A structure containing information about the delivery source.</p>
     #   @return [Types::DeliverySource]
     class GetDeliverySourceResponse < Struct.new(
+      nil,
       :delivery_source,
       keyword_init: true
     )
@@ -2425,6 +2528,7 @@ module Aws::CloudWatchLogs
     #            </p>
     #   @return [String]
     class GetIntegrationRequest < Struct.new(
+      nil,
       :integration_name,
       keyword_init: true
     )
@@ -2447,6 +2551,7 @@ module Aws::CloudWatchLogs
     #         resources such as the collection, the workspace, and policies.</p>
     #   @return [Types::IntegrationDetails]
     class GetIntegrationResponse < Struct.new(
+      nil,
       :integration_name,
       :integration_type,
       :integration_status,
@@ -2461,6 +2566,7 @@ module Aws::CloudWatchLogs
     #         log anomaly detectors in your account by using the <a href="https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_ListLogAnomalyDetectors.html">ListLogAnomalyDetectors</a> operation.</p>
     #   @return [String]
     class GetLogAnomalyDetectorRequest < Struct.new(
+      nil,
       :anomaly_detector_arn,
       keyword_init: true
     )
@@ -2504,6 +2610,7 @@ module Aws::CloudWatchLogs
     #         event as normal. </p>
     #   @return [Integer]
     class GetLogAnomalyDetectorResponse < Struct.new(
+      nil,
       :detector_name,
       :log_group_arn_list,
       :evaluation_frequency,
@@ -2575,6 +2682,7 @@ module Aws::CloudWatchLogs
     #           <code>logs:Unmask</code> permission.</p>
     #   @return [Boolean]
     class GetLogEventsRequest < Struct.new(
+      nil,
       :log_group_name,
       :log_group_identifier,
       :log_stream_name,
@@ -2603,6 +2711,7 @@ module Aws::CloudWatchLogs
     #         same token you passed in.</p>
     #   @return [String]
     class GetLogEventsResponse < Struct.new(
+      nil,
       :events,
       :next_forward_token,
       :next_backward_token,
@@ -2634,6 +2743,7 @@ module Aws::CloudWatchLogs
     #            </note>
     #   @return [String]
     class GetLogGroupFieldsRequest < Struct.new(
+      nil,
       :log_group_name,
       :time,
       :log_group_identifier,
@@ -2648,6 +2758,7 @@ module Aws::CloudWatchLogs
     #         queried.</p>
     #   @return [Array<Types::LogGroupField>]
     class GetLogGroupFieldsResponse < Struct.new(
+      nil,
       :log_group_fields,
       keyword_init: true
     )
@@ -2666,6 +2777,7 @@ module Aws::CloudWatchLogs
     #         from a previous query or filter operation.</p>
     #   @return [String]
     class GetLogObjectRequest < Struct.new(
+      nil,
       :unmask,
       :log_object_pointer,
       keyword_init: true
@@ -2679,6 +2791,7 @@ module Aws::CloudWatchLogs
     #         contains log events with their associated metadata and extracted fields.</p>
     #   @return [Types::GetLogObjectResponseStream]
     class GetLogObjectResponse < Struct.new(
+      nil,
       :field_stream,
       keyword_init: true
     )
@@ -2722,6 +2835,7 @@ module Aws::CloudWatchLogs
     #           <code>logs:Unmask</code> permission.</p>
     #   @return [Boolean]
     class GetLogRecordRequest < Struct.new(
+      nil,
       :log_record_pointer,
       :unmask,
       keyword_init: true
@@ -2733,6 +2847,7 @@ module Aws::CloudWatchLogs
     #   <p>The requested log event, as a JSON string.</p>
     #   @return [Hash<String, String>]
     class GetLogRecordResponse < Struct.new(
+      nil,
       :log_record,
       keyword_init: true
     )
@@ -2743,6 +2858,7 @@ module Aws::CloudWatchLogs
     #   <p>The ID number of the query.</p>
     #   @return [String]
     class GetQueryResultsRequest < Struct.new(
+      nil,
       :query_id,
       keyword_init: true
     )
@@ -2779,6 +2895,7 @@ module Aws::CloudWatchLogs
     #         them.</p>
     #   @return [String]
     class GetQueryResultsResponse < Struct.new(
+      nil,
       :query_language,
       :results,
       :statistics,
@@ -2795,6 +2912,7 @@ module Aws::CloudWatchLogs
     #         log group ARN.</p>
     #   @return [String]
     class GetTransformerRequest < Struct.new(
+      nil,
       :log_group_identifier,
       keyword_init: true
     )
@@ -2816,6 +2934,7 @@ module Aws::CloudWatchLogs
     #   <p>This sructure contains the configuration of the requested transformer.</p>
     #   @return [Array<Types::Processor>]
     class GetTransformerResponse < Struct.new(
+      nil,
       :log_group_identifier,
       :creation_time,
       :last_modified_time,
@@ -2837,6 +2956,7 @@ module Aws::CloudWatchLogs
     #         see <a href="https://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/CloudWatch-Logs-Transformation-Processors.html#Grok-Patterns">Supported grok patterns</a>.</p>
     #   @return [String]
     class Grok < Struct.new(
+      nil,
       :source,
       :match,
       keyword_init: true
@@ -2863,6 +2983,7 @@ module Aws::CloudWatchLogs
     #         applies only to a single log group.</p>
     #   @return [String]
     class IndexPolicy < Struct.new(
+      nil,
       :log_group_identifier,
       :last_update_time,
       :policy_document,
@@ -2883,6 +3004,7 @@ module Aws::CloudWatchLogs
     #   <p>The raw event message. Each log event can be no larger than 1 MB.</p>
     #   @return [String]
     class InputLogEvent < Struct.new(
+      nil,
       :timestamp,
       :message,
       keyword_init: true
@@ -2921,6 +3043,7 @@ module Aws::CloudWatchLogs
     #   <p>The current status of this integration.</p>
     #   @return [String]
     class IntegrationSummary < Struct.new(
+      nil,
       :integration_name,
       :integration_type,
       :integration_status,
@@ -2935,6 +3058,7 @@ module Aws::CloudWatchLogs
     # @!attribute message
     #   @return [String]
     class InternalStreamingException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -2945,6 +3069,7 @@ module Aws::CloudWatchLogs
     # @!attribute message
     #   @return [String]
     class InvalidOperationException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -2955,6 +3080,7 @@ module Aws::CloudWatchLogs
     # @!attribute message
     #   @return [String]
     class InvalidParameterException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -2975,6 +3101,7 @@ module Aws::CloudWatchLogs
     # @!attribute message
     #   @return [String]
     class InvalidSequenceTokenException < Struct.new(
+      nil,
       :expected_sequence_token,
       :message,
       keyword_init: true
@@ -2986,6 +3113,7 @@ module Aws::CloudWatchLogs
     # @!attribute message
     #   @return [String]
     class LimitExceededException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -3009,6 +3137,7 @@ module Aws::CloudWatchLogs
     #         hours.</p>
     #   @return [String]
     class ListAnomaliesRequest < Struct.new(
+      nil,
       :anomaly_detector_arn,
       :suppression_state,
       :limit,
@@ -3027,6 +3156,7 @@ module Aws::CloudWatchLogs
     #         hours.</p>
     #   @return [String]
     class ListAnomaliesResponse < Struct.new(
+      nil,
       :anomalies,
       :next_token,
       keyword_init: true
@@ -3046,6 +3176,7 @@ module Aws::CloudWatchLogs
     #         here.</p>
     #   @return [String]
     class ListIntegrationsRequest < Struct.new(
+      nil,
       :integration_name_prefix,
       :integration_type,
       :integration_status,
@@ -3059,6 +3190,7 @@ module Aws::CloudWatchLogs
     #         integration in this account. </p>
     #   @return [Array<Types::IntegrationSummary>]
     class ListIntegrationsResponse < Struct.new(
+      nil,
       :integration_summaries,
       keyword_init: true
     )
@@ -3078,6 +3210,7 @@ module Aws::CloudWatchLogs
     #         hours.</p>
     #   @return [String]
     class ListLogAnomalyDetectorsRequest < Struct.new(
+      nil,
       :filter_log_group_arn,
       :limit,
       :next_token,
@@ -3095,6 +3228,7 @@ module Aws::CloudWatchLogs
     #         hours.</p>
     #   @return [String]
     class ListLogAnomalyDetectorsResponse < Struct.new(
+      nil,
       :anomaly_detectors,
       :next_token,
       keyword_init: true
@@ -3113,6 +3247,7 @@ module Aws::CloudWatchLogs
     #   <p>Limits the number of returned log groups to the specified number.</p>
     #   @return [Integer]
     class ListLogGroupsForQueryRequest < Struct.new(
+      nil,
       :query_id,
       :next_token,
       :max_results,
@@ -3129,6 +3264,7 @@ module Aws::CloudWatchLogs
     #         hours.</p>
     #   @return [String]
     class ListLogGroupsForQueryResponse < Struct.new(
+      nil,
       :log_group_identifiers,
       :next_token,
       keyword_init: true
@@ -3185,6 +3321,7 @@ module Aws::CloudWatchLogs
     #         up to 50 log groups.</p>
     #   @return [Integer]
     class ListLogGroupsRequest < Struct.new(
+      nil,
       :log_group_name_pattern,
       :log_group_class,
       :include_linked_accounts,
@@ -3205,6 +3342,7 @@ module Aws::CloudWatchLogs
     #         hours.</p>
     #   @return [String]
     class ListLogGroupsResponse < Struct.new(
+      nil,
       :log_groups,
       :next_token,
       keyword_init: true
@@ -3226,6 +3364,7 @@ module Aws::CloudWatchLogs
     #           resources and operations</a>.</p>
     #   @return [String]
     class ListTagsForResourceRequest < Struct.new(
+      nil,
       :resource_arn,
       keyword_init: true
     )
@@ -3236,6 +3375,7 @@ module Aws::CloudWatchLogs
     #   <p>The list of tags associated with the requested resource.></p>
     #   @return [Hash<String, String>]
     class ListTagsForResourceResponse < Struct.new(
+      nil,
       :tags,
       keyword_init: true
     )
@@ -3248,6 +3388,7 @@ module Aws::CloudWatchLogs
     #   <p>The name of the log group.</p>
     #   @return [String]
     class ListTagsLogGroupRequest < Struct.new(
+      nil,
       :log_group_name,
       keyword_init: true
     )
@@ -3260,6 +3401,7 @@ module Aws::CloudWatchLogs
     #   <p>The tags for the log group.</p>
     #   @return [Hash<String, String>]
     class ListTagsLogGroupResponse < Struct.new(
+      nil,
       :tags,
       keyword_init: true
     )
@@ -3296,6 +3438,7 @@ module Aws::CloudWatchLogs
     #            </p>
     #   @return [String]
     class ListToMap < Struct.new(
+      nil,
       :source,
       :key,
       :value_key,
@@ -3330,6 +3473,7 @@ module Aws::CloudWatchLogs
     #   <p>The timestamp specifying when this log event was ingested into the log group.</p>
     #   @return [Integer]
     class LiveTailSessionLogEvent < Struct.new(
+      nil,
       :log_stream_name,
       :log_group_identifier,
       :message,
@@ -3352,6 +3496,7 @@ module Aws::CloudWatchLogs
     #         includes all log events that matched your request during this time.</p>
     #   @return [Boolean]
     class LiveTailSessionMetadata < Struct.new(
+      nil,
       :sampled,
       keyword_init: true
     )
@@ -3394,6 +3539,7 @@ module Aws::CloudWatchLogs
     #           Syntax</a>.</p>
     #   @return [String]
     class LiveTailSessionStart < Struct.new(
+      nil,
       :request_id,
       :session_id,
       :log_group_identifiers,
@@ -3417,6 +3563,7 @@ module Aws::CloudWatchLogs
     #         500 log events to be included in each <code>sessionUpdate</code> structure.</p>
     #   @return [Array<Types::LiveTailSessionLogEvent>]
     class LiveTailSessionUpdate < Struct.new(
+      nil,
       :session_metadata,
       :session_results,
       keyword_init: true
@@ -3433,6 +3580,7 @@ module Aws::CloudWatchLogs
     #   <p>The message content of the log event.</p>
     #   @return [String]
     class LogEvent < Struct.new(
+      nil,
       :timestamp,
       :message,
       keyword_init: true
@@ -3520,6 +3668,7 @@ module Aws::CloudWatchLogs
     #            </ul>
     #   @return [String]
     class LogGroup < Struct.new(
+      nil,
       :log_group_name,
       :creation_time,
       :retention_in_days,
@@ -3545,6 +3694,7 @@ module Aws::CloudWatchLogs
     #   <p>The percentage of log events queried that contained the field.</p>
     #   @return [Integer]
     class LogGroupField < Struct.new(
+      nil,
       :name,
       :percent,
       keyword_init: true
@@ -3570,6 +3720,7 @@ module Aws::CloudWatchLogs
     #            </p>
     #   @return [String]
     class LogGroupSummary < Struct.new(
+      nil,
       :log_group_name,
       :log_group_arn,
       :log_group_class,
@@ -3626,6 +3777,7 @@ module Aws::CloudWatchLogs
     #     Starting on June 17, 2019, this parameter will be deprecated for log streams, and will be reported as zero. This change applies only to log streams. The storedBytes parameter for log groups is not affected.
     #   @return [Integer]
     class LogStream < Struct.new(
+      nil,
       :log_stream_name,
       :creation_time,
       :first_event_timestamp,
@@ -3645,6 +3797,7 @@ module Aws::CloudWatchLogs
     #   <p>The array caontaining the keys of the fields to convert to lowercase.</p>
     #   @return [Array<String>]
     class LowerCaseString < Struct.new(
+      nil,
       :with_keys,
       keyword_init: true
     )
@@ -3661,6 +3814,7 @@ module Aws::CloudWatchLogs
     # @!attribute message
     #   @return [String]
     class MalformedQueryException < Struct.new(
+      nil,
       :query_compile_error,
       :message,
       keyword_init: true
@@ -3701,6 +3855,7 @@ module Aws::CloudWatchLogs
     #   <p>The list of system fields that are emitted as additional dimensions in the generated metrics. Returns the <code>emitSystemFieldDimensions</code> value if it was specified when the metric filter was created.</p>
     #   @return [Array<String>]
     class MetricFilter < Struct.new(
+      nil,
       :filter_name,
       :filter_pattern,
       :metric_transformations,
@@ -3730,6 +3885,7 @@ module Aws::CloudWatchLogs
     #   <p>The values extracted from the event data by the filter.</p>
     #   @return [Hash<String, String>]
     class MetricFilterMatchRecord < Struct.new(
+      nil,
       :event_number,
       :event_message,
       :extracted_values,
@@ -3782,6 +3938,7 @@ module Aws::CloudWatchLogs
     #         <code>None</code>.</p>
     #   @return [String]
     class MetricTransformation < Struct.new(
+      nil,
       :metric_name,
       :metric_namespace,
       :metric_value,
@@ -3805,6 +3962,7 @@ module Aws::CloudWatchLogs
     #         omit this, the default is <code>false</code>.</p>
     #   @return [Boolean]
     class MoveKeyEntry < Struct.new(
+      nil,
       :source,
       :target,
       :overwrite_if_exists,
@@ -3825,6 +3983,7 @@ module Aws::CloudWatchLogs
     #       </p>
     #   @return [Array<Types::MoveKeyEntry>]
     class MoveKeys < Struct.new(
+      nil,
       :entries,
       keyword_init: true
     )
@@ -3848,6 +4007,7 @@ module Aws::CloudWatchLogs
     #         resource.</p>
     #   @return [Types::OpenSearchResourceStatus]
     class OpenSearchApplication < Struct.new(
+      nil,
       :application_endpoint,
       :application_arn,
       :application_id,
@@ -3872,6 +4032,7 @@ module Aws::CloudWatchLogs
     #         resource.</p>
     #   @return [Types::OpenSearchResourceStatus]
     class OpenSearchCollection < Struct.new(
+      nil,
       :collection_endpoint,
       :collection_arn,
       :status,
@@ -3894,6 +4055,7 @@ module Aws::CloudWatchLogs
     #         resource.</p>
     #   @return [Types::OpenSearchResourceStatus]
     class OpenSearchDataAccessPolicy < Struct.new(
+      nil,
       :policy_name,
       :status,
       keyword_init: true
@@ -3915,6 +4077,7 @@ module Aws::CloudWatchLogs
     #         resource.</p>
     #   @return [Types::OpenSearchResourceStatus]
     class OpenSearchDataSource < Struct.new(
+      nil,
       :data_source_name,
       :status,
       keyword_init: true
@@ -3933,6 +4096,7 @@ module Aws::CloudWatchLogs
     #         resource.</p>
     #   @return [Types::OpenSearchResourceStatus]
     class OpenSearchEncryptionPolicy < Struct.new(
+      nil,
       :policy_name,
       :status,
       keyword_init: true
@@ -3995,6 +4159,7 @@ module Aws::CloudWatchLogs
     #         Developer Guide.</p>
     #   @return [Types::OpenSearchLifecyclePolicy]
     class OpenSearchIntegrationDetails < Struct.new(
+      nil,
       :data_source,
       :application,
       :collection,
@@ -4022,6 +4187,7 @@ module Aws::CloudWatchLogs
     #         resource.</p>
     #   @return [Types::OpenSearchResourceStatus]
     class OpenSearchLifecyclePolicy < Struct.new(
+      nil,
       :policy_name,
       :status,
       keyword_init: true
@@ -4040,6 +4206,7 @@ module Aws::CloudWatchLogs
     #         resource.</p>
     #   @return [Types::OpenSearchResourceStatus]
     class OpenSearchNetworkPolicy < Struct.new(
+      nil,
       :policy_name,
       :status,
       keyword_init: true
@@ -4079,6 +4246,7 @@ module Aws::CloudWatchLogs
     #         costs. </p>
     #   @return [Integer]
     class OpenSearchResourceConfig < Struct.new(
+      nil,
       :kms_key_arn,
       :data_source_role_arn,
       :dashboard_viewer_principals,
@@ -4098,6 +4266,7 @@ module Aws::CloudWatchLogs
     #   <p>A message with additional information about the status of this resource.</p>
     #   @return [String]
     class OpenSearchResourceStatus < Struct.new(
+      nil,
       :status,
       :status_message,
       keyword_init: true
@@ -4118,6 +4287,7 @@ module Aws::CloudWatchLogs
     #         resource.</p>
     #   @return [Types::OpenSearchResourceStatus]
     class OpenSearchWorkspace < Struct.new(
+      nil,
       :workspace_id,
       :status,
       keyword_init: true
@@ -4129,6 +4299,7 @@ module Aws::CloudWatchLogs
     # @!attribute message
     #   @return [String]
     class OperationAbortedException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -4148,6 +4319,7 @@ module Aws::CloudWatchLogs
     #           <code>Jan 1, 1970 00:00:00 UTC</code>.</p>
     #   @return [Integer]
     class OutputLogEvent < Struct.new(
+      nil,
       :timestamp,
       :message,
       :ingestion_time,
@@ -4168,6 +4340,7 @@ module Aws::CloudWatchLogs
     #         other value than <code>@message</code> is allowed for <code>source</code>.</p>
     #   @return [String]
     class ParseCloudfront < Struct.new(
+      nil,
       :source,
       keyword_init: true
     )
@@ -4190,6 +4363,7 @@ module Aws::CloudWatchLogs
     #         placed under the root node.</p>
     #   @return [String]
     class ParseJSON < Struct.new(
+      nil,
       :source,
       :destination,
       keyword_init: true
@@ -4228,6 +4402,7 @@ module Aws::CloudWatchLogs
     #         omit this, the default is <code>false</code>.</p>
     #   @return [Boolean]
     class ParseKeyValue < Struct.new(
+      nil,
       :source,
       :destination,
       :field_delimiter,
@@ -4258,6 +4433,7 @@ module Aws::CloudWatchLogs
     #         other value than <code>@message</code> is allowed for <code>source</code>.</p>
     #   @return [String]
     class ParsePostgres < Struct.new(
+      nil,
       :source,
       keyword_init: true
     )
@@ -4275,6 +4451,7 @@ module Aws::CloudWatchLogs
     #         other value than <code>@message</code> is allowed for <code>source</code>.</p>
     #   @return [String]
     class ParseRoute53 < Struct.new(
+      nil,
       :source,
       keyword_init: true
     )
@@ -4296,6 +4473,7 @@ module Aws::CloudWatchLogs
     #   <p>Specify which version of the OCSF schema to use for the transformed log events.</p>
     #   @return [String]
     class ParseToOCSF < Struct.new(
+      nil,
       :source,
       :event_source,
       :ocsf_version,
@@ -4318,6 +4496,7 @@ module Aws::CloudWatchLogs
     #         other value than <code>@message</code> is allowed for <code>source</code>.</p>
     #   @return [String]
     class ParseVPC < Struct.new(
+      nil,
       :source,
       keyword_init: true
     )
@@ -4337,6 +4516,7 @@ module Aws::CloudWatchLogs
     #         other value than <code>@message</code> is allowed for <code>source</code>.</p>
     #   @return [String]
     class ParseWAF < Struct.new(
+      nil,
       :source,
       keyword_init: true
     )
@@ -4374,6 +4554,7 @@ module Aws::CloudWatchLogs
     #         represents an IP address, and this token is the third dynamic token in the pattern.</p>
     #   @return [String]
     class PatternToken < Struct.new(
+      nil,
       :dynamic_token_position,
       :is_dynamic,
       :token_string,
@@ -4394,6 +4575,7 @@ module Aws::CloudWatchLogs
     #   <p>The contents of the delivery destination policy.</p>
     #   @return [String]
     class Policy < Struct.new(
+      nil,
       :delivery_destination_policy,
       keyword_init: true
     )
@@ -4476,6 +4658,7 @@ module Aws::CloudWatchLogs
     #   <p>Use this parameter to include the <a href="https://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/CloudWatch-Logs-Transformation.html#CloudWatch-Logs-Transformation-upperCaseString"> upperCaseString</a> processor in your transformer.</p>
     #   @return [Types::UpperCaseString]
     class Processor < Struct.new(
+      nil,
       :add_keys,
       :copy_value,
       :csv,
@@ -4647,6 +4830,7 @@ module Aws::CloudWatchLogs
     #           prevention</a>.</p>
     #   @return [String]
     class PutAccountPolicyRequest < Struct.new(
+      nil,
       :policy_name,
       :policy_document,
       :policy_type,
@@ -4661,6 +4845,7 @@ module Aws::CloudWatchLogs
     #   <p>The account policy that you created.</p>
     #   @return [Types::AccountPolicy]
     class PutAccountPolicyResponse < Struct.new(
+      nil,
       :account_policy,
       keyword_init: true
     )
@@ -4709,6 +4894,7 @@ module Aws::CloudWatchLogs
     #            <p>The JSON specified in <code>policyDocument</code> can be up to 30,720 characters.</p>
     #   @return [String]
     class PutDataProtectionPolicyRequest < Struct.new(
+      nil,
       :log_group_identifier,
       :policy_document,
       keyword_init: true
@@ -4726,6 +4912,7 @@ module Aws::CloudWatchLogs
     #   <p>The date and time that this policy was most recently updated.</p>
     #   @return [Integer]
     class PutDataProtectionPolicyResponse < Struct.new(
+      nil,
       :log_group_identifier,
       :policy_document,
       :last_updated_time,
@@ -4741,6 +4928,7 @@ module Aws::CloudWatchLogs
     #   <p>The contents of the policy.</p>
     #   @return [String]
     class PutDeliveryDestinationPolicyRequest < Struct.new(
+      nil,
       :delivery_destination_name,
       :delivery_destination_policy,
       keyword_init: true
@@ -4752,6 +4940,7 @@ module Aws::CloudWatchLogs
     #   <p>The contents of the policy that you just created.</p>
     #   @return [Types::Policy]
     class PutDeliveryDestinationPolicyResponse < Struct.new(
+      nil,
       :policy,
       keyword_init: true
     )
@@ -4808,6 +4997,7 @@ module Aws::CloudWatchLogs
     #            </p>
     #   @return [Hash<String, String>]
     class PutDeliveryDestinationRequest < Struct.new(
+      nil,
       :name,
       :output_format,
       :delivery_destination_configuration,
@@ -4823,6 +5013,7 @@ module Aws::CloudWatchLogs
     #         updated.</p>
     #   @return [Types::DeliveryDestination]
     class PutDeliveryDestinationResponse < Struct.new(
+      nil,
       :delivery_destination,
       keyword_init: true
     )
@@ -4896,6 +5087,7 @@ module Aws::CloudWatchLogs
     #            </p>
     #   @return [Hash<String, String>]
     class PutDeliverySourceRequest < Struct.new(
+      nil,
       :name,
       :resource_arn,
       :log_type,
@@ -4910,6 +5102,7 @@ module Aws::CloudWatchLogs
     #         updated.</p>
     #   @return [Types::DeliverySource]
     class PutDeliverySourceResponse < Struct.new(
+      nil,
       :delivery_source,
       keyword_init: true
     )
@@ -4936,6 +5129,7 @@ module Aws::CloudWatchLogs
     #            <p>If you omit this parameter, the default of <code>false</code> is used.</p>
     #   @return [Boolean]
     class PutDestinationPolicyRequest < Struct.new(
+      nil,
       :destination_name,
       :access_policy,
       :force_update,
@@ -4960,6 +5154,7 @@ module Aws::CloudWatchLogs
     #            </p>
     #   @return [Hash<String, String>]
     class PutDestinationRequest < Struct.new(
+      nil,
       :destination_name,
       :target_arn,
       :role_arn,
@@ -4973,6 +5168,7 @@ module Aws::CloudWatchLogs
     #   <p>The destination.</p>
     #   @return [Types::Destination]
     class PutDestinationResponse < Struct.new(
+      nil,
       :destination,
       keyword_init: true
     )
@@ -4997,6 +5193,7 @@ module Aws::CloudWatchLogs
     #           syntax and quotas</a>.</p>
     #   @return [String]
     class PutIndexPolicyRequest < Struct.new(
+      nil,
       :log_group_identifier,
       :policy_document,
       keyword_init: true
@@ -5008,6 +5205,7 @@ module Aws::CloudWatchLogs
     #   <p>The index policy that you just created or updated.</p>
     #   @return [Types::IndexPolicy]
     class PutIndexPolicyResponse < Struct.new(
+      nil,
       :index_policy,
       keyword_init: true
     )
@@ -5026,6 +5224,7 @@ module Aws::CloudWatchLogs
     #         <code>OPENSEARCH</code>.</p>
     #   @return [String]
     class PutIntegrationRequest < Struct.new(
+      nil,
       :integration_name,
       :resource_config,
       :integration_type,
@@ -5043,6 +5242,7 @@ module Aws::CloudWatchLogs
     #         you'll see the status as <code>PROVISIONING</code>.</p>
     #   @return [String]
     class PutIntegrationResponse < Struct.new(
+      nil,
       :integration_name,
       :integration_status,
       keyword_init: true
@@ -5073,6 +5273,7 @@ module Aws::CloudWatchLogs
     #   <p>The entity associated with the log events.</p>
     #   @return [Types::Entity]
     class PutLogEventsRequest < Struct.new(
+      nil,
       :log_group_name,
       :log_stream_name,
       :log_events,
@@ -5105,6 +5306,7 @@ module Aws::CloudWatchLogs
     #            </note>
     #   @return [Types::RejectedEntityInfo]
     class PutLogEventsResponse < Struct.new(
+      nil,
       :next_sequence_token,
       :rejected_log_events_info,
       :rejected_entity_info,
@@ -5139,6 +5341,7 @@ module Aws::CloudWatchLogs
     #   <p>A list of system fields to emit as additional dimensions in the generated metrics. Valid values are <code>@aws.account</code> and <code>@aws.region</code>. These dimensions help identify the source of centralized log data and count toward the total dimension limit for metric filters.</p>
     #   @return [Array<String>]
     class PutMetricFilterRequest < Struct.new(
+      nil,
       :log_group_name,
       :filter_name,
       :filter_pattern,
@@ -5186,6 +5389,7 @@ module Aws::CloudWatchLogs
     #         same request twice because of a network error.</p>
     #   @return [String]
     class PutQueryDefinitionRequest < Struct.new(
+      nil,
       :query_language,
       :name,
       :query_definition_id,
@@ -5201,6 +5405,7 @@ module Aws::CloudWatchLogs
     #   <p>The ID of the query definition.</p>
     #   @return [String]
     class PutQueryDefinitionResponse < Struct.new(
+      nil,
       :query_definition_id,
       keyword_init: true
     )
@@ -5241,6 +5446,7 @@ module Aws::CloudWatchLogs
     #         policy for the first time.</p>
     #   @return [String]
     class PutResourcePolicyRequest < Struct.new(
+      nil,
       :policy_name,
       :policy_document,
       :resource_arn,
@@ -5258,6 +5464,7 @@ module Aws::CloudWatchLogs
     #         resource-scoped policies.</p>
     #   @return [String]
     class PutResourcePolicyResponse < Struct.new(
+      nil,
       :resource_policy,
       :revision_id,
       keyword_init: true
@@ -5275,6 +5482,7 @@ module Aws::CloudWatchLogs
     #            <p>To set a log group so that its log events do not expire, use <a href="https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_DeleteRetentionPolicy.html">DeleteRetentionPolicy</a>. </p>
     #   @return [Integer]
     class PutRetentionPolicyRequest < Struct.new(
+      nil,
       :log_group_name,
       :retention_in_days,
       keyword_init: true
@@ -5343,6 +5551,7 @@ module Aws::CloudWatchLogs
     #   <p>A list of system fields to include in the log events sent to the subscription destination. Valid values are <code>@aws.account</code> and <code>@aws.region</code>. These fields provide source information for centralized log data in the forwarded payload.</p>
     #   @return [Array<String>]
     class PutSubscriptionFilterRequest < Struct.new(
+      nil,
       :log_group_name,
       :filter_name,
       :filter_pattern,
@@ -5366,6 +5575,7 @@ module Aws::CloudWatchLogs
     #         that are ingested.</p>
     #   @return [Array<Types::Processor>]
     class PutTransformerRequest < Struct.new(
+      nil,
       :log_group_identifier,
       :transformer_config,
       keyword_init: true
@@ -5381,6 +5591,7 @@ module Aws::CloudWatchLogs
     #   <p>Reserved.</p>
     #   @return [String]
     class QueryCompileError < Struct.new(
+      nil,
       :location,
       :message,
       keyword_init: true
@@ -5396,6 +5607,7 @@ module Aws::CloudWatchLogs
     #   <p>Reserved.</p>
     #   @return [Integer]
     class QueryCompileErrorLocation < Struct.new(
+      nil,
       :start_char_offset,
       :end_char_offset,
       keyword_init: true
@@ -5428,6 +5640,7 @@ module Aws::CloudWatchLogs
     #         appears here.</p>
     #   @return [Array<String>]
     class QueryDefinition < Struct.new(
+      nil,
       :query_language,
       :query_definition_id,
       :name,
@@ -5464,6 +5677,7 @@ module Aws::CloudWatchLogs
     #   <p>The name of the log group scanned by this query.</p>
     #   @return [String]
     class QueryInfo < Struct.new(
+      nil,
       :query_language,
       :query_id,
       :query_string,
@@ -5507,6 +5721,7 @@ module Aws::CloudWatchLogs
     #   <p>The number of log groups that were scanned by this query.</p>
     #   @return [Float]
     class QueryStatistics < Struct.new(
+      nil,
       :records_matched,
       :records_scanned,
       :estimated_records_skipped,
@@ -5538,6 +5753,7 @@ module Aws::CloudWatchLogs
     #           <code>recordFields</code> parameter provided to a <a href="https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_CreateDelivery.html">CreateDelivery</a> or <a href="https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_UpdateDeliveryConfiguration.html">UpdateDeliveryConfiguration</a> operation.</p>
     #   @return [Boolean]
     class RecordField < Struct.new(
+      nil,
       :name,
       :mandatory,
       keyword_init: true
@@ -5552,6 +5768,7 @@ module Aws::CloudWatchLogs
     #           <code>PutLogEvents</code>.</p>
     #   @return [String]
     class RejectedEntityInfo < Struct.new(
+      nil,
       :error_type,
       keyword_init: true
     )
@@ -5569,6 +5786,7 @@ module Aws::CloudWatchLogs
     #   <p>The expired log events.</p>
     #   @return [Integer]
     class RejectedLogEventsInfo < Struct.new(
+      nil,
       :too_new_log_event_start_index,
       :too_old_log_event_end_index,
       :expired_log_event_end_index,
@@ -5590,6 +5808,7 @@ module Aws::CloudWatchLogs
     #            </p>
     #   @return [Boolean]
     class RenameKeyEntry < Struct.new(
+      nil,
       :key,
       :rename_to,
       :overwrite_if_exists,
@@ -5610,6 +5829,7 @@ module Aws::CloudWatchLogs
     #         information about a single key to rename. </p>
     #   @return [Array<Types::RenameKeyEntry>]
     class RenameKeys < Struct.new(
+      nil,
       :entries,
       keyword_init: true
     )
@@ -5620,6 +5840,7 @@ module Aws::CloudWatchLogs
     # @!attribute message
     #   @return [String]
     class ResourceAlreadyExistsException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -5645,6 +5866,7 @@ module Aws::CloudWatchLogs
     # @!attribute message
     #   @return [String]
     class ResourceNotFoundException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -5675,6 +5897,7 @@ module Aws::CloudWatchLogs
     #         policies.</p>
     #   @return [String]
     class ResourcePolicy < Struct.new(
+      nil,
       :policy_name,
       :policy_document,
       :last_updated_time,
@@ -5697,6 +5920,7 @@ module Aws::CloudWatchLogs
     #   <p>The value of this field.</p>
     #   @return [String]
     class ResultField < Struct.new(
+      nil,
       :field,
       :value,
       keyword_init: true
@@ -5717,6 +5941,7 @@ module Aws::CloudWatchLogs
     #         that allows for integration with Apache Hive.</p>
     #   @return [Boolean]
     class S3DeliveryConfiguration < Struct.new(
+      nil,
       :suffix_path,
       :enable_hive_compatible_path,
       keyword_init: true
@@ -5732,6 +5957,7 @@ module Aws::CloudWatchLogs
     #   <p>Indicates whether all the events in this log stream were searched.</p>
     #   @return [Boolean]
     class SearchedLogStream < Struct.new(
+      nil,
       :log_stream_name,
       :searched_completely,
       keyword_init: true
@@ -5743,6 +5969,7 @@ module Aws::CloudWatchLogs
     # @!attribute message
     #   @return [String]
     class ServiceQuotaExceededException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -5753,6 +5980,7 @@ module Aws::CloudWatchLogs
     # @!attribute message
     #   @return [String]
     class ServiceUnavailableException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -5763,6 +5991,7 @@ module Aws::CloudWatchLogs
     # @!attribute message
     #   @return [String]
     class SessionStreamingException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -5774,6 +6003,7 @@ module Aws::CloudWatchLogs
     # @!attribute message
     #   @return [String]
     class SessionTimeoutException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -5788,6 +6018,7 @@ module Aws::CloudWatchLogs
     #         information about one field to split. </p>
     #   @return [Array<Types::SplitStringEntry>]
     class SplitString < Struct.new(
+      nil,
       :entries,
       keyword_init: true
     )
@@ -5802,6 +6033,7 @@ module Aws::CloudWatchLogs
     #   <p>The separator characters to split the string entry on.</p>
     #   @return [String]
     class SplitStringEntry < Struct.new(
+      nil,
       :source,
       :delimiter,
       keyword_init: true
@@ -5849,6 +6081,7 @@ module Aws::CloudWatchLogs
     #           Syntax</a>.</p>
     #   @return [String]
     class StartLiveTailRequest < Struct.new(
+      nil,
       :log_group_identifiers,
       :log_stream_names,
       :log_stream_name_prefixes,
@@ -5863,6 +6096,7 @@ module Aws::CloudWatchLogs
     #         events and exceptions.</p>
     #   @return [Types::StartLiveTailResponseStream]
     class StartLiveTailResponse < Struct.new(
+      nil,
       :response_stream,
       keyword_init: true
     )
@@ -5961,6 +6195,7 @@ module Aws::CloudWatchLogs
     #         default is 10,000.</p>
     #   @return [Integer]
     class StartQueryRequest < Struct.new(
+      nil,
       :query_language,
       :log_group_name,
       :log_group_names,
@@ -5978,6 +6213,7 @@ module Aws::CloudWatchLogs
     #   <p>The unique ID of the query. </p>
     #   @return [String]
     class StartQueryResponse < Struct.new(
+      nil,
       :query_id,
       keyword_init: true
     )
@@ -5989,6 +6225,7 @@ module Aws::CloudWatchLogs
     #           <code>DescribeQueries</code>.</p>
     #   @return [String]
     class StopQueryRequest < Struct.new(
+      nil,
       :query_id,
       keyword_init: true
     )
@@ -5999,6 +6236,7 @@ module Aws::CloudWatchLogs
     #   <p>This is true if the query was stopped by the <code>StopQuery</code> operation.</p>
     #   @return [Boolean]
     class StopQueryResponse < Struct.new(
+      nil,
       :success,
       keyword_init: true
     )
@@ -6049,6 +6287,7 @@ module Aws::CloudWatchLogs
     #   <p>The list of system fields that are included in the log events sent to the subscription destination. Returns the <code>emitSystemFields</code> value if it was specified when the subscription filter was created.</p>
     #   @return [Array<String>]
     class SubscriptionFilter < Struct.new(
+      nil,
       :filter_name,
       :log_group_name,
       :filter_pattern,
@@ -6077,6 +6316,7 @@ module Aws::CloudWatchLogs
     #         replace. </p>
     #   @return [Array<Types::SubstituteStringEntry>]
     class SubstituteString < Struct.new(
+      nil,
       :entries,
       keyword_init: true
     )
@@ -6097,6 +6337,7 @@ module Aws::CloudWatchLogs
     #            </p>
     #   @return [String]
     class SubstituteStringEntry < Struct.new(
+      nil,
       :source,
       :from,
       :to,
@@ -6115,6 +6356,7 @@ module Aws::CloudWatchLogs
     #   <p>Specifies whether the value of <code>value</code> is in seconds, minutes, or hours.</p>
     #   @return [String]
     class SuppressionPeriod < Struct.new(
+      nil,
       :value,
       :suppression_unit,
       keyword_init: true
@@ -6136,6 +6378,7 @@ module Aws::CloudWatchLogs
     #   <p>The key-value pairs to use for the tags.</p>
     #   @return [Hash<String, String>]
     class TagLogGroupRequest < Struct.new(
+      nil,
       :log_group_name,
       :tags,
       keyword_init: true
@@ -6160,6 +6403,7 @@ module Aws::CloudWatchLogs
     #   <p>The list of key-value pairs to associate with the resource.</p>
     #   @return [Hash<String, String>]
     class TagResourceRequest < Struct.new(
+      nil,
       :resource_arn,
       :tags,
       keyword_init: true
@@ -6176,6 +6420,7 @@ module Aws::CloudWatchLogs
     #   <p>The log event messages to test.</p>
     #   @return [Array<String>]
     class TestMetricFilterRequest < Struct.new(
+      nil,
       :filter_pattern,
       :log_event_messages,
       keyword_init: true
@@ -6187,6 +6432,7 @@ module Aws::CloudWatchLogs
     #   <p>The matched events.</p>
     #   @return [Array<Types::MetricFilterMatchRecord>]
     class TestMetricFilterResponse < Struct.new(
+      nil,
       :matches,
       keyword_init: true
     )
@@ -6202,6 +6448,7 @@ module Aws::CloudWatchLogs
     #   <p>An array of the raw log events that you want to use to test this transformer.</p>
     #   @return [Array<String>]
     class TestTransformerRequest < Struct.new(
+      nil,
       :transformer_config,
       :log_event_messages,
       keyword_init: true
@@ -6214,6 +6461,7 @@ module Aws::CloudWatchLogs
     #         transformed version of one of the log events that you input.</p>
     #   @return [Array<Types::TransformedLogRecord>]
     class TestTransformerResponse < Struct.new(
+      nil,
       :transformed_logs,
       keyword_init: true
     )
@@ -6224,6 +6472,7 @@ module Aws::CloudWatchLogs
     # @!attribute message
     #   @return [String]
     class ThrottlingException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -6237,6 +6486,7 @@ module Aws::CloudWatchLogs
     #   <p>The name of the resource.</p>
     #   @return [String]
     class TooManyTagsException < Struct.new(
+      nil,
       :message,
       :resource_name,
       keyword_init: true
@@ -6256,6 +6506,7 @@ module Aws::CloudWatchLogs
     #   <p>The log event message after being transformed.</p>
     #   @return [String]
     class TransformedLogRecord < Struct.new(
+      nil,
       :event_number,
       :event_message,
       :transformed_event_message,
@@ -6275,6 +6526,7 @@ module Aws::CloudWatchLogs
     #   <p>The array containing the keys of the fields to trim.</p>
     #   @return [Array<String>]
     class TrimString < Struct.new(
+      nil,
       :with_keys,
       keyword_init: true
     )
@@ -6291,6 +6543,7 @@ module Aws::CloudWatchLogs
     #         information about one field to change the type of. </p>
     #   @return [Array<Types::TypeConverterEntry>]
     class TypeConverter < Struct.new(
+      nil,
       :entries,
       keyword_init: true
     )
@@ -6306,6 +6559,7 @@ module Aws::CloudWatchLogs
     #           <code>double</code>, <code>string</code> and <code>boolean</code>.</p>
     #   @return [String]
     class TypeConverterEntry < Struct.new(
+      nil,
       :key,
       :type,
       keyword_init: true
@@ -6318,6 +6572,7 @@ module Aws::CloudWatchLogs
     # @!attribute message
     #   @return [String]
     class UnrecognizedClientException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -6333,6 +6588,7 @@ module Aws::CloudWatchLogs
     #   <p>The tag keys. The corresponding tags are removed from the log group.</p>
     #   @return [Array<String>]
     class UntagLogGroupRequest < Struct.new(
+      nil,
       :log_group_name,
       :tags,
       keyword_init: true
@@ -6357,6 +6613,7 @@ module Aws::CloudWatchLogs
     #   <p>The list of tag keys to remove from the resource.</p>
     #   @return [Array<String>]
     class UntagResourceRequest < Struct.new(
+      nil,
       :resource_arn,
       :tag_keys,
       keyword_init: true
@@ -6395,6 +6652,7 @@ module Aws::CloudWatchLogs
     #            </p>
     #   @return [Boolean]
     class UpdateAnomalyRequest < Struct.new(
+      nil,
       :anomaly_id,
       :pattern_id,
       :anomaly_detector_arn,
@@ -6422,6 +6680,7 @@ module Aws::CloudWatchLogs
     #         destination is an S3 bucket.</p>
     #   @return [Types::S3DeliveryConfiguration]
     class UpdateDeliveryConfigurationRequest < Struct.new(
+      nil,
       :id,
       :record_fields,
       :field_delimiter,
@@ -6432,6 +6691,7 @@ module Aws::CloudWatchLogs
     end
 
     class UpdateDeliveryConfigurationResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -6461,6 +6721,7 @@ module Aws::CloudWatchLogs
     #   <p>Use this parameter to pause or restart the anomaly detector. </p>
     #   @return [Boolean]
     class UpdateLogAnomalyDetectorRequest < Struct.new(
+      nil,
       :anomaly_detector_arn,
       :evaluation_frequency,
       :filter_pattern,
@@ -6477,6 +6738,7 @@ module Aws::CloudWatchLogs
     #   <p>The array of containing the keys of the field to convert to uppercase.</p>
     #   @return [Array<String>]
     class UpperCaseString < Struct.new(
+      nil,
       :with_keys,
       keyword_init: true
     )
@@ -6487,6 +6749,7 @@ module Aws::CloudWatchLogs
     # @!attribute message
     #   @return [String]
     class ValidationException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )

@@ -10,6 +10,7 @@ module Aws::S3Tables
     # @!attribute message
     #   @return [String]
     class AccessDeniedException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -20,6 +21,7 @@ module Aws::S3Tables
     # @!attribute message
     #   @return [String]
     class BadRequestException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -30,6 +32,7 @@ module Aws::S3Tables
     # @!attribute message
     #   @return [String]
     class ConflictException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -43,6 +46,7 @@ module Aws::S3Tables
     #   <p>A name for the namespace.</p>
     #   @return [Array<String>]
     class CreateNamespaceRequest < Struct.new(
+      nil,
       :table_bucket_arn,
       :namespace,
       keyword_init: true
@@ -57,6 +61,7 @@ module Aws::S3Tables
     #   <p>The name of the namespace.</p>
     #   @return [Array<String>]
     class CreateNamespaceResponse < Struct.new(
+      nil,
       :table_bucket_arn,
       :namespace,
       keyword_init: true
@@ -71,6 +76,7 @@ module Aws::S3Tables
     #   <p>The encryption configuration to use for the table bucket. This configuration specifies the default encryption settings that will be applied to all tables created in this bucket unless overridden at the table level. The configuration includes the encryption algorithm and, if using SSE-KMS, the KMS key to use.</p>
     #   @return [Types::EncryptionConfiguration]
     class CreateTableBucketRequest < Struct.new(
+      nil,
       :name,
       :encryption_configuration,
       keyword_init: true
@@ -82,6 +88,7 @@ module Aws::S3Tables
     #   <p>The Amazon Resource Name (ARN) of the table bucket.</p>
     #   @return [String]
     class CreateTableBucketResponse < Struct.new(
+      nil,
       :arn,
       keyword_init: true
     )
@@ -107,6 +114,7 @@ module Aws::S3Tables
     #   <p>The encryption configuration to use for the table. This configuration specifies the encryption algorithm and, if using SSE-KMS, the KMS key to use for encrypting the table. </p> <note> <p>If you choose SSE-KMS encryption you must grant the S3 Tables maintenance principal access to your KMS key. For more information, see <a href="https://docs.aws.amazon.com/AmazonS3/latest/userguide/s3-tables-kms-permissions.html">Permissions requirements for S3 Tables SSE-KMS encryption</a>.</p> </note>
     #   @return [Types::EncryptionConfiguration]
     class CreateTableRequest < Struct.new(
+      nil,
       :table_bucket_arn,
       :namespace,
       :name,
@@ -125,6 +133,7 @@ module Aws::S3Tables
     #   <p>The version token of the table.</p>
     #   @return [String]
     class CreateTableResponse < Struct.new(
+      nil,
       :table_arn,
       :version_token,
       keyword_init: true
@@ -139,6 +148,7 @@ module Aws::S3Tables
     #   <p>The name of the namespace.</p>
     #   @return [String]
     class DeleteNamespaceRequest < Struct.new(
+      nil,
       :table_bucket_arn,
       :namespace,
       keyword_init: true
@@ -150,6 +160,7 @@ module Aws::S3Tables
     #   <p>The Amazon Resource Name (ARN) of the table bucket.</p>
     #   @return [String]
     class DeleteTableBucketEncryptionRequest < Struct.new(
+      nil,
       :table_bucket_arn,
       keyword_init: true
     )
@@ -160,6 +171,7 @@ module Aws::S3Tables
     #   <p>The Amazon Resource Name (ARN) of the table bucket.</p>
     #   @return [String]
     class DeleteTableBucketPolicyRequest < Struct.new(
+      nil,
       :table_bucket_arn,
       keyword_init: true
     )
@@ -170,6 +182,7 @@ module Aws::S3Tables
     #   <p>The Amazon Resource Name (ARN) of the table bucket.</p>
     #   @return [String]
     class DeleteTableBucketRequest < Struct.new(
+      nil,
       :table_bucket_arn,
       keyword_init: true
     )
@@ -186,6 +199,7 @@ module Aws::S3Tables
     #   <p>The table name.</p>
     #   @return [String]
     class DeleteTablePolicyRequest < Struct.new(
+      nil,
       :table_bucket_arn,
       :namespace,
       :name,
@@ -207,6 +221,7 @@ module Aws::S3Tables
     #   <p>The version token of the table.</p>
     #   @return [String]
     class DeleteTableRequest < Struct.new(
+      nil,
       :table_bucket_arn,
       :namespace,
       :name,
@@ -224,6 +239,7 @@ module Aws::S3Tables
     #   <p>The Amazon Resource Name (ARN) of the KMS key to use for encryption. This field is required only when <code>sseAlgorithm</code> is set to <code>aws:kms</code>.</p>
     #   @return [String]
     class EncryptionConfiguration < Struct.new(
+      nil,
       :sse_algorithm,
       :kms_key_arn,
       keyword_init: true
@@ -235,6 +251,7 @@ module Aws::S3Tables
     # @!attribute message
     #   @return [String]
     class ForbiddenException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -248,6 +265,7 @@ module Aws::S3Tables
     #   <p>The name of the namespace.</p>
     #   @return [String]
     class GetNamespaceRequest < Struct.new(
+      nil,
       :table_bucket_arn,
       :namespace,
       keyword_init: true
@@ -274,6 +292,7 @@ module Aws::S3Tables
     #   <p>The unique identifier of the table bucket containing this namespace.</p>
     #   @return [String]
     class GetNamespaceResponse < Struct.new(
+      nil,
       :namespace,
       :created_at,
       :created_by,
@@ -289,6 +308,7 @@ module Aws::S3Tables
     #   <p>The Amazon Resource Name (ARN) of the table bucket.</p>
     #   @return [String]
     class GetTableBucketEncryptionRequest < Struct.new(
+      nil,
       :table_bucket_arn,
       keyword_init: true
     )
@@ -299,6 +319,7 @@ module Aws::S3Tables
     #   <p>The encryption configuration for the table bucket.</p>
     #   @return [Types::EncryptionConfiguration]
     class GetTableBucketEncryptionResponse < Struct.new(
+      nil,
       :encryption_configuration,
       keyword_init: true
     )
@@ -309,6 +330,7 @@ module Aws::S3Tables
     #   <p>The Amazon Resource Name (ARN) of the table bucket associated with the maintenance configuration.</p>
     #   @return [String]
     class GetTableBucketMaintenanceConfigurationRequest < Struct.new(
+      nil,
       :table_bucket_arn,
       keyword_init: true
     )
@@ -322,6 +344,7 @@ module Aws::S3Tables
     #   <p>Details about the maintenance configuration for the table bucket.</p>
     #   @return [Hash<String, Types::TableBucketMaintenanceConfigurationValue>]
     class GetTableBucketMaintenanceConfigurationResponse < Struct.new(
+      nil,
       :table_bucket_arn,
       :configuration,
       keyword_init: true
@@ -333,6 +356,7 @@ module Aws::S3Tables
     #   <p>The Amazon Resource Name (ARN) of the table bucket.</p>
     #   @return [String]
     class GetTableBucketPolicyRequest < Struct.new(
+      nil,
       :table_bucket_arn,
       keyword_init: true
     )
@@ -343,6 +367,7 @@ module Aws::S3Tables
     #   <p>The <code>JSON</code> that defines the policy.</p>
     #   @return [String]
     class GetTableBucketPolicyResponse < Struct.new(
+      nil,
       :resource_policy,
       keyword_init: true
     )
@@ -353,6 +378,7 @@ module Aws::S3Tables
     #   <p>The Amazon Resource Name (ARN) of the table bucket.</p>
     #   @return [String]
     class GetTableBucketRequest < Struct.new(
+      nil,
       :table_bucket_arn,
       keyword_init: true
     )
@@ -378,6 +404,7 @@ module Aws::S3Tables
     #   <p>The type of the table bucket.</p>
     #   @return [String]
     class GetTableBucketResponse < Struct.new(
+      nil,
       :arn,
       :name,
       :owner_account_id,
@@ -399,6 +426,7 @@ module Aws::S3Tables
     #   <p>The name of the table.</p>
     #   @return [String]
     class GetTableEncryptionRequest < Struct.new(
+      nil,
       :table_bucket_arn,
       :namespace,
       :name,
@@ -411,6 +439,7 @@ module Aws::S3Tables
     #   <p>The encryption configuration for the table.</p>
     #   @return [Types::EncryptionConfiguration]
     class GetTableEncryptionResponse < Struct.new(
+      nil,
       :encryption_configuration,
       keyword_init: true
     )
@@ -427,6 +456,7 @@ module Aws::S3Tables
     #   <p>The name of the table.</p>
     #   @return [String]
     class GetTableMaintenanceConfigurationRequest < Struct.new(
+      nil,
       :table_bucket_arn,
       :namespace,
       :name,
@@ -442,6 +472,7 @@ module Aws::S3Tables
     #   <p>Details about the maintenance configuration for the table bucket.</p>
     #   @return [Hash<String, Types::TableMaintenanceConfigurationValue>]
     class GetTableMaintenanceConfigurationResponse < Struct.new(
+      nil,
       :table_arn,
       :configuration,
       keyword_init: true
@@ -459,6 +490,7 @@ module Aws::S3Tables
     #   <p>The name of the maintenance job.</p>
     #   @return [String]
     class GetTableMaintenanceJobStatusRequest < Struct.new(
+      nil,
       :table_bucket_arn,
       :namespace,
       :name,
@@ -474,6 +506,7 @@ module Aws::S3Tables
     #   <p>The status of the maintenance job.</p>
     #   @return [Hash<String, Types::TableMaintenanceJobStatusValue>]
     class GetTableMaintenanceJobStatusResponse < Struct.new(
+      nil,
       :table_arn,
       :status,
       keyword_init: true
@@ -491,6 +524,7 @@ module Aws::S3Tables
     #   <p>The name of the table.</p>
     #   @return [String]
     class GetTableMetadataLocationRequest < Struct.new(
+      nil,
       :table_bucket_arn,
       :namespace,
       :name,
@@ -509,6 +543,7 @@ module Aws::S3Tables
     #   <p>The warehouse location.</p>
     #   @return [String]
     class GetTableMetadataLocationResponse < Struct.new(
+      nil,
       :version_token,
       :metadata_location,
       :warehouse_location,
@@ -527,6 +562,7 @@ module Aws::S3Tables
     #   <p>The name of the table.</p>
     #   @return [String]
     class GetTablePolicyRequest < Struct.new(
+      nil,
       :table_bucket_arn,
       :namespace,
       :name,
@@ -539,6 +575,7 @@ module Aws::S3Tables
     #   <p>The <code>JSON</code> that defines the policy.</p>
     #   @return [String]
     class GetTablePolicyResponse < Struct.new(
+      nil,
       :resource_policy,
       keyword_init: true
     )
@@ -558,6 +595,7 @@ module Aws::S3Tables
     #   <p>The Amazon Resource Name (ARN) of the table.</p>
     #   @return [String]
     class GetTableRequest < Struct.new(
+      nil,
       :table_bucket_arn,
       :namespace,
       :name,
@@ -616,6 +654,7 @@ module Aws::S3Tables
     #   <p>The unique identifier of the table bucket containing this table.</p>
     #   @return [String]
     class GetTableResponse < Struct.new(
+      nil,
       :name,
       :type,
       :table_arn,
@@ -650,6 +689,7 @@ module Aws::S3Tables
     #   <p>The compaction strategy to use for the table. This determines how files are selected and combined during compaction operations.</p>
     #   @return [String]
     class IcebergCompactionSettings < Struct.new(
+      nil,
       :target_file_size_mb,
       :strategy,
       keyword_init: true
@@ -662,6 +702,7 @@ module Aws::S3Tables
     #   <p>The schema for an Iceberg table.</p>
     #   @return [Types::IcebergSchema]
     class IcebergMetadata < Struct.new(
+      nil,
       :schema,
       keyword_init: true
     )
@@ -673,6 +714,7 @@ module Aws::S3Tables
     #   <p>The schema fields for the table</p>
     #   @return [Array<Types::SchemaField>]
     class IcebergSchema < Struct.new(
+      nil,
       :fields,
       keyword_init: true
     )
@@ -687,6 +729,7 @@ module Aws::S3Tables
     #   <p>The maximum age of a snapshot before it can be expired.</p>
     #   @return [Integer]
     class IcebergSnapshotManagementSettings < Struct.new(
+      nil,
       :min_snapshots_to_keep,
       :max_snapshot_age_hours,
       keyword_init: true
@@ -702,6 +745,7 @@ module Aws::S3Tables
     #   <p>The number of days an object has to be non-current before it is deleted.</p>
     #   @return [Integer]
     class IcebergUnreferencedFileRemovalSettings < Struct.new(
+      nil,
       :unreferenced_days,
       :non_current_days,
       keyword_init: true
@@ -713,6 +757,7 @@ module Aws::S3Tables
     # @!attribute message
     #   @return [String]
     class InternalServerErrorException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -732,6 +777,7 @@ module Aws::S3Tables
     #   <p>The maximum number of namespaces to return in the list.</p>
     #   @return [Integer]
     class ListNamespacesRequest < Struct.new(
+      nil,
       :table_bucket_arn,
       :prefix,
       :continuation_token,
@@ -748,6 +794,7 @@ module Aws::S3Tables
     #   <p>The <code>ContinuationToken</code> for pagination of the list results.</p>
     #   @return [String]
     class ListNamespacesResponse < Struct.new(
+      nil,
       :namespaces,
       :continuation_token,
       keyword_init: true
@@ -768,6 +815,7 @@ module Aws::S3Tables
     #   <p>The type of table buckets to filter by in the list.</p>
     #   @return [String]
     class ListTableBucketsRequest < Struct.new(
+      nil,
       :prefix,
       :continuation_token,
       :max_buckets,
@@ -784,6 +832,7 @@ module Aws::S3Tables
     #   <p>You can use this <code>ContinuationToken</code> for pagination of the list results.</p>
     #   @return [String]
     class ListTableBucketsResponse < Struct.new(
+      nil,
       :table_buckets,
       :continuation_token,
       keyword_init: true
@@ -807,6 +856,7 @@ module Aws::S3Tables
     #   <p>The maximum number of tables to return.</p>
     #   @return [Integer]
     class ListTablesRequest < Struct.new(
+      nil,
       :table_bucket_arn,
       :namespace,
       :prefix,
@@ -824,6 +874,7 @@ module Aws::S3Tables
     #   <p>You can use this <code>ContinuationToken</code> for pagination of the list results.</p>
     #   @return [String]
     class ListTablesResponse < Struct.new(
+      nil,
       :tables,
       :continuation_token,
       keyword_init: true
@@ -851,6 +902,7 @@ module Aws::S3Tables
     #   <p>The system-assigned unique identifier for the table bucket that contains this namespace.</p>
     #   @return [String]
     class NamespaceSummary < Struct.new(
+      nil,
       :namespace,
       :created_at,
       :created_by,
@@ -866,6 +918,7 @@ module Aws::S3Tables
     # @!attribute message
     #   @return [String]
     class NotFoundException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -879,6 +932,7 @@ module Aws::S3Tables
     #   <p>The encryption configuration to apply to the table bucket.</p>
     #   @return [Types::EncryptionConfiguration]
     class PutTableBucketEncryptionRequest < Struct.new(
+      nil,
       :table_bucket_arn,
       :encryption_configuration,
       keyword_init: true
@@ -896,6 +950,7 @@ module Aws::S3Tables
     #   <p>Defines the values of the maintenance configuration for the table bucket.</p>
     #   @return [Types::TableBucketMaintenanceConfigurationValue]
     class PutTableBucketMaintenanceConfigurationRequest < Struct.new(
+      nil,
       :table_bucket_arn,
       :type,
       :value,
@@ -911,6 +966,7 @@ module Aws::S3Tables
     #   <p>The <code>JSON</code> that defines the policy.</p>
     #   @return [String]
     class PutTableBucketPolicyRequest < Struct.new(
+      nil,
       :table_bucket_arn,
       :resource_policy,
       keyword_init: true
@@ -934,6 +990,7 @@ module Aws::S3Tables
     #   <p>Defines the values of the maintenance configuration for the table.</p>
     #   @return [Types::TableMaintenanceConfigurationValue]
     class PutTableMaintenanceConfigurationRequest < Struct.new(
+      nil,
       :table_bucket_arn,
       :namespace,
       :name,
@@ -957,6 +1014,7 @@ module Aws::S3Tables
     #   <p>The <code>JSON</code> that defines the policy.</p>
     #   @return [String]
     class PutTablePolicyRequest < Struct.new(
+      nil,
       :table_bucket_arn,
       :namespace,
       :name,
@@ -985,6 +1043,7 @@ module Aws::S3Tables
     #   <p>The version token of the table.</p>
     #   @return [String]
     class RenameTableRequest < Struct.new(
+      nil,
       :table_bucket_arn,
       :namespace,
       :name,
@@ -1007,6 +1066,7 @@ module Aws::S3Tables
     #   <p>A Boolean value that specifies whether values are required for each row in this field. By default, this is <code>false</code> and null values are allowed in the field. If this is <code>true</code> the field does not allow null values.</p>
     #   @return [Boolean]
     class SchemaField < Struct.new(
+      nil,
       :name,
       :type,
       :required,
@@ -1028,6 +1088,7 @@ module Aws::S3Tables
     #   <p>Contains details about the settings of the maintenance configuration.</p>
     #   @return [Types::TableBucketMaintenanceSettings]
     class TableBucketMaintenanceConfigurationValue < Struct.new(
+      nil,
       :status,
       :settings,
       keyword_init: true
@@ -1070,6 +1131,7 @@ module Aws::S3Tables
     #   <p>The type of the table bucket.</p>
     #   @return [String]
     class TableBucketSummary < Struct.new(
+      nil,
       :arn,
       :name,
       :owner_account_id,
@@ -1089,6 +1151,7 @@ module Aws::S3Tables
     #   <p>Contains details about the settings for the maintenance configuration.</p>
     #   @return [Types::TableMaintenanceSettings]
     class TableMaintenanceConfigurationValue < Struct.new(
+      nil,
       :status,
       :settings,
       keyword_init: true
@@ -1107,6 +1170,7 @@ module Aws::S3Tables
     #   <p>The failure message of a failed job.</p>
     #   @return [String]
     class TableMaintenanceJobStatusValue < Struct.new(
+      nil,
       :status,
       :last_run_timestamp,
       :failure_message,
@@ -1176,6 +1240,7 @@ module Aws::S3Tables
     #   <p>The unique identifier for the table bucket that contains this table.</p>
     #   @return [String]
     class TableSummary < Struct.new(
+      nil,
       :namespace,
       :name,
       :type,
@@ -1193,6 +1258,7 @@ module Aws::S3Tables
     # @!attribute message
     #   @return [String]
     class TooManyRequestsException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -1215,6 +1281,7 @@ module Aws::S3Tables
     #   <p>The new metadata location for the table. </p>
     #   @return [String]
     class UpdateTableMetadataLocationRequest < Struct.new(
+      nil,
       :table_bucket_arn,
       :namespace,
       :name,
@@ -1241,6 +1308,7 @@ module Aws::S3Tables
     #   <p>The metadata location of the table.</p>
     #   @return [String]
     class UpdateTableMetadataLocationResponse < Struct.new(
+      nil,
       :name,
       :table_arn,
       :namespace,

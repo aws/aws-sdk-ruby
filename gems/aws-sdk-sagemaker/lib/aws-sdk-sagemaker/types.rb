@@ -17,6 +17,7 @@ module Aws::SageMaker
     #   <p>The ID of the source.</p>
     #   @return [String]
     class ActionSource < Struct.new(
+      nil,
       :source_uri,
       :source_type,
       :source_id,
@@ -48,6 +49,7 @@ module Aws::SageMaker
     #   <p>When the action was last modified.</p>
     #   @return [Time]
     class ActionSummary < Struct.new(
+      nil,
       :action_arn,
       :action_name,
       :source,
@@ -70,6 +72,7 @@ module Aws::SageMaker
     #   <p>The type of association. The following are suggested uses for each type. Amazon SageMaker places no restrictions on their use.</p> <ul> <li> <p>ContributedTo - The source contributed to the destination or had a part in enabling the destination. For example, the training data contributed to the training job.</p> </li> <li> <p>AssociatedWith - The source is connected to the destination. For example, an approval workflow is associated with a model deployment.</p> </li> <li> <p>DerivedFrom - The destination is a modification of the source. For example, a digest output of a channel input for a processing job is derived from the original inputs.</p> </li> <li> <p>Produced - The source generated the destination. For example, a training job produced a model artifact.</p> </li> </ul>
     #   @return [String]
     class AddAssociationRequest < Struct.new(
+      nil,
       :source_arn,
       :destination_arn,
       :association_type,
@@ -85,6 +88,7 @@ module Aws::SageMaker
     #   <p>The Amazon Resource Name (ARN) of the destination.</p>
     #   @return [String]
     class AddAssociationResponse < Struct.new(
+      nil,
       :source_arn,
       :destination_arn,
       keyword_init: true
@@ -100,6 +104,7 @@ module Aws::SageMaker
     #   <p>The number of nodes to add to the specified instance group. The total number of nodes across all instance groups in a single request cannot exceed 50.</p>
     #   @return [Integer]
     class AddClusterNodeSpecification < Struct.new(
+      nil,
       :instance_group_name,
       :increment_target_count_by,
       keyword_init: true
@@ -114,6 +119,7 @@ module Aws::SageMaker
     #   <p>An array of key-value pairs. You can use tags to categorize your Amazon Web Services resources in different ways, for example, by purpose, owner, or environment. For more information, see <a href="https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html">Tagging Amazon Web Services Resources</a>.</p>
     #   @return [Array<Types::Tag>]
     class AddTagsInput < Struct.new(
+      nil,
       :resource_arn,
       :tags,
       keyword_init: true
@@ -125,6 +131,7 @@ module Aws::SageMaker
     #   <p>A list of tags associated with the SageMaker resource.</p>
     #   @return [Array<Types::Tag>]
     class AddTagsOutput < Struct.new(
+      nil,
       :tags,
       keyword_init: true
     )
@@ -136,6 +143,7 @@ module Aws::SageMaker
     #   <p>A list of Elastic Fabric Adapter (EFA) ENIs associated with the instance.</p>
     #   @return [Array<String>]
     class AdditionalEnis < Struct.new(
+      nil,
       :efa_enis,
       keyword_init: true
     )
@@ -165,6 +173,7 @@ module Aws::SageMaker
     #   <p>The supported MIME types for the output data.</p>
     #   @return [Array<String>]
     class AdditionalInferenceSpecificationDefinition < Struct.new(
+      nil,
       :name,
       :description,
       :containers,
@@ -185,6 +194,7 @@ module Aws::SageMaker
     #   <p>Specifies the S3 location of ML model data to deploy.</p>
     #   @return [Types::S3ModelDataSource]
     class AdditionalModelDataSource < Struct.new(
+      nil,
       :channel_name,
       :s3_data_source,
       keyword_init: true
@@ -206,6 +216,7 @@ module Aws::SageMaker
     #   <p>The ETag associated with S3 URI.</p>
     #   @return [String]
     class AdditionalS3DataSource < Struct.new(
+      nil,
       :s3_data_type,
       :s3_uri,
       :compression_type,
@@ -223,6 +234,7 @@ module Aws::SageMaker
     #   <p>The number of Edge Manager agents.</p>
     #   @return [Integer]
     class AgentVersion < Struct.new(
+      nil,
       :version,
       :agent_count,
       keyword_init: true
@@ -235,6 +247,7 @@ module Aws::SageMaker
     #   <p>The name of a CloudWatch alarm in your account.</p>
     #   @return [String]
     class Alarm < Struct.new(
+      nil,
       :alarm_name,
       keyword_init: true
     )
@@ -246,6 +259,7 @@ module Aws::SageMaker
     #   <p>The name of the alarm.</p>
     #   @return [String]
     class AlarmDetails < Struct.new(
+      nil,
       :alarm_name,
       keyword_init: true
     )
@@ -278,6 +292,7 @@ module Aws::SageMaker
     #   <p>The configuration to use an image from a private Docker registry for a training job.</p>
     #   @return [Types::TrainingImageConfig]
     class AlgorithmSpecification < Struct.new(
+      nil,
       :training_image,
       :algorithm_name,
       :training_input_mode,
@@ -299,6 +314,7 @@ module Aws::SageMaker
     #   <p>The status of the scan of the algorithm's Docker image container.</p>
     #   @return [Array<Types::AlgorithmStatusItem>]
     class AlgorithmStatusDetails < Struct.new(
+      nil,
       :validation_statuses,
       :image_scan_statuses,
       keyword_init: true
@@ -317,6 +333,7 @@ module Aws::SageMaker
     #   <p>if the overall status is <code>Failed</code>, the reason for the failure.</p>
     #   @return [String]
     class AlgorithmStatusItem < Struct.new(
+      nil,
       :name,
       :status,
       :failure_reason,
@@ -342,6 +359,7 @@ module Aws::SageMaker
     #   <p>The overall status of the algorithm.</p>
     #   @return [String]
     class AlgorithmSummary < Struct.new(
+      nil,
       :algorithm_name,
       :algorithm_arn,
       :algorithm_description,
@@ -363,6 +381,7 @@ module Aws::SageMaker
     #   <p>The <code>TransformJobDefinition</code> object that describes the transform job that SageMaker runs to validate your algorithm.</p>
     #   @return [Types::TransformJobDefinition]
     class AlgorithmValidationProfile < Struct.new(
+      nil,
       :profile_name,
       :training_job_definition,
       :transform_job_definition,
@@ -379,6 +398,7 @@ module Aws::SageMaker
     #   <p>An array of <code>AlgorithmValidationProfile</code> objects, each of which specifies a training job and batch transform job that SageMaker runs to validate your algorithm.</p>
     #   @return [Array<Types::AlgorithmValidationProfile>]
     class AlgorithmValidationSpecification < Struct.new(
+      nil,
       :validation_role,
       :validation_profiles,
       keyword_init: true
@@ -394,6 +414,7 @@ module Aws::SageMaker
     #   <p>The ARN of the Amazon Q profile used within the domain.</p>
     #   @return [String]
     class AmazonQSettings < Struct.new(
+      nil,
       :status,
       :q_profile_arn,
       keyword_init: true
@@ -406,6 +427,7 @@ module Aws::SageMaker
     #   <p>The Amazon Resource Name (ARN) of a Lambda function implements the logic for <a href="https://docs.aws.amazon.com/sagemaker/latest/dg/sms-annotation-consolidation.html">annotation consolidation</a> and to process output data.</p> <p>For <a href="https://docs.aws.amazon.com/sagemaker/latest/dg/sms-task-types.html">built-in task types</a>, use one of the following Amazon SageMaker Ground Truth Lambda function ARNs for <code>AnnotationConsolidationLambdaArn</code>. For custom labeling workflows, see <a href="https://docs.aws.amazon.com/sagemaker/latest/dg/sms-custom-templates-step3.html#sms-custom-templates-step3-postlambda">Post-annotation Lambda</a>.</p> <p> <b>Bounding box</b> - Finds the most similar boxes from different workers based on the Jaccard index of the boxes.</p> <ul> <li> <p> <code>arn:aws:lambda:us-east-1:432418664414:function:ACS-BoundingBox</code> </p> </li> <li> <p> <code>arn:aws:lambda:us-east-2:266458841044:function:ACS-BoundingBox</code> </p> </li> <li> <p> <code>arn:aws:lambda:us-west-2:081040173940:function:ACS-BoundingBox</code> </p> </li> <li> <p> <code>arn:aws:lambda:eu-west-1:568282634449:function:ACS-BoundingBox</code> </p> </li> <li> <p> <code>arn:aws:lambda:ap-northeast-1:477331159723:function:ACS-BoundingBox</code> </p> </li> <li> <p> <code>arn:aws:lambda:ap-southeast-2:454466003867:function:ACS-BoundingBox</code> </p> </li> <li> <p> <code>arn:aws:lambda:ap-south-1:565803892007:function:ACS-BoundingBox</code> </p> </li> <li> <p> <code>arn:aws:lambda:eu-central-1:203001061592:function:ACS-BoundingBox</code> </p> </li> <li> <p> <code>arn:aws:lambda:ap-northeast-2:845288260483:function:ACS-BoundingBox</code> </p> </li> <li> <p> <code>arn:aws:lambda:eu-west-2:487402164563:function:ACS-BoundingBox</code> </p> </li> <li> <p> <code>arn:aws:lambda:ap-southeast-1:377565633583:function:ACS-BoundingBox</code> </p> </li> <li> <p> <code>arn:aws:lambda:ca-central-1:918755190332:function:ACS-BoundingBox</code> </p> </li> </ul> <p> <b>Image classification</b> - Uses a variant of the Expectation Maximization approach to estimate the true class of an image based on annotations from individual workers.</p> <ul> <li> <p> <code>arn:aws:lambda:us-east-1:432418664414:function:ACS-ImageMultiClass</code> </p> </li> <li> <p> <code>arn:aws:lambda:us-east-2:266458841044:function:ACS-ImageMultiClass</code> </p> </li> <li> <p> <code>arn:aws:lambda:us-west-2:081040173940:function:ACS-ImageMultiClass</code> </p> </li> <li> <p> <code>arn:aws:lambda:eu-west-1:568282634449:function:ACS-ImageMultiClass</code> </p> </li> <li> <p> <code>arn:aws:lambda:ap-northeast-1:477331159723:function:ACS-ImageMultiClass</code> </p> </li> <li> <p> <code>arn:aws:lambda:ap-southeast-2:454466003867:function:ACS-ImageMultiClass</code> </p> </li> <li> <p> <code>arn:aws:lambda:ap-south-1:565803892007:function:ACS-ImageMultiClass</code> </p> </li> <li> <p> <code>arn:aws:lambda:eu-central-1:203001061592:function:ACS-ImageMultiClass</code> </p> </li> <li> <p> <code>arn:aws:lambda:ap-northeast-2:845288260483:function:ACS-ImageMultiClass</code> </p> </li> <li> <p> <code>arn:aws:lambda:eu-west-2:487402164563:function:ACS-ImageMultiClass</code> </p> </li> <li> <p> <code>arn:aws:lambda:ap-southeast-1:377565633583:function:ACS-ImageMultiClass</code> </p> </li> <li> <p> <code>arn:aws:lambda:ca-central-1:918755190332:function:ACS-ImageMultiClass</code> </p> </li> </ul> <p> <b>Multi-label image classification</b> - Uses a variant of the Expectation Maximization approach to estimate the true classes of an image based on annotations from individual workers.</p> <ul> <li> <p> <code>arn:aws:lambda:us-east-1:432418664414:function:ACS-ImageMultiClassMultiLabel</code> </p> </li> <li> <p> <code>arn:aws:lambda:us-east-2:266458841044:function:ACS-ImageMultiClassMultiLabel</code> </p> </li> <li> <p> <code>arn:aws:lambda:us-west-2:081040173940:function:ACS-ImageMultiClassMultiLabel</code> </p> </li> <li> <p> <code>arn:aws:lambda:eu-west-1:568282634449:function:ACS-ImageMultiClassMultiLabel</code> </p> </li> <li> <p> <code>arn:aws:lambda:ap-northeast-1:477331159723:function:ACS-ImageMultiClassMultiLabel</code> </p> </li> <li> <p> <code>arn:aws:lambda:ap-southeast-2:454466003867:function:ACS-ImageMultiClassMultiLabel</code> </p> </li> <li> <p> <code>arn:aws:lambda:ap-south-1:565803892007:function:ACS-ImageMultiClassMultiLabel</code> </p> </li> <li> <p> <code>arn:aws:lambda:eu-central-1:203001061592:function:ACS-ImageMultiClassMultiLabel</code> </p> </li> <li> <p> <code>arn:aws:lambda:ap-northeast-2:845288260483:function:ACS-ImageMultiClassMultiLabel</code> </p> </li> <li> <p> <code>arn:aws:lambda:eu-west-2:487402164563:function:ACS-ImageMultiClassMultiLabel</code> </p> </li> <li> <p> <code>arn:aws:lambda:ap-southeast-1:377565633583:function:ACS-ImageMultiClassMultiLabel</code> </p> </li> <li> <p> <code>arn:aws:lambda:ca-central-1:918755190332:function:ACS-ImageMultiClassMultiLabel</code> </p> </li> </ul> <p> <b>Semantic segmentation</b> - Treats each pixel in an image as a multi-class classification and treats pixel annotations from workers as "votes" for the correct label.</p> <ul> <li> <p> <code>arn:aws:lambda:us-east-1:432418664414:function:ACS-SemanticSegmentation</code> </p> </li> <li> <p> <code>arn:aws:lambda:us-east-2:266458841044:function:ACS-SemanticSegmentation</code> </p> </li> <li> <p> <code>arn:aws:lambda:us-west-2:081040173940:function:ACS-SemanticSegmentation</code> </p> </li> <li> <p> <code>arn:aws:lambda:eu-west-1:568282634449:function:ACS-SemanticSegmentation</code> </p> </li> <li> <p> <code>arn:aws:lambda:ap-northeast-1:477331159723:function:ACS-SemanticSegmentation</code> </p> </li> <li> <p> <code>arn:aws:lambda:ap-southeast-2:454466003867:function:ACS-SemanticSegmentation</code> </p> </li> <li> <p> <code>arn:aws:lambda:ap-south-1:565803892007:function:ACS-SemanticSegmentation</code> </p> </li> <li> <p> <code>arn:aws:lambda:eu-central-1:203001061592:function:ACS-SemanticSegmentation</code> </p> </li> <li> <p> <code>arn:aws:lambda:ap-northeast-2:845288260483:function:ACS-SemanticSegmentation</code> </p> </li> <li> <p> <code>arn:aws:lambda:eu-west-2:487402164563:function:ACS-SemanticSegmentation</code> </p> </li> <li> <p> <code>arn:aws:lambda:ap-southeast-1:377565633583:function:ACS-SemanticSegmentation</code> </p> </li> <li> <p> <code>arn:aws:lambda:ca-central-1:918755190332:function:ACS-SemanticSegmentation</code> </p> </li> </ul> <p> <b>Text classification</b> - Uses a variant of the Expectation Maximization approach to estimate the true class of text based on annotations from individual workers.</p> <ul> <li> <p> <code>arn:aws:lambda:us-east-1:432418664414:function:ACS-TextMultiClass</code> </p> </li> <li> <p> <code>arn:aws:lambda:us-east-2:266458841044:function:ACS-TextMultiClass</code> </p> </li> <li> <p> <code>arn:aws:lambda:us-west-2:081040173940:function:ACS-TextMultiClass</code> </p> </li> <li> <p> <code>arn:aws:lambda:eu-west-1:568282634449:function:ACS-TextMultiClass</code> </p> </li> <li> <p> <code>arn:aws:lambda:ap-northeast-1:477331159723:function:ACS-TextMultiClass</code> </p> </li> <li> <p> <code>arn:aws:lambda:ap-southeast-2:454466003867:function:ACS-TextMultiClass</code> </p> </li> <li> <p> <code>arn:aws:lambda:ap-south-1:565803892007:function:ACS-TextMultiClass</code> </p> </li> <li> <p> <code>arn:aws:lambda:eu-central-1:203001061592:function:ACS-TextMultiClass</code> </p> </li> <li> <p> <code>arn:aws:lambda:ap-northeast-2:845288260483:function:ACS-TextMultiClass</code> </p> </li> <li> <p> <code>arn:aws:lambda:eu-west-2:487402164563:function:ACS-TextMultiClass</code> </p> </li> <li> <p> <code>arn:aws:lambda:ap-southeast-1:377565633583:function:ACS-TextMultiClass</code> </p> </li> <li> <p> <code>arn:aws:lambda:ca-central-1:918755190332:function:ACS-TextMultiClass</code> </p> </li> </ul> <p> <b>Multi-label text classification</b> - Uses a variant of the Expectation Maximization approach to estimate the true classes of text based on annotations from individual workers.</p> <ul> <li> <p> <code>arn:aws:lambda:us-east-1:432418664414:function:ACS-TextMultiClassMultiLabel</code> </p> </li> <li> <p> <code>arn:aws:lambda:us-east-2:266458841044:function:ACS-TextMultiClassMultiLabel</code> </p> </li> <li> <p> <code>arn:aws:lambda:us-west-2:081040173940:function:ACS-TextMultiClassMultiLabel</code> </p> </li> <li> <p> <code>arn:aws:lambda:eu-west-1:568282634449:function:ACS-TextMultiClassMultiLabel</code> </p> </li> <li> <p> <code>arn:aws:lambda:ap-northeast-1:477331159723:function:ACS-TextMultiClassMultiLabel</code> </p> </li> <li> <p> <code>arn:aws:lambda:ap-southeast-2:454466003867:function:ACS-TextMultiClassMultiLabel</code> </p> </li> <li> <p> <code>arn:aws:lambda:ap-south-1:565803892007:function:ACS-TextMultiClassMultiLabel</code> </p> </li> <li> <p> <code>arn:aws:lambda:eu-central-1:203001061592:function:ACS-TextMultiClassMultiLabel</code> </p> </li> <li> <p> <code>arn:aws:lambda:ap-northeast-2:845288260483:function:ACS-TextMultiClassMultiLabel</code> </p> </li> <li> <p> <code>arn:aws:lambda:eu-west-2:487402164563:function:ACS-TextMultiClassMultiLabel</code> </p> </li> <li> <p> <code>arn:aws:lambda:ap-southeast-1:377565633583:function:ACS-TextMultiClassMultiLabel</code> </p> </li> <li> <p> <code>arn:aws:lambda:ca-central-1:918755190332:function:ACS-TextMultiClassMultiLabel</code> </p> </li> </ul> <p> <b>Named entity recognition</b> - Groups similar selections and calculates aggregate boundaries, resolving to most-assigned label.</p> <ul> <li> <p> <code>arn:aws:lambda:us-east-1:432418664414:function:ACS-NamedEntityRecognition</code> </p> </li> <li> <p> <code>arn:aws:lambda:us-east-2:266458841044:function:ACS-NamedEntityRecognition</code> </p> </li> <li> <p> <code>arn:aws:lambda:us-west-2:081040173940:function:ACS-NamedEntityRecognition</code> </p> </li> <li> <p> <code>arn:aws:lambda:eu-west-1:568282634449:function:ACS-NamedEntityRecognition</code> </p> </li> <li> <p> <code>arn:aws:lambda:ap-northeast-1:477331159723:function:ACS-NamedEntityRecognition</code> </p> </li> <li> <p> <code>arn:aws:lambda:ap-southeast-2:454466003867:function:ACS-NamedEntityRecognition</code> </p> </li> <li> <p> <code>arn:aws:lambda:ap-south-1:565803892007:function:ACS-NamedEntityRecognition</code> </p> </li> <li> <p> <code>arn:aws:lambda:eu-central-1:203001061592:function:ACS-NamedEntityRecognition</code> </p> </li> <li> <p> <code>arn:aws:lambda:ap-northeast-2:845288260483:function:ACS-NamedEntityRecognition</code> </p> </li> <li> <p> <code>arn:aws:lambda:eu-west-2:487402164563:function:ACS-NamedEntityRecognition</code> </p> </li> <li> <p> <code>arn:aws:lambda:ap-southeast-1:377565633583:function:ACS-NamedEntityRecognition</code> </p> </li> <li> <p> <code>arn:aws:lambda:ca-central-1:918755190332:function:ACS-NamedEntityRecognition</code> </p> </li> </ul> <p> <b>Video Classification</b> - Use this task type when you need workers to classify videos using predefined labels that you specify. Workers are shown videos and are asked to choose one label for each video.</p> <ul> <li> <p> <code>arn:aws:lambda:us-east-1:432418664414:function:ACS-VideoMultiClass</code> </p> </li> <li> <p> <code>arn:aws:lambda:us-east-2:266458841044:function:ACS-VideoMultiClass</code> </p> </li> <li> <p> <code>arn:aws:lambda:us-west-2:081040173940:function:ACS-VideoMultiClass</code> </p> </li> <li> <p> <code>arn:aws:lambda:eu-west-1:568282634449:function:ACS-VideoMultiClass</code> </p> </li> <li> <p> <code>arn:aws:lambda:ap-northeast-1:477331159723:function:ACS-VideoMultiClass</code> </p> </li> <li> <p> <code>arn:aws:lambda:ap-southeast-2:454466003867:function:ACS-VideoMultiClass</code> </p> </li> <li> <p> <code>arn:aws:lambda:ap-south-1:565803892007:function:ACS-VideoMultiClass</code> </p> </li> <li> <p> <code>arn:aws:lambda:eu-central-1:203001061592:function:ACS-VideoMultiClass</code> </p> </li> <li> <p> <code>arn:aws:lambda:ap-northeast-2:845288260483:function:ACS-VideoMultiClass</code> </p> </li> <li> <p> <code>arn:aws:lambda:eu-west-2:487402164563:function:ACS-VideoMultiClass</code> </p> </li> <li> <p> <code>arn:aws:lambda:ap-southeast-1:377565633583:function:ACS-VideoMultiClass</code> </p> </li> <li> <p> <code>arn:aws:lambda:ca-central-1:918755190332:function:ACS-VideoMultiClass</code> </p> </li> </ul> <p> <b>Video Frame Object Detection</b> - Use this task type to have workers identify and locate objects in a sequence of video frames (images extracted from a video) using bounding boxes. For example, you can use this task to ask workers to identify and localize various objects in a series of video frames, such as cars, bikes, and pedestrians.</p> <ul> <li> <p> <code>arn:aws:lambda:us-east-1:432418664414:function:ACS-VideoObjectDetection</code> </p> </li> <li> <p> <code>arn:aws:lambda:us-east-2:266458841044:function:ACS-VideoObjectDetection</code> </p> </li> <li> <p> <code>arn:aws:lambda:us-west-2:081040173940:function:ACS-VideoObjectDetection</code> </p> </li> <li> <p> <code>arn:aws:lambda:eu-west-1:568282634449:function:ACS-VideoObjectDetection</code> </p> </li> <li> <p> <code>arn:aws:lambda:ap-northeast-1:477331159723:function:ACS-VideoObjectDetection</code> </p> </li> <li> <p> <code>arn:aws:lambda:ap-southeast-2:454466003867:function:ACS-VideoObjectDetection</code> </p> </li> <li> <p> <code>arn:aws:lambda:ap-south-1:565803892007:function:ACS-VideoObjectDetection</code> </p> </li> <li> <p> <code>arn:aws:lambda:eu-central-1:203001061592:function:ACS-VideoObjectDetection</code> </p> </li> <li> <p> <code>arn:aws:lambda:ap-northeast-2:845288260483:function:ACS-VideoObjectDetection</code> </p> </li> <li> <p> <code>arn:aws:lambda:eu-west-2:487402164563:function:ACS-VideoObjectDetection</code> </p> </li> <li> <p> <code>arn:aws:lambda:ap-southeast-1:377565633583:function:ACS-VideoObjectDetection</code> </p> </li> <li> <p> <code>arn:aws:lambda:ca-central-1:918755190332:function:ACS-VideoObjectDetection</code> </p> </li> </ul> <p> <b>Video Frame Object Tracking</b> - Use this task type to have workers track the movement of objects in a sequence of video frames (images extracted from a video) using bounding boxes. For example, you can use this task to ask workers to track the movement of objects, such as cars, bikes, and pedestrians. </p> <ul> <li> <p> <code>arn:aws:lambda:us-east-1:432418664414:function:ACS-VideoObjectTracking</code> </p> </li> <li> <p> <code>arn:aws:lambda:us-east-2:266458841044:function:ACS-VideoObjectTracking</code> </p> </li> <li> <p> <code>arn:aws:lambda:us-west-2:081040173940:function:ACS-VideoObjectTracking</code> </p> </li> <li> <p> <code>arn:aws:lambda:eu-west-1:568282634449:function:ACS-VideoObjectTracking</code> </p> </li> <li> <p> <code>arn:aws:lambda:ap-northeast-1:477331159723:function:ACS-VideoObjectTracking</code> </p> </li> <li> <p> <code>arn:aws:lambda:ap-southeast-2:454466003867:function:ACS-VideoObjectTracking</code> </p> </li> <li> <p> <code>arn:aws:lambda:ap-south-1:565803892007:function:ACS-VideoObjectTracking</code> </p> </li> <li> <p> <code>arn:aws:lambda:eu-central-1:203001061592:function:ACS-VideoObjectTracking</code> </p> </li> <li> <p> <code>arn:aws:lambda:ap-northeast-2:845288260483:function:ACS-VideoObjectTracking</code> </p> </li> <li> <p> <code>arn:aws:lambda:eu-west-2:487402164563:function:ACS-VideoObjectTracking</code> </p> </li> <li> <p> <code>arn:aws:lambda:ap-southeast-1:377565633583:function:ACS-VideoObjectTracking</code> </p> </li> <li> <p> <code>arn:aws:lambda:ca-central-1:918755190332:function:ACS-VideoObjectTracking</code> </p> </li> </ul> <p> <b>3D Point Cloud Object Detection</b> - Use this task type when you want workers to classify objects in a 3D point cloud by drawing 3D cuboids around objects. For example, you can use this task type to ask workers to identify different types of objects in a point cloud, such as cars, bikes, and pedestrians.</p> <ul> <li> <p> <code>arn:aws:lambda:us-east-1:432418664414:function:ACS-3DPointCloudObjectDetection</code> </p> </li> <li> <p> <code>arn:aws:lambda:us-east-2:266458841044:function:ACS-3DPointCloudObjectDetection</code> </p> </li> <li> <p> <code>arn:aws:lambda:us-west-2:081040173940:function:ACS-3DPointCloudObjectDetection</code> </p> </li> <li> <p> <code>arn:aws:lambda:eu-west-1:568282634449:function:ACS-3DPointCloudObjectDetection</code> </p> </li> <li> <p> <code>arn:aws:lambda:ap-northeast-1:477331159723:function:ACS-3DPointCloudObjectDetection</code> </p> </li> <li> <p> <code>arn:aws:lambda:ap-southeast-2:454466003867:function:ACS-3DPointCloudObjectDetection</code> </p> </li> <li> <p> <code>arn:aws:lambda:ap-south-1:565803892007:function:ACS-3DPointCloudObjectDetection</code> </p> </li> <li> <p> <code>arn:aws:lambda:eu-central-1:203001061592:function:ACS-3DPointCloudObjectDetection</code> </p> </li> <li> <p> <code>arn:aws:lambda:ap-northeast-2:845288260483:function:ACS-3DPointCloudObjectDetection</code> </p> </li> <li> <p> <code>arn:aws:lambda:eu-west-2:487402164563:function:ACS-3DPointCloudObjectDetection</code> </p> </li> <li> <p> <code>arn:aws:lambda:ap-southeast-1:377565633583:function:ACS-3DPointCloudObjectDetection</code> </p> </li> <li> <p> <code>arn:aws:lambda:ca-central-1:918755190332:function:ACS-3DPointCloudObjectDetection</code> </p> </li> </ul> <p> <b>3D Point Cloud Object Tracking</b> - Use this task type when you want workers to draw 3D cuboids around objects that appear in a sequence of 3D point cloud frames. For example, you can use this task type to ask workers to track the movement of vehicles across multiple point cloud frames. </p> <ul> <li> <p> <code>arn:aws:lambda:us-east-1:432418664414:function:ACS-3DPointCloudObjectTracking</code> </p> </li> <li> <p> <code>arn:aws:lambda:us-east-2:266458841044:function:ACS-3DPointCloudObjectTracking</code> </p> </li> <li> <p> <code>arn:aws:lambda:us-west-2:081040173940:function:ACS-3DPointCloudObjectTracking</code> </p> </li> <li> <p> <code>arn:aws:lambda:eu-west-1:568282634449:function:ACS-3DPointCloudObjectTracking</code> </p> </li> <li> <p> <code>arn:aws:lambda:ap-northeast-1:477331159723:function:ACS-3DPointCloudObjectTracking</code> </p> </li> <li> <p> <code>arn:aws:lambda:ap-southeast-2:454466003867:function:ACS-3DPointCloudObjectTracking</code> </p> </li> <li> <p> <code>arn:aws:lambda:ap-south-1:565803892007:function:ACS-3DPointCloudObjectTracking</code> </p> </li> <li> <p> <code>arn:aws:lambda:eu-central-1:203001061592:function:ACS-3DPointCloudObjectTracking</code> </p> </li> <li> <p> <code>arn:aws:lambda:ap-northeast-2:845288260483:function:ACS-3DPointCloudObjectTracking</code> </p> </li> <li> <p> <code>arn:aws:lambda:eu-west-2:487402164563:function:ACS-3DPointCloudObjectTracking</code> </p> </li> <li> <p> <code>arn:aws:lambda:ap-southeast-1:377565633583:function:ACS-3DPointCloudObjectTracking</code> </p> </li> <li> <p> <code>arn:aws:lambda:ca-central-1:918755190332:function:ACS-3DPointCloudObjectTracking</code> </p> </li> </ul> <p> <b>3D Point Cloud Semantic Segmentation</b> - Use this task type when you want workers to create a point-level semantic segmentation masks by painting objects in a 3D point cloud using different colors where each color is assigned to one of the classes you specify.</p> <ul> <li> <p> <code>arn:aws:lambda:us-east-1:432418664414:function:ACS-3DPointCloudSemanticSegmentation</code> </p> </li> <li> <p> <code>arn:aws:lambda:us-east-2:266458841044:function:ACS-3DPointCloudSemanticSegmentation</code> </p> </li> <li> <p> <code>arn:aws:lambda:us-west-2:081040173940:function:ACS-3DPointCloudSemanticSegmentation</code> </p> </li> <li> <p> <code>arn:aws:lambda:eu-west-1:568282634449:function:ACS-3DPointCloudSemanticSegmentation</code> </p> </li> <li> <p> <code>arn:aws:lambda:ap-northeast-1:477331159723:function:ACS-3DPointCloudSemanticSegmentation</code> </p> </li> <li> <p> <code>arn:aws:lambda:ap-southeast-2:454466003867:function:ACS-3DPointCloudSemanticSegmentation</code> </p> </li> <li> <p> <code>arn:aws:lambda:ap-south-1:565803892007:function:ACS-3DPointCloudSemanticSegmentation</code> </p> </li> <li> <p> <code>arn:aws:lambda:eu-central-1:203001061592:function:ACS-3DPointCloudSemanticSegmentation</code> </p> </li> <li> <p> <code>arn:aws:lambda:ap-northeast-2:845288260483:function:ACS-3DPointCloudSemanticSegmentation</code> </p> </li> <li> <p> <code>arn:aws:lambda:eu-west-2:487402164563:function:ACS-3DPointCloudSemanticSegmentation</code> </p> </li> <li> <p> <code>arn:aws:lambda:ap-southeast-1:377565633583:function:ACS-3DPointCloudSemanticSegmentation</code> </p> </li> <li> <p> <code>arn:aws:lambda:ca-central-1:918755190332:function:ACS-3DPointCloudSemanticSegmentation</code> </p> </li> </ul> <p> <b>Use the following ARNs for Label Verification and Adjustment Jobs</b> </p> <p>Use label verification and adjustment jobs to review and adjust labels. To learn more, see <a href="https://docs.aws.amazon.com/sagemaker/latest/dg/sms-verification-data.html">Verify and Adjust Labels </a>.</p> <p> <b>Semantic Segmentation Adjustment</b> - Treats each pixel in an image as a multi-class classification and treats pixel adjusted annotations from workers as "votes" for the correct label.</p> <ul> <li> <p> <code>arn:aws:lambda:us-east-1:432418664414:function:ACS-AdjustmentSemanticSegmentation</code> </p> </li> <li> <p> <code>arn:aws:lambda:us-east-2:266458841044:function:ACS-AdjustmentSemanticSegmentation</code> </p> </li> <li> <p> <code>arn:aws:lambda:us-west-2:081040173940:function:ACS-AdjustmentSemanticSegmentation</code> </p> </li> <li> <p> <code>arn:aws:lambda:eu-west-1:568282634449:function:ACS-AdjustmentSemanticSegmentation</code> </p> </li> <li> <p> <code>arn:aws:lambda:ap-northeast-1:477331159723:function:ACS-AdjustmentSemanticSegmentation</code> </p> </li> <li> <p> <code>arn:aws:lambda:ap-southeast-2:454466003867:function:ACS-AdjustmentSemanticSegmentation</code> </p> </li> <li> <p> <code>arn:aws:lambda:ap-south-1:565803892007:function:ACS-AdjustmentSemanticSegmentation</code> </p> </li> <li> <p> <code>arn:aws:lambda:eu-central-1:203001061592:function:ACS-AdjustmentSemanticSegmentation</code> </p> </li> <li> <p> <code>arn:aws:lambda:ap-northeast-2:845288260483:function:ACS-AdjustmentSemanticSegmentation</code> </p> </li> <li> <p> <code>arn:aws:lambda:eu-west-2:487402164563:function:ACS-AdjustmentSemanticSegmentation</code> </p> </li> <li> <p> <code>arn:aws:lambda:ap-southeast-1:377565633583:function:ACS-AdjustmentSemanticSegmentation</code> </p> </li> <li> <p> <code>arn:aws:lambda:ca-central-1:918755190332:function:ACS-AdjustmentSemanticSegmentation</code> </p> </li> </ul> <p> <b>Semantic Segmentation Verification</b> - Uses a variant of the Expectation Maximization approach to estimate the true class of verification judgment for semantic segmentation labels based on annotations from individual workers.</p> <ul> <li> <p> <code>arn:aws:lambda:us-east-1:432418664414:function:ACS-VerificationSemanticSegmentation</code> </p> </li> <li> <p> <code>arn:aws:lambda:us-east-2:266458841044:function:ACS-VerificationSemanticSegmentation</code> </p> </li> <li> <p> <code>arn:aws:lambda:us-west-2:081040173940:function:ACS-VerificationSemanticSegmentation</code> </p> </li> <li> <p> <code>arn:aws:lambda:eu-west-1:568282634449:function:ACS-VerificationSemanticSegmentation</code> </p> </li> <li> <p> <code>arn:aws:lambda:ap-northeast-1:477331159723:function:ACS-VerificationSemanticSegmentation</code> </p> </li> <li> <p> <code>arn:aws:lambda:ap-southeast-2:454466003867:function:ACS-VerificationSemanticSegmentation</code> </p> </li> <li> <p> <code>arn:aws:lambda:ap-south-1:565803892007:function:ACS-VerificationSemanticSegmentation</code> </p> </li> <li> <p> <code>arn:aws:lambda:eu-central-1:203001061592:function:ACS-VerificationSemanticSegmentation</code> </p> </li> <li> <p> <code>arn:aws:lambda:ap-northeast-2:845288260483:function:ACS-VerificationSemanticSegmentation</code> </p> </li> <li> <p> <code>arn:aws:lambda:eu-west-2:487402164563:function:ACS-VerificationSemanticSegmentation</code> </p> </li> <li> <p> <code>arn:aws:lambda:ap-southeast-1:377565633583:function:ACS-VerificationSemanticSegmentation</code> </p> </li> <li> <p> <code>arn:aws:lambda:ca-central-1:918755190332:function:ACS-VerificationSemanticSegmentation</code> </p> </li> </ul> <p> <b>Bounding Box Adjustment</b> - Finds the most similar boxes from different workers based on the Jaccard index of the adjusted annotations.</p> <ul> <li> <p> <code>arn:aws:lambda:us-east-1:432418664414:function:ACS-AdjustmentBoundingBox</code> </p> </li> <li> <p> <code>arn:aws:lambda:us-east-2:266458841044:function:ACS-AdjustmentBoundingBox</code> </p> </li> <li> <p> <code>arn:aws:lambda:us-west-2:081040173940:function:ACS-AdjustmentBoundingBox</code> </p> </li> <li> <p> <code>arn:aws:lambda:eu-west-1:568282634449:function:ACS-AdjustmentBoundingBox</code> </p> </li> <li> <p> <code>arn:aws:lambda:ap-northeast-1:477331159723:function:ACS-AdjustmentBoundingBox</code> </p> </li> <li> <p> <code>arn:aws:lambda:ap-southeast-2:454466003867:function:ACS-AdjustmentBoundingBox</code> </p> </li> <li> <p> <code>arn:aws:lambda:ap-south-1:565803892007:function:ACS-AdjustmentBoundingBox</code> </p> </li> <li> <p> <code>arn:aws:lambda:eu-central-1:203001061592:function:ACS-AdjustmentBoundingBox</code> </p> </li> <li> <p> <code>arn:aws:lambda:ap-northeast-2:845288260483:function:ACS-AdjustmentBoundingBox</code> </p> </li> <li> <p> <code>arn:aws:lambda:eu-west-2:487402164563:function:ACS-AdjustmentBoundingBox</code> </p> </li> <li> <p> <code>arn:aws:lambda:ap-southeast-1:377565633583:function:ACS-AdjustmentBoundingBox</code> </p> </li> <li> <p> <code>arn:aws:lambda:ca-central-1:918755190332:function:ACS-AdjustmentBoundingBox</code> </p> </li> </ul> <p> <b>Bounding Box Verification</b> - Uses a variant of the Expectation Maximization approach to estimate the true class of verification judgement for bounding box labels based on annotations from individual workers.</p> <ul> <li> <p> <code>arn:aws:lambda:us-east-1:432418664414:function:ACS-VerificationBoundingBox</code> </p> </li> <li> <p> <code>arn:aws:lambda:us-east-2:266458841044:function:ACS-VerificationBoundingBox</code> </p> </li> <li> <p> <code>arn:aws:lambda:us-west-2:081040173940:function:ACS-VerificationBoundingBox</code> </p> </li> <li> <p> <code>arn:aws:lambda:eu-west-1:568282634449:function:ACS-VerificationBoundingBox</code> </p> </li> <li> <p> <code>arn:aws:lambda:ap-northeast-1:477331159723:function:ACS-VerificationBoundingBox</code> </p> </li> <li> <p> <code>arn:aws:lambda:ap-southeast-2:454466003867:function:ACS-VerificationBoundingBox</code> </p> </li> <li> <p> <code>arn:aws:lambda:ap-south-1:565803892007:function:ACS-VerificationBoundingBox</code> </p> </li> <li> <p> <code>arn:aws:lambda:eu-central-1:203001061592:function:ACS-VerificationBoundingBox</code> </p> </li> <li> <p> <code>arn:aws:lambda:ap-northeast-2:845288260483:function:ACS-VerificationBoundingBox</code> </p> </li> <li> <p> <code>arn:aws:lambda:eu-west-2:487402164563:function:ACS-VerificationBoundingBox</code> </p> </li> <li> <p> <code>arn:aws:lambda:ap-southeast-1:377565633583:function:ACS-VerificationBoundingBox</code> </p> </li> <li> <p> <code>arn:aws:lambda:ca-central-1:918755190332:function:ACS-VerificationBoundingBox</code> </p> </li> </ul> <p> <b>Video Frame Object Detection Adjustment</b> - Use this task type when you want workers to adjust bounding boxes that workers have added to video frames to classify and localize objects in a sequence of video frames.</p> <ul> <li> <p> <code>arn:aws:lambda:us-east-1:432418664414:function:ACS-AdjustmentVideoObjectDetection</code> </p> </li> <li> <p> <code>arn:aws:lambda:us-east-2:266458841044:function:ACS-AdjustmentVideoObjectDetection</code> </p> </li> <li> <p> <code>arn:aws:lambda:us-west-2:081040173940:function:ACS-AdjustmentVideoObjectDetection</code> </p> </li> <li> <p> <code>arn:aws:lambda:eu-west-1:568282634449:function:ACS-AdjustmentVideoObjectDetection</code> </p> </li> <li> <p> <code>arn:aws:lambda:ap-northeast-1:477331159723:function:ACS-AdjustmentVideoObjectDetection</code> </p> </li> <li> <p> <code>arn:aws:lambda:ap-southeast-2:454466003867:function:ACS-AdjustmentVideoObjectDetection</code> </p> </li> <li> <p> <code>arn:aws:lambda:ap-south-1:565803892007:function:ACS-AdjustmentVideoObjectDetection</code> </p> </li> <li> <p> <code>arn:aws:lambda:eu-central-1:203001061592:function:ACS-AdjustmentVideoObjectDetection</code> </p> </li> <li> <p> <code>arn:aws:lambda:ap-northeast-2:845288260483:function:ACS-AdjustmentVideoObjectDetection</code> </p> </li> <li> <p> <code>arn:aws:lambda:eu-west-2:487402164563:function:ACS-AdjustmentVideoObjectDetection</code> </p> </li> <li> <p> <code>arn:aws:lambda:ap-southeast-1:377565633583:function:ACS-AdjustmentVideoObjectDetection</code> </p> </li> <li> <p> <code>arn:aws:lambda:ca-central-1:918755190332:function:ACS-AdjustmentVideoObjectDetection</code> </p> </li> </ul> <p> <b>Video Frame Object Tracking Adjustment</b> - Use this task type when you want workers to adjust bounding boxes that workers have added to video frames to track object movement across a sequence of video frames.</p> <ul> <li> <p> <code>arn:aws:lambda:us-east-1:432418664414:function:ACS-AdjustmentVideoObjectTracking</code> </p> </li> <li> <p> <code>arn:aws:lambda:us-east-2:266458841044:function:ACS-AdjustmentVideoObjectTracking</code> </p> </li> <li> <p> <code>arn:aws:lambda:us-west-2:081040173940:function:ACS-AdjustmentVideoObjectTracking</code> </p> </li> <li> <p> <code>arn:aws:lambda:eu-west-1:568282634449:function:ACS-AdjustmentVideoObjectTracking</code> </p> </li> <li> <p> <code>arn:aws:lambda:ap-northeast-1:477331159723:function:ACS-AdjustmentVideoObjectTracking</code> </p> </li> <li> <p> <code>arn:aws:lambda:ap-southeast-2:454466003867:function:ACS-AdjustmentVideoObjectTracking</code> </p> </li> <li> <p> <code>arn:aws:lambda:ap-south-1:565803892007:function:ACS-AdjustmentVideoObjectTracking</code> </p> </li> <li> <p> <code>arn:aws:lambda:eu-central-1:203001061592:function:ACS-AdjustmentVideoObjectTracking</code> </p> </li> <li> <p> <code>arn:aws:lambda:ap-northeast-2:845288260483:function:ACS-AdjustmentVideoObjectTracking</code> </p> </li> <li> <p> <code>arn:aws:lambda:eu-west-2:487402164563:function:ACS-AdjustmentVideoObjectTracking</code> </p> </li> <li> <p> <code>arn:aws:lambda:ap-southeast-1:377565633583:function:ACS-AdjustmentVideoObjectTracking</code> </p> </li> <li> <p> <code>arn:aws:lambda:ca-central-1:918755190332:function:ACS-AdjustmentVideoObjectTracking</code> </p> </li> </ul> <p> <b>3D Point Cloud Object Detection Adjustment</b> - Use this task type when you want workers to adjust 3D cuboids around objects in a 3D point cloud. </p> <ul> <li> <p> <code>arn:aws:lambda:us-east-1:432418664414:function:ACS-Adjustment3DPointCloudObjectDetection</code> </p> </li> <li> <p> <code>arn:aws:lambda:us-east-2:266458841044:function:ACS-Adjustment3DPointCloudObjectDetection</code> </p> </li> <li> <p> <code>arn:aws:lambda:us-west-2:081040173940:function:ACS-Adjustment3DPointCloudObjectDetection</code> </p> </li> <li> <p> <code>arn:aws:lambda:eu-west-1:568282634449:function:ACS-Adjustment3DPointCloudObjectDetection</code> </p> </li> <li> <p> <code>arn:aws:lambda:ap-northeast-1:477331159723:function:ACS-Adjustment3DPointCloudObjectDetection</code> </p> </li> <li> <p> <code>arn:aws:lambda:ap-southeast-2:454466003867:function:ACS-Adjustment3DPointCloudObjectDetection</code> </p> </li> <li> <p> <code>arn:aws:lambda:ap-south-1:565803892007:function:ACS-Adjustment3DPointCloudObjectDetection</code> </p> </li> <li> <p> <code>arn:aws:lambda:eu-central-1:203001061592:function:ACS-Adjustment3DPointCloudObjectDetection</code> </p> </li> <li> <p> <code>arn:aws:lambda:ap-northeast-2:845288260483:function:ACS-Adjustment3DPointCloudObjectDetection</code> </p> </li> <li> <p> <code>arn:aws:lambda:eu-west-2:487402164563:function:ACS-Adjustment3DPointCloudObjectDetection</code> </p> </li> <li> <p> <code>arn:aws:lambda:ap-southeast-1:377565633583:function:ACS-Adjustment3DPointCloudObjectDetection</code> </p> </li> <li> <p> <code>arn:aws:lambda:ca-central-1:918755190332:function:ACS-Adjustment3DPointCloudObjectDetection</code> </p> </li> </ul> <p> <b>3D Point Cloud Object Tracking Adjustment</b> - Use this task type when you want workers to adjust 3D cuboids around objects that appear in a sequence of 3D point cloud frames.</p> <ul> <li> <p> <code>arn:aws:lambda:us-east-1:432418664414:function:ACS-Adjustment3DPointCloudObjectTracking</code> </p> </li> <li> <p> <code>arn:aws:lambda:us-east-2:266458841044:function:ACS-Adjustment3DPointCloudObjectTracking</code> </p> </li> <li> <p> <code>arn:aws:lambda:us-west-2:081040173940:function:ACS-Adjustment3DPointCloudObjectTracking</code> </p> </li> <li> <p> <code>arn:aws:lambda:eu-west-1:568282634449:function:ACS-Adjustment3DPointCloudObjectTracking</code> </p> </li> <li> <p> <code>arn:aws:lambda:ap-northeast-1:477331159723:function:ACS-Adjustment3DPointCloudObjectTracking</code> </p> </li> <li> <p> <code>arn:aws:lambda:ap-southeast-2:454466003867:function:ACS-Adjustment3DPointCloudObjectTracking</code> </p> </li> <li> <p> <code>arn:aws:lambda:ap-south-1:565803892007:function:ACS-Adjustment3DPointCloudObjectTracking</code> </p> </li> <li> <p> <code>arn:aws:lambda:eu-central-1:203001061592:function:ACS-Adjustment3DPointCloudObjectTracking</code> </p> </li> <li> <p> <code>arn:aws:lambda:ap-northeast-2:845288260483:function:ACS-Adjustment3DPointCloudObjectTracking</code> </p> </li> <li> <p> <code>arn:aws:lambda:eu-west-2:487402164563:function:ACS-Adjustment3DPointCloudObjectTracking</code> </p> </li> <li> <p> <code>arn:aws:lambda:ap-southeast-1:377565633583:function:ACS-Adjustment3DPointCloudObjectTracking</code> </p> </li> <li> <p> <code>arn:aws:lambda:ca-central-1:918755190332:function:ACS-Adjustment3DPointCloudObjectTracking</code> </p> </li> </ul> <p> <b>3D Point Cloud Semantic Segmentation Adjustment</b> - Use this task type when you want workers to adjust a point-level semantic segmentation masks using a paint tool.</p> <ul> <li> <p> <code>arn:aws:lambda:us-east-1:432418664414:function:ACS-3DPointCloudSemanticSegmentation</code> </p> </li> <li> <p> <code>arn:aws:lambda:us-east-1:432418664414:function:ACS-Adjustment3DPointCloudSemanticSegmentation</code> </p> </li> <li> <p> <code>arn:aws:lambda:us-east-2:266458841044:function:ACS-Adjustment3DPointCloudSemanticSegmentation</code> </p> </li> <li> <p> <code>arn:aws:lambda:us-west-2:081040173940:function:ACS-Adjustment3DPointCloudSemanticSegmentation</code> </p> </li> <li> <p> <code>arn:aws:lambda:eu-west-1:568282634449:function:ACS-Adjustment3DPointCloudSemanticSegmentation</code> </p> </li> <li> <p> <code>arn:aws:lambda:ap-northeast-1:477331159723:function:ACS-Adjustment3DPointCloudSemanticSegmentation</code> </p> </li> <li> <p> <code>arn:aws:lambda:ap-southeast-2:454466003867:function:ACS-Adjustment3DPointCloudSemanticSegmentation</code> </p> </li> <li> <p> <code>arn:aws:lambda:ap-south-1:565803892007:function:ACS-Adjustment3DPointCloudSemanticSegmentation</code> </p> </li> <li> <p> <code>arn:aws:lambda:eu-central-1:203001061592:function:ACS-Adjustment3DPointCloudSemanticSegmentation</code> </p> </li> <li> <p> <code>arn:aws:lambda:ap-northeast-2:845288260483:function:ACS-Adjustment3DPointCloudSemanticSegmentation</code> </p> </li> <li> <p> <code>arn:aws:lambda:eu-west-2:487402164563:function:ACS-Adjustment3DPointCloudSemanticSegmentation</code> </p> </li> <li> <p> <code>arn:aws:lambda:ap-southeast-1:377565633583:function:ACS-Adjustment3DPointCloudSemanticSegmentation</code> </p> </li> <li> <p> <code>arn:aws:lambda:ca-central-1:918755190332:function:ACS-Adjustment3DPointCloudSemanticSegmentation</code> </p> </li> </ul> <p> <b>Generative AI/Custom</b> - Direct passthrough of output data without any transformation.</p> <ul> <li> <p> <code>arn:aws:lambda:us-east-1:432418664414:function:ACS-PassThrough</code> </p> </li> <li> <p> <code>arn:aws:lambda:us-east-2:266458841044:function:ACS-PassThrough</code> </p> </li> <li> <p> <code>arn:aws:lambda:us-west-2:081040173940:function:ACS-PassThrough</code> </p> </li> <li> <p> <code>arn:aws:lambda:eu-west-1:568282634449:function:ACS-PassThrough</code> </p> </li> <li> <p> <code>arn:aws:lambda:ap-northeast-1:477331159723:function:ACS-PassThrough</code> </p> </li> <li> <p> <code>arn:aws:lambda:ap-southeast-2:454466003867:function:ACS-PassThrough</code> </p> </li> <li> <p> <code>arn:aws:lambda:ap-south-1:565803892007:function:ACS-PassThrough</code> </p> </li> <li> <p> <code>arn:aws:lambda:eu-central-1:203001061592:function:ACS-PassThrough</code> </p> </li> <li> <p> <code>arn:aws:lambda:ap-northeast-2:845288260483:function:ACS-PassThrough</code> </p> </li> <li> <p> <code>arn:aws:lambda:eu-west-2:487402164563:function:ACS-PassThrough</code> </p> </li> <li> <p> <code>arn:aws:lambda:ap-southeast-1:377565633583:function:ACS-PassThrough</code> </p> </li> <li> <p> <code>arn:aws:lambda:ca-central-1:918755190332:function:ACS-PassThrough</code> </p> </li> </ul>
     #   @return [String]
     class AnnotationConsolidationConfig < Struct.new(
+      nil,
       :annotation_consolidation_lambda_arn,
       keyword_init: true
     )
@@ -438,6 +460,7 @@ module Aws::SageMaker
     #   <p>Specifies the ARN's of a SageMaker AI image and SageMaker AI image version, and the instance type that the version runs on.</p> <note> <p>When both <code>SageMakerImageVersionArn</code> and <code>SageMakerImageArn</code> are passed, <code>SageMakerImageVersionArn</code> is used. Any updates to <code>SageMakerImageArn</code> will not take effect if <code>SageMakerImageVersionArn</code> already exists in the <code>ResourceSpec</code> because <code>SageMakerImageVersionArn</code> always takes precedence. To clear the value set for <code>SageMakerImageVersionArn</code>, pass <code>None</code> as the value.</p> </note>
     #   @return [Types::ResourceSpec]
     class AppDetails < Struct.new(
+      nil,
       :domain_id,
       :user_profile_name,
       :space_name,
@@ -474,6 +497,7 @@ module Aws::SageMaker
     #   <p>The configuration for the file system and the runtime, such as the environment variables and entry point.</p>
     #   @return [Types::CodeEditorAppImageConfig]
     class AppImageConfigDetails < Struct.new(
+      nil,
       :app_image_config_arn,
       :app_image_config_name,
       :creation_time,
@@ -491,6 +515,7 @@ module Aws::SageMaker
     #   <p>Settings related to idle shutdown of Studio applications.</p>
     #   @return [Types::IdleSettings]
     class AppLifecycleManagement < Struct.new(
+      nil,
       :idle_settings,
       keyword_init: true
     )
@@ -508,6 +533,7 @@ module Aws::SageMaker
     #   <p>The arguments for a container used to run a processing job.</p>
     #   @return [Array<String>]
     class AppSpecification < Struct.new(
+      nil,
       :image_uri,
       :container_entrypoint,
       :container_arguments,
@@ -524,6 +550,7 @@ module Aws::SageMaker
     #   <p>A list of source types.</p>
     #   @return [Array<Types::ArtifactSourceType>]
     class ArtifactSource < Struct.new(
+      nil,
       :source_uri,
       :source_types,
       keyword_init: true
@@ -539,6 +566,7 @@ module Aws::SageMaker
     #   <p>The ID.</p>
     #   @return [String]
     class ArtifactSourceType < Struct.new(
+      nil,
       :source_id_type,
       :value,
       keyword_init: true
@@ -566,6 +594,7 @@ module Aws::SageMaker
     #   <p>When the artifact was last modified.</p>
     #   @return [Time]
     class ArtifactSummary < Struct.new(
+      nil,
       :artifact_arn,
       :artifact_name,
       :source,
@@ -584,6 +613,7 @@ module Aws::SageMaker
     #   <p>The name of the trial to associate with.</p>
     #   @return [String]
     class AssociateTrialComponentRequest < Struct.new(
+      nil,
       :trial_component_name,
       :trial_name,
       keyword_init: true
@@ -598,6 +628,7 @@ module Aws::SageMaker
     #   <p>The Amazon Resource Name (ARN) of the trial.</p>
     #   @return [String]
     class AssociateTrialComponentResponse < Struct.new(
+      nil,
       :trial_component_arn,
       :trial_arn,
       keyword_init: true
@@ -634,6 +665,7 @@ module Aws::SageMaker
     #   <p>Information about the user who created or modified a SageMaker resource.</p>
     #   @return [Types::UserContext]
     class AssociationSummary < Struct.new(
+      nil,
       :source_arn,
       :destination_arn,
       :source_type,
@@ -653,6 +685,7 @@ module Aws::SageMaker
     #   <p>The maximum number of concurrent requests sent by the SageMaker client to the model container. If no value is provided, SageMaker chooses an optimal value.</p>
     #   @return [Integer]
     class AsyncInferenceClientConfig < Struct.new(
+      nil,
       :max_concurrent_invocations_per_instance,
       keyword_init: true
     )
@@ -667,6 +700,7 @@ module Aws::SageMaker
     #   <p>Specifies the configuration for asynchronous inference invocation outputs.</p>
     #   @return [Types::AsyncInferenceOutputConfig]
     class AsyncInferenceConfig < Struct.new(
+      nil,
       :client_config,
       :output_config,
       keyword_init: true
@@ -685,6 +719,7 @@ module Aws::SageMaker
     #   <p>The Amazon SNS topics where you want the inference response to be included.</p> <note> <p>The inference response is included only if the response size is less than or equal to 128 KB.</p> </note>
     #   @return [Array<String>]
     class AsyncInferenceNotificationConfig < Struct.new(
+      nil,
       :success_topic,
       :error_topic,
       :include_inference_response_in,
@@ -707,6 +742,7 @@ module Aws::SageMaker
     #   <p>The Amazon S3 location to upload failure inference responses to.</p>
     #   @return [String]
     class AsyncInferenceOutputConfig < Struct.new(
+      nil,
       :kms_key_id,
       :s3_output_path,
       :notification_config,
@@ -742,6 +778,7 @@ module Aws::SageMaker
     #   <p>The compression used for Athena query results.</p>
     #   @return [String]
     class AthenaDatasetDefinition < Struct.new(
+      nil,
       :catalog,
       :database,
       :query_string,
@@ -765,6 +802,7 @@ module Aws::SageMaker
     #   <p> The unique identifier of your EBS volume to attach. The volume must be in the <code>available</code> state. </p>
     #   @return [String]
     class AttachClusterNodeVolumeRequest < Struct.new(
+      nil,
       :cluster_arn,
       :node_id,
       :volume_id,
@@ -792,6 +830,7 @@ module Aws::SageMaker
     #   <p> The device name assigned to your attached volume on the target instance. </p>
     #   @return [String]
     class AttachClusterNodeVolumeResponse < Struct.new(
+      nil,
       :cluster_arn,
       :node_id,
       :volume_id,
@@ -811,6 +850,7 @@ module Aws::SageMaker
     #   <p>The recommended local file path where the downloaded file should be stored to maintain proper directory structure and file organization.</p>
     #   @return [String]
     class AuthorizedUrl < Struct.new(
+      nil,
       :url,
       :local_path,
       keyword_init: true
@@ -823,6 +863,7 @@ module Aws::SageMaker
     #   <p>The selection of algorithms trained on your dataset to generate the model candidates for an Autopilot job.</p> <ul> <li> <p> <b>For the tabular problem type <code>TabularJobConfig</code>:</b> </p> <note> <p>Selected algorithms must belong to the list corresponding to the training mode set in <a href="https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_AutoMLJobConfig.html#sagemaker-Type-AutoMLJobConfig-Mode">AutoMLJobConfig.Mode</a> (<code>ENSEMBLING</code> or <code>HYPERPARAMETER_TUNING</code>). Choose a minimum of 1 algorithm.</p> </note> <ul> <li> <p>In <code>ENSEMBLING</code> mode:</p> <ul> <li> <p>"catboost"</p> </li> <li> <p>"extra-trees"</p> </li> <li> <p>"fastai"</p> </li> <li> <p>"lightgbm"</p> </li> <li> <p>"linear-learner"</p> </li> <li> <p>"nn-torch"</p> </li> <li> <p>"randomforest"</p> </li> <li> <p>"xgboost"</p> </li> </ul> </li> <li> <p>In <code>HYPERPARAMETER_TUNING</code> mode:</p> <ul> <li> <p>"linear-learner"</p> </li> <li> <p>"mlp"</p> </li> <li> <p>"xgboost"</p> </li> </ul> </li> </ul> </li> <li> <p> <b>For the time-series forecasting problem type <code>TimeSeriesForecastingJobConfig</code>:</b> </p> <ul> <li> <p>Choose your algorithms from this list.</p> <ul> <li> <p>"cnn-qr"</p> </li> <li> <p>"deepar"</p> </li> <li> <p>"prophet"</p> </li> <li> <p>"arima"</p> </li> <li> <p>"npts"</p> </li> <li> <p>"ets"</p> </li> </ul> </li> </ul> </li> </ul>
     #   @return [Array<String>]
     class AutoMLAlgorithmConfig < Struct.new(
+      nil,
       :auto_ml_algorithms,
       keyword_init: true
     )
@@ -867,6 +908,7 @@ module Aws::SageMaker
     #   <p>The mapping of all supported processing unit (CPU, GPU, etc...) to inference container definitions for the candidate. This field is populated for the AutoML jobs V2 (for example, for jobs created by calling <code>CreateAutoMLJobV2</code>) related to image or text classification problem types only.</p>
     #   @return [Hash<String, Array<Types::AutoMLContainerDefinition>>]
     class AutoMLCandidate < Struct.new(
+      nil,
       :candidate_name,
       :final_auto_ml_job_objective_metric,
       :objective_status,
@@ -892,6 +934,7 @@ module Aws::SageMaker
     #   <p>Stores the configuration information for the selection of algorithms trained on tabular data.</p> <p>The list of available algorithms to choose from depends on the training mode set in <a href="https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_TabularJobConfig.html"> <code>TabularJobConfig.Mode</code> </a>.</p> <ul> <li> <p> <code>AlgorithmsConfig</code> should not be set if the training mode is set on <code>AUTO</code>.</p> </li> <li> <p>When <code>AlgorithmsConfig</code> is provided, one <code>AutoMLAlgorithms</code> attribute must be set and one only.</p> <p>If the list of algorithms provided as values for <code>AutoMLAlgorithms</code> is empty, <code>CandidateGenerationConfig</code> uses the full set of algorithms for the given training mode.</p> </li> <li> <p>When <code>AlgorithmsConfig</code> is not provided, <code>CandidateGenerationConfig</code> uses the full set of algorithms for the given training mode.</p> </li> </ul> <p>For the list of all algorithms per problem type and training mode, see <a href="https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_AutoMLAlgorithmConfig.html"> AutoMLAlgorithmConfig</a>.</p> <p>For more information on each algorithm, see the <a href="https://docs.aws.amazon.com/sagemaker/latest/dg/autopilot-model-support-validation.html#autopilot-algorithm-support">Algorithm support</a> section in Autopilot developer guide.</p>
     #   @return [Array<Types::AutoMLAlgorithmConfig>]
     class AutoMLCandidateGenerationConfig < Struct.new(
+      nil,
       :feature_specification_s3_uri,
       :algorithms_config,
       keyword_init: true
@@ -910,6 +953,7 @@ module Aws::SageMaker
     #   <p>The name for the candidate's step.</p>
     #   @return [String]
     class AutoMLCandidateStep < Struct.new(
+      nil,
       :candidate_step_type,
       :candidate_step_arn,
       :candidate_step_name,
@@ -938,6 +982,7 @@ module Aws::SageMaker
     #   <p>If specified, this column name indicates which column of the dataset should be treated as sample weights for use by the objective metric during the training, evaluation, and the selection of the best model. This column is not considered as a predictive feature. For more information on Autopilot metrics, see <a href="https://docs.aws.amazon.com/sagemaker/latest/dg/autopilot-metrics-validation.html">Metrics and validation</a>.</p> <p>Sample weights should be numeric, non-negative, with larger values indicating which rows are more important than others. Data points that have invalid or no weight value are excluded.</p> <p>Support for sample weights is available in <a href="https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_AutoMLAlgorithmConfig.html">Ensembling</a> mode only.</p>
     #   @return [String]
     class AutoMLChannel < Struct.new(
+      nil,
       :data_source,
       :compression_type,
       :target_attribute_name,
@@ -954,6 +999,7 @@ module Aws::SageMaker
     #   <p>The configuration for using <a href="https://docs.aws.amazon.com/emr/latest/EMR-Serverless-UserGuide/emr-serverless.html"> EMR Serverless</a> to run the AutoML job V2.</p> <p>To allow your AutoML job V2 to automatically initiate a remote job on EMR Serverless when additional compute resources are needed to process large datasets, you need to provide an <code>EmrServerlessComputeConfig</code> object, which includes an <code>ExecutionRoleARN</code> attribute, to the <code>AutoMLComputeConfig</code> of the AutoML job V2 input request.</p> <p>By seamlessly transitioning to EMR Serverless when required, the AutoML job can handle datasets that would otherwise exceed the initially provisioned resources, without any manual intervention from you. </p> <p>EMR Serverless is available for the tabular and time series problem types. We recommend setting up this option for tabular datasets larger than 5 GB and time series datasets larger than 30 GB.</p>
     #   @return [Types::EmrServerlessComputeConfig]
     class AutoMLComputeConfig < Struct.new(
+      nil,
       :emr_serverless_compute_config,
       keyword_init: true
     )
@@ -971,6 +1017,7 @@ module Aws::SageMaker
     #   <p>The environment variables to set in the container. For more information, see <a href="https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_ContainerDefinition.html"> ContainerDefinition</a>.</p>
     #   @return [Hash<String, String>]
     class AutoMLContainerDefinition < Struct.new(
+      nil,
       :image,
       :model_data_url,
       :environment,
@@ -984,6 +1031,7 @@ module Aws::SageMaker
     #   <p>The Amazon S3 location of the input data.</p>
     #   @return [Types::AutoMLS3DataSource]
     class AutoMLDataSource < Struct.new(
+      nil,
       :s3_data_source,
       keyword_init: true
     )
@@ -995,6 +1043,7 @@ module Aws::SageMaker
     #   <p>The validation fraction (optional) is a float that specifies the portion of the training dataset to be used for validation. The default value is 0.2, and values must be greater than 0 and less than 1. We recommend setting this value to be less than 0.5.</p>
     #   @return [Float]
     class AutoMLDataSplitConfig < Struct.new(
+      nil,
       :validation_fraction,
       keyword_init: true
     )
@@ -1009,6 +1058,7 @@ module Aws::SageMaker
     #   <p>The URL of the notebook location.</p>
     #   @return [String]
     class AutoMLJobArtifacts < Struct.new(
+      nil,
       :candidate_definition_notebook_location,
       :data_exploration_notebook_location,
       keyword_init: true
@@ -1030,6 +1080,7 @@ module Aws::SageMaker
     #   <p>The data source for an AutoML channel (Required).</p>
     #   @return [Types::AutoMLDataSource]
     class AutoMLJobChannel < Struct.new(
+      nil,
       :channel_type,
       :content_type,
       :compression_type,
@@ -1050,6 +1101,7 @@ module Aws::SageMaker
     #   <p>The maximum runtime, in seconds, an AutoML job has to complete.</p> <p>If an AutoML job exceeds the maximum runtime, the job is stopped automatically and its processing is ended gracefully. The AutoML job identifies the best model whose training was completed and marks it as the best-performing model. Any unfinished steps of the job, such as automatic one-click Autopilot model deployment, are not completed.</p>
     #   @return [Integer]
     class AutoMLJobCompletionCriteria < Struct.new(
+      nil,
       :max_candidates,
       :max_runtime_per_training_job_in_seconds,
       :max_auto_ml_job_runtime_in_seconds,
@@ -1075,6 +1127,7 @@ module Aws::SageMaker
     #   <p>The method that Autopilot uses to train the data. You can either specify the mode manually or let Autopilot choose for you based on the dataset size by selecting <code>AUTO</code>. In <code>AUTO</code> mode, Autopilot chooses <code>ENSEMBLING</code> for datasets smaller than 100 MB, and <code>HYPERPARAMETER_TUNING</code> for larger ones.</p> <p>The <code>ENSEMBLING</code> mode uses a multi-stack ensemble model to predict classification and regression tasks directly from your dataset. This machine learning mode combines several base models to produce an optimal predictive model. It then uses a stacking ensemble method to combine predictions from contributing members. A multi-stack ensemble model can provide better performance over a single model by combining the predictive capabilities of multiple models. See <a href="https://docs.aws.amazon.com/sagemaker/latest/dg/autopilot-model-support-validation.html#autopilot-algorithm-support">Autopilot algorithm support</a> for a list of algorithms supported by <code>ENSEMBLING</code> mode.</p> <p>The <code>HYPERPARAMETER_TUNING</code> (HPO) mode uses the best hyperparameters to train the best version of a model. HPO automatically selects an algorithm for the type of problem you want to solve. Then HPO finds the best hyperparameters according to your objective metric. See <a href="https://docs.aws.amazon.com/sagemaker/latest/dg/autopilot-model-support-validation.html#autopilot-algorithm-support">Autopilot algorithm support</a> for a list of algorithms supported by <code>HYPERPARAMETER_TUNING</code> mode.</p>
     #   @return [String]
     class AutoMLJobConfig < Struct.new(
+      nil,
       :completion_criteria,
       :security_config,
       :candidate_generation_config,
@@ -1090,6 +1143,7 @@ module Aws::SageMaker
     #   <p>The name of the objective metric used to measure the predictive quality of a machine learning system. During training, the model's parameters are updated iteratively to optimize its performance based on the feedback provided by the objective metric when evaluating the model on the validation dataset.</p> <p>The list of available metrics supported by Autopilot and the default metric applied when you do not specify a metric name explicitly depend on the problem type.</p> <ul> <li> <p>For tabular problem types:</p> <ul> <li> <p>List of available metrics: </p> <ul> <li> <p> Regression: <code>MAE</code>, <code>MSE</code>, <code>R2</code>, <code>RMSE</code> </p> </li> <li> <p> Binary classification: <code>Accuracy</code>, <code>AUC</code>, <code>BalancedAccuracy</code>, <code>F1</code>, <code>Precision</code>, <code>Recall</code> </p> </li> <li> <p> Multiclass classification: <code>Accuracy</code>, <code>BalancedAccuracy</code>, <code>F1macro</code>, <code>PrecisionMacro</code>, <code>RecallMacro</code> </p> </li> </ul> <p>For a description of each metric, see <a href="https://docs.aws.amazon.com/sagemaker/latest/dg/autopilot-metrics-validation.html#autopilot-metrics">Autopilot metrics for classification and regression</a>.</p> </li> <li> <p>Default objective metrics:</p> <ul> <li> <p>Regression: <code>MSE</code>.</p> </li> <li> <p>Binary classification: <code>F1</code>.</p> </li> <li> <p>Multiclass classification: <code>Accuracy</code>.</p> </li> </ul> </li> </ul> </li> <li> <p>For image or text classification problem types:</p> <ul> <li> <p>List of available metrics: <code>Accuracy</code> </p> <p>For a description of each metric, see <a href="https://docs.aws.amazon.com/sagemaker/latest/dg/text-classification-data-format-and-metric.html">Autopilot metrics for text and image classification</a>.</p> </li> <li> <p>Default objective metrics: <code>Accuracy</code> </p> </li> </ul> </li> <li> <p>For time-series forecasting problem types:</p> <ul> <li> <p>List of available metrics: <code>RMSE</code>, <code>wQL</code>, <code>Average wQL</code>, <code>MASE</code>, <code>MAPE</code>, <code>WAPE</code> </p> <p>For a description of each metric, see <a href="https://docs.aws.amazon.com/sagemaker/latest/dg/timeseries-objective-metric.html">Autopilot metrics for time-series forecasting</a>.</p> </li> <li> <p>Default objective metrics: <code>AverageWeightedQuantileLoss</code> </p> </li> </ul> </li> <li> <p>For text generation problem types (LLMs fine-tuning): Fine-tuning language models in Autopilot does not require setting the <code>AutoMLJobObjective</code> field. Autopilot fine-tunes LLMs without requiring multiple candidates to be trained and evaluated. Instead, using your dataset, Autopilot directly fine-tunes your target model to enhance a default objective metric, the cross-entropy loss. After fine-tuning a language model, you can evaluate the quality of its generated text using different metrics. For a list of the available metrics, see <a href="https://docs.aws.amazon.com/sagemaker/latest/dg/autopilot-llms-finetuning-metrics.html">Metrics for fine-tuning LLMs in Autopilot</a>.</p> </li> </ul>
     #   @return [String]
     class AutoMLJobObjective < Struct.new(
+      nil,
       :metric_name,
       keyword_init: true
     )
@@ -1101,6 +1155,7 @@ module Aws::SageMaker
     #   <p>The Amazon Resource Name (ARN) of the AutoML job.</p>
     #   @return [String]
     class AutoMLJobStepMetadata < Struct.new(
+      nil,
       :arn,
       keyword_init: true
     )
@@ -1136,6 +1191,7 @@ module Aws::SageMaker
     #   <p>The list of reasons for partial failures within an AutoML job.</p>
     #   @return [Array<Types::AutoMLPartialFailureReason>]
     class AutoMLJobSummary < Struct.new(
+      nil,
       :auto_ml_job_name,
       :auto_ml_job_arn,
       :auto_ml_job_status,
@@ -1158,6 +1214,7 @@ module Aws::SageMaker
     #   <p>The Amazon S3 output path. Must be 512 characters or less.</p>
     #   @return [String]
     class AutoMLOutputDataConfig < Struct.new(
+      nil,
       :kms_key_id,
       :s3_output_path,
       keyword_init: true
@@ -1170,6 +1227,7 @@ module Aws::SageMaker
     #   <p>The message containing the reason for a partial failure of an AutoML job.</p>
     #   @return [String]
     class AutoMLPartialFailureReason < Struct.new(
+      nil,
       :partial_failure_message,
       keyword_init: true
     )
@@ -1242,6 +1300,7 @@ module Aws::SageMaker
     #   <p>Defines the resolved attributes specific to a problem type.</p>
     #   @return [Types::AutoMLProblemTypeResolvedAttributes]
     class AutoMLResolvedAttributes < Struct.new(
+      nil,
       :auto_ml_job_objective,
       :completion_criteria,
       :auto_ml_problem_type_resolved_attributes,
@@ -1258,6 +1317,7 @@ module Aws::SageMaker
     #   <p>The URL to the Amazon S3 data source. The Uri refers to the Amazon S3 prefix or ManifestFile depending on the data type.</p>
     #   @return [String]
     class AutoMLS3DataSource < Struct.new(
+      nil,
       :s3_data_type,
       :s3_uri,
       keyword_init: true
@@ -1276,6 +1336,7 @@ module Aws::SageMaker
     #   <p>The VPC configuration.</p>
     #   @return [Types::VpcConfig]
     class AutoMLSecurityConfig < Struct.new(
+      nil,
       :volume_kms_key_id,
       :enable_inter_container_traffic_encryption,
       :vpc_config,
@@ -1292,6 +1353,7 @@ module Aws::SageMaker
     #   <p>An example value of the hyperparameter to optimize using Autotune.</p>
     #   @return [String]
     class AutoParameter < Struct.new(
+      nil,
       :name,
       :value_hint,
       keyword_init: true
@@ -1304,6 +1366,7 @@ module Aws::SageMaker
     #   <p>List of CloudWatch alarms in your account that are configured to monitor metrics on an endpoint. If any alarms are tripped during a deployment, SageMaker rolls back the deployment.</p>
     #   @return [Array<Types::Alarm>]
     class AutoRollbackConfig < Struct.new(
+      nil,
       :alarms,
       keyword_init: true
     )
@@ -1315,6 +1378,7 @@ module Aws::SageMaker
     #   <p>Set <code>Mode</code> to <code>Enabled</code> if you want to use Autotune.</p>
     #   @return [String]
     class Autotune < Struct.new(
+      nil,
       :mode,
       keyword_init: true
     )
@@ -1335,6 +1399,7 @@ module Aws::SageMaker
     #   <p>A descriptive message providing additional details about the error.</p>
     #   @return [String]
     class BatchAddClusterNodesError < Struct.new(
+      nil,
       :instance_group_name,
       :error_code,
       :failed_count,
@@ -1354,6 +1419,7 @@ module Aws::SageMaker
     #   <p>A list of instance groups and the number of nodes to add to each. You can specify up to 5 instance groups in a single request, with a maximum of 50 nodes total across all instance groups.</p>
     #   @return [Array<Types::AddClusterNodeSpecification>]
     class BatchAddClusterNodesRequest < Struct.new(
+      nil,
       :cluster_name,
       :client_token,
       :nodes_to_add,
@@ -1369,6 +1435,7 @@ module Aws::SageMaker
     #   <p>A list of errors that occurred during the node addition operation. Each entry includes the instance group name, error code, number of failed additions, and an error message.</p>
     #   @return [Array<Types::BatchAddClusterNodesError>]
     class BatchAddClusterNodesResponse < Struct.new(
+      nil,
       :successful,
       :failed,
       keyword_init: true
@@ -1387,6 +1454,7 @@ module Aws::SageMaker
     #   <p>Flag that indicates whether to append inference id to the output.</p>
     #   @return [Boolean]
     class BatchDataCaptureConfig < Struct.new(
+      nil,
       :destination_s3_uri,
       :kms_key_id,
       :generate_inference_id,
@@ -1406,6 +1474,7 @@ module Aws::SageMaker
     #   <p>The <code>NodeLogicalId</code> of the node that could not be deleted.</p>
     #   @return [String]
     class BatchDeleteClusterNodeLogicalIdsError < Struct.new(
+      nil,
       :code,
       :message,
       :node_logical_id,
@@ -1425,6 +1494,7 @@ module Aws::SageMaker
     #   <p>The ID of the node that encountered an error during the deletion process.</p>
     #   @return [String]
     class BatchDeleteClusterNodesError < Struct.new(
+      nil,
       :code,
       :message,
       :node_id,
@@ -1443,6 +1513,7 @@ module Aws::SageMaker
     #   <p>A list of <code>NodeLogicalIds</code> identifying the nodes to be deleted. You can specify up to 50 <code>NodeLogicalIds</code>. You must specify either <code>NodeLogicalIds</code>, <code>InstanceIds</code>, or both, with a combined maximum of 50 identifiers.</p>
     #   @return [Array<String>]
     class BatchDeleteClusterNodesRequest < Struct.new(
+      nil,
       :cluster_name,
       :node_ids,
       :node_logical_ids,
@@ -1464,6 +1535,7 @@ module Aws::SageMaker
     #   <p>A list of <code>NodeLogicalIds</code> that were successfully deleted from the cluster.</p>
     #   @return [Array<String>]
     class BatchDeleteClusterNodesResponse < Struct.new(
+      nil,
       :failed,
       :successful,
       :failed_node_logical_ids,
@@ -1481,6 +1553,7 @@ module Aws::SageMaker
     #   <p/>
     #   @return [String]
     class BatchDescribeModelPackageError < Struct.new(
+      nil,
       :error_code,
       :error_response,
       keyword_init: true
@@ -1492,6 +1565,7 @@ module Aws::SageMaker
     #   <p>The list of Amazon Resource Name (ARN) of the model package groups.</p>
     #   @return [Array<String>]
     class BatchDescribeModelPackageInput < Struct.new(
+      nil,
       :model_package_arn_list,
       keyword_init: true
     )
@@ -1505,6 +1579,7 @@ module Aws::SageMaker
     #   <p>A map of the resource and BatchDescribeModelPackageError objects reporting the error associated with describing the model package.</p>
     #   @return [Hash<String, Types::BatchDescribeModelPackageError>]
     class BatchDescribeModelPackageOutput < Struct.new(
+      nil,
       :model_package_summaries,
       :batch_describe_model_package_error_map,
       keyword_init: true
@@ -1538,6 +1613,7 @@ module Aws::SageMaker
     #   <p>The approval status of the model.</p>
     #   @return [String]
     class BatchDescribeModelPackageSummary < Struct.new(
+      nil,
       :model_package_group_name,
       :model_package_version,
       :model_package_arn,
@@ -1589,6 +1665,7 @@ module Aws::SageMaker
     #   <p>The attributes of the input data to exclude from the analysis.</p>
     #   @return [String]
     class BatchTransformInput < Struct.new(
+      nil,
       :data_captured_destination_s3_uri,
       :dataset_format,
       :local_path,
@@ -1611,6 +1688,7 @@ module Aws::SageMaker
     #   <p>The number of training jobs that have failed to improve model performance by 1% or greater over prior training jobs as evaluated against an objective function.</p>
     #   @return [Integer]
     class BestObjectiveNotImproving < Struct.new(
+      nil,
       :max_number_of_training_jobs_not_improving,
       keyword_init: true
     )
@@ -1628,6 +1706,7 @@ module Aws::SageMaker
     #   <p>The post-training bias report for a model.</p>
     #   @return [Types::MetricsSource]
     class Bias < Struct.new(
+      nil,
       :report,
       :pre_training_report,
       :post_training_report,
@@ -1647,6 +1726,7 @@ module Aws::SageMaker
     #   <p>Maximum execution timeout for the deployment. Note that the timeout value should be larger than the total waiting time specified in <code>TerminationWaitInSeconds</code> and <code>WaitIntervalInSeconds</code>.</p>
     #   @return [Integer]
     class BlueGreenUpdatePolicy < Struct.new(
+      nil,
       :traffic_routing_configuration,
       :termination_wait_in_seconds,
       :maximum_execution_timeout_in_seconds,
@@ -1660,6 +1740,7 @@ module Aws::SageMaker
     #   <p>The Amazon Resource Name (ARN) of the pipeline execution.</p>
     #   @return [String]
     class CacheHitResult < Struct.new(
+      nil,
       :source_pipeline_execution_arn,
       keyword_init: true
     )
@@ -1677,6 +1758,7 @@ module Aws::SageMaker
     #   <p>A list of the output parameters of the callback step.</p>
     #   @return [Array<Types::OutputParameter>]
     class CallbackStepMetadata < Struct.new(
+      nil,
       :callback_token,
       :sqs_queue_url,
       :output_parameters,
@@ -1696,6 +1778,7 @@ module Aws::SageMaker
     #   <p>The Amazon S3 prefix to the accuracy metrics and the inference results observed over the testing window. Available only for the time-series forecasting problem type.</p>
     #   @return [String]
     class CandidateArtifactLocations < Struct.new(
+      nil,
       :explainability,
       :model_insights,
       :backtest_results,
@@ -1709,6 +1792,7 @@ module Aws::SageMaker
     #   <p>Your Autopilot job trains a default set of algorithms on your dataset. For tabular and time-series data, you can customize the algorithm list by selecting a subset of algorithms for your problem type.</p> <p> <code>AlgorithmsConfig</code> stores the customized selection of algorithms to train on your data.</p> <ul> <li> <p> <b>For the tabular problem type <code>TabularJobConfig</code>,</b> the list of available algorithms to choose from depends on the training mode set in <a href="https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_AutoMLJobConfig.html"> <code>AutoMLJobConfig.Mode</code> </a>.</p> <ul> <li> <p> <code>AlgorithmsConfig</code> should not be set when the training mode <code>AutoMLJobConfig.Mode</code> is set to <code>AUTO</code>.</p> </li> <li> <p>When <code>AlgorithmsConfig</code> is provided, one <code>AutoMLAlgorithms</code> attribute must be set and one only.</p> <p>If the list of algorithms provided as values for <code>AutoMLAlgorithms</code> is empty, <code>CandidateGenerationConfig</code> uses the full set of algorithms for the given training mode.</p> </li> <li> <p>When <code>AlgorithmsConfig</code> is not provided, <code>CandidateGenerationConfig</code> uses the full set of algorithms for the given training mode.</p> </li> </ul> <p>For the list of all algorithms per training mode, see <a href="https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_AutoMLAlgorithmConfig.html"> AlgorithmConfig</a>.</p> <p>For more information on each algorithm, see the <a href="https://docs.aws.amazon.com/sagemaker/latest/dg/autopilot-model-support-validation.html#autopilot-algorithm-support">Algorithm support</a> section in the Autopilot developer guide.</p> </li> <li> <p> <b>For the time-series forecasting problem type <code>TimeSeriesForecastingJobConfig</code>,</b> choose your algorithms from the list provided in <a href="https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_AutoMLAlgorithmConfig.html"> AlgorithmConfig</a>.</p> <p>For more information on each algorithm, see the <a href="https://docs.aws.amazon.com/sagemaker/latest/dg/timeseries-forecasting-algorithms.html">Algorithms support for time-series forecasting</a> section in the Autopilot developer guide.</p> <ul> <li> <p>When <code>AlgorithmsConfig</code> is provided, one <code>AutoMLAlgorithms</code> attribute must be set and one only.</p> <p>If the list of algorithms provided as values for <code>AutoMLAlgorithms</code> is empty, <code>CandidateGenerationConfig</code> uses the full set of algorithms for time-series forecasting.</p> </li> <li> <p>When <code>AlgorithmsConfig</code> is not provided, <code>CandidateGenerationConfig</code> uses the full set of algorithms for time-series forecasting.</p> </li> </ul> </li> </ul>
     #   @return [Array<Types::AutoMLAlgorithmConfig>]
     class CandidateGenerationConfig < Struct.new(
+      nil,
       :algorithms_config,
       keyword_init: true
     )
@@ -1723,6 +1807,7 @@ module Aws::SageMaker
     #   <p>Information about the candidate metrics for an AutoML job.</p>
     #   @return [Array<Types::MetricDatum>]
     class CandidateProperties < Struct.new(
+      nil,
       :candidate_artifact_locations,
       :candidate_metrics,
       keyword_init: true
@@ -1756,6 +1841,7 @@ module Aws::SageMaker
     #   <p>The settings for running Amazon EMR Serverless data processing jobs in SageMaker Canvas.</p>
     #   @return [Types::EmrServerlessSettings]
     class CanvasAppSettings < Struct.new(
+      nil,
       :time_series_forecasting_settings,
       :model_register_settings,
       :workspace_settings,
@@ -1777,6 +1863,7 @@ module Aws::SageMaker
     #   <p>The type of Capacity Reservation. Valid values are <code>ODCR</code> (On-Demand Capacity Reservation) or <code>CRG</code> (Capacity Reservation Group).</p>
     #   @return [String]
     class CapacityReservation < Struct.new(
+      nil,
       :arn,
       :type,
       keyword_init: true
@@ -1792,6 +1879,7 @@ module Aws::SageMaker
     #   <p>Defines the capacity size, either as a number of instances or a capacity percentage.</p>
     #   @return [Integer]
     class CapacitySize < Struct.new(
+      nil,
       :type,
       :value,
       keyword_init: true
@@ -1807,6 +1895,7 @@ module Aws::SageMaker
     #   <p>Specifies the amount or percentage of instances SageMaker updates at a time.</p>
     #   @return [Integer]
     class CapacitySizeConfig < Struct.new(
+      nil,
       :type,
       :value,
       keyword_init: true
@@ -1822,6 +1911,7 @@ module Aws::SageMaker
     #   <p>The list of all content type headers that SageMaker AI will treat as JSON and capture accordingly.</p>
     #   @return [Array<String>]
     class CaptureContentTypeHeader < Struct.new(
+      nil,
       :csv_content_types,
       :json_content_types,
       keyword_init: true
@@ -1834,6 +1924,7 @@ module Aws::SageMaker
     #   <p>Specify the boundary of data to capture.</p>
     #   @return [String]
     class CaptureOption < Struct.new(
+      nil,
       :capture_mode,
       keyword_init: true
     )
@@ -1848,6 +1939,7 @@ module Aws::SageMaker
     #   <p>The list of values you can pass.</p>
     #   @return [Array<String>]
     class CategoricalParameter < Struct.new(
+      nil,
       :name,
       :value,
       keyword_init: true
@@ -1863,6 +1955,7 @@ module Aws::SageMaker
     #   <p>A list of the categories for the hyperparameter.</p>
     #   @return [Array<String>]
     class CategoricalParameterRange < Struct.new(
+      nil,
       :name,
       :values,
       keyword_init: true
@@ -1875,6 +1968,7 @@ module Aws::SageMaker
     #   <p>The allowed categories for the hyperparameter.</p>
     #   @return [Array<String>]
     class CategoricalParameterRangeSpecification < Struct.new(
+      nil,
       :values,
       keyword_init: true
     )
@@ -1895,6 +1989,7 @@ module Aws::SageMaker
     #   <p> An array of CloudFormation stack parameters.</p>
     #   @return [Array<Types::CfnStackCreateParameter>]
     class CfnCreateTemplateProvider < Struct.new(
+      nil,
       :template_name,
       :template_url,
       :role_arn,
@@ -1912,6 +2007,7 @@ module Aws::SageMaker
     #   <p> The value of the CloudFormation parameter. </p>
     #   @return [String]
     class CfnStackCreateParameter < Struct.new(
+      nil,
       :key,
       :value,
       keyword_init: true
@@ -1930,6 +2026,7 @@ module Aws::SageMaker
     #   <p> A human-readable message about the stack's current status. </p>
     #   @return [String]
     class CfnStackDetail < Struct.new(
+      nil,
       :name,
       :id,
       :status_message,
@@ -1946,6 +2043,7 @@ module Aws::SageMaker
     #   <p> The value of the CloudFormation parameter. </p>
     #   @return [String]
     class CfnStackParameter < Struct.new(
+      nil,
       :key,
       :value,
       keyword_init: true
@@ -1961,6 +2059,7 @@ module Aws::SageMaker
     #   <p> The value of the CloudFormation parameter. </p>
     #   @return [String]
     class CfnStackUpdateParameter < Struct.new(
+      nil,
       :key,
       :value,
       keyword_init: true
@@ -1985,6 +2084,7 @@ module Aws::SageMaker
     #   <p> Information about the CloudFormation stack created by the template provider. </p>
     #   @return [Types::CfnStackDetail]
     class CfnTemplateProviderDetail < Struct.new(
+      nil,
       :template_name,
       :template_url,
       :role_arn,
@@ -2006,6 +2106,7 @@ module Aws::SageMaker
     #   <p> An array of CloudFormation stack parameters. </p>
     #   @return [Array<Types::CfnStackUpdateParameter>]
     class CfnUpdateTemplateProvider < Struct.new(
+      nil,
       :template_name,
       :template_url,
       :parameters,
@@ -2037,6 +2138,7 @@ module Aws::SageMaker
     #   <p>A configuration for a shuffle option for input data in a channel. If you use <code>S3Prefix</code> for <code>S3DataType</code>, this shuffles the results of the S3 key prefix matches. If you use <code>ManifestFile</code>, the order of the S3 object references in the <code>ManifestFile</code> is shuffled. If you use <code>AugmentedManifestFile</code>, the order of the JSON lines in the <code>AugmentedManifestFile</code> is shuffled. The shuffling order is determined using the <code>Seed</code> value.</p> <p>For Pipe input mode, shuffling is done at the start of every epoch. With large datasets this ensures that the order of the training data is different for each epoch, it helps reduce bias and possible overfitting. In a multi-node training job when ShuffleConfig is combined with <code>S3DataDistributionType</code> of <code>ShardedByS3Key</code>, the data is shuffled across nodes so that the content sent to a particular node on the first epoch might be sent to a different node on the second epoch.</p>
     #   @return [Types::ShuffleConfig]
     class Channel < Struct.new(
+      nil,
       :channel_name,
       :data_source,
       :content_type,
@@ -2069,6 +2171,7 @@ module Aws::SageMaker
     #   <p>The allowed input mode, either FILE or PIPE.</p> <p>In FILE mode, Amazon SageMaker copies the data from the input source onto the local Amazon Elastic Block Store (Amazon EBS) volumes before starting your training algorithm. This is the most commonly used input mode.</p> <p>In PIPE mode, Amazon SageMaker streams input data from the source directly to your algorithm without using the EBS volume.</p>
     #   @return [Array<String>]
     class ChannelSpecification < Struct.new(
+      nil,
       :name,
       :description,
       :is_required,
@@ -2088,6 +2191,7 @@ module Aws::SageMaker
     #   <p>(Optional) The local directory where checkpoints are written. The default directory is <code>/opt/ml/checkpoints/</code>. </p>
     #   @return [String]
     class CheckpointConfig < Struct.new(
+      nil,
       :s3_uri,
       :local_path,
       keyword_init: true
@@ -2121,6 +2225,7 @@ module Aws::SageMaker
     #   <p>This flag indicates if a newly calculated baseline can be accessed through step properties <code>BaselineUsedForDriftCheckConstraints</code> and <code>BaselineUsedForDriftCheckStatistics</code>. If it is set to <code>False</code>, the previous baseline of the configured check type must also be available. These can be accessed through the <code>BaselineUsedForDriftCheckConstraints</code> property. </p>
     #   @return [Boolean]
     class ClarifyCheckStepMetadata < Struct.new(
+      nil,
       :check_type,
       :baseline_used_for_drift_check_constraints,
       :calculated_baseline_constraints,
@@ -2145,6 +2250,7 @@ module Aws::SageMaker
     #   <p>The configuration for SHAP analysis.</p>
     #   @return [Types::ClarifyShapConfig]
     class ClarifyExplainerConfig < Struct.new(
+      nil,
       :enable_explanations,
       :inference_config,
       :shap_config,
@@ -2188,6 +2294,7 @@ module Aws::SageMaker
     #   <p>A list of data types of the features (optional). Applicable only to NLP explainability. If provided, <code>FeatureTypes</code> must have at least one <code>'text'</code> string (for example, <code>['text']</code>). If <code>FeatureTypes</code> is not provided, the explainer infers the feature types based on the baseline data. The feature types are included in the endpoint response payload. For additional information see the <a href="https://docs.aws.amazon.com/sagemaker/latest/dg/clarify-online-explainability-invoke-endpoint.html#clarify-online-explainability-response">response</a> section under <b>Invoke the endpoint</b> in the Developer Guide for more information.</p>
     #   @return [Array<String>]
     class ClarifyInferenceConfig < Struct.new(
+      nil,
       :features_attribute,
       :content_template,
       :max_record_count,
@@ -2215,6 +2322,7 @@ module Aws::SageMaker
     #   <p>The uniform resource identifier (URI) of the S3 bucket where the SHAP baseline file is stored. The format of the SHAP baseline file should be the same format as the format of the training dataset. For example, if the training dataset is in CSV format, and each record in the training dataset has four features, and all features are numerical, then the baseline file should also have this same format. Each record should contain only the features. If you are using a virtual private cloud (VPC), the <code>ShapBaselineUri</code> should be accessible to the VPC. For more information about setting up endpoints with Amazon Virtual Private Cloud, see <a href="https://docs.aws.amazon.com/sagemaker/latest/dg/infrastructure-give-access.html">Give SageMaker access to Resources in your Amazon Virtual Private Cloud</a>.</p>
     #   @return [String]
     class ClarifyShapBaselineConfig < Struct.new(
+      nil,
       :mime_type,
       :shap_baseline,
       :shap_baseline_uri,
@@ -2240,6 +2348,7 @@ module Aws::SageMaker
     #   <p>A parameter that indicates if text features are treated as text and explanations are provided for individual units of text. Required for natural language processing (NLP) explainability only.</p>
     #   @return [Types::ClarifyTextConfig]
     class ClarifyShapConfig < Struct.new(
+      nil,
       :shap_baseline_config,
       :number_of_samples,
       :use_logit,
@@ -2258,6 +2367,7 @@ module Aws::SageMaker
     #   <p>The unit of granularity for the analysis of text features. For example, if the unit is <code>'token'</code>, then each token (like a word in English) of the text is treated as a feature. SHAP values are computed for each unit/feature.</p>
     #   @return [String]
     class ClarifyTextConfig < Struct.new(
+      nil,
       :language,
       :granularity,
       keyword_init: true
@@ -2273,6 +2383,7 @@ module Aws::SageMaker
     #   <p>The type of autoscaler to use. Currently supported value is <code>Karpenter</code>.</p>
     #   @return [String]
     class ClusterAutoScalingConfig < Struct.new(
+      nil,
       :mode,
       :auto_scaler_type,
       keyword_init: true
@@ -2294,6 +2405,7 @@ module Aws::SageMaker
     #   <p>If the autoscaling status is <code>Failed</code>, this field contains a message describing the failure.</p>
     #   @return [String]
     class ClusterAutoScalingConfigOutput < Struct.new(
+      nil,
       :mode,
       :auto_scaler_type,
       :status,
@@ -2314,6 +2426,7 @@ module Aws::SageMaker
     #   <p>Specifies whether the configuration is for the cluster's root or secondary Amazon EBS volume. You can specify two <code>ClusterEbsVolumeConfig</code> fields to configure both the root and secondary volumes. Set the value to <code>True</code> if you'd like to provide your own customer managed Amazon Web Services KMS key to encrypt the root volume. When <code>True</code>:</p> <ul> <li> <p>The configuration is applied to the root volume.</p> </li> <li> <p>You can't specify the <code>VolumeSizeInGB</code> field. The size of the root volume is determined for you.</p> </li> <li> <p>You must specify a KMS key ID for <code>VolumeKmsKeyId</code> to encrypt the root volume with your own KMS key instead of an Amazon Web Services owned KMS key.</p> </li> </ul> <p>Otherwise, by default, the value is <code>False</code>, and the following applies:</p> <ul> <li> <p>The configuration is applied to the secondary volume, while the root volume is encrypted with an Amazon Web Services owned key.</p> </li> <li> <p>You must specify the <code>VolumeSizeInGB</code> field.</p> </li> <li> <p>You can optionally specify the <code>VolumeKmsKeyId</code> to encrypt the secondary volume with your own KMS key instead of an Amazon Web Services owned KMS key.</p> </li> </ul>
     #   @return [Boolean]
     class ClusterEbsVolumeConfig < Struct.new(
+      nil,
       :volume_size_in_gb,
       :volume_kms_key_id,
       :root_volume,
@@ -2351,6 +2464,7 @@ module Aws::SageMaker
     #   <p>A human-readable description of the event.</p>
     #   @return [String]
     class ClusterEventDetail < Struct.new(
+      nil,
       :event_id,
       :cluster_arn,
       :cluster_name,
@@ -2391,6 +2505,7 @@ module Aws::SageMaker
     #   <p>A brief, human-readable description of the event.</p>
     #   @return [String]
     class ClusterEventSummary < Struct.new(
+      nil,
       :event_id,
       :cluster_arn,
       :cluster_name,
@@ -2454,6 +2569,7 @@ module Aws::SageMaker
     #   <p>The ID of the Amazon Machine Image (AMI) desired for the instance group.</p>
     #   @return [String]
     class ClusterInstanceGroupDetails < Struct.new(
+      nil,
       :current_count,
       :target_count,
       :instance_group_name,
@@ -2513,6 +2629,7 @@ module Aws::SageMaker
     #   <p>When configuring your HyperPod cluster, you can specify an image ID using one of the following options:</p> <ul> <li> <p> <code>HyperPodPublicAmiId</code>: Use a HyperPod public AMI</p> </li> <li> <p> <code>CustomAmiId</code>: Use your custom AMI</p> </li> <li> <p> <code>default</code>: Use the default latest system image</p> </li> </ul> <p>If you choose to use a custom AMI (<code>CustomAmiId</code>), ensure it meets the following requirements:</p> <ul> <li> <p>Encryption: The custom AMI must be unencrypted.</p> </li> <li> <p>Ownership: The custom AMI must be owned by the same Amazon Web Services account that is creating the HyperPod cluster.</p> </li> <li> <p>Volume support: Only the primary AMI snapshot volume is supported; additional AMI volumes are not supported.</p> </li> </ul> <p>When updating the instance group's AMI through the <code>UpdateClusterSoftware</code> operation, if an instance group uses a custom AMI, you must provide an <code>ImageId</code> or use the default as input. Note that if you don't specify an instance group in your <code>UpdateClusterSoftware</code> request, then all of the instance groups are patched with the specified image.</p>
     #   @return [String]
     class ClusterInstanceGroupSpecification < Struct.new(
+      nil,
       :instance_count,
       :instance_group_name,
       :instance_type,
@@ -2538,6 +2655,7 @@ module Aws::SageMaker
     #   <p>The unique identifier (ID) of the Availability Zone where the node in the SageMaker HyperPod cluster is launched.</p>
     #   @return [String]
     class ClusterInstancePlacement < Struct.new(
+      nil,
       :availability_zone,
       :availability_zone_id,
       keyword_init: true
@@ -2553,6 +2671,7 @@ module Aws::SageMaker
     #   <p>The message from an instance in a SageMaker HyperPod cluster.</p>
     #   @return [String]
     class ClusterInstanceStatusDetails < Struct.new(
+      nil,
       :status,
       :message,
       keyword_init: true
@@ -2583,6 +2702,7 @@ module Aws::SageMaker
     #   <p>The file name of the entrypoint script of lifecycle scripts under <code>SourceS3Uri</code>. This entrypoint script runs during cluster creation.</p>
     #   @return [String]
     class ClusterLifeCycleConfig < Struct.new(
+      nil,
       :source_s3_uri,
       :on_create,
       keyword_init: true
@@ -2601,6 +2721,7 @@ module Aws::SageMaker
     #   <p>The Service-Linked Role (SLR) associated with the cluster. This is created by HyperPod on your behalf and only applies for EKS orchestrated clusters.</p>
     #   @return [String]
     class ClusterMetadata < Struct.new(
+      nil,
       :failure_message,
       :eks_role_access_entries,
       :slr_access_entry,
@@ -2665,6 +2786,7 @@ module Aws::SageMaker
     #   <p>Contains information about the UltraServer.</p>
     #   @return [Types::UltraServerInfo]
     class ClusterNodeDetails < Struct.new(
+      nil,
       :instance_group_name,
       :instance_id,
       :node_logical_id,
@@ -2714,6 +2836,7 @@ module Aws::SageMaker
     #   <p>Contains information about the UltraServer.</p>
     #   @return [Types::UltraServerInfo]
     class ClusterNodeSummary < Struct.new(
+      nil,
       :instance_group_name,
       :instance_id,
       :node_logical_id,
@@ -2732,6 +2855,7 @@ module Aws::SageMaker
     #   <p>The Amazon EKS cluster used as the orchestrator for the SageMaker HyperPod cluster.</p>
     #   @return [Types::ClusterOrchestratorEksConfig]
     class ClusterOrchestrator < Struct.new(
+      nil,
       :eks,
       keyword_init: true
     )
@@ -2743,6 +2867,7 @@ module Aws::SageMaker
     #   <p>The Amazon Resource Name (ARN) of the Amazon EKS cluster associated with the SageMaker HyperPod cluster.</p>
     #   @return [String]
     class ClusterOrchestratorEksConfig < Struct.new(
+      nil,
       :cluster_arn,
       keyword_init: true
     )
@@ -2793,6 +2918,7 @@ module Aws::SageMaker
     #   <p>The configuration for the restricted instance groups (RIG) environment.</p>
     #   @return [Types::EnvironmentConfigDetails]
     class ClusterRestrictedInstanceGroupDetails < Struct.new(
+      nil,
       :current_count,
       :target_count,
       :instance_group_name,
@@ -2847,6 +2973,7 @@ module Aws::SageMaker
     #   <p>The configuration for the restricted instance groups (RIG) environment.</p>
     #   @return [Types::EnvironmentConfig]
     class ClusterRestrictedInstanceGroupSpecification < Struct.new(
+      nil,
       :instance_count,
       :instance_group_name,
       :instance_type,
@@ -2889,6 +3016,7 @@ module Aws::SageMaker
     #   <p>ARN of the cluster.</p>
     #   @return [String]
     class ClusterSchedulerConfigSummary < Struct.new(
+      nil,
       :cluster_scheduler_config_arn,
       :cluster_scheduler_config_id,
       :cluster_scheduler_config_version,
@@ -2919,6 +3047,7 @@ module Aws::SageMaker
     #   <p>A list of Amazon Resource Names (ARNs) of the training plans associated with this cluster.</p> <p>For more information about how to reserve GPU capacity for your SageMaker HyperPod clusters using Amazon SageMaker Training Plan, see <code> <a href="https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_CreateTrainingPlan.html">CreateTrainingPlan</a> </code>.</p>
     #   @return [Array<String>]
     class ClusterSummary < Struct.new(
+      nil,
       :cluster_arn,
       :cluster_name,
       :creation_time,
@@ -2937,6 +3066,7 @@ module Aws::SageMaker
     #   <p>The percentage (int) of cluster memory to allocate for checkpointing.</p>
     #   @return [Integer]
     class ClusterTieredStorageConfig < Struct.new(
+      nil,
       :mode,
       :instance_memory_allocation_percentage,
       keyword_init: true
@@ -2952,6 +3082,7 @@ module Aws::SageMaker
     #   <p>The configuration used to run the application image container.</p>
     #   @return [Types::ContainerConfig]
     class CodeEditorAppImageConfig < Struct.new(
+      nil,
       :file_system_config,
       :container_config,
       keyword_init: true
@@ -2976,6 +3107,7 @@ module Aws::SageMaker
     #   <p>The lifecycle configuration that runs before the default lifecycle configuration. It can override changes made in the default lifecycle configuration.</p>
     #   @return [String]
     class CodeEditorAppSettings < Struct.new(
+      nil,
       :default_resource_spec,
       :custom_images,
       :lifecycle_config_arns,
@@ -2991,6 +3123,7 @@ module Aws::SageMaker
     #   <p>The URL of the Git repository.</p>
     #   @return [String]
     class CodeRepository < Struct.new(
+      nil,
       :repository_url,
       keyword_init: true
     )
@@ -3014,6 +3147,7 @@ module Aws::SageMaker
     #   <p>Configuration details for the Git repository, including the URL where it is located and the ARN of the Amazon Web Services Secrets Manager secret that contains the credentials used to access the repository.</p>
     #   @return [Types::GitConfig]
     class CodeRepositorySummary < Struct.new(
+      nil,
       :code_repository_name,
       :code_repository_arn,
       :creation_time,
@@ -3032,6 +3166,7 @@ module Aws::SageMaker
     #   <p>The client ID for your Amazon Cognito user pool.</p>
     #   @return [String]
     class CognitoConfig < Struct.new(
+      nil,
       :user_pool,
       :client_id,
       keyword_init: true
@@ -3050,6 +3185,7 @@ module Aws::SageMaker
     #   <p>An identifier for an application client. You must create the app client ID using Amazon Cognito.</p>
     #   @return [String]
     class CognitoMemberDefinition < Struct.new(
+      nil,
       :user_pool,
       :user_group,
       :client_id,
@@ -3081,6 +3217,7 @@ module Aws::SageMaker
     #   <p>Parameter values for the tensor collection. The allowed parameters are <code>"name"</code>, <code>"include_regex"</code>, <code>"reduction_config"</code>, <code>"save_config"</code>, <code>"tensor_names"</code>, and <code>"save_histogram"</code>.</p>
     #   @return [Hash<String, String>]
     class CollectionConfiguration < Struct.new(
+      nil,
       :collection_name,
       :collection_parameters,
       keyword_init: true
@@ -3123,6 +3260,7 @@ module Aws::SageMaker
     #   <p>The status of the model compilation job.</p>
     #   @return [String]
     class CompilationJobSummary < Struct.new(
+      nil,
       :compilation_job_name,
       :compilation_job_arn,
       :creation_time,
@@ -3150,6 +3288,7 @@ module Aws::SageMaker
     #   <p>Allows workloads from within an entity to preempt same-team workloads. When set to <code>LowerPriority</code>, the entity's lower priority tasks are preempted by their own higher priority tasks.</p> <p>Default is <code>LowerPriority</code>.</p>
     #   @return [String]
     class ComputeQuotaConfig < Struct.new(
+      nil,
       :compute_quota_resources,
       :resource_sharing_config,
       :preempt_team_tasks,
@@ -3175,6 +3314,7 @@ module Aws::SageMaker
     #   <p>The amount of memory in GiB to allocate. If you specify a value only for this parameter, SageMaker AI automatically allocates a ratio-based value for vCPU based on this memory that you provide. For example, if you allocate 200 out of 400 total memory in GiB, SageMaker AI uses the ratio of 0.5 and allocates values to vCPU. Accelerators are set to 0.</p>
     #   @return [Float]
     class ComputeQuotaResourceConfig < Struct.new(
+      nil,
       :instance_type,
       :count,
       :accelerators,
@@ -3220,6 +3360,7 @@ module Aws::SageMaker
     #   <p>Last modified time of the compute allocation definition.</p>
     #   @return [Time]
     class ComputeQuotaSummary < Struct.new(
+      nil,
       :compute_quota_arn,
       :compute_quota_id,
       :name,
@@ -3244,6 +3385,7 @@ module Aws::SageMaker
     #   <p>Assigned entity fair-share weight. Idle compute will be shared across entities based on these assigned weights. This weight is only used when <code>FairShare</code> is enabled.</p> <p>A weight of 0 is the lowest priority and 100 is the highest. Weight 0 is the default.</p>
     #   @return [Integer]
     class ComputeQuotaTarget < Struct.new(
+      nil,
       :team_name,
       :fair_share_weight,
       keyword_init: true
@@ -3256,6 +3398,7 @@ module Aws::SageMaker
     #   <p>The outcome of the Condition step evaluation.</p>
     #   @return [String]
     class ConditionStepMetadata < Struct.new(
+      nil,
       :outcome,
       keyword_init: true
     )
@@ -3266,6 +3409,7 @@ module Aws::SageMaker
     # @!attribute message
     #   @return [String]
     class ConflictException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -3283,6 +3427,7 @@ module Aws::SageMaker
     #   <p>The environment variables to set in the container</p>
     #   @return [Hash<String, String>]
     class ContainerConfig < Struct.new(
+      nil,
       :container_arguments,
       :container_entrypoint,
       :container_environment_variables,
@@ -3326,6 +3471,7 @@ module Aws::SageMaker
     #   <p>Specifies additional configuration for multi-model endpoints.</p>
     #   @return [Types::MultiModelConfig]
     class ContainerDefinition < Struct.new(
+      nil,
       :container_hostname,
       :image,
       :image_config,
@@ -3353,6 +3499,7 @@ module Aws::SageMaker
     #   <p>The ID of the source.</p>
     #   @return [String]
     class ContextSource < Struct.new(
+      nil,
       :source_uri,
       :source_type,
       :source_id,
@@ -3381,6 +3528,7 @@ module Aws::SageMaker
     #   <p>When the context was last modified.</p>
     #   @return [Time]
     class ContextSummary < Struct.new(
+      nil,
       :context_arn,
       :context_name,
       :source,
@@ -3406,6 +3554,7 @@ module Aws::SageMaker
     #   <p>The scale that hyperparameter tuning uses to search the hyperparameter range. For information about choosing a hyperparameter scale, see <a href="https://docs.aws.amazon.com/sagemaker/latest/dg/automatic-model-tuning-define-ranges.html#scaling-type">Hyperparameter Scaling</a>. One of the following values:</p> <dl> <dt>Auto</dt> <dd> <p>SageMaker hyperparameter tuning chooses the best scale for the hyperparameter.</p> </dd> <dt>Linear</dt> <dd> <p>Hyperparameter tuning searches the values in the hyperparameter range by using a linear scale.</p> </dd> <dt>Logarithmic</dt> <dd> <p>Hyperparameter tuning searches the values in the hyperparameter range by using a logarithmic scale.</p> <p>Logarithmic scaling works only for ranges that have only values greater than 0.</p> </dd> <dt>ReverseLogarithmic</dt> <dd> <p>Hyperparameter tuning searches the values in the hyperparameter range by using a reverse logarithmic scale.</p> <p>Reverse logarithmic scaling works only for ranges that are entirely within the range 0&lt;=x&lt;1.0.</p> </dd> </dl>
     #   @return [String]
     class ContinuousParameterRange < Struct.new(
+      nil,
       :name,
       :min_value,
       :max_value,
@@ -3423,6 +3572,7 @@ module Aws::SageMaker
     #   <p>The maximum floating-point value allowed.</p>
     #   @return [String]
     class ContinuousParameterRangeSpecification < Struct.new(
+      nil,
       :min_value,
       :max_value,
       keyword_init: true
@@ -3435,6 +3585,7 @@ module Aws::SageMaker
     #   <p>A flag to stop a tuning job once AMT has detected that the job has converged.</p>
     #   @return [String]
     class ConvergenceDetected < Struct.new(
+      nil,
       :complete_on_convergence,
       keyword_init: true
     )
@@ -3466,6 +3617,7 @@ module Aws::SageMaker
     #   <p>A list of tags to apply to the action.</p>
     #   @return [Array<Types::Tag>]
     class CreateActionRequest < Struct.new(
+      nil,
       :action_name,
       :source,
       :action_type,
@@ -3483,6 +3635,7 @@ module Aws::SageMaker
     #   <p>The Amazon Resource Name (ARN) of the action.</p>
     #   @return [String]
     class CreateActionResponse < Struct.new(
+      nil,
       :action_arn,
       keyword_init: true
     )
@@ -3511,6 +3664,7 @@ module Aws::SageMaker
     #   <p>An array of key-value pairs. You can use tags to categorize your Amazon Web Services resources in different ways, for example, by purpose, owner, or environment. For more information, see <a href="https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html">Tagging Amazon Web Services Resources</a>.</p>
     #   @return [Array<Types::Tag>]
     class CreateAlgorithmInput < Struct.new(
+      nil,
       :algorithm_name,
       :algorithm_description,
       :training_specification,
@@ -3527,6 +3681,7 @@ module Aws::SageMaker
     #   <p>The Amazon Resource Name (ARN) of the new algorithm.</p>
     #   @return [String]
     class CreateAlgorithmOutput < Struct.new(
+      nil,
       :algorithm_arn,
       keyword_init: true
     )
@@ -3549,6 +3704,7 @@ module Aws::SageMaker
     #   <p>The <code>CodeEditorAppImageConfig</code>. You can only specify one image kernel in the AppImageConfig API. This kernel is shown to users before the image starts. After the image runs, all kernels are visible in Code Editor.</p>
     #   @return [Types::CodeEditorAppImageConfig]
     class CreateAppImageConfigRequest < Struct.new(
+      nil,
       :app_image_config_name,
       :tags,
       :kernel_gateway_image_config,
@@ -3563,6 +3719,7 @@ module Aws::SageMaker
     #   <p>The ARN of the AppImageConfig.</p>
     #   @return [String]
     class CreateAppImageConfigResponse < Struct.new(
+      nil,
       :app_image_config_arn,
       keyword_init: true
     )
@@ -3594,6 +3751,7 @@ module Aws::SageMaker
     #   <p> Indicates whether the application is launched in recovery mode. </p>
     #   @return [Boolean]
     class CreateAppRequest < Struct.new(
+      nil,
       :domain_id,
       :user_profile_name,
       :space_name,
@@ -3611,6 +3769,7 @@ module Aws::SageMaker
     #   <p>The Amazon Resource Name (ARN) of the app.</p>
     #   @return [String]
     class CreateAppResponse < Struct.new(
+      nil,
       :app_arn,
       keyword_init: true
     )
@@ -3636,6 +3795,7 @@ module Aws::SageMaker
     #   <p>A list of tags to apply to the artifact.</p>
     #   @return [Array<Types::Tag>]
     class CreateArtifactRequest < Struct.new(
+      nil,
       :artifact_name,
       :source,
       :artifact_type,
@@ -3651,6 +3811,7 @@ module Aws::SageMaker
     #   <p>The Amazon Resource Name (ARN) of the artifact.</p>
     #   @return [String]
     class CreateArtifactResponse < Struct.new(
+      nil,
       :artifact_arn,
       keyword_init: true
     )
@@ -3688,6 +3849,7 @@ module Aws::SageMaker
     #   <p>Specifies how to generate the endpoint name for an automatic one-click Autopilot model deployment.</p>
     #   @return [Types::ModelDeployConfig]
     class CreateAutoMLJobRequest < Struct.new(
+      nil,
       :auto_ml_job_name,
       :input_data_config,
       :output_data_config,
@@ -3707,6 +3869,7 @@ module Aws::SageMaker
     #   <p>The unique ARN assigned to the AutoML job when it is created.</p>
     #   @return [String]
     class CreateAutoMLJobResponse < Struct.new(
+      nil,
       :auto_ml_job_arn,
       keyword_init: true
     )
@@ -3747,6 +3910,7 @@ module Aws::SageMaker
     #   <p>Specifies the compute configuration for the AutoML job V2.</p>
     #   @return [Types::AutoMLComputeConfig]
     class CreateAutoMLJobV2Request < Struct.new(
+      nil,
       :auto_ml_job_name,
       :auto_ml_job_input_data_config,
       :output_data_config,
@@ -3767,6 +3931,7 @@ module Aws::SageMaker
     #   <p>The unique ARN assigned to the AutoMLJob when it is created.</p>
     #   @return [String]
     class CreateAutoMLJobV2Response < Struct.new(
+      nil,
       :auto_ml_job_arn,
       keyword_init: true
     )
@@ -3807,6 +3972,7 @@ module Aws::SageMaker
     #   <p>The autoscaling configuration for the cluster. Enables automatic scaling of cluster nodes based on workload demand using a Karpenter-based system.</p>
     #   @return [Types::ClusterAutoScalingConfig]
     class CreateClusterRequest < Struct.new(
+      nil,
       :cluster_name,
       :instance_groups,
       :restricted_instance_groups,
@@ -3827,6 +3993,7 @@ module Aws::SageMaker
     #   <p>The Amazon Resource Name (ARN) of the cluster.</p>
     #   @return [String]
     class CreateClusterResponse < Struct.new(
+      nil,
       :cluster_arn,
       keyword_init: true
     )
@@ -3849,6 +4016,7 @@ module Aws::SageMaker
     #   <p>Tags of the cluster policy.</p>
     #   @return [Array<Types::Tag>]
     class CreateClusterSchedulerConfigRequest < Struct.new(
+      nil,
       :name,
       :cluster_arn,
       :scheduler_config,
@@ -3866,6 +4034,7 @@ module Aws::SageMaker
     #   <p>ID of the cluster policy.</p>
     #   @return [String]
     class CreateClusterSchedulerConfigResponse < Struct.new(
+      nil,
       :cluster_scheduler_config_arn,
       :cluster_scheduler_config_id,
       keyword_init: true
@@ -3883,6 +4052,7 @@ module Aws::SageMaker
     #   <p>An array of key-value pairs. You can use tags to categorize your Amazon Web Services resources in different ways, for example, by purpose, owner, or environment. For more information, see <a href="https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html">Tagging Amazon Web Services Resources</a>.</p>
     #   @return [Array<Types::Tag>]
     class CreateCodeRepositoryInput < Struct.new(
+      nil,
       :code_repository_name,
       :git_config,
       :tags,
@@ -3895,6 +4065,7 @@ module Aws::SageMaker
     #   <p>The Amazon Resource Name (ARN) of the new repository.</p>
     #   @return [String]
     class CreateCodeRepositoryOutput < Struct.new(
+      nil,
       :code_repository_arn,
       keyword_init: true
     )
@@ -3926,6 +4097,7 @@ module Aws::SageMaker
     #   <p>An array of key-value pairs. You can use tags to categorize your Amazon Web Services resources in different ways, for example, by purpose, owner, or environment. For more information, see <a href="https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html">Tagging Amazon Web Services Resources</a>.</p>
     #   @return [Array<Types::Tag>]
     class CreateCompilationJobRequest < Struct.new(
+      nil,
       :compilation_job_name,
       :role_arn,
       :model_package_version_arn,
@@ -3943,6 +4115,7 @@ module Aws::SageMaker
     #   <p>If the action is successful, the service sends back an HTTP 200 response. Amazon SageMaker AI returns the following data in JSON format:</p> <ul> <li> <p> <code>CompilationJobArn</code>: The Amazon Resource Name (ARN) of the compiled job.</p> </li> </ul>
     #   @return [String]
     class CreateCompilationJobResponse < Struct.new(
+      nil,
       :compilation_job_arn,
       keyword_init: true
     )
@@ -3971,6 +4144,7 @@ module Aws::SageMaker
     #   <p>Tags of the compute allocation definition.</p>
     #   @return [Array<Types::Tag>]
     class CreateComputeQuotaRequest < Struct.new(
+      nil,
       :name,
       :description,
       :cluster_arn,
@@ -3990,6 +4164,7 @@ module Aws::SageMaker
     #   <p>ID of the compute allocation definition.</p>
     #   @return [String]
     class CreateComputeQuotaResponse < Struct.new(
+      nil,
       :compute_quota_arn,
       :compute_quota_id,
       keyword_init: true
@@ -4016,6 +4191,7 @@ module Aws::SageMaker
     #   <p>A list of tags to apply to the context.</p>
     #   @return [Array<Types::Tag>]
     class CreateContextRequest < Struct.new(
+      nil,
       :context_name,
       :source,
       :context_type,
@@ -4031,6 +4207,7 @@ module Aws::SageMaker
     #   <p>The Amazon Resource Name (ARN) of the context.</p>
     #   @return [String]
     class CreateContextResponse < Struct.new(
+      nil,
       :context_arn,
       keyword_init: true
     )
@@ -4068,6 +4245,7 @@ module Aws::SageMaker
     #   <p>(Optional) An array of key-value pairs. For more information, see <a href="https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/cost-alloc-tags.html#allocation-whatURL"> Using Cost Allocation Tags</a> in the <i>Amazon Web Services Billing and Cost Management User Guide</i>.</p>
     #   @return [Array<Types::Tag>]
     class CreateDataQualityJobDefinitionRequest < Struct.new(
+      nil,
       :job_definition_name,
       :data_quality_baseline_config,
       :data_quality_app_specification,
@@ -4087,6 +4265,7 @@ module Aws::SageMaker
     #   <p>The Amazon Resource Name (ARN) of the job definition.</p>
     #   @return [String]
     class CreateDataQualityJobDefinitionResponse < Struct.new(
+      nil,
       :job_definition_arn,
       keyword_init: true
     )
@@ -4112,6 +4291,7 @@ module Aws::SageMaker
     #   <p>Whether to create an Amazon Web Services IoT Role Alias during device fleet creation. The name of the role alias generated will match this pattern: "SageMakerEdge-{DeviceFleetName}".</p> <p>For example, if your device fleet is called "demo-fleet", the name of the role alias will be "SageMakerEdge-demo-fleet".</p>
     #   @return [Boolean]
     class CreateDeviceFleetRequest < Struct.new(
+      nil,
       :device_fleet_name,
       :role_arn,
       :description,
@@ -4165,6 +4345,7 @@ module Aws::SageMaker
     #   <p>The default settings for shared spaces that users create in the domain.</p>
     #   @return [Types::DefaultSpaceSettings]
     class CreateDomainRequest < Struct.new(
+      nil,
       :domain_name,
       :auth_mode,
       :default_user_settings,
@@ -4193,6 +4374,7 @@ module Aws::SageMaker
     #   <p>The URL to the created domain.</p>
     #   @return [String]
     class CreateDomainResponse < Struct.new(
+      nil,
       :domain_arn,
       :domain_id,
       :url,
@@ -4217,6 +4399,7 @@ module Aws::SageMaker
     #   <p>List of tags with which to tag the edge deployment plan.</p>
     #   @return [Array<Types::Tag>]
     class CreateEdgeDeploymentPlanRequest < Struct.new(
+      nil,
       :edge_deployment_plan_name,
       :model_configs,
       :device_fleet_name,
@@ -4231,6 +4414,7 @@ module Aws::SageMaker
     #   <p>The ARN of the edge deployment plan.</p>
     #   @return [String]
     class CreateEdgeDeploymentPlanResponse < Struct.new(
+      nil,
       :edge_deployment_plan_arn,
       keyword_init: true
     )
@@ -4244,6 +4428,7 @@ module Aws::SageMaker
     #   <p>List of stages to be added to the edge deployment plan.</p>
     #   @return [Array<Types::DeploymentStage>]
     class CreateEdgeDeploymentStageRequest < Struct.new(
+      nil,
       :edge_deployment_plan_name,
       :stages,
       keyword_init: true
@@ -4276,6 +4461,7 @@ module Aws::SageMaker
     #   <p>Creates tags for the packaging job.</p>
     #   @return [Array<Types::Tag>]
     class CreateEdgePackagingJobRequest < Struct.new(
+      nil,
       :edge_packaging_job_name,
       :compilation_job_name,
       :model_name,
@@ -4323,6 +4509,7 @@ module Aws::SageMaker
     #   <p>Sets whether all model containers deployed to the endpoint are isolated. If they are, no inbound or outbound network calls can be made to or from the model containers.</p>
     #   @return [Boolean]
     class CreateEndpointConfigInput < Struct.new(
+      nil,
       :endpoint_config_name,
       :production_variants,
       :data_capture_config,
@@ -4343,6 +4530,7 @@ module Aws::SageMaker
     #   <p>The Amazon Resource Name (ARN) of the endpoint configuration. </p>
     #   @return [String]
     class CreateEndpointConfigOutput < Struct.new(
+      nil,
       :endpoint_config_arn,
       keyword_init: true
     )
@@ -4362,6 +4550,7 @@ module Aws::SageMaker
     #   <p>An array of key-value pairs. You can use tags to categorize your Amazon Web Services resources in different ways, for example, by purpose, owner, or environment. For more information, see <a href="https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html">Tagging Amazon Web Services Resources</a>.</p>
     #   @return [Array<Types::Tag>]
     class CreateEndpointInput < Struct.new(
+      nil,
       :endpoint_name,
       :endpoint_config_name,
       :deployment_config,
@@ -4375,6 +4564,7 @@ module Aws::SageMaker
     #   <p>The Amazon Resource Name (ARN) of the endpoint.</p>
     #   @return [String]
     class CreateEndpointOutput < Struct.new(
+      nil,
       :endpoint_arn,
       keyword_init: true
     )
@@ -4394,6 +4584,7 @@ module Aws::SageMaker
     #   <p>A list of tags to associate with the experiment. You can use <a href="https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_Search.html">Search</a> API to search on the tags.</p>
     #   @return [Array<Types::Tag>]
     class CreateExperimentRequest < Struct.new(
+      nil,
       :experiment_name,
       :display_name,
       :description,
@@ -4407,6 +4598,7 @@ module Aws::SageMaker
     #   <p>The Amazon Resource Name (ARN) of the experiment.</p>
     #   @return [String]
     class CreateExperimentResponse < Struct.new(
+      nil,
       :experiment_arn,
       keyword_init: true
     )
@@ -4444,6 +4636,7 @@ module Aws::SageMaker
     #   <p>Tags used to identify <code>Features</code> in each <code>FeatureGroup</code>.</p>
     #   @return [Array<Types::Tag>]
     class CreateFeatureGroupRequest < Struct.new(
+      nil,
       :feature_group_name,
       :record_identifier_feature_name,
       :event_time_feature_name,
@@ -4463,6 +4656,7 @@ module Aws::SageMaker
     #   <p>The Amazon Resource Name (ARN) of the <code>FeatureGroup</code>. This is a unique identifier for the feature group. </p>
     #   @return [String]
     class CreateFeatureGroupResponse < Struct.new(
+      nil,
       :feature_group_arn,
       keyword_init: true
     )
@@ -4491,6 +4685,7 @@ module Aws::SageMaker
     #   <p>An array of key-value pairs that contain metadata to help you categorize and organize a flow definition. Each tag consists of a key and a value, both of which you define.</p>
     #   @return [Array<Types::Tag>]
     class CreateFlowDefinitionRequest < Struct.new(
+      nil,
       :flow_definition_name,
       :human_loop_request_source,
       :human_loop_activation_config,
@@ -4507,6 +4702,7 @@ module Aws::SageMaker
     #   <p>The Amazon Resource Name (ARN) of the flow definition you create.</p>
     #   @return [String]
     class CreateFlowDefinitionResponse < Struct.new(
+      nil,
       :flow_definition_arn,
       keyword_init: true
     )
@@ -4535,6 +4731,7 @@ module Aws::SageMaker
     #   <p> A token for pagination. Use this token to retrieve the next set of presigned URLs when the response is truncated.</p>
     #   @return [String]
     class CreateHubContentPresignedUrlsRequest < Struct.new(
+      nil,
       :hub_name,
       :hub_content_type,
       :hub_content_name,
@@ -4554,6 +4751,7 @@ module Aws::SageMaker
     #   <p>A token for pagination. If present, indicates that more presigned URLs are available. Use this token in a subsequent request to retrieve additional URLs.</p>
     #   @return [String]
     class CreateHubContentPresignedUrlsResponse < Struct.new(
+      nil,
       :authorized_url_configs,
       :next_token,
       keyword_init: true
@@ -4577,6 +4775,7 @@ module Aws::SageMaker
     #   <p>Any tags associated with the hub content to reference.</p>
     #   @return [Array<Types::Tag>]
     class CreateHubContentReferenceRequest < Struct.new(
+      nil,
       :hub_name,
       :sage_maker_public_hub_content_arn,
       :hub_content_name,
@@ -4594,6 +4793,7 @@ module Aws::SageMaker
     #   <p>The ARN of the hub content.</p>
     #   @return [String]
     class CreateHubContentReferenceResponse < Struct.new(
+      nil,
       :hub_arn,
       :hub_content_arn,
       keyword_init: true
@@ -4620,6 +4820,7 @@ module Aws::SageMaker
     #   <p>Any tags to associate with the hub.</p>
     #   @return [Array<Types::Tag>]
     class CreateHubRequest < Struct.new(
+      nil,
       :hub_name,
       :hub_description,
       :hub_display_name,
@@ -4635,6 +4836,7 @@ module Aws::SageMaker
     #   <p>The Amazon Resource Name (ARN) of the hub.</p>
     #   @return [String]
     class CreateHubResponse < Struct.new(
+      nil,
       :hub_arn,
       keyword_init: true
     )
@@ -4651,6 +4853,7 @@ module Aws::SageMaker
     #   <p>An array of key-value pairs that contain metadata to help you categorize and organize a human review workflow user interface. Each tag consists of a key and a value, both of which you define.</p>
     #   @return [Array<Types::Tag>]
     class CreateHumanTaskUiRequest < Struct.new(
+      nil,
       :human_task_ui_name,
       :ui_template,
       :tags,
@@ -4663,6 +4866,7 @@ module Aws::SageMaker
     #   <p>The Amazon Resource Name (ARN) of the human review workflow user interface you create.</p>
     #   @return [String]
     class CreateHumanTaskUiResponse < Struct.new(
+      nil,
       :human_task_ui_arn,
       keyword_init: true
     )
@@ -4691,6 +4895,7 @@ module Aws::SageMaker
     #   <p>Configures SageMaker Automatic model tuning (AMT) to automatically find optimal parameters for the following fields:</p> <ul> <li> <p> <a href="https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_HyperParameterTuningJobConfig.html#sagemaker-Type-HyperParameterTuningJobConfig-ParameterRanges">ParameterRanges</a>: The names and ranges of parameters that a hyperparameter tuning job can optimize.</p> </li> <li> <p> <a href="https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_ResourceLimits.html">ResourceLimits</a>: The maximum resources that can be used for a training job. These resources include the maximum number of training jobs, the maximum runtime of a tuning job, and the maximum number of training jobs to run at the same time.</p> </li> <li> <p> <a href="https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_HyperParameterTuningJobConfig.html#sagemaker-Type-HyperParameterTuningJobConfig-TrainingJobEarlyStoppingType">TrainingJobEarlyStoppingType</a>: A flag that specifies whether or not to use early stopping for training jobs launched by a hyperparameter tuning job.</p> </li> <li> <p> <a href="https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_HyperParameterTrainingJobDefinition.html#sagemaker-Type-HyperParameterTrainingJobDefinition-RetryStrategy">RetryStrategy</a>: The number of times to retry a training job.</p> </li> <li> <p> <a href="https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_HyperParameterTuningJobConfig.html">Strategy</a>: Specifies how hyperparameter tuning chooses the combinations of hyperparameter values to use for the training jobs that it launches.</p> </li> <li> <p> <a href="https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_ConvergenceDetected.html">ConvergenceDetected</a>: A flag to indicate that Automatic model tuning (AMT) has detected model convergence.</p> </li> </ul>
     #   @return [Types::Autotune]
     class CreateHyperParameterTuningJobRequest < Struct.new(
+      nil,
       :hyper_parameter_tuning_job_name,
       :hyper_parameter_tuning_job_config,
       :training_job_definition,
@@ -4707,6 +4912,7 @@ module Aws::SageMaker
     #   <p>The Amazon Resource Name (ARN) of the tuning job. SageMaker assigns an ARN to a hyperparameter tuning job when you create it.</p>
     #   @return [String]
     class CreateHyperParameterTuningJobResponse < Struct.new(
+      nil,
       :hyper_parameter_tuning_job_arn,
       keyword_init: true
     )
@@ -4729,6 +4935,7 @@ module Aws::SageMaker
     #   <p>A list of tags to apply to the image.</p>
     #   @return [Array<Types::Tag>]
     class CreateImageRequest < Struct.new(
+      nil,
       :description,
       :display_name,
       :image_name,
@@ -4743,6 +4950,7 @@ module Aws::SageMaker
     #   <p>The ARN of the image.</p>
     #   @return [String]
     class CreateImageResponse < Struct.new(
+      nil,
       :image_arn,
       keyword_init: true
     )
@@ -4783,6 +4991,7 @@ module Aws::SageMaker
     #   <p>The maintainer description of the image version.</p>
     #   @return [String]
     class CreateImageVersionRequest < Struct.new(
+      nil,
       :base_image,
       :client_token,
       :image_name,
@@ -4803,6 +5012,7 @@ module Aws::SageMaker
     #   <p>The ARN of the image version.</p>
     #   @return [String]
     class CreateImageVersionResponse < Struct.new(
+      nil,
       :image_version_arn,
       keyword_init: true
     )
@@ -4828,6 +5038,7 @@ module Aws::SageMaker
     #   <p>A list of key-value pairs associated with the model. For more information, see <a href="https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html">Tagging Amazon Web Services resources</a> in the <i>Amazon Web Services General Reference</i>.</p>
     #   @return [Array<Types::Tag>]
     class CreateInferenceComponentInput < Struct.new(
+      nil,
       :inference_component_name,
       :endpoint_name,
       :variant_name,
@@ -4843,6 +5054,7 @@ module Aws::SageMaker
     #   <p>The Amazon Resource Name (ARN) of the inference component.</p>
     #   @return [String]
     class CreateInferenceComponentOutput < Struct.new(
+      nil,
       :inference_component_arn,
       keyword_init: true
     )
@@ -4883,6 +5095,7 @@ module Aws::SageMaker
     #   <p> Array of key-value pairs. You can use tags to categorize your Amazon Web Services resources in different ways, for example, by purpose, owner, or environment. For more information, see <a href="https://docs.aws.amazon.com/ARG/latest/userguide/tagging.html">Tagging your Amazon Web Services Resources</a>. </p>
     #   @return [Array<Types::Tag>]
     class CreateInferenceExperimentRequest < Struct.new(
+      nil,
       :name,
       :type,
       :schedule,
@@ -4903,6 +5116,7 @@ module Aws::SageMaker
     #   <p>The ARN for your inference experiment.</p>
     #   @return [String]
     class CreateInferenceExperimentResponse < Struct.new(
+      nil,
       :inference_experiment_arn,
       keyword_init: true
     )
@@ -4934,6 +5148,7 @@ module Aws::SageMaker
     #   <p>The metadata that you apply to Amazon Web Services resources to help you categorize and organize them. Each tag consists of a key and a value, both of which you define. For more information, see <a href="https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html">Tagging Amazon Web Services Resources</a> in the Amazon Web Services General Reference.</p>
     #   @return [Array<Types::Tag>]
     class CreateInferenceRecommendationsJobRequest < Struct.new(
+      nil,
       :job_name,
       :job_type,
       :role_arn,
@@ -4951,6 +5166,7 @@ module Aws::SageMaker
     #   <p>The Amazon Resource Name (ARN) of the recommendation job.</p>
     #   @return [String]
     class CreateInferenceRecommendationsJobResponse < Struct.new(
+      nil,
       :job_arn,
       keyword_init: true
     )
@@ -4988,6 +5204,7 @@ module Aws::SageMaker
     #   <p>An array of key/value pairs. For more information, see <a href="https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/cost-alloc-tags.html#allocation-what">Using Cost Allocation Tags</a> in the <i>Amazon Web Services Billing and Cost Management User Guide</i>.</p>
     #   @return [Array<Types::Tag>]
     class CreateLabelingJobRequest < Struct.new(
+      nil,
       :labeling_job_name,
       :label_attribute_name,
       :input_config,
@@ -5007,6 +5224,7 @@ module Aws::SageMaker
     #   <p>The Amazon Resource Name (ARN) of the labeling job. You use this ARN to identify the labeling job.</p>
     #   @return [String]
     class CreateLabelingJobResponse < Struct.new(
+      nil,
       :labeling_job_arn,
       keyword_init: true
     )
@@ -5038,6 +5256,7 @@ module Aws::SageMaker
     #   <p>Tags consisting of key-value pairs used to manage metadata for the tracking server.</p>
     #   @return [Array<Types::Tag>]
     class CreateMlflowTrackingServerRequest < Struct.new(
+      nil,
       :tracking_server_name,
       :artifact_store_uri,
       :tracking_server_size,
@@ -5055,6 +5274,7 @@ module Aws::SageMaker
     #   <p>The ARN of the tracking server.</p>
     #   @return [String]
     class CreateMlflowTrackingServerResponse < Struct.new(
+      nil,
       :tracking_server_arn,
       keyword_init: true
     )
@@ -5092,6 +5312,7 @@ module Aws::SageMaker
     #   <p>(Optional) An array of key-value pairs. For more information, see <a href="https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/cost-alloc-tags.html#allocation-whatURL"> Using Cost Allocation Tags</a> in the <i>Amazon Web Services Billing and Cost Management User Guide</i>.</p>
     #   @return [Array<Types::Tag>]
     class CreateModelBiasJobDefinitionRequest < Struct.new(
+      nil,
       :job_definition_name,
       :model_bias_baseline_config,
       :model_bias_app_specification,
@@ -5111,6 +5332,7 @@ module Aws::SageMaker
     #   <p>The Amazon Resource Name (ARN) of the model bias job.</p>
     #   @return [String]
     class CreateModelBiasJobDefinitionResponse < Struct.new(
+      nil,
       :job_definition_arn,
       keyword_init: true
     )
@@ -5130,6 +5352,7 @@ module Aws::SageMaker
     #   <p>The model card output configuration that specifies the Amazon S3 path for exporting.</p>
     #   @return [Types::ModelCardExportOutputConfig]
     class CreateModelCardExportJobRequest < Struct.new(
+      nil,
       :model_card_name,
       :model_card_version,
       :model_card_export_job_name,
@@ -5143,6 +5366,7 @@ module Aws::SageMaker
     #   <p>The Amazon Resource Name (ARN) of the model card export job.</p>
     #   @return [String]
     class CreateModelCardExportJobResponse < Struct.new(
+      nil,
       :model_card_export_job_arn,
       keyword_init: true
     )
@@ -5165,6 +5389,7 @@ module Aws::SageMaker
     #   <p>Key-value pairs used to manage metadata for model cards.</p>
     #   @return [Array<Types::Tag>]
     class CreateModelCardRequest < Struct.new(
+      nil,
       :model_card_name,
       :security_config,
       :content,
@@ -5179,6 +5404,7 @@ module Aws::SageMaker
     #   <p>The Amazon Resource Name (ARN) of the successfully created model card.</p>
     #   @return [String]
     class CreateModelCardResponse < Struct.new(
+      nil,
       :model_card_arn,
       keyword_init: true
     )
@@ -5216,6 +5442,7 @@ module Aws::SageMaker
     #   <p>(Optional) An array of key-value pairs. For more information, see <a href="https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/cost-alloc-tags.html#allocation-whatURL"> Using Cost Allocation Tags</a> in the <i>Amazon Web Services Billing and Cost Management User Guide</i>.</p>
     #   @return [Array<Types::Tag>]
     class CreateModelExplainabilityJobDefinitionRequest < Struct.new(
+      nil,
       :job_definition_name,
       :model_explainability_baseline_config,
       :model_explainability_app_specification,
@@ -5235,6 +5462,7 @@ module Aws::SageMaker
     #   <p>The Amazon Resource Name (ARN) of the model explainability job.</p>
     #   @return [String]
     class CreateModelExplainabilityJobDefinitionResponse < Struct.new(
+      nil,
       :job_definition_arn,
       keyword_init: true
     )
@@ -5266,6 +5494,7 @@ module Aws::SageMaker
     #   <p>Isolates the model container. No inbound or outbound network calls can be made to or from the model container.</p>
     #   @return [Boolean]
     class CreateModelInput < Struct.new(
+      nil,
       :model_name,
       :primary_container,
       :containers,
@@ -5283,6 +5512,7 @@ module Aws::SageMaker
     #   <p>The ARN of the model created in SageMaker.</p>
     #   @return [String]
     class CreateModelOutput < Struct.new(
+      nil,
       :model_arn,
       keyword_init: true
     )
@@ -5299,6 +5529,7 @@ module Aws::SageMaker
     #   <p>A list of key value pairs associated with the model group. For more information, see <a href="https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html">Tagging Amazon Web Services resources</a> in the <i>Amazon Web Services General Reference Guide</i>.</p>
     #   @return [Array<Types::Tag>]
     class CreateModelPackageGroupInput < Struct.new(
+      nil,
       :model_package_group_name,
       :model_package_group_description,
       :tags,
@@ -5311,6 +5542,7 @@ module Aws::SageMaker
     #   <p>The Amazon Resource Name (ARN) of the model group.</p>
     #   @return [String]
     class CreateModelPackageGroupOutput < Struct.new(
+      nil,
       :model_package_group_arn,
       keyword_init: true
     )
@@ -5387,6 +5619,7 @@ module Aws::SageMaker
     #   <p> A structure describing the current state of the model in its life cycle. </p>
     #   @return [Types::ModelLifeCycle]
     class CreateModelPackageInput < Struct.new(
+      nil,
       :model_package_name,
       :model_package_group_name,
       :model_package_description,
@@ -5419,6 +5652,7 @@ module Aws::SageMaker
     #   <p>The Amazon Resource Name (ARN) of the new model package.</p>
     #   @return [String]
     class CreateModelPackageOutput < Struct.new(
+      nil,
       :model_package_arn,
       keyword_init: true
     )
@@ -5456,6 +5690,7 @@ module Aws::SageMaker
     #   <p>(Optional) An array of key-value pairs. For more information, see <a href="https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/cost-alloc-tags.html#allocation-whatURL"> Using Cost Allocation Tags</a> in the <i>Amazon Web Services Billing and Cost Management User Guide</i>.</p>
     #   @return [Array<Types::Tag>]
     class CreateModelQualityJobDefinitionRequest < Struct.new(
+      nil,
       :job_definition_name,
       :model_quality_baseline_config,
       :model_quality_app_specification,
@@ -5475,6 +5710,7 @@ module Aws::SageMaker
     #   <p>The Amazon Resource Name (ARN) of the model quality monitoring job.</p>
     #   @return [String]
     class CreateModelQualityJobDefinitionResponse < Struct.new(
+      nil,
       :job_definition_arn,
       keyword_init: true
     )
@@ -5491,6 +5727,7 @@ module Aws::SageMaker
     #   <p>(Optional) An array of key-value pairs. For more information, see <a href=" https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/cost-alloc-tags.html#allocation-whatURL">Using Cost Allocation Tags</a> in the <i>Amazon Web Services Billing and Cost Management User Guide</i>.</p>
     #   @return [Array<Types::Tag>]
     class CreateMonitoringScheduleRequest < Struct.new(
+      nil,
       :monitoring_schedule_name,
       :monitoring_schedule_config,
       :tags,
@@ -5503,6 +5740,7 @@ module Aws::SageMaker
     #   <p>The Amazon Resource Name (ARN) of the monitoring schedule.</p>
     #   @return [String]
     class CreateMonitoringScheduleResponse < Struct.new(
+      nil,
       :monitoring_schedule_arn,
       keyword_init: true
     )
@@ -5561,6 +5799,7 @@ module Aws::SageMaker
     #   <p>Information on the IMDS configuration of the notebook instance</p>
     #   @return [Types::InstanceMetadataServiceConfiguration]
     class CreateNotebookInstanceInput < Struct.new(
+      nil,
       :notebook_instance_name,
       :instance_type,
       :subnet_id,
@@ -5596,6 +5835,7 @@ module Aws::SageMaker
     #   <p>An array of key-value pairs. You can use tags to categorize your Amazon Web Services resources in different ways, for example, by purpose, owner, or environment. For more information, see <a href="https://docs.aws.amazon.com/tag-editor/latest/userguide/tagging.html">Tagging Amazon Web Services Resources</a>.</p>
     #   @return [Array<Types::Tag>]
     class CreateNotebookInstanceLifecycleConfigInput < Struct.new(
+      nil,
       :notebook_instance_lifecycle_config_name,
       :on_create,
       :on_start,
@@ -5609,6 +5849,7 @@ module Aws::SageMaker
     #   <p>The Amazon Resource Name (ARN) of the lifecycle configuration.</p>
     #   @return [String]
     class CreateNotebookInstanceLifecycleConfigOutput < Struct.new(
+      nil,
       :notebook_instance_lifecycle_config_arn,
       keyword_init: true
     )
@@ -5619,6 +5860,7 @@ module Aws::SageMaker
     #   <p>The Amazon Resource Name (ARN) of the notebook instance. </p>
     #   @return [String]
     class CreateNotebookInstanceOutput < Struct.new(
+      nil,
       :notebook_instance_arn,
       keyword_init: true
     )
@@ -5656,6 +5898,7 @@ module Aws::SageMaker
     #   <p>A VPC in Amazon VPC that your optimized model has access to.</p>
     #   @return [Types::OptimizationVpcConfig]
     class CreateOptimizationJobRequest < Struct.new(
+      nil,
       :optimization_job_name,
       :role_arn,
       :model_source,
@@ -5675,6 +5918,7 @@ module Aws::SageMaker
     #   <p>The Amazon Resource Name (ARN) of the optimization job.</p>
     #   @return [String]
     class CreateOptimizationJobResponse < Struct.new(
+      nil,
       :optimization_job_arn,
       keyword_init: true
     )
@@ -5691,6 +5935,7 @@ module Aws::SageMaker
     #   <p>Indicates how long the Amazon SageMaker Partner AI App session can be accessed for after logging in.</p>
     #   @return [Integer]
     class CreatePartnerAppPresignedUrlRequest < Struct.new(
+      nil,
       :arn,
       :expires_in_seconds,
       :session_expiration_duration_in_seconds,
@@ -5703,6 +5948,7 @@ module Aws::SageMaker
     #   <p>The presigned URL that you can use to access the SageMaker Partner AI App.</p>
     #   @return [String]
     class CreatePartnerAppPresignedUrlResponse < Struct.new(
+      nil,
       :url,
       keyword_init: true
     )
@@ -5743,6 +5989,7 @@ module Aws::SageMaker
     #   <p>Each tag consists of a key and an optional value. Tag keys must be unique per resource.</p>
     #   @return [Array<Types::Tag>]
     class CreatePartnerAppRequest < Struct.new(
+      nil,
       :name,
       :type,
       :execution_role_arn,
@@ -5763,6 +6010,7 @@ module Aws::SageMaker
     #   <p>The ARN of the SageMaker Partner AI App.</p>
     #   @return [String]
     class CreatePartnerAppResponse < Struct.new(
+      nil,
       :arn,
       keyword_init: true
     )
@@ -5797,6 +6045,7 @@ module Aws::SageMaker
     #   <p>This is the configuration that controls the parallelism of the pipeline. If specified, it applies to all runs of this pipeline by default.</p>
     #   @return [Types::ParallelismConfiguration]
     class CreatePipelineRequest < Struct.new(
+      nil,
       :pipeline_name,
       :pipeline_display_name,
       :pipeline_definition,
@@ -5815,6 +6064,7 @@ module Aws::SageMaker
     #   <p>The Amazon Resource Name (ARN) of the created pipeline.</p>
     #   @return [String]
     class CreatePipelineResponse < Struct.new(
+      nil,
       :pipeline_arn,
       keyword_init: true
     )
@@ -5840,6 +6090,7 @@ module Aws::SageMaker
     #   <p>The landing page that the user is directed to when accessing the presigned URL. Using this value, users can access Studio or Studio Classic, even if it is not the default experience for the domain. The supported values are:</p> <ul> <li> <p> <code>studio::relative/path</code>: Directs users to the relative path in Studio.</p> </li> <li> <p> <code>app:JupyterServer:relative/path</code>: Directs users to the relative path in the Studio Classic application.</p> </li> <li> <p> <code>app:JupyterLab:relative/path</code>: Directs users to the relative path in the JupyterLab application.</p> </li> <li> <p> <code>app:RStudioServerPro:relative/path</code>: Directs users to the relative path in the RStudio application.</p> </li> <li> <p> <code>app:CodeEditor:relative/path</code>: Directs users to the relative path in the Code Editor, based on Code-OSS, Visual Studio Code - Open Source application.</p> </li> <li> <p> <code>app:Canvas:relative/path</code>: Directs users to the relative path in the Canvas application.</p> </li> </ul>
     #   @return [String]
     class CreatePresignedDomainUrlRequest < Struct.new(
+      nil,
       :domain_id,
       :user_profile_name,
       :session_expiration_duration_in_seconds,
@@ -5855,6 +6106,7 @@ module Aws::SageMaker
     #   <p>The presigned URL.</p>
     #   @return [String]
     class CreatePresignedDomainUrlResponse < Struct.new(
+      nil,
       :authorized_url,
       keyword_init: true
     )
@@ -5871,6 +6123,7 @@ module Aws::SageMaker
     #   <p>The duration in seconds that your MLflow UI session is valid.</p>
     #   @return [Integer]
     class CreatePresignedMlflowTrackingServerUrlRequest < Struct.new(
+      nil,
       :tracking_server_name,
       :expires_in_seconds,
       :session_expiration_duration_in_seconds,
@@ -5883,6 +6136,7 @@ module Aws::SageMaker
     #   <p>A presigned URL with an authorization token.</p>
     #   @return [String]
     class CreatePresignedMlflowTrackingServerUrlResponse < Struct.new(
+      nil,
       :authorized_url,
       keyword_init: true
     )
@@ -5896,6 +6150,7 @@ module Aws::SageMaker
     #   <p>The duration of the session, in seconds. The default is 12 hours.</p>
     #   @return [Integer]
     class CreatePresignedNotebookInstanceUrlInput < Struct.new(
+      nil,
       :notebook_instance_name,
       :session_expiration_duration_in_seconds,
       keyword_init: true
@@ -5907,6 +6162,7 @@ module Aws::SageMaker
     #   <p>A JSON object that contains the URL string. </p>
     #   @return [String]
     class CreatePresignedNotebookInstanceUrlOutput < Struct.new(
+      nil,
       :authorized_url,
       keyword_init: true
     )
@@ -5947,6 +6203,7 @@ module Aws::SageMaker
     #   <p>Associates a SageMaker job as a trial component with an experiment and trial. Specified when you call the following APIs:</p> <ul> <li> <p> <a href="https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_CreateProcessingJob.html">CreateProcessingJob</a> </p> </li> <li> <p> <a href="https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_CreateTrainingJob.html">CreateTrainingJob</a> </p> </li> <li> <p> <a href="https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_CreateTransformJob.html">CreateTransformJob</a> </p> </li> </ul>
     #   @return [Types::ExperimentConfig]
     class CreateProcessingJobRequest < Struct.new(
+      nil,
       :processing_inputs,
       :processing_output_config,
       :processing_job_name,
@@ -5967,6 +6224,7 @@ module Aws::SageMaker
     #   <p>The Amazon Resource Name (ARN) of the processing job.</p>
     #   @return [String]
     class CreateProcessingJobResponse < Struct.new(
+      nil,
       :processing_job_arn,
       keyword_init: true
     )
@@ -5989,6 +6247,7 @@ module Aws::SageMaker
     #   <p> An array of template provider configurations for creating infrastructure resources for the project. </p>
     #   @return [Array<Types::CreateTemplateProvider>]
     class CreateProjectInput < Struct.new(
+      nil,
       :project_name,
       :project_description,
       :service_catalog_provisioning_details,
@@ -6006,6 +6265,7 @@ module Aws::SageMaker
     #   <p>The ID of the new project.</p>
     #   @return [String]
     class CreateProjectOutput < Struct.new(
+      nil,
       :project_arn,
       :project_id,
       keyword_init: true
@@ -6035,6 +6295,7 @@ module Aws::SageMaker
     #   <p>The name of the space that appears in the SageMaker Studio UI.</p>
     #   @return [String]
     class CreateSpaceRequest < Struct.new(
+      nil,
       :domain_id,
       :space_name,
       :tags,
@@ -6051,6 +6312,7 @@ module Aws::SageMaker
     #   <p>The space's Amazon Resource Name (ARN).</p>
     #   @return [String]
     class CreateSpaceResponse < Struct.new(
+      nil,
       :space_arn,
       keyword_init: true
     )
@@ -6070,6 +6332,7 @@ module Aws::SageMaker
     #   <p>Tags to be associated with the Lifecycle Configuration. Each tag consists of a key and an optional value. Tag keys must be unique per resource. Tags are searchable using the Search API. </p>
     #   @return [Array<Types::Tag>]
     class CreateStudioLifecycleConfigRequest < Struct.new(
+      nil,
       :studio_lifecycle_config_name,
       :studio_lifecycle_config_content,
       :studio_lifecycle_config_app_type,
@@ -6083,6 +6346,7 @@ module Aws::SageMaker
     #   <p>The ARN of your created Lifecycle Configuration.</p>
     #   @return [String]
     class CreateStudioLifecycleConfigResponse < Struct.new(
+      nil,
       :studio_lifecycle_config_arn,
       keyword_init: true
     )
@@ -6094,6 +6358,7 @@ module Aws::SageMaker
     #   <p> The CloudFormation template provider configuration for creating infrastructure resources. </p>
     #   @return [Types::CfnCreateTemplateProvider]
     class CreateTemplateProvider < Struct.new(
+      nil,
       :cfn_template_provider,
       keyword_init: true
     )
@@ -6176,6 +6441,7 @@ module Aws::SageMaker
     #   <p>Contains information about attribute-based access control (ABAC) for the training job.</p>
     #   @return [Types::SessionChainingConfig]
     class CreateTrainingJobRequest < Struct.new(
+      nil,
       :training_job_name,
       :hyper_parameters,
       :algorithm_specification,
@@ -6210,6 +6476,7 @@ module Aws::SageMaker
     #   <p>The Amazon Resource Name (ARN) of the training job.</p>
     #   @return [String]
     class CreateTrainingJobResponse < Struct.new(
+      nil,
       :training_job_arn,
       keyword_init: true
     )
@@ -6229,6 +6496,7 @@ module Aws::SageMaker
     #   <p>An array of key-value pairs to apply to this training plan.</p>
     #   @return [Array<Types::Tag>]
     class CreateTrainingPlanRequest < Struct.new(
+      nil,
       :training_plan_name,
       :training_plan_offering_id,
       :spare_instance_count_per_ultra_server,
@@ -6242,6 +6510,7 @@ module Aws::SageMaker
     #   <p>The Amazon Resource Name (ARN); of the created training plan.</p>
     #   @return [String]
     class CreateTrainingPlanResponse < Struct.new(
+      nil,
       :training_plan_arn,
       keyword_init: true
     )
@@ -6291,6 +6560,7 @@ module Aws::SageMaker
     #   <p>Associates a SageMaker job as a trial component with an experiment and trial. Specified when you call the following APIs:</p> <ul> <li> <p> <a href="https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_CreateProcessingJob.html">CreateProcessingJob</a> </p> </li> <li> <p> <a href="https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_CreateTrainingJob.html">CreateTrainingJob</a> </p> </li> <li> <p> <a href="https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_CreateTransformJob.html">CreateTransformJob</a> </p> </li> </ul>
     #   @return [Types::ExperimentConfig]
     class CreateTransformJobRequest < Struct.new(
+      nil,
       :transform_job_name,
       :model_name,
       :max_concurrent_transforms,
@@ -6314,6 +6584,7 @@ module Aws::SageMaker
     #   <p>The Amazon Resource Name (ARN) of the transform job.</p>
     #   @return [String]
     class CreateTransformJobResponse < Struct.new(
+      nil,
       :transform_job_arn,
       keyword_init: true
     )
@@ -6351,6 +6622,7 @@ module Aws::SageMaker
     #   <p>A list of tags to associate with the component. You can use <a href="https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_Search.html">Search</a> API to search on the tags.</p>
     #   @return [Array<Types::Tag>]
     class CreateTrialComponentRequest < Struct.new(
+      nil,
       :trial_component_name,
       :display_name,
       :status,
@@ -6370,6 +6642,7 @@ module Aws::SageMaker
     #   <p>The Amazon Resource Name (ARN) of the trial component.</p>
     #   @return [String]
     class CreateTrialComponentResponse < Struct.new(
+      nil,
       :trial_component_arn,
       keyword_init: true
     )
@@ -6392,6 +6665,7 @@ module Aws::SageMaker
     #   <p>A list of tags to associate with the trial. You can use <a href="https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_Search.html">Search</a> API to search on the tags.</p>
     #   @return [Array<Types::Tag>]
     class CreateTrialRequest < Struct.new(
+      nil,
       :trial_name,
       :display_name,
       :experiment_name,
@@ -6406,6 +6680,7 @@ module Aws::SageMaker
     #   <p>The Amazon Resource Name (ARN) of the trial.</p>
     #   @return [String]
     class CreateTrialResponse < Struct.new(
+      nil,
       :trial_arn,
       keyword_init: true
     )
@@ -6431,6 +6706,7 @@ module Aws::SageMaker
     #   <p>A collection of settings.</p>
     #   @return [Types::UserSettings]
     class CreateUserProfileRequest < Struct.new(
+      nil,
       :domain_id,
       :user_profile_name,
       :single_sign_on_user_identifier,
@@ -6446,6 +6722,7 @@ module Aws::SageMaker
     #   <p>The user profile Amazon Resource Name (ARN).</p>
     #   @return [String]
     class CreateUserProfileResponse < Struct.new(
+      nil,
       :user_profile_arn,
       keyword_init: true
     )
@@ -6474,6 +6751,7 @@ module Aws::SageMaker
     #   <p>Use this parameter to specify whether you want <code>IPv4</code> only or <code>dualstack</code> (<code>IPv4</code> and <code>IPv6</code>) to support your labeling workforce.</p>
     #   @return [String]
     class CreateWorkforceRequest < Struct.new(
+      nil,
       :cognito_config,
       :oidc_config,
       :source_ip_config,
@@ -6490,6 +6768,7 @@ module Aws::SageMaker
     #   <p>The Amazon Resource Name (ARN) of the workforce.</p>
     #   @return [String]
     class CreateWorkforceResponse < Struct.new(
+      nil,
       :workforce_arn,
       keyword_init: true
     )
@@ -6518,6 +6797,7 @@ module Aws::SageMaker
     #   <p>An array of key-value pairs.</p> <p>For more information, see <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-resource-tags.html">Resource Tag</a> and <a href="https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/cost-alloc-tags.html#allocation-what">Using Cost Allocation Tags</a> in the <i> Amazon Web Services Billing and Cost Management User Guide</i>.</p>
     #   @return [Array<Types::Tag>]
     class CreateWorkteamRequest < Struct.new(
+      nil,
       :workteam_name,
       :workforce_name,
       :member_definitions,
@@ -6534,6 +6814,7 @@ module Aws::SageMaker
     #   <p>The Amazon Resource Name (ARN) of the work team. You can use this ARN to identify the work team.</p>
     #   @return [String]
     class CreateWorkteamResponse < Struct.new(
+      nil,
       :workteam_arn,
       keyword_init: true
     )
@@ -6601,6 +6882,7 @@ module Aws::SageMaker
     #   <p>The name of the AppImageConfig.</p>
     #   @return [String]
     class CustomImage < Struct.new(
+      nil,
       :image_name,
       :image_version_number,
       :app_image_config_name,
@@ -6617,6 +6899,7 @@ module Aws::SageMaker
     #   <p>The POSIX group ID.</p>
     #   @return [Integer]
     class CustomPosixUserConfig < Struct.new(
+      nil,
       :uid,
       :gid,
       keyword_init: true
@@ -6635,6 +6918,7 @@ module Aws::SageMaker
     #   <p>The statistic of the customized metric.</p>
     #   @return [String]
     class CustomizedMetricSpecification < Struct.new(
+      nil,
       :metric_name,
       :namespace,
       :statistic,
@@ -6663,6 +6947,7 @@ module Aws::SageMaker
     #   <p>Configuration specifying how to treat different headers. If no headers are specified SageMaker AI will by default base64 encode when capturing the data.</p>
     #   @return [Types::CaptureContentTypeHeader]
     class DataCaptureConfig < Struct.new(
+      nil,
       :enable_capture,
       :initial_sampling_percentage,
       :destination_s3_uri,
@@ -6691,6 +6976,7 @@ module Aws::SageMaker
     #   <p>The KMS key being used to encrypt the data in Amazon S3.</p>
     #   @return [String]
     class DataCaptureConfigSummary < Struct.new(
+      nil,
       :enable_capture,
       :capture_status,
       :current_sampling_percentage,
@@ -6712,6 +6998,7 @@ module Aws::SageMaker
     #   <p>The name of the Glue table database.</p>
     #   @return [String]
     class DataCatalogConfig < Struct.new(
+      nil,
       :table_name,
       :catalog,
       :database,
@@ -6731,6 +7018,7 @@ module Aws::SageMaker
     #   <p>Specifies the source of the data to join with the transformed data. The valid values are <code>None</code> and <code>Input</code>. The default value is <code>None</code>, which specifies not to join the input with the transformed data. If you want the batch transform job to join the original input data with the transformed data, set <code>JoinSource</code> to <code>Input</code>. You can specify <code>OutputFilter</code> as an additional filter to select a portion of the joined dataset and store it in the output file.</p> <p>For JSON or JSONLines objects, such as a JSON array, SageMaker adds the transformed data to the input JSON object in an attribute called <code>SageMakerOutput</code>. The joined result for JSON must be a key-value pair object. If the input is not a key-value pair object, SageMaker creates a new JSON file. In the new JSON file, and the input data is stored under the <code>SageMakerInput</code> key and the results are stored in <code>SageMakerOutput</code>.</p> <p>For CSV data, SageMaker takes each row as a JSON array and joins the transformed data with the input by appending each transformed row to the end of the input. The joined data has the original input data followed by the transformed data and the output is a CSV file.</p> <p>For information on how joining in applied, see <a href="https://docs.aws.amazon.com/sagemaker/latest/dg/batch-transform-data-processing.html#batch-transform-data-processing-workflow">Workflow for Associating Inferences with Input Records</a>.</p>
     #   @return [String]
     class DataProcessing < Struct.new(
+      nil,
       :input_filter,
       :output_filter,
       :join_source,
@@ -6759,6 +7047,7 @@ module Aws::SageMaker
     #   <p>Sets the environment variables in the container that the monitoring job runs.</p>
     #   @return [Hash<String, String>]
     class DataQualityAppSpecification < Struct.new(
+      nil,
       :image_uri,
       :container_entrypoint,
       :container_arguments,
@@ -6781,6 +7070,7 @@ module Aws::SageMaker
     #   <p>The statistics resource for a monitoring job.</p>
     #   @return [Types::MonitoringStatisticsResource]
     class DataQualityBaselineConfig < Struct.new(
+      nil,
       :baselining_job_name,
       :constraints_resource,
       :statistics_resource,
@@ -6797,6 +7087,7 @@ module Aws::SageMaker
     #   <p>Input object for the batch transform job.</p>
     #   @return [Types::BatchTransformInput]
     class DataQualityJobInput < Struct.new(
+      nil,
       :endpoint_input,
       :batch_transform_input,
       keyword_init: true
@@ -6812,6 +7103,7 @@ module Aws::SageMaker
     #   <p>The file system that is associated with a channel.</p>
     #   @return [Types::FileSystemDataSource]
     class DataSource < Struct.new(
+      nil,
       :s3_data_source,
       :file_system_data_source,
       keyword_init: true
@@ -6836,6 +7128,7 @@ module Aws::SageMaker
     #   <p>Whether to use <code>File</code> or <code>Pipe</code> input mode. In <code>File</code> (default) mode, Amazon SageMaker copies the data from the input source onto the local Amazon Elastic Block Store (Amazon EBS) volumes before starting your training algorithm. This is the most commonly used input mode. In <code>Pipe</code> mode, Amazon SageMaker streams input data from the source directly to your algorithm without using the EBS volume.</p>
     #   @return [String]
     class DatasetDefinition < Struct.new(
+      nil,
       :athena_dataset_definition,
       :redshift_dataset_definition,
       :local_path,
@@ -6860,6 +7153,7 @@ module Aws::SageMaker
     #   <p>Configuration information for Amazon SageMaker Debugger tensor collections. To learn more about how to configure the <code>CollectionConfiguration</code> parameter, see <a href="https://docs.aws.amazon.com/sagemaker/latest/dg/debugger-createtrainingjob-api.html">Use the SageMaker and Debugger Configuration API Operations to Create, Update, and Debug Your Training Job</a>. </p>
     #   @return [Array<Types::CollectionConfiguration>]
     class DebugHookConfig < Struct.new(
+      nil,
       :local_path,
       :s3_output_path,
       :hook_parameters,
@@ -6892,6 +7186,7 @@ module Aws::SageMaker
     #   <p>Runtime configuration for rule container.</p>
     #   @return [Hash<String, String>]
     class DebugRuleConfiguration < Struct.new(
+      nil,
       :rule_configuration_name,
       :local_path,
       :s3_output_path,
@@ -6921,6 +7216,7 @@ module Aws::SageMaker
     #   <p>Timestamp when the rule evaluation status was last modified.</p>
     #   @return [Time]
     class DebugRuleEvaluationStatus < Struct.new(
+      nil,
       :rule_configuration_name,
       :rule_evaluation_job_arn,
       :rule_evaluation_status,
@@ -6939,6 +7235,7 @@ module Aws::SageMaker
     #   <p>The maximum size of the EBS storage volume for a space.</p>
     #   @return [Integer]
     class DefaultEbsStorageSettings < Struct.new(
+      nil,
       :default_ebs_volume_size_in_gb,
       :maximum_ebs_volume_size_in_gb,
       keyword_init: true
@@ -6972,6 +7269,7 @@ module Aws::SageMaker
     #   <p>The settings for assigning a custom file system to a domain. Permitted users can access this file system in Amazon SageMaker AI Studio.</p>
     #   @return [Array<Types::CustomFileSystemConfig>]
     class DefaultSpaceSettings < Struct.new(
+      nil,
       :execution_role,
       :security_groups,
       :jupyter_server_app_settings,
@@ -6990,6 +7288,7 @@ module Aws::SageMaker
     #   <p>The default EBS storage settings for a space.</p>
     #   @return [Types::DefaultEbsStorageSettings]
     class DefaultSpaceStorageSettings < Struct.new(
+      nil,
       :default_ebs_storage_settings,
       keyword_init: true
     )
@@ -7000,6 +7299,7 @@ module Aws::SageMaker
     #   <p>The name of the action to delete.</p>
     #   @return [String]
     class DeleteActionRequest < Struct.new(
+      nil,
       :action_name,
       keyword_init: true
     )
@@ -7010,6 +7310,7 @@ module Aws::SageMaker
     #   <p>The Amazon Resource Name (ARN) of the action.</p>
     #   @return [String]
     class DeleteActionResponse < Struct.new(
+      nil,
       :action_arn,
       keyword_init: true
     )
@@ -7020,6 +7321,7 @@ module Aws::SageMaker
     #   <p>The name of the algorithm to delete.</p>
     #   @return [String]
     class DeleteAlgorithmInput < Struct.new(
+      nil,
       :algorithm_name,
       keyword_init: true
     )
@@ -7030,6 +7332,7 @@ module Aws::SageMaker
     #   <p>The name of the AppImageConfig to delete.</p>
     #   @return [String]
     class DeleteAppImageConfigRequest < Struct.new(
+      nil,
       :app_image_config_name,
       keyword_init: true
     )
@@ -7052,6 +7355,7 @@ module Aws::SageMaker
     #   <p>The name of the app.</p>
     #   @return [String]
     class DeleteAppRequest < Struct.new(
+      nil,
       :domain_id,
       :user_profile_name,
       :space_name,
@@ -7069,6 +7373,7 @@ module Aws::SageMaker
     #   <p>The URI of the source.</p>
     #   @return [Types::ArtifactSource]
     class DeleteArtifactRequest < Struct.new(
+      nil,
       :artifact_arn,
       :source,
       keyword_init: true
@@ -7080,6 +7385,7 @@ module Aws::SageMaker
     #   <p>The Amazon Resource Name (ARN) of the artifact.</p>
     #   @return [String]
     class DeleteArtifactResponse < Struct.new(
+      nil,
       :artifact_arn,
       keyword_init: true
     )
@@ -7093,6 +7399,7 @@ module Aws::SageMaker
     #   <p>The Amazon Resource Name (ARN) of the destination.</p>
     #   @return [String]
     class DeleteAssociationRequest < Struct.new(
+      nil,
       :source_arn,
       :destination_arn,
       keyword_init: true
@@ -7107,6 +7414,7 @@ module Aws::SageMaker
     #   <p>The Amazon Resource Name (ARN) of the destination.</p>
     #   @return [String]
     class DeleteAssociationResponse < Struct.new(
+      nil,
       :source_arn,
       :destination_arn,
       keyword_init: true
@@ -7118,6 +7426,7 @@ module Aws::SageMaker
     #   <p>The string name or the Amazon Resource Name (ARN) of the SageMaker HyperPod cluster to delete.</p>
     #   @return [String]
     class DeleteClusterRequest < Struct.new(
+      nil,
       :cluster_name,
       keyword_init: true
     )
@@ -7128,6 +7437,7 @@ module Aws::SageMaker
     #   <p>The Amazon Resource Name (ARN) of the SageMaker HyperPod cluster to delete.</p>
     #   @return [String]
     class DeleteClusterResponse < Struct.new(
+      nil,
       :cluster_arn,
       keyword_init: true
     )
@@ -7138,6 +7448,7 @@ module Aws::SageMaker
     #   <p>ID of the cluster policy.</p>
     #   @return [String]
     class DeleteClusterSchedulerConfigRequest < Struct.new(
+      nil,
       :cluster_scheduler_config_id,
       keyword_init: true
     )
@@ -7148,6 +7459,7 @@ module Aws::SageMaker
     #   <p>The name of the Git repository to delete.</p>
     #   @return [String]
     class DeleteCodeRepositoryInput < Struct.new(
+      nil,
       :code_repository_name,
       keyword_init: true
     )
@@ -7158,6 +7470,7 @@ module Aws::SageMaker
     #   <p>The name of the compilation job to delete.</p>
     #   @return [String]
     class DeleteCompilationJobRequest < Struct.new(
+      nil,
       :compilation_job_name,
       keyword_init: true
     )
@@ -7168,6 +7481,7 @@ module Aws::SageMaker
     #   <p>ID of the compute allocation definition.</p>
     #   @return [String]
     class DeleteComputeQuotaRequest < Struct.new(
+      nil,
       :compute_quota_id,
       keyword_init: true
     )
@@ -7178,6 +7492,7 @@ module Aws::SageMaker
     #   <p>The name of the context to delete.</p>
     #   @return [String]
     class DeleteContextRequest < Struct.new(
+      nil,
       :context_name,
       keyword_init: true
     )
@@ -7188,6 +7503,7 @@ module Aws::SageMaker
     #   <p>The Amazon Resource Name (ARN) of the context.</p>
     #   @return [String]
     class DeleteContextResponse < Struct.new(
+      nil,
       :context_arn,
       keyword_init: true
     )
@@ -7198,6 +7514,7 @@ module Aws::SageMaker
     #   <p>The name of the data quality monitoring job definition to delete.</p>
     #   @return [String]
     class DeleteDataQualityJobDefinitionRequest < Struct.new(
+      nil,
       :job_definition_name,
       keyword_init: true
     )
@@ -7208,6 +7525,7 @@ module Aws::SageMaker
     #   <p>The name of the fleet to delete.</p>
     #   @return [String]
     class DeleteDeviceFleetRequest < Struct.new(
+      nil,
       :device_fleet_name,
       keyword_init: true
     )
@@ -7221,6 +7539,7 @@ module Aws::SageMaker
     #   <p>The retention policy for this domain, which specifies whether resources will be retained after the Domain is deleted. By default, all resources are retained (not automatically deleted). </p>
     #   @return [Types::RetentionPolicy]
     class DeleteDomainRequest < Struct.new(
+      nil,
       :domain_id,
       :retention_policy,
       keyword_init: true
@@ -7232,6 +7551,7 @@ module Aws::SageMaker
     #   <p>The name of the edge deployment plan to delete.</p>
     #   @return [String]
     class DeleteEdgeDeploymentPlanRequest < Struct.new(
+      nil,
       :edge_deployment_plan_name,
       keyword_init: true
     )
@@ -7245,6 +7565,7 @@ module Aws::SageMaker
     #   <p>The name of the stage.</p>
     #   @return [String]
     class DeleteEdgeDeploymentStageRequest < Struct.new(
+      nil,
       :edge_deployment_plan_name,
       :stage_name,
       keyword_init: true
@@ -7256,6 +7577,7 @@ module Aws::SageMaker
     #   <p>The name of the endpoint configuration that you want to delete.</p>
     #   @return [String]
     class DeleteEndpointConfigInput < Struct.new(
+      nil,
       :endpoint_config_name,
       keyword_init: true
     )
@@ -7266,6 +7588,7 @@ module Aws::SageMaker
     #   <p>The name of the endpoint that you want to delete.</p>
     #   @return [String]
     class DeleteEndpointInput < Struct.new(
+      nil,
       :endpoint_name,
       keyword_init: true
     )
@@ -7276,6 +7599,7 @@ module Aws::SageMaker
     #   <p>The name of the experiment to delete.</p>
     #   @return [String]
     class DeleteExperimentRequest < Struct.new(
+      nil,
       :experiment_name,
       keyword_init: true
     )
@@ -7286,6 +7610,7 @@ module Aws::SageMaker
     #   <p>The Amazon Resource Name (ARN) of the experiment that is being deleted.</p>
     #   @return [String]
     class DeleteExperimentResponse < Struct.new(
+      nil,
       :experiment_arn,
       keyword_init: true
     )
@@ -7296,6 +7621,7 @@ module Aws::SageMaker
     #   <p>The name of the <code>FeatureGroup</code> you want to delete. The name must be unique within an Amazon Web Services Region in an Amazon Web Services account. </p>
     #   @return [String]
     class DeleteFeatureGroupRequest < Struct.new(
+      nil,
       :feature_group_name,
       keyword_init: true
     )
@@ -7306,6 +7632,7 @@ module Aws::SageMaker
     #   <p>The name of the flow definition you are deleting.</p>
     #   @return [String]
     class DeleteFlowDefinitionRequest < Struct.new(
+      nil,
       :flow_definition_name,
       keyword_init: true
     )
@@ -7313,6 +7640,7 @@ module Aws::SageMaker
     end
 
     class DeleteFlowDefinitionResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -7328,6 +7656,7 @@ module Aws::SageMaker
     #   <p>The name of the hub content to delete.</p>
     #   @return [String]
     class DeleteHubContentReferenceRequest < Struct.new(
+      nil,
       :hub_name,
       :hub_content_type,
       :hub_content_name,
@@ -7349,6 +7678,7 @@ module Aws::SageMaker
     #   <p>The version of the content that you want to delete from a hub.</p>
     #   @return [String]
     class DeleteHubContentRequest < Struct.new(
+      nil,
       :hub_name,
       :hub_content_type,
       :hub_content_name,
@@ -7362,6 +7692,7 @@ module Aws::SageMaker
     #   <p>The name of the hub to delete.</p>
     #   @return [String]
     class DeleteHubRequest < Struct.new(
+      nil,
       :hub_name,
       keyword_init: true
     )
@@ -7372,6 +7703,7 @@ module Aws::SageMaker
     #   <p>The name of the human task user interface (work task template) you want to delete.</p>
     #   @return [String]
     class DeleteHumanTaskUiRequest < Struct.new(
+      nil,
       :human_task_ui_name,
       keyword_init: true
     )
@@ -7379,6 +7711,7 @@ module Aws::SageMaker
     end
 
     class DeleteHumanTaskUiResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -7388,6 +7721,7 @@ module Aws::SageMaker
     #   <p>The name of the hyperparameter tuning job that you want to delete.</p>
     #   @return [String]
     class DeleteHyperParameterTuningJobRequest < Struct.new(
+      nil,
       :hyper_parameter_tuning_job_name,
       keyword_init: true
     )
@@ -7398,6 +7732,7 @@ module Aws::SageMaker
     #   <p>The name of the image to delete.</p>
     #   @return [String]
     class DeleteImageRequest < Struct.new(
+      nil,
       :image_name,
       keyword_init: true
     )
@@ -7405,6 +7740,7 @@ module Aws::SageMaker
     end
 
     class DeleteImageResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -7420,6 +7756,7 @@ module Aws::SageMaker
     #   <p>The alias of the image to delete.</p>
     #   @return [String]
     class DeleteImageVersionRequest < Struct.new(
+      nil,
       :image_name,
       :version,
       :alias,
@@ -7429,6 +7766,7 @@ module Aws::SageMaker
     end
 
     class DeleteImageVersionResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -7438,6 +7776,7 @@ module Aws::SageMaker
     #   <p>The name of the inference component to delete.</p>
     #   @return [String]
     class DeleteInferenceComponentInput < Struct.new(
+      nil,
       :inference_component_name,
       keyword_init: true
     )
@@ -7448,6 +7787,7 @@ module Aws::SageMaker
     #   <p>The name of the inference experiment you want to delete.</p>
     #   @return [String]
     class DeleteInferenceExperimentRequest < Struct.new(
+      nil,
       :name,
       keyword_init: true
     )
@@ -7458,6 +7798,7 @@ module Aws::SageMaker
     #   <p>The ARN of the deleted inference experiment.</p>
     #   @return [String]
     class DeleteInferenceExperimentResponse < Struct.new(
+      nil,
       :inference_experiment_arn,
       keyword_init: true
     )
@@ -7468,6 +7809,7 @@ module Aws::SageMaker
     #   <p>The name of the the tracking server to delete.</p>
     #   @return [String]
     class DeleteMlflowTrackingServerRequest < Struct.new(
+      nil,
       :tracking_server_name,
       keyword_init: true
     )
@@ -7478,6 +7820,7 @@ module Aws::SageMaker
     #   <p>A <code>TrackingServerArn</code> object, the ARN of the tracking server that is deleted if successfully found.</p>
     #   @return [String]
     class DeleteMlflowTrackingServerResponse < Struct.new(
+      nil,
       :tracking_server_arn,
       keyword_init: true
     )
@@ -7488,6 +7831,7 @@ module Aws::SageMaker
     #   <p>The name of the model bias job definition to delete.</p>
     #   @return [String]
     class DeleteModelBiasJobDefinitionRequest < Struct.new(
+      nil,
       :job_definition_name,
       keyword_init: true
     )
@@ -7498,6 +7842,7 @@ module Aws::SageMaker
     #   <p>The name of the model card to delete.</p>
     #   @return [String]
     class DeleteModelCardRequest < Struct.new(
+      nil,
       :model_card_name,
       keyword_init: true
     )
@@ -7508,6 +7853,7 @@ module Aws::SageMaker
     #   <p>The name of the model explainability job definition to delete.</p>
     #   @return [String]
     class DeleteModelExplainabilityJobDefinitionRequest < Struct.new(
+      nil,
       :job_definition_name,
       keyword_init: true
     )
@@ -7518,6 +7864,7 @@ module Aws::SageMaker
     #   <p>The name of the model to delete.</p>
     #   @return [String]
     class DeleteModelInput < Struct.new(
+      nil,
       :model_name,
       keyword_init: true
     )
@@ -7528,6 +7875,7 @@ module Aws::SageMaker
     #   <p>The name of the model group to delete.</p>
     #   @return [String]
     class DeleteModelPackageGroupInput < Struct.new(
+      nil,
       :model_package_group_name,
       keyword_init: true
     )
@@ -7538,6 +7886,7 @@ module Aws::SageMaker
     #   <p>The name of the model group for which to delete the policy.</p>
     #   @return [String]
     class DeleteModelPackageGroupPolicyInput < Struct.new(
+      nil,
       :model_package_group_name,
       keyword_init: true
     )
@@ -7548,6 +7897,7 @@ module Aws::SageMaker
     #   <p>The name or Amazon Resource Name (ARN) of the model package to delete.</p> <p>When you specify a name, the name must have 1 to 63 characters. Valid characters are a-z, A-Z, 0-9, and - (hyphen).</p>
     #   @return [String]
     class DeleteModelPackageInput < Struct.new(
+      nil,
       :model_package_name,
       keyword_init: true
     )
@@ -7558,6 +7908,7 @@ module Aws::SageMaker
     #   <p>The name of the model quality monitoring job definition to delete.</p>
     #   @return [String]
     class DeleteModelQualityJobDefinitionRequest < Struct.new(
+      nil,
       :job_definition_name,
       keyword_init: true
     )
@@ -7568,6 +7919,7 @@ module Aws::SageMaker
     #   <p>The name of the monitoring schedule to delete.</p>
     #   @return [String]
     class DeleteMonitoringScheduleRequest < Struct.new(
+      nil,
       :monitoring_schedule_name,
       keyword_init: true
     )
@@ -7578,6 +7930,7 @@ module Aws::SageMaker
     #   <p>The name of the SageMaker AI notebook instance to delete.</p>
     #   @return [String]
     class DeleteNotebookInstanceInput < Struct.new(
+      nil,
       :notebook_instance_name,
       keyword_init: true
     )
@@ -7588,6 +7941,7 @@ module Aws::SageMaker
     #   <p>The name of the lifecycle configuration to delete.</p>
     #   @return [String]
     class DeleteNotebookInstanceLifecycleConfigInput < Struct.new(
+      nil,
       :notebook_instance_lifecycle_config_name,
       keyword_init: true
     )
@@ -7598,6 +7952,7 @@ module Aws::SageMaker
     #   <p>The name that you assigned to the optimization job.</p>
     #   @return [String]
     class DeleteOptimizationJobRequest < Struct.new(
+      nil,
       :optimization_job_name,
       keyword_init: true
     )
@@ -7611,6 +7966,7 @@ module Aws::SageMaker
     #   <p>A unique token that guarantees that the call to this API is idempotent.</p>
     #   @return [String]
     class DeletePartnerAppRequest < Struct.new(
+      nil,
       :arn,
       :client_token,
       keyword_init: true
@@ -7622,6 +7978,7 @@ module Aws::SageMaker
     #   <p>The ARN of the SageMaker Partner AI App that was deleted.</p>
     #   @return [String]
     class DeletePartnerAppResponse < Struct.new(
+      nil,
       :arn,
       keyword_init: true
     )
@@ -7635,6 +7992,7 @@ module Aws::SageMaker
     #   <p>A unique, case-sensitive identifier that you provide to ensure the idempotency of the operation. An idempotent operation completes no more than one time.</p>
     #   @return [String]
     class DeletePipelineRequest < Struct.new(
+      nil,
       :pipeline_name,
       :client_request_token,
       keyword_init: true
@@ -7646,6 +8004,7 @@ module Aws::SageMaker
     #   <p>The Amazon Resource Name (ARN) of the pipeline to delete.</p>
     #   @return [String]
     class DeletePipelineResponse < Struct.new(
+      nil,
       :pipeline_arn,
       keyword_init: true
     )
@@ -7656,6 +8015,7 @@ module Aws::SageMaker
     #   <p>The name of the project to delete.</p>
     #   @return [String]
     class DeleteProjectInput < Struct.new(
+      nil,
       :project_name,
       keyword_init: true
     )
@@ -7669,6 +8029,7 @@ module Aws::SageMaker
     #   <p>The name of the space.</p>
     #   @return [String]
     class DeleteSpaceRequest < Struct.new(
+      nil,
       :domain_id,
       :space_name,
       keyword_init: true
@@ -7680,6 +8041,7 @@ module Aws::SageMaker
     #   <p>The name of the Amazon SageMaker AI Studio Lifecycle Configuration to delete.</p>
     #   @return [String]
     class DeleteStudioLifecycleConfigRequest < Struct.new(
+      nil,
       :studio_lifecycle_config_name,
       keyword_init: true
     )
@@ -7693,6 +8055,7 @@ module Aws::SageMaker
     #   <p>An array or one or more tag keys to delete.</p>
     #   @return [Array<String>]
     class DeleteTagsInput < Struct.new(
+      nil,
       :resource_arn,
       :tag_keys,
       keyword_init: true
@@ -7701,6 +8064,7 @@ module Aws::SageMaker
     end
 
     class DeleteTagsOutput < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -7710,6 +8074,7 @@ module Aws::SageMaker
     #   <p>The name of the component to delete.</p>
     #   @return [String]
     class DeleteTrialComponentRequest < Struct.new(
+      nil,
       :trial_component_name,
       keyword_init: true
     )
@@ -7720,6 +8085,7 @@ module Aws::SageMaker
     #   <p>The Amazon Resource Name (ARN) of the component is being deleted.</p>
     #   @return [String]
     class DeleteTrialComponentResponse < Struct.new(
+      nil,
       :trial_component_arn,
       keyword_init: true
     )
@@ -7730,6 +8096,7 @@ module Aws::SageMaker
     #   <p>The name of the trial to delete.</p>
     #   @return [String]
     class DeleteTrialRequest < Struct.new(
+      nil,
       :trial_name,
       keyword_init: true
     )
@@ -7740,6 +8107,7 @@ module Aws::SageMaker
     #   <p>The Amazon Resource Name (ARN) of the trial that is being deleted.</p>
     #   @return [String]
     class DeleteTrialResponse < Struct.new(
+      nil,
       :trial_arn,
       keyword_init: true
     )
@@ -7753,6 +8121,7 @@ module Aws::SageMaker
     #   <p>The user profile name.</p>
     #   @return [String]
     class DeleteUserProfileRequest < Struct.new(
+      nil,
       :domain_id,
       :user_profile_name,
       keyword_init: true
@@ -7764,6 +8133,7 @@ module Aws::SageMaker
     #   <p>The name of the workforce.</p>
     #   @return [String]
     class DeleteWorkforceRequest < Struct.new(
+      nil,
       :workforce_name,
       keyword_init: true
     )
@@ -7771,6 +8141,7 @@ module Aws::SageMaker
     end
 
     class DeleteWorkforceResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -7780,6 +8151,7 @@ module Aws::SageMaker
     #   <p>The name of the work team to delete.</p>
     #   @return [String]
     class DeleteWorkteamRequest < Struct.new(
+      nil,
       :workteam_name,
       keyword_init: true
     )
@@ -7790,6 +8162,7 @@ module Aws::SageMaker
     #   <p>Returns <code>true</code> if the work team was successfully deleted; otherwise, returns <code>false</code>.</p>
     #   @return [Boolean]
     class DeleteWorkteamResponse < Struct.new(
+      nil,
       :success,
       keyword_init: true
     )
@@ -7807,6 +8180,7 @@ module Aws::SageMaker
     #   <p>The date and time when the image path for the model resolved to the <code>ResolvedImage</code> </p>
     #   @return [Time]
     class DeployedImage < Struct.new(
+      nil,
       :specified_image,
       :resolved_image,
       :resolution_time,
@@ -7826,6 +8200,7 @@ module Aws::SageMaker
     #   <p>Automatic rollback configuration for handling endpoint deployment failures and recovery.</p>
     #   @return [Types::AutoRollbackConfig]
     class DeploymentConfig < Struct.new(
+      nil,
       :blue_green_update_policy,
       :rolling_update_policy,
       :auto_rollback_configuration,
@@ -7845,6 +8220,7 @@ module Aws::SageMaker
     #   <p>An array that contains the alarms that SageMaker monitors to know whether to roll back the AMI update.</p>
     #   @return [Array<Types::AlarmDetails>]
     class DeploymentConfiguration < Struct.new(
+      nil,
       :rolling_update_policy,
       :wait_interval_in_seconds,
       :auto_rollback_configuration,
@@ -7861,6 +8237,7 @@ module Aws::SageMaker
     #   <p>A list of <a href="https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_RealTimeInferenceRecommendation.html">RealTimeInferenceRecommendation</a> items.</p>
     #   @return [Array<Types::RealTimeInferenceRecommendation>]
     class DeploymentRecommendation < Struct.new(
+      nil,
       :recommendation_status,
       :real_time_inference_recommendations,
       keyword_init: true
@@ -7879,6 +8256,7 @@ module Aws::SageMaker
     #   <p>Configuration of the deployment details.</p>
     #   @return [Types::EdgeDeploymentConfig]
     class DeploymentStage < Struct.new(
+      nil,
       :stage_name,
       :device_selection_config,
       :deployment_config,
@@ -7901,6 +8279,7 @@ module Aws::SageMaker
     #   <p>General status of the current state.</p>
     #   @return [Types::EdgeDeploymentStatus]
     class DeploymentStageStatusSummary < Struct.new(
+      nil,
       :stage_name,
       :device_selection_config,
       :deployment_config,
@@ -7917,6 +8296,7 @@ module Aws::SageMaker
     #   <p>The unique IDs of the devices.</p>
     #   @return [Array<String>]
     class DeregisterDevicesRequest < Struct.new(
+      nil,
       :device_fleet_name,
       :device_names,
       keyword_init: true
@@ -7929,6 +8309,7 @@ module Aws::SageMaker
     #   <p>The data input configuration that SageMaker Neo automatically derived for the model. When SageMaker Neo derives this information, you don't need to specify the data input configuration when you create a compilation job.</p>
     #   @return [String]
     class DerivedInformation < Struct.new(
+      nil,
       :derived_data_input_config,
       keyword_init: true
     )
@@ -7939,6 +8320,7 @@ module Aws::SageMaker
     #   <p>The name of the action to describe.</p>
     #   @return [String]
     class DescribeActionRequest < Struct.new(
+      nil,
       :action_name,
       keyword_init: true
     )
@@ -7985,6 +8367,7 @@ module Aws::SageMaker
     #   <p>The Amazon Resource Name (ARN) of the lineage group.</p>
     #   @return [String]
     class DescribeActionResponse < Struct.new(
+      nil,
       :action_name,
       :action_arn,
       :source,
@@ -8007,6 +8390,7 @@ module Aws::SageMaker
     #   <p>The name of the algorithm to describe.</p>
     #   @return [String]
     class DescribeAlgorithmInput < Struct.new(
+      nil,
       :algorithm_name,
       keyword_init: true
     )
@@ -8047,6 +8431,7 @@ module Aws::SageMaker
     #   <p>Whether the algorithm is certified to be listed in Amazon Web Services Marketplace.</p>
     #   @return [Boolean]
     class DescribeAlgorithmOutput < Struct.new(
+      nil,
       :algorithm_name,
       :algorithm_arn,
       :algorithm_description,
@@ -8067,6 +8452,7 @@ module Aws::SageMaker
     #   <p>The name of the AppImageConfig to describe.</p>
     #   @return [String]
     class DescribeAppImageConfigRequest < Struct.new(
+      nil,
       :app_image_config_name,
       keyword_init: true
     )
@@ -8095,6 +8481,7 @@ module Aws::SageMaker
     #   <p>The configuration of the Code Editor app.</p>
     #   @return [Types::CodeEditorAppImageConfig]
     class DescribeAppImageConfigResponse < Struct.new(
+      nil,
       :app_image_config_arn,
       :app_image_config_name,
       :creation_time,
@@ -8123,6 +8510,7 @@ module Aws::SageMaker
     #   <p>The name of the app.</p>
     #   @return [String]
     class DescribeAppRequest < Struct.new(
+      nil,
       :domain_id,
       :user_profile_name,
       :space_name,
@@ -8179,6 +8567,7 @@ module Aws::SageMaker
     #   <p>The lifecycle configuration that runs before the default lifecycle configuration</p>
     #   @return [String]
     class DescribeAppResponse < Struct.new(
+      nil,
       :app_arn,
       :app_type,
       :app_name,
@@ -8203,6 +8592,7 @@ module Aws::SageMaker
     #   <p>The Amazon Resource Name (ARN) of the artifact to describe.</p>
     #   @return [String]
     class DescribeArtifactRequest < Struct.new(
+      nil,
       :artifact_arn,
       keyword_init: true
     )
@@ -8243,6 +8633,7 @@ module Aws::SageMaker
     #   <p>The Amazon Resource Name (ARN) of the lineage group.</p>
     #   @return [String]
     class DescribeArtifactResponse < Struct.new(
+      nil,
       :artifact_name,
       :artifact_arn,
       :source,
@@ -8263,6 +8654,7 @@ module Aws::SageMaker
     #   <p>Requests information about an AutoML job using its unique name.</p>
     #   @return [String]
     class DescribeAutoMLJobRequest < Struct.new(
+      nil,
       :auto_ml_job_name,
       keyword_init: true
     )
@@ -8333,6 +8725,7 @@ module Aws::SageMaker
     #   <p>Provides information about endpoint for the model deployment.</p>
     #   @return [Types::ModelDeployResult]
     class DescribeAutoMLJobResponse < Struct.new(
+      nil,
       :auto_ml_job_name,
       :auto_ml_job_arn,
       :input_data_config,
@@ -8363,6 +8756,7 @@ module Aws::SageMaker
     #   <p>Requests information about an AutoML job V2 using its unique name.</p>
     #   @return [String]
     class DescribeAutoMLJobV2Request < Struct.new(
+      nil,
       :auto_ml_job_name,
       keyword_init: true
     )
@@ -8439,6 +8833,7 @@ module Aws::SageMaker
     #   <p>The compute configuration used for the AutoML job V2.</p>
     #   @return [Types::AutoMLComputeConfig]
     class DescribeAutoMLJobV2Response < Struct.new(
+      nil,
       :auto_ml_job_name,
       :auto_ml_job_arn,
       :auto_ml_job_input_data_config,
@@ -8474,6 +8869,7 @@ module Aws::SageMaker
     #   <p>The name or Amazon Resource Name (ARN) of the HyperPod cluster associated with the event.</p>
     #   @return [String]
     class DescribeClusterEventRequest < Struct.new(
+      nil,
       :event_id,
       :cluster_name,
       keyword_init: true
@@ -8485,6 +8881,7 @@ module Aws::SageMaker
     #   <p>Detailed information about the requested cluster event, including event metadata for various resource types such as <code>Cluster</code>, <code>InstanceGroup</code>, <code>Instance</code>, and their associated attributes.</p>
     #   @return [Types::ClusterEventDetail]
     class DescribeClusterEventResponse < Struct.new(
+      nil,
       :event_details,
       keyword_init: true
     )
@@ -8501,6 +8898,7 @@ module Aws::SageMaker
     #   <p>The logical identifier of the node to describe. You can specify either <code>NodeLogicalId</code> or <code>InstanceId</code>, but not both. <code>NodeLogicalId</code> can be used to describe nodes that are still being provisioned and don't yet have an <code>InstanceId</code> assigned.</p>
     #   @return [String]
     class DescribeClusterNodeRequest < Struct.new(
+      nil,
       :cluster_name,
       :node_id,
       :node_logical_id,
@@ -8513,6 +8911,7 @@ module Aws::SageMaker
     #   <p>The details of the SageMaker HyperPod cluster node.</p>
     #   @return [Types::ClusterNodeDetails]
     class DescribeClusterNodeResponse < Struct.new(
+      nil,
       :node_details,
       keyword_init: true
     )
@@ -8523,6 +8922,7 @@ module Aws::SageMaker
     #   <p>The string name or the Amazon Resource Name (ARN) of the SageMaker HyperPod cluster.</p>
     #   @return [String]
     class DescribeClusterRequest < Struct.new(
+      nil,
       :cluster_name,
       keyword_init: true
     )
@@ -8572,6 +8972,7 @@ module Aws::SageMaker
     #   <p>The current autoscaling configuration and status for the autoscaler.</p>
     #   @return [Types::ClusterAutoScalingConfigOutput]
     class DescribeClusterResponse < Struct.new(
+      nil,
       :cluster_arn,
       :cluster_name,
       :cluster_status,
@@ -8598,6 +8999,7 @@ module Aws::SageMaker
     #   <p>Version of the cluster policy.</p>
     #   @return [Integer]
     class DescribeClusterSchedulerConfigRequest < Struct.new(
+      nil,
       :cluster_scheduler_config_id,
       :cluster_scheduler_config_version,
       keyword_init: true
@@ -8645,6 +9047,7 @@ module Aws::SageMaker
     #   <p>Information about the user who created or modified a SageMaker resource.</p>
     #   @return [Types::UserContext]
     class DescribeClusterSchedulerConfigResponse < Struct.new(
+      nil,
       :cluster_scheduler_config_arn,
       :cluster_scheduler_config_id,
       :name,
@@ -8667,6 +9070,7 @@ module Aws::SageMaker
     #   <p>The name of the Git repository to describe.</p>
     #   @return [String]
     class DescribeCodeRepositoryInput < Struct.new(
+      nil,
       :code_repository_name,
       keyword_init: true
     )
@@ -8689,6 +9093,7 @@ module Aws::SageMaker
     #   <p>Configuration details about the repository, including the URL where the repository is located, the default branch, and the Amazon Resource Name (ARN) of the Amazon Web Services Secrets Manager secret that contains the credentials used to access the repository.</p>
     #   @return [Types::GitConfig]
     class DescribeCodeRepositoryOutput < Struct.new(
+      nil,
       :code_repository_name,
       :code_repository_arn,
       :creation_time,
@@ -8703,6 +9108,7 @@ module Aws::SageMaker
     #   <p>The name of the model compilation job that you want information about.</p>
     #   @return [String]
     class DescribeCompilationJobRequest < Struct.new(
+      nil,
       :compilation_job_name,
       keyword_init: true
     )
@@ -8764,6 +9170,7 @@ module Aws::SageMaker
     #   <p>Information that SageMaker Neo automatically derived about the model.</p>
     #   @return [Types::DerivedInformation]
     class DescribeCompilationJobResponse < Struct.new(
+      nil,
       :compilation_job_name,
       :compilation_job_arn,
       :compilation_job_status,
@@ -8794,6 +9201,7 @@ module Aws::SageMaker
     #   <p>Version of the compute allocation definition.</p>
     #   @return [Integer]
     class DescribeComputeQuotaRequest < Struct.new(
+      nil,
       :compute_quota_id,
       :compute_quota_version,
       keyword_init: true
@@ -8847,6 +9255,7 @@ module Aws::SageMaker
     #   <p>Information about the user who created or modified a SageMaker resource.</p>
     #   @return [Types::UserContext]
     class DescribeComputeQuotaResponse < Struct.new(
+      nil,
       :compute_quota_arn,
       :compute_quota_id,
       :name,
@@ -8871,6 +9280,7 @@ module Aws::SageMaker
     #   <p>The name of the context to describe.</p>
     #   @return [String]
     class DescribeContextRequest < Struct.new(
+      nil,
       :context_name,
       keyword_init: true
     )
@@ -8911,6 +9321,7 @@ module Aws::SageMaker
     #   <p>The Amazon Resource Name (ARN) of the lineage group.</p>
     #   @return [String]
     class DescribeContextResponse < Struct.new(
+      nil,
       :context_name,
       :context_arn,
       :source,
@@ -8931,6 +9342,7 @@ module Aws::SageMaker
     #   <p>The name of the data quality monitoring job definition to describe.</p>
     #   @return [String]
     class DescribeDataQualityJobDefinitionRequest < Struct.new(
+      nil,
       :job_definition_name,
       keyword_init: true
     )
@@ -8971,6 +9383,7 @@ module Aws::SageMaker
     #   <p>A time limit for how long the monitoring job is allowed to run before stopping.</p>
     #   @return [Types::MonitoringStoppingCondition]
     class DescribeDataQualityJobDefinitionResponse < Struct.new(
+      nil,
       :job_definition_arn,
       :job_definition_name,
       :creation_time,
@@ -8991,6 +9404,7 @@ module Aws::SageMaker
     #   <p>The name of the fleet.</p>
     #   @return [String]
     class DescribeDeviceFleetRequest < Struct.new(
+      nil,
       :device_fleet_name,
       keyword_init: true
     )
@@ -9022,6 +9436,7 @@ module Aws::SageMaker
     #   <p>The Amazon Resource Name (ARN) alias created in Amazon Web Services Internet of Things (IoT).</p>
     #   @return [String]
     class DescribeDeviceFleetResponse < Struct.new(
+      nil,
       :device_fleet_name,
       :device_fleet_arn,
       :output_config,
@@ -9045,6 +9460,7 @@ module Aws::SageMaker
     #   <p>The name of the fleet the devices belong to.</p>
     #   @return [String]
     class DescribeDeviceRequest < Struct.new(
+      nil,
       :next_token,
       :device_name,
       :device_fleet_name,
@@ -9087,6 +9503,7 @@ module Aws::SageMaker
     #   <p>Edge Manager agent version.</p>
     #   @return [String]
     class DescribeDeviceResponse < Struct.new(
+      nil,
       :device_arn,
       :device_name,
       :description,
@@ -9107,6 +9524,7 @@ module Aws::SageMaker
     #   <p>The domain ID.</p>
     #   @return [String]
     class DescribeDomainRequest < Struct.new(
+      nil,
       :domain_id,
       keyword_init: true
     )
@@ -9185,6 +9603,7 @@ module Aws::SageMaker
     #   <p>The default settings for shared spaces that users create in the domain.</p>
     #   @return [Types::DefaultSpaceSettings]
     class DescribeDomainResponse < Struct.new(
+      nil,
       :domain_arn,
       :domain_id,
       :domain_name,
@@ -9223,6 +9642,7 @@ module Aws::SageMaker
     #   <p>The maximum number of results to select (50 by default).</p>
     #   @return [Integer]
     class DescribeEdgeDeploymentPlanRequest < Struct.new(
+      nil,
       :edge_deployment_plan_name,
       :next_token,
       :max_results,
@@ -9265,6 +9685,7 @@ module Aws::SageMaker
     #   <p>The time when the edge deployment plan was last updated.</p>
     #   @return [Time]
     class DescribeEdgeDeploymentPlanResponse < Struct.new(
+      nil,
       :edge_deployment_plan_arn,
       :edge_deployment_plan_name,
       :model_configs,
@@ -9285,6 +9706,7 @@ module Aws::SageMaker
     #   <p>The name of the edge packaging job.</p>
     #   @return [String]
     class DescribeEdgePackagingJobRequest < Struct.new(
+      nil,
       :edge_packaging_job_name,
       keyword_init: true
     )
@@ -9337,6 +9759,7 @@ module Aws::SageMaker
     #   <p>The output of a SageMaker Edge Manager deployable resource.</p>
     #   @return [Types::EdgePresetDeploymentOutput]
     class DescribeEdgePackagingJobResponse < Struct.new(
+      nil,
       :edge_packaging_job_arn,
       :edge_packaging_job_name,
       :compilation_job_name,
@@ -9361,6 +9784,7 @@ module Aws::SageMaker
     #   <p>The name of the endpoint configuration.</p>
     #   @return [String]
     class DescribeEndpointConfigInput < Struct.new(
+      nil,
       :endpoint_config_name,
       keyword_init: true
     )
@@ -9404,6 +9828,7 @@ module Aws::SageMaker
     #   <p>Indicates whether all model containers deployed to the endpoint are isolated. If they are, no inbound or outbound network calls can be made to or from the model containers.</p>
     #   @return [Boolean]
     class DescribeEndpointConfigOutput < Struct.new(
+      nil,
       :endpoint_config_name,
       :endpoint_config_arn,
       :production_variants,
@@ -9425,6 +9850,7 @@ module Aws::SageMaker
     #   <p>The name of the endpoint.</p>
     #   @return [String]
     class DescribeEndpointInput < Struct.new(
+      nil,
       :endpoint_name,
       keyword_init: true
     )
@@ -9474,6 +9900,7 @@ module Aws::SageMaker
     #   <p>An array of <a href="https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_ProductionVariantSummary.html">ProductionVariantSummary</a> objects, one for each model that you want to host at this endpoint in shadow mode with production traffic replicated from the model specified on <code>ProductionVariants</code>.</p>
     #   @return [Array<Types::ProductionVariantSummary>]
     class DescribeEndpointOutput < Struct.new(
+      nil,
       :endpoint_name,
       :endpoint_arn,
       :endpoint_config_name,
@@ -9497,6 +9924,7 @@ module Aws::SageMaker
     #   <p>The name of the experiment to describe.</p>
     #   @return [String]
     class DescribeExperimentRequest < Struct.new(
+      nil,
       :experiment_name,
       keyword_init: true
     )
@@ -9531,6 +9959,7 @@ module Aws::SageMaker
     #   <p>Who last modified the experiment.</p>
     #   @return [Types::UserContext]
     class DescribeExperimentResponse < Struct.new(
+      nil,
       :experiment_name,
       :experiment_arn,
       :display_name,
@@ -9552,6 +9981,7 @@ module Aws::SageMaker
     #   <p>A token to resume pagination of the list of <code>Features</code> (<code>FeatureDefinitions</code>). 2,500 <code>Features</code> are returned by default.</p>
     #   @return [String]
     class DescribeFeatureGroupRequest < Struct.new(
+      nil,
       :feature_group_name,
       :next_token,
       keyword_init: true
@@ -9614,6 +10044,7 @@ module Aws::SageMaker
     #   <p>The size of the <code>OnlineStore</code> in bytes.</p>
     #   @return [Integer]
     class DescribeFeatureGroupResponse < Struct.new(
+      nil,
       :feature_group_arn,
       :feature_group_name,
       :record_identifier_feature_name,
@@ -9644,6 +10075,7 @@ module Aws::SageMaker
     #   <p>The name of the feature.</p>
     #   @return [String]
     class DescribeFeatureMetadataRequest < Struct.new(
+      nil,
       :feature_group_name,
       :feature_name,
       keyword_init: true
@@ -9676,6 +10108,7 @@ module Aws::SageMaker
     #   <p>The key-value pairs that you added to describe the feature.</p>
     #   @return [Array<Types::FeatureParameter>]
     class DescribeFeatureMetadataResponse < Struct.new(
+      nil,
       :feature_group_arn,
       :feature_group_name,
       :feature_name,
@@ -9693,6 +10126,7 @@ module Aws::SageMaker
     #   <p>The name of the flow definition.</p>
     #   @return [String]
     class DescribeFlowDefinitionRequest < Struct.new(
+      nil,
       :flow_definition_name,
       keyword_init: true
     )
@@ -9730,6 +10164,7 @@ module Aws::SageMaker
     #   <p>The reason your flow definition failed.</p>
     #   @return [String]
     class DescribeFlowDefinitionResponse < Struct.new(
+      nil,
       :flow_definition_arn,
       :flow_definition_name,
       :flow_definition_status,
@@ -9758,6 +10193,7 @@ module Aws::SageMaker
     #   <p>The version of the content to describe.</p>
     #   @return [String]
     class DescribeHubContentRequest < Struct.new(
+      nil,
       :hub_name,
       :hub_content_type,
       :hub_content_name,
@@ -9828,6 +10264,7 @@ module Aws::SageMaker
     #   <p>The last modified time of the hub content.</p>
     #   @return [Time]
     class DescribeHubContentResponse < Struct.new(
+      nil,
       :hub_content_name,
       :hub_content_arn,
       :hub_content_version,
@@ -9857,6 +10294,7 @@ module Aws::SageMaker
     #   <p>The name of the hub to describe.</p>
     #   @return [String]
     class DescribeHubRequest < Struct.new(
+      nil,
       :hub_name,
       keyword_init: true
     )
@@ -9894,6 +10332,7 @@ module Aws::SageMaker
     #   <p>The date and time that the hub was last modified.</p>
     #   @return [Time]
     class DescribeHubResponse < Struct.new(
+      nil,
       :hub_name,
       :hub_arn,
       :hub_display_name,
@@ -9913,6 +10352,7 @@ module Aws::SageMaker
     #   <p>The name of the human task user interface (worker task template) you want information about.</p>
     #   @return [String]
     class DescribeHumanTaskUiRequest < Struct.new(
+      nil,
       :human_task_ui_name,
       keyword_init: true
     )
@@ -9935,6 +10375,7 @@ module Aws::SageMaker
     #   <p>Container for user interface template information.</p>
     #   @return [Types::UiTemplateInfo]
     class DescribeHumanTaskUiResponse < Struct.new(
+      nil,
       :human_task_ui_arn,
       :human_task_ui_name,
       :human_task_ui_status,
@@ -9949,6 +10390,7 @@ module Aws::SageMaker
     #   <p>The name of the tuning job.</p>
     #   @return [String]
     class DescribeHyperParameterTuningJobRequest < Struct.new(
+      nil,
       :hyper_parameter_tuning_job_name,
       keyword_init: true
     )
@@ -10010,6 +10452,7 @@ module Aws::SageMaker
     #   <p>The total resources consumed by your hyperparameter tuning job.</p>
     #   @return [Types::HyperParameterTuningJobConsumedResources]
     class DescribeHyperParameterTuningJobResponse < Struct.new(
+      nil,
       :hyper_parameter_tuning_job_name,
       :hyper_parameter_tuning_job_arn,
       :hyper_parameter_tuning_job_config,
@@ -10037,6 +10480,7 @@ module Aws::SageMaker
     #   <p>The name of the image to describe.</p>
     #   @return [String]
     class DescribeImageRequest < Struct.new(
+      nil,
       :image_name,
       keyword_init: true
     )
@@ -10071,6 +10515,7 @@ module Aws::SageMaker
     #   <p>The ARN of the IAM role that enables Amazon SageMaker AI to perform tasks on your behalf.</p>
     #   @return [String]
     class DescribeImageResponse < Struct.new(
+      nil,
       :creation_time,
       :description,
       :display_name,
@@ -10095,6 +10540,7 @@ module Aws::SageMaker
     #   <p>The alias of the image version.</p>
     #   @return [String]
     class DescribeImageVersionRequest < Struct.new(
+      nil,
       :image_name,
       :version,
       :alias,
@@ -10152,6 +10598,7 @@ module Aws::SageMaker
     #   <p>The maintainer description of the image version.</p>
     #   @return [String]
     class DescribeImageVersionResponse < Struct.new(
+      nil,
       :base_image,
       :container_image,
       :creation_time,
@@ -10177,6 +10624,7 @@ module Aws::SageMaker
     #   <p>The name of the inference component.</p>
     #   @return [String]
     class DescribeInferenceComponentInput < Struct.new(
+      nil,
       :inference_component_name,
       keyword_init: true
     )
@@ -10220,6 +10668,7 @@ module Aws::SageMaker
     #   <p>The deployment and rollback settings that you assigned to the inference component.</p>
     #   @return [Types::InferenceComponentDeploymentConfig]
     class DescribeInferenceComponentOutput < Struct.new(
+      nil,
       :inference_component_name,
       :inference_component_arn,
       :endpoint_name,
@@ -10241,6 +10690,7 @@ module Aws::SageMaker
     #   <p>The name of the inference experiment to describe.</p>
     #   @return [String]
     class DescribeInferenceExperimentRequest < Struct.new(
+      nil,
       :name,
       keyword_init: true
     )
@@ -10296,6 +10746,7 @@ module Aws::SageMaker
     #   <p> The Amazon Web Services Key Management Service (Amazon Web Services KMS) key that Amazon SageMaker uses to encrypt data on the storage volume attached to the ML compute instance that hosts the endpoint. For more information, see <a href="https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_CreateInferenceExperiment.html">CreateInferenceExperiment</a>. </p>
     #   @return [String]
     class DescribeInferenceExperimentResponse < Struct.new(
+      nil,
       :arn,
       :name,
       :type,
@@ -10321,6 +10772,7 @@ module Aws::SageMaker
     #   <p>The name of the job. The name must be unique within an Amazon Web Services Region in the Amazon Web Services account.</p>
     #   @return [String]
     class DescribeInferenceRecommendationsJobRequest < Struct.new(
+      nil,
       :job_name,
       keyword_init: true
     )
@@ -10370,6 +10822,7 @@ module Aws::SageMaker
     #   <p>The performance results from running an Inference Recommender job on an existing endpoint.</p>
     #   @return [Array<Types::EndpointPerformance>]
     class DescribeInferenceRecommendationsJobResponse < Struct.new(
+      nil,
       :job_name,
       :job_description,
       :job_type,
@@ -10393,6 +10846,7 @@ module Aws::SageMaker
     #   <p>The name of the labeling job to return information for.</p>
     #   @return [String]
     class DescribeLabelingJobRequest < Struct.new(
+      nil,
       :labeling_job_name,
       keyword_init: true
     )
@@ -10454,6 +10908,7 @@ module Aws::SageMaker
     #   <p>The location of the output produced by the labeling job.</p>
     #   @return [Types::LabelingJobOutput]
     class DescribeLabelingJobResponse < Struct.new(
+      nil,
       :labeling_job_status,
       :label_counters,
       :failure_reason,
@@ -10481,6 +10936,7 @@ module Aws::SageMaker
     #   <p>The name of the lineage group.</p>
     #   @return [String]
     class DescribeLineageGroupRequest < Struct.new(
+      nil,
       :lineage_group_name,
       keyword_init: true
     )
@@ -10512,6 +10968,7 @@ module Aws::SageMaker
     #   <p>Information about the user who created or modified a SageMaker resource.</p>
     #   @return [Types::UserContext]
     class DescribeLineageGroupResponse < Struct.new(
+      nil,
       :lineage_group_name,
       :lineage_group_arn,
       :display_name,
@@ -10529,6 +10986,7 @@ module Aws::SageMaker
     #   <p>The name of the MLflow Tracking Server to describe.</p>
     #   @return [String]
     class DescribeMlflowTrackingServerRequest < Struct.new(
+      nil,
       :tracking_server_name,
       keyword_init: true
     )
@@ -10584,6 +11042,7 @@ module Aws::SageMaker
     #   <p>Information about the user who created or modified a SageMaker resource.</p>
     #   @return [Types::UserContext]
     class DescribeMlflowTrackingServerResponse < Struct.new(
+      nil,
       :tracking_server_arn,
       :tracking_server_name,
       :artifact_store_uri,
@@ -10609,6 +11068,7 @@ module Aws::SageMaker
     #   <p>The name of the model bias job definition. The name must be unique within an Amazon Web Services Region in the Amazon Web Services account.</p>
     #   @return [String]
     class DescribeModelBiasJobDefinitionRequest < Struct.new(
+      nil,
       :job_definition_name,
       keyword_init: true
     )
@@ -10649,6 +11109,7 @@ module Aws::SageMaker
     #   <p>A time limit for how long the monitoring job is allowed to run before stopping.</p>
     #   @return [Types::MonitoringStoppingCondition]
     class DescribeModelBiasJobDefinitionResponse < Struct.new(
+      nil,
       :job_definition_arn,
       :job_definition_name,
       :creation_time,
@@ -10669,6 +11130,7 @@ module Aws::SageMaker
     #   <p>The Amazon Resource Name (ARN) of the model card export job to describe.</p>
     #   @return [String]
     class DescribeModelCardExportJobRequest < Struct.new(
+      nil,
       :model_card_export_job_arn,
       keyword_init: true
     )
@@ -10706,6 +11168,7 @@ module Aws::SageMaker
     #   <p>The exported model card artifacts.</p>
     #   @return [Types::ModelCardExportArtifacts]
     class DescribeModelCardExportJobResponse < Struct.new(
+      nil,
       :model_card_export_job_name,
       :model_card_export_job_arn,
       :status,
@@ -10728,6 +11191,7 @@ module Aws::SageMaker
     #   <p>The version of the model card to describe. If a version is not provided, then the latest version of the model card is described.</p>
     #   @return [Integer]
     class DescribeModelCardRequest < Struct.new(
+      nil,
       :model_card_name,
       :model_card_version,
       keyword_init: true
@@ -10769,6 +11233,7 @@ module Aws::SageMaker
     #   <p>The processing status of model card deletion. The <code>ModelCardProcessingStatus</code> updates throughout the different deletion steps.</p> <ul> <li> <p> <code>DeletePending</code>: Model card deletion request received.</p> </li> <li> <p> <code>DeleteInProgress</code>: Model card deletion is in progress.</p> </li> <li> <p> <code>ContentDeleted</code>: Deleted model card content.</p> </li> <li> <p> <code>ExportJobsDeleted</code>: Deleted all export jobs associated with the model card.</p> </li> <li> <p> <code>DeleteCompleted</code>: Successfully deleted the model card.</p> </li> <li> <p> <code>DeleteFailed</code>: The model card failed to delete.</p> </li> </ul>
     #   @return [String]
     class DescribeModelCardResponse < Struct.new(
+      nil,
       :model_card_arn,
       :model_card_name,
       :model_card_version,
@@ -10789,6 +11254,7 @@ module Aws::SageMaker
     #   <p>The name of the model explainability job definition. The name must be unique within an Amazon Web Services Region in the Amazon Web Services account.</p>
     #   @return [String]
     class DescribeModelExplainabilityJobDefinitionRequest < Struct.new(
+      nil,
       :job_definition_name,
       keyword_init: true
     )
@@ -10829,6 +11295,7 @@ module Aws::SageMaker
     #   <p>A time limit for how long the monitoring job is allowed to run before stopping.</p>
     #   @return [Types::MonitoringStoppingCondition]
     class DescribeModelExplainabilityJobDefinitionResponse < Struct.new(
+      nil,
       :job_definition_arn,
       :job_definition_name,
       :creation_time,
@@ -10849,6 +11316,7 @@ module Aws::SageMaker
     #   <p>The name of the model.</p>
     #   @return [String]
     class DescribeModelInput < Struct.new(
+      nil,
       :model_name,
       keyword_init: true
     )
@@ -10886,6 +11354,7 @@ module Aws::SageMaker
     #   <p>A set of recommended deployment configurations for the model.</p>
     #   @return [Types::DeploymentRecommendation]
     class DescribeModelOutput < Struct.new(
+      nil,
       :model_name,
       :primary_container,
       :containers,
@@ -10905,6 +11374,7 @@ module Aws::SageMaker
     #   <p>The name of the model group to describe.</p>
     #   @return [String]
     class DescribeModelPackageGroupInput < Struct.new(
+      nil,
       :model_package_group_name,
       keyword_init: true
     )
@@ -10930,6 +11400,7 @@ module Aws::SageMaker
     #   <p>The status of the model group.</p>
     #   @return [String]
     class DescribeModelPackageGroupOutput < Struct.new(
+      nil,
       :model_package_group_name,
       :model_package_group_arn,
       :model_package_group_description,
@@ -10945,6 +11416,7 @@ module Aws::SageMaker
     #   <p>The name or Amazon Resource Name (ARN) of the model package to describe.</p> <p>When you specify a name, the name must have 1 to 63 characters. Valid characters are a-z, A-Z, 0-9, and - (hyphen).</p>
     #   @return [String]
     class DescribeModelPackageInput < Struct.new(
+      nil,
       :model_package_name,
       keyword_init: true
     )
@@ -11042,6 +11514,7 @@ module Aws::SageMaker
     #   <p> A structure describing the current state of the model in its life cycle. </p>
     #   @return [Types::ModelLifeCycle]
     class DescribeModelPackageOutput < Struct.new(
+      nil,
       :model_package_name,
       :model_package_group_name,
       :model_package_version,
@@ -11081,6 +11554,7 @@ module Aws::SageMaker
     #   <p>The name of the model quality job. The name must be unique within an Amazon Web Services Region in the Amazon Web Services account.</p>
     #   @return [String]
     class DescribeModelQualityJobDefinitionRequest < Struct.new(
+      nil,
       :job_definition_name,
       keyword_init: true
     )
@@ -11121,6 +11595,7 @@ module Aws::SageMaker
     #   <p>A time limit for how long the monitoring job is allowed to run before stopping.</p>
     #   @return [Types::MonitoringStoppingCondition]
     class DescribeModelQualityJobDefinitionResponse < Struct.new(
+      nil,
       :job_definition_arn,
       :job_definition_name,
       :creation_time,
@@ -11141,6 +11616,7 @@ module Aws::SageMaker
     #   <p>Name of a previously created monitoring schedule.</p>
     #   @return [String]
     class DescribeMonitoringScheduleRequest < Struct.new(
+      nil,
       :monitoring_schedule_name,
       keyword_init: true
     )
@@ -11178,6 +11654,7 @@ module Aws::SageMaker
     #   <p>Describes metadata on the last execution to run, if there was one.</p>
     #   @return [Types::MonitoringExecutionSummary]
     class DescribeMonitoringScheduleResponse < Struct.new(
+      nil,
       :monitoring_schedule_arn,
       :monitoring_schedule_name,
       :monitoring_schedule_status,
@@ -11197,6 +11674,7 @@ module Aws::SageMaker
     #   <p>The name of the notebook instance that you want information about.</p>
     #   @return [String]
     class DescribeNotebookInstanceInput < Struct.new(
+      nil,
       :notebook_instance_name,
       keyword_init: true
     )
@@ -11207,6 +11685,7 @@ module Aws::SageMaker
     #   <p>The name of the lifecycle configuration to describe.</p>
     #   @return [String]
     class DescribeNotebookInstanceLifecycleConfigInput < Struct.new(
+      nil,
       :notebook_instance_lifecycle_config_name,
       keyword_init: true
     )
@@ -11232,6 +11711,7 @@ module Aws::SageMaker
     #   <p>A timestamp that tells when the lifecycle configuration was created.</p>
     #   @return [Time]
     class DescribeNotebookInstanceLifecycleConfigOutput < Struct.new(
+      nil,
       :notebook_instance_lifecycle_config_arn,
       :notebook_instance_lifecycle_config_name,
       :on_create,
@@ -11313,6 +11793,7 @@ module Aws::SageMaker
     #   <p>Information on the IMDS configuration of the notebook instance</p>
     #   @return [Types::InstanceMetadataServiceConfiguration]
     class DescribeNotebookInstanceOutput < Struct.new(
+      nil,
       :notebook_instance_arn,
       :notebook_instance_name,
       :notebook_instance_status,
@@ -11345,6 +11826,7 @@ module Aws::SageMaker
     #   <p>The name that you assigned to the optimization job.</p>
     #   @return [String]
     class DescribeOptimizationJobRequest < Struct.new(
+      nil,
       :optimization_job_name,
       keyword_init: true
     )
@@ -11403,6 +11885,7 @@ module Aws::SageMaker
     #   <p>A VPC in Amazon VPC that your optimized model has access to.</p>
     #   @return [Types::OptimizationVpcConfig]
     class DescribeOptimizationJobResponse < Struct.new(
+      nil,
       :optimization_job_arn,
       :optimization_job_status,
       :optimization_start_time,
@@ -11429,6 +11912,7 @@ module Aws::SageMaker
     #   <p>The ARN of the SageMaker Partner AI App to describe.</p>
     #   @return [String]
     class DescribePartnerAppRequest < Struct.new(
+      nil,
       :arn,
       keyword_init: true
     )
@@ -11484,6 +11968,7 @@ module Aws::SageMaker
     #   <p>This is an error field object that contains the error code and the reason for an operation failure.</p>
     #   @return [Types::ErrorInfo]
     class DescribePartnerAppResponse < Struct.new(
+      nil,
       :arn,
       :name,
       :type,
@@ -11509,6 +11994,7 @@ module Aws::SageMaker
     #   <p>The Amazon Resource Name (ARN) of the pipeline execution.</p>
     #   @return [String]
     class DescribePipelineDefinitionForExecutionRequest < Struct.new(
+      nil,
       :pipeline_execution_arn,
       keyword_init: true
     )
@@ -11522,6 +12008,7 @@ module Aws::SageMaker
     #   <p>The time when the pipeline was created.</p>
     #   @return [Time]
     class DescribePipelineDefinitionForExecutionResponse < Struct.new(
+      nil,
       :pipeline_definition,
       :creation_time,
       keyword_init: true
@@ -11533,6 +12020,7 @@ module Aws::SageMaker
     #   <p>The Amazon Resource Name (ARN) of the pipeline execution.</p>
     #   @return [String]
     class DescribePipelineExecutionRequest < Struct.new(
+      nil,
       :pipeline_execution_arn,
       keyword_init: true
     )
@@ -11582,6 +12070,7 @@ module Aws::SageMaker
     #   <p>The ID of the pipeline version.</p>
     #   @return [Integer]
     class DescribePipelineExecutionResponse < Struct.new(
+      nil,
       :pipeline_arn,
       :pipeline_execution_arn,
       :pipeline_execution_display_name,
@@ -11608,6 +12097,7 @@ module Aws::SageMaker
     #   <p>The ID of the pipeline version to describe.</p>
     #   @return [Integer]
     class DescribePipelineRequest < Struct.new(
+      nil,
       :pipeline_name,
       :pipeline_version_id,
       keyword_init: true
@@ -11661,6 +12151,7 @@ module Aws::SageMaker
     #   <p>The description of the pipeline version.</p>
     #   @return [String]
     class DescribePipelineResponse < Struct.new(
+      nil,
       :pipeline_arn,
       :pipeline_name,
       :pipeline_display_name,
@@ -11685,6 +12176,7 @@ module Aws::SageMaker
     #   <p>The name of the processing job. The name must be unique within an Amazon Web Services Region in the Amazon Web Services account.</p>
     #   @return [String]
     class DescribeProcessingJobRequest < Struct.new(
+      nil,
       :processing_job_name,
       keyword_init: true
     )
@@ -11755,6 +12247,7 @@ module Aws::SageMaker
     #   <p>The ARN of a training job associated with this processing job.</p>
     #   @return [String]
     class DescribeProcessingJobResponse < Struct.new(
+      nil,
       :processing_inputs,
       :processing_output_config,
       :processing_job_name,
@@ -11785,6 +12278,7 @@ module Aws::SageMaker
     #   <p>The name of the project to describe.</p>
     #   @return [String]
     class DescribeProjectInput < Struct.new(
+      nil,
       :project_name,
       keyword_init: true
     )
@@ -11828,6 +12322,7 @@ module Aws::SageMaker
     #   <p>Information about the user who created or modified a SageMaker resource.</p>
     #   @return [Types::UserContext]
     class DescribeProjectOutput < Struct.new(
+      nil,
       :project_arn,
       :project_name,
       :project_id,
@@ -11849,6 +12344,7 @@ module Aws::SageMaker
     #   <p>ARN of the reserved capacity to describe.</p>
     #   @return [String]
     class DescribeReservedCapacityRequest < Struct.new(
+      nil,
       :reserved_capacity_arn,
       keyword_init: true
     )
@@ -11895,6 +12391,7 @@ module Aws::SageMaker
     #   <p>A summary of the UltraServer associated with this reserved capacity.</p>
     #   @return [Types::UltraServerSummary]
     class DescribeReservedCapacityResponse < Struct.new(
+      nil,
       :reserved_capacity_arn,
       :reserved_capacity_type,
       :status,
@@ -11920,6 +12417,7 @@ module Aws::SageMaker
     #   <p>The name of the space.</p>
     #   @return [String]
     class DescribeSpaceRequest < Struct.new(
+      nil,
       :domain_id,
       :space_name,
       keyword_init: true
@@ -11967,6 +12465,7 @@ module Aws::SageMaker
     #   <p>Returns the URL of the space. If the space is created with Amazon Web Services IAM Identity Center (Successor to Amazon Web Services Single Sign-On) authentication, users can navigate to the URL after appending the respective redirect parameter for the application type to be federated through Amazon Web Services IAM Identity Center.</p> <p>The following application types are supported:</p> <ul> <li> <p>Studio Classic: <code>&amp;redirect=JupyterServer</code> </p> </li> <li> <p>JupyterLab: <code>&amp;redirect=JupyterLab</code> </p> </li> <li> <p>Code Editor, based on Code-OSS, Visual Studio Code - Open Source: <code>&amp;redirect=CodeEditor</code> </p> </li> </ul>
     #   @return [String]
     class DescribeSpaceResponse < Struct.new(
+      nil,
       :domain_id,
       :space_arn,
       :space_name,
@@ -11989,6 +12488,7 @@ module Aws::SageMaker
     #   <p>The name of the Amazon SageMaker AI Studio Lifecycle Configuration to describe.</p>
     #   @return [String]
     class DescribeStudioLifecycleConfigRequest < Struct.new(
+      nil,
       :studio_lifecycle_config_name,
       keyword_init: true
     )
@@ -12014,6 +12514,7 @@ module Aws::SageMaker
     #   <p>The App type that the Lifecycle Configuration is attached to.</p>
     #   @return [String]
     class DescribeStudioLifecycleConfigResponse < Struct.new(
+      nil,
       :studio_lifecycle_config_arn,
       :studio_lifecycle_config_name,
       :creation_time,
@@ -12029,6 +12530,7 @@ module Aws::SageMaker
     #   <p>The Amazon Resource Name (ARN) of the subscribed work team to describe.</p>
     #   @return [String]
     class DescribeSubscribedWorkteamRequest < Struct.new(
+      nil,
       :workteam_arn,
       keyword_init: true
     )
@@ -12039,6 +12541,7 @@ module Aws::SageMaker
     #   <p>A <code>Workteam</code> instance that contains information about the work team.</p>
     #   @return [Types::SubscribedWorkteam]
     class DescribeSubscribedWorkteamResponse < Struct.new(
+      nil,
       :subscribed_workteam,
       keyword_init: true
     )
@@ -12049,6 +12552,7 @@ module Aws::SageMaker
     #   <p>The name of the training job.</p>
     #   @return [String]
     class DescribeTrainingJobRequest < Struct.new(
+      nil,
       :training_job_name,
       keyword_init: true
     )
@@ -12185,6 +12689,7 @@ module Aws::SageMaker
     #   <p>Contains information about the infrastructure health check configuration for the training job.</p>
     #   @return [Types::InfraCheckConfig]
     class DescribeTrainingJobResponse < Struct.new(
+      nil,
       :training_job_name,
       :training_job_arn,
       :tuning_job_arn,
@@ -12237,6 +12742,7 @@ module Aws::SageMaker
     #   <p>The name of the training plan to describe.</p>
     #   @return [String]
     class DescribeTrainingPlanRequest < Struct.new(
+      nil,
       :training_plan_name,
       keyword_init: true
     )
@@ -12298,6 +12804,7 @@ module Aws::SageMaker
     #   <p>The list of Reserved Capacity providing the underlying compute resources of the plan. </p>
     #   @return [Array<Types::ReservedCapacitySummary>]
     class DescribeTrainingPlanResponse < Struct.new(
+      nil,
       :training_plan_arn,
       :training_plan_name,
       :status,
@@ -12325,6 +12832,7 @@ module Aws::SageMaker
     #   <p>The name of the transform job that you want to view details of.</p>
     #   @return [String]
     class DescribeTransformJobRequest < Struct.new(
+      nil,
       :transform_job_name,
       keyword_init: true
     )
@@ -12395,6 +12903,7 @@ module Aws::SageMaker
     #   <p>Associates a SageMaker job as a trial component with an experiment and trial. Specified when you call the following APIs:</p> <ul> <li> <p> <a href="https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_CreateProcessingJob.html">CreateProcessingJob</a> </p> </li> <li> <p> <a href="https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_CreateTrainingJob.html">CreateTrainingJob</a> </p> </li> <li> <p> <a href="https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_CreateTransformJob.html">CreateTransformJob</a> </p> </li> </ul>
     #   @return [Types::ExperimentConfig]
     class DescribeTransformJobResponse < Struct.new(
+      nil,
       :transform_job_name,
       :transform_job_arn,
       :transform_job_status,
@@ -12425,6 +12934,7 @@ module Aws::SageMaker
     #   <p>The name of the trial component to describe.</p>
     #   @return [String]
     class DescribeTrialComponentRequest < Struct.new(
+      nil,
       :trial_component_name,
       keyword_init: true
     )
@@ -12486,6 +12996,7 @@ module Aws::SageMaker
     #   <p>A list of ARNs and, if applicable, job types for multiple sources of an experiment run.</p>
     #   @return [Array<Types::TrialComponentSource>]
     class DescribeTrialComponentResponse < Struct.new(
+      nil,
       :trial_component_name,
       :trial_component_arn,
       :display_name,
@@ -12513,6 +13024,7 @@ module Aws::SageMaker
     #   <p>The name of the trial to describe.</p>
     #   @return [String]
     class DescribeTrialRequest < Struct.new(
+      nil,
       :trial_name,
       keyword_init: true
     )
@@ -12550,6 +13062,7 @@ module Aws::SageMaker
     #   <p>Metadata properties of the tracking entity, trial, or trial component.</p>
     #   @return [Types::MetadataProperties]
     class DescribeTrialResponse < Struct.new(
+      nil,
       :trial_name,
       :trial_arn,
       :display_name,
@@ -12572,6 +13085,7 @@ module Aws::SageMaker
     #   <p>The user profile name. This value is not case sensitive.</p>
     #   @return [String]
     class DescribeUserProfileRequest < Struct.new(
+      nil,
       :domain_id,
       :user_profile_name,
       keyword_init: true
@@ -12613,6 +13127,7 @@ module Aws::SageMaker
     #   <p>A collection of settings.</p>
     #   @return [Types::UserSettings]
     class DescribeUserProfileResponse < Struct.new(
+      nil,
       :domain_id,
       :user_profile_arn,
       :user_profile_name,
@@ -12633,6 +13148,7 @@ module Aws::SageMaker
     #   <p>The name of the private workforce whose access you want to restrict. <code>WorkforceName</code> is automatically set to <code>default</code> when a workforce is created and cannot be modified. </p>
     #   @return [String]
     class DescribeWorkforceRequest < Struct.new(
+      nil,
       :workforce_name,
       keyword_init: true
     )
@@ -12643,6 +13159,7 @@ module Aws::SageMaker
     #   <p>A single private workforce, which is automatically created when you create your first private work team. You can create one private work force in each Amazon Web Services Region. By default, any workforce-related API operation used in a specific region will apply to the workforce created in that region. To learn how to create a private workforce, see <a href="https://docs.aws.amazon.com/sagemaker/latest/dg/sms-workforce-create-private.html">Create a Private Workforce</a>.</p>
     #   @return [Types::Workforce]
     class DescribeWorkforceResponse < Struct.new(
+      nil,
       :workforce,
       keyword_init: true
     )
@@ -12653,6 +13170,7 @@ module Aws::SageMaker
     #   <p>The name of the work team to return a description of.</p>
     #   @return [String]
     class DescribeWorkteamRequest < Struct.new(
+      nil,
       :workteam_name,
       keyword_init: true
     )
@@ -12663,6 +13181,7 @@ module Aws::SageMaker
     #   <p>A <code>Workteam</code> instance that contains information about the work team. </p>
     #   @return [Types::Workteam]
     class DescribeWorkteamResponse < Struct.new(
+      nil,
       :workteam,
       keyword_init: true
     )
@@ -12683,6 +13202,7 @@ module Aws::SageMaker
     #   <p>Specifies the serverless update concurrency configuration for an endpoint variant.</p>
     #   @return [Types::ProductionVariantServerlessUpdateConfig]
     class DesiredWeightAndCapacity < Struct.new(
+      nil,
       :variant_name,
       :desired_weight,
       :desired_instance_count,
@@ -12702,6 +13222,7 @@ module Aws::SageMaker
     #   <p> The unique identifier of your EBS volume that you want to detach. Your volume must be currently attached to the specified node. </p>
     #   @return [String]
     class DetachClusterNodeVolumeRequest < Struct.new(
+      nil,
       :cluster_arn,
       :node_id,
       :volume_id,
@@ -12729,6 +13250,7 @@ module Aws::SageMaker
     #   <p> The device name assigned to your attached volume on the target instance. </p>
     #   @return [String]
     class DetachClusterNodeVolumeResponse < Struct.new(
+      nil,
       :cluster_arn,
       :node_id,
       :volume_id,
@@ -12751,6 +13273,7 @@ module Aws::SageMaker
     #   <p>Amazon Web Services Internet of Things (IoT) object name.</p>
     #   @return [String]
     class Device < Struct.new(
+      nil,
       :device_name,
       :description,
       :iot_thing_name,
@@ -12794,6 +13317,7 @@ module Aws::SageMaker
     #   <p>The time when the deployment on the device started.</p>
     #   @return [Time]
     class DeviceDeploymentSummary < Struct.new(
+      nil,
       :edge_deployment_plan_arn,
       :edge_deployment_plan_name,
       :stage_name,
@@ -12824,6 +13348,7 @@ module Aws::SageMaker
     #   <p>Timestamp of when the device fleet was last updated.</p>
     #   @return [Time]
     class DeviceFleetSummary < Struct.new(
+      nil,
       :device_fleet_arn,
       :device_fleet_name,
       :creation_time,
@@ -12847,6 +13372,7 @@ module Aws::SageMaker
     #   <p>A filter to select devices with names containing this name.</p>
     #   @return [String]
     class DeviceSelectionConfig < Struct.new(
+      nil,
       :device_subset_type,
       :percentage,
       :device_names,
@@ -12864,6 +13390,7 @@ module Aws::SageMaker
     #   <p>The number of registered devices.</p>
     #   @return [Integer]
     class DeviceStats < Struct.new(
+      nil,
       :connected_device_count,
       :registered_device_count,
       keyword_init: true
@@ -12900,6 +13427,7 @@ module Aws::SageMaker
     #   <p>Edge Manager agent version.</p>
     #   @return [String]
     class DeviceSummary < Struct.new(
+      nil,
       :device_name,
       :device_arn,
       :description,
@@ -12919,6 +13447,7 @@ module Aws::SageMaker
     #   <p>Describes whether model deployment permissions are enabled or disabled in the Canvas application.</p>
     #   @return [String]
     class DirectDeploySettings < Struct.new(
+      nil,
       :status,
       keyword_init: true
     )
@@ -12926,12 +13455,14 @@ module Aws::SageMaker
     end
 
     class DisableSagemakerServicecatalogPortfolioInput < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
     end
 
     class DisableSagemakerServicecatalogPortfolioOutput < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -12944,6 +13475,7 @@ module Aws::SageMaker
     #   <p>The name of the trial to disassociate from.</p>
     #   @return [String]
     class DisassociateTrialComponentRequest < Struct.new(
+      nil,
       :trial_component_name,
       :trial_name,
       keyword_init: true
@@ -12958,6 +13490,7 @@ module Aws::SageMaker
     #   <p>The Amazon Resource Name (ARN) of the trial.</p>
     #   @return [String]
     class DisassociateTrialComponentResponse < Struct.new(
+      nil,
       :trial_component_arn,
       :trial_arn,
       keyword_init: true
@@ -12976,6 +13509,7 @@ module Aws::SageMaker
     #   <p>Indicates whether to use rootless Docker.</p>
     #   @return [String]
     class DockerSettings < Struct.new(
+      nil,
       :enable_docker_access,
       :vpc_only_trusted_accounts,
       :rootless_docker,
@@ -13007,6 +13541,7 @@ module Aws::SageMaker
     #   <p>The domain's URL.</p>
     #   @return [String]
     class DomainDetails < Struct.new(
+      nil,
       :domain_arn,
       :domain_id,
       :domain_name,
@@ -13045,6 +13580,7 @@ module Aws::SageMaker
     #   <p>The IP address type for the domain. Specify <code>ipv4</code> for IPv4-only connectivity or <code>dualstack</code> for both IPv4 and IPv6 connectivity. When you specify <code>dualstack</code>, the subnet must support IPv6 CIDR blocks. If not specified, defaults to <code>ipv4</code>.</p>
     #   @return [String]
     class DomainSettings < Struct.new(
+      nil,
       :security_group_ids,
       :r_studio_server_pro_domain_settings,
       :execution_role_identity_config,
@@ -13084,6 +13620,7 @@ module Aws::SageMaker
     #   <p>The IP address type for the domain. Specify <code>ipv4</code> for IPv4-only connectivity or <code>dualstack</code> for both IPv4 and IPv6 connectivity. When you specify <code>dualstack</code>, the subnet must support IPv6 CIDR blocks.</p>
     #   @return [String]
     class DomainSettingsForUpdate < Struct.new(
+      nil,
       :r_studio_server_pro_domain_settings_for_update,
       :execution_role_identity_config,
       :security_group_ids,
@@ -13111,6 +13648,7 @@ module Aws::SageMaker
     #   <p>Represents the drift check model data quality baselines that can be used when the model monitor is set using the model package.</p>
     #   @return [Types::DriftCheckModelDataQuality]
     class DriftCheckBaselines < Struct.new(
+      nil,
       :bias,
       :explainability,
       :model_quality,
@@ -13131,6 +13669,7 @@ module Aws::SageMaker
     #   <p>The post-training constraints.</p>
     #   @return [Types::MetricsSource]
     class DriftCheckBias < Struct.new(
+      nil,
       :config_file,
       :pre_training_constraints,
       :post_training_constraints,
@@ -13147,6 +13686,7 @@ module Aws::SageMaker
     #   <p>The explainability config file for the model.</p>
     #   @return [Types::FileSource]
     class DriftCheckExplainability < Struct.new(
+      nil,
       :constraints,
       :config_file,
       keyword_init: true
@@ -13162,6 +13702,7 @@ module Aws::SageMaker
     #   <p>The drift check model data quality constraints.</p>
     #   @return [Types::MetricsSource]
     class DriftCheckModelDataQuality < Struct.new(
+      nil,
       :statistics,
       :constraints,
       keyword_init: true
@@ -13177,6 +13718,7 @@ module Aws::SageMaker
     #   <p>The drift check model quality constraints.</p>
     #   @return [Types::MetricsSource]
     class DriftCheckModelQuality < Struct.new(
+      nil,
       :statistics,
       :constraints,
       keyword_init: true
@@ -13201,6 +13743,7 @@ module Aws::SageMaker
     #   <p>An object of the scaling policies for each metric.</p>
     #   @return [Array<Types::ScalingPolicy>]
     class DynamicScalingConfiguration < Struct.new(
+      nil,
       :min_capacity,
       :max_capacity,
       :scale_in_cooldown,
@@ -13216,6 +13759,7 @@ module Aws::SageMaker
     #   <p>The ID of your Amazon EFS file system.</p>
     #   @return [String]
     class EFSFileSystem < Struct.new(
+      nil,
       :file_system_id,
       keyword_init: true
     )
@@ -13230,6 +13774,7 @@ module Aws::SageMaker
     #   <p>The path to the file system directory that is accessible in Amazon SageMaker AI Studio. Permitted users can access only this directory and below.</p>
     #   @return [String]
     class EFSFileSystemConfig < Struct.new(
+      nil,
       :file_system_id,
       :file_system_path,
       keyword_init: true
@@ -13251,6 +13796,7 @@ module Aws::SageMaker
     #   <p>The path to the log file where the cluster step's failure root cause is recorded.</p>
     #   @return [String]
     class EMRStepMetadata < Struct.new(
+      nil,
       :cluster_id,
       :step_id,
       :step_name,
@@ -13265,6 +13811,7 @@ module Aws::SageMaker
     #   <p>The size of an EBS storage volume for a space.</p>
     #   @return [Integer]
     class EbsStorageSettings < Struct.new(
+      nil,
       :ebs_volume_size_in_gb,
       keyword_init: true
     )
@@ -13285,6 +13832,7 @@ module Aws::SageMaker
     #   <p>The number of instances from the EC2 capacity reservation that are being used by the endpoint.</p>
     #   @return [Integer]
     class Ec2CapacityReservation < Struct.new(
+      nil,
       :ec2_capacity_reservation_id,
       :total_instance_count,
       :available_instance_count,
@@ -13305,6 +13853,7 @@ module Aws::SageMaker
     #   <p>The type of the Association(Edge) between the source and destination. For example <code>ContributedTo</code>, <code>Produced</code>, or <code>DerivedFrom</code>.</p>
     #   @return [String]
     class Edge < Struct.new(
+      nil,
       :source_arn,
       :destination_arn,
       :association_type,
@@ -13318,6 +13867,7 @@ module Aws::SageMaker
     #   <p>Toggle that determines whether to rollback to previous configuration if the current deployment fails. By default this is turned on. You may turn this off if you want to investigate the errors yourself.</p>
     #   @return [String]
     class EdgeDeploymentConfig < Struct.new(
+      nil,
       :failure_handling_policy,
       keyword_init: true
     )
@@ -13332,6 +13882,7 @@ module Aws::SageMaker
     #   <p>The edge packaging job associated with this deployment.</p>
     #   @return [String]
     class EdgeDeploymentModelConfig < Struct.new(
+      nil,
       :model_handle,
       :edge_packaging_job_name,
       keyword_init: true
@@ -13365,6 +13916,7 @@ module Aws::SageMaker
     #   <p>The time when the edge deployment plan was last updated.</p>
     #   @return [Time]
     class EdgeDeploymentPlanSummary < Struct.new(
+      nil,
       :edge_deployment_plan_arn,
       :edge_deployment_plan_name,
       :device_fleet_name,
@@ -13398,6 +13950,7 @@ module Aws::SageMaker
     #   <p>The time when the deployment API started.</p>
     #   @return [Time]
     class EdgeDeploymentStatus < Struct.new(
+      nil,
       :stage_status,
       :edge_deployment_success_in_stage,
       :edge_deployment_pending_in_stage,
@@ -13423,6 +13976,7 @@ module Aws::SageMaker
     #   <p>The timestamp of the last inference that was made.</p>
     #   @return [Time]
     class EdgeModel < Struct.new(
+      nil,
       :model_name,
       :model_version,
       :latest_sample_time,
@@ -13452,6 +14006,7 @@ module Aws::SageMaker
     #   <p>The number of devices with this model version and are producing sample data.</p>
     #   @return [Integer]
     class EdgeModelStat < Struct.new(
+      nil,
       :model_name,
       :model_version,
       :offline_device_count,
@@ -13471,6 +14026,7 @@ module Aws::SageMaker
     #   <p>The version model.</p>
     #   @return [String]
     class EdgeModelSummary < Struct.new(
+      nil,
       :model_name,
       :model_version,
       keyword_init: true
@@ -13492,6 +14048,7 @@ module Aws::SageMaker
     #   <p>The configuration used to create deployment artifacts. Specify configuration options with a JSON string. The available configuration options for each type are:</p> <ul> <li> <p> <code>ComponentName</code> (optional) - Name of the GreenGrass V2 component. If not specified, the default name generated consists of "SagemakerEdgeManager" and the name of your SageMaker Edge Manager packaging job.</p> </li> <li> <p> <code>ComponentDescription</code> (optional) - Description of the component.</p> </li> <li> <p> <code>ComponentVersion</code> (optional) - The version of the component.</p> <note> <p>Amazon Web Services IoT Greengrass uses semantic versions for components. Semantic versions follow a<i> major.minor.patch</i> number system. For example, version 1.0.0 represents the first major release for a component. For more information, see the <a href="https://semver.org/">semantic version specification</a>.</p> </note> </li> <li> <p> <code>PlatformOS</code> (optional) - The name of the operating system for the platform. Supported platforms include Windows and Linux.</p> </li> <li> <p> <code>PlatformArchitecture</code> (optional) - The processor architecture for the platform. </p> <p>Supported architectures Windows include: Windows32_x86, Windows64_x64.</p> <p>Supported architectures for Linux include: Linux x86_64, Linux ARMV8.</p> </li> </ul>
     #   @return [String]
     class EdgeOutputConfig < Struct.new(
+      nil,
       :s3_output_location,
       :kms_key_id,
       :preset_deployment_type,
@@ -13527,6 +14084,7 @@ module Aws::SageMaker
     #   <p>The timestamp of when the edge packaging job was last updated.</p>
     #   @return [Time]
     class EdgePackagingJobSummary < Struct.new(
+      nil,
       :edge_packaging_job_arn,
       :edge_packaging_job_name,
       :edge_packaging_job_status,
@@ -13554,6 +14112,7 @@ module Aws::SageMaker
     #   <p>Returns a message describing the status of the deployed resource.</p>
     #   @return [String]
     class EdgePresetDeploymentOutput < Struct.new(
+      nil,
       :type,
       :artifact,
       :status,
@@ -13568,6 +14127,7 @@ module Aws::SageMaker
     #   <p>The ARN of the IAM role granting the AutoML job V2 the necessary permissions access policies to list, connect to, or manage EMR Serverless jobs. For detailed information about the required permissions of this role, see "How to configure AutoML to initiate a remote job on EMR Serverless for large datasets" in <a href="https://docs.aws.amazon.com/sagemaker/latest/dg/autopilot-automate-model-development-create-experiment.html">Create a regression or classification job for tabular data using the AutoML API</a> or <a href="https://docs.aws.amazon.com/sagemaker/latest/dg/autopilot-create-experiment-timeseries-forecasting.html#timeseries-forecasting-api-optional-params">Create an AutoML job for time-series forecasting using the API</a>.</p>
     #   @return [String]
     class EmrServerlessComputeConfig < Struct.new(
+      nil,
       :execution_role_arn,
       keyword_init: true
     )
@@ -13582,6 +14142,7 @@ module Aws::SageMaker
     #   <p>Describes whether Amazon EMR Serverless job capabilities are enabled or disabled in the SageMaker Canvas application.</p>
     #   @return [String]
     class EmrServerlessSettings < Struct.new(
+      nil,
       :execution_role_arn,
       :status,
       keyword_init: true
@@ -13597,6 +14158,7 @@ module Aws::SageMaker
     #   <p>An array of Amazon Resource Names (ARNs) of the IAM roles used by the Amazon EMR cluster instances or job execution environments to access other Amazon Web Services services and resources needed during the runtime of your Amazon EMR or Amazon EMR Serverless workloads, such as Amazon S3 for data access, Amazon CloudWatch for logging, or other Amazon Web Services services based on the particular workload requirements.</p>
     #   @return [Array<String>]
     class EmrSettings < Struct.new(
+      nil,
       :assumable_role_arns,
       :execution_role_arns,
       keyword_init: true
@@ -13605,12 +14167,14 @@ module Aws::SageMaker
     end
 
     class EnableSagemakerServicecatalogPortfolioInput < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
     end
 
     class EnableSagemakerServicecatalogPortfolioOutput < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -13654,6 +14218,7 @@ module Aws::SageMaker
     #   <p>A list of the shadow variants hosted on the endpoint. Each shadow variant is a model in shadow mode with production traffic replicated from the production variant.</p>
     #   @return [Array<Types::ProductionVariantSummary>]
     class Endpoint < Struct.new(
+      nil,
       :endpoint_name,
       :endpoint_arn,
       :endpoint_config_name,
@@ -13676,6 +14241,7 @@ module Aws::SageMaker
     #   <p>The Amazon Resource Name (ARN) of the endpoint configuration used in the step.</p>
     #   @return [String]
     class EndpointConfigStepMetadata < Struct.new(
+      nil,
       :arn,
       keyword_init: true
     )
@@ -13693,6 +14259,7 @@ module Aws::SageMaker
     #   <p>A timestamp that shows when the endpoint configuration was created.</p>
     #   @return [Time]
     class EndpointConfigSummary < Struct.new(
+      nil,
       :endpoint_config_name,
       :endpoint_config_arn,
       :creation_time,
@@ -13706,6 +14273,7 @@ module Aws::SageMaker
     #   <p>The name of a customer's endpoint.</p>
     #   @return [String]
     class EndpointInfo < Struct.new(
+      nil,
       :endpoint_name,
       keyword_init: true
     )
@@ -13747,6 +14315,7 @@ module Aws::SageMaker
     #   <p>The attributes of the input data to exclude from the analysis.</p>
     #   @return [String]
     class EndpointInput < Struct.new(
+      nil,
       :endpoint_name,
       :local_path,
       :s3_input_mode,
@@ -13777,6 +14346,7 @@ module Aws::SageMaker
     #   <p> The parameter you want to benchmark against.</p>
     #   @return [Types::EnvironmentParameterRanges]
     class EndpointInputConfiguration < Struct.new(
+      nil,
       :instance_type,
       :serverless_config,
       :inference_specification_name,
@@ -13800,6 +14370,7 @@ module Aws::SageMaker
     #   <p> If the status of the endpoint is <code>Failed</code>, or the status is <code>InService</code> but update operation fails, this provides the reason why it failed. </p>
     #   @return [String]
     class EndpointMetadata < Struct.new(
+      nil,
       :endpoint_name,
       :endpoint_config_name,
       :endpoint_status,
@@ -13826,6 +14397,7 @@ module Aws::SageMaker
     #   <p>Specifies the serverless configuration for an endpoint variant.</p>
     #   @return [Types::ProductionVariantServerlessConfig]
     class EndpointOutputConfiguration < Struct.new(
+      nil,
       :endpoint_name,
       :variant_name,
       :instance_type,
@@ -13844,6 +14416,7 @@ module Aws::SageMaker
     #   <p>Details about a customer endpoint that was compared in an Inference Recommender job.</p>
     #   @return [Types::EndpointInfo]
     class EndpointPerformance < Struct.new(
+      nil,
       :metrics,
       :endpoint_info,
       keyword_init: true
@@ -13856,6 +14429,7 @@ module Aws::SageMaker
     #   <p>The Amazon Resource Name (ARN) of the endpoint in the step.</p>
     #   @return [String]
     class EndpointStepMetadata < Struct.new(
+      nil,
       :arn,
       keyword_init: true
     )
@@ -13879,6 +14453,7 @@ module Aws::SageMaker
     #   <p>The status of the endpoint.</p> <ul> <li> <p> <code>OutOfService</code>: Endpoint is not available to take incoming requests.</p> </li> <li> <p> <code>Creating</code>: <a href="https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_CreateEndpoint.html">CreateEndpoint</a> is executing.</p> </li> <li> <p> <code>Updating</code>: <a href="https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_UpdateEndpoint.html">UpdateEndpoint</a> or <a href="https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_UpdateEndpointWeightsAndCapacities.html">UpdateEndpointWeightsAndCapacities</a> is executing.</p> </li> <li> <p> <code>SystemUpdating</code>: Endpoint is undergoing maintenance and cannot be updated or deleted or re-scaled until it has completed. This maintenance operation does not change any customer-specified values such as VPC config, KMS encryption, model, instance type, or instance count.</p> </li> <li> <p> <code>RollingBack</code>: Endpoint fails to scale up or down or change its variant weight and is in the process of rolling back to its previous configuration. Once the rollback completes, endpoint returns to an <code>InService</code> status. This transitional status only applies to an endpoint that has autoscaling enabled and is undergoing variant weight or capacity changes as part of an <a href="https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_UpdateEndpointWeightsAndCapacities.html">UpdateEndpointWeightsAndCapacities</a> call or when the <a href="https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_UpdateEndpointWeightsAndCapacities.html">UpdateEndpointWeightsAndCapacities</a> operation is called explicitly.</p> </li> <li> <p> <code>InService</code>: Endpoint is available to process incoming requests.</p> </li> <li> <p> <code>Deleting</code>: <a href="https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_DeleteEndpoint.html">DeleteEndpoint</a> is executing.</p> </li> <li> <p> <code>Failed</code>: Endpoint could not be created, updated, or re-scaled. Use <code>DescribeEndpointOutput$FailureReason</code> for information about the failure. <a href="https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_DeleteEndpoint.html">DeleteEndpoint</a> is the only operation that can be performed on a failed endpoint.</p> </li> </ul> <p>To get a list of endpoints with a specified status, use the <code>StatusEquals</code> filter with a call to <a href="https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_ListEndpoints.html">ListEndpoints</a>.</p>
     #   @return [String]
     class EndpointSummary < Struct.new(
+      nil,
       :endpoint_name,
       :endpoint_arn,
       :creation_time,
@@ -13894,6 +14469,7 @@ module Aws::SageMaker
     #   <p>Configuration settings for an Amazon FSx for Lustre file system to be used with the cluster.</p>
     #   @return [Types::FSxLustreConfig]
     class EnvironmentConfig < Struct.new(
+      nil,
       :f_sx_lustre_config,
       keyword_init: true
     )
@@ -13908,6 +14484,7 @@ module Aws::SageMaker
     #   <p>The Amazon S3 path where output data from the restricted instance group (RIG) environment will be stored.</p>
     #   @return [String]
     class EnvironmentConfigDetails < Struct.new(
+      nil,
       :f_sx_lustre_config,
       :s3_output_path,
       keyword_init: true
@@ -13926,6 +14503,7 @@ module Aws::SageMaker
     #   <p>The value suggested by the Amazon SageMaker Inference Recommender.</p>
     #   @return [String]
     class EnvironmentParameter < Struct.new(
+      nil,
       :key,
       :value_type,
       :value,
@@ -13939,6 +14517,7 @@ module Aws::SageMaker
     #   <p>Specified a list of parameters for each category.</p>
     #   @return [Array<Types::CategoricalParameter>]
     class EnvironmentParameterRanges < Struct.new(
+      nil,
       :categorical_parameter_ranges,
       keyword_init: true
     )
@@ -13953,6 +14532,7 @@ module Aws::SageMaker
     #   <p>The failure reason for the operation.</p>
     #   @return [String]
     class ErrorInfo < Struct.new(
+      nil,
       :code,
       :reason,
       keyword_init: true
@@ -13965,6 +14545,7 @@ module Aws::SageMaker
     #   <p>Metadata specific to the event, which may include information about the cluster, instance group, or instance involved.</p>
     #   @return [Types::EventMetadata]
     class EventDetails < Struct.new(
+      nil,
       :event_metadata,
       keyword_init: true
     )
@@ -14033,6 +14614,7 @@ module Aws::SageMaker
     #   <p>The list of tags that are associated with the experiment. You can use <a href="https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_Search.html">Search</a> API to search on the tags.</p>
     #   @return [Array<Types::Tag>]
     class Experiment < Struct.new(
+      nil,
       :experiment_name,
       :experiment_arn,
       :display_name,
@@ -14062,6 +14644,7 @@ module Aws::SageMaker
     #   <p>The name of the experiment run to associate with the trial component.</p>
     #   @return [String]
     class ExperimentConfig < Struct.new(
+      nil,
       :experiment_name,
       :trial_name,
       :trial_component_display_name,
@@ -14079,6 +14662,7 @@ module Aws::SageMaker
     #   <p>The source type.</p>
     #   @return [String]
     class ExperimentSource < Struct.new(
+      nil,
       :source_arn,
       :source_type,
       keyword_init: true
@@ -14106,6 +14690,7 @@ module Aws::SageMaker
     #   <p>When the experiment was last modified.</p>
     #   @return [Time]
     class ExperimentSummary < Struct.new(
+      nil,
       :experiment_arn,
       :experiment_name,
       :display_name,
@@ -14122,6 +14707,7 @@ module Aws::SageMaker
     #   <p>The explainability report for a model.</p>
     #   @return [Types::MetricsSource]
     class Explainability < Struct.new(
+      nil,
       :report,
       keyword_init: true
     )
@@ -14133,6 +14719,7 @@ module Aws::SageMaker
     #   <p>A member of <code>ExplainerConfig</code> that contains configuration parameters for the SageMaker Clarify explainer.</p>
     #   @return [Types::ClarifyExplainerConfig]
     class ExplainerConfig < Struct.new(
+      nil,
       :clarify_explainer_config,
       keyword_init: true
     )
@@ -14147,6 +14734,7 @@ module Aws::SageMaker
     #   <p>The throughput capacity of the Amazon FSx for Lustre file system, measured in MB/s per TiB of storage.</p>
     #   @return [Integer]
     class FSxLustreConfig < Struct.new(
+      nil,
       :size_in_gi_b,
       :per_unit_storage_throughput,
       keyword_init: true
@@ -14159,6 +14747,7 @@ module Aws::SageMaker
     #   <p>Amazon FSx for Lustre file system ID.</p>
     #   @return [String]
     class FSxLustreFileSystem < Struct.new(
+      nil,
       :file_system_id,
       keyword_init: true
     )
@@ -14173,6 +14762,7 @@ module Aws::SageMaker
     #   <p>The path to the file system directory that is accessible in Amazon SageMaker Studio. Permitted users can access only this directory and below.</p>
     #   @return [String]
     class FSxLustreFileSystemConfig < Struct.new(
+      nil,
       :file_system_id,
       :file_system_path,
       keyword_init: true
@@ -14185,6 +14775,7 @@ module Aws::SageMaker
     #   <p>A message that you define and then is processed and rendered by the Fail step when the error occurs.</p>
     #   @return [String]
     class FailStepMetadata < Struct.new(
+      nil,
       :error_message,
       keyword_init: true
     )
@@ -14205,6 +14796,7 @@ module Aws::SageMaker
     #   <p>Configuration for your collection.</p>
     #   @return [Types::CollectionConfig]
     class FeatureDefinition < Struct.new(
+      nil,
       :feature_name,
       :feature_type,
       :collection_type,
@@ -14264,6 +14856,7 @@ module Aws::SageMaker
     #   <p>Tags used to define a <code>FeatureGroup</code>.</p>
     #   @return [Array<Types::Tag>]
     class FeatureGroup < Struct.new(
+      nil,
       :feature_group_arn,
       :feature_group_name,
       :record_identifier_feature_name,
@@ -14302,6 +14895,7 @@ module Aws::SageMaker
     #   <p>Notifies you if replicating data into the <code>OfflineStore</code> has failed. Returns either: <code>Active</code> or <code>Blocked</code>.</p>
     #   @return [Types::OfflineStoreStatus]
     class FeatureGroupSummary < Struct.new(
+      nil,
       :feature_group_name,
       :feature_group_arn,
       :creation_time,
@@ -14338,6 +14932,7 @@ module Aws::SageMaker
     #   <p>Optional key-value pairs that you specify to better describe the feature.</p>
     #   @return [Array<Types::FeatureParameter>]
     class FeatureMetadata < Struct.new(
+      nil,
       :feature_group_arn,
       :feature_group_name,
       :feature_name,
@@ -14359,6 +14954,7 @@ module Aws::SageMaker
     #   <p>The value that belongs to a key.</p>
     #   @return [String]
     class FeatureParameter < Struct.new(
+      nil,
       :key,
       :value,
       keyword_init: true
@@ -14377,6 +14973,7 @@ module Aws::SageMaker
     #   <p>The Amazon S3 URI for the file source.</p>
     #   @return [String]
     class FileSource < Struct.new(
+      nil,
       :content_type,
       :content_digest,
       :s3_uri,
@@ -14396,6 +14993,7 @@ module Aws::SageMaker
     #   <p>The default POSIX group ID (GID). If not specified, defaults to <code>100</code>.</p>
     #   @return [Integer]
     class FileSystemConfig < Struct.new(
+      nil,
       :mount_path,
       :default_uid,
       :default_gid,
@@ -14418,6 +15016,7 @@ module Aws::SageMaker
     #   <p>The full path to the directory to associate with the channel.</p>
     #   @return [String]
     class FileSystemDataSource < Struct.new(
+      nil,
       :file_system_id,
       :file_system_access_mode,
       :file_system_type,
@@ -14438,6 +15037,7 @@ module Aws::SageMaker
     #   <p>A value used with <code>Name</code> and <code>Operator</code> to determine which resources satisfy the filter's condition. For numerical properties, <code>Value</code> must be an integer or floating-point decimal. For timestamp properties, <code>Value</code> must be an ISO 8601 date-time string of the following format: <code>YYYY-mm-dd'T'HH:MM:SS</code>.</p>
     #   @return [String]
     class Filter < Struct.new(
+      nil,
       :name,
       :operator,
       :value,
@@ -14460,6 +15060,7 @@ module Aws::SageMaker
     #   <p>The name of the standard metric. For a description of the standard metrics, see <a href="https://docs.aws.amazon.com/sagemaker/latest/dg/autopilot-metrics-validation.html#autopilot-metrics">Autopilot candidate metrics</a>.</p>
     #   @return [String]
     class FinalAutoMLJobObjectiveMetric < Struct.new(
+      nil,
       :type,
       :metric_name,
       :value,
@@ -14480,6 +15081,7 @@ module Aws::SageMaker
     #   <p>The value of the objective metric.</p>
     #   @return [Float]
     class FinalHyperParameterTuningJobObjectiveMetric < Struct.new(
+      nil,
       :type,
       :metric_name,
       :value,
@@ -14496,6 +15098,7 @@ module Aws::SageMaker
     #   <p>The Amazon Key Management Service (KMS) key ID for server-side encryption.</p>
     #   @return [String]
     class FlowDefinitionOutputConfig < Struct.new(
+      nil,
       :s3_output_path,
       :kms_key_id,
       keyword_init: true
@@ -14520,6 +15123,7 @@ module Aws::SageMaker
     #   <p>The reason why the flow definition creation failed. A failure reason is returned only when the flow definition status is <code>Failed</code>.</p>
     #   @return [String]
     class FlowDefinitionSummary < Struct.new(
+      nil,
       :flow_definition_name,
       :flow_definition_arn,
       :flow_definition_status,
@@ -14535,6 +15139,7 @@ module Aws::SageMaker
     #   <p>The ARN of an Amazon Web Services IAM role that allows fine-tuning of large language models (LLMs) in Amazon Bedrock. The IAM role should have Amazon S3 read and write permissions, as well as a trust relationship that establishes <code>bedrock.amazonaws.com</code> as a service principal.</p>
     #   @return [String]
     class GenerativeAiSettings < Struct.new(
+      nil,
       :amazon_bedrock_role_arn,
       keyword_init: true
     )
@@ -14545,6 +15150,7 @@ module Aws::SageMaker
     #   <p>The name of the fleet.</p>
     #   @return [String]
     class GetDeviceFleetReportRequest < Struct.new(
+      nil,
       :device_fleet_name,
       keyword_init: true
     )
@@ -14576,6 +15182,7 @@ module Aws::SageMaker
     #   <p>Status of model on device.</p>
     #   @return [Array<Types::EdgeModelStat>]
     class GetDeviceFleetReportResponse < Struct.new(
+      nil,
       :device_fleet_arn,
       :device_fleet_name,
       :output_config,
@@ -14593,6 +15200,7 @@ module Aws::SageMaker
     #   <p>The name or Amazon Resource Name (ARN) of the lineage group.</p>
     #   @return [String]
     class GetLineageGroupPolicyRequest < Struct.new(
+      nil,
       :lineage_group_name,
       keyword_init: true
     )
@@ -14606,6 +15214,7 @@ module Aws::SageMaker
     #   <p>The resource policy that gives access to the lineage group in another account.</p>
     #   @return [String]
     class GetLineageGroupPolicyResponse < Struct.new(
+      nil,
       :lineage_group_arn,
       :resource_policy,
       keyword_init: true
@@ -14617,6 +15226,7 @@ module Aws::SageMaker
     #   <p>The name of the model group for which to get the resource policy.</p>
     #   @return [String]
     class GetModelPackageGroupPolicyInput < Struct.new(
+      nil,
       :model_package_group_name,
       keyword_init: true
     )
@@ -14627,6 +15237,7 @@ module Aws::SageMaker
     #   <p>The resource policy for the model group.</p>
     #   @return [String]
     class GetModelPackageGroupPolicyOutput < Struct.new(
+      nil,
       :resource_policy,
       keyword_init: true
     )
@@ -14634,6 +15245,7 @@ module Aws::SageMaker
     end
 
     class GetSagemakerServicecatalogPortfolioStatusInput < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -14643,6 +15255,7 @@ module Aws::SageMaker
     #   <p>Whether Service Catalog is enabled or disabled in SageMaker.</p>
     #   @return [String]
     class GetSagemakerServicecatalogPortfolioStatusOutput < Struct.new(
+      nil,
       :status,
       keyword_init: true
     )
@@ -14665,6 +15278,7 @@ module Aws::SageMaker
     #   <p>An object where you specify the anticipated traffic pattern for an endpoint.</p>
     #   @return [Types::ScalingPolicyObjective]
     class GetScalingConfigurationRecommendationRequest < Struct.new(
+      nil,
       :inference_recommendations_job_name,
       :recommendation_id,
       :endpoint_name,
@@ -14697,6 +15311,7 @@ module Aws::SageMaker
     #   <p>An object with the recommended values for you to specify when creating an autoscaling policy.</p>
     #   @return [Types::DynamicScalingConfiguration]
     class GetScalingConfigurationRecommendationResponse < Struct.new(
+      nil,
       :inference_recommendations_job_name,
       :recommendation_id,
       :endpoint_name,
@@ -14716,6 +15331,7 @@ module Aws::SageMaker
     #   <p>Limits the property names that are included in the response.</p>
     #   @return [Types::SuggestionQuery]
     class GetSearchSuggestionsRequest < Struct.new(
+      nil,
       :resource,
       :suggestion_query,
       keyword_init: true
@@ -14727,6 +15343,7 @@ module Aws::SageMaker
     #   <p>A list of property names for a <code>Resource</code> that match a <code>SuggestionQuery</code>.</p>
     #   @return [Array<Types::PropertyNameSuggestion>]
     class GetSearchSuggestionsResponse < Struct.new(
+      nil,
       :property_name_suggestions,
       keyword_init: true
     )
@@ -14744,6 +15361,7 @@ module Aws::SageMaker
     #   <p>The Amazon Resource Name (ARN) of the Amazon Web Services Secrets Manager secret that contains the credentials used to access the git repository. The secret must have a staging label of <code>AWSCURRENT</code> and must be in the following format:</p> <p> <code>{"username": <i>UserName</i>, "password": <i>Password</i>}</code> </p>
     #   @return [String]
     class GitConfig < Struct.new(
+      nil,
       :repository_url,
       :branch,
       :secret_arn,
@@ -14757,6 +15375,7 @@ module Aws::SageMaker
     #   <p>The Amazon Resource Name (ARN) of the Amazon Web Services Secrets Manager secret that contains the credentials used to access the git repository. The secret must have a staging label of <code>AWSCURRENT</code> and must be in the following format:</p> <p> <code>{"username": <i>UserName</i>, "password": <i>Password</i>}</code> </p>
     #   @return [String]
     class GitConfigForUpdate < Struct.new(
+      nil,
       :secret_arn,
       keyword_init: true
     )
@@ -14771,6 +15390,7 @@ module Aws::SageMaker
     #   <p> The version aliases you are hiding from the Studio user interface. </p>
     #   @return [Array<String>]
     class HiddenSageMakerImage < Struct.new(
+      nil,
       :sage_maker_image_name,
       :version_aliases,
       keyword_init: true
@@ -14783,6 +15403,7 @@ module Aws::SageMaker
     #   <p>The country code for the holiday calendar.</p> <p>For the list of public holiday calendars supported by AutoML job V2, see <a href="https://docs.aws.amazon.com/sagemaker/latest/dg/autopilot-timeseries-forecasting-holiday-calendars.html#holiday-country-codes">Country Codes</a>. Use the country code corresponding to the country of your choice.</p>
     #   @return [String]
     class HolidayConfigAttributes < Struct.new(
+      nil,
       :country_code,
       keyword_init: true
     )
@@ -14794,6 +15415,7 @@ module Aws::SageMaker
     #   <p>The ARN of your private model hub content. This should be a <code>ModelReference</code> resource type that points to a SageMaker JumpStart public hub model.</p>
     #   @return [String]
     class HubAccessConfig < Struct.new(
+      nil,
       :hub_content_arn,
       keyword_init: true
     )
@@ -14808,6 +15430,7 @@ module Aws::SageMaker
     #   <p>The hub content dependency copy path.</p>
     #   @return [String]
     class HubContentDependency < Struct.new(
+      nil,
       :dependency_origin_path,
       :dependency_copy_path,
       keyword_init: true
@@ -14856,6 +15479,7 @@ module Aws::SageMaker
     #   <p>The date and time when the hub content was originally created, before any updates or revisions.</p>
     #   @return [Time]
     class HubContentInfo < Struct.new(
+      nil,
       :hub_content_name,
       :hub_content_arn,
       :sage_maker_public_hub_content_arn,
@@ -14900,6 +15524,7 @@ module Aws::SageMaker
     #   <p>The date and time that the hub was last modified.</p>
     #   @return [Time]
     class HubInfo < Struct.new(
+      nil,
       :hub_name,
       :hub_arn,
       :hub_display_name,
@@ -14918,6 +15543,7 @@ module Aws::SageMaker
     #   <p>The Amazon S3 bucket prefix for hosting hub content.</p>
     #   @return [String]
     class HubS3StorageConfig < Struct.new(
+      nil,
       :s3_output_path,
       keyword_init: true
     )
@@ -14929,6 +15555,7 @@ module Aws::SageMaker
     #   <p>JSON expressing use-case specific conditions declaratively. If any condition is matched, atomic tasks are created against the configured work team. The set of conditions is different for Rekognition and Textract. For more information about how to structure the JSON, see <a href="https://docs.aws.amazon.com/sagemaker/latest/dg/a2i-human-fallback-conditions-json-schema.html">JSON Schema for Human Loop Activation Conditions in Amazon Augmented AI</a> in the <i>Amazon SageMaker Developer Guide</i>.</p>
     #   @return [String]
     class HumanLoopActivationConditionsConfig < Struct.new(
+      nil,
       :human_loop_activation_conditions,
       keyword_init: true
     )
@@ -14940,6 +15567,7 @@ module Aws::SageMaker
     #   <p>Container structure for defining under what conditions SageMaker creates a human loop.</p>
     #   @return [Types::HumanLoopActivationConditionsConfig]
     class HumanLoopActivationConfig < Struct.new(
+      nil,
       :human_loop_activation_conditions_config,
       keyword_init: true
     )
@@ -14975,6 +15603,7 @@ module Aws::SageMaker
     #   <p>Defines the amount of money paid to an Amazon Mechanical Turk worker for each task performed. </p> <p>Use one of the following prices for bounding box tasks. Prices are in US dollars and should be based on the complexity of the task; the longer it takes in your initial testing, the more you should offer.</p> <ul> <li> <p>0.036</p> </li> <li> <p>0.048</p> </li> <li> <p>0.060</p> </li> <li> <p>0.072</p> </li> <li> <p>0.120</p> </li> <li> <p>0.240</p> </li> <li> <p>0.360</p> </li> <li> <p>0.480</p> </li> <li> <p>0.600</p> </li> <li> <p>0.720</p> </li> <li> <p>0.840</p> </li> <li> <p>0.960</p> </li> <li> <p>1.080</p> </li> <li> <p>1.200</p> </li> </ul> <p>Use one of the following prices for image classification, text classification, and custom tasks. Prices are in US dollars.</p> <ul> <li> <p>0.012</p> </li> <li> <p>0.024</p> </li> <li> <p>0.036</p> </li> <li> <p>0.048</p> </li> <li> <p>0.060</p> </li> <li> <p>0.072</p> </li> <li> <p>0.120</p> </li> <li> <p>0.240</p> </li> <li> <p>0.360</p> </li> <li> <p>0.480</p> </li> <li> <p>0.600</p> </li> <li> <p>0.720</p> </li> <li> <p>0.840</p> </li> <li> <p>0.960</p> </li> <li> <p>1.080</p> </li> <li> <p>1.200</p> </li> </ul> <p>Use one of the following prices for semantic segmentation tasks. Prices are in US dollars.</p> <ul> <li> <p>0.840</p> </li> <li> <p>0.960</p> </li> <li> <p>1.080</p> </li> <li> <p>1.200</p> </li> </ul> <p>Use one of the following prices for Textract AnalyzeDocument Important Form Key Amazon Augmented AI review tasks. Prices are in US dollars.</p> <ul> <li> <p>2.400 </p> </li> <li> <p>2.280 </p> </li> <li> <p>2.160 </p> </li> <li> <p>2.040 </p> </li> <li> <p>1.920 </p> </li> <li> <p>1.800 </p> </li> <li> <p>1.680 </p> </li> <li> <p>1.560 </p> </li> <li> <p>1.440 </p> </li> <li> <p>1.320 </p> </li> <li> <p>1.200 </p> </li> <li> <p>1.080 </p> </li> <li> <p>0.960 </p> </li> <li> <p>0.840 </p> </li> <li> <p>0.720 </p> </li> <li> <p>0.600 </p> </li> <li> <p>0.480 </p> </li> <li> <p>0.360 </p> </li> <li> <p>0.240 </p> </li> <li> <p>0.120 </p> </li> <li> <p>0.072 </p> </li> <li> <p>0.060 </p> </li> <li> <p>0.048 </p> </li> <li> <p>0.036 </p> </li> <li> <p>0.024 </p> </li> <li> <p>0.012 </p> </li> </ul> <p>Use one of the following prices for Rekognition DetectModerationLabels Amazon Augmented AI review tasks. Prices are in US dollars.</p> <ul> <li> <p>1.200 </p> </li> <li> <p>1.080 </p> </li> <li> <p>0.960 </p> </li> <li> <p>0.840 </p> </li> <li> <p>0.720 </p> </li> <li> <p>0.600 </p> </li> <li> <p>0.480 </p> </li> <li> <p>0.360 </p> </li> <li> <p>0.240 </p> </li> <li> <p>0.120 </p> </li> <li> <p>0.072 </p> </li> <li> <p>0.060 </p> </li> <li> <p>0.048 </p> </li> <li> <p>0.036 </p> </li> <li> <p>0.024 </p> </li> <li> <p>0.012 </p> </li> </ul> <p>Use one of the following prices for Amazon Augmented AI custom human review tasks. Prices are in US dollars.</p> <ul> <li> <p>1.200 </p> </li> <li> <p>1.080 </p> </li> <li> <p>0.960 </p> </li> <li> <p>0.840 </p> </li> <li> <p>0.720 </p> </li> <li> <p>0.600 </p> </li> <li> <p>0.480 </p> </li> <li> <p>0.360 </p> </li> <li> <p>0.240 </p> </li> <li> <p>0.120 </p> </li> <li> <p>0.072 </p> </li> <li> <p>0.060 </p> </li> <li> <p>0.048 </p> </li> <li> <p>0.036 </p> </li> <li> <p>0.024 </p> </li> <li> <p>0.012 </p> </li> </ul>
     #   @return [Types::PublicWorkforceTaskPrice]
     class HumanLoopConfig < Struct.new(
+      nil,
       :workteam_arn,
       :human_task_ui_arn,
       :task_title,
@@ -14994,6 +15623,7 @@ module Aws::SageMaker
     #   <p>Specifies whether Amazon Rekognition or Amazon Textract are used as the integration source. The default field settings and JSON parsing rules are different based on the integration source. Valid values:</p>
     #   @return [String]
     class HumanLoopRequestSource < Struct.new(
+      nil,
       :aws_managed_human_loop_request_source,
       keyword_init: true
     )
@@ -15038,6 +15668,7 @@ module Aws::SageMaker
     #   <p>The price that you pay for each task performed by an Amazon Mechanical Turk worker.</p>
     #   @return [Types::PublicWorkforceTaskPrice]
     class HumanTaskConfig < Struct.new(
+      nil,
       :workteam_arn,
       :ui_config,
       :pre_human_task_lambda_arn,
@@ -15066,6 +15697,7 @@ module Aws::SageMaker
     #   <p>A timestamp when SageMaker created the human task user interface.</p>
     #   @return [Time]
     class HumanTaskUiSummary < Struct.new(
+      nil,
       :human_task_ui_name,
       :human_task_ui_arn,
       :creation_time,
@@ -15088,6 +15720,7 @@ module Aws::SageMaker
     #   <p>An array of <a href="https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_MetricDefinition.html">MetricDefinition</a> objects that specify the metrics that the algorithm emits.</p>
     #   @return [Array<Types::MetricDefinition>]
     class HyperParameterAlgorithmSpecification < Struct.new(
+      nil,
       :training_image,
       :training_input_mode,
       :algorithm_name,
@@ -15120,6 +15753,7 @@ module Aws::SageMaker
     #   <p>The default value for this hyperparameter. If a default value is specified, a hyperparameter cannot be required.</p>
     #   @return [String]
     class HyperParameterSpecification < Struct.new(
+      nil,
       :name,
       :description,
       :type,
@@ -15188,6 +15822,7 @@ module Aws::SageMaker
     #   <p>An environment variable that you can pass into the SageMaker <a href="https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_CreateTrainingJob.html">CreateTrainingJob</a> API. You can use an existing <a href="https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_CreateTrainingJob.html#sagemaker-CreateTrainingJob-request-Environment">environment variable from the training container</a> or use your own. See <a href="https://docs.aws.amazon.com/sagemaker/latest/dg/automatic-model-tuning-define-metrics-variables.html">Define metrics and variables</a> for more information.</p> <note> <p>The maximum number of items specified for <code>Map Entries</code> refers to the maximum number of environment variables for each <code>TrainingJobDefinition</code> and also the maximum for the hyperparameter tuning job itself. That is, the sum of the number of environment variables for all the training job definitions can't exceed the maximum number specified.</p> </note>
     #   @return [Hash<String, String>]
     class HyperParameterTrainingJobDefinition < Struct.new(
+      nil,
       :definition_name,
       :tuning_objective,
       :hyper_parameter_ranges,
@@ -15249,6 +15884,7 @@ module Aws::SageMaker
     #   <p>The status of the objective metric for the training job:</p> <ul> <li> <p>Succeeded: The final objective metric for the training job was evaluated by the hyperparameter tuning job and used in the hyperparameter tuning process.</p> </li> </ul> <ul> <li> <p>Pending: The training job is in progress and evaluation of its final objective metric is pending.</p> </li> </ul> <ul> <li> <p>Failed: The final objective metric for the training job was not evaluated, and was not used in the hyperparameter tuning process. This typically occurs when the training job failed or did not emit an objective metric.</p> </li> </ul>
     #   @return [String]
     class HyperParameterTrainingJobSummary < Struct.new(
+      nil,
       :training_job_definition_name,
       :training_job_name,
       :training_job_arn,
@@ -15277,6 +15913,7 @@ module Aws::SageMaker
     #   <p>The volume size in GB of the data to be processed for hyperparameter optimization (optional).</p>
     #   @return [Integer]
     class HyperParameterTuningInstanceConfig < Struct.new(
+      nil,
       :instance_type,
       :instance_count,
       :volume_size_in_gb,
@@ -15293,6 +15930,7 @@ module Aws::SageMaker
     #   <p>The time in timestamp format that AMT detected model convergence, as defined by a lack of significant improvement over time based on criteria developed over a wide range of diverse benchmarking tests.</p>
     #   @return [Time]
     class HyperParameterTuningJobCompletionDetails < Struct.new(
+      nil,
       :number_of_training_jobs_objective_not_improving,
       :convergence_detected_time,
       keyword_init: true
@@ -15326,6 +15964,7 @@ module Aws::SageMaker
     #   <p>A value used to initialize a pseudo-random number generator. Setting a random seed and using the same seed later for the same tuning job will allow hyperparameter optimization to find more a consistent hyperparameter configuration between the two runs.</p>
     #   @return [Integer]
     class HyperParameterTuningJobConfig < Struct.new(
+      nil,
       :strategy,
       :strategy_config,
       :hyper_parameter_tuning_job_objective,
@@ -15344,6 +15983,7 @@ module Aws::SageMaker
     #   <p>The wall clock runtime in seconds used by your hyperparameter tuning job.</p>
     #   @return [Integer]
     class HyperParameterTuningJobConsumedResources < Struct.new(
+      nil,
       :runtime_in_seconds,
       keyword_init: true
     )
@@ -15358,6 +15998,7 @@ module Aws::SageMaker
     #   <p>The name of the metric to use for the objective metric.</p>
     #   @return [String]
     class HyperParameterTuningJobObjective < Struct.new(
+      nil,
       :type,
       :metric_name,
       keyword_init: true
@@ -15421,6 +16062,7 @@ module Aws::SageMaker
     #   <p>The tags associated with a hyperparameter tuning job. For more information see <a href="https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html">Tagging Amazon Web Services resources</a>.</p>
     #   @return [Array<Types::Tag>]
     class HyperParameterTuningJobSearchEntity < Struct.new(
+      nil,
       :hyper_parameter_tuning_job_name,
       :hyper_parameter_tuning_job_arn,
       :hyper_parameter_tuning_job_config,
@@ -15449,6 +16091,7 @@ module Aws::SageMaker
     #   <p>The configuration for the object that specifies the <code>Hyperband</code> strategy. This parameter is only supported for the <code>Hyperband</code> selection for <code>Strategy</code> within the <code>HyperParameterTuningJobConfig</code> API.</p>
     #   @return [Types::HyperbandStrategyConfig]
     class HyperParameterTuningJobStrategyConfig < Struct.new(
+      nil,
       :hyperband_strategy_config,
       keyword_init: true
     )
@@ -15487,6 +16130,7 @@ module Aws::SageMaker
     #   <p>The <a href="https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_ResourceLimits.html">ResourceLimits</a> object that specifies the maximum number of training jobs and parallel training jobs allowed for this tuning job.</p>
     #   @return [Types::ResourceLimits]
     class HyperParameterTuningJobSummary < Struct.new(
+      nil,
       :hyper_parameter_tuning_job_name,
       :hyper_parameter_tuning_job_arn,
       :hyper_parameter_tuning_job_status,
@@ -15510,6 +16154,7 @@ module Aws::SageMaker
     #   <p>Specifies one of the following:</p> <dl> <dt>IDENTICAL_DATA_AND_ALGORITHM</dt> <dd> <p>The new hyperparameter tuning job uses the same input data and training image as the parent tuning jobs. You can change the hyperparameter ranges to search and the maximum number of training jobs that the hyperparameter tuning job launches. You cannot use a new version of the training algorithm, unless the changes in the new version do not affect the algorithm itself. For example, changes that improve logging or adding support for a different data format are allowed. You can also change hyperparameters from tunable to static, and from static to tunable, but the total number of static plus tunable hyperparameters must remain the same as it is in all parent jobs. The objective metric for the new tuning job must be the same as for all parent jobs.</p> </dd> <dt>TRANSFER_LEARNING</dt> <dd> <p>The new hyperparameter tuning job can include input data, hyperparameter ranges, maximum number of concurrent training jobs, and maximum number of training jobs that are different than those of its parent hyperparameter tuning jobs. The training image can also be a different version from the version used in the parent hyperparameter tuning job. You can also change hyperparameters from tunable to static, and from static to tunable, but the total number of static plus tunable hyperparameters must remain the same as it is in all parent jobs. The objective metric for the new tuning job must be the same as for all parent jobs.</p> </dd> </dl>
     #   @return [String]
     class HyperParameterTuningJobWarmStartConfig < Struct.new(
+      nil,
       :parent_hyper_parameter_tuning_jobs,
       :warm_start_type,
       keyword_init: true
@@ -15537,6 +16182,7 @@ module Aws::SageMaker
     #   <p>A list containing the configuration(s) for one or more resources for processing hyperparameter jobs. These resources include compute instances and storage volumes to use in model training jobs launched by hyperparameter tuning jobs. The <code>AllocationStrategy</code> controls the order in which multiple configurations provided in <code>InstanceConfigs</code> are used.</p> <note> <p>If you only want to use a single instance configuration inside the <code>HyperParameterTuningResourceConfig</code> API, do not provide a value for <code>InstanceConfigs</code>. Instead, use <code>InstanceType</code>, <code>VolumeSizeInGB</code> and <code>InstanceCount</code>. If you use <code>InstanceConfigs</code>, do not provide values for <code>InstanceType</code>, <code>VolumeSizeInGB</code> or <code>InstanceCount</code>.</p> </note>
     #   @return [Array<Types::HyperParameterTuningInstanceConfig>]
     class HyperParameterTuningResourceConfig < Struct.new(
+      nil,
       :instance_type,
       :instance_count,
       :volume_size_in_gb,
@@ -15556,6 +16202,7 @@ module Aws::SageMaker
     #   <p>The maximum number of resources (such as epochs) that can be used by a training job launched by a hyperparameter tuning job. Once a job reaches the <code>MaxResource</code> value, it is stopped. If a value for <code>MaxResource</code> is not provided, and <code>Hyperband</code> is selected as the hyperparameter tuning strategy, <code>HyperbandTraining</code> attempts to infer <code>MaxResource</code> from the following keys (if present) in <a href="https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_HyperParameterTrainingJobDefinition.html#sagemaker-Type-HyperParameterTrainingJobDefinition-StaticHyperParameters">StaticsHyperParameters</a>:</p> <ul> <li> <p> <code>epochs</code> </p> </li> <li> <p> <code>numepochs</code> </p> </li> <li> <p> <code>n-epochs</code> </p> </li> <li> <p> <code>n_epochs</code> </p> </li> <li> <p> <code>num_epochs</code> </p> </li> </ul> <p>If <code>HyperbandStrategyConfig</code> is unable to infer a value for <code>MaxResource</code>, it generates a validation error. The maximum value is 20,000 epochs. All metrics that correspond to an objective metric are used to derive <a href="https://docs.aws.amazon.com/sagemaker/latest/dg/automatic-model-tuning-early-stopping.html">early stopping decisions</a>. For <a href="https://docs.aws.amazon.com/sagemaker/latest/dg/distributed-training.html">distributed</a> training jobs, ensure that duplicate metrics are not printed in the logs across the individual nodes in a training job. If multiple nodes are publishing duplicate or incorrect metrics, training jobs may make an incorrect stopping decision and stop the job prematurely. </p>
     #   @return [Integer]
     class HyperbandStrategyConfig < Struct.new(
+      nil,
       :min_resource,
       :max_resource,
       keyword_init: true
@@ -15574,6 +16221,7 @@ module Aws::SageMaker
     #   <p>The person or application which assumes the IAM identity.</p>
     #   @return [String]
     class IamIdentity < Struct.new(
+      nil,
       :arn,
       :principal_id,
       :source_identity,
@@ -15590,6 +16238,7 @@ module Aws::SageMaker
     #   <p>When <code>VpcSourceIp</code> is <code>Enabled</code> the worker's IP address when a task is rendered in private worker portal inside the VPC is added to the IAM policy as a <code>Condition</code> used to generate the Amazon S3 presigned URL. To render the task successfully Amazon S3 checks that the presigned URL is being accessed over an Amazon S3 VPC Endpoint, and that the worker's IP address matches the IP address in the IAM policy. To learn more about configuring private worker portal, see <a href="https://docs.aws.amazon.com/sagemaker/latest/dg/samurai-vpc-worker-portal.html">Use Amazon VPC mode from a private worker portal</a>.</p>
     #   @return [String]
     class IamPolicyConstraints < Struct.new(
+      nil,
       :source_ip,
       :vpc_source_ip,
       keyword_init: true
@@ -15608,6 +16257,7 @@ module Aws::SageMaker
     #   <p>The ARN of an Amazon Web Services Secrets Manager secret that stores the credentials from your identity provider, such as the client ID and secret, authorization URL, and token URL. </p>
     #   @return [String]
     class IdentityProviderOAuthSetting < Struct.new(
+      nil,
       :data_source_name,
       :status,
       :secret_arn,
@@ -15630,6 +16280,7 @@ module Aws::SageMaker
     #   <p>The maximum value in minutes that custom idle shutdown can be set to by the user.</p>
     #   @return [Integer]
     class IdleSettings < Struct.new(
+      nil,
       :lifecycle_management,
       :idle_timeout_in_minutes,
       :min_idle_timeout_in_minutes,
@@ -15665,6 +16316,7 @@ module Aws::SageMaker
     #   <p>When the image was last modified.</p>
     #   @return [Time]
     class Image < Struct.new(
+      nil,
       :creation_time,
       :description,
       :display_name,
@@ -15683,6 +16335,7 @@ module Aws::SageMaker
     #   <p>How long a job is allowed to run, or how many candidates a job is allowed to generate.</p>
     #   @return [Types::AutoMLJobCompletionCriteria]
     class ImageClassificationJobConfig < Struct.new(
+      nil,
       :completion_criteria,
       keyword_init: true
     )
@@ -15697,6 +16350,7 @@ module Aws::SageMaker
     #   <p>(Optional) Specifies an authentication configuration for the private docker registry where your model image is hosted. Specify a value for this property only if you specified <code>Vpc</code> as the value for the <code>RepositoryAccessMode</code> field, and the private Docker registry where the model image is hosted requires authentication.</p>
     #   @return [Types::RepositoryAuthConfig]
     class ImageConfig < Struct.new(
+      nil,
       :repository_access_mode,
       :repository_auth_config,
       keyword_init: true
@@ -15727,6 +16381,7 @@ module Aws::SageMaker
     #   <p>The version number.</p>
     #   @return [Integer]
     class ImageVersion < Struct.new(
+      nil,
       :creation_time,
       :failure_reason,
       :image_arn,
@@ -15776,6 +16431,7 @@ module Aws::SageMaker
     #   <p>Any tags associated with the hub content.</p>
     #   @return [Array<Types::Tag>]
     class ImportHubContentRequest < Struct.new(
+      nil,
       :hub_content_name,
       :hub_content_version,
       :hub_content_type,
@@ -15800,6 +16456,7 @@ module Aws::SageMaker
     #   <p>The ARN of the hub content that was imported.</p>
     #   @return [String]
     class ImportHubContentResponse < Struct.new(
+      nil,
       :hub_arn,
       :hub_content_arn,
       keyword_init: true
@@ -15815,6 +16472,7 @@ module Aws::SageMaker
     #   <p>Defines the capacity size, either as a number of inference component copies or a capacity percentage.</p>
     #   @return [Integer]
     class InferenceComponentCapacitySize < Struct.new(
+      nil,
       :type,
       :value,
       keyword_init: true
@@ -15836,6 +16494,7 @@ module Aws::SageMaker
     #   <p>The maximum MB of memory to allocate to run a model that you assign to an inference component.</p>
     #   @return [Integer]
     class InferenceComponentComputeResourceRequirements < Struct.new(
+      nil,
       :number_of_cpu_cores_required,
       :number_of_accelerator_devices_required,
       :min_memory_required_in_mb,
@@ -15856,6 +16515,7 @@ module Aws::SageMaker
     #   <p>The environment variables to set in the Docker container. Each key and value in the Environment string-to-string map can have length of up to 1024. We support up to 16 entries in the map.</p>
     #   @return [Hash<String, String>]
     class InferenceComponentContainerSpecification < Struct.new(
+      nil,
       :image,
       :artifact_url,
       :environment,
@@ -15875,6 +16535,7 @@ module Aws::SageMaker
     #   <p>The environment variables to set in the Docker container.</p>
     #   @return [Hash<String, String>]
     class InferenceComponentContainerSpecificationSummary < Struct.new(
+      nil,
       :deployed_image,
       :artifact_url,
       :environment,
@@ -15891,6 +16552,7 @@ module Aws::SageMaker
     #   <p>Automatic rollback configuration for handling endpoint deployment failures and recovery.</p>
     #   @return [Types::AutoRollbackConfig]
     class InferenceComponentDeploymentConfig < Struct.new(
+      nil,
       :rolling_update_policy,
       :auto_rollback_configuration,
       keyword_init: true
@@ -15912,6 +16574,7 @@ module Aws::SageMaker
     #   <p>The batch size for a rollback to the old endpoint fleet. If this field is absent, the value is set to the default, which is 100% of the total capacity. When the default is used, SageMaker AI provisions the entire capacity of the old fleet at once during rollback.</p>
     #   @return [Types::InferenceComponentCapacitySize]
     class InferenceComponentRollingUpdatePolicy < Struct.new(
+      nil,
       :maximum_batch_size,
       :wait_interval_in_seconds,
       :maximum_execution_timeout_in_seconds,
@@ -15926,6 +16589,7 @@ module Aws::SageMaker
     #   <p>The number of runtime copies of the model container to deploy with the inference component. Each copy can serve inference requests.</p>
     #   @return [Integer]
     class InferenceComponentRuntimeConfig < Struct.new(
+      nil,
       :copy_count,
       keyword_init: true
     )
@@ -15940,6 +16604,7 @@ module Aws::SageMaker
     #   <p>The number of runtime copies of the model container that are currently deployed.</p>
     #   @return [Integer]
     class InferenceComponentRuntimeConfigSummary < Struct.new(
+      nil,
       :desired_copy_count,
       :current_copy_count,
       keyword_init: true
@@ -15964,6 +16629,7 @@ module Aws::SageMaker
     #   <p>The name of an existing inference component that is to contain the inference component that you're creating with your request.</p> <p>Specify this parameter only if your request is meant to create an adapter inference component. An adapter inference component contains the path to an adapter model. The purpose of the adapter model is to tailor the inference output of a base foundation model, which is hosted by the base inference component. The adapter inference component uses the compute resources that you assigned to the base inference component.</p> <p>When you create an adapter inference component, use the <code>Container</code> parameter to specify the location of the adapter artifacts. In the parameter value, use the <code>ArtifactUrl</code> parameter of the <code>InferenceComponentContainerSpecification</code> data type.</p> <p>Before you can create an adapter inference component, you must have an existing inference component that contains the foundation model that you want to adapt.</p>
     #   @return [String]
     class InferenceComponentSpecification < Struct.new(
+      nil,
       :model_name,
       :container,
       :startup_parameters,
@@ -15991,6 +16657,7 @@ module Aws::SageMaker
     #   <p>The name of the base inference component that contains this inference component.</p>
     #   @return [String]
     class InferenceComponentSpecificationSummary < Struct.new(
+      nil,
       :model_name,
       :container,
       :startup_parameters,
@@ -16009,6 +16676,7 @@ module Aws::SageMaker
     #   <p>The timeout value, in seconds, for your inference container to pass health check by Amazon S3 Hosting. For more information about health check, see <a href="https://docs.aws.amazon.com/sagemaker/latest/dg/your-algorithms-inference-code.html#your-algorithms-inference-algo-ping-requests">How Your Container Should Respond to Health Check (Ping) Requests</a>.</p>
     #   @return [Integer]
     class InferenceComponentStartupParameters < Struct.new(
+      nil,
       :model_data_download_timeout_in_seconds,
       :container_startup_health_check_timeout_in_seconds,
       keyword_init: true
@@ -16042,6 +16710,7 @@ module Aws::SageMaker
     #   <p>The time when the inference component was last updated.</p>
     #   @return [Time]
     class InferenceComponentSummary < Struct.new(
+      nil,
       :creation_time,
       :inference_component_arn,
       :inference_component_name,
@@ -16060,6 +16729,7 @@ module Aws::SageMaker
     #   <p>How containers in a multi-container are run. The following values are valid.</p> <ul> <li> <p> <code>SERIAL</code> - Containers run as a serial pipeline.</p> </li> <li> <p> <code>DIRECT</code> - Only the individual container that you specify is run.</p> </li> </ul>
     #   @return [String]
     class InferenceExecutionConfig < Struct.new(
+      nil,
       :mode,
       keyword_init: true
     )
@@ -16077,6 +16747,7 @@ module Aws::SageMaker
     #   <p>Configuration specifying how to treat different headers. If no headers are specified Amazon SageMaker AI will by default base64 encode when capturing the data.</p>
     #   @return [Types::CaptureContentTypeHeader]
     class InferenceExperimentDataStorageConfig < Struct.new(
+      nil,
       :destination,
       :kms_key,
       :content_type,
@@ -16093,6 +16764,7 @@ module Aws::SageMaker
     #   <p>The timestamp at which the inference experiment ended or will end.</p>
     #   @return [Time]
     class InferenceExperimentSchedule < Struct.new(
+      nil,
       :start_time,
       :end_time,
       keyword_init: true
@@ -16132,6 +16804,7 @@ module Aws::SageMaker
     #   <p> The ARN of the IAM role that Amazon SageMaker can assume to access model artifacts and container images, and manage Amazon SageMaker Inference endpoints for model deployment. </p>
     #   @return [String]
     class InferenceExperimentSummary < Struct.new(
+      nil,
       :name,
       :type,
       :schedule,
@@ -16152,6 +16825,7 @@ module Aws::SageMaker
     #   <p>The ARN of the hub content for which deployment access is allowed.</p>
     #   @return [String]
     class InferenceHubAccessConfig < Struct.new(
+      nil,
       :hub_content_arn,
       keyword_init: true
     )
@@ -16166,6 +16840,7 @@ module Aws::SageMaker
     #   <p>The expected model latency at maximum invocations per minute for the instance.</p>
     #   @return [Integer]
     class InferenceMetrics < Struct.new(
+      nil,
       :max_invocations,
       :model_latency,
       keyword_init: true
@@ -16193,6 +16868,7 @@ module Aws::SageMaker
     #   <p>A timestamp that shows when the benchmark started.</p>
     #   @return [Time]
     class InferenceRecommendation < Struct.new(
+      nil,
       :recommendation_id,
       :metrics,
       :endpoint_configuration,
@@ -16245,6 +16921,7 @@ module Aws::SageMaker
     #   <p>The Amazon Resource Name (ARN) of a versioned model package.</p>
     #   @return [String]
     class InferenceRecommendationsJob < Struct.new(
+      nil,
       :job_name,
       :job_description,
       :job_type,
@@ -16277,6 +16954,7 @@ module Aws::SageMaker
     #   <p>The details for a specific benchmark.</p>
     #   @return [Types::RecommendationJobInferenceBenchmark]
     class InferenceRecommendationsJobStep < Struct.new(
+      nil,
       :step_type,
       :job_name,
       :status,
@@ -16303,6 +16981,7 @@ module Aws::SageMaker
     #   <p>The supported MIME types for the output data.</p>
     #   @return [Array<String>]
     class InferenceSpecification < Struct.new(
+      nil,
       :containers,
       :supported_transform_instance_types,
       :supported_realtime_inference_instance_types,
@@ -16318,6 +16997,7 @@ module Aws::SageMaker
     #   <p>Enables an infrastructure health check.</p>
     #   @return [Boolean]
     class InfraCheckConfig < Struct.new(
+      nil,
       :enable_infra_check,
       keyword_init: true
     )
@@ -16338,6 +17018,7 @@ module Aws::SageMaker
     #   <p>Specifies the framework version to use. This API field is only supported for the MXNet, PyTorch, TensorFlow and TensorFlow Lite frameworks.</p> <p>For information about framework versions supported for cloud targets and edge devices, see <a href="https://docs.aws.amazon.com/sagemaker/latest/dg/neo-supported-cloud.html">Cloud Supported Instance Types and Frameworks</a> and <a href="https://docs.aws.amazon.com/sagemaker/latest/dg/neo-supported-devices-edge-frameworks.html">Edge Supported Frameworks</a>.</p>
     #   @return [String]
     class InputConfig < Struct.new(
+      nil,
       :s3_uri,
       :data_input_config,
       :framework,
@@ -16358,6 +17039,7 @@ module Aws::SageMaker
     #   <p>Specifies the name of the instance group.</p>
     #   @return [String]
     class InstanceGroup < Struct.new(
+      nil,
       :instance_type,
       :instance_count,
       :instance_group_name,
@@ -16386,6 +17068,7 @@ module Aws::SageMaker
     #   <p>If you use a custom Amazon Machine Image (AMI) for the instance group, this field shows the ID of the custom AMI.</p>
     #   @return [String]
     class InstanceGroupMetadata < Struct.new(
+      nil,
       :failure_message,
       :availability_zone_id,
       :capacity_reservation,
@@ -16408,6 +17091,7 @@ module Aws::SageMaker
     #   <p>An error message describing why the scaling operation failed, if applicable.</p>
     #   @return [String]
     class InstanceGroupScalingMetadata < Struct.new(
+      nil,
       :instance_count,
       :target_count,
       :failure_message,
@@ -16436,6 +17120,7 @@ module Aws::SageMaker
     #   <p>The unique logical identifier of the node within the cluster. The ID used here is the same object as in the <code>BatchAddClusterNodes</code> API.</p>
     #   @return [String]
     class InstanceMetadata < Struct.new(
+      nil,
       :customer_eni,
       :additional_enis,
       :capacity_reservation,
@@ -16452,6 +17137,7 @@ module Aws::SageMaker
     #   <p>Indicates the minimum IMDS version that the notebook instance supports. When passed as part of <code>CreateNotebookInstance</code>, if no value is selected, then it defaults to IMDSv1. This means that both IMDSv1 and IMDSv2 are supported. If passed as part of <code>UpdateNotebookInstance</code>, there is no default.</p>
     #   @return [String]
     class InstanceMetadataServiceConfiguration < Struct.new(
+      nil,
       :minimum_instance_metadata_service_version,
       keyword_init: true
     )
@@ -16466,6 +17152,7 @@ module Aws::SageMaker
     #   <p>A list of specifications for how instances should be placed on specific UltraServers. Maximum of 10 items is supported.</p>
     #   @return [Array<Types::PlacementSpecification>]
     class InstancePlacementConfig < Struct.new(
+      nil,
       :enable_multiple_jobs,
       :placement_specifications,
       keyword_init: true
@@ -16487,6 +17174,7 @@ module Aws::SageMaker
     #   <p>The scale that hyperparameter tuning uses to search the hyperparameter range. For information about choosing a hyperparameter scale, see <a href="https://docs.aws.amazon.com/sagemaker/latest/dg/automatic-model-tuning-define-ranges.html#scaling-type">Hyperparameter Scaling</a>. One of the following values:</p> <dl> <dt>Auto</dt> <dd> <p>SageMaker hyperparameter tuning chooses the best scale for the hyperparameter.</p> </dd> <dt>Linear</dt> <dd> <p>Hyperparameter tuning searches the values in the hyperparameter range by using a linear scale.</p> </dd> <dt>Logarithmic</dt> <dd> <p>Hyperparameter tuning searches the values in the hyperparameter range by using a logarithmic scale.</p> <p>Logarithmic scaling works only for ranges that have only values greater than 0.</p> </dd> </dl>
     #   @return [String]
     class IntegerParameterRange < Struct.new(
+      nil,
       :name,
       :min_value,
       :max_value,
@@ -16504,6 +17192,7 @@ module Aws::SageMaker
     #   <p>The maximum integer value allowed.</p>
     #   @return [String]
     class IntegerParameterRangeSpecification < Struct.new(
+      nil,
       :min_value,
       :max_value,
       keyword_init: true
@@ -16519,6 +17208,7 @@ module Aws::SageMaker
     #   <p>The configuration used to run the application image container.</p>
     #   @return [Types::ContainerConfig]
     class JupyterLabAppImageConfig < Struct.new(
+      nil,
       :file_system_config,
       :container_config,
       keyword_init: true
@@ -16549,6 +17239,7 @@ module Aws::SageMaker
     #   <p>The lifecycle configuration that runs before the default lifecycle configuration. It can override changes made in the default lifecycle configuration.</p>
     #   @return [String]
     class JupyterLabAppSettings < Struct.new(
+      nil,
       :default_resource_spec,
       :custom_images,
       :lifecycle_config_arns,
@@ -16572,6 +17263,7 @@ module Aws::SageMaker
     #   <p>A list of Git repositories that SageMaker AI automatically displays to users for cloning in the JupyterServer application.</p>
     #   @return [Array<Types::CodeRepository>]
     class JupyterServerAppSettings < Struct.new(
+      nil,
       :default_resource_spec,
       :lifecycle_config_arns,
       :code_repositories,
@@ -16585,6 +17277,7 @@ module Aws::SageMaker
     #   <p>Describes whether the document querying feature is enabled or disabled in the Canvas application.</p>
     #   @return [String]
     class KendraSettings < Struct.new(
+      nil,
       :status,
       keyword_init: true
     )
@@ -16602,6 +17295,7 @@ module Aws::SageMaker
     #   <p> The Amazon Resource Name (ARN) of the Lifecycle Configurations attached to the the user profile or domain.</p> <note> <p>To remove a Lifecycle Config, you must set <code>LifecycleConfigArns</code> to an empty list.</p> </note>
     #   @return [Array<String>]
     class KernelGatewayAppSettings < Struct.new(
+      nil,
       :default_resource_spec,
       :custom_images,
       :lifecycle_config_arns,
@@ -16618,6 +17312,7 @@ module Aws::SageMaker
     #   <p>The Amazon Elastic File System storage configuration for a SageMaker AI image.</p>
     #   @return [Types::FileSystemConfig]
     class KernelGatewayImageConfig < Struct.new(
+      nil,
       :kernel_specs,
       :file_system_config,
       keyword_init: true
@@ -16633,6 +17328,7 @@ module Aws::SageMaker
     #   <p>The display name of the kernel.</p>
     #   @return [String]
     class KernelSpec < Struct.new(
+      nil,
       :name,
       :display_name,
       keyword_init: true
@@ -16657,6 +17353,7 @@ module Aws::SageMaker
     #   <p>The total number of objects not yet labeled.</p>
     #   @return [Integer]
     class LabelCounters < Struct.new(
+      nil,
       :total_labeled,
       :human_labeled,
       :machine_labeled,
@@ -16678,6 +17375,7 @@ module Aws::SageMaker
     #   <p>The total number of tasks in the labeling job.</p>
     #   @return [Integer]
     class LabelCountersForWorkteam < Struct.new(
+      nil,
       :human_labeled,
       :pending_human,
       :total,
@@ -16697,6 +17395,7 @@ module Aws::SageMaker
     #   <p>Provides configuration information for a labeling job.</p>
     #   @return [Types::LabelingJobResourceConfig]
     class LabelingJobAlgorithmsConfig < Struct.new(
+      nil,
       :labeling_job_algorithm_specification_arn,
       :initial_active_learning_model_arn,
       :labeling_job_resource_config,
@@ -16710,6 +17409,7 @@ module Aws::SageMaker
     #   <p>Declares that your content is free of personally identifiable information or adult content. SageMaker may restrict the Amazon Mechanical Turk workers that can view your task based on this information.</p>
     #   @return [Array<String>]
     class LabelingJobDataAttributes < Struct.new(
+      nil,
       :content_classifiers,
       keyword_init: true
     )
@@ -16724,6 +17424,7 @@ module Aws::SageMaker
     #   <p>An Amazon SNS data source used for streaming labeling jobs. To learn more, see <a href="https://docs.aws.amazon.com/sagemaker/latest/dg/sms-streaming-labeling-job.html#sms-streaming-how-it-works-send-data">Send Data to a Streaming Labeling Job</a>. </p>
     #   @return [Types::LabelingJobSnsDataSource]
     class LabelingJobDataSource < Struct.new(
+      nil,
       :s3_data_source,
       :sns_data_source,
       keyword_init: true
@@ -16751,6 +17452,7 @@ module Aws::SageMaker
     #   <p>The configured number of workers per data object.</p>
     #   @return [Integer]
     class LabelingJobForWorkteamSummary < Struct.new(
+      nil,
       :labeling_job_name,
       :job_reference_code,
       :work_requester_account_id,
@@ -16770,6 +17472,7 @@ module Aws::SageMaker
     #   <p>Attributes of the data specified by the customer.</p>
     #   @return [Types::LabelingJobDataAttributes]
     class LabelingJobInputConfig < Struct.new(
+      nil,
       :data_source,
       :data_attributes,
       keyword_init: true
@@ -16785,6 +17488,7 @@ module Aws::SageMaker
     #   <p>The Amazon Resource Name (ARN) for the most recent SageMaker model trained as part of automated data labeling. </p>
     #   @return [String]
     class LabelingJobOutput < Struct.new(
+      nil,
       :output_dataset_s3_uri,
       :final_active_learning_model_arn,
       keyword_init: true
@@ -16803,6 +17507,7 @@ module Aws::SageMaker
     #   <p>An Amazon Simple Notification Service (Amazon SNS) output topic ARN. Provide a <code>SnsTopicArn</code> if you want to do real time chaining to another streaming job and receive an Amazon SNS notifications each time a data object is submitted by a worker.</p> <p>If you provide an <code>SnsTopicArn</code> in <code>OutputConfig</code>, when workers complete labeling tasks, Ground Truth will send labeling task output data to the SNS output topic you specify here. </p> <p>To learn more, see <a href="https://docs.aws.amazon.com/sagemaker/latest/dg/sms-streaming-labeling-job.html#sms-streaming-how-it-works-output-data">Receive Output Data from a Streaming Labeling Job</a>. </p>
     #   @return [String]
     class LabelingJobOutputConfig < Struct.new(
+      nil,
       :s3_output_path,
       :kms_key_id,
       :sns_topic_arn,
@@ -16819,6 +17524,7 @@ module Aws::SageMaker
     #   <p>Specifies an Amazon Virtual Private Cloud (VPC) that your SageMaker jobs, hosted models, and compute resources have access to. You can control access to and from your resources by configuring a VPC. For more information, see <a href="https://docs.aws.amazon.com/sagemaker/latest/dg/infrastructure-give-access.html">Give SageMaker Access to Resources in your Amazon VPC</a>. </p>
     #   @return [Types::VpcConfig]
     class LabelingJobResourceConfig < Struct.new(
+      nil,
       :volume_kms_key_id,
       :vpc_config,
       keyword_init: true
@@ -16831,6 +17537,7 @@ module Aws::SageMaker
     #   <p>The Amazon S3 location of the manifest file that describes the input data objects. </p> <p>The input manifest file referenced in <code>ManifestS3Uri</code> must contain one of the following keys: <code>source-ref</code> or <code>source</code>. The value of the keys are interpreted as follows:</p> <ul> <li> <p> <code>source-ref</code>: The source of the object is the Amazon S3 object specified in the value. Use this value when the object is a binary object, such as an image.</p> </li> <li> <p> <code>source</code>: The source of the object is the value. Use this value when the object is a text value.</p> </li> </ul> <p>If you are a new user of Ground Truth, it is recommended you review <a href="https://docs.aws.amazon.com/sagemaker/latest/dg/sms-input-data-input-manifest.html">Use an Input Manifest File </a> in the Amazon SageMaker Developer Guide to learn how to create an input manifest file.</p>
     #   @return [String]
     class LabelingJobS3DataSource < Struct.new(
+      nil,
       :manifest_s3_uri,
       keyword_init: true
     )
@@ -16842,6 +17549,7 @@ module Aws::SageMaker
     #   <p>The Amazon SNS input topic Amazon Resource Name (ARN). Specify the ARN of the input topic you will use to send new data objects to a streaming labeling job.</p>
     #   @return [String]
     class LabelingJobSnsDataSource < Struct.new(
+      nil,
       :sns_topic_arn,
       keyword_init: true
     )
@@ -16856,6 +17564,7 @@ module Aws::SageMaker
     #   <p>The maximum number of input data objects that should be labeled.</p>
     #   @return [Integer]
     class LabelingJobStoppingConditions < Struct.new(
+      nil,
       :max_human_labeled_object_count,
       :max_percentage_of_input_dataset_labeled,
       keyword_init: true
@@ -16901,6 +17610,7 @@ module Aws::SageMaker
     #   <p>Input configuration for the labeling job.</p>
     #   @return [Types::LabelingJobInputConfig]
     class LabelingJobSummary < Struct.new(
+      nil,
       :labeling_job_name,
       :labeling_job_arn,
       :creation_time,
@@ -16926,6 +17636,7 @@ module Aws::SageMaker
     #   <p>A list of the output parameters of the Lambda step.</p>
     #   @return [Array<Types::OutputParameter>]
     class LambdaStepMetadata < Struct.new(
+      nil,
       :arn,
       :output_parameters,
       keyword_init: true
@@ -16941,6 +17652,7 @@ module Aws::SageMaker
     #   <p>If the update wasn't successful, indicates the reason why it failed.</p>
     #   @return [String]
     class LastUpdateStatus < Struct.new(
+      nil,
       :status,
       :failure_reason,
       keyword_init: true
@@ -16965,6 +17677,7 @@ module Aws::SageMaker
     #   <p>The last modified time of the lineage group summary.</p>
     #   @return [Time]
     class LineageGroupSummary < Struct.new(
+      nil,
       :lineage_group_arn,
       :lineage_group_name,
       :display_name,
@@ -17000,6 +17713,7 @@ module Aws::SageMaker
     #   <p>The maximum number of actions to return in the response. The default value is 10.</p>
     #   @return [Integer]
     class ListActionsRequest < Struct.new(
+      nil,
       :source_uri,
       :action_type,
       :created_after,
@@ -17020,6 +17734,7 @@ module Aws::SageMaker
     #   <p>A token for getting the next set of actions, if there are any.</p>
     #   @return [String]
     class ListActionsResponse < Struct.new(
+      nil,
       :action_summaries,
       :next_token,
       keyword_init: true
@@ -17049,6 +17764,7 @@ module Aws::SageMaker
     #   <p>The sort order for the results. The default is <code>Ascending</code>.</p>
     #   @return [String]
     class ListAlgorithmsInput < Struct.new(
+      nil,
       :creation_time_after,
       :creation_time_before,
       :max_results,
@@ -17068,6 +17784,7 @@ module Aws::SageMaker
     #   <p>If the response is truncated, SageMaker returns this token. To retrieve the next set of algorithms, use it in the subsequent request.</p>
     #   @return [String]
     class ListAlgorithmsOutput < Struct.new(
+      nil,
       :algorithm_summary_list,
       :next_token,
       keyword_init: true
@@ -17091,6 +17808,7 @@ module Aws::SageMaker
     #   <p>If the previous call to <code>ListAliases</code> didn't return the full set of aliases, the call returns a token for retrieving the next set of aliases.</p>
     #   @return [String]
     class ListAliasesRequest < Struct.new(
+      nil,
       :image_name,
       :alias,
       :version,
@@ -17108,6 +17826,7 @@ module Aws::SageMaker
     #   <p>A token for getting the next set of aliases, if more aliases exist.</p>
     #   @return [String]
     class ListAliasesResponse < Struct.new(
+      nil,
       :sage_maker_image_version_aliases,
       :next_token,
       keyword_init: true
@@ -17143,6 +17862,7 @@ module Aws::SageMaker
     #   <p>The sort order. The default value is <code>Descending</code>.</p>
     #   @return [String]
     class ListAppImageConfigsRequest < Struct.new(
+      nil,
       :max_results,
       :next_token,
       :name_contains,
@@ -17164,6 +17884,7 @@ module Aws::SageMaker
     #   <p>A list of AppImageConfigs and their properties.</p>
     #   @return [Array<Types::AppImageConfigDetails>]
     class ListAppImageConfigsResponse < Struct.new(
+      nil,
       :next_token,
       :app_image_configs,
       keyword_init: true
@@ -17193,6 +17914,7 @@ module Aws::SageMaker
     #   <p>A parameter to search by space name. If <code>UserProfileNameEquals</code> is set, then this value cannot be set.</p>
     #   @return [String]
     class ListAppsRequest < Struct.new(
+      nil,
       :next_token,
       :max_results,
       :sort_order,
@@ -17212,6 +17934,7 @@ module Aws::SageMaker
     #   <p>If the previous response was truncated, you will receive this token. Use it in your next request to receive the next set of results.</p>
     #   @return [String]
     class ListAppsResponse < Struct.new(
+      nil,
       :apps,
       :next_token,
       keyword_init: true
@@ -17244,6 +17967,7 @@ module Aws::SageMaker
     #   <p>The maximum number of artifacts to return in the response. The default value is 10.</p>
     #   @return [Integer]
     class ListArtifactsRequest < Struct.new(
+      nil,
       :source_uri,
       :artifact_type,
       :created_after,
@@ -17264,6 +17988,7 @@ module Aws::SageMaker
     #   <p>A token for getting the next set of artifacts, if there are any.</p>
     #   @return [String]
     class ListArtifactsResponse < Struct.new(
+      nil,
       :artifact_summaries,
       :next_token,
       keyword_init: true
@@ -17305,6 +18030,7 @@ module Aws::SageMaker
     #   <p>The maximum number of associations to return in the response. The default value is 10.</p>
     #   @return [Integer]
     class ListAssociationsRequest < Struct.new(
+      nil,
       :source_arn,
       :destination_arn,
       :source_type,
@@ -17328,6 +18054,7 @@ module Aws::SageMaker
     #   <p>A token for getting the next set of associations, if there are any.</p>
     #   @return [String]
     class ListAssociationsResponse < Struct.new(
+      nil,
       :association_summaries,
       :next_token,
       keyword_init: true
@@ -17366,6 +18093,7 @@ module Aws::SageMaker
     #   <p>If the previous response was truncated, you receive this token. Use it in your next request to receive the next set of results.</p>
     #   @return [String]
     class ListAutoMLJobsRequest < Struct.new(
+      nil,
       :creation_time_after,
       :creation_time_before,
       :last_modified_time_after,
@@ -17388,6 +18116,7 @@ module Aws::SageMaker
     #   <p>If the previous response was truncated, you receive this token. Use it in your next request to receive the next set of results.</p>
     #   @return [String]
     class ListAutoMLJobsResponse < Struct.new(
+      nil,
       :auto_ml_job_summaries,
       :next_token,
       keyword_init: true
@@ -17417,6 +18146,7 @@ module Aws::SageMaker
     #   <p>If the previous response was truncated, you receive this token. Use it in your next request to receive the next set of results.</p>
     #   @return [String]
     class ListCandidatesForAutoMLJobRequest < Struct.new(
+      nil,
       :auto_ml_job_name,
       :status_equals,
       :candidate_name_equals,
@@ -17436,6 +18166,7 @@ module Aws::SageMaker
     #   <p>If the previous response was truncated, you receive this token. Use it in your next request to receive the next set of results.</p>
     #   @return [String]
     class ListCandidatesForAutoMLJobResponse < Struct.new(
+      nil,
       :candidates,
       :next_token,
       keyword_init: true
@@ -17474,6 +18205,7 @@ module Aws::SageMaker
     #   <p>A token to retrieve the next set of results. This token is obtained from the output of a previous <code>ListClusterEvents</code> call.</p>
     #   @return [String]
     class ListClusterEventsRequest < Struct.new(
+      nil,
       :cluster_name,
       :instance_group_name,
       :node_id,
@@ -17496,6 +18228,7 @@ module Aws::SageMaker
     #   <p>A list of event summaries matching the specified criteria.</p>
     #   @return [Array<Types::ClusterEventSummary>]
     class ListClusterEventsResponse < Struct.new(
+      nil,
       :next_token,
       :events,
       keyword_init: true
@@ -17531,6 +18264,7 @@ module Aws::SageMaker
     #   <p>Specifies whether to include nodes that are still being provisioned in the response. When set to true, the response includes all nodes regardless of their provisioning status. When set to <code>False</code> (default), only nodes with assigned <code>InstanceIds</code> are returned.</p>
     #   @return [Boolean]
     class ListClusterNodesRequest < Struct.new(
+      nil,
       :cluster_name,
       :creation_time_after,
       :creation_time_before,
@@ -17552,6 +18286,7 @@ module Aws::SageMaker
     #   <p>The summaries of listed instances in a SageMaker HyperPod cluster</p>
     #   @return [Array<Types::ClusterNodeSummary>]
     class ListClusterNodesResponse < Struct.new(
+      nil,
       :next_token,
       :cluster_node_summaries,
       keyword_init: true
@@ -17587,6 +18322,7 @@ module Aws::SageMaker
     #   <p>The maximum number of cluster policies to list.</p>
     #   @return [Integer]
     class ListClusterSchedulerConfigsRequest < Struct.new(
+      nil,
       :created_after,
       :created_before,
       :name_contains,
@@ -17608,6 +18344,7 @@ module Aws::SageMaker
     #   <p>If the previous response was truncated, you will receive this token. Use it in your next request to receive the next set of results.</p>
     #   @return [String]
     class ListClusterSchedulerConfigsResponse < Struct.new(
+      nil,
       :cluster_scheduler_config_summaries,
       :next_token,
       keyword_init: true
@@ -17640,6 +18377,7 @@ module Aws::SageMaker
     #   <p>The Amazon Resource Name (ARN); of the training plan to filter clusters by. For more information about reserving GPU capacity for your SageMaker HyperPod clusters using Amazon SageMaker Training Plan, see <code> <a href="https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_CreateTrainingPlan.html">CreateTrainingPlan</a> </code>.</p>
     #   @return [String]
     class ListClustersRequest < Struct.new(
+      nil,
       :creation_time_after,
       :creation_time_before,
       :max_results,
@@ -17660,6 +18398,7 @@ module Aws::SageMaker
     #   <p>The summaries of listed SageMaker HyperPod clusters.</p>
     #   @return [Array<Types::ClusterSummary>]
     class ListClustersResponse < Struct.new(
+      nil,
       :next_token,
       :cluster_summaries,
       keyword_init: true
@@ -17695,6 +18434,7 @@ module Aws::SageMaker
     #   <p>The sort order for results. The default is <code>Ascending</code>.</p>
     #   @return [String]
     class ListCodeRepositoriesInput < Struct.new(
+      nil,
       :creation_time_after,
       :creation_time_before,
       :last_modified_time_after,
@@ -17716,6 +18456,7 @@ module Aws::SageMaker
     #   <p>If the result of a <code>ListCodeRepositoriesOutput</code> request was truncated, the response includes a <code>NextToken</code>. To get the next set of Git repositories, use the token in the next request.</p>
     #   @return [String]
     class ListCodeRepositoriesOutput < Struct.new(
+      nil,
       :code_repository_summary_list,
       :next_token,
       keyword_init: true
@@ -17754,6 +18495,7 @@ module Aws::SageMaker
     #   <p>The sort order for results. The default is <code>Ascending</code>.</p>
     #   @return [String]
     class ListCompilationJobsRequest < Struct.new(
+      nil,
       :next_token,
       :max_results,
       :creation_time_after,
@@ -17776,6 +18518,7 @@ module Aws::SageMaker
     #   <p>If the response is truncated, Amazon SageMaker AI returns this <code>NextToken</code>. To retrieve the next set of model compilation jobs, use this token in the next request.</p>
     #   @return [String]
     class ListCompilationJobsResponse < Struct.new(
+      nil,
       :compilation_job_summaries,
       :next_token,
       keyword_init: true
@@ -17811,6 +18554,7 @@ module Aws::SageMaker
     #   <p>The maximum number of compute allocation definitions to list.</p>
     #   @return [Integer]
     class ListComputeQuotasRequest < Struct.new(
+      nil,
       :created_after,
       :created_before,
       :name_contains,
@@ -17832,6 +18576,7 @@ module Aws::SageMaker
     #   <p>If the previous response was truncated, you will receive this token. Use it in your next request to receive the next set of results.</p>
     #   @return [String]
     class ListComputeQuotasResponse < Struct.new(
+      nil,
       :compute_quota_summaries,
       :next_token,
       keyword_init: true
@@ -17864,6 +18609,7 @@ module Aws::SageMaker
     #   <p>The maximum number of contexts to return in the response. The default value is 10.</p>
     #   @return [Integer]
     class ListContextsRequest < Struct.new(
+      nil,
       :source_uri,
       :context_type,
       :created_after,
@@ -17884,6 +18630,7 @@ module Aws::SageMaker
     #   <p>A token for getting the next set of contexts, if there are any.</p>
     #   @return [String]
     class ListContextsResponse < Struct.new(
+      nil,
       :context_summaries,
       :next_token,
       keyword_init: true
@@ -17916,6 +18663,7 @@ module Aws::SageMaker
     #   <p>A filter that returns only data quality monitoring job definitions created after the specified time.</p>
     #   @return [Time]
     class ListDataQualityJobDefinitionsRequest < Struct.new(
+      nil,
       :endpoint_name,
       :sort_by,
       :sort_order,
@@ -17936,6 +18684,7 @@ module Aws::SageMaker
     #   <p>If the result of the previous <code>ListDataQualityJobDefinitions</code> request was truncated, the response includes a <code>NextToken</code>. To retrieve the next set of data quality monitoring job definitions, use the token in the next request.</p>
     #   @return [String]
     class ListDataQualityJobDefinitionsResponse < Struct.new(
+      nil,
       :job_definition_summaries,
       :next_token,
       keyword_init: true
@@ -17971,6 +18720,7 @@ module Aws::SageMaker
     #   <p>What direction to sort in.</p>
     #   @return [String]
     class ListDeviceFleetsRequest < Struct.new(
+      nil,
       :next_token,
       :max_results,
       :creation_time_after,
@@ -17992,6 +18742,7 @@ module Aws::SageMaker
     #   <p>The response from the last list when returning a list large enough to need tokening.</p>
     #   @return [String]
     class ListDeviceFleetsResponse < Struct.new(
+      nil,
       :device_fleet_summaries,
       :next_token,
       keyword_init: true
@@ -18015,6 +18766,7 @@ module Aws::SageMaker
     #   <p>Filter for fleets containing this name in their device fleet name.</p>
     #   @return [String]
     class ListDevicesRequest < Struct.new(
+      nil,
       :next_token,
       :max_results,
       :latest_heartbeat_after,
@@ -18032,6 +18784,7 @@ module Aws::SageMaker
     #   <p>The response from the last list when returning a list large enough to need tokening.</p>
     #   @return [String]
     class ListDevicesResponse < Struct.new(
+      nil,
       :device_summaries,
       :next_token,
       keyword_init: true
@@ -18046,6 +18799,7 @@ module Aws::SageMaker
     #   <p>This parameter defines the maximum number of results that can be return in a single response. The <code>MaxResults</code> parameter is an upper bound, not a target. If there are more results available than the value specified, a <code>NextToken</code> is provided in the response. The <code>NextToken</code> indicates that the user should get the next set of results by providing this token as a part of a subsequent call. The default value for <code>MaxResults</code> is 10.</p>
     #   @return [Integer]
     class ListDomainsRequest < Struct.new(
+      nil,
       :next_token,
       :max_results,
       keyword_init: true
@@ -18060,6 +18814,7 @@ module Aws::SageMaker
     #   <p>If the previous response was truncated, you will receive this token. Use it in your next request to receive the next set of results.</p>
     #   @return [String]
     class ListDomainsResponse < Struct.new(
+      nil,
       :domains,
       :next_token,
       keyword_init: true
@@ -18098,6 +18853,7 @@ module Aws::SageMaker
     #   <p>The direction of the sorting (ascending or descending).</p>
     #   @return [String]
     class ListEdgeDeploymentPlansRequest < Struct.new(
+      nil,
       :next_token,
       :max_results,
       :creation_time_after,
@@ -18120,6 +18876,7 @@ module Aws::SageMaker
     #   <p>The token to use when calling the next page of results.</p>
     #   @return [String]
     class ListEdgeDeploymentPlansResponse < Struct.new(
+      nil,
       :edge_deployment_plan_summaries,
       :next_token,
       keyword_init: true
@@ -18161,6 +18918,7 @@ module Aws::SageMaker
     #   <p>What direction to sort by.</p>
     #   @return [String]
     class ListEdgePackagingJobsRequest < Struct.new(
+      nil,
       :next_token,
       :max_results,
       :creation_time_after,
@@ -18184,6 +18942,7 @@ module Aws::SageMaker
     #   <p>Token to use when calling the next page of results.</p>
     #   @return [String]
     class ListEdgePackagingJobsResponse < Struct.new(
+      nil,
       :edge_packaging_job_summaries,
       :next_token,
       keyword_init: true
@@ -18213,6 +18972,7 @@ module Aws::SageMaker
     #   <p>A filter that returns only endpoint configurations with a creation time greater than or equal to the specified time (timestamp).</p>
     #   @return [Time]
     class ListEndpointConfigsInput < Struct.new(
+      nil,
       :sort_by,
       :sort_order,
       :next_token,
@@ -18232,6 +18992,7 @@ module Aws::SageMaker
     #   <p> If the response is truncated, SageMaker returns this token. To retrieve the next set of endpoint configurations, use it in the subsequent request </p>
     #   @return [String]
     class ListEndpointConfigsOutput < Struct.new(
+      nil,
       :endpoint_configs,
       :next_token,
       keyword_init: true
@@ -18270,6 +19031,7 @@ module Aws::SageMaker
     #   <p> A filter that returns only endpoints with the specified status.</p>
     #   @return [String]
     class ListEndpointsInput < Struct.new(
+      nil,
       :sort_by,
       :sort_order,
       :next_token,
@@ -18292,6 +19054,7 @@ module Aws::SageMaker
     #   <p> If the response is truncated, SageMaker returns this token. To retrieve the next set of training jobs, use it in the subsequent request. </p>
     #   @return [String]
     class ListEndpointsOutput < Struct.new(
+      nil,
       :endpoints,
       :next_token,
       keyword_init: true
@@ -18318,6 +19081,7 @@ module Aws::SageMaker
     #   <p>The maximum number of experiments to return in the response. The default value is 10.</p>
     #   @return [Integer]
     class ListExperimentsRequest < Struct.new(
+      nil,
       :created_after,
       :created_before,
       :sort_by,
@@ -18336,6 +19100,7 @@ module Aws::SageMaker
     #   <p>A token for getting the next set of experiments, if there are any.</p>
     #   @return [String]
     class ListExperimentsResponse < Struct.new(
+      nil,
       :experiment_summaries,
       :next_token,
       keyword_init: true
@@ -18371,6 +19136,7 @@ module Aws::SageMaker
     #   <p>A token to resume pagination of <code>ListFeatureGroups</code> results.</p>
     #   @return [String]
     class ListFeatureGroupsRequest < Struct.new(
+      nil,
       :name_contains,
       :feature_group_status_equals,
       :offline_store_status_equals,
@@ -18392,6 +19158,7 @@ module Aws::SageMaker
     #   <p>A token to resume pagination of <code>ListFeatureGroups</code> results.</p>
     #   @return [String]
     class ListFeatureGroupsResponse < Struct.new(
+      nil,
       :feature_group_summaries,
       :next_token,
       keyword_init: true
@@ -18415,6 +19182,7 @@ module Aws::SageMaker
     #   <p>The total number of items to return. If the total number of available items is more than the value specified in <code>MaxResults</code>, then a <code>NextToken</code> will be provided in the output that you can use to resume pagination.</p>
     #   @return [Integer]
     class ListFlowDefinitionsRequest < Struct.new(
+      nil,
       :creation_time_after,
       :creation_time_before,
       :sort_order,
@@ -18432,6 +19200,7 @@ module Aws::SageMaker
     #   <p>A token to resume pagination.</p>
     #   @return [String]
     class ListFlowDefinitionsResponse < Struct.new(
+      nil,
       :flow_definition_summaries,
       :next_token,
       keyword_init: true
@@ -18473,6 +19242,7 @@ module Aws::SageMaker
     #   <p>If the response to a previous <code>ListHubContentVersions</code> request was truncated, the response includes a <code>NextToken</code>. To retrieve the next set of hub content versions, use the token in the next request.</p>
     #   @return [String]
     class ListHubContentVersionsRequest < Struct.new(
+      nil,
       :hub_name,
       :hub_content_type,
       :hub_content_name,
@@ -18496,6 +19266,7 @@ module Aws::SageMaker
     #   <p>If the response is truncated, SageMaker returns this token. To retrieve the next set of hub content versions, use it in the subsequent request.</p>
     #   @return [String]
     class ListHubContentVersionsResponse < Struct.new(
+      nil,
       :hub_content_summaries,
       :next_token,
       keyword_init: true
@@ -18534,6 +19305,7 @@ module Aws::SageMaker
     #   <p>If the response to a previous <code>ListHubContents</code> request was truncated, the response includes a <code>NextToken</code>. To retrieve the next set of hub content, use the token in the next request.</p>
     #   @return [String]
     class ListHubContentsRequest < Struct.new(
+      nil,
       :hub_name,
       :hub_content_type,
       :name_contains,
@@ -18556,6 +19328,7 @@ module Aws::SageMaker
     #   <p>If the response is truncated, SageMaker returns this token. To retrieve the next set of hub content, use it in the subsequent request.</p>
     #   @return [String]
     class ListHubContentsResponse < Struct.new(
+      nil,
       :hub_content_summaries,
       :next_token,
       keyword_init: true
@@ -18591,6 +19364,7 @@ module Aws::SageMaker
     #   <p>If the response to a previous <code>ListHubs</code> request was truncated, the response includes a <code>NextToken</code>. To retrieve the next set of hubs, use the token in the next request.</p>
     #   @return [String]
     class ListHubsRequest < Struct.new(
+      nil,
       :name_contains,
       :creation_time_before,
       :creation_time_after,
@@ -18612,6 +19386,7 @@ module Aws::SageMaker
     #   <p>If the response is truncated, SageMaker returns this token. To retrieve the next set of hubs, use it in the subsequent request.</p>
     #   @return [String]
     class ListHubsResponse < Struct.new(
+      nil,
       :hub_summaries,
       :next_token,
       keyword_init: true
@@ -18635,6 +19410,7 @@ module Aws::SageMaker
     #   <p>The total number of items to return. If the total number of available items is more than the value specified in <code>MaxResults</code>, then a <code>NextToken</code> will be provided in the output that you can use to resume pagination.</p>
     #   @return [Integer]
     class ListHumanTaskUisRequest < Struct.new(
+      nil,
       :creation_time_after,
       :creation_time_before,
       :sort_order,
@@ -18652,6 +19428,7 @@ module Aws::SageMaker
     #   <p>A token to resume pagination.</p>
     #   @return [String]
     class ListHumanTaskUisResponse < Struct.new(
+      nil,
       :human_task_ui_summaries,
       :next_token,
       keyword_init: true
@@ -18690,6 +19467,7 @@ module Aws::SageMaker
     #   <p>A filter that returns only tuning jobs with the specified status.</p>
     #   @return [String]
     class ListHyperParameterTuningJobsRequest < Struct.new(
+      nil,
       :next_token,
       :max_results,
       :sort_by,
@@ -18712,6 +19490,7 @@ module Aws::SageMaker
     #   <p>If the result of this <code>ListHyperParameterTuningJobs</code> request was truncated, the response includes a <code>NextToken</code>. To retrieve the next set of tuning jobs, use the token in the next request.</p>
     #   @return [String]
     class ListHyperParameterTuningJobsResponse < Struct.new(
+      nil,
       :hyper_parameter_tuning_job_summaries,
       :next_token,
       keyword_init: true
@@ -18747,6 +19526,7 @@ module Aws::SageMaker
     #   <p>The sort order. The default value is <code>DESCENDING</code>.</p>
     #   @return [String]
     class ListImageVersionsRequest < Struct.new(
+      nil,
       :creation_time_after,
       :creation_time_before,
       :image_name,
@@ -18768,6 +19548,7 @@ module Aws::SageMaker
     #   <p>A token for getting the next set of versions, if there are any.</p>
     #   @return [String]
     class ListImageVersionsResponse < Struct.new(
+      nil,
       :image_versions,
       :next_token,
       keyword_init: true
@@ -18803,6 +19584,7 @@ module Aws::SageMaker
     #   <p>The sort order. The default value is <code>DESCENDING</code>.</p>
     #   @return [String]
     class ListImagesRequest < Struct.new(
+      nil,
       :creation_time_after,
       :creation_time_before,
       :last_modified_time_after,
@@ -18824,6 +19606,7 @@ module Aws::SageMaker
     #   <p>A token for getting the next set of images, if there are any.</p>
     #   @return [String]
     class ListImagesResponse < Struct.new(
+      nil,
       :images,
       :next_token,
       keyword_init: true
@@ -18868,6 +19651,7 @@ module Aws::SageMaker
     #   <p>A production variant name to filter the listed inference components. The response includes only those inference components that are hosted at the specified variant.</p>
     #   @return [String]
     class ListInferenceComponentsInput < Struct.new(
+      nil,
       :sort_by,
       :sort_order,
       :next_token,
@@ -18892,6 +19676,7 @@ module Aws::SageMaker
     #   <p>The token to use in a subsequent request to get the next set of results following a truncated response.</p>
     #   @return [String]
     class ListInferenceComponentsOutput < Struct.new(
+      nil,
       :inference_components,
       :next_token,
       keyword_init: true
@@ -18933,6 +19718,7 @@ module Aws::SageMaker
     #   <p>The maximum number of results to select.</p>
     #   @return [Integer]
     class ListInferenceExperimentsRequest < Struct.new(
+      nil,
       :name_contains,
       :type,
       :status_equals,
@@ -18956,6 +19742,7 @@ module Aws::SageMaker
     #   <p>The token to use when calling the next page of results.</p>
     #   @return [String]
     class ListInferenceExperimentsResponse < Struct.new(
+      nil,
       :inference_experiments,
       :next_token,
       keyword_init: true
@@ -18979,6 +19766,7 @@ module Aws::SageMaker
     #   <p>A token that you can specify to return more results from the list. Specify this field if you have a token that was returned from a previous request.</p>
     #   @return [String]
     class ListInferenceRecommendationsJobStepsRequest < Struct.new(
+      nil,
       :job_name,
       :status,
       :step_type,
@@ -18996,6 +19784,7 @@ module Aws::SageMaker
     #   <p>A token that you can specify in your next request to return more results from the list.</p>
     #   @return [String]
     class ListInferenceRecommendationsJobStepsResponse < Struct.new(
+      nil,
       :steps,
       :next_token,
       keyword_init: true
@@ -19040,6 +19829,7 @@ module Aws::SageMaker
     #   <p>A filter that returns only jobs that were created for this versioned model package.</p>
     #   @return [String]
     class ListInferenceRecommendationsJobsRequest < Struct.new(
+      nil,
       :creation_time_after,
       :creation_time_before,
       :last_modified_time_after,
@@ -19064,6 +19854,7 @@ module Aws::SageMaker
     #   <p>A token for getting the next set of recommendations, if there are any.</p>
     #   @return [String]
     class ListInferenceRecommendationsJobsResponse < Struct.new(
+      nil,
       :inference_recommendations_jobs,
       :next_token,
       keyword_init: true
@@ -19096,6 +19887,7 @@ module Aws::SageMaker
     #   <p>The sort order for results. The default is <code>Ascending</code>.</p>
     #   @return [String]
     class ListLabelingJobsForWorkteamRequest < Struct.new(
+      nil,
       :workteam_arn,
       :max_results,
       :next_token,
@@ -19116,6 +19908,7 @@ module Aws::SageMaker
     #   <p>If the response is truncated, SageMaker returns this token. To retrieve the next set of labeling jobs, use it in the subsequent request.</p>
     #   @return [String]
     class ListLabelingJobsForWorkteamResponse < Struct.new(
+      nil,
       :labeling_job_summary_list,
       :next_token,
       keyword_init: true
@@ -19154,6 +19947,7 @@ module Aws::SageMaker
     #   <p>A filter that retrieves only labeling jobs with a specific status.</p>
     #   @return [String]
     class ListLabelingJobsRequest < Struct.new(
+      nil,
       :creation_time_after,
       :creation_time_before,
       :last_modified_time_after,
@@ -19176,6 +19970,7 @@ module Aws::SageMaker
     #   <p>If the response is truncated, SageMaker returns this token. To retrieve the next set of labeling jobs, use it in the subsequent request.</p>
     #   @return [String]
     class ListLabelingJobsResponse < Struct.new(
+      nil,
       :labeling_job_summary_list,
       :next_token,
       keyword_init: true
@@ -19202,6 +19997,7 @@ module Aws::SageMaker
     #   <p>The maximum number of endpoints to return in the response. This value defaults to 10.</p>
     #   @return [Integer]
     class ListLineageGroupsRequest < Struct.new(
+      nil,
       :created_after,
       :created_before,
       :sort_by,
@@ -19220,6 +20016,7 @@ module Aws::SageMaker
     #   <p>If the response is truncated, SageMaker returns this token. To retrieve the next set of algorithms, use it in the subsequent request.</p>
     #   @return [String]
     class ListLineageGroupsResponse < Struct.new(
+      nil,
       :lineage_group_summaries,
       :next_token,
       keyword_init: true
@@ -19252,6 +20049,7 @@ module Aws::SageMaker
     #   <p>The maximum number of tracking servers to list.</p>
     #   @return [Integer]
     class ListMlflowTrackingServersRequest < Struct.new(
+      nil,
       :created_after,
       :created_before,
       :tracking_server_status,
@@ -19272,6 +20070,7 @@ module Aws::SageMaker
     #   <p>If the previous response was truncated, you will receive this token. Use it in your next request to receive the next set of results.</p>
     #   @return [String]
     class ListMlflowTrackingServersResponse < Struct.new(
+      nil,
       :tracking_server_summaries,
       :next_token,
       keyword_init: true
@@ -19304,6 +20103,7 @@ module Aws::SageMaker
     #   <p>A filter that returns only model bias jobs created after a specified time.</p>
     #   @return [Time]
     class ListModelBiasJobDefinitionsRequest < Struct.new(
+      nil,
       :endpoint_name,
       :sort_by,
       :sort_order,
@@ -19324,6 +20124,7 @@ module Aws::SageMaker
     #   <p>The token returned if the response is truncated. To retrieve the next set of job executions, use it in the next request.</p>
     #   @return [String]
     class ListModelBiasJobDefinitionsResponse < Struct.new(
+      nil,
       :job_definition_summaries,
       :next_token,
       keyword_init: true
@@ -19362,6 +20163,7 @@ module Aws::SageMaker
     #   <p>The maximum number of model card export jobs to list.</p>
     #   @return [Integer]
     class ListModelCardExportJobsRequest < Struct.new(
+      nil,
       :model_card_name,
       :model_card_version,
       :creation_time_after,
@@ -19384,6 +20186,7 @@ module Aws::SageMaker
     #   <p>If the response is truncated, SageMaker returns this token. To retrieve the next set of model card export jobs, use it in the subsequent request.</p>
     #   @return [String]
     class ListModelCardExportJobsResponse < Struct.new(
+      nil,
       :model_card_export_job_summaries,
       :next_token,
       keyword_init: true
@@ -19416,6 +20219,7 @@ module Aws::SageMaker
     #   <p>Sort model card versions by ascending or descending order.</p>
     #   @return [String]
     class ListModelCardVersionsRequest < Struct.new(
+      nil,
       :creation_time_after,
       :creation_time_before,
       :max_results,
@@ -19436,6 +20240,7 @@ module Aws::SageMaker
     #   <p>If the response is truncated, SageMaker returns this token. To retrieve the next set of model card versions, use it in the subsequent request.</p>
     #   @return [String]
     class ListModelCardVersionsResponse < Struct.new(
+      nil,
       :model_card_version_summary_list,
       :next_token,
       keyword_init: true
@@ -19468,6 +20273,7 @@ module Aws::SageMaker
     #   <p>Sort model cards by ascending or descending order.</p>
     #   @return [String]
     class ListModelCardsRequest < Struct.new(
+      nil,
       :creation_time_after,
       :creation_time_before,
       :max_results,
@@ -19488,6 +20294,7 @@ module Aws::SageMaker
     #   <p>If the response is truncated, SageMaker returns this token. To retrieve the next set of model cards, use it in the subsequent request.</p>
     #   @return [String]
     class ListModelCardsResponse < Struct.new(
+      nil,
       :model_card_summaries,
       :next_token,
       keyword_init: true
@@ -19520,6 +20327,7 @@ module Aws::SageMaker
     #   <p>A filter that returns only model explainability jobs created after a specified time.</p>
     #   @return [Time]
     class ListModelExplainabilityJobDefinitionsRequest < Struct.new(
+      nil,
       :endpoint_name,
       :sort_by,
       :sort_order,
@@ -19540,6 +20348,7 @@ module Aws::SageMaker
     #   <p>The token returned if the response is truncated. To retrieve the next set of job executions, use it in the next request.</p>
     #   @return [String]
     class ListModelExplainabilityJobDefinitionsResponse < Struct.new(
+      nil,
       :job_definition_summaries,
       :next_token,
       keyword_init: true
@@ -19557,6 +20366,7 @@ module Aws::SageMaker
     #   <p>The maximum number of models to return in the response.</p>
     #   @return [Integer]
     class ListModelMetadataRequest < Struct.new(
+      nil,
       :search_expression,
       :next_token,
       :max_results,
@@ -19572,6 +20382,7 @@ module Aws::SageMaker
     #   <p>A token for getting the next set of recommendations, if there are any.</p>
     #   @return [String]
     class ListModelMetadataResponse < Struct.new(
+      nil,
       :model_metadata_summaries,
       :next_token,
       keyword_init: true
@@ -19604,6 +20415,7 @@ module Aws::SageMaker
     #   <p>A filter that returns either model groups shared with you or model groups in your own account. When the value is <code>CrossAccount</code>, the results show the resources made discoverable to you from other accounts. When the value is <code>SameAccount</code> or <code>null</code>, the results show resources from your account. The default is <code>SameAccount</code>.</p>
     #   @return [String]
     class ListModelPackageGroupsInput < Struct.new(
+      nil,
       :creation_time_after,
       :creation_time_before,
       :max_results,
@@ -19624,6 +20436,7 @@ module Aws::SageMaker
     #   <p>If the response is truncated, SageMaker returns this token. To retrieve the next set of model groups, use it in the subsequent request.</p>
     #   @return [String]
     class ListModelPackageGroupsOutput < Struct.new(
+      nil,
       :model_package_group_summary_list,
       :next_token,
       keyword_init: true
@@ -19662,6 +20475,7 @@ module Aws::SageMaker
     #   <p>The sort order for the results. The default is <code>Ascending</code>.</p>
     #   @return [String]
     class ListModelPackagesInput < Struct.new(
+      nil,
       :creation_time_after,
       :creation_time_before,
       :max_results,
@@ -19684,6 +20498,7 @@ module Aws::SageMaker
     #   <p>If the response is truncated, SageMaker returns this token. To retrieve the next set of model packages, use it in the subsequent request.</p>
     #   @return [String]
     class ListModelPackagesOutput < Struct.new(
+      nil,
       :model_package_summary_list,
       :next_token,
       keyword_init: true
@@ -19716,6 +20531,7 @@ module Aws::SageMaker
     #   <p>A filter that returns only model quality monitoring job definitions created after the specified time.</p>
     #   @return [Time]
     class ListModelQualityJobDefinitionsRequest < Struct.new(
+      nil,
       :endpoint_name,
       :sort_by,
       :sort_order,
@@ -19736,6 +20552,7 @@ module Aws::SageMaker
     #   <p>If the response is truncated, Amazon SageMaker AI returns this token. To retrieve the next set of model quality monitoring job definitions, use it in the next request.</p>
     #   @return [String]
     class ListModelQualityJobDefinitionsResponse < Struct.new(
+      nil,
       :job_definition_summaries,
       :next_token,
       keyword_init: true
@@ -19765,6 +20582,7 @@ module Aws::SageMaker
     #   <p>A filter that returns only models with a creation time greater than or equal to the specified time (timestamp).</p>
     #   @return [Time]
     class ListModelsInput < Struct.new(
+      nil,
       :sort_by,
       :sort_order,
       :next_token,
@@ -19784,6 +20602,7 @@ module Aws::SageMaker
     #   <p> If the response is truncated, SageMaker returns this token. To retrieve the next set of models, use it in the subsequent request. </p>
     #   @return [String]
     class ListModelsOutput < Struct.new(
+      nil,
       :models,
       :next_token,
       keyword_init: true
@@ -19819,6 +20638,7 @@ module Aws::SageMaker
     #   <p>A filter that retrieves only alerts with a specific status.</p>
     #   @return [String]
     class ListMonitoringAlertHistoryRequest < Struct.new(
+      nil,
       :monitoring_schedule_name,
       :monitoring_alert_name,
       :sort_by,
@@ -19840,6 +20660,7 @@ module Aws::SageMaker
     #   <p>If the response is truncated, SageMaker returns this token. To retrieve the next set of alerts, use it in the subsequent request.</p>
     #   @return [String]
     class ListMonitoringAlertHistoryResponse < Struct.new(
+      nil,
       :monitoring_alert_history,
       :next_token,
       keyword_init: true
@@ -19857,6 +20678,7 @@ module Aws::SageMaker
     #   <p>The maximum number of results to display. The default is 100.</p>
     #   @return [Integer]
     class ListMonitoringAlertsRequest < Struct.new(
+      nil,
       :monitoring_schedule_name,
       :next_token,
       :max_results,
@@ -19872,6 +20694,7 @@ module Aws::SageMaker
     #   <p>If the response is truncated, SageMaker returns this token. To retrieve the next set of alerts, use it in the subsequent request.</p>
     #   @return [String]
     class ListMonitoringAlertsResponse < Struct.new(
+      nil,
       :monitoring_alert_summaries,
       :next_token,
       keyword_init: true
@@ -19925,6 +20748,7 @@ module Aws::SageMaker
     #   <p>A filter that returns only the monitoring job runs of the specified monitoring type.</p>
     #   @return [String]
     class ListMonitoringExecutionsRequest < Struct.new(
+      nil,
       :monitoring_schedule_name,
       :endpoint_name,
       :sort_by,
@@ -19952,6 +20776,7 @@ module Aws::SageMaker
     #   <p>The token returned if the response is truncated. To retrieve the next set of job executions, use it in the next request.</p>
     #   @return [String]
     class ListMonitoringExecutionsResponse < Struct.new(
+      nil,
       :monitoring_execution_summaries,
       :next_token,
       keyword_init: true
@@ -19999,6 +20824,7 @@ module Aws::SageMaker
     #   <p>A filter that returns only the monitoring schedules for the specified monitoring type.</p>
     #   @return [String]
     class ListMonitoringSchedulesRequest < Struct.new(
+      nil,
       :endpoint_name,
       :sort_by,
       :sort_order,
@@ -20024,6 +20850,7 @@ module Aws::SageMaker
     #   <p>The token returned if the response is truncated. To retrieve the next set of job executions, use it in the next request.</p>
     #   @return [String]
     class ListMonitoringSchedulesResponse < Struct.new(
+      nil,
       :monitoring_schedule_summaries,
       :next_token,
       keyword_init: true
@@ -20059,6 +20886,7 @@ module Aws::SageMaker
     #   <p>A filter that returns only lifecycle configurations that were modified after the specified time (timestamp).</p>
     #   @return [Time]
     class ListNotebookInstanceLifecycleConfigsInput < Struct.new(
+      nil,
       :next_token,
       :max_results,
       :sort_by,
@@ -20080,6 +20908,7 @@ module Aws::SageMaker
     #   <p>An array of <code>NotebookInstanceLifecycleConfiguration</code> objects, each listing a lifecycle configuration.</p>
     #   @return [Array<Types::NotebookInstanceLifecycleConfigSummary>]
     class ListNotebookInstanceLifecycleConfigsOutput < Struct.new(
+      nil,
       :next_token,
       :notebook_instance_lifecycle_configs,
       keyword_init: true
@@ -20127,6 +20956,7 @@ module Aws::SageMaker
     #   <p>A filter that returns only notebook instances with associated with the specified git repository.</p>
     #   @return [String]
     class ListNotebookInstancesInput < Struct.new(
+      nil,
       :next_token,
       :max_results,
       :sort_by,
@@ -20152,6 +20982,7 @@ module Aws::SageMaker
     #   <p>An array of <code>NotebookInstanceSummary</code> objects, one for each notebook instance.</p>
     #   @return [Array<Types::NotebookInstanceSummary>]
     class ListNotebookInstancesOutput < Struct.new(
+      nil,
       :next_token,
       :notebook_instances,
       keyword_init: true
@@ -20193,6 +21024,7 @@ module Aws::SageMaker
     #   <p>The sort order for results. The default is <code>Ascending</code> </p>
     #   @return [String]
     class ListOptimizationJobsRequest < Struct.new(
+      nil,
       :next_token,
       :max_results,
       :creation_time_after,
@@ -20216,6 +21048,7 @@ module Aws::SageMaker
     #   <p>The token to use in a subsequent request to get the next set of results following a truncated response.</p>
     #   @return [String]
     class ListOptimizationJobsResponse < Struct.new(
+      nil,
       :optimization_job_summaries,
       :next_token,
       keyword_init: true
@@ -20230,6 +21063,7 @@ module Aws::SageMaker
     #   <p>If the previous response was truncated, you will receive this token. Use it in your next request to receive the next set of results.</p>
     #   @return [String]
     class ListPartnerAppsRequest < Struct.new(
+      nil,
       :max_results,
       :next_token,
       keyword_init: true
@@ -20244,6 +21078,7 @@ module Aws::SageMaker
     #   <p>If the previous response was truncated, you will receive this token. Use it in your next request to receive the next set of results.</p>
     #   @return [String]
     class ListPartnerAppsResponse < Struct.new(
+      nil,
       :summaries,
       :next_token,
       keyword_init: true
@@ -20264,6 +21099,7 @@ module Aws::SageMaker
     #   <p>The field by which to sort results. The default is <code>CreatedTime</code>.</p>
     #   @return [String]
     class ListPipelineExecutionStepsRequest < Struct.new(
+      nil,
       :pipeline_execution_arn,
       :next_token,
       :max_results,
@@ -20280,6 +21116,7 @@ module Aws::SageMaker
     #   <p>If the result of the previous <code>ListPipelineExecutionSteps</code> request was truncated, the response includes a <code>NextToken</code>. To retrieve the next set of pipeline execution steps, use the token in the next request.</p>
     #   @return [String]
     class ListPipelineExecutionStepsResponse < Struct.new(
+      nil,
       :pipeline_execution_steps,
       :next_token,
       keyword_init: true
@@ -20309,6 +21146,7 @@ module Aws::SageMaker
     #   <p>The maximum number of pipeline executions to return in the response.</p>
     #   @return [Integer]
     class ListPipelineExecutionsRequest < Struct.new(
+      nil,
       :pipeline_name,
       :created_after,
       :created_before,
@@ -20328,6 +21166,7 @@ module Aws::SageMaker
     #   <p>If the result of the previous <code>ListPipelineExecutions</code> request was truncated, the response includes a <code>NextToken</code>. To retrieve the next set of pipeline executions, use the token in the next request.</p>
     #   @return [String]
     class ListPipelineExecutionsResponse < Struct.new(
+      nil,
       :pipeline_execution_summaries,
       :next_token,
       keyword_init: true
@@ -20345,6 +21184,7 @@ module Aws::SageMaker
     #   <p>The maximum number of parameters to return in the response.</p>
     #   @return [Integer]
     class ListPipelineParametersForExecutionRequest < Struct.new(
+      nil,
       :pipeline_execution_arn,
       :next_token,
       :max_results,
@@ -20360,6 +21200,7 @@ module Aws::SageMaker
     #   <p>If the result of the previous <code>ListPipelineParametersForExecution</code> request was truncated, the response includes a <code>NextToken</code>. To retrieve the next set of parameters, use the token in the next request.</p>
     #   @return [String]
     class ListPipelineParametersForExecutionResponse < Struct.new(
+      nil,
       :pipeline_parameters,
       :next_token,
       keyword_init: true
@@ -20386,6 +21227,7 @@ module Aws::SageMaker
     #   <p>The maximum number of pipeline versions to return in the response.</p>
     #   @return [Integer]
     class ListPipelineVersionsRequest < Struct.new(
+      nil,
       :pipeline_name,
       :created_after,
       :created_before,
@@ -20404,6 +21246,7 @@ module Aws::SageMaker
     #   <p>If the result of the previous <code>ListPipelineVersions</code> request was truncated, the response includes a <code>NextToken</code>. To retrieve the next set of pipeline versions, use this token in your next request.</p>
     #   @return [String]
     class ListPipelineVersionsResponse < Struct.new(
+      nil,
       :pipeline_version_summaries,
       :next_token,
       keyword_init: true
@@ -20433,6 +21276,7 @@ module Aws::SageMaker
     #   <p>The maximum number of pipelines to return in the response.</p>
     #   @return [Integer]
     class ListPipelinesRequest < Struct.new(
+      nil,
       :pipeline_name_prefix,
       :created_after,
       :created_before,
@@ -20452,6 +21296,7 @@ module Aws::SageMaker
     #   <p>If the result of the previous <code>ListPipelines</code> request was truncated, the response includes a <code>NextToken</code>. To retrieve the next set of pipelines, use the token in the next request.</p>
     #   @return [String]
     class ListPipelinesResponse < Struct.new(
+      nil,
       :pipeline_summaries,
       :next_token,
       keyword_init: true
@@ -20490,6 +21335,7 @@ module Aws::SageMaker
     #   <p>The maximum number of processing jobs to return in the response.</p>
     #   @return [Integer]
     class ListProcessingJobsRequest < Struct.new(
+      nil,
       :creation_time_after,
       :creation_time_before,
       :last_modified_time_after,
@@ -20512,6 +21358,7 @@ module Aws::SageMaker
     #   <p>If the response is truncated, Amazon SageMaker returns this token. To retrieve the next set of processing jobs, use it in the subsequent request.</p>
     #   @return [String]
     class ListProcessingJobsResponse < Struct.new(
+      nil,
       :processing_job_summaries,
       :next_token,
       keyword_init: true
@@ -20541,6 +21388,7 @@ module Aws::SageMaker
     #   <p>The sort order for results. The default is <code>Ascending</code>.</p>
     #   @return [String]
     class ListProjectsInput < Struct.new(
+      nil,
       :creation_time_after,
       :creation_time_before,
       :max_results,
@@ -20560,6 +21408,7 @@ module Aws::SageMaker
     #   <p>If the result of the previous <code>ListCompilationJobs</code> request was truncated, the response includes a <code>NextToken</code>. To retrieve the next set of model compilation jobs, use the token in the next request.</p>
     #   @return [String]
     class ListProjectsOutput < Struct.new(
+      nil,
       :project_summary_list,
       :next_token,
       keyword_init: true
@@ -20589,6 +21438,7 @@ module Aws::SageMaker
     #   <p> A token to resume pagination of <code>ListResourceCatalogs</code> results. </p>
     #   @return [String]
     class ListResourceCatalogsRequest < Struct.new(
+      nil,
       :name_contains,
       :creation_time_after,
       :creation_time_before,
@@ -20608,6 +21458,7 @@ module Aws::SageMaker
     #   <p> A token to resume pagination of <code>ListResourceCatalogs</code> results. </p>
     #   @return [String]
     class ListResourceCatalogsResponse < Struct.new(
+      nil,
       :resource_catalogs,
       :next_token,
       keyword_init: true
@@ -20634,6 +21485,7 @@ module Aws::SageMaker
     #   <p>A parameter by which to filter the results.</p>
     #   @return [String]
     class ListSpacesRequest < Struct.new(
+      nil,
       :next_token,
       :max_results,
       :sort_order,
@@ -20652,6 +21504,7 @@ module Aws::SageMaker
     #   <p>If the previous response was truncated, you will receive this token. Use it in your next request to receive the next set of results.</p>
     #   @return [String]
     class ListSpacesResponse < Struct.new(
+      nil,
       :spaces,
       :next_token,
       keyword_init: true
@@ -20675,6 +21528,7 @@ module Aws::SageMaker
     #   <p>The name of the stage in the deployment.</p>
     #   @return [String]
     class ListStageDevicesRequest < Struct.new(
+      nil,
       :next_token,
       :max_results,
       :edge_deployment_plan_name,
@@ -20692,6 +21546,7 @@ module Aws::SageMaker
     #   <p>The token to use when calling the next page of results.</p>
     #   @return [String]
     class ListStageDevicesResponse < Struct.new(
+      nil,
       :device_deployment_summaries,
       :next_token,
       keyword_init: true
@@ -20730,6 +21585,7 @@ module Aws::SageMaker
     #   <p>The sort order. The default value is Descending.</p>
     #   @return [String]
     class ListStudioLifecycleConfigsRequest < Struct.new(
+      nil,
       :max_results,
       :next_token,
       :name_contains,
@@ -20752,6 +21608,7 @@ module Aws::SageMaker
     #   <p>A list of Lifecycle Configurations and their properties.</p>
     #   @return [Array<Types::StudioLifecycleConfigDetails>]
     class ListStudioLifecycleConfigsResponse < Struct.new(
+      nil,
       :next_token,
       :studio_lifecycle_configs,
       keyword_init: true
@@ -20769,6 +21626,7 @@ module Aws::SageMaker
     #   <p>The maximum number of work teams to return in each page of the response.</p>
     #   @return [Integer]
     class ListSubscribedWorkteamsRequest < Struct.new(
+      nil,
       :name_contains,
       :next_token,
       :max_results,
@@ -20784,6 +21642,7 @@ module Aws::SageMaker
     #   <p>If the response is truncated, Amazon SageMaker returns this token. To retrieve the next set of work teams, use it in the subsequent request.</p>
     #   @return [String]
     class ListSubscribedWorkteamsResponse < Struct.new(
+      nil,
       :subscribed_workteams,
       :next_token,
       keyword_init: true
@@ -20801,6 +21660,7 @@ module Aws::SageMaker
     #   <p>Maximum number of tags to return.</p>
     #   @return [Integer]
     class ListTagsInput < Struct.new(
+      nil,
       :resource_arn,
       :next_token,
       :max_results,
@@ -20816,6 +21676,7 @@ module Aws::SageMaker
     #   <p> If response is truncated, SageMaker includes a token in the response. You can use this token in your subsequent request to fetch next set of tokens. </p>
     #   @return [String]
     class ListTagsOutput < Struct.new(
+      nil,
       :tags,
       :next_token,
       keyword_init: true
@@ -20842,6 +21703,7 @@ module Aws::SageMaker
     #   <p>The sort order for results. The default is <code>Ascending</code>.</p>
     #   @return [String]
     class ListTrainingJobsForHyperParameterTuningJobRequest < Struct.new(
+      nil,
       :hyper_parameter_tuning_job_name,
       :next_token,
       :max_results,
@@ -20860,6 +21722,7 @@ module Aws::SageMaker
     #   <p>If the result of this <code>ListTrainingJobsForHyperParameterTuningJob</code> request was truncated, the response includes a <code>NextToken</code>. To retrieve the next set of training jobs, use the token in the next request.</p>
     #   @return [String]
     class ListTrainingJobsForHyperParameterTuningJobResponse < Struct.new(
+      nil,
       :training_job_summaries,
       :next_token,
       keyword_init: true
@@ -20904,6 +21767,7 @@ module Aws::SageMaker
     #   <p>The Amazon Resource Name (ARN); of the training plan to filter training jobs by. For more information about reserving GPU capacity for your SageMaker training jobs using Amazon SageMaker Training Plan, see <code> <a href="https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_CreateTrainingPlan.html">CreateTrainingPlan</a> </code>.</p>
     #   @return [String]
     class ListTrainingJobsRequest < Struct.new(
+      nil,
       :next_token,
       :max_results,
       :creation_time_after,
@@ -20928,6 +21792,7 @@ module Aws::SageMaker
     #   <p>If the response is truncated, SageMaker returns this token. To retrieve the next set of training jobs, use it in the subsequent request.</p>
     #   @return [String]
     class ListTrainingJobsResponse < Struct.new(
+      nil,
       :training_job_summaries,
       :next_token,
       keyword_init: true
@@ -20957,6 +21822,7 @@ module Aws::SageMaker
     #   <p>Additional filters to apply to the list of training plans.</p>
     #   @return [Array<Types::TrainingPlanFilter>]
     class ListTrainingPlansRequest < Struct.new(
+      nil,
       :next_token,
       :max_results,
       :start_time_after,
@@ -20976,6 +21842,7 @@ module Aws::SageMaker
     #   <p>A list of summary information for the training plans.</p>
     #   @return [Array<Types::TrainingPlanSummary>]
     class ListTrainingPlansResponse < Struct.new(
+      nil,
       :next_token,
       :training_plan_summaries,
       keyword_init: true
@@ -21014,6 +21881,7 @@ module Aws::SageMaker
     #   <p>The maximum number of transform jobs to return in the response. The default value is <code>10</code>.</p>
     #   @return [Integer]
     class ListTransformJobsRequest < Struct.new(
+      nil,
       :creation_time_after,
       :creation_time_before,
       :last_modified_time_after,
@@ -21036,6 +21904,7 @@ module Aws::SageMaker
     #   <p>If the response is truncated, Amazon SageMaker returns this token. To retrieve the next set of transform jobs, use it in the next request.</p>
     #   @return [String]
     class ListTransformJobsResponse < Struct.new(
+      nil,
       :transform_job_summaries,
       :next_token,
       keyword_init: true
@@ -21071,6 +21940,7 @@ module Aws::SageMaker
     #   <p>If the previous call to <code>ListTrialComponents</code> didn't return the full set of components, the call returns a token for getting the next set of components.</p>
     #   @return [String]
     class ListTrialComponentsRequest < Struct.new(
+      nil,
       :experiment_name,
       :trial_name,
       :source_arn,
@@ -21092,6 +21962,7 @@ module Aws::SageMaker
     #   <p>A token for getting the next set of components, if there are any.</p>
     #   @return [String]
     class ListTrialComponentsResponse < Struct.new(
+      nil,
       :trial_component_summaries,
       :next_token,
       keyword_init: true
@@ -21124,6 +21995,7 @@ module Aws::SageMaker
     #   <p>If the previous call to <code>ListTrials</code> didn't return the full set of trials, the call returns a token for getting the next set of trials.</p>
     #   @return [String]
     class ListTrialsRequest < Struct.new(
+      nil,
       :experiment_name,
       :trial_component_name,
       :created_after,
@@ -21144,6 +22016,7 @@ module Aws::SageMaker
     #   <p>A token for getting the next set of trials, if there are any.</p>
     #   @return [String]
     class ListTrialsResponse < Struct.new(
+      nil,
       :trial_summaries,
       :next_token,
       keyword_init: true
@@ -21161,6 +22034,7 @@ module Aws::SageMaker
     #   <p>If the previous response was truncated, you receive this token. Use it in your next request to receive the next set of results.</p>
     #   @return [String]
     class ListUltraServersByReservedCapacityRequest < Struct.new(
+      nil,
       :reserved_capacity_arn,
       :max_results,
       :next_token,
@@ -21176,6 +22050,7 @@ module Aws::SageMaker
     #   <p>A list of UltraServers that are part of the specified reserved capacity.</p>
     #   @return [Array<Types::UltraServer>]
     class ListUltraServersByReservedCapacityResponse < Struct.new(
+      nil,
       :next_token,
       :ultra_servers,
       keyword_init: true
@@ -21202,6 +22077,7 @@ module Aws::SageMaker
     #   <p>A parameter by which to filter the results.</p>
     #   @return [String]
     class ListUserProfilesRequest < Struct.new(
+      nil,
       :next_token,
       :max_results,
       :sort_order,
@@ -21220,6 +22096,7 @@ module Aws::SageMaker
     #   <p>If the previous response was truncated, you will receive this token. Use it in your next request to receive the next set of results.</p>
     #   @return [String]
     class ListUserProfilesResponse < Struct.new(
+      nil,
       :user_profiles,
       :next_token,
       keyword_init: true
@@ -21243,6 +22120,7 @@ module Aws::SageMaker
     #   <p>The maximum number of workforces returned in the response.</p>
     #   @return [Integer]
     class ListWorkforcesRequest < Struct.new(
+      nil,
       :sort_by,
       :sort_order,
       :name_contains,
@@ -21260,6 +22138,7 @@ module Aws::SageMaker
     #   <p>A token to resume pagination.</p>
     #   @return [String]
     class ListWorkforcesResponse < Struct.new(
+      nil,
       :workforces,
       :next_token,
       keyword_init: true
@@ -21283,6 +22162,7 @@ module Aws::SageMaker
     #   <p>The maximum number of work teams to return in each page of the response.</p>
     #   @return [Integer]
     class ListWorkteamsRequest < Struct.new(
+      nil,
       :sort_by,
       :sort_order,
       :name_contains,
@@ -21300,6 +22180,7 @@ module Aws::SageMaker
     #   <p>If the response is truncated, Amazon SageMaker returns this token. To retrieve the next set of work teams, use it in the subsequent request.</p>
     #   @return [String]
     class ListWorkteamsResponse < Struct.new(
+      nil,
       :workteams,
       :next_token,
       keyword_init: true
@@ -21315,6 +22196,7 @@ module Aws::SageMaker
     #   <p>A list user groups that exist in your OIDC Identity Provider (IdP). One to ten groups can be used to create a single private work team. When you add a user group to the list of <code>Groups</code>, you can add that user group to one or more private work teams. If you add a user group to a private work team, all workers in that user group are added to the work team.</p>
     #   @return [Types::OidcMemberDefinition]
     class MemberDefinition < Struct.new(
+      nil,
       :cognito_member_definition,
       :oidc_member_definition,
       keyword_init: true
@@ -21336,6 +22218,7 @@ module Aws::SageMaker
     #   <p>The project ID.</p>
     #   @return [String]
     class MetadataProperties < Struct.new(
+      nil,
       :commit_id,
       :repository,
       :generated_by,
@@ -21356,6 +22239,7 @@ module Aws::SageMaker
     #   <p>The date and time that the algorithm emitted the metric.</p>
     #   @return [Time]
     class MetricData < Struct.new(
+      nil,
       :metric_name,
       :value,
       :timestamp,
@@ -21378,6 +22262,7 @@ module Aws::SageMaker
     #   <p>The dataset split from which the AutoML job produced the metric.</p>
     #   @return [String]
     class MetricDatum < Struct.new(
+      nil,
       :metric_name,
       :standard_metric_name,
       :value,
@@ -21395,6 +22280,7 @@ module Aws::SageMaker
     #   <p>A regular expression that searches the output of a training job and gets the value of the metric. For more information about using regular expressions to define metrics, see <a href="https://docs.aws.amazon.com/sagemaker/latest/dg/automatic-model-tuning-define-metrics-variables.html">Defining metrics and environment variables</a>.</p>
     #   @return [String]
     class MetricDefinition < Struct.new(
+      nil,
       :name,
       :regex,
       keyword_init: true
@@ -21433,6 +22319,7 @@ module Aws::SageMaker
     #   <p>The S3 URI for the metrics source.</p>
     #   @return [String]
     class MetricsSource < Struct.new(
+      nil,
       :content_type,
       :content_digest,
       :s3_uri,
@@ -21476,6 +22363,7 @@ module Aws::SageMaker
     #   <p>A set of recommended deployment configurations for the model.</p>
     #   @return [Types::DeploymentRecommendation]
     class Model < Struct.new(
+      nil,
       :model_name,
       :primary_container,
       :containers,
@@ -21497,6 +22385,7 @@ module Aws::SageMaker
     #   <p>Specifies agreement to the model end-user license agreement (EULA). The <code>AcceptEula</code> value must be explicitly defined as <code>True</code> in order to accept the EULA that this model requires. You are responsible for reviewing and complying with any applicable license terms and making sure they are acceptable for your use case before downloading or using a model.</p>
     #   @return [Boolean]
     class ModelAccessConfig < Struct.new(
+      nil,
       :accept_eula,
       keyword_init: true
     )
@@ -21508,6 +22397,7 @@ module Aws::SageMaker
     #   <p>The path of the S3 object that contains the model artifacts. For example, <code>s3://bucket-name/keynameprefix/model.tar.gz</code>.</p>
     #   @return [String]
     class ModelArtifacts < Struct.new(
+      nil,
       :s3_model_artifacts,
       keyword_init: true
     )
@@ -21525,6 +22415,7 @@ module Aws::SageMaker
     #   <p>Sets the environment variables in the Docker container.</p>
     #   @return [Hash<String, String>]
     class ModelBiasAppSpecification < Struct.new(
+      nil,
       :image_uri,
       :config_uri,
       :environment,
@@ -21541,6 +22432,7 @@ module Aws::SageMaker
     #   <p>The constraints resource for a monitoring job.</p>
     #   @return [Types::MonitoringConstraintsResource]
     class ModelBiasBaselineConfig < Struct.new(
+      nil,
       :baselining_job_name,
       :constraints_resource,
       keyword_init: true
@@ -21559,6 +22451,7 @@ module Aws::SageMaker
     #   <p>Location of ground truth labels to use in model bias job.</p>
     #   @return [Types::MonitoringGroundTruthS3Input]
     class ModelBiasJobInput < Struct.new(
+      nil,
       :endpoint_input,
       :batch_transform_input,
       :ground_truth_s3_input,
@@ -21611,6 +22504,7 @@ module Aws::SageMaker
     #   <p>The model package group that contains the model package. Only relevant for model cards created for model packages in the Amazon SageMaker Model Registry. </p>
     #   @return [String]
     class ModelCard < Struct.new(
+      nil,
       :model_card_arn,
       :model_card_name,
       :model_card_version,
@@ -21635,6 +22529,7 @@ module Aws::SageMaker
     #   <p>The Amazon S3 URI of the exported model artifacts.</p>
     #   @return [String]
     class ModelCardExportArtifacts < Struct.new(
+      nil,
       :s3_export_artifacts,
       keyword_init: true
     )
@@ -21664,6 +22559,7 @@ module Aws::SageMaker
     #   <p>The date and time that the model card export job was last modified..</p>
     #   @return [Time]
     class ModelCardExportJobSummary < Struct.new(
+      nil,
       :model_card_export_job_name,
       :model_card_export_job_arn,
       :status,
@@ -21681,6 +22577,7 @@ module Aws::SageMaker
     #   <p>The Amazon S3 output path to export your model card PDF.</p>
     #   @return [String]
     class ModelCardExportOutputConfig < Struct.new(
+      nil,
       :s3_output_path,
       keyword_init: true
     )
@@ -21692,6 +22589,7 @@ module Aws::SageMaker
     #   <p>A Key Management Service <a href="https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#key-id-key-id">key ID</a> to use for encrypting a model card.</p>
     #   @return [String]
     class ModelCardSecurityConfig < Struct.new(
+      nil,
       :kms_key_id,
       keyword_init: true
     )
@@ -21715,6 +22613,7 @@ module Aws::SageMaker
     #   <p>The date and time that the model card was last modified.</p>
     #   @return [Time]
     class ModelCardSummary < Struct.new(
+      nil,
       :model_card_name,
       :model_card_arn,
       :model_card_status,
@@ -21745,6 +22644,7 @@ module Aws::SageMaker
     #   <p>The time date and time that the model card version was last modified.</p>
     #   @return [Time]
     class ModelCardVersionSummary < Struct.new(
+      nil,
       :model_card_name,
       :model_card_arn,
       :model_card_status,
@@ -21764,6 +22664,7 @@ module Aws::SageMaker
     #   <p>The maximum number of retries when invocation requests are failing. The default value is 3.</p>
     #   @return [Integer]
     class ModelClientConfig < Struct.new(
+      nil,
       :invocations_timeout_in_seconds,
       :invocations_max_retries,
       keyword_init: true
@@ -21779,6 +22680,7 @@ module Aws::SageMaker
     #   <p>Environment variables that override the default ones in the model container.</p>
     #   @return [Hash<String, String>]
     class ModelCompilationConfig < Struct.new(
+      nil,
       :image,
       :override_environment,
       keyword_init: true
@@ -21797,6 +22699,7 @@ module Aws::SageMaker
     #   <p>The name of the compilation job used to create the recommended model artifacts.</p>
     #   @return [String]
     class ModelConfiguration < Struct.new(
+      nil,
       :inference_specification_name,
       :environment_parameters,
       :compilation_job_name,
@@ -21822,6 +22725,7 @@ module Aws::SageMaker
     #   <p>The endpoint status.</p>
     #   @return [String]
     class ModelDashboardEndpoint < Struct.new(
+      nil,
       :endpoint_name,
       :endpoint_arn,
       :creation_time,
@@ -21837,6 +22741,7 @@ module Aws::SageMaker
     #   <p>Indicates whether the alert action is turned on.</p>
     #   @return [Boolean]
     class ModelDashboardIndicatorAction < Struct.new(
+      nil,
       :enabled,
       keyword_init: true
     )
@@ -21860,6 +22765,7 @@ module Aws::SageMaker
     #   <p>The model card for a model.</p>
     #   @return [Types::ModelDashboardModelCard]
     class ModelDashboardModel < Struct.new(
+      nil,
       :model,
       :endpoints,
       :last_batch_transform_job,
@@ -21908,6 +22814,7 @@ module Aws::SageMaker
     #   <p>A model card's risk rating. Can be low, medium, or high.</p>
     #   @return [String]
     class ModelDashboardModelCard < Struct.new(
+      nil,
       :model_card_arn,
       :model_card_name,
       :model_card_version,
@@ -21963,6 +22870,7 @@ module Aws::SageMaker
     #   <p>Input object for the batch transform job.</p>
     #   @return [Types::BatchTransformInput]
     class ModelDashboardMonitoringSchedule < Struct.new(
+      nil,
       :monitoring_schedule_arn,
       :monitoring_schedule_name,
       :monitoring_schedule_status,
@@ -21988,6 +22896,7 @@ module Aws::SageMaker
     #   <p>Data quality constraints for a model.</p>
     #   @return [Types::MetricsSource]
     class ModelDataQuality < Struct.new(
+      nil,
       :statistics,
       :constraints,
       keyword_init: true
@@ -22000,6 +22909,7 @@ module Aws::SageMaker
     #   <p>Specifies the S3 location of ML model data to deploy.</p>
     #   @return [Types::S3ModelDataSource]
     class ModelDataSource < Struct.new(
+      nil,
       :s3_data_source,
       keyword_init: true
     )
@@ -22014,6 +22924,7 @@ module Aws::SageMaker
     #   <p>Specifies the endpoint name to use for a one-click Autopilot model deployment if the endpoint name is not generated automatically.</p> <note> <p>Specify the <code>EndpointName</code> if and only if you set <code>AutoGenerateEndpointName</code> to <code>False</code>; otherwise a 400 error is thrown.</p> </note>
     #   @return [String]
     class ModelDeployConfig < Struct.new(
+      nil,
       :auto_generate_endpoint_name,
       :endpoint_name,
       keyword_init: true
@@ -22026,6 +22937,7 @@ module Aws::SageMaker
     #   <p>The name of the endpoint to which the model has been deployed.</p> <note> <p>If model deployment fails, this field is omitted from the response.</p> </note>
     #   @return [String]
     class ModelDeployResult < Struct.new(
+      nil,
       :endpoint_name,
       keyword_init: true
     )
@@ -22037,6 +22949,7 @@ module Aws::SageMaker
     #   <p>Provides a hash value that uniquely identifies the stored model artifacts.</p>
     #   @return [String]
     class ModelDigests < Struct.new(
+      nil,
       :artifact_digest,
       keyword_init: true
     )
@@ -22054,6 +22967,7 @@ module Aws::SageMaker
     #   <p>Sets the environment variables in the Docker container.</p>
     #   @return [Hash<String, String>]
     class ModelExplainabilityAppSpecification < Struct.new(
+      nil,
       :image_uri,
       :config_uri,
       :environment,
@@ -22070,6 +22984,7 @@ module Aws::SageMaker
     #   <p>The constraints resource for a monitoring job.</p>
     #   @return [Types::MonitoringConstraintsResource]
     class ModelExplainabilityBaselineConfig < Struct.new(
+      nil,
       :baselining_job_name,
       :constraints_resource,
       keyword_init: true
@@ -22085,6 +23000,7 @@ module Aws::SageMaker
     #   <p>Input object for the batch transform job.</p>
     #   @return [Types::BatchTransformInput]
     class ModelExplainabilityJobInput < Struct.new(
+      nil,
       :endpoint_input,
       :batch_transform_input,
       keyword_init: true
@@ -22100,6 +23016,7 @@ module Aws::SageMaker
     #   <p>The infrastructure configuration for deploying the model to real-time inference.</p>
     #   @return [Types::RealTimeInferenceConfig]
     class ModelInfrastructureConfig < Struct.new(
+      nil,
       :infrastructure_type,
       :real_time_inference_config,
       keyword_init: true
@@ -22112,6 +23029,7 @@ module Aws::SageMaker
     #   <p>The input configuration object for the model.</p>
     #   @return [String]
     class ModelInput < Struct.new(
+      nil,
       :data_input_config,
       keyword_init: true
     )
@@ -22126,6 +23044,7 @@ module Aws::SageMaker
     #   <p>The model latency percentile value in milliseconds.</p>
     #   @return [Integer]
     class ModelLatencyThreshold < Struct.new(
+      nil,
       :percentile,
       :value_in_milliseconds,
       keyword_init: true
@@ -22144,6 +23063,7 @@ module Aws::SageMaker
     #   <p> Describes the stage related details. </p>
     #   @return [String]
     class ModelLifeCycle < Struct.new(
+      nil,
       :stage,
       :stage_status,
       :stage_description,
@@ -22160,6 +23080,7 @@ module Aws::SageMaker
     #   <p>The value to filter the model metadata.</p>
     #   @return [String]
     class ModelMetadataFilter < Struct.new(
+      nil,
       :name,
       :value,
       keyword_init: true
@@ -22172,6 +23093,7 @@ module Aws::SageMaker
     #   <p>A list of filter objects.</p>
     #   @return [Array<Types::ModelMetadataFilter>]
     class ModelMetadataSearchExpression < Struct.new(
+      nil,
       :filters,
       keyword_init: true
     )
@@ -22195,6 +23117,7 @@ module Aws::SageMaker
     #   <p>The framework version of the model.</p>
     #   @return [String]
     class ModelMetadataSummary < Struct.new(
+      nil,
       :domain,
       :framework,
       :task,
@@ -22219,6 +23142,7 @@ module Aws::SageMaker
     #   <p>Metrics that help explain a model.</p>
     #   @return [Types::Explainability]
     class ModelMetrics < Struct.new(
+      nil,
       :model_quality,
       :model_data_quality,
       :bias,
@@ -22323,6 +23247,7 @@ module Aws::SageMaker
     #   <p>Indicates if you want to skip model validation.</p>
     #   @return [String]
     class ModelPackage < Struct.new(
+      nil,
       :model_package_name,
       :model_package_group_name,
       :model_package_version,
@@ -22400,6 +23325,7 @@ module Aws::SageMaker
     #   <p>The ETag associated with Model Data URL.</p>
     #   @return [String]
     class ModelPackageContainerDefinition < Struct.new(
+      nil,
       :container_hostname,
       :image,
       :image_digest,
@@ -22441,6 +23367,7 @@ module Aws::SageMaker
     #   <p>A list of the tags associated with the model group. For more information, see <a href="https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html">Tagging Amazon Web Services resources</a> in the <i>Amazon Web Services General Reference Guide</i>.</p>
     #   @return [Array<Types::Tag>]
     class ModelPackageGroup < Struct.new(
+      nil,
       :model_package_group_name,
       :model_package_group_arn,
       :model_package_group_description,
@@ -22470,6 +23397,7 @@ module Aws::SageMaker
     #   <p>The status of the model group.</p>
     #   @return [String]
     class ModelPackageGroupSummary < Struct.new(
+      nil,
       :model_package_group_name,
       :model_package_group_arn,
       :model_package_group_description,
@@ -22488,6 +23416,7 @@ module Aws::SageMaker
     #   <p>The approval status of the model card within your organization. Different organizations might have different criteria for model card review and approval.</p> <ul> <li> <p> <code>Draft</code>: The model card is a work in progress.</p> </li> <li> <p> <code>PendingReview</code>: The model card is pending review.</p> </li> <li> <p> <code>Approved</code>: The model card is approved.</p> </li> <li> <p> <code>Archived</code>: The model card is archived. No more updates can be made to the model card content. If you try to update the model card content, you will receive the message <code>Model Card is in Archived state</code>.</p> </li> </ul>
     #   @return [String]
     class ModelPackageModelCard < Struct.new(
+      nil,
       :model_card_content,
       :model_card_status,
       keyword_init: true
@@ -22500,6 +23429,7 @@ module Aws::SageMaker
     #   <p>The KMS Key ID (<code>KMSKeyId</code>) used for encryption of model package information.</p>
     #   @return [String]
     class ModelPackageSecurityConfig < Struct.new(
+      nil,
       :kms_key_id,
       keyword_init: true
     )
@@ -22514,6 +23444,7 @@ module Aws::SageMaker
     #   <p>The status of the scan of the Docker image container for the model package.</p>
     #   @return [Array<Types::ModelPackageStatusItem>]
     class ModelPackageStatusDetails < Struct.new(
+      nil,
       :validation_statuses,
       :image_scan_statuses,
       keyword_init: true
@@ -22532,6 +23463,7 @@ module Aws::SageMaker
     #   <p>if the overall status is <code>Failed</code>, the reason for the failure.</p>
     #   @return [String]
     class ModelPackageStatusItem < Struct.new(
+      nil,
       :name,
       :status,
       :failure_reason,
@@ -22569,6 +23501,7 @@ module Aws::SageMaker
     #   <p> A structure describing the current state of the model in its life cycle. </p>
     #   @return [Types::ModelLifeCycle]
     class ModelPackageSummary < Struct.new(
+      nil,
       :model_package_name,
       :model_package_group_name,
       :model_package_version,
@@ -22591,6 +23524,7 @@ module Aws::SageMaker
     #   <p>The <code>TransformJobDefinition</code> object that describes the transform job used for the validation of the model package.</p>
     #   @return [Types::TransformJobDefinition]
     class ModelPackageValidationProfile < Struct.new(
+      nil,
       :profile_name,
       :transform_job_definition,
       keyword_init: true
@@ -22606,6 +23540,7 @@ module Aws::SageMaker
     #   <p>An array of <code>ModelPackageValidationProfile</code> objects, each of which specifies a batch transform job that SageMaker runs to validate your model package.</p>
     #   @return [Array<Types::ModelPackageValidationProfile>]
     class ModelPackageValidationSpecification < Struct.new(
+      nil,
       :validation_role,
       :validation_profiles,
       keyword_init: true
@@ -22621,6 +23556,7 @@ module Aws::SageMaker
     #   <p>Model quality constraints.</p>
     #   @return [Types::MetricsSource]
     class ModelQuality < Struct.new(
+      nil,
       :statistics,
       :constraints,
       keyword_init: true
@@ -22651,6 +23587,7 @@ module Aws::SageMaker
     #   <p>Sets the environment variables in the container that the monitoring job runs.</p>
     #   @return [Hash<String, String>]
     class ModelQualityAppSpecification < Struct.new(
+      nil,
       :image_uri,
       :container_entrypoint,
       :container_arguments,
@@ -22671,6 +23608,7 @@ module Aws::SageMaker
     #   <p>The constraints resource for a monitoring job.</p>
     #   @return [Types::MonitoringConstraintsResource]
     class ModelQualityBaselineConfig < Struct.new(
+      nil,
       :baselining_job_name,
       :constraints_resource,
       keyword_init: true
@@ -22689,6 +23627,7 @@ module Aws::SageMaker
     #   <p>The ground truth label provided for the model.</p>
     #   @return [Types::MonitoringGroundTruthS3Input]
     class ModelQualityJobInput < Struct.new(
+      nil,
       :endpoint_input,
       :batch_transform_input,
       :ground_truth_s3_input,
@@ -22705,6 +23644,7 @@ module Aws::SageMaker
     #   <p>Environment variables that override the default ones in the model container.</p>
     #   @return [Hash<String, String>]
     class ModelQuantizationConfig < Struct.new(
+      nil,
       :image,
       :override_environment,
       keyword_init: true
@@ -22720,6 +23660,7 @@ module Aws::SageMaker
     #   <p>The Amazon Resource Name (ARN) of the SageMaker model registry account. Required only to register model versions created by a different SageMaker Canvas Amazon Web Services account than the Amazon Web Services account in which SageMaker model registry is set up.</p>
     #   @return [String]
     class ModelRegisterSettings < Struct.new(
+      nil,
       :status,
       :cross_account_model_register_role_arn,
       keyword_init: true
@@ -22735,6 +23676,7 @@ module Aws::SageMaker
     #   <p>Environment variables that override the default ones in the model container.</p>
     #   @return [Hash<String, String>]
     class ModelShardingConfig < Struct.new(
+      nil,
       :image,
       :override_environment,
       keyword_init: true
@@ -22747,6 +23689,7 @@ module Aws::SageMaker
     #   <p>The Amazon Resource Name (ARN) of the created model.</p>
     #   @return [String]
     class ModelStepMetadata < Struct.new(
+      nil,
       :arn,
       keyword_init: true
     )
@@ -22764,6 +23707,7 @@ module Aws::SageMaker
     #   <p>A timestamp that indicates when the model was created.</p>
     #   @return [Time]
     class ModelSummary < Struct.new(
+      nil,
       :model_name,
       :model_arn,
       :creation_time,
@@ -22783,6 +23727,7 @@ module Aws::SageMaker
     #   <p>The configuration for the infrastructure that the model will be deployed to.</p>
     #   @return [Types::ModelInfrastructureConfig]
     class ModelVariantConfig < Struct.new(
+      nil,
       :model_name,
       :variant_name,
       :infrastructure_config,
@@ -22805,6 +23750,7 @@ module Aws::SageMaker
     #   <p>The status of deployment for the model variant on the hosted inference endpoint.</p> <ul> <li> <p> <code>Creating</code> - Amazon SageMaker is preparing the model variant on the hosted inference endpoint. </p> </li> <li> <p> <code>InService</code> - The model variant is running on the hosted inference endpoint. </p> </li> <li> <p> <code>Updating</code> - Amazon SageMaker is updating the model variant on the hosted inference endpoint. </p> </li> <li> <p> <code>Deleting</code> - Amazon SageMaker is deleting the model variant on the hosted inference endpoint. </p> </li> <li> <p> <code>Deleted</code> - The model variant has been deleted on the hosted inference endpoint. This can only happen after stopping the experiment. </p> </li> </ul>
     #   @return [String]
     class ModelVariantConfigSummary < Struct.new(
+      nil,
       :model_name,
       :variant_name,
       :infrastructure_config,
@@ -22819,6 +23765,7 @@ module Aws::SageMaker
     #   <p>An alert action taken to light up an icon on the Model Dashboard when an alert goes into <code>InAlert</code> status.</p>
     #   @return [Types::ModelDashboardIndicatorAction]
     class MonitoringAlertActions < Struct.new(
+      nil,
       :model_dashboard_indicator,
       keyword_init: true
     )
@@ -22839,6 +23786,7 @@ module Aws::SageMaker
     #   <p>The current alert status of an alert.</p>
     #   @return [String]
     class MonitoringAlertHistorySummary < Struct.new(
+      nil,
       :monitoring_schedule_name,
       :monitoring_alert_name,
       :creation_time,
@@ -22871,6 +23819,7 @@ module Aws::SageMaker
     #   <p>A list of alert actions taken in response to an alert going into <code>InAlert</code> status.</p>
     #   @return [Types::MonitoringAlertActions]
     class MonitoringAlertSummary < Struct.new(
+      nil,
       :monitoring_alert_name,
       :creation_time,
       :last_modified_time,
@@ -22900,6 +23849,7 @@ module Aws::SageMaker
     #   <p>An Amazon S3 URI to a script that is called after analysis has been performed. Applicable only for the built-in (first party) containers.</p>
     #   @return [String]
     class MonitoringAppSpecification < Struct.new(
+      nil,
       :image_uri,
       :container_entrypoint,
       :container_arguments,
@@ -22921,6 +23871,7 @@ module Aws::SageMaker
     #   <p>The baseline statistics file in Amazon S3 that the current monitoring job should be validated against.</p>
     #   @return [Types::MonitoringStatisticsResource]
     class MonitoringBaselineConfig < Struct.new(
+      nil,
       :baselining_job_name,
       :constraints_resource,
       :statistics_resource,
@@ -22943,6 +23894,7 @@ module Aws::SageMaker
     #   <p>The Key Management Service (KMS) key that Amazon SageMaker AI uses to encrypt data on the storage volume attached to the ML compute instance(s) that run the model monitoring job.</p>
     #   @return [String]
     class MonitoringClusterConfig < Struct.new(
+      nil,
       :instance_count,
       :instance_type,
       :volume_size_in_gb,
@@ -22957,6 +23909,7 @@ module Aws::SageMaker
     #   <p>The Amazon S3 URI for the constraints resource.</p>
     #   @return [String]
     class MonitoringConstraintsResource < Struct.new(
+      nil,
       :s3_uri,
       keyword_init: true
     )
@@ -22968,6 +23921,7 @@ module Aws::SageMaker
     #   <p>Indicates if the CSV data has a header.</p>
     #   @return [Boolean]
     class MonitoringCsvDatasetFormat < Struct.new(
+      nil,
       :header,
       keyword_init: true
     )
@@ -22985,6 +23939,7 @@ module Aws::SageMaker
     #   <p>The Parquet dataset used in the monitoring job</p>
     #   @return [Types::MonitoringParquetDatasetFormat]
     class MonitoringDatasetFormat < Struct.new(
+      nil,
       :csv,
       :json,
       :parquet,
@@ -23025,6 +23980,7 @@ module Aws::SageMaker
     #   <p>The type of the monitoring job.</p>
     #   @return [String]
     class MonitoringExecutionSummary < Struct.new(
+      nil,
       :monitoring_schedule_name,
       :scheduled_time,
       :creation_time,
@@ -23045,6 +24001,7 @@ module Aws::SageMaker
     #   <p>The address of the Amazon S3 location of the ground truth labels.</p>
     #   @return [String]
     class MonitoringGroundTruthS3Input < Struct.new(
+      nil,
       :s3_uri,
       keyword_init: true
     )
@@ -23059,6 +24016,7 @@ module Aws::SageMaker
     #   <p>Input object for the batch transform job.</p>
     #   @return [Types::BatchTransformInput]
     class MonitoringInput < Struct.new(
+      nil,
       :endpoint_input,
       :batch_transform_input,
       keyword_init: true
@@ -23095,6 +24053,7 @@ module Aws::SageMaker
     #   <p>The Amazon Resource Name (ARN) of an IAM role that Amazon SageMaker AI can assume to perform tasks on your behalf.</p>
     #   @return [String]
     class MonitoringJobDefinition < Struct.new(
+      nil,
       :baseline_config,
       :monitoring_inputs,
       :monitoring_output_config,
@@ -23123,6 +24082,7 @@ module Aws::SageMaker
     #   <p>The name of the endpoint that the job monitors.</p>
     #   @return [String]
     class MonitoringJobDefinitionSummary < Struct.new(
+      nil,
       :monitoring_job_definition_name,
       :monitoring_job_definition_arn,
       :creation_time,
@@ -23137,6 +24097,7 @@ module Aws::SageMaker
     #   <p>Indicates if the file should be read as a JSON object per line. </p>
     #   @return [Boolean]
     class MonitoringJsonDatasetFormat < Struct.new(
+      nil,
       :line,
       keyword_init: true
     )
@@ -23154,6 +24115,7 @@ module Aws::SageMaker
     #   <p>Specifies an Amazon Virtual Private Cloud (VPC) that your SageMaker jobs, hosted models, and compute resources have access to. You can control access to and from your resources by configuring a VPC. For more information, see <a href="https://docs.aws.amazon.com/sagemaker/latest/dg/infrastructure-give-access.html">Give SageMaker Access to Resources in your Amazon VPC</a>. </p>
     #   @return [Types::VpcConfig]
     class MonitoringNetworkConfig < Struct.new(
+      nil,
       :enable_inter_container_traffic_encryption,
       :enable_network_isolation,
       :vpc_config,
@@ -23167,6 +24129,7 @@ module Aws::SageMaker
     #   <p>The Amazon S3 storage location where the results of a monitoring job are saved.</p>
     #   @return [Types::MonitoringS3Output]
     class MonitoringOutput < Struct.new(
+      nil,
       :s3_output,
       keyword_init: true
     )
@@ -23181,6 +24144,7 @@ module Aws::SageMaker
     #   <p>The Key Management Service (KMS) key that Amazon SageMaker AI uses to encrypt the model artifacts at rest using Amazon S3 server-side encryption.</p>
     #   @return [String]
     class MonitoringOutputConfig < Struct.new(
+      nil,
       :monitoring_outputs,
       :kms_key_id,
       keyword_init: true
@@ -23190,6 +24154,7 @@ module Aws::SageMaker
 
     # <p>Represents the Parquet dataset format used when running a monitoring job.</p>
     class MonitoringParquetDatasetFormat < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -23200,6 +24165,7 @@ module Aws::SageMaker
     #   <p>The configuration for the cluster resources used to run the processing job.</p>
     #   @return [Types::MonitoringClusterConfig]
     class MonitoringResources < Struct.new(
+      nil,
       :cluster_config,
       keyword_init: true
     )
@@ -23217,6 +24183,7 @@ module Aws::SageMaker
     #   <p>Whether to upload the results of the monitoring job continuously or after the job completes.</p>
     #   @return [String]
     class MonitoringS3Output < Struct.new(
+      nil,
       :s3_uri,
       :local_path,
       :s3_upload_mode,
@@ -23260,6 +24227,7 @@ module Aws::SageMaker
     #   <p>A list of the tags associated with the monitoring schedlue. For more information, see <a href="https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html">Tagging Amazon Web Services resources</a> in the <i>Amazon Web Services General Reference Guide</i>.</p>
     #   @return [Array<Types::Tag>]
     class MonitoringSchedule < Struct.new(
+      nil,
       :monitoring_schedule_arn,
       :monitoring_schedule_name,
       :monitoring_schedule_status,
@@ -23290,6 +24258,7 @@ module Aws::SageMaker
     #   <p>The type of the monitoring job definition to schedule.</p>
     #   @return [String]
     class MonitoringScheduleConfig < Struct.new(
+      nil,
       :schedule_config,
       :monitoring_job_definition,
       :monitoring_job_definition_name,
@@ -23325,6 +24294,7 @@ module Aws::SageMaker
     #   <p>The type of the monitoring job definition that the schedule is for.</p>
     #   @return [String]
     class MonitoringScheduleSummary < Struct.new(
+      nil,
       :monitoring_schedule_name,
       :monitoring_schedule_arn,
       :creation_time,
@@ -23343,6 +24313,7 @@ module Aws::SageMaker
     #   <p>The Amazon S3 URI for the statistics resource.</p>
     #   @return [String]
     class MonitoringStatisticsResource < Struct.new(
+      nil,
       :s3_uri,
       keyword_init: true
     )
@@ -23354,6 +24325,7 @@ module Aws::SageMaker
     #   <p>The maximum runtime allowed in seconds.</p> <note> <p>The <code>MaxRuntimeInSeconds</code> cannot exceed the frequency of the job. For data quality and model explainability, this can be up to 3600 seconds for an hourly schedule. For model bias and model quality hourly schedules, this can be up to 1800 seconds.</p> </note>
     #   @return [Integer]
     class MonitoringStoppingCondition < Struct.new(
+      nil,
       :max_runtime_in_seconds,
       keyword_init: true
     )
@@ -23365,6 +24337,7 @@ module Aws::SageMaker
     #   <p>Whether to cache models for a multi-model endpoint. By default, multi-model endpoints cache models so that a model does not have to be loaded into memory each time it is invoked. Some use cases do not benefit from model caching. For example, if an endpoint hosts a large number of models that are each invoked infrequently, the endpoint might perform better if you disable model caching. To disable model caching, set the value of this parameter to <code>Disabled</code>.</p>
     #   @return [String]
     class MultiModelConfig < Struct.new(
+      nil,
       :model_cache_setting,
       keyword_init: true
     )
@@ -23379,6 +24352,7 @@ module Aws::SageMaker
     #   <p>The ID of the subnets in the VPC that you want to connect the compilation job to for accessing the model in Amazon S3.</p>
     #   @return [Array<String>]
     class NeoVpcConfig < Struct.new(
+      nil,
       :security_group_ids,
       :subnets,
       keyword_init: true
@@ -23394,6 +24368,7 @@ module Aws::SageMaker
     #   <p>A list of filters. Each filter acts on a property. Filters must contain at least one <code>Filters</code> value. For example, a <code>NestedFilters</code> call might include a filter on the <code>PropertyName</code> parameter of the <code>InputDataConfig</code> property: <code>InputDataConfig.DataSource.S3DataSource.S3Uri</code>.</p>
     #   @return [Array<Types::Filter>]
     class NestedFilters < Struct.new(
+      nil,
       :nested_property_name,
       :filters,
       keyword_init: true
@@ -23412,6 +24387,7 @@ module Aws::SageMaker
     #   <p>Specifies an Amazon Virtual Private Cloud (VPC) that your SageMaker jobs, hosted models, and compute resources have access to. You can control access to and from your resources by configuring a VPC. For more information, see <a href="https://docs.aws.amazon.com/sagemaker/latest/dg/infrastructure-give-access.html">Give SageMaker Access to Resources in your Amazon VPC</a>. </p>
     #   @return [Types::VpcConfig]
     class NetworkConfig < Struct.new(
+      nil,
       :enable_inter_container_traffic_encryption,
       :enable_network_isolation,
       :vpc_config,
@@ -23431,6 +24407,7 @@ module Aws::SageMaker
     #   <p>The current status of the node. Possible values include <code>Pending</code>, <code>Running</code>, <code>Failed</code>, <code>ShuttingDown</code>, <code>SystemUpdating</code>, <code>DeepHealthCheckInProgress</code>, and <code>NotFound</code>.</p>
     #   @return [String]
     class NodeAdditionResult < Struct.new(
+      nil,
       :node_logical_id,
       :instance_group_name,
       :status,
@@ -23453,6 +24430,7 @@ module Aws::SageMaker
     #   <p>A timestamp that tells when the lifecycle configuration was last modified.</p>
     #   @return [Time]
     class NotebookInstanceLifecycleConfigSummary < Struct.new(
+      nil,
       :notebook_instance_lifecycle_config_name,
       :notebook_instance_lifecycle_config_arn,
       :creation_time,
@@ -23467,6 +24445,7 @@ module Aws::SageMaker
     #   <p>A base64-encoded string that contains a shell script for a notebook instance lifecycle configuration.</p>
     #   @return [String]
     class NotebookInstanceLifecycleHook < Struct.new(
+      nil,
       :content,
       keyword_init: true
     )
@@ -23505,6 +24484,7 @@ module Aws::SageMaker
     #   <p>An array of up to three Git repositories associated with the notebook instance. These can be either the names of Git repositories stored as resources in your account, or the URL of Git repositories in <a href="https://docs.aws.amazon.com/codecommit/latest/userguide/welcome.html">Amazon Web Services CodeCommit</a> or in any other Git repository. These repositories are cloned at the same level as the default repository of your notebook instance. For more information, see <a href="https://docs.aws.amazon.com/sagemaker/latest/dg/nbi-git-repo.html">Associating Git Repositories with SageMaker AI Notebook Instances</a>.</p>
     #   @return [Array<String>]
     class NotebookInstanceSummary < Struct.new(
+      nil,
       :notebook_instance_name,
       :notebook_instance_arn,
       :notebook_instance_status,
@@ -23525,6 +24505,7 @@ module Aws::SageMaker
     #   <p>The ARN for the Amazon SNS topic to which notifications should be published.</p>
     #   @return [String]
     class NotificationConfiguration < Struct.new(
+      nil,
       :notification_topic_arn,
       keyword_init: true
     )
@@ -23542,6 +24523,7 @@ module Aws::SageMaker
     #   <p>The number of training jobs whose final objective metric was not evaluated and used in the hyperparameter tuning process. This typically occurs when the training job failed or did not emit an objective metric.</p>
     #   @return [Integer]
     class ObjectiveStatusCounters < Struct.new(
+      nil,
       :succeeded,
       :pending,
       :failed,
@@ -23564,6 +24546,7 @@ module Aws::SageMaker
     #   <p>Format for the offline store table. Supported formats are Glue (Default) and <a href="https://iceberg.apache.org/">Apache Iceberg</a>.</p>
     #   @return [String]
     class OfflineStoreConfig < Struct.new(
+      nil,
       :s3_storage_config,
       :disable_glue_table_creation,
       :data_catalog_config,
@@ -23581,6 +24564,7 @@ module Aws::SageMaker
     #   <p>The justification for why the OfflineStoreStatus is Blocked (if applicable).</p>
     #   @return [String]
     class OfflineStoreStatus < Struct.new(
+      nil,
       :status,
       :blocked_reason,
       keyword_init: true
@@ -23620,6 +24604,7 @@ module Aws::SageMaker
     #   <p>A string to string map of identifiers specific to the custom identity provider (IdP) being used.</p>
     #   @return [Hash<String, String>]
     class OidcConfig < Struct.new(
+      nil,
       :client_id,
       :client_secret,
       :issuer,
@@ -23664,6 +24649,7 @@ module Aws::SageMaker
     #   <p>A string to string map of identifiers specific to the custom identity provider (IdP) being used.</p>
     #   @return [Hash<String, String>]
     class OidcConfigForResponse < Struct.new(
+      nil,
       :client_id,
       :issuer,
       :authorization_endpoint,
@@ -23683,6 +24669,7 @@ module Aws::SageMaker
     #   <p>A list of comma seperated strings that identifies user groups in your OIDC IdP. Each user group is made up of a group of private workers.</p>
     #   @return [Array<String>]
     class OidcMemberDefinition < Struct.new(
+      nil,
       :groups,
       keyword_init: true
     )
@@ -23703,6 +24690,7 @@ module Aws::SageMaker
     #   <p>Option for different tiers of low latency storage for real-time data retrieval.</p> <ul> <li> <p> <code>Standard</code>: A managed low latency data store for feature groups.</p> </li> <li> <p> <code>InMemory</code>: A managed data store for feature groups that supports very low latency retrieval. </p> </li> </ul>
     #   @return [String]
     class OnlineStoreConfig < Struct.new(
+      nil,
       :security_config,
       :enable_online_store,
       :ttl_duration,
@@ -23717,6 +24705,7 @@ module Aws::SageMaker
     #   <p>Time to live duration, where the record is hard deleted after the expiration time is reached; <code>ExpiresAt</code> = <code>EventTime</code> + <code>TtlDuration</code>. For information on HardDelete, see the <a href="https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_feature_store_DeleteRecord.html">DeleteRecord</a> API in the Amazon SageMaker API Reference guide.</p>
     #   @return [Types::TtlDuration]
     class OnlineStoreConfigUpdate < Struct.new(
+      nil,
       :ttl_duration,
       keyword_init: true
     )
@@ -23728,6 +24717,7 @@ module Aws::SageMaker
     #   <p>The Amazon Web Services Key Management Service (KMS) key ARN that SageMaker Feature Store uses to encrypt the Amazon S3 objects at rest using Amazon S3 server-side encryption.</p> <p>The caller (either user or IAM role) of <code>CreateFeatureGroup</code> must have below permissions to the <code>OnlineStore</code> <code>KmsKeyId</code>:</p> <ul> <li> <p> <code>"kms:Encrypt"</code> </p> </li> <li> <p> <code>"kms:Decrypt"</code> </p> </li> <li> <p> <code>"kms:DescribeKey"</code> </p> </li> <li> <p> <code>"kms:CreateGrant"</code> </p> </li> <li> <p> <code>"kms:RetireGrant"</code> </p> </li> <li> <p> <code>"kms:ReEncryptFrom"</code> </p> </li> <li> <p> <code>"kms:ReEncryptTo"</code> </p> </li> <li> <p> <code>"kms:GenerateDataKey"</code> </p> </li> <li> <p> <code>"kms:ListAliases"</code> </p> </li> <li> <p> <code>"kms:ListGrants"</code> </p> </li> <li> <p> <code>"kms:RevokeGrant"</code> </p> </li> </ul> <p>The caller (either user or IAM role) to all DataPlane operations (<code>PutRecord</code>, <code>GetRecord</code>, <code>DeleteRecord</code>) must have the following permissions to the <code>KmsKeyId</code>:</p> <ul> <li> <p> <code>"kms:Decrypt"</code> </p> </li> </ul>
     #   @return [String]
     class OnlineStoreSecurityConfig < Struct.new(
+      nil,
       :kms_key_id,
       keyword_init: true
     )
@@ -23764,6 +24754,7 @@ module Aws::SageMaker
     #   <p>The Amazon S3 location of a source model to optimize with an optimization job.</p>
     #   @return [Types::OptimizationJobModelSourceS3]
     class OptimizationJobModelSource < Struct.new(
+      nil,
       :s3,
       keyword_init: true
     )
@@ -23778,6 +24769,7 @@ module Aws::SageMaker
     #   <p>The access configuration settings for the source ML model for an optimization job, where you can accept the model end-user license agreement (EULA).</p>
     #   @return [Types::OptimizationModelAccessConfig]
     class OptimizationJobModelSourceS3 < Struct.new(
+      nil,
       :s3_uri,
       :model_access_config,
       keyword_init: true
@@ -23793,6 +24785,7 @@ module Aws::SageMaker
     #   <p>The Amazon S3 URI for where to store the optimized model that you create with an optimization job.</p>
     #   @return [String]
     class OptimizationJobOutputConfig < Struct.new(
+      nil,
       :kms_key_id,
       :s3_output_location,
       keyword_init: true
@@ -23829,6 +24822,7 @@ module Aws::SageMaker
     #   <p>The optimization techniques that are applied by the optimization job.</p>
     #   @return [Array<String>]
     class OptimizationJobSummary < Struct.new(
+      nil,
       :optimization_job_name,
       :optimization_job_arn,
       :creation_time,
@@ -23848,6 +24842,7 @@ module Aws::SageMaker
     #   <p>Specifies agreement to the model end-user license agreement (EULA). The <code>AcceptEula</code> value must be explicitly defined as <code>True</code> in order to accept the EULA that this model requires. You are responsible for reviewing and complying with any applicable license terms and making sure they are acceptable for your use case before downloading or using a model.</p>
     #   @return [Boolean]
     class OptimizationModelAccessConfig < Struct.new(
+      nil,
       :accept_eula,
       keyword_init: true
     )
@@ -23859,6 +24854,7 @@ module Aws::SageMaker
     #   <p>The image that SageMaker recommends that you use to host the optimized model that you created with an optimization job.</p>
     #   @return [String]
     class OptimizationOutput < Struct.new(
+      nil,
       :recommended_inference_image,
       keyword_init: true
     )
@@ -23873,6 +24869,7 @@ module Aws::SageMaker
     #   <p>The ID of the subnets in the VPC to which you want to connect your optimized model.</p>
     #   @return [Array<String>]
     class OptimizationVpcConfig < Struct.new(
+      nil,
       :security_group_ids,
       :subnets,
       keyword_init: true
@@ -23897,6 +24894,7 @@ module Aws::SageMaker
     #   <p>The Amazon Web Services Key Management Service key (Amazon Web Services KMS) that Amazon SageMaker AI uses to encrypt your output models with Amazon S3 server-side encryption after compilation job. If you don't provide a KMS key ID, Amazon SageMaker AI uses the default KMS key for Amazon S3 for your role's account. For more information, see <a href="https://docs.aws.amazon.com/AmazonS3/latest/userguide/UsingKMSEncryption.html">KMS-Managed Encryption Keys</a> in the <i>Amazon Simple Storage Service Developer Guide.</i> </p> <p>The KmsKeyId can be any of the following formats: </p> <ul> <li> <p>Key ID: <code>1234abcd-12ab-34cd-56ef-1234567890ab</code> </p> </li> <li> <p>Key ARN: <code>arn:aws:kms:us-west-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab</code> </p> </li> <li> <p>Alias name: <code>alias/ExampleAlias</code> </p> </li> <li> <p>Alias name ARN: <code>arn:aws:kms:us-west-2:111122223333:alias/ExampleAlias</code> </p> </li> </ul>
     #   @return [String]
     class OutputConfig < Struct.new(
+      nil,
       :s3_output_location,
       :target_device,
       :target_platform,
@@ -23918,6 +24916,7 @@ module Aws::SageMaker
     #   <p>The model output compression type. Select <code>None</code> to output an uncompressed model, recommended for large model outputs. Defaults to gzip.</p>
     #   @return [String]
     class OutputDataConfig < Struct.new(
+      nil,
       :kms_key_id,
       :s3_output_path,
       :compression_type,
@@ -23934,6 +24933,7 @@ module Aws::SageMaker
     #   <p>The value of the output parameter.</p>
     #   @return [String]
     class OutputParameter < Struct.new(
+      nil,
       :name,
       :value,
       keyword_init: true
@@ -23946,6 +24946,7 @@ module Aws::SageMaker
     #   <p>The user profile who is the owner of the space.</p>
     #   @return [String]
     class OwnershipSettings < Struct.new(
+      nil,
       :owner_user_profile_name,
       keyword_init: true
     )
@@ -23957,6 +24958,7 @@ module Aws::SageMaker
     #   <p>The user profile who is the owner of the space.</p>
     #   @return [String]
     class OwnershipSettingsSummary < Struct.new(
+      nil,
       :owner_user_profile_name,
       keyword_init: true
     )
@@ -23968,6 +24970,7 @@ module Aws::SageMaker
     #   <p>The max number of steps that can be executed in parallel. </p>
     #   @return [Integer]
     class ParallelismConfiguration < Struct.new(
+      nil,
       :max_parallel_execution_steps,
       keyword_init: true
     )
@@ -23982,6 +24985,7 @@ module Aws::SageMaker
     #   <p>The literal value for the parameter.</p>
     #   @return [String]
     class Parameter < Struct.new(
+      nil,
       :name,
       :value,
       keyword_init: true
@@ -24000,6 +25004,7 @@ module Aws::SageMaker
     #   <p>A <code>CategoricalParameterRangeSpecification</code> object that defines the possible values for a categorical hyperparameter.</p>
     #   @return [Types::CategoricalParameterRangeSpecification]
     class ParameterRange < Struct.new(
+      nil,
       :integer_parameter_range_specification,
       :continuous_parameter_range_specification,
       :categorical_parameter_range_specification,
@@ -24022,6 +25027,7 @@ module Aws::SageMaker
     #   <p>A list containing hyperparameter names and example values to be used by Autotune to determine optimal ranges for your tuning job.</p>
     #   @return [Array<Types::AutoParameter>]
     class ParameterRanges < Struct.new(
+      nil,
       :integer_parameter_ranges,
       :continuous_parameter_ranges,
       :categorical_parameter_ranges,
@@ -24039,6 +25045,7 @@ module Aws::SageMaker
     #   <p>The name of the experiment.</p>
     #   @return [String]
     class Parent < Struct.new(
+      nil,
       :trial_name,
       :experiment_name,
       keyword_init: true
@@ -24051,6 +25058,7 @@ module Aws::SageMaker
     #   <p>The name of the hyperparameter tuning job to be used as a starting point for a new hyperparameter tuning job.</p>
     #   @return [String]
     class ParentHyperParameterTuningJob < Struct.new(
+      nil,
       :hyper_parameter_tuning_job_name,
       keyword_init: true
     )
@@ -24065,6 +25073,7 @@ module Aws::SageMaker
     #   <p>This is a map of required inputs for a SageMaker Partner AI App. Based on the application type, the map is populated with a key and value pair that is specific to the user and application.</p>
     #   @return [Hash<String, String>]
     class PartnerAppConfig < Struct.new(
+      nil,
       :admin_users,
       :arguments,
       keyword_init: true
@@ -24077,6 +25086,7 @@ module Aws::SageMaker
     #   <p>The day and time of the week in Coordinated Universal Time (UTC) 24-hour standard time that weekly maintenance updates are scheduled. This value must take the following format: <code>3-letter-day:24-h-hour:minute</code>. For example: <code>TUE:03:30</code>.</p>
     #   @return [String]
     class PartnerAppMaintenanceConfig < Struct.new(
+      nil,
       :maintenance_window_start,
       keyword_init: true
     )
@@ -24100,6 +25110,7 @@ module Aws::SageMaker
     #   <p>The creation time of the SageMaker Partner AI App.</p>
     #   @return [Time]
     class PartnerAppSummary < Struct.new(
+      nil,
       :arn,
       :name,
       :type,
@@ -24124,6 +25135,7 @@ module Aws::SageMaker
     #   <p>An array of <a href="https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_PendingProductionVariantSummary.html">PendingProductionVariantSummary</a> objects, one for each model hosted behind this endpoint in shadow mode with production traffic replicated from the model specified on <code>ProductionVariants</code> for the in-progress deployment.</p>
     #   @return [Array<Types::PendingProductionVariantSummary>]
     class PendingDeploymentSummary < Struct.new(
+      nil,
       :endpoint_config_name,
       :production_variants,
       :start_time,
@@ -24174,6 +25186,7 @@ module Aws::SageMaker
     #   <p>Settings that control how the endpoint routes incoming traffic to the instances that the endpoint hosts.</p>
     #   @return [Types::ProductionVariantRoutingConfig]
     class PendingProductionVariantSummary < Struct.new(
+      nil,
       :variant_name,
       :deployed_images,
       :current_weight,
@@ -24203,6 +25216,7 @@ module Aws::SageMaker
     #   <p>Specifies how long a traffic phase should be. For custom load tests, the value should be between 120 and 3600. This value should not exceed <code>JobDurationInSeconds</code>.</p>
     #   @return [Integer]
     class Phase < Struct.new(
+      nil,
       :initial_number_of_users,
       :spawn_rate,
       :duration_in_seconds,
@@ -24252,6 +25266,7 @@ module Aws::SageMaker
     #   <p>A list of tags that apply to the pipeline.</p>
     #   @return [Array<Types::Tag>]
     class Pipeline < Struct.new(
+      nil,
       :pipeline_arn,
       :pipeline_name,
       :pipeline_display_name,
@@ -24281,6 +25296,7 @@ module Aws::SageMaker
     #   <p>Version Id of the pipeline definition file. If not specified, Amazon SageMaker will retrieve the latest version.</p>
     #   @return [String]
     class PipelineDefinitionS3Location < Struct.new(
+      nil,
       :bucket,
       :object_key,
       :version_id,
@@ -24339,6 +25355,7 @@ module Aws::SageMaker
     #   <p>The display name of the pipeline version that started this execution.</p>
     #   @return [String]
     class PipelineExecution < Struct.new(
+      nil,
       :pipeline_arn,
       :pipeline_execution_arn,
       :pipeline_execution_display_name,
@@ -24395,6 +25412,7 @@ module Aws::SageMaker
     #   <p>The ARN from an execution of the current pipeline from which results are reused for this step.</p>
     #   @return [Types::SelectiveExecutionResult]
     class PipelineExecutionStep < Struct.new(
+      nil,
       :step_name,
       :step_display_name,
       :step_description,
@@ -24461,6 +25479,7 @@ module Aws::SageMaker
     #   <p>The endpoint configuration used to create an endpoint during this step execution.</p>
     #   @return [Types::EndpointConfigStepMetadata]
     class PipelineExecutionStepMetadata < Struct.new(
+      nil,
       :training_job,
       :processing_job,
       :transform_job,
@@ -24502,6 +25521,7 @@ module Aws::SageMaker
     #   <p>A message generated by SageMaker Pipelines describing why the pipeline execution failed.</p>
     #   @return [String]
     class PipelineExecutionSummary < Struct.new(
+      nil,
       :pipeline_execution_arn,
       :start_time,
       :pipeline_execution_status,
@@ -24521,6 +25541,7 @@ module Aws::SageMaker
     #   <p>The name of the trial.</p>
     #   @return [String]
     class PipelineExperimentConfig < Struct.new(
+      nil,
       :experiment_name,
       :trial_name,
       keyword_init: true
@@ -24554,6 +25575,7 @@ module Aws::SageMaker
     #   <p>The last time that a pipeline execution began.</p>
     #   @return [Time]
     class PipelineSummary < Struct.new(
+      nil,
       :pipeline_arn,
       :pipeline_name,
       :pipeline_display_name,
@@ -24602,6 +25624,7 @@ module Aws::SageMaker
     #   <p>The status of the most recent pipeline execution created from this pipeline version.</p>
     #   @return [String]
     class PipelineVersion < Struct.new(
+      nil,
       :pipeline_arn,
       :pipeline_version_id,
       :pipeline_version_display_name,
@@ -24638,6 +25661,7 @@ module Aws::SageMaker
     #   <p>The Amazon Resource Name (ARN) of the most recent pipeline execution created from this pipeline version.</p>
     #   @return [String]
     class PipelineVersionSummary < Struct.new(
+      nil,
       :pipeline_arn,
       :pipeline_version_id,
       :creation_time,
@@ -24657,6 +25681,7 @@ module Aws::SageMaker
     #   <p>The number of ML compute instances required to be placed together on the same UltraServer. Minimum value of 1.</p>
     #   @return [Integer]
     class PlacementSpecification < Struct.new(
+      nil,
       :ultra_server_id,
       :instance_count,
       keyword_init: true
@@ -24669,6 +25694,7 @@ module Aws::SageMaker
     #   <p>The metric type. You can only apply SageMaker metric types to SageMaker endpoints.</p>
     #   @return [String]
     class PredefinedMetricSpecification < Struct.new(
+      nil,
       :predefined_metric_type,
       keyword_init: true
     )
@@ -24683,6 +25709,7 @@ module Aws::SageMaker
     #   <p>The expected S3 URL prefix for validation purposes. This parameter helps ensure consistency between the resolved S3 URIs and the deployment configuration, reducing potential compatibility issues.</p>
     #   @return [String]
     class PresignedUrlAccessConfig < Struct.new(
+      nil,
       :accept_eula,
       :expected_s3_url,
       keyword_init: true
@@ -24698,6 +25725,7 @@ module Aws::SageMaker
     #   <p>Weight of the priority class. The value is within a range from 0 to 100, where 0 is the default.</p> <p>A weight of 0 is the lowest priority and 100 is the highest. Weight 0 is the default.</p>
     #   @return [Integer]
     class PriorityClass < Struct.new(
+      nil,
       :name,
       :weight,
       keyword_init: true
@@ -24719,6 +25747,7 @@ module Aws::SageMaker
     #   <p>The Amazon Web Services Key Management Service (Amazon Web Services KMS) key that Amazon SageMaker uses to encrypt data on the storage volume attached to the ML compute instance(s) that run the processing job. </p> <note> <p>Certain Nitro-based instances include local storage, dependent on the instance type. Local storage volumes are encrypted using a hardware module on the instance. You can't request a <code>VolumeKmsKeyId</code> when using an instance type with local storage.</p> <p>For a list of instance types that support local instance storage, see <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/InstanceStorage.html#instance-store-volumes">Instance Store Volumes</a>.</p> <p>For more information about local instance storage encryption, see <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ssd-instance-store.html">SSD Instance Store Volumes</a>.</p> </note>
     #   @return [String]
     class ProcessingClusterConfig < Struct.new(
+      nil,
       :instance_count,
       :instance_type,
       :volume_size_in_gb,
@@ -24733,6 +25762,7 @@ module Aws::SageMaker
     #   <p>The name of the Amazon SageMaker FeatureGroup to use as the destination for processing job output. Note that your processing script is responsible for putting records into your Feature Store.</p>
     #   @return [String]
     class ProcessingFeatureStoreOutput < Struct.new(
+      nil,
       :feature_group_name,
       keyword_init: true
     )
@@ -24753,6 +25783,7 @@ module Aws::SageMaker
     #   <p>Configuration for a Dataset Definition input. </p>
     #   @return [Types::DatasetDefinition]
     class ProcessingInput < Struct.new(
+      nil,
       :input_name,
       :app_managed,
       :s3_input,
@@ -24830,6 +25861,7 @@ module Aws::SageMaker
     #   <p>An array of key-value pairs. For more information, see <a href="https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/cost-alloc-tags.html#allocation-whatURL">Using Cost Allocation Tags</a> in the <i>Amazon Web Services Billing and Cost Management User Guide</i>.</p>
     #   @return [Array<Types::Tag>]
     class ProcessingJob < Struct.new(
+      nil,
       :processing_inputs,
       :processing_output_config,
       :processing_job_name,
@@ -24862,6 +25894,7 @@ module Aws::SageMaker
     #   <p>The Amazon Resource Name (ARN) of the processing job.</p>
     #   @return [String]
     class ProcessingJobStepMetadata < Struct.new(
+      nil,
       :arn,
       keyword_init: true
     )
@@ -24894,6 +25927,7 @@ module Aws::SageMaker
     #   <p>An optional string, up to one KB in size, that contains metadata from the processing container when the processing job exits.</p>
     #   @return [String]
     class ProcessingJobSummary < Struct.new(
+      nil,
       :processing_job_name,
       :processing_job_arn,
       :creation_time,
@@ -24921,6 +25955,7 @@ module Aws::SageMaker
     #   <p>When <code>True</code>, output operations such as data upload are managed natively by the processing job application. When <code>False</code> (default), output operations are managed by Amazon SageMaker.</p>
     #   @return [Boolean]
     class ProcessingOutput < Struct.new(
+      nil,
       :output_name,
       :s3_output,
       :feature_store_output,
@@ -24938,6 +25973,7 @@ module Aws::SageMaker
     #   <p>The Amazon Web Services Key Management Service (Amazon Web Services KMS) key that Amazon SageMaker uses to encrypt the processing job output. <code>KmsKeyId</code> can be an ID of a KMS key, ARN of a KMS key, or alias of a KMS key. The <code>KmsKeyId</code> is applied to all outputs.</p>
     #   @return [String]
     class ProcessingOutputConfig < Struct.new(
+      nil,
       :outputs,
       :kms_key_id,
       keyword_init: true
@@ -24950,6 +25986,7 @@ module Aws::SageMaker
     #   <p>The configuration for the resources in a cluster used to run the processing job.</p>
     #   @return [Types::ProcessingClusterConfig]
     class ProcessingResources < Struct.new(
+      nil,
       :cluster_config,
       keyword_init: true
     )
@@ -24976,6 +26013,7 @@ module Aws::SageMaker
     #   <p>Whether to GZIP-decompress the data in Amazon S3 as it is streamed into the processing container. <code>Gzip</code> can only be used when <code>Pipe</code> mode is specified as the <code>S3InputMode</code>. In <code>Pipe</code> mode, Amazon SageMaker streams input data from the source directly to your container without using the EBS volume.</p>
     #   @return [String]
     class ProcessingS3Input < Struct.new(
+      nil,
       :s3_uri,
       :local_path,
       :s3_data_type,
@@ -24998,6 +26036,7 @@ module Aws::SageMaker
     #   <p>Whether to upload the results of the processing job continuously or after the job completes.</p>
     #   @return [String]
     class ProcessingS3Output < Struct.new(
+      nil,
       :s3_uri,
       :local_path,
       :s3_upload_mode,
@@ -25011,6 +26050,7 @@ module Aws::SageMaker
     #   <p>Specifies the maximum runtime in seconds.</p>
     #   @return [Integer]
     class ProcessingStoppingCondition < Struct.new(
+      nil,
       :max_runtime_in_seconds,
       keyword_init: true
     )
@@ -25067,6 +26107,7 @@ module Aws::SageMaker
     #   <p>Settings for the capacity reservation for the compute instances that SageMaker AI reserves for an endpoint. </p>
     #   @return [Types::ProductionVariantCapacityReservationConfig]
     class ProductionVariant < Struct.new(
+      nil,
       :variant_name,
       :model_name,
       :initial_instance_count,
@@ -25096,6 +26137,7 @@ module Aws::SageMaker
     #   <p>The Amazon Resource Name (ARN) that uniquely identifies the ML capacity reservation that SageMaker AI applies when it deploys the endpoint.</p>
     #   @return [String]
     class ProductionVariantCapacityReservationConfig < Struct.new(
+      nil,
       :capacity_reservation_preference,
       :ml_reservation_arn,
       keyword_init: true
@@ -25123,6 +26165,7 @@ module Aws::SageMaker
     #   <p>The EC2 capacity reservations that are shared to this ML capacity reservation, if any.</p>
     #   @return [Array<Types::Ec2CapacityReservation>]
     class ProductionVariantCapacityReservationSummary < Struct.new(
+      nil,
       :ml_reservation_arn,
       :capacity_reservation_preference,
       :total_instance_count,
@@ -25142,6 +26185,7 @@ module Aws::SageMaker
     #   <p>The Amazon Web Services Key Management Service (Amazon Web Services KMS) key that SageMaker uses to encrypt the core dump data at rest using Amazon S3 server-side encryption. The <code>KmsKeyId</code> can be any of the following formats: </p> <ul> <li> <p>// KMS Key ID</p> <p> <code>"1234abcd-12ab-34cd-56ef-1234567890ab"</code> </p> </li> <li> <p>// Amazon Resource Name (ARN) of a KMS Key</p> <p> <code>"arn:aws:kms:us-west-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab"</code> </p> </li> <li> <p>// KMS Key Alias</p> <p> <code>"alias/ExampleAlias"</code> </p> </li> <li> <p>// Amazon Resource Name (ARN) of a KMS Key Alias</p> <p> <code>"arn:aws:kms:us-west-2:111122223333:alias/ExampleAlias"</code> </p> </li> </ul> <p>If you use a KMS key ID or an alias of your KMS key, the SageMaker execution role must include permissions to call <code>kms:Encrypt</code>. If you don't provide a KMS key ID, SageMaker uses the default KMS key for Amazon S3 for your role's account. SageMaker uses server-side encryption with KMS-managed keys for <code>OutputDataConfig</code>. If you use a bucket policy with an <code>s3:PutObject</code> permission that only allows objects with server-side encryption, set the condition key of <code>s3:x-amz-server-side-encryption</code> to <code>"aws:kms"</code>. For more information, see <a href="https://docs.aws.amazon.com/AmazonS3/latest/dev/UsingKMSEncryption.html">KMS-Managed Encryption Keys</a> in the <i>Amazon Simple Storage Service Developer Guide.</i> </p> <p>The KMS key policy must grant permission to the IAM role that you specify in your <code>CreateEndpoint</code> and <code>UpdateEndpoint</code> requests. For more information, see <a href="https://docs.aws.amazon.com/kms/latest/developerguide/key-policies.html">Using Key Policies in Amazon Web Services KMS</a> in the <i>Amazon Web Services Key Management Service Developer Guide</i>.</p>
     #   @return [String]
     class ProductionVariantCoreDumpConfig < Struct.new(
+      nil,
       :destination_s3_uri,
       :kms_key_id,
       keyword_init: true
@@ -25160,6 +26204,7 @@ module Aws::SageMaker
     #   <p>The maximum number of instances that the endpoint can provision when it scales up to accommodate an increase in traffic.</p>
     #   @return [Integer]
     class ProductionVariantManagedInstanceScaling < Struct.new(
+      nil,
       :status,
       :min_instance_count,
       :max_instance_count,
@@ -25173,6 +26218,7 @@ module Aws::SageMaker
     #   <p>Sets how the endpoint routes incoming traffic:</p> <ul> <li> <p> <code>LEAST_OUTSTANDING_REQUESTS</code>: The endpoint routes requests to the specific instances that have more capacity to process them.</p> </li> <li> <p> <code>RANDOM</code>: The endpoint routes each request to a randomly chosen instance.</p> </li> </ul>
     #   @return [String]
     class ProductionVariantRoutingConfig < Struct.new(
+      nil,
       :routing_strategy,
       keyword_init: true
     )
@@ -25190,6 +26236,7 @@ module Aws::SageMaker
     #   <p>The amount of provisioned concurrency to allocate for the serverless endpoint. Should be less than or equal to <code>MaxConcurrency</code>.</p> <note> <p>This field is not supported for serverless endpoint recommendations for Inference Recommender jobs. For more information about creating an Inference Recommender job, see <a href="https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_CreateInferenceRecommendationsJob.html">CreateInferenceRecommendationsJobs</a>.</p> </note>
     #   @return [Integer]
     class ProductionVariantServerlessConfig < Struct.new(
+      nil,
       :memory_size_in_mb,
       :max_concurrency,
       :provisioned_concurrency,
@@ -25206,6 +26253,7 @@ module Aws::SageMaker
     #   <p>The updated amount of provisioned concurrency to allocate for the serverless endpoint. Should be less than or equal to <code>MaxConcurrency</code>.</p>
     #   @return [Integer]
     class ProductionVariantServerlessUpdateConfig < Struct.new(
+      nil,
       :max_concurrency,
       :provisioned_concurrency,
       keyword_init: true
@@ -25224,6 +26272,7 @@ module Aws::SageMaker
     #   <p>The start time of the current status change.</p>
     #   @return [Time]
     class ProductionVariantStatus < Struct.new(
+      nil,
       :status,
       :status_message,
       :start_time,
@@ -25270,6 +26319,7 @@ module Aws::SageMaker
     #   <p>Settings for the capacity reservation for the compute instances that SageMaker AI reserves for an endpoint. </p>
     #   @return [Types::ProductionVariantCapacityReservationSummary]
     class ProductionVariantSummary < Struct.new(
+      nil,
       :variant_name,
       :deployed_images,
       :current_weight,
@@ -25301,6 +26351,7 @@ module Aws::SageMaker
     #   <p>Configuration to turn off Amazon SageMaker Debugger's system monitoring and profiling functionality. To turn it off, set to <code>True</code>.</p>
     #   @return [Boolean]
     class ProfilerConfig < Struct.new(
+      nil,
       :s3_output_path,
       :profiling_interval_in_milliseconds,
       :profiling_parameters,
@@ -25324,6 +26375,7 @@ module Aws::SageMaker
     #   <p>To turn off Amazon SageMaker Debugger monitoring and profiling while a training job is in progress, set to <code>True</code>.</p>
     #   @return [Boolean]
     class ProfilerConfigForUpdate < Struct.new(
+      nil,
       :s3_output_path,
       :profiling_interval_in_milliseconds,
       :profiling_parameters,
@@ -25356,6 +26408,7 @@ module Aws::SageMaker
     #   <p>Runtime configuration for rule container.</p>
     #   @return [Hash<String, String>]
     class ProfilerRuleConfiguration < Struct.new(
+      nil,
       :rule_configuration_name,
       :local_path,
       :s3_output_path,
@@ -25385,6 +26438,7 @@ module Aws::SageMaker
     #   <p>Timestamp when the rule evaluation status was last modified.</p>
     #   @return [Time]
     class ProfilerRuleEvaluationStatus < Struct.new(
+      nil,
       :rule_configuration_name,
       :rule_evaluation_job_arn,
       :rule_evaluation_status,
@@ -25436,6 +26490,7 @@ module Aws::SageMaker
     #   <p>Information about the user who created or modified a SageMaker resource.</p>
     #   @return [Types::UserContext]
     class Project < Struct.new(
+      nil,
       :project_arn,
       :project_name,
       :project_id,
@@ -25474,6 +26529,7 @@ module Aws::SageMaker
     #   <p>The status of the project.</p>
     #   @return [String]
     class ProjectSummary < Struct.new(
+      nil,
       :project_name,
       :project_description,
       :project_arn,
@@ -25490,6 +26546,7 @@ module Aws::SageMaker
     #   <p>Text that begins a property's name.</p>
     #   @return [String]
     class PropertyNameQuery < Struct.new(
+      nil,
       :property_name_hint,
       keyword_init: true
     )
@@ -25501,6 +26558,7 @@ module Aws::SageMaker
     #   <p>A suggested property name based on what you entered in the search textbox in the SageMaker console.</p>
     #   @return [String]
     class PropertyNameSuggestion < Struct.new(
+      nil,
       :property_name,
       keyword_init: true
     )
@@ -25515,6 +26573,7 @@ module Aws::SageMaker
     #   <p>The value of the provisioning parameter.</p>
     #   @return [String]
     class ProvisioningParameter < Struct.new(
+      nil,
       :key,
       :value,
       keyword_init: true
@@ -25527,6 +26586,7 @@ module Aws::SageMaker
     #   <p>Defines the amount of money paid to an Amazon Mechanical Turk worker in United States dollars.</p>
     #   @return [Types::USD]
     class PublicWorkforceTaskPrice < Struct.new(
+      nil,
       :amount_in_usd,
       keyword_init: true
     )
@@ -25540,6 +26600,7 @@ module Aws::SageMaker
     #   <p>The resource policy for the model group.</p>
     #   @return [String]
     class PutModelPackageGroupPolicyInput < Struct.new(
+      nil,
       :model_package_group_name,
       :resource_policy,
       keyword_init: true
@@ -25551,6 +26612,7 @@ module Aws::SageMaker
     #   <p>The Amazon Resource Name (ARN) of the model package group.</p>
     #   @return [String]
     class PutModelPackageGroupPolicyOutput < Struct.new(
+      nil,
       :model_package_group_arn,
       keyword_init: true
     )
@@ -25589,6 +26651,7 @@ module Aws::SageMaker
     #   <p>This flag indicates if a newly calculated baseline can be accessed through step properties <code>BaselineUsedForDriftCheckConstraints</code> and <code>BaselineUsedForDriftCheckStatistics</code>. If it is set to <code>False</code>, the previous baseline of the configured check type must also be available. These can be accessed through the <code>BaselineUsedForDriftCheckConstraints</code> and <code> BaselineUsedForDriftCheckStatistics</code> properties. </p>
     #   @return [Boolean]
     class QualityCheckStepMetadata < Struct.new(
+      nil,
       :check_type,
       :baseline_used_for_drift_check_statistics,
       :baseline_used_for_drift_check_constraints,
@@ -25627,6 +26690,7 @@ module Aws::SageMaker
     #   <p>Filter the lineage entities connected to the <code>StartArn</code>(s) by a set if property key value pairs. If multiple pairs are provided, an entity is included in the results if it matches any of the provided pairs.</p>
     #   @return [Hash<String, String>]
     class QueryFilters < Struct.new(
+      nil,
       :types,
       :lineage_types,
       :created_before,
@@ -25661,6 +26725,7 @@ module Aws::SageMaker
     #   <p>Limits the number of vertices in the request. Use the <code>NextToken</code> in a response to to retrieve the next page of results.</p>
     #   @return [String]
     class QueryLineageRequest < Struct.new(
+      nil,
       :start_arns,
       :direction,
       :include_edges,
@@ -25683,6 +26748,7 @@ module Aws::SageMaker
     #   <p>Limits the number of vertices in the response. Use the <code>NextToken</code> in a response to to retrieve the next page of results.</p>
     #   @return [String]
     class QueryLineageResponse < Struct.new(
+      nil,
       :vertices,
       :edges,
       :next_token,
@@ -25699,6 +26765,7 @@ module Aws::SageMaker
     #   <p>A list of custom SageMaker AI images that are configured to run as a RSession app.</p>
     #   @return [Array<Types::CustomImage>]
     class RSessionAppSettings < Struct.new(
+      nil,
       :default_resource_spec,
       :custom_images,
       keyword_init: true
@@ -25714,6 +26781,7 @@ module Aws::SageMaker
     #   <p>The level of permissions that the user has within the <code>RStudioServerPro</code> app. This value defaults to `User`. The `Admin` value allows the user access to the RStudio Administrative Dashboard.</p>
     #   @return [String]
     class RStudioServerProAppSettings < Struct.new(
+      nil,
       :access_status,
       :user_group,
       keyword_init: true
@@ -25735,6 +26803,7 @@ module Aws::SageMaker
     #   <p>Specifies the ARN's of a SageMaker AI image and SageMaker AI image version, and the instance type that the version runs on.</p> <note> <p>When both <code>SageMakerImageVersionArn</code> and <code>SageMakerImageArn</code> are passed, <code>SageMakerImageVersionArn</code> is used. Any updates to <code>SageMakerImageArn</code> will not take effect if <code>SageMakerImageVersionArn</code> already exists in the <code>ResourceSpec</code> because <code>SageMakerImageVersionArn</code> always takes precedence. To clear the value set for <code>SageMakerImageVersionArn</code>, pass <code>None</code> as the value.</p> </note>
     #   @return [Types::ResourceSpec]
     class RStudioServerProDomainSettings < Struct.new(
+      nil,
       :domain_execution_role_arn,
       :r_studio_connect_url,
       :r_studio_package_manager_url,
@@ -25758,6 +26827,7 @@ module Aws::SageMaker
     #   <p>A URL pointing to an RStudio Package Manager server.</p>
     #   @return [String]
     class RStudioServerProDomainSettingsForUpdate < Struct.new(
+      nil,
       :domain_execution_role_arn,
       :default_resource_spec,
       :r_studio_connect_url,
@@ -25775,6 +26845,7 @@ module Aws::SageMaker
     #   <p>The number of instances of the type specified by <code>InstanceType</code>.</p>
     #   @return [Integer]
     class RealTimeInferenceConfig < Struct.new(
+      nil,
       :instance_type,
       :instance_count,
       keyword_init: true
@@ -25793,6 +26864,7 @@ module Aws::SageMaker
     #   <p>The recommended environment variables to set in the model container for Real-Time Inference.</p>
     #   @return [Hash<String, String>]
     class RealTimeInferenceRecommendation < Struct.new(
+      nil,
       :recommendation_id,
       :instance_type,
       :environment,
@@ -25806,6 +26878,7 @@ module Aws::SageMaker
     #   <p>Identifies the Amazon S3 bucket where you want SageMaker to store the compiled model artifacts.</p>
     #   @return [String]
     class RecommendationJobCompiledOutputConfig < Struct.new(
+      nil,
       :s3_output_uri,
       keyword_init: true
     )
@@ -25844,6 +26917,7 @@ module Aws::SageMaker
     #   <p>The supported MIME types for the output data.</p>
     #   @return [Array<String>]
     class RecommendationJobContainerConfig < Struct.new(
+      nil,
       :domain,
       :task,
       :framework,
@@ -25882,6 +26956,7 @@ module Aws::SageMaker
     #   <p>A timestamp that shows when the benchmark started.</p>
     #   @return [Time]
     class RecommendationJobInferenceBenchmark < Struct.new(
+      nil,
       :metrics,
       :endpoint_metrics,
       :endpoint_configuration,
@@ -25926,6 +27001,7 @@ module Aws::SageMaker
     #   <p>Inference Recommender provisions SageMaker endpoints with access to VPC in the inference recommendation job.</p>
     #   @return [Types::RecommendationJobVpcConfig]
     class RecommendationJobInputConfig < Struct.new(
+      nil,
       :model_package_version_arn,
       :model_name,
       :job_duration_in_seconds,
@@ -25949,6 +27025,7 @@ module Aws::SageMaker
     #   <p>Provides information about the output configuration for the compiled model.</p>
     #   @return [Types::RecommendationJobCompiledOutputConfig]
     class RecommendationJobOutputConfig < Struct.new(
+      nil,
       :kms_key_id,
       :compiled_output_config,
       keyword_init: true
@@ -25964,6 +27041,7 @@ module Aws::SageMaker
     #   <p>The supported MIME types for the input data.</p>
     #   @return [Array<String>]
     class RecommendationJobPayloadConfig < Struct.new(
+      nil,
       :sample_payload_url,
       :supported_content_types,
       keyword_init: true
@@ -25979,6 +27057,7 @@ module Aws::SageMaker
     #   <p>Defines the maximum number of parallel load tests.</p>
     #   @return [Integer]
     class RecommendationJobResourceLimit < Struct.new(
+      nil,
       :max_number_of_tests,
       :max_parallel_of_tests,
       keyword_init: true
@@ -25997,6 +27076,7 @@ module Aws::SageMaker
     #   <p>Stops a load test when the number of invocations (TPS) peaks and flattens, which means that the instance has reached capacity. The default value is <code>Stop</code>. If you want the load test to continue after invocations have flattened, set the value to <code>Continue</code>.</p>
     #   @return [String]
     class RecommendationJobStoppingConditions < Struct.new(
+      nil,
       :max_invocations,
       :model_latency_thresholds,
       :flat_invocations,
@@ -26013,6 +27093,7 @@ module Aws::SageMaker
     #   <p>The ID of the subnets in the VPC to which you want to connect your model.</p>
     #   @return [Array<String>]
     class RecommendationJobVpcConfig < Struct.new(
+      nil,
       :security_group_ids,
       :subnets,
       keyword_init: true
@@ -26043,6 +27124,7 @@ module Aws::SageMaker
     #   <p>The time it takes to launch new compute resources for a serverless endpoint. The time can vary depending on the model size, how long it takes to download the model, and the start-up time of the container.</p> <p> <code>NaN</code> indicates that the value is not available.</p>
     #   @return [Integer]
     class RecommendationMetrics < Struct.new(
+      nil,
       :cost_per_hour,
       :cost_per_inference,
       :max_invocations,
@@ -26084,6 +27166,7 @@ module Aws::SageMaker
     #   <p>The compression used for Redshift query results.</p>
     #   @return [String]
     class RedshiftDatasetDefinition < Struct.new(
+      nil,
       :cluster_id,
       :database,
       :db_user,
@@ -26108,6 +27191,7 @@ module Aws::SageMaker
     #   <p>The tags associated with devices.</p>
     #   @return [Array<Types::Tag>]
     class RegisterDevicesRequest < Struct.new(
+      nil,
       :device_fleet_name,
       :devices,
       :tags,
@@ -26121,6 +27205,7 @@ module Aws::SageMaker
     #   <p>The Amazon Resource Name (ARN) of the model package.</p>
     #   @return [String]
     class RegisterModelStepMetadata < Struct.new(
+      nil,
       :arn,
       keyword_init: true
     )
@@ -26132,6 +27217,7 @@ module Aws::SageMaker
     #   <p>If set to True, enables remote debugging.</p>
     #   @return [Boolean]
     class RemoteDebugConfig < Struct.new(
+      nil,
       :enable_remote_debug,
       keyword_init: true
     )
@@ -26143,6 +27229,7 @@ module Aws::SageMaker
     #   <p>If set to True, enables remote debugging.</p>
     #   @return [Boolean]
     class RemoteDebugConfigForUpdate < Struct.new(
+      nil,
       :enable_remote_debug,
       keyword_init: true
     )
@@ -26162,6 +27249,7 @@ module Aws::SageMaker
     #   <p>The <code>HumanTaskUiArn</code> of the worker UI that you want to render. Do not provide a <code>HumanTaskUiArn</code> if you use the <code>UiTemplate</code> parameter.</p> <p>See a list of available Human Ui Amazon Resource Names (ARNs) in <a href="https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_UiConfig.html">UiConfig</a>.</p>
     #   @return [String]
     class RenderUiTemplateRequest < Struct.new(
+      nil,
       :ui_template,
       :task,
       :role_arn,
@@ -26178,6 +27266,7 @@ module Aws::SageMaker
     #   <p>A list of one or more <code>RenderingError</code> objects if any were encountered while rendering the template. If there were no errors, the list is empty.</p>
     #   @return [Array<Types::RenderingError>]
     class RenderUiTemplateResponse < Struct.new(
+      nil,
       :rendered_content,
       :errors,
       keyword_init: true
@@ -26190,6 +27279,7 @@ module Aws::SageMaker
     #   <p>A JSON object that contains values for the variables defined in the template. It is made available to the template under the substitution variable <code>task.input</code>. For example, if you define a variable <code>task.input.text</code> in your template, you can supply the variable in the JSON object as <code>"text": "sample text"</code>.</p>
     #   @return [String]
     class RenderableTask < Struct.new(
+      nil,
       :input,
       keyword_init: true
     )
@@ -26204,6 +27294,7 @@ module Aws::SageMaker
     #   <p>A human-readable message describing the error.</p>
     #   @return [String]
     class RenderingError < Struct.new(
+      nil,
       :code,
       :message,
       keyword_init: true
@@ -26216,6 +27307,7 @@ module Aws::SageMaker
     #   <p>The Amazon Resource Name (ARN) of an Amazon Web Services Lambda function that provides credentials to authenticate to the private Docker registry where your model image is hosted. For information about how to create an Amazon Web Services Lambda function, see <a href="https://docs.aws.amazon.com/lambda/latest/dg/getting-started-create-function.html">Create a Lambda function with the console</a> in the <i>Amazon Web Services Lambda Developer Guide</i>.</p>
     #   @return [String]
     class RepositoryAuthConfig < Struct.new(
+      nil,
       :repository_credentials_provider_arn,
       keyword_init: true
     )
@@ -26254,6 +27346,7 @@ module Aws::SageMaker
     #   <p>The end time of the reserved capacity offering.</p>
     #   @return [Time]
     class ReservedCapacityOffering < Struct.new(
+      nil,
       :reserved_capacity_type,
       :ultra_server_type,
       :ultra_server_count,
@@ -26307,6 +27400,7 @@ module Aws::SageMaker
     #   <p>The end time of the reserved capacity.</p>
     #   @return [Time]
     class ReservedCapacitySummary < Struct.new(
+      nil,
       :reserved_capacity_arn,
       :reserved_capacity_type,
       :ultra_server_type,
@@ -26335,6 +27429,7 @@ module Aws::SageMaker
     #   <p>How long a job is allowed to run, or how many candidates a job is allowed to generate.</p>
     #   @return [Types::AutoMLJobCompletionCriteria]
     class ResolvedAttributes < Struct.new(
+      nil,
       :auto_ml_job_objective,
       :problem_type,
       :completion_criteria,
@@ -26357,6 +27452,7 @@ module Aws::SageMaker
     #   <p> The time the <code>ResourceCatalog</code> was created. </p>
     #   @return [Time]
     class ResourceCatalog < Struct.new(
+      nil,
       :resource_catalog_arn,
       :resource_catalog_name,
       :description,
@@ -26392,6 +27488,7 @@ module Aws::SageMaker
     #   <p>Configuration for how training job instances are placed and allocated within UltraServers. Only applicable for UltraServer capacity.</p>
     #   @return [Types::InstancePlacementConfig]
     class ResourceConfig < Struct.new(
+      nil,
       :instance_type,
       :instance_count,
       :volume_size_in_gb,
@@ -26410,6 +27507,7 @@ module Aws::SageMaker
     #   <p>The <code>KeepAlivePeriodInSeconds</code> value specified in the <code>ResourceConfig</code> to update.</p>
     #   @return [Integer]
     class ResourceConfigForUpdate < Struct.new(
+      nil,
       :keep_alive_period_in_seconds,
       keyword_init: true
     )
@@ -26420,6 +27518,7 @@ module Aws::SageMaker
     # @!attribute message
     #   @return [String]
     class ResourceInUse < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -26430,6 +27529,7 @@ module Aws::SageMaker
     # @!attribute message
     #   @return [String]
     class ResourceLimitExceeded < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -26447,6 +27547,7 @@ module Aws::SageMaker
     #   <p>The maximum time in seconds that a hyperparameter tuning job can run.</p>
     #   @return [Integer]
     class ResourceLimits < Struct.new(
+      nil,
       :max_number_of_training_jobs,
       :max_parallel_training_jobs,
       :max_runtime_in_seconds,
@@ -26459,6 +27560,7 @@ module Aws::SageMaker
     # @!attribute message
     #   @return [String]
     class ResourceNotFound < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -26473,6 +27575,7 @@ module Aws::SageMaker
     #   <p>The limit on how much idle compute can be borrowed.The values can be 1 - 500 percent of idle compute that the team is allowed to borrow.</p> <p>Default is <code>50</code>.</p>
     #   @return [Integer]
     class ResourceSharingConfig < Struct.new(
+      nil,
       :strategy,
       :borrow_limit,
       keyword_init: true
@@ -26497,6 +27600,7 @@ module Aws::SageMaker
     #   <p> The Amazon Resource Name (ARN) of the Lifecycle Configuration attached to the Resource.</p>
     #   @return [String]
     class ResourceSpec < Struct.new(
+      nil,
       :sage_maker_image_arn,
       :sage_maker_image_version_arn,
       :sage_maker_image_version_alias,
@@ -26512,6 +27616,7 @@ module Aws::SageMaker
     #   <p>The default is <code>Retain</code>, which specifies to keep the data stored on the Amazon EFS volume.</p> <p>Specify <code>Delete</code> to delete the data stored on the Amazon EFS volume.</p>
     #   @return [String]
     class RetentionPolicy < Struct.new(
+      nil,
       :home_efs_file_system,
       keyword_init: true
     )
@@ -26528,6 +27633,7 @@ module Aws::SageMaker
     #   <p>This configuration, if specified, overrides the parallelism configuration of the parent pipeline.</p>
     #   @return [Types::ParallelismConfiguration]
     class RetryPipelineExecutionRequest < Struct.new(
+      nil,
       :pipeline_execution_arn,
       :client_request_token,
       :parallelism_configuration,
@@ -26540,6 +27646,7 @@ module Aws::SageMaker
     #   <p>The Amazon Resource Name (ARN) of the pipeline execution.</p>
     #   @return [String]
     class RetryPipelineExecutionResponse < Struct.new(
+      nil,
       :pipeline_execution_arn,
       keyword_init: true
     )
@@ -26551,6 +27658,7 @@ module Aws::SageMaker
     #   <p>The number of times to retry the job. When the job is retried, it's <code>SecondaryStatus</code> is changed to <code>STARTING</code>.</p>
     #   @return [Integer]
     class RetryStrategy < Struct.new(
+      nil,
       :maximum_retry_attempts,
       keyword_init: true
     )
@@ -26565,6 +27673,7 @@ module Aws::SageMaker
     #   <p>The maximum amount of instances in the cluster that SageMaker can roll back at a time.</p>
     #   @return [Types::CapacitySizeConfig]
     class RollingDeploymentPolicy < Struct.new(
+      nil,
       :maximum_batch_size,
       :rollback_maximum_batch_size,
       keyword_init: true
@@ -26586,6 +27695,7 @@ module Aws::SageMaker
     #   <p>Batch size for rollback to the old endpoint fleet. Each rolling step to provision capacity and turn on traffic on the old endpoint fleet, and terminate capacity on the new endpoint fleet. If this field is absent, the default value will be set to 100% of total capacity which means to bring up the whole capacity of the old fleet at once during rollback.</p>
     #   @return [Types::CapacitySize]
     class RollingUpdatePolicy < Struct.new(
+      nil,
       :maximum_batch_size,
       :wait_interval_in_seconds,
       :maximum_execution_timeout_in_seconds,
@@ -26618,6 +27728,7 @@ module Aws::SageMaker
     #   <p>The configuration for a private hub model reference that points to a SageMaker JumpStart public hub model.</p>
     #   @return [Types::HubAccessConfig]
     class S3DataSource < Struct.new(
+      nil,
       :s3_data_type,
       :s3_uri,
       :s3_data_distribution_type,
@@ -26635,6 +27746,7 @@ module Aws::SageMaker
     #   <p>The Amazon S3 URI that specifies the location in S3 where files are stored, which is mounted within the Studio environment. For example: <code>s3://&lt;bucket-name&gt;/&lt;prefix&gt;/</code>.</p>
     #   @return [String]
     class S3FileSystem < Struct.new(
+      nil,
       :s3_uri,
       keyword_init: true
     )
@@ -26649,6 +27761,7 @@ module Aws::SageMaker
     #   <p>The Amazon S3 URI of the S3 file system configuration.</p>
     #   @return [String]
     class S3FileSystemConfig < Struct.new(
+      nil,
       :mount_path,
       :s3_uri,
       keyword_init: true
@@ -26682,6 +27795,7 @@ module Aws::SageMaker
     #   <p>The ETag associated with Manifest S3 URI.</p>
     #   @return [String]
     class S3ModelDataSource < Struct.new(
+      nil,
       :s3_uri,
       :s3_data_type,
       :compression_type,
@@ -26700,6 +27814,7 @@ module Aws::SageMaker
     #   <p>Use this parameter to specify the allowed request source. Possible sources are either <code>SourceIp</code> or <code>VpcSourceIp</code>.</p>
     #   @return [Types::IamPolicyConstraints]
     class S3Presign < Struct.new(
+      nil,
       :iam_policy_constraints,
       keyword_init: true
     )
@@ -26717,6 +27832,7 @@ module Aws::SageMaker
     #   <p>The S3 path where offline records are written.</p>
     #   @return [String]
     class S3StorageConfig < Struct.new(
+      nil,
       :s3_uri,
       :kms_key_id,
       :resolved_output_s3_uri,
@@ -26748,6 +27864,7 @@ module Aws::SageMaker
     #   <p>The interval of time taken by a model to respond as viewed from SageMaker. This interval includes the local communication times taken to send the request and to fetch the response from the container of a model and the time taken to complete the inference in the container.</p>
     #   @return [Integer]
     class ScalingPolicyMetric < Struct.new(
+      nil,
       :invocations_per_instance,
       :model_latency,
       keyword_init: true
@@ -26763,6 +27880,7 @@ module Aws::SageMaker
     #   <p>The maximum number of expected requests to your endpoint per minute.</p>
     #   @return [Integer]
     class ScalingPolicyObjective < Struct.new(
+      nil,
       :min_invocations_per_minute,
       :max_invocations_per_minute,
       keyword_init: true
@@ -26781,6 +27899,7 @@ module Aws::SageMaker
     #   <p>Sets the end time for a monitoring job window. Express this time as an offset to the times that you schedule your monitoring jobs to run. You schedule monitoring jobs with the <code>ScheduleExpression</code> parameter. Specify this offset in ISO 8601 duration format. For example, if you want to end the window one hour before the start of each monitoring job, you would specify: <code>"-PT1H"</code>.</p> <p>The end time that you specify must not follow the start time that you specify by more than 24 hours. You specify the start time with the <code>DataAnalysisStartTime</code> parameter.</p> <p>If you set <code>ScheduleExpression</code> to <code>NOW</code>, this parameter is required.</p>
     #   @return [String]
     class ScheduleConfig < Struct.new(
+      nil,
       :schedule_expression,
       :data_analysis_start_time,
       :data_analysis_end_time,
@@ -26797,6 +27916,7 @@ module Aws::SageMaker
     #   <p>The configuration to use when updating the AMI versions.</p>
     #   @return [Types::DeploymentConfiguration]
     class ScheduledUpdateConfig < Struct.new(
+      nil,
       :schedule_expression,
       :deployment_config,
       keyword_init: true
@@ -26812,6 +27932,7 @@ module Aws::SageMaker
     #   <p>When enabled, entities borrow idle compute based on their assigned <code>FairShareWeight</code>.</p> <p>When disabled, entities borrow idle compute based on a first-come first-serve basis.</p> <p>Default is <code>Enabled</code>.</p>
     #   @return [String]
     class SchedulerConfig < Struct.new(
+      nil,
       :priority_classes,
       :fair_share,
       keyword_init: true
@@ -26833,6 +27954,7 @@ module Aws::SageMaker
     #   <p>A Boolean operator used to evaluate the search expression. If you want every conditional statement in all lists to be satisfied for the entire search expression to be true, specify <code>And</code>. If only a single conditional statement needs to be true for the entire search expression to be true, specify <code>Or</code>. The default value is <code>And</code>.</p>
     #   @return [String]
     class SearchExpression < Struct.new(
+      nil,
       :filters,
       :nested_filters,
       :sub_expressions,
@@ -26892,6 +28014,7 @@ module Aws::SageMaker
     #   <p>A model displayed in the Amazon SageMaker Model Dashboard.</p>
     #   @return [Types::ModelDashboardModel]
     class SearchRecord < Struct.new(
+      nil,
       :training_job,
       :experiment,
       :trial,
@@ -26938,6 +28061,7 @@ module Aws::SageMaker
     #   <p> Limits the results of your search request to the resources that you can access. </p>
     #   @return [Array<Types::VisibilityConditions>]
     class SearchRequest < Struct.new(
+      nil,
       :resource,
       :search_expression,
       :sort_by,
@@ -26961,6 +28085,7 @@ module Aws::SageMaker
     #   <p>The total number of matching results.</p>
     #   @return [Types::TotalHits]
     class SearchResponse < Struct.new(
+      nil,
       :results,
       :next_token,
       :total_hits,
@@ -26994,6 +28119,7 @@ module Aws::SageMaker
     #   <p>The target resources (e.g., SageMaker Training Jobs, SageMaker HyperPod) to search for in the offerings.</p> <p>Training plans are specific to their target resource.</p> <ul> <li> <p>A training plan designed for SageMaker training jobs can only be used to schedule and run training jobs.</p> </li> <li> <p>A training plan for HyperPod clusters can be used exclusively to provide compute resources to a cluster's instance group.</p> </li> </ul>
     #   @return [Array<String>]
     class SearchTrainingPlanOfferingsRequest < Struct.new(
+      nil,
       :instance_type,
       :instance_count,
       :ultra_server_type,
@@ -27011,6 +28137,7 @@ module Aws::SageMaker
     #   <p>A list of training plan offerings that match the search criteria.</p>
     #   @return [Array<Types::TrainingPlanOffering>]
     class SearchTrainingPlanOfferingsResponse < Struct.new(
+      nil,
       :training_plan_offerings,
       keyword_init: true
     )
@@ -27031,6 +28158,7 @@ module Aws::SageMaker
     #   <p>A detailed description of the progress within a secondary status. </p> <p>SageMaker provides secondary statuses and status messages that apply to each of them:</p> <dl> <dt>Starting</dt> <dd> <ul> <li> <p>Starting the training job.</p> </li> <li> <p>Launching requested ML instances.</p> </li> <li> <p>Insufficient capacity error from EC2 while launching instances, retrying!</p> </li> <li> <p>Launched instance was unhealthy, replacing it!</p> </li> <li> <p>Preparing the instances for training.</p> </li> </ul> </dd> <dt>Training</dt> <dd> <ul> <li> <p>Training image download completed. Training in progress.</p> </li> </ul> </dd> </dl> <important> <p>Status messages are subject to change. Therefore, we recommend not including them in code that programmatically initiates actions. For examples, don't use status messages in if statements.</p> </important> <p>To have an overview of your training job's progress, view <code>TrainingJobStatus</code> and <code>SecondaryStatus</code> in <a href="https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_DescribeTrainingJob.html">DescribeTrainingJob</a>, and <code>StatusMessage</code> together. For example, at the start of a training job, you might see the following:</p> <ul> <li> <p> <code>TrainingJobStatus</code> - InProgress</p> </li> <li> <p> <code>SecondaryStatus</code> - Training</p> </li> <li> <p> <code>StatusMessage</code> - Downloading the training image</p> </li> </ul>
     #   @return [String]
     class SecondaryStatusTransition < Struct.new(
+      nil,
       :status,
       :start_time,
       :end_time,
@@ -27045,6 +28173,7 @@ module Aws::SageMaker
     #   <p>The name of the pipeline step.</p>
     #   @return [String]
     class SelectedStep < Struct.new(
+      nil,
       :step_name,
       keyword_init: true
     )
@@ -27059,6 +28188,7 @@ module Aws::SageMaker
     #   <p>A list of pipeline steps to run. All step(s) in all path(s) between two selected steps should be included.</p>
     #   @return [Array<Types::SelectedStep>]
     class SelectiveExecutionConfig < Struct.new(
+      nil,
       :source_pipeline_execution_arn,
       :selected_steps,
       keyword_init: true
@@ -27071,6 +28201,7 @@ module Aws::SageMaker
     #   <p>The ARN from an execution of the current pipeline.</p>
     #   @return [String]
     class SelectiveExecutionResult < Struct.new(
+      nil,
       :source_pipeline_execution_arn,
       keyword_init: true
     )
@@ -27087,6 +28218,7 @@ module Aws::SageMaker
     #   <p>A unique, case-sensitive identifier that you provide to ensure the idempotency of the operation. An idempotent operation completes no more than one time.</p>
     #   @return [String]
     class SendPipelineExecutionStepFailureRequest < Struct.new(
+      nil,
       :callback_token,
       :failure_reason,
       :client_request_token,
@@ -27099,6 +28231,7 @@ module Aws::SageMaker
     #   <p>The Amazon Resource Name (ARN) of the pipeline execution.</p>
     #   @return [String]
     class SendPipelineExecutionStepFailureResponse < Struct.new(
+      nil,
       :pipeline_execution_arn,
       keyword_init: true
     )
@@ -27115,6 +28248,7 @@ module Aws::SageMaker
     #   <p>A unique, case-sensitive identifier that you provide to ensure the idempotency of the operation. An idempotent operation completes no more than one time.</p>
     #   @return [String]
     class SendPipelineExecutionStepSuccessRequest < Struct.new(
+      nil,
       :callback_token,
       :output_parameters,
       :client_request_token,
@@ -27127,6 +28261,7 @@ module Aws::SageMaker
     #   <p>The Amazon Resource Name (ARN) of the pipeline execution.</p>
     #   @return [String]
     class SendPipelineExecutionStepSuccessResponse < Struct.new(
+      nil,
       :pipeline_execution_arn,
       keyword_init: true
     )
@@ -27141,6 +28276,7 @@ module Aws::SageMaker
     #   <p>The current status of the product.</p> <ul> <li> <p> <code>AVAILABLE</code> - Stable state, ready to perform any operation. The most recent operation succeeded and completed.</p> </li> <li> <p> <code>UNDER_CHANGE</code> - Transitive state. Operations performed might not have valid results. Wait for an AVAILABLE status before performing operations.</p> </li> <li> <p> <code>TAINTED</code> - Stable state, ready to perform any operation. The stack has completed the requested operation but is not exactly what was requested. For example, a request to update to a new version failed and the stack rolled back to the current version.</p> </li> <li> <p> <code>ERROR</code> - An unexpected error occurred. The provisioned product exists but the stack is not running. For example, CloudFormation received a parameter value that was not valid and could not launch the stack.</p> </li> <li> <p> <code>PLAN_IN_PROGRESS</code> - Transitive state. The plan operations were performed to provision a new product, but resources have not yet been created. After reviewing the list of resources to be created, execute the plan. Wait for an AVAILABLE status before performing operations.</p> </li> </ul>
     #   @return [String]
     class ServiceCatalogProvisionedProductDetails < Struct.new(
+      nil,
       :provisioned_product_id,
       :provisioned_product_status_message,
       keyword_init: true
@@ -27162,6 +28298,7 @@ module Aws::SageMaker
     #   <p>A list of key value pairs that you specify when you provision a product.</p>
     #   @return [Array<Types::ProvisioningParameter>]
     class ServiceCatalogProvisioningDetails < Struct.new(
+      nil,
       :product_id,
       :provisioning_artifact_id,
       :path_id,
@@ -27179,6 +28316,7 @@ module Aws::SageMaker
     #   <p>A list of key value pairs that you specify when you provision a product.</p>
     #   @return [Array<Types::ProvisioningParameter>]
     class ServiceCatalogProvisioningUpdateDetails < Struct.new(
+      nil,
       :provisioning_artifact_id,
       :provisioning_parameters,
       keyword_init: true
@@ -27191,6 +28329,7 @@ module Aws::SageMaker
     #   <p>Set to <code>True</code> to allow SageMaker to extract session tags from a training job creation role and reuse these tags when assuming the training job execution role.</p>
     #   @return [Boolean]
     class SessionChainingConfig < Struct.new(
+      nil,
       :enable_session_tag_chaining,
       keyword_init: true
     )
@@ -27205,6 +28344,7 @@ module Aws::SageMaker
     #   <p>List of shadow variant configurations.</p>
     #   @return [Array<Types::ShadowModelVariantConfig>]
     class ShadowModeConfig < Struct.new(
+      nil,
       :source_model_variant_name,
       :shadow_model_variants,
       keyword_init: true
@@ -27220,6 +28360,7 @@ module Aws::SageMaker
     #   <p> The percentage of inference requests that Amazon SageMaker replicates from the production variant to the shadow variant. </p>
     #   @return [Integer]
     class ShadowModelVariantConfig < Struct.new(
+      nil,
       :shadow_model_variant_name,
       :sampling_percentage,
       keyword_init: true
@@ -27238,6 +28379,7 @@ module Aws::SageMaker
     #   <p>When <code>NotebookOutputOption</code> is <code>Allowed</code>, the Amazon Web Services Key Management Service (KMS) encryption key ID used to encrypt the notebook cell output in the Amazon S3 bucket.</p>
     #   @return [String]
     class SharingSettings < Struct.new(
+      nil,
       :notebook_output_option,
       :s3_output_path,
       :s3_kms_key_id,
@@ -27251,6 +28393,7 @@ module Aws::SageMaker
     #   <p>Determines the shuffling order in <code>ShuffleConfig</code> value.</p>
     #   @return [Integer]
     class ShuffleConfig < Struct.new(
+      nil,
       :seed,
       keyword_init: true
     )
@@ -27271,6 +28414,7 @@ module Aws::SageMaker
     #   <p>The name of an algorithm that was used to create the model package. The algorithm must be either an algorithm resource in your SageMaker account or an algorithm in Amazon Web Services Marketplace that you are subscribed to.</p>
     #   @return [String]
     class SourceAlgorithm < Struct.new(
+      nil,
       :model_data_url,
       :model_data_source,
       :model_data_e_tag,
@@ -27285,6 +28429,7 @@ module Aws::SageMaker
     #   <p>A list of the algorithms that were used to create a model package.</p>
     #   @return [Array<Types::SourceAlgorithm>]
     class SourceAlgorithmSpecification < Struct.new(
+      nil,
       :source_algorithms,
       keyword_init: true
     )
@@ -27296,6 +28441,7 @@ module Aws::SageMaker
     #   <p>A list of one to ten <a href="https://docs.aws.amazon.com/vpc/latest/userguide/VPC_Subnets.html">Classless Inter-Domain Routing</a> (CIDR) values.</p> <p>Maximum: Ten CIDR values</p> <note> <p>The following Length Constraints apply to individual CIDR values in the CIDR value list.</p> </note>
     #   @return [Array<String>]
     class SourceIpConfig < Struct.new(
+      nil,
       :cidrs,
       keyword_init: true
     )
@@ -27307,6 +28453,7 @@ module Aws::SageMaker
     #   <p>Settings related to idle shutdown of Studio applications.</p>
     #   @return [Types::SpaceIdleSettings]
     class SpaceAppLifecycleManagement < Struct.new(
+      nil,
       :idle_settings,
       keyword_init: true
     )
@@ -27321,6 +28468,7 @@ module Aws::SageMaker
     #   <p>Settings that are used to configure and manage the lifecycle of CodeEditor applications in a space.</p>
     #   @return [Types::SpaceAppLifecycleManagement]
     class SpaceCodeEditorAppSettings < Struct.new(
+      nil,
       :default_resource_spec,
       :app_lifecycle_management,
       keyword_init: true
@@ -27357,6 +28505,7 @@ module Aws::SageMaker
     #   <p>The name of the space that appears in the Studio UI.</p>
     #   @return [String]
     class SpaceDetails < Struct.new(
+      nil,
       :domain_id,
       :space_name,
       :status,
@@ -27376,6 +28525,7 @@ module Aws::SageMaker
     #   <p>The time that SageMaker waits after the application becomes idle before shutting it down.</p>
     #   @return [Integer]
     class SpaceIdleSettings < Struct.new(
+      nil,
       :idle_timeout_in_minutes,
       keyword_init: true
     )
@@ -27393,6 +28543,7 @@ module Aws::SageMaker
     #   <p>Settings that are used to configure and manage the lifecycle of JupyterLab applications in a space.</p>
     #   @return [Types::SpaceAppLifecycleManagement]
     class SpaceJupyterLabAppSettings < Struct.new(
+      nil,
       :default_resource_spec,
       :code_repositories,
       :app_lifecycle_management,
@@ -27430,6 +28581,7 @@ module Aws::SageMaker
     #   <p>A setting that enables or disables remote access for a SageMaker space. When enabled, this allows you to connect to the remote space from your local IDE.</p>
     #   @return [String]
     class SpaceSettings < Struct.new(
+      nil,
       :jupyter_server_app_settings,
       :kernel_gateway_app_settings,
       :code_editor_app_settings,
@@ -27455,6 +28607,7 @@ module Aws::SageMaker
     #   <p>The storage settings for a space.</p>
     #   @return [Types::SpaceStorageSettings]
     class SpaceSettingsSummary < Struct.new(
+      nil,
       :app_type,
       :remote_access,
       :space_storage_settings,
@@ -27468,6 +28621,7 @@ module Aws::SageMaker
     #   <p>Specifies the sharing type of the space.</p>
     #   @return [String]
     class SpaceSharingSettings < Struct.new(
+      nil,
       :sharing_type,
       keyword_init: true
     )
@@ -27479,6 +28633,7 @@ module Aws::SageMaker
     #   <p>Specifies the sharing type of the space.</p>
     #   @return [String]
     class SpaceSharingSettingsSummary < Struct.new(
+      nil,
       :sharing_type,
       keyword_init: true
     )
@@ -27490,6 +28645,7 @@ module Aws::SageMaker
     #   <p>A collection of EBS storage settings for a space.</p>
     #   @return [Types::EbsStorageSettings]
     class SpaceStorageSettings < Struct.new(
+      nil,
       :ebs_storage_settings,
       keyword_init: true
     )
@@ -27507,6 +28663,7 @@ module Aws::SageMaker
     #   <p>Specifies how many new users to spawn in each step.</p>
     #   @return [Integer]
     class Stairs < Struct.new(
+      nil,
       :duration_in_seconds,
       :number_of_steps,
       :users_per_step,
@@ -27522,6 +28679,7 @@ module Aws::SageMaker
     #   <p>The name of the stage to start.</p>
     #   @return [String]
     class StartEdgeDeploymentStageRequest < Struct.new(
+      nil,
       :edge_deployment_plan_name,
       :stage_name,
       keyword_init: true
@@ -27533,6 +28691,7 @@ module Aws::SageMaker
     #   <p>The name of the inference experiment to start.</p>
     #   @return [String]
     class StartInferenceExperimentRequest < Struct.new(
+      nil,
       :name,
       keyword_init: true
     )
@@ -27543,6 +28702,7 @@ module Aws::SageMaker
     #   <p>The ARN of the started inference experiment to start.</p>
     #   @return [String]
     class StartInferenceExperimentResponse < Struct.new(
+      nil,
       :inference_experiment_arn,
       keyword_init: true
     )
@@ -27553,6 +28713,7 @@ module Aws::SageMaker
     #   <p>The name of the tracking server to start.</p>
     #   @return [String]
     class StartMlflowTrackingServerRequest < Struct.new(
+      nil,
       :tracking_server_name,
       keyword_init: true
     )
@@ -27563,6 +28724,7 @@ module Aws::SageMaker
     #   <p>The ARN of the started tracking server.</p>
     #   @return [String]
     class StartMlflowTrackingServerResponse < Struct.new(
+      nil,
       :tracking_server_arn,
       keyword_init: true
     )
@@ -27573,6 +28735,7 @@ module Aws::SageMaker
     #   <p>The name of the schedule to start.</p>
     #   @return [String]
     class StartMonitoringScheduleRequest < Struct.new(
+      nil,
       :monitoring_schedule_name,
       keyword_init: true
     )
@@ -27583,6 +28746,7 @@ module Aws::SageMaker
     #   <p>The name of the notebook instance to start.</p>
     #   @return [String]
     class StartNotebookInstanceInput < Struct.new(
+      nil,
       :notebook_instance_name,
       keyword_init: true
     )
@@ -27614,6 +28778,7 @@ module Aws::SageMaker
     #   <p>The ID of the pipeline version to start execution from.</p>
     #   @return [Integer]
     class StartPipelineExecutionRequest < Struct.new(
+      nil,
       :pipeline_name,
       :pipeline_execution_display_name,
       :pipeline_parameters,
@@ -27631,6 +28796,7 @@ module Aws::SageMaker
     #   <p>The Amazon Resource Name (ARN) of the pipeline execution.</p>
     #   @return [String]
     class StartPipelineExecutionResponse < Struct.new(
+      nil,
       :pipeline_execution_arn,
       keyword_init: true
     )
@@ -27641,6 +28807,7 @@ module Aws::SageMaker
     #   <p>The Amazon Resource Name (ARN) of the resource to which the remote connection will be established. For example, this identifies the specific ARN space application you want to connect to from your local IDE.</p>
     #   @return [String]
     class StartSessionRequest < Struct.new(
+      nil,
       :resource_identifier,
       keyword_init: true
     )
@@ -27657,6 +28824,7 @@ module Aws::SageMaker
     #   <p>An encrypted token value containing session and caller information. </p>
     #   @return [String]
     class StartSessionResponse < Struct.new(
+      nil,
       :session_id,
       :stream_url,
       :token_value,
@@ -27669,6 +28837,7 @@ module Aws::SageMaker
     #   <p>The name of the object you are requesting.</p>
     #   @return [String]
     class StopAutoMLJobRequest < Struct.new(
+      nil,
       :auto_ml_job_name,
       keyword_init: true
     )
@@ -27679,6 +28848,7 @@ module Aws::SageMaker
     #   <p>The name of the model compilation job to stop.</p>
     #   @return [String]
     class StopCompilationJobRequest < Struct.new(
+      nil,
       :compilation_job_name,
       keyword_init: true
     )
@@ -27692,6 +28862,7 @@ module Aws::SageMaker
     #   <p>The name of the stage to stop.</p>
     #   @return [String]
     class StopEdgeDeploymentStageRequest < Struct.new(
+      nil,
       :edge_deployment_plan_name,
       :stage_name,
       keyword_init: true
@@ -27703,6 +28874,7 @@ module Aws::SageMaker
     #   <p>The name of the edge packaging job.</p>
     #   @return [String]
     class StopEdgePackagingJobRequest < Struct.new(
+      nil,
       :edge_packaging_job_name,
       keyword_init: true
     )
@@ -27713,6 +28885,7 @@ module Aws::SageMaker
     #   <p>The name of the tuning job to stop.</p>
     #   @return [String]
     class StopHyperParameterTuningJobRequest < Struct.new(
+      nil,
       :hyper_parameter_tuning_job_name,
       keyword_init: true
     )
@@ -27735,6 +28908,7 @@ module Aws::SageMaker
     #   <p>The reason for stopping the experiment.</p>
     #   @return [String]
     class StopInferenceExperimentRequest < Struct.new(
+      nil,
       :name,
       :model_variant_actions,
       :desired_model_variants,
@@ -27749,6 +28923,7 @@ module Aws::SageMaker
     #   <p>The ARN of the stopped inference experiment.</p>
     #   @return [String]
     class StopInferenceExperimentResponse < Struct.new(
+      nil,
       :inference_experiment_arn,
       keyword_init: true
     )
@@ -27759,6 +28934,7 @@ module Aws::SageMaker
     #   <p>The name of the job you want to stop.</p>
     #   @return [String]
     class StopInferenceRecommendationsJobRequest < Struct.new(
+      nil,
       :job_name,
       keyword_init: true
     )
@@ -27769,6 +28945,7 @@ module Aws::SageMaker
     #   <p>The name of the labeling job to stop.</p>
     #   @return [String]
     class StopLabelingJobRequest < Struct.new(
+      nil,
       :labeling_job_name,
       keyword_init: true
     )
@@ -27779,6 +28956,7 @@ module Aws::SageMaker
     #   <p>The name of the tracking server to stop.</p>
     #   @return [String]
     class StopMlflowTrackingServerRequest < Struct.new(
+      nil,
       :tracking_server_name,
       keyword_init: true
     )
@@ -27789,6 +28967,7 @@ module Aws::SageMaker
     #   <p>The ARN of the stopped tracking server.</p>
     #   @return [String]
     class StopMlflowTrackingServerResponse < Struct.new(
+      nil,
       :tracking_server_arn,
       keyword_init: true
     )
@@ -27799,6 +28978,7 @@ module Aws::SageMaker
     #   <p>The name of the schedule to stop.</p>
     #   @return [String]
     class StopMonitoringScheduleRequest < Struct.new(
+      nil,
       :monitoring_schedule_name,
       keyword_init: true
     )
@@ -27809,6 +28989,7 @@ module Aws::SageMaker
     #   <p>The name of the notebook instance to terminate.</p>
     #   @return [String]
     class StopNotebookInstanceInput < Struct.new(
+      nil,
       :notebook_instance_name,
       keyword_init: true
     )
@@ -27819,6 +29000,7 @@ module Aws::SageMaker
     #   <p>The name that you assigned to the optimization job.</p>
     #   @return [String]
     class StopOptimizationJobRequest < Struct.new(
+      nil,
       :optimization_job_name,
       keyword_init: true
     )
@@ -27832,6 +29014,7 @@ module Aws::SageMaker
     #   <p>A unique, case-sensitive identifier that you provide to ensure the idempotency of the operation. An idempotent operation completes no more than once.</p>
     #   @return [String]
     class StopPipelineExecutionRequest < Struct.new(
+      nil,
       :pipeline_execution_arn,
       :client_request_token,
       keyword_init: true
@@ -27843,6 +29026,7 @@ module Aws::SageMaker
     #   <p>The Amazon Resource Name (ARN) of the pipeline execution.</p>
     #   @return [String]
     class StopPipelineExecutionResponse < Struct.new(
+      nil,
       :pipeline_execution_arn,
       keyword_init: true
     )
@@ -27853,6 +29037,7 @@ module Aws::SageMaker
     #   <p>The name of the processing job to stop.</p>
     #   @return [String]
     class StopProcessingJobRequest < Struct.new(
+      nil,
       :processing_job_name,
       keyword_init: true
     )
@@ -27863,6 +29048,7 @@ module Aws::SageMaker
     #   <p>The name of the training job to stop.</p>
     #   @return [String]
     class StopTrainingJobRequest < Struct.new(
+      nil,
       :training_job_name,
       keyword_init: true
     )
@@ -27873,6 +29059,7 @@ module Aws::SageMaker
     #   <p>The name of the batch transform job to stop.</p>
     #   @return [String]
     class StopTransformJobRequest < Struct.new(
+      nil,
       :transform_job_name,
       keyword_init: true
     )
@@ -27890,6 +29077,7 @@ module Aws::SageMaker
     #   <p>The maximum length of time, in seconds, that a training or compilation job can be pending before it is stopped.</p> <note> <p>When working with training jobs that use capacity from <a href="https://docs.aws.amazon.com/sagemaker/latest/dg/reserve-capacity-with-training-plans.html">training plans</a>, not all <code>Pending</code> job states count against the <code>MaxPendingTimeInSeconds</code> limit. The following scenarios do not increment the <code>MaxPendingTimeInSeconds</code> counter:</p> <ul> <li> <p>The plan is in a <code>Scheduled</code> state: Jobs queued (in <code>Pending</code> status) before a plan's start date (waiting for scheduled start time)</p> </li> <li> <p>Between capacity reservations: Jobs temporarily back to <code>Pending</code> status between two capacity reservation periods</p> </li> </ul> <p> <code>MaxPendingTimeInSeconds</code> only increments when jobs are actively waiting for capacity in an <code>Active</code> plan.</p> </note>
     #   @return [Integer]
     class StoppingCondition < Struct.new(
+      nil,
       :max_runtime_in_seconds,
       :max_wait_time_in_seconds,
       :max_pending_time_in_seconds,
@@ -27915,6 +29103,7 @@ module Aws::SageMaker
     #   <p>The App type to which the Lifecycle Configuration is attached.</p>
     #   @return [String]
     class StudioLifecycleConfigDetails < Struct.new(
+      nil,
       :studio_lifecycle_config_arn,
       :studio_lifecycle_config_name,
       :creation_time,
@@ -27939,6 +29128,7 @@ module Aws::SageMaker
     #   <p> The version aliases you are hiding from the Studio user interface. </p>
     #   @return [Array<Types::HiddenSageMakerImage>]
     class StudioWebPortalSettings < Struct.new(
+      nil,
       :hidden_ml_tools,
       :hidden_app_types,
       :hidden_instance_types,
@@ -27965,6 +29155,7 @@ module Aws::SageMaker
     #   <p>Marketplace product listing ID.</p>
     #   @return [String]
     class SubscribedWorkteam < Struct.new(
+      nil,
       :workteam_arn,
       :marketplace_title,
       :seller_name,
@@ -27980,6 +29171,7 @@ module Aws::SageMaker
     #   <p>Defines a property name hint. Only property names that begin with the specified hint are included in the response.</p>
     #   @return [Types::PropertyNameQuery]
     class SuggestionQuery < Struct.new(
+      nil,
       :property_name_query,
       keyword_init: true
     )
@@ -28012,6 +29204,7 @@ module Aws::SageMaker
     #   <p>If specified, this column name indicates which column of the dataset should be treated as sample weights for use by the objective metric during the training, evaluation, and the selection of the best model. This column is not considered as a predictive feature. For more information on Autopilot metrics, see <a href="https://docs.aws.amazon.com/sagemaker/latest/dg/autopilot-metrics-validation.html">Metrics and validation</a>.</p> <p>Sample weights should be numeric, non-negative, with larger values indicating which rows are more important than others. Data points that have invalid or no weight value are excluded.</p> <p>Support for sample weights is available in <a href="https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_AutoMLAlgorithmConfig.html">Ensembling</a> mode only.</p>
     #   @return [String]
     class TabularJobConfig < Struct.new(
+      nil,
       :candidate_generation_config,
       :completion_criteria,
       :feature_specification_s3_uri,
@@ -28030,6 +29223,7 @@ module Aws::SageMaker
     #   <p>The type of supervised learning problem available for the model candidates of the AutoML job V2 (Binary Classification, Multiclass Classification, Regression). For more information, see <a href="https://docs.aws.amazon.com/sagemaker/latest/dg/autopilot-datasets-problem-types.html#autopilot-problem-types"> SageMaker Autopilot problem types</a>.</p>
     #   @return [String]
     class TabularResolvedAttributes < Struct.new(
+      nil,
       :problem_type,
       keyword_init: true
     )
@@ -28044,6 +29238,7 @@ module Aws::SageMaker
     #   <p>The tag value.</p>
     #   @return [String]
     class Tag < Struct.new(
+      nil,
       :key,
       :value,
       keyword_init: true
@@ -28062,6 +29257,7 @@ module Aws::SageMaker
     #   <p>Specifies a target platform accelerator (optional).</p> <ul> <li> <p> <code>NVIDIA</code>: Nvidia graphics processing unit. It also requires <code>gpu-code</code>, <code>trt-ver</code>, <code>cuda-ver</code> compiler options</p> </li> <li> <p> <code>MALI</code>: ARM Mali graphics processor</p> </li> <li> <p> <code>INTEL_GRAPHICS</code>: Integrated Intel graphics</p> </li> </ul>
     #   @return [String]
     class TargetPlatform < Struct.new(
+      nil,
       :os,
       :arch,
       :accelerator,
@@ -28078,6 +29274,7 @@ module Aws::SageMaker
     #   <p>The recommended target value to specify for the metric when creating a scaling policy.</p>
     #   @return [Float]
     class TargetTrackingScalingPolicyConfiguration < Struct.new(
+      nil,
       :metric_specification,
       :target_value,
       keyword_init: true
@@ -28090,6 +29287,7 @@ module Aws::SageMaker
     #   <p> Details about a CloudFormation template provider configuration and associated provisioning information. </p>
     #   @return [Types::CfnTemplateProviderDetail]
     class TemplateProviderDetail < Struct.new(
+      nil,
       :cfn_template_provider_detail,
       keyword_init: true
     )
@@ -28101,6 +29299,7 @@ module Aws::SageMaker
     #   <p>The default instance type and the Amazon Resource Name (ARN) of the SageMaker AI image created on the instance.</p>
     #   @return [Types::ResourceSpec]
     class TensorBoardAppSettings < Struct.new(
+      nil,
       :default_resource_spec,
       keyword_init: true
     )
@@ -28115,6 +29314,7 @@ module Aws::SageMaker
     #   <p>Path to Amazon S3 storage location for TensorBoard output.</p>
     #   @return [String]
     class TensorBoardOutputConfig < Struct.new(
+      nil,
       :local_path,
       :s3_output_path,
       keyword_init: true
@@ -28133,6 +29333,7 @@ module Aws::SageMaker
     #   <p>The name of the column used to provide the class labels. It should not be same as the content column.</p>
     #   @return [String]
     class TextClassificationJobConfig < Struct.new(
+      nil,
       :completion_criteria,
       :content_column,
       :target_label_column,
@@ -28155,6 +29356,7 @@ module Aws::SageMaker
     #   <p>The access configuration file to control access to the ML model. You can explicitly accept the model end-user license agreement (EULA) within the <code>ModelAccessConfig</code>.</p> <ul> <li> <p>If you are a Jumpstart user, see the <a href="https://docs.aws.amazon.com/sagemaker/latest/dg/jumpstart-foundation-models-choose.html#jumpstart-foundation-models-choose-eula">End-user license agreements</a> section for more details on accepting the EULA.</p> </li> <li> <p>If you are an AutoML user, see the <i>Optional Parameters</i> section of <i>Create an AutoML job to fine-tune text generation models using the API</i> for details on <a href="https://docs.aws.amazon.com/sagemaker/latest/dg/autopilot-create-experiment-finetune-llms.html#autopilot-llms-finetuning-api-optional-params">How to set the EULA acceptance when fine-tuning a model using the AutoML API</a>.</p> </li> </ul>
     #   @return [Types::ModelAccessConfig]
     class TextGenerationJobConfig < Struct.new(
+      nil,
       :completion_criteria,
       :base_model_name,
       :text_generation_hyper_parameters,
@@ -28169,6 +29371,7 @@ module Aws::SageMaker
     #   <p>The name of the base model to fine-tune.</p>
     #   @return [String]
     class TextGenerationResolvedAttributes < Struct.new(
+      nil,
       :base_model_name,
       keyword_init: true
     )
@@ -28186,6 +29389,7 @@ module Aws::SageMaker
     #   <p> For provisioned feature groups, this indicates the write throughput you are billed for and can consume without throttling. </p> <p>This field is not applicable for on-demand feature groups. </p>
     #   @return [Integer]
     class ThroughputConfig < Struct.new(
+      nil,
       :throughput_mode,
       :provisioned_read_capacity_units,
       :provisioned_write_capacity_units,
@@ -28205,6 +29409,7 @@ module Aws::SageMaker
     #   <p> For provisioned feature groups, this indicates the write throughput you are billed for and can consume without throttling. </p> <p>This field is not applicable for on-demand feature groups. </p>
     #   @return [Integer]
     class ThroughputConfigDescription < Struct.new(
+      nil,
       :throughput_mode,
       :provisioned_read_capacity_units,
       :provisioned_write_capacity_units,
@@ -28224,6 +29429,7 @@ module Aws::SageMaker
     #   <p>For provisioned feature groups, this indicates the write throughput you are billed for and can consume without throttling. </p>
     #   @return [Integer]
     class ThroughputConfigUpdate < Struct.new(
+      nil,
       :throughput_mode,
       :provisioned_read_capacity_units,
       :provisioned_write_capacity_units,
@@ -28246,6 +29452,7 @@ module Aws::SageMaker
     #   <p>A set of columns names that can be grouped with the item identifier column to create a composite key for which a target value is predicted.</p>
     #   @return [Array<String>]
     class TimeSeriesConfig < Struct.new(
+      nil,
       :target_attribute_name,
       :timestamp_attribute_name,
       :item_identifier_attribute_name,
@@ -28284,6 +29491,7 @@ module Aws::SageMaker
     #   <p>Stores the configuration information for how model candidates are generated using an AutoML job V2.</p>
     #   @return [Types::CandidateGenerationConfig]
     class TimeSeriesForecastingJobConfig < Struct.new(
+      nil,
       :feature_specification_s3_uri,
       :completion_criteria,
       :forecast_frequency,
@@ -28306,6 +29514,7 @@ module Aws::SageMaker
     #   <p>The IAM role that Canvas passes to Amazon Forecast for time series forecasting. By default, Canvas uses the execution role specified in the <code>UserProfile</code> that launches the Canvas application. If an execution role is not specified in the <code>UserProfile</code>, Canvas uses the execution role specified in the Domain that owns the <code>UserProfile</code>. To allow time series forecasting, this IAM role should have the <a href="https://docs.aws.amazon.com/sagemaker/latest/dg/security-iam-awsmanpol-canvas.html#security-iam-awsmanpol-AmazonSageMakerCanvasForecastAccess"> AmazonSageMakerCanvasForecastAccess</a> policy attached and <code>forecast.amazonaws.com</code> added in the trust relationship as a service principal.</p>
     #   @return [String]
     class TimeSeriesForecastingSettings < Struct.new(
+      nil,
       :status,
       :amazon_forecast_role_arn,
       keyword_init: true
@@ -28321,6 +29530,7 @@ module Aws::SageMaker
     #   <p>A key value pair defining the aggregation method for a column, where the key is the column name and the value is the aggregation method.</p> <p>The supported aggregation methods are <code>sum</code> (default), <code>avg</code>, <code>first</code>, <code>min</code>, <code>max</code>.</p> <note> <p>Aggregation is only supported for the target column.</p> </note>
     #   @return [Hash<String, String>]
     class TimeSeriesTransformations < Struct.new(
+      nil,
       :filling,
       :aggregation,
       keyword_init: true
@@ -28336,6 +29546,7 @@ module Aws::SageMaker
     #   <p>Indicates the relationship between the returned <code>Value</code> and the actual total number of matching results. Possible values are:</p> <ul> <li> <p> <code>EqualTo</code>: The <code>Value</code> is the exact count of matching results.</p> </li> <li> <p> <code>GreaterThanOrEqualTo</code>: The <code>Value</code> is a lower bound of the actual count of matching results.</p> </li> </ul>
     #   @return [String]
     class TotalHits < Struct.new(
+      nil,
       :value,
       :relation,
       keyword_init: true
@@ -28366,6 +29577,7 @@ module Aws::SageMaker
     #   <p>The MLflow version used for a listed tracking server.</p>
     #   @return [String]
     class TrackingServerSummary < Struct.new(
+      nil,
       :tracking_server_arn,
       :tracking_server_name,
       :creation_time,
@@ -28389,6 +29601,7 @@ module Aws::SageMaker
     #   <p>Defines the stairs traffic pattern.</p>
     #   @return [Types::Stairs]
     class TrafficPattern < Struct.new(
+      nil,
       :traffic_type,
       :phases,
       :stairs,
@@ -28411,6 +29624,7 @@ module Aws::SageMaker
     #   <p>Batch size for each step to turn on traffic on the new endpoint fleet. <code>Value</code> must be 10-50% of the variant's total instance count.</p>
     #   @return [Types::CapacitySize]
     class TrafficRoutingConfig < Struct.new(
+      nil,
       :type,
       :wait_interval_in_seconds,
       :canary_size,
@@ -28428,6 +29642,7 @@ module Aws::SageMaker
     #   <p>An object containing authentication information for a private Docker registry containing your training images.</p>
     #   @return [Types::TrainingRepositoryAuthConfig]
     class TrainingImageConfig < Struct.new(
+      nil,
       :training_repository_access_mode,
       :training_repository_auth_config,
       keyword_init: true
@@ -28551,6 +29766,7 @@ module Aws::SageMaker
     #   <p>An array of key-value pairs. You can use tags to categorize your Amazon Web Services resources in different ways, for example, by purpose, owner, or environment. For more information, see <a href="https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html">Tagging Amazon Web Services Resources</a>.</p>
     #   @return [Array<Types::Tag>]
     class TrainingJob < Struct.new(
+      nil,
       :training_job_name,
       :training_job_arn,
       :tuning_job_arn,
@@ -28614,6 +29830,7 @@ module Aws::SageMaker
     #   <p>Specifies a limit to how long a model training job can run. It also specifies how long a managed Spot training job has to complete. When the job reaches the time limit, SageMaker ends the training job. Use this API to cap model training costs.</p> <p>To stop a job, SageMaker sends the algorithm the SIGTERM signal, which delays job termination for 120 seconds. Algorithms can use this 120-second window to save the model artifacts.</p>
     #   @return [Types::StoppingCondition]
     class TrainingJobDefinition < Struct.new(
+      nil,
       :training_input_mode,
       :hyper_parameters,
       :input_data_config,
@@ -28642,6 +29859,7 @@ module Aws::SageMaker
     #   <p>The number of training jobs launched by a hyperparameter tuning job that were manually stopped.</p>
     #   @return [Integer]
     class TrainingJobStatusCounters < Struct.new(
+      nil,
       :completed,
       :in_progress,
       :retryable_error,
@@ -28657,6 +29875,7 @@ module Aws::SageMaker
     #   <p>The Amazon Resource Name (ARN) of the training job that was run by this step execution.</p>
     #   @return [String]
     class TrainingJobStepMetadata < Struct.new(
+      nil,
       :arn,
       keyword_init: true
     )
@@ -28692,6 +29911,7 @@ module Aws::SageMaker
     #   <p>The Amazon Resource Name (ARN); of the training plan associated with this training job.</p> <p>For more information about how to reserve GPU capacity for your SageMaker HyperPod clusters using Amazon SageMaker Training Plan, see <code> <a href="https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_CreateTrainingPlan.html">CreateTrainingPlan</a> </code>.</p>
     #   @return [String]
     class TrainingJobSummary < Struct.new(
+      nil,
       :training_job_name,
       :training_job_arn,
       :creation_time,
@@ -28714,6 +29934,7 @@ module Aws::SageMaker
     #   <p>The value to filter by for the specified field.</p>
     #   @return [String]
     class TrainingPlanFilter < Struct.new(
+      nil,
       :name,
       :value,
       keyword_init: true
@@ -28750,6 +29971,7 @@ module Aws::SageMaker
     #   <p>A list of reserved capacity offerings associated with this training plan offering.</p>
     #   @return [Array<Types::ReservedCapacityOffering>]
     class TrainingPlanOffering < Struct.new(
+      nil,
       :training_plan_offering_id,
       :target_resources,
       :requested_start_time_after,
@@ -28814,6 +30036,7 @@ module Aws::SageMaker
     #   <p>A list of reserved capacities associated with this training plan, including details such as instance types, counts, and availability zones.</p>
     #   @return [Array<Types::ReservedCapacitySummary>]
     class TrainingPlanSummary < Struct.new(
+      nil,
       :training_plan_arn,
       :training_plan_name,
       :status,
@@ -28840,6 +30063,7 @@ module Aws::SageMaker
     #   <p>The Amazon Resource Name (ARN) of an Amazon Web Services Lambda function used to give SageMaker access credentials to your private Docker registry.</p>
     #   @return [String]
     class TrainingRepositoryAuthConfig < Struct.new(
+      nil,
       :training_repository_credentials_provider_arn,
       keyword_init: true
     )
@@ -28875,6 +30099,7 @@ module Aws::SageMaker
     #   <p>The additional data source used during the training job.</p>
     #   @return [Types::AdditionalS3DataSource]
     class TrainingSpecification < Struct.new(
+      nil,
       :training_image,
       :training_image_digest,
       :supported_hyper_parameters,
@@ -28894,6 +30119,7 @@ module Aws::SageMaker
     #   <p>The S3 location of the data source that is associated with a channel.</p>
     #   @return [Types::TransformS3DataSource]
     class TransformDataSource < Struct.new(
+      nil,
       :s3_data_source,
       keyword_init: true
     )
@@ -28914,6 +30140,7 @@ module Aws::SageMaker
     #   <p>The method to use to split the transform job's data files into smaller batches. Splitting is necessary when the total size of each object is too large to fit in a single request. You can also use data splitting to improve performance by processing multiple concurrent mini-batches. The default value for <code>SplitType</code> is <code>None</code>, which indicates that input data files are not split, and request payloads contain the entire contents of an input object. Set the value of this parameter to <code>Line</code> to split records on a newline character boundary. <code>SplitType</code> also supports a number of record-oriented binary data formats. Currently, the supported record formats are:</p> <ul> <li> <p>RecordIO</p> </li> <li> <p>TFRecord</p> </li> </ul> <p>When splitting is enabled, the size of a mini-batch depends on the values of the <code>BatchStrategy</code> and <code>MaxPayloadInMB</code> parameters. When the value of <code>BatchStrategy</code> is <code>MultiRecord</code>, Amazon SageMaker sends the maximum number of records in each request, up to the <code>MaxPayloadInMB</code> limit. If the value of <code>BatchStrategy</code> is <code>SingleRecord</code>, Amazon SageMaker sends individual records in each request.</p> <note> <p>Some data formats represent a record as a binary payload wrapped with extra padding bytes. When splitting is applied to a binary data format, padding is removed if the value of <code>BatchStrategy</code> is set to <code>SingleRecord</code>. Padding is not removed if the value of <code>BatchStrategy</code> is set to <code>MultiRecord</code>.</p> <p>For more information about <code>RecordIO</code>, see <a href="https://mxnet.apache.org/api/faq/recordio">Create a Dataset Using RecordIO</a> in the MXNet documentation. For more information about <code>TFRecord</code>, see <a href="https://www.tensorflow.org/guide/data#consuming_tfrecord_data">Consuming TFRecord data</a> in the TensorFlow documentation.</p> </note>
     #   @return [String]
     class TransformInput < Struct.new(
+      nil,
       :data_source,
       :content_type,
       :compression_type,
@@ -28991,6 +30218,7 @@ module Aws::SageMaker
     #   <p>A list of tags associated with the transform job.</p>
     #   @return [Array<Types::Tag>]
     class TransformJob < Struct.new(
+      nil,
       :transform_job_name,
       :transform_job_arn,
       :transform_job_status,
@@ -29041,6 +30269,7 @@ module Aws::SageMaker
     #   <p>Identifies the ML compute instances for the transform job.</p>
     #   @return [Types::TransformResources]
     class TransformJobDefinition < Struct.new(
+      nil,
       :max_concurrent_transforms,
       :max_payload_in_mb,
       :batch_strategy,
@@ -29058,6 +30287,7 @@ module Aws::SageMaker
     #   <p>The Amazon Resource Name (ARN) of the transform job that was run by this step execution.</p>
     #   @return [String]
     class TransformJobStepMetadata < Struct.new(
+      nil,
       :arn,
       keyword_init: true
     )
@@ -29087,6 +30317,7 @@ module Aws::SageMaker
     #   <p>If the transform job failed, the reason it failed.</p>
     #   @return [String]
     class TransformJobSummary < Struct.new(
+      nil,
       :transform_job_name,
       :transform_job_arn,
       :creation_time,
@@ -29113,6 +30344,7 @@ module Aws::SageMaker
     #   <p>The Amazon Web Services Key Management Service (Amazon Web Services KMS) key that Amazon SageMaker uses to encrypt the model artifacts at rest using Amazon S3 server-side encryption. The <code>KmsKeyId</code> can be any of the following formats: </p> <ul> <li> <p>Key ID: <code>1234abcd-12ab-34cd-56ef-1234567890ab</code> </p> </li> <li> <p>Key ARN: <code>arn:aws:kms:us-west-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab</code> </p> </li> <li> <p>Alias name: <code>alias/ExampleAlias</code> </p> </li> <li> <p>Alias name ARN: <code>arn:aws:kms:us-west-2:111122223333:alias/ExampleAlias</code> </p> </li> </ul> <p>If you don't provide a KMS key ID, Amazon SageMaker uses the default KMS key for Amazon S3 for your role's account. For more information, see <a href="https://docs.aws.amazon.com/AmazonS3/latest/dev/UsingKMSEncryption.html">KMS-Managed Encryption Keys</a> in the <i>Amazon Simple Storage Service Developer Guide.</i> </p> <p>The KMS key policy must grant permission to the IAM role that you specify in your <a href="https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_CreateModel.html">CreateModel</a> request. For more information, see <a href="https://docs.aws.amazon.com/kms/latest/developerguide/key-policies.html">Using Key Policies in Amazon Web Services KMS</a> in the <i>Amazon Web Services Key Management Service Developer Guide</i>.</p>
     #   @return [String]
     class TransformOutput < Struct.new(
+      nil,
       :s3_output_path,
       :accept,
       :assemble_with,
@@ -29136,6 +30368,7 @@ module Aws::SageMaker
     #   <p>Specifies an option from a collection of preconfigured Amazon Machine Image (AMI) images. Each image is configured by Amazon Web Services with a set of software and driver versions.</p> <dl> <dt>al2-ami-sagemaker-batch-gpu-470</dt> <dd> <ul> <li> <p>Accelerator: GPU</p> </li> <li> <p>NVIDIA driver version: 470</p> </li> </ul> </dd> <dt>al2-ami-sagemaker-batch-gpu-535</dt> <dd> <ul> <li> <p>Accelerator: GPU</p> </li> <li> <p>NVIDIA driver version: 535</p> </li> </ul> </dd> </dl>
     #   @return [String]
     class TransformResources < Struct.new(
+      nil,
       :instance_type,
       :instance_count,
       :volume_kms_key_id,
@@ -29153,6 +30386,7 @@ module Aws::SageMaker
     #   <p>Depending on the value specified for the <code>S3DataType</code>, identifies either a key name prefix or a manifest. For example:</p> <ul> <li> <p> A key name prefix might look like this: <code>s3://bucketname/exampleprefix/</code>. </p> </li> <li> <p> A manifest might look like this: <code>s3://bucketname/example.manifest</code> </p> <p> The manifest is an S3 object which is a JSON file with the following format: </p> <p> <code>[ {"prefix": "s3://customer_bucket/some/prefix/"},</code> </p> <p> <code>"relative/path/to/custdata-1",</code> </p> <p> <code>"relative/path/custdata-2",</code> </p> <p> <code>...</code> </p> <p> <code>"relative/path/custdata-N"</code> </p> <p> <code>]</code> </p> <p> The preceding JSON matches the following <code>S3Uris</code>: </p> <p> <code>s3://customer_bucket/some/prefix/relative/path/to/custdata-1</code> </p> <p> <code>s3://customer_bucket/some/prefix/relative/path/custdata-2</code> </p> <p> <code>...</code> </p> <p> <code>s3://customer_bucket/some/prefix/relative/path/custdata-N</code> </p> <p> The complete set of <code>S3Uris</code> in this manifest constitutes the input data for the channel for this datasource. The object that each <code>S3Uris</code> points to must be readable by the IAM role that Amazon SageMaker uses to perform tasks on your behalf.</p> </li> </ul>
     #   @return [String]
     class TransformS3DataSource < Struct.new(
+      nil,
       :s3_data_type,
       :s3_uri,
       keyword_init: true
@@ -29198,6 +30432,7 @@ module Aws::SageMaker
     #   <p>A list of the components associated with the trial. For each component, a summary of the component's properties is included.</p>
     #   @return [Array<Types::TrialComponentSimpleSummary>]
     class Trial < Struct.new(
+      nil,
       :trial_name,
       :trial_arn,
       :display_name,
@@ -29280,6 +30515,7 @@ module Aws::SageMaker
     #   <p>The name of the experiment run.</p>
     #   @return [String]
     class TrialComponent < Struct.new(
+      nil,
       :trial_component_name,
       :display_name,
       :trial_component_arn,
@@ -29314,6 +30550,7 @@ module Aws::SageMaker
     #   <p>The location of the artifact.</p>
     #   @return [String]
     class TrialComponentArtifact < Struct.new(
+      nil,
       :media_type,
       :value,
       keyword_init: true
@@ -29350,6 +30587,7 @@ module Aws::SageMaker
     #   <p>The standard deviation of the metric.</p>
     #   @return [Float]
     class TrialComponentMetricSummary < Struct.new(
+      nil,
       :metric_name,
       :source_arn,
       :time_stamp,
@@ -29401,6 +30639,7 @@ module Aws::SageMaker
     #   <p>Information about the user who created or modified a SageMaker resource.</p>
     #   @return [Types::UserContext]
     class TrialComponentSimpleSummary < Struct.new(
+      nil,
       :trial_component_name,
       :trial_component_arn,
       :trial_component_source,
@@ -29419,6 +30658,7 @@ module Aws::SageMaker
     #   <p>The source job type.</p>
     #   @return [String]
     class TrialComponentSource < Struct.new(
+      nil,
       :source_arn,
       :source_type,
       keyword_init: true
@@ -29440,6 +30680,7 @@ module Aws::SageMaker
     #   <p>Information about a transform job that's the source of a trial component.</p>
     #   @return [Types::TransformJob]
     class TrialComponentSourceDetail < Struct.new(
+      nil,
       :source_arn,
       :training_job,
       :processing_job,
@@ -29457,6 +30698,7 @@ module Aws::SageMaker
     #   <p>If the component failed, a message describing why.</p>
     #   @return [String]
     class TrialComponentStatus < Struct.new(
+      nil,
       :primary_status,
       :message,
       keyword_init: true
@@ -29499,6 +30741,7 @@ module Aws::SageMaker
     #   <p>Who last modified the component.</p>
     #   @return [Types::UserContext]
     class TrialComponentSummary < Struct.new(
+      nil,
       :trial_component_name,
       :trial_component_arn,
       :display_name,
@@ -29523,6 +30766,7 @@ module Aws::SageMaker
     #   <p>The source job type.</p>
     #   @return [String]
     class TrialSource < Struct.new(
+      nil,
       :source_arn,
       :source_type,
       keyword_init: true
@@ -29550,6 +30794,7 @@ module Aws::SageMaker
     #   <p>When the trial was last modified.</p>
     #   @return [Time]
     class TrialSummary < Struct.new(
+      nil,
       :trial_arn,
       :trial_name,
       :display_name,
@@ -29566,6 +30811,7 @@ module Aws::SageMaker
     #   <p>The status of Trusted Identity Propagation (TIP) at the SageMaker domain level. </p> <p>When disabled, standard IAM role-based access is used. </p> <p>When enabled:</p> <ul> <li> <p>User identities from IAM Identity Center are propagated through the application to TIP enabled Amazon Web Services services.</p> </li> <li> <p>New applications or existing applications that are automatically patched, will use the domain level configuration.</p> </li> </ul>
     #   @return [String]
     class TrustedIdentityPropagationSettings < Struct.new(
+      nil,
       :status,
       keyword_init: true
     )
@@ -29580,6 +30826,7 @@ module Aws::SageMaker
     #   <p> <code>TtlDuration</code> time value.</p>
     #   @return [Integer]
     class TtlDuration < Struct.new(
+      nil,
       :unit,
       :value,
       keyword_init: true
@@ -29598,6 +30845,7 @@ module Aws::SageMaker
     #   <p>A flag to top your hyperparameter tuning job if automatic model tuning (AMT) has detected that your model has converged as evaluated against your objective function.</p>
     #   @return [Types::ConvergenceDetected]
     class TuningJobCompletionCriteria < Struct.new(
+      nil,
       :target_objective_metric_value,
       :best_objective_not_improving,
       :convergence_detected,
@@ -29611,6 +30859,7 @@ module Aws::SageMaker
     #   <p>The Amazon Resource Name (ARN) of the tuning job that was run by this step execution.</p>
     #   @return [String]
     class TuningJobStepMetaData < Struct.new(
+      nil,
       :arn,
       keyword_init: true
     )
@@ -29628,6 +30877,7 @@ module Aws::SageMaker
     #   <p>Fractions of a cent, in tenths.</p>
     #   @return [Integer]
     class USD < Struct.new(
+      nil,
       :dollars,
       :cents,
       :tenth_fractions_of_a_cent,
@@ -29644,6 +30894,7 @@ module Aws::SageMaker
     #   <p>The ARN of the worker task template used to render the worker UI and tools for labeling job tasks.</p> <p>Use this parameter when you are creating a labeling job for named entity recognition, 3D point cloud and video frame labeling jobs. Use your labeling job task type to select one of the following ARNs and use it with this parameter when you create a labeling job. Replace <code>aws-region</code> with the Amazon Web Services Region you are creating your labeling job in. For example, replace <code>aws-region</code> with <code>us-west-1</code> if you create a labeling job in US West (N. California).</p> <p> <b>Named Entity Recognition</b> </p> <p>Use the following <code>HumanTaskUiArn</code> for named entity recognition labeling jobs:</p> <p> <code>arn:aws:sagemaker:aws-region:394669845002:human-task-ui/NamedEntityRecognition</code> </p> <p> <b>3D Point Cloud HumanTaskUiArns</b> </p> <p>Use this <code>HumanTaskUiArn</code> for 3D point cloud object detection and 3D point cloud object detection adjustment labeling jobs. </p> <ul> <li> <p> <code>arn:aws:sagemaker:aws-region:394669845002:human-task-ui/PointCloudObjectDetection</code> </p> </li> </ul> <p> Use this <code>HumanTaskUiArn</code> for 3D point cloud object tracking and 3D point cloud object tracking adjustment labeling jobs. </p> <ul> <li> <p> <code>arn:aws:sagemaker:aws-region:394669845002:human-task-ui/PointCloudObjectTracking</code> </p> </li> </ul> <p> Use this <code>HumanTaskUiArn</code> for 3D point cloud semantic segmentation and 3D point cloud semantic segmentation adjustment labeling jobs.</p> <ul> <li> <p> <code>arn:aws:sagemaker:aws-region:394669845002:human-task-ui/PointCloudSemanticSegmentation</code> </p> </li> </ul> <p> <b>Video Frame HumanTaskUiArns</b> </p> <p>Use this <code>HumanTaskUiArn</code> for video frame object detection and video frame object detection adjustment labeling jobs. </p> <ul> <li> <p> <code>arn:aws:sagemaker:region:394669845002:human-task-ui/VideoObjectDetection</code> </p> </li> </ul> <p> Use this <code>HumanTaskUiArn</code> for video frame object tracking and video frame object tracking adjustment labeling jobs. </p> <ul> <li> <p> <code>arn:aws:sagemaker:aws-region:394669845002:human-task-ui/VideoObjectTracking</code> </p> </li> </ul>
     #   @return [String]
     class UiConfig < Struct.new(
+      nil,
       :ui_template_s3_uri,
       :human_task_ui_arn,
       keyword_init: true
@@ -29656,6 +30907,7 @@ module Aws::SageMaker
     #   <p>The content of the Liquid template for the worker user interface.</p>
     #   @return [String]
     class UiTemplate < Struct.new(
+      nil,
       :content,
       keyword_init: true
     )
@@ -29670,6 +30922,7 @@ module Aws::SageMaker
     #   <p>The SHA-256 digest of the contents of the template.</p>
     #   @return [String]
     class UiTemplateInfo < Struct.new(
+      nil,
       :url,
       :content_sha256,
       keyword_init: true
@@ -29712,6 +30965,7 @@ module Aws::SageMaker
     #   <p>The overall health status of the UltraServer.</p>
     #   @return [String]
     class UltraServer < Struct.new(
+      nil,
       :ultra_server_id,
       :ultra_server_type,
       :availability_zone,
@@ -29733,6 +30987,7 @@ module Aws::SageMaker
     #   <p>The unique identifier of the UltraServer.</p>
     #   @return [String]
     class UltraServerInfo < Struct.new(
+      nil,
       :id,
       keyword_init: true
     )
@@ -29756,6 +31011,7 @@ module Aws::SageMaker
     #   <p>The total number of instances across all UltraServers of this type that are currently in an unhealthy state.</p>
     #   @return [Integer]
     class UltraServerSummary < Struct.new(
+      nil,
       :ultra_server_type,
       :instance_type,
       :ultra_server_count,
@@ -29792,6 +31048,7 @@ module Aws::SageMaker
     #   <p>The ARN of the Amazon DataZone application managed by Amazon SageMaker Unified Studio in the Amazon Web Services IAM Identity Center.</p>
     #   @return [String]
     class UnifiedStudioSettings < Struct.new(
+      nil,
       :studio_web_portal_access,
       :domain_account_id,
       :domain_region,
@@ -29821,6 +31078,7 @@ module Aws::SageMaker
     #   <p>A list of properties to remove.</p>
     #   @return [Array<String>]
     class UpdateActionRequest < Struct.new(
+      nil,
       :action_name,
       :description,
       :status,
@@ -29835,6 +31093,7 @@ module Aws::SageMaker
     #   <p>The Amazon Resource Name (ARN) of the action.</p>
     #   @return [String]
     class UpdateActionResponse < Struct.new(
+      nil,
       :action_arn,
       keyword_init: true
     )
@@ -29854,6 +31113,7 @@ module Aws::SageMaker
     #   <p>The Code Editor app running on the image.</p>
     #   @return [Types::CodeEditorAppImageConfig]
     class UpdateAppImageConfigRequest < Struct.new(
+      nil,
       :app_image_config_name,
       :kernel_gateway_image_config,
       :jupyter_lab_app_image_config,
@@ -29867,6 +31127,7 @@ module Aws::SageMaker
     #   <p>The ARN for the AppImageConfig.</p>
     #   @return [String]
     class UpdateAppImageConfigResponse < Struct.new(
+      nil,
       :app_image_config_arn,
       keyword_init: true
     )
@@ -29886,6 +31147,7 @@ module Aws::SageMaker
     #   <p>A list of properties to remove.</p>
     #   @return [Array<String>]
     class UpdateArtifactRequest < Struct.new(
+      nil,
       :artifact_arn,
       :artifact_name,
       :properties,
@@ -29899,6 +31161,7 @@ module Aws::SageMaker
     #   <p>The Amazon Resource Name (ARN) of the artifact.</p>
     #   @return [String]
     class UpdateArtifactResponse < Struct.new(
+      nil,
       :artifact_arn,
       keyword_init: true
     )
@@ -29930,6 +31193,7 @@ module Aws::SageMaker
     #   <p>Updates the autoscaling configuration for the cluster. Use to enable or disable automatic node scaling.</p>
     #   @return [Types::ClusterAutoScalingConfig]
     class UpdateClusterRequest < Struct.new(
+      nil,
       :cluster_name,
       :instance_groups,
       :restricted_instance_groups,
@@ -29947,6 +31211,7 @@ module Aws::SageMaker
     #   <p>The Amazon Resource Name (ARN) of the updated SageMaker HyperPod cluster.</p>
     #   @return [String]
     class UpdateClusterResponse < Struct.new(
+      nil,
       :cluster_arn,
       keyword_init: true
     )
@@ -29966,6 +31231,7 @@ module Aws::SageMaker
     #   <p>Description of the cluster policy.</p>
     #   @return [String]
     class UpdateClusterSchedulerConfigRequest < Struct.new(
+      nil,
       :cluster_scheduler_config_id,
       :target_version,
       :scheduler_config,
@@ -29982,6 +31248,7 @@ module Aws::SageMaker
     #   <p>Version of the cluster policy.</p>
     #   @return [Integer]
     class UpdateClusterSchedulerConfigResponse < Struct.new(
+      nil,
       :cluster_scheduler_config_arn,
       :cluster_scheduler_config_version,
       keyword_init: true
@@ -29994,6 +31261,7 @@ module Aws::SageMaker
     #   <p>The name of the instance group to update.</p>
     #   @return [String]
     class UpdateClusterSoftwareInstanceGroupSpecification < Struct.new(
+      nil,
       :instance_group_name,
       keyword_init: true
     )
@@ -30013,6 +31281,7 @@ module Aws::SageMaker
     #   <p>When configuring your HyperPod cluster, you can specify an image ID using one of the following options:</p> <ul> <li> <p> <code>HyperPodPublicAmiId</code>: Use a HyperPod public AMI</p> </li> <li> <p> <code>CustomAmiId</code>: Use your custom AMI</p> </li> <li> <p> <code>default</code>: Use the default latest system image</p> </li> </ul> <p>If you choose to use a custom AMI (<code>CustomAmiId</code>), ensure it meets the following requirements:</p> <ul> <li> <p>Encryption: The custom AMI must be unencrypted.</p> </li> <li> <p>Ownership: The custom AMI must be owned by the same Amazon Web Services account that is creating the HyperPod cluster.</p> </li> <li> <p>Volume support: Only the primary AMI snapshot volume is supported; additional AMI volumes are not supported.</p> </li> </ul> <p>When updating the instance group's AMI through the <code>UpdateClusterSoftware</code> operation, if an instance group uses a custom AMI, you must provide an <code>ImageId</code> or use the default as input. Note that if you don't specify an instance group in your <code>UpdateClusterSoftware</code> request, then all of the instance groups are patched with the specified image.</p>
     #   @return [String]
     class UpdateClusterSoftwareRequest < Struct.new(
+      nil,
       :cluster_name,
       :instance_groups,
       :deployment_config,
@@ -30026,6 +31295,7 @@ module Aws::SageMaker
     #   <p>The Amazon Resource Name (ARN) of the SageMaker HyperPod cluster being updated for security patching.</p>
     #   @return [String]
     class UpdateClusterSoftwareResponse < Struct.new(
+      nil,
       :cluster_arn,
       keyword_init: true
     )
@@ -30039,6 +31309,7 @@ module Aws::SageMaker
     #   <p>The configuration of the git repository, including the URL and the Amazon Resource Name (ARN) of the Amazon Web Services Secrets Manager secret that contains the credentials used to access the repository. The secret must have a staging label of <code>AWSCURRENT</code> and must be in the following format:</p> <p> <code>{"username": <i>UserName</i>, "password": <i>Password</i>}</code> </p>
     #   @return [Types::GitConfigForUpdate]
     class UpdateCodeRepositoryInput < Struct.new(
+      nil,
       :code_repository_name,
       :git_config,
       keyword_init: true
@@ -30050,6 +31321,7 @@ module Aws::SageMaker
     #   <p>The ARN of the Git repository.</p>
     #   @return [String]
     class UpdateCodeRepositoryOutput < Struct.new(
+      nil,
       :code_repository_arn,
       keyword_init: true
     )
@@ -30075,6 +31347,7 @@ module Aws::SageMaker
     #   <p>Description of the compute allocation definition.</p>
     #   @return [String]
     class UpdateComputeQuotaRequest < Struct.new(
+      nil,
       :compute_quota_id,
       :target_version,
       :compute_quota_config,
@@ -30093,6 +31366,7 @@ module Aws::SageMaker
     #   <p>Version of the compute allocation definition.</p>
     #   @return [Integer]
     class UpdateComputeQuotaResponse < Struct.new(
+      nil,
       :compute_quota_arn,
       :compute_quota_version,
       keyword_init: true
@@ -30113,6 +31387,7 @@ module Aws::SageMaker
     #   <p>A list of properties to remove.</p>
     #   @return [Array<String>]
     class UpdateContextRequest < Struct.new(
+      nil,
       :context_name,
       :description,
       :properties,
@@ -30126,6 +31401,7 @@ module Aws::SageMaker
     #   <p>The Amazon Resource Name (ARN) of the context.</p>
     #   @return [String]
     class UpdateContextResponse < Struct.new(
+      nil,
       :context_arn,
       keyword_init: true
     )
@@ -30148,6 +31424,7 @@ module Aws::SageMaker
     #   <p>Whether to create an Amazon Web Services IoT Role Alias during device fleet creation. The name of the role alias generated will match this pattern: "SageMakerEdge-{DeviceFleetName}".</p> <p>For example, if your device fleet is called "demo-fleet", the name of the role alias will be "SageMakerEdge-demo-fleet".</p>
     #   @return [Boolean]
     class UpdateDeviceFleetRequest < Struct.new(
+      nil,
       :device_fleet_name,
       :role_arn,
       :description,
@@ -30165,6 +31442,7 @@ module Aws::SageMaker
     #   <p>List of devices to register with Edge Manager agent.</p>
     #   @return [Array<Types::Device>]
     class UpdateDevicesRequest < Struct.new(
+      nil,
       :device_fleet_name,
       :devices,
       keyword_init: true
@@ -30197,6 +31475,7 @@ module Aws::SageMaker
     #   <p>Indicates whether custom tag propagation is supported for the domain. Defaults to <code>DISABLED</code>.</p>
     #   @return [String]
     class UpdateDomainRequest < Struct.new(
+      nil,
       :domain_id,
       :default_user_settings,
       :domain_settings_for_update,
@@ -30214,6 +31493,7 @@ module Aws::SageMaker
     #   <p>The Amazon Resource Name (ARN) of the domain.</p>
     #   @return [String]
     class UpdateDomainResponse < Struct.new(
+      nil,
       :domain_arn,
       keyword_init: true
     )
@@ -30239,6 +31519,7 @@ module Aws::SageMaker
     #   <p>Specifies whether to reuse the last deployment configuration. The default value is false (the configuration is not reused).</p>
     #   @return [Boolean]
     class UpdateEndpointInput < Struct.new(
+      nil,
       :endpoint_name,
       :endpoint_config_name,
       :retain_all_variant_properties,
@@ -30254,6 +31535,7 @@ module Aws::SageMaker
     #   <p>The Amazon Resource Name (ARN) of the endpoint.</p>
     #   @return [String]
     class UpdateEndpointOutput < Struct.new(
+      nil,
       :endpoint_arn,
       keyword_init: true
     )
@@ -30267,6 +31549,7 @@ module Aws::SageMaker
     #   <p>An object that provides new capacity and weight values for a variant.</p>
     #   @return [Array<Types::DesiredWeightAndCapacity>]
     class UpdateEndpointWeightsAndCapacitiesInput < Struct.new(
+      nil,
       :endpoint_name,
       :desired_weights_and_capacities,
       keyword_init: true
@@ -30278,6 +31561,7 @@ module Aws::SageMaker
     #   <p>The Amazon Resource Name (ARN) of the updated endpoint.</p>
     #   @return [String]
     class UpdateEndpointWeightsAndCapacitiesOutput < Struct.new(
+      nil,
       :endpoint_arn,
       keyword_init: true
     )
@@ -30294,6 +31578,7 @@ module Aws::SageMaker
     #   <p>The description of the experiment.</p>
     #   @return [String]
     class UpdateExperimentRequest < Struct.new(
+      nil,
       :experiment_name,
       :display_name,
       :description,
@@ -30306,6 +31591,7 @@ module Aws::SageMaker
     #   <p>The Amazon Resource Name (ARN) of the experiment.</p>
     #   @return [String]
     class UpdateExperimentResponse < Struct.new(
+      nil,
       :experiment_arn,
       keyword_init: true
     )
@@ -30325,6 +31611,7 @@ module Aws::SageMaker
     #   <p>The new throughput configuration for the feature group. You can switch between on-demand and provisioned modes or update the read / write capacity of provisioned feature groups. You can switch a feature group to on-demand only once in a 24 hour period. </p>
     #   @return [Types::ThroughputConfigUpdate]
     class UpdateFeatureGroupRequest < Struct.new(
+      nil,
       :feature_group_name,
       :feature_additions,
       :online_store_config,
@@ -30338,6 +31625,7 @@ module Aws::SageMaker
     #   <p>The Amazon Resource Number (ARN) of the feature group that you're updating.</p>
     #   @return [String]
     class UpdateFeatureGroupResponse < Struct.new(
+      nil,
       :feature_group_arn,
       keyword_init: true
     )
@@ -30360,6 +31648,7 @@ module Aws::SageMaker
     #   <p>A list of parameter keys that you can specify to remove parameters that describe your feature.</p>
     #   @return [Array<String>]
     class UpdateFeatureMetadataRequest < Struct.new(
+      nil,
       :feature_group_name,
       :feature_name,
       :description,
@@ -30383,6 +31672,7 @@ module Aws::SageMaker
     #   <p>The minimum hub content version of the referenced model that you want to use. The minimum version must be older than the latest available version of the referenced model. To support all versions of a model, set the value to <code>1.0.0</code>.</p>
     #   @return [String]
     class UpdateHubContentReferenceRequest < Struct.new(
+      nil,
       :hub_name,
       :hub_content_name,
       :hub_content_type,
@@ -30399,6 +31689,7 @@ module Aws::SageMaker
     #   <p>The ARN of the hub content resource that was updated.</p>
     #   @return [String]
     class UpdateHubContentReferenceResponse < Struct.new(
+      nil,
       :hub_arn,
       :hub_content_arn,
       keyword_init: true
@@ -30434,6 +31725,7 @@ module Aws::SageMaker
     #   <p>Indicates the current status of the hub content resource.</p>
     #   @return [String]
     class UpdateHubContentRequest < Struct.new(
+      nil,
       :hub_name,
       :hub_content_name,
       :hub_content_type,
@@ -30455,6 +31747,7 @@ module Aws::SageMaker
     #   <p>The ARN of the hub content resource that was updated.</p>
     #   @return [String]
     class UpdateHubContentResponse < Struct.new(
+      nil,
       :hub_arn,
       :hub_content_arn,
       keyword_init: true
@@ -30475,6 +31768,7 @@ module Aws::SageMaker
     #   <p>The searchable keywords for the hub.</p>
     #   @return [Array<String>]
     class UpdateHubRequest < Struct.new(
+      nil,
       :hub_name,
       :hub_description,
       :hub_display_name,
@@ -30488,6 +31782,7 @@ module Aws::SageMaker
     #   <p>The Amazon Resource Name (ARN) of the updated hub.</p>
     #   @return [String]
     class UpdateHubResponse < Struct.new(
+      nil,
       :hub_arn,
       keyword_init: true
     )
@@ -30510,6 +31805,7 @@ module Aws::SageMaker
     #   <p>The new ARN for the IAM role that enables Amazon SageMaker AI to perform tasks on your behalf.</p>
     #   @return [String]
     class UpdateImageRequest < Struct.new(
+      nil,
       :delete_properties,
       :description,
       :display_name,
@@ -30524,6 +31820,7 @@ module Aws::SageMaker
     #   <p>The ARN of the image.</p>
     #   @return [String]
     class UpdateImageResponse < Struct.new(
+      nil,
       :image_arn,
       keyword_init: true
     )
@@ -30567,6 +31864,7 @@ module Aws::SageMaker
     #   <p>The maintainer description of the image version.</p>
     #   @return [String]
     class UpdateImageVersionRequest < Struct.new(
+      nil,
       :image_name,
       :alias,
       :version,
@@ -30588,6 +31886,7 @@ module Aws::SageMaker
     #   <p>The ARN of the image version.</p>
     #   @return [String]
     class UpdateImageVersionResponse < Struct.new(
+      nil,
       :image_version_arn,
       keyword_init: true
     )
@@ -30607,6 +31906,7 @@ module Aws::SageMaker
     #   <p>The deployment configuration for the inference component. The configuration contains the desired deployment strategy and rollback settings.</p>
     #   @return [Types::InferenceComponentDeploymentConfig]
     class UpdateInferenceComponentInput < Struct.new(
+      nil,
       :inference_component_name,
       :specification,
       :runtime_config,
@@ -30620,6 +31920,7 @@ module Aws::SageMaker
     #   <p>The Amazon Resource Name (ARN) of the inference component.</p>
     #   @return [String]
     class UpdateInferenceComponentOutput < Struct.new(
+      nil,
       :inference_component_arn,
       keyword_init: true
     )
@@ -30633,6 +31934,7 @@ module Aws::SageMaker
     #   <p>Runtime settings for a model that is deployed with an inference component.</p>
     #   @return [Types::InferenceComponentRuntimeConfig]
     class UpdateInferenceComponentRuntimeConfigInput < Struct.new(
+      nil,
       :inference_component_name,
       :desired_runtime_config,
       keyword_init: true
@@ -30644,6 +31946,7 @@ module Aws::SageMaker
     #   <p>The Amazon Resource Name (ARN) of the inference component.</p>
     #   @return [String]
     class UpdateInferenceComponentRuntimeConfigOutput < Struct.new(
+      nil,
       :inference_component_arn,
       keyword_init: true
     )
@@ -30669,6 +31972,7 @@ module Aws::SageMaker
     #   <p> The configuration of <code>ShadowMode</code> inference experiment type. Use this field to specify a production variant which takes all the inference requests, and a shadow variant to which Amazon SageMaker replicates a percentage of the inference requests. For the shadow variant also specify the percentage of requests that Amazon SageMaker replicates. </p>
     #   @return [Types::ShadowModeConfig]
     class UpdateInferenceExperimentRequest < Struct.new(
+      nil,
       :name,
       :schedule,
       :description,
@@ -30684,6 +31988,7 @@ module Aws::SageMaker
     #   <p>The ARN of the updated inference experiment.</p>
     #   @return [String]
     class UpdateInferenceExperimentResponse < Struct.new(
+      nil,
       :inference_experiment_arn,
       keyword_init: true
     )
@@ -30706,6 +32011,7 @@ module Aws::SageMaker
     #   <p>The new weekly maintenance window start day and time to update. The maintenance window day and time should be in Coordinated Universal Time (UTC) 24-hour standard time. For example: TUE:03:30.</p>
     #   @return [String]
     class UpdateMlflowTrackingServerRequest < Struct.new(
+      nil,
       :tracking_server_name,
       :artifact_store_uri,
       :tracking_server_size,
@@ -30720,6 +32026,7 @@ module Aws::SageMaker
     #   <p>The ARN of the updated MLflow Tracking Server.</p>
     #   @return [String]
     class UpdateMlflowTrackingServerResponse < Struct.new(
+      nil,
       :tracking_server_arn,
       keyword_init: true
     )
@@ -30736,6 +32043,7 @@ module Aws::SageMaker
     #   <p>The approval status of the model card within your organization. Different organizations might have different criteria for model card review and approval.</p> <ul> <li> <p> <code>Draft</code>: The model card is a work in progress.</p> </li> <li> <p> <code>PendingReview</code>: The model card is pending review.</p> </li> <li> <p> <code>Approved</code>: The model card is approved.</p> </li> <li> <p> <code>Archived</code>: The model card is archived. No more updates should be made to the model card, but it can still be exported.</p> </li> </ul>
     #   @return [String]
     class UpdateModelCardRequest < Struct.new(
+      nil,
       :model_card_name,
       :content,
       :model_card_status,
@@ -30748,6 +32056,7 @@ module Aws::SageMaker
     #   <p>The Amazon Resource Name (ARN) of the updated model card.</p>
     #   @return [String]
     class UpdateModelCardResponse < Struct.new(
+      nil,
       :model_card_arn,
       keyword_init: true
     )
@@ -30788,6 +32097,7 @@ module Aws::SageMaker
     #   <p> A unique token that guarantees that the call to this API is idempotent. </p>
     #   @return [String]
     class UpdateModelPackageInput < Struct.new(
+      nil,
       :model_package_arn,
       :model_approval_status,
       :approval_description,
@@ -30808,6 +32118,7 @@ module Aws::SageMaker
     #   <p>The Amazon Resource Name (ARN) of the model.</p>
     #   @return [String]
     class UpdateModelPackageOutput < Struct.new(
+      nil,
       :model_package_arn,
       keyword_init: true
     )
@@ -30827,6 +32138,7 @@ module Aws::SageMaker
     #   <p>The number of most recent monitoring executions to consider when evaluating alert status.</p>
     #   @return [Integer]
     class UpdateMonitoringAlertRequest < Struct.new(
+      nil,
       :monitoring_schedule_name,
       :monitoring_alert_name,
       :datapoints_to_alert,
@@ -30843,6 +32155,7 @@ module Aws::SageMaker
     #   <p>The name of a monitoring alert.</p>
     #   @return [String]
     class UpdateMonitoringAlertResponse < Struct.new(
+      nil,
       :monitoring_schedule_arn,
       :monitoring_alert_name,
       keyword_init: true
@@ -30857,6 +32170,7 @@ module Aws::SageMaker
     #   <p>The configuration object that specifies the monitoring schedule and defines the monitoring job.</p>
     #   @return [Types::MonitoringScheduleConfig]
     class UpdateMonitoringScheduleRequest < Struct.new(
+      nil,
       :monitoring_schedule_name,
       :monitoring_schedule_config,
       keyword_init: true
@@ -30868,6 +32182,7 @@ module Aws::SageMaker
     #   <p>The Amazon Resource Name (ARN) of the monitoring schedule.</p>
     #   @return [String]
     class UpdateMonitoringScheduleResponse < Struct.new(
+      nil,
       :monitoring_schedule_arn,
       keyword_init: true
     )
@@ -30920,6 +32235,7 @@ module Aws::SageMaker
     #   <p>Information on the IMDS configuration of the notebook instance</p>
     #   @return [Types::InstanceMetadataServiceConfiguration]
     class UpdateNotebookInstanceInput < Struct.new(
+      nil,
       :notebook_instance_name,
       :instance_type,
       :ip_address_type,
@@ -30950,6 +32266,7 @@ module Aws::SageMaker
     #   <p>The shell script that runs every time you start a notebook instance, including when you create the notebook instance. The shell script must be a base64-encoded string.</p>
     #   @return [Array<Types::NotebookInstanceLifecycleHook>]
     class UpdateNotebookInstanceLifecycleConfigInput < Struct.new(
+      nil,
       :notebook_instance_lifecycle_config_name,
       :on_create,
       :on_start,
@@ -30959,12 +32276,14 @@ module Aws::SageMaker
     end
 
     class UpdateNotebookInstanceLifecycleConfigOutput < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
     end
 
     class UpdateNotebookInstanceOutput < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -30992,6 +32311,7 @@ module Aws::SageMaker
     #   <p>Each tag consists of a key and an optional value. Tag keys must be unique per resource.</p>
     #   @return [Array<Types::Tag>]
     class UpdatePartnerAppRequest < Struct.new(
+      nil,
       :arn,
       :maintenance_config,
       :tier,
@@ -31008,6 +32328,7 @@ module Aws::SageMaker
     #   <p>The ARN of the SageMaker Partner AI App that was updated.</p>
     #   @return [String]
     class UpdatePartnerAppResponse < Struct.new(
+      nil,
       :arn,
       keyword_init: true
     )
@@ -31027,6 +32348,7 @@ module Aws::SageMaker
     #   <p>This configuration, if specified, overrides the parallelism configuration of the parent pipeline for this specific run.</p>
     #   @return [Types::ParallelismConfiguration]
     class UpdatePipelineExecutionRequest < Struct.new(
+      nil,
       :pipeline_execution_arn,
       :pipeline_execution_description,
       :pipeline_execution_display_name,
@@ -31040,6 +32362,7 @@ module Aws::SageMaker
     #   <p>The Amazon Resource Name (ARN) of the updated pipeline execution.</p>
     #   @return [String]
     class UpdatePipelineExecutionResponse < Struct.new(
+      nil,
       :pipeline_execution_arn,
       keyword_init: true
     )
@@ -31068,6 +32391,7 @@ module Aws::SageMaker
     #   <p>If specified, it applies to all executions of this pipeline by default.</p>
     #   @return [Types::ParallelismConfiguration]
     class UpdatePipelineRequest < Struct.new(
+      nil,
       :pipeline_name,
       :pipeline_display_name,
       :pipeline_definition,
@@ -31087,6 +32411,7 @@ module Aws::SageMaker
     #   <p>The ID of the pipeline version.</p>
     #   @return [Integer]
     class UpdatePipelineResponse < Struct.new(
+      nil,
       :pipeline_arn,
       :pipeline_version_id,
       keyword_init: true
@@ -31107,6 +32432,7 @@ module Aws::SageMaker
     #   <p>The description of the pipeline version.</p>
     #   @return [String]
     class UpdatePipelineVersionRequest < Struct.new(
+      nil,
       :pipeline_arn,
       :pipeline_version_id,
       :pipeline_version_display_name,
@@ -31123,6 +32449,7 @@ module Aws::SageMaker
     #   <p>The ID of the pipeline version.</p>
     #   @return [Integer]
     class UpdatePipelineVersionResponse < Struct.new(
+      nil,
       :pipeline_arn,
       :pipeline_version_id,
       keyword_init: true
@@ -31146,6 +32473,7 @@ module Aws::SageMaker
     #   <p> The template providers to update in the project. </p>
     #   @return [Array<Types::UpdateTemplateProvider>]
     class UpdateProjectInput < Struct.new(
+      nil,
       :project_name,
       :project_description,
       :service_catalog_provisioning_update_details,
@@ -31160,6 +32488,7 @@ module Aws::SageMaker
     #   <p>The Amazon Resource Name (ARN) of the project.</p>
     #   @return [String]
     class UpdateProjectOutput < Struct.new(
+      nil,
       :project_arn,
       keyword_init: true
     )
@@ -31179,6 +32508,7 @@ module Aws::SageMaker
     #   <p>The name of the space that appears in the Amazon SageMaker Studio UI.</p>
     #   @return [String]
     class UpdateSpaceRequest < Struct.new(
+      nil,
       :domain_id,
       :space_name,
       :space_settings,
@@ -31192,6 +32522,7 @@ module Aws::SageMaker
     #   <p>The space's Amazon Resource Name (ARN).</p>
     #   @return [String]
     class UpdateSpaceResponse < Struct.new(
+      nil,
       :space_arn,
       keyword_init: true
     )
@@ -31203,6 +32534,7 @@ module Aws::SageMaker
     #   <p> The CloudFormation template provider configuration to update. </p>
     #   @return [Types::CfnUpdateTemplateProvider]
     class UpdateTemplateProvider < Struct.new(
+      nil,
       :cfn_template_provider,
       keyword_init: true
     )
@@ -31225,6 +32557,7 @@ module Aws::SageMaker
     #   <p>Configuration for remote debugging while the training job is running. You can update the remote debugging configuration when the <code>SecondaryStatus</code> of the job is <code>Downloading</code> or <code>Training</code>.To learn more about the remote debugging functionality of SageMaker, see <a href="https://docs.aws.amazon.com/sagemaker/latest/dg/train-remote-debugging.html">Access a training container through Amazon Web Services Systems Manager (SSM) for remote debugging</a>.</p>
     #   @return [Types::RemoteDebugConfigForUpdate]
     class UpdateTrainingJobRequest < Struct.new(
+      nil,
       :training_job_name,
       :profiler_config,
       :profiler_rule_configurations,
@@ -31239,6 +32572,7 @@ module Aws::SageMaker
     #   <p>The Amazon Resource Name (ARN) of the training job.</p>
     #   @return [String]
     class UpdateTrainingJobResponse < Struct.new(
+      nil,
       :training_job_arn,
       keyword_init: true
     )
@@ -31279,6 +32613,7 @@ module Aws::SageMaker
     #   <p>The output artifacts to remove from the component.</p>
     #   @return [Array<String>]
     class UpdateTrialComponentRequest < Struct.new(
+      nil,
       :trial_component_name,
       :display_name,
       :status,
@@ -31299,6 +32634,7 @@ module Aws::SageMaker
     #   <p>The Amazon Resource Name (ARN) of the trial component.</p>
     #   @return [String]
     class UpdateTrialComponentResponse < Struct.new(
+      nil,
       :trial_component_arn,
       keyword_init: true
     )
@@ -31312,6 +32648,7 @@ module Aws::SageMaker
     #   <p>The name of the trial as displayed. The name doesn't need to be unique. If <code>DisplayName</code> isn't specified, <code>TrialName</code> is displayed.</p>
     #   @return [String]
     class UpdateTrialRequest < Struct.new(
+      nil,
       :trial_name,
       :display_name,
       keyword_init: true
@@ -31323,6 +32660,7 @@ module Aws::SageMaker
     #   <p>The Amazon Resource Name (ARN) of the trial.</p>
     #   @return [String]
     class UpdateTrialResponse < Struct.new(
+      nil,
       :trial_arn,
       keyword_init: true
     )
@@ -31339,6 +32677,7 @@ module Aws::SageMaker
     #   <p>A collection of settings.</p>
     #   @return [Types::UserSettings]
     class UpdateUserProfileRequest < Struct.new(
+      nil,
       :domain_id,
       :user_profile_name,
       :user_settings,
@@ -31351,6 +32690,7 @@ module Aws::SageMaker
     #   <p>The user profile Amazon Resource Name (ARN).</p>
     #   @return [String]
     class UpdateUserProfileResponse < Struct.new(
+      nil,
       :user_profile_arn,
       keyword_init: true
     )
@@ -31373,6 +32713,7 @@ module Aws::SageMaker
     #   <p>Use this parameter to specify whether you want <code>IPv4</code> only or <code>dualstack</code> (<code>IPv4</code> and <code>IPv6</code>) to support your labeling workforce.</p>
     #   @return [String]
     class UpdateWorkforceRequest < Struct.new(
+      nil,
       :workforce_name,
       :source_ip_config,
       :oidc_config,
@@ -31387,6 +32728,7 @@ module Aws::SageMaker
     #   <p>A single private workforce. You can create one private work force in each Amazon Web Services Region. By default, any workforce-related API operation used in a specific region will apply to the workforce created in that region. To learn how to create a private workforce, see <a href="https://docs.aws.amazon.com/sagemaker/latest/dg/sms-workforce-create-private.html">Create a Private Workforce</a>.</p>
     #   @return [Types::Workforce]
     class UpdateWorkforceResponse < Struct.new(
+      nil,
       :workforce,
       keyword_init: true
     )
@@ -31409,6 +32751,7 @@ module Aws::SageMaker
     #   <p>Use this optional parameter to constrain access to an Amazon S3 resource based on the IP address using supported IAM global condition keys. The Amazon S3 resource is accessed in the worker portal using a Amazon S3 presigned URL.</p>
     #   @return [Types::WorkerAccessConfiguration]
     class UpdateWorkteamRequest < Struct.new(
+      nil,
       :workteam_name,
       :member_definitions,
       :description,
@@ -31423,6 +32766,7 @@ module Aws::SageMaker
     #   <p>A <code>Workteam</code> object that describes the updated work team.</p>
     #   @return [Types::Workteam]
     class UpdateWorkteamResponse < Struct.new(
+      nil,
       :workteam,
       keyword_init: true
     )
@@ -31443,6 +32787,7 @@ module Aws::SageMaker
     #   <p>The IAM Identity details associated with the user. These details are associated with model package groups, model packages, and project entities only.</p>
     #   @return [Types::IamIdentity]
     class UserContext < Struct.new(
+      nil,
       :user_profile_arn,
       :user_profile_name,
       :domain_id,
@@ -31469,6 +32814,7 @@ module Aws::SageMaker
     #   <p>The last modified time.</p>
     #   @return [Time]
     class UserProfileDetails < Struct.new(
+      nil,
       :domain_id,
       :user_profile_name,
       :status,
@@ -31535,6 +32881,7 @@ module Aws::SageMaker
     #   <p>Indicates whether auto-mounting of an EFS volume is supported for the user profile. The <code>DefaultAsDomain</code> value is only supported for user profiles. Do not use the <code>DefaultAsDomain</code> value when setting this parameter for a domain.</p> <p>SageMaker applies this setting only to private spaces that the user creates in the domain. SageMaker doesn't apply this setting to shared spaces.</p>
     #   @return [String]
     class UserSettings < Struct.new(
+      nil,
       :execution_role,
       :security_groups,
       :sharing_settings,
@@ -31563,6 +32910,7 @@ module Aws::SageMaker
     #   <p>The type of variant property. The supported values are:</p> <ul> <li> <p> <code>DesiredInstanceCount</code>: Overrides the existing variant instance counts using the <code>InitialInstanceCount</code> values in the <code>ProductionVariants</code> of <a href="https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_CreateEndpointConfig.html">CreateEndpointConfig</a>.</p> </li> <li> <p> <code>DesiredWeight</code>: Overrides the existing variant weights using the <code>InitialVariantWeight</code> values in the <code>ProductionVariants</code> of <a href="https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_CreateEndpointConfig.html">CreateEndpointConfig</a>.</p> </li> <li> <p> <code>DataCaptureConfig</code>: (Not currently supported.)</p> </li> </ul>
     #   @return [String]
     class VariantProperty < Struct.new(
+      nil,
       :variant_property_type,
       keyword_init: true
     )
@@ -31574,6 +32922,7 @@ module Aws::SageMaker
     #   <p>The number of elements in your vector.</p>
     #   @return [Integer]
     class VectorConfig < Struct.new(
+      nil,
       :dimension,
       keyword_init: true
     )
@@ -31591,6 +32940,7 @@ module Aws::SageMaker
     #   <p>The type of resource of the lineage entity.</p>
     #   @return [String]
     class Vertex < Struct.new(
+      nil,
       :arn,
       :type,
       :lineage_type,
@@ -31607,6 +32957,7 @@ module Aws::SageMaker
     #   <p>The value for the tag that you're using to filter the search results.</p>
     #   @return [String]
     class VisibilityConditions < Struct.new(
+      nil,
       :key,
       :value,
       keyword_init: true
@@ -31622,6 +32973,7 @@ module Aws::SageMaker
     #   <p>The ID of the subnets in the VPC to which you want to connect your training job or model. For information about the availability of specific instance types, see <a href="https://docs.aws.amazon.com/sagemaker/latest/dg/instance-types-az.html">Supported Instance Types and Availability Zones</a>.</p>
     #   @return [Array<String>]
     class VpcConfig < Struct.new(
+      nil,
       :security_group_ids,
       :subnets,
       keyword_init: true
@@ -31640,6 +32992,7 @@ module Aws::SageMaker
     #   <p>The name of the matching training job that reused the warm pool.</p>
     #   @return [String]
     class WarmPoolStatus < Struct.new(
+      nil,
       :status,
       :resource_retained_billable_time_in_seconds,
       :reused_by_job,
@@ -31653,6 +33006,7 @@ module Aws::SageMaker
     #   <p>Defines any Amazon S3 resource constraints.</p>
     #   @return [Types::S3Presign]
     class WorkerAccessConfiguration < Struct.new(
+      nil,
       :s3_presign,
       keyword_init: true
     )
@@ -31697,6 +33051,7 @@ module Aws::SageMaker
     #   <p>The IP address type you specify - either <code>IPv4</code> only or <code>dualstack</code> (<code>IPv4</code> and <code>IPv6</code>) - to support your labeling workforce.</p>
     #   @return [String]
     class Workforce < Struct.new(
+      nil,
       :workforce_name,
       :workforce_arn,
       :last_updated_date,
@@ -31725,6 +33080,7 @@ module Aws::SageMaker
     #   <p>The ID of the subnets in the VPC that you want to connect.</p>
     #   @return [Array<String>]
     class WorkforceVpcConfigRequest < Struct.new(
+      nil,
       :vpc_id,
       :security_group_ids,
       :subnets,
@@ -31747,6 +33103,7 @@ module Aws::SageMaker
     #   <p>The IDs for the VPC service endpoints of your VPC workforce when it is created and updated.</p>
     #   @return [String]
     class WorkforceVpcConfigResponse < Struct.new(
+      nil,
       :vpc_id,
       :security_group_ids,
       :subnets,
@@ -31764,6 +33121,7 @@ module Aws::SageMaker
     #   <p>The Amazon Web Services Key Management Service (KMS) encryption key ID that is used to encrypt artifacts generated by Canvas in the Amazon S3 bucket.</p>
     #   @return [String]
     class WorkspaceSettings < Struct.new(
+      nil,
       :s3_artifact_path,
       :s3_kms_key_id,
       keyword_init: true
@@ -31806,6 +33164,7 @@ module Aws::SageMaker
     #   <p>Describes any access constraints that have been defined for Amazon S3 resources.</p>
     #   @return [Types::WorkerAccessConfiguration]
     class Workteam < Struct.new(
+      nil,
       :workteam_name,
       :member_definitions,
       :workteam_arn,

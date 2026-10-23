@@ -14,6 +14,7 @@ module Aws::S3
     #   <p>Specifies the number of days after which Amazon S3 aborts an incomplete multipart upload.</p>
     #   @return [Integer]
     class AbortIncompleteMultipartUpload < Struct.new(
+      nil,
       :days_after_initiation,
       keyword_init: true
     )
@@ -29,6 +30,7 @@ module Aws::S3
     #            </note>
     #   @return [String]
     class AbortMultipartUploadOutput < Struct.new(
+      nil,
       :request_charged,
       keyword_init: true
     )
@@ -84,6 +86,7 @@ module Aws::S3
     #            </note>
     #   @return [Time]
     class AbortMultipartUploadRequest < Struct.new(
+      nil,
       :bucket,
       :key,
       :upload_id,
@@ -101,6 +104,7 @@ module Aws::S3
     #   <p>Specifies the transfer acceleration status of the bucket.</p>
     #   @return [String]
     class AccelerateConfiguration < Struct.new(
+      nil,
       :status,
       keyword_init: true
     )
@@ -115,6 +119,7 @@ module Aws::S3
     #   <p>Container for the bucket owner's display name and ID.</p>
     #   @return [Types::Owner]
     class AccessControlPolicy < Struct.new(
+      nil,
       :grants,
       :owner,
       keyword_init: true
@@ -128,6 +133,7 @@ module Aws::S3
     #           <i>Amazon S3 API Reference</i>.</p>
     #   @return [String]
     class AccessControlTranslation < Struct.new(
+      nil,
       :owner,
       keyword_init: true
     )
@@ -145,6 +151,7 @@ module Aws::S3
     #   <p>The list of tags to use when evaluating an AND predicate.</p>
     #   @return [Array<Types::Tag>]
     class AnalyticsAndOperator < Struct.new(
+      nil,
       :prefix,
       :tags,
       keyword_init: true
@@ -166,6 +173,7 @@ module Aws::S3
     #         tradeoffs between different storage classes. </p>
     #   @return [Types::StorageClassAnalysis]
     class AnalyticsConfiguration < Struct.new(
+      nil,
       :id,
       :filter,
       :storage_class_analysis,
@@ -179,6 +187,7 @@ module Aws::S3
     #   <p>A destination signifying output to an S3 bucket.</p>
     #   @return [Types::AnalyticsS3BucketDestination]
     class AnalyticsExportDestination < Struct.new(
+      nil,
       :s3_bucket_destination,
       keyword_init: true
     )
@@ -232,6 +241,7 @@ module Aws::S3
     #   <p>The prefix to use when exporting data. The prefix is prepended to all results.</p>
     #   @return [String]
     class AnalyticsS3BucketDestination < Struct.new(
+      nil,
       :format,
       :bucket_account_id,
       :bucket,
@@ -263,6 +273,7 @@ module Aws::S3
     #            </note>
     #   @return [String]
     class Bucket < Struct.new(
+      nil,
       :name,
       :creation_date,
       :bucket_region,
@@ -275,6 +286,7 @@ module Aws::S3
     # <p>The requested bucket name is not available. The bucket namespace is shared by all users of the
     #       system. Select a different name and try again.</p>
     class BucketAlreadyExists < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -285,6 +297,7 @@ module Aws::S3
     #       bucket that you already own in the North Virginia Region, Amazon S3 returns 200 OK and resets the bucket
     #       access control lists (ACLs).</p>
     class BucketAlreadyOwnedByYou < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -303,6 +316,7 @@ module Aws::S3
     #   <p>The type of bucket.</p>
     #   @return [String]
     class BucketInfo < Struct.new(
+      nil,
       :data_redundancy,
       :type,
       keyword_init: true
@@ -317,6 +331,7 @@ module Aws::S3
     #   <p>A lifecycle rule for individual objects in an Amazon S3 bucket.</p>
     #   @return [Array<Types::LifecycleRule>]
     class BucketLifecycleConfiguration < Struct.new(
+      nil,
       :rules,
       keyword_init: true
     )
@@ -330,6 +345,7 @@ module Aws::S3
     #           <i>Amazon S3 API Reference</i>.</p>
     #   @return [Types::LoggingEnabled]
     class BucketLoggingStatus < Struct.new(
+      nil,
       :logging_enabled,
       keyword_init: true
     )
@@ -344,6 +360,7 @@ module Aws::S3
     #         rules to the configuration.</p>
     #   @return [Array<Types::CORSRule>]
     class CORSConfiguration < Struct.new(
+      nil,
       :cors_rules,
       keyword_init: true
     )
@@ -375,6 +392,7 @@ module Aws::S3
     #         resource.</p>
     #   @return [Integer]
     class CORSRule < Struct.new(
+      nil,
       :id,
       :allowed_headers,
       :allowed_methods,
@@ -442,6 +460,7 @@ module Aws::S3
     #         allowed. Default value is FALSE. Setting this value to TRUE may lower performance.</p>
     #   @return [Boolean]
     class CSVInput < Struct.new(
+      nil,
       :file_header_info,
       :comments,
       :quote_escape_character,
@@ -485,6 +504,7 @@ module Aws::S3
     #           b "</code>.</p>
     #   @return [String]
     class CSVOutput < Struct.new(
+      nil,
       :quote_fields,
       :quote_escape_character,
       :record_delimiter,
@@ -533,6 +553,7 @@ module Aws::S3
     #           object integrity</a> in the <i>Amazon S3 User Guide</i>.</p>
     #   @return [String]
     class Checksum < Struct.new(
+      nil,
       :checksum_crc32,
       :checksum_crc32_c,
       :checksum_crc64_nvme,
@@ -552,6 +573,7 @@ module Aws::S3
     #   <p>Container for the specified common prefix.</p>
     #   @return [String]
     class CommonPrefix < Struct.new(
+      nil,
       :prefix,
       keyword_init: true
     )
@@ -655,6 +677,7 @@ module Aws::S3
     #            </note>
     #   @return [String]
     class CompleteMultipartUploadOutput < Struct.new(
+      nil,
       :location,
       :bucket,
       :key,
@@ -810,6 +833,7 @@ module Aws::S3
     #            </note>
     #   @return [String]
     class CompleteMultipartUploadRequest < Struct.new(
+      nil,
       :bucket,
       :key,
       :multipart_upload,
@@ -840,6 +864,7 @@ module Aws::S3
     #         response.</p>
     #   @return [Array<Types::CompletedPart>]
     class CompletedMultipartUpload < Struct.new(
+      nil,
       :parts,
       keyword_init: true
     )
@@ -904,6 +929,7 @@ module Aws::S3
     #            </note>
     #   @return [Integer]
     class CompletedPart < Struct.new(
+      nil,
       :e_tag,
       :checksum_crc32,
       :checksum_crc32_c,
@@ -940,6 +966,7 @@ module Aws::S3
     #            </important>
     #   @return [String]
     class Condition < Struct.new(
+      nil,
       :http_error_code_returned_equals,
       :key_prefix_equals,
       keyword_init: true
@@ -949,6 +976,7 @@ module Aws::S3
 
     # <p></p>
     class ContinuationEvent < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1019,6 +1047,7 @@ module Aws::S3
     #            </note>
     #   @return [String]
     class CopyObjectOutput < Struct.new(
+      nil,
       :copy_object_result,
       :expiration,
       :copy_source_version_id,
@@ -1645,6 +1674,7 @@ module Aws::S3
     #   <p>The account ID of the expected source bucket owner. If the account ID that you provide does not match the actual owner of the source bucket, the request fails with the HTTP status code <code>403 Forbidden</code> (access denied).</p>
     #   @return [String]
     class CopyObjectRequest < Struct.new(
+      nil,
       :acl,
       :bucket,
       :cache_control,
@@ -1732,6 +1762,7 @@ module Aws::S3
     #       Checking object integrity</a> in the <i>Amazon S3 User Guide</i>.</p>
     #   @return [String]
     class CopyObjectResult < Struct.new(
+      nil,
       :e_tag,
       :last_modified,
       :checksum_type,
@@ -1783,6 +1814,7 @@ module Aws::S3
     #         the <i>Amazon S3 User Guide</i>.</p>
     #   @return [String]
     class CopyPartResult < Struct.new(
+      nil,
       :e_tag,
       :last_modified,
       :checksum_crc32,
@@ -1836,6 +1868,7 @@ module Aws::S3
     #            </note>
     #   @return [Array<Types::Tag>]
     class CreateBucketConfiguration < Struct.new(
+      nil,
       :location_constraint,
       :location,
       :bucket,
@@ -1871,6 +1904,7 @@ module Aws::S3
     #       </p>
     #   @return [String]
     class CreateBucketMetadataConfigurationRequest < Struct.new(
+      nil,
       :bucket,
       :content_md5,
       :checksum_algorithm,
@@ -1898,6 +1932,7 @@ module Aws::S3
     #       </p>
     #   @return [String]
     class CreateBucketMetadataTableConfigurationRequest < Struct.new(
+      nil,
       :bucket,
       :content_md5,
       :checksum_algorithm,
@@ -1920,6 +1955,7 @@ module Aws::S3
     #            </note>
     #   @return [String]
     class CreateBucketOutput < Struct.new(
+      nil,
       :location,
       :bucket_arn,
       keyword_init: true
@@ -2011,6 +2047,7 @@ module Aws::S3
     #            </note>
     #   @return [String]
     class CreateBucketRequest < Struct.new(
+      nil,
       :acl,
       :bucket,
       :create_bucket_configuration,
@@ -2110,6 +2147,7 @@ module Aws::S3
     #           User Guide</a>.</p>
     #   @return [String]
     class CreateMultipartUploadOutput < Struct.new(
+      nil,
       :abort_date,
       :abort_rule_id,
       :bucket,
@@ -2642,6 +2680,7 @@ module Aws::S3
     #           User Guide</a>.</p>
     #   @return [String]
     class CreateMultipartUploadRequest < Struct.new(
+      nil,
       :acl,
       :bucket,
       :cache_control,
@@ -2704,6 +2743,7 @@ module Aws::S3
     #   <p>The established temporary security credentials for the created session.</p>
     #   @return [Types::SessionCredentials]
     class CreateSessionOutput < Struct.new(
+      nil,
       :server_side_encryption,
       :ssekms_key_id,
       :ssekms_encryption_context,
@@ -2766,6 +2806,7 @@ module Aws::S3
     #                               <a href="https://docs.aws.amazon.com/AmazonS3/latest/userguide/create-import-job">the import jobs</a>. In this case, Amazon S3 makes a call to KMS every time a copy request is made for a KMS-encrypted object.</p>
     #   @return [Boolean]
     class CreateSessionRequest < Struct.new(
+      nil,
       :session_mode,
       :bucket,
       :server_side_encryption,
@@ -2804,6 +2845,7 @@ module Aws::S3
     #           <code>Mode</code>.</p>
     #   @return [Integer]
     class DefaultRetention < Struct.new(
+      nil,
       :mode,
       :days,
       :years,
@@ -2828,6 +2870,7 @@ module Aws::S3
     #           <code>true</code>.</p>
     #   @return [Boolean]
     class Delete < Struct.new(
+      nil,
       :objects,
       :quiet,
       keyword_init: true
@@ -2845,6 +2888,7 @@ module Aws::S3
     #   <p>The account ID of the expected bucket owner. If the account ID that you provide does not match the actual owner of the bucket, the request fails with the HTTP status code <code>403 Forbidden</code> (access denied).</p>
     #   @return [String]
     class DeleteBucketAnalyticsConfigurationRequest < Struct.new(
+      nil,
       :bucket,
       :id,
       :expected_bucket_owner,
@@ -2860,6 +2904,7 @@ module Aws::S3
     #   <p>The account ID of the expected bucket owner. If the account ID that you provide does not match the actual owner of the bucket, the request fails with the HTTP status code <code>403 Forbidden</code> (access denied).</p>
     #   @return [String]
     class DeleteBucketCorsRequest < Struct.new(
+      nil,
       :bucket,
       :expected_bucket_owner,
       keyword_init: true
@@ -2884,6 +2929,7 @@ module Aws::S3
     #            </note>
     #   @return [String]
     class DeleteBucketEncryptionRequest < Struct.new(
+      nil,
       :bucket,
       :expected_bucket_owner,
       keyword_init: true
@@ -2901,6 +2947,7 @@ module Aws::S3
     #   <p>The account ID of the expected bucket owner. If the account ID that you provide does not match the actual owner of the bucket, the request fails with the HTTP status code <code>403 Forbidden</code> (access denied).</p>
     #   @return [String]
     class DeleteBucketIntelligentTieringConfigurationRequest < Struct.new(
+      nil,
       :bucket,
       :id,
       :expected_bucket_owner,
@@ -2919,6 +2966,7 @@ module Aws::S3
     #   <p>The account ID of the expected bucket owner. If the account ID that you provide does not match the actual owner of the bucket, the request fails with the HTTP status code <code>403 Forbidden</code> (access denied).</p>
     #   @return [String]
     class DeleteBucketInventoryConfigurationRequest < Struct.new(
+      nil,
       :bucket,
       :id,
       :expected_bucket_owner,
@@ -2938,6 +2986,7 @@ module Aws::S3
     #            </note>
     #   @return [String]
     class DeleteBucketLifecycleRequest < Struct.new(
+      nil,
       :bucket,
       :expected_bucket_owner,
       keyword_init: true
@@ -2957,6 +3006,7 @@ module Aws::S3
     #       </p>
     #   @return [String]
     class DeleteBucketMetadataConfigurationRequest < Struct.new(
+      nil,
       :bucket,
       :expected_bucket_owner,
       keyword_init: true
@@ -2972,6 +3022,7 @@ module Aws::S3
     #         configuration from. </p>
     #   @return [String]
     class DeleteBucketMetadataTableConfigurationRequest < Struct.new(
+      nil,
       :bucket,
       :expected_bucket_owner,
       keyword_init: true
@@ -2990,6 +3041,7 @@ module Aws::S3
     #   <p>The account ID of the expected bucket owner. If the account ID that you provide does not match the actual owner of the bucket, the request fails with the HTTP status code <code>403 Forbidden</code> (access denied).</p>
     #   @return [String]
     class DeleteBucketMetricsConfigurationRequest < Struct.new(
+      nil,
       :bucket,
       :id,
       :expected_bucket_owner,
@@ -3005,6 +3057,7 @@ module Aws::S3
     #   <p>The account ID of the expected bucket owner. If the account ID that you provide does not match the actual owner of the bucket, the request fails with the HTTP status code <code>403 Forbidden</code> (access denied).</p>
     #   @return [String]
     class DeleteBucketOwnershipControlsRequest < Struct.new(
+      nil,
       :bucket,
       :expected_bucket_owner,
       keyword_init: true
@@ -3029,6 +3082,7 @@ module Aws::S3
     #            </note>
     #   @return [String]
     class DeleteBucketPolicyRequest < Struct.new(
+      nil,
       :bucket,
       :expected_bucket_owner,
       keyword_init: true
@@ -3043,6 +3097,7 @@ module Aws::S3
     #   <p>The account ID of the expected bucket owner. If the account ID that you provide does not match the actual owner of the bucket, the request fails with the HTTP status code <code>403 Forbidden</code> (access denied).</p>
     #   @return [String]
     class DeleteBucketReplicationRequest < Struct.new(
+      nil,
       :bucket,
       :expected_bucket_owner,
       keyword_init: true
@@ -3067,6 +3122,7 @@ module Aws::S3
     #            </note>
     #   @return [String]
     class DeleteBucketRequest < Struct.new(
+      nil,
       :bucket,
       :expected_bucket_owner,
       keyword_init: true
@@ -3081,6 +3137,7 @@ module Aws::S3
     #   <p>The account ID of the expected bucket owner. If the account ID that you provide does not match the actual owner of the bucket, the request fails with the HTTP status code <code>403 Forbidden</code> (access denied).</p>
     #   @return [String]
     class DeleteBucketTaggingRequest < Struct.new(
+      nil,
       :bucket,
       :expected_bucket_owner,
       keyword_init: true
@@ -3095,6 +3152,7 @@ module Aws::S3
     #   <p>The account ID of the expected bucket owner. If the account ID that you provide does not match the actual owner of the bucket, the request fails with the HTTP status code <code>403 Forbidden</code> (access denied).</p>
     #   @return [String]
     class DeleteBucketWebsiteRequest < Struct.new(
+      nil,
       :bucket,
       :expected_bucket_owner,
       keyword_init: true
@@ -3119,6 +3177,7 @@ module Aws::S3
     #   <p>Date and time when the object was last modified.</p>
     #   @return [Time]
     class DeleteMarkerEntry < Struct.new(
+      nil,
       :owner,
       :key,
       :version_id,
@@ -3147,6 +3206,7 @@ module Aws::S3
     #            </note>
     #   @return [String]
     class DeleteMarkerReplication < Struct.new(
+      nil,
       :status,
       keyword_init: true
     )
@@ -3178,6 +3238,7 @@ module Aws::S3
     #            </note>
     #   @return [String]
     class DeleteObjectOutput < Struct.new(
+      nil,
       :delete_marker,
       :version_id,
       :request_charged,
@@ -3277,6 +3338,7 @@ module Aws::S3
     #            </important>
     #   @return [Integer]
     class DeleteObjectRequest < Struct.new(
+      nil,
       :bucket,
       :key,
       :mfa,
@@ -3296,6 +3358,7 @@ module Aws::S3
     #   <p>The versionId of the object the tag-set was removed from.</p>
     #   @return [String]
     class DeleteObjectTaggingOutput < Struct.new(
+      nil,
       :version_id,
       keyword_init: true
     )
@@ -3321,6 +3384,7 @@ module Aws::S3
     #   <p>The account ID of the expected bucket owner. If the account ID that you provide does not match the actual owner of the bucket, the request fails with the HTTP status code <code>403 Forbidden</code> (access denied).</p>
     #   @return [String]
     class DeleteObjectTaggingRequest < Struct.new(
+      nil,
       :bucket,
       :key,
       :version_id,
@@ -3347,6 +3411,7 @@ module Aws::S3
     #         error it encountered.</p>
     #   @return [Array<Types::Error>]
     class DeleteObjectsOutput < Struct.new(
+      nil,
       :deleted,
       :request_charged,
       :errors,
@@ -3457,6 +3522,7 @@ module Aws::S3
     #         parameter.</p>
     #   @return [String]
     class DeleteObjectsRequest < Struct.new(
+      nil,
       :bucket,
       :delete,
       :mfa,
@@ -3476,6 +3542,7 @@ module Aws::S3
     #   <p>The account ID of the expected bucket owner. If the account ID that you provide does not match the actual owner of the bucket, the request fails with the HTTP status code <code>403 Forbidden</code> (access denied).</p>
     #   @return [String]
     class DeletePublicAccessBlockRequest < Struct.new(
+      nil,
       :bucket,
       :expected_bucket_owner,
       keyword_init: true
@@ -3512,6 +3579,7 @@ module Aws::S3
     #            </note>
     #   @return [String]
     class DeletedObject < Struct.new(
+      nil,
       :key,
       :version_id,
       :delete_marker,
@@ -3561,6 +3629,7 @@ module Aws::S3
     #         events. </p>
     #   @return [Types::Metrics]
     class Destination < Struct.new(
+      nil,
       :bucket,
       :account,
       :storage_class,
@@ -3596,6 +3665,7 @@ module Aws::S3
     #       </p>
     #   @return [String]
     class DestinationResult < Struct.new(
+      nil,
       :table_bucket_type,
       :table_bucket_arn,
       :table_namespace,
@@ -3620,6 +3690,7 @@ module Aws::S3
     #         encryption context for the restore results.</p>
     #   @return [String]
     class Encryption < Struct.new(
+      nil,
       :encryption_type,
       :kms_key_id,
       :kms_context,
@@ -3643,6 +3714,7 @@ module Aws::S3
     #           <i>Amazon Web Services Key Management Service Developer Guide</i>.</p>
     #   @return [String]
     class EncryptionConfiguration < Struct.new(
+      nil,
       :replica_kms_key_id,
       keyword_init: true
     )
@@ -3652,6 +3724,7 @@ module Aws::S3
     # <p> The existing object was created with a different encryption type. Subsequent write requests must
     #       include the appropriate encryption parameters in the request or while creating the session. </p>
     class EncryptionTypeMismatch < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -3660,6 +3733,7 @@ module Aws::S3
     # <p>A message that indicates the request is complete and no more messages will be sent. You should not
     #       assume that the request is complete until the client receives an <code>EndEvent</code>.</p>
     class EndEvent < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -5515,6 +5589,7 @@ module Aws::S3
     #         error handling and proper internationalization are more likely to ignore the error message.</p>
     #   @return [String]
     class Error < Struct.new(
+      nil,
       :key,
       :version_id,
       :code,
@@ -5751,6 +5826,7 @@ module Aws::S3
     #            </ul>
     #   @return [String]
     class ErrorDetails < Struct.new(
+      nil,
       :error_code,
       :error_message,
       keyword_init: true
@@ -5768,6 +5844,7 @@ module Aws::S3
     #            </important>
     #   @return [String]
     class ErrorDocument < Struct.new(
+      nil,
       :key,
       keyword_init: true
     )
@@ -5776,6 +5853,7 @@ module Aws::S3
 
     # <p>A container for specifying the configuration for Amazon EventBridge.</p>
     class EventBridgeConfiguration < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -5791,6 +5869,7 @@ module Aws::S3
     #   <p>Specifies whether Amazon S3 replicates existing source bucket objects. </p>
     #   @return [String]
     class ExistingObjectReplication < Struct.new(
+      nil,
       :status,
       keyword_init: true
     )
@@ -5813,6 +5892,7 @@ module Aws::S3
     #   <p>The value that the filter searches for in object key names.</p>
     #   @return [String]
     class FilterRule < Struct.new(
+      nil,
       :name,
       :value,
       keyword_init: true
@@ -5832,6 +5912,7 @@ module Aws::S3
     #            </note>
     #   @return [String]
     class GetBucketAccelerateConfigurationOutput < Struct.new(
+      nil,
       :status,
       :request_charged,
       keyword_init: true
@@ -5856,6 +5937,7 @@ module Aws::S3
     #            </note>
     #   @return [String]
     class GetBucketAccelerateConfigurationRequest < Struct.new(
+      nil,
       :bucket,
       :expected_bucket_owner,
       :request_payer,
@@ -5871,6 +5953,7 @@ module Aws::S3
     #   <p>A list of grants.</p>
     #   @return [Array<Types::Grant>]
     class GetBucketAclOutput < Struct.new(
+      nil,
       :owner,
       :grants,
       keyword_init: true
@@ -5890,6 +5973,7 @@ module Aws::S3
     #   <p>The account ID of the expected bucket owner. If the account ID that you provide does not match the actual owner of the bucket, the request fails with the HTTP status code <code>403 Forbidden</code> (access denied).</p>
     #   @return [String]
     class GetBucketAclRequest < Struct.new(
+      nil,
       :bucket,
       :expected_bucket_owner,
       keyword_init: true
@@ -5901,6 +5985,7 @@ module Aws::S3
     #   <p>The configuration and any analyses for the analytics filter.</p>
     #   @return [Types::AnalyticsConfiguration]
     class GetBucketAnalyticsConfigurationOutput < Struct.new(
+      nil,
       :analytics_configuration,
       keyword_init: true
     )
@@ -5917,6 +6002,7 @@ module Aws::S3
     #   <p>The account ID of the expected bucket owner. If the account ID that you provide does not match the actual owner of the bucket, the request fails with the HTTP status code <code>403 Forbidden</code> (access denied).</p>
     #   @return [String]
     class GetBucketAnalyticsConfigurationRequest < Struct.new(
+      nil,
       :bucket,
       :id,
       :expected_bucket_owner,
@@ -5930,6 +6016,7 @@ module Aws::S3
     #         rules to the configuration.</p>
     #   @return [Array<Types::CORSRule>]
     class GetBucketCorsOutput < Struct.new(
+      nil,
       :cors_rules,
       keyword_init: true
     )
@@ -5948,6 +6035,7 @@ module Aws::S3
     #   <p>The account ID of the expected bucket owner. If the account ID that you provide does not match the actual owner of the bucket, the request fails with the HTTP status code <code>403 Forbidden</code> (access denied).</p>
     #   @return [String]
     class GetBucketCorsRequest < Struct.new(
+      nil,
       :bucket,
       :expected_bucket_owner,
       keyword_init: true
@@ -5959,6 +6047,7 @@ module Aws::S3
     #   <p>Specifies the default server-side-encryption configuration.</p>
     #   @return [Types::ServerSideEncryptionConfiguration]
     class GetBucketEncryptionOutput < Struct.new(
+      nil,
       :server_side_encryption_configuration,
       keyword_init: true
     )
@@ -5982,6 +6071,7 @@ module Aws::S3
     #            </note>
     #   @return [String]
     class GetBucketEncryptionRequest < Struct.new(
+      nil,
       :bucket,
       :expected_bucket_owner,
       keyword_init: true
@@ -5993,6 +6083,7 @@ module Aws::S3
     #   <p>Container for S3 Intelligent-Tiering configuration.</p>
     #   @return [Types::IntelligentTieringConfiguration]
     class GetBucketIntelligentTieringConfigurationOutput < Struct.new(
+      nil,
       :intelligent_tiering_configuration,
       keyword_init: true
     )
@@ -6009,6 +6100,7 @@ module Aws::S3
     #   <p>The account ID of the expected bucket owner. If the account ID that you provide does not match the actual owner of the bucket, the request fails with the HTTP status code <code>403 Forbidden</code> (access denied).</p>
     #   @return [String]
     class GetBucketIntelligentTieringConfigurationRequest < Struct.new(
+      nil,
       :bucket,
       :id,
       :expected_bucket_owner,
@@ -6021,6 +6113,7 @@ module Aws::S3
     #   <p>Specifies the inventory configuration.</p>
     #   @return [Types::InventoryConfiguration]
     class GetBucketInventoryConfigurationOutput < Struct.new(
+      nil,
       :inventory_configuration,
       keyword_init: true
     )
@@ -6037,6 +6130,7 @@ module Aws::S3
     #   <p>The account ID of the expected bucket owner. If the account ID that you provide does not match the actual owner of the bucket, the request fails with the HTTP status code <code>403 Forbidden</code> (access denied).</p>
     #   @return [String]
     class GetBucketInventoryConfigurationRequest < Struct.new(
+      nil,
       :bucket,
       :id,
       :expected_bucket_owner,
@@ -6073,6 +6167,7 @@ module Aws::S3
     #         rule. Custom filters always take precedence over the default transition behavior.</p>
     #   @return [String]
     class GetBucketLifecycleConfigurationOutput < Struct.new(
+      nil,
       :rules,
       :transition_default_minimum_object_size,
       keyword_init: true
@@ -6091,6 +6186,7 @@ module Aws::S3
     #            </note>
     #   @return [String]
     class GetBucketLifecycleConfigurationRequest < Struct.new(
+      nil,
       :bucket,
       :expected_bucket_owner,
       keyword_init: true
@@ -6105,6 +6201,7 @@ module Aws::S3
     #         with a LocationConstraint of <code>EU</code> reside in <code>eu-west-1</code>.</p>
     #   @return [String]
     class GetBucketLocationOutput < Struct.new(
+      nil,
       :location_constraint,
       keyword_init: true
     )
@@ -6123,6 +6220,7 @@ module Aws::S3
     #   <p>The account ID of the expected bucket owner. If the account ID that you provide does not match the actual owner of the bucket, the request fails with the HTTP status code <code>403 Forbidden</code> (access denied).</p>
     #   @return [String]
     class GetBucketLocationRequest < Struct.new(
+      nil,
       :bucket,
       :expected_bucket_owner,
       keyword_init: true
@@ -6136,6 +6234,7 @@ module Aws::S3
     #           <i>Amazon S3 API Reference</i>.</p>
     #   @return [Types::LoggingEnabled]
     class GetBucketLoggingOutput < Struct.new(
+      nil,
       :logging_enabled,
       keyword_init: true
     )
@@ -6149,6 +6248,7 @@ module Aws::S3
     #   <p>The account ID of the expected bucket owner. If the account ID that you provide does not match the actual owner of the bucket, the request fails with the HTTP status code <code>403 Forbidden</code> (access denied).</p>
     #   @return [String]
     class GetBucketLoggingRequest < Struct.new(
+      nil,
       :bucket,
       :expected_bucket_owner,
       keyword_init: true
@@ -6162,6 +6262,7 @@ module Aws::S3
     #       </p>
     #   @return [Types::GetBucketMetadataConfigurationResult]
     class GetBucketMetadataConfigurationOutput < Struct.new(
+      nil,
       :get_bucket_metadata_configuration_result,
       keyword_init: true
     )
@@ -6181,6 +6282,7 @@ module Aws::S3
     #       </p>
     #   @return [String]
     class GetBucketMetadataConfigurationRequest < Struct.new(
+      nil,
       :bucket,
       :expected_bucket_owner,
       keyword_init: true
@@ -6197,6 +6299,7 @@ module Aws::S3
     #       </p>
     #   @return [Types::MetadataConfigurationResult]
     class GetBucketMetadataConfigurationResult < Struct.new(
+      nil,
       :metadata_configuration_result,
       keyword_init: true
     )
@@ -6207,6 +6310,7 @@ module Aws::S3
     #   <p> The metadata table configuration for the general purpose bucket. </p>
     #   @return [Types::GetBucketMetadataTableConfigurationResult]
     class GetBucketMetadataTableConfigurationOutput < Struct.new(
+      nil,
       :get_bucket_metadata_table_configuration_result,
       keyword_init: true
     )
@@ -6222,6 +6326,7 @@ module Aws::S3
     #         configuration for. </p>
     #   @return [String]
     class GetBucketMetadataTableConfigurationRequest < Struct.new(
+      nil,
       :bucket,
       :expected_bucket_owner,
       keyword_init: true
@@ -6263,6 +6368,7 @@ module Aws::S3
     #         unable to create the table, this structure contains the error code and error message. </p>
     #   @return [Types::ErrorDetails]
     class GetBucketMetadataTableConfigurationResult < Struct.new(
+      nil,
       :metadata_table_configuration_result,
       :status,
       :error,
@@ -6275,6 +6381,7 @@ module Aws::S3
     #   <p>Specifies the metrics configuration.</p>
     #   @return [Types::MetricsConfiguration]
     class GetBucketMetricsConfigurationOutput < Struct.new(
+      nil,
       :metrics_configuration,
       keyword_init: true
     )
@@ -6292,6 +6399,7 @@ module Aws::S3
     #   <p>The account ID of the expected bucket owner. If the account ID that you provide does not match the actual owner of the bucket, the request fails with the HTTP status code <code>403 Forbidden</code> (access denied).</p>
     #   @return [String]
     class GetBucketMetricsConfigurationRequest < Struct.new(
+      nil,
       :bucket,
       :id,
       :expected_bucket_owner,
@@ -6317,6 +6425,7 @@ module Aws::S3
     #   <p>Enables delivery of events to Amazon EventBridge.</p>
     #   @return [Types::EventBridgeConfiguration]
     class GetBucketNotificationConfigurationOutput < Struct.new(
+      nil,
       :topic_configurations,
       :queue_configurations,
       :lambda_function_configurations,
@@ -6338,6 +6447,7 @@ module Aws::S3
     #   <p>The account ID of the expected bucket owner. If the account ID that you provide does not match the actual owner of the bucket, the request fails with the HTTP status code <code>403 Forbidden</code> (access denied).</p>
     #   @return [String]
     class GetBucketNotificationConfigurationRequest < Struct.new(
+      nil,
       :bucket,
       :expected_bucket_owner,
       keyword_init: true
@@ -6350,6 +6460,7 @@ module Aws::S3
     #         currently in effect for this Amazon S3 bucket.</p>
     #   @return [Types::OwnershipControls]
     class GetBucketOwnershipControlsOutput < Struct.new(
+      nil,
       :ownership_controls,
       keyword_init: true
     )
@@ -6363,6 +6474,7 @@ module Aws::S3
     #   <p>The account ID of the expected bucket owner. If the account ID that you provide does not match the actual owner of the bucket, the request fails with the HTTP status code <code>403 Forbidden</code> (access denied).</p>
     #   @return [String]
     class GetBucketOwnershipControlsRequest < Struct.new(
+      nil,
       :bucket,
       :expected_bucket_owner,
       keyword_init: true
@@ -6374,6 +6486,7 @@ module Aws::S3
     #   <p>The bucket policy as a JSON document.</p>
     #   @return [String]
     class GetBucketPolicyOutput < Struct.new(
+      nil,
       :policy,
       keyword_init: true
     )
@@ -6407,6 +6520,7 @@ module Aws::S3
     #            </note>
     #   @return [String]
     class GetBucketPolicyRequest < Struct.new(
+      nil,
       :bucket,
       :expected_bucket_owner,
       keyword_init: true
@@ -6418,6 +6532,7 @@ module Aws::S3
     #   <p>The policy status for the specified bucket.</p>
     #   @return [Types::PolicyStatus]
     class GetBucketPolicyStatusOutput < Struct.new(
+      nil,
       :policy_status,
       keyword_init: true
     )
@@ -6431,6 +6546,7 @@ module Aws::S3
     #   <p>The account ID of the expected bucket owner. If the account ID that you provide does not match the actual owner of the bucket, the request fails with the HTTP status code <code>403 Forbidden</code> (access denied).</p>
     #   @return [String]
     class GetBucketPolicyStatusRequest < Struct.new(
+      nil,
       :bucket,
       :expected_bucket_owner,
       keyword_init: true
@@ -6443,6 +6559,7 @@ module Aws::S3
     #         configuration is 2 MB.</p>
     #   @return [Types::ReplicationConfiguration]
     class GetBucketReplicationOutput < Struct.new(
+      nil,
       :replication_configuration,
       keyword_init: true
     )
@@ -6456,6 +6573,7 @@ module Aws::S3
     #   <p>The account ID of the expected bucket owner. If the account ID that you provide does not match the actual owner of the bucket, the request fails with the HTTP status code <code>403 Forbidden</code> (access denied).</p>
     #   @return [String]
     class GetBucketReplicationRequest < Struct.new(
+      nil,
       :bucket,
       :expected_bucket_owner,
       keyword_init: true
@@ -6467,6 +6585,7 @@ module Aws::S3
     #   <p>Specifies who pays for the download and request fees.</p>
     #   @return [String]
     class GetBucketRequestPaymentOutput < Struct.new(
+      nil,
       :payer,
       keyword_init: true
     )
@@ -6480,6 +6599,7 @@ module Aws::S3
     #   <p>The account ID of the expected bucket owner. If the account ID that you provide does not match the actual owner of the bucket, the request fails with the HTTP status code <code>403 Forbidden</code> (access denied).</p>
     #   @return [String]
     class GetBucketRequestPaymentRequest < Struct.new(
+      nil,
       :bucket,
       :expected_bucket_owner,
       keyword_init: true
@@ -6491,6 +6611,7 @@ module Aws::S3
     #   <p>Contains the tag set.</p>
     #   @return [Array<Types::Tag>]
     class GetBucketTaggingOutput < Struct.new(
+      nil,
       :tag_set,
       keyword_init: true
     )
@@ -6504,6 +6625,7 @@ module Aws::S3
     #   <p>The account ID of the expected bucket owner. If the account ID that you provide does not match the actual owner of the bucket, the request fails with the HTTP status code <code>403 Forbidden</code> (access denied).</p>
     #   @return [String]
     class GetBucketTaggingRequest < Struct.new(
+      nil,
       :bucket,
       :expected_bucket_owner,
       keyword_init: true
@@ -6520,6 +6642,7 @@ module Aws::S3
     #         this element is not returned.</p>
     #   @return [String]
     class GetBucketVersioningOutput < Struct.new(
+      nil,
       :status,
       :mfa_delete,
       keyword_init: true
@@ -6534,6 +6657,7 @@ module Aws::S3
     #   <p>The account ID of the expected bucket owner. If the account ID that you provide does not match the actual owner of the bucket, the request fails with the HTTP status code <code>403 Forbidden</code> (access denied).</p>
     #   @return [String]
     class GetBucketVersioningRequest < Struct.new(
+      nil,
       :bucket,
       :expected_bucket_owner,
       keyword_init: true
@@ -6554,6 +6678,7 @@ module Aws::S3
     #   <p>Rules that define when a redirect is applied and the redirect behavior.</p>
     #   @return [Array<Types::RoutingRule>]
     class GetBucketWebsiteOutput < Struct.new(
+      nil,
       :redirect_all_requests_to,
       :index_document,
       :error_document,
@@ -6570,6 +6695,7 @@ module Aws::S3
     #   <p>The account ID of the expected bucket owner. If the account ID that you provide does not match the actual owner of the bucket, the request fails with the HTTP status code <code>403 Forbidden</code> (access denied).</p>
     #   @return [String]
     class GetBucketWebsiteRequest < Struct.new(
+      nil,
       :bucket,
       :expected_bucket_owner,
       keyword_init: true
@@ -6592,6 +6718,7 @@ module Aws::S3
     #            </note>
     #   @return [String]
     class GetObjectAclOutput < Struct.new(
+      nil,
       :owner,
       :grants,
       :request_charged,
@@ -6628,6 +6755,7 @@ module Aws::S3
     #   <p>The account ID of the expected bucket owner. If the account ID that you provide does not match the actual owner of the bucket, the request fails with the HTTP status code <code>403 Forbidden</code> (access denied).</p>
     #   @return [String]
     class GetObjectAclRequest < Struct.new(
+      nil,
       :bucket,
       :key,
       :version_id,
@@ -6687,6 +6815,7 @@ module Aws::S3
     #   <p>The size of the object in bytes.</p>
     #   @return [Integer]
     class GetObjectAttributesOutput < Struct.new(
+      nil,
       :delete_marker,
       :last_modified,
       :version_id,
@@ -6743,6 +6872,7 @@ module Aws::S3
     #            </note>
     #   @return [Array<Types::ObjectPart>]
     class GetObjectAttributesParts < Struct.new(
+      nil,
       :total_parts_count,
       :part_number_marker,
       :next_part_number_marker,
@@ -6832,6 +6962,7 @@ module Aws::S3
     #         not specify are not returned.</p>
     #   @return [Array<String>]
     class GetObjectAttributesRequest < Struct.new(
+      nil,
       :bucket,
       :key,
       :version_id,
@@ -6852,6 +6983,7 @@ module Aws::S3
     #   <p>The current legal hold status for the specified object.</p>
     #   @return [Types::ObjectLockLegalHold]
     class GetObjectLegalHoldOutput < Struct.new(
+      nil,
       :legal_hold,
       keyword_init: true
     )
@@ -6883,6 +7015,7 @@ module Aws::S3
     #   <p>The account ID of the expected bucket owner. If the account ID that you provide does not match the actual owner of the bucket, the request fails with the HTTP status code <code>403 Forbidden</code> (access denied).</p>
     #   @return [String]
     class GetObjectLegalHoldRequest < Struct.new(
+      nil,
       :bucket,
       :key,
       :version_id,
@@ -6897,6 +7030,7 @@ module Aws::S3
     #   <p>The specified bucket's Object Lock configuration.</p>
     #   @return [Types::ObjectLockConfiguration]
     class GetObjectLockConfigurationOutput < Struct.new(
+      nil,
       :object_lock_configuration,
       keyword_init: true
     )
@@ -6912,6 +7046,7 @@ module Aws::S3
     #   <p>The account ID of the expected bucket owner. If the account ID that you provide does not match the actual owner of the bucket, the request fails with the HTTP status code <code>403 Forbidden</code> (access denied).</p>
     #   @return [String]
     class GetObjectLockConfigurationRequest < Struct.new(
+      nil,
       :bucket,
       :expected_bucket_owner,
       keyword_init: true
@@ -7140,6 +7275,7 @@ module Aws::S3
     #            </note>
     #   @return [String]
     class GetObjectOutput < Struct.new(
+      nil,
       :body,
       :delete_marker,
       :accept_ranges,
@@ -7410,6 +7546,7 @@ module Aws::S3
     #   <p>To retrieve the checksum, this mode must be enabled.</p>
     #   @return [String]
     class GetObjectRequest < Struct.new(
+      nil,
       :bucket,
       :if_match,
       :if_modified_since,
@@ -7440,6 +7577,7 @@ module Aws::S3
     #   <p>The container element for an object's retention settings.</p>
     #   @return [Types::ObjectLockRetention]
     class GetObjectRetentionOutput < Struct.new(
+      nil,
       :retention,
       keyword_init: true
     )
@@ -7471,6 +7609,7 @@ module Aws::S3
     #   <p>The account ID of the expected bucket owner. If the account ID that you provide does not match the actual owner of the bucket, the request fails with the HTTP status code <code>403 Forbidden</code> (access denied).</p>
     #   @return [String]
     class GetObjectRetentionRequest < Struct.new(
+      nil,
       :bucket,
       :key,
       :version_id,
@@ -7488,6 +7627,7 @@ module Aws::S3
     #   <p>Contains the tag set.</p>
     #   @return [Array<Types::Tag>]
     class GetObjectTaggingOutput < Struct.new(
+      nil,
       :version_id,
       :tag_set,
       keyword_init: true
@@ -7524,6 +7664,7 @@ module Aws::S3
     #            </note>
     #   @return [String]
     class GetObjectTaggingRequest < Struct.new(
+      nil,
       :bucket,
       :key,
       :version_id,
@@ -7546,6 +7687,7 @@ module Aws::S3
     #            </note>
     #   @return [String]
     class GetObjectTorrentOutput < Struct.new(
+      nil,
       :body,
       :request_charged,
       keyword_init: true
@@ -7578,6 +7720,7 @@ module Aws::S3
     #   <p>The account ID of the expected bucket owner. If the account ID that you provide does not match the actual owner of the bucket, the request fails with the HTTP status code <code>403 Forbidden</code> (access denied).</p>
     #   @return [String]
     class GetObjectTorrentRequest < Struct.new(
+      nil,
       :bucket,
       :key,
       :request_payer,
@@ -7591,6 +7734,7 @@ module Aws::S3
     #   <p>The <code>PublicAccessBlock</code> configuration currently in effect for this Amazon S3 bucket.</p>
     #   @return [Types::PublicAccessBlockConfiguration]
     class GetPublicAccessBlockOutput < Struct.new(
+      nil,
       :public_access_block_configuration,
       keyword_init: true
     )
@@ -7605,6 +7749,7 @@ module Aws::S3
     #   <p>The account ID of the expected bucket owner. If the account ID that you provide does not match the actual owner of the bucket, the request fails with the HTTP status code <code>403 Forbidden</code> (access denied).</p>
     #   @return [String]
     class GetPublicAccessBlockRequest < Struct.new(
+      nil,
       :bucket,
       :expected_bucket_owner,
       keyword_init: true
@@ -7617,6 +7762,7 @@ module Aws::S3
     #   <p>Retrieval tier at which the restore will be processed.</p>
     #   @return [String]
     class GlacierJobParameters < Struct.new(
+      nil,
       :tier,
       keyword_init: true
     )
@@ -7631,6 +7777,7 @@ module Aws::S3
     #   <p>Specifies the permission given to the grantee.</p>
     #   @return [String]
     class Grant < Struct.new(
+      nil,
       :grantee,
       :permission,
       keyword_init: true
@@ -7685,6 +7832,7 @@ module Aws::S3
     #   <p>Type of grantee</p>
     #   @return [String]
     class Grantee < Struct.new(
+      nil,
       :display_name,
       :email_address,
       :id,
@@ -7727,6 +7875,7 @@ module Aws::S3
     #            </note>
     #   @return [Boolean]
     class HeadBucketOutput < Struct.new(
+      nil,
       :bucket_arn,
       :bucket_location_type,
       :bucket_location_name,
@@ -7765,6 +7914,7 @@ module Aws::S3
     #   <p>The account ID of the expected bucket owner. If the account ID that you provide does not match the actual owner of the bucket, the request fails with the HTTP status code <code>403 Forbidden</code> (access denied).</p>
     #   @return [String]
     class HeadBucketRequest < Struct.new(
+      nil,
       :bucket,
       :expected_bucket_owner,
       keyword_init: true
@@ -8036,6 +8186,7 @@ module Aws::S3
     #            </note>
     #   @return [String]
     class HeadObjectOutput < Struct.new(
+      nil,
       :delete_marker,
       :accept_ranges,
       :expiration,
@@ -8256,6 +8407,7 @@ module Aws::S3
     #         policies and KMS key policies for the KMS key to retrieve the checksum of the object.</p>
     #   @return [String]
     class HeadObjectRequest < Struct.new(
+      nil,
       :bucket,
       :if_match,
       :if_modified_since,
@@ -8290,6 +8442,7 @@ module Aws::S3
     #         without performing any further actions.</p>
     #          </note>
     class IdempotencyParameterMismatch < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -8309,6 +8462,7 @@ module Aws::S3
     #            </important>
     #   @return [String]
     class IndexDocument < Struct.new(
+      nil,
       :suffix,
       keyword_init: true
     )
@@ -8333,6 +8487,7 @@ module Aws::S3
     #            </note>
     #   @return [String]
     class Initiator < Struct.new(
+      nil,
       :id,
       :display_name,
       keyword_init: true
@@ -8354,6 +8509,7 @@ module Aws::S3
     #   <p>Specifies Parquet as object's input serialization format.</p>
     #   @return [Types::ParquetInput]
     class InputSerialization < Struct.new(
+      nil,
       :csv,
       :compression_type,
       :json,
@@ -8373,6 +8529,7 @@ module Aws::S3
     #   <p>All of these tags must exist in the object's tag set in order for the configuration to apply.</p>
     #   @return [Array<Types::Tag>]
     class IntelligentTieringAndOperator < Struct.new(
+      nil,
       :prefix,
       :tags,
       keyword_init: true
@@ -8397,6 +8554,7 @@ module Aws::S3
     #   <p>Specifies the S3 Intelligent-Tiering storage class tier of the configuration.</p>
     #   @return [Array<Types::Tiering>]
     class IntelligentTieringConfiguration < Struct.new(
+      nil,
       :id,
       :filter,
       :status,
@@ -8425,6 +8583,7 @@ module Aws::S3
     #         the filter to apply.</p>
     #   @return [Types::IntelligentTieringAndOperator]
     class IntelligentTieringFilter < Struct.new(
+      nil,
       :prefix,
       :tag,
       :and,
@@ -8445,6 +8604,7 @@ module Aws::S3
     # @!attribute access_tier
     #   @return [String]
     class InvalidObjectState < Struct.new(
+      nil,
       :storage_class,
       :access_tier,
       keyword_init: true
@@ -8468,6 +8628,7 @@ module Aws::S3
     #             </li>
     #          </ul>
     class InvalidRequest < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -8475,6 +8636,7 @@ module Aws::S3
 
     # <p> The write offset value that you specified does not match the current object size. </p>
     class InvalidWriteOffset < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -8509,6 +8671,7 @@ module Aws::S3
     #   <p>Specifies the schedule for generating inventory results.</p>
     #   @return [Types::InventorySchedule]
     class InventoryConfiguration < Struct.new(
+      nil,
       :destination,
       :is_enabled,
       :filter,
@@ -8527,6 +8690,7 @@ module Aws::S3
     #         inventory results are published.</p>
     #   @return [Types::InventoryS3BucketDestination]
     class InventoryDestination < Struct.new(
+      nil,
       :s3_bucket_destination,
       keyword_init: true
     )
@@ -8541,6 +8705,7 @@ module Aws::S3
     #   <p>Specifies the use of SSE-KMS to encrypt delivered inventory reports.</p>
     #   @return [Types::SSEKMS]
     class InventoryEncryption < Struct.new(
+      nil,
       :sses3,
       :ssekms,
       keyword_init: true
@@ -8554,6 +8719,7 @@ module Aws::S3
     #   <p>The prefix that an object must have to be included in the inventory results.</p>
     #   @return [String]
     class InventoryFilter < Struct.new(
+      nil,
       :prefix,
       keyword_init: true
     )
@@ -8583,6 +8749,7 @@ module Aws::S3
     #   <p>Contains the type of server-side encryption used to encrypt the inventory results.</p>
     #   @return [Types::InventoryEncryption]
     class InventoryS3BucketDestination < Struct.new(
+      nil,
       :account_id,
       :bucket,
       :format,
@@ -8598,6 +8765,7 @@ module Aws::S3
     #   <p>Specifies how frequently inventory results are produced.</p>
     #   @return [String]
     class InventorySchedule < Struct.new(
+      nil,
       :frequency,
       keyword_init: true
     )
@@ -8619,6 +8787,7 @@ module Aws::S3
     #       </p>
     #   @return [Types::MetadataTableEncryptionConfiguration]
     class InventoryTableConfiguration < Struct.new(
+      nil,
       :configuration_state,
       :encryption_configuration,
       keyword_init: true
@@ -8687,6 +8856,7 @@ module Aws::S3
     #       </p>
     #   @return [String]
     class InventoryTableConfigurationResult < Struct.new(
+      nil,
       :configuration_state,
       :table_status,
       :error,
@@ -8712,6 +8882,7 @@ module Aws::S3
     #       </p>
     #   @return [Types::MetadataTableEncryptionConfiguration]
     class InventoryTableConfigurationUpdates < Struct.new(
+      nil,
       :configuration_state,
       :encryption_configuration,
       keyword_init: true
@@ -8724,6 +8895,7 @@ module Aws::S3
     #   <p>The type of JSON. Valid values: Document, Lines.</p>
     #   @return [String]
     class JSONInput < Struct.new(
+      nil,
       :type,
       keyword_init: true
     )
@@ -8736,6 +8908,7 @@ module Aws::S3
     #         newline character ('\n').</p>
     #   @return [String]
     class JSONOutput < Struct.new(
+      nil,
       :record_delimiter,
       keyword_init: true
     )
@@ -8756,6 +8929,7 @@ module Aws::S3
     #       </p>
     #   @return [Types::MetadataTableEncryptionConfiguration]
     class JournalTableConfiguration < Struct.new(
+      nil,
       :record_expiration,
       :encryption_configuration,
       keyword_init: true
@@ -8812,6 +8986,7 @@ module Aws::S3
     #       </p>
     #   @return [Types::RecordExpiration]
     class JournalTableConfigurationResult < Struct.new(
+      nil,
       :table_status,
       :error,
       :table_name,
@@ -8831,6 +9006,7 @@ module Aws::S3
     #       </p>
     #   @return [Types::RecordExpiration]
     class JournalTableConfigurationUpdates < Struct.new(
+      nil,
       :record_expiration,
       keyword_init: true
     )
@@ -8856,6 +9032,7 @@ module Aws::S3
     #           <i>Amazon S3 User Guide</i>.</p>
     #   @return [Types::NotificationConfigurationFilter]
     class LambdaFunctionConfiguration < Struct.new(
+      nil,
       :id,
       :lambda_function_arn,
       :events,
@@ -8890,6 +9067,7 @@ module Aws::S3
     #            </note>
     #   @return [Boolean]
     class LifecycleExpiration < Struct.new(
+      nil,
       :date,
       :days,
       :expired_object_delete_marker,
@@ -8969,6 +9147,7 @@ module Aws::S3
     #           <i>Amazon S3 User Guide</i>.</p>
     #   @return [Types::AbortIncompleteMultipartUpload]
     class LifecycleRule < Struct.new(
+      nil,
       :expiration,
       :id,
       :prefix,
@@ -8999,6 +9178,7 @@ module Aws::S3
     #   <p>Maximum object size to which the rule applies.</p>
     #   @return [Integer]
     class LifecycleRuleAndOperator < Struct.new(
+      nil,
       :prefix,
       :tags,
       :object_size_greater_than,
@@ -9040,6 +9220,7 @@ module Aws::S3
     #         operator.</p>
     #   @return [Types::LifecycleRuleAndOperator]
     class LifecycleRuleFilter < Struct.new(
+      nil,
       :prefix,
       :tag,
       :object_size_greater_than,
@@ -9069,6 +9250,7 @@ module Aws::S3
     #   <p>The list of analytics configurations for a bucket.</p>
     #   @return [Array<Types::AnalyticsConfiguration>]
     class ListBucketAnalyticsConfigurationsOutput < Struct.new(
+      nil,
       :is_truncated,
       :continuation_token,
       :next_continuation_token,
@@ -9089,6 +9271,7 @@ module Aws::S3
     #   <p>The account ID of the expected bucket owner. If the account ID that you provide does not match the actual owner of the bucket, the request fails with the HTTP status code <code>403 Forbidden</code> (access denied).</p>
     #   @return [String]
     class ListBucketAnalyticsConfigurationsRequest < Struct.new(
+      nil,
       :bucket,
       :continuation_token,
       :expected_bucket_owner,
@@ -9115,6 +9298,7 @@ module Aws::S3
     #   <p>The list of S3 Intelligent-Tiering configurations for a bucket.</p>
     #   @return [Array<Types::IntelligentTieringConfiguration>]
     class ListBucketIntelligentTieringConfigurationsOutput < Struct.new(
+      nil,
       :is_truncated,
       :continuation_token,
       :next_continuation_token,
@@ -9135,6 +9319,7 @@ module Aws::S3
     #   <p>The account ID of the expected bucket owner. If the account ID that you provide does not match the actual owner of the bucket, the request fails with the HTTP status code <code>403 Forbidden</code> (access denied).</p>
     #   @return [String]
     class ListBucketIntelligentTieringConfigurationsRequest < Struct.new(
+      nil,
       :bucket,
       :continuation_token,
       :expected_bucket_owner,
@@ -9160,6 +9345,7 @@ module Aws::S3
     #         The continuation token is an opaque value that Amazon S3 understands.</p>
     #   @return [String]
     class ListBucketInventoryConfigurationsOutput < Struct.new(
+      nil,
       :continuation_token,
       :inventory_configuration_list,
       :is_truncated,
@@ -9181,6 +9367,7 @@ module Aws::S3
     #   <p>The account ID of the expected bucket owner. If the account ID that you provide does not match the actual owner of the bucket, the request fails with the HTTP status code <code>403 Forbidden</code> (access denied).</p>
     #   @return [String]
     class ListBucketInventoryConfigurationsRequest < Struct.new(
+      nil,
       :bucket,
       :continuation_token,
       :expected_bucket_owner,
@@ -9207,6 +9394,7 @@ module Aws::S3
     #   <p>The list of metrics configurations for a bucket.</p>
     #   @return [Array<Types::MetricsConfiguration>]
     class ListBucketMetricsConfigurationsOutput < Struct.new(
+      nil,
       :is_truncated,
       :continuation_token,
       :next_continuation_token,
@@ -9228,6 +9416,7 @@ module Aws::S3
     #   <p>The account ID of the expected bucket owner. If the account ID that you provide does not match the actual owner of the bucket, the request fails with the HTTP status code <code>403 Forbidden</code> (access denied).</p>
     #   @return [String]
     class ListBucketMetricsConfigurationsRequest < Struct.new(
+      nil,
       :bucket,
       :continuation_token,
       :expected_bucket_owner,
@@ -9254,6 +9443,7 @@ module Aws::S3
     #            <p>All bucket names in the response begin with the specified bucket name prefix.</p>
     #   @return [String]
     class ListBucketsOutput < Struct.new(
+      nil,
       :buckets,
       :owner,
       :continuation_token,
@@ -9296,6 +9486,7 @@ module Aws::S3
     #            </note>
     #   @return [String]
     class ListBucketsRequest < Struct.new(
+      nil,
       :max_buckets,
       :continuation_token,
       :prefix,
@@ -9313,6 +9504,7 @@ module Aws::S3
     #         use the returned <code>ContinuationToken</code> for pagination of the list response.</p>
     #   @return [String]
     class ListDirectoryBucketsOutput < Struct.new(
+      nil,
       :buckets,
       :continuation_token,
       keyword_init: true
@@ -9331,6 +9523,7 @@ module Aws::S3
     #         buckets that are owned by an Amazon Web Services account, return all the buckets in response.</p>
     #   @return [Integer]
     class ListDirectoryBucketsRequest < Struct.new(
+      nil,
       :continuation_token,
       :max_directory_buckets,
       keyword_init: true
@@ -9419,6 +9612,7 @@ module Aws::S3
     #            </note>
     #   @return [String]
     class ListMultipartUploadsOutput < Struct.new(
+      nil,
       :bucket,
       :key_marker,
       :upload_id_marker,
@@ -9550,6 +9744,7 @@ module Aws::S3
     #            </note>
     #   @return [String]
     class ListMultipartUploadsRequest < Struct.new(
+      nil,
       :bucket,
       :delimiter,
       :encoding_type,
@@ -9630,6 +9825,7 @@ module Aws::S3
     #            </note>
     #   @return [String]
     class ListObjectVersionsOutput < Struct.new(
+      nil,
       :is_truncated,
       :key_marker,
       :version_id_marker,
@@ -9712,6 +9908,7 @@ module Aws::S3
     #         are not returned.</p>
     #   @return [Array<String>]
     class ListObjectVersionsRequest < Struct.new(
+      nil,
       :bucket,
       :delimiter,
       :encoding_type,
@@ -9800,6 +9997,7 @@ module Aws::S3
     #            </note>
     #   @return [String]
     class ListObjectsOutput < Struct.new(
+      nil,
       :is_truncated,
       :marker,
       :next_marker,
@@ -9877,6 +10075,7 @@ module Aws::S3
     #         are not returned.</p>
     #   @return [Array<String>]
     class ListObjectsRequest < Struct.new(
+      nil,
       :bucket,
       :delimiter,
       :encoding_type,
@@ -9992,6 +10191,7 @@ module Aws::S3
     #            </note>
     #   @return [String]
     class ListObjectsV2Output < Struct.new(
+      nil,
       :is_truncated,
       :contents,
       :name,
@@ -10115,6 +10315,7 @@ module Aws::S3
     #            </note>
     #   @return [Array<String>]
     class ListObjectsV2Request < Struct.new(
+      nil,
       :bucket,
       :delimiter,
       :encoding_type,
@@ -10222,6 +10423,7 @@ module Aws::S3
     #           User Guide</a>.</p>
     #   @return [String]
     class ListPartsOutput < Struct.new(
+      nil,
       :abort_date,
       :abort_rule_id,
       :bucket,
@@ -10316,6 +10518,7 @@ module Aws::S3
     #            </note>
     #   @return [String]
     class ListPartsRequest < Struct.new(
+      nil,
       :bucket,
       :key,
       :max_parts,
@@ -10347,6 +10550,7 @@ module Aws::S3
     #         the bucket will be created. An example AZ ID value is <code>usw2-az1</code>.</p>
     #   @return [String]
     class LocationInfo < Struct.new(
+      nil,
       :type,
       :name,
       keyword_init: true
@@ -10378,6 +10582,7 @@ module Aws::S3
     #   <p>Amazon S3 key format for log objects.</p>
     #   @return [Types::TargetObjectKeyFormat]
     class LoggingEnabled < Struct.new(
+      nil,
       :target_bucket,
       :target_grants,
       :target_prefix,
@@ -10401,6 +10606,7 @@ module Aws::S3
     #       </p>
     #   @return [Types::InventoryTableConfiguration]
     class MetadataConfiguration < Struct.new(
+      nil,
       :journal_table_configuration,
       :inventory_table_configuration,
       keyword_init: true
@@ -10427,6 +10633,7 @@ module Aws::S3
     #       </p>
     #   @return [Types::InventoryTableConfigurationResult]
     class MetadataConfigurationResult < Struct.new(
+      nil,
       :destination_result,
       :journal_table_configuration_result,
       :inventory_table_configuration_result,
@@ -10443,6 +10650,7 @@ module Aws::S3
     #   <p>Value of the object.</p>
     #   @return [String]
     class MetadataEntry < Struct.new(
+      nil,
       :name,
       :value,
       keyword_init: true
@@ -10463,6 +10671,7 @@ module Aws::S3
     #       </p>
     #   @return [Types::S3TablesDestination]
     class MetadataTableConfiguration < Struct.new(
+      nil,
       :s3_tables_destination,
       keyword_init: true
     )
@@ -10485,6 +10694,7 @@ module Aws::S3
     #       </p>
     #   @return [Types::S3TablesDestinationResult]
     class MetadataTableConfigurationResult < Struct.new(
+      nil,
       :s3_tables_destination_result,
       keyword_init: true
     )
@@ -10510,6 +10720,7 @@ module Aws::S3
     #       </p>
     #   @return [String]
     class MetadataTableEncryptionConfiguration < Struct.new(
+      nil,
       :sse_algorithm,
       :kms_key_arn,
       keyword_init: true
@@ -10527,6 +10738,7 @@ module Aws::S3
     #           <code>s3:Replication:OperationMissedThreshold</code> event. </p>
     #   @return [Types::ReplicationTimeValue]
     class Metrics < Struct.new(
+      nil,
       :status,
       :event_threshold,
       keyword_init: true
@@ -10547,6 +10759,7 @@ module Aws::S3
     #   <p>The access point ARN used when evaluating an <code>AND</code> predicate.</p>
     #   @return [String]
     class MetricsAndOperator < Struct.new(
+      nil,
       :prefix,
       :tags,
       :access_point_arn,
@@ -10569,6 +10782,7 @@ module Aws::S3
     #         conjunction (MetricsAndOperator).</p>
     #   @return [Types::MetricsFilter]
     class MetricsConfiguration < Struct.new(
+      nil,
       :id,
       :filter,
       keyword_init: true
@@ -10648,6 +10862,7 @@ module Aws::S3
     #           object integrity</a> in the <i>Amazon S3 User Guide</i>.</p>
     #   @return [String]
     class MultipartUpload < Struct.new(
+      nil,
       :upload_id,
       :key,
       :initiated,
@@ -10663,6 +10878,7 @@ module Aws::S3
 
     # <p>The specified bucket does not exist.</p>
     class NoSuchBucket < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -10670,6 +10886,7 @@ module Aws::S3
 
     # <p>The specified key does not exist.</p>
     class NoSuchKey < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -10677,6 +10894,7 @@ module Aws::S3
 
     # <p>The specified multipart upload does not exist.</p>
     class NoSuchUpload < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -10711,6 +10929,7 @@ module Aws::S3
     #            </note>
     #   @return [Integer]
     class NoncurrentVersionExpiration < Struct.new(
+      nil,
       :noncurrent_days,
       :newer_noncurrent_versions,
       keyword_init: true
@@ -10741,6 +10960,7 @@ module Aws::S3
     #         the <i>Amazon S3 User Guide</i>.</p>
     #   @return [Integer]
     class NoncurrentVersionTransition < Struct.new(
+      nil,
       :noncurrent_days,
       :storage_class,
       :newer_noncurrent_versions,
@@ -10751,6 +10971,7 @@ module Aws::S3
 
     # <p>The specified content does not exist.</p>
     class NotFound < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -10773,6 +10994,7 @@ module Aws::S3
     #   <p>Enables delivery of events to Amazon EventBridge.</p>
     #   @return [Types::EventBridgeConfiguration]
     class NotificationConfiguration < Struct.new(
+      nil,
       :topic_configurations,
       :queue_configurations,
       :lambda_function_configurations,
@@ -10789,6 +11011,7 @@ module Aws::S3
     #   <p>A container for object key name prefix and suffix filtering rules.</p>
     #   @return [Types::S3KeyFilter]
     class NotificationConfigurationFilter < Struct.new(
+      nil,
       :key,
       keyword_init: true
     )
@@ -10866,6 +11089,7 @@ module Aws::S3
     #            </note>
     #   @return [Types::RestoreStatus]
     class Object < Struct.new(
+      nil,
       :key,
       :last_modified,
       :e_tag,
@@ -10882,6 +11106,7 @@ module Aws::S3
 
     # <p>This action is not allowed against this storage tier.</p>
     class ObjectAlreadyInActiveTierError < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -10924,6 +11149,7 @@ module Aws::S3
     #            </note>
     #   @return [Integer]
     class ObjectIdentifier < Struct.new(
+      nil,
       :key,
       :version_id,
       :e_tag,
@@ -10947,6 +11173,7 @@ module Aws::S3
     #         specify <code>Days</code> and <code>Years</code> at the same time.</p>
     #   @return [Types::ObjectLockRule]
     class ObjectLockConfiguration < Struct.new(
+      nil,
       :object_lock_enabled,
       :rule,
       keyword_init: true
@@ -10959,6 +11186,7 @@ module Aws::S3
     #   <p>Indicates whether the specified object has a legal hold in place.</p>
     #   @return [String]
     class ObjectLockLegalHold < Struct.new(
+      nil,
       :status,
       keyword_init: true
     )
@@ -10973,6 +11201,7 @@ module Aws::S3
     #   <p>The date on which this Object Lock Retention will expire.</p>
     #   @return [Time]
     class ObjectLockRetention < Struct.new(
+      nil,
       :mode,
       :retain_until_date,
       keyword_init: true
@@ -10988,6 +11217,7 @@ module Aws::S3
     #         and <code>Years</code> at the same time.</p>
     #   @return [Types::DefaultRetention]
     class ObjectLockRule < Struct.new(
+      nil,
       :default_retention,
       keyword_init: true
     )
@@ -10997,6 +11227,7 @@ module Aws::S3
     # <p>The source object of the COPY action is not in the active tier and is only stored in Amazon S3
     #       Glacier.</p>
     class ObjectNotInActiveTierError < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -11041,6 +11272,7 @@ module Aws::S3
     #         the <i>Amazon S3 User Guide</i>.</p>
     #   @return [String]
     class ObjectPart < Struct.new(
+      nil,
       :part_number,
       :size,
       :checksum_crc32,
@@ -11093,6 +11325,7 @@ module Aws::S3
     #           Working with archived objects</a> in the <i>Amazon S3 User Guide</i>.</p>
     #   @return [Types::RestoreStatus]
     class ObjectVersion < Struct.new(
+      nil,
       :e_tag,
       :checksum_algorithm,
       :checksum_type,
@@ -11114,6 +11347,7 @@ module Aws::S3
     #   <p>Describes an S3 location that will receive the results of the restore request.</p>
     #   @return [Types::S3Location]
     class OutputLocation < Struct.new(
+      nil,
       :s3,
       keyword_init: true
     )
@@ -11128,6 +11362,7 @@ module Aws::S3
     #   <p>Specifies JSON as request's output serialization format.</p>
     #   @return [Types::JSONOutput]
     class OutputSerialization < Struct.new(
+      nil,
       :csv,
       :json,
       keyword_init: true
@@ -11180,6 +11415,7 @@ module Aws::S3
     #   <p>Container for the ID of the owner.</p>
     #   @return [String]
     class Owner < Struct.new(
+      nil,
       :display_name,
       :id,
       keyword_init: true
@@ -11192,6 +11428,7 @@ module Aws::S3
     #   <p>The container element for an ownership control rule.</p>
     #   @return [Array<Types::OwnershipControlsRule>]
     class OwnershipControls < Struct.new(
+      nil,
       :rules,
       keyword_init: true
     )
@@ -11223,6 +11460,7 @@ module Aws::S3
     #            </note>
     #   @return [String]
     class OwnershipControlsRule < Struct.new(
+      nil,
       :object_ownership,
       keyword_init: true
     )
@@ -11231,6 +11469,7 @@ module Aws::S3
 
     # <p>Container for Parquet.</p>
     class ParquetInput < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -11278,6 +11517,7 @@ module Aws::S3
     #           object integrity</a> in the <i>Amazon S3 User Guide</i>.</p>
     #   @return [String]
     class Part < Struct.new(
+      nil,
       :part_number,
       :last_modified,
       :e_tag,
@@ -11307,6 +11547,7 @@ module Aws::S3
     #         in the key.</p>
     #   @return [String]
     class PartitionedPrefix < Struct.new(
+      nil,
       :partition_date_source,
       keyword_init: true
     )
@@ -11319,6 +11560,7 @@ module Aws::S3
     #           <code>FALSE</code> indicates that the bucket is not public.</p>
     #   @return [Boolean]
     class PolicyStatus < Struct.new(
+      nil,
       :is_public,
       keyword_init: true
     )
@@ -11336,6 +11578,7 @@ module Aws::S3
     #   <p>The current number of bytes of records payload data returned.</p>
     #   @return [Integer]
     class Progress < Struct.new(
+      nil,
       :bytes_scanned,
       :bytes_processed,
       :bytes_returned,
@@ -11349,6 +11592,7 @@ module Aws::S3
     #   <p>The Progress event details.</p>
     #   @return [Types::Progress]
     class ProgressEvent < Struct.new(
+      nil,
       :details,
       keyword_init: true
     )
@@ -11396,6 +11640,7 @@ module Aws::S3
     #         accounts, is blocked.</p>
     #   @return [Boolean]
     class PublicAccessBlockConfiguration < Struct.new(
+      nil,
       :block_public_acls,
       :ignore_public_acls,
       :block_public_policy,
@@ -11424,6 +11669,7 @@ module Aws::S3
     #         parameter.</p>
     #   @return [String]
     class PutBucketAccelerateConfigurationRequest < Struct.new(
+      nil,
       :bucket,
       :accelerate_configuration,
       :expected_bucket_owner,
@@ -11479,6 +11725,7 @@ module Aws::S3
     #   <p>The account ID of the expected bucket owner. If the account ID that you provide does not match the actual owner of the bucket, the request fails with the HTTP status code <code>403 Forbidden</code> (access denied).</p>
     #   @return [String]
     class PutBucketAclRequest < Struct.new(
+      nil,
       :acl,
       :access_control_policy,
       :bucket,
@@ -11508,6 +11755,7 @@ module Aws::S3
     #   <p>The account ID of the expected bucket owner. If the account ID that you provide does not match the actual owner of the bucket, the request fails with the HTTP status code <code>403 Forbidden</code> (access denied).</p>
     #   @return [String]
     class PutBucketAnalyticsConfigurationRequest < Struct.new(
+      nil,
       :bucket,
       :id,
       :analytics_configuration,
@@ -11545,6 +11793,7 @@ module Aws::S3
     #   <p>The account ID of the expected bucket owner. If the account ID that you provide does not match the actual owner of the bucket, the request fails with the HTTP status code <code>403 Forbidden</code> (access denied).</p>
     #   @return [String]
     class PutBucketCorsRequest < Struct.new(
+      nil,
       :bucket,
       :cors_configuration,
       :content_md5,
@@ -11596,6 +11845,7 @@ module Aws::S3
     #            </note>
     #   @return [String]
     class PutBucketEncryptionRequest < Struct.new(
+      nil,
       :bucket,
       :content_md5,
       :checksum_algorithm,
@@ -11619,6 +11869,7 @@ module Aws::S3
     #   <p>Container for S3 Intelligent-Tiering configuration.</p>
     #   @return [Types::IntelligentTieringConfiguration]
     class PutBucketIntelligentTieringConfigurationRequest < Struct.new(
+      nil,
       :bucket,
       :id,
       :expected_bucket_owner,
@@ -11641,6 +11892,7 @@ module Aws::S3
     #   <p>The account ID of the expected bucket owner. If the account ID that you provide does not match the actual owner of the bucket, the request fails with the HTTP status code <code>403 Forbidden</code> (access denied).</p>
     #   @return [String]
     class PutBucketInventoryConfigurationRequest < Struct.new(
+      nil,
       :bucket,
       :id,
       :inventory_configuration,
@@ -11675,6 +11927,7 @@ module Aws::S3
     #         rule. Custom filters always take precedence over the default transition behavior.</p>
     #   @return [String]
     class PutBucketLifecycleConfigurationOutput < Struct.new(
+      nil,
       :transition_default_minimum_object_size,
       keyword_init: true
     )
@@ -11728,6 +11981,7 @@ module Aws::S3
     #         rule. Custom filters always take precedence over the default transition behavior.</p>
     #   @return [String]
     class PutBucketLifecycleConfigurationRequest < Struct.new(
+      nil,
       :bucket,
       :checksum_algorithm,
       :lifecycle_configuration,
@@ -11761,6 +12015,7 @@ module Aws::S3
     #   <p>The account ID of the expected bucket owner. If the account ID that you provide does not match the actual owner of the bucket, the request fails with the HTTP status code <code>403 Forbidden</code> (access denied).</p>
     #   @return [String]
     class PutBucketLoggingRequest < Struct.new(
+      nil,
       :bucket,
       :bucket_logging_status,
       :content_md5,
@@ -11785,6 +12040,7 @@ module Aws::S3
     #   <p>The account ID of the expected bucket owner. If the account ID that you provide does not match the actual owner of the bucket, the request fails with the HTTP status code <code>403 Forbidden</code> (access denied).</p>
     #   @return [String]
     class PutBucketMetricsConfigurationRequest < Struct.new(
+      nil,
       :bucket,
       :id,
       :metrics_configuration,
@@ -11809,6 +12065,7 @@ module Aws::S3
     #         True or false value.</p>
     #   @return [Boolean]
     class PutBucketNotificationConfigurationRequest < Struct.new(
+      nil,
       :bucket,
       :notification_configuration,
       :expected_bucket_owner,
@@ -11844,6 +12101,7 @@ module Aws::S3
     #         parameter. </p>
     #   @return [String]
     class PutBucketOwnershipControlsRequest < Struct.new(
+      nil,
       :bucket,
       :content_md5,
       :expected_bucket_owner,
@@ -11935,6 +12193,7 @@ module Aws::S3
     #            </note>
     #   @return [String]
     class PutBucketPolicyRequest < Struct.new(
+      nil,
       :bucket,
       :content_md5,
       :checksum_algorithm,
@@ -11975,6 +12234,7 @@ module Aws::S3
     #   <p>The account ID of the expected bucket owner. If the account ID that you provide does not match the actual owner of the bucket, the request fails with the HTTP status code <code>403 Forbidden</code> (access denied).</p>
     #   @return [String]
     class PutBucketReplicationRequest < Struct.new(
+      nil,
       :bucket,
       :content_md5,
       :checksum_algorithm,
@@ -12011,6 +12271,7 @@ module Aws::S3
     #   <p>The account ID of the expected bucket owner. If the account ID that you provide does not match the actual owner of the bucket, the request fails with the HTTP status code <code>403 Forbidden</code> (access denied).</p>
     #   @return [String]
     class PutBucketRequestPaymentRequest < Struct.new(
+      nil,
       :bucket,
       :content_md5,
       :checksum_algorithm,
@@ -12046,6 +12307,7 @@ module Aws::S3
     #   <p>The account ID of the expected bucket owner. If the account ID that you provide does not match the actual owner of the bucket, the request fails with the HTTP status code <code>403 Forbidden</code> (access denied).</p>
     #   @return [String]
     class PutBucketTaggingRequest < Struct.new(
+      nil,
       :bucket,
       :content_md5,
       :checksum_algorithm,
@@ -12085,6 +12347,7 @@ module Aws::S3
     #   <p>The account ID of the expected bucket owner. If the account ID that you provide does not match the actual owner of the bucket, the request fails with the HTTP status code <code>403 Forbidden</code> (access denied).</p>
     #   @return [String]
     class PutBucketVersioningRequest < Struct.new(
+      nil,
       :bucket,
       :content_md5,
       :checksum_algorithm,
@@ -12121,6 +12384,7 @@ module Aws::S3
     #   <p>The account ID of the expected bucket owner. If the account ID that you provide does not match the actual owner of the bucket, the request fails with the HTTP status code <code>403 Forbidden</code> (access denied).</p>
     #   @return [String]
     class PutBucketWebsiteRequest < Struct.new(
+      nil,
       :bucket,
       :content_md5,
       :checksum_algorithm,
@@ -12140,6 +12404,7 @@ module Aws::S3
     #            </note>
     #   @return [String]
     class PutObjectAclOutput < Struct.new(
+      nil,
       :request_charged,
       keyword_init: true
     )
@@ -12221,6 +12486,7 @@ module Aws::S3
     #   <p>The account ID of the expected bucket owner. If the account ID that you provide does not match the actual owner of the bucket, the request fails with the HTTP status code <code>403 Forbidden</code> (access denied).</p>
     #   @return [String]
     class PutObjectAclRequest < Struct.new(
+      nil,
       :acl,
       :access_control_policy,
       :bucket,
@@ -12249,6 +12515,7 @@ module Aws::S3
     #            </note>
     #   @return [String]
     class PutObjectLegalHoldOutput < Struct.new(
+      nil,
       :request_charged,
       keyword_init: true
     )
@@ -12296,6 +12563,7 @@ module Aws::S3
     #   <p>The account ID of the expected bucket owner. If the account ID that you provide does not match the actual owner of the bucket, the request fails with the HTTP status code <code>403 Forbidden</code> (access denied).</p>
     #   @return [String]
     class PutObjectLegalHoldRequest < Struct.new(
+      nil,
       :bucket,
       :key,
       :legal_hold,
@@ -12318,6 +12586,7 @@ module Aws::S3
     #            </note>
     #   @return [String]
     class PutObjectLockConfigurationOutput < Struct.new(
+      nil,
       :request_charged,
       keyword_init: true
     )
@@ -12360,6 +12629,7 @@ module Aws::S3
     #   <p>The account ID of the expected bucket owner. If the account ID that you provide does not match the actual owner of the bucket, the request fails with the HTTP status code <code>403 Forbidden</code> (access denied).</p>
     #   @return [String]
     class PutObjectLockConfigurationRequest < Struct.new(
+      nil,
       :bucket,
       :object_lock_configuration,
       :request_payer,
@@ -12496,6 +12766,7 @@ module Aws::S3
     #            </note>
     #   @return [String]
     class PutObjectOutput < Struct.new(
+      nil,
       :expiration,
       :e_tag,
       :checksum_crc32,
@@ -12966,6 +13237,7 @@ module Aws::S3
     #   <p>The account ID of the expected bucket owner. If the account ID that you provide does not match the actual owner of the bucket, the request fails with the HTTP status code <code>403 Forbidden</code> (access denied).</p>
     #   @return [String]
     class PutObjectRequest < Struct.new(
+      nil,
       :acl,
       :body,
       :bucket,
@@ -13021,6 +13293,7 @@ module Aws::S3
     #            </note>
     #   @return [String]
     class PutObjectRetentionOutput < Struct.new(
+      nil,
       :request_charged,
       keyword_init: true
     )
@@ -13071,6 +13344,7 @@ module Aws::S3
     #   <p>The account ID of the expected bucket owner. If the account ID that you provide does not match the actual owner of the bucket, the request fails with the HTTP status code <code>403 Forbidden</code> (access denied).</p>
     #   @return [String]
     class PutObjectRetentionRequest < Struct.new(
+      nil,
       :bucket,
       :key,
       :retention,
@@ -13089,6 +13363,7 @@ module Aws::S3
     #   <p>The versionId of the object the tag-set was added to.</p>
     #   @return [String]
     class PutObjectTaggingOutput < Struct.new(
+      nil,
       :version_id,
       keyword_init: true
     )
@@ -13140,6 +13415,7 @@ module Aws::S3
     #            </note>
     #   @return [String]
     class PutObjectTaggingRequest < Struct.new(
+      nil,
       :bucket,
       :key,
       :version_id,
@@ -13179,6 +13455,7 @@ module Aws::S3
     #   <p>The account ID of the expected bucket owner. If the account ID that you provide does not match the actual owner of the bucket, the request fails with the HTTP status code <code>403 Forbidden</code> (access denied).</p>
     #   @return [String]
     class PutPublicAccessBlockRequest < Struct.new(
+      nil,
       :bucket,
       :content_md5,
       :checksum_algorithm,
@@ -13208,6 +13485,7 @@ module Aws::S3
     #           <i>Amazon S3 User Guide</i>.</p>
     #   @return [Types::NotificationConfigurationFilter]
     class QueueConfiguration < Struct.new(
+      nil,
       :id,
       :queue_arn,
       :events,
@@ -13234,6 +13512,7 @@ module Aws::S3
     #       </p>
     #   @return [Integer]
     class RecordExpiration < Struct.new(
+      nil,
       :expiration,
       :days,
       keyword_init: true
@@ -13252,6 +13531,7 @@ module Aws::S3
     #         response.</p>
     #   @return [String]
     class RecordsEvent < Struct.new(
+      nil,
       :payload,
       keyword_init: true
     )
@@ -13295,6 +13575,7 @@ module Aws::S3
     #            </important>
     #   @return [String]
     class Redirect < Struct.new(
+      nil,
       :host_name,
       :http_redirect_code,
       :protocol,
@@ -13314,6 +13595,7 @@ module Aws::S3
     #         request.</p>
     #   @return [String]
     class RedirectAllRequestsTo < Struct.new(
+      nil,
       :host_name,
       :protocol,
       keyword_init: true
@@ -13322,6 +13604,7 @@ module Aws::S3
     end
 
     class RenameObjectOutput < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -13392,6 +13675,7 @@ module Aws::S3
     #            </note>
     #   @return [String]
     class RenameObjectRequest < Struct.new(
+      nil,
       :bucket,
       :key,
       :rename_source,
@@ -13421,6 +13705,7 @@ module Aws::S3
     #   <p>Specifies whether Amazon S3 replicates modifications on replicas.</p>
     #   @return [String]
     class ReplicaModifications < Struct.new(
+      nil,
       :status,
       keyword_init: true
     )
@@ -13439,6 +13724,7 @@ module Aws::S3
     #         rule and can contain a maximum of 1,000 rules. </p>
     #   @return [Array<Types::ReplicationRule>]
     class ReplicationConfiguration < Struct.new(
+      nil,
       :role,
       :rules,
       keyword_init: true
@@ -13508,6 +13794,7 @@ module Aws::S3
     #            </note>
     #   @return [Types::DeleteMarkerReplication]
     class ReplicationRule < Struct.new(
+      nil,
       :id,
       :priority,
       :prefix,
@@ -13542,6 +13829,7 @@ module Aws::S3
     #   <p>An array of tags containing key and value pairs.</p>
     #   @return [Array<Types::Tag>]
     class ReplicationRuleAndOperator < Struct.new(
+      nil,
       :prefix,
       :tags,
       keyword_init: true
@@ -13579,6 +13867,7 @@ module Aws::S3
     #            </ul>
     #   @return [Types::ReplicationRuleAndOperator]
     class ReplicationRuleFilter < Struct.new(
+      nil,
       :prefix,
       :tag,
       :and,
@@ -13598,6 +13887,7 @@ module Aws::S3
     #         operations on objects. </p>
     #   @return [Types::ReplicationTimeValue]
     class ReplicationTime < Struct.new(
+      nil,
       :status,
       :time,
       keyword_init: true
@@ -13612,6 +13902,7 @@ module Aws::S3
     #            <p> Valid value: 15</p>
     #   @return [Integer]
     class ReplicationTimeValue < Struct.new(
+      nil,
       :minutes,
       keyword_init: true
     )
@@ -13623,6 +13914,7 @@ module Aws::S3
     #   <p>Specifies who pays for the download and request fees.</p>
     #   @return [String]
     class RequestPaymentConfiguration < Struct.new(
+      nil,
       :payer,
       keyword_init: true
     )
@@ -13635,6 +13927,7 @@ module Aws::S3
     #         value: FALSE.</p>
     #   @return [Boolean]
     class RequestProgress < Struct.new(
+      nil,
       :enabled,
       keyword_init: true
     )
@@ -13654,6 +13947,7 @@ module Aws::S3
     #         to.</p>
     #   @return [String]
     class RestoreObjectOutput < Struct.new(
+      nil,
       :request_charged,
       :restore_output_path,
       keyword_init: true
@@ -13702,6 +13996,7 @@ module Aws::S3
     #   <p>The account ID of the expected bucket owner. If the account ID that you provide does not match the actual owner of the bucket, the request fails with the HTTP status code <code>403 Forbidden</code> (access denied).</p>
     #   @return [String]
     class RestoreObjectRequest < Struct.new(
+      nil,
       :bucket,
       :key,
       :version_id,
@@ -13751,6 +14046,7 @@ module Aws::S3
     #   <p>Describes the location where the restore job's output is stored.</p>
     #   @return [Types::OutputLocation]
     class RestoreRequest < Struct.new(
+      nil,
       :days,
       :glacier_job_parameters,
       :type,
@@ -13793,6 +14089,7 @@ module Aws::S3
     #            </p>
     #   @return [Time]
     class RestoreStatus < Struct.new(
+      nil,
       :is_restore_in_progress,
       :restore_expiry_date,
       keyword_init: true
@@ -13815,6 +14112,7 @@ module Aws::S3
     #         return.</p>
     #   @return [Types::Redirect]
     class RoutingRule < Struct.new(
+      nil,
       :condition,
       :redirect,
       keyword_init: true
@@ -13827,6 +14125,7 @@ module Aws::S3
     #   <p>A list of containers for the key-value pair that defines the criteria for the filter rule.</p>
     #   @return [Array<Types::FilterRule>]
     class S3KeyFilter < Struct.new(
+      nil,
       :filter_rules,
       keyword_init: true
     )
@@ -13859,6 +14158,7 @@ module Aws::S3
     #   <p>The class of storage used to store the restore results.</p>
     #   @return [String]
     class S3Location < Struct.new(
+      nil,
       :bucket_name,
       :prefix,
       :encryption,
@@ -13892,6 +14192,7 @@ module Aws::S3
     #       </p>
     #   @return [String]
     class S3TablesDestination < Struct.new(
+      nil,
       :table_bucket_arn,
       :table_name,
       keyword_init: true
@@ -13928,6 +14229,7 @@ module Aws::S3
     #         is always <code>aws_s3_metadata</code>. </p>
     #   @return [String]
     class S3TablesDestinationResult < Struct.new(
+      nil,
       :table_bucket_arn,
       :table_name,
       :table_arn,
@@ -13943,6 +14245,7 @@ module Aws::S3
     #         inventory reports.</p>
     #   @return [String]
     class SSEKMS < Struct.new(
+      nil,
       :key_id,
       keyword_init: true
     )
@@ -13951,6 +14254,7 @@ module Aws::S3
 
     # <p>Specifies the use of SSE-S3 to encrypt delivered inventory reports.</p>
     class SSES3 < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -13974,6 +14278,7 @@ module Aws::S3
     #         bytes.</p>
     #   @return [Integer]
     class ScanRange < Struct.new(
+      nil,
       :start,
       :end,
       keyword_init: true
@@ -14020,6 +14325,7 @@ module Aws::S3
     #   <p>The array of results.</p>
     #   @return [Types::SelectObjectContentEventStream]
     class SelectObjectContentOutput < Struct.new(
+      nil,
       :payload,
       keyword_init: true
     )
@@ -14104,6 +14410,7 @@ module Aws::S3
     #   <p>The account ID of the expected bucket owner. If the account ID that you provide does not match the actual owner of the bucket, the request fails with the HTTP status code <code>403 Forbidden</code> (access denied).</p>
     #   @return [String]
     class SelectObjectContentRequest < Struct.new(
+      nil,
       :bucket,
       :key,
       :sse_customer_algorithm,
@@ -14148,6 +14455,7 @@ module Aws::S3
     #   <p>Describes how the results of the Select job are serialized.</p>
     #   @return [Types::OutputSerialization]
     class SelectParameters < Struct.new(
+      nil,
       :input_serialization,
       :expression_type,
       :expression,
@@ -14249,6 +14557,7 @@ module Aws::S3
     #            </important>
     #   @return [String]
     class ServerSideEncryptionByDefault < Struct.new(
+      nil,
       :sse_algorithm,
       :kms_master_key_id,
       keyword_init: true
@@ -14261,6 +14570,7 @@ module Aws::S3
     #   <p>Container for information about a particular server-side encryption configuration rule.</p>
     #   @return [Array<Types::ServerSideEncryptionRule>]
     class ServerSideEncryptionConfiguration < Struct.new(
+      nil,
       :rules,
       keyword_init: true
     )
@@ -14312,6 +14622,7 @@ module Aws::S3
     #            </note>
     #   @return [Boolean]
     class ServerSideEncryptionRule < Struct.new(
+      nil,
       :apply_server_side_encryption_by_default,
       :bucket_key_enabled,
       keyword_init: true
@@ -14346,6 +14657,7 @@ module Aws::S3
     #         specified interval.</p>
     #   @return [Time]
     class SessionCredentials < Struct.new(
+      nil,
       :access_key_id,
       :secret_access_key,
       :session_token,
@@ -14360,6 +14672,7 @@ module Aws::S3
     #             <code>[DestinationPrefix][YYYY]-[MM]-[DD]-[hh]-[mm]-[ss]-[UniqueString]</code>
     #          </p>
     class SimplePrefix < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -14385,6 +14698,7 @@ module Aws::S3
     #            </note>
     #   @return [Types::ReplicaModifications]
     class SourceSelectionCriteria < Struct.new(
+      nil,
       :sse_kms_encrypted_objects,
       :replica_modifications,
       keyword_init: true
@@ -14398,6 +14712,7 @@ module Aws::S3
     #         stored in Amazon Web Services Key Management Service.</p>
     #   @return [String]
     class SseKmsEncryptedObjects < Struct.new(
+      nil,
       :status,
       keyword_init: true
     )
@@ -14415,6 +14730,7 @@ module Aws::S3
     #   <p>The total number of bytes of records payload data returned.</p>
     #   @return [Integer]
     class Stats < Struct.new(
+      nil,
       :bytes_scanned,
       :bytes_processed,
       :bytes_returned,
@@ -14428,6 +14744,7 @@ module Aws::S3
     #   <p>The Stats event details.</p>
     #   @return [Types::Stats]
     class StatsEvent < Struct.new(
+      nil,
       :details,
       keyword_init: true
     )
@@ -14441,6 +14758,7 @@ module Aws::S3
     #         exported.</p>
     #   @return [Types::StorageClassAnalysisDataExport]
     class StorageClassAnalysis < Struct.new(
+      nil,
       :data_export,
       keyword_init: true
     )
@@ -14455,6 +14773,7 @@ module Aws::S3
     #   <p>The place to store the data for an analysis.</p>
     #   @return [Types::AnalyticsExportDestination]
     class StorageClassAnalysisDataExport < Struct.new(
+      nil,
       :output_schema_version,
       :destination,
       keyword_init: true
@@ -14470,6 +14789,7 @@ module Aws::S3
     #   <p>Value of the tag.</p>
     #   @return [String]
     class Tag < Struct.new(
+      nil,
       :key,
       :value,
       keyword_init: true
@@ -14482,6 +14802,7 @@ module Aws::S3
     #   <p>A collection for a set of tags</p>
     #   @return [Array<Types::Tag>]
     class Tagging < Struct.new(
+      nil,
       :tag_set,
       keyword_init: true
     )
@@ -14498,6 +14819,7 @@ module Aws::S3
     #   <p>Logging permissions assigned to the grantee for the bucket.</p>
     #   @return [String]
     class TargetGrant < Struct.new(
+      nil,
       :grantee,
       :permission,
       keyword_init: true
@@ -14515,6 +14837,7 @@ module Aws::S3
     #   <p>Partitioned S3 key for log objects.</p>
     #   @return [Types::PartitionedPrefix]
     class TargetObjectKeyFormat < Struct.new(
+      nil,
       :simple_prefix,
       :partitioned_prefix,
       keyword_init: true
@@ -14537,6 +14860,7 @@ module Aws::S3
     #         tiers in the S3 Intelligent-Tiering storage class.</p>
     #   @return [String]
     class Tiering < Struct.new(
+      nil,
       :days,
       :access_tier,
       keyword_init: true
@@ -14548,6 +14872,7 @@ module Aws::S3
     #       You can use the CopyObject operation to copy this object to another and then add more data to the newly
     #       copied object. </p>
     class TooManyParts < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -14573,6 +14898,7 @@ module Aws::S3
     #           <i>Amazon S3 User Guide</i>.</p>
     #   @return [Types::NotificationConfigurationFilter]
     class TopicConfiguration < Struct.new(
+      nil,
       :id,
       :topic_arn,
       :events,
@@ -14603,6 +14929,7 @@ module Aws::S3
     #   <p>The storage class to which you want the object to transition.</p>
     #   @return [String]
     class Transition < Struct.new(
+      nil,
       :date,
       :days,
       :storage_class,
@@ -14639,6 +14966,7 @@ module Aws::S3
     #       </p>
     #   @return [String]
     class UpdateBucketMetadataInventoryTableConfigurationRequest < Struct.new(
+      nil,
       :bucket,
       :content_md5,
       :checksum_algorithm,
@@ -14677,6 +15005,7 @@ module Aws::S3
     #       </p>
     #   @return [String]
     class UpdateBucketMetadataJournalTableConfigurationRequest < Struct.new(
+      nil,
       :bucket,
       :content_md5,
       :checksum_algorithm,
@@ -14735,6 +15064,7 @@ module Aws::S3
     #            </note>
     #   @return [String]
     class UploadPartCopyOutput < Struct.new(
+      nil,
       :copy_source_version_id,
       :copy_part_result,
       :server_side_encryption,
@@ -14936,6 +15266,7 @@ module Aws::S3
     #   <p>The account ID of the expected source bucket owner. If the account ID that you provide does not match the actual owner of the source bucket, the request fails with the HTTP status code <code>403 Forbidden</code> (access denied).</p>
     #   @return [String]
     class UploadPartCopyRequest < Struct.new(
+      nil,
       :bucket,
       :copy_source,
       :copy_source_if_match,
@@ -15031,6 +15362,7 @@ module Aws::S3
     #            </note>
     #   @return [String]
     class UploadPartOutput < Struct.new(
+      nil,
       :server_side_encryption,
       :e_tag,
       :checksum_crc32,
@@ -15168,6 +15500,7 @@ module Aws::S3
     #   <p>The account ID of the expected bucket owner. If the account ID that you provide does not match the actual owner of the bucket, the request fails with the HTTP status code <code>403 Forbidden</code> (access denied).</p>
     #   @return [String]
     class UploadPartRequest < Struct.new(
+      nil,
       :body,
       :bucket,
       :content_length,
@@ -15202,6 +15535,7 @@ module Aws::S3
     #   <p>The versioning state of the bucket.</p>
     #   @return [String]
     class VersioningConfiguration < Struct.new(
+      nil,
       :mfa_delete,
       :status,
       keyword_init: true
@@ -15226,6 +15560,7 @@ module Aws::S3
     #   <p>Rules that define when a redirect is applied and the redirect behavior.</p>
     #   @return [Array<Types::RoutingRule>]
     class WebsiteConfiguration < Struct.new(
+      nil,
       :error_document,
       :index_document,
       :redirect_all_requests_to,
@@ -15498,6 +15833,7 @@ module Aws::S3
     #         Amazon Web Services KMS (SSE-KMS).</p>
     #   @return [Boolean]
     class WriteGetObjectResponseRequest < Struct.new(
+      nil,
       :request_route,
       :request_token,
       :body,

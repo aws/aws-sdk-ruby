@@ -10,6 +10,7 @@ module Aws::SageMakerFeatureStoreRuntime
     # @!attribute message
     #   @return [String]
     class AccessForbidden < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -34,6 +35,7 @@ module Aws::SageMakerFeatureStoreRuntime
     #            the batch.</p>
     #   @return [String]
     class BatchGetRecordError < Struct.new(
+      nil,
       :feature_group_name,
       :record_identifier_value_as_string,
       :error_code,
@@ -57,6 +59,7 @@ module Aws::SageMakerFeatureStoreRuntime
     #            the Features are returned.</p>
     #   @return [Array<String>]
     class BatchGetRecordIdentifier < Struct.new(
+      nil,
       :feature_group_name,
       :record_identifiers_value_as_string,
       :feature_names,
@@ -77,6 +80,7 @@ module Aws::SageMakerFeatureStoreRuntime
     #            null.</p>
     #   @return [String]
     class BatchGetRecordRequest < Struct.new(
+      nil,
       :identifiers,
       :expiration_time_response,
       keyword_init: true
@@ -95,6 +99,7 @@ module Aws::SageMakerFeatureStoreRuntime
     #               <code>RecordIdentifier</code> value, and Feature name.</p>
     #   @return [Array<Types::BatchGetRecordIdentifier>]
     class BatchGetRecordResponse < Struct.new(
+      nil,
       :records,
       :errors,
       :unprocessed_identifiers,
@@ -117,6 +122,7 @@ module Aws::SageMakerFeatureStoreRuntime
     #   <p>The <code>ExpiresAt</code> ISO string of the requested record.</p>
     #   @return [String]
     class BatchGetRecordResultDetail < Struct.new(
+      nil,
       :feature_group_name,
       :record_identifier_value_as_string,
       :record,
@@ -148,6 +154,7 @@ module Aws::SageMakerFeatureStoreRuntime
     #            set to <code>SoftDelete</code>.</p>
     #   @return [String]
     class DeleteRecordRequest < Struct.new(
+      nil,
       :feature_group_name,
       :record_identifier_value_as_string,
       :event_time,
@@ -176,6 +183,7 @@ module Aws::SageMakerFeatureStoreRuntime
     #            types as a string.</p>
     #   @return [Array<String>]
     class FeatureValue < Struct.new(
+      nil,
       :feature_name,
       :value_as_string,
       :value_as_string_list,
@@ -202,6 +210,7 @@ module Aws::SageMakerFeatureStoreRuntime
     #            null. If <code>Disabled</code> and null, <code>GetRecord</code> will return null.</p>
     #   @return [String]
     class GetRecordRequest < Struct.new(
+      nil,
       :feature_group_name,
       :record_identifier_value_as_string,
       :feature_names,
@@ -218,6 +227,7 @@ module Aws::SageMakerFeatureStoreRuntime
     #   <p>The <code>ExpiresAt</code> ISO string of the requested record.</p>
     #   @return [String]
     class GetRecordResponse < Struct.new(
+      nil,
       :record,
       :expires_at,
       keyword_init: true
@@ -230,6 +240,7 @@ module Aws::SageMakerFeatureStoreRuntime
     # @!attribute message
     #   @return [String]
     class InternalFailure < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -265,6 +276,7 @@ module Aws::SageMakerFeatureStoreRuntime
     #            information on HardDelete, see the <a href="https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_feature_store_DeleteRecord.html">DeleteRecord</a> API in the Amazon SageMaker API Reference guide.</p>
     #   @return [Types::TtlDuration]
     class PutRecordRequest < Struct.new(
+      nil,
       :feature_group_name,
       :record,
       :target_stores,
@@ -278,6 +290,7 @@ module Aws::SageMakerFeatureStoreRuntime
     # @!attribute message
     #   @return [String]
     class ResourceNotFound < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -288,6 +301,7 @@ module Aws::SageMakerFeatureStoreRuntime
     # @!attribute message
     #   @return [String]
     class ServiceUnavailable < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -306,6 +320,7 @@ module Aws::SageMakerFeatureStoreRuntime
     #               <code>TtlDuration</code> time value.</p>
     #   @return [Integer]
     class TtlDuration < Struct.new(
+      nil,
       :unit,
       :value,
       keyword_init: true
@@ -317,6 +332,7 @@ module Aws::SageMakerFeatureStoreRuntime
     # @!attribute message
     #   @return [String]
     class ValidationError < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )

@@ -10,6 +10,7 @@ module Aws::NetworkMonitor
     # @!attribute message
     #   @return [String]
     class AccessDeniedException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -20,6 +21,7 @@ module Aws::NetworkMonitor
     # @!attribute message
     #   @return [String]
     class ConflictException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -44,6 +46,7 @@ module Aws::NetworkMonitor
     #   <p>The list of key-value pairs created and assigned to the monitor.</p>
     #   @return [Hash<String, String>]
     class CreateMonitorInput < Struct.new(
+      nil,
       :monitor_name,
       :probes,
       :aggregation_period,
@@ -71,6 +74,7 @@ module Aws::NetworkMonitor
     #   <p>The list of key-value pairs assigned to the monitor.</p>
     #   @return [Hash<String, String>]
     class CreateMonitorOutput < Struct.new(
+      nil,
       :monitor_arn,
       :monitor_name,
       :state,
@@ -101,6 +105,7 @@ module Aws::NetworkMonitor
     #   <p>The list of key-value pairs created and assigned to the monitor.</p>
     #   @return [Hash<String, String>]
     class CreateMonitorProbeInput < Struct.new(
+      nil,
       :source_arn,
       :destination,
       :destination_port,
@@ -125,6 +130,7 @@ module Aws::NetworkMonitor
     #   <p>The list of key-value pairs created and assigned to the probe.</p>
     #   @return [Hash<String, String>]
     class CreateProbeInput < Struct.new(
+      nil,
       :monitor_name,
       :probe,
       :client_token,
@@ -174,6 +180,7 @@ module Aws::NetworkMonitor
     #   <p>The list of key-value pairs assigned to the probe.</p>
     #   @return [Hash<String, String>]
     class CreateProbeOutput < Struct.new(
+      nil,
       :probe_id,
       :probe_arn,
       :source_arn,
@@ -196,6 +203,7 @@ module Aws::NetworkMonitor
     #   <p>The name of the monitor to delete.  </p>
     #   @return [String]
     class DeleteMonitorInput < Struct.new(
+      nil,
       :monitor_name,
       keyword_init: true
     )
@@ -203,6 +211,7 @@ module Aws::NetworkMonitor
     end
 
     class DeleteMonitorOutput < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -215,6 +224,7 @@ module Aws::NetworkMonitor
     #   <p>The ID of the probe to delete. </p>
     #   @return [String]
     class DeleteProbeInput < Struct.new(
+      nil,
       :monitor_name,
       :probe_id,
       keyword_init: true
@@ -223,6 +233,7 @@ module Aws::NetworkMonitor
     end
 
     class DeleteProbeOutput < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -232,6 +243,7 @@ module Aws::NetworkMonitor
     #   <p>The name of the monitor that details are returned for.</p>
     #   @return [String]
     class GetMonitorInput < Struct.new(
+      nil,
       :monitor_name,
       keyword_init: true
     )
@@ -263,6 +275,7 @@ module Aws::NetworkMonitor
     #   <p>The time and date when the monitor was last modified.</p>
     #   @return [Time]
     class GetMonitorOutput < Struct.new(
+      nil,
       :monitor_arn,
       :monitor_name,
       :state,
@@ -283,6 +296,7 @@ module Aws::NetworkMonitor
     #   <p>The ID of the probe to get information about. Run <code>GetMonitor</code> action to get a list of probes and probe IDs for the  monitor.</p>
     #   @return [String]
     class GetProbeInput < Struct.new(
+      nil,
       :monitor_name,
       :probe_id,
       keyword_init: true
@@ -330,6 +344,7 @@ module Aws::NetworkMonitor
     #   <p>The list of key-value pairs assigned to the probe.</p>
     #   @return [Hash<String, String>]
     class GetProbeOutput < Struct.new(
+      nil,
       :probe_id,
       :probe_arn,
       :source_arn,
@@ -352,6 +367,7 @@ module Aws::NetworkMonitor
     # @!attribute message
     #   @return [String]
     class InternalServerException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -371,6 +387,7 @@ module Aws::NetworkMonitor
     #   <p>The list of all monitors and their states.</p>
     #   @return [String]
     class ListMonitorsInput < Struct.new(
+      nil,
       :next_token,
       :max_results,
       :state,
@@ -386,6 +403,7 @@ module Aws::NetworkMonitor
     #   <p>The token for the next page of results.</p>
     #   @return [String]
     class ListMonitorsOutput < Struct.new(
+      nil,
       :monitors,
       :next_token,
       keyword_init: true
@@ -397,6 +415,7 @@ module Aws::NetworkMonitor
     #   <p>The </p>
     #   @return [String]
     class ListTagsForResourceInput < Struct.new(
+      nil,
       :resource_arn,
       keyword_init: true
     )
@@ -407,6 +426,7 @@ module Aws::NetworkMonitor
     #   <p>Lists the tags assigned to the resource.</p>
     #   @return [Hash<String, String>]
     class ListTagsForResourceOutput < Struct.new(
+      nil,
       :tags,
       keyword_init: true
     )
@@ -430,6 +450,7 @@ module Aws::NetworkMonitor
     #   <p>The list of key-value pairs assigned to the monitor.</p>
     #   @return [Hash<String, String>]
     class MonitorSummary < Struct.new(
+      nil,
       :monitor_arn,
       :monitor_name,
       :state,
@@ -481,6 +502,7 @@ module Aws::NetworkMonitor
     #   <p>The list of key-value pairs created and assigned to the probe.</p>
     #   @return [Hash<String, String>]
     class Probe < Struct.new(
+      nil,
       :probe_id,
       :probe_arn,
       :source_arn,
@@ -519,6 +541,7 @@ module Aws::NetworkMonitor
     #   <p>The list of key-value pairs created and assigned to the monitor.</p>
     #   @return [Hash<String, String>]
     class ProbeInput < Struct.new(
+      nil,
       :source_arn,
       :destination,
       :destination_port,
@@ -534,6 +557,7 @@ module Aws::NetworkMonitor
     # @!attribute message
     #   @return [String]
     class ResourceNotFoundException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -544,6 +568,7 @@ module Aws::NetworkMonitor
     # @!attribute message
     #   @return [String]
     class ServiceQuotaExceededException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -557,6 +582,7 @@ module Aws::NetworkMonitor
     #   <p>The list of key-value pairs assigned to the monitor or probe.</p>
     #   @return [Hash<String, String>]
     class TagResourceInput < Struct.new(
+      nil,
       :resource_arn,
       :tags,
       keyword_init: true
@@ -565,6 +591,7 @@ module Aws::NetworkMonitor
     end
 
     class TagResourceOutput < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -574,6 +601,7 @@ module Aws::NetworkMonitor
     # @!attribute message
     #   @return [String]
     class ThrottlingException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -587,6 +615,7 @@ module Aws::NetworkMonitor
     #   <p>The key-value pa</p>
     #   @return [Array<String>]
     class UntagResourceInput < Struct.new(
+      nil,
       :resource_arn,
       :tag_keys,
       keyword_init: true
@@ -595,6 +624,7 @@ module Aws::NetworkMonitor
     end
 
     class UntagResourceOutput < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -607,6 +637,7 @@ module Aws::NetworkMonitor
     #   <p>The aggregation time, in seconds, to change to. This must be either <code>30</code> or <code>60</code>. </p>
     #   @return [Integer]
     class UpdateMonitorInput < Struct.new(
+      nil,
       :monitor_name,
       :aggregation_period,
       keyword_init: true
@@ -630,6 +661,7 @@ module Aws::NetworkMonitor
     #   <p>The list of key-value pairs associated with the monitor.</p>
     #   @return [Hash<String, String>]
     class UpdateMonitorOutput < Struct.new(
+      nil,
       :monitor_arn,
       :monitor_name,
       :state,
@@ -662,6 +694,7 @@ module Aws::NetworkMonitor
     #   <p>he updated packets size for network traffic between the source and destination. This must be a number between <code>56</code> and <code>8500</code>.</p>
     #   @return [Integer]
     class UpdateProbeInput < Struct.new(
+      nil,
       :monitor_name,
       :probe_id,
       :state,
@@ -714,6 +747,7 @@ module Aws::NetworkMonitor
     #   <p>Update tags for a probe.</p>
     #   @return [Hash<String, String>]
     class UpdateProbeOutput < Struct.new(
+      nil,
       :probe_id,
       :probe_arn,
       :source_arn,
@@ -736,6 +770,7 @@ module Aws::NetworkMonitor
     # @!attribute message
     #   @return [String]
     class ValidationException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )

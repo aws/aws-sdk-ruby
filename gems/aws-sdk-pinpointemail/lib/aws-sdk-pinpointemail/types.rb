@@ -11,6 +11,7 @@ module Aws::PinpointEmail
     # @!attribute message
     #   @return [String]
     class AccountSuspendedException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -21,6 +22,7 @@ module Aws::PinpointEmail
     # @!attribute message
     #   @return [String]
     class AlreadyExistsException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -31,6 +33,7 @@ module Aws::PinpointEmail
     # @!attribute message
     #   @return [String]
     class BadRequestException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -50,6 +53,7 @@ module Aws::PinpointEmail
     #               maintainer.</p>
     #   @return [String]
     class BlacklistEntry < Struct.new(
+      nil,
       :rbl_name,
       :listing_time,
       :description,
@@ -70,6 +74,7 @@ module Aws::PinpointEmail
     #               and more. </p>
     #   @return [Types::Content]
     class Body < Struct.new(
+      nil,
       :text,
       :html,
       keyword_init: true
@@ -84,6 +89,7 @@ module Aws::PinpointEmail
     #               Amazon CloudWatch.</p>
     #   @return [Array<Types::CloudWatchDimensionConfiguration>]
     class CloudWatchDestination < Struct.new(
+      nil,
       :dimension_configurations,
       keyword_init: true
     )
@@ -127,6 +133,7 @@ module Aws::PinpointEmail
     #            </ul>
     #   @return [String]
     class CloudWatchDimensionConfiguration < Struct.new(
+      nil,
       :dimension_name,
       :dimension_value_source,
       :default_dimension_value,
@@ -139,6 +146,7 @@ module Aws::PinpointEmail
     # @!attribute message
     #   @return [String]
     class ConcurrentModificationException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -157,6 +165,7 @@ module Aws::PinpointEmail
     #                   <code>UTF-8</code>, <code>ISO-8859-1</code>, or <code>Shift_JIS</code>.</p>
     #   @return [String]
     class Content < Struct.new(
+      nil,
       :data,
       :charset,
       keyword_init: true
@@ -175,6 +184,7 @@ module Aws::PinpointEmail
     #   <p>An object that defines the event destination.</p>
     #   @return [Types::EventDestinationDefinition]
     class CreateConfigurationSetEventDestinationRequest < Struct.new(
+      nil,
       :configuration_set_name,
       :event_destination_name,
       :event_destination,
@@ -186,6 +196,7 @@ module Aws::PinpointEmail
     # <p>An HTTP 200 response if the request succeeds, or an error message if the request
     #             fails.</p>
     class CreateConfigurationSetEventDestinationResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -216,6 +227,7 @@ module Aws::PinpointEmail
     #               with the configuration set.</p>
     #   @return [Array<Types::Tag>]
     class CreateConfigurationSetRequest < Struct.new(
+      nil,
       :configuration_set_name,
       :tracking_options,
       :delivery_options,
@@ -230,6 +242,7 @@ module Aws::PinpointEmail
     # <p>An HTTP 200 response if the request succeeds, or an error message if the request
     #             fails.</p>
     class CreateConfigurationSetResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -244,6 +257,7 @@ module Aws::PinpointEmail
     #               pool.</p>
     #   @return [Array<Types::Tag>]
     class CreateDedicatedIpPoolRequest < Struct.new(
+      nil,
       :pool_name,
       :tags,
       keyword_init: true
@@ -254,6 +268,7 @@ module Aws::PinpointEmail
     # <p>An HTTP 200 response if the request succeeds, or an error message if the request
     #             fails.</p>
     class CreateDedicatedIpPoolResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -281,6 +296,7 @@ module Aws::PinpointEmail
     #               with the predictive inbox placement test.</p>
     #   @return [Array<Types::Tag>]
     class CreateDeliverabilityTestReportRequest < Struct.new(
+      nil,
       :report_name,
       :from_email_address,
       :content,
@@ -301,6 +317,7 @@ module Aws::PinpointEmail
     #               the <code>GetDeliverabilityTestReport</code> to view the results of the test.</p>
     #   @return [String]
     class CreateDeliverabilityTestReportResponse < Struct.new(
+      nil,
       :report_id,
       :deliverability_test_status,
       keyword_init: true
@@ -318,6 +335,7 @@ module Aws::PinpointEmail
     #               with the email identity.</p>
     #   @return [Array<Types::Tag>]
     class CreateEmailIdentityRequest < Struct.new(
+      nil,
       :email_identity,
       :tags,
       keyword_init: true
@@ -343,6 +361,7 @@ module Aws::PinpointEmail
     #               complete the DKIM verification process.</p>
     #   @return [Types::DkimAttributes]
     class CreateEmailIdentityResponse < Struct.new(
+      nil,
       :identity_type,
       :verified_for_sending_status,
       :dkim_attributes,
@@ -370,6 +389,7 @@ module Aws::PinpointEmail
     #               period, broken out by the recipient's email provider.</p>
     #   @return [Array<Types::DomainIspPlacement>]
     class DailyVolume < Struct.new(
+      nil,
       :start_date,
       :volume_statistics,
       :domain_isp_placements,
@@ -408,6 +428,7 @@ module Aws::PinpointEmail
     #   <p>The name of the dedicated IP pool that the IP address is associated with.</p>
     #   @return [String]
     class DedicatedIp < Struct.new(
+      nil,
       :ip,
       :warmup_status,
       :warmup_percentage,
@@ -426,6 +447,7 @@ module Aws::PinpointEmail
     #   <p>The name of the event destination that you want to delete.</p>
     #   @return [String]
     class DeleteConfigurationSetEventDestinationRequest < Struct.new(
+      nil,
       :configuration_set_name,
       :event_destination_name,
       keyword_init: true
@@ -436,6 +458,7 @@ module Aws::PinpointEmail
     # <p>An HTTP 200 response if the request succeeds, or an error message if the request
     #             fails.</p>
     class DeleteConfigurationSetEventDestinationResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -446,6 +469,7 @@ module Aws::PinpointEmail
     #   <p>The name of the configuration set that you want to delete.</p>
     #   @return [String]
     class DeleteConfigurationSetRequest < Struct.new(
+      nil,
       :configuration_set_name,
       keyword_init: true
     )
@@ -455,6 +479,7 @@ module Aws::PinpointEmail
     # <p>An HTTP 200 response if the request succeeds, or an error message if the request
     #             fails.</p>
     class DeleteConfigurationSetResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -465,6 +490,7 @@ module Aws::PinpointEmail
     #   <p>The name of the dedicated IP pool that you want to delete.</p>
     #   @return [String]
     class DeleteDedicatedIpPoolRequest < Struct.new(
+      nil,
       :pool_name,
       keyword_init: true
     )
@@ -474,6 +500,7 @@ module Aws::PinpointEmail
     # <p>An HTTP 200 response if the request succeeds, or an error message if the request
     #             fails.</p>
     class DeleteDedicatedIpPoolResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -487,6 +514,7 @@ module Aws::PinpointEmail
     #               Amazon Pinpoint account.</p>
     #   @return [String]
     class DeleteEmailIdentityRequest < Struct.new(
+      nil,
       :email_identity,
       keyword_init: true
     )
@@ -496,6 +524,7 @@ module Aws::PinpointEmail
     # <p>An HTTP 200 response if the request succeeds, or an error message if the request
     #             fails.</p>
     class DeleteEmailIdentityResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -524,6 +553,7 @@ module Aws::PinpointEmail
     #               the <code>GetDeliverabilityTestReport</code> to view the results of the test.</p>
     #   @return [String]
     class DeliverabilityTestReport < Struct.new(
+      nil,
       :report_id,
       :report_name,
       :subject,
@@ -547,6 +577,7 @@ module Aws::PinpointEmail
     #               set.</p>
     #   @return [String]
     class DeliveryOptions < Struct.new(
+      nil,
       :tls_policy,
       :sending_pool_name,
       keyword_init: true
@@ -568,6 +599,7 @@ module Aws::PinpointEmail
     #               for the email.</p>
     #   @return [Array<String>]
     class Destination < Struct.new(
+      nil,
       :to_addresses,
       :cc_addresses,
       :bcc_addresses,
@@ -624,6 +656,7 @@ module Aws::PinpointEmail
     #               configuration for your domain.</p>
     #   @return [Array<String>]
     class DkimAttributes < Struct.new(
+      nil,
       :signing_enabled,
       :status,
       :tokens,
@@ -699,6 +732,7 @@ module Aws::PinpointEmail
     #   <p>The major email providers who handled the email message.</p>
     #   @return [Array<String>]
     class DomainDeliverabilityCampaign < Struct.new(
+      nil,
       :campaign_id,
       :image_url,
       :subject,
@@ -735,6 +769,7 @@ module Aws::PinpointEmail
     #               domain.</p>
     #   @return [Types::InboxPlacementTrackingOption]
     class DomainDeliverabilityTrackingOption < Struct.new(
+      nil,
       :domain,
       :subscription_start_date,
       :inbox_placement_tracking_option,
@@ -765,6 +800,7 @@ module Aws::PinpointEmail
     #               email provider that arrived in recipients' spam or junk mail folders.</p>
     #   @return [Float]
     class DomainIspPlacement < Struct.new(
+      nil,
       :isp_name,
       :inbox_raw_count,
       :spam_raw_count,
@@ -818,6 +854,7 @@ module Aws::PinpointEmail
     #   <p>The template to use for the email message.</p>
     #   @return [Types::Template]
     class EmailContent < Struct.new(
+      nil,
       :simple,
       :raw,
       :template,
@@ -862,6 +899,7 @@ module Aws::PinpointEmail
     #               for your campaigns.</p>
     #   @return [Types::PinpointDestination]
     class EventDestination < Struct.new(
+      nil,
       :name,
       :enabled,
       :matching_event_types,
@@ -912,6 +950,7 @@ module Aws::PinpointEmail
     #               for your campaigns.</p>
     #   @return [Types::PinpointDestination]
     class EventDestinationDefinition < Struct.new(
+      nil,
       :enabled,
       :matching_event_types,
       :kinesis_firehose_destination,
@@ -931,6 +970,7 @@ module Aws::PinpointEmail
     # <p>A request to obtain information about the email-sending capabilities of your Amazon Pinpoint
     #             account.</p>
     class GetAccountRequest < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -987,6 +1027,7 @@ module Aws::PinpointEmail
     #               maximum sending rate for your account vary based on your specific use case.</p>
     #   @return [Boolean]
     class GetAccountResponse < Struct.new(
+      nil,
       :send_quota,
       :sending_enabled,
       :dedicated_ip_auto_warmup_enabled,
@@ -1012,6 +1053,7 @@ module Aws::PinpointEmail
     #               Amazon SES.</p>
     #   @return [Array<String>]
     class GetBlacklistReportsRequest < Struct.new(
+      nil,
       :blacklist_item_names,
       keyword_init: true
     )
@@ -1024,6 +1066,7 @@ module Aws::PinpointEmail
     #               addresses appears on.</p>
     #   @return [Hash<String, Array<Types::BlacklistEntry>>]
     class GetBlacklistReportsResponse < Struct.new(
+      nil,
       :blacklist_report,
       keyword_init: true
     )
@@ -1036,6 +1079,7 @@ module Aws::PinpointEmail
     #   <p>The name of the configuration set that contains the event destination.</p>
     #   @return [String]
     class GetConfigurationSetEventDestinationsRequest < Struct.new(
+      nil,
       :configuration_set_name,
       keyword_init: true
     )
@@ -1048,6 +1092,7 @@ module Aws::PinpointEmail
     #               the configuration set.</p>
     #   @return [Array<Types::EventDestination>]
     class GetConfigurationSetEventDestinationsResponse < Struct.new(
+      nil,
       :event_destinations,
       keyword_init: true
     )
@@ -1060,6 +1105,7 @@ module Aws::PinpointEmail
     #               about.</p>
     #   @return [String]
     class GetConfigurationSetRequest < Struct.new(
+      nil,
       :configuration_set_name,
       keyword_init: true
     )
@@ -1091,6 +1137,7 @@ module Aws::PinpointEmail
     #               the configuration set.</p>
     #   @return [Array<Types::Tag>]
     class GetConfigurationSetResponse < Struct.new(
+      nil,
       :configuration_set_name,
       :tracking_options,
       :delivery_options,
@@ -1108,6 +1155,7 @@ module Aws::PinpointEmail
     #               has to be a dedicated IP address that's assocaited with your Amazon Pinpoint account.</p>
     #   @return [String]
     class GetDedicatedIpRequest < Struct.new(
+      nil,
       :ip,
       keyword_init: true
     )
@@ -1119,6 +1167,7 @@ module Aws::PinpointEmail
     #   <p>An object that contains information about a dedicated IP address.</p>
     #   @return [Types::DedicatedIp]
     class GetDedicatedIpResponse < Struct.new(
+      nil,
       :dedicated_ip,
       keyword_init: true
     )
@@ -1140,6 +1189,7 @@ module Aws::PinpointEmail
     #               additional results.</p>
     #   @return [Integer]
     class GetDedicatedIpsRequest < Struct.new(
+      nil,
       :pool_name,
       :next_token,
       :page_size,
@@ -1160,6 +1210,7 @@ module Aws::PinpointEmail
     #               passing this token in the <code>NextToken</code> parameter.</p>
     #   @return [String]
     class GetDedicatedIpsResponse < Struct.new(
+      nil,
       :dedicated_ips,
       :next_token,
       keyword_init: true
@@ -1175,6 +1226,7 @@ module Aws::PinpointEmail
     #             to any other fees that you accrue by using Amazon Pinpoint. For more information about the
     #             features and cost of a Deliverability dashboard subscription, see <a href="http://aws.amazon.com/pinpoint/pricing/">Amazon Pinpoint Pricing</a>.</p>
     class GetDeliverabilityDashboardOptionsRequest < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1207,6 +1259,7 @@ module Aws::PinpointEmail
     #               end of the current calendar month.</p>
     #   @return [Array<Types::DomainDeliverabilityTrackingOption>]
     class GetDeliverabilityDashboardOptionsResponse < Struct.new(
+      nil,
       :dashboard_enabled,
       :subscription_expiry_date,
       :account_status,
@@ -1227,6 +1280,7 @@ module Aws::PinpointEmail
     #   <p>A unique string that identifies the predictive inbox placement test.</p>
     #   @return [String]
     class GetDeliverabilityTestReportRequest < Struct.new(
+      nil,
       :report_id,
       keyword_init: true
     )
@@ -1255,6 +1309,7 @@ module Aws::PinpointEmail
     #               the predictive inbox placement test.</p>
     #   @return [Array<Types::Tag>]
     class GetDeliverabilityTestReportResponse < Struct.new(
+      nil,
       :deliverability_test_report,
       :overall_placement,
       :isp_placements,
@@ -1276,6 +1331,7 @@ module Aws::PinpointEmail
     #               Amazon Pinpoint console.</p>
     #   @return [String]
     class GetDomainDeliverabilityCampaignRequest < Struct.new(
+      nil,
       :campaign_id,
       keyword_init: true
     )
@@ -1290,6 +1346,7 @@ module Aws::PinpointEmail
     #   <p>An object that contains the deliverability data for the campaign.</p>
     #   @return [Types::DomainDeliverabilityCampaign]
     class GetDomainDeliverabilityCampaignResponse < Struct.new(
+      nil,
       :domain_deliverability_campaign,
       keyword_init: true
     )
@@ -1310,6 +1367,7 @@ module Aws::PinpointEmail
     #               the <code>StartDate</code>.</p>
     #   @return [Time]
     class GetDomainStatisticsReportRequest < Struct.new(
+      nil,
       :domain,
       :start_date,
       :end_date,
@@ -1331,6 +1389,7 @@ module Aws::PinpointEmail
     #               the <code>EndDate</code>.</p>
     #   @return [Array<Types::DailyVolume>]
     class GetDomainStatisticsReportResponse < Struct.new(
+      nil,
       :overall_volume,
       :daily_volumes,
       keyword_init: true
@@ -1343,6 +1402,7 @@ module Aws::PinpointEmail
     #   <p>The email identity that you want to retrieve details for.</p>
     #   @return [String]
     class GetEmailIdentityRequest < Struct.new(
+      nil,
       :email_identity,
       keyword_init: true
     )
@@ -1383,6 +1443,7 @@ module Aws::PinpointEmail
     #               the email identity.</p>
     #   @return [Array<Types::Tag>]
     class GetEmailIdentityResponse < Struct.new(
+      nil,
       :identity_type,
       :feedback_forwarding_status,
       :verified_for_sending_status,
@@ -1429,6 +1490,7 @@ module Aws::PinpointEmail
     #               and that you authorize Amazon Pinpoint to send email from that identity.</p>
     #   @return [Boolean]
     class IdentityInfo < Struct.new(
+      nil,
       :identity_type,
       :identity_name,
       :sending_enabled,
@@ -1454,6 +1516,7 @@ module Aws::PinpointEmail
     #               applies to.</p>
     #   @return [Array<String>]
     class InboxPlacementTrackingOption < Struct.new(
+      nil,
       :global,
       :tracked_isps,
       keyword_init: true
@@ -1475,6 +1538,7 @@ module Aws::PinpointEmail
     #   <p>An object that contains inbox placement metrics for a specific email provider.</p>
     #   @return [Types::PlacementStatistics]
     class IspPlacement < Struct.new(
+      nil,
       :isp_name,
       :placement_statistics,
       keyword_init: true
@@ -1493,6 +1557,7 @@ module Aws::PinpointEmail
     #               to.</p>
     #   @return [String]
     class KinesisFirehoseDestination < Struct.new(
+      nil,
       :iam_role_arn,
       :delivery_stream_arn,
       keyword_init: true
@@ -1504,6 +1569,7 @@ module Aws::PinpointEmail
     # @!attribute message
     #   @return [String]
     class LimitExceededException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -1523,6 +1589,7 @@ module Aws::PinpointEmail
     #               additional results.</p>
     #   @return [Integer]
     class ListConfigurationSetsRequest < Struct.new(
+      nil,
       :next_token,
       :page_size,
       keyword_init: true
@@ -1542,6 +1609,7 @@ module Aws::PinpointEmail
     #                   <code>NextToken</code> parameter.</p>
     #   @return [String]
     class ListConfigurationSetsResponse < Struct.new(
+      nil,
       :configuration_sets,
       :next_token,
       keyword_init: true
@@ -1561,6 +1629,7 @@ module Aws::PinpointEmail
     #               additional results.</p>
     #   @return [Integer]
     class ListDedicatedIpPoolsRequest < Struct.new(
+      nil,
       :next_token,
       :page_size,
       keyword_init: true
@@ -1579,6 +1648,7 @@ module Aws::PinpointEmail
     #               in the <code>NextToken</code> parameter.</p>
     #   @return [String]
     class ListDedicatedIpPoolsResponse < Struct.new(
+      nil,
       :dedicated_ip_pools,
       :next_token,
       keyword_init: true
@@ -1600,6 +1670,7 @@ module Aws::PinpointEmail
     #           <p>The value you specify has to be at least 0, and can be no more than 1000.</p>
     #   @return [Integer]
     class ListDeliverabilityTestReportsRequest < Struct.new(
+      nil,
       :next_token,
       :page_size,
       keyword_init: true
@@ -1618,6 +1689,7 @@ module Aws::PinpointEmail
     #               this token in the <code>NextToken</code> parameter.</p>
     #   @return [String]
     class ListDeliverabilityTestReportsResponse < Struct.new(
+      nil,
       :deliverability_test_reports,
       :next_token,
       keyword_init: true
@@ -1654,6 +1726,7 @@ module Aws::PinpointEmail
     #               results.</p>
     #   @return [Integer]
     class ListDomainDeliverabilityCampaignsRequest < Struct.new(
+      nil,
       :start_date,
       :end_date,
       :subscribed_domain,
@@ -1678,6 +1751,7 @@ module Aws::PinpointEmail
     #               position of the campaign in the list of campaigns.</p>
     #   @return [String]
     class ListDomainDeliverabilityCampaignsResponse < Struct.new(
+      nil,
       :domain_deliverability_campaigns,
       :next_token,
       keyword_init: true
@@ -1700,6 +1774,7 @@ module Aws::PinpointEmail
     #           <p>The value you specify has to be at least 0, and can be no more than 1000.</p>
     #   @return [Integer]
     class ListEmailIdentitiesRequest < Struct.new(
+      nil,
       :next_token,
       :page_size,
       keyword_init: true
@@ -1720,6 +1795,7 @@ module Aws::PinpointEmail
     #               parameter.</p>
     #   @return [String]
     class ListEmailIdentitiesResponse < Struct.new(
+      nil,
       :email_identities,
       :next_token,
       keyword_init: true
@@ -1732,6 +1808,7 @@ module Aws::PinpointEmail
     #               information for.</p>
     #   @return [String]
     class ListTagsForResourceRequest < Struct.new(
+      nil,
       :resource_arn,
       keyword_init: true
     )
@@ -1744,6 +1821,7 @@ module Aws::PinpointEmail
     #                   (<code>Value</code>)</p>
     #   @return [Array<Types::Tag>]
     class ListTagsForResourceResponse < Struct.new(
+      nil,
       :tags,
       keyword_init: true
     )
@@ -1790,6 +1868,7 @@ module Aws::PinpointEmail
     #               states.</p>
     #   @return [String]
     class MailFromAttributes < Struct.new(
+      nil,
       :mail_from_domain,
       :mail_from_domain_status,
       :behavior_on_mx_failure,
@@ -1802,6 +1881,7 @@ module Aws::PinpointEmail
     # @!attribute message
     #   @return [String]
     class MailFromDomainNotVerifiedException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -1820,6 +1900,7 @@ module Aws::PinpointEmail
     #               version of the message, or both.</p>
     #   @return [Types::Body]
     class Message < Struct.new(
+      nil,
       :subject,
       :body,
       keyword_init: true
@@ -1831,6 +1912,7 @@ module Aws::PinpointEmail
     # @!attribute message
     #   @return [String]
     class MessageRejected < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -1867,6 +1949,7 @@ module Aws::PinpointEmail
     #            </ul>
     #   @return [String]
     class MessageTag < Struct.new(
+      nil,
       :name,
       :value,
       keyword_init: true
@@ -1878,6 +1961,7 @@ module Aws::PinpointEmail
     # @!attribute message
     #   @return [String]
     class NotFoundException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -1899,6 +1983,7 @@ module Aws::PinpointEmail
     #               providers.</p>
     #   @return [Array<Types::DomainIspPlacement>]
     class OverallVolume < Struct.new(
+      nil,
       :volume_statistics,
       :read_rate_percent,
       :domain_isp_placements,
@@ -1915,6 +2000,7 @@ module Aws::PinpointEmail
     #               events to.</p>
     #   @return [String]
     class PinpointDestination < Struct.new(
+      nil,
       :application_arn,
       keyword_init: true
     )
@@ -1942,6 +2028,7 @@ module Aws::PinpointEmail
     #               (DKIM) during the predictive inbox placement test.</p>
     #   @return [Float]
     class PlacementStatistics < Struct.new(
+      nil,
       :inbox_percentage,
       :spam_percentage,
       :missing_percentage,
@@ -1960,6 +2047,7 @@ module Aws::PinpointEmail
     #               it.</p>
     #   @return [Boolean]
     class PutAccountDedicatedIpWarmupAttributesRequest < Struct.new(
+      nil,
       :auto_warmup_enabled,
       keyword_init: true
     )
@@ -1969,6 +2057,7 @@ module Aws::PinpointEmail
     # <p>An HTTP 200 response if the request succeeds, or an error message if the request
     #             fails.</p>
     class PutAccountDedicatedIpWarmupAttributesResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1984,6 +2073,7 @@ module Aws::PinpointEmail
     #           </note>
     #   @return [Boolean]
     class PutAccountSendingAttributesRequest < Struct.new(
+      nil,
       :sending_enabled,
       keyword_init: true
     )
@@ -1993,6 +2083,7 @@ module Aws::PinpointEmail
     # <p>An HTTP 200 response if the request succeeds, or an error message if the request
     #             fails.</p>
     class PutAccountSendingAttributesResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -2014,6 +2105,7 @@ module Aws::PinpointEmail
     #               set.</p>
     #   @return [String]
     class PutConfigurationSetDeliveryOptionsRequest < Struct.new(
+      nil,
       :configuration_set_name,
       :tls_policy,
       :sending_pool_name,
@@ -2025,6 +2117,7 @@ module Aws::PinpointEmail
     # <p>An HTTP 200 response if the request succeeds, or an error message if the request
     #             fails.</p>
     class PutConfigurationSetDeliveryOptionsResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -2042,6 +2135,7 @@ module Aws::PinpointEmail
     #               configuration set.</p>
     #   @return [Boolean]
     class PutConfigurationSetReputationOptionsRequest < Struct.new(
+      nil,
       :configuration_set_name,
       :reputation_metrics_enabled,
       keyword_init: true
@@ -2052,6 +2146,7 @@ module Aws::PinpointEmail
     # <p>An HTTP 200 response if the request succeeds, or an error message if the request
     #             fails.</p>
     class PutConfigurationSetReputationOptionsResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -2068,6 +2163,7 @@ module Aws::PinpointEmail
     #                   <code>false</code>, email sending is disabled for the configuration set.</p>
     #   @return [Boolean]
     class PutConfigurationSetSendingOptionsRequest < Struct.new(
+      nil,
       :configuration_set_name,
       :sending_enabled,
       keyword_init: true
@@ -2078,6 +2174,7 @@ module Aws::PinpointEmail
     # <p>An HTTP 200 response if the request succeeds, or an error message if the request
     #             fails.</p>
     class PutConfigurationSetSendingOptionsResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -2093,6 +2190,7 @@ module Aws::PinpointEmail
     #   <p>The domain that you want to use to track open and click events.</p>
     #   @return [String]
     class PutConfigurationSetTrackingOptionsRequest < Struct.new(
+      nil,
       :configuration_set_name,
       :custom_redirect_domain,
       keyword_init: true
@@ -2103,6 +2201,7 @@ module Aws::PinpointEmail
     # <p>An HTTP 200 response if the request succeeds, or an error message if the request
     #             fails.</p>
     class PutConfigurationSetTrackingOptionsResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -2118,6 +2217,7 @@ module Aws::PinpointEmail
     #               specify an IP pool that already exists.</p>
     #   @return [String]
     class PutDedicatedIpInPoolRequest < Struct.new(
+      nil,
       :ip,
       :destination_pool_name,
       keyword_init: true
@@ -2128,6 +2228,7 @@ module Aws::PinpointEmail
     # <p>An HTTP 200 response if the request succeeds, or an error message if the request
     #             fails.</p>
     class PutDedicatedIpInPoolResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -2143,6 +2244,7 @@ module Aws::PinpointEmail
     #               address.</p>
     #   @return [Integer]
     class PutDedicatedIpWarmupAttributesRequest < Struct.new(
+      nil,
       :ip,
       :warmup_percentage,
       keyword_init: true
@@ -2153,6 +2255,7 @@ module Aws::PinpointEmail
     # <p>An HTTP 200 response if the request succeeds, or an error message if the request
     #             fails.</p>
     class PutDedicatedIpWarmupAttributesResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -2174,6 +2277,7 @@ module Aws::PinpointEmail
     #               enabled the Deliverability dashboard for.</p>
     #   @return [Array<Types::DomainDeliverabilityTrackingOption>]
     class PutDeliverabilityDashboardOptionRequest < Struct.new(
+      nil,
       :dashboard_enabled,
       :subscribed_domains,
       keyword_init: true
@@ -2184,6 +2288,7 @@ module Aws::PinpointEmail
     # <p>A response that indicates whether the Deliverability dashboard is enabled for your Amazon Pinpoint
     #             account.</p>
     class PutDeliverabilityDashboardOptionResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -2201,6 +2306,7 @@ module Aws::PinpointEmail
     #               messages that Amazon Pinpoint sends from the identity aren't DKIM-signed.</p>
     #   @return [Boolean]
     class PutEmailIdentityDkimAttributesRequest < Struct.new(
+      nil,
       :email_identity,
       :signing_enabled,
       keyword_init: true
@@ -2211,6 +2317,7 @@ module Aws::PinpointEmail
     # <p>An HTTP 200 response if the request succeeds, or an error message if the request
     #             fails.</p>
     class PutEmailIdentityDkimAttributesResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -2234,6 +2341,7 @@ module Aws::PinpointEmail
     #               notification when these events occur (even if this setting is disabled).</p>
     #   @return [Boolean]
     class PutEmailIdentityFeedbackAttributesRequest < Struct.new(
+      nil,
       :email_identity,
       :email_forwarding_enabled,
       keyword_init: true
@@ -2244,6 +2352,7 @@ module Aws::PinpointEmail
     # <p>An HTTP 200 response if the request succeeds, or an error message if the request
     #             fails.</p>
     class PutEmailIdentityFeedbackAttributesResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -2281,6 +2390,7 @@ module Aws::PinpointEmail
     #               states.</p>
     #   @return [String]
     class PutEmailIdentityMailFromAttributesRequest < Struct.new(
+      nil,
       :email_identity,
       :mail_from_domain,
       :behavior_on_mx_failure,
@@ -2292,6 +2402,7 @@ module Aws::PinpointEmail
     # <p>An HTTP 200 response if the request succeeds, or an error message if the request
     #             fails.</p>
     class PutEmailIdentityMailFromAttributesResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -2330,6 +2441,7 @@ module Aws::PinpointEmail
     #            </ul>
     #   @return [String]
     class RawMessage < Struct.new(
+      nil,
       :data,
       keyword_init: true
     )
@@ -2349,6 +2461,7 @@ module Aws::PinpointEmail
     #               starting from the date of the fresh start.</p>
     #   @return [Time]
     class ReputationOptions < Struct.new(
+      nil,
       :reputation_metrics_enabled,
       :last_fresh_start,
       keyword_init: true
@@ -2390,6 +2503,7 @@ module Aws::PinpointEmail
     #   <p>The name of the configuration set that you want to use when sending the email.</p>
     #   @return [String]
     class SendEmailRequest < Struct.new(
+      nil,
       :from_email_address,
       :destination,
       :reply_to_addresses,
@@ -2414,6 +2528,7 @@ module Aws::PinpointEmail
     #           </note>
     #   @return [String]
     class SendEmailResponse < Struct.new(
+      nil,
       :message_id,
       keyword_init: true
     )
@@ -2437,6 +2552,7 @@ module Aws::PinpointEmail
     #               past 24 hours.</p>
     #   @return [Float]
     class SendQuota < Struct.new(
+      nil,
       :max24_hour_send,
       :max_send_rate,
       :sent_last24_hours,
@@ -2459,6 +2575,7 @@ module Aws::PinpointEmail
     #                   <code>false</code>, email sending is disabled for the configuration set.</p>
     #   @return [Boolean]
     class SendingOptions < Struct.new(
+      nil,
       :sending_enabled,
       keyword_init: true
     )
@@ -2475,6 +2592,7 @@ module Aws::PinpointEmail
     # @!attribute message
     #   @return [String]
     class SendingPausedException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -2489,6 +2607,7 @@ module Aws::PinpointEmail
     #                   Guide</a>.</p>
     #   @return [String]
     class SnsDestination < Struct.new(
+      nil,
       :topic_arn,
       keyword_init: true
     )
@@ -2539,6 +2658,7 @@ module Aws::PinpointEmail
     #               will set the value to an empty string.</p>
     #   @return [String]
     class Tag < Struct.new(
+      nil,
       :key,
       :value,
       keyword_init: true
@@ -2557,6 +2677,7 @@ module Aws::PinpointEmail
     #               characters.</p>
     #   @return [Array<Types::Tag>]
     class TagResourceRequest < Struct.new(
+      nil,
       :resource_arn,
       :tags,
       keyword_init: true
@@ -2565,6 +2686,7 @@ module Aws::PinpointEmail
     end
 
     class TagResourceResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -2577,6 +2699,7 @@ module Aws::PinpointEmail
     #   <p>An object that defines the values to use for message variables in the template. This object is a set of key-value pairs. Each key defines a message variable in the template. The corresponding value defines the value to use for that variable.</p>
     #   @return [String]
     class Template < Struct.new(
+      nil,
       :template_arn,
       :template_data,
       keyword_init: true
@@ -2588,6 +2711,7 @@ module Aws::PinpointEmail
     # @!attribute message
     #   @return [String]
     class TooManyRequestsException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -2605,6 +2729,7 @@ module Aws::PinpointEmail
     #   <p>The domain that you want to use for tracking open and click events.</p>
     #   @return [String]
     class TrackingOptions < Struct.new(
+      nil,
       :custom_redirect_domain,
       keyword_init: true
     )
@@ -2625,6 +2750,7 @@ module Aws::PinpointEmail
     #           </p>
     #   @return [Array<String>]
     class UntagResourceRequest < Struct.new(
+      nil,
       :resource_arn,
       :tag_keys,
       keyword_init: true
@@ -2633,6 +2759,7 @@ module Aws::PinpointEmail
     end
 
     class UntagResourceResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -2651,6 +2778,7 @@ module Aws::PinpointEmail
     #   <p>An object that defines the event destination.</p>
     #   @return [Types::EventDestinationDefinition]
     class UpdateConfigurationSetEventDestinationRequest < Struct.new(
+      nil,
       :configuration_set_name,
       :event_destination_name,
       :event_destination,
@@ -2662,6 +2790,7 @@ module Aws::PinpointEmail
     # <p>An HTTP 200 response if the request succeeds, or an error message if the request
     #             fails.</p>
     class UpdateConfigurationSetEventDestinationResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -2685,6 +2814,7 @@ module Aws::PinpointEmail
     #               in recipients' spam or junk mail folders.</p>
     #   @return [Integer]
     class VolumeStatistics < Struct.new(
+      nil,
       :inbox_raw_count,
       :spam_raw_count,
       :projected_inbox,

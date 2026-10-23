@@ -10,6 +10,7 @@ module Aws::MigrationHubConfig
     # @!attribute message
     #   @return [String]
     class AccessDeniedException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -28,6 +29,7 @@ module Aws::MigrationHubConfig
     #         the caller has permission to make the call.</p>
     #   @return [Boolean]
     class CreateHomeRegionControlRequest < Struct.new(
+      nil,
       :home_region,
       :target,
       :dry_run,
@@ -41,6 +43,7 @@ module Aws::MigrationHubConfig
     #         call to <code>CreateHomeRegionControl</code>.</p>
     #   @return [Types::HomeRegionControl]
     class CreateHomeRegionControlResult < Struct.new(
+      nil,
       :home_region_control,
       keyword_init: true
     )
@@ -52,6 +55,7 @@ module Aws::MigrationHubConfig
     #         that begins with "hrc-" followed by 12 lowercase letters and numbers.</p>
     #   @return [String]
     class DeleteHomeRegionControlRequest < Struct.new(
+      nil,
       :control_id,
       keyword_init: true
     )
@@ -59,6 +63,7 @@ module Aws::MigrationHubConfig
     end
 
     class DeleteHomeRegionControlResult < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -85,6 +90,7 @@ module Aws::MigrationHubConfig
     #           <code>NextToken</code>.</p>
     #   @return [String]
     class DescribeHomeRegionControlsRequest < Struct.new(
+      nil,
       :control_id,
       :home_region,
       :target,
@@ -104,6 +110,7 @@ module Aws::MigrationHubConfig
     #           <code>NextToken</code>.</p>
     #   @return [String]
     class DescribeHomeRegionControlsResult < Struct.new(
+      nil,
       :home_region_controls,
       :next_token,
       keyword_init: true
@@ -116,6 +123,7 @@ module Aws::MigrationHubConfig
     # @!attribute message
     #   @return [String]
     class DryRunOperation < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -123,6 +131,7 @@ module Aws::MigrationHubConfig
     end
 
     class GetHomeRegionRequest < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -132,6 +141,7 @@ module Aws::MigrationHubConfig
     #   <p>The name of the home region of the calling account.</p>
     #   @return [String]
     class GetHomeRegionResult < Struct.new(
+      nil,
       :home_region,
       keyword_init: true
     )
@@ -159,6 +169,7 @@ module Aws::MigrationHubConfig
     #           <code>CreateHomeregionControl</code> and set the home region for the account.</p>
     #   @return [Time]
     class HomeRegionControl < Struct.new(
+      nil,
       :control_id,
       :home_region,
       :target,
@@ -173,6 +184,7 @@ module Aws::MigrationHubConfig
     # @!attribute message
     #   @return [String]
     class InternalServerError < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -184,6 +196,7 @@ module Aws::MigrationHubConfig
     # @!attribute message
     #   @return [String]
     class InvalidInputException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -195,6 +208,7 @@ module Aws::MigrationHubConfig
     # @!attribute message
     #   @return [String]
     class ServiceUnavailableException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -212,6 +226,7 @@ module Aws::MigrationHubConfig
     #         which the control was created. (This must be the current account.) </p>
     #   @return [String]
     class Target < Struct.new(
+      nil,
       :type,
       :id,
       keyword_init: true
@@ -226,6 +241,7 @@ module Aws::MigrationHubConfig
     #   <p>The number of seconds the caller should wait before retrying.</p>
     #   @return [Integer]
     class ThrottlingException < Struct.new(
+      nil,
       :message,
       :retry_after_seconds,
       keyword_init: true

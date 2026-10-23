@@ -10,6 +10,7 @@ module Aws::QApps
     # @!attribute message
     #   @return [String]
     class AccessDeniedException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -27,6 +28,7 @@ module Aws::QApps
     #   <p>A flag indicating whether the Q App's definition can be edited by the user.</p>
     #   @return [Boolean]
     class AppDefinition < Struct.new(
+      nil,
       :app_definition_version,
       :cards,
       :can_edit,
@@ -43,6 +45,7 @@ module Aws::QApps
     #   <p>The initial prompt displayed when the Q App is started.</p>
     #   @return [String]
     class AppDefinitionInput < Struct.new(
+      nil,
       :cards,
       :initial_prompt,
       keyword_init: true
@@ -57,6 +60,7 @@ module Aws::QApps
     #   <p>The unique identifier of the library item to associate the review with.</p>
     #   @return [String]
     class AssociateLibraryItemReviewInput < Struct.new(
+      nil,
       :instance_id,
       :library_item_id,
       keyword_init: true
@@ -71,6 +75,7 @@ module Aws::QApps
     #   <p>The ID of the Amazon Q App to associate with the user.</p>
     #   @return [String]
     class AssociateQAppWithUserInput < Struct.new(
+      nil,
       :instance_id,
       :app_id,
       keyword_init: true
@@ -110,6 +115,7 @@ module Aws::QApps
     #   <p>Performs a <i>less than or equals</i> operation on two document attributes or metadata fields.Supported for the following <a href="https://docs.aws.amazon.com/amazonq/latest/api-reference/API_DocumentAttributeValue.html">document attribute value type</a>: <code>dateValue</code> and <code>longValue</code>. </p>
     #   @return [Types::DocumentAttribute]
     class AttributeFilter < Struct.new(
+      nil,
       :and_all_filters,
       :or_all_filters,
       :not_filter,
@@ -132,6 +138,7 @@ module Aws::QApps
     #   <p>The list of category objects to be created</p>
     #   @return [Array<Types::BatchCreateCategoryInputCategory>]
     class BatchCreateCategoryInput < Struct.new(
+      nil,
       :instance_id,
       :categories,
       keyword_init: true
@@ -150,6 +157,7 @@ module Aws::QApps
     #   <p>The color to be associated with a category. The color must be a hexadecimal value of either 3 or 6 digits.</p>
     #   @return [String]
     class BatchCreateCategoryInputCategory < Struct.new(
+      nil,
       :id,
       :title,
       :color,
@@ -165,6 +173,7 @@ module Aws::QApps
     #   <p>The list of IDs of the categories to be deleted.</p>
     #   @return [Array<String>]
     class BatchDeleteCategoryInput < Struct.new(
+      nil,
       :instance_id,
       :categories,
       keyword_init: true
@@ -179,6 +188,7 @@ module Aws::QApps
     #   <p>The list of categories to be updated with their new values.</p>
     #   @return [Array<Types::CategoryInput>]
     class BatchUpdateCategoryInput < Struct.new(
+      nil,
       :instance_id,
       :categories,
       keyword_init: true
@@ -267,6 +277,7 @@ module Aws::QApps
     #   <p>A list of previous submissions, if the card is a form card.</p>
     #   @return [Array<Types::Submission>]
     class CardStatus < Struct.new(
+      nil,
       :current_state,
       :current_value,
       :submissions,
@@ -286,6 +297,7 @@ module Aws::QApps
     #   <p>The structure that describes how the current form card value is mutated. Only applies for form cards when multiple responses are allowed.</p>
     #   @return [Types::SubmissionMutation]
     class CardValue < Struct.new(
+      nil,
       :card_id,
       :value,
       :submission_mutation,
@@ -308,6 +320,7 @@ module Aws::QApps
     #   <p>The number of published Amazon Q Apps associated with a category</p>
     #   @return [Integer]
     class Category < Struct.new(
+      nil,
       :id,
       :title,
       :color,
@@ -328,6 +341,7 @@ module Aws::QApps
     #   <p>The color of the category, represented as a hexadecimal value of either 3 or 6 digits.</p>
     #   @return [String]
     class CategoryInput < Struct.new(
+      nil,
       :id,
       :title,
       :color,
@@ -346,6 +360,7 @@ module Aws::QApps
     #   <p>The type of the resource</p>
     #   @return [String]
     class ConflictException < Struct.new(
+      nil,
       :message,
       :resource_id,
       :resource_type,
@@ -364,6 +379,7 @@ module Aws::QApps
     #   <p>The type of the resource</p>
     #   @return [String]
     class ContentTooLargeException < Struct.new(
+      nil,
       :message,
       :resource_id,
       :resource_type,
@@ -380,6 +396,7 @@ module Aws::QApps
     #   <p>The type of the conversation message.</p>
     #   @return [String]
     class ConversationMessage < Struct.new(
+      nil,
       :body,
       :type,
       keyword_init: true
@@ -400,6 +417,7 @@ module Aws::QApps
     #   <p>The categories to associate with the library item for easier discovery.</p>
     #   @return [Array<String>]
     class CreateLibraryItemInput < Struct.new(
+      nil,
       :instance_id,
       :app_id,
       :app_version,
@@ -434,6 +452,7 @@ module Aws::QApps
     #   <p>Indicates whether the library item has been verified.</p>
     #   @return [Boolean]
     class CreateLibraryItemOutput < Struct.new(
+      nil,
       :library_item_id,
       :status,
       :created_at,
@@ -469,6 +488,7 @@ module Aws::QApps
     #   <p>The unique identifier of the Q App session the file is associated with, if applicable.</p>
     #   @return [String]
     class CreatePresignedUrlInput < Struct.new(
+      nil,
       :instance_id,
       :card_id,
       :app_id,
@@ -494,6 +514,7 @@ module Aws::QApps
     #   <p>The date and time that the presigned URL will expire in ISO 8601 format.</p>
     #   @return [Time]
     class CreatePresignedUrlOutput < Struct.new(
+      nil,
       :file_id,
       :presigned_url,
       :presigned_url_fields,
@@ -519,6 +540,7 @@ module Aws::QApps
     #   <p>Optional tags to associate with the new Q App.</p>
     #   @return [Hash<String, String>]
     class CreateQAppInput < Struct.new(
+      nil,
       :instance_id,
       :title,
       :description,
@@ -566,6 +588,7 @@ module Aws::QApps
     #   <p>The capabilities required to run the Q App, such as file upload or third-party integrations.</p>
     #   @return [Array<String>]
     class CreateQAppOutput < Struct.new(
+      nil,
       :app_id,
       :app_arn,
       :title,
@@ -590,6 +613,7 @@ module Aws::QApps
     #   <p>The unique identifier of the library item to delete.</p>
     #   @return [String]
     class DeleteLibraryItemInput < Struct.new(
+      nil,
       :instance_id,
       :library_item_id,
       keyword_init: true
@@ -604,6 +628,7 @@ module Aws::QApps
     #   <p>The unique identifier of the Q App to delete.</p>
     #   @return [String]
     class DeleteQAppInput < Struct.new(
+      nil,
       :instance_id,
       :app_id,
       keyword_init: true
@@ -618,6 +643,7 @@ module Aws::QApps
     #   <p>The unique identifier of the Amazon Q App for which to retrieve permissions.</p>
     #   @return [String]
     class DescribeQAppPermissionsInput < Struct.new(
+      nil,
       :instance_id,
       :app_id,
       keyword_init: true
@@ -635,6 +661,7 @@ module Aws::QApps
     #   <p>The list of permissions granted for the Amazon Q App.</p>
     #   @return [Array<Types::PermissionOutput>]
     class DescribeQAppPermissionsOutput < Struct.new(
+      nil,
       :resource_arn,
       :app_id,
       :permissions,
@@ -650,6 +677,7 @@ module Aws::QApps
     #   <p>The unique identifier of the library item to remove the review from.</p>
     #   @return [String]
     class DisassociateLibraryItemReviewInput < Struct.new(
+      nil,
       :instance_id,
       :library_item_id,
       keyword_init: true
@@ -664,6 +692,7 @@ module Aws::QApps
     #   <p>The unique identifier of the Q App to disassociate from the user.</p>
     #   @return [String]
     class DisassociateQAppFromUserInput < Struct.new(
+      nil,
       :instance_id,
       :app_id,
       keyword_init: true
@@ -679,6 +708,7 @@ module Aws::QApps
     #   <p>The value of the attribute. </p>
     #   @return [Types::DocumentAttributeValue]
     class DocumentAttribute < Struct.new(
+      nil,
       :name,
       :value,
       keyword_init: true
@@ -723,6 +753,7 @@ module Aws::QApps
     #   <p>The unique identifier of the Q App data collection session.</p>
     #   @return [String]
     class ExportQAppSessionDataInput < Struct.new(
+      nil,
       :instance_id,
       :session_id,
       keyword_init: true
@@ -740,6 +771,7 @@ module Aws::QApps
     #   <p>The Amazon Resource Name (ARN) of the Q App data collection session.</p>
     #   @return [String]
     class ExportQAppSessionDataOutput < Struct.new(
+      nil,
       :csv_file_link,
       :expires_at,
       :session_arn,
@@ -771,6 +803,7 @@ module Aws::QApps
     #   <p>A flag indicating if the user can override the default file for the upload card.</p>
     #   @return [Boolean]
     class FileUploadCard < Struct.new(
+      nil,
       :id,
       :title,
       :dependencies,
@@ -803,6 +836,7 @@ module Aws::QApps
     #   <p>A flag indicating if the user can override the default file for the upload card.</p>
     #   @return [Boolean]
     class FileUploadCardInput < Struct.new(
+      nil,
       :title,
       :id,
       :type,
@@ -839,6 +873,7 @@ module Aws::QApps
     #   <p>The compute mode of the form input card. This property determines whether individual participants of a data collection session can submit multiple response or one response. A compute mode of <code>append</code> shall allow participants to submit the same form multiple times with different values. A compute mode of <code>replace</code>code&gt; shall overwrite the current value for each participant.</p>
     #   @return [String]
     class FormInputCard < Struct.new(
+      nil,
       :id,
       :title,
       :dependencies,
@@ -867,6 +902,7 @@ module Aws::QApps
     #   <p>The compute mode of the form input card. This property determines whether individual participants of a data collection session can submit multiple response or one response. A compute mode of <code>append</code> shall allow participants to submit the same form multiple times with different values. A compute mode of <code>replace</code>code&gt; shall overwrite the current value for each participant.</p>
     #   @return [String]
     class FormInputCardInput < Struct.new(
+      nil,
       :title,
       :id,
       :type,
@@ -887,6 +923,7 @@ module Aws::QApps
     #   <p>The JSON schema that defines the shape of the response data.</p>
     #   @return [JSON]
     class FormInputCardMetadata < Struct.new(
+      nil,
       :schema,
       keyword_init: true
     )
@@ -903,6 +940,7 @@ module Aws::QApps
     #   <p>The unique identifier of the Amazon Q App associated with the library item.</p>
     #   @return [String]
     class GetLibraryItemInput < Struct.new(
+      nil,
       :instance_id,
       :library_item_id,
       :app_id,
@@ -951,6 +989,7 @@ module Aws::QApps
     #   <p>Indicates whether the library item has been verified.</p>
     #   @return [Boolean]
     class GetLibraryItemOutput < Struct.new(
+      nil,
       :library_item_id,
       :app_id,
       :app_version,
@@ -979,6 +1018,7 @@ module Aws::QApps
     #   <p>The version of the Q App.</p>
     #   @return [Integer]
     class GetQAppInput < Struct.new(
+      nil,
       :instance_id,
       :app_id,
       :app_version,
@@ -1027,6 +1067,7 @@ module Aws::QApps
     #   <p>The full definition of the Q App, specifying the cards and flow.</p>
     #   @return [Types::AppDefinition]
     class GetQAppOutput < Struct.new(
+      nil,
       :app_id,
       :app_arn,
       :title,
@@ -1052,6 +1093,7 @@ module Aws::QApps
     #   <p>The unique identifier of the Q App session to retrieve.</p>
     #   @return [String]
     class GetQAppSessionInput < Struct.new(
+      nil,
       :instance_id,
       :session_id,
       keyword_init: true
@@ -1066,6 +1108,7 @@ module Aws::QApps
     #   <p>The unique identifier of the Q App session.</p>
     #   @return [String]
     class GetQAppSessionMetadataInput < Struct.new(
+      nil,
       :instance_id,
       :session_id,
       keyword_init: true
@@ -1089,6 +1132,7 @@ module Aws::QApps
     #   <p>Indicates whether the current user is the owner of the Q App session.</p>
     #   @return [Boolean]
     class GetQAppSessionMetadataOutput < Struct.new(
+      nil,
       :session_id,
       :session_arn,
       :session_name,
@@ -1124,6 +1168,7 @@ module Aws::QApps
     #   <p>Indicates whether the current user is the owner of the Q App data collection session.</p>
     #   @return [Boolean]
     class GetQAppSessionOutput < Struct.new(
+      nil,
       :session_id,
       :session_arn,
       :session_name,
@@ -1159,6 +1204,7 @@ module Aws::QApps
     #   <p>The unique identifier of the Q App session the file is associated with, if applicable.</p>
     #   @return [String]
     class ImportDocumentInput < Struct.new(
+      nil,
       :instance_id,
       :card_id,
       :app_id,
@@ -1175,6 +1221,7 @@ module Aws::QApps
     #   <p>The unique identifier assigned to the uploaded file.</p>
     #   @return [String]
     class ImportDocumentOutput < Struct.new(
+      nil,
       :file_id,
       keyword_init: true
     )
@@ -1188,6 +1235,7 @@ module Aws::QApps
     #   <p>The number of seconds to wait before retrying the operation</p>
     #   @return [Integer]
     class InternalServerException < Struct.new(
+      nil,
       :message,
       :retry_after_seconds,
       keyword_init: true
@@ -1236,6 +1284,7 @@ module Aws::QApps
     #   <p>Indicates whether the library item has been verified.</p>
     #   @return [Boolean]
     class LibraryItemMember < Struct.new(
+      nil,
       :library_item_id,
       :app_id,
       :app_version,
@@ -1258,6 +1307,7 @@ module Aws::QApps
     #   <p>The unique identifier of the Amazon Q Business application environment instance.</p>
     #   @return [String]
     class ListCategoriesInput < Struct.new(
+      nil,
       :instance_id,
       keyword_init: true
     )
@@ -1268,6 +1318,7 @@ module Aws::QApps
     #   <p>The categories of a Amazon Q Business application environment instance.</p>
     #   @return [Array<Types::Category>]
     class ListCategoriesOutput < Struct.new(
+      nil,
       :categories,
       keyword_init: true
     )
@@ -1287,6 +1338,7 @@ module Aws::QApps
     #   <p>Optional category to filter the library items by.</p>
     #   @return [String]
     class ListLibraryItemsInput < Struct.new(
+      nil,
       :instance_id,
       :limit,
       :next_token,
@@ -1303,6 +1355,7 @@ module Aws::QApps
     #   <p>The token to use to request the next page of results.</p>
     #   @return [String]
     class ListLibraryItemsOutput < Struct.new(
+      nil,
       :library_items,
       :next_token,
       keyword_init: true
@@ -1317,6 +1370,7 @@ module Aws::QApps
     #   <p>The unique identifier of the Q App data collection session.</p>
     #   @return [String]
     class ListQAppSessionDataInput < Struct.new(
+      nil,
       :instance_id,
       :session_id,
       keyword_init: true
@@ -1337,6 +1391,7 @@ module Aws::QApps
     #   <p> The pagination token that indicates the next set of results to retrieve.</p>
     #   @return [String]
     class ListQAppSessionDataOutput < Struct.new(
+      nil,
       :session_id,
       :session_arn,
       :session_data,
@@ -1356,6 +1411,7 @@ module Aws::QApps
     #   <p>The token to request the next page of results.</p>
     #   @return [String]
     class ListQAppsInput < Struct.new(
+      nil,
       :instance_id,
       :limit,
       :next_token,
@@ -1371,6 +1427,7 @@ module Aws::QApps
     #   <p>The token to use to request the next page of results.</p>
     #   @return [String]
     class ListQAppsOutput < Struct.new(
+      nil,
       :apps,
       :next_token,
       keyword_init: true
@@ -1382,6 +1439,7 @@ module Aws::QApps
     #   <p>The Amazon Resource Name (ARN) of the resource whose tags should be listed.</p>
     #   @return [String]
     class ListTagsForResourceRequest < Struct.new(
+      nil,
       :resource_arn,
       keyword_init: true
     )
@@ -1392,6 +1450,7 @@ module Aws::QApps
     #   <p>The list of tags that are assigned to the resource.</p>
     #   @return [Hash<String, String>]
     class ListTagsForResourceResponse < Struct.new(
+      nil,
       :tags,
       keyword_init: true
     )
@@ -1406,6 +1465,7 @@ module Aws::QApps
     #   <p>The principal user to which the permission applies.</p>
     #   @return [String]
     class PermissionInput < Struct.new(
+      nil,
       :action,
       :principal,
       keyword_init: true
@@ -1421,6 +1481,7 @@ module Aws::QApps
     #   <p>The principal user to which the permission applies.</p>
     #   @return [Types::PrincipalOutput]
     class PermissionOutput < Struct.new(
+      nil,
       :action,
       :principal,
       keyword_init: true
@@ -1439,6 +1500,7 @@ module Aws::QApps
     #   <p>The definition specifying the cards and flow of the generated Q App.</p>
     #   @return [Types::AppDefinitionInput]
     class PredictAppDefinition < Struct.new(
+      nil,
       :title,
       :description,
       :app_definition,
@@ -1454,6 +1516,7 @@ module Aws::QApps
     #   <p>The input to generate the Q App definition from, either a conversation or problem statement.</p>
     #   @return [Types::PredictQAppInputOptions]
     class PredictQAppInput < Struct.new(
+      nil,
       :instance_id,
       :options,
       keyword_init: true
@@ -1488,6 +1551,7 @@ module Aws::QApps
     #   <p>The problem statement extracted from the input conversation, if provided.</p>
     #   @return [String]
     class PredictQAppOutput < Struct.new(
+      nil,
       :app,
       :problem_statement,
       keyword_init: true
@@ -1506,6 +1570,7 @@ module Aws::QApps
     #   <p>The email address associated with the user.</p>
     #   @return [String]
     class PrincipalOutput < Struct.new(
+      nil,
       :user_id,
       :user_type,
       :email,
@@ -1531,6 +1596,7 @@ module Aws::QApps
     #   <p>The date and time when the session data is submitted.</p>
     #   @return [Time]
     class QAppSessionData < Struct.new(
+      nil,
       :card_id,
       :value,
       :user,
@@ -1567,6 +1633,7 @@ module Aws::QApps
     #   <p>The action identifier of the action to be performed by the plugin card.</p>
     #   @return [String]
     class QPluginCard < Struct.new(
+      nil,
       :id,
       :title,
       :dependencies,
@@ -1600,6 +1667,7 @@ module Aws::QApps
     #   <p>The action identifier of the action to be performed by the plugin card.</p>
     #   @return [String]
     class QPluginCardInput < Struct.new(
+      nil,
       :title,
       :id,
       :type,
@@ -1642,6 +1710,7 @@ module Aws::QApps
     #   <p>Any dependencies for the query card, where the dependencies are references to the collected responses.</p>
     #   @return [Array<String>]
     class QQueryCard < Struct.new(
+      nil,
       :id,
       :title,
       :dependencies,
@@ -1675,6 +1744,7 @@ module Aws::QApps
     #   <p>Turns on filtering of responses based on document attributes or metadata fields.</p>
     #   @return [Types::AttributeFilter]
     class QQueryCardInput < Struct.new(
+      nil,
       :title,
       :id,
       :type,
@@ -1702,6 +1772,7 @@ module Aws::QApps
     #   <p>The type of the resource</p>
     #   @return [String]
     class ResourceNotFoundException < Struct.new(
+      nil,
       :message,
       :resource_id,
       :resource_type,
@@ -1726,6 +1797,7 @@ module Aws::QApps
     #   <p>The code of the quota that was exceeded</p>
     #   @return [String]
     class ServiceQuotaExceededException < Struct.new(
+      nil,
       :message,
       :resource_id,
       :resource_type,
@@ -1747,6 +1819,7 @@ module Aws::QApps
     #   <p>Indicates whether collected responses for an Q App session are revealed for all users.</p>
     #   @return [Boolean]
     class SessionSharingConfiguration < Struct.new(
+      nil,
       :enabled,
       :accept_responses,
       :reveal_cards,
@@ -1774,6 +1847,7 @@ module Aws::QApps
     #   <p>Optional tags to associate with the new Q App session.</p>
     #   @return [Hash<String, String>]
     class StartQAppSessionInput < Struct.new(
+      nil,
       :instance_id,
       :app_id,
       :app_version,
@@ -1792,6 +1866,7 @@ module Aws::QApps
     #   <p>The Amazon Resource Name (ARN) of the new Q App session.</p>
     #   @return [String]
     class StartQAppSessionOutput < Struct.new(
+      nil,
       :session_id,
       :session_arn,
       keyword_init: true
@@ -1806,6 +1881,7 @@ module Aws::QApps
     #   <p>The unique identifier of the Q App session to stop.</p>
     #   @return [String]
     class StopQAppSessionInput < Struct.new(
+      nil,
       :instance_id,
       :session_id,
       keyword_init: true
@@ -1824,6 +1900,7 @@ module Aws::QApps
     #   <p>The date and time when the card is submitted.</p>
     #   @return [Time]
     class Submission < Struct.new(
+      nil,
       :value,
       :submission_id,
       :timestamp,
@@ -1840,6 +1917,7 @@ module Aws::QApps
     #   <p>The operation that is performed on a submission.</p>
     #   @return [String]
     class SubmissionMutation < Struct.new(
+      nil,
       :submission_id,
       :mutation_type,
       keyword_init: true
@@ -1854,6 +1932,7 @@ module Aws::QApps
     #   <p>The tags to associate with the resource.</p>
     #   @return [Hash<String, String>]
     class TagResourceRequest < Struct.new(
+      nil,
       :resource_arn,
       :tags,
       keyword_init: true
@@ -1862,6 +1941,7 @@ module Aws::QApps
     end
 
     class TagResourceResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1887,6 +1967,7 @@ module Aws::QApps
     #   <p>The default value to pre-populate in the text input field.</p>
     #   @return [String]
     class TextInputCard < Struct.new(
+      nil,
       :id,
       :title,
       :dependencies,
@@ -1915,6 +1996,7 @@ module Aws::QApps
     #   <p>The default value to pre-populate in the text input field.</p>
     #   @return [String]
     class TextInputCardInput < Struct.new(
+      nil,
       :title,
       :id,
       :type,
@@ -1943,6 +2025,7 @@ module Aws::QApps
     #   <p>The number of seconds to wait before retrying the operation</p>
     #   @return [Integer]
     class ThrottlingException < Struct.new(
+      nil,
       :message,
       :service_code,
       :quota_code,
@@ -1956,6 +2039,7 @@ module Aws::QApps
     # @!attribute message
     #   @return [String]
     class UnauthorizedException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -1969,6 +2053,7 @@ module Aws::QApps
     #   <p>The keys of the tags to disassociate from the resource.</p>
     #   @return [Array<String>]
     class UntagResourceRequest < Struct.new(
+      nil,
       :resource_arn,
       :tag_keys,
       keyword_init: true
@@ -1977,6 +2062,7 @@ module Aws::QApps
     end
 
     class UntagResourceResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1995,6 +2081,7 @@ module Aws::QApps
     #   <p>The new categories to associate with the library item.</p>
     #   @return [Array<String>]
     class UpdateLibraryItemInput < Struct.new(
+      nil,
       :instance_id,
       :library_item_id,
       :status,
@@ -2014,6 +2101,7 @@ module Aws::QApps
     #   <p>The verification status of the library item</p>
     #   @return [Boolean]
     class UpdateLibraryItemMetadataInput < Struct.new(
+      nil,
       :instance_id,
       :library_item_id,
       :is_verified,
@@ -2062,6 +2150,7 @@ module Aws::QApps
     #   <p>Indicates whether the library item has been verified.</p>
     #   @return [Boolean]
     class UpdateLibraryItemOutput < Struct.new(
+      nil,
       :library_item_id,
       :app_id,
       :app_version,
@@ -2096,6 +2185,7 @@ module Aws::QApps
     #   <p>The new definition specifying the cards and flow for the Q App.</p>
     #   @return [Types::AppDefinitionInput]
     class UpdateQAppInput < Struct.new(
+      nil,
       :instance_id,
       :app_id,
       :title,
@@ -2143,6 +2233,7 @@ module Aws::QApps
     #   <p>The capabilities required for the updated Q App.</p>
     #   @return [Array<String>]
     class UpdateQAppOutput < Struct.new(
+      nil,
       :app_id,
       :app_arn,
       :title,
@@ -2173,6 +2264,7 @@ module Aws::QApps
     #   <p>The list of permissions to revoke for the Amazon Q App.</p>
     #   @return [Array<Types::PermissionInput>]
     class UpdateQAppPermissionsInput < Struct.new(
+      nil,
       :instance_id,
       :app_id,
       :grant_permissions,
@@ -2192,6 +2284,7 @@ module Aws::QApps
     #   <p>The updated list of permissions for the Amazon Q App.</p>
     #   @return [Array<Types::PermissionOutput>]
     class UpdateQAppPermissionsOutput < Struct.new(
+      nil,
       :resource_arn,
       :app_id,
       :permissions,
@@ -2210,6 +2303,7 @@ module Aws::QApps
     #   <p>The input values to provide for the current state of the Q App session.</p>
     #   @return [Array<Types::CardValue>]
     class UpdateQAppSessionInput < Struct.new(
+      nil,
       :instance_id,
       :session_id,
       :values,
@@ -2231,6 +2325,7 @@ module Aws::QApps
     #   <p>The new sharing configuration for the Q App data collection session.</p>
     #   @return [Types::SessionSharingConfiguration]
     class UpdateQAppSessionMetadataInput < Struct.new(
+      nil,
       :instance_id,
       :session_id,
       :session_name,
@@ -2253,6 +2348,7 @@ module Aws::QApps
     #   <p>The new sharing configuration of the updated Q App data collection session.</p>
     #   @return [Types::SessionSharingConfiguration]
     class UpdateQAppSessionMetadataOutput < Struct.new(
+      nil,
       :session_id,
       :session_arn,
       :session_name,
@@ -2269,6 +2365,7 @@ module Aws::QApps
     #   <p>The Amazon Resource Name (ARN) of the updated Q App session.</p>
     #   @return [String]
     class UpdateQAppSessionOutput < Struct.new(
+      nil,
       :session_id,
       :session_arn,
       keyword_init: true
@@ -2281,6 +2378,7 @@ module Aws::QApps
     #   <p>The unique identifier of a user.</p>
     #   @return [String]
     class User < Struct.new(
+      nil,
       :user_id,
       keyword_init: true
     )
@@ -2313,6 +2411,7 @@ module Aws::QApps
     #   <p>Indicates whether the Q App has been verified.</p>
     #   @return [Boolean]
     class UserAppItem < Struct.new(
+      nil,
       :app_id,
       :app_arn,
       :title,
@@ -2335,6 +2434,7 @@ module Aws::QApps
     # @!attribute message
     #   @return [String]
     class ValidationException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )

@@ -10,6 +10,7 @@ module Aws::CloudFront
     # @!attribute message
     #   @return [String]
     class AccessDenied < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -27,6 +28,7 @@ module Aws::CloudFront
     #   <p>A list of key groups, including the identifiers of the public keys in each key group that CloudFront can use to verify the signatures of signed URLs and signed cookies.</p>
     #   @return [Array<Types::KGKeyPairIds>]
     class ActiveTrustedKeyGroups < Struct.new(
+      nil,
       :enabled,
       :quantity,
       :items,
@@ -46,6 +48,7 @@ module Aws::CloudFront
     #   <p>A list of Amazon Web Services accounts and the identifiers of active CloudFront key pairs in each account that CloudFront can use to verify the signatures of signed URLs and signed cookies.</p>
     #   @return [Array<Types::Signer>]
     class ActiveTrustedSigners < Struct.new(
+      nil,
       :enabled,
       :quantity,
       :items,
@@ -62,6 +65,7 @@ module Aws::CloudFront
     #   <p>The Internet Content Provider (ICP) recordal status for a CNAME. The ICPRecordalStatus is set to APPROVED for all CNAMEs (aliases) in Amazon Web Services Regions outside of China.</p> <p>The status values returned are the following:</p> <ul> <li> <p> <b>APPROVED</b> indicates that the associated CNAME has a valid ICP recordal number. Multiple CNAMEs can be associated with a distribution, and CNAMEs can correspond to different ICP recordals. To be marked as APPROVED, that is, valid to use with the China Regions, a CNAME must have one ICP recordal number associated with it.</p> </li> <li> <p> <b>SUSPENDED</b> indicates that the associated CNAME does not have a valid ICP recordal number.</p> </li> <li> <p> <b>PENDING</b> indicates that CloudFront can't determine the ICP recordal status of the CNAME associated with the distribution because there was an error in trying to determine the status. You can try again to see if the error is resolved in which case CloudFront returns an APPROVED or SUSPENDED status.</p> </li> </ul>
     #   @return [String]
     class AliasICPRecordal < Struct.new(
+      nil,
       :cname,
       :icp_recordal_status,
       keyword_init: true
@@ -77,6 +81,7 @@ module Aws::CloudFront
     #   <p>A complex type that contains the CNAME aliases, if any, that you want to associate with this distribution.</p>
     #   @return [Array<String>]
     class Aliases < Struct.new(
+      nil,
       :quantity,
       :items,
       keyword_init: true
@@ -95,6 +100,7 @@ module Aws::CloudFront
     #   <p>A complex type that controls whether CloudFront caches the response to requests using the specified HTTP methods. There are two choices:</p> <ul> <li> <p>CloudFront caches responses to <code>GET</code> and <code>HEAD</code> requests.</p> </li> <li> <p>CloudFront caches responses to <code>GET</code>, <code>HEAD</code>, and <code>OPTIONS</code> requests.</p> </li> </ul> <p>If you pick the second choice for your Amazon S3 Origin, you may need to forward Access-Control-Request-Method, Access-Control-Request-Headers, and Origin headers for the responses to be cached correctly.</p>
     #   @return [Types::CachedMethods]
     class AllowedMethods < Struct.new(
+      nil,
       :quantity,
       :items,
       :cached_methods,
@@ -126,6 +132,7 @@ module Aws::CloudFront
     #   <p>The last time the Anycast static IP list was modified.</p>
     #   @return [Time]
     class AnycastIpList < Struct.new(
+      nil,
       :id,
       :name,
       :status,
@@ -158,6 +165,7 @@ module Aws::CloudFront
     #   <p>The quantity of Anycast static IP lists in the collection.</p>
     #   @return [Integer]
     class AnycastIpListCollection < Struct.new(
+      nil,
       :items,
       :marker,
       :next_marker,
@@ -189,6 +197,7 @@ module Aws::CloudFront
     #   <p>The last time the Anycast static IP list was modified.</p>
     #   @return [Time]
     class AnycastIpListSummary < Struct.new(
+      nil,
       :id,
       :name,
       :status,
@@ -207,6 +216,7 @@ module Aws::CloudFront
     #   <p>The alias (also known as a CNAME) to add to the target standard distribution.</p>
     #   @return [String]
     class AssociateAliasRequest < Struct.new(
+      nil,
       :target_distribution_id,
       :alias,
       keyword_init: true
@@ -224,6 +234,7 @@ module Aws::CloudFront
     #   <p>The current <code>ETag</code> of the distribution tenant. This value is returned in the response of the <code>GetDistributionTenant</code> API operation.</p>
     #   @return [String]
     class AssociateDistributionTenantWebACLRequest < Struct.new(
+      nil,
       :id,
       :web_acl_arn,
       :if_match,
@@ -242,6 +253,7 @@ module Aws::CloudFront
     #   <p>The current version of the distribution tenant.</p>
     #   @return [String]
     class AssociateDistributionTenantWebACLResult < Struct.new(
+      nil,
       :id,
       :web_acl_arn,
       :e_tag,
@@ -260,6 +272,7 @@ module Aws::CloudFront
     #   <p>The value of the <code>ETag</code> header that you received when retrieving the distribution that you're associating with the WAF web ACL.</p>
     #   @return [String]
     class AssociateDistributionWebACLRequest < Struct.new(
+      nil,
       :id,
       :web_acl_arn,
       :if_match,
@@ -278,6 +291,7 @@ module Aws::CloudFront
     #   <p>The current version of the distribution.</p>
     #   @return [String]
     class AssociateDistributionWebACLResult < Struct.new(
+      nil,
       :id,
       :web_acl_arn,
       :e_tag,
@@ -290,6 +304,7 @@ module Aws::CloudFront
     # @!attribute message
     #   @return [String]
     class BatchTooLarge < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -300,6 +315,7 @@ module Aws::CloudFront
     # @!attribute message
     #   @return [String]
     class CNAMEAlreadyExists < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -372,6 +388,7 @@ module Aws::CloudFront
     #   @deprecated
     #   @return [Integer]
     class CacheBehavior < Struct.new(
+      nil,
       :path_pattern,
       :target_origin_id,
       :trusted_signers,
@@ -405,6 +422,7 @@ module Aws::CloudFront
     #   <p>Optional: A complex type that contains cache behaviors for this distribution. If <code>Quantity</code> is <code>0</code>, you can omit <code>Items</code>.</p>
     #   @return [Array<Types::CacheBehavior>]
     class CacheBehaviors < Struct.new(
+      nil,
       :quantity,
       :items,
       keyword_init: true
@@ -423,6 +441,7 @@ module Aws::CloudFront
     #   <p>The cache policy configuration.</p>
     #   @return [Types::CachePolicyConfig]
     class CachePolicy < Struct.new(
+      nil,
       :id,
       :last_modified_time,
       :cache_policy_config,
@@ -435,6 +454,7 @@ module Aws::CloudFront
     # @!attribute message
     #   @return [String]
     class CachePolicyAlreadyExists < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -461,6 +481,7 @@ module Aws::CloudFront
     #   <p>The HTTP headers, cookies, and URL query strings to include in the cache key. The values included in the cache key are also included in requests that CloudFront sends to the origin.</p>
     #   @return [Types::ParametersInCacheKeyAndForwardedToOrigin]
     class CachePolicyConfig < Struct.new(
+      nil,
       :comment,
       :name,
       :default_ttl,
@@ -480,6 +501,7 @@ module Aws::CloudFront
     #   <p>Contains a list of cookie names.</p>
     #   @return [Types::CookieNames]
     class CachePolicyCookiesConfig < Struct.new(
+      nil,
       :cookie_behavior,
       :cookies,
       keyword_init: true
@@ -495,6 +517,7 @@ module Aws::CloudFront
     #   <p>Contains a list of HTTP header names.</p>
     #   @return [Types::Headers]
     class CachePolicyHeadersConfig < Struct.new(
+      nil,
       :header_behavior,
       :headers,
       keyword_init: true
@@ -506,6 +529,7 @@ module Aws::CloudFront
     # @!attribute message
     #   @return [String]
     class CachePolicyInUse < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -526,6 +550,7 @@ module Aws::CloudFront
     #   <p>Contains the cache policies in the list.</p>
     #   @return [Array<Types::CachePolicySummary>]
     class CachePolicyList < Struct.new(
+      nil,
       :next_marker,
       :max_items,
       :quantity,
@@ -543,6 +568,7 @@ module Aws::CloudFront
     #   <p>Contains the specific query strings in viewer requests that either <i> <b>are</b> </i> or <i> <b>are not</b> </i> included in the cache key and in requests that CloudFront sends to the origin. The behavior depends on whether the <code>QueryStringBehavior</code> field in the <code>CachePolicyQueryStringsConfig</code> type is set to <code>whitelist</code> (the listed query strings <i> <b>are</b> </i> included) or <code>allExcept</code> (the listed query strings <i> <b>are not</b> </i> included, but all other query strings are).</p>
     #   @return [Types::QueryStringNames]
     class CachePolicyQueryStringsConfig < Struct.new(
+      nil,
       :query_string_behavior,
       :query_strings,
       keyword_init: true
@@ -558,6 +584,7 @@ module Aws::CloudFront
     #   <p>The cache policy.</p>
     #   @return [Types::CachePolicy]
     class CachePolicySummary < Struct.new(
+      nil,
       :type,
       :cache_policy,
       keyword_init: true
@@ -573,6 +600,7 @@ module Aws::CloudFront
     #   <p>A complex type that contains the HTTP methods that you want CloudFront to cache responses to. Valid values for <code>CachedMethods</code> include <code>GET</code>, <code>HEAD</code>, and <code>OPTIONS</code>, depending on which caching option you choose. For more information, see the preceding section.</p>
     #   @return [Array<String>]
     class CachedMethods < Struct.new(
+      nil,
       :quantity,
       :items,
       keyword_init: true
@@ -584,6 +612,7 @@ module Aws::CloudFront
     # @!attribute message
     #   @return [String]
     class CannotChangeImmutablePublicKeyFields < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -594,6 +623,7 @@ module Aws::CloudFront
     # @!attribute message
     #   @return [String]
     class CannotDeleteEntityWhileInUse < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -604,6 +634,7 @@ module Aws::CloudFront
     # @!attribute message
     #   @return [String]
     class CannotUpdateEntityWhileInUse < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -615,6 +646,7 @@ module Aws::CloudFront
     #   <p>The Amazon Resource Name (ARN) of the ACM certificate.</p>
     #   @return [String]
     class Certificate < Struct.new(
+      nil,
       :arn,
       keyword_init: true
     )
@@ -632,6 +664,7 @@ module Aws::CloudFront
     #   <p>The current configuration information for the identity.</p>
     #   @return [Types::CloudFrontOriginAccessIdentityConfig]
     class CloudFrontOriginAccessIdentity < Struct.new(
+      nil,
       :id,
       :s3_canonical_user_id,
       :cloud_front_origin_access_identity_config,
@@ -644,6 +677,7 @@ module Aws::CloudFront
     # @!attribute message
     #   @return [String]
     class CloudFrontOriginAccessIdentityAlreadyExists < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -658,6 +692,7 @@ module Aws::CloudFront
     #   <p>A comment to describe the origin access identity. The comment cannot be longer than 128 characters.</p>
     #   @return [String]
     class CloudFrontOriginAccessIdentityConfig < Struct.new(
+      nil,
       :caller_reference,
       :comment,
       keyword_init: true
@@ -669,6 +704,7 @@ module Aws::CloudFront
     # @!attribute message
     #   @return [String]
     class CloudFrontOriginAccessIdentityInUse < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -695,6 +731,7 @@ module Aws::CloudFront
     #   <p>A complex type that contains one <code>CloudFrontOriginAccessIdentitySummary</code> element for each origin access identity that was created by the current Amazon Web Services account.</p>
     #   @return [Array<Types::CloudFrontOriginAccessIdentitySummary>]
     class CloudFrontOriginAccessIdentityList < Struct.new(
+      nil,
       :marker,
       :next_marker,
       :max_items,
@@ -717,6 +754,7 @@ module Aws::CloudFront
     #   <p>The comment for this origin access identity, as originally specified when created.</p>
     #   @return [String]
     class CloudFrontOriginAccessIdentitySummary < Struct.new(
+      nil,
       :id,
       :s3_canonical_user_id,
       :comment,
@@ -736,6 +774,7 @@ module Aws::CloudFront
     #   <p>The (partially hidden) ID of the Amazon Web Services account that owns the standard distribution that's associated with the alias.</p>
     #   @return [String]
     class ConflictingAlias < Struct.new(
+      nil,
       :alias,
       :distribution_id,
       :account_id,
@@ -758,6 +797,7 @@ module Aws::CloudFront
     #   <p>Contains the conflicting aliases in the list.</p>
     #   @return [Array<Types::ConflictingAlias>]
     class ConflictingAliasesList < Struct.new(
+      nil,
       :next_marker,
       :max_items,
       :quantity,
@@ -805,6 +845,7 @@ module Aws::CloudFront
     #   <p>Whether the connection group is the default connection group for the distribution tenants.</p>
     #   @return [Boolean]
     class ConnectionGroup < Struct.new(
+      nil,
       :id,
       :name,
       :arn,
@@ -827,6 +868,7 @@ module Aws::CloudFront
     #   <p>The ID of the Anycast static IP list.</p>
     #   @return [String]
     class ConnectionGroupAssociationFilter < Struct.new(
+      nil,
       :anycast_ip_list_id,
       keyword_init: true
     )
@@ -868,6 +910,7 @@ module Aws::CloudFront
     #   <p>Whether the connection group is the default connection group for the distribution tenants.</p>
     #   @return [Boolean]
     class ConnectionGroupSummary < Struct.new(
+      nil,
       :id,
       :name,
       :arn,
@@ -895,6 +938,7 @@ module Aws::CloudFront
     #   <p>The content type for a field-level encryption content type-profile mapping.</p>
     #   @return [String]
     class ContentTypeProfile < Struct.new(
+      nil,
       :format,
       :profile_id,
       :content_type,
@@ -911,6 +955,7 @@ module Aws::CloudFront
     #   <p>The configuration for a field-level encryption content type-profile.</p>
     #   @return [Types::ContentTypeProfiles]
     class ContentTypeProfileConfig < Struct.new(
+      nil,
       :forward_when_content_type_is_unknown,
       :content_type_profiles,
       keyword_init: true
@@ -926,6 +971,7 @@ module Aws::CloudFront
     #   <p>Items in a field-level encryption content type-profile mapping.</p>
     #   @return [Array<Types::ContentTypeProfile>]
     class ContentTypeProfiles < Struct.new(
+      nil,
       :quantity,
       :items,
       keyword_init: true
@@ -944,6 +990,7 @@ module Aws::CloudFront
     #   <p>Contains the configuration for a continuous deployment policy.</p>
     #   @return [Types::ContinuousDeploymentPolicyConfig]
     class ContinuousDeploymentPolicy < Struct.new(
+      nil,
       :id,
       :last_modified_time,
       :continuous_deployment_policy_config,
@@ -956,6 +1003,7 @@ module Aws::CloudFront
     # @!attribute message
     #   @return [String]
     class ContinuousDeploymentPolicyAlreadyExists < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -973,6 +1021,7 @@ module Aws::CloudFront
     #   <p>Contains the parameters for routing production traffic from your primary to staging distributions.</p>
     #   @return [Types::TrafficConfig]
     class ContinuousDeploymentPolicyConfig < Struct.new(
+      nil,
       :staging_distribution_dns_names,
       :enabled,
       :traffic_config,
@@ -985,6 +1034,7 @@ module Aws::CloudFront
     # @!attribute message
     #   @return [String]
     class ContinuousDeploymentPolicyInUse < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -1005,6 +1055,7 @@ module Aws::CloudFront
     #   <p>A list of continuous deployment policy items.</p>
     #   @return [Array<Types::ContinuousDeploymentPolicySummary>]
     class ContinuousDeploymentPolicyList < Struct.new(
+      nil,
       :next_marker,
       :max_items,
       :quantity,
@@ -1019,6 +1070,7 @@ module Aws::CloudFront
     #   <p>The continuous deployment policy.</p>
     #   @return [Types::ContinuousDeploymentPolicy]
     class ContinuousDeploymentPolicySummary < Struct.new(
+      nil,
       :continuous_deployment_policy,
       keyword_init: true
     )
@@ -1033,6 +1085,7 @@ module Aws::CloudFront
     #   <p>The request header value.</p>
     #   @return [String]
     class ContinuousDeploymentSingleHeaderConfig < Struct.new(
+      nil,
       :header,
       :value,
       keyword_init: true
@@ -1048,6 +1101,7 @@ module Aws::CloudFront
     #   <p>Session stickiness provides the ability to define multiple requests from a single viewer as a single session. This prevents the potentially inconsistent experience of sending some of a given user's requests to your staging distribution, while others are sent to your primary distribution. Define the session duration using TTL values.</p>
     #   @return [Types::SessionStickinessConfig]
     class ContinuousDeploymentSingleWeightConfig < Struct.new(
+      nil,
       :weight,
       :session_stickiness_config,
       keyword_init: true
@@ -1063,6 +1117,7 @@ module Aws::CloudFront
     #   <p>A list of cookie names.</p>
     #   @return [Array<String>]
     class CookieNames < Struct.new(
+      nil,
       :quantity,
       :items,
       keyword_init: true
@@ -1078,6 +1133,7 @@ module Aws::CloudFront
     #   <p>This field is deprecated. We recommend that you use a cache policy or an origin request policy instead of this field.</p> <p>If you want to include cookies in the cache key, use a cache policy. For more information, see <a href="https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/controlling-the-cache-key.html#cache-key-create-cache-policy">Creating cache policies</a> in the <i>Amazon CloudFront Developer Guide</i>.</p> <p>If you want to send cookies to the origin but not include them in the cache key, use an origin request policy. For more information, see <a href="https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/controlling-origin-requests.html#origin-request-create-origin-request-policy">Creating origin request policies</a> in the <i>Amazon CloudFront Developer Guide</i>.</p> <p>Required if you specify <code>whitelist</code> for the value of <code>Forward</code>. A complex type that specifies how many different cookies you want CloudFront to forward to the origin for this cache behavior and, if you want to forward selected cookies, the names of those cookies.</p> <p>If you specify <code>all</code> or <code>none</code> for the value of <code>Forward</code>, omit <code>WhitelistedNames</code>. If you change the value of <code>Forward</code> from <code>whitelist</code> to <code>all</code> or <code>none</code> and you don't delete the <code>WhitelistedNames</code> element and its child elements, CloudFront deletes them automatically.</p> <p>For the current limit on the number of cookie names that you can whitelist for each cache behavior, see <a href="https://docs.aws.amazon.com/general/latest/gr/xrefaws_service_limits.html#limits_cloudfront"> CloudFront Limits</a> in the <i>Amazon Web Services General Reference</i>.</p>
     #   @return [Types::CookieNames]
     class CookiePreference < Struct.new(
+      nil,
       :forward,
       :whitelisted_names,
       keyword_init: true
@@ -1101,6 +1157,7 @@ module Aws::CloudFront
     #   <p>A Boolean flag to specify the state of the staging distribution when it's created. When you set this value to <code>True</code>, the staging distribution is enabled. When you set this value to <code>False</code>, the staging distribution is disabled.</p> <p>If you omit this field, the default value is <code>True</code>.</p>
     #   @return [Boolean]
     class CopyDistributionRequest < Struct.new(
+      nil,
       :primary_distribution_id,
       :staging,
       :if_match,
@@ -1121,6 +1178,7 @@ module Aws::CloudFront
     #   <p>The version identifier for the current version of the staging distribution.</p>
     #   @return [String]
     class CopyDistributionResult < Struct.new(
+      nil,
       :distribution,
       :location,
       :e_tag,
@@ -1139,6 +1197,7 @@ module Aws::CloudFront
     #   <p>A complex type that contains zero or more <code>Tag</code> elements.</p>
     #   @return [Types::Tags]
     class CreateAnycastIpListRequest < Struct.new(
+      nil,
       :name,
       :ip_count,
       :tags,
@@ -1154,6 +1213,7 @@ module Aws::CloudFront
     #   <p>The version identifier for the current version of the Anycast static IP list.</p>
     #   @return [String]
     class CreateAnycastIpListResult < Struct.new(
+      nil,
       :anycast_ip_list,
       :e_tag,
       keyword_init: true
@@ -1165,6 +1225,7 @@ module Aws::CloudFront
     #   <p>A cache policy configuration.</p>
     #   @return [Types::CachePolicyConfig]
     class CreateCachePolicyRequest < Struct.new(
+      nil,
       :cache_policy_config,
       keyword_init: true
     )
@@ -1181,6 +1242,7 @@ module Aws::CloudFront
     #   <p>The current version of the cache policy.</p>
     #   @return [String]
     class CreateCachePolicyResult < Struct.new(
+      nil,
       :cache_policy,
       :location,
       :e_tag,
@@ -1194,6 +1256,7 @@ module Aws::CloudFront
     #   <p>The current configuration information for the identity.</p>
     #   @return [Types::CloudFrontOriginAccessIdentityConfig]
     class CreateCloudFrontOriginAccessIdentityRequest < Struct.new(
+      nil,
       :cloud_front_origin_access_identity_config,
       keyword_init: true
     )
@@ -1211,6 +1274,7 @@ module Aws::CloudFront
     #   <p>The current version of the origin access identity created.</p>
     #   @return [String]
     class CreateCloudFrontOriginAccessIdentityResult < Struct.new(
+      nil,
       :cloud_front_origin_access_identity,
       :location,
       :e_tag,
@@ -1235,6 +1299,7 @@ module Aws::CloudFront
     #   <p>Enable the connection group.</p>
     #   @return [Boolean]
     class CreateConnectionGroupRequest < Struct.new(
+      nil,
       :name,
       :ipv6_enabled,
       :tags,
@@ -1252,6 +1317,7 @@ module Aws::CloudFront
     #   <p>The current version of the connection group.</p>
     #   @return [String]
     class CreateConnectionGroupResult < Struct.new(
+      nil,
       :connection_group,
       :e_tag,
       keyword_init: true
@@ -1263,6 +1329,7 @@ module Aws::CloudFront
     #   <p>Contains the configuration for a continuous deployment policy.</p>
     #   @return [Types::ContinuousDeploymentPolicyConfig]
     class CreateContinuousDeploymentPolicyRequest < Struct.new(
+      nil,
       :continuous_deployment_policy_config,
       keyword_init: true
     )
@@ -1279,6 +1346,7 @@ module Aws::CloudFront
     #   <p>The version identifier for the current version of the continuous deployment policy.</p>
     #   @return [String]
     class CreateContinuousDeploymentPolicyResult < Struct.new(
+      nil,
       :continuous_deployment_policy,
       :location,
       :e_tag,
@@ -1292,6 +1360,7 @@ module Aws::CloudFront
     #   <p>The distribution's configuration information.</p>
     #   @return [Types::DistributionConfig]
     class CreateDistributionRequest < Struct.new(
+      nil,
       :distribution_config,
       keyword_init: true
     )
@@ -1309,6 +1378,7 @@ module Aws::CloudFront
     #   <p>The current version of the distribution created.</p>
     #   @return [String]
     class CreateDistributionResult < Struct.new(
+      nil,
       :distribution,
       :location,
       :e_tag,
@@ -1345,6 +1415,7 @@ module Aws::CloudFront
     #   <p>Indicates whether the distribution tenant should be enabled when created. If the distribution tenant is disabled, the distribution tenant won't serve traffic.</p>
     #   @return [Boolean]
     class CreateDistributionTenantRequest < Struct.new(
+      nil,
       :distribution_id,
       :name,
       :domains,
@@ -1366,6 +1437,7 @@ module Aws::CloudFront
     #   <p>The current version of the distribution tenant.</p>
     #   @return [String]
     class CreateDistributionTenantResult < Struct.new(
+      nil,
       :distribution_tenant,
       :e_tag,
       keyword_init: true
@@ -1378,6 +1450,7 @@ module Aws::CloudFront
     #   <p>The distribution's configuration information.</p>
     #   @return [Types::DistributionConfigWithTags]
     class CreateDistributionWithTagsRequest < Struct.new(
+      nil,
       :distribution_config_with_tags,
       keyword_init: true
     )
@@ -1395,6 +1468,7 @@ module Aws::CloudFront
     #   <p>The current version of the distribution created.</p>
     #   @return [String]
     class CreateDistributionWithTagsResult < Struct.new(
+      nil,
       :distribution,
       :location,
       :e_tag,
@@ -1407,6 +1481,7 @@ module Aws::CloudFront
     #   <p>The request to create a new field-level encryption configuration.</p>
     #   @return [Types::FieldLevelEncryptionConfig]
     class CreateFieldLevelEncryptionConfigRequest < Struct.new(
+      nil,
       :field_level_encryption_config,
       keyword_init: true
     )
@@ -1423,6 +1498,7 @@ module Aws::CloudFront
     #   <p>The current version of the field level encryption configuration. For example: <code>E2QWRUHAPOMQZL</code>.</p>
     #   @return [String]
     class CreateFieldLevelEncryptionConfigResult < Struct.new(
+      nil,
       :field_level_encryption,
       :location,
       :e_tag,
@@ -1435,6 +1511,7 @@ module Aws::CloudFront
     #   <p>The request to create a field-level encryption profile.</p>
     #   @return [Types::FieldLevelEncryptionProfileConfig]
     class CreateFieldLevelEncryptionProfileRequest < Struct.new(
+      nil,
       :field_level_encryption_profile_config,
       keyword_init: true
     )
@@ -1451,6 +1528,7 @@ module Aws::CloudFront
     #   <p>The current version of the field level encryption profile. For example: <code>E2QWRUHAPOMQZL</code>.</p>
     #   @return [String]
     class CreateFieldLevelEncryptionProfileResult < Struct.new(
+      nil,
       :field_level_encryption_profile,
       :location,
       :e_tag,
@@ -1469,6 +1547,7 @@ module Aws::CloudFront
     #   <p>The function code. For more information about writing a CloudFront function, see <a href="https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/writing-function-code.html">Writing function code for CloudFront Functions</a> in the <i>Amazon CloudFront Developer Guide</i>.</p>
     #   @return [String]
     class CreateFunctionRequest < Struct.new(
+      nil,
       :name,
       :function_config,
       :function_code,
@@ -1487,6 +1566,7 @@ module Aws::CloudFront
     #   <p>The version identifier for the current version of the CloudFront function.</p>
     #   @return [String]
     class CreateFunctionResult < Struct.new(
+      nil,
       :function_summary,
       :location,
       :e_tag,
@@ -1502,6 +1582,7 @@ module Aws::CloudFront
     #   <p>An invalidation batch.</p>
     #   @return [Types::InvalidationBatch]
     class CreateInvalidationForDistributionTenantRequest < Struct.new(
+      nil,
       :id,
       :invalidation_batch,
       keyword_init: true
@@ -1516,6 +1597,7 @@ module Aws::CloudFront
     #   <p>An invalidation.</p>
     #   @return [Types::Invalidation]
     class CreateInvalidationForDistributionTenantResult < Struct.new(
+      nil,
       :location,
       :invalidation,
       keyword_init: true
@@ -1531,6 +1613,7 @@ module Aws::CloudFront
     #   <p>The batch information for the invalidation.</p>
     #   @return [Types::InvalidationBatch]
     class CreateInvalidationRequest < Struct.new(
+      nil,
       :distribution_id,
       :invalidation_batch,
       keyword_init: true
@@ -1546,6 +1629,7 @@ module Aws::CloudFront
     #   <p>The invalidation's information.</p>
     #   @return [Types::Invalidation]
     class CreateInvalidationResult < Struct.new(
+      nil,
       :location,
       :invalidation,
       keyword_init: true
@@ -1557,6 +1641,7 @@ module Aws::CloudFront
     #   <p>A key group configuration.</p>
     #   @return [Types::KeyGroupConfig]
     class CreateKeyGroupRequest < Struct.new(
+      nil,
       :key_group_config,
       keyword_init: true
     )
@@ -1573,6 +1658,7 @@ module Aws::CloudFront
     #   <p>The identifier for this version of the key group.</p>
     #   @return [String]
     class CreateKeyGroupResult < Struct.new(
+      nil,
       :key_group,
       :location,
       :e_tag,
@@ -1591,6 +1677,7 @@ module Aws::CloudFront
     #   <p>The S3 bucket that provides the source for the import. The source must be in a valid JSON format.</p>
     #   @return [Types::ImportSource]
     class CreateKeyValueStoreRequest < Struct.new(
+      nil,
       :name,
       :comment,
       :import_source,
@@ -1609,6 +1696,7 @@ module Aws::CloudFront
     #   <p>The location of the resulting key value store.</p>
     #   @return [String]
     class CreateKeyValueStoreResult < Struct.new(
+      nil,
       :key_value_store,
       :e_tag,
       :location,
@@ -1624,6 +1712,7 @@ module Aws::CloudFront
     #   <p>A monitoring subscription. This structure contains information about whether additional CloudWatch metrics are enabled for a given CloudFront distribution.</p>
     #   @return [Types::MonitoringSubscription]
     class CreateMonitoringSubscriptionRequest < Struct.new(
+      nil,
       :distribution_id,
       :monitoring_subscription,
       keyword_init: true
@@ -1635,6 +1724,7 @@ module Aws::CloudFront
     #   <p>A monitoring subscription. This structure contains information about whether additional CloudWatch metrics are enabled for a given CloudFront distribution.</p>
     #   @return [Types::MonitoringSubscription]
     class CreateMonitoringSubscriptionResult < Struct.new(
+      nil,
       :monitoring_subscription,
       keyword_init: true
     )
@@ -1645,6 +1735,7 @@ module Aws::CloudFront
     #   <p>Contains the origin access control.</p>
     #   @return [Types::OriginAccessControlConfig]
     class CreateOriginAccessControlRequest < Struct.new(
+      nil,
       :origin_access_control_config,
       keyword_init: true
     )
@@ -1661,6 +1752,7 @@ module Aws::CloudFront
     #   <p>The version identifier for the current version of the origin access control.</p>
     #   @return [String]
     class CreateOriginAccessControlResult < Struct.new(
+      nil,
       :origin_access_control,
       :location,
       :e_tag,
@@ -1673,6 +1765,7 @@ module Aws::CloudFront
     #   <p>An origin request policy configuration.</p>
     #   @return [Types::OriginRequestPolicyConfig]
     class CreateOriginRequestPolicyRequest < Struct.new(
+      nil,
       :origin_request_policy_config,
       keyword_init: true
     )
@@ -1689,6 +1782,7 @@ module Aws::CloudFront
     #   <p>The current version of the origin request policy.</p>
     #   @return [String]
     class CreateOriginRequestPolicyResult < Struct.new(
+      nil,
       :origin_request_policy,
       :location,
       :e_tag,
@@ -1701,6 +1795,7 @@ module Aws::CloudFront
     #   <p>A CloudFront public key configuration.</p>
     #   @return [Types::PublicKeyConfig]
     class CreatePublicKeyRequest < Struct.new(
+      nil,
       :public_key_config,
       keyword_init: true
     )
@@ -1717,6 +1812,7 @@ module Aws::CloudFront
     #   <p>The identifier for this version of the public key.</p>
     #   @return [String]
     class CreatePublicKeyResult < Struct.new(
+      nil,
       :public_key,
       :location,
       :e_tag,
@@ -1738,6 +1834,7 @@ module Aws::CloudFront
     #   <p>The sampling rate for this real-time log configuration. You can specify a whole number between 1 and 100 (inclusive) to determine the percentage of viewer requests that are represented in the real-time log data.</p>
     #   @return [Integer]
     class CreateRealtimeLogConfigRequest < Struct.new(
+      nil,
       :end_points,
       :fields,
       :name,
@@ -1751,6 +1848,7 @@ module Aws::CloudFront
     #   <p>A real-time log configuration.</p>
     #   @return [Types::RealtimeLogConfig]
     class CreateRealtimeLogConfigResult < Struct.new(
+      nil,
       :realtime_log_config,
       keyword_init: true
     )
@@ -1761,6 +1859,7 @@ module Aws::CloudFront
     #   <p>Contains metadata about the response headers policy, and a set of configurations that specify the HTTP headers.</p>
     #   @return [Types::ResponseHeadersPolicyConfig]
     class CreateResponseHeadersPolicyRequest < Struct.new(
+      nil,
       :response_headers_policy_config,
       keyword_init: true
     )
@@ -1777,6 +1876,7 @@ module Aws::CloudFront
     #   <p>The version identifier for the current version of the response headers policy.</p>
     #   @return [String]
     class CreateResponseHeadersPolicyResult < Struct.new(
+      nil,
       :response_headers_policy,
       :location,
       :e_tag,
@@ -1790,6 +1890,7 @@ module Aws::CloudFront
     #   <p>The streaming distribution's configuration information.</p>
     #   @return [Types::StreamingDistributionConfig]
     class CreateStreamingDistributionRequest < Struct.new(
+      nil,
       :streaming_distribution_config,
       keyword_init: true
     )
@@ -1807,6 +1908,7 @@ module Aws::CloudFront
     #   <p>The current version of the streaming distribution created.</p>
     #   @return [String]
     class CreateStreamingDistributionResult < Struct.new(
+      nil,
       :streaming_distribution,
       :location,
       :e_tag,
@@ -1820,6 +1922,7 @@ module Aws::CloudFront
     #   <p>The streaming distribution's configuration information.</p>
     #   @return [Types::StreamingDistributionConfigWithTags]
     class CreateStreamingDistributionWithTagsRequest < Struct.new(
+      nil,
       :streaming_distribution_config_with_tags,
       keyword_init: true
     )
@@ -1837,6 +1940,7 @@ module Aws::CloudFront
     #   <p>The current version of the distribution created.</p>
     #   @return [String]
     class CreateStreamingDistributionWithTagsResult < Struct.new(
+      nil,
       :streaming_distribution,
       :location,
       :e_tag,
@@ -1852,6 +1956,7 @@ module Aws::CloudFront
     #   <p>A complex type that contains zero or more <code>Tag</code> elements.</p>
     #   @return [Types::Tags]
     class CreateVpcOriginRequest < Struct.new(
+      nil,
       :vpc_origin_endpoint_config,
       :tags,
       keyword_init: true
@@ -1869,6 +1974,7 @@ module Aws::CloudFront
     #   <p>The VPC origin ETag.</p>
     #   @return [String]
     class CreateVpcOriginResult < Struct.new(
+      nil,
       :vpc_origin,
       :location,
       :e_tag,
@@ -1891,6 +1997,7 @@ module Aws::CloudFront
     #   <p>The minimum amount of time, in seconds, that you want CloudFront to cache the HTTP status code specified in <code>ErrorCode</code>. When this time period has elapsed, CloudFront queries your origin to see whether the problem that caused the error has been resolved and the requested object is now available.</p> <p>For more information, see <a href="https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/custom-error-pages.html">Customizing Error Responses</a> in the <i>Amazon CloudFront Developer Guide</i>.</p>
     #   @return [Integer]
     class CustomErrorResponse < Struct.new(
+      nil,
       :error_code,
       :response_page_path,
       :response_code,
@@ -1908,6 +2015,7 @@ module Aws::CloudFront
     #   <p>A complex type that contains a <code>CustomErrorResponse</code> element for each HTTP status code for which you want to specify a custom error page and/or a caching duration. </p>
     #   @return [Array<Types::CustomErrorResponse>]
     class CustomErrorResponses < Struct.new(
+      nil,
       :quantity,
       :items,
       keyword_init: true
@@ -1923,6 +2031,7 @@ module Aws::CloudFront
     #   <p> <b>Optional</b>: A list that contains one <code>OriginCustomHeader</code> element for each custom header that you want CloudFront to forward to the origin. If Quantity is <code>0</code>, omit <code>Items</code>.</p>
     #   @return [Array<Types::OriginCustomHeader>]
     class CustomHeaders < Struct.new(
+      nil,
       :quantity,
       :items,
       keyword_init: true
@@ -1953,6 +2062,7 @@ module Aws::CloudFront
     #   <p>Specifies which IP protocol CloudFront uses when connecting to your origin. If your origin uses both IPv4 and IPv6 protocols, you can choose <code>dualstack</code> to help optimize reliability.</p>
     #   @return [String]
     class CustomOriginConfig < Struct.new(
+      nil,
       :http_port,
       :https_port,
       :origin_protocol_policy,
@@ -1976,6 +2086,7 @@ module Aws::CloudFront
     #   <p>The geographic restrictions.</p>
     #   @return [Types::GeoRestrictionCustomization]
     class Customizations < Struct.new(
+      nil,
       :web_acl,
       :certificate,
       :geo_restrictions,
@@ -2047,6 +2158,7 @@ module Aws::CloudFront
     #   @deprecated
     #   @return [Integer]
     class DefaultCacheBehavior < Struct.new(
+      nil,
       :target_origin_id,
       :trusted_signers,
       :trusted_key_groups,
@@ -2078,6 +2190,7 @@ module Aws::CloudFront
     #   <p>The current version (<code>ETag</code> value) of the Anycast static IP list that you are deleting.</p>
     #   @return [String]
     class DeleteAnycastIpListRequest < Struct.new(
+      nil,
       :id,
       :if_match,
       keyword_init: true
@@ -2092,6 +2205,7 @@ module Aws::CloudFront
     #   <p>The version of the cache policy that you are deleting. The version is the cache policy's <code>ETag</code> value, which you can get using <code>ListCachePolicies</code>, <code>GetCachePolicy</code>, or <code>GetCachePolicyConfig</code>.</p>
     #   @return [String]
     class DeleteCachePolicyRequest < Struct.new(
+      nil,
       :id,
       :if_match,
       keyword_init: true
@@ -2107,6 +2221,7 @@ module Aws::CloudFront
     #   <p>The value of the <code>ETag</code> header you received from a previous <code>GET</code> or <code>PUT</code> request. For example: <code>E2QWRUHAPOMQZL</code>.</p>
     #   @return [String]
     class DeleteCloudFrontOriginAccessIdentityRequest < Struct.new(
+      nil,
       :id,
       :if_match,
       keyword_init: true
@@ -2121,6 +2236,7 @@ module Aws::CloudFront
     #   <p>The value of the <code>ETag</code> header that you received when retrieving the connection group to delete.</p>
     #   @return [String]
     class DeleteConnectionGroupRequest < Struct.new(
+      nil,
       :id,
       :if_match,
       keyword_init: true
@@ -2135,6 +2251,7 @@ module Aws::CloudFront
     #   <p>The current version (<code>ETag</code> value) of the continuous deployment policy that you are deleting.</p>
     #   @return [String]
     class DeleteContinuousDeploymentPolicyRequest < Struct.new(
+      nil,
       :id,
       :if_match,
       keyword_init: true
@@ -2150,6 +2267,7 @@ module Aws::CloudFront
     #   <p>The value of the <code>ETag</code> header that you received when you disabled the distribution. For example: <code>E2QWRUHAPOMQZL</code>.</p>
     #   @return [String]
     class DeleteDistributionRequest < Struct.new(
+      nil,
       :id,
       :if_match,
       keyword_init: true
@@ -2164,6 +2282,7 @@ module Aws::CloudFront
     #   <p>The value of the <code>ETag</code> header that you received when retrieving the distribution tenant. This value is returned in the response of the <code>GetDistributionTenant</code> API operation.</p>
     #   @return [String]
     class DeleteDistributionTenantRequest < Struct.new(
+      nil,
       :id,
       :if_match,
       keyword_init: true
@@ -2178,6 +2297,7 @@ module Aws::CloudFront
     #   <p>The value of the <code>ETag</code> header that you received when retrieving the configuration identity to delete. For example: <code>E2QWRUHAPOMQZL</code>.</p>
     #   @return [String]
     class DeleteFieldLevelEncryptionConfigRequest < Struct.new(
+      nil,
       :id,
       :if_match,
       keyword_init: true
@@ -2192,6 +2312,7 @@ module Aws::CloudFront
     #   <p>The value of the <code>ETag</code> header that you received when retrieving the profile to delete. For example: <code>E2QWRUHAPOMQZL</code>.</p>
     #   @return [String]
     class DeleteFieldLevelEncryptionProfileRequest < Struct.new(
+      nil,
       :id,
       :if_match,
       keyword_init: true
@@ -2206,6 +2327,7 @@ module Aws::CloudFront
     #   <p>The current version (<code>ETag</code> value) of the function that you are deleting, which you can get using <code>DescribeFunction</code>.</p>
     #   @return [String]
     class DeleteFunctionRequest < Struct.new(
+      nil,
       :name,
       :if_match,
       keyword_init: true
@@ -2220,6 +2342,7 @@ module Aws::CloudFront
     #   <p>The version of the key group that you are deleting. The version is the key group's <code>ETag</code> value. To get the <code>ETag</code>, use <code>GetKeyGroup</code> or <code>GetKeyGroupConfig</code>.</p>
     #   @return [String]
     class DeleteKeyGroupRequest < Struct.new(
+      nil,
       :id,
       :if_match,
       keyword_init: true
@@ -2234,6 +2357,7 @@ module Aws::CloudFront
     #   <p>The key value store to delete, if a match occurs.</p>
     #   @return [String]
     class DeleteKeyValueStoreRequest < Struct.new(
+      nil,
       :name,
       :if_match,
       keyword_init: true
@@ -2245,6 +2369,7 @@ module Aws::CloudFront
     #   <p>The ID of the distribution that you are disabling metrics for.</p>
     #   @return [String]
     class DeleteMonitoringSubscriptionRequest < Struct.new(
+      nil,
       :distribution_id,
       keyword_init: true
     )
@@ -2252,6 +2377,7 @@ module Aws::CloudFront
     end
 
     class DeleteMonitoringSubscriptionResult < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -2264,6 +2390,7 @@ module Aws::CloudFront
     #   <p>The current version (<code>ETag</code> value) of the origin access control that you are deleting.</p>
     #   @return [String]
     class DeleteOriginAccessControlRequest < Struct.new(
+      nil,
       :id,
       :if_match,
       keyword_init: true
@@ -2278,6 +2405,7 @@ module Aws::CloudFront
     #   <p>The version of the origin request policy that you are deleting. The version is the origin request policy's <code>ETag</code> value, which you can get using <code>ListOriginRequestPolicies</code>, <code>GetOriginRequestPolicy</code>, or <code>GetOriginRequestPolicyConfig</code>.</p>
     #   @return [String]
     class DeleteOriginRequestPolicyRequest < Struct.new(
+      nil,
       :id,
       :if_match,
       keyword_init: true
@@ -2292,6 +2420,7 @@ module Aws::CloudFront
     #   <p>The value of the <code>ETag</code> header that you received when retrieving the public key identity to delete. For example: <code>E2QWRUHAPOMQZL</code>.</p>
     #   @return [String]
     class DeletePublicKeyRequest < Struct.new(
+      nil,
       :id,
       :if_match,
       keyword_init: true
@@ -2306,6 +2435,7 @@ module Aws::CloudFront
     #   <p>The Amazon Resource Name (ARN) of the real-time log configuration to delete.</p>
     #   @return [String]
     class DeleteRealtimeLogConfigRequest < Struct.new(
+      nil,
       :name,
       :arn,
       keyword_init: true
@@ -2320,6 +2450,7 @@ module Aws::CloudFront
     #   <p>The version of the response headers policy that you are deleting.</p> <p>The version is the response headers policy's <code>ETag</code> value, which you can get using <code>ListResponseHeadersPolicies</code>, <code>GetResponseHeadersPolicy</code>, or <code>GetResponseHeadersPolicyConfig</code>.</p>
     #   @return [String]
     class DeleteResponseHeadersPolicyRequest < Struct.new(
+      nil,
       :id,
       :if_match,
       keyword_init: true
@@ -2335,6 +2466,7 @@ module Aws::CloudFront
     #   <p>The value of the <code>ETag</code> header that you received when you disabled the streaming distribution. For example: <code>E2QWRUHAPOMQZL</code>.</p>
     #   @return [String]
     class DeleteStreamingDistributionRequest < Struct.new(
+      nil,
       :id,
       :if_match,
       keyword_init: true
@@ -2349,6 +2481,7 @@ module Aws::CloudFront
     #   <p>The version identifier of the VPC origin to delete. This is the <code>ETag</code> value returned in the response to <a>GetVpcOrigin</a>.</p>
     #   @return [String]
     class DeleteVpcOriginRequest < Struct.new(
+      nil,
       :id,
       :if_match,
       keyword_init: true
@@ -2363,6 +2496,7 @@ module Aws::CloudFront
     #   <p>The VPC origin ETag.</p>
     #   @return [String]
     class DeleteVpcOriginResult < Struct.new(
+      nil,
       :vpc_origin,
       :e_tag,
       keyword_init: true
@@ -2377,6 +2511,7 @@ module Aws::CloudFront
     #   <p>The function's stage, either <code>DEVELOPMENT</code> or <code>LIVE</code>.</p>
     #   @return [String]
     class DescribeFunctionRequest < Struct.new(
+      nil,
       :name,
       :stage,
       keyword_init: true
@@ -2391,6 +2526,7 @@ module Aws::CloudFront
     #   <p>The version identifier for the current version of the CloudFront function.</p>
     #   @return [String]
     class DescribeFunctionResult < Struct.new(
+      nil,
       :function_summary,
       :e_tag,
       keyword_init: true
@@ -2402,6 +2538,7 @@ module Aws::CloudFront
     #   <p>The name of the key value store.</p>
     #   @return [String]
     class DescribeKeyValueStoreRequest < Struct.new(
+      nil,
       :name,
       keyword_init: true
     )
@@ -2415,6 +2552,7 @@ module Aws::CloudFront
     #   <p>The <code>ETag</code> of the resulting key value store.</p>
     #   @return [String]
     class DescribeKeyValueStoreResult < Struct.new(
+      nil,
       :key_value_store,
       :e_tag,
       keyword_init: true
@@ -2429,6 +2567,7 @@ module Aws::CloudFront
     #   <p>The current version of the distribution tenant that you're disassociating from the WAF web ACL. This is the <code>ETag</code> value returned in the response to the <code>GetDistributionTenant</code> API operation.</p>
     #   @return [String]
     class DisassociateDistributionTenantWebACLRequest < Struct.new(
+      nil,
       :id,
       :if_match,
       keyword_init: true
@@ -2443,6 +2582,7 @@ module Aws::CloudFront
     #   <p>The current version of the distribution tenant.</p>
     #   @return [String]
     class DisassociateDistributionTenantWebACLResult < Struct.new(
+      nil,
       :id,
       :e_tag,
       keyword_init: true
@@ -2457,6 +2597,7 @@ module Aws::CloudFront
     #   <p>The value of the <code>ETag</code> header that you received when retrieving the distribution that you're disassociating from the WAF web ACL.</p>
     #   @return [String]
     class DisassociateDistributionWebACLRequest < Struct.new(
+      nil,
       :id,
       :if_match,
       keyword_init: true
@@ -2471,6 +2612,7 @@ module Aws::CloudFront
     #   <p>The current version of the distribution.</p>
     #   @return [String]
     class DisassociateDistributionWebACLResult < Struct.new(
+      nil,
       :id,
       :e_tag,
       keyword_init: true
@@ -2510,6 +2652,7 @@ module Aws::CloudFront
     #   <p>Amazon Web Services services in China customers must file for an Internet Content Provider (ICP) recordal if they want to serve content publicly on an alternate domain name, also known as a CNAME, that they've added to CloudFront. AliasICPRecordal provides the ICP recordal status for CNAMEs associated with distributions.</p> <p>For more information about ICP recordals, see <a href="https://docs.amazonaws.cn/en_us/aws/latest/userguide/accounts-and-credentials.html"> Signup, Accounts, and Credentials</a> in <i>Getting Started with Amazon Web Services services in China</i>.</p>
     #   @return [Array<Types::AliasICPRecordal>]
     class Distribution < Struct.new(
+      nil,
       :id,
       :arn,
       :status,
@@ -2529,6 +2672,7 @@ module Aws::CloudFront
     # @!attribute message
     #   @return [String]
     class DistributionAlreadyExists < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -2603,6 +2747,7 @@ module Aws::CloudFront
     #   <p>This field specifies whether the connection mode is through a standard distribution (direct) or a multi-tenant distribution with distribution tenants (tenant-only).</p>
     #   @return [String]
     class DistributionConfig < Struct.new(
+      nil,
       :caller_reference,
       :aliases,
       :default_root_object,
@@ -2638,6 +2783,7 @@ module Aws::CloudFront
     #   <p>A complex type that contains zero or more <code>Tag</code> elements.</p>
     #   @return [Types::Tags]
     class DistributionConfigWithTags < Struct.new(
+      nil,
       :distribution_config,
       :tags,
       keyword_init: true
@@ -2665,6 +2811,7 @@ module Aws::CloudFront
     #   <p>Contains the distribution IDs in the list.</p>
     #   @return [Array<String>]
     class DistributionIdList < Struct.new(
+      nil,
       :marker,
       :next_marker,
       :max_items,
@@ -2696,6 +2843,7 @@ module Aws::CloudFront
     #   <p>A complex type that contains one <code>DistributionSummary</code> element for each distribution that was created by the current Amazon Web Services account.</p>
     #   @return [Array<Types::DistributionSummary>]
     class DistributionList < Struct.new(
+      nil,
       :marker,
       :next_marker,
       :max_items,
@@ -2711,6 +2859,7 @@ module Aws::CloudFront
     # @!attribute message
     #   @return [String]
     class DistributionNotDisabled < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -2725,6 +2874,7 @@ module Aws::CloudFront
     #   <p>The ID of the distribution tenant.</p>
     #   @return [String]
     class DistributionResourceId < Struct.new(
+      nil,
       :distribution_id,
       :distribution_tenant_id,
       keyword_init: true
@@ -2806,6 +2956,7 @@ module Aws::CloudFront
     #   <p>ID of the Anycast static IP list that is associated with the distribution.</p>
     #   @return [String]
     class DistributionSummary < Struct.new(
+      nil,
       :id,
       :arn,
       :e_tag,
@@ -2876,6 +3027,7 @@ module Aws::CloudFront
     #   <p>The status of the distribution tenant.</p>
     #   @return [String]
     class DistributionTenant < Struct.new(
+      nil,
       :id,
       :distribution_id,
       :name,
@@ -2902,6 +3054,7 @@ module Aws::CloudFront
     #   <p>The ID of the connection group to filter by. You can find distribution tenants associated with a specific connection group.</p>
     #   @return [String]
     class DistributionTenantAssociationFilter < Struct.new(
+      nil,
       :distribution_id,
       :connection_group_id,
       keyword_init: true
@@ -2947,6 +3100,7 @@ module Aws::CloudFront
     #   <p>The status of the distribution tenant.</p>
     #   @return [String]
     class DistributionTenantSummary < Struct.new(
+      nil,
       :id,
       :distribution_id,
       :name,
@@ -2975,6 +3129,7 @@ module Aws::CloudFront
     #   <p>Explains the status of the DNS configuration.</p>
     #   @return [String]
     class DnsConfiguration < Struct.new(
+      nil,
       :domain,
       :status,
       :reason,
@@ -2997,6 +3152,7 @@ module Aws::CloudFront
     #   <p>The ID of the Amazon Web Services account for the domain conflict.</p>
     #   @return [String]
     class DomainConflict < Struct.new(
+      nil,
       :domain,
       :resource_type,
       :resource_id,
@@ -3011,6 +3167,7 @@ module Aws::CloudFront
     #   <p>The domain name.</p>
     #   @return [String]
     class DomainItem < Struct.new(
+      nil,
       :domain,
       keyword_init: true
     )
@@ -3025,6 +3182,7 @@ module Aws::CloudFront
     #   <p>Whether the domain is active or inactive.</p>
     #   @return [String]
     class DomainResult < Struct.new(
+      nil,
       :domain,
       :status,
       keyword_init: true
@@ -3040,6 +3198,7 @@ module Aws::CloudFront
     #   <p>An array of field patterns in a field-level encryption content type-profile mapping. </p>
     #   @return [Array<Types::EncryptionEntity>]
     class EncryptionEntities < Struct.new(
+      nil,
       :quantity,
       :items,
       keyword_init: true
@@ -3058,6 +3217,7 @@ module Aws::CloudFront
     #   <p>Field patterns in a field-level encryption content type profile specify the fields that you want to be encrypted. You can provide the full field name, or any beginning characters followed by a wildcard (*). You can't overlap field patterns. For example, you can't have both ABC* and AB*. Note that field patterns are case-sensitive.</p>
     #   @return [Types::FieldPatterns]
     class EncryptionEntity < Struct.new(
+      nil,
       :public_key_id,
       :provider_id,
       :field_patterns,
@@ -3074,6 +3234,7 @@ module Aws::CloudFront
     #   <p>Contains information about the Amazon Kinesis data stream where you are sending real-time log data in a real-time log configuration.</p>
     #   @return [Types::KinesisStreamConfig]
     class EndPoint < Struct.new(
+      nil,
       :stream_type,
       :kinesis_stream_config,
       keyword_init: true
@@ -3085,6 +3246,7 @@ module Aws::CloudFront
     # @!attribute message
     #   @return [String]
     class EntityAlreadyExists < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -3095,6 +3257,7 @@ module Aws::CloudFront
     # @!attribute message
     #   @return [String]
     class EntityLimitExceeded < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -3105,6 +3268,7 @@ module Aws::CloudFront
     # @!attribute message
     #   @return [String]
     class EntityNotFound < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -3115,6 +3279,7 @@ module Aws::CloudFront
     # @!attribute message
     #   @return [String]
     class EntitySizeLimitExceeded < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -3132,6 +3297,7 @@ module Aws::CloudFront
     #   <p>A complex data type that includes the profile configurations specified for field-level encryption.</p>
     #   @return [Types::FieldLevelEncryptionConfig]
     class FieldLevelEncryption < Struct.new(
+      nil,
       :id,
       :last_modified_time,
       :field_level_encryption_config,
@@ -3154,6 +3320,7 @@ module Aws::CloudFront
     #   <p>A complex data type that specifies when to forward content if a content type isn't recognized and profiles to use as by default in a request if a query argument doesn't specify a profile to use.</p>
     #   @return [Types::ContentTypeProfileConfig]
     class FieldLevelEncryptionConfig < Struct.new(
+      nil,
       :caller_reference,
       :comment,
       :query_arg_profile_config,
@@ -3167,6 +3334,7 @@ module Aws::CloudFront
     # @!attribute message
     #   @return [String]
     class FieldLevelEncryptionConfigAlreadyExists < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -3177,6 +3345,7 @@ module Aws::CloudFront
     # @!attribute message
     #   @return [String]
     class FieldLevelEncryptionConfigInUse < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -3197,6 +3366,7 @@ module Aws::CloudFront
     #   <p>An array of field-level encryption items.</p>
     #   @return [Array<Types::FieldLevelEncryptionSummary>]
     class FieldLevelEncryptionList < Struct.new(
+      nil,
       :next_marker,
       :max_items,
       :quantity,
@@ -3217,6 +3387,7 @@ module Aws::CloudFront
     #   <p>A complex data type that includes the profile name and the encryption entities for the field-level encryption profile.</p>
     #   @return [Types::FieldLevelEncryptionProfileConfig]
     class FieldLevelEncryptionProfile < Struct.new(
+      nil,
       :id,
       :last_modified_time,
       :field_level_encryption_profile_config,
@@ -3229,6 +3400,7 @@ module Aws::CloudFront
     # @!attribute message
     #   @return [String]
     class FieldLevelEncryptionProfileAlreadyExists < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -3249,6 +3421,7 @@ module Aws::CloudFront
     #   <p>A complex data type of encryption entities for the field-level encryption profile that include the public key ID, provider, and field patterns for specifying which fields to encrypt with this key.</p>
     #   @return [Types::EncryptionEntities]
     class FieldLevelEncryptionProfileConfig < Struct.new(
+      nil,
       :name,
       :caller_reference,
       :comment,
@@ -3262,6 +3435,7 @@ module Aws::CloudFront
     # @!attribute message
     #   @return [String]
     class FieldLevelEncryptionProfileInUse < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -3282,6 +3456,7 @@ module Aws::CloudFront
     #   <p>The field-level encryption profile items.</p>
     #   @return [Array<Types::FieldLevelEncryptionProfileSummary>]
     class FieldLevelEncryptionProfileList < Struct.new(
+      nil,
       :next_marker,
       :max_items,
       :quantity,
@@ -3295,6 +3470,7 @@ module Aws::CloudFront
     # @!attribute message
     #   @return [String]
     class FieldLevelEncryptionProfileSizeExceeded < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -3318,6 +3494,7 @@ module Aws::CloudFront
     #   <p>An optional comment for the field-level encryption profile summary. The comment cannot be longer than 128 characters.</p>
     #   @return [String]
     class FieldLevelEncryptionProfileSummary < Struct.new(
+      nil,
       :id,
       :last_modified_time,
       :name,
@@ -3345,6 +3522,7 @@ module Aws::CloudFront
     #   <p>A summary of a content type-profile mapping.</p>
     #   @return [Types::ContentTypeProfileConfig]
     class FieldLevelEncryptionSummary < Struct.new(
+      nil,
       :id,
       :last_modified_time,
       :comment,
@@ -3363,6 +3541,7 @@ module Aws::CloudFront
     #   <p>An array of the field-level encryption field patterns.</p>
     #   @return [Array<String>]
     class FieldPatterns < Struct.new(
+      nil,
       :quantity,
       :items,
       keyword_init: true
@@ -3384,6 +3563,7 @@ module Aws::CloudFront
     #   <p>This field is deprecated. We recommend that you use a cache policy or an origin request policy instead of this field.</p> <p>If you want to include query strings in the cache key, use a cache policy. For more information, see <a href="https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/controlling-the-cache-key.html#cache-key-create-cache-policy">Creating cache policies</a> in the <i>Amazon CloudFront Developer Guide</i>.</p> <p>If you want to send query strings to the origin but not include them in the cache key, use an origin request policy. For more information, see <a href="https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/controlling-origin-requests.html#origin-request-create-origin-request-policy">Creating origin request policies</a> in the <i>Amazon CloudFront Developer Guide</i>.</p> <p>A complex type that contains information about the query string parameters that you want CloudFront to use for caching for this cache behavior.</p>
     #   @return [Types::QueryStringCacheKeys]
     class ForwardedValues < Struct.new(
+      nil,
       :query_string,
       :cookies,
       :headers,
@@ -3397,6 +3577,7 @@ module Aws::CloudFront
     # @!attribute message
     #   @return [String]
     class FunctionAlreadyExists < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -3411,6 +3592,7 @@ module Aws::CloudFront
     #   <p>The event type of the function, either <code>viewer-request</code> or <code>viewer-response</code>. You cannot use origin-facing event types (<code>origin-request</code> and <code>origin-response</code>) with a CloudFront function.</p>
     #   @return [String]
     class FunctionAssociation < Struct.new(
+      nil,
       :function_arn,
       :event_type,
       keyword_init: true
@@ -3426,6 +3608,7 @@ module Aws::CloudFront
     #   <p>The CloudFront functions that are associated with a cache behavior in a CloudFront distribution. Your functions must be published to the <code>LIVE</code> stage to associate them with a cache behavior.</p>
     #   @return [Array<Types::FunctionAssociation>]
     class FunctionAssociations < Struct.new(
+      nil,
       :quantity,
       :items,
       keyword_init: true
@@ -3444,6 +3627,7 @@ module Aws::CloudFront
     #   <p>The configuration for the key value store associations.</p>
     #   @return [Types::KeyValueStoreAssociations]
     class FunctionConfig < Struct.new(
+      nil,
       :comment,
       :runtime,
       :key_value_store_associations,
@@ -3456,6 +3640,7 @@ module Aws::CloudFront
     # @!attribute message
     #   @return [String]
     class FunctionInUse < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -3476,6 +3661,7 @@ module Aws::CloudFront
     #   <p>Contains the functions in the list.</p>
     #   @return [Array<Types::FunctionSummary>]
     class FunctionList < Struct.new(
+      nil,
       :next_marker,
       :max_items,
       :quantity,
@@ -3499,6 +3685,7 @@ module Aws::CloudFront
     #   <p>The date and time when the function was most recently updated.</p>
     #   @return [Time]
     class FunctionMetadata < Struct.new(
+      nil,
       :function_arn,
       :stage,
       :created_time,
@@ -3512,6 +3699,7 @@ module Aws::CloudFront
     # @!attribute message
     #   @return [String]
     class FunctionSizeLimitExceeded < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -3532,6 +3720,7 @@ module Aws::CloudFront
     #   <p>Contains metadata about a CloudFront function.</p>
     #   @return [Types::FunctionMetadata]
     class FunctionSummary < Struct.new(
+      nil,
       :name,
       :status,
       :function_config,
@@ -3552,6 +3741,7 @@ module Aws::CloudFront
     #   <p>A complex type that contains a <code>Location</code> element for each country in which you want CloudFront either to distribute your content (<code>whitelist</code>) or not distribute your content (<code>blacklist</code>).</p> <p>The <code>Location</code> element is a two-letter, uppercase country code for a country that you want to include in your <code>blacklist</code> or <code>whitelist</code>. Include one <code>Location</code> element for each country.</p> <p>CloudFront and <code>MaxMind</code> both use <code>ISO 3166</code> country codes. For the current list of countries and the corresponding codes, see <code>ISO 3166-1-alpha-2</code> code on the <i>International Organization for Standardization</i> website. You can also refer to the country list on the CloudFront console, which includes both country names and codes.</p>
     #   @return [Array<String>]
     class GeoRestriction < Struct.new(
+      nil,
       :restriction_type,
       :quantity,
       :items,
@@ -3568,6 +3758,7 @@ module Aws::CloudFront
     #   <p>The locations for geographic restrictions.</p>
     #   @return [Array<String>]
     class GeoRestrictionCustomization < Struct.new(
+      nil,
       :restriction_type,
       :locations,
       keyword_init: true
@@ -3579,6 +3770,7 @@ module Aws::CloudFront
     #   <p>The ID of the Anycast static IP list.</p>
     #   @return [String]
     class GetAnycastIpListRequest < Struct.new(
+      nil,
       :id,
       keyword_init: true
     )
@@ -3592,6 +3784,7 @@ module Aws::CloudFront
     #   <p>The version identifier for the current version of the Anycast static IP list.</p>
     #   @return [String]
     class GetAnycastIpListResult < Struct.new(
+      nil,
       :anycast_ip_list,
       :e_tag,
       keyword_init: true
@@ -3603,6 +3796,7 @@ module Aws::CloudFront
     #   <p>The unique identifier for the cache policy. If the cache policy is attached to a distribution's cache behavior, you can get the policy's identifier using <code>ListDistributions</code> or <code>GetDistribution</code>. If the cache policy is not attached to a cache behavior, you can get the identifier using <code>ListCachePolicies</code>.</p>
     #   @return [String]
     class GetCachePolicyConfigRequest < Struct.new(
+      nil,
       :id,
       keyword_init: true
     )
@@ -3616,6 +3810,7 @@ module Aws::CloudFront
     #   <p>The current version of the cache policy.</p>
     #   @return [String]
     class GetCachePolicyConfigResult < Struct.new(
+      nil,
       :cache_policy_config,
       :e_tag,
       keyword_init: true
@@ -3627,6 +3822,7 @@ module Aws::CloudFront
     #   <p>The unique identifier for the cache policy. If the cache policy is attached to a distribution's cache behavior, you can get the policy's identifier using <code>ListDistributions</code> or <code>GetDistribution</code>. If the cache policy is not attached to a cache behavior, you can get the identifier using <code>ListCachePolicies</code>.</p>
     #   @return [String]
     class GetCachePolicyRequest < Struct.new(
+      nil,
       :id,
       keyword_init: true
     )
@@ -3640,6 +3836,7 @@ module Aws::CloudFront
     #   <p>The current version of the cache policy.</p>
     #   @return [String]
     class GetCachePolicyResult < Struct.new(
+      nil,
       :cache_policy,
       :e_tag,
       keyword_init: true
@@ -3652,6 +3849,7 @@ module Aws::CloudFront
     #   <p>The identity's ID.</p>
     #   @return [String]
     class GetCloudFrontOriginAccessIdentityConfigRequest < Struct.new(
+      nil,
       :id,
       keyword_init: true
     )
@@ -3666,6 +3864,7 @@ module Aws::CloudFront
     #   <p>The current version of the configuration. For example: <code>E2QWRUHAPOMQZL</code>.</p>
     #   @return [String]
     class GetCloudFrontOriginAccessIdentityConfigResult < Struct.new(
+      nil,
       :cloud_front_origin_access_identity_config,
       :e_tag,
       keyword_init: true
@@ -3678,6 +3877,7 @@ module Aws::CloudFront
     #   <p>The identity's ID.</p>
     #   @return [String]
     class GetCloudFrontOriginAccessIdentityRequest < Struct.new(
+      nil,
       :id,
       keyword_init: true
     )
@@ -3692,6 +3892,7 @@ module Aws::CloudFront
     #   <p>The current version of the origin access identity's information. For example: <code>E2QWRUHAPOMQZL</code>.</p>
     #   @return [String]
     class GetCloudFrontOriginAccessIdentityResult < Struct.new(
+      nil,
       :cloud_front_origin_access_identity,
       :e_tag,
       keyword_init: true
@@ -3703,6 +3904,7 @@ module Aws::CloudFront
     #   <p>The routing endpoint for the target connection group, such as d111111abcdef8.cloudfront.net.</p>
     #   @return [String]
     class GetConnectionGroupByRoutingEndpointRequest < Struct.new(
+      nil,
       :routing_endpoint,
       keyword_init: true
     )
@@ -3716,6 +3918,7 @@ module Aws::CloudFront
     #   <p>The current version of the connection group.</p>
     #   @return [String]
     class GetConnectionGroupByRoutingEndpointResult < Struct.new(
+      nil,
       :connection_group,
       :e_tag,
       keyword_init: true
@@ -3727,6 +3930,7 @@ module Aws::CloudFront
     #   <p>The ID, name, or Amazon Resource Name (ARN) of the connection group.</p>
     #   @return [String]
     class GetConnectionGroupRequest < Struct.new(
+      nil,
       :identifier,
       keyword_init: true
     )
@@ -3740,6 +3944,7 @@ module Aws::CloudFront
     #   <p>The current version of the connection group.</p>
     #   @return [String]
     class GetConnectionGroupResult < Struct.new(
+      nil,
       :connection_group,
       :e_tag,
       keyword_init: true
@@ -3751,6 +3956,7 @@ module Aws::CloudFront
     #   <p>The identifier of the continuous deployment policy whose configuration you are getting.</p>
     #   @return [String]
     class GetContinuousDeploymentPolicyConfigRequest < Struct.new(
+      nil,
       :id,
       keyword_init: true
     )
@@ -3764,6 +3970,7 @@ module Aws::CloudFront
     #   <p>The version identifier for the current version of the continuous deployment policy.</p>
     #   @return [String]
     class GetContinuousDeploymentPolicyConfigResult < Struct.new(
+      nil,
       :continuous_deployment_policy_config,
       :e_tag,
       keyword_init: true
@@ -3775,6 +3982,7 @@ module Aws::CloudFront
     #   <p>The identifier of the continuous deployment policy that you are getting.</p>
     #   @return [String]
     class GetContinuousDeploymentPolicyRequest < Struct.new(
+      nil,
       :id,
       keyword_init: true
     )
@@ -3788,6 +3996,7 @@ module Aws::CloudFront
     #   <p>The version identifier for the current version of the continuous deployment policy.</p>
     #   @return [String]
     class GetContinuousDeploymentPolicyResult < Struct.new(
+      nil,
       :continuous_deployment_policy,
       :e_tag,
       keyword_init: true
@@ -3800,6 +4009,7 @@ module Aws::CloudFront
     #   <p>The distribution's ID. If the ID is empty, an empty distribution configuration is returned.</p>
     #   @return [String]
     class GetDistributionConfigRequest < Struct.new(
+      nil,
       :id,
       keyword_init: true
     )
@@ -3814,6 +4024,7 @@ module Aws::CloudFront
     #   <p>The current version of the configuration. For example: <code>E2QWRUHAPOMQZL</code>.</p>
     #   @return [String]
     class GetDistributionConfigResult < Struct.new(
+      nil,
       :distribution_config,
       :e_tag,
       keyword_init: true
@@ -3826,6 +4037,7 @@ module Aws::CloudFront
     #   <p>The distribution's ID. If the ID is empty, an empty distribution configuration is returned.</p>
     #   @return [String]
     class GetDistributionRequest < Struct.new(
+      nil,
       :id,
       keyword_init: true
     )
@@ -3840,6 +4052,7 @@ module Aws::CloudFront
     #   <p>The current version of the distribution's information. For example: <code>E2QWRUHAPOMQZL</code>.</p>
     #   @return [String]
     class GetDistributionResult < Struct.new(
+      nil,
       :distribution,
       :e_tag,
       keyword_init: true
@@ -3851,6 +4064,7 @@ module Aws::CloudFront
     #   <p>A domain name associated with the target distribution tenant.</p>
     #   @return [String]
     class GetDistributionTenantByDomainRequest < Struct.new(
+      nil,
       :domain,
       keyword_init: true
     )
@@ -3864,6 +4078,7 @@ module Aws::CloudFront
     #   <p>The current version of the distribution tenant.</p>
     #   @return [String]
     class GetDistributionTenantByDomainResult < Struct.new(
+      nil,
       :distribution_tenant,
       :e_tag,
       keyword_init: true
@@ -3875,6 +4090,7 @@ module Aws::CloudFront
     #   <p>The identifier of the distribution tenant. You can specify the ARN, ID, or name of the distribution tenant.</p>
     #   @return [String]
     class GetDistributionTenantRequest < Struct.new(
+      nil,
       :identifier,
       keyword_init: true
     )
@@ -3888,6 +4104,7 @@ module Aws::CloudFront
     #   <p>The current version of the distribution tenant.</p>
     #   @return [String]
     class GetDistributionTenantResult < Struct.new(
+      nil,
       :distribution_tenant,
       :e_tag,
       keyword_init: true
@@ -3899,6 +4116,7 @@ module Aws::CloudFront
     #   <p>Request the ID for the field-level encryption configuration information.</p>
     #   @return [String]
     class GetFieldLevelEncryptionConfigRequest < Struct.new(
+      nil,
       :id,
       keyword_init: true
     )
@@ -3912,6 +4130,7 @@ module Aws::CloudFront
     #   <p>The current version of the field level encryption configuration. For example: <code>E2QWRUHAPOMQZL</code>.</p>
     #   @return [String]
     class GetFieldLevelEncryptionConfigResult < Struct.new(
+      nil,
       :field_level_encryption_config,
       :e_tag,
       keyword_init: true
@@ -3923,6 +4142,7 @@ module Aws::CloudFront
     #   <p>Get the ID for the field-level encryption profile configuration information.</p>
     #   @return [String]
     class GetFieldLevelEncryptionProfileConfigRequest < Struct.new(
+      nil,
       :id,
       keyword_init: true
     )
@@ -3936,6 +4156,7 @@ module Aws::CloudFront
     #   <p>The current version of the field-level encryption profile configuration result. For example: <code>E2QWRUHAPOMQZL</code>.</p>
     #   @return [String]
     class GetFieldLevelEncryptionProfileConfigResult < Struct.new(
+      nil,
       :field_level_encryption_profile_config,
       :e_tag,
       keyword_init: true
@@ -3947,6 +4168,7 @@ module Aws::CloudFront
     #   <p>Get the ID for the field-level encryption profile information.</p>
     #   @return [String]
     class GetFieldLevelEncryptionProfileRequest < Struct.new(
+      nil,
       :id,
       keyword_init: true
     )
@@ -3960,6 +4182,7 @@ module Aws::CloudFront
     #   <p>The current version of the field level encryption profile. For example: <code>E2QWRUHAPOMQZL</code>.</p>
     #   @return [String]
     class GetFieldLevelEncryptionProfileResult < Struct.new(
+      nil,
       :field_level_encryption_profile,
       :e_tag,
       keyword_init: true
@@ -3971,6 +4194,7 @@ module Aws::CloudFront
     #   <p>Request the ID for the field-level encryption configuration information.</p>
     #   @return [String]
     class GetFieldLevelEncryptionRequest < Struct.new(
+      nil,
       :id,
       keyword_init: true
     )
@@ -3984,6 +4208,7 @@ module Aws::CloudFront
     #   <p>The current version of the field level encryption configuration. For example: <code>E2QWRUHAPOMQZL</code>.</p>
     #   @return [String]
     class GetFieldLevelEncryptionResult < Struct.new(
+      nil,
       :field_level_encryption,
       :e_tag,
       keyword_init: true
@@ -3998,6 +4223,7 @@ module Aws::CloudFront
     #   <p>The function's stage, either <code>DEVELOPMENT</code> or <code>LIVE</code>.</p>
     #   @return [String]
     class GetFunctionRequest < Struct.new(
+      nil,
       :name,
       :stage,
       keyword_init: true
@@ -4015,6 +4241,7 @@ module Aws::CloudFront
     #   <p>The content type (media type) of the response.</p>
     #   @return [String]
     class GetFunctionResult < Struct.new(
+      nil,
       :function_code,
       :e_tag,
       :content_type,
@@ -4030,6 +4257,7 @@ module Aws::CloudFront
     #   <p>The ID of the invalidation to retrieve.</p>
     #   @return [String]
     class GetInvalidationForDistributionTenantRequest < Struct.new(
+      nil,
       :distribution_tenant_id,
       :id,
       keyword_init: true
@@ -4041,6 +4269,7 @@ module Aws::CloudFront
     #   <p>An invalidation.</p>
     #   @return [Types::Invalidation]
     class GetInvalidationForDistributionTenantResult < Struct.new(
+      nil,
       :invalidation,
       keyword_init: true
     )
@@ -4055,6 +4284,7 @@ module Aws::CloudFront
     #   <p>The identifier for the invalidation request, for example, <code>IDFDVBD632BHDS5</code>.</p>
     #   @return [String]
     class GetInvalidationRequest < Struct.new(
+      nil,
       :distribution_id,
       :id,
       keyword_init: true
@@ -4067,6 +4297,7 @@ module Aws::CloudFront
     #   <p>The invalidation's information. For more information, see <a href="https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/InvalidationDatatype.html">Invalidation Complex Type</a>.</p>
     #   @return [Types::Invalidation]
     class GetInvalidationResult < Struct.new(
+      nil,
       :invalidation,
       keyword_init: true
     )
@@ -4077,6 +4308,7 @@ module Aws::CloudFront
     #   <p>The identifier of the key group whose configuration you are getting. To get the identifier, use <code>ListKeyGroups</code>.</p>
     #   @return [String]
     class GetKeyGroupConfigRequest < Struct.new(
+      nil,
       :id,
       keyword_init: true
     )
@@ -4090,6 +4322,7 @@ module Aws::CloudFront
     #   <p>The identifier for this version of the key group.</p>
     #   @return [String]
     class GetKeyGroupConfigResult < Struct.new(
+      nil,
       :key_group_config,
       :e_tag,
       keyword_init: true
@@ -4101,6 +4334,7 @@ module Aws::CloudFront
     #   <p>The identifier of the key group that you are getting. To get the identifier, use <code>ListKeyGroups</code>.</p>
     #   @return [String]
     class GetKeyGroupRequest < Struct.new(
+      nil,
       :id,
       keyword_init: true
     )
@@ -4114,6 +4348,7 @@ module Aws::CloudFront
     #   <p>The identifier for this version of the key group.</p>
     #   @return [String]
     class GetKeyGroupResult < Struct.new(
+      nil,
       :key_group,
       :e_tag,
       keyword_init: true
@@ -4125,6 +4360,7 @@ module Aws::CloudFront
     #   <p>The identifier of the distribution tenant. You can specify the ARN, ID, or name of the distribution tenant.</p>
     #   @return [String]
     class GetManagedCertificateDetailsRequest < Struct.new(
+      nil,
       :identifier,
       keyword_init: true
     )
@@ -4135,6 +4371,7 @@ module Aws::CloudFront
     #   <p>Contains details about the CloudFront managed ACM certificate.</p>
     #   @return [Types::ManagedCertificateDetails]
     class GetManagedCertificateDetailsResult < Struct.new(
+      nil,
       :managed_certificate_details,
       keyword_init: true
     )
@@ -4145,6 +4382,7 @@ module Aws::CloudFront
     #   <p>The ID of the distribution that you are getting metrics information for.</p>
     #   @return [String]
     class GetMonitoringSubscriptionRequest < Struct.new(
+      nil,
       :distribution_id,
       keyword_init: true
     )
@@ -4155,6 +4393,7 @@ module Aws::CloudFront
     #   <p>A monitoring subscription. This structure contains information about whether additional CloudWatch metrics are enabled for a given CloudFront distribution.</p>
     #   @return [Types::MonitoringSubscription]
     class GetMonitoringSubscriptionResult < Struct.new(
+      nil,
       :monitoring_subscription,
       keyword_init: true
     )
@@ -4165,6 +4404,7 @@ module Aws::CloudFront
     #   <p>The unique identifier of the origin access control.</p>
     #   @return [String]
     class GetOriginAccessControlConfigRequest < Struct.new(
+      nil,
       :id,
       keyword_init: true
     )
@@ -4178,6 +4418,7 @@ module Aws::CloudFront
     #   <p>The version identifier for the current version of the origin access control.</p>
     #   @return [String]
     class GetOriginAccessControlConfigResult < Struct.new(
+      nil,
       :origin_access_control_config,
       :e_tag,
       keyword_init: true
@@ -4189,6 +4430,7 @@ module Aws::CloudFront
     #   <p>The unique identifier of the origin access control.</p>
     #   @return [String]
     class GetOriginAccessControlRequest < Struct.new(
+      nil,
       :id,
       keyword_init: true
     )
@@ -4202,6 +4444,7 @@ module Aws::CloudFront
     #   <p>The version identifier for the current version of the origin access control.</p>
     #   @return [String]
     class GetOriginAccessControlResult < Struct.new(
+      nil,
       :origin_access_control,
       :e_tag,
       keyword_init: true
@@ -4213,6 +4456,7 @@ module Aws::CloudFront
     #   <p>The unique identifier for the origin request policy. If the origin request policy is attached to a distribution's cache behavior, you can get the policy's identifier using <code>ListDistributions</code> or <code>GetDistribution</code>. If the origin request policy is not attached to a cache behavior, you can get the identifier using <code>ListOriginRequestPolicies</code>.</p>
     #   @return [String]
     class GetOriginRequestPolicyConfigRequest < Struct.new(
+      nil,
       :id,
       keyword_init: true
     )
@@ -4226,6 +4470,7 @@ module Aws::CloudFront
     #   <p>The current version of the origin request policy.</p>
     #   @return [String]
     class GetOriginRequestPolicyConfigResult < Struct.new(
+      nil,
       :origin_request_policy_config,
       :e_tag,
       keyword_init: true
@@ -4237,6 +4482,7 @@ module Aws::CloudFront
     #   <p>The unique identifier for the origin request policy. If the origin request policy is attached to a distribution's cache behavior, you can get the policy's identifier using <code>ListDistributions</code> or <code>GetDistribution</code>. If the origin request policy is not attached to a cache behavior, you can get the identifier using <code>ListOriginRequestPolicies</code>.</p>
     #   @return [String]
     class GetOriginRequestPolicyRequest < Struct.new(
+      nil,
       :id,
       keyword_init: true
     )
@@ -4250,6 +4496,7 @@ module Aws::CloudFront
     #   <p>The current version of the origin request policy.</p>
     #   @return [String]
     class GetOriginRequestPolicyResult < Struct.new(
+      nil,
       :origin_request_policy,
       :e_tag,
       keyword_init: true
@@ -4261,6 +4508,7 @@ module Aws::CloudFront
     #   <p>The identifier of the public key whose configuration you are getting.</p>
     #   @return [String]
     class GetPublicKeyConfigRequest < Struct.new(
+      nil,
       :id,
       keyword_init: true
     )
@@ -4274,6 +4522,7 @@ module Aws::CloudFront
     #   <p>The identifier for this version of the public key configuration.</p>
     #   @return [String]
     class GetPublicKeyConfigResult < Struct.new(
+      nil,
       :public_key_config,
       :e_tag,
       keyword_init: true
@@ -4285,6 +4534,7 @@ module Aws::CloudFront
     #   <p>The identifier of the public key you are getting.</p>
     #   @return [String]
     class GetPublicKeyRequest < Struct.new(
+      nil,
       :id,
       keyword_init: true
     )
@@ -4298,6 +4548,7 @@ module Aws::CloudFront
     #   <p>The identifier for this version of the public key.</p>
     #   @return [String]
     class GetPublicKeyResult < Struct.new(
+      nil,
       :public_key,
       :e_tag,
       keyword_init: true
@@ -4312,6 +4563,7 @@ module Aws::CloudFront
     #   <p>The Amazon Resource Name (ARN) of the real-time log configuration to get.</p>
     #   @return [String]
     class GetRealtimeLogConfigRequest < Struct.new(
+      nil,
       :name,
       :arn,
       keyword_init: true
@@ -4323,6 +4575,7 @@ module Aws::CloudFront
     #   <p>A real-time log configuration.</p>
     #   @return [Types::RealtimeLogConfig]
     class GetRealtimeLogConfigResult < Struct.new(
+      nil,
       :realtime_log_config,
       keyword_init: true
     )
@@ -4333,6 +4586,7 @@ module Aws::CloudFront
     #   <p>The identifier for the response headers policy.</p> <p>If the response headers policy is attached to a distribution's cache behavior, you can get the policy's identifier using <code>ListDistributions</code> or <code>GetDistribution</code>. If the response headers policy is not attached to a cache behavior, you can get the identifier using <code>ListResponseHeadersPolicies</code>.</p>
     #   @return [String]
     class GetResponseHeadersPolicyConfigRequest < Struct.new(
+      nil,
       :id,
       keyword_init: true
     )
@@ -4346,6 +4600,7 @@ module Aws::CloudFront
     #   <p>The version identifier for the current version of the response headers policy.</p>
     #   @return [String]
     class GetResponseHeadersPolicyConfigResult < Struct.new(
+      nil,
       :response_headers_policy_config,
       :e_tag,
       keyword_init: true
@@ -4357,6 +4612,7 @@ module Aws::CloudFront
     #   <p>The identifier for the response headers policy.</p> <p>If the response headers policy is attached to a distribution's cache behavior, you can get the policy's identifier using <code>ListDistributions</code> or <code>GetDistribution</code>. If the response headers policy is not attached to a cache behavior, you can get the identifier using <code>ListResponseHeadersPolicies</code>.</p>
     #   @return [String]
     class GetResponseHeadersPolicyRequest < Struct.new(
+      nil,
       :id,
       keyword_init: true
     )
@@ -4370,6 +4626,7 @@ module Aws::CloudFront
     #   <p>The version identifier for the current version of the response headers policy.</p>
     #   @return [String]
     class GetResponseHeadersPolicyResult < Struct.new(
+      nil,
       :response_headers_policy,
       :e_tag,
       keyword_init: true
@@ -4382,6 +4639,7 @@ module Aws::CloudFront
     #   <p>The streaming distribution's ID.</p>
     #   @return [String]
     class GetStreamingDistributionConfigRequest < Struct.new(
+      nil,
       :id,
       keyword_init: true
     )
@@ -4396,6 +4654,7 @@ module Aws::CloudFront
     #   <p>The current version of the configuration. For example: <code>E2QWRUHAPOMQZL</code>. </p>
     #   @return [String]
     class GetStreamingDistributionConfigResult < Struct.new(
+      nil,
       :streaming_distribution_config,
       :e_tag,
       keyword_init: true
@@ -4408,6 +4667,7 @@ module Aws::CloudFront
     #   <p>The streaming distribution's ID.</p>
     #   @return [String]
     class GetStreamingDistributionRequest < Struct.new(
+      nil,
       :id,
       keyword_init: true
     )
@@ -4422,6 +4682,7 @@ module Aws::CloudFront
     #   <p>The current version of the streaming distribution's information. For example: <code>E2QWRUHAPOMQZL</code>.</p>
     #   @return [String]
     class GetStreamingDistributionResult < Struct.new(
+      nil,
       :streaming_distribution,
       :e_tag,
       keyword_init: true
@@ -4433,6 +4694,7 @@ module Aws::CloudFront
     #   <p>The VPC origin ID.</p>
     #   @return [String]
     class GetVpcOriginRequest < Struct.new(
+      nil,
       :id,
       keyword_init: true
     )
@@ -4446,6 +4708,7 @@ module Aws::CloudFront
     #   <p>The VPC origin ETag.</p>
     #   @return [String]
     class GetVpcOriginResult < Struct.new(
+      nil,
       :vpc_origin,
       :e_tag,
       keyword_init: true
@@ -4458,6 +4721,7 @@ module Aws::CloudFront
     #   <p>Enables your CloudFront distribution to receive gRPC requests and to proxy them directly to your origins.</p>
     #   @return [Boolean]
     class GrpcConfig < Struct.new(
+      nil,
       :enabled,
       keyword_init: true
     )
@@ -4472,6 +4736,7 @@ module Aws::CloudFront
     #   <p>A list of HTTP header names.</p>
     #   @return [Array<String>]
     class Headers < Struct.new(
+      nil,
       :quantity,
       :items,
       keyword_init: true
@@ -4483,6 +4748,7 @@ module Aws::CloudFront
     # @!attribute message
     #   @return [String]
     class IllegalDelete < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -4493,6 +4759,7 @@ module Aws::CloudFront
     # @!attribute message
     #   @return [String]
     class IllegalFieldLevelEncryptionConfigAssociationWithCacheBehavior < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -4503,6 +4770,7 @@ module Aws::CloudFront
     # @!attribute message
     #   @return [String]
     class IllegalOriginAccessConfiguration < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -4513,6 +4781,7 @@ module Aws::CloudFront
     # @!attribute message
     #   @return [String]
     class IllegalUpdate < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -4527,6 +4796,7 @@ module Aws::CloudFront
     #   <p>The Amazon Resource Name (ARN) of the import source for the key value store.</p>
     #   @return [String]
     class ImportSource < Struct.new(
+      nil,
       :source_type,
       :source_arn,
       keyword_init: true
@@ -4538,6 +4808,7 @@ module Aws::CloudFront
     # @!attribute message
     #   @return [String]
     class InconsistentQuantities < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -4548,6 +4819,7 @@ module Aws::CloudFront
     # @!attribute message
     #   @return [String]
     class InvalidArgument < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -4558,6 +4830,7 @@ module Aws::CloudFront
     # @!attribute message
     #   @return [String]
     class InvalidAssociation < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -4568,6 +4841,7 @@ module Aws::CloudFront
     # @!attribute message
     #   @return [String]
     class InvalidDefaultRootObject < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -4578,6 +4852,7 @@ module Aws::CloudFront
     # @!attribute message
     #   @return [String]
     class InvalidDomainNameForOriginAccessControl < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -4588,6 +4863,7 @@ module Aws::CloudFront
     # @!attribute message
     #   @return [String]
     class InvalidErrorCode < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -4598,6 +4874,7 @@ module Aws::CloudFront
     # @!attribute message
     #   @return [String]
     class InvalidForwardCookies < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -4608,6 +4885,7 @@ module Aws::CloudFront
     # @!attribute message
     #   @return [String]
     class InvalidFunctionAssociation < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -4618,6 +4896,7 @@ module Aws::CloudFront
     # @!attribute message
     #   @return [String]
     class InvalidGeoRestrictionParameter < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -4628,6 +4907,7 @@ module Aws::CloudFront
     # @!attribute message
     #   @return [String]
     class InvalidHeadersForS3Origin < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -4638,6 +4918,7 @@ module Aws::CloudFront
     # @!attribute message
     #   @return [String]
     class InvalidIfMatchVersion < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -4648,6 +4929,7 @@ module Aws::CloudFront
     # @!attribute message
     #   @return [String]
     class InvalidLambdaFunctionAssociation < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -4658,6 +4940,7 @@ module Aws::CloudFront
     # @!attribute message
     #   @return [String]
     class InvalidLocationCode < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -4668,6 +4951,7 @@ module Aws::CloudFront
     # @!attribute message
     #   @return [String]
     class InvalidMinimumProtocolVersion < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -4678,6 +4962,7 @@ module Aws::CloudFront
     # @!attribute message
     #   @return [String]
     class InvalidOrigin < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -4688,6 +4973,7 @@ module Aws::CloudFront
     # @!attribute message
     #   @return [String]
     class InvalidOriginAccessControl < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -4698,6 +4984,7 @@ module Aws::CloudFront
     # @!attribute message
     #   @return [String]
     class InvalidOriginAccessIdentity < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -4708,6 +4995,7 @@ module Aws::CloudFront
     # @!attribute message
     #   @return [String]
     class InvalidOriginKeepaliveTimeout < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -4718,6 +5006,7 @@ module Aws::CloudFront
     # @!attribute message
     #   @return [String]
     class InvalidOriginReadTimeout < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -4728,6 +5017,7 @@ module Aws::CloudFront
     # @!attribute message
     #   @return [String]
     class InvalidProtocolSettings < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -4738,6 +5028,7 @@ module Aws::CloudFront
     # @!attribute message
     #   @return [String]
     class InvalidQueryStringParameters < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -4748,6 +5039,7 @@ module Aws::CloudFront
     # @!attribute message
     #   @return [String]
     class InvalidRelativePath < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -4758,6 +5050,7 @@ module Aws::CloudFront
     # @!attribute message
     #   @return [String]
     class InvalidRequiredProtocol < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -4768,6 +5061,7 @@ module Aws::CloudFront
     # @!attribute message
     #   @return [String]
     class InvalidResponseCode < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -4778,6 +5072,7 @@ module Aws::CloudFront
     # @!attribute message
     #   @return [String]
     class InvalidTTLOrder < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -4788,6 +5083,7 @@ module Aws::CloudFront
     # @!attribute message
     #   @return [String]
     class InvalidTagging < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -4798,6 +5094,7 @@ module Aws::CloudFront
     # @!attribute message
     #   @return [String]
     class InvalidViewerCertificate < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -4808,6 +5105,7 @@ module Aws::CloudFront
     # @!attribute message
     #   @return [String]
     class InvalidWebACLId < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -4828,6 +5126,7 @@ module Aws::CloudFront
     #   <p>The current invalidation information for the batch request.</p>
     #   @return [Types::InvalidationBatch]
     class Invalidation < Struct.new(
+      nil,
       :id,
       :status,
       :create_time,
@@ -4845,6 +5144,7 @@ module Aws::CloudFront
     #   <p>A value that you specify to uniquely identify an invalidation request. CloudFront uses the value to prevent you from accidentally resubmitting an identical request. Whenever you create a new invalidation request, you must specify a new value for <code>CallerReference</code> and change other values in the request as applicable. One way to ensure that the value of <code>CallerReference</code> is unique is to use a <code>timestamp</code>, for example, <code>20120301090000</code>.</p> <p>If you make a second invalidation request with the same value for <code>CallerReference</code>, and if the rest of the request is the same, CloudFront doesn't create a new invalidation request. Instead, CloudFront returns information about the invalidation request that you previously created with the same <code>CallerReference</code>.</p> <p>If <code>CallerReference</code> is a value you already sent in a previous invalidation batch request but the content of any <code>Path</code> is different from the original request, CloudFront returns an <code>InvalidationBatchAlreadyExists</code> error.</p>
     #   @return [String]
     class InvalidationBatch < Struct.new(
+      nil,
       :paths,
       :caller_reference,
       keyword_init: true
@@ -4872,6 +5172,7 @@ module Aws::CloudFront
     #   <p>A complex type that contains one <code>InvalidationSummary</code> element for each invalidation batch created by the current Amazon Web Services account.</p>
     #   @return [Array<Types::InvalidationSummary>]
     class InvalidationList < Struct.new(
+      nil,
       :marker,
       :next_marker,
       :max_items,
@@ -4894,6 +5195,7 @@ module Aws::CloudFront
     #   <p>The status of an invalidation request.</p>
     #   @return [String]
     class InvalidationSummary < Struct.new(
+      nil,
       :id,
       :create_time,
       :status,
@@ -4910,6 +5212,7 @@ module Aws::CloudFront
     #   <p>A list of CloudFront key pair identifiers.</p>
     #   @return [Types::KeyPairIds]
     class KGKeyPairIds < Struct.new(
+      nil,
       :key_group_id,
       :key_pair_ids,
       keyword_init: true
@@ -4928,6 +5231,7 @@ module Aws::CloudFront
     #   <p>The key group configuration.</p>
     #   @return [Types::KeyGroupConfig]
     class KeyGroup < Struct.new(
+      nil,
       :id,
       :last_modified_time,
       :key_group_config,
@@ -4940,6 +5244,7 @@ module Aws::CloudFront
     # @!attribute message
     #   @return [String]
     class KeyGroupAlreadyExists < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -4957,6 +5262,7 @@ module Aws::CloudFront
     #   <p>A comment to describe the key group. The comment cannot be longer than 128 characters.</p>
     #   @return [String]
     class KeyGroupConfig < Struct.new(
+      nil,
       :name,
       :items,
       :comment,
@@ -4979,6 +5285,7 @@ module Aws::CloudFront
     #   <p>A list of key groups.</p>
     #   @return [Array<Types::KeyGroupSummary>]
     class KeyGroupList < Struct.new(
+      nil,
       :next_marker,
       :max_items,
       :quantity,
@@ -4993,6 +5300,7 @@ module Aws::CloudFront
     #   <p>A key group.</p>
     #   @return [Types::KeyGroup]
     class KeyGroupSummary < Struct.new(
+      nil,
       :key_group,
       keyword_init: true
     )
@@ -5007,6 +5315,7 @@ module Aws::CloudFront
     #   <p>A list of CloudFront key pair identifiers.</p>
     #   @return [Array<String>]
     class KeyPairIds < Struct.new(
+      nil,
       :quantity,
       :items,
       keyword_init: true
@@ -5034,6 +5343,7 @@ module Aws::CloudFront
     #   <p>The last-modified time of the key value store.</p>
     #   @return [Time]
     class KeyValueStore < Struct.new(
+      nil,
       :name,
       :id,
       :comment,
@@ -5050,6 +5360,7 @@ module Aws::CloudFront
     #   <p>The Amazon Resource Name (ARN) of the key value store association.</p>
     #   @return [String]
     class KeyValueStoreAssociation < Struct.new(
+      nil,
       :key_value_store_arn,
       keyword_init: true
     )
@@ -5064,6 +5375,7 @@ module Aws::CloudFront
     #   <p>The items of the key value store association.</p>
     #   @return [Array<Types::KeyValueStoreAssociation>]
     class KeyValueStoreAssociations < Struct.new(
+      nil,
       :quantity,
       :items,
       keyword_init: true
@@ -5085,6 +5397,7 @@ module Aws::CloudFront
     #   <p>The items of the key value store list.</p>
     #   @return [Array<Types::KeyValueStore>]
     class KeyValueStoreList < Struct.new(
+      nil,
       :next_marker,
       :max_items,
       :quantity,
@@ -5102,6 +5415,7 @@ module Aws::CloudFront
     #   <p>The Amazon Resource Name (ARN) of the Kinesis data stream where you are sending real-time log data.</p>
     #   @return [String]
     class KinesisStreamConfig < Struct.new(
+      nil,
       :role_arn,
       :stream_arn,
       keyword_init: true
@@ -5120,6 +5434,7 @@ module Aws::CloudFront
     #   <p>A flag that allows a Lambda@Edge function to have read access to the body content. For more information, see <a href="https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/lambda-include-body-access.html">Accessing the Request Body by Choosing the Include Body Option</a> in the Amazon CloudFront Developer Guide.</p>
     #   @return [Boolean]
     class LambdaFunctionAssociation < Struct.new(
+      nil,
       :lambda_function_arn,
       :event_type,
       :include_body,
@@ -5136,6 +5451,7 @@ module Aws::CloudFront
     #   <p> <b>Optional</b>: A complex type that contains <code>LambdaFunctionAssociation</code> items for this cache behavior. If <code>Quantity</code> is <code>0</code>, you can omit <code>Items</code>.</p>
     #   @return [Array<Types::LambdaFunctionAssociation>]
     class LambdaFunctionAssociations < Struct.new(
+      nil,
       :quantity,
       :items,
       keyword_init: true
@@ -5150,6 +5466,7 @@ module Aws::CloudFront
     #   <p>The maximum number of Anycast static IP lists that you want returned in the response.</p>
     #   @return [Integer]
     class ListAnycastIpListsRequest < Struct.new(
+      nil,
       :marker,
       :max_items,
       keyword_init: true
@@ -5161,6 +5478,7 @@ module Aws::CloudFront
     #   <p>Root level tag for the <code>AnycastIpLists</code> parameters.</p>
     #   @return [Types::AnycastIpListCollection]
     class ListAnycastIpListsResult < Struct.new(
+      nil,
       :anycast_ip_lists,
       keyword_init: true
     )
@@ -5177,6 +5495,7 @@ module Aws::CloudFront
     #   <p>The maximum number of cache policies that you want in the response.</p>
     #   @return [Integer]
     class ListCachePoliciesRequest < Struct.new(
+      nil,
       :type,
       :marker,
       :max_items,
@@ -5189,6 +5508,7 @@ module Aws::CloudFront
     #   <p>A list of cache policies.</p>
     #   @return [Types::CachePolicyList]
     class ListCachePoliciesResult < Struct.new(
+      nil,
       :cache_policy_list,
       keyword_init: true
     )
@@ -5203,6 +5523,7 @@ module Aws::CloudFront
     #   <p>The maximum number of origin access identities you want in the response body.</p>
     #   @return [Integer]
     class ListCloudFrontOriginAccessIdentitiesRequest < Struct.new(
+      nil,
       :marker,
       :max_items,
       keyword_init: true
@@ -5215,6 +5536,7 @@ module Aws::CloudFront
     #   <p>The <code>CloudFrontOriginAccessIdentityList</code> type.</p>
     #   @return [Types::CloudFrontOriginAccessIdentityList]
     class ListCloudFrontOriginAccessIdentitiesResult < Struct.new(
+      nil,
       :cloud_front_origin_access_identity_list,
       keyword_init: true
     )
@@ -5234,6 +5556,7 @@ module Aws::CloudFront
     #   <p>The maximum number of conflicting aliases that you want in the response.</p>
     #   @return [Integer]
     class ListConflictingAliasesRequest < Struct.new(
+      nil,
       :distribution_id,
       :alias,
       :marker,
@@ -5247,6 +5570,7 @@ module Aws::CloudFront
     #   <p>A list of conflicting aliases.</p>
     #   @return [Types::ConflictingAliasesList]
     class ListConflictingAliasesResult < Struct.new(
+      nil,
       :conflicting_aliases_list,
       keyword_init: true
     )
@@ -5263,6 +5587,7 @@ module Aws::CloudFront
     #   <p>The maximum number of connection groups to return.</p>
     #   @return [Integer]
     class ListConnectionGroupsRequest < Struct.new(
+      nil,
       :association_filter,
       :marker,
       :max_items,
@@ -5278,6 +5603,7 @@ module Aws::CloudFront
     #   <p>The list of connection groups that you retrieved.</p>
     #   @return [Array<Types::ConnectionGroupSummary>]
     class ListConnectionGroupsResult < Struct.new(
+      nil,
       :next_marker,
       :connection_groups,
       keyword_init: true
@@ -5292,6 +5618,7 @@ module Aws::CloudFront
     #   <p>The maximum number of continuous deployment policies that you want returned in the response.</p>
     #   @return [Integer]
     class ListContinuousDeploymentPoliciesRequest < Struct.new(
+      nil,
       :marker,
       :max_items,
       keyword_init: true
@@ -5303,6 +5630,7 @@ module Aws::CloudFront
     #   <p>A list of continuous deployment policies.</p>
     #   @return [Types::ContinuousDeploymentPolicyList]
     class ListContinuousDeploymentPoliciesResult < Struct.new(
+      nil,
       :continuous_deployment_policy_list,
       keyword_init: true
     )
@@ -5322,6 +5650,7 @@ module Aws::CloudFront
     #   <p>The maximum number of distribution tenants to return by the specified customization.</p>
     #   @return [Integer]
     class ListDistributionTenantsByCustomizationRequest < Struct.new(
+      nil,
       :web_acl_arn,
       :certificate_arn,
       :marker,
@@ -5338,6 +5667,7 @@ module Aws::CloudFront
     #   <p>A list of distribution tenants with the specified customization.</p>
     #   @return [Array<Types::DistributionTenantSummary>]
     class ListDistributionTenantsByCustomizationResult < Struct.new(
+      nil,
       :next_marker,
       :distribution_tenant_list,
       keyword_init: true
@@ -5355,6 +5685,7 @@ module Aws::CloudFront
     #   <p>The maximum number of distribution tenants to return.</p>
     #   @return [Integer]
     class ListDistributionTenantsRequest < Struct.new(
+      nil,
       :association_filter,
       :marker,
       :max_items,
@@ -5370,6 +5701,7 @@ module Aws::CloudFront
     #   <p>The list of distribution tenants that you retrieved.</p>
     #   @return [Array<Types::DistributionTenantSummary>]
     class ListDistributionTenantsResult < Struct.new(
+      nil,
       :next_marker,
       :distribution_tenant_list,
       keyword_init: true
@@ -5387,6 +5719,7 @@ module Aws::CloudFront
     #   <p>The ID of the Anycast static IP list.</p>
     #   @return [String]
     class ListDistributionsByAnycastIpListIdRequest < Struct.new(
+      nil,
       :marker,
       :max_items,
       :anycast_ip_list_id,
@@ -5399,6 +5732,7 @@ module Aws::CloudFront
     #   <p>A distribution list.</p>
     #   @return [Types::DistributionList]
     class ListDistributionsByAnycastIpListIdResult < Struct.new(
+      nil,
       :distribution_list,
       keyword_init: true
     )
@@ -5415,6 +5749,7 @@ module Aws::CloudFront
     #   <p>The ID of the cache policy whose associated distribution IDs you want to list.</p>
     #   @return [String]
     class ListDistributionsByCachePolicyIdRequest < Struct.new(
+      nil,
       :marker,
       :max_items,
       :cache_policy_id,
@@ -5427,6 +5762,7 @@ module Aws::CloudFront
     #   <p>A list of distribution IDs.</p>
     #   @return [Types::DistributionIdList]
     class ListDistributionsByCachePolicyIdResult < Struct.new(
+      nil,
       :distribution_id_list,
       keyword_init: true
     )
@@ -5443,6 +5779,7 @@ module Aws::CloudFront
     #   <p>This field specifies whether the connection mode is through a standard distribution (direct) or a multi-tenant distribution with distribution tenants (tenant-only).</p>
     #   @return [String]
     class ListDistributionsByConnectionModeRequest < Struct.new(
+      nil,
       :marker,
       :max_items,
       :connection_mode,
@@ -5455,6 +5792,7 @@ module Aws::CloudFront
     #   <p>A distribution list.</p>
     #   @return [Types::DistributionList]
     class ListDistributionsByConnectionModeResult < Struct.new(
+      nil,
       :distribution_list,
       keyword_init: true
     )
@@ -5471,6 +5809,7 @@ module Aws::CloudFront
     #   <p>The ID of the key group whose associated distribution IDs you are listing.</p>
     #   @return [String]
     class ListDistributionsByKeyGroupRequest < Struct.new(
+      nil,
       :marker,
       :max_items,
       :key_group_id,
@@ -5483,6 +5822,7 @@ module Aws::CloudFront
     #   <p>A list of distribution IDs.</p>
     #   @return [Types::DistributionIdList]
     class ListDistributionsByKeyGroupResult < Struct.new(
+      nil,
       :distribution_id_list,
       keyword_init: true
     )
@@ -5499,6 +5839,7 @@ module Aws::CloudFront
     #   <p>The ID of the origin request policy whose associated distribution IDs you want to list.</p>
     #   @return [String]
     class ListDistributionsByOriginRequestPolicyIdRequest < Struct.new(
+      nil,
       :marker,
       :max_items,
       :origin_request_policy_id,
@@ -5511,6 +5852,7 @@ module Aws::CloudFront
     #   <p>A list of distribution IDs.</p>
     #   @return [Types::DistributionIdList]
     class ListDistributionsByOriginRequestPolicyIdResult < Struct.new(
+      nil,
       :distribution_id_list,
       keyword_init: true
     )
@@ -5530,6 +5872,7 @@ module Aws::CloudFront
     #   <p>The Amazon Resource Name (ARN) of the real-time log configuration whose associated distributions you want to list.</p>
     #   @return [String]
     class ListDistributionsByRealtimeLogConfigRequest < Struct.new(
+      nil,
       :marker,
       :max_items,
       :realtime_log_config_name,
@@ -5543,6 +5886,7 @@ module Aws::CloudFront
     #   <p>A distribution list.</p>
     #   @return [Types::DistributionList]
     class ListDistributionsByRealtimeLogConfigResult < Struct.new(
+      nil,
       :distribution_list,
       keyword_init: true
     )
@@ -5559,6 +5903,7 @@ module Aws::CloudFront
     #   <p>The ID of the response headers policy whose associated distribution IDs you want to list.</p>
     #   @return [String]
     class ListDistributionsByResponseHeadersPolicyIdRequest < Struct.new(
+      nil,
       :marker,
       :max_items,
       :response_headers_policy_id,
@@ -5571,6 +5916,7 @@ module Aws::CloudFront
     #   <p>A list of distribution IDs.</p>
     #   @return [Types::DistributionIdList]
     class ListDistributionsByResponseHeadersPolicyIdResult < Struct.new(
+      nil,
       :distribution_id_list,
       keyword_init: true
     )
@@ -5587,6 +5933,7 @@ module Aws::CloudFront
     #   <p>The VPC origin ID.</p>
     #   @return [String]
     class ListDistributionsByVpcOriginIdRequest < Struct.new(
+      nil,
       :marker,
       :max_items,
       :vpc_origin_id,
@@ -5599,6 +5946,7 @@ module Aws::CloudFront
     #   <p>A list of distribution IDs.</p>
     #   @return [Types::DistributionIdList]
     class ListDistributionsByVpcOriginIdResult < Struct.new(
+      nil,
       :distribution_id_list,
       keyword_init: true
     )
@@ -5616,6 +5964,7 @@ module Aws::CloudFront
     #   <p>The ID of the WAF web ACL that you want to list the associated distributions. If you specify "null" for the ID, the request returns a list of the distributions that aren't associated with a web ACL. </p> <p>For WAFV2, this is the ARN of the web ACL, such as <code>arn:aws:wafv2:us-east-1:123456789012:global/webacl/ExampleWebACL/a1b2c3d4-5678-90ab-cdef-EXAMPLE11111</code>.</p> <p>For WAF Classic, this is the ID of the web ACL, such as <code>a1b2c3d4-5678-90ab-cdef-EXAMPLE11111</code>.</p>
     #   @return [String]
     class ListDistributionsByWebACLIdRequest < Struct.new(
+      nil,
       :marker,
       :max_items,
       :web_acl_id,
@@ -5629,6 +5978,7 @@ module Aws::CloudFront
     #   <p>The <code>DistributionList</code> type.</p>
     #   @return [Types::DistributionList]
     class ListDistributionsByWebACLIdResult < Struct.new(
+      nil,
       :distribution_list,
       keyword_init: true
     )
@@ -5643,6 +5993,7 @@ module Aws::CloudFront
     #   <p>The maximum number of distributions you want in the response body.</p>
     #   @return [Integer]
     class ListDistributionsRequest < Struct.new(
+      nil,
       :marker,
       :max_items,
       keyword_init: true
@@ -5655,6 +6006,7 @@ module Aws::CloudFront
     #   <p>The <code>DistributionList</code> type.</p>
     #   @return [Types::DistributionList]
     class ListDistributionsResult < Struct.new(
+      nil,
       :distribution_list,
       keyword_init: true
     )
@@ -5674,6 +6026,7 @@ module Aws::CloudFront
     #   <p>The marker for the next set of domain conflicts.</p>
     #   @return [String]
     class ListDomainConflictsRequest < Struct.new(
+      nil,
       :domain,
       :domain_control_validation_resource,
       :max_items,
@@ -5690,6 +6043,7 @@ module Aws::CloudFront
     #   <p>A token used for pagination of results returned in the response. You can use the token from the previous request to define where the current request should begin.</p>
     #   @return [String]
     class ListDomainConflictsResult < Struct.new(
+      nil,
       :domain_conflicts,
       :next_marker,
       keyword_init: true
@@ -5704,6 +6058,7 @@ module Aws::CloudFront
     #   <p>The maximum number of field-level encryption configurations you want in the response body.</p>
     #   @return [Integer]
     class ListFieldLevelEncryptionConfigsRequest < Struct.new(
+      nil,
       :marker,
       :max_items,
       keyword_init: true
@@ -5715,6 +6070,7 @@ module Aws::CloudFront
     #   <p>Returns a list of all field-level encryption configurations that have been created in CloudFront for this account.</p>
     #   @return [Types::FieldLevelEncryptionList]
     class ListFieldLevelEncryptionConfigsResult < Struct.new(
+      nil,
       :field_level_encryption_list,
       keyword_init: true
     )
@@ -5728,6 +6084,7 @@ module Aws::CloudFront
     #   <p>The maximum number of field-level encryption profiles you want in the response body. </p>
     #   @return [Integer]
     class ListFieldLevelEncryptionProfilesRequest < Struct.new(
+      nil,
       :marker,
       :max_items,
       keyword_init: true
@@ -5739,6 +6096,7 @@ module Aws::CloudFront
     #   <p>Returns a list of the field-level encryption profiles that have been created in CloudFront for this account.</p>
     #   @return [Types::FieldLevelEncryptionProfileList]
     class ListFieldLevelEncryptionProfilesResult < Struct.new(
+      nil,
       :field_level_encryption_profile_list,
       keyword_init: true
     )
@@ -5755,6 +6113,7 @@ module Aws::CloudFront
     #   <p>An optional filter to return only the functions that are in the specified stage, either <code>DEVELOPMENT</code> or <code>LIVE</code>.</p>
     #   @return [String]
     class ListFunctionsRequest < Struct.new(
+      nil,
       :marker,
       :max_items,
       :stage,
@@ -5767,6 +6126,7 @@ module Aws::CloudFront
     #   <p>A list of CloudFront functions.</p>
     #   @return [Types::FunctionList]
     class ListFunctionsResult < Struct.new(
+      nil,
       :function_list,
       keyword_init: true
     )
@@ -5783,6 +6143,7 @@ module Aws::CloudFront
     #   <p>The maximum number of invalidations to return for the distribution tenant.</p>
     #   @return [Integer]
     class ListInvalidationsForDistributionTenantRequest < Struct.new(
+      nil,
       :id,
       :marker,
       :max_items,
@@ -5795,6 +6156,7 @@ module Aws::CloudFront
     #   <p>The <code>InvalidationList</code> complex type describes the list of invalidation objects. For more information about invalidation, see <a href="https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/Invalidation.html">Invalidating Objects (Web Distributions Only)</a> in the <i>Amazon CloudFront Developer Guide</i>.</p>
     #   @return [Types::InvalidationList]
     class ListInvalidationsForDistributionTenantResult < Struct.new(
+      nil,
       :invalidation_list,
       keyword_init: true
     )
@@ -5812,6 +6174,7 @@ module Aws::CloudFront
     #   <p>The maximum number of invalidation batches that you want in the response body.</p>
     #   @return [Integer]
     class ListInvalidationsRequest < Struct.new(
+      nil,
       :distribution_id,
       :marker,
       :max_items,
@@ -5825,6 +6188,7 @@ module Aws::CloudFront
     #   <p>Information about invalidation batches.</p>
     #   @return [Types::InvalidationList]
     class ListInvalidationsResult < Struct.new(
+      nil,
       :invalidation_list,
       keyword_init: true
     )
@@ -5838,6 +6202,7 @@ module Aws::CloudFront
     #   <p>The maximum number of key groups that you want in the response.</p>
     #   @return [Integer]
     class ListKeyGroupsRequest < Struct.new(
+      nil,
       :marker,
       :max_items,
       keyword_init: true
@@ -5849,6 +6214,7 @@ module Aws::CloudFront
     #   <p>A list of key groups.</p>
     #   @return [Types::KeyGroupList]
     class ListKeyGroupsResult < Struct.new(
+      nil,
       :key_group_list,
       keyword_init: true
     )
@@ -5865,6 +6231,7 @@ module Aws::CloudFront
     #   <p>The status of the request for the key value stores list.</p>
     #   @return [String]
     class ListKeyValueStoresRequest < Struct.new(
+      nil,
       :marker,
       :max_items,
       :status,
@@ -5877,6 +6244,7 @@ module Aws::CloudFront
     #   <p>The resulting key value stores list.</p>
     #   @return [Types::KeyValueStoreList]
     class ListKeyValueStoresResult < Struct.new(
+      nil,
       :key_value_store_list,
       keyword_init: true
     )
@@ -5890,6 +6258,7 @@ module Aws::CloudFront
     #   <p>The maximum number of origin access controls that you want in the response.</p>
     #   @return [Integer]
     class ListOriginAccessControlsRequest < Struct.new(
+      nil,
       :marker,
       :max_items,
       keyword_init: true
@@ -5901,6 +6270,7 @@ module Aws::CloudFront
     #   <p>A list of origin access controls.</p>
     #   @return [Types::OriginAccessControlList]
     class ListOriginAccessControlsResult < Struct.new(
+      nil,
       :origin_access_control_list,
       keyword_init: true
     )
@@ -5917,6 +6287,7 @@ module Aws::CloudFront
     #   <p>The maximum number of origin request policies that you want in the response.</p>
     #   @return [Integer]
     class ListOriginRequestPoliciesRequest < Struct.new(
+      nil,
       :type,
       :marker,
       :max_items,
@@ -5929,6 +6300,7 @@ module Aws::CloudFront
     #   <p>A list of origin request policies.</p>
     #   @return [Types::OriginRequestPolicyList]
     class ListOriginRequestPoliciesResult < Struct.new(
+      nil,
       :origin_request_policy_list,
       keyword_init: true
     )
@@ -5942,6 +6314,7 @@ module Aws::CloudFront
     #   <p>The maximum number of public keys you want in the response body.</p>
     #   @return [Integer]
     class ListPublicKeysRequest < Struct.new(
+      nil,
       :marker,
       :max_items,
       keyword_init: true
@@ -5953,6 +6326,7 @@ module Aws::CloudFront
     #   <p>Returns a list of all public keys that have been added to CloudFront for this account.</p>
     #   @return [Types::PublicKeyList]
     class ListPublicKeysResult < Struct.new(
+      nil,
       :public_key_list,
       keyword_init: true
     )
@@ -5966,6 +6340,7 @@ module Aws::CloudFront
     #   <p>Use this field when paginating results to indicate where to begin in your list of real-time log configurations. The response includes real-time log configurations in the list that occur after the marker. To get the next page of the list, set this field's value to the value of <code>NextMarker</code> from the current page's response.</p>
     #   @return [String]
     class ListRealtimeLogConfigsRequest < Struct.new(
+      nil,
       :max_items,
       :marker,
       keyword_init: true
@@ -5977,6 +6352,7 @@ module Aws::CloudFront
     #   <p>A list of real-time log configurations.</p>
     #   @return [Types::RealtimeLogConfigs]
     class ListRealtimeLogConfigsResult < Struct.new(
+      nil,
       :realtime_log_configs,
       keyword_init: true
     )
@@ -5993,6 +6369,7 @@ module Aws::CloudFront
     #   <p>The maximum number of response headers policies that you want to get in the response.</p>
     #   @return [Integer]
     class ListResponseHeadersPoliciesRequest < Struct.new(
+      nil,
       :type,
       :marker,
       :max_items,
@@ -6005,6 +6382,7 @@ module Aws::CloudFront
     #   <p>A list of response headers policies.</p>
     #   @return [Types::ResponseHeadersPolicyList]
     class ListResponseHeadersPoliciesResult < Struct.new(
+      nil,
       :response_headers_policy_list,
       keyword_init: true
     )
@@ -6019,6 +6397,7 @@ module Aws::CloudFront
     #   <p>The value that you provided for the <code>MaxItems</code> request parameter.</p>
     #   @return [Integer]
     class ListStreamingDistributionsRequest < Struct.new(
+      nil,
       :marker,
       :max_items,
       keyword_init: true
@@ -6031,6 +6410,7 @@ module Aws::CloudFront
     #   <p>The <code>StreamingDistributionList</code> type.</p>
     #   @return [Types::StreamingDistributionList]
     class ListStreamingDistributionsResult < Struct.new(
+      nil,
       :streaming_distribution_list,
       keyword_init: true
     )
@@ -6042,6 +6422,7 @@ module Aws::CloudFront
     #   <p>An ARN of a CloudFront resource.</p>
     #   @return [String]
     class ListTagsForResourceRequest < Struct.new(
+      nil,
       :resource,
       keyword_init: true
     )
@@ -6053,6 +6434,7 @@ module Aws::CloudFront
     #   <p>A complex type that contains zero or more <code>Tag</code> elements.</p>
     #   @return [Types::Tags]
     class ListTagsForResourceResult < Struct.new(
+      nil,
       :tags,
       keyword_init: true
     )
@@ -6066,6 +6448,7 @@ module Aws::CloudFront
     #   <p>The maximum number of items included in the list.</p>
     #   @return [Integer]
     class ListVpcOriginsRequest < Struct.new(
+      nil,
       :marker,
       :max_items,
       keyword_init: true
@@ -6077,6 +6460,7 @@ module Aws::CloudFront
     #   <p>List of VPC origins.</p>
     #   @return [Types::VpcOriginList]
     class ListVpcOriginsResult < Struct.new(
+      nil,
       :vpc_origin_list,
       keyword_init: true
     )
@@ -6097,6 +6481,7 @@ module Aws::CloudFront
     #   <p>An optional string that you want CloudFront to prefix to the access log <code>filenames</code> for this distribution, for example, <code>myprefix/</code>. If you want to enable logging, but you don't want to specify a prefix, you still must include an empty <code>Prefix</code> element in the <code>Logging</code> element.</p>
     #   @return [String]
     class LoggingConfig < Struct.new(
+      nil,
       :enabled,
       :include_cookies,
       :bucket,
@@ -6128,6 +6513,7 @@ module Aws::CloudFront
     #   <p>Contains details about the validation token of the specified CloudFront managed ACM certificate.</p>
     #   @return [Array<Types::ValidationTokenDetail>]
     class ManagedCertificateDetails < Struct.new(
+      nil,
       :certificate_arn,
       :certificate_status,
       :validation_token_host,
@@ -6148,6 +6534,7 @@ module Aws::CloudFront
     #   <p>You can opt out of certificate transparency logging by specifying the <code>disabled</code> option. Opt in by specifying <code>enabled</code>. For more information, see <a href="https://docs.aws.amazon.com/acm/latest/userguide/acm-concepts.html#concept-transparency">Certificate Transparency Logging </a> in the <i>Certificate Manager User Guide</i>.</p>
     #   @return [String]
     class ManagedCertificateRequest < Struct.new(
+      nil,
       :validation_token_host,
       :primary_domain_name,
       :certificate_transparency_logging_preference,
@@ -6160,6 +6547,7 @@ module Aws::CloudFront
     # @!attribute message
     #   @return [String]
     class MissingBody < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -6171,6 +6559,7 @@ module Aws::CloudFront
     #   <p>A subscription configuration for additional CloudWatch metrics.</p>
     #   @return [Types::RealtimeMetricsSubscriptionConfig]
     class MonitoringSubscription < Struct.new(
+      nil,
       :realtime_metrics_subscription_config,
       keyword_init: true
     )
@@ -6181,6 +6570,7 @@ module Aws::CloudFront
     # @!attribute message
     #   @return [String]
     class MonitoringSubscriptionAlreadyExists < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -6191,6 +6581,7 @@ module Aws::CloudFront
     # @!attribute message
     #   @return [String]
     class NoSuchCachePolicy < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -6201,6 +6592,7 @@ module Aws::CloudFront
     # @!attribute message
     #   @return [String]
     class NoSuchCloudFrontOriginAccessIdentity < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -6211,6 +6603,7 @@ module Aws::CloudFront
     # @!attribute message
     #   @return [String]
     class NoSuchContinuousDeploymentPolicy < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -6221,6 +6614,7 @@ module Aws::CloudFront
     # @!attribute message
     #   @return [String]
     class NoSuchDistribution < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -6231,6 +6625,7 @@ module Aws::CloudFront
     # @!attribute message
     #   @return [String]
     class NoSuchFieldLevelEncryptionConfig < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -6241,6 +6636,7 @@ module Aws::CloudFront
     # @!attribute message
     #   @return [String]
     class NoSuchFieldLevelEncryptionProfile < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -6251,6 +6647,7 @@ module Aws::CloudFront
     # @!attribute message
     #   @return [String]
     class NoSuchFunctionExists < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -6261,6 +6658,7 @@ module Aws::CloudFront
     # @!attribute message
     #   @return [String]
     class NoSuchInvalidation < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -6271,6 +6669,7 @@ module Aws::CloudFront
     # @!attribute message
     #   @return [String]
     class NoSuchMonitoringSubscription < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -6281,6 +6680,7 @@ module Aws::CloudFront
     # @!attribute message
     #   @return [String]
     class NoSuchOrigin < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -6291,6 +6691,7 @@ module Aws::CloudFront
     # @!attribute message
     #   @return [String]
     class NoSuchOriginAccessControl < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -6301,6 +6702,7 @@ module Aws::CloudFront
     # @!attribute message
     #   @return [String]
     class NoSuchOriginRequestPolicy < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -6311,6 +6713,7 @@ module Aws::CloudFront
     # @!attribute message
     #   @return [String]
     class NoSuchPublicKey < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -6321,6 +6724,7 @@ module Aws::CloudFront
     # @!attribute message
     #   @return [String]
     class NoSuchRealtimeLogConfig < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -6331,6 +6735,7 @@ module Aws::CloudFront
     # @!attribute message
     #   @return [String]
     class NoSuchResource < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -6341,6 +6746,7 @@ module Aws::CloudFront
     # @!attribute message
     #   @return [String]
     class NoSuchResponseHeadersPolicy < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -6351,6 +6757,7 @@ module Aws::CloudFront
     # @!attribute message
     #   @return [String]
     class NoSuchStreamingDistribution < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -6395,6 +6802,7 @@ module Aws::CloudFront
     #   <p>The unique identifier of an origin access control for this origin.</p> <p>For more information, see <a href="https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/private-content-restricting-access-to-s3.html">Restricting access to an Amazon S3 origin</a> in the <i>Amazon CloudFront Developer Guide</i>.</p>
     #   @return [String]
     class Origin < Struct.new(
+      nil,
       :id,
       :domain_name,
       :origin_path,
@@ -6420,6 +6828,7 @@ module Aws::CloudFront
     #   <p>The origin access control.</p>
     #   @return [Types::OriginAccessControlConfig]
     class OriginAccessControl < Struct.new(
+      nil,
       :id,
       :origin_access_control_config,
       keyword_init: true
@@ -6431,6 +6840,7 @@ module Aws::CloudFront
     # @!attribute message
     #   @return [String]
     class OriginAccessControlAlreadyExists < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -6454,6 +6864,7 @@ module Aws::CloudFront
     #   <p>The type of origin that this origin access control is for.</p>
     #   @return [String]
     class OriginAccessControlConfig < Struct.new(
+      nil,
       :name,
       :description,
       :signing_protocol,
@@ -6468,6 +6879,7 @@ module Aws::CloudFront
     # @!attribute message
     #   @return [String]
     class OriginAccessControlInUse < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -6494,6 +6906,7 @@ module Aws::CloudFront
     #   <p>Contains the origin access controls in the list.</p>
     #   @return [Array<Types::OriginAccessControlSummary>]
     class OriginAccessControlList < Struct.new(
+      nil,
       :marker,
       :next_marker,
       :max_items,
@@ -6525,6 +6938,7 @@ module Aws::CloudFront
     #   <p>The type of origin that this origin access control is for.</p>
     #   @return [String]
     class OriginAccessControlSummary < Struct.new(
+      nil,
       :id,
       :description,
       :name,
@@ -6544,6 +6958,7 @@ module Aws::CloudFront
     #   <p>The value for the header that you specified in the <code>HeaderName</code> field.</p>
     #   @return [String]
     class OriginCustomHeader < Struct.new(
+      nil,
       :header_name,
       :header_value,
       keyword_init: true
@@ -6565,6 +6980,7 @@ module Aws::CloudFront
     #   <p>The selection criteria for the origin group. For more information, see <a href="https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/high_availability_origin_failover.html#concept_origin_groups.creating">Create an origin group</a> in the <i>Amazon CloudFront Developer Guide</i>.</p>
     #   @return [String]
     class OriginGroup < Struct.new(
+      nil,
       :id,
       :failover_criteria,
       :members,
@@ -6579,6 +6995,7 @@ module Aws::CloudFront
     #   <p>The status codes that, when returned from the primary origin, will trigger CloudFront to failover to the second origin.</p>
     #   @return [Types::StatusCodes]
     class OriginGroupFailoverCriteria < Struct.new(
+      nil,
       :status_codes,
       keyword_init: true
     )
@@ -6590,6 +7007,7 @@ module Aws::CloudFront
     #   <p>The ID for an origin in an origin group.</p>
     #   @return [String]
     class OriginGroupMember < Struct.new(
+      nil,
       :origin_id,
       keyword_init: true
     )
@@ -6604,6 +7022,7 @@ module Aws::CloudFront
     #   <p>Items (origins) in an origin group.</p>
     #   @return [Array<Types::OriginGroupMember>]
     class OriginGroupMembers < Struct.new(
+      nil,
       :quantity,
       :items,
       keyword_init: true
@@ -6619,6 +7038,7 @@ module Aws::CloudFront
     #   <p>The items (origin groups) in a distribution.</p>
     #   @return [Array<Types::OriginGroup>]
     class OriginGroups < Struct.new(
+      nil,
       :quantity,
       :items,
       keyword_init: true
@@ -6637,6 +7057,7 @@ module Aws::CloudFront
     #   <p>The origin request policy configuration.</p>
     #   @return [Types::OriginRequestPolicyConfig]
     class OriginRequestPolicy < Struct.new(
+      nil,
       :id,
       :last_modified_time,
       :origin_request_policy_config,
@@ -6649,6 +7070,7 @@ module Aws::CloudFront
     # @!attribute message
     #   @return [String]
     class OriginRequestPolicyAlreadyExists < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -6672,6 +7094,7 @@ module Aws::CloudFront
     #   <p>The URL query strings from viewer requests to include in origin requests.</p>
     #   @return [Types::OriginRequestPolicyQueryStringsConfig]
     class OriginRequestPolicyConfig < Struct.new(
+      nil,
       :comment,
       :name,
       :headers_config,
@@ -6690,6 +7113,7 @@ module Aws::CloudFront
     #   <p>Contains a list of cookie names.</p>
     #   @return [Types::CookieNames]
     class OriginRequestPolicyCookiesConfig < Struct.new(
+      nil,
       :cookie_behavior,
       :cookies,
       keyword_init: true
@@ -6705,6 +7129,7 @@ module Aws::CloudFront
     #   <p>Contains a list of HTTP header names.</p>
     #   @return [Types::Headers]
     class OriginRequestPolicyHeadersConfig < Struct.new(
+      nil,
       :header_behavior,
       :headers,
       keyword_init: true
@@ -6716,6 +7141,7 @@ module Aws::CloudFront
     # @!attribute message
     #   @return [String]
     class OriginRequestPolicyInUse < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -6736,6 +7162,7 @@ module Aws::CloudFront
     #   <p>Contains the origin request policies in the list.</p>
     #   @return [Array<Types::OriginRequestPolicySummary>]
     class OriginRequestPolicyList < Struct.new(
+      nil,
       :next_marker,
       :max_items,
       :quantity,
@@ -6753,6 +7180,7 @@ module Aws::CloudFront
     #   <p>Contains the specific query strings in viewer requests that either <i> <b>are</b> </i> or <i> <b>are not</b> </i> included in requests that CloudFront sends to the origin. The behavior depends on whether the <code>QueryStringBehavior</code> field in the <code>OriginRequestPolicyQueryStringsConfig</code> type is set to <code>whitelist</code> (the listed query strings <i> <b>are</b> </i> included) or <code>allExcept</code> (the listed query strings <i> <b>are not</b> </i> included, but all other query strings are).</p>
     #   @return [Types::QueryStringNames]
     class OriginRequestPolicyQueryStringsConfig < Struct.new(
+      nil,
       :query_string_behavior,
       :query_strings,
       keyword_init: true
@@ -6768,6 +7196,7 @@ module Aws::CloudFront
     #   <p>The origin request policy.</p>
     #   @return [Types::OriginRequestPolicy]
     class OriginRequestPolicySummary < Struct.new(
+      nil,
       :type,
       :origin_request_policy,
       keyword_init: true
@@ -6783,6 +7212,7 @@ module Aws::CloudFront
     #   <p>The Amazon Web Services Region for Origin Shield.</p> <p>Specify the Amazon Web Services Region that has the lowest latency to your origin. To specify a region, use the region code, not the region name. For example, specify the US East (Ohio) region as <code>us-east-2</code>.</p> <p>When you enable CloudFront Origin Shield, you must specify the Amazon Web Services Region for Origin Shield. For the list of Amazon Web Services Regions that you can specify, and for help choosing the best Region for your origin, see <a href="https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/origin-shield.html#choose-origin-shield-region">Choosing the Amazon Web Services Region for Origin Shield</a> in the <i>Amazon CloudFront Developer Guide</i>.</p>
     #   @return [String]
     class OriginShield < Struct.new(
+      nil,
       :enabled,
       :origin_shield_region,
       keyword_init: true
@@ -6798,6 +7228,7 @@ module Aws::CloudFront
     #   <p>A list that contains allowed SSL/TLS protocols for this distribution.</p>
     #   @return [Array<String>]
     class OriginSslProtocols < Struct.new(
+      nil,
       :quantity,
       :items,
       keyword_init: true
@@ -6813,6 +7244,7 @@ module Aws::CloudFront
     #   <p>A list of origins.</p>
     #   @return [Array<Types::Origin>]
     class Origins < Struct.new(
+      nil,
       :quantity,
       :items,
       keyword_init: true
@@ -6828,6 +7260,7 @@ module Aws::CloudFront
     #   <p>The parameter value.</p>
     #   @return [String]
     class Parameter < Struct.new(
+      nil,
       :name,
       :value,
       keyword_init: true
@@ -6843,6 +7276,7 @@ module Aws::CloudFront
     #   <p>The value that you assigned to the parameter.</p>
     #   @return [Types::ParameterDefinitionSchema]
     class ParameterDefinition < Struct.new(
+      nil,
       :name,
       :definition,
       keyword_init: true
@@ -6855,6 +7289,7 @@ module Aws::CloudFront
     #   <p>An object that contains information about the string schema.</p>
     #   @return [Types::StringSchemaConfig]
     class ParameterDefinitionSchema < Struct.new(
+      nil,
       :string_schema,
       keyword_init: true
     )
@@ -6878,6 +7313,7 @@ module Aws::CloudFront
     #   <p>An object that determines whether any URL query strings in viewer requests (and if so, which query strings) are included in the cache key and in requests that CloudFront sends to the origin.</p>
     #   @return [Types::CachePolicyQueryStringsConfig]
     class ParametersInCacheKeyAndForwardedToOrigin < Struct.new(
+      nil,
       :enable_accept_encoding_gzip,
       :enable_accept_encoding_brotli,
       :headers_config,
@@ -6896,6 +7332,7 @@ module Aws::CloudFront
     #   <p>A complex type that contains a list of the paths that you want to invalidate.</p>
     #   @return [Array<String>]
     class Paths < Struct.new(
+      nil,
       :quantity,
       :items,
       keyword_init: true
@@ -6907,6 +7344,7 @@ module Aws::CloudFront
     # @!attribute message
     #   @return [String]
     class PreconditionFailed < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -6924,6 +7362,7 @@ module Aws::CloudFront
     #   <p>Configuration information about a public key that you can use with <a href="https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/PrivateContent.html">signed URLs and signed cookies</a>, or with <a href="https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/field-level-encryption.html">field-level encryption</a>.</p>
     #   @return [Types::PublicKeyConfig]
     class PublicKey < Struct.new(
+      nil,
       :id,
       :created_time,
       :public_key_config,
@@ -6936,6 +7375,7 @@ module Aws::CloudFront
     # @!attribute message
     #   @return [String]
     class PublicKeyAlreadyExists < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -6956,6 +7396,7 @@ module Aws::CloudFront
     #   <p>A comment to describe the public key. The comment cannot be longer than 128 characters.</p>
     #   @return [String]
     class PublicKeyConfig < Struct.new(
+      nil,
       :caller_reference,
       :name,
       :encoded_key,
@@ -6969,6 +7410,7 @@ module Aws::CloudFront
     # @!attribute message
     #   @return [String]
     class PublicKeyInUse < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -6989,6 +7431,7 @@ module Aws::CloudFront
     #   <p>A list of public keys.</p>
     #   @return [Array<Types::PublicKeySummary>]
     class PublicKeyList < Struct.new(
+      nil,
       :next_marker,
       :max_items,
       :quantity,
@@ -7015,6 +7458,7 @@ module Aws::CloudFront
     #   <p>A comment to describe the public key. The comment cannot be longer than 128 characters.</p>
     #   @return [String]
     class PublicKeySummary < Struct.new(
+      nil,
       :id,
       :name,
       :created_time,
@@ -7032,6 +7476,7 @@ module Aws::CloudFront
     #   <p>The current version (<code>ETag</code> value) of the function that you are publishing, which you can get using <code>DescribeFunction</code>.</p>
     #   @return [String]
     class PublishFunctionRequest < Struct.new(
+      nil,
       :name,
       :if_match,
       keyword_init: true
@@ -7043,6 +7488,7 @@ module Aws::CloudFront
     #   <p>Contains configuration information and metadata about a CloudFront function.</p>
     #   @return [Types::FunctionSummary]
     class PublishFunctionResult < Struct.new(
+      nil,
       :function_summary,
       keyword_init: true
     )
@@ -7057,6 +7503,7 @@ module Aws::CloudFront
     #   <p>ID of profile to use for field-level encryption query argument-profile mapping</p>
     #   @return [String]
     class QueryArgProfile < Struct.new(
+      nil,
       :query_arg,
       :profile_id,
       keyword_init: true
@@ -7072,6 +7519,7 @@ module Aws::CloudFront
     #   <p>Profiles specified for query argument-profile mapping for field-level encryption.</p>
     #   @return [Types::QueryArgProfiles]
     class QueryArgProfileConfig < Struct.new(
+      nil,
       :forward_when_query_arg_profile_is_unknown,
       :query_arg_profiles,
       keyword_init: true
@@ -7083,6 +7531,7 @@ module Aws::CloudFront
     # @!attribute message
     #   @return [String]
     class QueryArgProfileEmpty < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -7097,6 +7546,7 @@ module Aws::CloudFront
     #   <p>Number of items for query argument-profile mapping for field-level encryption.</p>
     #   @return [Array<Types::QueryArgProfile>]
     class QueryArgProfiles < Struct.new(
+      nil,
       :quantity,
       :items,
       keyword_init: true
@@ -7112,6 +7562,7 @@ module Aws::CloudFront
     #   <p>A list that contains the query string parameters that you want CloudFront to use as a basis for caching for a cache behavior. If <code>Quantity</code> is 0, you can omit <code>Items</code>.</p>
     #   @return [Array<String>]
     class QueryStringCacheKeys < Struct.new(
+      nil,
       :quantity,
       :items,
       keyword_init: true
@@ -7127,6 +7578,7 @@ module Aws::CloudFront
     #   <p>A list of query string names.</p>
     #   @return [Array<String>]
     class QueryStringNames < Struct.new(
+      nil,
       :quantity,
       :items,
       keyword_init: true
@@ -7151,6 +7603,7 @@ module Aws::CloudFront
     #   <p>A list of fields that are included in each real-time log record. In an API response, the fields are provided in the same order in which they are sent to the Amazon Kinesis data stream.</p> <p>For more information about fields, see <a href="https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/real-time-logs.html#understand-real-time-log-config-fields">Real-time log configuration fields</a> in the <i>Amazon CloudFront Developer Guide</i>.</p>
     #   @return [Array<String>]
     class RealtimeLogConfig < Struct.new(
+      nil,
       :arn,
       :name,
       :sampling_rate,
@@ -7165,6 +7618,7 @@ module Aws::CloudFront
     # @!attribute message
     #   @return [String]
     class RealtimeLogConfigAlreadyExists < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -7175,6 +7629,7 @@ module Aws::CloudFront
     # @!attribute message
     #   @return [String]
     class RealtimeLogConfigInUse < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -7185,6 +7640,7 @@ module Aws::CloudFront
     # @!attribute message
     #   @return [String]
     class RealtimeLogConfigOwnerMismatch < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -7208,6 +7664,7 @@ module Aws::CloudFront
     #   <p>If there are more items in the list than are in this response, this element is present. It contains the value that you should use in the <code>Marker</code> field of a subsequent request to continue listing real-time log configurations where you left off. </p>
     #   @return [String]
     class RealtimeLogConfigs < Struct.new(
+      nil,
       :max_items,
       :items,
       :is_truncated,
@@ -7223,6 +7680,7 @@ module Aws::CloudFront
     #   <p>A flag that indicates whether additional CloudWatch metrics are enabled for a given CloudFront distribution.</p>
     #   @return [String]
     class RealtimeMetricsSubscriptionConfig < Struct.new(
+      nil,
       :realtime_metrics_subscription_status,
       keyword_init: true
     )
@@ -7233,6 +7691,7 @@ module Aws::CloudFront
     # @!attribute message
     #   @return [String]
     class ResourceInUse < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -7243,6 +7702,7 @@ module Aws::CloudFront
     # @!attribute message
     #   @return [String]
     class ResourceNotDisabled < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -7260,6 +7720,7 @@ module Aws::CloudFront
     #   <p>A response headers policy configuration.</p>
     #   @return [Types::ResponseHeadersPolicyConfig]
     class ResponseHeadersPolicy < Struct.new(
+      nil,
       :id,
       :last_modified_time,
       :response_headers_policy_config,
@@ -7276,6 +7737,7 @@ module Aws::CloudFront
     #   <p>The list of HTTP header names. You can specify <code>*</code> to allow all headers.</p>
     #   @return [Array<String>]
     class ResponseHeadersPolicyAccessControlAllowHeaders < Struct.new(
+      nil,
       :quantity,
       :items,
       keyword_init: true
@@ -7291,6 +7753,7 @@ module Aws::CloudFront
     #   <p>The list of HTTP methods. Valid values are:</p> <ul> <li> <p> <code>GET</code> </p> </li> <li> <p> <code>DELETE</code> </p> </li> <li> <p> <code>HEAD</code> </p> </li> <li> <p> <code>OPTIONS</code> </p> </li> <li> <p> <code>PATCH</code> </p> </li> <li> <p> <code>POST</code> </p> </li> <li> <p> <code>PUT</code> </p> </li> <li> <p> <code>ALL</code> </p> </li> </ul> <p> <code>ALL</code> is a special value that includes all of the listed HTTP methods.</p>
     #   @return [Array<String>]
     class ResponseHeadersPolicyAccessControlAllowMethods < Struct.new(
+      nil,
       :quantity,
       :items,
       keyword_init: true
@@ -7306,6 +7769,7 @@ module Aws::CloudFront
     #   <p>The list of origins (domain names). You can specify <code>*</code> to allow all origins.</p>
     #   @return [Array<String>]
     class ResponseHeadersPolicyAccessControlAllowOrigins < Struct.new(
+      nil,
       :quantity,
       :items,
       keyword_init: true
@@ -7321,6 +7785,7 @@ module Aws::CloudFront
     #   <p>The list of HTTP headers. You can specify <code>*</code> to expose all headers.</p>
     #   @return [Array<String>]
     class ResponseHeadersPolicyAccessControlExposeHeaders < Struct.new(
+      nil,
       :quantity,
       :items,
       keyword_init: true
@@ -7332,6 +7797,7 @@ module Aws::CloudFront
     # @!attribute message
     #   @return [String]
     class ResponseHeadersPolicyAlreadyExists < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -7361,6 +7827,7 @@ module Aws::CloudFront
     #   <p>A configuration for a set of HTTP headers to remove from the HTTP response.</p>
     #   @return [Types::ResponseHeadersPolicyRemoveHeadersConfig]
     class ResponseHeadersPolicyConfig < Struct.new(
+      nil,
       :comment,
       :name,
       :cors_config,
@@ -7381,6 +7848,7 @@ module Aws::CloudFront
     #   <p>The policy directives and their values that CloudFront includes as values for the <code>Content-Security-Policy</code> HTTP response header.</p>
     #   @return [String]
     class ResponseHeadersPolicyContentSecurityPolicy < Struct.new(
+      nil,
       :override,
       :content_security_policy,
       keyword_init: true
@@ -7393,6 +7861,7 @@ module Aws::CloudFront
     #   <p>A Boolean that determines whether CloudFront overrides the <code>X-Content-Type-Options</code> HTTP response header received from the origin with the one specified in this response headers policy.</p>
     #   @return [Boolean]
     class ResponseHeadersPolicyContentTypeOptions < Struct.new(
+      nil,
       :override,
       keyword_init: true
     )
@@ -7422,6 +7891,7 @@ module Aws::CloudFront
     #   <p>A Boolean that determines whether CloudFront overrides HTTP response headers received from the origin with the ones specified in this response headers policy.</p>
     #   @return [Boolean]
     class ResponseHeadersPolicyCorsConfig < Struct.new(
+      nil,
       :access_control_allow_origins,
       :access_control_allow_headers,
       :access_control_allow_methods,
@@ -7445,6 +7915,7 @@ module Aws::CloudFront
     #   <p>A Boolean that determines whether CloudFront overrides a response header with the same name received from the origin with the header specified here.</p>
     #   @return [Boolean]
     class ResponseHeadersPolicyCustomHeader < Struct.new(
+      nil,
       :header,
       :value,
       :override,
@@ -7461,6 +7932,7 @@ module Aws::CloudFront
     #   <p>The list of HTTP response headers and their values.</p>
     #   @return [Array<Types::ResponseHeadersPolicyCustomHeader>]
     class ResponseHeadersPolicyCustomHeadersConfig < Struct.new(
+      nil,
       :quantity,
       :items,
       keyword_init: true
@@ -7476,6 +7948,7 @@ module Aws::CloudFront
     #   <p>The value of the <code>X-Frame-Options</code> HTTP response header. Valid values are <code>DENY</code> and <code>SAMEORIGIN</code>.</p> <p>For more information about these values, see <a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/X-Frame-Options">X-Frame-Options</a> in the MDN Web Docs.</p>
     #   @return [String]
     class ResponseHeadersPolicyFrameOptions < Struct.new(
+      nil,
       :override,
       :frame_option,
       keyword_init: true
@@ -7487,6 +7960,7 @@ module Aws::CloudFront
     # @!attribute message
     #   @return [String]
     class ResponseHeadersPolicyInUse < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -7507,6 +7981,7 @@ module Aws::CloudFront
     #   <p>The response headers policies in the list.</p>
     #   @return [Array<Types::ResponseHeadersPolicySummary>]
     class ResponseHeadersPolicyList < Struct.new(
+      nil,
       :next_marker,
       :max_items,
       :quantity,
@@ -7524,6 +7999,7 @@ module Aws::CloudFront
     #   <p>The value of the <code>Referrer-Policy</code> HTTP response header. Valid values are:</p> <ul> <li> <p> <code>no-referrer</code> </p> </li> <li> <p> <code>no-referrer-when-downgrade</code> </p> </li> <li> <p> <code>origin</code> </p> </li> <li> <p> <code>origin-when-cross-origin</code> </p> </li> <li> <p> <code>same-origin</code> </p> </li> <li> <p> <code>strict-origin</code> </p> </li> <li> <p> <code>strict-origin-when-cross-origin</code> </p> </li> <li> <p> <code>unsafe-url</code> </p> </li> </ul> <p>For more information about these values, see <a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Referrer-Policy">Referrer-Policy</a> in the MDN Web Docs.</p>
     #   @return [String]
     class ResponseHeadersPolicyReferrerPolicy < Struct.new(
+      nil,
       :override,
       :referrer_policy,
       keyword_init: true
@@ -7536,6 +8012,7 @@ module Aws::CloudFront
     #   <p>The HTTP header name.</p>
     #   @return [String]
     class ResponseHeadersPolicyRemoveHeader < Struct.new(
+      nil,
       :header,
       keyword_init: true
     )
@@ -7550,6 +8027,7 @@ module Aws::CloudFront
     #   <p>The list of HTTP header names.</p>
     #   @return [Array<Types::ResponseHeadersPolicyRemoveHeader>]
     class ResponseHeadersPolicyRemoveHeadersConfig < Struct.new(
+      nil,
       :quantity,
       :items,
       keyword_init: true
@@ -7577,6 +8055,7 @@ module Aws::CloudFront
     #   <p>Determines whether CloudFront includes the <code>Strict-Transport-Security</code> HTTP response header and the header's value.</p> <p>For more information about the <code>Strict-Transport-Security</code> HTTP response header, see <a href="https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/understanding-response-headers-policies.html#understanding-response-headers-policies-security">Security headers</a> in the <i>Amazon CloudFront Developer Guide</i> and <a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Strict-Transport-Security">Strict-Transport-Security</a> in the MDN Web Docs.</p>
     #   @return [Types::ResponseHeadersPolicyStrictTransportSecurity]
     class ResponseHeadersPolicySecurityHeadersConfig < Struct.new(
+      nil,
       :xss_protection,
       :frame_options,
       :referrer_policy,
@@ -7596,6 +8075,7 @@ module Aws::CloudFront
     #   <p>A number 0–100 (inclusive) that specifies the percentage of responses that you want CloudFront to add the <code>Server-Timing</code> header to. When you set the sampling rate to 100, CloudFront adds the <code>Server-Timing</code> header to the HTTP response for every request that matches the cache behavior that this response headers policy is attached to. When you set it to 50, CloudFront adds the header to 50% of the responses for requests that match the cache behavior. You can set the sampling rate to any number 0–100 with up to four decimal places.</p>
     #   @return [Float]
     class ResponseHeadersPolicyServerTimingHeadersConfig < Struct.new(
+      nil,
       :enabled,
       :sampling_rate,
       keyword_init: true
@@ -7617,6 +8097,7 @@ module Aws::CloudFront
     #   <p>A number that CloudFront uses as the value for the <code>max-age</code> directive in the <code>Strict-Transport-Security</code> HTTP response header.</p>
     #   @return [Integer]
     class ResponseHeadersPolicyStrictTransportSecurity < Struct.new(
+      nil,
       :override,
       :include_subdomains,
       :preload,
@@ -7634,6 +8115,7 @@ module Aws::CloudFront
     #   <p>The response headers policy.</p>
     #   @return [Types::ResponseHeadersPolicy]
     class ResponseHeadersPolicySummary < Struct.new(
+      nil,
       :type,
       :response_headers_policy,
       keyword_init: true
@@ -7655,6 +8137,7 @@ module Aws::CloudFront
     #   <p>A reporting URI, which CloudFront uses as the value of the <code>report</code> directive in the <code>X-XSS-Protection</code> header.</p> <p>You cannot specify a <code>ReportUri</code> when <code>ModeBlock</code> is <code>true</code>.</p> <p>For more information about using a reporting URL, see <a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/X-XSS-Protection">X-XSS-Protection</a> in the MDN Web Docs.</p>
     #   @return [String]
     class ResponseHeadersPolicyXSSProtection < Struct.new(
+      nil,
       :override,
       :protection,
       :mode_block,
@@ -7669,6 +8152,7 @@ module Aws::CloudFront
     #   <p>A complex type that controls the countries in which your content is distributed. CloudFront determines the location of your users using <code>MaxMind</code> GeoIP databases.</p>
     #   @return [Types::GeoRestriction]
     class Restrictions < Struct.new(
+      nil,
       :geo_restriction,
       keyword_init: true
     )
@@ -7683,6 +8167,7 @@ module Aws::CloudFront
     #   <p>The CloudFront origin access identity to associate with the distribution. Use an origin access identity to configure the distribution so that end users can only access objects in an Amazon S3 bucket through CloudFront.</p> <p>If you want end users to be able to access objects using either the CloudFront URL or the Amazon S3 URL, specify an empty <code>OriginAccessIdentity</code> element.</p> <p>To delete the origin access identity from an existing distribution, update the distribution configuration and include an empty <code>OriginAccessIdentity</code> element.</p> <p>To replace the origin access identity, update the distribution configuration and specify the new origin access identity.</p> <p>For more information, see <a href="https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/private-content-restricting-access-to-s3.html">Using an Origin Access Identity to Restrict Access to Your Amazon S3 Content</a> in the <i> Amazon CloudFront Developer Guide</i>.</p>
     #   @return [String]
     class S3Origin < Struct.new(
+      nil,
       :domain_name,
       :origin_access_identity,
       keyword_init: true
@@ -7698,6 +8183,7 @@ module Aws::CloudFront
     #   <p>Specifies how long, in seconds, CloudFront waits for a response from the origin. This is also known as the <i>origin response timeout</i>. The minimum timeout is 1 second, the maximum is 120 seconds, and the default (if you don't specify otherwise) is 30 seconds.</p> <p>For more information, see <a href="https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/DownloadDistValuesOrigin.html#DownloadDistValuesOriginResponseTimeout">Response timeout</a> in the <i>Amazon CloudFront Developer Guide</i>.</p>
     #   @return [Integer]
     class S3OriginConfig < Struct.new(
+      nil,
       :origin_access_identity,
       :origin_read_timeout,
       keyword_init: true
@@ -7718,6 +8204,7 @@ module Aws::CloudFront
     #   <p>The maximum amount of time to consider requests from the viewer as being part of the same session. Allowed values are 300–3600 seconds (5–60 minutes).</p> <p>The value must be greater than or equal to <code>IdleTTL</code>.</p>
     #   @return [Integer]
     class SessionStickinessConfig < Struct.new(
+      nil,
       :idle_ttl,
       :maximum_ttl,
       keyword_init: true
@@ -7733,6 +8220,7 @@ module Aws::CloudFront
     #   <p>A list of CloudFront key pair identifiers.</p>
     #   @return [Types::KeyPairIds]
     class Signer < Struct.new(
+      nil,
       :aws_account_number,
       :key_pair_ids,
       keyword_init: true
@@ -7748,6 +8236,7 @@ module Aws::CloudFront
     #   <p>The CloudFront domain name of the staging distribution.</p>
     #   @return [Array<String>]
     class StagingDistributionDnsNames < Struct.new(
+      nil,
       :quantity,
       :items,
       keyword_init: true
@@ -7759,6 +8248,7 @@ module Aws::CloudFront
     # @!attribute message
     #   @return [String]
     class StagingDistributionInUse < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -7773,6 +8263,7 @@ module Aws::CloudFront
     #   <p>The items (status codes) for an origin group.</p>
     #   @return [Array<Integer>]
     class StatusCodes < Struct.new(
+      nil,
       :quantity,
       :items,
       keyword_init: true
@@ -7803,6 +8294,7 @@ module Aws::CloudFront
     #   <p>The current configuration information for the RTMP distribution.</p>
     #   @return [Types::StreamingDistributionConfig]
     class StreamingDistribution < Struct.new(
+      nil,
       :id,
       :arn,
       :status,
@@ -7819,6 +8311,7 @@ module Aws::CloudFront
     # @!attribute message
     #   @return [String]
     class StreamingDistributionAlreadyExists < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -7851,6 +8344,7 @@ module Aws::CloudFront
     #   <p>Whether the streaming distribution is enabled to accept user requests for content.</p>
     #   @return [Boolean]
     class StreamingDistributionConfig < Struct.new(
+      nil,
       :caller_reference,
       :s3_origin,
       :aliases,
@@ -7872,6 +8366,7 @@ module Aws::CloudFront
     #   <p>A complex type that contains zero or more <code>Tag</code> elements.</p>
     #   @return [Types::Tags]
     class StreamingDistributionConfigWithTags < Struct.new(
+      nil,
       :streaming_distribution_config,
       :tags,
       keyword_init: true
@@ -7899,6 +8394,7 @@ module Aws::CloudFront
     #   <p>A complex type that contains one <code>StreamingDistributionSummary</code> element for each distribution that was created by the current Amazon Web Services account.</p>
     #   @return [Array<Types::StreamingDistributionSummary>]
     class StreamingDistributionList < Struct.new(
+      nil,
       :marker,
       :next_marker,
       :max_items,
@@ -7914,6 +8410,7 @@ module Aws::CloudFront
     # @!attribute message
     #   @return [String]
     class StreamingDistributionNotDisabled < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -7955,6 +8452,7 @@ module Aws::CloudFront
     #   <p>Whether the distribution is enabled to accept end user requests for content.</p>
     #   @return [Boolean]
     class StreamingDistributionSummary < Struct.new(
+      nil,
       :id,
       :arn,
       :status,
@@ -7982,6 +8480,7 @@ module Aws::CloudFront
     #   <p>An optional string that you want CloudFront to prefix to the access log filenames for this streaming distribution, for example, <code>myprefix/</code>. If you want to enable logging, but you don't want to specify a prefix, you still must include an empty <code>Prefix</code> element in the <code>Logging</code> element.</p>
     #   @return [String]
     class StreamingLoggingConfig < Struct.new(
+      nil,
       :enabled,
       :bucket,
       :prefix,
@@ -8001,6 +8500,7 @@ module Aws::CloudFront
     #   <p>Whether the defined parameter is required.</p>
     #   @return [Boolean]
     class StringSchemaConfig < Struct.new(
+      nil,
       :comment,
       :default_value,
       :required,
@@ -8017,6 +8517,7 @@ module Aws::CloudFront
     #   <p>A string that contains an optional <code>Tag</code> value.</p> <p>The string length should be between 0 and 256 characters. Valid characters include <code>a-z</code>, <code>A-Z</code>, <code>0-9</code>, space, and the special characters <code>_ - . : / = + @</code>.</p>
     #   @return [String]
     class Tag < Struct.new(
+      nil,
       :key,
       :value,
       keyword_init: true
@@ -8029,6 +8530,7 @@ module Aws::CloudFront
     #   <p>A complex type that contains <code>Tag</code> key elements.</p>
     #   @return [Array<String>]
     class TagKeys < Struct.new(
+      nil,
       :items,
       keyword_init: true
     )
@@ -8043,6 +8545,7 @@ module Aws::CloudFront
     #   <p>A complex type that contains zero or more <code>Tag</code> elements.</p>
     #   @return [Types::Tags]
     class TagResourceRequest < Struct.new(
+      nil,
       :resource,
       :tags,
       keyword_init: true
@@ -8055,6 +8558,7 @@ module Aws::CloudFront
     #   <p>A complex type that contains <code>Tag</code> elements.</p>
     #   @return [Array<Types::Tag>]
     class Tags < Struct.new(
+      nil,
       :items,
       keyword_init: true
     )
@@ -8066,6 +8570,7 @@ module Aws::CloudFront
     #   <p>The parameters that you specify for a distribution tenant.</p>
     #   @return [Array<Types::ParameterDefinition>]
     class TenantConfig < Struct.new(
+      nil,
       :parameter_definitions,
       keyword_init: true
     )
@@ -8076,6 +8581,7 @@ module Aws::CloudFront
     # @!attribute message
     #   @return [String]
     class TestFunctionFailed < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -8095,6 +8601,7 @@ module Aws::CloudFront
     #   <p>The event object to test the function with. For more information about the structure of the event object, see <a href="https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/managing-functions.html#test-function">Testing functions</a> in the <i>Amazon CloudFront Developer Guide</i>.</p>
     #   @return [String]
     class TestFunctionRequest < Struct.new(
+      nil,
       :name,
       :if_match,
       :stage,
@@ -8108,6 +8615,7 @@ module Aws::CloudFront
     #   <p>An object that represents the result of running the function with the provided event object.</p>
     #   @return [Types::TestResult]
     class TestFunctionResult < Struct.new(
+      nil,
       :test_result,
       keyword_init: true
     )
@@ -8131,6 +8639,7 @@ module Aws::CloudFront
     #   <p>The event object returned by the function. For more information about the structure of the event object, see <a href="https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/functions-event-structure.html">Event object structure</a> in the <i>Amazon CloudFront Developer Guide</i>.</p>
     #   @return [String]
     class TestResult < Struct.new(
+      nil,
       :function_summary,
       :compute_utilization,
       :function_execution_logs,
@@ -8145,6 +8654,7 @@ module Aws::CloudFront
     # @!attribute message
     #   @return [String]
     class TooLongCSPInResponseHeadersPolicy < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -8155,6 +8665,7 @@ module Aws::CloudFront
     # @!attribute message
     #   @return [String]
     class TooManyCacheBehaviors < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -8165,6 +8676,7 @@ module Aws::CloudFront
     # @!attribute message
     #   @return [String]
     class TooManyCachePolicies < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -8175,6 +8687,7 @@ module Aws::CloudFront
     # @!attribute message
     #   @return [String]
     class TooManyCertificates < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -8185,6 +8698,7 @@ module Aws::CloudFront
     # @!attribute message
     #   @return [String]
     class TooManyCloudFrontOriginAccessIdentities < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -8195,6 +8709,7 @@ module Aws::CloudFront
     # @!attribute message
     #   @return [String]
     class TooManyContinuousDeploymentPolicies < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -8205,6 +8720,7 @@ module Aws::CloudFront
     # @!attribute message
     #   @return [String]
     class TooManyCookieNamesInWhiteList < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -8215,6 +8731,7 @@ module Aws::CloudFront
     # @!attribute message
     #   @return [String]
     class TooManyCookiesInCachePolicy < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -8225,6 +8742,7 @@ module Aws::CloudFront
     # @!attribute message
     #   @return [String]
     class TooManyCookiesInOriginRequestPolicy < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -8235,6 +8753,7 @@ module Aws::CloudFront
     # @!attribute message
     #   @return [String]
     class TooManyCustomHeadersInResponseHeadersPolicy < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -8245,6 +8764,7 @@ module Aws::CloudFront
     # @!attribute message
     #   @return [String]
     class TooManyDistributionCNAMEs < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -8255,6 +8775,7 @@ module Aws::CloudFront
     # @!attribute message
     #   @return [String]
     class TooManyDistributions < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -8265,6 +8786,7 @@ module Aws::CloudFront
     # @!attribute message
     #   @return [String]
     class TooManyDistributionsAssociatedToCachePolicy < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -8275,6 +8797,7 @@ module Aws::CloudFront
     # @!attribute message
     #   @return [String]
     class TooManyDistributionsAssociatedToFieldLevelEncryptionConfig < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -8285,6 +8808,7 @@ module Aws::CloudFront
     # @!attribute message
     #   @return [String]
     class TooManyDistributionsAssociatedToKeyGroup < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -8295,6 +8819,7 @@ module Aws::CloudFront
     # @!attribute message
     #   @return [String]
     class TooManyDistributionsAssociatedToOriginAccessControl < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -8305,6 +8830,7 @@ module Aws::CloudFront
     # @!attribute message
     #   @return [String]
     class TooManyDistributionsAssociatedToOriginRequestPolicy < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -8315,6 +8841,7 @@ module Aws::CloudFront
     # @!attribute message
     #   @return [String]
     class TooManyDistributionsAssociatedToResponseHeadersPolicy < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -8325,6 +8852,7 @@ module Aws::CloudFront
     # @!attribute message
     #   @return [String]
     class TooManyDistributionsWithFunctionAssociations < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -8335,6 +8863,7 @@ module Aws::CloudFront
     # @!attribute message
     #   @return [String]
     class TooManyDistributionsWithLambdaAssociations < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -8345,6 +8874,7 @@ module Aws::CloudFront
     # @!attribute message
     #   @return [String]
     class TooManyDistributionsWithSingleFunctionARN < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -8355,6 +8885,7 @@ module Aws::CloudFront
     # @!attribute message
     #   @return [String]
     class TooManyFieldLevelEncryptionConfigs < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -8365,6 +8896,7 @@ module Aws::CloudFront
     # @!attribute message
     #   @return [String]
     class TooManyFieldLevelEncryptionContentTypeProfiles < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -8375,6 +8907,7 @@ module Aws::CloudFront
     # @!attribute message
     #   @return [String]
     class TooManyFieldLevelEncryptionEncryptionEntities < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -8385,6 +8918,7 @@ module Aws::CloudFront
     # @!attribute message
     #   @return [String]
     class TooManyFieldLevelEncryptionFieldPatterns < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -8395,6 +8929,7 @@ module Aws::CloudFront
     # @!attribute message
     #   @return [String]
     class TooManyFieldLevelEncryptionProfiles < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -8405,6 +8940,7 @@ module Aws::CloudFront
     # @!attribute message
     #   @return [String]
     class TooManyFieldLevelEncryptionQueryArgProfiles < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -8415,6 +8951,7 @@ module Aws::CloudFront
     # @!attribute message
     #   @return [String]
     class TooManyFunctionAssociations < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -8425,6 +8962,7 @@ module Aws::CloudFront
     # @!attribute message
     #   @return [String]
     class TooManyFunctions < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -8435,6 +8973,7 @@ module Aws::CloudFront
     # @!attribute message
     #   @return [String]
     class TooManyHeadersInCachePolicy < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -8445,6 +8984,7 @@ module Aws::CloudFront
     # @!attribute message
     #   @return [String]
     class TooManyHeadersInForwardedValues < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -8455,6 +8995,7 @@ module Aws::CloudFront
     # @!attribute message
     #   @return [String]
     class TooManyHeadersInOriginRequestPolicy < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -8465,6 +9006,7 @@ module Aws::CloudFront
     # @!attribute message
     #   @return [String]
     class TooManyInvalidationsInProgress < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -8475,6 +9017,7 @@ module Aws::CloudFront
     # @!attribute message
     #   @return [String]
     class TooManyKeyGroups < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -8485,6 +9028,7 @@ module Aws::CloudFront
     # @!attribute message
     #   @return [String]
     class TooManyKeyGroupsAssociatedToDistribution < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -8495,6 +9039,7 @@ module Aws::CloudFront
     # @!attribute message
     #   @return [String]
     class TooManyLambdaFunctionAssociations < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -8505,6 +9050,7 @@ module Aws::CloudFront
     # @!attribute message
     #   @return [String]
     class TooManyOriginAccessControls < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -8515,6 +9061,7 @@ module Aws::CloudFront
     # @!attribute message
     #   @return [String]
     class TooManyOriginCustomHeaders < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -8525,6 +9072,7 @@ module Aws::CloudFront
     # @!attribute message
     #   @return [String]
     class TooManyOriginGroupsPerDistribution < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -8535,6 +9083,7 @@ module Aws::CloudFront
     # @!attribute message
     #   @return [String]
     class TooManyOriginRequestPolicies < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -8545,6 +9094,7 @@ module Aws::CloudFront
     # @!attribute message
     #   @return [String]
     class TooManyOrigins < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -8555,6 +9105,7 @@ module Aws::CloudFront
     # @!attribute message
     #   @return [String]
     class TooManyPublicKeys < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -8565,6 +9116,7 @@ module Aws::CloudFront
     # @!attribute message
     #   @return [String]
     class TooManyPublicKeysInKeyGroup < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -8575,6 +9127,7 @@ module Aws::CloudFront
     # @!attribute message
     #   @return [String]
     class TooManyQueryStringParameters < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -8585,6 +9138,7 @@ module Aws::CloudFront
     # @!attribute message
     #   @return [String]
     class TooManyQueryStringsInCachePolicy < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -8595,6 +9149,7 @@ module Aws::CloudFront
     # @!attribute message
     #   @return [String]
     class TooManyQueryStringsInOriginRequestPolicy < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -8605,6 +9160,7 @@ module Aws::CloudFront
     # @!attribute message
     #   @return [String]
     class TooManyRealtimeLogConfigs < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -8615,6 +9171,7 @@ module Aws::CloudFront
     # @!attribute message
     #   @return [String]
     class TooManyRemoveHeadersInResponseHeadersPolicy < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -8625,6 +9182,7 @@ module Aws::CloudFront
     # @!attribute message
     #   @return [String]
     class TooManyResponseHeadersPolicies < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -8635,6 +9193,7 @@ module Aws::CloudFront
     # @!attribute message
     #   @return [String]
     class TooManyStreamingDistributionCNAMEs < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -8645,6 +9204,7 @@ module Aws::CloudFront
     # @!attribute message
     #   @return [String]
     class TooManyStreamingDistributions < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -8655,6 +9215,7 @@ module Aws::CloudFront
     # @!attribute message
     #   @return [String]
     class TooManyTrustedSigners < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -8672,6 +9233,7 @@ module Aws::CloudFront
     #   <p>The type of traffic configuration.</p>
     #   @return [String]
     class TrafficConfig < Struct.new(
+      nil,
       :single_weight_config,
       :single_header_config,
       :type,
@@ -8684,6 +9246,7 @@ module Aws::CloudFront
     # @!attribute message
     #   @return [String]
     class TrustedKeyGroupDoesNotExist < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -8701,6 +9264,7 @@ module Aws::CloudFront
     #   <p>A list of key groups identifiers.</p>
     #   @return [Array<String>]
     class TrustedKeyGroups < Struct.new(
+      nil,
       :enabled,
       :quantity,
       :items,
@@ -8713,6 +9277,7 @@ module Aws::CloudFront
     # @!attribute message
     #   @return [String]
     class TrustedSignerDoesNotExist < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -8730,6 +9295,7 @@ module Aws::CloudFront
     #   <p>A list of Amazon Web Services account identifiers.</p>
     #   @return [Array<String>]
     class TrustedSigners < Struct.new(
+      nil,
       :enabled,
       :quantity,
       :items,
@@ -8742,6 +9308,7 @@ module Aws::CloudFront
     # @!attribute message
     #   @return [String]
     class UnsupportedOperation < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -8756,6 +9323,7 @@ module Aws::CloudFront
     #   <p>A complex type that contains zero or more <code>Tag</code> key elements.</p>
     #   @return [Types::TagKeys]
     class UntagResourceRequest < Struct.new(
+      nil,
       :resource,
       :tag_keys,
       keyword_init: true
@@ -8773,6 +9341,7 @@ module Aws::CloudFront
     #   <p>The version of the cache policy that you are updating. The version is returned in the cache policy's <code>ETag</code> field in the response to <code>GetCachePolicyConfig</code>.</p>
     #   @return [String]
     class UpdateCachePolicyRequest < Struct.new(
+      nil,
       :cache_policy_config,
       :id,
       :if_match,
@@ -8788,6 +9357,7 @@ module Aws::CloudFront
     #   <p>The current version of the cache policy.</p>
     #   @return [String]
     class UpdateCachePolicyResult < Struct.new(
+      nil,
       :cache_policy,
       :e_tag,
       keyword_init: true
@@ -8806,6 +9376,7 @@ module Aws::CloudFront
     #   <p>The value of the <code>ETag</code> header that you received when retrieving the identity's configuration. For example: <code>E2QWRUHAPOMQZL</code>.</p>
     #   @return [String]
     class UpdateCloudFrontOriginAccessIdentityRequest < Struct.new(
+      nil,
       :cloud_front_origin_access_identity_config,
       :id,
       :if_match,
@@ -8822,6 +9393,7 @@ module Aws::CloudFront
     #   <p>The current version of the configuration. For example: <code>E2QWRUHAPOMQZL</code>.</p>
     #   @return [String]
     class UpdateCloudFrontOriginAccessIdentityResult < Struct.new(
+      nil,
       :cloud_front_origin_access_identity,
       :e_tag,
       keyword_init: true
@@ -8845,6 +9417,7 @@ module Aws::CloudFront
     #   <p>Whether the connection group is enabled.</p>
     #   @return [Boolean]
     class UpdateConnectionGroupRequest < Struct.new(
+      nil,
       :id,
       :ipv6_enabled,
       :if_match,
@@ -8862,6 +9435,7 @@ module Aws::CloudFront
     #   <p>The current version of the connection group.</p>
     #   @return [String]
     class UpdateConnectionGroupResult < Struct.new(
+      nil,
       :connection_group,
       :e_tag,
       keyword_init: true
@@ -8879,6 +9453,7 @@ module Aws::CloudFront
     #   <p>The current version (<code>ETag</code> value) of the continuous deployment policy that you are updating.</p>
     #   @return [String]
     class UpdateContinuousDeploymentPolicyRequest < Struct.new(
+      nil,
       :continuous_deployment_policy_config,
       :id,
       :if_match,
@@ -8894,6 +9469,7 @@ module Aws::CloudFront
     #   <p>The version identifier for the current version of the continuous deployment policy.</p>
     #   @return [String]
     class UpdateContinuousDeploymentPolicyResult < Struct.new(
+      nil,
       :continuous_deployment_policy,
       :e_tag,
       keyword_init: true
@@ -8912,6 +9488,7 @@ module Aws::CloudFront
     #   <p>The value of the <code>ETag</code> header that you received when retrieving the distribution's configuration. For example: <code>E2QWRUHAPOMQZL</code>.</p>
     #   @return [String]
     class UpdateDistributionRequest < Struct.new(
+      nil,
       :distribution_config,
       :id,
       :if_match,
@@ -8928,6 +9505,7 @@ module Aws::CloudFront
     #   <p>The current version of the configuration. For example: <code>E2QWRUHAPOMQZL</code>.</p>
     #   @return [String]
     class UpdateDistributionResult < Struct.new(
+      nil,
       :distribution,
       :e_tag,
       keyword_init: true
@@ -8963,6 +9541,7 @@ module Aws::CloudFront
     #   <p>Indicates whether the distribution tenant should be updated to an enabled state. If you update the distribution tenant and it's not enabled, the distribution tenant won't serve traffic.</p>
     #   @return [Boolean]
     class UpdateDistributionTenantRequest < Struct.new(
+      nil,
       :id,
       :distribution_id,
       :domains,
@@ -8984,6 +9563,7 @@ module Aws::CloudFront
     #   <p>The current version of the distribution tenant.</p>
     #   @return [String]
     class UpdateDistributionTenantResult < Struct.new(
+      nil,
       :distribution_tenant,
       :e_tag,
       keyword_init: true
@@ -9001,6 +9581,7 @@ module Aws::CloudFront
     #   <p>The current versions (<code>ETag</code> values) of both primary and staging distributions. Provide these in the following format:</p> <p> <code>&lt;primary ETag&gt;, &lt;staging ETag&gt;</code> </p>
     #   @return [String]
     class UpdateDistributionWithStagingConfigRequest < Struct.new(
+      nil,
       :id,
       :staging_distribution_id,
       :if_match,
@@ -9016,6 +9597,7 @@ module Aws::CloudFront
     #   <p>The current version of the primary distribution (after it's updated).</p>
     #   @return [String]
     class UpdateDistributionWithStagingConfigResult < Struct.new(
+      nil,
       :distribution,
       :e_tag,
       keyword_init: true
@@ -9033,6 +9615,7 @@ module Aws::CloudFront
     #   <p>The value of the <code>ETag</code> identifier for the standard distribution or distribution tenant that will be associated with the domain.</p>
     #   @return [String]
     class UpdateDomainAssociationRequest < Struct.new(
+      nil,
       :domain,
       :target_resource,
       :if_match,
@@ -9051,6 +9634,7 @@ module Aws::CloudFront
     #   <p>The current version of the target standard distribution or distribution tenant that was associated with the domain.</p>
     #   @return [String]
     class UpdateDomainAssociationResult < Struct.new(
+      nil,
       :domain,
       :resource_id,
       :e_tag,
@@ -9069,6 +9653,7 @@ module Aws::CloudFront
     #   <p>The value of the <code>ETag</code> header that you received when retrieving the configuration identity to update. For example: <code>E2QWRUHAPOMQZL</code>.</p>
     #   @return [String]
     class UpdateFieldLevelEncryptionConfigRequest < Struct.new(
+      nil,
       :field_level_encryption_config,
       :id,
       :if_match,
@@ -9084,6 +9669,7 @@ module Aws::CloudFront
     #   <p>The value of the <code>ETag</code> header that you received when updating the configuration. For example: <code>E2QWRUHAPOMQZL</code>.</p>
     #   @return [String]
     class UpdateFieldLevelEncryptionConfigResult < Struct.new(
+      nil,
       :field_level_encryption,
       :e_tag,
       keyword_init: true
@@ -9101,6 +9687,7 @@ module Aws::CloudFront
     #   <p>The value of the <code>ETag</code> header that you received when retrieving the profile identity to update. For example: <code>E2QWRUHAPOMQZL</code>.</p>
     #   @return [String]
     class UpdateFieldLevelEncryptionProfileRequest < Struct.new(
+      nil,
       :field_level_encryption_profile_config,
       :id,
       :if_match,
@@ -9116,6 +9703,7 @@ module Aws::CloudFront
     #   <p>The result of the field-level encryption profile request.</p>
     #   @return [String]
     class UpdateFieldLevelEncryptionProfileResult < Struct.new(
+      nil,
       :field_level_encryption_profile,
       :e_tag,
       keyword_init: true
@@ -9136,6 +9724,7 @@ module Aws::CloudFront
     #   <p>The function code. For more information about writing a CloudFront function, see <a href="https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/writing-function-code.html">Writing function code for CloudFront Functions</a> in the <i>Amazon CloudFront Developer Guide</i>.</p>
     #   @return [String]
     class UpdateFunctionRequest < Struct.new(
+      nil,
       :name,
       :if_match,
       :function_config,
@@ -9152,6 +9741,7 @@ module Aws::CloudFront
     #   <p>The version identifier for the current version of the CloudFront function.</p>
     #   @return [String]
     class UpdateFunctionResult < Struct.new(
+      nil,
       :function_summary,
       :e_tag,
       keyword_init: true
@@ -9169,6 +9759,7 @@ module Aws::CloudFront
     #   <p>The version of the key group that you are updating. The version is the key group's <code>ETag</code> value.</p>
     #   @return [String]
     class UpdateKeyGroupRequest < Struct.new(
+      nil,
       :key_group_config,
       :id,
       :if_match,
@@ -9184,6 +9775,7 @@ module Aws::CloudFront
     #   <p>The identifier for this version of the key group.</p>
     #   @return [String]
     class UpdateKeyGroupResult < Struct.new(
+      nil,
       :key_group,
       :e_tag,
       keyword_init: true
@@ -9201,6 +9793,7 @@ module Aws::CloudFront
     #   <p>The key value store to update, if a match occurs.</p>
     #   @return [String]
     class UpdateKeyValueStoreRequest < Struct.new(
+      nil,
       :name,
       :comment,
       :if_match,
@@ -9216,6 +9809,7 @@ module Aws::CloudFront
     #   <p>The <code>ETag</code> of the resulting key value store.</p>
     #   @return [String]
     class UpdateKeyValueStoreResult < Struct.new(
+      nil,
       :key_value_store,
       :e_tag,
       keyword_init: true
@@ -9233,6 +9827,7 @@ module Aws::CloudFront
     #   <p>The current version (<code>ETag</code> value) of the origin access control that you are updating.</p>
     #   @return [String]
     class UpdateOriginAccessControlRequest < Struct.new(
+      nil,
       :origin_access_control_config,
       :id,
       :if_match,
@@ -9248,6 +9843,7 @@ module Aws::CloudFront
     #   <p>The new version of the origin access control after it has been updated.</p>
     #   @return [String]
     class UpdateOriginAccessControlResult < Struct.new(
+      nil,
       :origin_access_control,
       :e_tag,
       keyword_init: true
@@ -9265,6 +9861,7 @@ module Aws::CloudFront
     #   <p>The version of the origin request policy that you are updating. The version is returned in the origin request policy's <code>ETag</code> field in the response to <code>GetOriginRequestPolicyConfig</code>.</p>
     #   @return [String]
     class UpdateOriginRequestPolicyRequest < Struct.new(
+      nil,
       :origin_request_policy_config,
       :id,
       :if_match,
@@ -9280,6 +9877,7 @@ module Aws::CloudFront
     #   <p>The current version of the origin request policy.</p>
     #   @return [String]
     class UpdateOriginRequestPolicyResult < Struct.new(
+      nil,
       :origin_request_policy,
       :e_tag,
       keyword_init: true
@@ -9297,6 +9895,7 @@ module Aws::CloudFront
     #   <p>The value of the <code>ETag</code> header that you received when retrieving the public key to update. For example: <code>E2QWRUHAPOMQZL</code>.</p>
     #   @return [String]
     class UpdatePublicKeyRequest < Struct.new(
+      nil,
       :public_key_config,
       :id,
       :if_match,
@@ -9312,6 +9911,7 @@ module Aws::CloudFront
     #   <p>The identifier of the current version of the public key.</p>
     #   @return [String]
     class UpdatePublicKeyResult < Struct.new(
+      nil,
       :public_key,
       :e_tag,
       keyword_init: true
@@ -9335,6 +9935,7 @@ module Aws::CloudFront
     #   <p>The sampling rate for this real-time log configuration. The sampling rate determines the percentage of viewer requests that are represented in the real-time log data. You must provide an integer between 1 and 100, inclusive.</p>
     #   @return [Integer]
     class UpdateRealtimeLogConfigRequest < Struct.new(
+      nil,
       :end_points,
       :fields,
       :name,
@@ -9349,6 +9950,7 @@ module Aws::CloudFront
     #   <p>A real-time log configuration.</p>
     #   @return [Types::RealtimeLogConfig]
     class UpdateRealtimeLogConfigResult < Struct.new(
+      nil,
       :realtime_log_config,
       keyword_init: true
     )
@@ -9365,6 +9967,7 @@ module Aws::CloudFront
     #   <p>The version of the response headers policy that you are updating.</p> <p>The version is returned in the cache policy's <code>ETag</code> field in the response to <code>GetResponseHeadersPolicyConfig</code>.</p>
     #   @return [String]
     class UpdateResponseHeadersPolicyRequest < Struct.new(
+      nil,
       :response_headers_policy_config,
       :id,
       :if_match,
@@ -9380,6 +9983,7 @@ module Aws::CloudFront
     #   <p>The current version of the response headers policy.</p>
     #   @return [String]
     class UpdateResponseHeadersPolicyResult < Struct.new(
+      nil,
       :response_headers_policy,
       :e_tag,
       keyword_init: true
@@ -9398,6 +10002,7 @@ module Aws::CloudFront
     #   <p>The value of the <code>ETag</code> header that you received when retrieving the streaming distribution's configuration. For example: <code>E2QWRUHAPOMQZL</code>.</p>
     #   @return [String]
     class UpdateStreamingDistributionRequest < Struct.new(
+      nil,
       :streaming_distribution_config,
       :id,
       :if_match,
@@ -9414,6 +10019,7 @@ module Aws::CloudFront
     #   <p>The current version of the configuration. For example: <code>E2QWRUHAPOMQZL</code>.</p>
     #   @return [String]
     class UpdateStreamingDistributionResult < Struct.new(
+      nil,
       :streaming_distribution,
       :e_tag,
       keyword_init: true
@@ -9431,6 +10037,7 @@ module Aws::CloudFront
     #   <p>The VPC origin to update, if a match occurs.</p>
     #   @return [String]
     class UpdateVpcOriginRequest < Struct.new(
+      nil,
       :vpc_origin_endpoint_config,
       :id,
       :if_match,
@@ -9446,6 +10053,7 @@ module Aws::CloudFront
     #   <p>The VPC origin ETag.</p>
     #   @return [String]
     class UpdateVpcOriginResult < Struct.new(
+      nil,
       :vpc_origin,
       :e_tag,
       keyword_init: true
@@ -9464,6 +10072,7 @@ module Aws::CloudFront
     #   <p>The domain to redirect from.</p>
     #   @return [String]
     class ValidationTokenDetail < Struct.new(
+      nil,
       :domain,
       :redirect_to,
       :redirect_from,
@@ -9479,6 +10088,7 @@ module Aws::CloudFront
     #   <p>The identifier of the distribution tenant. You can specify the ARN, ID, or name of the distribution tenant.</p>
     #   @return [String]
     class VerifyDnsConfigurationRequest < Struct.new(
+      nil,
       :domain,
       :identifier,
       keyword_init: true
@@ -9490,6 +10100,7 @@ module Aws::CloudFront
     #   <p>The list of domain names, their statuses, and a description of each status.</p>
     #   @return [Array<Types::DnsConfiguration>]
     class VerifyDnsConfigurationResult < Struct.new(
+      nil,
       :dns_configuration_list,
       keyword_init: true
     )
@@ -9521,6 +10132,7 @@ module Aws::CloudFront
     #   @deprecated
     #   @return [String]
     class ViewerCertificate < Struct.new(
+      nil,
       :cloud_front_default_certificate,
       :iam_certificate_id,
       :acm_certificate_arn,
@@ -9553,6 +10165,7 @@ module Aws::CloudFront
     #   <p>The VPC origin endpoint configuration.</p>
     #   @return [Types::VpcOriginEndpointConfig]
     class VpcOrigin < Struct.new(
+      nil,
       :id,
       :arn,
       :status,
@@ -9575,6 +10188,7 @@ module Aws::CloudFront
     #   <p>Specifies how long, in seconds, CloudFront persists its connection to the origin. The minimum timeout is 1 second, the maximum is 120 seconds, and the default (if you don't specify otherwise) is 5 seconds.</p> <p>For more information, see <a href="https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/DownloadDistValuesOrigin.html#DownloadDistValuesOriginKeepaliveTimeout">Keep-alive timeout (custom origins only)</a> in the <i>Amazon CloudFront Developer Guide</i>.</p>
     #   @return [Integer]
     class VpcOriginConfig < Struct.new(
+      nil,
       :vpc_origin_id,
       :origin_read_timeout,
       :origin_keepalive_timeout,
@@ -9603,6 +10217,7 @@ module Aws::CloudFront
     #   <p>A complex type that contains information about the SSL/TLS protocols that CloudFront can use when establishing an HTTPS connection with your origin.</p>
     #   @return [Types::OriginSslProtocols]
     class VpcOriginEndpointConfig < Struct.new(
+      nil,
       :name,
       :arn,
       :http_port,
@@ -9634,6 +10249,7 @@ module Aws::CloudFront
     #   <p>The items of the VPC origins list.</p>
     #   @return [Array<Types::VpcOriginSummary>]
     class VpcOriginList < Struct.new(
+      nil,
       :marker,
       :next_marker,
       :max_items,
@@ -9668,6 +10284,7 @@ module Aws::CloudFront
     #   <p>The VPC origin summary origin endpoint ARN.</p>
     #   @return [String]
     class VpcOriginSummary < Struct.new(
+      nil,
       :id,
       :name,
       :status,
@@ -9688,6 +10305,7 @@ module Aws::CloudFront
     #   <p>The Amazon Resource Name (ARN) of the WAF web ACL.</p>
     #   @return [String]
     class WebAclCustomization < Struct.new(
+      nil,
       :action,
       :arn,
       keyword_init: true

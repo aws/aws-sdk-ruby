@@ -10,6 +10,7 @@ module Aws::MWAA
     # @!attribute message
     #   @return [String]
     class AccessDeniedException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -20,6 +21,7 @@ module Aws::MWAA
     #   <p>The name of the Amazon MWAA environment. For example, <code>MyMWAAEnvironment</code>.</p>
     #   @return [String]
     class CreateCliTokenInput < Struct.new(
+      nil,
       :name,
       keyword_init: true
     )
@@ -33,6 +35,7 @@ module Aws::MWAA
     #   <p>The Airflow web server hostname for the environment.</p>
     #   @return [String]
     class CreateCliTokenOutput < Struct.new(
+      nil,
       :cli_token,
       :web_server_hostname,
       keyword_init: true
@@ -169,6 +172,7 @@ module Aws::MWAA
     #               sizes except mw1.micro, which defaults to <code>1</code>.</p>
     #   @return [Integer]
     class CreateEnvironmentOperationInput < Struct.new(
+      nil,
       :name,
       :execution_role_arn,
       :source_bucket_arn,
@@ -203,6 +207,7 @@ module Aws::MWAA
     #   <p>The Amazon Resource Name (ARN) returned in the response for the environment.</p>
     #   @return [String]
     class CreateEnvironmentOperationOutput < Struct.new(
+      nil,
       :arn,
       keyword_init: true
     )
@@ -213,6 +218,7 @@ module Aws::MWAA
     #   <p>The name of the Amazon MWAA environment. For example, <code>MyMWAAEnvironment</code>.</p>
     #   @return [String]
     class CreateWebLoginTokenInput < Struct.new(
+      nil,
       :name,
       keyword_init: true
     )
@@ -232,6 +238,7 @@ module Aws::MWAA
     #   <p>The user name of the Apache Airflow identity creating the web login token.</p>
     #   @return [String]
     class CreateWebLoginTokenOutput < Struct.new(
+      nil,
       :web_token,
       :web_server_hostname,
       :iam_identity,
@@ -245,6 +252,7 @@ module Aws::MWAA
     #   <p>The name of the Amazon MWAA environment. For example, <code>MyMWAAEnvironment</code>.</p>
     #   @return [String]
     class DeleteEnvironmentOperationInput < Struct.new(
+      nil,
       :name,
       keyword_init: true
     )
@@ -252,6 +260,7 @@ module Aws::MWAA
     end
 
     class DeleteEnvironmentOperationOutput < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -270,6 +279,7 @@ module Aws::MWAA
     #               <b>Internal only</b>. The value of the dimension.</p>
     #   @return [String]
     class Dimension < Struct.new(
+      nil,
       :name,
       :value,
       keyword_init: true
@@ -493,6 +503,7 @@ module Aws::MWAA
     #               sizes except mw1.micro, which defaults to <code>1</code>.</p>
     #   @return [Integer]
     class Environment < Struct.new(
+      nil,
       :name,
       :status,
       :arn,
@@ -536,6 +547,7 @@ module Aws::MWAA
     #   <p>The name of the Amazon MWAA environment. For example, <code>MyMWAAEnvironment</code>.</p>
     #   @return [String]
     class GetEnvironmentOperationInput < Struct.new(
+      nil,
       :name,
       keyword_init: true
     )
@@ -546,6 +558,7 @@ module Aws::MWAA
     #   <p>An object containing all available details about the environment.</p>
     #   @return [Types::Environment]
     class GetEnvironmentOperationOutput < Struct.new(
+      nil,
       :environment,
       keyword_init: true
     )
@@ -556,6 +569,7 @@ module Aws::MWAA
     # @!attribute message
     #   @return [String]
     class InternalServerException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -583,6 +597,7 @@ module Aws::MWAA
     #               object.</p>
     #   @return [JSON]
     class InvokeRestApiRequest < Struct.new(
+      nil,
       :name,
       :path,
       :method,
@@ -601,6 +616,7 @@ module Aws::MWAA
     #               object.</p>
     #   @return [JSON]
     class InvokeRestApiResponse < Struct.new(
+      nil,
       :rest_api_status_code,
       :rest_api_response,
       keyword_init: true
@@ -625,6 +641,7 @@ module Aws::MWAA
     #   <p>The worker replacement strategy used in the last update of the environment.</p>
     #   @return [String]
     class LastUpdate < Struct.new(
+      nil,
       :status,
       :created_at,
       :error,
@@ -642,6 +659,7 @@ module Aws::MWAA
     #   <p>The maximum number of results to retrieve per page. For example, <code>5</code> environments per page.</p>
     #   @return [Integer]
     class ListEnvironmentsOperationInput < Struct.new(
+      nil,
       :next_token,
       :max_results,
       keyword_init: true
@@ -656,6 +674,7 @@ module Aws::MWAA
     #   <p>Retrieves the next page of the results.</p>
     #   @return [String]
     class ListEnvironmentsOperationOutput < Struct.new(
+      nil,
       :environments,
       :next_token,
       keyword_init: true
@@ -667,6 +686,7 @@ module Aws::MWAA
     #   <p>The Amazon Resource Name (ARN) of the Amazon MWAA environment. For example, <code>arn:aws:airflow:us-east-1:123456789012:environment/MyMWAAEnvironment</code>.</p>
     #   @return [String]
     class ListTagsForResourceOperationInput < Struct.new(
+      nil,
       :resource_arn,
       keyword_init: true
     )
@@ -677,6 +697,7 @@ module Aws::MWAA
     #   <p>The key-value tag pairs associated to your environment. For more information, see <a href="https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html">Tagging Amazon Web Services resources</a>.</p>
     #   @return [Hash<String, String>]
     class ListTagsForResourceOperationOutput < Struct.new(
+      nil,
       :tags,
       keyword_init: true
     )
@@ -700,6 +721,7 @@ module Aws::MWAA
     #   <p>The Airflow task logs published to CloudWatch Logs and the log level.</p>
     #   @return [Types::ModuleLoggingConfiguration]
     class LoggingConfiguration < Struct.new(
+      nil,
       :dag_processing_logs,
       :scheduler_logs,
       :webserver_logs,
@@ -727,6 +749,7 @@ module Aws::MWAA
     #   <p>Publishes Airflow task logs to CloudWatch Logs.</p>
     #   @return [Types::ModuleLoggingConfigurationInput]
     class LoggingConfigurationInput < Struct.new(
+      nil,
       :dag_processing_logs,
       :scheduler_logs,
       :webserver_logs,
@@ -766,6 +789,7 @@ module Aws::MWAA
     #               <b>Internal only</b>. The statistical values for the metric.</p>
     #   @return [Types::StatisticSet]
     class MetricDatum < Struct.new(
+      nil,
       :metric_name,
       :timestamp,
       :dimensions,
@@ -788,6 +812,7 @@ module Aws::MWAA
     #   <p>The Amazon Resource Name (ARN) for the CloudWatch Logs group where the Apache Airflow log type (e.g. <code>DagProcessingLogs</code>) is published. For example, <code>arn:aws:logs:us-east-1:123456789012:log-group:airflow-MyMWAAEnvironment-MwaaEnvironment-DAGProcessing:*</code>.</p>
     #   @return [String]
     class ModuleLoggingConfiguration < Struct.new(
+      nil,
       :enabled,
       :log_level,
       :cloud_watch_log_group_arn,
@@ -804,6 +829,7 @@ module Aws::MWAA
     #   <p>Defines the Apache Airflow log level (e.g. <code>INFO</code>) to send to CloudWatch Logs.</p>
     #   @return [String]
     class ModuleLoggingConfigurationInput < Struct.new(
+      nil,
       :enabled,
       :log_level,
       keyword_init: true
@@ -819,6 +845,7 @@ module Aws::MWAA
     #   <p>A list of security group IDs. For more information, see <a href="https://docs.aws.amazon.com/mwaa/latest/userguide/vpc-security.html">Security in your VPC on Amazon MWAA</a>.</p>
     #   @return [Array<String>]
     class NetworkConfiguration < Struct.new(
+      nil,
       :subnet_ids,
       :security_group_ids,
       keyword_init: true
@@ -837,6 +864,7 @@ module Aws::MWAA
     #               <b>Internal only</b>. Publishes metrics to Amazon CloudWatch. To learn more about the metrics published to Amazon CloudWatch, see <a href="https://docs.aws.amazon.com/mwaa/latest/userguide/cw-metrics.html">Amazon MWAA performance metrics in Amazon CloudWatch</a>.</p>
     #   @return [Array<Types::MetricDatum>]
     class PublishMetricsOperationInput < Struct.new(
+      nil,
       :environment_name,
       :metric_data,
       keyword_init: true
@@ -847,6 +875,7 @@ module Aws::MWAA
     # @deprecated
     #   This type is for internal use and not meant for public use. Data set for this type will be ignored.
     class PublishMetricsOperationOutput < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -856,6 +885,7 @@ module Aws::MWAA
     # @!attribute message
     #   @return [String]
     class ResourceNotFoundException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -872,6 +902,7 @@ module Aws::MWAA
     #               object.</p>
     #   @return [JSON]
     class RestApiClientException < Struct.new(
+      nil,
       :rest_api_status_code,
       :rest_api_response,
       keyword_init: true
@@ -889,6 +920,7 @@ module Aws::MWAA
     #               object.</p>
     #   @return [JSON]
     class RestApiServerException < Struct.new(
+      nil,
       :rest_api_status_code,
       :rest_api_response,
       keyword_init: true
@@ -917,6 +949,7 @@ module Aws::MWAA
     #               <b>Internal only</b>. The maximum value of the sample set.</p>
     #   @return [Float]
     class StatisticSet < Struct.new(
+      nil,
       :sample_count,
       :sum,
       :minimum,
@@ -933,6 +966,7 @@ module Aws::MWAA
     #   <p>The key-value tag pairs you want to associate to your environment. For example, <code>"Environment": "Staging"</code>. For more information, see <a href="https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html">Tagging Amazon Web Services resources</a>.</p>
     #   @return [Hash<String, String>]
     class TagResourceOperationInput < Struct.new(
+      nil,
       :resource_arn,
       :tags,
       keyword_init: true
@@ -941,6 +975,7 @@ module Aws::MWAA
     end
 
     class TagResourceOperationOutput < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -953,6 +988,7 @@ module Aws::MWAA
     #   <p>The key-value tag pair you want to remove. For example, <code>"Environment": "Staging"</code>. </p>
     #   @return [Array<String>]
     class UntagResourceOperationInput < Struct.new(
+      nil,
       :resource_arn,
       :tag_keys,
       keyword_init: true
@@ -961,6 +997,7 @@ module Aws::MWAA
     end
 
     class UntagResourceOperationOutput < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1093,6 +1130,7 @@ module Aws::MWAA
     #   <p>The day and time of the week in Coordinated Universal Time (UTC) 24-hour standard time to start weekly maintenance updates of your environment in the following format: <code>DAY:HH:MM</code>. For example: <code>TUE:03:30</code>. You can specify a start time in 30 minute increments only.</p>
     #   @return [String]
     class UpdateEnvironmentOperationInput < Struct.new(
+      nil,
       :name,
       :execution_role_arn,
       :airflow_configuration_options,
@@ -1125,6 +1163,7 @@ module Aws::MWAA
     #   <p>The Amazon Resource Name (ARN) of the Amazon MWAA environment. For example, <code>arn:aws:airflow:us-east-1:123456789012:environment/MyMWAAEnvironment</code>.</p>
     #   @return [String]
     class UpdateEnvironmentOperationOutput < Struct.new(
+      nil,
       :arn,
       keyword_init: true
     )
@@ -1139,6 +1178,7 @@ module Aws::MWAA
     #   <p>The error message that corresponds to the error code.</p>
     #   @return [String]
     class UpdateError < Struct.new(
+      nil,
       :error_code,
       :error_message,
       keyword_init: true
@@ -1151,6 +1191,7 @@ module Aws::MWAA
     #   <p>A list of security group IDs. A security group must be attached to the same VPC as the subnets. For more information, see <a href="https://docs.aws.amazon.com/mwaa/latest/userguide/vpc-security.html">Security in your VPC on Amazon MWAA</a>.</p>
     #   @return [Array<String>]
     class UpdateNetworkConfigurationInput < Struct.new(
+      nil,
       :security_group_ids,
       keyword_init: true
     )
@@ -1161,6 +1202,7 @@ module Aws::MWAA
     # @!attribute message
     #   @return [String]
     class ValidationException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )

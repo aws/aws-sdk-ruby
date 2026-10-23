@@ -11,6 +11,7 @@ module Aws::LakeFormation
     #   <p>A message describing the problem.</p>
     #   @return [String]
     class AccessDeniedException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -27,6 +28,7 @@ module Aws::LakeFormation
     #   <p>The LF-tags to attach to the resource.</p>
     #   @return [Array<Types::LFTagPair>]
     class AddLFTagsToResourceRequest < Struct.new(
+      nil,
       :catalog_id,
       :resource,
       :lf_tags,
@@ -39,6 +41,7 @@ module Aws::LakeFormation
     #   <p>A list of failures to tag the resource.</p>
     #   @return [Array<Types::LFTagError>]
     class AddLFTagsToResourceResponse < Struct.new(
+      nil,
       :failures,
       keyword_init: true
     )
@@ -60,6 +63,7 @@ module Aws::LakeFormation
     #            <p>The supported data types are integer, long, date(yyyy-MM-dd), timestamp(yyyy-MM-dd HH:mm:ssXXX or yyyy-MM-dd HH:mm:ss"), string and decimal.</p>
     #   @return [Array<String>]
     class AddObjectInput < Struct.new(
+      nil,
       :uri,
       :e_tag,
       :size,
@@ -76,6 +80,7 @@ module Aws::LakeFormation
 
     # <p>A structure that you pass to indicate you want all rows in a filter. </p>
     class AllRowsWildcard < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -86,6 +91,7 @@ module Aws::LakeFormation
     #   <p>A message describing the problem.</p>
     #   @return [String]
     class AlreadyExistsException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -105,6 +111,7 @@ module Aws::LakeFormation
     #   <p>The time period, between 900 and 43,200 seconds, for the timeout of the temporary credentials.</p>
     #   @return [Integer]
     class AssumeDecoratedRoleWithSAMLRequest < Struct.new(
+      nil,
       :saml_assertion,
       :role_arn,
       :principal_arn,
@@ -127,6 +134,7 @@ module Aws::LakeFormation
     #   <p>The date and time when the temporary credentials expire.</p>
     #   @return [Time]
     class AssumeDecoratedRoleWithSAMLResponse < Struct.new(
+      nil,
       :access_key_id,
       :secret_access_key,
       :session_token,
@@ -141,6 +149,7 @@ module Aws::LakeFormation
     #   <p>The filter engine can populate the 'AdditionalAuditContext' information with the request ID for you to track. This information will be displayed in CloudTrail log in your account.</p>
     #   @return [String]
     class AuditContext < Struct.new(
+      nil,
       :additional_audit_context,
       keyword_init: true
     )
@@ -154,6 +163,7 @@ module Aws::LakeFormation
     #   <p>A list of up to 20 entries for resource permissions to be granted by batch operation to the principal.</p>
     #   @return [Array<Types::BatchPermissionsRequestEntry>]
     class BatchGrantPermissionsRequest < Struct.new(
+      nil,
       :catalog_id,
       :entries,
       keyword_init: true
@@ -165,6 +175,7 @@ module Aws::LakeFormation
     #   <p>A list of failures to grant permissions to the resources.</p>
     #   @return [Array<Types::BatchPermissionsFailureEntry>]
     class BatchGrantPermissionsResponse < Struct.new(
+      nil,
       :failures,
       keyword_init: true
     )
@@ -179,6 +190,7 @@ module Aws::LakeFormation
     #   <p>An error message that applies to the failure of the entry.</p>
     #   @return [Types::ErrorDetail]
     class BatchPermissionsFailureEntry < Struct.new(
+      nil,
       :request_entry,
       :error,
       keyword_init: true
@@ -206,6 +218,7 @@ module Aws::LakeFormation
     #   <p>Indicates if the option to pass permissions is granted.</p>
     #   @return [Array<String>]
     class BatchPermissionsRequestEntry < Struct.new(
+      nil,
       :id,
       :principal,
       :resource,
@@ -224,6 +237,7 @@ module Aws::LakeFormation
     #   <p>A list of up to 20 entries for resource permissions to be revoked by batch operation to the principal.</p>
     #   @return [Array<Types::BatchPermissionsRequestEntry>]
     class BatchRevokePermissionsRequest < Struct.new(
+      nil,
       :catalog_id,
       :entries,
       keyword_init: true
@@ -235,6 +249,7 @@ module Aws::LakeFormation
     #   <p>A list of failures to revoke permissions to the resources.</p>
     #   @return [Array<Types::BatchPermissionsFailureEntry>]
     class BatchRevokePermissionsResponse < Struct.new(
+      nil,
       :failures,
       keyword_init: true
     )
@@ -245,6 +260,7 @@ module Aws::LakeFormation
     #   <p>The transaction to cancel.</p>
     #   @return [String]
     class CancelTransactionRequest < Struct.new(
+      nil,
       :transaction_id,
       keyword_init: true
     )
@@ -252,6 +268,7 @@ module Aws::LakeFormation
     end
 
     class CancelTransactionResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -262,6 +279,7 @@ module Aws::LakeFormation
     #   <p>An identifier for the catalog resource.</p>
     #   @return [String]
     class CatalogResource < Struct.new(
+      nil,
       :id,
       keyword_init: true
     )
@@ -276,6 +294,7 @@ module Aws::LakeFormation
     #   <p>The LF-tags attached to a column resource.</p>
     #   @return [Array<Types::LFTagPair>]
     class ColumnLFTag < Struct.new(
+      nil,
       :name,
       :lf_tags,
       keyword_init: true
@@ -288,6 +307,7 @@ module Aws::LakeFormation
     #   <p>Excludes column names. Any column with this name will be excluded.</p>
     #   @return [Array<String>]
     class ColumnWildcard < Struct.new(
+      nil,
       :excluded_column_names,
       keyword_init: true
     )
@@ -298,6 +318,7 @@ module Aws::LakeFormation
     #   <p>The transaction to commit.</p>
     #   @return [String]
     class CommitTransactionRequest < Struct.new(
+      nil,
       :transaction_id,
       keyword_init: true
     )
@@ -308,6 +329,7 @@ module Aws::LakeFormation
     #   <p>The status of the transaction.</p>
     #   @return [String]
     class CommitTransactionResponse < Struct.new(
+      nil,
       :transaction_status,
       keyword_init: true
     )
@@ -319,6 +341,7 @@ module Aws::LakeFormation
     #   <p>A message describing the problem.</p>
     #   @return [String]
     class ConcurrentModificationException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -330,6 +353,7 @@ module Aws::LakeFormation
     #   <p>An expression written based on the Cedar Policy Language used to match the principal attributes.</p>
     #   @return [String]
     class Condition < Struct.new(
+      nil,
       :expression,
       keyword_init: true
     )
@@ -340,6 +364,7 @@ module Aws::LakeFormation
     #   <p>A <code>DataCellsFilter</code> structure containing information about the data cells filter.</p>
     #   @return [Types::DataCellsFilter]
     class CreateDataCellsFilterRequest < Struct.new(
+      nil,
       :table_data,
       keyword_init: true
     )
@@ -347,6 +372,7 @@ module Aws::LakeFormation
     end
 
     class CreateDataCellsFilterResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -365,6 +391,7 @@ module Aws::LakeFormation
     #   <p>A list of LF-Tag conditions (key-value pairs).</p>
     #   @return [Array<Types::LFTag>]
     class CreateLFTagExpressionRequest < Struct.new(
+      nil,
       :name,
       :description,
       :catalog_id,
@@ -375,6 +402,7 @@ module Aws::LakeFormation
     end
 
     class CreateLFTagExpressionResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -390,6 +418,7 @@ module Aws::LakeFormation
     #   <p>A list of possible values an attribute can take.</p>
     #   @return [Array<String>]
     class CreateLFTagRequest < Struct.new(
+      nil,
       :catalog_id,
       :tag_key,
       :tag_values,
@@ -399,6 +428,7 @@ module Aws::LakeFormation
     end
 
     class CreateLFTagResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -426,6 +456,7 @@ module Aws::LakeFormation
     #            <p>If the <code>ShareRecipients</code> value is null or the list is empty, no resource share is created.</p>
     #   @return [Array<Types::DataLakePrincipal>]
     class CreateLakeFormationIdentityCenterConfigurationRequest < Struct.new(
+      nil,
       :catalog_id,
       :instance_arn,
       :external_filtering,
@@ -439,6 +470,7 @@ module Aws::LakeFormation
     #   <p>The Amazon Resource Name (ARN) of the Lake Formation application integrated with IAM Identity Center.</p>
     #   @return [String]
     class CreateLakeFormationIdentityCenterConfigurationResponse < Struct.new(
+      nil,
       :application_arn,
       keyword_init: true
     )
@@ -456,6 +488,7 @@ module Aws::LakeFormation
     #   <p>A Lake Formation condition, which applies to permissions and opt-ins that contain an expression.</p>
     #   @return [Types::Condition]
     class CreateLakeFormationOptInRequest < Struct.new(
+      nil,
       :principal,
       :resource,
       :condition,
@@ -465,6 +498,7 @@ module Aws::LakeFormation
     end
 
     class CreateLakeFormationOptInResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -498,6 +532,7 @@ module Aws::LakeFormation
     #   <p>The ID of the data cells filter version.</p>
     #   @return [String]
     class DataCellsFilter < Struct.new(
+      nil,
       :table_catalog_id,
       :database_name,
       :table_name,
@@ -525,6 +560,7 @@ module Aws::LakeFormation
     #   <p>The name of the data cells filter. </p>
     #   @return [String]
     class DataCellsFilterResource < Struct.new(
+      nil,
       :table_catalog_id,
       :database_name,
       :table_name,
@@ -540,6 +576,7 @@ module Aws::LakeFormation
     #   <p>An identifier for the Lake Formation principal.</p>
     #   @return [String]
     class DataLakePrincipal < Struct.new(
+      nil,
       :data_lake_principal_identifier,
       keyword_init: true
     )
@@ -588,6 +625,7 @@ module Aws::LakeFormation
     #   <p>Lake Formation relies on a privileged process secured by Amazon EMR or the third party integrator to tag the user's role while assuming it. Lake Formation will publish the acceptable key-value pair, for example key = "LakeFormationTrustedCaller" and value = "TRUE" and the third party integrator must properly tag the temporary security credentials that will be used to call Lake Formation's administrative APIs.</p>
     #   @return [Array<String>]
     class DataLakeSettings < Struct.new(
+      nil,
       :data_lake_admins,
       :read_only_admins,
       :create_database_default_permissions,
@@ -611,6 +649,7 @@ module Aws::LakeFormation
     #   <p>The Amazon Resource Name (ARN) that uniquely identifies the data location resource.</p>
     #   @return [String]
     class DataLocationResource < Struct.new(
+      nil,
       :catalog_id,
       :resource_arn,
       keyword_init: true
@@ -626,6 +665,7 @@ module Aws::LakeFormation
     #   <p>The name of the database resource. Unique to the Data Catalog.</p>
     #   @return [String]
     class DatabaseResource < Struct.new(
+      nil,
       :catalog_id,
       :name,
       keyword_init: true
@@ -646,6 +686,7 @@ module Aws::LakeFormation
     #   <p>The name given by the user to the data filter cell.</p>
     #   @return [String]
     class DeleteDataCellsFilterRequest < Struct.new(
+      nil,
       :table_catalog_id,
       :database_name,
       :table_name,
@@ -656,6 +697,7 @@ module Aws::LakeFormation
     end
 
     class DeleteDataCellsFilterResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -668,6 +710,7 @@ module Aws::LakeFormation
     #   <p>The identifier for the Data Catalog. By default, the account ID in which the LF-Tag expression is saved. </p>
     #   @return [String]
     class DeleteLFTagExpressionRequest < Struct.new(
+      nil,
       :name,
       :catalog_id,
       keyword_init: true
@@ -676,6 +719,7 @@ module Aws::LakeFormation
     end
 
     class DeleteLFTagExpressionResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -688,6 +732,7 @@ module Aws::LakeFormation
     #   <p>The key-name for the LF-tag to delete.</p>
     #   @return [String]
     class DeleteLFTagRequest < Struct.new(
+      nil,
       :catalog_id,
       :tag_key,
       keyword_init: true
@@ -696,6 +741,7 @@ module Aws::LakeFormation
     end
 
     class DeleteLFTagResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -707,6 +753,7 @@ module Aws::LakeFormation
     #            definition, and other control information to manage your Lake Formation environment.</p>
     #   @return [String]
     class DeleteLakeFormationIdentityCenterConfigurationRequest < Struct.new(
+      nil,
       :catalog_id,
       keyword_init: true
     )
@@ -714,6 +761,7 @@ module Aws::LakeFormation
     end
 
     class DeleteLakeFormationIdentityCenterConfigurationResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -730,6 +778,7 @@ module Aws::LakeFormation
     #   <p>A Lake Formation condition, which applies to permissions and opt-ins that contain an expression.</p>
     #   @return [Types::Condition]
     class DeleteLakeFormationOptInRequest < Struct.new(
+      nil,
       :principal,
       :resource,
       :condition,
@@ -739,6 +788,7 @@ module Aws::LakeFormation
     end
 
     class DeleteLakeFormationOptInResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -755,6 +805,7 @@ module Aws::LakeFormation
     #   <p>A list of partition values for the object. A value must be specified for each partition key associated with the governed table.</p>
     #   @return [Array<String>]
     class DeleteObjectInput < Struct.new(
+      nil,
       :uri,
       :e_tag,
       :partition_values,
@@ -779,6 +830,7 @@ module Aws::LakeFormation
     #   <p>A list of VirtualObject structures, which indicates the Amazon S3 objects to be deleted if the transaction cancels.</p>
     #   @return [Array<Types::VirtualObject>]
     class DeleteObjectsOnCancelRequest < Struct.new(
+      nil,
       :catalog_id,
       :database_name,
       :table_name,
@@ -790,6 +842,7 @@ module Aws::LakeFormation
     end
 
     class DeleteObjectsOnCancelResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -799,6 +852,7 @@ module Aws::LakeFormation
     #   <p>The Amazon Resource Name (ARN) of the resource that you want to deregister.</p>
     #   @return [String]
     class DeregisterResourceRequest < Struct.new(
+      nil,
       :resource_arn,
       keyword_init: true
     )
@@ -806,6 +860,7 @@ module Aws::LakeFormation
     end
 
     class DeregisterResourceResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -815,6 +870,7 @@ module Aws::LakeFormation
     #   <p>The identifier for the Data Catalog. By default, the account ID. The Data Catalog is the persistent metadata store. It contains database definitions, table definitions, and other control information to manage your Lake Formation environment.</p>
     #   @return [String]
     class DescribeLakeFormationIdentityCenterConfigurationRequest < Struct.new(
+      nil,
       :catalog_id,
       keyword_init: true
     )
@@ -843,6 +899,7 @@ module Aws::LakeFormation
     #   <p>The Amazon Resource Name (ARN) of the RAM share.</p>
     #   @return [String]
     class DescribeLakeFormationIdentityCenterConfigurationResponse < Struct.new(
+      nil,
       :catalog_id,
       :instance_arn,
       :application_arn,
@@ -858,6 +915,7 @@ module Aws::LakeFormation
     #   <p>The resource ARN.</p>
     #   @return [String]
     class DescribeResourceRequest < Struct.new(
+      nil,
       :resource_arn,
       keyword_init: true
     )
@@ -868,6 +926,7 @@ module Aws::LakeFormation
     #   <p>A structure containing information about an Lake Formation resource.</p>
     #   @return [Types::ResourceInfo]
     class DescribeResourceResponse < Struct.new(
+      nil,
       :resource_info,
       keyword_init: true
     )
@@ -878,6 +937,7 @@ module Aws::LakeFormation
     #   <p>The transaction for which to return status.</p>
     #   @return [String]
     class DescribeTransactionRequest < Struct.new(
+      nil,
       :transaction_id,
       keyword_init: true
     )
@@ -888,6 +948,7 @@ module Aws::LakeFormation
     #   <p>Returns a <code>TransactionDescription</code> object containing information about the transaction.</p>
     #   @return [Types::TransactionDescription]
     class DescribeTransactionResponse < Struct.new(
+      nil,
       :transaction_description,
       keyword_init: true
     )
@@ -900,6 +961,7 @@ module Aws::LakeFormation
     #   <p>A resource share ARN for a catalog resource shared through RAM.</p>
     #   @return [Array<String>]
     class DetailsMap < Struct.new(
+      nil,
       :resource_share,
       keyword_init: true
     )
@@ -911,6 +973,7 @@ module Aws::LakeFormation
     #   <p>A message describing the problem.</p>
     #   @return [String]
     class EntityNotFoundException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -925,6 +988,7 @@ module Aws::LakeFormation
     #   <p>A message describing the error.</p>
     #   @return [String]
     class ErrorDetail < Struct.new(
+      nil,
       :error_code,
       :error_message,
       keyword_init: true
@@ -943,6 +1007,7 @@ module Aws::LakeFormation
     #   <p>The number of work units executed.</p>
     #   @return [Integer]
     class ExecutionStatistics < Struct.new(
+      nil,
       :average_execution_time_millis,
       :data_scanned_bytes,
       :work_units_executed_count,
@@ -963,6 +1028,7 @@ module Aws::LakeFormation
     #   <p>A message describing the error.</p>
     #   @return [String]
     class ExpiredException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -973,6 +1039,7 @@ module Aws::LakeFormation
     #   <p>The transaction to extend.</p>
     #   @return [String]
     class ExtendTransactionRequest < Struct.new(
+      nil,
       :transaction_id,
       keyword_init: true
     )
@@ -980,6 +1047,7 @@ module Aws::LakeFormation
     end
 
     class ExtendTransactionResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -995,6 +1063,7 @@ module Aws::LakeFormation
     #   <p>List of third-party application <code>ARNs</code> integrated with Lake Formation.</p>
     #   @return [Array<String>]
     class ExternalFilteringConfiguration < Struct.new(
+      nil,
       :status,
       :authorized_targets,
       keyword_init: true
@@ -1013,6 +1082,7 @@ module Aws::LakeFormation
     #   <p>A string with values used in evaluating the filter condition.</p>
     #   @return [Array<String>]
     class FilterCondition < Struct.new(
+      nil,
       :field,
       :comparison_operator,
       :string_value_list,
@@ -1034,6 +1104,7 @@ module Aws::LakeFormation
     #   <p>The name given by the user to the data filter cell.</p>
     #   @return [String]
     class GetDataCellsFilterRequest < Struct.new(
+      nil,
       :table_catalog_id,
       :database_name,
       :table_name,
@@ -1047,6 +1118,7 @@ module Aws::LakeFormation
     #   <p>A structure that describes certain columns on certain rows.</p>
     #   @return [Types::DataCellsFilter]
     class GetDataCellsFilterResponse < Struct.new(
+      nil,
       :data_cells_filter,
       keyword_init: true
     )
@@ -1054,6 +1126,7 @@ module Aws::LakeFormation
     end
 
     class GetDataLakePrincipalRequest < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1063,6 +1136,7 @@ module Aws::LakeFormation
     #   <p>A unique identifier of the invoking principal.</p>
     #   @return [String]
     class GetDataLakePrincipalResponse < Struct.new(
+      nil,
       :identity,
       keyword_init: true
     )
@@ -1073,6 +1147,7 @@ module Aws::LakeFormation
     #   <p>The identifier for the Data Catalog. By default, the account ID. The Data Catalog is the persistent metadata store. It contains database definitions, table definitions, and other control information to manage your Lake Formation environment. </p>
     #   @return [String]
     class GetDataLakeSettingsRequest < Struct.new(
+      nil,
       :catalog_id,
       keyword_init: true
     )
@@ -1083,6 +1158,7 @@ module Aws::LakeFormation
     #   <p>A structure representing a list of Lake Formation principals designated as data lake administrators.</p>
     #   @return [Types::DataLakeSettings]
     class GetDataLakeSettingsResponse < Struct.new(
+      nil,
       :data_lake_settings,
       keyword_init: true
     )
@@ -1102,6 +1178,7 @@ module Aws::LakeFormation
     #   <p>The maximum number of results to return.</p>
     #   @return [Integer]
     class GetEffectivePermissionsForPathRequest < Struct.new(
+      nil,
       :catalog_id,
       :resource_arn,
       :next_token,
@@ -1118,6 +1195,7 @@ module Aws::LakeFormation
     #   <p>A continuation token, if this is not the first call to retrieve this list.</p>
     #   @return [String]
     class GetEffectivePermissionsForPathResponse < Struct.new(
+      nil,
       :permissions,
       :next_token,
       keyword_init: true
@@ -1132,6 +1210,7 @@ module Aws::LakeFormation
     #   <p>The identifier for the Data Catalog. By default, the account ID.</p>
     #   @return [String]
     class GetLFTagExpressionRequest < Struct.new(
+      nil,
       :name,
       :catalog_id,
       keyword_init: true
@@ -1152,6 +1231,7 @@ module Aws::LakeFormation
     #   <p>The body of the LF-Tag expression. It is composed of one or more LF-Tag key-value pairs.</p>
     #   @return [Array<Types::LFTag>]
     class GetLFTagExpressionResponse < Struct.new(
+      nil,
       :name,
       :description,
       :catalog_id,
@@ -1168,6 +1248,7 @@ module Aws::LakeFormation
     #   <p>The key-name for the LF-tag.</p>
     #   @return [String]
     class GetLFTagRequest < Struct.new(
+      nil,
       :catalog_id,
       :tag_key,
       keyword_init: true
@@ -1185,6 +1266,7 @@ module Aws::LakeFormation
     #   <p>A list of possible values an attribute can take.</p>
     #   @return [Array<String>]
     class GetLFTagResponse < Struct.new(
+      nil,
       :catalog_id,
       :tag_key,
       :tag_values,
@@ -1197,6 +1279,7 @@ module Aws::LakeFormation
     #   <p>The ID of the plan query operation.</p>
     #   @return [String]
     class GetQueryStateRequest < Struct.new(
+      nil,
       :query_id,
       keyword_init: true
     )
@@ -1225,6 +1308,7 @@ module Aws::LakeFormation
     #            </ul>
     #   @return [String]
     class GetQueryStateResponse < Struct.new(
+      nil,
       :error,
       :state,
       keyword_init: true
@@ -1236,6 +1320,7 @@ module Aws::LakeFormation
     #   <p>The ID of the plan query operation.</p>
     #   @return [String]
     class GetQueryStatisticsRequest < Struct.new(
+      nil,
       :query_id,
       keyword_init: true
     )
@@ -1252,6 +1337,7 @@ module Aws::LakeFormation
     #   <p>The time that the query was submitted.</p>
     #   @return [Time]
     class GetQueryStatisticsResponse < Struct.new(
+      nil,
       :execution_statistics,
       :planning_statistics,
       :query_submission_time,
@@ -1270,6 +1356,7 @@ module Aws::LakeFormation
     #   <p>Indicates whether to show the assigned LF-tags.</p>
     #   @return [Boolean]
     class GetResourceLFTagsRequest < Struct.new(
+      nil,
       :catalog_id,
       :resource,
       :show_assigned_lf_tags,
@@ -1288,6 +1375,7 @@ module Aws::LakeFormation
     #   <p>A list of LF-tags applied to a column resource.</p>
     #   @return [Array<Types::ColumnLFTag>]
     class GetResourceLFTagsResponse < Struct.new(
+      nil,
       :lf_tag_on_database,
       :lf_tags_on_table,
       :lf_tags_on_columns,
@@ -1332,6 +1420,7 @@ module Aws::LakeFormation
     #   <p>A continuation token if this is not the first call to retrieve these objects.</p>
     #   @return [String]
     class GetTableObjectsRequest < Struct.new(
+      nil,
       :catalog_id,
       :database_name,
       :table_name,
@@ -1352,6 +1441,7 @@ module Aws::LakeFormation
     #   <p>A continuation token indicating whether additional data is available.</p>
     #   @return [String]
     class GetTableObjectsResponse < Struct.new(
+      nil,
       :objects,
       :next_token,
       keyword_init: true
@@ -1378,6 +1468,7 @@ module Aws::LakeFormation
     #   <p>A list of supported permission types for the partition. Valid values are <code>COLUMN_PERMISSION</code> and <code>CELL_FILTER_PERMISSION</code>.</p>
     #   @return [Array<String>]
     class GetTemporaryGluePartitionCredentialsRequest < Struct.new(
+      nil,
       :table_arn,
       :partition,
       :permissions,
@@ -1402,6 +1493,7 @@ module Aws::LakeFormation
     #   <p>The date and time when the temporary credentials expire.</p>
     #   @return [Time]
     class GetTemporaryGluePartitionCredentialsResponse < Struct.new(
+      nil,
       :access_key_id,
       :secret_access_key,
       :session_token,
@@ -1433,6 +1525,7 @@ module Aws::LakeFormation
     #   <p>A structure used as a protocol between query engines and Lake Formation or Glue. Contains both a Lake Formation generated authorization identifier and information from the request's authorization context.</p>
     #   @return [Types::QuerySessionContext]
     class GetTemporaryGlueTableCredentialsRequest < Struct.new(
+      nil,
       :table_arn,
       :permissions,
       :duration_seconds,
@@ -1461,6 +1554,7 @@ module Aws::LakeFormation
     #   <p>The Amazon S3 path for the temporary credentials.</p>
     #   @return [Array<String>]
     class GetTemporaryGlueTableCredentialsResponse < Struct.new(
+      nil,
       :access_key_id,
       :secret_access_key,
       :session_token,
@@ -1481,6 +1575,7 @@ module Aws::LakeFormation
     #   <p>A work token used to query the execution service. Token output from <code>GetWorkUnits</code>.</p>
     #   @return [String]
     class GetWorkUnitResultsRequest < Struct.new(
+      nil,
       :query_id,
       :work_unit_id,
       :work_unit_token,
@@ -1494,6 +1589,7 @@ module Aws::LakeFormation
     #   <p>Rows returned from the <code>GetWorkUnitResults</code> operation as a stream of Apache Arrow v1.0 messages.</p>
     #   @return [String]
     class GetWorkUnitResultsResponse < Struct.new(
+      nil,
       :result_stream,
       keyword_init: true
     )
@@ -1515,6 +1611,7 @@ module Aws::LakeFormation
     #   <p>The ID of the plan query operation.</p>
     #   @return [String]
     class GetWorkUnitsRequest < Struct.new(
+      nil,
       :next_token,
       :page_size,
       :query_id,
@@ -1534,6 +1631,7 @@ module Aws::LakeFormation
     #   <p>A <code>WorkUnitRangeList</code> object that specifies the valid range of work unit IDs for querying the execution service.</p>
     #   @return [Array<Types::WorkUnitRange>]
     class GetWorkUnitsResponse < Struct.new(
+      nil,
       :next_token,
       :query_id,
       :work_unit_ranges,
@@ -1547,6 +1645,7 @@ module Aws::LakeFormation
     #   <p>A message describing the problem.</p>
     #   @return [String]
     class GlueEncryptionException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -1573,6 +1672,7 @@ module Aws::LakeFormation
     #   <p>Indicates a list of the granted permissions that the principal may pass to other users. These permissions may only be a subset of the permissions granted in the <code>Privileges</code>.</p>
     #   @return [Array<String>]
     class GrantPermissionsRequest < Struct.new(
+      nil,
       :catalog_id,
       :principal,
       :resource,
@@ -1585,6 +1685,7 @@ module Aws::LakeFormation
     end
 
     class GrantPermissionsResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1595,6 +1696,7 @@ module Aws::LakeFormation
     #   <p>A message describing the problem.</p>
     #   @return [String]
     class InternalServiceException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -1606,6 +1708,7 @@ module Aws::LakeFormation
     #   <p>A message describing the problem.</p>
     #   @return [String]
     class InvalidInputException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -1622,6 +1725,7 @@ module Aws::LakeFormation
     #         supports 50 values. You can use multiple API calls to add more values.</p>
     #   @return [Array<String>]
     class LFTag < Struct.new(
+      nil,
       :tag_key,
       :tag_values,
       keyword_init: true
@@ -1637,6 +1741,7 @@ module Aws::LakeFormation
     #   <p>An error that occurred with the attachment or detachment of the LF-tag.</p>
     #   @return [Types::ErrorDetail]
     class LFTagError < Struct.new(
+      nil,
       :lf_tag,
       :error,
       keyword_init: true
@@ -1658,6 +1763,7 @@ module Aws::LakeFormation
     #   <p>A logical expression composed of one or more LF-Tags.</p>
     #   @return [Array<Types::LFTag>]
     class LFTagExpression < Struct.new(
+      nil,
       :name,
       :description,
       :catalog_id,
@@ -1675,6 +1781,7 @@ module Aws::LakeFormation
     #   <p>The name of the LF-Tag expression to grant permissions on.</p>
     #   @return [String]
     class LFTagExpressionResource < Struct.new(
+      nil,
       :catalog_id,
       :name,
       keyword_init: true
@@ -1693,6 +1800,7 @@ module Aws::LakeFormation
     #   <p>A list of possible values an attribute can take.</p>
     #   @return [Array<String>]
     class LFTagKeyResource < Struct.new(
+      nil,
       :catalog_id,
       :tag_key,
       :tag_values,
@@ -1712,6 +1820,7 @@ module Aws::LakeFormation
     #   <p>A list of possible values an attribute can take.</p>
     #   @return [Array<String>]
     class LFTagPair < Struct.new(
+      nil,
       :catalog_id,
       :tag_key,
       :tag_values,
@@ -1736,6 +1845,7 @@ module Aws::LakeFormation
     #           <code>ExpressionName</code>.</p>
     #   @return [String]
     class LFTagPolicyResource < Struct.new(
+      nil,
       :catalog_id,
       :resource_type,
       :expression,
@@ -1768,6 +1878,7 @@ module Aws::LakeFormation
     #   <p>The user who updated the record.</p>
     #   @return [String]
     class LakeFormationOptInsInfo < Struct.new(
+      nil,
       :resource,
       :principal,
       :condition,
@@ -1788,6 +1899,7 @@ module Aws::LakeFormation
     #   <p>The maximum size of the response.</p>
     #   @return [Integer]
     class ListDataCellsFilterRequest < Struct.new(
+      nil,
       :table,
       :next_token,
       :max_results,
@@ -1803,6 +1915,7 @@ module Aws::LakeFormation
     #   <p>A continuation token, if not all requested data cell filters have been returned.</p>
     #   @return [String]
     class ListDataCellsFilterResponse < Struct.new(
+      nil,
       :data_cells_filters,
       :next_token,
       keyword_init: true
@@ -1820,6 +1933,7 @@ module Aws::LakeFormation
     #   <p>A continuation token, if this is not the first call to retrieve this list.</p>
     #   @return [String]
     class ListLFTagExpressionsRequest < Struct.new(
+      nil,
       :catalog_id,
       :max_results,
       :next_token,
@@ -1835,6 +1949,7 @@ module Aws::LakeFormation
     #   <p>A continuation token, if this is not the first call to retrieve this list.</p>
     #   @return [String]
     class ListLFTagExpressionsResponse < Struct.new(
+      nil,
       :lf_tag_expressions,
       :next_token,
       keyword_init: true
@@ -1855,6 +1970,7 @@ module Aws::LakeFormation
     #   <p>A continuation token, if this is not the first call to retrieve this list.</p>
     #   @return [String]
     class ListLFTagsRequest < Struct.new(
+      nil,
       :catalog_id,
       :resource_share_type,
       :max_results,
@@ -1871,6 +1987,7 @@ module Aws::LakeFormation
     #   <p>A continuation token, present if the current list segment is not the last.</p>
     #   @return [String]
     class ListLFTagsResponse < Struct.new(
+      nil,
       :lf_tags,
       :next_token,
       keyword_init: true
@@ -1892,6 +2009,7 @@ module Aws::LakeFormation
     #   <p>A continuation token, if this is not the first call to retrieve this list.</p>
     #   @return [String]
     class ListLakeFormationOptInsRequest < Struct.new(
+      nil,
       :principal,
       :resource,
       :max_results,
@@ -1908,6 +2026,7 @@ module Aws::LakeFormation
     #   <p>A continuation token, if this is not the first call to retrieve this list.</p>
     #   @return [String]
     class ListLakeFormationOptInsResponse < Struct.new(
+      nil,
       :lake_formation_opt_ins_info_list,
       :next_token,
       keyword_init: true
@@ -1938,6 +2057,7 @@ module Aws::LakeFormation
     #   <p>Indicates that related permissions should be included in the results.</p>
     #   @return [String]
     class ListPermissionsRequest < Struct.new(
+      nil,
       :catalog_id,
       :principal,
       :resource_type,
@@ -1957,6 +2077,7 @@ module Aws::LakeFormation
     #   <p>A continuation token, if this is not the first call to retrieve this list.</p>
     #   @return [String]
     class ListPermissionsResponse < Struct.new(
+      nil,
       :principal_resource_permissions,
       :next_token,
       keyword_init: true
@@ -1974,6 +2095,7 @@ module Aws::LakeFormation
     #   <p>A continuation token, if this is not the first call to retrieve these resources.</p>
     #   @return [String]
     class ListResourcesRequest < Struct.new(
+      nil,
       :filter_condition_list,
       :max_results,
       :next_token,
@@ -1989,6 +2111,7 @@ module Aws::LakeFormation
     #   <p>A continuation token, if this is not the first call to retrieve these resources.</p>
     #   @return [String]
     class ListResourcesResponse < Struct.new(
+      nil,
       :resource_info_list,
       :next_token,
       keyword_init: true
@@ -2015,6 +2138,7 @@ module Aws::LakeFormation
     #   <p>A continuation token, if this is a continuation call.</p>
     #   @return [String]
     class ListTableStorageOptimizersRequest < Struct.new(
+      nil,
       :catalog_id,
       :database_name,
       :table_name,
@@ -2033,6 +2157,7 @@ module Aws::LakeFormation
     #   <p>A continuation token for paginating the returned list of tokens, returned if the current segment of the list is not the last.</p>
     #   @return [String]
     class ListTableStorageOptimizersResponse < Struct.new(
+      nil,
       :storage_optimizer_list,
       :next_token,
       keyword_init: true
@@ -2053,6 +2178,7 @@ module Aws::LakeFormation
     #   <p>A continuation token if this is not the first call to retrieve transactions.</p>
     #   @return [String]
     class ListTransactionsRequest < Struct.new(
+      nil,
       :catalog_id,
       :status_filter,
       :max_results,
@@ -2069,6 +2195,7 @@ module Aws::LakeFormation
     #   <p>A continuation token indicating whether additional data is available.</p>
     #   @return [String]
     class ListTransactionsResponse < Struct.new(
+      nil,
       :transactions,
       :next_token,
       keyword_init: true
@@ -2081,6 +2208,7 @@ module Aws::LakeFormation
     #   <p>A message describing the problem.</p>
     #   @return [String]
     class OperationTimeoutException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -2095,6 +2223,7 @@ module Aws::LakeFormation
     #   <p>A list of table objects</p>
     #   @return [Array<Types::TableObject>]
     class PartitionObjects < Struct.new(
+      nil,
       :partition_values,
       :objects,
       keyword_init: true
@@ -2107,6 +2236,7 @@ module Aws::LakeFormation
     #   <p>The list of partition values.</p>
     #   @return [Array<String>]
     class PartitionValueList < Struct.new(
+      nil,
       :values,
       keyword_init: true
     )
@@ -2118,6 +2248,7 @@ module Aws::LakeFormation
     #   <p>A message describing the problem.</p>
     #   @return [String]
     class PermissionTypeMismatchException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -2138,6 +2269,7 @@ module Aws::LakeFormation
     #   <p>The number of work units generated.</p>
     #   @return [Integer]
     class PlanningStatistics < Struct.new(
+      nil,
       :estimated_data_to_scan_bytes,
       :planning_time_millis,
       :queue_time_millis,
@@ -2163,6 +2295,7 @@ module Aws::LakeFormation
     #   <p>The permissions that are granted to the principal.</p>
     #   @return [Array<String>]
     class PrincipalPermissions < Struct.new(
+      nil,
       :principal,
       :permissions,
       keyword_init: true
@@ -2196,6 +2329,7 @@ module Aws::LakeFormation
     #   <p>The user who updated the record.</p>
     #   @return [String]
     class PrincipalResourcePermissions < Struct.new(
+      nil,
       :principal,
       :resource,
       :condition,
@@ -2216,6 +2350,7 @@ module Aws::LakeFormation
     #   <p>A structure representing a list of Lake Formation principals designated as data lake administrators.</p>
     #   @return [Types::DataLakeSettings]
     class PutDataLakeSettingsRequest < Struct.new(
+      nil,
       :catalog_id,
       :data_lake_settings,
       keyword_init: true
@@ -2224,6 +2359,7 @@ module Aws::LakeFormation
     end
 
     class PutDataLakeSettingsResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -2246,6 +2382,7 @@ module Aws::LakeFormation
     #   <p>The transaction ID at which to read the table contents. If this transaction is not committed, the read will be treated as part of that transaction and will see its writes. If this transaction has aborted, an error will be returned. If not set, defaults to the most recent committed transaction. Cannot be specified along with <code>QueryAsOfTime</code>.</p>
     #   @return [String]
     class QueryPlanningContext < Struct.new(
+      nil,
       :catalog_id,
       :database_name,
       :query_as_of_time,
@@ -2273,6 +2410,7 @@ module Aws::LakeFormation
     #   <p>An opaque string-string map passed by the query engine.</p>
     #   @return [Hash<String, String>]
     class QuerySessionContext < Struct.new(
+      nil,
       :query_id,
       :query_start_time,
       :cluster_id,
@@ -2305,6 +2443,7 @@ module Aws::LakeFormation
     #   <p>Grants the calling principal the permissions to perform all supported Lake Formation operations on the registered data location. </p>
     #   @return [Boolean]
     class RegisterResourceRequest < Struct.new(
+      nil,
       :resource_arn,
       :use_service_linked_role,
       :role_arn,
@@ -2317,6 +2456,7 @@ module Aws::LakeFormation
     end
 
     class RegisterResourceResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -2332,6 +2472,7 @@ module Aws::LakeFormation
     #   <p>The LF-tags to be removed from the resource.</p>
     #   @return [Array<Types::LFTagPair>]
     class RemoveLFTagsFromResourceRequest < Struct.new(
+      nil,
       :catalog_id,
       :resource,
       :lf_tags,
@@ -2344,6 +2485,7 @@ module Aws::LakeFormation
     #   <p>A list of failures to untag a resource.</p>
     #   @return [Array<Types::LFTagError>]
     class RemoveLFTagsFromResourceResponse < Struct.new(
+      nil,
       :failures,
       keyword_init: true
     )
@@ -2379,6 +2521,7 @@ module Aws::LakeFormation
     #   <p>LF-Tag expression resource. A logical expression composed of one or more LF-Tag key:value pairs.</p>
     #   @return [Types::LFTagExpressionResource]
     class Resource < Struct.new(
+      nil,
       :catalog,
       :database,
       :table,
@@ -2415,6 +2558,7 @@ module Aws::LakeFormation
     #   <p>Grants the calling principal the permissions to perform all supported Lake Formation operations on the registered data location. </p>
     #   @return [Boolean]
     class ResourceInfo < Struct.new(
+      nil,
       :resource_arn,
       :role_arn,
       :last_modified,
@@ -2431,6 +2575,7 @@ module Aws::LakeFormation
     #   <p>A message describing the error.</p>
     #   @return [String]
     class ResourceNotReadyException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -2442,6 +2587,7 @@ module Aws::LakeFormation
     #   <p>A message describing the problem.</p>
     #   @return [String]
     class ResourceNumberLimitExceededException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -2468,6 +2614,7 @@ module Aws::LakeFormation
     #   <p>Indicates a list of permissions for which to revoke the grant option allowing the principal to pass permissions to other principals.</p>
     #   @return [Array<String>]
     class RevokePermissionsRequest < Struct.new(
+      nil,
       :catalog_id,
       :principal,
       :resource,
@@ -2480,6 +2627,7 @@ module Aws::LakeFormation
     end
 
     class RevokePermissionsResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -2493,6 +2641,7 @@ module Aws::LakeFormation
     #   <p>A wildcard for all rows.</p>
     #   @return [Types::AllRowsWildcard]
     class RowFilter < Struct.new(
+      nil,
       :filter_expression,
       :all_rows_wildcard,
       keyword_init: true
@@ -2513,6 +2662,7 @@ module Aws::LakeFormation
     #   <p>A list of conditions (<code>LFTag</code> structures) to search for in database resources.</p>
     #   @return [Array<Types::LFTag>]
     class SearchDatabasesByLFTagsRequest < Struct.new(
+      nil,
       :next_token,
       :max_results,
       :catalog_id,
@@ -2529,6 +2679,7 @@ module Aws::LakeFormation
     #   <p>A list of databases that meet the LF-tag conditions.</p>
     #   @return [Array<Types::TaggedDatabase>]
     class SearchDatabasesByLFTagsResponse < Struct.new(
+      nil,
       :next_token,
       :database_list,
       keyword_init: true
@@ -2549,6 +2700,7 @@ module Aws::LakeFormation
     #   <p>A list of conditions (<code>LFTag</code> structures) to search for in table resources.</p>
     #   @return [Array<Types::LFTag>]
     class SearchTablesByLFTagsRequest < Struct.new(
+      nil,
       :next_token,
       :max_results,
       :catalog_id,
@@ -2565,6 +2717,7 @@ module Aws::LakeFormation
     #   <p>A list of tables that meet the LF-tag conditions.</p>
     #   @return [Array<Types::TaggedTable>]
     class SearchTablesByLFTagsResponse < Struct.new(
+      nil,
       :next_token,
       :table_list,
       keyword_init: true
@@ -2579,6 +2732,7 @@ module Aws::LakeFormation
     #   <p>A PartiQL query statement used as an input to the planner service.</p>
     #   @return [String]
     class StartQueryPlanningRequest < Struct.new(
+      nil,
       :query_planning_context,
       :query_string,
       keyword_init: true
@@ -2591,6 +2745,7 @@ module Aws::LakeFormation
     #   <p>The ID of the plan query operation can be used to fetch the actual work unit descriptors that are produced as the result of the operation. The ID is also used to get the query state and as an input to the <code>Execute</code> operation.</p>
     #   @return [String]
     class StartQueryPlanningResponse < Struct.new(
+      nil,
       :query_id,
       keyword_init: true
     )
@@ -2601,6 +2756,7 @@ module Aws::LakeFormation
     #   <p>Indicates whether this transaction should be read only or read and write. Writes made using a read-only transaction ID will be rejected. Read-only transactions do not need to be committed. </p>
     #   @return [String]
     class StartTransactionRequest < Struct.new(
+      nil,
       :transaction_type,
       keyword_init: true
     )
@@ -2611,6 +2767,7 @@ module Aws::LakeFormation
     #   <p>An opaque identifier for the transaction.</p>
     #   @return [String]
     class StartTransactionResponse < Struct.new(
+      nil,
       :transaction_id,
       keyword_init: true
     )
@@ -2622,6 +2779,7 @@ module Aws::LakeFormation
     #   <p>A message describing the error.</p>
     #   @return [String]
     class StatisticsNotReadyYetException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -2647,6 +2805,7 @@ module Aws::LakeFormation
     #   <p>When an acceleration result has an enabled status, contains the details of the last job run.</p>
     #   @return [String]
     class StorageOptimizer < Struct.new(
+      nil,
       :storage_optimizer_type,
       :config,
       :error_message,
@@ -2668,6 +2827,7 @@ module Aws::LakeFormation
     #   <p>The size of the Amazon S3 object in bytes.</p>
     #   @return [Integer]
     class TableObject < Struct.new(
+      nil,
       :uri,
       :e_tag,
       :size,
@@ -2696,6 +2856,7 @@ module Aws::LakeFormation
     #            <p>At least one of <code>TableResource$Name</code> or <code>TableResource$TableWildcard</code> is required.</p>
     #   @return [Types::TableWildcard]
     class TableResource < Struct.new(
+      nil,
       :catalog_id,
       :database_name,
       :name,
@@ -2707,6 +2868,7 @@ module Aws::LakeFormation
 
     # <p>A wildcard object representing every table under a database.</p>
     class TableWildcard < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -2730,6 +2892,7 @@ module Aws::LakeFormation
     #   <p>A wildcard specified by a <code>ColumnWildcard</code> object. At least one of <code>ColumnNames</code> or <code>ColumnWildcard</code> is required.</p>
     #   @return [Types::ColumnWildcard]
     class TableWithColumnsResource < Struct.new(
+      nil,
       :catalog_id,
       :database_name,
       :name,
@@ -2748,6 +2911,7 @@ module Aws::LakeFormation
     #   <p>A list of LF-tags attached to the database.</p>
     #   @return [Array<Types::LFTagPair>]
     class TaggedDatabase < Struct.new(
+      nil,
       :database,
       :lf_tags,
       keyword_init: true
@@ -2769,6 +2933,7 @@ module Aws::LakeFormation
     #   <p>A list of LF-tags attached to columns in the table.</p>
     #   @return [Array<Types::ColumnLFTag>]
     class TaggedTable < Struct.new(
+      nil,
       :table,
       :lf_tag_on_database,
       :lf_tags_on_table,
@@ -2783,6 +2948,7 @@ module Aws::LakeFormation
     #   <p>A message describing the error.</p>
     #   @return [String]
     class ThrottledException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -2794,6 +2960,7 @@ module Aws::LakeFormation
     #   <p>A message describing the error.</p>
     #   @return [String]
     class TransactionCanceledException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -2805,6 +2972,7 @@ module Aws::LakeFormation
     #   <p>A message describing the error.</p>
     #   @return [String]
     class TransactionCommitInProgressException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -2816,6 +2984,7 @@ module Aws::LakeFormation
     #   <p>A message describing the error.</p>
     #   @return [String]
     class TransactionCommittedException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -2836,6 +3005,7 @@ module Aws::LakeFormation
     #   <p>The time when the transaction committed or aborted, if it is not currently active.</p>
     #   @return [Time]
     class TransactionDescription < Struct.new(
+      nil,
       :transaction_id,
       :transaction_status,
       :transaction_start_time,
@@ -2849,6 +3019,7 @@ module Aws::LakeFormation
     #   <p>A <code>DataCellsFilter</code> structure containing information about the data cells filter.</p>
     #   @return [Types::DataCellsFilter]
     class UpdateDataCellsFilterRequest < Struct.new(
+      nil,
       :table_data,
       keyword_init: true
     )
@@ -2856,6 +3027,7 @@ module Aws::LakeFormation
     end
 
     class UpdateDataCellsFilterResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -2874,6 +3046,7 @@ module Aws::LakeFormation
     #   <p>The LF-Tag expression body composed of one more LF-Tag key-value pairs.</p>
     #   @return [Array<Types::LFTag>]
     class UpdateLFTagExpressionRequest < Struct.new(
+      nil,
       :name,
       :description,
       :catalog_id,
@@ -2884,6 +3057,7 @@ module Aws::LakeFormation
     end
 
     class UpdateLFTagExpressionResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -2902,6 +3076,7 @@ module Aws::LakeFormation
     #   <p>A list of LF-tag values to add from the LF-tag.</p>
     #   @return [Array<String>]
     class UpdateLFTagRequest < Struct.new(
+      nil,
       :catalog_id,
       :tag_key,
       :tag_values_to_delete,
@@ -2912,6 +3087,7 @@ module Aws::LakeFormation
     end
 
     class UpdateLFTagResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -2940,6 +3116,7 @@ module Aws::LakeFormation
     #            that are allowed to access data managed by Lake Formation.</p>
     #   @return [Types::ExternalFilteringConfiguration]
     class UpdateLakeFormationIdentityCenterConfigurationRequest < Struct.new(
+      nil,
       :catalog_id,
       :share_recipients,
       :application_status,
@@ -2950,6 +3127,7 @@ module Aws::LakeFormation
     end
 
     class UpdateLakeFormationIdentityCenterConfigurationResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -2970,6 +3148,7 @@ module Aws::LakeFormation
     #       </p>
     #   @return [Boolean]
     class UpdateResourceRequest < Struct.new(
+      nil,
       :role_arn,
       :resource_arn,
       :with_federation,
@@ -2980,6 +3159,7 @@ module Aws::LakeFormation
     end
 
     class UpdateResourceResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -3001,6 +3181,7 @@ module Aws::LakeFormation
     #   <p>A list of <code>WriteOperation</code> objects that define an object to add to or delete from the manifest for a governed table.</p>
     #   @return [Array<Types::WriteOperation>]
     class UpdateTableObjectsRequest < Struct.new(
+      nil,
       :catalog_id,
       :database_name,
       :table_name,
@@ -3012,6 +3193,7 @@ module Aws::LakeFormation
     end
 
     class UpdateTableObjectsResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -3030,6 +3212,7 @@ module Aws::LakeFormation
     #   <p>Name of the configuration for the storage optimizer.</p>
     #   @return [Hash<String, Hash<String, String>>]
     class UpdateTableStorageOptimizerRequest < Struct.new(
+      nil,
       :catalog_id,
       :database_name,
       :table_name,
@@ -3043,6 +3226,7 @@ module Aws::LakeFormation
     #   <p>A response indicating the success of failure of the operation.</p>
     #   @return [String]
     class UpdateTableStorageOptimizerResponse < Struct.new(
+      nil,
       :result,
       keyword_init: true
     )
@@ -3058,6 +3242,7 @@ module Aws::LakeFormation
     #   <p>The ETag of the Amazon S3 object.</p>
     #   @return [String]
     class VirtualObject < Struct.new(
+      nil,
       :uri,
       :e_tag,
       keyword_init: true
@@ -3076,6 +3261,7 @@ module Aws::LakeFormation
     #   <p>A work token used to query the execution service.</p>
     #   @return [String]
     class WorkUnitRange < Struct.new(
+      nil,
       :work_unit_id_max,
       :work_unit_id_min,
       :work_unit_token,
@@ -3095,6 +3281,7 @@ module Aws::LakeFormation
     #   <p>A message describing the error.</p>
     #   @return [String]
     class WorkUnitsNotReadyYetException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -3109,6 +3296,7 @@ module Aws::LakeFormation
     #   <p>An object to delete from the governed table.</p>
     #   @return [Types::DeleteObjectInput]
     class WriteOperation < Struct.new(
+      nil,
       :add_object,
       :delete_object,
       keyword_init: true

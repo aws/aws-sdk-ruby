@@ -20,6 +20,7 @@ module Aws::IoTThingsGraph
     #   <p>The version of the user's namespace. Defaults to the latest version of the user's namespace.</p>
     #   @return [Integer]
     class AssociateEntityToThingRequest < Struct.new(
+      nil,
       :thing_name,
       :entity_id,
       :namespace_version,
@@ -29,6 +30,7 @@ module Aws::IoTThingsGraph
     end
 
     class AssociateEntityToThingResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -42,6 +44,7 @@ module Aws::IoTThingsGraph
     #            <p>If no value is specified, the latest version is used by default.</p>
     #   @return [Integer]
     class CreateFlowTemplateRequest < Struct.new(
+      nil,
       :definition,
       :compatible_namespace_version,
       keyword_init: true
@@ -53,6 +56,7 @@ module Aws::IoTThingsGraph
     #   <p>The summary object that describes the created workflow.</p>
     #   @return [Types::FlowTemplateSummary]
     class CreateFlowTemplateResponse < Struct.new(
+      nil,
       :summary,
       keyword_init: true
     )
@@ -85,6 +89,7 @@ module Aws::IoTThingsGraph
     #         value is required if the value of the <code>target</code> parameter is <code>CLOUD</code>.</p>
     #   @return [String]
     class CreateSystemInstanceRequest < Struct.new(
+      nil,
       :tags,
       :definition,
       :target,
@@ -101,6 +106,7 @@ module Aws::IoTThingsGraph
     #   <p>The summary object that describes the new system instance.</p>
     #   @return [Types::SystemInstanceSummary]
     class CreateSystemInstanceResponse < Struct.new(
+      nil,
       :summary,
       keyword_init: true
     )
@@ -115,6 +121,7 @@ module Aws::IoTThingsGraph
     #            <p>If no value is specified, the latest version is used by default.</p>
     #   @return [Integer]
     class CreateSystemTemplateRequest < Struct.new(
+      nil,
       :definition,
       :compatible_namespace_version,
       keyword_init: true
@@ -126,6 +133,7 @@ module Aws::IoTThingsGraph
     #   <p>The summary object that describes the created system.</p>
     #   @return [Types::SystemTemplateSummary]
     class CreateSystemTemplateResponse < Struct.new(
+      nil,
       :summary,
       keyword_init: true
     )
@@ -140,6 +148,7 @@ module Aws::IoTThingsGraph
     #   <p>The GraphQL text that defines the entity.</p>
     #   @return [String]
     class DefinitionDocument < Struct.new(
+      nil,
       :language,
       :text,
       keyword_init: true
@@ -155,6 +164,7 @@ module Aws::IoTThingsGraph
     #            </p>
     #   @return [String]
     class DeleteFlowTemplateRequest < Struct.new(
+      nil,
       :id,
       keyword_init: true
     )
@@ -162,12 +172,14 @@ module Aws::IoTThingsGraph
     end
 
     class DeleteFlowTemplateResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
     end
 
     class DeleteNamespaceRequest < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -180,6 +192,7 @@ module Aws::IoTThingsGraph
     #   <p>The name of the namespace to be deleted.</p>
     #   @return [String]
     class DeleteNamespaceResponse < Struct.new(
+      nil,
       :namespace_arn,
       :namespace_name,
       keyword_init: true
@@ -191,6 +204,7 @@ module Aws::IoTThingsGraph
     #   <p>The ID of the system instance to be deleted.</p>
     #   @return [String]
     class DeleteSystemInstanceRequest < Struct.new(
+      nil,
       :id,
       keyword_init: true
     )
@@ -198,6 +212,7 @@ module Aws::IoTThingsGraph
     end
 
     class DeleteSystemInstanceResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -211,6 +226,7 @@ module Aws::IoTThingsGraph
     #            </p>
     #   @return [String]
     class DeleteSystemTemplateRequest < Struct.new(
+      nil,
       :id,
       keyword_init: true
     )
@@ -218,6 +234,7 @@ module Aws::IoTThingsGraph
     end
 
     class DeleteSystemTemplateResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -231,6 +248,7 @@ module Aws::IoTThingsGraph
     #   <p>The revision number of the workflow or system.</p>
     #   @return [Integer]
     class DependencyRevision < Struct.new(
+      nil,
       :id,
       :revision_number,
       keyword_init: true
@@ -246,6 +264,7 @@ module Aws::IoTThingsGraph
     #            </p>
     #   @return [String]
     class DeploySystemInstanceRequest < Struct.new(
+      nil,
       :id,
       keyword_init: true
     )
@@ -259,6 +278,7 @@ module Aws::IoTThingsGraph
     #   <p>The ID of the Greengrass deployment used to deploy the system instance.</p>
     #   @return [String]
     class DeploySystemInstanceResponse < Struct.new(
+      nil,
       :summary,
       :greengrass_deployment_id,
       keyword_init: true
@@ -274,6 +294,7 @@ module Aws::IoTThingsGraph
     #            </p>
     #   @return [String]
     class DeprecateFlowTemplateRequest < Struct.new(
+      nil,
       :id,
       keyword_init: true
     )
@@ -281,6 +302,7 @@ module Aws::IoTThingsGraph
     end
 
     class DeprecateFlowTemplateResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -294,6 +316,7 @@ module Aws::IoTThingsGraph
     #            </p>
     #   @return [String]
     class DeprecateSystemTemplateRequest < Struct.new(
+      nil,
       :id,
       keyword_init: true
     )
@@ -301,6 +324,7 @@ module Aws::IoTThingsGraph
     end
 
     class DeprecateSystemTemplateResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -310,6 +334,7 @@ module Aws::IoTThingsGraph
     #   <p>The name of the user's namespace. Set this to <code>aws</code> to get the public namespace.</p>
     #   @return [String]
     class DescribeNamespaceRequest < Struct.new(
+      nil,
       :namespace_name,
       keyword_init: true
     )
@@ -332,6 +357,7 @@ module Aws::IoTThingsGraph
     #   <p>The version of the user's namespace to describe.</p>
     #   @return [Integer]
     class DescribeNamespaceResponse < Struct.new(
+      nil,
       :namespace_arn,
       :namespace_name,
       :tracking_namespace_name,
@@ -349,6 +375,7 @@ module Aws::IoTThingsGraph
     #   <p>The entity type from which to disassociate the thing.</p>
     #   @return [String]
     class DissociateEntityFromThingRequest < Struct.new(
+      nil,
       :thing_name,
       :entity_type,
       keyword_init: true
@@ -357,6 +384,7 @@ module Aws::IoTThingsGraph
     end
 
     class DissociateEntityFromThingResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -379,6 +407,7 @@ module Aws::IoTThingsGraph
     #   <p>The definition document of the entity.</p>
     #   @return [Types::DefinitionDocument]
     class EntityDescription < Struct.new(
+      nil,
       :id,
       :arn,
       :type,
@@ -400,6 +429,7 @@ module Aws::IoTThingsGraph
     #   <p>An array of string values for the search filter field. Multiple values function as AND criteria in the search.</p>
     #   @return [Array<String>]
     class EntityFilter < Struct.new(
+      nil,
       :name,
       :value,
       keyword_init: true
@@ -421,6 +451,7 @@ module Aws::IoTThingsGraph
     #   <p>A string containing information about the flow event.</p>
     #   @return [String]
     class FlowExecutionMessage < Struct.new(
+      nil,
       :message_id,
       :event_type,
       :timestamp,
@@ -450,6 +481,7 @@ module Aws::IoTThingsGraph
     #   <p>The date and time when the flow execution summary was last updated.</p>
     #   @return [Time]
     class FlowExecutionSummary < Struct.new(
+      nil,
       :flow_execution_id,
       :status,
       :system_instance_id,
@@ -472,6 +504,7 @@ module Aws::IoTThingsGraph
     #   <p>The version of the user's namespace against which the workflow was validated. Use this value in your system instance.</p>
     #   @return [Integer]
     class FlowTemplateDescription < Struct.new(
+      nil,
       :summary,
       :definition,
       :validated_namespace_version,
@@ -488,6 +521,7 @@ module Aws::IoTThingsGraph
     #   <p>An array of string values for the search filter field. Multiple values function as AND criteria in the search.</p>
     #   @return [Array<String>]
     class FlowTemplateFilter < Struct.new(
+      nil,
       :name,
       :value,
       keyword_init: true
@@ -509,6 +543,7 @@ module Aws::IoTThingsGraph
     #   <p>The date when the workflow was created.</p>
     #   @return [Time]
     class FlowTemplateSummary < Struct.new(
+      nil,
       :id,
       :arn,
       :revision_number,
@@ -529,6 +564,7 @@ module Aws::IoTThingsGraph
     #   <p>The version of the user's namespace. Defaults to the latest version of the user's namespace.</p>
     #   @return [Integer]
     class GetEntitiesRequest < Struct.new(
+      nil,
       :ids,
       :namespace_version,
       keyword_init: true
@@ -540,6 +576,7 @@ module Aws::IoTThingsGraph
     #   <p>An array of descriptions for the specified entities.</p>
     #   @return [Array<Types::EntityDescription>]
     class GetEntitiesResponse < Struct.new(
+      nil,
       :descriptions,
       keyword_init: true
     )
@@ -557,6 +594,7 @@ module Aws::IoTThingsGraph
     #   <p>The number of the workflow revision to retrieve.</p>
     #   @return [Integer]
     class GetFlowTemplateRequest < Struct.new(
+      nil,
       :id,
       :revision_number,
       keyword_init: true
@@ -568,6 +606,7 @@ module Aws::IoTThingsGraph
     #   <p>The object that describes the specified workflow.</p>
     #   @return [Types::FlowTemplateDescription]
     class GetFlowTemplateResponse < Struct.new(
+      nil,
       :description,
       keyword_init: true
     )
@@ -588,6 +627,7 @@ module Aws::IoTThingsGraph
     #   <p>The maximum number of results to return in the response.</p>
     #   @return [Integer]
     class GetFlowTemplateRevisionsRequest < Struct.new(
+      nil,
       :id,
       :next_token,
       :max_results,
@@ -603,6 +643,7 @@ module Aws::IoTThingsGraph
     #   <p>The string to specify as <code>nextToken</code> when you request the next page of results.</p>
     #   @return [String]
     class GetFlowTemplateRevisionsResponse < Struct.new(
+      nil,
       :summaries,
       :next_token,
       keyword_init: true
@@ -611,6 +652,7 @@ module Aws::IoTThingsGraph
     end
 
     class GetNamespaceDeletionStatusRequest < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -632,6 +674,7 @@ module Aws::IoTThingsGraph
     #   <p>An error code returned by the namespace deletion task.</p>
     #   @return [String]
     class GetNamespaceDeletionStatusResponse < Struct.new(
+      nil,
       :namespace_arn,
       :namespace_name,
       :status,
@@ -650,6 +693,7 @@ module Aws::IoTThingsGraph
     #            </p>
     #   @return [String]
     class GetSystemInstanceRequest < Struct.new(
+      nil,
       :id,
       keyword_init: true
     )
@@ -660,6 +704,7 @@ module Aws::IoTThingsGraph
     #   <p>An object that describes the system instance.</p>
     #   @return [Types::SystemInstanceDescription]
     class GetSystemInstanceResponse < Struct.new(
+      nil,
       :description,
       keyword_init: true
     )
@@ -677,6 +722,7 @@ module Aws::IoTThingsGraph
     #   <p>The number that specifies the revision of the system to get.</p>
     #   @return [Integer]
     class GetSystemTemplateRequest < Struct.new(
+      nil,
       :id,
       :revision_number,
       keyword_init: true
@@ -688,6 +734,7 @@ module Aws::IoTThingsGraph
     #   <p>An object that contains summary data about the system.</p>
     #   @return [Types::SystemTemplateDescription]
     class GetSystemTemplateResponse < Struct.new(
+      nil,
       :description,
       keyword_init: true
     )
@@ -708,6 +755,7 @@ module Aws::IoTThingsGraph
     #   <p>The maximum number of results to return in the response.</p>
     #   @return [Integer]
     class GetSystemTemplateRevisionsRequest < Struct.new(
+      nil,
       :id,
       :next_token,
       :max_results,
@@ -723,6 +771,7 @@ module Aws::IoTThingsGraph
     #   <p>The string to specify as <code>nextToken</code> when you request the next page of results. </p>
     #   @return [String]
     class GetSystemTemplateRevisionsResponse < Struct.new(
+      nil,
       :summaries,
       :next_token,
       keyword_init: true
@@ -734,6 +783,7 @@ module Aws::IoTThingsGraph
     #   <p>The ID of the upload. This value is returned by the <code>UploadEntityDefinitions</code> action.</p>
     #   @return [String]
     class GetUploadStatusRequest < Struct.new(
+      nil,
       :upload_id,
       keyword_init: true
     )
@@ -762,6 +812,7 @@ module Aws::IoTThingsGraph
     #   <p>The date at which the upload was created.</p>
     #   @return [Time]
     class GetUploadStatusResponse < Struct.new(
+      nil,
       :upload_id,
       :upload_status,
       :namespace_arn,
@@ -778,6 +829,7 @@ module Aws::IoTThingsGraph
     # @!attribute message
     #   @return [String]
     class InternalFailureException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -788,6 +840,7 @@ module Aws::IoTThingsGraph
     # @!attribute message
     #   @return [String]
     class InvalidRequestException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -798,6 +851,7 @@ module Aws::IoTThingsGraph
     # @!attribute message
     #   @return [String]
     class LimitExceededException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -814,6 +868,7 @@ module Aws::IoTThingsGraph
     #   <p>The maximum number of results to return in the response.</p>
     #   @return [Integer]
     class ListFlowExecutionMessagesRequest < Struct.new(
+      nil,
       :flow_execution_id,
       :next_token,
       :max_results,
@@ -829,6 +884,7 @@ module Aws::IoTThingsGraph
     #   <p>The string to specify as <code>nextToken</code> when you request the next page of results. </p>
     #   @return [String]
     class ListFlowExecutionMessagesResponse < Struct.new(
+      nil,
       :messages,
       :next_token,
       keyword_init: true
@@ -846,6 +902,7 @@ module Aws::IoTThingsGraph
     #   <p>The token that specifies the next page of results to return.</p>
     #   @return [String]
     class ListTagsForResourceRequest < Struct.new(
+      nil,
       :max_results,
       :resource_arn,
       :next_token,
@@ -861,6 +918,7 @@ module Aws::IoTThingsGraph
     #   <p>The token that specifies the next page of results to return.</p>
     #   @return [String]
     class ListTagsForResourceResponse < Struct.new(
+      nil,
       :tags,
       :next_token,
       keyword_init: true
@@ -876,6 +934,7 @@ module Aws::IoTThingsGraph
     #   <p>The ARN of the role that is used to collect cloud metrics.</p>
     #   @return [String]
     class MetricsConfiguration < Struct.new(
+      nil,
       :cloud_metric_enabled,
       :metric_rule_role_arn,
       keyword_init: true
@@ -892,6 +951,7 @@ module Aws::IoTThingsGraph
     # @!attribute message
     #   @return [String]
     class ResourceAlreadyExistsException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -902,6 +962,7 @@ module Aws::IoTThingsGraph
     # @!attribute message
     #   @return [String]
     class ResourceInUseException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -912,6 +973,7 @@ module Aws::IoTThingsGraph
     # @!attribute message
     #   @return [String]
     class ResourceNotFoundException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -938,6 +1000,7 @@ module Aws::IoTThingsGraph
     #   <p>The version of the user's namespace. Defaults to the latest version of the user's namespace.</p>
     #   @return [Integer]
     class SearchEntitiesRequest < Struct.new(
+      nil,
       :entity_types,
       :filters,
       :next_token,
@@ -955,6 +1018,7 @@ module Aws::IoTThingsGraph
     #   <p>The string to specify as <code>nextToken</code> when you request the next page of results.</p>
     #   @return [String]
     class SearchEntitiesResponse < Struct.new(
+      nil,
       :descriptions,
       :next_token,
       keyword_init: true
@@ -981,6 +1045,7 @@ module Aws::IoTThingsGraph
     #   <p>The maximum number of results to return in the response.</p>
     #   @return [Integer]
     class SearchFlowExecutionsRequest < Struct.new(
+      nil,
       :system_instance_id,
       :flow_execution_id,
       :start_time,
@@ -999,6 +1064,7 @@ module Aws::IoTThingsGraph
     #   <p>The string to specify as <code>nextToken</code> when you request the next page of results.</p>
     #   @return [String]
     class SearchFlowExecutionsResponse < Struct.new(
+      nil,
       :summaries,
       :next_token,
       keyword_init: true
@@ -1016,6 +1082,7 @@ module Aws::IoTThingsGraph
     #   <p>The maximum number of results to return in the response.</p>
     #   @return [Integer]
     class SearchFlowTemplatesRequest < Struct.new(
+      nil,
       :filters,
       :next_token,
       :max_results,
@@ -1031,6 +1098,7 @@ module Aws::IoTThingsGraph
     #   <p>The string to specify as <code>nextToken</code> when you request the next page of results.</p>
     #   @return [String]
     class SearchFlowTemplatesResponse < Struct.new(
+      nil,
       :summaries,
       :next_token,
       keyword_init: true
@@ -1050,6 +1118,7 @@ module Aws::IoTThingsGraph
     #   <p>The maximum number of results to return in the response.</p>
     #   @return [Integer]
     class SearchSystemInstancesRequest < Struct.new(
+      nil,
       :filters,
       :next_token,
       :max_results,
@@ -1065,6 +1134,7 @@ module Aws::IoTThingsGraph
     #   <p>The string to specify as <code>nextToken</code> when you request the next page of results. </p>
     #   @return [String]
     class SearchSystemInstancesResponse < Struct.new(
+      nil,
       :summaries,
       :next_token,
       keyword_init: true
@@ -1082,6 +1152,7 @@ module Aws::IoTThingsGraph
     #   <p>The maximum number of results to return in the response.</p>
     #   @return [Integer]
     class SearchSystemTemplatesRequest < Struct.new(
+      nil,
       :filters,
       :next_token,
       :max_results,
@@ -1097,6 +1168,7 @@ module Aws::IoTThingsGraph
     #   <p>The string to specify as <code>nextToken</code> when you request the next page of results.</p>
     #   @return [String]
     class SearchSystemTemplatesResponse < Struct.new(
+      nil,
       :summaries,
       :next_token,
       keyword_init: true
@@ -1121,6 +1193,7 @@ module Aws::IoTThingsGraph
     #   <p>The version of the user's namespace. Defaults to the latest version of the user's namespace.</p>
     #   @return [Integer]
     class SearchThingsRequest < Struct.new(
+      nil,
       :entity_id,
       :next_token,
       :max_results,
@@ -1137,6 +1210,7 @@ module Aws::IoTThingsGraph
     #   <p>The string to specify as <code>nextToken</code> when you request the next page of results.</p>
     #   @return [String]
     class SearchThingsResponse < Struct.new(
+      nil,
       :things,
       :next_token,
       keyword_init: true
@@ -1169,6 +1243,7 @@ module Aws::IoTThingsGraph
     #         AWS services that the flow uses.</p>
     #   @return [String]
     class SystemInstanceDescription < Struct.new(
+      nil,
       :summary,
       :definition,
       :s3_bucket_name,
@@ -1191,6 +1266,7 @@ module Aws::IoTThingsGraph
     #   <p>An array of string values for the search filter field. Multiple values function as AND criteria in the search. </p>
     #   @return [Array<String>]
     class SystemInstanceFilter < Struct.new(
+      nil,
       :name,
       :value,
       keyword_init: true
@@ -1229,6 +1305,7 @@ module Aws::IoTThingsGraph
     #   <p>The version of the Greengrass group where the system instance is deployed.</p>
     #   @return [String]
     class SystemInstanceSummary < Struct.new(
+      nil,
       :id,
       :arn,
       :status,
@@ -1254,6 +1331,7 @@ module Aws::IoTThingsGraph
     #   <p>The namespace version against which the system was validated. Use this value in your system instance.</p>
     #   @return [Integer]
     class SystemTemplateDescription < Struct.new(
+      nil,
       :summary,
       :definition,
       :validated_namespace_version,
@@ -1270,6 +1348,7 @@ module Aws::IoTThingsGraph
     #   <p>An array of string values for the search filter field. Multiple values function as AND criteria in the search.</p>
     #   @return [Array<String>]
     class SystemTemplateFilter < Struct.new(
+      nil,
       :name,
       :value,
       keyword_init: true
@@ -1291,6 +1370,7 @@ module Aws::IoTThingsGraph
     #   <p>The date when the system was created.</p>
     #   @return [Time]
     class SystemTemplateSummary < Struct.new(
+      nil,
       :id,
       :arn,
       :revision_number,
@@ -1308,6 +1388,7 @@ module Aws::IoTThingsGraph
     #   <p>The optional value of the tag. The string value can be from 1 to 256 Unicode characters in length.</p>
     #   @return [String]
     class Tag < Struct.new(
+      nil,
       :key,
       :value,
       keyword_init: true
@@ -1322,6 +1403,7 @@ module Aws::IoTThingsGraph
     #   <p>A list of tags to add to the resource.></p>
     #   @return [Array<Types::Tag>]
     class TagResourceRequest < Struct.new(
+      nil,
       :resource_arn,
       :tags,
       keyword_init: true
@@ -1330,6 +1412,7 @@ module Aws::IoTThingsGraph
     end
 
     class TagResourceResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1343,6 +1426,7 @@ module Aws::IoTThingsGraph
     #   <p>The name of the thing.</p>
     #   @return [String]
     class Thing < Struct.new(
+      nil,
       :thing_arn,
       :thing_name,
       keyword_init: true
@@ -1354,6 +1438,7 @@ module Aws::IoTThingsGraph
     # @!attribute message
     #   @return [String]
     class ThrottlingException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -1364,6 +1449,7 @@ module Aws::IoTThingsGraph
     #   <p>The ID of the system instance to remove from its target.</p>
     #   @return [String]
     class UndeploySystemInstanceRequest < Struct.new(
+      nil,
       :id,
       keyword_init: true
     )
@@ -1374,6 +1460,7 @@ module Aws::IoTThingsGraph
     #   <p>An object that contains summary information about the system instance that was removed from its target.</p>
     #   @return [Types::SystemInstanceSummary]
     class UndeploySystemInstanceResponse < Struct.new(
+      nil,
       :summary,
       keyword_init: true
     )
@@ -1388,6 +1475,7 @@ module Aws::IoTThingsGraph
     #            <p>This parameter to the API requires a JSON text string argument. For information on how to format a JSON parameter for the various command line tool environments, see <a href="https://docs.aws.amazon.com/cli/latest/userguide/cli-usage-parameters.html#cli-using-param-json">Using JSON for Parameters</a> in the <i>AWS CLI User Guide</i>. </p>
     #   @return [Array<String>]
     class UntagResourceRequest < Struct.new(
+      nil,
       :resource_arn,
       :tag_keys,
       keyword_init: true
@@ -1396,6 +1484,7 @@ module Aws::IoTThingsGraph
     end
 
     class UntagResourceResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1417,6 +1506,7 @@ module Aws::IoTThingsGraph
     #         to update.</p>
     #   @return [Integer]
     class UpdateFlowTemplateRequest < Struct.new(
+      nil,
       :id,
       :definition,
       :compatible_namespace_version,
@@ -1429,6 +1519,7 @@ module Aws::IoTThingsGraph
     #   <p>An object containing summary information about the updated workflow.</p>
     #   @return [Types::FlowTemplateSummary]
     class UpdateFlowTemplateResponse < Struct.new(
+      nil,
       :summary,
       keyword_init: true
     )
@@ -1450,6 +1541,7 @@ module Aws::IoTThingsGraph
     #            <p>If no value is specified, the latest version is used by default.</p>
     #   @return [Integer]
     class UpdateSystemTemplateRequest < Struct.new(
+      nil,
       :id,
       :definition,
       :compatible_namespace_version,
@@ -1462,6 +1554,7 @@ module Aws::IoTThingsGraph
     #   <p>An object containing summary information about the updated system.</p>
     #   @return [Types::SystemTemplateSummary]
     class UpdateSystemTemplateResponse < Struct.new(
+      nil,
       :summary,
       keyword_init: true
     )
@@ -1479,6 +1572,7 @@ module Aws::IoTThingsGraph
     #            If set to <code>true</code>, the upload will create a new namespace version.</p>
     #   @return [Boolean]
     class UploadEntityDefinitionsRequest < Struct.new(
+      nil,
       :document,
       :sync_with_public_namespace,
       :deprecate_existing_entities,
@@ -1491,6 +1585,7 @@ module Aws::IoTThingsGraph
     #   <p>The ID that specifies the upload action. You can use this to track the status of the upload.</p>
     #   @return [String]
     class UploadEntityDefinitionsResponse < Struct.new(
+      nil,
       :upload_id,
       keyword_init: true
     )

@@ -40,6 +40,7 @@ module Aws::LaunchWizard
     #   <p>The tags to add to the deployment.</p>
     #   @return [Hash<String, String>]
     class CreateDeploymentInput < Struct.new(
+      nil,
       :workload_name,
       :deployment_pattern_name,
       :name,
@@ -55,6 +56,7 @@ module Aws::LaunchWizard
     #   <p>The ID of the deployment.</p>
     #   @return [String]
     class CreateDeploymentOutput < Struct.new(
+      nil,
       :deployment_id,
       keyword_init: true
     )
@@ -65,6 +67,7 @@ module Aws::LaunchWizard
     #   <p>The ID of the deployment.</p>
     #   @return [String]
     class DeleteDeploymentInput < Struct.new(
+      nil,
       :deployment_id,
       keyword_init: true
     )
@@ -78,6 +81,7 @@ module Aws::LaunchWizard
     #   <p>The reason for the deployment status.</p>
     #   @return [String]
     class DeleteDeploymentOutput < Struct.new(
+      nil,
       :status,
       :status_reason,
       keyword_init: true
@@ -98,6 +102,7 @@ module Aws::LaunchWizard
     #            </p>
     #   @return [String]
     class DeploymentConditionalField < Struct.new(
+      nil,
       :name,
       :value,
       :comparator,
@@ -147,6 +152,7 @@ module Aws::LaunchWizard
     #   <p>The Amazon Resource Name (ARN) of the deployment.</p>
     #   @return [String]
     class DeploymentData < Struct.new(
+      nil,
       :name,
       :id,
       :workload_name,
@@ -183,6 +189,7 @@ module Aws::LaunchWizard
     #   <p>The time the deployment was created.</p>
     #   @return [Time]
     class DeploymentDataSummary < Struct.new(
+      nil,
       :name,
       :id,
       :workload_name,
@@ -211,6 +218,7 @@ module Aws::LaunchWizard
     #   <p>The timestamp of the deployment event.</p>
     #   @return [Time]
     class DeploymentEventDataSummary < Struct.new(
+      nil,
       :name,
       :description,
       :status,
@@ -233,6 +241,7 @@ module Aws::LaunchWizard
     #            results that match any of the specified values.</p>
     #   @return [Array<String>]
     class DeploymentFilter < Struct.new(
+      nil,
       :name,
       :values,
       keyword_init: true
@@ -257,6 +266,7 @@ module Aws::LaunchWizard
     #   <p>The conditionals used for the deployment specification.</p>
     #   @return [Array<Types::DeploymentConditionalField>]
     class DeploymentSpecificationsField < Struct.new(
+      nil,
       :name,
       :description,
       :allowed_values,
@@ -271,6 +281,7 @@ module Aws::LaunchWizard
     #   <p>The ID of the deployment.</p>
     #   @return [String]
     class GetDeploymentInput < Struct.new(
+      nil,
       :deployment_id,
       keyword_init: true
     )
@@ -281,6 +292,7 @@ module Aws::LaunchWizard
     #   <p>An object that details the deployment.</p>
     #   @return [Types::DeploymentData]
     class GetDeploymentOutput < Struct.new(
+      nil,
       :deployment,
       keyword_init: true
     )
@@ -294,6 +306,7 @@ module Aws::LaunchWizard
     #   <p>The name of the deployment pattern.</p>
     #   @return [String]
     class GetWorkloadDeploymentPatternInput < Struct.new(
+      nil,
       :workload_name,
       :deployment_pattern_name,
       keyword_init: true
@@ -305,6 +318,7 @@ module Aws::LaunchWizard
     #   <p>Details about the workload deployment pattern.</p>
     #   @return [Types::WorkloadDeploymentPatternData]
     class GetWorkloadDeploymentPatternOutput < Struct.new(
+      nil,
       :workload_deployment_pattern,
       keyword_init: true
     )
@@ -315,6 +329,7 @@ module Aws::LaunchWizard
     #   <p>The name of the workload.</p>
     #   @return [String]
     class GetWorkloadInput < Struct.new(
+      nil,
       :workload_name,
       keyword_init: true
     )
@@ -325,6 +340,7 @@ module Aws::LaunchWizard
     #   <p>Information about the workload.</p>
     #   @return [Types::WorkloadData]
     class GetWorkloadOutput < Struct.new(
+      nil,
       :workload,
       keyword_init: true
     )
@@ -336,6 +352,7 @@ module Aws::LaunchWizard
     # @!attribute message
     #   @return [String]
     class InternalServerException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -354,6 +371,7 @@ module Aws::LaunchWizard
     #            of the items returned by the previous request.</p>
     #   @return [String]
     class ListDeploymentEventsInput < Struct.new(
+      nil,
       :deployment_id,
       :max_results,
       :next_token,
@@ -370,6 +388,7 @@ module Aws::LaunchWizard
     #               <code>null</code> when there are no more items to return.</p>
     #   @return [String]
     class ListDeploymentEventsOutput < Struct.new(
+      nil,
       :deployment_events,
       :next_token,
       keyword_init: true
@@ -403,6 +422,7 @@ module Aws::LaunchWizard
     #            of the items returned by the previous request.</p>
     #   @return [String]
     class ListDeploymentsInput < Struct.new(
+      nil,
       :filters,
       :max_results,
       :next_token,
@@ -419,6 +439,7 @@ module Aws::LaunchWizard
     #               <code>null</code> when there are no more items to return.</p>
     #   @return [String]
     class ListDeploymentsOutput < Struct.new(
+      nil,
       :deployments,
       :next_token,
       keyword_init: true
@@ -430,6 +451,7 @@ module Aws::LaunchWizard
     #   <p>The Amazon Resource Name (ARN) of the resource.</p>
     #   @return [String]
     class ListTagsForResourceInput < Struct.new(
+      nil,
       :resource_arn,
       keyword_init: true
     )
@@ -440,6 +462,7 @@ module Aws::LaunchWizard
     #   <p>Information about the tags.</p>
     #   @return [Hash<String, String>]
     class ListTagsForResourceOutput < Struct.new(
+      nil,
       :tags,
       keyword_init: true
     )
@@ -458,6 +481,7 @@ module Aws::LaunchWizard
     #            of the items returned by the previous request.</p>
     #   @return [String]
     class ListWorkloadDeploymentPatternsInput < Struct.new(
+      nil,
       :workload_name,
       :max_results,
       :next_token,
@@ -474,6 +498,7 @@ module Aws::LaunchWizard
     #               <code>null</code> when there are no more items to return.</p>
     #   @return [String]
     class ListWorkloadDeploymentPatternsOutput < Struct.new(
+      nil,
       :workload_deployment_patterns,
       :next_token,
       keyword_init: true
@@ -490,6 +515,7 @@ module Aws::LaunchWizard
     #            of the items returned by the previous request.</p>
     #   @return [String]
     class ListWorkloadsInput < Struct.new(
+      nil,
       :max_results,
       :next_token,
       keyword_init: true
@@ -505,6 +531,7 @@ module Aws::LaunchWizard
     #               <code>null</code> when there are no more items to return.</p>
     #   @return [String]
     class ListWorkloadsOutput < Struct.new(
+      nil,
       :workloads,
       :next_token,
       keyword_init: true
@@ -517,6 +544,7 @@ module Aws::LaunchWizard
     # @!attribute message
     #   @return [String]
     class ResourceLimitException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -527,6 +555,7 @@ module Aws::LaunchWizard
     # @!attribute message
     #   @return [String]
     class ResourceNotFoundException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -540,6 +569,7 @@ module Aws::LaunchWizard
     #   <p>One or more tags to attach to the resource.</p>
     #   @return [Hash<String, String>]
     class TagResourceInput < Struct.new(
+      nil,
       :resource_arn,
       :tags,
       keyword_init: true
@@ -548,6 +578,7 @@ module Aws::LaunchWizard
     end
 
     class TagResourceOutput < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -560,6 +591,7 @@ module Aws::LaunchWizard
     #   <p>Keys identifying the tags to remove.</p>
     #   @return [Array<String>]
     class UntagResourceInput < Struct.new(
+      nil,
       :resource_arn,
       :tag_keys,
       keyword_init: true
@@ -568,6 +600,7 @@ module Aws::LaunchWizard
     end
 
     class UntagResourceOutput < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -577,6 +610,7 @@ module Aws::LaunchWizard
     # @!attribute message
     #   @return [String]
     class ValidationException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -606,6 +640,7 @@ module Aws::LaunchWizard
     #   <p>The message about a workload's status.</p>
     #   @return [String]
     class WorkloadData < Struct.new(
+      nil,
       :workload_name,
       :display_name,
       :description,
@@ -626,6 +661,7 @@ module Aws::LaunchWizard
     #   <p>The display name of the workload data.</p>
     #   @return [String]
     class WorkloadDataSummary < Struct.new(
+      nil,
       :workload_name,
       :display_name,
       keyword_init: true
@@ -665,6 +701,7 @@ module Aws::LaunchWizard
     #               </a> operation.</p>
     #   @return [Array<Types::DeploymentSpecificationsField>]
     class WorkloadDeploymentPatternData < Struct.new(
+      nil,
       :workload_name,
       :deployment_pattern_name,
       :workload_version_name,
@@ -701,6 +738,7 @@ module Aws::LaunchWizard
     #   <p>A message about a workload deployment pattern's status.</p>
     #   @return [String]
     class WorkloadDeploymentPatternDataSummary < Struct.new(
+      nil,
       :workload_name,
       :deployment_pattern_name,
       :workload_version_name,

@@ -10,6 +10,7 @@ module Aws::LicenseManagerUserSubscriptions
     # @!attribute message
     #   @return [String]
     class AccessDeniedException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -30,6 +31,7 @@ module Aws::LicenseManagerUserSubscriptions
     #   <p>Whether this directory is shared from an Amazon Web Services Managed Active Directory. The default value is false.</p>
     #   @return [Boolean]
     class ActiveDirectoryIdentityProvider < Struct.new(
+      nil,
       :directory_id,
       :active_directory_settings,
       :active_directory_type,
@@ -53,6 +55,7 @@ module Aws::LicenseManagerUserSubscriptions
     #   <p>The <code>DomainNetworkSettings</code> resource contains an array of subnets that apply for the Active Directory.</p>
     #   @return [Types::DomainNetworkSettings]
     class ActiveDirectorySettings < Struct.new(
+      nil,
       :domain_name,
       :domain_ipv4_list,
       :domain_credentials_provider,
@@ -78,6 +81,7 @@ module Aws::LicenseManagerUserSubscriptions
     #   <p>The tags that apply for the user association.</p>
     #   @return [Hash<String, String>]
     class AssociateUserRequest < Struct.new(
+      nil,
       :username,
       :instance_id,
       :identity_provider,
@@ -92,6 +96,7 @@ module Aws::LicenseManagerUserSubscriptions
     #   <p>Metadata that describes the associate user operation.</p>
     #   @return [Types::InstanceUserSummary]
     class AssociateUserResponse < Struct.new(
+      nil,
       :instance_user_summary,
       keyword_init: true
     )
@@ -102,6 +107,7 @@ module Aws::LicenseManagerUserSubscriptions
     # @!attribute message
     #   @return [String]
     class ConflictException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -118,6 +124,7 @@ module Aws::LicenseManagerUserSubscriptions
     #   <p>The tags that apply for the license server endpoint.</p>
     #   @return [Hash<String, String>]
     class CreateLicenseServerEndpointRequest < Struct.new(
+      nil,
       :identity_provider_arn,
       :license_server_settings,
       :tags,
@@ -133,6 +140,7 @@ module Aws::LicenseManagerUserSubscriptions
     #   <p>The ARN of the <code>LicenseServerEndpoint</code> resource.</p>
     #   @return [String]
     class CreateLicenseServerEndpointResponse < Struct.new(
+      nil,
       :identity_provider_arn,
       :license_server_endpoint_arn,
       keyword_init: true
@@ -162,6 +170,7 @@ module Aws::LicenseManagerUserSubscriptions
     #   <p>The type of License Server that the delete request refers to.</p>
     #   @return [String]
     class DeleteLicenseServerEndpointRequest < Struct.new(
+      nil,
       :license_server_endpoint_arn,
       :server_type,
       keyword_init: true
@@ -173,6 +182,7 @@ module Aws::LicenseManagerUserSubscriptions
     #   <p>Shows details from the <code>LicenseServerEndpoint</code> resource that was deleted.</p>
     #   @return [Types::LicenseServerEndpoint]
     class DeleteLicenseServerEndpointResponse < Struct.new(
+      nil,
       :license_server_endpoint,
       keyword_init: true
     )
@@ -189,6 +199,7 @@ module Aws::LicenseManagerUserSubscriptions
     #   <p>The Amazon Resource Name (ARN) that identifies the identity provider to deregister.</p>
     #   @return [String]
     class DeregisterIdentityProviderRequest < Struct.new(
+      nil,
       :identity_provider,
       :product,
       :identity_provider_arn,
@@ -201,6 +212,7 @@ module Aws::LicenseManagerUserSubscriptions
     #   <p>Metadata that describes the results of an identity provider operation.</p>
     #   @return [Types::IdentityProviderSummary]
     class DeregisterIdentityProviderResponse < Struct.new(
+      nil,
       :identity_provider_summary,
       keyword_init: true
     )
@@ -223,6 +235,7 @@ module Aws::LicenseManagerUserSubscriptions
     #   <p>The domain name of the Active Directory that contains information for the user to disassociate.</p>
     #   @return [String]
     class DisassociateUserRequest < Struct.new(
+      nil,
       :username,
       :instance_id,
       :identity_provider,
@@ -237,6 +250,7 @@ module Aws::LicenseManagerUserSubscriptions
     #   <p>Metadata that describes the associate user operation.</p>
     #   @return [Types::InstanceUserSummary]
     class DisassociateUserResponse < Struct.new(
+      nil,
       :instance_user_summary,
       keyword_init: true
     )
@@ -248,6 +262,7 @@ module Aws::LicenseManagerUserSubscriptions
     #   <p>Contains a list of subnets that apply for the Active Directory domain.</p>
     #   @return [Array<String>]
     class DomainNetworkSettings < Struct.new(
+      nil,
       :subnets,
       keyword_init: true
     )
@@ -265,6 +280,7 @@ module Aws::LicenseManagerUserSubscriptions
     #   <p>Value of the filter.</p>
     #   @return [String]
     class Filter < Struct.new(
+      nil,
       :attribute,
       :operation,
       :value,
@@ -311,6 +327,7 @@ module Aws::LicenseManagerUserSubscriptions
     #   <p>The AWS Account ID of the owner of this resource.</p>
     #   @return [String]
     class IdentityProviderSummary < Struct.new(
+      nil,
       :identity_provider,
       :settings,
       :product,
@@ -346,6 +363,7 @@ module Aws::LicenseManagerUserSubscriptions
     #   <p>The <code>IdentityProvider</code> resource specifies details about the identity provider.</p>
     #   @return [Types::IdentityProvider]
     class InstanceSummary < Struct.new(
+      nil,
       :instance_id,
       :status,
       :products,
@@ -387,6 +405,7 @@ module Aws::LicenseManagerUserSubscriptions
     #   <p>The date a user was disassociated from an EC2 instance.</p>
     #   @return [String]
     class InstanceUserSummary < Struct.new(
+      nil,
       :username,
       :instance_id,
       :identity_provider,
@@ -405,6 +424,7 @@ module Aws::LicenseManagerUserSubscriptions
     # @!attribute message
     #   @return [String]
     class InternalServerException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -422,6 +442,7 @@ module Aws::LicenseManagerUserSubscriptions
     #   <p>A list of domain IPv4 addresses that are used for the RDS license server.</p>
     #   @return [String]
     class LicenseServer < Struct.new(
+      nil,
       :provisioning_status,
       :health_status,
       :ipv4_address,
@@ -459,6 +480,7 @@ module Aws::LicenseManagerUserSubscriptions
     #   <p>The timestamp when License Manager created the license server endpoint.</p>
     #   @return [Time]
     class LicenseServerEndpoint < Struct.new(
+      nil,
       :identity_provider_arn,
       :server_type,
       :server_endpoint,
@@ -481,6 +503,7 @@ module Aws::LicenseManagerUserSubscriptions
     #   <p>The <code>ServerSettings</code> resource contains the settings for your server.</p>
     #   @return [Types::ServerSettings]
     class LicenseServerSettings < Struct.new(
+      nil,
       :server_type,
       :server_settings,
       keyword_init: true
@@ -498,6 +521,7 @@ module Aws::LicenseManagerUserSubscriptions
     #   <p>A token to specify where to start paginating. This is the nextToken from a previously truncated response.</p>
     #   @return [String]
     class ListIdentityProvidersRequest < Struct.new(
+      nil,
       :max_results,
       :filters,
       :next_token,
@@ -513,6 +537,7 @@ module Aws::LicenseManagerUserSubscriptions
     #   <p>The next token used for paginated responses. When this field isn't empty, there are additional elements that the service hasn't included in this request. Use this token with the next request to retrieve additional objects.</p>
     #   @return [String]
     class ListIdentityProvidersResponse < Struct.new(
+      nil,
       :identity_provider_summaries,
       :next_token,
       keyword_init: true
@@ -530,6 +555,7 @@ module Aws::LicenseManagerUserSubscriptions
     #   <p>You can use the following filters to streamline results:</p> <ul> <li> <p>Status</p> </li> <li> <p>InstanceId</p> </li> </ul>
     #   @return [Array<Types::Filter>]
     class ListInstancesRequest < Struct.new(
+      nil,
       :max_results,
       :next_token,
       :filters,
@@ -545,6 +571,7 @@ module Aws::LicenseManagerUserSubscriptions
     #   <p>The next token used for paginated responses. When this field isn't empty, there are additional elements that the service hasn't included in this request. Use this token with the next request to retrieve additional objects.</p>
     #   @return [String]
     class ListInstancesResponse < Struct.new(
+      nil,
       :instance_summaries,
       :next_token,
       keyword_init: true
@@ -562,6 +589,7 @@ module Aws::LicenseManagerUserSubscriptions
     #   <p>A token to specify where to start paginating. This is the nextToken from a previously truncated response.</p>
     #   @return [String]
     class ListLicenseServerEndpointsRequest < Struct.new(
+      nil,
       :max_results,
       :filters,
       :next_token,
@@ -577,6 +605,7 @@ module Aws::LicenseManagerUserSubscriptions
     #   <p>The next token used for paginated responses. When this field isn't empty, there are additional elements that the service hasn't included in this request. Use this token with the next request to retrieve additional objects.</p>
     #   @return [String]
     class ListLicenseServerEndpointsResponse < Struct.new(
+      nil,
       :license_server_endpoints,
       :next_token,
       keyword_init: true
@@ -600,6 +629,7 @@ module Aws::LicenseManagerUserSubscriptions
     #   <p>A token to specify where to start paginating. This is the nextToken from a previously truncated response.</p>
     #   @return [String]
     class ListProductSubscriptionsRequest < Struct.new(
+      nil,
       :product,
       :identity_provider,
       :max_results,
@@ -617,6 +647,7 @@ module Aws::LicenseManagerUserSubscriptions
     #   <p>The next token used for paginated responses. When this field isn't empty, there are additional elements that the service hasn't included in this request. Use this token with the next request to retrieve additional objects.</p>
     #   @return [String]
     class ListProductSubscriptionsResponse < Struct.new(
+      nil,
       :product_user_summaries,
       :next_token,
       keyword_init: true
@@ -628,6 +659,7 @@ module Aws::LicenseManagerUserSubscriptions
     #   <p>The Amazon Resource Name (ARN) of the resource whose tags you want to retrieve.</p>
     #   @return [String]
     class ListTagsForResourceRequest < Struct.new(
+      nil,
       :resource_arn,
       keyword_init: true
     )
@@ -638,6 +670,7 @@ module Aws::LicenseManagerUserSubscriptions
     #   <p>The tags for the specified resource.</p>
     #   @return [Hash<String, String>]
     class ListTagsForResourceResponse < Struct.new(
+      nil,
       :tags,
       keyword_init: true
     )
@@ -660,6 +693,7 @@ module Aws::LicenseManagerUserSubscriptions
     #   <p>A token to specify where to start paginating. This is the nextToken from a previously truncated response.</p>
     #   @return [String]
     class ListUserAssociationsRequest < Struct.new(
+      nil,
       :instance_id,
       :identity_provider,
       :max_results,
@@ -677,6 +711,7 @@ module Aws::LicenseManagerUserSubscriptions
     #   <p>The next token used for paginated responses. When this field isn't empty, there are additional elements that the service hasn't included in this request. Use this token with the next request to retrieve additional objects.</p>
     #   @return [String]
     class ListUserAssociationsResponse < Struct.new(
+      nil,
       :instance_user_summaries,
       :next_token,
       keyword_init: true
@@ -713,6 +748,7 @@ module Aws::LicenseManagerUserSubscriptions
     #   <p>The end date of a subscription.</p>
     #   @return [String]
     class ProductUserSummary < Struct.new(
+      nil,
       :username,
       :product,
       :identity_provider,
@@ -732,6 +768,7 @@ module Aws::LicenseManagerUserSubscriptions
     #   <p>The <code>CredentialsProvider</code> resource contains a reference to the credentials provider that's used for RDS license server user administration.</p>
     #   @return [Types::CredentialsProvider]
     class RdsSalSettings < Struct.new(
+      nil,
       :rds_sal_credentials_provider,
       keyword_init: true
     )
@@ -751,6 +788,7 @@ module Aws::LicenseManagerUserSubscriptions
     #   <p>The tags that apply to the identity provider's registration.</p>
     #   @return [Hash<String, String>]
     class RegisterIdentityProviderRequest < Struct.new(
+      nil,
       :identity_provider,
       :product,
       :settings,
@@ -764,6 +802,7 @@ module Aws::LicenseManagerUserSubscriptions
     #   <p>Metadata that describes the results of an identity provider operation.</p>
     #   @return [Types::IdentityProviderSummary]
     class RegisterIdentityProviderResponse < Struct.new(
+      nil,
       :identity_provider_summary,
       keyword_init: true
     )
@@ -774,6 +813,7 @@ module Aws::LicenseManagerUserSubscriptions
     # @!attribute message
     #   @return [String]
     class ResourceNotFoundException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -785,6 +825,7 @@ module Aws::LicenseManagerUserSubscriptions
     #   <p>The ID of the Secrets Manager secret that contains credentials.</p>
     #   @return [String]
     class SecretsManagerCredentialsProvider < Struct.new(
+      nil,
       :secret_id,
       keyword_init: true
     )
@@ -796,6 +837,7 @@ module Aws::LicenseManagerUserSubscriptions
     #   <p>The network address of the endpoint.</p>
     #   @return [String]
     class ServerEndpoint < Struct.new(
+      nil,
       :endpoint,
       keyword_init: true
     )
@@ -821,6 +863,7 @@ module Aws::LicenseManagerUserSubscriptions
     # @!attribute message
     #   @return [String]
     class ServiceQuotaExceededException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -835,6 +878,7 @@ module Aws::LicenseManagerUserSubscriptions
     #   <p>A security group ID that allows inbound TCP port 1688 communication between resources in your VPC and the VPC endpoint for activation servers.</p>
     #   @return [String]
     class Settings < Struct.new(
+      nil,
       :subnets,
       :security_group_id,
       keyword_init: true
@@ -858,6 +902,7 @@ module Aws::LicenseManagerUserSubscriptions
     #   <p>The tags that apply to the product subscription.</p>
     #   @return [Hash<String, String>]
     class StartProductSubscriptionRequest < Struct.new(
+      nil,
       :username,
       :identity_provider,
       :product,
@@ -872,6 +917,7 @@ module Aws::LicenseManagerUserSubscriptions
     #   <p>Metadata that describes the start product subscription operation.</p>
     #   @return [Types::ProductUserSummary]
     class StartProductSubscriptionResponse < Struct.new(
+      nil,
       :product_user_summary,
       keyword_init: true
     )
@@ -894,6 +940,7 @@ module Aws::LicenseManagerUserSubscriptions
     #   <p>The domain name of the Active Directory that contains the user for whom to stop the product subscription.</p>
     #   @return [String]
     class StopProductSubscriptionRequest < Struct.new(
+      nil,
       :username,
       :identity_provider,
       :product,
@@ -908,6 +955,7 @@ module Aws::LicenseManagerUserSubscriptions
     #   <p>Metadata that describes the start product subscription operation.</p>
     #   @return [Types::ProductUserSummary]
     class StopProductSubscriptionResponse < Struct.new(
+      nil,
       :product_user_summary,
       keyword_init: true
     )
@@ -921,6 +969,7 @@ module Aws::LicenseManagerUserSubscriptions
     #   <p>The tags to apply to the specified resource.</p>
     #   @return [Hash<String, String>]
     class TagResourceRequest < Struct.new(
+      nil,
       :resource_arn,
       :tags,
       keyword_init: true
@@ -929,6 +978,7 @@ module Aws::LicenseManagerUserSubscriptions
     end
 
     class TagResourceResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -938,6 +988,7 @@ module Aws::LicenseManagerUserSubscriptions
     # @!attribute message
     #   @return [String]
     class ThrottlingException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -951,6 +1002,7 @@ module Aws::LicenseManagerUserSubscriptions
     #   <p>The tag keys to remove from the resource.</p>
     #   @return [Array<String>]
     class UntagResourceRequest < Struct.new(
+      nil,
       :resource_arn,
       :tag_keys,
       keyword_init: true
@@ -959,6 +1011,7 @@ module Aws::LicenseManagerUserSubscriptions
     end
 
     class UntagResourceResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -977,6 +1030,7 @@ module Aws::LicenseManagerUserSubscriptions
     #   <p>Updates the registered identity provider’s product related configuration settings. You can update any combination of settings in a single operation such as the:</p> <ul> <li> <p>Subnets which you want to add to provision VPC endpoints.</p> </li> <li> <p>Subnets which you want to remove the VPC endpoints from.</p> </li> <li> <p>Security group ID which permits traffic to the VPC endpoints.</p> </li> </ul>
     #   @return [Types::UpdateSettings]
     class UpdateIdentityProviderSettingsRequest < Struct.new(
+      nil,
       :identity_provider,
       :product,
       :identity_provider_arn,
@@ -990,6 +1044,7 @@ module Aws::LicenseManagerUserSubscriptions
     #   <p>Describes an identity provider.</p>
     #   @return [Types::IdentityProviderSummary]
     class UpdateIdentityProviderSettingsResponse < Struct.new(
+      nil,
       :identity_provider_summary,
       keyword_init: true
     )
@@ -1007,6 +1062,7 @@ module Aws::LicenseManagerUserSubscriptions
     #   <p>A security group ID that allows inbound TCP port 1688 communication between resources in your VPC and the VPC endpoints for activation servers.</p>
     #   @return [String]
     class UpdateSettings < Struct.new(
+      nil,
       :add_subnets,
       :remove_subnets,
       :security_group_id,
@@ -1019,6 +1075,7 @@ module Aws::LicenseManagerUserSubscriptions
     # @!attribute message
     #   @return [String]
     class ValidationException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )

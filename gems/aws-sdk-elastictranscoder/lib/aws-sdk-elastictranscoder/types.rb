@@ -10,6 +10,7 @@ module Aws::ElasticTranscoder
     # @!attribute message
     #   @return [String]
     class AccessDeniedException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -100,6 +101,7 @@ module Aws::ElasticTranscoder
     #   <p>The encryption settings, if any, that you want Elastic Transcoder to apply to your artwork.</p>
     #   @return [Types::Encryption]
     class Artwork < Struct.new(
+      nil,
       :input_key,
       :max_width,
       :max_height,
@@ -166,6 +168,7 @@ module Aws::ElasticTranscoder
     #           <p>The supported value is <code>Signed</code>.</p>
     #   @return [String]
     class AudioCodecOptions < Struct.new(
+      nil,
       :profile,
       :bit_depth,
       :bit_order,
@@ -422,6 +425,7 @@ module Aws::ElasticTranscoder
     #           <p>If you specify <code>auto</code>, Elastic Transcoder chooses a profile based on the bit rate of the output file.</p>
     #   @return [Types::AudioCodecOptions]
     class AudioParameters < Struct.new(
+      nil,
       :codec,
       :sample_rate,
       :bit_rate,
@@ -440,6 +444,7 @@ module Aws::ElasticTranscoder
     #                   <code>Submitted</code>, use the <a>ListJobsByStatus</a> API action.</p>
     #   @return [String]
     class CancelJobRequest < Struct.new(
+      nil,
       :id,
       keyword_init: true
     )
@@ -449,6 +454,7 @@ module Aws::ElasticTranscoder
     # <p>The response body contains a JSON object. If the job is successfully canceled, the value
     #             of <code>Success</code> is <code>true</code>.</p>
     class CancelJobResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -535,6 +541,7 @@ module Aws::ElasticTranscoder
     #   <p>The encryption settings, if any, that you want Elastic Transcoder to apply to your caption formats.</p>
     #   @return [Types::Encryption]
     class CaptionFormat < Struct.new(
+      nil,
       :format,
       :pattern,
       :encryption,
@@ -575,6 +582,7 @@ module Aws::ElasticTranscoder
     #               want Elastic Transcoder to apply to your caption sources.</p>
     #   @return [Types::Encryption]
     class CaptionSource < Struct.new(
+      nil,
       :key,
       :language,
       :time_offset,
@@ -623,6 +631,7 @@ module Aws::ElasticTranscoder
     #   <p>The array of file formats for the output captions. If you leave this value blank, Elastic Transcoder returns an error.</p>
     #   @return [Array<Types::CaptionFormat>]
     class Captions < Struct.new(
+      nil,
       :merge_policy,
       :caption_sources,
       :caption_formats,
@@ -637,6 +646,7 @@ module Aws::ElasticTranscoder
     #   <p>Settings that determine when a clip begins and how long it lasts.</p>
     #   @return [Types::TimeSpan]
     class Clip < Struct.new(
+      nil,
       :time_span,
       keyword_init: true
     )
@@ -790,6 +800,7 @@ module Aws::ElasticTranscoder
     #       individually.</p>
     #   @return [Types::Encryption]
     class CreateJobOutput < Struct.new(
+      nil,
       :key,
       :thumbnail_pattern,
       :thumbnail_encryption,
@@ -874,6 +885,7 @@ module Aws::ElasticTranscoder
     #   <p>The DRM settings, if any, that you want Elastic Transcoder to apply to the output files associated with this playlist.</p>
     #   @return [Types::PlayReadyDrm]
     class CreateJobPlaylist < Struct.new(
+      nil,
       :name,
       :format,
       :output_keys,
@@ -926,6 +938,7 @@ module Aws::ElasticTranscoder
     #               order in which you specify them.</p>
     #   @return [Hash<String, String>]
     class CreateJobRequest < Struct.new(
+      nil,
       :pipeline_id,
       :input,
       :inputs,
@@ -944,6 +957,7 @@ module Aws::ElasticTranscoder
     #   <p>A section of the response body that provides information about the job that is created.</p>
     #   @return [Types::Job]
     class CreateJobResponse < Struct.new(
+      nil,
       :job,
       keyword_init: true
     )
@@ -1235,6 +1249,7 @@ module Aws::ElasticTranscoder
     #            </ul>
     #   @return [Types::PipelineOutputConfig]
     class CreatePipelineRequest < Struct.new(
+      nil,
       :name,
       :input_bucket,
       :output_bucket,
@@ -1259,6 +1274,7 @@ module Aws::ElasticTranscoder
     #               AWS KMS key, reduces processing time and prevents cross-regional charges.</p>
     #   @return [Array<Types::Warning>]
     class CreatePipelineResponse < Struct.new(
+      nil,
       :pipeline,
       :warnings,
       keyword_init: true
@@ -1290,6 +1306,7 @@ module Aws::ElasticTranscoder
     #   <p>A section of the request body that specifies the thumbnail parameters, if any.</p>
     #   @return [Types::Thumbnails]
     class CreatePresetRequest < Struct.new(
+      nil,
       :name,
       :description,
       :container,
@@ -1312,6 +1329,7 @@ module Aws::ElasticTranscoder
     #               acceptable output.</p>
     #   @return [String]
     class CreatePresetResponse < Struct.new(
+      nil,
       :preset,
       :warning,
       keyword_init: true
@@ -1324,6 +1342,7 @@ module Aws::ElasticTranscoder
     #   <p>The identifier of the pipeline that you want to delete.</p>
     #   @return [String]
     class DeletePipelineRequest < Struct.new(
+      nil,
       :id,
       keyword_init: true
     )
@@ -1332,6 +1351,7 @@ module Aws::ElasticTranscoder
 
     # <p>The <code>DeletePipelineResponse</code> structure.</p>
     class DeletePipelineResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1342,6 +1362,7 @@ module Aws::ElasticTranscoder
     #   <p>The identifier of the preset for which you want to get detailed information.</p>
     #   @return [String]
     class DeletePresetRequest < Struct.new(
+      nil,
       :id,
       keyword_init: true
     )
@@ -1350,6 +1371,7 @@ module Aws::ElasticTranscoder
 
     # <p>The <code>DeletePresetResponse</code> structure.</p>
     class DeletePresetResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1372,6 +1394,7 @@ module Aws::ElasticTranscoder
     #   <p>The detected duration of the input file, in milliseconds.</p>
     #   @return [Integer]
     class DetectedProperties < Struct.new(
+      nil,
       :width,
       :height,
       :frame_rate,
@@ -1465,6 +1488,7 @@ module Aws::ElasticTranscoder
     #               16 bytes long before being base64-encoded.</p>
     #   @return [String]
     class Encryption < Struct.new(
+      nil,
       :mode,
       :key,
       :key_md5,
@@ -1510,6 +1534,7 @@ module Aws::ElasticTranscoder
     #   writes your data key into the same bucket as the associated playlist.</p>
     #   @return [String]
     class HlsContentProtection < Struct.new(
+      nil,
       :method,
       :key,
       :key_md5,
@@ -1524,6 +1549,7 @@ module Aws::ElasticTranscoder
     # @!attribute message
     #   @return [String]
     class IncompatibleVersionException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -1563,6 +1589,7 @@ module Aws::ElasticTranscoder
     #               process. To omit all sidecar captions, leave <code>CaptionSources</code> blank.</p>
     #   @return [Array<Types::CaptionSource>]
     class InputCaptions < Struct.new(
+      nil,
       :merge_policy,
       :caption_sources,
       keyword_init: true
@@ -1574,6 +1601,7 @@ module Aws::ElasticTranscoder
     # @!attribute message
     #   @return [String]
     class InternalServiceException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -1668,6 +1696,7 @@ module Aws::ElasticTranscoder
     #   <p>Details about the timing of a job.</p>
     #   @return [Types::Timing]
     class Job < Struct.new(
+      nil,
       :id,
       :arn,
       :pipeline_id,
@@ -1717,6 +1746,7 @@ module Aws::ElasticTranscoder
     #            </p>
     #   @return [Array<Types::Artwork>]
     class JobAlbumArt < Struct.new(
+      nil,
       :merge_policy,
       :artwork,
       keyword_init: true
@@ -1831,6 +1861,7 @@ module Aws::ElasticTranscoder
     #   <p>The detected properties of the input file.</p>
     #   @return [Types::DetectedProperties]
     class JobInput < Struct.new(
+      nil,
       :key,
       :frame_rate,
       :resolution,
@@ -2073,6 +2104,7 @@ module Aws::ElasticTranscoder
     #         included in the job response.</p>
     #   @return [String]
     class JobOutput < Struct.new(
+      nil,
       :id,
       :key,
       :thumbnail_pattern,
@@ -2119,6 +2151,7 @@ module Aws::ElasticTranscoder
     #   <p>The encryption settings, if any, that you want Elastic Transcoder to apply to your watermarks.</p>
     #   @return [Types::Encryption]
     class JobWatermark < Struct.new(
+      nil,
       :preset_watermark_id,
       :input_key,
       :encryption,
@@ -2132,6 +2165,7 @@ module Aws::ElasticTranscoder
     # @!attribute message
     #   @return [String]
     class LimitExceededException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -2152,6 +2186,7 @@ module Aws::ElasticTranscoder
     #               subsequent <code>GET</code> requests to get each successive page of results. </p>
     #   @return [String]
     class ListJobsByPipelineRequest < Struct.new(
+      nil,
       :pipeline_id,
       :ascending,
       :page_token,
@@ -2170,6 +2205,7 @@ module Aws::ElasticTranscoder
     #               of results, the value of <code>NextPageToken</code> is <code>null</code>. </p>
     #   @return [String]
     class ListJobsByPipelineResponse < Struct.new(
+      nil,
       :jobs,
       :next_page_token,
       keyword_init: true
@@ -2194,6 +2230,7 @@ module Aws::ElasticTranscoder
     #               subsequent <code>GET</code> requests to get each successive page of results. </p>
     #   @return [String]
     class ListJobsByStatusRequest < Struct.new(
+      nil,
       :status,
       :ascending,
       :page_token,
@@ -2214,6 +2251,7 @@ module Aws::ElasticTranscoder
     #               of results, the value of <code>NextPageToken</code> is <code>null</code>. </p>
     #   @return [String]
     class ListJobsByStatusResponse < Struct.new(
+      nil,
       :jobs,
       :next_page_token,
       keyword_init: true
@@ -2232,6 +2270,7 @@ module Aws::ElasticTranscoder
     #               subsequent <code>GET</code> requests to get each successive page of results. </p>
     #   @return [String]
     class ListPipelinesRequest < Struct.new(
+      nil,
       :ascending,
       :page_token,
       keyword_init: true
@@ -2249,6 +2288,7 @@ module Aws::ElasticTranscoder
     #               of results, the value of <code>NextPageToken</code> is <code>null</code>.</p>
     #   @return [String]
     class ListPipelinesResponse < Struct.new(
+      nil,
       :pipelines,
       :next_page_token,
       keyword_init: true
@@ -2267,6 +2307,7 @@ module Aws::ElasticTranscoder
     #               subsequent <code>GET</code> requests to get each successive page of results. </p>
     #   @return [String]
     class ListPresetsRequest < Struct.new(
+      nil,
       :ascending,
       :page_token,
       keyword_init: true
@@ -2284,6 +2325,7 @@ module Aws::ElasticTranscoder
     #               of results, the value of <code>NextPageToken</code> is <code>null</code>.</p>
     #   @return [String]
     class ListPresetsResponse < Struct.new(
+      nil,
       :presets,
       :next_page_token,
       keyword_init: true
@@ -2308,6 +2350,7 @@ module Aws::ElasticTranscoder
     #   <p>The Amazon SNS topic that you want to notify when Elastic Transcoder encounters an error condition.</p>
     #   @return [String]
     class Notifications < Struct.new(
+      nil,
       :progressing,
       :completed,
       :warning,
@@ -2376,6 +2419,7 @@ module Aws::ElasticTranscoder
     #            </ul>
     #   @return [Array<String>]
     class Permission < Struct.new(
+      nil,
       :grantee_type,
       :grantee,
       :access,
@@ -2630,6 +2674,7 @@ module Aws::ElasticTranscoder
     #            </ul>
     #   @return [Types::PipelineOutputConfig]
     class Pipeline < Struct.new(
+      nil,
       :id,
       :arn,
       :name,
@@ -2691,6 +2736,7 @@ module Aws::ElasticTranscoder
     #               other permissions to any other user or group.</p>
     #   @return [Array<Types::Permission>]
     class PipelineOutputConfig < Struct.new(
+      nil,
       :bucket,
       :storage_class,
       :permissions,
@@ -2739,6 +2785,7 @@ module Aws::ElasticTranscoder
     #            </p>
     #   @return [String]
     class PlayReadyDrm < Struct.new(
+      nil,
       :format,
       :key,
       :key_md5,
@@ -2824,6 +2871,7 @@ module Aws::ElasticTranscoder
     #   <p>Information that further explains the status.</p>
     #   @return [String]
     class Playlist < Struct.new(
+      nil,
       :name,
       :format,
       :output_keys,
@@ -2873,6 +2921,7 @@ module Aws::ElasticTranscoder
     #                   (<code>System</code>) or a preset that you have defined (<code>Custom</code>).</p>
     #   @return [String]
     class Preset < Struct.new(
+      nil,
       :id,
       :arn,
       :name,
@@ -3091,6 +3140,7 @@ module Aws::ElasticTranscoder
     #            </ul>
     #   @return [String]
     class PresetWatermark < Struct.new(
+      nil,
       :id,
       :max_width,
       :max_height,
@@ -3111,6 +3161,7 @@ module Aws::ElasticTranscoder
     #   <p>The identifier of the job for which you want to get detailed information.</p>
     #   @return [String]
     class ReadJobRequest < Struct.new(
+      nil,
       :id,
       keyword_init: true
     )
@@ -3122,6 +3173,7 @@ module Aws::ElasticTranscoder
     #   <p>A section of the response body that provides information about the job.</p>
     #   @return [Types::Job]
     class ReadJobResponse < Struct.new(
+      nil,
       :job,
       keyword_init: true
     )
@@ -3133,6 +3185,7 @@ module Aws::ElasticTranscoder
     #   <p>The identifier of the pipeline to read.</p>
     #   @return [String]
     class ReadPipelineRequest < Struct.new(
+      nil,
       :id,
       keyword_init: true
     )
@@ -3150,6 +3203,7 @@ module Aws::ElasticTranscoder
     #               and AWS KMS key, reduces processing time and prevents cross-regional charges.</p>
     #   @return [Array<Types::Warning>]
     class ReadPipelineResponse < Struct.new(
+      nil,
       :pipeline,
       :warnings,
       keyword_init: true
@@ -3162,6 +3216,7 @@ module Aws::ElasticTranscoder
     #   <p>The identifier of the preset for which you want to get detailed information.</p>
     #   @return [String]
     class ReadPresetRequest < Struct.new(
+      nil,
       :id,
       keyword_init: true
     )
@@ -3173,6 +3228,7 @@ module Aws::ElasticTranscoder
     #   <p>A section of the response body that provides information about the preset.</p>
     #   @return [Types::Preset]
     class ReadPresetResponse < Struct.new(
+      nil,
       :preset,
       keyword_init: true
     )
@@ -3184,6 +3240,7 @@ module Aws::ElasticTranscoder
     # @!attribute message
     #   @return [String]
     class ResourceInUseException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -3195,6 +3252,7 @@ module Aws::ElasticTranscoder
     # @!attribute message
     #   @return [String]
     class ResourceNotFoundException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -3216,6 +3274,7 @@ module Aws::ElasticTranscoder
     #   <p>The ARNs of one or more Amazon Simple Notification Service (Amazon SNS) topics that you want the action to send a test notification to.</p>
     #   @return [Array<String>]
     class TestRoleRequest < Struct.new(
+      nil,
       :role,
       :input_bucket,
       :output_bucket,
@@ -3236,6 +3295,7 @@ module Aws::ElasticTranscoder
     #               of one or more error messages that were generated during the test process.</p>
     #   @return [Array<String>]
     class TestRoleResponse < Struct.new(
+      nil,
       :success,
       :messages,
       keyword_init: true
@@ -3350,6 +3410,7 @@ module Aws::ElasticTranscoder
     #                   <code>MaxWidth</code> and <code>MaxHeight</code> settings.</p>
     #   @return [String]
     class Thumbnails < Struct.new(
+      nil,
       :format,
       :interval,
       :resolution,
@@ -3378,6 +3439,7 @@ module Aws::ElasticTranscoder
     #              file and returns a warning message.</p>
     #   @return [String]
     class TimeSpan < Struct.new(
+      nil,
       :start_time,
       :duration,
       keyword_init: true
@@ -3396,6 +3458,7 @@ module Aws::ElasticTranscoder
     #   <p>The time the job finished transcoding, in epoch milliseconds.</p>
     #   @return [Integer]
     class Timing < Struct.new(
+      nil,
       :submit_time_millis,
       :start_time_millis,
       :finish_time_millis,
@@ -3441,6 +3504,7 @@ module Aws::ElasticTranscoder
     #            </ul>
     #   @return [Types::Notifications]
     class UpdatePipelineNotificationsRequest < Struct.new(
+      nil,
       :id,
       :notifications,
       keyword_init: true
@@ -3454,6 +3518,7 @@ module Aws::ElasticTranscoder
     #               with this notification.</p>
     #   @return [Types::Pipeline]
     class UpdatePipelineNotificationsResponse < Struct.new(
+      nil,
       :pipeline,
       keyword_init: true
     )
@@ -3712,6 +3777,7 @@ module Aws::ElasticTranscoder
     #            </ul>
     #   @return [Types::PipelineOutputConfig]
     class UpdatePipelineRequest < Struct.new(
+      nil,
       :id,
       :name,
       :input_bucket,
@@ -3736,6 +3802,7 @@ module Aws::ElasticTranscoder
     #               AWS KMS key, reduces processing time and prevents cross-regional charges.</p>
     #   @return [Array<Types::Warning>]
     class UpdatePipelineResponse < Struct.new(
+      nil,
       :pipeline,
       :warnings,
       keyword_init: true
@@ -3761,6 +3828,7 @@ module Aws::ElasticTranscoder
     #            </ul>
     #   @return [String]
     class UpdatePipelineStatusRequest < Struct.new(
+      nil,
       :id,
       :status,
       keyword_init: true
@@ -3774,6 +3842,7 @@ module Aws::ElasticTranscoder
     #   <p>A section of the response body that provides information about the pipeline.</p>
     #   @return [Types::Pipeline]
     class UpdatePipelineStatusResponse < Struct.new(
+      nil,
       :pipeline,
       keyword_init: true
     )
@@ -3784,6 +3853,7 @@ module Aws::ElasticTranscoder
     # @!attribute message
     #   @return [String]
     class ValidationException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -4331,6 +4401,7 @@ module Aws::ElasticTranscoder
     #               for up to four watermarks that have different dimensions.</p>
     #   @return [Array<Types::PresetWatermark>]
     class VideoParameters < Struct.new(
+      nil,
       :codec,
       :codec_options,
       :keyframes_max_dist,
@@ -4365,6 +4436,7 @@ module Aws::ElasticTranscoder
     #            </note>
     #   @return [String]
     class Warning < Struct.new(
+      nil,
       :code,
       :message,
       keyword_init: true

@@ -20,6 +20,7 @@ module Aws::STS
   #   Whether the global endpoint should be used, rather then the regional endpoint for us-east-1.
   #   @return [Boolean]
   EndpointParameters = Struct.new(
+    nil,
     :region,
     :use_dual_stack,
     :use_fips,

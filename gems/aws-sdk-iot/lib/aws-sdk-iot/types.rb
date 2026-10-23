@@ -11,6 +11,7 @@ module Aws::IoT
     #   <p>The list of criteria that determine when and how to abort the job.</p>
     #   @return [Array<Types::AbortCriteria>]
     class AbortConfig < Struct.new(
+      nil,
       :criteria_list,
       keyword_init: true
     )
@@ -35,6 +36,7 @@ module Aws::IoT
     #               the job can be aborted.</p>
     #   @return [Integer]
     class AbortCriteria < Struct.new(
+      nil,
       :failure_type,
       :action,
       :threshold_percentage,
@@ -53,6 +55,7 @@ module Aws::IoT
     #   <p>Specifies whether the certificate is active.</p>
     #   @return [Boolean]
     class AcceptCertificateTransferRequest < Struct.new(
+      nil,
       :certificate_id,
       :set_as_active,
       keyword_init: true
@@ -143,6 +146,7 @@ module Aws::IoT
     #            an MQTT message to an Amazon Location tracker resource.</p>
     #   @return [Types::LocationAction]
     class Action < Struct.new(
+      nil,
       :dynamo_db,
       :dynamo_d_bv2,
       :lambda,
@@ -205,6 +209,7 @@ module Aws::IoT
     #   <p>The time the violation started.</p>
     #   @return [Time]
     class ActiveViolation < Struct.new(
+      nil,
       :violation_id,
       :thing_name,
       :security_profile_name,
@@ -236,6 +241,7 @@ module Aws::IoT
     #   <p>The ARN of the thing to be added to the billing group.</p>
     #   @return [String]
     class AddThingToBillingGroupRequest < Struct.new(
+      nil,
       :billing_group_name,
       :billing_group_arn,
       :thing_name,
@@ -246,6 +252,7 @@ module Aws::IoT
     end
 
     class AddThingToBillingGroupResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -270,6 +277,7 @@ module Aws::IoT
     #   			dynamic group.</p>
     #   @return [Boolean]
     class AddThingToThingGroupRequest < Struct.new(
+      nil,
       :thing_group_name,
       :thing_group_arn,
       :thing_name,
@@ -281,6 +289,7 @@ module Aws::IoT
     end
 
     class AddThingToThingGroupResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -294,6 +303,7 @@ module Aws::IoT
     #   <p>Specifies if this mitigation action can move the things that triggered the mitigation action even if they are part of one or more dynamic thing groups.</p>
     #   @return [Boolean]
     class AddThingsToThingGroupParams < Struct.new(
+      nil,
       :thing_group_names,
       :override_dynamic_groups,
       keyword_init: true
@@ -309,6 +319,7 @@ module Aws::IoT
     #   <p>A list of the values of aggregation types.</p>
     #   @return [Array<String>]
     class AggregationType < Struct.new(
+      nil,
       :name,
       :values,
       keyword_init: true
@@ -325,6 +336,7 @@ module Aws::IoT
     #           notification target.</p>
     #   @return [String]
     class AlertTarget < Struct.new(
+      nil,
       :alert_target_arn,
       :role_arn,
       keyword_init: true
@@ -337,6 +349,7 @@ module Aws::IoT
     #   <p>A list of policies that allowed the authentication.</p>
     #   @return [Array<Types::Policy>]
     class Allowed < Struct.new(
+      nil,
       :policies,
       keyword_init: true
     )
@@ -353,6 +366,7 @@ module Aws::IoT
     #         templates.</p>
     #   @return [String]
     class AssetPropertyTimestamp < Struct.new(
+      nil,
       :time_in_seconds,
       :offset_in_nanos,
       keyword_init: true
@@ -372,6 +386,7 @@ module Aws::IoT
     #         templates. Must be <code>GOOD</code>, <code>BAD</code>, or <code>UNCERTAIN</code>.</p>
     #   @return [String]
     class AssetPropertyValue < Struct.new(
+      nil,
       :value,
       :timestamp,
       :quality,
@@ -427,6 +442,7 @@ module Aws::IoT
     #   <p>A unique case-sensitive identifier that you can provide to ensure the idempotency of the request. Don't reuse this client token if a new idempotent request is required.</p>
     #   @return [String]
     class AssociateSbomWithPackageVersionRequest < Struct.new(
+      nil,
       :package_name,
       :version_name,
       :sbom,
@@ -450,6 +466,7 @@ module Aws::IoT
     #   <p>The status of the initial validation for the software bill of materials against the Software Package Data Exchange (SPDX) and CycloneDX industry standard formats.</p>
     #   @return [String]
     class AssociateSbomWithPackageVersionResponse < Struct.new(
+      nil,
       :package_name,
       :version_name,
       :sbom,
@@ -483,6 +500,7 @@ module Aws::IoT
     #            </note>
     #   @return [String]
     class AssociateTargetsWithJobRequest < Struct.new(
+      nil,
       :targets,
       :job_id,
       :comment,
@@ -502,6 +520,7 @@ module Aws::IoT
     #   <p>A short text description of the job.</p>
     #   @return [String]
     class AssociateTargetsWithJobResponse < Struct.new(
+      nil,
       :job_arn,
       :job_id,
       :description,
@@ -517,6 +536,7 @@ module Aws::IoT
     #   <p>The <a href="https://docs.aws.amazon.com/iot/latest/developerguide/security-iam.html">identity</a> to which the policy is attached. For example, a thing group or a certificate.</p>
     #   @return [String]
     class AttachPolicyRequest < Struct.new(
+      nil,
       :policy_name,
       :target,
       keyword_init: true
@@ -533,6 +553,7 @@ module Aws::IoT
     #            operation) or an Amazon Cognito ID.</p>
     #   @return [String]
     class AttachPrincipalPolicyRequest < Struct.new(
+      nil,
       :policy_name,
       :principal,
       keyword_init: true
@@ -547,6 +568,7 @@ module Aws::IoT
     #   <p>The ARN of the target (thing group) to which the security profile is attached.</p>
     #   @return [String]
     class AttachSecurityProfileRequest < Struct.new(
+      nil,
       :security_profile_name,
       :security_profile_target_arn,
       keyword_init: true
@@ -555,6 +577,7 @@ module Aws::IoT
     end
 
     class AttachSecurityProfileResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -586,6 +609,7 @@ module Aws::IoT
     #            </ul>
     #   @return [String]
     class AttachThingPrincipalRequest < Struct.new(
+      nil,
       :thing_name,
       :principal,
       :thing_principal_type,
@@ -596,6 +620,7 @@ module Aws::IoT
 
     # <p>The output from the AttachThingPrincipal operation.</p>
     class AttachThingPrincipalResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -617,6 +642,7 @@ module Aws::IoT
     #            </note>
     #   @return [Boolean]
     class AttributePayload < Struct.new(
+      nil,
       :attributes,
       :merge,
       keyword_init: true
@@ -637,6 +663,7 @@ module Aws::IoT
     #   <p>A structure containing the configName and corresponding configValue for configuring audit checks.</p>
     #   @return [Hash<String, String>]
     class AuditCheckConfiguration < Struct.new(
+      nil,
       :enabled,
       :configuration,
       keyword_init: true
@@ -676,6 +703,7 @@ module Aws::IoT
     #   <p>The message associated with any error encountered when this check is performed during this audit.</p>
     #   @return [String]
     class AuditCheckDetails < Struct.new(
+      nil,
       :check_run_status,
       :check_compliant,
       :total_resources_count,
@@ -727,6 +755,7 @@ module Aws::IoT
     #           </p>
     #   @return [Boolean]
     class AuditFinding < Struct.new(
+      nil,
       :finding_id,
       :task_id,
       :check_name,
@@ -772,6 +801,7 @@ module Aws::IoT
     #   <p>If an error occurred, a message that describes the error.</p>
     #   @return [String]
     class AuditMitigationActionExecutionMetadata < Struct.new(
+      nil,
       :task_id,
       :finding_id,
       :action_name,
@@ -797,6 +827,7 @@ module Aws::IoT
     #   <p>The current state of the audit mitigation actions task.</p>
     #   @return [String]
     class AuditMitigationActionsTaskMetadata < Struct.new(
+      nil,
       :task_id,
       :start_time,
       :task_status,
@@ -816,6 +847,7 @@ module Aws::IoT
     #   <p>Specifies a filter in the form of an audit check and set of reason codes that identify the findings from the audit to which the audit mitigation actions task apply.</p>
     #   @return [Hash<String, Array<String>>]
     class AuditMitigationActionsTaskTarget < Struct.new(
+      nil,
       :audit_task_id,
       :finding_ids,
       :audit_check_to_reason_code_filter,
@@ -835,6 +867,7 @@ module Aws::IoT
     #   <p>True if notifications to the target are enabled.</p>
     #   @return [Boolean]
     class AuditNotificationTarget < Struct.new(
+      nil,
       :target_arn,
       :role_arn,
       :enabled,
@@ -874,6 +907,7 @@ module Aws::IoT
     #           </p>
     #   @return [String]
     class AuditSuppression < Struct.new(
+      nil,
       :check_name,
       :resource_identifier,
       :expiration_date,
@@ -896,6 +930,7 @@ module Aws::IoT
     #   <p>The type of this audit. One of "ON_DEMAND_AUDIT_TASK" or "SCHEDULED_AUDIT_TASK".</p>
     #   @return [String]
     class AuditTaskMetadata < Struct.new(
+      nil,
       :task_id,
       :task_status,
       :task_type,
@@ -913,6 +948,7 @@ module Aws::IoT
     #            action.</p>
     #   @return [Array<String>]
     class AuthInfo < Struct.new(
+      nil,
       :action_type,
       :resources,
       keyword_init: true
@@ -939,6 +975,7 @@ module Aws::IoT
     #   <p>Contains any missing context values found while evaluating policy.</p>
     #   @return [Array<String>]
     class AuthResult < Struct.new(
+      nil,
       :auth_info,
       :allowed,
       :denied,
@@ -957,6 +994,7 @@ module Aws::IoT
     #   <p>A Boolean that specifies whether the domain configuration's authorization service can be overridden.</p>
     #   @return [Boolean]
     class AuthorizerConfig < Struct.new(
+      nil,
       :default_authorizer_name,
       :allow_authorizer_override,
       keyword_init: true
@@ -1004,6 +1042,7 @@ module Aws::IoT
     #   	  result is used while the device reuses the same HTTP connection.</p>
     #   @return [Boolean]
     class AuthorizerDescription < Struct.new(
+      nil,
       :authorizer_name,
       :authorizer_arn,
       :authorizer_function_arn,
@@ -1027,6 +1066,7 @@ module Aws::IoT
     #   <p>The authorizer ARN.</p>
     #   @return [String]
     class AuthorizerSummary < Struct.new(
+      nil,
       :authorizer_name,
       :authorizer_arn,
       keyword_init: true
@@ -1039,6 +1079,7 @@ module Aws::IoT
     #   <p>The list of criteria that determine when and how to abort the job.</p>
     #   @return [Array<Types::AwsJobAbortCriteria>]
     class AwsJobAbortConfig < Struct.new(
+      nil,
       :abort_criteria_list,
       keyword_init: true
     )
@@ -1061,6 +1102,7 @@ module Aws::IoT
     #             can be aborted.</p>
     #   @return [Integer]
     class AwsJobAbortCriteria < Struct.new(
+      nil,
       :failure_type,
       :action,
       :threshold_percentage,
@@ -1079,6 +1121,7 @@ module Aws::IoT
     #               increase for a job rollout.</p>
     #   @return [Types::AwsJobExponentialRolloutRate]
     class AwsJobExecutionsRolloutConfig < Struct.new(
+      nil,
       :maximum_per_minute,
       :exponential_rate,
       keyword_init: true
@@ -1101,6 +1144,7 @@ module Aws::IoT
     #            <p>Amazon Web Services IoT Core supports up to one digit after the decimal (for example, 1.5, but not 1.55).</p>
     #   @return [Types::AwsJobRateIncreaseCriteria]
     class AwsJobExponentialRolloutRate < Struct.new(
+      nil,
       :base_rate_per_minute,
       :increment_factor,
       :rate_increase_criteria,
@@ -1121,6 +1165,7 @@ module Aws::IoT
     #               seconds. Pre-signed URLs are generated when a request for the job document is received.</p>
     #   @return [Integer]
     class AwsJobPresignedUrlConfig < Struct.new(
+      nil,
       :expires_in_sec,
       keyword_init: true
     )
@@ -1137,6 +1182,7 @@ module Aws::IoT
     #               increase in the rollout rate.</p>
     #   @return [Integer]
     class AwsJobRateIncreaseCriteria < Struct.new(
+      nil,
       :number_of_notified_things,
       :number_of_succeeded_things,
       keyword_init: true
@@ -1156,6 +1202,7 @@ module Aws::IoT
     #               switch to the terminal <code>TIMED_OUT</code> status.</p>
     #   @return [Integer]
     class AwsJobTimeoutConfig < Struct.new(
+      nil,
       :in_progress_timeout_in_minutes,
       keyword_init: true
     )
@@ -1189,6 +1236,7 @@ module Aws::IoT
     #   <p>Value indicates exporting metrics related to the behavior when it is true.</p>
     #   @return [Boolean]
     class Behavior < Struct.new(
+      nil,
       :name,
       :metric,
       :metric_dimension,
@@ -1258,6 +1306,7 @@ module Aws::IoT
     #           </p>
     #   @return [Types::MachineLearningDetectionConfig]
     class BehaviorCriteria < Struct.new(
+      nil,
       :comparison_operator,
       :value,
       :duration_seconds,
@@ -1304,6 +1353,7 @@ module Aws::IoT
     #           </p>
     #   @return [Time]
     class BehaviorModelTrainingSummary < Struct.new(
+      nil,
       :security_profile_name,
       :behavior_name,
       :training_data_collection_start_date,
@@ -1320,6 +1370,7 @@ module Aws::IoT
     #   <p>The date the billing group was created.</p>
     #   @return [Time]
     class BillingGroupMetadata < Struct.new(
+      nil,
       :creation_date,
       keyword_init: true
     )
@@ -1331,6 +1382,7 @@ module Aws::IoT
     #   <p>The description of the billing group.</p>
     #   @return [String]
     class BillingGroupProperties < Struct.new(
+      nil,
       :billing_group_description,
       keyword_init: true
     )
@@ -1345,6 +1397,7 @@ module Aws::IoT
     #   <p>The number of documents that have the value counted for the particular bucket.</p>
     #   @return [Integer]
     class Bucket < Struct.new(
+      nil,
       :key_value,
       :count,
       keyword_init: true
@@ -1362,6 +1415,7 @@ module Aws::IoT
     #   <p>Performs an aggregation that will return a list of buckets. The list of buckets is a ranked list of the number of occurrences of an aggregation field value.</p>
     #   @return [Types::TermsAggregation]
     class BucketsAggregationType < Struct.new(
+      nil,
       :terms_aggregation,
       keyword_init: true
     )
@@ -1383,6 +1437,7 @@ module Aws::IoT
     #   <p>The date the CA certificate was created.</p>
     #   @return [Time]
     class CACertificate < Struct.new(
+      nil,
       :certificate_arn,
       :certificate_id,
       :status,
@@ -1433,6 +1488,7 @@ module Aws::IoT
     #            in the same mode as the CA. For more information about certificate mode for device certificates, see <a href="https://docs.aws.amazon.com/iot/latest/apireference/API_CertificateDescription.html#iot-Type-CertificateDescription-certificateMode">certificate mode</a>.</p>
     #   @return [String]
     class CACertificateDescription < Struct.new(
+      nil,
       :certificate_arn,
       :certificate_id,
       :status,
@@ -1454,6 +1510,7 @@ module Aws::IoT
     #   <p>The unique identifier for the task that you want to cancel. </p>
     #   @return [String]
     class CancelAuditMitigationActionsTaskRequest < Struct.new(
+      nil,
       :task_id,
       keyword_init: true
     )
@@ -1461,6 +1518,7 @@ module Aws::IoT
     end
 
     class CancelAuditMitigationActionsTaskResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1471,6 +1529,7 @@ module Aws::IoT
     #                 audit that is "IN_PROGRESS".</p>
     #   @return [String]
     class CancelAuditTaskRequest < Struct.new(
+      nil,
       :task_id,
       keyword_init: true
     )
@@ -1478,6 +1537,7 @@ module Aws::IoT
     end
 
     class CancelAuditTaskResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1489,6 +1549,7 @@ module Aws::IoT
     #            certificate ID.)</p>
     #   @return [String]
     class CancelCertificateTransferRequest < Struct.new(
+      nil,
       :certificate_id,
       keyword_init: true
     )
@@ -1501,6 +1562,7 @@ module Aws::IoT
     #       </p>
     #   @return [String]
     class CancelDetectMitigationActionsTaskRequest < Struct.new(
+      nil,
       :task_id,
       keyword_init: true
     )
@@ -1508,6 +1570,7 @@ module Aws::IoT
     end
 
     class CancelDetectMitigationActionsTaskResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1544,6 +1607,7 @@ module Aws::IoT
     #               pairs.</p>
     #   @return [Hash<String, String>]
     class CancelJobExecutionRequest < Struct.new(
+      nil,
       :job_id,
       :thing_name,
       :force,
@@ -1572,6 +1636,7 @@ module Aws::IoT
     #               device executing a job which is canceled is able to recover to a valid state.</p>
     #   @return [Boolean]
     class CancelJobRequest < Struct.new(
+      nil,
       :job_id,
       :reason_code,
       :comment,
@@ -1591,6 +1656,7 @@ module Aws::IoT
     #   <p>A short text description of the job.</p>
     #   @return [String]
     class CancelJobResponse < Struct.new(
+      nil,
       :job_arn,
       :job_id,
       :description,
@@ -1628,6 +1694,7 @@ module Aws::IoT
     #   <p>The date and time the certificate was created.</p>
     #   @return [Time]
     class Certificate < Struct.new(
+      nil,
       :certificate_arn,
       :certificate_id,
       :status,
@@ -1645,6 +1712,7 @@ module Aws::IoT
     #   <p>The message for the exception.</p>
     #   @return [String]
     class CertificateConflictException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -1706,6 +1774,7 @@ module Aws::IoT
     #            <p>For more information about the value for SNI extension, see <a href="https://docs.aws.amazon.com/iot/latest/developerguide/transport-security.html">Transport security in IoT</a>.</p>
     #   @return [String]
     class CertificateDescription < Struct.new(
+      nil,
       :certificate_arn,
       :certificate_id,
       :ca_certificate_id,
@@ -1733,6 +1802,7 @@ module Aws::IoT
     #   <p>The ARN of the certificate provider.</p>
     #   @return [String]
     class CertificateProviderSummary < Struct.new(
+      nil,
       :certificate_provider_name,
       :certificate_provider_arn,
       keyword_init: true
@@ -1745,6 +1815,7 @@ module Aws::IoT
     #   <p>The message for the exception.</p>
     #   @return [String]
     class CertificateStateException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -1756,6 +1827,7 @@ module Aws::IoT
     #   <p>Additional information about the exception.</p>
     #   @return [String]
     class CertificateValidationException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -1770,6 +1842,7 @@ module Aws::IoT
     #   <p>The certificate is not valid after this date.</p>
     #   @return [Time]
     class CertificateValidity < Struct.new(
+      nil,
       :not_before,
       :not_after,
       keyword_init: true
@@ -1778,12 +1851,14 @@ module Aws::IoT
     end
 
     class ClearDefaultAuthorizerRequest < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
     end
 
     class ClearDefaultAuthorizerResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1794,6 +1869,7 @@ module Aws::IoT
     #   <p>The ARN of the Lambda function that IoT invokes after mutual TLS authentication during the connection.</p>
     #   @return [String]
     class ClientCertificateConfig < Struct.new(
+      nil,
       :client_certificate_callback_arn,
       keyword_init: true
     )
@@ -1815,6 +1891,7 @@ module Aws::IoT
     #            INSUFFICIENT_DATA.</p>
     #   @return [String]
     class CloudwatchAlarmAction < Struct.new(
+      nil,
       :role_arn,
       :alarm_name,
       :state_reason,
@@ -1836,6 +1913,7 @@ module Aws::IoT
     #               <i>(default)</i>.</p>
     #   @return [Boolean]
     class CloudwatchLogsAction < Struct.new(
+      nil,
       :role_arn,
       :log_group_name,
       :batch_mode,
@@ -1865,6 +1943,7 @@ module Aws::IoT
     #   <p>An optional <a href="https://docs.aws.amazon.com/AmazonCloudWatch/latest/DeveloperGuide/cloudwatch_concepts.html#about_timestamp">Unix timestamp</a>.</p>
     #   @return [String]
     class CloudwatchMetricAction < Struct.new(
+      nil,
       :role_arn,
       :metric_namespace,
       :metric_name,
@@ -1887,6 +1966,7 @@ module Aws::IoT
     #   <p>A custom method for code signing a file.</p>
     #   @return [Types::CustomCodeSigning]
     class CodeSigning < Struct.new(
+      nil,
       :aws_signer_job_id,
       :start_signing_job_parameter,
       :custom_code_signing,
@@ -1903,6 +1983,7 @@ module Aws::IoT
     #   <p>A base64 encoded binary representation of the code signing certificate chain.</p>
     #   @return [String]
     class CodeSigningCertificateChain < Struct.new(
+      nil,
       :certificate_name,
       :inline_document,
       keyword_init: true
@@ -1915,6 +1996,7 @@ module Aws::IoT
     #   <p>A base64 encoded binary representation of the code signing signature.</p>
     #   @return [String]
     class CodeSigningSignature < Struct.new(
+      nil,
       :inline_document,
       keyword_init: true
     )
@@ -1944,6 +2026,7 @@ module Aws::IoT
     #   <p>An attribute of type Binary.</p>
     #   @return [String]
     class CommandExecutionResult < Struct.new(
+      nil,
       :s,
       :b,
       :bin,
@@ -1977,6 +2060,7 @@ module Aws::IoT
     #               device.</p>
     #   @return [Time]
     class CommandExecutionSummary < Struct.new(
+      nil,
       :command_arn,
       :execution_id,
       :target_arn,
@@ -2005,6 +2089,7 @@ module Aws::IoT
     #   <p>The description of the command parameter.</p>
     #   @return [String]
     class CommandParameter < Struct.new(
+      nil,
       :name,
       :value,
       :default_value,
@@ -2051,6 +2136,7 @@ module Aws::IoT
     #   <p>An attribute of type unsigned long.</p>
     #   @return [String]
     class CommandParameterValue < Struct.new(
+      nil,
       :s,
       :b,
       :i,
@@ -2074,6 +2160,7 @@ module Aws::IoT
     #           For information about various content types, see <a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/MIME_types/Common_types">Common MIME types</a>.</p>
     #   @return [String]
     class CommandPayload < Struct.new(
+      nil,
       :content,
       :content_type,
       keyword_init: true
@@ -2104,6 +2191,7 @@ module Aws::IoT
     #   <p>Indicates whether the command is pending deletion.</p>
     #   @return [Boolean]
     class CommandSummary < Struct.new(
+      nil,
       :command_arn,
       :command_id,
       :display_name,
@@ -2121,6 +2209,7 @@ module Aws::IoT
     #   <p>True to enable the configuration.</p>
     #   @return [Boolean]
     class Configuration < Struct.new(
+      nil,
       :enabled,
       keyword_init: true
     )
@@ -2148,6 +2237,7 @@ module Aws::IoT
     #   <p>The detailed error message that corresponds to the <code>errorCode</code>.</p>
     #   @return [String]
     class ConfigurationDetails < Struct.new(
+      nil,
       :configuration_status,
       :error_code,
       :error_message,
@@ -2160,6 +2250,7 @@ module Aws::IoT
     #   <p>The token used to confirm ownership or access to the topic rule confirmation URL.</p>
     #   @return [String]
     class ConfirmTopicRuleDestinationRequest < Struct.new(
+      nil,
       :confirmation_token,
       keyword_init: true
     )
@@ -2167,6 +2258,7 @@ module Aws::IoT
     end
 
     class ConfirmTopicRuleDestinationResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -2179,6 +2271,7 @@ module Aws::IoT
     #   <p>A resource with the same name already exists.</p>
     #   @return [String]
     class ConflictException < Struct.new(
+      nil,
       :message,
       :resource_id,
       keyword_init: true
@@ -2192,6 +2285,7 @@ module Aws::IoT
     #   <p>The message for the exception.</p>
     #   @return [String]
     class ConflictingResourceUpdateException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -2229,6 +2323,7 @@ module Aws::IoT
     #         value, Amazon Web Services SDKs will automatically generate a unique client request.</p>
     #   @return [String]
     class CreateAuditSuppressionRequest < Struct.new(
+      nil,
       :check_name,
       :resource_identifier,
       :expiration_date,
@@ -2241,6 +2336,7 @@ module Aws::IoT
     end
 
     class CreateAuditSuppressionResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -2283,6 +2379,7 @@ module Aws::IoT
     #            <p>The default value is <code>false</code>.</p>
     #   @return [Boolean]
     class CreateAuthorizerRequest < Struct.new(
+      nil,
       :authorizer_name,
       :authorizer_function_arn,
       :token_key_name,
@@ -2303,6 +2400,7 @@ module Aws::IoT
     #   <p>The authorizer ARN.</p>
     #   @return [String]
     class CreateAuthorizerResponse < Struct.new(
+      nil,
       :authorizer_name,
       :authorizer_arn,
       keyword_init: true
@@ -2320,6 +2418,7 @@ module Aws::IoT
     #   <p>Metadata which can be used to manage the billing group.</p>
     #   @return [Array<Types::Tag>]
     class CreateBillingGroupRequest < Struct.new(
+      nil,
       :billing_group_name,
       :billing_group_properties,
       :tags,
@@ -2338,6 +2437,7 @@ module Aws::IoT
     #   <p>The ID of the billing group.</p>
     #   @return [String]
     class CreateBillingGroupResponse < Struct.new(
+      nil,
       :billing_group_name,
       :billing_group_arn,
       :billing_group_id,
@@ -2354,6 +2454,7 @@ module Aws::IoT
     #   <p>Specifies whether the certificate is active.</p>
     #   @return [Boolean]
     class CreateCertificateFromCsrRequest < Struct.new(
+      nil,
       :certificate_signing_request,
       :set_as_active,
       keyword_init: true
@@ -2374,6 +2475,7 @@ module Aws::IoT
     #   <p>The certificate data, in PEM format.</p>
     #   @return [String]
     class CreateCertificateFromCsrResponse < Struct.new(
+      nil,
       :certificate_arn,
       :certificate_id,
       :certificate_pem,
@@ -2400,6 +2502,7 @@ module Aws::IoT
     #   <p>Metadata which can be used to manage the certificate provider.</p>
     #   @return [Array<Types::Tag>]
     class CreateCertificateProviderRequest < Struct.new(
+      nil,
       :certificate_provider_name,
       :lambda_function_arn,
       :account_default_for_operations,
@@ -2417,6 +2520,7 @@ module Aws::IoT
     #   <p>The ARN of the certificate provider.</p>
     #   @return [String]
     class CreateCertificateProviderResponse < Struct.new(
+      nil,
       :certificate_provider_name,
       :certificate_provider_arn,
       keyword_init: true
@@ -2463,6 +2567,7 @@ module Aws::IoT
     #   <p>Name-value pairs that are used as metadata to manage a command.</p>
     #   @return [Array<Types::Tag>]
     class CreateCommandRequest < Struct.new(
+      nil,
       :command_id,
       :namespace,
       :display_name,
@@ -2485,6 +2590,7 @@ module Aws::IoT
     #            </p>
     #   @return [String]
     class CreateCommandResponse < Struct.new(
+      nil,
       :command_id,
       :command_arn,
       keyword_init: true
@@ -2523,6 +2629,7 @@ module Aws::IoT
     #         occurs. If you omit this value, Amazon Web Services SDKs will automatically generate a unique client request. </p>
     #   @return [String]
     class CreateCustomMetricRequest < Struct.new(
+      nil,
       :metric_name,
       :display_name,
       :metric_type,
@@ -2545,6 +2652,7 @@ module Aws::IoT
     #            </p>
     #   @return [String]
     class CreateCustomMetricResponse < Struct.new(
+      nil,
       :metric_name,
       :metric_arn,
       keyword_init: true
@@ -2570,6 +2678,7 @@ module Aws::IoT
     #         If you omit this value, Amazon Web Services SDKs will automatically generate a unique client request.</p>
     #   @return [String]
     class CreateDimensionRequest < Struct.new(
+      nil,
       :name,
       :type,
       :string_values,
@@ -2590,6 +2699,7 @@ module Aws::IoT
     #         the created dimension.</p>
     #   @return [String]
     class CreateDimensionResponse < Struct.new(
+      nil,
       :name,
       :arn,
       keyword_init: true
@@ -2704,6 +2814,7 @@ module Aws::IoT
     #   <p>An object that speciﬁes the client certificate conﬁguration for a domain.</p>
     #   @return [Types::ClientCertificateConfig]
     class CreateDomainConfigurationRequest < Struct.new(
+      nil,
       :domain_configuration_name,
       :domain_name,
       :server_certificate_arns,
@@ -2728,6 +2839,7 @@ module Aws::IoT
     #   <p>The ARN of the domain configuration.</p>
     #   @return [String]
     class CreateDomainConfigurationResponse < Struct.new(
+      nil,
       :domain_configuration_name,
       :domain_configuration_arn,
       keyword_init: true
@@ -2762,6 +2874,7 @@ module Aws::IoT
     #   <p>Metadata which can be used to manage the dynamic thing group.</p>
     #   @return [Array<Types::Tag>]
     class CreateDynamicThingGroupRequest < Struct.new(
+      nil,
       :thing_group_name,
       :thing_group_properties,
       :index_name,
@@ -2792,6 +2905,7 @@ module Aws::IoT
     #   <p>The dynamic thing group query version.</p>
     #   @return [String]
     class CreateDynamicThingGroupResponse < Struct.new(
+      nil,
       :thing_group_name,
       :thing_group_arn,
       :thing_group_id,
@@ -2835,6 +2949,7 @@ module Aws::IoT
     #   <p>Metadata, which can be used to manage the fleet metric.</p>
     #   @return [Array<Types::Tag>]
     class CreateFleetMetricRequest < Struct.new(
+      nil,
       :metric_name,
       :query_string,
       :aggregation_type,
@@ -2857,6 +2972,7 @@ module Aws::IoT
     #   <p>The Amazon Resource Name (ARN) of the new fleet metric.</p>
     #   @return [String]
     class CreateFleetMetricResponse < Struct.new(
+      nil,
       :metric_name,
       :metric_arn,
       keyword_init: true
@@ -2959,6 +3075,7 @@ module Aws::IoT
     #               single ARN. Up to 25 package version ARNs are allowed.</p>
     #   @return [Array<String>]
     class CreateJobRequest < Struct.new(
+      nil,
       :job_id,
       :targets,
       :document_source,
@@ -2991,6 +3108,7 @@ module Aws::IoT
     #   <p>The job description.</p>
     #   @return [String]
     class CreateJobResponse < Struct.new(
+      nil,
       :job_arn,
       :job_id,
       :description,
@@ -3056,6 +3174,7 @@ module Aws::IoT
     #               single ARN. Up to 25 package version ARNs are allowed.</p>
     #   @return [Array<String>]
     class CreateJobTemplateRequest < Struct.new(
+      nil,
       :job_template_id,
       :job_arn,
       :document_source,
@@ -3081,6 +3200,7 @@ module Aws::IoT
     #   <p>The unique identifier of the job template.</p>
     #   @return [String]
     class CreateJobTemplateResponse < Struct.new(
+      nil,
       :job_template_arn,
       :job_template_id,
       keyword_init: true
@@ -3094,6 +3214,7 @@ module Aws::IoT
     #   <p>Specifies whether the certificate is active.</p>
     #   @return [Boolean]
     class CreateKeysAndCertificateRequest < Struct.new(
+      nil,
       :set_as_active,
       keyword_init: true
     )
@@ -3115,6 +3236,7 @@ module Aws::IoT
     #   <p>The generated key pair.</p>
     #   @return [Types::KeyPair]
     class CreateKeysAndCertificateResponse < Struct.new(
+      nil,
       :certificate_arn,
       :certificate_id,
       :certificate_pem,
@@ -3137,6 +3259,7 @@ module Aws::IoT
     #   <p>Metadata that can be used to manage the mitigation action.</p>
     #   @return [Array<Types::Tag>]
     class CreateMitigationActionRequest < Struct.new(
+      nil,
       :action_name,
       :role_arn,
       :action_params,
@@ -3153,6 +3276,7 @@ module Aws::IoT
     #   <p>A unique identifier for the new mitigation action.</p>
     #   @return [String]
     class CreateMitigationActionResponse < Struct.new(
+      nil,
       :action_arn,
       :action_id,
       keyword_init: true
@@ -3210,6 +3334,7 @@ module Aws::IoT
     #   <p>Metadata which can be used to manage updates.</p>
     #   @return [Array<Types::Tag>]
     class CreateOTAUpdateRequest < Struct.new(
+      nil,
       :ota_update_id,
       :description,
       :targets,
@@ -3244,6 +3369,7 @@ module Aws::IoT
     #   <p>The OTA update status.</p>
     #   @return [String]
     class CreateOTAUpdateResponse < Struct.new(
+      nil,
       :ota_update_id,
       :aws_iot_job_id,
       :ota_update_arn,
@@ -3268,6 +3394,7 @@ module Aws::IoT
     #         Don't reuse this client token if a new idempotent request is required.</p>
     #   @return [String]
     class CreatePackageRequest < Struct.new(
+      nil,
       :package_name,
       :description,
       :tags,
@@ -3287,6 +3414,7 @@ module Aws::IoT
     #   <p>The package description.</p>
     #   @return [String]
     class CreatePackageResponse < Struct.new(
+      nil,
       :package_name,
       :package_arn,
       :description,
@@ -3324,6 +3452,7 @@ module Aws::IoT
     #         Don't reuse this client token if a new idempotent request is required.</p>
     #   @return [String]
     class CreatePackageVersionRequest < Struct.new(
+      nil,
       :package_name,
       :version_name,
       :description,
@@ -3359,6 +3488,7 @@ module Aws::IoT
     #   <p>Error reason for a package version failure during creation or update.</p>
     #   @return [String]
     class CreatePackageVersionResponse < Struct.new(
+      nil,
       :package_version_arn,
       :package_name,
       :version_name,
@@ -3390,6 +3520,7 @@ module Aws::IoT
     #            </note>
     #   @return [Array<Types::Tag>]
     class CreatePolicyRequest < Struct.new(
+      nil,
       :policy_name,
       :policy_document,
       :tags,
@@ -3412,6 +3543,7 @@ module Aws::IoT
     #   <p>The policy version ID.</p>
     #   @return [String]
     class CreatePolicyResponse < Struct.new(
+      nil,
       :policy_name,
       :policy_arn,
       :policy_document,
@@ -3435,6 +3567,7 @@ module Aws::IoT
     #            effect for the certificates to which the policy is attached).</p>
     #   @return [Boolean]
     class CreatePolicyVersionRequest < Struct.new(
+      nil,
       :policy_name,
       :policy_document,
       :set_as_default,
@@ -3457,6 +3590,7 @@ module Aws::IoT
     #   <p>Specifies whether the policy version is the default.</p>
     #   @return [Boolean]
     class CreatePolicyVersionResponse < Struct.new(
+      nil,
       :policy_arn,
       :policy_document,
       :policy_version_id,
@@ -3475,6 +3609,7 @@ module Aws::IoT
     #   <p>The name of the provisioning template to use.</p>
     #   @return [String]
     class CreateProvisioningClaimRequest < Struct.new(
+      nil,
       :template_name,
       keyword_init: true
     )
@@ -3494,6 +3629,7 @@ module Aws::IoT
     #   <p>The provisioning claim expiration time.</p>
     #   @return [Time]
     class CreateProvisioningClaimResponse < Struct.new(
+      nil,
       :certificate_id,
       :certificate_pem,
       :key_pair,
@@ -3541,6 +3677,7 @@ module Aws::IoT
     #         </p>
     #   @return [String]
     class CreateProvisioningTemplateRequest < Struct.new(
+      nil,
       :template_name,
       :description,
       :template_body,
@@ -3564,6 +3701,7 @@ module Aws::IoT
     #   <p>The default version of the provisioning template.</p>
     #   @return [Integer]
     class CreateProvisioningTemplateResponse < Struct.new(
+      nil,
       :template_arn,
       :template_name,
       :default_version_id,
@@ -3582,6 +3720,7 @@ module Aws::IoT
     #   <p>Sets a fleet provision template version as the default version.</p>
     #   @return [Boolean]
     class CreateProvisioningTemplateVersionRequest < Struct.new(
+      nil,
       :template_name,
       :template_body,
       :set_as_default,
@@ -3604,6 +3743,7 @@ module Aws::IoT
     #            false.</p>
     #   @return [Boolean]
     class CreateProvisioningTemplateVersionResponse < Struct.new(
+      nil,
       :template_arn,
       :template_name,
       :version_id,
@@ -3641,6 +3781,7 @@ module Aws::IoT
     #            </note>
     #   @return [Array<Types::Tag>]
     class CreateRoleAliasRequest < Struct.new(
+      nil,
       :role_alias,
       :role_arn,
       :credential_duration_seconds,
@@ -3657,6 +3798,7 @@ module Aws::IoT
     #   <p>The role alias ARN.</p>
     #   @return [String]
     class CreateRoleAliasResponse < Struct.new(
+      nil,
       :role_alias,
       :role_alias_arn,
       keyword_init: true
@@ -3702,6 +3844,7 @@ module Aws::IoT
     #   <p>Metadata that can be used to manage the scheduled audit.</p>
     #   @return [Array<Types::Tag>]
     class CreateScheduledAuditRequest < Struct.new(
+      nil,
       :frequency,
       :day_of_month,
       :day_of_week,
@@ -3717,6 +3860,7 @@ module Aws::IoT
     #   <p>The ARN of the scheduled audit.</p>
     #   @return [String]
     class CreateScheduledAuditResponse < Struct.new(
+      nil,
       :scheduled_audit_arn,
       keyword_init: true
     )
@@ -3756,6 +3900,7 @@ module Aws::IoT
     #   <p>Specifies the MQTT topic and role ARN required for metric export.</p>
     #   @return [Types::MetricsExportConfig]
     class CreateSecurityProfileRequest < Struct.new(
+      nil,
       :security_profile_name,
       :security_profile_description,
       :behaviors,
@@ -3776,6 +3921,7 @@ module Aws::IoT
     #   <p>The ARN of the security profile.</p>
     #   @return [String]
     class CreateSecurityProfileResponse < Struct.new(
+      nil,
       :security_profile_name,
       :security_profile_arn,
       keyword_init: true
@@ -3799,6 +3945,7 @@ module Aws::IoT
     #   <p>Metadata which can be used to manage streams.</p>
     #   @return [Array<Types::Tag>]
     class CreateStreamRequest < Struct.new(
+      nil,
       :stream_id,
       :description,
       :files,
@@ -3822,6 +3969,7 @@ module Aws::IoT
     #   <p>The version of the stream.</p>
     #   @return [Integer]
     class CreateStreamResponse < Struct.new(
+      nil,
       :stream_id,
       :stream_arn,
       :description,
@@ -3844,6 +3992,7 @@ module Aws::IoT
     #   <p>Metadata which can be used to manage the thing group.</p>
     #   @return [Array<Types::Tag>]
     class CreateThingGroupRequest < Struct.new(
+      nil,
       :thing_group_name,
       :parent_group_name,
       :thing_group_properties,
@@ -3863,6 +4012,7 @@ module Aws::IoT
     #   <p>The thing group ID.</p>
     #   @return [String]
     class CreateThingGroupResponse < Struct.new(
+      nil,
       :thing_group_name,
       :thing_group_arn,
       :thing_group_id,
@@ -3891,6 +4041,7 @@ module Aws::IoT
     #   <p>The name of the billing group the thing will be added to.</p>
     #   @return [String]
     class CreateThingRequest < Struct.new(
+      nil,
       :thing_name,
       :thing_type_name,
       :attribute_payload,
@@ -3911,6 +4062,7 @@ module Aws::IoT
     #   <p>The thing ID.</p>
     #   @return [String]
     class CreateThingResponse < Struct.new(
+      nil,
       :thing_name,
       :thing_arn,
       :thing_id,
@@ -3932,6 +4084,7 @@ module Aws::IoT
     #   <p>Metadata which can be used to manage the thing type.</p>
     #   @return [Array<Types::Tag>]
     class CreateThingTypeRequest < Struct.new(
+      nil,
       :thing_type_name,
       :thing_type_properties,
       :tags,
@@ -3951,6 +4104,7 @@ module Aws::IoT
     #   <p>The thing type ID.</p>
     #   @return [String]
     class CreateThingTypeResponse < Struct.new(
+      nil,
       :thing_type_name,
       :thing_type_arn,
       :thing_type_id,
@@ -3963,6 +4117,7 @@ module Aws::IoT
     #   <p>The topic rule destination configuration.</p>
     #   @return [Types::TopicRuleDestinationConfiguration]
     class CreateTopicRuleDestinationRequest < Struct.new(
+      nil,
       :destination_configuration,
       keyword_init: true
     )
@@ -3973,6 +4128,7 @@ module Aws::IoT
     #   <p>The topic rule destination.</p>
     #   @return [Types::TopicRuleDestination]
     class CreateTopicRuleDestinationResponse < Struct.new(
+      nil,
       :topic_rule_destination,
       keyword_init: true
     )
@@ -3997,6 +4153,7 @@ module Aws::IoT
     #            </note>
     #   @return [String]
     class CreateTopicRuleRequest < Struct.new(
+      nil,
       :rule_name,
       :topic_rule_payload,
       :tags,
@@ -4019,6 +4176,7 @@ module Aws::IoT
     #   <p>The signature algorithm used to code sign the file. You can use a string as the algorithm name if the target over-the-air (OTA) update devices are able to verify the signature that was generated using the same signature algorithm. For example, FreeRTOS uses <code>ECDSA</code> or <code>RSA</code>, so you can pass either of them based on which was used for generating the signature.</p>
     #   @return [String]
     class CustomCodeSigning < Struct.new(
+      nil,
       :signature,
       :certificate_chain,
       :hash_algorithm,
@@ -4032,6 +4190,7 @@ module Aws::IoT
     #   <p>If true, all scheduled audits are deleted.</p>
     #   @return [Boolean]
     class DeleteAccountAuditConfigurationRequest < Struct.new(
+      nil,
       :delete_scheduled_audits,
       keyword_init: true
     )
@@ -4039,6 +4198,7 @@ module Aws::IoT
     end
 
     class DeleteAccountAuditConfigurationResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -4054,6 +4214,7 @@ module Aws::IoT
     #   <p>Information that identifies the noncompliant resource.</p>
     #   @return [Types::ResourceIdentifier]
     class DeleteAuditSuppressionRequest < Struct.new(
+      nil,
       :check_name,
       :resource_identifier,
       keyword_init: true
@@ -4062,6 +4223,7 @@ module Aws::IoT
     end
 
     class DeleteAuditSuppressionResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -4071,6 +4233,7 @@ module Aws::IoT
     #   <p>The name of the authorizer to delete.</p>
     #   @return [String]
     class DeleteAuthorizerRequest < Struct.new(
+      nil,
       :authorizer_name,
       keyword_init: true
     )
@@ -4078,6 +4241,7 @@ module Aws::IoT
     end
 
     class DeleteAuthorizerResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -4093,6 +4257,7 @@ module Aws::IoT
     #   				<code>VersionConflictException</code>.</p>
     #   @return [Integer]
     class DeleteBillingGroupRequest < Struct.new(
+      nil,
       :billing_group_name,
       :expected_version,
       keyword_init: true
@@ -4101,6 +4266,7 @@ module Aws::IoT
     end
 
     class DeleteBillingGroupResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -4112,6 +4278,7 @@ module Aws::IoT
     #            the certificate ID.)</p>
     #   @return [String]
     class DeleteCACertificateRequest < Struct.new(
+      nil,
       :certificate_id,
       keyword_init: true
     )
@@ -4120,6 +4287,7 @@ module Aws::IoT
 
     # <p>The output for the DeleteCACertificate operation.</p>
     class DeleteCACertificateResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -4129,6 +4297,7 @@ module Aws::IoT
     #   <p>The name of the certificate provider.</p>
     #   @return [String]
     class DeleteCertificateProviderRequest < Struct.new(
+      nil,
       :certificate_provider_name,
       keyword_init: true
     )
@@ -4136,6 +4305,7 @@ module Aws::IoT
     end
 
     class DeleteCertificateProviderResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -4151,6 +4321,7 @@ module Aws::IoT
     #            thing.</p>
     #   @return [Boolean]
     class DeleteCertificateRequest < Struct.new(
+      nil,
       :certificate_id,
       :force_delete,
       keyword_init: true
@@ -4167,6 +4338,7 @@ module Aws::IoT
     #         command executions.</p>
     #   @return [String]
     class DeleteCommandExecutionRequest < Struct.new(
+      nil,
       :execution_id,
       :target_arn,
       keyword_init: true
@@ -4175,6 +4347,7 @@ module Aws::IoT
     end
 
     class DeleteCommandExecutionResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -4184,6 +4357,7 @@ module Aws::IoT
     #   <p>The unique identifier of the command to be deleted.</p>
     #   @return [String]
     class DeleteCommandRequest < Struct.new(
+      nil,
       :command_id,
       keyword_init: true
     )
@@ -4210,6 +4384,7 @@ module Aws::IoT
     #            </ul>
     #   @return [Integer]
     class DeleteCommandResponse < Struct.new(
+      nil,
       :status_code,
       keyword_init: true
     )
@@ -4227,6 +4402,7 @@ module Aws::IoT
     #   <p>The message for the exception.</p>
     #   @return [String]
     class DeleteConflictException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -4239,6 +4415,7 @@ module Aws::IoT
     #       </p>
     #   @return [String]
     class DeleteCustomMetricRequest < Struct.new(
+      nil,
       :metric_name,
       keyword_init: true
     )
@@ -4246,6 +4423,7 @@ module Aws::IoT
     end
 
     class DeleteCustomMetricResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -4255,6 +4433,7 @@ module Aws::IoT
     #   <p>The unique identifier for the dimension that you want to delete.</p>
     #   @return [String]
     class DeleteDimensionRequest < Struct.new(
+      nil,
       :name,
       keyword_init: true
     )
@@ -4262,6 +4441,7 @@ module Aws::IoT
     end
 
     class DeleteDimensionResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -4271,6 +4451,7 @@ module Aws::IoT
     #   <p>The name of the domain configuration to be deleted.</p>
     #   @return [String]
     class DeleteDomainConfigurationRequest < Struct.new(
+      nil,
       :domain_configuration_name,
       keyword_init: true
     )
@@ -4278,6 +4459,7 @@ module Aws::IoT
     end
 
     class DeleteDomainConfigurationResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -4290,6 +4472,7 @@ module Aws::IoT
     #   <p>The expected version of the dynamic thing group to delete.</p>
     #   @return [Integer]
     class DeleteDynamicThingGroupRequest < Struct.new(
+      nil,
       :thing_group_name,
       :expected_version,
       keyword_init: true
@@ -4298,6 +4481,7 @@ module Aws::IoT
     end
 
     class DeleteDynamicThingGroupResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -4310,6 +4494,7 @@ module Aws::IoT
     #   <p>The expected version of the fleet metric to delete.</p>
     #   @return [Integer]
     class DeleteFleetMetricRequest < Struct.new(
+      nil,
       :metric_name,
       :expected_version,
       keyword_init: true
@@ -4354,6 +4539,7 @@ module Aws::IoT
     #            </note>
     #   @return [String]
     class DeleteJobExecutionRequest < Struct.new(
+      nil,
       :job_id,
       :thing_name,
       :execution_number,
@@ -4395,6 +4581,7 @@ module Aws::IoT
     #            </note>
     #   @return [String]
     class DeleteJobRequest < Struct.new(
+      nil,
       :job_id,
       :force,
       :namespace_id,
@@ -4407,6 +4594,7 @@ module Aws::IoT
     #   <p>The unique identifier of the job template to delete.</p>
     #   @return [String]
     class DeleteJobTemplateRequest < Struct.new(
+      nil,
       :job_template_id,
       keyword_init: true
     )
@@ -4417,6 +4605,7 @@ module Aws::IoT
     #   <p>The name of the mitigation action that you want to delete.</p>
     #   @return [String]
     class DeleteMitigationActionRequest < Struct.new(
+      nil,
       :action_name,
       keyword_init: true
     )
@@ -4424,6 +4613,7 @@ module Aws::IoT
     end
 
     class DeleteMitigationActionResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -4441,6 +4631,7 @@ module Aws::IoT
     #               job is not in a terminal state ("COMPLETED" or "CANCELED") an exception will occur. The default is false.</p>
     #   @return [Boolean]
     class DeleteOTAUpdateRequest < Struct.new(
+      nil,
       :ota_update_id,
       :delete_stream,
       :force_delete_aws_job,
@@ -4450,6 +4641,7 @@ module Aws::IoT
     end
 
     class DeleteOTAUpdateResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -4463,6 +4655,7 @@ module Aws::IoT
     #         Don't reuse this client token if a new idempotent request is required.</p>
     #   @return [String]
     class DeletePackageRequest < Struct.new(
+      nil,
       :package_name,
       :client_token,
       keyword_init: true
@@ -4471,6 +4664,7 @@ module Aws::IoT
     end
 
     class DeletePackageResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -4487,6 +4681,7 @@ module Aws::IoT
     #         Don't reuse this client token if a new idempotent request is required.</p>
     #   @return [String]
     class DeletePackageVersionRequest < Struct.new(
+      nil,
       :package_name,
       :version_name,
       :client_token,
@@ -4496,6 +4691,7 @@ module Aws::IoT
     end
 
     class DeletePackageVersionResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -4506,6 +4702,7 @@ module Aws::IoT
     #   <p>The name of the policy to delete.</p>
     #   @return [String]
     class DeletePolicyRequest < Struct.new(
+      nil,
       :policy_name,
       keyword_init: true
     )
@@ -4520,6 +4717,7 @@ module Aws::IoT
     #   <p>The policy version ID.</p>
     #   @return [String]
     class DeletePolicyVersionRequest < Struct.new(
+      nil,
       :policy_name,
       :policy_version_id,
       keyword_init: true
@@ -4531,6 +4729,7 @@ module Aws::IoT
     #   <p>The name of the fleet provision template to delete.</p>
     #   @return [String]
     class DeleteProvisioningTemplateRequest < Struct.new(
+      nil,
       :template_name,
       keyword_init: true
     )
@@ -4538,6 +4737,7 @@ module Aws::IoT
     end
 
     class DeleteProvisioningTemplateResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -4550,6 +4750,7 @@ module Aws::IoT
     #   <p>The provisioning template version ID to delete.</p>
     #   @return [Integer]
     class DeleteProvisioningTemplateVersionRequest < Struct.new(
+      nil,
       :template_name,
       :version_id,
       keyword_init: true
@@ -4558,6 +4759,7 @@ module Aws::IoT
     end
 
     class DeleteProvisioningTemplateVersionResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -4565,6 +4767,7 @@ module Aws::IoT
 
     # <p>The input for the DeleteRegistrationCode operation.</p>
     class DeleteRegistrationCodeRequest < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -4572,6 +4775,7 @@ module Aws::IoT
 
     # <p>The output for the DeleteRegistrationCode operation.</p>
     class DeleteRegistrationCodeResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -4581,6 +4785,7 @@ module Aws::IoT
     #   <p>The role alias to delete.</p>
     #   @return [String]
     class DeleteRoleAliasRequest < Struct.new(
+      nil,
       :role_alias,
       keyword_init: true
     )
@@ -4588,6 +4793,7 @@ module Aws::IoT
     end
 
     class DeleteRoleAliasResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -4597,6 +4803,7 @@ module Aws::IoT
     #   <p>The name of the scheduled audit you want to delete.</p>
     #   @return [String]
     class DeleteScheduledAuditRequest < Struct.new(
+      nil,
       :scheduled_audit_name,
       keyword_init: true
     )
@@ -4604,6 +4811,7 @@ module Aws::IoT
     end
 
     class DeleteScheduledAuditResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -4618,6 +4826,7 @@ module Aws::IoT
     #           version, a <code>VersionConflictException</code> is thrown.</p>
     #   @return [Integer]
     class DeleteSecurityProfileRequest < Struct.new(
+      nil,
       :security_profile_name,
       :expected_version,
       keyword_init: true
@@ -4626,6 +4835,7 @@ module Aws::IoT
     end
 
     class DeleteSecurityProfileResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -4635,6 +4845,7 @@ module Aws::IoT
     #   <p>The stream ID.</p>
     #   @return [String]
     class DeleteStreamRequest < Struct.new(
+      nil,
       :stream_id,
       keyword_init: true
     )
@@ -4642,6 +4853,7 @@ module Aws::IoT
     end
 
     class DeleteStreamResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -4654,6 +4866,7 @@ module Aws::IoT
     #   <p>The expected version of the thing group to delete.</p>
     #   @return [Integer]
     class DeleteThingGroupRequest < Struct.new(
+      nil,
       :thing_group_name,
       :expected_version,
       keyword_init: true
@@ -4662,6 +4875,7 @@ module Aws::IoT
     end
 
     class DeleteThingGroupResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -4678,6 +4892,7 @@ module Aws::IoT
     #   				<code>VersionConflictException</code>.</p>
     #   @return [Integer]
     class DeleteThingRequest < Struct.new(
+      nil,
       :thing_name,
       :expected_version,
       keyword_init: true
@@ -4687,6 +4902,7 @@ module Aws::IoT
 
     # <p>The output of the DeleteThing operation.</p>
     class DeleteThingResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -4697,6 +4913,7 @@ module Aws::IoT
     #   <p>The name of the thing type.</p>
     #   @return [String]
     class DeleteThingTypeRequest < Struct.new(
+      nil,
       :thing_type_name,
       keyword_init: true
     )
@@ -4705,6 +4922,7 @@ module Aws::IoT
 
     # <p>The output for the DeleteThingType operation.</p>
     class DeleteThingTypeResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -4714,6 +4932,7 @@ module Aws::IoT
     #   <p>The ARN of the topic rule destination to delete.</p>
     #   @return [String]
     class DeleteTopicRuleDestinationRequest < Struct.new(
+      nil,
       :arn,
       keyword_init: true
     )
@@ -4721,6 +4940,7 @@ module Aws::IoT
     end
 
     class DeleteTopicRuleDestinationResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -4731,6 +4951,7 @@ module Aws::IoT
     #   <p>The name of the rule.</p>
     #   @return [String]
     class DeleteTopicRuleRequest < Struct.new(
+      nil,
       :rule_name,
       keyword_init: true
     )
@@ -4745,6 +4966,7 @@ module Aws::IoT
     #   <p>The name of the resource for which you are configuring logging.</p>
     #   @return [String]
     class DeleteV2LoggingLevelRequest < Struct.new(
+      nil,
       :target_type,
       :target_name,
       keyword_init: true
@@ -4762,6 +4984,7 @@ module Aws::IoT
     #   <p>Information that explicitly denies the authorization. </p>
     #   @return [Types::ExplicitDeny]
     class Denied < Struct.new(
+      nil,
       :implicit_deny,
       :explicit_deny,
       keyword_init: true
@@ -4778,6 +5001,7 @@ module Aws::IoT
     #   			associate it with things.</p>
     #   @return [Boolean]
     class DeprecateThingTypeRequest < Struct.new(
+      nil,
       :thing_type_name,
       :undo_deprecate,
       keyword_init: true
@@ -4787,12 +5011,14 @@ module Aws::IoT
 
     # <p>The output for the DeprecateThingType operation.</p>
     class DeprecateThingTypeResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
     end
 
     class DescribeAccountAuditConfigurationRequest < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -4813,6 +5039,7 @@ module Aws::IoT
     #   <p>Which audit checks are enabled and disabled for this account.</p>
     #   @return [Hash<String, Types::AuditCheckConfiguration>]
     class DescribeAccountAuditConfigurationResponse < Struct.new(
+      nil,
       :role_arn,
       :audit_notification_target_configurations,
       :audit_check_configurations,
@@ -4825,6 +5052,7 @@ module Aws::IoT
     #   <p>A unique identifier for a single audit finding. You can use this identifier to apply mitigation actions to the finding.</p>
     #   @return [String]
     class DescribeAuditFindingRequest < Struct.new(
+      nil,
       :finding_id,
       keyword_init: true
     )
@@ -4835,6 +5063,7 @@ module Aws::IoT
     #   <p>The findings (results) of the audit.</p>
     #   @return [Types::AuditFinding]
     class DescribeAuditFindingResponse < Struct.new(
+      nil,
       :finding,
       keyword_init: true
     )
@@ -4845,6 +5074,7 @@ module Aws::IoT
     #   <p>The unique identifier for the audit mitigation task.</p>
     #   @return [String]
     class DescribeAuditMitigationActionsTaskRequest < Struct.new(
+      nil,
       :task_id,
       keyword_init: true
     )
@@ -4873,6 +5103,7 @@ module Aws::IoT
     #   <p>Specifies the mitigation actions and their parameters that are applied as part of this task.</p>
     #   @return [Array<Types::MitigationAction>]
     class DescribeAuditMitigationActionsTaskResponse < Struct.new(
+      nil,
       :task_status,
       :start_time,
       :end_time,
@@ -4895,6 +5126,7 @@ module Aws::IoT
     #   <p>Information that identifies the noncompliant resource.</p>
     #   @return [Types::ResourceIdentifier]
     class DescribeAuditSuppressionRequest < Struct.new(
+      nil,
       :check_name,
       :resource_identifier,
       keyword_init: true
@@ -4927,6 +5159,7 @@ module Aws::IoT
     #       </p>
     #   @return [String]
     class DescribeAuditSuppressionResponse < Struct.new(
+      nil,
       :check_name,
       :resource_identifier,
       :expiration_date,
@@ -4941,6 +5174,7 @@ module Aws::IoT
     #   <p>The ID of the audit whose information you want to get.</p>
     #   @return [String]
     class DescribeAuditTaskRequest < Struct.new(
+      nil,
       :task_id,
       keyword_init: true
     )
@@ -4967,6 +5201,7 @@ module Aws::IoT
     #   <p>Detailed information about each check performed during this audit.</p>
     #   @return [Hash<String, Types::AuditCheckDetails>]
     class DescribeAuditTaskResponse < Struct.new(
+      nil,
       :task_status,
       :task_type,
       :task_start_time,
@@ -4982,6 +5217,7 @@ module Aws::IoT
     #   <p>The name of the authorizer to describe.</p>
     #   @return [String]
     class DescribeAuthorizerRequest < Struct.new(
+      nil,
       :authorizer_name,
       keyword_init: true
     )
@@ -4992,6 +5228,7 @@ module Aws::IoT
     #   <p>The authorizer description.</p>
     #   @return [Types::AuthorizerDescription]
     class DescribeAuthorizerResponse < Struct.new(
+      nil,
       :authorizer_description,
       keyword_init: true
     )
@@ -5002,6 +5239,7 @@ module Aws::IoT
     #   <p>The name of the billing group.</p>
     #   @return [String]
     class DescribeBillingGroupRequest < Struct.new(
+      nil,
       :billing_group_name,
       keyword_init: true
     )
@@ -5027,6 +5265,7 @@ module Aws::IoT
     #   <p>Additional information about the billing group.</p>
     #   @return [Types::BillingGroupMetadata]
     class DescribeBillingGroupResponse < Struct.new(
+      nil,
       :billing_group_name,
       :billing_group_id,
       :billing_group_arn,
@@ -5048,6 +5287,7 @@ module Aws::IoT
     #   <p>The CA certificate identifier.</p>
     #   @return [String]
     class DescribeCACertificateRequest < Struct.new(
+      nil,
       :certificate_id,
       keyword_init: true
     )
@@ -5062,6 +5302,7 @@ module Aws::IoT
     #   <p>Information about the registration configuration.</p>
     #   @return [Types::RegistrationConfig]
     class DescribeCACertificateResponse < Struct.new(
+      nil,
       :certificate_description,
       :registration_config,
       keyword_init: true
@@ -5073,6 +5314,7 @@ module Aws::IoT
     #   <p>The name of the certificate provider.</p>
     #   @return [String]
     class DescribeCertificateProviderRequest < Struct.new(
+      nil,
       :certificate_provider_name,
       keyword_init: true
     )
@@ -5099,6 +5341,7 @@ module Aws::IoT
     #   <p>The date-time string that indicates when the certificate provider was last updated.</p>
     #   @return [Time]
     class DescribeCertificateProviderResponse < Struct.new(
+      nil,
       :certificate_provider_name,
       :certificate_provider_arn,
       :lambda_function_arn,
@@ -5116,6 +5359,7 @@ module Aws::IoT
     #            certificate ID.)</p>
     #   @return [String]
     class DescribeCertificateRequest < Struct.new(
+      nil,
       :certificate_id,
       keyword_init: true
     )
@@ -5127,6 +5371,7 @@ module Aws::IoT
     #   <p>The description of the certificate.</p>
     #   @return [Types::CertificateDescription]
     class DescribeCertificateResponse < Struct.new(
+      nil,
       :certificate_description,
       keyword_init: true
     )
@@ -5139,6 +5384,7 @@ module Aws::IoT
     #       </p>
     #   @return [String]
     class DescribeCustomMetricRequest < Struct.new(
+      nil,
       :metric_name,
       keyword_init: true
     )
@@ -5177,6 +5423,7 @@ module Aws::IoT
     #       </p>
     #   @return [Time]
     class DescribeCustomMetricResponse < Struct.new(
+      nil,
       :metric_name,
       :metric_arn,
       :metric_type,
@@ -5189,6 +5436,7 @@ module Aws::IoT
     end
 
     class DescribeDefaultAuthorizerRequest < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -5198,6 +5446,7 @@ module Aws::IoT
     #   <p>The default authorizer's description.</p>
     #   @return [Types::AuthorizerDescription]
     class DescribeDefaultAuthorizerResponse < Struct.new(
+      nil,
       :authorizer_description,
       keyword_init: true
     )
@@ -5210,6 +5459,7 @@ module Aws::IoT
     #       </p>
     #   @return [String]
     class DescribeDetectMitigationActionsTaskRequest < Struct.new(
+      nil,
       :task_id,
       keyword_init: true
     )
@@ -5222,6 +5472,7 @@ module Aws::IoT
     #       </p>
     #   @return [Types::DetectMitigationActionsTaskSummary]
     class DescribeDetectMitigationActionsTaskResponse < Struct.new(
+      nil,
       :task_summary,
       keyword_init: true
     )
@@ -5232,6 +5483,7 @@ module Aws::IoT
     #   <p>The unique identifier for the dimension.</p>
     #   @return [String]
     class DescribeDimensionRequest < Struct.new(
+      nil,
       :name,
       keyword_init: true
     )
@@ -5260,6 +5512,7 @@ module Aws::IoT
     #   <p>The date the dimension was last modified.</p>
     #   @return [Time]
     class DescribeDimensionResponse < Struct.new(
+      nil,
       :name,
       :arn,
       :type,
@@ -5275,6 +5528,7 @@ module Aws::IoT
     #   <p>The name of the domain configuration.</p>
     #   @return [String]
     class DescribeDomainConfigurationRequest < Struct.new(
+      nil,
       :domain_configuration_name,
       keyword_init: true
     )
@@ -5382,6 +5636,7 @@ module Aws::IoT
     #   <p>An object that speciﬁes the client certificate conﬁguration for a domain.</p>
     #   @return [Types::ClientCertificateConfig]
     class DescribeDomainConfigurationResponse < Struct.new(
+      nil,
       :domain_configuration_name,
       :domain_configuration_arn,
       :domain_name,
@@ -5402,6 +5657,7 @@ module Aws::IoT
     end
 
     class DescribeEncryptionConfigurationRequest < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -5425,6 +5681,7 @@ module Aws::IoT
     #   <p>The date when encryption configuration is last updated.</p>
     #   @return [Time]
     class DescribeEncryptionConfigurationResponse < Struct.new(
+      nil,
       :encryption_type,
       :kms_key_arn,
       :kms_access_role_arn,
@@ -5469,6 +5726,7 @@ module Aws::IoT
     #            are more secure and are trusted by most popular browsers.</p>
     #   @return [String]
     class DescribeEndpointRequest < Struct.new(
+      nil,
       :endpoint_type,
       keyword_init: true
     )
@@ -5481,6 +5739,7 @@ module Aws::IoT
     #               <i>identifier</i>.iot.<i>region</i>.amazonaws.com.</p>
     #   @return [String]
     class DescribeEndpointResponse < Struct.new(
+      nil,
       :endpoint_address,
       keyword_init: true
     )
@@ -5488,6 +5747,7 @@ module Aws::IoT
     end
 
     class DescribeEventConfigurationsRequest < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -5503,6 +5763,7 @@ module Aws::IoT
     #   <p>The date the event configurations were last modified.</p>
     #   @return [Time]
     class DescribeEventConfigurationsResponse < Struct.new(
+      nil,
       :event_configurations,
       :creation_date,
       :last_modified_date,
@@ -5515,6 +5776,7 @@ module Aws::IoT
     #   <p>The name of the fleet metric to describe.</p>
     #   @return [String]
     class DescribeFleetMetricRequest < Struct.new(
+      nil,
       :metric_name,
       keyword_init: true
     )
@@ -5562,6 +5824,7 @@ module Aws::IoT
     #   <p>The ARN of the fleet metric to describe.</p>
     #   @return [String]
     class DescribeFleetMetricResponse < Struct.new(
+      nil,
       :metric_name,
       :query_string,
       :aggregation_type,
@@ -5589,6 +5852,7 @@ module Aws::IoT
     #   <p>The index name.</p>
     #   @return [String]
     class DescribeIndexRequest < Struct.new(
+      nil,
       :index_name,
       keyword_init: true
     )
@@ -5626,6 +5890,7 @@ module Aws::IoT
     #            </ul>
     #   @return [String]
     class DescribeIndexResponse < Struct.new(
+      nil,
       :index_name,
       :index_status,
       :schema,
@@ -5645,6 +5910,7 @@ module Aws::IoT
     #               particular job execution on a particular device.</p>
     #   @return [Integer]
     class DescribeJobExecutionRequest < Struct.new(
+      nil,
       :job_id,
       :thing_name,
       :execution_number,
@@ -5657,6 +5923,7 @@ module Aws::IoT
     #   <p>Information about the job execution.</p>
     #   @return [Types::JobExecution]
     class DescribeJobExecutionResponse < Struct.new(
+      nil,
       :execution,
       keyword_init: true
     )
@@ -5670,6 +5937,7 @@ module Aws::IoT
     #   <p>Provides a view of the job document before and after the substitution parameters have been resolved with their exact values.</p>
     #   @return [Boolean]
     class DescribeJobRequest < Struct.new(
+      nil,
       :job_id,
       :before_substitution,
       keyword_init: true
@@ -5684,6 +5952,7 @@ module Aws::IoT
     #   <p>Information about the job.</p>
     #   @return [Types::Job]
     class DescribeJobResponse < Struct.new(
+      nil,
       :document_source,
       :job,
       keyword_init: true
@@ -5695,6 +5964,7 @@ module Aws::IoT
     #   <p>The unique identifier of the job template.</p>
     #   @return [String]
     class DescribeJobTemplateRequest < Struct.new(
+      nil,
       :job_template_id,
       keyword_init: true
     )
@@ -5751,6 +6021,7 @@ module Aws::IoT
     #               single ARN. Up to 25 package version ARNs are allowed.</p>
     #   @return [Array<String>]
     class DescribeJobTemplateResponse < Struct.new(
+      nil,
       :job_template_arn,
       :job_template_id,
       :description,
@@ -5777,6 +6048,7 @@ module Aws::IoT
     #               pre-defined default version is returned.</p>
     #   @return [String]
     class DescribeManagedJobTemplateRequest < Struct.new(
+      nil,
       :template_name,
       :template_version,
       keyword_init: true
@@ -5813,6 +6085,7 @@ module Aws::IoT
     #   <p>The document schema for a managed job template.</p>
     #   @return [String]
     class DescribeManagedJobTemplateResponse < Struct.new(
+      nil,
       :template_name,
       :template_arn,
       :description,
@@ -5829,6 +6102,7 @@ module Aws::IoT
     #   <p>The friendly name that uniquely identifies the mitigation action.</p>
     #   @return [String]
     class DescribeMitigationActionRequest < Struct.new(
+      nil,
       :action_name,
       keyword_init: true
     )
@@ -5860,6 +6134,7 @@ module Aws::IoT
     #   <p>The date and time when the mitigation action was last changed.</p>
     #   @return [Time]
     class DescribeMitigationActionResponse < Struct.new(
+      nil,
       :action_name,
       :action_type,
       :action_arn,
@@ -5877,6 +6152,7 @@ module Aws::IoT
     #   <p>The name of the provisioning template.</p>
     #   @return [String]
     class DescribeProvisioningTemplateRequest < Struct.new(
+      nil,
       :template_name,
       keyword_init: true
     )
@@ -5921,6 +6197,7 @@ module Aws::IoT
     #         </p>
     #   @return [String]
     class DescribeProvisioningTemplateResponse < Struct.new(
+      nil,
       :template_arn,
       :template_name,
       :description,
@@ -5944,6 +6221,7 @@ module Aws::IoT
     #   <p>The provisioning template version ID.</p>
     #   @return [Integer]
     class DescribeProvisioningTemplateVersionRequest < Struct.new(
+      nil,
       :template_name,
       :version_id,
       keyword_init: true
@@ -5964,6 +6242,7 @@ module Aws::IoT
     #   <p>True if the provisioning template version is the default version.</p>
     #   @return [Boolean]
     class DescribeProvisioningTemplateVersionResponse < Struct.new(
+      nil,
       :version_id,
       :creation_date,
       :template_body,
@@ -5982,6 +6261,7 @@ module Aws::IoT
     #   <p>The role alias to describe.</p>
     #   @return [String]
     class DescribeRoleAliasRequest < Struct.new(
+      nil,
       :role_alias,
       keyword_init: true
     )
@@ -5992,6 +6272,7 @@ module Aws::IoT
     #   <p>The role alias description.</p>
     #   @return [Types::RoleAliasDescription]
     class DescribeRoleAliasResponse < Struct.new(
+      nil,
       :role_alias_description,
       keyword_init: true
     )
@@ -6002,6 +6283,7 @@ module Aws::IoT
     #   <p>The name of the scheduled audit whose information you want to get.</p>
     #   @return [String]
     class DescribeScheduledAuditRequest < Struct.new(
+      nil,
       :scheduled_audit_name,
       keyword_init: true
     )
@@ -6043,6 +6325,7 @@ module Aws::IoT
     #   <p>The ARN of the scheduled audit.</p>
     #   @return [String]
     class DescribeScheduledAuditResponse < Struct.new(
+      nil,
       :frequency,
       :day_of_month,
       :day_of_week,
@@ -6059,6 +6342,7 @@ module Aws::IoT
     #         whose information you want to get.</p>
     #   @return [String]
     class DescribeSecurityProfileRequest < Struct.new(
+      nil,
       :security_profile_name,
       keyword_init: true
     )
@@ -6115,6 +6399,7 @@ module Aws::IoT
     #   <p>Specifies the MQTT topic and role ARN required for metric export.</p>
     #   @return [Types::MetricsExportConfig]
     class DescribeSecurityProfileResponse < Struct.new(
+      nil,
       :security_profile_name,
       :security_profile_arn,
       :security_profile_description,
@@ -6140,6 +6425,7 @@ module Aws::IoT
     #   <p>The stream ID.</p>
     #   @return [String]
     class DescribeStreamRequest < Struct.new(
+      nil,
       :stream_id,
       keyword_init: true
     )
@@ -6150,6 +6436,7 @@ module Aws::IoT
     #   <p>Information about the stream.</p>
     #   @return [Types::StreamInfo]
     class DescribeStreamResponse < Struct.new(
+      nil,
       :stream_info,
       keyword_init: true
     )
@@ -6160,6 +6447,7 @@ module Aws::IoT
     #   <p>The name of the thing group.</p>
     #   @return [String]
     class DescribeThingGroupRequest < Struct.new(
+      nil,
       :thing_group_name,
       keyword_init: true
     )
@@ -6197,6 +6485,7 @@ module Aws::IoT
     #   <p>The dynamic thing group status.</p>
     #   @return [String]
     class DescribeThingGroupResponse < Struct.new(
+      nil,
       :thing_group_name,
       :thing_group_id,
       :thing_group_arn,
@@ -6221,6 +6510,7 @@ module Aws::IoT
     #   <p>The task ID.</p>
     #   @return [String]
     class DescribeThingRegistrationTaskRequest < Struct.new(
+      nil,
       :task_id,
       keyword_init: true
     )
@@ -6264,6 +6554,7 @@ module Aws::IoT
     #   <p>The progress of the bulk provisioning task expressed as a percentage.</p>
     #   @return [Integer]
     class DescribeThingRegistrationTaskResponse < Struct.new(
+      nil,
       :task_id,
       :creation_date,
       :last_modified_date,
@@ -6293,6 +6584,7 @@ module Aws::IoT
     #   <p>The name of the thing.</p>
     #   @return [String]
     class DescribeThingRequest < Struct.new(
+      nil,
       :thing_name,
       keyword_init: true
     )
@@ -6333,6 +6625,7 @@ module Aws::IoT
     #   <p>The name of the billing group the thing belongs to.</p>
     #   @return [String]
     class DescribeThingResponse < Struct.new(
+      nil,
       :default_client_id,
       :thing_name,
       :thing_id,
@@ -6356,6 +6649,7 @@ module Aws::IoT
     #   <p>The name of the thing type.</p>
     #   @return [String]
     class DescribeThingTypeRequest < Struct.new(
+      nil,
       :thing_type_name,
       keyword_init: true
     )
@@ -6382,6 +6676,7 @@ module Aws::IoT
     #   			deprecated, and a date and time when it was deprecated.</p>
     #   @return [Types::ThingTypeMetadata]
     class DescribeThingTypeResponse < Struct.new(
+      nil,
       :thing_type_name,
       :thing_type_id,
       :thing_type_arn,
@@ -6397,6 +6692,7 @@ module Aws::IoT
     #   <p>Describes the location in S3 of the updated firmware.</p>
     #   @return [Types::S3Destination]
     class Destination < Struct.new(
+      nil,
       :s3_destination,
       keyword_init: true
     )
@@ -6410,6 +6706,7 @@ module Aws::IoT
     #   <p>The target from which the policy will be detached.</p>
     #   @return [String]
     class DetachPolicyRequest < Struct.new(
+      nil,
       :policy_name,
       :target,
       keyword_init: true
@@ -6426,6 +6723,7 @@ module Aws::IoT
     #            <p>Valid principals are CertificateArn (arn:aws:iot:<i>region</i>:<i>accountId</i>:cert/<i>certificateId</i>), thingGroupArn (arn:aws:iot:<i>region</i>:<i>accountId</i>:thinggroup/<i>groupName</i>) and CognitoId (<i>region</i>:<i>id</i>).</p>
     #   @return [String]
     class DetachPrincipalPolicyRequest < Struct.new(
+      nil,
       :policy_name,
       :principal,
       keyword_init: true
@@ -6440,6 +6738,7 @@ module Aws::IoT
     #   <p>The ARN of the thing group from which the security profile is detached.</p>
     #   @return [String]
     class DetachSecurityProfileRequest < Struct.new(
+      nil,
       :security_profile_name,
       :security_profile_target_arn,
       keyword_init: true
@@ -6448,6 +6747,7 @@ module Aws::IoT
     end
 
     class DetachSecurityProfileResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -6463,6 +6763,7 @@ module Aws::IoT
     #   			Cognito identity.</p>
     #   @return [String]
     class DetachThingPrincipalRequest < Struct.new(
+      nil,
       :thing_name,
       :principal,
       keyword_init: true
@@ -6472,6 +6773,7 @@ module Aws::IoT
 
     # <p>The output from the DetachThingPrincipal operation.</p>
     class DetachThingPrincipalResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -6526,6 +6828,7 @@ module Aws::IoT
     #           </p>
     #   @return [String]
     class DetectMitigationActionExecution < Struct.new(
+      nil,
       :task_id,
       :violation_id,
       :action_name,
@@ -6559,6 +6862,7 @@ module Aws::IoT
     #           </p>
     #   @return [Integer]
     class DetectMitigationActionsTaskStatistics < Struct.new(
+      nil,
       :actions_executed,
       :actions_skipped,
       :actions_failed,
@@ -6621,6 +6925,7 @@ module Aws::IoT
     #           </p>
     #   @return [Types::DetectMitigationActionsTaskStatistics]
     class DetectMitigationActionsTaskSummary < Struct.new(
+      nil,
       :task_id,
       :task_status,
       :task_start_time,
@@ -6661,6 +6966,7 @@ module Aws::IoT
     #           </p>
     #   @return [String]
     class DetectMitigationActionsTaskTarget < Struct.new(
+      nil,
       :violation_ids,
       :security_profile_name,
       :behavior_name,
@@ -6674,6 +6980,7 @@ module Aws::IoT
     #   <p>The name of the rule to disable.</p>
     #   @return [String]
     class DisableTopicRuleRequest < Struct.new(
+      nil,
       :rule_name,
       keyword_init: true
     )
@@ -6690,6 +6997,7 @@ module Aws::IoT
     #   <p>A unique case-sensitive identifier that you can provide to ensure the idempotency of the request. Don't reuse this client token if a new idempotent request is required.</p>
     #   @return [String]
     class DisassociateSbomFromPackageVersionRequest < Struct.new(
+      nil,
       :package_name,
       :version_name,
       :client_token,
@@ -6699,6 +7007,7 @@ module Aws::IoT
     end
 
     class DisassociateSbomFromPackageVersionResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -6734,6 +7043,7 @@ module Aws::IoT
     #               document schema is optional or required.</p>
     #   @return [Boolean]
     class DocumentParameter < Struct.new(
+      nil,
       :key,
       :description,
       :regex,
@@ -6773,6 +7083,7 @@ module Aws::IoT
     #   <p>The type of service delivered by the endpoint.</p>
     #   @return [String]
     class DomainConfigurationSummary < Struct.new(
+      nil,
       :domain_configuration_name,
       :domain_configuration_arn,
       :service_type,
@@ -6830,6 +7141,7 @@ module Aws::IoT
     #   <p>The action payload. This name can be customized.</p>
     #   @return [String]
     class DynamoDBAction < Struct.new(
+      nil,
       :table_name,
       :role_arn,
       :operation,
@@ -6862,6 +7174,7 @@ module Aws::IoT
     #            DynamoDB database.</p>
     #   @return [Types::PutItemInput]
     class DynamoDBv2Action < Struct.new(
+      nil,
       :role_arn,
       :put_item,
       keyword_init: true
@@ -6880,6 +7193,7 @@ module Aws::IoT
     #   <p>The IAM policy document.</p>
     #   @return [String]
     class EffectivePolicy < Struct.new(
+      nil,
       :policy_name,
       :policy_arn,
       :policy_document,
@@ -6911,6 +7225,7 @@ module Aws::IoT
     #   <p>The unique identifier for the document you are storing.</p>
     #   @return [String]
     class ElasticsearchAction < Struct.new(
+      nil,
       :role_arn,
       :endpoint,
       :index,
@@ -6929,6 +7244,7 @@ module Aws::IoT
     #   <p>Specifies the type of information to be logged.</p>
     #   @return [String]
     class EnableIoTLoggingParams < Struct.new(
+      nil,
       :role_arn_for_logging,
       :log_level,
       keyword_init: true
@@ -6941,6 +7257,7 @@ module Aws::IoT
     #   <p>The name of the topic rule to enable.</p>
     #   @return [String]
     class EnableTopicRuleRequest < Struct.new(
+      nil,
       :rule_name,
       keyword_init: true
     )
@@ -6955,6 +7272,7 @@ module Aws::IoT
     #   <p>The error message.</p>
     #   @return [String]
     class ErrorInfo < Struct.new(
+      nil,
       :code,
       :message,
       keyword_init: true
@@ -6967,6 +7285,7 @@ module Aws::IoT
     #   <p>The policies that denied the authorization.</p>
     #   @return [Array<Types::Policy>]
     class ExplicitDeny < Struct.new(
+      nil,
       :policies,
       keyword_init: true
     )
@@ -6988,6 +7307,7 @@ module Aws::IoT
     #   <p>The criteria to initiate the increase in rate of rollout for a job.</p>
     #   @return [Types::RateIncreaseCriteria]
     class ExponentialRolloutRate < Struct.new(
+      nil,
       :base_rate_per_minute,
       :increment_factor,
       :rate_increase_criteria,
@@ -7004,6 +7324,7 @@ module Aws::IoT
     #   <p>The data type of the field.</p>
     #   @return [String]
     class Field < Struct.new(
+      nil,
       :name,
       :type,
       keyword_init: true
@@ -7019,6 +7340,7 @@ module Aws::IoT
     #   <p>The location of the updated firmware in S3.</p>
     #   @return [Types::S3Location]
     class FileLocation < Struct.new(
+      nil,
       :stream,
       :s3_location,
       keyword_init: true
@@ -7050,6 +7372,7 @@ module Aws::IoT
     #            than 500 records.</p>
     #   @return [Boolean]
     class FirehoseAction < Struct.new(
+      nil,
       :role_arn,
       :delivery_stream_name,
       :separator,
@@ -7067,6 +7390,7 @@ module Aws::IoT
     #   <p>The fleet metric ARN.</p>
     #   @return [String]
     class FleetMetricNameAndArn < Struct.new(
+      nil,
       :metric_name,
       :metric_arn,
       keyword_init: true
@@ -7086,6 +7410,7 @@ module Aws::IoT
     #         default value is <code>LatLon</code>.</p>
     #   @return [String]
     class GeoLocationTarget < Struct.new(
+      nil,
       :name,
       :order,
       keyword_init: true
@@ -7109,6 +7434,7 @@ module Aws::IoT
     #       </p>
     #   @return [String]
     class GetBehaviorModelTrainingSummariesRequest < Struct.new(
+      nil,
       :security_profile_name,
       :max_results,
       :next_token,
@@ -7128,6 +7454,7 @@ module Aws::IoT
     #       </p>
     #   @return [String]
     class GetBehaviorModelTrainingSummariesResponse < Struct.new(
+      nil,
       :summaries,
       :next_token,
       keyword_init: true
@@ -7151,6 +7478,7 @@ module Aws::IoT
     #   <p>The basic control of the response shape and the bucket aggregation type to perform. </p>
     #   @return [Types::BucketsAggregationType]
     class GetBucketsAggregationRequest < Struct.new(
+      nil,
       :index_name,
       :query_string,
       :aggregation_field,
@@ -7172,6 +7500,7 @@ module Aws::IoT
     #               <code>count</code>: The number of documents that have that value.</p>
     #   @return [Array<Types::Bucket>]
     class GetBucketsAggregationResponse < Struct.new(
+      nil,
       :total_count,
       :buckets,
       keyword_init: true
@@ -7197,6 +7526,7 @@ module Aws::IoT
     #   <p>The query version.</p>
     #   @return [String]
     class GetCardinalityRequest < Struct.new(
+      nil,
       :index_name,
       :query_string,
       :aggregation_field,
@@ -7210,6 +7540,7 @@ module Aws::IoT
     #   <p>The approximate count of unique values that match the query.</p>
     #   @return [Integer]
     class GetCardinalityResponse < Struct.new(
+      nil,
       :cardinality,
       keyword_init: true
     )
@@ -7236,6 +7567,7 @@ module Aws::IoT
     #               need to specify this field when using the <code>AWS-IoT</code> namespace.</p>
     #   @return [Boolean]
     class GetCommandExecutionRequest < Struct.new(
+      nil,
       :execution_id,
       :target_arn,
       :include_result,
@@ -7302,6 +7634,7 @@ module Aws::IoT
     #           be retained in your account. The default value is six months.</p>
     #   @return [Time]
     class GetCommandExecutionResponse < Struct.new(
+      nil,
       :execution_id,
       :command_arn,
       :target_arn,
@@ -7325,6 +7658,7 @@ module Aws::IoT
     #               information.</p>
     #   @return [String]
     class GetCommandRequest < Struct.new(
+      nil,
       :command_id,
       keyword_init: true
     )
@@ -7371,6 +7705,7 @@ module Aws::IoT
     #   <p>Indicates whether the command is being deleted.</p>
     #   @return [Boolean]
     class GetCommandResponse < Struct.new(
+      nil,
       :command_id,
       :command_arn,
       :namespace,
@@ -7398,6 +7733,7 @@ module Aws::IoT
     #   <p>The thing name.</p>
     #   @return [String]
     class GetEffectivePoliciesRequest < Struct.new(
+      nil,
       :principal,
       :cognito_identity_pool_id,
       :thing_name,
@@ -7410,6 +7746,7 @@ module Aws::IoT
     #   <p>The effective policies.</p>
     #   @return [Array<Types::EffectivePolicy>]
     class GetEffectivePoliciesResponse < Struct.new(
+      nil,
       :effective_policies,
       keyword_init: true
     )
@@ -7417,6 +7754,7 @@ module Aws::IoT
     end
 
     class GetIndexingConfigurationRequest < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -7429,6 +7767,7 @@ module Aws::IoT
     #   <p>The index configuration.</p>
     #   @return [Types::ThingGroupIndexingConfiguration]
     class GetIndexingConfigurationResponse < Struct.new(
+      nil,
       :thing_indexing_configuration,
       :thing_group_indexing_configuration,
       keyword_init: true
@@ -7443,6 +7782,7 @@ module Aws::IoT
     #   <p>Provides a view of the job document before and after the substitution parameters have been resolved with their exact values.</p>
     #   @return [Boolean]
     class GetJobDocumentRequest < Struct.new(
+      nil,
       :job_id,
       :before_substitution,
       keyword_init: true
@@ -7454,6 +7794,7 @@ module Aws::IoT
     #   <p>The job document content.</p>
     #   @return [String]
     class GetJobDocumentResponse < Struct.new(
+      nil,
       :document,
       keyword_init: true
     )
@@ -7462,6 +7803,7 @@ module Aws::IoT
 
     # <p>The input for the GetLoggingOptions operation.</p>
     class GetLoggingOptionsRequest < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -7475,6 +7817,7 @@ module Aws::IoT
     #   <p>The logging level.</p>
     #   @return [String]
     class GetLoggingOptionsResponse < Struct.new(
+      nil,
       :role_arn,
       :log_level,
       keyword_init: true
@@ -7486,6 +7829,7 @@ module Aws::IoT
     #   <p>The OTA update ID.</p>
     #   @return [String]
     class GetOTAUpdateRequest < Struct.new(
+      nil,
       :ota_update_id,
       keyword_init: true
     )
@@ -7496,6 +7840,7 @@ module Aws::IoT
     #   <p>The OTA update info.</p>
     #   @return [Types::OTAUpdateInfo]
     class GetOTAUpdateResponse < Struct.new(
+      nil,
       :ota_update_info,
       keyword_init: true
     )
@@ -7503,6 +7848,7 @@ module Aws::IoT
     end
 
     class GetPackageConfigurationRequest < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -7512,6 +7858,7 @@ module Aws::IoT
     #   <p>The version that is associated to a specific job.</p>
     #   @return [Types::VersionUpdateByJobsConfig]
     class GetPackageConfigurationResponse < Struct.new(
+      nil,
       :version_update_by_jobs_config,
       keyword_init: true
     )
@@ -7522,6 +7869,7 @@ module Aws::IoT
     #   <p>The name of the target software package.</p>
     #   @return [String]
     class GetPackageRequest < Struct.new(
+      nil,
       :package_name,
       keyword_init: true
     )
@@ -7547,6 +7895,7 @@ module Aws::IoT
     #   <p>The date when the package was last updated.</p>
     #   @return [Time]
     class GetPackageResponse < Struct.new(
+      nil,
       :package_name,
       :package_arn,
       :description,
@@ -7565,6 +7914,7 @@ module Aws::IoT
     #   <p>The name of the target package version.</p>
     #   @return [String]
     class GetPackageVersionRequest < Struct.new(
+      nil,
       :package_name,
       :version_name,
       keyword_init: true
@@ -7614,6 +7964,7 @@ module Aws::IoT
     #            deployment.</p>
     #   @return [String]
     class GetPackageVersionResponse < Struct.new(
+      nil,
       :package_version_arn,
       :package_name,
       :version_name,
@@ -7648,6 +7999,7 @@ module Aws::IoT
     #   <p>The percentile groups returned.</p>
     #   @return [Array<Float>]
     class GetPercentilesRequest < Struct.new(
+      nil,
       :index_name,
       :query_string,
       :aggregation_field,
@@ -7662,6 +8014,7 @@ module Aws::IoT
     #   <p>The percentile values of the aggregated fields.</p>
     #   @return [Array<Types::PercentPair>]
     class GetPercentilesResponse < Struct.new(
+      nil,
       :percentiles,
       keyword_init: true
     )
@@ -7673,6 +8026,7 @@ module Aws::IoT
     #   <p>The name of the policy.</p>
     #   @return [String]
     class GetPolicyRequest < Struct.new(
+      nil,
       :policy_name,
       keyword_init: true
     )
@@ -7702,6 +8056,7 @@ module Aws::IoT
     #   <p>The generation ID of the policy.</p>
     #   @return [String]
     class GetPolicyResponse < Struct.new(
+      nil,
       :policy_name,
       :policy_arn,
       :policy_document,
@@ -7722,6 +8077,7 @@ module Aws::IoT
     #   <p>The policy version ID.</p>
     #   @return [String]
     class GetPolicyVersionRequest < Struct.new(
+      nil,
       :policy_name,
       :policy_version_id,
       keyword_init: true
@@ -7755,6 +8111,7 @@ module Aws::IoT
     #   <p>The generation ID of the policy version.</p>
     #   @return [String]
     class GetPolicyVersionResponse < Struct.new(
+      nil,
       :policy_arn,
       :policy_name,
       :policy_document,
@@ -7775,6 +8132,7 @@ module Aws::IoT
 
     # <p>The input to the GetRegistrationCode operation.</p>
     class GetRegistrationCodeRequest < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -7785,6 +8143,7 @@ module Aws::IoT
     #   <p>The CA certificate registration code.</p>
     #   @return [String]
     class GetRegistrationCodeResponse < Struct.new(
+      nil,
       :registration_code,
       keyword_init: true
     )
@@ -7805,6 +8164,7 @@ module Aws::IoT
     #   <p>The version of the query used to search.</p>
     #   @return [String]
     class GetStatisticsRequest < Struct.new(
+      nil,
       :index_name,
       :query_string,
       :aggregation_field,
@@ -7819,6 +8179,7 @@ module Aws::IoT
     #         field.</p>
     #   @return [Types::Statistics]
     class GetStatisticsResponse < Struct.new(
+      nil,
       :statistics,
       keyword_init: true
     )
@@ -7829,6 +8190,7 @@ module Aws::IoT
     #   <p>The name of your IoT thing.</p>
     #   @return [String]
     class GetThingConnectivityDataRequest < Struct.new(
+      nil,
       :thing_name,
       keyword_init: true
     )
@@ -7848,6 +8210,7 @@ module Aws::IoT
     #   <p>The reason why the client is disconnecting.</p>
     #   @return [String]
     class GetThingConnectivityDataResponse < Struct.new(
+      nil,
       :thing_name,
       :connected,
       :timestamp,
@@ -7861,6 +8224,7 @@ module Aws::IoT
     #   <p>The ARN of the topic rule destination.</p>
     #   @return [String]
     class GetTopicRuleDestinationRequest < Struct.new(
+      nil,
       :arn,
       keyword_init: true
     )
@@ -7871,6 +8235,7 @@ module Aws::IoT
     #   <p>The topic rule destination.</p>
     #   @return [Types::TopicRuleDestination]
     class GetTopicRuleDestinationResponse < Struct.new(
+      nil,
       :topic_rule_destination,
       keyword_init: true
     )
@@ -7882,6 +8247,7 @@ module Aws::IoT
     #   <p>The name of the rule.</p>
     #   @return [String]
     class GetTopicRuleRequest < Struct.new(
+      nil,
       :rule_name,
       keyword_init: true
     )
@@ -7896,6 +8262,7 @@ module Aws::IoT
     #   <p>The rule.</p>
     #   @return [Types::TopicRule]
     class GetTopicRuleResponse < Struct.new(
+      nil,
       :rule_arn,
       :rule,
       keyword_init: true
@@ -7904,6 +8271,7 @@ module Aws::IoT
     end
 
     class GetV2LoggingOptionsRequest < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -7919,6 +8287,7 @@ module Aws::IoT
     #   <p>Disables all logs.</p>
     #   @return [Boolean]
     class GetV2LoggingOptionsResponse < Struct.new(
+      nil,
       :role_arn,
       :default_log_level,
       :disable_all_logs,
@@ -7940,6 +8309,7 @@ module Aws::IoT
     #   <p>The group ARN.</p>
     #   @return [String]
     class GroupNameAndArn < Struct.new(
+      nil,
       :group_name,
       :group_arn,
       keyword_init: true
@@ -7968,6 +8338,7 @@ module Aws::IoT
     #   <p>The authentication method to use when sending data to an HTTPS endpoint.</p>
     #   @return [Types::HttpAuthorization]
     class HttpAction < Struct.new(
+      nil,
       :url,
       :confirmation_url,
       :headers,
@@ -7985,6 +8356,7 @@ module Aws::IoT
     #   <p>The HTTP header value. Substitution templates are supported.</p>
     #   @return [String]
     class HttpActionHeader < Struct.new(
+      nil,
       :key,
       :value,
       keyword_init: true
@@ -7998,6 +8370,7 @@ module Aws::IoT
     #               Version 4 Signing Process</a>.</p>
     #   @return [Types::SigV4Authorization]
     class HttpAuthorization < Struct.new(
+      nil,
       :sigv4,
       keyword_init: true
     )
@@ -8012,6 +8385,7 @@ module Aws::IoT
     #   <p>The query string keys and values in an HTTP authorization request.</p>
     #   @return [String]
     class HttpContext < Struct.new(
+      nil,
       :headers,
       :query_string,
       keyword_init: true
@@ -8025,6 +8399,7 @@ module Aws::IoT
     #            URL.</p>
     #   @return [String]
     class HttpUrlDestinationConfiguration < Struct.new(
+      nil,
       :confirmation_url,
       keyword_init: true
     )
@@ -8036,6 +8411,7 @@ module Aws::IoT
     #   <p>The URL used to confirm the HTTP topic rule destination URL.</p>
     #   @return [String]
     class HttpUrlDestinationProperties < Struct.new(
+      nil,
       :confirmation_url,
       keyword_init: true
     )
@@ -8048,6 +8424,7 @@ module Aws::IoT
     #            URL.</p>
     #   @return [String]
     class HttpUrlDestinationSummary < Struct.new(
+      nil,
       :confirmation_url,
       keyword_init: true
     )
@@ -8061,6 +8438,7 @@ module Aws::IoT
     #            action on the specified resource. </p>
     #   @return [Array<Types::Policy>]
     class ImplicitDeny < Struct.new(
+      nil,
       :policies,
       keyword_init: true
     )
@@ -8072,6 +8450,7 @@ module Aws::IoT
     #   <p>The message for the exception.</p>
     #   @return [String]
     class IndexNotReadyException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -8108,6 +8487,7 @@ module Aws::IoT
     #           Management Quotas</a> in the <i>Amazon Web Services General Reference</i>.</p>
     #   @return [Array<Types::GeoLocationTarget>]
     class IndexingFilter < Struct.new(
+      nil,
       :named_shadow_names,
       :geo_locations,
       keyword_init: true
@@ -8120,6 +8500,7 @@ module Aws::IoT
     #   <p>The message for the exception.</p>
     #   @return [String]
     class InternalException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -8131,6 +8512,7 @@ module Aws::IoT
     #   <p>The message for the exception.</p>
     #   @return [String]
     class InternalFailureException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -8142,6 +8524,7 @@ module Aws::IoT
     # @!attribute message
     #   @return [String]
     class InternalServerException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -8152,6 +8535,7 @@ module Aws::IoT
     # @!attribute message
     #   @return [String]
     class InvalidAggregationException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -8163,6 +8547,7 @@ module Aws::IoT
     #   <p>The message for the exception.</p>
     #   @return [String]
     class InvalidQueryException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -8174,6 +8559,7 @@ module Aws::IoT
     #   <p>The message for the exception.</p>
     #   @return [String]
     class InvalidRequestException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -8185,6 +8571,7 @@ module Aws::IoT
     #   <p>The message for the exception.</p>
     #   @return [String]
     class InvalidResponseException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -8198,6 +8585,7 @@ module Aws::IoT
     #   <p>The message for the exception.</p>
     #   @return [String]
     class InvalidStateTransitionException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -8226,6 +8614,7 @@ module Aws::IoT
     #            message data via IoT Analytics (iotanalytics:BatchPutMessage).</p>
     #   @return [String]
     class IotAnalyticsAction < Struct.new(
+      nil,
       :channel_arn,
       :channel_name,
       :batch_mode,
@@ -8263,6 +8652,7 @@ module Aws::IoT
     #         Events detector. ("Action":"iotevents:BatchPutMessage").</p>
     #   @return [String]
     class IotEventsAction < Struct.new(
+      nil,
       :input_name,
       :message_id,
       :batch_mode,
@@ -8282,6 +8672,7 @@ module Aws::IoT
     #         policy can restrict access to specific asset hierarchy paths.</p>
     #   @return [String]
     class IotSiteWiseAction < Struct.new(
+      nil,
       :put_asset_property_value_entries,
       :role_arn,
       keyword_init: true
@@ -8300,6 +8691,7 @@ module Aws::IoT
     #   <p>The issuer certificate serial number.</p>
     #   @return [String]
     class IssuerCertificateIdentifier < Struct.new(
+      nil,
       :issuer_certificate_subject,
       :issuer_id,
       :issuer_certificate_serial_number,
@@ -8427,6 +8819,7 @@ module Aws::IoT
     #               single ARN. Up to 25 package version ARNs are allowed.</p>
     #   @return [Array<String>]
     class Job < Struct.new(
+      nil,
       :job_arn,
       :job_id,
       :target_selection,
@@ -8504,6 +8897,7 @@ module Aws::IoT
     #               execution has reached a terminal status.</p>
     #   @return [Integer]
     class JobExecution < Struct.new(
+      nil,
       :job_id,
       :status,
       :force_canceled,
@@ -8530,6 +8924,7 @@ module Aws::IoT
     #   <p>The job execution status.</p>
     #   @return [Hash<String, String>]
     class JobExecutionStatusDetails < Struct.new(
+      nil,
       :details_map,
       keyword_init: true
     )
@@ -8560,6 +8955,7 @@ module Aws::IoT
     #               this device.</p>
     #   @return [Integer]
     class JobExecutionSummary < Struct.new(
+      nil,
       :status,
       :queued_at,
       :started_at,
@@ -8580,6 +8976,7 @@ module Aws::IoT
     #   <p>Contains a subset of information about a job execution.</p>
     #   @return [Types::JobExecutionSummary]
     class JobExecutionSummaryForJob < Struct.new(
+      nil,
       :thing_arn,
       :job_execution_summary,
       keyword_init: true
@@ -8595,6 +8992,7 @@ module Aws::IoT
     #   <p>Contains a subset of information about a job execution.</p>
     #   @return [Types::JobExecutionSummary]
     class JobExecutionSummaryForThing < Struct.new(
+      nil,
       :job_id,
       :job_execution_summary,
       keyword_init: true
@@ -8609,6 +9007,7 @@ module Aws::IoT
     #               type for a job.</p>
     #   @return [Array<Types::RetryCriteria>]
     class JobExecutionsRetryConfig < Struct.new(
+      nil,
       :criteria_list,
       keyword_init: true
     )
@@ -8625,6 +9024,7 @@ module Aws::IoT
     #               exponential rate for a job rollout.</p>
     #   @return [Types::ExponentialRolloutRate]
     class JobExecutionsRolloutConfig < Struct.new(
+      nil,
       :maximum_per_minute,
       :exponential_rate,
       keyword_init: true
@@ -8665,6 +9065,7 @@ module Aws::IoT
     #   <p>The number of things whose job execution status is <code>TIMED_OUT</code>.</p>
     #   @return [Integer]
     class JobProcessDetails < Struct.new(
+      nil,
       :processing_targets,
       :number_of_canceled_things,
       :number_of_succeeded_things,
@@ -8718,6 +9119,7 @@ module Aws::IoT
     #               executions or canceling previously created executions, otherwise false.</p>
     #   @return [Boolean]
     class JobSummary < Struct.new(
+      nil,
       :job_arn,
       :job_id,
       :thing_group_id,
@@ -8746,6 +9148,7 @@ module Aws::IoT
     #   <p>The time, in seconds since the epoch, when the job template was created.</p>
     #   @return [Time]
     class JobTemplateSummary < Struct.new(
+      nil,
       :job_template_arn,
       :job_template_id,
       :description,
@@ -8775,6 +9178,7 @@ module Aws::IoT
     #   <p>The list of Kafka headers that you specify.</p>
     #   @return [Array<Types::KafkaActionHeader>]
     class KafkaAction < Struct.new(
+      nil,
       :destination_arn,
       :topic,
       :key,
@@ -8798,6 +9202,7 @@ module Aws::IoT
     #   <p>The value of the Kafka header.</p>
     #   @return [String]
     class KafkaActionHeader < Struct.new(
+      nil,
       :key,
       :value,
       keyword_init: true
@@ -8813,6 +9218,7 @@ module Aws::IoT
     #   <p>The private key.</p>
     #   @return [String]
     class KeyPair < Struct.new(
+      nil,
       :public_key,
       :private_key,
       keyword_init: true
@@ -8831,6 +9237,7 @@ module Aws::IoT
     #   <p>The partition key.</p>
     #   @return [String]
     class KinesisAction < Struct.new(
+      nil,
       :role_arn,
       :stream_name,
       :partition_key,
@@ -8844,6 +9251,7 @@ module Aws::IoT
     #   <p>The ARN of the Lambda function.</p>
     #   @return [String]
     class LambdaAction < Struct.new(
+      nil,
       :function_arn,
       keyword_init: true
     )
@@ -8855,6 +9263,7 @@ module Aws::IoT
     #   <p>The message for the exception.</p>
     #   @return [String]
     class LimitExceededException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -8887,6 +9296,7 @@ module Aws::IoT
     #   <p>The maximum number of results to return at one time.</p>
     #   @return [Integer]
     class ListActiveViolationsRequest < Struct.new(
+      nil,
       :thing_name,
       :security_profile_name,
       :behavior_criteria_type,
@@ -8907,6 +9317,7 @@ module Aws::IoT
     #               or <code>null</code> if there are no additional results.</p>
     #   @return [String]
     class ListActiveViolationsResponse < Struct.new(
+      nil,
       :active_violations,
       :next_token,
       keyword_init: true
@@ -8927,6 +9338,7 @@ module Aws::IoT
     #   <p>The maximum number of results to be returned per request.</p>
     #   @return [Integer]
     class ListAttachedPoliciesRequest < Struct.new(
+      nil,
       :target,
       :recursive,
       :marker,
@@ -8944,6 +9356,7 @@ module Aws::IoT
     #            results.</p>
     #   @return [String]
     class ListAttachedPoliciesResponse < Struct.new(
+      nil,
       :policies,
       :next_marker,
       keyword_init: true
@@ -8981,6 +9394,7 @@ module Aws::IoT
     #       </p>
     #   @return [Boolean]
     class ListAuditFindingsRequest < Struct.new(
+      nil,
       :task_id,
       :check_name,
       :resource_identifier,
@@ -9002,6 +9416,7 @@ module Aws::IoT
     #               if there are no additional results.</p>
     #   @return [String]
     class ListAuditFindingsResponse < Struct.new(
+      nil,
       :findings,
       :next_token,
       keyword_init: true
@@ -9025,6 +9440,7 @@ module Aws::IoT
     #   <p>The token for the next set of results.</p>
     #   @return [String]
     class ListAuditMitigationActionsExecutionsRequest < Struct.new(
+      nil,
       :task_id,
       :action_status,
       :finding_id,
@@ -9042,6 +9458,7 @@ module Aws::IoT
     #   <p>The token for the next set of results.</p>
     #   @return [String]
     class ListAuditMitigationActionsExecutionsResponse < Struct.new(
+      nil,
       :actions_executions,
       :next_token,
       keyword_init: true
@@ -9071,6 +9488,7 @@ module Aws::IoT
     #   <p>Specify this filter to limit results to tasks that were completed or canceled on or before a specific date and time.</p>
     #   @return [Time]
     class ListAuditMitigationActionsTasksRequest < Struct.new(
+      nil,
       :audit_task_id,
       :finding_id,
       :task_status,
@@ -9090,6 +9508,7 @@ module Aws::IoT
     #   <p>The token for the next set of results.</p>
     #   @return [String]
     class ListAuditMitigationActionsTasksResponse < Struct.new(
+      nil,
       :tasks,
       :next_token,
       keyword_init: true
@@ -9122,6 +9541,7 @@ module Aws::IoT
     #       </p>
     #   @return [Integer]
     class ListAuditSuppressionsRequest < Struct.new(
+      nil,
       :check_name,
       :resource_identifier,
       :ascending_order,
@@ -9143,6 +9563,7 @@ module Aws::IoT
     #       </p>
     #   @return [String]
     class ListAuditSuppressionsResponse < Struct.new(
+      nil,
       :suppressions,
       :next_token,
       keyword_init: true
@@ -9173,6 +9594,7 @@ module Aws::IoT
     #   <p>The maximum number of results to return at one time. The default is 25.</p>
     #   @return [Integer]
     class ListAuditTasksRequest < Struct.new(
+      nil,
       :start_time,
       :end_time,
       :task_type,
@@ -9192,6 +9614,7 @@ module Aws::IoT
     #               if there are no additional results.</p>
     #   @return [String]
     class ListAuditTasksResponse < Struct.new(
+      nil,
       :tasks,
       :next_token,
       keyword_init: true
@@ -9212,6 +9635,7 @@ module Aws::IoT
     #   <p>The status of the list authorizers request.</p>
     #   @return [String]
     class ListAuthorizersRequest < Struct.new(
+      nil,
       :page_size,
       :marker,
       :ascending_order,
@@ -9228,6 +9652,7 @@ module Aws::IoT
     #   <p>A marker used to get the next set of results.</p>
     #   @return [String]
     class ListAuthorizersResponse < Struct.new(
+      nil,
       :authorizers,
       :next_marker,
       keyword_init: true
@@ -9247,6 +9672,7 @@ module Aws::IoT
     #   <p>Limit the results to billing groups whose names have the given prefix.</p>
     #   @return [String]
     class ListBillingGroupsRequest < Struct.new(
+      nil,
       :next_token,
       :max_results,
       :name_prefix_filter,
@@ -9262,6 +9688,7 @@ module Aws::IoT
     #   <p>The token to use to get the next set of results, or <b>null</b> if there are no additional results.</p>
     #   @return [String]
     class ListBillingGroupsResponse < Struct.new(
+      nil,
       :billing_groups,
       :next_token,
       keyword_init: true
@@ -9283,6 +9710,7 @@ module Aws::IoT
     #   <p>The name of the provisioning template.</p>
     #   @return [String]
     class ListCACertificatesRequest < Struct.new(
+      nil,
       :page_size,
       :marker,
       :ascending_order,
@@ -9300,6 +9728,7 @@ module Aws::IoT
     #   <p>The current position within the list of CA certificates.</p>
     #   @return [String]
     class ListCACertificatesResponse < Struct.new(
+      nil,
       :certificates,
       :next_marker,
       keyword_init: true
@@ -9314,6 +9743,7 @@ module Aws::IoT
     #   <p>Returns the list of certificate providers in ascending alphabetical order.</p>
     #   @return [Boolean]
     class ListCertificateProvidersRequest < Struct.new(
+      nil,
       :next_token,
       :ascending_order,
       keyword_init: true
@@ -9328,6 +9758,7 @@ module Aws::IoT
     #   <p>The token for the next set of results, or <code>null</code> if there are no more results.</p>
     #   @return [String]
     class ListCertificateProvidersResponse < Struct.new(
+      nil,
       :certificate_providers,
       :next_token,
       keyword_init: true
@@ -9351,6 +9782,7 @@ module Aws::IoT
     #            order, based on the creation date.</p>
     #   @return [Boolean]
     class ListCertificatesByCARequest < Struct.new(
+      nil,
       :ca_certificate_id,
       :page_size,
       :marker,
@@ -9369,6 +9801,7 @@ module Aws::IoT
     #            results.</p>
     #   @return [String]
     class ListCertificatesByCAResponse < Struct.new(
+      nil,
       :certificates,
       :next_marker,
       keyword_init: true
@@ -9388,6 +9821,7 @@ module Aws::IoT
     #            order, based on the creation date.</p>
     #   @return [Boolean]
     class ListCertificatesRequest < Struct.new(
+      nil,
       :page_size,
       :marker,
       :ascending_order,
@@ -9405,6 +9839,7 @@ module Aws::IoT
     #            results.</p>
     #   @return [String]
     class ListCertificatesResponse < Struct.new(
+      nil,
       :certificates,
       :next_marker,
       keyword_init: true
@@ -9453,6 +9888,7 @@ module Aws::IoT
     #               list all command executions for a particular command.</p>
     #   @return [String]
     class ListCommandExecutionsRequest < Struct.new(
+      nil,
       :max_results,
       :next_token,
       :namespace,
@@ -9475,6 +9911,7 @@ module Aws::IoT
     #               additional results.</p>
     #   @return [String]
     class ListCommandExecutionsResponse < Struct.new(
+      nil,
       :command_executions,
       :next_token,
       keyword_init: true
@@ -9507,6 +9944,7 @@ module Aws::IoT
     #               on the time that they were created.</p>
     #   @return [String]
     class ListCommandsRequest < Struct.new(
+      nil,
       :max_results,
       :next_token,
       :namespace,
@@ -9525,6 +9963,7 @@ module Aws::IoT
     #               additional results.</p>
     #   @return [String]
     class ListCommandsResponse < Struct.new(
+      nil,
       :commands,
       :next_token,
       keyword_init: true
@@ -9543,6 +9982,7 @@ module Aws::IoT
     #       </p>
     #   @return [Integer]
     class ListCustomMetricsRequest < Struct.new(
+      nil,
       :next_token,
       :max_results,
       keyword_init: true
@@ -9562,6 +10002,7 @@ module Aws::IoT
     #       </p>
     #   @return [String]
     class ListCustomMetricsResponse < Struct.new(
+      nil,
       :metric_names,
       :next_token,
       keyword_init: true
@@ -9606,6 +10047,7 @@ module Aws::IoT
     #       </p>
     #   @return [String]
     class ListDetectMitigationActionsExecutionsRequest < Struct.new(
+      nil,
       :task_id,
       :violation_id,
       :thing_name,
@@ -9629,6 +10071,7 @@ module Aws::IoT
     #       </p>
     #   @return [String]
     class ListDetectMitigationActionsExecutionsResponse < Struct.new(
+      nil,
       :actions_executions,
       :next_token,
       keyword_init: true
@@ -9656,6 +10099,7 @@ module Aws::IoT
     #       </p>
     #   @return [Time]
     class ListDetectMitigationActionsTasksRequest < Struct.new(
+      nil,
       :max_results,
       :next_token,
       :start_time,
@@ -9676,6 +10120,7 @@ module Aws::IoT
     #       </p>
     #   @return [String]
     class ListDetectMitigationActionsTasksResponse < Struct.new(
+      nil,
       :tasks,
       :next_token,
       keyword_init: true
@@ -9690,6 +10135,7 @@ module Aws::IoT
     #   <p>The maximum number of results to retrieve at one time.</p>
     #   @return [Integer]
     class ListDimensionsRequest < Struct.new(
+      nil,
       :next_token,
       :max_results,
       keyword_init: true
@@ -9704,6 +10150,7 @@ module Aws::IoT
     #   <p>A token that can be used to retrieve the next set of results, or <code>null</code> if there are no additional results.</p>
     #   @return [String]
     class ListDimensionsResponse < Struct.new(
+      nil,
       :dimension_names,
       :next_token,
       keyword_init: true
@@ -9721,6 +10168,7 @@ module Aws::IoT
     #   <p>The type of service delivered by the endpoint.</p>
     #   @return [String]
     class ListDomainConfigurationsRequest < Struct.new(
+      nil,
       :marker,
       :page_size,
       :service_type,
@@ -9736,6 +10184,7 @@ module Aws::IoT
     #   <p>The marker for the next set of results.</p>
     #   @return [String]
     class ListDomainConfigurationsResponse < Struct.new(
+      nil,
       :domain_configurations,
       :next_marker,
       keyword_init: true
@@ -9751,6 +10200,7 @@ module Aws::IoT
     #   <p>The maximum number of results to return in this operation.</p>
     #   @return [Integer]
     class ListFleetMetricsRequest < Struct.new(
+      nil,
       :next_token,
       :max_results,
       keyword_init: true
@@ -9766,6 +10216,7 @@ module Aws::IoT
     #         all results.</p>
     #   @return [String]
     class ListFleetMetricsResponse < Struct.new(
+      nil,
       :fleet_metrics,
       :next_token,
       keyword_init: true
@@ -9781,6 +10232,7 @@ module Aws::IoT
     #   <p>The maximum number of results to return at one time.</p>
     #   @return [Integer]
     class ListIndicesRequest < Struct.new(
+      nil,
       :next_token,
       :max_results,
       keyword_init: true
@@ -9796,6 +10248,7 @@ module Aws::IoT
     #         results.</p>
     #   @return [String]
     class ListIndicesResponse < Struct.new(
+      nil,
       :index_names,
       :next_token,
       keyword_init: true
@@ -9816,6 +10269,7 @@ module Aws::IoT
     #   <p>The token to retrieve the next set of results.</p>
     #   @return [String]
     class ListJobExecutionsForJobRequest < Struct.new(
+      nil,
       :job_id,
       :status,
       :max_results,
@@ -9833,6 +10287,7 @@ module Aws::IoT
     #               there are no additional results.</p>
     #   @return [String]
     class ListJobExecutionsForJobResponse < Struct.new(
+      nil,
       :execution_summaries,
       :next_token,
       keyword_init: true
@@ -9870,6 +10325,7 @@ module Aws::IoT
     #   <p>The unique identifier you assigned to this job when it was created.</p>
     #   @return [String]
     class ListJobExecutionsForThingRequest < Struct.new(
+      nil,
       :thing_name,
       :status,
       :namespace_id,
@@ -9889,6 +10345,7 @@ module Aws::IoT
     #               there are no additional results.</p>
     #   @return [String]
     class ListJobExecutionsForThingResponse < Struct.new(
+      nil,
       :execution_summaries,
       :next_token,
       keyword_init: true
@@ -9903,6 +10360,7 @@ module Aws::IoT
     #   <p>The token to use to return the next set of results in the list.</p>
     #   @return [String]
     class ListJobTemplatesRequest < Struct.new(
+      nil,
       :max_results,
       :next_token,
       keyword_init: true
@@ -9918,6 +10376,7 @@ module Aws::IoT
     #               there are no additional results.</p>
     #   @return [String]
     class ListJobTemplatesResponse < Struct.new(
+      nil,
       :job_templates,
       :next_token,
       keyword_init: true
@@ -9967,6 +10426,7 @@ module Aws::IoT
     #            </note>
     #   @return [String]
     class ListJobsRequest < Struct.new(
+      nil,
       :status,
       :target_selection,
       :max_results,
@@ -9987,6 +10447,7 @@ module Aws::IoT
     #               there are no additional results.</p>
     #   @return [String]
     class ListJobsResponse < Struct.new(
+      nil,
       :jobs,
       :next_token,
       keyword_init: true
@@ -10005,6 +10466,7 @@ module Aws::IoT
     #   <p>The token to retrieve the next set of results.</p>
     #   @return [String]
     class ListManagedJobTemplatesRequest < Struct.new(
+      nil,
       :template_name,
       :max_results,
       :next_token,
@@ -10020,6 +10482,7 @@ module Aws::IoT
     #   <p>The token to retrieve the next set of results.</p>
     #   @return [String]
     class ListManagedJobTemplatesResponse < Struct.new(
+      nil,
       :managed_job_templates,
       :next_token,
       keyword_init: true
@@ -10052,6 +10515,7 @@ module Aws::IoT
     #   <p>The token for the next set of results.</p>
     #   @return [String]
     class ListMetricValuesRequest < Struct.new(
+      nil,
       :thing_name,
       :metric_name,
       :dimension_name,
@@ -10073,6 +10537,7 @@ module Aws::IoT
     #           if there are no additional results.</p>
     #   @return [String]
     class ListMetricValuesResponse < Struct.new(
+      nil,
       :metric_datum_list,
       :next_token,
       keyword_init: true
@@ -10090,6 +10555,7 @@ module Aws::IoT
     #   <p>The token for the next set of results.</p>
     #   @return [String]
     class ListMitigationActionsRequest < Struct.new(
+      nil,
       :action_type,
       :max_results,
       :next_token,
@@ -10105,6 +10571,7 @@ module Aws::IoT
     #   <p>The token for the next set of results.</p>
     #   @return [String]
     class ListMitigationActionsResponse < Struct.new(
+      nil,
       :action_identifiers,
       :next_token,
       keyword_init: true
@@ -10122,6 +10589,7 @@ module Aws::IoT
     #   <p>The OTA update job status.</p>
     #   @return [String]
     class ListOTAUpdatesRequest < Struct.new(
+      nil,
       :max_results,
       :next_token,
       :ota_update_status,
@@ -10137,6 +10605,7 @@ module Aws::IoT
     #   <p>A token to use to get the next set of results.</p>
     #   @return [String]
     class ListOTAUpdatesResponse < Struct.new(
+      nil,
       :ota_updates,
       :next_token,
       keyword_init: true
@@ -10156,6 +10625,7 @@ module Aws::IoT
     #            order, based on the creation date.</p>
     #   @return [Boolean]
     class ListOutgoingCertificatesRequest < Struct.new(
+      nil,
       :page_size,
       :marker,
       :ascending_order,
@@ -10172,6 +10642,7 @@ module Aws::IoT
     #   <p>The marker for the next set of results.</p>
     #   @return [String]
     class ListOutgoingCertificatesResponse < Struct.new(
+      nil,
       :outgoing_certificates,
       :next_marker,
       keyword_init: true
@@ -10192,6 +10663,7 @@ module Aws::IoT
     #   <p>The token for the next set of results.</p>
     #   @return [String]
     class ListPackageVersionsRequest < Struct.new(
+      nil,
       :package_name,
       :status,
       :max_results,
@@ -10208,6 +10680,7 @@ module Aws::IoT
     #   <p>The token for the next set of results.</p>
     #   @return [String]
     class ListPackageVersionsResponse < Struct.new(
+      nil,
       :package_version_summaries,
       :next_token,
       keyword_init: true
@@ -10222,6 +10695,7 @@ module Aws::IoT
     #   <p>The token for the next set of results.</p>
     #   @return [String]
     class ListPackagesRequest < Struct.new(
+      nil,
       :max_results,
       :next_token,
       keyword_init: true
@@ -10236,6 +10710,7 @@ module Aws::IoT
     #   <p>The token for the next set of results.</p>
     #   @return [String]
     class ListPackagesResponse < Struct.new(
+      nil,
       :package_summaries,
       :next_token,
       keyword_init: true
@@ -10255,6 +10730,7 @@ module Aws::IoT
     #            creation order.</p>
     #   @return [Boolean]
     class ListPoliciesRequest < Struct.new(
+      nil,
       :marker,
       :page_size,
       :ascending_order,
@@ -10272,6 +10748,7 @@ module Aws::IoT
     #            results.</p>
     #   @return [String]
     class ListPoliciesResponse < Struct.new(
+      nil,
       :policies,
       :next_marker,
       keyword_init: true
@@ -10294,6 +10771,7 @@ module Aws::IoT
     #            creation order.</p>
     #   @return [Boolean]
     class ListPolicyPrincipalsRequest < Struct.new(
+      nil,
       :policy_name,
       :marker,
       :page_size,
@@ -10312,6 +10790,7 @@ module Aws::IoT
     #            results.</p>
     #   @return [String]
     class ListPolicyPrincipalsResponse < Struct.new(
+      nil,
       :principals,
       :next_marker,
       keyword_init: true
@@ -10324,6 +10803,7 @@ module Aws::IoT
     #   <p>The policy name.</p>
     #   @return [String]
     class ListPolicyVersionsRequest < Struct.new(
+      nil,
       :policy_name,
       keyword_init: true
     )
@@ -10335,6 +10815,7 @@ module Aws::IoT
     #   <p>The policy versions.</p>
     #   @return [Array<Types::PolicyVersion>]
     class ListPolicyVersionsResponse < Struct.new(
+      nil,
       :policy_versions,
       keyword_init: true
     )
@@ -10356,6 +10837,7 @@ module Aws::IoT
     #            order.</p>
     #   @return [Boolean]
     class ListPrincipalPoliciesRequest < Struct.new(
+      nil,
       :principal,
       :marker,
       :page_size,
@@ -10374,6 +10856,7 @@ module Aws::IoT
     #            results.</p>
     #   @return [String]
     class ListPrincipalPoliciesResponse < Struct.new(
+      nil,
       :policies,
       :next_marker,
       keyword_init: true
@@ -10394,6 +10877,7 @@ module Aws::IoT
     #   <p>The principal.</p>
     #   @return [String]
     class ListPrincipalThingsRequest < Struct.new(
+      nil,
       :next_token,
       :max_results,
       :principal,
@@ -10410,6 +10894,7 @@ module Aws::IoT
     #   <p>The token to use to get the next set of results, or <b>null</b> if there are no additional results.</p>
     #   @return [String]
     class ListPrincipalThingsResponse < Struct.new(
+      nil,
       :things,
       :next_token,
       keyword_init: true
@@ -10449,6 +10934,7 @@ module Aws::IoT
     #            </ul>
     #   @return [String]
     class ListPrincipalThingsV2Request < Struct.new(
+      nil,
       :next_token,
       :max_results,
       :principal,
@@ -10465,6 +10951,7 @@ module Aws::IoT
     #   <p>The token to use to get the next set of results, or <b>null</b> if there are no additional results.</p>
     #   @return [String]
     class ListPrincipalThingsV2Response < Struct.new(
+      nil,
       :principal_thing_objects,
       :next_token,
       keyword_init: true
@@ -10482,6 +10969,7 @@ module Aws::IoT
     #   <p>A token to retrieve the next set of results.</p>
     #   @return [String]
     class ListProvisioningTemplateVersionsRequest < Struct.new(
+      nil,
       :template_name,
       :max_results,
       :next_token,
@@ -10497,6 +10985,7 @@ module Aws::IoT
     #   <p>A token to retrieve the next set of results.</p>
     #   @return [String]
     class ListProvisioningTemplateVersionsResponse < Struct.new(
+      nil,
       :versions,
       :next_token,
       keyword_init: true
@@ -10511,6 +11000,7 @@ module Aws::IoT
     #   <p>A token to retrieve the next set of results.</p>
     #   @return [String]
     class ListProvisioningTemplatesRequest < Struct.new(
+      nil,
       :max_results,
       :next_token,
       keyword_init: true
@@ -10525,6 +11015,7 @@ module Aws::IoT
     #   <p>A token to retrieve the next set of results.</p>
     #   @return [String]
     class ListProvisioningTemplatesResponse < Struct.new(
+      nil,
       :templates,
       :next_token,
       keyword_init: true
@@ -10543,6 +11034,7 @@ module Aws::IoT
     #   <p>The maximum number of results to return at one time.</p>
     #   @return [Integer]
     class ListRelatedResourcesForAuditFindingRequest < Struct.new(
+      nil,
       :finding_id,
       :next_token,
       :max_results,
@@ -10559,6 +11051,7 @@ module Aws::IoT
     #         or <code>null</code> for the first API call.</p>
     #   @return [String]
     class ListRelatedResourcesForAuditFindingResponse < Struct.new(
+      nil,
       :related_resources,
       :next_token,
       keyword_init: true
@@ -10576,6 +11069,7 @@ module Aws::IoT
     #   <p>Return the list of role aliases in ascending alphabetical order.</p>
     #   @return [Boolean]
     class ListRoleAliasesRequest < Struct.new(
+      nil,
       :page_size,
       :marker,
       :ascending_order,
@@ -10591,6 +11085,7 @@ module Aws::IoT
     #   <p>A marker used to get the next set of results.</p>
     #   @return [String]
     class ListRoleAliasesResponse < Struct.new(
+      nil,
       :role_aliases,
       :next_marker,
       keyword_init: true
@@ -10614,6 +11109,7 @@ module Aws::IoT
     #   <p>A token that can be used to retrieve the next set of results, or null if there are no additional results.</p>
     #   @return [String]
     class ListSbomValidationResultsRequest < Struct.new(
+      nil,
       :package_name,
       :version_name,
       :validation_result,
@@ -10631,6 +11127,7 @@ module Aws::IoT
     #   <p>A token that can be used to retrieve the next set of results, or null if there are no additional results.</p>
     #   @return [String]
     class ListSbomValidationResultsResponse < Struct.new(
+      nil,
       :validation_result_summaries,
       :next_token,
       keyword_init: true
@@ -10645,6 +11142,7 @@ module Aws::IoT
     #   <p>The maximum number of results to return at one time. The default is 25.</p>
     #   @return [Integer]
     class ListScheduledAuditsRequest < Struct.new(
+      nil,
       :next_token,
       :max_results,
       keyword_init: true
@@ -10660,6 +11158,7 @@ module Aws::IoT
     #               or <code>null</code> if there are no additional results.</p>
     #   @return [String]
     class ListScheduledAuditsResponse < Struct.new(
+      nil,
       :scheduled_audits,
       :next_token,
       keyword_init: true
@@ -10680,6 +11179,7 @@ module Aws::IoT
     #   <p>The ARN of the target (thing group) whose attached security profiles you want to get.</p>
     #   @return [String]
     class ListSecurityProfilesForTargetRequest < Struct.new(
+      nil,
       :next_token,
       :max_results,
       :recursive,
@@ -10697,6 +11197,7 @@ module Aws::IoT
     #           additional results.</p>
     #   @return [String]
     class ListSecurityProfilesForTargetResponse < Struct.new(
+      nil,
       :security_profile_target_mappings,
       :next_token,
       keyword_init: true
@@ -10720,6 +11221,7 @@ module Aws::IoT
     #         Cannot be used with <code>dimensionName</code>. </p>
     #   @return [String]
     class ListSecurityProfilesRequest < Struct.new(
+      nil,
       :next_token,
       :max_results,
       :dimension_name,
@@ -10737,6 +11239,7 @@ module Aws::IoT
     #           additional results.</p>
     #   @return [String]
     class ListSecurityProfilesResponse < Struct.new(
+      nil,
       :security_profile_identifiers,
       :next_token,
       keyword_init: true
@@ -10754,6 +11257,7 @@ module Aws::IoT
     #   <p>Set to true to return the list of streams in ascending order.</p>
     #   @return [Boolean]
     class ListStreamsRequest < Struct.new(
+      nil,
       :max_results,
       :next_token,
       :ascending_order,
@@ -10769,6 +11273,7 @@ module Aws::IoT
     #   <p>A token used to get the next set of results.</p>
     #   @return [String]
     class ListStreamsResponse < Struct.new(
+      nil,
       :streams,
       :next_token,
       keyword_init: true
@@ -10785,6 +11290,7 @@ module Aws::IoT
     #   			the first set of results.</p>
     #   @return [String]
     class ListTagsForResourceRequest < Struct.new(
+      nil,
       :resource_arn,
       :next_token,
       keyword_init: true
@@ -10799,6 +11305,7 @@ module Aws::IoT
     #   <p>The token to use to get the next set of results, or <b>null</b> if there are no additional results.</p>
     #   @return [String]
     class ListTagsForResourceResponse < Struct.new(
+      nil,
       :tags,
       :next_token,
       keyword_init: true
@@ -10816,6 +11323,7 @@ module Aws::IoT
     #   <p>The maximum number of results to return at one time.</p>
     #   @return [Integer]
     class ListTargetsForPolicyRequest < Struct.new(
+      nil,
       :policy_name,
       :marker,
       :page_size,
@@ -10831,6 +11339,7 @@ module Aws::IoT
     #   <p>A marker used to get the next set of results.</p>
     #   @return [String]
     class ListTargetsForPolicyResponse < Struct.new(
+      nil,
       :targets,
       :next_marker,
       keyword_init: true
@@ -10848,6 +11357,7 @@ module Aws::IoT
     #   <p>The maximum number of results to return at one time.</p>
     #   @return [Integer]
     class ListTargetsForSecurityProfileRequest < Struct.new(
+      nil,
       :security_profile_name,
       :next_token,
       :max_results,
@@ -10864,6 +11374,7 @@ module Aws::IoT
     #           additional results.</p>
     #   @return [String]
     class ListTargetsForSecurityProfileResponse < Struct.new(
+      nil,
       :security_profile_targets,
       :next_token,
       keyword_init: true
@@ -10883,6 +11394,7 @@ module Aws::IoT
     #   <p>The maximum number of results to return at one time.</p>
     #   @return [Integer]
     class ListThingGroupsForThingRequest < Struct.new(
+      nil,
       :thing_name,
       :next_token,
       :max_results,
@@ -10898,6 +11410,7 @@ module Aws::IoT
     #   <p>The token to use to get the next set of results, or <b>null</b> if there are no additional results.</p>
     #   @return [String]
     class ListThingGroupsForThingResponse < Struct.new(
+      nil,
       :thing_groups,
       :next_token,
       keyword_init: true
@@ -10923,6 +11436,7 @@ module Aws::IoT
     #   <p>If true, return child groups as well.</p>
     #   @return [Boolean]
     class ListThingGroupsRequest < Struct.new(
+      nil,
       :next_token,
       :max_results,
       :parent_group,
@@ -10940,6 +11454,7 @@ module Aws::IoT
     #   <p>The token to use to get the next set of results. Will not be returned if operation has returned all results.</p>
     #   @return [String]
     class ListThingGroupsResponse < Struct.new(
+      nil,
       :thing_groups,
       :next_token,
       keyword_init: true
@@ -10960,6 +11475,7 @@ module Aws::IoT
     #   <p>The name of the thing.</p>
     #   @return [String]
     class ListThingPrincipalsRequest < Struct.new(
+      nil,
       :next_token,
       :max_results,
       :thing_name,
@@ -10976,6 +11492,7 @@ module Aws::IoT
     #   <p>The token to use to get the next set of results, or <b>null</b> if there are no additional results.</p>
     #   @return [String]
     class ListThingPrincipalsResponse < Struct.new(
+      nil,
       :principals,
       :next_token,
       keyword_init: true
@@ -11015,6 +11532,7 @@ module Aws::IoT
     #            </ul>
     #   @return [String]
     class ListThingPrincipalsV2Request < Struct.new(
+      nil,
       :next_token,
       :max_results,
       :thing_name,
@@ -11032,6 +11550,7 @@ module Aws::IoT
     #   <p>The token to use to get the next set of results, or <b>null</b> if there are no additional results.</p>
     #   @return [String]
     class ListThingPrincipalsV2Response < Struct.new(
+      nil,
       :thing_principal_objects,
       :next_token,
       keyword_init: true
@@ -11054,6 +11573,7 @@ module Aws::IoT
     #   <p>The maximum number of results to return per request.</p>
     #   @return [Integer]
     class ListThingRegistrationTaskReportsRequest < Struct.new(
+      nil,
       :task_id,
       :report_type,
       :next_token,
@@ -11073,6 +11593,7 @@ module Aws::IoT
     #   <p>The token to use to get the next set of results, or <b>null</b> if there are no additional results.</p>
     #   @return [String]
     class ListThingRegistrationTaskReportsResponse < Struct.new(
+      nil,
       :resource_links,
       :report_type,
       :next_token,
@@ -11093,6 +11614,7 @@ module Aws::IoT
     #   <p>The status of the bulk thing provisioning task.</p>
     #   @return [String]
     class ListThingRegistrationTasksRequest < Struct.new(
+      nil,
       :next_token,
       :max_results,
       :status,
@@ -11108,6 +11630,7 @@ module Aws::IoT
     #   <p>The token to use to get the next set of results, or <b>null</b> if there are no additional results.</p>
     #   @return [String]
     class ListThingRegistrationTasksResponse < Struct.new(
+      nil,
       :task_ids,
       :next_token,
       keyword_init: true
@@ -11128,6 +11651,7 @@ module Aws::IoT
     #   <p>The name of the thing type.</p>
     #   @return [String]
     class ListThingTypesRequest < Struct.new(
+      nil,
       :next_token,
       :max_results,
       :thing_type_name,
@@ -11144,6 +11668,7 @@ module Aws::IoT
     #   <p>The token for the next set of results. Will not be returned if operation has returned all results.</p>
     #   @return [String]
     class ListThingTypesResponse < Struct.new(
+      nil,
       :thing_types,
       :next_token,
       keyword_init: true
@@ -11163,6 +11688,7 @@ module Aws::IoT
     #   <p>The maximum number of results to return per request.</p>
     #   @return [Integer]
     class ListThingsInBillingGroupRequest < Struct.new(
+      nil,
       :billing_group_name,
       :next_token,
       :max_results,
@@ -11178,6 +11704,7 @@ module Aws::IoT
     #   <p>The token to use to get the next set of results. Will not be returned if operation has returned all results.</p>
     #   @return [String]
     class ListThingsInBillingGroupResponse < Struct.new(
+      nil,
       :things,
       :next_token,
       keyword_init: true
@@ -11201,6 +11728,7 @@ module Aws::IoT
     #   <p>The maximum number of results to return at one time.</p>
     #   @return [Integer]
     class ListThingsInThingGroupRequest < Struct.new(
+      nil,
       :thing_group_name,
       :recursive,
       :next_token,
@@ -11217,6 +11745,7 @@ module Aws::IoT
     #   <p>The token to use to get the next set of results, or <b>null</b> if there are no additional results.</p>
     #   @return [String]
     class ListThingsInThingGroupResponse < Struct.new(
+      nil,
       :things,
       :next_token,
       keyword_init: true
@@ -11250,6 +11779,7 @@ module Aws::IoT
     #   			provided. </p>
     #   @return [Boolean]
     class ListThingsRequest < Struct.new(
+      nil,
       :next_token,
       :max_results,
       :attribute_name,
@@ -11269,6 +11799,7 @@ module Aws::IoT
     #   <p>The token to use to get the next set of results. Will not be returned if operation has returned all results.</p>
     #   @return [String]
     class ListThingsResponse < Struct.new(
+      nil,
       :things,
       :next_token,
       keyword_init: true
@@ -11285,6 +11816,7 @@ module Aws::IoT
     #            the first set of results.</p>
     #   @return [String]
     class ListTopicRuleDestinationsRequest < Struct.new(
+      nil,
       :max_results,
       :next_token,
       keyword_init: true
@@ -11299,6 +11831,7 @@ module Aws::IoT
     #   <p>The token to use to get the next set of results, or <b>null</b> if there are no additional results.</p>
     #   @return [String]
     class ListTopicRuleDestinationsResponse < Struct.new(
+      nil,
       :destination_summaries,
       :next_token,
       keyword_init: true
@@ -11322,6 +11855,7 @@ module Aws::IoT
     #   <p>Specifies whether the rule is disabled.</p>
     #   @return [Boolean]
     class ListTopicRulesRequest < Struct.new(
+      nil,
       :topic,
       :max_results,
       :next_token,
@@ -11339,6 +11873,7 @@ module Aws::IoT
     #   <p>The token to use to get the next set of results, or <b>null</b> if there are no additional results.</p>
     #   @return [String]
     class ListTopicRulesResponse < Struct.new(
+      nil,
       :rules,
       :next_token,
       keyword_init: true
@@ -11359,6 +11894,7 @@ module Aws::IoT
     #   <p>The maximum number of results to return at one time.</p>
     #   @return [Integer]
     class ListV2LoggingLevelsRequest < Struct.new(
+      nil,
       :target_type,
       :next_token,
       :max_results,
@@ -11374,6 +11910,7 @@ module Aws::IoT
     #   <p>The token to use to get the next set of results, or <b>null</b> if there are no additional results.</p>
     #   @return [String]
     class ListV2LoggingLevelsResponse < Struct.new(
+      nil,
       :log_target_configurations,
       :next_token,
       keyword_init: true
@@ -11413,6 +11950,7 @@ module Aws::IoT
     #   <p>The maximum number of results to return at one time.</p>
     #   @return [Integer]
     class ListViolationEventsRequest < Struct.new(
+      nil,
       :start_time,
       :end_time,
       :thing_name,
@@ -11436,6 +11974,7 @@ module Aws::IoT
     #           additional results.</p>
     #   @return [String]
     class ListViolationEventsResponse < Struct.new(
+      nil,
       :violation_events,
       :next_token,
       keyword_init: true
@@ -11467,6 +12006,7 @@ module Aws::IoT
     #            longitude of the device's location.</p>
     #   @return [String]
     class LocationAction < Struct.new(
+      nil,
       :role_arn,
       :tracker_name,
       :device_id,
@@ -11491,6 +12031,7 @@ module Aws::IoT
     #            <code>MILLISECONDS</code>.</p>
     #   @return [String]
     class LocationTimestamp < Struct.new(
+      nil,
       :value,
       :unit,
       keyword_init: true
@@ -11506,6 +12047,7 @@ module Aws::IoT
     #   <p>The target name.</p>
     #   @return [String]
     class LogTarget < Struct.new(
+      nil,
       :target_type,
       :target_name,
       keyword_init: true
@@ -11521,6 +12063,7 @@ module Aws::IoT
     #   <p>The logging level.</p>
     #   @return [String]
     class LogTargetConfiguration < Struct.new(
+      nil,
       :log_target,
       :log_level,
       keyword_init: true
@@ -11536,6 +12079,7 @@ module Aws::IoT
     #   <p>The log level.</p>
     #   @return [String]
     class LoggingOptionsPayload < Struct.new(
+      nil,
       :role_arn,
       :log_level,
       keyword_init: true
@@ -11552,6 +12096,7 @@ module Aws::IoT
     #           </p>
     #   @return [String]
     class MachineLearningDetectionConfig < Struct.new(
+      nil,
       :confidence_level,
       keyword_init: true
     )
@@ -11568,6 +12113,7 @@ module Aws::IoT
     #   <p>Displays the duration of the next maintenance window.</p>
     #   @return [Integer]
     class MaintenanceWindow < Struct.new(
+      nil,
       :start_time,
       :duration_in_minutes,
       keyword_init: true
@@ -11580,6 +12126,7 @@ module Aws::IoT
     #   <p>The message for the exception.</p>
     #   @return [String]
     class MalformedPolicyException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -11603,6 +12150,7 @@ module Aws::IoT
     #   <p>The version for a managed template.</p>
     #   @return [String]
     class ManagedJobTemplateSummary < Struct.new(
+      nil,
       :template_arn,
       :template_name,
       :description,
@@ -11621,6 +12169,7 @@ module Aws::IoT
     #   <p>The value reported for the metric.</p>
     #   @return [Types::MetricValue]
     class MetricDatum < Struct.new(
+      nil,
       :timestamp,
       :value,
       keyword_init: true
@@ -11636,6 +12185,7 @@ module Aws::IoT
     #   <p>Defines how the <code>dimensionValues</code> of a dimension are interpreted. For example, for dimension type TOPIC_FILTER, the <code>IN</code> operator, a message will be counted only if its topic matches one of the topic filters. With <code>NOT_IN</code> operator, a message will be counted only if it doesn't match any of the topic filters. The operator is optional: if it's not provided (is <code>null</code>), it will be interpreted as <code>IN</code>.</p>
     #   @return [String]
     class MetricDimension < Struct.new(
+      nil,
       :dimension_name,
       :operator,
       keyword_init: true
@@ -11654,6 +12204,7 @@ module Aws::IoT
     #   <p>The value indicates exporting metrics related to the <code>MetricToRetain </code> when it's true.</p>
     #   @return [Boolean]
     class MetricToRetain < Struct.new(
+      nil,
       :metric,
       :metric_dimension,
       :export_metric,
@@ -11691,6 +12242,7 @@ module Aws::IoT
     #           </p>
     #   @return [Array<String>]
     class MetricValue < Struct.new(
+      nil,
       :count,
       :cidrs,
       :ports,
@@ -11712,6 +12264,7 @@ module Aws::IoT
     #         can assume the role and publish messages on your behalf.</p>
     #   @return [String]
     class MetricsExportConfig < Struct.new(
+      nil,
       :mqtt_topic,
       :role_arn,
       keyword_init: true
@@ -11733,6 +12286,7 @@ module Aws::IoT
     #   <p>The set of parameters for this mitigation action. The parameters vary, depending on the kind of action you apply.</p>
     #   @return [Types::MitigationActionParams]
     class MitigationAction < Struct.new(
+      nil,
       :name,
       :id,
       :role_arn,
@@ -11753,6 +12307,7 @@ module Aws::IoT
     #   <p>The date when this mitigation action was created.</p>
     #   @return [Time]
     class MitigationActionIdentifier < Struct.new(
+      nil,
       :action_name,
       :action_arn,
       :creation_date,
@@ -11781,6 +12336,7 @@ module Aws::IoT
     #   <p>Parameters to define a mitigation action that publishes findings to Amazon Simple Notification Service (Amazon SNS. You can implement your own custom actions in response to the Amazon SNS messages.</p>
     #   @return [Types::PublishFindingToSnsParams]
     class MitigationActionParams < Struct.new(
+      nil,
       :update_device_certificate_params,
       :update_ca_certificate_params,
       :add_things_to_thing_group_params,
@@ -11797,6 +12353,7 @@ module Aws::IoT
     #   <p>An object that represents the propagating thing attributes and the connection attributes.</p>
     #   @return [Array<Types::PropagatingAttribute>]
     class Mqtt5Configuration < Struct.new(
+      nil,
       :propagating_attributes,
       keyword_init: true
     )
@@ -11814,6 +12371,7 @@ module Aws::IoT
     #   <p>The value of the <code>clientId</code> key in an MQTT authorization request.</p>
     #   @return [String]
     class MqttContext < Struct.new(
+      nil,
       :username,
       :password,
       :client_id,
@@ -11875,6 +12433,7 @@ module Aws::IoT
     #   <p>An array of key-value pairs that you define in the MQTT5 header.</p>
     #   @return [Array<Types::UserProperty>]
     class MqttHeaders < Struct.new(
+      nil,
       :payload_format_indicator,
       :content_type,
       :response_topic,
@@ -11897,6 +12456,7 @@ module Aws::IoT
     #   <p>Other information about the noncompliant resource.</p>
     #   @return [Hash<String, String>]
     class NonCompliantResource < Struct.new(
+      nil,
       :resource_type,
       :resource_identifier,
       :additional_info,
@@ -11910,6 +12470,7 @@ module Aws::IoT
     #   <p>The message for the exception.</p>
     #   @return [String]
     class NotConfiguredException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -11937,6 +12498,7 @@ module Aws::IoT
     #   <p>A list of name-attribute pairs. They won't be sent to devices as a part of the Job document.</p>
     #   @return [Hash<String, String>]
     class OTAUpdateFile < Struct.new(
+      nil,
       :file_name,
       :file_type,
       :file_version,
@@ -12004,6 +12566,7 @@ module Aws::IoT
     #   <p>A collection of name/value pairs</p>
     #   @return [Hash<String, String>]
     class OTAUpdateInfo < Struct.new(
+      nil,
       :ota_update_id,
       :ota_update_arn,
       :creation_date,
@@ -12036,6 +12599,7 @@ module Aws::IoT
     #   <p>The date when the OTA update was created.</p>
     #   @return [Time]
     class OTAUpdateSummary < Struct.new(
+      nil,
       :ota_update_id,
       :ota_update_arn,
       :creation_date,
@@ -12062,6 +12626,7 @@ module Aws::IoT
     #   <p>The unique identifier for the document you are storing.</p>
     #   @return [String]
     class OpenSearchAction < Struct.new(
+      nil,
       :role_arn,
       :endpoint,
       :index,
@@ -12092,6 +12657,7 @@ module Aws::IoT
     #   <p>The certificate creation date.</p>
     #   @return [Time]
     class OutgoingCertificate < Struct.new(
+      nil,
       :certificate_arn,
       :certificate_id,
       :transferred_to,
@@ -12117,6 +12683,7 @@ module Aws::IoT
     #   <p>The date that the package was last updated.</p>
     #   @return [Time]
     class PackageSummary < Struct.new(
+      nil,
       :package_name,
       :default_version_name,
       :creation_date,
@@ -12131,6 +12698,7 @@ module Aws::IoT
     #   <p>The S3 location.</p>
     #   @return [Types::S3Location]
     class PackageVersionArtifact < Struct.new(
+      nil,
       :s3_location,
       keyword_init: true
     )
@@ -12154,6 +12722,7 @@ module Aws::IoT
     #   <p>The date that the package version was last updated.</p>
     #   @return [Time]
     class PackageVersionSummary < Struct.new(
+      nil,
       :package_name,
       :version_name,
       :status,
@@ -12172,6 +12741,7 @@ module Aws::IoT
     #   <p>The value of the percentile.</p>
     #   @return [Float]
     class PercentPair < Struct.new(
+      nil,
       :percent,
       :value,
       keyword_init: true
@@ -12193,6 +12763,7 @@ module Aws::IoT
     #   <p>The policy ARN.</p>
     #   @return [String]
     class Policy < Struct.new(
+      nil,
       :policy_name,
       :policy_arn,
       keyword_init: true
@@ -12211,6 +12782,7 @@ module Aws::IoT
     #   <p>The date and time the policy was created.</p>
     #   @return [Time]
     class PolicyVersion < Struct.new(
+      nil,
       :version_id,
       :is_default_version,
       :create_date,
@@ -12232,6 +12804,7 @@ module Aws::IoT
     #   <p>The ID of the version of the policy associated with the resource.</p>
     #   @return [String]
     class PolicyVersionIdentifier < Struct.new(
+      nil,
       :policy_name,
       :policy_version_id,
       keyword_init: true
@@ -12255,6 +12828,7 @@ module Aws::IoT
     #               request for the job document.</p>
     #   @return [Integer]
     class PresignedUrlConfig < Struct.new(
+      nil,
       :role_arn,
       :expires_in_sec,
       keyword_init: true
@@ -12285,6 +12859,7 @@ module Aws::IoT
     #            </ul>
     #   @return [String]
     class PrincipalThingObject < Struct.new(
+      nil,
       :thing_name,
       :thing_principal_type,
       keyword_init: true
@@ -12303,6 +12878,7 @@ module Aws::IoT
     #   <p>The attribute associated with the connection between a device and Amazon Web Services IoT Core.</p>
     #   @return [String]
     class PropagatingAttribute < Struct.new(
+      nil,
       :user_property_key,
       :thing_attribute,
       :connection_attribute,
@@ -12324,6 +12900,7 @@ module Aws::IoT
     #               <i>Note:</i> Only Lambda functions are currently supported.</p>
     #   @return [String]
     class ProvisioningHook < Struct.new(
+      nil,
       :payload_version,
       :target_arn,
       keyword_init: true
@@ -12357,6 +12934,7 @@ module Aws::IoT
     #         </p>
     #   @return [String]
     class ProvisioningTemplateSummary < Struct.new(
+      nil,
       :template_arn,
       :template_name,
       :description,
@@ -12381,6 +12959,7 @@ module Aws::IoT
     #            false.</p>
     #   @return [Boolean]
     class ProvisioningTemplateVersionSummary < Struct.new(
+      nil,
       :version_id,
       :creation_date,
       :is_default_version,
@@ -12399,6 +12978,7 @@ module Aws::IoT
     #   <p>The ARN of the topic to which you want to publish the findings.</p>
     #   @return [String]
     class PublishFindingToSnsParams < Struct.new(
+      nil,
       :topic_arn,
       keyword_init: true
     )
@@ -12431,6 +13011,7 @@ module Aws::IoT
     #         information.</p>
     #   @return [Array<Types::AssetPropertyValue>]
     class PutAssetPropertyValueEntry < Struct.new(
+      nil,
       :entry_id,
       :asset_id,
       :property_id,
@@ -12447,6 +13028,7 @@ module Aws::IoT
     #   <p>The table where the message data will be written.</p>
     #   @return [String]
     class PutItemInput < Struct.new(
+      nil,
       :table_name,
       keyword_init: true
     )
@@ -12463,6 +13045,7 @@ module Aws::IoT
     #   <p>The description of the verification state of the violation (detect alarm).</p>
     #   @return [String]
     class PutVerificationStateOnViolationRequest < Struct.new(
+      nil,
       :violation_id,
       :verification_state,
       :verification_state_description,
@@ -12472,6 +13055,7 @@ module Aws::IoT
     end
 
     class PutVerificationStateOnViolationResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -12488,6 +13072,7 @@ module Aws::IoT
     #               rate of rollout.</p>
     #   @return [Integer]
     class RateIncreaseCriteria < Struct.new(
+      nil,
       :number_of_notified_things,
       :number_of_succeeded_things,
       keyword_init: true
@@ -12539,6 +13124,7 @@ module Aws::IoT
     #         </p>
     #   @return [String]
     class RegisterCACertificateRequest < Struct.new(
+      nil,
       :ca_certificate,
       :verification_certificate,
       :set_as_active,
@@ -12559,6 +13145,7 @@ module Aws::IoT
     #   <p>The CA certificate identifier.</p>
     #   @return [String]
     class RegisterCACertificateResponse < Struct.new(
+      nil,
       :certificate_arn,
       :certificate_id,
       keyword_init: true
@@ -12584,6 +13171,7 @@ module Aws::IoT
     #            <code>ACTIVE</code>, <code>INACTIVE</code>, and <code>REVOKED</code>.</p>
     #   @return [String]
     class RegisterCertificateRequest < Struct.new(
+      nil,
       :certificate_pem,
       :ca_certificate_pem,
       :set_as_active,
@@ -12601,6 +13189,7 @@ module Aws::IoT
     #   <p>The certificate identifier.</p>
     #   @return [String]
     class RegisterCertificateResponse < Struct.new(
+      nil,
       :certificate_arn,
       :certificate_id,
       keyword_init: true
@@ -12615,6 +13204,7 @@ module Aws::IoT
     #   <p>The status of the register certificate request.</p>
     #   @return [String]
     class RegisterCertificateWithoutCARequest < Struct.new(
+      nil,
       :certificate_pem,
       :status,
       keyword_init: true
@@ -12630,6 +13220,7 @@ module Aws::IoT
     #            certificate ID.</p>
     #   @return [String]
     class RegisterCertificateWithoutCAResponse < Struct.new(
+      nil,
       :certificate_arn,
       :certificate_id,
       keyword_init: true
@@ -12644,6 +13235,7 @@ module Aws::IoT
     #   <p>The parameters for provisioning a thing. See <a href="https://docs.aws.amazon.com/iot/latest/developerguide/provision-template.html">Provisioning Templates</a> for more information.</p>
     #   @return [Hash<String, String>]
     class RegisterThingRequest < Struct.new(
+      nil,
       :template_body,
       :parameters,
       keyword_init: true
@@ -12658,6 +13250,7 @@ module Aws::IoT
     #   <p>ARNs for the generated resources.</p>
     #   @return [Hash<String, String>]
     class RegisterThingResponse < Struct.new(
+      nil,
       :certificate_pem,
       :resource_arns,
       keyword_init: true
@@ -12670,6 +13263,7 @@ module Aws::IoT
     #   <p>Additional information about the exception.</p>
     #   @return [String]
     class RegistrationCodeValidationException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -12687,6 +13281,7 @@ module Aws::IoT
     #   <p>The name of the provisioning template.</p>
     #   @return [String]
     class RegistrationConfig < Struct.new(
+      nil,
       :template_body,
       :role_arn,
       :template_name,
@@ -12704,6 +13299,7 @@ module Aws::IoT
     #   <p>The reason the certificate transfer was rejected.</p>
     #   @return [String]
     class RejectCertificateTransferRequest < Struct.new(
+      nil,
       :certificate_id,
       :reject_reason,
       keyword_init: true
@@ -12722,6 +13318,7 @@ module Aws::IoT
     #   <p>Other information about the resource.</p>
     #   @return [Hash<String, String>]
     class RelatedResource < Struct.new(
+      nil,
       :resource_type,
       :resource_identifier,
       :additional_info,
@@ -12743,6 +13340,7 @@ module Aws::IoT
     #   <p>The ARN of the thing to be removed from the billing group.</p>
     #   @return [String]
     class RemoveThingFromBillingGroupRequest < Struct.new(
+      nil,
       :billing_group_name,
       :billing_group_arn,
       :thing_name,
@@ -12753,6 +13351,7 @@ module Aws::IoT
     end
 
     class RemoveThingFromBillingGroupResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -12771,6 +13370,7 @@ module Aws::IoT
     #   <p>The ARN of the thing to remove from the group.</p>
     #   @return [String]
     class RemoveThingFromThingGroupRequest < Struct.new(
+      nil,
       :thing_group_name,
       :thing_group_arn,
       :thing_name,
@@ -12781,6 +13381,7 @@ module Aws::IoT
     end
 
     class RemoveThingFromThingGroupResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -12791,6 +13392,7 @@ module Aws::IoT
     #   <p>The name of the template to be applied. The only supported value is <code>BLANK_POLICY</code>.</p>
     #   @return [String]
     class ReplaceDefaultPolicyVersionParams < Struct.new(
+      nil,
       :template_name,
       keyword_init: true
     )
@@ -12805,6 +13407,7 @@ module Aws::IoT
     #   <p>The rule payload.</p>
     #   @return [Types::TopicRulePayload]
     class ReplaceTopicRuleRequest < Struct.new(
+      nil,
       :rule_name,
       :topic_rule_payload,
       keyword_init: true
@@ -12828,6 +13431,7 @@ module Aws::IoT
     #            MQTT</a> from the Amazon Web Services IoT Core Developer Guide.</p>
     #   @return [Types::MqttHeaders]
     class RepublishAction < Struct.new(
+      nil,
       :role_arn,
       :topic,
       :qos,
@@ -12848,6 +13452,7 @@ module Aws::IoT
     #   <p>The ARN of the resource that caused the exception.</p>
     #   @return [String]
     class ResourceAlreadyExistsException < Struct.new(
+      nil,
       :message,
       :resource_id,
       :resource_arn,
@@ -12888,6 +13493,7 @@ module Aws::IoT
     #   <p>The ARN of the identified device certificate.</p>
     #   @return [String]
     class ResourceIdentifier < Struct.new(
+      nil,
       :device_certificate_id,
       :ca_certificate_id,
       :cognito_identity_pool_id,
@@ -12908,6 +13514,7 @@ module Aws::IoT
     #   <p>The message for the exception.</p>
     #   @return [String]
     class ResourceNotFoundException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -12919,6 +13526,7 @@ module Aws::IoT
     #   <p>The message for the exception.</p>
     #   @return [String]
     class ResourceRegistrationFailureException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -12934,6 +13542,7 @@ module Aws::IoT
     #   <p>The number of retries allowed for a failure type for the job.</p>
     #   @return [Integer]
     class RetryCriteria < Struct.new(
+      nil,
       :failure_type,
       :number_of_retries,
       keyword_init: true
@@ -12964,6 +13573,7 @@ module Aws::IoT
     #   <p>The UNIX timestamp of when the role alias was last modified.</p>
     #   @return [Time]
     class RoleAliasDescription < Struct.new(
+      nil,
       :role_alias,
       :role_alias_arn,
       :role_arn,
@@ -12991,6 +13601,7 @@ module Aws::IoT
     #            key. For more information, see <a href="https://docs.aws.amazon.com/AmazonS3/latest/dev/acl-overview.html#canned-acl">S3 canned ACLs</a>.</p>
     #   @return [String]
     class S3Action < Struct.new(
+      nil,
       :role_arn,
       :bucket_name,
       :key,
@@ -13008,6 +13619,7 @@ module Aws::IoT
     #   <p>The S3 prefix.</p>
     #   @return [String]
     class S3Destination < Struct.new(
+      nil,
       :bucket,
       :prefix,
       keyword_init: true
@@ -13026,6 +13638,7 @@ module Aws::IoT
     #   <p>The S3 bucket version.</p>
     #   @return [String]
     class S3Location < Struct.new(
+      nil,
       :bucket,
       :key,
       :version,
@@ -13046,6 +13659,7 @@ module Aws::IoT
     #            the Salesforce IoT Cloud platform after creation of the Input Stream.</p>
     #   @return [String]
     class SalesforceAction < Struct.new(
+      nil,
       :token,
       :url,
       keyword_init: true
@@ -13059,6 +13673,7 @@ module Aws::IoT
     #   <p>The S3 location.</p>
     #   @return [Types::S3Location]
     class Sbom < Struct.new(
+      nil,
       :s3_location,
       keyword_init: true
     )
@@ -13081,6 +13696,7 @@ module Aws::IoT
     #            validation failed.</p>
     #   @return [String]
     class SbomValidationResultSummary < Struct.new(
+      nil,
       :file_name,
       :validation_result,
       :error_code,
@@ -13111,6 +13727,7 @@ module Aws::IoT
     #             <code>frequency</code> is "WEEKLY" or "BIWEEKLY").</p>
     #   @return [String]
     class ScheduledAuditMetadata < Struct.new(
+      nil,
       :scheduled_audit_name,
       :scheduled_audit_arn,
       :frequency,
@@ -13126,6 +13743,7 @@ module Aws::IoT
     #   <p>Displays the start times of the next seven maintenance window occurrences.</p>
     #   @return [String]
     class ScheduledJobRollout < Struct.new(
+      nil,
       :start_time,
       keyword_init: true
     )
@@ -13166,6 +13784,7 @@ module Aws::IoT
     #               rollout of a job document to all devices in a target group for a job.</p>
     #   @return [Array<Types::MaintenanceWindow>]
     class SchedulingConfig < Struct.new(
+      nil,
       :start_time,
       :end_time,
       :end_behavior,
@@ -13198,6 +13817,7 @@ module Aws::IoT
     #   <p>The query version.</p>
     #   @return [String]
     class SearchIndexRequest < Struct.new(
+      nil,
       :index_name,
       :query_string,
       :next_token,
@@ -13219,6 +13839,7 @@ module Aws::IoT
     #   <p>The thing groups that match the search query.</p>
     #   @return [Array<Types::ThingGroupDocument>]
     class SearchIndexResponse < Struct.new(
+      nil,
       :next_token,
       :things,
       :thing_groups,
@@ -13235,6 +13856,7 @@ module Aws::IoT
     #   <p>The ARN of the security profile.</p>
     #   @return [String]
     class SecurityProfileIdentifier < Struct.new(
+      nil,
       :name,
       :arn,
       keyword_init: true
@@ -13248,6 +13870,7 @@ module Aws::IoT
     #   <p>The ARN of the security profile.</p>
     #   @return [String]
     class SecurityProfileTarget < Struct.new(
+      nil,
       :arn,
       keyword_init: true
     )
@@ -13262,6 +13885,7 @@ module Aws::IoT
     #   <p>Information about the target (thing group) associated with the security profile.</p>
     #   @return [Types::SecurityProfileTarget]
     class SecurityProfileTargetMapping < Struct.new(
+      nil,
       :security_profile_identifier,
       :target,
       keyword_init: true
@@ -13295,6 +13919,7 @@ module Aws::IoT
     #            domain configuration.</p>
     #   @return [String]
     class ServerCertificateConfig < Struct.new(
+      nil,
       :enable_ocsp_check,
       :ocsp_lambda_arn,
       :ocsp_authorized_responder_arn,
@@ -13314,6 +13939,7 @@ module Aws::IoT
     #   <p>Details that explain the status of the server certificate.</p>
     #   @return [String]
     class ServerCertificateSummary < Struct.new(
+      nil,
       :server_certificate_arn,
       :server_certificate_status,
       :server_certificate_status_detail,
@@ -13326,6 +13952,7 @@ module Aws::IoT
     # @!attribute message
     #   @return [String]
     class ServiceQuotaExceededException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -13337,6 +13964,7 @@ module Aws::IoT
     #   <p>The message for the exception.</p>
     #   @return [String]
     class ServiceUnavailableException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -13347,6 +13975,7 @@ module Aws::IoT
     #   <p>The authorizer name.</p>
     #   @return [String]
     class SetDefaultAuthorizerRequest < Struct.new(
+      nil,
       :authorizer_name,
       keyword_init: true
     )
@@ -13360,6 +13989,7 @@ module Aws::IoT
     #   <p>The authorizer ARN.</p>
     #   @return [String]
     class SetDefaultAuthorizerResponse < Struct.new(
+      nil,
       :authorizer_name,
       :authorizer_arn,
       keyword_init: true
@@ -13375,6 +14005,7 @@ module Aws::IoT
     #   <p>The policy version ID.</p>
     #   @return [String]
     class SetDefaultPolicyVersionRequest < Struct.new(
+      nil,
       :policy_name,
       :policy_version_id,
       keyword_init: true
@@ -13387,6 +14018,7 @@ module Aws::IoT
     #   <p>The logging options payload.</p>
     #   @return [Types::LoggingOptionsPayload]
     class SetLoggingOptionsRequest < Struct.new(
+      nil,
       :logging_options_payload,
       keyword_init: true
     )
@@ -13400,6 +14032,7 @@ module Aws::IoT
     #   <p>The log level.</p>
     #   @return [String]
     class SetV2LoggingLevelRequest < Struct.new(
+      nil,
       :log_target,
       :log_level,
       keyword_init: true
@@ -13417,6 +14050,7 @@ module Aws::IoT
     #   <p>If true all logs are disabled. The default is false.</p>
     #   @return [Boolean]
     class SetV2LoggingOptionsRequest < Struct.new(
+      nil,
       :role_arn,
       :default_log_level,
       :disable_all_logs,
@@ -13436,6 +14070,7 @@ module Aws::IoT
     #   <p>The ARN of the signing role.</p>
     #   @return [String]
     class SigV4Authorization < Struct.new(
+      nil,
       :signing_region,
       :service_name,
       :role_arn,
@@ -13455,6 +14090,7 @@ module Aws::IoT
     #   <p>The location of the code-signing certificate on your device.</p>
     #   @return [String]
     class SigningProfileParameter < Struct.new(
+      nil,
       :certificate_arn,
       :platform,
       :certificate_path_on_device,
@@ -13477,6 +14113,7 @@ module Aws::IoT
     #            be extracted. To read more about SNS message formats, see <a href="https://docs.aws.amazon.com/sns/latest/dg/json-formats.html">https://docs.aws.amazon.com/sns/latest/dg/json-formats.html</a> refer to their official documentation.</p>
     #   @return [String]
     class SnsAction < Struct.new(
+      nil,
       :target_arn,
       :role_arn,
       :message_format,
@@ -13490,6 +14127,7 @@ module Aws::IoT
     #   <p>The message for the exception.</p>
     #   @return [String]
     class SqlParseException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -13507,6 +14145,7 @@ module Aws::IoT
     #   <p>Specifies whether to use Base64 encoding.</p>
     #   @return [Boolean]
     class SqsAction < Struct.new(
+      nil,
       :role_arn,
       :queue_url,
       :use_base64,
@@ -13531,6 +14170,7 @@ module Aws::IoT
     #   <p>Each audit mitigation task must have a unique client request token. If you try to start a new task with the same token as a task that already exists, an exception occurs. If you omit this value, a unique client request token is generated automatically.</p>
     #   @return [String]
     class StartAuditMitigationActionsTaskRequest < Struct.new(
+      nil,
       :task_id,
       :target,
       :audit_check_to_actions_mapping,
@@ -13544,6 +14184,7 @@ module Aws::IoT
     #   <p>The unique identifier for the audit mitigation task. This matches the <code>taskId</code> that you specified in the request.</p>
     #   @return [String]
     class StartAuditMitigationActionsTaskResponse < Struct.new(
+      nil,
       :task_id,
       keyword_init: true
     )
@@ -13586,6 +14227,7 @@ module Aws::IoT
     #       </p>
     #   @return [String]
     class StartDetectMitigationActionsTaskRequest < Struct.new(
+      nil,
       :task_id,
       :target,
       :actions,
@@ -13604,6 +14246,7 @@ module Aws::IoT
     #       </p>
     #   @return [String]
     class StartDetectMitigationActionsTaskResponse < Struct.new(
+      nil,
       :task_id,
       keyword_init: true
     )
@@ -13617,6 +14260,7 @@ module Aws::IoT
     #               <code>UpdateAccountAuditConfiguration</code> to select which checks are enabled.</p>
     #   @return [Array<String>]
     class StartOnDemandAuditTaskRequest < Struct.new(
+      nil,
       :target_check_names,
       keyword_init: true
     )
@@ -13627,6 +14271,7 @@ module Aws::IoT
     #   <p>The ID of the on-demand audit you started.</p>
     #   @return [String]
     class StartOnDemandAuditTaskResponse < Struct.new(
+      nil,
       :task_id,
       keyword_init: true
     )
@@ -13644,6 +14289,7 @@ module Aws::IoT
     #   <p>The location to write the code-signed file.</p>
     #   @return [Types::Destination]
     class StartSigningJobParameter < Struct.new(
+      nil,
       :signing_profile_parameter,
       :signing_profile_name,
       :destination,
@@ -13667,6 +14313,7 @@ module Aws::IoT
     #   <p>The IAM role ARN that grants permission the input file.</p>
     #   @return [String]
     class StartThingRegistrationTaskRequest < Struct.new(
+      nil,
       :template_body,
       :input_file_bucket,
       :input_file_key,
@@ -13680,6 +14327,7 @@ module Aws::IoT
     #   <p>The bulk thing provisioning task ID.</p>
     #   @return [String]
     class StartThingRegistrationTaskResponse < Struct.new(
+      nil,
       :task_id,
       keyword_init: true
     )
@@ -13700,6 +14348,7 @@ module Aws::IoT
     #         occurs.</p>
     #   @return [String]
     class StatisticalThreshold < Struct.new(
+      nil,
       :statistic,
       keyword_init: true
     )
@@ -13734,6 +14383,7 @@ module Aws::IoT
     #   <p>The standard deviation of the aggregated field values.</p>
     #   @return [Float]
     class Statistics < Struct.new(
+      nil,
       :count,
       :average,
       :sum,
@@ -13769,6 +14419,7 @@ module Aws::IoT
     #               reason code for a command execution status.</p>
     #   @return [String]
     class StatusReason < Struct.new(
+      nil,
       :reason_code,
       :reason_description,
       keyword_init: true
@@ -13790,6 +14441,7 @@ module Aws::IoT
     #         ("Action":"states:StartExecution").</p>
     #   @return [String]
     class StepFunctionsAction < Struct.new(
+      nil,
       :execution_name_prefix,
       :state_machine_name,
       :role_arn,
@@ -13802,6 +14454,7 @@ module Aws::IoT
     #   <p>The bulk thing provisioning task ID.</p>
     #   @return [String]
     class StopThingRegistrationTaskRequest < Struct.new(
+      nil,
       :task_id,
       keyword_init: true
     )
@@ -13809,6 +14462,7 @@ module Aws::IoT
     end
 
     class StopThingRegistrationTaskResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -13822,6 +14476,7 @@ module Aws::IoT
     #   <p>The ID of a file associated with a stream.</p>
     #   @return [Integer]
     class Stream < Struct.new(
+      nil,
       :stream_id,
       :file_id,
       keyword_init: true
@@ -13837,6 +14492,7 @@ module Aws::IoT
     #   <p>The location of the file in S3.</p>
     #   @return [Types::S3Location]
     class StreamFile < Struct.new(
+      nil,
       :file_id,
       :s3_location,
       keyword_init: true
@@ -13870,6 +14526,7 @@ module Aws::IoT
     #   <p>An IAM role IoT assumes to access your S3 files.</p>
     #   @return [String]
     class StreamInfo < Struct.new(
+      nil,
       :stream_id,
       :stream_arn,
       :stream_version,
@@ -13897,6 +14554,7 @@ module Aws::IoT
     #   <p>A description of the stream.</p>
     #   @return [String]
     class StreamSummary < Struct.new(
+      nil,
       :stream_id,
       :stream_arn,
       :stream_version,
@@ -13914,6 +14572,7 @@ module Aws::IoT
     #   <p>The tag's value.</p>
     #   @return [String]
     class Tag < Struct.new(
+      nil,
       :key,
       :value,
       keyword_init: true
@@ -13928,6 +14587,7 @@ module Aws::IoT
     #   <p>The new or modified tags for the resource.</p>
     #   @return [Array<Types::Tag>]
     class TagResourceRequest < Struct.new(
+      nil,
       :resource_arn,
       :tags,
       keyword_init: true
@@ -13936,6 +14596,7 @@ module Aws::IoT
     end
 
     class TagResourceResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -13947,6 +14608,7 @@ module Aws::IoT
     # @!attribute message
     #   @return [String]
     class TaskAlreadyExistsException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -13976,6 +14638,7 @@ module Aws::IoT
     #   <p>The number of checks that did not run because the audit was canceled.</p>
     #   @return [Integer]
     class TaskStatistics < Struct.new(
+      nil,
       :total_checks,
       :in_progress_checks,
       :waiting_for_data_collection_checks,
@@ -14005,6 +14668,7 @@ module Aws::IoT
     #   <p>The number of findings to which the mitigation action task was canceled when applied.</p>
     #   @return [Integer]
     class TaskStatisticsForAuditCheck < Struct.new(
+      nil,
       :total_findings_count,
       :failed_findings_count,
       :succeeded_findings_count,
@@ -14020,6 +14684,7 @@ module Aws::IoT
     #   <p>The number of buckets to return in the response. Default to 10.</p>
     #   @return [Integer]
     class TermsAggregation < Struct.new(
+      nil,
       :max_buckets,
       keyword_init: true
     )
@@ -14048,6 +14713,7 @@ module Aws::IoT
     #            are not attached to the principal being authorized.</p>
     #   @return [Array<String>]
     class TestAuthorizationRequest < Struct.new(
+      nil,
       :principal,
       :cognito_identity_pool_id,
       :auth_infos,
@@ -14063,6 +14729,7 @@ module Aws::IoT
     #   <p>The authentication results.</p>
     #   @return [Array<Types::AuthResult>]
     class TestAuthorizationResponse < Struct.new(
+      nil,
       :auth_results,
       keyword_init: true
     )
@@ -14089,6 +14756,7 @@ module Aws::IoT
     #   <p>Specifies a test TLS authorization request.</p>
     #   @return [Types::TlsContext]
     class TestInvokeAuthorizerRequest < Struct.new(
+      nil,
       :authorizer_name,
       :token,
       :token_signature,
@@ -14116,6 +14784,7 @@ module Aws::IoT
     #   <p>The number of seconds after which the connection is terminated.</p>
     #   @return [Integer]
     class TestInvokeAuthorizerResponse < Struct.new(
+      nil,
       :is_authenticated,
       :principal_id,
       :policy_documents,
@@ -14144,6 +14813,7 @@ module Aws::IoT
     #   <p>The version of the thing record in the registry.</p>
     #   @return [Integer]
     class ThingAttribute < Struct.new(
+      nil,
       :thing_name,
       :thing_type_name,
       :thing_arn,
@@ -14172,6 +14842,7 @@ module Aws::IoT
     #   <p>The reason why the client is disconnected. If the thing has been disconnected for approximately an hour, the <code>disconnectReason</code> value might be missing.</p>
     #   @return [String]
     class ThingConnectivity < Struct.new(
+      nil,
       :connected,
       :timestamp,
       :disconnect_reason,
@@ -14209,6 +14880,7 @@ module Aws::IoT
     #   <p>Indicates whether the thing is connected to the Amazon Web Services IoT Core service.</p>
     #   @return [Types::ThingConnectivity]
     class ThingDocument < Struct.new(
+      nil,
       :thing_name,
       :thing_id,
       :thing_type_name,
@@ -14239,6 +14911,7 @@ module Aws::IoT
     #   <p>Parent group names.</p>
     #   @return [Array<String>]
     class ThingGroupDocument < Struct.new(
+      nil,
       :thing_group_name,
       :thing_group_id,
       :thing_group_description,
@@ -14266,6 +14939,7 @@ module Aws::IoT
     #            <p>Contains custom field names and their data type.</p>
     #   @return [Array<Types::Field>]
     class ThingGroupIndexingConfiguration < Struct.new(
+      nil,
       :thing_group_indexing_mode,
       :managed_fields,
       :custom_fields,
@@ -14285,6 +14959,7 @@ module Aws::IoT
     #   <p>The UNIX timestamp of when the thing group was created.</p>
     #   @return [Time]
     class ThingGroupMetadata < Struct.new(
+      nil,
       :parent_group_name,
       :root_to_parent_thing_groups,
       :creation_date,
@@ -14301,6 +14976,7 @@ module Aws::IoT
     #   <p>The thing group attributes in JSON format.</p>
     #   @return [Types::AttributePayload]
     class ThingGroupProperties < Struct.new(
+      nil,
       :thing_group_description,
       :attribute_payload,
       keyword_init: true
@@ -14397,6 +15073,7 @@ module Aws::IoT
     #            </ul>
     #   @return [Types::IndexingFilter]
     class ThingIndexingConfiguration < Struct.new(
+      nil,
       :thing_indexing_mode,
       :thing_connectivity_indexing_mode,
       :device_defender_indexing_mode,
@@ -14432,6 +15109,7 @@ module Aws::IoT
     #            </ul>
     #   @return [String]
     class ThingPrincipalObject < Struct.new(
+      nil,
       :principal,
       :thing_principal_type,
       keyword_init: true
@@ -14455,6 +15133,7 @@ module Aws::IoT
     #   			deprecated.</p>
     #   @return [Types::ThingTypeMetadata]
     class ThingTypeDefinition < Struct.new(
+      nil,
       :thing_type_name,
       :thing_type_arn,
       :thing_type_properties,
@@ -14478,6 +15157,7 @@ module Aws::IoT
     #   <p>The date and time when the thing type was created.</p>
     #   @return [Time]
     class ThingTypeMetadata < Struct.new(
+      nil,
       :deprecated,
       :deprecation_date,
       :creation_date,
@@ -14503,6 +15183,7 @@ module Aws::IoT
     #   <p>The configuration to add user-defined properties to enrich MQTT 5 messages.</p>
     #   @return [Types::Mqtt5Configuration]
     class ThingTypeProperties < Struct.new(
+      nil,
       :thing_type_description,
       :searchable_attributes,
       :mqtt5_configuration,
@@ -14516,6 +15197,7 @@ module Aws::IoT
     #   <p>The message for the exception.</p>
     #   @return [String]
     class ThrottlingException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -14533,6 +15215,7 @@ module Aws::IoT
     #               particular date and time.</p>
     #   @return [String]
     class TimeFilter < Struct.new(
+      nil,
       :after,
       :before,
       keyword_init: true
@@ -14553,6 +15236,7 @@ module Aws::IoT
     #                   <code>TIMED_OUT</code> status.</p>
     #   @return [Integer]
     class TimeoutConfig < Struct.new(
+      nil,
       :in_progress_timeout_in_minutes,
       keyword_init: true
     )
@@ -14585,6 +15269,7 @@ module Aws::IoT
     #            processed the rule. </p>
     #   @return [Types::TimestreamTimestamp]
     class TimestreamAction < Struct.new(
+      nil,
       :role_arn,
       :database_name,
       :table_name,
@@ -14610,6 +15295,7 @@ module Aws::IoT
     #   <p>The value to write in this column of the database record.</p>
     #   @return [String]
     class TimestreamDimension < Struct.new(
+      nil,
       :name,
       :value,
       keyword_init: true
@@ -14630,6 +15316,7 @@ module Aws::IoT
     #               <code>MILLISECONDS</code>.</p>
     #   @return [String]
     class TimestreamTimestamp < Struct.new(
+      nil,
       :value,
       :unit,
       keyword_init: true
@@ -14644,6 +15331,7 @@ module Aws::IoT
     #            guide</i>.</p>
     #   @return [String]
     class TlsConfig < Struct.new(
+      nil,
       :security_policy,
       keyword_init: true
     )
@@ -14655,6 +15343,7 @@ module Aws::IoT
     #   <p>The value of the <code>serverName</code> key in a TLS authorization request.</p>
     #   @return [String]
     class TlsContext < Struct.new(
+      nil,
       :server_name,
       keyword_init: true
     )
@@ -14688,6 +15377,7 @@ module Aws::IoT
     #   <p>The action to perform when an error occurs.</p>
     #   @return [Types::Action]
     class TopicRule < Struct.new(
+      nil,
       :rule_name,
       :sql,
       :description,
@@ -14756,6 +15446,7 @@ module Aws::IoT
     #   <p>Properties of the virtual private cloud (VPC) connection.</p>
     #   @return [Types::VpcDestinationProperties]
     class TopicRuleDestination < Struct.new(
+      nil,
       :arn,
       :status,
       :created_at,
@@ -14776,6 +15467,7 @@ module Aws::IoT
     #   <p>Configuration of the virtual private cloud (VPC) connection.</p>
     #   @return [Types::VpcDestinationConfiguration]
     class TopicRuleDestinationConfiguration < Struct.new(
+      nil,
       :http_url_configuration,
       :vpc_configuration,
       keyword_init: true
@@ -14837,6 +15529,7 @@ module Aws::IoT
     #   <p>Information about the virtual private cloud (VPC) connection.</p>
     #   @return [Types::VpcDestinationSummary]
     class TopicRuleDestinationSummary < Struct.new(
+      nil,
       :arn,
       :status,
       :created_at,
@@ -14866,6 +15559,7 @@ module Aws::IoT
     #   <p>Specifies whether the rule is disabled.</p>
     #   @return [Boolean]
     class TopicRuleListItem < Struct.new(
+      nil,
       :rule_arn,
       :rule_name,
       :topic_pattern,
@@ -14897,6 +15591,7 @@ module Aws::IoT
     #   <p>The action to take when an error occurs.</p>
     #   @return [Types::Action]
     class TopicRulePayload < Struct.new(
+      nil,
       :sql,
       :description,
       :actions,
@@ -14914,6 +15609,7 @@ module Aws::IoT
     #   <p>The message for the exception.</p>
     #   @return [String]
     class TransferAlreadyCompletedException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -14932,6 +15628,7 @@ module Aws::IoT
     #   <p>The transfer message.</p>
     #   @return [String]
     class TransferCertificateRequest < Struct.new(
+      nil,
       :certificate_id,
       :target_aws_account,
       :transfer_message,
@@ -14945,6 +15642,7 @@ module Aws::IoT
     #   <p>The ARN of the certificate.</p>
     #   @return [String]
     class TransferCertificateResponse < Struct.new(
+      nil,
       :transferred_certificate_arn,
       keyword_init: true
     )
@@ -14957,6 +15655,7 @@ module Aws::IoT
     #   <p>The message for the exception.</p>
     #   @return [String]
     class TransferConflictException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -14980,6 +15679,7 @@ module Aws::IoT
     #   <p>The date the transfer was rejected.</p>
     #   @return [Time]
     class TransferData < Struct.new(
+      nil,
       :transfer_message,
       :reject_reason,
       :transfer_date,
@@ -14995,6 +15695,7 @@ module Aws::IoT
     #   <p>The message for the exception.</p>
     #   @return [String]
     class UnauthorizedException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -15008,6 +15709,7 @@ module Aws::IoT
     #   <p>A list of the keys of the tags to be removed from the resource.</p>
     #   @return [Array<String>]
     class UntagResourceRequest < Struct.new(
+      nil,
       :resource_arn,
       :tag_keys,
       keyword_init: true
@@ -15016,6 +15718,7 @@ module Aws::IoT
     end
 
     class UntagResourceResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -15050,6 +15753,7 @@ module Aws::IoT
     #               this parameter is required and must specify at least one enabled check.</p>
     #   @return [Hash<String, Types::AuditCheckConfiguration>]
     class UpdateAccountAuditConfigurationRequest < Struct.new(
+      nil,
       :role_arn,
       :audit_notification_target_configurations,
       :audit_check_configurations,
@@ -15059,6 +15763,7 @@ module Aws::IoT
     end
 
     class UpdateAccountAuditConfigurationResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -15089,6 +15794,7 @@ module Aws::IoT
     #       </p>
     #   @return [String]
     class UpdateAuditSuppressionRequest < Struct.new(
+      nil,
       :check_name,
       :resource_identifier,
       :expiration_date,
@@ -15100,6 +15806,7 @@ module Aws::IoT
     end
 
     class UpdateAuditSuppressionResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -15126,6 +15833,7 @@ module Aws::IoT
     #   	  result is used while the device reuses the same HTTP connection.</p>
     #   @return [Boolean]
     class UpdateAuthorizerRequest < Struct.new(
+      nil,
       :authorizer_name,
       :authorizer_function_arn,
       :token_key_name,
@@ -15144,6 +15852,7 @@ module Aws::IoT
     #   <p>The authorizer ARN.</p>
     #   @return [String]
     class UpdateAuthorizerResponse < Struct.new(
+      nil,
       :authorizer_name,
       :authorizer_arn,
       keyword_init: true
@@ -15164,6 +15873,7 @@ module Aws::IoT
     #   				<code>VersionConflictException</code>.</p>
     #   @return [Integer]
     class UpdateBillingGroupRequest < Struct.new(
+      nil,
       :billing_group_name,
       :billing_group_properties,
       :expected_version,
@@ -15176,6 +15886,7 @@ module Aws::IoT
     #   <p>The latest version of the billing group.</p>
     #   @return [Integer]
     class UpdateBillingGroupResponse < Struct.new(
+      nil,
       :version,
       keyword_init: true
     )
@@ -15192,6 +15903,7 @@ module Aws::IoT
     #   <p>The action that you want to apply to the CA certificate. The only supported value is <code>DEACTIVATE</code>.</p>
     #   @return [String]
     class UpdateCACertificateParams < Struct.new(
+      nil,
       :action,
       keyword_init: true
     )
@@ -15219,6 +15931,7 @@ module Aws::IoT
     #   <p>If true, removes auto registration.</p>
     #   @return [Boolean]
     class UpdateCACertificateRequest < Struct.new(
+      nil,
       :certificate_id,
       :new_status,
       :new_auto_registration_status,
@@ -15240,6 +15953,7 @@ module Aws::IoT
     #            Valid value: <code>CreateCertificateFromCsr</code>.</p>
     #   @return [Array<String>]
     class UpdateCertificateProviderRequest < Struct.new(
+      nil,
       :certificate_provider_name,
       :lambda_function_arn,
       :account_default_for_operations,
@@ -15255,6 +15969,7 @@ module Aws::IoT
     #   <p>The ARN of the certificate provider.</p>
     #   @return [String]
     class UpdateCertificateProviderResponse < Struct.new(
+      nil,
       :certificate_provider_name,
       :certificate_provider_arn,
       keyword_init: true
@@ -15278,6 +15993,7 @@ module Aws::IoT
     #            should not be used.</p>
     #   @return [String]
     class UpdateCertificateRequest < Struct.new(
+      nil,
       :certificate_id,
       :new_status,
       keyword_init: true
@@ -15298,6 +16014,7 @@ module Aws::IoT
     #   <p>A boolean that you can use to specify whether to deprecate a command.</p>
     #   @return [Boolean]
     class UpdateCommandRequest < Struct.new(
+      nil,
       :command_id,
       :display_name,
       :description,
@@ -15324,6 +16041,7 @@ module Aws::IoT
     #               updated.</p>
     #   @return [Time]
     class UpdateCommandResponse < Struct.new(
+      nil,
       :command_id,
       :display_name,
       :description,
@@ -15349,6 +16067,7 @@ module Aws::IoT
     #         be updated. </p>
     #   @return [String]
     class UpdateCustomMetricRequest < Struct.new(
+      nil,
       :metric_name,
       :display_name,
       keyword_init: true
@@ -15388,6 +16107,7 @@ module Aws::IoT
     #       </p>
     #   @return [Time]
     class UpdateCustomMetricResponse < Struct.new(
+      nil,
       :metric_name,
       :metric_arn,
       :metric_type,
@@ -15404,6 +16124,7 @@ module Aws::IoT
     #   <p>The action that you want to apply to the device certificate. The only supported value is <code>DEACTIVATE</code>.</p>
     #   @return [String]
     class UpdateDeviceCertificateParams < Struct.new(
+      nil,
       :action,
       keyword_init: true
     )
@@ -15417,6 +16138,7 @@ module Aws::IoT
     #   <p>Specifies the value or list of values for the dimension. For <code>TOPIC_FILTER</code> dimensions, this is a pattern used to match the MQTT topic (for example, "admin/#").</p>
     #   @return [Array<String>]
     class UpdateDimensionRequest < Struct.new(
+      nil,
       :name,
       :string_values,
       keyword_init: true
@@ -15445,6 +16167,7 @@ module Aws::IoT
     #   <p>The date and time, in milliseconds since epoch, when the dimension was most recently updated.</p>
     #   @return [Time]
     class UpdateDimensionResponse < Struct.new(
+      nil,
       :name,
       :arn,
       :type,
@@ -15542,6 +16265,7 @@ module Aws::IoT
     #   <p>An object that speciﬁes the client certificate conﬁguration for a domain.</p>
     #   @return [Types::ClientCertificateConfig]
     class UpdateDomainConfigurationRequest < Struct.new(
+      nil,
       :domain_configuration_name,
       :authorizer_config,
       :domain_configuration_status,
@@ -15563,6 +16287,7 @@ module Aws::IoT
     #   <p>The ARN of the domain configuration that was updated.</p>
     #   @return [String]
     class UpdateDomainConfigurationResponse < Struct.new(
+      nil,
       :domain_configuration_name,
       :domain_configuration_arn,
       keyword_init: true
@@ -15596,6 +16321,7 @@ module Aws::IoT
     #            </note>
     #   @return [String]
     class UpdateDynamicThingGroupRequest < Struct.new(
+      nil,
       :thing_group_name,
       :thing_group_properties,
       :expected_version,
@@ -15611,6 +16337,7 @@ module Aws::IoT
     #   <p>The dynamic thing group version.</p>
     #   @return [Integer]
     class UpdateDynamicThingGroupResponse < Struct.new(
+      nil,
       :version,
       keyword_init: true
     )
@@ -15633,6 +16360,7 @@ module Aws::IoT
     #            behalf of the customer.</p>
     #   @return [String]
     class UpdateEncryptionConfigurationRequest < Struct.new(
+      nil,
       :encryption_type,
       :kms_key_arn,
       :kms_access_role_arn,
@@ -15642,6 +16370,7 @@ module Aws::IoT
     end
 
     class UpdateEncryptionConfigurationResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -15651,6 +16380,7 @@ module Aws::IoT
     #   <p>The new event configuration values.</p>
     #   @return [Hash<String, Types::Configuration>]
     class UpdateEventConfigurationsRequest < Struct.new(
+      nil,
       :event_configurations,
       keyword_init: true
     )
@@ -15658,6 +16388,7 @@ module Aws::IoT
     end
 
     class UpdateEventConfigurationsResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -15695,6 +16426,7 @@ module Aws::IoT
     #   <p>The expected version of the fleet metric record in the registry.</p>
     #   @return [Integer]
     class UpdateFleetMetricRequest < Struct.new(
+      nil,
       :metric_name,
       :query_string,
       :aggregation_type,
@@ -15717,6 +16449,7 @@ module Aws::IoT
     #   <p>Thing group indexing configuration.</p>
     #   @return [Types::ThingGroupIndexingConfiguration]
     class UpdateIndexingConfigurationRequest < Struct.new(
+      nil,
       :thing_indexing_configuration,
       :thing_group_indexing_configuration,
       keyword_init: true
@@ -15725,6 +16458,7 @@ module Aws::IoT
     end
 
     class UpdateIndexingConfigurationResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -15768,6 +16502,7 @@ module Aws::IoT
     #   <p>Allows you to create the criteria to retry a job.</p>
     #   @return [Types::JobExecutionsRetryConfig]
     class UpdateJobRequest < Struct.new(
+      nil,
       :job_id,
       :description,
       :presigned_url_config,
@@ -15794,6 +16529,7 @@ module Aws::IoT
     #   <p>Defines the type of action and the parameters for that action.</p>
     #   @return [Types::MitigationActionParams]
     class UpdateMitigationActionRequest < Struct.new(
+      nil,
       :action_name,
       :role_arn,
       :action_params,
@@ -15809,6 +16545,7 @@ module Aws::IoT
     #   <p>A unique identifier for the mitigation action.</p>
     #   @return [String]
     class UpdateMitigationActionResponse < Struct.new(
+      nil,
       :action_arn,
       :action_id,
       keyword_init: true
@@ -15824,6 +16561,7 @@ module Aws::IoT
     #         Don't reuse this client token if a new idempotent request is required.</p>
     #   @return [String]
     class UpdatePackageConfigurationRequest < Struct.new(
+      nil,
       :version_update_by_jobs_config,
       :client_token,
       keyword_init: true
@@ -15832,6 +16570,7 @@ module Aws::IoT
     end
 
     class UpdatePackageConfigurationResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -15861,6 +16600,7 @@ module Aws::IoT
     #         Don't reuse this client token if a new idempotent request is required.</p>
     #   @return [String]
     class UpdatePackageRequest < Struct.new(
+      nil,
       :package_name,
       :description,
       :default_version_name,
@@ -15872,6 +16612,7 @@ module Aws::IoT
     end
 
     class UpdatePackageResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -15908,6 +16649,7 @@ module Aws::IoT
     #         Don't reuse this client token if a new idempotent request is required.</p>
     #   @return [String]
     class UpdatePackageVersionRequest < Struct.new(
+      nil,
       :package_name,
       :version_name,
       :description,
@@ -15922,6 +16664,7 @@ module Aws::IoT
     end
 
     class UpdatePackageVersionResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -15952,6 +16695,7 @@ module Aws::IoT
     #   <p>Removes pre-provisioning hook template.</p>
     #   @return [Boolean]
     class UpdateProvisioningTemplateRequest < Struct.new(
+      nil,
       :template_name,
       :description,
       :enabled,
@@ -15965,6 +16709,7 @@ module Aws::IoT
     end
 
     class UpdateProvisioningTemplateResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -15982,6 +16727,7 @@ module Aws::IoT
     #            that the role alias references.</p>
     #   @return [Integer]
     class UpdateRoleAliasRequest < Struct.new(
+      nil,
       :role_alias,
       :role_arn,
       :credential_duration_seconds,
@@ -15997,6 +16743,7 @@ module Aws::IoT
     #   <p>The role alias ARN.</p>
     #   @return [String]
     class UpdateRoleAliasResponse < Struct.new(
+      nil,
       :role_alias,
       :role_alias_arn,
       keyword_init: true
@@ -16036,6 +16783,7 @@ module Aws::IoT
     #   <p>The name of the scheduled audit. (Max. 128 chars)</p>
     #   @return [String]
     class UpdateScheduledAuditRequest < Struct.new(
+      nil,
       :frequency,
       :day_of_month,
       :day_of_week,
@@ -16050,6 +16798,7 @@ module Aws::IoT
     #   <p>The ARN of the scheduled audit.</p>
     #   @return [String]
     class UpdateScheduledAuditResponse < Struct.new(
+      nil,
       :scheduled_audit_arn,
       keyword_init: true
     )
@@ -16110,6 +16859,7 @@ module Aws::IoT
     #   <p>Set the value as true to delete metrics export related configurations.</p>
     #   @return [Boolean]
     class UpdateSecurityProfileRequest < Struct.new(
+      nil,
       :security_profile_name,
       :security_profile_description,
       :behaviors,
@@ -16172,6 +16922,7 @@ module Aws::IoT
     #   <p>Specifies the MQTT topic and role ARN required for metric export.</p>
     #   @return [Types::MetricsExportConfig]
     class UpdateSecurityProfileResponse < Struct.new(
+      nil,
       :security_profile_name,
       :security_profile_arn,
       :security_profile_description,
@@ -16206,6 +16957,7 @@ module Aws::IoT
     #   <p>An IAM role that allows the IoT service principal assumes to access your S3 files.</p>
     #   @return [String]
     class UpdateStreamRequest < Struct.new(
+      nil,
       :stream_id,
       :description,
       :files,
@@ -16228,6 +16980,7 @@ module Aws::IoT
     #   <p>The stream version.</p>
     #   @return [Integer]
     class UpdateStreamResponse < Struct.new(
+      nil,
       :stream_id,
       :stream_arn,
       :description,
@@ -16248,6 +17001,7 @@ module Aws::IoT
     #   			thing group being updated, the update will fail.</p>
     #   @return [Integer]
     class UpdateThingGroupRequest < Struct.new(
+      nil,
       :thing_group_name,
       :thing_group_properties,
       :expected_version,
@@ -16260,6 +17014,7 @@ module Aws::IoT
     #   <p>The version of the updated thing group.</p>
     #   @return [Integer]
     class UpdateThingGroupResponse < Struct.new(
+      nil,
       :version,
       keyword_init: true
     )
@@ -16287,6 +17042,7 @@ module Aws::IoT
     #   			dynamic group.</p>
     #   @return [Boolean]
     class UpdateThingGroupsForThingRequest < Struct.new(
+      nil,
       :thing_name,
       :thing_groups_to_add,
       :thing_groups_to_remove,
@@ -16297,6 +17053,7 @@ module Aws::IoT
     end
 
     class UpdateThingGroupsForThingResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -16330,6 +17087,7 @@ module Aws::IoT
     #   			association is removed.</p>
     #   @return [Boolean]
     class UpdateThingRequest < Struct.new(
+      nil,
       :thing_name,
       :thing_type_name,
       :attribute_payload,
@@ -16342,6 +17100,7 @@ module Aws::IoT
 
     # <p>The output from the UpdateThing operation.</p>
     class UpdateThingResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -16355,6 +17114,7 @@ module Aws::IoT
     #   			and a list of searchable thing attribute names.</p>
     #   @return [Types::ThingTypeProperties]
     class UpdateThingTypeRequest < Struct.new(
+      nil,
       :thing_type_name,
       :thing_type_properties,
       keyword_init: true
@@ -16363,6 +17123,7 @@ module Aws::IoT
     end
 
     class UpdateThingTypeResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -16406,6 +17167,7 @@ module Aws::IoT
     #            </dl>
     #   @return [String]
     class UpdateTopicRuleDestinationRequest < Struct.new(
+      nil,
       :arn,
       :status,
       keyword_init: true
@@ -16414,6 +17176,7 @@ module Aws::IoT
     end
 
     class UpdateTopicRuleDestinationResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -16429,6 +17192,7 @@ module Aws::IoT
     #   <p>A value to be specified in <code>UserProperty</code>.</p>
     #   @return [String]
     class UserProperty < Struct.new(
+      nil,
       :key,
       :value,
       keyword_init: true
@@ -16440,6 +17204,7 @@ module Aws::IoT
     #   <p>Specifies the behaviors that, when violated by a device (thing), cause an alert.</p>
     #   @return [Array<Types::Behavior>]
     class ValidateSecurityProfileBehaviorsRequest < Struct.new(
+      nil,
       :behaviors,
       keyword_init: true
     )
@@ -16453,6 +17218,7 @@ module Aws::IoT
     #   <p>The list of any errors found in the behaviors.</p>
     #   @return [Array<Types::ValidationError>]
     class ValidateSecurityProfileBehaviorsResponse < Struct.new(
+      nil,
       :valid,
       :validation_errors,
       keyword_init: true
@@ -16470,6 +17236,7 @@ module Aws::IoT
     #   <p>The description of an error found in the behaviors.</p>
     #   @return [String]
     class ValidationError < Struct.new(
+      nil,
       :error_message,
       keyword_init: true
     )
@@ -16480,6 +17247,7 @@ module Aws::IoT
     # @!attribute message
     #   @return [String]
     class ValidationException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -16493,6 +17261,7 @@ module Aws::IoT
     #   <p>The message for the exception.</p>
     #   @return [String]
     class VersionConflictException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -16511,6 +17280,7 @@ module Aws::IoT
     #         jobs service to update the reserved named shadow when the job successfully completes.</p>
     #   @return [String]
     class VersionUpdateByJobsConfig < Struct.new(
+      nil,
       :enabled,
       :role_arn,
       keyword_init: true
@@ -16523,6 +17293,7 @@ module Aws::IoT
     #   <p>The message for the exception.</p>
     #   @return [String]
     class VersionsLimitExceededException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -16563,6 +17334,7 @@ module Aws::IoT
     #   <p>The time the violation event occurred.</p>
     #   @return [Time]
     class ViolationEvent < Struct.new(
+      nil,
       :violation_id,
       :thing_name,
       :security_profile_name,
@@ -16587,6 +17359,7 @@ module Aws::IoT
     #           </p>
     #   @return [String]
     class ViolationEventAdditionalInfo < Struct.new(
+      nil,
       :confidence_level,
       keyword_init: true
     )
@@ -16607,6 +17380,7 @@ module Aws::IoT
     #           </p>
     #   @return [Time]
     class ViolationEventOccurrenceRange < Struct.new(
+      nil,
       :start_time,
       :end_time,
       keyword_init: true
@@ -16628,6 +17402,7 @@ module Aws::IoT
     #   <p>The ARN of a role that has permission to create and attach to elastic network interfaces (ENIs).</p>
     #   @return [String]
     class VpcDestinationConfiguration < Struct.new(
+      nil,
       :subnet_ids,
       :security_groups,
       :vpc_id,
@@ -16651,6 +17426,7 @@ module Aws::IoT
     #   <p>The ARN of a role that has permission to create and attach to elastic network interfaces (ENIs).</p>
     #   @return [String]
     class VpcDestinationProperties < Struct.new(
+      nil,
       :subnet_ids,
       :security_groups,
       :vpc_id,
@@ -16674,6 +17450,7 @@ module Aws::IoT
     #   <p>The ARN of a role that has permission to create and attach to elastic network interfaces (ENIs).</p>
     #   @return [String]
     class VpcDestinationSummary < Struct.new(
+      nil,
       :subnet_ids,
       :security_groups,
       :vpc_id,

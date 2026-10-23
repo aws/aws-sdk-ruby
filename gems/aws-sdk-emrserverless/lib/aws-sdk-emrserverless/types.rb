@@ -77,6 +77,7 @@ module Aws::EMRServerless
     #   <p>The IAM Identity Center configuration applied to enable trusted identity propagation. </p>
     #   @return [Types::IdentityCenterConfiguration]
     class Application < Struct.new(
+      nil,
       :application_id,
       :name,
       :arn,
@@ -137,6 +138,7 @@ module Aws::EMRServerless
     #   <p>The CPU architecture of an application.</p>
     #   @return [String]
     class ApplicationSummary < Struct.new(
+      nil,
       :id,
       :name,
       :arn,
@@ -157,6 +159,7 @@ module Aws::EMRServerless
     #   <p>Enables the application to automatically start on job submission. Defaults to true.</p>
     #   @return [Boolean]
     class AutoStartConfig < Struct.new(
+      nil,
       :enabled,
       keyword_init: true
     )
@@ -171,6 +174,7 @@ module Aws::EMRServerless
     #   <p>The amount of idle time in minutes after which your application will automatically stop. Defaults to 15 minutes.</p>
     #   @return [Integer]
     class AutoStopConfig < Struct.new(
+      nil,
       :enabled,
       :idle_timeout_minutes,
       keyword_init: true
@@ -193,6 +197,7 @@ module Aws::EMRServerless
     #   <p>The duration in seconds to wait before forcefully terminating the job after cancellation is requested.</p>
     #   @return [Integer]
     class CancelJobRunInput < Struct.new(
+      nil,
       :application_id,
       :job_run_id,
       :shutdown_grace_period_in_seconds,
@@ -208,6 +213,7 @@ module Aws::EMRServerless
     #   <p>The output contains the ID of the cancelled job run.</p>
     #   @return [String]
     class CancelJobRunOutput < Struct.new(
+      nil,
       :application_id,
       :job_run_id,
       keyword_init: true
@@ -232,6 +238,7 @@ module Aws::EMRServerless
     #   <p>The types of logs that you want to publish to CloudWatch. If you don't specify any log types, driver STDOUT and STDERR logs will be published to CloudWatch Logs by default. For more information including the supported worker types for Hive and Spark, see <a href="https://docs.aws.amazon.com/emr/latest/EMR-Serverless-UserGuide/logging.html#jobs-log-storage-cw">Logging for EMR Serverless with CloudWatch</a>.</p> <ul> <li> <p> <b>Key Valid Values</b>: <code>SPARK_DRIVER</code>, <code>SPARK_EXECUTOR</code>, <code>HIVE_DRIVER</code>, <code>TEZ_TASK</code> </p> </li> <li> <p> <b>Array Members Valid Values</b>: <code>STDOUT</code>, <code>STDERR</code>, <code>HIVE_LOG</code>, <code>TEZ_AM</code>, <code>SYSTEM_LOGS</code> </p> </li> </ul>
     #   @return [Hash<String, Array<String>>]
     class CloudWatchLoggingConfiguration < Struct.new(
+      nil,
       :enabled,
       :log_group_name,
       :log_stream_name_prefix,
@@ -253,6 +260,7 @@ module Aws::EMRServerless
     #   <p>A list of additional configurations to apply within a configuration object.</p>
     #   @return [Array<Types::Configuration>]
     class Configuration < Struct.new(
+      nil,
       :classification,
       :properties,
       :configurations,
@@ -269,6 +277,7 @@ module Aws::EMRServerless
     #   <p>The override configurations for monitoring.</p>
     #   @return [Types::MonitoringConfiguration]
     class ConfigurationOverrides < Struct.new(
+      nil,
       :application_configuration,
       :monitoring_configuration,
       keyword_init: true
@@ -280,6 +289,7 @@ module Aws::EMRServerless
     # @!attribute message
     #   @return [String]
     class ConflictException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -341,6 +351,7 @@ module Aws::EMRServerless
     #   <p>The IAM Identity Center Configuration accepts the Identity Center instance parameter required to enable trusted identity propagation. This configuration allows identity propagation between integrated services and the Identity Center instance.</p>
     #   @return [Types::IdentityCenterConfigurationInput]
     class CreateApplicationInput < Struct.new(
+      nil,
       :name,
       :release_label,
       :type,
@@ -374,6 +385,7 @@ module Aws::EMRServerless
     #   <p>The output contains the ARN of the application.</p>
     #   @return [String]
     class CreateApplicationOutput < Struct.new(
+      nil,
       :application_id,
       :name,
       :arn,
@@ -386,6 +398,7 @@ module Aws::EMRServerless
     #   <p>The ID of the application that will be deleted.</p>
     #   @return [String]
     class DeleteApplicationInput < Struct.new(
+      nil,
       :application_id,
       keyword_init: true
     )
@@ -393,6 +406,7 @@ module Aws::EMRServerless
     end
 
     class DeleteApplicationOutput < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -402,6 +416,7 @@ module Aws::EMRServerless
     #   <p>The ID of the application that will be described.</p>
     #   @return [String]
     class GetApplicationInput < Struct.new(
+      nil,
       :application_id,
       keyword_init: true
     )
@@ -412,6 +427,7 @@ module Aws::EMRServerless
     #   <p>The output displays information about the specified application.</p>
     #   @return [Types::Application]
     class GetApplicationOutput < Struct.new(
+      nil,
       :application,
       keyword_init: true
     )
@@ -431,6 +447,7 @@ module Aws::EMRServerless
     #   <p>Allows access to system profile logs for Lake Formation-enabled jobs. Default is false.</p>
     #   @return [Boolean]
     class GetDashboardForJobRunInput < Struct.new(
+      nil,
       :application_id,
       :job_run_id,
       :attempt,
@@ -444,6 +461,7 @@ module Aws::EMRServerless
     #   <p>The URL to view job run's dashboard.</p>
     #   @return [String]
     class GetDashboardForJobRunOutput < Struct.new(
+      nil,
       :url,
       keyword_init: true
     )
@@ -460,6 +478,7 @@ module Aws::EMRServerless
     #   <p>An optimal parameter that indicates the amount of attempts for the job. If not specified, this value defaults to the attempt of the latest job.</p>
     #   @return [Integer]
     class GetJobRunInput < Struct.new(
+      nil,
       :application_id,
       :job_run_id,
       :attempt,
@@ -472,6 +491,7 @@ module Aws::EMRServerless
     #   <p>The output displays information about the job run.</p>
     #   @return [Types::JobRun]
     class GetJobRunOutput < Struct.new(
+      nil,
       :job_run,
       keyword_init: true
     )
@@ -489,6 +509,7 @@ module Aws::EMRServerless
     #   <p>The parameters for the Hive job run.</p>
     #   @return [String]
     class Hive < Struct.new(
+      nil,
       :query,
       :init_query_file,
       :parameters,
@@ -505,6 +526,7 @@ module Aws::EMRServerless
     #   <p>The ARN of the EMR Serverless created IAM Identity Center Application that provides trusted-identity propagation.</p>
     #   @return [String]
     class IdentityCenterConfiguration < Struct.new(
+      nil,
       :identity_center_instance_arn,
       :identity_center_application_arn,
       keyword_init: true
@@ -517,6 +539,7 @@ module Aws::EMRServerless
     #   <p>The ARN of the IAM Identity Center instance.</p>
     #   @return [String]
     class IdentityCenterConfigurationInput < Struct.new(
+      nil,
       :identity_center_instance_arn,
       keyword_init: true
     )
@@ -531,6 +554,7 @@ module Aws::EMRServerless
     #   <p>The SHA256 digest of the image URI. This indicates which specific image the application is configured for. The image digest doesn't exist until an application has started.</p>
     #   @return [String]
     class ImageConfiguration < Struct.new(
+      nil,
       :image_uri,
       :resolved_image_digest,
       keyword_init: true
@@ -543,6 +567,7 @@ module Aws::EMRServerless
     #   <p>The URI of an image in the Amazon ECR registry. This field is required when you create a new application. If you leave this field blank in an update, Amazon EMR will remove the image configuration.</p>
     #   @return [String]
     class ImageConfigurationInput < Struct.new(
+      nil,
       :image_uri,
       keyword_init: true
     )
@@ -559,6 +584,7 @@ module Aws::EMRServerless
     #     This shape is recommended
     #   @return [Types::WorkerResourceConfig]
     class InitialCapacityConfig < Struct.new(
+      nil,
       :worker_count,
       :worker_configuration,
       keyword_init: true
@@ -579,6 +605,7 @@ module Aws::EMRServerless
     #   <p>Enables an Apache Livy endpoint that you can connect to and run interactive jobs.</p>
     #   @return [Boolean]
     class InteractiveConfiguration < Struct.new(
+      nil,
       :studio_enabled,
       :livy_endpoint_enabled,
       keyword_init: true
@@ -590,6 +617,7 @@ module Aws::EMRServerless
     # @!attribute message
     #   @return [String]
     class InternalServerException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -702,6 +730,7 @@ module Aws::EMRServerless
     #   <p>The total time for a job in the QUEUED state in milliseconds.</p>
     #   @return [Integer]
     class JobRun < Struct.new(
+      nil,
       :application_id,
       :job_run_id,
       :name,
@@ -787,6 +816,7 @@ module Aws::EMRServerless
     #   <p>The attempt number of the job run execution.</p>
     #   @return [Integer]
     class JobRunAttemptSummary < Struct.new(
+      nil,
       :application_id,
       :id,
       :name,
@@ -815,6 +845,7 @@ module Aws::EMRServerless
     #   <p>A list of Amazon Resource Names (ARNs) to use as an execution IAM policy.</p>
     #   @return [Array<String>]
     class JobRunExecutionIamPolicy < Struct.new(
+      nil,
       :policy,
       :policy_arns,
       keyword_init: true
@@ -872,6 +903,7 @@ module Aws::EMRServerless
     #   <p>The date and time of when the job run attempt was last updated.</p>
     #   @return [Time]
     class JobRunSummary < Struct.new(
+      nil,
       :application_id,
       :id,
       :name,
@@ -903,6 +935,7 @@ module Aws::EMRServerless
     #   <p>An optional filter for application states. Note that if this filter contains multiple states, the resulting list will be grouped by the state.</p>
     #   @return [Array<String>]
     class ListApplicationsInput < Struct.new(
+      nil,
       :next_token,
       :max_results,
       :states,
@@ -918,6 +951,7 @@ module Aws::EMRServerless
     #   <p>The output displays the token for the next set of application results. This is required for pagination and is available as a response of the previous request.</p>
     #   @return [String]
     class ListApplicationsOutput < Struct.new(
+      nil,
       :applications,
       :next_token,
       keyword_init: true
@@ -938,6 +972,7 @@ module Aws::EMRServerless
     #   <p>The maximum number of job run attempts to list.</p>
     #   @return [Integer]
     class ListJobRunAttemptsRequest < Struct.new(
+      nil,
       :application_id,
       :job_run_id,
       :next_token,
@@ -954,6 +989,7 @@ module Aws::EMRServerless
     #   <p>The output displays the token for the next set of application results. This is required for pagination and is available as a response of the previous request.</p>
     #   @return [String]
     class ListJobRunAttemptsResponse < Struct.new(
+      nil,
       :job_run_attempts,
       :next_token,
       keyword_init: true
@@ -983,6 +1019,7 @@ module Aws::EMRServerless
     #   <p>The mode of the job runs to list.</p>
     #   @return [String]
     class ListJobRunsInput < Struct.new(
+      nil,
       :application_id,
       :next_token,
       :max_results,
@@ -1002,6 +1039,7 @@ module Aws::EMRServerless
     #   <p>The output displays the token for the next set of job run results. This is required for pagination and is available as a response of the previous request.</p>
     #   @return [String]
     class ListJobRunsOutput < Struct.new(
+      nil,
       :job_runs,
       :next_token,
       keyword_init: true
@@ -1013,6 +1051,7 @@ module Aws::EMRServerless
     #   <p>The Amazon Resource Name (ARN) that identifies the resource to list the tags for. Currently, the supported resources are Amazon EMR Serverless applications and job runs.</p>
     #   @return [String]
     class ListTagsForResourceInput < Struct.new(
+      nil,
       :resource_arn,
       keyword_init: true
     )
@@ -1023,6 +1062,7 @@ module Aws::EMRServerless
     #   <p>The tags for the resource.</p>
     #   @return [Hash<String, String>]
     class ListTagsForResourceOutput < Struct.new(
+      nil,
       :tags,
       keyword_init: true
     )
@@ -1037,6 +1077,7 @@ module Aws::EMRServerless
     #   <p>The KMS key ARN to encrypt the logs stored in managed log persistence.</p>
     #   @return [String]
     class ManagedPersistenceMonitoringConfiguration < Struct.new(
+      nil,
       :enabled,
       :encryption_key_arn,
       keyword_init: true
@@ -1055,6 +1096,7 @@ module Aws::EMRServerless
     #   <p>The maximum allowed disk for an application.</p>
     #   @return [String]
     class MaximumAllowedResources < Struct.new(
+      nil,
       :cpu,
       :memory,
       :disk,
@@ -1077,6 +1119,7 @@ module Aws::EMRServerless
     #   <p>The monitoring configuration object you can configure to send metrics to Amazon Managed Service for Prometheus for a job run.</p>
     #   @return [Types::PrometheusMonitoringConfiguration]
     class MonitoringConfiguration < Struct.new(
+      nil,
       :s3_monitoring_configuration,
       :managed_persistence_monitoring_configuration,
       :cloud_watch_logging_configuration,
@@ -1094,6 +1137,7 @@ module Aws::EMRServerless
     #   <p>The array of security group Ids for customer VPC connectivity.</p>
     #   @return [Array<String>]
     class NetworkConfiguration < Struct.new(
+      nil,
       :subnet_ids,
       :security_group_ids,
       keyword_init: true
@@ -1106,6 +1150,7 @@ module Aws::EMRServerless
     #   <p>The remote write URL in the Amazon Managed Service for Prometheus workspace to send metrics to.</p>
     #   @return [String]
     class PrometheusMonitoringConfiguration < Struct.new(
+      nil,
       :remote_write_url,
       keyword_init: true
     )
@@ -1116,6 +1161,7 @@ module Aws::EMRServerless
     # @!attribute message
     #   @return [String]
     class ResourceNotFoundException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -1133,6 +1179,7 @@ module Aws::EMRServerless
     #   <p>The aggregated storage used per hour from the time the job starts executing until the job is terminated.</p>
     #   @return [Float]
     class ResourceUtilization < Struct.new(
+      nil,
       :v_cpu_hour,
       :memory_gb_hour,
       :storage_gb_hour,
@@ -1149,6 +1196,7 @@ module Aws::EMRServerless
     #   <p>Maximum number of failed attempts per hour. This [arameter is only applicable for <code>STREAMING</code> mode.</p>
     #   @return [Integer]
     class RetryPolicy < Struct.new(
+      nil,
       :max_attempts,
       :max_failed_attempts_per_hour,
       keyword_init: true
@@ -1169,6 +1217,7 @@ module Aws::EMRServerless
     #   <p>The KMS key ARN to encrypt the logs published to the given Amazon S3 destination.</p>
     #   @return [String]
     class S3MonitoringConfiguration < Struct.new(
+      nil,
       :log_uri,
       :encryption_key_arn,
       keyword_init: true
@@ -1184,6 +1233,7 @@ module Aws::EMRServerless
     #   <p>The maximum concurrent job runs on this application. If scheduler configuration is enabled on your application, the default value is 15. The valid range is 1 to 1000.</p>
     #   @return [Integer]
     class SchedulerConfiguration < Struct.new(
+      nil,
       :queue_timeout_minutes,
       :max_concurrent_runs,
       keyword_init: true
@@ -1195,6 +1245,7 @@ module Aws::EMRServerless
     # @!attribute message
     #   @return [String]
     class ServiceQuotaExceededException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -1212,6 +1263,7 @@ module Aws::EMRServerless
     #   <p>The parameters for the Spark submit job run.</p>
     #   @return [String]
     class SparkSubmit < Struct.new(
+      nil,
       :entry_point,
       :entry_point_arguments,
       :spark_submit_parameters,
@@ -1224,6 +1276,7 @@ module Aws::EMRServerless
     #   <p>The ID of the application to start.</p>
     #   @return [String]
     class StartApplicationInput < Struct.new(
+      nil,
       :application_id,
       keyword_init: true
     )
@@ -1231,6 +1284,7 @@ module Aws::EMRServerless
     end
 
     class StartApplicationOutput < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1270,6 +1324,7 @@ module Aws::EMRServerless
     #   <p>The retry policy when job run starts.</p>
     #   @return [Types::RetryPolicy]
     class StartJobRunInput < Struct.new(
+      nil,
       :application_id,
       :client_token,
       :execution_role_arn,
@@ -1296,6 +1351,7 @@ module Aws::EMRServerless
     #   <p>This output displays the ARN of the job run..</p>
     #   @return [String]
     class StartJobRunOutput < Struct.new(
+      nil,
       :application_id,
       :job_run_id,
       :arn,
@@ -1308,6 +1364,7 @@ module Aws::EMRServerless
     #   <p>The ID of the application to stop.</p>
     #   @return [String]
     class StopApplicationInput < Struct.new(
+      nil,
       :application_id,
       keyword_init: true
     )
@@ -1315,6 +1372,7 @@ module Aws::EMRServerless
     end
 
     class StopApplicationOutput < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1327,6 +1385,7 @@ module Aws::EMRServerless
     #   <p>The tags to add to the resource. A tag is an array of key-value pairs.</p>
     #   @return [Hash<String, String>]
     class TagResourceInput < Struct.new(
+      nil,
       :resource_arn,
       :tags,
       keyword_init: true
@@ -1335,6 +1394,7 @@ module Aws::EMRServerless
     end
 
     class TagResourceOutput < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1351,6 +1411,7 @@ module Aws::EMRServerless
     #   <p>The aggregated storage used per hour from the time job start executing till the time job is terminated.</p>
     #   @return [Float]
     class TotalResourceUtilization < Struct.new(
+      nil,
       :v_cpu_hour,
       :memory_gb_hour,
       :storage_gb_hour,
@@ -1366,6 +1427,7 @@ module Aws::EMRServerless
     #   <p>The keys of the tags to be removed.</p>
     #   @return [Array<String>]
     class UntagResourceInput < Struct.new(
+      nil,
       :resource_arn,
       :tag_keys,
       keyword_init: true
@@ -1374,6 +1436,7 @@ module Aws::EMRServerless
     end
 
     class UntagResourceOutput < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1428,6 +1491,7 @@ module Aws::EMRServerless
     #   <p>Specifies the IAM Identity Center configuration used to enable or disable trusted identity propagation. When provided, this configuration determines how the application interacts with IAM Identity Center for user authentication and access control.</p>
     #   @return [Types::IdentityCenterConfigurationInput]
     class UpdateApplicationInput < Struct.new(
+      nil,
       :application_id,
       :client_token,
       :initial_capacity,
@@ -1453,6 +1517,7 @@ module Aws::EMRServerless
     #   <p>Information about the updated application.</p>
     #   @return [Types::Application]
     class UpdateApplicationOutput < Struct.new(
+      nil,
       :application,
       keyword_init: true
     )
@@ -1463,6 +1528,7 @@ module Aws::EMRServerless
     # @!attribute message
     #   @return [String]
     class ValidationException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -1483,6 +1549,7 @@ module Aws::EMRServerless
     #   <p>The disk type for every worker instance of the work type. Shuffle optimized disks have higher performance characteristics and are better for shuffle heavy workloads. Default is <code>STANDARD</code>.</p>
     #   @return [String]
     class WorkerResourceConfig < Struct.new(
+      nil,
       :cpu,
       :memory,
       :disk,
@@ -1497,6 +1564,7 @@ module Aws::EMRServerless
     #   <p>The image configuration for a worker type.</p>
     #   @return [Types::ImageConfiguration]
     class WorkerTypeSpecification < Struct.new(
+      nil,
       :image_configuration,
       keyword_init: true
     )
@@ -1508,6 +1576,7 @@ module Aws::EMRServerless
     #   <p>The image configuration for a worker type.</p>
     #   @return [Types::ImageConfigurationInput]
     class WorkerTypeSpecificationInput < Struct.new(
+      nil,
       :image_configuration,
       keyword_init: true
     )

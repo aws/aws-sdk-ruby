@@ -31,6 +31,7 @@ module Aws::Savingsplans
     #   <p>One or more tags.</p>
     #   @return [Hash<String, String>]
     class CreateSavingsPlanRequest < Struct.new(
+      nil,
       :savings_plan_offering_id,
       :commitment,
       :upfront_payment_amount,
@@ -46,6 +47,7 @@ module Aws::Savingsplans
     #   <p>The ID of the Savings Plan.</p>
     #   @return [String]
     class CreateSavingsPlanResponse < Struct.new(
+      nil,
       :savings_plan_id,
       keyword_init: true
     )
@@ -56,6 +58,7 @@ module Aws::Savingsplans
     #   <p>The ID of the Savings Plan.</p>
     #   @return [String]
     class DeleteQueuedSavingsPlanRequest < Struct.new(
+      nil,
       :savings_plan_id,
       keyword_init: true
     )
@@ -63,6 +66,7 @@ module Aws::Savingsplans
     end
 
     class DeleteQueuedSavingsPlanResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -82,6 +86,7 @@ module Aws::Savingsplans
     #            results, make another call with the returned token value.</p>
     #   @return [Integer]
     class DescribeSavingsPlanRatesRequest < Struct.new(
+      nil,
       :savings_plan_id,
       :filters,
       :next_token,
@@ -102,6 +107,7 @@ module Aws::Savingsplans
     #            no more results to return.</p>
     #   @return [String]
     class DescribeSavingsPlanRatesResponse < Struct.new(
+      nil,
       :savings_plan_id,
       :search_results,
       :next_token,
@@ -143,6 +149,7 @@ module Aws::Savingsplans
     #            results, make another call with the returned token value.</p>
     #   @return [Integer]
     class DescribeSavingsPlansOfferingRatesRequest < Struct.new(
+      nil,
       :savings_plan_offering_ids,
       :savings_plan_payment_options,
       :savings_plan_types,
@@ -166,6 +173,7 @@ module Aws::Savingsplans
     #            no more results to return.</p>
     #   @return [String]
     class DescribeSavingsPlansOfferingRatesResponse < Struct.new(
+      nil,
       :search_results,
       :next_token,
       keyword_init: true
@@ -215,6 +223,7 @@ module Aws::Savingsplans
     #            results, make another call with the returned token value.</p>
     #   @return [Integer]
     class DescribeSavingsPlansOfferingsRequest < Struct.new(
+      nil,
       :offering_ids,
       :payment_options,
       :product_type,
@@ -241,6 +250,7 @@ module Aws::Savingsplans
     #            no more results to return.</p>
     #   @return [String]
     class DescribeSavingsPlansOfferingsResponse < Struct.new(
+      nil,
       :search_results,
       :next_token,
       keyword_init: true
@@ -268,6 +278,7 @@ module Aws::Savingsplans
     #   <p>The filters.</p>
     #   @return [Array<Types::SavingsPlanFilter>]
     class DescribeSavingsPlansRequest < Struct.new(
+      nil,
       :savings_plan_arns,
       :savings_plan_ids,
       :next_token,
@@ -287,6 +298,7 @@ module Aws::Savingsplans
     #            no more results to return.</p>
     #   @return [String]
     class DescribeSavingsPlansResponse < Struct.new(
+      nil,
       :savings_plans,
       :next_token,
       keyword_init: true
@@ -298,6 +310,7 @@ module Aws::Savingsplans
     # @!attribute message
     #   @return [String]
     class InternalServerException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -308,6 +321,7 @@ module Aws::Savingsplans
     #   <p>The Amazon Resource Name (ARN) of the resource.</p>
     #   @return [String]
     class ListTagsForResourceRequest < Struct.new(
+      nil,
       :resource_arn,
       keyword_init: true
     )
@@ -318,6 +332,7 @@ module Aws::Savingsplans
     #   <p>Information about the tags.</p>
     #   @return [Hash<String, String>]
     class ListTagsForResourceResponse < Struct.new(
+      nil,
       :tags,
       keyword_init: true
     )
@@ -344,6 +359,7 @@ module Aws::Savingsplans
     #   <p>The description.</p>
     #   @return [String]
     class ParentSavingsPlanOffering < Struct.new(
+      nil,
       :offering_id,
       :payment_option,
       :plan_type,
@@ -364,6 +380,7 @@ module Aws::Savingsplans
     # @!attribute message
     #   @return [String]
     class ResourceNotFoundException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -378,6 +395,7 @@ module Aws::Savingsplans
     #            request.</p>
     #   @return [String]
     class ReturnSavingsPlanRequest < Struct.new(
+      nil,
       :savings_plan_id,
       :client_token,
       keyword_init: true
@@ -389,6 +407,7 @@ module Aws::Savingsplans
     #   <p>The ID of the Savings Plan.</p>
     #   @return [String]
     class ReturnSavingsPlanResponse < Struct.new(
+      nil,
       :savings_plan_id,
       keyword_init: true
     )
@@ -455,6 +474,7 @@ module Aws::Savingsplans
     #               Savings Plan is not returnable, the field reflects the Savings Plan start time.</p>
     #   @return [String]
     class SavingsPlan < Struct.new(
+      nil,
       :offering_id,
       :savings_plan_id,
       :savings_plan_arn,
@@ -492,6 +512,7 @@ module Aws::Savingsplans
     #   <p>The filter value.</p>
     #   @return [Array<String>]
     class SavingsPlanFilter < Struct.new(
+      nil,
       :name,
       :values,
       keyword_init: true
@@ -535,6 +556,7 @@ module Aws::Savingsplans
     #   <p>The properties.</p>
     #   @return [Array<Types::SavingsPlanOfferingProperty>]
     class SavingsPlanOffering < Struct.new(
+      nil,
       :offering_id,
       :product_types,
       :plan_type,
@@ -564,6 +586,7 @@ module Aws::Savingsplans
     #   <p>The filter values.</p>
     #   @return [Array<String>]
     class SavingsPlanOfferingFilterElement < Struct.new(
+      nil,
       :name,
       :values,
       keyword_init: true
@@ -579,6 +602,7 @@ module Aws::Savingsplans
     #   <p>The property value.</p>
     #   @return [String]
     class SavingsPlanOfferingProperty < Struct.new(
+      nil,
       :name,
       :value,
       keyword_init: true
@@ -613,6 +637,7 @@ module Aws::Savingsplans
     #   <p>The properties.</p>
     #   @return [Array<Types::SavingsPlanOfferingRateProperty>]
     class SavingsPlanOfferingRate < Struct.new(
+      nil,
       :savings_plan_offering,
       :rate,
       :unit,
@@ -634,6 +659,7 @@ module Aws::Savingsplans
     #   <p>The filter values.</p>
     #   @return [Array<String>]
     class SavingsPlanOfferingRateFilterElement < Struct.new(
+      nil,
       :name,
       :values,
       keyword_init: true
@@ -649,6 +675,7 @@ module Aws::Savingsplans
     #   <p>The property value.</p>
     #   @return [String]
     class SavingsPlanOfferingRateProperty < Struct.new(
+      nil,
       :name,
       :value,
       keyword_init: true
@@ -683,6 +710,7 @@ module Aws::Savingsplans
     #   <p>The properties.</p>
     #   @return [Array<Types::SavingsPlanRateProperty>]
     class SavingsPlanRate < Struct.new(
+      nil,
       :rate,
       :currency,
       :unit,
@@ -704,6 +732,7 @@ module Aws::Savingsplans
     #   <p>The filter values.</p>
     #   @return [Array<String>]
     class SavingsPlanRateFilter < Struct.new(
+      nil,
       :name,
       :values,
       keyword_init: true
@@ -719,6 +748,7 @@ module Aws::Savingsplans
     #   <p>The property value.</p>
     #   @return [String]
     class SavingsPlanRateProperty < Struct.new(
+      nil,
       :name,
       :value,
       keyword_init: true
@@ -730,6 +760,7 @@ module Aws::Savingsplans
     # @!attribute message
     #   @return [String]
     class ServiceQuotaExceededException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -743,6 +774,7 @@ module Aws::Savingsplans
     #   <p>One or more tags. For example, { "tags": {"key1":"value1", "key2":"value2"} }.</p>
     #   @return [Hash<String, String>]
     class TagResourceRequest < Struct.new(
+      nil,
       :resource_arn,
       :tags,
       keyword_init: true
@@ -751,6 +783,7 @@ module Aws::Savingsplans
     end
 
     class TagResourceResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -763,6 +796,7 @@ module Aws::Savingsplans
     #   <p>The tag keys.</p>
     #   @return [Array<String>]
     class UntagResourceRequest < Struct.new(
+      nil,
       :resource_arn,
       :tag_keys,
       keyword_init: true
@@ -771,6 +805,7 @@ module Aws::Savingsplans
     end
 
     class UntagResourceResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -780,6 +815,7 @@ module Aws::Savingsplans
     # @!attribute message
     #   @return [String]
     class ValidationException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )

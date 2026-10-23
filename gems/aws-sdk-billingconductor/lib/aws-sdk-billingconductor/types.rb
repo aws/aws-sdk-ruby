@@ -11,6 +11,7 @@ module Aws::Billingconductor
     # @!attribute message
     #   @return [String]
     class AccessDeniedException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -31,6 +32,7 @@ module Aws::Billingconductor
     #   <p>The Amazon Web Services account email.</p>
     #   @return [String]
     class AccountAssociationsListElement < Struct.new(
+      nil,
       :account_id,
       :billing_group_arn,
       :account_name,
@@ -49,6 +51,7 @@ module Aws::Billingconductor
     #   Amazon Web Services accounts that join your consolidated billing family.</p>
     #   @return [Boolean]
     class AccountGrouping < Struct.new(
+      nil,
       :linked_account_ids,
       :auto_associate,
       keyword_init: true
@@ -66,6 +69,7 @@ module Aws::Billingconductor
     #       </p>
     #   @return [Array<String>]
     class AssociateAccountsOperationInput < Struct.new(
+      nil,
       :arn,
       :account_ids,
       keyword_init: true
@@ -78,6 +82,7 @@ module Aws::Billingconductor
     #         account IDs. </p>
     #   @return [String]
     class AssociateAccountsOperationOutput < Struct.new(
+      nil,
       :arn,
       keyword_init: true
     )
@@ -95,6 +100,7 @@ module Aws::Billingconductor
     #       </p>
     #   @return [Array<String>]
     class AssociatePricingRulesOperationInput < Struct.new(
+      nil,
       :arn,
       :pricing_rule_arns,
       keyword_init: true
@@ -108,6 +114,7 @@ module Aws::Billingconductor
     #       </p>
     #   @return [String]
     class AssociatePricingRulesOperationOutput < Struct.new(
+      nil,
       :arn,
       keyword_init: true
     )
@@ -122,6 +129,7 @@ module Aws::Billingconductor
     #   <p>A static error code that's used to classify the type of failure.</p>
     #   @return [String]
     class AssociateResourceError < Struct.new(
+      nil,
       :message,
       :reason,
       keyword_init: true
@@ -137,6 +145,7 @@ module Aws::Billingconductor
     #   <p>An <code>AssociateResourceError</code> that will populate if the resource association fails.</p>
     #   @return [Types::AssociateResourceError]
     class AssociateResourceResponseElement < Struct.new(
+      nil,
       :arn,
       :error,
       keyword_init: true
@@ -155,6 +164,7 @@ module Aws::Billingconductor
     #   <p>The value in a key-value pair that describes the margin summary.</p>
     #   @return [String]
     class Attribute < Struct.new(
+      nil,
       :key,
       :value,
       keyword_init: true
@@ -176,6 +186,7 @@ module Aws::Billingconductor
     #   <p>The billing period range in which the custom line item request will be applied.</p>
     #   @return [Types::CustomLineItemBillingPeriodRange]
     class BatchAssociateResourcesToCustomLineItemOperationInput < Struct.new(
+      nil,
       :target_arn,
       :resource_arns,
       :billing_period_range,
@@ -195,6 +206,7 @@ module Aws::Billingconductor
     #       </p>
     #   @return [Array<Types::AssociateResourceResponseElement>]
     class BatchAssociateResourcesToCustomLineItemOperationOutput < Struct.new(
+      nil,
       :successfully_associated_resources,
       :failed_associated_resources,
       keyword_init: true
@@ -216,6 +228,7 @@ module Aws::Billingconductor
     #   <p>The billing period range in which the custom line item request will be applied.</p>
     #   @return [Types::CustomLineItemBillingPeriodRange]
     class BatchDisassociateResourcesFromCustomLineItemOperationInput < Struct.new(
+      nil,
       :target_arn,
       :resource_arns,
       :billing_period_range,
@@ -235,6 +248,7 @@ module Aws::Billingconductor
     #       </p>
     #   @return [Array<Types::DisassociateResourceResponseElement>]
     class BatchDisassociateResourcesFromCustomLineItemOperationOutput < Struct.new(
+      nil,
       :successfully_disassociated_resources,
       :failed_disassociated_resources,
       keyword_init: true
@@ -262,6 +276,7 @@ module Aws::Billingconductor
     #   <p>The displayed currency.</p>
     #   @return [String]
     class BillingGroupCostReportElement < Struct.new(
+      nil,
       :arn,
       :aws_cost,
       :proforma_cost,
@@ -302,6 +317,7 @@ module Aws::Billingconductor
     #                   <code>"Nov 2023"</code>.</p>
     #   @return [Array<Types::Attribute>]
     class BillingGroupCostReportResultElement < Struct.new(
+      nil,
       :arn,
       :aws_cost,
       :proforma_cost,
@@ -350,6 +366,7 @@ module Aws::Billingconductor
     #   association (<code>AutoAssociate</code>) enabled.</p>
     #   @return [Types::ListBillingGroupAccountGrouping]
     class BillingGroupListElement < Struct.new(
+      nil,
       :name,
       :arn,
       :description,
@@ -381,6 +398,7 @@ module Aws::Billingconductor
     #   <p>The exclusive end billing period that defines a billing period range for the margin summary. For example, if you choose a billing period that starts in October 2023 and ends in December 2023, the margin summary will only include data from October 2023 and November 2023.</p>
     #   @return [String]
     class BillingPeriodRange < Struct.new(
+      nil,
       :inclusive_start_billing_period,
       :exclusive_end_billing_period,
       keyword_init: true
@@ -393,6 +411,7 @@ module Aws::Billingconductor
     #   <p> The Amazon Resource Name (ARN) of the pricing plan that's used to compute the Amazon Web Services charges for a billing group. </p>
     #   @return [String]
     class ComputationPreference < Struct.new(
+      nil,
       :pricing_plan_arn,
       keyword_init: true
     )
@@ -416,6 +435,7 @@ module Aws::Billingconductor
     #       </p>
     #   @return [String]
     class ConflictException < Struct.new(
+      nil,
       :message,
       :resource_id,
       :resource_type,
@@ -456,6 +476,7 @@ module Aws::Billingconductor
     #         feature isn't available during the beta. </p>
     #   @return [Hash<String, String>]
     class CreateBillingGroupOperationInput < Struct.new(
+      nil,
       :client_token,
       :name,
       :account_grouping,
@@ -472,6 +493,7 @@ module Aws::Billingconductor
     #   <p>The Amazon Resource Name (ARN) of the created billing group. </p>
     #   @return [String]
     class CreateBillingGroupOperationOutput < Struct.new(
+      nil,
       :arn,
       keyword_init: true
     )
@@ -512,6 +534,7 @@ module Aws::Billingconductor
     #   <p>The Amazon Web Services account in which this custom line item will be applied to.</p>
     #   @return [String]
     class CreateCustomLineItemOperationInput < Struct.new(
+      nil,
       :client_token,
       :name,
       :description,
@@ -529,6 +552,7 @@ module Aws::Billingconductor
     #   <p> The Amazon Resource Name (ARN) of the created custom line item. </p>
     #   @return [String]
     class CreateCustomLineItemOperationOutput < Struct.new(
+      nil,
       :arn,
       keyword_init: true
     )
@@ -544,6 +568,7 @@ module Aws::Billingconductor
     #       </p>
     #   @return [Boolean]
     class CreateFreeTierConfig < Struct.new(
+      nil,
       :activated,
       keyword_init: true
     )
@@ -570,6 +595,7 @@ module Aws::Billingconductor
     #       </p>
     #   @return [Hash<String, String>]
     class CreatePricingPlanOperationInput < Struct.new(
+      nil,
       :client_token,
       :name,
       :description,
@@ -584,6 +610,7 @@ module Aws::Billingconductor
     #   <p>The Amazon Resource Name (ARN) of the created pricing plan.</p>
     #   @return [String]
     class CreatePricingPlanOperationOutput < Struct.new(
+      nil,
       :arn,
       keyword_init: true
     )
@@ -650,6 +677,7 @@ module Aws::Billingconductor
     #           If the <code>Scope</code> attribute is set to <code>SKU</code>, this attribute indicates which operation the <code>PricingRule</code> is modifying. For example, a value of <code>RunInstances:0202</code> indicates the operation of running an Amazon EC2 instance.</p>
     #   @return [String]
     class CreatePricingRuleOperationInput < Struct.new(
+      nil,
       :client_token,
       :name,
       :description,
@@ -671,6 +699,7 @@ module Aws::Billingconductor
     #   <p> The Amazon Resource Name (ARN) of the created pricing rule. </p>
     #   @return [String]
     class CreatePricingRuleOperationOutput < Struct.new(
+      nil,
       :arn,
       keyword_init: true
     )
@@ -686,6 +715,7 @@ module Aws::Billingconductor
     #       </p>
     #   @return [Types::CreateFreeTierConfig]
     class CreateTieringInput < Struct.new(
+      nil,
       :free_tier,
       keyword_init: true
     )
@@ -700,6 +730,7 @@ module Aws::Billingconductor
     #   <p>The inclusive end billing period that defines a billing period range where a custom line is applied.</p>
     #   @return [String]
     class CustomLineItemBillingPeriodRange < Struct.new(
+      nil,
       :inclusive_start_billing_period,
       :exclusive_end_billing_period,
       keyword_init: true
@@ -722,6 +753,7 @@ module Aws::Billingconductor
     #   <p>A representation of the line item filter.</p>
     #   @return [Array<Types::LineItemFilter>]
     class CustomLineItemChargeDetails < Struct.new(
+      nil,
       :flat,
       :percentage,
       :type,
@@ -736,6 +768,7 @@ module Aws::Billingconductor
     #   <p>The custom line item's fixed charge value in USD.</p>
     #   @return [Float]
     class CustomLineItemFlatChargeDetails < Struct.new(
+      nil,
       :charge_value,
       keyword_init: true
     )
@@ -777,6 +810,7 @@ module Aws::Billingconductor
     #   <p>The Amazon Web Services account in which this custom line item will be applied to.</p>
     #   @return [String]
     class CustomLineItemListElement < Struct.new(
+      nil,
       :arn,
       :name,
       :charge_details,
@@ -809,6 +843,7 @@ module Aws::Billingconductor
     #   <p>A list of resource ARNs to associate to the percentage custom line item.</p>
     #   @return [Array<String>]
     class CustomLineItemPercentageChargeDetails < Struct.new(
+      nil,
       :percentage_value,
       :associated_values,
       keyword_init: true
@@ -866,6 +901,7 @@ module Aws::Billingconductor
     #   <p>The Amazon Web Services account in which this custom line item will be applied to.</p>
     #   @return [String]
     class CustomLineItemVersionListElement < Struct.new(
+      nil,
       :name,
       :charge_details,
       :currency_code,
@@ -897,6 +933,7 @@ module Aws::Billingconductor
     #   <p>The Amazon Resource Name (ARN) of the billing group that you're deleting.</p>
     #   @return [String]
     class DeleteBillingGroupOperationInput < Struct.new(
+      nil,
       :arn,
       keyword_init: true
     )
@@ -907,6 +944,7 @@ module Aws::Billingconductor
     #   <p>The Amazon Resource Name (ARN) of the deleted billing group.</p>
     #   @return [String]
     class DeleteBillingGroupOperationOutput < Struct.new(
+      nil,
       :arn,
       keyword_init: true
     )
@@ -922,6 +960,7 @@ module Aws::Billingconductor
     #   <p>The billing period range in which the custom line item request will be applied.</p>
     #   @return [Types::CustomLineItemBillingPeriodRange]
     class DeleteCustomLineItemOperationInput < Struct.new(
+      nil,
       :arn,
       :billing_period_range,
       keyword_init: true
@@ -933,6 +972,7 @@ module Aws::Billingconductor
     #   <p>The ARN of the deleted custom line item. </p>
     #   @return [String]
     class DeleteCustomLineItemOperationOutput < Struct.new(
+      nil,
       :arn,
       keyword_init: true
     )
@@ -943,6 +983,7 @@ module Aws::Billingconductor
     #   <p>The Amazon Resource Name (ARN) of the pricing plan that you're deleting. </p>
     #   @return [String]
     class DeletePricingPlanOperationInput < Struct.new(
+      nil,
       :arn,
       keyword_init: true
     )
@@ -953,6 +994,7 @@ module Aws::Billingconductor
     #   <p> The Amazon Resource Name (ARN) of the deleted pricing plan. </p>
     #   @return [String]
     class DeletePricingPlanOperationOutput < Struct.new(
+      nil,
       :arn,
       keyword_init: true
     )
@@ -963,6 +1005,7 @@ module Aws::Billingconductor
     #   <p> The Amazon Resource Name (ARN) of the pricing rule that you are deleting. </p>
     #   @return [String]
     class DeletePricingRuleOperationInput < Struct.new(
+      nil,
       :arn,
       keyword_init: true
     )
@@ -973,6 +1016,7 @@ module Aws::Billingconductor
     #   <p> The Amazon Resource Name (ARN) of the deleted pricing rule. </p>
     #   @return [String]
     class DeletePricingRuleOperationOutput < Struct.new(
+      nil,
       :arn,
       keyword_init: true
     )
@@ -988,6 +1032,7 @@ module Aws::Billingconductor
     #       </p>
     #   @return [Array<String>]
     class DisassociateAccountsOperationInput < Struct.new(
+      nil,
       :arn,
       :account_ids,
       keyword_init: true
@@ -1000,6 +1045,7 @@ module Aws::Billingconductor
     #         disassociated from. </p>
     #   @return [String]
     class DisassociateAccountsOperationOutput < Struct.new(
+      nil,
       :arn,
       keyword_init: true
     )
@@ -1014,6 +1060,7 @@ module Aws::Billingconductor
     #         disassociated. </p>
     #   @return [Array<String>]
     class DisassociatePricingRulesOperationInput < Struct.new(
+      nil,
       :arn,
       :pricing_rule_arns,
       keyword_init: true
@@ -1026,6 +1073,7 @@ module Aws::Billingconductor
     #         disassociated from. </p>
     #   @return [String]
     class DisassociatePricingRulesOperationOutput < Struct.new(
+      nil,
       :arn,
       keyword_init: true
     )
@@ -1041,6 +1089,7 @@ module Aws::Billingconductor
     #   <p> An <code>AssociateResourceError</code> that's shown if the resource disassociation fails. </p>
     #   @return [Types::AssociateResourceError]
     class DisassociateResourceResponseElement < Struct.new(
+      nil,
       :arn,
       :error,
       keyword_init: true
@@ -1057,6 +1106,7 @@ module Aws::Billingconductor
     #       </p>
     #   @return [Boolean]
     class FreeTierConfig < Struct.new(
+      nil,
       :activated,
       keyword_init: true
     )
@@ -1081,6 +1131,7 @@ module Aws::Billingconductor
     #   <p>The pagination token used on subsequent calls to get reports.</p>
     #   @return [String]
     class GetBillingGroupCostReportInput < Struct.new(
+      nil,
       :arn,
       :billing_period_range,
       :group_by,
@@ -1098,6 +1149,7 @@ module Aws::Billingconductor
     #   <p>The pagination token used on subsequent calls to get reports.</p>
     #   @return [String]
     class GetBillingGroupCostReportOutput < Struct.new(
+      nil,
       :billing_group_cost_report_results,
       :next_token,
       keyword_init: true
@@ -1114,6 +1166,7 @@ module Aws::Billingconductor
     #       </p>
     #   @return [Integer]
     class InternalServerException < Struct.new(
+      nil,
       :message,
       :retry_after_seconds,
       keyword_init: true
@@ -1140,6 +1193,7 @@ module Aws::Billingconductor
     #   <p>The values of the line item filter. This specifies the values to filter on. Currently, you can only exclude Savings Plan discounts.</p>
     #   @return [Array<String>]
     class LineItemFilter < Struct.new(
+      nil,
       :attribute,
       :match_option,
       :values,
@@ -1172,6 +1226,7 @@ module Aws::Billingconductor
     #       </p>
     #   @return [Array<String>]
     class ListAccountAssociationsFilter < Struct.new(
+      nil,
       :association,
       :account_id,
       :account_ids,
@@ -1201,6 +1256,7 @@ module Aws::Billingconductor
     #       </p>
     #   @return [String]
     class ListAccountAssociationsOperationInput < Struct.new(
+      nil,
       :billing_period,
       :filters,
       :next_token,
@@ -1218,6 +1274,7 @@ module Aws::Billingconductor
     #       </p>
     #   @return [String]
     class ListAccountAssociationsOperationOutput < Struct.new(
+      nil,
       :linked_accounts,
       :next_token,
       keyword_init: true
@@ -1232,6 +1289,7 @@ module Aws::Billingconductor
     #   Amazon Web Services accounts that join your consolidated billing family.</p>
     #   @return [Boolean]
     class ListBillingGroupAccountGrouping < Struct.new(
+      nil,
       :auto_associate,
       keyword_init: true
     )
@@ -1243,6 +1301,7 @@ module Aws::Billingconductor
     #   <p>The list of Amazon Resource Names (ARNs) used to filter billing groups to retrieve reports. </p>
     #   @return [Array<String>]
     class ListBillingGroupCostReportsFilter < Struct.new(
+      nil,
       :billing_group_arns,
       keyword_init: true
     )
@@ -1266,6 +1325,7 @@ module Aws::Billingconductor
     #       </p>
     #   @return [Types::ListBillingGroupCostReportsFilter]
     class ListBillingGroupCostReportsOperationInput < Struct.new(
+      nil,
       :billing_period,
       :max_results,
       :next_token,
@@ -1284,6 +1344,7 @@ module Aws::Billingconductor
     #       </p>
     #   @return [String]
     class ListBillingGroupCostReportsOperationOutput < Struct.new(
+      nil,
       :billing_group_cost_reports,
       :next_token,
       keyword_init: true
@@ -1308,6 +1369,7 @@ module Aws::Billingconductor
     #   Amazon Web Services accounts that join your consolidated billing family.</p>
     #   @return [Boolean]
     class ListBillingGroupsFilter < Struct.new(
+      nil,
       :arns,
       :pricing_plan,
       :statuses,
@@ -1334,6 +1396,7 @@ module Aws::Billingconductor
     #       </p>
     #   @return [Types::ListBillingGroupsFilter]
     class ListBillingGroupsOperationInput < Struct.new(
+      nil,
       :billing_period,
       :max_results,
       :next_token,
@@ -1352,6 +1415,7 @@ module Aws::Billingconductor
     #       </p>
     #   @return [String]
     class ListBillingGroupsOperationOutput < Struct.new(
+      nil,
       :billing_groups,
       :next_token,
       keyword_init: true
@@ -1381,6 +1445,7 @@ module Aws::Billingconductor
     #   <p>A representation of the line item filter.</p>
     #   @return [Array<Types::LineItemFilter>]
     class ListCustomLineItemChargeDetails < Struct.new(
+      nil,
       :flat,
       :percentage,
       :type,
@@ -1399,6 +1464,7 @@ module Aws::Billingconductor
     #       </p>
     #   @return [Float]
     class ListCustomLineItemFlatChargeDetails < Struct.new(
+      nil,
       :charge_value,
       keyword_init: true
     )
@@ -1414,6 +1480,7 @@ module Aws::Billingconductor
     #       </p>
     #   @return [Float]
     class ListCustomLineItemPercentageChargeDetails < Struct.new(
+      nil,
       :percentage_value,
       keyword_init: true
     )
@@ -1428,6 +1495,7 @@ module Aws::Billingconductor
     #   <p>The exclusive end billing period that defines a billing period range where a  custom line item version is applied.</p>
     #   @return [String]
     class ListCustomLineItemVersionsBillingPeriodRangeFilter < Struct.new(
+      nil,
       :start_billing_period,
       :end_billing_period,
       keyword_init: true
@@ -1440,6 +1508,7 @@ module Aws::Billingconductor
     #   <p>The billing period range in which the custom line item version is applied.</p>
     #   @return [Types::ListCustomLineItemVersionsBillingPeriodRangeFilter]
     class ListCustomLineItemVersionsFilter < Struct.new(
+      nil,
       :billing_period_range,
       keyword_init: true
     )
@@ -1459,6 +1528,7 @@ module Aws::Billingconductor
     #   <p>A <code>ListCustomLineItemVersionsFilter</code> that specifies the billing period range in which the custom line item versions are applied.</p>
     #   @return [Types::ListCustomLineItemVersionsFilter]
     class ListCustomLineItemVersionsOperationInput < Struct.new(
+      nil,
       :arn,
       :max_results,
       :next_token,
@@ -1475,6 +1545,7 @@ module Aws::Billingconductor
     #   <p>The pagination token that's used on subsequent calls to retrieve custom line item versions.</p>
     #   @return [String]
     class ListCustomLineItemVersionsOperationOutput < Struct.new(
+      nil,
       :custom_line_item_versions,
       :next_token,
       keyword_init: true
@@ -1496,6 +1567,7 @@ module Aws::Billingconductor
     #   <p>The Amazon Web Services accounts in which this custom line item will be applied to.</p>
     #   @return [Array<String>]
     class ListCustomLineItemsFilter < Struct.new(
+      nil,
       :names,
       :billing_groups,
       :arns,
@@ -1525,6 +1597,7 @@ module Aws::Billingconductor
     #         and/or billing group Amazon Resource Names (ARNs) to retrieve FFLI information.</p>
     #   @return [Types::ListCustomLineItemsFilter]
     class ListCustomLineItemsOperationInput < Struct.new(
+      nil,
       :billing_period,
       :max_results,
       :next_token,
@@ -1545,6 +1618,7 @@ module Aws::Billingconductor
     #       </p>
     #   @return [String]
     class ListCustomLineItemsOperationOutput < Struct.new(
+      nil,
       :custom_line_items,
       :next_token,
       keyword_init: true
@@ -1571,6 +1645,7 @@ module Aws::Billingconductor
     #       </p>
     #   @return [String]
     class ListPricingPlansAssociatedWithPricingRuleOperationInput < Struct.new(
+      nil,
       :billing_period,
       :pricing_rule_arn,
       :max_results,
@@ -1599,6 +1674,7 @@ module Aws::Billingconductor
     #       </p>
     #   @return [String]
     class ListPricingPlansAssociatedWithPricingRuleOperationOutput < Struct.new(
+      nil,
       :billing_period,
       :pricing_rule_arn,
       :pricing_plan_arns,
@@ -1614,6 +1690,7 @@ module Aws::Billingconductor
     #   <p>A list of pricing plan Amazon Resource Names (ARNs) to retrieve information.</p>
     #   @return [Array<String>]
     class ListPricingPlansFilter < Struct.new(
+      nil,
       :arns,
       keyword_init: true
     )
@@ -1636,6 +1713,7 @@ module Aws::Billingconductor
     #       </p>
     #   @return [String]
     class ListPricingPlansOperationInput < Struct.new(
+      nil,
       :billing_period,
       :filters,
       :max_results,
@@ -1659,6 +1737,7 @@ module Aws::Billingconductor
     #       </p>
     #   @return [String]
     class ListPricingPlansOperationOutput < Struct.new(
+      nil,
       :billing_period,
       :pricing_plans,
       :next_token,
@@ -1685,6 +1764,7 @@ module Aws::Billingconductor
     #       </p>
     #   @return [String]
     class ListPricingRulesAssociatedToPricingPlanOperationInput < Struct.new(
+      nil,
       :billing_period,
       :pricing_plan_arn,
       :max_results,
@@ -1714,6 +1794,7 @@ module Aws::Billingconductor
     #       </p>
     #   @return [String]
     class ListPricingRulesAssociatedToPricingPlanOperationOutput < Struct.new(
+      nil,
       :billing_period,
       :pricing_plan_arn,
       :pricing_rule_arns,
@@ -1728,6 +1809,7 @@ module Aws::Billingconductor
     #   <p>A list containing the pricing rule Amazon Resource Names (ARNs) to include in the API response.</p>
     #   @return [Array<String>]
     class ListPricingRulesFilter < Struct.new(
+      nil,
       :arns,
       keyword_init: true
     )
@@ -1754,6 +1836,7 @@ module Aws::Billingconductor
     #       </p>
     #   @return [String]
     class ListPricingRulesOperationInput < Struct.new(
+      nil,
       :billing_period,
       :filters,
       :max_results,
@@ -1779,6 +1862,7 @@ module Aws::Billingconductor
     #       </p>
     #   @return [String]
     class ListPricingRulesOperationOutput < Struct.new(
+      nil,
       :billing_period,
       :pricing_rules,
       :next_token,
@@ -1796,6 +1880,7 @@ module Aws::Billingconductor
     #       </p>
     #   @return [String]
     class ListResourcesAssociatedToCustomLineItemFilter < Struct.new(
+      nil,
       :relationship,
       keyword_init: true
     )
@@ -1826,6 +1911,7 @@ module Aws::Billingconductor
     #       </p>
     #   @return [Types::ListResourcesAssociatedToCustomLineItemFilter]
     class ListResourcesAssociatedToCustomLineItemOperationInput < Struct.new(
+      nil,
       :billing_period,
       :arn,
       :max_results,
@@ -1852,6 +1938,7 @@ module Aws::Billingconductor
     #       </p>
     #   @return [String]
     class ListResourcesAssociatedToCustomLineItemOperationOutput < Struct.new(
+      nil,
       :arn,
       :associated_resources,
       :next_token,
@@ -1877,6 +1964,7 @@ module Aws::Billingconductor
     #   <p>The end billing period of the associated resource.</p>
     #   @return [String]
     class ListResourcesAssociatedToCustomLineItemResponseElement < Struct.new(
+      nil,
       :arn,
       :relationship,
       :end_billing_period,
@@ -1891,6 +1979,7 @@ module Aws::Billingconductor
     #       </p>
     #   @return [String]
     class ListTagsForResourceInput < Struct.new(
+      nil,
       :resource_arn,
       keyword_init: true
     )
@@ -1903,6 +1992,7 @@ module Aws::Billingconductor
     #       </p>
     #   @return [Hash<String, String>]
     class ListTagsForResourceOutput < Struct.new(
+      nil,
       :tags,
       keyword_init: true
     )
@@ -1929,6 +2019,7 @@ module Aws::Billingconductor
     #   <p>The most recent time when the pricing plan was modified.</p>
     #   @return [Integer]
     class PricingPlanListElement < Struct.new(
+      nil,
       :name,
       :arn,
       :description,
@@ -2002,6 +2093,7 @@ module Aws::Billingconductor
     #           If the <code>Scope</code> attribute is set to <code>SKU</code>, this attribute indicates which operation the <code>PricingRule</code> is modifying. For example, a value of <code>RunInstances:0202</code> indicates the operation of running an Amazon EC2 instance.</p>
     #   @return [String]
     class PricingRuleListElement < Struct.new(
+      nil,
       :name,
       :arn,
       :description,
@@ -2041,6 +2133,7 @@ module Aws::Billingconductor
     #       </p>
     #   @return [String]
     class ResourceNotFoundException < Struct.new(
+      nil,
       :message,
       :resource_id,
       :resource_type,
@@ -2070,6 +2163,7 @@ module Aws::Billingconductor
     #       </p>
     #   @return [String]
     class ServiceLimitExceededException < Struct.new(
+      nil,
       :message,
       :resource_id,
       :resource_type,
@@ -2091,6 +2185,7 @@ module Aws::Billingconductor
     #       </p>
     #   @return [Hash<String, String>]
     class TagResourceInput < Struct.new(
+      nil,
       :resource_arn,
       :tags,
       keyword_init: true
@@ -2099,6 +2194,7 @@ module Aws::Billingconductor
     end
 
     class TagResourceOutput < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -2113,6 +2209,7 @@ module Aws::Billingconductor
     #       </p>
     #   @return [Integer]
     class ThrottlingException < Struct.new(
+      nil,
       :message,
       :retry_after_seconds,
       keyword_init: true
@@ -2134,6 +2231,7 @@ module Aws::Billingconductor
     #       </p>
     #   @return [Types::FreeTierConfig]
     class Tiering < Struct.new(
+      nil,
       :free_tier,
       keyword_init: true
     )
@@ -2151,6 +2249,7 @@ module Aws::Billingconductor
     #       </p>
     #   @return [Array<String>]
     class UntagResourceInput < Struct.new(
+      nil,
       :resource_arn,
       :tag_keys,
       keyword_init: true
@@ -2159,6 +2258,7 @@ module Aws::Billingconductor
     end
 
     class UntagResourceOutput < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -2171,6 +2271,7 @@ module Aws::Billingconductor
     #   Amazon Web Services accounts that join your consolidated billing family.</p>
     #   @return [Boolean]
     class UpdateBillingGroupAccountGrouping < Struct.new(
+      nil,
       :auto_associate,
       keyword_init: true
     )
@@ -2202,6 +2303,7 @@ module Aws::Billingconductor
     #   association (<code>AutoAssociate</code>) enabled.</p>
     #   @return [Types::UpdateBillingGroupAccountGrouping]
     class UpdateBillingGroupOperationInput < Struct.new(
+      nil,
       :arn,
       :name,
       :status,
@@ -2260,6 +2362,7 @@ module Aws::Billingconductor
     #   association (<code>AutoAssociate</code>) enabled.</p>
     #   @return [Types::UpdateBillingGroupAccountGrouping]
     class UpdateBillingGroupOperationOutput < Struct.new(
+      nil,
       :arn,
       :name,
       :description,
@@ -2298,6 +2401,7 @@ module Aws::Billingconductor
     #   <p>A representation of the line item filter.</p>
     #   @return [Array<Types::LineItemFilter>]
     class UpdateCustomLineItemChargeDetails < Struct.new(
+      nil,
       :flat,
       :percentage,
       :line_item_filters,
@@ -2315,6 +2419,7 @@ module Aws::Billingconductor
     #       </p>
     #   @return [Float]
     class UpdateCustomLineItemFlatChargeDetails < Struct.new(
+      nil,
       :charge_value,
       keyword_init: true
     )
@@ -2345,6 +2450,7 @@ module Aws::Billingconductor
     #   <p>The billing period range in which the custom line item request will be applied.</p>
     #   @return [Types::CustomLineItemBillingPeriodRange]
     class UpdateCustomLineItemOperationInput < Struct.new(
+      nil,
       :arn,
       :name,
       :description,
@@ -2389,6 +2495,7 @@ module Aws::Billingconductor
     #       </p>
     #   @return [Integer]
     class UpdateCustomLineItemOperationOutput < Struct.new(
+      nil,
       :arn,
       :billing_group_arn,
       :name,
@@ -2416,6 +2523,7 @@ module Aws::Billingconductor
     #       </p>
     #   @return [Float]
     class UpdateCustomLineItemPercentageChargeDetails < Struct.new(
+      nil,
       :percentage_value,
       keyword_init: true
     )
@@ -2431,6 +2539,7 @@ module Aws::Billingconductor
     #       </p>
     #   @return [Boolean]
     class UpdateFreeTierConfig < Struct.new(
+      nil,
       :activated,
       keyword_init: true
     )
@@ -2448,6 +2557,7 @@ module Aws::Billingconductor
     #   <p>The description of the pricing plan. </p>
     #   @return [String]
     class UpdatePricingPlanOperationInput < Struct.new(
+      nil,
       :arn,
       :name,
       :description,
@@ -2478,6 +2588,7 @@ module Aws::Billingconductor
     #   <p> The most recent time when the pricing plan was modified. </p>
     #   @return [Integer]
     class UpdatePricingPlanOperationOutput < Struct.new(
+      nil,
       :arn,
       :name,
       :description,
@@ -2523,6 +2634,7 @@ module Aws::Billingconductor
     #       </p>
     #   @return [Types::UpdateTieringInput]
     class UpdatePricingRuleOperationInput < Struct.new(
+      nil,
       :arn,
       :name,
       :description,
@@ -2597,6 +2709,7 @@ module Aws::Billingconductor
     #         If the <code>Scope</code> attribute is set to <code>SKU</code>, this attribute indicates which operation the <code>PricingRule</code> is modifying. For example, a value of <code>RunInstances:0202</code> indicates the operation of running an Amazon EC2 instance.</p>
     #   @return [String]
     class UpdatePricingRuleOperationOutput < Struct.new(
+      nil,
       :arn,
       :name,
       :description,
@@ -2630,6 +2743,7 @@ module Aws::Billingconductor
     #       </p>
     #   @return [Types::UpdateFreeTierConfig]
     class UpdateTieringInput < Struct.new(
+      nil,
       :free_tier,
       keyword_init: true
     )
@@ -2648,6 +2762,7 @@ module Aws::Billingconductor
     #       </p>
     #   @return [Array<Types::ValidationExceptionField>]
     class ValidationException < Struct.new(
+      nil,
       :message,
       :reason,
       :fields,
@@ -2664,6 +2779,7 @@ module Aws::Billingconductor
     #   <p>The message describing why the field failed validation.</p>
     #   @return [String]
     class ValidationExceptionField < Struct.new(
+      nil,
       :name,
       :message,
       keyword_init: true

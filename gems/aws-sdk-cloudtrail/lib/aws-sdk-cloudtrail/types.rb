@@ -13,6 +13,7 @@ module Aws::CloudTrail
     #   <p>Brief description of the exception returned by the request.</p>
     #   @return [String]
     class AccessDeniedException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -25,6 +26,7 @@ module Aws::CloudTrail
     #   <p>Brief description of the exception returned by the request.</p>
     #   @return [String]
     class AccountHasOngoingImportException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -37,6 +39,7 @@ module Aws::CloudTrail
     #   <p>Brief description of the exception returned by the request.</p>
     #   @return [String]
     class AccountNotFoundException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -48,6 +51,7 @@ module Aws::CloudTrail
     #   <p>Brief description of the exception returned by the request.</p>
     #   @return [String]
     class AccountNotRegisteredException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -60,6 +64,7 @@ module Aws::CloudTrail
     #   <p>Brief description of the exception returned by the request.</p>
     #   @return [String]
     class AccountRegisteredException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -86,6 +91,7 @@ module Aws::CloudTrail
     #   <p>Contains a list of tags, up to a limit of 50</p>
     #   @return [Array<Types::Tag>]
     class AddTagsRequest < Struct.new(
+      nil,
       :resource_id,
       :tags_list,
       keyword_init: true
@@ -95,6 +101,7 @@ module Aws::CloudTrail
 
     # <p>Returns the objects or data if successful. Otherwise, returns an error.</p>
     class AddTagsResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -115,6 +122,7 @@ module Aws::CloudTrail
     #   <p>Contains all selector statements in an advanced event selector.</p>
     #   @return [Array<Types::AdvancedFieldSelector>]
     class AdvancedEventSelector < Struct.new(
+      nil,
       :name,
       :field_selectors,
       keyword_init: true
@@ -162,6 +170,7 @@ module Aws::CloudTrail
     #            field specified as the value of <code>Field</code>. </p>
     #   @return [Array<String>]
     class AdvancedFieldSelector < Struct.new(
+      nil,
       :field,
       :equals,
       :starts_with,
@@ -190,6 +199,7 @@ module Aws::CloudTrail
     #   </p>
     #   @return [String]
     class CancelQueryRequest < Struct.new(
+      nil,
       :event_data_store,
       :query_id,
       :event_data_store_owner_account_id,
@@ -211,6 +221,7 @@ module Aws::CloudTrail
     #   </p>
     #   @return [String]
     class CancelQueryResponse < Struct.new(
+      nil,
       :query_id,
       :query_status,
       :event_data_store_owner_account_id,
@@ -225,6 +236,7 @@ module Aws::CloudTrail
     #   <p>Brief description of the exception returned by the request.</p>
     #   @return [String]
     class CannotDelegateManagementAccountException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -243,6 +255,7 @@ module Aws::CloudTrail
     #               Amazon Web Services service. </p>
     #   @return [String]
     class Channel < Struct.new(
+      nil,
       :channel_arn,
       :name,
       keyword_init: true
@@ -256,6 +269,7 @@ module Aws::CloudTrail
     #   <p>Brief description of the exception returned by the request.</p>
     #   @return [String]
     class ChannelARNInvalidException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -269,6 +283,7 @@ module Aws::CloudTrail
     #   <p>Brief description of the exception returned by the request.</p>
     #   @return [String]
     class ChannelAlreadyExistsException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -281,6 +296,7 @@ module Aws::CloudTrail
     #   <p>Brief description of the exception returned by the request.</p>
     #   @return [String]
     class ChannelExistsForEDSException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -294,6 +310,7 @@ module Aws::CloudTrail
     #   <p>Brief description of the exception returned by the request.</p>
     #   @return [String]
     class ChannelMaxLimitExceededException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -305,6 +322,7 @@ module Aws::CloudTrail
     #   <p>Brief description of the exception returned by the request.</p>
     #   @return [String]
     class ChannelNotFoundException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -326,6 +344,7 @@ module Aws::CloudTrail
     #   <p>Brief description of the exception returned by the request.</p>
     #   @return [String]
     class CloudTrailARNInvalidException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -337,6 +356,7 @@ module Aws::CloudTrail
     #   <p>Brief description of the exception returned by the request.</p>
     #   @return [String]
     class CloudTrailAccessNotEnabledException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -350,6 +370,7 @@ module Aws::CloudTrail
     #   <p>Brief description of the exception returned by the request.</p>
     #   @return [String]
     class CloudTrailInvalidClientTokenIdException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -361,6 +382,7 @@ module Aws::CloudTrail
     #   <p>Brief description of the exception returned by the request.</p>
     #   @return [String]
     class CloudWatchLogsDeliveryUnavailableException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -374,6 +396,7 @@ module Aws::CloudTrail
     #   <p>Brief description of the exception returned by the request.</p>
     #   @return [String]
     class ConcurrentModificationException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -388,6 +411,7 @@ module Aws::CloudTrail
     #   <p>Brief description of the exception returned by the request.</p>
     #   @return [String]
     class ConflictException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -402,6 +426,7 @@ module Aws::CloudTrail
     #   <p>A list of keys defined by Type to be included in CloudTrail enriched events. </p>
     #   @return [Array<String>]
     class ContextKeySelector < Struct.new(
+      nil,
       :type,
       :equals,
       keyword_init: true
@@ -427,6 +452,7 @@ module Aws::CloudTrail
     #   <p>A list of tags.</p>
     #   @return [Array<Types::Tag>]
     class CreateChannelRequest < Struct.new(
+      nil,
       :name,
       :source,
       :destinations,
@@ -452,6 +478,7 @@ module Aws::CloudTrail
     #   <p>A list of tags.</p>
     #   @return [Array<Types::Tag>]
     class CreateChannelResponse < Struct.new(
+      nil,
       :channel_arn,
       :name,
       :source,
@@ -490,6 +517,7 @@ module Aws::CloudTrail
     #            <p>You do not need to specify widgets for the Highlights dashboard.</p>
     #   @return [Array<Types::RequestWidget>]
     class CreateDashboardRequest < Struct.new(
+      nil,
       :name,
       :refresh_schedule,
       :tags_list,
@@ -534,6 +562,7 @@ module Aws::CloudTrail
     #   </p>
     #   @return [Boolean]
     class CreateDashboardResponse < Struct.new(
+      nil,
       :dashboard_arn,
       :name,
       :type,
@@ -654,6 +683,7 @@ module Aws::CloudTrail
     #            <a href="https://docs.aws.amazon.com/awscloudtrail/latest/userguide/cloudtrail-lake-manage-costs.html">Managing CloudTrail Lake costs</a>.</p>
     #   @return [String]
     class CreateEventDataStoreRequest < Struct.new(
+      nil,
       :name,
       :advanced_event_selectors,
       :multi_region_enabled,
@@ -718,6 +748,7 @@ module Aws::CloudTrail
     #   <p>The billing mode for the event data store.</p>
     #   @return [String]
     class CreateEventDataStoreResponse < Struct.new(
+      nil,
       :event_data_store_arn,
       :name,
       :status,
@@ -845,6 +876,7 @@ module Aws::CloudTrail
     #   <p>A list of tags.</p>
     #   @return [Array<Types::Tag>]
     class CreateTrailRequest < Struct.new(
+      nil,
       :name,
       :s3_bucket_name,
       :s3_key_prefix,
@@ -921,6 +953,7 @@ module Aws::CloudTrail
     #   <p>Specifies whether the trail is an organization trail.</p>
     #   @return [Boolean]
     class CreateTrailResponse < Struct.new(
+      nil,
       :name,
       :s3_bucket_name,
       :s3_key_prefix,
@@ -953,6 +986,7 @@ module Aws::CloudTrail
     #   </p>
     #   @return [String]
     class DashboardDetail < Struct.new(
+      nil,
       :dashboard_arn,
       :type,
       keyword_init: true
@@ -1108,6 +1142,7 @@ module Aws::CloudTrail
     #            </ul>
     #   @return [Array<String>]
     class DataResource < Struct.new(
+      nil,
       :type,
       :values,
       keyword_init: true
@@ -1121,6 +1156,7 @@ module Aws::CloudTrail
     #   <p>Brief description of the exception returned by the request.</p>
     #   @return [String]
     class DelegatedAdminAccountLimitExceededException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -1131,6 +1167,7 @@ module Aws::CloudTrail
     #   <p>The ARN or the <code>UUID</code> value of the channel that you want to delete.</p>
     #   @return [String]
     class DeleteChannelRequest < Struct.new(
+      nil,
       :channel,
       keyword_init: true
     )
@@ -1138,6 +1175,7 @@ module Aws::CloudTrail
     end
 
     class DeleteChannelResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1149,6 +1187,7 @@ module Aws::CloudTrail
     #   </p>
     #   @return [String]
     class DeleteDashboardRequest < Struct.new(
+      nil,
       :dashboard_id,
       keyword_init: true
     )
@@ -1156,6 +1195,7 @@ module Aws::CloudTrail
     end
 
     class DeleteDashboardResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1165,6 +1205,7 @@ module Aws::CloudTrail
     #   <p>The ARN (or the ID suffix of the ARN) of the event data store to delete.</p>
     #   @return [String]
     class DeleteEventDataStoreRequest < Struct.new(
+      nil,
       :event_data_store,
       keyword_init: true
     )
@@ -1172,6 +1213,7 @@ module Aws::CloudTrail
     end
 
     class DeleteEventDataStoreResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1190,6 +1232,7 @@ module Aws::CloudTrail
     #            </p>
     #   @return [String]
     class DeleteResourcePolicyRequest < Struct.new(
+      nil,
       :resource_arn,
       keyword_init: true
     )
@@ -1197,6 +1240,7 @@ module Aws::CloudTrail
     end
 
     class DeleteResourcePolicyResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1210,6 +1254,7 @@ module Aws::CloudTrail
     #            </p>
     #   @return [String]
     class DeleteTrailRequest < Struct.new(
+      nil,
       :name,
       keyword_init: true
     )
@@ -1219,6 +1264,7 @@ module Aws::CloudTrail
     # <p>Returns the objects or data listed below if successful. Otherwise, returns an
     #          error.</p>
     class DeleteTrailResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1232,6 +1278,7 @@ module Aws::CloudTrail
     #            is currently designated as a delegated administrator.</p>
     #   @return [String]
     class DeregisterOrganizationDelegatedAdminRequest < Struct.new(
+      nil,
       :delegated_admin_account_id,
       keyword_init: true
     )
@@ -1240,6 +1287,7 @@ module Aws::CloudTrail
 
     # <p>Returns the following response if successful. Otherwise, returns an error.</p>
     class DeregisterOrganizationDelegatedAdminResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1270,6 +1318,7 @@ module Aws::CloudTrail
     #   </p>
     #   @return [String]
     class DescribeQueryRequest < Struct.new(
+      nil,
       :event_data_store,
       :query_id,
       :query_alias,
@@ -1320,6 +1369,7 @@ module Aws::CloudTrail
     #   </p>
     #   @return [String]
     class DescribeQueryResponse < Struct.new(
+      nil,
       :query_id,
       :query_string,
       :query_status,
@@ -1369,6 +1419,7 @@ module Aws::CloudTrail
     #            replication trails will not be returned. The default is true.</p>
     #   @return [Boolean]
     class DescribeTrailsRequest < Struct.new(
+      nil,
       :trail_name_list,
       :include_shadow_trails,
       keyword_init: true
@@ -1387,6 +1438,7 @@ module Aws::CloudTrail
     #            customer managed keys.</p>
     #   @return [Array<Types::Trail>]
     class DescribeTrailsResponse < Struct.new(
+      nil,
       :trail_list,
       keyword_init: true
     )
@@ -1403,6 +1455,7 @@ module Aws::CloudTrail
     #            For service-linked channels, the location is the name of the Amazon Web Services service.</p>
     #   @return [String]
     class Destination < Struct.new(
+      nil,
       :type,
       :location,
       keyword_init: true
@@ -1416,6 +1469,7 @@ module Aws::CloudTrail
     #         </p>
     #   @return [String]
     class DisableFederationRequest < Struct.new(
+      nil,
       :event_data_store,
       keyword_init: true
     )
@@ -1433,6 +1487,7 @@ module Aws::CloudTrail
     #         </p>
     #   @return [String]
     class DisableFederationResponse < Struct.new(
+      nil,
       :event_data_store_arn,
       :federation_status,
       keyword_init: true
@@ -1450,6 +1505,7 @@ module Aws::CloudTrail
     #         </p>
     #   @return [String]
     class EnableFederationRequest < Struct.new(
+      nil,
       :event_data_store,
       :federation_role_arn,
       keyword_init: true
@@ -1473,6 +1529,7 @@ module Aws::CloudTrail
     #         </p>
     #   @return [String]
     class EnableFederationResponse < Struct.new(
+      nil,
       :event_data_store_arn,
       :federation_status,
       :federation_role_arn,
@@ -1514,6 +1571,7 @@ module Aws::CloudTrail
     #   <p>A JSON string that contains a representation of the event returned.</p>
     #   @return [String]
     class Event < Struct.new(
+      nil,
       :event_id,
       :event_name,
       :read_only,
@@ -1584,6 +1642,7 @@ module Aws::CloudTrail
     #     UpdatedTimestamp is no longer returned by ListEventDataStores
     #   @return [Time]
     class EventDataStore < Struct.new(
+      nil,
       :event_data_store_arn,
       :name,
       :termination_protection_enabled,
@@ -1605,6 +1664,7 @@ module Aws::CloudTrail
     #   <p>Brief description of the exception returned by the request.</p>
     #   @return [String]
     class EventDataStoreARNInvalidException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -1616,6 +1676,7 @@ module Aws::CloudTrail
     #   <p>Brief description of the exception returned by the request.</p>
     #   @return [String]
     class EventDataStoreAlreadyExistsException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -1630,6 +1691,7 @@ module Aws::CloudTrail
     #   <p>Brief description of the exception returned by the request.</p>
     #   @return [String]
     class EventDataStoreFederationEnabledException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -1642,6 +1704,7 @@ module Aws::CloudTrail
     #   <p>Brief description of the exception returned by the request.</p>
     #   @return [String]
     class EventDataStoreHasOngoingImportException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -1653,6 +1716,7 @@ module Aws::CloudTrail
     #   <p>Brief description of the exception returned by the request.</p>
     #   @return [String]
     class EventDataStoreMaxLimitExceededException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -1664,6 +1728,7 @@ module Aws::CloudTrail
     #   <p>Brief description of the exception returned by the request.</p>
     #   @return [String]
     class EventDataStoreNotFoundException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -1676,6 +1741,7 @@ module Aws::CloudTrail
     #   <p>Brief description of the exception returned by the request.</p>
     #   @return [String]
     class EventDataStoreTerminationProtectedException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -1730,6 +1796,7 @@ module Aws::CloudTrail
     #            event sources only in Regions that support the event source.</p>
     #   @return [Array<String>]
     class EventSelector < Struct.new(
+      nil,
       :read_write_type,
       :include_management_events,
       :data_resources,
@@ -1753,6 +1820,7 @@ module Aws::CloudTrail
     #         </p>
     #   @return [String]
     class GenerateQueryRequest < Struct.new(
+      nil,
       :event_data_stores,
       :prompt,
       keyword_init: true
@@ -1777,6 +1845,7 @@ module Aws::CloudTrail
     #   </p>
     #   @return [String]
     class GenerateQueryResponse < Struct.new(
+      nil,
       :query_statement,
       :query_alias,
       :event_data_store_owner_account_id,
@@ -1792,6 +1861,7 @@ module Aws::CloudTrail
     #   <p>Brief description of the exception returned by the request.</p>
     #   @return [String]
     class GenerateResponseException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -1802,6 +1872,7 @@ module Aws::CloudTrail
     #   <p>The ARN or <code>UUID</code> of a channel.</p>
     #   @return [String]
     class GetChannelRequest < Struct.new(
+      nil,
       :channel,
       keyword_init: true
     )
@@ -1835,6 +1906,7 @@ module Aws::CloudTrail
     #         to ingest events.</p>
     #   @return [Types::IngestionStatus]
     class GetChannelResponse < Struct.new(
+      nil,
       :channel_arn,
       :name,
       :source,
@@ -1852,6 +1924,7 @@ module Aws::CloudTrail
     #   </p>
     #   @return [String]
     class GetDashboardRequest < Struct.new(
+      nil,
       :dashboard_id,
       keyword_init: true
     )
@@ -1909,6 +1982,7 @@ module Aws::CloudTrail
     #   </p>
     #   @return [Boolean]
     class GetDashboardResponse < Struct.new(
+      nil,
       :dashboard_arn,
       :type,
       :status,
@@ -1928,6 +2002,7 @@ module Aws::CloudTrail
     #   <p>The Amazon Resource Name (ARN) or ID suffix of the ARN of the event data store for which you want to retrieve event configuration settings.</p>
     #   @return [String]
     class GetEventConfigurationRequest < Struct.new(
+      nil,
       :event_data_store,
       keyword_init: true
     )
@@ -1944,6 +2019,7 @@ module Aws::CloudTrail
     #   <p>The list of context key selectors that are configured for the event data store.</p>
     #   @return [Array<Types::ContextKeySelector>]
     class GetEventConfigurationResponse < Struct.new(
+      nil,
       :event_data_store_arn,
       :max_event_size,
       :context_key_selectors,
@@ -1957,6 +2033,7 @@ module Aws::CloudTrail
     #            information.</p>
     #   @return [String]
     class GetEventDataStoreRequest < Struct.new(
+      nil,
       :event_data_store,
       keyword_init: true
     )
@@ -2023,6 +2100,7 @@ module Aws::CloudTrail
     #            event data into partitions based on values derived from partition keys.</p>
     #   @return [Array<Types::PartitionKey>]
     class GetEventDataStoreResponse < Struct.new(
+      nil,
       :event_data_store_arn,
       :name,
       :status,
@@ -2071,6 +2149,7 @@ module Aws::CloudTrail
     #            </p>
     #   @return [String]
     class GetEventSelectorsRequest < Struct.new(
+      nil,
       :trail_name,
       keyword_init: true
     )
@@ -2087,6 +2166,7 @@ module Aws::CloudTrail
     #   <p> The advanced event selectors that are configured for the trail. </p>
     #   @return [Array<Types::AdvancedEventSelector>]
     class GetEventSelectorsResponse < Struct.new(
+      nil,
       :trail_arn,
       :event_selectors,
       :advanced_event_selectors,
@@ -2099,6 +2179,7 @@ module Aws::CloudTrail
     #   <p> The ID for the import. </p>
     #   @return [String]
     class GetImportRequest < Struct.new(
+      nil,
       :import_id,
       keyword_init: true
     )
@@ -2140,6 +2221,7 @@ module Aws::CloudTrail
     #            over the course of the import. </p>
     #   @return [Types::ImportStatistics]
     class GetImportResponse < Struct.new(
+      nil,
       :import_id,
       :destinations,
       :import_source,
@@ -2190,6 +2272,7 @@ module Aws::CloudTrail
     #            <p>You cannot use this parameter with the <code>TrailName</code> parameter.</p>
     #   @return [String]
     class GetInsightSelectorsRequest < Struct.new(
+      nil,
       :trail_name,
       :event_data_store,
       keyword_init: true
@@ -2216,6 +2299,7 @@ module Aws::CloudTrail
     #         </p>
     #   @return [String]
     class GetInsightSelectorsResponse < Struct.new(
+      nil,
       :trail_arn,
       :insight_selectors,
       :event_data_store_arn,
@@ -2246,6 +2330,7 @@ module Aws::CloudTrail
     #   </p>
     #   @return [String]
     class GetQueryResultsRequest < Struct.new(
+      nil,
       :event_data_store,
       :query_id,
       :next_token,
@@ -2274,6 +2359,7 @@ module Aws::CloudTrail
     #   <p>The error message returned if a query failed.</p>
     #   @return [String]
     class GetQueryResultsResponse < Struct.new(
+      nil,
       :query_status,
       :query_statistics,
       :query_result_rows,
@@ -2297,6 +2383,7 @@ module Aws::CloudTrail
     #            </p>
     #   @return [String]
     class GetResourcePolicyRequest < Struct.new(
+      nil,
       :resource_arn,
       keyword_init: true
     )
@@ -2329,6 +2416,7 @@ module Aws::CloudTrail
     #         </p>
     #   @return [String]
     class GetResourcePolicyResponse < Struct.new(
+      nil,
       :resource_arn,
       :resource_policy,
       :delegated_admin_resource_policy,
@@ -2342,6 +2430,7 @@ module Aws::CloudTrail
     #            settings information.</p>
     #   @return [String]
     class GetTrailRequest < Struct.new(
+      nil,
       :name,
       keyword_init: true
     )
@@ -2352,6 +2441,7 @@ module Aws::CloudTrail
     #   <p>The settings for a trail.</p>
     #   @return [Types::Trail]
     class GetTrailResponse < Struct.new(
+      nil,
       :trail,
       keyword_init: true
     )
@@ -2372,6 +2462,7 @@ module Aws::CloudTrail
     #            </note>
     #   @return [String]
     class GetTrailStatusRequest < Struct.new(
+      nil,
       :name,
       keyword_init: true
     )
@@ -2459,6 +2550,7 @@ module Aws::CloudTrail
     #   <p>This field is no longer in use.</p>
     #   @return [String]
     class GetTrailStatusResponse < Struct.new(
+      nil,
       :is_logging,
       :latest_delivery_error,
       :latest_notification_error,
@@ -2498,6 +2590,7 @@ module Aws::CloudTrail
     #   <p> When the import was last updated. </p>
     #   @return [Time]
     class ImportFailureListItem < Struct.new(
+      nil,
       :location,
       :status,
       :error_type,
@@ -2513,6 +2606,7 @@ module Aws::CloudTrail
     #   <p>Brief description of the exception returned by the request.</p>
     #   @return [String]
     class ImportNotFoundException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -2524,6 +2618,7 @@ module Aws::CloudTrail
     #   <p> The source S3 bucket. </p>
     #   @return [Types::S3ImportSource]
     class ImportSource < Struct.new(
+      nil,
       :s3,
       keyword_init: true
     )
@@ -2549,6 +2644,7 @@ module Aws::CloudTrail
     #   <p> The number of failed entries. </p>
     #   @return [Integer]
     class ImportStatistics < Struct.new(
+      nil,
       :prefixes_found,
       :prefixes_completed,
       :files_completed,
@@ -2576,6 +2672,7 @@ module Aws::CloudTrail
     #   <p> The timestamp of the import's last update. </p>
     #   @return [Time]
     class ImportsListItem < Struct.new(
+      nil,
       :import_id,
       :import_status,
       :destinations,
@@ -2591,6 +2688,7 @@ module Aws::CloudTrail
     #   <p>Brief description of the exception returned by the request.</p>
     #   @return [String]
     class InactiveEventDataStoreException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -2603,6 +2701,7 @@ module Aws::CloudTrail
     #   <p>Brief description of the exception returned by the request.</p>
     #   @return [String]
     class InactiveQueryException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -2627,6 +2726,7 @@ module Aws::CloudTrail
     #   <p>The event ID of the most recent attempt to ingest events.</p>
     #   @return [String]
     class IngestionStatus < Struct.new(
+      nil,
       :latest_ingestion_success_time,
       :latest_ingestion_success_event_id,
       :latest_ingestion_error_code,
@@ -2644,6 +2744,7 @@ module Aws::CloudTrail
     #   <p>Brief description of the exception returned by the request.</p>
     #   @return [String]
     class InsightNotEnabledException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -2661,6 +2762,7 @@ module Aws::CloudTrail
     #            unsuccessful.</p>
     #   @return [String]
     class InsightSelector < Struct.new(
+      nil,
       :insight_type,
       keyword_init: true
     )
@@ -2674,6 +2776,7 @@ module Aws::CloudTrail
     #   <p>Brief description of the exception returned by the request.</p>
     #   @return [String]
     class InsufficientDependencyServiceAccessPermissionException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -2690,6 +2793,7 @@ module Aws::CloudTrail
     #   <p>Brief description of the exception returned by the request.</p>
     #   @return [String]
     class InsufficientEncryptionPolicyException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -2701,6 +2805,7 @@ module Aws::CloudTrail
     #   <p>Brief description of the exception returned by the request.</p>
     #   @return [String]
     class InsufficientIAMAccessPermissionException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -2712,6 +2817,7 @@ module Aws::CloudTrail
     #   <p>Brief description of the exception returned by the request.</p>
     #   @return [String]
     class InsufficientS3BucketPolicyException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -2724,6 +2830,7 @@ module Aws::CloudTrail
     #   <p>Brief description of the exception returned by the request.</p>
     #   @return [String]
     class InsufficientSnsTopicPolicyException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -2736,6 +2843,7 @@ module Aws::CloudTrail
     #   <p>Brief description of the exception returned by the request.</p>
     #   @return [String]
     class InvalidCloudWatchLogsLogGroupArnException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -2747,6 +2855,7 @@ module Aws::CloudTrail
     #   <p>Brief description of the exception returned by the request.</p>
     #   @return [String]
     class InvalidCloudWatchLogsRoleArnException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -2760,6 +2869,7 @@ module Aws::CloudTrail
     #   <p>Brief description of the exception returned by the request.</p>
     #   @return [String]
     class InvalidDateRangeException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -2772,6 +2882,7 @@ module Aws::CloudTrail
     #   <p>Brief description of the exception returned by the request.</p>
     #   @return [String]
     class InvalidEventCategoryException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -2784,6 +2895,7 @@ module Aws::CloudTrail
     #   <p>Brief description of the exception returned by the request.</p>
     #   @return [String]
     class InvalidEventDataStoreCategoryException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -2795,6 +2907,7 @@ module Aws::CloudTrail
     #   <p>Brief description of the exception returned by the request.</p>
     #   @return [String]
     class InvalidEventDataStoreStatusException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -2833,6 +2946,7 @@ module Aws::CloudTrail
     #   <p>Brief description of the exception returned by the request.</p>
     #   @return [String]
     class InvalidEventSelectorsException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -2845,6 +2959,7 @@ module Aws::CloudTrail
     #   <p>Brief description of the exception returned by the request.</p>
     #   @return [String]
     class InvalidHomeRegionException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -2857,6 +2972,7 @@ module Aws::CloudTrail
     #   <p>Brief description of the exception returned by the request.</p>
     #   @return [String]
     class InvalidImportSourceException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -2876,6 +2992,7 @@ module Aws::CloudTrail
     #   <p>Brief description of the exception returned by the request.</p>
     #   @return [String]
     class InvalidInsightSelectorsException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -2887,6 +3004,7 @@ module Aws::CloudTrail
     #   <p>Brief description of the exception returned by the request.</p>
     #   @return [String]
     class InvalidKmsKeyIdException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -2898,6 +3016,7 @@ module Aws::CloudTrail
     #   <p>Brief description of the exception returned by the request.</p>
     #   @return [String]
     class InvalidLookupAttributesException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -2909,6 +3028,7 @@ module Aws::CloudTrail
     #   <p>Brief description of the exception returned by the request.</p>
     #   @return [String]
     class InvalidMaxResultsException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -2921,6 +3041,7 @@ module Aws::CloudTrail
     #   <p>Brief description of the exception returned by the request.</p>
     #   @return [String]
     class InvalidNextTokenException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -2933,6 +3054,7 @@ module Aws::CloudTrail
     #   <p>Brief description of the exception returned by the request.</p>
     #   @return [String]
     class InvalidParameterCombinationException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -2944,6 +3066,7 @@ module Aws::CloudTrail
     #   <p>Brief description of the exception returned by the request.</p>
     #   @return [String]
     class InvalidParameterException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -2957,6 +3080,7 @@ module Aws::CloudTrail
     #   <p>Brief description of the exception returned by the request.</p>
     #   @return [String]
     class InvalidQueryStatementException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -2968,6 +3092,7 @@ module Aws::CloudTrail
     #   <p>Brief description of the exception returned by the request.</p>
     #   @return [String]
     class InvalidQueryStatusException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -2979,6 +3104,7 @@ module Aws::CloudTrail
     #   <p>Brief description of the exception returned by the request.</p>
     #   @return [String]
     class InvalidS3BucketNameException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -2990,6 +3116,7 @@ module Aws::CloudTrail
     #   <p>Brief description of the exception returned by the request.</p>
     #   @return [String]
     class InvalidS3PrefixException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -3001,6 +3128,7 @@ module Aws::CloudTrail
     #   <p>Brief description of the exception returned by the request.</p>
     #   @return [String]
     class InvalidSnsTopicNameException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -3012,6 +3140,7 @@ module Aws::CloudTrail
     #   <p>Brief description of the exception returned by the request.</p>
     #   @return [String]
     class InvalidSourceException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -3024,6 +3153,7 @@ module Aws::CloudTrail
     #   <p>Brief description of the exception returned by the request.</p>
     #   @return [String]
     class InvalidTagParameterException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -3036,6 +3166,7 @@ module Aws::CloudTrail
     #   <p>Brief description of the exception returned by the request.</p>
     #   @return [String]
     class InvalidTimeRangeException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -3047,6 +3178,7 @@ module Aws::CloudTrail
     #   <p>Brief description of the exception returned by the request.</p>
     #   @return [String]
     class InvalidTokenException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -3078,6 +3210,7 @@ module Aws::CloudTrail
     #   <p>Brief description of the exception returned by the request.</p>
     #   @return [String]
     class InvalidTrailNameException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -3090,6 +3223,7 @@ module Aws::CloudTrail
     #   <p>Brief description of the exception returned by the request.</p>
     #   @return [String]
     class KmsException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -3102,6 +3236,7 @@ module Aws::CloudTrail
     #   <p>Brief description of the exception returned by the request.</p>
     #   @return [String]
     class KmsKeyDisabledException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -3115,6 +3250,7 @@ module Aws::CloudTrail
     #   <p>Brief description of the exception returned by the request.</p>
     #   @return [String]
     class KmsKeyNotFoundException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -3131,6 +3267,7 @@ module Aws::CloudTrail
     #            'root', the call with NextToken should include those same parameters.</p>
     #   @return [String]
     class ListChannelsRequest < Struct.new(
+      nil,
       :max_results,
       :next_token,
       keyword_init: true
@@ -3145,6 +3282,7 @@ module Aws::CloudTrail
     #   <p>The token to use to get the next page of results after a previous API call.</p>
     #   @return [String]
     class ListChannelsResponse < Struct.new(
+      nil,
       :channels,
       :next_token,
       keyword_init: true
@@ -3173,6 +3311,7 @@ module Aws::CloudTrail
     #   </p>
     #   @return [Integer]
     class ListDashboardsRequest < Struct.new(
+      nil,
       :name_prefix,
       :type,
       :next_token,
@@ -3193,6 +3332,7 @@ module Aws::CloudTrail
     #   </p>
     #   @return [String]
     class ListDashboardsResponse < Struct.new(
+      nil,
       :dashboards,
       :next_token,
       keyword_init: true
@@ -3207,6 +3347,7 @@ module Aws::CloudTrail
     #   <p>The maximum number of event data stores to display on a single page.</p>
     #   @return [Integer]
     class ListEventDataStoresRequest < Struct.new(
+      nil,
       :next_token,
       :max_results,
       keyword_init: true
@@ -3222,6 +3363,7 @@ module Aws::CloudTrail
     #   <p>A token you can use to get the next page of results.</p>
     #   @return [String]
     class ListEventDataStoresResponse < Struct.new(
+      nil,
       :event_data_stores,
       :next_token,
       keyword_init: true
@@ -3239,6 +3381,7 @@ module Aws::CloudTrail
     #   <p> A token you can use to get the next page of import failures. </p>
     #   @return [String]
     class ListImportFailuresRequest < Struct.new(
+      nil,
       :import_id,
       :max_results,
       :next_token,
@@ -3254,6 +3397,7 @@ module Aws::CloudTrail
     #   <p> A token you can use to get the next page of results. </p>
     #   @return [String]
     class ListImportFailuresResponse < Struct.new(
+      nil,
       :failures,
       :next_token,
       keyword_init: true
@@ -3274,6 +3418,7 @@ module Aws::CloudTrail
     #   <p> A token you can use to get the next page of import results. </p>
     #   @return [String]
     class ListImportsRequest < Struct.new(
+      nil,
       :max_results,
       :destination,
       :import_status,
@@ -3290,6 +3435,7 @@ module Aws::CloudTrail
     #   <p> A token you can use to get the next page of import results. </p>
     #   @return [String]
     class ListImportsResponse < Struct.new(
+      nil,
       :imports,
       :next_token,
       keyword_init: true
@@ -3338,6 +3484,7 @@ module Aws::CloudTrail
     #            <p>Add this parameter to the request to continue retrieving results starting from the last evaluated point.</p>
     #   @return [String]
     class ListInsightsMetricDataRequest < Struct.new(
+      nil,
       :event_source,
       :event_name,
       :insight_type,
@@ -3379,6 +3526,7 @@ module Aws::CloudTrail
     #            in the next request to this value to continue retrieval.</p>
     #   @return [String]
     class ListInsightsMetricDataResponse < Struct.new(
+      nil,
       :event_source,
       :event_name,
       :insight_type,
@@ -3405,6 +3553,7 @@ module Aws::CloudTrail
     #   <p>Reserved for future use.</p>
     #   @return [String]
     class ListPublicKeysRequest < Struct.new(
+      nil,
       :start_time,
       :end_time,
       :next_token,
@@ -3425,6 +3574,7 @@ module Aws::CloudTrail
     #   <p>Reserved for future use.</p>
     #   @return [String]
     class ListPublicKeysResponse < Struct.new(
+      nil,
       :public_key_list,
       :next_token,
       keyword_init: true
@@ -3457,6 +3607,7 @@ module Aws::CloudTrail
     #               <code>CANCELLED</code>.</p>
     #   @return [String]
     class ListQueriesRequest < Struct.new(
+      nil,
       :event_data_store,
       :next_token,
       :max_results,
@@ -3476,6 +3627,7 @@ module Aws::CloudTrail
     #   <p>A token you can use to get the next page of results.</p>
     #   @return [String]
     class ListQueriesResponse < Struct.new(
+      nil,
       :queries,
       :next_token,
       keyword_init: true
@@ -3503,6 +3655,7 @@ module Aws::CloudTrail
     #   <p>Reserved for future use.</p>
     #   @return [String]
     class ListTagsRequest < Struct.new(
+      nil,
       :resource_id_list,
       :next_token,
       keyword_init: true
@@ -3519,6 +3672,7 @@ module Aws::CloudTrail
     #   <p>Reserved for future use.</p>
     #   @return [String]
     class ListTagsResponse < Struct.new(
+      nil,
       :resource_tag_list,
       :next_token,
       keyword_init: true
@@ -3533,6 +3687,7 @@ module Aws::CloudTrail
     #            'root', the call with NextToken should include those same parameters.</p>
     #   @return [String]
     class ListTrailsRequest < Struct.new(
+      nil,
       :next_token,
       keyword_init: true
     )
@@ -3550,6 +3705,7 @@ module Aws::CloudTrail
     #            those same parameters.</p>
     #   @return [String]
     class ListTrailsResponse < Struct.new(
+      nil,
       :trails,
       :next_token,
       keyword_init: true
@@ -3568,6 +3724,7 @@ module Aws::CloudTrail
     #            '<code>\\n</code>') count as two characters towards the 2000 character limit.</p>
     #   @return [String]
     class LookupAttribute < Struct.new(
+      nil,
       :attribute_key,
       :attribute_value,
       keyword_init: true
@@ -3605,6 +3762,7 @@ module Aws::CloudTrail
     #            'root', the call with NextToken should include those same parameters.</p>
     #   @return [String]
     class LookupEventsRequest < Struct.new(
+      nil,
       :lookup_attributes,
       :start_time,
       :end_time,
@@ -3629,6 +3787,7 @@ module Aws::CloudTrail
     #            those same parameters.</p>
     #   @return [String]
     class LookupEventsResponse < Struct.new(
+      nil,
       :events,
       :next_token,
       keyword_init: true
@@ -3642,6 +3801,7 @@ module Aws::CloudTrail
     #   <p>Brief description of the exception returned by the request.</p>
     #   @return [String]
     class MaxConcurrentQueriesException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -3653,6 +3813,7 @@ module Aws::CloudTrail
     #   <p>Brief description of the exception returned by the request.</p>
     #   @return [String]
     class MaximumNumberOfTrailsExceededException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -3665,6 +3826,7 @@ module Aws::CloudTrail
     #   <p>Brief description of the exception returned by the request.</p>
     #   @return [String]
     class NoManagementAccountSLRExistsException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -3677,6 +3839,7 @@ module Aws::CloudTrail
     #   <p>Brief description of the exception returned by the request.</p>
     #   @return [String]
     class NotOrganizationManagementAccountException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -3690,6 +3853,7 @@ module Aws::CloudTrail
     #   <p>Brief description of the exception returned by the request.</p>
     #   @return [String]
     class NotOrganizationMasterAccountException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -3701,6 +3865,7 @@ module Aws::CloudTrail
     #   <p>Brief description of the exception returned by the request.</p>
     #   @return [String]
     class OperationNotPermittedException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -3714,6 +3879,7 @@ module Aws::CloudTrail
     #   <p>Brief description of the exception returned by the request.</p>
     #   @return [String]
     class OrganizationNotInAllFeaturesModeException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -3727,6 +3893,7 @@ module Aws::CloudTrail
     #   <p>Brief description of the exception returned by the request.</p>
     #   @return [String]
     class OrganizationsNotInUseException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -3741,6 +3908,7 @@ module Aws::CloudTrail
     #   <p>The data type of the partition key. For example, <code>bigint</code> or <code>string</code>.</p>
     #   @return [String]
     class PartitionKey < Struct.new(
+      nil,
       :name,
       :type,
       keyword_init: true
@@ -3762,6 +3930,7 @@ module Aws::CloudTrail
     #   <p>The fingerprint of the public key.</p>
     #   @return [String]
     class PublicKey < Struct.new(
+      nil,
       :value,
       :validity_start_time,
       :validity_end_time,
@@ -3781,6 +3950,7 @@ module Aws::CloudTrail
     #   <p>A list of context key selectors that will be included to provide enriched event data.</p>
     #   @return [Array<Types::ContextKeySelector>]
     class PutEventConfigurationRequest < Struct.new(
+      nil,
       :event_data_store,
       :max_event_size,
       :context_key_selectors,
@@ -3799,6 +3969,7 @@ module Aws::CloudTrail
     #   <p>The list of context key selectors that are configured for the event data store.</p>
     #   @return [Array<Types::ContextKeySelector>]
     class PutEventConfigurationResponse < Struct.new(
+      nil,
       :event_data_store_arn,
       :max_event_size,
       :context_key_selectors,
@@ -3874,6 +4045,7 @@ module Aws::CloudTrail
     #            in the <i>CloudTrail User Guide</i>. </p>
     #   @return [Array<Types::AdvancedEventSelector>]
     class PutEventSelectorsRequest < Struct.new(
+      nil,
       :trail_name,
       :event_selectors,
       :advanced_event_selectors,
@@ -3896,6 +4068,7 @@ module Aws::CloudTrail
     #   <p>Specifies the advanced event selectors configured for your trail.</p>
     #   @return [Array<Types::AdvancedEventSelector>]
     class PutEventSelectorsResponse < Struct.new(
+      nil,
       :trail_arn,
       :event_selectors,
       :advanced_event_selectors,
@@ -3933,6 +4106,7 @@ module Aws::CloudTrail
     #            <p>You cannot use this parameter with the <code>TrailName</code> parameter.</p>
     #   @return [String]
     class PutInsightSelectorsRequest < Struct.new(
+      nil,
       :trail_name,
       :insight_selectors,
       :event_data_store,
@@ -3961,6 +4135,7 @@ module Aws::CloudTrail
     #         </p>
     #   @return [String]
     class PutInsightSelectorsResponse < Struct.new(
+      nil,
       :trail_arn,
       :insight_selectors,
       :event_data_store_arn,
@@ -3991,6 +4166,7 @@ module Aws::CloudTrail
     #            in the <i>CloudTrail User Guide</i>.</p>
     #   @return [String]
     class PutResourcePolicyRequest < Struct.new(
+      nil,
       :resource_arn,
       :resource_policy,
       keyword_init: true
@@ -4024,6 +4200,7 @@ module Aws::CloudTrail
     #         </p>
     #   @return [String]
     class PutResourcePolicyResponse < Struct.new(
+      nil,
       :resource_arn,
       :resource_policy,
       :delegated_admin_resource_policy,
@@ -4046,6 +4223,7 @@ module Aws::CloudTrail
     #   <p>The creation time of a query.</p>
     #   @return [Time]
     class Query < Struct.new(
+      nil,
       :query_id,
       :query_status,
       :creation_time,
@@ -4059,6 +4237,7 @@ module Aws::CloudTrail
     #   <p>Brief description of the exception returned by the request.</p>
     #   @return [String]
     class QueryIdNotFoundException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -4078,6 +4257,7 @@ module Aws::CloudTrail
     #            running.</p>
     #   @return [Integer]
     class QueryStatistics < Struct.new(
+      nil,
       :results_count,
       :total_results_count,
       :bytes_scanned,
@@ -4107,6 +4287,7 @@ module Aws::CloudTrail
     #   <p>The creation time of the query.</p>
     #   @return [Time]
     class QueryStatisticsForDescribeQuery < Struct.new(
+      nil,
       :events_matched,
       :events_scanned,
       :bytes_scanned,
@@ -4136,6 +4317,7 @@ module Aws::CloudTrail
     #   </p>
     #   @return [String]
     class RefreshSchedule < Struct.new(
+      nil,
       :frequency,
       :status,
       :time_of_day,
@@ -4168,6 +4350,7 @@ module Aws::CloudTrail
     #            <p>For the Highlights dashboard, the <code>Value</code> must be <code>6</code>.</p>
     #   @return [Integer]
     class RefreshScheduleFrequency < Struct.new(
+      nil,
       :unit,
       :value,
       keyword_init: true
@@ -4182,6 +4365,7 @@ module Aws::CloudTrail
     #            administrator.</p>
     #   @return [String]
     class RegisterOrganizationDelegatedAdminRequest < Struct.new(
+      nil,
       :member_account_id,
       keyword_init: true
     )
@@ -4190,6 +4374,7 @@ module Aws::CloudTrail
 
     # <p>Returns the following response if successful. Otherwise, returns an error.</p>
     class RegisterOrganizationDelegatedAdminResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -4215,6 +4400,7 @@ module Aws::CloudTrail
     #   <p>Specifies a list of tags to be removed.</p>
     #   @return [Array<Types::Tag>]
     class RemoveTagsRequest < Struct.new(
+      nil,
       :resource_id,
       :tags_list,
       keyword_init: true
@@ -4225,6 +4411,7 @@ module Aws::CloudTrail
     # <p>Returns the objects or data listed below if successful. Otherwise, returns an
     #          error.</p>
     class RemoveTagsResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -4254,6 +4441,7 @@ module Aws::CloudTrail
     #   </p>
     #   @return [Hash<String, String>]
     class RequestWidget < Struct.new(
+      nil,
       :query_statement,
       :query_parameters,
       :view_properties,
@@ -4275,6 +4463,7 @@ module Aws::CloudTrail
     #            Instance.</p>
     #   @return [String]
     class Resource < Struct.new(
+      nil,
       :resource_type,
       :resource_name,
       keyword_init: true
@@ -4297,6 +4486,7 @@ module Aws::CloudTrail
     #   <p>Brief description of the exception returned by the request.</p>
     #   @return [String]
     class ResourceARNNotValidException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -4308,6 +4498,7 @@ module Aws::CloudTrail
     #   <p>Brief description of the exception returned by the request.</p>
     #   @return [String]
     class ResourceNotFoundException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -4321,6 +4512,7 @@ module Aws::CloudTrail
     #   <p>Brief description of the exception returned by the request.</p>
     #   @return [String]
     class ResourcePolicyNotFoundException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -4334,6 +4526,7 @@ module Aws::CloudTrail
     #   <p>Brief description of the exception returned by the request.</p>
     #   @return [String]
     class ResourcePolicyNotValidException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -4348,6 +4541,7 @@ module Aws::CloudTrail
     #   <p>A list of tags.</p>
     #   @return [Array<Types::Tag>]
     class ResourceTag < Struct.new(
+      nil,
       :resource_id,
       :tags_list,
       keyword_init: true
@@ -4360,6 +4554,7 @@ module Aws::CloudTrail
     #   <p>Brief description of the exception returned by the request.</p>
     #   @return [String]
     class ResourceTypeNotSupportedException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -4371,6 +4566,7 @@ module Aws::CloudTrail
     #            restore.</p>
     #   @return [String]
     class RestoreEventDataStoreRequest < Struct.new(
+      nil,
       :event_data_store,
       keyword_init: true
     )
@@ -4423,6 +4619,7 @@ module Aws::CloudTrail
     #   <p>The billing mode for the event data store.</p>
     #   @return [String]
     class RestoreEventDataStoreResponse < Struct.new(
+      nil,
       :event_data_store_arn,
       :name,
       :status,
@@ -4445,6 +4642,7 @@ module Aws::CloudTrail
     #   <p>Brief description of the exception returned by the request.</p>
     #   @return [String]
     class S3BucketDoesNotExistException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -4462,6 +4660,7 @@ module Aws::CloudTrail
     #   <p> The IAM ARN role used to access the source S3 bucket. </p>
     #   @return [String]
     class S3ImportSource < Struct.new(
+      nil,
       :s3_location_uri,
       :s3_bucket_region,
       :s3_bucket_access_role_arn,
@@ -4485,6 +4684,7 @@ module Aws::CloudTrail
     #         </p>
     #   @return [String]
     class SearchSampleQueriesRequest < Struct.new(
+      nil,
       :search_phrase,
       :max_results,
       :next_token,
@@ -4503,6 +4703,7 @@ module Aws::CloudTrail
     #            A token you can use to get the next page of results.</p>
     #   @return [String]
     class SearchSampleQueriesResponse < Struct.new(
+      nil,
       :search_results,
       :next_token,
       keyword_init: true
@@ -4534,6 +4735,7 @@ module Aws::CloudTrail
     #         </p>
     #   @return [Float]
     class SearchSampleQueriesSearchResult < Struct.new(
+      nil,
       :name,
       :description,
       :sql,
@@ -4556,6 +4758,7 @@ module Aws::CloudTrail
     #   <p>Brief description of the exception returned by the request.</p>
     #   @return [String]
     class ServiceQuotaExceededException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -4570,6 +4773,7 @@ module Aws::CloudTrail
     #   <p> The advanced event selectors that are configured for the channel.</p>
     #   @return [Array<Types::AdvancedEventSelector>]
     class SourceConfig < Struct.new(
+      nil,
       :apply_to_all_regions,
       :advanced_event_selectors,
       keyword_init: true
@@ -4592,6 +4796,7 @@ module Aws::CloudTrail
     #               <code>$EventDataStoreId$</code> query parameter is required.</p>
     #   @return [Hash<String, String>]
     class StartDashboardRefreshRequest < Struct.new(
+      nil,
       :dashboard_id,
       :query_parameter_values,
       keyword_init: true
@@ -4605,6 +4810,7 @@ module Aws::CloudTrail
     #   </p>
     #   @return [String]
     class StartDashboardRefreshResponse < Struct.new(
+      nil,
       :refresh_id,
       keyword_init: true
     )
@@ -4615,6 +4821,7 @@ module Aws::CloudTrail
     #   <p>The ARN (or ID suffix of the ARN) of the event data store for which you want to start ingestion.</p>
     #   @return [String]
     class StartEventDataStoreIngestionRequest < Struct.new(
+      nil,
       :event_data_store,
       keyword_init: true
     )
@@ -4622,6 +4829,7 @@ module Aws::CloudTrail
     end
 
     class StartEventDataStoreIngestionResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -4652,6 +4860,7 @@ module Aws::CloudTrail
     #   <p> The ID of the import. Use this parameter when you are retrying an import. </p>
     #   @return [String]
     class StartImportRequest < Struct.new(
+      nil,
       :destinations,
       :import_source,
       :start_event_time,
@@ -4693,6 +4902,7 @@ module Aws::CloudTrail
     #   <p> The timestamp of the import's last update, if applicable. </p>
     #   @return [Time]
     class StartImportResponse < Struct.new(
+      nil,
       :import_id,
       :destinations,
       :import_source,
@@ -4716,6 +4926,7 @@ module Aws::CloudTrail
     #            </p>
     #   @return [String]
     class StartLoggingRequest < Struct.new(
+      nil,
       :name,
       keyword_init: true
     )
@@ -4725,6 +4936,7 @@ module Aws::CloudTrail
     # <p>Returns the objects or data listed below if successful. Otherwise, returns an
     #          error.</p>
     class StartLoggingResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -4752,6 +4964,7 @@ module Aws::CloudTrail
     #   </p>
     #   @return [String]
     class StartQueryRequest < Struct.new(
+      nil,
       :query_statement,
       :delivery_s3_uri,
       :query_alias,
@@ -4771,6 +4984,7 @@ module Aws::CloudTrail
     #   </p>
     #   @return [String]
     class StartQueryResponse < Struct.new(
+      nil,
       :query_id,
       :event_data_store_owner_account_id,
       keyword_init: true
@@ -4782,6 +4996,7 @@ module Aws::CloudTrail
     #   <p>The ARN (or ID suffix of the ARN) of the event data store for which you want to stop ingestion.</p>
     #   @return [String]
     class StopEventDataStoreIngestionRequest < Struct.new(
+      nil,
       :event_data_store,
       keyword_init: true
     )
@@ -4789,6 +5004,7 @@ module Aws::CloudTrail
     end
 
     class StopEventDataStoreIngestionResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -4798,6 +5014,7 @@ module Aws::CloudTrail
     #   <p> The ID of the import. </p>
     #   @return [String]
     class StopImportRequest < Struct.new(
+      nil,
       :import_id,
       keyword_init: true
     )
@@ -4836,6 +5053,7 @@ module Aws::CloudTrail
     #   <p> Returns information on the stopped import. </p>
     #   @return [Types::ImportStatistics]
     class StopImportResponse < Struct.new(
+      nil,
       :import_id,
       :import_source,
       :destinations,
@@ -4861,6 +5079,7 @@ module Aws::CloudTrail
     #            </p>
     #   @return [String]
     class StopLoggingRequest < Struct.new(
+      nil,
       :name,
       keyword_init: true
     )
@@ -4870,6 +5089,7 @@ module Aws::CloudTrail
     # <p>Returns the objects or data listed below if successful. Otherwise, returns an
     #          error.</p>
     class StopLoggingResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -4886,6 +5106,7 @@ module Aws::CloudTrail
     #            characters.</p>
     #   @return [String]
     class Tag < Struct.new(
+      nil,
       :key,
       :value,
       keyword_init: true
@@ -4899,6 +5120,7 @@ module Aws::CloudTrail
     #   <p>Brief description of the exception returned by the request.</p>
     #   @return [String]
     class TagsLimitExceededException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -4912,6 +5134,7 @@ module Aws::CloudTrail
     #   <p>Brief description of the exception returned by the request.</p>
     #   @return [String]
     class ThrottlingException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -4990,6 +5213,7 @@ module Aws::CloudTrail
     #   <p>Specifies whether the trail is an organization trail.</p>
     #   @return [Boolean]
     class Trail < Struct.new(
+      nil,
       :name,
       :s3_bucket_name,
       :s3_key_prefix,
@@ -5016,6 +5240,7 @@ module Aws::CloudTrail
     #   <p>Brief description of the exception returned by the request.</p>
     #   @return [String]
     class TrailAlreadyExistsException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -5034,6 +5259,7 @@ module Aws::CloudTrail
     #   <p>The Amazon Web Services Region in which a trail was created.</p>
     #   @return [String]
     class TrailInfo < Struct.new(
+      nil,
       :trail_arn,
       :name,
       :home_region,
@@ -5047,6 +5273,7 @@ module Aws::CloudTrail
     #   <p>Brief description of the exception returned by the request.</p>
     #   @return [String]
     class TrailNotFoundException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -5058,6 +5285,7 @@ module Aws::CloudTrail
     #   <p>Brief description of the exception returned by the request.</p>
     #   @return [String]
     class TrailNotProvidedException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -5069,6 +5297,7 @@ module Aws::CloudTrail
     #   <p>Brief description of the exception returned by the request.</p>
     #   @return [String]
     class UnsupportedOperationException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -5087,6 +5316,7 @@ module Aws::CloudTrail
     #         </p>
     #   @return [String]
     class UpdateChannelRequest < Struct.new(
+      nil,
       :channel,
       :destinations,
       :name,
@@ -5108,6 +5338,7 @@ module Aws::CloudTrail
     #   <p>The event data stores that log events arriving through the channel.</p>
     #   @return [Array<Types::Destination>]
     class UpdateChannelResponse < Struct.new(
+      nil,
       :channel_arn,
       :name,
       :source,
@@ -5140,6 +5371,7 @@ module Aws::CloudTrail
     #   </p>
     #   @return [Boolean]
     class UpdateDashboardRequest < Struct.new(
+      nil,
       :dashboard_id,
       :widgets,
       :refresh_schedule,
@@ -5190,6 +5422,7 @@ module Aws::CloudTrail
     #   </p>
     #   @return [Time]
     class UpdateDashboardResponse < Struct.new(
+      nil,
       :dashboard_arn,
       :name,
       :type,
@@ -5307,6 +5540,7 @@ module Aws::CloudTrail
     #            <a href="https://docs.aws.amazon.com/awscloudtrail/latest/userguide/cloudtrail-lake-manage-costs.html">Managing CloudTrail Lake costs</a>.</p>
     #   @return [String]
     class UpdateEventDataStoreRequest < Struct.new(
+      nil,
       :event_data_store,
       :name,
       :advanced_event_selectors,
@@ -5377,6 +5611,7 @@ module Aws::CloudTrail
     #         </p>
     #   @return [String]
     class UpdateEventDataStoreResponse < Struct.new(
+      nil,
       :event_data_store_arn,
       :name,
       :status,
@@ -5507,6 +5742,7 @@ module Aws::CloudTrail
     #            </note>
     #   @return [Boolean]
     class UpdateTrailRequest < Struct.new(
+      nil,
       :name,
       :s3_bucket_name,
       :s3_key_prefix,
@@ -5583,6 +5819,7 @@ module Aws::CloudTrail
     #   <p>Specifies whether the trail is an organization trail.</p>
     #   @return [Boolean]
     class UpdateTrailResponse < Struct.new(
+      nil,
       :name,
       :s3_bucket_name,
       :s3_key_prefix,
@@ -5626,6 +5863,7 @@ module Aws::CloudTrail
     #   </p>
     #   @return [Hash<String, String>]
     class Widget < Struct.new(
+      nil,
       :query_alias,
       :query_statement,
       :query_parameters,

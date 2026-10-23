@@ -10,6 +10,7 @@ module Aws::Artifact
     # @!attribute message
     #   @return [String]
     class AccessDeniedException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -21,6 +22,7 @@ module Aws::Artifact
     #   <p>Notification subscription status of the customer.</p>
     #   @return [String]
     class AccountSettings < Struct.new(
+      nil,
       :notification_subscription_status,
       keyword_init: true
     )
@@ -37,6 +39,7 @@ module Aws::Artifact
     #   <p>Type of the affected resource.</p>
     #   @return [String]
     class ConflictException < Struct.new(
+      nil,
       :message,
       :resource_id,
       :resource_type,
@@ -86,6 +89,7 @@ module Aws::Artifact
     #   <p>Type of the customer-agreement resource.</p>
     #   @return [String]
     class CustomerAgreementSummary < Struct.new(
+      nil,
       :name,
       :arn,
       :id,
@@ -105,6 +109,7 @@ module Aws::Artifact
     end
 
     class GetAccountSettingsRequest < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -114,6 +119,7 @@ module Aws::Artifact
     #   <p>Account settings for the customer.</p>
     #   @return [Types::AccountSettings]
     class GetAccountSettingsResponse < Struct.new(
+      nil,
       :account_settings,
       keyword_init: true
     )
@@ -127,6 +133,7 @@ module Aws::Artifact
     #   <p>Version for the report resource.</p>
     #   @return [Integer]
     class GetReportMetadataRequest < Struct.new(
+      nil,
       :report_id,
       :report_version,
       keyword_init: true
@@ -138,6 +145,7 @@ module Aws::Artifact
     #   <p>Report resource detail.</p>
     #   @return [Types::ReportDetail]
     class GetReportMetadataResponse < Struct.new(
+      nil,
       :report_details,
       keyword_init: true
     )
@@ -154,6 +162,7 @@ module Aws::Artifact
     #   <p>Unique download token provided by GetTermForReport API.</p>
     #   @return [String]
     class GetReportRequest < Struct.new(
+      nil,
       :report_id,
       :report_version,
       :term_token,
@@ -166,6 +175,7 @@ module Aws::Artifact
     #   <p>Presigned S3 url to access the report content.</p>
     #   @return [String]
     class GetReportResponse < Struct.new(
+      nil,
       :document_presigned_url,
       keyword_init: true
     )
@@ -179,6 +189,7 @@ module Aws::Artifact
     #   <p>Version for the report resource.</p>
     #   @return [Integer]
     class GetTermForReportRequest < Struct.new(
+      nil,
       :report_id,
       :report_version,
       keyword_init: true
@@ -193,6 +204,7 @@ module Aws::Artifact
     #   <p>Unique token representing this request event.</p>
     #   @return [String]
     class GetTermForReportResponse < Struct.new(
+      nil,
       :document_presigned_url,
       :term_token,
       keyword_init: true
@@ -207,6 +219,7 @@ module Aws::Artifact
     #   <p>Number of seconds in which the caller can retry the request.</p>
     #   @return [Integer]
     class InternalServerException < Struct.new(
+      nil,
       :message,
       :retry_after_seconds,
       keyword_init: true
@@ -221,6 +234,7 @@ module Aws::Artifact
     #   <p>Pagination token to request the next page of resources.</p>
     #   @return [String]
     class ListCustomerAgreementsRequest < Struct.new(
+      nil,
       :max_results,
       :next_token,
       keyword_init: true
@@ -235,6 +249,7 @@ module Aws::Artifact
     #   <p>Pagination token to request the next page of resources.</p>
     #   @return [String]
     class ListCustomerAgreementsResponse < Struct.new(
+      nil,
       :customer_agreements,
       :next_token,
       keyword_init: true
@@ -249,6 +264,7 @@ module Aws::Artifact
     #   <p>Pagination token to request the next page of resources.</p>
     #   @return [String]
     class ListReportsRequest < Struct.new(
+      nil,
       :max_results,
       :next_token,
       keyword_init: true
@@ -263,6 +279,7 @@ module Aws::Artifact
     #   <p>Pagination token to request the next page of resources.</p>
     #   @return [String]
     class ListReportsResponse < Struct.new(
+      nil,
       :reports,
       :next_token,
       keyword_init: true
@@ -274,6 +291,7 @@ module Aws::Artifact
     #   <p>Desired notification subscription status.</p>
     #   @return [String]
     class PutAccountSettingsRequest < Struct.new(
+      nil,
       :notification_subscription_status,
       keyword_init: true
     )
@@ -284,6 +302,7 @@ module Aws::Artifact
     #   <p>Account settings for the customer.</p>
     #   @return [Types::AccountSettings]
     class PutAccountSettingsResponse < Struct.new(
+      nil,
       :account_settings,
       keyword_init: true
     )
@@ -352,6 +371,7 @@ module Aws::Artifact
     #   <p>The message associated with the current upload state.</p>
     #   @return [String]
     class ReportDetail < Struct.new(
+      nil,
       :id,
       :name,
       :description,
@@ -424,6 +444,7 @@ module Aws::Artifact
     #   <p>Acceptance type for report.</p>
     #   @return [String]
     class ReportSummary < Struct.new(
+      nil,
       :id,
       :name,
       :state,
@@ -454,6 +475,7 @@ module Aws::Artifact
     #   <p>Type of the affected resource.</p>
     #   @return [String]
     class ResourceNotFoundException < Struct.new(
+      nil,
       :message,
       :resource_id,
       :resource_type,
@@ -478,6 +500,7 @@ module Aws::Artifact
     #   <p>Code for the affected quota.</p>
     #   @return [String]
     class ServiceQuotaExceededException < Struct.new(
+      nil,
       :message,
       :resource_id,
       :resource_type,
@@ -501,6 +524,7 @@ module Aws::Artifact
     #   <p>Number of seconds in which the caller can retry the request.</p>
     #   @return [Integer]
     class ThrottlingException < Struct.new(
+      nil,
       :message,
       :service_code,
       :quota_code,
@@ -520,6 +544,7 @@ module Aws::Artifact
     #   <p>The field that caused the error, if applicable.</p>
     #   @return [Array<Types::ValidationExceptionField>]
     class ValidationException < Struct.new(
+      nil,
       :message,
       :reason,
       :field_list,
@@ -536,6 +561,7 @@ module Aws::Artifact
     #   <p>Message describing why the field failed validation.</p>
     #   @return [String]
     class ValidationExceptionField < Struct.new(
+      nil,
       :name,
       :message,
       keyword_init: true

@@ -14,6 +14,7 @@ module Aws::SagemakerEdge
     #   <p>The checksum of the model.</p>
     #   @return [String]
     class Checksum < Struct.new(
+      nil,
       :type,
       :sum,
       keyword_init: true
@@ -35,6 +36,7 @@ module Aws::SagemakerEdge
     #   <p>The desired state of the model.</p>
     #   @return [String]
     class Definition < Struct.new(
+      nil,
       :model_handle,
       :s3_url,
       :checksum,
@@ -70,6 +72,7 @@ module Aws::SagemakerEdge
     #   <p>Returns the error message if there is a rollback.</p>
     #   @return [String]
     class DeploymentModel < Struct.new(
+      nil,
       :model_handle,
       :model_name,
       :model_version,
@@ -103,6 +106,7 @@ module Aws::SagemakerEdge
     #   <p>Returns a list of models deployed on the agent.</p>
     #   @return [Array<Types::DeploymentModel>]
     class DeploymentResult < Struct.new(
+      nil,
       :deployment_name,
       :deployment_status,
       :deployment_status_message,
@@ -128,6 +132,7 @@ module Aws::SagemakerEdge
     #   <p>Returns a list of Definition objects.</p>
     #   @return [Array<Types::Definition>]
     class EdgeDeployment < Struct.new(
+      nil,
       :deployment_name,
       :type,
       :failure_handling_policy,
@@ -151,6 +156,7 @@ module Aws::SagemakerEdge
     #   <p>Timestamp of when the metric was requested.</p>
     #   @return [Time]
     class EdgeMetric < Struct.new(
+      nil,
       :dimension,
       :metric_name,
       :value,
@@ -167,6 +173,7 @@ module Aws::SagemakerEdge
     #   <p>The name of the fleet that the device belongs to.</p>
     #   @return [String]
     class GetDeploymentsRequest < Struct.new(
+      nil,
       :device_name,
       :device_fleet_name,
       keyword_init: true
@@ -178,6 +185,7 @@ module Aws::SagemakerEdge
     #   <p>Returns a list of the configurations of the active deployments on the device.</p>
     #   @return [Array<Types::EdgeDeployment>]
     class GetDeploymentsResult < Struct.new(
+      nil,
       :deployments,
       keyword_init: true
     )
@@ -191,6 +199,7 @@ module Aws::SagemakerEdge
     #   <p>The name of the fleet that the device belongs to.</p>
     #   @return [String]
     class GetDeviceRegistrationRequest < Struct.new(
+      nil,
       :device_name,
       :device_fleet_name,
       keyword_init: true
@@ -205,6 +214,7 @@ module Aws::SagemakerEdge
     #   <p>The amount of time, in seconds, that the registration status is stored on the device’s cache before it is refreshed.</p>
     #   @return [String]
     class GetDeviceRegistrationResult < Struct.new(
+      nil,
       :device_registration,
       :cache_ttl,
       keyword_init: true
@@ -217,6 +227,7 @@ module Aws::SagemakerEdge
     # @!attribute message
     #   @return [String]
     class InternalServiceException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -240,6 +251,7 @@ module Aws::SagemakerEdge
     #   <p>Information required for model metrics.</p>
     #   @return [Array<Types::EdgeMetric>]
     class Model < Struct.new(
+      nil,
       :model_name,
       :model_version,
       :latest_sample_time,
@@ -269,6 +281,7 @@ module Aws::SagemakerEdge
     #   <p>Returns the result of a deployment on the device.</p>
     #   @return [Types::DeploymentResult]
     class SendHeartbeatRequest < Struct.new(
+      nil,
       :agent_metrics,
       :models,
       :agent_version,

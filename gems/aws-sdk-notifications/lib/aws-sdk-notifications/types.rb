@@ -10,6 +10,7 @@ module Aws::Notifications
     # @!attribute message
     #   @return [String]
     class AccessDeniedException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -21,6 +22,7 @@ module Aws::Notifications
     #   <p>Properties used to summarize aggregated events.</p>
     #   @return [Array<Types::SummarizationDimensionDetail>]
     class AggregationDetail < Struct.new(
+      nil,
       :summarization_dimensions,
       keyword_init: true
     )
@@ -35,6 +37,7 @@ module Aws::Notifications
     #   <p>Indicates the value associated with the aggregation key name.</p>
     #   @return [String]
     class AggregationKey < Struct.new(
+      nil,
       :name,
       :value,
       keyword_init: true
@@ -62,6 +65,7 @@ module Aws::Notifications
     #   <p>List of additional dimensions used to group and summarize data.</p>
     #   @return [Array<Types::SummarizationDimensionOverview>]
     class AggregationSummary < Struct.new(
+      nil,
       :event_count,
       :aggregated_by,
       :aggregated_accounts,
@@ -80,6 +84,7 @@ module Aws::Notifications
     #   <p>The ARN of the <code>NotificationConfiguration</code> to associate with the Channel.</p>
     #   @return [String]
     class AssociateChannelRequest < Struct.new(
+      nil,
       :arn,
       :notification_configuration_arn,
       keyword_init: true
@@ -88,6 +93,7 @@ module Aws::Notifications
     end
 
     class AssociateChannelResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -100,6 +106,7 @@ module Aws::Notifications
     #   <p>The Amazon Resource Name (ARN) of the <code>ManagedNotificationConfiguration</code> to associate with the Account Contact.</p>
     #   @return [String]
     class AssociateManagedNotificationAccountContactRequest < Struct.new(
+      nil,
       :contact_identifier,
       :managed_notification_configuration_arn,
       keyword_init: true
@@ -108,6 +115,7 @@ module Aws::Notifications
     end
 
     class AssociateManagedNotificationAccountContactResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -120,6 +128,7 @@ module Aws::Notifications
     #   <p>The Amazon Resource Name (ARN) of the <code>ManagedNotificationConfiguration</code> to associate with the additional Channel.</p>
     #   @return [String]
     class AssociateManagedNotificationAdditionalChannelRequest < Struct.new(
+      nil,
       :channel_arn,
       :managed_notification_configuration_arn,
       keyword_init: true
@@ -128,6 +137,7 @@ module Aws::Notifications
     end
 
     class AssociateManagedNotificationAdditionalChannelResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -140,6 +150,7 @@ module Aws::Notifications
     #   <p>The Amazon Resource Name (ARN) of the notification configuration to associate with the organizational unit.</p>
     #   @return [String]
     class AssociateOrganizationalUnitRequest < Struct.new(
+      nil,
       :organizational_unit_id,
       :notification_configuration_arn,
       keyword_init: true
@@ -148,6 +159,7 @@ module Aws::Notifications
     end
 
     class AssociateOrganizationalUnitResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -160,6 +172,7 @@ module Aws::Notifications
     #   <p>The resource ID that prompted the conflict error.</p>
     #   @return [String]
     class ConflictException < Struct.new(
+      nil,
       :message,
       :resource_id,
       keyword_init: true
@@ -183,6 +196,7 @@ module Aws::Notifications
     #   <p>A list of Amazon Web Services Regions that send events to this <code>EventRule</code>.</p>
     #   @return [Array<String>]
     class CreateEventRuleRequest < Struct.new(
+      nil,
       :notification_configuration_arn,
       :source,
       :event_type,
@@ -203,6 +217,7 @@ module Aws::Notifications
     #   <p>A list of an <code>EventRule</code>'s status by Region. Regions are mapped to <code>EventRuleStatusSummary</code>.</p>
     #   @return [Hash<String, Types::EventRuleStatusSummary>]
     class CreateEventRuleResponse < Struct.new(
+      nil,
       :arn,
       :notification_configuration_arn,
       :status_summary_by_region,
@@ -224,6 +239,7 @@ module Aws::Notifications
     #   <p>A map of tags assigned to a resource. A tag is a string-to-string map of key-value pairs.</p>
     #   @return [Hash<String, String>]
     class CreateNotificationConfigurationRequest < Struct.new(
+      nil,
       :name,
       :description,
       :aggregation_duration,
@@ -240,6 +256,7 @@ module Aws::Notifications
     #   <p>The current status of this <code>NotificationConfiguration</code>.</p>
     #   @return [String]
     class CreateNotificationConfigurationResponse < Struct.new(
+      nil,
       :arn,
       :status,
       keyword_init: true
@@ -251,6 +268,7 @@ module Aws::Notifications
     #   <p>The Amazon Resource Name (ARN) of the <code>EventRule</code> to delete.</p>
     #   @return [String]
     class DeleteEventRuleRequest < Struct.new(
+      nil,
       :arn,
       keyword_init: true
     )
@@ -258,6 +276,7 @@ module Aws::Notifications
     end
 
     class DeleteEventRuleResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -267,6 +286,7 @@ module Aws::Notifications
     #   <p>The Amazon Resource Name (ARN) of the <code>NotificationConfiguration</code> to delete.</p>
     #   @return [String]
     class DeleteNotificationConfigurationRequest < Struct.new(
+      nil,
       :arn,
       keyword_init: true
     )
@@ -274,6 +294,7 @@ module Aws::Notifications
     end
 
     class DeleteNotificationConfigurationResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -283,6 +304,7 @@ module Aws::Notifications
     #   <p>The <code>NotificationConfiguration</code> Region.</p>
     #   @return [String]
     class DeregisterNotificationHubRequest < Struct.new(
+      nil,
       :notification_hub_region,
       keyword_init: true
     )
@@ -296,6 +318,7 @@ module Aws::Notifications
     #   <p> <code>NotificationConfiguration</code> status information.</p>
     #   @return [Types::NotificationHubStatusSummary]
     class DeregisterNotificationHubResponse < Struct.new(
+      nil,
       :notification_hub_region,
       :status_summary,
       keyword_init: true
@@ -311,6 +334,7 @@ module Aws::Notifications
     #   <p>The value of the dimension.</p>
     #   @return [String]
     class Dimension < Struct.new(
+      nil,
       :name,
       :value,
       keyword_init: true
@@ -319,12 +343,14 @@ module Aws::Notifications
     end
 
     class DisableNotificationsAccessForOrganizationRequest < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
     end
 
     class DisableNotificationsAccessForOrganizationResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -337,6 +363,7 @@ module Aws::Notifications
     #   <p>The ARN of the <code>NotificationConfiguration</code> to disassociate.</p>
     #   @return [String]
     class DisassociateChannelRequest < Struct.new(
+      nil,
       :arn,
       :notification_configuration_arn,
       keyword_init: true
@@ -345,6 +372,7 @@ module Aws::Notifications
     end
 
     class DisassociateChannelResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -357,6 +385,7 @@ module Aws::Notifications
     #   <p>The Amazon Resource Name (ARN) of the <code>ManagedNotificationConfiguration</code> to associate with the Account Contact.</p>
     #   @return [String]
     class DisassociateManagedNotificationAccountContactRequest < Struct.new(
+      nil,
       :contact_identifier,
       :managed_notification_configuration_arn,
       keyword_init: true
@@ -365,6 +394,7 @@ module Aws::Notifications
     end
 
     class DisassociateManagedNotificationAccountContactResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -377,6 +407,7 @@ module Aws::Notifications
     #   <p>The Amazon Resource Name (ARN) of the Managed Notification Configuration to associate with the additional Channel.</p>
     #   @return [String]
     class DisassociateManagedNotificationAdditionalChannelRequest < Struct.new(
+      nil,
       :channel_arn,
       :managed_notification_configuration_arn,
       keyword_init: true
@@ -385,6 +416,7 @@ module Aws::Notifications
     end
 
     class DisassociateManagedNotificationAdditionalChannelResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -397,6 +429,7 @@ module Aws::Notifications
     #   <p>The Amazon Resource Name (ARN) of the notification configuration to disassociate from the organizational unit.</p>
     #   @return [String]
     class DisassociateOrganizationalUnitRequest < Struct.new(
+      nil,
       :organizational_unit_id,
       :notification_configuration_arn,
       keyword_init: true
@@ -405,18 +438,21 @@ module Aws::Notifications
     end
 
     class DisassociateOrganizationalUnitResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
     end
 
     class EnableNotificationsAccessForOrganizationRequest < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
     end
 
     class EnableNotificationsAccessForOrganizationResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -430,6 +466,7 @@ module Aws::Notifications
     #   <p>A human-readable reason for <code>EventRuleStatus</code>.</p>
     #   @return [String]
     class EventRuleStatusSummary < Struct.new(
+      nil,
       :status,
       :reason,
       keyword_init: true
@@ -466,6 +503,7 @@ module Aws::Notifications
     #   <p>A list of an <code>EventRule</code>'s status by Region. Regions are mapped to <code>EventRuleStatusSummary</code>.</p>
     #   @return [Hash<String, Types::EventRuleStatusSummary>]
     class EventRuleStructure < Struct.new(
+      nil,
       :arn,
       :notification_configuration_arn,
       :creation_time,
@@ -484,6 +522,7 @@ module Aws::Notifications
     #   <p>The Amazon Resource Name (ARN) of the <code>EventRule</code> to return.</p>
     #   @return [String]
     class GetEventRuleRequest < Struct.new(
+      nil,
       :arn,
       keyword_init: true
     )
@@ -518,6 +557,7 @@ module Aws::Notifications
     #   <p>A list of an <code>EventRule</code>'s status by Region. Regions are mapped to <code>EventRuleStatusSummary</code>.</p>
     #   @return [Hash<String, Types::EventRuleStatusSummary>]
     class GetEventRuleResponse < Struct.new(
+      nil,
       :arn,
       :notification_configuration_arn,
       :creation_time,
@@ -539,6 +579,7 @@ module Aws::Notifications
     #   <p>The locale code of the language used for the retrieved <code>ManagedNotificationChildEvent</code>. The default locale is English <code>en_US</code>.</p>
     #   @return [String]
     class GetManagedNotificationChildEventRequest < Struct.new(
+      nil,
       :arn,
       :locale,
       keyword_init: true
@@ -559,6 +600,7 @@ module Aws::Notifications
     #   <p>The content of the <code>ManagedNotificationChildEvent</code>.</p>
     #   @return [Types::ManagedNotificationChildEvent]
     class GetManagedNotificationChildEventResponse < Struct.new(
+      nil,
       :arn,
       :managed_notification_configuration_arn,
       :creation_time,
@@ -572,6 +614,7 @@ module Aws::Notifications
     #   <p>The Amazon Resource Name (ARN) of the <code>ManagedNotificationConfiguration</code> to return.</p>
     #   @return [String]
     class GetManagedNotificationConfigurationRequest < Struct.new(
+      nil,
       :arn,
       keyword_init: true
     )
@@ -594,6 +637,7 @@ module Aws::Notifications
     #   <p>The subCategory of the <code>ManagedNotificationConfiguration</code>.</p>
     #   @return [String]
     class GetManagedNotificationConfigurationResponse < Struct.new(
+      nil,
       :arn,
       :name,
       :description,
@@ -611,6 +655,7 @@ module Aws::Notifications
     #   <p>The locale code of the language used for the retrieved <code>ManagedNotificationEvent</code>. The default locale is English <code>(en_US)</code>.</p>
     #   @return [String]
     class GetManagedNotificationEventRequest < Struct.new(
+      nil,
       :arn,
       :locale,
       keyword_init: true
@@ -631,6 +676,7 @@ module Aws::Notifications
     #   <p>The content of the <code>ManagedNotificationEvent</code>.</p>
     #   @return [Types::ManagedNotificationEvent]
     class GetManagedNotificationEventResponse < Struct.new(
+      nil,
       :arn,
       :managed_notification_configuration_arn,
       :creation_time,
@@ -644,6 +690,7 @@ module Aws::Notifications
     #   <p>The Amazon Resource Name (ARN) of the <code>NotificationConfiguration</code> to return.</p>
     #   @return [String]
     class GetNotificationConfigurationRequest < Struct.new(
+      nil,
       :arn,
       keyword_init: true
     )
@@ -672,6 +719,7 @@ module Aws::Notifications
     #   <p>The subtype of the notification configuration returned in the response.</p>
     #   @return [String]
     class GetNotificationConfigurationResponse < Struct.new(
+      nil,
       :arn,
       :name,
       :description,
@@ -691,6 +739,7 @@ module Aws::Notifications
     #   <p>The locale code of the language used for the retrieved <code>NotificationEvent</code>. The default locale is English <code>en_US</code>.</p>
     #   @return [String]
     class GetNotificationEventRequest < Struct.new(
+      nil,
       :arn,
       :locale,
       keyword_init: true
@@ -711,6 +760,7 @@ module Aws::Notifications
     #   <p>The content of the <code>NotificationEvent</code>.</p>
     #   @return [Types::NotificationEventSchema]
     class GetNotificationEventResponse < Struct.new(
+      nil,
       :arn,
       :notification_configuration_arn,
       :creation_time,
@@ -721,6 +771,7 @@ module Aws::Notifications
     end
 
     class GetNotificationsAccessForOrganizationRequest < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -730,6 +781,7 @@ module Aws::Notifications
     #   <p>The <code>AccessStatus</code> of Service Trust Enablement for User Notifications to Amazon Web Services Organizations.</p>
     #   @return [Types::NotificationsAccessForOrganization]
     class GetNotificationsAccessForOrganizationResponse < Struct.new(
+      nil,
       :notifications_access_for_organization,
       keyword_init: true
     )
@@ -740,6 +792,7 @@ module Aws::Notifications
     # @!attribute message
     #   @return [String]
     class InternalServerException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -756,6 +809,7 @@ module Aws::Notifications
     #   <p>The start token for paginated calls. Retrieved from the response of a previous ListNotificationEvents call. <code>NextToken</code> uses Base64 encoding.</p>
     #   @return [String]
     class ListChannelsRequest < Struct.new(
+      nil,
       :notification_configuration_arn,
       :max_results,
       :next_token,
@@ -771,6 +825,7 @@ module Aws::Notifications
     #   <p>A list of Channels.</p>
     #   @return [Array<String>]
     class ListChannelsResponse < Struct.new(
+      nil,
       :next_token,
       :channels,
       keyword_init: true
@@ -788,6 +843,7 @@ module Aws::Notifications
     #   <p>The start token for paginated calls. Retrieved from the response of a previous <code>ListEventRules</code> call. Next token uses Base64 encoding.</p>
     #   @return [String]
     class ListEventRulesRequest < Struct.new(
+      nil,
       :notification_configuration_arn,
       :max_results,
       :next_token,
@@ -803,6 +859,7 @@ module Aws::Notifications
     #   <p>A list of <code>EventRules</code>.</p>
     #   @return [Array<Types::EventRuleStructure>]
     class ListEventRulesResponse < Struct.new(
+      nil,
       :next_token,
       :event_rules,
       keyword_init: true
@@ -820,6 +877,7 @@ module Aws::Notifications
     #   <p>The start token for paginated calls. Retrieved from the response of a previous <code>ListManagedNotificationChannelAssociations</code> call.</p>
     #   @return [String]
     class ListManagedNotificationChannelAssociationsRequest < Struct.new(
+      nil,
       :managed_notification_configuration_arn,
       :max_results,
       :next_token,
@@ -835,6 +893,7 @@ module Aws::Notifications
     #   <p>A list that contains the following information about a channel association.</p>
     #   @return [Array<Types::ManagedNotificationChannelAssociationSummary>]
     class ListManagedNotificationChannelAssociationsResponse < Struct.new(
+      nil,
       :next_token,
       :channel_associations,
       keyword_init: true
@@ -867,6 +926,7 @@ module Aws::Notifications
     #   <p>The start token for paginated calls. Retrieved from the response of a previous ListManagedNotificationChannelAssociations call. Next token uses Base64 encoding.</p>
     #   @return [String]
     class ListManagedNotificationChildEventsRequest < Struct.new(
+      nil,
       :aggregate_managed_notification_event_arn,
       :start_time,
       :end_time,
@@ -887,6 +947,7 @@ module Aws::Notifications
     #   <p>A pagination token. If a non-null pagination token is returned in a result, pass its value in another request to retrieve more entries.</p>
     #   @return [Array<Types::ManagedNotificationChildEventOverview>]
     class ListManagedNotificationChildEventsResponse < Struct.new(
+      nil,
       :next_token,
       :managed_notification_child_events,
       keyword_init: true
@@ -904,6 +965,7 @@ module Aws::Notifications
     #   <p>The start token for paginated calls. Retrieved from the response of a previous ListManagedNotificationChannelAssociations call. Next token uses Base64 encoding.</p>
     #   @return [String]
     class ListManagedNotificationConfigurationsRequest < Struct.new(
+      nil,
       :channel_identifier,
       :max_results,
       :next_token,
@@ -919,6 +981,7 @@ module Aws::Notifications
     #   <p>A list of Managed Notification Configurations matching the request criteria.</p>
     #   @return [Array<Types::ManagedNotificationConfigurationStructure>]
     class ListManagedNotificationConfigurationsResponse < Struct.new(
+      nil,
       :next_token,
       :managed_notification_configurations,
       keyword_init: true
@@ -951,6 +1014,7 @@ module Aws::Notifications
     #   <p>The Amazon Web Services account ID associated with the Managed Notification Events.</p>
     #   @return [String]
     class ListManagedNotificationEventsRequest < Struct.new(
+      nil,
       :start_time,
       :end_time,
       :locale,
@@ -971,6 +1035,7 @@ module Aws::Notifications
     #   <p>A list of Managed Notification Events matching the request criteria.</p>
     #   @return [Array<Types::ManagedNotificationEventOverview>]
     class ListManagedNotificationEventsResponse < Struct.new(
+      nil,
       :next_token,
       :managed_notification_events,
       keyword_init: true
@@ -997,6 +1062,7 @@ module Aws::Notifications
     #   <p>The organizational unit ID used to filter the member accounts.</p>
     #   @return [String]
     class ListMemberAccountsRequest < Struct.new(
+      nil,
       :notification_configuration_arn,
       :max_results,
       :next_token,
@@ -1015,6 +1081,7 @@ module Aws::Notifications
     #   <p>The token to use for the next page of results.</p>
     #   @return [String]
     class ListMemberAccountsResponse < Struct.new(
+      nil,
       :member_accounts,
       :next_token,
       keyword_init: true
@@ -1041,6 +1108,7 @@ module Aws::Notifications
     #   <p>The start token for paginated calls. Retrieved from the response of a previous <code>ListEventRules</code> call. Next token uses Base64 encoding.</p>
     #   @return [String]
     class ListNotificationConfigurationsRequest < Struct.new(
+      nil,
       :event_rule_source,
       :channel_arn,
       :status,
@@ -1059,6 +1127,7 @@ module Aws::Notifications
     #   <p>The <code>NotificationConfigurations</code> in the account.</p>
     #   @return [Array<Types::NotificationConfigurationStructure>]
     class ListNotificationConfigurationsResponse < Struct.new(
+      nil,
       :next_token,
       :notification_configurations,
       keyword_init: true
@@ -1094,6 +1163,7 @@ module Aws::Notifications
     #   <p>The unique identifier of the organizational unit used to filter notification events.</p>
     #   @return [String]
     class ListNotificationEventsRequest < Struct.new(
+      nil,
       :start_time,
       :end_time,
       :locale,
@@ -1115,6 +1185,7 @@ module Aws::Notifications
     #   <p>The list of notification events.</p>
     #   @return [Array<Types::NotificationEventOverview>]
     class ListNotificationEventsResponse < Struct.new(
+      nil,
       :next_token,
       :notification_events,
       keyword_init: true
@@ -1129,6 +1200,7 @@ module Aws::Notifications
     #   <p>A pagination token. Set to null to start listing notification hubs from the start.</p>
     #   @return [String]
     class ListNotificationHubsRequest < Struct.new(
+      nil,
       :max_results,
       :next_token,
       keyword_init: true
@@ -1143,6 +1215,7 @@ module Aws::Notifications
     #   <p>A pagination token. If a non-null pagination token is returned in a result, pass its value in another request to retrieve more entries.</p>
     #   @return [String]
     class ListNotificationHubsResponse < Struct.new(
+      nil,
       :notification_hubs,
       :next_token,
       keyword_init: true
@@ -1160,6 +1233,7 @@ module Aws::Notifications
     #   <p>The token for the next page of results. Use the value returned in the previous response.</p>
     #   @return [String]
     class ListOrganizationalUnitsRequest < Struct.new(
+      nil,
       :notification_configuration_arn,
       :max_results,
       :next_token,
@@ -1175,6 +1249,7 @@ module Aws::Notifications
     #   <p>The token to use for the next page of results. If there are no additional results, this value is null.</p>
     #   @return [String]
     class ListOrganizationalUnitsResponse < Struct.new(
+      nil,
       :organizational_units,
       :next_token,
       keyword_init: true
@@ -1186,6 +1261,7 @@ module Aws::Notifications
     #   <p>The Amazon Resource Name (ARN) to use to list tags.</p>
     #   @return [String]
     class ListTagsForResourceRequest < Struct.new(
+      nil,
       :arn,
       keyword_init: true
     )
@@ -1196,6 +1272,7 @@ module Aws::Notifications
     #   <p>A list of tags for the specified ARN.</p>
     #   @return [Hash<String, String>]
     class ListTagsForResourceResponse < Struct.new(
+      nil,
       :tags,
       keyword_init: true
     )
@@ -1213,6 +1290,7 @@ module Aws::Notifications
     #   <p>Controls whether users can modify channel associations for a notification configuration.</p> <ul> <li> <p>Values:</p> <ul> <li> <p> <code>ENABLED</code> </p> <ul> <li> <p>Users can associate or disassociate channels with the notification configuration.</p> </li> </ul> </li> <li> <p> <code>DISABLED</code> </p> <ul> <li> <p>Users cannot associate or disassociate channels with the notification configuration.</p> </li> </ul> </li> </ul> </li> </ul>
     #   @return [String]
     class ManagedNotificationChannelAssociationSummary < Struct.new(
+      nil,
       :channel_identifier,
       :channel_type,
       :override_option,
@@ -1262,6 +1340,7 @@ module Aws::Notifications
     #   <p>Provides detailed information about the dimensions used for event summarization and aggregation.</p>
     #   @return [Types::AggregationDetail]
     class ManagedNotificationChildEvent < Struct.new(
+      nil,
       :schema_version,
       :id,
       :message_components,
@@ -1303,6 +1382,7 @@ module Aws::Notifications
     #   <p>The Organizational Unit Id that an AWS account belongs to.</p>
     #   @return [String]
     class ManagedNotificationChildEventOverview < Struct.new(
+      nil,
       :arn,
       :managed_notification_configuration_arn,
       :related_account,
@@ -1335,6 +1415,7 @@ module Aws::Notifications
     #   <p>The Type of the event causing this notification.</p> <ul> <li> <p>Values:</p> <ul> <li> <p> <code>ALERT</code> </p> <ul> <li> <p>A notification about an event where something was triggered, initiated, reopened, deployed, or a threshold was breached.</p> </li> </ul> </li> <li> <p> <code>WARNING</code> </p> <ul> <li> <p>A notification about an event where an issue is about to arise. For example, something is approaching a threshold.</p> </li> </ul> </li> <li> <p> <code>ANNOUNCEMENT</code> </p> <ul> <li> <p>A notification about an important event. For example, a step in a workflow or escalation path or that a workflow was updated.</p> </li> </ul> </li> <li> <p> <code>INFORMATIONAL</code> </p> <ul> <li> <p>A notification about informational messages. For example, recommendations, service announcements, or reminders.</p> </li> </ul> </li> </ul> </li> </ul>
     #   @return [String]
     class ManagedNotificationChildEventSummary < Struct.new(
+      nil,
       :schema_version,
       :source_event_metadata,
       :message_components,
@@ -1357,6 +1438,7 @@ module Aws::Notifications
     #   <p>The description of the <code>ManagedNotificationConfiguration</code>.</p>
     #   @return [String]
     class ManagedNotificationConfigurationStructure < Struct.new(
+      nil,
       :arn,
       :name,
       :description,
@@ -1406,6 +1488,7 @@ module Aws::Notifications
     #   <p>The Organizational Unit Id that an Amazon Web Services account belongs to.</p>
     #   @return [String]
     class ManagedNotificationEvent < Struct.new(
+      nil,
       :schema_version,
       :id,
       :message_components,
@@ -1453,6 +1536,7 @@ module Aws::Notifications
     #   <p>The list of the regions where the aggregated notifications in this <code>NotificationEvent</code> originated.</p>
     #   @return [Array<String>]
     class ManagedNotificationEventOverview < Struct.new(
+      nil,
       :arn,
       :managed_notification_configuration_arn,
       :related_account,
@@ -1484,6 +1568,7 @@ module Aws::Notifications
     #   <p>The Type of event causing the notification.</p> <ul> <li> <p>Values:</p> <ul> <li> <p> <code>ALERT</code> </p> <ul> <li> <p>A notification about an event where something was triggered, initiated, reopened, deployed, or a threshold was breached.</p> </li> </ul> </li> <li> <p> <code>WARNING</code> </p> <ul> <li> <p>A notification about an event where an issue is about to arise. For example, something is approaching a threshold.</p> </li> </ul> </li> <li> <p> <code>ANNOUNCEMENT</code> </p> <ul> <li> <p>A notification about an important event. For example, a step in a workflow or escalation path or that a workflow was updated.</p> </li> </ul> </li> <li> <p> <code>INFORMATIONAL</code> </p> <ul> <li> <p>A notification about informational messages. For example, recommendations, service announcements, or reminders.</p> </li> </ul> </li> </ul> </li> </ul>
     #   @return [String]
     class ManagedNotificationEventSummary < Struct.new(
+      nil,
       :schema_version,
       :source_event_metadata,
       :message_components,
@@ -1505,6 +1590,7 @@ module Aws::Notifications
     #   <p>The event Type of the notification.</p>
     #   @return [String]
     class ManagedSourceEventMetadataSummary < Struct.new(
+      nil,
       :event_origin_region,
       :source,
       :event_type,
@@ -1527,6 +1613,7 @@ module Aws::Notifications
     #   <p>The caption of the media.</p>
     #   @return [String]
     class MediaElement < Struct.new(
+      nil,
       :media_id,
       :type,
       :url,
@@ -1553,6 +1640,7 @@ module Aws::Notifications
     #   <p>The unique identifier of the organizational unit containing the member account.</p>
     #   @return [String]
     class MemberAccount < Struct.new(
+      nil,
       :notification_configuration_arn,
       :account_id,
       :status,
@@ -1577,6 +1665,7 @@ module Aws::Notifications
     #   <p>A list of properties in key-value pairs. Pairs are shown in order of importance from most important to least important. Channels may limit the number of dimensions shown to the notification viewer.</p> <note> <p>Included dimensions, keys, and values are subject to change.</p> </note>
     #   @return [Array<Types::Dimension>]
     class MessageComponents < Struct.new(
+      nil,
       :headline,
       :paragraph_summary,
       :complete_description,
@@ -1591,6 +1680,7 @@ module Aws::Notifications
     #   <p>A sentence long summary. For example, titles or an email subject line.</p>
     #   @return [String]
     class MessageComponentsSummary < Struct.new(
+      nil,
       :headline,
       keyword_init: true
     )
@@ -1620,6 +1710,7 @@ module Aws::Notifications
     #   <p>The subtype of the notification configuration.</p>
     #   @return [String]
     class NotificationConfigurationStructure < Struct.new(
+      nil,
       :arn,
       :name,
       :description,
@@ -1661,6 +1752,7 @@ module Aws::Notifications
     #   <p>The unique identifier of the organizational unit in the notification event overview.</p>
     #   @return [String]
     class NotificationEventOverview < Struct.new(
+      nil,
       :arn,
       :notification_configuration_arn,
       :related_account,
@@ -1725,6 +1817,7 @@ module Aws::Notifications
     #   <p>The unique identifier of the organizational unit associated with the notification event.</p>
     #   @return [String]
     class NotificationEventSchema < Struct.new(
+      nil,
       :schema_version,
       :id,
       :source_event_metadata,
@@ -1763,6 +1856,7 @@ module Aws::Notifications
     #   <p>The type of event causing the notification.</p> <ul> <li> <p>Values:</p> <ul> <li> <p> <code>ALERT</code> </p> <ul> <li> <p>A notification about an event where something was triggered, initiated, reopened, deployed, or a threshold was breached.</p> </li> </ul> </li> <li> <p> <code>WARNING</code> </p> <ul> <li> <p>A notification about an event where an issue is about to arise. For example, something is approaching a threshold.</p> </li> </ul> </li> <li> <p> <code>ANNOUNCEMENT</code> </p> <ul> <li> <p>A notification about an important event. For example, a step in a workflow or escalation path or that a workflow was updated.</p> </li> </ul> </li> <li> <p> <code>INFORMATIONAL</code> </p> <ul> <li> <p>A notification about informational messages. For example, recommendations, service announcements, or reminders.</p> </li> </ul> </li> </ul> </li> </ul>
     #   @return [String]
     class NotificationEventSummary < Struct.new(
+      nil,
       :schema_version,
       :source_event_metadata,
       :message_components,
@@ -1787,6 +1881,7 @@ module Aws::Notifications
     #   <p>The most recent time this <code>NotificationHub</code> had an <code>ACTIVE</code> status.</p>
     #   @return [Time]
     class NotificationHubOverview < Struct.new(
+      nil,
       :notification_hub_region,
       :status_summary,
       :creation_time,
@@ -1804,6 +1899,7 @@ module Aws::Notifications
     #   <p>An explanation for the current status.</p>
     #   @return [String]
     class NotificationHubStatusSummary < Struct.new(
+      nil,
       :status,
       :reason,
       keyword_init: true
@@ -1816,6 +1912,7 @@ module Aws::Notifications
     #   <p>Access Status for the Orgs Service.</p>
     #   @return [String]
     class NotificationsAccessForOrganization < Struct.new(
+      nil,
       :access_status,
       keyword_init: true
     )
@@ -1826,6 +1923,7 @@ module Aws::Notifications
     #   <p>The Region of the <code>NotificationHub</code>.</p>
     #   @return [String]
     class RegisterNotificationHubRequest < Struct.new(
+      nil,
       :notification_hub_region,
       keyword_init: true
     )
@@ -1845,6 +1943,7 @@ module Aws::Notifications
     #   <p>The date the resource was last activated.</p>
     #   @return [Time]
     class RegisterNotificationHubResponse < Struct.new(
+      nil,
       :notification_hub_region,
       :status_summary,
       :creation_time,
@@ -1868,6 +1967,7 @@ module Aws::Notifications
     #   <p>A map of tags assigned to a resource. A tag is a string-to-string map of key-value pairs.</p>
     #   @return [Array<String>]
     class Resource < Struct.new(
+      nil,
       :id,
       :arn,
       :detail_url,
@@ -1884,6 +1984,7 @@ module Aws::Notifications
     #   <p>The ID of the resource that wasn't found.</p>
     #   @return [String]
     class ResourceNotFoundException < Struct.new(
+      nil,
       :message,
       :resource_id,
       keyword_init: true
@@ -1907,6 +2008,7 @@ module Aws::Notifications
     #   <p>The code for the service quota in <a href="https://docs.aws.amazon.com/servicequotas/latest/userguide/intro.html">Service Quotas</a>.</p>
     #   @return [String]
     class ServiceQuotaExceededException < Struct.new(
+      nil,
       :message,
       :resource_type,
       :resource_id,
@@ -1943,6 +2045,7 @@ module Aws::Notifications
     #   <p>A list of resources related to this <code>NotificationEvent</code>.</p>
     #   @return [Array<Types::Resource>]
     class SourceEventMetadata < Struct.new(
+      nil,
       :event_type_version,
       :source_event_id,
       :event_origin_region,
@@ -1967,6 +2070,7 @@ module Aws::Notifications
     #   <p>The event type to match.</p> <p>Must match one of the valid Amazon EventBridge event types. For example, EC2 Instance State-change Notification and Amazon CloudWatch Alarm State Change. For more information, see <a href="https://docs.aws.amazon.com/eventbridge/latest/userguide/eb-service-event.html#eb-service-event-delivery-level">Event delivery from Amazon Web Services services</a> in the <i>Amazon EventBridge User Guide</i>.</p>
     #   @return [String]
     class SourceEventMetadataSummary < Struct.new(
+      nil,
       :event_origin_region,
       :source,
       :event_type,
@@ -1983,6 +2087,7 @@ module Aws::Notifications
     #   <p>Value of the property used to summarize aggregated events.</p>
     #   @return [String]
     class SummarizationDimensionDetail < Struct.new(
+      nil,
       :name,
       :value,
       keyword_init: true
@@ -2001,6 +2106,7 @@ module Aws::Notifications
     #   <p>Indicates the sample values found within the dimension.</p>
     #   @return [Array<String>]
     class SummarizationDimensionOverview < Struct.new(
+      nil,
       :name,
       :count,
       :sample_values,
@@ -2016,6 +2122,7 @@ module Aws::Notifications
     #   <p>A map of tags assigned to a resource. A tag is a string-to-string map of key-value pairs.</p>
     #   @return [Hash<String, String>]
     class TagResourceRequest < Struct.new(
+      nil,
       :arn,
       :tags,
       keyword_init: true
@@ -2024,6 +2131,7 @@ module Aws::Notifications
     end
 
     class TagResourceResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -2043,6 +2151,7 @@ module Aws::Notifications
     #   <p>The URL itself.</p>
     #   @return [String]
     class TextPartValue < Struct.new(
+      nil,
       :type,
       :display_text,
       :text_by_locale,
@@ -2065,6 +2174,7 @@ module Aws::Notifications
     #   <p>The number of seconds a client should wait before retrying the request.</p>
     #   @return [Integer]
     class ThrottlingException < Struct.new(
+      nil,
       :message,
       :service_code,
       :quota_code,
@@ -2081,6 +2191,7 @@ module Aws::Notifications
     #   <p>The tag keys to use to untag a resource.</p>
     #   @return [Array<String>]
     class UntagResourceRequest < Struct.new(
+      nil,
       :arn,
       :tag_keys,
       keyword_init: true
@@ -2089,6 +2200,7 @@ module Aws::Notifications
     end
 
     class UntagResourceResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -2104,6 +2216,7 @@ module Aws::Notifications
     #   <p>A list of Amazon Web Services Regions that sends events to this <code>EventRule</code>.</p>
     #   @return [Array<String>]
     class UpdateEventRuleRequest < Struct.new(
+      nil,
       :arn,
       :event_pattern,
       :regions,
@@ -2122,6 +2235,7 @@ module Aws::Notifications
     #   <p>The status of the action by Region.</p>
     #   @return [Hash<String, Types::EventRuleStatusSummary>]
     class UpdateEventRuleResponse < Struct.new(
+      nil,
       :arn,
       :notification_configuration_arn,
       :status_summary_by_region,
@@ -2143,6 +2257,7 @@ module Aws::Notifications
     #   <p>The aggregation preference of the <code>NotificationConfiguration</code>.</p> <ul> <li> <p>Values:</p> <ul> <li> <p> <code>LONG</code> </p> <ul> <li> <p>Aggregate notifications for long periods of time (12 hours).</p> </li> </ul> </li> <li> <p> <code>SHORT</code> </p> <ul> <li> <p>Aggregate notifications for short periods of time (5 minutes).</p> </li> </ul> </li> <li> <p> <code>NONE</code> </p> <ul> <li> <p>Don't aggregate notifications.</p> </li> </ul> </li> </ul> </li> </ul>
     #   @return [String]
     class UpdateNotificationConfigurationRequest < Struct.new(
+      nil,
       :arn,
       :name,
       :description,
@@ -2156,6 +2271,7 @@ module Aws::Notifications
     #   <p>The ARN used to update the <code>NotificationConfiguration</code>.</p>
     #   @return [String]
     class UpdateNotificationConfigurationResponse < Struct.new(
+      nil,
       :arn,
       keyword_init: true
     )
@@ -2172,6 +2288,7 @@ module Aws::Notifications
     #   <p>The list of input fields that are invalid.</p>
     #   @return [Array<Types::ValidationExceptionField>]
     class ValidationException < Struct.new(
+      nil,
       :message,
       :reason,
       :field_list,
@@ -2188,6 +2305,7 @@ module Aws::Notifications
     #   <p>A message with the reason for the validation exception error.</p>
     #   @return [String]
     class ValidationExceptionField < Struct.new(
+      nil,
       :name,
       :message,
       keyword_init: true

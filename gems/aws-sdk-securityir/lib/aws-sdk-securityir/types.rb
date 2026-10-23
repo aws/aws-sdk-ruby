@@ -11,6 +11,7 @@ module Aws::SecurityIR
     #   <p>The ID of the resource which lead to the access denial.</p>
     #   @return [String]
     class AccessDeniedException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -27,6 +28,7 @@ module Aws::SecurityIR
     #   @see https://docs.aws.amazon.com/security-ir/latest/APIReference/API_BatchGetMemberAccountDetails.html#securityir-BatchGetMemberAccountDetails-request-accountIds API Reference
     #   @return [Array<String>]
     class BatchGetMemberAccountDetailsRequest < Struct.new(
+      nil,
       :membership_id,
       :account_ids,
       keyword_init: true
@@ -44,6 +46,7 @@ module Aws::SecurityIR
     #   @see https://docs.aws.amazon.com/security-ir/latest/APIReference/API_BatchGetMemberAccountDetails.html#securityir-BatchGetMemberAccountDetails-response-errors API Reference
     #   @return [Array<Types::GetMembershipAccountDetailError>]
     class BatchGetMemberAccountDetailsResponse < Struct.new(
+      nil,
       :items,
       :errors,
       keyword_init: true
@@ -57,6 +60,7 @@ module Aws::SecurityIR
     #   @see https://docs.aws.amazon.com/security-ir/latest/APIReference/API_CancelMembership.html#securityir-CancelMembership-request-uri-membershipId API Reference
     #   @return [String]
     class CancelMembershipRequest < Struct.new(
+      nil,
       :membership_id,
       keyword_init: true
     )
@@ -69,6 +73,7 @@ module Aws::SecurityIR
     #   @see https://docs.aws.amazon.com/security-ir/latest/APIReference/API_CancelMembership.html#securityir-CancelMembership-response-membershipId API Reference
     #   @return [String]
     class CancelMembershipResponse < Struct.new(
+      nil,
       :membership_id,
       keyword_init: true
     )
@@ -98,6 +103,7 @@ module Aws::SecurityIR
     #   @see https://docs.aws.amazon.com/security-ir/latest/APIReference/API_CaseAttachmentAttributes.html#securityir-Type-CaseAttachmentAttributes-createdDate API Reference
     #   @return [Time]
     class CaseAttachmentAttributes < Struct.new(
+      nil,
       :attachment_id,
       :file_name,
       :attachment_status,
@@ -127,6 +133,7 @@ module Aws::SecurityIR
     #   @see https://docs.aws.amazon.com/security-ir/latest/APIReference/API_CaseEditItem.html#securityir-Type-CaseEditItem-message API Reference
     #   @return [String]
     class CaseEditItem < Struct.new(
+      nil,
       :event_timestamp,
       :principal,
       :action,
@@ -141,6 +148,7 @@ module Aws::SecurityIR
     #   @see https://docs.aws.amazon.com/security-ir/latest/APIReference/API_CloseCase.html#securityir-CloseCase-request-uri-caseId API Reference
     #   @return [String]
     class CloseCaseRequest < Struct.new(
+      nil,
       :case_id,
       keyword_init: true
     )
@@ -156,6 +164,7 @@ module Aws::SecurityIR
     #   @see https://docs.aws.amazon.com/security-ir/latest/APIReference/API_CloseCase.html#securityir-CloseCase-response-closedDate API Reference
     #   @return [Time]
     class CloseCaseResponse < Struct.new(
+      nil,
       :case_status,
       :closed_date,
       keyword_init: true
@@ -174,6 +183,7 @@ module Aws::SecurityIR
     #   <p>The type of the conflicting resource.</p>
     #   @return [String]
     class ConflictException < Struct.new(
+      nil,
       :message,
       :resource_id,
       :resource_type,
@@ -195,6 +205,7 @@ module Aws::SecurityIR
     #   @see https://docs.aws.amazon.com/security-ir/latest/APIReference/API_CreateCaseComment.html#securityir-CreateCaseComment-request-body API Reference
     #   @return [String]
     class CreateCaseCommentRequest < Struct.new(
+      nil,
       :case_id,
       :client_token,
       :body,
@@ -208,6 +219,7 @@ module Aws::SecurityIR
     #   @see https://docs.aws.amazon.com/security-ir/latest/APIReference/API_CreateCaseComment.html#securityir-CreateCaseComment-response-commentId API Reference
     #   @return [String]
     class CreateCaseCommentResponse < Struct.new(
+      nil,
       :comment_id,
       keyword_init: true
     )
@@ -263,6 +275,7 @@ module Aws::SecurityIR
     #   @see https://docs.aws.amazon.com/security-ir/latest/APIReference/API_CreateCase.html#securityir-CreateCase-request-tags API Reference
     #   @return [Hash<String, String>]
     class CreateCaseRequest < Struct.new(
+      nil,
       :client_token,
       :resolver_type,
       :title,
@@ -286,6 +299,7 @@ module Aws::SecurityIR
     #   @see https://docs.aws.amazon.com/security-ir/latest/APIReference/API_CreateCase.html#securityir-CreateCase-response-caseId API Reference
     #   @return [String]
     class CreateCaseResponse < Struct.new(
+      nil,
       :case_id,
       keyword_init: true
     )
@@ -317,6 +331,7 @@ module Aws::SecurityIR
     #   @see https://docs.aws.amazon.com/security-ir/latest/APIReference/API_CreateMembership.html#securityir-CreateMembership-request-coverEntireOrganization API Reference
     #   @return [Boolean]
     class CreateMembershipRequest < Struct.new(
+      nil,
       :client_token,
       :membership_name,
       :incident_response_team,
@@ -333,6 +348,7 @@ module Aws::SecurityIR
     #   @see https://docs.aws.amazon.com/security-ir/latest/APIReference/API_CreateMembership.html#securityir-CreateMembership-response-membershipId API Reference
     #   @return [String]
     class CreateMembershipResponse < Struct.new(
+      nil,
       :membership_id,
       keyword_init: true
     )
@@ -348,6 +364,7 @@ module Aws::SecurityIR
     #   @see https://docs.aws.amazon.com/security-ir/latest/APIReference/API_GetCaseAttachmentDownloadUrl.html#securityir-GetCaseAttachmentDownloadUrl-request-uri-attachmentId API Reference
     #   @return [String]
     class GetCaseAttachmentDownloadUrlRequest < Struct.new(
+      nil,
       :case_id,
       :attachment_id,
       keyword_init: true
@@ -360,6 +377,7 @@ module Aws::SecurityIR
     #   @see https://docs.aws.amazon.com/security-ir/latest/APIReference/API_GetCaseAttachmentDownloadUrl.html#securityir-GetCaseAttachmentDownloadUrl-response-attachmentPresignedUrl API Reference
     #   @return [String]
     class GetCaseAttachmentDownloadUrlResponse < Struct.new(
+      nil,
       :attachment_presigned_url,
       keyword_init: true
     )
@@ -383,6 +401,7 @@ module Aws::SecurityIR
     #   @see https://docs.aws.amazon.com/security-ir/latest/APIReference/API_GetCaseAttachmentUploadUrl.html#securityir-GetCaseAttachmentUploadUrl-request-clientToken API Reference
     #   @return [String]
     class GetCaseAttachmentUploadUrlRequest < Struct.new(
+      nil,
       :case_id,
       :file_name,
       :content_length,
@@ -397,6 +416,7 @@ module Aws::SecurityIR
     #   @see https://docs.aws.amazon.com/security-ir/latest/APIReference/API_GetCaseAttachmentUploadUrl.html#securityir-GetCaseAttachmentUploadUrl-response-attachmentPresignedUrl API Reference
     #   @return [String]
     class GetCaseAttachmentUploadUrlResponse < Struct.new(
+      nil,
       :attachment_presigned_url,
       keyword_init: true
     )
@@ -408,6 +428,7 @@ module Aws::SecurityIR
     #   @see https://docs.aws.amazon.com/security-ir/latest/APIReference/API_GetCase.html#securityir-GetCase-request-uri-caseId API Reference
     #   @return [String]
     class GetCaseRequest < Struct.new(
+      nil,
       :case_id,
       keyword_init: true
     )
@@ -491,6 +512,7 @@ module Aws::SecurityIR
     #   @see https://docs.aws.amazon.com/security-ir/latest/APIReference/API_GetCase.html#securityir-GetCase-response-closedDate API Reference
     #   @return [Time]
     class GetCaseResponse < Struct.new(
+      nil,
       :title,
       :case_arn,
       :description,
@@ -530,6 +552,7 @@ module Aws::SecurityIR
     #   @see https://docs.aws.amazon.com/security-ir/latest/APIReference/API_GetMembershipAccountDetailItem.html#securityir-Type-GetMembershipAccountDetailItem-relationshipType API Reference
     #   @return [String]
     class GetMembershipAccountDetailError < Struct.new(
+      nil,
       :account_id,
       :error,
       :message,
@@ -553,6 +576,7 @@ module Aws::SecurityIR
     #   @see https://docs.aws.amazon.com/security-ir/latest/APIReference/API_GetMembershipAccountDetailItem.html#securityir-Type-GetMembershipAccountDetailItem-relationshipType API Reference
     #   @return [String]
     class GetMembershipAccountDetailItem < Struct.new(
+      nil,
       :account_id,
       :relationship_status,
       :relationship_type,
@@ -566,6 +590,7 @@ module Aws::SecurityIR
     #   @see https://docs.aws.amazon.com/security-ir/latest/APIReference/API_GetMembership.html#securityir-GetMembership-request-uri-membershipId API Reference
     #   @return [String]
     class GetMembershipRequest < Struct.new(
+      nil,
       :membership_id,
       keyword_init: true
     )
@@ -624,6 +649,7 @@ module Aws::SecurityIR
     #   @see https://docs.aws.amazon.com/security-ir/latest/APIReference/API_GetMembership.html#securityir-GetMembership-response-membershipAccountsConfigurations API Reference
     #   @return [Types::MembershipAccountsConfigurations]
     class GetMembershipResponse < Struct.new(
+      nil,
       :membership_id,
       :account_id,
       :region,
@@ -647,6 +673,7 @@ module Aws::SecurityIR
     #   <p/>
     #   @return [String]
     class ImpactedAwsRegion < Struct.new(
+      nil,
       :region,
       keyword_init: true
     )
@@ -664,6 +691,7 @@ module Aws::SecurityIR
     #   <p/>
     #   @return [String]
     class IncidentResponder < Struct.new(
+      nil,
       :name,
       :job_title,
       :email,
@@ -680,6 +708,7 @@ module Aws::SecurityIR
     #   <p>The number of seconds after which to retry the request.</p>
     #   @return [Integer]
     class InternalServerException < Struct.new(
+      nil,
       :message,
       :retry_after_seconds,
       keyword_init: true
@@ -692,6 +721,7 @@ module Aws::SecurityIR
     #   <p>The exception message.</p>
     #   @return [String]
     class InvalidTokenException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -711,6 +741,7 @@ module Aws::SecurityIR
     #   @see https://docs.aws.amazon.com/security-ir/latest/APIReference/API_ListCaseEdits.html#securityir-ListCaseEdits-request-uri-caseId API Reference
     #   @return [String]
     class ListCaseEditsRequest < Struct.new(
+      nil,
       :next_token,
       :max_results,
       :case_id,
@@ -732,6 +763,7 @@ module Aws::SecurityIR
     #   @see https://docs.aws.amazon.com/security-ir/latest/APIReference/API_ListCaseEdits.html#securityir-ListCaseEdits-response-total API Reference
     #   @return [Integer]
     class ListCaseEditsResponse < Struct.new(
+      nil,
       :next_token,
       :items,
       :total,
@@ -781,6 +813,7 @@ module Aws::SecurityIR
     #   @see https://docs.aws.amazon.com/security-ir/latest/APIReference/API_ListCasesItem.html#securityir-Type-ListCasesItem-pendingAction API Response
     #   @return [String]
     class ListCasesItem < Struct.new(
+      nil,
       :case_id,
       :last_updated_date,
       :title,
@@ -805,6 +838,7 @@ module Aws::SecurityIR
     #   @see https://docs.aws.amazon.com/security-ir/latest/APIReference/API_ListCases.html#securityir-ListCases-request-maxResults API Response
     #   @return [Integer]
     class ListCasesRequest < Struct.new(
+      nil,
       :next_token,
       :max_results,
       keyword_init: true
@@ -825,6 +859,7 @@ module Aws::SecurityIR
     #   @see https://docs.aws.amazon.com/security-ir/latest/APIReference/API_ListCases.html#securityir-ListCases-response-total API Response
     #   @return [Integer]
     class ListCasesResponse < Struct.new(
+      nil,
       :next_token,
       :items,
       :total,
@@ -856,6 +891,7 @@ module Aws::SecurityIR
     #   @see https://docs.aws.amazon.com/security-ir/latest/APIReference/API_ListCommentsItem.html#securityir-Type-ListCommentsItem-body API Reference
     #   @return [String]
     class ListCommentsItem < Struct.new(
+      nil,
       :comment_id,
       :created_date,
       :last_updated_date,
@@ -880,6 +916,7 @@ module Aws::SecurityIR
     #   @see https://docs.aws.amazon.com/security-ir/latest/APIReference/API_ListComments.html#securityir-ListComments-request-uri-caseId API Reference
     #   @return [String]
     class ListCommentsRequest < Struct.new(
+      nil,
       :next_token,
       :max_results,
       :case_id,
@@ -901,6 +938,7 @@ module Aws::SecurityIR
     #   @see https://docs.aws.amazon.com/security-ir/latest/APIReference/API_ListComments.html#securityir-ListComments-response-total API Reference
     #   @return [Integer]
     class ListCommentsResponse < Struct.new(
+      nil,
       :next_token,
       :items,
       :total,
@@ -932,6 +970,7 @@ module Aws::SecurityIR
     #   @see https://docs.aws.amazon.com/security-ir/latest/APIReference/API_ListMemberships.html#securityir-ListMemberships-response-membershipStatus API Reference
     #   @return [String]
     class ListMembershipItem < Struct.new(
+      nil,
       :membership_id,
       :account_id,
       :region,
@@ -951,6 +990,7 @@ module Aws::SecurityIR
     #   @see https://docs.aws.amazon.com/security-ir/latest/APIReference/API_ListMemberships.html#securityir-ListMemberships-request-maxResults API Reference
     #   @return [Integer]
     class ListMembershipsRequest < Struct.new(
+      nil,
       :next_token,
       :max_results,
       keyword_init: true
@@ -967,6 +1007,7 @@ module Aws::SecurityIR
     #   @see https://docs.aws.amazon.com/security-ir/latest/APIReference/API_ListMemberships.html#securityir-ListMemberships-response-items API Reference
     #   @return [Array<Types::ListMembershipItem>]
     class ListMembershipsResponse < Struct.new(
+      nil,
       :next_token,
       :items,
       keyword_init: true
@@ -979,6 +1020,7 @@ module Aws::SecurityIR
     #   @see https://docs.aws.amazon.com/security-ir/latest/APIReference/API_ListTagsForResource.html#securityir-ListTagsForResource-request-uri-resourceArn API Reference
     #   @return [String]
     class ListTagsForResourceInput < Struct.new(
+      nil,
       :resource_arn,
       keyword_init: true
     )
@@ -990,6 +1032,7 @@ module Aws::SecurityIR
     #   @see https://docs.aws.amazon.com/security-ir/latest/APIReference/API_ListTagsForResource.html#securityir-ListTagsForResource-response-tags API Reference
     #   @return [Hash<String, String>]
     class ListTagsForResourceOutput < Struct.new(
+      nil,
       :tags,
       keyword_init: true
     )
@@ -1004,6 +1047,7 @@ module Aws::SecurityIR
     #   <p>A list of organizational unit IDs that follow the pattern <code>ou-[0-9a-z]{4,32}-[a-z0-9]{8,32}</code>. These IDs represent the organizational units within an Amazon Web Services Organizations structure that are covered by the membership. </p> <p>Each organizational unit ID in the list must:</p> <ul> <li> <p>Begin with the prefix 'ou-'</p> </li> <li> <p>Contain between 4 and 32 alphanumeric characters in the first segment</p> </li> <li> <p>Contain between 8 and 32 alphanumeric characters in the second segment</p> </li> </ul>
     #   @return [Array<String>]
     class MembershipAccountsConfigurations < Struct.new(
+      nil,
       :cover_entire_organization,
       :organizational_units,
       keyword_init: true
@@ -1022,6 +1066,7 @@ module Aws::SecurityIR
     #   <p>A list of organizational unit IDs to remove from the membership configuration. Each organizational unit ID must match the pattern <code>ou-[0-9a-z]{4,32}-[a-z0-9]{8,32}</code>. </p> <p>The list must contain between 1 and 5 organizational unit IDs per invocation of the API request.</p>
     #   @return [Array<String>]
     class MembershipAccountsConfigurationsUpdate < Struct.new(
+      nil,
       :cover_entire_organization,
       :organizational_units_to_add,
       :organizational_units_to_remove,
@@ -1038,6 +1083,7 @@ module Aws::SecurityIR
     #   <p/>
     #   @return [Boolean]
     class OptInFeature < Struct.new(
+      nil,
       :feature_name,
       :is_enabled,
       keyword_init: true
@@ -1050,6 +1096,7 @@ module Aws::SecurityIR
     #   <p>The exception message.</p>
     #   @return [String]
     class ResourceNotFoundException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -1062,6 +1109,7 @@ module Aws::SecurityIR
     #   <p>The exception message.</p>
     #   @return [String]
     class SecurityIncidentResponseNotActiveException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -1085,6 +1133,7 @@ module Aws::SecurityIR
     #   <p>The code of the quota.</p>
     #   @return [String]
     class ServiceQuotaExceededException < Struct.new(
+      nil,
       :message,
       :resource_id,
       :resource_type,
@@ -1104,6 +1153,7 @@ module Aws::SecurityIR
     #   @see https://docs.aws.amazon.com/security-ir/latest/APIReference/API_TagResource.html#securityir-TagResource-request-tags API Reference
     #   @return [Hash<String, String>]
     class TagResourceInput < Struct.new(
+      nil,
       :resource_arn,
       :tags,
       keyword_init: true
@@ -1113,6 +1163,7 @@ module Aws::SecurityIR
 
     # @see https://docs.aws.amazon.com/security-ir/latest/APIReference/API_TagResource.html#API_TagResource_ResponseSyntax API Reference
     class TagResourceOutput < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1126,6 +1177,7 @@ module Aws::SecurityIR
     #   <p/>
     #   @return [String]
     class ThreatActorIp < Struct.new(
+      nil,
       :ip_address,
       :user_agent,
       keyword_init: true
@@ -1147,6 +1199,7 @@ module Aws::SecurityIR
     #   <p>The number of seconds after which to retry the request.</p>
     #   @return [Integer]
     class ThrottlingException < Struct.new(
+      nil,
       :message,
       :service_code,
       :quota_code,
@@ -1165,6 +1218,7 @@ module Aws::SecurityIR
     #   @see https://docs.aws.amazon.com/security-ir/latest/APIReference/API_UntagResource.html#securityir-UntagResource-request-uri-resourceArn API Reference
     #   @return [Array<String>]
     class UntagResourceInput < Struct.new(
+      nil,
       :resource_arn,
       :tag_keys,
       keyword_init: true
@@ -1174,6 +1228,7 @@ module Aws::SecurityIR
 
     # @see https://docs.aws.amazon.com/security-ir/latest/APIReference/API_UntagResource.html#API_UntagResource_ResponseSyntax API Reference
     class UntagResourceOutput < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1192,6 +1247,7 @@ module Aws::SecurityIR
     #   @see https://docs.aws.amazon.com/security-ir/latest/APIReference/API_UpdateCaseComment.html#securityir-UpdateCaseComment-request-body API Reference
     #   @return [String]
     class UpdateCaseCommentRequest < Struct.new(
+      nil,
       :case_id,
       :comment_id,
       :body,
@@ -1209,6 +1265,7 @@ module Aws::SecurityIR
     #   @see https://docs.aws.amazon.com/security-ir/latest/APIReference/API_UpdateCaseComment.html#securityir-UpdateCaseComment-response-body API Reference
     #   @return [String]
     class UpdateCaseCommentResponse < Struct.new(
+      nil,
       :comment_id,
       :body,
       keyword_init: true
@@ -1281,6 +1338,7 @@ module Aws::SecurityIR
     #   @see https://docs.aws.amazon.com/security-ir/latest/APIReference/API_UpdateCase.html#securityir-UpdateCase-request-impactedAccountsToDelete API Reference
     #   @return [Array<String>]
     class UpdateCaseRequest < Struct.new(
+      nil,
       :case_id,
       :title,
       :description,
@@ -1303,6 +1361,7 @@ module Aws::SecurityIR
     end
 
     class UpdateCaseResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1317,6 +1376,7 @@ module Aws::SecurityIR
     #   @see https://docs.aws.amazon.com/security-ir/latest/APIReference/API_UpdateCaseStatus.html#securityir-UpdateCaseStatus-request-caseStatus API Reference
     #   @return [String]
     class UpdateCaseStatusRequest < Struct.new(
+      nil,
       :case_id,
       :case_status,
       keyword_init: true
@@ -1329,6 +1389,7 @@ module Aws::SecurityIR
     #   @see https://docs.aws.amazon.com/security-ir/latest/APIReference/API_UpdateCaseStatus.html#securityir-UpdateCaseStatus-response-caseStatus API Reference
     #   @return [String]
     class UpdateCaseStatusResponse < Struct.new(
+      nil,
       :case_status,
       keyword_init: true
     )
@@ -1360,6 +1421,7 @@ module Aws::SecurityIR
     #   @see https://docs.aws.amazon.com/security-ir/latest/APIReference/API_UpdateMembership.html#securityir-UpdateMembership-request-undoMembershipCancellation API Reference
     #   @return [Boolean]
     class UpdateMembershipRequest < Struct.new(
+      nil,
       :membership_id,
       :membership_name,
       :incident_response_team,
@@ -1372,6 +1434,7 @@ module Aws::SecurityIR
     end
 
     class UpdateMembershipResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1386,6 +1449,7 @@ module Aws::SecurityIR
     #   @see https://docs.aws.amazon.com/security-ir/latest/APIReference/API_UpdateResolverType.html#securityir-UpdateResolverType-request-resolverType API Reference
     #   @return [String]
     class UpdateResolverTypeRequest < Struct.new(
+      nil,
       :case_id,
       :resolver_type,
       keyword_init: true
@@ -1406,6 +1470,7 @@ module Aws::SecurityIR
     #   @see https://docs.aws.amazon.com/security-ir/latest/APIReference/API_UpdateResolverType.html#securityir-UpdateResolverType-response-resolverType API Response
     #   @return [String]
     class UpdateResolverTypeResponse < Struct.new(
+      nil,
       :case_id,
       :case_status,
       :resolver_type,
@@ -1425,6 +1490,7 @@ module Aws::SecurityIR
     #   <p>The fields which lead to the exception.</p>
     #   @return [Array<Types::ValidationExceptionField>]
     class ValidationException < Struct.new(
+      nil,
       :message,
       :reason,
       :field_list,
@@ -1441,6 +1507,7 @@ module Aws::SecurityIR
     #   <p/>
     #   @return [String]
     class ValidationExceptionField < Struct.new(
+      nil,
       :name,
       :message,
       keyword_init: true
@@ -1463,6 +1530,7 @@ module Aws::SecurityIR
     #   @see https://docs.aws.amazon.com/security-ir/latest/APIReference/API_Watcher.html#securityir-Type-Watcher-jobTitle API Reference
     #   @return [String]
     class Watcher < Struct.new(
+      nil,
       :email,
       :name,
       :job_title,

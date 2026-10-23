@@ -13,6 +13,7 @@ module Aws::EKSAuth
     # @!attribute message
     #   @return [String]
     class AccessDeniedException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -26,6 +27,7 @@ module Aws::EKSAuth
     #   <p>The token of the Kubernetes service account for the pod.</p>
     #   @return [String]
     class AssumeRoleForPodIdentityRequest < Struct.new(
+      nil,
       :cluster_name,
       :token,
       keyword_init: true
@@ -62,6 +64,7 @@ module Aws::EKSAuth
     #               credentials.</p>
     #   @return [Types::Credentials]
     class AssumeRoleForPodIdentityResponse < Struct.new(
+      nil,
       :subject,
       :audience,
       :pod_identity_association,
@@ -88,6 +91,7 @@ module Aws::EKSAuth
     #            </p>
     #   @return [String]
     class AssumedRoleUser < Struct.new(
+      nil,
       :arn,
       :assume_role_id,
       keyword_init: true
@@ -112,6 +116,7 @@ module Aws::EKSAuth
     #   <p>The Unix epoch timestamp in seconds when the current credentials expire.</p>
     #   @return [Time]
     class Credentials < Struct.new(
+      nil,
       :session_token,
       :secret_access_key,
       :access_key_id,
@@ -125,6 +130,7 @@ module Aws::EKSAuth
     # @!attribute message
     #   @return [String]
     class ExpiredTokenException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -135,6 +141,7 @@ module Aws::EKSAuth
     # @!attribute message
     #   @return [String]
     class InternalServerException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -146,6 +153,7 @@ module Aws::EKSAuth
     # @!attribute message
     #   @return [String]
     class InvalidParameterException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -157,6 +165,7 @@ module Aws::EKSAuth
     # @!attribute message
     #   @return [String]
     class InvalidRequestException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -167,6 +176,7 @@ module Aws::EKSAuth
     # @!attribute message
     #   @return [String]
     class InvalidTokenException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -181,6 +191,7 @@ module Aws::EKSAuth
     #   <p>The ID of the association.</p>
     #   @return [String]
     class PodIdentityAssociation < Struct.new(
+      nil,
       :association_arn,
       :association_id,
       keyword_init: true
@@ -192,6 +203,7 @@ module Aws::EKSAuth
     # @!attribute message
     #   @return [String]
     class ResourceNotFoundException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -202,6 +214,7 @@ module Aws::EKSAuth
     # @!attribute message
     #   @return [String]
     class ServiceUnavailableException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -220,6 +233,7 @@ module Aws::EKSAuth
     #               credentials with.</p>
     #   @return [String]
     class Subject < Struct.new(
+      nil,
       :namespace,
       :service_account,
       keyword_init: true
@@ -231,6 +245,7 @@ module Aws::EKSAuth
     # @!attribute message
     #   @return [String]
     class ThrottlingException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )

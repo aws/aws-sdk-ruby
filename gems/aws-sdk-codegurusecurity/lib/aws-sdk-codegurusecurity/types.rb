@@ -20,6 +20,7 @@ module Aws::CodeGuruSecurity
     #   <p>The type of resource you don't have access to.</p>
     #   @return [String]
     class AccessDeniedException < Struct.new(
+      nil,
       :error_code,
       :message,
       :resource_id,
@@ -46,6 +47,7 @@ module Aws::CodeGuruSecurity
     #   <p>The average time in days it takes to close findings of each severity as of a specified date.</p>
     #   @return [Types::FindingMetricsValuePerSeverity]
     class AccountFindingsMetric < Struct.new(
+      nil,
       :date,
       :new_findings,
       :closed_findings,
@@ -70,6 +72,7 @@ module Aws::CodeGuruSecurity
     #   <p>Describes the error.</p>
     #   @return [String]
     class BatchGetFindingsError < Struct.new(
+      nil,
       :scan_name,
       :finding_id,
       :error_code,
@@ -83,6 +86,7 @@ module Aws::CodeGuruSecurity
     #   <p>A list of finding identifiers. Each identifier consists of a <code>scanName</code> and a <code>findingId</code>. You retrieve the <code>findingId</code> when you call <code>GetFindings</code>.</p>
     #   @return [Array<Types::FindingIdentifier>]
     class BatchGetFindingsRequest < Struct.new(
+      nil,
       :finding_identifiers,
       keyword_init: true
     )
@@ -96,6 +100,7 @@ module Aws::CodeGuruSecurity
     #   <p>A list of errors for individual findings which were not fetched. Each BatchGetFindingsError contains the <code>scanName</code>, <code>findingId</code>, <code>errorCode</code> and error <code>message</code>.</p>
     #   @return [Array<Types::BatchGetFindingsError>]
     class BatchGetFindingsResponse < Struct.new(
+      nil,
       :findings,
       :failed_findings,
       keyword_init: true
@@ -111,6 +116,7 @@ module Aws::CodeGuruSecurity
     #   <p>The number of open findings in the category.</p>
     #   @return [Integer]
     class CategoryWithFindingNum < Struct.new(
+      nil,
       :category_name,
       :finding_number,
       keyword_init: true
@@ -126,6 +132,7 @@ module Aws::CodeGuruSecurity
     #   <p>The code that contains a vulnerability.</p>
     #   @return [String]
     class CodeLine < Struct.new(
+      nil,
       :number,
       :content,
       keyword_init: true
@@ -147,6 +154,7 @@ module Aws::CodeGuruSecurity
     #   <p>The type of resource associated with the request.</p>
     #   @return [String]
     class ConflictException < Struct.new(
+      nil,
       :error_code,
       :message,
       :resource_id,
@@ -175,6 +183,7 @@ module Aws::CodeGuruSecurity
     #   <p>An array of key-value pairs used to tag a scan. A tag is a custom attribute label with two parts:</p> <ul> <li> <p>A tag key. For example, <code>CostCenter</code>, <code>Environment</code>, or <code>Secret</code>. Tag keys are case sensitive.</p> </li> <li> <p>An optional tag value field. For example, <code>111122223333</code>, <code>Production</code>, or a team name. Omitting the tag value is the same as using an empty string. Tag values are case sensitive.</p> </li> </ul>
     #   @return [Hash<String, String>]
     class CreateScanRequest < Struct.new(
+      nil,
       :client_token,
       :resource_id,
       :scan_name,
@@ -202,6 +211,7 @@ module Aws::CodeGuruSecurity
     #   <p>The ARN for the scan name.</p>
     #   @return [String]
     class CreateScanResponse < Struct.new(
+      nil,
       :scan_name,
       :run_id,
       :resource_id,
@@ -216,6 +226,7 @@ module Aws::CodeGuruSecurity
     #   <p>The name of the scan that will use the uploaded resource. CodeGuru Security uses the unique scan name to track revisions across multiple scans of the same resource. Use this <code>scanName</code> when you call <code>CreateScan</code> on the code resource you upload to this URL.</p>
     #   @return [String]
     class CreateUploadUrlRequest < Struct.new(
+      nil,
       :scan_name,
       keyword_init: true
     )
@@ -232,6 +243,7 @@ module Aws::CodeGuruSecurity
     #   <p>The identifier for the uploaded code resource. Pass this to <code>CreateScan</code> to use the uploaded resources.</p>
     #   @return [String]
     class CreateUploadUrlResponse < Struct.new(
+      nil,
       :s3_url,
       :request_headers,
       :code_artifact_id,
@@ -245,6 +257,7 @@ module Aws::CodeGuruSecurity
     #   <p>The KMS key ARN that is used for encryption. If an AWS-managed key is used for encryption, returns empty.</p>
     #   @return [String]
     class EncryptionConfig < Struct.new(
+      nil,
       :kms_key_arn,
       keyword_init: true
     )
@@ -268,6 +281,7 @@ module Aws::CodeGuruSecurity
     #   <p>A list of <code>CodeLine</code> objects that describe where the security vulnerability appears in your code.</p>
     #   @return [Array<Types::CodeLine>]
     class FilePath < Struct.new(
+      nil,
       :name,
       :path,
       :start_line,
@@ -328,6 +342,7 @@ module Aws::CodeGuruSecurity
     #   <p>The identifier for the rule that generated the finding.</p>
     #   @return [String]
     class Finding < Struct.new(
+      nil,
       :created_at,
       :description,
       :generator_id,
@@ -357,6 +372,7 @@ module Aws::CodeGuruSecurity
     #   <p>The identifier for a finding.</p>
     #   @return [String]
     class FindingIdentifier < Struct.new(
+      nil,
       :scan_name,
       :finding_id,
       keyword_init: true
@@ -381,6 +397,7 @@ module Aws::CodeGuruSecurity
     #   <p>A numeric value corresponding to a critical finding.</p>
     #   @return [Float]
     class FindingMetricsValuePerSeverity < Struct.new(
+      nil,
       :info,
       :low,
       :medium,
@@ -392,6 +409,7 @@ module Aws::CodeGuruSecurity
     end
 
     class GetAccountConfigurationRequest < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -401,6 +419,7 @@ module Aws::CodeGuruSecurity
     #   <p>An <code>EncryptionConfig</code> object that contains the KMS key ARN that is used for encryption. By default, CodeGuru Security uses an AWS-managed key for encryption. To specify your own key, call <code>UpdateAccountConfiguration</code>. If you do not specify a customer-managed key, returns empty.</p>
     #   @return [Types::EncryptionConfig]
     class GetAccountConfigurationResponse < Struct.new(
+      nil,
       :encryption_config,
       keyword_init: true
     )
@@ -420,6 +439,7 @@ module Aws::CodeGuruSecurity
     #   <p>The status of the findings you want to get. Pass either <code>Open</code>, <code>Closed</code>, or <code>All</code>.</p>
     #   @return [String]
     class GetFindingsRequest < Struct.new(
+      nil,
       :scan_name,
       :next_token,
       :max_results,
@@ -436,6 +456,7 @@ module Aws::CodeGuruSecurity
     #   <p>A pagination token. You can use this in future calls to <code>GetFindings</code> to continue listing results after the current page. </p>
     #   @return [String]
     class GetFindingsResponse < Struct.new(
+      nil,
       :findings,
       :next_token,
       keyword_init: true
@@ -447,6 +468,7 @@ module Aws::CodeGuruSecurity
     #   <p>The date you want to retrieve summary metrics from, rounded to the nearest day. The date must be within the past two years.</p>
     #   @return [Time]
     class GetMetricsSummaryRequest < Struct.new(
+      nil,
       :date,
       keyword_init: true
     )
@@ -457,6 +479,7 @@ module Aws::CodeGuruSecurity
     #   <p>The summary metrics from the specified date.</p>
     #   @return [Types::MetricsSummary]
     class GetMetricsSummaryResponse < Struct.new(
+      nil,
       :metrics_summary,
       keyword_init: true
     )
@@ -470,6 +493,7 @@ module Aws::CodeGuruSecurity
     #   <p>UUID that identifies the individual scan run you want to view details about. You retrieve this when you call the <code>CreateScan</code> operation. Defaults to the latest scan run if missing.</p>
     #   @return [String]
     class GetScanRequest < Struct.new(
+      nil,
       :scan_name,
       :run_id,
       keyword_init: true
@@ -505,6 +529,7 @@ module Aws::CodeGuruSecurity
     #   <p>Details about the error that causes a scan to fail to be retrieved.</p>
     #   @return [String]
     class GetScanResponse < Struct.new(
+      nil,
       :scan_name,
       :run_id,
       :scan_state,
@@ -527,6 +552,7 @@ module Aws::CodeGuruSecurity
     #   <p>Description of the error.</p>
     #   @return [String]
     class InternalServerException < Struct.new(
+      nil,
       :error,
       :message,
       keyword_init: true
@@ -547,6 +573,7 @@ module Aws::CodeGuruSecurity
     #   <p>The end date of the interval which you want to retrieve metrics from. Round to the nearest day.</p>
     #   @return [Time]
     class ListFindingsMetricsRequest < Struct.new(
+      nil,
       :next_token,
       :max_results,
       :start_date,
@@ -563,6 +590,7 @@ module Aws::CodeGuruSecurity
     #   <p>A pagination token. You can use this in future calls to <code>ListFindingMetrics</code> to continue listing results after the current page. </p>
     #   @return [String]
     class ListFindingsMetricsResponse < Struct.new(
+      nil,
       :findings_metrics,
       :next_token,
       keyword_init: true
@@ -577,6 +605,7 @@ module Aws::CodeGuruSecurity
     #   <p>The maximum number of results to return in the response. Use this parameter when paginating results. If additional results exist beyond the number you specify, the <code>nextToken</code> element is returned in the response. Use <code>nextToken</code> in a subsequent request to retrieve additional results. If not specified, returns 100 results.</p>
     #   @return [Integer]
     class ListScansRequest < Struct.new(
+      nil,
       :next_token,
       :max_results,
       keyword_init: true
@@ -591,6 +620,7 @@ module Aws::CodeGuruSecurity
     #   <p>A pagination token. You can use this in future calls to <code>ListScans</code> to continue listing results after the current page.</p>
     #   @return [String]
     class ListScansResponse < Struct.new(
+      nil,
       :summaries,
       :next_token,
       keyword_init: true
@@ -602,6 +632,7 @@ module Aws::CodeGuruSecurity
     #   <p>The ARN of the <code>ScanName</code> object. You can retrieve this ARN by calling <code>CreateScan</code>, <code>ListScans</code>, or <code>GetScan</code>.</p>
     #   @return [String]
     class ListTagsForResourceRequest < Struct.new(
+      nil,
       :resource_arn,
       keyword_init: true
     )
@@ -612,6 +643,7 @@ module Aws::CodeGuruSecurity
     #   <p>An array of key-value pairs used to tag an existing scan. A tag is a custom attribute label with two parts:</p> <ul> <li> <p>A tag key. For example, <code>CostCenter</code>, <code>Environment</code>, or <code>Secret</code>. Tag keys are case sensitive.</p> </li> <li> <p>An optional tag value field. For example, <code>111122223333</code>, <code>Production</code>, or a team name. Omitting the tag value is the same as using an empty string. Tag values are case sensitive.</p> </li> </ul>
     #   @return [Hash<String, String>]
     class ListTagsForResourceResponse < Struct.new(
+      nil,
       :tags,
       keyword_init: true
     )
@@ -635,6 +667,7 @@ module Aws::CodeGuruSecurity
     #   <p>A list of <code>ScanNameWithFindingNum</code> objects for the top 3 scans with the most number of open critical findings.</p>
     #   @return [Array<Types::ScanNameWithFindingNum>]
     class MetricsSummary < Struct.new(
+      nil,
       :date,
       :open_findings,
       :categories_with_most_findings,
@@ -653,6 +686,7 @@ module Aws::CodeGuruSecurity
     #   <p>The URL address to the recommendation for remediating the finding. </p>
     #   @return [String]
     class Recommendation < Struct.new(
+      nil,
       :text,
       :url,
       keyword_init: true
@@ -668,6 +702,7 @@ module Aws::CodeGuruSecurity
     #   <p>A list of <code>SuggestedFix</code> objects. Each object contains information about a suggested code fix to remediate the finding.</p>
     #   @return [Array<Types::SuggestedFix>]
     class Remediation < Struct.new(
+      nil,
       :recommendation,
       :suggested_fixes,
       keyword_init: true
@@ -683,6 +718,7 @@ module Aws::CodeGuruSecurity
     #   <p>The identifier for a section of the resource.</p>
     #   @return [String]
     class Resource < Struct.new(
+      nil,
       :id,
       :sub_resource_id,
       keyword_init: true
@@ -719,6 +755,7 @@ module Aws::CodeGuruSecurity
     #   <p>The type of resource that was not found.</p>
     #   @return [String]
     class ResourceNotFoundException < Struct.new(
+      nil,
       :error_code,
       :message,
       :resource_id,
@@ -736,6 +773,7 @@ module Aws::CodeGuruSecurity
     #   <p>The number of findings generated by a scan.</p>
     #   @return [Integer]
     class ScanNameWithFindingNum < Struct.new(
+      nil,
       :scan_name,
       :finding_number,
       keyword_init: true
@@ -763,6 +801,7 @@ module Aws::CodeGuruSecurity
     #   <p>The ARN for the scan name.</p>
     #   @return [String]
     class ScanSummary < Struct.new(
+      nil,
       :scan_state,
       :created_at,
       :updated_at,
@@ -782,6 +821,7 @@ module Aws::CodeGuruSecurity
     #   <p>The suggested code fix. If applicable, includes code patch to replace your source code. </p>
     #   @return [String]
     class SuggestedFix < Struct.new(
+      nil,
       :description,
       :code,
       keyword_init: true
@@ -796,6 +836,7 @@ module Aws::CodeGuruSecurity
     #   <p>An array of key-value pairs used to tag an existing scan. A tag is a custom attribute label with two parts:</p> <ul> <li> <p>A tag key. For example, <code>CostCenter</code>, <code>Environment</code>, or <code>Secret</code>. Tag keys are case sensitive.</p> </li> <li> <p>An optional tag value field. For example, <code>111122223333</code>, <code>Production</code>, or a team name. Omitting the tag value is the same as using an empty string. Tag values are case sensitive.</p> </li> </ul>
     #   @return [Hash<String, String>]
     class TagResourceRequest < Struct.new(
+      nil,
       :resource_arn,
       :tags,
       keyword_init: true
@@ -804,6 +845,7 @@ module Aws::CodeGuruSecurity
     end
 
     class TagResourceResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -823,6 +865,7 @@ module Aws::CodeGuruSecurity
     #   <p>The identifier for the originating quota.</p>
     #   @return [String]
     class ThrottlingException < Struct.new(
+      nil,
       :error_code,
       :message,
       :service_code,
@@ -839,6 +882,7 @@ module Aws::CodeGuruSecurity
     #   <p>A list of keys for each tag you want to remove from a scan.</p>
     #   @return [Array<String>]
     class UntagResourceRequest < Struct.new(
+      nil,
       :resource_arn,
       :tag_keys,
       keyword_init: true
@@ -847,6 +891,7 @@ module Aws::CodeGuruSecurity
     end
 
     class UntagResourceResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -856,6 +901,7 @@ module Aws::CodeGuruSecurity
     #   <p>The customer-managed KMS key ARN you want to use for encryption. If not specified, CodeGuru Security will use an AWS-managed key for encryption. If you previously specified a customer-managed KMS key and want CodeGuru Security to use an AWS-managed key for encryption instead, pass nothing.</p>
     #   @return [Types::EncryptionConfig]
     class UpdateAccountConfigurationRequest < Struct.new(
+      nil,
       :encryption_config,
       keyword_init: true
     )
@@ -866,6 +912,7 @@ module Aws::CodeGuruSecurity
     #   <p>An <code>EncryptionConfig</code> object that contains the KMS key ARN that is used for encryption. If you did not specify a customer-managed KMS key in the request, returns empty. </p>
     #   @return [Types::EncryptionConfig]
     class UpdateAccountConfigurationResponse < Struct.new(
+      nil,
       :encryption_config,
       keyword_init: true
     )
@@ -886,6 +933,7 @@ module Aws::CodeGuruSecurity
     #   <p>The field that caused the error, if applicable.</p>
     #   @return [Array<Types::ValidationExceptionField>]
     class ValidationException < Struct.new(
+      nil,
       :error_code,
       :message,
       :reason,
@@ -903,6 +951,7 @@ module Aws::CodeGuruSecurity
     #   <p>Describes the exception.</p>
     #   @return [String]
     class ValidationExceptionField < Struct.new(
+      nil,
       :name,
       :message,
       keyword_init: true
@@ -929,6 +978,7 @@ module Aws::CodeGuruSecurity
     #     This shape is not used.
     #   @return [Integer]
     class Vulnerability < Struct.new(
+      nil,
       :reference_urls,
       :related_vulnerabilities,
       :id,

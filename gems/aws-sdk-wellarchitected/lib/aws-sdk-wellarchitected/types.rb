@@ -11,6 +11,7 @@ module Aws::WellArchitected
     #   <p>Description of the error.</p>
     #   @return [String]
     class AccessDeniedException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -31,6 +32,7 @@ module Aws::WellArchitected
     #   <p>Account-level: Configuration status of the Jira integration.</p>
     #   @return [String]
     class AccountJiraConfigurationInput < Struct.new(
+      nil,
       :issue_management_status,
       :issue_management_type,
       :jira_project_key,
@@ -60,6 +62,7 @@ module Aws::WellArchitected
     #   <p>Account-level: Status message on configuration of the Jira integration.</p>
     #   @return [String]
     class AccountJiraConfigurationOutput < Struct.new(
+      nil,
       :integration_status,
       :issue_management_status,
       :issue_management_type,
@@ -80,6 +83,7 @@ module Aws::WellArchitected
     #   <p>The URLs for additional resources, either helpful resources or improvement plans, for a custom lens. Up to five additional URLs can be specified.</p>
     #   @return [Array<Types::ChoiceContent>]
     class AdditionalResources < Struct.new(
+      nil,
       :type,
       :content,
       keyword_init: true
@@ -143,6 +147,7 @@ module Aws::WellArchitected
     #   <p>Configuration of the Jira integration.</p>
     #   @return [Types::JiraConfiguration]
     class Answer < Struct.new(
+      nil,
       :question_id,
       :pillar_id,
       :question_title,
@@ -200,6 +205,7 @@ module Aws::WellArchitected
     #   <p>Configuration of the Jira integration.</p>
     #   @return [Types::JiraConfiguration]
     class AnswerSummary < Struct.new(
+      nil,
       :question_id,
       :pillar_id,
       :question_title,
@@ -225,6 +231,7 @@ module Aws::WellArchitected
     #            <p>Identify a lens using its <a>LensSummary$LensAlias</a>.</p>
     #   @return [Array<String>]
     class AssociateLensesInput < Struct.new(
+      nil,
       :workload_id,
       :lens_aliases,
       keyword_init: true
@@ -239,6 +246,7 @@ module Aws::WellArchitected
     #   <p>The list of profile ARNs to associate with the workload.</p>
     #   @return [Array<String>]
     class AssociateProfilesInput < Struct.new(
+      nil,
       :workload_id,
       :profile_arns,
       keyword_init: true
@@ -254,6 +262,7 @@ module Aws::WellArchitected
     #   <p>The title of a choice.</p>
     #   @return [String]
     class BestPractice < Struct.new(
+      nil,
       :choice_id,
       :choice_title,
       keyword_init: true
@@ -303,6 +312,7 @@ module Aws::WellArchitected
     #   <p>The date and time recorded.</p>
     #   @return [Time]
     class CheckDetail < Struct.new(
+      nil,
       :id,
       :name,
       :description,
@@ -357,6 +367,7 @@ module Aws::WellArchitected
     #   <p>Account summary associated to the check.</p>
     #   @return [Hash<String, Integer>]
     class CheckSummary < Struct.new(
+      nil,
       :id,
       :name,
       :provider,
@@ -397,6 +408,7 @@ module Aws::WellArchitected
     #               one of type <code>IMPROVEMENT_PLAN</code>, or both.</p>
     #   @return [Array<Types::AdditionalResources>]
     class Choice < Struct.new(
+      nil,
       :choice_id,
       :title,
       :description,
@@ -422,6 +434,7 @@ module Aws::WellArchitected
     #   <p>The notes associated with a choice.</p>
     #   @return [String]
     class ChoiceAnswer < Struct.new(
+      nil,
       :choice_id,
       :status,
       :reason,
@@ -442,6 +455,7 @@ module Aws::WellArchitected
     #   <p>The reason why a choice is non-applicable to a question in your workload.</p>
     #   @return [String]
     class ChoiceAnswerSummary < Struct.new(
+      nil,
       :choice_id,
       :status,
       :reason,
@@ -458,6 +472,7 @@ module Aws::WellArchitected
     #   <p>The URL for the choice content.</p>
     #   @return [String]
     class ChoiceContent < Struct.new(
+      nil,
       :display_text,
       :url,
       keyword_init: true
@@ -478,6 +493,7 @@ module Aws::WellArchitected
     #            <p>This value does not apply to custom lenses.</p>
     #   @return [String]
     class ChoiceImprovementPlan < Struct.new(
+      nil,
       :choice_id,
       :display_text,
       :improvement_plan_url,
@@ -497,6 +513,7 @@ module Aws::WellArchitected
     #   <p>The notes associated with a choice.</p>
     #   @return [String]
     class ChoiceUpdate < Struct.new(
+      nil,
       :status,
       :reason,
       :notes,
@@ -516,6 +533,7 @@ module Aws::WellArchitected
     #   <p>Type of the resource affected.</p>
     #   @return [String]
     class ConflictException < Struct.new(
+      nil,
       :message,
       :resource_id,
       :resource_type,
@@ -552,6 +570,7 @@ module Aws::WellArchitected
     #   <p>The total number of lenses applied to the workload.</p>
     #   @return [Integer]
     class ConsolidatedReportMetric < Struct.new(
+      nil,
       :metric_type,
       :risk_counts,
       :workload_id,
@@ -592,6 +611,7 @@ module Aws::WellArchitected
     #            </important>
     #   @return [String]
     class CreateLensShareInput < Struct.new(
+      nil,
       :lens_alias,
       :shared_with,
       :client_request_token,
@@ -604,6 +624,7 @@ module Aws::WellArchitected
     #   <p>The ID associated with the share.</p>
     #   @return [String]
     class CreateLensShareOutput < Struct.new(
+      nil,
       :share_id,
       keyword_init: true
     )
@@ -639,6 +660,7 @@ module Aws::WellArchitected
     #            </important>
     #   @return [String]
     class CreateLensVersionInput < Struct.new(
+      nil,
       :lens_alias,
       :lens_version,
       :is_major_version,
@@ -655,6 +677,7 @@ module Aws::WellArchitected
     #   <p>The version of the lens.</p>
     #   @return [String]
     class CreateLensVersionOutput < Struct.new(
+      nil,
       :lens_arn,
       :lens_version,
       keyword_init: true
@@ -683,6 +706,7 @@ module Aws::WellArchitected
     #            </important>
     #   @return [String]
     class CreateMilestoneInput < Struct.new(
+      nil,
       :workload_id,
       :milestone_name,
       :client_request_token,
@@ -700,6 +724,7 @@ module Aws::WellArchitected
     #            <p>A workload can have a maximum of 100 milestones.</p>
     #   @return [Integer]
     class CreateMilestoneOutput < Struct.new(
+      nil,
       :workload_id,
       :milestone_number,
       keyword_init: true
@@ -732,6 +757,7 @@ module Aws::WellArchitected
     #   <p>The tags assigned to the profile.</p>
     #   @return [Hash<String, String>]
     class CreateProfileInput < Struct.new(
+      nil,
       :profile_name,
       :profile_description,
       :profile_questions,
@@ -749,6 +775,7 @@ module Aws::WellArchitected
     #   <p>Version of the profile.</p>
     #   @return [String]
     class CreateProfileOutput < Struct.new(
+      nil,
       :profile_arn,
       :profile_version,
       keyword_init: true
@@ -776,6 +803,7 @@ module Aws::WellArchitected
     #            </important>
     #   @return [String]
     class CreateProfileShareInput < Struct.new(
+      nil,
       :profile_arn,
       :shared_with,
       :client_request_token,
@@ -791,6 +819,7 @@ module Aws::WellArchitected
     #   <p>The profile ARN.</p>
     #   @return [String]
     class CreateProfileShareOutput < Struct.new(
+      nil,
       :share_id,
       :profile_arn,
       keyword_init: true
@@ -827,6 +856,7 @@ module Aws::WellArchitected
     #            </important>
     #   @return [String]
     class CreateReviewTemplateInput < Struct.new(
+      nil,
       :template_name,
       :description,
       :lenses,
@@ -842,6 +872,7 @@ module Aws::WellArchitected
     #   <p>The review template ARN.</p>
     #   @return [String]
     class CreateReviewTemplateOutput < Struct.new(
+      nil,
       :template_arn,
       keyword_init: true
     )
@@ -868,6 +899,7 @@ module Aws::WellArchitected
     #            </important>
     #   @return [String]
     class CreateTemplateShareInput < Struct.new(
+      nil,
       :template_arn,
       :shared_with,
       :client_request_token,
@@ -883,6 +915,7 @@ module Aws::WellArchitected
     #   <p>The ID associated with the share.</p>
     #   @return [String]
     class CreateTemplateShareOutput < Struct.new(
+      nil,
       :template_arn,
       :share_id,
       keyword_init: true
@@ -1107,6 +1140,7 @@ module Aws::WellArchitected
     #   <p>Jira configuration settings when creating a workload.</p>
     #   @return [Types::WorkloadJiraConfigurationInput]
     class CreateWorkloadInput < Struct.new(
+      nil,
       :workload_name,
       :description,
       :environment,
@@ -1140,6 +1174,7 @@ module Aws::WellArchitected
     #   <p>The ARN for the workload.</p>
     #   @return [String]
     class CreateWorkloadOutput < Struct.new(
+      nil,
       :workload_id,
       :workload_arn,
       keyword_init: true
@@ -1171,6 +1206,7 @@ module Aws::WellArchitected
     #            </important>
     #   @return [String]
     class CreateWorkloadShareInput < Struct.new(
+      nil,
       :workload_id,
       :shared_with,
       :permission_type,
@@ -1188,6 +1224,7 @@ module Aws::WellArchitected
     #   <p>The ID associated with the share.</p>
     #   @return [String]
     class CreateWorkloadShareOutput < Struct.new(
+      nil,
       :workload_id,
       :share_id,
       keyword_init: true
@@ -1221,6 +1258,7 @@ module Aws::WellArchitected
     #   <p>The status of the lens to be deleted.</p>
     #   @return [String]
     class DeleteLensInput < Struct.new(
+      nil,
       :lens_alias,
       :client_request_token,
       :lens_status,
@@ -1255,6 +1293,7 @@ module Aws::WellArchitected
     #            </important>
     #   @return [String]
     class DeleteLensShareInput < Struct.new(
+      nil,
       :share_id,
       :lens_alias,
       :client_request_token,
@@ -1279,6 +1318,7 @@ module Aws::WellArchitected
     #            </important>
     #   @return [String]
     class DeleteProfileInput < Struct.new(
+      nil,
       :profile_arn,
       :client_request_token,
       keyword_init: true
@@ -1305,6 +1345,7 @@ module Aws::WellArchitected
     #            </important>
     #   @return [String]
     class DeleteProfileShareInput < Struct.new(
+      nil,
       :share_id,
       :profile_arn,
       :client_request_token,
@@ -1329,6 +1370,7 @@ module Aws::WellArchitected
     #            </important>
     #   @return [String]
     class DeleteReviewTemplateInput < Struct.new(
+      nil,
       :template_arn,
       :client_request_token,
       keyword_init: true
@@ -1355,6 +1397,7 @@ module Aws::WellArchitected
     #            </important>
     #   @return [String]
     class DeleteTemplateShareInput < Struct.new(
+      nil,
       :share_id,
       :template_arn,
       :client_request_token,
@@ -1380,6 +1423,7 @@ module Aws::WellArchitected
     #            </important>
     #   @return [String]
     class DeleteWorkloadInput < Struct.new(
+      nil,
       :workload_id,
       :client_request_token,
       keyword_init: true
@@ -1407,6 +1451,7 @@ module Aws::WellArchitected
     #            </important>
     #   @return [String]
     class DeleteWorkloadShareInput < Struct.new(
+      nil,
       :share_id,
       :workload_id,
       :client_request_token,
@@ -1424,6 +1469,7 @@ module Aws::WellArchitected
     #            <p>Identify a lens using its <a>LensSummary$LensAlias</a>.</p>
     #   @return [Array<String>]
     class DisassociateLensesInput < Struct.new(
+      nil,
       :workload_id,
       :lens_aliases,
       keyword_init: true
@@ -1438,6 +1484,7 @@ module Aws::WellArchitected
     #   <p>The list of profile ARNs to disassociate from the workload.</p>
     #   @return [Array<String>]
     class DisassociateProfilesInput < Struct.new(
+      nil,
       :workload_id,
       :profile_arns,
       keyword_init: true
@@ -1459,6 +1506,7 @@ module Aws::WellArchitected
     #   <p>The lens version to be exported.</p>
     #   @return [String]
     class ExportLensInput < Struct.new(
+      nil,
       :lens_alias,
       :lens_version,
       keyword_init: true
@@ -1470,6 +1518,7 @@ module Aws::WellArchitected
     #   <p>The JSON representation of a lens.</p>
     #   @return [String]
     class ExportLensOutput < Struct.new(
+      nil,
       :lens_json,
       keyword_init: true
     )
@@ -1498,6 +1547,7 @@ module Aws::WellArchitected
     #            <p>A workload can have a maximum of 100 milestones.</p>
     #   @return [Integer]
     class GetAnswerInput < Struct.new(
+      nil,
       :workload_id,
       :lens_alias,
       :question_id,
@@ -1532,6 +1582,7 @@ module Aws::WellArchitected
     #   <p>An answer of the question.</p>
     #   @return [Types::Answer]
     class GetAnswerOutput < Struct.new(
+      nil,
       :workload_id,
       :milestone_number,
       :lens_alias,
@@ -1557,6 +1608,7 @@ module Aws::WellArchitected
     #   <p>The maximum number of results to return for this request.</p>
     #   @return [Integer]
     class GetConsolidatedReportInput < Struct.new(
+      nil,
       :format,
       :include_shared_resources,
       :next_token,
@@ -1580,6 +1632,7 @@ module Aws::WellArchitected
     #            when <code>PDF</code> format is requested.</p>
     #   @return [String]
     class GetConsolidatedReportOutput < Struct.new(
+      nil,
       :metrics,
       :next_token,
       :base64_string,
@@ -1598,6 +1651,7 @@ module Aws::WellArchitected
     #   <p>Jira configuration status.</p>
     #   @return [Types::AccountJiraConfigurationOutput]
     class GetGlobalSettingsOutput < Struct.new(
+      nil,
       :organization_sharing_status,
       :discovery_integration_status,
       :jira_configuration,
@@ -1620,6 +1674,7 @@ module Aws::WellArchitected
     #   <p>The lens version to be retrieved.</p>
     #   @return [String]
     class GetLensInput < Struct.new(
+      nil,
       :lens_alias,
       :lens_version,
       keyword_init: true
@@ -1631,6 +1686,7 @@ module Aws::WellArchitected
     #   <p>A lens return object.</p>
     #   @return [Types::Lens]
     class GetLensOutput < Struct.new(
+      nil,
       :lens,
       keyword_init: true
     )
@@ -1656,6 +1712,7 @@ module Aws::WellArchitected
     #            <p>A workload can have a maximum of 100 milestones.</p>
     #   @return [Integer]
     class GetLensReviewInput < Struct.new(
+      nil,
       :workload_id,
       :lens_alias,
       :milestone_number,
@@ -1676,6 +1733,7 @@ module Aws::WellArchitected
     #   <p>A lens review of a question.</p>
     #   @return [Types::LensReview]
     class GetLensReviewOutput < Struct.new(
+      nil,
       :workload_id,
       :milestone_number,
       :lens_review,
@@ -1703,6 +1761,7 @@ module Aws::WellArchitected
     #            <p>A workload can have a maximum of 100 milestones.</p>
     #   @return [Integer]
     class GetLensReviewReportInput < Struct.new(
+      nil,
       :workload_id,
       :lens_alias,
       :milestone_number,
@@ -1723,6 +1782,7 @@ module Aws::WellArchitected
     #   <p>A report of a lens review.</p>
     #   @return [Types::LensReviewReport]
     class GetLensReviewReportOutput < Struct.new(
+      nil,
       :workload_id,
       :milestone_number,
       :lens_review_report,
@@ -1748,6 +1808,7 @@ module Aws::WellArchitected
     #   <p>The lens version to target a difference for.</p>
     #   @return [String]
     class GetLensVersionDifferenceInput < Struct.new(
+      nil,
       :lens_alias,
       :base_lens_version,
       :target_lens_version,
@@ -1782,6 +1843,7 @@ module Aws::WellArchitected
     #   <p>The differences between the base and latest versions of the lens.</p>
     #   @return [Types::VersionDifferences]
     class GetLensVersionDifferenceOutput < Struct.new(
+      nil,
       :lens_alias,
       :lens_arn,
       :base_lens_version,
@@ -1802,6 +1864,7 @@ module Aws::WellArchitected
     #            <p>A workload can have a maximum of 100 milestones.</p>
     #   @return [Integer]
     class GetMilestoneInput < Struct.new(
+      nil,
       :workload_id,
       :milestone_number,
       keyword_init: true
@@ -1817,6 +1880,7 @@ module Aws::WellArchitected
     #   <p>A milestone return object.</p>
     #   @return [Types::Milestone]
     class GetMilestoneOutput < Struct.new(
+      nil,
       :workload_id,
       :milestone,
       keyword_init: true
@@ -1831,6 +1895,7 @@ module Aws::WellArchitected
     #   <p>The profile version.</p>
     #   @return [String]
     class GetProfileInput < Struct.new(
+      nil,
       :profile_arn,
       :profile_version,
       keyword_init: true
@@ -1842,6 +1907,7 @@ module Aws::WellArchitected
     #   <p>The profile.</p>
     #   @return [Types::Profile]
     class GetProfileOutput < Struct.new(
+      nil,
       :profile,
       keyword_init: true
     )
@@ -1849,6 +1915,7 @@ module Aws::WellArchitected
     end
 
     class GetProfileTemplateInput < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1858,6 +1925,7 @@ module Aws::WellArchitected
     #   <p>The profile template.</p>
     #   @return [Types::ProfileTemplate]
     class GetProfileTemplateOutput < Struct.new(
+      nil,
       :profile_template,
       keyword_init: true
     )
@@ -1881,6 +1949,7 @@ module Aws::WellArchitected
     #   <p>The ID of the question.</p>
     #   @return [String]
     class GetReviewTemplateAnswerInput < Struct.new(
+      nil,
       :template_arn,
       :lens_alias,
       :question_id,
@@ -1906,6 +1975,7 @@ module Aws::WellArchitected
     #   <p>An answer of the question.</p>
     #   @return [Types::ReviewTemplateAnswer]
     class GetReviewTemplateAnswerOutput < Struct.new(
+      nil,
       :template_arn,
       :lens_alias,
       :answer,
@@ -1918,6 +1988,7 @@ module Aws::WellArchitected
     #   <p>The review template ARN.</p>
     #   @return [String]
     class GetReviewTemplateInput < Struct.new(
+      nil,
       :template_arn,
       keyword_init: true
     )
@@ -1938,6 +2009,7 @@ module Aws::WellArchitected
     #            <p>Each lens is identified by its <a>LensSummary$LensAlias</a>.</p>
     #   @return [String]
     class GetReviewTemplateLensReviewInput < Struct.new(
+      nil,
       :template_arn,
       :lens_alias,
       keyword_init: true
@@ -1952,6 +2024,7 @@ module Aws::WellArchitected
     #   <p>A lens review of a question.</p>
     #   @return [Types::ReviewTemplateLensReview]
     class GetReviewTemplateLensReviewOutput < Struct.new(
+      nil,
       :template_arn,
       :lens_review,
       keyword_init: true
@@ -1963,6 +2036,7 @@ module Aws::WellArchitected
     #   <p>The review template.</p>
     #   @return [Types::ReviewTemplate]
     class GetReviewTemplateOutput < Struct.new(
+      nil,
       :review_template,
       keyword_init: true
     )
@@ -1974,6 +2048,7 @@ module Aws::WellArchitected
     #   <p>The ID assigned to the workload. This ID is unique within an Amazon Web Services Region.</p>
     #   @return [String]
     class GetWorkloadInput < Struct.new(
+      nil,
       :workload_id,
       keyword_init: true
     )
@@ -1985,6 +2060,7 @@ module Aws::WellArchitected
     #   <p>A workload return object.</p>
     #   @return [Types::Workload]
     class GetWorkloadOutput < Struct.new(
+      nil,
       :workload,
       keyword_init: true
     )
@@ -2020,6 +2096,7 @@ module Aws::WellArchitected
     #   <p>Tags to associate to a lens.</p>
     #   @return [Hash<String, String>]
     class ImportLensInput < Struct.new(
+      nil,
       :lens_alias,
       :json_string,
       :client_request_token,
@@ -2036,6 +2113,7 @@ module Aws::WellArchitected
     #   <p>The status of the imported lens.</p>
     #   @return [String]
     class ImportLensOutput < Struct.new(
+      nil,
       :lens_arn,
       :status,
       keyword_init: true
@@ -2069,6 +2147,7 @@ module Aws::WellArchitected
     #   <p>Configuration of the Jira integration.</p>
     #   @return [Types::JiraConfiguration]
     class ImprovementSummary < Struct.new(
+      nil,
       :question_id,
       :pillar_id,
       :question_title,
@@ -2086,6 +2165,7 @@ module Aws::WellArchitected
     #   <p>Description of the error.</p>
     #   @return [String]
     class InternalServerException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -2100,6 +2180,7 @@ module Aws::WellArchitected
     #   <p>The date and time recorded.</p>
     #   @return [Time]
     class JiraConfiguration < Struct.new(
+      nil,
       :jira_issue_url,
       :last_synced_time,
       keyword_init: true
@@ -2112,6 +2193,7 @@ module Aws::WellArchitected
     #   <p>Selected pillars in the workload.</p>
     #   @return [Array<Types::SelectedPillar>]
     class JiraSelectedQuestionConfiguration < Struct.new(
+      nil,
       :selected_pillars,
       keyword_init: true
     )
@@ -2141,6 +2223,7 @@ module Aws::WellArchitected
     #   <p>The tags assigned to the lens.</p>
     #   @return [Hash<String, String>]
     class Lens < Struct.new(
+      nil,
       :lens_arn,
       :lens_version,
       :name,
@@ -2164,6 +2247,7 @@ module Aws::WellArchitected
     #   <p>A map from risk names to the count of how many questions have that rating.</p>
     #   @return [Hash<String, Integer>]
     class LensMetric < Struct.new(
+      nil,
       :lens_arn,
       :pillars,
       :risk_counts,
@@ -2221,6 +2305,7 @@ module Aws::WellArchitected
     #   <p>A map from risk names to the count of how many questions have that rating.</p>
     #   @return [Hash<String, Integer>]
     class LensReview < Struct.new(
+      nil,
       :lens_alias,
       :lens_arn,
       :lens_version,
@@ -2260,6 +2345,7 @@ module Aws::WellArchitected
     #            when <code>PDF</code> format is requested.</p>
     #   @return [String]
     class LensReviewReport < Struct.new(
+      nil,
       :lens_alias,
       :lens_arn,
       :base64_string,
@@ -2304,6 +2390,7 @@ module Aws::WellArchitected
     #   <p>A map from risk names to the count of how many questions have that rating.</p>
     #   @return [Hash<String, Integer>]
     class LensReviewSummary < Struct.new(
+      nil,
       :lens_alias,
       :lens_arn,
       :lens_version,
@@ -2333,6 +2420,7 @@ module Aws::WellArchitected
     #   <p>Optional message to compliment the Status field.</p>
     #   @return [String]
     class LensShareSummary < Struct.new(
+      nil,
       :share_id,
       :shared_with,
       :status,
@@ -2381,6 +2469,7 @@ module Aws::WellArchitected
     #   <p>The status of the lens.</p>
     #   @return [String]
     class LensSummary < Struct.new(
+      nil,
       :lens_arn,
       :lens_alias,
       :lens_name,
@@ -2434,6 +2523,7 @@ module Aws::WellArchitected
     #               are ignored when checking for uniqueness.</p>
     #   @return [String]
     class LensUpgradeSummary < Struct.new(
+      nil,
       :workload_id,
       :workload_name,
       :lens_alias,
@@ -2479,6 +2569,7 @@ module Aws::WellArchitected
     #   <p>The priority of the question.</p>
     #   @return [String]
     class ListAnswersInput < Struct.new(
+      nil,
       :workload_id,
       :lens_alias,
       :pillar_id,
@@ -2519,6 +2610,7 @@ module Aws::WellArchitected
     #   <p>The token to use to retrieve the next set of results.</p>
     #   @return [String]
     class ListAnswersOutput < Struct.new(
+      nil,
       :workload_id,
       :milestone_number,
       :lens_alias,
@@ -2553,6 +2645,7 @@ module Aws::WellArchitected
     #   <p>The ID of a choice.</p>
     #   @return [String]
     class ListCheckDetailsInput < Struct.new(
+      nil,
       :workload_id,
       :next_token,
       :max_results,
@@ -2572,6 +2665,7 @@ module Aws::WellArchitected
     #   <p>The token to use to retrieve the next set of results.</p>
     #   @return [String]
     class ListCheckDetailsOutput < Struct.new(
+      nil,
       :check_details,
       :next_token,
       keyword_init: true
@@ -2602,6 +2696,7 @@ module Aws::WellArchitected
     #   <p>The ID of a choice.</p>
     #   @return [String]
     class ListCheckSummariesInput < Struct.new(
+      nil,
       :workload_id,
       :next_token,
       :max_results,
@@ -2621,6 +2716,7 @@ module Aws::WellArchitected
     #   <p>The token to use to retrieve the next set of results.</p>
     #   @return [String]
     class ListCheckSummariesOutput < Struct.new(
+      nil,
       :check_summaries,
       :next_token,
       keyword_init: true
@@ -2660,6 +2756,7 @@ module Aws::WellArchitected
     #   <p>The priority of the question.</p>
     #   @return [String]
     class ListLensReviewImprovementsInput < Struct.new(
+      nil,
       :workload_id,
       :lens_alias,
       :pillar_id,
@@ -2700,6 +2797,7 @@ module Aws::WellArchitected
     #   <p>The token to use to retrieve the next set of results.</p>
     #   @return [String]
     class ListLensReviewImprovementsOutput < Struct.new(
+      nil,
       :workload_id,
       :milestone_number,
       :lens_alias,
@@ -2726,6 +2824,7 @@ module Aws::WellArchitected
     #   <p>The maximum number of results to return for this request.</p>
     #   @return [Integer]
     class ListLensReviewsInput < Struct.new(
+      nil,
       :workload_id,
       :milestone_number,
       :next_token,
@@ -2750,6 +2849,7 @@ module Aws::WellArchitected
     #   <p>The token to use to retrieve the next set of results.</p>
     #   @return [String]
     class ListLensReviewsOutput < Struct.new(
+      nil,
       :workload_id,
       :milestone_number,
       :lens_review_summaries,
@@ -2782,6 +2882,7 @@ module Aws::WellArchitected
     #   <p>The status of the share request.</p>
     #   @return [String]
     class ListLensSharesInput < Struct.new(
+      nil,
       :lens_alias,
       :shared_with_prefix,
       :next_token,
@@ -2799,6 +2900,7 @@ module Aws::WellArchitected
     #   <p>The token to use to retrieve the next set of results.</p>
     #   @return [String]
     class ListLensSharesOutput < Struct.new(
+      nil,
       :lens_share_summaries,
       :next_token,
       keyword_init: true
@@ -2823,6 +2925,7 @@ module Aws::WellArchitected
     #   <p>The full name of the lens.</p>
     #   @return [String]
     class ListLensesInput < Struct.new(
+      nil,
       :next_token,
       :max_results,
       :lens_type,
@@ -2841,6 +2944,7 @@ module Aws::WellArchitected
     #   <p>The token to use to retrieve the next set of results.</p>
     #   @return [String]
     class ListLensesOutput < Struct.new(
+      nil,
       :lens_summaries,
       :next_token,
       keyword_init: true
@@ -2859,6 +2963,7 @@ module Aws::WellArchitected
     #   <p>The maximum number of results to return for this request.</p>
     #   @return [Integer]
     class ListMilestonesInput < Struct.new(
+      nil,
       :workload_id,
       :next_token,
       :max_results,
@@ -2878,6 +2983,7 @@ module Aws::WellArchitected
     #   <p>The token to use to retrieve the next set of results.</p>
     #   @return [String]
     class ListMilestonesOutput < Struct.new(
+      nil,
       :workload_id,
       :milestone_summaries,
       :next_token,
@@ -2902,6 +3008,7 @@ module Aws::WellArchitected
     #            </note>
     #   @return [String]
     class ListNotificationsInput < Struct.new(
+      nil,
       :workload_id,
       :next_token,
       :max_results,
@@ -2918,6 +3025,7 @@ module Aws::WellArchitected
     #   <p>The token to use to retrieve the next set of results.</p>
     #   @return [String]
     class ListNotificationsOutput < Struct.new(
+      nil,
       :notification_summaries,
       :next_token,
       keyword_init: true
@@ -2935,6 +3043,7 @@ module Aws::WellArchitected
     #   <p>The maximum number of results to return for this request.</p>
     #   @return [Integer]
     class ListProfileNotificationsInput < Struct.new(
+      nil,
       :workload_id,
       :next_token,
       :max_results,
@@ -2950,6 +3059,7 @@ module Aws::WellArchitected
     #   <p>The token to use to retrieve the next set of results.</p>
     #   @return [String]
     class ListProfileNotificationsOutput < Struct.new(
+      nil,
       :notification_summaries,
       :next_token,
       keyword_init: true
@@ -2973,6 +3083,7 @@ module Aws::WellArchitected
     #   <p>The status of the share request.</p>
     #   @return [String]
     class ListProfileSharesInput < Struct.new(
+      nil,
       :profile_arn,
       :shared_with_prefix,
       :next_token,
@@ -2990,6 +3101,7 @@ module Aws::WellArchitected
     #   <p>The token to use to retrieve the next set of results.</p>
     #   @return [String]
     class ListProfileSharesOutput < Struct.new(
+      nil,
       :profile_share_summaries,
       :next_token,
       keyword_init: true
@@ -3011,6 +3123,7 @@ module Aws::WellArchitected
     #   <p>The maximum number of results to return for this request.</p>
     #   @return [Integer]
     class ListProfilesInput < Struct.new(
+      nil,
       :profile_name_prefix,
       :profile_owner_type,
       :next_token,
@@ -3027,6 +3140,7 @@ module Aws::WellArchitected
     #   <p>The token to use to retrieve the next set of results.</p>
     #   @return [String]
     class ListProfilesOutput < Struct.new(
+      nil,
       :profile_summaries,
       :next_token,
       keyword_init: true
@@ -3058,6 +3172,7 @@ module Aws::WellArchitected
     #   <p>The maximum number of results to return for this request.</p>
     #   @return [Integer]
     class ListReviewTemplateAnswersInput < Struct.new(
+      nil,
       :template_arn,
       :lens_alias,
       :pillar_id,
@@ -3088,6 +3203,7 @@ module Aws::WellArchitected
     #   <p>The token to use to retrieve the next set of results.</p>
     #   @return [String]
     class ListReviewTemplateAnswersOutput < Struct.new(
+      nil,
       :template_arn,
       :lens_alias,
       :answer_summaries,
@@ -3104,6 +3220,7 @@ module Aws::WellArchitected
     #   <p>The maximum number of results to return for this request.</p>
     #   @return [Integer]
     class ListReviewTemplatesInput < Struct.new(
+      nil,
       :next_token,
       :max_results,
       keyword_init: true
@@ -3118,6 +3235,7 @@ module Aws::WellArchitected
     #   <p>The token to use to retrieve the next set of results.</p>
     #   @return [String]
     class ListReviewTemplatesOutput < Struct.new(
+      nil,
       :review_templates,
       :next_token,
       keyword_init: true
@@ -3151,6 +3269,7 @@ module Aws::WellArchitected
     #               results.</p>
     #   @return [String]
     class ListShareInvitationsInput < Struct.new(
+      nil,
       :workload_name_prefix,
       :lens_name_prefix,
       :share_resource_type,
@@ -3171,6 +3290,7 @@ module Aws::WellArchitected
     #   <p>The token to use to retrieve the next set of results.</p>
     #   @return [String]
     class ListShareInvitationsOutput < Struct.new(
+      nil,
       :share_invitation_summaries,
       :next_token,
       keyword_init: true
@@ -3182,6 +3302,7 @@ module Aws::WellArchitected
     #   <p>The ARN for the workload.</p>
     #   @return [String]
     class ListTagsForResourceInput < Struct.new(
+      nil,
       :workload_arn,
       keyword_init: true
     )
@@ -3192,6 +3313,7 @@ module Aws::WellArchitected
     #   <p>The tags for the resource.</p>
     #   @return [Hash<String, String>]
     class ListTagsForResourceOutput < Struct.new(
+      nil,
       :tags,
       keyword_init: true
     )
@@ -3215,6 +3337,7 @@ module Aws::WellArchitected
     #   <p>The status of the share request.</p>
     #   @return [String]
     class ListTemplateSharesInput < Struct.new(
+      nil,
       :template_arn,
       :shared_with_prefix,
       :next_token,
@@ -3235,6 +3358,7 @@ module Aws::WellArchitected
     #   <p>The token to use to retrieve the next set of results.</p>
     #   @return [String]
     class ListTemplateSharesOutput < Struct.new(
+      nil,
       :template_arn,
       :template_share_summaries,
       :next_token,
@@ -3260,6 +3384,7 @@ module Aws::WellArchitected
     #   <p>The status of the share request.</p>
     #   @return [String]
     class ListWorkloadSharesInput < Struct.new(
+      nil,
       :workload_id,
       :shared_with_prefix,
       :next_token,
@@ -3281,6 +3406,7 @@ module Aws::WellArchitected
     #   <p>The token to use to retrieve the next set of results.</p>
     #   @return [String]
     class ListWorkloadSharesOutput < Struct.new(
+      nil,
       :workload_id,
       :workload_share_summaries,
       :next_token,
@@ -3301,6 +3427,7 @@ module Aws::WellArchitected
     #   <p>The maximum number of results to return for this request.</p>
     #   @return [Integer]
     class ListWorkloadsInput < Struct.new(
+      nil,
       :workload_name_prefix,
       :next_token,
       :max_results,
@@ -3317,6 +3444,7 @@ module Aws::WellArchitected
     #   <p>The token to use to retrieve the next set of results.</p>
     #   @return [String]
     class ListWorkloadsOutput < Struct.new(
+      nil,
       :workload_summaries,
       :next_token,
       keyword_init: true
@@ -3340,6 +3468,7 @@ module Aws::WellArchitected
     #   <p>A workload return object.</p>
     #   @return [Types::Workload]
     class Milestone < Struct.new(
+      nil,
       :milestone_number,
       :milestone_name,
       :recorded_at,
@@ -3365,6 +3494,7 @@ module Aws::WellArchitected
     #   <p>A workload summary return object.</p>
     #   @return [Types::WorkloadSummary]
     class MilestoneSummary < Struct.new(
+      nil,
       :milestone_number,
       :milestone_name,
       :recorded_at,
@@ -3382,6 +3512,7 @@ module Aws::WellArchitected
     #   <p>Summary of lens upgrade.</p>
     #   @return [Types::LensUpgradeSummary]
     class NotificationSummary < Struct.new(
+      nil,
       :type,
       :lens_upgrade_summary,
       keyword_init: true
@@ -3404,6 +3535,7 @@ module Aws::WellArchitected
     #   <p>List of question differences.</p>
     #   @return [Array<Types::QuestionDifference>]
     class PillarDifference < Struct.new(
+      nil,
       :pillar_id,
       :pillar_name,
       :difference_status,
@@ -3425,6 +3557,7 @@ module Aws::WellArchitected
     #   <p>The questions that have been identified as risks in the pillar.</p>
     #   @return [Array<Types::QuestionMetric>]
     class PillarMetric < Struct.new(
+      nil,
       :pillar_id,
       :risk_counts,
       :questions,
@@ -3452,6 +3585,7 @@ module Aws::WellArchitected
     #   <p>A map from risk names to the count of how many questions have that rating.</p>
     #   @return [Hash<String, Integer>]
     class PillarReviewSummary < Struct.new(
+      nil,
       :pillar_id,
       :pillar_name,
       :notes,
@@ -3494,6 +3628,7 @@ module Aws::WellArchitected
     #   <p>The tags assigned to the profile.</p>
     #   @return [Hash<String, String>]
     class Profile < Struct.new(
+      nil,
       :profile_arn,
       :profile_version,
       :profile_name,
@@ -3520,6 +3655,7 @@ module Aws::WellArchitected
     #   <p>The description of a choice.</p>
     #   @return [String]
     class ProfileChoice < Struct.new(
+      nil,
       :choice_id,
       :choice_title,
       :choice_description,
@@ -3553,6 +3689,7 @@ module Aws::WellArchitected
     #               are ignored when checking for uniqueness.</p>
     #   @return [String]
     class ProfileNotificationSummary < Struct.new(
+      nil,
       :current_profile_version,
       :latest_profile_version,
       :type,
@@ -3588,6 +3725,7 @@ module Aws::WellArchitected
     #   <p>The maximum number of selected choices.</p>
     #   @return [Integer]
     class ProfileQuestion < Struct.new(
+      nil,
       :question_id,
       :question_title,
       :question_description,
@@ -3608,6 +3746,7 @@ module Aws::WellArchitected
     #   <p>The selected choices.</p>
     #   @return [Array<String>]
     class ProfileQuestionUpdate < Struct.new(
+      nil,
       :question_id,
       :selected_choice_ids,
       keyword_init: true
@@ -3630,6 +3769,7 @@ module Aws::WellArchitected
     #   <p>Profile share invitation status message.</p>
     #   @return [String]
     class ProfileShareSummary < Struct.new(
+      nil,
       :share_id,
       :shared_with,
       :status,
@@ -3662,6 +3802,7 @@ module Aws::WellArchitected
     #   <p>The date and time recorded.</p>
     #   @return [Time]
     class ProfileSummary < Struct.new(
+      nil,
       :profile_arn,
       :profile_version,
       :profile_name,
@@ -3688,6 +3829,7 @@ module Aws::WellArchitected
     #   <p>The date and time recorded.</p>
     #   @return [Time]
     class ProfileTemplate < Struct.new(
+      nil,
       :template_name,
       :template_questions,
       :created_at,
@@ -3708,6 +3850,7 @@ module Aws::WellArchitected
     #   <p>The description of a choice.</p>
     #   @return [String]
     class ProfileTemplateChoice < Struct.new(
+      nil,
       :choice_id,
       :choice_title,
       :choice_description,
@@ -3736,6 +3879,7 @@ module Aws::WellArchitected
     #   <p>The maximum number of choices selected.</p>
     #   @return [Integer]
     class ProfileTemplateQuestion < Struct.new(
+      nil,
       :question_id,
       :question_title,
       :question_description,
@@ -3758,6 +3902,7 @@ module Aws::WellArchitected
     #   <p>Indicates the type of change to the question.</p>
     #   @return [String]
     class QuestionDifference < Struct.new(
+      nil,
       :question_id,
       :question_title,
       :difference_status,
@@ -3777,6 +3922,7 @@ module Aws::WellArchitected
     #   <p>The best practices, or choices, that have been identified as contributing to risk in a question.</p>
     #   @return [Array<Types::BestPractice>]
     class QuestionMetric < Struct.new(
+      nil,
       :question_id,
       :risk,
       :best_practices,
@@ -3796,6 +3942,7 @@ module Aws::WellArchitected
     #   <p>Type of the resource affected.</p>
     #   @return [String]
     class ResourceNotFoundException < Struct.new(
+      nil,
       :message,
       :resource_id,
       :resource_type,
@@ -3840,6 +3987,7 @@ module Aws::WellArchitected
     #   <p>The ID assigned to the template share invitation.</p>
     #   @return [String]
     class ReviewTemplate < Struct.new(
+      nil,
       :description,
       :lenses,
       :notes,
@@ -3911,6 +4059,7 @@ module Aws::WellArchitected
     #   <p>The reason why the question is not applicable to your review template.</p>
     #   @return [String]
     class ReviewTemplateAnswer < Struct.new(
+      nil,
       :question_id,
       :pillar_id,
       :question_title,
@@ -3964,6 +4113,7 @@ module Aws::WellArchitected
     #   <p>The type of question.</p>
     #   @return [String]
     class ReviewTemplateAnswerSummary < Struct.new(
+      nil,
       :question_id,
       :pillar_id,
       :question_title,
@@ -4019,6 +4169,7 @@ module Aws::WellArchitected
     #   <p>The token to use to retrieve the next set of results.</p>
     #   @return [String]
     class ReviewTemplateLensReview < Struct.new(
+      nil,
       :lens_alias,
       :lens_arn,
       :lens_version,
@@ -4050,6 +4201,7 @@ module Aws::WellArchitected
     #   <p>A count of how many questions are answered and unanswered in the requested pillar of the lens review.</p>
     #   @return [Hash<String, Integer>]
     class ReviewTemplatePillarReviewSummary < Struct.new(
+      nil,
       :pillar_id,
       :pillar_name,
       :notes,
@@ -4082,6 +4234,7 @@ module Aws::WellArchitected
     #   <p>The latest status of a review template.</p>
     #   @return [String]
     class ReviewTemplateSummary < Struct.new(
+      nil,
       :description,
       :lenses,
       :owner,
@@ -4103,6 +4256,7 @@ module Aws::WellArchitected
     #   <p>Selected question IDs in the selected pillar.</p>
     #   @return [Array<String>]
     class SelectedPillar < Struct.new(
+      nil,
       :pillar_id,
       :selected_question_ids,
       keyword_init: true
@@ -4127,6 +4281,7 @@ module Aws::WellArchitected
     #   <p>Service Quotas requirement to identify originating service.</p>
     #   @return [String]
     class ServiceQuotaExceededException < Struct.new(
+      nil,
       :message,
       :resource_id,
       :resource_type,
@@ -4167,6 +4322,7 @@ module Aws::WellArchitected
     #   <p>The review template ARN.</p>
     #   @return [String]
     class ShareInvitation < Struct.new(
+      nil,
       :share_invitation_id,
       :share_resource_type,
       :workload_id,
@@ -4223,6 +4379,7 @@ module Aws::WellArchitected
     #   <p>The review template ARN.</p>
     #   @return [String]
     class ShareInvitationSummary < Struct.new(
+      nil,
       :share_invitation_id,
       :shared_by,
       :shared_with,
@@ -4248,6 +4405,7 @@ module Aws::WellArchitected
     #   <p>The tags for the resource.</p>
     #   @return [Hash<String, String>]
     class TagResourceInput < Struct.new(
+      nil,
       :workload_arn,
       :tags,
       keyword_init: true
@@ -4256,6 +4414,7 @@ module Aws::WellArchitected
     end
 
     class TagResourceOutput < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -4276,6 +4435,7 @@ module Aws::WellArchitected
     #   <p>Review template share invitation status message. </p>
     #   @return [String]
     class TemplateShareSummary < Struct.new(
+      nil,
       :share_id,
       :shared_with,
       :status,
@@ -4296,6 +4456,7 @@ module Aws::WellArchitected
     #   <p>Service Quotas requirement to identify originating service.</p>
     #   @return [String]
     class ThrottlingException < Struct.new(
+      nil,
       :message,
       :quota_code,
       :service_code,
@@ -4312,6 +4473,7 @@ module Aws::WellArchitected
     #               whose keys are members of this list are removed from the resource.</p>
     #   @return [Array<String>]
     class UntagResourceInput < Struct.new(
+      nil,
       :workload_arn,
       :tag_keys,
       keyword_init: true
@@ -4320,6 +4482,7 @@ module Aws::WellArchitected
     end
 
     class UntagResourceOutput < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -4361,6 +4524,7 @@ module Aws::WellArchitected
     #   <p>The reason why a question is not applicable to your workload.</p>
     #   @return [String]
     class UpdateAnswerInput < Struct.new(
+      nil,
       :workload_id,
       :lens_alias,
       :question_id,
@@ -4395,6 +4559,7 @@ module Aws::WellArchitected
     #   <p>An answer of the question.</p>
     #   @return [Types::Answer]
     class UpdateAnswerOutput < Struct.new(
+      nil,
       :workload_id,
       :lens_alias,
       :lens_arn,
@@ -4414,6 +4579,7 @@ module Aws::WellArchitected
     #   <p>The status of Jira integration settings.</p>
     #   @return [Types::AccountJiraConfigurationInput]
     class UpdateGlobalSettingsInput < Struct.new(
+      nil,
       :organization_sharing_status,
       :discovery_integration_status,
       :jira_configuration,
@@ -4441,6 +4607,7 @@ module Aws::WellArchitected
     #   <p>Which integrated service to update.</p>
     #   @return [String]
     class UpdateIntegrationInput < Struct.new(
+      nil,
       :workload_id,
       :client_request_token,
       :integrating_service,
@@ -4475,6 +4642,7 @@ module Aws::WellArchitected
     #   <p>Configuration of the Jira integration.</p>
     #   @return [Types::JiraSelectedQuestionConfiguration]
     class UpdateLensReviewInput < Struct.new(
+      nil,
       :workload_id,
       :lens_alias,
       :lens_notes,
@@ -4493,6 +4661,7 @@ module Aws::WellArchitected
     #   <p>A lens review of a question.</p>
     #   @return [Types::LensReview]
     class UpdateLensReviewOutput < Struct.new(
+      nil,
       :workload_id,
       :lens_review,
       keyword_init: true
@@ -4510,6 +4679,7 @@ module Aws::WellArchitected
     #   <p>Profile questions.</p>
     #   @return [Array<Types::ProfileQuestionUpdate>]
     class UpdateProfileInput < Struct.new(
+      nil,
       :profile_arn,
       :profile_description,
       :profile_questions,
@@ -4522,6 +4692,7 @@ module Aws::WellArchitected
     #   <p>The profile.</p>
     #   @return [Types::Profile]
     class UpdateProfileOutput < Struct.new(
+      nil,
       :profile,
       keyword_init: true
     )
@@ -4562,6 +4733,7 @@ module Aws::WellArchitected
     #   <p>The update reason.</p>
     #   @return [String]
     class UpdateReviewTemplateAnswerInput < Struct.new(
+      nil,
       :template_arn,
       :lens_alias,
       :question_id,
@@ -4592,6 +4764,7 @@ module Aws::WellArchitected
     #   <p>An answer of the question.</p>
     #   @return [Types::ReviewTemplateAnswer]
     class UpdateReviewTemplateAnswerOutput < Struct.new(
+      nil,
       :template_arn,
       :lens_alias,
       :answer,
@@ -4620,6 +4793,7 @@ module Aws::WellArchitected
     #   <p>A list of lens aliases or ARNs to unapply to the review template. The <code>wellarchitected</code> lens cannot be unapplied.</p>
     #   @return [Array<String>]
     class UpdateReviewTemplateInput < Struct.new(
+      nil,
       :template_arn,
       :template_name,
       :description,
@@ -4653,6 +4827,7 @@ module Aws::WellArchitected
     #            <p>For a review template, these are the notes that will be associated with the workload when the template is applied.</p>
     #   @return [Hash<String, String>]
     class UpdateReviewTemplateLensReviewInput < Struct.new(
+      nil,
       :template_arn,
       :lens_alias,
       :lens_notes,
@@ -4669,6 +4844,7 @@ module Aws::WellArchitected
     #   <p>A lens review of a question.</p>
     #   @return [Types::ReviewTemplateLensReview]
     class UpdateReviewTemplateLensReviewOutput < Struct.new(
+      nil,
       :template_arn,
       :lens_review,
       keyword_init: true
@@ -4680,6 +4856,7 @@ module Aws::WellArchitected
     #   <p>A review template.</p>
     #   @return [Types::ReviewTemplate]
     class UpdateReviewTemplateOutput < Struct.new(
+      nil,
       :review_template,
       keyword_init: true
     )
@@ -4694,6 +4871,7 @@ module Aws::WellArchitected
     #   <p>Share invitation action taken by contributor.</p>
     #   @return [String]
     class UpdateShareInvitationInput < Struct.new(
+      nil,
       :share_invitation_id,
       :share_invitation_action,
       keyword_init: true
@@ -4705,6 +4883,7 @@ module Aws::WellArchitected
     #   <p>The updated workload or custom lens share invitation.</p>
     #   @return [Types::ShareInvitation]
     class UpdateShareInvitationOutput < Struct.new(
+      nil,
       :share_invitation,
       keyword_init: true
     )
@@ -4915,6 +5094,7 @@ module Aws::WellArchitected
     #   <p>Configuration of the Jira integration.</p>
     #   @return [Types::WorkloadJiraConfigurationInput]
     class UpdateWorkloadInput < Struct.new(
+      nil,
       :workload_id,
       :workload_name,
       :description,
@@ -4943,6 +5123,7 @@ module Aws::WellArchitected
     #   <p>A workload return object.</p>
     #   @return [Types::Workload]
     class UpdateWorkloadOutput < Struct.new(
+      nil,
       :workload,
       keyword_init: true
     )
@@ -4960,6 +5141,7 @@ module Aws::WellArchitected
     #   <p>Permission granted on a share request.</p>
     #   @return [String]
     class UpdateWorkloadShareInput < Struct.new(
+      nil,
       :share_id,
       :workload_id,
       :permission_type,
@@ -4976,6 +5158,7 @@ module Aws::WellArchitected
     #   <p>A workload share return object.</p>
     #   @return [Types::WorkloadShare]
     class UpdateWorkloadShareOutput < Struct.new(
+      nil,
       :workload_id,
       :workload_share,
       keyword_init: true
@@ -5013,6 +5196,7 @@ module Aws::WellArchitected
     #            </important>
     #   @return [String]
     class UpgradeLensReviewInput < Struct.new(
+      nil,
       :workload_id,
       :lens_alias,
       :milestone_name,
@@ -5045,6 +5229,7 @@ module Aws::WellArchitected
     #            </important>
     #   @return [String]
     class UpgradeProfileVersionInput < Struct.new(
+      nil,
       :workload_id,
       :profile_arn,
       :milestone_name,
@@ -5080,6 +5265,7 @@ module Aws::WellArchitected
     #            </important>
     #   @return [String]
     class UpgradeReviewTemplateLensReviewInput < Struct.new(
+      nil,
       :template_arn,
       :lens_alias,
       :client_request_token,
@@ -5099,6 +5285,7 @@ module Aws::WellArchitected
     #   <p>The fields that caused the error, if applicable.</p>
     #   @return [Array<Types::ValidationExceptionField>]
     class ValidationException < Struct.new(
+      nil,
       :message,
       :reason,
       :fields,
@@ -5115,6 +5302,7 @@ module Aws::WellArchitected
     #   <p>Description of the error.</p>
     #   @return [String]
     class ValidationExceptionField < Struct.new(
+      nil,
       :name,
       :message,
       keyword_init: true
@@ -5127,6 +5315,7 @@ module Aws::WellArchitected
     #   <p>The differences between the base and latest versions of the lens.</p>
     #   @return [Array<Types::PillarDifference>]
     class VersionDifferences < Struct.new(
+      nil,
       :pillar_differences,
       keyword_init: true
     )
@@ -5369,6 +5558,7 @@ module Aws::WellArchitected
     #   <p>Jira configuration for a specific workload.</p>
     #   @return [Types::WorkloadJiraConfigurationOutput]
     class Workload < Struct.new(
+      nil,
       :workload_id,
       :workload_arn,
       :workload_name,
@@ -5411,6 +5601,7 @@ module Aws::WellArchitected
     #            <p>You can specify <code>WORKLOAD_METADATA</code>, <code>APP_REGISTRY</code>, or both.</p>
     #   @return [Array<String>]
     class WorkloadDiscoveryConfig < Struct.new(
+      nil,
       :trusted_advisor_integration_status,
       :workload_resource_definition,
       keyword_init: true
@@ -5429,6 +5620,7 @@ module Aws::WellArchitected
     #   <p>Workload-level: Jira project key to sync workloads to.</p>
     #   @return [String]
     class WorkloadJiraConfigurationInput < Struct.new(
+      nil,
       :issue_management_status,
       :issue_management_type,
       :jira_project_key,
@@ -5451,6 +5643,7 @@ module Aws::WellArchitected
     #   <p>Workload-level: Status message on configuration of the Jira integration.</p>
     #   @return [String]
     class WorkloadJiraConfigurationOutput < Struct.new(
+      nil,
       :issue_management_status,
       :issue_management_type,
       :jira_project_key,
@@ -5468,6 +5661,7 @@ module Aws::WellArchitected
     #   <p>The profile version.</p>
     #   @return [String]
     class WorkloadProfile < Struct.new(
+      nil,
       :profile_arn,
       :profile_version,
       keyword_init: true
@@ -5501,6 +5695,7 @@ module Aws::WellArchitected
     #   <p>The ID assigned to the workload. This ID is unique within an Amazon Web Services Region.</p>
     #   @return [String]
     class WorkloadShare < Struct.new(
+      nil,
       :share_id,
       :shared_by,
       :shared_with,
@@ -5531,6 +5726,7 @@ module Aws::WellArchitected
     #   <p>Optional message to compliment the Status field.</p>
     #   @return [String]
     class WorkloadShareSummary < Struct.new(
+      nil,
       :share_id,
       :shared_with,
       :permission_type,
@@ -5577,6 +5773,7 @@ module Aws::WellArchitected
     #   <p>A map from risk names to the count of how many questions have that rating.</p>
     #   @return [Hash<String, Integer>]
     class WorkloadSummary < Struct.new(
+      nil,
       :workload_id,
       :workload_arn,
       :workload_name,

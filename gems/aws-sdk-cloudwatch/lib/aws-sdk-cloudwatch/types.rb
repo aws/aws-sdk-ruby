@@ -20,6 +20,7 @@ module Aws::CloudWatch
     #   <p>The timestamp when the contributor last transitioned to its current state.</p>
     #   @return [Time]
     class AlarmContributor < Struct.new(
+      nil,
       :contributor_id,
       :contributor_attributes,
       :state_reason,
@@ -55,6 +56,7 @@ module Aws::CloudWatch
     #   <p>A map of attributes that describe the alarm contributor associated with this history item, providing context about the contributor's characteristics at the time of the event.</p>
     #   @return [Hash<String, String>]
     class AlarmHistoryItem < Struct.new(
+      nil,
       :alarm_name,
       :alarm_contributor_id,
       :alarm_type,
@@ -113,6 +115,7 @@ module Aws::CloudWatch
     #   <p>The CloudWatch metric math expression for this anomaly detector.</p>
     #   @return [Types::MetricMathAnomalyDetector]
     class AnomalyDetector < Struct.new(
+      nil,
       :namespace,
       :metric_name,
       :dimensions,
@@ -143,6 +146,7 @@ module Aws::CloudWatch
     #               tz database. For more information, see <a href="https://en.wikipedia.org/wiki/Tz_database">tz database</a>.</p>
     #   @return [String]
     class AnomalyDetectorConfiguration < Struct.new(
+      nil,
       :excluded_time_ranges,
       :metric_timezone,
       keyword_init: true
@@ -240,6 +244,7 @@ module Aws::CloudWatch
     #            </important>
     #   @return [Integer]
     class CompositeAlarm < Struct.new(
+      nil,
       :actions_enabled,
       :alarm_actions,
       :alarm_arn,
@@ -268,6 +273,7 @@ module Aws::CloudWatch
     # @!attribute message
     #   @return [String]
     class ConcurrentModificationException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -278,6 +284,7 @@ module Aws::CloudWatch
     # @!attribute message
     #   @return [String]
     class ConflictException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -300,6 +307,7 @@ module Aws::CloudWatch
     #   <p>The size of the dashboard, in bytes.</p>
     #   @return [Integer]
     class DashboardEntry < Struct.new(
+      nil,
       :dashboard_name,
       :dashboard_arn,
       :last_modified,
@@ -315,6 +323,7 @@ module Aws::CloudWatch
     # @!attribute dashboard_validation_messages
     #   @return [Array<Types::DashboardValidationMessage>]
     class DashboardInvalidInputError < Struct.new(
+      nil,
       :message,
       :dashboard_validation_messages,
       keyword_init: true
@@ -326,6 +335,7 @@ module Aws::CloudWatch
     # @!attribute message
     #   @return [String]
     class DashboardNotFoundError < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -340,6 +350,7 @@ module Aws::CloudWatch
     #   <p>A message describing the error or warning.</p>
     #   @return [String]
     class DashboardValidationMessage < Struct.new(
+      nil,
       :data_path,
       :message,
       keyword_init: true
@@ -375,6 +386,7 @@ module Aws::CloudWatch
     #   <p>The percentile statistic for the data point.</p>
     #   @return [Hash<String, Float>]
     class Datapoint < Struct.new(
+      nil,
       :timestamp,
       :sample_count,
       :average,
@@ -392,6 +404,7 @@ module Aws::CloudWatch
     #   <p>The alarms to be deleted. Do not enclose the alarm names in quote marks.</p>
     #   @return [Array<String>]
     class DeleteAlarmsInput < Struct.new(
+      nil,
       :alarm_names,
       keyword_init: true
     )
@@ -485,6 +498,7 @@ module Aws::CloudWatch
     #               <code>MetricMathAnomalyDetector</code> property.</p>
     #   @return [Types::MetricMathAnomalyDetector]
     class DeleteAnomalyDetectorInput < Struct.new(
+      nil,
       :namespace,
       :metric_name,
       :dimensions,
@@ -497,6 +511,7 @@ module Aws::CloudWatch
     end
 
     class DeleteAnomalyDetectorOutput < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -506,6 +521,7 @@ module Aws::CloudWatch
     #   <p>The dashboards to be deleted. This parameter is required.</p>
     #   @return [Array<String>]
     class DeleteDashboardsInput < Struct.new(
+      nil,
       :dashboard_names,
       keyword_init: true
     )
@@ -513,6 +529,7 @@ module Aws::CloudWatch
     end
 
     class DeleteDashboardsOutput < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -523,6 +540,7 @@ module Aws::CloudWatch
     #               use <a href="https://docs.aws.amazon.com/AmazonCloudWatch/latest/APIReference/API_DescribeInsightRules.html">DescribeInsightRules</a>.</p>
     #   @return [Array<String>]
     class DeleteInsightRulesInput < Struct.new(
+      nil,
       :rule_names,
       keyword_init: true
     )
@@ -534,6 +552,7 @@ module Aws::CloudWatch
     #               rules.</p>
     #   @return [Array<Types::PartialFailure>]
     class DeleteInsightRulesOutput < Struct.new(
+      nil,
       :failures,
       keyword_init: true
     )
@@ -544,6 +563,7 @@ module Aws::CloudWatch
     #   <p>The name of the metric stream to delete.</p>
     #   @return [String]
     class DeleteMetricStreamInput < Struct.new(
+      nil,
       :name,
       keyword_init: true
     )
@@ -551,6 +571,7 @@ module Aws::CloudWatch
     end
 
     class DeleteMetricStreamOutput < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -563,6 +584,7 @@ module Aws::CloudWatch
     #   <p>The token returned by a previous call to indicate that there is more data available.</p>
     #   @return [String]
     class DescribeAlarmContributorsInput < Struct.new(
+      nil,
       :alarm_name,
       :next_token,
       keyword_init: true
@@ -577,6 +599,7 @@ module Aws::CloudWatch
     #   <p>The token that marks the start of the next batch of returned results.</p>
     #   @return [String]
     class DescribeAlarmContributorsOutput < Struct.new(
+      nil,
       :alarm_contributors,
       :next_token,
       keyword_init: true
@@ -617,6 +640,7 @@ module Aws::CloudWatch
     #               first.</p>
     #   @return [String]
     class DescribeAlarmHistoryInput < Struct.new(
+      nil,
       :alarm_name,
       :alarm_contributor_id,
       :alarm_types,
@@ -638,6 +662,7 @@ module Aws::CloudWatch
     #   <p>The token that marks the start of the next batch of returned results.</p>
     #   @return [String]
     class DescribeAlarmHistoryOutput < Struct.new(
+      nil,
       :alarm_history_items,
       :next_token,
       keyword_init: true
@@ -670,6 +695,7 @@ module Aws::CloudWatch
     #   <p>The unit for the metric.</p>
     #   @return [String]
     class DescribeAlarmsForMetricInput < Struct.new(
+      nil,
       :metric_name,
       :namespace,
       :statistic,
@@ -686,6 +712,7 @@ module Aws::CloudWatch
     #   <p>The information for each alarm with the specified metric.</p>
     #   @return [Array<Types::MetricAlarm>]
     class DescribeAlarmsForMetricOutput < Struct.new(
+      nil,
       :metric_alarms,
       keyword_init: true
     )
@@ -762,6 +789,7 @@ module Aws::CloudWatch
     #               available.</p>
     #   @return [String]
     class DescribeAlarmsInput < Struct.new(
+      nil,
       :alarm_names,
       :alarm_name_prefix,
       :alarm_types,
@@ -786,6 +814,7 @@ module Aws::CloudWatch
     #   <p>The token that marks the start of the next batch of returned results.</p>
     #   @return [String]
     class DescribeAlarmsOutput < Struct.new(
+      nil,
       :composite_alarms,
       :metric_alarms,
       :next_token,
@@ -824,6 +853,7 @@ module Aws::CloudWatch
     #               <code>SINGLE_METRIC</code>.</p>
     #   @return [Array<String>]
     class DescribeAnomalyDetectorsInput < Struct.new(
+      nil,
       :next_token,
       :max_results,
       :namespace,
@@ -843,6 +873,7 @@ module Aws::CloudWatch
     #               results.</p>
     #   @return [String]
     class DescribeAnomalyDetectorsOutput < Struct.new(
+      nil,
       :anomaly_detectors,
       :next_token,
       keyword_init: true
@@ -859,6 +890,7 @@ module Aws::CloudWatch
     #               the default of 500 is used.</p>
     #   @return [Integer]
     class DescribeInsightRulesInput < Struct.new(
+      nil,
       :next_token,
       :max_results,
       keyword_init: true
@@ -874,6 +906,7 @@ module Aws::CloudWatch
     #   <p>The rules returned by the operation.</p>
     #   @return [Array<Types::InsightRule>]
     class DescribeInsightRulesOutput < Struct.new(
+      nil,
       :next_token,
       :insight_rules,
       keyword_init: true
@@ -899,6 +932,7 @@ module Aws::CloudWatch
     #               supported as part of dimension values.</p>
     #   @return [String]
     class Dimension < Struct.new(
+      nil,
       :name,
       :value,
       keyword_init: true
@@ -914,6 +948,7 @@ module Aws::CloudWatch
     #   <p>The value of the dimension to be matched.</p>
     #   @return [String]
     class DimensionFilter < Struct.new(
+      nil,
       :name,
       :value,
       keyword_init: true
@@ -925,6 +960,7 @@ module Aws::CloudWatch
     #   <p>The names of the alarms.</p>
     #   @return [Array<String>]
     class DisableAlarmActionsInput < Struct.new(
+      nil,
       :alarm_names,
       keyword_init: true
     )
@@ -936,6 +972,7 @@ module Aws::CloudWatch
     #               rules, use <a href="https://docs.aws.amazon.com/AmazonCloudWatch/latest/APIReference/API_DescribeInsightRules.html">DescribeInsightRules</a>.</p>
     #   @return [Array<String>]
     class DisableInsightRulesInput < Struct.new(
+      nil,
       :rule_names,
       keyword_init: true
     )
@@ -947,6 +984,7 @@ module Aws::CloudWatch
     #               rules.</p>
     #   @return [Array<Types::PartialFailure>]
     class DisableInsightRulesOutput < Struct.new(
+      nil,
       :failures,
       keyword_init: true
     )
@@ -957,6 +995,7 @@ module Aws::CloudWatch
     #   <p>The names of the alarms.</p>
     #   @return [Array<String>]
     class EnableAlarmActionsInput < Struct.new(
+      nil,
       :alarm_names,
       keyword_init: true
     )
@@ -968,6 +1007,7 @@ module Aws::CloudWatch
     #               use <a href="https://docs.aws.amazon.com/AmazonCloudWatch/latest/APIReference/API_DescribeInsightRules.html">DescribeInsightRules</a>.</p>
     #   @return [Array<String>]
     class EnableInsightRulesInput < Struct.new(
+      nil,
       :rule_names,
       keyword_init: true
     )
@@ -979,6 +1019,7 @@ module Aws::CloudWatch
     #               built-in rules.</p>
     #   @return [Array<Types::PartialFailure>]
     class EnableInsightRulesOutput < Struct.new(
+      nil,
       :failures,
       keyword_init: true
     )
@@ -1011,6 +1052,7 @@ module Aws::CloudWatch
     #               telemetry</a> in the <i>CloudWatch User Guide</i>.</p>
     #   @return [Hash<String, String>]
     class Entity < Struct.new(
+      nil,
       :key_attributes,
       :attributes,
       keyword_init: true
@@ -1027,6 +1069,7 @@ module Aws::CloudWatch
     #   <p>The metric data.</p>
     #   @return [Array<Types::MetricDatum>]
     class EntityMetricData < Struct.new(
+      nil,
       :entity,
       :metric_data,
       keyword_init: true
@@ -1038,6 +1081,7 @@ module Aws::CloudWatch
     #   <p>The name of the dashboard to be described.</p>
     #   @return [String]
     class GetDashboardInput < Struct.new(
+      nil,
       :dashboard_name,
       keyword_init: true
     )
@@ -1056,6 +1100,7 @@ module Aws::CloudWatch
     #   <p>The name of the dashboard.</p>
     #   @return [String]
     class GetDashboardOutput < Struct.new(
+      nil,
       :dashboard_arn,
       :dashboard_body,
       :dashboard_name,
@@ -1136,6 +1181,7 @@ module Aws::CloudWatch
     #               <code>Sum</code> and <code>Maximum</code>.</p>
     #   @return [String]
     class GetInsightRuleReportInput < Struct.new(
+      nil,
       :rule_name,
       :start_time,
       :end_time,
@@ -1173,6 +1219,7 @@ module Aws::CloudWatch
     #               request.</p>
     #   @return [Array<Types::InsightRuleMetricDatapoint>]
     class GetInsightRuleReportOutput < Struct.new(
+      nil,
       :key_labels,
       :aggregation_statistic,
       :aggregate_value,
@@ -1254,6 +1301,7 @@ module Aws::CloudWatch
     #               your time zone. </p>
     #   @return [Types::LabelOptions]
     class GetMetricDataInput < Struct.new(
+      nil,
       :metric_data_queries,
       :start_time,
       :end_time,
@@ -1283,6 +1331,7 @@ module Aws::CloudWatch
     #                   <code>MetricDataResult</code> object returned for that metric.</p>
     #   @return [Array<Types::MessageData>]
     class GetMetricDataOutput < Struct.new(
+      nil,
       :metric_data_results,
       :next_token,
       :messages,
@@ -1387,6 +1436,7 @@ module Aws::CloudWatch
     #               CloudWatch does not perform unit conversions.</p>
     #   @return [String]
     class GetMetricStatisticsInput < Struct.new(
+      nil,
       :namespace,
       :metric_name,
       :dimensions,
@@ -1408,6 +1458,7 @@ module Aws::CloudWatch
     #   <p>The data points for the specified metric.</p>
     #   @return [Array<Types::Datapoint>]
     class GetMetricStatisticsOutput < Struct.new(
+      nil,
       :label,
       :datapoints,
       keyword_init: true
@@ -1419,6 +1470,7 @@ module Aws::CloudWatch
     #   <p>The name of the metric stream to retrieve information about.</p>
     #   @return [String]
     class GetMetricStreamInput < Struct.new(
+      nil,
       :name,
       keyword_init: true
     )
@@ -1474,6 +1526,7 @@ module Aws::CloudWatch
     #               to.</p>
     #   @return [Boolean]
     class GetMetricStreamOutput < Struct.new(
+      nil,
       :arn,
       :name,
       :include_filters,
@@ -1543,6 +1596,7 @@ module Aws::CloudWatch
     #               image.</p>
     #   @return [String]
     class GetMetricWidgetImageInput < Struct.new(
+      nil,
       :metric_widget,
       :output_format,
       keyword_init: true
@@ -1555,6 +1609,7 @@ module Aws::CloudWatch
     #               base64-encoded.</p>
     #   @return [String]
     class GetMetricWidgetImageOutput < Struct.new(
+      nil,
       :metric_widget_image,
       keyword_init: true
     )
@@ -1589,6 +1644,7 @@ module Aws::CloudWatch
     #               that have <a href="https://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/CloudWatch-Logs-Transformation.html">Log transformation</a> enabled. If this is <code>false</code>, log events are evaluated before they are transformed.</p>
     #   @return [Boolean]
     class InsightRule < Struct.new(
+      nil,
       :name,
       :state,
       :schema,
@@ -1618,6 +1674,7 @@ module Aws::CloudWatch
     #               when this contributor appeared are included in the array.</p>
     #   @return [Array<Types::InsightRuleContributorDatapoint>]
     class InsightRuleContributor < Struct.new(
+      nil,
       :keys,
       :approximate_aggregate_value,
       :datapoints,
@@ -1635,6 +1692,7 @@ module Aws::CloudWatch
     #   <p>The approximate value that this contributor added during this timestamp.</p>
     #   @return [Float]
     class InsightRuleContributorDatapoint < Struct.new(
+      nil,
       :timestamp,
       :approximate_value,
       keyword_init: true
@@ -1690,6 +1748,7 @@ module Aws::CloudWatch
     #               in your request.</p>
     #   @return [Float]
     class InsightRuleMetricDatapoint < Struct.new(
+      nil,
       :timestamp,
       :unique_contributors,
       :max_contributor_value,
@@ -1709,6 +1768,7 @@ module Aws::CloudWatch
     #   <p></p>
     #   @return [String]
     class InternalServiceFault < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -1720,6 +1780,7 @@ module Aws::CloudWatch
     #   <p></p>
     #   @return [String]
     class InvalidFormatFault < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -1731,6 +1792,7 @@ module Aws::CloudWatch
     #   <p></p>
     #   @return [String]
     class InvalidNextToken < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -1742,6 +1804,7 @@ module Aws::CloudWatch
     #   <p></p>
     #   @return [String]
     class InvalidParameterCombinationException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -1753,6 +1816,7 @@ module Aws::CloudWatch
     #   <p></p>
     #   @return [String]
     class InvalidParameterValueException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -1774,6 +1838,7 @@ module Aws::CloudWatch
     #               minutes ahead of UTC. The default is +0000. </p>
     #   @return [String]
     class LabelOptions < Struct.new(
+      nil,
       :timezone,
       keyword_init: true
     )
@@ -1784,6 +1849,7 @@ module Aws::CloudWatch
     # @!attribute message
     #   @return [String]
     class LimitExceededException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -1795,6 +1861,7 @@ module Aws::CloudWatch
     #   <p></p>
     #   @return [String]
     class LimitExceededFault < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -1811,6 +1878,7 @@ module Aws::CloudWatch
     #               available.</p>
     #   @return [String]
     class ListDashboardsInput < Struct.new(
+      nil,
       :dashboard_name_prefix,
       :next_token,
       keyword_init: true
@@ -1825,6 +1893,7 @@ module Aws::CloudWatch
     #   <p>The token that marks the start of the next batch of returned results.</p>
     #   @return [String]
     class ListDashboardsOutput < Struct.new(
+      nil,
       :dashboard_entries,
       :next_token,
       keyword_init: true
@@ -1845,6 +1914,7 @@ module Aws::CloudWatch
     #               the default number is used. The default number is <code>100</code>. </p>
     #   @return [Integer]
     class ListManagedInsightRulesInput < Struct.new(
+      nil,
       :resource_arn,
       :next_token,
       :max_results,
@@ -1862,6 +1932,7 @@ module Aws::CloudWatch
     #               previous operation. </p>
     #   @return [String]
     class ListManagedInsightRulesOutput < Struct.new(
+      nil,
       :managed_rules,
       :next_token,
       keyword_init: true
@@ -1877,6 +1948,7 @@ module Aws::CloudWatch
     #   <p>The maximum number of results to return in one operation.</p>
     #   @return [Integer]
     class ListMetricStreamsInput < Struct.new(
+      nil,
       :next_token,
       :max_results,
       keyword_init: true
@@ -1892,6 +1964,7 @@ module Aws::CloudWatch
     #   <p>The array of metric stream information.</p>
     #   @return [Array<Types::MetricStreamEntry>]
     class ListMetricStreamsOutput < Struct.new(
+      nil,
       :next_token,
       :entries,
       keyword_init: true
@@ -1934,6 +2007,7 @@ module Aws::CloudWatch
     #               and also specify <code>true</code> for <code>IncludeLinkedAccounts</code>.</p>
     #   @return [String]
     class ListMetricsInput < Struct.new(
+      nil,
       :namespace,
       :metric_name,
       :dimensions,
@@ -1960,6 +2034,7 @@ module Aws::CloudWatch
     #               owning account.</p>
     #   @return [Array<String>]
     class ListMetricsOutput < Struct.new(
+      nil,
       :metrics,
       :next_token,
       :owning_accounts,
@@ -1982,6 +2057,7 @@ module Aws::CloudWatch
     #                   Services General Reference</i>.</p>
     #   @return [String]
     class ListTagsForResourceInput < Struct.new(
+      nil,
       :resource_arn,
       keyword_init: true
     )
@@ -1992,6 +2068,7 @@ module Aws::CloudWatch
     #   <p>The list of tag keys and values associated with the resource you specified.</p>
     #   @return [Array<Types::Tag>]
     class ListTagsForResourceOutput < Struct.new(
+      nil,
       :tags,
       keyword_init: true
     )
@@ -2022,6 +2099,7 @@ module Aws::CloudWatch
     #               <code>TagResource</code>. </p>
     #   @return [Array<Types::Tag>]
     class ManagedRule < Struct.new(
+      nil,
       :template_name,
       :resource_arn,
       :tags,
@@ -2047,6 +2125,7 @@ module Aws::CloudWatch
     #               resource. </p>
     #   @return [Types::ManagedRuleState]
     class ManagedRuleDescription < Struct.new(
+      nil,
       :template_name,
       :resource_arn,
       :rule_state,
@@ -2064,6 +2143,7 @@ module Aws::CloudWatch
     #   <p> Indicates whether the rule is enabled or disabled. </p>
     #   @return [String]
     class ManagedRuleState < Struct.new(
+      nil,
       :rule_name,
       :state,
       keyword_init: true
@@ -2085,6 +2165,7 @@ module Aws::CloudWatch
     #   <p>The message text.</p>
     #   @return [String]
     class MessageData < Struct.new(
+      nil,
       :code,
       :value,
       keyword_init: true
@@ -2103,6 +2184,7 @@ module Aws::CloudWatch
     #   <p>The dimensions for the metric.</p>
     #   @return [Array<Types::Dimension>]
     class Metric < Struct.new(
+      nil,
       :namespace,
       :metric_name,
       :dimensions,
@@ -2229,6 +2311,7 @@ module Aws::CloudWatch
     #               changed.</p>
     #   @return [Time]
     class MetricAlarm < Struct.new(
+      nil,
       :alarm_name,
       :alarm_arn,
       :alarm_description,
@@ -2272,6 +2355,7 @@ module Aws::CloudWatch
     #               anomalies.</p>
     #   @return [Boolean]
     class MetricCharacteristics < Struct.new(
+      nil,
       :periodic_spikes,
       keyword_init: true
     )
@@ -2366,6 +2450,7 @@ module Aws::CloudWatch
     #               which account contains the metric that the alarm is watching.</p>
     #   @return [String]
     class MetricDataQuery < Struct.new(
+      nil,
       :id,
       :metric_stat,
       :expression,
@@ -2410,6 +2495,7 @@ module Aws::CloudWatch
     #   <p>A list of messages with additional information about the data returned.</p>
     #   @return [Array<Types::MessageData>]
     class MetricDataResult < Struct.new(
+      nil,
       :id,
       :label,
       :timestamps,
@@ -2480,6 +2566,7 @@ module Aws::CloudWatch
     #               used.</p>
     #   @return [Integer]
     class MetricDatum < Struct.new(
+      nil,
       :metric_name,
       :dimensions,
       :timestamp,
@@ -2508,6 +2595,7 @@ module Aws::CloudWatch
     #               designated expression must return a single time series.</p>
     #   @return [Array<Types::MetricDataQuery>]
     class MetricMathAnomalyDetector < Struct.new(
+      nil,
       :metric_data_queries,
       keyword_init: true
     )
@@ -2559,6 +2647,7 @@ module Aws::CloudWatch
     #               CloudWatch does not perform unit conversions.</p>
     #   @return [String]
     class MetricStat < Struct.new(
+      nil,
       :metric,
       :period,
       :stat,
@@ -2595,6 +2684,7 @@ module Aws::CloudWatch
     #               <code>opentelemetry1.0</code>, and <code>opentelemetry0.7</code>.</p>
     #   @return [String]
     class MetricStreamEntry < Struct.new(
+      nil,
       :arn,
       :creation_date,
       :last_update_date,
@@ -2627,6 +2717,7 @@ module Aws::CloudWatch
     #               126). Each metric name must contain at least one non-whitespace character.</p>
     #   @return [Array<String>]
     class MetricStreamFilter < Struct.new(
+      nil,
       :namespace,
       :metric_names,
       keyword_init: true
@@ -2663,6 +2754,7 @@ module Aws::CloudWatch
     #               <code>wm90</code>, <code>PR(:300)</code>, and so on.</p>
     #   @return [Array<String>]
     class MetricStreamStatisticsConfiguration < Struct.new(
+      nil,
       :include_metrics,
       :additional_statistics,
       keyword_init: true
@@ -2679,6 +2771,7 @@ module Aws::CloudWatch
     #   <p>The name of the metric.</p>
     #   @return [String]
     class MetricStreamStatisticsMetric < Struct.new(
+      nil,
       :namespace,
       :metric_name,
       keyword_init: true
@@ -2691,6 +2784,7 @@ module Aws::CloudWatch
     #   <p></p>
     #   @return [String]
     class MissingRequiredParameterException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -2713,6 +2807,7 @@ module Aws::CloudWatch
     #   <p>A description of the error.</p>
     #   @return [String]
     class PartialFailure < Struct.new(
+      nil,
       :failure_resource,
       :exception_type,
       :failure_code,
@@ -2822,6 +2917,7 @@ module Aws::CloudWatch
     #               <code>MetricMathAnomalyDetector</code>.</p>
     #   @return [Types::MetricMathAnomalyDetector]
     class PutAnomalyDetectorInput < Struct.new(
+      nil,
       :namespace,
       :metric_name,
       :dimensions,
@@ -2836,6 +2932,7 @@ module Aws::CloudWatch
     end
 
     class PutAnomalyDetectorOutput < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -3080,6 +3177,7 @@ module Aws::CloudWatch
     #            </important>
     #   @return [Integer]
     class PutCompositeAlarmInput < Struct.new(
+      nil,
       :actions_enabled,
       :alarm_actions,
       :alarm_description,
@@ -3108,6 +3206,7 @@ module Aws::CloudWatch
     #            <p>For more information about the syntax, see <a href="https://docs.aws.amazon.com/AmazonCloudWatch/latest/APIReference/CloudWatch-Dashboard-Body-Structure.html">Dashboard Body Structure and Syntax</a>.</p>
     #   @return [String]
     class PutDashboardInput < Struct.new(
+      nil,
       :dashboard_name,
       :dashboard_body,
       keyword_init: true
@@ -3125,6 +3224,7 @@ module Aws::CloudWatch
     #               failed.</p>
     #   @return [Array<Types::DashboardValidationMessage>]
     class PutDashboardOutput < Struct.new(
+      nil,
       :dashboard_validation_messages,
       keyword_init: true
     )
@@ -3168,6 +3268,7 @@ module Aws::CloudWatch
     #            </note>
     #   @return [Boolean]
     class PutInsightRuleInput < Struct.new(
+      nil,
       :rule_name,
       :rule_state,
       :rule_definition,
@@ -3179,6 +3280,7 @@ module Aws::CloudWatch
     end
 
     class PutInsightRuleOutput < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -3188,6 +3290,7 @@ module Aws::CloudWatch
     #   <p> A list of <code>ManagedRules</code> to enable. </p>
     #   @return [Array<Types::ManagedRule>]
     class PutManagedInsightRulesInput < Struct.new(
+      nil,
       :managed_rules,
       keyword_init: true
     )
@@ -3198,6 +3301,7 @@ module Aws::CloudWatch
     #   <p> An array that lists the rules that could not be enabled. </p>
     #   @return [Array<Types::PartialFailure>]
     class PutManagedInsightRulesOutput < Struct.new(
+      nil,
       :failures,
       keyword_init: true
     )
@@ -3770,6 +3874,7 @@ module Aws::CloudWatch
     #            <p>If your alarm uses this parameter, it cannot have Auto Scaling actions.</p>
     #   @return [String]
     class PutMetricAlarmInput < Struct.new(
+      nil,
       :alarm_name,
       :alarm_description,
       :actions_enabled,
@@ -3877,6 +3982,7 @@ module Aws::CloudWatch
     #               included.</p>
     #   @return [Boolean]
     class PutMetricDataInput < Struct.new(
+      nil,
       :namespace,
       :metric_data,
       :entity_metric_data,
@@ -3958,6 +4064,7 @@ module Aws::CloudWatch
     #               to include metrics from source accounts in the metric stream.</p>
     #   @return [Boolean]
     class PutMetricStreamInput < Struct.new(
+      nil,
       :name,
       :include_filters,
       :exclude_filters,
@@ -3976,6 +4083,7 @@ module Aws::CloudWatch
     #   <p>The ARN of the metric stream.</p>
     #   @return [String]
     class PutMetricStreamOutput < Struct.new(
+      nil,
       :arn,
       keyword_init: true
     )
@@ -3995,6 +4103,7 @@ module Aws::CloudWatch
     #               <code>2019-07-01T23:59:59</code>.</p>
     #   @return [Time]
     class Range < Struct.new(
+      nil,
       :start_time,
       :end_time,
       keyword_init: true
@@ -4007,6 +4116,7 @@ module Aws::CloudWatch
     #   <p></p>
     #   @return [String]
     class ResourceNotFound < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -4021,6 +4131,7 @@ module Aws::CloudWatch
     # @!attribute message
     #   @return [String]
     class ResourceNotFoundException < Struct.new(
+      nil,
       :resource_type,
       :resource_id,
       :message,
@@ -4045,6 +4156,7 @@ module Aws::CloudWatch
     #               in this field to take the correct action.</p>
     #   @return [String]
     class SetAlarmStateInput < Struct.new(
+      nil,
       :alarm_name,
       :state_value,
       :state_reason,
@@ -4076,6 +4188,7 @@ module Aws::CloudWatch
     #   <p>The statistic to use for the metric and anomaly detection model.</p>
     #   @return [String]
     class SingleMetricAnomalyDetector < Struct.new(
+      nil,
       :account_id,
       :namespace,
       :metric_name,
@@ -4093,6 +4206,7 @@ module Aws::CloudWatch
     #               operation will start streaming.</p>
     #   @return [Array<String>]
     class StartMetricStreamsInput < Struct.new(
+      nil,
       :names,
       keyword_init: true
     )
@@ -4100,6 +4214,7 @@ module Aws::CloudWatch
     end
 
     class StartMetricStreamsOutput < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -4119,6 +4234,7 @@ module Aws::CloudWatch
     #   <p>The maximum value of the sample set.</p>
     #   @return [Float]
     class StatisticSet < Struct.new(
+      nil,
       :sample_count,
       :sum,
       :minimum,
@@ -4135,6 +4251,7 @@ module Aws::CloudWatch
     #               operation will stop streaming.</p>
     #   @return [Array<String>]
     class StopMetricStreamsInput < Struct.new(
+      nil,
       :names,
       keyword_init: true
     )
@@ -4142,6 +4259,7 @@ module Aws::CloudWatch
     end
 
     class StopMetricStreamsOutput < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -4156,6 +4274,7 @@ module Aws::CloudWatch
     #   <p>The value for the specified tag key.</p>
     #   @return [String]
     class Tag < Struct.new(
+      nil,
       :key,
       :value,
       keyword_init: true
@@ -4180,6 +4299,7 @@ module Aws::CloudWatch
     #   <p>The list of key-value pairs to associate with the alarm.</p>
     #   @return [Array<Types::Tag>]
     class TagResourceInput < Struct.new(
+      nil,
       :resource_arn,
       :tags,
       keyword_init: true
@@ -4188,6 +4308,7 @@ module Aws::CloudWatch
     end
 
     class TagResourceOutput < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -4210,6 +4331,7 @@ module Aws::CloudWatch
     #   <p>The list of tag keys to remove from the resource.</p>
     #   @return [Array<String>]
     class UntagResourceInput < Struct.new(
+      nil,
       :resource_arn,
       :tag_keys,
       keyword_init: true
@@ -4218,6 +4340,7 @@ module Aws::CloudWatch
     end
 
     class UntagResourceOutput < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure

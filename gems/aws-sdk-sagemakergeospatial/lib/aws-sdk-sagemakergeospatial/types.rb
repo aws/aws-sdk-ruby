@@ -10,6 +10,7 @@ module Aws::SageMakerGeospatial
     # @!attribute message
     #   @return [String]
     class AccessDeniedException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -56,6 +57,7 @@ module Aws::SageMakerGeospatial
     #   <p>Link to the asset object.</p>
     #   @return [String]
     class AssetValue < Struct.new(
+      nil,
       :href,
       keyword_init: true
     )
@@ -73,6 +75,7 @@ module Aws::SageMakerGeospatial
     #   <p>CustomIndices that are computed.</p>
     #   @return [Types::CustomIndicesInput]
     class BandMathConfigInput < Struct.new(
+      nil,
       :predefined_indices,
       :custom_indices,
       keyword_init: true
@@ -82,6 +85,7 @@ module Aws::SageMakerGeospatial
 
     # <p>Input structure for CloudMasking operation type.</p>
     class CloudMaskingConfigInput < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -98,6 +102,7 @@ module Aws::SageMakerGeospatial
     #   <p>TargetBands to be returned in the output of CloudRemoval operation.</p>
     #   @return [Array<String>]
     class CloudRemovalConfigInput < Struct.new(
+      nil,
       :algorithm_name,
       :interpolation_value,
       :target_bands,
@@ -113,6 +118,7 @@ module Aws::SageMakerGeospatial
     #   <p>Identifier of the resource affected.</p>
     #   @return [String]
     class ConflictException < Struct.new(
+      nil,
       :message,
       :resource_id,
       keyword_init: true
@@ -125,6 +131,7 @@ module Aws::SageMakerGeospatial
     #   <p>A list of BandMath indices to compute.</p>
     #   @return [Array<Types::Operation>]
     class CustomIndicesInput < Struct.new(
+      nil,
       :operations,
       keyword_init: true
     )
@@ -135,6 +142,7 @@ module Aws::SageMakerGeospatial
     #   <p>The Amazon Resource Name (ARN) of the Earth Observation job being deleted.</p>
     #   @return [String]
     class DeleteEarthObservationJobInput < Struct.new(
+      nil,
       :arn,
       keyword_init: true
     )
@@ -142,6 +150,7 @@ module Aws::SageMakerGeospatial
     end
 
     class DeleteEarthObservationJobOutput < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -151,6 +160,7 @@ module Aws::SageMakerGeospatial
     #   <p>The Amazon Resource Name (ARN) of the Vector Enrichment job being deleted.</p>
     #   @return [String]
     class DeleteVectorEnrichmentJobInput < Struct.new(
+      nil,
       :arn,
       keyword_init: true
     )
@@ -158,6 +168,7 @@ module Aws::SageMakerGeospatial
     end
 
     class DeleteVectorEnrichmentJobOutput < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -171,6 +182,7 @@ module Aws::SageMakerGeospatial
     #   <p>A detailed message describing the error in an Earth Observation job.</p>
     #   @return [String]
     class EarthObservationJobErrorDetails < Struct.new(
+      nil,
       :type,
       :message,
       keyword_init: true
@@ -186,6 +198,7 @@ module Aws::SageMakerGeospatial
     #   <p>Upper bound for EoCloudCover.</p>
     #   @return [Float]
     class EoCloudCoverInput < Struct.new(
+      nil,
       :lower_bound,
       :upper_bound,
       keyword_init: true
@@ -209,6 +222,7 @@ module Aws::SageMakerGeospatial
     #   <p>The source images provided to the Earth Observation job being exported.</p>
     #   @return [Boolean]
     class ExportEarthObservationJobOperationInput < Struct.new(
+      nil,
       :arn,
       :client_token,
       :execution_role_arn,
@@ -238,6 +252,7 @@ module Aws::SageMakerGeospatial
     #   <p>The source images provided to the Earth Observation job being exported.</p>
     #   @return [Boolean]
     class ExportEarthObservationJobOperationOutput < Struct.new(
+      nil,
       :arn,
       :creation_time,
       :export_status,
@@ -258,6 +273,7 @@ module Aws::SageMakerGeospatial
     #         while exporting the source images of an Earth Observation job.</p>
     #   @return [Types::ExportErrorDetailsOutput]
     class ExportErrorDetails < Struct.new(
+      nil,
       :export_results,
       :export_source_images,
       keyword_init: true
@@ -273,6 +289,7 @@ module Aws::SageMakerGeospatial
     #   <p>A detailed message describing the error in an export EarthObservationJob operation.</p>
     #   @return [String]
     class ExportErrorDetailsOutput < Struct.new(
+      nil,
       :type,
       :message,
       keyword_init: true
@@ -288,6 +305,7 @@ module Aws::SageMakerGeospatial
     #   <p>The Key Management Service key ID for server-side encryption.</p>
     #   @return [String]
     class ExportS3DataInput < Struct.new(
+      nil,
       :s3_uri,
       :kms_key_id,
       keyword_init: true
@@ -309,6 +327,7 @@ module Aws::SageMakerGeospatial
     #   </p>
     #   @return [Types::ExportVectorEnrichmentJobOutputConfig]
     class ExportVectorEnrichmentJobInput < Struct.new(
+      nil,
       :arn,
       :client_token,
       :execution_role_arn,
@@ -335,6 +354,7 @@ module Aws::SageMakerGeospatial
     #   </p>
     #   @return [Types::ExportVectorEnrichmentJobOutputConfig]
     class ExportVectorEnrichmentJobOutput < Struct.new(
+      nil,
       :arn,
       :creation_time,
       :execution_role_arn,
@@ -350,6 +370,7 @@ module Aws::SageMakerGeospatial
     #   <p>The input structure for Amazon S3 data; representing the Amazon S3 location of the input data objects.</p>
     #   @return [Types::VectorEnrichmentJobS3Data]
     class ExportVectorEnrichmentJobOutputConfig < Struct.new(
+      nil,
       :s3_data,
       keyword_init: true
     )
@@ -370,6 +391,7 @@ module Aws::SageMakerGeospatial
     #   <p>The maximum value of the filter.</p>
     #   @return [Float]
     class Filter < Struct.new(
+      nil,
       :name,
       :type,
       :minimum,
@@ -387,6 +409,7 @@ module Aws::SageMakerGeospatial
     #   <p>The target bands for geomosaic.</p>
     #   @return [Array<String>]
     class GeoMosaicConfigInput < Struct.new(
+      nil,
       :algorithm_name,
       :target_bands,
       keyword_init: true
@@ -403,6 +426,7 @@ module Aws::SageMakerGeospatial
     #   <p>The coordinates of the GeoJson Geometry.</p>
     #   @return [Array<Array<Array<Float>>>]
     class Geometry < Struct.new(
+      nil,
       :type,
       :coordinates,
       keyword_init: true
@@ -414,6 +438,7 @@ module Aws::SageMakerGeospatial
     #   <p>The Amazon Resource Name (ARN) of the Earth Observation job.</p>
     #   @return [String]
     class GetEarthObservationJobInput < Struct.new(
+      nil,
       :arn,
       keyword_init: true
     )
@@ -463,6 +488,7 @@ module Aws::SageMakerGeospatial
     #   <p>Each tag consists of a key and a value.</p>
     #   @return [Hash<String, String>]
     class GetEarthObservationJobOutput < Struct.new(
+      nil,
       :arn,
       :name,
       :creation_time,
@@ -486,6 +512,7 @@ module Aws::SageMakerGeospatial
     #   <p>The Amazon Resource Name (ARN) of the raster data collection.</p>
     #   @return [String]
     class GetRasterDataCollectionOperationInput < Struct.new(
+      nil,
       :arn,
       keyword_init: true
     )
@@ -517,6 +544,7 @@ module Aws::SageMakerGeospatial
     #   <p>Each tag consists of a key and a value.</p>
     #   @return [Hash<String, String>]
     class GetRasterDataCollectionOperationOutput < Struct.new(
+      nil,
       :name,
       :arn,
       :type,
@@ -567,6 +595,7 @@ module Aws::SageMakerGeospatial
     #   <p>The Amazon Resource Name (ARN) of the IAM role that you specify.</p>
     #   @return [String]
     class GetTileInput < Struct.new(
+      nil,
       :x,
       :y,
       :z,
@@ -588,6 +617,7 @@ module Aws::SageMakerGeospatial
     #   <p>The output binary file.</p>
     #   @return [String]
     class GetTileOutput < Struct.new(
+      nil,
       :binary_file,
       keyword_init: true
     )
@@ -603,6 +633,7 @@ module Aws::SageMakerGeospatial
     #   <p>The Amazon Resource Name (ARN) of the Vector Enrichment job.</p>
     #   @return [String]
     class GetVectorEnrichmentJobInput < Struct.new(
+      nil,
       :arn,
       keyword_init: true
     )
@@ -652,6 +683,7 @@ module Aws::SageMakerGeospatial
     #   <p>Each tag consists of a key and a value.</p>
     #   @return [Hash<String, String>]
     class GetVectorEnrichmentJobOutput < Struct.new(
+      nil,
       :arn,
       :type,
       :name,
@@ -680,6 +712,7 @@ module Aws::SageMakerGeospatial
     #         the Area of Interest, RasterDataCollectionArn,TimeRange and Property Filters.</p>
     #   @return [Types::RasterDataCollectionQueryInput]
     class InputConfigInput < Struct.new(
+      nil,
       :previous_earth_observation_job_arn,
       :raster_data_collection_query,
       keyword_init: true
@@ -696,6 +729,7 @@ module Aws::SageMakerGeospatial
     #         RasterDataCollectionArn, RasterDataCollectionName, TimeRange, and Property Filters.</p>
     #   @return [Types::RasterDataCollectionQueryOutput]
     class InputConfigOutput < Struct.new(
+      nil,
       :previous_earth_observation_job_arn,
       :raster_data_collection_query,
       keyword_init: true
@@ -710,6 +744,7 @@ module Aws::SageMakerGeospatial
     #   <p/>
     #   @return [String]
     class InternalServerException < Struct.new(
+      nil,
       :message,
       :resource_id,
       keyword_init: true
@@ -735,6 +770,7 @@ module Aws::SageMakerGeospatial
     #   <p>This field contains additional properties of the item.</p>
     #   @return [Types::Properties]
     class ItemSource < Struct.new(
+      nil,
       :id,
       :geometry,
       :assets,
@@ -802,6 +838,7 @@ module Aws::SageMakerGeospatial
 
     # <p>The input structure for Land Cover Operation type.</p>
     class LandCoverSegmentationConfigInput < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -817,6 +854,7 @@ module Aws::SageMakerGeospatial
     #         This will filter items having Land Cloud Cover less than or equal to this value.</p>
     #   @return [Float]
     class LandsatCloudCoverLandInput < Struct.new(
+      nil,
       :lower_bound,
       :upper_bound,
       keyword_init: true
@@ -847,6 +885,7 @@ module Aws::SageMakerGeospatial
     #   <p>Each tag consists of a key and a value.</p>
     #   @return [Hash<String, String>]
     class ListEarthObservationJobOutputConfig < Struct.new(
+      nil,
       :arn,
       :name,
       :creation_time,
@@ -876,6 +915,7 @@ module Aws::SageMakerGeospatial
     #   <p>The total number of items to return.</p>
     #   @return [Integer]
     class ListEarthObservationJobsInput < Struct.new(
+      nil,
       :status_equals,
       :sort_order,
       :sort_by,
@@ -894,6 +934,7 @@ module Aws::SageMakerGeospatial
     #            Use it in your next request to receive the next set of results.</p>
     #   @return [String]
     class ListEarthObservationJobsOutput < Struct.new(
+      nil,
       :earth_observation_job_summaries,
       :next_token,
       keyword_init: true
@@ -909,6 +950,7 @@ module Aws::SageMakerGeospatial
     #   <p>The total number of items to return.</p>
     #   @return [Integer]
     class ListRasterDataCollectionsOperationInput < Struct.new(
+      nil,
       :next_token,
       :max_results,
       keyword_init: true
@@ -924,6 +966,7 @@ module Aws::SageMakerGeospatial
     #            Use it in your next request to receive the next set of results.</p>
     #   @return [String]
     class ListRasterDataCollectionsOperationOutput < Struct.new(
+      nil,
       :raster_data_collection_summaries,
       :next_token,
       keyword_init: true
@@ -935,6 +978,7 @@ module Aws::SageMakerGeospatial
     #   <p>The Amazon Resource Name (ARN) of the resource you want to tag.</p>
     #   @return [String]
     class ListTagsForResourceInput < Struct.new(
+      nil,
       :resource_arn,
       keyword_init: true
     )
@@ -945,6 +989,7 @@ module Aws::SageMakerGeospatial
     #   <p>Each tag consists of a key and a value.</p>
     #   @return [Hash<String, String>]
     class ListTagsForResourceOutput < Struct.new(
+      nil,
       :tags,
       keyword_init: true
     )
@@ -974,6 +1019,7 @@ module Aws::SageMakerGeospatial
     #   <p>Each tag consists of a key and a value.</p>
     #   @return [Hash<String, String>]
     class ListVectorEnrichmentJobOutputConfig < Struct.new(
+      nil,
       :arn,
       :name,
       :type,
@@ -1003,6 +1049,7 @@ module Aws::SageMakerGeospatial
     #   <p>The maximum number of items to return.</p>
     #   @return [Integer]
     class ListVectorEnrichmentJobsInput < Struct.new(
+      nil,
       :status_equals,
       :sort_order,
       :sort_by,
@@ -1021,6 +1068,7 @@ module Aws::SageMakerGeospatial
     #            Use it in your next request to receive the next set of results.</p>
     #   @return [String]
     class ListVectorEnrichmentJobsOutput < Struct.new(
+      nil,
       :vector_enrichment_job_summaries,
       :next_token,
       keyword_init: true
@@ -1042,6 +1090,7 @@ module Aws::SageMakerGeospatial
     #   <p>The name of the timestamp attribute.</p>
     #   @return [String]
     class MapMatchingConfig < Struct.new(
+      nil,
       :id_attribute_name,
       :y_attribute_name,
       :x_attribute_name,
@@ -1056,6 +1105,7 @@ module Aws::SageMakerGeospatial
     #   <p>The coordinates of the multipolygon geometry.</p>
     #   @return [Array<Array<Array<Array<Float>>>>]
     class MultiPolygonGeometryInput < Struct.new(
+      nil,
       :coordinates,
       keyword_init: true
     )
@@ -1073,6 +1123,7 @@ module Aws::SageMakerGeospatial
     #   <p>The type of the operation.</p>
     #   @return [String]
     class Operation < Struct.new(
+      nil,
       :name,
       :equation,
       :output_type,
@@ -1089,6 +1140,7 @@ module Aws::SageMakerGeospatial
     #   <p>The datatype of the output band.</p>
     #   @return [String]
     class OutputBand < Struct.new(
+      nil,
       :band_name,
       :output_data_type,
       keyword_init: true
@@ -1101,6 +1153,7 @@ module Aws::SageMakerGeospatial
     #   <p>Path to Amazon S3 storage location for the output configuration file.</p>
     #   @return [Types::ExportS3DataInput]
     class OutputConfigInput < Struct.new(
+      nil,
       :s3_data,
       keyword_init: true
     )
@@ -1114,6 +1167,7 @@ module Aws::SageMakerGeospatial
     #         of Resampling operation defined by value and unit.</p>
     #   @return [Types::UserDefined]
     class OutputResolutionResamplingInput < Struct.new(
+      nil,
       :user_defined,
       keyword_init: true
     )
@@ -1128,6 +1182,7 @@ module Aws::SageMakerGeospatial
     #   <p>The structure representing User Output Resolution for a Stacking operation defined as a value and unit.</p>
     #   @return [Types::UserDefined]
     class OutputResolutionStackInput < Struct.new(
+      nil,
       :predefined,
       :user_defined,
       keyword_init: true
@@ -1145,6 +1200,7 @@ module Aws::SageMakerGeospatial
     #   <p>The ComparisonOperator to use with PlatformInput.</p>
     #   @return [String]
     class PlatformInput < Struct.new(
+      nil,
       :value,
       :comparison_operator,
       keyword_init: true
@@ -1157,6 +1213,7 @@ module Aws::SageMakerGeospatial
     #   <p>Coordinates representing a Polygon based on the <a href="https://www.rfc-editor.org/rfc/rfc7946#section-3.1.6">GeoJson spec</a>.</p>
     #   @return [Array<Array<Array<Float>>>]
     class PolygonGeometryInput < Struct.new(
+      nil,
       :coordinates,
       keyword_init: true
     )
@@ -1188,6 +1245,7 @@ module Aws::SageMakerGeospatial
     #   <p>Land cloud cover for Landsat Data Collection.</p>
     #   @return [Float]
     class Properties < Struct.new(
+      nil,
       :eo_cloud_cover,
       :view_off_nadir,
       :view_sun_azimuth,
@@ -1245,6 +1303,7 @@ module Aws::SageMakerGeospatial
     #   <p>Represents a single property to match with when searching a raster data collection.</p>
     #   @return [Types::Property]
     class PropertyFilter < Struct.new(
+      nil,
       :property,
       keyword_init: true
     )
@@ -1259,6 +1318,7 @@ module Aws::SageMakerGeospatial
     #   <p>The Logical Operator used to combine the Property Filters.</p>
     #   @return [String]
     class PropertyFilters < Struct.new(
+      nil,
       :properties,
       :logical_operator,
       keyword_init: true
@@ -1289,6 +1349,7 @@ module Aws::SageMakerGeospatial
     #   <p>Each tag consists of a key and a value.</p>
     #   @return [Hash<String, String>]
     class RasterDataCollectionMetadata < Struct.new(
+      nil,
       :name,
       :arn,
       :type,
@@ -1315,6 +1376,7 @@ module Aws::SageMakerGeospatial
     #   <p>The list of Property filters used in the Raster Data Collection Query.</p>
     #   @return [Types::PropertyFilters]
     class RasterDataCollectionQueryInput < Struct.new(
+      nil,
       :raster_data_collection_arn,
       :time_range_filter,
       :area_of_interest,
@@ -1342,6 +1404,7 @@ module Aws::SageMakerGeospatial
     #   <p>Property filters used in the search.</p>
     #   @return [Types::PropertyFilters]
     class RasterDataCollectionQueryOutput < Struct.new(
+      nil,
       :raster_data_collection_arn,
       :raster_data_collection_name,
       :time_range_filter,
@@ -1366,6 +1429,7 @@ module Aws::SageMakerGeospatial
     #   <p>The list of Bands to be displayed in the result for each item.</p>
     #   @return [Array<String>]
     class RasterDataCollectionQueryWithBandFilterInput < Struct.new(
+      nil,
       :time_range_filter,
       :area_of_interest,
       :property_filters,
@@ -1387,6 +1451,7 @@ module Aws::SageMakerGeospatial
     #   <p>Bands used in the operation. If no target bands are specified, it uses all bands available in the input.</p>
     #   @return [Array<String>]
     class ResamplingConfigInput < Struct.new(
+      nil,
       :output_resolution,
       :algorithm_name,
       :target_bands,
@@ -1402,6 +1467,7 @@ module Aws::SageMakerGeospatial
     #   <p>Identifier of the resource that was not found.</p>
     #   @return [String]
     class ResourceNotFoundException < Struct.new(
+      nil,
       :message,
       :resource_id,
       keyword_init: true
@@ -1417,6 +1483,7 @@ module Aws::SageMakerGeospatial
     #   <p>The field name for the data that describes x-axis coordinate, eg. longitude of a point.</p>
     #   @return [String]
     class ReverseGeocodingConfig < Struct.new(
+      nil,
       :y_attribute_name,
       :x_attribute_name,
       keyword_init: true
@@ -1436,6 +1503,7 @@ module Aws::SageMakerGeospatial
     #            Use it in your next request to receive the next set of results.</p>
     #   @return [String]
     class SearchRasterDataCollectionInput < Struct.new(
+      nil,
       :arn,
       :raster_data_collection_query,
       :next_token,
@@ -1455,6 +1523,7 @@ module Aws::SageMakerGeospatial
     #   <p>List of items matching the Raster DataCollectionQuery.</p>
     #   @return [Array<Types::ItemSource>]
     class SearchRasterDataCollectionOutput < Struct.new(
+      nil,
       :approximate_result_count,
       :next_token,
       :items,
@@ -1470,6 +1539,7 @@ module Aws::SageMakerGeospatial
     #   <p>Identifier of the resource affected.</p>
     #   @return [String]
     class ServiceQuotaExceededException < Struct.new(
+      nil,
       :message,
       :resource_id,
       keyword_init: true
@@ -1487,6 +1557,7 @@ module Aws::SageMakerGeospatial
     #   <p>A list of bands to be stacked in the specified order. When the parameter is not provided, all the available bands in the data collection are stacked in the alphabetical order of their asset names.</p>
     #   @return [Array<String>]
     class StackConfigInput < Struct.new(
+      nil,
       :output_resolution,
       :target_bands,
       keyword_init: true
@@ -1516,6 +1587,7 @@ module Aws::SageMakerGeospatial
     #   <p>Each tag consists of a key and a value.</p>
     #   @return [Hash<String, String>]
     class StartEarthObservationJobInput < Struct.new(
+      nil,
       :name,
       :client_token,
       :kms_key_id,
@@ -1559,6 +1631,7 @@ module Aws::SageMakerGeospatial
     #   <p>Each tag consists of a key and a value.</p>
     #   @return [Hash<String, String>]
     class StartEarthObservationJobOperationOutput < Struct.new(
+      nil,
       :name,
       :arn,
       :creation_time,
@@ -1596,6 +1669,7 @@ module Aws::SageMakerGeospatial
     #   <p>Each tag consists of a key and a value.</p>
     #   @return [Hash<String, String>]
     class StartVectorEnrichmentJobInput < Struct.new(
+      nil,
       :name,
       :client_token,
       :kms_key_id,
@@ -1642,6 +1716,7 @@ module Aws::SageMakerGeospatial
     #   <p>Each tag consists of a key and a value.</p>
     #   @return [Hash<String, String>]
     class StartVectorEnrichmentJobOperationOutput < Struct.new(
+      nil,
       :name,
       :arn,
       :type,
@@ -1662,6 +1737,7 @@ module Aws::SageMakerGeospatial
     #   <p>The Amazon Resource Name (ARN) of the Earth Observation job being stopped.</p>
     #   @return [String]
     class StopEarthObservationJobInput < Struct.new(
+      nil,
       :arn,
       keyword_init: true
     )
@@ -1669,6 +1745,7 @@ module Aws::SageMakerGeospatial
     end
 
     class StopEarthObservationJobOutput < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1678,6 +1755,7 @@ module Aws::SageMakerGeospatial
     #   <p>The Amazon Resource Name (ARN) of the Vector Enrichment job.</p>
     #   @return [String]
     class StopVectorEnrichmentJobInput < Struct.new(
+      nil,
       :arn,
       keyword_init: true
     )
@@ -1685,6 +1763,7 @@ module Aws::SageMakerGeospatial
     end
 
     class StopVectorEnrichmentJobOutput < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1697,6 +1776,7 @@ module Aws::SageMakerGeospatial
     #   <p>Each tag consists of a key and a value.</p>
     #   @return [Hash<String, String>]
     class TagResourceInput < Struct.new(
+      nil,
       :resource_arn,
       :tags,
       keyword_init: true
@@ -1705,6 +1785,7 @@ module Aws::SageMakerGeospatial
     end
 
     class TagResourceOutput < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1721,6 +1802,7 @@ module Aws::SageMakerGeospatial
     #   <p>The list of target band names for the temporal statistic to calculate.</p>
     #   @return [Array<String>]
     class TemporalStatisticsConfigInput < Struct.new(
+      nil,
       :group_by,
       :statistics,
       :target_bands,
@@ -1736,6 +1818,7 @@ module Aws::SageMakerGeospatial
     #   <p/>
     #   @return [String]
     class ThrottlingException < Struct.new(
+      nil,
       :message,
       :resource_id,
       keyword_init: true
@@ -1752,6 +1835,7 @@ module Aws::SageMakerGeospatial
     #   <p>The end time for the time-range filter.</p>
     #   @return [Time]
     class TimeRangeFilterInput < Struct.new(
+      nil,
       :start_time,
       :end_time,
       keyword_init: true
@@ -1768,6 +1852,7 @@ module Aws::SageMakerGeospatial
     #   <p>The ending time for the time range filter.</p>
     #   @return [Time]
     class TimeRangeFilterOutput < Struct.new(
+      nil,
       :start_time,
       :end_time,
       keyword_init: true
@@ -1782,6 +1867,7 @@ module Aws::SageMakerGeospatial
     #   <p>Keys of the tags you want to remove.</p>
     #   @return [Array<String>]
     class UntagResourceInput < Struct.new(
+      nil,
       :resource_arn,
       :tag_keys,
       keyword_init: true
@@ -1790,6 +1876,7 @@ module Aws::SageMakerGeospatial
     end
 
     class UntagResourceOutput < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1804,6 +1891,7 @@ module Aws::SageMakerGeospatial
     #   <p>The units for output resolution of the result.</p>
     #   @return [String]
     class UserDefined < Struct.new(
+      nil,
       :value,
       :unit,
       keyword_init: true
@@ -1818,6 +1906,7 @@ module Aws::SageMakerGeospatial
     #   <p/>
     #   @return [String]
     class ValidationException < Struct.new(
+      nil,
       :message,
       :resource_id,
       keyword_init: true
@@ -1869,6 +1958,7 @@ module Aws::SageMakerGeospatial
     #            the Vector Enrichment job when the error occurs.</p>
     #   @return [String]
     class VectorEnrichmentJobErrorDetails < Struct.new(
+      nil,
       :error_type,
       :error_message,
       keyword_init: true
@@ -1884,6 +1974,7 @@ module Aws::SageMakerGeospatial
     #   <p>The message providing details about the errors generated during the Vector Enrichment job.</p>
     #   @return [String]
     class VectorEnrichmentJobExportErrorDetails < Struct.new(
+      nil,
       :type,
       :message,
       keyword_init: true
@@ -1899,6 +1990,7 @@ module Aws::SageMakerGeospatial
     #   <p>The input structure for the data source that represents the storage type of the input data objects.</p>
     #   @return [Types::VectorEnrichmentJobDataSourceConfigInput]
     class VectorEnrichmentJobInputConfig < Struct.new(
+      nil,
       :document_type,
       :data_source_config,
       keyword_init: true
@@ -1914,6 +2006,7 @@ module Aws::SageMakerGeospatial
     #   <p>The Key Management Service key ID for server-side encryption.</p>
     #   @return [String]
     class VectorEnrichmentJobS3Data < Struct.new(
+      nil,
       :s3_uri,
       :kms_key_id,
       keyword_init: true
@@ -1933,6 +2026,7 @@ module Aws::SageMakerGeospatial
     #         This filters items having ViewOffNadir lesser than or equal to this value.</p>
     #   @return [Float]
     class ViewOffNadirInput < Struct.new(
+      nil,
       :lower_bound,
       :upper_bound,
       keyword_init: true
@@ -1954,6 +2048,7 @@ module Aws::SageMakerGeospatial
     #         This filters items having ViewSunAzimuth lesser than or equal to this value.</p>
     #   @return [Float]
     class ViewSunAzimuthInput < Struct.new(
+      nil,
       :lower_bound,
       :upper_bound,
       keyword_init: true
@@ -1969,6 +2064,7 @@ module Aws::SageMakerGeospatial
     #   <p>The upper bound to view the sun elevation.</p>
     #   @return [Float]
     class ViewSunElevationInput < Struct.new(
+      nil,
       :lower_bound,
       :upper_bound,
       keyword_init: true
@@ -2010,6 +2106,7 @@ module Aws::SageMakerGeospatial
     #   Amazon Web Services Key Management Service (Amazon Web Services KMS) documentation.</p>
     #   @return [String]
     class ZonalStatisticsConfigInput < Struct.new(
+      nil,
       :zone_s3_path,
       :statistics,
       :target_bands,

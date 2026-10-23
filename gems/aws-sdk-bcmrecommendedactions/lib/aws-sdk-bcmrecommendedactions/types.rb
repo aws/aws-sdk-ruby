@@ -10,6 +10,7 @@ module Aws::BCMRecommendedActions
     # @!attribute message
     #   @return [String]
     class AccessDeniedException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -27,6 +28,7 @@ module Aws::BCMRecommendedActions
     #   <p>One or more values to match against the specified key.</p>
     #   @return [Array<String>]
     class ActionFilter < Struct.new(
+      nil,
       :key,
       :match_option,
       :values,
@@ -39,6 +41,7 @@ module Aws::BCMRecommendedActions
     # @!attribute message
     #   @return [String]
     class InternalServerException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -55,6 +58,7 @@ module Aws::BCMRecommendedActions
     #   <p>The pagination token that indicates the next set of results that you want to retrieve.</p>
     #   @return [String]
     class ListRecommendedActionsRequest < Struct.new(
+      nil,
       :filter,
       :max_results,
       :next_token,
@@ -70,6 +74,7 @@ module Aws::BCMRecommendedActions
     #   <p>The pagination token that indicates the next set of results that you want to retrieve.</p>
     #   @return [String]
     class ListRecommendedActionsResponse < Struct.new(
+      nil,
       :recommended_actions,
       :next_token,
       keyword_init: true
@@ -103,6 +108,7 @@ module Aws::BCMRecommendedActions
     #   <p>The time when the recommended action status was last updated.</p>
     #   @return [String]
     class RecommendedAction < Struct.new(
+      nil,
       :id,
       :type,
       :account_id,
@@ -121,6 +127,7 @@ module Aws::BCMRecommendedActions
     #   <p>A list of action filters that define criteria for filtering results. Each filter specifies a key, match option, and corresponding values to filter on.</p>
     #   @return [Array<Types::ActionFilter>]
     class RequestFilter < Struct.new(
+      nil,
       :actions,
       keyword_init: true
     )
@@ -131,6 +138,7 @@ module Aws::BCMRecommendedActions
     # @!attribute message
     #   @return [String]
     class ThrottlingException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -147,6 +155,7 @@ module Aws::BCMRecommendedActions
     #   <p>Lists each problematic field and why it failed validation.</p>
     #   @return [Array<Types::ValidationExceptionField>]
     class ValidationException < Struct.new(
+      nil,
       :message,
       :reason,
       :field_list,
@@ -163,6 +172,7 @@ module Aws::BCMRecommendedActions
     #   <p>Provides a message explaining why the field failed validation.</p>
     #   @return [String]
     class ValidationExceptionField < Struct.new(
+      nil,
       :name,
       :message,
       keyword_init: true

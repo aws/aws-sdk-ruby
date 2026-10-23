@@ -17,6 +17,7 @@ module Aws::Lightsail
     # @!attribute tip
     #   @return [String]
     class AccessDeniedException < Struct.new(
+      nil,
       :code,
       :docs,
       :message,
@@ -62,6 +63,7 @@ module Aws::Lightsail
     #            </note>
     #   @return [Types::AccessKeyLastUsed]
     class AccessKey < Struct.new(
+      nil,
       :access_key_id,
       :secret_access_key,
       :status,
@@ -90,6 +92,7 @@ module Aws::Lightsail
     #            <p>This value is <code>N/A</code> if the access key has not been used.</p>
     #   @return [String]
     class AccessKeyLastUsed < Struct.new(
+      nil,
       :last_used_date,
       :region,
       :service_name,
@@ -136,6 +139,7 @@ module Aws::Lightsail
     #         using the <code>private</code> ACL.</p>
     #   @return [Boolean]
     class AccessRules < Struct.new(
+      nil,
       :get_object,
       :allow_public_overrides,
       keyword_init: true
@@ -233,6 +237,7 @@ module Aws::Lightsail
     #           Lightsail buckets.</p>
     #   @return [Boolean]
     class AccountLevelBpaSync < Struct.new(
+      nil,
       :status,
       :last_synced_at,
       :message,
@@ -253,6 +258,7 @@ module Aws::Lightsail
     # @!attribute tip
     #   @return [String]
     class AccountSetupInProgressException < Struct.new(
+      nil,
       :code,
       :docs,
       :message,
@@ -297,6 +303,7 @@ module Aws::Lightsail
     #            </important>
     #   @return [String]
     class AddOn < Struct.new(
+      nil,
       :name,
       :status,
       :snapshot_time_of_day,
@@ -330,6 +337,7 @@ module Aws::Lightsail
     #            </important>
     #   @return [Types::StopInstanceOnIdleRequest]
     class AddOnRequest < Struct.new(
+      nil,
       :add_on_type,
       :auto_snapshot_add_on_request,
       :stop_instance_on_idle_request,
@@ -476,6 +484,7 @@ module Aws::Lightsail
     #   <p>Indicates whether the alarm is enabled.</p>
     #   @return [Boolean]
     class Alarm < Struct.new(
+      nil,
       :name,
       :arn,
       :created_at,
@@ -505,6 +514,7 @@ module Aws::Lightsail
     #   <p>The name of the static IP address.</p>
     #   @return [String]
     class AllocateStaticIpRequest < Struct.new(
+      nil,
       :static_ip_name,
       keyword_init: true
     )
@@ -516,6 +526,7 @@ module Aws::Lightsail
     #         request, the timestamp of the request, and the resources affected by the request.</p>
     #   @return [Array<Types::Operation>]
     class AllocateStaticIpResult < Struct.new(
+      nil,
       :operations,
       keyword_init: true
     )
@@ -542,6 +553,7 @@ module Aws::Lightsail
     #            </note>
     #   @return [String]
     class AttachCertificateToDistributionRequest < Struct.new(
+      nil,
       :distribution_name,
       :certificate_name,
       keyword_init: true
@@ -554,6 +566,7 @@ module Aws::Lightsail
     #         timestamp of the request, and the resources affected by the request.</p>
     #   @return [Types::Operation]
     class AttachCertificateToDistributionResult < Struct.new(
+      nil,
       :operation,
       keyword_init: true
     )
@@ -577,6 +590,7 @@ module Aws::Lightsail
     #            </important>
     #   @return [Boolean]
     class AttachDiskRequest < Struct.new(
+      nil,
       :disk_name,
       :instance_name,
       :disk_path,
@@ -591,6 +605,7 @@ module Aws::Lightsail
     #         request, the timestamp of the request, and the resources affected by the request.</p>
     #   @return [Array<Types::Operation>]
     class AttachDiskResult < Struct.new(
+      nil,
       :operations,
       keyword_init: true
     )
@@ -610,6 +625,7 @@ module Aws::Lightsail
     #         (20).</p>
     #   @return [Array<String>]
     class AttachInstancesToLoadBalancerRequest < Struct.new(
+      nil,
       :load_balancer_name,
       :instance_names,
       keyword_init: true
@@ -622,6 +638,7 @@ module Aws::Lightsail
     #         request, the timestamp of the request, and the resources affected by the request.</p>
     #   @return [Array<Types::Operation>]
     class AttachInstancesToLoadBalancerResult < Struct.new(
+      nil,
       :operations,
       keyword_init: true
     )
@@ -636,6 +653,7 @@ module Aws::Lightsail
     #   <p>The name of your SSL/TLS certificate.</p>
     #   @return [String]
     class AttachLoadBalancerTlsCertificateRequest < Struct.new(
+      nil,
       :load_balancer_name,
       :certificate_name,
       keyword_init: true
@@ -650,6 +668,7 @@ module Aws::Lightsail
     #         the certificate and use it for another purpose.</p>
     #   @return [Array<Types::Operation>]
     class AttachLoadBalancerTlsCertificateResult < Struct.new(
+      nil,
       :operations,
       keyword_init: true
     )
@@ -663,6 +682,7 @@ module Aws::Lightsail
     #   <p>The instance name to which you want to attach the static IP address.</p>
     #   @return [String]
     class AttachStaticIpRequest < Struct.new(
+      nil,
       :static_ip_name,
       :instance_name,
       keyword_init: true
@@ -675,6 +695,7 @@ module Aws::Lightsail
     #         request, the timestamp of the request, and the resources affected by the request.</p>
     #   @return [Array<Types::Operation>]
     class AttachStaticIpResult < Struct.new(
+      nil,
       :operations,
       keyword_init: true
     )
@@ -690,6 +711,7 @@ module Aws::Lightsail
     #   <p>The size of the disk in GB.</p>
     #   @return [Integer]
     class AttachedDisk < Struct.new(
+      nil,
       :path,
       :size_in_gb,
       keyword_init: true
@@ -747,6 +769,7 @@ module Aws::Lightsail
     #            </ul>
     #   @return [String]
     class AutoSnapshotAddOnRequest < Struct.new(
+      nil,
       :snapshot_time_of_day,
       keyword_init: true
     )
@@ -768,6 +791,7 @@ module Aws::Lightsail
     #         the automatic snapshot was created.</p>
     #   @return [Array<Types::AttachedDisk>]
     class AutoSnapshotDetails < Struct.new(
+      nil,
       :date,
       :created_at,
       :status,
@@ -787,6 +811,7 @@ module Aws::Lightsail
     #   <p>The state of the Availability Zone.</p>
     #   @return [String]
     class AvailabilityZone < Struct.new(
+      nil,
       :zone_name,
       :state,
       keyword_init: true
@@ -847,6 +872,7 @@ module Aws::Lightsail
     #            </important>
     #   @return [String]
     class Blueprint < Struct.new(
+      nil,
       :blueprint_id,
       :name,
       :group,
@@ -948,6 +974,7 @@ module Aws::Lightsail
     #   <p>An object that describes the access log configuration for the bucket.</p>
     #   @return [Types::BucketAccessLogConfig]
     class Bucket < Struct.new(
+      nil,
       :resource_type,
       :access_rules,
       :arn,
@@ -998,6 +1025,7 @@ module Aws::Lightsail
     #            </note>
     #   @return [String]
     class BucketAccessLogConfig < Struct.new(
+      nil,
       :enabled,
       :destination,
       :prefix,
@@ -1029,6 +1057,7 @@ module Aws::Lightsail
     #   <p>Indicates whether the bundle is active. Use for a new or existing bucket.</p>
     #   @return [Boolean]
     class BucketBundle < Struct.new(
+      nil,
       :bundle_id,
       :name,
       :price,
@@ -1060,6 +1089,7 @@ module Aws::Lightsail
     #   <p>A message that describes the state of the bucket.</p>
     #   @return [String]
     class BucketState < Struct.new(
+      nil,
       :code,
       :message,
       keyword_init: true
@@ -1120,6 +1150,7 @@ module Aws::Lightsail
     #         is either 0 or 1.</p>
     #   @return [Integer]
     class Bundle < Struct.new(
+      nil,
       :price,
       :cpu_count,
       :disk_size_in_gb,
@@ -1168,6 +1199,7 @@ module Aws::Lightsail
     #            </ul>
     #   @return [String]
     class CacheBehavior < Struct.new(
+      nil,
       :behavior,
       keyword_init: true
     )
@@ -1250,6 +1282,7 @@ module Aws::Lightsail
     #            </ul>
     #   @return [String]
     class CacheBehaviorPerPath < Struct.new(
+      nil,
       :path,
       :behavior,
       keyword_init: true
@@ -1341,6 +1374,7 @@ module Aws::Lightsail
     #         is cached based on the query strings that are forwarded.</p>
     #   @return [Types::QueryStringObject]
     class CacheSettings < Struct.new(
+      nil,
       :default_ttl,
       :minimum_ttl,
       :maximum_ttl,
@@ -1494,6 +1528,7 @@ module Aws::Lightsail
     #         information more easily.</p>
     #   @return [String]
     class Certificate < Struct.new(
+      nil,
       :arn,
       :name,
       :domain_name,
@@ -1543,6 +1578,7 @@ module Aws::Lightsail
     #         Lightsail, see the <a href="https://docs.aws.amazon.com/lightsail/latest/userguide/amazon-lightsail-tags">Amazon Lightsail Developer Guide</a>.</p>
     #   @return [Array<Types::Tag>]
     class CertificateSummary < Struct.new(
+      nil,
       :certificate_arn,
       :certificate_name,
       :domain_name,
@@ -1560,6 +1596,7 @@ module Aws::Lightsail
     #   <p>The name of the instance for which to close ports.</p>
     #   @return [String]
     class CloseInstancePublicPortsRequest < Struct.new(
+      nil,
       :port_info,
       :instance_name,
       keyword_init: true
@@ -1572,6 +1609,7 @@ module Aws::Lightsail
     #         timestamp of the request, and the resources affected by the request.</p>
     #   @return [Types::Operation]
     class CloseInstancePublicPortsResult < Struct.new(
+      nil,
       :operation,
       keyword_init: true
     )
@@ -1610,6 +1648,7 @@ module Aws::Lightsail
     #         Resource Name (ARN) of the AWS CloudFormation stack.</p>
     #   @return [Types::DestinationInfo]
     class CloudFormationStackRecord < Struct.new(
+      nil,
       :name,
       :arn,
       :created_at,
@@ -1635,6 +1674,7 @@ module Aws::Lightsail
     #   <p>The Amazon Resource Name (ARN) of the export snapshot record.</p>
     #   @return [String]
     class CloudFormationStackRecordSourceInfo < Struct.new(
+      nil,
       :resource_type,
       :name,
       :arn,
@@ -1693,6 +1733,7 @@ module Aws::Lightsail
     #         Lightsail information more easily.</p>
     #   @return [String]
     class ContactMethod < Struct.new(
+      nil,
       :contact_endpoint,
       :status,
       :protocol,
@@ -1733,6 +1774,7 @@ module Aws::Lightsail
     #   <p>The open firewall ports of the container.</p>
     #   @return [Hash<String, String>]
     class Container < Struct.new(
+      nil,
       :image,
       :command,
       :environment,
@@ -1754,6 +1796,7 @@ module Aws::Lightsail
     #   <p>The timestamp when the container image was created.</p>
     #   @return [Time]
     class ContainerImage < Struct.new(
+      nil,
       :image,
       :digest,
       :created_at,
@@ -1890,6 +1933,7 @@ module Aws::Lightsail
     #            <p>For more information, see <a href="https://docs.aws.amazon.com/lightsail/latest/userguide/amazon-lightsail-container-service-ecr-private-repo-access">Configuring access to an Amazon ECR private repository for an Amazon Lightsail container service</a> in the <i>Amazon Lightsail Developer Guide</i>.</p>
     #   @return [Types::PrivateRegistryAccess]
     class ContainerService < Struct.new(
+      nil,
       :container_service_name,
       :arn,
       :created_at,
@@ -1958,6 +2002,7 @@ module Aws::Lightsail
     #   <p>The timestamp when the deployment was created.</p>
     #   @return [Time]
     class ContainerServiceDeployment < Struct.new(
+      nil,
       :version,
       :state,
       :containers,
@@ -1979,6 +2024,7 @@ module Aws::Lightsail
     #   <p>An object that describes the endpoint of the deployment.</p>
     #   @return [Types::EndpointRequest]
     class ContainerServiceDeploymentRequest < Struct.new(
+      nil,
       :containers,
       :public_endpoint,
       keyword_init: true
@@ -2000,6 +2046,7 @@ module Aws::Lightsail
     #   <p>The Amazon Resource Name (ARN) of the role, if it is activated.</p>
     #   @return [String]
     class ContainerServiceECRImagePullerRole < Struct.new(
+      nil,
       :is_active,
       :principal_arn,
       keyword_init: true
@@ -2018,6 +2065,7 @@ module Aws::Lightsail
     #   <p>A Boolean value that indicates whether to activate the role.</p>
     #   @return [Boolean]
     class ContainerServiceECRImagePullerRoleRequest < Struct.new(
+      nil,
       :is_active,
       keyword_init: true
     )
@@ -2037,6 +2085,7 @@ module Aws::Lightsail
     #   <p>An object that describes the health check configuration of the container.</p>
     #   @return [Types::ContainerServiceHealthCheckConfig]
     class ContainerServiceEndpoint < Struct.new(
+      nil,
       :container_name,
       :container_port,
       :health_check,
@@ -2073,6 +2122,7 @@ module Aws::Lightsail
     #         <code>200-299</code>).</p>
     #   @return [String]
     class ContainerServiceHealthCheckConfig < Struct.new(
+      nil,
       :healthy_threshold,
       :unhealthy_threshold,
       :timeout_seconds,
@@ -2092,6 +2142,7 @@ module Aws::Lightsail
     #   <p>The message of the container service log event.</p>
     #   @return [String]
     class ContainerServiceLogEvent < Struct.new(
+      nil,
       :created_at,
       :message,
       keyword_init: true
@@ -2123,6 +2174,7 @@ module Aws::Lightsail
     #         services.</p>
     #   @return [Boolean]
     class ContainerServicePower < Struct.new(
+      nil,
       :power_id,
       :price,
       :cpu_count,
@@ -2155,6 +2207,7 @@ module Aws::Lightsail
     #         Lightsail account.</p>
     #   @return [String]
     class ContainerServiceRegistryLogin < Struct.new(
+      nil,
       :username,
       :password,
       :expires_at,
@@ -2236,6 +2289,7 @@ module Aws::Lightsail
     #            </note>
     #   @return [String]
     class ContainerServiceStateDetail < Struct.new(
+      nil,
       :code,
       :message,
       keyword_init: true
@@ -2247,6 +2301,7 @@ module Aws::Lightsail
     #   <p>An array of objects that describe one or more container services.</p>
     #   @return [Array<Types::ContainerService>]
     class ContainerServicesListResult < Struct.new(
+      nil,
       :container_services,
       keyword_init: true
     )
@@ -2267,6 +2322,7 @@ module Aws::Lightsail
     #   <p>The specific cookies to forward to your distribution's origin.</p>
     #   @return [Array<String>]
     class CookieObject < Struct.new(
+      nil,
       :option,
       :cookies_allow_list,
       keyword_init: true
@@ -2338,6 +2394,7 @@ module Aws::Lightsail
     #         located.</p>
     #   @return [String]
     class CopySnapshotRequest < Struct.new(
+      nil,
       :source_snapshot_name,
       :source_resource_name,
       :restore_date,
@@ -2354,6 +2411,7 @@ module Aws::Lightsail
     #         request, the timestamp of the request, and the resources affected by the request.</p>
     #   @return [Array<Types::Operation>]
     class CopySnapshotResult < Struct.new(
+      nil,
       :operations,
       keyword_init: true
     )
@@ -2369,6 +2427,7 @@ module Aws::Lightsail
     #   <p>The cost estimate result that's associated with a time period.</p>
     #   @return [Array<Types::EstimateByTime>]
     class CostEstimate < Struct.new(
+      nil,
       :usage_type,
       :results_by_time,
       keyword_init: true
@@ -2380,6 +2439,7 @@ module Aws::Lightsail
     #   <p>The name of the bucket that the new access key will belong to, and grant access to.</p>
     #   @return [String]
     class CreateBucketAccessKeyRequest < Struct.new(
+      nil,
       :bucket_name,
       keyword_init: true
     )
@@ -2394,6 +2454,7 @@ module Aws::Lightsail
     #         request, the timestamp of the request, and the resources affected by the request.</p>
     #   @return [Array<Types::Operation>]
     class CreateBucketAccessKeyResult < Struct.new(
+      nil,
       :access_key,
       :operations,
       keyword_init: true
@@ -2427,6 +2488,7 @@ module Aws::Lightsail
     #           <i>Amazon Lightsail Developer Guide</i>.</p>
     #   @return [Boolean]
     class CreateBucketRequest < Struct.new(
+      nil,
       :bucket_name,
       :bundle_id,
       :tags,
@@ -2444,6 +2506,7 @@ module Aws::Lightsail
     #         request, the timestamp of the request, and the resources affected by the request.</p>
     #   @return [Array<Types::Operation>]
     class CreateBucketResult < Struct.new(
+      nil,
       :bucket,
       :operations,
       keyword_init: true
@@ -2469,6 +2532,7 @@ module Aws::Lightsail
     #            <p>Use the <code>TagResource</code> action to tag a resource after it's created.</p>
     #   @return [Array<Types::Tag>]
     class CreateCertificateRequest < Struct.new(
+      nil,
       :certificate_name,
       :domain_name,
       :subject_alternative_names,
@@ -2486,6 +2550,7 @@ module Aws::Lightsail
     #         request, the timestamp of the request, and the resources affected by the request.</p>
     #   @return [Array<Types::Operation>]
     class CreateCertificateResult < Struct.new(
+      nil,
       :certificate,
       :operations,
       keyword_init: true
@@ -2499,6 +2564,7 @@ module Aws::Lightsail
     #         you pass more than one instance entry in this array.</p>
     #   @return [Array<Types::InstanceEntry>]
     class CreateCloudFormationStackRequest < Struct.new(
+      nil,
       :instances,
       keyword_init: true
     )
@@ -2510,6 +2576,7 @@ module Aws::Lightsail
     #         request, the timestamp of the request, and the resources affected by the request.</p>
     #   @return [Array<Types::Operation>]
     class CreateCloudFormationStackResult < Struct.new(
+      nil,
       :operations,
       keyword_init: true
     )
@@ -2556,6 +2623,7 @@ module Aws::Lightsail
     #         +1XXX5550100. For more information, see <a href="https://en.wikipedia.org/wiki/E.164">E.164</a> on <i>Wikipedia</i>.</p>
     #   @return [String]
     class CreateContactMethodRequest < Struct.new(
+      nil,
       :protocol,
       :contact_endpoint,
       keyword_init: true
@@ -2568,6 +2636,7 @@ module Aws::Lightsail
     #         request, the timestamp of the request, and the resources affected by the request.</p>
     #   @return [Array<Types::Operation>]
     class CreateContactMethodResult < Struct.new(
+      nil,
       :operations,
       keyword_init: true
     )
@@ -2586,6 +2655,7 @@ module Aws::Lightsail
     #         service.</p>
     #   @return [Types::EndpointRequest]
     class CreateContainerServiceDeploymentRequest < Struct.new(
+      nil,
       :service_name,
       :containers,
       :public_endpoint,
@@ -2598,6 +2668,7 @@ module Aws::Lightsail
     #   <p>An object that describes a container service.</p>
     #   @return [Types::ContainerService]
     class CreateContainerServiceDeploymentResult < Struct.new(
+      nil,
       :container_service,
       keyword_init: true
     )
@@ -2605,6 +2676,7 @@ module Aws::Lightsail
     end
 
     class CreateContainerServiceRegistryLoginRequest < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -2615,6 +2687,7 @@ module Aws::Lightsail
     #         Lightsail account.</p>
     #   @return [Types::ContainerServiceRegistryLogin]
     class CreateContainerServiceRegistryLoginResult < Struct.new(
+      nil,
       :registry_login,
       keyword_init: true
     )
@@ -2702,6 +2775,7 @@ module Aws::Lightsail
     #            <p>For more information, see <a href="https://docs.aws.amazon.com/lightsail/latest/userguide/amazon-lightsail-container-service-ecr-private-repo-access">Configuring access to an Amazon ECR private repository for an Amazon Lightsail container service</a> in the <i>Amazon Lightsail Developer Guide</i>.</p>
     #   @return [Types::PrivateRegistryAccessRequest]
     class CreateContainerServiceRequest < Struct.new(
+      nil,
       :service_name,
       :power,
       :scale,
@@ -2718,6 +2792,7 @@ module Aws::Lightsail
     #   <p>An object that describes a container service.</p>
     #   @return [Types::ContainerService]
     class CreateContainerServiceResult < Struct.new(
+      nil,
       :container_service,
       keyword_init: true
     )
@@ -2807,6 +2882,7 @@ module Aws::Lightsail
     #            </ul>
     #   @return [Boolean]
     class CreateDiskFromSnapshotRequest < Struct.new(
+      nil,
       :disk_name,
       :disk_snapshot_name,
       :availability_zone,
@@ -2826,6 +2902,7 @@ module Aws::Lightsail
     #         request, the timestamp of the request, and the resources affected by the request.</p>
     #   @return [Array<Types::Operation>]
     class CreateDiskFromSnapshotResult < Struct.new(
+      nil,
       :operations,
       keyword_init: true
     )
@@ -2853,6 +2930,7 @@ module Aws::Lightsail
     #   <p>An array of objects that represent the add-ons to enable for the new disk.</p>
     #   @return [Array<Types::AddOnRequest>]
     class CreateDiskRequest < Struct.new(
+      nil,
       :disk_name,
       :availability_zone,
       :size_in_gb,
@@ -2868,6 +2946,7 @@ module Aws::Lightsail
     #         request, the timestamp of the request, and the resources affected by the request.</p>
     #   @return [Array<Types::Operation>]
     class CreateDiskResult < Struct.new(
+      nil,
       :operations,
       keyword_init: true
     )
@@ -2900,6 +2979,7 @@ module Aws::Lightsail
     #            <p>Use the <code>TagResource</code> action to tag a resource after it's created.</p>
     #   @return [Array<Types::Tag>]
     class CreateDiskSnapshotRequest < Struct.new(
+      nil,
       :disk_name,
       :disk_snapshot_name,
       :instance_name,
@@ -2914,6 +2994,7 @@ module Aws::Lightsail
     #         request, the timestamp of the request, and the resources affected by the request.</p>
     #   @return [Array<Types::Operation>]
     class CreateDiskSnapshotResult < Struct.new(
+      nil,
       :operations,
       keyword_init: true
     )
@@ -2963,6 +3044,7 @@ module Aws::Lightsail
     #   <p>The minimum TLS protocol version for the SSL/TLS certificate.</p>
     #   @return [String]
     class CreateDistributionRequest < Struct.new(
+      nil,
       :distribution_name,
       :origin,
       :default_cache_behavior,
@@ -2986,6 +3068,7 @@ module Aws::Lightsail
     #         request, the timestamp of the request, and the resources affected by the request.</p>
     #   @return [Types::Operation]
     class CreateDistributionResult < Struct.new(
+      nil,
       :distribution,
       :operation,
       keyword_init: true
@@ -3001,6 +3084,7 @@ module Aws::Lightsail
     #   <p>An array of key-value pairs containing information about the domain entry request.</p>
     #   @return [Types::DomainEntry]
     class CreateDomainEntryRequest < Struct.new(
+      nil,
       :domain_name,
       :domain_entry,
       keyword_init: true
@@ -3013,6 +3097,7 @@ module Aws::Lightsail
     #         request, the timestamp of the request, and the resources affected by the request.</p>
     #   @return [Types::Operation]
     class CreateDomainEntryResult < Struct.new(
+      nil,
       :operation,
       keyword_init: true
     )
@@ -3027,6 +3112,7 @@ module Aws::Lightsail
     #            <p>Use the <code>TagResource</code> action to tag a resource after it's created.</p>
     #   @return [Array<Types::Tag>]
     class CreateDomainRequest < Struct.new(
+      nil,
       :domain_name,
       :tags,
       keyword_init: true
@@ -3039,6 +3125,7 @@ module Aws::Lightsail
     #         request, the timestamp of the request, and the resources affected by the request.</p>
     #   @return [Types::Operation]
     class CreateDomainResult < Struct.new(
+      nil,
       :operation,
       keyword_init: true
     )
@@ -3049,6 +3136,7 @@ module Aws::Lightsail
     #   <p>The resource name.</p>
     #   @return [String]
     class CreateGUISessionAccessDetailsRequest < Struct.new(
+      nil,
       :resource_name,
       keyword_init: true
     )
@@ -3071,6 +3159,7 @@ module Aws::Lightsail
     #   <p>Returns information about the specified Amazon DCV GUI session.</p>
     #   @return [Array<Types::Session>]
     class CreateGUISessionAccessDetailsResult < Struct.new(
+      nil,
       :resource_name,
       :status,
       :percentage_complete,
@@ -3092,6 +3181,7 @@ module Aws::Lightsail
     #            <p>Use the <code>TagResource</code> action to tag a resource after it's created.</p>
     #   @return [Array<Types::Tag>]
     class CreateInstanceSnapshotRequest < Struct.new(
+      nil,
       :instance_snapshot_name,
       :instance_name,
       :tags,
@@ -3105,6 +3195,7 @@ module Aws::Lightsail
     #         request, the timestamp of the request, and the resources affected by the request.</p>
     #   @return [Array<Types::Operation>]
     class CreateInstanceSnapshotResult < Struct.new(
+      nil,
       :operations,
       keyword_init: true
     )
@@ -3218,6 +3309,7 @@ module Aws::Lightsail
     #            </ul>
     #   @return [Boolean]
     class CreateInstancesFromSnapshotRequest < Struct.new(
+      nil,
       :instance_names,
       :attached_disk_mapping,
       :availability_zone,
@@ -3241,6 +3333,7 @@ module Aws::Lightsail
     #         request, the timestamp of the request, and the resources affected by the request.</p>
     #   @return [Array<Types::Operation>]
     class CreateInstancesFromSnapshotResult < Struct.new(
+      nil,
       :operations,
       keyword_init: true
     )
@@ -3310,6 +3403,7 @@ module Aws::Lightsail
     #            <p>The default value is <code>dualstack</code>.</p>
     #   @return [String]
     class CreateInstancesRequest < Struct.new(
+      nil,
       :instance_names,
       :availability_zone,
       :custom_image_name,
@@ -3330,6 +3424,7 @@ module Aws::Lightsail
     #         request, the timestamp of the request, and the resources affected by the request.</p>
     #   @return [Array<Types::Operation>]
     class CreateInstancesResult < Struct.new(
+      nil,
       :operations,
       keyword_init: true
     )
@@ -3344,6 +3439,7 @@ module Aws::Lightsail
     #            <p>Use the <code>TagResource</code> action to tag a resource after it's created.</p>
     #   @return [Array<Types::Tag>]
     class CreateKeyPairRequest < Struct.new(
+      nil,
       :key_pair_name,
       :tags,
       keyword_init: true
@@ -3366,6 +3462,7 @@ module Aws::Lightsail
     #         request, the timestamp of the request, and the resources affected by the request.</p>
     #   @return [Types::Operation]
     class CreateKeyPairResult < Struct.new(
+      nil,
       :key_pair,
       :public_key_base64,
       :private_key_base64,
@@ -3421,6 +3518,7 @@ module Aws::Lightsail
     #           balancers</a> in the <i>Amazon Lightsail Developer Guide</i>.</p>
     #   @return [String]
     class CreateLoadBalancerRequest < Struct.new(
+      nil,
       :load_balancer_name,
       :instance_port,
       :health_check_path,
@@ -3440,6 +3538,7 @@ module Aws::Lightsail
     #         request, the timestamp of the request, and the resources affected by the request.</p>
     #   @return [Array<Types::Operation>]
     class CreateLoadBalancerResult < Struct.new(
+      nil,
       :operations,
       keyword_init: true
     )
@@ -3470,6 +3569,7 @@ module Aws::Lightsail
     #            <p>Use the <code>TagResource</code> action to tag a resource after it's created.</p>
     #   @return [Array<Types::Tag>]
     class CreateLoadBalancerTlsCertificateRequest < Struct.new(
+      nil,
       :load_balancer_name,
       :certificate_name,
       :certificate_domain_name,
@@ -3485,6 +3585,7 @@ module Aws::Lightsail
     #         request, the timestamp of the request, and the resources affected by the request.</p>
     #   @return [Array<Types::Operation>]
     class CreateLoadBalancerTlsCertificateResult < Struct.new(
+      nil,
       :operations,
       keyword_init: true
     )
@@ -3564,6 +3665,7 @@ module Aws::Lightsail
     #            <p>Use the <code>TagResource</code> action to tag a resource after it's created.</p>
     #   @return [Array<Types::Tag>]
     class CreateRelationalDatabaseFromSnapshotRequest < Struct.new(
+      nil,
       :relational_database_name,
       :availability_zone,
       :publicly_accessible,
@@ -3583,6 +3685,7 @@ module Aws::Lightsail
     #         request, the timestamp of the request, and the resources affected by the request.</p>
     #   @return [Array<Types::Operation>]
     class CreateRelationalDatabaseFromSnapshotResult < Struct.new(
+      nil,
       :operations,
       keyword_init: true
     )
@@ -3784,6 +3887,7 @@ module Aws::Lightsail
     #            <p>Use the <code>TagResource</code> action to tag a resource after it's created.</p>
     #   @return [Array<Types::Tag>]
     class CreateRelationalDatabaseRequest < Struct.new(
+      nil,
       :relational_database_name,
       :availability_zone,
       :relational_database_blueprint_id,
@@ -3805,6 +3909,7 @@ module Aws::Lightsail
     #         request, the timestamp of the request, and the resources affected by the request.</p>
     #   @return [Array<Types::Operation>]
     class CreateRelationalDatabaseResult < Struct.new(
+      nil,
       :operations,
       keyword_init: true
     )
@@ -3831,6 +3936,7 @@ module Aws::Lightsail
     #            <p>Use the <code>TagResource</code> action to tag a resource after it's created.</p>
     #   @return [Array<Types::Tag>]
     class CreateRelationalDatabaseSnapshotRequest < Struct.new(
+      nil,
       :relational_database_name,
       :relational_database_snapshot_name,
       :tags,
@@ -3844,6 +3950,7 @@ module Aws::Lightsail
     #         request, the timestamp of the request, and the resources affected by the request.</p>
     #   @return [Array<Types::Operation>]
     class CreateRelationalDatabaseSnapshotResult < Struct.new(
+      nil,
       :operations,
       keyword_init: true
     )
@@ -3854,6 +3961,7 @@ module Aws::Lightsail
     #   <p>The name of the alarm to delete.</p>
     #   @return [String]
     class DeleteAlarmRequest < Struct.new(
+      nil,
       :alarm_name,
       keyword_init: true
     )
@@ -3865,6 +3973,7 @@ module Aws::Lightsail
     #         request, the timestamp of the request, and the resources affected by the request.</p>
     #   @return [Array<Types::Operation>]
     class DeleteAlarmResult < Struct.new(
+      nil,
       :operations,
       keyword_init: true
     )
@@ -3881,6 +3990,7 @@ module Aws::Lightsail
     #         resource.</p>
     #   @return [String]
     class DeleteAutoSnapshotRequest < Struct.new(
+      nil,
       :resource_name,
       :date,
       keyword_init: true
@@ -3893,6 +4003,7 @@ module Aws::Lightsail
     #         request, the timestamp of the request, and the resources affected by the request.</p>
     #   @return [Array<Types::Operation>]
     class DeleteAutoSnapshotResult < Struct.new(
+      nil,
       :operations,
       keyword_init: true
     )
@@ -3908,6 +4019,7 @@ module Aws::Lightsail
     #         list of access key IDs that you can specify.</p>
     #   @return [String]
     class DeleteBucketAccessKeyRequest < Struct.new(
+      nil,
       :bucket_name,
       :access_key_id,
       keyword_init: true
@@ -3920,6 +4032,7 @@ module Aws::Lightsail
     #         request, the timestamp of the request, and the resources affected by the request.</p>
     #   @return [Array<Types::Operation>]
     class DeleteBucketAccessKeyResult < Struct.new(
+      nil,
       :operations,
       keyword_init: true
     )
@@ -3954,6 +4067,7 @@ module Aws::Lightsail
     #            </important>
     #   @return [Boolean]
     class DeleteBucketRequest < Struct.new(
+      nil,
       :bucket_name,
       :force_delete,
       keyword_init: true
@@ -3966,6 +4080,7 @@ module Aws::Lightsail
     #         request, the timestamp of the request, and the resources affected by the request.</p>
     #   @return [Array<Types::Operation>]
     class DeleteBucketResult < Struct.new(
+      nil,
       :operations,
       keyword_init: true
     )
@@ -3978,6 +4093,7 @@ module Aws::Lightsail
     #         can specify.</p>
     #   @return [String]
     class DeleteCertificateRequest < Struct.new(
+      nil,
       :certificate_name,
       keyword_init: true
     )
@@ -3989,6 +4105,7 @@ module Aws::Lightsail
     #         request, the timestamp of the request, and the resources affected by the request.</p>
     #   @return [Array<Types::Operation>]
     class DeleteCertificateResult < Struct.new(
+      nil,
       :operations,
       keyword_init: true
     )
@@ -4005,6 +4122,7 @@ module Aws::Lightsail
     #            </note>
     #   @return [String]
     class DeleteContactMethodRequest < Struct.new(
+      nil,
       :protocol,
       keyword_init: true
     )
@@ -4016,6 +4134,7 @@ module Aws::Lightsail
     #         request, the timestamp of the request, and the resources affected by the request.</p>
     #   @return [Array<Types::Operation>]
     class DeleteContactMethodResult < Struct.new(
+      nil,
       :operations,
       keyword_init: true
     )
@@ -4038,6 +4157,7 @@ module Aws::Lightsail
     #            </note>
     #   @return [String]
     class DeleteContainerImageRequest < Struct.new(
+      nil,
       :service_name,
       :image,
       keyword_init: true
@@ -4046,6 +4166,7 @@ module Aws::Lightsail
     end
 
     class DeleteContainerImageResult < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -4055,6 +4176,7 @@ module Aws::Lightsail
     #   <p>The name of the container service to delete.</p>
     #   @return [String]
     class DeleteContainerServiceRequest < Struct.new(
+      nil,
       :service_name,
       keyword_init: true
     )
@@ -4062,6 +4184,7 @@ module Aws::Lightsail
     end
 
     class DeleteContainerServiceResult < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -4074,6 +4197,7 @@ module Aws::Lightsail
     #   <p>A Boolean value to indicate whether to delete all add-ons for the disk.</p>
     #   @return [Boolean]
     class DeleteDiskRequest < Struct.new(
+      nil,
       :disk_name,
       :force_delete_add_ons,
       keyword_init: true
@@ -4086,6 +4210,7 @@ module Aws::Lightsail
     #         request, the timestamp of the request, and the resources affected by the request.</p>
     #   @return [Array<Types::Operation>]
     class DeleteDiskResult < Struct.new(
+      nil,
       :operations,
       keyword_init: true
     )
@@ -4096,6 +4221,7 @@ module Aws::Lightsail
     #   <p>The name of the disk snapshot you want to delete (<code>my-disk-snapshot</code>).</p>
     #   @return [String]
     class DeleteDiskSnapshotRequest < Struct.new(
+      nil,
       :disk_snapshot_name,
       keyword_init: true
     )
@@ -4107,6 +4233,7 @@ module Aws::Lightsail
     #         request, the timestamp of the request, and the resources affected by the request.</p>
     #   @return [Array<Types::Operation>]
     class DeleteDiskSnapshotResult < Struct.new(
+      nil,
       :operations,
       keyword_init: true
     )
@@ -4119,6 +4246,7 @@ module Aws::Lightsail
     #         can specify.</p>
     #   @return [String]
     class DeleteDistributionRequest < Struct.new(
+      nil,
       :distribution_name,
       keyword_init: true
     )
@@ -4130,6 +4258,7 @@ module Aws::Lightsail
     #         timestamp of the request, and the resources affected by the request.</p>
     #   @return [Types::Operation]
     class DeleteDistributionResult < Struct.new(
+      nil,
       :operation,
       keyword_init: true
     )
@@ -4143,6 +4272,7 @@ module Aws::Lightsail
     #   <p>An array of key-value pairs containing information about your domain entries.</p>
     #   @return [Types::DomainEntry]
     class DeleteDomainEntryRequest < Struct.new(
+      nil,
       :domain_name,
       :domain_entry,
       keyword_init: true
@@ -4155,6 +4285,7 @@ module Aws::Lightsail
     #         request, the timestamp of the request, and the resources affected by the request.</p>
     #   @return [Types::Operation]
     class DeleteDomainEntryResult < Struct.new(
+      nil,
       :operation,
       keyword_init: true
     )
@@ -4165,6 +4296,7 @@ module Aws::Lightsail
     #   <p>The specific domain name to delete.</p>
     #   @return [String]
     class DeleteDomainRequest < Struct.new(
+      nil,
       :domain_name,
       keyword_init: true
     )
@@ -4176,6 +4308,7 @@ module Aws::Lightsail
     #         request, the timestamp of the request, and the resources affected by the request.</p>
     #   @return [Types::Operation]
     class DeleteDomainResult < Struct.new(
+      nil,
       :operation,
       keyword_init: true
     )
@@ -4189,6 +4322,7 @@ module Aws::Lightsail
     #   <p>A Boolean value to indicate whether to delete all add-ons for the instance.</p>
     #   @return [Boolean]
     class DeleteInstanceRequest < Struct.new(
+      nil,
       :instance_name,
       :force_delete_add_ons,
       keyword_init: true
@@ -4201,6 +4335,7 @@ module Aws::Lightsail
     #         request, the timestamp of the request, and the resources affected by the request.</p>
     #   @return [Array<Types::Operation>]
     class DeleteInstanceResult < Struct.new(
+      nil,
       :operations,
       keyword_init: true
     )
@@ -4211,6 +4346,7 @@ module Aws::Lightsail
     #   <p>The name of the snapshot to delete.</p>
     #   @return [String]
     class DeleteInstanceSnapshotRequest < Struct.new(
+      nil,
       :instance_snapshot_name,
       keyword_init: true
     )
@@ -4222,6 +4358,7 @@ module Aws::Lightsail
     #         request, the timestamp of the request, and the resources affected by the request.</p>
     #   @return [Array<Types::Operation>]
     class DeleteInstanceSnapshotResult < Struct.new(
+      nil,
       :operations,
       keyword_init: true
     )
@@ -4239,6 +4376,7 @@ module Aws::Lightsail
     #            </note>
     #   @return [String]
     class DeleteKeyPairRequest < Struct.new(
+      nil,
       :key_pair_name,
       :expected_fingerprint,
       keyword_init: true
@@ -4251,6 +4389,7 @@ module Aws::Lightsail
     #         request, the timestamp of the request, and the resources affected by the request.</p>
     #   @return [Types::Operation]
     class DeleteKeyPairResult < Struct.new(
+      nil,
       :operation,
       keyword_init: true
     )
@@ -4261,6 +4400,7 @@ module Aws::Lightsail
     #   <p>The name of the instance for which you want to reset the host key or certificate.</p>
     #   @return [String]
     class DeleteKnownHostKeysRequest < Struct.new(
+      nil,
       :instance_name,
       keyword_init: true
     )
@@ -4272,6 +4412,7 @@ module Aws::Lightsail
     #         request, the timestamp of the request, and the resources affected by the request.</p>
     #   @return [Array<Types::Operation>]
     class DeleteKnownHostKeysResult < Struct.new(
+      nil,
       :operations,
       keyword_init: true
     )
@@ -4282,6 +4423,7 @@ module Aws::Lightsail
     #   <p>The name of the load balancer you want to delete.</p>
     #   @return [String]
     class DeleteLoadBalancerRequest < Struct.new(
+      nil,
       :load_balancer_name,
       keyword_init: true
     )
@@ -4293,6 +4435,7 @@ module Aws::Lightsail
     #         request, the timestamp of the request, and the resources affected by the request.</p>
     #   @return [Array<Types::Operation>]
     class DeleteLoadBalancerResult < Struct.new(
+      nil,
       :operations,
       keyword_init: true
     )
@@ -4312,6 +4455,7 @@ module Aws::Lightsail
     #         is in use by an instance attached to the load balancer.</p>
     #   @return [Boolean]
     class DeleteLoadBalancerTlsCertificateRequest < Struct.new(
+      nil,
       :load_balancer_name,
       :certificate_name,
       :force,
@@ -4325,6 +4469,7 @@ module Aws::Lightsail
     #         request, the timestamp of the request, and the resources affected by the request.</p>
     #   @return [Array<Types::Operation>]
     class DeleteLoadBalancerTlsCertificateResult < Struct.new(
+      nil,
       :operations,
       keyword_init: true
     )
@@ -4361,6 +4506,7 @@ module Aws::Lightsail
     #            </ul>
     #   @return [String]
     class DeleteRelationalDatabaseRequest < Struct.new(
+      nil,
       :relational_database_name,
       :skip_final_snapshot,
       :final_relational_database_snapshot_name,
@@ -4374,6 +4520,7 @@ module Aws::Lightsail
     #         request, the timestamp of the request, and the resources affected by the request.</p>
     #   @return [Array<Types::Operation>]
     class DeleteRelationalDatabaseResult < Struct.new(
+      nil,
       :operations,
       keyword_init: true
     )
@@ -4384,6 +4531,7 @@ module Aws::Lightsail
     #   <p>The name of the database snapshot that you are deleting.</p>
     #   @return [String]
     class DeleteRelationalDatabaseSnapshotRequest < Struct.new(
+      nil,
       :relational_database_snapshot_name,
       keyword_init: true
     )
@@ -4395,6 +4543,7 @@ module Aws::Lightsail
     #         request, the timestamp of the request, and the resources affected by the request.</p>
     #   @return [Array<Types::Operation>]
     class DeleteRelationalDatabaseSnapshotResult < Struct.new(
+      nil,
       :operations,
       keyword_init: true
     )
@@ -4409,6 +4558,7 @@ module Aws::Lightsail
     #   <p>The destination service of the record.</p>
     #   @return [String]
     class DestinationInfo < Struct.new(
+      nil,
       :id,
       :service,
       keyword_init: true
@@ -4422,6 +4572,7 @@ module Aws::Lightsail
     #         can specify.</p>
     #   @return [String]
     class DetachCertificateFromDistributionRequest < Struct.new(
+      nil,
       :distribution_name,
       keyword_init: true
     )
@@ -4433,6 +4584,7 @@ module Aws::Lightsail
     #         timestamp of the request, and the resources affected by the request.</p>
     #   @return [Types::Operation]
     class DetachCertificateFromDistributionResult < Struct.new(
+      nil,
       :operation,
       keyword_init: true
     )
@@ -4444,6 +4596,7 @@ module Aws::Lightsail
     #         (<code>my-disk</code>).</p>
     #   @return [String]
     class DetachDiskRequest < Struct.new(
+      nil,
       :disk_name,
       keyword_init: true
     )
@@ -4455,6 +4608,7 @@ module Aws::Lightsail
     #         request, the timestamp of the request, and the resources affected by the request.</p>
     #   @return [Array<Types::Operation>]
     class DetachDiskResult < Struct.new(
+      nil,
       :operations,
       keyword_init: true
     )
@@ -4469,6 +4623,7 @@ module Aws::Lightsail
     #         balancer.</p>
     #   @return [Array<String>]
     class DetachInstancesFromLoadBalancerRequest < Struct.new(
+      nil,
       :load_balancer_name,
       :instance_names,
       keyword_init: true
@@ -4481,6 +4636,7 @@ module Aws::Lightsail
     #         request, the timestamp of the request, and the resources affected by the request.</p>
     #   @return [Array<Types::Operation>]
     class DetachInstancesFromLoadBalancerResult < Struct.new(
+      nil,
       :operations,
       keyword_init: true
     )
@@ -4491,6 +4647,7 @@ module Aws::Lightsail
     #   <p>The name of the static IP to detach from the instance.</p>
     #   @return [String]
     class DetachStaticIpRequest < Struct.new(
+      nil,
       :static_ip_name,
       keyword_init: true
     )
@@ -4502,6 +4659,7 @@ module Aws::Lightsail
     #         request, the timestamp of the request, and the resources affected by the request.</p>
     #   @return [Array<Types::Operation>]
     class DetachStaticIpResult < Struct.new(
+      nil,
       :operations,
       keyword_init: true
     )
@@ -4515,6 +4673,7 @@ module Aws::Lightsail
     #   <p>The name of the source resource for which to disable the add-on.</p>
     #   @return [String]
     class DisableAddOnRequest < Struct.new(
+      nil,
       :add_on_type,
       :resource_name,
       keyword_init: true
@@ -4527,6 +4686,7 @@ module Aws::Lightsail
     #         request, the timestamp of the request, and the resources affected by the request.</p>
     #   @return [Array<Types::Operation>]
     class DisableAddOnResult < Struct.new(
+      nil,
       :operations,
       keyword_init: true
     )
@@ -4607,6 +4767,7 @@ module Aws::Lightsail
     #            </important>
     #   @return [String]
     class Disk < Struct.new(
+      nil,
       :name,
       :arn,
       :support_code,
@@ -4645,6 +4806,7 @@ module Aws::Lightsail
     #         loaded on it).</p>
     #   @return [Boolean]
     class DiskInfo < Struct.new(
+      nil,
       :name,
       :path,
       :size_in_gb,
@@ -4663,6 +4825,7 @@ module Aws::Lightsail
     #   <p>The new disk name (<code>my-new-disk</code>).</p>
     #   @return [String]
     class DiskMap < Struct.new(
+      nil,
       :original_disk_path,
       :new_disk_name,
       keyword_init: true
@@ -4724,6 +4887,7 @@ module Aws::Lightsail
     #         snapshot.</p>
     #   @return [Boolean]
     class DiskSnapshot < Struct.new(
+      nil,
       :name,
       :arn,
       :support_code,
@@ -4749,6 +4913,7 @@ module Aws::Lightsail
     #   <p>The size of the disk in GB (<code>32</code>).</p>
     #   @return [Integer]
     class DiskSnapshotInfo < Struct.new(
+      nil,
       :size_in_gb,
       keyword_init: true
     )
@@ -4773,6 +4938,7 @@ module Aws::Lightsail
     #         distribution.</p>
     #   @return [Boolean]
     class DistributionBundle < Struct.new(
+      nil,
       :bundle_id,
       :name,
       :price,
@@ -4817,6 +4983,7 @@ module Aws::Lightsail
     #   <p>The message that describes the reason for the status code.</p>
     #   @return [String]
     class DnsRecordCreationState < Struct.new(
+      nil,
       :code,
       :message,
       keyword_init: true
@@ -4858,6 +5025,7 @@ module Aws::Lightsail
     #           Lightsail DNS zone.</p>
     #   @return [Types::RegisteredDomainDelegationInfo]
     class Domain < Struct.new(
+      nil,
       :name,
       :arn,
       :support_code,
@@ -4953,6 +5121,7 @@ module Aws::Lightsail
     #   @deprecated
     #   @return [Hash<String, String>]
     class DomainEntry < Struct.new(
+      nil,
       :id,
       :name,
       :target,
@@ -4983,6 +5152,7 @@ module Aws::Lightsail
     #   <p>The validation status of the record.</p>
     #   @return [String]
     class DomainValidationRecord < Struct.new(
+      nil,
       :domain_name,
       :resource_record,
       :dns_record_creation_state,
@@ -4993,6 +5163,7 @@ module Aws::Lightsail
     end
 
     class DownloadDefaultKeyPairRequest < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -5008,6 +5179,7 @@ module Aws::Lightsail
     #   <p>The timestamp when the default key pair was created.</p>
     #   @return [Time]
     class DownloadDefaultKeyPairResult < Struct.new(
+      nil,
       :public_key_base64,
       :private_key_base64,
       :created_at,
@@ -5023,6 +5195,7 @@ module Aws::Lightsail
     #   <p>An array of strings representing the add-on to enable or modify.</p>
     #   @return [Types::AddOnRequest]
     class EnableAddOnRequest < Struct.new(
+      nil,
       :resource_name,
       :add_on_request,
       keyword_init: true
@@ -5035,6 +5208,7 @@ module Aws::Lightsail
     #         request, the timestamp of the request, and the resources affected by the request.</p>
     #   @return [Array<Types::Operation>]
     class EnableAddOnResult < Struct.new(
+      nil,
       :operations,
       keyword_init: true
     )
@@ -5053,6 +5227,7 @@ module Aws::Lightsail
     #   <p>An object that describes the health check configuration of the container.</p>
     #   @return [Types::ContainerServiceHealthCheckConfig]
     class EndpointRequest < Struct.new(
+      nil,
       :container_name,
       :container_port,
       :health_check,
@@ -5080,6 +5255,7 @@ module Aws::Lightsail
     #         end date. The start date must come before the end date.</p>
     #   @return [Types::TimePeriod]
     class EstimateByTime < Struct.new(
+      nil,
       :usage_cost,
       :pricing_unit,
       :unit,
@@ -5116,6 +5292,7 @@ module Aws::Lightsail
     #   <p>A list of objects describing the destination of the export snapshot record.</p>
     #   @return [Types::DestinationInfo]
     class ExportSnapshotRecord < Struct.new(
+      nil,
       :name,
       :arn,
       :created_at,
@@ -5156,6 +5333,7 @@ module Aws::Lightsail
     #   <p>A list of objects describing a disk snapshot.</p>
     #   @return [Types::DiskSnapshotInfo]
     class ExportSnapshotRecordSourceInfo < Struct.new(
+      nil,
       :resource_type,
       :created_at,
       :name,
@@ -5173,6 +5351,7 @@ module Aws::Lightsail
     #   <p>The name of the instance or disk snapshot to be exported to Amazon EC2.</p>
     #   @return [String]
     class ExportSnapshotRequest < Struct.new(
+      nil,
       :source_snapshot_name,
       keyword_init: true
     )
@@ -5184,6 +5363,7 @@ module Aws::Lightsail
     #         request, the timestamp of the request, and the resources affected by the request.</p>
     #   @return [Array<Types::Operation>]
     class ExportSnapshotResult < Struct.new(
+      nil,
       :operations,
       keyword_init: true
     )
@@ -5197,6 +5377,7 @@ module Aws::Lightsail
     #         page token in a subsequent request.</p>
     #   @return [String]
     class GetActiveNamesRequest < Struct.new(
+      nil,
       :page_token,
       keyword_init: true
     )
@@ -5213,6 +5394,7 @@ module Aws::Lightsail
     #         specify the next page token using the <code>pageToken</code> parameter.</p>
     #   @return [String]
     class GetActiveNamesResult < Struct.new(
+      nil,
       :active_names,
       :next_page_token,
       keyword_init: true
@@ -5236,6 +5418,7 @@ module Aws::Lightsail
     #         resource.</p>
     #   @return [String]
     class GetAlarmsRequest < Struct.new(
+      nil,
       :alarm_name,
       :page_token,
       :monitored_resource_name,
@@ -5254,6 +5437,7 @@ module Aws::Lightsail
     #         specify the next page token using the <code>pageToken</code> parameter.</p>
     #   @return [String]
     class GetAlarmsResult < Struct.new(
+      nil,
       :alarms,
       :next_page_token,
       keyword_init: true
@@ -5266,6 +5450,7 @@ module Aws::Lightsail
     #         information.</p>
     #   @return [String]
     class GetAutoSnapshotsRequest < Struct.new(
+      nil,
       :resource_name,
       keyword_init: true
     )
@@ -5284,6 +5469,7 @@ module Aws::Lightsail
     #         specified source instance or disk.</p>
     #   @return [Array<Types::AutoSnapshotDetails>]
     class GetAutoSnapshotsResult < Struct.new(
+      nil,
       :resource_name,
       :resource_type,
       :auto_snapshots,
@@ -5309,6 +5495,7 @@ module Aws::Lightsail
     #            </important>
     #   @return [String]
     class GetBlueprintsRequest < Struct.new(
+      nil,
       :include_inactive,
       :page_token,
       :app_category,
@@ -5328,6 +5515,7 @@ module Aws::Lightsail
     #         specify the next page token using the <code>pageToken</code> parameter.</p>
     #   @return [String]
     class GetBlueprintsResult < Struct.new(
+      nil,
       :blueprints,
       :next_page_token,
       keyword_init: true
@@ -5339,6 +5527,7 @@ module Aws::Lightsail
     #   <p>The name of the bucket for which to return access keys.</p>
     #   @return [String]
     class GetBucketAccessKeysRequest < Struct.new(
+      nil,
       :bucket_name,
       keyword_init: true
     )
@@ -5349,6 +5538,7 @@ module Aws::Lightsail
     #   <p>An object that describes the access keys for the specified bucket.</p>
     #   @return [Array<Types::AccessKey>]
     class GetBucketAccessKeysResult < Struct.new(
+      nil,
       :access_keys,
       keyword_init: true
     )
@@ -5360,6 +5550,7 @@ module Aws::Lightsail
     #         response of your request.</p>
     #   @return [Boolean]
     class GetBucketBundlesRequest < Struct.new(
+      nil,
       :include_inactive,
       keyword_init: true
     )
@@ -5370,6 +5561,7 @@ module Aws::Lightsail
     #   <p>An object that describes bucket bundles.</p>
     #   @return [Array<Types::BucketBundle>]
     class GetBucketBundlesResult < Struct.new(
+      nil,
       :bundles,
       keyword_init: true
     )
@@ -5464,6 +5656,7 @@ module Aws::Lightsail
     #         available metric, see the <code>metricName</code> parameter.</p>
     #   @return [String]
     class GetBucketMetricDataRequest < Struct.new(
+      nil,
       :bucket_name,
       :metric_name,
       :start_time,
@@ -5483,6 +5676,7 @@ module Aws::Lightsail
     #   <p>An array of objects that describe the metric data returned.</p>
     #   @return [Array<Types::MetricDatapoint>]
     class GetBucketMetricDataResult < Struct.new(
+      nil,
       :metric_name,
       :metric_data,
       keyword_init: true
@@ -5507,6 +5701,7 @@ module Aws::Lightsail
     #         action.</p>
     #   @return [Boolean]
     class GetBucketsRequest < Struct.new(
+      nil,
       :bucket_name,
       :page_token,
       :include_connected_resources,
@@ -5530,6 +5725,7 @@ module Aws::Lightsail
     #            <p>For more information about this feature and how it affects Lightsail buckets, see <a href="https://docs.aws.amazon.com/lightsail/latest/userguide/amazon-lightsail-block-public-access-for-buckets">Block public access for buckets in Amazon Lightsail</a>.</p>
     #   @return [Types::AccountLevelBpaSync]
     class GetBucketsResult < Struct.new(
+      nil,
       :buckets,
       :next_page_token,
       :account_level_bpa_sync,
@@ -5555,6 +5751,7 @@ module Aws::Lightsail
     #            </important>
     #   @return [String]
     class GetBundlesRequest < Struct.new(
+      nil,
       :include_inactive,
       :page_token,
       :app_category,
@@ -5573,6 +5770,7 @@ module Aws::Lightsail
     #         specify the next page token using the <code>pageToken</code> parameter.</p>
     #   @return [String]
     class GetBundlesResult < Struct.new(
+      nil,
       :bundles,
       :next_page_token,
       keyword_init: true
@@ -5605,6 +5803,7 @@ module Aws::Lightsail
     #         page token in a subsequent request.</p>
     #   @return [String]
     class GetCertificatesRequest < Struct.new(
+      nil,
       :certificate_statuses,
       :include_certificate_details,
       :certificate_name,
@@ -5623,6 +5822,7 @@ module Aws::Lightsail
     #         using the returned token to retrieve the next page. Keep all other arguments unchanged.</p>
     #   @return [String]
     class GetCertificatesResult < Struct.new(
+      nil,
       :certificates,
       :next_page_token,
       keyword_init: true
@@ -5637,6 +5837,7 @@ module Aws::Lightsail
     #         as the page token in a subsequent request.</p>
     #   @return [String]
     class GetCloudFormationStackRecordsRequest < Struct.new(
+      nil,
       :page_token,
       keyword_init: true
     )
@@ -5654,6 +5855,7 @@ module Aws::Lightsail
     #           <code>pageToken</code> parameter.</p>
     #   @return [String]
     class GetCloudFormationStackRecordsResult < Struct.new(
+      nil,
       :cloud_formation_stack_records,
       :next_page_token,
       keyword_init: true
@@ -5668,6 +5870,7 @@ module Aws::Lightsail
     #         protocol.</p>
     #   @return [Array<String>]
     class GetContactMethodsRequest < Struct.new(
+      nil,
       :protocols,
       keyword_init: true
     )
@@ -5678,6 +5881,7 @@ module Aws::Lightsail
     #   <p>An array of objects that describe the contact methods.</p>
     #   @return [Array<Types::ContactMethod>]
     class GetContactMethodsResult < Struct.new(
+      nil,
       :contact_methods,
       keyword_init: true
     )
@@ -5685,6 +5889,7 @@ module Aws::Lightsail
     end
 
     class GetContainerAPIMetadataRequest < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -5695,6 +5900,7 @@ module Aws::Lightsail
     #         Control (lightsailctl) plugin.</p>
     #   @return [Array<Hash<String, String>>]
     class GetContainerAPIMetadataResult < Struct.new(
+      nil,
       :metadata,
       keyword_init: true
     )
@@ -5705,6 +5911,7 @@ module Aws::Lightsail
     #   <p>The name of the container service for which to return registered container images.</p>
     #   @return [String]
     class GetContainerImagesRequest < Struct.new(
+      nil,
       :service_name,
       keyword_init: true
     )
@@ -5716,6 +5923,7 @@ module Aws::Lightsail
     #         service.</p>
     #   @return [Array<Types::ContainerImage>]
     class GetContainerImagesResult < Struct.new(
+      nil,
       :container_images,
       keyword_init: true
     )
@@ -5793,6 +6001,7 @@ module Aws::Lightsail
     #         page token in a subsequent request.</p>
     #   @return [String]
     class GetContainerLogRequest < Struct.new(
+      nil,
       :service_name,
       :container_name,
       :start_time,
@@ -5814,6 +6023,7 @@ module Aws::Lightsail
     #         specify the next page token using the <code>pageToken</code> parameter.</p>
     #   @return [String]
     class GetContainerLogResult < Struct.new(
+      nil,
       :log_events,
       :next_page_token,
       keyword_init: true
@@ -5825,6 +6035,7 @@ module Aws::Lightsail
     #   <p>The name of the container service for which to return deployments.</p>
     #   @return [String]
     class GetContainerServiceDeploymentsRequest < Struct.new(
+      nil,
       :service_name,
       keyword_init: true
     )
@@ -5835,6 +6046,7 @@ module Aws::Lightsail
     #   <p>An array of objects that describe deployments for a container service.</p>
     #   @return [Array<Types::ContainerServiceDeployment>]
     class GetContainerServiceDeploymentsResult < Struct.new(
+      nil,
       :deployments,
       keyword_init: true
     )
@@ -5915,6 +6127,7 @@ module Aws::Lightsail
     #            </ul>
     #   @return [Array<String>]
     class GetContainerServiceMetricDataRequest < Struct.new(
+      nil,
       :service_name,
       :metric_name,
       :start_time,
@@ -5933,6 +6146,7 @@ module Aws::Lightsail
     #   <p>An array of objects that describe the metric data returned.</p>
     #   @return [Array<Types::MetricDatapoint>]
     class GetContainerServiceMetricDataResult < Struct.new(
+      nil,
       :metric_name,
       :metric_data,
       keyword_init: true
@@ -5941,6 +6155,7 @@ module Aws::Lightsail
     end
 
     class GetContainerServicePowersRequest < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -5951,6 +6166,7 @@ module Aws::Lightsail
     #         service.</p>
     #   @return [Array<Types::ContainerServicePower>]
     class GetContainerServicePowersResult < Struct.new(
+      nil,
       :powers,
       keyword_init: true
     )
@@ -5962,6 +6178,7 @@ module Aws::Lightsail
     #            <p>When omitted, the response includes all of your container services in the Amazon Web Services Region where the request is made.</p>
     #   @return [String]
     class GetContainerServicesRequest < Struct.new(
+      nil,
       :service_name,
       keyword_init: true
     )
@@ -6002,6 +6219,7 @@ module Aws::Lightsail
     #            <p>You can convert a human-friendly time to Unix time format using a converter like <a href="https://www.epochconverter.com/">Epoch converter</a>.</p>
     #   @return [Time]
     class GetCostEstimateRequest < Struct.new(
+      nil,
       :resource_name,
       :start_time,
       :end_time,
@@ -6014,6 +6232,7 @@ module Aws::Lightsail
     #   <p>Returns the estimate's forecasted cost or usage.</p>
     #   @return [Array<Types::ResourceBudgetEstimate>]
     class GetCostEstimateResult < Struct.new(
+      nil,
       :resources_budget_estimate,
       keyword_init: true
     )
@@ -6024,6 +6243,7 @@ module Aws::Lightsail
     #   <p>The name of the disk (<code>my-disk</code>).</p>
     #   @return [String]
     class GetDiskRequest < Struct.new(
+      nil,
       :disk_name,
       keyword_init: true
     )
@@ -6034,6 +6254,7 @@ module Aws::Lightsail
     #   <p>An object containing information about the disk.</p>
     #   @return [Types::Disk]
     class GetDiskResult < Struct.new(
+      nil,
       :disk,
       keyword_init: true
     )
@@ -6044,6 +6265,7 @@ module Aws::Lightsail
     #   <p>The name of the disk snapshot (<code>my-disk-snapshot</code>).</p>
     #   @return [String]
     class GetDiskSnapshotRequest < Struct.new(
+      nil,
       :disk_snapshot_name,
       keyword_init: true
     )
@@ -6054,6 +6276,7 @@ module Aws::Lightsail
     #   <p>An object containing information about the disk snapshot.</p>
     #   @return [Types::DiskSnapshot]
     class GetDiskSnapshotResult < Struct.new(
+      nil,
       :disk_snapshot,
       keyword_init: true
     )
@@ -6067,6 +6290,7 @@ module Aws::Lightsail
     #         page token in a subsequent request.</p>
     #   @return [String]
     class GetDiskSnapshotsRequest < Struct.new(
+      nil,
       :page_token,
       keyword_init: true
     )
@@ -6083,6 +6307,7 @@ module Aws::Lightsail
     #         specify the next page token using the <code>pageToken</code> parameter.</p>
     #   @return [String]
     class GetDiskSnapshotsResult < Struct.new(
+      nil,
       :disk_snapshots,
       :next_page_token,
       keyword_init: true
@@ -6097,6 +6322,7 @@ module Aws::Lightsail
     #         in a subsequent request.</p>
     #   @return [String]
     class GetDisksRequest < Struct.new(
+      nil,
       :page_token,
       keyword_init: true
     )
@@ -6113,6 +6339,7 @@ module Aws::Lightsail
     #         the next page token using the <code>pageToken</code> parameter.</p>
     #   @return [String]
     class GetDisksResult < Struct.new(
+      nil,
       :disks,
       :next_page_token,
       keyword_init: true
@@ -6121,6 +6348,7 @@ module Aws::Lightsail
     end
 
     class GetDistributionBundlesRequest < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -6130,6 +6358,7 @@ module Aws::Lightsail
     #   <p>An object that describes a distribution bundle.</p>
     #   @return [Array<Types::DistributionBundle>]
     class GetDistributionBundlesResult < Struct.new(
+      nil,
       :bundles,
       keyword_init: true
     )
@@ -6145,6 +6374,7 @@ module Aws::Lightsail
     #         distributions.</p>
     #   @return [String]
     class GetDistributionLatestCacheResetRequest < Struct.new(
+      nil,
       :distribution_name,
       keyword_init: true
     )
@@ -6159,6 +6389,7 @@ module Aws::Lightsail
     #         format.</p>
     #   @return [Time]
     class GetDistributionLatestCacheResetResult < Struct.new(
+      nil,
       :status,
       :create_time,
       keyword_init: true
@@ -6323,6 +6554,7 @@ module Aws::Lightsail
     #            </ul>
     #   @return [Array<String>]
     class GetDistributionMetricDataRequest < Struct.new(
+      nil,
       :distribution_name,
       :metric_name,
       :start_time,
@@ -6342,6 +6574,7 @@ module Aws::Lightsail
     #   <p>An array of objects that describe the metric data returned.</p>
     #   @return [Array<Types::MetricDatapoint>]
     class GetDistributionMetricDataResult < Struct.new(
+      nil,
       :metric_name,
       :metric_data,
       keyword_init: true
@@ -6361,6 +6594,7 @@ module Aws::Lightsail
     #         page token in a subsequent request.</p>
     #   @return [String]
     class GetDistributionsRequest < Struct.new(
+      nil,
       :distribution_name,
       :page_token,
       keyword_init: true
@@ -6378,6 +6612,7 @@ module Aws::Lightsail
     #         specify the next page token using the <code>pageToken</code> parameter.</p>
     #   @return [String]
     class GetDistributionsResult < Struct.new(
+      nil,
       :distributions,
       :next_page_token,
       keyword_init: true
@@ -6389,6 +6624,7 @@ module Aws::Lightsail
     #   <p>The domain name for which your want to return information about.</p>
     #   @return [String]
     class GetDomainRequest < Struct.new(
+      nil,
       :domain_name,
       keyword_init: true
     )
@@ -6399,6 +6635,7 @@ module Aws::Lightsail
     #   <p>An array of key-value pairs containing information about your get domain request.</p>
     #   @return [Types::Domain]
     class GetDomainResult < Struct.new(
+      nil,
       :domain,
       keyword_init: true
     )
@@ -6412,6 +6649,7 @@ module Aws::Lightsail
     #         token in a subsequent request.</p>
     #   @return [String]
     class GetDomainsRequest < Struct.new(
+      nil,
       :page_token,
       keyword_init: true
     )
@@ -6429,6 +6667,7 @@ module Aws::Lightsail
     #         specify the next page token using the <code>pageToken</code> parameter.</p>
     #   @return [String]
     class GetDomainsResult < Struct.new(
+      nil,
       :domains,
       :next_page_token,
       keyword_init: true
@@ -6443,6 +6682,7 @@ module Aws::Lightsail
     #         the page token in a subsequent request.</p>
     #   @return [String]
     class GetExportSnapshotRecordsRequest < Struct.new(
+      nil,
       :page_token,
       keyword_init: true
     )
@@ -6459,6 +6699,7 @@ module Aws::Lightsail
     #         request and specify the next page token using the <code>pageToken</code> parameter.</p>
     #   @return [String]
     class GetExportSnapshotRecordsResult < Struct.new(
+      nil,
       :export_snapshot_records,
       :next_page_token,
       keyword_init: true
@@ -6473,6 +6714,7 @@ module Aws::Lightsail
     #   <p>The protocol to use to connect to your instance. Defaults to <code>ssh</code>.</p>
     #   @return [String]
     class GetInstanceAccessDetailsRequest < Struct.new(
+      nil,
       :instance_name,
       :protocol,
       keyword_init: true
@@ -6485,6 +6727,7 @@ module Aws::Lightsail
     #         request.</p>
     #   @return [Types::InstanceAccessDetails]
     class GetInstanceAccessDetailsResult < Struct.new(
+      nil,
       :access_details,
       keyword_init: true
     )
@@ -6684,6 +6927,7 @@ module Aws::Lightsail
     #            </ul>
     #   @return [Array<String>]
     class GetInstanceMetricDataRequest < Struct.new(
+      nil,
       :instance_name,
       :metric_name,
       :period,
@@ -6703,6 +6947,7 @@ module Aws::Lightsail
     #   <p>An array of objects that describe the metric data returned.</p>
     #   @return [Array<Types::MetricDatapoint>]
     class GetInstanceMetricDataResult < Struct.new(
+      nil,
       :metric_name,
       :metric_data,
       keyword_init: true
@@ -6714,6 +6959,7 @@ module Aws::Lightsail
     #   <p>The name of the instance for which to return firewall port states.</p>
     #   @return [String]
     class GetInstancePortStatesRequest < Struct.new(
+      nil,
       :instance_name,
       keyword_init: true
     )
@@ -6725,6 +6971,7 @@ module Aws::Lightsail
     #         instance.</p>
     #   @return [Array<Types::InstancePortState>]
     class GetInstancePortStatesResult < Struct.new(
+      nil,
       :port_states,
       keyword_init: true
     )
@@ -6735,6 +6982,7 @@ module Aws::Lightsail
     #   <p>The name of the instance.</p>
     #   @return [String]
     class GetInstanceRequest < Struct.new(
+      nil,
       :instance_name,
       keyword_init: true
     )
@@ -6745,6 +6993,7 @@ module Aws::Lightsail
     #   <p>An array of key-value pairs containing information about the specified instance.</p>
     #   @return [Types::Instance]
     class GetInstanceResult < Struct.new(
+      nil,
       :instance,
       keyword_init: true
     )
@@ -6755,6 +7004,7 @@ module Aws::Lightsail
     #   <p>The name of the snapshot for which you are requesting information.</p>
     #   @return [String]
     class GetInstanceSnapshotRequest < Struct.new(
+      nil,
       :instance_snapshot_name,
       keyword_init: true
     )
@@ -6766,6 +7016,7 @@ module Aws::Lightsail
     #         snapshot request.</p>
     #   @return [Types::InstanceSnapshot]
     class GetInstanceSnapshotResult < Struct.new(
+      nil,
       :instance_snapshot,
       keyword_init: true
     )
@@ -6779,6 +7030,7 @@ module Aws::Lightsail
     #         page token in a subsequent request.</p>
     #   @return [String]
     class GetInstanceSnapshotsRequest < Struct.new(
+      nil,
       :page_token,
       keyword_init: true
     )
@@ -6796,6 +7048,7 @@ module Aws::Lightsail
     #         and specify the next page token using the <code>pageToken</code> parameter.</p>
     #   @return [String]
     class GetInstanceSnapshotsResult < Struct.new(
+      nil,
       :instance_snapshots,
       :next_page_token,
       keyword_init: true
@@ -6807,6 +7060,7 @@ module Aws::Lightsail
     #   <p>The name of the instance to get state information about.</p>
     #   @return [String]
     class GetInstanceStateRequest < Struct.new(
+      nil,
       :instance_name,
       keyword_init: true
     )
@@ -6817,6 +7071,7 @@ module Aws::Lightsail
     #   <p>The state of the instance.</p>
     #   @return [Types::InstanceState]
     class GetInstanceStateResult < Struct.new(
+      nil,
       :state,
       keyword_init: true
     )
@@ -6830,6 +7085,7 @@ module Aws::Lightsail
     #         token in a subsequent request.</p>
     #   @return [String]
     class GetInstancesRequest < Struct.new(
+      nil,
       :page_token,
       keyword_init: true
     )
@@ -6846,6 +7102,7 @@ module Aws::Lightsail
     #         specify the next page token using the <code>pageToken</code> parameter.</p>
     #   @return [String]
     class GetInstancesResult < Struct.new(
+      nil,
       :instances,
       :next_page_token,
       keyword_init: true
@@ -6857,6 +7114,7 @@ module Aws::Lightsail
     #   <p>The name of the key pair for which you are requesting information.</p>
     #   @return [String]
     class GetKeyPairRequest < Struct.new(
+      nil,
       :key_pair_name,
       keyword_init: true
     )
@@ -6867,6 +7125,7 @@ module Aws::Lightsail
     #   <p>An array of key-value pairs containing information about the key pair.</p>
     #   @return [Types::KeyPair]
     class GetKeyPairResult < Struct.new(
+      nil,
       :key_pair,
       keyword_init: true
     )
@@ -6884,6 +7143,7 @@ module Aws::Lightsail
     #         your request.</p>
     #   @return [Boolean]
     class GetKeyPairsRequest < Struct.new(
+      nil,
       :page_token,
       :include_default_key_pair,
       keyword_init: true
@@ -6901,6 +7161,7 @@ module Aws::Lightsail
     #         specify the next page token using the <code>pageToken</code> parameter.</p>
     #   @return [String]
     class GetKeyPairsResult < Struct.new(
+      nil,
       :key_pairs,
       :next_page_token,
       keyword_init: true
@@ -7130,6 +7391,7 @@ module Aws::Lightsail
     #            </ul>
     #   @return [Array<String>]
     class GetLoadBalancerMetricDataRequest < Struct.new(
+      nil,
       :load_balancer_name,
       :metric_name,
       :period,
@@ -7149,6 +7411,7 @@ module Aws::Lightsail
     #   <p>An array of objects that describe the metric data returned.</p>
     #   @return [Array<Types::MetricDatapoint>]
     class GetLoadBalancerMetricDataResult < Struct.new(
+      nil,
       :metric_name,
       :metric_data,
       keyword_init: true
@@ -7160,6 +7423,7 @@ module Aws::Lightsail
     #   <p>The name of the load balancer.</p>
     #   @return [String]
     class GetLoadBalancerRequest < Struct.new(
+      nil,
       :load_balancer_name,
       keyword_init: true
     )
@@ -7170,6 +7434,7 @@ module Aws::Lightsail
     #   <p>An object containing information about your load balancer.</p>
     #   @return [Types::LoadBalancer]
     class GetLoadBalancerResult < Struct.new(
+      nil,
       :load_balancer,
       keyword_init: true
     )
@@ -7180,6 +7445,7 @@ module Aws::Lightsail
     #   <p>The name of the load balancer you associated with your SSL/TLS certificate.</p>
     #   @return [String]
     class GetLoadBalancerTlsCertificatesRequest < Struct.new(
+      nil,
       :load_balancer_name,
       keyword_init: true
     )
@@ -7191,6 +7457,7 @@ module Aws::Lightsail
     #         certificates.</p>
     #   @return [Array<Types::LoadBalancerTlsCertificate>]
     class GetLoadBalancerTlsCertificatesResult < Struct.new(
+      nil,
       :tls_certificates,
       keyword_init: true
     )
@@ -7204,6 +7471,7 @@ module Aws::Lightsail
     #         as the page token in a subsequent request.</p>
     #   @return [String]
     class GetLoadBalancerTlsPoliciesRequest < Struct.new(
+      nil,
       :page_token,
       keyword_init: true
     )
@@ -7220,6 +7488,7 @@ module Aws::Lightsail
     #         request and specify the next page token using the <code>pageToken</code> parameter.</p>
     #   @return [String]
     class GetLoadBalancerTlsPoliciesResult < Struct.new(
+      nil,
       :tls_policies,
       :next_page_token,
       keyword_init: true
@@ -7234,6 +7503,7 @@ module Aws::Lightsail
     #         page token in a subsequent request.</p>
     #   @return [String]
     class GetLoadBalancersRequest < Struct.new(
+      nil,
       :page_token,
       keyword_init: true
     )
@@ -7250,6 +7520,7 @@ module Aws::Lightsail
     #         specify the next page token using the <code>pageToken</code> parameter.</p>
     #   @return [String]
     class GetLoadBalancersResult < Struct.new(
+      nil,
       :load_balancers,
       :next_page_token,
       keyword_init: true
@@ -7261,6 +7532,7 @@ module Aws::Lightsail
     #   <p>A GUID used to identify the operation.</p>
     #   @return [String]
     class GetOperationRequest < Struct.new(
+      nil,
       :operation_id,
       keyword_init: true
     )
@@ -7272,6 +7544,7 @@ module Aws::Lightsail
     #         request, the timestamp of the request, and the resources affected by the request.</p>
     #   @return [Types::Operation]
     class GetOperationResult < Struct.new(
+      nil,
       :operation,
       keyword_init: true
     )
@@ -7288,6 +7561,7 @@ module Aws::Lightsail
     #         the page token in a subsequent request.</p>
     #   @return [String]
     class GetOperationsForResourceRequest < Struct.new(
+      nil,
       :resource_name,
       :page_token,
       keyword_init: true
@@ -7315,6 +7589,7 @@ module Aws::Lightsail
     #         request and specify the next page token using the <code>pageToken</code> parameter.</p>
     #   @return [String]
     class GetOperationsForResourceResult < Struct.new(
+      nil,
       :operations,
       :next_page_count,
       :next_page_token,
@@ -7330,6 +7605,7 @@ module Aws::Lightsail
     #         page token in a subsequent request.</p>
     #   @return [String]
     class GetOperationsRequest < Struct.new(
+      nil,
       :page_token,
       keyword_init: true
     )
@@ -7347,6 +7623,7 @@ module Aws::Lightsail
     #         specify the next page token using the <code>pageToken</code> parameter.</p>
     #   @return [String]
     class GetOperationsResult < Struct.new(
+      nil,
       :operations,
       :next_page_token,
       keyword_init: true
@@ -7364,6 +7641,7 @@ module Aws::Lightsail
     #           (<code>us-east-2a</code>).</p>
     #   @return [Boolean]
     class GetRegionsRequest < Struct.new(
+      nil,
       :include_availability_zones,
       :include_relational_database_availability_zones,
       keyword_init: true
@@ -7375,6 +7653,7 @@ module Aws::Lightsail
     #   <p>An array of key-value pairs containing information about your get regions request.</p>
     #   @return [Array<Types::Region>]
     class GetRegionsResult < Struct.new(
+      nil,
       :regions,
       keyword_init: true
     )
@@ -7388,6 +7667,7 @@ module Aws::Lightsail
     #         can specify as the page token in a subsequent request.</p>
     #   @return [String]
     class GetRelationalDatabaseBlueprintsRequest < Struct.new(
+      nil,
       :page_token,
       keyword_init: true
     )
@@ -7405,6 +7685,7 @@ module Aws::Lightsail
     #         the <code>pageToken</code> parameter.</p>
     #   @return [String]
     class GetRelationalDatabaseBlueprintsResult < Struct.new(
+      nil,
       :blueprints,
       :next_page_token,
       keyword_init: true
@@ -7423,6 +7704,7 @@ module Aws::Lightsail
     #         response of your request.</p>
     #   @return [Boolean]
     class GetRelationalDatabaseBundlesRequest < Struct.new(
+      nil,
       :page_token,
       :include_inactive,
       keyword_init: true
@@ -7440,6 +7722,7 @@ module Aws::Lightsail
     #         request and specify the next page token using the <code>pageToken</code> parameter.</p>
     #   @return [String]
     class GetRelationalDatabaseBundlesResult < Struct.new(
+      nil,
       :bundles,
       :next_page_token,
       keyword_init: true
@@ -7464,6 +7747,7 @@ module Aws::Lightsail
     #         as the page token in a subsequent request.</p>
     #   @return [String]
     class GetRelationalDatabaseEventsRequest < Struct.new(
+      nil,
       :relational_database_name,
       :duration_in_minutes,
       :page_token,
@@ -7482,6 +7766,7 @@ module Aws::Lightsail
     #         request and specify the next page token using the <code>pageToken</code> parameter.</p>
     #   @return [String]
     class GetRelationalDatabaseEventsResult < Struct.new(
+      nil,
       :relational_database_events,
       :next_page_token,
       keyword_init: true
@@ -7541,6 +7826,7 @@ module Aws::Lightsail
     #         next backward token that you can specify as the page token in a subsequent request.</p>
     #   @return [String]
     class GetRelationalDatabaseLogEventsRequest < Struct.new(
+      nil,
       :relational_database_name,
       :log_stream_name,
       :start_time,
@@ -7564,6 +7850,7 @@ module Aws::Lightsail
     #         log events request.</p>
     #   @return [String]
     class GetRelationalDatabaseLogEventsResult < Struct.new(
+      nil,
       :resource_log_events,
       :next_backward_token,
       :next_forward_token,
@@ -7576,6 +7863,7 @@ module Aws::Lightsail
     #   <p>The name of your database for which to get log streams.</p>
     #   @return [String]
     class GetRelationalDatabaseLogStreamsRequest < Struct.new(
+      nil,
       :relational_database_name,
       keyword_init: true
     )
@@ -7587,6 +7875,7 @@ module Aws::Lightsail
     #         request.</p>
     #   @return [Array<String>]
     class GetRelationalDatabaseLogStreamsResult < Struct.new(
+      nil,
       :log_streams,
       keyword_init: true
     )
@@ -7607,6 +7896,7 @@ module Aws::Lightsail
     #            </p>
     #   @return [String]
     class GetRelationalDatabaseMasterUserPasswordRequest < Struct.new(
+      nil,
       :relational_database_name,
       :password_version,
       keyword_init: true
@@ -7621,6 +7911,7 @@ module Aws::Lightsail
     #   <p>The timestamp when the specified version of the master user password was created.</p>
     #   @return [Time]
     class GetRelationalDatabaseMasterUserPasswordResult < Struct.new(
+      nil,
       :master_user_password,
       :created_at,
       keyword_init: true
@@ -7782,6 +8073,7 @@ module Aws::Lightsail
     #            </ul>
     #   @return [Array<String>]
     class GetRelationalDatabaseMetricDataRequest < Struct.new(
+      nil,
       :relational_database_name,
       :metric_name,
       :period,
@@ -7801,6 +8093,7 @@ module Aws::Lightsail
     #   <p>An array of objects that describe the metric data returned.</p>
     #   @return [Array<Types::MetricDatapoint>]
     class GetRelationalDatabaseMetricDataResult < Struct.new(
+      nil,
       :metric_name,
       :metric_data,
       keyword_init: true
@@ -7818,6 +8111,7 @@ module Aws::Lightsail
     #         can specify as the page token in a subsequent request.</p>
     #   @return [String]
     class GetRelationalDatabaseParametersRequest < Struct.new(
+      nil,
       :relational_database_name,
       :page_token,
       keyword_init: true
@@ -7836,6 +8130,7 @@ module Aws::Lightsail
     #         the <code>pageToken</code> parameter.</p>
     #   @return [String]
     class GetRelationalDatabaseParametersResult < Struct.new(
+      nil,
       :parameters,
       :next_page_token,
       keyword_init: true
@@ -7847,6 +8142,7 @@ module Aws::Lightsail
     #   <p>The name of the database that you are looking up.</p>
     #   @return [String]
     class GetRelationalDatabaseRequest < Struct.new(
+      nil,
       :relational_database_name,
       keyword_init: true
     )
@@ -7857,6 +8153,7 @@ module Aws::Lightsail
     #   <p>An object describing the specified database.</p>
     #   @return [Types::RelationalDatabase]
     class GetRelationalDatabaseResult < Struct.new(
+      nil,
       :relational_database,
       keyword_init: true
     )
@@ -7867,6 +8164,7 @@ module Aws::Lightsail
     #   <p>The name of the database snapshot for which to get information.</p>
     #   @return [String]
     class GetRelationalDatabaseSnapshotRequest < Struct.new(
+      nil,
       :relational_database_snapshot_name,
       keyword_init: true
     )
@@ -7877,6 +8175,7 @@ module Aws::Lightsail
     #   <p>An object describing the specified database snapshot.</p>
     #   @return [Types::RelationalDatabaseSnapshot]
     class GetRelationalDatabaseSnapshotResult < Struct.new(
+      nil,
       :relational_database_snapshot,
       keyword_init: true
     )
@@ -7890,6 +8189,7 @@ module Aws::Lightsail
     #         can specify as the page token in a subsequent request.</p>
     #   @return [String]
     class GetRelationalDatabaseSnapshotsRequest < Struct.new(
+      nil,
       :page_token,
       keyword_init: true
     )
@@ -7907,6 +8207,7 @@ module Aws::Lightsail
     #         the <code>pageToken</code> parameter.</p>
     #   @return [String]
     class GetRelationalDatabaseSnapshotsResult < Struct.new(
+      nil,
       :relational_database_snapshots,
       :next_page_token,
       keyword_init: true
@@ -7921,6 +8222,7 @@ module Aws::Lightsail
     #         the page token in a subsequent request.</p>
     #   @return [String]
     class GetRelationalDatabasesRequest < Struct.new(
+      nil,
       :page_token,
       keyword_init: true
     )
@@ -7937,6 +8239,7 @@ module Aws::Lightsail
     #         request and specify the next page token using the <code>pageToken</code> parameter.</p>
     #   @return [String]
     class GetRelationalDatabasesResult < Struct.new(
+      nil,
       :relational_databases,
       :next_page_token,
       keyword_init: true
@@ -7954,6 +8257,7 @@ module Aws::Lightsail
     #         page token in a subsequent request.</p>
     #   @return [String]
     class GetSetupHistoryRequest < Struct.new(
+      nil,
       :resource_name,
       :page_token,
       keyword_init: true
@@ -7971,6 +8275,7 @@ module Aws::Lightsail
     #         specify the next page token using the pageToken parameter.</p>
     #   @return [String]
     class GetSetupHistoryResult < Struct.new(
+      nil,
       :setup_history,
       :next_page_token,
       keyword_init: true
@@ -7982,6 +8287,7 @@ module Aws::Lightsail
     #   <p>The name of the static IP in Lightsail.</p>
     #   @return [String]
     class GetStaticIpRequest < Struct.new(
+      nil,
       :static_ip_name,
       keyword_init: true
     )
@@ -7992,6 +8298,7 @@ module Aws::Lightsail
     #   <p>An array of key-value pairs containing information about the requested static IP.</p>
     #   @return [Types::StaticIp]
     class GetStaticIpResult < Struct.new(
+      nil,
       :static_ip,
       keyword_init: true
     )
@@ -8005,6 +8312,7 @@ module Aws::Lightsail
     #         token in a subsequent request.</p>
     #   @return [String]
     class GetStaticIpsRequest < Struct.new(
+      nil,
       :page_token,
       keyword_init: true
     )
@@ -8022,6 +8330,7 @@ module Aws::Lightsail
     #         specify the next page token using the <code>pageToken</code> parameter.</p>
     #   @return [String]
     class GetStaticIpsResult < Struct.new(
+      nil,
       :static_ips,
       :next_page_token,
       keyword_init: true
@@ -8070,6 +8379,7 @@ module Aws::Lightsail
     #   <p>The specific headers to forward to your distribution's origin.</p>
     #   @return [Array<String>]
     class HeaderObject < Struct.new(
+      nil,
       :option,
       :headers_allow_list,
       keyword_init: true
@@ -8133,6 +8443,7 @@ module Aws::Lightsail
     #            <p>This value is listed only for RDP certificates.</p>
     #   @return [Time]
     class HostKeyAttributes < Struct.new(
+      nil,
       :algorithm,
       :public_key,
       :witnessed_at,
@@ -8152,6 +8463,7 @@ module Aws::Lightsail
     #   <p>A base64-encoded public key of the <code>ssh-rsa</code> type.</p>
     #   @return [String]
     class ImportKeyPairRequest < Struct.new(
+      nil,
       :key_pair_name,
       :public_key_base64,
       keyword_init: true
@@ -8164,6 +8476,7 @@ module Aws::Lightsail
     #         request, the timestamp of the request, and the resources affected by the request.</p>
     #   @return [Types::Operation]
     class ImportKeyPairResult < Struct.new(
+      nil,
       :operation,
       keyword_init: true
     )
@@ -8191,6 +8504,7 @@ module Aws::Lightsail
     #         seconds, and the default (if you don't specify otherwise) is 30 seconds.</p>
     #   @return [Integer]
     class InputOrigin < Struct.new(
+      nil,
       :name,
       :region_name,
       :protocol_policy,
@@ -8277,6 +8591,7 @@ module Aws::Lightsail
     #   <p>The metadata options for the Amazon Lightsail instance.</p>
     #   @return [Types::InstanceMetadataOptions]
     class Instance < Struct.new(
+      nil,
       :name,
       :arn,
       :support_code,
@@ -8355,6 +8670,7 @@ module Aws::Lightsail
     #   <p>Describes the public SSH host keys or the RDP certificate.</p>
     #   @return [Array<Types::HostKeyAttributes>]
     class InstanceAccessDetails < Struct.new(
+      nil,
       :cert_key,
       :expires_at,
       :ip_address,
@@ -8433,6 +8749,7 @@ module Aws::Lightsail
     #   <p>The Availability Zone for the new Amazon EC2 instance.</p>
     #   @return [String]
     class InstanceEntry < Struct.new(
+      nil,
       :source_name,
       :instance_type,
       :port_info_source,
@@ -8454,6 +8771,7 @@ module Aws::Lightsail
     #   <p>The amount of RAM in GB on the instance (<code>1.0</code>).</p>
     #   @return [Float]
     class InstanceHardware < Struct.new(
+      nil,
       :cpu_count,
       :disks,
       :ram_size_in_gb,
@@ -8594,6 +8912,7 @@ module Aws::Lightsail
     #            </ul>
     #   @return [String]
     class InstanceHealthSummary < Struct.new(
+      nil,
       :instance_name,
       :instance_health,
       :instance_health_reason,
@@ -8650,6 +8969,7 @@ module Aws::Lightsail
     #         disabled.</p>
     #   @return [String]
     class InstanceMetadataOptions < Struct.new(
+      nil,
       :state,
       :http_tokens,
       :http_endpoint,
@@ -8668,6 +8988,7 @@ module Aws::Lightsail
     #   <p>An array of key-value pairs containing information about the ports on the instance.</p>
     #   @return [Array<Types::InstancePortInfo>]
     class InstanceNetworking < Struct.new(
+      nil,
       :monthly_transfer,
       :ports,
       keyword_init: true
@@ -8806,6 +9127,7 @@ module Aws::Lightsail
     #         instance.</p>
     #   @return [Array<String>]
     class InstancePortInfo < Struct.new(
+      nil,
       :from_port,
       :to_port,
       :protocol,
@@ -8949,6 +9271,7 @@ module Aws::Lightsail
     #         instance.</p>
     #   @return [Array<String>]
     class InstancePortState < Struct.new(
+      nil,
       :from_port,
       :to_port,
       :protocol,
@@ -9029,6 +9352,7 @@ module Aws::Lightsail
     #   <p>The size in GB of the SSD.</p>
     #   @return [Integer]
     class InstanceSnapshot < Struct.new(
+      nil,
       :name,
       :arn,
       :support_code,
@@ -9061,6 +9385,7 @@ module Aws::Lightsail
     #   <p>A list of objects describing the disks that were attached to the source instance.</p>
     #   @return [Array<Types::DiskInfo>]
     class InstanceSnapshotInfo < Struct.new(
+      nil,
       :from_bundle_id,
       :from_blueprint_id,
       :from_disk_info,
@@ -9077,6 +9402,7 @@ module Aws::Lightsail
     #   <p>The state of the instance (<code>running</code> or <code>pending</code>).</p>
     #   @return [String]
     class InstanceState < Struct.new(
+      nil,
       :code,
       :name,
       keyword_init: true
@@ -9101,6 +9427,7 @@ module Aws::Lightsail
     # @!attribute tip
     #   @return [String]
     class InvalidInputException < Struct.new(
+      nil,
       :code,
       :docs,
       :message,
@@ -9111,6 +9438,7 @@ module Aws::Lightsail
     end
 
     class IsVpcPeeredRequest < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -9121,6 +9449,7 @@ module Aws::Lightsail
     #         <code>false</code>.</p>
     #   @return [Boolean]
     class IsVpcPeeredResult < Struct.new(
+      nil,
       :is_peered,
       keyword_init: true
     )
@@ -9157,6 +9486,7 @@ module Aws::Lightsail
     #   <p>The RSA fingerprint of the key pair.</p>
     #   @return [String]
     class KeyPair < Struct.new(
+      nil,
       :name,
       :arn,
       :support_code,
@@ -9252,6 +9582,7 @@ module Aws::Lightsail
     #         viewers.</p>
     #   @return [String]
     class LightsailDistribution < Struct.new(
+      nil,
       :name,
       :arn,
       :support_code,
@@ -9353,6 +9684,7 @@ module Aws::Lightsail
     #   <p>The name of the TLS security policy for the load balancer.</p>
     #   @return [String]
     class LoadBalancer < Struct.new(
+      nil,
       :name,
       :arn,
       :support_code,
@@ -9597,6 +9929,7 @@ module Aws::Lightsail
     #         subdomains (<code>blog.example.com</code>) for the certificate.</p>
     #   @return [Array<String>]
     class LoadBalancerTlsCertificate < Struct.new(
+      nil,
       :name,
       :arn,
       :support_code,
@@ -9652,6 +9985,7 @@ module Aws::Lightsail
     #   <p>The message that describes the reason for the status code.</p>
     #   @return [String]
     class LoadBalancerTlsCertificateDnsRecordCreationState < Struct.new(
+      nil,
       :code,
       :message,
       keyword_init: true
@@ -9668,6 +10002,7 @@ module Aws::Lightsail
     #   <p>The status of the domain validation. Valid values are listed below.</p>
     #   @return [String]
     class LoadBalancerTlsCertificateDomainValidationOption < Struct.new(
+      nil,
       :domain_name,
       :validation_status,
       keyword_init: true
@@ -9699,6 +10034,7 @@ module Aws::Lightsail
     #         ownership.</p>
     #   @return [Types::LoadBalancerTlsCertificateDnsRecordCreationState]
     class LoadBalancerTlsCertificateDomainValidationRecord < Struct.new(
+      nil,
       :name,
       :type,
       :value,
@@ -9798,6 +10134,7 @@ module Aws::Lightsail
     #         occurs as a result of the RequestCertificate request.</p>
     #   @return [Array<Types::LoadBalancerTlsCertificateDomainValidationOption>]
     class LoadBalancerTlsCertificateRenewalSummary < Struct.new(
+      nil,
       :renewal_status,
       :domain_validation_options,
       keyword_init: true
@@ -9814,6 +10151,7 @@ module Aws::Lightsail
     #         balancer.</p>
     #   @return [Boolean]
     class LoadBalancerTlsCertificateSummary < Struct.new(
+      nil,
       :name,
       :is_attached,
       keyword_init: true
@@ -9843,6 +10181,7 @@ module Aws::Lightsail
     #            <p>The ciphers are listed in order of preference.</p>
     #   @return [Array<String>]
     class LoadBalancerTlsPolicy < Struct.new(
+      nil,
       :name,
       :is_default,
       :description,
@@ -9861,6 +10200,7 @@ module Aws::Lightsail
     #   <p>The message of the database log event.</p>
     #   @return [String]
     class LogEvent < Struct.new(
+      nil,
       :created_at,
       :message,
       keyword_init: true
@@ -9891,6 +10231,7 @@ module Aws::Lightsail
     #   <p>The unit. </p>
     #   @return [String]
     class MetricDatapoint < Struct.new(
+      nil,
       :average,
       :maximum,
       :minimum,
@@ -9919,6 +10260,7 @@ module Aws::Lightsail
     #         that can currently be monitored by alarms.</p>
     #   @return [String]
     class MonitoredResourceInfo < Struct.new(
+      nil,
       :arn,
       :name,
       :resource_type,
@@ -9933,6 +10275,7 @@ module Aws::Lightsail
     #   <p>The amount allocated per month (in GB).</p>
     #   @return [Integer]
     class MonthlyTransfer < Struct.new(
+      nil,
       :gb_per_month_allocated,
       keyword_init: true
     )
@@ -9969,6 +10312,7 @@ module Aws::Lightsail
     #   <p>The message that describes the reason for the status code.</p>
     #   @return [String]
     class NameServersUpdateState < Struct.new(
+      nil,
       :code,
       :message,
       keyword_init: true
@@ -9986,6 +10330,7 @@ module Aws::Lightsail
     # @!attribute tip
     #   @return [String]
     class NotFoundException < Struct.new(
+      nil,
       :code,
       :docs,
       :message,
@@ -10002,6 +10347,7 @@ module Aws::Lightsail
     #   <p>The name of the instance for which to open ports.</p>
     #   @return [String]
     class OpenInstancePublicPortsRequest < Struct.new(
+      nil,
       :port_info,
       :instance_name,
       keyword_init: true
@@ -10014,6 +10360,7 @@ module Aws::Lightsail
     #         request, the timestamp of the request, and the resources affected by the request.</p>
     #   @return [Types::Operation]
     class OpenInstancePublicPortsResult < Struct.new(
+      nil,
       :operation,
       keyword_init: true
     )
@@ -10058,6 +10405,7 @@ module Aws::Lightsail
     #   <p>The error details.</p>
     #   @return [String]
     class Operation < Struct.new(
+      nil,
       :id,
       :resource_name,
       :resource_type,
@@ -10085,6 +10433,7 @@ module Aws::Lightsail
     # @!attribute tip
     #   @return [String]
     class OperationFailureException < Struct.new(
+      nil,
       :code,
       :docs,
       :message,
@@ -10118,6 +10467,7 @@ module Aws::Lightsail
     #         seconds, and the default (if you don't specify otherwise) is 30 seconds.</p>
     #   @return [Integer]
     class Origin < Struct.new(
+      nil,
       :name,
       :resource_type,
       :region_name,
@@ -10152,6 +10502,7 @@ module Aws::Lightsail
     #         your password with the public key part of this key pair.</p>
     #   @return [String]
     class PasswordData < Struct.new(
+      nil,
       :ciphertext,
       :key_pair_name,
       keyword_init: true
@@ -10160,6 +10511,7 @@ module Aws::Lightsail
     end
 
     class PeerVpcRequest < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -10170,6 +10522,7 @@ module Aws::Lightsail
     #         request, the timestamp of the request, and the resources affected by the request.</p>
     #   @return [Types::Operation]
     class PeerVpcResult < Struct.new(
+      nil,
       :operation,
       keyword_init: true
     )
@@ -10187,6 +10540,7 @@ module Aws::Lightsail
     #   <p>The effective date of the pending database maintenance action.</p>
     #   @return [Time]
     class PendingMaintenanceAction < Struct.new(
+      nil,
       :action,
       :description,
       :current_apply_date,
@@ -10206,6 +10560,7 @@ module Aws::Lightsail
     #   <p>A Boolean value indicating whether automated backup retention is enabled.</p>
     #   @return [Boolean]
     class PendingModifiedRelationalDatabaseValues < Struct.new(
+      nil,
       :master_user_password,
       :engine_version,
       :backup_retention_enabled,
@@ -10341,6 +10696,7 @@ module Aws::Lightsail
     #         instance.</p>
     #   @return [Array<String>]
     class PortInfo < Struct.new(
+      nil,
       :from_port,
       :to_port,
       :protocol,
@@ -10368,6 +10724,7 @@ module Aws::Lightsail
     #         listed.</p>
     #   @return [Types::ContainerServiceECRImagePullerRole]
     class PrivateRegistryAccess < Struct.new(
+      nil,
       :ecr_image_puller_role,
       keyword_init: true
     )
@@ -10383,6 +10740,7 @@ module Aws::Lightsail
     #           (Amazon ECR) private repositories.</p>
     #   @return [Types::ContainerServiceECRImagePullerRoleRequest]
     class PrivateRegistryAccessRequest < Struct.new(
+      nil,
       :ecr_image_puller_role,
       keyword_init: true
     )
@@ -10537,6 +10895,7 @@ module Aws::Lightsail
     #            <p>Notifications are enabled by default if you don't specify this parameter.</p>
     #   @return [Boolean]
     class PutAlarmRequest < Struct.new(
+      nil,
       :alarm_name,
       :metric_name,
       :monitored_resource_name,
@@ -10558,6 +10917,7 @@ module Aws::Lightsail
     #         request, the timestamp of the request, and the resources affected by the request.</p>
     #   @return [Array<Types::Operation>]
     class PutAlarmResult < Struct.new(
+      nil,
       :operations,
       keyword_init: true
     )
@@ -10571,6 +10931,7 @@ module Aws::Lightsail
     #   <p>The name of the instance for which to open ports.</p>
     #   @return [String]
     class PutInstancePublicPortsRequest < Struct.new(
+      nil,
       :port_infos,
       :instance_name,
       keyword_init: true
@@ -10583,6 +10944,7 @@ module Aws::Lightsail
     #         request, the timestamp of the request, and the resources affected by the request.</p>
     #   @return [Types::Operation]
     class PutInstancePublicPortsResult < Struct.new(
+      nil,
       :operation,
       keyword_init: true
     )
@@ -10605,6 +10967,7 @@ module Aws::Lightsail
     #         parameter.</p>
     #   @return [Array<String>]
     class QueryStringObject < Struct.new(
+      nil,
       :option,
       :query_strings_allow_list,
       keyword_init: true
@@ -10640,6 +11003,7 @@ module Aws::Lightsail
     #   <p>The message that describes the reason for the status code.</p>
     #   @return [String]
     class R53HostedZoneDeletionState < Struct.new(
+      nil,
       :code,
       :message,
       keyword_init: true
@@ -10651,6 +11015,7 @@ module Aws::Lightsail
     #   <p>The name of the instance to reboot.</p>
     #   @return [String]
     class RebootInstanceRequest < Struct.new(
+      nil,
       :instance_name,
       keyword_init: true
     )
@@ -10662,6 +11027,7 @@ module Aws::Lightsail
     #         request, the timestamp of the request, and the resources affected by the request.</p>
     #   @return [Array<Types::Operation>]
     class RebootInstanceResult < Struct.new(
+      nil,
       :operations,
       keyword_init: true
     )
@@ -10672,6 +11038,7 @@ module Aws::Lightsail
     #   <p>The name of your database to reboot.</p>
     #   @return [String]
     class RebootRelationalDatabaseRequest < Struct.new(
+      nil,
       :relational_database_name,
       keyword_init: true
     )
@@ -10683,6 +11050,7 @@ module Aws::Lightsail
     #         request, the timestamp of the request, and the resources affected by the request.</p>
     #   @return [Array<Types::Operation>]
     class RebootRelationalDatabaseResult < Struct.new(
+      nil,
       :operations,
       keyword_init: true
     )
@@ -10712,6 +11080,7 @@ module Aws::Lightsail
     #         (case-sensitive).</p>
     #   @return [Array<Types::AvailabilityZone>]
     class Region < Struct.new(
+      nil,
       :continent_code,
       :description,
       :display_name,
@@ -10739,6 +11108,7 @@ module Aws::Lightsail
     #   <p>Opt-in Regions typically take a few minutes to finish setting up before you can work with them. Wait a few minutes and try again.</p>
     #   @return [String]
     class RegionSetupInProgressException < Struct.new(
+      nil,
       :code,
       :docs,
       :message,
@@ -10778,6 +11148,7 @@ module Aws::Lightsail
     #   <p>The digest of the container image to be registered.</p>
     #   @return [String]
     class RegisterContainerImageRequest < Struct.new(
+      nil,
       :service_name,
       :label,
       :digest,
@@ -10791,6 +11162,7 @@ module Aws::Lightsail
     #         service</p>
     #   @return [Types::ContainerImage]
     class RegisterContainerImageResult < Struct.new(
+      nil,
       :container_image,
       keyword_init: true
     )
@@ -10831,6 +11203,7 @@ module Aws::Lightsail
     #         being automatically delegated to an Amazon Lightsail DNS zone.</p>
     #   @return [Types::R53HostedZoneDeletionState]
     class RegisteredDomainDelegationInfo < Struct.new(
+      nil,
       :name_servers_update_state,
       :r53_hosted_zone_deletion_state,
       keyword_init: true
@@ -10932,6 +11305,7 @@ module Aws::Lightsail
     #   <p>The certificate associated with the database.</p>
     #   @return [String]
     class RelationalDatabase < Struct.new(
+      nil,
       :name,
       :arn,
       :support_code,
@@ -10986,6 +11360,7 @@ module Aws::Lightsail
     #         blueprint.</p>
     #   @return [Boolean]
     class RelationalDatabaseBlueprint < Struct.new(
+      nil,
       :blueprint_id,
       :engine,
       :engine_version,
@@ -11027,6 +11402,7 @@ module Aws::Lightsail
     #   <p>A Boolean value indicating whether the database bundle is active.</p>
     #   @return [Boolean]
     class RelationalDatabaseBundle < Struct.new(
+      nil,
       :bundle_id,
       :name,
       :price,
@@ -11049,6 +11425,7 @@ module Aws::Lightsail
     #   <p>Specifies the DNS address of the database.</p>
     #   @return [String]
     class RelationalDatabaseEndpoint < Struct.new(
+      nil,
       :port,
       :address,
       keyword_init: true
@@ -11070,6 +11447,7 @@ module Aws::Lightsail
     #   <p>The category that the database event belongs to.</p>
     #   @return [Array<String>]
     class RelationalDatabaseEvent < Struct.new(
+      nil,
       :resource,
       :created_at,
       :message,
@@ -11090,6 +11468,7 @@ module Aws::Lightsail
     #   <p>The amount of RAM in GB for the database.</p>
     #   @return [Float]
     class RelationalDatabaseHardware < Struct.new(
+      nil,
       :cpu_count,
       :disk_size_in_gb,
       :ram_size_in_gb,
@@ -11125,6 +11504,7 @@ module Aws::Lightsail
     #   <p>Specifies the value of the parameter.</p>
     #   @return [String]
     class RelationalDatabaseParameter < Struct.new(
+      nil,
       :allowed_values,
       :apply_method,
       :apply_type,
@@ -11192,6 +11572,7 @@ module Aws::Lightsail
     #         describes the major engine version of a database.</p>
     #   @return [String]
     class RelationalDatabaseSnapshot < Struct.new(
+      nil,
       :name,
       :arn,
       :support_code,
@@ -11216,6 +11597,7 @@ module Aws::Lightsail
     #   <p>The name of the static IP to delete.</p>
     #   @return [String]
     class ReleaseStaticIpRequest < Struct.new(
+      nil,
       :static_ip_name,
       keyword_init: true
     )
@@ -11227,6 +11609,7 @@ module Aws::Lightsail
     #         request, the timestamp of the request, and the resources affected by the request.</p>
     #   @return [Array<Types::Operation>]
     class ReleaseStaticIpResult < Struct.new(
+      nil,
       :operations,
       keyword_init: true
     )
@@ -11285,6 +11668,7 @@ module Aws::Lightsail
     #   <p>The timestamp when the certificate was last updated.</p>
     #   @return [Time]
     class RenewalSummary < Struct.new(
+      nil,
       :domain_validation_records,
       :renewal_status,
       :renewal_status_reason,
@@ -11300,6 +11684,7 @@ module Aws::Lightsail
     #         can specify.</p>
     #   @return [String]
     class ResetDistributionCacheRequest < Struct.new(
+      nil,
       :distribution_name,
       keyword_init: true
     )
@@ -11318,6 +11703,7 @@ module Aws::Lightsail
     #         request, the timestamp of the request, and the resources affected by the request.</p>
     #   @return [Types::Operation]
     class ResetDistributionCacheResult < Struct.new(
+      nil,
       :status,
       :create_time,
       :operation,
@@ -11343,6 +11729,7 @@ module Aws::Lightsail
     #   <p>The estimate end time.</p>
     #   @return [Time]
     class ResourceBudgetEstimate < Struct.new(
+      nil,
       :resource_name,
       :resource_type,
       :cost_estimates,
@@ -11361,6 +11748,7 @@ module Aws::Lightsail
     #   <p>The Amazon Web Services Region name.</p>
     #   @return [String]
     class ResourceLocation < Struct.new(
+      nil,
       :availability_zone,
       :region_name,
       keyword_init: true
@@ -11376,6 +11764,7 @@ module Aws::Lightsail
     #   <p>The Lightsail resource type (for example, <code>Instance</code>).</p>
     #   @return [String]
     class ResourceReceivingAccess < Struct.new(
+      nil,
       :name,
       :resource_type,
       keyword_init: true
@@ -11395,6 +11784,7 @@ module Aws::Lightsail
     #   <p>The value for the DNS record.</p>
     #   @return [String]
     class ResourceRecord < Struct.new(
+      nil,
       :name,
       :type,
       :value,
@@ -11408,6 +11798,7 @@ module Aws::Lightsail
     #         messaging).</p>
     #   @return [String]
     class SendContactMethodVerificationRequest < Struct.new(
+      nil,
       :protocol,
       keyword_init: true
     )
@@ -11419,6 +11810,7 @@ module Aws::Lightsail
     #         request, the timestamp of the request, and the resources affected by the request.</p>
     #   @return [Array<Types::Operation>]
     class SendContactMethodVerificationResult < Struct.new(
+      nil,
       :operations,
       keyword_init: true
     )
@@ -11435,6 +11827,7 @@ module Aws::Lightsail
     # @!attribute tip
     #   @return [String]
     class ServiceException < Struct.new(
+      nil,
       :code,
       :docs,
       :message,
@@ -11457,6 +11850,7 @@ module Aws::Lightsail
     #         resource.</p>
     #   @return [Boolean]
     class Session < Struct.new(
+      nil,
       :name,
       :url,
       :is_primary,
@@ -11496,6 +11890,7 @@ module Aws::Lightsail
     #            </note>
     #   @return [Boolean]
     class SetIpAddressTypeRequest < Struct.new(
+      nil,
       :resource_type,
       :resource_name,
       :ip_address_type,
@@ -11510,6 +11905,7 @@ module Aws::Lightsail
     #         request, the timestamp of the request, and the resources affected by the request.</p>
     #   @return [Array<Types::Operation>]
     class SetIpAddressTypeResult < Struct.new(
+      nil,
       :operations,
       keyword_init: true
     )
@@ -11539,6 +11935,7 @@ module Aws::Lightsail
     #            </ul>
     #   @return [String]
     class SetResourceAccessForBucketRequest < Struct.new(
+      nil,
       :resource_name,
       :bucket_name,
       :access,
@@ -11552,6 +11949,7 @@ module Aws::Lightsail
     #         request, the timestamp of the request, and the resources affected by the request.</p>
     #   @return [Array<Types::Operation>]
     class SetResourceAccessForBucketResult < Struct.new(
+      nil,
       :operations,
       keyword_init: true
     )
@@ -11581,6 +11979,7 @@ module Aws::Lightsail
     #   <p>The current version of the script..</p>
     #   @return [String]
     class SetupExecutionDetails < Struct.new(
+      nil,
       :command,
       :date_time,
       :name,
@@ -11611,6 +12010,7 @@ module Aws::Lightsail
     #   <p>The status of the request.</p>
     #   @return [String]
     class SetupHistory < Struct.new(
+      nil,
       :operation_id,
       :request,
       :resource,
@@ -11638,6 +12038,7 @@ module Aws::Lightsail
     #   <p>The Lightsail resource type. For example, <code>Instance</code>.</p>
     #   @return [String]
     class SetupHistoryResource < Struct.new(
+      nil,
       :name,
       :arn,
       :created_at,
@@ -11663,6 +12064,7 @@ module Aws::Lightsail
     #   <p>The certificate authority that issues the SSL/TLS certificate.</p>
     #   @return [String]
     class SetupInstanceHttpsRequest < Struct.new(
+      nil,
       :instance_name,
       :email_address,
       :domain_names,
@@ -11676,6 +12078,7 @@ module Aws::Lightsail
     #   <p>The available API operations for <code>SetupInstanceHttps</code>.</p>
     #   @return [Array<Types::Operation>]
     class SetupInstanceHttpsResult < Struct.new(
+      nil,
       :operations,
       keyword_init: true
     )
@@ -11694,6 +12097,7 @@ module Aws::Lightsail
     #   <p>The Certificate Authority (CA) that issues the SSL/TLS certificate.</p>
     #   @return [String]
     class SetupRequest < Struct.new(
+      nil,
       :instance_name,
       :domain_names,
       :certificate_provider,
@@ -11706,6 +12110,7 @@ module Aws::Lightsail
     #   <p>The resource name.</p>
     #   @return [String]
     class StartGUISessionRequest < Struct.new(
+      nil,
       :resource_name,
       keyword_init: true
     )
@@ -11716,6 +12121,7 @@ module Aws::Lightsail
     #   <p>The available API operations.</p>
     #   @return [Array<Types::Operation>]
     class StartGUISessionResult < Struct.new(
+      nil,
       :operations,
       keyword_init: true
     )
@@ -11726,6 +12132,7 @@ module Aws::Lightsail
     #   <p>The name of the instance (a virtual private server) to start.</p>
     #   @return [String]
     class StartInstanceRequest < Struct.new(
+      nil,
       :instance_name,
       keyword_init: true
     )
@@ -11737,6 +12144,7 @@ module Aws::Lightsail
     #         request, the timestamp of the request, and the resources affected by the request.</p>
     #   @return [Array<Types::Operation>]
     class StartInstanceResult < Struct.new(
+      nil,
       :operations,
       keyword_init: true
     )
@@ -11747,6 +12155,7 @@ module Aws::Lightsail
     #   <p>The name of your database to start.</p>
     #   @return [String]
     class StartRelationalDatabaseRequest < Struct.new(
+      nil,
       :relational_database_name,
       keyword_init: true
     )
@@ -11758,6 +12167,7 @@ module Aws::Lightsail
     #         request, the timestamp of the request, and the resources affected by the request.</p>
     #   @return [Array<Types::Operation>]
     class StartRelationalDatabaseResult < Struct.new(
+      nil,
       :operations,
       keyword_init: true
     )
@@ -11797,6 +12207,7 @@ module Aws::Lightsail
     #   <p>A Boolean value indicating whether the static IP is attached.</p>
     #   @return [Boolean]
     class StaticIp < Struct.new(
+      nil,
       :name,
       :arn,
       :support_code,
@@ -11815,6 +12226,7 @@ module Aws::Lightsail
     #   <p>The resource name.</p>
     #   @return [String]
     class StopGUISessionRequest < Struct.new(
+      nil,
       :resource_name,
       keyword_init: true
     )
@@ -11825,6 +12237,7 @@ module Aws::Lightsail
     #   <p>The available API operations.</p>
     #   @return [Array<Types::Operation>]
     class StopGUISessionResult < Struct.new(
+      nil,
       :operations,
       keyword_init: true
     )
@@ -11843,6 +12256,7 @@ module Aws::Lightsail
     #         stop.</p>
     #   @return [String]
     class StopInstanceOnIdleRequest < Struct.new(
+      nil,
       :threshold,
       :duration,
       keyword_init: true
@@ -11863,6 +12277,7 @@ module Aws::Lightsail
     #            </important>
     #   @return [Boolean]
     class StopInstanceRequest < Struct.new(
+      nil,
       :instance_name,
       :force,
       keyword_init: true
@@ -11875,6 +12290,7 @@ module Aws::Lightsail
     #         request, the timestamp of the request, and the resources affected by the request.</p>
     #   @return [Array<Types::Operation>]
     class StopInstanceResult < Struct.new(
+      nil,
       :operations,
       keyword_init: true
     )
@@ -11888,6 +12304,7 @@ module Aws::Lightsail
     #   <p>The name of your new database snapshot to be created before stopping your database.</p>
     #   @return [String]
     class StopRelationalDatabaseRequest < Struct.new(
+      nil,
       :relational_database_name,
       :relational_database_snapshot_name,
       keyword_init: true
@@ -11900,6 +12317,7 @@ module Aws::Lightsail
     #         request, the timestamp of the request, and the resources affected by the request.</p>
     #   @return [Array<Types::Operation>]
     class StopRelationalDatabaseResult < Struct.new(
+      nil,
       :operations,
       keyword_init: true
     )
@@ -11919,6 +12337,7 @@ module Aws::Lightsail
     #         following characters: + - = . _ : / @</p>
     #   @return [String]
     class Tag < Struct.new(
+      nil,
       :key,
       :value,
       keyword_init: true
@@ -11936,6 +12355,7 @@ module Aws::Lightsail
     #   <p>The tag key and optional value.</p>
     #   @return [Array<Types::Tag>]
     class TagResourceRequest < Struct.new(
+      nil,
       :resource_name,
       :resource_arn,
       :tags,
@@ -11949,6 +12369,7 @@ module Aws::Lightsail
     #         request, the timestamp of the request, and the resources affected by the request.</p>
     #   @return [Array<Types::Operation>]
     class TagResourceResult < Struct.new(
+      nil,
       :operations,
       keyword_init: true
     )
@@ -11979,6 +12400,7 @@ module Aws::Lightsail
     #            </ul>
     #   @return [String]
     class TestAlarmRequest < Struct.new(
+      nil,
       :alarm_name,
       :state,
       keyword_init: true
@@ -11991,6 +12413,7 @@ module Aws::Lightsail
     #         request, the timestamp of the request, and the resources affected by the request.</p>
     #   @return [Array<Types::Operation>]
     class TestAlarmResult < Struct.new(
+      nil,
       :operations,
       keyword_init: true
     )
@@ -12014,6 +12437,7 @@ module Aws::Lightsail
     #         not including, <code>2017-05-01</code>.</p>
     #   @return [Time]
     class TimePeriod < Struct.new(
+      nil,
       :start,
       :end,
       keyword_init: true
@@ -12031,6 +12455,7 @@ module Aws::Lightsail
     # @!attribute tip
     #   @return [String]
     class UnauthenticatedException < Struct.new(
+      nil,
       :code,
       :docs,
       :message,
@@ -12041,6 +12466,7 @@ module Aws::Lightsail
     end
 
     class UnpeerVpcRequest < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -12051,6 +12477,7 @@ module Aws::Lightsail
     #         request, the timestamp of the request, and the resources affected by the request.</p>
     #   @return [Types::Operation]
     class UnpeerVpcResult < Struct.new(
+      nil,
       :operation,
       keyword_init: true
     )
@@ -12067,6 +12494,7 @@ module Aws::Lightsail
     #   <p>The tag keys to delete from the specified resource.</p>
     #   @return [Array<String>]
     class UntagResourceRequest < Struct.new(
+      nil,
       :resource_name,
       :resource_arn,
       :tag_keys,
@@ -12080,6 +12508,7 @@ module Aws::Lightsail
     #         request, the timestamp of the request, and the resources affected by the request.</p>
     #   @return [Array<Types::Operation>]
     class UntagResourceResult < Struct.new(
+      nil,
       :operations,
       keyword_init: true
     )
@@ -12095,6 +12524,7 @@ module Aws::Lightsail
     #         bundle IDs that you can specify.</p>
     #   @return [String]
     class UpdateBucketBundleRequest < Struct.new(
+      nil,
       :bucket_name,
       :bundle_id,
       keyword_init: true
@@ -12107,6 +12537,7 @@ module Aws::Lightsail
     #         request, the timestamp of the request, and the resources affected by the request.</p>
     #   @return [Array<Types::Operation>]
     class UpdateBucketBundleResult < Struct.new(
+      nil,
       :operations,
       keyword_init: true
     )
@@ -12143,6 +12574,7 @@ module Aws::Lightsail
     #   <p>An object that describes the access log configuration for the bucket.</p>
     #   @return [Types::BucketAccessLogConfig]
     class UpdateBucketRequest < Struct.new(
+      nil,
       :bucket_name,
       :access_rules,
       :versioning,
@@ -12161,6 +12593,7 @@ module Aws::Lightsail
     #         request, the timestamp of the request, and the resources affected by the request.</p>
     #   @return [Array<Types::Operation>]
     class UpdateBucketResult < Struct.new(
+      nil,
       :bucket,
       :operations,
       keyword_init: true
@@ -12215,6 +12648,7 @@ module Aws::Lightsail
     #            <p>For more information, see <a href="https://docs.aws.amazon.com/lightsail/latest/userguide/amazon-lightsail-container-service-ecr-private-repo-access">Configuring access to an Amazon ECR private repository for an Amazon Lightsail container service</a> in the <i>Amazon Lightsail Developer Guide</i>.</p>
     #   @return [Types::PrivateRegistryAccessRequest]
     class UpdateContainerServiceRequest < Struct.new(
+      nil,
       :service_name,
       :power,
       :scale,
@@ -12230,6 +12664,7 @@ module Aws::Lightsail
     #   <p>An object that describes a container service.</p>
     #   @return [Types::ContainerService]
     class UpdateContainerServiceResult < Struct.new(
+      nil,
       :container_service,
       keyword_init: true
     )
@@ -12247,6 +12682,7 @@ module Aws::Lightsail
     #         IDs that you can specify.</p>
     #   @return [String]
     class UpdateDistributionBundleRequest < Struct.new(
+      nil,
       :distribution_name,
       :bundle_id,
       keyword_init: true
@@ -12259,6 +12695,7 @@ module Aws::Lightsail
     #         timestamp of the request, and the resources affected by the request.</p>
     #   @return [Types::Operation]
     class UpdateDistributionBundleResult < Struct.new(
+      nil,
       :operation,
       keyword_init: true
     )
@@ -12311,6 +12748,7 @@ module Aws::Lightsail
     #         distribution.</p>
     #   @return [Boolean]
     class UpdateDistributionRequest < Struct.new(
+      nil,
       :distribution_name,
       :origin,
       :default_cache_behavior,
@@ -12330,6 +12768,7 @@ module Aws::Lightsail
     #         request, the timestamp of the request, and the resources affected by the request.</p>
     #   @return [Types::Operation]
     class UpdateDistributionResult < Struct.new(
+      nil,
       :operation,
       keyword_init: true
     )
@@ -12343,6 +12782,7 @@ module Aws::Lightsail
     #   <p>An array of key-value pairs containing information about the domain entry.</p>
     #   @return [Types::DomainEntry]
     class UpdateDomainEntryRequest < Struct.new(
+      nil,
       :domain_name,
       :domain_entry,
       keyword_init: true
@@ -12355,6 +12795,7 @@ module Aws::Lightsail
     #         request, the timestamp of the request, and the resources affected by the request.</p>
     #   @return [Array<Types::Operation>]
     class UpdateDomainEntryResult < Struct.new(
+      nil,
       :operations,
       keyword_init: true
     )
@@ -12395,6 +12836,7 @@ module Aws::Lightsail
     #            </note>
     #   @return [String]
     class UpdateInstanceMetadataOptionsRequest < Struct.new(
+      nil,
       :instance_name,
       :http_tokens,
       :http_endpoint,
@@ -12410,6 +12852,7 @@ module Aws::Lightsail
     #         request, the timestamp of the request, and the resources affected by the request.</p>
     #   @return [Types::Operation]
     class UpdateInstanceMetadataOptionsResult < Struct.new(
+      nil,
       :operation,
       keyword_init: true
     )
@@ -12461,6 +12904,7 @@ module Aws::Lightsail
     #            </ul>
     #   @return [String]
     class UpdateLoadBalancerAttributeRequest < Struct.new(
+      nil,
       :load_balancer_name,
       :attribute_name,
       :attribute_value,
@@ -12474,6 +12918,7 @@ module Aws::Lightsail
     #         request, the timestamp of the request, and the resources affected by the request.</p>
     #   @return [Array<Types::Operation>]
     class UpdateLoadBalancerAttributeResult < Struct.new(
+      nil,
       :operations,
       keyword_init: true
     )
@@ -12487,6 +12932,7 @@ module Aws::Lightsail
     #   <p>The database parameters to update.</p>
     #   @return [Array<Types::RelationalDatabaseParameter>]
     class UpdateRelationalDatabaseParametersRequest < Struct.new(
+      nil,
       :relational_database_name,
       :parameters,
       keyword_init: true
@@ -12499,6 +12945,7 @@ module Aws::Lightsail
     #         request, the timestamp of the request, and the resources affected by the request.</p>
     #   @return [Array<Types::Operation>]
     class UpdateRelationalDatabaseParametersResult < Struct.new(
+      nil,
       :operations,
       keyword_init: true
     )
@@ -12605,6 +13052,7 @@ module Aws::Lightsail
     #         IDs.</p>
     #   @return [String]
     class UpdateRelationalDatabaseRequest < Struct.new(
+      nil,
       :relational_database_name,
       :master_user_password,
       :rotate_master_user_password,
@@ -12626,6 +13074,7 @@ module Aws::Lightsail
     #         request, the timestamp of the request, and the resources affected by the request.</p>
     #   @return [Array<Types::Operation>]
     class UpdateRelationalDatabaseResult < Struct.new(
+      nil,
       :operations,
       keyword_init: true
     )

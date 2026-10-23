@@ -12,6 +12,7 @@ module Aws::Detective
     #            <p>The member account status in the behavior graph must be <code>INVITED</code>.</p>
     #   @return [String]
     class AcceptInvitationRequest < Struct.new(
+      nil,
       :graph_arn,
       keyword_init: true
     )
@@ -35,6 +36,7 @@ module Aws::Detective
     #   <p> An explanation of why access was denied.</p>
     #   @return [String]
     class AccessDeniedException < Struct.new(
+      nil,
       :message,
       :error_code,
       :error_code_reason,
@@ -55,6 +57,7 @@ module Aws::Detective
     #            account.</p>
     #   @return [String]
     class Account < Struct.new(
+      nil,
       :account_id,
       :email_address,
       keyword_init: true
@@ -77,6 +80,7 @@ module Aws::Detective
     #            <code>2021-08-18T16:35:56.284Z</code>.</p>
     #   @return [Time]
     class Administrator < Struct.new(
+      nil,
       :account_id,
       :graph_arn,
       :delegation_time,
@@ -93,6 +97,7 @@ module Aws::Detective
     #            on.</p>
     #   @return [Array<String>]
     class BatchGetGraphMemberDatasourcesRequest < Struct.new(
+      nil,
       :graph_arn,
       :account_ids,
       keyword_init: true
@@ -107,6 +112,7 @@ module Aws::Detective
     #   <p>Accounts that data source package information could not be retrieved for.</p>
     #   @return [Array<Types::UnprocessedAccount>]
     class BatchGetGraphMemberDatasourcesResponse < Struct.new(
+      nil,
       :member_datasources,
       :unprocessed_accounts,
       keyword_init: true
@@ -118,6 +124,7 @@ module Aws::Detective
     #   <p>The ARN of the behavior graph.</p>
     #   @return [Array<String>]
     class BatchGetMembershipDatasourcesRequest < Struct.new(
+      nil,
       :graph_arns,
       keyword_init: true
     )
@@ -131,6 +138,7 @@ module Aws::Detective
     #   <p>Graphs that data source package information could not be retrieved for.</p>
     #   @return [Array<Types::UnprocessedGraph>]
     class BatchGetMembershipDatasourcesResponse < Struct.new(
+      nil,
       :membership_datasources,
       :unprocessed_graphs,
       keyword_init: true
@@ -142,6 +150,7 @@ module Aws::Detective
     # @!attribute message
     #   @return [String]
     class ConflictException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -154,6 +163,7 @@ module Aws::Detective
     #            Each tag value can contain up to 256 characters.</p>
     #   @return [Hash<String, String>]
     class CreateGraphRequest < Struct.new(
+      nil,
       :tags,
       keyword_init: true
     )
@@ -164,6 +174,7 @@ module Aws::Detective
     #   <p>The ARN of the new behavior graph.</p>
     #   @return [String]
     class CreateGraphResponse < Struct.new(
+      nil,
       :graph_arn,
       keyword_init: true
     )
@@ -192,6 +203,7 @@ module Aws::Detective
     #            required.</p>
     #   @return [Array<Types::Account>]
     class CreateMembersRequest < Struct.new(
+      nil,
       :graph_arn,
       :message,
       :disable_email_notification,
@@ -213,6 +225,7 @@ module Aws::Detective
     #            behavior graph.</p>
     #   @return [Array<Types::UnprocessedAccount>]
     class CreateMembersResponse < Struct.new(
+      nil,
       :members,
       :unprocessed_accounts,
       keyword_init: true
@@ -228,6 +241,7 @@ module Aws::Detective
     #   <p>The date a data source package was enabled for this account</p>
     #   @return [Hash<String, Types::TimestampForCollection>]
     class DatasourcePackageIngestDetail < Struct.new(
+      nil,
       :datasource_package_ingest_state,
       :last_ingest_state_change,
       keyword_init: true
@@ -244,6 +258,7 @@ module Aws::Detective
     #            ISO8601 formatted string. For example, <code>2021-08-18T16:35:56.284Z</code>.</p>
     #   @return [Time]
     class DatasourcePackageUsageInfo < Struct.new(
+      nil,
       :volume_usage_in_bytes,
       :volume_usage_update_time,
       keyword_init: true
@@ -259,6 +274,7 @@ module Aws::Detective
     #   <p>A timestamp representing the end date of the time period until when data is filtered, including the end date.</p>
     #   @return [Time]
     class DateFilter < Struct.new(
+      nil,
       :start_inclusive,
       :end_inclusive,
       keyword_init: true
@@ -270,6 +286,7 @@ module Aws::Detective
     #   <p>The ARN of the behavior graph to disable.</p>
     #   @return [String]
     class DeleteGraphRequest < Struct.new(
+      nil,
       :graph_arn,
       keyword_init: true
     )
@@ -284,6 +301,7 @@ module Aws::Detective
     #            from the behavior graph. You can remove up to 50 member accounts at a time.</p>
     #   @return [Array<String>]
     class DeleteMembersRequest < Struct.new(
+      nil,
       :graph_arn,
       :account_ids,
       keyword_init: true
@@ -300,6 +318,7 @@ module Aws::Detective
     #            processed.</p>
     #   @return [Array<Types::UnprocessedAccount>]
     class DeleteMembersResponse < Struct.new(
+      nil,
       :account_ids,
       :unprocessed_accounts,
       keyword_init: true
@@ -311,6 +330,7 @@ module Aws::Detective
     #   <p>The ARN of the organization behavior graph.</p>
     #   @return [String]
     class DescribeOrganizationConfigurationRequest < Struct.new(
+      nil,
       :graph_arn,
       keyword_init: true
     )
@@ -322,6 +342,7 @@ module Aws::Detective
     #            in the organization behavior graph.</p>
     #   @return [Boolean]
     class DescribeOrganizationConfigurationResponse < Struct.new(
+      nil,
       :auto_enable,
       keyword_init: true
     )
@@ -339,6 +360,7 @@ module Aws::Detective
     #            <code>ENABLED</code>.</p>
     #   @return [String]
     class DisassociateMembershipRequest < Struct.new(
+      nil,
       :graph_arn,
       keyword_init: true
     )
@@ -349,6 +371,7 @@ module Aws::Detective
     #   <p>The Amazon Web Services account identifier of the account to designate as the Detective administrator account for the organization.</p>
     #   @return [String]
     class EnableOrganizationAdminAccountRequest < Struct.new(
+      nil,
       :account_id,
       keyword_init: true
     )
@@ -372,6 +395,7 @@ module Aws::Detective
     #   <p>Filter the investigation results based on when the investigation was created.</p>
     #   @return [Types::DateFilter]
     class FilterCriteria < Struct.new(
+      nil,
       :severity,
       :status,
       :state,
@@ -390,6 +414,7 @@ module Aws::Detective
     #   <p>Details the reason the IP address was flagged as suspicious.</p>
     #   @return [String]
     class FlaggedIpAddressDetail < Struct.new(
+      nil,
       :ip_address,
       :reason,
       keyword_init: true
@@ -404,6 +429,7 @@ module Aws::Detective
     #   <p>The investigation ID of the investigation report.</p>
     #   @return [String]
     class GetInvestigationRequest < Struct.new(
+      nil,
       :graph_arn,
       :investigation_id,
       keyword_init: true
@@ -446,6 +472,7 @@ module Aws::Detective
     #            have completed reviewing the investigation.</p>
     #   @return [String]
     class GetInvestigationResponse < Struct.new(
+      nil,
       :graph_arn,
       :investigation_id,
       :entity_arn,
@@ -472,6 +499,7 @@ module Aws::Detective
     #            that were removed from the behavior graph.</p>
     #   @return [Array<String>]
     class GetMembersRequest < Struct.new(
+      nil,
       :graph_arn,
       :account_ids,
       keyword_init: true
@@ -489,6 +517,7 @@ module Aws::Detective
     #            <p>For each account, provides the reason why the request could not be processed.</p>
     #   @return [Array<Types::UnprocessedAccount>]
     class GetMembersResponse < Struct.new(
+      nil,
       :member_details,
       :unprocessed_accounts,
       keyword_init: true
@@ -505,6 +534,7 @@ module Aws::Detective
     #            string. For example, <code>2021-08-18T16:35:56.284Z</code>.</p>
     #   @return [Time]
     class Graph < Struct.new(
+      nil,
       :arn,
       :created_time,
       keyword_init: true
@@ -529,6 +559,7 @@ module Aws::Detective
     #   <p>Returns the time difference between the first and last timestamp the resource was used.</p>
     #   @return [Integer]
     class ImpossibleTravelDetail < Struct.new(
+      nil,
       :starting_ip_address,
       :ending_ip_address,
       :starting_location,
@@ -551,6 +582,7 @@ module Aws::Detective
     #   <p>Details about the indicators of compromise that are used to determine if a resource is involved in a security incident. An indicator of compromise (IOC) is an artifact observed in or on a network, system, or environment that can (with a high level of confidence) identify malicious activity or a security incident.</p>
     #   @return [Types::IndicatorDetail]
     class Indicator < Struct.new(
+      nil,
       :indicator_type,
       :indicator_detail,
       keyword_init: true
@@ -584,6 +616,7 @@ module Aws::Detective
     #   <p>Contains details about related finding groups.</p>
     #   @return [Types::RelatedFindingGroupDetail]
     class IndicatorDetail < Struct.new(
+      nil,
       :tt_ps_observed_detail,
       :impossible_travel_detail,
       :flagged_ip_address_detail,
@@ -601,6 +634,7 @@ module Aws::Detective
     # @!attribute message
     #   @return [String]
     class InternalServerException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -631,6 +665,7 @@ module Aws::Detective
     #   <p>Type of entity. For example, Amazon Web Services accounts, such as IAM user and role.</p>
     #   @return [String]
     class InvestigationDetail < Struct.new(
+      nil,
       :investigation_id,
       :severity,
       :status,
@@ -655,6 +690,7 @@ module Aws::Detective
     #   <p>The maximum number of results to return.</p>
     #   @return [Integer]
     class ListDatasourcePackagesRequest < Struct.new(
+      nil,
       :graph_arn,
       :next_token,
       :max_results,
@@ -672,6 +708,7 @@ module Aws::Detective
     #            token.</p>
     #   @return [String]
     class ListDatasourcePackagesResponse < Struct.new(
+      nil,
       :datasource_packages,
       :next_token,
       keyword_init: true
@@ -689,6 +726,7 @@ module Aws::Detective
     #            overall limit on the number of results to return, which is currently 200.</p>
     #   @return [Integer]
     class ListGraphsRequest < Struct.new(
+      nil,
       :next_token,
       :max_results,
       keyword_init: true
@@ -704,6 +742,7 @@ module Aws::Detective
     #            token to use to request the next page of behavior graphs.</p>
     #   @return [String]
     class ListGraphsResponse < Struct.new(
+      nil,
       :graph_list,
       :next_token,
       keyword_init: true
@@ -728,6 +767,7 @@ module Aws::Detective
     #   <p>Lists the maximum number of indicators in a page.</p>
     #   @return [Integer]
     class ListIndicatorsRequest < Struct.new(
+      nil,
       :graph_arn,
       :investigation_id,
       :indicator_type,
@@ -752,6 +792,7 @@ module Aws::Detective
     #   <p>Lists the indicators of compromise.</p>
     #   @return [Array<Types::Indicator>]
     class ListIndicatorsResponse < Struct.new(
+      nil,
       :graph_arn,
       :investigation_id,
       :next_token,
@@ -778,6 +819,7 @@ module Aws::Detective
     #   <p>Sorts the investigation results based on a criteria.</p>
     #   @return [Types::SortCriteria]
     class ListInvestigationsRequest < Struct.new(
+      nil,
       :graph_arn,
       :next_token,
       :max_results,
@@ -796,6 +838,7 @@ module Aws::Detective
     #            <p>Each pagination token expires after 24 hours. </p>
     #   @return [String]
     class ListInvestigationsResponse < Struct.new(
+      nil,
       :investigation_details,
       :next_token,
       keyword_init: true
@@ -814,6 +857,7 @@ module Aws::Detective
     #            200.</p>
     #   @return [Integer]
     class ListInvitationsRequest < Struct.new(
+      nil,
       :next_token,
       :max_results,
       keyword_init: true
@@ -830,6 +874,7 @@ module Aws::Detective
     #            token to use to request the next page of behavior graphs.</p>
     #   @return [String]
     class ListInvitationsResponse < Struct.new(
+      nil,
       :invitations,
       :next_token,
       keyword_init: true
@@ -850,6 +895,7 @@ module Aws::Detective
     #            than the overall limit on the number of results to return, which is currently 200.</p>
     #   @return [Integer]
     class ListMembersRequest < Struct.new(
+      nil,
       :graph_arn,
       :next_token,
       :max_results,
@@ -872,6 +918,7 @@ module Aws::Detective
     #            token to request the next page of member accounts.</p>
     #   @return [String]
     class ListMembersResponse < Struct.new(
+      nil,
       :member_details,
       :next_token,
       keyword_init: true
@@ -888,6 +935,7 @@ module Aws::Detective
     #   <p>The maximum number of results to return.</p>
     #   @return [Integer]
     class ListOrganizationAdminAccountsRequest < Struct.new(
+      nil,
       :next_token,
       :max_results,
       keyword_init: true
@@ -903,6 +951,7 @@ module Aws::Detective
     #            to use to request the next page of accounts.</p>
     #   @return [String]
     class ListOrganizationAdminAccountsResponse < Struct.new(
+      nil,
       :administrators,
       :next_token,
       keyword_init: true
@@ -914,6 +963,7 @@ module Aws::Detective
     #   <p>The ARN of the behavior graph for which to retrieve the tag values.</p>
     #   @return [String]
     class ListTagsForResourceRequest < Struct.new(
+      nil,
       :resource_arn,
       keyword_init: true
     )
@@ -925,6 +975,7 @@ module Aws::Detective
     #            values.</p>
     #   @return [Hash<String, String>]
     class ListTagsForResourceResponse < Struct.new(
+      nil,
       :tags,
       keyword_init: true
     )
@@ -1064,6 +1115,7 @@ module Aws::Detective
     #   <p>The state of a data source package for the behavior graph.</p>
     #   @return [Hash<String, String>]
     class MemberDetail < Struct.new(
+      nil,
       :account_id,
       :email_address,
       :graph_arn,
@@ -1096,6 +1148,7 @@ module Aws::Detective
     #   <p>Details on when a data source package was added to a behavior graph.</p>
     #   @return [Hash<String, Hash<String, Types::TimestampForCollection>>]
     class MembershipDatasources < Struct.new(
+      nil,
       :account_id,
       :graph_arn,
       :datasource_package_ingest_history,
@@ -1112,6 +1165,7 @@ module Aws::Detective
     #   <p>Checks if the Autonomous System Organization (ASO) is new for the entire account.</p>
     #   @return [Boolean]
     class NewAsoDetail < Struct.new(
+      nil,
       :aso,
       :is_new_for_entire_account,
       keyword_init: true
@@ -1135,6 +1189,7 @@ module Aws::Detective
     #   <p>Checks if the geolocation is new for the entire account.</p>
     #   @return [Boolean]
     class NewGeolocationDetail < Struct.new(
+      nil,
       :location,
       :ip_address,
       :is_new_for_entire_account,
@@ -1156,6 +1211,7 @@ module Aws::Detective
     #   <p>Checks if the user agent is new for the entire account.</p>
     #   @return [Boolean]
     class NewUserAgentDetail < Struct.new(
+      nil,
       :user_agent,
       :is_new_for_entire_account,
       keyword_init: true
@@ -1174,6 +1230,7 @@ module Aws::Detective
     #               <code>INVITED</code>.</p>
     #   @return [String]
     class RejectInvitationRequest < Struct.new(
+      nil,
       :graph_arn,
       keyword_init: true
     )
@@ -1191,6 +1248,7 @@ module Aws::Detective
     #   <p>The IP address of the finding.</p>
     #   @return [String]
     class RelatedFindingDetail < Struct.new(
+      nil,
       :arn,
       :type,
       :ip_address,
@@ -1204,6 +1262,7 @@ module Aws::Detective
     #   <p>The unique identifier for the finding group.</p>
     #   @return [String]
     class RelatedFindingGroupDetail < Struct.new(
+      nil,
       :id,
       keyword_init: true
     )
@@ -1214,6 +1273,7 @@ module Aws::Detective
     # @!attribute message
     #   @return [String]
     class ResourceNotFoundException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -1237,6 +1297,7 @@ module Aws::Detective
     #   <p>The type of resource that has exceeded the service quota.</p>
     #   @return [Array<String>]
     class ServiceQuotaExceededException < Struct.new(
+      nil,
       :message,
       :resources,
       keyword_init: true
@@ -1252,6 +1313,7 @@ module Aws::Detective
     #   <p>The order by which the sorted findings are displayed.</p>
     #   @return [String]
     class SortCriteria < Struct.new(
+      nil,
       :field,
       :sort_order,
       keyword_init: true
@@ -1273,6 +1335,7 @@ module Aws::Detective
     #            string. For example, <code>2021-08-18T16:35:56.284Z</code>.</p>
     #   @return [Time]
     class StartInvestigationRequest < Struct.new(
+      nil,
       :graph_arn,
       :entity_arn,
       :scope_start_time,
@@ -1286,6 +1349,7 @@ module Aws::Detective
     #   <p>The investigation ID of the investigation report.</p>
     #   @return [String]
     class StartInvestigationResponse < Struct.new(
+      nil,
       :investigation_id,
       keyword_init: true
     )
@@ -1301,6 +1365,7 @@ module Aws::Detective
     #               <code>ACCEPTED_BUT_DISABLED</code>. </p>
     #   @return [String]
     class StartMonitoringMemberRequest < Struct.new(
+      nil,
       :graph_arn,
       :account_id,
       keyword_init: true
@@ -1313,6 +1378,7 @@ module Aws::Detective
     #   <p>The string filter value.</p>
     #   @return [String]
     class StringFilter < Struct.new(
+      nil,
       :value,
       keyword_init: true
     )
@@ -1343,6 +1409,7 @@ module Aws::Detective
     #   <p>The total number of failed API requests.</p>
     #   @return [Integer]
     class TTPsObservedDetail < Struct.new(
+      nil,
       :tactic,
       :technique,
       :procedure,
@@ -1370,6 +1437,7 @@ module Aws::Detective
     #            tag value can contain up to 256 characters.</p>
     #   @return [Hash<String, String>]
     class TagResourceRequest < Struct.new(
+      nil,
       :resource_arn,
       :tags,
       keyword_init: true
@@ -1378,6 +1446,7 @@ module Aws::Detective
     end
 
     class TagResourceResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1389,6 +1458,7 @@ module Aws::Detective
     #            ISO8601 formatted string. For example, <code>2021-08-18T16:35:56.284Z</code>.</p>
     #   @return [Time]
     class TimestampForCollection < Struct.new(
+      nil,
       :timestamp,
       keyword_init: true
     )
@@ -1400,6 +1470,7 @@ module Aws::Detective
     # @!attribute message
     #   @return [String]
     class TooManyRequestsException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -1416,6 +1487,7 @@ module Aws::Detective
     #   <p>The reason that the member account request could not be processed.</p>
     #   @return [String]
     class UnprocessedAccount < Struct.new(
+      nil,
       :account_id,
       :reason,
       keyword_init: true
@@ -1432,6 +1504,7 @@ module Aws::Detective
     #            graph.</p>
     #   @return [String]
     class UnprocessedGraph < Struct.new(
+      nil,
       :graph_arn,
       :reason,
       keyword_init: true
@@ -1447,6 +1520,7 @@ module Aws::Detective
     #            at a time.</p>
     #   @return [Array<String>]
     class UntagResourceRequest < Struct.new(
+      nil,
       :resource_arn,
       :tag_keys,
       keyword_init: true
@@ -1455,6 +1529,7 @@ module Aws::Detective
     end
 
     class UntagResourceResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1467,6 +1542,7 @@ module Aws::Detective
     #   <p>The data source package to start for the behavior graph.</p>
     #   @return [Array<String>]
     class UpdateDatasourcePackagesRequest < Struct.new(
+      nil,
       :graph_arn,
       :datasource_packages,
       keyword_init: true
@@ -1484,6 +1560,7 @@ module Aws::Detective
     #   <p>The current state of the investigation. An archived investigation indicates you have completed reviewing the investigation.</p>
     #   @return [String]
     class UpdateInvestigationStateRequest < Struct.new(
+      nil,
       :graph_arn,
       :investigation_id,
       :state,
@@ -1500,6 +1577,7 @@ module Aws::Detective
     #            in the organization behavior graph.</p>
     #   @return [Boolean]
     class UpdateOrganizationConfigurationRequest < Struct.new(
+      nil,
       :graph_arn,
       :auto_enable,
       keyword_init: true
@@ -1517,6 +1595,7 @@ module Aws::Detective
     #   <p> An explanation of why validation failed.</p>
     #   @return [String]
     class ValidationException < Struct.new(
+      nil,
       :message,
       :error_code,
       :error_code_reason,

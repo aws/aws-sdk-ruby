@@ -13,6 +13,7 @@ module Aws::OAM
     #   <p>The name of the exception.</p>
     #   @return [String]
     class ConflictException < Struct.new(
+      nil,
       :message,
       :amzn_error_type,
       keyword_init: true
@@ -36,6 +37,7 @@ module Aws::OAM
     #   <p>Use this structure to optionally create filters that specify that only some metric namespaces or log groups are to be shared from the source account to the monitoring account.</p>
     #   @return [Types::LinkConfiguration]
     class CreateLinkInput < Struct.new(
+      nil,
       :label_template,
       :resource_types,
       :sink_identifier,
@@ -71,6 +73,7 @@ module Aws::OAM
     #   <p>This structure includes filters that specify which metric namespaces and which log groups are shared from the source account to the monitoring account.</p>
     #   @return [Types::LinkConfiguration]
     class CreateLinkOutput < Struct.new(
+      nil,
       :arn,
       :id,
       :label,
@@ -91,6 +94,7 @@ module Aws::OAM
     #   <p>Assigns one or more tags (key-value pairs) to the link. </p> <p>Tags can help you organize and categorize your resources. You can also use them to scope user permissions by granting a user permission to access or change only resources with certain tag values.</p> <p>For more information about using tags to control access, see <a href="https://docs.aws.amazon.com/IAM/latest/UserGuide/access_tags.html">Controlling access to Amazon Web Services resources using tags</a>.</p>
     #   @return [Hash<String, String>]
     class CreateSinkInput < Struct.new(
+      nil,
       :name,
       :tags,
       keyword_init: true
@@ -111,6 +115,7 @@ module Aws::OAM
     #   <p>The tags assigned to the sink.</p>
     #   @return [Hash<String, String>]
     class CreateSinkOutput < Struct.new(
+      nil,
       :arn,
       :id,
       :name,
@@ -124,6 +129,7 @@ module Aws::OAM
     #   <p>The ARN of the link to delete.</p>
     #   @return [String]
     class DeleteLinkInput < Struct.new(
+      nil,
       :identifier,
       keyword_init: true
     )
@@ -131,6 +137,7 @@ module Aws::OAM
     end
 
     class DeleteLinkOutput < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -140,6 +147,7 @@ module Aws::OAM
     #   <p>The ARN of the sink to delete.</p>
     #   @return [String]
     class DeleteSinkInput < Struct.new(
+      nil,
       :identifier,
       keyword_init: true
     )
@@ -147,6 +155,7 @@ module Aws::OAM
     end
 
     class DeleteSinkOutput < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -159,6 +168,7 @@ module Aws::OAM
     #   <p>Specifies whether to include the tags associated with the link in the response. When <code>IncludeTags</code> is set to <code>true</code> and the caller has the required permission, <code>oam:ListTagsForResource</code>, the API will return the tags for the specified resource. If the caller doesn't have the required permission, <code>oam:ListTagsForResource</code>, the API will raise an exception.</p> <p>The default value is <code>false</code>.</p>
     #   @return [Boolean]
     class GetLinkInput < Struct.new(
+      nil,
       :identifier,
       :include_tags,
       keyword_init: true
@@ -191,6 +201,7 @@ module Aws::OAM
     #   <p>This structure includes filters that specify which metric namespaces and which log groups are shared from the source account to the monitoring account.</p>
     #   @return [Types::LinkConfiguration]
     class GetLinkOutput < Struct.new(
+      nil,
       :arn,
       :id,
       :label,
@@ -211,6 +222,7 @@ module Aws::OAM
     #   <p>Specifies whether to include the tags associated with the sink in the response. When <code>IncludeTags</code> is set to <code>true</code> and the caller has the required permission, <code>oam:ListTagsForResource</code>, the API will return the tags for the specified resource. If the caller doesn't have the required permission, <code>oam:ListTagsForResource</code>, the API will raise an exception.</p> <p>The default value is <code>false</code>.</p>
     #   @return [Boolean]
     class GetSinkInput < Struct.new(
+      nil,
       :identifier,
       :include_tags,
       keyword_init: true
@@ -231,6 +243,7 @@ module Aws::OAM
     #   <p>The tags assigned to the sink.</p>
     #   @return [Hash<String, String>]
     class GetSinkOutput < Struct.new(
+      nil,
       :arn,
       :id,
       :name,
@@ -244,6 +257,7 @@ module Aws::OAM
     #   <p>The ARN of the sink to retrieve the policy of.</p>
     #   @return [String]
     class GetSinkPolicyInput < Struct.new(
+      nil,
       :sink_identifier,
       keyword_init: true
     )
@@ -260,6 +274,7 @@ module Aws::OAM
     #   <p>The policy that you specified, in JSON format.</p>
     #   @return [String]
     class GetSinkPolicyOutput < Struct.new(
+      nil,
       :sink_arn,
       :sink_id,
       :policy,
@@ -275,6 +290,7 @@ module Aws::OAM
     #   <p>The name of the exception.</p>
     #   @return [String]
     class InternalServiceFault < Struct.new(
+      nil,
       :message,
       :amzn_error_type,
       keyword_init: true
@@ -289,6 +305,7 @@ module Aws::OAM
     #   <p>The name of the exception.</p>
     #   @return [String]
     class InvalidParameterException < Struct.new(
+      nil,
       :message,
       :amzn_error_type,
       keyword_init: true
@@ -304,6 +321,7 @@ module Aws::OAM
     #   <p>Use this structure to filter which metric namespaces are to be shared from the source account to the monitoring account.</p>
     #   @return [Types::MetricConfiguration]
     class LinkConfiguration < Struct.new(
+      nil,
       :log_group_configuration,
       :metric_configuration,
       keyword_init: true
@@ -321,6 +339,7 @@ module Aws::OAM
     #   <p>The ARN of the sink that you want to retrieve links for.</p>
     #   @return [String]
     class ListAttachedLinksInput < Struct.new(
+      nil,
       :max_results,
       :next_token,
       :sink_identifier,
@@ -340,6 +359,7 @@ module Aws::OAM
     #   <p>The resource types supported by this link.</p>
     #   @return [Array<String>]
     class ListAttachedLinksItem < Struct.new(
+      nil,
       :label,
       :link_arn,
       :resource_types,
@@ -355,6 +375,7 @@ module Aws::OAM
     #   <p>The token to use when requesting the next set of links.</p>
     #   @return [String]
     class ListAttachedLinksOutput < Struct.new(
+      nil,
       :items,
       :next_token,
       keyword_init: true
@@ -369,6 +390,7 @@ module Aws::OAM
     #   <p>The token for the next set of items to return. You received this token from a previous call.</p>
     #   @return [String]
     class ListLinksInput < Struct.new(
+      nil,
       :max_results,
       :next_token,
       keyword_init: true
@@ -393,6 +415,7 @@ module Aws::OAM
     #   <p>The ARN of the sink that this link is attached to.</p>
     #   @return [String]
     class ListLinksItem < Struct.new(
+      nil,
       :arn,
       :id,
       :label,
@@ -410,6 +433,7 @@ module Aws::OAM
     #   <p>The token to use when requesting the next set of links.</p>
     #   @return [String]
     class ListLinksOutput < Struct.new(
+      nil,
       :items,
       :next_token,
       keyword_init: true
@@ -424,6 +448,7 @@ module Aws::OAM
     #   <p>The token for the next set of items to return. You received this token from a previous call.</p>
     #   @return [String]
     class ListSinksInput < Struct.new(
+      nil,
       :max_results,
       :next_token,
       keyword_init: true
@@ -442,6 +467,7 @@ module Aws::OAM
     #   <p>The name of the sink.</p>
     #   @return [String]
     class ListSinksItem < Struct.new(
+      nil,
       :arn,
       :id,
       :name,
@@ -457,6 +483,7 @@ module Aws::OAM
     #   <p>The token to use when requesting the next set of sinks.</p>
     #   @return [String]
     class ListSinksOutput < Struct.new(
+      nil,
       :items,
       :next_token,
       keyword_init: true
@@ -468,6 +495,7 @@ module Aws::OAM
     #   <p>The ARN of the resource that you want to view tags for.</p> <p>The ARN format of a sink is <code>arn:aws:oam:<i>Region</i>:<i>account-id</i>:sink/<i>sink-id</i> </code> </p> <p>The ARN format of a link is <code>arn:aws:oam:<i>Region</i>:<i>account-id</i>:link/<i>link-id</i> </code> </p> <p>For more information about ARN format, see <a href="https://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/iam-access-control-overview-cwl.html">CloudWatch Logs resources and operations</a>.</p> <important> <p>Unlike tagging permissions in other Amazon Web Services services, to retrieve the list of tags for links or sinks you must have the <code>oam:RequestTag</code> permission. The <code>aws:ReguestTag</code> permission does not allow you to tag and untag links and sinks.</p> </important>
     #   @return [String]
     class ListTagsForResourceInput < Struct.new(
+      nil,
       :resource_arn,
       keyword_init: true
     )
@@ -478,6 +506,7 @@ module Aws::OAM
     #   <p>The list of tags associated with the requested resource.&gt;</p>
     #   @return [Hash<String, String>]
     class ListTagsForResourceOutput < Struct.new(
+      nil,
       :tags,
       keyword_init: true
     )
@@ -489,6 +518,7 @@ module Aws::OAM
     #   <p>Use this field to specify which log groups are to share their log events with the monitoring account. Use the term <code>LogGroupName</code> and one or more of the following operands. Use single quotation marks (') around log group names. The matching of log group names is case sensitive. Each filter has a limit of five conditional operands. Conditional operands are <code>AND</code> and <code>OR</code>.</p> <ul> <li> <p> <code>=</code> and <code>!=</code> </p> </li> <li> <p> <code>AND</code> </p> </li> <li> <p> <code>OR</code> </p> </li> <li> <p> <code>LIKE</code> and <code>NOT LIKE</code>. These can be used only as prefix searches. Include a <code>%</code> at the end of the string that you want to search for and include.</p> </li> <li> <p> <code>IN</code> and <code>NOT IN</code>, using parentheses <code>( )</code> </p> </li> </ul> <p>Examples:</p> <ul> <li> <p> <code>LogGroupName IN ('This-Log-Group', 'Other-Log-Group')</code> includes only the log groups with names <code>This-Log-Group</code> and <code>Other-Log-Group</code>.</p> </li> <li> <p> <code>LogGroupName NOT IN ('Private-Log-Group', 'Private-Log-Group-2')</code> includes all log groups except the log groups with names <code>Private-Log-Group</code> and <code>Private-Log-Group-2</code>.</p> </li> <li> <p> <code>LogGroupName LIKE 'aws/lambda/%' OR LogGroupName LIKE 'AWSLogs%'</code> includes all log groups that have names that start with <code>aws/lambda/</code> or <code>AWSLogs</code>.</p> </li> </ul> <note> <p>If you are updating a link that uses filters, you can specify <code>*</code> as the only value for the <code>filter</code> parameter to delete the filter and share all log groups with the monitoring account.</p> </note>
     #   @return [String]
     class LogGroupConfiguration < Struct.new(
+      nil,
       :filter,
       keyword_init: true
     )
@@ -500,6 +530,7 @@ module Aws::OAM
     #   <p>Use this field to specify which metrics are to be shared with the monitoring account. Use the term <code>Namespace</code> and one or more of the following operands. Use single quotation marks (') around namespace names. The matching of namespace names is case sensitive. Each filter has a limit of five conditional operands. Conditional operands are <code>AND</code> and <code>OR</code>.</p> <ul> <li> <p> <code>=</code> and <code>!=</code> </p> </li> <li> <p> <code>AND</code> </p> </li> <li> <p> <code>OR</code> </p> </li> <li> <p> <code>LIKE</code> and <code>NOT LIKE</code>. These can be used only as prefix searches. Include a <code>%</code> at the end of the string that you want to search for and include.</p> </li> <li> <p> <code>IN</code> and <code>NOT IN</code>, using parentheses <code>( )</code> </p> </li> </ul> <p>Examples:</p> <ul> <li> <p> <code>Namespace NOT LIKE 'AWS/%'</code> includes only namespaces that don't start with <code>AWS/</code>, such as custom namespaces.</p> </li> <li> <p> <code>Namespace IN ('AWS/EC2', 'AWS/ELB', 'AWS/S3')</code> includes only the metrics in the EC2, Elastic Load Balancing, and Amazon S3 namespaces. </p> </li> <li> <p> <code>Namespace = 'AWS/EC2' OR Namespace NOT LIKE 'AWS/%'</code> includes only the EC2 namespace and your custom namespaces.</p> </li> </ul> <note> <p>If you are updating a link that uses filters, you can specify <code>*</code> as the only value for the <code>filter</code> parameter to delete the filter and share all metric namespaces with the monitoring account.</p> </note>
     #   @return [String]
     class MetricConfiguration < Struct.new(
+      nil,
       :filter,
       keyword_init: true
     )
@@ -513,6 +544,7 @@ module Aws::OAM
     #   <p>The name of the exception.</p>
     #   @return [String]
     class MissingRequiredParameterException < Struct.new(
+      nil,
       :message,
       :amzn_error_type,
       keyword_init: true
@@ -527,6 +559,7 @@ module Aws::OAM
     #   <p>The JSON policy to use. If you are updating an existing policy, the entire existing policy is replaced by what you specify here.</p> <p>The policy must be in JSON string format with quotation marks escaped and no newlines.</p> <p>For examples of different types of policies, see the <b>Examples</b> section on this page.</p>
     #   @return [String]
     class PutSinkPolicyInput < Struct.new(
+      nil,
       :sink_identifier,
       :policy,
       keyword_init: true
@@ -544,6 +577,7 @@ module Aws::OAM
     #   <p>The policy that you specified.</p>
     #   @return [String]
     class PutSinkPolicyOutput < Struct.new(
+      nil,
       :sink_arn,
       :sink_id,
       :policy,
@@ -559,6 +593,7 @@ module Aws::OAM
     #   <p>The name of the exception.</p>
     #   @return [String]
     class ResourceNotFoundException < Struct.new(
+      nil,
       :message,
       :amzn_error_type,
       keyword_init: true
@@ -573,6 +608,7 @@ module Aws::OAM
     #   <p>The name of the exception.</p>
     #   @return [String]
     class ServiceQuotaExceededException < Struct.new(
+      nil,
       :message,
       :amzn_error_type,
       keyword_init: true
@@ -587,6 +623,7 @@ module Aws::OAM
     #   <p>The list of key-value pairs to associate with the resource.</p>
     #   @return [Hash<String, String>]
     class TagResourceInput < Struct.new(
+      nil,
       :resource_arn,
       :tags,
       keyword_init: true
@@ -595,6 +632,7 @@ module Aws::OAM
     end
 
     class TagResourceOutput < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -604,6 +642,7 @@ module Aws::OAM
     # @!attribute message
     #   @return [String]
     class TooManyTagsException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -617,6 +656,7 @@ module Aws::OAM
     #   <p>The list of tag keys to remove from the resource.</p>
     #   @return [Array<String>]
     class UntagResourceInput < Struct.new(
+      nil,
       :resource_arn,
       :tag_keys,
       keyword_init: true
@@ -625,6 +665,7 @@ module Aws::OAM
     end
 
     class UntagResourceOutput < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -643,6 +684,7 @@ module Aws::OAM
     #   <p>Specifies whether to include the tags associated with the link in the response after the update operation. When <code>IncludeTags</code> is set to <code>true</code> and the caller has the required permission, <code>oam:ListTagsForResource</code>, the API will return the tags for the specified resource. If the caller doesn't have the required permission, <code>oam:ListTagsForResource</code>, the API will raise an exception. </p> <p>The default value is <code>false</code>.</p>
     #   @return [Boolean]
     class UpdateLinkInput < Struct.new(
+      nil,
       :identifier,
       :resource_types,
       :link_configuration,
@@ -677,6 +719,7 @@ module Aws::OAM
     #   <p>This structure includes filters that specify which metric namespaces and which log groups are shared from the source account to the monitoring account.</p>
     #   @return [Types::LinkConfiguration]
     class UpdateLinkOutput < Struct.new(
+      nil,
       :arn,
       :id,
       :label,
@@ -694,6 +737,7 @@ module Aws::OAM
     # @!attribute message
     #   @return [String]
     class ValidationException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )

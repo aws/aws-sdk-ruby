@@ -10,6 +10,7 @@ module Aws::MigrationHubRefactorSpaces
     # @!attribute message
     #   @return [String]
     class AccessDeniedException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -40,6 +41,7 @@ module Aws::MigrationHubRefactorSpaces
     #   <p>The name of the API Gateway stage. The name defaults to <code>prod</code>. </p>
     #   @return [String]
     class ApiGatewayProxyConfig < Struct.new(
+      nil,
       :proxy_url,
       :api_gateway_id,
       :vpc_link_id,
@@ -67,6 +69,7 @@ module Aws::MigrationHubRefactorSpaces
     #   <p>The name of the API Gateway stage. The name defaults to <code>prod</code>. </p>
     #   @return [String]
     class ApiGatewayProxyInput < Struct.new(
+      nil,
       :endpoint_type,
       :stage_name,
       keyword_init: true
@@ -98,6 +101,7 @@ module Aws::MigrationHubRefactorSpaces
     #   <p>The name of the API Gateway stage. The name defaults to <code>prod</code>. </p>
     #   @return [String]
     class ApiGatewayProxySummary < Struct.new(
+      nil,
       :proxy_url,
       :api_gateway_id,
       :vpc_link_id,
@@ -155,6 +159,7 @@ module Aws::MigrationHubRefactorSpaces
     #   <p>A timestamp that indicates when the application is created. </p>
     #   @return [Time]
     class ApplicationSummary < Struct.new(
+      nil,
       :name,
       :arn,
       :owner_account_id,
@@ -184,6 +189,7 @@ module Aws::MigrationHubRefactorSpaces
     #   <p>The type of resource. </p>
     #   @return [String]
     class ConflictException < Struct.new(
+      nil,
       :message,
       :resource_id,
       :resource_type,
@@ -216,6 +222,7 @@ module Aws::MigrationHubRefactorSpaces
     #         request.</p>
     #   @return [String]
     class CreateApplicationInput < Struct.new(
+      nil,
       :name,
       :environment_identifier,
       :vpc_id,
@@ -275,6 +282,7 @@ module Aws::MigrationHubRefactorSpaces
     #   <p>A timestamp that indicates when the application is created.</p>
     #   @return [Time]
     class CreateApplicationOutput < Struct.new(
+      nil,
       :name,
       :arn,
       :owner_account_id,
@@ -310,6 +318,7 @@ module Aws::MigrationHubRefactorSpaces
     #         request.</p>
     #   @return [String]
     class CreateEnvironmentInput < Struct.new(
+      nil,
       :name,
       :description,
       :network_fabric_type,
@@ -351,6 +360,7 @@ module Aws::MigrationHubRefactorSpaces
     #   <p>A timestamp that indicates when the environment is created.</p>
     #   @return [Time]
     class CreateEnvironmentOutput < Struct.new(
+      nil,
       :name,
       :arn,
       :description,
@@ -396,6 +406,7 @@ module Aws::MigrationHubRefactorSpaces
     #         request.</p>
     #   @return [String]
     class CreateRouteInput < Struct.new(
+      nil,
       :environment_identifier,
       :application_identifier,
       :service_identifier,
@@ -454,6 +465,7 @@ module Aws::MigrationHubRefactorSpaces
     #   <p>A timestamp that indicates when the route is created.</p>
     #   @return [Time]
     class CreateRouteOutput < Struct.new(
+      nil,
       :route_id,
       :arn,
       :owner_account_id,
@@ -506,6 +518,7 @@ module Aws::MigrationHubRefactorSpaces
     #         request.</p>
     #   @return [String]
     class CreateServiceInput < Struct.new(
+      nil,
       :name,
       :description,
       :environment_identifier,
@@ -570,6 +583,7 @@ module Aws::MigrationHubRefactorSpaces
     #   <p>A timestamp that indicates when the service is created.</p>
     #   @return [Time]
     class CreateServiceOutput < Struct.new(
+      nil,
       :service_id,
       :name,
       :arn,
@@ -597,6 +611,7 @@ module Aws::MigrationHubRefactorSpaces
     #         route is created. </p>
     #   @return [String]
     class DefaultRouteInput < Struct.new(
+      nil,
       :activation_state,
       keyword_init: true
     )
@@ -610,6 +625,7 @@ module Aws::MigrationHubRefactorSpaces
     #   <p>The ID of the application.</p>
     #   @return [String]
     class DeleteApplicationInput < Struct.new(
+      nil,
       :environment_identifier,
       :application_identifier,
       keyword_init: true
@@ -636,6 +652,7 @@ module Aws::MigrationHubRefactorSpaces
     #   <p>A timestamp that indicates when the environment was last updated. </p>
     #   @return [Time]
     class DeleteApplicationOutput < Struct.new(
+      nil,
       :name,
       :arn,
       :application_id,
@@ -651,6 +668,7 @@ module Aws::MigrationHubRefactorSpaces
     #   <p>The ID of the environment. </p>
     #   @return [String]
     class DeleteEnvironmentInput < Struct.new(
+      nil,
       :environment_identifier,
       keyword_init: true
     )
@@ -673,6 +691,7 @@ module Aws::MigrationHubRefactorSpaces
     #   <p>A timestamp that indicates when the environment was last updated. </p>
     #   @return [Time]
     class DeleteEnvironmentOutput < Struct.new(
+      nil,
       :name,
       :arn,
       :environment_id,
@@ -687,6 +706,7 @@ module Aws::MigrationHubRefactorSpaces
     #   <p>Amazon Resource Name (ARN) of the resource associated with the policy. </p>
     #   @return [String]
     class DeleteResourcePolicyInput < Struct.new(
+      nil,
       :identifier,
       keyword_init: true
     )
@@ -694,6 +714,7 @@ module Aws::MigrationHubRefactorSpaces
     end
 
     class DeleteResourcePolicyOutput < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -709,6 +730,7 @@ module Aws::MigrationHubRefactorSpaces
     #   <p>The ID of the route to delete.</p>
     #   @return [String]
     class DeleteRouteInput < Struct.new(
+      nil,
       :environment_identifier,
       :application_identifier,
       :route_identifier,
@@ -736,6 +758,7 @@ module Aws::MigrationHubRefactorSpaces
     #   <p>A timestamp that indicates when the route was last updated. </p>
     #   @return [Time]
     class DeleteRouteOutput < Struct.new(
+      nil,
       :route_id,
       :arn,
       :service_id,
@@ -762,6 +785,7 @@ module Aws::MigrationHubRefactorSpaces
     #   <p>The ID of the service to delete.</p>
     #   @return [String]
     class DeleteServiceInput < Struct.new(
+      nil,
       :environment_identifier,
       :application_identifier,
       :service_identifier,
@@ -792,6 +816,7 @@ module Aws::MigrationHubRefactorSpaces
     #   <p>A timestamp that indicates when the service was last updated. </p>
     #   @return [Time]
     class DeleteServiceOutput < Struct.new(
+      nil,
       :service_id,
       :name,
       :arn,
@@ -843,6 +868,7 @@ module Aws::MigrationHubRefactorSpaces
     #   <p>A timestamp that indicates when the environment is created. </p>
     #   @return [Time]
     class EnvironmentSummary < Struct.new(
+      nil,
       :name,
       :arn,
       :description,
@@ -884,6 +910,7 @@ module Aws::MigrationHubRefactorSpaces
     #   <p>A timestamp that indicates when the VPC is first added to the environment. </p>
     #   @return [Time]
     class EnvironmentVpc < Struct.new(
+      nil,
       :environment_id,
       :vpc_id,
       :account_id,
@@ -916,6 +943,7 @@ module Aws::MigrationHubRefactorSpaces
     #   <p>Additional details about the error. </p>
     #   @return [Hash<String, String>]
     class ErrorResponse < Struct.new(
+      nil,
       :code,
       :message,
       :account_id,
@@ -934,6 +962,7 @@ module Aws::MigrationHubRefactorSpaces
     #   <p>The ID of the application.</p>
     #   @return [String]
     class GetApplicationInput < Struct.new(
+      nil,
       :environment_identifier,
       :application_identifier,
       keyword_init: true
@@ -985,6 +1014,7 @@ module Aws::MigrationHubRefactorSpaces
     #   <p>A timestamp that indicates when the application is created. </p>
     #   @return [Time]
     class GetApplicationOutput < Struct.new(
+      nil,
       :name,
       :arn,
       :owner_account_id,
@@ -1008,6 +1038,7 @@ module Aws::MigrationHubRefactorSpaces
     #   <p>The ID of the environment.</p>
     #   @return [String]
     class GetEnvironmentInput < Struct.new(
+      nil,
       :environment_identifier,
       keyword_init: true
     )
@@ -1051,6 +1082,7 @@ module Aws::MigrationHubRefactorSpaces
     #   <p>A timestamp that indicates when the environment is created. </p>
     #   @return [Time]
     class GetEnvironmentOutput < Struct.new(
+      nil,
       :name,
       :arn,
       :description,
@@ -1072,6 +1104,7 @@ module Aws::MigrationHubRefactorSpaces
     #   <p>The Amazon Resource Name (ARN) of the resource associated with the policy. </p>
     #   @return [String]
     class GetResourcePolicyInput < Struct.new(
+      nil,
       :identifier,
       keyword_init: true
     )
@@ -1082,6 +1115,7 @@ module Aws::MigrationHubRefactorSpaces
     #   <p>A JSON-formatted string for an Amazon Web Services resource-based policy. </p>
     #   @return [String]
     class GetResourcePolicyOutput < Struct.new(
+      nil,
       :policy,
       keyword_init: true
     )
@@ -1098,6 +1132,7 @@ module Aws::MigrationHubRefactorSpaces
     #   <p>The ID of the route.</p>
     #   @return [String]
     class GetRouteInput < Struct.new(
+      nil,
       :environment_identifier,
       :application_identifier,
       :route_identifier,
@@ -1172,6 +1207,7 @@ module Aws::MigrationHubRefactorSpaces
     #   <p>If set to <code>true</code>, this option appends the source path to the service URL endpoint.</p>
     #   @return [Boolean]
     class GetRouteOutput < Struct.new(
+      nil,
       :route_id,
       :arn,
       :owner_account_id,
@@ -1205,6 +1241,7 @@ module Aws::MigrationHubRefactorSpaces
     #   <p>The ID of the service.</p>
     #   @return [String]
     class GetServiceInput < Struct.new(
+      nil,
       :environment_identifier,
       :application_identifier,
       :service_identifier,
@@ -1269,6 +1306,7 @@ module Aws::MigrationHubRefactorSpaces
     #   <p>The timestamp of when the service is created.</p>
     #   @return [Time]
     class GetServiceOutput < Struct.new(
+      nil,
       :service_id,
       :name,
       :arn,
@@ -1295,6 +1333,7 @@ module Aws::MigrationHubRefactorSpaces
     # @!attribute message
     #   @return [String]
     class InternalServerException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -1305,6 +1344,7 @@ module Aws::MigrationHubRefactorSpaces
     # @!attribute message
     #   @return [String]
     class InvalidResourcePolicyException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -1316,6 +1356,7 @@ module Aws::MigrationHubRefactorSpaces
     #   <p>The Amazon Resource Name (ARN) of the Lambda endpoint. </p>
     #   @return [String]
     class LambdaEndpointConfig < Struct.new(
+      nil,
       :arn,
       keyword_init: true
     )
@@ -1327,6 +1368,7 @@ module Aws::MigrationHubRefactorSpaces
     #   <p>The Amazon Resource Name (ARN) of the Lambda function or alias.</p>
     #   @return [String]
     class LambdaEndpointInput < Struct.new(
+      nil,
       :arn,
       keyword_init: true
     )
@@ -1338,6 +1380,7 @@ module Aws::MigrationHubRefactorSpaces
     #   <p>The Amazon Resource Name (ARN) of the Lambda endpoint. </p>
     #   @return [String]
     class LambdaEndpointSummary < Struct.new(
+      nil,
       :arn,
       keyword_init: true
     )
@@ -1355,6 +1398,7 @@ module Aws::MigrationHubRefactorSpaces
     #         results, make another call with the returned <code>nextToken</code> value.</p>
     #   @return [Integer]
     class ListApplicationsInput < Struct.new(
+      nil,
       :environment_identifier,
       :next_token,
       :max_results,
@@ -1370,6 +1414,7 @@ module Aws::MigrationHubRefactorSpaces
     #   <p>The token for the next page of results.</p>
     #   @return [String]
     class ListApplicationsOutput < Struct.new(
+      nil,
       :application_summary_list,
       :next_token,
       keyword_init: true
@@ -1388,6 +1433,7 @@ module Aws::MigrationHubRefactorSpaces
     #         results, make another call with the returned <code>nextToken</code> value.</p>
     #   @return [Integer]
     class ListEnvironmentVpcsInput < Struct.new(
+      nil,
       :environment_identifier,
       :next_token,
       :max_results,
@@ -1403,6 +1449,7 @@ module Aws::MigrationHubRefactorSpaces
     #   <p>The token for the next page of results.</p>
     #   @return [String]
     class ListEnvironmentVpcsOutput < Struct.new(
+      nil,
       :environment_vpc_list,
       :next_token,
       keyword_init: true
@@ -1418,6 +1465,7 @@ module Aws::MigrationHubRefactorSpaces
     #         results, make another call with the returned <code>nextToken</code> value.</p>
     #   @return [Integer]
     class ListEnvironmentsInput < Struct.new(
+      nil,
       :next_token,
       :max_results,
       keyword_init: true
@@ -1432,6 +1480,7 @@ module Aws::MigrationHubRefactorSpaces
     #   <p>The token for the next page of results.</p>
     #   @return [String]
     class ListEnvironmentsOutput < Struct.new(
+      nil,
       :environment_summary_list,
       :next_token,
       keyword_init: true
@@ -1453,6 +1502,7 @@ module Aws::MigrationHubRefactorSpaces
     #         results, make another call with the returned <code>nextToken</code> value.</p>
     #   @return [Integer]
     class ListRoutesInput < Struct.new(
+      nil,
       :environment_identifier,
       :application_identifier,
       :next_token,
@@ -1469,6 +1519,7 @@ module Aws::MigrationHubRefactorSpaces
     #   <p>The token for the next page of results.</p>
     #   @return [String]
     class ListRoutesOutput < Struct.new(
+      nil,
       :route_summary_list,
       :next_token,
       keyword_init: true
@@ -1490,6 +1541,7 @@ module Aws::MigrationHubRefactorSpaces
     #         results, make another call with the returned <code>nextToken</code> value.</p>
     #   @return [Integer]
     class ListServicesInput < Struct.new(
+      nil,
       :environment_identifier,
       :application_identifier,
       :next_token,
@@ -1506,6 +1558,7 @@ module Aws::MigrationHubRefactorSpaces
     #   <p>The token for the next page of results.</p>
     #   @return [String]
     class ListServicesOutput < Struct.new(
+      nil,
       :service_summary_list,
       :next_token,
       keyword_init: true
@@ -1517,6 +1570,7 @@ module Aws::MigrationHubRefactorSpaces
     #   <p>The Amazon Resource Name (ARN) of the resource. </p>
     #   @return [String]
     class ListTagsForResourceInput < Struct.new(
+      nil,
       :resource_arn,
       keyword_init: true
     )
@@ -1527,6 +1581,7 @@ module Aws::MigrationHubRefactorSpaces
     #   <p>The list of tags assigned to the resource. </p>
     #   @return [Hash<String, String>]
     class ListTagsForResourceOutput < Struct.new(
+      nil,
       :tags,
       keyword_init: true
     )
@@ -1541,6 +1596,7 @@ module Aws::MigrationHubRefactorSpaces
     #   <p>A JSON-formatted string for an Amazon Web Services resource-based policy. </p>
     #   @return [String]
     class PutResourcePolicyInput < Struct.new(
+      nil,
       :resource_arn,
       :policy,
       keyword_init: true
@@ -1549,6 +1605,7 @@ module Aws::MigrationHubRefactorSpaces
     end
 
     class PutResourcePolicyOutput < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1564,6 +1621,7 @@ module Aws::MigrationHubRefactorSpaces
     #   <p>The type of resource. </p>
     #   @return [String]
     class ResourceNotFoundException < Struct.new(
+      nil,
       :message,
       :resource_id,
       :resource_type,
@@ -1632,6 +1690,7 @@ module Aws::MigrationHubRefactorSpaces
     #   <p>If set to <code>true</code>, this option appends the source path to the service URL endpoint.</p>
     #   @return [Boolean]
     class RouteSummary < Struct.new(
+      nil,
       :route_id,
       :arn,
       :owner_account_id,
@@ -1673,6 +1732,7 @@ module Aws::MigrationHubRefactorSpaces
     #         exception service code. </p>
     #   @return [String]
     class ServiceQuotaExceededException < Struct.new(
+      nil,
       :message,
       :resource_id,
       :resource_type,
@@ -1736,6 +1796,7 @@ module Aws::MigrationHubRefactorSpaces
     #   <p>A timestamp that indicates when the service is created. </p>
     #   @return [Time]
     class ServiceSummary < Struct.new(
+      nil,
       :service_id,
       :name,
       :arn,
@@ -1765,6 +1826,7 @@ module Aws::MigrationHubRefactorSpaces
     #   <p>The new or modified tags for the resource.</p>
     #   @return [Hash<String, String>]
     class TagResourceInput < Struct.new(
+      nil,
       :resource_arn,
       :tags,
       keyword_init: true
@@ -1773,6 +1835,7 @@ module Aws::MigrationHubRefactorSpaces
     end
 
     class TagResourceOutput < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1793,6 +1856,7 @@ module Aws::MigrationHubRefactorSpaces
     #   <p>The number of seconds to wait before retrying. </p>
     #   @return [Integer]
     class ThrottlingException < Struct.new(
+      nil,
       :message,
       :quota_code,
       :service_code,
@@ -1814,6 +1878,7 @@ module Aws::MigrationHubRefactorSpaces
     #   <p>The list of keys of the tags to be removed from the resource. </p>
     #   @return [Array<String>]
     class UntagResourceInput < Struct.new(
+      nil,
       :resource_arn,
       :tag_keys,
       keyword_init: true
@@ -1822,6 +1887,7 @@ module Aws::MigrationHubRefactorSpaces
     end
 
     class UntagResourceOutput < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1841,6 +1907,7 @@ module Aws::MigrationHubRefactorSpaces
     #         route is updated. </p>
     #   @return [String]
     class UpdateRouteInput < Struct.new(
+      nil,
       :environment_identifier,
       :application_identifier,
       :route_identifier,
@@ -1875,6 +1942,7 @@ module Aws::MigrationHubRefactorSpaces
     #   <p> A timestamp that indicates when the route was last updated. </p>
     #   @return [Time]
     class UpdateRouteOutput < Struct.new(
+      nil,
       :route_id,
       :arn,
       :service_id,
@@ -1909,6 +1977,7 @@ module Aws::MigrationHubRefactorSpaces
     #   <p>If set to <code>true</code>, this option appends the source path to the service URL endpoint.</p>
     #   @return [Boolean]
     class UriPathRouteInput < Struct.new(
+      nil,
       :source_path,
       :activation_state,
       :methods,
@@ -1927,6 +1996,7 @@ module Aws::MigrationHubRefactorSpaces
     #   <p>The health check URL of the URL endpoint type. </p>
     #   @return [String]
     class UrlEndpointConfig < Struct.new(
+      nil,
       :url,
       :health_url,
       keyword_init: true
@@ -1947,6 +2017,7 @@ module Aws::MigrationHubRefactorSpaces
     #         host must be the same as the URL. </p>
     #   @return [String]
     class UrlEndpointInput < Struct.new(
+      nil,
       :url,
       :health_url,
       keyword_init: true
@@ -1967,6 +2038,7 @@ module Aws::MigrationHubRefactorSpaces
     #         host must be the same as the URL.</p>
     #   @return [String]
     class UrlEndpointSummary < Struct.new(
+      nil,
       :url,
       :health_url,
       keyword_init: true
@@ -1979,6 +2051,7 @@ module Aws::MigrationHubRefactorSpaces
     # @!attribute message
     #   @return [String]
     class ValidationException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )

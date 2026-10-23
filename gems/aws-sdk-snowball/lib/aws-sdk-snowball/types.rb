@@ -62,6 +62,7 @@ module Aws::Snowball
     #   <p>Differentiates between delivery address and pickup address in the customer account. Provided at job creation.</p>
     #   @return [String]
     class Address < Struct.new(
+      nil,
       :address_id,
       :name,
       :company,
@@ -92,6 +93,7 @@ module Aws::Snowball
     #           <code>CID123e4567-e89b-12d3-a456-426655440000</code>.</p>
     #   @return [String]
     class CancelClusterRequest < Struct.new(
+      nil,
       :cluster_id,
       keyword_init: true
     )
@@ -99,6 +101,7 @@ module Aws::Snowball
     end
 
     class CancelClusterResult < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -109,6 +112,7 @@ module Aws::Snowball
     #           <code>JID123e4567-e89b-12d3-a456-426655440000</code>.</p>
     #   @return [String]
     class CancelJobRequest < Struct.new(
+      nil,
       :job_id,
       keyword_init: true
     )
@@ -116,6 +120,7 @@ module Aws::Snowball
     end
 
     class CancelJobResult < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -127,6 +132,7 @@ module Aws::Snowball
     # @!attribute message
     #   @return [String]
     class ClusterLimitExceededException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -150,6 +156,7 @@ module Aws::Snowball
     #           Cluster-01</code>.</p>
     #   @return [String]
     class ClusterListEntry < Struct.new(
+      nil,
       :cluster_id,
       :cluster_state,
       :creation_date,
@@ -237,6 +244,7 @@ module Aws::Snowball
     #         device.</p>
     #   @return [Types::OnDeviceServiceConfiguration]
     class ClusterMetadata < Struct.new(
+      nil,
       :cluster_id,
       :description,
       :kms_key_arn,
@@ -268,6 +276,7 @@ module Aws::Snowball
     #   <p>The optional name of a compatible image.</p>
     #   @return [String]
     class CompatibleImage < Struct.new(
+      nil,
       :ami_id,
       :name,
       keyword_init: true
@@ -283,6 +292,7 @@ module Aws::Snowball
     # @!attribute message
     #   @return [String]
     class ConflictException < Struct.new(
+      nil,
       :conflict_resource,
       :message,
       keyword_init: true
@@ -294,6 +304,7 @@ module Aws::Snowball
     #   <p>The address that you want the Snow device shipped to.</p>
     #   @return [Types::Address]
     class CreateAddressRequest < Struct.new(
+      nil,
       :address,
       keyword_init: true
     )
@@ -306,6 +317,7 @@ module Aws::Snowball
     #         to.</p>
     #   @return [String]
     class CreateAddressResult < Struct.new(
+      nil,
       :address_id,
       keyword_init: true
     )
@@ -438,6 +450,7 @@ module Aws::Snowball
     #         Family Devices and Capacity) in the <i>Snowcone User Guide</i>.</p>
     #   @return [String]
     class CreateClusterRequest < Struct.new(
+      nil,
       :job_type,
       :resources,
       :on_device_service_configuration,
@@ -467,6 +480,7 @@ module Aws::Snowball
     #   <p>List of jobs created for this cluster. For syntax, see <a href="http://amazonaws.com/snowball/latest/api-reference/API_ListJobs.html#API_ListJobs_ResponseSyntax">ListJobsResult$JobListEntries</a> in this guide.</p>
     #   @return [Array<Types::JobListEntry>]
     class CreateClusterResult < Struct.new(
+      nil,
       :cluster_id,
       :job_list_entries,
       keyword_init: true
@@ -600,6 +614,7 @@ module Aws::Snowball
     #   <p>Information identifying the person picking up the device.</p>
     #   @return [Types::PickupDetails]
     class CreateJobRequest < Struct.new(
+      nil,
       :job_type,
       :resources,
       :on_device_service_configuration,
@@ -629,6 +644,7 @@ module Aws::Snowball
     #           <code>JID123e4567-e89b-12d3-a456-426655440000</code>.</p>
     #   @return [String]
     class CreateJobResult < Struct.new(
+      nil,
       :job_id,
       keyword_init: true
     )
@@ -647,6 +663,7 @@ module Aws::Snowball
     #   <p>The type of Snow Family devices to use for the long-term pricing job.</p>
     #   @return [String]
     class CreateLongTermPricingRequest < Struct.new(
+      nil,
       :long_term_pricing_type,
       :is_long_term_pricing_auto_renew,
       :snowball_type,
@@ -659,6 +676,7 @@ module Aws::Snowball
     #   <p>The ID of the long-term pricing type for the device.</p>
     #   @return [String]
     class CreateLongTermPricingResult < Struct.new(
+      nil,
       :long_term_pricing_id,
       keyword_init: true
     )
@@ -675,6 +693,7 @@ module Aws::Snowball
     #         destination while in transit. Regional shipping speeds are as follows:</p>
     #   @return [String]
     class CreateReturnShippingLabelRequest < Struct.new(
+      nil,
       :job_id,
       :shipping_option,
       keyword_init: true
@@ -686,6 +705,7 @@ module Aws::Snowball
     #   <p>The status information of the task on a Snow device that is being returned to Amazon Web Services.</p>
     #   @return [String]
     class CreateReturnShippingLabelResult < Struct.new(
+      nil,
       :status,
       keyword_init: true
     )
@@ -711,6 +731,7 @@ module Aws::Snowball
     #         listed.</p>
     #   @return [Integer]
     class DataTransfer < Struct.new(
+      nil,
       :bytes_transferred,
       :objects_transferred,
       :total_bytes,
@@ -736,6 +757,7 @@ module Aws::Snowball
     #   <p>The version of the dependent service.</p>
     #   @return [Types::ServiceVersion]
     class DependentService < Struct.new(
+      nil,
       :service_name,
       :service_version,
       keyword_init: true
@@ -747,6 +769,7 @@ module Aws::Snowball
     #   <p>The automatically generated ID for a specific address.</p>
     #   @return [String]
     class DescribeAddressRequest < Struct.new(
+      nil,
       :address_id,
       keyword_init: true
     )
@@ -758,6 +781,7 @@ module Aws::Snowball
     #         shipped to.</p>
     #   @return [Types::Address]
     class DescribeAddressResult < Struct.new(
+      nil,
       :address,
       keyword_init: true
     )
@@ -773,6 +797,7 @@ module Aws::Snowball
     #           <code>NextToken</code> as the starting point for your list of returned addresses.</p>
     #   @return [String]
     class DescribeAddressesRequest < Struct.new(
+      nil,
       :max_results,
       :next_token,
       keyword_init: true
@@ -789,6 +814,7 @@ module Aws::Snowball
     #         returned addresses will start from this point in the array.</p>
     #   @return [String]
     class DescribeAddressesResult < Struct.new(
+      nil,
       :addresses,
       :next_token,
       keyword_init: true
@@ -800,6 +826,7 @@ module Aws::Snowball
     #   <p>The automatically generated ID for a cluster.</p>
     #   @return [String]
     class DescribeClusterRequest < Struct.new(
+      nil,
       :cluster_id,
       keyword_init: true
     )
@@ -811,6 +838,7 @@ module Aws::Snowball
     #         and other important metadata.</p>
     #   @return [Types::ClusterMetadata]
     class DescribeClusterResult < Struct.new(
+      nil,
       :cluster_metadata,
       keyword_init: true
     )
@@ -822,6 +850,7 @@ module Aws::Snowball
     #           <code>JID123e4567-e89b-12d3-a456-426655440000</code>.</p>
     #   @return [String]
     class DescribeJobRequest < Struct.new(
+      nil,
       :job_id,
       keyword_init: true
     )
@@ -837,6 +866,7 @@ module Aws::Snowball
     #         shipping information, job status, and other important metadata.</p>
     #   @return [Array<Types::JobMetadata>]
     class DescribeJobResult < Struct.new(
+      nil,
       :job_metadata,
       :sub_job_metadata,
       keyword_init: true
@@ -849,6 +879,7 @@ module Aws::Snowball
     #           <code>JID123e4567-e89b-12d3-a456-426655440000</code>.</p>
     #   @return [String]
     class DescribeReturnShippingLabelRequest < Struct.new(
+      nil,
       :job_id,
       keyword_init: true
     )
@@ -865,6 +896,7 @@ module Aws::Snowball
     #   <p>The pre-signed Amazon S3 URI used to download the return shipping label.</p>
     #   @return [String]
     class DescribeReturnShippingLabelResult < Struct.new(
+      nil,
       :status,
       :expiration_date,
       :return_shipping_label_uri,
@@ -879,6 +911,7 @@ module Aws::Snowball
     #         job.</p>
     #   @return [Types::SnowconeDeviceConfiguration]
     class DeviceConfiguration < Struct.new(
+      nil,
       :snowcone_device_configuration,
       keyword_init: true
     )
@@ -893,6 +926,7 @@ module Aws::Snowball
     #   <p>The optional version of EKS Anywhere on the Snow Family device.</p>
     #   @return [String]
     class EKSOnDeviceServiceConfiguration < Struct.new(
+      nil,
       :kubernetes_version,
       :eks_anywhere_version,
       keyword_init: true
@@ -910,6 +944,7 @@ module Aws::Snowball
     #   <p>The ID of the AMI on the Snow device.</p>
     #   @return [String]
     class Ec2AmiResource < Struct.new(
+      nil,
       :ami_id,
       :snowball_ami_id,
       keyword_init: true
@@ -922,6 +957,7 @@ module Aws::Snowball
     # @!attribute message
     #   @return [String]
     class Ec2RequestFailedException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -933,6 +969,7 @@ module Aws::Snowball
     #   <p>The Amazon Resource Name (ARN) for any local Amazon S3 resource that is an Lambda function's event trigger associated with this job.</p>
     #   @return [String]
     class EventTriggerDefinition < Struct.new(
+      nil,
       :event_resource_arn,
       keyword_init: true
     )
@@ -944,6 +981,7 @@ module Aws::Snowball
     #           <code>JID123e4567-e89b-12d3-a456-426655440000</code>.</p>
     #   @return [String]
     class GetJobManifestRequest < Struct.new(
+      nil,
       :job_id,
       keyword_init: true
     )
@@ -955,6 +993,7 @@ module Aws::Snowball
     #           <code>JobId</code> value.</p>
     #   @return [String]
     class GetJobManifestResult < Struct.new(
+      nil,
       :manifest_uri,
       keyword_init: true
     )
@@ -966,6 +1005,7 @@ module Aws::Snowball
     #         example <code>JID123e4567-e89b-12d3-a456-426655440000</code>.</p>
     #   @return [String]
     class GetJobUnlockCodeRequest < Struct.new(
+      nil,
       :job_id,
       keyword_init: true
     )
@@ -977,6 +1017,7 @@ module Aws::Snowball
     #         value can be accessed for up to 360 days after the job has been created.</p>
     #   @return [String]
     class GetJobUnlockCodeResult < Struct.new(
+      nil,
       :unlock_code,
       keyword_init: true
     )
@@ -984,6 +1025,7 @@ module Aws::Snowball
     end
 
     class GetSnowballUsageRequest < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -997,6 +1039,7 @@ module Aws::Snowball
     #   <p>The number of Snow devices that this account is currently using.</p>
     #   @return [Integer]
     class GetSnowballUsageResult < Struct.new(
+      nil,
       :snowball_limit,
       :snowballs_in_use,
       keyword_init: true
@@ -1009,6 +1052,7 @@ module Aws::Snowball
     #           <code>JID123e4567-e89b-12d3-a456-426655440000</code>.</p>
     #   @return [String]
     class GetSoftwareUpdatesRequest < Struct.new(
+      nil,
       :job_id,
       keyword_init: true
     )
@@ -1022,6 +1066,7 @@ module Aws::Snowball
     #         call to <code>GetSoftwareUpdates</code>.</p>
     #   @return [String]
     class GetSoftwareUpdatesResult < Struct.new(
+      nil,
       :updates_uri,
       keyword_init: true
     )
@@ -1034,6 +1079,7 @@ module Aws::Snowball
     #         India.</p>
     #   @return [String]
     class INDTaxDocuments < Struct.new(
+      nil,
       :gstin,
       keyword_init: true
     )
@@ -1045,6 +1091,7 @@ module Aws::Snowball
     # @!attribute message
     #   @return [String]
     class InvalidAddressException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -1055,6 +1102,7 @@ module Aws::Snowball
     # @!attribute message
     #   @return [String]
     class InvalidInputCombinationException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -1066,6 +1114,7 @@ module Aws::Snowball
     # @!attribute message
     #   @return [String]
     class InvalidJobStateException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -1078,6 +1127,7 @@ module Aws::Snowball
     # @!attribute message
     #   @return [String]
     class InvalidNextTokenException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -1092,6 +1142,7 @@ module Aws::Snowball
     #   <p>The provided resource value is invalid.</p>
     #   @return [String]
     class InvalidResourceException < Struct.new(
+      nil,
       :message,
       :resource_type,
       keyword_init: true
@@ -1129,6 +1180,7 @@ module Aws::Snowball
     #           2016-08-11</code>.</p>
     #   @return [String]
     class JobListEntry < Struct.new(
+      nil,
       :job_id,
       :job_state,
       :is_master,
@@ -1172,6 +1224,7 @@ module Aws::Snowball
     #   <p>A link to an Amazon S3 presigned URL where the job failure log is located.</p>
     #   @return [String]
     class JobLogs < Struct.new(
+      nil,
       :job_completion_report_uri,
       :job_success_log_uri,
       :job_failure_log_uri,
@@ -1287,6 +1340,7 @@ module Aws::Snowball
     #   <p>Unique ID associated with a device.</p>
     #   @return [String]
     class JobMetadata < Struct.new(
+      nil,
       :job_id,
       :job_state,
       :job_type,
@@ -1330,6 +1384,7 @@ module Aws::Snowball
     #   <p>The Amazon Machine Images (AMIs) associated with this job.</p>
     #   @return [Array<Types::Ec2AmiResource>]
     class JobResource < Struct.new(
+      nil,
       :s3_resources,
       :lambda_resources,
       :ec2_ami_resources,
@@ -1343,6 +1398,7 @@ module Aws::Snowball
     # @!attribute message
     #   @return [String]
     class KMSRequestFailedException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -1362,6 +1418,7 @@ module Aws::Snowball
     #         UTF-8 binary sorted.</p>
     #   @return [String]
     class KeyRange < Struct.new(
+      nil,
       :begin_marker,
       :end_marker,
       keyword_init: true
@@ -1378,6 +1435,7 @@ module Aws::Snowball
     #   <p>The array of ARNs for <a>S3Resource</a> objects to trigger the <a>LambdaResource</a> objects associated with this job.</p>
     #   @return [Array<Types::EventTriggerDefinition>]
     class LambdaResource < Struct.new(
+      nil,
       :lambda_arn,
       :event_triggers,
       keyword_init: true
@@ -1398,6 +1456,7 @@ module Aws::Snowball
     #         as the starting point for your returned list.</p>
     #   @return [String]
     class ListClusterJobsRequest < Struct.new(
+      nil,
       :cluster_id,
       :max_results,
       :next_token,
@@ -1416,6 +1475,7 @@ module Aws::Snowball
     #         of returned jobs will start from this point in the array.</p>
     #   @return [String]
     class ListClusterJobsResult < Struct.new(
+      nil,
       :job_list_entries,
       :next_token,
       keyword_init: true
@@ -1432,6 +1492,7 @@ module Aws::Snowball
     #           <code>NextToken</code> as the starting point for your returned list.</p>
     #   @return [String]
     class ListClustersRequest < Struct.new(
+      nil,
       :max_results,
       :next_token,
       keyword_init: true
@@ -1449,6 +1510,7 @@ module Aws::Snowball
     #         returned clusters will start from this point in the array.</p>
     #   @return [String]
     class ListClustersResult < Struct.new(
+      nil,
       :cluster_list_entries,
       :next_token,
       keyword_init: true
@@ -1466,6 +1528,7 @@ module Aws::Snowball
     #         for your list of returned images.</p>
     #   @return [String]
     class ListCompatibleImagesRequest < Struct.new(
+      nil,
       :max_results,
       :next_token,
       keyword_init: true
@@ -1482,6 +1545,7 @@ module Aws::Snowball
     #         returned images.</p>
     #   @return [String]
     class ListCompatibleImagesResult < Struct.new(
+      nil,
       :compatible_images,
       :next_token,
       keyword_init: true
@@ -1498,6 +1562,7 @@ module Aws::Snowball
     #         as the starting point for your returned list.</p>
     #   @return [String]
     class ListJobsRequest < Struct.new(
+      nil,
       :max_results,
       :next_token,
       keyword_init: true
@@ -1515,6 +1580,7 @@ module Aws::Snowball
     #           <code>JobListEntry</code> objects will start from this point in the array.</p>
     #   @return [String]
     class ListJobsResult < Struct.new(
+      nil,
       :job_list_entries,
       :next_token,
       keyword_init: true
@@ -1530,6 +1596,7 @@ module Aws::Snowball
     #           <code>ListLongTermPricing</code> to return.</p>
     #   @return [String]
     class ListLongTermPricingRequest < Struct.new(
+      nil,
       :max_results,
       :next_token,
       keyword_init: true
@@ -1546,6 +1613,7 @@ module Aws::Snowball
     #         returned <code>ListLongTermPricing</code> list.</p>
     #   @return [String]
     class ListLongTermPricingResult < Struct.new(
+      nil,
       :long_term_pricing_entries,
       :next_token,
       keyword_init: true
@@ -1560,6 +1628,7 @@ module Aws::Snowball
     #   <p>HTTP requests are stateless. To identify what object comes "next" in the list of <code>ListPickupLocationsRequest</code> objects, you have the option of specifying <code>NextToken</code> as the starting point for your returned list.</p>
     #   @return [String]
     class ListPickupLocationsRequest < Struct.new(
+      nil,
       :max_results,
       :next_token,
       keyword_init: true
@@ -1574,6 +1643,7 @@ module Aws::Snowball
     #   <p>HTTP requests are stateless. To identify what object comes "next" in the list of <code>ListPickupLocationsResult</code> objects, you have the option of specifying <code>NextToken</code> as the starting point for your returned list.</p>
     #   @return [String]
     class ListPickupLocationsResult < Struct.new(
+      nil,
       :addresses,
       :next_token,
       keyword_init: true
@@ -1595,6 +1665,7 @@ module Aws::Snowball
     #         <code>ListServiceVersionsRequest</code> versions.</p>
     #   @return [String]
     class ListServiceVersionsRequest < Struct.new(
+      nil,
       :service_name,
       :dependent_services,
       :max_results,
@@ -1618,6 +1689,7 @@ module Aws::Snowball
     #         <code>ListServiceVersionsResult</code> results.</p>
     #   @return [String]
     class ListServiceVersionsResult < Struct.new(
+      nil,
       :service_versions,
       :service_name,
       :dependent_services,
@@ -1661,6 +1733,7 @@ module Aws::Snowball
     #   <p>The IDs of the jobs that are associated with a long-term pricing type.</p>
     #   @return [Array<String>]
     class LongTermPricingListEntry < Struct.new(
+      nil,
       :long_term_pricing_id,
       :long_term_pricing_end_date,
       :long_term_pricing_start_date,
@@ -1686,6 +1759,7 @@ module Aws::Snowball
     #            <p>Valid values: TB.</p>
     #   @return [String]
     class NFSOnDeviceServiceConfiguration < Struct.new(
+      nil,
       :storage_limit,
       :storage_unit,
       keyword_init: true
@@ -1723,6 +1797,7 @@ module Aws::Snowball
     #   <p>Used to send SNS notifications for the person picking up the device (identified during job creation).</p>
     #   @return [String]
     class Notification < Struct.new(
+      nil,
       :sns_topic_arn,
       :job_states_to_notify,
       :notify_all,
@@ -1752,6 +1827,7 @@ module Aws::Snowball
     #   <p>Configuration for Amazon S3 compatible storage on Snow family devices.</p>
     #   @return [Types::S3OnDeviceServiceConfiguration]
     class OnDeviceServiceConfiguration < Struct.new(
+      nil,
       :nfs_on_device_service,
       :tgw_on_device_service,
       :eks_on_device_service,
@@ -1784,6 +1860,7 @@ module Aws::Snowball
     #   <p>The unique ID for a device that will be picked up.</p>
     #   @return [String]
     class PickupDetails < Struct.new(
+      nil,
       :name,
       :phone_number,
       :email,
@@ -1802,6 +1879,7 @@ module Aws::Snowball
     # @!attribute message
     #   @return [String]
     class ReturnShippingLabelAlreadyExistsException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -1824,6 +1902,7 @@ module Aws::Snowball
     #   <p>>Fault tolerance level of the cluster. This indicates the number of nodes that can go down without degrading the performance of the cluster. This additional input helps when the specified <code>StorageLimit</code> matches more than one Amazon S3 compatible storage on Snow family devices service configuration.</p>
     #   @return [Integer]
     class S3OnDeviceServiceConfiguration < Struct.new(
+      nil,
       :storage_limit,
       :storage_unit,
       :service_size,
@@ -1853,6 +1932,7 @@ module Aws::Snowball
     #         System).</p>
     #   @return [Array<Types::TargetOnDeviceService>]
     class S3Resource < Struct.new(
+      nil,
       :bucket_arn,
       :key_range,
       :target_on_device_services,
@@ -1866,6 +1946,7 @@ module Aws::Snowball
     #   <p>The version number of the requested service.</p>
     #   @return [String]
     class ServiceVersion < Struct.new(
+      nil,
       :version,
       keyword_init: true
     )
@@ -1884,6 +1965,7 @@ module Aws::Snowball
     #         carrier.</p>
     #   @return [String]
     class Shipment < Struct.new(
+      nil,
       :status,
       :tracking_number,
       keyword_init: true
@@ -1926,6 +2008,7 @@ module Aws::Snowball
     #         delivered to the address that you specified for a particular job.</p>
     #   @return [Types::Shipment]
     class ShippingDetails < Struct.new(
+      nil,
       :shipping_option,
       :inbound_shipment,
       :outbound_shipment,
@@ -1939,6 +2022,7 @@ module Aws::Snowball
     #   <p>Configures the wireless connection for the Snowball Edge device.</p>
     #   @return [Types::WirelessConnection]
     class SnowconeDeviceConfiguration < Struct.new(
+      nil,
       :wireless_connection,
       keyword_init: true
     )
@@ -1955,6 +2039,7 @@ module Aws::Snowball
     #   <p>The scale unit of the virtual tapes on the device.</p>
     #   @return [String]
     class TGWOnDeviceServiceConfiguration < Struct.new(
+      nil,
       :storage_limit,
       :storage_unit,
       keyword_init: true
@@ -1979,6 +2064,7 @@ module Aws::Snowball
     #         data, or use it locally on the device.</p>
     #   @return [String]
     class TargetOnDeviceService < Struct.new(
+      nil,
       :service_name,
       :transfer_option,
       keyword_init: true
@@ -1991,6 +2077,7 @@ module Aws::Snowball
     #   <p>The tax documents required in Amazon Web Services Region in India.</p>
     #   @return [Types::INDTaxDocuments]
     class TaxDocuments < Struct.new(
+      nil,
       :ind,
       keyword_init: true
     )
@@ -2003,6 +2090,7 @@ module Aws::Snowball
     # @!attribute message
     #   @return [String]
     class UnsupportedAddressException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -2044,6 +2132,7 @@ module Aws::Snowball
     #         supported in most regions.</p>
     #   @return [String]
     class UpdateClusterRequest < Struct.new(
+      nil,
       :cluster_id,
       :role_arn,
       :description,
@@ -2059,6 +2148,7 @@ module Aws::Snowball
     end
 
     class UpdateClusterResult < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -2111,6 +2201,7 @@ module Aws::Snowball
     #   <p>Information identifying the person picking up the device.</p>
     #   @return [Types::PickupDetails]
     class UpdateJobRequest < Struct.new(
+      nil,
       :job_id,
       :role_arn,
       :notification,
@@ -2128,6 +2219,7 @@ module Aws::Snowball
     end
 
     class UpdateJobResult < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -2143,6 +2235,7 @@ module Aws::Snowball
     #            <p>Set to <code>RETURNED</code> when you have returned the device to Amazon Web Services.</p>
     #   @return [String]
     class UpdateJobShipmentStateRequest < Struct.new(
+      nil,
       :job_id,
       :shipment_state,
       keyword_init: true
@@ -2151,6 +2244,7 @@ module Aws::Snowball
     end
 
     class UpdateJobShipmentStateResult < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -2168,6 +2262,7 @@ module Aws::Snowball
     #         device should be automatically renewed before the long-term pricing contract expires.</p>
     #   @return [Boolean]
     class UpdateLongTermPricingRequest < Struct.new(
+      nil,
       :long_term_pricing_id,
       :replacement_job,
       :is_long_term_pricing_auto_renew,
@@ -2177,6 +2272,7 @@ module Aws::Snowball
     end
 
     class UpdateLongTermPricingResult < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -2187,6 +2283,7 @@ module Aws::Snowball
     #   <p>Enables the Wi-Fi adapter on an Snowball Edge device.</p>
     #   @return [Boolean]
     class WirelessConnection < Struct.new(
+      nil,
       :is_wifi_enabled,
       keyword_init: true
     )

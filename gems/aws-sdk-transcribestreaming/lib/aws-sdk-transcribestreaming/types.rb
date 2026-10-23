@@ -19,6 +19,7 @@ module Aws::TranscribeStreaming
     #         output.</p>
     #   @return [Array<Types::Entity>]
     class Alternative < Struct.new(
+      nil,
       :transcript,
       :items,
       :entities,
@@ -51,6 +52,7 @@ module Aws::TranscribeStreaming
     #     </p>
     #   @return [String]
     class AudioEvent < Struct.new(
+      nil,
       :audio_chunk,
       keyword_init: true
     )
@@ -88,6 +90,7 @@ module Aws::TranscribeStreaming
     # @!attribute message
     #   @return [String]
     class BadRequestException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -120,6 +123,7 @@ module Aws::TranscribeStreaming
     #         media.</p>
     #   @return [Float]
     class CallAnalyticsEntity < Struct.new(
+      nil,
       :begin_offset_millis,
       :end_offset_millis,
       :category,
@@ -161,6 +165,7 @@ module Aws::TranscribeStreaming
     #         (<code>false</code>).</p>
     #   @return [Boolean]
     class CallAnalyticsItem < Struct.new(
+      nil,
       :begin_offset_millis,
       :end_offset_millis,
       :type,
@@ -187,6 +192,7 @@ module Aws::TranscribeStreaming
     #   <p>The confidence score associated with the identified language code. Confidence scores are values between zero and one; larger values indicate a higher confidence in the identified language.</p>
     #   @return [Float]
     class CallAnalyticsLanguageWithScore < Struct.new(
+      nil,
       :language_code,
       :score,
       keyword_init: true
@@ -262,6 +268,7 @@ module Aws::TranscribeStreaming
     #   <p>Contains information about the matched categories, including category names and timestamps.</p>
     #   @return [Hash<String, Types::PointsOfInterest>]
     class CategoryEvent < Struct.new(
+      nil,
       :matched_categories,
       :matched_details,
       keyword_init: true
@@ -281,6 +288,7 @@ module Aws::TranscribeStreaming
     #         specifying both participants.</p>
     #   @return [String]
     class ChannelDefinition < Struct.new(
+      nil,
       :channel_id,
       :participant_role,
       keyword_init: true
@@ -304,6 +312,7 @@ module Aws::TranscribeStreaming
     #         character associated with an issue or a category match in a segment transcript.</p>
     #   @return [Integer]
     class CharacterOffsets < Struct.new(
+      nil,
       :begin,
       :end,
       keyword_init: true
@@ -353,6 +362,7 @@ module Aws::TranscribeStreaming
     #   <p>If <code>ClinicalNoteGenerationResult</code> is <code>FAILED</code>, information about why it failed. </p>
     #   @return [String]
     class ClinicalNoteGenerationResult < Struct.new(
+      nil,
       :clinical_note_output_location,
       :transcript_output_location,
       :status,
@@ -402,6 +412,7 @@ module Aws::TranscribeStreaming
     #            </ul>
     #   @return [String]
     class ClinicalNoteGenerationSettings < Struct.new(
+      nil,
       :output_bucket_name,
       :note_template,
       keyword_init: true
@@ -422,6 +433,7 @@ module Aws::TranscribeStreaming
     #         on this feature.</p>
     #   @return [Types::PostCallAnalyticsSettings]
     class ConfigurationEvent < Struct.new(
+      nil,
       :channel_definitions,
       :post_call_analytics_settings,
       keyword_init: true
@@ -433,6 +445,7 @@ module Aws::TranscribeStreaming
     # @!attribute message
     #   @return [String]
     class ConflictException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -465,6 +478,7 @@ module Aws::TranscribeStreaming
     #         media.</p>
     #   @return [Float]
     class Entity < Struct.new(
+      nil,
       :start_time,
       :end_time,
       :category,
@@ -486,6 +500,7 @@ module Aws::TranscribeStreaming
     #   <p>The identifier of the HealthScribe streaming session you want information about.</p>
     #   @return [String]
     class GetMedicalScribeStreamRequest < Struct.new(
+      nil,
       :session_id,
       keyword_init: true
     )
@@ -496,6 +511,7 @@ module Aws::TranscribeStreaming
     #   <p>Provides details about a HealthScribe streaming session.</p>
     #   @return [Types::MedicalScribeStreamDetails]
     class GetMedicalScribeStreamResponse < Struct.new(
+      nil,
       :medical_scribe_stream_details,
       keyword_init: true
     )
@@ -507,6 +523,7 @@ module Aws::TranscribeStreaming
     # @!attribute message
     #   @return [String]
     class InternalFailureException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -518,6 +535,7 @@ module Aws::TranscribeStreaming
     #   <p>Provides the timestamps that identify when in an audio segment the specified issue occurs.</p>
     #   @return [Types::CharacterOffsets]
     class IssueDetected < Struct.new(
+      nil,
       :character_offsets,
       keyword_init: true
     )
@@ -558,6 +576,7 @@ module Aws::TranscribeStreaming
     #         (<code>false</code>).</p>
     #   @return [Boolean]
     class Item < Struct.new(
+      nil,
       :start_time,
       :end_time,
       :type,
@@ -589,6 +608,7 @@ module Aws::TranscribeStreaming
     #         between zero and one; larger values indicate a higher confidence in the identified language.</p>
     #   @return [Float]
     class LanguageWithScore < Struct.new(
+      nil,
       :language_code,
       :score,
       keyword_init: true
@@ -606,6 +626,7 @@ module Aws::TranscribeStreaming
     # @!attribute message
     #   @return [String]
     class LimitExceededException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -626,6 +647,7 @@ module Aws::TranscribeStreaming
     #               output.</p>
     #   @return [Array<Types::MedicalEntity>]
     class MedicalAlternative < Struct.new(
+      nil,
       :transcript,
       :items,
       :entities,
@@ -656,6 +678,7 @@ module Aws::TranscribeStreaming
     #               media.</p>
     #   @return [Float]
     class MedicalEntity < Struct.new(
+      nil,
       :start_time,
       :end_time,
       :category,
@@ -698,6 +721,7 @@ module Aws::TranscribeStreaming
     #               specified item.</p>
     #   @return [String]
     class MedicalItem < Struct.new(
+      nil,
       :start_time,
       :end_time,
       :type,
@@ -744,6 +768,7 @@ module Aws::TranscribeStreaming
     #   <p>Indicates the channel identified for the <code>Result</code>.</p>
     #   @return [String]
     class MedicalResult < Struct.new(
+      nil,
       :result_id,
       :start_time,
       :end_time,
@@ -786,6 +811,7 @@ module Aws::TranscribeStreaming
     #     </p>
     #   @return [String]
     class MedicalScribeAudioEvent < Struct.new(
+      nil,
       :audio_chunk,
       keyword_init: true
     )
@@ -813,6 +839,7 @@ module Aws::TranscribeStreaming
     #       </p>
     #   @return [String]
     class MedicalScribeChannelDefinition < Struct.new(
+      nil,
       :channel_id,
       :participant_role,
       keyword_init: true
@@ -880,6 +907,7 @@ module Aws::TranscribeStreaming
     #               customized clinical notes.</p>
     #   @return [Types::MedicalScribeContext]
     class MedicalScribeConfigurationEvent < Struct.new(
+      nil,
       :vocabulary_name,
       :vocabulary_filter_name,
       :vocabulary_filter_method,
@@ -899,6 +927,7 @@ module Aws::TranscribeStreaming
     #   <p>Contains patient-specific information used to customize the clinical note generation.</p>
     #   @return [Types::MedicalScribePatientContext]
     class MedicalScribeContext < Struct.new(
+      nil,
       :patient_context,
       keyword_init: true
     )
@@ -948,6 +977,7 @@ module Aws::TranscribeStreaming
     #       </p>
     #   @return [String]
     class MedicalScribeEncryptionSettings < Struct.new(
+      nil,
       :kms_encryption_context,
       :kms_key_id,
       keyword_init: true
@@ -1010,6 +1040,7 @@ module Aws::TranscribeStreaming
     #   <p>The patient's preferred pronouns that the user wants to provide as a context for clinical note generation .</p>
     #   @return [String]
     class MedicalScribePatientContext < Struct.new(
+      nil,
       :pronouns,
       keyword_init: true
     )
@@ -1022,6 +1053,7 @@ module Aws::TranscribeStreaming
     #   <p>Provides the Clinical Note Generation result for post-stream analytics.</p>
     #   @return [Types::ClinicalNoteGenerationResult]
     class MedicalScribePostStreamAnalyticsResult < Struct.new(
+      nil,
       :clinical_note_generation_result,
       keyword_init: true
     )
@@ -1034,6 +1066,7 @@ module Aws::TranscribeStreaming
     #   <p>Specify settings for the post-stream clinical note generation.</p>
     #   @return [Types::ClinicalNoteGenerationSettings]
     class MedicalScribePostStreamAnalyticsSettings < Struct.new(
+      nil,
       :clinical_note_generation_settings,
       keyword_init: true
     )
@@ -1106,6 +1139,7 @@ module Aws::TranscribeStreaming
     #            </ul>
     #   @return [String]
     class MedicalScribeSessionControlEvent < Struct.new(
+      nil,
       :type,
       keyword_init: true
     )
@@ -1193,6 +1227,7 @@ module Aws::TranscribeStreaming
     #   <p>Indicates whether the <code>MedicalScribeContext</code> object was provided when the stream was started.</p>
     #   @return [Boolean]
     class MedicalScribeStreamDetails < Struct.new(
+      nil,
       :session_id,
       :stream_created_at,
       :stream_ended_at,
@@ -1223,6 +1258,7 @@ module Aws::TranscribeStreaming
     #       </p>
     #   @return [Types::MedicalScribeTranscriptSegment]
     class MedicalScribeTranscriptEvent < Struct.new(
+      nil,
       :transcript_segment,
       keyword_init: true
     )
@@ -1258,6 +1294,7 @@ module Aws::TranscribeStreaming
     #       </p>
     #   @return [Boolean]
     class MedicalScribeTranscriptItem < Struct.new(
+      nil,
       :begin_audio_time,
       :end_audio_time,
       :type,
@@ -1305,6 +1342,7 @@ module Aws::TranscribeStreaming
     #       </p>
     #   @return [String]
     class MedicalScribeTranscriptSegment < Struct.new(
+      nil,
       :segment_id,
       :begin_audio_time,
       :end_audio_time,
@@ -1337,6 +1375,7 @@ module Aws::TranscribeStreaming
     #               identification, and other transcription-related data.</p>
     #   @return [Array<Types::MedicalResult>]
     class MedicalTranscript < Struct.new(
+      nil,
       :results,
       keyword_init: true
     )
@@ -1354,6 +1393,7 @@ module Aws::TranscribeStreaming
     #               stabilization, language identification, and other transcription-related data.</p>
     #   @return [Types::MedicalTranscript]
     class MedicalTranscriptEvent < Struct.new(
+      nil,
       :transcript,
       keyword_init: true
     )
@@ -1415,6 +1455,7 @@ module Aws::TranscribeStreaming
     #   <p>Contains the timestamp ranges (start time through end time) of matched categories and rules.</p>
     #   @return [Array<Types::TimestampRange>]
     class PointsOfInterest < Struct.new(
+      nil,
       :timestamp_ranges,
       keyword_init: true
     )
@@ -1506,6 +1547,7 @@ module Aws::TranscribeStreaming
     #         request must have permission to use the specified KMS key.</p>
     #   @return [String]
     class PostCallAnalyticsSettings < Struct.new(
+      nil,
       :output_location,
       :data_access_role_arn,
       :content_redaction_output,
@@ -1519,6 +1561,7 @@ module Aws::TranscribeStreaming
     # @!attribute message
     #   @return [String]
     class ResourceNotFoundException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -1561,6 +1604,7 @@ module Aws::TranscribeStreaming
     #         you may have more than one result.</p>
     #   @return [Array<Types::LanguageWithScore>]
     class Result < Struct.new(
+      nil,
       :result_id,
       :start_time,
       :end_time,
@@ -1585,6 +1629,7 @@ module Aws::TranscribeStreaming
     # @!attribute message
     #   @return [String]
     class ServiceUnavailableException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -1764,6 +1809,7 @@ module Aws::TranscribeStreaming
     #         <code>PiiEntityTypes</code>, all PII is redacted or identified.</p>
     #   @return [String]
     class StartCallAnalyticsStreamTranscriptionRequest < Struct.new(
+      nil,
       :language_code,
       :media_sample_rate_hertz,
       :media_encoding,
@@ -1851,6 +1897,7 @@ module Aws::TranscribeStreaming
     #   <p>Lists the PII entity types you specified in your Call Analytics request.</p>
     #   @return [String]
     class StartCallAnalyticsStreamTranscriptionResponse < Struct.new(
+      nil,
       :request_id,
       :language_code,
       :media_sample_rate_hertz,
@@ -1923,6 +1970,7 @@ module Aws::TranscribeStreaming
     #       </p>
     #   @return [Types::MedicalScribeInputStream]
     class StartMedicalScribeStreamRequest < Struct.new(
+      nil,
       :session_id,
       :language_code,
       :media_sample_rate_hertz,
@@ -1964,6 +2012,7 @@ module Aws::TranscribeStreaming
     #       </p>
     #   @return [Types::MedicalScribeResultStream]
     class StartMedicalScribeStreamResponse < Struct.new(
+      nil,
       :session_id,
       :request_id,
       :language_code,
@@ -2054,6 +2103,7 @@ module Aws::TranscribeStreaming
     #               transcription</a>.</p>
     #   @return [String]
     class StartMedicalStreamTranscriptionRequest < Struct.new(
+      nil,
       :language_code,
       :media_sample_rate_hertz,
       :media_encoding,
@@ -2112,6 +2162,7 @@ module Aws::TranscribeStreaming
     #   <p>Shows whether content identification was enabled for your transcription.</p>
     #   @return [String]
     class StartMedicalStreamTranscriptionResponse < Struct.new(
+      nil,
       :request_id,
       :language_code,
       :media_sample_rate_hertz,
@@ -2358,6 +2409,7 @@ module Aws::TranscribeStreaming
     #         words</a>.</p>
     #   @return [String]
     class StartStreamTranscriptionRequest < Struct.new(
+      nil,
       :language_code,
       :media_sample_rate_hertz,
       :media_encoding,
@@ -2462,6 +2514,7 @@ module Aws::TranscribeStreaming
     #         request.</p>
     #   @return [String]
     class StartStreamTranscriptionResponse < Struct.new(
+      nil,
       :request_id,
       :language_code,
       :media_sample_rate_hertz,
@@ -2510,6 +2563,7 @@ module Aws::TranscribeStreaming
     #         match.</p>
     #   @return [Integer]
     class TimestampRange < Struct.new(
+      nil,
       :begin_offset_millis,
       :end_offset_millis,
       keyword_init: true
@@ -2530,6 +2584,7 @@ module Aws::TranscribeStreaming
     #         transcription-related data.</p>
     #   @return [Array<Types::Result>]
     class Transcript < Struct.new(
+      nil,
       :results,
       keyword_init: true
     )
@@ -2547,6 +2602,7 @@ module Aws::TranscribeStreaming
     #         result stabilization, language identification, and other transcription-related data.</p>
     #   @return [Types::Transcript]
     class TranscriptEvent < Struct.new(
+      nil,
       :transcript,
       keyword_init: true
     )
@@ -2646,6 +2702,7 @@ module Aws::TranscribeStreaming
     #   <p>The language code of the dominant language identified in your stream.</p>
     #   @return [Array<Types::CallAnalyticsLanguageWithScore>]
     class UtteranceEvent < Struct.new(
+      nil,
       :utterance_id,
       :is_partial,
       :participant_role,

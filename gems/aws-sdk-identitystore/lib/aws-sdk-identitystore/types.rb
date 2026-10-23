@@ -15,6 +15,7 @@ module Aws::Identitystore
     #            if the request fails.</p>
     #   @return [String]
     class AccessDeniedException < Struct.new(
+      nil,
       :message,
       :request_id,
       keyword_init: true
@@ -53,6 +54,7 @@ module Aws::Identitystore
     #            resource.</p>
     #   @return [Boolean]
     class Address < Struct.new(
+      nil,
       :street_address,
       :locality,
       :region,
@@ -102,6 +104,7 @@ module Aws::Identitystore
     #            This type is not supported by Java V1, Go V1, and older versions of the CLI.</p>
     #   @return [JSON]
     class AttributeOperation < Struct.new(
+      nil,
       :attribute_path,
       :attribute_value,
       keyword_init: true
@@ -135,6 +138,7 @@ module Aws::Identitystore
     #            </ul>
     #   @return [String]
     class ConflictException < Struct.new(
+      nil,
       :message,
       :request_id,
       :reason,
@@ -155,6 +159,7 @@ module Aws::Identitystore
     #   <p>A string containing the description of the group.</p>
     #   @return [String]
     class CreateGroupInput < Struct.new(
+      nil,
       :identity_store_id,
       :display_name,
       :description,
@@ -173,6 +178,7 @@ module Aws::Identitystore
     #   <p>An object that contains the identifier of a group member. Setting the <code>UserID</code> field to the specific identifier for a user indicates that the user is a member of the group.</p>
     #   @return [Types::MemberId]
     class CreateGroupMembershipInput < Struct.new(
+      nil,
       :identity_store_id,
       :group_id,
       :member_id,
@@ -189,6 +195,7 @@ module Aws::Identitystore
     #   <p>The globally unique identifier for the identity store.</p>
     #   @return [String]
     class CreateGroupMembershipOutput < Struct.new(
+      nil,
       :membership_id,
       :identity_store_id,
       keyword_init: true
@@ -205,6 +212,7 @@ module Aws::Identitystore
     #   <p>The globally unique identifier for the identity store.</p>
     #   @return [String]
     class CreateGroupOutput < Struct.new(
+      nil,
       :group_id,
       :identity_store_id,
       keyword_init: true
@@ -263,6 +271,7 @@ module Aws::Identitystore
     #   <p>A string containing the time zone of the user.</p>
     #   @return [String]
     class CreateUserInput < Struct.new(
+      nil,
       :identity_store_id,
       :user_name,
       :name,
@@ -289,6 +298,7 @@ module Aws::Identitystore
     #   <p>The globally unique identifier for the identity store.</p>
     #   @return [String]
     class CreateUserOutput < Struct.new(
+      nil,
       :user_id,
       :identity_store_id,
       keyword_init: true
@@ -303,6 +313,7 @@ module Aws::Identitystore
     #   <p>The identifier for a group in the identity store.</p>
     #   @return [String]
     class DeleteGroupInput < Struct.new(
+      nil,
       :identity_store_id,
       :group_id,
       keyword_init: true
@@ -317,6 +328,7 @@ module Aws::Identitystore
     #   <p>The identifier for a <code>GroupMembership</code> in an identity store.</p>
     #   @return [String]
     class DeleteGroupMembershipInput < Struct.new(
+      nil,
       :identity_store_id,
       :membership_id,
       keyword_init: true
@@ -325,12 +337,14 @@ module Aws::Identitystore
     end
 
     class DeleteGroupMembershipOutput < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
     end
 
     class DeleteGroupOutput < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -343,6 +357,7 @@ module Aws::Identitystore
     #   <p>The identifier for a user in the identity store.</p>
     #   @return [String]
     class DeleteUserInput < Struct.new(
+      nil,
       :identity_store_id,
       :user_id,
       keyword_init: true
@@ -351,6 +366,7 @@ module Aws::Identitystore
     end
 
     class DeleteUserOutput < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -367,6 +383,7 @@ module Aws::Identitystore
     #   <p>The identifier for a group in the identity store.</p>
     #   @return [String]
     class DescribeGroupInput < Struct.new(
+      nil,
       :identity_store_id,
       :group_id,
       keyword_init: true
@@ -381,6 +398,7 @@ module Aws::Identitystore
     #   <p>The identifier for a <code>GroupMembership</code> in an identity store.</p>
     #   @return [String]
     class DescribeGroupMembershipInput < Struct.new(
+      nil,
       :identity_store_id,
       :membership_id,
       keyword_init: true
@@ -401,6 +419,7 @@ module Aws::Identitystore
     #   <p>An object containing the identifier of a group member.</p>
     #   @return [Types::MemberId]
     class DescribeGroupMembershipOutput < Struct.new(
+      nil,
       :identity_store_id,
       :membership_id,
       :group_id,
@@ -431,6 +450,7 @@ module Aws::Identitystore
     #   <p>The globally unique identifier for the identity store.</p>
     #   @return [String]
     class DescribeGroupOutput < Struct.new(
+      nil,
       :group_id,
       :display_name,
       :external_ids,
@@ -452,6 +472,7 @@ module Aws::Identitystore
     #   <p>The identifier for a user in the identity store.</p>
     #   @return [String]
     class DescribeUserInput < Struct.new(
+      nil,
       :identity_store_id,
       :user_id,
       keyword_init: true
@@ -511,6 +532,7 @@ module Aws::Identitystore
     #   <p>The globally unique identifier for the identity store.</p>
     #   @return [String]
     class DescribeUserOutput < Struct.new(
+      nil,
       :user_name,
       :user_id,
       :external_ids,
@@ -544,6 +566,7 @@ module Aws::Identitystore
     #            associated resource.</p>
     #   @return [Boolean]
     class Email < Struct.new(
+      nil,
       :value,
       :type,
       :primary,
@@ -565,6 +588,7 @@ module Aws::Identitystore
     #   <p>The identifier issued to this resource by an external identity provider.</p>
     #   @return [String]
     class ExternalId < Struct.new(
+      nil,
       :issuer,
       :id,
       keyword_init: true
@@ -585,6 +609,7 @@ module Aws::Identitystore
     #            pair. </p>
     #   @return [String]
     class Filter < Struct.new(
+      nil,
       :attribute_path,
       :attribute_value,
       keyword_init: true
@@ -600,6 +625,7 @@ module Aws::Identitystore
     #            an identifier from an external identity provider (IdP) that is associated with the user, the group, or a unique attribute. For the unique attribute, the only valid path is <code>displayName</code>.</p>
     #   @return [Types::AlternateIdentifier]
     class GetGroupIdInput < Struct.new(
+      nil,
       :identity_store_id,
       :alternate_identifier,
       keyword_init: true
@@ -614,6 +640,7 @@ module Aws::Identitystore
     #   <p>The globally unique identifier for the identity store.</p>
     #   @return [String]
     class GetGroupIdOutput < Struct.new(
+      nil,
       :group_id,
       :identity_store_id,
       keyword_init: true
@@ -631,6 +658,7 @@ module Aws::Identitystore
     #   <p>An object that contains the identifier of a group member. Setting the <code>UserID</code> field to the specific identifier for a user indicates that the user is a member of the group.</p>
     #   @return [Types::MemberId]
     class GetGroupMembershipIdInput < Struct.new(
+      nil,
       :identity_store_id,
       :group_id,
       :member_id,
@@ -646,6 +674,7 @@ module Aws::Identitystore
     #   <p>The globally unique identifier for the identity store.</p>
     #   @return [String]
     class GetGroupMembershipIdOutput < Struct.new(
+      nil,
       :membership_id,
       :identity_store_id,
       keyword_init: true
@@ -661,6 +690,7 @@ module Aws::Identitystore
     #            an identifier from an external identity provider (IdP) that is associated with the user, the group, or a unique attribute. For the unique attribute, the only valid paths are <code>userName</code> and <code>emails.value</code>.</p>
     #   @return [Types::AlternateIdentifier]
     class GetUserIdInput < Struct.new(
+      nil,
       :identity_store_id,
       :alternate_identifier,
       keyword_init: true
@@ -675,6 +705,7 @@ module Aws::Identitystore
     #   <p>The globally unique identifier for the identity store.</p>
     #   @return [String]
     class GetUserIdOutput < Struct.new(
+      nil,
       :user_id,
       :identity_store_id,
       keyword_init: true
@@ -704,6 +735,7 @@ module Aws::Identitystore
     #   <p>The globally unique identifier for the identity store.</p>
     #   @return [String]
     class Group < Struct.new(
+      nil,
       :group_id,
       :display_name,
       :external_ids,
@@ -729,6 +761,7 @@ module Aws::Identitystore
     #   <p>An object that contains the identifier of a group member. Setting the <code>UserID</code> field to the specific identifier for a user indicates that the user is a member of the group.</p>
     #   @return [Types::MemberId]
     class GroupMembership < Struct.new(
+      nil,
       :identity_store_id,
       :membership_id,
       :group_id,
@@ -749,6 +782,7 @@ module Aws::Identitystore
     #   <p>Indicates whether a membership relation exists or not.</p>
     #   @return [Boolean]
     class GroupMembershipExistenceResult < Struct.new(
+      nil,
       :group_id,
       :member_id,
       :membership_exists,
@@ -774,6 +808,7 @@ module Aws::Identitystore
     #   <p>The number of seconds to wait before retrying the next request.</p>
     #   @return [Integer]
     class InternalServerException < Struct.new(
+      nil,
       :message,
       :request_id,
       :retry_after_seconds,
@@ -797,6 +832,7 @@ module Aws::Identitystore
     #   <p>A list of identifiers for groups in the identity store.</p>
     #   @return [Array<String>]
     class IsMemberInGroupsInput < Struct.new(
+      nil,
       :identity_store_id,
       :member_id,
       :group_ids,
@@ -809,6 +845,7 @@ module Aws::Identitystore
     #   <p>A list containing the results of membership existence checks.</p>
     #   @return [Array<Types::GroupMembershipExistenceResult>]
     class IsMemberInGroupsOutput < Struct.new(
+      nil,
       :results,
       keyword_init: true
     )
@@ -828,6 +865,7 @@ module Aws::Identitystore
     #   <p>The pagination token used for the <code>ListUsers</code>, <code>ListGroups</code>, and <code>ListGroupMemberships</code> API operations. This value is generated by the identity store service. It is returned in the API response if the total results are more than the size of one page. This token is also returned when it is used in the API request to search for the next page.</p>
     #   @return [String]
     class ListGroupMembershipsForMemberInput < Struct.new(
+      nil,
       :identity_store_id,
       :member_id,
       :max_results,
@@ -845,6 +883,7 @@ module Aws::Identitystore
     #            </p>
     #   @return [String]
     class ListGroupMembershipsForMemberOutput < Struct.new(
+      nil,
       :group_memberships,
       :next_token,
       keyword_init: true
@@ -866,6 +905,7 @@ module Aws::Identitystore
     #   <p>The pagination token used for the <code>ListUsers</code>, <code>ListGroups</code> and <code>ListGroupMemberships</code> API operations. This value is generated by the identity store service. It is returned in the API response if the total results are more than the size of one page. This token is also returned when it is used in the API request to search for the next page.</p>
     #   @return [String]
     class ListGroupMembershipsInput < Struct.new(
+      nil,
       :identity_store_id,
       :group_id,
       :max_results,
@@ -882,6 +922,7 @@ module Aws::Identitystore
     #   <p>The pagination token used for the <code>ListUsers</code>, <code>ListGroups</code>, and <code>ListGroupMemberships</code> API operations. This value is generated by the identity store service. It is returned in the API response if the total results are more than the size of one page. This token is also returned when it is used in the API request to search for the next page.</p>
     #   @return [String]
     class ListGroupMembershipsOutput < Struct.new(
+      nil,
       :group_memberships,
       :next_token,
       keyword_init: true
@@ -914,6 +955,7 @@ module Aws::Identitystore
     #     Using filters with ListGroups API is deprecated, please use GetGroupId API instead.
     #   @return [Array<Types::Filter>]
     class ListGroupsInput < Struct.new(
+      nil,
       :identity_store_id,
       :max_results,
       :next_token,
@@ -933,6 +975,7 @@ module Aws::Identitystore
     #            returned when it1 is used in the API request to search for the next page.</p>
     #   @return [String]
     class ListGroupsOutput < Struct.new(
+      nil,
       :groups,
       :next_token,
       keyword_init: true
@@ -965,6 +1008,7 @@ module Aws::Identitystore
     #     Using filters with ListUsers API is deprecated, please use GetGroupId API instead.
     #   @return [Array<Types::Filter>]
     class ListUsersInput < Struct.new(
+      nil,
       :identity_store_id,
       :max_results,
       :next_token,
@@ -984,6 +1028,7 @@ module Aws::Identitystore
     #            returned when it is used in the API request to search for the next page.</p>
     #   @return [String]
     class ListUsersOutput < Struct.new(
+      nil,
       :users,
       :next_token,
       keyword_init: true
@@ -1028,6 +1073,7 @@ module Aws::Identitystore
     #   <p>The honorific suffix of the user. For example, "M.D."</p>
     #   @return [String]
     class Name < Struct.new(
+      nil,
       :formatted,
       :family_name,
       :given_name,
@@ -1053,6 +1099,7 @@ module Aws::Identitystore
     #            resource.</p>
     #   @return [Boolean]
     class PhoneNumber < Struct.new(
+      nil,
       :value,
       :type,
       :primary,
@@ -1081,6 +1128,7 @@ module Aws::Identitystore
     #            if the request fails.</p>
     #   @return [String]
     class ResourceNotFoundException < Struct.new(
+      nil,
       :resource_type,
       :resource_id,
       :message,
@@ -1097,6 +1145,7 @@ module Aws::Identitystore
     #   <p>The identifier for each request. This value is a globally unique ID that is generated by the identity store service for each sent request, and is then returned inside the exception if the request fails.</p>
     #   @return [String]
     class ServiceQuotaExceededException < Struct.new(
+      nil,
       :message,
       :request_id,
       keyword_init: true
@@ -1116,6 +1165,7 @@ module Aws::Identitystore
     #   <p>The number of seconds to wait before retrying the next request.</p>
     #   @return [Integer]
     class ThrottlingException < Struct.new(
+      nil,
       :message,
       :request_id,
       :retry_after_seconds,
@@ -1139,6 +1189,7 @@ module Aws::Identitystore
     #            This type is not supported by Java V1, Go V1, and older versions of the CLI.</p>
     #   @return [JSON]
     class UniqueAttribute < Struct.new(
+      nil,
       :attribute_path,
       :attribute_value,
       keyword_init: true
@@ -1157,6 +1208,7 @@ module Aws::Identitystore
     #            operations might add, replace, or remove an attribute.</p>
     #   @return [Array<Types::AttributeOperation>]
     class UpdateGroupInput < Struct.new(
+      nil,
       :identity_store_id,
       :group_id,
       :operations,
@@ -1166,6 +1218,7 @@ module Aws::Identitystore
     end
 
     class UpdateGroupOutput < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1182,6 +1235,7 @@ module Aws::Identitystore
     #            operations might add, replace, or remove an attribute.</p>
     #   @return [Array<Types::AttributeOperation>]
     class UpdateUserInput < Struct.new(
+      nil,
       :identity_store_id,
       :user_id,
       :operations,
@@ -1191,6 +1245,7 @@ module Aws::Identitystore
     end
 
     class UpdateUserOutput < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1253,6 +1308,7 @@ module Aws::Identitystore
     #   <p>The globally unique identifier for the identity store.</p>
     #   @return [String]
     class User < Struct.new(
+      nil,
       :user_name,
       :user_id,
       :external_ids,
@@ -1283,6 +1339,7 @@ module Aws::Identitystore
     #            if the request fails.</p>
     #   @return [String]
     class ValidationException < Struct.new(
+      nil,
       :message,
       :request_id,
       keyword_init: true

@@ -12,6 +12,7 @@ module Aws::RedshiftServerless
     # @!attribute message
     #   @return [String]
     class AccessDeniedException < Struct.new(
+      nil,
       :code,
       :message,
       keyword_init: true
@@ -33,6 +34,7 @@ module Aws::RedshiftServerless
     #   <p>The name of the workgroup associated with the database.</p>
     #   @return [String]
     class Association < Struct.new(
+      nil,
       :custom_domain_certificate_arn,
       :custom_domain_certificate_expiry_time,
       :custom_domain_name,
@@ -54,6 +56,7 @@ module Aws::RedshiftServerless
     #   <p>The value of the parameter to set.</p>
     #   @return [String]
     class ConfigParameter < Struct.new(
+      nil,
       :parameter_key,
       :parameter_value,
       keyword_init: true
@@ -65,6 +68,7 @@ module Aws::RedshiftServerless
     # @!attribute message
     #   @return [String]
     class ConflictException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -85,6 +89,7 @@ module Aws::RedshiftServerless
     #            to associate with the created snapshot.</p>
     #   @return [Array<Types::Tag>]
     class ConvertRecoveryPointToSnapshotRequest < Struct.new(
+      nil,
       :recovery_point_id,
       :snapshot_name,
       :retention_period,
@@ -98,6 +103,7 @@ module Aws::RedshiftServerless
     #   <p>The snapshot converted from the recovery point.</p>
     #   @return [Types::Snapshot]
     class ConvertRecoveryPointToSnapshotResponse < Struct.new(
+      nil,
       :snapshot,
       keyword_init: true
     )
@@ -114,6 +120,7 @@ module Aws::RedshiftServerless
     #   <p>The custom domain name’s certificate Amazon resource name (ARN).</p>
     #   @return [String]
     class CreateCustomDomainAssociationRequest < Struct.new(
+      nil,
       :workgroup_name,
       :custom_domain_name,
       :custom_domain_certificate_arn,
@@ -135,6 +142,7 @@ module Aws::RedshiftServerless
     #   <p>The expiration time for the certificate.</p>
     #   @return [Time]
     class CreateCustomDomainAssociationResponse < Struct.new(
+      nil,
       :custom_domain_name,
       :workgroup_name,
       :custom_domain_certificate_arn,
@@ -164,6 +172,7 @@ module Aws::RedshiftServerless
     #   <p>The owner Amazon Web Services account for the Amazon Redshift Serverless workgroup.</p>
     #   @return [String]
     class CreateEndpointAccessRequest < Struct.new(
+      nil,
       :endpoint_name,
       :subnet_ids,
       :workgroup_name,
@@ -178,6 +187,7 @@ module Aws::RedshiftServerless
     #   <p>The created VPC endpoint.</p>
     #   @return [Types::EndpointAccess]
     class CreateEndpointAccessResponse < Struct.new(
+      nil,
       :endpoint,
       keyword_init: true
     )
@@ -228,6 +238,7 @@ module Aws::RedshiftServerless
     #   <p>The ARN for the Redshift application that integrates with IAM Identity Center.</p>
     #   @return [String]
     class CreateNamespaceRequest < Struct.new(
+      nil,
       :namespace_name,
       :admin_username,
       :admin_user_password,
@@ -249,6 +260,7 @@ module Aws::RedshiftServerless
     #   <p>The created namespace object.</p>
     #   @return [Types::Namespace]
     class CreateNamespaceResponse < Struct.new(
+      nil,
       :namespace,
       keyword_init: true
     )
@@ -268,6 +280,7 @@ module Aws::RedshiftServerless
     #            </a>.</p>
     #   @return [String]
     class CreateReservationRequest < Struct.new(
+      nil,
       :capacity,
       :offering_id,
       :client_token,
@@ -280,6 +293,7 @@ module Aws::RedshiftServerless
     #   <p>The reservation object that the <code>CreateReservation</code> action created.</p>
     #   @return [Types::Reservation]
     class CreateReservationResponse < Struct.new(
+      nil,
       :reservation,
       keyword_init: true
     )
@@ -330,6 +344,7 @@ module Aws::RedshiftServerless
     #   <p>The end time in UTC when the schedule is no longer active. After this time, the scheduled action does not trigger.</p>
     #   @return [Time]
     class CreateScheduledActionRequest < Struct.new(
+      nil,
       :scheduled_action_name,
       :target_action,
       :schedule,
@@ -348,6 +363,7 @@ module Aws::RedshiftServerless
     #   <p>The returned <code>ScheduledAction</code> object that describes the properties of a scheduled action.</p>
     #   @return [Types::ScheduledActionResponse]
     class CreateScheduledActionResponse < Struct.new(
+      nil,
       :scheduled_action,
       keyword_init: true
     )
@@ -367,6 +383,7 @@ module Aws::RedshiftServerless
     #   <p>The KMS key to use to encrypt your snapshots in the destination Amazon Web Services Region.</p>
     #   @return [String]
     class CreateSnapshotCopyConfigurationRequest < Struct.new(
+      nil,
       :namespace_name,
       :destination_region,
       :snapshot_retention_period,
@@ -380,6 +397,7 @@ module Aws::RedshiftServerless
     #   <p>The snapshot copy configuration object that is returned.</p>
     #   @return [Types::SnapshotCopyConfiguration]
     class CreateSnapshotCopyConfigurationResponse < Struct.new(
+      nil,
       :snapshot_copy_configuration,
       keyword_init: true
     )
@@ -399,6 +417,7 @@ module Aws::RedshiftServerless
     #   <p>An array of <a href="https://docs.aws.amazon.com/redshift-serverless/latest/APIReference/API_Tag.html">Tag objects</a> to associate with the snapshot.</p>
     #   @return [Array<Types::Tag>]
     class CreateSnapshotRequest < Struct.new(
+      nil,
       :namespace_name,
       :snapshot_name,
       :retention_period,
@@ -412,6 +431,7 @@ module Aws::RedshiftServerless
     #   <p>The created snapshot object.</p>
     #   @return [Types::Snapshot]
     class CreateSnapshotResponse < Struct.new(
+      nil,
       :snapshot,
       keyword_init: true
     )
@@ -434,6 +454,7 @@ module Aws::RedshiftServerless
     #   <p>An array of <a href="https://docs.aws.amazon.com/redshift-serverless/latest/APIReference/API_Tag.html">Tag objects</a> to associate with the snapshot.</p>
     #   @return [Array<Types::Tag>]
     class CreateSnapshotScheduleActionParameters < Struct.new(
+      nil,
       :namespace_name,
       :snapshot_name_prefix,
       :retention_period,
@@ -460,6 +481,7 @@ module Aws::RedshiftServerless
     #   <p>The action that Amazon Redshift Serverless takes when the limit is reached. The default is log.</p>
     #   @return [String]
     class CreateUsageLimitRequest < Struct.new(
+      nil,
       :resource_arn,
       :usage_type,
       :amount,
@@ -474,6 +496,7 @@ module Aws::RedshiftServerless
     #   <p>The returned usage limit object.</p>
     #   @return [Types::UsageLimit]
     class CreateUsageLimitResponse < Struct.new(
+      nil,
       :usage_limit,
       keyword_init: true
     )
@@ -529,6 +552,7 @@ module Aws::RedshiftServerless
     #            a track name, the workgroup is assigned to the <code>current</code> track.</p>
     #   @return [String]
     class CreateWorkgroupRequest < Struct.new(
+      nil,
       :workgroup_name,
       :namespace_name,
       :base_capacity,
@@ -552,6 +576,7 @@ module Aws::RedshiftServerless
     #   <p>The created workgroup object.</p>
     #   @return [Types::Workgroup]
     class CreateWorkgroupResponse < Struct.new(
+      nil,
       :workgroup,
       keyword_init: true
     )
@@ -565,6 +590,7 @@ module Aws::RedshiftServerless
     #   <p>The custom domain name associated with the workgroup.</p>
     #   @return [String]
     class DeleteCustomDomainAssociationRequest < Struct.new(
+      nil,
       :workgroup_name,
       :custom_domain_name,
       keyword_init: true
@@ -573,6 +599,7 @@ module Aws::RedshiftServerless
     end
 
     class DeleteCustomDomainAssociationResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -582,6 +609,7 @@ module Aws::RedshiftServerless
     #   <p>The name of the VPC endpoint to delete.</p>
     #   @return [String]
     class DeleteEndpointAccessRequest < Struct.new(
+      nil,
       :endpoint_name,
       keyword_init: true
     )
@@ -592,6 +620,7 @@ module Aws::RedshiftServerless
     #   <p>The deleted VPC endpoint.</p>
     #   @return [Types::EndpointAccess]
     class DeleteEndpointAccessResponse < Struct.new(
+      nil,
       :endpoint,
       keyword_init: true
     )
@@ -608,6 +637,7 @@ module Aws::RedshiftServerless
     #   <p>How long to retain the final snapshot.</p>
     #   @return [Integer]
     class DeleteNamespaceRequest < Struct.new(
+      nil,
       :namespace_name,
       :final_snapshot_name,
       :final_snapshot_retention_period,
@@ -620,6 +650,7 @@ module Aws::RedshiftServerless
     #   <p>The deleted namespace object.</p>
     #   @return [Types::Namespace]
     class DeleteNamespaceResponse < Struct.new(
+      nil,
       :namespace,
       keyword_init: true
     )
@@ -630,6 +661,7 @@ module Aws::RedshiftServerless
     #   <p>The Amazon Resource Name (ARN) of the policy to delete.</p>
     #   @return [String]
     class DeleteResourcePolicyRequest < Struct.new(
+      nil,
       :resource_arn,
       keyword_init: true
     )
@@ -637,6 +669,7 @@ module Aws::RedshiftServerless
     end
 
     class DeleteResourcePolicyResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -646,6 +679,7 @@ module Aws::RedshiftServerless
     #   <p>The name of the scheduled action to delete.</p>
     #   @return [String]
     class DeleteScheduledActionRequest < Struct.new(
+      nil,
       :scheduled_action_name,
       keyword_init: true
     )
@@ -656,6 +690,7 @@ module Aws::RedshiftServerless
     #   <p>The deleted scheduled action object.</p>
     #   @return [Types::ScheduledActionResponse]
     class DeleteScheduledActionResponse < Struct.new(
+      nil,
       :scheduled_action,
       keyword_init: true
     )
@@ -666,6 +701,7 @@ module Aws::RedshiftServerless
     #   <p>The ID of the snapshot copy configuration to delete.</p>
     #   @return [String]
     class DeleteSnapshotCopyConfigurationRequest < Struct.new(
+      nil,
       :snapshot_copy_configuration_id,
       keyword_init: true
     )
@@ -676,6 +712,7 @@ module Aws::RedshiftServerless
     #   <p>The deleted snapshot copy configuration object.</p>
     #   @return [Types::SnapshotCopyConfiguration]
     class DeleteSnapshotCopyConfigurationResponse < Struct.new(
+      nil,
       :snapshot_copy_configuration,
       keyword_init: true
     )
@@ -686,6 +723,7 @@ module Aws::RedshiftServerless
     #   <p>The name of the snapshot to be deleted.</p>
     #   @return [String]
     class DeleteSnapshotRequest < Struct.new(
+      nil,
       :snapshot_name,
       keyword_init: true
     )
@@ -696,6 +734,7 @@ module Aws::RedshiftServerless
     #   <p>The deleted snapshot object.</p>
     #   @return [Types::Snapshot]
     class DeleteSnapshotResponse < Struct.new(
+      nil,
       :snapshot,
       keyword_init: true
     )
@@ -706,6 +745,7 @@ module Aws::RedshiftServerless
     #   <p>The unique identifier of the usage limit to delete.</p>
     #   @return [String]
     class DeleteUsageLimitRequest < Struct.new(
+      nil,
       :usage_limit_id,
       keyword_init: true
     )
@@ -716,6 +756,7 @@ module Aws::RedshiftServerless
     #   <p>The deleted usage limit object.</p>
     #   @return [Types::UsageLimit]
     class DeleteUsageLimitResponse < Struct.new(
+      nil,
       :usage_limit,
       keyword_init: true
     )
@@ -726,6 +767,7 @@ module Aws::RedshiftServerless
     #   <p>The name of the workgroup to be deleted.</p>
     #   @return [String]
     class DeleteWorkgroupRequest < Struct.new(
+      nil,
       :workgroup_name,
       keyword_init: true
     )
@@ -736,6 +778,7 @@ module Aws::RedshiftServerless
     #   <p>The deleted workgroup object.</p>
     #   @return [Types::Workgroup]
     class DeleteWorkgroupResponse < Struct.new(
+      nil,
       :workgroup,
       keyword_init: true
     )
@@ -753,6 +796,7 @@ module Aws::RedshiftServerless
     #   <p>An array of <code>VpcEndpoint</code> objects.</p>
     #   @return [Array<Types::VpcEndpoint>]
     class Endpoint < Struct.new(
+      nil,
       :address,
       :port,
       :vpc_endpoints,
@@ -794,6 +838,7 @@ module Aws::RedshiftServerless
     #   <p>The Amazon Resource Name (ARN) of the VPC endpoint.</p>
     #   @return [String]
     class EndpointAccess < Struct.new(
+      nil,
       :endpoint_name,
       :endpoint_status,
       :workgroup_name,
@@ -843,6 +888,7 @@ module Aws::RedshiftServerless
     #   <p>The custom domain name associated with the workgroup. The custom domain name or the workgroup name must be included in the request.</p>
     #   @return [String]
     class GetCredentialsRequest < Struct.new(
+      nil,
       :db_name,
       :duration_seconds,
       :workgroup_name,
@@ -870,6 +916,7 @@ module Aws::RedshiftServerless
     #            authorization refreshes.</p>
     #   @return [Time]
     class GetCredentialsResponse < Struct.new(
+      nil,
       :db_user,
       :db_password,
       :expiration,
@@ -886,6 +933,7 @@ module Aws::RedshiftServerless
     #   <p>The name of the workgroup associated with the database.</p>
     #   @return [String]
     class GetCustomDomainAssociationRequest < Struct.new(
+      nil,
       :custom_domain_name,
       :workgroup_name,
       keyword_init: true
@@ -906,6 +954,7 @@ module Aws::RedshiftServerless
     #   <p>The expiration time for the certificate.</p>
     #   @return [Time]
     class GetCustomDomainAssociationResponse < Struct.new(
+      nil,
       :custom_domain_name,
       :workgroup_name,
       :custom_domain_certificate_arn,
@@ -919,6 +968,7 @@ module Aws::RedshiftServerless
     #   <p>The name of the VPC endpoint to return information for.</p>
     #   @return [String]
     class GetEndpointAccessRequest < Struct.new(
+      nil,
       :endpoint_name,
       keyword_init: true
     )
@@ -929,6 +979,7 @@ module Aws::RedshiftServerless
     #   <p>The returned VPC endpoint.</p>
     #   @return [Types::EndpointAccess]
     class GetEndpointAccessResponse < Struct.new(
+      nil,
       :endpoint,
       keyword_init: true
     )
@@ -939,6 +990,7 @@ module Aws::RedshiftServerless
     #   <p>The name of the namespace to retrieve information for.</p>
     #   @return [String]
     class GetNamespaceRequest < Struct.new(
+      nil,
       :namespace_name,
       keyword_init: true
     )
@@ -949,6 +1001,7 @@ module Aws::RedshiftServerless
     #   <p>The returned namespace object.</p>
     #   @return [Types::Namespace]
     class GetNamespaceResponse < Struct.new(
+      nil,
       :namespace,
       keyword_init: true
     )
@@ -959,6 +1012,7 @@ module Aws::RedshiftServerless
     #   <p>The unique identifier of the recovery point to return information for.</p>
     #   @return [String]
     class GetRecoveryPointRequest < Struct.new(
+      nil,
       :recovery_point_id,
       keyword_init: true
     )
@@ -969,6 +1023,7 @@ module Aws::RedshiftServerless
     #   <p>The returned recovery point object.</p>
     #   @return [Types::RecoveryPoint]
     class GetRecoveryPointResponse < Struct.new(
+      nil,
       :recovery_point,
       keyword_init: true
     )
@@ -979,6 +1034,7 @@ module Aws::RedshiftServerless
     #   <p>The identifier for the offering..</p>
     #   @return [String]
     class GetReservationOfferingRequest < Struct.new(
+      nil,
       :offering_id,
       keyword_init: true
     )
@@ -989,6 +1045,7 @@ module Aws::RedshiftServerless
     #   <p>The returned reservation offering. The offering determines the payment schedule for the reservation.</p>
     #   @return [Types::ReservationOffering]
     class GetReservationOfferingResponse < Struct.new(
+      nil,
       :reservation_offering,
       keyword_init: true
     )
@@ -999,6 +1056,7 @@ module Aws::RedshiftServerless
     #   <p>The ID of the reservation to retrieve.</p>
     #   @return [String]
     class GetReservationRequest < Struct.new(
+      nil,
       :reservation_id,
       keyword_init: true
     )
@@ -1009,6 +1067,7 @@ module Aws::RedshiftServerless
     #   <p>The returned reservation object.</p>
     #   @return [Types::Reservation]
     class GetReservationResponse < Struct.new(
+      nil,
       :reservation,
       keyword_init: true
     )
@@ -1019,6 +1078,7 @@ module Aws::RedshiftServerless
     #   <p>The Amazon Resource Name (ARN) of the resource to return.</p>
     #   @return [String]
     class GetResourcePolicyRequest < Struct.new(
+      nil,
       :resource_arn,
       keyword_init: true
     )
@@ -1029,6 +1089,7 @@ module Aws::RedshiftServerless
     #   <p>The returned resource policy.</p>
     #   @return [Types::ResourcePolicy]
     class GetResourcePolicyResponse < Struct.new(
+      nil,
       :resource_policy,
       keyword_init: true
     )
@@ -1039,6 +1100,7 @@ module Aws::RedshiftServerless
     #   <p>The name of the scheduled action.</p>
     #   @return [String]
     class GetScheduledActionRequest < Struct.new(
+      nil,
       :scheduled_action_name,
       keyword_init: true
     )
@@ -1049,6 +1111,7 @@ module Aws::RedshiftServerless
     #   <p>The returned scheduled action object.</p>
     #   @return [Types::ScheduledActionResponse]
     class GetScheduledActionResponse < Struct.new(
+      nil,
       :scheduled_action,
       keyword_init: true
     )
@@ -1065,6 +1128,7 @@ module Aws::RedshiftServerless
     #   <p>The Amazon Resource Name (ARN) of the snapshot to return.</p>
     #   @return [String]
     class GetSnapshotRequest < Struct.new(
+      nil,
       :snapshot_name,
       :owner_account,
       :snapshot_arn,
@@ -1077,6 +1141,7 @@ module Aws::RedshiftServerless
     #   <p>The returned snapshot object.</p>
     #   @return [Types::Snapshot]
     class GetSnapshotResponse < Struct.new(
+      nil,
       :snapshot,
       keyword_init: true
     )
@@ -1087,6 +1152,7 @@ module Aws::RedshiftServerless
     #   <p>The ID of the <code>RestoreTableFromSnapshot</code> request to return status for.</p>
     #   @return [String]
     class GetTableRestoreStatusRequest < Struct.new(
+      nil,
       :table_restore_request_id,
       keyword_init: true
     )
@@ -1098,6 +1164,7 @@ module Aws::RedshiftServerless
     #            the status of your <code>RestoreTableFromSnapshot</code> request.</p>
     #   @return [Types::TableRestoreStatus]
     class GetTableRestoreStatusResponse < Struct.new(
+      nil,
       :table_restore_status,
       keyword_init: true
     )
@@ -1108,6 +1175,7 @@ module Aws::RedshiftServerless
     #   <p>The name of the track of which its version is fetched.</p>
     #   @return [String]
     class GetTrackRequest < Struct.new(
+      nil,
       :track_name,
       keyword_init: true
     )
@@ -1118,6 +1186,7 @@ module Aws::RedshiftServerless
     #   <p>The version of the specified track.</p>
     #   @return [Types::ServerlessTrack]
     class GetTrackResponse < Struct.new(
+      nil,
       :track,
       keyword_init: true
     )
@@ -1128,6 +1197,7 @@ module Aws::RedshiftServerless
     #   <p>The unique identifier of the usage limit to return information for.</p>
     #   @return [String]
     class GetUsageLimitRequest < Struct.new(
+      nil,
       :usage_limit_id,
       keyword_init: true
     )
@@ -1138,6 +1208,7 @@ module Aws::RedshiftServerless
     #   <p>The returned usage limit object.</p>
     #   @return [Types::UsageLimit]
     class GetUsageLimitResponse < Struct.new(
+      nil,
       :usage_limit,
       keyword_init: true
     )
@@ -1148,6 +1219,7 @@ module Aws::RedshiftServerless
     #   <p>The name of the workgroup to return information for.</p>
     #   @return [String]
     class GetWorkgroupRequest < Struct.new(
+      nil,
       :workgroup_name,
       keyword_init: true
     )
@@ -1158,6 +1230,7 @@ module Aws::RedshiftServerless
     #   <p>The returned workgroup object.</p>
     #   @return [Types::Workgroup]
     class GetWorkgroupResponse < Struct.new(
+      nil,
       :workgroup,
       keyword_init: true
     )
@@ -1168,6 +1241,7 @@ module Aws::RedshiftServerless
     # @!attribute message
     #   @return [String]
     class InsufficientCapacityException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -1178,6 +1252,7 @@ module Aws::RedshiftServerless
     # @!attribute message
     #   @return [String]
     class InternalServerException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -1188,6 +1263,7 @@ module Aws::RedshiftServerless
     # @!attribute message
     #   @return [String]
     class InvalidPaginationException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -1198,6 +1274,7 @@ module Aws::RedshiftServerless
     # @!attribute message
     #   @return [String]
     class Ipv6CidrBlockNotFoundException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -1220,6 +1297,7 @@ module Aws::RedshiftServerless
     #   <p>The custom domain name’s certificate Amazon resource name (ARN).</p>
     #   @return [String]
     class ListCustomDomainAssociationsRequest < Struct.new(
+      nil,
       :next_token,
       :max_results,
       :custom_domain_name,
@@ -1238,6 +1316,7 @@ module Aws::RedshiftServerless
     #   <p>A list of Association objects.</p>
     #   @return [Array<Types::Association>]
     class ListCustomDomainAssociationsResponse < Struct.new(
+      nil,
       :next_token,
       :associations,
       keyword_init: true
@@ -1264,6 +1343,7 @@ module Aws::RedshiftServerless
     #   <p>The owner Amazon Web Services account for the Amazon Redshift Serverless workgroup.</p>
     #   @return [String]
     class ListEndpointAccessRequest < Struct.new(
+      nil,
       :next_token,
       :max_results,
       :workgroup_name,
@@ -1283,6 +1363,7 @@ module Aws::RedshiftServerless
     #   <p>The returned VPC endpoints.</p>
     #   @return [Array<Types::EndpointAccess>]
     class ListEndpointAccessResponse < Struct.new(
+      nil,
       :next_token,
       :endpoints,
       keyword_init: true
@@ -1304,6 +1385,7 @@ module Aws::RedshiftServerless
     #            of results to return. You can use nextToken to display the next page of results.</p>
     #   @return [Integer]
     class ListManagedWorkgroupsRequest < Struct.new(
+      nil,
       :source_arn,
       :next_token,
       :max_results,
@@ -1321,6 +1403,7 @@ module Aws::RedshiftServerless
     #   <p>The returned array of managed workgroups.</p>
     #   @return [Array<Types::ManagedWorkgroupListItem>]
     class ListManagedWorkgroupsResponse < Struct.new(
+      nil,
       :next_token,
       :managed_workgroups,
       keyword_init: true
@@ -1338,6 +1421,7 @@ module Aws::RedshiftServerless
     #            You can use <code>nextToken</code> to display the next page of results.</p>
     #   @return [Integer]
     class ListNamespacesRequest < Struct.new(
+      nil,
       :next_token,
       :max_results,
       keyword_init: true
@@ -1354,6 +1438,7 @@ module Aws::RedshiftServerless
     #   <p>The list of returned namespaces.</p>
     #   @return [Array<Types::Namespace>]
     class ListNamespacesResponse < Struct.new(
+      nil,
       :next_token,
       :namespaces,
       keyword_init: true
@@ -1383,6 +1468,7 @@ module Aws::RedshiftServerless
     #   <p>The Amazon Resource Name (ARN) of the namespace from which to list recovery points.</p>
     #   @return [String]
     class ListRecoveryPointsRequest < Struct.new(
+      nil,
       :next_token,
       :max_results,
       :start_time,
@@ -1403,6 +1489,7 @@ module Aws::RedshiftServerless
     #            Make the call again using the returned token to retrieve the next page.</p>
     #   @return [String]
     class ListRecoveryPointsResponse < Struct.new(
+      nil,
       :recovery_points,
       :next_token,
       keyword_init: true
@@ -1417,6 +1504,7 @@ module Aws::RedshiftServerless
     #   <p>The maximum number of items to return for this call. The call also returns a token that you can specify in a subsequent call to get the next set of results.</p>
     #   @return [Integer]
     class ListReservationOfferingsRequest < Struct.new(
+      nil,
       :next_token,
       :max_results,
       keyword_init: true
@@ -1431,6 +1519,7 @@ module Aws::RedshiftServerless
     #   <p>The token to use when requesting the next set of items.</p>
     #   @return [String]
     class ListReservationOfferingsResponse < Struct.new(
+      nil,
       :reservation_offerings_list,
       :next_token,
       keyword_init: true
@@ -1445,6 +1534,7 @@ module Aws::RedshiftServerless
     #   <p>The maximum number of items to return for this call. The call also returns a token that you can specify in a subsequent call to get the next set of results.</p>
     #   @return [Integer]
     class ListReservationsRequest < Struct.new(
+      nil,
       :next_token,
       :max_results,
       keyword_init: true
@@ -1459,6 +1549,7 @@ module Aws::RedshiftServerless
     #   <p>The token to use when requesting the next set of items.</p>
     #   @return [String]
     class ListReservationsResponse < Struct.new(
+      nil,
       :reservations_list,
       :next_token,
       keyword_init: true
@@ -1477,6 +1568,7 @@ module Aws::RedshiftServerless
     #   <p>The name of namespace associated with the scheduled action to retrieve.</p>
     #   @return [String]
     class ListScheduledActionsRequest < Struct.new(
+      nil,
       :next_token,
       :max_results,
       :namespace_name,
@@ -1492,6 +1584,7 @@ module Aws::RedshiftServerless
     #   <p>All of the returned scheduled action association objects.</p>
     #   @return [Array<Types::ScheduledActionAssociation>]
     class ListScheduledActionsResponse < Struct.new(
+      nil,
       :next_token,
       :scheduled_actions,
       keyword_init: true
@@ -1510,6 +1603,7 @@ module Aws::RedshiftServerless
     #   <p>An optional parameter that specifies the maximum number of results to return. You can use <code>nextToken</code> to display the next page of results.</p>
     #   @return [Integer]
     class ListSnapshotCopyConfigurationsRequest < Struct.new(
+      nil,
       :namespace_name,
       :next_token,
       :max_results,
@@ -1526,6 +1620,7 @@ module Aws::RedshiftServerless
     #   <p>All of the returned snapshot copy configurations.</p>
     #   @return [Array<Types::SnapshotCopyConfiguration>]
     class ListSnapshotCopyConfigurationsResponse < Struct.new(
+      nil,
       :next_token,
       :snapshot_copy_configurations,
       keyword_init: true
@@ -1558,6 +1653,7 @@ module Aws::RedshiftServerless
     #   <p>The timestamp showing when the snapshot creation finished.</p>
     #   @return [Time]
     class ListSnapshotsRequest < Struct.new(
+      nil,
       :next_token,
       :max_results,
       :namespace_name,
@@ -1579,6 +1675,7 @@ module Aws::RedshiftServerless
     #   <p>All of the returned snapshot objects.</p>
     #   @return [Array<Types::Snapshot>]
     class ListSnapshotsResponse < Struct.new(
+      nil,
       :next_token,
       :snapshots,
       keyword_init: true
@@ -1602,6 +1699,7 @@ module Aws::RedshiftServerless
     #   <p>The workgroup from which to list all of the statuses of <code>RestoreTableFromSnapshot</code> operations.</p>
     #   @return [String]
     class ListTableRestoreStatusRequest < Struct.new(
+      nil,
       :next_token,
       :max_results,
       :namespace_name,
@@ -1620,6 +1718,7 @@ module Aws::RedshiftServerless
     #   <p>The array of returned <code>TableRestoreStatus</code> objects.</p>
     #   @return [Array<Types::TableRestoreStatus>]
     class ListTableRestoreStatusResponse < Struct.new(
+      nil,
       :next_token,
       :table_restore_statuses,
       keyword_init: true
@@ -1631,6 +1730,7 @@ module Aws::RedshiftServerless
     #   <p>The Amazon Resource Name (ARN) of the resource to list tags for.</p>
     #   @return [String]
     class ListTagsForResourceRequest < Struct.new(
+      nil,
       :resource_arn,
       keyword_init: true
     )
@@ -1641,6 +1741,7 @@ module Aws::RedshiftServerless
     #   <p>A map of the key-value pairs assigned to the resource.</p>
     #   @return [Array<Types::Tag>]
     class ListTagsForResourceResponse < Struct.new(
+      nil,
       :tags,
       keyword_init: true
     )
@@ -1660,6 +1761,7 @@ module Aws::RedshiftServerless
     #            returned marker value.</p>
     #   @return [Integer]
     class ListTracksRequest < Struct.new(
+      nil,
       :next_token,
       :max_results,
       keyword_init: true
@@ -1675,6 +1777,7 @@ module Aws::RedshiftServerless
     #            is a unique pagination token for each page. Make the call again using the returned token to retrieve the next page.</p>
     #   @return [String]
     class ListTracksResponse < Struct.new(
+      nil,
       :tracks,
       :next_token,
       keyword_init: true
@@ -1699,6 +1802,7 @@ module Aws::RedshiftServerless
     #            You can use <code>nextToken</code> to get the next page of results. The default is 100.</p>
     #   @return [Integer]
     class ListUsageLimitsRequest < Struct.new(
+      nil,
       :resource_arn,
       :usage_type,
       :next_token,
@@ -1717,6 +1821,7 @@ module Aws::RedshiftServerless
     #            Make the call again using the returned token to retrieve the next page.</p>
     #   @return [String]
     class ListUsageLimitsResponse < Struct.new(
+      nil,
       :usage_limits,
       :next_token,
       keyword_init: true
@@ -1737,6 +1842,7 @@ module Aws::RedshiftServerless
     #   <p>The owner Amazon Web Services account for the Amazon Redshift Serverless workgroup.</p>
     #   @return [String]
     class ListWorkgroupsRequest < Struct.new(
+      nil,
       :next_token,
       :max_results,
       :owner_account,
@@ -1755,6 +1861,7 @@ module Aws::RedshiftServerless
     #   <p>The returned array of workgroups.</p>
     #   @return [Array<Types::Workgroup>]
     class ListWorkgroupsResponse < Struct.new(
+      nil,
       :next_token,
       :workgroups,
       keyword_init: true
@@ -1780,6 +1887,7 @@ module Aws::RedshiftServerless
     #   <p>The creation date of the managed workgroup.</p>
     #   @return [Time]
     class ManagedWorkgroupListItem < Struct.new(
+      nil,
       :managed_workgroup_name,
       :managed_workgroup_id,
       :source_arn,
@@ -1834,6 +1942,7 @@ module Aws::RedshiftServerless
     #   <p>The ID of the Key Management Service (KMS) key used to encrypt and store the namespace's admin credentials secret.</p>
     #   @return [String]
     class Namespace < Struct.new(
+      nil,
       :namespace_arn,
       :namespace_id,
       :namespace_name,
@@ -1871,6 +1980,7 @@ module Aws::RedshiftServerless
     #   <p>The IPv6 address of the network interface within the subnet.</p>
     #   @return [String]
     class NetworkInterface < Struct.new(
+      nil,
       :network_interface_id,
       :subnet_id,
       :private_ip_address,
@@ -1890,6 +2000,7 @@ module Aws::RedshiftServerless
     #            correspond to the price performance levels LOW_COST, ECONOMICAL, BALANCED, RESOURCEFUL, and HIGH_PERFORMANCE.</p>
     #   @return [Integer]
     class PerformanceTarget < Struct.new(
+      nil,
       :status,
       :level,
       keyword_init: true
@@ -1910,6 +2021,7 @@ module Aws::RedshiftServerless
     #            </p>
     #   @return [String]
     class PutResourcePolicyRequest < Struct.new(
+      nil,
       :resource_arn,
       :policy,
       keyword_init: true
@@ -1921,6 +2033,7 @@ module Aws::RedshiftServerless
     #   <p>The policy that was created or updated.</p>
     #   @return [Types::ResourcePolicy]
     class PutResourcePolicyResponse < Struct.new(
+      nil,
       :resource_policy,
       keyword_init: true
     )
@@ -1948,6 +2061,7 @@ module Aws::RedshiftServerless
     #   <p>The Amazon Resource Name (ARN) of the namespace the recovery point is associated with.</p>
     #   @return [String]
     class RecoveryPoint < Struct.new(
+      nil,
       :recovery_point_id,
       :recovery_point_create_time,
       :total_size_in_mega_bytes,
@@ -2006,6 +2120,7 @@ module Aws::RedshiftServerless
     #            </ul>
     #   @return [String]
     class Reservation < Struct.new(
+      nil,
       :reservation_id,
       :reservation_arn,
       :start_date,
@@ -2044,6 +2159,7 @@ module Aws::RedshiftServerless
     #   <p>Determines the payment schedule for the reservation.</p>
     #   @return [String]
     class ReservationOffering < Struct.new(
+      nil,
       :offering_id,
       :duration,
       :upfront_charge,
@@ -2069,6 +2185,7 @@ module Aws::RedshiftServerless
     #   <p>The name of the resource that could not be found.</p>
     #   @return [String]
     class ResourceNotFoundException < Struct.new(
+      nil,
       :message,
       :resource_name,
       keyword_init: true
@@ -2084,6 +2201,7 @@ module Aws::RedshiftServerless
     #   <p>The resource policy.</p>
     #   @return [String]
     class ResourcePolicy < Struct.new(
+      nil,
       :resource_arn,
       :policy,
       keyword_init: true
@@ -2101,6 +2219,7 @@ module Aws::RedshiftServerless
     #   <p>The name of the workgroup used to restore data.</p>
     #   @return [String]
     class RestoreFromRecoveryPointRequest < Struct.new(
+      nil,
       :recovery_point_id,
       :namespace_name,
       :workgroup_name,
@@ -2116,6 +2235,7 @@ module Aws::RedshiftServerless
     #   <p>The namespace that data was restored into.</p>
     #   @return [Types::Namespace]
     class RestoreFromRecoveryPointResponse < Struct.new(
+      nil,
       :recovery_point_id,
       :namespace,
       keyword_init: true
@@ -2151,6 +2271,7 @@ module Aws::RedshiftServerless
     #   <p>The ID of the Key Management Service (KMS) key used to encrypt and store the namespace's admin credentials secret.</p>
     #   @return [String]
     class RestoreFromSnapshotRequest < Struct.new(
+      nil,
       :namespace_name,
       :workgroup_name,
       :snapshot_name,
@@ -2173,6 +2294,7 @@ module Aws::RedshiftServerless
     #   <p>A collection of database objects and users.</p>
     #   @return [Types::Namespace]
     class RestoreFromSnapshotResponse < Struct.new(
+      nil,
       :snapshot_name,
       :owner_account,
       :namespace,
@@ -2212,6 +2334,7 @@ module Aws::RedshiftServerless
     #   <p>Indicates whether name identifiers for database, schema, and table are case sensitive. If true, the names are case sensitive. If false, the names are not case sensitive. The default is false.</p>
     #   @return [Boolean]
     class RestoreTableFromRecoveryPointRequest < Struct.new(
+      nil,
       :namespace_name,
       :workgroup_name,
       :recovery_point_id,
@@ -2231,6 +2354,7 @@ module Aws::RedshiftServerless
     #   <p>Contains information about a table restore request.</p>
     #   @return [Types::TableRestoreStatus]
     class RestoreTableFromRecoveryPointResponse < Struct.new(
+      nil,
       :table_restore_status,
       keyword_init: true
     )
@@ -2270,6 +2394,7 @@ module Aws::RedshiftServerless
     #            false, the names are not case sensitive. The default is false.</p>
     #   @return [Boolean]
     class RestoreTableFromSnapshotRequest < Struct.new(
+      nil,
       :namespace_name,
       :workgroup_name,
       :snapshot_name,
@@ -2289,6 +2414,7 @@ module Aws::RedshiftServerless
     #   <p>The TableRestoreStatus object that contains the status of the restore operation.</p>
     #   @return [Types::TableRestoreStatus]
     class RestoreTableFromSnapshotResponse < Struct.new(
+      nil,
       :table_restore_status,
       keyword_init: true
     )
@@ -2325,6 +2451,7 @@ module Aws::RedshiftServerless
     #   <p>Name of associated scheduled action.</p>
     #   @return [String]
     class ScheduledActionAssociation < Struct.new(
+      nil,
       :namespace_name,
       :scheduled_action_name,
       keyword_init: true
@@ -2382,6 +2509,7 @@ module Aws::RedshiftServerless
     #   <p>The uuid of the scheduled action.</p>
     #   @return [String]
     class ScheduledActionResponse < Struct.new(
+      nil,
       :scheduled_action_name,
       :schedule,
       :scheduled_action_description,
@@ -2412,6 +2540,7 @@ module Aws::RedshiftServerless
     #   <p>An array of <code>UpdateTarget</code> objects to update with the track.</p>
     #   @return [Array<Types::UpdateTarget>]
     class ServerlessTrack < Struct.new(
+      nil,
       :track_name,
       :workgroup_version,
       :update_targets,
@@ -2424,6 +2553,7 @@ module Aws::RedshiftServerless
     # @!attribute message
     #   @return [String]
     class ServiceQuotaExceededException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -2499,6 +2629,7 @@ module Aws::RedshiftServerless
     #   <p>The ID of the Key Management Service (KMS) key used to encrypt and store the namespace's admin credentials secret.</p>
     #   @return [String]
     class Snapshot < Struct.new(
+      nil,
       :namespace_name,
       :namespace_arn,
       :snapshot_name,
@@ -2546,6 +2677,7 @@ module Aws::RedshiftServerless
     #   <p>The ID of the KMS key to use to encrypt your snapshots in the destination Amazon Web Services Region.</p>
     #   @return [String]
     class SnapshotCopyConfiguration < Struct.new(
+      nil,
       :snapshot_copy_configuration_id,
       :snapshot_copy_configuration_arn,
       :namespace_name,
@@ -2609,6 +2741,7 @@ module Aws::RedshiftServerless
     #   <p>The ID of the recovery point being restored from.</p>
     #   @return [String]
     class TableRestoreStatus < Struct.new(
+      nil,
       :table_restore_request_id,
       :status,
       :message,
@@ -2638,6 +2771,7 @@ module Aws::RedshiftServerless
     #   <p>The value of the tag.</p>
     #   @return [String]
     class Tag < Struct.new(
+      nil,
       :key,
       :value,
       keyword_init: true
@@ -2652,6 +2786,7 @@ module Aws::RedshiftServerless
     #   <p>The map of the key-value pairs used to tag the resource.</p>
     #   @return [Array<Types::Tag>]
     class TagResourceRequest < Struct.new(
+      nil,
       :resource_arn,
       :tags,
       keyword_init: true
@@ -2660,6 +2795,7 @@ module Aws::RedshiftServerless
     end
 
     class TagResourceResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -2690,6 +2826,7 @@ module Aws::RedshiftServerless
     # @!attribute message
     #   @return [String]
     class ThrottlingException < Struct.new(
+      nil,
       :code,
       :message,
       keyword_init: true
@@ -2704,6 +2841,7 @@ module Aws::RedshiftServerless
     #   <p>The name of the resource that exceeded the number of tags allowed for a resource.</p>
     #   @return [String]
     class TooManyTagsException < Struct.new(
+      nil,
       :message,
       :resource_name,
       keyword_init: true
@@ -2718,6 +2856,7 @@ module Aws::RedshiftServerless
     #   <p>The tag or set of tags to remove from the resource.</p>
     #   @return [Array<String>]
     class UntagResourceRequest < Struct.new(
+      nil,
       :resource_arn,
       :tag_keys,
       keyword_init: true
@@ -2726,6 +2865,7 @@ module Aws::RedshiftServerless
     end
 
     class UntagResourceResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -2741,6 +2881,7 @@ module Aws::RedshiftServerless
     #   <p>The custom domain name’s certificate Amazon resource name (ARN). This is optional.</p>
     #   @return [String]
     class UpdateCustomDomainAssociationRequest < Struct.new(
+      nil,
       :workgroup_name,
       :custom_domain_name,
       :custom_domain_certificate_arn,
@@ -2762,6 +2903,7 @@ module Aws::RedshiftServerless
     #   <p>The expiration time for the certificate.</p>
     #   @return [Time]
     class UpdateCustomDomainAssociationResponse < Struct.new(
+      nil,
       :custom_domain_name,
       :workgroup_name,
       :custom_domain_certificate_arn,
@@ -2778,6 +2920,7 @@ module Aws::RedshiftServerless
     #   <p>The list of VPC security groups associated with the endpoint after the endpoint is modified.</p>
     #   @return [Array<String>]
     class UpdateEndpointAccessRequest < Struct.new(
+      nil,
       :endpoint_name,
       :vpc_security_group_ids,
       keyword_init: true
@@ -2789,6 +2932,7 @@ module Aws::RedshiftServerless
     #   <p>The updated VPC endpoint.</p>
     #   @return [Types::EndpointAccess]
     class UpdateEndpointAccessResponse < Struct.new(
+      nil,
       :endpoint,
       keyword_init: true
     )
@@ -2832,6 +2976,7 @@ module Aws::RedshiftServerless
     #            You can only use this parameter if <code>manageAdminPassword</code> is true.</p>
     #   @return [String]
     class UpdateNamespaceRequest < Struct.new(
+      nil,
       :namespace_name,
       :admin_user_password,
       :admin_username,
@@ -2850,6 +2995,7 @@ module Aws::RedshiftServerless
     #   <p>A list of tag instances.</p>
     #   @return [Types::Namespace]
     class UpdateNamespaceResponse < Struct.new(
+      nil,
       :namespace,
       keyword_init: true
     )
@@ -2896,6 +3042,7 @@ module Aws::RedshiftServerless
     #   <p>The end time in UTC of the scheduled action to update.</p>
     #   @return [Time]
     class UpdateScheduledActionRequest < Struct.new(
+      nil,
       :scheduled_action_name,
       :target_action,
       :schedule,
@@ -2913,6 +3060,7 @@ module Aws::RedshiftServerless
     #   <p>The ScheduledAction object that was updated.</p>
     #   @return [Types::ScheduledActionResponse]
     class UpdateScheduledActionResponse < Struct.new(
+      nil,
       :scheduled_action,
       keyword_init: true
     )
@@ -2926,6 +3074,7 @@ module Aws::RedshiftServerless
     #   <p>The new retention period of how long to keep a snapshot in the destination Amazon Web Services Region.</p>
     #   @return [Integer]
     class UpdateSnapshotCopyConfigurationRequest < Struct.new(
+      nil,
       :snapshot_copy_configuration_id,
       :snapshot_retention_period,
       keyword_init: true
@@ -2937,6 +3086,7 @@ module Aws::RedshiftServerless
     #   <p>The updated snapshot copy configuration object.</p>
     #   @return [Types::SnapshotCopyConfiguration]
     class UpdateSnapshotCopyConfigurationResponse < Struct.new(
+      nil,
       :snapshot_copy_configuration,
       keyword_init: true
     )
@@ -2950,6 +3100,7 @@ module Aws::RedshiftServerless
     #   <p>The new retention period of the snapshot.</p>
     #   @return [Integer]
     class UpdateSnapshotRequest < Struct.new(
+      nil,
       :snapshot_name,
       :retention_period,
       keyword_init: true
@@ -2961,6 +3112,7 @@ module Aws::RedshiftServerless
     #   <p>The updated snapshot object.</p>
     #   @return [Types::Snapshot]
     class UpdateSnapshotResponse < Struct.new(
+      nil,
       :snapshot,
       keyword_init: true
     )
@@ -2975,6 +3127,7 @@ module Aws::RedshiftServerless
     #   <p>The workgroup version for the new track.</p>
     #   @return [String]
     class UpdateTarget < Struct.new(
+      nil,
       :track_name,
       :workgroup_version,
       keyword_init: true
@@ -2994,6 +3147,7 @@ module Aws::RedshiftServerless
     #   <p>The new action that Amazon Redshift Serverless takes when the limit is reached.</p>
     #   @return [String]
     class UpdateUsageLimitRequest < Struct.new(
+      nil,
       :usage_limit_id,
       :amount,
       :breach_action,
@@ -3006,6 +3160,7 @@ module Aws::RedshiftServerless
     #   <p>The updated usage limit object.</p>
     #   @return [Types::UsageLimit]
     class UpdateUsageLimitResponse < Struct.new(
+      nil,
       :usage_limit,
       keyword_init: true
     )
@@ -3056,6 +3211,7 @@ module Aws::RedshiftServerless
     #            a track name, the workgroup is assigned to the <code>current</code> track.</p>
     #   @return [String]
     class UpdateWorkgroupRequest < Struct.new(
+      nil,
       :workgroup_name,
       :base_capacity,
       :enhanced_vpc_routing,
@@ -3077,6 +3233,7 @@ module Aws::RedshiftServerless
     #   <p>The updated workgroup object.</p>
     #   @return [Types::Workgroup]
     class UpdateWorkgroupResponse < Struct.new(
+      nil,
       :workgroup,
       keyword_init: true
     )
@@ -3106,6 +3263,7 @@ module Aws::RedshiftServerless
     #   <p>The action that Amazon Redshift Serverless takes when the limit is reached.</p>
     #   @return [String]
     class UsageLimit < Struct.new(
+      nil,
       :usage_limit_id,
       :usage_limit_arn,
       :resource_arn,
@@ -3122,6 +3280,7 @@ module Aws::RedshiftServerless
     # @!attribute message
     #   @return [String]
     class ValidationException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -3139,6 +3298,7 @@ module Aws::RedshiftServerless
     #   <p>One or more network interfaces of the endpoint. Also known as an interface endpoint.</p>
     #   @return [Array<Types::NetworkInterface>]
     class VpcEndpoint < Struct.new(
+      nil,
       :vpc_endpoint_id,
       :vpc_id,
       :network_interfaces,
@@ -3155,6 +3315,7 @@ module Aws::RedshiftServerless
     #   <p>The status of the VPC security group.</p>
     #   @return [String]
     class VpcSecurityGroupMembership < Struct.new(
+      nil,
       :vpc_security_group_id,
       :status,
       keyword_init: true
@@ -3246,6 +3407,7 @@ module Aws::RedshiftServerless
     #            track name is applied.</p>
     #   @return [String]
     class Workgroup < Struct.new(
+      nil,
       :workgroup_id,
       :workgroup_arn,
       :workgroup_name,

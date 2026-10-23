@@ -10,6 +10,7 @@ module Aws::CodeCatalyst
     # @!attribute message
     #   @return [String]
     class AccessDeniedException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -27,6 +28,7 @@ module Aws::CodeCatalyst
     #   <p>The date and time when the personal access token will expire, in coordinated universal time (UTC) timestamp format as specified in <a href="https://www.rfc-editor.org/rfc/rfc3339#section-5.6">RFC 3339</a>.</p>
     #   @return [Time]
     class AccessTokenSummary < Struct.new(
+      nil,
       :id,
       :name,
       :expires_time,
@@ -40,6 +42,7 @@ module Aws::CodeCatalyst
     # @!attribute message
     #   @return [String]
     class ConflictException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -53,6 +56,7 @@ module Aws::CodeCatalyst
     #   <p>The date and time the personal access token expires, in coordinated universal time (UTC) timestamp format as specified in <a href="https://www.rfc-editor.org/rfc/rfc3339#section-5.6">RFC 3339</a>.</p>
     #   @return [Time]
     class CreateAccessTokenRequest < Struct.new(
+      nil,
       :name,
       :expires_time,
       keyword_init: true
@@ -73,6 +77,7 @@ module Aws::CodeCatalyst
     #   <p>The system-generated unique ID of the access token.</p>
     #   @return [String]
     class CreateAccessTokenResponse < Struct.new(
+      nil,
       :secret,
       :name,
       :expires_time,
@@ -125,6 +130,7 @@ module Aws::CodeCatalyst
     #   <p>The name of the connection that will be used to connect to Amazon VPC, if any.</p>
     #   @return [String]
     class CreateDevEnvironmentRequest < Struct.new(
+      nil,
       :space_name,
       :project_name,
       :repositories,
@@ -153,6 +159,7 @@ module Aws::CodeCatalyst
     #   <p>The name of the connection used to connect to Amazon VPC used when the Dev Environment was created, if any.</p>
     #   @return [String]
     class CreateDevEnvironmentResponse < Struct.new(
+      nil,
       :space_name,
       :project_name,
       :id,
@@ -172,6 +179,7 @@ module Aws::CodeCatalyst
     #   <p>The description of the project. This description will be displayed to all users of the project. We recommend providing a brief description of the project and its intended purpose.</p>
     #   @return [String]
     class CreateProjectRequest < Struct.new(
+      nil,
       :space_name,
       :display_name,
       :description,
@@ -193,6 +201,7 @@ module Aws::CodeCatalyst
     #   <p>The description of the project.</p>
     #   @return [String]
     class CreateProjectResponse < Struct.new(
+      nil,
       :space_name,
       :name,
       :display_name,
@@ -218,6 +227,7 @@ module Aws::CodeCatalyst
     #   <p>The commit ID in an existing branch from which you want to create the new branch.</p>
     #   @return [String]
     class CreateSourceRepositoryBranchRequest < Struct.new(
+      nil,
       :space_name,
       :project_name,
       :source_repository_name,
@@ -241,6 +251,7 @@ module Aws::CodeCatalyst
     #   <p>The commit ID of the tip of the newly created branch.</p>
     #   @return [String]
     class CreateSourceRepositoryBranchResponse < Struct.new(
+      nil,
       :ref,
       :name,
       :last_updated_time,
@@ -263,6 +274,7 @@ module Aws::CodeCatalyst
     #   <p>The description of the source repository.</p>
     #   @return [String]
     class CreateSourceRepositoryRequest < Struct.new(
+      nil,
       :space_name,
       :project_name,
       :name,
@@ -285,6 +297,7 @@ module Aws::CodeCatalyst
     #   <p>The description of the source repository.</p>
     #   @return [String]
     class CreateSourceRepositoryResponse < Struct.new(
+      nil,
       :space_name,
       :project_name,
       :name,
@@ -298,6 +311,7 @@ module Aws::CodeCatalyst
     #   <p>The ID of the personal access token to delete. You can find the IDs of all PATs associated with your Amazon Web Services Builder ID in a space by calling <a>ListAccessTokens</a>.</p>
     #   @return [String]
     class DeleteAccessTokenRequest < Struct.new(
+      nil,
       :id,
       keyword_init: true
     )
@@ -305,6 +319,7 @@ module Aws::CodeCatalyst
     end
 
     class DeleteAccessTokenResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -320,6 +335,7 @@ module Aws::CodeCatalyst
     #   <p>The system-generated unique ID of the Dev Environment you want to delete. To retrieve a list of Dev Environment IDs, use <a>ListDevEnvironments</a>.</p>
     #   @return [String]
     class DeleteDevEnvironmentRequest < Struct.new(
+      nil,
       :space_name,
       :project_name,
       :id,
@@ -338,6 +354,7 @@ module Aws::CodeCatalyst
     #   <p>The system-generated unique ID of the deleted Dev Environment. </p>
     #   @return [String]
     class DeleteDevEnvironmentResponse < Struct.new(
+      nil,
       :space_name,
       :project_name,
       :id,
@@ -353,6 +370,7 @@ module Aws::CodeCatalyst
     #   <p>The name of the project in the space. To retrieve a list of project names, use <a>ListProjects</a>.</p>
     #   @return [String]
     class DeleteProjectRequest < Struct.new(
+      nil,
       :space_name,
       :name,
       keyword_init: true
@@ -370,6 +388,7 @@ module Aws::CodeCatalyst
     #   <p>The friendly name displayed to users of the project in Amazon CodeCatalyst.</p>
     #   @return [String]
     class DeleteProjectResponse < Struct.new(
+      nil,
       :space_name,
       :name,
       :display_name,
@@ -388,6 +407,7 @@ module Aws::CodeCatalyst
     #   <p>The name of the source repository.</p>
     #   @return [String]
     class DeleteSourceRepositoryRequest < Struct.new(
+      nil,
       :space_name,
       :project_name,
       :name,
@@ -406,6 +426,7 @@ module Aws::CodeCatalyst
     #   <p>The name of the repository.</p>
     #   @return [String]
     class DeleteSourceRepositoryResponse < Struct.new(
+      nil,
       :space_name,
       :project_name,
       :name,
@@ -418,6 +439,7 @@ module Aws::CodeCatalyst
     #   <p>The name of the space.  To retrieve a list of space names, use <a>ListSpaces</a>.</p>
     #   @return [String]
     class DeleteSpaceRequest < Struct.new(
+      nil,
       :name,
       keyword_init: true
     )
@@ -431,6 +453,7 @@ module Aws::CodeCatalyst
     #   <p>The friendly name of the space displayed to users of the space in Amazon CodeCatalyst.</p>
     #   @return [String]
     class DeleteSpaceResponse < Struct.new(
+      nil,
       :name,
       :display_name,
       keyword_init: true
@@ -447,6 +470,7 @@ module Aws::CodeCatalyst
     #   <p>An encrypted token value that contains session and caller information used to authenticate the connection.</p>
     #   @return [String]
     class DevEnvironmentAccessDetails < Struct.new(
+      nil,
       :stream_url,
       :token_value,
       keyword_init: true
@@ -462,6 +486,7 @@ module Aws::CodeCatalyst
     #   <p>The name of the branch in a source repository cloned into the Dev Environment. </p>
     #   @return [String]
     class DevEnvironmentRepositorySummary < Struct.new(
+      nil,
       :repository_name,
       :branch_name,
       keyword_init: true
@@ -477,6 +502,7 @@ module Aws::CodeCatalyst
     #   <p>Information about optional commands that will be run on the Dev Environment when the SSH session begins.</p>
     #   @return [Types::ExecuteCommandSessionConfiguration]
     class DevEnvironmentSessionConfiguration < Struct.new(
+      nil,
       :session_type,
       :execute_command_session_configuration,
       keyword_init: true
@@ -502,6 +528,7 @@ module Aws::CodeCatalyst
     #   <p>The system-generated unique ID of the Dev Environment session.</p>
     #   @return [String]
     class DevEnvironmentSessionSummary < Struct.new(
+      nil,
       :space_name,
       :project_name,
       :dev_environment_id,
@@ -556,6 +583,7 @@ module Aws::CodeCatalyst
     #   <p>The name of the connection used to connect to Amazon VPC used when the Dev Environment was created, if any.</p>
     #   @return [String]
     class DevEnvironmentSummary < Struct.new(
+      nil,
       :space_name,
       :project_name,
       :id,
@@ -588,6 +616,7 @@ module Aws::CodeCatalyst
     #   <p>Whether the email address has been verified.</p>
     #   @return [Boolean]
     class EmailAddress < Struct.new(
+      nil,
       :email,
       :verified,
       keyword_init: true
@@ -642,6 +671,7 @@ module Aws::CodeCatalyst
     #   <p>The user agent whose actions are recorded in the event.</p>
     #   @return [String]
     class EventLogEntry < Struct.new(
+      nil,
       :id,
       :event_name,
       :event_type,
@@ -670,6 +700,7 @@ module Aws::CodeCatalyst
     #   <p>The data included in the event payload.</p>
     #   @return [String]
     class EventPayload < Struct.new(
+      nil,
       :content_type,
       :data,
       keyword_init: true
@@ -685,6 +716,7 @@ module Aws::CodeCatalyst
     #   <p>An array of arguments containing arguments and members.</p>
     #   @return [Array<String>]
     class ExecuteCommandSessionConfiguration < Struct.new(
+      nil,
       :command,
       :arguments,
       keyword_init: true
@@ -703,6 +735,7 @@ module Aws::CodeCatalyst
     #   <p>The operator used to compare the fields.</p>
     #   @return [String]
     class Filter < Struct.new(
+      nil,
       :key,
       :values,
       :comparison_operator,
@@ -721,6 +754,7 @@ module Aws::CodeCatalyst
     #   <p>The system-generated unique ID of the Dev Environment for which you want to view information. To retrieve a list of Dev Environment IDs, use <a>ListDevEnvironments</a>.</p>
     #   @return [String]
     class GetDevEnvironmentRequest < Struct.new(
+      nil,
       :space_name,
       :project_name,
       :id,
@@ -772,6 +806,7 @@ module Aws::CodeCatalyst
     #   <p>The name of the connection used to connect to Amazon VPC used when the Dev Environment was created, if any.</p>
     #   @return [String]
     class GetDevEnvironmentResponse < Struct.new(
+      nil,
       :space_name,
       :project_name,
       :id,
@@ -803,6 +838,7 @@ module Aws::CodeCatalyst
     #   <p>The name of the project in the space.</p>
     #   @return [String]
     class GetProjectRequest < Struct.new(
+      nil,
       :space_name,
       :name,
       keyword_init: true
@@ -823,6 +859,7 @@ module Aws::CodeCatalyst
     #   <p>The description of the project.</p>
     #   @return [String]
     class GetProjectResponse < Struct.new(
+      nil,
       :space_name,
       :name,
       :display_name,
@@ -842,6 +879,7 @@ module Aws::CodeCatalyst
     #   <p>The name of the source repository.</p>
     #   @return [String]
     class GetSourceRepositoryCloneUrlsRequest < Struct.new(
+      nil,
       :space_name,
       :project_name,
       :source_repository_name,
@@ -854,6 +892,7 @@ module Aws::CodeCatalyst
     #   <p>The HTTPS URL to use when cloning the source repository.</p>
     #   @return [String]
     class GetSourceRepositoryCloneUrlsResponse < Struct.new(
+      nil,
       :https,
       keyword_init: true
     )
@@ -870,6 +909,7 @@ module Aws::CodeCatalyst
     #   <p>The name of the source repository.</p>
     #   @return [String]
     class GetSourceRepositoryRequest < Struct.new(
+      nil,
       :space_name,
       :project_name,
       :name,
@@ -897,6 +937,7 @@ module Aws::CodeCatalyst
     #   <p>The time the source repository was created, in coordinated universal time (UTC) timestamp format as specified in <a href="https://www.rfc-editor.org/rfc/rfc3339#section-5.6">RFC 3339</a>.</p>
     #   @return [Time]
     class GetSourceRepositoryResponse < Struct.new(
+      nil,
       :space_name,
       :project_name,
       :name,
@@ -912,6 +953,7 @@ module Aws::CodeCatalyst
     #   <p>The name of the space.</p>
     #   @return [String]
     class GetSpaceRequest < Struct.new(
+      nil,
       :name,
       keyword_init: true
     )
@@ -931,6 +973,7 @@ module Aws::CodeCatalyst
     #   <p>The description of the space.</p>
     #   @return [String]
     class GetSpaceResponse < Struct.new(
+      nil,
       :name,
       :region_name,
       :display_name,
@@ -944,6 +987,7 @@ module Aws::CodeCatalyst
     #   <p>The name of the space.</p>
     #   @return [String]
     class GetSubscriptionRequest < Struct.new(
+      nil,
       :space_name,
       keyword_init: true
     )
@@ -965,6 +1009,7 @@ module Aws::CodeCatalyst
     #   <p>The day and time the pending change will be applied to the space, in coordinated universal time (UTC) timestamp format as specified in <a href="https://www.rfc-editor.org/rfc/rfc3339#section-5.6">RFC 3339</a>.</p>
     #   @return [Time]
     class GetSubscriptionResponse < Struct.new(
+      nil,
       :subscription_type,
       :aws_account_name,
       :pending_subscription_type,
@@ -981,6 +1026,7 @@ module Aws::CodeCatalyst
     #   <p>The name of the user as displayed in Amazon CodeCatalyst.</p>
     #   @return [String]
     class GetUserDetailsRequest < Struct.new(
+      nil,
       :id,
       :user_name,
       keyword_init: true
@@ -1004,6 +1050,7 @@ module Aws::CodeCatalyst
     #   <p/>
     #   @return [String]
     class GetUserDetailsResponse < Struct.new(
+      nil,
       :user_id,
       :user_name,
       :display_name,
@@ -1024,6 +1071,7 @@ module Aws::CodeCatalyst
     #   <p>The name of the project in the space.</p>
     #   @return [String]
     class GetWorkflowRequest < Struct.new(
+      nil,
       :space_name,
       :id,
       :project_name,
@@ -1069,6 +1117,7 @@ module Aws::CodeCatalyst
     #   <p>The status of the workflow.</p>
     #   @return [String]
     class GetWorkflowResponse < Struct.new(
+      nil,
       :space_name,
       :project_name,
       :id,
@@ -1095,6 +1144,7 @@ module Aws::CodeCatalyst
     #   <p>The name of the project in the space.</p>
     #   @return [String]
     class GetWorkflowRunRequest < Struct.new(
+      nil,
       :space_name,
       :id,
       :project_name,
@@ -1133,6 +1183,7 @@ module Aws::CodeCatalyst
     #            </p>
     #   @return [Time]
     class GetWorkflowRunResponse < Struct.new(
+      nil,
       :space_name,
       :project_name,
       :id,
@@ -1155,6 +1206,7 @@ module Aws::CodeCatalyst
     #   <p>The name of the IDE.</p>
     #   @return [String]
     class Ide < Struct.new(
+      nil,
       :runtime,
       :name,
       keyword_init: true
@@ -1173,6 +1225,7 @@ module Aws::CodeCatalyst
     #   <p>The name of the IDE. Valid values include <code>Cloud9</code>, <code>IntelliJ</code>, <code>PyCharm</code>, <code>GoLand</code>, and <code>VSCode</code>.</p>
     #   @return [String]
     class IdeConfiguration < Struct.new(
+      nil,
       :runtime,
       :name,
       keyword_init: true
@@ -1187,6 +1240,7 @@ module Aws::CodeCatalyst
     #   <p>A token returned from a call to this API to indicate the next batch of results to return, if any.</p>
     #   @return [String]
     class ListAccessTokensRequest < Struct.new(
+      nil,
       :max_results,
       :next_token,
       keyword_init: true
@@ -1201,6 +1255,7 @@ module Aws::CodeCatalyst
     #   <p>A token returned from a call to this API to indicate the next batch of results to return, if any.</p>
     #   @return [String]
     class ListAccessTokensResponse < Struct.new(
+      nil,
       :items,
       :next_token,
       keyword_init: true
@@ -1224,6 +1279,7 @@ module Aws::CodeCatalyst
     #   <p>The maximum number of results to show in a single call to this API. If the number of results is larger than the number you specified, the response will include a <code>NextToken</code> element, which you can use to obtain additional results.</p>
     #   @return [Integer]
     class ListDevEnvironmentSessionsRequest < Struct.new(
+      nil,
       :space_name,
       :project_name,
       :dev_environment_id,
@@ -1241,6 +1297,7 @@ module Aws::CodeCatalyst
     #   <p>A token returned from a call to this API to indicate the next batch of results to return, if any.</p>
     #   @return [String]
     class ListDevEnvironmentSessionsResponse < Struct.new(
+      nil,
       :items,
       :next_token,
       keyword_init: true
@@ -1264,6 +1321,7 @@ module Aws::CodeCatalyst
     #   <p>The maximum number of results to show in a single call to this API. If the number of results is larger than the number you specified, the response will include a <code>NextToken</code> element, which you can use to obtain additional results.</p>
     #   @return [Integer]
     class ListDevEnvironmentsRequest < Struct.new(
+      nil,
       :space_name,
       :project_name,
       :filters,
@@ -1281,6 +1339,7 @@ module Aws::CodeCatalyst
     #   <p>A token returned from a call to this API to indicate the next batch of results to return, if any.</p>
     #   @return [String]
     class ListDevEnvironmentsResponse < Struct.new(
+      nil,
       :items,
       :next_token,
       keyword_init: true
@@ -1307,6 +1366,7 @@ module Aws::CodeCatalyst
     #   <p>The maximum number of results to show in a single call to this API. If the number of results is larger than the number you specified, the response will include a <code>NextToken</code> element, which you can use to obtain additional results.</p>
     #   @return [Integer]
     class ListEventLogsRequest < Struct.new(
+      nil,
       :space_name,
       :start_time,
       :end_time,
@@ -1325,6 +1385,7 @@ module Aws::CodeCatalyst
     #   <p>Information about each event retrieved in the list.</p>
     #   @return [Array<Types::EventLogEntry>]
     class ListEventLogsResponse < Struct.new(
+      nil,
       :next_token,
       :items,
       keyword_init: true
@@ -1345,6 +1406,7 @@ module Aws::CodeCatalyst
     #   <p>Information about filters to apply to narrow the results returned in the list.</p>
     #   @return [Array<Types::ProjectListFilter>]
     class ListProjectsRequest < Struct.new(
+      nil,
       :space_name,
       :next_token,
       :max_results,
@@ -1361,6 +1423,7 @@ module Aws::CodeCatalyst
     #   <p>Information about the projects.</p>
     #   @return [Array<Types::ProjectSummary>]
     class ListProjectsResponse < Struct.new(
+      nil,
       :next_token,
       :items,
       keyword_init: true
@@ -1385,6 +1448,7 @@ module Aws::CodeCatalyst
     #   <p>The time the source repository was created, in coordinated universal time (UTC) timestamp format as specified in <a href="https://www.rfc-editor.org/rfc/rfc3339#section-5.6">RFC 3339</a>.</p>
     #   @return [Time]
     class ListSourceRepositoriesItem < Struct.new(
+      nil,
       :id,
       :name,
       :description,
@@ -1408,6 +1472,7 @@ module Aws::CodeCatalyst
     #   <p>The maximum number of results to show in a single call to this API. If the number of results is larger than the number you specified, the response will include a <code>NextToken</code> element, which you can use to obtain additional results.</p>
     #   @return [Integer]
     class ListSourceRepositoriesRequest < Struct.new(
+      nil,
       :space_name,
       :project_name,
       :next_token,
@@ -1424,6 +1489,7 @@ module Aws::CodeCatalyst
     #   <p>A token returned from a call to this API to indicate the next batch of results to return, if any.</p>
     #   @return [String]
     class ListSourceRepositoriesResponse < Struct.new(
+      nil,
       :items,
       :next_token,
       keyword_init: true
@@ -1445,6 +1511,7 @@ module Aws::CodeCatalyst
     #   <p>The commit ID of the tip of the branch at the time of the request, also known as the head commit.</p>
     #   @return [String]
     class ListSourceRepositoryBranchesItem < Struct.new(
+      nil,
       :ref,
       :name,
       :last_updated_time,
@@ -1470,6 +1537,7 @@ module Aws::CodeCatalyst
     #   <p>The maximum number of results to show in a single call to this API. If the number of results is larger than the number you specified, the response will include a <code>NextToken</code> element, which you can use to obtain additional results.</p>
     #   @return [Integer]
     class ListSourceRepositoryBranchesRequest < Struct.new(
+      nil,
       :space_name,
       :project_name,
       :source_repository_name,
@@ -1487,6 +1555,7 @@ module Aws::CodeCatalyst
     #   <p>Information about the source branches.</p>
     #   @return [Array<Types::ListSourceRepositoryBranchesItem>]
     class ListSourceRepositoryBranchesResponse < Struct.new(
+      nil,
       :next_token,
       :items,
       keyword_init: true
@@ -1498,6 +1567,7 @@ module Aws::CodeCatalyst
     #   <p>A token returned from a call to this API to indicate the next batch of results to return, if any.</p>
     #   @return [String]
     class ListSpacesRequest < Struct.new(
+      nil,
       :next_token,
       keyword_init: true
     )
@@ -1511,6 +1581,7 @@ module Aws::CodeCatalyst
     #   <p>Information about the spaces. </p>
     #   @return [Array<Types::SpaceSummary>]
     class ListSpacesResponse < Struct.new(
+      nil,
       :next_token,
       :items,
       keyword_init: true
@@ -1537,6 +1608,7 @@ module Aws::CodeCatalyst
     #   <p>Information used to sort the items in the returned list.</p>
     #   @return [Array<Types::WorkflowRunSortCriteria>]
     class ListWorkflowRunsRequest < Struct.new(
+      nil,
       :space_name,
       :workflow_id,
       :project_name,
@@ -1555,6 +1627,7 @@ module Aws::CodeCatalyst
     #   <p>Information about the runs of a workflow.</p>
     #   @return [Array<Types::WorkflowRunSummary>]
     class ListWorkflowRunsResponse < Struct.new(
+      nil,
       :next_token,
       :items,
       keyword_init: true
@@ -1578,6 +1651,7 @@ module Aws::CodeCatalyst
     #   <p>Information used to sort the items in the returned list.</p>
     #   @return [Array<Types::WorkflowSortCriteria>]
     class ListWorkflowsRequest < Struct.new(
+      nil,
       :space_name,
       :project_name,
       :next_token,
@@ -1595,6 +1669,7 @@ module Aws::CodeCatalyst
     #   <p>Information about the workflows in a project.</p>
     #   @return [Array<Types::WorkflowSummary>]
     class ListWorkflowsResponse < Struct.new(
+      nil,
       :next_token,
       :items,
       keyword_init: true
@@ -1611,6 +1686,7 @@ module Aws::CodeCatalyst
     #            </note>
     #   @return [Integer]
     class PersistentStorage < Struct.new(
+      nil,
       :size_in_gi_b,
       keyword_init: true
     )
@@ -1626,6 +1702,7 @@ module Aws::CodeCatalyst
     #            </note>
     #   @return [Integer]
     class PersistentStorageConfiguration < Struct.new(
+      nil,
       :size_in_gi_b,
       keyword_init: true
     )
@@ -1640,6 +1717,7 @@ module Aws::CodeCatalyst
     #   <p>The system-generated unique ID of the project.</p>
     #   @return [String]
     class ProjectInformation < Struct.new(
+      nil,
       :name,
       :project_id,
       keyword_init: true
@@ -1658,6 +1736,7 @@ module Aws::CodeCatalyst
     #   <p>The operator used to compare the fields.</p>
     #   @return [String]
     class ProjectListFilter < Struct.new(
+      nil,
       :key,
       :values,
       :comparison_operator,
@@ -1677,6 +1756,7 @@ module Aws::CodeCatalyst
     #   <p>The description of the project.</p>
     #   @return [String]
     class ProjectSummary < Struct.new(
+      nil,
       :name,
       :display_name,
       :description,
@@ -1693,6 +1773,7 @@ module Aws::CodeCatalyst
     #   <p>The name of the branch in a source repository.</p>
     #   @return [String]
     class RepositoryInput < Struct.new(
+      nil,
       :repository_name,
       :branch_name,
       keyword_init: true
@@ -1704,6 +1785,7 @@ module Aws::CodeCatalyst
     # @!attribute message
     #   @return [String]
     class ResourceNotFoundException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -1715,6 +1797,7 @@ module Aws::CodeCatalyst
     # @!attribute message
     #   @return [String]
     class ServiceQuotaExceededException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -1736,6 +1819,7 @@ module Aws::CodeCatalyst
     #   <p>The description of the space.</p>
     #   @return [String]
     class SpaceSummary < Struct.new(
+      nil,
       :name,
       :region_name,
       :display_name,
@@ -1764,6 +1848,7 @@ module Aws::CodeCatalyst
     #   <p>The amount of time the Dev Environment will run without any activity detected before stopping, in minutes. Only whole integers are allowed. Dev Environments consume compute minutes when running.</p>
     #   @return [Integer]
     class StartDevEnvironmentRequest < Struct.new(
+      nil,
       :space_name,
       :project_name,
       :id,
@@ -1788,6 +1873,7 @@ module Aws::CodeCatalyst
     #   <p>The status of the Dev Environment. </p>
     #   @return [String]
     class StartDevEnvironmentResponse < Struct.new(
+      nil,
       :space_name,
       :project_name,
       :id,
@@ -1810,6 +1896,7 @@ module Aws::CodeCatalyst
     #   <p>Information about the configuration of a Dev Environment session.</p>
     #   @return [Types::DevEnvironmentSessionConfiguration]
     class StartDevEnvironmentSessionRequest < Struct.new(
+      nil,
       :space_name,
       :project_name,
       :id,
@@ -1835,6 +1922,7 @@ module Aws::CodeCatalyst
     #   <p>The system-generated unique ID of the Dev Environment.</p>
     #   @return [String]
     class StartDevEnvironmentSessionResponse < Struct.new(
+      nil,
       :access_details,
       :session_id,
       :space_name,
@@ -1859,6 +1947,7 @@ module Aws::CodeCatalyst
     #          With an idempotent request, if the original request completes successfully, the subsequent retries return the result from the original successful request and have no additional effect.</p>
     #   @return [String]
     class StartWorkflowRunRequest < Struct.new(
+      nil,
       :space_name,
       :project_name,
       :workflow_id,
@@ -1881,6 +1970,7 @@ module Aws::CodeCatalyst
     #   <p>The system-generated unique ID of the workflow.</p>
     #   @return [String]
     class StartWorkflowRunResponse < Struct.new(
+      nil,
       :space_name,
       :project_name,
       :id,
@@ -1900,6 +1990,7 @@ module Aws::CodeCatalyst
     #   <p>The system-generated unique ID of the Dev Environment. </p>
     #   @return [String]
     class StopDevEnvironmentRequest < Struct.new(
+      nil,
       :space_name,
       :project_name,
       :id,
@@ -1921,6 +2012,7 @@ module Aws::CodeCatalyst
     #   <p>The status of the Dev Environment. </p>
     #   @return [String]
     class StopDevEnvironmentResponse < Struct.new(
+      nil,
       :space_name,
       :project_name,
       :id,
@@ -1943,6 +2035,7 @@ module Aws::CodeCatalyst
     #   <p>The system-generated unique ID of the Dev Environment session. This ID is returned by <a>StartDevEnvironmentSession</a>.</p>
     #   @return [String]
     class StopDevEnvironmentSessionRequest < Struct.new(
+      nil,
       :space_name,
       :project_name,
       :id,
@@ -1965,6 +2058,7 @@ module Aws::CodeCatalyst
     #   <p>The system-generated unique ID of the Dev Environment session.</p>
     #   @return [String]
     class StopDevEnvironmentSessionResponse < Struct.new(
+      nil,
       :space_name,
       :project_name,
       :id,
@@ -1978,6 +2072,7 @@ module Aws::CodeCatalyst
     # @!attribute message
     #   @return [String]
     class ThrottlingException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -2017,6 +2112,7 @@ module Aws::CodeCatalyst
     #          With an idempotent request, if the original request completes successfully, the subsequent retries return the result from the original successful request and have no additional effect.</p>
     #   @return [String]
     class UpdateDevEnvironmentRequest < Struct.new(
+      nil,
       :space_name,
       :project_name,
       :id,
@@ -2056,6 +2152,7 @@ module Aws::CodeCatalyst
     #          With an idempotent request, if the original request completes successfully, the subsequent retries return the result from the original successful request and have no additional effect.</p>
     #   @return [String]
     class UpdateDevEnvironmentResponse < Struct.new(
+      nil,
       :id,
       :space_name,
       :project_name,
@@ -2084,6 +2181,7 @@ module Aws::CodeCatalyst
     #   <p>The description of the project.</p>
     #   @return [String]
     class UpdateProjectRequest < Struct.new(
+      nil,
       :space_name,
       :name,
       :description,
@@ -2105,6 +2203,7 @@ module Aws::CodeCatalyst
     #   <p>The description of the project.</p>
     #   @return [String]
     class UpdateProjectResponse < Struct.new(
+      nil,
       :space_name,
       :name,
       :display_name,
@@ -2121,6 +2220,7 @@ module Aws::CodeCatalyst
     #   <p>The description of the space.</p>
     #   @return [String]
     class UpdateSpaceRequest < Struct.new(
+      nil,
       :name,
       :description,
       keyword_init: true
@@ -2138,6 +2238,7 @@ module Aws::CodeCatalyst
     #   <p>The description of the space.</p>
     #   @return [String]
     class UpdateSpaceResponse < Struct.new(
+      nil,
       :name,
       :display_name,
       :description,
@@ -2160,6 +2261,7 @@ module Aws::CodeCatalyst
     #   <p>The Amazon Web Services account number of the user in Amazon Web Services, if any.</p>
     #   @return [String]
     class UserIdentity < Struct.new(
+      nil,
       :user_type,
       :principal_id,
       :user_name,
@@ -2173,6 +2275,7 @@ module Aws::CodeCatalyst
     # @!attribute message
     #   @return [String]
     class ValidationException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -2183,6 +2286,7 @@ module Aws::CodeCatalyst
     #   <p>The system-generated unique ID of the user in Amazon CodeCatalyst.</p>
     #   @return [String]
     class VerifySessionResponse < Struct.new(
+      nil,
       :identity,
       keyword_init: true
     )
@@ -2194,6 +2298,7 @@ module Aws::CodeCatalyst
     #   <p>The path to the workflow definition file stored in the source repository for the project, including the file name.</p>
     #   @return [String]
     class WorkflowDefinition < Struct.new(
+      nil,
       :path,
       keyword_init: true
     )
@@ -2205,6 +2310,7 @@ module Aws::CodeCatalyst
     #   <p>The path to the workflow definition file stored in the source repository for the project, including the file name.</p>
     #   @return [String]
     class WorkflowDefinitionSummary < Struct.new(
+      nil,
       :path,
       keyword_init: true
     )
@@ -2213,6 +2319,7 @@ module Aws::CodeCatalyst
 
     # <p>Information used to sort workflow runs in the returned list.</p>
     class WorkflowRunSortCriteria < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -2220,6 +2327,7 @@ module Aws::CodeCatalyst
 
     # <p>Information about the status of a workflow run.</p>
     class WorkflowRunStatusReason < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -2253,6 +2361,7 @@ module Aws::CodeCatalyst
     #            </p>
     #   @return [Time]
     class WorkflowRunSummary < Struct.new(
+      nil,
       :id,
       :workflow_id,
       :workflow_name,
@@ -2268,6 +2377,7 @@ module Aws::CodeCatalyst
 
     # <p>Information used to sort workflows in the returned list.</p>
     class WorkflowSortCriteria < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -2304,6 +2414,7 @@ module Aws::CodeCatalyst
     #   <p>The status of the workflow.</p>
     #   @return [String]
     class WorkflowSummary < Struct.new(
+      nil,
       :id,
       :name,
       :source_repository_name,

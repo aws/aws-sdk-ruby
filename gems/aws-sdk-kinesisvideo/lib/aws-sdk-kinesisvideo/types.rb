@@ -10,6 +10,7 @@ module Aws::KinesisVideo
     # @!attribute message
     #   @return [String]
     class AccessDeniedException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -21,6 +22,7 @@ module Aws::KinesisVideo
     # @!attribute message
     #   @return [String]
     class AccountChannelLimitExceededException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -31,6 +33,7 @@ module Aws::KinesisVideo
     # @!attribute message
     #   @return [String]
     class AccountStreamLimitExceededException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -61,6 +64,7 @@ module Aws::KinesisVideo
     #   <p>The current version of the signaling channel.</p>
     #   @return [String]
     class ChannelInfo < Struct.new(
+      nil,
       :channel_name,
       :channel_arn,
       :channel_type,
@@ -85,6 +89,7 @@ module Aws::KinesisVideo
     #   <p>A value to compare.</p>
     #   @return [String]
     class ChannelNameCondition < Struct.new(
+      nil,
       :comparison_operator,
       :comparison_value,
       keyword_init: true
@@ -97,6 +102,7 @@ module Aws::KinesisVideo
     # @!attribute message
     #   @return [String]
     class ClientLimitExceededException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -118,6 +124,7 @@ module Aws::KinesisVideo
     #   <p>A set of tags (key-value pairs) that you want to associate with this channel.</p>
     #   @return [Array<Types::Tag>]
     class CreateSignalingChannelInput < Struct.new(
+      nil,
       :channel_name,
       :channel_type,
       :single_master_configuration,
@@ -131,6 +138,7 @@ module Aws::KinesisVideo
     #   <p>The Amazon Resource Name (ARN) of the created channel.</p>
     #   @return [String]
     class CreateSignalingChannelOutput < Struct.new(
+      nil,
       :channel_arn,
       keyword_init: true
     )
@@ -178,6 +186,7 @@ module Aws::KinesisVideo
     #               (the value is optional).</p>
     #   @return [Hash<String, String>]
     class CreateStreamInput < Struct.new(
+      nil,
       :device_name,
       :stream_name,
       :media_type,
@@ -193,6 +202,7 @@ module Aws::KinesisVideo
     #   <p>The Amazon Resource Name (ARN) of the stream.</p>
     #   @return [String]
     class CreateStreamOutput < Struct.new(
+      nil,
       :stream_arn,
       keyword_init: true
     )
@@ -206,6 +216,7 @@ module Aws::KinesisVideo
     #   <p>The Amazon Resource Name (ARN) of the stream. Specify either the <code>StreamName</code> or the <code>StreamARN</code>.</p>
     #   @return [String]
     class DeleteEdgeConfigurationInput < Struct.new(
+      nil,
       :stream_name,
       :stream_arn,
       keyword_init: true
@@ -214,6 +225,7 @@ module Aws::KinesisVideo
     end
 
     class DeleteEdgeConfigurationOutput < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -229,6 +241,7 @@ module Aws::KinesisVideo
     #                   <code>ListSignalingChannels</code> API operations.</p>
     #   @return [String]
     class DeleteSignalingChannelInput < Struct.new(
+      nil,
       :channel_arn,
       :current_version,
       keyword_init: true
@@ -237,6 +250,7 @@ module Aws::KinesisVideo
     end
 
     class DeleteSignalingChannelOutput < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -253,6 +267,7 @@ module Aws::KinesisVideo
     #               stream.</p>
     #   @return [String]
     class DeleteStreamInput < Struct.new(
+      nil,
       :stream_arn,
       :current_version,
       keyword_init: true
@@ -261,6 +276,7 @@ module Aws::KinesisVideo
     end
 
     class DeleteStreamOutput < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -284,6 +300,7 @@ module Aws::KinesisVideo
     #               that the media files are not being deleted before they are initially uploaded to the  Amazon Web Services cloud.</p>
     #   @return [Boolean]
     class DeletionConfig < Struct.new(
+      nil,
       :edge_retention_in_hours,
       :local_size_config,
       :delete_after_upload,
@@ -301,6 +318,7 @@ module Aws::KinesisVideo
     #   <p>The Amazon Resource Name (ARN) of the stream. Specify either the <code>StreamName</code>or the <code>StreamARN</code>.</p>
     #   @return [String]
     class DescribeEdgeConfigurationInput < Struct.new(
+      nil,
       :stream_name,
       :stream_arn,
       keyword_init: true
@@ -335,6 +353,7 @@ module Aws::KinesisVideo
     #   <p>An object that contains the latest status details for an edge agent's recorder and uploader jobs. Use this information to determine the current health of an edge agent.</p>
     #   @return [Types::EdgeAgentStatus]
     class DescribeEdgeConfigurationOutput < Struct.new(
+      nil,
       :stream_name,
       :stream_arn,
       :creation_time,
@@ -355,6 +374,7 @@ module Aws::KinesisVideo
     #   <p>The Amazon Resource Name (ARN) of the Kinesis video stream from which to retrieve the image generation configuration. You must specify either the <code>StreamName</code> or the <code>StreamARN</code>.</p>
     #   @return [String]
     class DescribeImageGenerationConfigurationInput < Struct.new(
+      nil,
       :stream_name,
       :stream_arn,
       keyword_init: true
@@ -366,6 +386,7 @@ module Aws::KinesisVideo
     #   <p>The structure that contains the information required for the Kinesis video stream (KVS) images delivery. If this structure is null, the configuration will be deleted from the stream.</p>
     #   @return [Types::ImageGenerationConfiguration]
     class DescribeImageGenerationConfigurationOutput < Struct.new(
+      nil,
       :image_generation_configuration,
       keyword_init: true
     )
@@ -385,6 +406,7 @@ module Aws::KinesisVideo
     #   <p>The token to provide in your next request, to get another batch of results.</p>
     #   @return [String]
     class DescribeMappedResourceConfigurationInput < Struct.new(
+      nil,
       :stream_name,
       :stream_arn,
       :max_results,
@@ -401,6 +423,7 @@ module Aws::KinesisVideo
     #   <p>The token that was used in the <code>NextToken</code>request to fetch the next set of results. </p>
     #   @return [String]
     class DescribeMappedResourceConfigurationOutput < Struct.new(
+      nil,
       :mapped_resource_configuration_list,
       :next_token,
       keyword_init: true
@@ -415,6 +438,7 @@ module Aws::KinesisVideo
     #   <p>The Amazon Resource Name (ARN) of the channel.</p>
     #   @return [String]
     class DescribeMediaStorageConfigurationInput < Struct.new(
+      nil,
       :channel_name,
       :channel_arn,
       keyword_init: true
@@ -426,6 +450,7 @@ module Aws::KinesisVideo
     #   <p>A structure that encapsulates, or contains, the media storage configuration properties.</p>
     #   @return [Types::MediaStorageConfiguration]
     class DescribeMediaStorageConfigurationOutput < Struct.new(
+      nil,
       :media_storage_configuration,
       keyword_init: true
     )
@@ -439,6 +464,7 @@ module Aws::KinesisVideo
     #   <p>The Amazon Resource Name (ARN) of the Kinesis video stream from where you want to retrieve the notification configuration. You must specify either the <code>StreamName</code> or the StreamARN.</p>
     #   @return [String]
     class DescribeNotificationConfigurationInput < Struct.new(
+      nil,
       :stream_name,
       :stream_arn,
       keyword_init: true
@@ -450,6 +476,7 @@ module Aws::KinesisVideo
     #   <p>The structure that contains the information required for notifications. If the structure is null, the configuration will be deleted from the stream.</p>
     #   @return [Types::NotificationConfiguration]
     class DescribeNotificationConfigurationOutput < Struct.new(
+      nil,
       :notification_configuration,
       keyword_init: true
     )
@@ -463,6 +490,7 @@ module Aws::KinesisVideo
     #   <p>The ARN of the signaling channel that you want to describe.</p>
     #   @return [String]
     class DescribeSignalingChannelInput < Struct.new(
+      nil,
       :channel_name,
       :channel_arn,
       keyword_init: true
@@ -475,6 +503,7 @@ module Aws::KinesisVideo
     #               properties.</p>
     #   @return [Types::ChannelInfo]
     class DescribeSignalingChannelOutput < Struct.new(
+      nil,
       :channel_info,
       keyword_init: true
     )
@@ -488,6 +517,7 @@ module Aws::KinesisVideo
     #   <p>The Amazon Resource Name (ARN) of the stream.</p>
     #   @return [String]
     class DescribeStreamInput < Struct.new(
+      nil,
       :stream_name,
       :stream_arn,
       keyword_init: true
@@ -499,6 +529,7 @@ module Aws::KinesisVideo
     #   <p>An object that describes the stream.</p>
     #   @return [Types::StreamInfo]
     class DescribeStreamOutput < Struct.new(
+      nil,
       :stream_info,
       keyword_init: true
     )
@@ -510,6 +541,7 @@ module Aws::KinesisVideo
     # @!attribute message
     #   @return [String]
     class DeviceStreamLimitExceededException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -524,6 +556,7 @@ module Aws::KinesisVideo
     #   <p>The latest status of a stream’s edge to cloud uploader job.</p>
     #   @return [Types::LastUploaderStatus]
     class EdgeAgentStatus < Struct.new(
+      nil,
       :last_recorder_status,
       :last_uploader_status,
       keyword_init: true
@@ -550,6 +583,7 @@ module Aws::KinesisVideo
     #           (<code>LocalSizeConfig</code>) details that are used to make the deletion.</p>
     #   @return [Types::DeletionConfig]
     class EdgeConfig < Struct.new(
+      nil,
       :hub_device_arn,
       :recorder_config,
       :uploader_config,
@@ -572,6 +606,7 @@ module Aws::KinesisVideo
     #   <p>The name of the API action for which to get an endpoint.</p>
     #   @return [String]
     class GetDataEndpointInput < Struct.new(
+      nil,
       :stream_name,
       :stream_arn,
       :api_name,
@@ -585,6 +620,7 @@ module Aws::KinesisVideo
     #               this endpoint in your application.</p>
     #   @return [String]
     class GetDataEndpointOutput < Struct.new(
+      nil,
       :data_endpoint,
       keyword_init: true
     )
@@ -600,6 +636,7 @@ module Aws::KinesisVideo
     #               channel type.</p>
     #   @return [Types::SingleMasterChannelEndpointConfiguration]
     class GetSignalingChannelEndpointInput < Struct.new(
+      nil,
       :channel_arn,
       :single_master_channel_endpoint_configuration,
       keyword_init: true
@@ -611,6 +648,7 @@ module Aws::KinesisVideo
     #   <p>A list of endpoints for the specified signaling channel.</p>
     #   @return [Array<Types::ResourceEndpointListItem>]
     class GetSignalingChannelEndpointOutput < Struct.new(
+      nil,
       :resource_endpoint_list,
       keyword_init: true
     )
@@ -653,6 +691,7 @@ module Aws::KinesisVideo
     #               If neither parameter is provided, the original image size will be returned.</p>
     #   @return [Integer]
     class ImageGenerationConfiguration < Struct.new(
+      nil,
       :status,
       :image_selector_type,
       :destination_config,
@@ -674,6 +713,7 @@ module Aws::KinesisVideo
     #   <p>The Amazon Web Services Region of the S3 bucket where images will be delivered. This <code>DestinationRegion</code> must match the Region where the stream is located.</p>
     #   @return [String]
     class ImageGenerationDestinationConfig < Struct.new(
+      nil,
       :uri,
       :destination_region,
       keyword_init: true
@@ -685,6 +725,7 @@ module Aws::KinesisVideo
     # @!attribute message
     #   @return [String]
     class InvalidArgumentException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -695,6 +736,7 @@ module Aws::KinesisVideo
     # @!attribute message
     #   @return [String]
     class InvalidDeviceException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -705,6 +747,7 @@ module Aws::KinesisVideo
     # @!attribute message
     #   @return [String]
     class InvalidResourceFormatException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -725,6 +768,7 @@ module Aws::KinesisVideo
     #   <p>The status of the latest recorder job.</p>
     #   @return [String]
     class LastRecorderStatus < Struct.new(
+      nil,
       :job_status_details,
       :last_collected_time,
       :last_updated_time,
@@ -748,6 +792,7 @@ module Aws::KinesisVideo
     #   <p>The status of the latest uploader job.</p>
     #   @return [String]
     class LastUploaderStatus < Struct.new(
+      nil,
       :job_status_details,
       :last_collected_time,
       :last_updated_time,
@@ -782,6 +827,7 @@ module Aws::KinesisVideo
     #               on an IoT Hub Device setup at your premise.</p>
     #   @return [Types::EdgeConfig]
     class ListEdgeAgentConfigurationsEdgeConfig < Struct.new(
+      nil,
       :stream_name,
       :stream_arn,
       :creation_time,
@@ -805,6 +851,7 @@ module Aws::KinesisVideo
     #           </p>
     #   @return [String]
     class ListEdgeAgentConfigurationsInput < Struct.new(
+      nil,
       :hub_device_arn,
       :max_results,
       :next_token,
@@ -820,6 +867,7 @@ module Aws::KinesisVideo
     #   <p>If the response is truncated, the call returns this element with a given token. To get the next batch of edge configurations, use this token in your next request.</p>
     #   @return [String]
     class ListEdgeAgentConfigurationsOutput < Struct.new(
+      nil,
       :edge_configs,
       :next_token,
       keyword_init: true
@@ -839,6 +887,7 @@ module Aws::KinesisVideo
     #   <p>Optional: Returns only the channels that satisfy a specific condition.</p>
     #   @return [Types::ChannelNameCondition]
     class ListSignalingChannelsInput < Struct.new(
+      nil,
       :max_results,
       :next_token,
       :channel_name_condition,
@@ -855,6 +904,7 @@ module Aws::KinesisVideo
     #               next batch of streams, use this token in your next request.</p>
     #   @return [String]
     class ListSignalingChannelsOutput < Struct.new(
+      nil,
       :channel_info_list,
       :next_token,
       keyword_init: true
@@ -876,6 +926,7 @@ module Aws::KinesisVideo
     #               can specify only the prefix of a stream name as a condition. </p>
     #   @return [Types::StreamNameCondition]
     class ListStreamsInput < Struct.new(
+      nil,
       :max_results,
       :next_token,
       :stream_name_condition,
@@ -892,6 +943,7 @@ module Aws::KinesisVideo
     #               the next batch of streams, use this token in your next request. </p>
     #   @return [String]
     class ListStreamsOutput < Struct.new(
+      nil,
       :stream_info_list,
       :next_token,
       keyword_init: true
@@ -909,6 +961,7 @@ module Aws::KinesisVideo
     #               tags.</p>
     #   @return [String]
     class ListTagsForResourceInput < Struct.new(
+      nil,
       :next_token,
       :resource_arn,
       keyword_init: true
@@ -925,6 +978,7 @@ module Aws::KinesisVideo
     #   <p>A map of tag keys and values associated with the specified signaling channel.</p>
     #   @return [Hash<String, String>]
     class ListTagsForResourceOutput < Struct.new(
+      nil,
       :next_token,
       :tags,
       keyword_init: true
@@ -945,6 +999,7 @@ module Aws::KinesisVideo
     #   <p>The name of the stream that you want to list tags for.</p>
     #   @return [String]
     class ListTagsForStreamInput < Struct.new(
+      nil,
       :next_token,
       :stream_arn,
       :stream_name,
@@ -962,6 +1017,7 @@ module Aws::KinesisVideo
     #   <p>A map of tag keys and values associated with the specified stream.</p>
     #   @return [Hash<String, String>]
     class ListTagsForStreamOutput < Struct.new(
+      nil,
       :next_token,
       :tags,
       keyword_init: true
@@ -980,6 +1036,7 @@ module Aws::KinesisVideo
     #   <p>The strategy to perform when a stream’s <code>MaxLocalMediaSizeInMB</code> limit is reached.</p>
     #   @return [String]
     class LocalSizeConfig < Struct.new(
+      nil,
       :max_local_media_size_in_mb,
       :strategy_on_full_size,
       keyword_init: true
@@ -995,6 +1052,7 @@ module Aws::KinesisVideo
     #   <p>The Amazon Resource Name (ARN) of the Kinesis Video Stream resource, associated with the stream.</p>
     #   @return [String]
     class MappedResourceConfigurationListItem < Struct.new(
+      nil,
       :type,
       :arn,
       keyword_init: true
@@ -1016,6 +1074,7 @@ module Aws::KinesisVideo
     #            </note>
     #   @return [String]
     class MediaSourceConfig < Struct.new(
+      nil,
       :media_uri_secret_arn,
       :media_uri_type,
       keyword_init: true
@@ -1043,6 +1102,7 @@ module Aws::KinesisVideo
     #   <p>The status of the media storage configuration.</p>
     #   @return [String]
     class MediaStorageConfiguration < Struct.new(
+      nil,
       :stream_arn,
       :status,
       keyword_init: true
@@ -1054,6 +1114,7 @@ module Aws::KinesisVideo
     # @!attribute message
     #   @return [String]
     class NoDataRetentionException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -1064,6 +1125,7 @@ module Aws::KinesisVideo
     # @!attribute message
     #   @return [String]
     class NotAuthorizedException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -1078,6 +1140,7 @@ module Aws::KinesisVideo
     #   <p>The destination information required to deliver a notification to a customer.</p>
     #   @return [Types::NotificationDestinationConfig]
     class NotificationConfiguration < Struct.new(
+      nil,
       :status,
       :destination_config,
       keyword_init: true
@@ -1090,6 +1153,7 @@ module Aws::KinesisVideo
     #   <p>The Uniform Resource Identifier (URI) that identifies where the images will be delivered.</p>
     #   @return [String]
     class NotificationDestinationConfig < Struct.new(
+      nil,
       :uri,
       keyword_init: true
     )
@@ -1111,6 +1175,7 @@ module Aws::KinesisVideo
     #           then the Edge Agent will always be set to recording mode.</p>
     #   @return [Types::ScheduleConfig]
     class RecorderConfig < Struct.new(
+      nil,
       :media_source_config,
       :schedule_config,
       keyword_init: true
@@ -1130,6 +1195,7 @@ module Aws::KinesisVideo
     #                   <code>GetSignalingChannelEndpoint</code> API.</p>
     #   @return [String]
     class ResourceEndpointListItem < Struct.new(
+      nil,
       :protocol,
       :resource_endpoint,
       keyword_init: true
@@ -1158,6 +1224,7 @@ module Aws::KinesisVideo
     # @!attribute message
     #   @return [String]
     class ResourceInUseException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -1168,6 +1235,7 @@ module Aws::KinesisVideo
     # @!attribute message
     #   @return [String]
     class ResourceNotFoundException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -1195,6 +1263,7 @@ module Aws::KinesisVideo
     #           <code>DurationInSeconds</code> attribute should also be specified.</p>
     #   @return [Integer]
     class ScheduleConfig < Struct.new(
+      nil,
       :schedule_expression,
       :duration_in_seconds,
       keyword_init: true
@@ -1219,6 +1288,7 @@ module Aws::KinesisVideo
     #               another <code>MASTER</code> client on this signaling channel. </p>
     #   @return [String]
     class SingleMasterChannelEndpointConfiguration < Struct.new(
+      nil,
       :protocols,
       :role,
       keyword_init: true
@@ -1233,6 +1303,7 @@ module Aws::KinesisVideo
     #               discarded.</p>
     #   @return [Integer]
     class SingleMasterConfiguration < Struct.new(
+      nil,
       :message_ttl_seconds,
       keyword_init: true
     )
@@ -1251,6 +1322,7 @@ module Aws::KinesisVideo
     #   <p>The edge configuration details required to invoke the update process.</p>
     #   @return [Types::EdgeConfig]
     class StartEdgeConfigurationUpdateInput < Struct.new(
+      nil,
       :stream_name,
       :stream_arn,
       :edge_config,
@@ -1285,6 +1357,7 @@ module Aws::KinesisVideo
     #               on an IoT Hub Device setup at your premise.</p>
     #   @return [Types::EdgeConfig]
     class StartEdgeConfigurationUpdateOutput < Struct.new(
+      nil,
       :stream_name,
       :stream_arn,
       :creation_time,
@@ -1302,6 +1375,7 @@ module Aws::KinesisVideo
     # @!attribute message
     #   @return [String]
     class StreamEdgeConfigurationNotFoundException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -1338,6 +1412,7 @@ module Aws::KinesisVideo
     #   <p>How long the stream retains data, in hours.</p>
     #   @return [Integer]
     class StreamInfo < Struct.new(
+      nil,
       :device_name,
       :stream_name,
       :stream_arn,
@@ -1364,6 +1439,7 @@ module Aws::KinesisVideo
     #   <p>A value to compare.</p>
     #   @return [String]
     class StreamNameCondition < Struct.new(
+      nil,
       :comparison_operator,
       :comparison_value,
       keyword_init: true
@@ -1379,6 +1455,7 @@ module Aws::KinesisVideo
     #   <p>The value of the tag that is associated with the specified signaling channel.</p>
     #   @return [String]
     class Tag < Struct.new(
+      nil,
       :key,
       :value,
       keyword_init: true
@@ -1395,6 +1472,7 @@ module Aws::KinesisVideo
     #               key-value pair.</p>
     #   @return [Array<Types::Tag>]
     class TagResourceInput < Struct.new(
+      nil,
       :resource_arn,
       :tags,
       keyword_init: true
@@ -1403,6 +1481,7 @@ module Aws::KinesisVideo
     end
 
     class TagResourceOutput < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1420,6 +1499,7 @@ module Aws::KinesisVideo
     #               (the value is optional).</p>
     #   @return [Hash<String, String>]
     class TagStreamInput < Struct.new(
+      nil,
       :stream_arn,
       :stream_name,
       :tags,
@@ -1429,6 +1509,7 @@ module Aws::KinesisVideo
     end
 
     class TagStreamOutput < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1439,6 +1520,7 @@ module Aws::KinesisVideo
     # @!attribute message
     #   @return [String]
     class TagsPerResourceExceededLimitException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -1453,6 +1535,7 @@ module Aws::KinesisVideo
     #   <p>A list of the keys of the tags that you want to remove.</p>
     #   @return [Array<String>]
     class UntagResourceInput < Struct.new(
+      nil,
       :resource_arn,
       :tag_key_list,
       keyword_init: true
@@ -1461,6 +1544,7 @@ module Aws::KinesisVideo
     end
 
     class UntagResourceOutput < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1477,6 +1561,7 @@ module Aws::KinesisVideo
     #   <p>A list of the keys of the tags that you want to remove.</p>
     #   @return [Array<String>]
     class UntagStreamInput < Struct.new(
+      nil,
       :stream_arn,
       :stream_name,
       :tag_key_list,
@@ -1486,6 +1571,7 @@ module Aws::KinesisVideo
     end
 
     class UntagStreamOutput < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1511,6 +1597,7 @@ module Aws::KinesisVideo
     #            <p>The minimum value for data retention is 0 and the maximum value is 87600 (ten years).</p>
     #   @return [Integer]
     class UpdateDataRetentionInput < Struct.new(
+      nil,
       :stream_name,
       :stream_arn,
       :current_version,
@@ -1522,6 +1609,7 @@ module Aws::KinesisVideo
     end
 
     class UpdateDataRetentionOutput < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1538,6 +1626,7 @@ module Aws::KinesisVideo
     #   <p>The structure that contains the information required for the KVS images delivery. If the structure is null, the configuration will be deleted from the stream.</p>
     #   @return [Types::ImageGenerationConfiguration]
     class UpdateImageGenerationConfigurationInput < Struct.new(
+      nil,
       :stream_name,
       :stream_arn,
       :image_generation_configuration,
@@ -1547,6 +1636,7 @@ module Aws::KinesisVideo
     end
 
     class UpdateImageGenerationConfigurationOutput < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1559,6 +1649,7 @@ module Aws::KinesisVideo
     #   <p>A structure that encapsulates, or contains, the media storage configuration properties.</p>
     #   @return [Types::MediaStorageConfiguration]
     class UpdateMediaStorageConfigurationInput < Struct.new(
+      nil,
       :channel_arn,
       :media_storage_configuration,
       keyword_init: true
@@ -1567,6 +1658,7 @@ module Aws::KinesisVideo
     end
 
     class UpdateMediaStorageConfigurationOutput < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1582,6 +1674,7 @@ module Aws::KinesisVideo
     #   <p>The structure containing the information required for notifications. If the structure is null, the configuration will be deleted from the stream.</p>
     #   @return [Types::NotificationConfiguration]
     class UpdateNotificationConfigurationInput < Struct.new(
+      nil,
       :stream_name,
       :stream_arn,
       :notification_configuration,
@@ -1591,6 +1684,7 @@ module Aws::KinesisVideo
     end
 
     class UpdateNotificationConfigurationOutput < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1608,6 +1702,7 @@ module Aws::KinesisVideo
     #               the signaling channel that you want to update. </p>
     #   @return [Types::SingleMasterConfiguration]
     class UpdateSignalingChannelInput < Struct.new(
+      nil,
       :channel_arn,
       :current_version,
       :single_master_configuration,
@@ -1617,6 +1712,7 @@ module Aws::KinesisVideo
     end
 
     class UpdateSignalingChannelOutput < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1651,6 +1747,7 @@ module Aws::KinesisVideo
     #                   <code>MediaType</code>.</p>
     #   @return [String]
     class UpdateStreamInput < Struct.new(
+      nil,
       :stream_name,
       :stream_arn,
       :current_version,
@@ -1662,6 +1759,7 @@ module Aws::KinesisVideo
     end
 
     class UpdateStreamOutput < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1679,6 +1777,7 @@ module Aws::KinesisVideo
     #               then the Edge Agent will upload at regular intervals (every 1 hour).</p>
     #   @return [Types::ScheduleConfig]
     class UploaderConfig < Struct.new(
+      nil,
       :schedule_config,
       keyword_init: true
     )
@@ -1691,6 +1790,7 @@ module Aws::KinesisVideo
     # @!attribute message
     #   @return [String]
     class VersionMismatchException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )

@@ -29,6 +29,7 @@ module Aws::Kinesis
   #   The ARN of the Kinesis resource
   #   @return [String]
   EndpointParameters = Struct.new(
+    nil,
     :region,
     :use_dual_stack,
     :use_fips,

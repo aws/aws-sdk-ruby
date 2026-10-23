@@ -10,6 +10,7 @@ module Aws::RedshiftData
     # @!attribute message
     #   @return [String]
     class ActiveSessionsExceededException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -20,6 +21,7 @@ module Aws::RedshiftData
     # @!attribute message
     #   @return [String]
     class ActiveStatementsExceededException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -33,6 +35,7 @@ module Aws::RedshiftData
     #   <p>Statement identifier of the exception.</p>
     #   @return [String]
     class BatchExecuteStatementException < Struct.new(
+      nil,
       :message,
       :statement_id,
       keyword_init: true
@@ -81,6 +84,7 @@ module Aws::RedshiftData
     #   <p>The data format of the result of the SQL statement. If no format is specified, the default is JSON.</p>
     #   @return [String]
     class BatchExecuteStatementInput < Struct.new(
+      nil,
       :sqls,
       :cluster_identifier,
       :secret_arn,
@@ -127,6 +131,7 @@ module Aws::RedshiftData
     #   <p>The session identifier of the query.</p>
     #   @return [String]
     class BatchExecuteStatementOutput < Struct.new(
+      nil,
       :id,
       :created_at,
       :cluster_identifier,
@@ -146,6 +151,7 @@ module Aws::RedshiftData
     #           This identifier is returned by <code>BatchExecuteStatment</code>, <code>ExecuteStatment</code>, and <code>ListStatements</code>. </p>
     #   @return [String]
     class CancelStatementRequest < Struct.new(
+      nil,
       :id,
       keyword_init: true
     )
@@ -156,6 +162,7 @@ module Aws::RedshiftData
     #   <p>A value that indicates whether the cancel statement succeeded (true). </p>
     #   @return [Boolean]
     class CancelStatementResponse < Struct.new(
+      nil,
       :status,
       keyword_init: true
     )
@@ -203,6 +210,7 @@ module Aws::RedshiftData
     #   <p>The default value of the column. </p>
     #   @return [String]
     class ColumnMetadata < Struct.new(
+      nil,
       :is_case_sensitive,
       :is_currency,
       :is_signed,
@@ -236,6 +244,7 @@ module Aws::RedshiftData
     # @!attribute message
     #   @return [String]
     class DatabaseConnectionException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -249,6 +258,7 @@ module Aws::RedshiftData
     #          This identifier is returned by <code>BatchExecuteStatment</code>, <code>ExecuteStatement</code>, and <code>ListStatements</code>. </p>
     #   @return [String]
     class DescribeStatementRequest < Struct.new(
+      nil,
       :id,
       keyword_init: true
     )
@@ -347,6 +357,7 @@ module Aws::RedshiftData
     #   <p>The data format of the result of the SQL statement.</p>
     #   @return [String]
     class DescribeStatementResponse < Struct.new(
+      nil,
       :id,
       :secret_arn,
       :db_user,
@@ -416,6 +427,7 @@ module Aws::RedshiftData
     #   <p>The serverless workgroup name or Amazon Resource Name (ARN). This parameter is required when connecting to a serverless workgroup and authenticating using either Secrets Manager or temporary credentials.</p>
     #   @return [String]
     class DescribeTableRequest < Struct.new(
+      nil,
       :cluster_identifier,
       :secret_arn,
       :db_user,
@@ -441,6 +453,7 @@ module Aws::RedshiftData
     #   <p>A value that indicates the starting point for the next set of response records in a subsequent request. If a value is returned in a response, you can retrieve the next set of records by providing this returned NextToken value in the next NextToken parameter and retrying the command. If the NextToken field is empty, all response records have been retrieved for the request. </p>
     #   @return [String]
     class DescribeTableResponse < Struct.new(
+      nil,
       :table_name,
       :column_list,
       :next_token,
@@ -457,6 +470,7 @@ module Aws::RedshiftData
     #   <p>Statement identifier of the exception.</p>
     #   @return [String]
     class ExecuteStatementException < Struct.new(
+      nil,
       :message,
       :statement_id,
       keyword_init: true
@@ -504,6 +518,7 @@ module Aws::RedshiftData
     #   <p>The data format of the result of the SQL statement. If no format is specified, the default is JSON.</p>
     #   @return [String]
     class ExecuteStatementInput < Struct.new(
+      nil,
       :sql,
       :cluster_identifier,
       :secret_arn,
@@ -550,6 +565,7 @@ module Aws::RedshiftData
     #   <p>The session identifier of the query.</p>
     #   @return [String]
     class ExecuteStatementOutput < Struct.new(
+      nil,
       :id,
       :created_at,
       :cluster_identifier,
@@ -614,6 +630,7 @@ module Aws::RedshiftData
     #   <p>A value that indicates the starting point for the next set of response records in a subsequent request. If a value is returned in a response, you can retrieve the next set of records by providing this returned NextToken value in the next NextToken parameter and retrying the command. If the NextToken field is empty, all response records have been retrieved for the request. </p>
     #   @return [String]
     class GetStatementResultRequest < Struct.new(
+      nil,
       :id,
       :next_token,
       keyword_init: true
@@ -635,6 +652,7 @@ module Aws::RedshiftData
     #   <p>A value that indicates the starting point for the next set of response records in a subsequent request. If a value is returned in a response, you can retrieve the next set of records by providing this returned NextToken value in the next NextToken parameter and retrying the command. If the NextToken field is empty, all response records have been retrieved for the request. </p>
     #   @return [String]
     class GetStatementResultResponse < Struct.new(
+      nil,
       :records,
       :column_metadata,
       :total_num_rows,
@@ -659,6 +677,7 @@ module Aws::RedshiftData
     #   <p>A value that indicates the starting point for the next set of response records in a subsequent request. If a value is returned in a response, you can retrieve the next set of records by providing this returned NextToken value in the next NextToken parameter and retrying the command. If the NextToken field is empty, all response records have been retrieved for the request.</p>
     #   @return [String]
     class GetStatementResultV2Request < Struct.new(
+      nil,
       :id,
       :next_token,
       keyword_init: true
@@ -683,6 +702,7 @@ module Aws::RedshiftData
     #   <p>A value that indicates the starting point for the next set of response records in a subsequent request. If a value is returned in a response, you can retrieve the next set of records by providing this returned NextToken value in the next NextToken parameter and retrying the command. If the NextToken field is empty, all response records have been retrieved for the request. </p>
     #   @return [String]
     class GetStatementResultV2Response < Struct.new(
+      nil,
       :records,
       :column_metadata,
       :total_num_rows,
@@ -703,6 +723,7 @@ module Aws::RedshiftData
     #   <p>The exception message.</p>
     #   @return [String]
     class InternalServerException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -732,6 +753,7 @@ module Aws::RedshiftData
     #   <p>The serverless workgroup name or Amazon Resource Name (ARN). This parameter is required when connecting to a serverless workgroup and authenticating using either Secrets Manager or temporary credentials.</p>
     #   @return [String]
     class ListDatabasesRequest < Struct.new(
+      nil,
       :cluster_identifier,
       :database,
       :secret_arn,
@@ -751,6 +773,7 @@ module Aws::RedshiftData
     #   <p>A value that indicates the starting point for the next set of response records in a subsequent request. If a value is returned in a response, you can retrieve the next set of records by providing this returned NextToken value in the next NextToken parameter and retrying the command. If the NextToken field is empty, all response records have been retrieved for the request. </p>
     #   @return [String]
     class ListDatabasesResponse < Struct.new(
+      nil,
       :databases,
       :next_token,
       keyword_init: true
@@ -790,6 +813,7 @@ module Aws::RedshiftData
     #   <p>The serverless workgroup name or Amazon Resource Name (ARN). This parameter is required when connecting to a serverless workgroup and authenticating using either Secrets Manager or temporary credentials.</p>
     #   @return [String]
     class ListSchemasRequest < Struct.new(
+      nil,
       :cluster_identifier,
       :secret_arn,
       :db_user,
@@ -811,6 +835,7 @@ module Aws::RedshiftData
     #   <p>A value that indicates the starting point for the next set of response records in a subsequent request. If a value is returned in a response, you can retrieve the next set of records by providing this returned NextToken value in the next NextToken parameter and retrying the command. If the NextToken field is empty, all response records have been retrieved for the request. </p>
     #   @return [String]
     class ListSchemasResponse < Struct.new(
+      nil,
       :schemas,
       :next_token,
       keyword_init: true
@@ -874,6 +899,7 @@ module Aws::RedshiftData
     #         When providing <code>WorkgroupName</code>, then <code>ClusterIdentifier</code> can't be specified.</p>
     #   @return [String]
     class ListStatementsRequest < Struct.new(
+      nil,
       :next_token,
       :max_results,
       :statement_name,
@@ -894,6 +920,7 @@ module Aws::RedshiftData
     #   <p>A value that indicates the starting point for the next set of response records in a subsequent request. If a value is returned in a response, you can retrieve the next set of records by providing this returned NextToken value in the next NextToken parameter and retrying the command. If the NextToken field is empty, all response records have been retrieved for the request. </p>
     #   @return [String]
     class ListStatementsResponse < Struct.new(
+      nil,
       :statements,
       :next_token,
       keyword_init: true
@@ -942,6 +969,7 @@ module Aws::RedshiftData
     #   <p>The serverless workgroup name or Amazon Resource Name (ARN). This parameter is required when connecting to a serverless workgroup and authenticating using either Secrets Manager or temporary credentials.</p>
     #   @return [String]
     class ListTablesRequest < Struct.new(
+      nil,
       :cluster_identifier,
       :secret_arn,
       :db_user,
@@ -964,6 +992,7 @@ module Aws::RedshiftData
     #   <p>A value that indicates the starting point for the next set of response records in a subsequent request. If a value is returned in a response, you can retrieve the next set of records by providing this returned NextToken value in the next NextToken parameter and retrying the command. If the NextToken field is empty, all response records have been retrieved for the request. </p>
     #   @return [String]
     class ListTablesResponse < Struct.new(
+      nil,
       :tables,
       :next_token,
       keyword_init: true
@@ -990,6 +1019,7 @@ module Aws::RedshiftData
     # @!attribute message
     #   @return [String]
     class QueryTimeoutException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -1004,6 +1034,7 @@ module Aws::RedshiftData
     #   <p>Resource identifier associated with the exception.</p>
     #   @return [String]
     class ResourceNotFoundException < Struct.new(
+      nil,
       :message,
       :resource_id,
       keyword_init: true
@@ -1022,6 +1053,7 @@ module Aws::RedshiftData
     #         <i>Amazon Redshift Database Developer Guide</i>. </p>
     #   @return [String]
     class SqlParameter < Struct.new(
+      nil,
       :name,
       :value,
       keyword_init: true
@@ -1069,6 +1101,7 @@ module Aws::RedshiftData
     #   <p>The session identifier of the query.</p>
     #   @return [String]
     class StatementData < Struct.new(
+      nil,
       :id,
       :query_string,
       :query_strings,
@@ -1127,6 +1160,7 @@ module Aws::RedshiftData
     #   <p>A value that indicates whether the statement has a result set. The result set can be empty. The value is true for an empty result set.</p>
     #   @return [Boolean]
     class SubStatementData < Struct.new(
+      nil,
       :id,
       :duration,
       :error,
@@ -1163,6 +1197,7 @@ module Aws::RedshiftData
     #   <p>The schema containing the table. </p>
     #   @return [String]
     class TableMember < Struct.new(
+      nil,
       :name,
       :type,
       :schema,
@@ -1176,6 +1211,7 @@ module Aws::RedshiftData
     #   <p>The exception message.</p>
     #   @return [String]
     class ValidationException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )

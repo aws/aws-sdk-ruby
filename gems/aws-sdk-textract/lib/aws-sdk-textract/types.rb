@@ -13,6 +13,7 @@ module Aws::Textract
     # @!attribute code
     #   @return [String]
     class AccessDeniedException < Struct.new(
+      nil,
       :message,
       :code,
       keyword_init: true
@@ -52,6 +53,7 @@ module Aws::Textract
     #   <p>A string that identifies the version of the adapter.</p>
     #   @return [String]
     class Adapter < Struct.new(
+      nil,
       :adapter_id,
       :pages,
       :version,
@@ -74,6 +76,7 @@ module Aws::Textract
     #   <p>The feature types that the adapter is operating on.</p>
     #   @return [Array<String>]
     class AdapterOverview < Struct.new(
+      nil,
       :adapter_id,
       :adapter_name,
       :creation_time,
@@ -95,6 +98,7 @@ module Aws::Textract
     #         </p>
     #   @return [Types::S3Object]
     class AdapterVersionDatasetConfig < Struct.new(
+      nil,
       :manifest_s3_object,
       keyword_init: true
     )
@@ -113,6 +117,7 @@ module Aws::Textract
     #   <p>Indicates the feature type being analyzed by a given adapter version.</p>
     #   @return [String]
     class AdapterVersionEvaluationMetric < Struct.new(
+      nil,
       :baseline,
       :adapter_version,
       :feature_type,
@@ -141,6 +146,7 @@ module Aws::Textract
     #   <p>A message explaining the status of a given adapter vesion.</p>
     #   @return [String]
     class AdapterVersionOverview < Struct.new(
+      nil,
       :adapter_id,
       :adapter_version,
       :creation_time,
@@ -158,6 +164,7 @@ module Aws::Textract
     #   <p>A list of adapters to be used when analyzing the specified document.</p>
     #   @return [Array<Types::Adapter>]
     class AdaptersConfig < Struct.new(
+      nil,
       :adapters,
       keyword_init: true
     )
@@ -189,6 +196,7 @@ module Aws::Textract
     #   <p>Specifies the adapter to be used when analyzing a document.</p>
     #   @return [Types::AdaptersConfig]
     class AnalyzeDocumentRequest < Struct.new(
+      nil,
       :document,
       :feature_types,
       :human_loop_config,
@@ -212,6 +220,7 @@ module Aws::Textract
     #   <p>The version of the model used to analyze the document.</p>
     #   @return [String]
     class AnalyzeDocumentResponse < Struct.new(
+      nil,
       :document_metadata,
       :blocks,
       :human_loop_activation_output,
@@ -240,6 +249,7 @@ module Aws::Textract
     #            to access the S3 object. </p>
     #   @return [Types::Document]
     class AnalyzeExpenseRequest < Struct.new(
+      nil,
       :document,
       keyword_init: true
     )
@@ -253,6 +263,7 @@ module Aws::Textract
     #   <p>The expenses detected by Amazon Textract.</p>
     #   @return [Array<Types::ExpenseDocument>]
     class AnalyzeExpenseResponse < Struct.new(
+      nil,
       :document_metadata,
       :expense_documents,
       keyword_init: true
@@ -272,6 +283,7 @@ module Aws::Textract
     #   <p>The confidence score of the detected text.</p>
     #   @return [Float]
     class AnalyzeIDDetections < Struct.new(
+      nil,
       :text,
       :normalized_value,
       :confidence,
@@ -284,6 +296,7 @@ module Aws::Textract
     #   <p>The document being passed to AnalyzeID.</p>
     #   @return [Array<Types::Document>]
     class AnalyzeIDRequest < Struct.new(
+      nil,
       :document_pages,
       keyword_init: true
     )
@@ -301,6 +314,7 @@ module Aws::Textract
     #   <p>The version of the AnalyzeIdentity API being used to process documents.</p>
     #   @return [String]
     class AnalyzeIDResponse < Struct.new(
+      nil,
       :identity_documents,
       :document_metadata,
       :analyze_id_model_version,
@@ -316,6 +330,7 @@ module Aws::Textract
     # @!attribute code
     #   @return [String]
     class BadDocumentException < Struct.new(
+      nil,
       :message,
       :code,
       keyword_init: true
@@ -589,6 +604,7 @@ module Aws::Textract
     #   <p></p>
     #   @return [Types::Query]
     class Block < Struct.new(
+      nil,
       :block_type,
       :confidence,
       :text,
@@ -638,6 +654,7 @@ module Aws::Textract
     #            height.</p>
     #   @return [Float]
     class BoundingBox < Struct.new(
+      nil,
       :width,
       :height,
       :left,
@@ -661,6 +678,7 @@ module Aws::Textract
     # @!attribute code
     #   @return [String]
     class ConflictException < Struct.new(
+      nil,
       :message,
       :code,
       keyword_init: true
@@ -691,6 +709,7 @@ module Aws::Textract
     #   <p>A list of tags to be added to the adapter.</p>
     #   @return [Hash<String, String>]
     class CreateAdapterRequest < Struct.new(
+      nil,
       :adapter_name,
       :client_request_token,
       :description,
@@ -706,6 +725,7 @@ module Aws::Textract
     #   <p>A string containing the unique ID for the adapter that has been created.</p>
     #   @return [String]
     class CreateAdapterResponse < Struct.new(
+      nil,
       :adapter_id,
       keyword_init: true
     )
@@ -750,6 +770,7 @@ module Aws::Textract
     #   <p>A set of tags (key-value pairs) that you want to attach to the adapter version. </p>
     #   @return [Hash<String, String>]
     class CreateAdapterVersionRequest < Struct.new(
+      nil,
       :adapter_id,
       :client_request_token,
       :dataset_config,
@@ -768,6 +789,7 @@ module Aws::Textract
     #   <p>A string describing the new version of the adapter.</p>
     #   @return [String]
     class CreateAdapterVersionResponse < Struct.new(
+      nil,
       :adapter_id,
       :adapter_version,
       keyword_init: true
@@ -779,6 +801,7 @@ module Aws::Textract
     #   <p>A string containing a unique ID for the adapter to be deleted.</p>
     #   @return [String]
     class DeleteAdapterRequest < Struct.new(
+      nil,
       :adapter_id,
       keyword_init: true
     )
@@ -786,6 +809,7 @@ module Aws::Textract
     end
 
     class DeleteAdapterResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -798,6 +822,7 @@ module Aws::Textract
     #   <p>Specifies the adapter version to be deleted.</p>
     #   @return [String]
     class DeleteAdapterVersionRequest < Struct.new(
+      nil,
       :adapter_id,
       :adapter_version,
       keyword_init: true
@@ -806,6 +831,7 @@ module Aws::Textract
     end
 
     class DeleteAdapterVersionResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -819,6 +845,7 @@ module Aws::Textract
     #            image bytes that are passed using the <code>Bytes</code> field. </p>
     #   @return [Types::Document]
     class DetectDocumentTextRequest < Struct.new(
+      nil,
       :document,
       keyword_init: true
     )
@@ -837,6 +864,7 @@ module Aws::Textract
     #   <p></p>
     #   @return [String]
     class DetectDocumentTextResponse < Struct.new(
+      nil,
       :document_metadata,
       :blocks,
       :detect_document_text_model_version,
@@ -850,6 +878,7 @@ module Aws::Textract
     #   <p>The page a detected signature was found on.</p>
     #   @return [Integer]
     class DetectedSignature < Struct.new(
+      nil,
       :page,
       keyword_init: true
     )
@@ -883,6 +912,7 @@ module Aws::Textract
     #            stored in an S3 bucket is 5 MB.</p>
     #   @return [Types::S3Object]
     class Document < Struct.new(
+      nil,
       :bytes,
       :s3_object,
       keyword_init: true
@@ -904,6 +934,7 @@ module Aws::Textract
     #   <p>A list of any expected signatures not found in a document group.</p>
     #   @return [Array<Types::UndetectedSignature>]
     class DocumentGroup < Struct.new(
+      nil,
       :type,
       :split_documents,
       :detected_signatures,
@@ -921,6 +952,7 @@ module Aws::Textract
     #   <p>The Amazon S3 bucket that contains the input document.</p>
     #   @return [Types::S3Object]
     class DocumentLocation < Struct.new(
+      nil,
       :s3_object,
       keyword_init: true
     )
@@ -932,6 +964,7 @@ module Aws::Textract
     #   <p>The number of pages that are detected in the document.</p>
     #   @return [Integer]
     class DocumentMetadata < Struct.new(
+      nil,
       :pages,
       keyword_init: true
     )
@@ -946,6 +979,7 @@ module Aws::Textract
     # @!attribute code
     #   @return [String]
     class DocumentTooLargeException < Struct.new(
+      nil,
       :message,
       :code,
       keyword_init: true
@@ -964,6 +998,7 @@ module Aws::Textract
     #   <p>The Recall score for an adapter version.</p>
     #   @return [Float]
     class EvaluationMetric < Struct.new(
+      nil,
       :f1_score,
       :precision,
       :recall,
@@ -1025,6 +1060,7 @@ module Aws::Textract
     #   <p>Percentage confideence in the detected currency.</p>
     #   @return [Float]
     class ExpenseCurrency < Struct.new(
+      nil,
       :code,
       :confidence,
       keyword_init: true
@@ -1044,6 +1080,7 @@ module Aws::Textract
     #   <p>The confidence in detection, as a percentage</p>
     #   @return [Float]
     class ExpenseDetection < Struct.new(
+      nil,
       :text,
       :geometry,
       :confidence,
@@ -1068,6 +1105,7 @@ module Aws::Textract
     #         It provides word level recognition of text.</p>
     #   @return [Array<Types::Block>]
     class ExpenseDocument < Struct.new(
+      nil,
       :expense_index,
       :summary_fields,
       :line_item_groups,
@@ -1100,6 +1138,7 @@ module Aws::Textract
     #            belongs to the vendor's address or the recipent's address.</p>
     #   @return [Array<Types::ExpenseGroupProperty>]
     class ExpenseField < Struct.new(
+      nil,
       :type,
       :label_detection,
       :value_detection,
@@ -1121,6 +1160,7 @@ module Aws::Textract
     #   <p>Provides a group Id number, which will be the same for each in the group.</p>
     #   @return [String]
     class ExpenseGroupProperty < Struct.new(
+      nil,
       :types,
       :id,
       keyword_init: true
@@ -1136,6 +1176,7 @@ module Aws::Textract
     #   <p>The confidence of accuracy, as a percentage.</p>
     #   @return [Float]
     class ExpenseType < Struct.new(
+      nil,
       :text,
       :confidence,
       keyword_init: true
@@ -1154,6 +1195,7 @@ module Aws::Textract
     #   <p>The structure that lists each document processed in an AnalyzeID operation.</p>
     #   @return [Types::IdentityDocument]
     class Extraction < Struct.new(
+      nil,
       :lending_document,
       :expense_document,
       :identity_document,
@@ -1175,6 +1217,7 @@ module Aws::Textract
     #   <p>Provides a numerical value corresponding to the rotation of the text.</p>
     #   @return [Float]
     class Geometry < Struct.new(
+      nil,
       :bounding_box,
       :polygon,
       :rotation_angle,
@@ -1187,6 +1230,7 @@ module Aws::Textract
     #   <p>A string containing a unique ID for the adapter.</p>
     #   @return [String]
     class GetAdapterRequest < Struct.new(
+      nil,
       :adapter_id,
       keyword_init: true
     )
@@ -1215,6 +1259,7 @@ module Aws::Textract
     #   <p>A set of tags (key-value pairs) associated with the adapter that has been retrieved.</p>
     #   @return [Hash<String, String>]
     class GetAdapterResponse < Struct.new(
+      nil,
       :adapter_id,
       :adapter_name,
       :creation_time,
@@ -1234,6 +1279,7 @@ module Aws::Textract
     #   <p>A string specifying the adapter version you want to retrieve information for.</p>
     #   @return [String]
     class GetAdapterVersionRequest < Struct.new(
+      nil,
       :adapter_id,
       :adapter_version,
       keyword_init: true
@@ -1293,6 +1339,7 @@ module Aws::Textract
     #   <p>A set of tags (key-value pairs) that are associated with the adapter version.</p>
     #   @return [Hash<String, String>]
     class GetAdapterVersionResponse < Struct.new(
+      nil,
       :adapter_id,
       :adapter_version,
       :creation_time,
@@ -1325,6 +1372,7 @@ module Aws::Textract
     #            token to retrieve the next set of blocks.</p>
     #   @return [String]
     class GetDocumentAnalysisRequest < Struct.new(
+      nil,
       :job_id,
       :max_results,
       :next_token,
@@ -1359,6 +1407,7 @@ module Aws::Textract
     #   <p></p>
     #   @return [String]
     class GetDocumentAnalysisResponse < Struct.new(
+      nil,
       :document_metadata,
       :job_status,
       :next_token,
@@ -1385,6 +1434,7 @@ module Aws::Textract
     #            token in the response. You can use this pagination token to retrieve the next set of blocks.</p>
     #   @return [String]
     class GetDocumentTextDetectionRequest < Struct.new(
+      nil,
       :job_id,
       :max_results,
       :next_token,
@@ -1418,6 +1468,7 @@ module Aws::Textract
     #   <p></p>
     #   @return [String]
     class GetDocumentTextDetectionResponse < Struct.new(
+      nil,
       :document_metadata,
       :job_status,
       :next_token,
@@ -1444,6 +1495,7 @@ module Aws::Textract
     #      token in the response. You can use this pagination token to retrieve the next set of blocks.</p>
     #   @return [String]
     class GetExpenseAnalysisRequest < Struct.new(
+      nil,
       :job_id,
       :max_results,
       :next_token,
@@ -1477,6 +1529,7 @@ module Aws::Textract
     #   <p>The current model version of AnalyzeExpense.</p>
     #   @return [String]
     class GetExpenseAnalysisResponse < Struct.new(
+      nil,
       :document_metadata,
       :job_status,
       :next_token,
@@ -1505,6 +1558,7 @@ module Aws::Textract
     #               results.</p>
     #   @return [String]
     class GetLendingAnalysisRequest < Struct.new(
+      nil,
       :job_id,
       :max_results,
       :next_token,
@@ -1538,6 +1592,7 @@ module Aws::Textract
     #   <p> The current model version of the Analyze Lending API.</p>
     #   @return [String]
     class GetLendingAnalysisResponse < Struct.new(
+      nil,
       :document_metadata,
       :job_status,
       :next_token,
@@ -1555,6 +1610,7 @@ module Aws::Textract
     #      returned from StartLendingAnalysis. A <code>JobId</code> value is only valid for 7 days.</p>
     #   @return [String]
     class GetLendingAnalysisSummaryRequest < Struct.new(
+      nil,
       :job_id,
       keyword_init: true
     )
@@ -1581,6 +1637,7 @@ module Aws::Textract
     #   <p>The current model version of the Analyze Lending API.</p>
     #   @return [String]
     class GetLendingAnalysisSummaryResponse < Struct.new(
+      nil,
       :document_metadata,
       :job_status,
       :summary,
@@ -1605,6 +1662,7 @@ module Aws::Textract
     #            human review.</p>
     #   @return [String]
     class HumanLoopActivationOutput < Struct.new(
+      nil,
       :human_loop_arn,
       :human_loop_activation_reasons,
       :human_loop_activation_conditions_evaluation_results,
@@ -1626,6 +1684,7 @@ module Aws::Textract
     #   <p>Sets attributes of the input data.</p>
     #   @return [Types::HumanLoopDataAttributes]
     class HumanLoopConfig < Struct.new(
+      nil,
       :human_loop_name,
       :flow_definition_arn,
       :data_attributes,
@@ -1641,6 +1700,7 @@ module Aws::Textract
     #            content.</p>
     #   @return [Array<String>]
     class HumanLoopDataAttributes < Struct.new(
+      nil,
       :content_classifiers,
       keyword_init: true
     )
@@ -1662,6 +1722,7 @@ module Aws::Textract
     # @!attribute code
     #   @return [String]
     class HumanLoopQuotaExceededException < Struct.new(
+      nil,
       :resource_type,
       :quota_code,
       :service_code,
@@ -1680,6 +1741,7 @@ module Aws::Textract
     # @!attribute code
     #   @return [String]
     class IdempotentParameterMismatchException < Struct.new(
+      nil,
       :message,
       :code,
       keyword_init: true
@@ -1700,6 +1762,7 @@ module Aws::Textract
     #   <p>Individual word recognition, as returned by document detection.</p>
     #   @return [Array<Types::Block>]
     class IdentityDocument < Struct.new(
+      nil,
       :document_index,
       :identity_document_fields,
       :blocks,
@@ -1717,6 +1780,7 @@ module Aws::Textract
     #   <p>Used to contain the information detected by an AnalyzeID operation.</p>
     #   @return [Types::AnalyzeIDDetections]
     class IdentityDocumentField < Struct.new(
+      nil,
       :type,
       :value_detection,
       keyword_init: true
@@ -1730,6 +1794,7 @@ module Aws::Textract
     # @!attribute code
     #   @return [String]
     class InternalServerError < Struct.new(
+      nil,
       :message,
       :code,
       keyword_init: true
@@ -1743,6 +1808,7 @@ module Aws::Textract
     # @!attribute code
     #   @return [String]
     class InvalidJobIdException < Struct.new(
+      nil,
       :message,
       :code,
       keyword_init: true
@@ -1757,6 +1823,7 @@ module Aws::Textract
     # @!attribute code
     #   @return [String]
     class InvalidKMSKeyException < Struct.new(
+      nil,
       :message,
       :code,
       keyword_init: true
@@ -1774,6 +1841,7 @@ module Aws::Textract
     # @!attribute code
     #   @return [String]
     class InvalidParameterException < Struct.new(
+      nil,
       :message,
       :code,
       keyword_init: true
@@ -1790,6 +1858,7 @@ module Aws::Textract
     # @!attribute code
     #   @return [String]
     class InvalidS3ObjectException < Struct.new(
+      nil,
       :message,
       :code,
       keyword_init: true
@@ -1812,6 +1881,7 @@ module Aws::Textract
     #   <p>The confidence level for the text of a detected value in a lending document.</p>
     #   @return [Float]
     class LendingDetection < Struct.new(
+      nil,
       :text,
       :selection_status,
       :geometry,
@@ -1829,6 +1899,7 @@ module Aws::Textract
     #   <p>A list of signatures detected in a lending document.</p>
     #   @return [Array<Types::SignatureDetection>]
     class LendingDocument < Struct.new(
+      nil,
       :lending_fields,
       :signature_detections,
       keyword_init: true
@@ -1847,6 +1918,7 @@ module Aws::Textract
     #   <p>An array of LendingDetection objects.</p>
     #   @return [Array<Types::LendingDetection>]
     class LendingField < Struct.new(
+      nil,
       :type,
       :key_detection,
       :value_detections,
@@ -1866,6 +1938,7 @@ module Aws::Textract
     #   <p>An array of Extraction to hold structured data. e.g. normalized key value pairs instead of raw OCR detections .</p>
     #   @return [Array<Types::Extraction>]
     class LendingResult < Struct.new(
+      nil,
       :page,
       :page_classification,
       :extractions,
@@ -1882,6 +1955,7 @@ module Aws::Textract
     #   <p>UndetectedDocumentTypes.</p>
     #   @return [Array<String>]
     class LendingSummary < Struct.new(
+      nil,
       :document_groups,
       :undetected_document_types,
       keyword_init: true
@@ -1899,6 +1973,7 @@ module Aws::Textract
     # @!attribute code
     #   @return [String]
     class LimitExceededException < Struct.new(
+      nil,
       :message,
       :code,
       keyword_init: true
@@ -1911,6 +1986,7 @@ module Aws::Textract
     #   <p>ExpenseFields used to show information from detected lines on a table.</p>
     #   @return [Array<Types::ExpenseField>]
     class LineItemFields < Struct.new(
+      nil,
       :line_item_expense_fields,
       keyword_init: true
     )
@@ -1925,6 +2001,7 @@ module Aws::Textract
     #   <p>The breakdown of information on a particular line of a table. </p>
     #   @return [Array<Types::LineItemFields>]
     class LineItemGroup < Struct.new(
+      nil,
       :line_item_group_index,
       :line_items,
       keyword_init: true
@@ -1950,6 +2027,7 @@ module Aws::Textract
     #   <p>Identifies the next page of results to return when listing adapter versions.</p>
     #   @return [String]
     class ListAdapterVersionsRequest < Struct.new(
+      nil,
       :adapter_id,
       :after_creation_time,
       :before_creation_time,
@@ -1967,6 +2045,7 @@ module Aws::Textract
     #   <p>Identifies the next page of results to return when listing adapter versions.</p>
     #   @return [String]
     class ListAdapterVersionsResponse < Struct.new(
+      nil,
       :adapter_versions,
       :next_token,
       keyword_init: true
@@ -1989,6 +2068,7 @@ module Aws::Textract
     #   <p>Identifies the next page of results to return when listing adapters.</p>
     #   @return [String]
     class ListAdaptersRequest < Struct.new(
+      nil,
       :after_creation_time,
       :before_creation_time,
       :max_results,
@@ -2005,6 +2085,7 @@ module Aws::Textract
     #   <p>Identifies the next page of results to return when listing adapters.</p>
     #   @return [String]
     class ListAdaptersResponse < Struct.new(
+      nil,
       :adapters,
       :next_token,
       keyword_init: true
@@ -2016,6 +2097,7 @@ module Aws::Textract
     #   <p>The Amazon Resource Name (ARN) that specifies the resource to list tags for.</p>
     #   @return [String]
     class ListTagsForResourceRequest < Struct.new(
+      nil,
       :resource_arn,
       keyword_init: true
     )
@@ -2026,6 +2108,7 @@ module Aws::Textract
     #   <p>A set of tags (key-value pairs) that are part of the requested resource.</p>
     #   @return [Hash<String, String>]
     class ListTagsForResourceResponse < Struct.new(
+      nil,
       :tags,
       keyword_init: true
     )
@@ -2041,6 +2124,7 @@ module Aws::Textract
     #   <p>The normalized type of the value detected. In this case, DATE.</p>
     #   @return [String]
     class NormalizedValue < Struct.new(
+      nil,
       :value,
       :value_type,
       keyword_init: true
@@ -2057,6 +2141,7 @@ module Aws::Textract
     #   <p>The Amazon Resource Name (ARN) of an IAM role that gives Amazon Textract publishing permissions to the Amazon SNS topic. </p>
     #   @return [String]
     class NotificationChannel < Struct.new(
+      nil,
       :sns_topic_arn,
       :role_arn,
       keyword_init: true
@@ -2089,6 +2174,7 @@ module Aws::Textract
     #            prefix will be “textract_output".</p>
     #   @return [String]
     class OutputConfig < Struct.new(
+      nil,
       :s3_bucket,
       :s3_prefix,
       keyword_init: true
@@ -2107,6 +2193,7 @@ module Aws::Textract
     #   <p> The page number the value was detected on, relative to Amazon Textract's starting position.</p>
     #   @return [Array<Types::Prediction>]
     class PageClassification < Struct.new(
+      nil,
       :page_type,
       :page_number,
       keyword_init: true
@@ -2129,6 +2216,7 @@ module Aws::Textract
     #   <p>The value of the Y coordinate for a point on a <code>Polygon</code>.</p>
     #   @return [Float]
     class Point < Struct.new(
+      nil,
       :x,
       :y,
       keyword_init: true
@@ -2151,6 +2239,7 @@ module Aws::Textract
     #   <p>Amazon Textract's confidence in its predicted value.</p>
     #   @return [Float]
     class Prediction < Struct.new(
+      nil,
       :value,
       :confidence,
       keyword_init: true
@@ -2165,6 +2254,7 @@ module Aws::Textract
     # @!attribute code
     #   @return [String]
     class ProvisionedThroughputExceededException < Struct.new(
+      nil,
       :message,
       :code,
       keyword_init: true
@@ -2177,6 +2267,7 @@ module Aws::Textract
     #   <p></p>
     #   @return [Array<Types::Query>]
     class QueriesConfig < Struct.new(
+      nil,
       :queries,
       keyword_init: true
     )
@@ -2214,6 +2305,7 @@ module Aws::Textract
     #            </ul>
     #   @return [Array<String>]
     class Query < Struct.new(
+      nil,
       :text,
       :alias,
       :pages,
@@ -2275,6 +2367,7 @@ module Aws::Textract
     #               <code>Type</code> element.</p>
     #   @return [Array<String>]
     class Relationship < Struct.new(
+      nil,
       :type,
       :ids,
       keyword_init: true
@@ -2288,6 +2381,7 @@ module Aws::Textract
     # @!attribute code
     #   @return [String]
     class ResourceNotFoundException < Struct.new(
+      nil,
       :message,
       :code,
       keyword_init: true
@@ -2313,6 +2407,7 @@ module Aws::Textract
     #   <p>If the bucket has versioning enabled, you can specify the object version. </p>
     #   @return [String]
     class S3Object < Struct.new(
+      nil,
       :bucket,
       :name,
       :version,
@@ -2327,6 +2422,7 @@ module Aws::Textract
     # @!attribute code
     #   @return [String]
     class ServiceQuotaExceededException < Struct.new(
+      nil,
       :message,
       :code,
       keyword_init: true
@@ -2343,6 +2439,7 @@ module Aws::Textract
     #            page, text, key-value pairs, tables, table cells, and selection elements.</p>
     #   @return [Types::Geometry]
     class SignatureDetection < Struct.new(
+      nil,
       :confidence,
       :geometry,
       keyword_init: true
@@ -2358,6 +2455,7 @@ module Aws::Textract
     #   <p>An array of page numbers for a for a given document, ordered by logical boundary.</p>
     #   @return [Array<Integer>]
     class SplitDocument < Struct.new(
+      nil,
       :index,
       :pages,
       keyword_init: true
@@ -2411,6 +2509,7 @@ module Aws::Textract
     #   <p>Specifies the adapter to be used when analyzing a document.</p>
     #   @return [Types::AdaptersConfig]
     class StartDocumentAnalysisRequest < Struct.new(
+      nil,
       :document_location,
       :feature_types,
       :client_request_token,
@@ -2431,6 +2530,7 @@ module Aws::Textract
     #            is only valid for 7 days.</p>
     #   @return [String]
     class StartDocumentAnalysisResponse < Struct.new(
+      nil,
       :job_id,
       keyword_init: true
     )
@@ -2469,6 +2569,7 @@ module Aws::Textract
     #            be encrypted server side,using SSE-S3.</p>
     #   @return [String]
     class StartDocumentTextDetectionRequest < Struct.new(
+      nil,
       :document_location,
       :client_request_token,
       :job_tag,
@@ -2486,6 +2587,7 @@ module Aws::Textract
     #            A <code>JobId</code> value is only valid for 7 days.</p>
     #   @return [String]
     class StartDocumentTextDetectionResponse < Struct.new(
+      nil,
       :job_id,
       keyword_init: true
     )
@@ -2524,6 +2626,7 @@ module Aws::Textract
     #      be encrypted server side,using SSE-S3.</p>
     #   @return [String]
     class StartExpenseAnalysisRequest < Struct.new(
+      nil,
       :document_location,
       :client_request_token,
       :job_tag,
@@ -2540,6 +2643,7 @@ module Aws::Textract
     #       <code>StartExpenseAnalysis</code>. A <code>JobId</code> value is only valid for 7 days.</p>
     #   @return [String]
     class StartExpenseAnalysisResponse < Struct.new(
+      nil,
       :job_id,
       keyword_init: true
     )
@@ -2594,6 +2698,7 @@ module Aws::Textract
     #      encrypted server side, using SSE-S3. </p>
     #   @return [String]
     class StartLendingAnalysisRequest < Struct.new(
+      nil,
       :document_location,
       :client_request_token,
       :job_tag,
@@ -2611,6 +2716,7 @@ module Aws::Textract
     #      days.</p>
     #   @return [String]
     class StartLendingAnalysisResponse < Struct.new(
+      nil,
       :job_id,
       keyword_init: true
     )
@@ -2624,6 +2730,7 @@ module Aws::Textract
     #   <p>A set of tags (key-value pairs) that you want to assign to the resource.</p>
     #   @return [Hash<String, String>]
     class TagResourceRequest < Struct.new(
+      nil,
       :resource_arn,
       :tags,
       keyword_init: true
@@ -2632,6 +2739,7 @@ module Aws::Textract
     end
 
     class TagResourceResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -2643,6 +2751,7 @@ module Aws::Textract
     # @!attribute code
     #   @return [String]
     class ThrottlingException < Struct.new(
+      nil,
       :message,
       :code,
       keyword_init: true
@@ -2655,6 +2764,7 @@ module Aws::Textract
     #   <p>The page where a signature was expected but not found.</p>
     #   @return [Integer]
     class UndetectedSignature < Struct.new(
+      nil,
       :page,
       keyword_init: true
     )
@@ -2668,6 +2778,7 @@ module Aws::Textract
     # @!attribute code
     #   @return [String]
     class UnsupportedDocumentException < Struct.new(
+      nil,
       :message,
       :code,
       keyword_init: true
@@ -2682,6 +2793,7 @@ module Aws::Textract
     #   <p>Specifies the tags to be removed from the resource specified by the ResourceARN.</p>
     #   @return [Array<String>]
     class UntagResourceRequest < Struct.new(
+      nil,
       :resource_arn,
       :tag_keys,
       keyword_init: true
@@ -2690,6 +2802,7 @@ module Aws::Textract
     end
 
     class UntagResourceResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -2708,6 +2821,7 @@ module Aws::Textract
     #   <p>The new auto-update status to be applied to the adapter.</p>
     #   @return [String]
     class UpdateAdapterRequest < Struct.new(
+      nil,
       :adapter_id,
       :description,
       :adapter_name,
@@ -2736,6 +2850,7 @@ module Aws::Textract
     #   <p>The auto-update status of the adapter that has been updated.</p>
     #   @return [String]
     class UpdateAdapterResponse < Struct.new(
+      nil,
       :adapter_id,
       :adapter_name,
       :creation_time,
@@ -2753,6 +2868,7 @@ module Aws::Textract
     # @!attribute code
     #   @return [String]
     class ValidationException < Struct.new(
+      nil,
       :message,
       :code,
       keyword_init: true
@@ -2768,6 +2884,7 @@ module Aws::Textract
     #   <p>A list of the pages that the warning applies to.</p>
     #   @return [Array<Integer>]
     class Warning < Struct.new(
+      nil,
       :error_code,
       :pages,
       keyword_init: true

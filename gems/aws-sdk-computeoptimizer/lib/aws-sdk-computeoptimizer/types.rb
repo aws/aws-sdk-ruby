@@ -10,6 +10,7 @@ module Aws::ComputeOptimizer
     # @!attribute message
     #   @return [String]
     class AccessDeniedException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -33,6 +34,7 @@ module Aws::ComputeOptimizer
     #               updated.</p>
     #   @return [Time]
     class AccountEnrollmentStatus < Struct.new(
+      nil,
       :account_id,
       :status,
       :status_reason,
@@ -78,6 +80,7 @@ module Aws::ComputeOptimizer
     #           </p>
     #   @return [Array<String>]
     class AutoScalingGroupConfiguration < Struct.new(
+      nil,
       :desired_capacity,
       :min_size,
       :max_size,
@@ -113,6 +116,7 @@ module Aws::ComputeOptimizer
     #           </p>
     #   @return [Float]
     class AutoScalingGroupEstimatedMonthlySavings < Struct.new(
+      nil,
       :currency,
       :value,
       keyword_init: true
@@ -244,6 +248,7 @@ module Aws::ComputeOptimizer
     #            </ul>
     #   @return [Array<String>]
     class AutoScalingGroupRecommendation < Struct.new(
+      nil,
       :account_id,
       :auto_scaling_group_arn,
       :auto_scaling_group_name,
@@ -329,6 +334,7 @@ module Aws::ComputeOptimizer
     #               same CPU architecture.</p>
     #   @return [String]
     class AutoScalingGroupRecommendationOption < Struct.new(
+      nil,
       :configuration,
       :instance_gpu_info,
       :projected_utilization_metrics,
@@ -365,6 +371,7 @@ module Aws::ComputeOptimizer
     #           </p>
     #   @return [Types::AutoScalingGroupEstimatedMonthlySavings]
     class AutoScalingGroupSavingsOpportunityAfterDiscounts < Struct.new(
+      nil,
       :savings_opportunity_percentage,
       :estimated_monthly_savings,
       keyword_init: true
@@ -396,6 +403,7 @@ module Aws::ComputeOptimizer
     #           </p>
     #   @return [Integer]
     class ContainerConfiguration < Struct.new(
+      nil,
       :container_name,
       :memory_size_configuration,
       :cpu,
@@ -423,6 +431,7 @@ module Aws::ComputeOptimizer
     #           </p>
     #   @return [Integer]
     class ContainerRecommendation < Struct.new(
+      nil,
       :container_name,
       :memory_size_configuration,
       :cpu,
@@ -449,6 +458,7 @@ module Aws::ComputeOptimizer
     #               rating.</p>
     #   @return [Integer]
     class CurrentPerformanceRiskRatings < Struct.new(
+      nil,
       :high,
       :medium,
       :low,
@@ -494,6 +504,7 @@ module Aws::ComputeOptimizer
     #            </ul>
     #   @return [String]
     class CustomizableMetricParameters < Struct.new(
+      nil,
       :threshold,
       :headroom,
       keyword_init: true
@@ -530,6 +541,7 @@ module Aws::ComputeOptimizer
     #           </p>
     #   @return [Integer]
     class DBStorageConfiguration < Struct.new(
+      nil,
       :storage_type,
       :allocated_storage,
       :iops,
@@ -563,6 +575,7 @@ module Aws::ComputeOptimizer
     #   <p>The name of the recommendation preference to delete.</p>
     #   @return [Array<String>]
     class DeleteRecommendationPreferencesRequest < Struct.new(
+      nil,
       :resource_type,
       :scope,
       :recommendation_preference_names,
@@ -572,6 +585,7 @@ module Aws::ComputeOptimizer
     end
 
     class DeleteRecommendationPreferencesResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -596,6 +610,7 @@ module Aws::ComputeOptimizer
     #                   <code>nextToken</code> value.</p>
     #   @return [Integer]
     class DescribeRecommendationExportJobsRequest < Struct.new(
+      nil,
       :job_ids,
       :filters,
       :next_token,
@@ -613,6 +628,7 @@ module Aws::ComputeOptimizer
     #            <p>This value is null when there are no more pages of export jobs to return.</p>
     #   @return [String]
     class DescribeRecommendationExportJobsResponse < Struct.new(
+      nil,
       :recommendation_export_jobs,
       :next_token,
       keyword_init: true
@@ -629,6 +645,7 @@ module Aws::ComputeOptimizer
     #           </p>
     #   @return [Types::EBSSavingsEstimationMode]
     class EBSEffectiveRecommendationPreferences < Struct.new(
+      nil,
       :savings_estimation_mode,
       keyword_init: true
     )
@@ -650,6 +667,7 @@ module Aws::ComputeOptimizer
     #           </p>
     #   @return [Float]
     class EBSEstimatedMonthlySavings < Struct.new(
+      nil,
       :currency,
       :value,
       keyword_init: true
@@ -689,6 +707,7 @@ module Aws::ComputeOptimizer
     #            <p>The valid values are <code>Optimized</code>, or <code>NotOptimized</code>.</p>
     #   @return [Array<String>]
     class EBSFilter < Struct.new(
+      nil,
       :name,
       :values,
       keyword_init: true
@@ -705,6 +724,7 @@ module Aws::ComputeOptimizer
     #           </p>
     #   @return [String]
     class EBSSavingsEstimationMode < Struct.new(
+      nil,
       :source,
       keyword_init: true
     )
@@ -727,6 +747,7 @@ module Aws::ComputeOptimizer
     #           </p>
     #   @return [Types::EBSEstimatedMonthlySavings]
     class EBSSavingsOpportunityAfterDiscounts < Struct.new(
+      nil,
       :savings_opportunity_percentage,
       :estimated_monthly_savings,
       keyword_init: true
@@ -792,6 +813,7 @@ module Aws::ComputeOptimizer
     #   <p>The value of the utilization metric.</p>
     #   @return [Float]
     class EBSUtilizationMetric < Struct.new(
+      nil,
       :name,
       :statistic,
       :value,
@@ -814,6 +836,7 @@ module Aws::ComputeOptimizer
     #           </p>
     #   @return [Types::ECSSavingsEstimationMode]
     class ECSEffectiveRecommendationPreferences < Struct.new(
+      nil,
       :savings_estimation_mode,
       keyword_init: true
     )
@@ -835,6 +858,7 @@ module Aws::ComputeOptimizer
     #           </p>
     #   @return [Float]
     class ECSEstimatedMonthlySavings < Struct.new(
+      nil,
       :currency,
       :value,
       keyword_init: true
@@ -856,6 +880,7 @@ module Aws::ComputeOptimizer
     #           </p>
     #   @return [String]
     class ECSSavingsEstimationMode < Struct.new(
+      nil,
       :source,
       keyword_init: true
     )
@@ -880,6 +905,7 @@ module Aws::ComputeOptimizer
     #           </p>
     #   @return [Types::ECSEstimatedMonthlySavings]
     class ECSSavingsOpportunityAfterDiscounts < Struct.new(
+      nil,
       :savings_opportunity_percentage,
       :estimated_monthly_savings,
       keyword_init: true
@@ -931,6 +957,7 @@ module Aws::ComputeOptimizer
     #           </p>
     #   @return [Array<Float>]
     class ECSServiceProjectedMetric < Struct.new(
+      nil,
       :name,
       :timestamps,
       :upper_bound_values,
@@ -988,6 +1015,7 @@ module Aws::ComputeOptimizer
     #           </p>
     #   @return [Float]
     class ECSServiceProjectedUtilizationMetric < Struct.new(
+      nil,
       :name,
       :statistic,
       :lower_bound_value,
@@ -1151,6 +1179,7 @@ module Aws::ComputeOptimizer
     #           </p>
     #   @return [Array<Types::Tag>]
     class ECSServiceRecommendation < Struct.new(
+      nil,
       :service_arn,
       :account_id,
       :current_service_configuration,
@@ -1219,6 +1248,7 @@ module Aws::ComputeOptimizer
     #            </ul>
     #   @return [Array<String>]
     class ECSServiceRecommendationFilter < Struct.new(
+      nil,
       :name,
       :values,
       keyword_init: true
@@ -1275,6 +1305,7 @@ module Aws::ComputeOptimizer
     #           </p>
     #   @return [Array<Types::ContainerRecommendation>]
     class ECSServiceRecommendationOption < Struct.new(
+      nil,
       :memory,
       :cpu,
       :savings_opportunity,
@@ -1307,6 +1338,7 @@ module Aws::ComputeOptimizer
     #           </p>
     #   @return [Array<Types::ECSServiceProjectedMetric>]
     class ECSServiceRecommendedOptionProjectedMetric < Struct.new(
+      nil,
       :recommended_cpu_units,
       :recommended_memory_size,
       :projected_metrics,
@@ -1362,6 +1394,7 @@ module Aws::ComputeOptimizer
     #           </p>
     #   @return [Float]
     class ECSServiceUtilizationMetric < Struct.new(
+      nil,
       :name,
       :statistic,
       :value,
@@ -1402,6 +1435,7 @@ module Aws::ComputeOptimizer
     #           </p>
     #   @return [Array<String>]
     class EffectivePreferredResource < Struct.new(
+      nil,
       :name,
       :include_list,
       :effective_include_list,
@@ -1478,6 +1512,7 @@ module Aws::ComputeOptimizer
     #           </p>
     #   @return [Types::InstanceSavingsEstimationMode]
     class EffectiveRecommendationPreferences < Struct.new(
+      nil,
       :cpu_vendor_architectures,
       :enhanced_infrastructure_metrics,
       :inferred_workload_types,
@@ -1505,6 +1540,7 @@ module Aws::ComputeOptimizer
     #               and <code>Failed</code>.</p>
     #   @return [Array<String>]
     class EnrollmentFilter < Struct.new(
+      nil,
       :name,
       :values,
       keyword_init: true
@@ -1524,6 +1560,7 @@ module Aws::ComputeOptimizer
     #   <p>The value of the estimated monthly savings.</p>
     #   @return [Float]
     class EstimatedMonthlySavings < Struct.new(
+      nil,
       :currency,
       :value,
       keyword_init: true
@@ -1589,6 +1626,7 @@ module Aws::ComputeOptimizer
     #               to export.</p>
     #   @return [Types::RecommendationPreferences]
     class ExportAutoScalingGroupRecommendationsRequest < Struct.new(
+      nil,
       :account_ids,
       :filters,
       :fields_to_export,
@@ -1611,6 +1649,7 @@ module Aws::ComputeOptimizer
     #               export file.</p>
     #   @return [Types::S3Destination]
     class ExportAutoScalingGroupRecommendationsResponse < Struct.new(
+      nil,
       :job_id,
       :s3_destination,
       keyword_init: true
@@ -1625,6 +1664,7 @@ module Aws::ComputeOptimizer
     #               metadata file.</p>
     #   @return [Types::S3Destination]
     class ExportDestination < Struct.new(
+      nil,
       :s3,
       keyword_init: true
     )
@@ -1680,6 +1720,7 @@ module Aws::ComputeOptimizer
     #               or the account IDs parameter, is omitted.</p>
     #   @return [Boolean]
     class ExportEBSVolumeRecommendationsRequest < Struct.new(
+      nil,
       :account_ids,
       :filters,
       :fields_to_export,
@@ -1701,6 +1742,7 @@ module Aws::ComputeOptimizer
     #               object keys of a recommendations export file, and its associated metadata file.</p>
     #   @return [Types::S3Destination]
     class ExportEBSVolumeRecommendationsResponse < Struct.new(
+      nil,
       :job_id,
       :s3_destination,
       keyword_init: true
@@ -1761,6 +1803,7 @@ module Aws::ComputeOptimizer
     #               recommendations to export.</p>
     #   @return [Types::RecommendationPreferences]
     class ExportEC2InstanceRecommendationsRequest < Struct.new(
+      nil,
       :account_ids,
       :filters,
       :fields_to_export,
@@ -1783,6 +1826,7 @@ module Aws::ComputeOptimizer
     #               export file.</p>
     #   @return [Types::S3Destination]
     class ExportEC2InstanceRecommendationsResponse < Struct.new(
+      nil,
       :job_id,
       :s3_destination,
       keyword_init: true
@@ -1845,6 +1889,7 @@ module Aws::ComputeOptimizer
     #               member accounts aren't included in the export.</p>
     #   @return [Boolean]
     class ExportECSServiceRecommendationsRequest < Struct.new(
+      nil,
       :account_ids,
       :filters,
       :fields_to_export,
@@ -1869,6 +1914,7 @@ module Aws::ComputeOptimizer
     #               object keys of a recommendations export file, and its associated metadata file.</p>
     #   @return [Types::S3Destination]
     class ExportECSServiceRecommendationsResponse < Struct.new(
+      nil,
       :job_id,
       :s3_destination,
       keyword_init: true
@@ -1925,6 +1971,7 @@ module Aws::ComputeOptimizer
     #               member accounts aren't included in the export.</p>
     #   @return [Boolean]
     class ExportIdleRecommendationsRequest < Struct.new(
+      nil,
       :account_ids,
       :filters,
       :fields_to_export,
@@ -1949,6 +1996,7 @@ module Aws::ComputeOptimizer
     #               object keys of a recommendations export file, and its associated metadata file.</p>
     #   @return [Types::S3Destination]
     class ExportIdleRecommendationsResponse < Struct.new(
+      nil,
       :job_id,
       :s3_destination,
       keyword_init: true
@@ -2005,6 +2053,7 @@ module Aws::ComputeOptimizer
     #               or the account IDs parameter, is omitted.</p>
     #   @return [Boolean]
     class ExportLambdaFunctionRecommendationsRequest < Struct.new(
+      nil,
       :account_ids,
       :filters,
       :fields_to_export,
@@ -2026,6 +2075,7 @@ module Aws::ComputeOptimizer
     #               object keys of a recommendations export file, and its associated metadata file.</p>
     #   @return [Types::S3Destination]
     class ExportLambdaFunctionRecommendationsResponse < Struct.new(
+      nil,
       :job_id,
       :s3_destination,
       keyword_init: true
@@ -2082,6 +2132,7 @@ module Aws::ComputeOptimizer
     #               parameters are mutually exclusive.</p>
     #   @return [Boolean]
     class ExportLicenseRecommendationsRequest < Struct.new(
+      nil,
       :account_ids,
       :filters,
       :fields_to_export,
@@ -2105,6 +2156,7 @@ module Aws::ComputeOptimizer
     #               object keys of a recommendations export file, and its associated metadata file.</p>
     #   @return [Types::S3Destination]
     class ExportLicenseRecommendationsResponse < Struct.new(
+      nil,
       :job_id,
       :s3_destination,
       keyword_init: true
@@ -2170,6 +2222,7 @@ module Aws::ComputeOptimizer
     #   <p>Describes the recommendation preferences to return in the response of a <a>GetAutoScalingGroupRecommendations</a>, <a>GetEC2InstanceRecommendations</a>, <a>GetEC2RecommendationProjectedMetrics</a>, <a>GetRDSDatabaseRecommendations</a>, and <a>GetRDSDatabaseRecommendationProjectedMetrics</a> request.</p>
     #   @return [Types::RecommendationPreferences]
     class ExportRDSDatabaseRecommendationsRequest < Struct.new(
+      nil,
       :account_ids,
       :filters,
       :fields_to_export,
@@ -2195,6 +2248,7 @@ module Aws::ComputeOptimizer
     #               object keys of a recommendations export file, and its associated metadata file.</p>
     #   @return [Types::S3Destination]
     class ExportRDSDatabaseRecommendationsResponse < Struct.new(
+      nil,
       :job_id,
       :s3_destination,
       keyword_init: true
@@ -2216,6 +2270,7 @@ module Aws::ComputeOptimizer
     #           </p>
     #   @return [String]
     class ExternalMetricStatus < Struct.new(
+      nil,
       :status_code,
       :status_reason,
       keyword_init: true
@@ -2229,6 +2284,7 @@ module Aws::ComputeOptimizer
     #   <p> Contains the source options for external metrics preferences. </p>
     #   @return [String]
     class ExternalMetricsPreference < Struct.new(
+      nil,
       :source,
       keyword_init: true
     )
@@ -2431,6 +2487,7 @@ module Aws::ComputeOptimizer
     #            </ul>
     #   @return [Array<String>]
     class Filter < Struct.new(
+      nil,
       :name,
       :values,
       keyword_init: true
@@ -2468,6 +2525,7 @@ module Aws::ComputeOptimizer
     #               to return in the response.</p>
     #   @return [Types::RecommendationPreferences]
     class GetAutoScalingGroupRecommendationsRequest < Struct.new(
+      nil,
       :account_ids,
       :auto_scaling_group_arns,
       :next_token,
@@ -2494,6 +2552,7 @@ module Aws::ComputeOptimizer
     #                   Auto Scaling group.</p>
     #   @return [Array<Types::GetRecommendationError>]
     class GetAutoScalingGroupRecommendationsResponse < Struct.new(
+      nil,
       :next_token,
       :auto_scaling_group_recommendations,
       :errors,
@@ -2526,6 +2585,7 @@ module Aws::ComputeOptimizer
     #            <p>Only one account ID can be specified per request.</p>
     #   @return [Array<String>]
     class GetEBSVolumeRecommendationsRequest < Struct.new(
+      nil,
       :volume_arns,
       :next_token,
       :max_results,
@@ -2550,6 +2610,7 @@ module Aws::ComputeOptimizer
     #               volume.</p>
     #   @return [Array<Types::GetRecommendationError>]
     class GetEBSVolumeRecommendationsResponse < Struct.new(
+      nil,
       :next_token,
       :volume_recommendations,
       :errors,
@@ -2586,6 +2647,7 @@ module Aws::ComputeOptimizer
     #               recommendations to return in the response.</p>
     #   @return [Types::RecommendationPreferences]
     class GetEC2InstanceRecommendationsRequest < Struct.new(
+      nil,
       :instance_arns,
       :next_token,
       :max_results,
@@ -2611,6 +2673,7 @@ module Aws::ComputeOptimizer
     #               unsupported instance family.</p>
     #   @return [Array<Types::GetRecommendationError>]
     class GetEC2InstanceRecommendationsResponse < Struct.new(
+      nil,
       :next_token,
       :instance_recommendations,
       :errors,
@@ -2640,6 +2703,7 @@ module Aws::ComputeOptimizer
     #               projected metrics to return in the response.</p>
     #   @return [Types::RecommendationPreferences]
     class GetEC2RecommendationProjectedMetricsRequest < Struct.new(
+      nil,
       :instance_arn,
       :stat,
       :period,
@@ -2655,6 +2719,7 @@ module Aws::ComputeOptimizer
     #   <p>An array of objects that describes projected metrics.</p>
     #   @return [Array<Types::RecommendedOptionProjectedMetric>]
     class GetEC2RecommendationProjectedMetricsResponse < Struct.new(
+      nil,
       :recommended_option_projected_metrics,
       keyword_init: true
     )
@@ -2693,6 +2758,7 @@ module Aws::ComputeOptimizer
     #           </p>
     #   @return [Time]
     class GetECSServiceRecommendationProjectedMetricsRequest < Struct.new(
+      nil,
       :service_arn,
       :stat,
       :period,
@@ -2709,6 +2775,7 @@ module Aws::ComputeOptimizer
     #           </p>
     #   @return [Array<Types::ECSServiceRecommendedOptionProjectedMetric>]
     class GetECSServiceRecommendationProjectedMetricsResponse < Struct.new(
+      nil,
       :recommended_option_projected_metrics,
       keyword_init: true
     )
@@ -2753,6 +2820,7 @@ module Aws::ComputeOptimizer
     #            <p>You can only specify one account ID per request.</p>
     #   @return [Array<String>]
     class GetECSServiceRecommendationsRequest < Struct.new(
+      nil,
       :service_arns,
       :next_token,
       :max_results,
@@ -2779,6 +2847,7 @@ module Aws::ComputeOptimizer
     #           </p>
     #   @return [Array<Types::GetRecommendationError>]
     class GetECSServiceRecommendationsResponse < Struct.new(
+      nil,
       :next_token,
       :ecs_service_recommendations,
       :errors,
@@ -2793,6 +2862,7 @@ module Aws::ComputeOptimizer
     #               currently supported.</p>
     #   @return [String]
     class GetEffectiveRecommendationPreferencesRequest < Struct.new(
+      nil,
       :resource_arn,
       keyword_init: true
     )
@@ -2857,6 +2927,7 @@ module Aws::ComputeOptimizer
     #               or GetEC2InstanceRecommendations actions.</p>
     #   @return [Array<Types::EffectivePreferredResource>]
     class GetEffectiveRecommendationPreferencesResponse < Struct.new(
+      nil,
       :enhanced_infrastructure_metrics,
       :external_metrics_preference,
       :look_back_period,
@@ -2868,6 +2939,7 @@ module Aws::ComputeOptimizer
     end
 
     class GetEnrollmentStatusRequest < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -2894,6 +2966,7 @@ module Aws::ComputeOptimizer
     #               account is an organization management account.</p>
     #   @return [Integer]
     class GetEnrollmentStatusResponse < Struct.new(
+      nil,
       :status,
       :status_reason,
       :member_accounts_enrolled,
@@ -2923,6 +2996,7 @@ module Aws::ComputeOptimizer
     #                   <code>nextToken</code> value.</p>
     #   @return [Integer]
     class GetEnrollmentStatusesForOrganizationRequest < Struct.new(
+      nil,
       :filters,
       :next_token,
       :max_results,
@@ -2941,6 +3015,7 @@ module Aws::ComputeOptimizer
     #               return.</p>
     #   @return [String]
     class GetEnrollmentStatusesForOrganizationResponse < Struct.new(
+      nil,
       :account_enrollment_statuses,
       :next_token,
       keyword_init: true
@@ -2973,6 +3048,7 @@ module Aws::ComputeOptimizer
     #   <p>The order to sort the idle resource recommendations.</p>
     #   @return [Types::OrderBy]
     class GetIdleRecommendationsRequest < Struct.new(
+      nil,
       :resource_arns,
       :next_token,
       :max_results,
@@ -2994,6 +3070,7 @@ module Aws::ComputeOptimizer
     #   <p>An array of objects that describe errors of the request.</p>
     #   @return [Array<Types::IdleRecommendationError>]
     class GetIdleRecommendationsResponse < Struct.new(
+      nil,
       :next_token,
       :idle_recommendations,
       :errors,
@@ -3033,6 +3110,7 @@ module Aws::ComputeOptimizer
     #                   <code>nextToken</code> value.</p>
     #   @return [Integer]
     class GetLambdaFunctionRecommendationsRequest < Struct.new(
+      nil,
       :function_arns,
       :account_ids,
       :filters,
@@ -3052,6 +3130,7 @@ module Aws::ComputeOptimizer
     #   <p>An array of objects that describe function recommendations.</p>
     #   @return [Array<Types::LambdaFunctionRecommendation>]
     class GetLambdaFunctionRecommendationsResponse < Struct.new(
+      nil,
       :next_token,
       :lambda_function_recommendations,
       keyword_init: true
@@ -3096,6 +3175,7 @@ module Aws::ComputeOptimizer
     #            <p>Only one account ID can be specified per request.</p>
     #   @return [Array<String>]
     class GetLicenseRecommendationsRequest < Struct.new(
+      nil,
       :resource_arns,
       :next_token,
       :max_results,
@@ -3122,6 +3202,7 @@ module Aws::ComputeOptimizer
     #           </p>
     #   @return [Array<Types::GetRecommendationError>]
     class GetLicenseRecommendationsResponse < Struct.new(
+      nil,
       :next_token,
       :license_recommendations,
       :errors,
@@ -3165,6 +3246,7 @@ module Aws::ComputeOptimizer
     #   <p>Describes the recommendation preferences to return in the response of a <a>GetAutoScalingGroupRecommendations</a>, <a>GetEC2InstanceRecommendations</a>, <a>GetEC2RecommendationProjectedMetrics</a>, <a>GetRDSDatabaseRecommendations</a>, and <a>GetRDSDatabaseRecommendationProjectedMetrics</a> request.</p>
     #   @return [Types::RecommendationPreferences]
     class GetRDSDatabaseRecommendationProjectedMetricsRequest < Struct.new(
+      nil,
       :resource_arn,
       :stat,
       :period,
@@ -3182,6 +3264,7 @@ module Aws::ComputeOptimizer
     #           </p>
     #   @return [Array<Types::RDSDatabaseRecommendedOptionProjectedMetric>]
     class GetRDSDatabaseRecommendationProjectedMetricsResponse < Struct.new(
+      nil,
       :recommended_option_projected_metrics,
       keyword_init: true
     )
@@ -3232,6 +3315,7 @@ module Aws::ComputeOptimizer
     #   <p>Describes the recommendation preferences to return in the response of a <a>GetAutoScalingGroupRecommendations</a>, <a>GetEC2InstanceRecommendations</a>, <a>GetEC2RecommendationProjectedMetrics</a>, <a>GetRDSDatabaseRecommendations</a>, and <a>GetRDSDatabaseRecommendationProjectedMetrics</a> request.</p>
     #   @return [Types::RecommendationPreferences]
     class GetRDSDatabaseRecommendationsRequest < Struct.new(
+      nil,
       :resource_arns,
       :next_token,
       :max_results,
@@ -3259,6 +3343,7 @@ module Aws::ComputeOptimizer
     #           </p>
     #   @return [Array<Types::GetRecommendationError>]
     class GetRDSDatabaseRecommendationsResponse < Struct.new(
+      nil,
       :next_token,
       :rds_db_recommendations,
       :errors,
@@ -3281,6 +3366,7 @@ module Aws::ComputeOptimizer
     #   <p>The message, or reason, for the error.</p>
     #   @return [String]
     class GetRecommendationError < Struct.new(
+      nil,
       :identifier,
       :code,
       :message,
@@ -3314,6 +3400,7 @@ module Aws::ComputeOptimizer
     #                   <code>nextToken</code> value.</p>
     #   @return [Integer]
     class GetRecommendationPreferencesRequest < Struct.new(
+      nil,
       :resource_type,
       :scope,
       :next_token,
@@ -3332,6 +3419,7 @@ module Aws::ComputeOptimizer
     #   <p>An array of objects that describe recommendation preferences.</p>
     #   @return [Array<Types::RecommendationPreferencesDetail>]
     class GetRecommendationPreferencesResponse < Struct.new(
+      nil,
       :next_token,
       :recommendation_preferences_details,
       keyword_init: true
@@ -3355,6 +3443,7 @@ module Aws::ComputeOptimizer
     #                   <code>nextToken</code> value.</p>
     #   @return [Integer]
     class GetRecommendationSummariesRequest < Struct.new(
+      nil,
       :account_ids,
       :next_token,
       :max_results,
@@ -3372,6 +3461,7 @@ module Aws::ComputeOptimizer
     #   <p>An array of objects that summarize a recommendation.</p>
     #   @return [Array<Types::RecommendationSummary>]
     class GetRecommendationSummariesResponse < Struct.new(
+      nil,
       :next_token,
       :recommendation_summaries,
       keyword_init: true
@@ -3393,6 +3483,7 @@ module Aws::ComputeOptimizer
     #           </p>
     #   @return [Integer]
     class Gpu < Struct.new(
+      nil,
       :gpu_count,
       :gpu_memory_size_in_mi_b,
       keyword_init: true
@@ -3415,6 +3506,7 @@ module Aws::ComputeOptimizer
     #           </p>
     #   @return [Array<Types::Gpu>]
     class GpuInfo < Struct.new(
+      nil,
       :gpus,
       keyword_init: true
     )
@@ -3429,6 +3521,7 @@ module Aws::ComputeOptimizer
     #   <p>The value of the estimated monthly savings for Idle resources.</p>
     #   @return [Float]
     class IdleEstimatedMonthlySavings < Struct.new(
+      nil,
       :currency,
       :value,
       keyword_init: true
@@ -3479,6 +3572,7 @@ module Aws::ComputeOptimizer
     #   <p>A list of tags assigned to your idle resource recommendations.</p>
     #   @return [Array<Types::Tag>]
     class IdleRecommendation < Struct.new(
+      nil,
       :resource_arn,
       :resource_id,
       :resource_type,
@@ -3515,6 +3609,7 @@ module Aws::ComputeOptimizer
     #   <p>The type of resource associated with the error.</p>
     #   @return [String]
     class IdleRecommendationError < Struct.new(
+      nil,
       :identifier,
       :code,
       :message,
@@ -3549,6 +3644,7 @@ module Aws::ComputeOptimizer
     #   <p>The value of the filter.</p>
     #   @return [Array<String>]
     class IdleRecommendationFilter < Struct.new(
+      nil,
       :name,
       :values,
       keyword_init: true
@@ -3564,6 +3660,7 @@ module Aws::ComputeOptimizer
     #   <p>The estimated monthly savings possible by adopting Compute Optimizer's idle resource recommendations.</p>
     #   @return [Types::IdleEstimatedMonthlySavings]
     class IdleSavingsOpportunity < Struct.new(
+      nil,
       :savings_opportunity_percentage,
       :estimated_monthly_savings,
       keyword_init: true
@@ -3585,6 +3682,7 @@ module Aws::ComputeOptimizer
     #   <p>The estimated monthly savings possible by adopting Compute Optimizer's idle resource recommendations. This includes any applicable discounts.</p>
     #   @return [Types::IdleEstimatedMonthlySavings]
     class IdleSavingsOpportunityAfterDiscounts < Struct.new(
+      nil,
       :savings_opportunity_percentage,
       :estimated_monthly_savings,
       keyword_init: true
@@ -3605,6 +3703,7 @@ module Aws::ComputeOptimizer
     #   <p>The count of idle resources in the finding group.</p>
     #   @return [Float]
     class IdleSummary < Struct.new(
+      nil,
       :name,
       :value,
       keyword_init: true
@@ -3641,6 +3740,7 @@ module Aws::ComputeOptimizer
     #   <p>The value of the utilization metric.</p>
     #   @return [Float]
     class IdleUtilizationMetric < Struct.new(
+      nil,
       :name,
       :statistic,
       :value,
@@ -3717,6 +3817,7 @@ module Aws::ComputeOptimizer
     #               resource. This is based on the On-Demand instance pricing.</p>
     #   @return [Types::EstimatedMonthlySavings]
     class InferredWorkloadSaving < Struct.new(
+      nil,
       :inferred_workload_types,
       :estimated_monthly_savings,
       keyword_init: true
@@ -3739,6 +3840,7 @@ module Aws::ComputeOptimizer
     #           </p>
     #   @return [Float]
     class InstanceEstimatedMonthlySavings < Struct.new(
+      nil,
       :currency,
       :value,
       keyword_init: true
@@ -4104,6 +4206,7 @@ module Aws::ComputeOptimizer
     #           </p>
     #   @return [String]
     class InstanceRecommendation < Struct.new(
+      nil,
       :instance_arn,
       :account_id,
       :instance_name,
@@ -4293,6 +4396,7 @@ module Aws::ComputeOptimizer
     #               same CPU architecture.</p>
     #   @return [String]
     class InstanceRecommendationOption < Struct.new(
+      nil,
       :instance_type,
       :instance_gpu_info,
       :projected_utilization_metrics,
@@ -4322,6 +4426,7 @@ module Aws::ComputeOptimizer
     #           </p>
     #   @return [String]
     class InstanceSavingsEstimationMode < Struct.new(
+      nil,
       :source,
       keyword_init: true
     )
@@ -4346,6 +4451,7 @@ module Aws::ComputeOptimizer
     #           </p>
     #   @return [Types::InstanceEstimatedMonthlySavings]
     class InstanceSavingsOpportunityAfterDiscounts < Struct.new(
+      nil,
       :savings_opportunity_percentage,
       :estimated_monthly_savings,
       keyword_init: true
@@ -4362,6 +4468,7 @@ module Aws::ComputeOptimizer
     # @!attribute message
     #   @return [String]
     class InternalServerException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -4372,6 +4479,7 @@ module Aws::ComputeOptimizer
     # @!attribute message
     #   @return [String]
     class InvalidParameterValueException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -4410,6 +4518,7 @@ module Aws::ComputeOptimizer
     #            </ul>
     #   @return [Array<String>]
     class JobFilter < Struct.new(
+      nil,
       :name,
       :values,
       keyword_init: true
@@ -4426,6 +4535,7 @@ module Aws::ComputeOptimizer
     #           </p>
     #   @return [Types::LambdaSavingsEstimationMode]
     class LambdaEffectiveRecommendationPreferences < Struct.new(
+      nil,
       :savings_estimation_mode,
       keyword_init: true
     )
@@ -4447,6 +4557,7 @@ module Aws::ComputeOptimizer
     #           </p>
     #   @return [Float]
     class LambdaEstimatedMonthlySavings < Struct.new(
+      nil,
       :currency,
       :value,
       keyword_init: true
@@ -4471,6 +4582,7 @@ module Aws::ComputeOptimizer
     #   <p>The values of the projected utilization metrics.</p>
     #   @return [Float]
     class LambdaFunctionMemoryProjectedMetric < Struct.new(
+      nil,
       :name,
       :statistic,
       :value,
@@ -4508,6 +4620,7 @@ module Aws::ComputeOptimizer
     #           </p>
     #   @return [Types::LambdaSavingsOpportunityAfterDiscounts]
     class LambdaFunctionMemoryRecommendationOption < Struct.new(
+      nil,
       :rank,
       :memory_size,
       :projected_utilization_metrics,
@@ -4666,6 +4779,7 @@ module Aws::ComputeOptimizer
     #           </p>
     #   @return [Array<Types::Tag>]
     class LambdaFunctionRecommendation < Struct.new(
+      nil,
       :function_arn,
       :function_version,
       :account_id,
@@ -4735,6 +4849,7 @@ module Aws::ComputeOptimizer
     #            </ul>
     #   @return [Array<String>]
     class LambdaFunctionRecommendationFilter < Struct.new(
+      nil,
       :name,
       :values,
       keyword_init: true
@@ -4776,6 +4891,7 @@ module Aws::ComputeOptimizer
     #   <p>The value of the utilization metric.</p>
     #   @return [Float]
     class LambdaFunctionUtilizationMetric < Struct.new(
+      nil,
       :name,
       :statistic,
       :value,
@@ -4798,6 +4914,7 @@ module Aws::ComputeOptimizer
     #           </p>
     #   @return [String]
     class LambdaSavingsEstimationMode < Struct.new(
+      nil,
       :source,
       keyword_init: true
     )
@@ -4822,6 +4939,7 @@ module Aws::ComputeOptimizer
     #           </p>
     #   @return [Types::LambdaEstimatedMonthlySavings]
     class LambdaSavingsOpportunityAfterDiscounts < Struct.new(
+      nil,
       :savings_opportunity_percentage,
       :estimated_monthly_savings,
       keyword_init: true
@@ -4878,6 +4996,7 @@ module Aws::ComputeOptimizer
     #           </p>
     #   @return [Array<Types::MetricSource>]
     class LicenseConfiguration < Struct.new(
+      nil,
       :number_of_cores,
       :instance_type,
       :operating_system,
@@ -4987,6 +5106,7 @@ module Aws::ComputeOptimizer
     #           </p>
     #   @return [Array<Types::Tag>]
     class LicenseRecommendation < Struct.new(
+      nil,
       :resource_arn,
       :account_id,
       :current_license_configuration,
@@ -5048,6 +5168,7 @@ module Aws::ComputeOptimizer
     #            </ul>
     #   @return [Array<String>]
     class LicenseRecommendationFilter < Struct.new(
+      nil,
       :name,
       :values,
       keyword_init: true
@@ -5100,6 +5221,7 @@ module Aws::ComputeOptimizer
     #            </important>
     #   @return [Types::SavingsOpportunity]
     class LicenseRecommendationOption < Struct.new(
+      nil,
       :rank,
       :operating_system,
       :license_edition,
@@ -5119,6 +5241,7 @@ module Aws::ComputeOptimizer
     # @!attribute message
     #   @return [String]
     class LimitExceededException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -5139,6 +5262,7 @@ module Aws::ComputeOptimizer
     #           </p>
     #   @return [Integer]
     class MemorySizeConfiguration < Struct.new(
+      nil,
       :memory,
       :memory_reservation,
       keyword_init: true
@@ -5160,6 +5284,7 @@ module Aws::ComputeOptimizer
     #           </p>
     #   @return [String]
     class MetricSource < Struct.new(
+      nil,
       :provider,
       :provider_arn,
       keyword_init: true
@@ -5172,6 +5297,7 @@ module Aws::ComputeOptimizer
     # @!attribute message
     #   @return [String]
     class MissingAuthenticationToken < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -5182,6 +5308,7 @@ module Aws::ComputeOptimizer
     # @!attribute message
     #   @return [String]
     class OptInRequiredException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -5196,6 +5323,7 @@ module Aws::ComputeOptimizer
     #   <p>The order to sort the recommendations.</p>
     #   @return [String]
     class OrderBy < Struct.new(
+      nil,
       :dimension,
       :order,
       keyword_init: true
@@ -5243,6 +5371,7 @@ module Aws::ComputeOptimizer
     #           </p>
     #   @return [Array<String>]
     class PreferredResource < Struct.new(
+      nil,
       :name,
       :include_list,
       :exclude_list,
@@ -5318,6 +5447,7 @@ module Aws::ComputeOptimizer
     #   <p>The values of the projected utilization metrics.</p>
     #   @return [Array<Float>]
     class ProjectedMetric < Struct.new(
+      nil,
       :name,
       :timestamps,
       :values,
@@ -5455,6 +5585,7 @@ module Aws::ComputeOptimizer
     #               Savings estimation mode</a> in the <i>Compute Optimizer User Guide</i>.</p>
     #   @return [String]
     class PutRecommendationPreferencesRequest < Struct.new(
+      nil,
       :resource_type,
       :scope,
       :enhanced_infrastructure_metrics,
@@ -5470,6 +5601,7 @@ module Aws::ComputeOptimizer
     end
 
     class PutRecommendationPreferencesResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -5524,6 +5656,7 @@ module Aws::ComputeOptimizer
     #               You can achieve this by implementing a given Compute Optimizer recommendation.</p>
     #   @return [Types::RDSInstanceSavingsOpportunityAfterDiscounts]
     class RDSDBInstanceRecommendationOption < Struct.new(
+      nil,
       :db_instance_class,
       :projected_utilization_metrics,
       :performance_risk,
@@ -5661,6 +5794,7 @@ module Aws::ComputeOptimizer
     #           </p>
     #   @return [Array<Types::Tag>]
     class RDSDBRecommendation < Struct.new(
+      nil,
       :resource_arn,
       :account_id,
       :engine,
@@ -5723,6 +5857,7 @@ module Aws::ComputeOptimizer
     #           </p>
     #   @return [Array<String>]
     class RDSDBRecommendationFilter < Struct.new(
+      nil,
       :name,
       :values,
       keyword_init: true
@@ -5776,6 +5911,7 @@ module Aws::ComputeOptimizer
     #           </p>
     #   @return [String]
     class RDSDBStorageRecommendationOption < Struct.new(
+      nil,
       :storage_configuration,
       :rank,
       :savings_opportunity,
@@ -5825,6 +5961,7 @@ module Aws::ComputeOptimizer
     #           </p>
     #   @return [Float]
     class RDSDBUtilizationMetric < Struct.new(
+      nil,
       :name,
       :statistic,
       :value,
@@ -5862,6 +5999,7 @@ module Aws::ComputeOptimizer
     #           </p>
     #   @return [Array<Float>]
     class RDSDatabaseProjectedMetric < Struct.new(
+      nil,
       :name,
       :timestamps,
       :values,
@@ -5893,6 +6031,7 @@ module Aws::ComputeOptimizer
     #           </p>
     #   @return [Array<Types::RDSDatabaseProjectedMetric>]
     class RDSDatabaseRecommendedOptionProjectedMetric < Struct.new(
+      nil,
       :recommended_db_instance_class,
       :rank,
       :projected_metrics,
@@ -5938,6 +6077,7 @@ module Aws::ComputeOptimizer
     #           </p>
     #   @return [Types::RDSSavingsEstimationMode]
     class RDSEffectiveRecommendationPreferences < Struct.new(
+      nil,
       :cpu_vendor_architectures,
       :enhanced_infrastructure_metrics,
       :look_back_period,
@@ -5963,6 +6103,7 @@ module Aws::ComputeOptimizer
     #           </p>
     #   @return [Float]
     class RDSInstanceEstimatedMonthlySavings < Struct.new(
+      nil,
       :currency,
       :value,
       keyword_init: true
@@ -5995,6 +6136,7 @@ module Aws::ComputeOptimizer
     #           </p>
     #   @return [Types::RDSInstanceEstimatedMonthlySavings]
     class RDSInstanceSavingsOpportunityAfterDiscounts < Struct.new(
+      nil,
       :savings_opportunity_percentage,
       :estimated_monthly_savings,
       keyword_init: true
@@ -6016,6 +6158,7 @@ module Aws::ComputeOptimizer
     #           </p>
     #   @return [String]
     class RDSSavingsEstimationMode < Struct.new(
+      nil,
       :source,
       keyword_init: true
     )
@@ -6037,6 +6180,7 @@ module Aws::ComputeOptimizer
     #           </p>
     #   @return [Float]
     class RDSStorageEstimatedMonthlySavings < Struct.new(
+      nil,
       :currency,
       :value,
       keyword_init: true
@@ -6068,6 +6212,7 @@ module Aws::ComputeOptimizer
     #           </p>
     #   @return [Types::RDSStorageEstimatedMonthlySavings]
     class RDSStorageSavingsOpportunityAfterDiscounts < Struct.new(
+      nil,
       :savings_opportunity_percentage,
       :estimated_monthly_savings,
       keyword_init: true
@@ -6088,6 +6233,7 @@ module Aws::ComputeOptimizer
     #   <p>The value of the finding reason code summary.</p>
     #   @return [Float]
     class ReasonCodeSummary < Struct.new(
+      nil,
       :name,
       :value,
       keyword_init: true
@@ -6127,6 +6273,7 @@ module Aws::ComputeOptimizer
     #   <p>The reason for an export job failure.</p>
     #   @return [String]
     class RecommendationExportJob < Struct.new(
+      nil,
       :job_id,
       :destination,
       :resource_type,
@@ -6159,6 +6306,7 @@ module Aws::ComputeOptimizer
     #            </ul>
     #   @return [Array<String>]
     class RecommendationPreferences < Struct.new(
+      nil,
       :cpu_vendor_architectures,
       keyword_init: true
     )
@@ -6232,6 +6380,7 @@ module Aws::ComputeOptimizer
     #            <p>Only the account manager or delegated administrator of your organization can activate this preference.</p>
     #   @return [String]
     class RecommendationPreferencesDetail < Struct.new(
+      nil,
       :scope,
       :resource_type,
       :enhanced_infrastructure_metrics,
@@ -6255,6 +6404,7 @@ module Aws::ComputeOptimizer
     #   <p>The resource type of the recommendation source.</p>
     #   @return [String]
     class RecommendationSource < Struct.new(
+      nil,
       :recommendation_source_arn,
       :recommendation_source_type,
       keyword_init: true
@@ -6329,6 +6479,7 @@ module Aws::ComputeOptimizer
     #           </p>
     #   @return [Array<Types::InferredWorkloadSaving>]
     class RecommendationSummary < Struct.new(
+      nil,
       :summaries,
       :idle_summaries,
       :recommendation_resource_type,
@@ -6364,6 +6515,7 @@ module Aws::ComputeOptimizer
     #   <p>An array of objects that describe a projected utilization metric.</p>
     #   @return [Array<Types::ProjectedMetric>]
     class RecommendedOptionProjectedMetric < Struct.new(
+      nil,
       :recommended_instance_type,
       :rank,
       :projected_metrics,
@@ -6381,6 +6533,7 @@ module Aws::ComputeOptimizer
     # @!attribute message
     #   @return [String]
     class ResourceNotFoundException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -6402,6 +6555,7 @@ module Aws::ComputeOptimizer
     #            <p>The key uniquely identifies the object, or metadata file, in the S3 bucket.</p>
     #   @return [String]
     class S3Destination < Struct.new(
+      nil,
       :bucket,
       :key,
       :metadata_key,
@@ -6427,6 +6581,7 @@ module Aws::ComputeOptimizer
     #   <p>The Amazon S3 bucket prefix for an export job.</p>
     #   @return [String]
     class S3DestinationConfig < Struct.new(
+      nil,
       :bucket,
       :key_prefix,
       keyword_init: true
@@ -6459,6 +6614,7 @@ module Aws::ComputeOptimizer
     #               resource. This is based on the On-Demand instance pricing..</p>
     #   @return [Types::EstimatedMonthlySavings]
     class SavingsOpportunity < Struct.new(
+      nil,
       :savings_opportunity_percentage,
       :estimated_monthly_savings,
       keyword_init: true
@@ -6532,6 +6688,7 @@ module Aws::ComputeOptimizer
     #            <p>Only EC2 instance and Auto Scaling group ARNs are currently supported.</p>
     #   @return [String]
     class Scope < Struct.new(
+      nil,
       :name,
       :value,
       keyword_init: true
@@ -6589,6 +6746,7 @@ module Aws::ComputeOptimizer
     #           </p>
     #   @return [String]
     class ServiceConfiguration < Struct.new(
+      nil,
       :memory,
       :cpu,
       :container_configurations,
@@ -6603,6 +6761,7 @@ module Aws::ComputeOptimizer
     # @!attribute message
     #   @return [String]
     class ServiceUnavailableException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -6620,6 +6779,7 @@ module Aws::ComputeOptimizer
     #   <p>An array of objects that summarize a finding reason code.</p>
     #   @return [Array<Types::ReasonCodeSummary>]
     class Summary < Struct.new(
+      nil,
       :name,
       :value,
       :reason_code_summaries,
@@ -6649,6 +6809,7 @@ module Aws::ComputeOptimizer
     #           </p>
     #   @return [String]
     class Tag < Struct.new(
+      nil,
       :key,
       :value,
       keyword_init: true
@@ -6660,6 +6821,7 @@ module Aws::ComputeOptimizer
     # @!attribute message
     #   @return [String]
     class ThrottlingException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -6695,6 +6857,7 @@ module Aws::ComputeOptimizer
     #               management account of an organization.</p>
     #   @return [Boolean]
     class UpdateEnrollmentStatusRequest < Struct.new(
+      nil,
       :status,
       :include_member_accounts,
       keyword_init: true
@@ -6711,6 +6874,7 @@ module Aws::ComputeOptimizer
     #               more time to be enrolled in the service.</p>
     #   @return [String]
     class UpdateEnrollmentStatusResponse < Struct.new(
+      nil,
       :status,
       :status_reason,
       keyword_init: true
@@ -6868,6 +7032,7 @@ module Aws::ComputeOptimizer
     #   <p>The value of the utilization metric.</p>
     #   @return [Float]
     class UtilizationMetric < Struct.new(
+      nil,
       :name,
       :statistic,
       :value,
@@ -6898,6 +7063,7 @@ module Aws::ComputeOptimizer
     #           </p>
     #   @return [Types::CustomizableMetricParameters]
     class UtilizationPreference < Struct.new(
+      nil,
       :metric_name,
       :metric_parameters,
       keyword_init: true
@@ -6954,6 +7120,7 @@ module Aws::ComputeOptimizer
     #           </p>
     #   @return [Boolean]
     class VolumeConfiguration < Struct.new(
+      nil,
       :volume_type,
       :volume_size,
       :volume_baseline_iops,
@@ -7037,6 +7204,7 @@ module Aws::ComputeOptimizer
     #           </p>
     #   @return [Array<Types::Tag>]
     class VolumeRecommendation < Struct.new(
+      nil,
       :volume_arn,
       :account_id,
       :current_configuration,
@@ -7089,6 +7257,7 @@ module Aws::ComputeOptimizer
     #           </p>
     #   @return [Types::EBSSavingsOpportunityAfterDiscounts]
     class VolumeRecommendationOption < Struct.new(
+      nil,
       :configuration,
       :performance_risk,
       :rank,

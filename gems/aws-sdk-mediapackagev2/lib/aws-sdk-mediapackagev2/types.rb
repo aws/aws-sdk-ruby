@@ -10,6 +10,7 @@ module Aws::MediaPackageV2
     # @!attribute message
     #   @return [String]
     class AccessDeniedException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -32,6 +33,7 @@ module Aws::MediaPackageV2
     #   <p>The current Entity Tag (ETag) associated with the harvest job. Used for concurrency control.</p>
     #   @return [String]
     class CancelHarvestJobRequest < Struct.new(
+      nil,
       :channel_group_name,
       :channel_name,
       :origin_endpoint_name,
@@ -43,6 +45,7 @@ module Aws::MediaPackageV2
     end
 
     class CancelHarvestJobResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -56,6 +59,7 @@ module Aws::MediaPackageV2
     #   <p>The ARN for the IAM role that gives MediaPackage read access to Secrets Manager and KMS for CDN authorization.</p>
     #   @return [String]
     class CdnAuthConfiguration < Struct.new(
+      nil,
       :cdn_identifier_secret_arns,
       :secrets_role_arn,
       keyword_init: true
@@ -80,6 +84,7 @@ module Aws::MediaPackageV2
     #   <p>Any descriptive information that you want to add to the channel group for future identification purposes.</p>
     #   @return [String]
     class ChannelGroupListConfiguration < Struct.new(
+      nil,
       :channel_group_name,
       :arn,
       :created_at,
@@ -113,6 +118,7 @@ module Aws::MediaPackageV2
     #   <p>The input type will be an immutable field which will be used to define whether the channel will allow CMAF ingest or HLS ingest. If unprovided, it will default to HLS to preserve current behavior.</p> <p>The allowed values are:</p> <ul> <li> <p> <code>HLS</code> - The HLS streaming specification (which defines M3U8 manifests and TS segments).</p> </li> <li> <p> <code>CMAF</code> - The DASH-IF CMAF Ingest specification (which defines CMAF segments with optional DASH manifests).</p> </li> </ul>
     #   @return [String]
     class ChannelListConfiguration < Struct.new(
+      nil,
       :arn,
       :channel_name,
       :channel_group_name,
@@ -132,6 +138,7 @@ module Aws::MediaPackageV2
     #   <p>The type of ConflictException.</p>
     #   @return [String]
     class ConflictException < Struct.new(
+      nil,
       :message,
       :conflict_exception_type,
       keyword_init: true
@@ -152,6 +159,7 @@ module Aws::MediaPackageV2
     #   <p>A comma-separated list of tag key:value pairs that you define. For example:</p> <p> <code>"Key1": "Value1",</code> </p> <p> <code>"Key2": "Value2"</code> </p>
     #   @return [Hash<String, String>]
     class CreateChannelGroupRequest < Struct.new(
+      nil,
       :channel_group_name,
       :client_token,
       :description,
@@ -186,6 +194,7 @@ module Aws::MediaPackageV2
     #   <p>The comma-separated list of tag key:value pairs assigned to the channel group.</p>
     #   @return [Hash<String, String>]
     class CreateChannelGroupResponse < Struct.new(
+      nil,
       :channel_group_name,
       :arn,
       :egress_domain,
@@ -224,6 +233,7 @@ module Aws::MediaPackageV2
     #   <p>A comma-separated list of tag key:value pairs that you define. For example:</p> <p> <code>"Key1": "Value1",</code> </p> <p> <code>"Key2": "Value2"</code> </p>
     #   @return [Hash<String, String>]
     class CreateChannelRequest < Struct.new(
+      nil,
       :channel_group_name,
       :channel_name,
       :client_token,
@@ -274,6 +284,7 @@ module Aws::MediaPackageV2
     #   <p>The settings for what common media server data (CMSD) headers AWS Elemental MediaPackage includes in responses to the CDN. This setting is valid only when <code>InputType</code> is <code>CMAF</code>.</p>
     #   @return [Types::OutputHeaderConfiguration]
     class CreateChannelResponse < Struct.new(
+      nil,
       :arn,
       :channel_name,
       :channel_group_name,
@@ -344,6 +355,7 @@ module Aws::MediaPackageV2
     #   <p>The configuration for DASH subtitles.</p>
     #   @return [Types::DashSubtitleConfiguration]
     class CreateDashManifestConfiguration < Struct.new(
+      nil,
       :manifest_name,
       :manifest_window_seconds,
       :filter_configuration,
@@ -398,6 +410,7 @@ module Aws::MediaPackageV2
     #   <p>A collection of tags associated with the harvest job.</p>
     #   @return [Hash<String, String>]
     class CreateHarvestJobRequest < Struct.new(
+      nil,
       :channel_group_name,
       :channel_name,
       :origin_endpoint_name,
@@ -460,6 +473,7 @@ module Aws::MediaPackageV2
     #   <p>A collection of tags associated with the harvest job.</p>
     #   @return [Hash<String, String>]
     class CreateHarvestJobResponse < Struct.new(
+      nil,
       :channel_group_name,
       :channel_name,
       :origin_endpoint_name,
@@ -506,6 +520,7 @@ module Aws::MediaPackageV2
     #   <p>When enabled, MediaPackage URL-encodes the query string for API requests for HLS child manifests to comply with Amazon Web Services Signature Version 4 (SigV4) signature signing protocol. For more information, see <a href="https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_sigv.html">Amazon Web Services Signature Version 4 for API requests</a> in <i>Identity and Access Management User Guide</i>.</p>
     #   @return [Boolean]
     class CreateHlsManifestConfiguration < Struct.new(
+      nil,
       :manifest_name,
       :child_manifest_name,
       :scte_hls,
@@ -545,6 +560,7 @@ module Aws::MediaPackageV2
     #   <p>When enabled, MediaPackage URL-encodes the query string for API requests for LL-HLS child manifests to comply with Amazon Web Services Signature Version 4 (SigV4) signature signing protocol. For more information, see <a href="https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_sigv.html">Amazon Web Services Signature Version 4 for API requests</a> in <i>Identity and Access Management User Guide</i>.</p>
     #   @return [Boolean]
     class CreateLowLatencyHlsManifestConfiguration < Struct.new(
+      nil,
       :manifest_name,
       :child_manifest_name,
       :scte_hls,
@@ -572,6 +588,7 @@ module Aws::MediaPackageV2
     #   <p>Determines the layout format of the MSS manifest. This controls how the manifest is structured and presented to client players, affecting compatibility with different MSS-compatible devices and applications.</p>
     #   @return [String]
     class CreateMssManifestConfiguration < Struct.new(
+      nil,
       :manifest_name,
       :manifest_window_seconds,
       :filter_configuration,
@@ -624,6 +641,7 @@ module Aws::MediaPackageV2
     #   <p>A comma-separated list of tag key:value pairs that you define. For example:</p> <p> <code>"Key1": "Value1",</code> </p> <p> <code>"Key2": "Value2"</code> </p>
     #   @return [Hash<String, String>]
     class CreateOriginEndpointRequest < Struct.new(
+      nil,
       :channel_group_name,
       :channel_name,
       :origin_endpoint_name,
@@ -695,6 +713,7 @@ module Aws::MediaPackageV2
     #   <p>The comma-separated list of tag key:value pairs assigned to the origin endpoint.</p>
     #   @return [Hash<String, String>]
     class CreateOriginEndpointResponse < Struct.new(
+      nil,
       :arn,
       :channel_group_name,
       :channel_name,
@@ -731,6 +750,7 @@ module Aws::MediaPackageV2
     #   <p>For use with DVB-DASH profiles only. The weighting for source locations that have the same priority. </p>
     #   @return [Integer]
     class DashBaseUrl < Struct.new(
+      nil,
       :url,
       :service_location,
       :dvb_priority,
@@ -751,6 +771,7 @@ module Aws::MediaPackageV2
     #   <p>The <code>fontFamily</code> name for subtitles, as described in <a href="https://tech.ebu.ch/publications/tech3380">EBU-TT-D Subtitling Distribution Format</a>. </p>
     #   @return [String]
     class DashDvbFontDownload < Struct.new(
+      nil,
       :url,
       :mime_type,
       :font_family,
@@ -767,6 +788,7 @@ module Aws::MediaPackageV2
     #   <p>The number of playback devices per 1000 that will send error reports to the reporting URL. This represents the probability that a playback device will be a reporting player for this session.</p>
     #   @return [Integer]
     class DashDvbMetricsReporting < Struct.new(
+      nil,
       :reporting_url,
       :probability,
       keyword_init: true
@@ -782,6 +804,7 @@ module Aws::MediaPackageV2
     #   <p>Playback device error reporting settings.</p>
     #   @return [Array<Types::DashDvbMetricsReporting>]
     class DashDvbSettings < Struct.new(
+      nil,
       :font_download,
       :error_metrics,
       keyword_init: true
@@ -806,6 +829,7 @@ module Aws::MediaPackageV2
     #   <p>An absolute URL that contains more information about this content.</p>
     #   @return [String]
     class DashProgramInformation < Struct.new(
+      nil,
       :title,
       :source,
       :copyright,
@@ -821,6 +845,7 @@ module Aws::MediaPackageV2
     #   <p>Settings for TTML subtitles.</p>
     #   @return [Types::DashTtmlConfiguration]
     class DashSubtitleConfiguration < Struct.new(
+      nil,
       :ttml_configuration,
       keyword_init: true
     )
@@ -832,6 +857,7 @@ module Aws::MediaPackageV2
     #   <p>The profile that MediaPackage uses when signaling subtitles in the manifest. <code>IMSC</code> is the default profile. <code>EBU-TT-D</code> produces subtitles that are compliant with the EBU-TT-D TTML profile. MediaPackage passes through subtitle styles to the manifest. For more information about EBU-TT-D subtitles, see <a href="https://tech.ebu.ch/publications/tech3380">EBU-TT-D Subtitling Distribution Format</a>.</p>
     #   @return [String]
     class DashTtmlConfiguration < Struct.new(
+      nil,
       :ttml_profile,
       keyword_init: true
     )
@@ -846,6 +872,7 @@ module Aws::MediaPackageV2
     #   <p>The the method that the player uses to synchronize to coordinated universal time (UTC) wall clock time.</p>
     #   @return [String]
     class DashUtcTiming < Struct.new(
+      nil,
       :timing_mode,
       :timing_source,
       keyword_init: true
@@ -857,6 +884,7 @@ module Aws::MediaPackageV2
     #   <p>The name that describes the channel group. The name is the primary identifier for the channel group, and must be unique for your account in the AWS Region.</p>
     #   @return [String]
     class DeleteChannelGroupRequest < Struct.new(
+      nil,
       :channel_group_name,
       keyword_init: true
     )
@@ -864,6 +892,7 @@ module Aws::MediaPackageV2
     end
 
     class DeleteChannelGroupResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -876,6 +905,7 @@ module Aws::MediaPackageV2
     #   <p>The name that describes the channel. The name is the primary identifier for the channel, and must be unique for your account in the AWS Region and channel group.</p>
     #   @return [String]
     class DeleteChannelPolicyRequest < Struct.new(
+      nil,
       :channel_group_name,
       :channel_name,
       keyword_init: true
@@ -884,6 +914,7 @@ module Aws::MediaPackageV2
     end
 
     class DeleteChannelPolicyResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -896,6 +927,7 @@ module Aws::MediaPackageV2
     #   <p>The name that describes the channel. The name is the primary identifier for the channel, and must be unique for your account in the AWS Region and channel group.</p>
     #   @return [String]
     class DeleteChannelRequest < Struct.new(
+      nil,
       :channel_group_name,
       :channel_name,
       keyword_init: true
@@ -904,6 +936,7 @@ module Aws::MediaPackageV2
     end
 
     class DeleteChannelResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -919,6 +952,7 @@ module Aws::MediaPackageV2
     #   <p>The name that describes the origin endpoint. The name is the primary identifier for the origin endpoint, and and must be unique for your account in the AWS Region and channel. </p>
     #   @return [String]
     class DeleteOriginEndpointPolicyRequest < Struct.new(
+      nil,
       :channel_group_name,
       :channel_name,
       :origin_endpoint_name,
@@ -928,6 +962,7 @@ module Aws::MediaPackageV2
     end
 
     class DeleteOriginEndpointPolicyResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -943,6 +978,7 @@ module Aws::MediaPackageV2
     #   <p>The name that describes the origin endpoint. The name is the primary identifier for the origin endpoint, and and must be unique for your account in the AWS Region and channel. </p>
     #   @return [String]
     class DeleteOriginEndpointRequest < Struct.new(
+      nil,
       :channel_group_name,
       :channel_name,
       :origin_endpoint_name,
@@ -952,6 +988,7 @@ module Aws::MediaPackageV2
     end
 
     class DeleteOriginEndpointResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -962,6 +999,7 @@ module Aws::MediaPackageV2
     #   <p>The configuration for exporting harvested content to an S3 bucket. This includes details such as the bucket name and destination path within the bucket.</p>
     #   @return [Types::S3DestinationConfig]
     class Destination < Struct.new(
+      nil,
       :s3_destination,
       keyword_init: true
     )
@@ -985,6 +1023,7 @@ module Aws::MediaPackageV2
     #   <p>The parameters for the SPEKE key provider.</p>
     #   @return [Types::SpekeKeyProvider]
     class Encryption < Struct.new(
+      nil,
       :constant_initialization_vector,
       :encryption_method,
       :key_rotation_interval_seconds,
@@ -1003,6 +1042,7 @@ module Aws::MediaPackageV2
     #   <p>A collection of video encryption presets.</p> <p>Value description: </p> <ul> <li> <p>PRESET-VIDEO-1 - Use one content key to encrypt all of the video tracks in your stream.</p> </li> <li> <p>PRESET-VIDEO-2 - Use one content key to encrypt all of the SD video tracks and one content key for all HD and higher resolutions video tracks.</p> </li> <li> <p>PRESET-VIDEO-3 - Use one content key to encrypt all of the SD video tracks, one content key for HD video tracks and one content key for all UHD video tracks.</p> </li> <li> <p>PRESET-VIDEO-4 - Use one content key to encrypt all of the SD video tracks, one content key for HD video tracks, one content key for all UHD1 video tracks and one content key for all UHD2 video tracks.</p> </li> <li> <p>PRESET-VIDEO-5 - Use one content key to encrypt all of the SD video tracks, one content key for HD1 video tracks, one content key for HD2 video tracks, one content key for all UHD1 video tracks and one content key for all UHD2 video tracks.</p> </li> <li> <p>PRESET-VIDEO-6 - Use one content key to encrypt all of the SD video tracks, one content key for HD1 video tracks, one content key for HD2 video tracks and one content key for all UHD video tracks.</p> </li> <li> <p>PRESET-VIDEO-7 - Use one content key to encrypt all of the SD+HD1 video tracks, one content key for HD2 video tracks and one content key for all UHD video tracks.</p> </li> <li> <p>PRESET-VIDEO-8 - Use one content key to encrypt all of the SD+HD1 video tracks, one content key for HD2 video tracks, one content key for all UHD1 video tracks and one content key for all UHD2 video tracks.</p> </li> <li> <p>SHARED - Use the same content key for all of the video and audio tracks in your stream.</p> </li> <li> <p>UNENCRYPTED - Don't encrypt any of the video tracks in your stream.</p> </li> </ul>
     #   @return [String]
     class EncryptionContractConfiguration < Struct.new(
+      nil,
       :preset_speke20_audio,
       :preset_speke20_video,
       keyword_init: true
@@ -1021,6 +1061,7 @@ module Aws::MediaPackageV2
     #   <p>The encryption method used for Microsoft Smooth Streaming (MSS) content. This specifies how the MSS segments are encrypted to protect the content during delivery to client players.</p>
     #   @return [String]
     class EncryptionMethod < Struct.new(
+      nil,
       :ts_encryption_method,
       :cmaf_encryption_method,
       :ism_encryption_method,
@@ -1046,6 +1087,7 @@ module Aws::MediaPackageV2
     #   <p>Optionally specify the clip start time for all of your manifest egress requests. When you include clip start time, note that you cannot use clip start time query parameters for this manifest's endpoint URL.</p>
     #   @return [Time]
     class FilterConfiguration < Struct.new(
+      nil,
       :manifest_filter,
       :start,
       :end,
@@ -1061,6 +1103,7 @@ module Aws::MediaPackageV2
     #   <p>The failover conditions for the endpoint. The options are:</p> <ul> <li> <p> <code>STALE_MANIFEST</code> - The manifest stalled and there are no new segments or parts.</p> </li> <li> <p> <code>INCOMPLETE_MANIFEST</code> - There is a gap in the manifest.</p> </li> <li> <p> <code>MISSING_DRM_KEY</code> - Key rotation is enabled but we're unable to fetch the key for the current key period.</p> </li> <li> <p> <code>SLATE_INPUT</code> - The segments which contain slate content are considered to be missing content.</p> </li> </ul>
     #   @return [Array<String>]
     class ForceEndpointErrorConfiguration < Struct.new(
+      nil,
       :endpoint_error_conditions,
       keyword_init: true
     )
@@ -1071,6 +1114,7 @@ module Aws::MediaPackageV2
     #   <p>The name that describes the channel group. The name is the primary identifier for the channel group, and must be unique for your account in the AWS Region.</p>
     #   @return [String]
     class GetChannelGroupRequest < Struct.new(
+      nil,
       :channel_group_name,
       keyword_init: true
     )
@@ -1102,6 +1146,7 @@ module Aws::MediaPackageV2
     #   <p>The comma-separated list of tag key:value pairs assigned to the channel group.</p>
     #   @return [Hash<String, String>]
     class GetChannelGroupResponse < Struct.new(
+      nil,
       :channel_group_name,
       :arn,
       :egress_domain,
@@ -1122,6 +1167,7 @@ module Aws::MediaPackageV2
     #   <p>The name that describes the channel. The name is the primary identifier for the channel, and must be unique for your account in the AWS Region and channel group. </p>
     #   @return [String]
     class GetChannelPolicyRequest < Struct.new(
+      nil,
       :channel_group_name,
       :channel_name,
       keyword_init: true
@@ -1139,6 +1185,7 @@ module Aws::MediaPackageV2
     #   <p>The policy assigned to the channel.</p>
     #   @return [String]
     class GetChannelPolicyResponse < Struct.new(
+      nil,
       :channel_group_name,
       :channel_name,
       :policy,
@@ -1154,6 +1201,7 @@ module Aws::MediaPackageV2
     #   <p>The name that describes the channel. The name is the primary identifier for the channel, and must be unique for your account in the AWS Region and channel group. </p>
     #   @return [String]
     class GetChannelRequest < Struct.new(
+      nil,
       :channel_group_name,
       :channel_name,
       keyword_init: true
@@ -1201,6 +1249,7 @@ module Aws::MediaPackageV2
     #   <p>The settings for what common media server data (CMSD) headers AWS Elemental MediaPackage includes in responses to the CDN. This setting is valid only when <code>InputType</code> is <code>CMAF</code>.</p>
     #   @return [Types::OutputHeaderConfiguration]
     class GetChannelResponse < Struct.new(
+      nil,
       :arn,
       :channel_name,
       :channel_group_name,
@@ -1275,6 +1324,7 @@ module Aws::MediaPackageV2
     #   <p>The configuration for DASH subtitles.</p>
     #   @return [Types::DashSubtitleConfiguration]
     class GetDashManifestConfiguration < Struct.new(
+      nil,
       :manifest_name,
       :url,
       :manifest_window_seconds,
@@ -1312,6 +1362,7 @@ module Aws::MediaPackageV2
     #   <p>The name of the harvest job to retrieve.</p>
     #   @return [String]
     class GetHarvestJobRequest < Struct.new(
+      nil,
       :channel_group_name,
       :channel_name,
       :origin_endpoint_name,
@@ -1368,6 +1419,7 @@ module Aws::MediaPackageV2
     #   <p>A collection of tags associated with the harvest job.</p>
     #   @return [Hash<String, String>]
     class GetHarvestJobResponse < Struct.new(
+      nil,
       :channel_group_name,
       :channel_name,
       :origin_endpoint_name,
@@ -1417,6 +1469,7 @@ module Aws::MediaPackageV2
     #   <p>When enabled, MediaPackage URL-encodes the query string for API requests for HLS child manifests to comply with Amazon Web Services Signature Version 4 (SigV4) signature signing protocol. For more information, see <a href="https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_sigv.html">Amazon Web Services Signature Version 4 for API requests</a> in <i>Identity and Access Management User Guide</i>.</p>
     #   @return [Boolean]
     class GetHlsManifestConfiguration < Struct.new(
+      nil,
       :manifest_name,
       :url,
       :child_manifest_name,
@@ -1460,6 +1513,7 @@ module Aws::MediaPackageV2
     #   <p>When enabled, MediaPackage URL-encodes the query string for API requests for LL-HLS child manifests to comply with Amazon Web Services Signature Version 4 (SigV4) signature signing protocol. For more information, see <a href="https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_sigv.html">Amazon Web Services Signature Version 4 for API requests</a> in <i>Identity and Access Management User Guide</i>.</p>
     #   @return [Boolean]
     class GetLowLatencyHlsManifestConfiguration < Struct.new(
+      nil,
       :manifest_name,
       :url,
       :child_manifest_name,
@@ -1491,6 +1545,7 @@ module Aws::MediaPackageV2
     #   <p>The layout format of the MSS manifest, which determines how the manifest is structured for client compatibility.</p>
     #   @return [String]
     class GetMssManifestConfiguration < Struct.new(
+      nil,
       :manifest_name,
       :url,
       :filter_configuration,
@@ -1511,6 +1566,7 @@ module Aws::MediaPackageV2
     #   <p>The name that describes the origin endpoint. The name is the primary identifier for the origin endpoint, and and must be unique for your account in the AWS Region and channel. </p>
     #   @return [String]
     class GetOriginEndpointPolicyRequest < Struct.new(
+      nil,
       :channel_group_name,
       :channel_name,
       :origin_endpoint_name,
@@ -1535,6 +1591,7 @@ module Aws::MediaPackageV2
     #   <p>The settings for using authorization headers between the MediaPackage endpoint and your CDN. </p> <p>For information about CDN authorization, see <a href="https://docs.aws.amazon.com/mediapackage/latest/userguide/cdn-auth.html">CDN authorization in Elemental MediaPackage</a> in the MediaPackage user guide.</p>
     #   @return [Types::CdnAuthConfiguration]
     class GetOriginEndpointPolicyResponse < Struct.new(
+      nil,
       :channel_group_name,
       :channel_name,
       :origin_endpoint_name,
@@ -1555,6 +1612,7 @@ module Aws::MediaPackageV2
     #   <p>The name that describes the origin endpoint. The name is the primary identifier for the origin endpoint, and and must be unique for your account in the AWS Region and channel. </p>
     #   @return [String]
     class GetOriginEndpointRequest < Struct.new(
+      nil,
       :channel_group_name,
       :channel_name,
       :origin_endpoint_name,
@@ -1618,6 +1676,7 @@ module Aws::MediaPackageV2
     #   <p>The comma-separated list of tag key:value pairs assigned to the origin endpoint.</p>
     #   @return [Hash<String, String>]
     class GetOriginEndpointResponse < Struct.new(
+      nil,
       :arn,
       :channel_group_name,
       :channel_name,
@@ -1685,6 +1744,7 @@ module Aws::MediaPackageV2
     #   <p>The current version of the harvest job. Used for concurrency control.</p>
     #   @return [String]
     class HarvestJob < Struct.new(
+      nil,
       :channel_group_name,
       :channel_name,
       :origin_endpoint_name,
@@ -1709,6 +1769,7 @@ module Aws::MediaPackageV2
     #   <p>The name of the harvested DASH manifest.</p>
     #   @return [String]
     class HarvestedDashManifest < Struct.new(
+      nil,
       :manifest_name,
       keyword_init: true
     )
@@ -1720,6 +1781,7 @@ module Aws::MediaPackageV2
     #   <p>The name of the harvested HLS manifest.</p>
     #   @return [String]
     class HarvestedHlsManifest < Struct.new(
+      nil,
       :manifest_name,
       keyword_init: true
     )
@@ -1731,6 +1793,7 @@ module Aws::MediaPackageV2
     #   <p>The name of the harvested Low-Latency HLS manifest.</p>
     #   @return [String]
     class HarvestedLowLatencyHlsManifest < Struct.new(
+      nil,
       :manifest_name,
       keyword_init: true
     )
@@ -1748,6 +1811,7 @@ module Aws::MediaPackageV2
     #   <p>A list of harvested Low-Latency HLS manifests.</p>
     #   @return [Array<Types::HarvestedLowLatencyHlsManifest>]
     class HarvestedManifests < Struct.new(
+      nil,
       :hls_manifests,
       :dash_manifests,
       :low_latency_hls_manifests,
@@ -1764,6 +1828,7 @@ module Aws::MediaPackageV2
     #   <p>The end time for the harvest job.</p>
     #   @return [Time]
     class HarvesterScheduleConfiguration < Struct.new(
+      nil,
       :start_time,
       :end_time,
       keyword_init: true
@@ -1779,6 +1844,7 @@ module Aws::MediaPackageV2
     #   <p>The ingest domain URL where the source stream should be sent.</p>
     #   @return [String]
     class IngestEndpoint < Struct.new(
+      nil,
       :id,
       :url,
       keyword_init: true
@@ -1794,6 +1860,7 @@ module Aws::MediaPackageV2
     #   <p>For CMAF inputs, indicates which input MediaPackage should prefer when both inputs have equal MQCS scores. Select <code>1</code> to prefer the first ingest endpoint, or <code>2</code> to prefer the second ingest endpoint. If you don't specify a preferred input, MediaPackage uses its default switching behavior when MQCS scores are equal.</p>
     #   @return [Integer]
     class InputSwitchConfiguration < Struct.new(
+      nil,
       :mqcs_input_switching,
       :preferred_input,
       keyword_init: true
@@ -1805,6 +1872,7 @@ module Aws::MediaPackageV2
     # @!attribute message
     #   @return [String]
     class InternalServerException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -1818,6 +1886,7 @@ module Aws::MediaPackageV2
     #   <p>The pagination token from the GET list request. Use the token to fetch the next page of results.</p>
     #   @return [String]
     class ListChannelGroupsRequest < Struct.new(
+      nil,
       :max_results,
       :next_token,
       keyword_init: true
@@ -1832,6 +1901,7 @@ module Aws::MediaPackageV2
     #   <p>The pagination token from the GET list request. Use the token to fetch the next page of results.</p>
     #   @return [String]
     class ListChannelGroupsResponse < Struct.new(
+      nil,
       :items,
       :next_token,
       keyword_init: true
@@ -1849,6 +1919,7 @@ module Aws::MediaPackageV2
     #   <p>The pagination token from the GET list request. Use the token to fetch the next page of results.</p>
     #   @return [String]
     class ListChannelsRequest < Struct.new(
+      nil,
       :channel_group_name,
       :max_results,
       :next_token,
@@ -1864,6 +1935,7 @@ module Aws::MediaPackageV2
     #   <p>The pagination token from the GET list request.</p>
     #   @return [String]
     class ListChannelsResponse < Struct.new(
+      nil,
       :items,
       :next_token,
       keyword_init: true
@@ -1879,6 +1951,7 @@ module Aws::MediaPackageV2
     #   <p>The egress domain URL for stream delivery from MediaPackage.</p>
     #   @return [String]
     class ListDashManifestConfiguration < Struct.new(
+      nil,
       :manifest_name,
       :url,
       keyword_init: true
@@ -1906,6 +1979,7 @@ module Aws::MediaPackageV2
     #   <p>A token used for pagination. Provide this value in subsequent requests to retrieve the next set of results.</p>
     #   @return [String]
     class ListHarvestJobsRequest < Struct.new(
+      nil,
       :channel_group_name,
       :channel_name,
       :origin_endpoint_name,
@@ -1925,6 +1999,7 @@ module Aws::MediaPackageV2
     #   <p>A token used for pagination. Include this value in subsequent requests to retrieve the next set of results. If null, there are no more results to retrieve.</p>
     #   @return [String]
     class ListHarvestJobsResponse < Struct.new(
+      nil,
       :items,
       :next_token,
       keyword_init: true
@@ -1943,6 +2018,7 @@ module Aws::MediaPackageV2
     #   <p>The egress domain URL for stream delivery from MediaPackage.</p>
     #   @return [String]
     class ListHlsManifestConfiguration < Struct.new(
+      nil,
       :manifest_name,
       :child_manifest_name,
       :url,
@@ -1962,6 +2038,7 @@ module Aws::MediaPackageV2
     #   <p>The egress domain URL for stream delivery from MediaPackage.</p>
     #   @return [String]
     class ListLowLatencyHlsManifestConfiguration < Struct.new(
+      nil,
       :manifest_name,
       :child_manifest_name,
       :url,
@@ -1978,6 +2055,7 @@ module Aws::MediaPackageV2
     #   <p>The URL for accessing the MSS manifest.</p>
     #   @return [String]
     class ListMssManifestConfiguration < Struct.new(
+      nil,
       :manifest_name,
       :url,
       keyword_init: true
@@ -1998,6 +2076,7 @@ module Aws::MediaPackageV2
     #   <p>The pagination token from the GET list request. Use the token to fetch the next page of results.</p>
     #   @return [String]
     class ListOriginEndpointsRequest < Struct.new(
+      nil,
       :channel_group_name,
       :channel_name,
       :max_results,
@@ -2014,6 +2093,7 @@ module Aws::MediaPackageV2
     #   <p>The pagination token from the GET list request. Use the token to fetch the next page of results.</p>
     #   @return [String]
     class ListOriginEndpointsResponse < Struct.new(
+      nil,
       :items,
       :next_token,
       keyword_init: true
@@ -2025,6 +2105,7 @@ module Aws::MediaPackageV2
     #   <p>The ARN of the CloudWatch resource that you want to view tags for.</p>
     #   @return [String]
     class ListTagsForResourceRequest < Struct.new(
+      nil,
       :resource_arn,
       keyword_init: true
     )
@@ -2035,6 +2116,7 @@ module Aws::MediaPackageV2
     #   <p>Contains a map of the key-value pairs for the resource tag or tags assigned to the resource.</p>
     #   @return [Hash<String, String>]
     class ListTagsForResourceResponse < Struct.new(
+      nil,
       :tags,
       keyword_init: true
     )
@@ -2082,6 +2164,7 @@ module Aws::MediaPackageV2
     #   <p>The failover settings for the endpoint.</p>
     #   @return [Types::ForceEndpointErrorConfiguration]
     class OriginEndpointListConfiguration < Struct.new(
+      nil,
       :arn,
       :channel_group_name,
       :channel_name,
@@ -2105,6 +2188,7 @@ module Aws::MediaPackageV2
     #   <p>When true, AWS Elemental MediaPackage includes the MQCS in responses to the CDN. This setting is valid only when <code>InputType</code> is <code>CMAF</code>.</p>
     #   @return [Boolean]
     class OutputHeaderConfiguration < Struct.new(
+      nil,
       :publish_mqcs,
       keyword_init: true
     )
@@ -2121,6 +2205,7 @@ module Aws::MediaPackageV2
     #   <p>The policy to attach to the specified channel.</p>
     #   @return [String]
     class PutChannelPolicyRequest < Struct.new(
+      nil,
       :channel_group_name,
       :channel_name,
       :policy,
@@ -2130,6 +2215,7 @@ module Aws::MediaPackageV2
     end
 
     class PutChannelPolicyResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -2151,6 +2237,7 @@ module Aws::MediaPackageV2
     #   <p>The settings for using authorization headers between the MediaPackage endpoint and your CDN. </p> <p>For information about CDN authorization, see <a href="https://docs.aws.amazon.com/mediapackage/latest/userguide/cdn-auth.html">CDN authorization in Elemental MediaPackage</a> in the MediaPackage user guide. </p>
     #   @return [Types::CdnAuthConfiguration]
     class PutOriginEndpointPolicyRequest < Struct.new(
+      nil,
       :channel_group_name,
       :channel_name,
       :origin_endpoint_name,
@@ -2162,6 +2249,7 @@ module Aws::MediaPackageV2
     end
 
     class PutOriginEndpointPolicyResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -2174,6 +2262,7 @@ module Aws::MediaPackageV2
     #   <p>The name of the channel that you are resetting.</p>
     #   @return [String]
     class ResetChannelStateRequest < Struct.new(
+      nil,
       :channel_group_name,
       :channel_name,
       keyword_init: true
@@ -2194,6 +2283,7 @@ module Aws::MediaPackageV2
     #   <p>The time that the channel was last reset.</p>
     #   @return [Time]
     class ResetChannelStateResponse < Struct.new(
+      nil,
       :channel_group_name,
       :channel_name,
       :arn,
@@ -2213,6 +2303,7 @@ module Aws::MediaPackageV2
     #   <p>The name of the origin endpoint that you are resetting.</p>
     #   @return [String]
     class ResetOriginEndpointStateRequest < Struct.new(
+      nil,
       :channel_group_name,
       :channel_name,
       :origin_endpoint_name,
@@ -2237,6 +2328,7 @@ module Aws::MediaPackageV2
     #   <p>The time that the origin endpoint was last reset.</p>
     #   @return [Time]
     class ResetOriginEndpointStateResponse < Struct.new(
+      nil,
       :channel_group_name,
       :channel_name,
       :origin_endpoint_name,
@@ -2254,6 +2346,7 @@ module Aws::MediaPackageV2
     #   <p>The specified resource type wasn't found.</p>
     #   @return [String]
     class ResourceNotFoundException < Struct.new(
+      nil,
       :message,
       :resource_type_not_found,
       keyword_init: true
@@ -2269,6 +2362,7 @@ module Aws::MediaPackageV2
     #   <p>The path within the specified S3 bucket where the harvested content will be placed.</p>
     #   @return [String]
     class S3DestinationConfig < Struct.new(
+      nil,
       :bucket_name,
       :destination_path,
       keyword_init: true
@@ -2281,6 +2375,7 @@ module Aws::MediaPackageV2
     #   <p>The SCTE-35 message types that you want to be treated as ad markers in the output.</p>
     #   @return [Array<String>]
     class Scte < Struct.new(
+      nil,
       :scte_filter,
       keyword_init: true
     )
@@ -2292,6 +2387,7 @@ module Aws::MediaPackageV2
     #   <p>Choose how ad markers are included in the packaged content. If you include ad markers in the content stream in your upstream encoders, then you need to inform MediaPackage what to do with the ad markers in the output.</p> <p>Value description:</p> <ul> <li> <p> <code>Binary</code> - The SCTE-35 marker is expressed as a hex-string (Base64 string) rather than full XML.</p> </li> <li> <p> <code>XML</code> - The SCTE marker is expressed fully in XML.</p> </li> </ul>
     #   @return [String]
     class ScteDash < Struct.new(
+      nil,
       :ad_marker_dash,
       keyword_init: true
     )
@@ -2303,6 +2399,7 @@ module Aws::MediaPackageV2
     #   <p>Ad markers indicate when ads should be inserted during playback. If you include ad markers in the content stream in your upstream encoders, then you need to inform MediaPackage what to do with the ad markers in the output. Choose what you want MediaPackage to do with the ad markers.</p> <p>Value description: </p> <ul> <li> <p>DATERANGE - Insert EXT-X-DATERANGE tags to signal ad and program transition events in TS and CMAF manifests. If you use DATERANGE, you must set a programDateTimeIntervalSeconds value of 1 or higher. To learn more about DATERANGE, see <a href="http://docs.aws.amazon.com/mediapackage/latest/ug/scte-35-ad-marker-ext-x-daterange.html">SCTE-35 Ad Marker EXT-X-DATERANGE</a>.</p> </li> </ul>
     #   @return [String]
     class ScteHls < Struct.new(
+      nil,
       :ad_marker_hls,
       keyword_init: true
     )
@@ -2332,6 +2429,7 @@ module Aws::MediaPackageV2
     #   <p>The parameters for encrypting content.</p>
     #   @return [Types::Encryption]
     class Segment < Struct.new(
+      nil,
       :segment_duration_seconds,
       :segment_name,
       :ts_use_audio_rendition_group,
@@ -2348,6 +2446,7 @@ module Aws::MediaPackageV2
     # @!attribute message
     #   @return [String]
     class ServiceQuotaExceededException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -2371,6 +2470,7 @@ module Aws::MediaPackageV2
     #   <p>The URL of the API Gateway proxy that you set up to talk to your key server. The API Gateway proxy must reside in the same AWS Region as MediaPackage and must start with https://.</p> <p>The following example shows a URL: <code>https://1wm2dx1f33.execute-api.us-west-2.amazonaws.com/SpekeSample/copyProtection</code> </p>
     #   @return [String]
     class SpekeKeyProvider < Struct.new(
+      nil,
       :encryption_contract_configuration,
       :resource_id,
       :drm_systems,
@@ -2389,6 +2489,7 @@ module Aws::MediaPackageV2
     #   <p>Specify the value for PRECISE within your EXT-X-START tag. Leave blank, or choose false, to use the default value NO. Choose yes to use the value YES.</p>
     #   @return [Boolean]
     class StartTag < Struct.new(
+      nil,
       :time_offset,
       :precise,
       keyword_init: true
@@ -2403,6 +2504,7 @@ module Aws::MediaPackageV2
     #   <p>Contains a map of the key-value pairs for the resource tag or tags assigned to the resource.</p>
     #   @return [Hash<String, String>]
     class TagResourceRequest < Struct.new(
+      nil,
       :resource_arn,
       :tags,
       keyword_init: true
@@ -2414,6 +2516,7 @@ module Aws::MediaPackageV2
     # @!attribute message
     #   @return [String]
     class ThrottlingException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -2427,6 +2530,7 @@ module Aws::MediaPackageV2
     #   <p>The list of tag keys to remove from the resource.</p>
     #   @return [Array<String>]
     class UntagResourceRequest < Struct.new(
+      nil,
       :resource_arn,
       :tag_keys,
       keyword_init: true
@@ -2444,6 +2548,7 @@ module Aws::MediaPackageV2
     #   <p>Any descriptive information that you want to add to the channel group for future identification purposes.</p>
     #   @return [String]
     class UpdateChannelGroupRequest < Struct.new(
+      nil,
       :channel_group_name,
       :e_tag,
       :description,
@@ -2477,6 +2582,7 @@ module Aws::MediaPackageV2
     #   <p>The comma-separated list of tag key:value pairs assigned to the channel group.</p>
     #   @return [Hash<String, String>]
     class UpdateChannelGroupResponse < Struct.new(
+      nil,
       :channel_group_name,
       :arn,
       :egress_domain,
@@ -2509,6 +2615,7 @@ module Aws::MediaPackageV2
     #   <p>The settings for what common media server data (CMSD) headers AWS Elemental MediaPackage includes in responses to the CDN. This setting is valid only when <code>InputType</code> is <code>CMAF</code>.</p>
     #   @return [Types::OutputHeaderConfiguration]
     class UpdateChannelRequest < Struct.new(
+      nil,
       :channel_group_name,
       :channel_name,
       :e_tag,
@@ -2557,6 +2664,7 @@ module Aws::MediaPackageV2
     #   <p>The settings for what common media server data (CMSD) headers AWS Elemental MediaPackage includes in responses to the CDN. This setting is valid only when <code>InputType</code> is <code>CMAF</code>.</p>
     #   @return [Types::OutputHeaderConfiguration]
     class UpdateChannelResponse < Struct.new(
+      nil,
       :arn,
       :channel_name,
       :channel_group_name,
@@ -2614,6 +2722,7 @@ module Aws::MediaPackageV2
     #   <p>The expected current Entity Tag (ETag) for the resource. If the specified ETag does not match the resource's current entity tag, the update request will be rejected.</p>
     #   @return [String]
     class UpdateOriginEndpointRequest < Struct.new(
+      nil,
       :channel_group_name,
       :channel_name,
       :origin_endpoint_name,
@@ -2684,6 +2793,7 @@ module Aws::MediaPackageV2
     #   <p>A DASH manifest configuration.</p>
     #   @return [Array<Types::GetDashManifestConfiguration>]
     class UpdateOriginEndpointResponse < Struct.new(
+      nil,
       :arn,
       :channel_group_name,
       :channel_name,
@@ -2713,6 +2823,7 @@ module Aws::MediaPackageV2
     #   <p>The type of ValidationException.</p>
     #   @return [String]
     class ValidationException < Struct.new(
+      nil,
       :message,
       :validation_exception_type,
       keyword_init: true

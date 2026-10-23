@@ -17,6 +17,7 @@ module Aws::MediaConnect
     #   <p> The name of the flow source. This name is used to reference the source and must be unique among sources in this bridge. </p>
     #   @return [String]
     class AddBridgeFlowSourceRequest < Struct.new(
+      nil,
       :flow_arn,
       :flow_vpc_interface_attachment,
       :name,
@@ -45,6 +46,7 @@ module Aws::MediaConnect
     #   <p> The network output TTL. </p>
     #   @return [Integer]
     class AddBridgeNetworkOutputRequest < Struct.new(
+      nil,
       :ip_address,
       :name,
       :network_name,
@@ -76,6 +78,7 @@ module Aws::MediaConnect
     #   <p> The network source protocol.</p> <note> <p>Elemental MediaConnect no longer supports the Fujitsu QoS protocol. This reference is maintained for legacy purposes only.</p> </note>
     #   @return [String]
     class AddBridgeNetworkSourceRequest < Struct.new(
+      nil,
       :multicast_ip,
       :multicast_source_settings,
       :name,
@@ -92,6 +95,7 @@ module Aws::MediaConnect
     #   <p> The network output of the bridge. A network output is delivered to your premises. </p>
     #   @return [Types::AddBridgeNetworkOutputRequest]
     class AddBridgeOutputRequest < Struct.new(
+      nil,
       :network_output,
       keyword_init: true
     )
@@ -105,6 +109,7 @@ module Aws::MediaConnect
     #   <p> The outputs that you want to add to this bridge.</p>
     #   @return [Array<Types::AddBridgeOutputRequest>]
     class AddBridgeOutputsRequest < Struct.new(
+      nil,
       :bridge_arn,
       :outputs,
       keyword_init: true
@@ -119,6 +124,7 @@ module Aws::MediaConnect
     #   <p> The outputs that you added to this bridge.</p>
     #   @return [Array<Types::BridgeOutput>]
     class AddBridgeOutputsResponse < Struct.new(
+      nil,
       :bridge_arn,
       :outputs,
       keyword_init: true
@@ -134,6 +140,7 @@ module Aws::MediaConnect
     #   <p> The source of the network. </p>
     #   @return [Types::AddBridgeNetworkSourceRequest]
     class AddBridgeSourceRequest < Struct.new(
+      nil,
       :flow_source,
       :network_source,
       keyword_init: true
@@ -148,6 +155,7 @@ module Aws::MediaConnect
     #   <p> The sources that you want to add to this bridge.</p>
     #   @return [Array<Types::AddBridgeSourceRequest>]
     class AddBridgeSourcesRequest < Struct.new(
+      nil,
       :bridge_arn,
       :sources,
       keyword_init: true
@@ -162,6 +170,7 @@ module Aws::MediaConnect
     #   <p> The sources that you added to this bridge.</p>
     #   @return [Array<Types::BridgeSource>]
     class AddBridgeSourcesResponse < Struct.new(
+      nil,
       :bridge_arn,
       :sources,
       keyword_init: true
@@ -174,6 +183,7 @@ module Aws::MediaConnect
     #   <p> The maximum expected bitrate (in bps) of the egress bridge.</p>
     #   @return [Integer]
     class AddEgressGatewayBridgeRequest < Struct.new(
+      nil,
       :max_bitrate,
       keyword_init: true
     )
@@ -187,6 +197,7 @@ module Aws::MediaConnect
     #   <p> The media streams that you want to add to the flow.</p>
     #   @return [Array<Types::AddMediaStreamRequest>]
     class AddFlowMediaStreamsRequest < Struct.new(
+      nil,
       :flow_arn,
       :media_streams,
       keyword_init: true
@@ -201,6 +212,7 @@ module Aws::MediaConnect
     #   <p> The media streams that you added to the flow.</p>
     #   @return [Array<Types::MediaStream>]
     class AddFlowMediaStreamsResponse < Struct.new(
+      nil,
       :flow_arn,
       :media_streams,
       keyword_init: true
@@ -212,6 +224,7 @@ module Aws::MediaConnect
     # @!attribute message
     #   @return [String]
     class AddFlowOutputs420Exception < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -225,6 +238,7 @@ module Aws::MediaConnect
     #   <p> A list of outputs that you want to add to the flow.</p>
     #   @return [Array<Types::AddOutputRequest>]
     class AddFlowOutputsRequest < Struct.new(
+      nil,
       :flow_arn,
       :outputs,
       keyword_init: true
@@ -239,6 +253,7 @@ module Aws::MediaConnect
     #   <p> The details of the newly added outputs.</p>
     #   @return [Array<Types::Output>]
     class AddFlowOutputsResponse < Struct.new(
+      nil,
       :flow_arn,
       :outputs,
       keyword_init: true
@@ -253,6 +268,7 @@ module Aws::MediaConnect
     #   <p> A list of sources that you want to add to the flow.</p>
     #   @return [Array<Types::SetSourceRequest>]
     class AddFlowSourcesRequest < Struct.new(
+      nil,
       :flow_arn,
       :sources,
       keyword_init: true
@@ -267,6 +283,7 @@ module Aws::MediaConnect
     #   <p> The details of the newly added sources.</p>
     #   @return [Array<Types::Source>]
     class AddFlowSourcesResponse < Struct.new(
+      nil,
       :flow_arn,
       :sources,
       keyword_init: true
@@ -281,6 +298,7 @@ module Aws::MediaConnect
     #   <p> A list of VPC interfaces that you want to add to the flow.</p>
     #   @return [Array<Types::VpcInterfaceRequest>]
     class AddFlowVpcInterfacesRequest < Struct.new(
+      nil,
       :flow_arn,
       :vpc_interfaces,
       keyword_init: true
@@ -295,6 +313,7 @@ module Aws::MediaConnect
     #   <p> The details of the newly added VPC interfaces.</p>
     #   @return [Array<Types::VpcInterface>]
     class AddFlowVpcInterfacesResponse < Struct.new(
+      nil,
       :flow_arn,
       :vpc_interfaces,
       keyword_init: true
@@ -310,6 +329,7 @@ module Aws::MediaConnect
     #   <p> The maximum number of expected outputs on the ingress bridge. </p>
     #   @return [Integer]
     class AddIngressGatewayBridgeRequest < Struct.new(
+      nil,
       :max_bitrate,
       :max_outputs,
       keyword_init: true
@@ -325,6 +345,7 @@ module Aws::MediaConnect
     #   <p> UTC time when the maintenance will happen. </p> <p>Use 24-hour HH:MM format. </p> <p>Minutes must be 00. </p> <p>Example: 13:00. </p> <p>The default value is 02:00.</p>
     #   @return [String]
     class AddMaintenance < Struct.new(
+      nil,
       :maintenance_day,
       :maintenance_start_hour,
       keyword_init: true
@@ -355,6 +376,7 @@ module Aws::MediaConnect
     #   <p> The resolution of the video.</p>
     #   @return [String]
     class AddMediaStreamRequest < Struct.new(
+      nil,
       :attributes,
       :clock_rate,
       :description,
@@ -423,6 +445,7 @@ module Aws::MediaConnect
     #   <p> A suffix for the names of the NDI sources that the flow creates. If a custom name isn't specified, MediaConnect uses the output name. </p>
     #   @return [String]
     class AddOutputRequest < Struct.new(
+      nil,
       :cidr_allow_list,
       :description,
       :destination,
@@ -451,6 +474,7 @@ module Aws::MediaConnect
     #   <p> Detects periods of silence. </p>
     #   @return [Types::SilentAudio]
     class AudioMonitoringSetting < Struct.new(
+      nil,
       :silent_audio,
       keyword_init: true
     )
@@ -461,6 +485,7 @@ module Aws::MediaConnect
     # @!attribute message
     #   @return [String]
     class BadRequestException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -475,6 +500,7 @@ module Aws::MediaConnect
     #   <p> Specifies the number of consecutive seconds of black frames that triggers an event or alert.</p>
     #   @return [Integer]
     class BlackFrames < Struct.new(
+      nil,
       :state,
       :threshold_seconds,
       keyword_init: true
@@ -514,6 +540,7 @@ module Aws::MediaConnect
     #   <p> The sources on this bridge.</p>
     #   @return [Array<Types::BridgeSource>]
     class Bridge < Struct.new(
+      nil,
       :bridge_arn,
       :bridge_messages,
       :bridge_state,
@@ -540,6 +567,7 @@ module Aws::MediaConnect
     #   <p> The name of the bridge's output.</p>
     #   @return [String]
     class BridgeFlowOutput < Struct.new(
+      nil,
       :flow_arn,
       :flow_source_arn,
       :name,
@@ -562,6 +590,7 @@ module Aws::MediaConnect
     #   <p> The Amazon Resource Number (ARN) of the output.</p>
     #   @return [String]
     class BridgeFlowSource < Struct.new(
+      nil,
       :flow_arn,
       :flow_vpc_interface_attachment,
       :name,
@@ -591,6 +620,7 @@ module Aws::MediaConnect
     #   <p> The network output TTL.</p>
     #   @return [Integer]
     class BridgeNetworkOutput < Struct.new(
+      nil,
       :ip_address,
       :name,
       :network_name,
@@ -622,6 +652,7 @@ module Aws::MediaConnect
     #   <p> The network source protocol.</p> <note> <p>Elemental MediaConnect no longer supports the Fujitsu QoS protocol. This reference is maintained for legacy purposes only.</p> </note>
     #   @return [String]
     class BridgeNetworkSource < Struct.new(
+      nil,
       :multicast_ip,
       :multicast_source_settings,
       :name,
@@ -641,6 +672,7 @@ module Aws::MediaConnect
     #   <p> The network output for the bridge. </p>
     #   @return [Types::BridgeNetworkOutput]
     class BridgeOutput < Struct.new(
+      nil,
       :flow_output,
       :network_output,
       keyword_init: true
@@ -656,6 +688,7 @@ module Aws::MediaConnect
     #   <p> The network source for the bridge. </p>
     #   @return [Types::BridgeNetworkSource]
     class BridgeSource < Struct.new(
+      nil,
       :flow_source,
       :network_source,
       keyword_init: true
@@ -667,6 +700,7 @@ module Aws::MediaConnect
     # @!attribute message
     #   @return [String]
     class ConflictException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -677,6 +711,7 @@ module Aws::MediaConnect
     # @!attribute message
     #   @return [String]
     class CreateBridge420Exception < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -705,6 +740,7 @@ module Aws::MediaConnect
     #   <p> The sources that you want to add to this bridge.</p>
     #   @return [Array<Types::AddBridgeSourceRequest>]
     class CreateBridgeRequest < Struct.new(
+      nil,
       :egress_gateway_bridge,
       :ingress_gateway_bridge,
       :name,
@@ -721,6 +757,7 @@ module Aws::MediaConnect
     #   <p> The name of the bridge that was created.</p>
     #   @return [Types::Bridge]
     class CreateBridgeResponse < Struct.new(
+      nil,
       :bridge,
       keyword_init: true
     )
@@ -731,6 +768,7 @@ module Aws::MediaConnect
     # @!attribute message
     #   @return [String]
     class CreateFlow420Exception < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -777,6 +815,7 @@ module Aws::MediaConnect
     #   <p> Specifies the configuration settings for NDI outputs. Required when the flow includes NDI outputs. </p>
     #   @return [Types::NdiConfig]
     class CreateFlowRequest < Struct.new(
+      nil,
       :availability_zone,
       :entitlements,
       :media_streams,
@@ -799,6 +838,7 @@ module Aws::MediaConnect
     #   <p> The flow that you created. </p>
     #   @return [Types::Flow]
     class CreateFlowResponse < Struct.new(
+      nil,
       :flow,
       keyword_init: true
     )
@@ -809,6 +849,7 @@ module Aws::MediaConnect
     # @!attribute message
     #   @return [String]
     class CreateGateway420Exception < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -825,6 +866,7 @@ module Aws::MediaConnect
     #   <p> The list of networks that you want to add to the gateway.</p>
     #   @return [Array<Types::GatewayNetwork>]
     class CreateGatewayRequest < Struct.new(
+      nil,
       :egress_cidr_blocks,
       :name,
       :networks,
@@ -837,6 +879,7 @@ module Aws::MediaConnect
     #   <p> The gateway that you created. </p>
     #   @return [Types::Gateway]
     class CreateGatewayResponse < Struct.new(
+      nil,
       :gateway,
       keyword_init: true
     )
@@ -847,6 +890,7 @@ module Aws::MediaConnect
     #   <p> The Amazon Resource Name (ARN) of the bridge that you want to delete.</p>
     #   @return [String]
     class DeleteBridgeRequest < Struct.new(
+      nil,
       :bridge_arn,
       keyword_init: true
     )
@@ -857,6 +901,7 @@ module Aws::MediaConnect
     #   <p> The ARN of the deleted bridge.</p>
     #   @return [String]
     class DeleteBridgeResponse < Struct.new(
+      nil,
       :bridge_arn,
       keyword_init: true
     )
@@ -867,6 +912,7 @@ module Aws::MediaConnect
     #   <p> The Amazon Resource Name (ARN) of the flow that you want to delete.</p>
     #   @return [String]
     class DeleteFlowRequest < Struct.new(
+      nil,
       :flow_arn,
       keyword_init: true
     )
@@ -880,6 +926,7 @@ module Aws::MediaConnect
     #   <p> The status of the flow when the <code>DeleteFlow</code> process begins.</p>
     #   @return [String]
     class DeleteFlowResponse < Struct.new(
+      nil,
       :flow_arn,
       :status,
       keyword_init: true
@@ -891,6 +938,7 @@ module Aws::MediaConnect
     #   <p> The Amazon Resource Name (ARN) of the gateway that you want to delete.</p>
     #   @return [String]
     class DeleteGatewayRequest < Struct.new(
+      nil,
       :gateway_arn,
       keyword_init: true
     )
@@ -901,6 +949,7 @@ module Aws::MediaConnect
     #   <p> The ARN of the gateway that was deleted.</p>
     #   @return [String]
     class DeleteGatewayResponse < Struct.new(
+      nil,
       :gateway_arn,
       keyword_init: true
     )
@@ -914,6 +963,7 @@ module Aws::MediaConnect
     #   <p> The Amazon Resource Name (ARN) of the gateway that contains the instance that you want to deregister.</p>
     #   @return [String]
     class DeregisterGatewayInstanceRequest < Struct.new(
+      nil,
       :force,
       :gateway_instance_arn,
       keyword_init: true
@@ -928,6 +978,7 @@ module Aws::MediaConnect
     #   <p> The status of the instance.</p>
     #   @return [String]
     class DeregisterGatewayInstanceResponse < Struct.new(
+      nil,
       :gateway_instance_arn,
       :instance_state,
       keyword_init: true
@@ -939,6 +990,7 @@ module Aws::MediaConnect
     #   <p> The Amazon Resource Name (ARN) of the bridge that you want to describe.</p>
     #   @return [String]
     class DescribeBridgeRequest < Struct.new(
+      nil,
       :bridge_arn,
       keyword_init: true
     )
@@ -949,6 +1001,7 @@ module Aws::MediaConnect
     #   <p>The bridge that you requested a description of. </p>
     #   @return [Types::Bridge]
     class DescribeBridgeResponse < Struct.new(
+      nil,
       :bridge,
       keyword_init: true
     )
@@ -959,6 +1012,7 @@ module Aws::MediaConnect
     #   <p> The ARN of the flow that you want to describe.</p>
     #   @return [String]
     class DescribeFlowRequest < Struct.new(
+      nil,
       :flow_arn,
       keyword_init: true
     )
@@ -972,6 +1026,7 @@ module Aws::MediaConnect
     #   <p> Any errors that apply currently to the flow. If there are no errors, MediaConnect will not include this field in the response. </p>
     #   @return [Types::Messages]
     class DescribeFlowResponse < Struct.new(
+      nil,
       :flow,
       :messages,
       keyword_init: true
@@ -983,6 +1038,7 @@ module Aws::MediaConnect
     #   <p> The Amazon Resource Name (ARN) of the flow.</p>
     #   @return [String]
     class DescribeFlowSourceMetadataRequest < Struct.new(
+      nil,
       :flow_arn,
       keyword_init: true
     )
@@ -1002,6 +1058,7 @@ module Aws::MediaConnect
     #   <p> Information about the flow's transport media. </p>
     #   @return [Types::TransportMediaInfo]
     class DescribeFlowSourceMetadataResponse < Struct.new(
+      nil,
       :flow_arn,
       :messages,
       :timestamp,
@@ -1015,6 +1072,7 @@ module Aws::MediaConnect
     #   <p> The Amazon Resource Name (ARN) of the flow.</p>
     #   @return [String]
     class DescribeFlowSourceThumbnailRequest < Struct.new(
+      nil,
       :flow_arn,
       keyword_init: true
     )
@@ -1025,6 +1083,7 @@ module Aws::MediaConnect
     #   <p>The details of the thumbnail, including thumbnail base64 string, timecode and the time when thumbnail was generated. </p>
     #   @return [Types::ThumbnailDetails]
     class DescribeFlowSourceThumbnailResponse < Struct.new(
+      nil,
       :thumbnail_details,
       keyword_init: true
     )
@@ -1035,6 +1094,7 @@ module Aws::MediaConnect
     #   <p> The Amazon Resource Name (ARN) of the gateway instance that you want to describe.</p>
     #   @return [String]
     class DescribeGatewayInstanceRequest < Struct.new(
+      nil,
       :gateway_instance_arn,
       keyword_init: true
     )
@@ -1045,6 +1105,7 @@ module Aws::MediaConnect
     #   <p>The gateway instance that you requested a description of. </p>
     #   @return [Types::GatewayInstance]
     class DescribeGatewayInstanceResponse < Struct.new(
+      nil,
       :gateway_instance,
       keyword_init: true
     )
@@ -1055,6 +1116,7 @@ module Aws::MediaConnect
     #   <p> The ARN of the gateway that you want to describe.</p>
     #   @return [String]
     class DescribeGatewayRequest < Struct.new(
+      nil,
       :gateway_arn,
       keyword_init: true
     )
@@ -1065,6 +1127,7 @@ module Aws::MediaConnect
     #   <p>The gateway that you wanted to describe. </p>
     #   @return [Types::Gateway]
     class DescribeGatewayResponse < Struct.new(
+      nil,
       :gateway,
       keyword_init: true
     )
@@ -1075,6 +1138,7 @@ module Aws::MediaConnect
     #   <p> The ARN of the offering.</p>
     #   @return [String]
     class DescribeOfferingRequest < Struct.new(
+      nil,
       :offering_arn,
       keyword_init: true
     )
@@ -1085,6 +1149,7 @@ module Aws::MediaConnect
     #   <p>The offering that you requested a description of. </p>
     #   @return [Types::Offering]
     class DescribeOfferingResponse < Struct.new(
+      nil,
       :offering,
       keyword_init: true
     )
@@ -1095,6 +1160,7 @@ module Aws::MediaConnect
     #   <p>The Amazon Resource Name (ARN) of the offering. </p>
     #   @return [String]
     class DescribeReservationRequest < Struct.new(
+      nil,
       :reservation_arn,
       keyword_init: true
     )
@@ -1105,6 +1171,7 @@ module Aws::MediaConnect
     #   <p> A pricing agreement for a discounted rate for a specific outbound bandwidth that your MediaConnect account will use each month over a specific time period. The discounted rate in the reservation applies to outbound bandwidth for all flows from your account until your account reaches the amount of bandwidth in your reservation. If you use more outbound bandwidth than the agreed upon amount in a single month, the overage is charged at the on-demand rate. </p>
     #   @return [Types::Reservation]
     class DescribeReservationResponse < Struct.new(
+      nil,
       :reservation,
       keyword_init: true
     )
@@ -1125,6 +1192,7 @@ module Aws::MediaConnect
     #   <p>The IP address that the receiver requires in order to establish a connection with the flow. This value is represented by the elastic network interface IP address of the VPC. This field applies only to outputs that use the CDI or ST 2110 JPEG XS or protocol. </p>
     #   @return [String]
     class DestinationConfiguration < Struct.new(
+      nil,
       :destination_ip,
       :destination_port,
       :interface,
@@ -1145,6 +1213,7 @@ module Aws::MediaConnect
     #   <p> The VPC interface that you want to use for the media stream associated with the output.</p>
     #   @return [Types::InterfaceRequest]
     class DestinationConfigurationRequest < Struct.new(
+      nil,
       :destination_ip,
       :destination_port,
       :interface,
@@ -1161,6 +1230,7 @@ module Aws::MediaConnect
     #   <p> The maximum expected bitrate (in bps) of the egress bridge.</p>
     #   @return [Integer]
     class EgressGatewayBridge < Struct.new(
+      nil,
       :instance_id,
       :max_bitrate,
       keyword_init: true
@@ -1176,6 +1246,7 @@ module Aws::MediaConnect
     #   <p> A setting on the encoder that drives compression settings. This property only applies to video media streams associated with outputs that use the ST 2110 JPEG XS protocol, with a flow source that uses the CDI protocol.</p>
     #   @return [String]
     class EncodingParameters < Struct.new(
+      nil,
       :compression_factor,
       :encoder_profile,
       keyword_init: true
@@ -1191,6 +1262,7 @@ module Aws::MediaConnect
     #   <p> A setting on the encoder that drives compression settings. This property only applies to video media streams associated with outputs that use the ST 2110 JPEG XS protocol, if at least one source on the flow uses the CDI protocol.</p>
     #   @return [String]
     class EncodingParametersRequest < Struct.new(
+      nil,
       :compression_factor,
       :encoder_profile,
       keyword_init: true
@@ -1227,6 +1299,7 @@ module Aws::MediaConnect
     #   <p> The URL from the API Gateway proxy that you set up to talk to your key server. This parameter is required for SPEKE encryption and is not valid for static key encryption.</p>
     #   @return [String]
     class Encryption < Struct.new(
+      nil,
       :algorithm,
       :constant_initialization_vector,
       :device_id,
@@ -1264,6 +1337,7 @@ module Aws::MediaConnect
     #   <p> The Amazon Web Services account IDs that you want to share your content with. The receiving accounts (subscribers) will be allowed to create their own flow using your content as the source. </p>
     #   @return [Array<String>]
     class Entitlement < Struct.new(
+      nil,
       :data_transfer_subscriber_fee_percent,
       :description,
       :encryption,
@@ -1290,6 +1364,7 @@ module Aws::MediaConnect
     #   <p>The state of source failover on the flow. If the state is inactive, the flow can have only one source. If the state is active, the flow can have one or two sources. </p>
     #   @return [String]
     class FailoverConfig < Struct.new(
+      nil,
       :failover_mode,
       :recovery_window,
       :source_priority,
@@ -1352,6 +1427,7 @@ module Aws::MediaConnect
     #   <p>Specifies the configuration settings for NDI outputs. Required when the flow includes NDI outputs. </p>
     #   @return [Types::NdiConfig]
     class Flow < Struct.new(
+      nil,
       :availability_zone,
       :description,
       :egress_ip,
@@ -1397,6 +1473,7 @@ module Aws::MediaConnect
     #   <p>The transfer characteristic system (TCS) that is used in the video. </p>
     #   @return [String]
     class Fmtp < Struct.new(
+      nil,
       :channel_order,
       :colorimetry,
       :exact_framerate,
@@ -1432,6 +1509,7 @@ module Aws::MediaConnect
     #   <p> The transfer characteristic system (TCS) that is used in the video.</p>
     #   @return [String]
     class FmtpRequest < Struct.new(
+      nil,
       :channel_order,
       :colorimetry,
       :exact_framerate,
@@ -1448,6 +1526,7 @@ module Aws::MediaConnect
     # @!attribute message
     #   @return [String]
     class ForbiddenException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -1462,6 +1541,7 @@ module Aws::MediaConnect
     #   <p> The number of pixels in the width of the video frame.</p>
     #   @return [Integer]
     class FrameResolution < Struct.new(
+      nil,
       :frame_height,
       :frame_width,
       keyword_init: true
@@ -1477,6 +1557,7 @@ module Aws::MediaConnect
     #   <p> Specifies the number of consecutive seconds of a static image that triggers an event or alert.</p>
     #   @return [Integer]
     class FrozenFrames < Struct.new(
+      nil,
       :state,
       :threshold_seconds,
       keyword_init: true
@@ -1504,6 +1585,7 @@ module Aws::MediaConnect
     #   <p> The list of networks in the gateway.</p>
     #   @return [Array<Types::GatewayNetwork>]
     class Gateway < Struct.new(
+      nil,
       :egress_cidr_blocks,
       :gateway_arn,
       :gateway_messages,
@@ -1523,6 +1605,7 @@ module Aws::MediaConnect
     #   <p> The name of the VPC interface attachment to use for this bridge source.</p>
     #   @return [Types::VpcInterfaceAttachment]
     class GatewayBridgeSource < Struct.new(
+      nil,
       :bridge_arn,
       :vpc_interface_attachment,
       keyword_init: true
@@ -1556,6 +1639,7 @@ module Aws::MediaConnect
     #   <p> The running bridge count. </p>
     #   @return [Integer]
     class GatewayInstance < Struct.new(
+      nil,
       :bridge_placement,
       :connection_status,
       :gateway_arn,
@@ -1577,6 +1661,7 @@ module Aws::MediaConnect
     #   <p>The name of the network. This name is used to reference the network and must be unique among networks in this gateway. </p>
     #   @return [String]
     class GatewayNetwork < Struct.new(
+      nil,
       :cidr_block,
       :name,
       keyword_init: true
@@ -1604,6 +1689,7 @@ module Aws::MediaConnect
     #   <p> The Amazon Web Services account IDs that you want to share your content with. The receiving accounts (subscribers) will be allowed to create their own flows using your content as the source.</p>
     #   @return [Array<String>]
     class GrantEntitlementRequest < Struct.new(
+      nil,
       :data_transfer_subscriber_fee_percent,
       :description,
       :encryption,
@@ -1619,6 +1705,7 @@ module Aws::MediaConnect
     # @!attribute message
     #   @return [String]
     class GrantFlowEntitlements420Exception < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -1632,6 +1719,7 @@ module Aws::MediaConnect
     #   <p> The Amazon Resource Name (ARN) of the flow that you want to grant entitlements on.</p>
     #   @return [String]
     class GrantFlowEntitlementsRequest < Struct.new(
+      nil,
       :entitlements,
       :flow_arn,
       keyword_init: true
@@ -1646,6 +1734,7 @@ module Aws::MediaConnect
     #   <p> The ARN of the flow that these entitlements were granted to.</p>
     #   @return [String]
     class GrantFlowEntitlementsResponse < Struct.new(
+      nil,
       :entitlements,
       :flow_arn,
       keyword_init: true
@@ -1664,6 +1753,7 @@ module Aws::MediaConnect
     #   <p>The maximum number of outputs on the ingress bridge. </p>
     #   @return [Integer]
     class IngressGatewayBridge < Struct.new(
+      nil,
       :instance_id,
       :max_bitrate,
       :max_outputs,
@@ -1683,6 +1773,7 @@ module Aws::MediaConnect
     #   <p> The VPC interface where the media stream comes in from.</p>
     #   @return [Types::Interface]
     class InputConfiguration < Struct.new(
+      nil,
       :input_ip,
       :input_port,
       :interface,
@@ -1699,6 +1790,7 @@ module Aws::MediaConnect
     #   <p> The VPC interface that you want to use for the incoming media stream.</p>
     #   @return [Types::InterfaceRequest]
     class InputConfigurationRequest < Struct.new(
+      nil,
       :input_port,
       :interface,
       keyword_init: true
@@ -1711,6 +1803,7 @@ module Aws::MediaConnect
     #   <p> The name of the VPC interface.</p>
     #   @return [String]
     class Interface < Struct.new(
+      nil,
       :name,
       keyword_init: true
     )
@@ -1722,6 +1815,7 @@ module Aws::MediaConnect
     #   <p> The name of the VPC interface.</p>
     #   @return [String]
     class InterfaceRequest < Struct.new(
+      nil,
       :name,
       keyword_init: true
     )
@@ -1732,6 +1826,7 @@ module Aws::MediaConnect
     # @!attribute message
     #   @return [String]
     class InternalServerErrorException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -1748,6 +1843,7 @@ module Aws::MediaConnect
     #   <p> The token that identifies the batch of results that you want to see. </p> <p>For example, you submit a <code>ListBridges</code> request with <code>MaxResults</code> set at 5. The service returns the first batch of results (up to 5) and a <code>NextToken</code> value. To see the next batch of results, you can submit the <code>ListBridges</code> request a second time and specify the <code>NextToken</code> value.</p>
     #   @return [String]
     class ListBridgesRequest < Struct.new(
+      nil,
       :filter_arn,
       :max_results,
       :next_token,
@@ -1763,6 +1859,7 @@ module Aws::MediaConnect
     #   <p> The token that identifies the batch of results that you want to see. </p> <p>For example, you submit a <code>ListBridges</code> request with <code>MaxResults</code> set at 5. The service returns the first batch of results (up to 5) and a <code>NextToken</code> value. To see the next batch of results, you can submit the <code>ListBridges</code> request a second time and specify the <code>NextToken</code> value.</p>
     #   @return [String]
     class ListBridgesResponse < Struct.new(
+      nil,
       :bridges,
       :next_token,
       keyword_init: true
@@ -1777,6 +1874,7 @@ module Aws::MediaConnect
     #   <p> The token that identifies the batch of results that you want to see. </p> <p>For example, you submit a <code>ListEntitlements</code> request with <code>MaxResults</code> set at 5. The service returns the first batch of results (up to 5) and a <code>NextToken</code> value. To see the next batch of results, you can submit the <code>ListEntitlements</code> request a second time and specify the <code>NextToken</code> value.</p>
     #   @return [String]
     class ListEntitlementsRequest < Struct.new(
+      nil,
       :max_results,
       :next_token,
       keyword_init: true
@@ -1791,6 +1889,7 @@ module Aws::MediaConnect
     #   <p>The token that identifies the batch of results that you want to see. </p> <p>For example, you submit a ListEntitlements request with <code>MaxResults</code> set at 5. The service returns the first batch of results (up to 5) and a NextToken value. To see the next batch of results, you can submit the <code>ListEntitlements</code> request a second time and specify the <code>NextToken</code> value. </p>
     #   @return [String]
     class ListEntitlementsResponse < Struct.new(
+      nil,
       :entitlements,
       :next_token,
       keyword_init: true
@@ -1805,6 +1904,7 @@ module Aws::MediaConnect
     #   <p> The token that identifies the batch of results that you want to see. </p> <p>For example, you submit a <code>ListFlows</code> request with MaxResults set at 5. The service returns the first batch of results (up to 5) and a <code>NextToken</code> value. To see the next batch of results, you can submit the <code>ListFlows</code> request a second time and specify the <code>NextToken</code> value.</p>
     #   @return [String]
     class ListFlowsRequest < Struct.new(
+      nil,
       :max_results,
       :next_token,
       keyword_init: true
@@ -1819,6 +1919,7 @@ module Aws::MediaConnect
     #   <p> The token that identifies the batch of results that you want to see. </p> <p>For example, you submit a <code>ListFlows</code> request with MaxResults set at 5. The service returns the first batch of results (up to 5) and a <code>NextToken</code> value. To see the next batch of results, you can submit the <code>ListFlows</code> request a second time and specify the <code>NextToken</code> value.</p>
     #   @return [String]
     class ListFlowsResponse < Struct.new(
+      nil,
       :flows,
       :next_token,
       keyword_init: true
@@ -1836,6 +1937,7 @@ module Aws::MediaConnect
     #   <p> The token that identifies the batch of results that you want to see. </p> <p>For example, you submit a <code>ListInstances</code> request with <code>MaxResults</code> set at 5. The service returns the first batch of results (up to 5) and a <code>NextToken</code> value. To see the next batch of results, you can submit the <code>ListInstances</code> request a second time and specify the <code>NextToken</code> value.</p>
     #   @return [String]
     class ListGatewayInstancesRequest < Struct.new(
+      nil,
       :filter_arn,
       :max_results,
       :next_token,
@@ -1851,6 +1953,7 @@ module Aws::MediaConnect
     #   <p> The token that identifies the batch of results that you want to see. </p> <p>For example, you submit a <code>ListInstances</code> request with MaxResults set at 5. The service returns the first batch of results (up to 5) and a <code>NextToken</code> value. To see the next batch of results, you can submit the <code>ListInstances</code> request a second time and specify the <code>NextToken</code> value.</p>
     #   @return [String]
     class ListGatewayInstancesResponse < Struct.new(
+      nil,
       :instances,
       :next_token,
       keyword_init: true
@@ -1865,6 +1968,7 @@ module Aws::MediaConnect
     #   <p> The token that identifies the batch of results that you want to see. </p> <p>For example, you submit a <code>ListGateways</code> request with <code>MaxResults</code> set at 5. The service returns the first batch of results (up to 5) and a <code>NextToken</code> value. To see the next batch of results, you can submit the <code>ListGateways</code> request a second time and specify the <code>NextToken</code> value.</p>
     #   @return [String]
     class ListGatewaysRequest < Struct.new(
+      nil,
       :max_results,
       :next_token,
       keyword_init: true
@@ -1879,6 +1983,7 @@ module Aws::MediaConnect
     #   <p> The token that identifies the batch of results that you want to see. </p> <p>For example, you submit a <code>ListGateways</code> request with <code>MaxResults</code> set at 5. The service returns the first batch of results (up to 5) and a <code>NextToken</code> value. To see the next batch of results, you can submit the <code>ListGateways</code> request a second time and specify the <code>NextToken</code> value.</p>
     #   @return [String]
     class ListGatewaysResponse < Struct.new(
+      nil,
       :gateways,
       :next_token,
       keyword_init: true
@@ -1893,6 +1998,7 @@ module Aws::MediaConnect
     #   <p> The token that identifies the batch of results that you want to see. </p> <p>For example, you submit a <code>ListOfferings</code> request with <code>MaxResults</code> set at 5. The service returns the first batch of results (up to 5) and a <code>NextToken</code> value. To see the next batch of results, you can submit the <code>ListOfferings</code> request a second time and specify the <code>NextToken</code> value.</p>
     #   @return [String]
     class ListOfferingsRequest < Struct.new(
+      nil,
       :max_results,
       :next_token,
       keyword_init: true
@@ -1907,6 +2013,7 @@ module Aws::MediaConnect
     #   <p> A list of offerings that are available to this account in the current Amazon Web Services Region.</p>
     #   @return [Array<Types::Offering>]
     class ListOfferingsResponse < Struct.new(
+      nil,
       :next_token,
       :offerings,
       keyword_init: true
@@ -1921,6 +2028,7 @@ module Aws::MediaConnect
     #   <p> The token that identifies the batch of results that you want to see. </p> <p>For example, you submit a <code>ListReservations</code> request with <code>MaxResults</code> set at 5. The service returns the first batch of results (up to 5) and a <code>NextToken</code> value. To see the next batch of results, you can submit the <code>ListOfferings</code> request a second time and specify the <code>NextToken</code> value. </p>
     #   @return [String]
     class ListReservationsRequest < Struct.new(
+      nil,
       :max_results,
       :next_token,
       keyword_init: true
@@ -1935,6 +2043,7 @@ module Aws::MediaConnect
     #   <p> A list of all reservations that have been purchased by this account in the current Amazon Web Services Region. </p>
     #   @return [Array<Types::Reservation>]
     class ListReservationsResponse < Struct.new(
+      nil,
       :next_token,
       :reservations,
       keyword_init: true
@@ -1946,6 +2055,7 @@ module Aws::MediaConnect
     #   <p> The Amazon Resource Name (ARN) that identifies the MediaConnect resource for which to list the tags.</p>
     #   @return [String]
     class ListTagsForResourceRequest < Struct.new(
+      nil,
       :resource_arn,
       keyword_init: true
     )
@@ -1956,6 +2066,7 @@ module Aws::MediaConnect
     #   <p> A map from tag keys to values. Tag keys can have a maximum character length of 128 characters, and tag values can have a maximum length of 256 characters.</p>
     #   @return [Hash<String, String>]
     class ListTagsForResourceResponse < Struct.new(
+      nil,
       :tags,
       keyword_init: true
     )
@@ -1979,6 +2090,7 @@ module Aws::MediaConnect
     #   <p> The ARN of the gateway associated with the bridge.</p>
     #   @return [String]
     class ListedBridge < Struct.new(
+      nil,
       :bridge_arn,
       :bridge_state,
       :bridge_type,
@@ -2000,6 +2112,7 @@ module Aws::MediaConnect
     #   <p> The name of the entitlement.</p>
     #   @return [String]
     class ListedEntitlement < Struct.new(
+      nil,
       :data_transfer_subscriber_fee_percent,
       :entitlement_arn,
       :entitlement_name,
@@ -2031,6 +2144,7 @@ module Aws::MediaConnect
     #   <p> The maintenance settings for the flow. </p>
     #   @return [Types::Maintenance]
     class ListedFlow < Struct.new(
+      nil,
       :availability_zone,
       :description,
       :flow_arn,
@@ -2054,6 +2168,7 @@ module Aws::MediaConnect
     #   <p> The name of the gateway.</p>
     #   @return [String]
     class ListedGateway < Struct.new(
+      nil,
       :gateway_arn,
       :gateway_state,
       :name,
@@ -2076,6 +2191,7 @@ module Aws::MediaConnect
     #   <p> The status of the instance.</p>
     #   @return [String]
     class ListedGatewayInstance < Struct.new(
+      nil,
       :gateway_arn,
       :gateway_instance_arn,
       :instance_id,
@@ -2099,6 +2215,7 @@ module Aws::MediaConnect
     #   <p> UTC time when the maintenance will happen. Use 24-hour HH:MM format. Minutes must be 00. Example: 13:00. The default value is 02:00.</p>
     #   @return [String]
     class Maintenance < Struct.new(
+      nil,
       :maintenance_day,
       :maintenance_deadline,
       :maintenance_scheduled_date,
@@ -2134,6 +2251,7 @@ module Aws::MediaConnect
     #   <p> The resolution of the video. </p>
     #   @return [String]
     class MediaStream < Struct.new(
+      nil,
       :attributes,
       :clock_rate,
       :description,
@@ -2155,6 +2273,7 @@ module Aws::MediaConnect
     #   <p>The audio language, in a format that is recognized by the receiver. </p>
     #   @return [String]
     class MediaStreamAttributes < Struct.new(
+      nil,
       :fmtp,
       :lang,
       keyword_init: true
@@ -2170,6 +2289,7 @@ module Aws::MediaConnect
     #   <p>The audio language, in a format that is recognized by the receiver. </p>
     #   @return [String]
     class MediaStreamAttributesRequest < Struct.new(
+      nil,
       :fmtp,
       :lang,
       keyword_init: true
@@ -2191,6 +2311,7 @@ module Aws::MediaConnect
     #   <p> The name of the media stream.</p>
     #   @return [String]
     class MediaStreamOutputConfiguration < Struct.new(
+      nil,
       :destination_configurations,
       :encoding_name,
       :encoding_parameters,
@@ -2214,6 +2335,7 @@ module Aws::MediaConnect
     #   <p> The name of the media stream that is associated with the output.</p>
     #   @return [String]
     class MediaStreamOutputConfigurationRequest < Struct.new(
+      nil,
       :destination_configurations,
       :encoding_name,
       :encoding_parameters,
@@ -2234,6 +2356,7 @@ module Aws::MediaConnect
     #   <p>A name that helps you distinguish one media stream from another. </p>
     #   @return [String]
     class MediaStreamSourceConfiguration < Struct.new(
+      nil,
       :encoding_name,
       :input_configurations,
       :media_stream_name,
@@ -2253,6 +2376,7 @@ module Aws::MediaConnect
     #   <p>The name of the media stream. </p>
     #   @return [String]
     class MediaStreamSourceConfigurationRequest < Struct.new(
+      nil,
       :encoding_name,
       :input_configurations,
       :media_stream_name,
@@ -2272,6 +2396,7 @@ module Aws::MediaConnect
     #   <p> The name of the resource.</p>
     #   @return [String]
     class MessageDetail < Struct.new(
+      nil,
       :code,
       :message,
       :resource_name,
@@ -2285,6 +2410,7 @@ module Aws::MediaConnect
     #   <p> A list of errors that might have been generated from processes on this flow.</p>
     #   @return [Array<String>]
     class Messages < Struct.new(
+      nil,
       :errors,
       keyword_init: true
     )
@@ -2305,6 +2431,7 @@ module Aws::MediaConnect
     #   <p> Contains the settings for video stream metrics monitoring.</p>
     #   @return [Array<Types::VideoMonitoringSetting>]
     class MonitoringConfig < Struct.new(
+      nil,
       :thumbnail_state,
       :audio_monitoring_settings,
       :content_quality_analysis_state,
@@ -2319,6 +2446,7 @@ module Aws::MediaConnect
     #   <p> The IP address of the source for source-specific multicast (SSM).</p>
     #   @return [String]
     class MulticastSourceSettings < Struct.new(
+      nil,
       :multicast_source_ip,
       keyword_init: true
     )
@@ -2336,6 +2464,7 @@ module Aws::MediaConnect
     #   <p>A list of up to three NDI discovery server configurations. While not required by the API, this configuration is necessary for NDI functionality to work properly. </p>
     #   @return [Array<Types::NdiDiscoveryServerConfig>]
     class NdiConfig < Struct.new(
+      nil,
       :ndi_state,
       :machine_name,
       :ndi_discovery_servers,
@@ -2355,6 +2484,7 @@ module Aws::MediaConnect
     #   <p>The identifier for the Virtual Private Cloud (VPC) network interface used by the flow. </p>
     #   @return [String]
     class NdiDiscoveryServerConfig < Struct.new(
+      nil,
       :discovery_server_address,
       :discovery_server_port,
       :vpc_interface_adapter,
@@ -2367,6 +2497,7 @@ module Aws::MediaConnect
     # @!attribute message
     #   @return [String]
     class NotFoundException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -2399,6 +2530,7 @@ module Aws::MediaConnect
     #   <p> A definition of the amount of outbound bandwidth that you would be reserving if you purchase the offering.</p>
     #   @return [Types::ResourceSpecification]
     class Offering < Struct.new(
+      nil,
       :currency_code,
       :duration,
       :duration_units,
@@ -2465,6 +2597,7 @@ module Aws::MediaConnect
     #   <p>The IP address of the device that is currently receiving content from this output.</p> <note> <ul> <li> <p>For outputs that use protocols where you specify the destination (such as SRT Caller or Zixi Push), this value matches the configured destination address.</p> </li> <li> <p>For outputs that use listener protocols (such as SRT Listener), this value shows the address of the connected receiver. </p> </li> <li> <p>Peer IP addresses aren't available for entitlements, managed MediaLive outputs, NDI outputs, and CDI/ST2110 outputs. </p> </li> <li> <p>The peer IP address might not be visible for flows that haven't been started yet, or flows that were started before May 2025. In these cases, restart your flow to see the peer IP address.</p> </li> </ul> </note>
     #   @return [String]
     class Output < Struct.new(
+      nil,
       :data_transfer_subscriber_fee_percent,
       :description,
       :destination,
@@ -2497,6 +2630,7 @@ module Aws::MediaConnect
     #   <p> The date and time that you want the reservation to begin, in Coordinated Universal Time (UTC). </p> <p>You can specify any date and time between 12:00am on the first day of the current month to the current time on today's date, inclusive. Specify the start in a 24-hour notation. Use the following format: <code>YYYY-MM-DDTHH:mm:SSZ</code>, where <code>T</code> and <code>Z</code> are literal characters. For example, to specify 11:30pm on March 5, 2020, enter <code>2020-03-05T23:30:00Z</code>.</p>
     #   @return [String]
     class PurchaseOfferingRequest < Struct.new(
+      nil,
       :offering_arn,
       :reservation_name,
       :start,
@@ -2509,6 +2643,7 @@ module Aws::MediaConnect
     #   <p>The details of the reservation that you just created when you purchased the offering. </p>
     #   @return [Types::Reservation]
     class PurchaseOfferingResponse < Struct.new(
+      nil,
       :reservation,
       keyword_init: true
     )
@@ -2522,6 +2657,7 @@ module Aws::MediaConnect
     #   <p> The name of the bridge output that you want to remove.</p>
     #   @return [String]
     class RemoveBridgeOutputRequest < Struct.new(
+      nil,
       :bridge_arn,
       :output_name,
       keyword_init: true
@@ -2536,6 +2672,7 @@ module Aws::MediaConnect
     #   <p> The name of the bridge output that was removed. </p>
     #   @return [String]
     class RemoveBridgeOutputResponse < Struct.new(
+      nil,
       :bridge_arn,
       :output_name,
       keyword_init: true
@@ -2550,6 +2687,7 @@ module Aws::MediaConnect
     #   <p> The name of the bridge source that you want to remove.</p>
     #   @return [String]
     class RemoveBridgeSourceRequest < Struct.new(
+      nil,
       :bridge_arn,
       :source_name,
       keyword_init: true
@@ -2564,6 +2702,7 @@ module Aws::MediaConnect
     #   <p> The name of the bridge source that was removed. </p>
     #   @return [String]
     class RemoveBridgeSourceResponse < Struct.new(
+      nil,
       :bridge_arn,
       :source_name,
       keyword_init: true
@@ -2578,6 +2717,7 @@ module Aws::MediaConnect
     #   <p> The name of the media stream that you want to remove.</p>
     #   @return [String]
     class RemoveFlowMediaStreamRequest < Struct.new(
+      nil,
       :flow_arn,
       :media_stream_name,
       keyword_init: true
@@ -2592,6 +2732,7 @@ module Aws::MediaConnect
     #   <p> The name of the media stream that was removed.</p>
     #   @return [String]
     class RemoveFlowMediaStreamResponse < Struct.new(
+      nil,
       :flow_arn,
       :media_stream_name,
       keyword_init: true
@@ -2606,6 +2747,7 @@ module Aws::MediaConnect
     #   <p> The ARN of the output that you want to remove. </p>
     #   @return [String]
     class RemoveFlowOutputRequest < Struct.new(
+      nil,
       :flow_arn,
       :output_arn,
       keyword_init: true
@@ -2620,6 +2762,7 @@ module Aws::MediaConnect
     #   <p> The ARN of the output that was removed. </p>
     #   @return [String]
     class RemoveFlowOutputResponse < Struct.new(
+      nil,
       :flow_arn,
       :output_arn,
       keyword_init: true
@@ -2634,6 +2777,7 @@ module Aws::MediaConnect
     #   <p> The ARN of the source that you want to remove.</p>
     #   @return [String]
     class RemoveFlowSourceRequest < Struct.new(
+      nil,
       :flow_arn,
       :source_arn,
       keyword_init: true
@@ -2648,6 +2792,7 @@ module Aws::MediaConnect
     #   <p> The ARN of the source that was removed. </p>
     #   @return [String]
     class RemoveFlowSourceResponse < Struct.new(
+      nil,
       :flow_arn,
       :source_arn,
       keyword_init: true
@@ -2662,6 +2807,7 @@ module Aws::MediaConnect
     #   <p> The name of the VPC interface that you want to remove.</p>
     #   @return [String]
     class RemoveFlowVpcInterfaceRequest < Struct.new(
+      nil,
       :flow_arn,
       :vpc_interface_name,
       keyword_init: true
@@ -2679,6 +2825,7 @@ module Aws::MediaConnect
     #   <p> The name of the VPC interface that was removed.</p>
     #   @return [String]
     class RemoveFlowVpcInterfaceResponse < Struct.new(
+      nil,
       :flow_arn,
       :non_deleted_network_interface_ids,
       :vpc_interface_name,
@@ -2728,6 +2875,7 @@ module Aws::MediaConnect
     #   <p> The day and time that the reservation becomes active. You set this value when you purchase the offering.</p>
     #   @return [String]
     class Reservation < Struct.new(
+      nil,
       :currency_code,
       :duration,
       :duration_units,
@@ -2754,6 +2902,7 @@ module Aws::MediaConnect
     #   <p> The type of resource and the unit that is being billed for.</p>
     #   @return [String]
     class ResourceSpecification < Struct.new(
+      nil,
       :reserved_bitrate,
       :resource_type,
       keyword_init: true
@@ -2768,6 +2917,7 @@ module Aws::MediaConnect
     #   <p> The flow that you want to revoke an entitlement from.</p>
     #   @return [String]
     class RevokeFlowEntitlementRequest < Struct.new(
+      nil,
       :entitlement_arn,
       :flow_arn,
       keyword_init: true
@@ -2782,6 +2932,7 @@ module Aws::MediaConnect
     #   <p> The ARN of the flow that the entitlement was revoked from.</p>
     #   @return [String]
     class RevokeFlowEntitlementResponse < Struct.new(
+      nil,
       :entitlement_arn,
       :flow_arn,
       keyword_init: true
@@ -2793,6 +2944,7 @@ module Aws::MediaConnect
     # @!attribute message
     #   @return [String]
     class ServiceUnavailableException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -2807,6 +2959,7 @@ module Aws::MediaConnect
     #   <p> The name of the VPC interface attachment to use for this bridge source.</p>
     #   @return [Types::VpcInterfaceAttachment]
     class SetGatewayBridgeSourceRequest < Struct.new(
+      nil,
       :bridge_arn,
       :vpc_interface_attachment,
       keyword_init: true
@@ -2873,6 +3026,7 @@ module Aws::MediaConnect
     #   <p> The source configuration for cloud flows receiving a stream from a bridge.</p>
     #   @return [Types::SetGatewayBridgeSourceRequest]
     class SetSourceRequest < Struct.new(
+      nil,
       :decryption,
       :description,
       :entitlement_arn,
@@ -2905,6 +3059,7 @@ module Aws::MediaConnect
     #   <p>Specifies the number of consecutive seconds of silence that triggers an event or alert. </p>
     #   @return [Integer]
     class SilentAudio < Struct.new(
+      nil,
       :state,
       :threshold_seconds,
       keyword_init: true
@@ -2962,6 +3117,7 @@ module Aws::MediaConnect
     #   <p>The IP address of the device that is currently sending content to this source. </p> <note> <ul> <li> <p>For sources that use protocols where you specify the origin (such as SRT Caller), this value matches the configured origin address. </p> </li> <li> <p>For sources that use listener protocols (such as SRT Listener or RTP), this value shows the address of the connected sender. </p> </li> <li> <p>Peer IP addresses aren't available for entitlements and CDI/ST2110 sources.</p> </li> <li> <p>The peer IP address might not be visible for flows that haven't been started yet, or flows that were started before May 2025. In these cases, restart your flow to see the peer IP address.</p> </li> </ul> </note>
     #   @return [String]
     class Source < Struct.new(
+      nil,
       :data_transfer_subscriber_fee_percent,
       :decryption,
       :description,
@@ -2988,6 +3144,7 @@ module Aws::MediaConnect
     #   <p> The name of the source you choose as the primary source for this flow.</p>
     #   @return [String]
     class SourcePriority < Struct.new(
+      nil,
       :primary_source,
       keyword_init: true
     )
@@ -2998,6 +3155,7 @@ module Aws::MediaConnect
     #   <p> The Amazon Resource Name (ARN) of the flow that you want to start.</p>
     #   @return [String]
     class StartFlowRequest < Struct.new(
+      nil,
       :flow_arn,
       keyword_init: true
     )
@@ -3011,6 +3169,7 @@ module Aws::MediaConnect
     #   <p> The status of the flow when the <code>StartFlow</code> process begins.</p>
     #   @return [String]
     class StartFlowResponse < Struct.new(
+      nil,
       :flow_arn,
       :status,
       keyword_init: true
@@ -3022,6 +3181,7 @@ module Aws::MediaConnect
     #   <p> The Amazon Resource Name (ARN) of the flow that you want to stop.</p>
     #   @return [String]
     class StopFlowRequest < Struct.new(
+      nil,
       :flow_arn,
       keyword_init: true
     )
@@ -3035,6 +3195,7 @@ module Aws::MediaConnect
     #   <p> The status of the flow when the <code>StopFlow</code> process begins.</p>
     #   @return [String]
     class StopFlowResponse < Struct.new(
+      nil,
       :flow_arn,
       :status,
       keyword_init: true
@@ -3049,6 +3210,7 @@ module Aws::MediaConnect
     #   <p> A map from tag keys to values. Tag keys can have a maximum character length of 128 characters, and tag values can have a maximum length of 256 characters.</p>
     #   @return [Hash<String, String>]
     class TagResourceRequest < Struct.new(
+      nil,
       :resource_arn,
       :tags,
       keyword_init: true
@@ -3073,6 +3235,7 @@ module Aws::MediaConnect
     #   <p> The timestamp of when thumbnail was generated.</p>
     #   @return [Time]
     class ThumbnailDetails < Struct.new(
+      nil,
       :flow_arn,
       :thumbnail,
       :thumbnail_messages,
@@ -3087,6 +3250,7 @@ module Aws::MediaConnect
     # @!attribute message
     #   @return [String]
     class TooManyRequestsException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -3140,6 +3304,7 @@ module Aws::MediaConnect
     #   <p>A suffix for the names of the NDI sources that the flow creates. If a custom name isn't specified, MediaConnect uses the output name. </p>
     #   @return [String]
     class Transport < Struct.new(
+      nil,
       :cidr_allow_list,
       :max_bitrate,
       :max_latency,
@@ -3165,6 +3330,7 @@ module Aws::MediaConnect
     #   <p> The list of transport stream programs in the current flow's source.</p>
     #   @return [Array<Types::TransportStreamProgram>]
     class TransportMediaInfo < Struct.new(
+      nil,
       :programs,
       keyword_init: true
     )
@@ -3197,6 +3363,7 @@ module Aws::MediaConnect
     #   <p> The Stream Type as it is reported in the Program Map Table.</p>
     #   @return [String]
     class TransportStream < Struct.new(
+      nil,
       :channels,
       :codec,
       :frame_rate,
@@ -3227,6 +3394,7 @@ module Aws::MediaConnect
     #   <p> The list of elementary transport streams in the program. The list includes video, audio, and data streams.</p>
     #   @return [Array<Types::TransportStream>]
     class TransportStreamProgram < Struct.new(
+      nil,
       :pcr_pid,
       :program_name,
       :program_number,
@@ -3244,6 +3412,7 @@ module Aws::MediaConnect
     #   <p>The keys of the tags to be removed. </p>
     #   @return [Array<String>]
     class UntagResourceRequest < Struct.new(
+      nil,
       :resource_arn,
       :tag_keys,
       keyword_init: true
@@ -3259,6 +3428,7 @@ module Aws::MediaConnect
     #   <p>The name of the VPC interface attachment to use for this source. </p>
     #   @return [Types::VpcInterfaceAttachment]
     class UpdateBridgeFlowSourceRequest < Struct.new(
+      nil,
       :flow_arn,
       :flow_vpc_interface_attachment,
       keyword_init: true
@@ -3283,6 +3453,7 @@ module Aws::MediaConnect
     #   <p>The network output TTL. </p>
     #   @return [Integer]
     class UpdateBridgeNetworkOutputRequest < Struct.new(
+      nil,
       :ip_address,
       :network_name,
       :port,
@@ -3310,6 +3481,7 @@ module Aws::MediaConnect
     #   <p>The network source protocol. </p> <note> <p>Elemental MediaConnect no longer supports the Fujitsu QoS protocol. This reference is maintained for legacy purposes only.</p> </note>
     #   @return [String]
     class UpdateBridgeNetworkSourceRequest < Struct.new(
+      nil,
       :multicast_ip,
       :multicast_source_settings,
       :network_name,
@@ -3330,6 +3502,7 @@ module Aws::MediaConnect
     #   <p> Tname of the output that you want to update. </p>
     #   @return [String]
     class UpdateBridgeOutputRequest < Struct.new(
+      nil,
       :bridge_arn,
       :network_output,
       :output_name,
@@ -3345,6 +3518,7 @@ module Aws::MediaConnect
     #   <p> The bridge output that was updated. </p>
     #   @return [Types::BridgeOutput]
     class UpdateBridgeOutputResponse < Struct.new(
+      nil,
       :bridge_arn,
       :output,
       keyword_init: true
@@ -3365,6 +3539,7 @@ module Aws::MediaConnect
     #   <p> The settings for source failover. </p>
     #   @return [Types::UpdateFailoverConfig]
     class UpdateBridgeRequest < Struct.new(
+      nil,
       :bridge_arn,
       :egress_gateway_bridge,
       :ingress_gateway_bridge,
@@ -3378,6 +3553,7 @@ module Aws::MediaConnect
     #   <p> The bridge that was updated. </p>
     #   @return [Types::Bridge]
     class UpdateBridgeResponse < Struct.new(
+      nil,
       :bridge,
       keyword_init: true
     )
@@ -3397,6 +3573,7 @@ module Aws::MediaConnect
     #   <p> The name of the source that you want to update. </p>
     #   @return [String]
     class UpdateBridgeSourceRequest < Struct.new(
+      nil,
       :bridge_arn,
       :flow_source,
       :network_source,
@@ -3413,6 +3590,7 @@ module Aws::MediaConnect
     #   <p> The updated bridge source. </p>
     #   @return [Types::BridgeSource]
     class UpdateBridgeSourceResponse < Struct.new(
+      nil,
       :bridge_arn,
       :source,
       keyword_init: true
@@ -3427,6 +3605,7 @@ module Aws::MediaConnect
     #   <p> The desired state for the bridge. </p>
     #   @return [String]
     class UpdateBridgeStateRequest < Struct.new(
+      nil,
       :bridge_arn,
       :desired_state,
       keyword_init: true
@@ -3441,6 +3620,7 @@ module Aws::MediaConnect
     #   <p> The new state of the bridge. </p>
     #   @return [String]
     class UpdateBridgeStateResponse < Struct.new(
+      nil,
       :bridge_arn,
       :desired_state,
       keyword_init: true
@@ -3453,6 +3633,7 @@ module Aws::MediaConnect
     #   <p>The maximum expected bitrate (in bps). </p>
     #   @return [Integer]
     class UpdateEgressGatewayBridgeRequest < Struct.new(
+      nil,
       :max_bitrate,
       keyword_init: true
     )
@@ -3488,6 +3669,7 @@ module Aws::MediaConnect
     #   <p> The URL from the API Gateway proxy that you set up to talk to your key server. This parameter is required for SPEKE encryption and is not valid for static key encryption.</p>
     #   @return [String]
     class UpdateEncryption < Struct.new(
+      nil,
       :algorithm,
       :constant_initialization_vector,
       :device_id,
@@ -3516,6 +3698,7 @@ module Aws::MediaConnect
     #   <p>The state of source failover on the flow. If the state is inactive, the flow can have only one source. If the state is active, the flow can have one or two sources. </p>
     #   @return [String]
     class UpdateFailoverConfig < Struct.new(
+      nil,
       :failover_mode,
       :recovery_window,
       :source_priority,
@@ -3544,6 +3727,7 @@ module Aws::MediaConnect
     #   <p> The Amazon Web Services account IDs that you want to share your content with. The receiving accounts (subscribers) will be allowed to create their own flow using your content as the source.</p>
     #   @return [Array<String>]
     class UpdateFlowEntitlementRequest < Struct.new(
+      nil,
       :description,
       :encryption,
       :entitlement_arn,
@@ -3562,6 +3746,7 @@ module Aws::MediaConnect
     #   <p> The ARN of the flow that this entitlement was granted on.</p>
     #   @return [String]
     class UpdateFlowEntitlementResponse < Struct.new(
+      nil,
       :entitlement,
       :flow_arn,
       keyword_init: true
@@ -3591,6 +3776,7 @@ module Aws::MediaConnect
     #   <p>The resolution of the video. </p>
     #   @return [String]
     class UpdateFlowMediaStreamRequest < Struct.new(
+      nil,
       :attributes,
       :clock_rate,
       :description,
@@ -3610,6 +3796,7 @@ module Aws::MediaConnect
     #   <p>The media stream that you updated. </p>
     #   @return [Types::MediaStream]
     class UpdateFlowMediaStreamResponse < Struct.new(
+      nil,
       :flow_arn,
       :media_stream,
       keyword_init: true
@@ -3678,6 +3865,7 @@ module Aws::MediaConnect
     #   <p>A quality setting for the NDI Speed HQ encoder. </p>
     #   @return [Integer]
     class UpdateFlowOutputRequest < Struct.new(
+      nil,
       :cidr_allow_list,
       :description,
       :destination,
@@ -3710,6 +3898,7 @@ module Aws::MediaConnect
     #   <p> The new settings of the output that you updated.</p>
     #   @return [Types::Output]
     class UpdateFlowOutputResponse < Struct.new(
+      nil,
       :flow_arn,
       :output,
       keyword_init: true
@@ -3733,6 +3922,7 @@ module Aws::MediaConnect
     #   <p> Specifies the configuration settings for NDI outputs. Required when the flow includes NDI outputs. </p>
     #   @return [Types::NdiConfig]
     class UpdateFlowRequest < Struct.new(
+      nil,
       :flow_arn,
       :source_failover_config,
       :maintenance,
@@ -3747,6 +3937,7 @@ module Aws::MediaConnect
     #   <p> The updated flow. </p>
     #   @return [Types::Flow]
     class UpdateFlowResponse < Struct.new(
+      nil,
       :flow,
       keyword_init: true
     )
@@ -3814,6 +4005,7 @@ module Aws::MediaConnect
     #   <p>The source configuration for cloud flows receiving a stream from a bridge. </p>
     #   @return [Types::UpdateGatewayBridgeSourceRequest]
     class UpdateFlowSourceRequest < Struct.new(
+      nil,
       :decryption,
       :description,
       :entitlement_arn,
@@ -3846,6 +4038,7 @@ module Aws::MediaConnect
     #   <p>The details of the sources that are assigned to the flow. </p>
     #   @return [Types::Source]
     class UpdateFlowSourceResponse < Struct.new(
+      nil,
       :flow_arn,
       :source,
       keyword_init: true
@@ -3861,6 +4054,7 @@ module Aws::MediaConnect
     #   <p> The name of the VPC interface attachment to use for this bridge source.</p>
     #   @return [Types::VpcInterfaceAttachment]
     class UpdateGatewayBridgeSourceRequest < Struct.new(
+      nil,
       :bridge_arn,
       :vpc_interface_attachment,
       keyword_init: true
@@ -3875,6 +4069,7 @@ module Aws::MediaConnect
     #   <p>The Amazon Resource Name (ARN) of the gateway instance that you want to update. </p>
     #   @return [String]
     class UpdateGatewayInstanceRequest < Struct.new(
+      nil,
       :bridge_placement,
       :gateway_instance_arn,
       keyword_init: true
@@ -3889,6 +4084,7 @@ module Aws::MediaConnect
     #   <p>The ARN of the instance that was updated. </p>
     #   @return [String]
     class UpdateGatewayInstanceResponse < Struct.new(
+      nil,
       :bridge_placement,
       :gateway_instance_arn,
       keyword_init: true
@@ -3904,6 +4100,7 @@ module Aws::MediaConnect
     #   <p> The maximum number of expected outputs.</p>
     #   @return [Integer]
     class UpdateIngressGatewayBridgeRequest < Struct.new(
+      nil,
       :max_bitrate,
       :max_outputs,
       keyword_init: true
@@ -3922,6 +4119,7 @@ module Aws::MediaConnect
     #   <p> UTC time when the maintenance will happen. Use 24-hour HH:MM format. Minutes must be 00. Example: 13:00. The default value is 02:00.</p>
     #   @return [String]
     class UpdateMaintenance < Struct.new(
+      nil,
       :maintenance_day,
       :maintenance_scheduled_date,
       :maintenance_start_hour,
@@ -3938,6 +4136,7 @@ module Aws::MediaConnect
     #   <p>Detects video frames that have not changed. </p>
     #   @return [Types::FrozenFrames]
     class VideoMonitoringSetting < Struct.new(
+      nil,
       :black_frames,
       :frozen_frames,
       keyword_init: true
@@ -3965,6 +4164,7 @@ module Aws::MediaConnect
     #   <p> Subnet must be in the AZ of the Flow. </p>
     #   @return [String]
     class VpcInterface < Struct.new(
+      nil,
       :name,
       :network_interface_ids,
       :network_interface_type,
@@ -3981,6 +4181,7 @@ module Aws::MediaConnect
     #   <p> The name of the VPC interface to use for this resource.</p>
     #   @return [String]
     class VpcInterfaceAttachment < Struct.new(
+      nil,
       :vpc_interface_name,
       keyword_init: true
     )
@@ -4004,6 +4205,7 @@ module Aws::MediaConnect
     #   <p> The subnet IDs that you want to use for your VPC interface. A range of IP addresses in your VPC. When you create your VPC, you specify a range of IPv4 addresses for the VPC in the form of a Classless Inter-Domain Routing (CIDR) block; for example, 10.0.0.0/16. This is the primary CIDR block for your VPC. When you create a subnet for your VPC, you specify the CIDR block for the subnet, which is a subset of the VPC CIDR block. The subnets that you use across all VPC interfaces on the flow must be in the same Availability Zone as the flow. </p>
     #   @return [String]
     class VpcInterfaceRequest < Struct.new(
+      nil,
       :name,
       :network_interface_type,
       :role_arn,

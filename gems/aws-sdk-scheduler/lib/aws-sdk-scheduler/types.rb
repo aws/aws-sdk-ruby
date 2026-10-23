@@ -18,6 +18,7 @@ module Aws::Scheduler
     #   <p>Specifies whether the task's elastic network interface receives a public IP address. You can specify <code>ENABLED</code> only when <code>LaunchType</code> in <code>EcsParameters</code> is set to <code>FARGATE</code>.</p>
     #   @return [String]
     class AwsVpcConfiguration < Struct.new(
+      nil,
       :subnets,
       :security_groups,
       :assign_public_ip,
@@ -39,6 +40,7 @@ module Aws::Scheduler
     #            If no value is specified, the default value of <code>0</code> is used.</p>
     #   @return [Integer]
     class CapacityProviderStrategyItem < Struct.new(
+      nil,
       :capacity_provider,
       :weight,
       :base,
@@ -57,6 +59,7 @@ module Aws::Scheduler
     # @!attribute message
     #   @return [String]
     class ConflictException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -76,6 +79,7 @@ module Aws::Scheduler
     #   </p>
     #   @return [String]
     class CreateScheduleGroupOperationInput < Struct.new(
+      nil,
       :name,
       :tags,
       :client_token,
@@ -88,6 +92,7 @@ module Aws::Scheduler
     #   <p>The Amazon Resource Name (ARN) of the schedule group.</p>
     #   @return [String]
     class CreateScheduleGroupOperationOutput < Struct.new(
+      nil,
       :schedule_group_arn,
       keyword_init: true
     )
@@ -174,6 +179,7 @@ module Aws::Scheduler
     #   <p>Specifies the action that EventBridge Scheduler applies to the schedule after the schedule completes invoking the target.</p>
     #   @return [String]
     class CreateScheduleOperationInput < Struct.new(
+      nil,
       :name,
       :group_name,
       :schedule_expression,
@@ -196,6 +202,7 @@ module Aws::Scheduler
     #   <p>The Amazon Resource Name (ARN) of the schedule.</p>
     #   @return [String]
     class CreateScheduleOperationOutput < Struct.new(
+      nil,
       :schedule_arn,
       keyword_init: true
     )
@@ -207,6 +214,7 @@ module Aws::Scheduler
     #   <p>The Amazon Resource Name (ARN) of the SQS queue specified as the destination for the dead-letter queue.</p>
     #   @return [String]
     class DeadLetterConfig < Struct.new(
+      nil,
       :arn,
       keyword_init: true
     )
@@ -223,6 +231,7 @@ module Aws::Scheduler
     #   </p>
     #   @return [String]
     class DeleteScheduleGroupOperationInput < Struct.new(
+      nil,
       :name,
       :client_token,
       keyword_init: true
@@ -231,6 +240,7 @@ module Aws::Scheduler
     end
 
     class DeleteScheduleGroupOperationOutput < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -249,6 +259,7 @@ module Aws::Scheduler
     #   </p>
     #   @return [String]
     class DeleteScheduleOperationInput < Struct.new(
+      nil,
       :name,
       :group_name,
       :client_token,
@@ -258,6 +269,7 @@ module Aws::Scheduler
     end
 
     class DeleteScheduleOperationOutput < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -320,6 +332,7 @@ module Aws::Scheduler
     #               </a> in the <i>Amazon ECS API Reference</i>.</p>
     #   @return [Array<Hash<String, String>>]
     class EcsParameters < Struct.new(
+      nil,
       :task_definition_arn,
       :task_count,
       :launch_type,
@@ -349,6 +362,7 @@ module Aws::Scheduler
     #   <p>The source of the event.</p>
     #   @return [String]
     class EventBridgeParameters < Struct.new(
+      nil,
       :detail_type,
       :source,
       keyword_init: true
@@ -364,6 +378,7 @@ module Aws::Scheduler
     #   <p>The maximum time window during which a schedule can be invoked.</p>
     #   @return [Integer]
     class FlexibleTimeWindow < Struct.new(
+      nil,
       :mode,
       :maximum_window_in_minutes,
       keyword_init: true
@@ -375,6 +390,7 @@ module Aws::Scheduler
     #   <p>The name of the schedule group to retrieve.</p>
     #   @return [String]
     class GetScheduleGroupOperationInput < Struct.new(
+      nil,
       :name,
       keyword_init: true
     )
@@ -397,6 +413,7 @@ module Aws::Scheduler
     #   <p>The time at which the schedule group was last modified.</p>
     #   @return [Time]
     class GetScheduleGroupOperationOutput < Struct.new(
+      nil,
       :arn,
       :name,
       :state,
@@ -414,6 +431,7 @@ module Aws::Scheduler
     #   <p>The name of the schedule group associated with this schedule. If you omit this, EventBridge Scheduler assumes that the schedule is associated with the default group.</p>
     #   @return [String]
     class GetScheduleOperationInput < Struct.new(
+      nil,
       :name,
       :group_name,
       keyword_init: true
@@ -504,6 +522,7 @@ module Aws::Scheduler
     #   <p>Indicates the action that EventBridge Scheduler applies to the schedule after the schedule completes invoking the target.</p>
     #   @return [String]
     class GetScheduleOperationOutput < Struct.new(
+      nil,
       :arn,
       :group_name,
       :name,
@@ -528,6 +547,7 @@ module Aws::Scheduler
     # @!attribute message
     #   @return [String]
     class InternalServerException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -542,6 +562,7 @@ module Aws::Scheduler
     #            <i>Amazon Kinesis Streams Developer Guide</i>.</p>
     #   @return [String]
     class KinesisParameters < Struct.new(
+      nil,
       :partition_key,
       keyword_init: true
     )
@@ -558,6 +579,7 @@ module Aws::Scheduler
     #   <p>If specified, limits the number of results returned by this operation. The operation also returns a <code>NextToken</code> which you can use in a subsequent operation to retrieve the next set of results.</p>
     #   @return [Integer]
     class ListScheduleGroupsOperationInput < Struct.new(
+      nil,
       :name_prefix,
       :next_token,
       :max_results,
@@ -573,6 +595,7 @@ module Aws::Scheduler
     #   <p>The schedule groups that match the specified criteria.</p>
     #   @return [Array<Types::ScheduleGroupSummary>]
     class ListScheduleGroupsOperationOutput < Struct.new(
+      nil,
       :next_token,
       :schedule_groups,
       keyword_init: true
@@ -596,6 +619,7 @@ module Aws::Scheduler
     #   <p>If specified, limits the number of results returned by this operation. The operation also returns a <code>NextToken</code> which you can use in a subsequent operation to retrieve the next set of results.</p>
     #   @return [Integer]
     class ListSchedulesOperationInput < Struct.new(
+      nil,
       :group_name,
       :name_prefix,
       :state,
@@ -613,6 +637,7 @@ module Aws::Scheduler
     #   <p>The schedules that match the specified criteria.</p>
     #   @return [Array<Types::ScheduleSummary>]
     class ListSchedulesOperationOutput < Struct.new(
+      nil,
       :next_token,
       :schedules,
       keyword_init: true
@@ -624,6 +649,7 @@ module Aws::Scheduler
     #   <p>The ARN of the EventBridge Scheduler resource for which you want to view tags.</p>
     #   @return [String]
     class ListTagsForResourceOperationInput < Struct.new(
+      nil,
       :resource_arn,
       keyword_init: true
     )
@@ -634,6 +660,7 @@ module Aws::Scheduler
     #   <p>The list of tags associated with the specified resource.</p>
     #   @return [Array<Types::Tag>]
     class ListTagsForResourceOperationOutput < Struct.new(
+      nil,
       :tags,
       keyword_init: true
     )
@@ -645,6 +672,7 @@ module Aws::Scheduler
     #   <p>Specifies the Amazon VPC subnets and security groups for the task, and whether a public IP address is to be used. This structure is relevant only for ECS tasks that use the awsvpc network mode.</p>
     #   @return [Types::AwsVpcConfiguration]
     class NetworkConfiguration < Struct.new(
+      nil,
       :awsvpc_configuration,
       keyword_init: true
     )
@@ -660,6 +688,7 @@ module Aws::Scheduler
     #            For more information, see <a href="https://docs.aws.amazon.com/latest/developerguide/cluster-query-language.html">Cluster query language</a> in the <i>Amazon ECS Developer Guide</i>.</p>
     #   @return [String]
     class PlacementConstraint < Struct.new(
+      nil,
       :type,
       :expression,
       keyword_init: true
@@ -679,6 +708,7 @@ module Aws::Scheduler
     #            <code>cpu</code> and <code>memory</code>. For the random placement strategy, this field is not used.</p>
     #   @return [String]
     class PlacementStrategy < Struct.new(
+      nil,
       :type,
       :field,
       keyword_init: true
@@ -690,6 +720,7 @@ module Aws::Scheduler
     # @!attribute message
     #   @return [String]
     class ResourceNotFoundException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -705,6 +736,7 @@ module Aws::Scheduler
     #            until the duration of the <code>MaximumEventAgeInSeconds</code> is reached.</p>
     #   @return [Integer]
     class RetryPolicy < Struct.new(
+      nil,
       :maximum_event_age_in_seconds,
       :maximum_retry_attempts,
       keyword_init: true
@@ -720,6 +752,7 @@ module Aws::Scheduler
     #   <p>Value of parameter to start execution of a SageMaker Model Building Pipeline.</p>
     #   @return [String]
     class SageMakerPipelineParameter < Struct.new(
+      nil,
       :name,
       :value,
       keyword_init: true
@@ -734,6 +767,7 @@ module Aws::Scheduler
     #   <p>List of parameter names and values to use when executing the SageMaker Model Building Pipeline.</p>
     #   @return [Array<Types::SageMakerPipelineParameter>]
     class SageMakerPipelineParameters < Struct.new(
+      nil,
       :pipeline_parameter_list,
       keyword_init: true
     )
@@ -757,6 +791,7 @@ module Aws::Scheduler
     #   <p>The time at which the schedule group was last modified.</p>
     #   @return [Time]
     class ScheduleGroupSummary < Struct.new(
+      nil,
       :arn,
       :name,
       :state,
@@ -790,6 +825,7 @@ module Aws::Scheduler
     #   <p>The schedule's target details.</p>
     #   @return [Types::TargetSummary]
     class ScheduleSummary < Struct.new(
+      nil,
       :arn,
       :name,
       :group_name,
@@ -806,6 +842,7 @@ module Aws::Scheduler
     # @!attribute message
     #   @return [String]
     class ServiceQuotaExceededException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -823,6 +860,7 @@ module Aws::Scheduler
     #   <p>The FIFO message group ID to use as the target.</p>
     #   @return [String]
     class SqsParameters < Struct.new(
+      nil,
       :message_group_id,
       keyword_init: true
     )
@@ -837,6 +875,7 @@ module Aws::Scheduler
     #   <p>The value for the tag.</p>
     #   @return [String]
     class Tag < Struct.new(
+      nil,
       :key,
       :value,
       keyword_init: true
@@ -851,6 +890,7 @@ module Aws::Scheduler
     #   <p>The list of tags to associate with the schedule group.</p>
     #   @return [Array<Types::Tag>]
     class TagResourceOperationInput < Struct.new(
+      nil,
       :resource_arn,
       :tags,
       keyword_init: true
@@ -859,6 +899,7 @@ module Aws::Scheduler
     end
 
     class TagResourceOperationOutput < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -912,6 +953,7 @@ module Aws::Scheduler
     #            <i>Amazon SQS Developer Guide</i>.</p>
     #   @return [Types::SqsParameters]
     class Target < Struct.new(
+      nil,
       :arn,
       :role_arn,
       :dead_letter_config,
@@ -932,6 +974,7 @@ module Aws::Scheduler
     #   <p>The Amazon Resource Name (ARN) of the target.</p>
     #   @return [String]
     class TargetSummary < Struct.new(
+      nil,
       :arn,
       keyword_init: true
     )
@@ -942,6 +985,7 @@ module Aws::Scheduler
     # @!attribute message
     #   @return [String]
     class ThrottlingException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -955,6 +999,7 @@ module Aws::Scheduler
     #   <p>The list of tag keys to remove from the resource.</p>
     #   @return [Array<String>]
     class UntagResourceOperationInput < Struct.new(
+      nil,
       :resource_arn,
       :tag_keys,
       keyword_init: true
@@ -963,6 +1008,7 @@ module Aws::Scheduler
     end
 
     class UntagResourceOperationOutput < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1049,6 +1095,7 @@ module Aws::Scheduler
     #   <p>Specifies the action that EventBridge Scheduler applies to the schedule after the schedule completes invoking the target.</p>
     #   @return [String]
     class UpdateScheduleOperationInput < Struct.new(
+      nil,
       :name,
       :group_name,
       :schedule_expression,
@@ -1071,6 +1118,7 @@ module Aws::Scheduler
     #   <p>The Amazon Resource Name (ARN) of the schedule that you updated.</p>
     #   @return [String]
     class UpdateScheduleOperationOutput < Struct.new(
+      nil,
       :schedule_arn,
       keyword_init: true
     )
@@ -1081,6 +1129,7 @@ module Aws::Scheduler
     # @!attribute message
     #   @return [String]
     class ValidationException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )

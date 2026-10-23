@@ -10,6 +10,7 @@ module Aws::M2
     # @!attribute message
     #   @return [String]
     class AccessDeniedException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -34,6 +35,7 @@ module Aws::M2
     #            set.</p>
     #   @return [Boolean]
     class AlternateKey < Struct.new(
+      nil,
       :name,
       :offset,
       :length,
@@ -93,6 +95,7 @@ module Aws::M2
     #   <p>The Amazon Resource Name (ARN) of the role associated with the application.</p>
     #   @return [String]
     class ApplicationSummary < Struct.new(
+      nil,
       :name,
       :description,
       :application_id,
@@ -125,6 +128,7 @@ module Aws::M2
     #   <p>The timestamp when the application version was created.</p>
     #   @return [Time]
     class ApplicationVersionSummary < Struct.new(
+      nil,
       :application_version,
       :status,
       :status_reason,
@@ -189,6 +193,7 @@ module Aws::M2
     #   <p>The unique identifier of this batch job.</p>
     #   @return [Types::BatchJobIdentifier]
     class BatchJobExecutionSummary < Struct.new(
+      nil,
       :execution_id,
       :application_id,
       :job_id,
@@ -245,6 +250,7 @@ module Aws::M2
     #   <p>The Amazon Web Services Secrets Manager containing user's credentials for authentication and authorization for Cancel Batch Job Execution operation.</p>
     #   @return [String]
     class CancelBatchJobExecutionInput < Struct.new(
+      nil,
       :application_id,
       :execution_id,
       :auth_secrets_manager_arn,
@@ -254,6 +260,7 @@ module Aws::M2
     end
 
     class CancelBatchJobExecutionOutput < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -269,6 +276,7 @@ module Aws::M2
     #   <p>The type of the conflicting resource.</p>
     #   @return [String]
     class ConflictException < Struct.new(
+      nil,
       :message,
       :resource_id,
       :resource_type,
@@ -305,6 +313,7 @@ module Aws::M2
     #            that are not part of the application or are in a different Amazon Web Services account.</p>
     #   @return [String]
     class CreateApplicationInput < Struct.new(
+      nil,
       :name,
       :description,
       :engine_type,
@@ -328,6 +337,7 @@ module Aws::M2
     #   <p>The version number of the application.</p>
     #   @return [Integer]
     class CreateApplicationOutput < Struct.new(
+      nil,
       :application_arn,
       :application_id,
       :application_version,
@@ -349,6 +359,7 @@ module Aws::M2
     #   <p>The identifier of a customer managed key.</p>
     #   @return [String]
     class CreateDataSetExportTaskRequest < Struct.new(
+      nil,
       :application_id,
       :export_config,
       :client_token,
@@ -362,6 +373,7 @@ module Aws::M2
     #   <p>The task identifier. This operation is asynchronous. Use this identifier with the <a>GetDataSetExportTask</a> operation to obtain the status of this task.</p>
     #   @return [String]
     class CreateDataSetExportTaskResponse < Struct.new(
+      nil,
       :task_id,
       keyword_init: true
     )
@@ -382,6 +394,7 @@ module Aws::M2
     #            deleting the clientToken after it expires. </p>
     #   @return [String]
     class CreateDataSetImportTaskInput < Struct.new(
+      nil,
       :application_id,
       :import_config,
       :client_token,
@@ -394,6 +407,7 @@ module Aws::M2
     #   <p>The task identifier. This operation is asynchronous. Use this identifier with the <a>GetDataSetImportTask</a> operation to obtain the status of this task.</p>
     #   @return [String]
     class CreateDataSetImportTaskOutput < Struct.new(
+      nil,
       :task_id,
       keyword_init: true
     )
@@ -418,6 +432,7 @@ module Aws::M2
     #            deleting the clientToken after it expires. </p>
     #   @return [String]
     class CreateDeploymentInput < Struct.new(
+      nil,
       :environment_id,
       :application_id,
       :application_version,
@@ -431,6 +446,7 @@ module Aws::M2
     #   <p>The unique identifier of the deployment.</p>
     #   @return [String]
     class CreateDeploymentOutput < Struct.new(
+      nil,
       :deployment_id,
       keyword_init: true
     )
@@ -488,6 +504,7 @@ module Aws::M2
     #   <p>The identifier of a customer managed key.</p>
     #   @return [String]
     class CreateEnvironmentInput < Struct.new(
+      nil,
       :name,
       :instance_type,
       :description,
@@ -512,6 +529,7 @@ module Aws::M2
     #   <p>The unique identifier of the runtime environment.</p>
     #   @return [String]
     class CreateEnvironmentOutput < Struct.new(
+      nil,
       :environment_id,
       keyword_init: true
     )
@@ -537,6 +555,7 @@ module Aws::M2
     #   <p>The length of a record.</p>
     #   @return [Types::RecordLength]
     class DataSet < Struct.new(
+      nil,
       :storage_type,
       :dataset_name,
       :dataset_org,
@@ -575,6 +594,7 @@ module Aws::M2
     #   <p>The location of the data set.</p>
     #   @return [Types::ExternalLocation]
     class DataSetExportItem < Struct.new(
+      nil,
       :dataset_name,
       :external_location,
       keyword_init: true
@@ -599,6 +619,7 @@ module Aws::M2
     #   <p>The number of data set exports that are in progress.</p>
     #   @return [Integer]
     class DataSetExportSummary < Struct.new(
+      nil,
       :total,
       :succeeded,
       :failed,
@@ -632,6 +653,7 @@ module Aws::M2
     #   <p>If dataset exports failed, the failure reason will show here.</p>
     #   @return [String]
     class DataSetExportTask < Struct.new(
+      nil,
       :task_id,
       :status,
       :summary,
@@ -669,6 +691,7 @@ module Aws::M2
     #   <p>The location of the data set.</p>
     #   @return [Types::ExternalLocation]
     class DataSetImportItem < Struct.new(
+      nil,
       :data_set,
       :external_location,
       keyword_init: true
@@ -693,6 +716,7 @@ module Aws::M2
     #   <p>The number of data set imports that are in progress.</p>
     #   @return [Integer]
     class DataSetImportSummary < Struct.new(
+      nil,
       :total,
       :succeeded,
       :failed,
@@ -726,6 +750,7 @@ module Aws::M2
     #   <p>If dataset import failed, the failure reason will show here.</p>
     #   @return [String]
     class DataSetImportTask < Struct.new(
+      nil,
       :task_id,
       :status,
       :summary,
@@ -755,6 +780,7 @@ module Aws::M2
     #   <p>The last time the data set was referenced.</p>
     #   @return [Time]
     class DataSetSummary < Struct.new(
+      nil,
       :data_set_name,
       :data_set_org,
       :format,
@@ -859,6 +885,7 @@ module Aws::M2
     #            deployed.</p>
     #   @return [String]
     class DeleteApplicationFromEnvironmentInput < Struct.new(
+      nil,
       :application_id,
       :environment_id,
       keyword_init: true
@@ -867,6 +894,7 @@ module Aws::M2
     end
 
     class DeleteApplicationFromEnvironmentOutput < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -876,6 +904,7 @@ module Aws::M2
     #   <p>The unique identifier of the application you want to delete.</p>
     #   @return [String]
     class DeleteApplicationInput < Struct.new(
+      nil,
       :application_id,
       keyword_init: true
     )
@@ -883,6 +912,7 @@ module Aws::M2
     end
 
     class DeleteApplicationOutput < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -892,6 +922,7 @@ module Aws::M2
     #   <p>The unique identifier of the runtime environment you want to delete.</p>
     #   @return [String]
     class DeleteEnvironmentInput < Struct.new(
+      nil,
       :environment_id,
       keyword_init: true
     )
@@ -899,6 +930,7 @@ module Aws::M2
     end
 
     class DeleteEnvironmentOutput < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -915,6 +947,7 @@ module Aws::M2
     #   <p>The reason for the reported status.</p>
     #   @return [String]
     class DeployedVersionSummary < Struct.new(
+      nil,
       :application_version,
       :status,
       :status_reason,
@@ -946,6 +979,7 @@ module Aws::M2
     #   <p>The reason for the reported status.</p>
     #   @return [String]
     class DeploymentSummary < Struct.new(
+      nil,
       :deployment_id,
       :application_id,
       :environment_id,
@@ -966,6 +1000,7 @@ module Aws::M2
     #   <p>The mount point for the file system.</p>
     #   @return [String]
     class EfsStorageConfiguration < Struct.new(
+      nil,
       :file_system_id,
       :mount_point,
       keyword_init: true
@@ -981,6 +1016,7 @@ module Aws::M2
     #   <p>The version of the engine type used by the application.</p>
     #   @return [String]
     class EngineVersionsSummary < Struct.new(
+      nil,
       :engine_type,
       :engine_version,
       keyword_init: true
@@ -1018,6 +1054,7 @@ module Aws::M2
     #   <p>The network type supported by the runtime environment.</p>
     #   @return [String]
     class EnvironmentSummary < Struct.new(
+      nil,
       :name,
       :environment_arn,
       :environment_id,
@@ -1036,6 +1073,7 @@ module Aws::M2
     # @!attribute message
     #   @return [String]
     class ExecutionTimeoutException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -1065,6 +1103,7 @@ module Aws::M2
     #   <p>The path to the file containing the batch job definition.</p>
     #   @return [String]
     class FileBatchJobDefinition < Struct.new(
+      nil,
       :file_name,
       :folder_path,
       keyword_init: true
@@ -1081,6 +1120,7 @@ module Aws::M2
     #   <p>The relative path to the file name for the batch job identifier.</p>
     #   @return [String]
     class FileBatchJobIdentifier < Struct.new(
+      nil,
       :file_name,
       :folder_path,
       keyword_init: true
@@ -1096,6 +1136,7 @@ module Aws::M2
     #   <p>The mount point for the file system.</p>
     #   @return [String]
     class FsxStorageConfiguration < Struct.new(
+      nil,
       :file_system_id,
       :mount_point,
       keyword_init: true
@@ -1115,6 +1156,7 @@ module Aws::M2
     #   <p>The disposition of the data set in the catalog.</p>
     #   @return [String]
     class GdgAttributes < Struct.new(
+      nil,
       :limit,
       :roll_disposition,
       keyword_init: true
@@ -1139,6 +1181,7 @@ module Aws::M2
     #   <p>The disposition of the data set in the catalog.</p>
     #   @return [String]
     class GdgDetailAttributes < Struct.new(
+      nil,
       :limit,
       :roll_disposition,
       keyword_init: true
@@ -1155,6 +1198,7 @@ module Aws::M2
     #   <p>The identifier of the application.</p>
     #   @return [String]
     class GetApplicationInput < Struct.new(
+      nil,
       :application_id,
       keyword_init: true
     )
@@ -1230,6 +1274,7 @@ module Aws::M2
     #   <p>The Amazon Resource Name (ARN) of the role associated with the application.</p>
     #   @return [String]
     class GetApplicationOutput < Struct.new(
+      nil,
       :name,
       :description,
       :application_id,
@@ -1262,6 +1307,7 @@ module Aws::M2
     #   <p>The specific version of the application.</p>
     #   @return [Integer]
     class GetApplicationVersionInput < Struct.new(
+      nil,
       :application_id,
       :application_version,
       keyword_init: true
@@ -1292,6 +1338,7 @@ module Aws::M2
     #   <p>The reason for the reported status.</p>
     #   @return [String]
     class GetApplicationVersionOutput < Struct.new(
+      nil,
       :name,
       :application_version,
       :description,
@@ -1311,6 +1358,7 @@ module Aws::M2
     #   <p>The unique identifier of the batch job execution.</p>
     #   @return [String]
     class GetBatchJobExecutionInput < Struct.new(
+      nil,
       :application_id,
       :execution_id,
       keyword_init: true
@@ -1361,6 +1409,7 @@ module Aws::M2
     #   <p>The step/procedure step information for the restart batch job operation.</p>
     #   @return [Types::JobStepRestartMarker]
     class GetBatchJobExecutionOutput < Struct.new(
+      nil,
       :execution_id,
       :application_id,
       :job_id,
@@ -1386,6 +1435,7 @@ module Aws::M2
     #   <p>The name of the data set.</p>
     #   @return [String]
     class GetDataSetDetailsRequest < Struct.new(
+      nil,
       :application_id,
       :data_set_name,
       keyword_init: true
@@ -1421,6 +1471,7 @@ module Aws::M2
     #   <p>File size of the dataset.</p>
     #   @return [Integer]
     class GetDataSetDetailsResponse < Struct.new(
+      nil,
       :data_set_name,
       :data_set_org,
       :record_length,
@@ -1449,6 +1500,7 @@ module Aws::M2
     #   <p>The task identifier returned by the <a>CreateDataSetExportTask</a> operation.</p>
     #   @return [String]
     class GetDataSetExportTaskRequest < Struct.new(
+      nil,
       :application_id,
       :task_id,
       keyword_init: true
@@ -1472,6 +1524,7 @@ module Aws::M2
     #   <p>The identifier of a customer managed key used for exported data set encryption.</p>
     #   @return [String]
     class GetDataSetExportTaskResponse < Struct.new(
+      nil,
       :task_id,
       :status,
       :summary,
@@ -1490,6 +1543,7 @@ module Aws::M2
     #         </p>
     #   @return [String]
     class GetDataSetImportTaskInput < Struct.new(
+      nil,
       :application_id,
       :task_id,
       keyword_init: true
@@ -1507,6 +1561,7 @@ module Aws::M2
     #   <p>A summary of the status of the task.</p>
     #   @return [Types::DataSetImportSummary]
     class GetDataSetImportTaskOutput < Struct.new(
+      nil,
       :task_id,
       :status,
       :summary,
@@ -1522,6 +1577,7 @@ module Aws::M2
     #   <p>The unique identifier of the application.</p>
     #   @return [String]
     class GetDeploymentInput < Struct.new(
+      nil,
       :deployment_id,
       :application_id,
       keyword_init: true
@@ -1551,6 +1607,7 @@ module Aws::M2
     #   <p>The reason for the reported status.</p>
     #   @return [String]
     class GetDeploymentOutput < Struct.new(
+      nil,
       :deployment_id,
       :application_id,
       :environment_id,
@@ -1567,6 +1624,7 @@ module Aws::M2
     #   <p>The unique identifier of the runtime environment.</p>
     #   @return [String]
     class GetEnvironmentInput < Struct.new(
+      nil,
       :environment_id,
       keyword_init: true
     )
@@ -1651,6 +1709,7 @@ module Aws::M2
     #   <p>The network type supported by the runtime environment.</p>
     #   @return [String]
     class GetEnvironmentOutput < Struct.new(
+      nil,
       :name,
       :description,
       :environment_arn,
@@ -1688,6 +1747,7 @@ module Aws::M2
     #   <p>Single sign-on AWS Blu Insights URL.</p>
     #   @return [String]
     class GetSignedBluinsightsUrlResponse < Struct.new(
+      nil,
       :signed_bi_url,
       keyword_init: true
     )
@@ -1699,6 +1759,7 @@ module Aws::M2
     #   <p>The number of instances in a high availability configuration. The minimum possible value is 1 and the maximum is 100.</p>
     #   @return [Integer]
     class HighAvailabilityConfig < Struct.new(
+      nil,
       :desired_capacity,
       keyword_init: true
     )
@@ -1712,6 +1773,7 @@ module Aws::M2
     #   <p>The number of seconds to wait before retrying the request.</p>
     #   @return [Integer]
     class InternalServerException < Struct.new(
+      nil,
       :message,
       :retry_after_seconds,
       keyword_init: true
@@ -1773,6 +1835,7 @@ module Aws::M2
     #   <p>The step-level checkpoint status for an Amazon Web Services Blu Age application batch job.</p>
     #   @return [Time]
     class JobStep < Struct.new(
+      nil,
       :step_number,
       :step_name,
       :proc_step_number,
@@ -1815,6 +1878,7 @@ module Aws::M2
     #   <p>The step-level checkpoint timestamp (creation or last modification) for an Amazon Web Services Blu Age application batch job.</p>
     #   @return [Boolean]
     class JobStepRestartMarker < Struct.new(
+      nil,
       :from_step,
       :from_proc_step,
       :to_step,
@@ -1844,6 +1908,7 @@ module Aws::M2
     #   <p>The unique identifier of the application.</p>
     #   @return [String]
     class ListApplicationVersionsRequest < Struct.new(
+      nil,
       :next_token,
       :max_results,
       :application_id,
@@ -1860,6 +1925,7 @@ module Aws::M2
     #     that is passed to a subsequent call to this operation to retrieve the next set of items.</p>
     #   @return [String]
     class ListApplicationVersionsResponse < Struct.new(
+      nil,
       :application_versions,
       :next_token,
       keyword_init: true
@@ -1881,6 +1947,7 @@ module Aws::M2
     #            deployed.</p>
     #   @return [String]
     class ListApplicationsRequest < Struct.new(
+      nil,
       :next_token,
       :max_results,
       :names,
@@ -1899,6 +1966,7 @@ module Aws::M2
     #            applications.</p>
     #   @return [String]
     class ListApplicationsResponse < Struct.new(
+      nil,
       :applications,
       :next_token,
       keyword_init: true
@@ -1922,6 +1990,7 @@ module Aws::M2
     #            on the file names of FileBatchJobDefinitions.</p>
     #   @return [String]
     class ListBatchJobDefinitionsRequest < Struct.new(
+      nil,
       :next_token,
       :max_results,
       :application_id,
@@ -1939,6 +2008,7 @@ module Aws::M2
     #     that is passed to a subsequent call to this operation to retrieve the next set of items.</p>
     #   @return [String]
     class ListBatchJobDefinitionsResponse < Struct.new(
+      nil,
       :batch_job_definitions,
       :next_token,
       keyword_init: true
@@ -1972,6 +2042,7 @@ module Aws::M2
     #   <p>The time before the batch job executions started.</p>
     #   @return [Time]
     class ListBatchJobExecutionsInput < Struct.new(
+      nil,
       :next_token,
       :max_results,
       :application_id,
@@ -1993,6 +2064,7 @@ module Aws::M2
     #            executions.</p>
     #   @return [String]
     class ListBatchJobExecutionsOutput < Struct.new(
+      nil,
       :batch_job_executions,
       :next_token,
       keyword_init: true
@@ -2010,6 +2082,7 @@ module Aws::M2
     #   <p>The Amazon Web Services Secrets Manager containing user's credentials for authentication and authorization for List Batch Job Restart Points operation.</p>
     #   @return [String]
     class ListBatchJobRestartPointsRequest < Struct.new(
+      nil,
       :application_id,
       :execution_id,
       :auth_secrets_manager_arn,
@@ -2022,6 +2095,7 @@ module Aws::M2
     #   <p>Returns all the batch job steps and related information for a batch job that previously ran.</p>
     #   @return [Array<Types::JobStep>]
     class ListBatchJobRestartPointsResponse < Struct.new(
+      nil,
       :batch_job_steps,
       keyword_init: true
     )
@@ -2040,6 +2114,7 @@ module Aws::M2
     #   <p>The unique identifier of the application.</p>
     #   @return [String]
     class ListDataSetExportHistoryRequest < Struct.new(
+      nil,
       :next_token,
       :max_results,
       :application_id,
@@ -2056,6 +2131,7 @@ module Aws::M2
     #     that is passed to a subsequent call to this operation to retrieve the next set of items.</p>
     #   @return [String]
     class ListDataSetExportHistoryResponse < Struct.new(
+      nil,
       :data_set_export_tasks,
       :next_token,
       keyword_init: true
@@ -2075,6 +2151,7 @@ module Aws::M2
     #   <p>The unique identifier of the application.</p>
     #   @return [String]
     class ListDataSetImportHistoryRequest < Struct.new(
+      nil,
       :next_token,
       :max_results,
       :application_id,
@@ -2091,6 +2168,7 @@ module Aws::M2
     #     that is passed to a subsequent call to this operation to retrieve the next set of items.</p>
     #   @return [String]
     class ListDataSetImportHistoryResponse < Struct.new(
+      nil,
       :data_set_import_tasks,
       :next_token,
       keyword_init: true
@@ -2118,6 +2196,7 @@ module Aws::M2
     #   <p>Filter dataset name matching the specified pattern. Can use * and % as wild cards.</p>
     #   @return [String]
     class ListDataSetsRequest < Struct.new(
+      nil,
       :application_id,
       :next_token,
       :max_results,
@@ -2138,6 +2217,7 @@ module Aws::M2
     #     that is passed to a subsequent call to this operation to retrieve the next set of items.</p>
     #   @return [String]
     class ListDataSetsResponse < Struct.new(
+      nil,
       :data_sets,
       :next_token,
       keyword_init: true
@@ -2157,6 +2237,7 @@ module Aws::M2
     #   <p>The application identifier.</p>
     #   @return [String]
     class ListDeploymentsRequest < Struct.new(
+      nil,
       :next_token,
       :max_results,
       :application_id,
@@ -2173,6 +2254,7 @@ module Aws::M2
     #     that is passed to a subsequent call to this operation to retrieve the next set of items.</p>
     #   @return [String]
     class ListDeploymentsResponse < Struct.new(
+      nil,
       :deployments,
       :next_token,
       keyword_init: true
@@ -2192,6 +2274,7 @@ module Aws::M2
     #   <p>The maximum number of objects to return.</p>
     #   @return [Integer]
     class ListEngineVersionsInput < Struct.new(
+      nil,
       :engine_type,
       :next_token,
       :max_results,
@@ -2208,6 +2291,7 @@ module Aws::M2
     #     that is passed to a subsequent call to this operation to retrieve the next set of items.</p>
     #   @return [String]
     class ListEngineVersionsOutput < Struct.new(
+      nil,
       :engine_versions,
       :next_token,
       keyword_init: true
@@ -2229,6 +2313,7 @@ module Aws::M2
     #   <p>The engine type for the runtime environment.</p>
     #   @return [String]
     class ListEnvironmentsRequest < Struct.new(
+      nil,
       :next_token,
       :max_results,
       :names,
@@ -2247,6 +2332,7 @@ module Aws::M2
     #            environments.</p>
     #   @return [String]
     class ListEnvironmentsResponse < Struct.new(
+      nil,
       :environments,
       :next_token,
       keyword_init: true
@@ -2258,6 +2344,7 @@ module Aws::M2
     #   <p>The Amazon Resource Name (ARN) of the resource.</p>
     #   @return [String]
     class ListTagsForResourceInput < Struct.new(
+      nil,
       :resource_arn,
       keyword_init: true
     )
@@ -2268,6 +2355,7 @@ module Aws::M2
     #   <p>The tags for the resource.</p>
     #   @return [Hash<String, String>]
     class ListTagsForResourceOutput < Struct.new(
+      nil,
       :tags,
       keyword_init: true
     )
@@ -2283,6 +2371,7 @@ module Aws::M2
     #   <p>The name of the log group.</p>
     #   @return [String]
     class LogGroupSummary < Struct.new(
+      nil,
       :log_type,
       :log_group_name,
       keyword_init: true
@@ -2298,6 +2387,7 @@ module Aws::M2
     #   <p>The time the scheduled maintenance is to end.</p>
     #   @return [Time]
     class MaintenanceSchedule < Struct.new(
+      nil,
       :start_time,
       :end_time,
       keyword_init: true
@@ -2313,6 +2403,7 @@ module Aws::M2
     #   <p>The specific runtime engine that the maintenance schedule applies to.</p>
     #   @return [String]
     class PendingMaintenance < Struct.new(
+      nil,
       :schedule,
       :engine_version,
       keyword_init: true
@@ -2332,6 +2423,7 @@ module Aws::M2
     #            to be included as PDS member.</p>
     #   @return [Array<String>]
     class PoAttributes < Struct.new(
+      nil,
       :format,
       :encoding,
       :member_file_extensions,
@@ -2348,6 +2440,7 @@ module Aws::M2
     #   <p>The character set encoding of the data set.</p>
     #   @return [String]
     class PoDetailAttributes < Struct.new(
+      nil,
       :format,
       :encoding,
       keyword_init: true
@@ -2367,6 +2460,7 @@ module Aws::M2
     #   <p>A strictly positive integer value representing the length of the primary key. </p>
     #   @return [Integer]
     class PrimaryKey < Struct.new(
+      nil,
       :name,
       :offset,
       :length,
@@ -2389,6 +2483,7 @@ module Aws::M2
     #   <p>The character set encoding of the data set.</p>
     #   @return [String]
     class PsAttributes < Struct.new(
+      nil,
       :format,
       :encoding,
       keyword_init: true
@@ -2404,6 +2499,7 @@ module Aws::M2
     #   <p>The character set encoding of the data set.</p>
     #   @return [String]
     class PsDetailAttributes < Struct.new(
+      nil,
       :format,
       :encoding,
       keyword_init: true
@@ -2420,6 +2516,7 @@ module Aws::M2
     #            same.</p>
     #   @return [Integer]
     class RecordLength < Struct.new(
+      nil,
       :min,
       :max,
       keyword_init: true
@@ -2443,6 +2540,7 @@ module Aws::M2
     #   <p>The type of the missing resource.</p>
     #   @return [String]
     class ResourceNotFoundException < Struct.new(
+      nil,
       :message,
       :resource_id,
       :resource_type,
@@ -2459,6 +2557,7 @@ module Aws::M2
     #   <p>The step/procedure step information for a restart batch job operation.</p>
     #   @return [Types::JobStepRestartMarker]
     class RestartBatchJobIdentifier < Struct.new(
+      nil,
       :execution_id,
       :job_step_restart_marker,
       keyword_init: true
@@ -2477,6 +2576,7 @@ module Aws::M2
     #   <p>Identifies the batch job definition. This identifier can also point to any batch job definition that already exists in the application or to one of the batch job definitions within the directory that is specified in <code>keyPrefix</code>.</p>
     #   @return [Types::JobIdentifier]
     class S3BatchJobIdentifier < Struct.new(
+      nil,
       :bucket,
       :key_prefix,
       :identifier,
@@ -2490,6 +2590,7 @@ module Aws::M2
     #   <p>The name of the script containing the batch job definition.</p>
     #   @return [String]
     class ScriptBatchJobDefinition < Struct.new(
+      nil,
       :script_name,
       keyword_init: true
     )
@@ -2502,6 +2603,7 @@ module Aws::M2
     #   <p>The name of the script containing the batch job definition.</p>
     #   @return [String]
     class ScriptBatchJobIdentifier < Struct.new(
+      nil,
       :script_name,
       keyword_init: true
     )
@@ -2524,6 +2626,7 @@ module Aws::M2
     #   <p>The identifier of the exceeded quota.</p>
     #   @return [String]
     class ServiceQuotaExceededException < Struct.new(
+      nil,
       :message,
       :resource_id,
       :resource_type,
@@ -2538,6 +2641,7 @@ module Aws::M2
     # @!attribute message
     #   @return [String]
     class ServiceUnavailableException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -2548,6 +2652,7 @@ module Aws::M2
     #   <p>The unique identifier of the application you want to start.</p>
     #   @return [String]
     class StartApplicationInput < Struct.new(
+      nil,
       :application_id,
       keyword_init: true
     )
@@ -2555,6 +2660,7 @@ module Aws::M2
     end
 
     class StartApplicationOutput < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -2574,6 +2680,7 @@ module Aws::M2
     #   <p>The Amazon Web Services Secrets Manager containing user's credentials for authentication and authorization for Start Batch Job execution operation.</p>
     #   @return [String]
     class StartBatchJobInput < Struct.new(
+      nil,
       :application_id,
       :batch_job_identifier,
       :job_params,
@@ -2587,6 +2694,7 @@ module Aws::M2
     #   <p>The unique identifier of this execution of the batch job.</p>
     #   @return [String]
     class StartBatchJobOutput < Struct.new(
+      nil,
       :execution_id,
       keyword_init: true
     )
@@ -2602,6 +2710,7 @@ module Aws::M2
     #            apply another action on the application. The default value is false.</p>
     #   @return [Boolean]
     class StopApplicationInput < Struct.new(
+      nil,
       :application_id,
       :force_stop,
       keyword_init: true
@@ -2610,6 +2719,7 @@ module Aws::M2
     end
 
     class StopApplicationOutput < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -2642,6 +2752,7 @@ module Aws::M2
     #   <p>The tags to add to the resource.</p>
     #   @return [Hash<String, String>]
     class TagResourceInput < Struct.new(
+      nil,
       :resource_arn,
       :tags,
       keyword_init: true
@@ -2650,6 +2761,7 @@ module Aws::M2
     end
 
     class TagResourceOutput < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -2668,6 +2780,7 @@ module Aws::M2
     #   <p>The number of seconds to wait before retrying the request.</p>
     #   @return [Integer]
     class ThrottlingException < Struct.new(
+      nil,
       :message,
       :service_code,
       :quota_code,
@@ -2689,6 +2802,7 @@ module Aws::M2
     #   <p>The keys of the tags to remove.</p>
     #   @return [Array<String>]
     class UntagResourceInput < Struct.new(
+      nil,
       :resource_arn,
       :tag_keys,
       keyword_init: true
@@ -2697,6 +2811,7 @@ module Aws::M2
     end
 
     class UntagResourceOutput < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -2716,6 +2831,7 @@ module Aws::M2
     #            an S3 bucket location.</p>
     #   @return [Types::Definition]
     class UpdateApplicationInput < Struct.new(
+      nil,
       :application_id,
       :description,
       :current_application_version,
@@ -2729,6 +2845,7 @@ module Aws::M2
     #   <p>The new version of the application.</p>
     #   @return [Integer]
     class UpdateApplicationOutput < Struct.new(
+      nil,
       :application_version,
       keyword_init: true
     )
@@ -2764,6 +2881,7 @@ module Aws::M2
     #            <p>This option is not needed if the attribute being updated is <code>preferredMaintenanceWindow</code>.</p>
     #   @return [Boolean]
     class UpdateEnvironmentInput < Struct.new(
+      nil,
       :environment_id,
       :desired_capacity,
       :instance_type,
@@ -2780,6 +2898,7 @@ module Aws::M2
     #   <p>The unique identifier of the runtime environment that was updated.</p>
     #   @return [String]
     class UpdateEnvironmentOutput < Struct.new(
+      nil,
       :environment_id,
       keyword_init: true
     )
@@ -2796,6 +2915,7 @@ module Aws::M2
     #   <p>The list of fields that failed service validation.</p>
     #   @return [Array<Types::ValidationExceptionField>]
     class ValidationException < Struct.new(
+      nil,
       :message,
       :reason,
       :field_list,
@@ -2812,6 +2932,7 @@ module Aws::M2
     #   <p>The message of the exception field.</p>
     #   @return [String]
     class ValidationExceptionField < Struct.new(
+      nil,
       :name,
       :message,
       keyword_init: true
@@ -2839,6 +2960,7 @@ module Aws::M2
     #            will make use of them.</p>
     #   @return [Array<Types::AlternateKey>]
     class VsamAttributes < Struct.new(
+      nil,
       :format,
       :encoding,
       :compressed,
@@ -2878,6 +3000,7 @@ module Aws::M2
     #            will make use of them.</p>
     #   @return [Array<Types::AlternateKey>]
     class VsamDetailAttributes < Struct.new(
+      nil,
       :encoding,
       :record_format,
       :compressed,

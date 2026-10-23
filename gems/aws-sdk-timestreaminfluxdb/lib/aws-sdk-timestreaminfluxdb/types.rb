@@ -10,6 +10,7 @@ module Aws::TimestreamInfluxDB
     # @!attribute message
     #   @return [String]
     class AccessDeniedException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -26,6 +27,7 @@ module Aws::TimestreamInfluxDB
     #   <p>The type of Timestream for InfluxDB resource associated with the request.</p>
     #   @return [String]
     class ConflictException < Struct.new(
+      nil,
       :message,
       :resource_id,
       :resource_type,
@@ -106,6 +108,7 @@ module Aws::TimestreamInfluxDB
     #   <p>A list of key-value pairs to associate with the DB instance.</p>
     #   @return [Hash<String, String>]
     class CreateDbClusterInput < Struct.new(
+      nil,
       :name,
       :username,
       :password,
@@ -136,6 +139,7 @@ module Aws::TimestreamInfluxDB
     #   <p>The status of the DB cluster.</p>
     #   @return [String]
     class CreateDbClusterOutput < Struct.new(
+      nil,
       :db_cluster_id,
       :db_cluster_status,
       keyword_init: true
@@ -213,6 +217,7 @@ module Aws::TimestreamInfluxDB
     #   <p>Specifies whether the networkType of the Timestream for InfluxDB instance is IPV4, which can communicate over IPv4 protocol only, or DUAL, which can communicate over both IPv4 and IPv6 protocols.</p>
     #   @return [String]
     class CreateDbInstanceInput < Struct.new(
+      nil,
       :name,
       :username,
       :password,
@@ -299,6 +304,7 @@ module Aws::TimestreamInfluxDB
     #   <p>Specifies the DbInstance's role in the cluster.</p>
     #   @return [String]
     class CreateDbInstanceOutput < Struct.new(
+      nil,
       :id,
       :name,
       :arn,
@@ -338,6 +344,7 @@ module Aws::TimestreamInfluxDB
     #   <p>A list of key-value pairs to associate with the DB parameter group.</p>
     #   @return [Hash<String, String>]
     class CreateDbParameterGroupInput < Struct.new(
+      nil,
       :name,
       :description,
       :parameters,
@@ -363,6 +370,7 @@ module Aws::TimestreamInfluxDB
     #   <p>A list of the parameters that comprise the DB parameter group.</p>
     #   @return [Types::Parameters]
     class CreateDbParameterGroupOutput < Struct.new(
+      nil,
       :id,
       :name,
       :arn,
@@ -411,6 +419,7 @@ module Aws::TimestreamInfluxDB
     #   <p>The amount of storage allocated for your DB storage type (in gibibytes).</p>
     #   @return [Integer]
     class DbClusterSummary < Struct.new(
+      nil,
       :id,
       :name,
       :arn,
@@ -466,6 +475,7 @@ module Aws::TimestreamInfluxDB
     #   <p>Specifies the DB instance's role in the cluster.</p>
     #   @return [String]
     class DbInstanceForClusterSummary < Struct.new(
+      nil,
       :id,
       :name,
       :arn,
@@ -519,6 +529,7 @@ module Aws::TimestreamInfluxDB
     #   <p>Single-Instance or with a MultiAZ Standby for High availability.</p>
     #   @return [String]
     class DbInstanceSummary < Struct.new(
+      nil,
       :id,
       :name,
       :arn,
@@ -549,6 +560,7 @@ module Aws::TimestreamInfluxDB
     #   <p>A description of the DB parameter group.</p>
     #   @return [String]
     class DbParameterGroupSummary < Struct.new(
+      nil,
       :id,
       :name,
       :arn,
@@ -562,6 +574,7 @@ module Aws::TimestreamInfluxDB
     #   <p>Service-generated unique identifier of the DB cluster.</p>
     #   @return [String]
     class DeleteDbClusterInput < Struct.new(
+      nil,
       :db_cluster_id,
       keyword_init: true
     )
@@ -572,6 +585,7 @@ module Aws::TimestreamInfluxDB
     #   <p>The status of the DB cluster.</p>
     #   @return [String]
     class DeleteDbClusterOutput < Struct.new(
+      nil,
       :db_cluster_status,
       keyword_init: true
     )
@@ -582,6 +596,7 @@ module Aws::TimestreamInfluxDB
     #   <p>The id of the DB instance.</p>
     #   @return [String]
     class DeleteDbInstanceInput < Struct.new(
+      nil,
       :identifier,
       keyword_init: true
     )
@@ -652,6 +667,7 @@ module Aws::TimestreamInfluxDB
     #   <p>Specifies the DbInstance's role in the cluster.</p>
     #   @return [String]
     class DeleteDbInstanceOutput < Struct.new(
+      nil,
       :id,
       :name,
       :arn,
@@ -686,6 +702,7 @@ module Aws::TimestreamInfluxDB
     #   <p>The value of duration for InfluxDB parameters.</p>
     #   @return [Integer]
     class Duration < Struct.new(
+      nil,
       :duration_type,
       :value,
       keyword_init: true
@@ -697,6 +714,7 @@ module Aws::TimestreamInfluxDB
     #   <p>Service-generated unique identifier of the DB cluster to retrieve.</p>
     #   @return [String]
     class GetDbClusterInput < Struct.new(
+      nil,
       :db_cluster_id,
       keyword_init: true
     )
@@ -761,6 +779,7 @@ module Aws::TimestreamInfluxDB
     #   <p>The configured failover mode for the DB cluster.</p>
     #   @return [String]
     class GetDbClusterOutput < Struct.new(
+      nil,
       :id,
       :name,
       :arn,
@@ -789,6 +808,7 @@ module Aws::TimestreamInfluxDB
     #   <p>The id of the DB instance.</p>
     #   @return [String]
     class GetDbInstanceInput < Struct.new(
+      nil,
       :identifier,
       keyword_init: true
     )
@@ -859,6 +879,7 @@ module Aws::TimestreamInfluxDB
     #   <p>Specifies the DbInstance's role in the cluster.</p>
     #   @return [String]
     class GetDbInstanceOutput < Struct.new(
+      nil,
       :id,
       :name,
       :arn,
@@ -889,6 +910,7 @@ module Aws::TimestreamInfluxDB
     #   <p>The id of the DB parameter group.</p>
     #   @return [String]
     class GetDbParameterGroupInput < Struct.new(
+      nil,
       :identifier,
       keyword_init: true
     )
@@ -911,6 +933,7 @@ module Aws::TimestreamInfluxDB
     #   <p>The parameters that comprise the DB parameter group.</p>
     #   @return [Types::Parameters]
     class GetDbParameterGroupOutput < Struct.new(
+      nil,
       :id,
       :name,
       :arn,
@@ -1058,6 +1081,7 @@ module Aws::TimestreamInfluxDB
     #            <p>Default: false</p>
     #   @return [Boolean]
     class InfluxDBv2Parameters < Struct.new(
+      nil,
       :flux_log_enabled,
       :log_level,
       :no_tasks,
@@ -1101,6 +1125,7 @@ module Aws::TimestreamInfluxDB
     # @!attribute message
     #   @return [String]
     class InternalServerException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -1114,6 +1139,7 @@ module Aws::TimestreamInfluxDB
     #   <p>The maximum number of items to return in the output. If the total number of items available is more than the value specified, a nextToken is provided in the output. To resume pagination, provide the nextToken value as an argument of a subsequent API invocation.</p>
     #   @return [Integer]
     class ListDbClustersInput < Struct.new(
+      nil,
       :next_token,
       :max_results,
       keyword_init: true
@@ -1129,6 +1155,7 @@ module Aws::TimestreamInfluxDB
     #               service returns results from where the previous response left off.</p>
     #   @return [String]
     class ListDbClustersOutput < Struct.new(
+      nil,
       :items,
       :next_token,
       keyword_init: true
@@ -1146,6 +1173,7 @@ module Aws::TimestreamInfluxDB
     #   <p>The maximum number of items to return in the output. If the total number of items available is more than the value specified, a nextToken is provided in the output. To resume pagination, provide the nextToken value as an argument of a subsequent API invocation.</p>
     #   @return [Integer]
     class ListDbInstancesForClusterInput < Struct.new(
+      nil,
       :db_cluster_id,
       :next_token,
       :max_results,
@@ -1162,6 +1190,7 @@ module Aws::TimestreamInfluxDB
     #               service returns results from where the previous response left off.</p>
     #   @return [String]
     class ListDbInstancesForClusterOutput < Struct.new(
+      nil,
       :items,
       :next_token,
       keyword_init: true
@@ -1176,6 +1205,7 @@ module Aws::TimestreamInfluxDB
     #   <p>The maximum number of items to return in the output. If the total number of items available is more than the value specified, a NextToken is provided in the output. To resume pagination, provide the NextToken value as argument of a subsequent API invocation.</p>
     #   @return [Integer]
     class ListDbInstancesInput < Struct.new(
+      nil,
       :next_token,
       :max_results,
       keyword_init: true
@@ -1191,6 +1221,7 @@ module Aws::TimestreamInfluxDB
     #               service returns results from where the previous response left off.</p>
     #   @return [String]
     class ListDbInstancesOutput < Struct.new(
+      nil,
       :items,
       :next_token,
       keyword_init: true
@@ -1205,6 +1236,7 @@ module Aws::TimestreamInfluxDB
     #   <p>The maximum number of items to return in the output. If the total number of items available is more than the value specified, a NextToken is provided in the output. To resume pagination, provide the NextToken value as argument of a subsequent API invocation.</p>
     #   @return [Integer]
     class ListDbParameterGroupsInput < Struct.new(
+      nil,
       :next_token,
       :max_results,
       keyword_init: true
@@ -1220,6 +1252,7 @@ module Aws::TimestreamInfluxDB
     #               service returns results from where the previous response left off.</p>
     #   @return [String]
     class ListDbParameterGroupsOutput < Struct.new(
+      nil,
       :items,
       :next_token,
       keyword_init: true
@@ -1231,6 +1264,7 @@ module Aws::TimestreamInfluxDB
     #   <p>The Amazon Resource Name (ARN) of the tagged resource.</p>
     #   @return [String]
     class ListTagsForResourceRequest < Struct.new(
+      nil,
       :resource_arn,
       keyword_init: true
     )
@@ -1241,6 +1275,7 @@ module Aws::TimestreamInfluxDB
     #   <p>A list of tags used to categorize and track resources.</p>
     #   @return [Hash<String, String>]
     class ListTagsForResourceResponse < Struct.new(
+      nil,
       :tags,
       keyword_init: true
     )
@@ -1252,6 +1287,7 @@ module Aws::TimestreamInfluxDB
     #   <p>Configuration for S3 bucket log delivery.</p>
     #   @return [Types::S3Configuration]
     class LogDeliveryConfiguration < Struct.new(
+      nil,
       :s3_configuration,
       keyword_init: true
     )
@@ -1283,6 +1319,7 @@ module Aws::TimestreamInfluxDB
     #   <p>The type of Timestream for InfluxDB resource associated with the request.</p>
     #   @return [String]
     class ResourceNotFoundException < Struct.new(
+      nil,
       :message,
       :resource_id,
       :resource_type,
@@ -1299,6 +1336,7 @@ module Aws::TimestreamInfluxDB
     #   <p>Indicates whether log delivery to the S3 bucket is enabled.</p>
     #   @return [Boolean]
     class S3Configuration < Struct.new(
+      nil,
       :bucket_name,
       :enabled,
       keyword_init: true
@@ -1310,6 +1348,7 @@ module Aws::TimestreamInfluxDB
     # @!attribute message
     #   @return [String]
     class ServiceQuotaExceededException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -1323,6 +1362,7 @@ module Aws::TimestreamInfluxDB
     #   <p>A list of tags used to categorize and track resources.</p>
     #   @return [Hash<String, String>]
     class TagResourceRequest < Struct.new(
+      nil,
       :resource_arn,
       :tags,
       keyword_init: true
@@ -1337,6 +1377,7 @@ module Aws::TimestreamInfluxDB
     #   <p>The number of seconds the caller should wait before retrying.</p>
     #   @return [Integer]
     class ThrottlingException < Struct.new(
+      nil,
       :message,
       :retry_after_seconds,
       keyword_init: true
@@ -1351,6 +1392,7 @@ module Aws::TimestreamInfluxDB
     #   <p>The keys used to identify the tags.</p>
     #   @return [Array<String>]
     class UntagResourceRequest < Struct.new(
+      nil,
       :resource_arn,
       :tag_keys,
       keyword_init: true
@@ -1377,6 +1419,7 @@ module Aws::TimestreamInfluxDB
     #   <p>Update the DB cluster's failover behavior.</p>
     #   @return [String]
     class UpdateDbClusterInput < Struct.new(
+      nil,
       :db_cluster_id,
       :log_delivery_configuration,
       :db_parameter_group_identifier,
@@ -1392,6 +1435,7 @@ module Aws::TimestreamInfluxDB
     #   <p>The status of the DB cluster.</p>
     #   @return [String]
     class UpdateDbClusterOutput < Struct.new(
+      nil,
       :db_cluster_status,
       keyword_init: true
     )
@@ -1427,6 +1471,7 @@ module Aws::TimestreamInfluxDB
     #   <p>The amount of storage to allocate for your DB storage type (in gibibytes).</p>
     #   @return [Integer]
     class UpdateDbInstanceInput < Struct.new(
+      nil,
       :identifier,
       :log_delivery_configuration,
       :db_parameter_group_identifier,
@@ -1505,6 +1550,7 @@ module Aws::TimestreamInfluxDB
     #   <p>Specifies the DbInstance's role in the cluster.</p>
     #   @return [String]
     class UpdateDbInstanceOutput < Struct.new(
+      nil,
       :id,
       :name,
       :arn,
@@ -1538,6 +1584,7 @@ module Aws::TimestreamInfluxDB
     #   <p>The reason that validation failed.</p>
     #   @return [String]
     class ValidationException < Struct.new(
+      nil,
       :message,
       :reason,
       keyword_init: true

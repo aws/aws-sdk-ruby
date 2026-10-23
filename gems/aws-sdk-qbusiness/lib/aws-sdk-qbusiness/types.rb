@@ -34,6 +34,7 @@ module Aws::QBusiness
     #   <p>Describes the member relation within the <code>AccessControlList</code> object.</p>
     #   @return [String]
     class AccessConfiguration < Struct.new(
+      nil,
       :access_controls,
       :member_relation,
       keyword_init: true
@@ -49,6 +50,7 @@ module Aws::QBusiness
     #   <p>Describes the member relation within a principal list.</p>
     #   @return [String]
     class AccessControl < Struct.new(
+      nil,
       :principals,
       :member_relation,
       keyword_init: true
@@ -60,6 +62,7 @@ module Aws::QBusiness
     # @!attribute message
     #   @return [String]
     class AccessDeniedException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -74,6 +77,7 @@ module Aws::QBusiness
     #   <p>The filter configuration for the action, if any.</p>
     #   @return [Types::ActionFilterConfiguration]
     class ActionConfiguration < Struct.new(
+      nil,
       :action,
       :filter_configuration,
       keyword_init: true
@@ -92,6 +96,7 @@ module Aws::QBusiness
     #   <p>A string used to retain information about the hierarchical contexts within an action execution event payload.</p>
     #   @return [String]
     class ActionExecution < Struct.new(
+      nil,
       :plugin_id,
       :payload,
       :payload_field_name_separator,
@@ -111,6 +116,7 @@ module Aws::QBusiness
     #   <p>A string used to retain information about the hierarchical contexts within a action execution event payload.</p>
     #   @return [String]
     class ActionExecutionEvent < Struct.new(
+      nil,
       :plugin_id,
       :payload,
       :payload_field_name_separator,
@@ -124,6 +130,7 @@ module Aws::QBusiness
     #   <p>The content of a user input field in an plugin action execution payload.</p>
     #   @return [JSON]
     class ActionExecutionPayloadField < Struct.new(
+      nil,
       :value,
       keyword_init: true
     )
@@ -135,6 +142,7 @@ module Aws::QBusiness
     #   <p>Enables filtering of responses based on document attributes or metadata fields.</p>
     #   @return [Types::AttributeFilter]
     class ActionFilterConfiguration < Struct.new(
+      nil,
       :document_attribute_filter,
       keyword_init: true
     )
@@ -155,6 +163,7 @@ module Aws::QBusiness
     #   <p>A string used to retain information about the hierarchical contexts within an action review payload.</p>
     #   @return [String]
     class ActionReview < Struct.new(
+      nil,
       :plugin_id,
       :plugin_type,
       :payload,
@@ -187,6 +196,7 @@ module Aws::QBusiness
     #   <p>A string used to retain information about the hierarchical contexts within an action review event payload.</p>
     #   @return [String]
     class ActionReviewEvent < Struct.new(
+      nil,
       :conversation_id,
       :user_message_id,
       :system_message_id,
@@ -228,6 +238,7 @@ module Aws::QBusiness
     #   <p>Information about whether the field is required.</p>
     #   @return [Boolean]
     class ActionReviewPayloadField < Struct.new(
+      nil,
       :display_name,
       :display_order,
       :display_description,
@@ -250,6 +261,7 @@ module Aws::QBusiness
     #   <p>The name of the field.</p>
     #   @return [JSON]
     class ActionReviewPayloadFieldAllowedValue < Struct.new(
+      nil,
       :value,
       :display_value,
       keyword_init: true
@@ -271,6 +283,7 @@ module Aws::QBusiness
     #   <p>The description of an Amazon Q Business plugin action.</p>
     #   @return [String]
     class ActionSummary < Struct.new(
+      nil,
       :action_identifier,
       :display_name,
       :instruction_example,
@@ -303,6 +316,7 @@ module Aws::QBusiness
     #   <p>The Amazon QuickSight configuration for an Amazon Q Business application that uses QuickSight as the identity provider.</p>
     #   @return [Types::QuickSightConfiguration]
     class Application < Struct.new(
+      nil,
       :display_name,
       :application_id,
       :created_at,
@@ -320,6 +334,7 @@ module Aws::QBusiness
     #   <p>Information about whether file upload during chat functionality is activated for your application.</p>
     #   @return [String]
     class AppliedAttachmentsConfiguration < Struct.new(
+      nil,
       :attachments_control_mode,
       keyword_init: true
     )
@@ -331,6 +346,7 @@ module Aws::QBusiness
     #   <p> Information about whether creator mode is enabled or disabled for an Amazon Q Business application. </p>
     #   @return [String]
     class AppliedCreatorModeConfiguration < Struct.new(
+      nil,
       :creator_mode_control,
       keyword_init: true
     )
@@ -342,6 +358,7 @@ module Aws::QBusiness
     #   <p> Information about whether chat orchestration is enabled or disabled for an Amazon Q Business application. </p>
     #   @return [String]
     class AppliedOrchestrationConfiguration < Struct.new(
+      nil,
       :control,
       keyword_init: true
     )
@@ -364,6 +381,7 @@ module Aws::QBusiness
     #   <p>The Amazon Resource Name of the IAM role for the ISV that is being granted permission.</p>
     #   @return [String]
     class AssociatePermissionRequest < Struct.new(
+      nil,
       :application_id,
       :statement_id,
       :actions,
@@ -378,6 +396,7 @@ module Aws::QBusiness
     #   <p>The JSON representation of the added permission statement.</p>
     #   @return [String]
     class AssociatePermissionResponse < Struct.new(
+      nil,
       :statement,
       keyword_init: true
     )
@@ -392,6 +411,7 @@ module Aws::QBusiness
     #   <p>The type of the associated group. This indicates the scope of the group's applicability.</p>
     #   @return [String]
     class AssociatedGroup < Struct.new(
+      nil,
       :name,
       :type,
       keyword_init: true
@@ -407,6 +427,7 @@ module Aws::QBusiness
     #   <p>The type of the associated user. This indicates the scope of the user's association.</p>
     #   @return [String]
     class AssociatedUser < Struct.new(
+      nil,
       :id,
       :type,
       keyword_init: true
@@ -446,6 +467,7 @@ module Aws::QBusiness
     #   <p>ErrorDetail providing information about a Amazon Q Business attachment error. </p>
     #   @return [Types::ErrorDetail]
     class Attachment < Struct.new(
+      nil,
       :attachment_id,
       :conversation_id,
       :name,
@@ -472,6 +494,7 @@ module Aws::QBusiness
     #   <p>A reference to an existing attachment.</p>
     #   @return [Types::CopyFromSource]
     class AttachmentInput < Struct.new(
+      nil,
       :data,
       :name,
       :copy_from,
@@ -485,6 +508,7 @@ module Aws::QBusiness
     #   <p>This is either a file directly uploaded into a web experience chat or a reference to an existing attachment that is part of a web experience chat.</p>
     #   @return [Types::AttachmentInput]
     class AttachmentInputEvent < Struct.new(
+      nil,
       :attachment,
       keyword_init: true
     )
@@ -508,6 +532,7 @@ module Aws::QBusiness
     #   <p>The unique identifier of the Amazon Q Business conversation.</p>
     #   @return [String]
     class AttachmentOutput < Struct.new(
+      nil,
       :name,
       :status,
       :error,
@@ -523,6 +548,7 @@ module Aws::QBusiness
     #   <p>Status information about whether file upload functionality is activated or deactivated for your end user.</p>
     #   @return [String]
     class AttachmentsConfiguration < Struct.new(
+      nil,
       :attachments_control_mode,
       keyword_init: true
     )
@@ -561,6 +587,7 @@ module Aws::QBusiness
     #   <p>Performs a less than or equals operation on two document attributes or metadata fields.Supported for the following <a href="https://docs.aws.amazon.com/amazonq/latest/api-reference/API_DocumentAttributeValue.html">document attribute value type</a>: <code>dateValue</code> and <code>longValue</code>. </p>
     #   @return [Types::DocumentAttribute]
     class AttributeFilter < Struct.new(
+      nil,
       :and_all_filters,
       :or_all_filters,
       :not_filter,
@@ -581,6 +608,7 @@ module Aws::QBusiness
     #   <p>The status of audio extraction (ENABLED or DISABLED) for processing audio content from files.</p>
     #   @return [String]
     class AudioExtractionConfiguration < Struct.new(
+      nil,
       :audio_extraction_status,
       keyword_init: true
     )
@@ -604,6 +632,7 @@ module Aws::QBusiness
     #   <p>The type of audio extraction performed on the content.</p>
     #   @return [String]
     class AudioSourceDetails < Struct.new(
+      nil,
       :media_id,
       :media_mime_type,
       :start_time_milliseconds,
@@ -619,6 +648,7 @@ module Aws::QBusiness
     #   <p>The URL sent by Amazon Q Business to the third party authentication server to authenticate a custom plugin user through an OAuth protocol.</p>
     #   @return [String]
     class AuthChallengeRequest < Struct.new(
+      nil,
       :authorization_url,
       keyword_init: true
     )
@@ -630,6 +660,7 @@ module Aws::QBusiness
     #   <p>The URL sent by Amazon Q Business to a third party authentication server in response to an authentication verification event activated by an end user request to use a custom plugin. </p>
     #   @return [String]
     class AuthChallengeRequestEvent < Struct.new(
+      nil,
       :authorization_url,
       keyword_init: true
     )
@@ -641,6 +672,7 @@ module Aws::QBusiness
     #   <p>The mapping of key-value pairs in an authentication challenge response.</p>
     #   @return [Hash<String, String>]
     class AuthChallengeResponse < Struct.new(
+      nil,
       :response_map,
       keyword_init: true
     )
@@ -652,6 +684,7 @@ module Aws::QBusiness
     #   <p>The mapping of key-value pairs in an authentication challenge response.</p>
     #   @return [Hash<String, String>]
     class AuthChallengeResponseEvent < Struct.new(
+      nil,
       :response_map,
       keyword_init: true
     )
@@ -666,6 +699,7 @@ module Aws::QBusiness
     #   <p>Describes the default subscription type assigned to an Amazon Q Business application using IAM identity federation for user management. If the value for <code>autoSubscribe</code> is set to <code>ENABLED</code> you must select a value for this field.</p>
     #   @return [String]
     class AutoSubscriptionConfiguration < Struct.new(
+      nil,
       :auto_subscribe,
       :default_subscription_type,
       keyword_init: true
@@ -681,6 +715,7 @@ module Aws::QBusiness
     #   <p>The ARN of an IAM role used by Amazon Q Business to access the basic authentication credentials stored in a Secrets Manager secret.</p>
     #   @return [String]
     class BasicAuthConfiguration < Struct.new(
+      nil,
       :secret_arn,
       :role_arn,
       keyword_init: true
@@ -701,6 +736,7 @@ module Aws::QBusiness
     #   <p>The identifier of the data source sync during which the documents were deleted.</p>
     #   @return [String]
     class BatchDeleteDocumentRequest < Struct.new(
+      nil,
       :application_id,
       :index_id,
       :documents,
@@ -714,6 +750,7 @@ module Aws::QBusiness
     #   <p>A list of documents that couldn't be removed from the Amazon Q Business index. Each entry contains an error message that indicates why the document couldn't be removed from the index. </p>
     #   @return [Array<Types::FailedDocument>]
     class BatchDeleteDocumentResponse < Struct.new(
+      nil,
       :failed_documents,
       keyword_init: true
     )
@@ -736,6 +773,7 @@ module Aws::QBusiness
     #   <p>The identifier of the data source sync during which the documents were added.</p>
     #   @return [String]
     class BatchPutDocumentRequest < Struct.new(
+      nil,
       :application_id,
       :index_id,
       :documents,
@@ -750,6 +788,7 @@ module Aws::QBusiness
     #   <p> A list of documents that were not added to the Amazon Q Business index because the document failed a validation check. Each document contains an error message that indicates why the document couldn't be added to the index. </p>
     #   @return [Array<Types::FailedDocument>]
     class BatchPutDocumentResponse < Struct.new(
+      nil,
       :failed_documents,
       keyword_init: true
     )
@@ -764,6 +803,7 @@ module Aws::QBusiness
     #   <p>The configured custom message displayed to an end user informing them that they've used a blocked phrase during chat.</p>
     #   @return [String]
     class BlockedPhrasesConfiguration < Struct.new(
+      nil,
       :blocked_phrases,
       :system_message_override,
       keyword_init: true
@@ -782,6 +822,7 @@ module Aws::QBusiness
     #   <p>The configured custom message displayed to your end user when they use blocked phrase during chat.</p>
     #   @return [String]
     class BlockedPhrasesConfigurationUpdate < Struct.new(
+      nil,
       :blocked_phrases_to_create_or_update,
       :blocked_phrases_to_delete,
       :system_message_override,
@@ -795,6 +836,7 @@ module Aws::QBusiness
     #   <p>Specify the browser extensions allowed for your Amazon Q web experience.</p> <ul> <li> <p> <code>CHROME</code> — Enables the extension for Chromium-based browsers (Google Chrome, Microsoft Edge, Opera, etc.).</p> </li> <li> <p> <code>FIREFOX</code> — Enables the extension for Mozilla Firefox.</p> </li> <li> <p> <code>CHROME</code> and <code>FIREFOX</code> — Enable the extension for Chromium-based browsers and Mozilla Firefox.</p> </li> </ul>
     #   @return [Array<String>]
     class BrowserExtensionConfiguration < Struct.new(
+      nil,
       :enabled_browser_extensions,
       keyword_init: true
     )
@@ -808,6 +850,7 @@ module Aws::QBusiness
     #   <p>The identifier of the Amazon Q Business subscription being cancelled.</p>
     #   @return [String]
     class CancelSubscriptionRequest < Struct.new(
+      nil,
       :application_id,
       :subscription_id,
       keyword_init: true
@@ -825,6 +868,7 @@ module Aws::QBusiness
     #   <p>The type of the Amazon Q Business subscription for the next month.</p>
     #   @return [Types::SubscriptionDetails]
     class CancelSubscriptionResponse < Struct.new(
+      nil,
       :subscription_arn,
       :current_subscription,
       :next_subscription,
@@ -855,6 +899,7 @@ module Aws::QBusiness
     #   <p>The streaming input for the <code>Chat</code> API.</p>
     #   @return [Types::ChatInputStream]
     class ChatInput < Struct.new(
+      nil,
       :application_id,
       :user_id,
       :user_groups,
@@ -926,6 +971,7 @@ module Aws::QBusiness
     #   <p>The streaming output for the <code>Chat</code> API.</p>
     #   @return [Types::ChatOutputStream]
     class ChatOutput < Struct.new(
+      nil,
       :output_stream,
       keyword_init: true
     )
@@ -990,6 +1036,7 @@ module Aws::QBusiness
     #   <p>The timestamp indicating when the chat response configuration was last modified, helping administrators track changes and maintain version awareness.</p>
     #   @return [Time]
     class ChatResponseConfiguration < Struct.new(
+      nil,
       :chat_response_configuration_id,
       :chat_response_configuration_arn,
       :display_name,
@@ -1019,6 +1066,7 @@ module Aws::QBusiness
     #   <p>The timestamp indicating when the detailed chat response configuration was last modified, helping administrators track changes and maintain version awareness.</p>
     #   @return [Time]
     class ChatResponseConfigurationDetail < Struct.new(
+      nil,
       :response_configurations,
       :response_configuration_summary,
       :status,
@@ -1069,6 +1117,7 @@ module Aws::QBusiness
     #   <p>A token that you provide to identify a chat request.</p>
     #   @return [String]
     class ChatSyncInput < Struct.new(
+      nil,
       :application_id,
       :user_id,
       :user_groups,
@@ -1112,6 +1161,7 @@ module Aws::QBusiness
     #   <p>A list of files which failed to upload during chat.</p>
     #   @return [Array<Types::AttachmentOutput>]
     class ChatSyncOutput < Struct.new(
+      nil,
       :conversation_id,
       :system_message,
       :system_message_id,
@@ -1141,6 +1191,7 @@ module Aws::QBusiness
     #   <p>The unique identifier of the data source. Identifies the specific data source from which the document originates. Should not be used when a document is uploaded directly with BatchPutDocument, as no dataSourceId is available or necessary. </p>
     #   @return [String]
     class CheckDocumentAccessRequest < Struct.new(
+      nil,
       :application_id,
       :index_id,
       :user_id,
@@ -1164,6 +1215,7 @@ module Aws::QBusiness
     #   <p>The Access Control List (ACL) associated with the document. Includes allowlist and denylist conditions that determine user access.</p>
     #   @return [Types::DocumentAcl]
     class CheckDocumentAccessResponse < Struct.new(
+      nil,
       :user_groups,
       :user_aliases,
       :has_access,
@@ -1184,6 +1236,7 @@ module Aws::QBusiness
     #   <p>Enables filtering of responses based on document attributes or metadata fields.</p>
     #   @return [Types::AttributeFilter]
     class ConfigurationEvent < Struct.new(
+      nil,
       :chat_mode,
       :chat_mode_configuration,
       :attribute_filter,
@@ -1203,6 +1256,7 @@ module Aws::QBusiness
     #   <p>The type of the resource affected.</p>
     #   @return [String]
     class ConflictException < Struct.new(
+      nil,
       :message,
       :resource_id,
       :resource_type,
@@ -1216,6 +1270,7 @@ module Aws::QBusiness
     #   <p>The configured custom message displayed to an end user informing them that they've used a blocked phrase during chat.</p>
     #   @return [String]
     class ContentBlockerRule < Struct.new(
+      nil,
       :system_message_override,
       keyword_init: true
     )
@@ -1227,6 +1282,7 @@ module Aws::QBusiness
     #   <p>Specifies data sources in a Amazon Q Business application to use for content generation.</p>
     #   @return [Array<Types::EligibleDataSource>]
     class ContentRetrievalRule < Struct.new(
+      nil,
       :eligible_data_sources,
       keyword_init: true
     )
@@ -1259,6 +1315,7 @@ module Aws::QBusiness
     #   <p>The start time of the conversation.</p>
     #   @return [Time]
     class Conversation < Struct.new(
+      nil,
       :conversation_id,
       :title,
       :start_time,
@@ -1275,6 +1332,7 @@ module Aws::QBusiness
     #   <p>The unique identifier of the Amazon Q Business attachment.</p>
     #   @return [String]
     class ConversationSource < Struct.new(
+      nil,
       :conversation_id,
       :attachment_id,
       keyword_init: true
@@ -1307,6 +1365,7 @@ module Aws::QBusiness
     #   <p>The duration of the session associated with the unique URL for the web experience.</p>
     #   @return [Integer]
     class CreateAnonymousWebExperienceUrlRequest < Struct.new(
+      nil,
       :application_id,
       :web_experience_id,
       :session_duration_in_minutes,
@@ -1319,6 +1378,7 @@ module Aws::QBusiness
     #   <p>The unique URL for accessing the web experience.</p> <important> <p>This URL can only be used once and must be used within 5 minutes after it's generated.</p> </important>
     #   @return [String]
     class CreateAnonymousWebExperienceUrlResponse < Struct.new(
+      nil,
       :anonymous_url,
       keyword_init: true
     )
@@ -1368,6 +1428,7 @@ module Aws::QBusiness
     #   <p>The Amazon QuickSight configuration for an Amazon Q Business application that uses QuickSight for authentication. This configuration is required if your application uses QuickSight as the identity provider. For more information, see <a href="https://docs.aws.amazon.com/amazonq/latest/qbusiness-ug/create-quicksight-integrated-application.html">Creating an Amazon QuickSight integrated application</a>.</p>
     #   @return [Types::QuickSightConfiguration]
     class CreateApplicationRequest < Struct.new(
+      nil,
       :display_name,
       :role_arn,
       :identity_type,
@@ -1394,6 +1455,7 @@ module Aws::QBusiness
     #   <p> The Amazon Resource Name (ARN) of the Amazon Q Business application. </p>
     #   @return [String]
     class CreateApplicationResponse < Struct.new(
+      nil,
       :application_id,
       :application_arn,
       keyword_init: true
@@ -1417,6 +1479,7 @@ module Aws::QBusiness
     #   <p>A list of key-value pairs to apply as tags to the new chat response configuration, enabling categorization and management of resources across Amazon Web Services services.</p>
     #   @return [Array<Types::Tag>]
     class CreateChatResponseConfigurationRequest < Struct.new(
+      nil,
       :application_id,
       :display_name,
       :client_token,
@@ -1434,6 +1497,7 @@ module Aws::QBusiness
     #   <p>The Amazon Resource Name (ARN) of the newly created chat response configuration, which uniquely identifies the resource across all Amazon Web Services services. </p>
     #   @return [String]
     class CreateChatResponseConfigurationResponse < Struct.new(
+      nil,
       :chat_response_configuration_id,
       :chat_response_configuration_arn,
       keyword_init: true
@@ -1463,6 +1527,7 @@ module Aws::QBusiness
     #   <p>The tags to associate with the data accessor.</p>
     #   @return [Array<Types::Tag>]
     class CreateDataAccessorRequest < Struct.new(
+      nil,
       :application_id,
       :principal,
       :action_configurations,
@@ -1485,6 +1550,7 @@ module Aws::QBusiness
     #   <p>The Amazon Resource Name (ARN) of the created data accessor.</p>
     #   @return [String]
     class CreateDataAccessorResponse < Struct.new(
+      nil,
       :data_accessor_id,
       :idc_application_arn,
       :data_accessor_arn,
@@ -1530,6 +1596,7 @@ module Aws::QBusiness
     #   <p>The configuration for extracting information from media in documents during ingestion.</p>
     #   @return [Types::MediaExtractionConfiguration]
     class CreateDataSourceRequest < Struct.new(
+      nil,
       :application_id,
       :index_id,
       :display_name,
@@ -1554,6 +1621,7 @@ module Aws::QBusiness
     #   <p> The Amazon Resource Name (ARN) of a data source in an Amazon Q Business application. </p>
     #   @return [String]
     class CreateDataSourceResponse < Struct.new(
+      nil,
       :data_source_id,
       :data_source_arn,
       keyword_init: true
@@ -1583,6 +1651,7 @@ module Aws::QBusiness
     #   <p>A token that you provide to identify the request to create an index. Multiple calls to the <code>CreateIndex</code> API with the same client token will create only one index.</p>
     #   @return [String]
     class CreateIndexRequest < Struct.new(
+      nil,
       :application_id,
       :display_name,
       :description,
@@ -1602,6 +1671,7 @@ module Aws::QBusiness
     #   <p> The Amazon Resource Name (ARN) of an Amazon Q Business index.</p>
     #   @return [String]
     class CreateIndexResponse < Struct.new(
+      nil,
       :index_id,
       :index_arn,
       keyword_init: true
@@ -1634,6 +1704,7 @@ module Aws::QBusiness
     #   <p>A token that you provide to identify the request to create your Amazon Q Business plugin.</p>
     #   @return [String]
     class CreatePluginRequest < Struct.new(
+      nil,
       :application_id,
       :display_name,
       :type,
@@ -1657,6 +1728,7 @@ module Aws::QBusiness
     #   <p>The current status of a plugin. A plugin is modified asynchronously.</p>
     #   @return [String]
     class CreatePluginResponse < Struct.new(
+      nil,
       :plugin_id,
       :plugin_arn,
       :build_status,
@@ -1687,6 +1759,7 @@ module Aws::QBusiness
     #   <p>A list of key-value pairs that identify or categorize the retriever. You can also use tags to help control access to the retriever. Tag keys and values can consist of Unicode letters, digits, white space, and any of the following symbols: _ . : / = + - @.</p>
     #   @return [Array<Types::Tag>]
     class CreateRetrieverRequest < Struct.new(
+      nil,
       :application_id,
       :type,
       :display_name,
@@ -1706,6 +1779,7 @@ module Aws::QBusiness
     #   <p>The Amazon Resource Name (ARN) of an IAM role associated with a retriever.</p>
     #   @return [String]
     class CreateRetrieverResponse < Struct.new(
+      nil,
       :retriever_id,
       :retriever_arn,
       keyword_init: true
@@ -1726,6 +1800,7 @@ module Aws::QBusiness
     #   <p>A token that you provide to identify the request to create a subscription for your Amazon Q Business application.</p>
     #   @return [String]
     class CreateSubscriptionRequest < Struct.new(
+      nil,
       :application_id,
       :principal,
       :type,
@@ -1748,6 +1823,7 @@ module Aws::QBusiness
     #   <p>The type of the Amazon Q Business subscription for the next month.</p>
     #   @return [Types::SubscriptionDetails]
     class CreateSubscriptionResponse < Struct.new(
+      nil,
       :subscription_id,
       :subscription_arn,
       :current_subscription,
@@ -1770,6 +1846,7 @@ module Aws::QBusiness
     #   <p>A token that you provide to identify the request to create your Amazon Q Business user mapping.</p>
     #   @return [String]
     class CreateUserRequest < Struct.new(
+      nil,
       :application_id,
       :user_id,
       :user_aliases,
@@ -1780,6 +1857,7 @@ module Aws::QBusiness
     end
 
     class CreateUserResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1822,6 +1900,7 @@ module Aws::QBusiness
     #   <p>Sets the custom logo, favicon, font, and color used in the Amazon Q web experience. </p>
     #   @return [Types::CustomizationConfiguration]
     class CreateWebExperienceRequest < Struct.new(
+      nil,
       :application_id,
       :title,
       :subtitle,
@@ -1846,6 +1925,7 @@ module Aws::QBusiness
     #   <p> The Amazon Resource Name (ARN) of an Amazon Q Business web experience.</p>
     #   @return [String]
     class CreateWebExperienceResponse < Struct.new(
+      nil,
       :web_experience_id,
       :web_experience_arn,
       keyword_init: true
@@ -1858,6 +1938,7 @@ module Aws::QBusiness
     #   <p>Status information about whether <code>CREATOR_MODE</code> has been enabled or disabled. The default status is <code>DISABLED</code>.</p>
     #   @return [String]
     class CreatorModeConfiguration < Struct.new(
+      nil,
       :creator_mode_control,
       keyword_init: true
     )
@@ -1875,6 +1956,7 @@ module Aws::QBusiness
     #   <p>Contains either details about the S3 object containing the OpenAPI schema for the action group or the JSON or YAML-formatted payload defining the schema.</p>
     #   @return [Types::APISchema]
     class CustomPluginConfiguration < Struct.new(
+      nil,
       :description,
       :api_schema_type,
       :api_schema,
@@ -1897,6 +1979,7 @@ module Aws::QBusiness
     #   <p>Provides the URL where the custom favicon file is hosted for an Amazon Q web experience.</p>
     #   @return [String]
     class CustomizationConfiguration < Struct.new(
+      nil,
       :custom_css_url,
       :logo_url,
       :font_url,
@@ -1932,6 +2015,7 @@ module Aws::QBusiness
     #   <p>The timestamp when the data accessor was last updated.</p>
     #   @return [Time]
     class DataAccessor < Struct.new(
+      nil,
       :display_name,
       :data_accessor_id,
       :data_accessor_arn,
@@ -1971,6 +2055,7 @@ module Aws::QBusiness
     #   <p>A list of external identifiers associated with this authentication configuration. These are used to correlate the data accessor with external systems.</p>
     #   @return [Array<String>]
     class DataAccessorAuthenticationDetail < Struct.new(
+      nil,
       :authentication_type,
       :authentication_configuration,
       :external_ids,
@@ -1984,6 +2069,7 @@ module Aws::QBusiness
     #   <p>The Amazon Resource Name (ARN) of the IAM Identity Center Trusted Token Issuer that will be used for authentication.</p>
     #   @return [String]
     class DataAccessorIdcTrustedTokenIssuerConfiguration < Struct.new(
+      nil,
       :idc_trusted_token_issuer_arn,
       keyword_init: true
     )
@@ -2010,6 +2096,7 @@ module Aws::QBusiness
     #   <p>The status of the Amazon Q Business data source.</p>
     #   @return [String]
     class DataSource < Struct.new(
+      nil,
       :display_name,
       :data_source_id,
       :type,
@@ -2044,6 +2131,7 @@ module Aws::QBusiness
     #   <p>Maps a batch delete document request to a specific data source sync job. This is optional and should only be supplied when documents are deleted by a data source connector.</p>
     #   @return [Types::DataSourceSyncJobMetrics]
     class DataSourceSyncJob < Struct.new(
+      nil,
       :execution_id,
       :start_time,
       :end_time,
@@ -2073,6 +2161,7 @@ module Aws::QBusiness
     #   <p>The current count of documents crawled by the ongoing sync job in the data source.</p>
     #   @return [String]
     class DataSourceSyncJobMetrics < Struct.new(
+      nil,
       :documents_added,
       :documents_modified,
       :documents_deleted,
@@ -2091,6 +2180,7 @@ module Aws::QBusiness
     #   <p>A list of identifiers of security groups within your Amazon VPC. The security groups should enable Amazon Q Business to connect to the data source.</p>
     #   @return [Array<String>]
     class DataSourceVpcConfiguration < Struct.new(
+      nil,
       :subnet_ids,
       :security_group_ids,
       keyword_init: true
@@ -2106,6 +2196,7 @@ module Aws::QBusiness
     #   <p>Specifies the duration, in seconds, of a boost applies to a <code>DATE</code> type document attribute.</p>
     #   @return [Integer]
     class DateAttributeBoostingConfiguration < Struct.new(
+      nil,
       :boosting_level,
       :boosting_duration_in_seconds,
       keyword_init: true
@@ -2117,6 +2208,7 @@ module Aws::QBusiness
     #   <p>The identifier of the Amazon Q Business application.</p>
     #   @return [String]
     class DeleteApplicationRequest < Struct.new(
+      nil,
       :application_id,
       keyword_init: true
     )
@@ -2124,6 +2216,7 @@ module Aws::QBusiness
     end
 
     class DeleteApplicationResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -2142,6 +2235,7 @@ module Aws::QBusiness
     #   <p>The unique identifier of the user involved in the conversation.</p>
     #   @return [String]
     class DeleteAttachmentRequest < Struct.new(
+      nil,
       :application_id,
       :conversation_id,
       :attachment_id,
@@ -2152,6 +2246,7 @@ module Aws::QBusiness
     end
 
     class DeleteAttachmentResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -2161,6 +2256,7 @@ module Aws::QBusiness
     #   <p>The identifier of the application the chat controls have been configured for.</p>
     #   @return [String]
     class DeleteChatControlsConfigurationRequest < Struct.new(
+      nil,
       :application_id,
       keyword_init: true
     )
@@ -2168,6 +2264,7 @@ module Aws::QBusiness
     end
 
     class DeleteChatControlsConfigurationResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -2180,6 +2277,7 @@ module Aws::QBusiness
     #   <p>The unique identifier of the chat response configuration to delete from the specified application. </p>
     #   @return [String]
     class DeleteChatResponseConfigurationRequest < Struct.new(
+      nil,
       :application_id,
       :chat_response_configuration_id,
       keyword_init: true
@@ -2188,6 +2286,7 @@ module Aws::QBusiness
     end
 
     class DeleteChatResponseConfigurationResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -2203,6 +2302,7 @@ module Aws::QBusiness
     #   <p>The identifier of the user who is deleting the conversation.</p>
     #   @return [String]
     class DeleteConversationRequest < Struct.new(
+      nil,
       :conversation_id,
       :application_id,
       :user_id,
@@ -2212,6 +2312,7 @@ module Aws::QBusiness
     end
 
     class DeleteConversationResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -2224,6 +2325,7 @@ module Aws::QBusiness
     #   <p>The unique identifier of the data accessor to delete.</p>
     #   @return [String]
     class DeleteDataAccessorRequest < Struct.new(
+      nil,
       :application_id,
       :data_accessor_id,
       keyword_init: true
@@ -2232,6 +2334,7 @@ module Aws::QBusiness
     end
 
     class DeleteDataAccessorResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -2247,6 +2350,7 @@ module Aws::QBusiness
     #   <p>The identifier of the data source connector that you want to delete. </p>
     #   @return [String]
     class DeleteDataSourceRequest < Struct.new(
+      nil,
       :application_id,
       :index_id,
       :data_source_id,
@@ -2256,6 +2360,7 @@ module Aws::QBusiness
     end
 
     class DeleteDataSourceResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -2266,6 +2371,7 @@ module Aws::QBusiness
     #   <p>The identifier of the deleted document.</p>
     #   @return [String]
     class DeleteDocument < Struct.new(
+      nil,
       :document_id,
       keyword_init: true
     )
@@ -2285,6 +2391,7 @@ module Aws::QBusiness
     #   <p>The identifier of the data source linked to the group</p> <p>A group can be tied to multiple data sources. You can delete a group from accessing documents in a certain data source. For example, the groups "Research", "Engineering", and "Sales and Marketing" are all tied to the company's documents stored in the data sources Confluence and Salesforce. You want to delete "Research" and "Engineering" groups from Salesforce, so that these groups cannot access customer-related documents stored in Salesforce. Only "Sales and Marketing" should access documents in the Salesforce data source.</p>
     #   @return [String]
     class DeleteGroupRequest < Struct.new(
+      nil,
       :application_id,
       :index_id,
       :group_name,
@@ -2295,6 +2402,7 @@ module Aws::QBusiness
     end
 
     class DeleteGroupResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -2307,6 +2415,7 @@ module Aws::QBusiness
     #   <p>The identifier of the Amazon Q Business index.</p>
     #   @return [String]
     class DeleteIndexRequest < Struct.new(
+      nil,
       :application_id,
       :index_id,
       keyword_init: true
@@ -2315,6 +2424,7 @@ module Aws::QBusiness
     end
 
     class DeleteIndexResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -2327,6 +2437,7 @@ module Aws::QBusiness
     #   <p>The identifier of the plugin being deleted.</p>
     #   @return [String]
     class DeletePluginRequest < Struct.new(
+      nil,
       :application_id,
       :plugin_id,
       keyword_init: true
@@ -2335,6 +2446,7 @@ module Aws::QBusiness
     end
 
     class DeletePluginResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -2347,6 +2459,7 @@ module Aws::QBusiness
     #   <p>The identifier of the retriever being deleted.</p>
     #   @return [String]
     class DeleteRetrieverRequest < Struct.new(
+      nil,
       :application_id,
       :retriever_id,
       keyword_init: true
@@ -2355,6 +2468,7 @@ module Aws::QBusiness
     end
 
     class DeleteRetrieverResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -2367,6 +2481,7 @@ module Aws::QBusiness
     #   <p>The user email being deleted.</p>
     #   @return [String]
     class DeleteUserRequest < Struct.new(
+      nil,
       :application_id,
       :user_id,
       keyword_init: true
@@ -2375,6 +2490,7 @@ module Aws::QBusiness
     end
 
     class DeleteUserResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -2387,6 +2503,7 @@ module Aws::QBusiness
     #   <p>The identifier of the Amazon Q Business web experience being deleted.</p>
     #   @return [String]
     class DeleteWebExperienceRequest < Struct.new(
+      nil,
       :application_id,
       :web_experience_id,
       keyword_init: true
@@ -2395,6 +2512,7 @@ module Aws::QBusiness
     end
 
     class DeleteWebExperienceResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -2407,6 +2525,7 @@ module Aws::QBusiness
     #   <p>The statement ID of the permission to remove.</p>
     #   @return [String]
     class DisassociatePermissionRequest < Struct.new(
+      nil,
       :application_id,
       :statement_id,
       keyword_init: true
@@ -2415,6 +2534,7 @@ module Aws::QBusiness
     end
 
     class DisassociatePermissionResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -2446,6 +2566,7 @@ module Aws::QBusiness
     #   <p>The configuration for extracting information from media in the document.</p>
     #   @return [Types::MediaExtractionConfiguration]
     class Document < Struct.new(
+      nil,
       :id,
       :attributes,
       :content,
@@ -2467,6 +2588,7 @@ module Aws::QBusiness
     #   <p>The denylist conditions for the document. Users or groups matching these conditions are denied access to the document, overriding allowlist permissions.</p>
     #   @return [Types::DocumentAclMembership]
     class DocumentAcl < Struct.new(
+      nil,
       :allowlist,
       :deny_list,
       keyword_init: true
@@ -2485,6 +2607,7 @@ module Aws::QBusiness
     #   <p>An array of group identifiers that this condition applies to. Groups listed here are subject to the access rule defined by this condition.</p>
     #   @return [Array<Types::DocumentAclGroup>]
     class DocumentAclCondition < Struct.new(
+      nil,
       :member_relation,
       :users,
       :groups,
@@ -2501,6 +2624,7 @@ module Aws::QBusiness
     #   <p>The type of the group. This indicates the scope of the group's applicability in access control.</p>
     #   @return [String]
     class DocumentAclGroup < Struct.new(
+      nil,
       :name,
       :type,
       keyword_init: true
@@ -2516,6 +2640,7 @@ module Aws::QBusiness
     #   <p>An array of conditions that define the membership rules. Each condition specifies criteria for users or groups to be included in this membership.</p>
     #   @return [Array<Types::DocumentAclCondition>]
     class DocumentAclMembership < Struct.new(
+      nil,
       :member_relation,
       :conditions,
       keyword_init: true
@@ -2531,6 +2656,7 @@ module Aws::QBusiness
     #   <p>The type of the user. This indicates the scope of the user's applicability in access control.</p>
     #   @return [String]
     class DocumentAclUser < Struct.new(
+      nil,
       :id,
       :type,
       keyword_init: true
@@ -2546,6 +2672,7 @@ module Aws::QBusiness
     #   <p>The value of the attribute. </p>
     #   @return [Types::DocumentAttributeValue]
     class DocumentAttribute < Struct.new(
+      nil,
       :name,
       :value,
       keyword_init: true
@@ -2594,6 +2721,7 @@ module Aws::QBusiness
     #   <p>The value of a document attribute. You can only provide one value for a document attribute.</p>
     #   @return [Types::DocumentAttributeValue]
     class DocumentAttributeCondition < Struct.new(
+      nil,
       :key,
       :operator,
       :value,
@@ -2613,6 +2741,7 @@ module Aws::QBusiness
     #   <p>Information about whether the document attribute can be used by an end user to search for information on their web experience.</p>
     #   @return [String]
     class DocumentAttributeConfiguration < Struct.new(
+      nil,
       :name,
       :type,
       :search,
@@ -2632,6 +2761,7 @@ module Aws::QBusiness
     #   <p> <code>TRUE</code> to delete the existing target value for your specified target attribute key. You cannot create a target value and set this to <code>TRUE</code>.</p>
     #   @return [String]
     class DocumentAttributeTarget < Struct.new(
+      nil,
       :key,
       :value,
       :attribute_value_operator,
@@ -2707,6 +2837,7 @@ module Aws::QBusiness
     #   <p>The timestamp for when the document was last updated.</p>
     #   @return [Time]
     class DocumentDetails < Struct.new(
+      nil,
       :document_id,
       :status,
       :error,
@@ -2728,6 +2859,7 @@ module Aws::QBusiness
     #   <p>Provides the configuration information for invoking a Lambda function in Lambda to alter document metadata and content when ingesting documents into Amazon Q Business.</p> <p>You can configure your Lambda function using the <code>PreExtractionHookConfiguration</code> parameter if you want to apply advanced alterations on the original or raw documents.</p> <p>If you want to apply advanced alterations on the Amazon Q Business structured documents, you must configure your Lambda function using <code>PostExtractionHookConfiguration</code>.</p> <p>You can only invoke one Lambda function. However, this function can invoke other functions it requires.</p> <p>For more information, see <a href="https://docs.aws.amazon.com/amazonq/latest/business-use-dg/custom-document-enrichment.html">Custom document enrichment</a>. </p>
     #   @return [Types::HookConfiguration]
     class DocumentEnrichmentConfiguration < Struct.new(
+      nil,
       :inline_configurations,
       :pre_extraction_hook_configuration,
       :post_extraction_hook_configuration,
@@ -2744,6 +2876,7 @@ module Aws::QBusiness
     #   <p>The identifier of the data source.</p>
     #   @return [String]
     class EligibleDataSource < Struct.new(
+      nil,
       :index_id,
       :data_source_id,
       keyword_init: true
@@ -2756,6 +2889,7 @@ module Aws::QBusiness
     #   <p>The identifier of the KMS key. Amazon Q Business doesn't support asymmetric keys.</p>
     #   @return [String]
     class EncryptionConfiguration < Struct.new(
+      nil,
       :kms_key_id,
       keyword_init: true
     )
@@ -2764,6 +2898,7 @@ module Aws::QBusiness
 
     # <p>The end of the streaming input for the <code>Chat</code> API.</p>
     class EndOfInputEvent < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -2777,6 +2912,7 @@ module Aws::QBusiness
     #   <p>The code associated with the Amazon Q Business request error.</p>
     #   @return [String]
     class ErrorDetail < Struct.new(
+      nil,
       :error_message,
       :error_code,
       keyword_init: true
@@ -2788,6 +2924,7 @@ module Aws::QBusiness
     # @!attribute message
     #   @return [String]
     class ExternalResourceException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -2808,6 +2945,7 @@ module Aws::QBusiness
     #   <p>The details of a file uploaded during chat.</p>
     #   @return [Types::AttachmentOutput]
     class FailedAttachmentEvent < Struct.new(
+      nil,
       :conversation_id,
       :user_message_id,
       :system_message_id,
@@ -2828,6 +2966,7 @@ module Aws::QBusiness
     #   <p>The identifier of the Amazon Q Business data source connector that contains the failed document.</p>
     #   @return [String]
     class FailedDocument < Struct.new(
+      nil,
       :id,
       :error,
       :data_source_id,
@@ -2840,6 +2979,7 @@ module Aws::QBusiness
     #   <p>The identifier of the Amazon Q Business application.</p>
     #   @return [String]
     class GetApplicationRequest < Struct.new(
+      nil,
       :application_id,
       keyword_init: true
     )
@@ -2904,6 +3044,7 @@ module Aws::QBusiness
     #   <p>The Amazon QuickSight authentication configuration for the Amazon Q Business application.</p>
     #   @return [Types::QuickSightConfiguration]
     class GetApplicationResponse < Struct.new(
+      nil,
       :display_name,
       :application_id,
       :application_arn,
@@ -2938,6 +3079,7 @@ module Aws::QBusiness
     #   <p>If the <code>maxResults</code> response was incomplete because there is more data to retrieve, Amazon Q Business returns a pagination token in the response. You can use this pagination token to retrieve the next set of Amazon Q Business chat controls configured.</p>
     #   @return [String]
     class GetChatControlsConfigurationRequest < Struct.new(
+      nil,
       :application_id,
       :max_results,
       :next_token,
@@ -2968,6 +3110,7 @@ module Aws::QBusiness
     #   <p> The hallucination reduction settings for your application.</p>
     #   @return [Types::HallucinationReductionConfiguration]
     class GetChatControlsConfigurationResponse < Struct.new(
+      nil,
       :response_scope,
       :orchestration_configuration,
       :blocked_phrases,
@@ -2987,6 +3130,7 @@ module Aws::QBusiness
     #   <p>The unique identifier of the chat response configuration to retrieve from the specified application.</p>
     #   @return [String]
     class GetChatResponseConfigurationRequest < Struct.new(
+      nil,
       :application_id,
       :chat_response_configuration_id,
       keyword_init: true
@@ -3013,6 +3157,7 @@ module Aws::QBusiness
     #   <p>Information about the most recent update to the configuration, including timestamp and modification details.</p>
     #   @return [Types::ChatResponseConfigurationDetail]
     class GetChatResponseConfigurationResponse < Struct.new(
+      nil,
       :chat_response_configuration_id,
       :chat_response_configuration_arn,
       :display_name,
@@ -3031,6 +3176,7 @@ module Aws::QBusiness
     #   <p>The unique identifier of the data accessor to retrieve.</p>
     #   @return [String]
     class GetDataAccessorRequest < Struct.new(
+      nil,
       :application_id,
       :data_accessor_id,
       keyword_init: true
@@ -3069,6 +3215,7 @@ module Aws::QBusiness
     #   <p>The timestamp when the data accessor was last updated.</p>
     #   @return [Time]
     class GetDataAccessorResponse < Struct.new(
+      nil,
       :display_name,
       :data_accessor_id,
       :data_accessor_arn,
@@ -3094,6 +3241,7 @@ module Aws::QBusiness
     #   <p>The identifier of the data source connector.</p>
     #   @return [String]
     class GetDataSourceRequest < Struct.new(
+      nil,
       :application_id,
       :index_id,
       :data_source_id,
@@ -3154,6 +3302,7 @@ module Aws::QBusiness
     #   <p>The configuration for extracting information from media in documents for the data source. </p>
     #   @return [Types::MediaExtractionConfiguration]
     class GetDataSourceResponse < Struct.new(
+      nil,
       :application_id,
       :index_id,
       :data_source_id,
@@ -3192,6 +3341,7 @@ module Aws::QBusiness
     #   <p>Document outputFormat. Defaults to RAW if not selected.</p>
     #   @return [String]
     class GetDocumentContentRequest < Struct.new(
+      nil,
       :application_id,
       :index_id,
       :data_source_id,
@@ -3209,6 +3359,7 @@ module Aws::QBusiness
     #   <p>The MIME type of the document content. When outputFormat is RAW, this corresponds to the original document's MIME type (e.g., application/pdf, text/plain, application/vnd.openxmlformats-officedocument.wordprocessingml.document). When outputFormat is EXTRACTED, the MIME type is always application/json.</p>
     #   @return [String]
     class GetDocumentContentResponse < Struct.new(
+      nil,
       :presigned_url,
       :mime_type,
       keyword_init: true
@@ -3229,6 +3380,7 @@ module Aws::QBusiness
     #   <p>The identifier of the data source the group is attached to.</p>
     #   @return [String]
     class GetGroupRequest < Struct.new(
+      nil,
       :application_id,
       :index_id,
       :group_name,
@@ -3245,6 +3397,7 @@ module Aws::QBusiness
     #   <p>The status history of the group.</p>
     #   @return [Array<Types::GroupStatusDetail>]
     class GetGroupResponse < Struct.new(
+      nil,
       :status,
       :status_history,
       keyword_init: true
@@ -3259,6 +3412,7 @@ module Aws::QBusiness
     #   <p>The identifier of the Amazon Q Business index you want information on.</p>
     #   @return [String]
     class GetIndexRequest < Struct.new(
+      nil,
       :application_id,
       :index_id,
       keyword_init: true
@@ -3306,6 +3460,7 @@ module Aws::QBusiness
     #   <p>Provides information about the number of documents indexed.</p>
     #   @return [Types::IndexStatistics]
     class GetIndexResponse < Struct.new(
+      nil,
       :application_id,
       :index_id,
       :display_name,
@@ -3337,6 +3492,7 @@ module Aws::QBusiness
     #   <p>The identifier of the media object. You can find this in the <code>sourceAttributions</code> returned by the <code>Chat</code>, <code>ChatSync</code>, and <code>ListMessages</code> API responses.</p>
     #   @return [String]
     class GetMediaRequest < Struct.new(
+      nil,
       :application_id,
       :conversation_id,
       :message_id,
@@ -3353,6 +3509,7 @@ module Aws::QBusiness
     #   <p>The MIME type of the media object (image/png).</p>
     #   @return [String]
     class GetMediaResponse < Struct.new(
+      nil,
       :media_bytes,
       :media_mime_type,
       keyword_init: true
@@ -3367,6 +3524,7 @@ module Aws::QBusiness
     #   <p>The identifier of the plugin.</p>
     #   @return [String]
     class GetPluginRequest < Struct.new(
+      nil,
       :application_id,
       :plugin_id,
       keyword_init: true
@@ -3411,6 +3569,7 @@ module Aws::QBusiness
     #   <p>The timestamp for when the plugin was last updated.</p>
     #   @return [Time]
     class GetPluginResponse < Struct.new(
+      nil,
       :application_id,
       :plugin_id,
       :display_name,
@@ -3432,6 +3591,7 @@ module Aws::QBusiness
     #   <p>The unique identifier of the Amazon Q Business application.</p>
     #   @return [String]
     class GetPolicyRequest < Struct.new(
+      nil,
       :application_id,
       keyword_init: true
     )
@@ -3442,6 +3602,7 @@ module Aws::QBusiness
     #   <p>The JSON representation of the permission policy.</p>
     #   @return [String]
     class GetPolicyResponse < Struct.new(
+      nil,
       :policy,
       keyword_init: true
     )
@@ -3455,6 +3616,7 @@ module Aws::QBusiness
     #   <p>The identifier of the retriever.</p>
     #   @return [String]
     class GetRetrieverRequest < Struct.new(
+      nil,
       :application_id,
       :retriever_id,
       keyword_init: true
@@ -3493,6 +3655,7 @@ module Aws::QBusiness
     #   <p>The Unix timestamp when the retriever was last updated.</p>
     #   @return [Time]
     class GetRetrieverResponse < Struct.new(
+      nil,
       :application_id,
       :retriever_id,
       :retriever_arn,
@@ -3515,6 +3678,7 @@ module Aws::QBusiness
     #   <p>The user email address attached to the user.</p>
     #   @return [String]
     class GetUserRequest < Struct.new(
+      nil,
       :application_id,
       :user_id,
       keyword_init: true
@@ -3526,6 +3690,7 @@ module Aws::QBusiness
     #   <p>A list of user aliases attached to a user.</p>
     #   @return [Array<Types::UserAlias>]
     class GetUserResponse < Struct.new(
+      nil,
       :user_aliases,
       keyword_init: true
     )
@@ -3539,6 +3704,7 @@ module Aws::QBusiness
     #   <p>The identifier of the Amazon Q Business web experience. </p>
     #   @return [String]
     class GetWebExperienceRequest < Struct.new(
+      nil,
       :application_id,
       :web_experience_id,
       keyword_init: true
@@ -3603,6 +3769,7 @@ module Aws::QBusiness
     #   <p>Gets the custom logo, favicon, font, and color used in the Amazon Q web experience. </p>
     #   @return [Types::CustomizationConfiguration]
     class GetWebExperienceResponse < Struct.new(
+      nil,
       :application_id,
       :web_experience_id,
       :web_experience_arn,
@@ -3637,6 +3804,7 @@ module Aws::QBusiness
     #   <p>Information required for Amazon Q Business to find a specific file in an Amazon S3 bucket.</p>
     #   @return [Types::S3]
     class GroupMembers < Struct.new(
+      nil,
       :member_groups,
       :member_users,
       :s3_path_for_group_members,
@@ -3656,6 +3824,7 @@ module Aws::QBusiness
     #   <p>The details of an error associated a group status.</p>
     #   @return [Types::ErrorDetail]
     class GroupStatusDetail < Struct.new(
+      nil,
       :status,
       :last_updated_at,
       :error_detail,
@@ -3669,6 +3838,7 @@ module Aws::QBusiness
     #   <p>The name of the group the summary information is for.</p>
     #   @return [String]
     class GroupSummary < Struct.new(
+      nil,
       :group_name,
       keyword_init: true
     )
@@ -3680,6 +3850,7 @@ module Aws::QBusiness
     #   <p>Controls whether hallucination reduction has been enabled or disabled for your application. The default status is <code>DISABLED</code>. </p>
     #   @return [String]
     class HallucinationReductionConfiguration < Struct.new(
+      nil,
       :hallucination_reduction_control,
       keyword_init: true
     )
@@ -3700,6 +3871,7 @@ module Aws::QBusiness
     #   <p>The Amazon Resource Name (ARN) of a role with permission to run <code>PreExtractionHookConfiguration</code> and <code>PostExtractionHookConfiguration</code> for altering document metadata and content during the document ingestion process.</p>
     #   @return [String]
     class HookConfiguration < Struct.new(
+      nil,
       :invocation_condition,
       :lambda_arn,
       :s3_bucket_name,
@@ -3717,6 +3889,7 @@ module Aws::QBusiness
     #   <p>The Amazon Resource Name (ARN) of the IAM role with permissions to perform actions on Amazon Web Services services on your behalf.</p>
     #   @return [String]
     class IdcAuthConfiguration < Struct.new(
+      nil,
       :idc_application_arn,
       :role_arn,
       keyword_init: true
@@ -3749,6 +3922,7 @@ module Aws::QBusiness
     #   <p>Specify whether to extract semantic meaning from images and visuals from documents.</p>
     #   @return [String]
     class ImageExtractionConfiguration < Struct.new(
+      nil,
       :image_extraction_status,
       keyword_init: true
     )
@@ -3763,6 +3937,7 @@ module Aws::QBusiness
     #   <p>The MIME type of the image file.</p>
     #   @return [String]
     class ImageSourceDetails < Struct.new(
+      nil,
       :media_id,
       :media_mime_type,
       keyword_init: true
@@ -3787,6 +3962,7 @@ module Aws::QBusiness
     #   <p>The current status of the index. When the status is <code>ACTIVE</code>, the index is ready.</p>
     #   @return [String]
     class Index < Struct.new(
+      nil,
       :display_name,
       :index_id,
       :created_at,
@@ -3802,6 +3978,7 @@ module Aws::QBusiness
     #   <p>The number of storage units configured for an Amazon Q Business index.</p>
     #   @return [Integer]
     class IndexCapacityConfiguration < Struct.new(
+      nil,
       :units,
       keyword_init: true
     )
@@ -3813,6 +3990,7 @@ module Aws::QBusiness
     #   <p>The number of documents indexed.</p>
     #   @return [Types::TextDocumentStatistics]
     class IndexStatistics < Struct.new(
+      nil,
       :text_document_statistics,
       keyword_init: true
     )
@@ -3830,6 +4008,7 @@ module Aws::QBusiness
     #   <p> <code>TRUE</code> to delete content if the condition used for the target attribute is met.</p>
     #   @return [String]
     class InlineDocumentEnrichmentConfiguration < Struct.new(
+      nil,
       :condition,
       :target,
       :document_content_operator,
@@ -3864,6 +4043,7 @@ module Aws::QBusiness
     #   <p>Provides sample responses or templates that Amazon Q Business can reference when generating responses, helping to establish consistent patterns and formats for different types of user queries.</p>
     #   @return [String]
     class InstructionCollection < Struct.new(
+      nil,
       :response_length,
       :target_audience,
       :perspective,
@@ -3881,6 +4061,7 @@ module Aws::QBusiness
     # @!attribute message
     #   @return [String]
     class InternalServerException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -3892,6 +4073,7 @@ module Aws::QBusiness
     #   <p>The identifier of the Amazon Kendra index.</p>
     #   @return [String]
     class KendraIndexConfiguration < Struct.new(
+      nil,
       :index_id,
       keyword_init: true
     )
@@ -3902,6 +4084,7 @@ module Aws::QBusiness
     # @!attribute message
     #   @return [String]
     class LicenseNotFoundException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -3915,6 +4098,7 @@ module Aws::QBusiness
     #   <p>The maximum number of Amazon Q Business applications to return.</p>
     #   @return [Integer]
     class ListApplicationsRequest < Struct.new(
+      nil,
       :next_token,
       :max_results,
       keyword_init: true
@@ -3929,6 +4113,7 @@ module Aws::QBusiness
     #   <p>An array of summary information on the configuration of one or more Amazon Q Business applications.</p>
     #   @return [Array<Types::Application>]
     class ListApplicationsResponse < Struct.new(
+      nil,
       :next_token,
       :applications,
       keyword_init: true
@@ -3952,6 +4137,7 @@ module Aws::QBusiness
     #   <p>The maximum number of attachements to return.</p>
     #   @return [Integer]
     class ListAttachmentsRequest < Struct.new(
+      nil,
       :application_id,
       :conversation_id,
       :user_id,
@@ -3969,6 +4155,7 @@ module Aws::QBusiness
     #   <p>If the response is truncated, Amazon Q Business returns this token, which you can use in a later request to list the next set of attachments.</p>
     #   @return [String]
     class ListAttachmentsResponse < Struct.new(
+      nil,
       :attachments,
       :next_token,
       keyword_init: true
@@ -3986,6 +4173,7 @@ module Aws::QBusiness
     #   <p>A pagination token used to retrieve the next set of results when the number of configurations exceeds the specified <code>maxResults</code> value.</p>
     #   @return [String]
     class ListChatResponseConfigurationsRequest < Struct.new(
+      nil,
       :application_id,
       :max_results,
       :next_token,
@@ -4001,6 +4189,7 @@ module Aws::QBusiness
     #   <p>A pagination token that can be used in a subsequent request to retrieve additional chat response configurations if the results were truncated due to the <code>maxResults</code> parameter.</p>
     #   @return [String]
     class ListChatResponseConfigurationsResponse < Struct.new(
+      nil,
       :chat_response_configurations,
       :next_token,
       keyword_init: true
@@ -4021,6 +4210,7 @@ module Aws::QBusiness
     #   <p>The maximum number of Amazon Q Business conversations to return.</p>
     #   @return [Integer]
     class ListConversationsRequest < Struct.new(
+      nil,
       :application_id,
       :user_id,
       :next_token,
@@ -4037,6 +4227,7 @@ module Aws::QBusiness
     #   <p>An array of summary information on the configuration of one or more Amazon Q Business web experiences.</p>
     #   @return [Array<Types::Conversation>]
     class ListConversationsResponse < Struct.new(
+      nil,
       :next_token,
       :conversations,
       keyword_init: true
@@ -4054,6 +4245,7 @@ module Aws::QBusiness
     #   <p>The maximum number of results to return in a single call.</p>
     #   @return [Integer]
     class ListDataAccessorsRequest < Struct.new(
+      nil,
       :application_id,
       :next_token,
       :max_results,
@@ -4069,6 +4261,7 @@ module Aws::QBusiness
     #   <p>The token to use to retrieve the next set of results, if there are any.</p>
     #   @return [String]
     class ListDataAccessorsResponse < Struct.new(
+      nil,
       :data_accessors,
       :next_token,
       keyword_init: true
@@ -4101,6 +4294,7 @@ module Aws::QBusiness
     #   <p>Only returns synchronization jobs with the <code>Status</code> field equal to the specified status.</p>
     #   @return [String]
     class ListDataSourceSyncJobsRequest < Struct.new(
+      nil,
       :data_source_id,
       :application_id,
       :index_id,
@@ -4121,6 +4315,7 @@ module Aws::QBusiness
     #   <p>If the response is truncated, Amazon Q Business returns this token. You can use this token in any subsequent request to retrieve the next set of jobs.</p>
     #   @return [String]
     class ListDataSourceSyncJobsResponse < Struct.new(
+      nil,
       :history,
       :next_token,
       keyword_init: true
@@ -4141,6 +4336,7 @@ module Aws::QBusiness
     #   <p>The maximum number of data source connectors to return.</p>
     #   @return [Integer]
     class ListDataSourcesRequest < Struct.new(
+      nil,
       :application_id,
       :index_id,
       :next_token,
@@ -4157,6 +4353,7 @@ module Aws::QBusiness
     #   <p>If the response is truncated, Amazon Q Business returns this token. You can use this token in a subsequent request to retrieve the next set of data source connectors.</p>
     #   @return [String]
     class ListDataSourcesResponse < Struct.new(
+      nil,
       :data_sources,
       :next_token,
       keyword_init: true
@@ -4180,6 +4377,7 @@ module Aws::QBusiness
     #   <p>The maximum number of documents to return.</p>
     #   @return [Integer]
     class ListDocumentsRequest < Struct.new(
+      nil,
       :application_id,
       :index_id,
       :data_source_ids,
@@ -4197,6 +4395,7 @@ module Aws::QBusiness
     #   <p>If the <code>maxResults</code> response was incomplete because there is more data to retrieve, Amazon Q Business returns a pagination token in the response. You can use this pagination token to retrieve the next set of documents.</p>
     #   @return [String]
     class ListDocumentsResponse < Struct.new(
+      nil,
       :document_detail_list,
       :next_token,
       keyword_init: true
@@ -4223,6 +4422,7 @@ module Aws::QBusiness
     #   <p>The maximum number of returned groups that are mapped to users.</p>
     #   @return [Integer]
     class ListGroupsRequest < Struct.new(
+      nil,
       :application_id,
       :index_id,
       :updated_earlier_than,
@@ -4241,6 +4441,7 @@ module Aws::QBusiness
     #   <p>Summary information for list of groups that are mapped to users.</p>
     #   @return [Array<Types::GroupSummary>]
     class ListGroupsResponse < Struct.new(
+      nil,
       :next_token,
       :items,
       keyword_init: true
@@ -4258,6 +4459,7 @@ module Aws::QBusiness
     #   <p>The maximum number of indices to return.</p>
     #   @return [Integer]
     class ListIndicesRequest < Struct.new(
+      nil,
       :application_id,
       :next_token,
       :max_results,
@@ -4273,6 +4475,7 @@ module Aws::QBusiness
     #   <p>An array of information on the items in one or more indexes.</p>
     #   @return [Array<Types::Index>]
     class ListIndicesResponse < Struct.new(
+      nil,
       :next_token,
       :indices,
       keyword_init: true
@@ -4296,6 +4499,7 @@ module Aws::QBusiness
     #   <p>The maximum number of messages to return.</p>
     #   @return [Integer]
     class ListMessagesRequest < Struct.new(
+      nil,
       :conversation_id,
       :application_id,
       :user_id,
@@ -4313,6 +4517,7 @@ module Aws::QBusiness
     #   <p>If the response is truncated, Amazon Q Business returns this token, which you can use in a later request to list the next set of messages.</p>
     #   @return [String]
     class ListMessagesResponse < Struct.new(
+      nil,
       :messages,
       :next_token,
       keyword_init: true
@@ -4333,6 +4538,7 @@ module Aws::QBusiness
     #   <p>The maximum number of plugin actions to return.</p>
     #   @return [Integer]
     class ListPluginActionsRequest < Struct.new(
+      nil,
       :application_id,
       :plugin_id,
       :next_token,
@@ -4349,6 +4555,7 @@ module Aws::QBusiness
     #   <p>An array of information on one or more plugin actions.</p>
     #   @return [Array<Types::ActionSummary>]
     class ListPluginActionsResponse < Struct.new(
+      nil,
       :next_token,
       :items,
       keyword_init: true
@@ -4366,6 +4573,7 @@ module Aws::QBusiness
     #   <p>The maximum number of plugins to return.</p>
     #   @return [Integer]
     class ListPluginTypeActionsRequest < Struct.new(
+      nil,
       :plugin_type,
       :next_token,
       :max_results,
@@ -4381,6 +4589,7 @@ module Aws::QBusiness
     #   <p>An array of information on one or more plugins.</p>
     #   @return [Array<Types::ActionSummary>]
     class ListPluginTypeActionsResponse < Struct.new(
+      nil,
       :next_token,
       :items,
       keyword_init: true
@@ -4395,6 +4604,7 @@ module Aws::QBusiness
     #   <p>The maximum number of plugin metadata items to return.</p>
     #   @return [Integer]
     class ListPluginTypeMetadataRequest < Struct.new(
+      nil,
       :next_token,
       :max_results,
       keyword_init: true
@@ -4409,6 +4619,7 @@ module Aws::QBusiness
     #   <p>An array of information on plugin metadata.</p>
     #   @return [Array<Types::PluginTypeMetadataSummary>]
     class ListPluginTypeMetadataResponse < Struct.new(
+      nil,
       :next_token,
       :items,
       keyword_init: true
@@ -4426,6 +4637,7 @@ module Aws::QBusiness
     #   <p>The maximum number of documents to return.</p>
     #   @return [Integer]
     class ListPluginsRequest < Struct.new(
+      nil,
       :application_id,
       :next_token,
       :max_results,
@@ -4441,6 +4653,7 @@ module Aws::QBusiness
     #   <p>Information about a configured plugin.</p>
     #   @return [Array<Types::Plugin>]
     class ListPluginsResponse < Struct.new(
+      nil,
       :next_token,
       :plugins,
       keyword_init: true
@@ -4458,6 +4671,7 @@ module Aws::QBusiness
     #   <p>The maximum number of retrievers returned.</p>
     #   @return [Integer]
     class ListRetrieversRequest < Struct.new(
+      nil,
       :application_id,
       :next_token,
       :max_results,
@@ -4473,6 +4687,7 @@ module Aws::QBusiness
     #   <p>If the response is truncated, Amazon Q Business returns this token, which you can use in a later request to list the next set of retrievers.</p>
     #   @return [String]
     class ListRetrieversResponse < Struct.new(
+      nil,
       :retrievers,
       :next_token,
       keyword_init: true
@@ -4490,6 +4705,7 @@ module Aws::QBusiness
     #   <p>The maximum number of Amazon Q Business subscriptions to return.</p>
     #   @return [Integer]
     class ListSubscriptionsRequest < Struct.new(
+      nil,
       :application_id,
       :next_token,
       :max_results,
@@ -4505,6 +4721,7 @@ module Aws::QBusiness
     #   <p>An array of summary information on the subscriptions configured for an Amazon Q Business application.</p>
     #   @return [Array<Types::Subscription>]
     class ListSubscriptionsResponse < Struct.new(
+      nil,
       :next_token,
       :subscriptions,
       keyword_init: true
@@ -4516,6 +4733,7 @@ module Aws::QBusiness
     #   <p>The Amazon Resource Name (ARN) of the Amazon Q Business application or data source to get a list of tags for.</p>
     #   @return [String]
     class ListTagsForResourceRequest < Struct.new(
+      nil,
       :resource_arn,
       keyword_init: true
     )
@@ -4526,6 +4744,7 @@ module Aws::QBusiness
     #   <p>A list of tags associated with the Amazon Q Business application or data source.</p>
     #   @return [Array<Types::Tag>]
     class ListTagsForResourceResponse < Struct.new(
+      nil,
       :tags,
       keyword_init: true
     )
@@ -4542,6 +4761,7 @@ module Aws::QBusiness
     #   <p>The maximum number of Amazon Q Business Web Experiences to return.</p>
     #   @return [Integer]
     class ListWebExperiencesRequest < Struct.new(
+      nil,
       :application_id,
       :next_token,
       :max_results,
@@ -4557,6 +4777,7 @@ module Aws::QBusiness
     #   <p>If the response is truncated, Amazon Q Business returns this token, which you can use in a later request to list the next set of messages.</p>
     #   @return [String]
     class ListWebExperiencesResponse < Struct.new(
+      nil,
       :web_experiences,
       :next_token,
       keyword_init: true
@@ -4575,6 +4796,7 @@ module Aws::QBusiness
     #   <p>Configuration settings for extracting and processing video content from media files.</p>
     #   @return [Types::VideoExtractionConfiguration]
     class MediaExtractionConfiguration < Struct.new(
+      nil,
       :image_extraction_configuration,
       :audio_extraction_configuration,
       :video_extraction_configuration,
@@ -4587,6 +4809,7 @@ module Aws::QBusiness
     # @!attribute message
     #   @return [String]
     class MediaTooLargeException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -4601,6 +4824,7 @@ module Aws::QBusiness
     #   <p>The type of the sub group.</p>
     #   @return [String]
     class MemberGroup < Struct.new(
+      nil,
       :group_name,
       :type,
       keyword_init: true
@@ -4616,6 +4840,7 @@ module Aws::QBusiness
     #   <p>The type of the user.</p>
     #   @return [String]
     class MemberUser < Struct.new(
+      nil,
       :user_id,
       :type,
       keyword_init: true
@@ -4649,6 +4874,7 @@ module Aws::QBusiness
     #   <p>Performs an Amazon Q Business plugin action during a non-streaming chat conversation.</p>
     #   @return [Types::ActionExecution]
     class Message < Struct.new(
+      nil,
       :message_id,
       :body,
       :time,
@@ -4676,6 +4902,7 @@ module Aws::QBusiness
     #   <p>The timestamp for when the feedback was submitted.</p>
     #   @return [Time]
     class MessageUsefulnessFeedback < Struct.new(
+      nil,
       :usefulness,
       :reason,
       :comment,
@@ -4702,6 +4929,7 @@ module Aws::QBusiness
     #   <p>The final text output message generated by the system.</p>
     #   @return [String]
     class MetadataEvent < Struct.new(
+      nil,
       :conversation_id,
       :user_message_id,
       :system_message_id,
@@ -4723,6 +4951,7 @@ module Aws::QBusiness
     #   <p>Overrides the default boosts applied by Amazon Q Business to supported document attribute data types.</p>
     #   @return [Hash<String, Types::DocumentAttributeBoostingConfiguration>]
     class NativeIndexConfiguration < Struct.new(
+      nil,
       :index_id,
       :version,
       :boosting_override,
@@ -4733,6 +4962,7 @@ module Aws::QBusiness
 
     # <p>Information about invoking a custom plugin without any authentication or authorization requirement.</p>
     class NoAuthConfiguration < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -4746,6 +4976,7 @@ module Aws::QBusiness
     #   <p>Specifies whether higher or lower numeric values should be prioritized when boosting. Valid values are ASCENDING (higher numbers are more important) and DESCENDING (lower numbers are more important).</p>
     #   @return [String]
     class NumberAttributeBoostingConfiguration < Struct.new(
+      nil,
       :boosting_level,
       :boosting_type,
       keyword_init: true
@@ -4767,6 +4998,7 @@ module Aws::QBusiness
     #   <p>The URL required by the OAuth 2.0 protocol to exchange an end user authorization code for an access token.</p>
     #   @return [String]
     class OAuth2ClientCredentialConfiguration < Struct.new(
+      nil,
       :secret_arn,
       :role_arn,
       :authorization_url,
@@ -4784,6 +5016,7 @@ module Aws::QBusiness
     #   <p>An IAM role with permissions to access KMS to decrypt the Secrets Manager secret containing your OIDC client secret.</p>
     #   @return [String]
     class OpenIDConnectProviderConfiguration < Struct.new(
+      nil,
       :secrets_arn,
       :secrets_role,
       keyword_init: true
@@ -4796,6 +5029,7 @@ module Aws::QBusiness
     #   <p> Status information about whether chat orchestration is activated or deactivated for your Amazon Q Business application.</p>
     #   @return [String]
     class OrchestrationConfiguration < Struct.new(
+      nil,
       :control,
       keyword_init: true
     )
@@ -4813,6 +5047,7 @@ module Aws::QBusiness
     #   <p>The values to compare against using the specified condition operator.</p>
     #   @return [Array<String>]
     class PermissionCondition < Struct.new(
+      nil,
       :condition_operator,
       :condition_key,
       :condition_values,
@@ -4826,6 +5061,7 @@ module Aws::QBusiness
     #   <p>An option to allow Amazon Q Business to customize chat responses using user specific metadata—specifically, location and job information—in your IAM Identity Center instance.</p>
     #   @return [String]
     class PersonalizationConfiguration < Struct.new(
+      nil,
       :personalization_control_mode,
       keyword_init: true
     )
@@ -4858,6 +5094,7 @@ module Aws::QBusiness
     #   <p>The timestamp for when the plugin was last updated.</p>
     #   @return [Time]
     class Plugin < Struct.new(
+      nil,
       :plugin_id,
       :display_name,
       :type,
@@ -4906,6 +5143,7 @@ module Aws::QBusiness
     #   <p> The identifier of the plugin you want to use.</p>
     #   @return [String]
     class PluginConfiguration < Struct.new(
+      nil,
       :plugin_id,
       keyword_init: true
     )
@@ -4923,6 +5161,7 @@ module Aws::QBusiness
     #   <p>The description assigned by Amazon Q Business to a plugin. You can't modify this value.</p>
     #   @return [String]
     class PluginTypeMetadataSummary < Struct.new(
+      nil,
       :type,
       :category,
       :description,
@@ -4962,6 +5201,7 @@ module Aws::QBusiness
     #   <p>The type of group.</p>
     #   @return [String]
     class PrincipalGroup < Struct.new(
+      nil,
       :name,
       :access,
       :membership_type,
@@ -4981,6 +5221,7 @@ module Aws::QBusiness
     #   <p>The type of group.</p>
     #   @return [String]
     class PrincipalUser < Struct.new(
+      nil,
       :id,
       :access,
       :membership_type,
@@ -5008,6 +5249,7 @@ module Aws::QBusiness
     #   <p>The feedback usefulness value given by the user to the chat message.</p>
     #   @return [Types::MessageUsefulnessFeedback]
     class PutFeedbackRequest < Struct.new(
+      nil,
       :application_id,
       :user_id,
       :conversation_id,
@@ -5041,6 +5283,7 @@ module Aws::QBusiness
     #   <p>The Amazon Resource Name (ARN) of an IAM role that has access to the S3 file that contains your list of users that belong to a group.</p>
     #   @return [String]
     class PutGroupRequest < Struct.new(
+      nil,
       :application_id,
       :index_id,
       :group_name,
@@ -5054,6 +5297,7 @@ module Aws::QBusiness
     end
 
     class PutGroupResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -5064,6 +5308,7 @@ module Aws::QBusiness
     #   <p>Status information about whether end users can create and use Amazon Q Apps in the web experience.</p>
     #   @return [String]
     class QAppsConfiguration < Struct.new(
+      nil,
       :q_apps_control_mode,
       keyword_init: true
     )
@@ -5075,6 +5320,7 @@ module Aws::QBusiness
     #   <p>The Amazon QuickSight namespace that is used as the identity provider. For more information about QuickSight namespaces, see <a href="https://docs.aws.amazon.com/quicksight/latest/developerguide/namespace-operations.html">Namespace operations</a>. </p>
     #   @return [String]
     class QuickSightConfiguration < Struct.new(
+      nil,
       :client_namespace,
       keyword_init: true
     )
@@ -5101,6 +5347,7 @@ module Aws::QBusiness
     #   <p>Attributes related to the relevance score of the content.</p>
     #   @return [Types::ScoreAttributes]
     class RelevantContent < Struct.new(
+      nil,
       :content,
       :document_id,
       :document_title,
@@ -5123,6 +5370,7 @@ module Aws::QBusiness
     #   <p>The type of the resource affected.</p>
     #   @return [String]
     class ResourceNotFoundException < Struct.new(
+      nil,
       :message,
       :resource_id,
       :resource_type,
@@ -5136,6 +5384,7 @@ module Aws::QBusiness
     #   <p>A collection of instructions that guide how Amazon Q Business generates responses, including parameters for response length, target audience, perspective, output style, identity, tone, and custom instructions.</p>
     #   @return [Types::InstructionCollection]
     class ResponseConfiguration < Struct.new(
+      nil,
       :instruction_collection,
       keyword_init: true
     )
@@ -5159,6 +5408,7 @@ module Aws::QBusiness
     #   <p>The name of your retriever.</p>
     #   @return [String]
     class Retriever < Struct.new(
+      nil,
       :application_id,
       :retriever_id,
       :type,
@@ -5194,6 +5444,7 @@ module Aws::QBusiness
     #   <p>The unique identifier of the retriever to use as the content source.</p>
     #   @return [String]
     class RetrieverContentSource < Struct.new(
+      nil,
       :retriever_id,
       keyword_init: true
     )
@@ -5214,6 +5465,7 @@ module Aws::QBusiness
     #   <p>The configuration information for a rule.</p>
     #   @return [Types::RuleConfiguration]
     class Rule < Struct.new(
+      nil,
       :included_users_and_groups,
       :excluded_users_and_groups,
       :rule_type,
@@ -5251,6 +5503,7 @@ module Aws::QBusiness
     #   <p>The name of the file.</p>
     #   @return [String]
     class S3 < Struct.new(
+      nil,
       :bucket,
       :key,
       keyword_init: true
@@ -5272,6 +5525,7 @@ module Aws::QBusiness
     #   <p>The group attribute name in your IdP that maps to user groups.</p>
     #   @return [String]
     class SamlConfiguration < Struct.new(
+      nil,
       :metadata_xml,
       :role_arn,
       :user_id_attribute,
@@ -5286,6 +5540,7 @@ module Aws::QBusiness
     #   <p>The URL where Amazon Q Business end users will be redirected for authentication. </p>
     #   @return [String]
     class SamlProviderConfiguration < Struct.new(
+      nil,
       :authentication_url,
       keyword_init: true
     )
@@ -5297,6 +5552,7 @@ module Aws::QBusiness
     #   <p>The confidence level of the relevance score.</p>
     #   @return [String]
     class ScoreAttributes < Struct.new(
+      nil,
       :score_confidence,
       keyword_init: true
     )
@@ -5322,6 +5578,7 @@ module Aws::QBusiness
     #   <p>The token for the next set of results. (You received this token from a previous call.)</p>
     #   @return [String]
     class SearchRelevantContentRequest < Struct.new(
+      nil,
       :application_id,
       :query_text,
       :content_source,
@@ -5340,6 +5597,7 @@ module Aws::QBusiness
     #   <p>The token to use to retrieve the next set of results, if there are any.</p>
     #   @return [String]
     class SearchRelevantContentResponse < Struct.new(
+      nil,
       :relevant_content,
       :next_token,
       keyword_init: true
@@ -5358,6 +5616,7 @@ module Aws::QBusiness
     #   <p>The type of the resource affected.</p>
     #   @return [String]
     class ServiceQuotaExceededException < Struct.new(
+      nil,
       :message,
       :resource_id,
       :resource_type,
@@ -5371,6 +5630,7 @@ module Aws::QBusiness
     #   <p>The relevant text excerpt from a source that was used to generate a citation text segment in an Amazon Q chat response.</p>
     #   @return [String]
     class SnippetExcerpt < Struct.new(
+      nil,
       :text,
       keyword_init: true
     )
@@ -5406,6 +5666,7 @@ module Aws::QBusiness
     #   <p>The identifier of the data source from which the document was ingested. This field is not present if the document is ingested by directly calling the BatchPutDocument API (similar to checkDocumentAccess). If the document is from a file-upload data source, the datasource will be "uploaded-docs-file-stat-datasourceid".</p>
     #   @return [String]
     class SourceAttribution < Struct.new(
+      nil,
       :title,
       :snippet,
       :url,
@@ -5455,6 +5716,7 @@ module Aws::QBusiness
     #   <p>The identifier of the index used with the data source connector.</p>
     #   @return [String]
     class StartDataSourceSyncJobRequest < Struct.new(
+      nil,
       :data_source_id,
       :application_id,
       :index_id,
@@ -5467,6 +5729,7 @@ module Aws::QBusiness
     #   <p>The identifier for a particular synchronization job.</p>
     #   @return [String]
     class StartDataSourceSyncJobResponse < Struct.new(
+      nil,
       :execution_id,
       keyword_init: true
     )
@@ -5483,6 +5746,7 @@ module Aws::QBusiness
     #   <p>The identifier of the index used with the Amazon Q Business data source connector.</p>
     #   @return [String]
     class StopDataSourceSyncJobRequest < Struct.new(
+      nil,
       :data_source_id,
       :application_id,
       :index_id,
@@ -5492,6 +5756,7 @@ module Aws::QBusiness
     end
 
     class StopDataSourceSyncJobResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -5505,6 +5770,7 @@ module Aws::QBusiness
     #   <p>Specifies specific values of a <code>STRING</code> type document attribute being boosted. When using <code>NativeIndexConfiguration</code> version 2, you can specify up to five values in order of priority.</p>
     #   @return [Hash<String, String>]
     class StringAttributeBoostingConfiguration < Struct.new(
+      nil,
       :boosting_level,
       :attribute_value_boosting,
       keyword_init: true
@@ -5517,6 +5783,7 @@ module Aws::QBusiness
     #   <p>Specifies the priority of boosted document attributes in relation to other boosted attributes. This parameter determines how strongly the attribute influences document ranking in search results. <code>STRING_LIST</code> attributes can serve as additional boosting factors when needed, but are not supported when using <code>NativeIndexConfiguration</code> version 2.</p>
     #   @return [String]
     class StringListAttributeBoostingConfiguration < Struct.new(
+      nil,
       :boosting_level,
       keyword_init: true
     )
@@ -5540,6 +5807,7 @@ module Aws::QBusiness
     #   <p>The type of the Amazon Q Business subscription for the next month.</p>
     #   @return [Types::SubscriptionDetails]
     class Subscription < Struct.new(
+      nil,
       :subscription_id,
       :subscription_arn,
       :principal,
@@ -5555,6 +5823,7 @@ module Aws::QBusiness
     #   <p> The type of an Amazon Q Business subscription. </p>
     #   @return [String]
     class SubscriptionDetails < Struct.new(
+      nil,
       :type,
       keyword_init: true
     )
@@ -5589,6 +5858,7 @@ module Aws::QBusiness
     #   <p>The value associated with the tag. The value may be an empty string but it can't be null.</p>
     #   @return [String]
     class Tag < Struct.new(
+      nil,
       :key,
       :value,
       keyword_init: true
@@ -5603,6 +5873,7 @@ module Aws::QBusiness
     #   <p>A list of tag keys to add to the Amazon Q Business application or data source. If a tag already exists, the existing value is replaced with the new value.</p>
     #   @return [Array<Types::Tag>]
     class TagResourceRequest < Struct.new(
+      nil,
       :resource_arn,
       :tags,
       keyword_init: true
@@ -5611,6 +5882,7 @@ module Aws::QBusiness
     end
 
     class TagResourceResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -5624,6 +5896,7 @@ module Aws::QBusiness
     #   <p>The number of text documents indexed.</p>
     #   @return [Integer]
     class TextDocumentStatistics < Struct.new(
+      nil,
       :indexed_text_bytes,
       :indexed_text_document_count,
       keyword_init: true
@@ -5636,6 +5909,7 @@ module Aws::QBusiness
     #   <p>A user message in a text message input event.</p>
     #   @return [String]
     class TextInputEvent < Struct.new(
+      nil,
       :user_message,
       keyword_init: true
     )
@@ -5659,6 +5933,7 @@ module Aws::QBusiness
     #   <p>An AI-generated message in a <code>TextOutputEvent</code>.</p>
     #   @return [String]
     class TextOutputEvent < Struct.new(
+      nil,
       :system_message_type,
       :conversation_id,
       :user_message_id,
@@ -5695,6 +5970,7 @@ module Aws::QBusiness
     #   <p>Source information for a segment of extracted text, including its media type.</p>
     #   @return [Types::SourceDetails]
     class TextSegment < Struct.new(
+      nil,
       :begin_offset,
       :end_offset,
       :snippet_excerpt,
@@ -5710,6 +5986,7 @@ module Aws::QBusiness
     # @!attribute message
     #   @return [String]
     class ThrottlingException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -5730,6 +6007,7 @@ module Aws::QBusiness
     #   <p>Rules defined for a topic configuration.</p>
     #   @return [Array<Types::Rule>]
     class TopicConfiguration < Struct.new(
+      nil,
       :name,
       :description,
       :example_chat_messages,
@@ -5746,6 +6024,7 @@ module Aws::QBusiness
     #   <p>A list of tag keys to remove from the Amazon Q Business application or data source. If a tag key does not exist on the resource, it is ignored.</p>
     #   @return [Array<String>]
     class UntagResourceRequest < Struct.new(
+      nil,
       :resource_arn,
       :tag_keys,
       keyword_init: true
@@ -5754,6 +6033,7 @@ module Aws::QBusiness
     end
 
     class UntagResourceResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -5787,6 +6067,7 @@ module Aws::QBusiness
     #   <p>An option to enable updating the default subscription type assigned to an Amazon Q Business application using IAM identity federation for user management.</p>
     #   @return [Types::AutoSubscriptionConfiguration]
     class UpdateApplicationRequest < Struct.new(
+      nil,
       :application_id,
       :identity_center_instance_arn,
       :display_name,
@@ -5802,6 +6083,7 @@ module Aws::QBusiness
     end
 
     class UpdateApplicationResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -5835,6 +6117,7 @@ module Aws::QBusiness
     #   <p> The hallucination reduction settings for your application.</p>
     #   @return [Types::HallucinationReductionConfiguration]
     class UpdateChatControlsConfigurationRequest < Struct.new(
+      nil,
       :application_id,
       :client_token,
       :response_scope,
@@ -5850,6 +6133,7 @@ module Aws::QBusiness
     end
 
     class UpdateChatControlsConfigurationResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -5871,6 +6155,7 @@ module Aws::QBusiness
     #   <p>A unique, case-sensitive identifier to ensure idempotency of the request. This helps prevent the same update from being processed multiple times if retries occur.</p>
     #   @return [String]
     class UpdateChatResponseConfigurationRequest < Struct.new(
+      nil,
       :application_id,
       :chat_response_configuration_id,
       :display_name,
@@ -5882,6 +6167,7 @@ module Aws::QBusiness
     end
 
     class UpdateChatResponseConfigurationResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -5903,6 +6189,7 @@ module Aws::QBusiness
     #   <p>The updated friendly name for the data accessor.</p>
     #   @return [String]
     class UpdateDataAccessorRequest < Struct.new(
+      nil,
       :application_id,
       :data_accessor_id,
       :action_configurations,
@@ -5914,6 +6201,7 @@ module Aws::QBusiness
     end
 
     class UpdateDataAccessorResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -5953,6 +6241,7 @@ module Aws::QBusiness
     #   <p>The configuration for extracting information from media in documents for your data source.</p>
     #   @return [Types::MediaExtractionConfiguration]
     class UpdateDataSourceRequest < Struct.new(
+      nil,
       :application_id,
       :index_id,
       :data_source_id,
@@ -5970,6 +6259,7 @@ module Aws::QBusiness
     end
 
     class UpdateDataSourceResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -5994,6 +6284,7 @@ module Aws::QBusiness
     #   <p>Configuration information for document metadata or fields. Document metadata are fields or attributes associated with your documents. For example, the company department name associated with each document. For more information, see <a href="https://docs.aws.amazon.com/amazonq/latest/business-use-dg/doc-attributes-types.html#doc-attributes">Understanding document attributes</a>.</p>
     #   @return [Array<Types::DocumentAttributeConfiguration>]
     class UpdateIndexRequest < Struct.new(
+      nil,
       :application_id,
       :index_id,
       :display_name,
@@ -6006,6 +6297,7 @@ module Aws::QBusiness
     end
 
     class UpdateIndexResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -6033,6 +6325,7 @@ module Aws::QBusiness
     #   <p>The authentication configuration the plugin is using.</p>
     #   @return [Types::PluginAuthConfiguration]
     class UpdatePluginRequest < Struct.new(
+      nil,
       :application_id,
       :plugin_id,
       :display_name,
@@ -6046,6 +6339,7 @@ module Aws::QBusiness
     end
 
     class UpdatePluginResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -6067,6 +6361,7 @@ module Aws::QBusiness
     #   <p>The Amazon Resource Name (ARN) of an IAM role with permission to access the retriever and required resources. </p>
     #   @return [String]
     class UpdateRetrieverRequest < Struct.new(
+      nil,
       :application_id,
       :retriever_id,
       :configuration,
@@ -6078,6 +6373,7 @@ module Aws::QBusiness
     end
 
     class UpdateRetrieverResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -6093,6 +6389,7 @@ module Aws::QBusiness
     #   <p>The type of the Amazon Q Business subscription to be updated.</p>
     #   @return [String]
     class UpdateSubscriptionRequest < Struct.new(
+      nil,
       :application_id,
       :subscription_id,
       :type,
@@ -6111,6 +6408,7 @@ module Aws::QBusiness
     #   <p>The type of the Amazon Q Business subscription for the next month.</p>
     #   @return [Types::SubscriptionDetails]
     class UpdateSubscriptionResponse < Struct.new(
+      nil,
       :subscription_arn,
       :current_subscription,
       :next_subscription,
@@ -6132,6 +6430,7 @@ module Aws::QBusiness
     #   <p>The user aliases attached to the user id that are to be deleted.</p>
     #   @return [Array<Types::UserAlias>]
     class UpdateUserRequest < Struct.new(
+      nil,
       :application_id,
       :user_id,
       :user_aliases_to_update,
@@ -6151,6 +6450,7 @@ module Aws::QBusiness
     #   <p>The user aliases that have been deleted from a user id.</p>
     #   @return [Array<Types::UserAlias>]
     class UpdateUserResponse < Struct.new(
+      nil,
       :user_aliases_added,
       :user_aliases_updated,
       :user_aliases_deleted,
@@ -6198,6 +6498,7 @@ module Aws::QBusiness
     #   <p>Updates the custom logo, favicon, font, and color used in the Amazon Q web experience. </p>
     #   @return [Types::CustomizationConfiguration]
     class UpdateWebExperienceRequest < Struct.new(
+      nil,
       :application_id,
       :web_experience_id,
       :role_arn,
@@ -6216,6 +6517,7 @@ module Aws::QBusiness
     end
 
     class UpdateWebExperienceResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -6232,6 +6534,7 @@ module Aws::QBusiness
     #   <p>The identifier of the user id associated with the user aliases.</p>
     #   @return [String]
     class UserAlias < Struct.new(
+      nil,
       :index_id,
       :data_source_id,
       :user_id,
@@ -6248,6 +6551,7 @@ module Aws::QBusiness
     #   <p>The user group names associated with a topic control rule.</p>
     #   @return [Array<String>]
     class UsersAndGroups < Struct.new(
+      nil,
       :user_ids,
       :user_groups,
       keyword_init: true
@@ -6266,6 +6570,7 @@ module Aws::QBusiness
     #   <p>The input field(s) that failed validation.</p>
     #   @return [Array<Types::ValidationExceptionField>]
     class ValidationException < Struct.new(
+      nil,
       :message,
       :reason,
       :fields,
@@ -6282,6 +6587,7 @@ module Aws::QBusiness
     #   <p>A message about the validation exception.</p>
     #   @return [String]
     class ValidationExceptionField < Struct.new(
+      nil,
       :name,
       :message,
       keyword_init: true
@@ -6294,6 +6600,7 @@ module Aws::QBusiness
     #   <p>The status of video extraction (ENABLED or DISABLED) for processing video content from files.</p>
     #   @return [String]
     class VideoExtractionConfiguration < Struct.new(
+      nil,
       :video_extraction_status,
       keyword_init: true
     )
@@ -6317,6 +6624,7 @@ module Aws::QBusiness
     #   <p>The type of video extraction performed on the content.</p>
     #   @return [String]
     class VideoSourceDetails < Struct.new(
+      nil,
       :media_id,
       :media_mime_type,
       :start_time_milliseconds,
@@ -6344,6 +6652,7 @@ module Aws::QBusiness
     #   <p>The status of your Amazon Q Business web experience.</p>
     #   @return [String]
     class WebExperience < Struct.new(
+      nil,
       :web_experience_id,
       :created_at,
       :updated_at,

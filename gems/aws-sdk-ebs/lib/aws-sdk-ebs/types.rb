@@ -13,6 +13,7 @@ module Aws::EBS
     #   <p>The reason for the exception.</p>
     #   @return [String]
     class AccessDeniedException < Struct.new(
+      nil,
       :message,
       :reason,
       keyword_init: true
@@ -28,6 +29,7 @@ module Aws::EBS
     #   <p>The block token for the block index.</p>
     #   @return [String]
     class Block < Struct.new(
+      nil,
       :block_index,
       :block_token,
       keyword_init: true
@@ -51,6 +53,7 @@ module Aws::EBS
     #               the <code>ListChangedBlocks</code> operation.</p>
     #   @return [String]
     class ChangedBlock < Struct.new(
+      nil,
       :block_index,
       :first_block_token,
       :second_block_token,
@@ -82,6 +85,7 @@ module Aws::EBS
     #               aggregation method is <code>LINEAR</code>.</p>
     #   @return [String]
     class CompleteSnapshotRequest < Struct.new(
+      nil,
       :snapshot_id,
       :changed_blocks_count,
       :checksum,
@@ -96,6 +100,7 @@ module Aws::EBS
     #   <p>The status of the snapshot.</p>
     #   @return [String]
     class CompleteSnapshotResponse < Struct.new(
+      nil,
       :status,
       keyword_init: true
     )
@@ -108,6 +113,7 @@ module Aws::EBS
     # @!attribute message
     #   @return [String]
     class ConcurrentLimitExceededException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -119,6 +125,7 @@ module Aws::EBS
     # @!attribute message
     #   @return [String]
     class ConflictException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -147,6 +154,7 @@ module Aws::EBS
     #               by running the <code>ListChangedBlocks</code> or <code>ListSnapshotBlocks</code> operations.</p>
     #   @return [String]
     class GetSnapshotBlockRequest < Struct.new(
+      nil,
       :snapshot_id,
       :block_index,
       :block_token,
@@ -168,6 +176,7 @@ module Aws::EBS
     #   <p>The algorithm used to generate the checksum for the block, such as SHA256.</p>
     #   @return [String]
     class GetSnapshotBlockResponse < Struct.new(
+      nil,
       :data_length,
       :block_data,
       :checksum,
@@ -186,6 +195,7 @@ module Aws::EBS
     # @!attribute message
     #   @return [String]
     class InternalServerException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -229,6 +239,7 @@ module Aws::EBS
     #               <b>StartingBlockIndex</b> is ignored.</p>
     #   @return [Integer]
     class ListChangedBlocksRequest < Struct.new(
+      nil,
       :first_snapshot_id,
       :second_snapshot_id,
       :next_token,
@@ -256,6 +267,7 @@ module Aws::EBS
     #               are no more results to return.</p>
     #   @return [String]
     class ListChangedBlocksResponse < Struct.new(
+      nil,
       :changed_blocks,
       :expiry_time,
       :volume_size,
@@ -291,6 +303,7 @@ module Aws::EBS
     #               <b>StartingBlockIndex</b> is ignored.</p>
     #   @return [Integer]
     class ListSnapshotBlocksRequest < Struct.new(
+      nil,
       :snapshot_id,
       :next_token,
       :max_results,
@@ -317,6 +330,7 @@ module Aws::EBS
     #               are no more results to return.</p>
     #   @return [String]
     class ListSnapshotBlocksResponse < Struct.new(
+      nil,
       :blocks,
       :expiry_time,
       :volume_size,
@@ -375,6 +389,7 @@ module Aws::EBS
     #               is <code>SHA256</code>.</p>
     #   @return [String]
     class PutSnapshotBlockRequest < Struct.new(
+      nil,
       :snapshot_id,
       :block_index,
       :block_data,
@@ -394,6 +409,7 @@ module Aws::EBS
     #   <p>The algorithm used by Amazon EBS to generate the checksum.</p>
     #   @return [String]
     class PutSnapshotBlockResponse < Struct.new(
+      nil,
       :checksum,
       :checksum_algorithm,
       keyword_init: true
@@ -409,6 +425,7 @@ module Aws::EBS
     #   <p>The reason for the exception.</p>
     #   @return [String]
     class RequestThrottledException < Struct.new(
+      nil,
       :message,
       :reason,
       keyword_init: true
@@ -423,6 +440,7 @@ module Aws::EBS
     #   <p>The reason for the exception.</p>
     #   @return [String]
     class ResourceNotFoundException < Struct.new(
+      nil,
       :message,
       :reason,
       keyword_init: true
@@ -437,6 +455,7 @@ module Aws::EBS
     #   <p>The reason for the exception.</p>
     #   @return [String]
     class ServiceQuotaExceededException < Struct.new(
+      nil,
       :message,
       :reason,
       keyword_init: true
@@ -531,6 +550,7 @@ module Aws::EBS
     #            <p>If no value is specified, the timeout defaults to <code>60</code> minutes.</p>
     #   @return [Integer]
     class StartSnapshotRequest < Struct.new(
+      nil,
       :volume_size,
       :parent_snapshot_id,
       :tags,
@@ -580,6 +600,7 @@ module Aws::EBS
     #   <p>Reserved for future use.</p>
     #   @return [String]
     class StartSnapshotResponse < Struct.new(
+      nil,
       :description,
       :snapshot_id,
       :owner_id,
@@ -604,6 +625,7 @@ module Aws::EBS
     #   <p>The value of the tag.</p>
     #   @return [String]
     class Tag < Struct.new(
+      nil,
       :key,
       :value,
       keyword_init: true
@@ -618,6 +640,7 @@ module Aws::EBS
     #   <p>The reason for the validation exception.</p>
     #   @return [String]
     class ValidationException < Struct.new(
+      nil,
       :message,
       :reason,
       keyword_init: true

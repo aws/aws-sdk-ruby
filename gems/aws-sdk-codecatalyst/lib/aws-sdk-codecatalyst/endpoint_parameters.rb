@@ -14,6 +14,7 @@ module Aws::CodeCatalyst
   #   Override the endpoint used to send this request
   #   @return [String]
   EndpointParameters = Struct.new(
+    nil,
     :use_fips,
     :region,
     :endpoint,

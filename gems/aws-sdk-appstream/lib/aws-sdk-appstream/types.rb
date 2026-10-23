@@ -14,6 +14,7 @@ module Aws::AppStream
     #   <p>The identifier (ID) of the VPC in which the interface endpoint is used.</p>
     #   @return [String]
     class AccessEndpoint < Struct.new(
+      nil,
       :endpoint_type,
       :vpce_id,
       keyword_init: true
@@ -68,6 +69,7 @@ module Aws::AppStream
     #   <p>The errors of the app block.</p>
     #   @return [Array<Types::ErrorDetails>]
     class AppBlock < Struct.new(
+      nil,
       :name,
       :arn,
       :description,
@@ -130,6 +132,7 @@ module Aws::AppStream
     #   <p>The list of interface VPC endpoint (interface endpoint) objects. Administrators can connect to the app block builder only through the specified endpoints.</p>
     #   @return [Array<Types::AccessEndpoint>]
     class AppBlockBuilder < Struct.new(
+      nil,
       :arn,
       :name,
       :display_name,
@@ -157,6 +160,7 @@ module Aws::AppStream
     #   <p>The name of the app block builder.</p>
     #   @return [String]
     class AppBlockBuilderAppBlockAssociation < Struct.new(
+      nil,
       :app_block_arn,
       :app_block_builder_name,
       keyword_init: true
@@ -172,6 +176,7 @@ module Aws::AppStream
     #   <p>The state change reason message.</p>
     #   @return [String]
     class AppBlockBuilderStateChangeReason < Struct.new(
+      nil,
       :code,
       :message,
       keyword_init: true
@@ -226,6 +231,7 @@ module Aws::AppStream
     #   <p>The time at which the application was created within the app block.</p>
     #   @return [Time]
     class Application < Struct.new(
+      nil,
       :name,
       :display_name,
       :icon_url,
@@ -254,6 +260,7 @@ module Aws::AppStream
     #   <p>The ARN of the application associated with the fleet.</p>
     #   @return [String]
     class ApplicationFleetAssociation < Struct.new(
+      nil,
       :fleet_name,
       :application_arn,
       keyword_init: true
@@ -269,6 +276,7 @@ module Aws::AppStream
     #   <p>The path prefix for the S3 bucket where users’ persistent application settings are stored. You can allow the same persistent application settings to be used across multiple stacks by specifying the same settings group for each stack. </p>
     #   @return [String]
     class ApplicationSettings < Struct.new(
+      nil,
       :enabled,
       :settings_group,
       keyword_init: true
@@ -288,6 +296,7 @@ module Aws::AppStream
     #           </p>
     #   @return [String]
     class ApplicationSettingsResponse < Struct.new(
+      nil,
       :enabled,
       :settings_group,
       :s3_bucket_name,
@@ -303,6 +312,7 @@ module Aws::AppStream
     #   <p>The name of the app block builder.</p>
     #   @return [String]
     class AssociateAppBlockBuilderAppBlockRequest < Struct.new(
+      nil,
       :app_block_arn,
       :app_block_builder_name,
       keyword_init: true
@@ -314,6 +324,7 @@ module Aws::AppStream
     #   <p>The list of app block builders associated with app blocks.</p>
     #   @return [Types::AppBlockBuilderAppBlockAssociation]
     class AssociateAppBlockBuilderAppBlockResult < Struct.new(
+      nil,
       :app_block_builder_app_block_association,
       keyword_init: true
     )
@@ -327,6 +338,7 @@ module Aws::AppStream
     #   <p>The ARN of the application.</p>
     #   @return [String]
     class AssociateApplicationFleetRequest < Struct.new(
+      nil,
       :fleet_name,
       :application_arn,
       keyword_init: true
@@ -340,6 +352,7 @@ module Aws::AppStream
     #               associated.</p>
     #   @return [Types::ApplicationFleetAssociation]
     class AssociateApplicationFleetResult < Struct.new(
+      nil,
       :application_fleet_association,
       keyword_init: true
     )
@@ -356,6 +369,7 @@ module Aws::AppStream
     #   <p>The identifier of the application.</p>
     #   @return [String]
     class AssociateApplicationToEntitlementRequest < Struct.new(
+      nil,
       :stack_name,
       :entitlement_name,
       :application_identifier,
@@ -365,6 +379,7 @@ module Aws::AppStream
     end
 
     class AssociateApplicationToEntitlementResult < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -377,6 +392,7 @@ module Aws::AppStream
     #   <p>The name of the stack.</p>
     #   @return [String]
     class AssociateFleetRequest < Struct.new(
+      nil,
       :fleet_name,
       :stack_name,
       keyword_init: true
@@ -385,6 +401,7 @@ module Aws::AppStream
     end
 
     class AssociateFleetResult < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -394,6 +411,7 @@ module Aws::AppStream
     #   <p>The list of UserStackAssociation objects.</p>
     #   @return [Array<Types::UserStackAssociation>]
     class BatchAssociateUserStackRequest < Struct.new(
+      nil,
       :user_stack_associations,
       keyword_init: true
     )
@@ -404,6 +422,7 @@ module Aws::AppStream
     #   <p>The list of UserStackAssociationError objects.</p>
     #   @return [Array<Types::UserStackAssociationError>]
     class BatchAssociateUserStackResult < Struct.new(
+      nil,
       :errors,
       keyword_init: true
     )
@@ -414,6 +433,7 @@ module Aws::AppStream
     #   <p>The list of UserStackAssociation objects.</p>
     #   @return [Array<Types::UserStackAssociation>]
     class BatchDisassociateUserStackRequest < Struct.new(
+      nil,
       :user_stack_associations,
       keyword_init: true
     )
@@ -424,6 +444,7 @@ module Aws::AppStream
     #   <p>The list of UserStackAssociationError objects.</p>
     #   @return [Array<Types::UserStackAssociationError>]
     class BatchDisassociateUserStackResult < Struct.new(
+      nil,
       :errors,
       keyword_init: true
     )
@@ -444,6 +465,7 @@ module Aws::AppStream
     #   <p>The ARN of the AWS Certificate Manager Private CA resource.</p>
     #   @return [String]
     class CertificateBasedAuthProperties < Struct.new(
+      nil,
       :status,
       :certificate_authority_arn,
       keyword_init: true
@@ -460,6 +482,7 @@ module Aws::AppStream
     #            <p>When you create a fleet, you must set either the DesiredSessions or DesiredInstances attribute, based on the type of fleet you create. You can’t define both attributes or leave both attributes blank.</p>
     #   @return [Integer]
     class ComputeCapacity < Struct.new(
+      nil,
       :desired_instances,
       :desired_sessions,
       keyword_init: true
@@ -500,6 +523,7 @@ module Aws::AppStream
     #            <p>This only applies to multi-session fleets.</p>
     #   @return [Integer]
     class ComputeCapacityStatus < Struct.new(
+      nil,
       :desired,
       :running,
       :in_use,
@@ -518,6 +542,7 @@ module Aws::AppStream
     #   <p>The error message in the exception.</p>
     #   @return [String]
     class ConcurrentModificationException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -537,6 +562,7 @@ module Aws::AppStream
     #   <p>The description that the image will have when it is copied to the destination.</p>
     #   @return [String]
     class CopyImageRequest < Struct.new(
+      nil,
       :source_image_name,
       :destination_image_name,
       :destination_region,
@@ -550,6 +576,7 @@ module Aws::AppStream
     #   <p>The name of the destination image.</p>
     #   @return [String]
     class CopyImageResponse < Struct.new(
+      nil,
       :destination_image_name,
       keyword_init: true
     )
@@ -620,6 +647,7 @@ module Aws::AppStream
     #   <p>The list of interface VPC endpoint (interface endpoint) objects. Administrators can connect to the app block builder only through the specified endpoints.</p>
     #   @return [Array<Types::AccessEndpoint>]
     class CreateAppBlockBuilderRequest < Struct.new(
+      nil,
       :name,
       :description,
       :display_name,
@@ -639,6 +667,7 @@ module Aws::AppStream
     #   <p>Describes an app block builder.</p>
     #   @return [Types::AppBlockBuilder]
     class CreateAppBlockBuilderResult < Struct.new(
+      nil,
       :app_block_builder,
       keyword_init: true
     )
@@ -653,6 +682,7 @@ module Aws::AppStream
     #               Specify a value between 1 and 604800 seconds. The default is 3600 seconds.</p>
     #   @return [Integer]
     class CreateAppBlockBuilderStreamingURLRequest < Struct.new(
+      nil,
       :app_block_builder_name,
       :validity,
       keyword_init: true
@@ -667,6 +697,7 @@ module Aws::AppStream
     #   <p>The elapsed time, in seconds after the Unix epoch, when this URL expires.</p>
     #   @return [Time]
     class CreateAppBlockBuilderStreamingURLResult < Struct.new(
+      nil,
       :streaming_url,
       :expires,
       keyword_init: true
@@ -701,6 +732,7 @@ module Aws::AppStream
     #   <p>The packaging type of the app block.</p>
     #   @return [String]
     class CreateAppBlockRequest < Struct.new(
+      nil,
       :name,
       :description,
       :display_name,
@@ -718,6 +750,7 @@ module Aws::AppStream
     #   <p>The app block.</p>
     #   @return [Types::AppBlock]
     class CreateAppBlockResult < Struct.new(
+      nil,
       :app_block,
       keyword_init: true
     )
@@ -758,6 +791,7 @@ module Aws::AppStream
     #   <p>The tags assigned to the application.</p>
     #   @return [Hash<String, String>]
     class CreateApplicationRequest < Struct.new(
+      nil,
       :name,
       :display_name,
       :description,
@@ -778,6 +812,7 @@ module Aws::AppStream
     #   <p>Describes an application in the application catalog.</p>
     #   @return [Types::Application]
     class CreateApplicationResult < Struct.new(
+      nil,
       :application,
       keyword_init: true
     )
@@ -803,6 +838,7 @@ module Aws::AppStream
     #               will be disconnected to re-authenticate using certificates.</p>
     #   @return [Types::CertificateBasedAuthProperties]
     class CreateDirectoryConfigRequest < Struct.new(
+      nil,
       :directory_name,
       :organizational_unit_distinguished_names,
       :service_account_credentials,
@@ -816,6 +852,7 @@ module Aws::AppStream
     #   <p>Information about the directory configuration.</p>
     #   @return [Types::DirectoryConfig]
     class CreateDirectoryConfigResult < Struct.new(
+      nil,
       :directory_config,
       keyword_init: true
     )
@@ -838,6 +875,7 @@ module Aws::AppStream
     #   <p>The attributes of the entitlement.</p>
     #   @return [Array<Types::EntitlementAttribute>]
     class CreateEntitlementRequest < Struct.new(
+      nil,
       :name,
       :stack_name,
       :description,
@@ -852,6 +890,7 @@ module Aws::AppStream
     #   <p>The entitlement.</p>
     #   @return [Types::Entitlement]
     class CreateEntitlementResult < Struct.new(
+      nil,
       :entitlement,
       keyword_init: true
     )
@@ -1149,6 +1188,7 @@ module Aws::AppStream
     #   <p>The maximum number of user sessions on an instance. This only applies to multi-session fleets.</p>
     #   @return [Integer]
     class CreateFleetRequest < Struct.new(
+      nil,
       :name,
       :image_name,
       :image_arn,
@@ -1180,6 +1220,7 @@ module Aws::AppStream
     #   <p>Information about the fleet.</p>
     #   @return [Types::Fleet]
     class CreateFleetResult < Struct.new(
+      nil,
       :fleet,
       keyword_init: true
     )
@@ -1395,6 +1436,7 @@ module Aws::AppStream
     #   <p>The list of interface VPC endpoint (interface endpoint) objects. Administrators can connect to the image builder only through the specified endpoints.</p>
     #   @return [Array<Types::AccessEndpoint>]
     class CreateImageBuilderRequest < Struct.new(
+      nil,
       :name,
       :image_name,
       :image_arn,
@@ -1417,6 +1459,7 @@ module Aws::AppStream
     #   <p>Information about the image builder.</p>
     #   @return [Types::ImageBuilder]
     class CreateImageBuilderResult < Struct.new(
+      nil,
       :image_builder,
       keyword_init: true
     )
@@ -1431,6 +1474,7 @@ module Aws::AppStream
     #               Specify a value between 1 and 604800 seconds. The default is 3600 seconds.</p>
     #   @return [Integer]
     class CreateImageBuilderStreamingURLRequest < Struct.new(
+      nil,
       :name,
       :validity,
       keyword_init: true
@@ -1445,6 +1489,7 @@ module Aws::AppStream
     #   <p>The elapsed time, in seconds after the Unix epoch, when this URL expires.</p>
     #   @return [Time]
     class CreateImageBuilderStreamingURLResult < Struct.new(
+      nil,
       :streaming_url,
       :expires,
       keyword_init: true
@@ -1493,6 +1538,7 @@ module Aws::AppStream
     #   <p>The streaming protocol you want your stack to prefer. This can be UDP or TCP. Currently, UDP is only supported in the Windows native client.</p>
     #   @return [Types::StreamingExperienceSettings]
     class CreateStackRequest < Struct.new(
+      nil,
       :name,
       :description,
       :display_name,
@@ -1514,6 +1560,7 @@ module Aws::AppStream
     #   <p>Information about the stack.</p>
     #   @return [Types::Stack]
     class CreateStackResult < Struct.new(
+      nil,
       :stack,
       keyword_init: true
     )
@@ -1541,6 +1588,7 @@ module Aws::AppStream
     #   <p>The session context. For more information, see <a href="https://docs.aws.amazon.com/appstream2/latest/developerguide/managing-stacks-fleets.html#managing-stacks-fleets-parameters">Session Context</a> in the <i>Amazon AppStream 2.0 Administration Guide</i>.</p>
     #   @return [String]
     class CreateStreamingURLRequest < Struct.new(
+      nil,
       :stack_name,
       :fleet_name,
       :user_id,
@@ -1559,6 +1607,7 @@ module Aws::AppStream
     #   <p>The elapsed time, in seconds after the Unix epoch, when this URL expires.</p>
     #   @return [Time]
     class CreateStreamingURLResult < Struct.new(
+      nil,
       :streaming_url,
       :expires,
       keyword_init: true
@@ -1585,6 +1634,7 @@ module Aws::AppStream
     #   <p>The S3 location of the favicon. The favicon enables users to recognize their application streaming site in a browser full of tabs or bookmarks. It is displayed at the top of the browser tab for the application streaming site during users' streaming sessions.</p>
     #   @return [Types::S3Location]
     class CreateThemeForStackRequest < Struct.new(
+      nil,
       :stack_name,
       :footer_links,
       :title_text,
@@ -1600,6 +1650,7 @@ module Aws::AppStream
     #   <p> The theme object that contains the metadata of the custom branding.</p>
     #   @return [Types::Theme]
     class CreateThemeForStackResult < Struct.new(
+      nil,
       :theme,
       keyword_init: true
     )
@@ -1629,6 +1680,7 @@ module Aws::AppStream
     #   <p>Indicates whether to display the status of image update availability before AppStream 2.0 initiates the process of creating a new updated image. If this value is set to <code>true</code>, AppStream 2.0 displays whether image updates are available. If this value is set to <code>false</code>, AppStream 2.0 initiates the process of creating a new updated image without displaying whether image updates are available.</p>
     #   @return [Boolean]
     class CreateUpdatedImageRequest < Struct.new(
+      nil,
       :existing_image_name,
       :new_image_name,
       :new_image_description,
@@ -1647,6 +1699,7 @@ module Aws::AppStream
     #   <p>Indicates whether a new image can be created.</p>
     #   @return [Boolean]
     class CreateUpdatedImageResult < Struct.new(
+      nil,
       :image,
       :can_update_image,
       keyword_init: true
@@ -1655,6 +1708,7 @@ module Aws::AppStream
     end
 
     class CreateUsageReportSubscriptionRequest < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1672,6 +1726,7 @@ module Aws::AppStream
     #   <p>The schedule for generating usage reports.</p>
     #   @return [String]
     class CreateUsageReportSubscriptionResult < Struct.new(
+      nil,
       :s3_bucket_name,
       :schedule,
       keyword_init: true
@@ -1701,6 +1756,7 @@ module Aws::AppStream
     #   <p>The authentication type for the user. You must specify USERPOOL. </p>
     #   @return [String]
     class CreateUserRequest < Struct.new(
+      nil,
       :user_name,
       :message_action,
       :first_name,
@@ -1712,6 +1768,7 @@ module Aws::AppStream
     end
 
     class CreateUserResult < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1721,6 +1778,7 @@ module Aws::AppStream
     #   <p>The name of the app block builder.</p>
     #   @return [String]
     class DeleteAppBlockBuilderRequest < Struct.new(
+      nil,
       :name,
       keyword_init: true
     )
@@ -1728,6 +1786,7 @@ module Aws::AppStream
     end
 
     class DeleteAppBlockBuilderResult < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1737,6 +1796,7 @@ module Aws::AppStream
     #   <p>The name of the app block.</p>
     #   @return [String]
     class DeleteAppBlockRequest < Struct.new(
+      nil,
       :name,
       keyword_init: true
     )
@@ -1744,6 +1804,7 @@ module Aws::AppStream
     end
 
     class DeleteAppBlockResult < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1753,6 +1814,7 @@ module Aws::AppStream
     #   <p>The name of the application.</p>
     #   @return [String]
     class DeleteApplicationRequest < Struct.new(
+      nil,
       :name,
       keyword_init: true
     )
@@ -1760,6 +1822,7 @@ module Aws::AppStream
     end
 
     class DeleteApplicationResult < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1769,6 +1832,7 @@ module Aws::AppStream
     #   <p>The name of the directory configuration.</p>
     #   @return [String]
     class DeleteDirectoryConfigRequest < Struct.new(
+      nil,
       :directory_name,
       keyword_init: true
     )
@@ -1776,6 +1840,7 @@ module Aws::AppStream
     end
 
     class DeleteDirectoryConfigResult < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1788,6 +1853,7 @@ module Aws::AppStream
     #   <p>The name of the stack with which the entitlement is associated.</p>
     #   @return [String]
     class DeleteEntitlementRequest < Struct.new(
+      nil,
       :name,
       :stack_name,
       keyword_init: true
@@ -1796,6 +1862,7 @@ module Aws::AppStream
     end
 
     class DeleteEntitlementResult < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1805,6 +1872,7 @@ module Aws::AppStream
     #   <p>The name of the fleet.</p>
     #   @return [String]
     class DeleteFleetRequest < Struct.new(
+      nil,
       :name,
       keyword_init: true
     )
@@ -1812,6 +1880,7 @@ module Aws::AppStream
     end
 
     class DeleteFleetResult < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1821,6 +1890,7 @@ module Aws::AppStream
     #   <p>The name of the image builder.</p>
     #   @return [String]
     class DeleteImageBuilderRequest < Struct.new(
+      nil,
       :name,
       keyword_init: true
     )
@@ -1831,6 +1901,7 @@ module Aws::AppStream
     #   <p>Information about the image builder.</p>
     #   @return [Types::ImageBuilder]
     class DeleteImageBuilderResult < Struct.new(
+      nil,
       :image_builder,
       keyword_init: true
     )
@@ -1844,6 +1915,7 @@ module Aws::AppStream
     #   <p>The 12-digit identifier of the AWS account for which to delete image permissions.</p>
     #   @return [String]
     class DeleteImagePermissionsRequest < Struct.new(
+      nil,
       :name,
       :shared_account_id,
       keyword_init: true
@@ -1852,6 +1924,7 @@ module Aws::AppStream
     end
 
     class DeleteImagePermissionsResult < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1861,6 +1934,7 @@ module Aws::AppStream
     #   <p>The name of the image.</p>
     #   @return [String]
     class DeleteImageRequest < Struct.new(
+      nil,
       :name,
       keyword_init: true
     )
@@ -1871,6 +1945,7 @@ module Aws::AppStream
     #   <p>Information about the image.</p>
     #   @return [Types::Image]
     class DeleteImageResult < Struct.new(
+      nil,
       :image,
       keyword_init: true
     )
@@ -1881,6 +1956,7 @@ module Aws::AppStream
     #   <p>The name of the stack.</p>
     #   @return [String]
     class DeleteStackRequest < Struct.new(
+      nil,
       :name,
       keyword_init: true
     )
@@ -1888,6 +1964,7 @@ module Aws::AppStream
     end
 
     class DeleteStackResult < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1897,6 +1974,7 @@ module Aws::AppStream
     #   <p>The name of the stack for the theme.</p>
     #   @return [String]
     class DeleteThemeForStackRequest < Struct.new(
+      nil,
       :stack_name,
       keyword_init: true
     )
@@ -1904,18 +1982,21 @@ module Aws::AppStream
     end
 
     class DeleteThemeForStackResult < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
     end
 
     class DeleteUsageReportSubscriptionRequest < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
     end
 
     class DeleteUsageReportSubscriptionResult < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1931,6 +2012,7 @@ module Aws::AppStream
     #   <p>The authentication type for the user. You must specify USERPOOL.</p>
     #   @return [String]
     class DeleteUserRequest < Struct.new(
+      nil,
       :user_name,
       :authentication_type,
       keyword_init: true
@@ -1939,6 +2021,7 @@ module Aws::AppStream
     end
 
     class DeleteUserResult < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1958,6 +2041,7 @@ module Aws::AppStream
     #               operation.</p>
     #   @return [String]
     class DescribeAppBlockBuilderAppBlockAssociationsRequest < Struct.new(
+      nil,
       :app_block_arn,
       :app_block_builder_name,
       :max_results,
@@ -1975,6 +2059,7 @@ module Aws::AppStream
     #               operation.</p>
     #   @return [String]
     class DescribeAppBlockBuilderAppBlockAssociationsResult < Struct.new(
+      nil,
       :app_block_builder_app_block_associations,
       :next_token,
       keyword_init: true
@@ -1993,6 +2078,7 @@ module Aws::AppStream
     #   <p>The maximum size of each page of results. The maximum value is 25.</p>
     #   @return [Integer]
     class DescribeAppBlockBuildersRequest < Struct.new(
+      nil,
       :names,
       :next_token,
       :max_results,
@@ -2009,6 +2095,7 @@ module Aws::AppStream
     #               operation.</p>
     #   @return [String]
     class DescribeAppBlockBuildersResult < Struct.new(
+      nil,
       :app_block_builders,
       :next_token,
       keyword_init: true
@@ -2027,6 +2114,7 @@ module Aws::AppStream
     #   <p>The maximum size of each page of results.</p>
     #   @return [Integer]
     class DescribeAppBlocksRequest < Struct.new(
+      nil,
       :arns,
       :next_token,
       :max_results,
@@ -2043,6 +2131,7 @@ module Aws::AppStream
     #               operation.</p>
     #   @return [String]
     class DescribeAppBlocksResult < Struct.new(
+      nil,
       :app_blocks,
       :next_token,
       keyword_init: true
@@ -2064,6 +2153,7 @@ module Aws::AppStream
     #               operation.</p>
     #   @return [String]
     class DescribeApplicationFleetAssociationsRequest < Struct.new(
+      nil,
       :fleet_name,
       :application_arn,
       :max_results,
@@ -2081,6 +2171,7 @@ module Aws::AppStream
     #               operation.</p>
     #   @return [String]
     class DescribeApplicationFleetAssociationsResult < Struct.new(
+      nil,
       :application_fleet_associations,
       :next_token,
       keyword_init: true
@@ -2099,6 +2190,7 @@ module Aws::AppStream
     #   <p>The maximum size of each page of results.</p>
     #   @return [Integer]
     class DescribeApplicationsRequest < Struct.new(
+      nil,
       :arns,
       :next_token,
       :max_results,
@@ -2115,6 +2207,7 @@ module Aws::AppStream
     #               operation.</p>
     #   @return [String]
     class DescribeApplicationsResult < Struct.new(
+      nil,
       :applications,
       :next_token,
       keyword_init: true
@@ -2132,6 +2225,7 @@ module Aws::AppStream
     #   <p>The pagination token to use to retrieve the next page of results for this operation. If this value is null, it retrieves the first page.</p>
     #   @return [String]
     class DescribeDirectoryConfigsRequest < Struct.new(
+      nil,
       :directory_names,
       :max_results,
       :next_token,
@@ -2147,6 +2241,7 @@ module Aws::AppStream
     #   <p>The pagination token to use to retrieve the next page of results for this operation. If there are no more pages, this value is null.</p>
     #   @return [String]
     class DescribeDirectoryConfigsResult < Struct.new(
+      nil,
       :directory_configs,
       :next_token,
       keyword_init: true
@@ -2167,6 +2262,7 @@ module Aws::AppStream
     #   <p>The maximum size of each page of results.</p>
     #   @return [Integer]
     class DescribeEntitlementsRequest < Struct.new(
+      nil,
       :name,
       :stack_name,
       :next_token,
@@ -2184,6 +2280,7 @@ module Aws::AppStream
     #               operation.</p>
     #   @return [String]
     class DescribeEntitlementsResult < Struct.new(
+      nil,
       :entitlements,
       :next_token,
       keyword_init: true
@@ -2198,6 +2295,7 @@ module Aws::AppStream
     #   <p>The pagination token to use to retrieve the next page of results for this operation. If this value is null, it retrieves the first page.</p>
     #   @return [String]
     class DescribeFleetsRequest < Struct.new(
+      nil,
       :names,
       :next_token,
       keyword_init: true
@@ -2212,6 +2310,7 @@ module Aws::AppStream
     #   <p>The pagination token to use to retrieve the next page of results for this operation. If there are no more pages, this value is null.</p>
     #   @return [String]
     class DescribeFleetsResult < Struct.new(
+      nil,
       :fleets,
       :next_token,
       keyword_init: true
@@ -2229,6 +2328,7 @@ module Aws::AppStream
     #   <p>The pagination token to use to retrieve the next page of results for this operation. If this value is null, it retrieves the first page.</p>
     #   @return [String]
     class DescribeImageBuildersRequest < Struct.new(
+      nil,
       :names,
       :max_results,
       :next_token,
@@ -2244,6 +2344,7 @@ module Aws::AppStream
     #   <p>The pagination token to use to retrieve the next page of results for this operation. If there are no more pages, this value is null.</p>
     #   @return [String]
     class DescribeImageBuildersResult < Struct.new(
+      nil,
       :image_builders,
       :next_token,
       keyword_init: true
@@ -2264,6 +2365,7 @@ module Aws::AppStream
     #   <p>The pagination token to use to retrieve the next page of results for this operation. If this value is null, it retrieves the first page.</p>
     #   @return [String]
     class DescribeImagePermissionsRequest < Struct.new(
+      nil,
       :name,
       :max_results,
       :shared_aws_account_ids,
@@ -2283,6 +2385,7 @@ module Aws::AppStream
     #   <p>The pagination token to use to retrieve the next page of results for this operation. If there are no more pages, this value is null.</p>
     #   @return [String]
     class DescribeImagePermissionsResult < Struct.new(
+      nil,
       :name,
       :shared_image_permissions_list,
       :next_token,
@@ -2307,6 +2410,7 @@ module Aws::AppStream
     #   <p>The maximum size of each page of results.</p>
     #   @return [Integer]
     class DescribeImagesRequest < Struct.new(
+      nil,
       :names,
       :arns,
       :type,
@@ -2324,6 +2428,7 @@ module Aws::AppStream
     #   <p>The pagination token to use to retrieve the next page of results for this operation. If there are no more pages, this value is null.</p>
     #   @return [String]
     class DescribeImagesResult < Struct.new(
+      nil,
       :images,
       :next_token,
       keyword_init: true
@@ -2355,6 +2460,7 @@ module Aws::AppStream
     #   <p>The identifier for the instance hosting the session.</p>
     #   @return [String]
     class DescribeSessionsRequest < Struct.new(
+      nil,
       :stack_name,
       :fleet_name,
       :user_id,
@@ -2374,6 +2480,7 @@ module Aws::AppStream
     #   <p>The pagination token to use to retrieve the next page of results for this operation. If there are no more pages, this value is null.</p>
     #   @return [String]
     class DescribeSessionsResult < Struct.new(
+      nil,
       :sessions,
       :next_token,
       keyword_init: true
@@ -2388,6 +2495,7 @@ module Aws::AppStream
     #   <p>The pagination token to use to retrieve the next page of results for this operation. If this value is null, it retrieves the first page.</p>
     #   @return [String]
     class DescribeStacksRequest < Struct.new(
+      nil,
       :names,
       :next_token,
       keyword_init: true
@@ -2402,6 +2510,7 @@ module Aws::AppStream
     #   <p>The pagination token to use to retrieve the next page of results for this operation. If there are no more pages, this value is null.</p>
     #   @return [String]
     class DescribeStacksResult < Struct.new(
+      nil,
       :stacks,
       :next_token,
       keyword_init: true
@@ -2413,6 +2522,7 @@ module Aws::AppStream
     #   <p>The name of the stack for the theme.</p>
     #   @return [String]
     class DescribeThemeForStackRequest < Struct.new(
+      nil,
       :stack_name,
       keyword_init: true
     )
@@ -2423,6 +2533,7 @@ module Aws::AppStream
     #   <p> The theme object that contains the metadata of the custom branding.</p>
     #   @return [Types::Theme]
     class DescribeThemeForStackResult < Struct.new(
+      nil,
       :theme,
       keyword_init: true
     )
@@ -2436,6 +2547,7 @@ module Aws::AppStream
     #   <p>The pagination token to use to retrieve the next page of results for this operation. If this value is null, it retrieves the first page.</p>
     #   @return [String]
     class DescribeUsageReportSubscriptionsRequest < Struct.new(
+      nil,
       :max_results,
       :next_token,
       keyword_init: true
@@ -2450,6 +2562,7 @@ module Aws::AppStream
     #   <p>The pagination token to use to retrieve the next page of results for this operation. If there are no more pages, this value is null.</p>
     #   @return [String]
     class DescribeUsageReportSubscriptionsResult < Struct.new(
+      nil,
       :usage_report_subscriptions,
       :next_token,
       keyword_init: true
@@ -2476,6 +2589,7 @@ module Aws::AppStream
     #   <p>The pagination token to use to retrieve the next page of results for this operation. If this value is null, it retrieves the first page.</p>
     #   @return [String]
     class DescribeUserStackAssociationsRequest < Struct.new(
+      nil,
       :stack_name,
       :user_name,
       :authentication_type,
@@ -2493,6 +2607,7 @@ module Aws::AppStream
     #   <p>The pagination token to use to retrieve the next page of results for this operation. If there are no more pages, this value is null.</p>
     #   @return [String]
     class DescribeUserStackAssociationsResult < Struct.new(
+      nil,
       :user_stack_associations,
       :next_token,
       keyword_init: true
@@ -2510,6 +2625,7 @@ module Aws::AppStream
     #   <p>The pagination token to use to retrieve the next page of results for this operation. If this value is null, it retrieves the first page.</p>
     #   @return [String]
     class DescribeUsersRequest < Struct.new(
+      nil,
       :authentication_type,
       :max_results,
       :next_token,
@@ -2525,6 +2641,7 @@ module Aws::AppStream
     #   <p>The pagination token to use to retrieve the next page of results for this operation. If there are no more pages, this value is null.</p>
     #   @return [String]
     class DescribeUsersResult < Struct.new(
+      nil,
       :users,
       :next_token,
       keyword_init: true
@@ -2555,6 +2672,7 @@ module Aws::AppStream
     #               will be disconnected to re-authenticate using certificates.</p>
     #   @return [Types::CertificateBasedAuthProperties]
     class DirectoryConfig < Struct.new(
+      nil,
       :directory_name,
       :organizational_unit_distinguished_names,
       :service_account_credentials,
@@ -2575,6 +2693,7 @@ module Aws::AppStream
     #   <p>The authentication type for the user. You must specify USERPOOL.</p>
     #   @return [String]
     class DisableUserRequest < Struct.new(
+      nil,
       :user_name,
       :authentication_type,
       keyword_init: true
@@ -2583,6 +2702,7 @@ module Aws::AppStream
     end
 
     class DisableUserResult < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -2595,6 +2715,7 @@ module Aws::AppStream
     #   <p>The name of the app block builder.</p>
     #   @return [String]
     class DisassociateAppBlockBuilderAppBlockRequest < Struct.new(
+      nil,
       :app_block_arn,
       :app_block_builder_name,
       keyword_init: true
@@ -2603,6 +2724,7 @@ module Aws::AppStream
     end
 
     class DisassociateAppBlockBuilderAppBlockResult < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -2615,6 +2737,7 @@ module Aws::AppStream
     #   <p>The ARN of the application.</p>
     #   @return [String]
     class DisassociateApplicationFleetRequest < Struct.new(
+      nil,
       :fleet_name,
       :application_arn,
       keyword_init: true
@@ -2623,6 +2746,7 @@ module Aws::AppStream
     end
 
     class DisassociateApplicationFleetResult < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -2638,6 +2762,7 @@ module Aws::AppStream
     #   <p>The identifier of the application to remove from the entitlement.</p>
     #   @return [String]
     class DisassociateApplicationFromEntitlementRequest < Struct.new(
+      nil,
       :stack_name,
       :entitlement_name,
       :application_identifier,
@@ -2647,6 +2772,7 @@ module Aws::AppStream
     end
 
     class DisassociateApplicationFromEntitlementResult < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -2659,6 +2785,7 @@ module Aws::AppStream
     #   <p>The name of the stack.</p>
     #   @return [String]
     class DisassociateFleetRequest < Struct.new(
+      nil,
       :fleet_name,
       :stack_name,
       keyword_init: true
@@ -2667,6 +2794,7 @@ module Aws::AppStream
     end
 
     class DisassociateFleetResult < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -2680,6 +2808,7 @@ module Aws::AppStream
     #   <p>The distinguished name of the organizational unit for computer accounts.</p>
     #   @return [String]
     class DomainJoinInfo < Struct.new(
+      nil,
       :directory_name,
       :organizational_unit_distinguished_name,
       keyword_init: true
@@ -2697,6 +2826,7 @@ module Aws::AppStream
     #   <p>The authentication type for the user. You must specify USERPOOL.</p>
     #   @return [String]
     class EnableUserRequest < Struct.new(
+      nil,
       :user_name,
       :authentication_type,
       keyword_init: true
@@ -2705,6 +2835,7 @@ module Aws::AppStream
     end
 
     class EnableUserResult < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -2715,6 +2846,7 @@ module Aws::AppStream
     #   <p>The identifier of the application.</p>
     #   @return [String]
     class EntitledApplication < Struct.new(
+      nil,
       :application_identifier,
       keyword_init: true
     )
@@ -2749,6 +2881,7 @@ module Aws::AppStream
     #   <p>The time when the entitlement was last modified.</p>
     #   @return [Time]
     class Entitlement < Struct.new(
+      nil,
       :name,
       :stack_name,
       :description,
@@ -2766,6 +2899,7 @@ module Aws::AppStream
     #   <p>The error message in the exception.</p>
     #   @return [String]
     class EntitlementAlreadyExistsException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -2810,6 +2944,7 @@ module Aws::AppStream
     #               federates into an Amazon AppStream 2.0 SAML application. </p>
     #   @return [String]
     class EntitlementAttribute < Struct.new(
+      nil,
       :name,
       :value,
       keyword_init: true
@@ -2822,6 +2957,7 @@ module Aws::AppStream
     #   <p>The error message in the exception.</p>
     #   @return [String]
     class EntitlementNotFoundException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -2836,6 +2972,7 @@ module Aws::AppStream
     #   <p>The error message.</p>
     #   @return [String]
     class ErrorDetails < Struct.new(
+      nil,
       :error_code,
       :error_message,
       keyword_init: true
@@ -2847,6 +2984,7 @@ module Aws::AppStream
     #   <p>The identifier of the streaming session.</p>
     #   @return [String]
     class ExpireSessionRequest < Struct.new(
+      nil,
       :session_id,
       keyword_init: true
     )
@@ -2854,6 +2992,7 @@ module Aws::AppStream
     end
 
     class ExpireSessionResult < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -3130,6 +3269,7 @@ module Aws::AppStream
     #   <p>The maximum number of user sessions on an instance. This only applies to multi-session fleets.</p>
     #   @return [Integer]
     class Fleet < Struct.new(
+      nil,
       :arn,
       :name,
       :display_name,
@@ -3168,6 +3308,7 @@ module Aws::AppStream
     #   <p>The error message.</p>
     #   @return [String]
     class FleetError < Struct.new(
+      nil,
       :error_code,
       :error_message,
       keyword_init: true
@@ -3268,6 +3409,7 @@ module Aws::AppStream
     #   <p>Indicates whether the image is shared with another account ID.</p>
     #   @return [String]
     class Image < Struct.new(
+      nil,
       :name,
       :arn,
       :base_image_arn,
@@ -3518,6 +3660,7 @@ module Aws::AppStream
     #   <p>Indicates whether the image builder is using the latest AppStream 2.0 agent version or not.</p>
     #   @return [String]
     class ImageBuilder < Struct.new(
+      nil,
       :name,
       :arn,
       :image_arn,
@@ -3550,6 +3693,7 @@ module Aws::AppStream
     #   <p>The state change reason message.</p>
     #   @return [String]
     class ImageBuilderStateChangeReason < Struct.new(
+      nil,
       :code,
       :message,
       keyword_init: true
@@ -3565,6 +3709,7 @@ module Aws::AppStream
     #   <p>Indicates whether the image can be used for an image builder.</p>
     #   @return [Boolean]
     class ImagePermissions < Struct.new(
+      nil,
       :allow_fleet,
       :allow_image_builder,
       keyword_init: true
@@ -3580,6 +3725,7 @@ module Aws::AppStream
     #   <p>The state change reason message.</p>
     #   @return [String]
     class ImageStateChangeReason < Struct.new(
+      nil,
       :code,
       :message,
       keyword_init: true
@@ -3592,6 +3738,7 @@ module Aws::AppStream
     #   <p>The error message in the exception.</p>
     #   @return [String]
     class IncompatibleImageException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -3603,6 +3750,7 @@ module Aws::AppStream
     #   <p>The error message in the exception.</p>
     #   @return [String]
     class InvalidAccountStatusException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -3614,6 +3762,7 @@ module Aws::AppStream
     #   <p>The error message in the exception.</p>
     #   @return [String]
     class InvalidParameterCombinationException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -3625,6 +3774,7 @@ module Aws::AppStream
     #   <p>The error message in the exception.</p>
     #   @return [String]
     class InvalidRoleException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -3639,6 +3789,7 @@ module Aws::AppStream
     #   <p>The error message for the error that is returned when a usage report can't be generated.</p>
     #   @return [String]
     class LastReportGenerationExecutionError < Struct.new(
+      nil,
       :error_code,
       :error_message,
       keyword_init: true
@@ -3651,6 +3802,7 @@ module Aws::AppStream
     #   <p>The error message in the exception.</p>
     #   @return [String]
     class LimitExceededException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -3664,6 +3816,7 @@ module Aws::AppStream
     #   <p>The pagination token to use to retrieve the next page of results for this operation. If this value is null, it retrieves the first page.</p>
     #   @return [String]
     class ListAssociatedFleetsRequest < Struct.new(
+      nil,
       :stack_name,
       :next_token,
       keyword_init: true
@@ -3678,6 +3831,7 @@ module Aws::AppStream
     #   <p>The pagination token to use to retrieve the next page of results for this operation. If there are no more pages, this value is null.</p>
     #   @return [String]
     class ListAssociatedFleetsResult < Struct.new(
+      nil,
       :names,
       :next_token,
       keyword_init: true
@@ -3692,6 +3846,7 @@ module Aws::AppStream
     #   <p>The pagination token to use to retrieve the next page of results for this operation. If this value is null, it retrieves the first page.</p>
     #   @return [String]
     class ListAssociatedStacksRequest < Struct.new(
+      nil,
       :fleet_name,
       :next_token,
       keyword_init: true
@@ -3706,6 +3861,7 @@ module Aws::AppStream
     #   <p>The pagination token to use to retrieve the next page of results for this operation. If there are no more pages, this value is null.</p>
     #   @return [String]
     class ListAssociatedStacksResult < Struct.new(
+      nil,
       :names,
       :next_token,
       keyword_init: true
@@ -3726,6 +3882,7 @@ module Aws::AppStream
     #   <p>The maximum size of each page of results.</p>
     #   @return [Integer]
     class ListEntitledApplicationsRequest < Struct.new(
+      nil,
       :stack_name,
       :entitlement_name,
       :next_token,
@@ -3742,6 +3899,7 @@ module Aws::AppStream
     #   <p>The pagination token used to retrieve the next page of results for this operation.</p>
     #   @return [String]
     class ListEntitledApplicationsResult < Struct.new(
+      nil,
       :entitled_applications,
       :next_token,
       keyword_init: true
@@ -3753,6 +3911,7 @@ module Aws::AppStream
     #   <p>The Amazon Resource Name (ARN) of the resource.</p>
     #   @return [String]
     class ListTagsForResourceRequest < Struct.new(
+      nil,
       :resource_arn,
       keyword_init: true
     )
@@ -3763,6 +3922,7 @@ module Aws::AppStream
     #   <p>The information about the tags.</p>
     #   @return [Hash<String, String>]
     class ListTagsForResourceResponse < Struct.new(
+      nil,
       :tags,
       keyword_init: true
     )
@@ -3777,6 +3937,7 @@ module Aws::AppStream
     #   <p>The resource identifier of the elastic network interface that is attached to instances in your VPC. All network interfaces have the eni-xxxxxxxx resource identifier.</p>
     #   @return [String]
     class NetworkAccessConfiguration < Struct.new(
+      nil,
       :eni_private_ip_address,
       :eni_id,
       keyword_init: true
@@ -3789,6 +3950,7 @@ module Aws::AppStream
     #   <p>The error message in the exception.</p>
     #   @return [String]
     class OperationNotPermittedException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -3800,6 +3962,7 @@ module Aws::AppStream
     #   <p>The error message in the exception.</p>
     #   @return [String]
     class RequestLimitExceededException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -3811,6 +3974,7 @@ module Aws::AppStream
     #   <p>The error message in the exception.</p>
     #   @return [String]
     class ResourceAlreadyExistsException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -3828,6 +3992,7 @@ module Aws::AppStream
     #   <p>The time the error occurred.</p>
     #   @return [Time]
     class ResourceError < Struct.new(
+      nil,
       :error_code,
       :error_message,
       :error_timestamp,
@@ -3841,6 +4006,7 @@ module Aws::AppStream
     #   <p>The error message in the exception.</p>
     #   @return [String]
     class ResourceInUseException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -3852,6 +4018,7 @@ module Aws::AppStream
     #   <p>The error message in the exception.</p>
     #   @return [String]
     class ResourceNotAvailableException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -3863,6 +4030,7 @@ module Aws::AppStream
     #   <p>The error message in the exception.</p>
     #   @return [String]
     class ResourceNotFoundException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -3900,6 +4068,7 @@ module Aws::AppStream
     #            </ul>
     #   @return [String]
     class S3Location < Struct.new(
+      nil,
       :s3_bucket,
       :s3_key,
       keyword_init: true
@@ -3921,6 +4090,7 @@ module Aws::AppStream
     #   <p>The run timeout, in seconds, for the script.</p>
     #   @return [Integer]
     class ScriptDetails < Struct.new(
+      nil,
       :script_s3_location,
       :executable_path,
       :executable_parameters,
@@ -3940,6 +4110,7 @@ module Aws::AppStream
     #   <p>The password for the account.</p>
     #   @return [String]
     class ServiceAccountCredentials < Struct.new(
+      nil,
       :account_name,
       :account_password,
       keyword_init: true
@@ -3983,6 +4154,7 @@ module Aws::AppStream
     #   <p>The identifier for the instance hosting the session.</p>
     #   @return [String]
     class Session < Struct.new(
+      nil,
       :id,
       :user_id,
       :stack_name,
@@ -4007,6 +4179,7 @@ module Aws::AppStream
     #   <p>Describes the permissions for a shared image.</p>
     #   @return [Types::ImagePermissions]
     class SharedImagePermissions < Struct.new(
+      nil,
       :shared_account_id,
       :image_permissions,
       keyword_init: true
@@ -4058,6 +4231,7 @@ module Aws::AppStream
     #   <p>The streaming protocol you want your stack to prefer. This can be UDP or TCP. Currently, UDP is only supported in the Windows native client.</p>
     #   @return [Types::StreamingExperienceSettings]
     class Stack < Struct.new(
+      nil,
       :arn,
       :name,
       :description,
@@ -4085,6 +4259,7 @@ module Aws::AppStream
     #   <p>The error message.</p>
     #   @return [String]
     class StackError < Struct.new(
+      nil,
       :error_code,
       :error_message,
       keyword_init: true
@@ -4096,6 +4271,7 @@ module Aws::AppStream
     #   <p>The name of the app block builder.</p>
     #   @return [String]
     class StartAppBlockBuilderRequest < Struct.new(
+      nil,
       :name,
       keyword_init: true
     )
@@ -4106,6 +4282,7 @@ module Aws::AppStream
     #   <p>Describes an app block builder.</p>
     #   @return [Types::AppBlockBuilder]
     class StartAppBlockBuilderResult < Struct.new(
+      nil,
       :app_block_builder,
       keyword_init: true
     )
@@ -4116,6 +4293,7 @@ module Aws::AppStream
     #   <p>The name of the fleet.</p>
     #   @return [String]
     class StartFleetRequest < Struct.new(
+      nil,
       :name,
       keyword_init: true
     )
@@ -4123,6 +4301,7 @@ module Aws::AppStream
     end
 
     class StartFleetResult < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -4135,6 +4314,7 @@ module Aws::AppStream
     #   <p>The version of the AppStream 2.0 agent to use for this image builder. To use the latest version of the AppStream 2.0 agent, specify [LATEST]. </p>
     #   @return [String]
     class StartImageBuilderRequest < Struct.new(
+      nil,
       :name,
       :appstream_agent_version,
       keyword_init: true
@@ -4146,6 +4326,7 @@ module Aws::AppStream
     #   <p>Information about the image builder.</p>
     #   @return [Types::ImageBuilder]
     class StartImageBuilderResult < Struct.new(
+      nil,
       :image_builder,
       keyword_init: true
     )
@@ -4156,6 +4337,7 @@ module Aws::AppStream
     #   <p>The name of the app block builder.</p>
     #   @return [String]
     class StopAppBlockBuilderRequest < Struct.new(
+      nil,
       :name,
       keyword_init: true
     )
@@ -4166,6 +4348,7 @@ module Aws::AppStream
     #   <p>Describes an app block builder.</p>
     #   @return [Types::AppBlockBuilder]
     class StopAppBlockBuilderResult < Struct.new(
+      nil,
       :app_block_builder,
       keyword_init: true
     )
@@ -4176,6 +4359,7 @@ module Aws::AppStream
     #   <p>The name of the fleet.</p>
     #   @return [String]
     class StopFleetRequest < Struct.new(
+      nil,
       :name,
       keyword_init: true
     )
@@ -4183,6 +4367,7 @@ module Aws::AppStream
     end
 
     class StopFleetResult < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -4192,6 +4377,7 @@ module Aws::AppStream
     #   <p>The name of the image builder.</p>
     #   @return [String]
     class StopImageBuilderRequest < Struct.new(
+      nil,
       :name,
       keyword_init: true
     )
@@ -4202,6 +4388,7 @@ module Aws::AppStream
     #   <p>Information about the image builder.</p>
     #   @return [Types::ImageBuilder]
     class StopImageBuilderResult < Struct.new(
+      nil,
       :image_builder,
       keyword_init: true
     )
@@ -4222,6 +4409,7 @@ module Aws::AppStream
     #   <p>The OneDrive for Business domains where you require admin consent when users try to link their OneDrive account to AppStream 2.0. The attribute can only be specified when ConnectorType=ONE_DRIVE.</p>
     #   @return [Array<String>]
     class StorageConnector < Struct.new(
+      nil,
       :connector_type,
       :resource_identifier,
       :domains,
@@ -4236,6 +4424,7 @@ module Aws::AppStream
     #   <p>The preferred protocol that you want to use while streaming your application.</p>
     #   @return [String]
     class StreamingExperienceSettings < Struct.new(
+      nil,
       :preferred_protocol,
       keyword_init: true
     )
@@ -4252,6 +4441,7 @@ module Aws::AppStream
     #            <p>_ . : / = + \ - @</p>
     #   @return [Hash<String, String>]
     class TagResourceRequest < Struct.new(
+      nil,
       :resource_arn,
       :tags,
       keyword_init: true
@@ -4260,6 +4450,7 @@ module Aws::AppStream
     end
 
     class TagResourceResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -4291,6 +4482,7 @@ module Aws::AppStream
     #   <p>The time the theme was created.</p>
     #   @return [Time]
     class Theme < Struct.new(
+      nil,
       :stack_name,
       :state,
       :theme_title_text,
@@ -4312,6 +4504,7 @@ module Aws::AppStream
     #   <p>The URL of the websites that display in the catalog page footer.</p>
     #   @return [String]
     class ThemeFooterLink < Struct.new(
+      nil,
       :display_name,
       :footer_link_url,
       keyword_init: true
@@ -4326,6 +4519,7 @@ module Aws::AppStream
     #   <p>The tag keys for the tags to disassociate.</p>
     #   @return [Array<String>]
     class UntagResourceRequest < Struct.new(
+      nil,
       :resource_arn,
       :tag_keys,
       keyword_init: true
@@ -4334,6 +4528,7 @@ module Aws::AppStream
     end
 
     class UntagResourceResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -4397,6 +4592,7 @@ module Aws::AppStream
     #   <p>The attributes to delete from the app block builder.</p>
     #   @return [Array<String>]
     class UpdateAppBlockBuilderRequest < Struct.new(
+      nil,
       :name,
       :description,
       :display_name,
@@ -4416,6 +4612,7 @@ module Aws::AppStream
     #   <p>Describes an app block builder.</p>
     #   @return [Types::AppBlockBuilder]
     class UpdateAppBlockBuilderResult < Struct.new(
+      nil,
       :app_block_builder,
       keyword_init: true
     )
@@ -4450,6 +4647,7 @@ module Aws::AppStream
     #   <p>The attributes to delete for an application.</p>
     #   @return [Array<String>]
     class UpdateApplicationRequest < Struct.new(
+      nil,
       :name,
       :display_name,
       :description,
@@ -4468,6 +4666,7 @@ module Aws::AppStream
     #   <p>Describes an application in the application catalog.</p>
     #   @return [Types::Application]
     class UpdateApplicationResult < Struct.new(
+      nil,
       :application,
       keyword_init: true
     )
@@ -4493,6 +4692,7 @@ module Aws::AppStream
     #               will be disconnected to re-authenticate using certificates.</p>
     #   @return [Types::CertificateBasedAuthProperties]
     class UpdateDirectoryConfigRequest < Struct.new(
+      nil,
       :directory_name,
       :organizational_unit_distinguished_names,
       :service_account_credentials,
@@ -4506,6 +4706,7 @@ module Aws::AppStream
     #   <p>Information about the Directory Config object.</p>
     #   @return [Types::DirectoryConfig]
     class UpdateDirectoryConfigResult < Struct.new(
+      nil,
       :directory_config,
       keyword_init: true
     )
@@ -4528,6 +4729,7 @@ module Aws::AppStream
     #   <p>The attributes of the entitlement.</p>
     #   @return [Array<Types::EntitlementAttribute>]
     class UpdateEntitlementRequest < Struct.new(
+      nil,
       :name,
       :stack_name,
       :description,
@@ -4542,6 +4744,7 @@ module Aws::AppStream
     #   <p>The entitlement.</p>
     #   @return [Types::Entitlement]
     class UpdateEntitlementResult < Struct.new(
+      nil,
       :entitlement,
       keyword_init: true
     )
@@ -4821,6 +5024,7 @@ module Aws::AppStream
     #   <p>The maximum number of user sessions on an instance. This only applies to multi-session fleets.</p>
     #   @return [Integer]
     class UpdateFleetRequest < Struct.new(
+      nil,
       :image_name,
       :image_arn,
       :name,
@@ -4852,6 +5056,7 @@ module Aws::AppStream
     #   <p>Information about the fleet.</p>
     #   @return [Types::Fleet]
     class UpdateFleetResult < Struct.new(
+      nil,
       :fleet,
       keyword_init: true
     )
@@ -4868,6 +5073,7 @@ module Aws::AppStream
     #   <p>The permissions for the image.</p>
     #   @return [Types::ImagePermissions]
     class UpdateImagePermissionsRequest < Struct.new(
+      nil,
       :name,
       :shared_account_id,
       :image_permissions,
@@ -4877,6 +5083,7 @@ module Aws::AppStream
     end
 
     class UpdateImagePermissionsResult < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -4923,6 +5130,7 @@ module Aws::AppStream
     #   <p>The streaming protocol you want your stack to prefer. This can be UDP or TCP. Currently, UDP is only supported in the Windows native client.</p>
     #   @return [Types::StreamingExperienceSettings]
     class UpdateStackRequest < Struct.new(
+      nil,
       :display_name,
       :description,
       :name,
@@ -4945,6 +5153,7 @@ module Aws::AppStream
     #   <p>Information about the stack.</p>
     #   @return [Types::Stack]
     class UpdateStackResult < Struct.new(
+      nil,
       :stack,
       keyword_init: true
     )
@@ -4976,6 +5185,7 @@ module Aws::AppStream
     #   <p>The attributes to delete.</p>
     #   @return [Array<String>]
     class UpdateThemeForStackRequest < Struct.new(
+      nil,
       :stack_name,
       :footer_links,
       :title_text,
@@ -4993,6 +5203,7 @@ module Aws::AppStream
     #   <p> The theme object that contains the metadata of the custom branding.</p>
     #   @return [Types::Theme]
     class UpdateThemeForStackResult < Struct.new(
+      nil,
       :theme,
       keyword_init: true
     )
@@ -5018,6 +5229,7 @@ module Aws::AppStream
     #   <p>The errors that were returned if usage reports couldn't be generated.</p>
     #   @return [Array<Types::LastReportGenerationExecutionError>]
     class UsageReportSubscription < Struct.new(
+      nil,
       :s3_bucket_name,
       :schedule,
       :last_generated_report_date,
@@ -5073,6 +5285,7 @@ module Aws::AppStream
     #   <p>The authentication type for the user.</p>
     #   @return [String]
     class User < Struct.new(
+      nil,
       :arn,
       :user_name,
       :enabled,
@@ -5100,6 +5313,7 @@ module Aws::AppStream
     #            <p>The value can be between 1 and 20,971,520 (20 MB).</p>
     #   @return [Integer]
     class UserSetting < Struct.new(
+      nil,
       :action,
       :permission,
       :maximum_length,
@@ -5125,6 +5339,7 @@ module Aws::AppStream
     #   <p>Specifies whether a welcome email is sent to a user after the user is created in the user pool.</p>
     #   @return [Boolean]
     class UserStackAssociation < Struct.new(
+      nil,
       :stack_name,
       :user_name,
       :authentication_type,
@@ -5145,6 +5360,7 @@ module Aws::AppStream
     #   <p>The error message for the error that is returned when a user can’t be associated with or disassociated from a stack.</p>
     #   @return [String]
     class UserStackAssociationError < Struct.new(
+      nil,
       :user_stack_association,
       :error_code,
       :error_message,
@@ -5161,6 +5377,7 @@ module Aws::AppStream
     #   <p>The identifiers of the security groups for the fleet or image builder.</p>
     #   @return [Array<String>]
     class VpcConfig < Struct.new(
+      nil,
       :subnet_ids,
       :security_group_ids,
       keyword_init: true

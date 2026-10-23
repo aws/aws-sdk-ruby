@@ -11,6 +11,7 @@ module Aws::Resiliencehub
     #   <p>Indicates the identifier of the grouping recommendation.</p>
     #   @return [String]
     class AcceptGroupingRecommendationEntry < Struct.new(
+      nil,
       :grouping_recommendation_id,
       keyword_init: true
     )
@@ -28,6 +29,7 @@ module Aws::Resiliencehub
     #   <p>List of resource grouping recommendations you want to include in your application.</p>
     #   @return [Array<Types::AcceptGroupingRecommendationEntry>]
     class AcceptResourceGroupingRecommendationsRequest < Struct.new(
+      nil,
       :app_arn,
       :entries,
       keyword_init: true
@@ -46,6 +48,7 @@ module Aws::Resiliencehub
     #   <p>List of resource grouping recommendations that could not be included in your application.</p>
     #   @return [Array<Types::FailedGroupingRecommendationEntry>]
     class AcceptResourceGroupingRecommendationsResponse < Struct.new(
+      nil,
       :app_arn,
       :failed_entries,
       keyword_init: true
@@ -59,6 +62,7 @@ module Aws::Resiliencehub
     # @!attribute message
     #   @return [String]
     class AccessDeniedException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -80,6 +84,7 @@ module Aws::Resiliencehub
     #         application is backed by a CloudFormation stack.</p>
     #   @return [Array<Types::ResourceMapping>]
     class AddDraftAppVersionResourceMappingsInput < Struct.new(
+      nil,
       :app_arn,
       :resource_mappings,
       keyword_init: true
@@ -103,6 +108,7 @@ module Aws::Resiliencehub
     #         AppRegistry applications, or Amazon EKS.</p>
     #   @return [Array<Types::ResourceMapping>]
     class AddDraftAppVersionResourceMappingsOutput < Struct.new(
+      nil,
       :app_arn,
       :app_version,
       :resource_mappings,
@@ -121,6 +127,7 @@ module Aws::Resiliencehub
     #         or if you had created the alarm in Amazon CloudWatch (<code>Customer</code>).</p>
     #   @return [String]
     class Alarm < Struct.new(
+      nil,
       :alarm_arn,
       :source,
       keyword_init: true
@@ -163,6 +170,7 @@ module Aws::Resiliencehub
     #   <p>Status of the recommended Amazon CloudWatch alarm.</p>
     #   @return [String]
     class AlarmRecommendation < Struct.new(
+      nil,
       :recommendation_id,
       :reference_id,
       :name,
@@ -254,6 +262,7 @@ module Aws::Resiliencehub
     #                       <i>Amazon Web Services General Reference</i> guide.</p>
     #   @return [String]
     class App < Struct.new(
+      nil,
       :app_arn,
       :name,
       :description,
@@ -356,6 +365,7 @@ module Aws::Resiliencehub
     #            </note>
     #   @return [Types::AssessmentSummary]
     class AppAssessment < Struct.new(
+      nil,
       :app_arn,
       :app_version,
       :invoker,
@@ -433,6 +443,7 @@ module Aws::Resiliencehub
     #         your application.</p>
     #   @return [String]
     class AppAssessmentSummary < Struct.new(
+      nil,
       :app_arn,
       :app_version,
       :assessment_status,
@@ -478,6 +489,7 @@ module Aws::Resiliencehub
     #            </note>
     #   @return [Hash<String, Array<String>>]
     class AppComponent < Struct.new(
+      nil,
       :name,
       :type,
       :id,
@@ -507,6 +519,7 @@ module Aws::Resiliencehub
     #   <p>The current resiliency score for the application.</p>
     #   @return [Types::ResiliencyScore]
     class AppComponentCompliance < Struct.new(
+      nil,
       :cost,
       :app_component_name,
       :compliance,
@@ -541,6 +554,7 @@ module Aws::Resiliencehub
     #   <p>The namespace on your Amazon Elastic Kubernetes Service cluster.</p>
     #   @return [Types::EksSourceClusterNamespace]
     class AppInputSource < Struct.new(
+      nil,
       :source_name,
       :import_type,
       :source_arn,
@@ -606,6 +620,7 @@ module Aws::Resiliencehub
     #                       <i>Amazon Web Services General Reference</i> guide.</p>
     #   @return [String]
     class AppSummary < Struct.new(
+      nil,
       :app_arn,
       :name,
       :description,
@@ -643,6 +658,7 @@ module Aws::Resiliencehub
     #   <p>Name of the application version.</p>
     #   @return [String]
     class AppVersionSummary < Struct.new(
+      nil,
       :app_version,
       :identifier,
       :creation_time,
@@ -683,6 +699,7 @@ module Aws::Resiliencehub
     #            </note>
     #   @return [Array<String>]
     class AssessmentRiskRecommendation < Struct.new(
+      nil,
       :risk,
       :recommendation,
       :app_components,
@@ -709,6 +726,7 @@ module Aws::Resiliencehub
     #            </note>
     #   @return [Array<Types::AssessmentRiskRecommendation>]
     class AssessmentSummary < Struct.new(
+      nil,
       :summary,
       :risk_recommendations,
       keyword_init: true
@@ -727,6 +745,7 @@ module Aws::Resiliencehub
     #   <p>Indicates the error that occurred while excluding an operational recommendation.</p>
     #   @return [String]
     class BatchUpdateRecommendationStatusFailedEntry < Struct.new(
+      nil,
       :entry_id,
       :error_message,
       keyword_init: true
@@ -746,6 +765,7 @@ module Aws::Resiliencehub
     #         excluded.</p>
     #   @return [Array<Types::UpdateRecommendationStatusRequestEntry>]
     class BatchUpdateRecommendationStatusRequest < Struct.new(
+      nil,
       :app_arn,
       :request_entries,
       keyword_init: true
@@ -768,6 +788,7 @@ module Aws::Resiliencehub
     #         excluded.</p>
     #   @return [Array<Types::BatchUpdateRecommendationStatusFailedEntry>]
     class BatchUpdateRecommendationStatusResponse < Struct.new(
+      nil,
       :app_arn,
       :successful_entries,
       :failed_entries,
@@ -799,6 +820,7 @@ module Aws::Resiliencehub
     #   <p>Indicates the reason for excluding an operational recommendation.</p>
     #   @return [String]
     class BatchUpdateRecommendationStatusSuccessfulEntry < Struct.new(
+      nil,
       :entry_id,
       :reference_id,
       :item,
@@ -848,6 +870,7 @@ module Aws::Resiliencehub
     #           <code>NotEqual</code> difference type.</p>
     #   @return [String]
     class ComplianceDrift < Struct.new(
+      nil,
       :entity_id,
       :entity_type,
       :drift_type,
@@ -876,6 +899,7 @@ module Aws::Resiliencehub
     #   <p>List of recommendations.</p>
     #   @return [Array<Types::ConfigRecommendation>]
     class ComponentRecommendation < Struct.new(
+      nil,
       :app_component_name,
       :recommendation_status,
       :config_recommendations,
@@ -895,6 +919,7 @@ module Aws::Resiliencehub
     #   <p>Indicates the value or data against which a condition is evaluated.</p>
     #   @return [String]
     class Condition < Struct.new(
+      nil,
       :field,
       :operator,
       :value,
@@ -937,6 +962,7 @@ module Aws::Resiliencehub
     #   <p>Reference identifier for the recommendation configuration.</p>
     #   @return [String]
     class ConfigRecommendation < Struct.new(
+      nil,
       :cost,
       :app_component_name,
       :compliance,
@@ -965,6 +991,7 @@ module Aws::Resiliencehub
     #   <p>The type of the resource that the exception applies to.</p>
     #   @return [String]
     class ConflictException < Struct.new(
+      nil,
       :message,
       :resource_id,
       :resource_type,
@@ -984,6 +1011,7 @@ module Aws::Resiliencehub
     #   <p>The cost frequency.</p>
     #   @return [String]
     class Cost < Struct.new(
+      nil,
       :amount,
       :currency,
       :frequency,
@@ -1037,6 +1065,7 @@ module Aws::Resiliencehub
     #                       <i>Amazon Web Services General Reference</i> guide.</p>
     #   @return [String]
     class CreateAppInput < Struct.new(
+      nil,
       :name,
       :description,
       :policy_arn,
@@ -1056,6 +1085,7 @@ module Aws::Resiliencehub
     #         creation time, description, resiliency score, and more.</p>
     #   @return [Types::App]
     class CreateAppOutput < Struct.new(
+      nil,
       :app,
       keyword_init: true
     )
@@ -1086,6 +1116,7 @@ module Aws::Resiliencehub
     #   You should not reuse the same client token for other API requests.</p>
     #   @return [String]
     class CreateAppVersionAppComponentInput < Struct.new(
+      nil,
       :app_arn,
       :id,
       :name,
@@ -1111,6 +1142,7 @@ module Aws::Resiliencehub
     #   <p>List of Application Components that belong to this resource.</p>
     #   @return [Types::AppComponent]
     class CreateAppVersionAppComponentOutput < Struct.new(
+      nil,
       :app_arn,
       :app_version,
       :app_component,
@@ -1155,6 +1187,7 @@ module Aws::Resiliencehub
     #   You should not reuse the same client token for other API requests.</p>
     #   @return [String]
     class CreateAppVersionResourceInput < Struct.new(
+      nil,
       :app_arn,
       :resource_name,
       :logical_resource_id,
@@ -1184,6 +1217,7 @@ module Aws::Resiliencehub
     #   <p>Defines a physical resource. A physical resource is a resource that exists in your account. It can be identified using an Amazon Resource Name (ARN) or a Resilience Hub-native identifier.</p>
     #   @return [Types::PhysicalResource]
     class CreateAppVersionResourceOutput < Struct.new(
+      nil,
       :app_arn,
       :app_version,
       :physical_resource,
@@ -1247,6 +1281,7 @@ module Aws::Resiliencehub
     #   <p>The name of the Amazon S3 bucket that will contain the recommendation template.</p>
     #   @return [String]
     class CreateRecommendationTemplateInput < Struct.new(
+      nil,
       :recommendation_ids,
       :format,
       :recommendation_types,
@@ -1265,6 +1300,7 @@ module Aws::Resiliencehub
     #         template's name, format, status, tags, Amazon S3 bucket location, and more.</p>
     #   @return [Types::RecommendationTemplate]
     class CreateRecommendationTemplateOutput < Struct.new(
+      nil,
       :recommendation_template,
       keyword_init: true
     )
@@ -1298,6 +1334,7 @@ module Aws::Resiliencehub
     #   Each tag consists of a key/value pair.</p>
     #   @return [Hash<String, String>]
     class CreateResiliencyPolicyInput < Struct.new(
+      nil,
       :policy_name,
       :policy_description,
       :data_location_constraint,
@@ -1315,6 +1352,7 @@ module Aws::Resiliencehub
     #         (RTO) and recovery point objective (RPO) in seconds.</p>
     #   @return [Types::ResiliencyPolicy]
     class CreateResiliencyPolicyOutput < Struct.new(
+      nil,
       :policy,
       keyword_init: true
     )
@@ -1333,6 +1371,7 @@ module Aws::Resiliencehub
     #   You should not reuse the same client token for other API requests.</p>
     #   @return [String]
     class DeleteAppAssessmentInput < Struct.new(
+      nil,
       :assessment_arn,
       :client_token,
       keyword_init: true
@@ -1351,6 +1390,7 @@ module Aws::Resiliencehub
     #   <p>The current status of the assessment for the resiliency policy.</p>
     #   @return [String]
     class DeleteAppAssessmentOutput < Struct.new(
+      nil,
       :assessment_arn,
       :assessment_status,
       keyword_init: true
@@ -1373,6 +1413,7 @@ module Aws::Resiliencehub
     #   You should not reuse the same client token for other API requests.</p>
     #   @return [String]
     class DeleteAppInput < Struct.new(
+      nil,
       :app_arn,
       :force_delete,
       :client_token,
@@ -1408,6 +1449,7 @@ module Aws::Resiliencehub
     #           Resilience Hub application.</p>
     #   @return [Types::EksSourceClusterNamespace]
     class DeleteAppInputSourceInput < Struct.new(
+      nil,
       :app_arn,
       :source_arn,
       :terraform_source,
@@ -1429,6 +1471,7 @@ module Aws::Resiliencehub
     #   <p>Name of the input source from where the application resource is imported from.</p>
     #   @return [Types::AppInputSource]
     class DeleteAppInputSourceOutput < Struct.new(
+      nil,
       :app_arn,
       :app_input_source,
       keyword_init: true
@@ -1444,6 +1487,7 @@ module Aws::Resiliencehub
     #                       <i>Amazon Web Services General Reference</i> guide.</p>
     #   @return [String]
     class DeleteAppOutput < Struct.new(
+      nil,
       :app_arn,
       keyword_init: true
     )
@@ -1465,6 +1509,7 @@ module Aws::Resiliencehub
     #   You should not reuse the same client token for other API requests.</p>
     #   @return [String]
     class DeleteAppVersionAppComponentInput < Struct.new(
+      nil,
       :app_arn,
       :id,
       :client_token,
@@ -1487,6 +1532,7 @@ module Aws::Resiliencehub
     #   <p>List of Application Components that belong to this resource.</p>
     #   @return [Types::AppComponent]
     class DeleteAppVersionAppComponentOutput < Struct.new(
+      nil,
       :app_arn,
       :app_version,
       :app_component,
@@ -1522,6 +1568,7 @@ module Aws::Resiliencehub
     #   You should not reuse the same client token for other API requests.</p>
     #   @return [String]
     class DeleteAppVersionResourceInput < Struct.new(
+      nil,
       :app_arn,
       :resource_name,
       :logical_resource_id,
@@ -1548,6 +1595,7 @@ module Aws::Resiliencehub
     #   <p>Defines a physical resource. A physical resource is a resource that exists in your account. It can be identified using an Amazon Resource Name (ARN) or a Resilience Hub-native identifier.</p>
     #   @return [Types::PhysicalResource]
     class DeleteAppVersionResourceOutput < Struct.new(
+      nil,
       :app_arn,
       :app_version,
       :physical_resource,
@@ -1564,6 +1612,7 @@ module Aws::Resiliencehub
     #   You should not reuse the same client token for other API requests.</p>
     #   @return [String]
     class DeleteRecommendationTemplateInput < Struct.new(
+      nil,
       :recommendation_template_arn,
       :client_token,
       keyword_init: true
@@ -1578,6 +1627,7 @@ module Aws::Resiliencehub
     #   <p>Status of the action.</p>
     #   @return [String]
     class DeleteRecommendationTemplateOutput < Struct.new(
+      nil,
       :recommendation_template_arn,
       :status,
       keyword_init: true
@@ -1597,6 +1647,7 @@ module Aws::Resiliencehub
     #   You should not reuse the same client token for other API requests.</p>
     #   @return [String]
     class DeleteResiliencyPolicyInput < Struct.new(
+      nil,
       :policy_arn,
       :client_token,
       keyword_init: true
@@ -1612,6 +1663,7 @@ module Aws::Resiliencehub
     #                       <i>Amazon Web Services General Reference</i> guide.</p>
     #   @return [String]
     class DeleteResiliencyPolicyOutput < Struct.new(
+      nil,
       :policy_arn,
       keyword_init: true
     )
@@ -1626,6 +1678,7 @@ module Aws::Resiliencehub
     #                       <i>Amazon Web Services General Reference</i> guide.</p>
     #   @return [String]
     class DescribeAppAssessmentInput < Struct.new(
+      nil,
       :assessment_arn,
       keyword_init: true
     )
@@ -1638,6 +1691,7 @@ module Aws::Resiliencehub
     #         messages, resiliency scores, and more.</p>
     #   @return [Types::AppAssessment]
     class DescribeAppAssessmentOutput < Struct.new(
+      nil,
       :assessment,
       keyword_init: true
     )
@@ -1652,6 +1706,7 @@ module Aws::Resiliencehub
     #                       <i>Amazon Web Services General Reference</i> guide.</p>
     #   @return [String]
     class DescribeAppInput < Struct.new(
+      nil,
       :app_arn,
       keyword_init: true
     )
@@ -1663,6 +1718,7 @@ module Aws::Resiliencehub
     #         creation time, description, resiliency score, and more.</p>
     #   @return [Types::App]
     class DescribeAppOutput < Struct.new(
+      nil,
       :app,
       keyword_init: true
     )
@@ -1683,6 +1739,7 @@ module Aws::Resiliencehub
     #   <p>Identifier of the Application Component.</p>
     #   @return [String]
     class DescribeAppVersionAppComponentInput < Struct.new(
+      nil,
       :app_arn,
       :app_version,
       :id,
@@ -1705,6 +1762,7 @@ module Aws::Resiliencehub
     #   <p>List of Application Components that belong to this resource.</p>
     #   @return [Types::AppComponent]
     class DescribeAppVersionAppComponentOutput < Struct.new(
+      nil,
       :app_arn,
       :app_version,
       :app_component,
@@ -1724,6 +1782,7 @@ module Aws::Resiliencehub
     #   <p>Resilience Hub application version.</p>
     #   @return [String]
     class DescribeAppVersionInput < Struct.new(
+      nil,
       :app_arn,
       :app_version,
       keyword_init: true
@@ -1748,6 +1807,7 @@ module Aws::Resiliencehub
     #            </note>
     #   @return [Hash<String, Array<String>>]
     class DescribeAppVersionOutput < Struct.new(
+      nil,
       :app_arn,
       :app_version,
       :additional_info,
@@ -1782,6 +1842,7 @@ module Aws::Resiliencehub
     #   <p>Amazon Web Services account that owns the physical resource.</p>
     #   @return [String]
     class DescribeAppVersionResourceInput < Struct.new(
+      nil,
       :app_arn,
       :app_version,
       :resource_name,
@@ -1808,6 +1869,7 @@ module Aws::Resiliencehub
     #   <p>Defines a physical resource. A physical resource is a resource that exists in your account. It can be identified using an Amazon Resource Name (ARN) or a Resilience Hub-native identifier.</p>
     #   @return [Types::PhysicalResource]
     class DescribeAppVersionResourceOutput < Struct.new(
+      nil,
       :app_arn,
       :app_version,
       :physical_resource,
@@ -1830,6 +1892,7 @@ module Aws::Resiliencehub
     #   <p>The identifier for a specific resolution.</p>
     #   @return [String]
     class DescribeAppVersionResourcesResolutionStatusInput < Struct.new(
+      nil,
       :app_arn,
       :app_version,
       :resolution_id,
@@ -1858,6 +1921,7 @@ module Aws::Resiliencehub
     #   <p>The returned error message for the request.</p>
     #   @return [String]
     class DescribeAppVersionResourcesResolutionStatusOutput < Struct.new(
+      nil,
       :app_arn,
       :app_version,
       :resolution_id,
@@ -1879,6 +1943,7 @@ module Aws::Resiliencehub
     #   <p>The version of the application.</p>
     #   @return [String]
     class DescribeAppVersionTemplateInput < Struct.new(
+      nil,
       :app_arn,
       :app_version,
       keyword_init: true
@@ -2159,6 +2224,7 @@ module Aws::Resiliencehub
     #            </ul>
     #   @return [String]
     class DescribeAppVersionTemplateOutput < Struct.new(
+      nil,
       :app_arn,
       :app_version,
       :app_template_body,
@@ -2175,6 +2241,7 @@ module Aws::Resiliencehub
     #                       <i>Amazon Web Services General Reference</i> guide.</p>
     #   @return [String]
     class DescribeDraftAppVersionResourcesImportStatusInput < Struct.new(
+      nil,
       :app_arn,
       keyword_init: true
     )
@@ -2204,6 +2271,7 @@ module Aws::Resiliencehub
     #   <p>List of errors that were encountered while importing resources.</p>
     #   @return [Array<Types::ErrorDetail>]
     class DescribeDraftAppVersionResourcesImportStatusOutput < Struct.new(
+      nil,
       :app_arn,
       :app_version,
       :status,
@@ -2219,6 +2287,7 @@ module Aws::Resiliencehub
     #   <p>Identifier of the metrics export task.</p>
     #   @return [String]
     class DescribeMetricsExportRequest < Struct.new(
+      nil,
       :metrics_export_id,
       keyword_init: true
     )
@@ -2238,6 +2307,7 @@ module Aws::Resiliencehub
     #   <p>Explains the error that occurred while exporting the metrics.</p>
     #   @return [String]
     class DescribeMetricsExportResponse < Struct.new(
+      nil,
       :metrics_export_id,
       :status,
       :export_location,
@@ -2255,6 +2325,7 @@ module Aws::Resiliencehub
     #                       <i>Amazon Web Services General Reference</i> guide.</p>
     #   @return [String]
     class DescribeResiliencyPolicyInput < Struct.new(
+      nil,
       :policy_arn,
       keyword_init: true
     )
@@ -2267,6 +2338,7 @@ module Aws::Resiliencehub
     #         time objective (RTO) and recovery point objective (RPO) in seconds, and more.</p>
     #   @return [Types::ResiliencyPolicy]
     class DescribeResiliencyPolicyOutput < Struct.new(
+      nil,
       :policy,
       keyword_init: true
     )
@@ -2284,6 +2356,7 @@ module Aws::Resiliencehub
     #   <p>Identifier of the grouping recommendation task.</p>
     #   @return [String]
     class DescribeResourceGroupingRecommendationTaskRequest < Struct.new(
+      nil,
       :app_arn,
       :grouping_id,
       keyword_init: true
@@ -2301,6 +2374,7 @@ module Aws::Resiliencehub
     #   <p>Error that occurred while generating a grouping recommendation.</p>
     #   @return [String]
     class DescribeResourceGroupingRecommendationTaskResponse < Struct.new(
+      nil,
       :grouping_id,
       :status,
       :error_message,
@@ -2341,6 +2415,7 @@ module Aws::Resiliencehub
     #   <p>The disruption compliance message.</p>
     #   @return [String]
     class DisruptionCompliance < Struct.new(
+      nil,
       :achievable_rto_in_secs,
       :current_rto_in_secs,
       :rto_reference_id,
@@ -2376,6 +2451,7 @@ module Aws::Resiliencehub
     #   <p>The list of namespaces located on your Amazon Elastic Kubernetes Service cluster.</p>
     #   @return [Array<String>]
     class EksSource < Struct.new(
+      nil,
       :eks_cluster_arn,
       :namespaces,
       keyword_init: true
@@ -2396,6 +2472,7 @@ module Aws::Resiliencehub
     #   <p>Name of the namespace that is located on your Amazon Elastic Kubernetes Service cluster.</p>
     #   @return [String]
     class EksSourceClusterNamespace < Struct.new(
+      nil,
       :eks_cluster_arn,
       :namespace,
       keyword_init: true
@@ -2408,6 +2485,7 @@ module Aws::Resiliencehub
     #   <p>Provides additional information about the error.</p>
     #   @return [String]
     class ErrorDetail < Struct.new(
+      nil,
       :error_message,
       keyword_init: true
     )
@@ -2434,6 +2512,7 @@ module Aws::Resiliencehub
     #                       <i>Amazon Web Services General Reference</i> guide.</p>
     #   @return [String]
     class EventSubscription < Struct.new(
+      nil,
       :name,
       :event_type,
       :sns_topic_arn,
@@ -2450,6 +2529,7 @@ module Aws::Resiliencehub
     #   <p>Identifier of the FIS experiment template.</p>
     #   @return [String]
     class Experiment < Struct.new(
+      nil,
       :experiment_arn,
       :experiment_template_id,
       keyword_init: true
@@ -2465,6 +2545,7 @@ module Aws::Resiliencehub
     #   <p>Indicates the error that occurred while implementing a grouping recommendation.</p>
     #   @return [String]
     class FailedGroupingRecommendationEntry < Struct.new(
+      nil,
       :grouping_recommendation_id,
       :error_message,
       keyword_init: true
@@ -2480,6 +2561,7 @@ module Aws::Resiliencehub
     #   <p>Recovery Point Objective (RPO) in seconds.</p>
     #   @return [Integer]
     class FailurePolicy < Struct.new(
+      nil,
       :rto_in_secs,
       :rpo_in_secs,
       keyword_init: true
@@ -2501,6 +2583,7 @@ module Aws::Resiliencehub
     #   <p>(Optional) Indicates the type of aggregation or summary operation (such as Sum, Average, and so on) to be performed on a particular field or set of data.</p>
     #   @return [String]
     class Field < Struct.new(
+      nil,
       :name,
       :aggregation,
       keyword_init: true
@@ -2519,6 +2602,7 @@ module Aws::Resiliencehub
     #   <p>Indicates the name of an AppComponent.</p>
     #   @return [String]
     class GroupingAppComponent < Struct.new(
+      nil,
       :app_component_id,
       :app_component_type,
       :app_component_name,
@@ -2556,6 +2640,7 @@ module Aws::Resiliencehub
     #   <p>Indicates the reason you had selected while rejecting a grouping recommendation.</p>
     #   @return [String]
     class GroupingRecommendation < Struct.new(
+      nil,
       :grouping_recommendation_id,
       :grouping_app_component,
       :resources,
@@ -2592,6 +2677,7 @@ module Aws::Resiliencehub
     #   <p>Indicates the identifier of the source AppComponents in which the resources were previously grouped into.</p>
     #   @return [Array<String>]
     class GroupingResource < Struct.new(
+      nil,
       :resource_name,
       :resource_type,
       :physical_resource_id,
@@ -2623,6 +2709,7 @@ module Aws::Resiliencehub
     #   <p>The input sources of the Amazon Elastic Kubernetes Service resources you need to import.</p>
     #   @return [Array<Types::EksSource>]
     class ImportResourcesToDraftAppVersionInput < Struct.new(
+      nil,
       :app_arn,
       :source_arns,
       :terraform_sources,
@@ -2656,6 +2743,7 @@ module Aws::Resiliencehub
     #   <p>The input sources of the Amazon Elastic Kubernetes Service resources you have imported.</p>
     #   @return [Array<Types::EksSource>]
     class ImportResourcesToDraftAppVersionOutput < Struct.new(
+      nil,
       :app_arn,
       :app_version,
       :source_arns,
@@ -2672,6 +2760,7 @@ module Aws::Resiliencehub
     # @!attribute message
     #   @return [String]
     class InternalServerException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -2693,6 +2782,7 @@ module Aws::Resiliencehub
     #   <code>MaxResults</code> value, a token is included in the response so that the remaining results can be retrieved.</p>
     #   @return [Integer]
     class ListAlarmRecommendationsInput < Struct.new(
+      nil,
       :assessment_arn,
       :next_token,
       :max_results,
@@ -2710,6 +2800,7 @@ module Aws::Resiliencehub
     #   <p>Token for the next set of results, or null if there are no more results.</p>
     #   @return [String]
     class ListAlarmRecommendationsOutput < Struct.new(
+      nil,
       :alarm_recommendations,
       :next_token,
       keyword_init: true
@@ -2731,6 +2822,7 @@ module Aws::Resiliencehub
     #   <p>Maximum number of compliance drifts requested.</p>
     #   @return [Integer]
     class ListAppAssessmentComplianceDriftsRequest < Struct.new(
+      nil,
       :assessment_arn,
       :next_token,
       :max_results,
@@ -2747,6 +2839,7 @@ module Aws::Resiliencehub
     #   <p>Null, or the token from a previous call to get the next set of results.</p>
     #   @return [String]
     class ListAppAssessmentComplianceDriftsResponse < Struct.new(
+      nil,
       :compliance_drifts,
       :next_token,
       keyword_init: true
@@ -2770,6 +2863,7 @@ module Aws::Resiliencehub
     #         that the remaining results can be retrieved.</p>
     #   @return [Integer]
     class ListAppAssessmentResourceDriftsRequest < Struct.new(
+      nil,
       :assessment_arn,
       :next_token,
       :max_results,
@@ -2785,6 +2879,7 @@ module Aws::Resiliencehub
     #   <p>Null, or the token from a previous call to get the next set of results.</p>
     #   @return [String]
     class ListAppAssessmentResourceDriftsResponse < Struct.new(
+      nil,
       :resource_drifts,
       :next_token,
       keyword_init: true
@@ -2824,6 +2919,7 @@ module Aws::Resiliencehub
     #   <code>MaxResults</code> value, a token is included in the response so that the remaining results can be retrieved.</p>
     #   @return [Integer]
     class ListAppAssessmentsInput < Struct.new(
+      nil,
       :app_arn,
       :assessment_name,
       :assessment_status,
@@ -2846,6 +2942,7 @@ module Aws::Resiliencehub
     #         scores, and more.</p>
     #   @return [Array<Types::AppAssessmentSummary>]
     class ListAppAssessmentsOutput < Struct.new(
+      nil,
       :next_token,
       :assessment_summaries,
       keyword_init: true
@@ -2868,6 +2965,7 @@ module Aws::Resiliencehub
     #                       <i>Amazon Web Services General Reference</i> guide.</p>
     #   @return [String]
     class ListAppComponentCompliancesInput < Struct.new(
+      nil,
       :next_token,
       :max_results,
       :assessment_arn,
@@ -2885,6 +2983,7 @@ module Aws::Resiliencehub
     #   <p>Token for the next set of results, or null if there are no more results.</p>
     #   @return [String]
     class ListAppComponentCompliancesOutput < Struct.new(
+      nil,
       :component_compliances,
       :next_token,
       keyword_init: true
@@ -2907,6 +3006,7 @@ module Aws::Resiliencehub
     #   <code>MaxResults</code> value, a token is included in the response so that the remaining results can be retrieved.</p>
     #   @return [Integer]
     class ListAppComponentRecommendationsInput < Struct.new(
+      nil,
       :assessment_arn,
       :next_token,
       :max_results,
@@ -2924,6 +3024,7 @@ module Aws::Resiliencehub
     #   <p>Token for the next set of results, or null if there are no more results.</p>
     #   @return [String]
     class ListAppComponentRecommendationsOutput < Struct.new(
+      nil,
       :component_recommendations,
       :next_token,
       keyword_init: true
@@ -2948,6 +3049,7 @@ module Aws::Resiliencehub
     #   <p>Maximum number of input sources to be displayed per Resilience Hub application.</p>
     #   @return [Integer]
     class ListAppInputSourcesInput < Struct.new(
+      nil,
       :app_arn,
       :app_version,
       :next_token,
@@ -2964,6 +3066,7 @@ module Aws::Resiliencehub
     #   <p>Token for the next set of results, or null if there are no more results.</p>
     #   @return [String]
     class ListAppInputSourcesOutput < Struct.new(
+      nil,
       :app_input_sources,
       :next_token,
       keyword_init: true
@@ -2988,6 +3091,7 @@ module Aws::Resiliencehub
     #   <p>Maximum number of Application Components to be displayed per Resilience Hub application version.</p>
     #   @return [Integer]
     class ListAppVersionAppComponentsInput < Struct.new(
+      nil,
       :app_arn,
       :app_version,
       :next_token,
@@ -3014,6 +3118,7 @@ module Aws::Resiliencehub
     #   <p>Token for the next set of results, or null if there are no more results.</p>
     #   @return [String]
     class ListAppVersionAppComponentsOutput < Struct.new(
+      nil,
       :app_arn,
       :app_version,
       :app_components,
@@ -3041,6 +3146,7 @@ module Aws::Resiliencehub
     #   <code>MaxResults</code> value, a token is included in the response so that the remaining results can be retrieved.</p>
     #   @return [Integer]
     class ListAppVersionResourceMappingsInput < Struct.new(
+      nil,
       :app_arn,
       :app_version,
       :next_token,
@@ -3061,6 +3167,7 @@ module Aws::Resiliencehub
     #   <p>Token for the next set of results, or null if there are no more results.</p>
     #   @return [String]
     class ListAppVersionResourceMappingsOutput < Struct.new(
+      nil,
       :resource_mappings,
       :next_token,
       keyword_init: true
@@ -3089,6 +3196,7 @@ module Aws::Resiliencehub
     #   <code>MaxResults</code> value, a token is included in the response so that the remaining results can be retrieved.</p>
     #   @return [Integer]
     class ListAppVersionResourcesInput < Struct.new(
+      nil,
       :app_arn,
       :app_version,
       :resolution_id,
@@ -3109,6 +3217,7 @@ module Aws::Resiliencehub
     #   <p>Token for the next set of results, or null if there are no more results.</p>
     #   @return [String]
     class ListAppVersionResourcesOutput < Struct.new(
+      nil,
       :physical_resources,
       :resolution_id,
       :next_token,
@@ -3138,6 +3247,7 @@ module Aws::Resiliencehub
     #   <p>Upper limit of the time range to filter the application versions.</p>
     #   @return [Time]
     class ListAppVersionsInput < Struct.new(
+      nil,
       :app_arn,
       :next_token,
       :max_results,
@@ -3155,6 +3265,7 @@ module Aws::Resiliencehub
     #   <p>Token for the next set of results, or null if there are no more results.</p>
     #   @return [String]
     class ListAppVersionsOutput < Struct.new(
+      nil,
       :app_versions,
       :next_token,
       keyword_init: true
@@ -3200,6 +3311,7 @@ module Aws::Resiliencehub
     #                       <i>Amazon Web Services General Reference</i> guide.</p>
     #   @return [String]
     class ListAppsInput < Struct.new(
+      nil,
       :next_token,
       :max_results,
       :name,
@@ -3220,6 +3332,7 @@ module Aws::Resiliencehub
     #   <p>Token for the next set of results, or null if there are no more results.</p>
     #   @return [String]
     class ListAppsOutput < Struct.new(
+      nil,
       :app_summaries,
       :next_token,
       keyword_init: true
@@ -3247,6 +3360,7 @@ module Aws::Resiliencehub
     #   <p>(Optional) Indicates the order in which you want to sort the fields in the metrics. By default, the fields are sorted in the ascending order.</p>
     #   @return [Array<Types::Sort>]
     class ListMetricsRequest < Struct.new(
+      nil,
       :next_token,
       :max_results,
       :fields,
@@ -3265,6 +3379,7 @@ module Aws::Resiliencehub
     #   <p>Token for the next set of results, or null if there are no more results.</p>
     #   @return [String]
     class ListMetricsResponse < Struct.new(
+      nil,
       :rows,
       :next_token,
       keyword_init: true
@@ -3300,6 +3415,7 @@ module Aws::Resiliencehub
     #   <code>MaxResults</code> value, a token is included in the response so that the remaining results can be retrieved.</p>
     #   @return [Integer]
     class ListRecommendationTemplatesInput < Struct.new(
+      nil,
       :assessment_arn,
       :reverse_order,
       :status,
@@ -3319,6 +3435,7 @@ module Aws::Resiliencehub
     #   <p>The recommendation templates for the Resilience Hub applications.</p>
     #   @return [Array<Types::RecommendationTemplate>]
     class ListRecommendationTemplatesOutput < Struct.new(
+      nil,
       :next_token,
       :recommendation_templates,
       keyword_init: true
@@ -3337,6 +3454,7 @@ module Aws::Resiliencehub
     #   <code>MaxResults</code> value, a token is included in the response so that the remaining results can be retrieved.</p>
     #   @return [Integer]
     class ListResiliencyPoliciesInput < Struct.new(
+      nil,
       :policy_name,
       :next_token,
       :max_results,
@@ -3352,6 +3470,7 @@ module Aws::Resiliencehub
     #   <p>Token for the next set of results, or null if there are no more results.</p>
     #   @return [String]
     class ListResiliencyPoliciesOutput < Struct.new(
+      nil,
       :resiliency_policies,
       :next_token,
       keyword_init: true
@@ -3373,6 +3492,7 @@ module Aws::Resiliencehub
     #   <p>Maximum number of grouping recommendations to be displayed per Resilience Hub application.</p>
     #   @return [Integer]
     class ListResourceGroupingRecommendationsRequest < Struct.new(
+      nil,
       :app_arn,
       :next_token,
       :max_results,
@@ -3388,6 +3508,7 @@ module Aws::Resiliencehub
     #   <p>Null, or the token from a previous call to get the next set of results.</p>
     #   @return [String]
     class ListResourceGroupingRecommendationsResponse < Struct.new(
+      nil,
       :grouping_recommendations,
       :next_token,
       keyword_init: true
@@ -3410,6 +3531,7 @@ module Aws::Resiliencehub
     #                       <i>Amazon Web Services General Reference</i> guide.</p>
     #   @return [String]
     class ListSopRecommendationsInput < Struct.new(
+      nil,
       :next_token,
       :max_results,
       :assessment_arn,
@@ -3426,6 +3548,7 @@ module Aws::Resiliencehub
     #         applications.</p>
     #   @return [Array<Types::SopRecommendation>]
     class ListSopRecommendationsOutput < Struct.new(
+      nil,
       :next_token,
       :sop_recommendations,
       keyword_init: true
@@ -3441,6 +3564,7 @@ module Aws::Resiliencehub
     #   <code>MaxResults</code> value, a token is included in the response so that the remaining results can be retrieved.</p>
     #   @return [Integer]
     class ListSuggestedResiliencyPoliciesInput < Struct.new(
+      nil,
       :next_token,
       :max_results,
       keyword_init: true
@@ -3455,6 +3579,7 @@ module Aws::Resiliencehub
     #   <p>Token for the next set of results, or null if there are no more results.</p>
     #   @return [String]
     class ListSuggestedResiliencyPoliciesOutput < Struct.new(
+      nil,
       :resiliency_policies,
       :next_token,
       keyword_init: true
@@ -3467,6 +3592,7 @@ module Aws::Resiliencehub
     #         application.</p>
     #   @return [String]
     class ListTagsForResourceInput < Struct.new(
+      nil,
       :resource_arn,
       keyword_init: true
     )
@@ -3478,6 +3604,7 @@ module Aws::Resiliencehub
     #   Each tag consists of a key/value pair.</p>
     #   @return [Hash<String, String>]
     class ListTagsForResourceOutput < Struct.new(
+      nil,
       :tags,
       keyword_init: true
     )
@@ -3499,6 +3626,7 @@ module Aws::Resiliencehub
     #                       <i>Amazon Web Services General Reference</i> guide.</p>
     #   @return [String]
     class ListTestRecommendationsInput < Struct.new(
+      nil,
       :next_token,
       :max_results,
       :assessment_arn,
@@ -3514,6 +3642,7 @@ module Aws::Resiliencehub
     #   <p>The test recommendations for the Resilience Hub application.</p>
     #   @return [Array<Types::TestRecommendation>]
     class ListTestRecommendationsOutput < Struct.new(
+      nil,
       :next_token,
       :test_recommendations,
       keyword_init: true
@@ -3542,6 +3671,7 @@ module Aws::Resiliencehub
     #   <code>MaxResults</code> value, a token is included in the response so that the remaining results can be retrieved.</p>
     #   @return [Integer]
     class ListUnsupportedAppVersionResourcesInput < Struct.new(
+      nil,
       :app_arn,
       :app_version,
       :resolution_id,
@@ -3562,6 +3692,7 @@ module Aws::Resiliencehub
     #   <p>Token for the next set of results, or null if there are no more results.</p>
     #   @return [String]
     class ListUnsupportedAppVersionResourcesOutput < Struct.new(
+      nil,
       :unsupported_resources,
       :resolution_id,
       :next_token,
@@ -3590,6 +3721,7 @@ module Aws::Resiliencehub
     #            </note>
     #   @return [String]
     class LogicalResourceId < Struct.new(
+      nil,
       :identifier,
       :logical_stack_name,
       :resource_group_name,
@@ -3647,6 +3779,7 @@ module Aws::Resiliencehub
     #            </note>
     #   @return [Array<String>]
     class PermissionModel < Struct.new(
+      nil,
       :type,
       :invoker_role_name,
       :cross_account_role_arns,
@@ -3692,6 +3825,7 @@ module Aws::Resiliencehub
     #   <p>Name of the parent resource.</p>
     #   @return [String]
     class PhysicalResource < Struct.new(
+      nil,
       :resource_name,
       :logical_resource_id,
       :physical_resource_id,
@@ -3856,6 +3990,7 @@ module Aws::Resiliencehub
     #   <p>The Amazon Web Services account that owns the physical resource.</p>
     #   @return [String]
     class PhysicalResourceId < Struct.new(
+      nil,
       :identifier,
       :type,
       :aws_region,
@@ -3876,6 +4011,7 @@ module Aws::Resiliencehub
     #   <p>Name of the application version.</p>
     #   @return [String]
     class PublishAppVersionInput < Struct.new(
+      nil,
       :app_arn,
       :version_name,
       keyword_init: true
@@ -3900,6 +4036,7 @@ module Aws::Resiliencehub
     #   <p>Name of the application version.</p>
     #   @return [String]
     class PublishAppVersionOutput < Struct.new(
+      nil,
       :app_arn,
       :app_version,
       :identifier,
@@ -4179,6 +4316,7 @@ module Aws::Resiliencehub
     #            </ul>
     #   @return [String]
     class PutDraftAppVersionTemplateInput < Struct.new(
+      nil,
       :app_arn,
       :app_template_body,
       keyword_init: true
@@ -4197,6 +4335,7 @@ module Aws::Resiliencehub
     #   <p>The version of the application.</p>
     #   @return [String]
     class PutDraftAppVersionTemplateOutput < Struct.new(
+      nil,
       :app_arn,
       :app_version,
       keyword_init: true
@@ -4223,6 +4362,7 @@ module Aws::Resiliencehub
     #         configuration change.</p>
     #   @return [String]
     class RecommendationDisruptionCompliance < Struct.new(
+      nil,
       :expected_compliance_status,
       :expected_rto_in_secs,
       :expected_rto_description,
@@ -4265,6 +4405,7 @@ module Aws::Resiliencehub
     #   <p>Indicates the previously implemented Amazon CloudWatch alarm discovered by Resilience Hub.</p>
     #   @return [Types::Alarm]
     class RecommendationItem < Struct.new(
+      nil,
       :resource_id,
       :target_account_id,
       :target_region,
@@ -4355,6 +4496,7 @@ module Aws::Resiliencehub
     #   <p>Indicates if replacements are needed.</p>
     #   @return [Boolean]
     class RecommendationTemplate < Struct.new(
+      nil,
       :templates_location,
       :assessment_arn,
       :app_arn,
@@ -4382,6 +4524,7 @@ module Aws::Resiliencehub
     #   <p>Indicates the reason you had selected while rejecting a grouping recommendation.</p>
     #   @return [String]
     class RejectGroupingRecommendationEntry < Struct.new(
+      nil,
       :grouping_recommendation_id,
       :rejection_reason,
       keyword_init: true
@@ -4400,6 +4543,7 @@ module Aws::Resiliencehub
     #   <p>List of resource grouping recommendations you have selected to exclude from your application.</p>
     #   @return [Array<Types::RejectGroupingRecommendationEntry>]
     class RejectResourceGroupingRecommendationsRequest < Struct.new(
+      nil,
       :app_arn,
       :entries,
       keyword_init: true
@@ -4418,6 +4562,7 @@ module Aws::Resiliencehub
     #   <p>List of resource grouping recommendations that failed to get excluded in your application.</p>
     #   @return [Array<Types::FailedGroupingRecommendationEntry>]
     class RejectResourceGroupingRecommendationsResponse < Struct.new(
+      nil,
       :app_arn,
       :failed_entries,
       keyword_init: true
@@ -4456,6 +4601,7 @@ module Aws::Resiliencehub
     #            </note>
     #   @return [Array<String>]
     class RemoveDraftAppVersionResourceMappingsInput < Struct.new(
+      nil,
       :app_arn,
       :resource_names,
       :logical_stack_names,
@@ -4479,6 +4625,7 @@ module Aws::Resiliencehub
     #   <p>The version of the application.</p>
     #   @return [String]
     class RemoveDraftAppVersionResourceMappingsOutput < Struct.new(
+      nil,
       :app_arn,
       :app_version,
       keyword_init: true
@@ -4531,6 +4678,7 @@ module Aws::Resiliencehub
     #   Each tag consists of a key/value pair.</p>
     #   @return [Hash<String, String>]
     class ResiliencyPolicy < Struct.new(
+      nil,
       :policy_arn,
       :policy_name,
       :policy_description,
@@ -4560,6 +4708,7 @@ module Aws::Resiliencehub
     #         your application generated by Resilience Hub after running an assessment.</p>
     #   @return [Hash<String, Types::ScoringComponentResiliencyScore>]
     class ResiliencyScore < Struct.new(
+      nil,
       :score,
       :disruption_score,
       :component_score,
@@ -4584,6 +4733,7 @@ module Aws::Resiliencehub
     #   <p>The version of the application.</p>
     #   @return [String]
     class ResolveAppVersionResourcesInput < Struct.new(
+      nil,
       :app_arn,
       :app_version,
       keyword_init: true
@@ -4608,6 +4758,7 @@ module Aws::Resiliencehub
     #   <p>Status of the action.</p>
     #   @return [String]
     class ResolveAppVersionResourcesOutput < Struct.new(
+      nil,
       :app_arn,
       :app_version,
       :resolution_id,
@@ -4638,6 +4789,7 @@ module Aws::Resiliencehub
     #   <p>Indicates if the resource was added or removed.</p>
     #   @return [String]
     class ResourceDrift < Struct.new(
+      nil,
       :app_arn,
       :app_version,
       :reference_id,
@@ -4659,6 +4811,7 @@ module Aws::Resiliencehub
     #   <p> This is the error message. </p>
     #   @return [String]
     class ResourceError < Struct.new(
+      nil,
       :logical_resource_id,
       :physical_resource_id,
       :reason,
@@ -4676,6 +4829,7 @@ module Aws::Resiliencehub
     #         list. </p>
     #   @return [Boolean]
     class ResourceErrorsDetails < Struct.new(
+      nil,
       :resource_errors,
       :has_more_errors,
       keyword_init: true
@@ -4691,6 +4845,7 @@ module Aws::Resiliencehub
     #   <p>Type of the drifted resource.</p>
     #   @return [String]
     class ResourceIdentifier < Struct.new(
+      nil,
       :logical_resource_id,
       :resource_type,
       keyword_init: true
@@ -4728,6 +4883,7 @@ module Aws::Resiliencehub
     #            </note>
     #   @return [String]
     class ResourceMapping < Struct.new(
+      nil,
       :resource_name,
       :logical_stack_name,
       :app_registry_app_name,
@@ -4751,6 +4907,7 @@ module Aws::Resiliencehub
     #   <p>The type of the resource that the exception applies to.</p>
     #   @return [String]
     class ResourceNotFoundException < Struct.new(
+      nil,
       :message,
       :resource_id,
       :resource_type,
@@ -4767,6 +4924,7 @@ module Aws::Resiliencehub
     #   <p>The prefix for the Amazon S3 bucket.</p>
     #   @return [String]
     class S3Location < Struct.new(
+      nil,
       :bucket,
       :prefix,
       keyword_init: true
@@ -4801,6 +4959,7 @@ module Aws::Resiliencehub
     #         it indicates that 7 Amazon CloudWatch alarms are excluded from the assessment.</p>
     #   @return [Integer]
     class ScoringComponentResiliencyScore < Struct.new(
+      nil,
       :score,
       :possible_score,
       :outstanding_count,
@@ -4823,6 +4982,7 @@ module Aws::Resiliencehub
     # @!attribute message
     #   @return [String]
     class ServiceQuotaExceededException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -4858,6 +5018,7 @@ module Aws::Resiliencehub
     #   <p>Status of the recommended standard operating procedure.</p>
     #   @return [String]
     class SopRecommendation < Struct.new(
+      nil,
       :service_type,
       :app_component_name,
       :description,
@@ -4880,6 +5041,7 @@ module Aws::Resiliencehub
     #   <p>Indicates the name or identifier of the field or attribute that should be used as the basis for sorting the metrics.</p>
     #   @return [Boolean]
     class Sort < Struct.new(
+      nil,
       :field,
       :ascending,
       keyword_init: true
@@ -4909,6 +5071,7 @@ module Aws::Resiliencehub
     #   Each tag consists of a key/value pair.</p>
     #   @return [Hash<String, String>]
     class StartAppAssessmentInput < Struct.new(
+      nil,
       :app_arn,
       :app_version,
       :assessment_name,
@@ -4923,6 +5086,7 @@ module Aws::Resiliencehub
     #   <p>The assessment created.</p>
     #   @return [Types::AppAssessment]
     class StartAppAssessmentOutput < Struct.new(
+      nil,
       :assessment,
       keyword_init: true
     )
@@ -4937,6 +5101,7 @@ module Aws::Resiliencehub
     #   You should not reuse the same client token for other API requests.</p>
     #   @return [String]
     class StartMetricsExportRequest < Struct.new(
+      nil,
       :bucket_name,
       :client_token,
       keyword_init: true
@@ -4951,6 +5116,7 @@ module Aws::Resiliencehub
     #   <p>Indicates the status of the metrics export task.</p>
     #   @return [String]
     class StartMetricsExportResponse < Struct.new(
+      nil,
       :metrics_export_id,
       :status,
       keyword_init: true
@@ -4966,6 +5132,7 @@ module Aws::Resiliencehub
     #                       <i>Amazon Web Services General Reference</i> guide.</p>
     #   @return [String]
     class StartResourceGroupingRecommendationTaskRequest < Struct.new(
+      nil,
       :app_arn,
       keyword_init: true
     )
@@ -4989,6 +5156,7 @@ module Aws::Resiliencehub
     #   <p>Error that occurred while executing a grouping recommendation task.</p>
     #   @return [String]
     class StartResourceGroupingRecommendationTaskResponse < Struct.new(
+      nil,
       :app_arn,
       :grouping_id,
       :status,
@@ -5005,6 +5173,7 @@ module Aws::Resiliencehub
     #   <p>The tags to assign to the resource. Each tag consists of a key/value pair.</p>
     #   @return [Hash<String, String>]
     class TagResourceInput < Struct.new(
+      nil,
       :resource_arn,
       :tags,
       keyword_init: true
@@ -5013,6 +5182,7 @@ module Aws::Resiliencehub
     end
 
     class TagResourceOutput < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -5023,6 +5193,7 @@ module Aws::Resiliencehub
     #   <p> The URL of the Terraform s3 state file you need to import. </p>
     #   @return [String]
     class TerraformSource < Struct.new(
+      nil,
       :s3_state_file_url,
       keyword_init: true
     )
@@ -5071,6 +5242,7 @@ module Aws::Resiliencehub
     #   <p>Status of the recommended test.</p>
     #   @return [String]
     class TestRecommendation < Struct.new(
+      nil,
       :recommendation_id,
       :reference_id,
       :app_component_id,
@@ -5096,6 +5268,7 @@ module Aws::Resiliencehub
     #   <p>The number of seconds to wait before retrying the operation.</p>
     #   @return [Integer]
     class ThrottlingException < Struct.new(
+      nil,
       :message,
       :retry_after_seconds,
       keyword_init: true
@@ -5117,6 +5290,7 @@ module Aws::Resiliencehub
     #   <p>The status of the unsupported resource.</p>
     #   @return [String]
     class UnsupportedResource < Struct.new(
+      nil,
       :logical_resource_id,
       :physical_resource_id,
       :resource_type,
@@ -5133,6 +5307,7 @@ module Aws::Resiliencehub
     #   <p>The keys of the tags you want to remove.</p>
     #   @return [Array<String>]
     class UntagResourceInput < Struct.new(
+      nil,
       :resource_arn,
       :tag_keys,
       keyword_init: true
@@ -5141,6 +5316,7 @@ module Aws::Resiliencehub
     end
 
     class UntagResourceOutput < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -5180,6 +5356,7 @@ module Aws::Resiliencehub
     #         events.</p>
     #   @return [Array<Types::EventSubscription>]
     class UpdateAppInput < Struct.new(
+      nil,
       :app_arn,
       :description,
       :policy_arn,
@@ -5197,6 +5374,7 @@ module Aws::Resiliencehub
     #         creation time, description, resiliency score, and more.</p>
     #   @return [Types::App]
     class UpdateAppOutput < Struct.new(
+      nil,
       :app,
       keyword_init: true
     )
@@ -5223,6 +5401,7 @@ module Aws::Resiliencehub
     #   <p>Currently, there is no supported additional information for Application Components.</p>
     #   @return [Hash<String, Array<String>>]
     class UpdateAppVersionAppComponentInput < Struct.new(
+      nil,
       :app_arn,
       :id,
       :name,
@@ -5247,6 +5426,7 @@ module Aws::Resiliencehub
     #   <p>List of Application Components that belong to this resource.</p>
     #   @return [Types::AppComponent]
     class UpdateAppVersionAppComponentOutput < Struct.new(
+      nil,
       :app_arn,
       :app_version,
       :app_component,
@@ -5273,6 +5453,7 @@ module Aws::Resiliencehub
     #            </note>
     #   @return [Hash<String, Array<String>>]
     class UpdateAppVersionInput < Struct.new(
+      nil,
       :app_arn,
       :additional_info,
       keyword_init: true
@@ -5297,6 +5478,7 @@ module Aws::Resiliencehub
     #            </note>
     #   @return [Hash<String, Array<String>>]
     class UpdateAppVersionOutput < Struct.new(
+      nil,
       :app_arn,
       :app_version,
       :additional_info,
@@ -5344,6 +5526,7 @@ module Aws::Resiliencehub
     #            </note>
     #   @return [Boolean]
     class UpdateAppVersionResourceInput < Struct.new(
+      nil,
       :app_arn,
       :resource_name,
       :logical_resource_id,
@@ -5373,6 +5556,7 @@ module Aws::Resiliencehub
     #   <p>Defines a physical resource. A physical resource is a resource that exists in your account. It can be identified using an Amazon Resource Name (ARN) or a Resilience Hub-native identifier.</p>
     #   @return [Types::PhysicalResource]
     class UpdateAppVersionResourceOutput < Struct.new(
+      nil,
       :app_arn,
       :app_version,
       :physical_resource,
@@ -5392,6 +5576,7 @@ module Aws::Resiliencehub
     #   <p>Identifier of the target Amazon Web Services Region.</p>
     #   @return [String]
     class UpdateRecommendationStatusItem < Struct.new(
+      nil,
       :resource_id,
       :target_account_id,
       :target_region,
@@ -5424,6 +5609,7 @@ module Aws::Resiliencehub
     #   <p>Indicates the reason for excluding an operational recommendation.</p>
     #   @return [String]
     class UpdateRecommendationStatusRequestEntry < Struct.new(
+      nil,
       :entry_id,
       :reference_id,
       :item,
@@ -5459,6 +5645,7 @@ module Aws::Resiliencehub
     #   <p>Resiliency policy to be created, including the recovery time objective (RTO) and recovery point objective (RPO) in seconds.</p>
     #   @return [Hash<String, Types::FailurePolicy>]
     class UpdateResiliencyPolicyInput < Struct.new(
+      nil,
       :policy_arn,
       :policy_name,
       :policy_description,
@@ -5475,6 +5662,7 @@ module Aws::Resiliencehub
     #         (RTO) and recovery point objective (RPO) in seconds.</p>
     #   @return [Types::ResiliencyPolicy]
     class UpdateResiliencyPolicyOutput < Struct.new(
+      nil,
       :policy,
       keyword_init: true
     )
@@ -5485,6 +5673,7 @@ module Aws::Resiliencehub
     # @!attribute message
     #   @return [String]
     class ValidationException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )

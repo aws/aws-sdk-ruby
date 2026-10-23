@@ -11,6 +11,7 @@ module Aws::VoiceID
     # @!attribute message
     #   @return [String]
     class AccessDeniedException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -27,6 +28,7 @@ module Aws::VoiceID
     #   <p>The identifier of the fraudster to be associated with the watchlist.</p>
     #   @return [String]
     class AssociateFraudsterInput < Struct.new(
+      nil,
       :domain_id,
       :watchlist_id,
       :fraudster_id,
@@ -39,6 +41,7 @@ module Aws::VoiceID
     #   <p>Contains all the information about a fraudster.</p>
     #   @return [Types::Fraudster]
     class AssociateFraudsterOutput < Struct.new(
+      nil,
       :fraudster,
       keyword_init: true
     )
@@ -50,6 +53,7 @@ module Aws::VoiceID
     #   <p>The minimum threshold needed to successfully authenticate a speaker.</p>
     #   @return [Integer]
     class AuthenticationConfiguration < Struct.new(
+      nil,
       :acceptance_threshold,
       keyword_init: true
     )
@@ -95,6 +99,7 @@ module Aws::VoiceID
     #               result.</p>
     #   @return [Types::AuthenticationConfiguration]
     class AuthenticationResult < Struct.new(
+      nil,
       :authentication_result_id,
       :audio_aggregation_started_at,
       :audio_aggregation_ended_at,
@@ -148,6 +153,7 @@ module Aws::VoiceID
     #            </ul>
     #   @return [String]
     class ConflictException < Struct.new(
+      nil,
       :message,
       :conflict_type,
       keyword_init: true
@@ -176,6 +182,7 @@ module Aws::VoiceID
     #   <p>A list of tags you want added to the domain.</p>
     #   @return [Array<Types::Tag>]
     class CreateDomainInput < Struct.new(
+      nil,
       :name,
       :description,
       :server_side_encryption_configuration,
@@ -190,6 +197,7 @@ module Aws::VoiceID
     #   <p>Information about the newly created domain.</p>
     #   @return [Types::Domain]
     class CreateDomainOutput < Struct.new(
+      nil,
       :domain,
       keyword_init: true
     )
@@ -212,6 +220,7 @@ module Aws::VoiceID
     #               <a href="https://aws.amazon.com/builders-library/making-retries-safe-with-idempotent-APIs/">Making retries safe with idempotent APIs</a>.</p>
     #   @return [String]
     class CreateWatchlistInput < Struct.new(
+      nil,
       :domain_id,
       :name,
       :description,
@@ -225,6 +234,7 @@ module Aws::VoiceID
     #   <p>Information about the newly created watchlist.</p>
     #   @return [Types::Watchlist]
     class CreateWatchlistOutput < Struct.new(
+      nil,
       :watchlist,
       keyword_init: true
     )
@@ -235,6 +245,7 @@ module Aws::VoiceID
     #   <p>The identifier of the domain you want to delete.</p>
     #   @return [String]
     class DeleteDomainInput < Struct.new(
+      nil,
       :domain_id,
       keyword_init: true
     )
@@ -248,6 +259,7 @@ module Aws::VoiceID
     #   <p>The identifier of the fraudster you want to delete.</p>
     #   @return [String]
     class DeleteFraudsterInput < Struct.new(
+      nil,
       :domain_id,
       :fraudster_id,
       keyword_init: true
@@ -262,6 +274,7 @@ module Aws::VoiceID
     #   <p>The identifier of the speaker you want to delete.</p>
     #   @return [String]
     class DeleteSpeakerInput < Struct.new(
+      nil,
       :domain_id,
       :speaker_id,
       keyword_init: true
@@ -276,6 +289,7 @@ module Aws::VoiceID
     #   <p>The identifier of the watchlist to be deleted.</p>
     #   @return [String]
     class DeleteWatchlistInput < Struct.new(
+      nil,
       :domain_id,
       :watchlist_id,
       keyword_init: true
@@ -287,6 +301,7 @@ module Aws::VoiceID
     #   <p>The identifier of the domain that you are describing.</p>
     #   @return [String]
     class DescribeDomainInput < Struct.new(
+      nil,
       :domain_id,
       keyword_init: true
     )
@@ -297,6 +312,7 @@ module Aws::VoiceID
     #   <p>Information about the specified domain.</p>
     #   @return [Types::Domain]
     class DescribeDomainOutput < Struct.new(
+      nil,
       :domain,
       keyword_init: true
     )
@@ -310,6 +326,7 @@ module Aws::VoiceID
     #   <p>The identifier of the fraudster you are describing.</p>
     #   @return [String]
     class DescribeFraudsterInput < Struct.new(
+      nil,
       :domain_id,
       :fraudster_id,
       keyword_init: true
@@ -321,6 +338,7 @@ module Aws::VoiceID
     #   <p>Information about the specified fraudster.</p>
     #   @return [Types::Fraudster]
     class DescribeFraudsterOutput < Struct.new(
+      nil,
       :fraudster,
       keyword_init: true
     )
@@ -334,6 +352,7 @@ module Aws::VoiceID
     #   <p>The identifier of the fraudster registration job you are describing.</p>
     #   @return [String]
     class DescribeFraudsterRegistrationJobInput < Struct.new(
+      nil,
       :domain_id,
       :job_id,
       keyword_init: true
@@ -345,6 +364,7 @@ module Aws::VoiceID
     #   <p>Contains details about the specified fraudster registration job.</p>
     #   @return [Types::FraudsterRegistrationJob]
     class DescribeFraudsterRegistrationJobOutput < Struct.new(
+      nil,
       :job,
       keyword_init: true
     )
@@ -358,6 +378,7 @@ module Aws::VoiceID
     #   <p>The identifier of the speaker enrollment job you are describing.</p>
     #   @return [String]
     class DescribeSpeakerEnrollmentJobInput < Struct.new(
+      nil,
       :domain_id,
       :job_id,
       keyword_init: true
@@ -369,6 +390,7 @@ module Aws::VoiceID
     #   <p>Contains details about the specified speaker enrollment job.</p>
     #   @return [Types::SpeakerEnrollmentJob]
     class DescribeSpeakerEnrollmentJobOutput < Struct.new(
+      nil,
       :job,
       keyword_init: true
     )
@@ -382,6 +404,7 @@ module Aws::VoiceID
     #   <p>The identifier of the speaker you are describing.</p>
     #   @return [String]
     class DescribeSpeakerInput < Struct.new(
+      nil,
       :domain_id,
       :speaker_id,
       keyword_init: true
@@ -393,6 +416,7 @@ module Aws::VoiceID
     #   <p>Information about the specified speaker.</p>
     #   @return [Types::Speaker]
     class DescribeSpeakerOutput < Struct.new(
+      nil,
       :speaker,
       keyword_init: true
     )
@@ -406,6 +430,7 @@ module Aws::VoiceID
     #   <p>The identifier of the watchlist that you are describing.</p>
     #   @return [String]
     class DescribeWatchlistInput < Struct.new(
+      nil,
       :domain_id,
       :watchlist_id,
       keyword_init: true
@@ -417,6 +442,7 @@ module Aws::VoiceID
     #   <p>Information about the specified watchlist.</p>
     #   @return [Types::Watchlist]
     class DescribeWatchlistOutput < Struct.new(
+      nil,
       :watchlist,
       keyword_init: true
     )
@@ -433,6 +459,7 @@ module Aws::VoiceID
     #   <p>The identifier of the fraudster to be disassociated from the watchlist.</p>
     #   @return [String]
     class DisassociateFraudsterInput < Struct.new(
+      nil,
       :domain_id,
       :watchlist_id,
       :fraudster_id,
@@ -445,6 +472,7 @@ module Aws::VoiceID
     #   <p>Contains all the information about a fraudster.</p>
     #   @return [Types::Fraudster]
     class DisassociateFraudsterOutput < Struct.new(
+      nil,
       :fraudster,
       keyword_init: true
     )
@@ -486,6 +514,7 @@ module Aws::VoiceID
     #   <p>The watchlist details of a domain. Contains the default watchlist ID of the domain.</p>
     #   @return [Types::WatchlistDetails]
     class Domain < Struct.new(
+      nil,
       :domain_id,
       :arn,
       :name,
@@ -536,6 +565,7 @@ module Aws::VoiceID
     #   <p>Provides information about <code>watchlistDetails</code> and <code>DefaultWatchlistID</code>. </p>
     #   @return [Types::WatchlistDetails]
     class DomainSummary < Struct.new(
+      nil,
       :domain_id,
       :arn,
       :name,
@@ -563,6 +593,7 @@ module Aws::VoiceID
     #   <p>The fraud detection configuration to use for the speaker enrollment job.</p>
     #   @return [Types::EnrollmentJobFraudDetectionConfig]
     class EnrollmentConfig < Struct.new(
+      nil,
       :existing_enrollment_action,
       :fraud_detection_config,
       keyword_init: true
@@ -587,6 +618,7 @@ module Aws::VoiceID
     #           </p>
     #   @return [Array<String>]
     class EnrollmentJobFraudDetectionConfig < Struct.new(
+      nil,
       :fraud_detection_action,
       :risk_threshold,
       :watchlist_ids,
@@ -603,6 +635,7 @@ module Aws::VoiceID
     #               Voice ID integration, this is the Contact-Id.</p>
     #   @return [String]
     class EvaluateSessionInput < Struct.new(
+      nil,
       :domain_id,
       :session_name_or_id,
       keyword_init: true
@@ -639,6 +672,7 @@ module Aws::VoiceID
     #               and risk score.</p>
     #   @return [Types::FraudDetectionResult]
     class EvaluateSessionOutput < Struct.new(
+      nil,
       :domain_id,
       :session_id,
       :session_name,
@@ -658,6 +692,7 @@ module Aws::VoiceID
     #   <p>A description of the error that caused the batch job failure.</p>
     #   @return [String]
     class FailureDetails < Struct.new(
+      nil,
       :status_code,
       :message,
       keyword_init: true
@@ -677,6 +712,7 @@ module Aws::VoiceID
     #           </p>
     #   @return [String]
     class FraudDetectionConfiguration < Struct.new(
+      nil,
       :risk_threshold,
       :watchlist_id,
       keyword_init: true
@@ -719,6 +755,7 @@ module Aws::VoiceID
     #               KnownFraudsterRisk and VoiceSpoofingRisk details.</p>
     #   @return [Types::FraudRiskDetails]
     class FraudDetectionResult < Struct.new(
+      nil,
       :fraud_detection_result_id,
       :audio_aggregation_started_at,
       :audio_aggregation_ended_at,
@@ -740,6 +777,7 @@ module Aws::VoiceID
     #   <p>The details resulting from 'Voice Spoofing Risk' analysis of the speaker.</p>
     #   @return [Types::VoiceSpoofingRisk]
     class FraudRiskDetails < Struct.new(
+      nil,
       :known_fraudster_risk,
       :voice_spoofing_risk,
       keyword_init: true
@@ -761,6 +799,7 @@ module Aws::VoiceID
     #   <p>The identifier of the watchlists the fraudster is a part of.</p>
     #   @return [Array<String>]
     class Fraudster < Struct.new(
+      nil,
       :domain_id,
       :generated_fraudster_id,
       :created_at,
@@ -819,6 +858,7 @@ module Aws::VoiceID
     #               file.</p>
     #   @return [Types::JobProgress]
     class FraudsterRegistrationJob < Struct.new(
+      nil,
       :job_name,
       :job_id,
       :job_status,
@@ -867,6 +907,7 @@ module Aws::VoiceID
     #               file.</p>
     #   @return [Types::JobProgress]
     class FraudsterRegistrationJobSummary < Struct.new(
+      nil,
       :job_name,
       :job_id,
       :job_status,
@@ -895,6 +936,7 @@ module Aws::VoiceID
     #   <p>The identifier of the watchlists the fraudster is a part of.</p>
     #   @return [Array<String>]
     class FraudsterSummary < Struct.new(
+      nil,
       :domain_id,
       :generated_fraudster_id,
       :created_at,
@@ -910,6 +952,7 @@ module Aws::VoiceID
     #               enrollment or registration job requests.</p>
     #   @return [String]
     class InputDataConfig < Struct.new(
+      nil,
       :s3_uri,
       keyword_init: true
     )
@@ -920,6 +963,7 @@ module Aws::VoiceID
     # @!attribute message
     #   @return [String]
     class InternalServerException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -932,6 +976,7 @@ module Aws::VoiceID
     #               input file.</p>
     #   @return [Integer]
     class JobProgress < Struct.new(
+      nil,
       :percent_complete,
       keyword_init: true
     )
@@ -949,6 +994,7 @@ module Aws::VoiceID
     #               non-zero RiskScore, this value is <code>null</code>.</p>
     #   @return [String]
     class KnownFraudsterRisk < Struct.new(
+      nil,
       :risk_score,
       :generated_fraudster_id,
       keyword_init: true
@@ -967,6 +1013,7 @@ module Aws::VoiceID
     #               unchanged. Each pagination token expires after 24 hours.</p>
     #   @return [String]
     class ListDomainsInput < Struct.new(
+      nil,
       :max_results,
       :next_token,
       keyword_init: true
@@ -984,6 +1031,7 @@ module Aws::VoiceID
     #               unchanged. Each pagination token expires after 24 hours.</p>
     #   @return [String]
     class ListDomainsOutput < Struct.new(
+      nil,
       :domain_summaries,
       :next_token,
       keyword_init: true
@@ -1008,6 +1056,7 @@ module Aws::VoiceID
     #               unchanged. Each pagination token expires after 24 hours.</p>
     #   @return [String]
     class ListFraudsterRegistrationJobsInput < Struct.new(
+      nil,
       :domain_id,
       :job_status,
       :max_results,
@@ -1027,6 +1076,7 @@ module Aws::VoiceID
     #               unchanged. Each pagination token expires after 24 hours.</p>
     #   @return [String]
     class ListFraudsterRegistrationJobsOutput < Struct.new(
+      nil,
       :job_summaries,
       :next_token,
       keyword_init: true
@@ -1052,6 +1102,7 @@ module Aws::VoiceID
     #           </p>
     #   @return [String]
     class ListFraudstersInput < Struct.new(
+      nil,
       :domain_id,
       :watchlist_id,
       :max_results,
@@ -1073,6 +1124,7 @@ module Aws::VoiceID
     #           </p>
     #   @return [String]
     class ListFraudstersOutput < Struct.new(
+      nil,
       :fraudster_summaries,
       :next_token,
       keyword_init: true
@@ -1097,6 +1149,7 @@ module Aws::VoiceID
     #               unchanged. Each pagination token expires after 24 hours.</p>
     #   @return [String]
     class ListSpeakerEnrollmentJobsInput < Struct.new(
+      nil,
       :domain_id,
       :job_status,
       :max_results,
@@ -1116,6 +1169,7 @@ module Aws::VoiceID
     #               unchanged. Each pagination token expires after 24 hours. </p>
     #   @return [String]
     class ListSpeakerEnrollmentJobsOutput < Struct.new(
+      nil,
       :job_summaries,
       :next_token,
       keyword_init: true
@@ -1137,6 +1191,7 @@ module Aws::VoiceID
     #               unchanged. Each pagination token expires after 24 hours.</p>
     #   @return [String]
     class ListSpeakersInput < Struct.new(
+      nil,
       :domain_id,
       :max_results,
       :next_token,
@@ -1156,6 +1211,7 @@ module Aws::VoiceID
     #               unchanged. Each pagination token expires after 24 hours. </p>
     #   @return [String]
     class ListSpeakersOutput < Struct.new(
+      nil,
       :speaker_summaries,
       :next_token,
       keyword_init: true
@@ -1168,6 +1224,7 @@ module Aws::VoiceID
     #               the tags.</p>
     #   @return [String]
     class ListTagsForResourceInput < Struct.new(
+      nil,
       :resource_arn,
       keyword_init: true
     )
@@ -1178,6 +1235,7 @@ module Aws::VoiceID
     #   <p>The list of tags associated with the specified resource.</p>
     #   @return [Array<Types::Tag>]
     class ListTagsForResourceOutput < Struct.new(
+      nil,
       :tags,
       keyword_init: true
     )
@@ -1200,6 +1258,7 @@ module Aws::VoiceID
     #           </p>
     #   @return [String]
     class ListWatchlistsInput < Struct.new(
+      nil,
       :domain_id,
       :max_results,
       :next_token,
@@ -1220,6 +1279,7 @@ module Aws::VoiceID
     #           </p>
     #   @return [String]
     class ListWatchlistsOutput < Struct.new(
+      nil,
       :watchlist_summaries,
       :next_token,
       keyword_init: true
@@ -1234,6 +1294,7 @@ module Aws::VoiceID
     #   <p>The identifier of the speaker you want opted-out.</p>
     #   @return [String]
     class OptOutSpeakerInput < Struct.new(
+      nil,
       :domain_id,
       :speaker_id,
       keyword_init: true
@@ -1245,6 +1306,7 @@ module Aws::VoiceID
     #   <p>Details about the opted-out speaker.</p>
     #   @return [Types::Speaker]
     class OptOutSpeakerOutput < Struct.new(
+      nil,
       :speaker,
       keyword_init: true
     )
@@ -1265,6 +1327,7 @@ module Aws::VoiceID
     #               </p>
     #   @return [String]
     class OutputDataConfig < Struct.new(
+      nil,
       :s3_uri,
       :kms_key_id,
       keyword_init: true
@@ -1288,6 +1351,7 @@ module Aws::VoiceID
     #           </p>
     #   @return [Array<String>]
     class RegistrationConfig < Struct.new(
+      nil,
       :duplicate_registration_action,
       :fraudster_similarity_threshold,
       :watchlist_ids,
@@ -1306,6 +1370,7 @@ module Aws::VoiceID
     #                   <code>FRAUDSTER</code>, <code>SESSION</code> and <code>SPEAKER</code>.</p>
     #   @return [String]
     class ResourceNotFoundException < Struct.new(
+      nil,
       :message,
       :resource_type,
       keyword_init: true
@@ -1320,6 +1385,7 @@ module Aws::VoiceID
     #               Voice ID. Voice ID doesn't support asymmetric customer managed keys. </p>
     #   @return [String]
     class ServerSideEncryptionConfiguration < Struct.new(
+      nil,
       :kms_key_id,
       keyword_init: true
     )
@@ -1345,6 +1411,7 @@ module Aws::VoiceID
     #               message explains the cause of the failure.</p>
     #   @return [String]
     class ServerSideEncryptionUpdateDetails < Struct.new(
+      nil,
       :old_kms_key_id,
       :update_status,
       :message,
@@ -1357,6 +1424,7 @@ module Aws::VoiceID
     # @!attribute message
     #   @return [String]
     class ServiceQuotaExceededException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -1387,6 +1455,7 @@ module Aws::VoiceID
     #               successful authentication. This timestamp is accurate to one hour.</p>
     #   @return [Time]
     class Speaker < Struct.new(
+      nil,
       :domain_id,
       :customer_speaker_id,
       :generated_speaker_id,
@@ -1447,6 +1516,7 @@ module Aws::VoiceID
     #               registration requests listed in the input file.</p>
     #   @return [Types::JobProgress]
     class SpeakerEnrollmentJob < Struct.new(
+      nil,
       :job_name,
       :job_id,
       :job_status,
@@ -1495,6 +1565,7 @@ module Aws::VoiceID
     #               enrollment requests listed in the input file.</p>
     #   @return [Types::JobProgress]
     class SpeakerEnrollmentJobSummary < Struct.new(
+      nil,
       :job_name,
       :job_id,
       :job_status,
@@ -1532,6 +1603,7 @@ module Aws::VoiceID
     #               successful authentication. This timestamp is accurate to one hour.</p>
     #   @return [Time]
     class SpeakerSummary < Struct.new(
+      nil,
       :domain_id,
       :customer_speaker_id,
       :generated_speaker_id,
@@ -1579,6 +1651,7 @@ module Aws::VoiceID
     #               file.</p>
     #   @return [Types::OutputDataConfig]
     class StartFraudsterRegistrationJobInput < Struct.new(
+      nil,
       :client_token,
       :job_name,
       :domain_id,
@@ -1595,6 +1668,7 @@ module Aws::VoiceID
     #   <p>Details about the started fraudster registration job.</p>
     #   @return [Types::FraudsterRegistrationJob]
     class StartFraudsterRegistrationJobOutput < Struct.new(
+      nil,
       :job,
       keyword_init: true
     )
@@ -1634,6 +1708,7 @@ module Aws::VoiceID
     #               file.</p>
     #   @return [Types::OutputDataConfig]
     class StartSpeakerEnrollmentJobInput < Struct.new(
+      nil,
       :client_token,
       :job_name,
       :domain_id,
@@ -1650,6 +1725,7 @@ module Aws::VoiceID
     #   <p>Details about the started speaker enrollment job.</p>
     #   @return [Types::SpeakerEnrollmentJob]
     class StartSpeakerEnrollmentJobOutput < Struct.new(
+      nil,
       :job,
       keyword_init: true
     )
@@ -1667,6 +1743,7 @@ module Aws::VoiceID
     #               For example, in the tag 'Department':'Sales', the value is 'Sales'. </p>
     #   @return [String]
     class Tag < Struct.new(
+      nil,
       :key,
       :value,
       keyword_init: true
@@ -1681,6 +1758,7 @@ module Aws::VoiceID
     #   <p>The list of tags to assign to the specified resource.</p>
     #   @return [Array<Types::Tag>]
     class TagResourceInput < Struct.new(
+      nil,
       :resource_arn,
       :tags,
       keyword_init: true
@@ -1689,6 +1767,7 @@ module Aws::VoiceID
     end
 
     class TagResourceOutput < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1701,6 +1780,7 @@ module Aws::VoiceID
     # @!attribute message
     #   @return [String]
     class ThrottlingException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -1715,6 +1795,7 @@ module Aws::VoiceID
     #   <p>The list of tag keys you want to remove from the specified resource.</p>
     #   @return [Array<String>]
     class UntagResourceInput < Struct.new(
+      nil,
       :resource_arn,
       :tag_keys,
       keyword_init: true
@@ -1723,6 +1804,7 @@ module Aws::VoiceID
     end
 
     class UntagResourceOutput < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1747,6 +1829,7 @@ module Aws::VoiceID
     #               process.</p>
     #   @return [Types::ServerSideEncryptionConfiguration]
     class UpdateDomainInput < Struct.new(
+      nil,
       :domain_id,
       :name,
       :description,
@@ -1760,6 +1843,7 @@ module Aws::VoiceID
     #   <p>Details about the updated domain</p>
     #   @return [Types::Domain]
     class UpdateDomainOutput < Struct.new(
+      nil,
       :domain,
       keyword_init: true
     )
@@ -1779,6 +1863,7 @@ module Aws::VoiceID
     #   <p>A brief description about this watchlist.</p>
     #   @return [String]
     class UpdateWatchlistInput < Struct.new(
+      nil,
       :domain_id,
       :watchlist_id,
       :name,
@@ -1792,6 +1877,7 @@ module Aws::VoiceID
     #   <p>Details about the updated watchlist.</p>
     #   @return [Types::Watchlist]
     class UpdateWatchlistOutput < Struct.new(
+      nil,
       :watchlist,
       keyword_init: true
     )
@@ -1803,6 +1889,7 @@ module Aws::VoiceID
     # @!attribute message
     #   @return [String]
     class ValidationException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -1814,6 +1901,7 @@ module Aws::VoiceID
     #   <p>The score indicating the likelihood of speaker’s voice being spoofed.</p>
     #   @return [Integer]
     class VoiceSpoofingRisk < Struct.new(
+      nil,
       :risk_score,
       keyword_init: true
     )
@@ -1843,6 +1931,7 @@ module Aws::VoiceID
     #   <p>The timestamp of when the watchlist was updated.</p>
     #   @return [Time]
     class Watchlist < Struct.new(
+      nil,
       :domain_id,
       :watchlist_id,
       :name,
@@ -1865,6 +1954,7 @@ module Aws::VoiceID
     #   <p>The identifier of the default watchlist.</p>
     #   @return [String]
     class WatchlistDetails < Struct.new(
+      nil,
       :default_watchlist_id,
       keyword_init: true
     )
@@ -1894,6 +1984,7 @@ module Aws::VoiceID
     #   <p>The timestamp of when the watchlist was last updated.</p>
     #   @return [Time]
     class WatchlistSummary < Struct.new(
+      nil,
       :domain_id,
       :watchlist_id,
       :name,

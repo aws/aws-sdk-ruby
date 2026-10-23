@@ -10,6 +10,7 @@ module Aws::GeoPlaces
     # @!attribute message
     #   @return [String]
     class AccessDeniedException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -21,6 +22,7 @@ module Aws::GeoPlaces
     #   <p>The position, in longitude and latitude.</p>
     #   @return [Array<Float>]
     class AccessPoint < Struct.new(
+      nil,
       :position,
       keyword_init: true
     )
@@ -35,6 +37,7 @@ module Aws::GeoPlaces
     #   <p>Categories of results that results must belong too.</p>
     #   @return [Array<Types::Category>]
     class AccessRestriction < Struct.new(
+      nil,
       :restricted,
       :categories,
       keyword_init: true
@@ -92,6 +95,7 @@ module Aws::GeoPlaces
     #   <p>Components that correspond to secondary identifiers on an Address. Secondary address components include information such as Suite or Unit Number, Building, or Floor.</p>
     #   @return [Array<Types::SecondaryAddressComponent>]
     class Address < Struct.new(
+      nil,
       :label,
       :country,
       :region,
@@ -154,6 +158,7 @@ module Aws::GeoPlaces
     #   <p>Match scores for the secondary address components in the result.</p>
     #   @return [Array<Types::SecondaryAddressComponentMatchScore>]
     class AddressComponentMatchScores < Struct.new(
+      nil,
       :country,
       :region,
       :sub_region,
@@ -216,6 +221,7 @@ module Aws::GeoPlaces
     #   <p>How to pronounce the name of the street results should be present in.</p>
     #   @return [Array<Types::PhonemeTranscription>]
     class AddressComponentPhonemes < Struct.new(
+      nil,
       :country,
       :region,
       :sub_region,
@@ -274,6 +280,7 @@ module Aws::GeoPlaces
     #   <p>The name of the building at the address.</p>
     #   @return [Array<Types::Highlight>]
     class AutocompleteAddressHighlights < Struct.new(
+      nil,
       :label,
       :country,
       :region,
@@ -307,6 +314,7 @@ module Aws::GeoPlaces
     #   <p>The included place types.</p>
     #   @return [Array<String>]
     class AutocompleteFilter < Struct.new(
+      nil,
       :bounding_box,
       :circle,
       :include_countries,
@@ -324,6 +332,7 @@ module Aws::GeoPlaces
     #   <p>Describes how part of the result address match the input query.</p>
     #   @return [Types::AutocompleteAddressHighlights]
     class AutocompleteHighlights < Struct.new(
+      nil,
       :title,
       :address,
       keyword_init: true
@@ -362,6 +371,7 @@ module Aws::GeoPlaces
     #   <p>Optional: The API key to be used for authorization. Either an API key or valid SigV4 signature must be provided when making a request.</p>
     #   @return [String]
     class AutocompleteRequest < Struct.new(
+      nil,
       :query_text,
       :max_results,
       :bias_position,
@@ -384,6 +394,7 @@ module Aws::GeoPlaces
     #   <p>List of places or results returned for a query. </p>
     #   @return [Array<Types::AutocompleteResultItem>]
     class AutocompleteResponse < Struct.new(
+      nil,
       :pricing_bucket,
       :result_items,
       keyword_init: true
@@ -417,6 +428,7 @@ module Aws::GeoPlaces
     #   <p>Indicates the starting and ending index of the place in the text query that match the found title. </p>
     #   @return [Types::AutocompleteHighlights]
     class AutocompleteResultItem < Struct.new(
+      nil,
       :place_id,
       :place_type,
       :title,
@@ -443,6 +455,7 @@ module Aws::GeoPlaces
     #   <p>The Business Chain Id.</p>
     #   @return [String]
     class BusinessChain < Struct.new(
+      nil,
       :name,
       :id,
       keyword_init: true
@@ -464,6 +477,7 @@ module Aws::GeoPlaces
     #   <p>Boolean which indicates if this category is the primary offered by the place.</p>
     #   @return [Boolean]
     class Category < Struct.new(
+      nil,
       :id,
       :name,
       :localized_name,
@@ -481,6 +495,7 @@ module Aws::GeoPlaces
     #   <p>The place's address.</p>
     #   @return [Types::AddressComponentMatchScores]
     class ComponentMatchScores < Struct.new(
+      nil,
       :title,
       :address,
       keyword_init: true
@@ -504,6 +519,7 @@ module Aws::GeoPlaces
     #   <p>Categories of results that results must belong too.</p>
     #   @return [Array<Types::Category>]
     class ContactDetails < Struct.new(
+      nil,
       :label,
       :value,
       :categories,
@@ -526,6 +542,7 @@ module Aws::GeoPlaces
     #   <p>List of emails for contacts of the result. </p>
     #   @return [Array<Types::ContactDetails>]
     class Contacts < Struct.new(
+      nil,
       :phones,
       :faxes,
       :websites,
@@ -546,6 +563,7 @@ module Aws::GeoPlaces
     #   <p>Name of the country.</p>
     #   @return [String]
     class Country < Struct.new(
+      nil,
       :code2,
       :code3,
       :name,
@@ -562,6 +580,7 @@ module Aws::GeoPlaces
     #   <p>Indicates the starting and ending index of the country code in the text query that match the found title.</p>
     #   @return [Array<Types::Highlight>]
     class CountryHighlights < Struct.new(
+      nil,
       :code,
       :name,
       keyword_init: true
@@ -578,6 +597,7 @@ module Aws::GeoPlaces
     #   <p>The radius, in meters, of the <code>FilterCircle</code>.</p>
     #   @return [Integer]
     class FilterCircle < Struct.new(
+      nil,
       :center,
       :radius,
       keyword_init: true
@@ -601,6 +621,7 @@ module Aws::GeoPlaces
     #   <p>Boolean which indicates if this food type is the primary offered by the place. For example, if a location serves fast food, but also dessert, he primary would likely be fast food.</p>
     #   @return [Boolean]
     class FoodType < Struct.new(
+      nil,
       :localized_name,
       :id,
       :primary,
@@ -617,6 +638,7 @@ module Aws::GeoPlaces
     #   <p>The included place types.</p>
     #   @return [Array<String>]
     class GeocodeFilter < Struct.new(
+      nil,
       :include_countries,
       :include_place_types,
       keyword_init: true
@@ -632,6 +654,7 @@ module Aws::GeoPlaces
     #   <p>The place address.</p>
     #   @return [Types::GeocodeParsedQueryAddressComponents]
     class GeocodeParsedQuery < Struct.new(
+      nil,
       :title,
       :address,
       keyword_init: true
@@ -680,6 +703,7 @@ module Aws::GeoPlaces
     #   <p>Parsed secondary address components from the provided query text.</p>
     #   @return [Array<Types::ParsedQuerySecondaryAddressComponent>]
     class GeocodeParsedQueryAddressComponents < Struct.new(
+      nil,
       :country,
       :region,
       :sub_region,
@@ -724,6 +748,7 @@ module Aws::GeoPlaces
     #   <p>An alphanumeric string included in a postal address to facilitate mail sorting, such as post code, postcode, or ZIP code for which the result should possess. </p>
     #   @return [String]
     class GeocodeQueryComponents < Struct.new(
+      nil,
       :country,
       :region,
       :sub_region,
@@ -768,6 +793,7 @@ module Aws::GeoPlaces
     #   <p>Optional: The API key to be used for authorization. Either an API key or valid SigV4 signature must be provided when making a request.</p>
     #   @return [String]
     class GeocodeRequest < Struct.new(
+      nil,
       :query_text,
       :query_components,
       :max_results,
@@ -790,6 +816,7 @@ module Aws::GeoPlaces
     #   <p>List of places or results returned for a query. </p>
     #   @return [Array<Types::GeocodeResultItem>]
     class GeocodeResponse < Struct.new(
+      nil,
       :pricing_bucket,
       :result_items,
       keyword_init: true
@@ -856,6 +883,7 @@ module Aws::GeoPlaces
     #   <p>All secondary addresses that are associated with a main address. A secondary address is one that includes secondary designators, such as a Suite or Unit Number, Building, or Floor information.</p>
     #   @return [Array<Types::RelatedPlace>]
     class GeocodeResultItem < Struct.new(
+      nil,
       :place_id,
       :place_type,
       :title,
@@ -904,6 +932,7 @@ module Aws::GeoPlaces
     #   <p>Optional: The API key to be used for authorization. Either an API key or valid SigV4 signature must be provided when making a request.</p>
     #   @return [String]
     class GetPlaceRequest < Struct.new(
+      nil,
       :place_id,
       :additional_features,
       :language,
@@ -979,6 +1008,7 @@ module Aws::GeoPlaces
     #   <p>All secondary addresses that are associated with a main address. A secondary address is one that includes secondary designators, such as a Suite or Unit Number, Building, or Floor information.</p>
     #   @return [Array<Types::RelatedPlace>]
     class GetPlaceResponse < Struct.new(
+      nil,
       :place_id,
       :place_type,
       :title,
@@ -1016,6 +1046,7 @@ module Aws::GeoPlaces
     #   <p>The highlight's value.</p>
     #   @return [String]
     class Highlight < Struct.new(
+      nil,
       :start_index,
       :end_index,
       :value,
@@ -1028,6 +1059,7 @@ module Aws::GeoPlaces
     # @!attribute message
     #   @return [String]
     class InternalServerException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -1060,6 +1092,7 @@ module Aws::GeoPlaces
     #   <p>Position of the access point represented by longitude and latitude.</p>
     #   @return [Array<Types::AccessPoint>]
     class Intersection < Struct.new(
+      nil,
       :place_id,
       :title,
       :address,
@@ -1087,6 +1120,7 @@ module Aws::GeoPlaces
     #   <p>Indicates how well the component input matches the returned. It is equal to 1 if all input tokens are recognized and matched.</p>
     #   @return [Types::ComponentMatchScores]
     class MatchScoreDetails < Struct.new(
+      nil,
       :overall,
       :components,
       keyword_init: true
@@ -1113,6 +1147,7 @@ module Aws::GeoPlaces
     #   <p>Categories of results that results must belong too.</p>
     #   @return [Array<Types::Category>]
     class OpeningHours < Struct.new(
+      nil,
       :display,
       :open_now,
       :components,
@@ -1133,6 +1168,7 @@ module Aws::GeoPlaces
     #   <p>Days or periods when the provided opening hours are in affect. </p> <p>Example: <code>FREQ:DAILY;BYDAY:MO,TU,WE,TH,SU</code> </p>
     #   @return [String]
     class OpeningHoursComponents < Struct.new(
+      nil,
       :open_time,
       :open_duration,
       :recurrence,
@@ -1155,6 +1191,7 @@ module Aws::GeoPlaces
     #   <p>The address component that the parsed query component corresponds to.</p>
     #   @return [String]
     class ParsedQueryComponent < Struct.new(
+      nil,
       :start_index,
       :end_index,
       :value,
@@ -1181,6 +1218,7 @@ module Aws::GeoPlaces
     #   <p>Secondary address designator provided in the query.</p>
     #   @return [String]
     class ParsedQuerySecondaryAddressComponent < Struct.new(
+      nil,
       :start_index,
       :end_index,
       :value,
@@ -1199,6 +1237,7 @@ module Aws::GeoPlaces
     #   <p>How to pronounce the address.</p>
     #   @return [Types::AddressComponentPhonemes]
     class PhonemeDetails < Struct.new(
+      nil,
       :title,
       :address,
       keyword_init: true
@@ -1217,6 +1256,7 @@ module Aws::GeoPlaces
     #   <p>Boolean which indicates if it the preferred pronunciation.</p>
     #   @return [Boolean]
     class PhonemeTranscription < Struct.new(
+      nil,
       :value,
       :language,
       :preferred,
@@ -1242,6 +1282,7 @@ module Aws::GeoPlaces
     #   <p>The USPS ZIP+4 Record Type Code.</p>
     #   @return [Types::UspsZipPlus4]
     class PostalCodeDetails < Struct.new(
+      nil,
       :postal_code,
       :postal_authority,
       :postal_code_type,
@@ -1266,6 +1307,7 @@ module Aws::GeoPlaces
     #   <p>End index of the parsed query.</p>
     #   @return [Integer]
     class QueryRefinement < Struct.new(
+      nil,
       :refined_term,
       :original_term,
       :start_index,
@@ -1283,6 +1325,7 @@ module Aws::GeoPlaces
     #   <p>Name for a the state, province, or region of the country. </p> <p>Example: <code>British Columbia</code>. </p>
     #   @return [String]
     class Region < Struct.new(
+      nil,
       :code,
       :name,
       keyword_init: true
@@ -1298,6 +1341,7 @@ module Aws::GeoPlaces
     #   <p>Indicates the starting and ending index of the region name in the text query that match the found title. </p>
     #   @return [Array<Types::Highlight>]
     class RegionHighlights < Struct.new(
+      nil,
       :code,
       :name,
       keyword_init: true
@@ -1325,6 +1369,7 @@ module Aws::GeoPlaces
     #   <p>Position of the access point represented by longitude and latitude.</p>
     #   @return [Array<Types::AccessPoint>]
     class RelatedPlace < Struct.new(
+      nil,
       :place_id,
       :place_type,
       :title,
@@ -1341,6 +1386,7 @@ module Aws::GeoPlaces
     #   <p>The included place types.</p>
     #   @return [Array<String>]
     class ReverseGeocodeFilter < Struct.new(
+      nil,
       :include_place_types,
       keyword_init: true
     )
@@ -1375,6 +1421,7 @@ module Aws::GeoPlaces
     #   <p>Optional: The API key to be used for authorization. Either an API key or valid SigV4 signature must be provided when making a request.</p>
     #   @return [String]
     class ReverseGeocodeRequest < Struct.new(
+      nil,
       :query_position,
       :query_radius,
       :max_results,
@@ -1396,6 +1443,7 @@ module Aws::GeoPlaces
     #   <p>List of places or results returned for a query. </p>
     #   @return [Array<Types::ReverseGeocodeResultItem>]
     class ReverseGeocodeResponse < Struct.new(
+      nil,
       :pricing_bucket,
       :result_items,
       keyword_init: true
@@ -1450,6 +1498,7 @@ module Aws::GeoPlaces
     #   <p>All Intersections that are near the provided address.</p>
     #   @return [Array<Types::Intersection>]
     class ReverseGeocodeResultItem < Struct.new(
+      nil,
       :place_id,
       :place_type,
       :title,
@@ -1501,6 +1550,7 @@ module Aws::GeoPlaces
     #   <p>Food types that results are excluded from.</p>
     #   @return [Array<String>]
     class SearchNearbyFilter < Struct.new(
+      nil,
       :bounding_box,
       :include_countries,
       :include_categories,
@@ -1545,6 +1595,7 @@ module Aws::GeoPlaces
     #   <p>Optional: The API key to be used for authorization. Either an API key or valid SigV4 signature must be provided when making a request.</p>
     #   @return [String]
     class SearchNearbyRequest < Struct.new(
+      nil,
       :query_position,
       :query_radius,
       :max_results,
@@ -1570,6 +1621,7 @@ module Aws::GeoPlaces
     #   <p>If <code>nextToken</code> is returned, there are more results available. The value of <code>nextToken</code> is a unique pagination token for each page. </p>
     #   @return [String]
     class SearchNearbyResponse < Struct.new(
+      nil,
       :pricing_bucket,
       :result_items,
       :next_token,
@@ -1634,6 +1686,7 @@ module Aws::GeoPlaces
     #   <p>How the various components of the result's address are pronounced in various languages.</p>
     #   @return [Types::PhonemeDetails]
     class SearchNearbyResultItem < Struct.new(
+      nil,
       :place_id,
       :place_type,
       :title,
@@ -1673,6 +1726,7 @@ module Aws::GeoPlaces
     #   <p> A list of countries that all results must be in. Countries are represented by either their alpha-2 or alpha-3 character codes.</p>
     #   @return [Array<String>]
     class SearchTextFilter < Struct.new(
+      nil,
       :bounding_box,
       :circle,
       :include_countries,
@@ -1715,6 +1769,7 @@ module Aws::GeoPlaces
     #   <p>Optional: The API key to be used for authorization. Either an API key or valid SigV4 signature must be provided when making a request.</p>
     #   @return [String]
     class SearchTextRequest < Struct.new(
+      nil,
       :query_text,
       :query_id,
       :max_results,
@@ -1741,6 +1796,7 @@ module Aws::GeoPlaces
     #   <p>If <code>nextToken</code> is returned, there are more results available. The value of <code>nextToken</code> is a unique pagination token for each page. </p>
     #   @return [String]
     class SearchTextResponse < Struct.new(
+      nil,
       :pricing_bucket,
       :result_items,
       :next_token,
@@ -1805,6 +1861,7 @@ module Aws::GeoPlaces
     #   <p>How the various components of the result's address are pronounced in various languages.</p>
     #   @return [Types::PhonemeDetails]
     class SearchTextResultItem < Struct.new(
+      nil,
       :place_id,
       :place_type,
       :title,
@@ -1838,6 +1895,7 @@ module Aws::GeoPlaces
     #   <p>Number that uniquely identifies a secondary address.</p>
     #   @return [String]
     class SecondaryAddressComponent < Struct.new(
+      nil,
       :number,
       keyword_init: true
     )
@@ -1849,6 +1907,7 @@ module Aws::GeoPlaces
     #   <p>Match score for the secondary address number.</p>
     #   @return [Float]
     class SecondaryAddressComponentMatchScore < Struct.new(
+      nil,
       :number,
       keyword_init: true
     )
@@ -1886,6 +1945,7 @@ module Aws::GeoPlaces
     #   <p>A <a href="https://en.wikipedia.org/wiki/IETF_language_tag">BCP 47</a> compliant language codes for the results to be rendered in. If there is no data for the result in the requested language, data will be returned in the default language for the entry.</p>
     #   @return [String]
     class StreetComponents < Struct.new(
+      nil,
       :base_name,
       :type,
       :type_placement,
@@ -1907,6 +1967,7 @@ module Aws::GeoPlaces
     #   <p>Name for the county or sub-region.</p>
     #   @return [String]
     class SubRegion < Struct.new(
+      nil,
       :code,
       :name,
       keyword_init: true
@@ -1922,6 +1983,7 @@ module Aws::GeoPlaces
     #   <p>Indicates the starting and ending index of the name in the text query that match the found title. </p>
     #   @return [Array<Types::Highlight>]
     class SubRegionHighlights < Struct.new(
+      nil,
       :code,
       :name,
       keyword_init: true
@@ -1934,6 +1996,7 @@ module Aws::GeoPlaces
     #   <p>Indicates the starting and ending indexes of the places in the result which were identified to match the textQuery. This result is useful for providing emphasis to results where the user query directly matched to make selecting the correct result from a list easier for an end user.</p>
     #   @return [Array<Types::Highlight>]
     class SuggestAddressHighlights < Struct.new(
+      nil,
       :label,
       keyword_init: true
     )
@@ -1951,6 +2014,7 @@ module Aws::GeoPlaces
     #   <p> A list of countries that all results must be in. Countries are represented by either their alpha-2 or alpha-3 character codes.</p>
     #   @return [Array<String>]
     class SuggestFilter < Struct.new(
+      nil,
       :bounding_box,
       :circle,
       :include_countries,
@@ -1967,6 +2031,7 @@ module Aws::GeoPlaces
     #   <p>The place's address.</p>
     #   @return [Types::SuggestAddressHighlights]
     class SuggestHighlights < Struct.new(
+      nil,
       :title,
       :address,
       keyword_init: true
@@ -2018,6 +2083,7 @@ module Aws::GeoPlaces
     #   <p>How the various components of the result's address are pronounced in various languages.</p>
     #   @return [Types::PhonemeDetails]
     class SuggestPlaceResult < Struct.new(
+      nil,
       :place_id,
       :place_type,
       :address,
@@ -2050,6 +2116,7 @@ module Aws::GeoPlaces
     #   <p>The query type. Category queries will search for places which have an entry matching the given category, for example "doctor office". BusinessChain queries will search for instances of a given business.</p>
     #   @return [String]
     class SuggestQueryResult < Struct.new(
+      nil,
       :query_id,
       :query_type,
       keyword_init: true
@@ -2088,6 +2155,7 @@ module Aws::GeoPlaces
     #   <p>Optional: The API key to be used for authorization. Either an API key or valid SigV4 signature must be provided when making a request.</p>
     #   @return [String]
     class SuggestRequest < Struct.new(
+      nil,
       :query_text,
       :max_results,
       :max_query_refinements,
@@ -2113,6 +2181,7 @@ module Aws::GeoPlaces
     #   <p>Maximum number of query terms to be returned for use with a search text query.</p>
     #   @return [Array<Types::QueryRefinement>]
     class SuggestResponse < Struct.new(
+      nil,
       :pricing_bucket,
       :result_items,
       :query_refinements,
@@ -2138,6 +2207,7 @@ module Aws::GeoPlaces
     #   <p>Describes how the parts of the response element matched the input query by returning the sections of the response which matched to input query terms. </p>
     #   @return [Types::SuggestHighlights]
     class SuggestResultItem < Struct.new(
+      nil,
       :title,
       :suggest_result_item_type,
       :place,
@@ -2152,6 +2222,7 @@ module Aws::GeoPlaces
     # @!attribute message
     #   @return [String]
     class ThrottlingException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -2169,6 +2240,7 @@ module Aws::GeoPlaces
     #   <p>The offset of the time zone from UTC, in seconds.</p>
     #   @return [Integer]
     class TimeZone < Struct.new(
+      nil,
       :name,
       :offset,
       :offset_seconds,
@@ -2187,6 +2259,7 @@ module Aws::GeoPlaces
     #   <p>The ZIP Classification Code, or in other words what type of postal code is it. </p>
     #   @return [String]
     class UspsZip < Struct.new(
+      nil,
       :zip_classification_code,
       keyword_init: true
     )
@@ -2198,6 +2271,7 @@ module Aws::GeoPlaces
     #   <p>The USPS ZIP+4 Record Type Code.</p>
     #   @return [String]
     class UspsZipPlus4 < Struct.new(
+      nil,
       :record_type_code,
       keyword_init: true
     )
@@ -2214,6 +2288,7 @@ module Aws::GeoPlaces
     #   <p>Test stub for FieldList.</p>
     #   @return [Array<Types::ValidationExceptionField>]
     class ValidationException < Struct.new(
+      nil,
       :message,
       :reason,
       :field_list,
@@ -2230,6 +2305,7 @@ module Aws::GeoPlaces
     #   <p>The error message.</p>
     #   @return [String]
     class ValidationExceptionField < Struct.new(
+      nil,
       :name,
       :message,
       keyword_init: true

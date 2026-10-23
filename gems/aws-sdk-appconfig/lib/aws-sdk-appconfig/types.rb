@@ -68,6 +68,7 @@ module Aws::AppConfig
     #   <p>An Amazon Resource Name (ARN) for an Identity and Access Management assume role.</p>
     #   @return [String]
     class Action < Struct.new(
+      nil,
       :name,
       :description,
       :uri,
@@ -102,6 +103,7 @@ module Aws::AppConfig
     #   <p>A system-generated ID for this invocation.</p>
     #   @return [String]
     class ActionInvocation < Struct.new(
+      nil,
       :extension_identifier,
       :action_name,
       :uri,
@@ -124,6 +126,7 @@ module Aws::AppConfig
     #   <p>The description of the application.</p>
     #   @return [String]
     class Application < Struct.new(
+      nil,
       :id,
       :name,
       :description,
@@ -146,6 +149,7 @@ module Aws::AppConfig
     #   <p>One or more parameters for the actions called by the extension.</p>
     #   @return [Hash<String, String>]
     class AppliedExtension < Struct.new(
+      nil,
       :extension_id,
       :extension_association_id,
       :version_number,
@@ -187,6 +191,7 @@ module Aws::AppConfig
     #            a call.</p>
     #   @return [Types::BadRequestDetails]
     class BadRequestException < Struct.new(
+      nil,
       :message,
       :reason,
       :details,
@@ -225,6 +230,7 @@ module Aws::AppConfig
     #            </p>
     #   @return [String]
     class ConfigurationProfileSummary < Struct.new(
+      nil,
       :application_id,
       :id,
       :name,
@@ -241,6 +247,7 @@ module Aws::AppConfig
     # @!attribute message
     #   @return [String]
     class ConflictException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -257,6 +264,7 @@ module Aws::AppConfig
     #   <p>The description of the application.</p>
     #   @return [String]
     class CreateApplicationOutput < Struct.new(
+      nil,
       :id,
       :name,
       :description,
@@ -276,6 +284,7 @@ module Aws::AppConfig
     #            you define.</p>
     #   @return [Hash<String, String>]
     class CreateApplicationRequest < Struct.new(
+      nil,
       :name,
       :description,
       :tags,
@@ -331,6 +340,7 @@ module Aws::AppConfig
     #            the resource was created or updated.</p>
     #   @return [String]
     class CreateConfigurationProfileOutput < Struct.new(
+      nil,
       :application_id,
       :id,
       :name,
@@ -425,6 +435,7 @@ module Aws::AppConfig
     #            managed in other configuration stores, see the documentation for how to specify an KMS key for that particular service.</p>
     #   @return [String]
     class CreateConfigurationProfileRequest < Struct.new(
+      nil,
       :application_id,
       :name,
       :description,
@@ -466,6 +477,7 @@ module Aws::AppConfig
     #   <p>Save the deployment strategy to a Systems Manager (SSM) document.</p>
     #   @return [String]
     class CreateDeploymentStrategyOutput < Struct.new(
+      nil,
       :id,
       :name,
       :description,
@@ -546,6 +558,7 @@ module Aws::AppConfig
     #            which you define.</p>
     #   @return [Hash<String, String>]
     class CreateDeploymentStrategyRequest < Struct.new(
+      nil,
       :name,
       :description,
       :deployment_duration_in_minutes,
@@ -581,6 +594,7 @@ module Aws::AppConfig
     #   <p>Amazon CloudWatch alarms monitored during the deployment.</p>
     #   @return [Array<Types::Monitor>]
     class CreateEnvironmentOutput < Struct.new(
+      nil,
       :application_id,
       :id,
       :name,
@@ -609,6 +623,7 @@ module Aws::AppConfig
     #            you define.</p>
     #   @return [Hash<String, String>]
     class CreateEnvironmentRequest < Struct.new(
+      nil,
       :application_id,
       :name,
       :description,
@@ -639,6 +654,7 @@ module Aws::AppConfig
     #   <p>The version number for the extension defined in the association.</p>
     #   @return [Integer]
     class CreateExtensionAssociationOutput < Struct.new(
+      nil,
       :id,
       :extension_arn,
       :resource_arn,
@@ -676,6 +692,7 @@ module Aws::AppConfig
     #         </p>
     #   @return [Hash<String, String>]
     class CreateExtensionAssociationRequest < Struct.new(
+      nil,
       :extension_identifier,
       :extension_version_number,
       :resource_identifier,
@@ -711,6 +728,7 @@ module Aws::AppConfig
     #            actions, these parameters are included in the Lambda request object.</p>
     #   @return [Hash<String, Types::Parameter>]
     class CreateExtensionOutput < Struct.new(
+      nil,
       :id,
       :name,
       :version_number,
@@ -755,6 +773,7 @@ module Aws::AppConfig
     #            for this field.</p>
     #   @return [Integer]
     class CreateExtensionRequest < Struct.new(
+      nil,
       :name,
       :description,
       :actions,
@@ -794,6 +813,7 @@ module Aws::AppConfig
     #            store.</p>
     #   @return [String]
     class CreateHostedConfigurationVersionOutput < Struct.new(
+      nil,
       :application_id,
       :configuration_profile_id,
       :version_number,
@@ -844,6 +864,7 @@ module Aws::AppConfig
     #            "v2.2.0".</p>
     #   @return [String]
     class CreateHostedConfigurationVersionRequest < Struct.new(
+      nil,
       :application_id,
       :configuration_profile_id,
       :description,
@@ -860,6 +881,7 @@ module Aws::AppConfig
     #   <p>The ID of the application to delete.</p>
     #   @return [String]
     class DeleteApplicationRequest < Struct.new(
+      nil,
       :application_id,
       keyword_init: true
     )
@@ -899,6 +921,7 @@ module Aws::AppConfig
     #            </ul>
     #   @return [String]
     class DeleteConfigurationProfileRequest < Struct.new(
+      nil,
       :application_id,
       :configuration_profile_id,
       :deletion_protection_check,
@@ -911,6 +934,7 @@ module Aws::AppConfig
     #   <p>The ID of the deployment strategy you want to delete.</p>
     #   @return [String]
     class DeleteDeploymentStrategyRequest < Struct.new(
+      nil,
       :deployment_strategy_id,
       keyword_init: true
     )
@@ -950,6 +974,7 @@ module Aws::AppConfig
     #            </ul>
     #   @return [String]
     class DeleteEnvironmentRequest < Struct.new(
+      nil,
       :environment_id,
       :application_id,
       :deletion_protection_check,
@@ -962,6 +987,7 @@ module Aws::AppConfig
     #   <p>The ID of the extension association to delete.</p>
     #   @return [String]
     class DeleteExtensionAssociationRequest < Struct.new(
+      nil,
       :extension_association_id,
       keyword_init: true
     )
@@ -976,6 +1002,7 @@ module Aws::AppConfig
     #            deleted.</p>
     #   @return [Integer]
     class DeleteExtensionRequest < Struct.new(
+      nil,
       :extension_identifier,
       :version_number,
       keyword_init: true
@@ -993,6 +1020,7 @@ module Aws::AppConfig
     #   <p>The versions number to delete.</p>
     #   @return [Integer]
     class DeleteHostedConfigurationVersionRequest < Struct.new(
+      nil,
       :application_id,
       :configuration_profile_id,
       :version_number,
@@ -1020,6 +1048,7 @@ module Aws::AppConfig
     #            either  or .</p>
     #   @return [Integer]
     class DeletionProtectionSettings < Struct.new(
+      nil,
       :enabled,
       :protection_period_in_minutes,
       keyword_init: true
@@ -1065,6 +1094,7 @@ module Aws::AppConfig
     #   <p>The date and time the event occurred.</p>
     #   @return [Time]
     class DeploymentEvent < Struct.new(
+      nil,
       :event_type,
       :triggered_by,
       :description,
@@ -1102,6 +1132,7 @@ module Aws::AppConfig
     #   <p>Save the deployment strategy to a Systems Manager (SSM) document.</p>
     #   @return [String]
     class DeploymentStrategy < Struct.new(
+      nil,
       :id,
       :name,
       :description,
@@ -1161,6 +1192,7 @@ module Aws::AppConfig
     #   <p>A user-defined label for an AppConfig hosted configuration version.</p>
     #   @return [String]
     class DeploymentSummary < Struct.new(
+      nil,
       :deployment_number,
       :configuration_name,
       :configuration_version,
@@ -1207,6 +1239,7 @@ module Aws::AppConfig
     #   <p>Amazon CloudWatch alarms monitored during the deployment.</p>
     #   @return [Array<Types::Monitor>]
     class Environment < Struct.new(
+      nil,
       :application_id,
       :id,
       :name,
@@ -1235,6 +1268,7 @@ module Aws::AppConfig
     #            association.</p>
     #   @return [String]
     class ExtensionAssociationSummary < Struct.new(
+      nil,
       :id,
       :extension_arn,
       :resource_arn,
@@ -1261,6 +1295,7 @@ module Aws::AppConfig
     #   <p>Information about the extension.</p>
     #   @return [String]
     class ExtensionSummary < Struct.new(
+      nil,
       :id,
       :name,
       :version_number,
@@ -1284,6 +1319,7 @@ module Aws::AppConfig
     #            interval for <code>ProtectionPeriodInMinutes</code> is 60.</p>
     #   @return [Types::DeletionProtectionSettings]
     class GetAccountSettingsOutput < Struct.new(
+      nil,
       :deletion_protection,
       keyword_init: true
     )
@@ -1300,6 +1336,7 @@ module Aws::AppConfig
     #   <p>The description of the application.</p>
     #   @return [String]
     class GetApplicationOutput < Struct.new(
+      nil,
       :id,
       :name,
       :description,
@@ -1312,6 +1349,7 @@ module Aws::AppConfig
     #   <p>The ID of the application you want to get.</p>
     #   @return [String]
     class GetApplicationRequest < Struct.new(
+      nil,
       :application_id,
       keyword_init: true
     )
@@ -1336,6 +1374,7 @@ module Aws::AppConfig
     #            information, see <a href="http://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.17">Content-Type</a>.</p>
     #   @return [String]
     class GetConfigurationOutput < Struct.new(
+      nil,
       :content,
       :configuration_version,
       :content_type,
@@ -1391,6 +1430,7 @@ module Aws::AppConfig
     #            the resource was created or updated.</p>
     #   @return [String]
     class GetConfigurationProfileOutput < Struct.new(
+      nil,
       :application_id,
       :id,
       :name,
@@ -1414,6 +1454,7 @@ module Aws::AppConfig
     #   <p>The ID of the configuration profile that you want to get.</p>
     #   @return [String]
     class GetConfigurationProfileRequest < Struct.new(
+      nil,
       :application_id,
       :configuration_profile_id,
       keyword_init: true
@@ -1459,6 +1500,7 @@ module Aws::AppConfig
     #               User Guide</i>.</p>
     #   @return [String]
     class GetConfigurationRequest < Struct.new(
+      nil,
       :application,
       :environment,
       :configuration,
@@ -1545,6 +1587,7 @@ module Aws::AppConfig
     #   <p>A user-defined label for an AppConfig hosted configuration version.</p>
     #   @return [String]
     class GetDeploymentOutput < Struct.new(
+      nil,
       :application_id,
       :environment_id,
       :deployment_strategy_id,
@@ -1589,6 +1632,7 @@ module Aws::AppConfig
     #   <p>The sequence number of the deployment.</p>
     #   @return [Integer]
     class GetDeploymentRequest < Struct.new(
+      nil,
       :application_id,
       :environment_id,
       :deployment_number,
@@ -1624,6 +1668,7 @@ module Aws::AppConfig
     #   <p>Save the deployment strategy to a Systems Manager (SSM) document.</p>
     #   @return [String]
     class GetDeploymentStrategyOutput < Struct.new(
+      nil,
       :id,
       :name,
       :description,
@@ -1647,6 +1692,7 @@ module Aws::AppConfig
     #   <p>The ID of the deployment strategy to get.</p>
     #   @return [String]
     class GetDeploymentStrategyRequest < Struct.new(
+      nil,
       :deployment_strategy_id,
       keyword_init: true
     )
@@ -1675,6 +1721,7 @@ module Aws::AppConfig
     #   <p>Amazon CloudWatch alarms monitored during the deployment.</p>
     #   @return [Array<Types::Monitor>]
     class GetEnvironmentOutput < Struct.new(
+      nil,
       :application_id,
       :id,
       :name,
@@ -1693,6 +1740,7 @@ module Aws::AppConfig
     #   <p>The ID of the environment that you want to get.</p>
     #   @return [String]
     class GetEnvironmentRequest < Struct.new(
+      nil,
       :application_id,
       :environment_id,
       keyword_init: true
@@ -1720,6 +1768,7 @@ module Aws::AppConfig
     #   <p>The version number for the extension defined in the association.</p>
     #   @return [Integer]
     class GetExtensionAssociationOutput < Struct.new(
+      nil,
       :id,
       :extension_arn,
       :resource_arn,
@@ -1740,6 +1789,7 @@ module Aws::AppConfig
     #   <p>The extension association ID to get.</p>
     #   @return [String]
     class GetExtensionAssociationRequest < Struct.new(
+      nil,
       :extension_association_id,
       keyword_init: true
     )
@@ -1771,6 +1821,7 @@ module Aws::AppConfig
     #            actions, these parameters are included in the Lambda request object.</p>
     #   @return [Hash<String, Types::Parameter>]
     class GetExtensionOutput < Struct.new(
+      nil,
       :id,
       :name,
       :version_number,
@@ -1796,6 +1847,7 @@ module Aws::AppConfig
     #            the highest version.</p>
     #   @return [Integer]
     class GetExtensionRequest < Struct.new(
+      nil,
       :extension_identifier,
       :version_number,
       keyword_init: true
@@ -1831,6 +1883,7 @@ module Aws::AppConfig
     #            store.</p>
     #   @return [String]
     class GetHostedConfigurationVersionOutput < Struct.new(
+      nil,
       :application_id,
       :configuration_profile_id,
       :version_number,
@@ -1859,6 +1912,7 @@ module Aws::AppConfig
     #   <p>The version.</p>
     #   @return [Integer]
     class GetHostedConfigurationVersionRequest < Struct.new(
+      nil,
       :application_id,
       :configuration_profile_id,
       :version_number,
@@ -1893,6 +1947,7 @@ module Aws::AppConfig
     #            store.</p>
     #   @return [String]
     class HostedConfigurationVersionSummary < Struct.new(
+      nil,
       :application_id,
       :configuration_profile_id,
       :version_number,
@@ -1914,6 +1969,7 @@ module Aws::AppConfig
     # @!attribute message
     #   @return [String]
     class InternalServerException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -1941,6 +1997,7 @@ module Aws::AppConfig
     #            experiences an error during an invocation.</p>
     #   @return [String]
     class InvalidConfigurationDetail < Struct.new(
+      nil,
       :constraint,
       :location,
       :reason,
@@ -1959,6 +2016,7 @@ module Aws::AppConfig
     #            results.</p>
     #   @return [String]
     class ListApplicationsOutput < Struct.new(
+      nil,
       :items,
       :next_token,
       keyword_init: true
@@ -1977,6 +2035,7 @@ module Aws::AppConfig
     #            of results. </p>
     #   @return [String]
     class ListApplicationsRequest < Struct.new(
+      nil,
       :max_results,
       :next_token,
       keyword_init: true
@@ -1992,6 +2051,7 @@ module Aws::AppConfig
     #            results.</p>
     #   @return [String]
     class ListConfigurationProfilesOutput < Struct.new(
+      nil,
       :items,
       :next_token,
       keyword_init: true
@@ -2014,6 +2074,7 @@ module Aws::AppConfig
     #            configuration can be a feature flag or a freeform configuration.</p>
     #   @return [String]
     class ListConfigurationProfilesRequest < Struct.new(
+      nil,
       :application_id,
       :max_results,
       :next_token,
@@ -2031,6 +2092,7 @@ module Aws::AppConfig
     #            results.</p>
     #   @return [String]
     class ListDeploymentStrategiesOutput < Struct.new(
+      nil,
       :items,
       :next_token,
       keyword_init: true
@@ -2046,6 +2108,7 @@ module Aws::AppConfig
     #   <p>A token to start the list. Use this token to get the next set of results.</p>
     #   @return [String]
     class ListDeploymentStrategiesRequest < Struct.new(
+      nil,
       :max_results,
       :next_token,
       keyword_init: true
@@ -2061,6 +2124,7 @@ module Aws::AppConfig
     #            results.</p>
     #   @return [String]
     class ListDeploymentsOutput < Struct.new(
+      nil,
       :items,
       :next_token,
       keyword_init: true
@@ -2085,6 +2149,7 @@ module Aws::AppConfig
     #            results.</p>
     #   @return [String]
     class ListDeploymentsRequest < Struct.new(
+      nil,
       :application_id,
       :environment_id,
       :max_results,
@@ -2102,6 +2167,7 @@ module Aws::AppConfig
     #            results.</p>
     #   @return [String]
     class ListEnvironmentsOutput < Struct.new(
+      nil,
       :items,
       :next_token,
       keyword_init: true
@@ -2120,6 +2186,7 @@ module Aws::AppConfig
     #   <p>A token to start the list. Use this token to get the next set of results.</p>
     #   @return [String]
     class ListEnvironmentsRequest < Struct.new(
+      nil,
       :application_id,
       :max_results,
       :next_token,
@@ -2137,6 +2204,7 @@ module Aws::AppConfig
     #            results.</p>
     #   @return [String]
     class ListExtensionAssociationsOutput < Struct.new(
+      nil,
       :items,
       :next_token,
       keyword_init: true
@@ -2162,6 +2230,7 @@ module Aws::AppConfig
     #            get the first set of results. </p>
     #   @return [String]
     class ListExtensionAssociationsRequest < Struct.new(
+      nil,
       :resource_identifier,
       :extension_identifier,
       :extension_version_number,
@@ -2181,6 +2250,7 @@ module Aws::AppConfig
     #            results.</p>
     #   @return [String]
     class ListExtensionsOutput < Struct.new(
+      nil,
       :items,
       :next_token,
       keyword_init: true
@@ -2199,6 +2269,7 @@ module Aws::AppConfig
     #   <p>The extension name.</p>
     #   @return [String]
     class ListExtensionsRequest < Struct.new(
+      nil,
       :max_results,
       :next_token,
       :name,
@@ -2215,6 +2286,7 @@ module Aws::AppConfig
     #            results.</p>
     #   @return [String]
     class ListHostedConfigurationVersionsOutput < Struct.new(
+      nil,
       :items,
       :next_token,
       keyword_init: true
@@ -2242,6 +2314,7 @@ module Aws::AppConfig
     #            an exact match is returned.</p>
     #   @return [String]
     class ListHostedConfigurationVersionsRequest < Struct.new(
+      nil,
       :application_id,
       :configuration_profile_id,
       :max_results,
@@ -2258,6 +2331,7 @@ module Aws::AppConfig
     #            of which you define.</p>
     #   @return [Hash<String, String>]
     class ListTagsForResourceOutput < Struct.new(
+      nil,
       :tags,
       keyword_init: true
     )
@@ -2268,6 +2342,7 @@ module Aws::AppConfig
     #   <p>The resource ARN.</p>
     #   @return [String]
     class ListTagsForResourceRequest < Struct.new(
+      nil,
       :resource_arn,
       keyword_init: true
     )
@@ -2283,6 +2358,7 @@ module Aws::AppConfig
     #               <code>AlarmArn</code>.</p>
     #   @return [String]
     class Monitor < Struct.new(
+      nil,
       :alarm_arn,
       :alarm_role_arn,
       keyword_init: true
@@ -2306,6 +2382,7 @@ module Aws::AppConfig
     #               <code>Required</code>.</p>
     #   @return [Boolean]
     class Parameter < Struct.new(
+      nil,
       :description,
       :required,
       :dynamic,
@@ -2330,6 +2407,7 @@ module Aws::AppConfig
     # @!attribute size
     #   @return [Float]
     class PayloadTooLargeException < Struct.new(
+      nil,
       :message,
       :measure,
       :limit,
@@ -2351,6 +2429,7 @@ module Aws::AppConfig
     # @!attribute resource_name
     #   @return [String]
     class ResourceNotFoundException < Struct.new(
+      nil,
       :message,
       :resource_name,
       keyword_init: true
@@ -2370,6 +2449,7 @@ module Aws::AppConfig
     # @!attribute message
     #   @return [String]
     class ServiceQuotaExceededException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -2452,6 +2532,7 @@ module Aws::AppConfig
     #   <p>A user-defined label for an AppConfig hosted configuration version.</p>
     #   @return [String]
     class StartDeploymentOutput < Struct.new(
+      nil,
       :application_id,
       :environment_id,
       :deployment_strategy_id,
@@ -2518,6 +2599,7 @@ module Aws::AppConfig
     #            with <code>PRE_START_DEPLOYMENT</code> actions.</p>
     #   @return [Hash<String, String>]
     class StartDeploymentRequest < Struct.new(
+      nil,
       :application_id,
       :environment_id,
       :deployment_strategy_id,
@@ -2608,6 +2690,7 @@ module Aws::AppConfig
     #   <p>A user-defined label for an AppConfig hosted configuration version.</p>
     #   @return [String]
     class StopDeploymentOutput < Struct.new(
+      nil,
       :application_id,
       :environment_id,
       :deployment_strategy_id,
@@ -2657,6 +2740,7 @@ module Aws::AppConfig
     #            status of <code>REVERTED</code>.</p>
     #   @return [Boolean]
     class StopDeploymentRequest < Struct.new(
+      nil,
       :application_id,
       :environment_id,
       :deployment_number,
@@ -2675,6 +2759,7 @@ module Aws::AppConfig
     #            256 characters.</p>
     #   @return [Hash<String, String>]
     class TagResourceRequest < Struct.new(
+      nil,
       :resource_arn,
       :tags,
       keyword_init: true
@@ -2689,6 +2774,7 @@ module Aws::AppConfig
     #   <p>The tag keys to delete.</p>
     #   @return [Array<String>]
     class UntagResourceRequest < Struct.new(
+      nil,
       :resource_arn,
       :tag_keys,
       keyword_init: true
@@ -2704,6 +2790,7 @@ module Aws::AppConfig
     #            interval for <code>ProtectionPeriodInMinutes</code> is 60.</p>
     #   @return [Types::DeletionProtectionSettings]
     class UpdateAccountSettingsOutput < Struct.new(
+      nil,
       :deletion_protection,
       keyword_init: true
     )
@@ -2718,6 +2805,7 @@ module Aws::AppConfig
     #            interval for <code>ProtectionPeriodInMinutes</code> is 60.</p>
     #   @return [Types::DeletionProtectionSettings]
     class UpdateAccountSettingsRequest < Struct.new(
+      nil,
       :deletion_protection,
       keyword_init: true
     )
@@ -2734,6 +2822,7 @@ module Aws::AppConfig
     #   <p>The description of the application.</p>
     #   @return [String]
     class UpdateApplicationOutput < Struct.new(
+      nil,
       :id,
       :name,
       :description,
@@ -2752,6 +2841,7 @@ module Aws::AppConfig
     #   <p>A description of the application.</p>
     #   @return [String]
     class UpdateApplicationRequest < Struct.new(
+      nil,
       :application_id,
       :name,
       :description,
@@ -2807,6 +2897,7 @@ module Aws::AppConfig
     #            the resource was created or updated.</p>
     #   @return [String]
     class UpdateConfigurationProfileOutput < Struct.new(
+      nil,
       :application_id,
       :id,
       :name,
@@ -2853,6 +2944,7 @@ module Aws::AppConfig
     #            managed in other configuration stores, see the documentation for how to specify an KMS key for that particular service.</p>
     #   @return [String]
     class UpdateConfigurationProfileRequest < Struct.new(
+      nil,
       :application_id,
       :configuration_profile_id,
       :name,
@@ -2892,6 +2984,7 @@ module Aws::AppConfig
     #   <p>Save the deployment strategy to a Systems Manager (SSM) document.</p>
     #   @return [String]
     class UpdateDeploymentStrategyOutput < Struct.new(
+      nil,
       :id,
       :name,
       :description,
@@ -2959,6 +3052,7 @@ module Aws::AppConfig
     #            targets.</p>
     #   @return [String]
     class UpdateDeploymentStrategyRequest < Struct.new(
+      nil,
       :deployment_strategy_id,
       :description,
       :deployment_duration_in_minutes,
@@ -2992,6 +3086,7 @@ module Aws::AppConfig
     #   <p>Amazon CloudWatch alarms monitored during the deployment.</p>
     #   @return [Array<Types::Monitor>]
     class UpdateEnvironmentOutput < Struct.new(
+      nil,
       :application_id,
       :id,
       :name,
@@ -3019,6 +3114,7 @@ module Aws::AppConfig
     #   <p>Amazon CloudWatch alarms to monitor during the deployment process.</p>
     #   @return [Array<Types::Monitor>]
     class UpdateEnvironmentRequest < Struct.new(
+      nil,
       :application_id,
       :environment_id,
       :name,
@@ -3049,6 +3145,7 @@ module Aws::AppConfig
     #   <p>The version number for the extension defined in the association.</p>
     #   @return [Integer]
     class UpdateExtensionAssociationOutput < Struct.new(
+      nil,
       :id,
       :extension_arn,
       :resource_arn,
@@ -3072,6 +3169,7 @@ module Aws::AppConfig
     #   <p>The parameter names and values defined in the extension.</p>
     #   @return [Hash<String, String>]
     class UpdateExtensionAssociationRequest < Struct.new(
+      nil,
       :extension_association_id,
       :parameters,
       keyword_init: true
@@ -3104,6 +3202,7 @@ module Aws::AppConfig
     #            actions, these parameters are included in the Lambda request object.</p>
     #   @return [Hash<String, Types::Parameter>]
     class UpdateExtensionOutput < Struct.new(
+      nil,
       :id,
       :name,
       :version_number,
@@ -3137,6 +3236,7 @@ module Aws::AppConfig
     #   <p>The extension version number.</p>
     #   @return [Integer]
     class UpdateExtensionRequest < Struct.new(
+      nil,
       :extension_identifier,
       :description,
       :actions,
@@ -3157,6 +3257,7 @@ module Aws::AppConfig
     #   <p>The version of the configuration to validate.</p>
     #   @return [String]
     class ValidateConfigurationRequest < Struct.new(
+      nil,
       :application_id,
       :configuration_profile_id,
       :configuration_version,
@@ -3180,6 +3281,7 @@ module Aws::AppConfig
     #            function.</p>
     #   @return [String]
     class Validator < Struct.new(
+      nil,
       :type,
       :content,
       keyword_init: true

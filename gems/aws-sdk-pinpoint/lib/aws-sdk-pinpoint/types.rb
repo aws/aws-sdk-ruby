@@ -17,6 +17,7 @@ module Aws::Pinpoint
     #   <p>Specifies whether to enable the ADM channel for the application.</p>
     #   @return [Boolean]
     class ADMChannelRequest < Struct.new(
+      nil,
       :client_id,
       :client_secret,
       :enabled,
@@ -57,6 +58,7 @@ module Aws::Pinpoint
     #   <p>The current version of the ADM channel.</p>
     #   @return [Integer]
     class ADMChannelResponse < Struct.new(
+      nil,
       :application_id,
       :creation_date,
       :enabled,
@@ -122,6 +124,7 @@ module Aws::Pinpoint
     #   <p>The URL to open in the recipient's default mobile browser, if a recipient taps the push notification and the value of the Action property is URL.</p>
     #   @return [String]
     class ADMMessage < Struct.new(
+      nil,
       :action,
       :body,
       :consolidation_key,
@@ -169,6 +172,7 @@ module Aws::Pinpoint
     #   <p>The key identifier that's assigned to your APNs signing key, if you want Amazon Pinpoint to communicate with APNs by using APNs tokens.</p>
     #   @return [String]
     class APNSChannelRequest < Struct.new(
+      nil,
       :bundle_id,
       :certificate,
       :default_authentication_method,
@@ -220,6 +224,7 @@ module Aws::Pinpoint
     #   <p>The current version of the APNs channel.</p>
     #   @return [Integer]
     class APNSChannelResponse < Struct.new(
+      nil,
       :application_id,
       :creation_date,
       :default_authentication_method,
@@ -293,6 +298,7 @@ module Aws::Pinpoint
     #   <p>The URL to open in the recipient's default mobile browser, if a recipient taps the push notification and the value of the Action property is URL.</p>
     #   @return [String]
     class APNSMessage < Struct.new(
+      nil,
       :apns_push_type,
       :action,
       :badge,
@@ -339,6 +345,7 @@ module Aws::Pinpoint
     #   <p>The URL to open in the recipient's default mobile browser, if a recipient taps a push notification that's based on the message template and the value of the Action property is URL.</p>
     #   @return [String]
     class APNSPushNotificationTemplate < Struct.new(
+      nil,
       :action,
       :body,
       :media_url,
@@ -377,6 +384,7 @@ module Aws::Pinpoint
     #   <p>The key identifier that's assigned to your APNs signing key, if you want Amazon Pinpoint to communicate with the APNs sandbox environment by using APNs tokens.</p>
     #   @return [String]
     class APNSSandboxChannelRequest < Struct.new(
+      nil,
       :bundle_id,
       :certificate,
       :default_authentication_method,
@@ -428,6 +436,7 @@ module Aws::Pinpoint
     #   <p>The current version of the APNs sandbox channel.</p>
     #   @return [Integer]
     class APNSSandboxChannelResponse < Struct.new(
+      nil,
       :application_id,
       :creation_date,
       :default_authentication_method,
@@ -471,6 +480,7 @@ module Aws::Pinpoint
     #   <p>The key identifier that's assigned to your APNs signing key, if you want Amazon Pinpoint to communicate with APNs by using APNs tokens.</p>
     #   @return [String]
     class APNSVoipChannelRequest < Struct.new(
+      nil,
       :bundle_id,
       :certificate,
       :default_authentication_method,
@@ -522,6 +532,7 @@ module Aws::Pinpoint
     #   <p>The current version of the APNs VoIP channel.</p>
     #   @return [Integer]
     class APNSVoipChannelResponse < Struct.new(
+      nil,
       :application_id,
       :creation_date,
       :default_authentication_method,
@@ -565,6 +576,7 @@ module Aws::Pinpoint
     #   <p>The key identifier that's assigned to your APNs signing key, if you want Amazon Pinpoint to communicate with the APNs sandbox environment by using APNs tokens.</p>
     #   @return [String]
     class APNSVoipSandboxChannelRequest < Struct.new(
+      nil,
       :bundle_id,
       :certificate,
       :default_authentication_method,
@@ -616,6 +628,7 @@ module Aws::Pinpoint
     #   <p>The current version of the APNs VoIP sandbox channel.</p>
     #   @return [Integer]
     class APNSVoipSandboxChannelResponse < Struct.new(
+      nil,
       :application_id,
       :creation_date,
       :default_authentication_method,
@@ -641,6 +654,7 @@ module Aws::Pinpoint
     #   <p>The string to use in a subsequent request to get the next page of results in a paginated response. This value is null if there are no additional pages.</p>
     #   @return [String]
     class ActivitiesResponse < Struct.new(
+      nil,
       :item,
       :next_token,
       keyword_init: true
@@ -683,6 +697,7 @@ module Aws::Pinpoint
     #   <p>The settings for a connect activity. This type of activity initiates a contact center call to participants.</p>
     #   @return [Types::ContactCenterActivity]
     class Activity < Struct.new(
+      nil,
       :custom,
       :conditional_split,
       :description,
@@ -743,6 +758,7 @@ module Aws::Pinpoint
     #   <p>A JSON object that contains metrics relating to the campaign execution for this campaign activity. For information about the structure and contents of the results, see <a href="https://docs.aws.amazon.com//pinpoint/latest/developerguide/analytics-standard-metrics.html">Standard Amazon Pinpoint analytics metrics</a> in the <i>Amazon Pinpoint Developer Guide</i>.</p>
     #   @return [Hash<String, String>]
     class ActivityResponse < Struct.new(
+      nil,
       :application_id,
       :campaign_id,
       :end,
@@ -782,6 +798,7 @@ module Aws::Pinpoint
     #   <p>The message title to use instead of the default message title. This value overrides the default message title.</p>
     #   @return [String]
     class AddressConfiguration < Struct.new(
+      nil,
       :body_override,
       :channel_type,
       :context,
@@ -822,6 +839,7 @@ module Aws::Pinpoint
     #   <p>The URL to open in a recipient's default mobile browser, if a recipient taps a push notification that's based on the message template and the value of the Action property is URL.</p>
     #   @return [String]
     class AndroidPushNotificationTemplate < Struct.new(
+      nil,
       :action,
       :body,
       :image_icon_url,
@@ -856,6 +874,7 @@ module Aws::Pinpoint
     #   <p>The first date and time of the date range that was used to filter the query results, in extended ISO 8601 format. The date range is inclusive.</p>
     #   @return [Time]
     class ApplicationDateRangeKpiResponse < Struct.new(
+      nil,
       :application_id,
       :end_time,
       :kpi_name,
@@ -884,6 +903,7 @@ module Aws::Pinpoint
     #   <p>The date and time when the Application was created.</p>
     #   @return [String]
     class ApplicationResponse < Struct.new(
+      nil,
       :arn,
       :id,
       :name,
@@ -905,6 +925,7 @@ module Aws::Pinpoint
     #   <p>The default maximum number of messages that a single journey can sent to a single endpoint. The maximum value is 100. If set to 0, this limit will not apply.</p>
     #   @return [Integer]
     class ApplicationSettingsJourneyLimits < Struct.new(
+      nil,
       :daily_cap,
       :timeframe_cap,
       :total_cap,
@@ -933,6 +954,7 @@ module Aws::Pinpoint
     #   <p>The default sending limits for journeys in the application. These limits apply to each journey for the application but can be overridden, on a per journey basis, with the JourneyLimits resource.</p>
     #   @return [Types::ApplicationSettingsJourneyLimits]
     class ApplicationSettingsResource < Struct.new(
+      nil,
       :application_id,
       :campaign_hook,
       :last_modified_date,
@@ -952,6 +974,7 @@ module Aws::Pinpoint
     #   <p>The string to use in a subsequent request to get the next page of results in a paginated response. This value is null if there are no additional pages.</p>
     #   @return [String]
     class ApplicationsResponse < Struct.new(
+      nil,
       :item,
       :next_token,
       keyword_init: true
@@ -967,6 +990,7 @@ module Aws::Pinpoint
     #   <p>The criteria values to use for the segment dimension. Depending on the value of the AttributeType property, endpoints are included or excluded from the segment if their attribute values match the criteria values.</p>
     #   @return [Array<String>]
     class AttributeDimension < Struct.new(
+      nil,
       :attribute_type,
       :values,
       keyword_init: true
@@ -985,6 +1009,7 @@ module Aws::Pinpoint
     #   <p>An array that specifies the names of the attributes that were removed from the endpoints.</p>
     #   @return [Array<String>]
     class AttributesResource < Struct.new(
+      nil,
       :application_id,
       :attribute_type,
       :attributes,
@@ -1001,6 +1026,7 @@ module Aws::Pinpoint
     #   <p>The unique identifier for the request or response.</p>
     #   @return [String]
     class BadRequestException < Struct.new(
+      nil,
       :message,
       :request_id,
       keyword_init: true
@@ -1019,6 +1045,7 @@ module Aws::Pinpoint
     #   <p>The secret key that you received from the Baidu Cloud Push service to communicate with the service.</p>
     #   @return [String]
     class BaiduChannelRequest < Struct.new(
+      nil,
       :api_key,
       :enabled,
       :secret_key,
@@ -1062,6 +1089,7 @@ module Aws::Pinpoint
     #   <p>The current version of the Baidu channel.</p>
     #   @return [Integer]
     class BaiduChannelResponse < Struct.new(
+      nil,
       :application_id,
       :creation_date,
       :credential,
@@ -1122,6 +1150,7 @@ module Aws::Pinpoint
     #   <p>The URL to open in the recipient's default mobile browser, if a recipient taps the push notification and the value of the Action property is URL.</p>
     #   @return [String]
     class BaiduMessage < Struct.new(
+      nil,
       :action,
       :body,
       :data,
@@ -1146,6 +1175,7 @@ module Aws::Pinpoint
     #   <p>An array of objects that provides the results of a query that retrieved the data for a standard metric that applies to an application, campaign, or journey.</p>
     #   @return [Array<Types::ResultRow>]
     class BaseKpiResult < Struct.new(
+      nil,
       :rows,
       keyword_init: true
     )
@@ -1157,6 +1187,7 @@ module Aws::Pinpoint
     #   <p>The raw, JSON-formatted string to use as the payload for the message. The maximum size is 5 KB.</p>
     #   @return [String]
     class CampaignCustomMessage < Struct.new(
+      nil,
       :data,
       keyword_init: true
     )
@@ -1186,6 +1217,7 @@ module Aws::Pinpoint
     #   <p>The first date and time of the date range that was used to filter the query results, in extended ISO 8601 format. The date range is inclusive.</p>
     #   @return [Time]
     class CampaignDateRangeKpiResponse < Struct.new(
+      nil,
       :application_id,
       :campaign_id,
       :end_time,
@@ -1215,6 +1247,7 @@ module Aws::Pinpoint
     #   <p>The subject line, or title, of the email.</p>
     #   @return [String]
     class CampaignEmailMessage < Struct.new(
+      nil,
       :body,
       :from_address,
       :headers,
@@ -1233,6 +1266,7 @@ module Aws::Pinpoint
     #   <p>The type of event that causes the campaign to be sent. Valid values are: SYSTEM, sends the campaign when a system event occurs; and, ENDPOINT, sends the campaign when an endpoint event (<link  linkend="apps-application-id-events">Events</link> resource) occurs.</p>
     #   @return [String]
     class CampaignEventFilter < Struct.new(
+      nil,
       :dimensions,
       :filter_type,
       keyword_init: true
@@ -1251,6 +1285,7 @@ module Aws::Pinpoint
     #   <p>The web URL that Amazon Pinpoint calls to invoke the AWS Lambda function over HTTPS.</p>
     #   @return [String]
     class CampaignHook < Struct.new(
+      nil,
       :lambda_function_name,
       :mode,
       :web_url,
@@ -1273,6 +1308,7 @@ module Aws::Pinpoint
     #   <p>In-app message layout.</p>
     #   @return [String]
     class CampaignInAppMessage < Struct.new(
+      nil,
       :body,
       :content,
       :custom_config,
@@ -1299,6 +1335,7 @@ module Aws::Pinpoint
     #   <p>The maximum total number of messages that the campaign can send per user session.</p>
     #   @return [Integer]
     class CampaignLimits < Struct.new(
+      nil,
       :daily,
       :maximum_duration,
       :messages_per_second,
@@ -1386,6 +1423,7 @@ module Aws::Pinpoint
     #   <p>Defines the priority of the campaign, used to decide the order of messages displayed to user if there are multiple messages scheduled to be displayed at the same moment.</p>
     #   @return [Integer]
     class CampaignResponse < Struct.new(
+      nil,
       :additional_treatments,
       :application_id,
       :arn,
@@ -1436,6 +1474,7 @@ module Aws::Pinpoint
     #   <p>The template ID received from the regulatory body for sending SMS in your country.</p>
     #   @return [String]
     class CampaignSmsMessage < Struct.new(
+      nil,
       :body,
       :message_type,
       :origination_number,
@@ -1452,6 +1491,7 @@ module Aws::Pinpoint
     #   <p>The current status of the campaign, or the current status of a treatment that belongs to an A/B test campaign.</p> <p>If a campaign uses A/B testing, the campaign has a status of COMPLETED only if all campaign treatments have a status of COMPLETED. If you delete the segment that's associated with a campaign, the campaign fails and has a status of DELETED.</p>
     #   @return [String]
     class CampaignState < Struct.new(
+      nil,
       :campaign_status,
       keyword_init: true
     )
@@ -1466,6 +1506,7 @@ module Aws::Pinpoint
     #   <p>The string to use in a subsequent request to get the next page of results in a paginated response. This value is null if there are no additional pages.</p>
     #   @return [String]
     class CampaignsResponse < Struct.new(
+      nil,
       :item,
       :next_token,
       keyword_init: true
@@ -1502,6 +1543,7 @@ module Aws::Pinpoint
     #   <p>The current version of the channel.</p>
     #   @return [Integer]
     class ChannelResponse < Struct.new(
+      nil,
       :application_id,
       :creation_date,
       :enabled,
@@ -1521,6 +1563,7 @@ module Aws::Pinpoint
     #   <p>A map that contains a multipart response for each channel. For each item in this object, the ChannelType is the key and the Channel is the value.</p>
     #   @return [Hash<String, Types::ChannelResponse>]
     class ChannelsResponse < Struct.new(
+      nil,
       :channels,
       keyword_init: true
     )
@@ -1544,6 +1587,7 @@ module Aws::Pinpoint
     #   <p>Rules for the Custom channel.</p>
     #   @return [Array<Types::ClosedDaysRule>]
     class ClosedDays < Struct.new(
+      nil,
       :email,
       :sms,
       :push,
@@ -1565,6 +1609,7 @@ module Aws::Pinpoint
     #   <p>End DateTime ISO 8601 format</p>
     #   @return [String]
     class ClosedDaysRule < Struct.new(
+      nil,
       :name,
       :start_date_time,
       :end_date_time,
@@ -1581,6 +1626,7 @@ module Aws::Pinpoint
     #   <p>Specifies how to handle multiple conditions for the activity. For example, if you specify two conditions for an activity, whether both or only one of the conditions must be met for the activity to be performed.</p>
     #   @return [String]
     class Condition < Struct.new(
+      nil,
       :conditions,
       :operator,
       keyword_init: true
@@ -1602,6 +1648,7 @@ module Aws::Pinpoint
     #   <p>The unique identifier for the activity to perform if the conditions are met.</p>
     #   @return [String]
     class ConditionalSplitActivity < Struct.new(
+      nil,
       :condition,
       :evaluation_wait_time,
       :false_activity,
@@ -1619,6 +1666,7 @@ module Aws::Pinpoint
     #   <p>The unique identifier for the request or response.</p>
     #   @return [String]
     class ConflictException < Struct.new(
+      nil,
       :message,
       :request_id,
       keyword_init: true
@@ -1630,6 +1678,7 @@ module Aws::Pinpoint
     #   <p>The unique identifier for the next activity to perform after the this activity.</p>
     #   @return [String]
     class ContactCenterActivity < Struct.new(
+      nil,
       :next_activity,
       keyword_init: true
     )
@@ -1640,6 +1689,7 @@ module Aws::Pinpoint
     #   <p>Specifies the display name of an application and the tags to associate with the application.</p>
     #   @return [Types::CreateApplicationRequest]
     class CreateAppRequest < Struct.new(
+      nil,
       :create_application_request,
       keyword_init: true
     )
@@ -1650,6 +1700,7 @@ module Aws::Pinpoint
     #   <p>Provides information about an application.</p>
     #   @return [Types::ApplicationResponse]
     class CreateAppResponse < Struct.new(
+      nil,
       :application_response,
       keyword_init: true
     )
@@ -1664,6 +1715,7 @@ module Aws::Pinpoint
     #   <p>A string-to-string map of key-value pairs that defines the tags to associate with the application. Each tag consists of a required tag key and an associated tag value.</p>
     #   @return [Hash<String, String>]
     class CreateApplicationRequest < Struct.new(
+      nil,
       :name,
       :tags,
       keyword_init: true
@@ -1678,6 +1730,7 @@ module Aws::Pinpoint
     #   <p>Specifies the configuration and other settings for a campaign.</p>
     #   @return [Types::WriteCampaignRequest]
     class CreateCampaignRequest < Struct.new(
+      nil,
       :application_id,
       :write_campaign_request,
       keyword_init: true
@@ -1689,6 +1742,7 @@ module Aws::Pinpoint
     #   <p>Provides information about the status, configuration, and other settings for a campaign.</p>
     #   @return [Types::CampaignResponse]
     class CreateCampaignResponse < Struct.new(
+      nil,
       :campaign_response,
       keyword_init: true
     )
@@ -1702,6 +1756,7 @@ module Aws::Pinpoint
     #   <p>The name of the message template. A template name must start with an alphanumeric character and can contain a maximum of 128 characters. The characters can be alphanumeric characters, underscores (_), or hyphens (-). Template names are case sensitive.</p>
     #   @return [String]
     class CreateEmailTemplateRequest < Struct.new(
+      nil,
       :email_template_request,
       :template_name,
       keyword_init: true
@@ -1713,6 +1768,7 @@ module Aws::Pinpoint
     #   <p>Provides information about a request to create a message template.</p>
     #   @return [Types::CreateTemplateMessageBody]
     class CreateEmailTemplateResponse < Struct.new(
+      nil,
       :create_template_message_body,
       keyword_init: true
     )
@@ -1726,6 +1782,7 @@ module Aws::Pinpoint
     #   <p>Specifies the settings for a job that exports endpoint definitions to an Amazon Simple Storage Service (Amazon S3) bucket.</p>
     #   @return [Types::ExportJobRequest]
     class CreateExportJobRequest < Struct.new(
+      nil,
       :application_id,
       :export_job_request,
       keyword_init: true
@@ -1737,6 +1794,7 @@ module Aws::Pinpoint
     #   <p>Provides information about the status and settings of a job that exports endpoint definitions to a file. The file can be added directly to an Amazon Simple Storage Service (Amazon S3) bucket by using the Amazon Pinpoint API or downloaded directly to a computer by using the Amazon Pinpoint console.</p>
     #   @return [Types::ExportJobResponse]
     class CreateExportJobResponse < Struct.new(
+      nil,
       :export_job_response,
       keyword_init: true
     )
@@ -1750,6 +1808,7 @@ module Aws::Pinpoint
     #   <p>Specifies the settings for a job that imports endpoint definitions from an Amazon Simple Storage Service (Amazon S3) bucket.</p>
     #   @return [Types::ImportJobRequest]
     class CreateImportJobRequest < Struct.new(
+      nil,
       :application_id,
       :import_job_request,
       keyword_init: true
@@ -1761,6 +1820,7 @@ module Aws::Pinpoint
     #   <p>Provides information about the status and settings of a job that imports endpoint definitions from one or more files. The files can be stored in an Amazon Simple Storage Service (Amazon S3) bucket or uploaded directly from a computer by using the Amazon Pinpoint console.</p>
     #   @return [Types::ImportJobResponse]
     class CreateImportJobResponse < Struct.new(
+      nil,
       :import_job_response,
       keyword_init: true
     )
@@ -1774,6 +1834,7 @@ module Aws::Pinpoint
     #   <p>The name of the message template. A template name must start with an alphanumeric character and can contain a maximum of 128 characters. The characters can be alphanumeric characters, underscores (_), or hyphens (-). Template names are case sensitive.</p>
     #   @return [String]
     class CreateInAppTemplateRequest < Struct.new(
+      nil,
       :in_app_template_request,
       :template_name,
       keyword_init: true
@@ -1785,6 +1846,7 @@ module Aws::Pinpoint
     #   <p>Provides information about a request to create a message template.</p>
     #   @return [Types::TemplateCreateMessageBody]
     class CreateInAppTemplateResponse < Struct.new(
+      nil,
       :template_create_message_body,
       keyword_init: true
     )
@@ -1798,6 +1860,7 @@ module Aws::Pinpoint
     #   <p>Specifies the configuration and other settings for a journey.</p>
     #   @return [Types::WriteJourneyRequest]
     class CreateJourneyRequest < Struct.new(
+      nil,
       :application_id,
       :write_journey_request,
       keyword_init: true
@@ -1809,6 +1872,7 @@ module Aws::Pinpoint
     #   <p>Provides information about the status, configuration, and other settings for a journey.</p>
     #   @return [Types::JourneyResponse]
     class CreateJourneyResponse < Struct.new(
+      nil,
       :journey_response,
       keyword_init: true
     )
@@ -1822,6 +1886,7 @@ module Aws::Pinpoint
     #   <p>The name of the message template. A template name must start with an alphanumeric character and can contain a maximum of 128 characters. The characters can be alphanumeric characters, underscores (_), or hyphens (-). Template names are case sensitive.</p>
     #   @return [String]
     class CreatePushTemplateRequest < Struct.new(
+      nil,
       :push_notification_template_request,
       :template_name,
       keyword_init: true
@@ -1833,6 +1898,7 @@ module Aws::Pinpoint
     #   <p>Provides information about a request to create a message template.</p>
     #   @return [Types::CreateTemplateMessageBody]
     class CreatePushTemplateResponse < Struct.new(
+      nil,
       :create_template_message_body,
       keyword_init: true
     )
@@ -1843,6 +1909,7 @@ module Aws::Pinpoint
     #   <p>Specifies Amazon Pinpoint configuration settings for retrieving and processing recommendation data from a recommender model.</p>
     #   @return [Types::CreateRecommenderConfigurationShape]
     class CreateRecommenderConfigurationRequest < Struct.new(
+      nil,
       :create_recommender_configuration,
       keyword_init: true
     )
@@ -1853,6 +1920,7 @@ module Aws::Pinpoint
     #   <p>Provides information about Amazon Pinpoint configuration settings for retrieving and processing data from a recommender model.</p>
     #   @return [Types::RecommenderConfigurationResponse]
     class CreateRecommenderConfigurationResponse < Struct.new(
+      nil,
       :recommender_configuration_response,
       keyword_init: true
     )
@@ -1888,6 +1956,7 @@ module Aws::Pinpoint
     #   <p>The number of recommended items to retrieve from the model for each endpoint or user, depending on the value for the RecommendationProviderIdType property. This number determines how many recommended items are available for use in message variables. The minimum value is 1. The maximum value is 5. The default value is 5.</p> <p>To use multiple recommended items and custom attributes with message variables, you have to use an AWS Lambda function (RecommendationTransformerUri) to perform additional processing of recommendation data.</p>
     #   @return [Integer]
     class CreateRecommenderConfigurationShape < Struct.new(
+      nil,
       :attributes,
       :description,
       :name,
@@ -1909,6 +1978,7 @@ module Aws::Pinpoint
     #   <p>Specifies the configuration, dimension, and other settings for a segment. A WriteSegmentRequest object can include a Dimensions object or a SegmentGroups object, but not both.</p>
     #   @return [Types::WriteSegmentRequest]
     class CreateSegmentRequest < Struct.new(
+      nil,
       :application_id,
       :write_segment_request,
       keyword_init: true
@@ -1920,6 +1990,7 @@ module Aws::Pinpoint
     #   <p>Provides information about the configuration, dimension, and other settings for a segment.</p>
     #   @return [Types::SegmentResponse]
     class CreateSegmentResponse < Struct.new(
+      nil,
       :segment_response,
       keyword_init: true
     )
@@ -1933,6 +2004,7 @@ module Aws::Pinpoint
     #   <p>The name of the message template. A template name must start with an alphanumeric character and can contain a maximum of 128 characters. The characters can be alphanumeric characters, underscores (_), or hyphens (-). Template names are case sensitive.</p>
     #   @return [String]
     class CreateSmsTemplateRequest < Struct.new(
+      nil,
       :sms_template_request,
       :template_name,
       keyword_init: true
@@ -1944,6 +2016,7 @@ module Aws::Pinpoint
     #   <p>Provides information about a request to create a message template.</p>
     #   @return [Types::CreateTemplateMessageBody]
     class CreateSmsTemplateResponse < Struct.new(
+      nil,
       :create_template_message_body,
       keyword_init: true
     )
@@ -1961,6 +2034,7 @@ module Aws::Pinpoint
     #   <p>The unique identifier for the request to create the message template.</p>
     #   @return [String]
     class CreateTemplateMessageBody < Struct.new(
+      nil,
       :arn,
       :message,
       :request_id,
@@ -1976,6 +2050,7 @@ module Aws::Pinpoint
     #   <p>Specifies the content and settings for a message template that can be used in messages that are sent through the voice channel.</p>
     #   @return [Types::VoiceTemplateRequest]
     class CreateVoiceTemplateRequest < Struct.new(
+      nil,
       :template_name,
       :voice_template_request,
       keyword_init: true
@@ -1987,6 +2062,7 @@ module Aws::Pinpoint
     #   <p>Provides information about a request to create a message template.</p>
     #   @return [Types::CreateTemplateMessageBody]
     class CreateVoiceTemplateResponse < Struct.new(
+      nil,
       :create_template_message_body,
       keyword_init: true
     )
@@ -2001,6 +2077,7 @@ module Aws::Pinpoint
     #   <p>The types of endpoints to send the campaign or treatment to. Each valid value maps to a type of channel that you can associate with an endpoint by using the ChannelType property of an endpoint.</p>
     #   @return [Array<String>]
     class CustomDeliveryConfiguration < Struct.new(
+      nil,
       :delivery_uri,
       :endpoint_types,
       keyword_init: true
@@ -2028,6 +2105,7 @@ module Aws::Pinpoint
     #   <p>The unique identifier for the version of the message template to use for the message. If specified, this value must match the identifier for an existing template version. To retrieve a list of versions and version identifiers for a template, use the <link  linkend="templates-template-name-template-type-versions">Template Versions</link> resource.</p> <p>If you don't specify a value for this property, Amazon Pinpoint uses the <i>active version</i> of the template. The <i>active version</i> is typically the version of a template that's been most recently reviewed and approved for use, depending on your workflow. It isn't necessarily the latest version of a template.</p>
     #   @return [String]
     class CustomMessageActivity < Struct.new(
+      nil,
       :delivery_uri,
       :endpoint_types,
       :message_config,
@@ -2059,6 +2137,7 @@ module Aws::Pinpoint
     #   <p>The text color of the button.</p>
     #   @return [String]
     class DefaultButtonConfiguration < Struct.new(
+      nil,
       :background_color,
       :border_radius,
       :button_action,
@@ -2078,6 +2157,7 @@ module Aws::Pinpoint
     #   <p>The default message variables to use in the message. You can override these default variables with individual address variables.</p>
     #   @return [Hash<String, Array<String>>]
     class DefaultMessage < Struct.new(
+      nil,
       :body,
       :substitutions,
       keyword_init: true
@@ -2108,6 +2188,7 @@ module Aws::Pinpoint
     #   <p>The default URL to open in a recipient's default mobile browser, if a recipient taps the push notification and the value of the Action property is URL.</p>
     #   @return [String]
     class DefaultPushNotificationMessage < Struct.new(
+      nil,
       :action,
       :body,
       :data,
@@ -2137,6 +2218,7 @@ module Aws::Pinpoint
     #   <p>The URL to open in a recipient's default mobile browser, if a recipient taps a push notification that's based on the message template and the value of the Action property is URL.</p>
     #   @return [String]
     class DefaultPushNotificationTemplate < Struct.new(
+      nil,
       :action,
       :body,
       :sound,
@@ -2151,6 +2233,7 @@ module Aws::Pinpoint
     #   <p>The unique identifier for the application. This identifier is displayed as the <b>Project ID</b> on the Amazon Pinpoint console.</p>
     #   @return [String]
     class DeleteAdmChannelRequest < Struct.new(
+      nil,
       :application_id,
       keyword_init: true
     )
@@ -2161,6 +2244,7 @@ module Aws::Pinpoint
     #   <p>Provides information about the status and settings of the ADM (Amazon Device Messaging) channel for an application.</p>
     #   @return [Types::ADMChannelResponse]
     class DeleteAdmChannelResponse < Struct.new(
+      nil,
       :adm_channel_response,
       keyword_init: true
     )
@@ -2171,6 +2255,7 @@ module Aws::Pinpoint
     #   <p>The unique identifier for the application. This identifier is displayed as the <b>Project ID</b> on the Amazon Pinpoint console.</p>
     #   @return [String]
     class DeleteApnsChannelRequest < Struct.new(
+      nil,
       :application_id,
       keyword_init: true
     )
@@ -2181,6 +2266,7 @@ module Aws::Pinpoint
     #   <p>Provides information about the status and settings of the APNs (Apple Push Notification service) channel for an application.</p>
     #   @return [Types::APNSChannelResponse]
     class DeleteApnsChannelResponse < Struct.new(
+      nil,
       :apns_channel_response,
       keyword_init: true
     )
@@ -2191,6 +2277,7 @@ module Aws::Pinpoint
     #   <p>The unique identifier for the application. This identifier is displayed as the <b>Project ID</b> on the Amazon Pinpoint console.</p>
     #   @return [String]
     class DeleteApnsSandboxChannelRequest < Struct.new(
+      nil,
       :application_id,
       keyword_init: true
     )
@@ -2201,6 +2288,7 @@ module Aws::Pinpoint
     #   <p>Provides information about the status and settings of the APNs (Apple Push Notification service) sandbox channel for an application.</p>
     #   @return [Types::APNSSandboxChannelResponse]
     class DeleteApnsSandboxChannelResponse < Struct.new(
+      nil,
       :apns_sandbox_channel_response,
       keyword_init: true
     )
@@ -2211,6 +2299,7 @@ module Aws::Pinpoint
     #   <p>The unique identifier for the application. This identifier is displayed as the <b>Project ID</b> on the Amazon Pinpoint console.</p>
     #   @return [String]
     class DeleteApnsVoipChannelRequest < Struct.new(
+      nil,
       :application_id,
       keyword_init: true
     )
@@ -2221,6 +2310,7 @@ module Aws::Pinpoint
     #   <p>Provides information about the status and settings of the APNs (Apple Push Notification service) VoIP channel for an application.</p>
     #   @return [Types::APNSVoipChannelResponse]
     class DeleteApnsVoipChannelResponse < Struct.new(
+      nil,
       :apns_voip_channel_response,
       keyword_init: true
     )
@@ -2231,6 +2321,7 @@ module Aws::Pinpoint
     #   <p>The unique identifier for the application. This identifier is displayed as the <b>Project ID</b> on the Amazon Pinpoint console.</p>
     #   @return [String]
     class DeleteApnsVoipSandboxChannelRequest < Struct.new(
+      nil,
       :application_id,
       keyword_init: true
     )
@@ -2241,6 +2332,7 @@ module Aws::Pinpoint
     #   <p>Provides information about the status and settings of the APNs (Apple Push Notification service) VoIP sandbox channel for an application.</p>
     #   @return [Types::APNSVoipSandboxChannelResponse]
     class DeleteApnsVoipSandboxChannelResponse < Struct.new(
+      nil,
       :apns_voip_sandbox_channel_response,
       keyword_init: true
     )
@@ -2251,6 +2343,7 @@ module Aws::Pinpoint
     #   <p>The unique identifier for the application. This identifier is displayed as the <b>Project ID</b> on the Amazon Pinpoint console.</p>
     #   @return [String]
     class DeleteAppRequest < Struct.new(
+      nil,
       :application_id,
       keyword_init: true
     )
@@ -2261,6 +2354,7 @@ module Aws::Pinpoint
     #   <p>Provides information about an application.</p>
     #   @return [Types::ApplicationResponse]
     class DeleteAppResponse < Struct.new(
+      nil,
       :application_response,
       keyword_init: true
     )
@@ -2271,6 +2365,7 @@ module Aws::Pinpoint
     #   <p>The unique identifier for the application. This identifier is displayed as the <b>Project ID</b> on the Amazon Pinpoint console.</p>
     #   @return [String]
     class DeleteBaiduChannelRequest < Struct.new(
+      nil,
       :application_id,
       keyword_init: true
     )
@@ -2281,6 +2376,7 @@ module Aws::Pinpoint
     #   <p>Provides information about the status and settings of the Baidu (Baidu Cloud Push) channel for an application.</p>
     #   @return [Types::BaiduChannelResponse]
     class DeleteBaiduChannelResponse < Struct.new(
+      nil,
       :baidu_channel_response,
       keyword_init: true
     )
@@ -2294,6 +2390,7 @@ module Aws::Pinpoint
     #   <p>The unique identifier for the campaign.</p>
     #   @return [String]
     class DeleteCampaignRequest < Struct.new(
+      nil,
       :application_id,
       :campaign_id,
       keyword_init: true
@@ -2305,6 +2402,7 @@ module Aws::Pinpoint
     #   <p>Provides information about the status, configuration, and other settings for a campaign.</p>
     #   @return [Types::CampaignResponse]
     class DeleteCampaignResponse < Struct.new(
+      nil,
       :campaign_response,
       keyword_init: true
     )
@@ -2315,6 +2413,7 @@ module Aws::Pinpoint
     #   <p>The unique identifier for the application. This identifier is displayed as the <b>Project ID</b> on the Amazon Pinpoint console.</p>
     #   @return [String]
     class DeleteEmailChannelRequest < Struct.new(
+      nil,
       :application_id,
       keyword_init: true
     )
@@ -2325,6 +2424,7 @@ module Aws::Pinpoint
     #   <p>Provides information about the status and settings of the email channel for an application.</p>
     #   @return [Types::EmailChannelResponse]
     class DeleteEmailChannelResponse < Struct.new(
+      nil,
       :email_channel_response,
       keyword_init: true
     )
@@ -2338,6 +2438,7 @@ module Aws::Pinpoint
     #   <p>The unique identifier for the version of the message template to update, retrieve information about, or delete. To retrieve identifiers and other information for all the versions of a template, use the <link  linkend="templates-template-name-template-type-versions">Template Versions</link> resource.</p> <p>If specified, this value must match the identifier for an existing template version. If specified for an update operation, this value must match the identifier for the latest existing version of the template. This restriction helps ensure that race conditions don't occur.</p> <p>If you don't specify a value for this parameter, Amazon Pinpoint does the following:</p> <ul><li><p>For a get operation, retrieves information about the active version of the template.</p></li> <li><p>For an update operation, saves the updates to (overwrites) the latest existing version of the template, if the create-new-version parameter isn't used or is set to false.</p></li> <li><p>For a delete operation, deletes the template, including all versions of the template.</p></li></ul>
     #   @return [String]
     class DeleteEmailTemplateRequest < Struct.new(
+      nil,
       :template_name,
       :version,
       keyword_init: true
@@ -2349,6 +2450,7 @@ module Aws::Pinpoint
     #   <p>Provides information about an API request or response.</p>
     #   @return [Types::MessageBody]
     class DeleteEmailTemplateResponse < Struct.new(
+      nil,
       :message_body,
       keyword_init: true
     )
@@ -2362,6 +2464,7 @@ module Aws::Pinpoint
     #   <p>The case insensitive unique identifier for the endpoint. The identifier can't contain <code>$</code>, <code>{</code> or <code>}</code>.</p>
     #   @return [String]
     class DeleteEndpointRequest < Struct.new(
+      nil,
       :application_id,
       :endpoint_id,
       keyword_init: true
@@ -2373,6 +2476,7 @@ module Aws::Pinpoint
     #   <p>Provides information about the channel type and other settings for an endpoint.</p>
     #   @return [Types::EndpointResponse]
     class DeleteEndpointResponse < Struct.new(
+      nil,
       :endpoint_response,
       keyword_init: true
     )
@@ -2383,6 +2487,7 @@ module Aws::Pinpoint
     #   <p>The unique identifier for the application. This identifier is displayed as the <b>Project ID</b> on the Amazon Pinpoint console.</p>
     #   @return [String]
     class DeleteEventStreamRequest < Struct.new(
+      nil,
       :application_id,
       keyword_init: true
     )
@@ -2393,6 +2498,7 @@ module Aws::Pinpoint
     #   <p>Specifies settings for publishing event data to an Amazon Kinesis data stream or an Amazon Kinesis Data Firehose delivery stream.</p>
     #   @return [Types::EventStream]
     class DeleteEventStreamResponse < Struct.new(
+      nil,
       :event_stream,
       keyword_init: true
     )
@@ -2403,6 +2509,7 @@ module Aws::Pinpoint
     #   <p>The unique identifier for the application. This identifier is displayed as the <b>Project ID</b> on the Amazon Pinpoint console.</p>
     #   @return [String]
     class DeleteGcmChannelRequest < Struct.new(
+      nil,
       :application_id,
       keyword_init: true
     )
@@ -2413,6 +2520,7 @@ module Aws::Pinpoint
     #   <p>Provides information about the status and settings of the GCM channel for an application. The GCM channel enables Amazon Pinpoint to send push notifications through the Firebase Cloud Messaging (FCM), formerly Google Cloud Messaging (GCM), service.</p>
     #   @return [Types::GCMChannelResponse]
     class DeleteGcmChannelResponse < Struct.new(
+      nil,
       :gcm_channel_response,
       keyword_init: true
     )
@@ -2426,6 +2534,7 @@ module Aws::Pinpoint
     #   <p>The unique identifier for the version of the message template to update, retrieve information about, or delete. To retrieve identifiers and other information for all the versions of a template, use the <link  linkend="templates-template-name-template-type-versions">Template Versions</link> resource.</p> <p>If specified, this value must match the identifier for an existing template version. If specified for an update operation, this value must match the identifier for the latest existing version of the template. This restriction helps ensure that race conditions don't occur.</p> <p>If you don't specify a value for this parameter, Amazon Pinpoint does the following:</p> <ul><li><p>For a get operation, retrieves information about the active version of the template.</p></li> <li><p>For an update operation, saves the updates to (overwrites) the latest existing version of the template, if the create-new-version parameter isn't used or is set to false.</p></li> <li><p>For a delete operation, deletes the template, including all versions of the template.</p></li></ul>
     #   @return [String]
     class DeleteInAppTemplateRequest < Struct.new(
+      nil,
       :template_name,
       :version,
       keyword_init: true
@@ -2437,6 +2546,7 @@ module Aws::Pinpoint
     #   <p>Provides information about an API request or response.</p>
     #   @return [Types::MessageBody]
     class DeleteInAppTemplateResponse < Struct.new(
+      nil,
       :message_body,
       keyword_init: true
     )
@@ -2450,6 +2560,7 @@ module Aws::Pinpoint
     #   <p>The unique identifier for the journey.</p>
     #   @return [String]
     class DeleteJourneyRequest < Struct.new(
+      nil,
       :application_id,
       :journey_id,
       keyword_init: true
@@ -2461,6 +2572,7 @@ module Aws::Pinpoint
     #   <p>Provides information about the status, configuration, and other settings for a journey.</p>
     #   @return [Types::JourneyResponse]
     class DeleteJourneyResponse < Struct.new(
+      nil,
       :journey_response,
       keyword_init: true
     )
@@ -2474,6 +2586,7 @@ module Aws::Pinpoint
     #   <p>The unique identifier for the version of the message template to update, retrieve information about, or delete. To retrieve identifiers and other information for all the versions of a template, use the <link  linkend="templates-template-name-template-type-versions">Template Versions</link> resource.</p> <p>If specified, this value must match the identifier for an existing template version. If specified for an update operation, this value must match the identifier for the latest existing version of the template. This restriction helps ensure that race conditions don't occur.</p> <p>If you don't specify a value for this parameter, Amazon Pinpoint does the following:</p> <ul><li><p>For a get operation, retrieves information about the active version of the template.</p></li> <li><p>For an update operation, saves the updates to (overwrites) the latest existing version of the template, if the create-new-version parameter isn't used or is set to false.</p></li> <li><p>For a delete operation, deletes the template, including all versions of the template.</p></li></ul>
     #   @return [String]
     class DeletePushTemplateRequest < Struct.new(
+      nil,
       :template_name,
       :version,
       keyword_init: true
@@ -2485,6 +2598,7 @@ module Aws::Pinpoint
     #   <p>Provides information about an API request or response.</p>
     #   @return [Types::MessageBody]
     class DeletePushTemplateResponse < Struct.new(
+      nil,
       :message_body,
       keyword_init: true
     )
@@ -2495,6 +2609,7 @@ module Aws::Pinpoint
     #   <p>The unique identifier for the recommender model configuration. This identifier is displayed as the <b>Recommender ID</b> on the Amazon Pinpoint console.</p>
     #   @return [String]
     class DeleteRecommenderConfigurationRequest < Struct.new(
+      nil,
       :recommender_id,
       keyword_init: true
     )
@@ -2505,6 +2620,7 @@ module Aws::Pinpoint
     #   <p>Provides information about Amazon Pinpoint configuration settings for retrieving and processing data from a recommender model.</p>
     #   @return [Types::RecommenderConfigurationResponse]
     class DeleteRecommenderConfigurationResponse < Struct.new(
+      nil,
       :recommender_configuration_response,
       keyword_init: true
     )
@@ -2518,6 +2634,7 @@ module Aws::Pinpoint
     #   <p>The unique identifier for the segment.</p>
     #   @return [String]
     class DeleteSegmentRequest < Struct.new(
+      nil,
       :application_id,
       :segment_id,
       keyword_init: true
@@ -2529,6 +2646,7 @@ module Aws::Pinpoint
     #   <p>Provides information about the configuration, dimension, and other settings for a segment.</p>
     #   @return [Types::SegmentResponse]
     class DeleteSegmentResponse < Struct.new(
+      nil,
       :segment_response,
       keyword_init: true
     )
@@ -2539,6 +2657,7 @@ module Aws::Pinpoint
     #   <p>The unique identifier for the application. This identifier is displayed as the <b>Project ID</b> on the Amazon Pinpoint console.</p>
     #   @return [String]
     class DeleteSmsChannelRequest < Struct.new(
+      nil,
       :application_id,
       keyword_init: true
     )
@@ -2549,6 +2668,7 @@ module Aws::Pinpoint
     #   <p>Provides information about the status and settings of the SMS channel for an application.</p>
     #   @return [Types::SMSChannelResponse]
     class DeleteSmsChannelResponse < Struct.new(
+      nil,
       :sms_channel_response,
       keyword_init: true
     )
@@ -2562,6 +2682,7 @@ module Aws::Pinpoint
     #   <p>The unique identifier for the version of the message template to update, retrieve information about, or delete. To retrieve identifiers and other information for all the versions of a template, use the <link  linkend="templates-template-name-template-type-versions">Template Versions</link> resource.</p> <p>If specified, this value must match the identifier for an existing template version. If specified for an update operation, this value must match the identifier for the latest existing version of the template. This restriction helps ensure that race conditions don't occur.</p> <p>If you don't specify a value for this parameter, Amazon Pinpoint does the following:</p> <ul><li><p>For a get operation, retrieves information about the active version of the template.</p></li> <li><p>For an update operation, saves the updates to (overwrites) the latest existing version of the template, if the create-new-version parameter isn't used or is set to false.</p></li> <li><p>For a delete operation, deletes the template, including all versions of the template.</p></li></ul>
     #   @return [String]
     class DeleteSmsTemplateRequest < Struct.new(
+      nil,
       :template_name,
       :version,
       keyword_init: true
@@ -2573,6 +2694,7 @@ module Aws::Pinpoint
     #   <p>Provides information about an API request or response.</p>
     #   @return [Types::MessageBody]
     class DeleteSmsTemplateResponse < Struct.new(
+      nil,
       :message_body,
       keyword_init: true
     )
@@ -2586,6 +2708,7 @@ module Aws::Pinpoint
     #   <p>The unique identifier for the user.</p>
     #   @return [String]
     class DeleteUserEndpointsRequest < Struct.new(
+      nil,
       :application_id,
       :user_id,
       keyword_init: true
@@ -2597,6 +2720,7 @@ module Aws::Pinpoint
     #   <p>Provides information about all the endpoints that are associated with a user ID.</p>
     #   @return [Types::EndpointsResponse]
     class DeleteUserEndpointsResponse < Struct.new(
+      nil,
       :endpoints_response,
       keyword_init: true
     )
@@ -2607,6 +2731,7 @@ module Aws::Pinpoint
     #   <p>The unique identifier for the application. This identifier is displayed as the <b>Project ID</b> on the Amazon Pinpoint console.</p>
     #   @return [String]
     class DeleteVoiceChannelRequest < Struct.new(
+      nil,
       :application_id,
       keyword_init: true
     )
@@ -2617,6 +2742,7 @@ module Aws::Pinpoint
     #   <p>Provides information about the status and settings of the voice channel for an application.</p>
     #   @return [Types::VoiceChannelResponse]
     class DeleteVoiceChannelResponse < Struct.new(
+      nil,
       :voice_channel_response,
       keyword_init: true
     )
@@ -2630,6 +2756,7 @@ module Aws::Pinpoint
     #   <p>The unique identifier for the version of the message template to update, retrieve information about, or delete. To retrieve identifiers and other information for all the versions of a template, use the <link  linkend="templates-template-name-template-type-versions">Template Versions</link> resource.</p> <p>If specified, this value must match the identifier for an existing template version. If specified for an update operation, this value must match the identifier for the latest existing version of the template. This restriction helps ensure that race conditions don't occur.</p> <p>If you don't specify a value for this parameter, Amazon Pinpoint does the following:</p> <ul><li><p>For a get operation, retrieves information about the active version of the template.</p></li> <li><p>For an update operation, saves the updates to (overwrites) the latest existing version of the template, if the create-new-version parameter isn't used or is set to false.</p></li> <li><p>For a delete operation, deletes the template, including all versions of the template.</p></li></ul>
     #   @return [String]
     class DeleteVoiceTemplateRequest < Struct.new(
+      nil,
       :template_name,
       :version,
       keyword_init: true
@@ -2641,6 +2768,7 @@ module Aws::Pinpoint
     #   <p>Provides information about an API request or response.</p>
     #   @return [Types::MessageBody]
     class DeleteVoiceTemplateResponse < Struct.new(
+      nil,
       :message_body,
       keyword_init: true
     )
@@ -2676,6 +2804,7 @@ module Aws::Pinpoint
     #   <p>The default message for the voice channel. This message overrides the default message (DefaultMessage).</p>
     #   @return [Types::VoiceMessage]
     class DirectMessageConfiguration < Struct.new(
+      nil,
       :adm_message,
       :apns_message,
       :baidu_message,
@@ -2710,6 +2839,7 @@ module Aws::Pinpoint
     #   <p>The ARN of an IAM role for Amazon Pinpoint to use to send email from your campaigns or journeys through Amazon SES.</p>
     #   @return [String]
     class EmailChannelRequest < Struct.new(
+      nil,
       :configuration_set,
       :enabled,
       :from_address,
@@ -2771,6 +2901,7 @@ module Aws::Pinpoint
     #   <p>The current version of the email channel.</p>
     #   @return [Integer]
     class EmailChannelResponse < Struct.new(
+      nil,
       :application_id,
       :configuration_set,
       :creation_date,
@@ -2815,6 +2946,7 @@ module Aws::Pinpoint
     #   <p>The default message variables to use in the email message. You can override the default variables with individual address variables.</p>
     #   @return [Hash<String, Array<String>>]
     class EmailMessage < Struct.new(
+      nil,
       :body,
       :feedback_forwarding_address,
       :from_address,
@@ -2841,6 +2973,7 @@ module Aws::Pinpoint
     #   <p>The unique identifier for the version of the email template to use for the message. If specified, this value must match the identifier for an existing template version. To retrieve a list of versions and version identifiers for a template, use the <link  linkend="templates-template-name-template-type-versions">Template Versions</link> resource.</p> <p>If you don't specify a value for this property, Amazon Pinpoint uses the <i>active version</i> of the template. The <i>active version</i> is typically the version of a template that's been most recently reviewed and approved for use, depending on your workflow. It isn't necessarily the latest version of a template.</p>
     #   @return [String]
     class EmailMessageActivity < Struct.new(
+      nil,
       :message_config,
       :next_activity,
       :template_name,
@@ -2876,6 +3009,7 @@ module Aws::Pinpoint
     #   <p>The message body, in plain text format, to use in email messages that are based on the message template. We recommend using plain text format for email clients that don't render HTML content and clients that are connected to high-latency networks, such as mobile devices.</p>
     #   @return [String]
     class EmailTemplateRequest < Struct.new(
+      nil,
       :default_substitutions,
       :html_part,
       :recommender_id,
@@ -2933,6 +3067,7 @@ module Aws::Pinpoint
     #   <p>The unique identifier, as an integer, for the active version of the message template, or the version of the template that you specified by using the version parameter in your request.</p>
     #   @return [String]
     class EmailTemplateResponse < Struct.new(
+      nil,
       :arn,
       :creation_date,
       :default_substitutions,
@@ -2990,6 +3125,7 @@ module Aws::Pinpoint
     #   <p>One or more custom attributes that describe the user who's associated with the endpoint.</p>
     #   @return [Types::EndpointUser]
     class EndpointBatchItem < Struct.new(
+      nil,
       :address,
       :attributes,
       :channel_type,
@@ -3012,6 +3148,7 @@ module Aws::Pinpoint
     #   <p>An array that defines the endpoints to create or update and, for each endpoint, the property values to set or change. An array can contain a maximum of 100 items.</p>
     #   @return [Array<Types::EndpointBatchItem>]
     class EndpointBatchRequest < Struct.new(
+      nil,
       :item,
       keyword_init: true
     )
@@ -3044,6 +3181,7 @@ module Aws::Pinpoint
     #   <p>The time zone of the endpoint, specified as a tz database name value, such as America/Los_Angeles.</p>
     #   @return [String]
     class EndpointDemographic < Struct.new(
+      nil,
       :app_version,
       :locale,
       :make,
@@ -3065,6 +3203,7 @@ module Aws::Pinpoint
     #   <p>The status code that's returned in the response as a result of processing the endpoint data.</p>
     #   @return [Integer]
     class EndpointItemResponse < Struct.new(
+      nil,
       :message,
       :status_code,
       keyword_init: true
@@ -3092,6 +3231,7 @@ module Aws::Pinpoint
     #   <p>The name of the region where the endpoint is located. For locations in the United States, this value is the name of a state.</p>
     #   @return [String]
     class EndpointLocation < Struct.new(
+      nil,
       :city,
       :country,
       :latitude,
@@ -3123,6 +3263,7 @@ module Aws::Pinpoint
     #   <p>For push notifications that are sent through the GCM channel, specifies whether the endpoint's device registration token was updated as part of delivering the message.</p>
     #   @return [String]
     class EndpointMessageResult < Struct.new(
+      nil,
       :address,
       :delivery_status,
       :message_id,
@@ -3169,6 +3310,7 @@ module Aws::Pinpoint
     #   <p>One or more custom attributes that describe the user who's associated with the endpoint.</p>
     #   @return [Types::EndpointUser]
     class EndpointRequest < Struct.new(
+      nil,
       :address,
       :attributes,
       :channel_type,
@@ -3232,6 +3374,7 @@ module Aws::Pinpoint
     #   <p>One or more custom user attributes that your app reports to Amazon Pinpoint for the user who's associated with the endpoint.</p>
     #   @return [Types::EndpointUser]
     class EndpointResponse < Struct.new(
+      nil,
       :address,
       :application_id,
       :attributes,
@@ -3269,6 +3412,7 @@ module Aws::Pinpoint
     #   <p>The title or subject line of the message. If specified, this value overrides the default message title or subject line.</p>
     #   @return [String]
     class EndpointSendConfiguration < Struct.new(
+      nil,
       :body_override,
       :context,
       :raw_content,
@@ -3287,6 +3431,7 @@ module Aws::Pinpoint
     #   <p>The unique identifier for the user.</p>
     #   @return [String]
     class EndpointUser < Struct.new(
+      nil,
       :user_attributes,
       :user_id,
       keyword_init: true
@@ -3299,6 +3444,7 @@ module Aws::Pinpoint
     #   <p>An array of responses, one for each endpoint that's associated with the user ID.</p>
     #   @return [Array<Types::EndpointResponse>]
     class EndpointsResponse < Struct.new(
+      nil,
       :item,
       keyword_init: true
     )
@@ -3337,6 +3483,7 @@ module Aws::Pinpoint
     #   <p>The date and time, in ISO 8601 format, when the event occurred.</p>
     #   @return [String]
     class Event < Struct.new(
+      nil,
       :app_package_name,
       :app_title,
       :app_version_code,
@@ -3360,6 +3507,7 @@ module Aws::Pinpoint
     #   <p>The message identifier (message_id) for the message to use when determining whether message events meet the condition.</p>
     #   @return [String]
     class EventCondition < Struct.new(
+      nil,
       :dimensions,
       :message_activity,
       keyword_init: true
@@ -3378,6 +3526,7 @@ module Aws::Pinpoint
     #   <p>One or more custom metrics that your application reports to Amazon Pinpoint. You can use these metrics as selection criteria when you create an event filter.</p>
     #   @return [Hash<String, Types::MetricDimension>]
     class EventDimensions < Struct.new(
+      nil,
       :attributes,
       :event_type,
       :metrics,
@@ -3394,6 +3543,7 @@ module Aws::Pinpoint
     #   <p>The type of event that causes the campaign to be sent or the journey activity to be performed. Valid values are: SYSTEM, sends the campaign or performs the activity when a system event occurs; and, ENDPOINT, sends the campaign or performs the activity when an endpoint event (<link  linkend="apps-application-id-events">Events resource</link>) occurs.</p>
     #   @return [String]
     class EventFilter < Struct.new(
+      nil,
       :dimensions,
       :filter_type,
       keyword_init: true
@@ -3409,6 +3559,7 @@ module Aws::Pinpoint
     #   <p>The status code that's returned in the response as a result of processing the event. Possible values are: 202, for events that were accepted; and, 400, for events that weren't valid.</p>
     #   @return [Integer]
     class EventItemResponse < Struct.new(
+      nil,
       :message,
       :status_code,
       keyword_init: true
@@ -3423,6 +3574,7 @@ module Aws::Pinpoint
     # @!attribute segment_id
     #   @return [String]
     class EventStartCondition < Struct.new(
+      nil,
       :event_filter,
       :segment_id,
       keyword_init: true
@@ -3452,6 +3604,7 @@ module Aws::Pinpoint
     #   <p>The AWS Identity and Access Management (IAM) role that authorizes Amazon Pinpoint to publish event data to the stream in your AWS account.</p>
     #   @return [String]
     class EventStream < Struct.new(
+      nil,
       :application_id,
       :destination_stream_arn,
       :external_id,
@@ -3471,6 +3624,7 @@ module Aws::Pinpoint
     #   <p>A set of properties that are associated with the event.</p>
     #   @return [Hash<String, Types::Event>]
     class EventsBatch < Struct.new(
+      nil,
       :endpoint,
       :events,
       keyword_init: true
@@ -3483,6 +3637,7 @@ module Aws::Pinpoint
     #   <p>The batch of events to process. For each item in a batch, the endpoint ID acts as a key that has an EventsBatch object as its value.</p>
     #   @return [Hash<String, Types::EventsBatch>]
     class EventsRequest < Struct.new(
+      nil,
       :batch_item,
       keyword_init: true
     )
@@ -3494,6 +3649,7 @@ module Aws::Pinpoint
     #   <p>A map that contains a multipart response for each endpoint. For each item in this object, the endpoint ID is the key and the item response is the value. If no item response exists, the value can also be one of the following: 202, the request was processed successfully; or 400, the payload wasn't valid or required fields were missing.</p>
     #   @return [Hash<String, Types::ItemResponse>]
     class EventsResponse < Struct.new(
+      nil,
       :results,
       keyword_init: true
     )
@@ -3514,6 +3670,7 @@ module Aws::Pinpoint
     #   <p>The version of the segment to export endpoint definitions from, if specified.</p>
     #   @return [Integer]
     class ExportJobRequest < Struct.new(
+      nil,
       :role_arn,
       :s3_url_prefix,
       :segment_id,
@@ -3537,6 +3694,7 @@ module Aws::Pinpoint
     #   <p>The version of the segment that the endpoint definitions were exported from.</p>
     #   @return [Integer]
     class ExportJobResource < Struct.new(
+      nil,
       :role_arn,
       :s3_url_prefix,
       :segment_id,
@@ -3587,6 +3745,7 @@ module Aws::Pinpoint
     #   <p>The job type. This value is EXPORT for export jobs.</p>
     #   @return [String]
     class ExportJobResponse < Struct.new(
+      nil,
       :application_id,
       :completed_pieces,
       :completion_date,
@@ -3613,6 +3772,7 @@ module Aws::Pinpoint
     #   <p>The string to use in a subsequent request to get the next page of results in a paginated response. This value is null if there are no additional pages.</p>
     #   @return [String]
     class ExportJobsResponse < Struct.new(
+      nil,
       :item,
       :next_token,
       keyword_init: true
@@ -3628,6 +3788,7 @@ module Aws::Pinpoint
     #   <p>The unique identifier for the request or response.</p>
     #   @return [String]
     class ForbiddenException < Struct.new(
+      nil,
       :message,
       :request_id,
       keyword_init: true
@@ -3649,6 +3810,7 @@ module Aws::Pinpoint
     #   <p>The contents of the JSON file provided by Google during registration in order to generate an access token for authentication. For more information see <a href="https://firebase.google.com/docs/cloud-messaging/migrate-v1">Migrate from legacy FCM APIs to HTTP v1</a>.</p>
     #   @return [String]
     class GCMChannelRequest < Struct.new(
+      nil,
       :api_key,
       :default_authentication_method,
       :enabled,
@@ -3699,6 +3861,7 @@ module Aws::Pinpoint
     #   <p>The current version of the GCM channel.</p>
     #   @return [Integer]
     class GCMChannelResponse < Struct.new(
+      nil,
       :application_id,
       :creation_date,
       :credential,
@@ -3773,6 +3936,7 @@ module Aws::Pinpoint
     #   <p>The URL to open in the recipient's default mobile browser, if a recipient taps the push notification and the value of the Action property is URL.</p>
     #   @return [String]
     class GCMMessage < Struct.new(
+      nil,
       :action,
       :body,
       :collapse_key,
@@ -3804,6 +3968,7 @@ module Aws::Pinpoint
     #   <p>The longitude coordinate of the location.</p>
     #   @return [Float]
     class GPSCoordinates < Struct.new(
+      nil,
       :latitude,
       :longitude,
       keyword_init: true
@@ -3819,6 +3984,7 @@ module Aws::Pinpoint
     #   <p>The range, in kilometers, from the GPS coordinates.</p>
     #   @return [Float]
     class GPSPointDimension < Struct.new(
+      nil,
       :coordinates,
       :range_in_kilometers,
       keyword_init: true
@@ -3830,6 +3996,7 @@ module Aws::Pinpoint
     #   <p>The unique identifier for the application. This identifier is displayed as the <b>Project ID</b> on the Amazon Pinpoint console.</p>
     #   @return [String]
     class GetAdmChannelRequest < Struct.new(
+      nil,
       :application_id,
       keyword_init: true
     )
@@ -3840,6 +4007,7 @@ module Aws::Pinpoint
     #   <p>Provides information about the status and settings of the ADM (Amazon Device Messaging) channel for an application.</p>
     #   @return [Types::ADMChannelResponse]
     class GetAdmChannelResponse < Struct.new(
+      nil,
       :adm_channel_response,
       keyword_init: true
     )
@@ -3850,6 +4018,7 @@ module Aws::Pinpoint
     #   <p>The unique identifier for the application. This identifier is displayed as the <b>Project ID</b> on the Amazon Pinpoint console.</p>
     #   @return [String]
     class GetApnsChannelRequest < Struct.new(
+      nil,
       :application_id,
       keyword_init: true
     )
@@ -3860,6 +4029,7 @@ module Aws::Pinpoint
     #   <p>Provides information about the status and settings of the APNs (Apple Push Notification service) channel for an application.</p>
     #   @return [Types::APNSChannelResponse]
     class GetApnsChannelResponse < Struct.new(
+      nil,
       :apns_channel_response,
       keyword_init: true
     )
@@ -3870,6 +4040,7 @@ module Aws::Pinpoint
     #   <p>The unique identifier for the application. This identifier is displayed as the <b>Project ID</b> on the Amazon Pinpoint console.</p>
     #   @return [String]
     class GetApnsSandboxChannelRequest < Struct.new(
+      nil,
       :application_id,
       keyword_init: true
     )
@@ -3880,6 +4051,7 @@ module Aws::Pinpoint
     #   <p>Provides information about the status and settings of the APNs (Apple Push Notification service) sandbox channel for an application.</p>
     #   @return [Types::APNSSandboxChannelResponse]
     class GetApnsSandboxChannelResponse < Struct.new(
+      nil,
       :apns_sandbox_channel_response,
       keyword_init: true
     )
@@ -3890,6 +4062,7 @@ module Aws::Pinpoint
     #   <p>The unique identifier for the application. This identifier is displayed as the <b>Project ID</b> on the Amazon Pinpoint console.</p>
     #   @return [String]
     class GetApnsVoipChannelRequest < Struct.new(
+      nil,
       :application_id,
       keyword_init: true
     )
@@ -3900,6 +4073,7 @@ module Aws::Pinpoint
     #   <p>Provides information about the status and settings of the APNs (Apple Push Notification service) VoIP channel for an application.</p>
     #   @return [Types::APNSVoipChannelResponse]
     class GetApnsVoipChannelResponse < Struct.new(
+      nil,
       :apns_voip_channel_response,
       keyword_init: true
     )
@@ -3910,6 +4084,7 @@ module Aws::Pinpoint
     #   <p>The unique identifier for the application. This identifier is displayed as the <b>Project ID</b> on the Amazon Pinpoint console.</p>
     #   @return [String]
     class GetApnsVoipSandboxChannelRequest < Struct.new(
+      nil,
       :application_id,
       keyword_init: true
     )
@@ -3920,6 +4095,7 @@ module Aws::Pinpoint
     #   <p>Provides information about the status and settings of the APNs (Apple Push Notification service) VoIP sandbox channel for an application.</p>
     #   @return [Types::APNSVoipSandboxChannelResponse]
     class GetApnsVoipSandboxChannelResponse < Struct.new(
+      nil,
       :apns_voip_sandbox_channel_response,
       keyword_init: true
     )
@@ -3930,6 +4106,7 @@ module Aws::Pinpoint
     #   <p>The unique identifier for the application. This identifier is displayed as the <b>Project ID</b> on the Amazon Pinpoint console.</p>
     #   @return [String]
     class GetAppRequest < Struct.new(
+      nil,
       :application_id,
       keyword_init: true
     )
@@ -3940,6 +4117,7 @@ module Aws::Pinpoint
     #   <p>Provides information about an application.</p>
     #   @return [Types::ApplicationResponse]
     class GetAppResponse < Struct.new(
+      nil,
       :application_response,
       keyword_init: true
     )
@@ -3965,6 +4143,7 @@ module Aws::Pinpoint
     #   <p>The first date and time to retrieve data for, as part of an inclusive date range that filters the query results. This value should be in extended ISO 8601 format and use Coordinated Universal Time (UTC), for example: 2019-07-19T20:00:00Z for 8:00 PM UTC July 19, 2019. This value should also be fewer than 90 days from the current day.</p>
     #   @return [Time]
     class GetApplicationDateRangeKpiRequest < Struct.new(
+      nil,
       :application_id,
       :end_time,
       :kpi_name,
@@ -3980,6 +4159,7 @@ module Aws::Pinpoint
     #   <p>Provides the results of a query that retrieved the data for a standard metric that applies to an application, and provides information about that query.</p>
     #   @return [Types::ApplicationDateRangeKpiResponse]
     class GetApplicationDateRangeKpiResponse < Struct.new(
+      nil,
       :application_date_range_kpi_response,
       keyword_init: true
     )
@@ -3990,6 +4170,7 @@ module Aws::Pinpoint
     #   <p>The unique identifier for the application. This identifier is displayed as the <b>Project ID</b> on the Amazon Pinpoint console.</p>
     #   @return [String]
     class GetApplicationSettingsRequest < Struct.new(
+      nil,
       :application_id,
       keyword_init: true
     )
@@ -4000,6 +4181,7 @@ module Aws::Pinpoint
     #   <p>Provides information about an application, including the default settings for an application.</p>
     #   @return [Types::ApplicationSettingsResource]
     class GetApplicationSettingsResponse < Struct.new(
+      nil,
       :application_settings_resource,
       keyword_init: true
     )
@@ -4013,6 +4195,7 @@ module Aws::Pinpoint
     #   <p>The NextToken string that specifies which page of results to return in a paginated response.</p>
     #   @return [String]
     class GetAppsRequest < Struct.new(
+      nil,
       :page_size,
       :token,
       keyword_init: true
@@ -4024,6 +4207,7 @@ module Aws::Pinpoint
     #   <p>Provides information about all of your applications.</p>
     #   @return [Types::ApplicationsResponse]
     class GetAppsResponse < Struct.new(
+      nil,
       :applications_response,
       keyword_init: true
     )
@@ -4034,6 +4218,7 @@ module Aws::Pinpoint
     #   <p>The unique identifier for the application. This identifier is displayed as the <b>Project ID</b> on the Amazon Pinpoint console.</p>
     #   @return [String]
     class GetBaiduChannelRequest < Struct.new(
+      nil,
       :application_id,
       keyword_init: true
     )
@@ -4044,6 +4229,7 @@ module Aws::Pinpoint
     #   <p>Provides information about the status and settings of the Baidu (Baidu Cloud Push) channel for an application.</p>
     #   @return [Types::BaiduChannelResponse]
     class GetBaiduChannelResponse < Struct.new(
+      nil,
       :baidu_channel_response,
       keyword_init: true
     )
@@ -4063,6 +4249,7 @@ module Aws::Pinpoint
     #   <p>The NextToken string that specifies which page of results to return in a paginated response.</p>
     #   @return [String]
     class GetCampaignActivitiesRequest < Struct.new(
+      nil,
       :application_id,
       :campaign_id,
       :page_size,
@@ -4076,6 +4263,7 @@ module Aws::Pinpoint
     #   <p>Provides information about the activities that were performed by a campaign.</p>
     #   @return [Types::ActivitiesResponse]
     class GetCampaignActivitiesResponse < Struct.new(
+      nil,
       :activities_response,
       keyword_init: true
     )
@@ -4104,6 +4292,7 @@ module Aws::Pinpoint
     #   <p>The first date and time to retrieve data for, as part of an inclusive date range that filters the query results. This value should be in extended ISO 8601 format and use Coordinated Universal Time (UTC), for example: 2019-07-19T20:00:00Z for 8:00 PM UTC July 19, 2019. This value should also be fewer than 90 days from the current day.</p>
     #   @return [Time]
     class GetCampaignDateRangeKpiRequest < Struct.new(
+      nil,
       :application_id,
       :campaign_id,
       :end_time,
@@ -4120,6 +4309,7 @@ module Aws::Pinpoint
     #   <p>Provides the results of a query that retrieved the data for a standard metric that applies to a campaign, and provides information about that query.</p>
     #   @return [Types::CampaignDateRangeKpiResponse]
     class GetCampaignDateRangeKpiResponse < Struct.new(
+      nil,
       :campaign_date_range_kpi_response,
       keyword_init: true
     )
@@ -4133,6 +4323,7 @@ module Aws::Pinpoint
     #   <p>The unique identifier for the campaign.</p>
     #   @return [String]
     class GetCampaignRequest < Struct.new(
+      nil,
       :application_id,
       :campaign_id,
       keyword_init: true
@@ -4144,6 +4335,7 @@ module Aws::Pinpoint
     #   <p>Provides information about the status, configuration, and other settings for a campaign.</p>
     #   @return [Types::CampaignResponse]
     class GetCampaignResponse < Struct.new(
+      nil,
       :campaign_response,
       keyword_init: true
     )
@@ -4160,6 +4352,7 @@ module Aws::Pinpoint
     #   <p>The unique version number (Version property) for the campaign version.</p>
     #   @return [String]
     class GetCampaignVersionRequest < Struct.new(
+      nil,
       :application_id,
       :campaign_id,
       :version,
@@ -4172,6 +4365,7 @@ module Aws::Pinpoint
     #   <p>Provides information about the status, configuration, and other settings for a campaign.</p>
     #   @return [Types::CampaignResponse]
     class GetCampaignVersionResponse < Struct.new(
+      nil,
       :campaign_response,
       keyword_init: true
     )
@@ -4191,6 +4385,7 @@ module Aws::Pinpoint
     #   <p>The NextToken string that specifies which page of results to return in a paginated response.</p>
     #   @return [String]
     class GetCampaignVersionsRequest < Struct.new(
+      nil,
       :application_id,
       :campaign_id,
       :page_size,
@@ -4204,6 +4399,7 @@ module Aws::Pinpoint
     #   <p>Provides information about the configuration and other settings for all the campaigns that are associated with an application.</p>
     #   @return [Types::CampaignsResponse]
     class GetCampaignVersionsResponse < Struct.new(
+      nil,
       :campaigns_response,
       keyword_init: true
     )
@@ -4220,6 +4416,7 @@ module Aws::Pinpoint
     #   <p>The NextToken string that specifies which page of results to return in a paginated response.</p>
     #   @return [String]
     class GetCampaignsRequest < Struct.new(
+      nil,
       :application_id,
       :page_size,
       :token,
@@ -4232,6 +4429,7 @@ module Aws::Pinpoint
     #   <p>Provides information about the configuration and other settings for all the campaigns that are associated with an application.</p>
     #   @return [Types::CampaignsResponse]
     class GetCampaignsResponse < Struct.new(
+      nil,
       :campaigns_response,
       keyword_init: true
     )
@@ -4242,6 +4440,7 @@ module Aws::Pinpoint
     #   <p>The unique identifier for the application. This identifier is displayed as the <b>Project ID</b> on the Amazon Pinpoint console.</p>
     #   @return [String]
     class GetChannelsRequest < Struct.new(
+      nil,
       :application_id,
       keyword_init: true
     )
@@ -4252,6 +4451,7 @@ module Aws::Pinpoint
     #   <p>Provides information about the general settings and status of all channels for an application, including channels that aren't enabled for the application.</p>
     #   @return [Types::ChannelsResponse]
     class GetChannelsResponse < Struct.new(
+      nil,
       :channels_response,
       keyword_init: true
     )
@@ -4262,6 +4462,7 @@ module Aws::Pinpoint
     #   <p>The unique identifier for the application. This identifier is displayed as the <b>Project ID</b> on the Amazon Pinpoint console.</p>
     #   @return [String]
     class GetEmailChannelRequest < Struct.new(
+      nil,
       :application_id,
       keyword_init: true
     )
@@ -4272,6 +4473,7 @@ module Aws::Pinpoint
     #   <p>Provides information about the status and settings of the email channel for an application.</p>
     #   @return [Types::EmailChannelResponse]
     class GetEmailChannelResponse < Struct.new(
+      nil,
       :email_channel_response,
       keyword_init: true
     )
@@ -4285,6 +4487,7 @@ module Aws::Pinpoint
     #   <p>The unique identifier for the version of the message template to update, retrieve information about, or delete. To retrieve identifiers and other information for all the versions of a template, use the <link  linkend="templates-template-name-template-type-versions">Template Versions</link> resource.</p> <p>If specified, this value must match the identifier for an existing template version. If specified for an update operation, this value must match the identifier for the latest existing version of the template. This restriction helps ensure that race conditions don't occur.</p> <p>If you don't specify a value for this parameter, Amazon Pinpoint does the following:</p> <ul><li><p>For a get operation, retrieves information about the active version of the template.</p></li> <li><p>For an update operation, saves the updates to (overwrites) the latest existing version of the template, if the create-new-version parameter isn't used or is set to false.</p></li> <li><p>For a delete operation, deletes the template, including all versions of the template.</p></li></ul>
     #   @return [String]
     class GetEmailTemplateRequest < Struct.new(
+      nil,
       :template_name,
       :version,
       keyword_init: true
@@ -4296,6 +4499,7 @@ module Aws::Pinpoint
     #   <p>Provides information about the content and settings for a message template that can be used in messages that are sent through the email channel.</p>
     #   @return [Types::EmailTemplateResponse]
     class GetEmailTemplateResponse < Struct.new(
+      nil,
       :email_template_response,
       keyword_init: true
     )
@@ -4309,6 +4513,7 @@ module Aws::Pinpoint
     #   <p>The case insensitive unique identifier for the endpoint. The identifier can't contain <code>$</code>, <code>{</code> or <code>}</code>.</p>
     #   @return [String]
     class GetEndpointRequest < Struct.new(
+      nil,
       :application_id,
       :endpoint_id,
       keyword_init: true
@@ -4320,6 +4525,7 @@ module Aws::Pinpoint
     #   <p>Provides information about the channel type and other settings for an endpoint.</p>
     #   @return [Types::EndpointResponse]
     class GetEndpointResponse < Struct.new(
+      nil,
       :endpoint_response,
       keyword_init: true
     )
@@ -4330,6 +4536,7 @@ module Aws::Pinpoint
     #   <p>The unique identifier for the application. This identifier is displayed as the <b>Project ID</b> on the Amazon Pinpoint console.</p>
     #   @return [String]
     class GetEventStreamRequest < Struct.new(
+      nil,
       :application_id,
       keyword_init: true
     )
@@ -4340,6 +4547,7 @@ module Aws::Pinpoint
     #   <p>Specifies settings for publishing event data to an Amazon Kinesis data stream or an Amazon Kinesis Data Firehose delivery stream.</p>
     #   @return [Types::EventStream]
     class GetEventStreamResponse < Struct.new(
+      nil,
       :event_stream,
       keyword_init: true
     )
@@ -4353,6 +4561,7 @@ module Aws::Pinpoint
     #   <p>The unique identifier for the job.</p>
     #   @return [String]
     class GetExportJobRequest < Struct.new(
+      nil,
       :application_id,
       :job_id,
       keyword_init: true
@@ -4364,6 +4573,7 @@ module Aws::Pinpoint
     #   <p>Provides information about the status and settings of a job that exports endpoint definitions to a file. The file can be added directly to an Amazon Simple Storage Service (Amazon S3) bucket by using the Amazon Pinpoint API or downloaded directly to a computer by using the Amazon Pinpoint console.</p>
     #   @return [Types::ExportJobResponse]
     class GetExportJobResponse < Struct.new(
+      nil,
       :export_job_response,
       keyword_init: true
     )
@@ -4380,6 +4590,7 @@ module Aws::Pinpoint
     #   <p>The NextToken string that specifies which page of results to return in a paginated response.</p>
     #   @return [String]
     class GetExportJobsRequest < Struct.new(
+      nil,
       :application_id,
       :page_size,
       :token,
@@ -4392,6 +4603,7 @@ module Aws::Pinpoint
     #   <p>Provides information about all the export jobs that are associated with an application or segment. An export job is a job that exports endpoint definitions to a file.</p>
     #   @return [Types::ExportJobsResponse]
     class GetExportJobsResponse < Struct.new(
+      nil,
       :export_jobs_response,
       keyword_init: true
     )
@@ -4402,6 +4614,7 @@ module Aws::Pinpoint
     #   <p>The unique identifier for the application. This identifier is displayed as the <b>Project ID</b> on the Amazon Pinpoint console.</p>
     #   @return [String]
     class GetGcmChannelRequest < Struct.new(
+      nil,
       :application_id,
       keyword_init: true
     )
@@ -4412,6 +4625,7 @@ module Aws::Pinpoint
     #   <p>Provides information about the status and settings of the GCM channel for an application. The GCM channel enables Amazon Pinpoint to send push notifications through the Firebase Cloud Messaging (FCM), formerly Google Cloud Messaging (GCM), service.</p>
     #   @return [Types::GCMChannelResponse]
     class GetGcmChannelResponse < Struct.new(
+      nil,
       :gcm_channel_response,
       keyword_init: true
     )
@@ -4425,6 +4639,7 @@ module Aws::Pinpoint
     #   <p>The unique identifier for the job.</p>
     #   @return [String]
     class GetImportJobRequest < Struct.new(
+      nil,
       :application_id,
       :job_id,
       keyword_init: true
@@ -4436,6 +4651,7 @@ module Aws::Pinpoint
     #   <p>Provides information about the status and settings of a job that imports endpoint definitions from one or more files. The files can be stored in an Amazon Simple Storage Service (Amazon S3) bucket or uploaded directly from a computer by using the Amazon Pinpoint console.</p>
     #   @return [Types::ImportJobResponse]
     class GetImportJobResponse < Struct.new(
+      nil,
       :import_job_response,
       keyword_init: true
     )
@@ -4452,6 +4668,7 @@ module Aws::Pinpoint
     #   <p>The NextToken string that specifies which page of results to return in a paginated response.</p>
     #   @return [String]
     class GetImportJobsRequest < Struct.new(
+      nil,
       :application_id,
       :page_size,
       :token,
@@ -4464,6 +4681,7 @@ module Aws::Pinpoint
     #   <p>Provides information about the status and settings of all the import jobs that are associated with an application or segment. An import job is a job that imports endpoint definitions from one or more files.</p>
     #   @return [Types::ImportJobsResponse]
     class GetImportJobsResponse < Struct.new(
+      nil,
       :import_jobs_response,
       keyword_init: true
     )
@@ -4477,6 +4695,7 @@ module Aws::Pinpoint
     #   <p>The unique identifier for the endpoint.</p>
     #   @return [String]
     class GetInAppMessagesRequest < Struct.new(
+      nil,
       :application_id,
       :endpoint_id,
       keyword_init: true
@@ -4488,6 +4707,7 @@ module Aws::Pinpoint
     #   <p>Get in-app messages response object.</p>
     #   @return [Types::InAppMessagesResponse]
     class GetInAppMessagesResponse < Struct.new(
+      nil,
       :in_app_messages_response,
       keyword_init: true
     )
@@ -4501,6 +4721,7 @@ module Aws::Pinpoint
     #   <p>The unique identifier for the version of the message template to update, retrieve information about, or delete. To retrieve identifiers and other information for all the versions of a template, use the <link  linkend="templates-template-name-template-type-versions">Template Versions</link> resource.</p> <p>If specified, this value must match the identifier for an existing template version. If specified for an update operation, this value must match the identifier for the latest existing version of the template. This restriction helps ensure that race conditions don't occur.</p> <p>If you don't specify a value for this parameter, Amazon Pinpoint does the following:</p> <ul><li><p>For a get operation, retrieves information about the active version of the template.</p></li> <li><p>For an update operation, saves the updates to (overwrites) the latest existing version of the template, if the create-new-version parameter isn't used or is set to false.</p></li> <li><p>For a delete operation, deletes the template, including all versions of the template.</p></li></ul>
     #   @return [String]
     class GetInAppTemplateRequest < Struct.new(
+      nil,
       :template_name,
       :version,
       keyword_init: true
@@ -4512,6 +4733,7 @@ module Aws::Pinpoint
     #   <p>In-App Template Response.</p>
     #   @return [Types::InAppTemplateResponse]
     class GetInAppTemplateResponse < Struct.new(
+      nil,
       :in_app_template_response,
       keyword_init: true
     )
@@ -4540,6 +4762,7 @@ module Aws::Pinpoint
     #   <p>The first date and time to retrieve data for, as part of an inclusive date range that filters the query results. This value should be in extended ISO 8601 format and use Coordinated Universal Time (UTC), for example: 2019-07-19T20:00:00Z for 8:00 PM UTC July 19, 2019. This value should also be fewer than 90 days from the current day.</p>
     #   @return [Time]
     class GetJourneyDateRangeKpiRequest < Struct.new(
+      nil,
       :application_id,
       :end_time,
       :journey_id,
@@ -4556,6 +4779,7 @@ module Aws::Pinpoint
     #   <p>Provides the results of a query that retrieved the data for a standard engagement metric that applies to a journey, and provides information about that query.</p>
     #   @return [Types::JourneyDateRangeKpiResponse]
     class GetJourneyDateRangeKpiResponse < Struct.new(
+      nil,
       :journey_date_range_kpi_response,
       keyword_init: true
     )
@@ -4578,6 +4802,7 @@ module Aws::Pinpoint
     #   <p>The maximum number of items to include in each page of a paginated response. This parameter is not supported for application, campaign, and journey metrics.</p>
     #   @return [String]
     class GetJourneyExecutionActivityMetricsRequest < Struct.new(
+      nil,
       :application_id,
       :journey_activity_id,
       :journey_id,
@@ -4592,6 +4817,7 @@ module Aws::Pinpoint
     #   <p>Provides the results of a query that retrieved the data for a standard execution metric that applies to a journey activity, and provides information about that query.</p>
     #   @return [Types::JourneyExecutionActivityMetricsResponse]
     class GetJourneyExecutionActivityMetricsResponse < Struct.new(
+      nil,
       :journey_execution_activity_metrics_response,
       keyword_init: true
     )
@@ -4611,6 +4837,7 @@ module Aws::Pinpoint
     #   <p>The maximum number of items to include in each page of a paginated response. This parameter is not supported for application, campaign, and journey metrics.</p>
     #   @return [String]
     class GetJourneyExecutionMetricsRequest < Struct.new(
+      nil,
       :application_id,
       :journey_id,
       :next_token,
@@ -4624,6 +4851,7 @@ module Aws::Pinpoint
     #   <p>Provides the results of a query that retrieved the data for a standard execution metric that applies to a journey, and provides information about that query.</p>
     #   @return [Types::JourneyExecutionMetricsResponse]
     class GetJourneyExecutionMetricsResponse < Struct.new(
+      nil,
       :journey_execution_metrics_response,
       keyword_init: true
     )
@@ -4637,6 +4865,7 @@ module Aws::Pinpoint
     #   <p>The unique identifier for the journey.</p>
     #   @return [String]
     class GetJourneyRequest < Struct.new(
+      nil,
       :application_id,
       :journey_id,
       keyword_init: true
@@ -4648,6 +4877,7 @@ module Aws::Pinpoint
     #   <p>Provides information about the status, configuration, and other settings for a journey.</p>
     #   @return [Types::JourneyResponse]
     class GetJourneyResponse < Struct.new(
+      nil,
       :journey_response,
       keyword_init: true
     )
@@ -4673,6 +4903,7 @@ module Aws::Pinpoint
     #   <p>The unique identifier for the journey run.</p>
     #   @return [String]
     class GetJourneyRunExecutionActivityMetricsRequest < Struct.new(
+      nil,
       :application_id,
       :journey_activity_id,
       :journey_id,
@@ -4688,6 +4919,7 @@ module Aws::Pinpoint
     #   <p>Provides the results of a query that retrieved the data for a standard execution metric that applies to a journey activity for a particular journey run, and provides information about that query.</p>
     #   @return [Types::JourneyRunExecutionActivityMetricsResponse]
     class GetJourneyRunExecutionActivityMetricsResponse < Struct.new(
+      nil,
       :journey_run_execution_activity_metrics_response,
       keyword_init: true
     )
@@ -4710,6 +4942,7 @@ module Aws::Pinpoint
     #   <p>The unique identifier for the journey run.</p>
     #   @return [String]
     class GetJourneyRunExecutionMetricsRequest < Struct.new(
+      nil,
       :application_id,
       :journey_id,
       :next_token,
@@ -4724,6 +4957,7 @@ module Aws::Pinpoint
     #   <p>Provides the results of a query that retrieved the data for a standard execution metric that applies to a journey run, and provides information about that query.</p>
     #   @return [Types::JourneyRunExecutionMetricsResponse]
     class GetJourneyRunExecutionMetricsResponse < Struct.new(
+      nil,
       :journey_run_execution_metrics_response,
       keyword_init: true
     )
@@ -4743,6 +4977,7 @@ module Aws::Pinpoint
     #   <p>The NextToken string that specifies which page of results to return in a paginated response.</p>
     #   @return [String]
     class GetJourneyRunsRequest < Struct.new(
+      nil,
       :application_id,
       :journey_id,
       :page_size,
@@ -4756,6 +4991,7 @@ module Aws::Pinpoint
     #   <p>Provides information from all runs of a journey.</p>
     #   @return [Types::JourneyRunsResponse]
     class GetJourneyRunsResponse < Struct.new(
+      nil,
       :journey_runs_response,
       keyword_init: true
     )
@@ -4769,6 +5005,7 @@ module Aws::Pinpoint
     #   <p>The unique identifier for the version of the message template to update, retrieve information about, or delete. To retrieve identifiers and other information for all the versions of a template, use the <link  linkend="templates-template-name-template-type-versions">Template Versions</link> resource.</p> <p>If specified, this value must match the identifier for an existing template version. If specified for an update operation, this value must match the identifier for the latest existing version of the template. This restriction helps ensure that race conditions don't occur.</p> <p>If you don't specify a value for this parameter, Amazon Pinpoint does the following:</p> <ul><li><p>For a get operation, retrieves information about the active version of the template.</p></li> <li><p>For an update operation, saves the updates to (overwrites) the latest existing version of the template, if the create-new-version parameter isn't used or is set to false.</p></li> <li><p>For a delete operation, deletes the template, including all versions of the template.</p></li></ul>
     #   @return [String]
     class GetPushTemplateRequest < Struct.new(
+      nil,
       :template_name,
       :version,
       keyword_init: true
@@ -4780,6 +5017,7 @@ module Aws::Pinpoint
     #   <p>Provides information about the content and settings for a message template that can be used in messages that are sent through a push notification channel.</p>
     #   @return [Types::PushNotificationTemplateResponse]
     class GetPushTemplateResponse < Struct.new(
+      nil,
       :push_notification_template_response,
       keyword_init: true
     )
@@ -4790,6 +5028,7 @@ module Aws::Pinpoint
     #   <p>The unique identifier for the recommender model configuration. This identifier is displayed as the <b>Recommender ID</b> on the Amazon Pinpoint console.</p>
     #   @return [String]
     class GetRecommenderConfigurationRequest < Struct.new(
+      nil,
       :recommender_id,
       keyword_init: true
     )
@@ -4800,6 +5039,7 @@ module Aws::Pinpoint
     #   <p>Provides information about Amazon Pinpoint configuration settings for retrieving and processing data from a recommender model.</p>
     #   @return [Types::RecommenderConfigurationResponse]
     class GetRecommenderConfigurationResponse < Struct.new(
+      nil,
       :recommender_configuration_response,
       keyword_init: true
     )
@@ -4813,6 +5053,7 @@ module Aws::Pinpoint
     #   <p>The NextToken string that specifies which page of results to return in a paginated response.</p>
     #   @return [String]
     class GetRecommenderConfigurationsRequest < Struct.new(
+      nil,
       :page_size,
       :token,
       keyword_init: true
@@ -4824,6 +5065,7 @@ module Aws::Pinpoint
     #   <p>Provides information about all the recommender model configurations that are associated with your Amazon Pinpoint account.</p>
     #   @return [Types::ListRecommenderConfigurationsResponse]
     class GetRecommenderConfigurationsResponse < Struct.new(
+      nil,
       :list_recommender_configurations_response,
       keyword_init: true
     )
@@ -4843,6 +5085,7 @@ module Aws::Pinpoint
     #   <p>The NextToken string that specifies which page of results to return in a paginated response.</p>
     #   @return [String]
     class GetSegmentExportJobsRequest < Struct.new(
+      nil,
       :application_id,
       :page_size,
       :segment_id,
@@ -4856,6 +5099,7 @@ module Aws::Pinpoint
     #   <p>Provides information about all the export jobs that are associated with an application or segment. An export job is a job that exports endpoint definitions to a file.</p>
     #   @return [Types::ExportJobsResponse]
     class GetSegmentExportJobsResponse < Struct.new(
+      nil,
       :export_jobs_response,
       keyword_init: true
     )
@@ -4875,6 +5119,7 @@ module Aws::Pinpoint
     #   <p>The NextToken string that specifies which page of results to return in a paginated response.</p>
     #   @return [String]
     class GetSegmentImportJobsRequest < Struct.new(
+      nil,
       :application_id,
       :page_size,
       :segment_id,
@@ -4888,6 +5133,7 @@ module Aws::Pinpoint
     #   <p>Provides information about the status and settings of all the import jobs that are associated with an application or segment. An import job is a job that imports endpoint definitions from one or more files.</p>
     #   @return [Types::ImportJobsResponse]
     class GetSegmentImportJobsResponse < Struct.new(
+      nil,
       :import_jobs_response,
       keyword_init: true
     )
@@ -4901,6 +5147,7 @@ module Aws::Pinpoint
     #   <p>The unique identifier for the segment.</p>
     #   @return [String]
     class GetSegmentRequest < Struct.new(
+      nil,
       :application_id,
       :segment_id,
       keyword_init: true
@@ -4912,6 +5159,7 @@ module Aws::Pinpoint
     #   <p>Provides information about the configuration, dimension, and other settings for a segment.</p>
     #   @return [Types::SegmentResponse]
     class GetSegmentResponse < Struct.new(
+      nil,
       :segment_response,
       keyword_init: true
     )
@@ -4928,6 +5176,7 @@ module Aws::Pinpoint
     #   <p>The unique version number (Version property) for the campaign version.</p>
     #   @return [String]
     class GetSegmentVersionRequest < Struct.new(
+      nil,
       :application_id,
       :segment_id,
       :version,
@@ -4940,6 +5189,7 @@ module Aws::Pinpoint
     #   <p>Provides information about the configuration, dimension, and other settings for a segment.</p>
     #   @return [Types::SegmentResponse]
     class GetSegmentVersionResponse < Struct.new(
+      nil,
       :segment_response,
       keyword_init: true
     )
@@ -4959,6 +5209,7 @@ module Aws::Pinpoint
     #   <p>The NextToken string that specifies which page of results to return in a paginated response.</p>
     #   @return [String]
     class GetSegmentVersionsRequest < Struct.new(
+      nil,
       :application_id,
       :page_size,
       :segment_id,
@@ -4972,6 +5223,7 @@ module Aws::Pinpoint
     #   <p>Provides information about all the segments that are associated with an application.</p>
     #   @return [Types::SegmentsResponse]
     class GetSegmentVersionsResponse < Struct.new(
+      nil,
       :segments_response,
       keyword_init: true
     )
@@ -4988,6 +5240,7 @@ module Aws::Pinpoint
     #   <p>The NextToken string that specifies which page of results to return in a paginated response.</p>
     #   @return [String]
     class GetSegmentsRequest < Struct.new(
+      nil,
       :application_id,
       :page_size,
       :token,
@@ -5000,6 +5253,7 @@ module Aws::Pinpoint
     #   <p>Provides information about all the segments that are associated with an application.</p>
     #   @return [Types::SegmentsResponse]
     class GetSegmentsResponse < Struct.new(
+      nil,
       :segments_response,
       keyword_init: true
     )
@@ -5010,6 +5264,7 @@ module Aws::Pinpoint
     #   <p>The unique identifier for the application. This identifier is displayed as the <b>Project ID</b> on the Amazon Pinpoint console.</p>
     #   @return [String]
     class GetSmsChannelRequest < Struct.new(
+      nil,
       :application_id,
       keyword_init: true
     )
@@ -5020,6 +5275,7 @@ module Aws::Pinpoint
     #   <p>Provides information about the status and settings of the SMS channel for an application.</p>
     #   @return [Types::SMSChannelResponse]
     class GetSmsChannelResponse < Struct.new(
+      nil,
       :sms_channel_response,
       keyword_init: true
     )
@@ -5033,6 +5289,7 @@ module Aws::Pinpoint
     #   <p>The unique identifier for the version of the message template to update, retrieve information about, or delete. To retrieve identifiers and other information for all the versions of a template, use the <link  linkend="templates-template-name-template-type-versions">Template Versions</link> resource.</p> <p>If specified, this value must match the identifier for an existing template version. If specified for an update operation, this value must match the identifier for the latest existing version of the template. This restriction helps ensure that race conditions don't occur.</p> <p>If you don't specify a value for this parameter, Amazon Pinpoint does the following:</p> <ul><li><p>For a get operation, retrieves information about the active version of the template.</p></li> <li><p>For an update operation, saves the updates to (overwrites) the latest existing version of the template, if the create-new-version parameter isn't used or is set to false.</p></li> <li><p>For a delete operation, deletes the template, including all versions of the template.</p></li></ul>
     #   @return [String]
     class GetSmsTemplateRequest < Struct.new(
+      nil,
       :template_name,
       :version,
       keyword_init: true
@@ -5044,6 +5301,7 @@ module Aws::Pinpoint
     #   <p>Provides information about the content and settings for a message template that can be used in text messages that are sent through the SMS channel.</p>
     #   @return [Types::SMSTemplateResponse]
     class GetSmsTemplateResponse < Struct.new(
+      nil,
       :sms_template_response,
       keyword_init: true
     )
@@ -5057,6 +5315,7 @@ module Aws::Pinpoint
     #   <p>The unique identifier for the user.</p>
     #   @return [String]
     class GetUserEndpointsRequest < Struct.new(
+      nil,
       :application_id,
       :user_id,
       keyword_init: true
@@ -5068,6 +5327,7 @@ module Aws::Pinpoint
     #   <p>Provides information about all the endpoints that are associated with a user ID.</p>
     #   @return [Types::EndpointsResponse]
     class GetUserEndpointsResponse < Struct.new(
+      nil,
       :endpoints_response,
       keyword_init: true
     )
@@ -5078,6 +5338,7 @@ module Aws::Pinpoint
     #   <p>The unique identifier for the application. This identifier is displayed as the <b>Project ID</b> on the Amazon Pinpoint console.</p>
     #   @return [String]
     class GetVoiceChannelRequest < Struct.new(
+      nil,
       :application_id,
       keyword_init: true
     )
@@ -5088,6 +5349,7 @@ module Aws::Pinpoint
     #   <p>Provides information about the status and settings of the voice channel for an application.</p>
     #   @return [Types::VoiceChannelResponse]
     class GetVoiceChannelResponse < Struct.new(
+      nil,
       :voice_channel_response,
       keyword_init: true
     )
@@ -5101,6 +5363,7 @@ module Aws::Pinpoint
     #   <p>The unique identifier for the version of the message template to update, retrieve information about, or delete. To retrieve identifiers and other information for all the versions of a template, use the <link  linkend="templates-template-name-template-type-versions">Template Versions</link> resource.</p> <p>If specified, this value must match the identifier for an existing template version. If specified for an update operation, this value must match the identifier for the latest existing version of the template. This restriction helps ensure that race conditions don't occur.</p> <p>If you don't specify a value for this parameter, Amazon Pinpoint does the following:</p> <ul><li><p>For a get operation, retrieves information about the active version of the template.</p></li> <li><p>For an update operation, saves the updates to (overwrites) the latest existing version of the template, if the create-new-version parameter isn't used or is set to false.</p></li> <li><p>For a delete operation, deletes the template, including all versions of the template.</p></li></ul>
     #   @return [String]
     class GetVoiceTemplateRequest < Struct.new(
+      nil,
       :template_name,
       :version,
       keyword_init: true
@@ -5112,6 +5375,7 @@ module Aws::Pinpoint
     #   <p>Provides information about the content and settings for a message template that can be used in messages that are sent through the voice channel.</p>
     #   @return [Types::VoiceTemplateResponse]
     class GetVoiceTemplateResponse < Struct.new(
+      nil,
       :voice_template_response,
       keyword_init: true
     )
@@ -5126,6 +5390,7 @@ module Aws::Pinpoint
     #   <p>The percentage of participants who shouldn't continue the journey.</p> <p>To determine which participants are held out, Amazon Pinpoint applies a probability-based algorithm to the percentage that you specify. Therefore, the actual percentage of participants who are held out may not be equal to the percentage that you specify.</p>
     #   @return [Integer]
     class HoldoutActivity < Struct.new(
+      nil,
       :next_activity,
       :percentage,
       keyword_init: true
@@ -5159,6 +5424,7 @@ module Aws::Pinpoint
     #   <p>A custom name for the segment that's created by the import job, if the value of the DefineSegment property is true.</p>
     #   @return [String]
     class ImportJobRequest < Struct.new(
+      nil,
       :define_segment,
       :external_id,
       :format,
@@ -5198,6 +5464,7 @@ module Aws::Pinpoint
     #   <p>The custom name for the segment that's created by the import job, if the value of the DefineSegment property is true.</p>
     #   @return [String]
     class ImportJobResource < Struct.new(
+      nil,
       :define_segment,
       :external_id,
       :format,
@@ -5252,6 +5519,7 @@ module Aws::Pinpoint
     #   <p>The job type. This value is IMPORT for import jobs.</p>
     #   @return [String]
     class ImportJobResponse < Struct.new(
+      nil,
       :application_id,
       :completed_pieces,
       :completion_date,
@@ -5278,6 +5546,7 @@ module Aws::Pinpoint
     #   <p>The string to use in a subsequent request to get the next page of results in a paginated response. This value is null if there are no additional pages.</p>
     #   @return [String]
     class ImportJobsResponse < Struct.new(
+      nil,
       :item,
       :next_token,
       keyword_init: true
@@ -5296,6 +5565,7 @@ module Aws::Pinpoint
     #   <p>Time during which the in-app message should not be shown to the user.</p>
     #   @return [Types::QuietTime]
     class InAppCampaignSchedule < Struct.new(
+      nil,
       :end_date,
       :event_filter,
       :quiet_time,
@@ -5315,6 +5585,7 @@ module Aws::Pinpoint
     #   <p>The layout of the message.</p>
     #   @return [String]
     class InAppMessage < Struct.new(
+      nil,
       :content,
       :custom_config,
       :layout,
@@ -5334,6 +5605,7 @@ module Aws::Pinpoint
     #   <p>The text color.</p>
     #   @return [String]
     class InAppMessageBodyConfig < Struct.new(
+      nil,
       :alignment,
       :body,
       :text_color,
@@ -5356,6 +5628,7 @@ module Aws::Pinpoint
     #   <p>Default button content.</p>
     #   @return [Types::OverrideButtonConfiguration]
     class InAppMessageButton < Struct.new(
+      nil,
       :android,
       :default_config,
       :ios,
@@ -5391,6 +5664,7 @@ module Aws::Pinpoint
     #   <p>Treatment id of the campaign.</p>
     #   @return [String]
     class InAppMessageCampaign < Struct.new(
+      nil,
       :campaign_id,
       :daily_cap,
       :in_app_message,
@@ -5424,6 +5698,7 @@ module Aws::Pinpoint
     #   <p>The second button inside message.</p>
     #   @return [Types::InAppMessageButton]
     class InAppMessageContent < Struct.new(
+      nil,
       :background_color,
       :body_config,
       :header_config,
@@ -5446,6 +5721,7 @@ module Aws::Pinpoint
     #   <p>The text color.</p>
     #   @return [String]
     class InAppMessageHeaderConfig < Struct.new(
+      nil,
       :alignment,
       :header,
       :text_color,
@@ -5459,6 +5735,7 @@ module Aws::Pinpoint
     #   <p>List of targeted in-app message campaigns.</p>
     #   @return [Array<Types::InAppMessageCampaign>]
     class InAppMessagesResponse < Struct.new(
+      nil,
       :in_app_message_campaigns,
       keyword_init: true
     )
@@ -5482,6 +5759,7 @@ module Aws::Pinpoint
     #   <p>The description of the template.</p>
     #   @return [String]
     class InAppTemplateRequest < Struct.new(
+      nil,
       :content,
       :custom_config,
       :layout,
@@ -5527,6 +5805,7 @@ module Aws::Pinpoint
     #   <p>The version id of the template.</p>
     #   @return [String]
     class InAppTemplateResponse < Struct.new(
+      nil,
       :arn,
       :content,
       :creation_date,
@@ -5551,6 +5830,7 @@ module Aws::Pinpoint
     #   <p>The unique identifier for the request or response.</p>
     #   @return [String]
     class InternalServerErrorException < Struct.new(
+      nil,
       :message,
       :request_id,
       keyword_init: true
@@ -5566,6 +5846,7 @@ module Aws::Pinpoint
     #   <p>A multipart response object that contains a key and a value for each event in the request. In each object, the event ID is the key and an EventItemResponse object is the value.</p>
     #   @return [Hash<String, Types::EventItemResponse>]
     class ItemResponse < Struct.new(
+      nil,
       :endpoint_item_response,
       :events_item_response,
       keyword_init: true
@@ -5581,6 +5862,7 @@ module Aws::Pinpoint
     #   <p>IAM role ARN to be assumed when invoking Connect campaign execution APIs for dialing.</p>
     #   @return [String]
     class JourneyChannelSettings < Struct.new(
+      nil,
       :connect_campaign_arn,
       :connect_campaign_execution_role_arn,
       keyword_init: true
@@ -5593,6 +5875,7 @@ module Aws::Pinpoint
     #   <p>The message content that's passed to an AWS Lambda function or to a web hook.</p>
     #   @return [String]
     class JourneyCustomMessage < Struct.new(
+      nil,
       :data,
       keyword_init: true
     )
@@ -5622,6 +5905,7 @@ module Aws::Pinpoint
     #   <p>The first date and time of the date range that was used to filter the query results, in extended ISO 8601 format. The date range is inclusive.</p>
     #   @return [Time]
     class JourneyDateRangeKpiResponse < Struct.new(
+      nil,
       :application_id,
       :end_time,
       :journey_id,
@@ -5639,6 +5923,7 @@ module Aws::Pinpoint
     #   <p>The verified email address to send the email message from. The default address is the FromAddress specified for the email channel for the application.</p>
     #   @return [String]
     class JourneyEmailMessage < Struct.new(
+      nil,
       :from_address,
       keyword_init: true
     )
@@ -5665,6 +5950,7 @@ module Aws::Pinpoint
     #   <p>A JSON object that contains the results of the query. The results vary depending on the type of activity (ActivityType). For information about the structure and contents of the results, see the <a href="https://docs.aws.amazon.com/pinpoint/latest/developerguide/analytics-standard-metrics.html">Amazon Pinpoint Developer Guide</a>.</p>
     #   @return [Hash<String, String>]
     class JourneyExecutionActivityMetricsResponse < Struct.new(
+      nil,
       :activity_type,
       :application_id,
       :journey_activity_id,
@@ -5690,6 +5976,7 @@ module Aws::Pinpoint
     #   <p>A JSON object that contains the results of the query. For information about the structure and contents of the results, see the <a href="https://docs.aws.amazon.com//pinpoint/latest/developerguide/analytics-standard-metrics.html">Amazon Pinpoint Developer Guide</a>.</p>
     #   @return [Hash<String, String>]
     class JourneyExecutionMetricsResponse < Struct.new(
+      nil,
       :application_id,
       :journey_id,
       :last_evaluated_time,
@@ -5719,6 +6006,7 @@ module Aws::Pinpoint
     #   <p>The maximum number of messages a journey can sent to a single endpoint. The maximum value is 100. If set to 0, this limit will not apply.</p>
     #   @return [Integer]
     class JourneyLimits < Struct.new(
+      nil,
       :daily_cap,
       :endpoint_reentry_cap,
       :messages_per_second,
@@ -5735,6 +6023,7 @@ module Aws::Pinpoint
     #   <p>The number of seconds that the push notification service should keep the message, if the service is unable to deliver the notification the first time. This value is converted to an expiration value when it's sent to a push-notification service. If this value is 0, the service treats the notification as if it expires immediately and the service doesn't store or try to deliver the notification again.</p> <p>This value doesn't apply to messages that are sent through the Amazon Device Messaging (ADM) service.</p>
     #   @return [String]
     class JourneyPushMessage < Struct.new(
+      nil,
       :time_to_live,
       keyword_init: true
     )
@@ -5809,6 +6098,7 @@ module Aws::Pinpoint
     #   <p>An array of time zone estimation methods, if any, to use for determining an <a href="https://docs.aws.amazon.com/pinpoint/latest/apireference/apps-application-id-endpoints-endpoint-id.html">Endpoints</a> time zone if the Endpoint does not have a value for the Demographic.Timezone attribute.</p> <ul> <li><p>PHONE_NUMBER - A time zone is determined based on the Endpoint.Address and Endpoint.Location.Country.</p></li> <li><p>POSTAL_CODE - A time zone is determined based on the Endpoint.Location.PostalCode and Endpoint.Location.Country.</p> <note><p>POSTAL_CODE detection is only supported in the United States, United Kingdom, Australia, New Zealand, Canada, France, Italy, Spain, Germany and in regions where Amazon Pinpoint is available.</p></note></li> </ul>
     #   @return [Array<String>]
     class JourneyResponse < Struct.new(
+      nil,
       :activities,
       :application_id,
       :creation_date,
@@ -5859,6 +6149,7 @@ module Aws::Pinpoint
     #   <p>The unique identifier for the journey run that the metric applies to.</p>
     #   @return [String]
     class JourneyRunExecutionActivityMetricsResponse < Struct.new(
+      nil,
       :activity_type,
       :application_id,
       :journey_activity_id,
@@ -5888,6 +6179,7 @@ module Aws::Pinpoint
     #   <p>The unique identifier for the journey run that the metric applies to.</p>
     #   @return [String]
     class JourneyRunExecutionMetricsResponse < Struct.new(
+      nil,
       :application_id,
       :journey_id,
       :last_evaluated_time,
@@ -5912,6 +6204,7 @@ module Aws::Pinpoint
     #   <p>The current status of the journey run.</p>
     #   @return [String]
     class JourneyRunResponse < Struct.new(
+      nil,
       :creation_time,
       :last_update_time,
       :run_id,
@@ -5929,6 +6222,7 @@ module Aws::Pinpoint
     #   <p>The string to use in a subsequent request to get the next page of results in a paginated response. This value is null if there are no additional pages.</p>
     #   @return [String]
     class JourneyRunsResponse < Struct.new(
+      nil,
       :item,
       :next_token,
       keyword_init: true
@@ -5953,6 +6247,7 @@ module Aws::Pinpoint
     #   <p>The template ID received from the regulatory body for sending SMS in your country.</p>
     #   @return [String]
     class JourneySMSMessage < Struct.new(
+      nil,
       :message_type,
       :origination_number,
       :sender_id,
@@ -5979,6 +6274,7 @@ module Aws::Pinpoint
     #                     UTC-09:30, UTC-10, and UTC-11.</p>
     #   @return [String]
     class JourneySchedule < Struct.new(
+      nil,
       :end_time,
       :start_time,
       :timezone,
@@ -5992,6 +6288,7 @@ module Aws::Pinpoint
     #   <p>The status of the journey. Currently, Supported values are ACTIVE, PAUSED, and CANCELLED</p> <p>If you cancel a journey, Amazon Pinpoint continues to perform activities that are currently in progress, until those activities are complete. Amazon Pinpoint also continues to collect and aggregate analytics data for those activities, until they are complete, and any activities that were complete when you cancelled the journey.</p> <p>After you cancel a journey, you can't add, change, or remove any activities from the journey. In addition, Amazon Pinpoint stops evaluating the journey and doesn't perform any activities that haven't started.</p> <p>When the journey is paused, Amazon Pinpoint continues to perform activities that are currently in progress, until those activities are complete. Endpoints will stop entering journeys when the journey is paused and will resume entering the journey after the journey is resumed. For wait activities, wait time is paused when the journey is paused. Currently, PAUSED only supports journeys with a segment refresh interval.</p>
     #   @return [String]
     class JourneyStateRequest < Struct.new(
+      nil,
       :state,
       keyword_init: true
     )
@@ -6006,6 +6303,7 @@ module Aws::Pinpoint
     #   <p>The length of the timeframe in days. The maximum value is 30. If set to 0, this limit will not apply.</p>
     #   @return [Integer]
     class JourneyTimeframeCap < Struct.new(
+      nil,
       :cap,
       :days,
       keyword_init: true
@@ -6021,6 +6319,7 @@ module Aws::Pinpoint
     #   <p>The string to use in a subsequent request to get the next page of results in a paginated response. This value is null if there are no additional pages.</p>
     #   @return [String]
     class JourneysResponse < Struct.new(
+      nil,
       :item,
       :next_token,
       keyword_init: true
@@ -6038,6 +6337,7 @@ module Aws::Pinpoint
     #   <p>The NextToken string that specifies which page of results to return in a paginated response.</p>
     #   @return [String]
     class ListJourneysRequest < Struct.new(
+      nil,
       :application_id,
       :page_size,
       :token,
@@ -6050,6 +6350,7 @@ module Aws::Pinpoint
     #   <p>Provides information about the status, configuration, and other settings for all the journeys that are associated with an application.</p>
     #   @return [Types::JourneysResponse]
     class ListJourneysResponse < Struct.new(
+      nil,
       :journeys_response,
       keyword_init: true
     )
@@ -6064,6 +6365,7 @@ module Aws::Pinpoint
     #   <p>The string to use in a subsequent request to get the next page of results in a paginated response. This value is null if there are no additional pages.</p>
     #   @return [String]
     class ListRecommenderConfigurationsResponse < Struct.new(
+      nil,
       :item,
       :next_token,
       keyword_init: true
@@ -6075,6 +6377,7 @@ module Aws::Pinpoint
     #   <p>The Amazon Resource Name (ARN) of the resource.</p>
     #   @return [String]
     class ListTagsForResourceRequest < Struct.new(
+      nil,
       :resource_arn,
       keyword_init: true
     )
@@ -6085,6 +6388,7 @@ module Aws::Pinpoint
     #   <p>Specifies the tags (keys and values) for an application, campaign, message template, or segment.</p>
     #   @return [Types::TagsModel]
     class ListTagsForResourceResponse < Struct.new(
+      nil,
       :tags_model,
       keyword_init: true
     )
@@ -6104,6 +6408,7 @@ module Aws::Pinpoint
     #   <p>The type of channel that the message template is designed for. Valid values are: EMAIL, PUSH, SMS, and VOICE.</p>
     #   @return [String]
     class ListTemplateVersionsRequest < Struct.new(
+      nil,
       :next_token,
       :page_size,
       :template_name,
@@ -6117,6 +6422,7 @@ module Aws::Pinpoint
     #   <p>Provides information about all the versions of a specific message template.</p>
     #   @return [Types::TemplateVersionsResponse]
     class ListTemplateVersionsResponse < Struct.new(
+      nil,
       :template_versions_response,
       keyword_init: true
     )
@@ -6136,6 +6442,7 @@ module Aws::Pinpoint
     #   <p>The type of message template to include in the results. Valid values are: EMAIL, PUSH, SMS, and VOICE. To include all types of templates in the results, don't include this parameter in your request.</p>
     #   @return [String]
     class ListTemplatesRequest < Struct.new(
+      nil,
       :next_token,
       :page_size,
       :prefix,
@@ -6149,6 +6456,7 @@ module Aws::Pinpoint
     #   <p>Provides information about all the message templates that are associated with your Amazon Pinpoint account.</p>
     #   @return [Types::TemplatesResponse]
     class ListTemplatesResponse < Struct.new(
+      nil,
       :templates_response,
       keyword_init: true
     )
@@ -6193,6 +6501,7 @@ module Aws::Pinpoint
     #   <p>The URL to open in a recipient's default mobile browser, if a recipient taps the push notification and the value of the Action property is URL.</p>
     #   @return [String]
     class Message < Struct.new(
+      nil,
       :action,
       :body,
       :image_icon_url,
@@ -6218,6 +6527,7 @@ module Aws::Pinpoint
     #   <p>The unique identifier for the request or response.</p>
     #   @return [String]
     class MessageBody < Struct.new(
+      nil,
       :message,
       :request_id,
       keyword_init: true
@@ -6254,6 +6564,7 @@ module Aws::Pinpoint
     #   <p>The in-app message configuration.</p>
     #   @return [Types::CampaignInAppMessage]
     class MessageConfiguration < Struct.new(
+      nil,
       :adm_message,
       :apns_message,
       :baidu_message,
@@ -6276,6 +6587,7 @@ module Aws::Pinpoint
     #   <p>The value of the message header. The header value can contain up to 870 characters, including the length of any rendered attributes. For example if you add the {CreationDate} attribute, it renders as YYYY-MM-DDTHH:MM:SS.SSSZ and is 24 characters in length.</p>
     #   @return [String]
     class MessageHeader < Struct.new(
+      nil,
       :name,
       :value,
       keyword_init: true
@@ -6303,6 +6615,7 @@ module Aws::Pinpoint
     #   <p>The unique identifier for tracing the message. This identifier is visible to message recipients.</p>
     #   @return [String]
     class MessageRequest < Struct.new(
+      nil,
       :addresses,
       :context,
       :endpoints,
@@ -6328,6 +6641,7 @@ module Aws::Pinpoint
     #   <p>A map that contains a multipart response for each address (email address, phone number, or push notification token) that the message was sent to. In the map, the address is the key and the result is the value.</p>
     #   @return [Hash<String, Types::MessageResult>]
     class MessageResponse < Struct.new(
+      nil,
       :application_id,
       :endpoint_result,
       :request_id,
@@ -6354,6 +6668,7 @@ module Aws::Pinpoint
     #   <p>For push notifications that are sent through the GCM channel, specifies whether the endpoint's device registration token was updated as part of delivering the message.</p>
     #   @return [String]
     class MessageResult < Struct.new(
+      nil,
       :delivery_status,
       :message_id,
       :status_code,
@@ -6372,6 +6687,7 @@ module Aws::Pinpoint
     #   <p>The unique identifier for the request or response.</p>
     #   @return [String]
     class MethodNotAllowedException < Struct.new(
+      nil,
       :message,
       :request_id,
       keyword_init: true
@@ -6387,6 +6703,7 @@ module Aws::Pinpoint
     #   <p>The value to compare.</p>
     #   @return [Float]
     class MetricDimension < Struct.new(
+      nil,
       :comparison_operator,
       :value,
       keyword_init: true
@@ -6402,6 +6719,7 @@ module Aws::Pinpoint
     #   <p>The unique identifier for the next activity to perform, after completing the activity for the path.</p>
     #   @return [String]
     class MultiConditionalBranch < Struct.new(
+      nil,
       :condition,
       :next_activity,
       keyword_init: true
@@ -6420,6 +6738,7 @@ module Aws::Pinpoint
     #   <p>The amount of time to wait or the date and time when Amazon Pinpoint determines whether the conditions are met.</p>
     #   @return [Types::WaitTime]
     class MultiConditionalSplitActivity < Struct.new(
+      nil,
       :branches,
       :default_activity,
       :evaluation_wait_time,
@@ -6436,6 +6755,7 @@ module Aws::Pinpoint
     #   <p>The unique identifier for the request or response.</p>
     #   @return [String]
     class NotFoundException < Struct.new(
+      nil,
       :message,
       :request_id,
       keyword_init: true
@@ -6451,6 +6771,7 @@ module Aws::Pinpoint
     #   <p>The phone number to retrieve information about. The phone number that you provide should include a valid numeric country code. Otherwise, the operation might result in an error.</p>
     #   @return [String]
     class NumberValidateRequest < Struct.new(
+      nil,
       :iso_country_code,
       :phone_number,
       keyword_init: true
@@ -6503,6 +6824,7 @@ module Aws::Pinpoint
     #   <p>The postal or ZIP code for the location where the phone number was originally registered.</p>
     #   @return [String]
     class NumberValidateResponse < Struct.new(
+      nil,
       :carrier,
       :city,
       :cleansed_phone_number_e164,
@@ -6539,6 +6861,7 @@ module Aws::Pinpoint
     #   <p>Specifies the schedule settings for the custom channel.</p>
     #   @return [Hash<String, Array<Types::OpenHoursRule>>]
     class OpenHours < Struct.new(
+      nil,
       :email,
       :sms,
       :push,
@@ -6557,6 +6880,7 @@ module Aws::Pinpoint
     #   <p>The end of the scheduled time, in ISO 8601 format, when the channel can't send messages.</p>
     #   @return [String]
     class OpenHoursRule < Struct.new(
+      nil,
       :start_time,
       :end_time,
       keyword_init: true
@@ -6572,6 +6896,7 @@ module Aws::Pinpoint
     #   <p>Button destination.</p>
     #   @return [String]
     class OverrideButtonConfiguration < Struct.new(
+      nil,
       :button_action,
       :link,
       keyword_init: true
@@ -6587,6 +6912,7 @@ module Aws::Pinpoint
     #   <p>The unique identifier for the request or response.</p>
     #   @return [String]
     class PayloadTooLargeException < Struct.new(
+      nil,
       :message,
       :request_id,
       keyword_init: true
@@ -6598,6 +6924,7 @@ module Aws::Pinpoint
     #   <p>Specifies a phone number to validate and retrieve information about.</p>
     #   @return [Types::NumberValidateRequest]
     class PhoneNumberValidateRequest < Struct.new(
+      nil,
       :number_validate_request,
       keyword_init: true
     )
@@ -6608,6 +6935,7 @@ module Aws::Pinpoint
     #   <p>Provides information about a phone number.</p>
     #   @return [Types::NumberValidateResponse]
     class PhoneNumberValidateResponse < Struct.new(
+      nil,
       :number_validate_response,
       keyword_init: true
     )
@@ -6649,6 +6977,7 @@ module Aws::Pinpoint
     #   <p>One or more custom user attributes that your app reports to Amazon Pinpoint for the user who's associated with the endpoint.</p>
     #   @return [Types::EndpointUser]
     class PublicEndpoint < Struct.new(
+      nil,
       :address,
       :attributes,
       :channel_type,
@@ -6679,6 +7008,7 @@ module Aws::Pinpoint
     #   <p>The unique identifier for the version of the push notification template to use for the message. If specified, this value must match the identifier for an existing template version. To retrieve a list of versions and version identifiers for a template, use the <link  linkend="templates-template-name-template-type-versions">Template Versions</link> resource.</p> <p>If you don't specify a value for this property, Amazon Pinpoint uses the <i>active version</i> of the template. The <i>active version</i> is typically the version of a template that's been most recently reviewed and approved for use, depending on your workflow. It isn't necessarily the latest version of a template.</p>
     #   @return [String]
     class PushMessageActivity < Struct.new(
+      nil,
       :message_config,
       :next_activity,
       :template_name,
@@ -6717,6 +7047,7 @@ module Aws::Pinpoint
     #   <p>A custom description of the message template.</p>
     #   @return [String]
     class PushNotificationTemplateRequest < Struct.new(
+      nil,
       :adm,
       :apns,
       :baidu,
@@ -6778,6 +7109,7 @@ module Aws::Pinpoint
     #   <p>The unique identifier, as an integer, for the active version of the message template, or the version of the template that you specified by using the version parameter in your request.</p>
     #   @return [String]
     class PushNotificationTemplateResponse < Struct.new(
+      nil,
       :adm,
       :apns,
       :arn,
@@ -6805,6 +7137,7 @@ module Aws::Pinpoint
     #   <p>Specifies the Amazon Resource Name (ARN) of an event stream to publish events to and the AWS Identity and Access Management (IAM) role to use when publishing those events.</p>
     #   @return [Types::WriteEventStream]
     class PutEventStreamRequest < Struct.new(
+      nil,
       :application_id,
       :write_event_stream,
       keyword_init: true
@@ -6816,6 +7149,7 @@ module Aws::Pinpoint
     #   <p>Specifies settings for publishing event data to an Amazon Kinesis data stream or an Amazon Kinesis Data Firehose delivery stream.</p>
     #   @return [Types::EventStream]
     class PutEventStreamResponse < Struct.new(
+      nil,
       :event_stream,
       keyword_init: true
     )
@@ -6829,6 +7163,7 @@ module Aws::Pinpoint
     #   <p>Specifies a batch of events to process.</p>
     #   @return [Types::EventsRequest]
     class PutEventsRequest < Struct.new(
+      nil,
       :application_id,
       :events_request,
       keyword_init: true
@@ -6840,6 +7175,7 @@ module Aws::Pinpoint
     #   <p>Provides information about endpoints and the events that they're associated with.</p>
     #   @return [Types::EventsResponse]
     class PutEventsResponse < Struct.new(
+      nil,
       :events_response,
       keyword_init: true
     )
@@ -6854,6 +7190,7 @@ module Aws::Pinpoint
     #   <p>The specific time when quiet time begins. This value has to use 24-hour notation and be in HH:MM format, where HH is the hour (with a leading zero, if applicable) and MM is the minutes. For example, use 02:30 to represent 2:30 AM, or 14:30 to represent 2:30 PM.</p>
     #   @return [String]
     class QuietTime < Struct.new(
+      nil,
       :end,
       :start,
       keyword_init: true
@@ -6866,6 +7203,7 @@ module Aws::Pinpoint
     #   <p>The paths for the activity, including the percentage of participants to enter each path and the activity to perform for each path.</p>
     #   @return [Array<Types::RandomSplitEntry>]
     class RandomSplitActivity < Struct.new(
+      nil,
       :branches,
       keyword_init: true
     )
@@ -6880,6 +7218,7 @@ module Aws::Pinpoint
     #   <p>The percentage of participants to send down the activity path.</p> <p>To determine which participants are sent down each path, Amazon Pinpoint applies a probability-based algorithm to the percentages that you specify for the paths. Therefore, the actual percentage of participants who are sent down a path may not be equal to the percentage that you specify.</p>
     #   @return [Integer]
     class RandomSplitEntry < Struct.new(
+      nil,
       :next_activity,
       :percentage,
       keyword_init: true
@@ -6892,6 +7231,7 @@ module Aws::Pinpoint
     #   <p>The email message, represented as a raw MIME message. The entire message must be base64 encoded.</p>
     #   @return [String]
     class RawEmail < Struct.new(
+      nil,
       :data,
       keyword_init: true
     )
@@ -6906,6 +7246,7 @@ module Aws::Pinpoint
     #   <p>The type of recency dimension to use for the segment. Valid values are: ACTIVE, endpoints that were active within the specified duration are included in the segment; and, INACTIVE, endpoints that weren't active within the specified duration are included in the segment.</p>
     #   @return [String]
     class RecencyDimension < Struct.new(
+      nil,
       :duration,
       :recency_type,
       keyword_init: true
@@ -6951,6 +7292,7 @@ module Aws::Pinpoint
     #   <p>The number of recommended items that are retrieved from the model for each endpoint or user, depending on the value for the RecommendationProviderIdType property. This number determines how many recommended items are available for use in message variables.</p>
     #   @return [Integer]
     class RecommenderConfigurationResponse < Struct.new(
+      nil,
       :attributes,
       :creation_date,
       :description,
@@ -6978,6 +7320,7 @@ module Aws::Pinpoint
     #   <p>Specifies one or more attributes to remove from all the endpoints that are associated with an application.</p>
     #   @return [Types::UpdateAttributesRequest]
     class RemoveAttributesRequest < Struct.new(
+      nil,
       :application_id,
       :attribute_type,
       :update_attributes_request,
@@ -6990,6 +7333,7 @@ module Aws::Pinpoint
     #   <p>Provides information about the type and the names of attributes that were removed from all the endpoints that are associated with an application.</p>
     #   @return [Types::AttributesResource]
     class RemoveAttributesResponse < Struct.new(
+      nil,
       :attributes_resource,
       keyword_init: true
     )
@@ -7004,6 +7348,7 @@ module Aws::Pinpoint
     #   <p>An array of objects that provides pre-aggregated values for a standard metric that applies to an application, campaign, or journey.</p>
     #   @return [Array<Types::ResultRowValue>]
     class ResultRow < Struct.new(
+      nil,
       :grouped_bys,
       :values,
       keyword_init: true
@@ -7022,6 +7367,7 @@ module Aws::Pinpoint
     #   <p>In a Values object, the value for the metric that the query retrieved data for. In a GroupedBys object, the value for the field that was used to group data in a result set that contains multiple results (Values objects).</p>
     #   @return [String]
     class ResultRowValue < Struct.new(
+      nil,
       :key,
       :type,
       :value,
@@ -7041,6 +7387,7 @@ module Aws::Pinpoint
     #   <p>The registered short code that you want to use when you send messages through the SMS channel.</p>
     #   @return [String]
     class SMSChannelRequest < Struct.new(
+      nil,
       :enabled,
       :sender_id,
       :short_code,
@@ -7093,6 +7440,7 @@ module Aws::Pinpoint
     #   <p>The current version of the SMS channel.</p>
     #   @return [Integer]
     class SMSChannelResponse < Struct.new(
+      nil,
       :application_id,
       :creation_date,
       :enabled,
@@ -7141,6 +7489,7 @@ module Aws::Pinpoint
     #   <p>The template ID received from the regulatory body for sending SMS in your country.</p>
     #   @return [String]
     class SMSMessage < Struct.new(
+      nil,
       :body,
       :keyword,
       :media_url,
@@ -7169,6 +7518,7 @@ module Aws::Pinpoint
     #   <p>The unique identifier for the version of the SMS template to use for the message. If specified, this value must match the identifier for an existing template version. To retrieve a list of versions and version identifiers for a template, use the <link  linkend="templates-template-name-template-type-versions">Template Versions</link> resource.</p> <p>If you don't specify a value for this property, Amazon Pinpoint uses the <i>active version</i> of the template. The <i>active version</i> is typically the version of a template that's been most recently reviewed and approved for use, depending on your workflow. It isn't necessarily the latest version of a template.</p>
     #   @return [String]
     class SMSMessageActivity < Struct.new(
+      nil,
       :message_config,
       :next_activity,
       :template_name,
@@ -7195,6 +7545,7 @@ module Aws::Pinpoint
     #   <p>A custom description of the message template.</p>
     #   @return [String]
     class SMSTemplateRequest < Struct.new(
+      nil,
       :body,
       :default_substitutions,
       :recommender_id,
@@ -7240,6 +7591,7 @@ module Aws::Pinpoint
     #   <p>The unique identifier, as an integer, for the active version of the message template, or the version of the template that you specified by using the version parameter in your request.</p>
     #   @return [String]
     class SMSTemplateResponse < Struct.new(
+      nil,
       :arn,
       :body,
       :creation_date,
@@ -7282,6 +7634,7 @@ module Aws::Pinpoint
     #                     UTC-07, UTC-08, UTC-09, UTC-10, and UTC-11.</p>
     #   @return [String]
     class Schedule < Struct.new(
+      nil,
       :end_time,
       :event_filter,
       :frequency,
@@ -7299,6 +7652,7 @@ module Aws::Pinpoint
     #   <p>The dimension settings that are based on how recently an endpoint was active.</p>
     #   @return [Types::RecencyDimension]
     class SegmentBehaviors < Struct.new(
+      nil,
       :recency,
       keyword_init: true
     )
@@ -7310,6 +7664,7 @@ module Aws::Pinpoint
     #   <p>The unique identifier for the segment to associate with the activity.</p>
     #   @return [String]
     class SegmentCondition < Struct.new(
+      nil,
       :segment_id,
       keyword_init: true
     )
@@ -7336,6 +7691,7 @@ module Aws::Pinpoint
     #   <p>The device platform criteria for the segment.</p>
     #   @return [Types::SetDimension]
     class SegmentDemographics < Struct.new(
+      nil,
       :app_version,
       :channel,
       :device_type,
@@ -7367,6 +7723,7 @@ module Aws::Pinpoint
     #   <p>One or more custom user attributes to use as criteria for the segment.</p>
     #   @return [Hash<String, Types::AttributeDimension>]
     class SegmentDimensions < Struct.new(
+      nil,
       :attributes,
       :behavior,
       :demographic,
@@ -7392,6 +7749,7 @@ module Aws::Pinpoint
     #   <p>Specifies how to handle multiple dimensions for the segment. For example, if you specify three dimensions for the segment, whether the resulting segment includes endpoints that match all, any, or none of the dimensions.</p>
     #   @return [String]
     class SegmentGroup < Struct.new(
+      nil,
       :dimensions,
       :source_segments,
       :source_type,
@@ -7409,6 +7767,7 @@ module Aws::Pinpoint
     #   <p>Specifies how to handle multiple segment groups for the segment. For example, if the segment includes three segment groups, whether the resulting segment includes endpoints that match all, any, or none of the segment groups.</p>
     #   @return [String]
     class SegmentGroupList < Struct.new(
+      nil,
       :groups,
       :include,
       keyword_init: true
@@ -7436,6 +7795,7 @@ module Aws::Pinpoint
     #   <p>The number of endpoint definitions that were imported successfully to create the segment.</p>
     #   @return [Integer]
     class SegmentImportResource < Struct.new(
+      nil,
       :channel_counts,
       :external_id,
       :format,
@@ -7455,6 +7815,7 @@ module Aws::Pinpoint
     #   <p>The GPS location and range for the segment.</p>
     #   @return [Types::GPSPointDimension]
     class SegmentLocation < Struct.new(
+      nil,
       :country,
       :gps_point,
       keyword_init: true
@@ -7470,6 +7831,7 @@ module Aws::Pinpoint
     #   <p>The version number of the segment.</p>
     #   @return [Integer]
     class SegmentReference < Struct.new(
+      nil,
       :id,
       :version,
       keyword_init: true
@@ -7515,6 +7877,7 @@ module Aws::Pinpoint
     #   <p>The version number of the segment.</p>
     #   @return [Integer]
     class SegmentResponse < Struct.new(
+      nil,
       :application_id,
       :arn,
       :creation_date,
@@ -7540,6 +7903,7 @@ module Aws::Pinpoint
     #   <p>The string to use in a subsequent request to get the next page of results in a paginated response. This value is null if there are no additional pages.</p>
     #   @return [String]
     class SegmentsResponse < Struct.new(
+      nil,
       :item,
       :next_token,
       keyword_init: true
@@ -7554,6 +7918,7 @@ module Aws::Pinpoint
     #   <p>Specifies the configuration and other settings for a message.</p>
     #   @return [Types::MessageRequest]
     class SendMessagesRequest < Struct.new(
+      nil,
       :application_id,
       :message_request,
       keyword_init: true
@@ -7565,6 +7930,7 @@ module Aws::Pinpoint
     #   <p>Provides information about the results of a request to send a message to an endpoint address.</p>
     #   @return [Types::MessageResponse]
     class SendMessagesResponse < Struct.new(
+      nil,
       :message_response,
       keyword_init: true
     )
@@ -7578,6 +7944,7 @@ module Aws::Pinpoint
     #   <p>Send OTP message request parameters.</p>
     #   @return [Types::SendOTPMessageRequestParameters]
     class SendOTPMessageRequest < Struct.new(
+      nil,
       :application_id,
       :send_otp_message_request_parameters,
       keyword_init: true
@@ -7620,6 +7987,7 @@ module Aws::Pinpoint
     #   <p>The time in minutes before the OTP is no longer valid.</p>
     #   @return [Integer]
     class SendOTPMessageRequestParameters < Struct.new(
+      nil,
       :allowed_attempts,
       :brand_name,
       :channel,
@@ -7640,6 +8008,7 @@ module Aws::Pinpoint
     #   <p>Provides information about the results of a request to send a message to an endpoint address.</p>
     #   @return [Types::MessageResponse]
     class SendOTPMessageResponse < Struct.new(
+      nil,
       :message_response,
       keyword_init: true
     )
@@ -7663,6 +8032,7 @@ module Aws::Pinpoint
     #   <p>A map that associates user IDs with <a href="https://docs.aws.amazon.com/pinpoint/latest/apireference/apps-application-id-messages.html#apps-application-id-messages-model-endpointsendconfiguration">EndpointSendConfiguration</a> objects. You can use an <a href="https://docs.aws.amazon.com/pinpoint/latest/apireference/apps-application-id-messages.html#apps-application-id-messages-model-endpointsendconfiguration">EndpointSendConfiguration</a> object to tailor the message for a user by specifying settings such as content overrides and message variables.</p>
     #   @return [Hash<String, Types::EndpointSendConfiguration>]
     class SendUsersMessageRequest < Struct.new(
+      nil,
       :context,
       :message_configuration,
       :template_configuration,
@@ -7684,6 +8054,7 @@ module Aws::Pinpoint
     #   <p>An object that indicates which endpoints the message was sent to, for each user. The object lists user IDs and, for each user ID, provides the endpoint IDs that the message was sent to. For each endpoint ID, it provides an EndpointMessageResult object.</p>
     #   @return [Hash<String, Hash<String, Types::EndpointMessageResult>>]
     class SendUsersMessageResponse < Struct.new(
+      nil,
       :application_id,
       :request_id,
       :result,
@@ -7699,6 +8070,7 @@ module Aws::Pinpoint
     #   <p>Specifies the configuration and other settings for a message to send to all the endpoints that are associated with a list of users.</p>
     #   @return [Types::SendUsersMessageRequest]
     class SendUsersMessagesRequest < Struct.new(
+      nil,
       :application_id,
       :send_users_message_request,
       keyword_init: true
@@ -7710,6 +8082,7 @@ module Aws::Pinpoint
     #   <p>Provides information about which users and endpoints a message was sent to.</p>
     #   @return [Types::SendUsersMessageResponse]
     class SendUsersMessagesResponse < Struct.new(
+      nil,
       :send_users_message_response,
       keyword_init: true
     )
@@ -7730,6 +8103,7 @@ module Aws::Pinpoint
     #   <p>The date and time when the session ended.</p>
     #   @return [String]
     class Session < Struct.new(
+      nil,
       :duration,
       :id,
       :start_timestamp,
@@ -7747,6 +8121,7 @@ module Aws::Pinpoint
     #   <p>The criteria values to use for the segment dimension. Depending on the value of the DimensionType property, endpoints are included or excluded from the segment if their values match the criteria values.</p>
     #   @return [Array<String>]
     class SetDimension < Struct.new(
+      nil,
       :dimension_type,
       :values,
       keyword_init: true
@@ -7765,6 +8140,7 @@ module Aws::Pinpoint
     #   <p>The dimension settings for the segment that's associated with the activity.</p>
     #   @return [Types::SegmentDimensions]
     class SimpleCondition < Struct.new(
+      nil,
       :event_condition,
       :segment_condition,
       :segment_dimensions,
@@ -7787,6 +8163,7 @@ module Aws::Pinpoint
     #   <p>The list of MessageHeaders for the email. You can have up to 15 Headers.</p>
     #   @return [Array<Types::MessageHeader>]
     class SimpleEmail < Struct.new(
+      nil,
       :html_part,
       :subject,
       :text_part,
@@ -7804,6 +8181,7 @@ module Aws::Pinpoint
     #   <p>The textual data of the message content.</p>
     #   @return [String]
     class SimpleEmailPart < Struct.new(
+      nil,
       :charset,
       :data,
       keyword_init: true
@@ -7822,6 +8200,7 @@ module Aws::Pinpoint
     #   <p>The segment that's associated with the first activity in the journey. This segment determines which users are participants in the journey.</p>
     #   @return [Types::SegmentCondition]
     class StartCondition < Struct.new(
+      nil,
       :description,
       :event_start_condition,
       :segment_start_condition,
@@ -7837,6 +8216,7 @@ module Aws::Pinpoint
     #   <p>Specifies the tags (keys and values) for an application, campaign, message template, or segment.</p>
     #   @return [Types::TagsModel]
     class TagResourceRequest < Struct.new(
+      nil,
       :resource_arn,
       :tags_model,
       keyword_init: true
@@ -7849,6 +8229,7 @@ module Aws::Pinpoint
     #   <p>A string-to-string map of key-value pairs that defines the tags for an application, campaign, message template, or segment. Each of these resources can have a maximum of 50 tags.</p> <p>Each tag consists of a required tag key and an associated tag value. The maximum length of a tag key is 128 characters. The maximum length of a tag value is 256 characters.</p>
     #   @return [Hash<String, String>]
     class TagsModel < Struct.new(
+      nil,
       :tags,
       keyword_init: true
     )
@@ -7863,6 +8244,7 @@ module Aws::Pinpoint
     #   <p>The unique identifier for the version of the message template to use for the message. If specified, this value must match the identifier for an existing template version. To retrieve a list of versions and version identifiers for a template, use the <link  linkend="templates-template-name-template-type-versions">Template Versions</link> resource.</p> <p>If you don't specify a value for this property, Amazon Pinpoint uses the <i>active version</i> of the template. The <i>active version</i> is typically the version of a template that's been most recently reviewed and approved for use, depending on your workflow. It isn't necessarily the latest version of a template.</p>
     #   @return [String]
     class Template < Struct.new(
+      nil,
       :name,
       :version,
       keyword_init: true
@@ -7875,6 +8257,7 @@ module Aws::Pinpoint
     #   <p>The version of the message template to use as the active version of the template. Valid values are: latest, for the most recent version of the template; or, the unique identifier for any existing version of the template. If you specify an identifier, the value must match the identifier for an existing template version. To retrieve a list of versions and version identifiers for a template, use the <link  linkend="templates-template-name-template-type-versions">Template Versions</link> resource.</p>
     #   @return [String]
     class TemplateActiveVersionRequest < Struct.new(
+      nil,
       :version,
       keyword_init: true
     )
@@ -7898,6 +8281,7 @@ module Aws::Pinpoint
     #   <p>The InApp template to use for the message. The InApp template object is not supported for SendMessages.</p>
     #   @return [Types::Template]
     class TemplateConfiguration < Struct.new(
+      nil,
       :email_template,
       :push_template,
       :sms_template,
@@ -7919,6 +8303,7 @@ module Aws::Pinpoint
     #   <p>The unique identifier for the request to create the message template.</p>
     #   @return [String]
     class TemplateCreateMessageBody < Struct.new(
+      nil,
       :arn,
       :message,
       :request_id,
@@ -7956,6 +8341,7 @@ module Aws::Pinpoint
     #   <p>The unique identifier, as an integer, for the active version of the message template.</p>
     #   @return [String]
     class TemplateResponse < Struct.new(
+      nil,
       :arn,
       :creation_date,
       :default_substitutions,
@@ -7993,6 +8379,7 @@ module Aws::Pinpoint
     #   <p>The unique identifier for the version of the message template. This value is an integer that Amazon Pinpoint automatically increments and assigns to each new version of a template.</p>
     #   @return [String]
     class TemplateVersionResponse < Struct.new(
+      nil,
       :creation_date,
       :default_substitutions,
       :last_modified_date,
@@ -8019,6 +8406,7 @@ module Aws::Pinpoint
     #   <p>The unique identifier for the request to retrieve information about all the versions of the message template.</p>
     #   @return [String]
     class TemplateVersionsResponse < Struct.new(
+      nil,
       :item,
       :message,
       :next_token,
@@ -8036,6 +8424,7 @@ module Aws::Pinpoint
     #   <p>The string to use in a subsequent request to get the next page of results in a paginated response. This value is null if there are no additional pages.</p>
     #   @return [String]
     class TemplatesResponse < Struct.new(
+      nil,
       :item,
       :next_token,
       keyword_init: true
@@ -8051,6 +8440,7 @@ module Aws::Pinpoint
     #   <p>The unique identifier for the request or response.</p>
     #   @return [String]
     class TooManyRequestsException < Struct.new(
+      nil,
       :message,
       :request_id,
       keyword_init: true
@@ -8087,6 +8477,7 @@ module Aws::Pinpoint
     #   <p>The custom name of the treatment.</p>
     #   @return [String]
     class TreatmentResource < Struct.new(
+      nil,
       :custom_delivery_configuration,
       :id,
       :message_configuration,
@@ -8108,6 +8499,7 @@ module Aws::Pinpoint
     #   <p>The key of the tag to remove from the resource. To remove multiple tags, append the tagKeys parameter and argument for each additional tag to remove, separated by an ampersand (&amp;).</p>
     #   @return [Array<String>]
     class UntagResourceRequest < Struct.new(
+      nil,
       :resource_arn,
       :tag_keys,
       keyword_init: true
@@ -8122,6 +8514,7 @@ module Aws::Pinpoint
     #   <p>The unique identifier for the application. This identifier is displayed as the <b>Project ID</b> on the Amazon Pinpoint console.</p>
     #   @return [String]
     class UpdateAdmChannelRequest < Struct.new(
+      nil,
       :adm_channel_request,
       :application_id,
       keyword_init: true
@@ -8133,6 +8526,7 @@ module Aws::Pinpoint
     #   <p>Provides information about the status and settings of the ADM (Amazon Device Messaging) channel for an application.</p>
     #   @return [Types::ADMChannelResponse]
     class UpdateAdmChannelResponse < Struct.new(
+      nil,
       :adm_channel_response,
       keyword_init: true
     )
@@ -8146,6 +8540,7 @@ module Aws::Pinpoint
     #   <p>The unique identifier for the application. This identifier is displayed as the <b>Project ID</b> on the Amazon Pinpoint console.</p>
     #   @return [String]
     class UpdateApnsChannelRequest < Struct.new(
+      nil,
       :apns_channel_request,
       :application_id,
       keyword_init: true
@@ -8157,6 +8552,7 @@ module Aws::Pinpoint
     #   <p>Provides information about the status and settings of the APNs (Apple Push Notification service) channel for an application.</p>
     #   @return [Types::APNSChannelResponse]
     class UpdateApnsChannelResponse < Struct.new(
+      nil,
       :apns_channel_response,
       keyword_init: true
     )
@@ -8170,6 +8566,7 @@ module Aws::Pinpoint
     #   <p>The unique identifier for the application. This identifier is displayed as the <b>Project ID</b> on the Amazon Pinpoint console.</p>
     #   @return [String]
     class UpdateApnsSandboxChannelRequest < Struct.new(
+      nil,
       :apns_sandbox_channel_request,
       :application_id,
       keyword_init: true
@@ -8181,6 +8578,7 @@ module Aws::Pinpoint
     #   <p>Provides information about the status and settings of the APNs (Apple Push Notification service) sandbox channel for an application.</p>
     #   @return [Types::APNSSandboxChannelResponse]
     class UpdateApnsSandboxChannelResponse < Struct.new(
+      nil,
       :apns_sandbox_channel_response,
       keyword_init: true
     )
@@ -8194,6 +8592,7 @@ module Aws::Pinpoint
     #   <p>The unique identifier for the application. This identifier is displayed as the <b>Project ID</b> on the Amazon Pinpoint console.</p>
     #   @return [String]
     class UpdateApnsVoipChannelRequest < Struct.new(
+      nil,
       :apns_voip_channel_request,
       :application_id,
       keyword_init: true
@@ -8205,6 +8604,7 @@ module Aws::Pinpoint
     #   <p>Provides information about the status and settings of the APNs (Apple Push Notification service) VoIP channel for an application.</p>
     #   @return [Types::APNSVoipChannelResponse]
     class UpdateApnsVoipChannelResponse < Struct.new(
+      nil,
       :apns_voip_channel_response,
       keyword_init: true
     )
@@ -8218,6 +8618,7 @@ module Aws::Pinpoint
     #   <p>The unique identifier for the application. This identifier is displayed as the <b>Project ID</b> on the Amazon Pinpoint console.</p>
     #   @return [String]
     class UpdateApnsVoipSandboxChannelRequest < Struct.new(
+      nil,
       :apns_voip_sandbox_channel_request,
       :application_id,
       keyword_init: true
@@ -8229,6 +8630,7 @@ module Aws::Pinpoint
     #   <p>Provides information about the status and settings of the APNs (Apple Push Notification service) VoIP sandbox channel for an application.</p>
     #   @return [Types::APNSVoipSandboxChannelResponse]
     class UpdateApnsVoipSandboxChannelResponse < Struct.new(
+      nil,
       :apns_voip_sandbox_channel_response,
       keyword_init: true
     )
@@ -8242,6 +8644,7 @@ module Aws::Pinpoint
     #   <p>Specifies the default settings for an application.</p>
     #   @return [Types::WriteApplicationSettingsRequest]
     class UpdateApplicationSettingsRequest < Struct.new(
+      nil,
       :application_id,
       :write_application_settings_request,
       keyword_init: true
@@ -8253,6 +8656,7 @@ module Aws::Pinpoint
     #   <p>Provides information about an application, including the default settings for an application.</p>
     #   @return [Types::ApplicationSettingsResource]
     class UpdateApplicationSettingsResponse < Struct.new(
+      nil,
       :application_settings_resource,
       keyword_init: true
     )
@@ -8264,6 +8668,7 @@ module Aws::Pinpoint
     #   <p>An array of the attributes to remove from all the endpoints that are associated with the application. The array can specify the complete, exact name of each attribute to remove or it can specify a glob pattern that an attribute name must match in order for the attribute to be removed.</p>
     #   @return [Array<String>]
     class UpdateAttributesRequest < Struct.new(
+      nil,
       :blacklist,
       keyword_init: true
     )
@@ -8277,6 +8682,7 @@ module Aws::Pinpoint
     #   <p>Specifies the status and settings of the Baidu (Baidu Cloud Push) channel for an application.</p>
     #   @return [Types::BaiduChannelRequest]
     class UpdateBaiduChannelRequest < Struct.new(
+      nil,
       :application_id,
       :baidu_channel_request,
       keyword_init: true
@@ -8288,6 +8694,7 @@ module Aws::Pinpoint
     #   <p>Provides information about the status and settings of the Baidu (Baidu Cloud Push) channel for an application.</p>
     #   @return [Types::BaiduChannelResponse]
     class UpdateBaiduChannelResponse < Struct.new(
+      nil,
       :baidu_channel_response,
       keyword_init: true
     )
@@ -8304,6 +8711,7 @@ module Aws::Pinpoint
     #   <p>Specifies the configuration and other settings for a campaign.</p>
     #   @return [Types::WriteCampaignRequest]
     class UpdateCampaignRequest < Struct.new(
+      nil,
       :application_id,
       :campaign_id,
       :write_campaign_request,
@@ -8316,6 +8724,7 @@ module Aws::Pinpoint
     #   <p>Provides information about the status, configuration, and other settings for a campaign.</p>
     #   @return [Types::CampaignResponse]
     class UpdateCampaignResponse < Struct.new(
+      nil,
       :campaign_response,
       keyword_init: true
     )
@@ -8329,6 +8738,7 @@ module Aws::Pinpoint
     #   <p>Specifies the status and settings of the email channel for an application.</p>
     #   @return [Types::EmailChannelRequest]
     class UpdateEmailChannelRequest < Struct.new(
+      nil,
       :application_id,
       :email_channel_request,
       keyword_init: true
@@ -8340,6 +8750,7 @@ module Aws::Pinpoint
     #   <p>Provides information about the status and settings of the email channel for an application.</p>
     #   @return [Types::EmailChannelResponse]
     class UpdateEmailChannelResponse < Struct.new(
+      nil,
       :email_channel_response,
       keyword_init: true
     )
@@ -8359,6 +8770,7 @@ module Aws::Pinpoint
     #   <p>The unique identifier for the version of the message template to update, retrieve information about, or delete. To retrieve identifiers and other information for all the versions of a template, use the <link  linkend="templates-template-name-template-type-versions">Template Versions</link> resource.</p> <p>If specified, this value must match the identifier for an existing template version. If specified for an update operation, this value must match the identifier for the latest existing version of the template. This restriction helps ensure that race conditions don't occur.</p> <p>If you don't specify a value for this parameter, Amazon Pinpoint does the following:</p> <ul><li><p>For a get operation, retrieves information about the active version of the template.</p></li> <li><p>For an update operation, saves the updates to (overwrites) the latest existing version of the template, if the create-new-version parameter isn't used or is set to false.</p></li> <li><p>For a delete operation, deletes the template, including all versions of the template.</p></li></ul>
     #   @return [String]
     class UpdateEmailTemplateRequest < Struct.new(
+      nil,
       :create_new_version,
       :email_template_request,
       :template_name,
@@ -8372,6 +8784,7 @@ module Aws::Pinpoint
     #   <p>Provides information about an API request or response.</p>
     #   @return [Types::MessageBody]
     class UpdateEmailTemplateResponse < Struct.new(
+      nil,
       :message_body,
       keyword_init: true
     )
@@ -8388,6 +8801,7 @@ module Aws::Pinpoint
     #   <p>Specifies the channel type and other settings for an endpoint.</p>
     #   @return [Types::EndpointRequest]
     class UpdateEndpointRequest < Struct.new(
+      nil,
       :application_id,
       :endpoint_id,
       :endpoint_request,
@@ -8400,6 +8814,7 @@ module Aws::Pinpoint
     #   <p>Provides information about an API request or response.</p>
     #   @return [Types::MessageBody]
     class UpdateEndpointResponse < Struct.new(
+      nil,
       :message_body,
       keyword_init: true
     )
@@ -8413,6 +8828,7 @@ module Aws::Pinpoint
     #   <p>Specifies a batch of endpoints to create or update and the settings and attributes to set or change for each endpoint.</p>
     #   @return [Types::EndpointBatchRequest]
     class UpdateEndpointsBatchRequest < Struct.new(
+      nil,
       :application_id,
       :endpoint_batch_request,
       keyword_init: true
@@ -8424,6 +8840,7 @@ module Aws::Pinpoint
     #   <p>Provides information about an API request or response.</p>
     #   @return [Types::MessageBody]
     class UpdateEndpointsBatchResponse < Struct.new(
+      nil,
       :message_body,
       keyword_init: true
     )
@@ -8437,6 +8854,7 @@ module Aws::Pinpoint
     #   <p>Specifies the status and settings of the GCM channel for an application. This channel enables Amazon Pinpoint to send push notifications through the Firebase Cloud Messaging (FCM), formerly Google Cloud Messaging (GCM), service.</p>
     #   @return [Types::GCMChannelRequest]
     class UpdateGcmChannelRequest < Struct.new(
+      nil,
       :application_id,
       :gcm_channel_request,
       keyword_init: true
@@ -8448,6 +8866,7 @@ module Aws::Pinpoint
     #   <p>Provides information about the status and settings of the GCM channel for an application. The GCM channel enables Amazon Pinpoint to send push notifications through the Firebase Cloud Messaging (FCM), formerly Google Cloud Messaging (GCM), service.</p>
     #   @return [Types::GCMChannelResponse]
     class UpdateGcmChannelResponse < Struct.new(
+      nil,
       :gcm_channel_response,
       keyword_init: true
     )
@@ -8467,6 +8886,7 @@ module Aws::Pinpoint
     #   <p>The unique identifier for the version of the message template to update, retrieve information about, or delete. To retrieve identifiers and other information for all the versions of a template, use the <link  linkend="templates-template-name-template-type-versions">Template Versions</link> resource.</p> <p>If specified, this value must match the identifier for an existing template version. If specified for an update operation, this value must match the identifier for the latest existing version of the template. This restriction helps ensure that race conditions don't occur.</p> <p>If you don't specify a value for this parameter, Amazon Pinpoint does the following:</p> <ul><li><p>For a get operation, retrieves information about the active version of the template.</p></li> <li><p>For an update operation, saves the updates to (overwrites) the latest existing version of the template, if the create-new-version parameter isn't used or is set to false.</p></li> <li><p>For a delete operation, deletes the template, including all versions of the template.</p></li></ul>
     #   @return [String]
     class UpdateInAppTemplateRequest < Struct.new(
+      nil,
       :create_new_version,
       :in_app_template_request,
       :template_name,
@@ -8480,6 +8900,7 @@ module Aws::Pinpoint
     #   <p>Provides information about an API request or response.</p>
     #   @return [Types::MessageBody]
     class UpdateInAppTemplateResponse < Struct.new(
+      nil,
       :message_body,
       keyword_init: true
     )
@@ -8496,6 +8917,7 @@ module Aws::Pinpoint
     #   <p>Specifies the configuration and other settings for a journey.</p>
     #   @return [Types::WriteJourneyRequest]
     class UpdateJourneyRequest < Struct.new(
+      nil,
       :application_id,
       :journey_id,
       :write_journey_request,
@@ -8508,6 +8930,7 @@ module Aws::Pinpoint
     #   <p>Provides information about the status, configuration, and other settings for a journey.</p>
     #   @return [Types::JourneyResponse]
     class UpdateJourneyResponse < Struct.new(
+      nil,
       :journey_response,
       keyword_init: true
     )
@@ -8524,6 +8947,7 @@ module Aws::Pinpoint
     #   <p>Changes the status of a journey.</p>
     #   @return [Types::JourneyStateRequest]
     class UpdateJourneyStateRequest < Struct.new(
+      nil,
       :application_id,
       :journey_id,
       :journey_state_request,
@@ -8536,6 +8960,7 @@ module Aws::Pinpoint
     #   <p>Provides information about the status, configuration, and other settings for a journey.</p>
     #   @return [Types::JourneyResponse]
     class UpdateJourneyStateResponse < Struct.new(
+      nil,
       :journey_response,
       keyword_init: true
     )
@@ -8555,6 +8980,7 @@ module Aws::Pinpoint
     #   <p>The unique identifier for the version of the message template to update, retrieve information about, or delete. To retrieve identifiers and other information for all the versions of a template, use the <link  linkend="templates-template-name-template-type-versions">Template Versions</link> resource.</p> <p>If specified, this value must match the identifier for an existing template version. If specified for an update operation, this value must match the identifier for the latest existing version of the template. This restriction helps ensure that race conditions don't occur.</p> <p>If you don't specify a value for this parameter, Amazon Pinpoint does the following:</p> <ul><li><p>For a get operation, retrieves information about the active version of the template.</p></li> <li><p>For an update operation, saves the updates to (overwrites) the latest existing version of the template, if the create-new-version parameter isn't used or is set to false.</p></li> <li><p>For a delete operation, deletes the template, including all versions of the template.</p></li></ul>
     #   @return [String]
     class UpdatePushTemplateRequest < Struct.new(
+      nil,
       :create_new_version,
       :push_notification_template_request,
       :template_name,
@@ -8568,6 +8994,7 @@ module Aws::Pinpoint
     #   <p>Provides information about an API request or response.</p>
     #   @return [Types::MessageBody]
     class UpdatePushTemplateResponse < Struct.new(
+      nil,
       :message_body,
       keyword_init: true
     )
@@ -8581,6 +9008,7 @@ module Aws::Pinpoint
     #   <p>Specifies Amazon Pinpoint configuration settings for retrieving and processing recommendation data from a recommender model.</p>
     #   @return [Types::UpdateRecommenderConfigurationShape]
     class UpdateRecommenderConfigurationRequest < Struct.new(
+      nil,
       :recommender_id,
       :update_recommender_configuration,
       keyword_init: true
@@ -8592,6 +9020,7 @@ module Aws::Pinpoint
     #   <p>Provides information about Amazon Pinpoint configuration settings for retrieving and processing data from a recommender model.</p>
     #   @return [Types::RecommenderConfigurationResponse]
     class UpdateRecommenderConfigurationResponse < Struct.new(
+      nil,
       :recommender_configuration_response,
       keyword_init: true
     )
@@ -8627,6 +9056,7 @@ module Aws::Pinpoint
     #   <p>The number of recommended items to retrieve from the model for each endpoint or user, depending on the value for the RecommendationProviderIdType property. This number determines how many recommended items are available for use in message variables. The minimum value is 1. The maximum value is 5. The default value is 5.</p> <p>To use multiple recommended items and custom attributes with message variables, you have to use an AWS Lambda function (RecommendationTransformerUri) to perform additional processing of recommendation data.</p>
     #   @return [Integer]
     class UpdateRecommenderConfigurationShape < Struct.new(
+      nil,
       :attributes,
       :description,
       :name,
@@ -8651,6 +9081,7 @@ module Aws::Pinpoint
     #   <p>Specifies the configuration, dimension, and other settings for a segment. A WriteSegmentRequest object can include a Dimensions object or a SegmentGroups object, but not both.</p>
     #   @return [Types::WriteSegmentRequest]
     class UpdateSegmentRequest < Struct.new(
+      nil,
       :application_id,
       :segment_id,
       :write_segment_request,
@@ -8663,6 +9094,7 @@ module Aws::Pinpoint
     #   <p>Provides information about the configuration, dimension, and other settings for a segment.</p>
     #   @return [Types::SegmentResponse]
     class UpdateSegmentResponse < Struct.new(
+      nil,
       :segment_response,
       keyword_init: true
     )
@@ -8676,6 +9108,7 @@ module Aws::Pinpoint
     #   <p>Specifies the status and settings of the SMS channel for an application.</p>
     #   @return [Types::SMSChannelRequest]
     class UpdateSmsChannelRequest < Struct.new(
+      nil,
       :application_id,
       :sms_channel_request,
       keyword_init: true
@@ -8687,6 +9120,7 @@ module Aws::Pinpoint
     #   <p>Provides information about the status and settings of the SMS channel for an application.</p>
     #   @return [Types::SMSChannelResponse]
     class UpdateSmsChannelResponse < Struct.new(
+      nil,
       :sms_channel_response,
       keyword_init: true
     )
@@ -8706,6 +9140,7 @@ module Aws::Pinpoint
     #   <p>The unique identifier for the version of the message template to update, retrieve information about, or delete. To retrieve identifiers and other information for all the versions of a template, use the <link  linkend="templates-template-name-template-type-versions">Template Versions</link> resource.</p> <p>If specified, this value must match the identifier for an existing template version. If specified for an update operation, this value must match the identifier for the latest existing version of the template. This restriction helps ensure that race conditions don't occur.</p> <p>If you don't specify a value for this parameter, Amazon Pinpoint does the following:</p> <ul><li><p>For a get operation, retrieves information about the active version of the template.</p></li> <li><p>For an update operation, saves the updates to (overwrites) the latest existing version of the template, if the create-new-version parameter isn't used or is set to false.</p></li> <li><p>For a delete operation, deletes the template, including all versions of the template.</p></li></ul>
     #   @return [String]
     class UpdateSmsTemplateRequest < Struct.new(
+      nil,
       :create_new_version,
       :sms_template_request,
       :template_name,
@@ -8719,6 +9154,7 @@ module Aws::Pinpoint
     #   <p>Provides information about an API request or response.</p>
     #   @return [Types::MessageBody]
     class UpdateSmsTemplateResponse < Struct.new(
+      nil,
       :message_body,
       keyword_init: true
     )
@@ -8735,6 +9171,7 @@ module Aws::Pinpoint
     #   <p>The type of channel that the message template is designed for. Valid values are: EMAIL, PUSH, SMS, and VOICE.</p>
     #   @return [String]
     class UpdateTemplateActiveVersionRequest < Struct.new(
+      nil,
       :template_active_version_request,
       :template_name,
       :template_type,
@@ -8747,6 +9184,7 @@ module Aws::Pinpoint
     #   <p>Provides information about an API request or response.</p>
     #   @return [Types::MessageBody]
     class UpdateTemplateActiveVersionResponse < Struct.new(
+      nil,
       :message_body,
       keyword_init: true
     )
@@ -8760,6 +9198,7 @@ module Aws::Pinpoint
     #   <p>Specifies the status and settings of the voice channel for an application.</p>
     #   @return [Types::VoiceChannelRequest]
     class UpdateVoiceChannelRequest < Struct.new(
+      nil,
       :application_id,
       :voice_channel_request,
       keyword_init: true
@@ -8771,6 +9210,7 @@ module Aws::Pinpoint
     #   <p>Provides information about the status and settings of the voice channel for an application.</p>
     #   @return [Types::VoiceChannelResponse]
     class UpdateVoiceChannelResponse < Struct.new(
+      nil,
       :voice_channel_response,
       keyword_init: true
     )
@@ -8790,6 +9230,7 @@ module Aws::Pinpoint
     #   <p>Specifies the content and settings for a message template that can be used in messages that are sent through the voice channel.</p>
     #   @return [Types::VoiceTemplateRequest]
     class UpdateVoiceTemplateRequest < Struct.new(
+      nil,
       :create_new_version,
       :template_name,
       :version,
@@ -8803,6 +9244,7 @@ module Aws::Pinpoint
     #   <p>Provides information about an API request or response.</p>
     #   @return [Types::MessageBody]
     class UpdateVoiceTemplateResponse < Struct.new(
+      nil,
       :message_body,
       keyword_init: true
     )
@@ -8814,6 +9256,7 @@ module Aws::Pinpoint
     #   <p>Specifies whether the OTP is valid or not.</p>
     #   @return [Boolean]
     class VerificationResponse < Struct.new(
+      nil,
       :valid,
       keyword_init: true
     )
@@ -8827,6 +9270,7 @@ module Aws::Pinpoint
     #   <p>Verify OTP message request.</p>
     #   @return [Types::VerifyOTPMessageRequestParameters]
     class VerifyOTPMessageRequest < Struct.new(
+      nil,
       :application_id,
       :verify_otp_message_request_parameters,
       keyword_init: true
@@ -8845,6 +9289,7 @@ module Aws::Pinpoint
     #   <p>The reference identifier provided when the OTP was previously sent.</p>
     #   @return [String]
     class VerifyOTPMessageRequestParameters < Struct.new(
+      nil,
       :destination_identity,
       :otp,
       :reference_id,
@@ -8857,6 +9302,7 @@ module Aws::Pinpoint
     #   <p>Verify OTP Message Response.</p>
     #   @return [Types::VerificationResponse]
     class VerifyOTPMessageResponse < Struct.new(
+      nil,
       :verification_response,
       keyword_init: true
     )
@@ -8868,6 +9314,7 @@ module Aws::Pinpoint
     #   <p>Specifies whether to enable the voice channel for the application.</p>
     #   @return [Boolean]
     class VoiceChannelRequest < Struct.new(
+      nil,
       :enabled,
       keyword_init: true
     )
@@ -8906,6 +9353,7 @@ module Aws::Pinpoint
     #   <p>The current version of the voice channel.</p>
     #   @return [Integer]
     class VoiceChannelResponse < Struct.new(
+      nil,
       :application_id,
       :creation_date,
       :enabled,
@@ -8938,6 +9386,7 @@ module Aws::Pinpoint
     #   <p>The name of the voice to use when delivering the message. For a list of supported voices, see the <a href="https://docs.aws.amazon.com/polly/latest/dg/what-is.html">Amazon Polly Developer Guide</a>.</p>
     #   @return [String]
     class VoiceMessage < Struct.new(
+      nil,
       :body,
       :language_code,
       :origination_number,
@@ -8968,6 +9417,7 @@ module Aws::Pinpoint
     #   <p>The name of the voice to use when delivering messages that are based on the message template. For a list of supported voices, see the <a href="https://docs.aws.amazon.com/polly/latest/dg/what-is.html">Amazon Polly Developer Guide</a>.</p>
     #   @return [String]
     class VoiceTemplateRequest < Struct.new(
+      nil,
       :body,
       :default_substitutions,
       :language_code,
@@ -9017,6 +9467,7 @@ module Aws::Pinpoint
     #   <p>The name of the voice that's used when delivering messages that are based on the message template. For a list of supported voices, see the <a href="https://docs.aws.amazon.com/polly/latest/dg/what-is.html">Amazon Polly Developer Guide</a>.</p>
     #   @return [String]
     class VoiceTemplateResponse < Struct.new(
+      nil,
       :arn,
       :body,
       :creation_date,
@@ -9042,6 +9493,7 @@ module Aws::Pinpoint
     #   <p>The amount of time to wait or the date and time when the activity moves participants to the next activity in the journey.</p>
     #   @return [Types::WaitTime]
     class WaitActivity < Struct.new(
+      nil,
       :next_activity,
       :wait_time,
       keyword_init: true
@@ -9057,6 +9509,7 @@ module Aws::Pinpoint
     #   <p>The date and time, in ISO 8601 format, when Amazon Pinpoint determines whether the activity's conditions have been met or the activity moves participants to the next activity in the journey.</p>
     #   @return [String]
     class WaitTime < Struct.new(
+      nil,
       :wait_for,
       :wait_until,
       keyword_init: true
@@ -9083,6 +9536,7 @@ module Aws::Pinpoint
     #   <p>The default sending limits for journeys in the application. These limits apply to each journey for the application but can be overridden, on a per journey basis, with the JourneyLimits resource.</p>
     #   @return [Types::ApplicationSettingsJourneyLimits]
     class WriteApplicationSettingsRequest < Struct.new(
+      nil,
       :campaign_hook,
       :cloud_watch_metrics_enabled,
       :event_tagging_enabled,
@@ -9147,6 +9601,7 @@ module Aws::Pinpoint
     #   <p>Defines the priority of the campaign, used to decide the order of messages displayed to user if there are multiple messages scheduled to be displayed at the same moment.</p>
     #   @return [Integer]
     class WriteCampaignRequest < Struct.new(
+      nil,
       :additional_treatments,
       :custom_delivery_configuration,
       :description,
@@ -9179,6 +9634,7 @@ module Aws::Pinpoint
     #   <p>The AWS Identity and Access Management (IAM) role that authorizes Amazon Pinpoint to publish event data to the stream in your AWS account.</p>
     #   @return [String]
     class WriteEventStream < Struct.new(
+      nil,
       :destination_stream_arn,
       :role_arn,
       keyword_init: true
@@ -9245,6 +9701,7 @@ module Aws::Pinpoint
     #   <p>An array of time zone estimation methods, if any, to use for determining an <a href="https://docs.aws.amazon.com/pinpoint/latest/apireference/apps-application-id-endpoints-endpoint-id.html">Endpoints</a> time zone if the Endpoint does not have a value for the Demographic.Timezone attribute.</p> <ul> <li><p>PHONE_NUMBER - A time zone is determined based on the Endpoint.Address and Endpoint.Location.Country.</p></li> <li><p>POSTAL_CODE - A time zone is determined based on the Endpoint.Location.PostalCode and Endpoint.Location.Country.</p> <note><p>POSTAL_CODE detection is only supported in the United States, United Kingdom, Australia, New Zealand, Canada, France, Italy, Spain, Germany and in regions where Amazon Pinpoint is available.</p></note></li> </ul>
     #   @return [Array<String>]
     class WriteJourneyRequest < Struct.new(
+      nil,
       :activities,
       :creation_date,
       :last_modified_date,
@@ -9283,6 +9740,7 @@ module Aws::Pinpoint
     #   <note><p>As of <b>22-05-2023</b> tags has been deprecated for update operations. After this date any value in tags is not processed and an error code is not returned. To manage tags we recommend using either <a href="https://docs.aws.amazon.com/pinpoint/latest/apireference/tags-resource-arn.html">Tags</a> in the <i>API Reference for Amazon Pinpoint</i>, <a href="https://docs.aws.amazon.com/cli/latest/reference/resourcegroupstaggingapi/index.html">resourcegroupstaggingapi</a> commands in the <i>AWS Command Line Interface Documentation</i> or <a href="https://sdk.amazonaws.com/java/api/latest/software/amazon/awssdk/services/resourcegroupstaggingapi/package-summary.html">resourcegroupstaggingapi</a> in the <i>AWS SDK</i>.</p></note> <p>(Deprecated) A string-to-string map of key-value pairs that defines the tags to associate with the segment. Each tag consists of a required tag key and an associated tag value.</p>
     #   @return [Hash<String, String>]
     class WriteSegmentRequest < Struct.new(
+      nil,
       :dimensions,
       :name,
       :segment_groups,
@@ -9315,6 +9773,7 @@ module Aws::Pinpoint
     #   <p>A custom name for the treatment.</p>
     #   @return [String]
     class WriteTreatmentResource < Struct.new(
+      nil,
       :custom_delivery_configuration,
       :message_configuration,
       :schedule,

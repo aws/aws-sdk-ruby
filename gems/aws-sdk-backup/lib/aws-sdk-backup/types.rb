@@ -28,6 +28,7 @@ module Aws::Backup
     #               Backup</a>.</p>
     #   @return [Hash<String, String>]
     class AdvancedBackupSetting < Struct.new(
+      nil,
       :resource_type,
       :backup_options,
       keyword_init: true
@@ -53,6 +54,7 @@ module Aws::Backup
     #   <p></p>
     #   @return [String]
     class AlreadyExistsException < Struct.new(
+      nil,
       :code,
       :message,
       :creator_request_id,
@@ -74,6 +76,7 @@ module Aws::Backup
     #   <p>A comment provided by the requester explaining the association request.</p>
     #   @return [String]
     class AssociateBackupVaultMpaApprovalTeamInput < Struct.new(
+      nil,
       :backup_vault_name,
       :mpa_approval_team_arn,
       :requester_comment,
@@ -243,6 +246,7 @@ module Aws::Backup
     #            for all message categories and returns the sum.</p>
     #   @return [String]
     class BackupJob < Struct.new(
+      nil,
       :account_id,
       :backup_job_id,
       :backup_vault_name,
@@ -326,6 +330,7 @@ module Aws::Backup
     #            12:11:30.087 AM.</p>
     #   @return [Time]
     class BackupJobSummary < Struct.new(
+      nil,
       :region,
       :account_id,
       :state,
@@ -362,6 +367,7 @@ module Aws::Backup
     #   <p>Contains a list of <code>BackupOptions</code> for each resource type.</p>
     #   @return [Array<Types::AdvancedBackupSetting>]
     class BackupPlan < Struct.new(
+      nil,
       :backup_plan_name,
       :rules,
       :advanced_backup_settings,
@@ -386,6 +392,7 @@ module Aws::Backup
     #            are only available for Windows Volume Shadow Copy Service (VSS) backup jobs.</p>
     #   @return [Array<Types::AdvancedBackupSetting>]
     class BackupPlanInput < Struct.new(
+      nil,
       :backup_plan_name,
       :rules,
       :advanced_backup_settings,
@@ -402,6 +409,7 @@ module Aws::Backup
     #   <p>The optional display name of a backup plan template.</p>
     #   @return [String]
     class BackupPlanTemplatesListMember < Struct.new(
+      nil,
       :backup_plan_template_id,
       :backup_plan_template_name,
       keyword_init: true
@@ -451,6 +459,7 @@ module Aws::Backup
     #   <p>Contains a list of <code>BackupOptions</code> for a resource type.</p>
     #   @return [Array<Types::AdvancedBackupSetting>]
     class BackupPlansListMember < Struct.new(
+      nil,
       :backup_plan_arn,
       :backup_plan_id,
       :creation_date,
@@ -541,6 +550,7 @@ module Aws::Backup
     #            <p>Within the array is ResourceType. Only one will be accepted for each BackupRule.</p>
     #   @return [Array<Types::IndexAction>]
     class BackupRule < Struct.new(
+      nil,
       :rule_name,
       :target_backup_vault_name,
       :schedule_expression,
@@ -634,6 +644,7 @@ module Aws::Backup
     #            </ul>
     #   @return [Array<Types::IndexAction>]
     class BackupRuleInput < Struct.new(
+      nil,
       :rule_name,
       :target_backup_vault_name,
       :schedule_expression,
@@ -695,6 +706,7 @@ module Aws::Backup
     #            <p>If you specify multiple conditions, the resources much match all conditions (AND logic).</p>
     #   @return [Types::Conditions]
     class BackupSelection < Struct.new(
+      nil,
       :selection_name,
       :iam_role_arn,
       :resources,
@@ -732,6 +744,7 @@ module Aws::Backup
     #            for example, <code>arn:aws:iam::123456789012:role/S3Access</code>.</p>
     #   @return [String]
     class BackupSelectionsListMember < Struct.new(
+      nil,
       :selection_id,
       :selection_name,
       :backup_plan_id,
@@ -823,6 +836,7 @@ module Aws::Backup
     #            12:11:30.087 AM.</p>
     #   @return [Time]
     class BackupVaultListMember < Struct.new(
+      nil,
       :backup_vault_name,
       :backup_vault_arn,
       :vault_type,
@@ -863,6 +877,7 @@ module Aws::Backup
     #   <p>A timestamp that specifies when to delete a recovery point.</p>
     #   @return [Time]
     class CalculatedLifecycle < Struct.new(
+      nil,
       :move_to_cold_storage_at,
       :delete_at,
       keyword_init: true
@@ -880,6 +895,7 @@ module Aws::Backup
     #   <p>The integer amount, in days, after which to remove legal hold.</p>
     #   @return [Integer]
     class CancelLegalHoldInput < Struct.new(
+      nil,
       :legal_hold_id,
       :cancel_description,
       :retain_record_in_days,
@@ -889,6 +905,7 @@ module Aws::Backup
     end
 
     class CancelLegalHoldOutput < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -914,6 +931,7 @@ module Aws::Backup
     #               Accounting</code>, <code>Accounting</code> is the value.</p>
     #   @return [String]
     class Condition < Struct.new(
+      nil,
       :condition_type,
       :condition_key,
       :condition_value,
@@ -935,6 +953,7 @@ module Aws::Backup
     #               Accounting</code>, <code>Accounting</code> is the value.</p>
     #   @return [String]
     class ConditionParameter < Struct.new(
+      nil,
       :condition_key,
       :condition_value,
       keyword_init: true
@@ -962,6 +981,7 @@ module Aws::Backup
     #            a wildcard character (*) anywhere in the string.</p>
     #   @return [Array<Types::ConditionParameter>]
     class Conditions < Struct.new(
+      nil,
       :string_equals,
       :string_not_equals,
       :string_like,
@@ -984,6 +1004,7 @@ module Aws::Backup
     #   <p></p>
     #   @return [String]
     class ConflictException < Struct.new(
+      nil,
       :code,
       :message,
       :type,
@@ -1004,6 +1025,7 @@ module Aws::Backup
     #   <p>The value of parameter, for example, <code>hourly</code>.</p>
     #   @return [String]
     class ControlInputParameter < Struct.new(
+      nil,
       :parameter_name,
       :parameter_value,
       keyword_init: true
@@ -1039,6 +1061,7 @@ module Aws::Backup
     #               <code>[{"Key":"string","Value":"string"}]</code>.</p>
     #   @return [Hash<String, String>]
     class ControlScope < Struct.new(
+      nil,
       :compliance_resource_ids,
       :compliance_resource_types,
       :tags,
@@ -1067,6 +1090,7 @@ module Aws::Backup
     #            <code>arn:aws:backup:us-east-1:123456789012:backup-vault:aBackupVault</code>.</p>
     #   @return [String]
     class CopyAction < Struct.new(
+      nil,
       :lifecycle,
       :destination_backup_vault_arn,
       keyword_init: true
@@ -1173,6 +1197,7 @@ module Aws::Backup
     #            for all message categories and returns the sum</p>
     #   @return [String]
     class CopyJob < Struct.new(
+      nil,
       :account_id,
       :copy_job_id,
       :source_backup_vault_arn,
@@ -1253,6 +1278,7 @@ module Aws::Backup
     #            12:11:30.087 AM.</p>
     #   @return [Time]
     class CopyJobSummary < Struct.new(
+      nil,
       :region,
       :account_id,
       :state,
@@ -1285,6 +1311,7 @@ module Aws::Backup
     #            <p>If used, this parameter must contain 1 to 50 alphanumeric or '-_.' characters.</p>
     #   @return [String]
     class CreateBackupPlanInput < Struct.new(
+      nil,
       :backup_plan,
       :backup_plan_tags,
       :creator_request_id,
@@ -1315,6 +1342,7 @@ module Aws::Backup
     #            available for Windows Volume Shadow Copy Service (VSS) backup jobs.</p>
     #   @return [Array<Types::AdvancedBackupSetting>]
     class CreateBackupPlanOutput < Struct.new(
+      nil,
       :backup_plan_id,
       :backup_plan_arn,
       :creation_date,
@@ -1337,6 +1365,7 @@ module Aws::Backup
     #            <p>If used, this parameter must contain 1 to 50 alphanumeric or '-_.' characters.</p>
     #   @return [String]
     class CreateBackupSelectionInput < Struct.new(
+      nil,
       :backup_plan_id,
       :backup_selection,
       :creator_request_id,
@@ -1359,6 +1388,7 @@ module Aws::Backup
     #            AM.</p>
     #   @return [Time]
     class CreateBackupSelectionOutput < Struct.new(
+      nil,
       :selection_id,
       :backup_plan_id,
       :creation_date,
@@ -1385,6 +1415,7 @@ module Aws::Backup
     #            <p>If used, this parameter must contain 1 to 50 alphanumeric or '-_.' characters.</p>
     #   @return [String]
     class CreateBackupVaultInput < Struct.new(
+      nil,
       :backup_vault_name,
       :backup_vault_tags,
       :encryption_key_arn,
@@ -1410,6 +1441,7 @@ module Aws::Backup
     #            AM.</p>
     #   @return [Time]
     class CreateBackupVaultOutput < Struct.new(
+      nil,
       :backup_vault_name,
       :backup_vault_arn,
       :creation_date,
@@ -1439,6 +1471,7 @@ module Aws::Backup
     #   <p>The tags to assign to the framework.</p>
     #   @return [Hash<String, String>]
     class CreateFrameworkInput < Struct.new(
+      nil,
       :framework_name,
       :framework_description,
       :framework_controls,
@@ -1459,6 +1492,7 @@ module Aws::Backup
     #            depends on the resource type.</p>
     #   @return [String]
     class CreateFrameworkOutput < Struct.new(
+      nil,
       :framework_name,
       :framework_arn,
       keyword_init: true
@@ -1486,6 +1520,7 @@ module Aws::Backup
     #            numbers, spaces, and the following characters: + - = . _ : /. </p>
     #   @return [Hash<String, String>]
     class CreateLegalHoldInput < Struct.new(
+      nil,
       :title,
       :description,
       :idempotency_token,
@@ -1518,6 +1553,7 @@ module Aws::Backup
     #   <p>The criteria to assign to a set of resources, such as resource types or backup vaults.</p>
     #   @return [Types::RecoveryPointSelection]
     class CreateLegalHoldOutput < Struct.new(
+      nil,
       :title,
       :status,
       :description,
@@ -1552,6 +1588,7 @@ module Aws::Backup
     #   <p>The maximum retention period that the vault retains its recovery points.</p>
     #   @return [Integer]
     class CreateLogicallyAirGappedBackupVaultInput < Struct.new(
+      nil,
       :backup_vault_name,
       :backup_vault_tags,
       :creator_request_id,
@@ -1580,6 +1617,7 @@ module Aws::Backup
     #   <p>The current state of the vault.</p>
     #   @return [String]
     class CreateLogicallyAirGappedBackupVaultOutput < Struct.new(
+      nil,
       :backup_vault_name,
       :backup_vault_arn,
       :creation_date,
@@ -1622,6 +1660,7 @@ module Aws::Backup
     #            idempotency token results in a success message with no action taken.</p>
     #   @return [String]
     class CreateReportPlanInput < Struct.new(
+      nil,
       :report_plan_name,
       :report_plan_description,
       :report_delivery_channel,
@@ -1647,6 +1686,7 @@ module Aws::Backup
     #            AM.</p>
     #   @return [Time]
     class CreateReportPlanOutput < Struct.new(
+      nil,
       :report_plan_name,
       :report_plan_arn,
       :creation_time,
@@ -1671,6 +1711,7 @@ module Aws::Backup
     #   <p>A comment explaining the reason for requesting restore access to the backup vault.</p>
     #   @return [String]
     class CreateRestoreAccessBackupVaultInput < Struct.new(
+      nil,
       :source_backup_vault_arn,
       :backup_vault_name,
       :backup_vault_tags,
@@ -1694,6 +1735,7 @@ module Aws::Backup
     #   <p>>The date and time when the restore access backup vault was created, in Unix format and Coordinated Universal Time </p>
     #   @return [Time]
     class CreateRestoreAccessBackupVaultOutput < Struct.new(
+      nil,
       :restore_access_backup_vault_arn,
       :vault_state,
       :restore_access_backup_vault_name,
@@ -1722,6 +1764,7 @@ module Aws::Backup
     #   <p>The tags to assign to the restore testing plan.</p>
     #   @return [Hash<String, String>]
     class CreateRestoreTestingPlanInput < Struct.new(
+      nil,
       :creator_request_id,
       :restore_testing_plan,
       :tags,
@@ -1746,6 +1789,7 @@ module Aws::Backup
     #            alphanumeric characters and underscores. Maximum length is 50.</p>
     #   @return [String]
     class CreateRestoreTestingPlanOutput < Struct.new(
+      nil,
       :creation_time,
       :restore_testing_plan_arn,
       :restore_testing_plan_name,
@@ -1786,6 +1830,7 @@ module Aws::Backup
     #               <code>ProtectedResourceArns</code>.</p>
     #   @return [Types::RestoreTestingSelectionForCreate]
     class CreateRestoreTestingSelectionInput < Struct.new(
+      nil,
       :creator_request_id,
       :restore_testing_plan_name,
       :restore_testing_selection,
@@ -1810,6 +1855,7 @@ module Aws::Backup
     #   <p>The name of the restore testing selection for the related restore testing plan.</p>
     #   @return [String]
     class CreateRestoreTestingSelectionOutput < Struct.new(
+      nil,
       :creation_time,
       :restore_testing_plan_arn,
       :restore_testing_plan_name,
@@ -1840,6 +1886,7 @@ module Aws::Backup
     #            (milliseconds are optional).</p>
     #   @return [Time]
     class DateRange < Struct.new(
+      nil,
       :from_date,
       :to_date,
       keyword_init: true
@@ -1851,6 +1898,7 @@ module Aws::Backup
     #   <p>Uniquely identifies a backup plan.</p>
     #   @return [String]
     class DeleteBackupPlanInput < Struct.new(
+      nil,
       :backup_plan_id,
       keyword_init: true
     )
@@ -1875,6 +1923,7 @@ module Aws::Backup
     #            long. Version IDs cannot be edited.</p>
     #   @return [String]
     class DeleteBackupPlanOutput < Struct.new(
+      nil,
       :backup_plan_id,
       :backup_plan_arn,
       :deletion_date,
@@ -1892,6 +1941,7 @@ module Aws::Backup
     #            plan.</p>
     #   @return [String]
     class DeleteBackupSelectionInput < Struct.new(
+      nil,
       :backup_plan_id,
       :selection_id,
       keyword_init: true
@@ -1906,6 +1956,7 @@ module Aws::Backup
     #            hyphens.</p>
     #   @return [String]
     class DeleteBackupVaultAccessPolicyInput < Struct.new(
+      nil,
       :backup_vault_name,
       keyword_init: true
     )
@@ -1918,6 +1969,7 @@ module Aws::Backup
     #            Region where they are created.</p>
     #   @return [String]
     class DeleteBackupVaultInput < Struct.new(
+      nil,
       :backup_vault_name,
       keyword_init: true
     )
@@ -1928,6 +1980,7 @@ module Aws::Backup
     #   <p>The name of the backup vault from which to delete Backup Vault Lock.</p>
     #   @return [String]
     class DeleteBackupVaultLockConfigurationInput < Struct.new(
+      nil,
       :backup_vault_name,
       keyword_init: true
     )
@@ -1940,6 +1993,7 @@ module Aws::Backup
     #            created.</p>
     #   @return [String]
     class DeleteBackupVaultNotificationsInput < Struct.new(
+      nil,
       :backup_vault_name,
       keyword_init: true
     )
@@ -1950,6 +2004,7 @@ module Aws::Backup
     #   <p>The unique name of a framework.</p>
     #   @return [String]
     class DeleteFrameworkInput < Struct.new(
+      nil,
       :framework_name,
       keyword_init: true
     )
@@ -1966,6 +2021,7 @@ module Aws::Backup
     #               <code>arn:aws:backup:us-east-1:123456789012:recovery-point:1EB3B5E7-9EB0-435A-A80B-108B488B0D45</code>.</p>
     #   @return [String]
     class DeleteRecoveryPointInput < Struct.new(
+      nil,
       :backup_vault_name,
       :recovery_point_arn,
       keyword_init: true
@@ -1977,6 +2033,7 @@ module Aws::Backup
     #   <p>The unique name of a report plan.</p>
     #   @return [String]
     class DeleteReportPlanInput < Struct.new(
+      nil,
       :report_plan_name,
       keyword_init: true
     )
@@ -1988,6 +2045,7 @@ module Aws::Backup
     #            to delete.</p>
     #   @return [String]
     class DeleteRestoreTestingPlanInput < Struct.new(
+      nil,
       :restore_testing_plan_name,
       keyword_init: true
     )
@@ -2003,6 +2061,7 @@ module Aws::Backup
     #            wish to delete.</p>
     #   @return [String]
     class DeleteRestoreTestingSelectionInput < Struct.new(
+      nil,
       :restore_testing_plan_name,
       :restore_testing_selection_name,
       keyword_init: true
@@ -2022,6 +2081,7 @@ module Aws::Backup
     #   <p></p>
     #   @return [String]
     class DependencyFailureException < Struct.new(
+      nil,
       :code,
       :message,
       :type,
@@ -2035,6 +2095,7 @@ module Aws::Backup
     #   <p>Uniquely identifies a request to Backup to back up a resource.</p>
     #   @return [String]
     class DescribeBackupJobInput < Struct.new(
+      nil,
       :backup_job_id,
       keyword_init: true
     )
@@ -2192,6 +2253,7 @@ module Aws::Backup
     #            for a list of accepted MessageCategory strings.</p>
     #   @return [String]
     class DescribeBackupJobOutput < Struct.new(
+      nil,
       :account_id,
       :backup_job_id,
       :backup_vault_name,
@@ -2238,6 +2300,7 @@ module Aws::Backup
     #   <p>The account ID of the specified backup vault.</p>
     #   @return [String]
     class DescribeBackupVaultInput < Struct.new(
+      nil,
       :backup_vault_name,
       :backup_vault_account_id,
       keyword_init: true
@@ -2333,6 +2396,7 @@ module Aws::Backup
     #   <p>Information about the latest update to the MPA approval team association for this backup vault.</p>
     #   @return [Types::LatestMpaApprovalTeamUpdate]
     class DescribeBackupVaultOutput < Struct.new(
+      nil,
       :backup_vault_name,
       :backup_vault_arn,
       :vault_type,
@@ -2363,6 +2427,7 @@ module Aws::Backup
     #   <p>Uniquely identifies a copy job.</p>
     #   @return [String]
     class DescribeCopyJobInput < Struct.new(
+      nil,
       :copy_job_id,
       keyword_init: true
     )
@@ -2373,6 +2438,7 @@ module Aws::Backup
     #   <p>Contains detailed information about a copy job.</p>
     #   @return [Types::CopyJob]
     class DescribeCopyJobOutput < Struct.new(
+      nil,
       :copy_job,
       keyword_init: true
     )
@@ -2383,6 +2449,7 @@ module Aws::Backup
     #   <p>The unique name of a framework.</p>
     #   @return [String]
     class DescribeFrameworkInput < Struct.new(
+      nil,
       :framework_name,
       keyword_init: true
     )
@@ -2448,6 +2515,7 @@ module Aws::Backup
     #            idempotency token results in a success message with no action taken.</p>
     #   @return [String]
     class DescribeFrameworkOutput < Struct.new(
+      nil,
       :framework_name,
       :framework_arn,
       :framework_description,
@@ -2462,6 +2530,7 @@ module Aws::Backup
     end
 
     class DescribeGlobalSettingsInput < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -2477,6 +2546,7 @@ module Aws::Backup
     #            1516925490.087 represents Friday, January 26, 2018 12:11:30.087 AM.</p>
     #   @return [Time]
     class DescribeGlobalSettingsOutput < Struct.new(
+      nil,
       :global_settings,
       :last_update_time,
       keyword_init: true
@@ -2489,6 +2559,7 @@ module Aws::Backup
     #            depends on the resource type.</p>
     #   @return [String]
     class DescribeProtectedResourceInput < Struct.new(
+      nil,
       :resource_arn,
       keyword_init: true
     )
@@ -2530,6 +2601,7 @@ module Aws::Backup
     #   <p>The date the most recent recovery point was created.</p>
     #   @return [Time]
     class DescribeProtectedResourceOutput < Struct.new(
+      nil,
       :resource_arn,
       :resource_type,
       :last_backup_time,
@@ -2557,6 +2629,7 @@ module Aws::Backup
     #   <p>The account ID of the specified backup vault.</p>
     #   @return [String]
     class DescribeRecoveryPointInput < Struct.new(
+      nil,
       :backup_vault_name,
       :recovery_point_arn,
       :backup_vault_account_id,
@@ -2741,6 +2814,7 @@ module Aws::Backup
     #            associated with the recovery point.</p>
     #   @return [String]
     class DescribeRecoveryPointOutput < Struct.new(
+      nil,
       :recovery_point_arn,
       :backup_vault_name,
       :backup_vault_arn,
@@ -2780,6 +2854,7 @@ module Aws::Backup
     end
 
     class DescribeRegionSettingsInput < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -2799,6 +2874,7 @@ module Aws::Backup
     #               Backup's advanced DynamoDB backup features</a>.</p>
     #   @return [Hash<String, Boolean>]
     class DescribeRegionSettingsOutput < Struct.new(
+      nil,
       :resource_type_opt_in_preference,
       :resource_type_management_preference,
       keyword_init: true
@@ -2811,6 +2887,7 @@ module Aws::Backup
     #            string that is at most 1,024 bytes long. The report job ID cannot be edited.</p>
     #   @return [String]
     class DescribeReportJobInput < Struct.new(
+      nil,
       :report_job_id,
       keyword_init: true
     )
@@ -2823,6 +2900,7 @@ module Aws::Backup
     #            status, and status message.</p>
     #   @return [Types::ReportJob]
     class DescribeReportJobOutput < Struct.new(
+      nil,
       :report_job,
       keyword_init: true
     )
@@ -2833,6 +2911,7 @@ module Aws::Backup
     #   <p>The unique name of a report plan.</p>
     #   @return [String]
     class DescribeReportPlanInput < Struct.new(
+      nil,
       :report_plan_name,
       keyword_init: true
     )
@@ -2846,6 +2925,7 @@ module Aws::Backup
     #            times.</p>
     #   @return [Types::ReportPlan]
     class DescribeReportPlanOutput < Struct.new(
+      nil,
       :report_plan,
       keyword_init: true
     )
@@ -2856,6 +2936,7 @@ module Aws::Backup
     #   <p>Uniquely identifies the job that restores a recovery point.</p>
     #   @return [String]
     class DescribeRestoreJobInput < Struct.new(
+      nil,
       :restore_job_id,
       keyword_init: true
     )
@@ -2935,6 +3016,7 @@ module Aws::Backup
     #   <p>This describes the restore job deletion status.</p>
     #   @return [String]
     class DescribeRestoreJobOutput < Struct.new(
+      nil,
       :account_id,
       :restore_job_id,
       :recovery_point_arn,
@@ -2966,6 +3048,7 @@ module Aws::Backup
     #   <p>An optional comment explaining the reason for disassociating the MPA approval team from the backup vault.</p>
     #   @return [String]
     class DisassociateBackupVaultMpaApprovalTeamInput < Struct.new(
+      nil,
       :backup_vault_name,
       :requester_comment,
       keyword_init: true
@@ -2985,6 +3068,7 @@ module Aws::Backup
     #            </p>
     #   @return [String]
     class DisassociateRecoveryPointFromParentInput < Struct.new(
+      nil,
       :backup_vault_name,
       :recovery_point_arn,
       keyword_init: true
@@ -3000,6 +3084,7 @@ module Aws::Backup
     #            point.</p>
     #   @return [String]
     class DisassociateRecoveryPointInput < Struct.new(
+      nil,
       :backup_vault_name,
       :recovery_point_arn,
       keyword_init: true
@@ -3011,6 +3096,7 @@ module Aws::Backup
     #   <p>Uniquely identifies a backup plan.</p>
     #   @return [String]
     class ExportBackupPlanTemplateInput < Struct.new(
+      nil,
       :backup_plan_id,
       keyword_init: true
     )
@@ -3026,6 +3112,7 @@ module Aws::Backup
     #            </note>
     #   @return [String]
     class ExportBackupPlanTemplateOutput < Struct.new(
+      nil,
       :backup_plan_template_json,
       keyword_init: true
     )
@@ -3063,6 +3150,7 @@ module Aws::Backup
     #            </p>
     #   @return [String]
     class Framework < Struct.new(
+      nil,
       :framework_name,
       :framework_arn,
       :framework_description,
@@ -3096,6 +3184,7 @@ module Aws::Backup
     #            </p>
     #   @return [Types::ControlScope]
     class FrameworkControl < Struct.new(
+      nil,
       :control_name,
       :control_input_parameters,
       :control_scope,
@@ -3108,6 +3197,7 @@ module Aws::Backup
     #   <p>A customer-supplied backup plan document in JSON format.</p>
     #   @return [String]
     class GetBackupPlanFromJSONInput < Struct.new(
+      nil,
       :backup_plan_template_json,
       keyword_init: true
     )
@@ -3119,6 +3209,7 @@ module Aws::Backup
     #            more sets of <code>Rules</code>.</p>
     #   @return [Types::BackupPlan]
     class GetBackupPlanFromJSONOutput < Struct.new(
+      nil,
       :backup_plan,
       keyword_init: true
     )
@@ -3129,6 +3220,7 @@ module Aws::Backup
     #   <p>Uniquely identifies a stored backup plan template.</p>
     #   @return [String]
     class GetBackupPlanFromTemplateInput < Struct.new(
+      nil,
       :backup_plan_template_id,
       keyword_init: true
     )
@@ -3140,6 +3232,7 @@ module Aws::Backup
     #            rules, and backup vault of the plan.</p>
     #   @return [Types::BackupPlan]
     class GetBackupPlanFromTemplateOutput < Struct.new(
+      nil,
       :backup_plan_document,
       keyword_init: true
     )
@@ -3154,6 +3247,7 @@ module Aws::Backup
     #            long. Version IDs cannot be edited.</p>
     #   @return [String]
     class GetBackupPlanInput < Struct.new(
+      nil,
       :backup_plan_id,
       :version_id,
       keyword_init: true
@@ -3203,6 +3297,7 @@ module Aws::Backup
     #            populated only if the advanced option is set for the backup plan.</p>
     #   @return [Array<Types::AdvancedBackupSetting>]
     class GetBackupPlanOutput < Struct.new(
+      nil,
       :backup_plan,
       :backup_plan_id,
       :backup_plan_arn,
@@ -3225,6 +3320,7 @@ module Aws::Backup
     #            plan.</p>
     #   @return [String]
     class GetBackupSelectionInput < Struct.new(
+      nil,
       :backup_plan_id,
       :selection_id,
       keyword_init: true
@@ -3253,6 +3349,7 @@ module Aws::Backup
     #            without the risk of running the operation twice.</p>
     #   @return [String]
     class GetBackupSelectionOutput < Struct.new(
+      nil,
       :backup_selection,
       :selection_id,
       :backup_plan_id,
@@ -3269,6 +3366,7 @@ module Aws::Backup
     #            Region where they are created.</p>
     #   @return [String]
     class GetBackupVaultAccessPolicyInput < Struct.new(
+      nil,
       :backup_vault_name,
       keyword_init: true
     )
@@ -3288,6 +3386,7 @@ module Aws::Backup
     #   <p>The backup vault access policy document in JSON format.</p>
     #   @return [String]
     class GetBackupVaultAccessPolicyOutput < Struct.new(
+      nil,
       :backup_vault_name,
       :backup_vault_arn,
       :policy,
@@ -3302,6 +3401,7 @@ module Aws::Backup
     #            Region where they are created.</p>
     #   @return [String]
     class GetBackupVaultNotificationsInput < Struct.new(
+      nil,
       :backup_vault_name,
       keyword_init: true
     )
@@ -3326,6 +3426,7 @@ module Aws::Backup
     #            vault.</p>
     #   @return [Array<String>]
     class GetBackupVaultNotificationsOutput < Struct.new(
+      nil,
       :backup_vault_name,
       :backup_vault_arn,
       :sns_topic_arn,
@@ -3339,6 +3440,7 @@ module Aws::Backup
     #   <p>The ID of the legal hold.</p>
     #   @return [String]
     class GetLegalHoldInput < Struct.new(
+      nil,
       :legal_hold_id,
       keyword_init: true
     )
@@ -3377,6 +3479,7 @@ module Aws::Backup
     #   <p>The criteria to assign a set of resources, such as resource types or backup vaults.</p>
     #   @return [Types::RecoveryPointSelection]
     class GetLegalHoldOutput < Struct.new(
+      nil,
       :title,
       :status,
       :description,
@@ -3403,6 +3506,7 @@ module Aws::Backup
     #            <code>arn:aws:backup:us-east-1:123456789012:recovery-point:1EB3B5E7-9EB0-435A-A80B-108B488B0D45</code>.</p>
     #   @return [String]
     class GetRecoveryPointIndexDetailsInput < Struct.new(
+      nil,
       :backup_vault_name,
       :recovery_point_arn,
       keyword_init: true
@@ -3459,6 +3563,7 @@ module Aws::Backup
     #            recovery point.</p>
     #   @return [Integer]
     class GetRecoveryPointIndexDetailsOutput < Struct.new(
+      nil,
       :recovery_point_arn,
       :backup_vault_arn,
       :source_resource_arn,
@@ -3486,6 +3591,7 @@ module Aws::Backup
     #   <p>The account ID of the specified backup vault.</p>
     #   @return [String]
     class GetRecoveryPointRestoreMetadataInput < Struct.new(
+      nil,
       :backup_vault_name,
       :recovery_point_arn,
       :backup_vault_account_id,
@@ -3511,6 +3617,7 @@ module Aws::Backup
     #   <p>The resource type of the recovery point.</p>
     #   @return [String]
     class GetRecoveryPointRestoreMetadataOutput < Struct.new(
+      nil,
       :backup_vault_arn,
       :recovery_point_arn,
       :restore_metadata,
@@ -3524,6 +3631,7 @@ module Aws::Backup
     #   <p>This is a unique identifier of a restore job within Backup.</p>
     #   @return [String]
     class GetRestoreJobMetadataInput < Struct.new(
+      nil,
       :restore_job_id,
       keyword_init: true
     )
@@ -3537,6 +3645,7 @@ module Aws::Backup
     #   <p>This contains the metadata of the specified backup job.</p>
     #   @return [Hash<String, String>]
     class GetRestoreJobMetadataOutput < Struct.new(
+      nil,
       :restore_job_id,
       :metadata,
       keyword_init: true
@@ -3560,6 +3669,7 @@ module Aws::Backup
     #         </p>
     #   @return [String]
     class GetRestoreTestingInferredMetadataInput < Struct.new(
+      nil,
       :backup_vault_account_id,
       :backup_vault_name,
       :recovery_point_arn,
@@ -3572,6 +3682,7 @@ module Aws::Backup
     #   <p>This is a string map of the metadata inferred from the request.</p>
     #   @return [Hash<String, String>]
     class GetRestoreTestingInferredMetadataOutput < Struct.new(
+      nil,
       :inferred_metadata,
       keyword_init: true
     )
@@ -3582,6 +3693,7 @@ module Aws::Backup
     #   <p>Required unique name of the restore testing plan.</p>
     #   @return [String]
     class GetRestoreTestingPlanInput < Struct.new(
+      nil,
       :restore_testing_plan_name,
       keyword_init: true
     )
@@ -3593,6 +3705,7 @@ module Aws::Backup
     #            <code>RestoreTestingPlanName</code>.</p>
     #   @return [Types::RestoreTestingPlanForGet]
     class GetRestoreTestingPlanOutput < Struct.new(
+      nil,
       :restore_testing_plan,
       keyword_init: true
     )
@@ -3606,6 +3719,7 @@ module Aws::Backup
     #   <p>Required unique name of the restore testing selection.</p>
     #   @return [String]
     class GetRestoreTestingSelectionInput < Struct.new(
+      nil,
       :restore_testing_plan_name,
       :restore_testing_selection_name,
       keyword_init: true
@@ -3617,6 +3731,7 @@ module Aws::Backup
     #   <p>Unique name of the restore testing selection.</p>
     #   @return [Types::RestoreTestingSelectionForGet]
     class GetRestoreTestingSelectionOutput < Struct.new(
+      nil,
       :restore_testing_selection,
       keyword_init: true
     )
@@ -3694,6 +3809,7 @@ module Aws::Backup
     #            </ul>
     #   @return [Array<String>]
     class GetSupportedResourceTypesOutput < Struct.new(
+      nil,
       :resource_types,
       keyword_init: true
     )
@@ -3717,6 +3833,7 @@ module Aws::Backup
     #            </ul>
     #   @return [Array<String>]
     class IndexAction < Struct.new(
+      nil,
       :resource_types,
       keyword_init: true
     )
@@ -3783,6 +3900,7 @@ module Aws::Backup
     #            <code>arn:aws:backup:us-east-1:123456789012:backup-vault:aBackupVault</code>.</p>
     #   @return [String]
     class IndexedRecoveryPoint < Struct.new(
+      nil,
       :recovery_point_arn,
       :source_resource_arn,
       :iam_role_arn,
@@ -3810,6 +3928,7 @@ module Aws::Backup
     #   <p></p>
     #   @return [String]
     class InvalidParameterValueException < Struct.new(
+      nil,
       :code,
       :message,
       :type,
@@ -3832,6 +3951,7 @@ module Aws::Backup
     #   <p></p>
     #   @return [String]
     class InvalidRequestException < Struct.new(
+      nil,
       :code,
       :message,
       :type,
@@ -3854,6 +3974,7 @@ module Aws::Backup
     #   <p></p>
     #   @return [String]
     class InvalidResourceStateException < Struct.new(
+      nil,
       :code,
       :message,
       :type,
@@ -3883,6 +4004,7 @@ module Aws::Backup
     #            </p>
     #   @return [String]
     class KeyValue < Struct.new(
+      nil,
       :key,
       :value,
       keyword_init: true
@@ -3907,6 +4029,7 @@ module Aws::Backup
     #   <p>The date and time when the MPA approval team update will expire.</p>
     #   @return [Time]
     class LatestMpaApprovalTeamUpdate < Struct.new(
+      nil,
       :mpa_session_arn,
       :status,
       :status_message,
@@ -3934,6 +4057,7 @@ module Aws::Backup
     #   <p>The date and time when the revoke request will expire.</p>
     #   @return [Time]
     class LatestRevokeRequest < Struct.new(
+      nil,
       :mpa_session_arn,
       :status,
       :status_message,
@@ -3975,6 +4099,7 @@ module Aws::Backup
     #   <p>The time when the legal hold was cancelled.</p>
     #   @return [Time]
     class LegalHold < Struct.new(
+      nil,
       :title,
       :status,
       :description,
@@ -4011,6 +4136,7 @@ module Aws::Backup
     #            archive (cold) storage tier in accordance with your lifecycle settings.</p>
     #   @return [Boolean]
     class Lifecycle < Struct.new(
+      nil,
       :move_to_cold_storage_after_days,
       :delete_after_days,
       :opt_in_to_archive_for_supported_resources,
@@ -4032,6 +4158,7 @@ module Aws::Backup
     #   <p></p>
     #   @return [String]
     class LimitExceededException < Struct.new(
+      nil,
       :code,
       :message,
       :type,
@@ -4123,6 +4250,7 @@ module Aws::Backup
     #            next token.</p>
     #   @return [String]
     class ListBackupJobSummariesInput < Struct.new(
+      nil,
       :account_id,
       :state,
       :resource_type,
@@ -4162,6 +4290,7 @@ module Aws::Backup
     #            next token.</p>
     #   @return [String]
     class ListBackupJobSummariesOutput < Struct.new(
+      nil,
       :backup_job_summaries,
       :aggregation_period,
       :next_token,
@@ -4309,6 +4438,7 @@ module Aws::Backup
     #               for all message categories and returns the sum.</p>
     #   @return [String]
     class ListBackupJobsInput < Struct.new(
+      nil,
       :next_token,
       :max_results,
       :by_resource_arn,
@@ -4338,6 +4468,7 @@ module Aws::Backup
     #            token.</p>
     #   @return [String]
     class ListBackupJobsOutput < Struct.new(
+      nil,
       :backup_jobs,
       :next_token,
       keyword_init: true
@@ -4355,6 +4486,7 @@ module Aws::Backup
     #   <p>The maximum number of items to return.</p>
     #   @return [Integer]
     class ListBackupPlanTemplatesInput < Struct.new(
+      nil,
       :next_token,
       :max_results,
       keyword_init: true
@@ -4372,6 +4504,7 @@ module Aws::Backup
     #   <p>An array of template list items containing metadata about your saved templates.</p>
     #   @return [Array<Types::BackupPlanTemplatesListMember>]
     class ListBackupPlanTemplatesOutput < Struct.new(
+      nil,
       :next_token,
       :backup_plan_templates_list,
       keyword_init: true
@@ -4392,6 +4525,7 @@ module Aws::Backup
     #   <p>The maximum number of items to be returned.</p>
     #   @return [Integer]
     class ListBackupPlanVersionsInput < Struct.new(
+      nil,
       :backup_plan_id,
       :next_token,
       :max_results,
@@ -4410,6 +4544,7 @@ module Aws::Backup
     #   <p>An array of version list items containing metadata about your backup plans.</p>
     #   @return [Array<Types::BackupPlansListMember>]
     class ListBackupPlanVersionsOutput < Struct.new(
+      nil,
       :next_token,
       :backup_plan_versions_list,
       keyword_init: true
@@ -4431,6 +4566,7 @@ module Aws::Backup
     #            plans when set to <code>TRUE</code>.</p>
     #   @return [Boolean]
     class ListBackupPlansInput < Struct.new(
+      nil,
       :next_token,
       :max_results,
       :include_deleted,
@@ -4449,6 +4585,7 @@ module Aws::Backup
     #   <p>Information about the backup plans.</p>
     #   @return [Array<Types::BackupPlansListMember>]
     class ListBackupPlansOutput < Struct.new(
+      nil,
       :next_token,
       :backup_plans_list,
       keyword_init: true
@@ -4469,6 +4606,7 @@ module Aws::Backup
     #   <p>The maximum number of items to be returned.</p>
     #   @return [Integer]
     class ListBackupSelectionsInput < Struct.new(
+      nil,
       :backup_plan_id,
       :next_token,
       :max_results,
@@ -4488,6 +4626,7 @@ module Aws::Backup
     #            list.</p>
     #   @return [Array<Types::BackupSelectionsListMember>]
     class ListBackupSelectionsOutput < Struct.new(
+      nil,
       :next_token,
       :backup_selections_list,
       keyword_init: true
@@ -4511,6 +4650,7 @@ module Aws::Backup
     #   <p>The maximum number of items to be returned.</p>
     #   @return [Integer]
     class ListBackupVaultsInput < Struct.new(
+      nil,
       :by_vault_type,
       :by_shared,
       :next_token,
@@ -4532,6 +4672,7 @@ module Aws::Backup
     #            token.</p>
     #   @return [String]
     class ListBackupVaultsOutput < Struct.new(
+      nil,
       :backup_vault_list,
       :next_token,
       keyword_init: true
@@ -4612,6 +4753,7 @@ module Aws::Backup
     #            next token.</p>
     #   @return [String]
     class ListCopyJobSummariesInput < Struct.new(
+      nil,
       :account_id,
       :state,
       :resource_type,
@@ -4653,6 +4795,7 @@ module Aws::Backup
     #            next token.</p>
     #   @return [String]
     class ListCopyJobSummariesOutput < Struct.new(
+      nil,
       :copy_job_summaries,
       :aggregation_period,
       :next_token,
@@ -4788,6 +4931,7 @@ module Aws::Backup
     #               for all message categories and returns the sum.</p>
     #   @return [String]
     class ListCopyJobsInput < Struct.new(
+      nil,
       :next_token,
       :max_results,
       :by_resource_arn,
@@ -4816,6 +4960,7 @@ module Aws::Backup
     #            your list starting at the location pointed to by the next token. </p>
     #   @return [String]
     class ListCopyJobsOutput < Struct.new(
+      nil,
       :copy_jobs,
       :next_token,
       keyword_init: true
@@ -4832,6 +4977,7 @@ module Aws::Backup
     #            used to return the next set of items in the list.</p>
     #   @return [String]
     class ListFrameworksInput < Struct.new(
+      nil,
       :max_results,
       :next_token,
       keyword_init: true
@@ -4849,6 +4995,7 @@ module Aws::Backup
     #            used to return the next set of items in the list.</p>
     #   @return [String]
     class ListFrameworksOutput < Struct.new(
+      nil,
       :frameworks,
       :next_token,
       keyword_init: true
@@ -4902,6 +5049,7 @@ module Aws::Backup
     #            can be included in a search.</p>
     #   @return [String]
     class ListIndexedRecoveryPointsInput < Struct.new(
+      nil,
       :next_token,
       :max_results,
       :source_resource_arn,
@@ -4926,6 +5074,7 @@ module Aws::Backup
     #            next token.</p>
     #   @return [String]
     class ListIndexedRecoveryPointsOutput < Struct.new(
+      nil,
       :indexed_recovery_points,
       :next_token,
       keyword_init: true
@@ -4943,6 +5092,7 @@ module Aws::Backup
     #   <p>The maximum number of resource list items to be returned.</p>
     #   @return [Integer]
     class ListLegalHoldsInput < Struct.new(
+      nil,
       :next_token,
       :max_results,
       keyword_init: true
@@ -4960,6 +5110,7 @@ module Aws::Backup
     #   <p>This is an array of returned legal holds, both active and previous.</p>
     #   @return [Array<Types::LegalHold>]
     class ListLegalHoldsOutput < Struct.new(
+      nil,
       :next_token,
       :legal_holds,
       keyword_init: true
@@ -4983,6 +5134,7 @@ module Aws::Backup
     #   <p>The maximum number of items to be returned.</p>
     #   @return [Integer]
     class ListProtectedResourcesByBackupVaultInput < Struct.new(
+      nil,
       :backup_vault_name,
       :backup_vault_account_id,
       :next_token,
@@ -5002,6 +5154,7 @@ module Aws::Backup
     #            token.</p>
     #   @return [String]
     class ListProtectedResourcesByBackupVaultOutput < Struct.new(
+      nil,
       :results,
       :next_token,
       keyword_init: true
@@ -5019,6 +5172,7 @@ module Aws::Backup
     #   <p>The maximum number of items to be returned.</p>
     #   @return [Integer]
     class ListProtectedResourcesInput < Struct.new(
+      nil,
       :next_token,
       :max_results,
       keyword_init: true
@@ -5038,6 +5192,7 @@ module Aws::Backup
     #            token.</p>
     #   @return [String]
     class ListProtectedResourcesOutput < Struct.new(
+      nil,
       :results,
       :next_token,
       keyword_init: true
@@ -5154,6 +5309,7 @@ module Aws::Backup
     #            recovery point Amazon Resource Name (ARN).</p>
     #   @return [String]
     class ListRecoveryPointsByBackupVaultInput < Struct.new(
+      nil,
       :backup_vault_name,
       :backup_vault_account_id,
       :next_token,
@@ -5180,6 +5336,7 @@ module Aws::Backup
     #            backup vault.</p>
     #   @return [Array<Types::RecoveryPointByBackupVault>]
     class ListRecoveryPointsByBackupVaultOutput < Struct.new(
+      nil,
       :next_token,
       :recovery_points,
       keyword_init: true
@@ -5200,6 +5357,7 @@ module Aws::Backup
     #   <p>The maximum number of resource list items to be returned.</p>
     #   @return [Integer]
     class ListRecoveryPointsByLegalHoldInput < Struct.new(
+      nil,
       :legal_hold_id,
       :next_token,
       :max_results,
@@ -5215,6 +5373,7 @@ module Aws::Backup
     #   <p>The next item following a partial list of returned resources.</p>
     #   @return [String]
     class ListRecoveryPointsByLegalHoldOutput < Struct.new(
+      nil,
       :recovery_points,
       :next_token,
       keyword_init: true
@@ -5248,6 +5407,7 @@ module Aws::Backup
     #            <p>Type: Boolean</p>
     #   @return [Boolean]
     class ListRecoveryPointsByResourceInput < Struct.new(
+      nil,
       :resource_arn,
       :next_token,
       :max_results,
@@ -5272,6 +5432,7 @@ module Aws::Backup
     #            </note>
     #   @return [Array<Types::RecoveryPointByResource>]
     class ListRecoveryPointsByResourceOutput < Struct.new(
+      nil,
       :next_token,
       :recovery_points,
       keyword_init: true
@@ -5307,6 +5468,7 @@ module Aws::Backup
     #            used to return the next set of items in the list.</p>
     #   @return [String]
     class ListReportJobsInput < Struct.new(
+      nil,
       :by_report_plan_name,
       :by_creation_before,
       :by_creation_after,
@@ -5326,6 +5488,7 @@ module Aws::Backup
     #            used to return the next set of items in the list.</p>
     #   @return [String]
     class ListReportJobsOutput < Struct.new(
+      nil,
       :report_jobs,
       :next_token,
       keyword_init: true
@@ -5342,6 +5505,7 @@ module Aws::Backup
     #            used to return the next set of items in the list.</p>
     #   @return [String]
     class ListReportPlansInput < Struct.new(
+      nil,
       :max_results,
       :next_token,
       keyword_init: true
@@ -5360,6 +5524,7 @@ module Aws::Backup
     #            used to return the next set of items in the list.</p>
     #   @return [String]
     class ListReportPlansOutput < Struct.new(
+      nil,
       :report_plans,
       :next_token,
       keyword_init: true
@@ -5377,6 +5542,7 @@ module Aws::Backup
     #   <p>The maximum number of items to return in the response.</p>
     #   @return [Integer]
     class ListRestoreAccessBackupVaultsInput < Struct.new(
+      nil,
       :backup_vault_name,
       :next_token,
       :max_results,
@@ -5392,6 +5558,7 @@ module Aws::Backup
     #   <p>A list of restore access backup vaults associated with the specified backup vault.</p>
     #   @return [Array<Types::RestoreAccessBackupVaultListMember>]
     class ListRestoreAccessBackupVaultsOutput < Struct.new(
+      nil,
       :next_token,
       :restore_access_backup_vaults,
       keyword_init: true
@@ -5460,6 +5627,7 @@ module Aws::Backup
     #            next token.</p>
     #   @return [String]
     class ListRestoreJobSummariesInput < Struct.new(
+      nil,
       :account_id,
       :state,
       :resource_type,
@@ -5500,6 +5668,7 @@ module Aws::Backup
     #            next token.</p>
     #   @return [String]
     class ListRestoreJobSummariesOutput < Struct.new(
+      nil,
       :restore_job_summaries,
       :aggregation_period,
       :next_token,
@@ -5531,6 +5700,7 @@ module Aws::Backup
     #   <p>The maximum number of items to be returned.</p>
     #   @return [Integer]
     class ListRestoreJobsByProtectedResourceInput < Struct.new(
+      nil,
       :resource_arn,
       :by_status,
       :by_recovery_point_creation_date_after,
@@ -5553,6 +5723,7 @@ module Aws::Backup
     #            at the location pointed to by the next token</p>
     #   @return [String]
     class ListRestoreJobsByProtectedResourceOutput < Struct.new(
+      nil,
       :restore_jobs,
       :next_token,
       keyword_init: true
@@ -5665,6 +5836,7 @@ module Aws::Backup
     #            specified resource Amazon Resource Name (ARN).</p>
     #   @return [String]
     class ListRestoreJobsInput < Struct.new(
+      nil,
       :next_token,
       :max_results,
       :by_account_id,
@@ -5691,6 +5863,7 @@ module Aws::Backup
     #            token.</p>
     #   @return [String]
     class ListRestoreJobsOutput < Struct.new(
+      nil,
       :restore_jobs,
       :next_token,
       keyword_init: true
@@ -5708,6 +5881,7 @@ module Aws::Backup
     #            in your list starting at the location pointed to by the nexttoken.</p>
     #   @return [String]
     class ListRestoreTestingPlansInput < Struct.new(
+      nil,
       :max_results,
       :next_token,
       keyword_init: true
@@ -5725,6 +5899,7 @@ module Aws::Backup
     #   <p>This is a returned list of restore testing plans.</p>
     #   @return [Array<Types::RestoreTestingPlanForList>]
     class ListRestoreTestingPlansOutput < Struct.new(
+      nil,
       :next_token,
       :restore_testing_plans,
       keyword_init: true
@@ -5746,6 +5921,7 @@ module Aws::Backup
     #            plan name.</p>
     #   @return [String]
     class ListRestoreTestingSelectionsInput < Struct.new(
+      nil,
       :max_results,
       :next_token,
       :restore_testing_plan_name,
@@ -5765,6 +5941,7 @@ module Aws::Backup
     #            restore testing plan.</p>
     #   @return [Array<Types::RestoreTestingSelectionForList>]
     class ListRestoreTestingSelectionsOutput < Struct.new(
+      nil,
       :next_token,
       :restore_testing_selections,
       keyword_init: true
@@ -5787,6 +5964,7 @@ module Aws::Backup
     #   <p>The maximum number of items to be returned.</p>
     #   @return [Integer]
     class ListTagsInput < Struct.new(
+      nil,
       :resource_arn,
       :next_token,
       :max_results,
@@ -5805,6 +5983,7 @@ module Aws::Backup
     #   <p>Information about the tags.</p>
     #   @return [Hash<String, String>]
     class ListTagsOutput < Struct.new(
+      nil,
       :next_token,
       :tags,
       keyword_init: true
@@ -5824,6 +6003,7 @@ module Aws::Backup
     #   <p></p>
     #   @return [String]
     class MissingParameterValueException < Struct.new(
+      nil,
       :code,
       :message,
       :type,
@@ -5862,6 +6042,7 @@ module Aws::Backup
     #            recent recovery point.</p>
     #   @return [String]
     class ProtectedResource < Struct.new(
+      nil,
       :resource_arn,
       :resource_type,
       :last_backup_time,
@@ -5886,6 +6067,7 @@ module Aws::Backup
     #            Also called "negated matching."</p>
     #   @return [Array<Types::KeyValue>]
     class ProtectedResourceConditions < Struct.new(
+      nil,
       :string_equals,
       :string_not_equals,
       keyword_init: true
@@ -5902,6 +6084,7 @@ module Aws::Backup
     #   <p>The backup vault access policy document in JSON format.</p>
     #   @return [String]
     class PutBackupVaultAccessPolicyInput < Struct.new(
+      nil,
       :backup_vault_name,
       :policy,
       keyword_init: true
@@ -5962,6 +6145,7 @@ module Aws::Backup
     #            using <code>PutBackupVaultLockConfiguration</code> at any time.</p>
     #   @return [Integer]
     class PutBackupVaultLockConfigurationInput < Struct.new(
+      nil,
       :backup_vault_name,
       :min_retention_days,
       :max_retention_days,
@@ -5986,6 +6170,7 @@ module Aws::Backup
     #               with Backup</a>.</p>
     #   @return [Array<String>]
     class PutBackupVaultNotificationsInput < Struct.new(
+      nil,
       :backup_vault_name,
       :sns_topic_arn,
       :backup_vault_events,
@@ -6005,6 +6190,7 @@ module Aws::Backup
     #            describe the validation status for the restore test validation.</p>
     #   @return [String]
     class PutRestoreValidationResultInput < Struct.new(
+      nil,
       :restore_job_id,
       :validation_status,
       :validation_status_message,
@@ -6140,6 +6326,7 @@ module Aws::Backup
     #            with the recovery point.</p>
     #   @return [String]
     class RecoveryPointByBackupVault < Struct.new(
+      nil,
       :recovery_point_arn,
       :backup_vault_name,
       :backup_vault_arn,
@@ -6235,6 +6422,7 @@ module Aws::Backup
     #            associated with the recovery point.</p>
     #   @return [String]
     class RecoveryPointByResource < Struct.new(
+      nil,
       :recovery_point_arn,
       :creation_date,
       :status,
@@ -6276,6 +6464,7 @@ module Aws::Backup
     #            resources.</p>
     #   @return [String]
     class RecoveryPointCreator < Struct.new(
+      nil,
       :backup_plan_id,
       :backup_plan_arn,
       :backup_plan_version,
@@ -6306,6 +6495,7 @@ module Aws::Backup
     #            (the logical container in which backups are stored).</p>
     #   @return [String]
     class RecoveryPointMember < Struct.new(
+      nil,
       :recovery_point_arn,
       :resource_arn,
       :resource_type,
@@ -6336,6 +6526,7 @@ module Aws::Backup
     #            26, 2018 12:11:30.087 AM.</p>
     #   @return [Types::DateRange]
     class RecoveryPointSelection < Struct.new(
+      nil,
       :vault_names,
       :resource_identifiers,
       :date_range,
@@ -6360,6 +6551,7 @@ module Aws::Backup
     #            not specified, the default format is <code>CSV</code>.</p>
     #   @return [Array<String>]
     class ReportDeliveryChannel < Struct.new(
+      nil,
       :s3_bucket_name,
       :s3_key_prefix,
       :formats,
@@ -6376,6 +6568,7 @@ module Aws::Backup
     #   <p>The object key that uniquely identifies your reports in your S3 bucket.</p>
     #   @return [Array<String>]
     class ReportDestination < Struct.new(
+      nil,
       :s3_bucket_name,
       :s3_keys,
       keyword_init: true
@@ -6431,6 +6624,7 @@ module Aws::Backup
     #            report.</p>
     #   @return [Types::ReportDestination]
     class ReportJob < Struct.new(
+      nil,
       :report_job_id,
       :report_plan_arn,
       :report_template,
@@ -6498,6 +6692,7 @@ module Aws::Backup
     #            value 1516925490.087 represents Friday, January 26, 2018 12:11:30.087 AM.</p>
     #   @return [Time]
     class ReportPlan < Struct.new(
+      nil,
       :report_plan_arn,
       :report_plan_name,
       :report_plan_description,
@@ -6539,6 +6734,7 @@ module Aws::Backup
     #            <p>Use the wildcard as the string value to include all Regions.</p>
     #   @return [Array<String>]
     class ReportSetting < Struct.new(
+      nil,
       :report_template,
       :framework_arns,
       :number_of_frameworks,
@@ -6567,6 +6763,7 @@ module Aws::Backup
     #   <p></p>
     #   @return [String]
     class ResourceNotFoundException < Struct.new(
+      nil,
       :code,
       :message,
       :type,
@@ -6593,6 +6790,7 @@ module Aws::Backup
     #   <p>Information about the latest request to revoke access to this backup vault.</p>
     #   @return [Types::LatestRevokeRequest]
     class RestoreAccessBackupVaultListMember < Struct.new(
+      nil,
       :restore_access_backup_vault_arn,
       :creation_date,
       :approval_date,
@@ -6610,6 +6808,7 @@ module Aws::Backup
     #            a restore testing plan.</p>
     #   @return [String]
     class RestoreJobCreator < Struct.new(
+      nil,
       :restore_testing_plan_arn,
       keyword_init: true
     )
@@ -6652,6 +6851,7 @@ module Aws::Backup
     #            12:11:30.087 AM.</p>
     #   @return [Time]
     class RestoreJobSummary < Struct.new(
+      nil,
       :region,
       :account_id,
       :state,
@@ -6748,6 +6948,7 @@ module Aws::Backup
     #   <p>This describes the restore job deletion status.</p>
     #   @return [String]
     class RestoreJobsListMember < Struct.new(
+      nil,
       :account_id,
       :restore_job_id,
       :recovery_point_arn,
@@ -6828,6 +7029,7 @@ module Aws::Backup
     #            (one week).</p>
     #   @return [Integer]
     class RestoreTestingPlanForCreate < Struct.new(
+      nil,
       :recovery_point_selection,
       :restore_testing_plan_name,
       :schedule_expression,
@@ -6905,6 +7107,7 @@ module Aws::Backup
     #            (one week).</p>
     #   @return [Integer]
     class RestoreTestingPlanForGet < Struct.new(
+      nil,
       :creation_time,
       :creator_request_id,
       :last_execution_time,
@@ -6973,6 +7176,7 @@ module Aws::Backup
     #               has a maximum value of 168 hours (one week).</p>
     #   @return [Integer]
     class RestoreTestingPlanForList < Struct.new(
+      nil,
       :creation_time,
       :last_execution_time,
       :last_update_time,
@@ -7017,6 +7221,7 @@ module Aws::Backup
     #            maximum value of 168 hours (one week).</p>
     #   @return [Integer]
     class RestoreTestingPlanForUpdate < Struct.new(
+      nil,
       :recovery_point_selection,
       :schedule_expression,
       :schedule_expression_timezone,
@@ -7086,6 +7291,7 @@ module Aws::Backup
     #   <p>Accepted values are integers from 1 to 365.</p>
     #   @return [Integer]
     class RestoreTestingRecoveryPointSelection < Struct.new(
+      nil,
       :algorithm,
       :exclude_vaults,
       :include_vaults,
@@ -7209,6 +7415,7 @@ module Aws::Backup
     #            specified retention period, whichever comes first.</p>
     #   @return [Integer]
     class RestoreTestingSelectionForCreate < Struct.new(
+      nil,
       :iam_role_arn,
       :protected_resource_arns,
       :protected_resource_conditions,
@@ -7286,6 +7493,7 @@ module Aws::Backup
     #            specified retention period, whichever comes first.</p>
     #   @return [Integer]
     class RestoreTestingSelectionForGet < Struct.new(
+      nil,
       :creation_time,
       :creator_request_id,
       :iam_role_arn,
@@ -7341,6 +7549,7 @@ module Aws::Backup
     #            0 and 168 (the hourly equivalent of seven days).</p>
     #   @return [Integer]
     class RestoreTestingSelectionForList < Struct.new(
+      nil,
       :creation_time,
       :iam_role_arn,
       :protected_resource_type,
@@ -7387,6 +7596,7 @@ module Aws::Backup
     #            0 and 168 (the hourly equivalent of seven days).</p>
     #   @return [Integer]
     class RestoreTestingSelectionForUpdate < Struct.new(
+      nil,
       :iam_role_arn,
       :protected_resource_arns,
       :protected_resource_conditions,
@@ -7412,6 +7622,7 @@ module Aws::Backup
     #   <p>A comment explaining the reason for revoking access to the restore access backup vault.</p>
     #   @return [String]
     class RevokeRestoreAccessBackupVaultInput < Struct.new(
+      nil,
       :backup_vault_name,
       :restore_access_backup_vault_arn,
       :requester_comment,
@@ -7432,6 +7643,7 @@ module Aws::Backup
     #   <p></p>
     #   @return [String]
     class ServiceUnavailableException < Struct.new(
+      nil,
       :code,
       :message,
       :type,
@@ -7525,6 +7737,7 @@ module Aws::Backup
     #            <p>To delete a backup index, set value to <code>DISABLED</code>.</p>
     #   @return [String]
     class StartBackupJobInput < Struct.new(
+      nil,
       :backup_vault_name,
       :resource_arn,
       :iam_role_arn,
@@ -7562,6 +7775,7 @@ module Aws::Backup
     #            backup job.</p>
     #   @return [Boolean]
     class StartBackupJobOutput < Struct.new(
+      nil,
       :backup_job_id,
       :recovery_point_arn,
       :creation_date,
@@ -7613,6 +7827,7 @@ module Aws::Backup
     #            specify -1 for <code>MoveToColdStorageAfterDays</code> and <code>DeleteAfterDays</code>.</p>
     #   @return [Types::Lifecycle]
     class StartCopyJobInput < Struct.new(
+      nil,
       :recovery_point_arn,
       :source_backup_vault_name,
       :destination_backup_vault_arn,
@@ -7638,6 +7853,7 @@ module Aws::Backup
     #            copy job.</p>
     #   @return [Boolean]
     class StartCopyJobOutput < Struct.new(
+      nil,
       :copy_job_id,
       :creation_date,
       :is_parent,
@@ -7660,6 +7876,7 @@ module Aws::Backup
     #            idempotency token results in a success message with no action taken.</p>
     #   @return [String]
     class StartReportJobInput < Struct.new(
+      nil,
       :report_plan_name,
       :idempotency_token,
       keyword_init: true
@@ -7672,6 +7889,7 @@ module Aws::Backup
     #            string that is at most 1,024 bytes long. The report job ID cannot be edited.</p>
     #   @return [String]
     class StartReportJobOutput < Struct.new(
+      nil,
       :report_job_id,
       keyword_init: true
     )
@@ -7850,6 +8068,7 @@ module Aws::Backup
     #            <p>This can only be applied to backups created through Backup.</p>
     #   @return [Boolean]
     class StartRestoreJobInput < Struct.new(
+      nil,
       :recovery_point_arn,
       :metadata,
       :iam_role_arn,
@@ -7865,6 +8084,7 @@ module Aws::Backup
     #   <p>Uniquely identifies the job that restores a recovery point.</p>
     #   @return [String]
     class StartRestoreJobOutput < Struct.new(
+      nil,
       :restore_job_id,
       keyword_init: true
     )
@@ -7875,6 +8095,7 @@ module Aws::Backup
     #   <p>Uniquely identifies a request to Backup to back up a resource.</p>
     #   @return [String]
     class StopBackupJobInput < Struct.new(
+      nil,
       :backup_job_id,
       keyword_init: true
     )
@@ -7890,6 +8111,7 @@ module Aws::Backup
     #               <code>[{"Key":"string","Value":"string"}]</code>.</p>
     #   @return [Hash<String, String>]
     class TagResourceInput < Struct.new(
+      nil,
       :resource_arn,
       :tags,
       keyword_init: true
@@ -7910,6 +8132,7 @@ module Aws::Backup
     #   <p>The keys to identify which key-value tags to remove from a resource.</p>
     #   @return [Array<String>]
     class UntagResourceInput < Struct.new(
+      nil,
       :resource_arn,
       :tag_key_list,
       keyword_init: true
@@ -7925,6 +8148,7 @@ module Aws::Backup
     #            more sets of <code>Rules</code>.</p>
     #   @return [Types::BackupPlanInput]
     class UpdateBackupPlanInput < Struct.new(
+      nil,
       :backup_plan_id,
       :backup_plan,
       keyword_init: true
@@ -7953,6 +8177,7 @@ module Aws::Backup
     #   <p>Contains a list of <code>BackupOptions</code> for each resource type.</p>
     #   @return [Array<Types::AdvancedBackupSetting>]
     class UpdateBackupPlanOutput < Struct.new(
+      nil,
       :backup_plan_id,
       :backup_plan_arn,
       :creation_date,
@@ -7980,6 +8205,7 @@ module Aws::Backup
     #            idempotency token results in a success message with no action taken.</p>
     #   @return [String]
     class UpdateFrameworkInput < Struct.new(
+      nil,
       :framework_name,
       :framework_description,
       :framework_controls,
@@ -8003,6 +8229,7 @@ module Aws::Backup
     #            UTC.</p>
     #   @return [Time]
     class UpdateFrameworkOutput < Struct.new(
+      nil,
       :framework_name,
       :framework_arn,
       :creation_time,
@@ -8017,6 +8244,7 @@ module Aws::Backup
     #               --region us-west-2</code>.</p>
     #   @return [Hash<String, String>]
     class UpdateGlobalSettingsInput < Struct.new(
+      nil,
       :global_settings,
       keyword_init: true
     )
@@ -8045,6 +8273,7 @@ module Aws::Backup
     #            <p>To delete a backup index, set value to <code>DISABLED</code>.</p>
     #   @return [String]
     class UpdateRecoveryPointIndexSettingsInput < Struct.new(
+      nil,
       :backup_vault_name,
       :recovery_point_arn,
       :iam_role_arn,
@@ -8079,6 +8308,7 @@ module Aws::Backup
     #            <p>A value of <code>DISABLED</code> means a backup index was deleted.</p>
     #   @return [String]
     class UpdateRecoveryPointIndexSettingsOutput < Struct.new(
+      nil,
       :backup_vault_name,
       :recovery_point_arn,
       :index_status,
@@ -8107,6 +8337,7 @@ module Aws::Backup
     #            after a backup has been transitioned to cold. </p>
     #   @return [Types::Lifecycle]
     class UpdateRecoveryPointLifecycleInput < Struct.new(
+      nil,
       :backup_vault_name,
       :recovery_point_arn,
       :lifecycle,
@@ -8139,6 +8370,7 @@ module Aws::Backup
     #               <code>MoveToColdStorageAt</code> timestamps.</p>
     #   @return [Types::CalculatedLifecycle]
     class UpdateRecoveryPointLifecycleOutput < Struct.new(
+      nil,
       :backup_vault_arn,
       :recovery_point_arn,
       :lifecycle,
@@ -8165,6 +8397,7 @@ module Aws::Backup
     #            procedure to <a href="https://docs.aws.amazon.com/aws-backup/latest/devguide/advanced-ddb-backup.html#advanced-ddb-backup-enable-cli"> enable advanced DynamoDB backup programmatically</a>.</p>
     #   @return [Hash<String, Boolean>]
     class UpdateRegionSettingsInput < Struct.new(
+      nil,
       :resource_type_opt_in_preference,
       :resource_type_management_preference,
       keyword_init: true
@@ -8201,6 +8434,7 @@ module Aws::Backup
     #            idempotency token results in a success message with no action taken.</p>
     #   @return [String]
     class UpdateReportPlanInput < Struct.new(
+      nil,
       :report_plan_name,
       :report_plan_description,
       :report_delivery_channel,
@@ -8225,6 +8459,7 @@ module Aws::Backup
     #            AM.</p>
     #   @return [Time]
     class UpdateReportPlanOutput < Struct.new(
+      nil,
       :report_plan_name,
       :report_plan_arn,
       :creation_time,
@@ -8240,6 +8475,7 @@ module Aws::Backup
     #   <p>The name of the restore testing plan name.</p>
     #   @return [String]
     class UpdateRestoreTestingPlanInput < Struct.new(
+      nil,
       :restore_testing_plan,
       :restore_testing_plan_name,
       keyword_init: true
@@ -8263,6 +8499,7 @@ module Aws::Backup
     #            testing plan.</p>
     #   @return [Time]
     class UpdateRestoreTestingPlanOutput < Struct.new(
+      nil,
       :creation_time,
       :restore_testing_plan_arn,
       :restore_testing_plan_name,
@@ -8288,6 +8525,7 @@ module Aws::Backup
     #            testing selection you wish to update.</p>
     #   @return [String]
     class UpdateRestoreTestingSelectionInput < Struct.new(
+      nil,
       :restore_testing_plan_name,
       :restore_testing_selection,
       :restore_testing_selection_name,
@@ -8315,6 +8553,7 @@ module Aws::Backup
     #            testing selection.</p>
     #   @return [Time]
     class UpdateRestoreTestingSelectionOutput < Struct.new(
+      nil,
       :creation_time,
       :restore_testing_plan_arn,
       :restore_testing_plan_name,

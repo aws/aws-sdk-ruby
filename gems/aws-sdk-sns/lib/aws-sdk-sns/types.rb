@@ -22,6 +22,7 @@ module Aws::SNS
     #            <p>Valid values: Any Amazon SNS action name, for example <code>Publish</code>.</p>
     #   @return [Array<String>]
     class AddPermissionInput < Struct.new(
+      nil,
       :topic_arn,
       :label,
       :aws_account_id,
@@ -35,6 +36,7 @@ module Aws::SNS
     # @!attribute message
     #   @return [String]
     class AuthorizationErrorException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -45,6 +47,7 @@ module Aws::SNS
     # @!attribute message
     #   @return [String]
     class BatchEntryIdsNotDistinctException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -55,6 +58,7 @@ module Aws::SNS
     # @!attribute message
     #   @return [String]
     class BatchRequestTooLongException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -75,6 +79,7 @@ module Aws::SNS
     #   <p>Specifies whether the error happened due to the caller of the batch API action.</p>
     #   @return [Boolean]
     class BatchResultErrorEntry < Struct.new(
+      nil,
       :id,
       :code,
       :message,
@@ -94,6 +99,7 @@ module Aws::SNS
     #   <p>The phone number for which you want to check the opt out status.</p>
     #   @return [String]
     class CheckIfPhoneNumberIsOptedOutInput < Struct.new(
+      nil,
       :phone_number,
       keyword_init: true
     )
@@ -117,6 +123,7 @@ module Aws::SNS
     #            </ul>
     #   @return [Boolean]
     class CheckIfPhoneNumberIsOptedOutResponse < Struct.new(
+      nil,
       :is_opted_out,
       keyword_init: true
     )
@@ -133,6 +140,7 @@ module Aws::SNS
     # @!attribute message
     #   @return [String]
     class ConcurrentAccessException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -153,6 +161,7 @@ module Aws::SNS
     #               action requires Amazon Web Services authentication. </p>
     #   @return [String]
     class ConfirmSubscriptionInput < Struct.new(
+      nil,
       :topic_arn,
       :token,
       :authenticate_on_unsubscribe,
@@ -166,6 +175,7 @@ module Aws::SNS
     #   <p>The ARN of the created subscription.</p>
     #   @return [String]
     class ConfirmSubscriptionResponse < Struct.new(
+      nil,
       :subscription_arn,
       keyword_init: true
     )
@@ -177,6 +187,7 @@ module Aws::SNS
     #   <p>EndpointArn returned from CreateEndpoint action.</p>
     #   @return [String]
     class CreateEndpointResponse < Struct.new(
+      nil,
       :endpoint_arn,
       keyword_init: true
     )
@@ -199,6 +210,7 @@ module Aws::SNS
     #               </a>.</p>
     #   @return [Hash<String, String>]
     class CreatePlatformApplicationInput < Struct.new(
+      nil,
       :name,
       :platform,
       :attributes,
@@ -213,6 +225,7 @@ module Aws::SNS
     #               <code>PlatformApplicationArn</code> is returned.</p>
     #   @return [String]
     class CreatePlatformApplicationResponse < Struct.new(
+      nil,
       :platform_application_arn,
       keyword_init: true
     )
@@ -242,6 +255,7 @@ module Aws::SNS
     #               </a>.</p>
     #   @return [Hash<String, String>]
     class CreatePlatformEndpointInput < Struct.new(
+      nil,
       :platform_application_arn,
       :token,
       :custom_user_data,
@@ -260,6 +274,7 @@ module Aws::SNS
     #               <code>en-US</code>.</p>
     #   @return [String]
     class CreateSMSSandboxPhoneNumberInput < Struct.new(
+      nil,
       :phone_number,
       :language_code,
       keyword_init: true
@@ -268,6 +283,7 @@ module Aws::SNS
     end
 
     class CreateSMSSandboxPhoneNumberResult < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -518,6 +534,7 @@ module Aws::SNS
     #            <p>Length Constraints: Maximum length of 30,720.</p>
     #   @return [String]
     class CreateTopicInput < Struct.new(
+      nil,
       :name,
       :attributes,
       :tags,
@@ -532,6 +549,7 @@ module Aws::SNS
     #   <p>The Amazon Resource Name (ARN) assigned to the created topic.</p>
     #   @return [String]
     class CreateTopicResponse < Struct.new(
+      nil,
       :topic_arn,
       keyword_init: true
     )
@@ -544,6 +562,7 @@ module Aws::SNS
     #               <code>EndpointArn</code> of endpoint to delete.</p>
     #   @return [String]
     class DeleteEndpointInput < Struct.new(
+      nil,
       :endpoint_arn,
       keyword_init: true
     )
@@ -556,6 +575,7 @@ module Aws::SNS
     #               <code>PlatformApplicationArn</code> of platform application object to delete.</p>
     #   @return [String]
     class DeletePlatformApplicationInput < Struct.new(
+      nil,
       :platform_application_arn,
       keyword_init: true
     )
@@ -566,6 +586,7 @@ module Aws::SNS
     #   <p>The destination phone number to delete.</p>
     #   @return [String]
     class DeleteSMSSandboxPhoneNumberInput < Struct.new(
+      nil,
       :phone_number,
       keyword_init: true
     )
@@ -573,6 +594,7 @@ module Aws::SNS
     end
 
     class DeleteSMSSandboxPhoneNumberResult < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -582,6 +604,7 @@ module Aws::SNS
     #   <p>The ARN of the topic you want to delete.</p>
     #   @return [String]
     class DeleteTopicInput < Struct.new(
+      nil,
       :topic_arn,
       keyword_init: true
     )
@@ -592,6 +615,7 @@ module Aws::SNS
     # @!attribute message
     #   @return [String]
     class EmptyBatchRequestException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -606,6 +630,7 @@ module Aws::SNS
     #   <p>Attributes for endpoint.</p>
     #   @return [Hash<String, String>]
     class Endpoint < Struct.new(
+      nil,
       :endpoint_arn,
       :attributes,
       keyword_init: true
@@ -618,6 +643,7 @@ module Aws::SNS
     #   <p>Message for endpoint disabled.</p>
     #   @return [String]
     class EndpointDisabledException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -630,6 +656,7 @@ module Aws::SNS
     # @!attribute message
     #   @return [String]
     class FilterPolicyLimitExceededException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -642,6 +669,7 @@ module Aws::SNS
     #                   (ARNs)</a> in the Amazon Web Services General Reference.</p>
     #   @return [String]
     class GetDataProtectionPolicyInput < Struct.new(
+      nil,
       :resource_arn,
       keyword_init: true
     )
@@ -652,6 +680,7 @@ module Aws::SNS
     #   <p>Retrieves the <code>DataProtectionPolicy</code> in JSON string format.</p>
     #   @return [String]
     class GetDataProtectionPolicyResponse < Struct.new(
+      nil,
       :data_protection_policy,
       keyword_init: true
     )
@@ -664,6 +693,7 @@ module Aws::SNS
     #               <code>EndpointArn</code> for <code>GetEndpointAttributes</code> input.</p>
     #   @return [String]
     class GetEndpointAttributesInput < Struct.new(
+      nil,
       :endpoint_arn,
       keyword_init: true
     )
@@ -701,6 +731,7 @@ module Aws::SNS
     #            </ul>
     #   @return [Hash<String, String>]
     class GetEndpointAttributesResponse < Struct.new(
+      nil,
       :attributes,
       keyword_init: true
     )
@@ -713,6 +744,7 @@ module Aws::SNS
     #               <code>PlatformApplicationArn</code> for GetPlatformApplicationAttributesInput.</p>
     #   @return [String]
     class GetPlatformApplicationAttributesInput < Struct.new(
+      nil,
       :platform_application_arn,
       keyword_init: true
     )
@@ -776,6 +808,7 @@ module Aws::SNS
     #            </ul>
     #   @return [Hash<String, String>]
     class GetPlatformApplicationAttributesResponse < Struct.new(
+      nil,
       :attributes,
       keyword_init: true
     )
@@ -790,6 +823,7 @@ module Aws::SNS
     #            <p>If you don't use this parameter, Amazon SNS returns all SMS attributes.</p>
     #   @return [Array<String>]
     class GetSMSAttributesInput < Struct.new(
+      nil,
       :attributes,
       keyword_init: true
     )
@@ -801,6 +835,7 @@ module Aws::SNS
     #   <p>The SMS attribute names and their values.</p>
     #   @return [Hash<String, String>]
     class GetSMSAttributesResponse < Struct.new(
+      nil,
       :attributes,
       keyword_init: true
     )
@@ -808,6 +843,7 @@ module Aws::SNS
     end
 
     class GetSMSSandboxAccountStatusInput < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -817,6 +853,7 @@ module Aws::SNS
     #   <p>Indicates whether the calling Amazon Web Services account is in the SMS sandbox.</p>
     #   @return [Boolean]
     class GetSMSSandboxAccountStatusResult < Struct.new(
+      nil,
       :is_in_sandbox,
       keyword_init: true
     )
@@ -833,6 +870,7 @@ module Aws::SNS
     #   <p>The ARN of the subscription whose properties you want to get.</p>
     #   @return [String]
     class GetSubscriptionAttributesInput < Struct.new(
+      nil,
       :subscription_arn,
       keyword_init: true
     )
@@ -937,6 +975,7 @@ module Aws::SNS
     #            </ul>
     #   @return [Hash<String, String>]
     class GetSubscriptionAttributesResponse < Struct.new(
+      nil,
       :attributes,
       keyword_init: true
     )
@@ -948,6 +987,7 @@ module Aws::SNS
     #   <p>The ARN of the topic whose properties you want to get.</p>
     #   @return [String]
     class GetTopicAttributesInput < Struct.new(
+      nil,
       :topic_arn,
       keyword_init: true
     )
@@ -1087,6 +1127,7 @@ module Aws::SNS
     #            </ul>
     #   @return [Hash<String, String>]
     class GetTopicAttributesResponse < Struct.new(
+      nil,
       :attributes,
       keyword_init: true
     )
@@ -1097,6 +1138,7 @@ module Aws::SNS
     # @!attribute message
     #   @return [String]
     class InternalErrorException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -1107,6 +1149,7 @@ module Aws::SNS
     # @!attribute message
     #   @return [String]
     class InvalidBatchEntryIdException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -1118,6 +1161,7 @@ module Aws::SNS
     # @!attribute message
     #   @return [String]
     class InvalidParameterException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -1129,6 +1173,7 @@ module Aws::SNS
     #   <p>The parameter of an entry in a request doesn't abide by the specification. </p>
     #   @return [String]
     class InvalidParameterValueException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -1140,6 +1185,7 @@ module Aws::SNS
     # @!attribute message
     #   @return [String]
     class InvalidSecurityException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -1150,6 +1196,7 @@ module Aws::SNS
     # @!attribute message
     #   @return [String]
     class InvalidStateException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -1161,6 +1208,7 @@ module Aws::SNS
     # @!attribute message
     #   @return [String]
     class KMSAccessDeniedException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -1172,6 +1220,7 @@ module Aws::SNS
     # @!attribute message
     #   @return [String]
     class KMSDisabledException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -1184,6 +1233,7 @@ module Aws::SNS
     # @!attribute message
     #   @return [String]
     class KMSInvalidStateException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -1195,6 +1245,7 @@ module Aws::SNS
     # @!attribute message
     #   @return [String]
     class KMSNotFoundException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -1205,6 +1256,7 @@ module Aws::SNS
     # @!attribute message
     #   @return [String]
     class KMSOptInRequired < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -1218,6 +1270,7 @@ module Aws::SNS
     # @!attribute message
     #   @return [String]
     class KMSThrottlingException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -1237,6 +1290,7 @@ module Aws::SNS
     #               records that are available after the first page results.</p>
     #   @return [String]
     class ListEndpointsByPlatformApplicationInput < Struct.new(
+      nil,
       :platform_application_arn,
       :next_token,
       keyword_init: true
@@ -1255,6 +1309,7 @@ module Aws::SNS
     #               available after the first page results.</p>
     #   @return [String]
     class ListEndpointsByPlatformApplicationResponse < Struct.new(
+      nil,
       :endpoints,
       :next_token,
       keyword_init: true
@@ -1269,6 +1324,7 @@ module Aws::SNS
     #   <p>The maximum number of origination numbers to return.</p>
     #   @return [Integer]
     class ListOriginationNumbersRequest < Struct.new(
+      nil,
       :next_token,
       :max_results,
       keyword_init: true
@@ -1285,6 +1341,7 @@ module Aws::SNS
     #   <p>A list of the calling account's verified and pending origination numbers.</p>
     #   @return [Array<Types::PhoneNumberInformation>]
     class ListOriginationNumbersResult < Struct.new(
+      nil,
       :next_token,
       :phone_numbers,
       keyword_init: true
@@ -1299,6 +1356,7 @@ module Aws::SNS
     #               available after the first page of results.</p>
     #   @return [String]
     class ListPhoneNumbersOptedOutInput < Struct.new(
+      nil,
       :next_token,
       keyword_init: true
     )
@@ -1316,6 +1374,7 @@ module Aws::SNS
     #               after the first page of results.</p>
     #   @return [String]
     class ListPhoneNumbersOptedOutResponse < Struct.new(
+      nil,
       :phone_numbers,
       :next_token,
       keyword_init: true
@@ -1331,6 +1390,7 @@ module Aws::SNS
     #               available after the first page results.</p>
     #   @return [String]
     class ListPlatformApplicationsInput < Struct.new(
+      nil,
       :next_token,
       keyword_init: true
     )
@@ -1349,6 +1409,7 @@ module Aws::SNS
     #               after the first page results.</p>
     #   @return [String]
     class ListPlatformApplicationsResponse < Struct.new(
+      nil,
       :platform_applications,
       :next_token,
       keyword_init: true
@@ -1364,6 +1425,7 @@ module Aws::SNS
     #   <p>The maximum number of phone numbers to return.</p>
     #   @return [Integer]
     class ListSMSSandboxPhoneNumbersInput < Struct.new(
+      nil,
       :next_token,
       :max_results,
       keyword_init: true
@@ -1380,6 +1442,7 @@ module Aws::SNS
     #               records are available.</p>
     #   @return [String]
     class ListSMSSandboxPhoneNumbersResult < Struct.new(
+      nil,
       :phone_numbers,
       :next_token,
       keyword_init: true
@@ -1395,6 +1458,7 @@ module Aws::SNS
     #   <p>Token returned by the previous <code>ListSubscriptionsByTopic</code> request.</p>
     #   @return [String]
     class ListSubscriptionsByTopicInput < Struct.new(
+      nil,
       :topic_arn,
       :next_token,
       keyword_init: true
@@ -1411,6 +1475,7 @@ module Aws::SNS
     #               element is returned if there are more subscriptions to retrieve.</p>
     #   @return [String]
     class ListSubscriptionsByTopicResponse < Struct.new(
+      nil,
       :subscriptions,
       :next_token,
       keyword_init: true
@@ -1423,6 +1488,7 @@ module Aws::SNS
     #   <p>Token returned by the previous <code>ListSubscriptions</code> request.</p>
     #   @return [String]
     class ListSubscriptionsInput < Struct.new(
+      nil,
       :next_token,
       keyword_init: true
     )
@@ -1438,6 +1504,7 @@ module Aws::SNS
     #               is returned if there are more subscriptions to retrieve.</p>
     #   @return [String]
     class ListSubscriptionsResponse < Struct.new(
+      nil,
       :subscriptions,
       :next_token,
       keyword_init: true
@@ -1449,6 +1516,7 @@ module Aws::SNS
     #   <p>The ARN of the topic for which to list tags.</p>
     #   @return [String]
     class ListTagsForResourceRequest < Struct.new(
+      nil,
       :resource_arn,
       keyword_init: true
     )
@@ -1459,6 +1527,7 @@ module Aws::SNS
     #   <p>The tags associated with the specified topic.</p>
     #   @return [Array<Types::Tag>]
     class ListTagsForResourceResponse < Struct.new(
+      nil,
       :tags,
       keyword_init: true
     )
@@ -1469,6 +1538,7 @@ module Aws::SNS
     #   <p>Token returned by the previous <code>ListTopics</code> request.</p>
     #   @return [String]
     class ListTopicsInput < Struct.new(
+      nil,
       :next_token,
       keyword_init: true
     )
@@ -1484,6 +1554,7 @@ module Aws::SNS
     #               returned if there are additional topics to retrieve.</p>
     #   @return [String]
     class ListTopicsResponse < Struct.new(
+      nil,
       :topics,
       :next_token,
       keyword_init: true
@@ -1515,6 +1586,7 @@ module Aws::SNS
     #               encrypted data, or images.</p>
     #   @return [String]
     class MessageAttributeValue < Struct.new(
+      nil,
       :data_type,
       :string_value,
       :binary_value,
@@ -1527,6 +1599,7 @@ module Aws::SNS
     # @!attribute message
     #   @return [String]
     class NotFoundException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -1538,6 +1611,7 @@ module Aws::SNS
     #   <p>The phone number to opt in. Use E.164 format.</p>
     #   @return [String]
     class OptInPhoneNumberInput < Struct.new(
+      nil,
       :phone_number,
       keyword_init: true
     )
@@ -1546,6 +1620,7 @@ module Aws::SNS
 
     # <p>The response for the OptInPhoneNumber action.</p>
     class OptInPhoneNumberResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1556,6 +1631,7 @@ module Aws::SNS
     # @!attribute message
     #   @return [String]
     class OptedOutException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -1582,6 +1658,7 @@ module Aws::SNS
     #   <p>The capabilities of each phone number.</p>
     #   @return [Array<String>]
     class PhoneNumberInformation < Struct.new(
+      nil,
       :created_at,
       :phone_number,
       :status,
@@ -1601,6 +1678,7 @@ module Aws::SNS
     #   <p>Attributes for platform application object.</p>
     #   @return [Hash<String, String>]
     class PlatformApplication < Struct.new(
+      nil,
       :platform_application_arn,
       :attributes,
       keyword_init: true
@@ -1613,6 +1691,7 @@ module Aws::SNS
     #   <p>Message for platform application disabled.</p>
     #   @return [String]
     class PlatformApplicationDisabledException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -1627,6 +1706,7 @@ module Aws::SNS
     #               topic.</p>
     #   @return [Array<Types::PublishBatchRequestEntry>]
     class PublishBatchInput < Struct.new(
+      nil,
       :topic_arn,
       :publish_batch_request_entries,
       keyword_init: true
@@ -1768,6 +1848,7 @@ module Aws::SNS
     #                   <code>(!"#$%&'()*+,-./:;<=>?@[\]^_`{|}~)</code>.</p>
     #   @return [String]
     class PublishBatchRequestEntry < Struct.new(
+      nil,
       :id,
       :message,
       :subject,
@@ -1787,6 +1868,7 @@ module Aws::SNS
     #   <p>A list of failed <code>PublishBatch</code> responses. </p>
     #   @return [Array<Types::BatchResultErrorEntry>]
     class PublishBatchResponse < Struct.new(
+      nil,
       :successful,
       :failed,
       keyword_init: true
@@ -1808,6 +1890,7 @@ module Aws::SNS
     #               continues to increase for a particular <code>MessageGroupId</code>.</p>
     #   @return [String]
     class PublishBatchResultEntry < Struct.new(
+      nil,
       :id,
       :message_id,
       :sequence_number,
@@ -2010,6 +2093,7 @@ module Aws::SNS
     #           </p>
     #   @return [String]
     class PublishInput < Struct.new(
+      nil,
       :topic_arn,
       :target_arn,
       :phone_number,
@@ -2037,6 +2121,7 @@ module Aws::SNS
     #                   <code>MessageGroupId</code>.</p>
     #   @return [String]
     class PublishResponse < Struct.new(
+      nil,
       :message_id,
       :sequence_number,
       keyword_init: true
@@ -2056,6 +2141,7 @@ module Aws::SNS
     #            <p>Length Constraints: Maximum length of 30,720.</p>
     #   @return [String]
     class PutDataProtectionPolicyInput < Struct.new(
+      nil,
       :resource_arn,
       :data_protection_policy,
       keyword_init: true
@@ -2071,6 +2157,7 @@ module Aws::SNS
     #   <p>The unique label of the statement you want to remove.</p>
     #   @return [String]
     class RemovePermissionInput < Struct.new(
+      nil,
       :topic_arn,
       :label,
       keyword_init: true
@@ -2082,6 +2169,7 @@ module Aws::SNS
     # @!attribute message
     #   @return [String]
     class ReplayLimitExceededException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -2093,6 +2181,7 @@ module Aws::SNS
     # @!attribute message
     #   @return [String]
     class ResourceNotFoundException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -2115,6 +2204,7 @@ module Aws::SNS
     #   <p>The destination phone number's verification status.</p>
     #   @return [String]
     class SMSSandboxPhoneNumber < Struct.new(
+      nil,
       :phone_number,
       :status,
       keyword_init: true
@@ -2152,6 +2242,7 @@ module Aws::SNS
     #            </ul>
     #   @return [Hash<String, String>]
     class SetEndpointAttributesInput < Struct.new(
+      nil,
       :endpoint_arn,
       :attributes,
       keyword_init: true
@@ -2281,6 +2372,7 @@ module Aws::SNS
     #            </ul>
     #   @return [Hash<String, String>]
     class SetPlatformApplicationAttributesInput < Struct.new(
+      nil,
       :platform_application_arn,
       :attributes,
       keyword_init: true
@@ -2378,6 +2470,7 @@ module Aws::SNS
     #                   <i>Amazon SNS Developer Guide</i>.</p>
     #   @return [Hash<String, String>]
     class SetSMSAttributesInput < Struct.new(
+      nil,
       :attributes,
       keyword_init: true
     )
@@ -2386,6 +2479,7 @@ module Aws::SNS
 
     # <p>The response for the SetSMSAttributes action.</p>
     class SetSMSAttributesResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -2466,6 +2560,7 @@ module Aws::SNS
     #   <p>The new value for the attribute in JSON format.</p>
     #   @return [String]
     class SetSubscriptionAttributesInput < Struct.new(
+      nil,
       :subscription_arn,
       :attribute_name,
       :attribute_value,
@@ -2709,6 +2804,7 @@ module Aws::SNS
     #   <p>The new value for the attribute.</p>
     #   @return [String]
     class SetTopicAttributesInput < Struct.new(
+      nil,
       :topic_arn,
       :attribute_name,
       :attribute_value,
@@ -2722,6 +2818,7 @@ module Aws::SNS
     # @!attribute message
     #   @return [String]
     class StaleTagException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -2939,6 +3036,7 @@ module Aws::SNS
     #            <p>The default value is <code>false</code>.</p>
     #   @return [Boolean]
     class SubscribeInput < Struct.new(
+      nil,
       :topic_arn,
       :protocol,
       :endpoint,
@@ -2957,6 +3055,7 @@ module Aws::SNS
     #               subscription ARN, even if the subscription requires confirmation.</p>
     #   @return [String]
     class SubscribeResponse < Struct.new(
+      nil,
       :subscription_arn,
       keyword_init: true
     )
@@ -2980,6 +3079,7 @@ module Aws::SNS
     #   <p>The ARN of the subscription's topic.</p>
     #   @return [String]
     class Subscription < Struct.new(
+      nil,
       :subscription_arn,
       :owner,
       :protocol,
@@ -2995,6 +3095,7 @@ module Aws::SNS
     # @!attribute message
     #   @return [String]
     class SubscriptionLimitExceededException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -3009,6 +3110,7 @@ module Aws::SNS
     #   <p>The optional value portion of the tag.</p>
     #   @return [String]
     class Tag < Struct.new(
+      nil,
       :key,
       :value,
       keyword_init: true
@@ -3020,6 +3122,7 @@ module Aws::SNS
     # @!attribute message
     #   @return [String]
     class TagLimitExceededException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -3031,6 +3134,7 @@ module Aws::SNS
     # @!attribute message
     #   @return [String]
     class TagPolicyException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -3045,6 +3149,7 @@ module Aws::SNS
     #               optional value.</p>
     #   @return [Array<Types::Tag>]
     class TagResourceRequest < Struct.new(
+      nil,
       :resource_arn,
       :tags,
       keyword_init: true
@@ -3053,6 +3158,7 @@ module Aws::SNS
     end
 
     class TagResourceResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -3063,6 +3169,7 @@ module Aws::SNS
     #   <p>Throttled request.</p>
     #   @return [String]
     class ThrottledException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -3073,6 +3180,7 @@ module Aws::SNS
     # @!attribute message
     #   @return [String]
     class TooManyEntriesInBatchRequestException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -3085,6 +3193,7 @@ module Aws::SNS
     #   <p>The topic's ARN.</p>
     #   @return [String]
     class Topic < Struct.new(
+      nil,
       :topic_arn,
       keyword_init: true
     )
@@ -3095,6 +3204,7 @@ module Aws::SNS
     # @!attribute message
     #   @return [String]
     class TopicLimitExceededException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -3106,6 +3216,7 @@ module Aws::SNS
     #   <p>The ARN of the subscription to be deleted.</p>
     #   @return [String]
     class UnsubscribeInput < Struct.new(
+      nil,
       :subscription_arn,
       keyword_init: true
     )
@@ -3119,6 +3230,7 @@ module Aws::SNS
     #   <p>The list of tag keys to remove from the specified topic.</p>
     #   @return [Array<String>]
     class UntagResourceRequest < Struct.new(
+      nil,
       :resource_arn,
       :tag_keys,
       keyword_init: true
@@ -3127,6 +3239,7 @@ module Aws::SNS
     end
 
     class UntagResourceResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -3137,6 +3250,7 @@ module Aws::SNS
     # @!attribute message
     #   @return [String]
     class UserErrorException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -3147,6 +3261,7 @@ module Aws::SNS
     # @!attribute message
     #   @return [String]
     class ValidationException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -3160,6 +3275,7 @@ module Aws::SNS
     #   <p>The status of the verification error.</p>
     #   @return [String]
     class VerificationException < Struct.new(
+      nil,
       :message,
       :status,
       keyword_init: true
@@ -3175,6 +3291,7 @@ module Aws::SNS
     #                   <code>CreateSMSSandBoxPhoneNumber</code> call.</p>
     #   @return [String]
     class VerifySMSSandboxPhoneNumberInput < Struct.new(
+      nil,
       :phone_number,
       :one_time_password,
       keyword_init: true
@@ -3184,6 +3301,7 @@ module Aws::SNS
 
     # <p>The destination phone number's verification status.</p>
     class VerifySMSSandboxPhoneNumberResult < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure

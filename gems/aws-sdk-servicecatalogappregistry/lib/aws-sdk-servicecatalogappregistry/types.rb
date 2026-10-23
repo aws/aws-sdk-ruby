@@ -17,6 +17,7 @@ module Aws::ServiceCatalogAppRegistry
     #       </p>
     #   @return [Types::TagQueryConfiguration]
     class AppRegistryConfiguration < Struct.new(
+      nil,
       :tag_query_configuration,
       keyword_init: true
     )
@@ -52,6 +53,7 @@ module Aws::ServiceCatalogAppRegistry
     #       </p>
     #   @return [Hash<String, String>]
     class Application < Struct.new(
+      nil,
       :id,
       :arn,
       :name,
@@ -85,6 +87,7 @@ module Aws::ServiceCatalogAppRegistry
     #   <p> The ISO-8601 formatted timestamp of the moment when the application was last updated.</p>
     #   @return [Time]
     class ApplicationSummary < Struct.new(
+      nil,
       :id,
       :arn,
       :name,
@@ -120,6 +123,7 @@ module Aws::ServiceCatalogAppRegistry
     #       </p>
     #   @return [String]
     class ApplicationTagResult < Struct.new(
+      nil,
       :application_tag_status,
       :error_message,
       :resources,
@@ -144,6 +148,7 @@ module Aws::ServiceCatalogAppRegistry
     #        </p>
     #   @return [String]
     class AssociateAttributeGroupRequest < Struct.new(
+      nil,
       :application,
       :attribute_group,
       keyword_init: true
@@ -158,6 +163,7 @@ module Aws::ServiceCatalogAppRegistry
     #   <p>The Amazon resource name (ARN) of the attribute group that contains the application's new attributes.</p>
     #   @return [String]
     class AssociateAttributeGroupResponse < Struct.new(
+      nil,
       :application_arn,
       :attribute_group_arn,
       keyword_init: true
@@ -183,6 +189,7 @@ module Aws::ServiceCatalogAppRegistry
     #       </p>
     #   @return [Array<String>]
     class AssociateResourceRequest < Struct.new(
+      nil,
       :application,
       :resource_type,
       :resource,
@@ -204,6 +211,7 @@ module Aws::ServiceCatalogAppRegistry
     #       </p>
     #   @return [Array<String>]
     class AssociateResourceResponse < Struct.new(
+      nil,
       :application_arn,
       :resource_arn,
       :options,
@@ -235,6 +243,7 @@ module Aws::ServiceCatalogAppRegistry
     #   <p>Key-value pairs you can use to associate with the attribute group.</p>
     #   @return [Hash<String, String>]
     class AttributeGroup < Struct.new(
+      nil,
       :id,
       :arn,
       :name,
@@ -272,6 +281,7 @@ module Aws::ServiceCatalogAppRegistry
     #   <p>The service principal that created the attribute group.</p>
     #   @return [String]
     class AttributeGroupDetails < Struct.new(
+      nil,
       :id,
       :arn,
       :name,
@@ -304,6 +314,7 @@ module Aws::ServiceCatalogAppRegistry
     #   <p>The service principal that created the attribute group.</p>
     #   @return [String]
     class AttributeGroupSummary < Struct.new(
+      nil,
       :id,
       :arn,
       :name,
@@ -321,6 +332,7 @@ module Aws::ServiceCatalogAppRegistry
     # @!attribute message
     #   @return [String]
     class ConflictException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -343,6 +355,7 @@ module Aws::ServiceCatalogAppRegistry
     #         client token, but one or more of the parameters are different, the retry fails.</p>
     #   @return [String]
     class CreateApplicationRequest < Struct.new(
+      nil,
       :name,
       :description,
       :tags,
@@ -356,6 +369,7 @@ module Aws::ServiceCatalogAppRegistry
     #   <p>Information about the application.</p>
     #   @return [Types::Application]
     class CreateApplicationResponse < Struct.new(
+      nil,
       :application,
       keyword_init: true
     )
@@ -381,6 +395,7 @@ module Aws::ServiceCatalogAppRegistry
     #         client token, but one or more of the parameters are different, the retry fails.</p>
     #   @return [String]
     class CreateAttributeGroupRequest < Struct.new(
+      nil,
       :name,
       :description,
       :attributes,
@@ -395,6 +410,7 @@ module Aws::ServiceCatalogAppRegistry
     #   <p>Information about the attribute group.</p>
     #   @return [Types::AttributeGroup]
     class CreateAttributeGroupResponse < Struct.new(
+      nil,
       :attribute_group,
       keyword_init: true
     )
@@ -408,6 +424,7 @@ module Aws::ServiceCatalogAppRegistry
     #        </p>
     #   @return [String]
     class DeleteApplicationRequest < Struct.new(
+      nil,
       :application,
       keyword_init: true
     )
@@ -418,6 +435,7 @@ module Aws::ServiceCatalogAppRegistry
     #   <p>Information about the deleted application.</p>
     #   @return [Types::ApplicationSummary]
     class DeleteApplicationResponse < Struct.new(
+      nil,
       :application,
       keyword_init: true
     )
@@ -433,6 +451,7 @@ module Aws::ServiceCatalogAppRegistry
     #        </p>
     #   @return [String]
     class DeleteAttributeGroupRequest < Struct.new(
+      nil,
       :attribute_group,
       keyword_init: true
     )
@@ -443,6 +462,7 @@ module Aws::ServiceCatalogAppRegistry
     #   <p>Information about the deleted attribute group.</p>
     #   @return [Types::AttributeGroupSummary]
     class DeleteAttributeGroupResponse < Struct.new(
+      nil,
       :attribute_group,
       keyword_init: true
     )
@@ -464,6 +484,7 @@ module Aws::ServiceCatalogAppRegistry
     #        </p>
     #   @return [String]
     class DisassociateAttributeGroupRequest < Struct.new(
+      nil,
       :application,
       :attribute_group,
       keyword_init: true
@@ -478,6 +499,7 @@ module Aws::ServiceCatalogAppRegistry
     #   <p>The Amazon resource name (ARN) that specifies the attribute group.</p>
     #   @return [String]
     class DisassociateAttributeGroupResponse < Struct.new(
+      nil,
       :application_arn,
       :attribute_group_arn,
       keyword_init: true
@@ -495,6 +517,7 @@ module Aws::ServiceCatalogAppRegistry
     #   <p>The name or ID of the resource.</p>
     #   @return [String]
     class DisassociateResourceRequest < Struct.new(
+      nil,
       :application,
       :resource_type,
       :resource,
@@ -510,6 +533,7 @@ module Aws::ServiceCatalogAppRegistry
     #   <p>The Amazon resource name (ARN) that specifies the resource.</p>
     #   @return [String]
     class DisassociateResourceResponse < Struct.new(
+      nil,
       :application_arn,
       :resource_arn,
       keyword_init: true
@@ -524,6 +548,7 @@ module Aws::ServiceCatalogAppRegistry
     #        </p>
     #   @return [String]
     class GetApplicationRequest < Struct.new(
+      nil,
       :application,
       keyword_init: true
     )
@@ -570,6 +595,7 @@ module Aws::ServiceCatalogAppRegistry
     #       </p>
     #   @return [Hash<String, String>]
     class GetApplicationResponse < Struct.new(
+      nil,
       :id,
       :arn,
       :name,
@@ -619,6 +645,7 @@ module Aws::ServiceCatalogAppRegistry
     #       </p>
     #   @return [Integer]
     class GetAssociatedResourceRequest < Struct.new(
+      nil,
       :application,
       :resource_type,
       :resource,
@@ -644,6 +671,7 @@ module Aws::ServiceCatalogAppRegistry
     #       </p>
     #   @return [Types::ApplicationTagResult]
     class GetAssociatedResourceResponse < Struct.new(
+      nil,
       :resource,
       :options,
       :application_tag_result,
@@ -661,6 +689,7 @@ module Aws::ServiceCatalogAppRegistry
     #        </p>
     #   @return [String]
     class GetAttributeGroupRequest < Struct.new(
+      nil,
       :attribute_group,
       keyword_init: true
     )
@@ -695,6 +724,7 @@ module Aws::ServiceCatalogAppRegistry
     #   <p>The service principal that created the attribute group.</p>
     #   @return [String]
     class GetAttributeGroupResponse < Struct.new(
+      nil,
       :id,
       :arn,
       :name,
@@ -716,6 +746,7 @@ module Aws::ServiceCatalogAppRegistry
     #       </p>
     #   @return [Types::AppRegistryConfiguration]
     class GetConfigurationResponse < Struct.new(
+      nil,
       :configuration,
       keyword_init: true
     )
@@ -730,6 +761,7 @@ module Aws::ServiceCatalogAppRegistry
     #   <p>The information about the resource group integration.</p>
     #   @return [Types::ResourceGroup]
     class Integrations < Struct.new(
+      nil,
       :resource_group,
       :application_tag_resource_group,
       keyword_init: true
@@ -741,6 +773,7 @@ module Aws::ServiceCatalogAppRegistry
     # @!attribute message
     #   @return [String]
     class InternalServerException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -754,6 +787,7 @@ module Aws::ServiceCatalogAppRegistry
     #   <p>The upper bound of the number of results to return (cannot exceed 25). If this parameter is omitted, it defaults to 25. This value is optional.</p>
     #   @return [Integer]
     class ListApplicationsRequest < Struct.new(
+      nil,
       :next_token,
       :max_results,
       keyword_init: true
@@ -768,6 +802,7 @@ module Aws::ServiceCatalogAppRegistry
     #   <p>The token to use to get the next page of results after a previous API call. </p>
     #   @return [String]
     class ListApplicationsResponse < Struct.new(
+      nil,
       :applications,
       :next_token,
       keyword_init: true
@@ -785,6 +820,7 @@ module Aws::ServiceCatalogAppRegistry
     #   <p>The upper bound of the number of results to return (cannot exceed 25). If this parameter is omitted, it defaults to 25. This value is optional.</p>
     #   @return [Integer]
     class ListAssociatedAttributeGroupsRequest < Struct.new(
+      nil,
       :application,
       :next_token,
       :max_results,
@@ -800,6 +836,7 @@ module Aws::ServiceCatalogAppRegistry
     #   <p>The token to use to get the next page of results after a previous API call. </p>
     #   @return [String]
     class ListAssociatedAttributeGroupsResponse < Struct.new(
+      nil,
       :attribute_groups,
       :next_token,
       keyword_init: true
@@ -820,6 +857,7 @@ module Aws::ServiceCatalogAppRegistry
     #   <p>The upper bound of the number of results to return (cannot exceed 25). If this parameter is omitted, it defaults to 25. This value is optional.</p>
     #   @return [Integer]
     class ListAssociatedResourcesRequest < Struct.new(
+      nil,
       :application,
       :next_token,
       :max_results,
@@ -835,6 +873,7 @@ module Aws::ServiceCatalogAppRegistry
     #   <p>The token to use to get the next page of results after a previous API call. </p>
     #   @return [String]
     class ListAssociatedResourcesResponse < Struct.new(
+      nil,
       :resources,
       :next_token,
       keyword_init: true
@@ -852,6 +891,7 @@ module Aws::ServiceCatalogAppRegistry
     #   <p>The upper bound of the number of results to return. The value cannot exceed 25. If you omit this parameter, it defaults to 25. This value is optional.</p>
     #   @return [Integer]
     class ListAttributeGroupsForApplicationRequest < Struct.new(
+      nil,
       :application,
       :next_token,
       :max_results,
@@ -867,6 +907,7 @@ module Aws::ServiceCatalogAppRegistry
     #   <p>The token to use to get the next page of results after a previous API call.</p>
     #   @return [String]
     class ListAttributeGroupsForApplicationResponse < Struct.new(
+      nil,
       :attribute_groups_details,
       :next_token,
       keyword_init: true
@@ -881,6 +922,7 @@ module Aws::ServiceCatalogAppRegistry
     #   <p>The upper bound of the number of results to return (cannot exceed 25). If this parameter is omitted, it defaults to 25. This value is optional.</p>
     #   @return [Integer]
     class ListAttributeGroupsRequest < Struct.new(
+      nil,
       :next_token,
       :max_results,
       keyword_init: true
@@ -895,6 +937,7 @@ module Aws::ServiceCatalogAppRegistry
     #   <p>The token to use to get the next page of results after a previous API call. </p>
     #   @return [String]
     class ListAttributeGroupsResponse < Struct.new(
+      nil,
       :attribute_groups,
       :next_token,
       keyword_init: true
@@ -906,6 +949,7 @@ module Aws::ServiceCatalogAppRegistry
     #   <p>The Amazon resource name (ARN) that specifies the resource.</p>
     #   @return [String]
     class ListTagsForResourceRequest < Struct.new(
+      nil,
       :resource_arn,
       keyword_init: true
     )
@@ -916,6 +960,7 @@ module Aws::ServiceCatalogAppRegistry
     #   <p>The tags on the resource.</p>
     #   @return [Hash<String, String>]
     class ListTagsForResourceResponse < Struct.new(
+      nil,
       :tags,
       keyword_init: true
     )
@@ -929,6 +974,7 @@ module Aws::ServiceCatalogAppRegistry
     #       </p>
     #   @return [Types::AppRegistryConfiguration]
     class PutConfigurationRequest < Struct.new(
+      nil,
       :configuration,
       keyword_init: true
     )
@@ -950,6 +996,7 @@ module Aws::ServiceCatalogAppRegistry
     #        </p>
     #   @return [Types::ResourceIntegrations]
     class Resource < Struct.new(
+      nil,
       :name,
       :arn,
       :association_time,
@@ -969,6 +1016,7 @@ module Aws::ServiceCatalogAppRegistry
     #   <p>The value of the tag.</p>
     #   @return [String]
     class ResourceDetails < Struct.new(
+      nil,
       :tag_value,
       keyword_init: true
     )
@@ -998,6 +1046,7 @@ module Aws::ServiceCatalogAppRegistry
     #   <p>The error message that generates when the propagation process for the resource group fails.</p>
     #   @return [String]
     class ResourceGroup < Struct.new(
+      nil,
       :state,
       :arn,
       :error_message,
@@ -1032,6 +1081,7 @@ module Aws::ServiceCatalogAppRegistry
     #       </p>
     #   @return [Array<String>]
     class ResourceInfo < Struct.new(
+      nil,
       :name,
       :arn,
       :resource_type,
@@ -1047,6 +1097,7 @@ module Aws::ServiceCatalogAppRegistry
     #   <p>The information about the integration of Resource Groups.</p>
     #   @return [Types::ResourceGroup]
     class ResourceIntegrations < Struct.new(
+      nil,
       :resource_group,
       keyword_init: true
     )
@@ -1057,6 +1108,7 @@ module Aws::ServiceCatalogAppRegistry
     # @!attribute message
     #   @return [String]
     class ResourceNotFoundException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -1087,6 +1139,7 @@ module Aws::ServiceCatalogAppRegistry
     #       </p>
     #   @return [String]
     class ResourcesListItem < Struct.new(
+      nil,
       :resource_arn,
       :error_message,
       :status,
@@ -1103,6 +1156,7 @@ module Aws::ServiceCatalogAppRegistry
     # @!attribute message
     #   @return [String]
     class ServiceQuotaExceededException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -1116,6 +1170,7 @@ module Aws::ServiceCatalogAppRegistry
     #   <p>An entity you can work with and specify with a name or ID. Examples include an Amazon EC2 instance, an Amazon Web Services CloudFormation stack, or an Amazon S3 bucket.</p>
     #   @return [String]
     class SyncResourceRequest < Struct.new(
+      nil,
       :resource_type,
       :resource,
       keyword_init: true
@@ -1133,6 +1188,7 @@ module Aws::ServiceCatalogAppRegistry
     #   <p>The results of the output if an application is associated with an ARN value, which could be <code>syncStarted</code> or None.</p>
     #   @return [String]
     class SyncResourceResponse < Struct.new(
+      nil,
       :application_arn,
       :resource_arn,
       :action_taken,
@@ -1157,6 +1213,7 @@ module Aws::ServiceCatalogAppRegistry
     #       </p>
     #   @return [String]
     class TagQueryConfiguration < Struct.new(
+      nil,
       :tag_key,
       keyword_init: true
     )
@@ -1170,6 +1227,7 @@ module Aws::ServiceCatalogAppRegistry
     #   <p>The new or modified tags for the resource.</p>
     #   @return [Hash<String, String>]
     class TagResourceRequest < Struct.new(
+      nil,
       :resource_arn,
       :tags,
       keyword_init: true
@@ -1178,6 +1236,7 @@ module Aws::ServiceCatalogAppRegistry
     end
 
     class TagResourceResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1195,6 +1254,7 @@ module Aws::ServiceCatalogAppRegistry
     #   <p>The originating service code.</p>
     #   @return [String]
     class ThrottlingException < Struct.new(
+      nil,
       :message,
       :service_code,
       keyword_init: true
@@ -1209,6 +1269,7 @@ module Aws::ServiceCatalogAppRegistry
     #   <p>A list of the tag keys to remove from the specified resource.</p>
     #   @return [Array<String>]
     class UntagResourceRequest < Struct.new(
+      nil,
       :resource_arn,
       :tag_keys,
       keyword_init: true
@@ -1217,6 +1278,7 @@ module Aws::ServiceCatalogAppRegistry
     end
 
     class UntagResourceResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1239,6 +1301,7 @@ module Aws::ServiceCatalogAppRegistry
     #   <p>The new description of the application.</p>
     #   @return [String]
     class UpdateApplicationRequest < Struct.new(
+      nil,
       :application,
       :name,
       :description,
@@ -1251,6 +1314,7 @@ module Aws::ServiceCatalogAppRegistry
     #   <p>The updated information of the application.</p>
     #   @return [Types::Application]
     class UpdateApplicationResponse < Struct.new(
+      nil,
       :application,
       keyword_init: true
     )
@@ -1278,6 +1342,7 @@ module Aws::ServiceCatalogAppRegistry
     #   <p>A JSON string in the form of nested key-value pairs that represent the attributes in the group and describes an application and its components.</p>
     #   @return [String]
     class UpdateAttributeGroupRequest < Struct.new(
+      nil,
       :attribute_group,
       :name,
       :description,
@@ -1291,6 +1356,7 @@ module Aws::ServiceCatalogAppRegistry
     #   <p>The updated information of the attribute group.</p>
     #   @return [Types::AttributeGroup]
     class UpdateAttributeGroupResponse < Struct.new(
+      nil,
       :attribute_group,
       keyword_init: true
     )
@@ -1301,6 +1367,7 @@ module Aws::ServiceCatalogAppRegistry
     # @!attribute message
     #   @return [String]
     class ValidationException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )

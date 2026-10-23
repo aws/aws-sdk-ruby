@@ -22,6 +22,7 @@ module Aws::Athena
     #               For more information about Amazon S3 canned ACLs, see <a href="https://docs.aws.amazon.com/AmazonS3/latest/userguide/acl-overview.html#canned-acl">Canned ACL</a> in the <i>Amazon S3 User Guide</i>.</p>
     #   @return [String]
     class AclConfiguration < Struct.new(
+      nil,
       :s3_acl_option,
       keyword_init: true
     )
@@ -37,6 +38,7 @@ module Aws::Athena
     #   <p>A list of the supported DPU sizes that the application runtime supports.</p>
     #   @return [Array<Integer>]
     class ApplicationDPUSizes < Struct.new(
+      nil,
       :application_runtime_id,
       :supported_dpu_sizes,
       keyword_init: true
@@ -72,6 +74,7 @@ module Aws::Athena
     #   <p>Contains a short description of the error that occurred.</p>
     #   @return [String]
     class AthenaError < Struct.new(
+      nil,
       :error_category,
       :error_type,
       :retryable,
@@ -91,6 +94,7 @@ module Aws::Athena
     #   <p>An array of query IDs.</p>
     #   @return [Array<String>]
     class BatchGetNamedQueryInput < Struct.new(
+      nil,
       :named_query_ids,
       keyword_init: true
     )
@@ -104,6 +108,7 @@ module Aws::Athena
     #   <p>Information about provided query IDs.</p>
     #   @return [Array<Types::UnprocessedNamedQueryId>]
     class BatchGetNamedQueryOutput < Struct.new(
+      nil,
       :named_queries,
       :unprocessed_named_query_ids,
       keyword_init: true
@@ -118,6 +123,7 @@ module Aws::Athena
     #   <p>The name of the workgroup to which the prepared statements belong.</p>
     #   @return [String]
     class BatchGetPreparedStatementInput < Struct.new(
+      nil,
       :prepared_statement_names,
       :work_group,
       keyword_init: true
@@ -133,6 +139,7 @@ module Aws::Athena
     #               returned.</p>
     #   @return [Array<Types::UnprocessedPreparedStatementName>]
     class BatchGetPreparedStatementOutput < Struct.new(
+      nil,
       :prepared_statements,
       :unprocessed_prepared_statement_names,
       keyword_init: true
@@ -145,6 +152,7 @@ module Aws::Athena
     #   <p>An array of query execution IDs.</p>
     #   @return [Array<String>]
     class BatchGetQueryExecutionInput < Struct.new(
+      nil,
       :query_execution_ids,
       keyword_init: true
     )
@@ -158,6 +166,7 @@ module Aws::Athena
     #   <p>Information about the query executions that failed to run.</p>
     #   @return [Array<Types::UnprocessedQueryExecutionId>]
     class BatchGetQueryExecutionOutput < Struct.new(
+      nil,
       :query_executions,
       :unprocessed_query_execution_ids,
       keyword_init: true
@@ -170,6 +179,7 @@ module Aws::Athena
     #   <p>A string that contains the code for the calculation.</p>
     #   @return [String]
     class CalculationConfiguration < Struct.new(
+      nil,
       :code_block,
       keyword_init: true
     )
@@ -191,6 +201,7 @@ module Aws::Athena
     #   <p>The data format of the calculation result.</p>
     #   @return [String]
     class CalculationResult < Struct.new(
+      nil,
       :std_out_s3_uri,
       :std_error_s3_uri,
       :result_s3_uri,
@@ -208,6 +219,7 @@ module Aws::Athena
     #   <p>The progress of the calculation.</p>
     #   @return [String]
     class CalculationStatistics < Struct.new(
+      nil,
       :dpu_execution_in_millis,
       :progress,
       keyword_init: true
@@ -248,6 +260,7 @@ module Aws::Athena
     #               because the session was terminated).</p>
     #   @return [String]
     class CalculationStatus < Struct.new(
+      nil,
       :submission_date_time,
       :completion_date_time,
       :state,
@@ -268,6 +281,7 @@ module Aws::Athena
     #   <p>Contains information about the status of the calculation.</p>
     #   @return [Types::CalculationStatus]
     class CalculationSummary < Struct.new(
+      nil,
       :calculation_execution_id,
       :description,
       :status,
@@ -280,6 +294,7 @@ module Aws::Athena
     #   <p>The name of the capacity reservation to cancel.</p>
     #   @return [String]
     class CancelCapacityReservationInput < Struct.new(
+      nil,
       :name,
       keyword_init: true
     )
@@ -287,6 +302,7 @@ module Aws::Athena
     end
 
     class CancelCapacityReservationOutput < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -307,6 +323,7 @@ module Aws::Athena
     #   <p>The time when the capacity allocation request was completed.</p>
     #   @return [Time]
     class CapacityAllocation < Struct.new(
+      nil,
       :status,
       :status_message,
       :request_time,
@@ -321,6 +338,7 @@ module Aws::Athena
     #   <p>The list of workgroup names for the capacity assignment.</p>
     #   @return [Array<String>]
     class CapacityAssignment < Struct.new(
+      nil,
       :work_group_names,
       keyword_init: true
     )
@@ -339,6 +357,7 @@ module Aws::Athena
     #   <p>The list of assignments that make up the capacity assignment configuration.</p>
     #   @return [Array<Types::CapacityAssignment>]
     class CapacityAssignmentConfiguration < Struct.new(
+      nil,
       :capacity_reservation_name,
       :capacity_assignments,
       keyword_init: true
@@ -372,6 +391,7 @@ module Aws::Athena
     #   <p>The time in UTC epoch millis when the capacity reservation was created.</p>
     #   @return [Time]
     class CapacityReservation < Struct.new(
+      nil,
       :name,
       :status,
       :target_dpus,
@@ -395,6 +415,7 @@ module Aws::Athena
     #   <p>Optional information about the column.</p>
     #   @return [String]
     class Column < Struct.new(
+      nil,
       :name,
       :type,
       :comment,
@@ -437,6 +458,7 @@ module Aws::Athena
     #   <p>Indicates whether values in the column are case-sensitive.</p>
     #   @return [Boolean]
     class ColumnInfo < Struct.new(
+      nil,
       :catalog_name,
       :schema_name,
       :table_name,
@@ -469,6 +491,7 @@ module Aws::Athena
     #   <p>The tags for the capacity reservation.</p>
     #   @return [Array<Types::Tag>]
     class CreateCapacityReservationInput < Struct.new(
+      nil,
       :target_dpus,
       :name,
       :tags,
@@ -478,6 +501,7 @@ module Aws::Athena
     end
 
     class CreateCapacityReservationOutput < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -618,6 +642,7 @@ module Aws::Athena
     #               (Lambda Function, IAM policies/roles).</p>
     #   @return [Array<Types::Tag>]
     class CreateDataCatalogInput < Struct.new(
+      nil,
       :name,
       :type,
       :description,
@@ -636,6 +661,7 @@ module Aws::Athena
     #            </note>
     #   @return [Types::DataCatalog]
     class CreateDataCatalogOutput < Struct.new(
+      nil,
       :data_catalog,
       keyword_init: true
     )
@@ -670,6 +696,7 @@ module Aws::Athena
     #   <p>The name of the workgroup in which the named query is being created.</p>
     #   @return [String]
     class CreateNamedQueryInput < Struct.new(
+      nil,
       :name,
       :description,
       :database,
@@ -685,6 +712,7 @@ module Aws::Athena
     #   <p>The unique ID of the query.</p>
     #   @return [String]
     class CreateNamedQueryOutput < Struct.new(
+      nil,
       :named_query_id,
       keyword_init: true
     )
@@ -709,6 +737,7 @@ module Aws::Athena
     #            </important>
     #   @return [String]
     class CreateNotebookInput < Struct.new(
+      nil,
       :work_group,
       :name,
       :client_request_token,
@@ -721,6 +750,7 @@ module Aws::Athena
     #   <p>A unique identifier for the notebook.</p>
     #   @return [String]
     class CreateNotebookOutput < Struct.new(
+      nil,
       :notebook_id,
       keyword_init: true
     )
@@ -740,6 +770,7 @@ module Aws::Athena
     #   <p>The description of the prepared statement.</p>
     #   @return [String]
     class CreatePreparedStatementInput < Struct.new(
+      nil,
       :statement_name,
       :work_group,
       :query_statement,
@@ -750,6 +781,7 @@ module Aws::Athena
     end
 
     class CreatePreparedStatementOutput < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -759,6 +791,7 @@ module Aws::Athena
     #   <p>The session ID.</p>
     #   @return [String]
     class CreatePresignedNotebookUrlRequest < Struct.new(
+      nil,
       :session_id,
       keyword_init: true
     )
@@ -776,6 +809,7 @@ module Aws::Athena
     #   <p>The UTC epoch time when the authentication token expires.</p>
     #   @return [Integer]
     class CreatePresignedNotebookUrlResponse < Struct.new(
+      nil,
       :notebook_url,
       :auth_token,
       :auth_token_expiration_time,
@@ -804,6 +838,7 @@ module Aws::Athena
     #   <p>A list of comma separated tags to add to the workgroup that is created.</p>
     #   @return [Array<Types::Tag>]
     class CreateWorkGroupInput < Struct.new(
+      nil,
       :name,
       :configuration,
       :description,
@@ -814,6 +849,7 @@ module Aws::Athena
     end
 
     class CreateWorkGroupOutput < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -826,6 +862,7 @@ module Aws::Athena
     #   <p>The customer managed KMS key that is used to encrypt the user's data stores in Athena.</p>
     #   @return [String]
     class CustomerContentEncryptionConfiguration < Struct.new(
+      nil,
       :kms_key,
       keyword_init: true
     )
@@ -1011,6 +1048,7 @@ module Aws::Athena
     #   <p>Text of the error that occurred during data catalog creation or deletion.</p>
     #   @return [String]
     class DataCatalog < Struct.new(
+      nil,
       :name,
       :description,
       :type,
@@ -1103,6 +1141,7 @@ module Aws::Athena
     #   <p>Text of the error that occurred during data catalog creation or deletion.</p>
     #   @return [String]
     class DataCatalogSummary < Struct.new(
+      nil,
       :catalog_name,
       :type,
       :status,
@@ -1124,6 +1163,7 @@ module Aws::Athena
     #   <p>A set of custom key/value pairs.</p>
     #   @return [Hash<String, String>]
     class Database < Struct.new(
+      nil,
       :name,
       :description,
       :parameters,
@@ -1137,6 +1177,7 @@ module Aws::Athena
     #   <p>The value of the datum.</p>
     #   @return [String]
     class Datum < Struct.new(
+      nil,
       :var_char_value,
       keyword_init: true
     )
@@ -1147,6 +1188,7 @@ module Aws::Athena
     #   <p>The name of the capacity reservation to delete.</p>
     #   @return [String]
     class DeleteCapacityReservationInput < Struct.new(
+      nil,
       :name,
       keyword_init: true
     )
@@ -1154,6 +1196,7 @@ module Aws::Athena
     end
 
     class DeleteCapacityReservationOutput < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1169,6 +1212,7 @@ module Aws::Athena
     #               function. </p>
     #   @return [Boolean]
     class DeleteDataCatalogInput < Struct.new(
+      nil,
       :name,
       :delete_catalog_only,
       keyword_init: true
@@ -1184,6 +1228,7 @@ module Aws::Athena
     #            </note>
     #   @return [Types::DataCatalog]
     class DeleteDataCatalogOutput < Struct.new(
+      nil,
       :data_catalog,
       keyword_init: true
     )
@@ -1194,6 +1239,7 @@ module Aws::Athena
     #   <p>The unique ID of the query to delete.</p>
     #   @return [String]
     class DeleteNamedQueryInput < Struct.new(
+      nil,
       :named_query_id,
       keyword_init: true
     )
@@ -1201,6 +1247,7 @@ module Aws::Athena
     end
 
     class DeleteNamedQueryOutput < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1210,6 +1257,7 @@ module Aws::Athena
     #   <p>The ID of the notebook to delete.</p>
     #   @return [String]
     class DeleteNotebookInput < Struct.new(
+      nil,
       :notebook_id,
       keyword_init: true
     )
@@ -1217,6 +1265,7 @@ module Aws::Athena
     end
 
     class DeleteNotebookOutput < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1229,6 +1278,7 @@ module Aws::Athena
     #   <p>The workgroup to which the statement to be deleted belongs.</p>
     #   @return [String]
     class DeletePreparedStatementInput < Struct.new(
+      nil,
       :statement_name,
       :work_group,
       keyword_init: true
@@ -1237,6 +1287,7 @@ module Aws::Athena
     end
 
     class DeletePreparedStatementOutput < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1250,6 +1301,7 @@ module Aws::Athena
     #               named queries, query executions, or notebooks.</p>
     #   @return [Boolean]
     class DeleteWorkGroupInput < Struct.new(
+      nil,
       :work_group,
       :recursive_delete_option,
       keyword_init: true
@@ -1258,6 +1310,7 @@ module Aws::Athena
     end
 
     class DeleteWorkGroupOutput < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1279,6 +1332,7 @@ module Aws::Athena
     #               ID.</p>
     #   @return [String]
     class EncryptionConfiguration < Struct.new(
+      nil,
       :encryption_option,
       :kms_key,
       keyword_init: true
@@ -1313,6 +1367,7 @@ module Aws::Athena
     #               table formats, and general Spark tuning.</p>
     #   @return [Hash<String, String>]
     class EngineConfiguration < Struct.new(
+      nil,
       :coordinator_dpu_size,
       :max_concurrent_dpus,
       :default_executor_dpu_size,
@@ -1338,6 +1393,7 @@ module Aws::Athena
     #                   <code>EffectiveEngineVersion</code> field is ignored.</p>
     #   @return [String]
     class EngineVersion < Struct.new(
+      nil,
       :selected_engine_version,
       :effective_engine_version,
       keyword_init: true
@@ -1381,6 +1437,7 @@ module Aws::Athena
     #               power.</p>
     #   @return [Integer]
     class ExecutorsSummary < Struct.new(
+      nil,
       :executor_id,
       :executor_type,
       :start_date_time,
@@ -1396,6 +1453,7 @@ module Aws::Athena
     #   <p>The ID of the notebook to export.</p>
     #   @return [String]
     class ExportNotebookInput < Struct.new(
+      nil,
       :notebook_id,
       keyword_init: true
     )
@@ -1410,6 +1468,7 @@ module Aws::Athena
     #   <p>The content of the exported notebook.</p>
     #   @return [String]
     class ExportNotebookOutput < Struct.new(
+      nil,
       :notebook_metadata,
       :payload,
       keyword_init: true
@@ -1422,6 +1481,7 @@ module Aws::Athena
     #   <p>The name of the notebook to search for.</p>
     #   @return [String]
     class FilterDefinition < Struct.new(
+      nil,
       :name,
       keyword_init: true
     )
@@ -1432,6 +1492,7 @@ module Aws::Athena
     #   <p>The calculation execution UUID.</p>
     #   @return [String]
     class GetCalculationExecutionCodeRequest < Struct.new(
+      nil,
       :calculation_execution_id,
       keyword_init: true
     )
@@ -1442,6 +1503,7 @@ module Aws::Athena
     #   <p>The unencrypted code that was executed for the calculation.</p>
     #   @return [String]
     class GetCalculationExecutionCodeResponse < Struct.new(
+      nil,
       :code_block,
       keyword_init: true
     )
@@ -1452,6 +1514,7 @@ module Aws::Athena
     #   <p>The calculation execution UUID.</p>
     #   @return [String]
     class GetCalculationExecutionRequest < Struct.new(
+      nil,
       :calculation_execution_id,
       keyword_init: true
     )
@@ -1482,6 +1545,7 @@ module Aws::Athena
     #               completed.</p>
     #   @return [Types::CalculationResult]
     class GetCalculationExecutionResponse < Struct.new(
+      nil,
       :calculation_execution_id,
       :session_id,
       :description,
@@ -1498,6 +1562,7 @@ module Aws::Athena
     #   <p>The calculation execution UUID.</p>
     #   @return [String]
     class GetCalculationExecutionStatusRequest < Struct.new(
+      nil,
       :calculation_execution_id,
       keyword_init: true
     )
@@ -1511,6 +1576,7 @@ module Aws::Athena
     #   <p>Contains information about the DPU execution time and progress.</p>
     #   @return [Types::CalculationStatistics]
     class GetCalculationExecutionStatusResponse < Struct.new(
+      nil,
       :status,
       :statistics,
       keyword_init: true
@@ -1523,6 +1589,7 @@ module Aws::Athena
     #               for.</p>
     #   @return [String]
     class GetCapacityAssignmentConfigurationInput < Struct.new(
+      nil,
       :capacity_reservation_name,
       keyword_init: true
     )
@@ -1534,6 +1601,7 @@ module Aws::Athena
     #               reservation.</p>
     #   @return [Types::CapacityAssignmentConfiguration]
     class GetCapacityAssignmentConfigurationOutput < Struct.new(
+      nil,
       :capacity_assignment_configuration,
       keyword_init: true
     )
@@ -1544,6 +1612,7 @@ module Aws::Athena
     #   <p>The name of the capacity reservation.</p>
     #   @return [String]
     class GetCapacityReservationInput < Struct.new(
+      nil,
       :name,
       keyword_init: true
     )
@@ -1554,6 +1623,7 @@ module Aws::Athena
     #   <p>The requested capacity reservation structure.</p>
     #   @return [Types::CapacityReservation]
     class GetCapacityReservationOutput < Struct.new(
+      nil,
       :capacity_reservation,
       keyword_init: true
     )
@@ -1567,6 +1637,7 @@ module Aws::Athena
     #   <p>The name of the workgroup. Required if making an IAM Identity Center request.</p>
     #   @return [String]
     class GetDataCatalogInput < Struct.new(
+      nil,
       :name,
       :work_group,
       keyword_init: true
@@ -1578,6 +1649,7 @@ module Aws::Athena
     #   <p>The data catalog returned.</p>
     #   @return [Types::DataCatalog]
     class GetDataCatalogOutput < Struct.new(
+      nil,
       :data_catalog,
       keyword_init: true
     )
@@ -1595,6 +1667,7 @@ module Aws::Athena
     #               requesting an IAM Identity Center enabled Glue Data Catalog.</p>
     #   @return [String]
     class GetDatabaseInput < Struct.new(
+      nil,
       :catalog_name,
       :database_name,
       :work_group,
@@ -1607,6 +1680,7 @@ module Aws::Athena
     #   <p>The database returned.</p>
     #   @return [Types::Database]
     class GetDatabaseOutput < Struct.new(
+      nil,
       :database,
       keyword_init: true
     )
@@ -1618,6 +1692,7 @@ module Aws::Athena
     #               IDs.</p>
     #   @return [String]
     class GetNamedQueryInput < Struct.new(
+      nil,
       :named_query_id,
       keyword_init: true
     )
@@ -1628,6 +1703,7 @@ module Aws::Athena
     #   <p>Information about the query.</p>
     #   @return [Types::NamedQuery]
     class GetNamedQueryOutput < Struct.new(
+      nil,
       :named_query,
       keyword_init: true
     )
@@ -1638,6 +1714,7 @@ module Aws::Athena
     #   <p>The ID of the notebook whose metadata is to be retrieved.</p>
     #   @return [String]
     class GetNotebookMetadataInput < Struct.new(
+      nil,
       :notebook_id,
       keyword_init: true
     )
@@ -1648,6 +1725,7 @@ module Aws::Athena
     #   <p>The metadata that is returned for the specified notebook ID.</p>
     #   @return [Types::NotebookMetadata]
     class GetNotebookMetadataOutput < Struct.new(
+      nil,
       :notebook_metadata,
       keyword_init: true
     )
@@ -1661,6 +1739,7 @@ module Aws::Athena
     #   <p>The workgroup to which the statement to be retrieved belongs.</p>
     #   @return [String]
     class GetPreparedStatementInput < Struct.new(
+      nil,
       :statement_name,
       :work_group,
       keyword_init: true
@@ -1672,6 +1751,7 @@ module Aws::Athena
     #   <p>The name of the prepared statement that was retrieved.</p>
     #   @return [Types::PreparedStatement]
     class GetPreparedStatementOutput < Struct.new(
+      nil,
       :prepared_statement,
       keyword_init: true
     )
@@ -1682,6 +1762,7 @@ module Aws::Athena
     #   <p>The unique ID of the query execution.</p>
     #   @return [String]
     class GetQueryExecutionInput < Struct.new(
+      nil,
       :query_execution_id,
       keyword_init: true
     )
@@ -1692,6 +1773,7 @@ module Aws::Athena
     #   <p>Information about the query execution.</p>
     #   @return [Types::QueryExecution]
     class GetQueryExecutionOutput < Struct.new(
+      nil,
       :query_execution,
       keyword_init: true
     )
@@ -1717,6 +1799,7 @@ module Aws::Athena
     #               use <code>DATA_MANIFEST</code> for other query types, the query will fail. </p>
     #   @return [String]
     class GetQueryResultsInput < Struct.new(
+      nil,
       :query_execution_id,
       :next_token,
       :max_results,
@@ -1739,6 +1822,7 @@ module Aws::Athena
     #               the <code>NextToken</code> from the response object of the previous page call.</p>
     #   @return [String]
     class GetQueryResultsOutput < Struct.new(
+      nil,
       :update_count,
       :result_set,
       :next_token,
@@ -1751,6 +1835,7 @@ module Aws::Athena
     #   <p>The unique ID of the query execution.</p>
     #   @return [String]
     class GetQueryRuntimeStatisticsInput < Struct.new(
+      nil,
       :query_execution_id,
       keyword_init: true
     )
@@ -1761,6 +1846,7 @@ module Aws::Athena
     #   <p>Runtime statistics about the query execution.</p>
     #   @return [Types::QueryRuntimeStatistics]
     class GetQueryRuntimeStatisticsOutput < Struct.new(
+      nil,
       :query_runtime_statistics,
       keyword_init: true
     )
@@ -1771,6 +1857,7 @@ module Aws::Athena
     #   <p>The session ID.</p>
     #   @return [String]
     class GetSessionRequest < Struct.new(
+      nil,
       :session_id,
       keyword_init: true
     )
@@ -1806,6 +1893,7 @@ module Aws::Athena
     #   <p>Contains the DPU execution time.</p>
     #   @return [Types::SessionStatistics]
     class GetSessionResponse < Struct.new(
+      nil,
       :session_id,
       :description,
       :work_group,
@@ -1824,6 +1912,7 @@ module Aws::Athena
     #   <p>The session ID.</p>
     #   @return [String]
     class GetSessionStatusRequest < Struct.new(
+      nil,
       :session_id,
       keyword_init: true
     )
@@ -1837,6 +1926,7 @@ module Aws::Athena
     #   <p>Contains information about the status of the session.</p>
     #   @return [Types::SessionStatus]
     class GetSessionStatusResponse < Struct.new(
+      nil,
       :session_id,
       :status,
       keyword_init: true
@@ -1859,6 +1949,7 @@ module Aws::Athena
     #               requesting an IAM Identity Center enabled Glue Data Catalog.</p>
     #   @return [String]
     class GetTableMetadataInput < Struct.new(
+      nil,
       :catalog_name,
       :database_name,
       :table_name,
@@ -1872,6 +1963,7 @@ module Aws::Athena
     #   <p>An object that contains table metadata.</p>
     #   @return [Types::TableMetadata]
     class GetTableMetadataOutput < Struct.new(
+      nil,
       :table_metadata,
       keyword_init: true
     )
@@ -1882,6 +1974,7 @@ module Aws::Athena
     #   <p>The name of the workgroup.</p>
     #   @return [String]
     class GetWorkGroupInput < Struct.new(
+      nil,
       :work_group,
       keyword_init: true
     )
@@ -1892,6 +1985,7 @@ module Aws::Athena
     #   <p>Information about the workgroup.</p>
     #   @return [Types::WorkGroup]
     class GetWorkGroupOutput < Struct.new(
+      nil,
       :work_group,
       keyword_init: true
     )
@@ -1906,6 +2000,7 @@ module Aws::Athena
     #   <p>The IAM Identity Center instance ARN that the workgroup associates to.</p>
     #   @return [String]
     class IdentityCenterConfiguration < Struct.new(
+      nil,
       :enable_identity_center,
       :identity_center_instance_arn,
       keyword_init: true
@@ -1942,6 +2037,7 @@ module Aws::Athena
     #            </important>
     #   @return [String]
     class ImportNotebookInput < Struct.new(
+      nil,
       :work_group,
       :name,
       :payload,
@@ -1957,6 +2053,7 @@ module Aws::Athena
     #   <p>The ID assigned to the imported notebook.</p>
     #   @return [String]
     class ImportNotebookOutput < Struct.new(
+      nil,
       :notebook_id,
       keyword_init: true
     )
@@ -1968,6 +2065,7 @@ module Aws::Athena
     # @!attribute message
     #   @return [String]
     class InternalServerException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -1983,6 +2081,7 @@ module Aws::Athena
     # @!attribute message
     #   @return [String]
     class InvalidRequestException < Struct.new(
+      nil,
       :athena_error_code,
       :message,
       keyword_init: true
@@ -1998,6 +2097,7 @@ module Aws::Athena
     #               pagination if a previous request was truncated.</p>
     #   @return [String]
     class ListApplicationDPUSizesInput < Struct.new(
+      nil,
       :max_results,
       :next_token,
       keyword_init: true
@@ -2014,6 +2114,7 @@ module Aws::Athena
     #               the <code>NextToken</code> from the response object of the previous page call.</p>
     #   @return [String]
     class ListApplicationDPUSizesOutput < Struct.new(
+      nil,
       :application_dpu_sizes,
       :next_token,
       keyword_init: true
@@ -2055,6 +2156,7 @@ module Aws::Athena
     #               the <code>NextToken</code> from the response object of the previous page call.</p>
     #   @return [String]
     class ListCalculationExecutionsRequest < Struct.new(
+      nil,
       :session_id,
       :state_filter,
       :max_results,
@@ -2073,6 +2175,7 @@ module Aws::Athena
     #   <p>A list of <a>CalculationSummary</a> objects.</p>
     #   @return [Array<Types::CalculationSummary>]
     class ListCalculationExecutionsResponse < Struct.new(
+      nil,
       :next_token,
       :calculations,
       keyword_init: true
@@ -2088,6 +2191,7 @@ module Aws::Athena
     #   <p>Specifies the maximum number of results to return.</p>
     #   @return [Integer]
     class ListCapacityReservationsInput < Struct.new(
+      nil,
       :next_token,
       :max_results,
       keyword_init: true
@@ -2104,6 +2208,7 @@ module Aws::Athena
     #   <p>The capacity reservations for the current account.</p>
     #   @return [Array<Types::CapacityReservation>]
     class ListCapacityReservationsOutput < Struct.new(
+      nil,
       :next_token,
       :capacity_reservations,
       keyword_init: true
@@ -2123,6 +2228,7 @@ module Aws::Athena
     #   <p>The name of the workgroup. Required if making an IAM Identity Center request.</p>
     #   @return [String]
     class ListDataCatalogsInput < Struct.new(
+      nil,
       :next_token,
       :max_results,
       :work_group,
@@ -2140,6 +2246,7 @@ module Aws::Athena
     #               the NextToken from the response object of the previous page call.</p>
     #   @return [String]
     class ListDataCatalogsOutput < Struct.new(
+      nil,
       :data_catalogs_summary,
       :next_token,
       keyword_init: true
@@ -2163,6 +2270,7 @@ module Aws::Athena
     #               requesting an IAM Identity Center enabled Glue Data Catalog.</p>
     #   @return [String]
     class ListDatabasesInput < Struct.new(
+      nil,
       :catalog_name,
       :next_token,
       :max_results,
@@ -2181,6 +2289,7 @@ module Aws::Athena
     #               the NextToken from the response object of the previous page call.</p>
     #   @return [String]
     class ListDatabasesOutput < Struct.new(
+      nil,
       :database_list,
       :next_token,
       keyword_init: true
@@ -2197,6 +2306,7 @@ module Aws::Athena
     #   <p>The maximum number of engine versions to return in this request.</p>
     #   @return [Integer]
     class ListEngineVersionsInput < Struct.new(
+      nil,
       :next_token,
       :max_results,
       keyword_init: true
@@ -2213,6 +2323,7 @@ module Aws::Athena
     #               the <code>NextToken</code> from the response object of the previous page call.</p>
     #   @return [String]
     class ListEngineVersionsOutput < Struct.new(
+      nil,
       :engine_versions,
       :next_token,
       keyword_init: true
@@ -2248,6 +2359,7 @@ module Aws::Athena
     #               the <code>NextToken</code> from the response object of the previous page call.</p>
     #   @return [String]
     class ListExecutorsRequest < Struct.new(
+      nil,
       :session_id,
       :executor_state_filter,
       :max_results,
@@ -2269,6 +2381,7 @@ module Aws::Athena
     #   <p>Contains summary information about the executor.</p>
     #   @return [Array<Types::ExecutorsSummary>]
     class ListExecutorsResponse < Struct.new(
+      nil,
       :session_id,
       :next_token,
       :executors_summary,
@@ -2291,6 +2404,7 @@ module Aws::Athena
     #               returned.</p>
     #   @return [String]
     class ListNamedQueriesInput < Struct.new(
+      nil,
       :next_token,
       :max_results,
       :work_group,
@@ -2308,6 +2422,7 @@ module Aws::Athena
     #               the <code>NextToken</code> from the response object of the previous page call.</p>
     #   @return [String]
     class ListNamedQueriesOutput < Struct.new(
+      nil,
       :named_query_ids,
       :next_token,
       keyword_init: true
@@ -2329,6 +2444,7 @@ module Aws::Athena
     #   <p>The name of the Spark enabled workgroup to retrieve notebook metadata for.</p>
     #   @return [String]
     class ListNotebookMetadataInput < Struct.new(
+      nil,
       :filters,
       :next_token,
       :max_results,
@@ -2347,6 +2463,7 @@ module Aws::Athena
     #   <p>The list of notebook metadata for the specified workgroup.</p>
     #   @return [Array<Types::NotebookMetadata>]
     class ListNotebookMetadataOutput < Struct.new(
+      nil,
       :next_token,
       :notebook_metadata_list,
       keyword_init: true
@@ -2366,6 +2483,7 @@ module Aws::Athena
     #               the <code>NextToken</code> from the response object of the previous page call.</p>
     #   @return [String]
     class ListNotebookSessionsRequest < Struct.new(
+      nil,
       :notebook_id,
       :max_results,
       :next_token,
@@ -2383,6 +2501,7 @@ module Aws::Athena
     #               the <code>NextToken</code> from the response object of the previous page call.</p>
     #   @return [String]
     class ListNotebookSessionsResponse < Struct.new(
+      nil,
       :notebook_sessions_list,
       :next_token,
       keyword_init: true
@@ -2402,6 +2521,7 @@ module Aws::Athena
     #   <p>The maximum number of results to return in this request.</p>
     #   @return [Integer]
     class ListPreparedStatementsInput < Struct.new(
+      nil,
       :work_group,
       :next_token,
       :max_results,
@@ -2419,6 +2539,7 @@ module Aws::Athena
     #               the <code>NextToken</code> from the response object of the previous page call.</p>
     #   @return [String]
     class ListPreparedStatementsOutput < Struct.new(
+      nil,
       :prepared_statements,
       :next_token,
       keyword_init: true
@@ -2440,6 +2561,7 @@ module Aws::Athena
     #               workgroup is returned.</p>
     #   @return [String]
     class ListQueryExecutionsInput < Struct.new(
+      nil,
       :next_token,
       :max_results,
       :work_group,
@@ -2455,6 +2577,7 @@ module Aws::Athena
     #   <p>A token to be used by the next request if this request is truncated.</p>
     #   @return [String]
     class ListQueryExecutionsOutput < Struct.new(
+      nil,
       :query_execution_ids,
       :next_token,
       keyword_init: true
@@ -2496,6 +2619,7 @@ module Aws::Athena
     #               the <code>NextToken</code> from the response object of the previous page call.</p>
     #   @return [String]
     class ListSessionsRequest < Struct.new(
+      nil,
       :work_group,
       :state_filter,
       :max_results,
@@ -2514,6 +2638,7 @@ module Aws::Athena
     #   <p>A list of sessions.</p>
     #   @return [Array<Types::SessionSummary>]
     class ListSessionsResponse < Struct.new(
+      nil,
       :next_token,
       :sessions,
       keyword_init: true
@@ -2544,6 +2669,7 @@ module Aws::Athena
     #               requesting an IAM Identity Center enabled Glue Data Catalog.</p>
     #   @return [String]
     class ListTableMetadataInput < Struct.new(
+      nil,
       :catalog_name,
       :database_name,
       :expression,
@@ -2564,6 +2690,7 @@ module Aws::Athena
     #               the NextToken from the response object of the previous page call.</p>
     #   @return [String]
     class ListTableMetadataOutput < Struct.new(
+      nil,
       :table_metadata_list,
       :next_token,
       keyword_init: true
@@ -2584,6 +2711,7 @@ module Aws::Athena
     #               resource.</p>
     #   @return [Integer]
     class ListTagsForResourceInput < Struct.new(
+      nil,
       :resource_arn,
       :next_token,
       :max_results,
@@ -2599,6 +2727,7 @@ module Aws::Athena
     #   <p>A token to be used by the next request if this request is truncated.</p>
     #   @return [String]
     class ListTagsForResourceOutput < Struct.new(
+      nil,
       :tags,
       :next_token,
       keyword_init: true
@@ -2615,6 +2744,7 @@ module Aws::Athena
     #   <p>The maximum number of workgroups to return in this request.</p>
     #   @return [Integer]
     class ListWorkGroupsInput < Struct.new(
+      nil,
       :next_token,
       :max_results,
       keyword_init: true
@@ -2632,6 +2762,7 @@ module Aws::Athena
     #               the <code>NextToken</code> from the response object of the previous page call.</p>
     #   @return [String]
     class ListWorkGroupsOutput < Struct.new(
+      nil,
       :work_groups,
       :next_token,
       keyword_init: true
@@ -2655,6 +2786,7 @@ module Aws::Athena
     #               information.</p>
     #   @return [Types::ManagedQueryResultsEncryptionConfiguration]
     class ManagedQueryResultsConfiguration < Struct.new(
+      nil,
       :enabled,
       :encryption_configuration,
       keyword_init: true
@@ -2683,6 +2815,7 @@ module Aws::Athena
     #               under <code>ResultConfiguration$OutputLocation</code>.</p>
     #   @return [Boolean]
     class ManagedQueryResultsConfigurationUpdates < Struct.new(
+      nil,
       :enabled,
       :encryption_configuration,
       :remove_encryption_configuration,
@@ -2698,6 +2831,7 @@ module Aws::Athena
     #   <p>The ARN of an KMS key for encrypting managed query results.</p>
     #   @return [String]
     class ManagedQueryResultsEncryptionConfiguration < Struct.new(
+      nil,
       :kms_key,
       keyword_init: true
     )
@@ -2713,6 +2847,7 @@ module Aws::Athena
     # @!attribute message
     #   @return [String]
     class MetadataException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -2740,6 +2875,7 @@ module Aws::Athena
     #   <p>The name of the workgroup that contains the named query.</p>
     #   @return [String]
     class NamedQuery < Struct.new(
+      nil,
       :name,
       :description,
       :database,
@@ -2772,6 +2908,7 @@ module Aws::Athena
     #   <p>The time when the notebook was last modified.</p>
     #   @return [Time]
     class NotebookMetadata < Struct.new(
+      nil,
       :notebook_id,
       :name,
       :work_group,
@@ -2791,6 +2928,7 @@ module Aws::Athena
     #   <p>The time when the notebook session was created.</p>
     #   @return [Time]
     class NotebookSessionSummary < Struct.new(
+      nil,
       :session_id,
       :creation_time,
       keyword_init: true
@@ -2815,6 +2953,7 @@ module Aws::Athena
     #   <p>The last modified time of the prepared statement.</p>
     #   @return [Time]
     class PreparedStatement < Struct.new(
+      nil,
       :statement_name,
       :query_statement,
       :work_group_name,
@@ -2833,6 +2972,7 @@ module Aws::Athena
     #   <p>The last modified time of the prepared statement.</p>
     #   @return [Time]
     class PreparedStatementSummary < Struct.new(
+      nil,
       :statement_name,
       :last_modified_time,
       keyword_init: true
@@ -2848,6 +2988,7 @@ module Aws::Athena
     #   <p>The list of assignments for the capacity assignment configuration.</p>
     #   @return [Array<Types::CapacityAssignment>]
     class PutCapacityAssignmentConfigurationInput < Struct.new(
+      nil,
       :capacity_reservation_name,
       :capacity_assignments,
       keyword_init: true
@@ -2856,6 +2997,7 @@ module Aws::Athena
     end
 
     class PutCapacityAssignmentConfigurationOutput < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -2920,6 +3062,7 @@ module Aws::Athena
     #               results.</p>
     #   @return [Types::QueryResultsS3AccessGrantsConfiguration]
     class QueryExecution < Struct.new(
+      nil,
       :query_execution_id,
       :query,
       :statement_type,
@@ -2948,6 +3091,7 @@ module Aws::Athena
     #   <p>The name of the data catalog used in the query execution.</p>
     #   @return [String]
     class QueryExecutionContext < Struct.new(
+      nil,
       :database,
       :catalog,
       keyword_init: true
@@ -2999,6 +3143,7 @@ module Aws::Athena
     #               query.</p>
     #   @return [Types::ResultReuseInformation]
     class QueryExecutionStatistics < Struct.new(
+      nil,
       :engine_execution_time_in_millis,
       :data_scanned_in_bytes,
       :data_manifest_location,
@@ -3042,6 +3187,7 @@ module Aws::Athena
     #   <p>Provides information about an Athena query error.</p>
     #   @return [Types::AthenaError]
     class QueryExecutionStatus < Struct.new(
+      nil,
       :state,
       :state_change_reason,
       :submission_date_time,
@@ -3067,6 +3213,7 @@ module Aws::Athena
     #                   <code>DIRECTORY_IDENTITY</code> is supported.</p>
     #   @return [String]
     class QueryResultsS3AccessGrantsConfiguration < Struct.new(
+      nil,
       :enable_s3_access_grants,
       :create_user_level_prefix,
       :authentication_type,
@@ -3090,6 +3237,7 @@ module Aws::Athena
     #               state. This information also includes substages and the query stage plan.</p>
     #   @return [Types::QueryStage]
     class QueryRuntimeStatistics < Struct.new(
+      nil,
       :timeline,
       :rows,
       :output_stage,
@@ -3113,6 +3261,7 @@ module Aws::Athena
     #   <p>The number of rows returned by the query.</p>
     #   @return [Integer]
     class QueryRuntimeStatisticsRows < Struct.new(
+      nil,
       :input_rows,
       :input_bytes,
       :output_bytes,
@@ -3150,6 +3299,7 @@ module Aws::Athena
     #   <p>The number of milliseconds that Athena took to run the query.</p>
     #   @return [Integer]
     class QueryRuntimeStatisticsTimeline < Struct.new(
+      nil,
       :query_queue_time_in_millis,
       :service_pre_processing_time_in_millis,
       :query_planning_time_in_millis,
@@ -3191,6 +3341,7 @@ module Aws::Athena
     #   <p>List of sub query stages that form this stage execution plan.</p>
     #   @return [Array<Types::QueryStage>]
     class QueryStage < Struct.new(
+      nil,
       :stage_id,
       :state,
       :output_bytes,
@@ -3221,6 +3372,7 @@ module Aws::Athena
     #   <p>Source plan node IDs.</p>
     #   @return [Array<String>]
     class QueryStagePlanNode < Struct.new(
+      nil,
       :name,
       :identifier,
       :children,
@@ -3237,6 +3389,7 @@ module Aws::Athena
     #   <p>The name of the Amazon resource.</p>
     #   @return [String]
     class ResourceNotFoundException < Struct.new(
+      nil,
       :message,
       :resource_name,
       keyword_init: true
@@ -3288,6 +3441,7 @@ module Aws::Athena
     #               specified in the workgroup. For more information, see <a>WorkGroupConfiguration$EnforceWorkGroupConfiguration</a> and <a href="https://docs.aws.amazon.com/athena/latest/ug/workgroups-settings-override.html">Workgroup Settings Override Client-Side Settings</a>.</p>
     #   @return [Types::AclConfiguration]
     class ResultConfiguration < Struct.new(
+      nil,
       :output_location,
       :encryption_configuration,
       :expected_bucket_owner,
@@ -3363,6 +3517,7 @@ module Aws::Athena
     #                   Client-Side Settings</a>.</p>
     #   @return [Boolean]
     class ResultConfigurationUpdates < Struct.new(
+      nil,
       :output_location,
       :remove_output_location,
       :encryption_configuration,
@@ -3386,6 +3541,7 @@ module Aws::Athena
     #   <p>Specifies, in minutes, the maximum age of a previous query result that Athena should consider for reuse. The default is 60.</p>
     #   @return [Integer]
     class ResultReuseByAgeConfiguration < Struct.new(
+      nil,
       :enabled,
       :max_age_in_minutes,
       keyword_init: true
@@ -3404,6 +3560,7 @@ module Aws::Athena
     #               age.</p>
     #   @return [Types::ResultReuseByAgeConfiguration]
     class ResultReuseConfiguration < Struct.new(
+      nil,
       :result_reuse_by_age_configuration,
       keyword_init: true
     )
@@ -3416,6 +3573,7 @@ module Aws::Athena
     #               new run of the query.</p>
     #   @return [Boolean]
     class ResultReuseInformation < Struct.new(
+      nil,
       :reused_previous_result,
       keyword_init: true
     )
@@ -3437,6 +3595,7 @@ module Aws::Athena
     #               results.</p>
     #   @return [Types::ResultSetMetadata]
     class ResultSet < Struct.new(
+      nil,
       :rows,
       :result_set_metadata,
       keyword_init: true
@@ -3450,6 +3609,7 @@ module Aws::Athena
     #   <p>Information about the columns returned in a query result metadata.</p>
     #   @return [Array<Types::ColumnInfo>]
     class ResultSetMetadata < Struct.new(
+      nil,
       :column_info,
       keyword_init: true
     )
@@ -3461,6 +3621,7 @@ module Aws::Athena
     #   <p>The data that populates a row in a query result table.</p>
     #   @return [Array<Types::Datum>]
     class Row < Struct.new(
+      nil,
       :data,
       keyword_init: true
     )
@@ -3471,6 +3632,7 @@ module Aws::Athena
     # @!attribute message
     #   @return [String]
     class SessionAlreadyExistsException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -3495,6 +3657,7 @@ module Aws::Athena
     #               key information.</p>
     #   @return [Types::EncryptionConfiguration]
     class SessionConfiguration < Struct.new(
+      nil,
       :execution_role,
       :working_directory,
       :idle_timeout_seconds,
@@ -3509,6 +3672,7 @@ module Aws::Athena
     #   <p>The data processing unit execution time for a session in milliseconds.</p>
     #   @return [Integer]
     class SessionStatistics < Struct.new(
+      nil,
       :dpu_execution_in_millis,
       keyword_init: true
     )
@@ -3556,6 +3720,7 @@ module Aws::Athena
     #               terminated).</p>
     #   @return [String]
     class SessionStatus < Struct.new(
+      nil,
       :start_date_time,
       :last_modified_date_time,
       :end_date_time,
@@ -3585,6 +3750,7 @@ module Aws::Athena
     #   <p>Contains information about the session status.</p>
     #   @return [Types::SessionStatus]
     class SessionSummary < Struct.new(
+      nil,
       :session_id,
       :description,
       :engine_version,
@@ -3624,6 +3790,7 @@ module Aws::Athena
     #            </important>
     #   @return [String]
     class StartCalculationExecutionRequest < Struct.new(
+      nil,
       :session_id,
       :description,
       :calculation_configuration,
@@ -3658,6 +3825,7 @@ module Aws::Athena
     #               <code>FAILED</code> - The calculation failed and is no longer running.</p>
     #   @return [String]
     class StartCalculationExecutionResponse < Struct.new(
+      nil,
       :calculation_execution_id,
       :state,
       keyword_init: true
@@ -3703,6 +3871,7 @@ module Aws::Athena
     #   <p>Specifies the query result reuse behavior for the query.</p>
     #   @return [Types::ResultReuseConfiguration]
     class StartQueryExecutionInput < Struct.new(
+      nil,
       :query_string,
       :client_request_token,
       :query_execution_context,
@@ -3719,6 +3888,7 @@ module Aws::Athena
     #   <p>The unique ID of the query that ran as a result of this request.</p>
     #   @return [String]
     class StartQueryExecutionOutput < Struct.new(
+      nil,
       :query_execution_id,
       keyword_init: true
     )
@@ -3758,6 +3928,7 @@ module Aws::Athena
     #            </important>
     #   @return [String]
     class StartSessionRequest < Struct.new(
+      nil,
       :description,
       :work_group,
       :engine_configuration,
@@ -3795,6 +3966,7 @@ module Aws::Athena
     #               running.</p>
     #   @return [String]
     class StartSessionResponse < Struct.new(
+      nil,
       :session_id,
       :state,
       keyword_init: true
@@ -3806,6 +3978,7 @@ module Aws::Athena
     #   <p>The calculation execution UUID.</p>
     #   @return [String]
     class StopCalculationExecutionRequest < Struct.new(
+      nil,
       :calculation_execution_id,
       keyword_init: true
     )
@@ -3833,6 +4006,7 @@ module Aws::Athena
     #               <code>FAILED</code> - The calculation failed and is no longer running.</p>
     #   @return [String]
     class StopCalculationExecutionResponse < Struct.new(
+      nil,
       :state,
       keyword_init: true
     )
@@ -3843,6 +4017,7 @@ module Aws::Athena
     #   <p>The unique ID of the query execution to stop.</p>
     #   @return [String]
     class StopQueryExecutionInput < Struct.new(
+      nil,
       :query_execution_id,
       keyword_init: true
     )
@@ -3850,6 +4025,7 @@ module Aws::Athena
     end
 
     class StopQueryExecutionOutput < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -3879,6 +4055,7 @@ module Aws::Athena
     #   <p>A set of custom key/value pairs for table properties.</p>
     #   @return [Hash<String, String>]
     class TableMetadata < Struct.new(
+      nil,
       :name,
       :create_time,
       :last_access_time,
@@ -3913,6 +4090,7 @@ module Aws::Athena
     #               . _ : / @. Tag values are case-sensitive. </p>
     #   @return [String]
     class Tag < Struct.new(
+      nil,
       :key,
       :value,
       keyword_init: true
@@ -3928,6 +4106,7 @@ module Aws::Athena
     #   <p>A collection of one or more tags, separated by commas, to be added to an Athena resource.</p>
     #   @return [Array<Types::Tag>]
     class TagResourceInput < Struct.new(
+      nil,
       :resource_arn,
       :tags,
       keyword_init: true
@@ -3936,6 +4115,7 @@ module Aws::Athena
     end
 
     class TagResourceOutput < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -3945,6 +4125,7 @@ module Aws::Athena
     #   <p>The session ID.</p>
     #   @return [String]
     class TerminateSessionRequest < Struct.new(
+      nil,
       :session_id,
       keyword_init: true
     )
@@ -3974,6 +4155,7 @@ module Aws::Athena
     #               running.</p>
     #   @return [String]
     class TerminateSessionResponse < Struct.new(
+      nil,
       :state,
       keyword_init: true
     )
@@ -3988,6 +4170,7 @@ module Aws::Athena
     #               limit.</p>
     #   @return [String]
     class TooManyRequestsException < Struct.new(
+      nil,
       :message,
       :reason,
       keyword_init: true
@@ -4008,6 +4191,7 @@ module Aws::Athena
     #               applicable.</p>
     #   @return [String]
     class UnprocessedNamedQueryId < Struct.new(
+      nil,
       :named_query_id,
       :error_code,
       :error_message,
@@ -4045,6 +4229,7 @@ module Aws::Athena
     #            </ul>
     #   @return [String]
     class UnprocessedPreparedStatementName < Struct.new(
+      nil,
       :statement_name,
       :error_code,
       :error_message,
@@ -4066,6 +4251,7 @@ module Aws::Athena
     #               applicable.</p>
     #   @return [String]
     class UnprocessedQueryExecutionId < Struct.new(
+      nil,
       :query_execution_id,
       :error_code,
       :error_message,
@@ -4082,6 +4268,7 @@ module Aws::Athena
     #               specified resource.</p>
     #   @return [Array<String>]
     class UntagResourceInput < Struct.new(
+      nil,
       :resource_arn,
       :tag_keys,
       keyword_init: true
@@ -4090,6 +4277,7 @@ module Aws::Athena
     end
 
     class UntagResourceOutput < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -4102,6 +4290,7 @@ module Aws::Athena
     #   <p>The name of the capacity reservation.</p>
     #   @return [String]
     class UpdateCapacityReservationInput < Struct.new(
+      nil,
       :target_dpus,
       :name,
       keyword_init: true
@@ -4110,6 +4299,7 @@ module Aws::Athena
     end
 
     class UpdateCapacityReservationOutput < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -4171,6 +4361,7 @@ module Aws::Athena
     #            </ul>
     #   @return [Hash<String, String>]
     class UpdateDataCatalogInput < Struct.new(
+      nil,
       :name,
       :type,
       :description,
@@ -4181,6 +4372,7 @@ module Aws::Athena
     end
 
     class UpdateDataCatalogOutput < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -4199,6 +4391,7 @@ module Aws::Athena
     #   <p>The contents of the query with all query statements.</p>
     #   @return [String]
     class UpdateNamedQueryInput < Struct.new(
+      nil,
       :named_query_id,
       :name,
       :description,
@@ -4209,6 +4402,7 @@ module Aws::Athena
     end
 
     class UpdateNamedQueryOutput < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -4238,6 +4432,7 @@ module Aws::Athena
     #            </important>
     #   @return [String]
     class UpdateNotebookInput < Struct.new(
+      nil,
       :notebook_id,
       :payload,
       :type,
@@ -4265,6 +4460,7 @@ module Aws::Athena
     #   <p>The name to update the notebook to.</p>
     #   @return [String]
     class UpdateNotebookMetadataInput < Struct.new(
+      nil,
       :notebook_id,
       :client_request_token,
       :name,
@@ -4274,12 +4470,14 @@ module Aws::Athena
     end
 
     class UpdateNotebookMetadataOutput < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
     end
 
     class UpdateNotebookOutput < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -4298,6 +4496,7 @@ module Aws::Athena
     #   <p>The description of the prepared statement.</p>
     #   @return [String]
     class UpdatePreparedStatementInput < Struct.new(
+      nil,
       :statement_name,
       :work_group,
       :query_statement,
@@ -4308,6 +4507,7 @@ module Aws::Athena
     end
 
     class UpdatePreparedStatementOutput < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -4326,6 +4526,7 @@ module Aws::Athena
     #   <p>The workgroup state that will be updated for the given workgroup.</p>
     #   @return [String]
     class UpdateWorkGroupInput < Struct.new(
+      nil,
       :work_group,
       :description,
       :configuration_updates,
@@ -4336,6 +4537,7 @@ module Aws::Athena
     end
 
     class UpdateWorkGroupOutput < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -4375,6 +4577,7 @@ module Aws::Athena
     #               workgroup.</p>
     #   @return [String]
     class WorkGroup < Struct.new(
+      nil,
       :name,
       :state,
       :configuration,
@@ -4461,6 +4664,7 @@ module Aws::Athena
     #               results.</p>
     #   @return [Types::QueryResultsS3AccessGrantsConfiguration]
     class WorkGroupConfiguration < Struct.new(
+      nil,
       :result_configuration,
       :managed_query_results_configuration,
       :enforce_work_group_configuration,
@@ -4553,6 +4757,7 @@ module Aws::Athena
     #               results.</p>
     #   @return [Types::QueryResultsS3AccessGrantsConfiguration]
     class WorkGroupConfigurationUpdates < Struct.new(
+      nil,
       :enforce_work_group_configuration,
       :result_configuration_updates,
       :managed_query_results_configuration_updates,
@@ -4596,6 +4801,7 @@ module Aws::Athena
     #               workgroup.</p>
     #   @return [String]
     class WorkGroupSummary < Struct.new(
+      nil,
       :name,
       :state,
       :description,

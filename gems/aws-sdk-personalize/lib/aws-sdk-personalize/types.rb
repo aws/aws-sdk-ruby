@@ -40,6 +40,7 @@ module Aws::Personalize
     #   <p>The date and time (in Unix time) that the algorithm was last updated.</p>
     #   @return [Time]
     class Algorithm < Struct.new(
+      nil,
       :name,
       :algorithm_arn,
       :algorithm_image,
@@ -63,6 +64,7 @@ module Aws::Personalize
     #   <p>The URI of the Docker container for the algorithm image.</p>
     #   @return [String]
     class AlgorithmImage < Struct.new(
+      nil,
       :name,
       :docker_uri,
       keyword_init: true
@@ -81,6 +83,7 @@ module Aws::Personalize
     #   <p>The list of candidate recipes.</p>
     #   @return [Array<String>]
     class AutoMLConfig < Struct.new(
+      nil,
       :metric_name,
       :recipe_list,
       keyword_init: true
@@ -95,6 +98,7 @@ module Aws::Personalize
     #   <p>The Amazon Resource Name (ARN) of the best recipe.</p>
     #   @return [String]
     class AutoMLResult < Struct.new(
+      nil,
       :best_recipe_arn,
       keyword_init: true
     )
@@ -110,6 +114,7 @@ module Aws::Personalize
     #            <p>For more information about auto training, see <a href="https://docs.aws.amazon.com/personalize/latest/dg/customizing-solution-config.html">Creating and configuring a solution</a>.</p>
     #   @return [String]
     class AutoTrainingConfig < Struct.new(
+      nil,
       :scheduling_expression,
       keyword_init: true
     )
@@ -180,6 +185,7 @@ module Aws::Personalize
     #   <p>The time at which the batch inference job was last updated.</p>
     #   @return [Time]
     class BatchInferenceJob < Struct.new(
+      nil,
       :job_name,
       :batch_inference_job_arn,
       :filter_arn,
@@ -208,6 +214,7 @@ module Aws::Personalize
     #         See <a href="https://docs.aws.amazon.com/personalize/latest/dg/native-recipe-new-item-USER_PERSONALIZATION.html">User-Personalization</a>.</p>
     #   @return [Hash<String, String>]
     class BatchInferenceJobConfig < Struct.new(
+      nil,
       :item_exploration_config,
       keyword_init: true
     )
@@ -220,6 +227,7 @@ module Aws::Personalize
     #         same region as the API endpoint you are calling.</p>
     #   @return [Types::S3DataConfig]
     class BatchInferenceJobInput < Struct.new(
+      nil,
       :s3_data_source,
       keyword_init: true
     )
@@ -231,6 +239,7 @@ module Aws::Personalize
     #   <p>Information on the Amazon S3 bucket in which the batch inference job's output is stored.</p>
     #   @return [Types::S3DataConfig]
     class BatchInferenceJobOutput < Struct.new(
+      nil,
       :s3_data_destination,
       keyword_init: true
     )
@@ -279,6 +288,7 @@ module Aws::Personalize
     #   <p>The job's mode.</p>
     #   @return [String]
     class BatchInferenceJobSummary < Struct.new(
+      nil,
       :batch_inference_job_arn,
       :job_name,
       :status,
@@ -344,6 +354,7 @@ module Aws::Personalize
     #   <p>The time at which the batch segment job last updated.</p>
     #   @return [Time]
     class BatchSegmentJob < Struct.new(
+      nil,
       :job_name,
       :batch_segment_job_arn,
       :filter_arn,
@@ -366,6 +377,7 @@ module Aws::Personalize
     #   <p>The configuration details of an Amazon S3 input or output bucket.</p>
     #   @return [Types::S3DataConfig]
     class BatchSegmentJobInput < Struct.new(
+      nil,
       :s3_data_source,
       keyword_init: true
     )
@@ -377,6 +389,7 @@ module Aws::Personalize
     #   <p>The configuration details of an Amazon S3 input or output bucket.</p>
     #   @return [Types::S3DataConfig]
     class BatchSegmentJobOutput < Struct.new(
+      nil,
       :s3_data_destination,
       keyword_init: true
     )
@@ -422,6 +435,7 @@ module Aws::Personalize
     #   <p>The Amazon Resource Name (ARN) of the solution version used by the batch segment job to generate batch segments.</p>
     #   @return [String]
     class BatchSegmentJobSummary < Struct.new(
+      nil,
       :batch_segment_job_arn,
       :job_name,
       :status,
@@ -479,6 +493,7 @@ module Aws::Personalize
     #         <a href="https://docs.aws.amazon.com/personalize/latest/dg/API_DescribeCampaign.html">DescribeCampaign</a> API.</p>
     #   @return [Types::CampaignUpdateSummary]
     class Campaign < Struct.new(
+      nil,
       :name,
       :campaign_arn,
       :solution_version_arn,
@@ -520,6 +535,7 @@ module Aws::Personalize
     #       </p>
     #   @return [Boolean]
     class CampaignConfig < Struct.new(
+      nil,
       :item_exploration_config,
       :enable_metadata_with_recommendations,
       :sync_with_latest_solution_version,
@@ -558,6 +574,7 @@ module Aws::Personalize
     #   <p>If a campaign fails, the reason behind the failure.</p>
     #   @return [String]
     class CampaignSummary < Struct.new(
+      nil,
       :name,
       :campaign_arn,
       :status,
@@ -603,6 +620,7 @@ module Aws::Personalize
     #   <p>The date and time (in Unix time) that the campaign update was last updated.</p>
     #   @return [Time]
     class CampaignUpdateSummary < Struct.new(
+      nil,
       :solution_version_arn,
       :min_provisioned_tps,
       :campaign_config,
@@ -623,6 +641,7 @@ module Aws::Personalize
     #   <p>A list of the categories for the hyperparameter.</p>
     #   @return [Array<String>]
     class CategoricalHyperParameterRange < Struct.new(
+      nil,
       :name,
       :values,
       keyword_init: true
@@ -641,6 +660,7 @@ module Aws::Personalize
     #   <p>The maximum allowable value for the hyperparameter.</p>
     #   @return [Float]
     class ContinuousHyperParameterRange < Struct.new(
+      nil,
       :name,
       :min_value,
       :max_value,
@@ -699,6 +719,7 @@ module Aws::Personalize
     #         dataset that contains each item's name.</p>
     #   @return [Types::ThemeGenerationConfig]
     class CreateBatchInferenceJobRequest < Struct.new(
+      nil,
       :job_name,
       :solution_version_arn,
       :filter_arn,
@@ -719,6 +740,7 @@ module Aws::Personalize
     #   <p>The ARN of the batch inference job.</p>
     #   @return [String]
     class CreateBatchInferenceJobResponse < Struct.new(
+      nil,
       :batch_inference_job_arn,
       keyword_init: true
     )
@@ -753,6 +775,7 @@ module Aws::Personalize
     #   <p>A list of <a href="https://docs.aws.amazon.com/personalize/latest/dg/tagging-resources.html">tags</a> to apply to the batch segment job.</p>
     #   @return [Array<Types::Tag>]
     class CreateBatchSegmentJobRequest < Struct.new(
+      nil,
       :job_name,
       :solution_version_arn,
       :filter_arn,
@@ -770,6 +793,7 @@ module Aws::Personalize
     #   <p>The ARN of the batch segment job.</p>
     #   @return [String]
     class CreateBatchSegmentJobResponse < Struct.new(
+      nil,
       :batch_segment_job_arn,
       keyword_init: true
     )
@@ -805,6 +829,7 @@ module Aws::Personalize
     #   <p>A list of <a href="https://docs.aws.amazon.com/personalize/latest/dg/tagging-resources.html">tags</a> to apply to the campaign.</p>
     #   @return [Array<Types::Tag>]
     class CreateCampaignRequest < Struct.new(
+      nil,
       :name,
       :solution_version_arn,
       :min_provisioned_tps,
@@ -819,6 +844,7 @@ module Aws::Personalize
     #   <p>The Amazon Resource Name (ARN) of the campaign.</p>
     #   @return [String]
     class CreateCampaignResponse < Struct.new(
+      nil,
       :campaign_arn,
       keyword_init: true
     )
@@ -843,6 +869,7 @@ module Aws::Personalize
     #   <p>A list of <a href="https://docs.aws.amazon.com/personalize/latest/dg/tagging-resources.html">tags</a> to apply to the data deletion job.</p>
     #   @return [Array<Types::Tag>]
     class CreateDataDeletionJobRequest < Struct.new(
+      nil,
       :job_name,
       :dataset_group_arn,
       :data_source,
@@ -857,6 +884,7 @@ module Aws::Personalize
     #   <p>The Amazon Resource Name (ARN) of the data deletion job.</p>
     #   @return [String]
     class CreateDataDeletionJobResponse < Struct.new(
+      nil,
       :data_deletion_job_arn,
       keyword_init: true
     )
@@ -889,6 +917,7 @@ module Aws::Personalize
     #   <p>A list of <a href="https://docs.aws.amazon.com/personalize/latest/dg/tagging-resources.html">tags</a> to apply to the dataset export job.</p>
     #   @return [Array<Types::Tag>]
     class CreateDatasetExportJobRequest < Struct.new(
+      nil,
       :job_name,
       :dataset_arn,
       :ingestion_mode,
@@ -904,6 +933,7 @@ module Aws::Personalize
     #   <p>The Amazon Resource Name (ARN) of the dataset export job.</p>
     #   @return [String]
     class CreateDatasetExportJobResponse < Struct.new(
+      nil,
       :dataset_export_job_arn,
       keyword_init: true
     )
@@ -933,6 +963,7 @@ module Aws::Personalize
     #   <p>A list of <a href="https://docs.aws.amazon.com/personalize/latest/dg/tagging-resources.html">tags</a> to apply to the dataset group.</p>
     #   @return [Array<Types::Tag>]
     class CreateDatasetGroupRequest < Struct.new(
+      nil,
       :name,
       :role_arn,
       :kms_key_arn,
@@ -950,6 +981,7 @@ module Aws::Personalize
     #   <p>The domain for the new Domain dataset group.</p>
     #   @return [String]
     class CreateDatasetGroupResponse < Struct.new(
+      nil,
       :dataset_group_arn,
       :domain,
       keyword_init: true
@@ -993,6 +1025,7 @@ module Aws::Personalize
     #   <p>If you created a metric attribution, specify whether to publish metrics for this import job to Amazon S3</p>
     #   @return [Boolean]
     class CreateDatasetImportJobRequest < Struct.new(
+      nil,
       :job_name,
       :dataset_arn,
       :data_source,
@@ -1009,6 +1042,7 @@ module Aws::Personalize
     #   <p>The ARN of the dataset import job.</p>
     #   @return [String]
     class CreateDatasetImportJobResponse < Struct.new(
+      nil,
       :dataset_import_job_arn,
       keyword_init: true
     )
@@ -1051,6 +1085,7 @@ module Aws::Personalize
     #   <p>A list of <a href="https://docs.aws.amazon.com/personalize/latest/dg/tagging-resources.html">tags</a> to apply to the dataset.</p>
     #   @return [Array<Types::Tag>]
     class CreateDatasetRequest < Struct.new(
+      nil,
       :name,
       :schema_arn,
       :dataset_group_arn,
@@ -1065,6 +1100,7 @@ module Aws::Personalize
     #   <p>The ARN of the dataset.</p>
     #   @return [String]
     class CreateDatasetResponse < Struct.new(
+      nil,
       :dataset_arn,
       keyword_init: true
     )
@@ -1081,6 +1117,7 @@ module Aws::Personalize
     #   <p>A list of <a href="https://docs.aws.amazon.com/personalize/latest/dg/tagging-resources.html">tags</a> to apply to the event tracker.</p>
     #   @return [Array<Types::Tag>]
     class CreateEventTrackerRequest < Struct.new(
+      nil,
       :name,
       :dataset_group_arn,
       :tags,
@@ -1097,6 +1134,7 @@ module Aws::Personalize
     #         <a href="https://docs.aws.amazon.com/personalize/latest/dg/API_UBS_PutEvents.html">PutEvents</a> API.</p>
     #   @return [String]
     class CreateEventTrackerResponse < Struct.new(
+      nil,
       :event_tracker_arn,
       :tracking_id,
       keyword_init: true
@@ -1119,6 +1157,7 @@ module Aws::Personalize
     #   <p>A list of <a href="https://docs.aws.amazon.com/personalize/latest/dg/tagging-resources.html">tags</a> to apply to the filter.</p>
     #   @return [Array<Types::Tag>]
     class CreateFilterRequest < Struct.new(
+      nil,
       :name,
       :dataset_group_arn,
       :filter_expression,
@@ -1132,6 +1171,7 @@ module Aws::Personalize
     #   <p>The ARN of the new filter.</p>
     #   @return [String]
     class CreateFilterResponse < Struct.new(
+      nil,
       :filter_arn,
       keyword_init: true
     )
@@ -1153,6 +1193,7 @@ module Aws::Personalize
     #   <p>The output configuration details for the metric attribution.</p>
     #   @return [Types::MetricAttributionOutput]
     class CreateMetricAttributionRequest < Struct.new(
+      nil,
       :name,
       :dataset_group_arn,
       :metrics,
@@ -1166,6 +1207,7 @@ module Aws::Personalize
     #   <p>The Amazon Resource Name (ARN) for the new metric attribution.</p>
     #   @return [String]
     class CreateMetricAttributionResponse < Struct.new(
+      nil,
       :metric_attribution_arn,
       keyword_init: true
     )
@@ -1190,6 +1232,7 @@ module Aws::Personalize
     #   <p>A list of <a href="https://docs.aws.amazon.com/personalize/latest/dg/tagging-resources.html">tags</a> to apply to the recommender.</p>
     #   @return [Array<Types::Tag>]
     class CreateRecommenderRequest < Struct.new(
+      nil,
       :name,
       :dataset_group_arn,
       :recipe_arn,
@@ -1204,6 +1247,7 @@ module Aws::Personalize
     #   <p>The Amazon Resource Name (ARN) of the recommender.</p>
     #   @return [String]
     class CreateRecommenderResponse < Struct.new(
+      nil,
       :recommender_arn,
       keyword_init: true
     )
@@ -1221,6 +1265,7 @@ module Aws::Personalize
     #       the domain you chose when you created the Domain dataset group.</p>
     #   @return [String]
     class CreateSchemaRequest < Struct.new(
+      nil,
       :name,
       :schema,
       :domain,
@@ -1233,6 +1278,7 @@ module Aws::Personalize
     #   <p>The Amazon Resource Name (ARN) of the created schema.</p>
     #   @return [String]
     class CreateSchemaResponse < Struct.new(
+      nil,
       :schema_arn,
       keyword_init: true
     )
@@ -1306,6 +1352,7 @@ module Aws::Personalize
     #   <p>A list of <a href="https://docs.aws.amazon.com/personalize/latest/dg/tagging-resources.html">tags</a> to apply to the solution.</p>
     #   @return [Array<Types::Tag>]
     class CreateSolutionRequest < Struct.new(
+      nil,
       :name,
       :perform_hpo,
       :perform_auto_ml,
@@ -1324,6 +1371,7 @@ module Aws::Personalize
     #   <p>The ARN of the solution.</p>
     #   @return [String]
     class CreateSolutionResponse < Struct.new(
+      nil,
       :solution_arn,
       keyword_init: true
     )
@@ -1362,6 +1410,7 @@ module Aws::Personalize
     #   <p>A list of <a href="https://docs.aws.amazon.com/personalize/latest/dg/tagging-resources.html">tags</a> to apply to the solution version.</p>
     #   @return [Array<Types::Tag>]
     class CreateSolutionVersionRequest < Struct.new(
+      nil,
       :name,
       :solution_arn,
       :training_mode,
@@ -1375,6 +1424,7 @@ module Aws::Personalize
     #   <p>The ARN of the new solution version.</p>
     #   @return [String]
     class CreateSolutionVersionResponse < Struct.new(
+      nil,
       :solution_version_arn,
       keyword_init: true
     )
@@ -1424,6 +1474,7 @@ module Aws::Personalize
     #   <p>If a data deletion job fails, provides the reason why.</p>
     #   @return [String]
     class DataDeletionJob < Struct.new(
+      nil,
       :job_name,
       :data_deletion_job_arn,
       :dataset_group_arn,
@@ -1470,6 +1521,7 @@ module Aws::Personalize
     #   <p>If a data deletion job fails, provides the reason why.</p>
     #   @return [String]
     class DataDeletionJobSummary < Struct.new(
+      nil,
       :data_deletion_job_arn,
       :dataset_group_arn,
       :job_name,
@@ -1501,6 +1553,7 @@ module Aws::Personalize
     #            </p>
     #   @return [String]
     class DataSource < Struct.new(
+      nil,
       :data_location,
       keyword_init: true
     )
@@ -1568,6 +1621,7 @@ module Aws::Personalize
     #         You specify the tracker's ID in the <code>PutActionInteractions</code> API operation. Amazon Personalize uses it to direct new data to the Action interactions dataset in your dataset group.</p>
     #   @return [String]
     class Dataset < Struct.new(
+      nil,
       :name,
       :dataset_arn,
       :dataset_group_arn,
@@ -1641,6 +1695,7 @@ module Aws::Personalize
     #   <p>If a dataset export job fails, provides the reason why.</p>
     #   @return [String]
     class DatasetExportJob < Struct.new(
+      nil,
       :job_name,
       :dataset_export_job_arn,
       :dataset_arn,
@@ -1661,6 +1716,7 @@ module Aws::Personalize
     #   <p>The configuration details of an Amazon S3 input or output bucket.</p>
     #   @return [Types::S3DataConfig]
     class DatasetExportJobOutput < Struct.new(
+      nil,
       :s3_data_destination,
       keyword_init: true
     )
@@ -1694,6 +1750,7 @@ module Aws::Personalize
     #   <p>If a dataset export job fails, the reason behind the failure.</p>
     #   @return [String]
     class DatasetExportJobSummary < Struct.new(
+      nil,
       :dataset_export_job_arn,
       :job_name,
       :status,
@@ -1754,6 +1811,7 @@ module Aws::Personalize
     #   <p>The domain of a Domain dataset group.</p>
     #   @return [String]
     class DatasetGroup < Struct.new(
+      nil,
       :name,
       :dataset_group_arn,
       :status,
@@ -1801,6 +1859,7 @@ module Aws::Personalize
     #   <p>The domain of a Domain dataset group.</p>
     #   @return [String]
     class DatasetGroupSummary < Struct.new(
+      nil,
       :name,
       :dataset_group_arn,
       :status,
@@ -1867,6 +1926,7 @@ module Aws::Personalize
     #   <p>Whether the job publishes metrics to Amazon S3 for a metric attribution.</p>
     #   @return [Boolean]
     class DatasetImportJob < Struct.new(
+      nil,
       :job_name,
       :dataset_import_job_arn,
       :dataset_arn,
@@ -1916,6 +1976,7 @@ module Aws::Personalize
     #       </p>
     #   @return [String]
     class DatasetImportJobSummary < Struct.new(
+      nil,
       :dataset_import_job_arn,
       :job_name,
       :status,
@@ -1949,6 +2010,7 @@ module Aws::Personalize
     #   <p>The domain of a schema that you created for a dataset in a Domain dataset group.</p>
     #   @return [String]
     class DatasetSchema < Struct.new(
+      nil,
       :name,
       :schema_arn,
       :schema,
@@ -1978,6 +2040,7 @@ module Aws::Personalize
     #   <p>The domain of a schema that you created for a dataset in a Domain dataset group.</p>
     #   @return [String]
     class DatasetSchemaSummary < Struct.new(
+      nil,
       :name,
       :schema_arn,
       :creation_date_time,
@@ -2032,6 +2095,7 @@ module Aws::Personalize
     #   <p>The date and time (in Unix time) that the dataset was last updated.</p>
     #   @return [Time]
     class DatasetSummary < Struct.new(
+      nil,
       :name,
       :dataset_arn,
       :dataset_type,
@@ -2060,6 +2124,7 @@ module Aws::Personalize
     #   <p>The last update date and time (in Unix time) of the dataset.</p>
     #   @return [Time]
     class DatasetUpdateSummary < Struct.new(
+      nil,
       :schema_arn,
       :status,
       :failure_reason,
@@ -2083,6 +2148,7 @@ module Aws::Personalize
     #   <p>Whether the hyperparameter is tunable.</p>
     #   @return [Boolean]
     class DefaultCategoricalHyperParameterRange < Struct.new(
+      nil,
       :name,
       :values,
       :is_tunable,
@@ -2112,6 +2178,7 @@ module Aws::Personalize
     #   <p>Whether the hyperparameter is tunable.</p>
     #   @return [Boolean]
     class DefaultContinuousHyperParameterRange < Struct.new(
+      nil,
       :name,
       :min_value,
       :max_value,
@@ -2140,6 +2207,7 @@ module Aws::Personalize
     #   <p>The categorical hyperparameters and their default ranges.</p>
     #   @return [Array<Types::DefaultCategoricalHyperParameterRange>]
     class DefaultHyperParameterRanges < Struct.new(
+      nil,
       :integer_hyper_parameter_ranges,
       :continuous_hyper_parameter_ranges,
       :categorical_hyper_parameter_ranges,
@@ -2164,6 +2232,7 @@ module Aws::Personalize
     #   <p>Indicates whether the hyperparameter is tunable.</p>
     #   @return [Boolean]
     class DefaultIntegerHyperParameterRange < Struct.new(
+      nil,
       :name,
       :min_value,
       :max_value,
@@ -2184,6 +2253,7 @@ module Aws::Personalize
     #   <p>The Amazon Resource Name (ARN) of the campaign to delete.</p>
     #   @return [String]
     class DeleteCampaignRequest < Struct.new(
+      nil,
       :campaign_arn,
       keyword_init: true
     )
@@ -2194,6 +2264,7 @@ module Aws::Personalize
     #   <p>The ARN of the dataset group to delete.</p>
     #   @return [String]
     class DeleteDatasetGroupRequest < Struct.new(
+      nil,
       :dataset_group_arn,
       keyword_init: true
     )
@@ -2204,6 +2275,7 @@ module Aws::Personalize
     #   <p>The Amazon Resource Name (ARN) of the dataset to delete.</p>
     #   @return [String]
     class DeleteDatasetRequest < Struct.new(
+      nil,
       :dataset_arn,
       keyword_init: true
     )
@@ -2214,6 +2286,7 @@ module Aws::Personalize
     #   <p>The Amazon Resource Name (ARN) of the event tracker to delete.</p>
     #   @return [String]
     class DeleteEventTrackerRequest < Struct.new(
+      nil,
       :event_tracker_arn,
       keyword_init: true
     )
@@ -2224,6 +2297,7 @@ module Aws::Personalize
     #   <p>The ARN of the filter to delete.</p>
     #   @return [String]
     class DeleteFilterRequest < Struct.new(
+      nil,
       :filter_arn,
       keyword_init: true
     )
@@ -2234,6 +2308,7 @@ module Aws::Personalize
     #   <p>The metric attribution's Amazon Resource Name (ARN).</p>
     #   @return [String]
     class DeleteMetricAttributionRequest < Struct.new(
+      nil,
       :metric_attribution_arn,
       keyword_init: true
     )
@@ -2244,6 +2319,7 @@ module Aws::Personalize
     #   <p>The Amazon Resource Name (ARN) of the recommender to delete.</p>
     #   @return [String]
     class DeleteRecommenderRequest < Struct.new(
+      nil,
       :recommender_arn,
       keyword_init: true
     )
@@ -2254,6 +2330,7 @@ module Aws::Personalize
     #   <p>The Amazon Resource Name (ARN) of the schema to delete.</p>
     #   @return [String]
     class DeleteSchemaRequest < Struct.new(
+      nil,
       :schema_arn,
       keyword_init: true
     )
@@ -2264,6 +2341,7 @@ module Aws::Personalize
     #   <p>The ARN of the solution to delete.</p>
     #   @return [String]
     class DeleteSolutionRequest < Struct.new(
+      nil,
       :solution_arn,
       keyword_init: true
     )
@@ -2274,6 +2352,7 @@ module Aws::Personalize
     #   <p>The Amazon Resource Name (ARN) of the algorithm to describe.</p>
     #   @return [String]
     class DescribeAlgorithmRequest < Struct.new(
+      nil,
       :algorithm_arn,
       keyword_init: true
     )
@@ -2284,6 +2363,7 @@ module Aws::Personalize
     #   <p>A listing of the properties of the algorithm.</p>
     #   @return [Types::Algorithm]
     class DescribeAlgorithmResponse < Struct.new(
+      nil,
       :algorithm,
       keyword_init: true
     )
@@ -2294,6 +2374,7 @@ module Aws::Personalize
     #   <p>The ARN of the batch inference job to describe.</p>
     #   @return [String]
     class DescribeBatchInferenceJobRequest < Struct.new(
+      nil,
       :batch_inference_job_arn,
       keyword_init: true
     )
@@ -2304,6 +2385,7 @@ module Aws::Personalize
     #   <p>Information on the specified batch inference job.</p>
     #   @return [Types::BatchInferenceJob]
     class DescribeBatchInferenceJobResponse < Struct.new(
+      nil,
       :batch_inference_job,
       keyword_init: true
     )
@@ -2314,6 +2396,7 @@ module Aws::Personalize
     #   <p>The ARN of the batch segment job to describe.</p>
     #   @return [String]
     class DescribeBatchSegmentJobRequest < Struct.new(
+      nil,
       :batch_segment_job_arn,
       keyword_init: true
     )
@@ -2324,6 +2407,7 @@ module Aws::Personalize
     #   <p>Information on the specified batch segment job.</p>
     #   @return [Types::BatchSegmentJob]
     class DescribeBatchSegmentJobResponse < Struct.new(
+      nil,
       :batch_segment_job,
       keyword_init: true
     )
@@ -2334,6 +2418,7 @@ module Aws::Personalize
     #   <p>The Amazon Resource Name (ARN) of the campaign.</p>
     #   @return [String]
     class DescribeCampaignRequest < Struct.new(
+      nil,
       :campaign_arn,
       keyword_init: true
     )
@@ -2344,6 +2429,7 @@ module Aws::Personalize
     #   <p>The properties of the campaign.</p>
     #   @return [Types::Campaign]
     class DescribeCampaignResponse < Struct.new(
+      nil,
       :campaign,
       keyword_init: true
     )
@@ -2354,6 +2440,7 @@ module Aws::Personalize
     #   <p>The Amazon Resource Name (ARN) of the data deletion job.</p>
     #   @return [String]
     class DescribeDataDeletionJobRequest < Struct.new(
+      nil,
       :data_deletion_job_arn,
       keyword_init: true
     )
@@ -2379,6 +2466,7 @@ module Aws::Personalize
     #            </ul>
     #   @return [Types::DataDeletionJob]
     class DescribeDataDeletionJobResponse < Struct.new(
+      nil,
       :data_deletion_job,
       keyword_init: true
     )
@@ -2390,6 +2478,7 @@ module Aws::Personalize
     #         describe.</p>
     #   @return [String]
     class DescribeDatasetExportJobRequest < Struct.new(
+      nil,
       :dataset_export_job_arn,
       keyword_init: true
     )
@@ -2415,6 +2504,7 @@ module Aws::Personalize
     #            </ul>
     #   @return [Types::DatasetExportJob]
     class DescribeDatasetExportJobResponse < Struct.new(
+      nil,
       :dataset_export_job,
       keyword_init: true
     )
@@ -2426,6 +2516,7 @@ module Aws::Personalize
     #         describe.</p>
     #   @return [String]
     class DescribeDatasetGroupRequest < Struct.new(
+      nil,
       :dataset_group_arn,
       keyword_init: true
     )
@@ -2436,6 +2527,7 @@ module Aws::Personalize
     #   <p>A listing of the dataset group's properties.</p>
     #   @return [Types::DatasetGroup]
     class DescribeDatasetGroupResponse < Struct.new(
+      nil,
       :dataset_group,
       keyword_init: true
     )
@@ -2447,6 +2539,7 @@ module Aws::Personalize
     #         describe.</p>
     #   @return [String]
     class DescribeDatasetImportJobRequest < Struct.new(
+      nil,
       :dataset_import_job_arn,
       keyword_init: true
     )
@@ -2472,6 +2565,7 @@ module Aws::Personalize
     #            </ul>
     #   @return [Types::DatasetImportJob]
     class DescribeDatasetImportJobResponse < Struct.new(
+      nil,
       :dataset_import_job,
       keyword_init: true
     )
@@ -2482,6 +2576,7 @@ module Aws::Personalize
     #   <p>The Amazon Resource Name (ARN) of the dataset to describe.</p>
     #   @return [String]
     class DescribeDatasetRequest < Struct.new(
+      nil,
       :dataset_arn,
       keyword_init: true
     )
@@ -2492,6 +2587,7 @@ module Aws::Personalize
     #   <p>A listing of the dataset's properties.</p>
     #   @return [Types::Dataset]
     class DescribeDatasetResponse < Struct.new(
+      nil,
       :dataset,
       keyword_init: true
     )
@@ -2502,6 +2598,7 @@ module Aws::Personalize
     #   <p>The Amazon Resource Name (ARN) of the event tracker to describe.</p>
     #   @return [String]
     class DescribeEventTrackerRequest < Struct.new(
+      nil,
       :event_tracker_arn,
       keyword_init: true
     )
@@ -2512,6 +2609,7 @@ module Aws::Personalize
     #   <p>An object that describes the event tracker.</p>
     #   @return [Types::EventTracker]
     class DescribeEventTrackerResponse < Struct.new(
+      nil,
       :event_tracker,
       keyword_init: true
     )
@@ -2522,6 +2620,7 @@ module Aws::Personalize
     #   <p>The Amazon Resource Name (ARN) of the feature transformation to describe.</p>
     #   @return [String]
     class DescribeFeatureTransformationRequest < Struct.new(
+      nil,
       :feature_transformation_arn,
       keyword_init: true
     )
@@ -2532,6 +2631,7 @@ module Aws::Personalize
     #   <p>A listing of the FeatureTransformation properties.</p>
     #   @return [Types::FeatureTransformation]
     class DescribeFeatureTransformationResponse < Struct.new(
+      nil,
       :feature_transformation,
       keyword_init: true
     )
@@ -2542,6 +2642,7 @@ module Aws::Personalize
     #   <p>The ARN of the filter to describe.</p>
     #   @return [String]
     class DescribeFilterRequest < Struct.new(
+      nil,
       :filter_arn,
       keyword_init: true
     )
@@ -2552,6 +2653,7 @@ module Aws::Personalize
     #   <p>The filter's details.</p>
     #   @return [Types::Filter]
     class DescribeFilterResponse < Struct.new(
+      nil,
       :filter,
       keyword_init: true
     )
@@ -2562,6 +2664,7 @@ module Aws::Personalize
     #   <p>The metric attribution's Amazon Resource Name (ARN).</p>
     #   @return [String]
     class DescribeMetricAttributionRequest < Struct.new(
+      nil,
       :metric_attribution_arn,
       keyword_init: true
     )
@@ -2572,6 +2675,7 @@ module Aws::Personalize
     #   <p>The details of the metric attribution.</p>
     #   @return [Types::MetricAttribution]
     class DescribeMetricAttributionResponse < Struct.new(
+      nil,
       :metric_attribution,
       keyword_init: true
     )
@@ -2582,6 +2686,7 @@ module Aws::Personalize
     #   <p>The Amazon Resource Name (ARN) of the recipe to describe.</p>
     #   @return [String]
     class DescribeRecipeRequest < Struct.new(
+      nil,
       :recipe_arn,
       keyword_init: true
     )
@@ -2592,6 +2697,7 @@ module Aws::Personalize
     #   <p>An object that describes the recipe.</p>
     #   @return [Types::Recipe]
     class DescribeRecipeResponse < Struct.new(
+      nil,
       :recipe,
       keyword_init: true
     )
@@ -2602,6 +2708,7 @@ module Aws::Personalize
     #   <p>The Amazon Resource Name (ARN) of the recommender to describe.</p>
     #   @return [String]
     class DescribeRecommenderRequest < Struct.new(
+      nil,
       :recommender_arn,
       keyword_init: true
     )
@@ -2612,6 +2719,7 @@ module Aws::Personalize
     #   <p>The properties of the recommender.</p>
     #   @return [Types::Recommender]
     class DescribeRecommenderResponse < Struct.new(
+      nil,
       :recommender,
       keyword_init: true
     )
@@ -2622,6 +2730,7 @@ module Aws::Personalize
     #   <p>The Amazon Resource Name (ARN) of the schema to retrieve.</p>
     #   @return [String]
     class DescribeSchemaRequest < Struct.new(
+      nil,
       :schema_arn,
       keyword_init: true
     )
@@ -2632,6 +2741,7 @@ module Aws::Personalize
     #   <p>The requested schema.</p>
     #   @return [Types::DatasetSchema]
     class DescribeSchemaResponse < Struct.new(
+      nil,
       :schema,
       keyword_init: true
     )
@@ -2642,6 +2752,7 @@ module Aws::Personalize
     #   <p>The Amazon Resource Name (ARN) of the solution to describe.</p>
     #   @return [String]
     class DescribeSolutionRequest < Struct.new(
+      nil,
       :solution_arn,
       keyword_init: true
     )
@@ -2652,6 +2763,7 @@ module Aws::Personalize
     #   <p>An object that describes the solution.</p>
     #   @return [Types::Solution]
     class DescribeSolutionResponse < Struct.new(
+      nil,
       :solution,
       keyword_init: true
     )
@@ -2662,6 +2774,7 @@ module Aws::Personalize
     #   <p>The Amazon Resource Name (ARN) of the solution version.</p>
     #   @return [String]
     class DescribeSolutionVersionRequest < Struct.new(
+      nil,
       :solution_version_arn,
       keyword_init: true
     )
@@ -2672,6 +2785,7 @@ module Aws::Personalize
     #   <p>The solution version.</p>
     #   @return [Types::SolutionVersion]
     class DescribeSolutionVersionResponse < Struct.new(
+      nil,
       :solution_version,
       keyword_init: true
     )
@@ -2689,6 +2803,7 @@ module Aws::Personalize
     #   <p>The weight of the event type. A higher weight means higher importance of the event type for the created solution.</p>
     #   @return [Float]
     class EventParameters < Struct.new(
+      nil,
       :event_type,
       :event_value_threshold,
       :weight,
@@ -2733,6 +2848,7 @@ module Aws::Personalize
     #   <p>The date and time (in Unix time) that the event tracker was last updated.</p>
     #   @return [Time]
     class EventTracker < Struct.new(
+      nil,
       :name,
       :event_tracker_arn,
       :account_id,
@@ -2773,6 +2889,7 @@ module Aws::Personalize
     #   <p>The date and time (in Unix time) that the event tracker was last updated.</p>
     #   @return [Time]
     class EventTrackerSummary < Struct.new(
+      nil,
       :name,
       :event_tracker_arn,
       :status,
@@ -2788,6 +2905,7 @@ module Aws::Personalize
     #   <p>A list of event parameters, which includes event types and their event value thresholds and weights.</p>
     #   @return [Array<Types::EventParameters>]
     class EventsConfig < Struct.new(
+      nil,
       :event_parameters_list,
       keyword_init: true
     )
@@ -2821,6 +2939,7 @@ module Aws::Personalize
     #            </ul>
     #   @return [String]
     class FeatureTransformation < Struct.new(
+      nil,
       :name,
       :feature_transformation_arn,
       :default_parameters,
@@ -2837,6 +2956,7 @@ module Aws::Personalize
     #   <p>The name of the Items dataset column that stores the name of each item in the dataset.</p>
     #   @return [String]
     class FieldsForThemeGeneration < Struct.new(
+      nil,
       :item_name,
       keyword_init: true
     )
@@ -2872,6 +2992,7 @@ module Aws::Personalize
     #   <p>The status of the filter.</p>
     #   @return [String]
     class Filter < Struct.new(
+      nil,
       :name,
       :filter_arn,
       :creation_date_time,
@@ -2908,6 +3029,7 @@ module Aws::Personalize
     #   <p>The status of the filter.</p>
     #   @return [String]
     class FilterSummary < Struct.new(
+      nil,
       :name,
       :filter_arn,
       :creation_date_time,
@@ -2924,6 +3046,7 @@ module Aws::Personalize
     #   <p>The Amazon Resource Name (ARN) of the solution version for which to get metrics.</p>
     #   @return [String]
     class GetSolutionMetricsRequest < Struct.new(
+      nil,
       :solution_version_arn,
       keyword_init: true
     )
@@ -2940,6 +3063,7 @@ module Aws::Personalize
     #         </a>.</p>
     #   @return [Hash<String, Float>]
     class GetSolutionMetricsResponse < Struct.new(
+      nil,
       :solution_version_arn,
       :metrics,
       keyword_init: true
@@ -2962,6 +3086,7 @@ module Aws::Personalize
     #   <p>The hyperparameters and their allowable ranges.</p>
     #   @return [Types::HyperParameterRanges]
     class HPOConfig < Struct.new(
+      nil,
       :hpo_objective,
       :hpo_resource_config,
       :algorithm_hyper_parameter_ranges,
@@ -2985,6 +3110,7 @@ module Aws::Personalize
     #   <p>A regular expression for finding the metric in the training job logs.</p>
     #   @return [String]
     class HPOObjective < Struct.new(
+      nil,
       :type,
       :metric_name,
       :metric_regex,
@@ -3011,6 +3137,7 @@ module Aws::Personalize
     #         <code>10</code>.</p>
     #   @return [String]
     class HPOResourceConfig < Struct.new(
+      nil,
       :max_number_of_training_jobs,
       :max_parallel_training_jobs,
       keyword_init: true
@@ -3030,6 +3157,7 @@ module Aws::Personalize
     #   <p>The categorical hyperparameters and their ranges.</p>
     #   @return [Array<Types::CategoricalHyperParameterRange>]
     class HyperParameterRanges < Struct.new(
+      nil,
       :integer_hyper_parameter_ranges,
       :continuous_hyper_parameter_ranges,
       :categorical_hyper_parameter_ranges,
@@ -3049,6 +3177,7 @@ module Aws::Personalize
     #   <p>The maximum allowable value for the hyperparameter.</p>
     #   @return [Integer]
     class IntegerHyperParameterRange < Struct.new(
+      nil,
       :name,
       :min_value,
       :max_value,
@@ -3067,6 +3196,7 @@ module Aws::Personalize
     # @!attribute message
     #   @return [String]
     class InvalidInputException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -3077,6 +3207,7 @@ module Aws::Personalize
     # @!attribute message
     #   @return [String]
     class InvalidNextTokenException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -3087,6 +3218,7 @@ module Aws::Personalize
     # @!attribute message
     #   @return [String]
     class LimitExceededException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -3105,6 +3237,7 @@ module Aws::Personalize
     #         value is 100.</p>
     #   @return [Integer]
     class ListBatchInferenceJobsRequest < Struct.new(
+      nil,
       :solution_version_arn,
       :next_token,
       :max_results,
@@ -3121,6 +3254,7 @@ module Aws::Personalize
     #         there are no more results to return.</p>
     #   @return [String]
     class ListBatchInferenceJobsResponse < Struct.new(
+      nil,
       :batch_inference_jobs,
       :next_token,
       keyword_init: true
@@ -3139,6 +3273,7 @@ module Aws::Personalize
     #         value is 100.</p>
     #   @return [Integer]
     class ListBatchSegmentJobsRequest < Struct.new(
+      nil,
       :solution_version_arn,
       :next_token,
       :max_results,
@@ -3155,6 +3290,7 @@ module Aws::Personalize
     #         there are no more results to return.</p>
     #   @return [String]
     class ListBatchSegmentJobsResponse < Struct.new(
+      nil,
       :batch_segment_jobs,
       :next_token,
       keyword_init: true
@@ -3174,6 +3310,7 @@ module Aws::Personalize
     #   <p>The maximum number of campaigns to return.</p>
     #   @return [Integer]
     class ListCampaignsRequest < Struct.new(
+      nil,
       :solution_arn,
       :next_token,
       :max_results,
@@ -3189,6 +3326,7 @@ module Aws::Personalize
     #   <p>A token for getting the next set of campaigns (if they exist).</p>
     #   @return [String]
     class ListCampaignsResponse < Struct.new(
+      nil,
       :campaigns,
       :next_token,
       keyword_init: true
@@ -3207,6 +3345,7 @@ module Aws::Personalize
     #   <p>The maximum number of data deletion jobs to return.</p>
     #   @return [Integer]
     class ListDataDeletionJobsRequest < Struct.new(
+      nil,
       :dataset_group_arn,
       :next_token,
       :max_results,
@@ -3223,6 +3362,7 @@ module Aws::Personalize
     #         exist).</p>
     #   @return [String]
     class ListDataDeletionJobsResponse < Struct.new(
+      nil,
       :data_deletion_jobs,
       :next_token,
       keyword_init: true
@@ -3243,6 +3383,7 @@ module Aws::Personalize
     #   <p>The maximum number of dataset export jobs to return.</p>
     #   @return [Integer]
     class ListDatasetExportJobsRequest < Struct.new(
+      nil,
       :dataset_arn,
       :next_token,
       :max_results,
@@ -3259,6 +3400,7 @@ module Aws::Personalize
     #         exist).</p>
     #   @return [String]
     class ListDatasetExportJobsResponse < Struct.new(
+      nil,
       :dataset_export_jobs,
       :next_token,
       keyword_init: true
@@ -3275,6 +3417,7 @@ module Aws::Personalize
     #   <p>The maximum number of dataset groups to return.</p>
     #   @return [Integer]
     class ListDatasetGroupsRequest < Struct.new(
+      nil,
       :next_token,
       :max_results,
       keyword_init: true
@@ -3290,6 +3433,7 @@ module Aws::Personalize
     #         exist).</p>
     #   @return [String]
     class ListDatasetGroupsResponse < Struct.new(
+      nil,
       :dataset_groups,
       :next_token,
       keyword_init: true
@@ -3310,6 +3454,7 @@ module Aws::Personalize
     #   <p>The maximum number of dataset import jobs to return.</p>
     #   @return [Integer]
     class ListDatasetImportJobsRequest < Struct.new(
+      nil,
       :dataset_arn,
       :next_token,
       :max_results,
@@ -3326,6 +3471,7 @@ module Aws::Personalize
     #         exist).</p>
     #   @return [String]
     class ListDatasetImportJobsResponse < Struct.new(
+      nil,
       :dataset_import_jobs,
       :next_token,
       keyword_init: true
@@ -3346,6 +3492,7 @@ module Aws::Personalize
     #   <p>The maximum number of datasets to return.</p>
     #   @return [Integer]
     class ListDatasetsRequest < Struct.new(
+      nil,
       :dataset_group_arn,
       :next_token,
       :max_results,
@@ -3362,6 +3509,7 @@ module Aws::Personalize
     #   <p>A token for getting the next set of datasets (if they exist).</p>
     #   @return [String]
     class ListDatasetsResponse < Struct.new(
+      nil,
       :datasets,
       :next_token,
       keyword_init: true
@@ -3380,6 +3528,7 @@ module Aws::Personalize
     #   <p>The maximum number of event trackers to return.</p>
     #   @return [Integer]
     class ListEventTrackersRequest < Struct.new(
+      nil,
       :dataset_group_arn,
       :next_token,
       :max_results,
@@ -3395,6 +3544,7 @@ module Aws::Personalize
     #   <p>A token for getting the next set of event trackers (if they exist).</p>
     #   @return [String]
     class ListEventTrackersResponse < Struct.new(
+      nil,
       :event_trackers,
       :next_token,
       keyword_init: true
@@ -3413,6 +3563,7 @@ module Aws::Personalize
     #   <p>The maximum number of filters to return.</p>
     #   @return [Integer]
     class ListFiltersRequest < Struct.new(
+      nil,
       :dataset_group_arn,
       :next_token,
       :max_results,
@@ -3428,6 +3579,7 @@ module Aws::Personalize
     #   <p>A token for getting the next set of filters (if they exist).</p>
     #   @return [String]
     class ListFiltersResponse < Struct.new(
+      nil,
       :filters,
       :next_token,
       keyword_init: true
@@ -3445,6 +3597,7 @@ module Aws::Personalize
     #   <p>The maximum number of metrics to return in one page of results.</p>
     #   @return [Integer]
     class ListMetricAttributionMetricsRequest < Struct.new(
+      nil,
       :metric_attribution_arn,
       :next_token,
       :max_results,
@@ -3460,6 +3613,7 @@ module Aws::Personalize
     #   <p>Specify the pagination token from a previous <code>ListMetricAttributionMetricsResponse</code> request to retrieve the next page of results.</p>
     #   @return [String]
     class ListMetricAttributionMetricsResponse < Struct.new(
+      nil,
       :metrics,
       :next_token,
       keyword_init: true
@@ -3477,6 +3631,7 @@ module Aws::Personalize
     #   <p>The maximum number of metric attributions to return in one page of results.</p>
     #   @return [Integer]
     class ListMetricAttributionsRequest < Struct.new(
+      nil,
       :dataset_group_arn,
       :next_token,
       :max_results,
@@ -3492,6 +3647,7 @@ module Aws::Personalize
     #   <p>Specify the pagination token from a previous request to retrieve the next page of results.</p>
     #   @return [String]
     class ListMetricAttributionsResponse < Struct.new(
+      nil,
       :metric_attributions,
       :next_token,
       keyword_init: true
@@ -3516,6 +3672,7 @@ module Aws::Personalize
     #       </p>
     #   @return [String]
     class ListRecipesRequest < Struct.new(
+      nil,
       :recipe_provider,
       :next_token,
       :max_results,
@@ -3532,6 +3689,7 @@ module Aws::Personalize
     #   <p>A token for getting the next set of recipes.</p>
     #   @return [String]
     class ListRecipesResponse < Struct.new(
+      nil,
       :recipes,
       :next_token,
       keyword_init: true
@@ -3551,6 +3709,7 @@ module Aws::Personalize
     #   <p>The maximum number of recommenders to return.</p>
     #   @return [Integer]
     class ListRecommendersRequest < Struct.new(
+      nil,
       :dataset_group_arn,
       :next_token,
       :max_results,
@@ -3566,6 +3725,7 @@ module Aws::Personalize
     #   <p>A token for getting the next set of recommenders (if they exist).</p>
     #   @return [String]
     class ListRecommendersResponse < Struct.new(
+      nil,
       :recommenders,
       :next_token,
       keyword_init: true
@@ -3581,6 +3741,7 @@ module Aws::Personalize
     #   <p>The maximum number of schemas to return.</p>
     #   @return [Integer]
     class ListSchemasRequest < Struct.new(
+      nil,
       :next_token,
       :max_results,
       keyword_init: true
@@ -3595,6 +3756,7 @@ module Aws::Personalize
     #   <p>A token used to get the next set of schemas (if they exist).</p>
     #   @return [String]
     class ListSchemasResponse < Struct.new(
+      nil,
       :schemas,
       :next_token,
       keyword_init: true
@@ -3613,6 +3775,7 @@ module Aws::Personalize
     #   <p>The maximum number of solution versions to return.</p>
     #   @return [Integer]
     class ListSolutionVersionsRequest < Struct.new(
+      nil,
       :solution_arn,
       :next_token,
       :max_results,
@@ -3628,6 +3791,7 @@ module Aws::Personalize
     #   <p>A token for getting the next set of solution versions (if they exist).</p>
     #   @return [String]
     class ListSolutionVersionsResponse < Struct.new(
+      nil,
       :solution_versions,
       :next_token,
       keyword_init: true
@@ -3646,6 +3810,7 @@ module Aws::Personalize
     #   <p>The maximum number of solutions to return.</p>
     #   @return [Integer]
     class ListSolutionsRequest < Struct.new(
+      nil,
       :dataset_group_arn,
       :next_token,
       :max_results,
@@ -3661,6 +3826,7 @@ module Aws::Personalize
     #   <p>A token for getting the next set of solutions (if they exist).</p>
     #   @return [String]
     class ListSolutionsResponse < Struct.new(
+      nil,
       :solutions,
       :next_token,
       keyword_init: true
@@ -3672,6 +3838,7 @@ module Aws::Personalize
     #   <p>The resource's Amazon Resource Name (ARN).</p>
     #   @return [String]
     class ListTagsForResourceRequest < Struct.new(
+      nil,
       :resource_arn,
       keyword_init: true
     )
@@ -3682,6 +3849,7 @@ module Aws::Personalize
     #   <p>The resource's tags.</p>
     #   @return [Array<Types::Tag>]
     class ListTagsForResourceResponse < Struct.new(
+      nil,
       :tags,
       keyword_init: true
     )
@@ -3700,6 +3868,7 @@ module Aws::Personalize
     #         dataset type (either Interactions or Items) and column to sum as a parameter. For example SUM(Items.PRICE).</p>
     #   @return [String]
     class MetricAttribute < Struct.new(
+      nil,
       :event_type,
       :metric_name,
       :expression,
@@ -3736,6 +3905,7 @@ module Aws::Personalize
     #   <p>The metric attribution's failure reason.</p>
     #   @return [String]
     class MetricAttribution < Struct.new(
+      nil,
       :name,
       :metric_attribution_arn,
       :dataset_group_arn,
@@ -3757,6 +3927,7 @@ module Aws::Personalize
     #   <p>The Amazon Resource Name (ARN) of the IAM service role that has permissions to add data to your output Amazon S3 bucket and add metrics to Amazon CloudWatch. For more information, see <a href="https://docs.aws.amazon.com/personalize/latest/dg/measuring-recommendation-impact.html">Measuring impact of recommendations</a>.</p>
     #   @return [String]
     class MetricAttributionOutput < Struct.new(
+      nil,
       :s3_data_destination,
       :role_arn,
       keyword_init: true
@@ -3784,6 +3955,7 @@ module Aws::Personalize
     #   <p>The metric attribution's failure reason.</p>
     #   @return [String]
     class MetricAttributionSummary < Struct.new(
+      nil,
       :name,
       :metric_attribution_arn,
       :status,
@@ -3804,6 +3976,7 @@ module Aws::Personalize
     #   <p>Specifies how Amazon Personalize balances the importance of your optimization objective versus relevance.</p>
     #   @return [String]
     class OptimizationObjective < Struct.new(
+      nil,
       :item_attribute,
       :objective_sensitivity,
       keyword_init: true
@@ -3854,6 +4027,7 @@ module Aws::Personalize
     #   <p>The date and time (in Unix format) that the recipe was last updated.</p>
     #   @return [Time]
     class Recipe < Struct.new(
+      nil,
       :name,
       :recipe_arn,
       :algorithm_arn,
@@ -3889,6 +4063,7 @@ module Aws::Personalize
     #   <p>The domain of the recipe (if the recipe is a Domain dataset group use case).</p>
     #   @return [String]
     class RecipeSummary < Struct.new(
+      nil,
       :name,
       :recipe_arn,
       :status,
@@ -3952,6 +4127,7 @@ module Aws::Personalize
     #           Evaluating a recommender</a>.</p>
     #   @return [Hash<String, Float>]
     class Recommender < Struct.new(
+      nil,
       :recommender_arn,
       :dataset_group_arn,
       :name,
@@ -3995,6 +4171,7 @@ module Aws::Personalize
     #       </p>
     #   @return [Boolean]
     class RecommenderConfig < Struct.new(
+      nil,
       :item_exploration_config,
       :min_recommendation_requests_per_second,
       :training_data_config,
@@ -4041,6 +4218,7 @@ module Aws::Personalize
     #   <p>The date and time (in Unix format) that the recommender was last updated.</p>
     #   @return [Time]
     class RecommenderSummary < Struct.new(
+      nil,
       :name,
       :recommender_arn,
       :dataset_group_arn,
@@ -4073,6 +4251,7 @@ module Aws::Personalize
     #   <p>If a recommender update fails, the reason behind the failure.</p>
     #   @return [String]
     class RecommenderUpdateSummary < Struct.new(
+      nil,
       :recommender_config,
       :creation_date_time,
       :last_updated_date_time,
@@ -4087,6 +4266,7 @@ module Aws::Personalize
     # @!attribute message
     #   @return [String]
     class ResourceAlreadyExistsException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -4097,6 +4277,7 @@ module Aws::Personalize
     # @!attribute message
     #   @return [String]
     class ResourceInUseException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -4107,6 +4288,7 @@ module Aws::Personalize
     # @!attribute message
     #   @return [String]
     class ResourceNotFoundException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -4122,6 +4304,7 @@ module Aws::Personalize
     #         encrypt or decrypt the input and output files.</p>
     #   @return [String]
     class S3DataConfig < Struct.new(
+      nil,
       :path,
       :kms_key_arn,
       keyword_init: true
@@ -4208,6 +4391,7 @@ module Aws::Personalize
     #   <p>Provides a summary of the latest updates to the solution.</p>
     #   @return [Types::SolutionUpdateSummary]
     class Solution < Struct.new(
+      nil,
       :name,
       :solution_arn,
       :perform_hpo,
@@ -4268,6 +4452,7 @@ module Aws::Personalize
     #   <p>Specifies the automatic training configuration to use.</p>
     #   @return [Types::AutoTrainingConfig]
     class SolutionConfig < Struct.new(
+      nil,
       :event_value_threshold,
       :hpo_config,
       :algorithm_hyper_parameters,
@@ -4312,6 +4497,7 @@ module Aws::Personalize
     #   <p>The Amazon Resource Name (ARN) of the recipe used by the solution.</p>
     #   @return [String]
     class SolutionSummary < Struct.new(
+      nil,
       :name,
       :solution_arn,
       :status,
@@ -4331,6 +4517,7 @@ module Aws::Personalize
     #   <p>Describes the configuration of an event, which includes a list of event parameters. You can specify up to 10 event parameters. Events are used in solution creation.</p>
     #   @return [Types::EventsConfig]
     class SolutionUpdateConfig < Struct.new(
+      nil,
       :auto_training_config,
       :events_config,
       keyword_init: true
@@ -4360,6 +4547,7 @@ module Aws::Personalize
     #   <p>If a solution update fails, the reason behind the failure.</p>
     #   @return [String]
     class SolutionUpdateSummary < Struct.new(
+      nil,
       :solution_update_config,
       :status,
       :perform_auto_training,
@@ -4459,6 +4647,7 @@ module Aws::Personalize
     #   <p>Whether the solution version was created automatically or manually.</p>
     #   @return [String]
     class SolutionVersion < Struct.new(
+      nil,
       :name,
       :solution_version_arn,
       :solution_arn,
@@ -4522,6 +4711,7 @@ module Aws::Personalize
     #   <p>If a solution version fails, the reason behind the failure.</p>
     #   @return [String]
     class SolutionVersionSummary < Struct.new(
+      nil,
       :solution_version_arn,
       :status,
       :training_mode,
@@ -4538,6 +4728,7 @@ module Aws::Personalize
     #   <p>The Amazon Resource Name (ARN) of the recommender to start.</p>
     #   @return [String]
     class StartRecommenderRequest < Struct.new(
+      nil,
       :recommender_arn,
       keyword_init: true
     )
@@ -4548,6 +4739,7 @@ module Aws::Personalize
     #   <p>The Amazon Resource Name (ARN) of the recommender you started.</p>
     #   @return [String]
     class StartRecommenderResponse < Struct.new(
+      nil,
       :recommender_arn,
       keyword_init: true
     )
@@ -4558,6 +4750,7 @@ module Aws::Personalize
     #   <p>The Amazon Resource Name (ARN) of the recommender to stop.</p>
     #   @return [String]
     class StopRecommenderRequest < Struct.new(
+      nil,
       :recommender_arn,
       keyword_init: true
     )
@@ -4568,6 +4761,7 @@ module Aws::Personalize
     #   <p>The Amazon Resource Name (ARN) of the recommender you stopped.</p>
     #   @return [String]
     class StopRecommenderResponse < Struct.new(
+      nil,
       :recommender_arn,
       keyword_init: true
     )
@@ -4578,6 +4772,7 @@ module Aws::Personalize
     #   <p>The Amazon Resource Name (ARN) of the solution version you want to stop creating.</p>
     #   @return [String]
     class StopSolutionVersionCreationRequest < Struct.new(
+      nil,
       :solution_version_arn,
       keyword_init: true
     )
@@ -4594,6 +4789,7 @@ module Aws::Personalize
     #   <p>The optional part of a key-value pair that makes up a tag. A value acts as a descriptor within a tag category (key).</p>
     #   @return [String]
     class Tag < Struct.new(
+      nil,
       :tag_key,
       :tag_value,
       keyword_init: true
@@ -4608,6 +4804,7 @@ module Aws::Personalize
     #   <p>Tags to apply to the resource. For more information see <a href="https://docs.aws.amazon.com/personalize/latest/dg/tagging-resources.html">Tagging Amazon Personalize resources</a>.</p>
     #   @return [Array<Types::Tag>]
     class TagResourceRequest < Struct.new(
+      nil,
       :resource_arn,
       :tags,
       keyword_init: true
@@ -4616,6 +4813,7 @@ module Aws::Personalize
     end
 
     class TagResourceResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -4626,6 +4824,7 @@ module Aws::Personalize
     #   <p>Fields used to generate descriptive themes for a batch inference job.</p>
     #   @return [Types::FieldsForThemeGeneration]
     class ThemeGenerationConfig < Struct.new(
+      nil,
       :fields_for_theme_generation,
       keyword_init: true
     )
@@ -4636,6 +4835,7 @@ module Aws::Personalize
     # @!attribute message
     #   @return [String]
     class TooManyTagKeysException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -4646,6 +4846,7 @@ module Aws::Personalize
     # @!attribute message
     #   @return [String]
     class TooManyTagsException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -4662,6 +4863,7 @@ module Aws::Personalize
     #       </p>
     #   @return [Hash<String, Array<String>>]
     class TrainingDataConfig < Struct.new(
+      nil,
       :excluded_dataset_columns,
       keyword_init: true
     )
@@ -4674,6 +4876,7 @@ module Aws::Personalize
     #   <p>A list of the hyperparameter values of the best performing model.</p>
     #   @return [Hash<String, String>]
     class TunedHPOParams < Struct.new(
+      nil,
       :algorithm_hyper_parameters,
       keyword_init: true
     )
@@ -4687,6 +4890,7 @@ module Aws::Personalize
     #   <p>The keys of the tags to be removed.</p>
     #   @return [Array<String>]
     class UntagResourceRequest < Struct.new(
+      nil,
       :resource_arn,
       :tag_keys,
       keyword_init: true
@@ -4695,6 +4899,7 @@ module Aws::Personalize
     end
 
     class UntagResourceResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -4727,6 +4932,7 @@ module Aws::Personalize
     #   <p>The configuration details of a campaign.</p>
     #   @return [Types::CampaignConfig]
     class UpdateCampaignRequest < Struct.new(
+      nil,
       :campaign_arn,
       :solution_version_arn,
       :min_provisioned_tps,
@@ -4740,6 +4946,7 @@ module Aws::Personalize
     #   <p>The same campaign ARN as given in the request.</p>
     #   @return [String]
     class UpdateCampaignResponse < Struct.new(
+      nil,
       :campaign_arn,
       keyword_init: true
     )
@@ -4753,6 +4960,7 @@ module Aws::Personalize
     #   <p>The Amazon Resource Name (ARN) of the new schema you want use.</p>
     #   @return [String]
     class UpdateDatasetRequest < Struct.new(
+      nil,
       :dataset_arn,
       :schema_arn,
       keyword_init: true
@@ -4764,6 +4972,7 @@ module Aws::Personalize
     #   <p>The Amazon Resource Name (ARN) of the dataset you updated.</p>
     #   @return [String]
     class UpdateDatasetResponse < Struct.new(
+      nil,
       :dataset_arn,
       keyword_init: true
     )
@@ -4783,6 +4992,7 @@ module Aws::Personalize
     #   <p>The Amazon Resource Name (ARN) for the metric attribution to update.</p>
     #   @return [String]
     class UpdateMetricAttributionRequest < Struct.new(
+      nil,
       :add_metrics,
       :remove_metrics,
       :metrics_output_config,
@@ -4796,6 +5006,7 @@ module Aws::Personalize
     #   <p>The Amazon Resource Name (ARN) for the metric attribution that you updated.</p>
     #   @return [String]
     class UpdateMetricAttributionResponse < Struct.new(
+      nil,
       :metric_attribution_arn,
       keyword_init: true
     )
@@ -4809,6 +5020,7 @@ module Aws::Personalize
     #   <p>The configuration details of the recommender.</p>
     #   @return [Types::RecommenderConfig]
     class UpdateRecommenderRequest < Struct.new(
+      nil,
       :recommender_arn,
       :recommender_config,
       keyword_init: true
@@ -4820,6 +5032,7 @@ module Aws::Personalize
     #   <p>The same recommender Amazon Resource Name (ARN) as given in the request.</p>
     #   @return [String]
     class UpdateRecommenderResponse < Struct.new(
+      nil,
       :recommender_arn,
       keyword_init: true
     )
@@ -4849,6 +5062,7 @@ module Aws::Personalize
     #   <p>The new configuration details of the solution.</p>
     #   @return [Types::SolutionUpdateConfig]
     class UpdateSolutionRequest < Struct.new(
+      nil,
       :solution_arn,
       :perform_auto_training,
       :solution_update_config,
@@ -4861,6 +5075,7 @@ module Aws::Personalize
     #   <p>The same solution Amazon Resource Name (ARN) as given in the request.</p>
     #   @return [String]
     class UpdateSolutionResponse < Struct.new(
+      nil,
       :solution_arn,
       keyword_init: true
     )

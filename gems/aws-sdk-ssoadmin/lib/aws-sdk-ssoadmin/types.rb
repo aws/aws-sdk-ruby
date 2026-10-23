@@ -14,6 +14,7 @@ module Aws::SSOAdmin
     #   <p>The value used for mapping a specified attribute to an identity source.</p>
     #   @return [Types::AccessControlAttributeValue]
     class AccessControlAttribute < Struct.new(
+      nil,
       :key,
       :value,
       keyword_init: true
@@ -26,6 +27,7 @@ module Aws::SSOAdmin
     #   <p>The identity source to use when mapping a specified attribute to IAM Identity Center.</p>
     #   @return [Array<String>]
     class AccessControlAttributeValue < Struct.new(
+      nil,
       :source,
       keyword_init: true
     )
@@ -39,6 +41,7 @@ module Aws::SSOAdmin
     #   <p>The reason for the access denied exception.</p>
     #   @return [String]
     class AccessDeniedException < Struct.new(
+      nil,
       :message,
       :reason,
       keyword_init: true
@@ -60,6 +63,7 @@ module Aws::SSOAdmin
     #   <p>An identifier for an object in IAM Identity Center, such as a user or group. PrincipalIds are GUIDs (For example, f81d4fae-7dec-11d0-a765-00a0c91e6bf6). For more information about PrincipalIds in IAM Identity Center, see the <a href="/singlesignon/latest/IdentityStoreAPIReference/welcome.html">IAM Identity Center Identity Store API Reference</a>.</p>
     #   @return [String]
     class AccountAssignment < Struct.new(
+      nil,
       :account_id,
       :permission_set_arn,
       :principal_type,
@@ -83,6 +87,7 @@ module Aws::SSOAdmin
     #   <p>The type of the principal.</p>
     #   @return [String]
     class AccountAssignmentForPrincipal < Struct.new(
+      nil,
       :account_id,
       :permission_set_arn,
       :principal_id,
@@ -121,6 +126,7 @@ module Aws::SSOAdmin
     #   <p>The date that the permission set was created.</p>
     #   @return [Time]
     class AccountAssignmentOperationStatus < Struct.new(
+      nil,
       :status,
       :request_id,
       :failure_reason,
@@ -146,6 +152,7 @@ module Aws::SSOAdmin
     #   <p>The date that the permission set was created.</p>
     #   @return [Time]
     class AccountAssignmentOperationStatusMetadata < Struct.new(
+      nil,
       :status,
       :request_id,
       :created_date,
@@ -183,6 +190,7 @@ module Aws::SSOAdmin
     #   <p>The date and time when the application was originally created.</p>
     #   @return [Time]
     class Application < Struct.new(
+      nil,
       :application_arn,
       :application_provider_arn,
       :name,
@@ -208,6 +216,7 @@ module Aws::SSOAdmin
     #   <p>The type of the principal assigned to the application.</p>
     #   @return [String]
     class ApplicationAssignment < Struct.new(
+      nil,
       :application_arn,
       :principal_id,
       :principal_type,
@@ -227,6 +236,7 @@ module Aws::SSOAdmin
     #   <p>The type of the principal assigned to the application.</p>
     #   @return [String]
     class ApplicationAssignmentForPrincipal < Struct.new(
+      nil,
       :application_arn,
       :principal_id,
       :principal_type,
@@ -249,6 +259,7 @@ module Aws::SSOAdmin
     #   <p>A structure that describes the application provider's resource server.</p>
     #   @return [Types::ResourceServerConfig]
     class ApplicationProvider < Struct.new(
+      nil,
       :application_provider_arn,
       :federation_protocol,
       :display_data,
@@ -268,6 +279,7 @@ module Aws::SSOAdmin
     #   <p>Specifies the name and path of a customer managed policy. You must have an IAM policy that matches the name and path in each Amazon Web Services account where you want to deploy your permission set.</p>
     #   @return [Types::CustomerManagedPolicyReference]
     class AttachCustomerManagedPolicyReferenceToPermissionSetRequest < Struct.new(
+      nil,
       :instance_arn,
       :permission_set_arn,
       :customer_managed_policy_reference,
@@ -277,6 +289,7 @@ module Aws::SSOAdmin
     end
 
     class AttachCustomerManagedPolicyReferenceToPermissionSetResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -292,6 +305,7 @@ module Aws::SSOAdmin
     #   <p>The Amazon Web Services managed policy ARN to be attached to a permission set.</p>
     #   @return [String]
     class AttachManagedPolicyToPermissionSetRequest < Struct.new(
+      nil,
       :instance_arn,
       :permission_set_arn,
       :managed_policy_arn,
@@ -301,6 +315,7 @@ module Aws::SSOAdmin
     end
 
     class AttachManagedPolicyToPermissionSetResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -314,6 +329,7 @@ module Aws::SSOAdmin
     #   <p>The ARN of the Amazon Web Services managed policy. For more information about ARNs, see <a href="/general/latest/gr/aws-arns-and-namespaces.html">Amazon Resource Names (ARNs) and Amazon Web Services Service Namespaces</a> in the <i>Amazon Web Services General Reference</i>.</p>
     #   @return [String]
     class AttachedManagedPolicy < Struct.new(
+      nil,
       :name,
       :arn,
       keyword_init: true
@@ -344,6 +360,7 @@ module Aws::SSOAdmin
     #   <p>A structure that describes an authentication method. The contents of this structure is determined by the <code>AuthenticationMethodType</code>.</p>
     #   @return [Types::AuthenticationMethod]
     class AuthenticationMethodItem < Struct.new(
+      nil,
       :authentication_method_type,
       :authentication_method,
       keyword_init: true
@@ -356,6 +373,7 @@ module Aws::SSOAdmin
     #   <p>A list of URIs that are valid locations to redirect a user's browser after the user is authorized.</p> <note> <p>RedirectUris is required when the grant type is <code>authorization_code</code>.</p> </note>
     #   @return [Array<String>]
     class AuthorizationCodeGrant < Struct.new(
+      nil,
       :redirect_uris,
       keyword_init: true
     )
@@ -370,6 +388,7 @@ module Aws::SSOAdmin
     #   <p>An array list of authorized audiences, or applications, that can consume the tokens generated by the associated trusted token issuer.</p>
     #   @return [Array<String>]
     class AuthorizedTokenIssuer < Struct.new(
+      nil,
       :trusted_token_issuer_arn,
       :authorized_audiences,
       keyword_init: true
@@ -381,6 +400,7 @@ module Aws::SSOAdmin
     # @!attribute message
     #   @return [String]
     class ConflictException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -406,6 +426,7 @@ module Aws::SSOAdmin
     #   <p>An identifier for an object in IAM Identity Center, such as a user or group. PrincipalIds are GUIDs (For example, f81d4fae-7dec-11d0-a765-00a0c91e6bf6). For more information about PrincipalIds in IAM Identity Center, see the <a href="/singlesignon/latest/IdentityStoreAPIReference/welcome.html">IAM Identity Center Identity Store API Reference</a>.</p>
     #   @return [String]
     class CreateAccountAssignmentRequest < Struct.new(
+      nil,
       :instance_arn,
       :target_id,
       :target_type,
@@ -421,6 +442,7 @@ module Aws::SSOAdmin
     #   <p>The status object for the account assignment creation operation.</p>
     #   @return [Types::AccountAssignmentOperationStatus]
     class CreateAccountAssignmentResponse < Struct.new(
+      nil,
       :account_assignment_creation_status,
       keyword_init: true
     )
@@ -437,6 +459,7 @@ module Aws::SSOAdmin
     #   <p>The entity type for which the assignment will be created.</p>
     #   @return [String]
     class CreateApplicationAssignmentRequest < Struct.new(
+      nil,
       :application_arn,
       :principal_id,
       :principal_type,
@@ -446,6 +469,7 @@ module Aws::SSOAdmin
     end
 
     class CreateApplicationAssignmentResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -476,6 +500,7 @@ module Aws::SSOAdmin
     #   <p>Specifies a unique, case-sensitive ID that you provide to ensure the idempotency of the request. This lets you safely retry the request without accidentally performing the same operation a second time. Passing the same value to a later call to an operation requires that you also pass the same value for all other parameters. We recommend that you use a <a href="https://wikipedia.org/wiki/Universally_unique_identifier">UUID type of value</a>.</p> <p>If you don't provide this value, then Amazon Web Services generates a random one for you.</p> <p>If you retry the operation with the same <code>ClientToken</code>, but with different parameters, the retry fails with an <code>IdempotentParameterMismatch</code> error.</p>
     #   @return [String]
     class CreateApplicationRequest < Struct.new(
+      nil,
       :instance_arn,
       :application_provider_arn,
       :name,
@@ -493,6 +518,7 @@ module Aws::SSOAdmin
     #   <p>Specifies the ARN of the application.</p>
     #   @return [String]
     class CreateApplicationResponse < Struct.new(
+      nil,
       :application_arn,
       keyword_init: true
     )
@@ -506,6 +532,7 @@ module Aws::SSOAdmin
     #   <p>Specifies the IAM Identity Center identity store attributes to add to your ABAC configuration. When using an external identity provider as an identity source, you can pass attributes through the SAML assertion. Doing so provides an alternative to configuring attributes from the IAM Identity Center identity store. If a SAML assertion passes any of these attributes, IAM Identity Center will replace the attribute value with the value from the IAM Identity Center identity store.</p>
     #   @return [Types::InstanceAccessControlAttributeConfiguration]
     class CreateInstanceAccessControlAttributeConfigurationRequest < Struct.new(
+      nil,
       :instance_arn,
       :instance_access_control_attribute_configuration,
       keyword_init: true
@@ -514,6 +541,7 @@ module Aws::SSOAdmin
     end
 
     class CreateInstanceAccessControlAttributeConfigurationResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -529,6 +557,7 @@ module Aws::SSOAdmin
     #   <p>Specifies tags to be attached to the instance of IAM Identity Center.</p>
     #   @return [Array<Types::Tag>]
     class CreateInstanceRequest < Struct.new(
+      nil,
       :name,
       :client_token,
       :tags,
@@ -541,6 +570,7 @@ module Aws::SSOAdmin
     #   <p>The ARN of the instance of IAM Identity Center under which the operation will run. </p> <p>For more information about ARNs, see <a href="/general/latest/gr/aws-arns-and-namespaces.html">Amazon Resource Names (ARNs) and Amazon Web Services Service Namespaces</a> in the <i>Amazon Web Services General Reference</i>.</p>
     #   @return [String]
     class CreateInstanceResponse < Struct.new(
+      nil,
       :instance_arn,
       keyword_init: true
     )
@@ -566,6 +596,7 @@ module Aws::SSOAdmin
     #   <p>The tags to attach to the new <a>PermissionSet</a>.</p>
     #   @return [Array<Types::Tag>]
     class CreatePermissionSetRequest < Struct.new(
+      nil,
       :name,
       :description,
       :instance_arn,
@@ -581,6 +612,7 @@ module Aws::SSOAdmin
     #   <p>Defines the level of access on an Amazon Web Services account.</p>
     #   @return [Types::PermissionSet]
     class CreatePermissionSetResponse < Struct.new(
+      nil,
       :permission_set,
       keyword_init: true
     )
@@ -606,6 +638,7 @@ module Aws::SSOAdmin
     #   <p>Specifies tags to be attached to the new trusted token issuer configuration.</p>
     #   @return [Array<Types::Tag>]
     class CreateTrustedTokenIssuerRequest < Struct.new(
+      nil,
       :instance_arn,
       :name,
       :trusted_token_issuer_type,
@@ -621,6 +654,7 @@ module Aws::SSOAdmin
     #   <p>The ARN of the new trusted token issuer configuration.</p>
     #   @return [String]
     class CreateTrustedTokenIssuerResponse < Struct.new(
+      nil,
       :trusted_token_issuer_arn,
       keyword_init: true
     )
@@ -635,6 +669,7 @@ module Aws::SSOAdmin
     #   <p>The path to the IAM policy that you have configured in each account where you want to deploy your permission set. The default is <code>/</code>. For more information, see <a href="https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_identifiers.html#identifiers-friendly-names">Friendly names and paths</a> in the <i>IAM User Guide</i>.</p>
     #   @return [String]
     class CustomerManagedPolicyReference < Struct.new(
+      nil,
       :name,
       :path,
       keyword_init: true
@@ -661,6 +696,7 @@ module Aws::SSOAdmin
     #   <p>An identifier for an object in IAM Identity Center, such as a user or group. PrincipalIds are GUIDs (For example, f81d4fae-7dec-11d0-a765-00a0c91e6bf6). For more information about PrincipalIds in IAM Identity Center, see the <a href="/singlesignon/latest/IdentityStoreAPIReference/welcome.html">IAM Identity Center Identity Store API Reference</a>.</p>
     #   @return [String]
     class DeleteAccountAssignmentRequest < Struct.new(
+      nil,
       :instance_arn,
       :target_id,
       :target_type,
@@ -676,6 +712,7 @@ module Aws::SSOAdmin
     #   <p>The status object for the account assignment deletion operation.</p>
     #   @return [Types::AccountAssignmentOperationStatus]
     class DeleteAccountAssignmentResponse < Struct.new(
+      nil,
       :account_assignment_deletion_status,
       keyword_init: true
     )
@@ -689,6 +726,7 @@ module Aws::SSOAdmin
     #   <p>Specifies the name of the access scope to remove from the application.</p>
     #   @return [String]
     class DeleteApplicationAccessScopeRequest < Struct.new(
+      nil,
       :application_arn,
       :scope,
       keyword_init: true
@@ -706,6 +744,7 @@ module Aws::SSOAdmin
     #   <p>The entity type for which the assignment will be deleted.</p>
     #   @return [String]
     class DeleteApplicationAssignmentRequest < Struct.new(
+      nil,
       :application_arn,
       :principal_id,
       :principal_type,
@@ -715,6 +754,7 @@ module Aws::SSOAdmin
     end
 
     class DeleteApplicationAssignmentResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -727,6 +767,7 @@ module Aws::SSOAdmin
     #   <p>Specifies the authentication method type to delete from the application.</p>
     #   @return [String]
     class DeleteApplicationAuthenticationMethodRequest < Struct.new(
+      nil,
       :application_arn,
       :authentication_method_type,
       keyword_init: true
@@ -741,6 +782,7 @@ module Aws::SSOAdmin
     #   <p>Specifies the type of grant to delete from the application.</p>
     #   @return [String]
     class DeleteApplicationGrantRequest < Struct.new(
+      nil,
       :application_arn,
       :grant_type,
       keyword_init: true
@@ -752,6 +794,7 @@ module Aws::SSOAdmin
     #   <p>Specifies the ARN of the application. For more information about ARNs, see <a href="/general/latest/gr/aws-arns-and-namespaces.html">Amazon Resource Names (ARNs) and Amazon Web Services Service Namespaces</a> in the <i>Amazon Web Services General Reference</i>. </p>
     #   @return [String]
     class DeleteApplicationRequest < Struct.new(
+      nil,
       :application_arn,
       keyword_init: true
     )
@@ -759,6 +802,7 @@ module Aws::SSOAdmin
     end
 
     class DeleteApplicationResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -771,6 +815,7 @@ module Aws::SSOAdmin
     #   <p>The ARN of the permission set that will be used to remove access.</p>
     #   @return [String]
     class DeleteInlinePolicyFromPermissionSetRequest < Struct.new(
+      nil,
       :instance_arn,
       :permission_set_arn,
       keyword_init: true
@@ -779,6 +824,7 @@ module Aws::SSOAdmin
     end
 
     class DeleteInlinePolicyFromPermissionSetResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -788,6 +834,7 @@ module Aws::SSOAdmin
     #   <p>The ARN of the IAM Identity Center instance under which the operation will be executed.</p>
     #   @return [String]
     class DeleteInstanceAccessControlAttributeConfigurationRequest < Struct.new(
+      nil,
       :instance_arn,
       keyword_init: true
     )
@@ -795,6 +842,7 @@ module Aws::SSOAdmin
     end
 
     class DeleteInstanceAccessControlAttributeConfigurationResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -804,6 +852,7 @@ module Aws::SSOAdmin
     #   <p>The ARN of the instance of IAM Identity Center under which the operation will run.</p>
     #   @return [String]
     class DeleteInstanceRequest < Struct.new(
+      nil,
       :instance_arn,
       keyword_init: true
     )
@@ -811,6 +860,7 @@ module Aws::SSOAdmin
     end
 
     class DeleteInstanceResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -823,6 +873,7 @@ module Aws::SSOAdmin
     #   <p>The ARN of the permission set that should be deleted.</p>
     #   @return [String]
     class DeletePermissionSetRequest < Struct.new(
+      nil,
       :instance_arn,
       :permission_set_arn,
       keyword_init: true
@@ -831,6 +882,7 @@ module Aws::SSOAdmin
     end
 
     class DeletePermissionSetResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -843,6 +895,7 @@ module Aws::SSOAdmin
     #   <p>The ARN of the <code>PermissionSet</code>.</p>
     #   @return [String]
     class DeletePermissionsBoundaryFromPermissionSetRequest < Struct.new(
+      nil,
       :instance_arn,
       :permission_set_arn,
       keyword_init: true
@@ -851,6 +904,7 @@ module Aws::SSOAdmin
     end
 
     class DeletePermissionsBoundaryFromPermissionSetResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -860,6 +914,7 @@ module Aws::SSOAdmin
     #   <p>Specifies the ARN of the trusted token issuer configuration to delete.</p>
     #   @return [String]
     class DeleteTrustedTokenIssuerRequest < Struct.new(
+      nil,
       :trusted_token_issuer_arn,
       keyword_init: true
     )
@@ -867,6 +922,7 @@ module Aws::SSOAdmin
     end
 
     class DeleteTrustedTokenIssuerResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -879,6 +935,7 @@ module Aws::SSOAdmin
     #   <p>The identifier that is used to track the request operation progress.</p>
     #   @return [String]
     class DescribeAccountAssignmentCreationStatusRequest < Struct.new(
+      nil,
       :instance_arn,
       :account_assignment_creation_request_id,
       keyword_init: true
@@ -890,6 +947,7 @@ module Aws::SSOAdmin
     #   <p>The status object for the account assignment creation operation.</p>
     #   @return [Types::AccountAssignmentOperationStatus]
     class DescribeAccountAssignmentCreationStatusResponse < Struct.new(
+      nil,
       :account_assignment_creation_status,
       keyword_init: true
     )
@@ -903,6 +961,7 @@ module Aws::SSOAdmin
     #   <p>The identifier that is used to track the request operation progress.</p>
     #   @return [String]
     class DescribeAccountAssignmentDeletionStatusRequest < Struct.new(
+      nil,
       :instance_arn,
       :account_assignment_deletion_request_id,
       keyword_init: true
@@ -914,6 +973,7 @@ module Aws::SSOAdmin
     #   <p>The status object for the account assignment deletion operation.</p>
     #   @return [Types::AccountAssignmentOperationStatus]
     class DescribeAccountAssignmentDeletionStatusResponse < Struct.new(
+      nil,
       :account_assignment_deletion_status,
       keyword_init: true
     )
@@ -930,6 +990,7 @@ module Aws::SSOAdmin
     #   <p>The entity type for which the assignment will be created.</p>
     #   @return [String]
     class DescribeApplicationAssignmentRequest < Struct.new(
+      nil,
       :application_arn,
       :principal_id,
       :principal_type,
@@ -948,6 +1009,7 @@ module Aws::SSOAdmin
     #   <p>Specifies the ARN of the application. For more information about ARNs, see <a href="/general/latest/gr/aws-arns-and-namespaces.html">Amazon Resource Names (ARNs) and Amazon Web Services Service Namespaces</a> in the <i>Amazon Web Services General Reference</i>.</p>
     #   @return [String]
     class DescribeApplicationAssignmentResponse < Struct.new(
+      nil,
       :principal_type,
       :principal_id,
       :application_arn,
@@ -960,6 +1022,7 @@ module Aws::SSOAdmin
     #   <p>Specifies the ARN of the application provider for which you want details.</p>
     #   @return [String]
     class DescribeApplicationProviderRequest < Struct.new(
+      nil,
       :application_provider_arn,
       keyword_init: true
     )
@@ -979,6 +1042,7 @@ module Aws::SSOAdmin
     #   <p>A structure with details about the receiving application.</p>
     #   @return [Types::ResourceServerConfig]
     class DescribeApplicationProviderResponse < Struct.new(
+      nil,
       :application_provider_arn,
       :federation_protocol,
       :display_data,
@@ -992,6 +1056,7 @@ module Aws::SSOAdmin
     #   <p>Specifies the ARN of the application. For more information about ARNs, see <a href="/general/latest/gr/aws-arns-and-namespaces.html">Amazon Resource Names (ARNs) and Amazon Web Services Service Namespaces</a> in the <i>Amazon Web Services General Reference</i>.</p>
     #   @return [String]
     class DescribeApplicationRequest < Struct.new(
+      nil,
       :application_arn,
       keyword_init: true
     )
@@ -1026,6 +1091,7 @@ module Aws::SSOAdmin
     #   <p>The date the application was created.</p>
     #   @return [Time]
     class DescribeApplicationResponse < Struct.new(
+      nil,
       :application_arn,
       :application_provider_arn,
       :name,
@@ -1044,6 +1110,7 @@ module Aws::SSOAdmin
     #   <p>The ARN of the IAM Identity Center instance under which the operation will be executed.</p>
     #   @return [String]
     class DescribeInstanceAccessControlAttributeConfigurationRequest < Struct.new(
+      nil,
       :instance_arn,
       keyword_init: true
     )
@@ -1060,6 +1127,7 @@ module Aws::SSOAdmin
     #   <p>Gets the list of IAM Identity Center identity store attributes that have been added to your ABAC configuration.</p>
     #   @return [Types::InstanceAccessControlAttributeConfiguration]
     class DescribeInstanceAccessControlAttributeConfigurationResponse < Struct.new(
+      nil,
       :status,
       :status_reason,
       :instance_access_control_attribute_configuration,
@@ -1072,6 +1140,7 @@ module Aws::SSOAdmin
     #   <p>The ARN of the instance of IAM Identity Center under which the operation will run.</p>
     #   @return [String]
     class DescribeInstanceRequest < Struct.new(
+      nil,
       :instance_arn,
       keyword_init: true
     )
@@ -1103,6 +1172,7 @@ module Aws::SSOAdmin
     #   <p>Contains the encryption configuration for your IAM Identity Center instance, including the encryption status, KMS key type, and KMS key ARN.</p>
     #   @return [Types::EncryptionConfigurationDetails]
     class DescribeInstanceResponse < Struct.new(
+      nil,
       :instance_arn,
       :identity_store_id,
       :owner_account_id,
@@ -1123,6 +1193,7 @@ module Aws::SSOAdmin
     #   <p>The identifier that is provided by the <a>ProvisionPermissionSet</a> call to retrieve the current status of the provisioning workflow.</p>
     #   @return [String]
     class DescribePermissionSetProvisioningStatusRequest < Struct.new(
+      nil,
       :instance_arn,
       :provision_permission_set_request_id,
       keyword_init: true
@@ -1134,6 +1205,7 @@ module Aws::SSOAdmin
     #   <p>The status object for the permission set provisioning operation.</p>
     #   @return [Types::PermissionSetProvisioningStatus]
     class DescribePermissionSetProvisioningStatusResponse < Struct.new(
+      nil,
       :permission_set_provisioning_status,
       keyword_init: true
     )
@@ -1147,6 +1219,7 @@ module Aws::SSOAdmin
     #   <p>The ARN of the permission set. </p>
     #   @return [String]
     class DescribePermissionSetRequest < Struct.new(
+      nil,
       :instance_arn,
       :permission_set_arn,
       keyword_init: true
@@ -1158,6 +1231,7 @@ module Aws::SSOAdmin
     #   <p>Describes the level of access on an Amazon Web Services account.</p>
     #   @return [Types::PermissionSet]
     class DescribePermissionSetResponse < Struct.new(
+      nil,
       :permission_set,
       keyword_init: true
     )
@@ -1168,6 +1242,7 @@ module Aws::SSOAdmin
     #   <p>Specifies the ARN of the trusted token issuer configuration that you want details about.</p>
     #   @return [String]
     class DescribeTrustedTokenIssuerRequest < Struct.new(
+      nil,
       :trusted_token_issuer_arn,
       keyword_init: true
     )
@@ -1187,6 +1262,7 @@ module Aws::SSOAdmin
     #   <p>A structure the describes the settings that apply of this trusted token issuer.</p>
     #   @return [Types::TrustedTokenIssuerConfiguration]
     class DescribeTrustedTokenIssuerResponse < Struct.new(
+      nil,
       :trusted_token_issuer_arn,
       :name,
       :trusted_token_issuer_type,
@@ -1206,6 +1282,7 @@ module Aws::SSOAdmin
     #   <p>Specifies the name and path of a customer managed policy. You must have an IAM policy that matches the name and path in each Amazon Web Services account where you want to deploy your permission set.</p>
     #   @return [Types::CustomerManagedPolicyReference]
     class DetachCustomerManagedPolicyReferenceFromPermissionSetRequest < Struct.new(
+      nil,
       :instance_arn,
       :permission_set_arn,
       :customer_managed_policy_reference,
@@ -1215,6 +1292,7 @@ module Aws::SSOAdmin
     end
 
     class DetachCustomerManagedPolicyReferenceFromPermissionSetResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1230,6 +1308,7 @@ module Aws::SSOAdmin
     #   <p>The Amazon Web Services managed policy ARN to be detached from a permission set.</p>
     #   @return [String]
     class DetachManagedPolicyFromPermissionSetRequest < Struct.new(
+      nil,
       :instance_arn,
       :permission_set_arn,
       :managed_policy_arn,
@@ -1239,6 +1318,7 @@ module Aws::SSOAdmin
     end
 
     class DetachManagedPolicyFromPermissionSetResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1255,6 +1335,7 @@ module Aws::SSOAdmin
     #   <p>The description of the application provider that appears in the portal.</p>
     #   @return [String]
     class DisplayData < Struct.new(
+      nil,
       :display_name,
       :icon_url,
       :description,
@@ -1271,6 +1352,7 @@ module Aws::SSOAdmin
     #   <p>The ARN of the KMS key used to encrypt data. Required when KeyType is CUSTOMER_MANAGED_KEY. Cannot be specified when KeyType is AWS_OWNED_KMS_KEY.</p>
     #   @return [String]
     class EncryptionConfiguration < Struct.new(
+      nil,
       :key_type,
       :kms_key_arn,
       keyword_init: true
@@ -1292,6 +1374,7 @@ module Aws::SSOAdmin
     #   <p>Provides additional context about the current encryption status. This field is particularly useful when the encryption status is UPDATE_FAILED. When encryption configuration update fails, this field contains information about the cause, which may include KMS key access issues, key not found errors, invalid key configuration, key in an invalid state, or a disabled key. </p>
     #   @return [String]
     class EncryptionConfigurationDetails < Struct.new(
+      nil,
       :key_type,
       :kms_key_arn,
       :encryption_status,
@@ -1308,6 +1391,7 @@ module Aws::SSOAdmin
     #   <p>Specifies the name of the access scope for which you want the authorized targets.</p>
     #   @return [String]
     class GetApplicationAccessScopeRequest < Struct.new(
+      nil,
       :application_arn,
       :scope,
       keyword_init: true
@@ -1322,6 +1406,7 @@ module Aws::SSOAdmin
     #   <p>An array of authorized targets associated with this access scope.</p>
     #   @return [Array<String>]
     class GetApplicationAccessScopeResponse < Struct.new(
+      nil,
       :scope,
       :authorized_targets,
       keyword_init: true
@@ -1333,6 +1418,7 @@ module Aws::SSOAdmin
     #   <p>Specifies the ARN of the application. For more information about ARNs, see <a href="/general/latest/gr/aws-arns-and-namespaces.html">Amazon Resource Names (ARNs) and Amazon Web Services Service Namespaces</a> in the <i>Amazon Web Services General Reference</i>.</p>
     #   @return [String]
     class GetApplicationAssignmentConfigurationRequest < Struct.new(
+      nil,
       :application_arn,
       keyword_init: true
     )
@@ -1343,6 +1429,7 @@ module Aws::SSOAdmin
     #   <p>If <code>AssignmentsRequired</code> is <code>true</code> (default value), users don’t have access to the application unless an assignment is created using the <a href="https://docs.aws.amazon.com/singlesignon/latest/APIReference/API_CreateApplicationAssignment.html">CreateApplicationAssignment API</a>. If <code>false</code>, all users have access to the application. </p>
     #   @return [Boolean]
     class GetApplicationAssignmentConfigurationResponse < Struct.new(
+      nil,
       :assignment_required,
       keyword_init: true
     )
@@ -1361,6 +1448,7 @@ module Aws::SSOAdmin
     #   <p>Specifies the type of authentication method for which you want details.</p>
     #   @return [String]
     class GetApplicationAuthenticationMethodRequest < Struct.new(
+      nil,
       :application_arn,
       :authentication_method_type,
       keyword_init: true
@@ -1372,6 +1460,7 @@ module Aws::SSOAdmin
     #   <p>A structure that contains details about the requested authentication method.</p>
     #   @return [Types::AuthenticationMethod]
     class GetApplicationAuthenticationMethodResponse < Struct.new(
+      nil,
       :authentication_method,
       keyword_init: true
     )
@@ -1385,6 +1474,7 @@ module Aws::SSOAdmin
     #   <p>Specifies the type of grant.</p>
     #   @return [String]
     class GetApplicationGrantRequest < Struct.new(
+      nil,
       :application_arn,
       :grant_type,
       keyword_init: true
@@ -1396,6 +1486,7 @@ module Aws::SSOAdmin
     #   <p>A structure that describes the requested grant.</p>
     #   @return [Types::Grant]
     class GetApplicationGrantResponse < Struct.new(
+      nil,
       :grant,
       keyword_init: true
     )
@@ -1406,6 +1497,7 @@ module Aws::SSOAdmin
     #   <p>The Amazon Resource Name (ARN) of the application for which to retrieve the session configuration.</p>
     #   @return [String]
     class GetApplicationSessionConfigurationRequest < Struct.new(
+      nil,
       :application_arn,
       keyword_init: true
     )
@@ -1416,6 +1508,7 @@ module Aws::SSOAdmin
     #   <p>The status of user background sessions for the application. </p>
     #   @return [String]
     class GetApplicationSessionConfigurationResponse < Struct.new(
+      nil,
       :user_background_session_application_status,
       keyword_init: true
     )
@@ -1429,6 +1522,7 @@ module Aws::SSOAdmin
     #   <p>The ARN of the permission set.</p>
     #   @return [String]
     class GetInlinePolicyForPermissionSetRequest < Struct.new(
+      nil,
       :instance_arn,
       :permission_set_arn,
       keyword_init: true
@@ -1440,6 +1534,7 @@ module Aws::SSOAdmin
     #   <p>The inline policy that is attached to the permission set.</p> <note> <p>For <code>Length Constraints</code>, if a valid ARN is provided for a permission set, it is possible for an empty inline policy to be returned.</p> </note>
     #   @return [String]
     class GetInlinePolicyForPermissionSetResponse < Struct.new(
+      nil,
       :inline_policy,
       keyword_init: true
     )
@@ -1453,6 +1548,7 @@ module Aws::SSOAdmin
     #   <p>The ARN of the <code>PermissionSet</code>.</p>
     #   @return [String]
     class GetPermissionsBoundaryForPermissionSetRequest < Struct.new(
+      nil,
       :instance_arn,
       :permission_set_arn,
       keyword_init: true
@@ -1464,6 +1560,7 @@ module Aws::SSOAdmin
     #   <p>The permissions boundary attached to the specified permission set.</p>
     #   @return [Types::PermissionsBoundary]
     class GetPermissionsBoundaryForPermissionSetResponse < Struct.new(
+      nil,
       :permissions_boundary,
       keyword_init: true
     )
@@ -1508,6 +1605,7 @@ module Aws::SSOAdmin
     #   <p>The configuration structure for the selected grant.</p>
     #   @return [Types::Grant]
     class GrantItem < Struct.new(
+      nil,
       :grant_type,
       :grant,
       keyword_init: true
@@ -1520,6 +1618,7 @@ module Aws::SSOAdmin
     #   <p>An IAM policy document in JSON.</p>
     #   @return [JSON]
     class IamAuthenticationMethod < Struct.new(
+      nil,
       :actor_policy,
       keyword_init: true
     )
@@ -1531,6 +1630,7 @@ module Aws::SSOAdmin
     #   <p>Lists the attributes that are configured for ABAC in the specified IAM Identity Center instance.</p>
     #   @return [Array<Types::AccessControlAttribute>]
     class InstanceAccessControlAttributeConfiguration < Struct.new(
+      nil,
       :access_control_attributes,
       keyword_init: true
     )
@@ -1560,6 +1660,7 @@ module Aws::SSOAdmin
     #   <p>Provides additional context about the current status of the IAM Identity Center instance. This field is particularly useful when an instance is in a non-ACTIVE state, such as CREATE_FAILED. When an instance creation fails, this field contains information about the cause, which may include issues with KMS key configuration or insufficient permissions. </p>
     #   @return [String]
     class InstanceMetadata < Struct.new(
+      nil,
       :instance_arn,
       :identity_store_id,
       :owner_account_id,
@@ -1576,6 +1677,7 @@ module Aws::SSOAdmin
     # @!attribute message
     #   @return [String]
     class InternalServerException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -1587,6 +1689,7 @@ module Aws::SSOAdmin
     #   <p>A list of allowed token issuers trusted by the Identity Center instances for this application.</p> <note> <p> <code>AuthorizedTokenIssuers</code> is required when the grant type is <code>JwtBearerGrant</code>.</p> </note>
     #   @return [Array<Types::AuthorizedTokenIssuer>]
     class JwtBearerGrant < Struct.new(
+      nil,
       :authorized_token_issuers,
       keyword_init: true
     )
@@ -1606,6 +1709,7 @@ module Aws::SSOAdmin
     #   <p>Filters results based on the passed attribute value.</p>
     #   @return [Types::OperationStatusFilter]
     class ListAccountAssignmentCreationStatusRequest < Struct.new(
+      nil,
       :instance_arn,
       :max_results,
       :next_token,
@@ -1622,6 +1726,7 @@ module Aws::SSOAdmin
     #   <p>The pagination token for the list API. Initially the value is null. Use the output of previous API calls to make subsequent calls.</p>
     #   @return [String]
     class ListAccountAssignmentCreationStatusResponse < Struct.new(
+      nil,
       :account_assignments_creation_status,
       :next_token,
       keyword_init: true
@@ -1642,6 +1747,7 @@ module Aws::SSOAdmin
     #   <p>Filters results based on the passed attribute value.</p>
     #   @return [Types::OperationStatusFilter]
     class ListAccountAssignmentDeletionStatusRequest < Struct.new(
+      nil,
       :instance_arn,
       :max_results,
       :next_token,
@@ -1658,6 +1764,7 @@ module Aws::SSOAdmin
     #   <p>The pagination token for the list API. Initially the value is null. Use the output of previous API calls to make subsequent calls.</p>
     #   @return [String]
     class ListAccountAssignmentDeletionStatusResponse < Struct.new(
+      nil,
       :account_assignments_deletion_status,
       :next_token,
       keyword_init: true
@@ -1670,6 +1777,7 @@ module Aws::SSOAdmin
     #   <p>The ID number of an Amazon Web Services account that filters the results in the response.</p>
     #   @return [String]
     class ListAccountAssignmentsFilter < Struct.new(
+      nil,
       :account_id,
       keyword_init: true
     )
@@ -1695,6 +1803,7 @@ module Aws::SSOAdmin
     #   <p>Specifies the total number of results that you want included in each response. If additional items exist beyond the number you specify, the <code>NextToken</code> response element is returned with a value (not null). Include the specified value as the <code>NextToken</code> request parameter in the next call to the operation to get the next set of results. Note that the service might return fewer results than the maximum even when there are more results available. You should check <code>NextToken</code> after every operation to ensure that you receive all of the results.</p>
     #   @return [Integer]
     class ListAccountAssignmentsForPrincipalRequest < Struct.new(
+      nil,
       :instance_arn,
       :principal_id,
       :principal_type,
@@ -1713,6 +1822,7 @@ module Aws::SSOAdmin
     #   <p>If present, this value indicates that more output is available than is included in the current response. Use this value in the <code>NextToken</code> request parameter in a subsequent call to the operation to get the next part of the output. You should repeat this until the <code>NextToken</code> response element comes back as <code>null</code>. This indicates that this is the last page of results.</p>
     #   @return [String]
     class ListAccountAssignmentsForPrincipalResponse < Struct.new(
+      nil,
       :account_assignments,
       :next_token,
       keyword_init: true
@@ -1736,6 +1846,7 @@ module Aws::SSOAdmin
     #   <p>The pagination token for the list API. Initially the value is null. Use the output of previous API calls to make subsequent calls.</p>
     #   @return [String]
     class ListAccountAssignmentsRequest < Struct.new(
+      nil,
       :instance_arn,
       :account_id,
       :permission_set_arn,
@@ -1753,6 +1864,7 @@ module Aws::SSOAdmin
     #   <p>The pagination token for the list API. Initially the value is null. Use the output of previous API calls to make subsequent calls.</p>
     #   @return [String]
     class ListAccountAssignmentsResponse < Struct.new(
+      nil,
       :account_assignments,
       :next_token,
       keyword_init: true
@@ -1776,6 +1888,7 @@ module Aws::SSOAdmin
     #   <p>The pagination token for the list API. Initially the value is null. Use the output of previous API calls to make subsequent calls.</p>
     #   @return [String]
     class ListAccountsForProvisionedPermissionSetRequest < Struct.new(
+      nil,
       :instance_arn,
       :permission_set_arn,
       :provisioning_status,
@@ -1793,6 +1906,7 @@ module Aws::SSOAdmin
     #   <p>The pagination token for the list API. Initially the value is null. Use the output of previous API calls to make subsequent calls.</p>
     #   @return [String]
     class ListAccountsForProvisionedPermissionSetResponse < Struct.new(
+      nil,
       :account_ids,
       :next_token,
       keyword_init: true
@@ -1810,6 +1924,7 @@ module Aws::SSOAdmin
     #   <p>Specifies that you want to receive the next page of results. Valid only if you received a <code>NextToken</code> response in the previous request. If you did, it indicates that more output is available. Set this parameter to the value provided by the previous call's <code>NextToken</code> response to request the next page of results.</p>
     #   @return [String]
     class ListApplicationAccessScopesRequest < Struct.new(
+      nil,
       :application_arn,
       :max_results,
       :next_token,
@@ -1825,6 +1940,7 @@ module Aws::SSOAdmin
     #   <p>If present, this value indicates that more output is available than is included in the current response. Use this value in the <code>NextToken</code> request parameter in a subsequent call to the operation to get the next part of the output. You should repeat this until the <code>NextToken</code> response element comes back as <code>null</code>. This indicates that this is the last page of results.</p>
     #   @return [String]
     class ListApplicationAccessScopesResponse < Struct.new(
+      nil,
       :scopes,
       :next_token,
       keyword_init: true
@@ -1837,6 +1953,7 @@ module Aws::SSOAdmin
     #   <p>The ARN of an application.</p>
     #   @return [String]
     class ListApplicationAssignmentsFilter < Struct.new(
+      nil,
       :application_arn,
       keyword_init: true
     )
@@ -1862,6 +1979,7 @@ module Aws::SSOAdmin
     #   <p>Specifies the total number of results that you want included in each response. If additional items exist beyond the number you specify, the <code>NextToken</code> response element is returned with a value (not null). Include the specified value as the <code>NextToken</code> request parameter in the next call to the operation to get the next set of results. Note that the service might return fewer results than the maximum even when there are more results available. You should check <code>NextToken</code> after every operation to ensure that you receive all of the results.</p>
     #   @return [Integer]
     class ListApplicationAssignmentsForPrincipalRequest < Struct.new(
+      nil,
       :instance_arn,
       :principal_id,
       :principal_type,
@@ -1880,6 +1998,7 @@ module Aws::SSOAdmin
     #   <p>If present, this value indicates that more output is available than is included in the current response. Use this value in the <code>NextToken</code> request parameter in a subsequent call to the operation to get the next part of the output. You should repeat this until the <code>NextToken</code> response element comes back as <code>null</code>. This indicates that this is the last page of results.</p>
     #   @return [String]
     class ListApplicationAssignmentsForPrincipalResponse < Struct.new(
+      nil,
       :application_assignments,
       :next_token,
       keyword_init: true
@@ -1897,6 +2016,7 @@ module Aws::SSOAdmin
     #   <p>Specifies that you want to receive the next page of results. Valid only if you received a <code>NextToken</code> response in the previous request. If you did, it indicates that more output is available. Set this parameter to the value provided by the previous call's <code>NextToken</code> response to request the next page of results.</p>
     #   @return [String]
     class ListApplicationAssignmentsRequest < Struct.new(
+      nil,
       :application_arn,
       :max_results,
       :next_token,
@@ -1912,6 +2032,7 @@ module Aws::SSOAdmin
     #   <p>If present, this value indicates that more output is available than is included in the current response. Use this value in the <code>NextToken</code> request parameter in a subsequent call to the operation to get the next part of the output. You should repeat this until the <code>NextToken</code> response element comes back as <code>null</code>. This indicates that this is the last page of results.</p>
     #   @return [String]
     class ListApplicationAssignmentsResponse < Struct.new(
+      nil,
       :application_assignments,
       :next_token,
       keyword_init: true
@@ -1926,6 +2047,7 @@ module Aws::SSOAdmin
     #   <p>Specifies that you want to receive the next page of results. Valid only if you received a <code>NextToken</code> response in the previous request. If you did, it indicates that more output is available. Set this parameter to the value provided by the previous call's <code>NextToken</code> response to request the next page of results.</p>
     #   @return [String]
     class ListApplicationAuthenticationMethodsRequest < Struct.new(
+      nil,
       :application_arn,
       :next_token,
       keyword_init: true
@@ -1940,6 +2062,7 @@ module Aws::SSOAdmin
     #   <p>If present, this value indicates that more output is available than is included in the current response. Use this value in the <code>NextToken</code> request parameter in a subsequent call to the operation to get the next part of the output. You should repeat this until the <code>NextToken</code> response element comes back as <code>null</code>. This indicates that this is the last page of results.</p>
     #   @return [String]
     class ListApplicationAuthenticationMethodsResponse < Struct.new(
+      nil,
       :authentication_methods,
       :next_token,
       keyword_init: true
@@ -1954,6 +2077,7 @@ module Aws::SSOAdmin
     #   <p>Specifies that you want to receive the next page of results. Valid only if you received a <code>NextToken</code> response in the previous request. If you did, it indicates that more output is available. Set this parameter to the value provided by the previous call's <code>NextToken</code> response to request the next page of results.</p>
     #   @return [String]
     class ListApplicationGrantsRequest < Struct.new(
+      nil,
       :application_arn,
       :next_token,
       keyword_init: true
@@ -1968,6 +2092,7 @@ module Aws::SSOAdmin
     #   <p>If present, this value indicates that more output is available than is included in the current response. Use this value in the <code>NextToken</code> request parameter in a subsequent call to the operation to get the next part of the output. You should repeat this until the <code>NextToken</code> response element comes back as <code>null</code>. This indicates that this is the last page of results.</p>
     #   @return [String]
     class ListApplicationGrantsResponse < Struct.new(
+      nil,
       :grants,
       :next_token,
       keyword_init: true
@@ -1982,6 +2107,7 @@ module Aws::SSOAdmin
     #   <p>Specifies that you want to receive the next page of results. Valid only if you received a <code>NextToken</code> response in the previous request. If you did, it indicates that more output is available. Set this parameter to the value provided by the previous call's <code>NextToken</code> response to request the next page of results.</p>
     #   @return [String]
     class ListApplicationProvidersRequest < Struct.new(
+      nil,
       :max_results,
       :next_token,
       keyword_init: true
@@ -1996,6 +2122,7 @@ module Aws::SSOAdmin
     #   <p>If present, this value indicates that more output is available than is included in the current response. Use this value in the <code>NextToken</code> request parameter in a subsequent call to the operation to get the next part of the output. You should repeat this until the <code>NextToken</code> response element comes back as <code>null</code>. This indicates that this is the last page of results.</p>
     #   @return [String]
     class ListApplicationProvidersResponse < Struct.new(
+      nil,
       :application_providers,
       :next_token,
       keyword_init: true
@@ -2011,6 +2138,7 @@ module Aws::SSOAdmin
     #   <p>The ARN of an application provider that can filter the results in the response.</p>
     #   @return [String]
     class ListApplicationsFilter < Struct.new(
+      nil,
       :application_account,
       :application_provider,
       keyword_init: true
@@ -2031,6 +2159,7 @@ module Aws::SSOAdmin
     #   <p>Filters response results. </p>
     #   @return [Types::ListApplicationsFilter]
     class ListApplicationsRequest < Struct.new(
+      nil,
       :instance_arn,
       :max_results,
       :next_token,
@@ -2047,6 +2176,7 @@ module Aws::SSOAdmin
     #   <p>If present, this value indicates that more output is available than is included in the current response. Use this value in the <code>NextToken</code> request parameter in a subsequent call to the operation to get the next part of the output. You should repeat this until the <code>NextToken</code> response element comes back as <code>null</code>. This indicates that this is the last page of results.</p>
     #   @return [String]
     class ListApplicationsResponse < Struct.new(
+      nil,
       :applications,
       :next_token,
       keyword_init: true
@@ -2067,6 +2197,7 @@ module Aws::SSOAdmin
     #   <p>The pagination token for the list API. Initially the value is null. Use the output of previous API calls to make subsequent calls.</p>
     #   @return [String]
     class ListCustomerManagedPolicyReferencesInPermissionSetRequest < Struct.new(
+      nil,
       :instance_arn,
       :permission_set_arn,
       :max_results,
@@ -2083,6 +2214,7 @@ module Aws::SSOAdmin
     #   <p>The pagination token for the list API. Initially the value is null. Use the output of previous API calls to make subsequent calls.</p>
     #   @return [String]
     class ListCustomerManagedPolicyReferencesInPermissionSetResponse < Struct.new(
+      nil,
       :customer_managed_policy_references,
       :next_token,
       keyword_init: true
@@ -2097,6 +2229,7 @@ module Aws::SSOAdmin
     #   <p>The pagination token for the list API. Initially the value is null. Use the output of previous API calls to make subsequent calls.</p>
     #   @return [String]
     class ListInstancesRequest < Struct.new(
+      nil,
       :max_results,
       :next_token,
       keyword_init: true
@@ -2111,6 +2244,7 @@ module Aws::SSOAdmin
     #   <p>The pagination token for the list API. Initially the value is null. Use the output of previous API calls to make subsequent calls.</p>
     #   @return [String]
     class ListInstancesResponse < Struct.new(
+      nil,
       :instances,
       :next_token,
       keyword_init: true
@@ -2131,6 +2265,7 @@ module Aws::SSOAdmin
     #   <p>The pagination token for the list API. Initially the value is null. Use the output of previous API calls to make subsequent calls.</p>
     #   @return [String]
     class ListManagedPoliciesInPermissionSetRequest < Struct.new(
+      nil,
       :instance_arn,
       :permission_set_arn,
       :max_results,
@@ -2147,6 +2282,7 @@ module Aws::SSOAdmin
     #   <p>The pagination token for the list API. Initially the value is null. Use the output of previous API calls to make subsequent calls.</p>
     #   @return [String]
     class ListManagedPoliciesInPermissionSetResponse < Struct.new(
+      nil,
       :attached_managed_policies,
       :next_token,
       keyword_init: true
@@ -2167,6 +2303,7 @@ module Aws::SSOAdmin
     #   <p>Filters results based on the passed attribute value.</p>
     #   @return [Types::OperationStatusFilter]
     class ListPermissionSetProvisioningStatusRequest < Struct.new(
+      nil,
       :instance_arn,
       :max_results,
       :next_token,
@@ -2183,6 +2320,7 @@ module Aws::SSOAdmin
     #   <p>The pagination token for the list API. Initially the value is null. Use the output of previous API calls to make subsequent calls.</p>
     #   @return [String]
     class ListPermissionSetProvisioningStatusResponse < Struct.new(
+      nil,
       :permission_sets_provisioning_status,
       :next_token,
       keyword_init: true
@@ -2206,6 +2344,7 @@ module Aws::SSOAdmin
     #   <p>The pagination token for the list API. Initially the value is null. Use the output of previous API calls to make subsequent calls.</p>
     #   @return [String]
     class ListPermissionSetsProvisionedToAccountRequest < Struct.new(
+      nil,
       :instance_arn,
       :account_id,
       :provisioning_status,
@@ -2223,6 +2362,7 @@ module Aws::SSOAdmin
     #   <p>Defines the level of access that an Amazon Web Services account has.</p>
     #   @return [Array<String>]
     class ListPermissionSetsProvisionedToAccountResponse < Struct.new(
+      nil,
       :next_token,
       :permission_sets,
       keyword_init: true
@@ -2240,6 +2380,7 @@ module Aws::SSOAdmin
     #   <p>The maximum number of results to display for the assignment.</p>
     #   @return [Integer]
     class ListPermissionSetsRequest < Struct.new(
+      nil,
       :instance_arn,
       :next_token,
       :max_results,
@@ -2255,6 +2396,7 @@ module Aws::SSOAdmin
     #   <p>The pagination token for the list API. Initially the value is null. Use the output of previous API calls to make subsequent calls.</p>
     #   @return [String]
     class ListPermissionSetsResponse < Struct.new(
+      nil,
       :permission_sets,
       :next_token,
       keyword_init: true
@@ -2272,6 +2414,7 @@ module Aws::SSOAdmin
     #   <p>The pagination token for the list API. Initially the value is null. Use the output of previous API calls to make subsequent calls.</p>
     #   @return [String]
     class ListTagsForResourceRequest < Struct.new(
+      nil,
       :instance_arn,
       :resource_arn,
       :next_token,
@@ -2287,6 +2430,7 @@ module Aws::SSOAdmin
     #   <p>The pagination token for the list API. Initially the value is null. Use the output of previous API calls to make subsequent calls.</p>
     #   @return [String]
     class ListTagsForResourceResponse < Struct.new(
+      nil,
       :tags,
       :next_token,
       keyword_init: true
@@ -2304,6 +2448,7 @@ module Aws::SSOAdmin
     #   <p>Specifies that you want to receive the next page of results. Valid only if you received a <code>NextToken</code> response in the previous request. If you did, it indicates that more output is available. Set this parameter to the value provided by the previous call's <code>NextToken</code> response to request the next page of results.</p>
     #   @return [String]
     class ListTrustedTokenIssuersRequest < Struct.new(
+      nil,
       :instance_arn,
       :max_results,
       :next_token,
@@ -2319,6 +2464,7 @@ module Aws::SSOAdmin
     #   <p>If present, this value indicates that more output is available than is included in the current response. Use this value in the <code>NextToken</code> request parameter in a subsequent call to the operation to get the next part of the output. You should repeat this until the <code>NextToken</code> response element comes back as <code>null</code>. This indicates that this is the last page of results.</p>
     #   @return [String]
     class ListTrustedTokenIssuersResponse < Struct.new(
+      nil,
       :trusted_token_issuers,
       :next_token,
       keyword_init: true
@@ -2340,6 +2486,7 @@ module Aws::SSOAdmin
     #   <p>The method that the trusted token issuer can use to retrieve the JSON Web Key Set used to verify a JWT.</p>
     #   @return [String]
     class OidcJwtConfiguration < Struct.new(
+      nil,
       :issuer_url,
       :claim_attribute_path,
       :identity_store_attribute_path,
@@ -2360,6 +2507,7 @@ module Aws::SSOAdmin
     #   <p>The method that the trusted token issuer can use to retrieve the JSON Web Key Set used to verify a JWT.</p>
     #   @return [String]
     class OidcJwtUpdateConfiguration < Struct.new(
+      nil,
       :claim_attribute_path,
       :identity_store_attribute_path,
       :jwks_retrieval_option,
@@ -2373,6 +2521,7 @@ module Aws::SSOAdmin
     #   <p>Filters the list operations result based on the status attribute.</p>
     #   @return [String]
     class OperationStatusFilter < Struct.new(
+      nil,
       :status,
       keyword_init: true
     )
@@ -2399,6 +2548,7 @@ module Aws::SSOAdmin
     #   <p>Used to redirect users within the application during the federation authentication process.</p>
     #   @return [String]
     class PermissionSet < Struct.new(
+      nil,
       :name,
       :permission_set_arn,
       :description,
@@ -2430,6 +2580,7 @@ module Aws::SSOAdmin
     #   <p>The date that the permission set was created.</p>
     #   @return [Time]
     class PermissionSetProvisioningStatus < Struct.new(
+      nil,
       :status,
       :request_id,
       :account_id,
@@ -2452,6 +2603,7 @@ module Aws::SSOAdmin
     #   <p>The date that the permission set was created.</p>
     #   @return [Time]
     class PermissionSetProvisioningStatusMetadata < Struct.new(
+      nil,
       :status,
       :request_id,
       :created_date,
@@ -2468,6 +2620,7 @@ module Aws::SSOAdmin
     #   <p>The Amazon Web Services managed policy ARN that you want to attach to a permission set as a permissions boundary.</p>
     #   @return [String]
     class PermissionsBoundary < Struct.new(
+      nil,
       :customer_managed_policy_reference,
       :managed_policy_arn,
       keyword_init: true
@@ -2483,6 +2636,7 @@ module Aws::SSOAdmin
     #   <p>Indicates whether this application is visible in the access portal.</p>
     #   @return [String]
     class PortalOptions < Struct.new(
+      nil,
       :sign_in_options,
       :visibility,
       keyword_init: true
@@ -2508,6 +2662,7 @@ module Aws::SSOAdmin
     #   <p>The entity type for which the assignment will be created.</p>
     #   @return [String]
     class ProvisionPermissionSetRequest < Struct.new(
+      nil,
       :instance_arn,
       :permission_set_arn,
       :target_id,
@@ -2521,6 +2676,7 @@ module Aws::SSOAdmin
     #   <p>The status object for the permission set provisioning operation.</p>
     #   @return [Types::PermissionSetProvisioningStatus]
     class ProvisionPermissionSetResponse < Struct.new(
+      nil,
       :permission_set_provisioning_status,
       keyword_init: true
     )
@@ -2537,6 +2693,7 @@ module Aws::SSOAdmin
     #   <p>Specifies the ARN of the application with the access scope with the targets to add or update.</p>
     #   @return [String]
     class PutApplicationAccessScopeRequest < Struct.new(
+      nil,
       :scope,
       :authorized_targets,
       :application_arn,
@@ -2552,6 +2709,7 @@ module Aws::SSOAdmin
     #   <p>If <code>AssignmentsRequired</code> is <code>true</code> (default value), users don’t have access to the application unless an assignment is created using the <a href="https://docs.aws.amazon.com/singlesignon/latest/APIReference/API_CreateApplicationAssignment.html">CreateApplicationAssignment API</a>. If <code>false</code>, all users have access to the application. </p>
     #   @return [Boolean]
     class PutApplicationAssignmentConfigurationRequest < Struct.new(
+      nil,
       :application_arn,
       :assignment_required,
       keyword_init: true
@@ -2560,6 +2718,7 @@ module Aws::SSOAdmin
     end
 
     class PutApplicationAssignmentConfigurationResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -2575,6 +2734,7 @@ module Aws::SSOAdmin
     #   <p>Specifies a structure that describes the authentication method to add or update. The structure type you provide is determined by the <code>AuthenticationMethodType</code> parameter.</p>
     #   @return [Types::AuthenticationMethod]
     class PutApplicationAuthenticationMethodRequest < Struct.new(
+      nil,
       :application_arn,
       :authentication_method_type,
       :authentication_method,
@@ -2593,6 +2753,7 @@ module Aws::SSOAdmin
     #   <p>Specifies a structure that describes the grant to update.</p>
     #   @return [Types::Grant]
     class PutApplicationGrantRequest < Struct.new(
+      nil,
       :application_arn,
       :grant_type,
       :grant,
@@ -2608,6 +2769,7 @@ module Aws::SSOAdmin
     #   <p>The status of user background sessions for the application.</p>
     #   @return [String]
     class PutApplicationSessionConfigurationRequest < Struct.new(
+      nil,
       :application_arn,
       :user_background_session_application_status,
       keyword_init: true
@@ -2616,6 +2778,7 @@ module Aws::SSOAdmin
     end
 
     class PutApplicationSessionConfigurationResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -2631,6 +2794,7 @@ module Aws::SSOAdmin
     #   <p>The inline policy to attach to a <a>PermissionSet</a>.</p>
     #   @return [String]
     class PutInlinePolicyToPermissionSetRequest < Struct.new(
+      nil,
       :instance_arn,
       :permission_set_arn,
       :inline_policy,
@@ -2640,6 +2804,7 @@ module Aws::SSOAdmin
     end
 
     class PutInlinePolicyToPermissionSetResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -2655,6 +2820,7 @@ module Aws::SSOAdmin
     #   <p>The permissions boundary that you want to attach to a <code>PermissionSet</code>.</p>
     #   @return [Types::PermissionsBoundary]
     class PutPermissionsBoundaryToPermissionSetRequest < Struct.new(
+      nil,
       :instance_arn,
       :permission_set_arn,
       :permissions_boundary,
@@ -2664,6 +2830,7 @@ module Aws::SSOAdmin
     end
 
     class PutPermissionsBoundaryToPermissionSetResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -2671,6 +2838,7 @@ module Aws::SSOAdmin
 
     # <p>A structure that defines configuration settings for an application that supports the OAuth 2.0 Refresh Token Grant. For more, see <a href="https://datatracker.ietf.org/doc/html/rfc6749#section-1.5">RFC 6749</a>.</p>
     class RefreshTokenGrant < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -2683,6 +2851,7 @@ module Aws::SSOAdmin
     #   <p>The reason for the resource not found exception.</p>
     #   @return [String]
     class ResourceNotFoundException < Struct.new(
+      nil,
       :message,
       :reason,
       keyword_init: true
@@ -2695,6 +2864,7 @@ module Aws::SSOAdmin
     #   <p>A list of the IAM Identity Center access scopes that are associated with this resource server.</p>
     #   @return [Hash<String, Types::ResourceServerScopeDetails>]
     class ResourceServerConfig < Struct.new(
+      nil,
       :scopes,
       keyword_init: true
     )
@@ -2709,6 +2879,7 @@ module Aws::SSOAdmin
     #   <p>The title of an access scope for a resource server.</p>
     #   @return [String]
     class ResourceServerScopeDetails < Struct.new(
+      nil,
       :long_description,
       :detailed_title,
       keyword_init: true
@@ -2724,6 +2895,7 @@ module Aws::SSOAdmin
     #   <p>An array list of ARNs of applications.</p>
     #   @return [Array<String>]
     class ScopeDetails < Struct.new(
+      nil,
       :scope,
       :authorized_targets,
       keyword_init: true
@@ -2735,6 +2907,7 @@ module Aws::SSOAdmin
     # @!attribute message
     #   @return [String]
     class ServiceQuotaExceededException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -2749,6 +2922,7 @@ module Aws::SSOAdmin
     #   <p>The URL that accepts authentication requests for an application. This is a required parameter if the <code>Origin</code> parameter is <code>APPLICATION</code>.</p>
     #   @return [String]
     class SignInOptions < Struct.new(
+      nil,
       :origin,
       :application_url,
       keyword_init: true
@@ -2764,6 +2938,7 @@ module Aws::SSOAdmin
     #   <p>The value of the tag.</p>
     #   @return [String]
     class Tag < Struct.new(
+      nil,
       :key,
       :value,
       keyword_init: true
@@ -2781,6 +2956,7 @@ module Aws::SSOAdmin
     #   <p>A set of key-value pairs that are used to manage the resource.</p>
     #   @return [Array<Types::Tag>]
     class TagResourceRequest < Struct.new(
+      nil,
       :instance_arn,
       :resource_arn,
       :tags,
@@ -2790,6 +2966,7 @@ module Aws::SSOAdmin
     end
 
     class TagResourceResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -2802,6 +2979,7 @@ module Aws::SSOAdmin
     #   <p>The reason for the throttling exception.</p>
     #   @return [String]
     class ThrottlingException < Struct.new(
+      nil,
       :message,
       :reason,
       keyword_init: true
@@ -2811,6 +2989,7 @@ module Aws::SSOAdmin
 
     # <p>A structure that defines configuration settings for an application that supports the OAuth 2.0 Token Exchange Grant. For more information, see <a href="https://datatracker.ietf.org/doc/html/rfc8693">RFC 8693</a>.</p>
     class TokenExchangeGrant < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -2842,6 +3021,7 @@ module Aws::SSOAdmin
     #   <p>The type of trusted token issuer.</p>
     #   @return [String]
     class TrustedTokenIssuerMetadata < Struct.new(
+      nil,
       :trusted_token_issuer_arn,
       :name,
       :trusted_token_issuer_type,
@@ -2875,6 +3055,7 @@ module Aws::SSOAdmin
     #   <p>The keys of tags that are attached to the resource.</p>
     #   @return [Array<String>]
     class UntagResourceRequest < Struct.new(
+      nil,
       :instance_arn,
       :resource_arn,
       :tag_keys,
@@ -2884,6 +3065,7 @@ module Aws::SSOAdmin
     end
 
     class UntagResourceResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -2894,6 +3076,7 @@ module Aws::SSOAdmin
     #   <p>A structure that describes the sign-in options for an application portal.</p>
     #   @return [Types::SignInOptions]
     class UpdateApplicationPortalOptions < Struct.new(
+      nil,
       :sign_in_options,
       keyword_init: true
     )
@@ -2916,6 +3099,7 @@ module Aws::SSOAdmin
     #   <p>A structure that describes the options for the portal associated with an application.</p>
     #   @return [Types::UpdateApplicationPortalOptions]
     class UpdateApplicationRequest < Struct.new(
+      nil,
       :application_arn,
       :name,
       :description,
@@ -2927,6 +3111,7 @@ module Aws::SSOAdmin
     end
 
     class UpdateApplicationResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -2939,6 +3124,7 @@ module Aws::SSOAdmin
     #   <p>Updates the attributes for your ABAC configuration.</p>
     #   @return [Types::InstanceAccessControlAttributeConfiguration]
     class UpdateInstanceAccessControlAttributeConfigurationRequest < Struct.new(
+      nil,
       :instance_arn,
       :instance_access_control_attribute_configuration,
       keyword_init: true
@@ -2947,6 +3133,7 @@ module Aws::SSOAdmin
     end
 
     class UpdateInstanceAccessControlAttributeConfigurationResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -2962,6 +3149,7 @@ module Aws::SSOAdmin
     #   <p>Specifies the encryption configuration for your IAM Identity Center instance. You can use this to configure customer managed KMS keys (CMK) or Amazon Web Services owned KMS keys for encrypting your instance data.</p>
     #   @return [Types::EncryptionConfiguration]
     class UpdateInstanceRequest < Struct.new(
+      nil,
       :name,
       :instance_arn,
       :encryption_configuration,
@@ -2971,6 +3159,7 @@ module Aws::SSOAdmin
     end
 
     class UpdateInstanceResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -2992,6 +3181,7 @@ module Aws::SSOAdmin
     #   <p>Used to redirect users within the application during the federation authentication process.</p>
     #   @return [String]
     class UpdatePermissionSetRequest < Struct.new(
+      nil,
       :instance_arn,
       :permission_set_arn,
       :description,
@@ -3003,6 +3193,7 @@ module Aws::SSOAdmin
     end
 
     class UpdatePermissionSetResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -3018,6 +3209,7 @@ module Aws::SSOAdmin
     #   <p>Specifies a structure with settings to apply to the specified trusted token issuer. The settings that you can provide are determined by the type of the trusted token issuer that you are updating.</p>
     #   @return [Types::TrustedTokenIssuerUpdateConfiguration]
     class UpdateTrustedTokenIssuerRequest < Struct.new(
+      nil,
       :trusted_token_issuer_arn,
       :name,
       :trusted_token_issuer_configuration,
@@ -3027,6 +3219,7 @@ module Aws::SSOAdmin
     end
 
     class UpdateTrustedTokenIssuerResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -3039,6 +3232,7 @@ module Aws::SSOAdmin
     #   <p>The reason for the validation exception.</p>
     #   @return [String]
     class ValidationException < Struct.new(
+      nil,
       :message,
       :reason,
       keyword_init: true

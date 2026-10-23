@@ -10,6 +10,7 @@ module Aws::TimestreamQuery
     # @!attribute message
     #   @return [String]
     class AccessDeniedException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -24,6 +25,7 @@ module Aws::TimestreamQuery
     #   <p>An Amazon Resource Name (ARN) that grants Timestream permission to publish notifications. This field is only visible if SNS Topic is provided when updating the account settings.</p>
     #   @return [String]
     class AccountSettingsNotificationConfiguration < Struct.new(
+      nil,
       :sns_configuration,
       :role_arn,
       keyword_init: true
@@ -36,6 +38,7 @@ module Aws::TimestreamQuery
     #               part of the query result. </p>
     #   @return [String]
     class CancelQueryRequest < Struct.new(
+      nil,
       :query_id,
       keyword_init: true
     )
@@ -47,6 +50,7 @@ module Aws::TimestreamQuery
     #               request for the query specified by <code>QueryId</code> has already been issued. </p>
     #   @return [String]
     class CancelQueryResponse < Struct.new(
+      nil,
       :cancellation_message,
       keyword_init: true
     )
@@ -65,6 +69,7 @@ module Aws::TimestreamQuery
     #               types are types such as arrays, rows, and others. </p>
     #   @return [Types::Type]
     class ColumnInfo < Struct.new(
+      nil,
       :name,
       :type,
       keyword_init: true
@@ -76,6 +81,7 @@ module Aws::TimestreamQuery
     # @!attribute message
     #   @return [String]
     class ConflictException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -144,6 +150,7 @@ module Aws::TimestreamQuery
     #               encountered when writing the query results. </p>
     #   @return [Types::ErrorReportConfiguration]
     class CreateScheduledQueryRequest < Struct.new(
+      nil,
       :name,
       :query_string,
       :schedule_configuration,
@@ -163,6 +170,7 @@ module Aws::TimestreamQuery
     #   <p>ARN for the created scheduled query.</p>
     #   @return [String]
     class CreateScheduledQueryResponse < Struct.new(
+      nil,
       :arn,
       keyword_init: true
     )
@@ -187,6 +195,7 @@ module Aws::TimestreamQuery
     #   <p> Indicates if the data point is null. </p>
     #   @return [Boolean]
     class Datum < Struct.new(
+      nil,
       :scalar_value,
       :time_series_value,
       :array_value,
@@ -201,6 +210,7 @@ module Aws::TimestreamQuery
     #   <p>The ARN of the scheduled query. </p>
     #   @return [String]
     class DeleteScheduledQueryRequest < Struct.new(
+      nil,
       :scheduled_query_arn,
       keyword_init: true
     )
@@ -208,6 +218,7 @@ module Aws::TimestreamQuery
     end
 
     class DescribeAccountSettingsRequest < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -229,6 +240,7 @@ module Aws::TimestreamQuery
     #   <p>An object that contains the usage settings for Timestream Compute Units (TCUs) in your account for the query workload. </p>
     #   @return [Types::QueryComputeResponse]
     class DescribeAccountSettingsResponse < Struct.new(
+      nil,
       :max_query_tcu,
       :query_pricing_model,
       :query_compute,
@@ -238,6 +250,7 @@ module Aws::TimestreamQuery
     end
 
     class DescribeEndpointsRequest < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -248,6 +261,7 @@ module Aws::TimestreamQuery
     #               request is made.</p>
     #   @return [Array<Types::Endpoint>]
     class DescribeEndpointsResponse < Struct.new(
+      nil,
       :endpoints,
       keyword_init: true
     )
@@ -258,6 +272,7 @@ module Aws::TimestreamQuery
     #   <p>The ARN of the scheduled query.</p>
     #   @return [String]
     class DescribeScheduledQueryRequest < Struct.new(
+      nil,
       :scheduled_query_arn,
       keyword_init: true
     )
@@ -268,6 +283,7 @@ module Aws::TimestreamQuery
     #   <p>The scheduled query.</p>
     #   @return [Types::ScheduledQueryDescription]
     class DescribeScheduledQueryResponse < Struct.new(
+      nil,
       :scheduled_query,
       keyword_init: true
     )
@@ -283,6 +299,7 @@ module Aws::TimestreamQuery
     #   <p>Type for the dimension. </p>
     #   @return [String]
     class DimensionMapping < Struct.new(
+      nil,
       :name,
       :dimension_value_type,
       keyword_init: true
@@ -299,6 +316,7 @@ module Aws::TimestreamQuery
     #   <p>The TTL for the endpoint, in minutes.</p>
     #   @return [Integer]
     class Endpoint < Struct.new(
+      nil,
       :address,
       :cache_period_in_minutes,
       keyword_init: true
@@ -316,6 +334,7 @@ module Aws::TimestreamQuery
     #   <p>The S3 configuration for the error reports.</p>
     #   @return [Types::S3Configuration]
     class ErrorReportConfiguration < Struct.new(
+      nil,
       :s3_configuration,
       keyword_init: true
     )
@@ -328,6 +347,7 @@ module Aws::TimestreamQuery
     #   <p>The S3 location where error reports are written.</p>
     #   @return [Types::S3ReportLocation]
     class ErrorReportLocation < Struct.new(
+      nil,
       :s3_report_location,
       keyword_init: true
     )
@@ -349,6 +369,7 @@ module Aws::TimestreamQuery
     #            <p>Enabling <code>QueryInsights</code> returns insights and metrics as a part of the Amazon SNS notification for the query that you executed. You can use <code>QueryInsights</code> to tune your query performance and cost.</p>
     #   @return [Types::ScheduledQueryInsights]
     class ExecuteScheduledQueryRequest < Struct.new(
+      nil,
       :scheduled_query_arn,
       :invocation_time,
       :client_token,
@@ -380,6 +401,7 @@ module Aws::TimestreamQuery
     #               destination data source.</p>
     #   @return [Integer]
     class ExecutionStats < Struct.new(
+      nil,
       :execution_time_in_millis,
       :data_writes,
       :bytes_metered,
@@ -405,6 +427,7 @@ module Aws::TimestreamQuery
     # @!attribute message
     #   @return [String]
     class InternalServerException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -415,6 +438,7 @@ module Aws::TimestreamQuery
     # @!attribute message
     #   @return [String]
     class InvalidEndpointException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -432,6 +456,7 @@ module Aws::TimestreamQuery
     #   <p>Error message describing the last account settings update status, visible only if an error occurred.</p>
     #   @return [String]
     class LastUpdate < Struct.new(
+      nil,
       :target_query_tcu,
       :status,
       :status_message,
@@ -450,6 +475,7 @@ module Aws::TimestreamQuery
     #   <p> A pagination token to resume pagination.</p>
     #   @return [String]
     class ListScheduledQueriesRequest < Struct.new(
+      nil,
       :max_results,
       :next_token,
       keyword_init: true
@@ -465,6 +491,7 @@ module Aws::TimestreamQuery
     #               truncated response.</p>
     #   @return [String]
     class ListScheduledQueriesResponse < Struct.new(
+      nil,
       :scheduled_queries,
       :next_token,
       keyword_init: true
@@ -483,6 +510,7 @@ module Aws::TimestreamQuery
     #   <p>A pagination token to resume pagination.</p>
     #   @return [String]
     class ListTagsForResourceRequest < Struct.new(
+      nil,
       :resource_arn,
       :max_results,
       :next_token,
@@ -499,6 +527,7 @@ module Aws::TimestreamQuery
     #                   <code>ListTagsForResourceResponse</code>.</p>
     #   @return [String]
     class ListTagsForResourceResponse < Struct.new(
+      nil,
       :tags,
       :next_token,
       keyword_init: true
@@ -529,6 +558,7 @@ module Aws::TimestreamQuery
     #               measures.</p>
     #   @return [Array<Types::MultiMeasureAttributeMapping>]
     class MixedMeasureMapping < Struct.new(
+      nil,
       :measure_name,
       :source_column,
       :target_measure_name,
@@ -551,6 +581,7 @@ module Aws::TimestreamQuery
     #   <p>Type of the attribute to be read from the source column.</p>
     #   @return [String]
     class MultiMeasureAttributeMapping < Struct.new(
+      nil,
       :source_column,
       :target_multi_measure_attribute_name,
       :measure_value_type,
@@ -572,6 +603,7 @@ module Aws::TimestreamQuery
     #               multi-measure attributes.</p>
     #   @return [Array<Types::MultiMeasureAttributeMapping>]
     class MultiMeasureMappings < Struct.new(
+      nil,
       :target_multi_measure_name,
       :multi_measure_attribute_mappings,
       keyword_init: true
@@ -585,6 +617,7 @@ module Aws::TimestreamQuery
     #   <p>Details about the Amazon Simple Notification Service (SNS) configuration. This field is visible only when SNS Topic is provided when updating the account settings.  </p>
     #   @return [Types::SnsConfiguration]
     class NotificationConfiguration < Struct.new(
+      nil,
       :sns_configuration,
       keyword_init: true
     )
@@ -602,6 +635,7 @@ module Aws::TimestreamQuery
     #               and timeseries.</p>
     #   @return [Types::Type]
     class ParameterMapping < Struct.new(
+      nil,
       :name,
       :type,
       keyword_init: true
@@ -620,6 +654,7 @@ module Aws::TimestreamQuery
     #               use.</p>
     #   @return [Boolean]
     class PrepareQueryRequest < Struct.new(
+      nil,
       :query_string,
       :validate_only,
       keyword_init: true
@@ -637,6 +672,7 @@ module Aws::TimestreamQuery
     #   <p>A list of parameters used in the submitted query string. </p>
     #   @return [Array<Types::ParameterMapping>]
     class PrepareQueryResponse < Struct.new(
+      nil,
       :query_string,
       :columns,
       :parameters,
@@ -653,6 +689,7 @@ module Aws::TimestreamQuery
     #   <p>Configuration settings for notifications related to the provisioned capacity update.</p>
     #   @return [Types::AccountSettingsNotificationConfiguration]
     class ProvisionedCapacityRequest < Struct.new(
+      nil,
       :target_query_tcu,
       :notification_configuration,
       keyword_init: true
@@ -671,6 +708,7 @@ module Aws::TimestreamQuery
     #   <p>Information about the last update to the provisioned capacity settings.</p>
     #   @return [Types::LastUpdate]
     class ProvisionedCapacityResponse < Struct.new(
+      nil,
       :active_query_tcu,
       :notification_configuration,
       :last_update,
@@ -687,6 +725,7 @@ module Aws::TimestreamQuery
     #   <p>Configuration object that contains settings for provisioned Timestream Compute Units (TCUs) in your account.</p>
     #   @return [Types::ProvisionedCapacityRequest]
     class QueryComputeRequest < Struct.new(
+      nil,
       :compute_mode,
       :provisioned_capacity,
       keyword_init: true
@@ -702,6 +741,7 @@ module Aws::TimestreamQuery
     #   <p>Configuration object that contains settings for provisioned Timestream Compute Units (TCUs) in your account.</p>
     #   @return [Types::ProvisionedCapacityResponse]
     class QueryComputeResponse < Struct.new(
+      nil,
       :compute_mode,
       :provisioned_capacity,
       keyword_init: true
@@ -714,6 +754,7 @@ module Aws::TimestreamQuery
     # @!attribute message
     #   @return [String]
     class QueryExecutionException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -758,6 +799,7 @@ module Aws::TimestreamQuery
     #            </ul>
     #   @return [String]
     class QueryInsights < Struct.new(
+      nil,
       :mode,
       keyword_init: true
     )
@@ -801,6 +843,7 @@ module Aws::TimestreamQuery
     #   <p>Indicates the size, in bytes, written by the <code>Unload</code> operation.</p>
     #   @return [Integer]
     class QueryInsightsResponse < Struct.new(
+      nil,
       :query_spatial_coverage,
       :query_temporal_range,
       :query_table_count,
@@ -924,6 +967,7 @@ module Aws::TimestreamQuery
     #            <p>Enabling <code>QueryInsights</code> returns insights and metrics in addition to query results for the query that you executed. You can use <code>QueryInsights</code> to tune your query performance.</p>
     #   @return [Types::QueryInsights]
     class QueryRequest < Struct.new(
+      nil,
       :query_string,
       :client_token,
       :next_token,
@@ -955,6 +999,7 @@ module Aws::TimestreamQuery
     #   <p>Encapsulates <code>QueryInsights</code> containing insights and metrics related to the query that you executed.</p>
     #   @return [Types::QueryInsightsResponse]
     class QueryResponse < Struct.new(
+      nil,
       :query_id,
       :next_token,
       :rows,
@@ -994,6 +1039,7 @@ module Aws::TimestreamQuery
     #            </ul>
     #   @return [Types::QuerySpatialCoverageMax]
     class QuerySpatialCoverage < Struct.new(
+      nil,
       :max,
       keyword_init: true
     )
@@ -1011,6 +1057,7 @@ module Aws::TimestreamQuery
     #   <p>The partition key used for partitioning, which can be a default <code>measure_name</code> or a <a href="https://docs.aws.amazon.com/timestream/latest/developerguide/customer-defined-partition-keys.html">customer defined partition key</a>.</p>
     #   @return [Array<String>]
     class QuerySpatialCoverageMax < Struct.new(
+      nil,
       :value,
       :table_arn,
       :partition_key,
@@ -1040,6 +1087,7 @@ module Aws::TimestreamQuery
     #               the query completes running or when the query is cancelled. </p>
     #   @return [Integer]
     class QueryStatus < Struct.new(
+      nil,
       :progress_percentage,
       :cumulative_bytes_scanned,
       :cumulative_bytes_metered,
@@ -1070,6 +1118,7 @@ module Aws::TimestreamQuery
     #            </ul>
     #   @return [Types::QueryTemporalRangeMax]
     class QueryTemporalRange < Struct.new(
+      nil,
       :max,
       keyword_init: true
     )
@@ -1084,6 +1133,7 @@ module Aws::TimestreamQuery
     #   <p>The Amazon Resource Name (ARN) of the table which is queried with the largest time range.</p>
     #   @return [String]
     class QueryTemporalRangeMax < Struct.new(
+      nil,
       :value,
       :table_arn,
       keyword_init: true
@@ -1103,6 +1153,7 @@ module Aws::TimestreamQuery
     #   <p>The ARN of the scheduled query.</p>
     #   @return [String]
     class ResourceNotFoundException < Struct.new(
+      nil,
       :message,
       :scheduled_query_arn,
       keyword_init: true
@@ -1115,6 +1166,7 @@ module Aws::TimestreamQuery
     #   <p>List of data points in a single row of the result set.</p>
     #   @return [Array<Types::Datum>]
     class Row < Struct.new(
+      nil,
       :data,
       keyword_init: true
     )
@@ -1134,6 +1186,7 @@ module Aws::TimestreamQuery
     #               specified, Timestream will choose SSE_S3 as default. </p>
     #   @return [String]
     class S3Configuration < Struct.new(
+      nil,
       :bucket_name,
       :object_key_prefix,
       :encryption_option,
@@ -1150,6 +1203,7 @@ module Aws::TimestreamQuery
     #   <p>S3 key. </p>
     #   @return [String]
     class S3ReportLocation < Struct.new(
+      nil,
       :bucket_name,
       :object_key,
       keyword_init: true
@@ -1163,6 +1217,7 @@ module Aws::TimestreamQuery
     #               expression or a rate expression. </p>
     #   @return [String]
     class ScheduleConfiguration < Struct.new(
+      nil,
       :schedule_expression,
       keyword_init: true
     )
@@ -1198,6 +1253,7 @@ module Aws::TimestreamQuery
     #   <p>Status of the last scheduled query run.</p>
     #   @return [String]
     class ScheduledQuery < Struct.new(
+      nil,
       :arn,
       :name,
       :creation_time,
@@ -1259,6 +1315,7 @@ module Aws::TimestreamQuery
     #   <p>Runtime summary for the last five failed scheduled query runs.</p>
     #   @return [Array<Types::ScheduledQueryRunSummary>]
     class ScheduledQueryDescription < Struct.new(
+      nil,
       :arn,
       :name,
       :query_string,
@@ -1294,6 +1351,7 @@ module Aws::TimestreamQuery
     #            </ul>
     #   @return [String]
     class ScheduledQueryInsights < Struct.new(
+      nil,
       :mode,
       keyword_init: true
     )
@@ -1328,6 +1386,7 @@ module Aws::TimestreamQuery
     #   <p>Indicates the size of query result set in bytes. You can use this data to validate if the result set has changed as part of the query tuning exercise.</p>
     #   @return [Integer]
     class ScheduledQueryInsightsResponse < Struct.new(
+      nil,
       :query_spatial_coverage,
       :query_temporal_range,
       :query_table_count,
@@ -1371,6 +1430,7 @@ module Aws::TimestreamQuery
     #               the error report to get more detailed error reasons. </p>
     #   @return [String]
     class ScheduledQueryRunSummary < Struct.new(
+      nil,
       :invocation_time,
       :trigger_time,
       :run_status,
@@ -1403,6 +1463,7 @@ module Aws::TimestreamQuery
     #   <p>True, if the column name was aliased by the query. False otherwise.</p>
     #   @return [Boolean]
     class SelectColumn < Struct.new(
+      nil,
       :name,
       :type,
       :database_name,
@@ -1417,6 +1478,7 @@ module Aws::TimestreamQuery
     # @!attribute message
     #   @return [String]
     class ServiceQuotaExceededException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -1428,6 +1490,7 @@ module Aws::TimestreamQuery
     #   <p>SNS topic ARN that the scheduled query status notifications will be sent to.</p>
     #   @return [String]
     class SnsConfiguration < Struct.new(
+      nil,
       :topic_arn,
       keyword_init: true
     )
@@ -1445,6 +1508,7 @@ module Aws::TimestreamQuery
     #   <p>The value of the tag. Tag values are case sensitive and can be null. </p>
     #   @return [String]
     class Tag < Struct.new(
+      nil,
       :key,
       :value,
       keyword_init: true
@@ -1460,6 +1524,7 @@ module Aws::TimestreamQuery
     #   <p>The tags to be assigned to the Timestream resource.</p>
     #   @return [Array<Types::Tag>]
     class TagResourceRequest < Struct.new(
+      nil,
       :resource_arn,
       :tags,
       keyword_init: true
@@ -1468,6 +1533,7 @@ module Aws::TimestreamQuery
     end
 
     class TagResourceResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1478,6 +1544,7 @@ module Aws::TimestreamQuery
     #   <p>Configuration needed to write data into the Timestream database and table.</p>
     #   @return [Types::TimestreamConfiguration]
     class TargetConfiguration < Struct.new(
+      nil,
       :timestream_configuration,
       keyword_init: true
     )
@@ -1490,6 +1557,7 @@ module Aws::TimestreamQuery
     #   <p>Query result destination details for Timestream data source.</p>
     #   @return [Types::TimestreamDestination]
     class TargetDestination < Struct.new(
+      nil,
       :timestream_destination,
       keyword_init: true
     )
@@ -1500,6 +1568,7 @@ module Aws::TimestreamQuery
     # @!attribute message
     #   @return [String]
     class ThrottlingException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -1517,6 +1586,7 @@ module Aws::TimestreamQuery
     #   <p>The measure value for the data point.</p>
     #   @return [Types::Datum]
     class TimeSeriesDataPoint < Struct.new(
+      nil,
       :time,
       :value,
       keyword_init: true
@@ -1552,6 +1622,7 @@ module Aws::TimestreamQuery
     #   <p>Name of the measure column.</p>
     #   @return [String]
     class TimestreamConfiguration < Struct.new(
+      nil,
       :database_name,
       :table_name,
       :time_column,
@@ -1572,6 +1643,7 @@ module Aws::TimestreamQuery
     #   <p>Timestream table name. </p>
     #   @return [String]
     class TimestreamDestination < Struct.new(
+      nil,
       :database_name,
       :table_name,
       keyword_init: true
@@ -1598,6 +1670,7 @@ module Aws::TimestreamQuery
     #   <p>Indicates if the column is a row.</p>
     #   @return [Array<Types::ColumnInfo>]
     class Type < Struct.new(
+      nil,
       :scalar_type,
       :array_column_info,
       :time_series_measure_value_column_info,
@@ -1616,6 +1689,7 @@ module Aws::TimestreamQuery
     #               will be removed from the Timestream resource. </p>
     #   @return [Array<String>]
     class UntagResourceRequest < Struct.new(
+      nil,
       :resource_arn,
       :tag_keys,
       keyword_init: true
@@ -1624,6 +1698,7 @@ module Aws::TimestreamQuery
     end
 
     class UntagResourceResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1646,6 +1721,7 @@ module Aws::TimestreamQuery
     #            </note>
     #   @return [Types::QueryComputeRequest]
     class UpdateAccountSettingsRequest < Struct.new(
+      nil,
       :max_query_tcu,
       :query_pricing_model,
       :query_compute,
@@ -1664,6 +1740,7 @@ module Aws::TimestreamQuery
     #   <p>Confirms the updated account settings for querying data in your account.</p>
     #   @return [Types::QueryComputeResponse]
     class UpdateAccountSettingsResponse < Struct.new(
+      nil,
       :max_query_tcu,
       :query_pricing_model,
       :query_compute,
@@ -1679,6 +1756,7 @@ module Aws::TimestreamQuery
     #   <p>State of the scheduled query. </p>
     #   @return [String]
     class UpdateScheduledQueryRequest < Struct.new(
+      nil,
       :scheduled_query_arn,
       :state,
       keyword_init: true
@@ -1690,6 +1768,7 @@ module Aws::TimestreamQuery
     # @!attribute message
     #   @return [String]
     class ValidationException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )

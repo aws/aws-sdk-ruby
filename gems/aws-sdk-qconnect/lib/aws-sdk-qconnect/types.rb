@@ -51,6 +51,7 @@ module Aws::QConnect
     #   <p>The ID of the AI Agent to be configured.</p>
     #   @return [String]
     class AIAgentConfigurationData < Struct.new(
+      nil,
       :ai_agent_id,
       keyword_init: true
     )
@@ -98,6 +99,7 @@ module Aws::QConnect
     #   <p>The status of the AI Agent.</p>
     #   @return [String]
     class AIAgentData < Struct.new(
+      nil,
       :assistant_id,
       :assistant_arn,
       :ai_agent_id,
@@ -157,6 +159,7 @@ module Aws::QConnect
     #   <p>The tags used to organize, track, or control access for this resource.</p>
     #   @return [Hash<String, String>]
     class AIAgentSummary < Struct.new(
+      nil,
       :name,
       :assistant_id,
       :assistant_arn,
@@ -183,6 +186,7 @@ module Aws::QConnect
     #   <p>The version number for this AI Agent version.</p>
     #   @return [Integer]
     class AIAgentVersionSummary < Struct.new(
+      nil,
       :ai_agent_summary,
       :version_number,
       keyword_init: true
@@ -195,6 +199,7 @@ module Aws::QConnect
     #   <p>Contains the type of the content filter and how strongly it should apply to prompts and model responses.</p>
     #   @return [Array<Types::GuardrailContentFilterConfig>]
     class AIGuardrailContentPolicyConfig < Struct.new(
+      nil,
       :filters_config,
       keyword_init: true
     )
@@ -206,6 +211,7 @@ module Aws::QConnect
     #   <p>The filter configuration details for the AI Guardrails contextual grounding policy.</p>
     #   @return [Array<Types::GuardrailContextualGroundingFilterConfig>]
     class AIGuardrailContextualGroundingPolicyConfig < Struct.new(
+      nil,
       :filters_config,
       keyword_init: true
     )
@@ -265,6 +271,7 @@ module Aws::QConnect
     #   <p>The time the AI Guardrail was last modified.</p>
     #   @return [Time]
     class AIGuardrailData < Struct.new(
+      nil,
       :assistant_id,
       :assistant_arn,
       :ai_guardrail_arn,
@@ -295,6 +302,7 @@ module Aws::QConnect
     #   <p>A list of regular expressions to configure to the AI Guardrail.</p>
     #   @return [Array<Types::GuardrailRegexConfig>]
     class AIGuardrailSensitiveInformationPolicyConfig < Struct.new(
+      nil,
       :pii_entities_config,
       :regexes_config,
       keyword_init: true
@@ -334,6 +342,7 @@ module Aws::QConnect
     #   <p>The tags used to organize, track, or control access for this resource.</p>
     #   @return [Hash<String, String>]
     class AIGuardrailSummary < Struct.new(
+      nil,
       :name,
       :assistant_id,
       :assistant_arn,
@@ -354,6 +363,7 @@ module Aws::QConnect
     #   <p>A list of policies related to topics that the AI Guardrail should deny.</p>
     #   @return [Array<Types::GuardrailTopicConfig>]
     class AIGuardrailTopicPolicyConfig < Struct.new(
+      nil,
       :topics_config,
       keyword_init: true
     )
@@ -368,6 +378,7 @@ module Aws::QConnect
     #   <p>The version number for this AI Guardrail version.</p>
     #   @return [Integer]
     class AIGuardrailVersionSummary < Struct.new(
+      nil,
       :ai_guardrail_summary,
       :version_number,
       keyword_init: true
@@ -383,6 +394,7 @@ module Aws::QConnect
     #   <p>A list of managed words to configure for the AI Guardrail.</p>
     #   @return [Array<Types::GuardrailManagedWordsConfig>]
     class AIGuardrailWordPolicyConfig < Struct.new(
+      nil,
       :words_config,
       :managed_word_lists_config,
       keyword_init: true
@@ -440,6 +452,7 @@ module Aws::QConnect
     #   <p>The status of the AI Prompt.</p>
     #   @return [String]
     class AIPromptData < Struct.new(
+      nil,
       :assistant_id,
       :assistant_arn,
       :ai_prompt_id,
@@ -508,6 +521,7 @@ module Aws::QConnect
     #   <p>The tags used to organize, track, or control access for this resource.</p>
     #   @return [Hash<String, String>]
     class AIPromptSummary < Struct.new(
+      nil,
       :name,
       :assistant_id,
       :assistant_arn,
@@ -551,6 +565,7 @@ module Aws::QConnect
     #   <p>The version number for this AI Prompt version.</p>
     #   @return [Integer]
     class AIPromptVersionSummary < Struct.new(
+      nil,
       :ai_prompt_summary,
       :version_number,
       keyword_init: true
@@ -562,6 +577,7 @@ module Aws::QConnect
     # @!attribute message
     #   @return [String]
     class AccessDeniedException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -578,6 +594,7 @@ module Aws::QConnect
     #   <p>The version number of the message template version to activate.</p>
     #   @return [Integer]
     class ActivateMessageTemplateRequest < Struct.new(
+      nil,
       :knowledge_base_id,
       :message_template_id,
       :version_number,
@@ -596,6 +613,7 @@ module Aws::QConnect
     #   <p>The version number of the message template version that is activated.</p>
     #   @return [Integer]
     class ActivateMessageTemplateResponse < Struct.new(
+      nil,
       :message_template_arn,
       :message_template_id,
       :version_number,
@@ -612,6 +630,7 @@ module Aws::QConnect
     #   <p>The agent’s last name as entered in their Amazon Connect user account.</p>
     #   @return [String]
     class AgentAttributes < Struct.new(
+      nil,
       :first_name,
       :last_name,
       keyword_init: true
@@ -624,6 +643,7 @@ module Aws::QConnect
     #   <p> The Amazon Resource Name (ARN) of an Amazon Connect flow. Step-by-step guides are a type of flow.</p>
     #   @return [String]
     class AmazonConnectGuideAssociationData < Struct.new(
+      nil,
       :flow_id,
       keyword_init: true
     )
@@ -650,6 +670,7 @@ module Aws::QConnect
     #   <p>The locale to which specifies the language and region settings that determine the response language for <a href="https://docs.aws.amazon.com/connect/latest/APIReference/API_amazon-q-connect_QueryAssistant.html">QueryAssistant</a>.</p> <note> <p>For more information on supported locales, see <a href="https://docs.aws.amazon.com/connect/latest/adminguide/supported-languages.html#qic-notes-languages">Language support for Amazon Q in Connect</a>.</p> </note>
     #   @return [String]
     class AnswerRecommendationAIAgentConfiguration < Struct.new(
+      nil,
       :intent_labeling_generation_ai_prompt_id,
       :query_reformulation_ai_prompt_id,
       :answer_generation_ai_prompt_id,
@@ -669,6 +690,7 @@ module Aws::QConnect
     #   <p>The fields from the source that are made available to your agents in Amazon Q in Connect. Optional if ObjectConfiguration is included in the provided DataIntegration. </p> <ul> <li> <p> For <a href="https://developer.salesforce.com/docs/atlas.en-us.knowledge_dev.meta/knowledge_dev/sforce_api_objects_knowledge__kav.htm"> Salesforce</a>, you must include at least <code>Id</code>, <code>ArticleNumber</code>, <code>VersionNumber</code>, <code>Title</code>, <code>PublishStatus</code>, and <code>IsDeleted</code>. </p> </li> <li> <p>For <a href="https://developer.servicenow.com/dev.do#!/reference/api/rome/rest/knowledge-management-api"> ServiceNow</a>, you must include at least <code>number</code>, <code>short_description</code>, <code>sys_mod_count</code>, <code>workflow_state</code>, and <code>active</code>. </p> </li> <li> <p>For <a href="https://developer.zendesk.com/api-reference/help_center/help-center-api/articles/"> Zendesk</a>, you must include at least <code>id</code>, <code>title</code>, <code>updated_at</code>, and <code>draft</code>. </p> </li> </ul> <p>Make sure to include additional fields. These fields are indexed and used to source recommendations. </p>
     #   @return [Array<String>]
     class AppIntegrationsConfiguration < Struct.new(
+      nil,
       :app_integration_arn,
       :object_fields,
       keyword_init: true
@@ -699,6 +721,7 @@ module Aws::QConnect
     #   <p>The tags used to organize, track, or control access for this resource.</p>
     #   @return [Hash<String, String>]
     class AssistantAssociationData < Struct.new(
+      nil,
       :assistant_association_id,
       :assistant_association_arn,
       :assistant_id,
@@ -764,6 +787,7 @@ module Aws::QConnect
     #   <p>The tags used to organize, track, or control access for this resource.</p>
     #   @return [Hash<String, String>]
     class AssistantAssociationSummary < Struct.new(
+      nil,
       :assistant_association_id,
       :assistant_association_arn,
       :assistant_id,
@@ -781,6 +805,7 @@ module Aws::QConnect
     #   <p>The type of Amazon Q in Connect assistant capability. </p>
     #   @return [String]
     class AssistantCapabilityConfiguration < Struct.new(
+      nil,
       :type,
       keyword_init: true
     )
@@ -822,6 +847,7 @@ module Aws::QConnect
     #   <p>The configuration of the AI Agents (mapped by AI Agent Type to AI Agent version) that is set on the Amazon Q in Connect Assistant.</p>
     #   @return [Hash<String, Types::AIAgentConfigurationData>]
     class AssistantData < Struct.new(
+      nil,
       :assistant_id,
       :assistant_arn,
       :name,
@@ -843,6 +869,7 @@ module Aws::QConnect
     #   <p>The Amazon Resource Name (ARN) of the integrated Amazon SNS topic used for streaming chat messages.</p>
     #   @return [String]
     class AssistantIntegrationConfiguration < Struct.new(
+      nil,
       :topic_integration_arn,
       keyword_init: true
     )
@@ -884,6 +911,7 @@ module Aws::QConnect
     #   <p>The configuration of the AI Agents (mapped by AI Agent Type to AI Agent version) that is set on the Amazon Q in Connect Assistant.</p>
     #   @return [Hash<String, Types::AIAgentConfigurationData>]
     class AssistantSummary < Struct.new(
+      nil,
       :assistant_id,
       :assistant_arn,
       :name,
@@ -911,6 +939,7 @@ module Aws::QConnect
     #   <p>The data of the configuration for an Amazon Q in Connect Assistant Association.</p>
     #   @return [Types::AssociationConfigurationData]
     class AssociationConfiguration < Struct.new(
+      nil,
       :association_id,
       :association_type,
       :association_configuration_data,
@@ -942,6 +971,7 @@ module Aws::QConnect
     #   <p>Instructions for interpreting the contents of a document.</p>
     #   @return [Types::ParsingPrompt]
     class BedrockFoundationModelConfigurationForParsing < Struct.new(
+      nil,
       :model_arn,
       :parsing_prompt,
       keyword_init: true
@@ -963,6 +993,7 @@ module Aws::QConnect
     #   <p>Settings for semantic document chunking for a data source. Semantic chunking splits a document into smaller documents based on groups of similar content derived from the text with natural language processing.</p>
     #   @return [Types::SemanticChunkingConfiguration]
     class ChunkingConfiguration < Struct.new(
+      nil,
       :chunking_strategy,
       :fixed_size_chunking_configuration,
       :hierarchical_chunking_configuration,
@@ -980,6 +1011,7 @@ module Aws::QConnect
     #   <p>Where the text with a citation ends in the generated output.</p>
     #   @return [Integer]
     class CitationSpan < Struct.new(
+      nil,
       :begin_offset_inclusive,
       :end_offset_exclusive,
       keyword_init: true
@@ -1012,6 +1044,7 @@ module Aws::QConnect
     # @!attribute message
     #   @return [String]
     class ConflictException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -1023,6 +1056,7 @@ module Aws::QConnect
     #   <p>The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.</p>
     #   @return [String]
     class ConnectConfiguration < Struct.new(
+      nil,
       :instance_id,
       keyword_init: true
     )
@@ -1073,6 +1107,7 @@ module Aws::QConnect
     #   <p>The tags used to organize, track, or control access for this resource.</p>
     #   @return [Hash<String, String>]
     class ContentAssociationData < Struct.new(
+      nil,
       :knowledge_base_id,
       :knowledge_base_arn,
       :content_id,
@@ -1116,6 +1151,7 @@ module Aws::QConnect
     #   <p>The tags used to organize, track, or control access for this resource.</p>
     #   @return [Hash<String, String>]
     class ContentAssociationSummary < Struct.new(
+      nil,
       :knowledge_base_id,
       :knowledge_base_arn,
       :content_id,
@@ -1174,6 +1210,7 @@ module Aws::QConnect
     #   <p>The expiration time of the URL as an epoch timestamp.</p>
     #   @return [Time]
     class ContentData < Struct.new(
+      nil,
       :content_arn,
       :content_id,
       :knowledge_base_arn,
@@ -1201,6 +1238,7 @@ module Aws::QConnect
     #   <p>Details about the content ranking data.</p>
     #   @return [Types::RankingData]
     class ContentDataDetails < Struct.new(
+      nil,
       :text_data,
       :ranking_data,
       keyword_init: true
@@ -1243,6 +1281,7 @@ module Aws::QConnect
     #   <p>The type of reference content.</p>
     #   @return [String]
     class ContentReference < Struct.new(
+      nil,
       :knowledge_base_arn,
       :knowledge_base_id,
       :content_arn,
@@ -1289,6 +1328,7 @@ module Aws::QConnect
     #   <p>The tags used to organize, track, or control access for this resource.</p>
     #   @return [Hash<String, String>]
     class ContentSummary < Struct.new(
+      nil,
       :content_arn,
       :content_id,
       :knowledge_base_arn,
@@ -1310,6 +1350,7 @@ module Aws::QConnect
     #   <p>The self service conversation history before the Amazon Q in Connect session.</p>
     #   @return [Array<Types::SelfServiceConversationHistory>]
     class ConversationContext < Struct.new(
+      nil,
       :self_service_conversation_history,
       keyword_init: true
     )
@@ -1324,6 +1365,7 @@ module Aws::QConnect
     #   <p>The reason of the conversation state.</p>
     #   @return [String]
     class ConversationState < Struct.new(
+      nil,
       :status,
       :reason,
       keyword_init: true
@@ -1356,6 +1398,7 @@ module Aws::QConnect
     #   <p>The description of the AI Agent.</p>
     #   @return [String]
     class CreateAIAgentRequest < Struct.new(
+      nil,
       :client_token,
       :assistant_id,
       :name,
@@ -1373,6 +1416,7 @@ module Aws::QConnect
     #   <p>The data of the created AI Agent.</p>
     #   @return [Types::AIAgentData]
     class CreateAIAgentResponse < Struct.new(
+      nil,
       :ai_agent,
       keyword_init: true
     )
@@ -1392,6 +1436,7 @@ module Aws::QConnect
     #   <p>A unique, case-sensitive identifier that you provide to ensure the idempotency of the request. If not provided, the Amazon Web Services SDK populates this field. For more information about idempotency, see <a href="http://aws.amazon.com/builders-library/making-retries-safe-with-idempotent-APIs/">Making retries safe with idempotent APIs</a>..</p>
     #   @return [String]
     class CreateAIAgentVersionRequest < Struct.new(
+      nil,
       :assistant_id,
       :ai_agent_id,
       :modified_time,
@@ -1408,6 +1453,7 @@ module Aws::QConnect
     #   <p>The version number of the AI Agent version.</p>
     #   @return [Integer]
     class CreateAIAgentVersionResponse < Struct.new(
+      nil,
       :ai_agent,
       :version_number,
       keyword_init: true
@@ -1455,6 +1501,7 @@ module Aws::QConnect
     #   <p>The tags used to organize, track, or control access for this resource.</p>
     #   @return [Hash<String, String>]
     class CreateAIGuardrailRequest < Struct.new(
+      nil,
       :client_token,
       :assistant_id,
       :name,
@@ -1477,6 +1524,7 @@ module Aws::QConnect
     #   <p>The data of the AI Guardrail.</p>
     #   @return [Types::AIGuardrailData]
     class CreateAIGuardrailResponse < Struct.new(
+      nil,
       :ai_guardrail,
       keyword_init: true
     )
@@ -1496,6 +1544,7 @@ module Aws::QConnect
     #   <p>A unique, case-sensitive identifier that you provide to ensure the idempotency of the request. If not provided, the Amazon Web Services SDK populates this field. For more information about idempotency, see <a href="http://aws.amazon.com/builders-library/making-retries-safe-with-idempotent-APIs/">Making retries safe with idempotent APIs</a>..</p>
     #   @return [String]
     class CreateAIGuardrailVersionRequest < Struct.new(
+      nil,
       :assistant_id,
       :ai_guardrail_id,
       :modified_time,
@@ -1512,6 +1561,7 @@ module Aws::QConnect
     #   <p>The version number of the AI Guardrail version.</p>
     #   @return [Integer]
     class CreateAIGuardrailVersionResponse < Struct.new(
+      nil,
       :ai_guardrail,
       :version_number,
       keyword_init: true
@@ -1553,6 +1603,7 @@ module Aws::QConnect
     #   <p>The description of the AI Prompt.</p>
     #   @return [String]
     class CreateAIPromptRequest < Struct.new(
+      nil,
       :client_token,
       :assistant_id,
       :name,
@@ -1573,6 +1624,7 @@ module Aws::QConnect
     #   <p>The data of the AI Prompt.</p>
     #   @return [Types::AIPromptData]
     class CreateAIPromptResponse < Struct.new(
+      nil,
       :ai_prompt,
       keyword_init: true
     )
@@ -1592,6 +1644,7 @@ module Aws::QConnect
     #   <p>A unique, case-sensitive identifier that you provide to ensure the idempotency of the request. If not provided, the Amazon Web Services SDK populates this field. For more information about idempotency, see <a href="http://aws.amazon.com/builders-library/making-retries-safe-with-idempotent-APIs/">Making retries safe with idempotent APIs</a>..</p>
     #   @return [String]
     class CreateAIPromptVersionRequest < Struct.new(
+      nil,
       :assistant_id,
       :ai_prompt_id,
       :modified_time,
@@ -1608,6 +1661,7 @@ module Aws::QConnect
     #   <p>The version number of the AI Prompt version.</p>
     #   @return [Integer]
     class CreateAIPromptVersionResponse < Struct.new(
+      nil,
       :ai_prompt,
       :version_number,
       keyword_init: true
@@ -1631,6 +1685,7 @@ module Aws::QConnect
     #   <p>The tags used to organize, track, or control access for this resource.</p>
     #   @return [Hash<String, String>]
     class CreateAssistantAssociationInput < Struct.new(
+      nil,
       :assistant_id,
       :association_type,
       :association,
@@ -1645,6 +1700,7 @@ module Aws::QConnect
     #   <p>The assistant association.</p>
     #   @return [Types::AssistantAssociationData]
     class CreateAssistantAssociationOutput < Struct.new(
+      nil,
       :assistant_association,
       keyword_init: true
     )
@@ -1670,6 +1726,7 @@ module Aws::QConnect
     #   <p>The configuration information for the customer managed key used for encryption. </p> <p>The customer managed key must have a policy that allows <code>kms:CreateGrant</code>, <code> kms:DescribeKey</code>, <code>kms:Decrypt</code>, and <code>kms:GenerateDataKey*</code> permissions to the IAM identity using the key to invoke Amazon Q in Connect. To use Amazon Q in Connect with chat, the key policy must also allow <code>kms:Decrypt</code>, <code>kms:GenerateDataKey*</code>, and <code>kms:DescribeKey</code> permissions to the <code>connect.amazonaws.com</code> service principal. </p> <p>For more information about setting up a customer managed key for Amazon Q in Connect, see <a href="https://docs.aws.amazon.com/connect/latest/adminguide/enable-q.html">Enable Amazon Q in Connect for your instance</a>.</p>
     #   @return [Types::ServerSideEncryptionConfiguration]
     class CreateAssistantInput < Struct.new(
+      nil,
       :client_token,
       :name,
       :type,
@@ -1685,6 +1742,7 @@ module Aws::QConnect
     #   <p>Information about the assistant.</p>
     #   @return [Types::AssistantData]
     class CreateAssistantOutput < Struct.new(
+      nil,
       :assistant,
       keyword_init: true
     )
@@ -1710,6 +1768,7 @@ module Aws::QConnect
     #   <p>The tags used to organize, track, or control access for this resource.</p>
     #   @return [Hash<String, String>]
     class CreateContentAssociationRequest < Struct.new(
+      nil,
       :client_token,
       :knowledge_base_id,
       :content_id,
@@ -1725,6 +1784,7 @@ module Aws::QConnect
     #   <p>The association between Amazon Q in Connect content and another resource.</p>
     #   @return [Types::ContentAssociationData]
     class CreateContentAssociationResponse < Struct.new(
+      nil,
       :content_association,
       keyword_init: true
     )
@@ -1756,6 +1816,7 @@ module Aws::QConnect
     #   <p>The tags used to organize, track, or control access for this resource.</p>
     #   @return [Hash<String, String>]
     class CreateContentInput < Struct.new(
+      nil,
       :knowledge_base_id,
       :name,
       :title,
@@ -1773,6 +1834,7 @@ module Aws::QConnect
     #   <p>The content.</p>
     #   @return [Types::ContentData]
     class CreateContentOutput < Struct.new(
+      nil,
       :content,
       keyword_init: true
     )
@@ -1807,6 +1869,7 @@ module Aws::QConnect
     #   <p>The tags used to organize, track, or control access for this resource.</p>
     #   @return [Hash<String, String>]
     class CreateKnowledgeBaseInput < Struct.new(
+      nil,
       :client_token,
       :name,
       :knowledge_base_type,
@@ -1825,6 +1888,7 @@ module Aws::QConnect
     #   <p>The knowledge base.</p>
     #   @return [Types::KnowledgeBaseData]
     class CreateKnowledgeBaseOutput < Struct.new(
+      nil,
       :knowledge_base,
       keyword_init: true
     )
@@ -1850,6 +1914,7 @@ module Aws::QConnect
     #   <p>A unique, case-sensitive identifier that you provide to ensure the idempotency of the request. If not provided, the Amazon Web Services SDK populates this field. For more information about idempotency, see <a href="http://aws.amazon.com/builders-library/making-retries-safe-with-idempotent-APIs/">Making retries safe with idempotent APIs</a>.</p>
     #   @return [String]
     class CreateMessageTemplateAttachmentRequest < Struct.new(
+      nil,
       :knowledge_base_id,
       :message_template_id,
       :content_disposition,
@@ -1865,6 +1930,7 @@ module Aws::QConnect
     #   <p>The message template attachment.</p>
     #   @return [Types::MessageTemplateAttachment]
     class CreateMessageTemplateAttachmentResponse < Struct.new(
+      nil,
       :attachment,
       keyword_init: true
     )
@@ -1902,6 +1968,7 @@ module Aws::QConnect
     #   <p>The tags used to organize, track, or control access for this resource.</p>
     #   @return [Hash<String, String>]
     class CreateMessageTemplateRequest < Struct.new(
+      nil,
       :knowledge_base_id,
       :name,
       :content,
@@ -1921,6 +1988,7 @@ module Aws::QConnect
     #   <p>The message template.</p>
     #   @return [Types::MessageTemplateData]
     class CreateMessageTemplateResponse < Struct.new(
+      nil,
       :message_template,
       keyword_init: true
     )
@@ -1937,6 +2005,7 @@ module Aws::QConnect
     #   <p>The checksum value of the message template content that is referenced by the <code>$LATEST</code> qualifier. It can be returned in <code>MessageTemplateData</code> or <code>ExtendedMessageTemplateData</code>. It’s calculated by content, language, <code>defaultAttributes</code> and <code>Attachments</code> of the message template. If not supplied, the message template version will be created based on the message template content that is referenced by the <code>$LATEST</code> qualifier by default.</p>
     #   @return [String]
     class CreateMessageTemplateVersionRequest < Struct.new(
+      nil,
       :knowledge_base_id,
       :message_template_id,
       :message_template_content_sha256,
@@ -1949,6 +2018,7 @@ module Aws::QConnect
     #   <p>The message template.</p>
     #   @return [Types::ExtendedMessageTemplateData]
     class CreateMessageTemplateVersionResponse < Struct.new(
+      nil,
       :message_template,
       keyword_init: true
     )
@@ -1992,6 +2062,7 @@ module Aws::QConnect
     #   <p>The tags used to organize, track, or control access for this resource.</p>
     #   @return [Hash<String, String>]
     class CreateQuickResponseRequest < Struct.new(
+      nil,
       :knowledge_base_id,
       :name,
       :content,
@@ -2013,6 +2084,7 @@ module Aws::QConnect
     #   <p>The quick response.</p>
     #   @return [Types::QuickResponseData]
     class CreateQuickResponseResponse < Struct.new(
+      nil,
       :quick_response,
       keyword_init: true
     )
@@ -2044,6 +2116,7 @@ module Aws::QConnect
     #   <p>The Amazon Resource Name (ARN) of the email contact in Amazon Connect. Used to retrieve email content and establish session context for AI-powered email assistance.</p>
     #   @return [String]
     class CreateSessionInput < Struct.new(
+      nil,
       :client_token,
       :assistant_id,
       :name,
@@ -2061,6 +2134,7 @@ module Aws::QConnect
     #   <p>The session.</p>
     #   @return [Types::SessionData]
     class CreateSessionOutput < Struct.new(
+      nil,
       :session,
       keyword_init: true
     )
@@ -2243,6 +2317,7 @@ module Aws::QConnect
     #   <p>The custom attributes in customer profile attributes.</p>
     #   @return [Hash<String, String>]
     class CustomerProfileAttributes < Struct.new(
+      nil,
       :profile_id,
       :profile_arn,
       :first_name,
@@ -2384,6 +2459,7 @@ module Aws::QConnect
     #   <p>Details about the data.</p>
     #   @return [Types::DataDetails]
     class DataSummary < Struct.new(
+      nil,
       :reference,
       :details,
       keyword_init: true
@@ -2401,6 +2477,7 @@ module Aws::QConnect
     #   <p>The version number of the message template version to deactivate.</p>
     #   @return [Integer]
     class DeactivateMessageTemplateRequest < Struct.new(
+      nil,
       :knowledge_base_id,
       :message_template_id,
       :version_number,
@@ -2419,6 +2496,7 @@ module Aws::QConnect
     #   <p>The version number of the message template version that has been deactivated.</p>
     #   @return [Integer]
     class DeactivateMessageTemplateResponse < Struct.new(
+      nil,
       :message_template_arn,
       :message_template_id,
       :version_number,
@@ -2434,6 +2512,7 @@ module Aws::QConnect
     #   <p>The identifier of the Amazon Q in Connect AI Agent. Can be either the ID or the ARN. URLs cannot contain the ARN.</p>
     #   @return [String]
     class DeleteAIAgentRequest < Struct.new(
+      nil,
       :assistant_id,
       :ai_agent_id,
       keyword_init: true
@@ -2442,6 +2521,7 @@ module Aws::QConnect
     end
 
     class DeleteAIAgentResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -2457,6 +2537,7 @@ module Aws::QConnect
     #   <p>The version number of the AI Agent version.</p>
     #   @return [Integer]
     class DeleteAIAgentVersionRequest < Struct.new(
+      nil,
       :assistant_id,
       :ai_agent_id,
       :version_number,
@@ -2466,6 +2547,7 @@ module Aws::QConnect
     end
 
     class DeleteAIAgentVersionResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -2478,6 +2560,7 @@ module Aws::QConnect
     #   <p>The identifier of the Amazon Q in Connect AI Guardrail. Can be either the ID or the ARN. URLs cannot contain the ARN.</p>
     #   @return [String]
     class DeleteAIGuardrailRequest < Struct.new(
+      nil,
       :assistant_id,
       :ai_guardrail_id,
       keyword_init: true
@@ -2486,6 +2569,7 @@ module Aws::QConnect
     end
 
     class DeleteAIGuardrailResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -2501,6 +2585,7 @@ module Aws::QConnect
     #   <p>The version number of the AI Guardrail version to be deleted.</p>
     #   @return [Integer]
     class DeleteAIGuardrailVersionRequest < Struct.new(
+      nil,
       :assistant_id,
       :ai_guardrail_id,
       :version_number,
@@ -2510,6 +2595,7 @@ module Aws::QConnect
     end
 
     class DeleteAIGuardrailVersionResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -2522,6 +2608,7 @@ module Aws::QConnect
     #   <p>The identifier of the Amazon Q in Connect AI prompt. Can be either the ID or the ARN. URLs cannot contain the ARN.</p>
     #   @return [String]
     class DeleteAIPromptRequest < Struct.new(
+      nil,
       :assistant_id,
       :ai_prompt_id,
       keyword_init: true
@@ -2530,6 +2617,7 @@ module Aws::QConnect
     end
 
     class DeleteAIPromptResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -2545,6 +2633,7 @@ module Aws::QConnect
     #   <p>The version number of the AI Prompt version to be deleted.</p>
     #   @return [Integer]
     class DeleteAIPromptVersionRequest < Struct.new(
+      nil,
       :assistant_id,
       :ai_prompt_id,
       :version_number,
@@ -2554,6 +2643,7 @@ module Aws::QConnect
     end
 
     class DeleteAIPromptVersionResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -2566,6 +2656,7 @@ module Aws::QConnect
     #   <p>The identifier of the Amazon Q in Connect assistant. Can be either the ID or the ARN. URLs cannot contain the ARN.</p>
     #   @return [String]
     class DeleteAssistantAssociationInput < Struct.new(
+      nil,
       :assistant_association_id,
       :assistant_id,
       keyword_init: true
@@ -2574,6 +2665,7 @@ module Aws::QConnect
     end
 
     class DeleteAssistantAssociationOutput < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -2583,6 +2675,7 @@ module Aws::QConnect
     #   <p>The identifier of the Amazon Q in Connect assistant. Can be either the ID or the ARN. URLs cannot contain the ARN.</p>
     #   @return [String]
     class DeleteAssistantInput < Struct.new(
+      nil,
       :assistant_id,
       keyword_init: true
     )
@@ -2590,6 +2683,7 @@ module Aws::QConnect
     end
 
     class DeleteAssistantOutput < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -2605,6 +2699,7 @@ module Aws::QConnect
     #   <p>The identifier of the content association. Can be either the ID or the ARN. URLs cannot contain the ARN.</p>
     #   @return [String]
     class DeleteContentAssociationRequest < Struct.new(
+      nil,
       :knowledge_base_id,
       :content_id,
       :content_association_id,
@@ -2614,6 +2709,7 @@ module Aws::QConnect
     end
 
     class DeleteContentAssociationResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -2626,6 +2722,7 @@ module Aws::QConnect
     #   <p>The identifier of the content. Can be either the ID or the ARN. URLs cannot contain the ARN.</p>
     #   @return [String]
     class DeleteContentInput < Struct.new(
+      nil,
       :knowledge_base_id,
       :content_id,
       keyword_init: true
@@ -2634,6 +2731,7 @@ module Aws::QConnect
     end
 
     class DeleteContentOutput < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -2646,6 +2744,7 @@ module Aws::QConnect
     #   <p>The identifier of the import job to be deleted.</p>
     #   @return [String]
     class DeleteImportJobRequest < Struct.new(
+      nil,
       :knowledge_base_id,
       :import_job_id,
       keyword_init: true
@@ -2654,6 +2753,7 @@ module Aws::QConnect
     end
 
     class DeleteImportJobResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -2663,6 +2763,7 @@ module Aws::QConnect
     #   <p>The knowledge base to delete content from. Can be either the ID or the ARN. URLs cannot contain the ARN.</p>
     #   @return [String]
     class DeleteKnowledgeBaseInput < Struct.new(
+      nil,
       :knowledge_base_id,
       keyword_init: true
     )
@@ -2670,6 +2771,7 @@ module Aws::QConnect
     end
 
     class DeleteKnowledgeBaseOutput < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -2685,6 +2787,7 @@ module Aws::QConnect
     #   <p>The identifier of the attachment file.</p>
     #   @return [String]
     class DeleteMessageTemplateAttachmentRequest < Struct.new(
+      nil,
       :knowledge_base_id,
       :message_template_id,
       :attachment_id,
@@ -2694,6 +2797,7 @@ module Aws::QConnect
     end
 
     class DeleteMessageTemplateAttachmentResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -2706,6 +2810,7 @@ module Aws::QConnect
     #   <p>The identifier of the message template. Can be either the ID or the ARN.</p>
     #   @return [String]
     class DeleteMessageTemplateRequest < Struct.new(
+      nil,
       :knowledge_base_id,
       :message_template_id,
       keyword_init: true
@@ -2714,6 +2819,7 @@ module Aws::QConnect
     end
 
     class DeleteMessageTemplateResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -2726,6 +2832,7 @@ module Aws::QConnect
     #   <p>The identifier of the quick response to delete.</p>
     #   @return [String]
     class DeleteQuickResponseRequest < Struct.new(
+      nil,
       :knowledge_base_id,
       :quick_response_id,
       keyword_init: true
@@ -2734,6 +2841,7 @@ module Aws::QConnect
     end
 
     class DeleteQuickResponseResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -2743,6 +2851,7 @@ module Aws::QConnect
     # @!attribute message
     #   @return [String]
     class DependencyFailedException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -2760,6 +2869,7 @@ module Aws::QConnect
     #   <p>The excerpt from the document.</p>
     #   @return [Types::DocumentText]
     class Document < Struct.new(
+      nil,
       :content_reference,
       :title,
       :excerpt,
@@ -2776,6 +2886,7 @@ module Aws::QConnect
     #   <p>Highlights in the document text.</p>
     #   @return [Array<Types::Highlight>]
     class DocumentText < Struct.new(
+      nil,
       :text,
       :highlights,
       keyword_init: true
@@ -2797,6 +2908,7 @@ module Aws::QConnect
     #   <p>Configuration settings for knowledge base associations used by the email generative answer agent.</p>
     #   @return [Array<Types::AssociationConfiguration>]
     class EmailGenerativeAnswerAIAgentConfiguration < Struct.new(
+      nil,
       :email_generative_answer_ai_prompt_id,
       :email_query_reformulation_ai_prompt_id,
       :locale,
@@ -2817,6 +2929,7 @@ module Aws::QConnect
     #   <p>Token for retrieving the next chunk of streaming response data, if available.</p>
     #   @return [String]
     class EmailGenerativeAnswerChunkDataDetails < Struct.new(
+      nil,
       :completion,
       :references,
       :next_chunk_token,
@@ -2833,6 +2946,7 @@ module Aws::QConnect
     #   <p>The value of the email header.</p>
     #   @return [String]
     class EmailHeader < Struct.new(
+      nil,
       :name,
       :value,
       keyword_init: true
@@ -2851,6 +2965,7 @@ module Aws::QConnect
     #   <p>The email headers to include in email messages.</p>
     #   @return [Array<Types::EmailHeader>]
     class EmailMessageTemplateContent < Struct.new(
+      nil,
       :subject,
       :body,
       :headers,
@@ -2867,6 +2982,7 @@ module Aws::QConnect
     #   <p>The message body, in HTML format, to use in email messages that are based on the message template. We recommend using HTML format for email clients that render HTML content. You can include links, formatted text, and more in an HTML message.</p>
     #   @return [Types::MessageTemplateBodyContentProvider]
     class EmailMessageTemplateContentBody < Struct.new(
+      nil,
       :plain_text,
       :html,
       keyword_init: true
@@ -2882,6 +2998,7 @@ module Aws::QConnect
     #   <p>The locale setting for language-specific email overview processing (for example, en_US, es_ES).</p>
     #   @return [String]
     class EmailOverviewAIAgentConfiguration < Struct.new(
+      nil,
       :email_overview_ai_prompt_id,
       :locale,
       keyword_init: true
@@ -2897,6 +3014,7 @@ module Aws::QConnect
     #   <p>Token for retrieving the next chunk of streaming overview data, if available.</p>
     #   @return [String]
     class EmailOverviewChunkDataDetails < Struct.new(
+      nil,
       :completion,
       :next_chunk_token,
       keyword_init: true
@@ -2918,6 +3036,7 @@ module Aws::QConnect
     #   <p>Configuration settings for knowledge base associations used by the email response agent.</p>
     #   @return [Array<Types::AssociationConfiguration>]
     class EmailResponseAIAgentConfiguration < Struct.new(
+      nil,
       :email_response_ai_prompt_id,
       :email_query_reformulation_ai_prompt_id,
       :locale,
@@ -2935,6 +3054,7 @@ module Aws::QConnect
     #   <p>Token for retrieving the next chunk of streaming response data, if available.</p>
     #   @return [String]
     class EmailResponseChunkDataDetails < Struct.new(
+      nil,
       :completion,
       :next_chunk_token,
       keyword_init: true
@@ -3004,6 +3124,7 @@ module Aws::QConnect
     #   <p>The tags used to organize, track, or control access for this resource.</p>
     #   @return [Hash<String, String>]
     class ExtendedMessageTemplateData < Struct.new(
+      nil,
       :message_template_arn,
       :message_template_id,
       :knowledge_base_arn,
@@ -3037,6 +3158,7 @@ module Aws::QConnect
     #   <p>The configuration information of the external data source.</p>
     #   @return [Types::Configuration]
     class ExternalSourceConfiguration < Struct.new(
+      nil,
       :source,
       :configuration,
       keyword_init: true
@@ -3055,6 +3177,7 @@ module Aws::QConnect
     #   <p>The desired field value on which to filter.</p>
     #   @return [String]
     class Filter < Struct.new(
+      nil,
       :field,
       :operator,
       :value,
@@ -3071,6 +3194,7 @@ module Aws::QConnect
     #   <p>The percentage of overlap between adjacent chunks of a data source.</p>
     #   @return [Integer]
     class FixedSizeChunkingConfiguration < Struct.new(
+      nil,
       :max_tokens,
       :overlap_percentage,
       keyword_init: true
@@ -3089,6 +3213,7 @@ module Aws::QConnect
     #   <p>The token for the next set of chunks. Use the value returned in the previous response in the next request to retrieve the next set of chunks.</p>
     #   @return [String]
     class GenerativeChunkDataDetails < Struct.new(
+      nil,
       :completion,
       :references,
       :next_chunk_token,
@@ -3102,6 +3227,7 @@ module Aws::QConnect
     #   <p>The relevance of the feedback.</p>
     #   @return [String]
     class GenerativeContentFeedbackData < Struct.new(
+      nil,
       :relevance,
       keyword_init: true
     )
@@ -3119,6 +3245,7 @@ module Aws::QConnect
     #   <p>Details about the generative content ranking data.</p>
     #   @return [Types::RankingData]
     class GenerativeDataDetails < Struct.new(
+      nil,
       :completion,
       :references,
       :ranking_data,
@@ -3135,6 +3262,7 @@ module Aws::QConnect
     #   <p> The identifier of the LLM model. </p>
     #   @return [String]
     class GenerativeReference < Struct.new(
+      nil,
       :model_id,
       :generation_id,
       keyword_init: true
@@ -3149,6 +3277,7 @@ module Aws::QConnect
     #   <p>The identifier of the Amazon Q in Connect AI Agent (with or without a version qualifier). Can be either the ID or the ARN. URLs cannot contain the ARN.</p>
     #   @return [String]
     class GetAIAgentRequest < Struct.new(
+      nil,
       :assistant_id,
       :ai_agent_id,
       keyword_init: true
@@ -3163,6 +3292,7 @@ module Aws::QConnect
     #   <p>The version number of the AI Agent version (returned if an AI Agent version was specified via use of a qualifier for the <code>aiAgentId</code> on the request). </p>
     #   @return [Integer]
     class GetAIAgentResponse < Struct.new(
+      nil,
       :ai_agent,
       :version_number,
       keyword_init: true
@@ -3177,6 +3307,7 @@ module Aws::QConnect
     #   <p>The identifier of the Amazon Q in Connect AI Guardrail.</p>
     #   @return [String]
     class GetAIGuardrailRequest < Struct.new(
+      nil,
       :assistant_id,
       :ai_guardrail_id,
       keyword_init: true
@@ -3191,6 +3322,7 @@ module Aws::QConnect
     #   <p>The version number of the AI Guardrail version (returned if an AI Guardrail version was specified via use of a qualifier for the <code>aiGuardrailId</code> on the request). </p>
     #   @return [Integer]
     class GetAIGuardrailResponse < Struct.new(
+      nil,
       :ai_guardrail,
       :version_number,
       keyword_init: true
@@ -3205,6 +3337,7 @@ module Aws::QConnect
     #   <p>The identifier of the Amazon Q in Connect AI prompt.</p>
     #   @return [String]
     class GetAIPromptRequest < Struct.new(
+      nil,
       :assistant_id,
       :ai_prompt_id,
       keyword_init: true
@@ -3219,6 +3352,7 @@ module Aws::QConnect
     #   <p>The version number of the AI Prompt version (returned if an AI Prompt version was specified via use of a qualifier for the <code>aiPromptId</code> on the request). </p>
     #   @return [Integer]
     class GetAIPromptResponse < Struct.new(
+      nil,
       :ai_prompt,
       :version_number,
       keyword_init: true
@@ -3233,6 +3367,7 @@ module Aws::QConnect
     #   <p>The identifier of the Amazon Q in Connect assistant. Can be either the ID or the ARN. URLs cannot contain the ARN.</p>
     #   @return [String]
     class GetAssistantAssociationInput < Struct.new(
+      nil,
       :assistant_association_id,
       :assistant_id,
       keyword_init: true
@@ -3244,6 +3379,7 @@ module Aws::QConnect
     #   <p>The assistant association.</p>
     #   @return [Types::AssistantAssociationData]
     class GetAssistantAssociationOutput < Struct.new(
+      nil,
       :assistant_association,
       keyword_init: true
     )
@@ -3254,6 +3390,7 @@ module Aws::QConnect
     #   <p>The identifier of the Amazon Q in Connect assistant. Can be either the ID or the ARN. URLs cannot contain the ARN.</p>
     #   @return [String]
     class GetAssistantInput < Struct.new(
+      nil,
       :assistant_id,
       keyword_init: true
     )
@@ -3264,6 +3401,7 @@ module Aws::QConnect
     #   <p>Information about the assistant.</p>
     #   @return [Types::AssistantData]
     class GetAssistantOutput < Struct.new(
+      nil,
       :assistant,
       keyword_init: true
     )
@@ -3280,6 +3418,7 @@ module Aws::QConnect
     #   <p>The identifier of the content association. Can be either the ID or the ARN. URLs cannot contain the ARN.</p>
     #   @return [String]
     class GetContentAssociationRequest < Struct.new(
+      nil,
       :knowledge_base_id,
       :content_id,
       :content_association_id,
@@ -3292,6 +3431,7 @@ module Aws::QConnect
     #   <p>The association between Amazon Q in Connect content and another resource.</p>
     #   @return [Types::ContentAssociationData]
     class GetContentAssociationResponse < Struct.new(
+      nil,
       :content_association,
       keyword_init: true
     )
@@ -3305,6 +3445,7 @@ module Aws::QConnect
     #   <p>The identifier of the knowledge base. This should not be a QUICK_RESPONSES type knowledge base. Can be either the ID or the ARN. URLs cannot contain the ARN.</p>
     #   @return [String]
     class GetContentInput < Struct.new(
+      nil,
       :content_id,
       :knowledge_base_id,
       keyword_init: true
@@ -3316,6 +3457,7 @@ module Aws::QConnect
     #   <p>The content.</p>
     #   @return [Types::ContentData]
     class GetContentOutput < Struct.new(
+      nil,
       :content,
       keyword_init: true
     )
@@ -3329,6 +3471,7 @@ module Aws::QConnect
     #   <p>The identifier of the knowledge base. Can be either the ID or the ARN. URLs cannot contain the ARN.</p>
     #   @return [String]
     class GetContentSummaryInput < Struct.new(
+      nil,
       :content_id,
       :knowledge_base_id,
       keyword_init: true
@@ -3340,6 +3483,7 @@ module Aws::QConnect
     #   <p>The content summary.</p>
     #   @return [Types::ContentSummary]
     class GetContentSummaryOutput < Struct.new(
+      nil,
       :content_summary,
       keyword_init: true
     )
@@ -3353,6 +3497,7 @@ module Aws::QConnect
     #   <p>The identifier of the knowledge base that the import job belongs to.</p>
     #   @return [String]
     class GetImportJobRequest < Struct.new(
+      nil,
       :import_job_id,
       :knowledge_base_id,
       keyword_init: true
@@ -3364,6 +3509,7 @@ module Aws::QConnect
     #   <p>The import job.</p>
     #   @return [Types::ImportJobData]
     class GetImportJobResponse < Struct.new(
+      nil,
       :import_job,
       keyword_init: true
     )
@@ -3374,6 +3520,7 @@ module Aws::QConnect
     #   <p>The identifier of the knowledge base. Can be either the ID or the ARN. URLs cannot contain the ARN.</p>
     #   @return [String]
     class GetKnowledgeBaseInput < Struct.new(
+      nil,
       :knowledge_base_id,
       keyword_init: true
     )
@@ -3384,6 +3531,7 @@ module Aws::QConnect
     #   <p>The knowledge base.</p>
     #   @return [Types::KnowledgeBaseData]
     class GetKnowledgeBaseOutput < Struct.new(
+      nil,
       :knowledge_base,
       keyword_init: true
     )
@@ -3397,6 +3545,7 @@ module Aws::QConnect
     #   <p>The identifier of the knowledge base. Can be either the ID or the ARN. URLs cannot contain the ARN.</p>
     #   @return [String]
     class GetMessageTemplateRequest < Struct.new(
+      nil,
       :message_template_id,
       :knowledge_base_id,
       keyword_init: true
@@ -3408,6 +3557,7 @@ module Aws::QConnect
     #   <p>The message template.</p>
     #   @return [Types::ExtendedMessageTemplateData]
     class GetMessageTemplateResponse < Struct.new(
+      nil,
       :message_template,
       keyword_init: true
     )
@@ -3424,6 +3574,7 @@ module Aws::QConnect
     #   <p>The token for the next message. Use the value returned in the SendMessage or previous response in the next request to retrieve the next message.</p>
     #   @return [String]
     class GetNextMessageRequest < Struct.new(
+      nil,
       :assistant_id,
       :session_id,
       :next_message_token,
@@ -3451,6 +3602,7 @@ module Aws::QConnect
     #   <p>The conversation data stored on an Amazon Q in Connect Session.</p>
     #   @return [Array<Types::RuntimeSessionData>]
     class GetNextMessageResponse < Struct.new(
+      nil,
       :type,
       :response,
       :request_message_id,
@@ -3469,6 +3621,7 @@ module Aws::QConnect
     #   <p>The identifier of the knowledge base. This should be a QUICK_RESPONSES type knowledge base.</p>
     #   @return [String]
     class GetQuickResponseRequest < Struct.new(
+      nil,
       :quick_response_id,
       :knowledge_base_id,
       keyword_init: true
@@ -3480,6 +3633,7 @@ module Aws::QConnect
     #   <p>The quick response.</p>
     #   @return [Types::QuickResponseData]
     class GetQuickResponseResponse < Struct.new(
+      nil,
       :quick_response,
       keyword_init: true
     )
@@ -3502,6 +3656,7 @@ module Aws::QConnect
     #   <p>The token for the next set of chunks. Use the value returned in the previous response in the next request to retrieve the next set of chunks.</p>
     #   @return [String]
     class GetRecommendationsInput < Struct.new(
+      nil,
       :assistant_id,
       :session_id,
       :max_results,
@@ -3519,6 +3674,7 @@ module Aws::QConnect
     #   <p>The triggers corresponding to recommendations.</p>
     #   @return [Array<Types::RecommendationTrigger>]
     class GetRecommendationsOutput < Struct.new(
+      nil,
       :recommendations,
       :triggers,
       keyword_init: true
@@ -3533,6 +3689,7 @@ module Aws::QConnect
     #   <p>The identifier of the session. Can be either the ID or the ARN. URLs cannot contain the ARN.</p>
     #   @return [String]
     class GetSessionInput < Struct.new(
+      nil,
       :assistant_id,
       :session_id,
       keyword_init: true
@@ -3544,6 +3701,7 @@ module Aws::QConnect
     #   <p>The session.</p>
     #   @return [Types::SessionData]
     class GetSessionOutput < Struct.new(
+      nil,
       :session,
       keyword_init: true
     )
@@ -3558,6 +3716,7 @@ module Aws::QConnect
     #   <p>The list of values that define different groups of Amazon Q in Connect users.</p> <ul> <li> <p>When setting <code>criteria</code> to <code>RoutingProfileArn</code>, you need to provide a list of ARNs of <a href="https://docs.aws.amazon.com/connect/latest/APIReference/API_RoutingProfile.html">Amazon Connect routing profiles</a> as values of this parameter.</p> </li> </ul>
     #   @return [Array<String>]
     class GroupingConfiguration < Struct.new(
+      nil,
       :criteria,
       :values,
       keyword_init: true
@@ -3576,6 +3735,7 @@ module Aws::QConnect
     #   <p>The strength of the content filter to apply to model responses. As you increase the filter strength, the likelihood of filtering harmful content increases and the probability of seeing harmful content in your application reduces.</p>
     #   @return [String]
     class GuardrailContentFilterConfig < Struct.new(
+      nil,
       :type,
       :input_strength,
       :output_strength,
@@ -3592,6 +3752,7 @@ module Aws::QConnect
     #   <p>The threshold details for the AI Guardrail's contextual grounding filter.</p>
     #   @return [Float]
     class GuardrailContextualGroundingFilterConfig < Struct.new(
+      nil,
       :type,
       :threshold,
       keyword_init: true
@@ -3609,6 +3770,7 @@ module Aws::QConnect
     #   <p>The managed word type to configure for the AI Guardrail.</p>
     #   @return [String]
     class GuardrailManagedWordsConfig < Struct.new(
+      nil,
       :type,
       keyword_init: true
     )
@@ -3623,6 +3785,7 @@ module Aws::QConnect
     #   <p>Configure AI Guardrail's action when the PII entity is detected.</p>
     #   @return [String]
     class GuardrailPiiEntityConfig < Struct.new(
+      nil,
       :type,
       :action,
       keyword_init: true
@@ -3644,6 +3807,7 @@ module Aws::QConnect
     #   <p>The AI Guardrail action to configure when matching regular expression is detected.</p>
     #   @return [String]
     class GuardrailRegexConfig < Struct.new(
+      nil,
       :name,
       :description,
       :pattern,
@@ -3667,6 +3831,7 @@ module Aws::QConnect
     #   <p>Specifies to deny the topic.</p>
     #   @return [String]
     class GuardrailTopicConfig < Struct.new(
+      nil,
       :name,
       :definition,
       :examples,
@@ -3681,6 +3846,7 @@ module Aws::QConnect
     #   <p>Text of the word configured for the AI Guardrail to block.</p>
     #   @return [String]
     class GuardrailWordConfig < Struct.new(
+      nil,
       :text,
       keyword_init: true
     )
@@ -3695,6 +3861,7 @@ module Aws::QConnect
     #   <p>The number of tokens to repeat across chunks in the same layer.</p>
     #   @return [Integer]
     class HierarchicalChunkingConfiguration < Struct.new(
+      nil,
       :level_configurations,
       :overlap_tokens,
       keyword_init: true
@@ -3707,6 +3874,7 @@ module Aws::QConnect
     #   <p>The maximum number of tokens that a chunk can contain in this layer.</p>
     #   @return [Integer]
     class HierarchicalChunkingLevelConfiguration < Struct.new(
+      nil,
       :max_tokens,
       keyword_init: true
     )
@@ -3721,6 +3889,7 @@ module Aws::QConnect
     #   <p>The offset for the end of the highlight.</p>
     #   @return [Integer]
     class Highlight < Struct.new(
+      nil,
       :begin_offset_inclusive,
       :end_offset_exclusive,
       keyword_init: true
@@ -3775,6 +3944,7 @@ module Aws::QConnect
     #   <p>The configuration information of the external data source.</p>
     #   @return [Types::ExternalSourceConfiguration]
     class ImportJobData < Struct.new(
+      nil,
       :import_job_id,
       :knowledge_base_id,
       :upload_id,
@@ -3825,6 +3995,7 @@ module Aws::QConnect
     #   <p>The configuration information of the external source that the resource data are imported from.</p>
     #   @return [Types::ExternalSourceConfiguration]
     class ImportJobSummary < Struct.new(
+      nil,
       :import_job_id,
       :knowledge_base_id,
       :upload_id,
@@ -3848,6 +4019,7 @@ module Aws::QConnect
     #   <p>The identifier of the detected intent.</p>
     #   @return [String]
     class IntentDetectedDataDetails < Struct.new(
+      nil,
       :intent,
       :intent_id,
       keyword_init: true
@@ -3860,6 +4032,7 @@ module Aws::QConnect
     #   <p>The identifier of the Amazon Q intent.</p>
     #   @return [String]
     class IntentInputData < Struct.new(
+      nil,
       :intent_id,
       keyword_init: true
     )
@@ -3877,6 +4050,7 @@ module Aws::QConnect
     #   <p>The search type to be used against the Knowledge Base for this request. The values can be <code>SEMANTIC</code> which uses vector embeddings or <code>HYBRID</code> which use vector embeddings and raw text</p>
     #   @return [String]
     class KnowledgeBaseAssociationConfigurationData < Struct.new(
+      nil,
       :content_tag_filter,
       :max_results,
       :override_knowledge_base_search_type,
@@ -3893,6 +4067,7 @@ module Aws::QConnect
     #   <p>The Amazon Resource Name (ARN) of the knowledge base.</p>
     #   @return [String]
     class KnowledgeBaseAssociationData < Struct.new(
+      nil,
       :knowledge_base_id,
       :knowledge_base_arn,
       keyword_init: true
@@ -3944,6 +4119,7 @@ module Aws::QConnect
     #   <p>List of failure reasons on ingestion per file.</p>
     #   @return [Array<String>]
     class KnowledgeBaseData < Struct.new(
+      nil,
       :knowledge_base_id,
       :knowledge_base_arn,
       :name,
@@ -3998,6 +4174,7 @@ module Aws::QConnect
     #   <p>The tags used to organize, track, or control access for this resource.</p>
     #   @return [Hash<String, String>]
     class KnowledgeBaseSummary < Struct.new(
+      nil,
       :knowledge_base_id,
       :knowledge_base_arn,
       :name,
@@ -4030,6 +4207,7 @@ module Aws::QConnect
     #   <p>The origin of the AI Agent versions to be listed. <code>SYSTEM</code> for a default AI Agent created by Q in Connect or <code>CUSTOMER</code> for an AI Agent created by calling AI Agent creation APIs. </p>
     #   @return [String]
     class ListAIAgentVersionsRequest < Struct.new(
+      nil,
       :assistant_id,
       :ai_agent_id,
       :next_token,
@@ -4047,6 +4225,7 @@ module Aws::QConnect
     #   <p>The token for the next set of results. Use the value returned in the previous response in the next request to retrieve the next set of results.</p>
     #   @return [String]
     class ListAIAgentVersionsResponse < Struct.new(
+      nil,
       :ai_agent_version_summaries,
       :next_token,
       keyword_init: true
@@ -4067,6 +4246,7 @@ module Aws::QConnect
     #   <p>The origin of the AI Agents to be listed. <code>SYSTEM</code> for a default AI Agent created by Q in Connect or <code>CUSTOMER</code> for an AI Agent created by calling AI Agent creation APIs. </p>
     #   @return [String]
     class ListAIAgentsRequest < Struct.new(
+      nil,
       :assistant_id,
       :next_token,
       :max_results,
@@ -4083,6 +4263,7 @@ module Aws::QConnect
     #   <p>The token for the next set of results. Use the value returned in the previous response in the next request to retrieve the next set of results.</p>
     #   @return [String]
     class ListAIAgentsResponse < Struct.new(
+      nil,
       :ai_agent_summaries,
       :next_token,
       keyword_init: true
@@ -4103,6 +4284,7 @@ module Aws::QConnect
     #   <p>The maximum number of results to return per page.</p>
     #   @return [Integer]
     class ListAIGuardrailVersionsRequest < Struct.new(
+      nil,
       :assistant_id,
       :ai_guardrail_id,
       :next_token,
@@ -4119,6 +4301,7 @@ module Aws::QConnect
     #   <p>The token for the next set of results. Use the value returned in the previous response in the next request to retrieve the next set of results.</p>
     #   @return [String]
     class ListAIGuardrailVersionsResponse < Struct.new(
+      nil,
       :ai_guardrail_version_summaries,
       :next_token,
       keyword_init: true
@@ -4136,6 +4319,7 @@ module Aws::QConnect
     #   <p>The maximum number of results to return per page.</p>
     #   @return [Integer]
     class ListAIGuardrailsRequest < Struct.new(
+      nil,
       :assistant_id,
       :next_token,
       :max_results,
@@ -4151,6 +4335,7 @@ module Aws::QConnect
     #   <p>The token for the next set of results. Use the value returned in the previous response in the next request to retrieve the next set of results.</p>
     #   @return [String]
     class ListAIGuardrailsResponse < Struct.new(
+      nil,
       :ai_guardrail_summaries,
       :next_token,
       keyword_init: true
@@ -4174,6 +4359,7 @@ module Aws::QConnect
     #   <p>The origin of the AI Prompt versions to be listed. <code>SYSTEM</code> for a default AI Agent created by Q in Connect or <code>CUSTOMER</code> for an AI Agent created by calling AI Agent creation APIs. </p>
     #   @return [String]
     class ListAIPromptVersionsRequest < Struct.new(
+      nil,
       :assistant_id,
       :ai_prompt_id,
       :next_token,
@@ -4191,6 +4377,7 @@ module Aws::QConnect
     #   <p>The token for the next set of results. Use the value returned in the previous response in the next request to retrieve the next set of results.</p>
     #   @return [String]
     class ListAIPromptVersionsResponse < Struct.new(
+      nil,
       :ai_prompt_version_summaries,
       :next_token,
       keyword_init: true
@@ -4211,6 +4398,7 @@ module Aws::QConnect
     #   <p>The origin of the AI Prompts to be listed. <code>SYSTEM</code> for a default AI Agent created by Q in Connect or <code>CUSTOMER</code> for an AI Agent created by calling AI Agent creation APIs. </p>
     #   @return [String]
     class ListAIPromptsRequest < Struct.new(
+      nil,
       :assistant_id,
       :next_token,
       :max_results,
@@ -4227,6 +4415,7 @@ module Aws::QConnect
     #   <p>The token for the next set of results. Use the value returned in the previous response in the next request to retrieve the next set of results.</p>
     #   @return [String]
     class ListAIPromptsResponse < Struct.new(
+      nil,
       :ai_prompt_summaries,
       :next_token,
       keyword_init: true
@@ -4244,6 +4433,7 @@ module Aws::QConnect
     #   <p>The identifier of the Amazon Q in Connect assistant. Can be either the ID or the ARN. URLs cannot contain the ARN.</p>
     #   @return [String]
     class ListAssistantAssociationsInput < Struct.new(
+      nil,
       :next_token,
       :max_results,
       :assistant_id,
@@ -4259,6 +4449,7 @@ module Aws::QConnect
     #   <p>If there are additional results, this is the token for the next set of results.</p>
     #   @return [String]
     class ListAssistantAssociationsOutput < Struct.new(
+      nil,
       :assistant_association_summaries,
       :next_token,
       keyword_init: true
@@ -4273,6 +4464,7 @@ module Aws::QConnect
     #   <p>The maximum number of results to return per page.</p>
     #   @return [Integer]
     class ListAssistantsInput < Struct.new(
+      nil,
       :next_token,
       :max_results,
       keyword_init: true
@@ -4287,6 +4479,7 @@ module Aws::QConnect
     #   <p>If there are additional results, this is the token for the next set of results.</p>
     #   @return [String]
     class ListAssistantsOutput < Struct.new(
+      nil,
       :assistant_summaries,
       :next_token,
       keyword_init: true
@@ -4307,6 +4500,7 @@ module Aws::QConnect
     #   <p>The identifier of the content.</p>
     #   @return [String]
     class ListContentAssociationsRequest < Struct.new(
+      nil,
       :next_token,
       :max_results,
       :knowledge_base_id,
@@ -4323,6 +4517,7 @@ module Aws::QConnect
     #   <p>If there are additional results, this is the token for the next set of results.</p>
     #   @return [String]
     class ListContentAssociationsResponse < Struct.new(
+      nil,
       :content_association_summaries,
       :next_token,
       keyword_init: true
@@ -4340,6 +4535,7 @@ module Aws::QConnect
     #   <p>The identifier of the knowledge base. This should not be a QUICK_RESPONSES type knowledge base. Can be either the ID or the ARN. URLs cannot contain the ARN.</p>
     #   @return [String]
     class ListContentsInput < Struct.new(
+      nil,
       :next_token,
       :max_results,
       :knowledge_base_id,
@@ -4355,6 +4551,7 @@ module Aws::QConnect
     #   <p>If there are additional results, this is the token for the next set of results.</p>
     #   @return [String]
     class ListContentsOutput < Struct.new(
+      nil,
       :content_summaries,
       :next_token,
       keyword_init: true
@@ -4372,6 +4569,7 @@ module Aws::QConnect
     #   <p>The identifier of the knowledge base. Can be either the ID or the ARN. URLs cannot contain the ARN.</p>
     #   @return [String]
     class ListImportJobsRequest < Struct.new(
+      nil,
       :next_token,
       :max_results,
       :knowledge_base_id,
@@ -4387,6 +4585,7 @@ module Aws::QConnect
     #   <p>The token for the next set of results. Use the value returned in the previous response in the next request to retrieve the next set of results.</p>
     #   @return [String]
     class ListImportJobsResponse < Struct.new(
+      nil,
       :import_job_summaries,
       :next_token,
       keyword_init: true
@@ -4401,6 +4600,7 @@ module Aws::QConnect
     #   <p>The maximum number of results to return per page.</p>
     #   @return [Integer]
     class ListKnowledgeBasesInput < Struct.new(
+      nil,
       :next_token,
       :max_results,
       keyword_init: true
@@ -4415,6 +4615,7 @@ module Aws::QConnect
     #   <p>If there are additional results, this is the token for the next set of results.</p>
     #   @return [String]
     class ListKnowledgeBasesOutput < Struct.new(
+      nil,
       :knowledge_base_summaries,
       :next_token,
       keyword_init: true
@@ -4435,6 +4636,7 @@ module Aws::QConnect
     #   <p>The maximum number of results to return per page.</p>
     #   @return [Integer]
     class ListMessageTemplateVersionsRequest < Struct.new(
+      nil,
       :knowledge_base_id,
       :message_template_id,
       :next_token,
@@ -4451,6 +4653,7 @@ module Aws::QConnect
     #   <p>If there are additional results, this is the token for the next set of results.</p>
     #   @return [String]
     class ListMessageTemplateVersionsResponse < Struct.new(
+      nil,
       :message_template_version_summaries,
       :next_token,
       keyword_init: true
@@ -4468,6 +4671,7 @@ module Aws::QConnect
     #   <p>The identifier of the knowledge base. Can be either the ID or the ARN. URLs cannot contain the ARN.</p>
     #   @return [String]
     class ListMessageTemplatesRequest < Struct.new(
+      nil,
       :next_token,
       :max_results,
       :knowledge_base_id,
@@ -4483,6 +4687,7 @@ module Aws::QConnect
     #   <p>If there are additional results, this is the token for the next set of results.</p>
     #   @return [String]
     class ListMessageTemplatesResponse < Struct.new(
+      nil,
       :message_template_summaries,
       :next_token,
       keyword_init: true
@@ -4503,6 +4708,7 @@ module Aws::QConnect
     #   <p>The maximum number of results to return per page.</p>
     #   @return [Integer]
     class ListMessagesRequest < Struct.new(
+      nil,
       :assistant_id,
       :session_id,
       :next_token,
@@ -4519,6 +4725,7 @@ module Aws::QConnect
     #   <p>The token for the next set of results. Use the value returned in the previous response in the next request to retrieve the next set of results.</p>
     #   @return [String]
     class ListMessagesResponse < Struct.new(
+      nil,
       :messages,
       :next_token,
       keyword_init: true
@@ -4536,6 +4743,7 @@ module Aws::QConnect
     #   <p>The identifier of the knowledge base. Can be either the ID or the ARN. URLs cannot contain the ARN.</p>
     #   @return [String]
     class ListQuickResponsesRequest < Struct.new(
+      nil,
       :next_token,
       :max_results,
       :knowledge_base_id,
@@ -4551,6 +4759,7 @@ module Aws::QConnect
     #   <p>The token for the next set of results. Use the value returned in the previous response in the next request to retrieve the next set of results.</p>
     #   @return [String]
     class ListQuickResponsesResponse < Struct.new(
+      nil,
       :quick_response_summaries,
       :next_token,
       keyword_init: true
@@ -4562,6 +4771,7 @@ module Aws::QConnect
     #   <p>The Amazon Resource Name (ARN) of the resource.</p>
     #   @return [String]
     class ListTagsForResourceInput < Struct.new(
+      nil,
       :resource_arn,
       keyword_init: true
     )
@@ -4572,6 +4782,7 @@ module Aws::QConnect
     #   <p>The tags used to organize, track, or control access for this resource.</p>
     #   @return [Hash<String, String>]
     class ListTagsForResourceOutput < Struct.new(
+      nil,
       :tags,
       keyword_init: true
     )
@@ -4607,6 +4818,7 @@ module Aws::QConnect
     #   <p>The locale to which specifies the language and region settings that determine the response language for <a href="https://docs.aws.amazon.com/connect/latest/APIReference/API_amazon-q-connect_QueryAssistant.html">QueryAssistant</a>.</p> <note> <p>For more information on supported locales, see <a href="https://docs.aws.amazon.com/connect/latest/adminguide/supported-languages.html#qic-notes-languages">Language support for Amazon Q in Connect</a>.</p> </note>
     #   @return [String]
     class ManualSearchAIAgentConfiguration < Struct.new(
+      nil,
       :answer_generation_ai_prompt_id,
       :answer_generation_ai_guardrail_id,
       :association_configurations,
@@ -4621,6 +4833,7 @@ module Aws::QConnect
     #   <p>Generates a filler response when tool selection is <code>QUESTION</code>.</p>
     #   @return [Boolean]
     class MessageConfiguration < Struct.new(
+      nil,
       :generate_filler_message,
       keyword_init: true
     )
@@ -4647,6 +4860,7 @@ module Aws::QConnect
     #   <p>The message input value.</p>
     #   @return [Types::MessageData]
     class MessageInput < Struct.new(
+      nil,
       :value,
       keyword_init: true
     )
@@ -4667,6 +4881,7 @@ module Aws::QConnect
     #   <p>The timestamp of a message.</p>
     #   @return [Time]
     class MessageOutput < Struct.new(
+      nil,
       :value,
       :message_id,
       :participant,
@@ -4696,6 +4911,7 @@ module Aws::QConnect
     #   <p>The identifier of the attachment file.</p>
     #   @return [String]
     class MessageTemplateAttachment < Struct.new(
+      nil,
       :content_disposition,
       :name,
       :uploaded_time,
@@ -4721,6 +4937,7 @@ module Aws::QConnect
     #   <p>The custom attributes that are used with the message template.</p>
     #   @return [Hash<String, String>]
     class MessageTemplateAttributes < Struct.new(
+      nil,
       :system_attributes,
       :agent_attributes,
       :customer_profile_attributes,
@@ -4818,6 +5035,7 @@ module Aws::QConnect
     #   <p>The tags used to organize, track, or control access for this resource.</p>
     #   @return [Hash<String, String>]
     class MessageTemplateData < Struct.new(
+      nil,
       :message_template_arn,
       :message_template_id,
       :knowledge_base_arn,
@@ -4854,6 +5072,7 @@ module Aws::QConnect
     #   <p>Whether to treat null value as a match for the attribute field.</p>
     #   @return [Boolean]
     class MessageTemplateFilterField < Struct.new(
+      nil,
       :name,
       :values,
       :operator,
@@ -4871,6 +5090,7 @@ module Aws::QConnect
     #   <p>The order at which the message templates are sorted by.</p>
     #   @return [String]
     class MessageTemplateOrderField < Struct.new(
+      nil,
       :name,
       :order,
       keyword_init: true
@@ -4895,6 +5115,7 @@ module Aws::QConnect
     #   <p>The importance of the attribute field when calculating query result relevancy scores. The value set for this parameter affects the ordering of search results.</p>
     #   @return [String]
     class MessageTemplateQueryField < Struct.new(
+      nil,
       :name,
       :values,
       :operator,
@@ -4916,6 +5137,7 @@ module Aws::QConnect
     #   <p>The message template attribute fields on which the query results are ordered.</p>
     #   @return [Types::MessageTemplateOrderField]
     class MessageTemplateSearchExpression < Struct.new(
+      nil,
       :queries,
       :filters,
       :order_on_field,
@@ -4971,6 +5193,7 @@ module Aws::QConnect
     #   <p>The tags used to organize, track, or control access for this resource.</p>
     #   @return [Hash<String, String>]
     class MessageTemplateSearchResultData < Struct.new(
+      nil,
       :message_template_arn,
       :message_template_id,
       :knowledge_base_arn,
@@ -5029,6 +5252,7 @@ module Aws::QConnect
     #   <p>The tags used to organize, track, or control access for this resource.</p>
     #   @return [Hash<String, String>]
     class MessageTemplateSummary < Struct.new(
+      nil,
       :message_template_arn,
       :message_template_id,
       :knowledge_base_arn,
@@ -5072,6 +5296,7 @@ module Aws::QConnect
     #   <p>The version number of the message template version.</p>
     #   @return [Integer]
     class MessageTemplateVersionSummary < Struct.new(
+      nil,
       :message_template_arn,
       :message_template_id,
       :knowledge_base_arn,
@@ -5093,6 +5318,7 @@ module Aws::QConnect
     #   <p>A recommendation is causing an error.</p>
     #   @return [String]
     class NotifyRecommendationsReceivedError < Struct.new(
+      nil,
       :recommendation_id,
       :message,
       keyword_init: true
@@ -5110,6 +5336,7 @@ module Aws::QConnect
     #   <p>The identifiers of the recommendations.</p>
     #   @return [Array<String>]
     class NotifyRecommendationsReceivedInput < Struct.new(
+      nil,
       :assistant_id,
       :session_id,
       :recommendation_ids,
@@ -5125,6 +5352,7 @@ module Aws::QConnect
     #   <p>The identifiers of recommendations that are causing errors.</p>
     #   @return [Array<Types::NotifyRecommendationsReceivedError>]
     class NotifyRecommendationsReceivedOutput < Struct.new(
+      nil,
       :recommendation_ids,
       :errors,
       keyword_init: true
@@ -5160,6 +5388,7 @@ module Aws::QConnect
     #   <p>Settings for a foundation model used to parse documents for a data source.</p>
     #   @return [Types::BedrockFoundationModelConfigurationForParsing]
     class ParsingConfiguration < Struct.new(
+      nil,
       :parsing_strategy,
       :bedrock_foundation_model_configuration,
       keyword_init: true
@@ -5172,6 +5401,7 @@ module Aws::QConnect
     #   <p>Instructions for interpreting the contents of a document.</p>
     #   @return [String]
     class ParsingPrompt < Struct.new(
+      nil,
       :parsing_prompt_text,
       keyword_init: true
     )
@@ -5182,6 +5412,7 @@ module Aws::QConnect
     # @!attribute message
     #   @return [String]
     class PreconditionFailedException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -5201,6 +5432,7 @@ module Aws::QConnect
     #   <p>Information about the feedback provided.</p>
     #   @return [Types::ContentFeedbackData]
     class PutFeedbackRequest < Struct.new(
+      nil,
       :assistant_id,
       :target_id,
       :target_type,
@@ -5226,6 +5458,7 @@ module Aws::QConnect
     #   <p>Information about the feedback provided.</p>
     #   @return [Types::ContentFeedbackData]
     class PutFeedbackResponse < Struct.new(
+      nil,
       :assistant_id,
       :assistant_arn,
       :target_id,
@@ -5261,6 +5494,7 @@ module Aws::QConnect
     #   <p>The search type to be used against the Knowledge Base for this request. The values can be <code>SEMANTIC</code> which uses vector embeddings or <code>HYBRID</code> which use vector embeddings and raw text.</p>
     #   @return [String]
     class QueryAssistantInput < Struct.new(
+      nil,
       :assistant_id,
       :query_text,
       :next_token,
@@ -5281,6 +5515,7 @@ module Aws::QConnect
     #   <p>If there are additional results, this is the token for the next set of results.</p>
     #   @return [String]
     class QueryAssistantOutput < Struct.new(
+      nil,
       :results,
       :next_token,
       keyword_init: true
@@ -5314,6 +5549,7 @@ module Aws::QConnect
     #   <p>The value for the query condition to query on.</p>
     #   @return [String]
     class QueryConditionItem < Struct.new(
+      nil,
       :field,
       :comparator,
       :value,
@@ -5347,6 +5583,7 @@ module Aws::QConnect
     #   <p>The text associated with the recommendation trigger.</p>
     #   @return [String]
     class QueryRecommendationTriggerData < Struct.new(
+      nil,
       :text,
       keyword_init: true
     )
@@ -5358,6 +5595,7 @@ module Aws::QConnect
     #   <p>The text to search for.</p>
     #   @return [String]
     class QueryTextInputData < Struct.new(
+      nil,
       :text,
       keyword_init: true
     )
@@ -5387,6 +5625,7 @@ module Aws::QConnect
     #   <p>The container quick response content.</p>
     #   @return [Types::QuickResponseContentProvider]
     class QuickResponseContents < Struct.new(
+      nil,
       :plain_text,
       :markdown,
       keyword_init: true
@@ -5450,6 +5689,7 @@ module Aws::QConnect
     #   <p>The tags used to organize, track, or control access for this resource.</p>
     #   @return [Hash<String, String>]
     class QuickResponseData < Struct.new(
+      nil,
       :quick_response_arn,
       :quick_response_id,
       :knowledge_base_arn,
@@ -5502,6 +5742,7 @@ module Aws::QConnect
     #   <p>Whether to treat null value as a match for the attribute field.</p>
     #   @return [Boolean]
     class QuickResponseFilterField < Struct.new(
+      nil,
       :name,
       :values,
       :operator,
@@ -5519,6 +5760,7 @@ module Aws::QConnect
     #   <p>The order at which the quick responses are sorted by.</p>
     #   @return [String]
     class QuickResponseOrderField < Struct.new(
+      nil,
       :name,
       :order,
       keyword_init: true
@@ -5543,6 +5785,7 @@ module Aws::QConnect
     #   <p>The importance of the attribute field when calculating query result relevancy scores. The value set for this parameter affects the ordering of search results.</p>
     #   @return [String]
     class QuickResponseQueryField < Struct.new(
+      nil,
       :name,
       :values,
       :operator,
@@ -5564,6 +5807,7 @@ module Aws::QConnect
     #   <p>The quick response attribute fields on which the query results are ordered.</p>
     #   @return [Types::QuickResponseOrderField]
     class QuickResponseSearchExpression < Struct.new(
+      nil,
       :queries,
       :filters,
       :order_on_field,
@@ -5634,6 +5878,7 @@ module Aws::QConnect
     #   <p>The tags used to organize, track, or control access for this resource.</p>
     #   @return [Hash<String, String>]
     class QuickResponseSearchResultData < Struct.new(
+      nil,
       :quick_response_arn,
       :quick_response_id,
       :knowledge_base_arn,
@@ -5703,6 +5948,7 @@ module Aws::QConnect
     #   <p>The tags used to organize, track, or control access for this resource.</p>
     #   @return [Hash<String, String>]
     class QuickResponseSummary < Struct.new(
+      nil,
       :quick_response_arn,
       :quick_response_id,
       :knowledge_base_arn,
@@ -5730,6 +5976,7 @@ module Aws::QConnect
     #   <p>The relevance score of the content.</p>
     #   @return [String]
     class RankingData < Struct.new(
+      nil,
       :relevance_score,
       :relevance_level,
       keyword_init: true
@@ -5762,6 +6009,7 @@ module Aws::QConnect
     #   <p> Summary of the recommended content.</p>
     #   @return [Types::DataSummary]
     class RecommendationData < Struct.new(
+      nil,
       :recommendation_id,
       :document,
       :relevance_score,
@@ -5795,6 +6043,7 @@ module Aws::QConnect
     #   <p>The identifiers of the recommendations.</p>
     #   @return [Array<String>]
     class RecommendationTrigger < Struct.new(
+      nil,
       :id,
       :type,
       :source,
@@ -5827,6 +6076,7 @@ module Aws::QConnect
     #   <p>The type of the AI Agent being removed for use by default from the Amazon Q in Connect Assistant.</p>
     #   @return [String]
     class RemoveAssistantAIAgentRequest < Struct.new(
+      nil,
       :assistant_id,
       :ai_agent_type,
       keyword_init: true
@@ -5835,6 +6085,7 @@ module Aws::QConnect
     end
 
     class RemoveAssistantAIAgentResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -5844,6 +6095,7 @@ module Aws::QConnect
     #   <p>The identifier of the knowledge base. Can be either the ID or the ARN. URLs cannot contain the ARN.</p>
     #   @return [String]
     class RemoveKnowledgeBaseTemplateUriInput < Struct.new(
+      nil,
       :knowledge_base_id,
       keyword_init: true
     )
@@ -5851,6 +6103,7 @@ module Aws::QConnect
     end
 
     class RemoveKnowledgeBaseTemplateUriOutput < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -5866,6 +6119,7 @@ module Aws::QConnect
     #   <p>An object that specifies the values to use for variables in the message template. This object contains different categories of key-value pairs. Each key defines a variable or placeholder in the message template. The corresponding value defines the value for that variable.</p>
     #   @return [Types::MessageTemplateAttributes]
     class RenderMessageTemplateRequest < Struct.new(
+      nil,
       :knowledge_base_id,
       :message_template_id,
       :attributes,
@@ -5884,6 +6138,7 @@ module Aws::QConnect
     #   <p>The message template attachments.</p>
     #   @return [Array<Types::MessageTemplateAttachment>]
     class RenderMessageTemplateResponse < Struct.new(
+      nil,
       :content,
       :attributes_not_interpolated,
       :attachments,
@@ -5897,6 +6152,7 @@ module Aws::QConnect
     #   <p>A URI template containing exactly one variable in <code>${variableName} </code>format. This can only be set for <code>EXTERNAL</code> knowledge bases. For Salesforce, ServiceNow, and Zendesk, the variable must be one of the following:</p> <ul> <li> <p>Salesforce: <code>Id</code>, <code>ArticleNumber</code>, <code>VersionNumber</code>, <code>Title</code>, <code>PublishStatus</code>, or <code>IsDeleted</code> </p> </li> <li> <p>ServiceNow: <code>number</code>, <code>short_description</code>, <code>sys_mod_count</code>, <code>workflow_state</code>, or <code>active</code> </p> </li> <li> <p>Zendesk: <code>id</code>, <code>title</code>, <code>updated_at</code>, or <code>draft</code> </p> </li> </ul> <p>The variable is replaced with the actual value for a piece of content when calling <a href="https://docs.aws.amazon.com/amazon-q-connect/latest/APIReference/API_GetContent.html">GetContent</a>. </p>
     #   @return [String]
     class RenderingConfiguration < Struct.new(
+      nil,
       :template_uri,
       keyword_init: true
     )
@@ -5907,6 +6163,7 @@ module Aws::QConnect
     # @!attribute message
     #   @return [String]
     class RequestTimeoutException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -5920,6 +6177,7 @@ module Aws::QConnect
     #   <p>The specified resource name.</p>
     #   @return [String]
     class ResourceNotFoundException < Struct.new(
+      nil,
       :message,
       :resource_name,
       keyword_init: true
@@ -5944,6 +6202,7 @@ module Aws::QConnect
     #   <p>The type of the query result.</p>
     #   @return [String]
     class ResultData < Struct.new(
+      nil,
       :result_id,
       :document,
       :relevance_score,
@@ -5967,6 +6226,7 @@ module Aws::QConnect
     #   <p>The value of the data stored on the session.</p>
     #   @return [Types::RuntimeSessionDataValue]
     class RuntimeSessionData < Struct.new(
+      nil,
       :key,
       :value,
       keyword_init: true
@@ -5994,6 +6254,7 @@ module Aws::QConnect
     #   <p>The body to use in SMS messages.</p>
     #   @return [Types::SMSMessageTemplateContentBody]
     class SMSMessageTemplateContent < Struct.new(
+      nil,
       :body,
       keyword_init: true
     )
@@ -6005,6 +6266,7 @@ module Aws::QConnect
     #   <p>The message body to use in SMS messages.</p>
     #   @return [Types::MessageTemplateBodyContentProvider]
     class SMSMessageTemplateContentBody < Struct.new(
+      nil,
       :plain_text,
       keyword_init: true
     )
@@ -6024,6 +6286,7 @@ module Aws::QConnect
     #   <p>The search expression to filter results.</p>
     #   @return [Types::SearchExpression]
     class SearchContentInput < Struct.new(
+      nil,
       :next_token,
       :max_results,
       :knowledge_base_id,
@@ -6040,6 +6303,7 @@ module Aws::QConnect
     #   <p>If there are additional results, this is the token for the next set of results.</p>
     #   @return [String]
     class SearchContentOutput < Struct.new(
+      nil,
       :content_summaries,
       :next_token,
       keyword_init: true
@@ -6052,6 +6316,7 @@ module Aws::QConnect
     #   <p>The search expression filters.</p>
     #   @return [Array<Types::Filter>]
     class SearchExpression < Struct.new(
+      nil,
       :filters,
       keyword_init: true
     )
@@ -6071,6 +6336,7 @@ module Aws::QConnect
     #   <p>The maximum number of results to return per page.</p>
     #   @return [Integer]
     class SearchMessageTemplatesRequest < Struct.new(
+      nil,
       :knowledge_base_id,
       :search_expression,
       :next_token,
@@ -6087,6 +6353,7 @@ module Aws::QConnect
     #   <p>If there are additional results, this is the token for the next set of results.</p>
     #   @return [String]
     class SearchMessageTemplatesResponse < Struct.new(
+      nil,
       :results,
       :next_token,
       keyword_init: true
@@ -6110,6 +6377,7 @@ module Aws::QConnect
     #   <p>The <a href="https://docs.aws.amazon.com/connect/latest/adminguide/connect-attrib-list.html#user-defined-attributes">user-defined Amazon Connect contact attributes</a> to be resolved when search results are returned.</p>
     #   @return [Hash<String, String>]
     class SearchQuickResponsesRequest < Struct.new(
+      nil,
       :knowledge_base_id,
       :search_expression,
       :next_token,
@@ -6127,6 +6395,7 @@ module Aws::QConnect
     #   <p>The token for the next set of results. Use the value returned in the previous response in the next request to retrieve the next set of results.</p>
     #   @return [String]
     class SearchQuickResponsesResponse < Struct.new(
+      nil,
       :results,
       :next_token,
       keyword_init: true
@@ -6147,6 +6416,7 @@ module Aws::QConnect
     #   <p>The search expression to filter results.</p>
     #   @return [Types::SearchExpression]
     class SearchSessionsInput < Struct.new(
+      nil,
       :next_token,
       :max_results,
       :assistant_id,
@@ -6163,6 +6433,7 @@ module Aws::QConnect
     #   <p>If there are additional results, this is the token for the next set of results.</p>
     #   @return [String]
     class SearchSessionsOutput < Struct.new(
+      nil,
       :session_summaries,
       :next_token,
       keyword_init: true
@@ -6175,6 +6446,7 @@ module Aws::QConnect
     #   <p>URL for crawling</p>
     #   @return [String]
     class SeedUrl < Struct.new(
+      nil,
       :url,
       keyword_init: true
     )
@@ -6195,6 +6467,7 @@ module Aws::QConnect
     #   <p>The association configurations for overriding behavior on this AI Agent.</p>
     #   @return [Array<Types::AssociationConfiguration>]
     class SelfServiceAIAgentConfiguration < Struct.new(
+      nil,
       :self_service_pre_processing_ai_prompt_id,
       :self_service_answer_generation_ai_prompt_id,
       :self_service_ai_guardrail_id,
@@ -6215,6 +6488,7 @@ module Aws::QConnect
     #   <p>The bot response of the conversation history data.</p>
     #   @return [String]
     class SelfServiceConversationHistory < Struct.new(
+      nil,
       :turn_number,
       :input_transcript,
       :bot_response,
@@ -6234,6 +6508,7 @@ module Aws::QConnect
     #   <p>The dissimilarity threshold for splitting chunks.</p>
     #   @return [Integer]
     class SemanticChunkingConfiguration < Struct.new(
+      nil,
       :max_tokens,
       :buffer_size,
       :breakpoint_percentile_threshold,
@@ -6264,6 +6539,7 @@ module Aws::QConnect
     #   <p>A unique, case-sensitive identifier that you provide to ensure the idempotency of the request. If not provided, the AWS SDK populates this field.For more information about idempotency, see Making retries safe with idempotent APIs.</p>
     #   @return [String]
     class SendMessageRequest < Struct.new(
+      nil,
       :assistant_id,
       :session_id,
       :type,
@@ -6286,6 +6562,7 @@ module Aws::QConnect
     #   <p>The token for the next message, used by GetNextMessage.</p>
     #   @return [String]
     class SendMessageResponse < Struct.new(
+      nil,
       :request_message_id,
       :configuration,
       :next_message_token,
@@ -6299,6 +6576,7 @@ module Aws::QConnect
     #   <p>The customer managed key used for encryption. For more information about setting up a customer managed key for Amazon Q in Connect, see <a href="https://docs.aws.amazon.com/connect/latest/adminguide/enable-q.html">Enable Amazon Q in Connect for your instance</a>. For information about valid ID values, see <a href="https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#key-id">Key identifiers (KeyId)</a>.</p>
     #   @return [String]
     class ServerSideEncryptionConfiguration < Struct.new(
+      nil,
       :kms_key_id,
       keyword_init: true
     )
@@ -6309,6 +6587,7 @@ module Aws::QConnect
     # @!attribute message
     #   @return [String]
     class ServiceQuotaExceededException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -6344,6 +6623,7 @@ module Aws::QConnect
     #   <p>The origin of the Session to be listed. <code>SYSTEM</code> for a default Session created by Amazon Q in Connect or <code>CUSTOMER</code> for a Session created by calling <a href="https://docs.aws.amazon.com/connect/latest/APIReference/API_amazon-q-connect_CreateSession.html">CreateSession</a> API.</p>
     #   @return [String]
     class SessionData < Struct.new(
+      nil,
       :session_arn,
       :session_id,
       :name,
@@ -6363,6 +6643,7 @@ module Aws::QConnect
     #   <p>The Amazon Resource Name (ARN) of the integrated Amazon SNS topic used for streaming chat messages.</p>
     #   @return [String]
     class SessionIntegrationConfiguration < Struct.new(
+      nil,
       :topic_integration_arn,
       keyword_init: true
     )
@@ -6383,6 +6664,7 @@ module Aws::QConnect
     #   <p>The Amazon Resource Name (ARN) of the Amazon Q in Connect assistant.</p>
     #   @return [String]
     class SessionSummary < Struct.new(
+      nil,
       :session_id,
       :session_arn,
       :assistant_id,
@@ -6429,6 +6711,7 @@ module Aws::QConnect
     #   <p>Contains information about where the text with a citation begins and ends in the generated output.</p>
     #   @return [Types::CitationSpan]
     class SourceContentDataDetails < Struct.new(
+      nil,
       :id,
       :type,
       :text_data,
@@ -6449,6 +6732,7 @@ module Aws::QConnect
     #   <p>The expected expiration time of the generated presigned URL, specified in minutes.</p>
     #   @return [Integer]
     class StartContentUploadInput < Struct.new(
+      nil,
       :knowledge_base_id,
       :content_type,
       :presigned_url_time_to_live,
@@ -6470,6 +6754,7 @@ module Aws::QConnect
     #   <p>The headers to include in the upload.</p>
     #   @return [Hash<String, String>]
     class StartContentUploadOutput < Struct.new(
+      nil,
       :upload_id,
       :url,
       :url_expiry,
@@ -6498,6 +6783,7 @@ module Aws::QConnect
     #   <p>The configuration information of the external source that the resource data are imported from.</p>
     #   @return [Types::ExternalSourceConfiguration]
     class StartImportJobRequest < Struct.new(
+      nil,
       :knowledge_base_id,
       :import_job_type,
       :upload_id,
@@ -6513,6 +6799,7 @@ module Aws::QConnect
     #   <p>The import job.</p>
     #   @return [Types::ImportJobData]
     class StartImportJobResponse < Struct.new(
+      nil,
       :import_job,
       keyword_init: true
     )
@@ -6530,6 +6817,7 @@ module Aws::QConnect
     #   <p>The SystemEndpoint attribute.</p>
     #   @return [Types::SystemEndpointAttributes]
     class SystemAttributes < Struct.new(
+      nil,
       :name,
       :customer_endpoint,
       :system_endpoint,
@@ -6543,6 +6831,7 @@ module Aws::QConnect
     #   <p>The customer's phone number if used with <code>customerEndpoint</code>, or the number the customer dialed to call your contact center if used with <code>systemEndpoint</code>.</p>
     #   @return [String]
     class SystemEndpointAttributes < Struct.new(
+      nil,
       :address,
       keyword_init: true
     )
@@ -6557,6 +6846,7 @@ module Aws::QConnect
     #   <p>The tag value in the tag condition.</p>
     #   @return [String]
     class TagCondition < Struct.new(
+      nil,
       :key,
       :value,
       keyword_init: true
@@ -6596,6 +6886,7 @@ module Aws::QConnect
     #   <p>The tags used to organize, track, or control access for this resource.</p>
     #   @return [Hash<String, String>]
     class TagResourceInput < Struct.new(
+      nil,
       :resource_arn,
       :tags,
       keyword_init: true
@@ -6604,6 +6895,7 @@ module Aws::QConnect
     end
 
     class TagResourceOutput < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -6617,6 +6909,7 @@ module Aws::QConnect
     #   <p>The text of the document.</p>
     #   @return [Types::DocumentText]
     class TextData < Struct.new(
+      nil,
       :title,
       :excerpt,
       keyword_init: true
@@ -6629,6 +6922,7 @@ module Aws::QConnect
     #   <p>The YAML text for the AI Prompt template.</p>
     #   @return [String]
     class TextFullAIPromptEditTemplateConfiguration < Struct.new(
+      nil,
       :text,
       keyword_init: true
     )
@@ -6640,6 +6934,7 @@ module Aws::QConnect
     #   <p>The value of the message data in text type.</p>
     #   @return [String]
     class TextMessage < Struct.new(
+      nil,
       :value,
       keyword_init: true
     )
@@ -6650,6 +6945,7 @@ module Aws::QConnect
     # @!attribute message
     #   @return [String]
     class ThrottlingException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -6663,6 +6959,7 @@ module Aws::QConnect
     #   <p>The specified resource name.</p>
     #   @return [String]
     class TooManyTagsException < Struct.new(
+      nil,
       :message,
       :resource_name,
       keyword_init: true
@@ -6674,6 +6971,7 @@ module Aws::QConnect
     # @!attribute message
     #   @return [String]
     class UnauthorizedException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -6687,6 +6985,7 @@ module Aws::QConnect
     #   <p>The tag keys.</p>
     #   @return [Array<String>]
     class UntagResourceInput < Struct.new(
+      nil,
       :resource_arn,
       :tag_keys,
       keyword_init: true
@@ -6695,6 +6994,7 @@ module Aws::QConnect
     end
 
     class UntagResourceOutput < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -6719,6 +7019,7 @@ module Aws::QConnect
     #   <p>The description of the Amazon Q in Connect AI Agent.</p>
     #   @return [String]
     class UpdateAIAgentRequest < Struct.new(
+      nil,
       :client_token,
       :assistant_id,
       :ai_agent_id,
@@ -6734,6 +7035,7 @@ module Aws::QConnect
     #   <p>The data of the updated Amazon Q in Connect AI Agent.</p>
     #   @return [Types::AIAgentData]
     class UpdateAIAgentResponse < Struct.new(
+      nil,
       :ai_agent,
       keyword_init: true
     )
@@ -6777,6 +7079,7 @@ module Aws::QConnect
     #   <p>The contextual grounding policy configuration used to create an AI Guardrail.</p>
     #   @return [Types::AIGuardrailContextualGroundingPolicyConfig]
     class UpdateAIGuardrailRequest < Struct.new(
+      nil,
       :client_token,
       :assistant_id,
       :ai_guardrail_id,
@@ -6798,6 +7101,7 @@ module Aws::QConnect
     #   <p>The data of the updated Amazon Q in Connect AI Guardrail.</p>
     #   @return [Types::AIGuardrailData]
     class UpdateAIGuardrailResponse < Struct.new(
+      nil,
       :ai_guardrail,
       keyword_init: true
     )
@@ -6826,6 +7130,7 @@ module Aws::QConnect
     #   <p>The identifier of the model used for this AI Prompt.</p> <note> <p>For information about which models are supported in each Amazon Web Services Region, see <a href="https://docs.aws.amazon.com/connect/latest/adminguide/create-ai-prompts.html#cli-create-aiprompt">Supported models for system/custom prompts</a>.</p> </note>
     #   @return [String]
     class UpdateAIPromptRequest < Struct.new(
+      nil,
       :client_token,
       :assistant_id,
       :ai_prompt_id,
@@ -6842,6 +7147,7 @@ module Aws::QConnect
     #   <p>The data of the updated Amazon Q in Connect AI Prompt.</p>
     #   @return [Types::AIPromptData]
     class UpdateAIPromptResponse < Struct.new(
+      nil,
       :ai_prompt,
       keyword_init: true
     )
@@ -6858,6 +7164,7 @@ module Aws::QConnect
     #   <p>The configuration of the AI Agent being updated for use by default on the Amazon Q in Connect Assistant.</p>
     #   @return [Types::AIAgentConfigurationData]
     class UpdateAssistantAIAgentRequest < Struct.new(
+      nil,
       :assistant_id,
       :ai_agent_type,
       :configuration,
@@ -6870,6 +7177,7 @@ module Aws::QConnect
     #   <p>The assistant data.</p>
     #   @return [Types::AssistantData]
     class UpdateAssistantAIAgentResponse < Struct.new(
+      nil,
       :assistant,
       keyword_init: true
     )
@@ -6901,6 +7209,7 @@ module Aws::QConnect
     #   <p>A pointer to the uploaded asset. This value is returned by <a href="https://docs.aws.amazon.com/amazon-q-connect/latest/APIReference/API_StartContentUpload.html">StartContentUpload</a>. </p>
     #   @return [String]
     class UpdateContentInput < Struct.new(
+      nil,
       :knowledge_base_id,
       :content_id,
       :revision_id,
@@ -6918,6 +7227,7 @@ module Aws::QConnect
     #   <p>The content.</p>
     #   @return [Types::ContentData]
     class UpdateContentOutput < Struct.new(
+      nil,
       :content,
       keyword_init: true
     )
@@ -6931,6 +7241,7 @@ module Aws::QConnect
     #   <p>The template URI to update.</p>
     #   @return [String]
     class UpdateKnowledgeBaseTemplateUriInput < Struct.new(
+      nil,
       :knowledge_base_id,
       :template_uri,
       keyword_init: true
@@ -6942,6 +7253,7 @@ module Aws::QConnect
     #   <p>The knowledge base to update.</p>
     #   @return [Types::KnowledgeBaseData]
     class UpdateKnowledgeBaseTemplateUriOutput < Struct.new(
+      nil,
       :knowledge_base,
       keyword_init: true
     )
@@ -6964,6 +7276,7 @@ module Aws::QConnect
     #   <p>The configuration information of the grouping of Amazon Q in Connect users.</p>
     #   @return [Types::GroupingConfiguration]
     class UpdateMessageTemplateMetadataRequest < Struct.new(
+      nil,
       :knowledge_base_id,
       :message_template_id,
       :name,
@@ -6978,6 +7291,7 @@ module Aws::QConnect
     #   <p>The message template.</p>
     #   @return [Types::MessageTemplateData]
     class UpdateMessageTemplateMetadataResponse < Struct.new(
+      nil,
       :message_template,
       keyword_init: true
     )
@@ -7000,6 +7314,7 @@ module Aws::QConnect
     #   <p>An object that specifies the default values to use for variables in the message template. This object contains different categories of key-value pairs. Each key defines a variable or placeholder in the message template. The corresponding value defines the default value for that variable.</p>
     #   @return [Types::MessageTemplateAttributes]
     class UpdateMessageTemplateRequest < Struct.new(
+      nil,
       :knowledge_base_id,
       :message_template_id,
       :content,
@@ -7014,6 +7329,7 @@ module Aws::QConnect
     #   <p>The message template.</p>
     #   @return [Types::MessageTemplateData]
     class UpdateMessageTemplateResponse < Struct.new(
+      nil,
       :message_template,
       keyword_init: true
     )
@@ -7063,6 +7379,7 @@ module Aws::QConnect
     #   <p>The language code value for the language in which the quick response is written. The supported language codes include <code>de_DE</code>, <code>en_US</code>, <code>es_ES</code>, <code>fr_FR</code>, <code>id_ID</code>, <code>it_IT</code>, <code>ja_JP</code>, <code>ko_KR</code>, <code>pt_BR</code>, <code>zh_CN</code>, <code>zh_TW</code> </p>
     #   @return [String]
     class UpdateQuickResponseRequest < Struct.new(
+      nil,
       :knowledge_base_id,
       :quick_response_id,
       :name,
@@ -7086,6 +7403,7 @@ module Aws::QConnect
     #   <p>The quick response.</p>
     #   @return [Types::QuickResponseData]
     class UpdateQuickResponseResponse < Struct.new(
+      nil,
       :quick_response,
       keyword_init: true
     )
@@ -7105,6 +7423,7 @@ module Aws::QConnect
     #   <p>The data stored on the Amazon Q in Connect Session.</p>
     #   @return [Array<Types::RuntimeSessionData>]
     class UpdateSessionDataRequest < Struct.new(
+      nil,
       :assistant_id,
       :session_id,
       :namespace,
@@ -7127,6 +7446,7 @@ module Aws::QConnect
     #   <p>Data stored in the session.</p>
     #   @return [Array<Types::RuntimeSessionData>]
     class UpdateSessionDataResponse < Struct.new(
+      nil,
       :session_arn,
       :session_id,
       :namespace,
@@ -7152,6 +7472,7 @@ module Aws::QConnect
     #   <p>The configuration of the AI Agents (mapped by AI Agent Type to AI Agent version) that should be used by Amazon Q in Connect for this Session.</p>
     #   @return [Hash<String, Types::AIAgentConfigurationData>]
     class UpdateSessionRequest < Struct.new(
+      nil,
       :assistant_id,
       :session_id,
       :description,
@@ -7166,6 +7487,7 @@ module Aws::QConnect
     #   <p>Information about the session.</p>
     #   @return [Types::SessionData]
     class UpdateSessionResponse < Struct.new(
+      nil,
       :session,
       keyword_init: true
     )
@@ -7177,6 +7499,7 @@ module Aws::QConnect
     #   <p>List of URLs for crawling.</p>
     #   @return [Array<Types::SeedUrl>]
     class UrlConfiguration < Struct.new(
+      nil,
       :seed_urls,
       keyword_init: true
     )
@@ -7187,6 +7510,7 @@ module Aws::QConnect
     # @!attribute message
     #   @return [String]
     class ValidationException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -7201,6 +7525,7 @@ module Aws::QConnect
     #   <p>A custom parser for data source documents.</p>
     #   @return [Types::ParsingConfiguration]
     class VectorIngestionConfiguration < Struct.new(
+      nil,
       :chunking_configuration,
       :parsing_configuration,
       keyword_init: true
@@ -7225,6 +7550,7 @@ module Aws::QConnect
     #   <p>The scope of what is crawled for your URLs. You can choose to crawl only web pages that belong to the same host or primary domain. For example, only web pages that contain the seed URL <code>https://docs.aws.amazon.com/bedrock/latest/userguide/</code> and no other domains. You can choose to include sub domains in addition to the host or primary domain. For example, web pages that contain <code>aws.amazon.com</code> can also include sub domain <code>docs.aws.amazon.com</code>.</p>
     #   @return [String]
     class WebCrawlerConfiguration < Struct.new(
+      nil,
       :url_configuration,
       :crawler_limits,
       :inclusion_filters,
@@ -7240,6 +7566,7 @@ module Aws::QConnect
     #   <p>Rate of web URLs retrieved per minute.</p>
     #   @return [Integer]
     class WebCrawlerLimits < Struct.new(
+      nil,
       :rate_limit,
       keyword_init: true
     )

@@ -10,6 +10,7 @@ module Aws::Appflow
     # @!attribute message
     #   @return [String]
     class AccessDeniedException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -29,6 +30,7 @@ module Aws::Appflow
     #         the records that each file contains.</p>
     #   @return [Integer]
     class AggregationConfig < Struct.new(
+      nil,
       :aggregation_type,
       :target_file_size,
       keyword_init: true
@@ -45,6 +47,7 @@ module Aws::Appflow
     #   <p> The Secret Access Key portion of the credentials. </p>
     #   @return [String]
     class AmplitudeConnectorProfileCredentials < Struct.new(
+      nil,
       :api_key,
       :secret_key,
       keyword_init: true
@@ -54,6 +57,7 @@ module Aws::Appflow
 
     # <p> The connector-specific profile properties required when using Amplitude. </p>
     class AmplitudeConnectorProfileProperties < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -61,6 +65,7 @@ module Aws::Appflow
 
     # <p> The connector metadata specific to Amplitude. </p>
     class AmplitudeMetadata < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -71,6 +76,7 @@ module Aws::Appflow
     #   <p> The object specified in the Amplitude flow source. </p>
     #   @return [String]
     class AmplitudeSourceProperties < Struct.new(
+      nil,
       :object,
       keyword_init: true
     )
@@ -85,6 +91,7 @@ module Aws::Appflow
     #   <p>The API secret key required for API key authentication.</p>
     #   @return [String]
     class ApiKeyCredentials < Struct.new(
+      nil,
       :api_key,
       :api_secret_key,
       keyword_init: true
@@ -113,6 +120,7 @@ module Aws::Appflow
     #         connector.</p>
     #   @return [Array<String>]
     class AuthParameter < Struct.new(
+      nil,
       :key,
       :is_required,
       :label,
@@ -150,6 +158,7 @@ module Aws::Appflow
     #   <p>Contains information required for custom authentication.</p>
     #   @return [Array<Types::CustomAuthConfig>]
     class AuthenticationConfig < Struct.new(
+      nil,
       :is_basic_auth_supported,
       :is_api_key_auth_supported,
       :is_o_auth2_supported,
@@ -177,6 +186,7 @@ module Aws::Appflow
     #   <p> The password to use to connect to a resource.</p>
     #   @return [String]
     class BasicAuthCredentials < Struct.new(
+      nil,
       :username,
       :password,
       keyword_init: true
@@ -194,6 +204,7 @@ module Aws::Appflow
     #         flow.</p>
     #   @return [Array<String>]
     class CancelFlowExecutionsRequest < Struct.new(
+      nil,
       :flow_name,
       :execution_ids,
       keyword_init: true
@@ -206,6 +217,7 @@ module Aws::Appflow
     #         for canceling because they haven't started yet or have already completed.</p>
     #   @return [Array<String>]
     class CancelFlowExecutionsResponse < Struct.new(
+      nil,
       :invalid_executions,
       keyword_init: true
     )
@@ -217,6 +229,7 @@ module Aws::Appflow
     # @!attribute message
     #   @return [String]
     class ConflictException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -227,6 +240,7 @@ module Aws::Appflow
     # @!attribute message
     #   @return [String]
     class ConnectorAuthenticationException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -331,6 +345,7 @@ module Aws::Appflow
     #         data.</p>
     #   @return [Array<Types::DataTransferApi>]
     class ConnectorConfiguration < Struct.new(
+      nil,
       :can_use_as_source,
       :can_use_as_destination,
       :supported_destination_connectors,
@@ -420,6 +435,7 @@ module Aws::Appflow
     #            </dl>
     #   @return [Array<String>]
     class ConnectorDetail < Struct.new(
+      nil,
       :connector_description,
       :connector_name,
       :connector_owner,
@@ -455,6 +471,7 @@ module Aws::Appflow
     #         fashion. </p>
     #   @return [Boolean]
     class ConnectorEntity < Struct.new(
+      nil,
       :name,
       :label,
       :has_nested_entities,
@@ -508,6 +525,7 @@ module Aws::Appflow
     #   <p>A map that has specific properties related to the ConnectorEntityField.</p>
     #   @return [Hash<String, String>]
     class ConnectorEntityField < Struct.new(
+      nil,
       :identifier,
       :parent_identifier,
       :label,
@@ -599,6 +617,7 @@ module Aws::Appflow
     #   <p>The connector metadata specific to Salesforce Pardot.</p>
     #   @return [Types::PardotMetadata]
     class ConnectorMetadata < Struct.new(
+      nil,
       :amplitude,
       :datadog,
       :dynatrace,
@@ -637,6 +656,7 @@ module Aws::Appflow
     #         been granted. </p>
     #   @return [String]
     class ConnectorOAuthRequest < Struct.new(
+      nil,
       :auth_code,
       :redirect_uri,
       keyword_init: true
@@ -697,6 +717,7 @@ module Aws::Appflow
     #   <p>The operation to be performed on the provided Salesforce Pardot source fields.</p>
     #   @return [String]
     class ConnectorOperator < Struct.new(
+      nil,
       :amplitude,
       :datadog,
       :dynatrace,
@@ -756,6 +777,7 @@ module Aws::Appflow
     #   <p> Specifies the private connection provisioning state. </p>
     #   @return [Types::PrivateConnectionProvisioningState]
     class ConnectorProfile < Struct.new(
+      nil,
       :connector_profile_arn,
       :connector_profile_name,
       :connector_type,
@@ -780,6 +802,7 @@ module Aws::Appflow
     #   <p> The connector-specific credentials required by each connector. </p>
     #   @return [Types::ConnectorProfileCredentials]
     class ConnectorProfileConfig < Struct.new(
+      nil,
       :connector_profile_properties,
       :connector_profile_credentials,
       keyword_init: true
@@ -847,6 +870,7 @@ module Aws::Appflow
     #   <p>The connector-specific credentials required when using Salesforce Pardot.</p>
     #   @return [Types::PardotConnectorProfileCredentials]
     class ConnectorProfileCredentials < Struct.new(
+      nil,
       :amplitude,
       :datadog,
       :dynatrace,
@@ -930,6 +954,7 @@ module Aws::Appflow
     #   <p>The connector-specific properties required by Salesforce Pardot.</p>
     #   @return [Types::PardotConnectorProfileProperties]
     class ConnectorProfileProperties < Struct.new(
+      nil,
       :amplitude,
       :datadog,
       :dynatrace,
@@ -960,6 +985,7 @@ module Aws::Appflow
     #         the connector.</p>
     #   @return [Types::LambdaConnectorProvisioningConfig]
     class ConnectorProvisioningConfig < Struct.new(
+      nil,
       :lambda,
       keyword_init: true
     )
@@ -991,6 +1017,7 @@ module Aws::Appflow
     #         connector.</p>
     #   @return [Array<String>]
     class ConnectorRuntimeSetting < Struct.new(
+      nil,
       :key,
       :data_type,
       :is_required,
@@ -1012,6 +1039,7 @@ module Aws::Appflow
     # @!attribute message
     #   @return [String]
     class ConnectorServerException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -1056,6 +1084,7 @@ module Aws::Appflow
     #         call to <code>CreateConnectorProfile</code>. The token is active for 8 hours.</p>
     #   @return [String]
     class CreateConnectorProfileRequest < Struct.new(
+      nil,
       :connector_profile_name,
       :kms_arn,
       :connector_type,
@@ -1072,6 +1101,7 @@ module Aws::Appflow
     #   <p> The Amazon Resource Name (ARN) of the connector profile. </p>
     #   @return [String]
     class CreateConnectorProfileResponse < Struct.new(
+      nil,
       :connector_profile_arn,
       keyword_init: true
     )
@@ -1126,6 +1156,7 @@ module Aws::Appflow
     #         call to <code>CreateFlow</code>. The token is active for 8 hours.</p>
     #   @return [String]
     class CreateFlowRequest < Struct.new(
+      nil,
       :flow_name,
       :description,
       :kms_arn,
@@ -1148,6 +1179,7 @@ module Aws::Appflow
     #   <p> Indicates the current status of the flow. </p>
     #   @return [String]
     class CreateFlowResponse < Struct.new(
+      nil,
       :flow_arn,
       :flow_status,
       keyword_init: true
@@ -1163,6 +1195,7 @@ module Aws::Appflow
     #   <p>Information about authentication parameters required for authentication.</p>
     #   @return [Array<Types::AuthParameter>]
     class CustomAuthConfig < Struct.new(
+      nil,
       :custom_authentication_type,
       :auth_parameters,
       keyword_init: true
@@ -1178,6 +1211,7 @@ module Aws::Appflow
     #   <p>A map that holds custom authentication credentials.</p>
     #   @return [Hash<String, String>]
     class CustomAuthCredentials < Struct.new(
+      nil,
       :custom_authentication_type,
       :credentials_map,
       keyword_init: true
@@ -1207,6 +1241,7 @@ module Aws::Appflow
     #         in the flow.</p>
     #   @return [Hash<String, String>]
     class CustomConnectorDestinationProperties < Struct.new(
+      nil,
       :entity_name,
       :error_handling_config,
       :write_operation_type,
@@ -1237,6 +1272,7 @@ module Aws::Appflow
     #         credentials.</p>
     #   @return [Types::CustomAuthCredentials]
     class CustomConnectorProfileCredentials < Struct.new(
+      nil,
       :authentication_type,
       :basic,
       :oauth2,
@@ -1255,6 +1291,7 @@ module Aws::Appflow
     #   <p>The OAuth 2.0 properties required for OAuth 2.0 authentication.</p>
     #   @return [Types::OAuth2Properties]
     class CustomConnectorProfileProperties < Struct.new(
+      nil,
       :profile_properties,
       :o_auth2_properties,
       keyword_init: true
@@ -1275,6 +1312,7 @@ module Aws::Appflow
     #         data.</p>
     #   @return [Types::DataTransferApi]
     class CustomConnectorSourceProperties < Struct.new(
+      nil,
       :entity_name,
       :custom_properties,
       :data_transfer_api,
@@ -1293,6 +1331,7 @@ module Aws::Appflow
     #       </p>
     #   @return [String]
     class CustomerProfilesDestinationProperties < Struct.new(
+      nil,
       :domain_name,
       :object_type_name,
       keyword_init: true
@@ -1302,6 +1341,7 @@ module Aws::Appflow
 
     # <p> The connector metadata specific to Amazon Connect Customer Profiles. </p>
     class CustomerProfilesMetadata < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1333,6 +1373,7 @@ module Aws::Appflow
     #            </dl>
     #   @return [String]
     class DataTransferApi < Struct.new(
+      nil,
       :name,
       :type,
       keyword_init: true
@@ -1351,6 +1392,7 @@ module Aws::Appflow
     #         application key is used to log all requests made to the API. </p>
     #   @return [String]
     class DatadogConnectorProfileCredentials < Struct.new(
+      nil,
       :api_key,
       :application_key,
       keyword_init: true
@@ -1363,6 +1405,7 @@ module Aws::Appflow
     #   <p> The location of the Datadog resource. </p>
     #   @return [String]
     class DatadogConnectorProfileProperties < Struct.new(
+      nil,
       :instance_url,
       keyword_init: true
     )
@@ -1371,6 +1414,7 @@ module Aws::Appflow
 
     # <p> The connector metadata specific to Datadog. </p>
     class DatadogMetadata < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1381,6 +1425,7 @@ module Aws::Appflow
     #   <p> The object specified in the Datadog flow source. </p>
     #   @return [String]
     class DatadogSourceProperties < Struct.new(
+      nil,
       :object,
       keyword_init: true
     )
@@ -1396,6 +1441,7 @@ module Aws::Appflow
     #         in use in one or more flows. </p>
     #   @return [Boolean]
     class DeleteConnectorProfileRequest < Struct.new(
+      nil,
       :connector_profile_name,
       :force_delete,
       keyword_init: true
@@ -1404,6 +1450,7 @@ module Aws::Appflow
     end
 
     class DeleteConnectorProfileResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1418,6 +1465,7 @@ module Aws::Appflow
     #         use. </p>
     #   @return [Boolean]
     class DeleteFlowRequest < Struct.new(
+      nil,
       :flow_name,
       :force_delete,
       keyword_init: true
@@ -1426,6 +1474,7 @@ module Aws::Appflow
     end
 
     class DeleteFlowResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1445,6 +1494,7 @@ module Aws::Appflow
     #   <p>The version of the API that's used by the connector.</p>
     #   @return [String]
     class DescribeConnectorEntityRequest < Struct.new(
+      nil,
       :connector_entity_name,
       :connector_type,
       :connector_profile_name,
@@ -1460,6 +1510,7 @@ module Aws::Appflow
     #           <i>account ID</i>, and so on. </p>
     #   @return [Array<Types::ConnectorEntityField>]
     class DescribeConnectorEntityResponse < Struct.new(
+      nil,
       :connector_entity_fields,
       keyword_init: true
     )
@@ -1486,6 +1537,7 @@ module Aws::Appflow
     #   <p> The pagination token for the next page of data. </p>
     #   @return [String]
     class DescribeConnectorProfilesRequest < Struct.new(
+      nil,
       :connector_profile_names,
       :connector_type,
       :connector_label,
@@ -1504,6 +1556,7 @@ module Aws::Appflow
     #         means that all records have been fetched. </p>
     #   @return [String]
     class DescribeConnectorProfilesResponse < Struct.new(
+      nil,
       :connector_profile_details,
       :next_token,
       keyword_init: true
@@ -1521,6 +1574,7 @@ module Aws::Appflow
     #         calling for CUSTOMCONNECTOR connector type/.</p>
     #   @return [String]
     class DescribeConnectorRequest < Struct.new(
+      nil,
       :connector_type,
       :connector_label,
       keyword_init: true
@@ -1532,6 +1586,7 @@ module Aws::Appflow
     #   <p>Configuration info of all the connectors that the user requested.</p>
     #   @return [Types::ConnectorConfiguration]
     class DescribeConnectorResponse < Struct.new(
+      nil,
       :connector_configuration,
       keyword_init: true
     )
@@ -1549,6 +1604,7 @@ module Aws::Appflow
     #   <p> The pagination token for the next page of data. </p>
     #   @return [String]
     class DescribeConnectorsRequest < Struct.new(
+      nil,
       :connector_types,
       :max_results,
       :next_token,
@@ -1567,6 +1623,7 @@ module Aws::Appflow
     #   <p> The pagination token for the next page of data. </p>
     #   @return [String]
     class DescribeConnectorsResponse < Struct.new(
+      nil,
       :connector_configurations,
       :connectors,
       :next_token,
@@ -1587,6 +1644,7 @@ module Aws::Appflow
     #   <p> The pagination token for the next page of data. </p>
     #   @return [String]
     class DescribeFlowExecutionRecordsRequest < Struct.new(
+      nil,
       :flow_name,
       :max_results,
       :next_token,
@@ -1602,6 +1660,7 @@ module Aws::Appflow
     #   <p> The pagination token for the next page of data. </p>
     #   @return [String]
     class DescribeFlowExecutionRecordsResponse < Struct.new(
+      nil,
       :flow_executions,
       :next_token,
       keyword_init: true
@@ -1614,6 +1673,7 @@ module Aws::Appflow
     #         (-) only. </p>
     #   @return [String]
     class DescribeFlowRequest < Struct.new(
+      nil,
       :flow_name,
       keyword_init: true
     )
@@ -1700,6 +1760,7 @@ module Aws::Appflow
     #            </ul>
     #   @return [Integer]
     class DescribeFlowResponse < Struct.new(
+      nil,
       :flow_arn,
       :description,
       :flow_name,
@@ -1765,6 +1826,7 @@ module Aws::Appflow
     #   <p>The properties required to query SAPOData.</p>
     #   @return [Types::SAPODataDestinationProperties]
     class DestinationConnectorProperties < Struct.new(
+      nil,
       :redshift,
       :s3,
       :salesforce,
@@ -1808,6 +1870,7 @@ module Aws::Appflow
     #         option. </p>
     #   @return [Array<String>]
     class DestinationFieldProperties < Struct.new(
+      nil,
       :is_creatable,
       :is_nullable,
       :is_upsertable,
@@ -1844,6 +1907,7 @@ module Aws::Appflow
     #   <p> This stores the information that is required to query a particular connector. </p>
     #   @return [Types::DestinationConnectorProperties]
     class DestinationFlowConfig < Struct.new(
+      nil,
       :connector_type,
       :api_version,
       :connector_profile_name,
@@ -1858,6 +1922,7 @@ module Aws::Appflow
     #   <p> The API tokens used by Dynatrace API to authenticate various API calls. </p>
     #   @return [String]
     class DynatraceConnectorProfileCredentials < Struct.new(
+      nil,
       :api_token,
       keyword_init: true
     )
@@ -1869,6 +1934,7 @@ module Aws::Appflow
     #   <p> The location of the Dynatrace resource. </p>
     #   @return [String]
     class DynatraceConnectorProfileProperties < Struct.new(
+      nil,
       :instance_url,
       keyword_init: true
     )
@@ -1877,6 +1943,7 @@ module Aws::Appflow
 
     # <p> The connector metadata specific to Dynatrace. </p>
     class DynatraceMetadata < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1887,6 +1954,7 @@ module Aws::Appflow
     #   <p> The object specified in the Dynatrace flow source. </p>
     #   @return [String]
     class DynatraceSourceProperties < Struct.new(
+      nil,
       :object,
       keyword_init: true
     )
@@ -1909,6 +1977,7 @@ module Aws::Appflow
     #   <p> Specifies the name of the Amazon S3 bucket. </p>
     #   @return [String]
     class ErrorHandlingConfig < Struct.new(
+      nil,
       :fail_on_first_destination_error,
       :bucket_prefix,
       :bucket_name,
@@ -1931,6 +2000,7 @@ module Aws::Appflow
     #   <p> Specifies the error message that appears if a flow fails. </p>
     #   @return [String]
     class ErrorInfo < Struct.new(
+      nil,
       :put_failures_count,
       :execution_message,
       keyword_init: true
@@ -1951,6 +2021,7 @@ module Aws::Appflow
     #       </p>
     #   @return [Types::ErrorHandlingConfig]
     class EventBridgeDestinationProperties < Struct.new(
+      nil,
       :object,
       :error_handling_config,
       keyword_init: true
@@ -1960,6 +2031,7 @@ module Aws::Appflow
 
     # <p> The connector metadata specific to Amazon EventBridge. </p>
     class EventBridgeMetadata < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1977,6 +2049,7 @@ module Aws::Appflow
     #   <p> Specifies the status of the most recent flow run. </p>
     #   @return [String]
     class ExecutionDetails < Struct.new(
+      nil,
       :most_recent_execution_message,
       :most_recent_execution_time,
       :most_recent_execution_status,
@@ -2014,6 +2087,7 @@ module Aws::Appflow
     #   <p>Describes the metadata catalog, metadata table, and data partitions that Amazon AppFlow used for the associated flow run.</p>
     #   @return [Array<Types::MetadataCatalogDetail>]
     class ExecutionRecord < Struct.new(
+      nil,
       :execution_id,
       :execution_status,
       :execution_result,
@@ -2049,6 +2123,7 @@ module Aws::Appflow
     #         response from your SAP application.</p>
     #   @return [Integer]
     class ExecutionResult < Struct.new(
+      nil,
       :error_info,
       :bytes_processed,
       :bytes_written,
@@ -2085,6 +2160,7 @@ module Aws::Appflow
     #   <p>This is the allowable length range for this field's value.</p>
     #   @return [Types::Range]
     class FieldTypeDetails < Struct.new(
+      nil,
       :field_type,
       :filter_operators,
       :supported_values,
@@ -2149,6 +2225,7 @@ module Aws::Appflow
     #   <p> Describes the details of the most recent flow run. </p>
     #   @return [Types::ExecutionDetails]
     class FlowDefinition < Struct.new(
+      nil,
       :flow_arn,
       :description,
       :flow_name,
@@ -2196,6 +2273,7 @@ module Aws::Appflow
     #         beginning of the each table name.</p>
     #   @return [String]
     class GlueDataCatalogConfig < Struct.new(
+      nil,
       :role_arn,
       :database_name,
       :table_prefix,
@@ -2224,6 +2302,7 @@ module Aws::Appflow
     #       </p>
     #   @return [Types::ConnectorOAuthRequest]
     class GoogleAnalyticsConnectorProfileCredentials < Struct.new(
+      nil,
       :client_id,
       :client_secret,
       :access_token,
@@ -2236,6 +2315,7 @@ module Aws::Appflow
 
     # <p> The connector-specific profile properties required by Google Analytics. </p>
     class GoogleAnalyticsConnectorProfileProperties < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -2246,6 +2326,7 @@ module Aws::Appflow
     #   <p> The desired authorization scope for the Google Analytics account. </p>
     #   @return [Array<String>]
     class GoogleAnalyticsMetadata < Struct.new(
+      nil,
       :o_auth_scopes,
       keyword_init: true
     )
@@ -2257,6 +2338,7 @@ module Aws::Appflow
     #   <p> The object specified in the Google Analytics flow source. </p>
     #   @return [String]
     class GoogleAnalyticsSourceProperties < Struct.new(
+      nil,
       :object,
       keyword_init: true
     )
@@ -2275,6 +2357,7 @@ module Aws::Appflow
     #         Google Analytics, Marketo, Zendesk, and Slack. </p>
     #   @return [Types::ConnectorOAuthRequest]
     class HoneycodeConnectorProfileCredentials < Struct.new(
+      nil,
       :access_token,
       :refresh_token,
       :o_auth_request,
@@ -2285,6 +2368,7 @@ module Aws::Appflow
 
     # <p> The connector-specific properties required when using Amazon Honeycode. </p>
     class HoneycodeConnectorProfileProperties < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -2302,6 +2386,7 @@ module Aws::Appflow
     #       </p>
     #   @return [Types::ErrorHandlingConfig]
     class HoneycodeDestinationProperties < Struct.new(
+      nil,
       :object,
       :error_handling_config,
       keyword_init: true
@@ -2314,6 +2399,7 @@ module Aws::Appflow
     #   <p> The desired authorization scope for the Amazon Honeycode account. </p>
     #   @return [Array<String>]
     class HoneycodeMetadata < Struct.new(
+      nil,
       :o_auth_scopes,
       keyword_init: true
     )
@@ -2327,6 +2413,7 @@ module Aws::Appflow
     #         importing incremental records from the source. </p>
     #   @return [String]
     class IncrementalPullConfig < Struct.new(
+      nil,
       :datetime_type_field_name,
       keyword_init: true
     )
@@ -2347,6 +2434,7 @@ module Aws::Appflow
     #   <p> The encryption keys used to encrypt data. </p>
     #   @return [String]
     class InforNexusConnectorProfileCredentials < Struct.new(
+      nil,
       :access_key_id,
       :user_id,
       :secret_access_key,
@@ -2361,6 +2449,7 @@ module Aws::Appflow
     #   <p> The location of the Infor Nexus resource. </p>
     #   @return [String]
     class InforNexusConnectorProfileProperties < Struct.new(
+      nil,
       :instance_url,
       keyword_init: true
     )
@@ -2369,6 +2458,7 @@ module Aws::Appflow
 
     # <p> The connector metadata specific to Infor Nexus. </p>
     class InforNexusMetadata < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -2379,6 +2469,7 @@ module Aws::Appflow
     #   <p> The object specified in the Infor Nexus flow source. </p>
     #   @return [String]
     class InforNexusSourceProperties < Struct.new(
+      nil,
       :object,
       keyword_init: true
     )
@@ -2390,6 +2481,7 @@ module Aws::Appflow
     # @!attribute message
     #   @return [String]
     class InternalServerException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -2402,6 +2494,7 @@ module Aws::Appflow
     #   <p>Lambda ARN of the connector being registered.</p>
     #   @return [String]
     class LambdaConnectorProvisioningConfig < Struct.new(
+      nil,
       :lambda_arn,
       keyword_init: true
     )
@@ -2435,6 +2528,7 @@ module Aws::Appflow
     #         results in paginated response.</p>
     #   @return [String]
     class ListConnectorEntitiesRequest < Struct.new(
+      nil,
       :connector_profile_name,
       :connector_type,
       :entities_path,
@@ -2457,6 +2551,7 @@ module Aws::Appflow
     #         operation provides this token if the response is too big for the page size.</p>
     #   @return [String]
     class ListConnectorEntitiesResponse < Struct.new(
+      nil,
       :connector_entity_map,
       :next_token,
       keyword_init: true
@@ -2472,6 +2567,7 @@ module Aws::Appflow
     #   <p>The pagination token for the next page of data.</p>
     #   @return [String]
     class ListConnectorsRequest < Struct.new(
+      nil,
       :max_results,
       :next_token,
       keyword_init: true
@@ -2487,6 +2583,7 @@ module Aws::Appflow
     #         records have been fetched.</p>
     #   @return [String]
     class ListConnectorsResponse < Struct.new(
+      nil,
       :connectors,
       :next_token,
       keyword_init: true
@@ -2501,6 +2598,7 @@ module Aws::Appflow
     #   <p> The pagination token for next page of data. </p>
     #   @return [String]
     class ListFlowsRequest < Struct.new(
+      nil,
       :max_results,
       :next_token,
       keyword_init: true
@@ -2515,6 +2613,7 @@ module Aws::Appflow
     #   <p> The pagination token for next page of data. </p>
     #   @return [String]
     class ListFlowsResponse < Struct.new(
+      nil,
       :flows,
       :next_token,
       keyword_init: true
@@ -2526,6 +2625,7 @@ module Aws::Appflow
     #   <p> The Amazon Resource Name (ARN) of the specified flow. </p>
     #   @return [String]
     class ListTagsForResourceRequest < Struct.new(
+      nil,
       :resource_arn,
       keyword_init: true
     )
@@ -2536,6 +2636,7 @@ module Aws::Appflow
     #   <p> The tags used to organize, track, or control access for your flow. </p>
     #   @return [Hash<String, String>]
     class ListTagsForResourceResponse < Struct.new(
+      nil,
       :tags,
       keyword_init: true
     )
@@ -2545,6 +2646,7 @@ module Aws::Appflow
     # <p> The properties that are applied when Amazon Lookout for Metrics is used as a destination.
     #     </p>
     class LookoutMetricsDestinationProperties < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -2566,6 +2668,7 @@ module Aws::Appflow
     #       </p>
     #   @return [Types::ConnectorOAuthRequest]
     class MarketoConnectorProfileCredentials < Struct.new(
+      nil,
       :client_id,
       :client_secret,
       :access_token,
@@ -2580,6 +2683,7 @@ module Aws::Appflow
     #   <p> The location of the Marketo resource. </p>
     #   @return [String]
     class MarketoConnectorProfileProperties < Struct.new(
+      nil,
       :instance_url,
       keyword_init: true
     )
@@ -2599,6 +2703,7 @@ module Aws::Appflow
     #       </p>
     #   @return [Types::ErrorHandlingConfig]
     class MarketoDestinationProperties < Struct.new(
+      nil,
       :object,
       :error_handling_config,
       keyword_init: true
@@ -2608,6 +2713,7 @@ module Aws::Appflow
 
     # <p> The connector metadata specific to Marketo. </p>
     class MarketoMetadata < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -2618,6 +2724,7 @@ module Aws::Appflow
     #   <p> The object specified in the Marketo flow source. </p>
     #   @return [String]
     class MarketoSourceProperties < Struct.new(
+      nil,
       :object,
       keyword_init: true
     )
@@ -2631,6 +2738,7 @@ module Aws::Appflow
     #         the Glue Data Catalog.</p>
     #   @return [Types::GlueDataCatalogConfig]
     class MetadataCatalogConfig < Struct.new(
+      nil,
       :glue_data_catalog,
       keyword_init: true
     )
@@ -2666,6 +2774,7 @@ module Aws::Appflow
     #         partitions (if they don't already exist) based on your flow configuration.</p>
     #   @return [Types::RegistrationOutput]
     class MetadataCatalogDetail < Struct.new(
+      nil,
       :catalog_type,
       :table_name,
       :table_registration_output,
@@ -2694,6 +2803,7 @@ module Aws::Appflow
     #         Google Analytics, Marketo, Zendesk, and Slack. </p>
     #   @return [Types::ConnectorOAuthRequest]
     class OAuth2Credentials < Struct.new(
+      nil,
       :client_id,
       :client_secret,
       :access_token,
@@ -2728,6 +2838,7 @@ module Aws::Appflow
     #   <p>Indicates whether custom parameter is used with TokenUrl or AuthUrl.</p>
     #   @return [String]
     class OAuth2CustomParameter < Struct.new(
+      nil,
       :key,
       :is_required,
       :label,
@@ -2763,6 +2874,7 @@ module Aws::Appflow
     #   <p>List of custom parameters required for OAuth 2.0 authentication.</p>
     #   @return [Array<Types::OAuth2CustomParameter>]
     class OAuth2Defaults < Struct.new(
+      nil,
       :oauth_scopes,
       :token_urls,
       :auth_code_urls,
@@ -2786,6 +2898,7 @@ module Aws::Appflow
     #         request.</p>
     #   @return [Hash<String, String>]
     class OAuth2Properties < Struct.new(
+      nil,
       :token_url,
       :o_auth2_grant_type,
       :token_url_custom_properties,
@@ -2813,6 +2926,7 @@ module Aws::Appflow
     #       </p>
     #   @return [Types::ConnectorOAuthRequest]
     class OAuthCredentials < Struct.new(
+      nil,
       :client_id,
       :client_secret,
       :access_token,
@@ -2836,6 +2950,7 @@ module Aws::Appflow
     #   <p> The OAuth scopes required for OAuth type authentication. </p>
     #   @return [Array<String>]
     class OAuthProperties < Struct.new(
+      nil,
       :token_url,
       :auth_code_url,
       :o_auth_scopes,
@@ -2860,6 +2975,7 @@ module Aws::Appflow
     #         app.</p>
     #   @return [String]
     class PardotConnectorProfileCredentials < Struct.new(
+      nil,
       :access_token,
       :refresh_token,
       :o_auth_request,
@@ -2881,6 +2997,7 @@ module Aws::Appflow
     #   <p>The business unit id of Salesforce Pardot instance.</p>
     #   @return [String]
     class PardotConnectorProfileProperties < Struct.new(
+      nil,
       :instance_url,
       :is_sandbox_environment,
       :business_unit_id,
@@ -2896,6 +3013,7 @@ module Aws::Appflow
 
     # <p>The connector metadata specific to Salesforce Pardot.</p>
     class PardotMetadata < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -2906,6 +3024,7 @@ module Aws::Appflow
     #   <p>The object specified in the Salesforce Pardot flow source.</p>
     #   @return [String]
     class PardotSourceProperties < Struct.new(
+      nil,
       :object,
       keyword_init: true
     )
@@ -2950,6 +3069,7 @@ module Aws::Appflow
     #            </dl>
     #   @return [Array<String>]
     class PrefixConfig < Struct.new(
+      nil,
       :prefix_type,
       :prefix_format,
       :path_prefix_hierarchy,
@@ -2969,6 +3089,7 @@ module Aws::Appflow
     #   <p> Specifies the private connection provisioning failure cause. </p>
     #   @return [String]
     class PrivateConnectionProvisioningState < Struct.new(
+      nil,
       :status,
       :failure_message,
       :failure_cause,
@@ -2985,6 +3106,7 @@ module Aws::Appflow
     #   <p>Minimum value supported by the field.</p>
     #   @return [Float]
     class Range < Struct.new(
+      nil,
       :maximum,
       :minimum,
       keyword_init: true
@@ -3006,6 +3128,7 @@ module Aws::Appflow
     #   <p> The password that corresponds to the user name. </p>
     #   @return [String]
     class RedshiftConnectorProfileCredentials < Struct.new(
+      nil,
       :username,
       :password,
       keyword_init: true
@@ -3048,6 +3171,7 @@ module Aws::Appflow
     #   <p>The name of an Amazon Redshift database.</p>
     #   @return [String]
     class RedshiftConnectorProfileProperties < Struct.new(
+      nil,
       :database_url,
       :bucket_name,
       :bucket_prefix,
@@ -3087,6 +3211,7 @@ module Aws::Appflow
     #         destination connector details. </p>
     #   @return [Types::ErrorHandlingConfig]
     class RedshiftDestinationProperties < Struct.new(
+      nil,
       :object,
       :intermediate_bucket_name,
       :bucket_prefix,
@@ -3098,6 +3223,7 @@ module Aws::Appflow
 
     # <p> The connector metadata specific to Amazon Redshift. </p>
     class RedshiftMetadata < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -3131,6 +3257,7 @@ module Aws::Appflow
     #         call to <code>RegisterConnector</code>. The token is active for 8 hours.</p>
     #   @return [String]
     class RegisterConnectorRequest < Struct.new(
+      nil,
       :connector_label,
       :description,
       :connector_provisioning_type,
@@ -3145,6 +3272,7 @@ module Aws::Appflow
     #   <p>The ARN of the connector being registered.</p>
     #   @return [String]
     class RegisterConnectorResponse < Struct.new(
+      nil,
       :connector_arn,
       keyword_init: true
     )
@@ -3168,6 +3296,7 @@ module Aws::Appflow
     #   <p>Indicates the status of the registration attempt from Amazon AppFlow.</p>
     #   @return [String]
     class RegistrationOutput < Struct.new(
+      nil,
       :message,
       :result,
       :status,
@@ -3219,6 +3348,7 @@ module Aws::Appflow
     #         DescribeConnectorProfiles action.</p>
     #   @return [String]
     class ResetConnectorMetadataCacheRequest < Struct.new(
+      nil,
       :connector_profile_name,
       :connector_type,
       :connector_entity_name,
@@ -3230,6 +3360,7 @@ module Aws::Appflow
     end
 
     class ResetConnectorMetadataCacheResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -3240,6 +3371,7 @@ module Aws::Appflow
     # @!attribute message
     #   @return [String]
     class ResourceNotFoundException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -3260,6 +3392,7 @@ module Aws::Appflow
     #         data when Amazon S3 is used as the destination. </p>
     #   @return [Types::S3OutputFormatConfig]
     class S3DestinationProperties < Struct.new(
+      nil,
       :bucket_name,
       :bucket_prefix,
       :s3_output_format_config,
@@ -3274,6 +3407,7 @@ module Aws::Appflow
     #   <p> The file type that Amazon AppFlow gets from your Amazon S3 bucket. </p>
     #   @return [String]
     class S3InputFormatConfig < Struct.new(
+      nil,
       :s3_input_file_type,
       keyword_init: true
     )
@@ -3282,6 +3416,7 @@ module Aws::Appflow
 
     # <p> The connector metadata specific to Amazon S3. </p>
     class S3Metadata < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -3318,6 +3453,7 @@ module Aws::Appflow
     #            </ul>
     #   @return [Boolean]
     class S3OutputFormatConfig < Struct.new(
+      nil,
       :file_type,
       :prefix_config,
       :aggregation_config,
@@ -3341,6 +3477,7 @@ module Aws::Appflow
     #         the flow input data. </p>
     #   @return [Types::S3InputFormatConfig]
     class S3SourceProperties < Struct.new(
+      nil,
       :bucket_name,
       :bucket_prefix,
       :s3_input_format_config,
@@ -3357,6 +3494,7 @@ module Aws::Appflow
     #   <p> The SAPOData OAuth type authentication credentials. </p>
     #   @return [Types::OAuthCredentials]
     class SAPODataConnectorProfileCredentials < Struct.new(
+      nil,
       :basic_auth_credentials,
       :o_auth_credentials,
       keyword_init: true
@@ -3397,6 +3535,7 @@ module Aws::Appflow
     #         affect.</p>
     #   @return [Boolean]
     class SAPODataConnectorProfileProperties < Struct.new(
+      nil,
       :application_host_url,
       :application_service_path,
       :port_number,
@@ -3441,6 +3580,7 @@ module Aws::Appflow
     #         provided, this defaults to the <code>INSERT</code> operation. </p>
     #   @return [String]
     class SAPODataDestinationProperties < Struct.new(
+      nil,
       :object_path,
       :success_response_handling_config,
       :id_field_names,
@@ -3453,6 +3593,7 @@ module Aws::Appflow
 
     # <p> The connector metadata specific to SAPOData. </p>
     class SAPODataMetadata < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -3469,6 +3610,7 @@ module Aws::Appflow
     #         is 10,000.</p>
     #   @return [Integer]
     class SAPODataPaginationConfig < Struct.new(
+      nil,
       :max_page_size,
       keyword_init: true
     )
@@ -3484,6 +3626,7 @@ module Aws::Appflow
     #         retrieves your data from your SAP application.</p>
     #   @return [Integer]
     class SAPODataParallelismConfig < Struct.new(
+      nil,
       :max_parallelism,
       keyword_init: true
     )
@@ -3503,6 +3646,7 @@ module Aws::Appflow
     #         instance.</p>
     #   @return [Types::SAPODataPaginationConfig]
     class SAPODataSourceProperties < Struct.new(
+      nil,
       :object_path,
       :parallelism_config,
       :pagination_config,
@@ -3557,6 +3701,7 @@ module Aws::Appflow
     #         records.</p>
     #   @return [String]
     class SalesforceConnectorProfileCredentials < Struct.new(
+      nil,
       :access_token,
       :refresh_token,
       :o_auth_request,
@@ -3625,6 +3770,7 @@ module Aws::Appflow
     #            </dl>
     #   @return [Boolean]
     class SalesforceConnectorProfileProperties < Struct.new(
+      nil,
       :instance_url,
       :is_sandbox_environment,
       :use_private_link_for_metadata_and_authorization,
@@ -3698,6 +3844,7 @@ module Aws::Appflow
     #            </dl>
     #   @return [String]
     class SalesforceDestinationProperties < Struct.new(
+      nil,
       :object,
       :id_field_names,
       :error_handling_config,
@@ -3742,6 +3889,7 @@ module Aws::Appflow
     #            </note>
     #   @return [Array<String>]
     class SalesforceMetadata < Struct.new(
+      nil,
       :o_auth_scopes,
       :data_transfer_apis,
       :oauth2_grant_types_supported,
@@ -3801,6 +3949,7 @@ module Aws::Appflow
     #            </dl>
     #   @return [String]
     class SalesforceSourceProperties < Struct.new(
+      nil,
       :object,
       :enable_dynamic_field_update,
       :include_deleted_records,
@@ -3857,6 +4006,7 @@ module Aws::Appflow
     #         deactivates it.</p>
     #   @return [Integer]
     class ScheduledTriggerProperties < Struct.new(
+      nil,
       :schedule_expression,
       :data_pull_mode,
       :schedule_start_time,
@@ -3886,6 +4036,7 @@ module Aws::Appflow
     #   <p> The OAuth 2.0 credentials required to authenticate the user. </p>
     #   @return [Types::OAuth2Credentials]
     class ServiceNowConnectorProfileCredentials < Struct.new(
+      nil,
       :username,
       :password,
       :o_auth2_credentials,
@@ -3899,6 +4050,7 @@ module Aws::Appflow
     #   <p> The location of the ServiceNow resource. </p>
     #   @return [String]
     class ServiceNowConnectorProfileProperties < Struct.new(
+      nil,
       :instance_url,
       keyword_init: true
     )
@@ -3907,6 +4059,7 @@ module Aws::Appflow
 
     # <p> The connector metadata specific to ServiceNow. </p>
     class ServiceNowMetadata < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -3917,6 +4070,7 @@ module Aws::Appflow
     #   <p> The object specified in the ServiceNow flow source. </p>
     #   @return [String]
     class ServiceNowSourceProperties < Struct.new(
+      nil,
       :object,
       keyword_init: true
     )
@@ -3928,6 +4082,7 @@ module Aws::Appflow
     # @!attribute message
     #   @return [String]
     class ServiceQuotaExceededException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -3940,6 +4095,7 @@ module Aws::Appflow
     #         program to your API. </p>
     #   @return [String]
     class SingularConnectorProfileCredentials < Struct.new(
+      nil,
       :api_key,
       keyword_init: true
     )
@@ -3948,6 +4104,7 @@ module Aws::Appflow
 
     # <p> The connector-specific profile properties required when using Singular. </p>
     class SingularConnectorProfileProperties < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -3955,6 +4112,7 @@ module Aws::Appflow
 
     # <p> The connector metadata specific to Singular. </p>
     class SingularMetadata < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -3965,6 +4123,7 @@ module Aws::Appflow
     #   <p> The object specified in the Singular flow source. </p>
     #   @return [String]
     class SingularSourceProperties < Struct.new(
+      nil,
       :object,
       keyword_init: true
     )
@@ -3987,6 +4146,7 @@ module Aws::Appflow
     #       </p>
     #   @return [Types::ConnectorOAuthRequest]
     class SlackConnectorProfileCredentials < Struct.new(
+      nil,
       :client_id,
       :client_secret,
       :access_token,
@@ -4001,6 +4161,7 @@ module Aws::Appflow
     #   <p> The location of the Slack resource. </p>
     #   @return [String]
     class SlackConnectorProfileProperties < Struct.new(
+      nil,
       :instance_url,
       keyword_init: true
     )
@@ -4012,6 +4173,7 @@ module Aws::Appflow
     #   <p> The desired authorization scope for the Slack account. </p>
     #   @return [Array<String>]
     class SlackMetadata < Struct.new(
+      nil,
       :o_auth_scopes,
       keyword_init: true
     )
@@ -4023,6 +4185,7 @@ module Aws::Appflow
     #   <p> The object specified in the Slack flow source. </p>
     #   @return [String]
     class SlackSourceProperties < Struct.new(
+      nil,
       :object,
       keyword_init: true
     )
@@ -4037,6 +4200,7 @@ module Aws::Appflow
     #   <p> The password that corresponds to the user name. </p>
     #   @return [String]
     class SnowflakeConnectorProfileCredentials < Struct.new(
+      nil,
       :username,
       :password,
       keyword_init: true
@@ -4069,6 +4233,7 @@ module Aws::Appflow
     #   <p> The Amazon Web Services Region of the Snowflake account. </p>
     #   @return [String]
     class SnowflakeConnectorProfileProperties < Struct.new(
+      nil,
       :warehouse,
       :stage,
       :bucket_name,
@@ -4101,6 +4266,7 @@ module Aws::Appflow
     #         details. </p>
     #   @return [Types::ErrorHandlingConfig]
     class SnowflakeDestinationProperties < Struct.new(
+      nil,
       :object,
       :intermediate_bucket_name,
       :bucket_prefix,
@@ -4115,6 +4281,7 @@ module Aws::Appflow
     #   <p> Specifies the supported Amazon Web Services Regions when using Snowflake. </p>
     #   @return [Array<String>]
     class SnowflakeMetadata < Struct.new(
+      nil,
       :supported_regions,
       keyword_init: true
     )
@@ -4175,6 +4342,7 @@ module Aws::Appflow
     #   <p>Specifies the information that is required for querying Salesforce Pardot.</p>
     #   @return [Types::PardotSourceProperties]
     class SourceConnectorProperties < Struct.new(
+      nil,
       :amplitude,
       :datadog,
       :dynatrace,
@@ -4209,6 +4377,7 @@ module Aws::Appflow
     #   <p>Indicates if this timestamp field can be used for incremental queries.</p>
     #   @return [Boolean]
     class SourceFieldProperties < Struct.new(
+      nil,
       :is_retrievable,
       :is_queryable,
       :is_timestamp_field_for_incremental_queries,
@@ -4246,6 +4415,7 @@ module Aws::Appflow
     #         incremental data pull. </p>
     #   @return [Types::IncrementalPullConfig]
     class SourceFlowConfig < Struct.new(
+      nil,
       :connector_type,
       :api_version,
       :connector_profile_name,
@@ -4276,6 +4446,7 @@ module Aws::Appflow
     #         it a new call to <code>StartFlow</code>. The token is active for 8 hours.</p>
     #   @return [String]
     class StartFlowRequest < Struct.new(
+      nil,
       :flow_name,
       :client_token,
       keyword_init: true
@@ -4294,6 +4465,7 @@ module Aws::Appflow
     #         scheduled or event-triggered flows, this value is null. </p>
     #   @return [String]
     class StartFlowResponse < Struct.new(
+      nil,
       :flow_arn,
       :flow_status,
       :execution_id,
@@ -4307,6 +4479,7 @@ module Aws::Appflow
     #         (-) only. </p>
     #   @return [String]
     class StopFlowRequest < Struct.new(
+      nil,
       :flow_name,
       keyword_init: true
     )
@@ -4320,6 +4493,7 @@ module Aws::Appflow
     #   <p> Indicates the current status of the flow. </p>
     #   @return [String]
     class StopFlowResponse < Struct.new(
+      nil,
       :flow_arn,
       :flow_status,
       keyword_init: true
@@ -4338,6 +4512,7 @@ module Aws::Appflow
     #   <p>The name of the Amazon S3 bucket.</p>
     #   @return [String]
     class SuccessResponseHandlingConfig < Struct.new(
+      nil,
       :bucket_prefix,
       :bucket_name,
       keyword_init: true
@@ -4352,6 +4527,7 @@ module Aws::Appflow
     #         different version, v2 will be introduced. </p>
     #   @return [Types::FieldTypeDetails]
     class SupportedFieldTypeDetails < Struct.new(
+      nil,
       :v1,
       keyword_init: true
     )
@@ -4365,6 +4541,7 @@ module Aws::Appflow
     #   <p> The tags used to organize, track, or control access for your flow. </p>
     #   @return [Hash<String, String>]
     class TagResourceRequest < Struct.new(
+      nil,
       :resource_arn,
       :tags,
       keyword_init: true
@@ -4373,6 +4550,7 @@ module Aws::Appflow
     end
 
     class TagResourceResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -4398,6 +4576,7 @@ module Aws::Appflow
     #         information based on the <code>TaskType</code>. </p>
     #   @return [Hash<String, String>]
     class Task < Struct.new(
+      nil,
       :source_fields,
       :connector_operator,
       :destination_field,
@@ -4413,6 +4592,7 @@ module Aws::Appflow
     # @!attribute message
     #   @return [String]
     class ThrottlingException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -4424,6 +4604,7 @@ module Aws::Appflow
     #   <p> The Secret Access Key portion of the credentials. </p>
     #   @return [String]
     class TrendmicroConnectorProfileCredentials < Struct.new(
+      nil,
       :api_secret_key,
       keyword_init: true
     )
@@ -4432,6 +4613,7 @@ module Aws::Appflow
 
     # <p> The connector-specific profile properties required when using Trend Micro. </p>
     class TrendmicroConnectorProfileProperties < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -4439,6 +4621,7 @@ module Aws::Appflow
 
     # <p> The connector metadata specific to Trend Micro. </p>
     class TrendmicroMetadata < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -4449,6 +4632,7 @@ module Aws::Appflow
     #   <p> The object specified in the Trend Micro flow source. </p>
     #   @return [String]
     class TrendmicroSourceProperties < Struct.new(
+      nil,
       :object,
       keyword_init: true
     )
@@ -4466,6 +4650,7 @@ module Aws::Appflow
     #         Currently, these settings only apply to the <code>Scheduled</code> trigger type. </p>
     #   @return [Types::TriggerProperties]
     class TriggerConfig < Struct.new(
+      nil,
       :trigger_type,
       :trigger_properties,
       keyword_init: true
@@ -4480,6 +4665,7 @@ module Aws::Appflow
     #       </p>
     #   @return [Types::ScheduledTriggerProperties]
     class TriggerProperties < Struct.new(
+      nil,
       :scheduled,
       keyword_init: true
     )
@@ -4495,6 +4681,7 @@ module Aws::Appflow
     #         currently in use in one or more connector profiles. The default value is false.</p>
     #   @return [Boolean]
     class UnregisterConnectorRequest < Struct.new(
+      nil,
       :connector_label,
       :force_delete,
       keyword_init: true
@@ -4503,6 +4690,7 @@ module Aws::Appflow
     end
 
     class UnregisterConnectorResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -4512,6 +4700,7 @@ module Aws::Appflow
     # @!attribute message
     #   @return [String]
     class UnsupportedOperationException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -4525,6 +4714,7 @@ module Aws::Appflow
     #   <p> The tag keys associated with the tag that you want to remove from your flow. </p>
     #   @return [Array<String>]
     class UntagResourceRequest < Struct.new(
+      nil,
       :resource_arn,
       :tag_keys,
       keyword_init: true
@@ -4533,6 +4723,7 @@ module Aws::Appflow
     end
 
     class UntagResourceResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -4561,6 +4752,7 @@ module Aws::Appflow
     #         call to <code>UpdateConnectorProfile</code>. The token is active for 8 hours.</p>
     #   @return [String]
     class UpdateConnectorProfileRequest < Struct.new(
+      nil,
       :connector_profile_name,
       :connection_mode,
       :connector_profile_config,
@@ -4574,6 +4766,7 @@ module Aws::Appflow
     #   <p> The Amazon Resource Name (ARN) of the connector profile. </p>
     #   @return [String]
     class UpdateConnectorProfileResponse < Struct.new(
+      nil,
       :connector_profile_arn,
       keyword_init: true
     )
@@ -4603,6 +4796,7 @@ module Aws::Appflow
     #         call to <code>UpdateConnectorRegistration</code>. The token is active for 8 hours.</p>
     #   @return [String]
     class UpdateConnectorRegistrationRequest < Struct.new(
+      nil,
       :connector_label,
       :description,
       :connector_provisioning_config,
@@ -4616,6 +4810,7 @@ module Aws::Appflow
     #   <p>The ARN of the connector being updated.</p>
     #   @return [String]
     class UpdateConnectorRegistrationResponse < Struct.new(
+      nil,
       :connector_arn,
       keyword_init: true
     )
@@ -4662,6 +4857,7 @@ module Aws::Appflow
     #         call to <code>UpdateFlow</code>. The token is active for 8 hours.</p>
     #   @return [String]
     class UpdateFlowRequest < Struct.new(
+      nil,
       :flow_name,
       :description,
       :trigger_config,
@@ -4679,6 +4875,7 @@ module Aws::Appflow
     #   <p>Indicates the current status of the flow. </p>
     #   @return [String]
     class UpdateFlowResponse < Struct.new(
+      nil,
       :flow_status,
       keyword_init: true
     )
@@ -4698,6 +4895,7 @@ module Aws::Appflow
     #         destination. </p>
     #   @return [Types::UpsolverS3OutputFormatConfig]
     class UpsolverDestinationProperties < Struct.new(
+      nil,
       :bucket_name,
       :bucket_prefix,
       :s3_output_format_config,
@@ -4708,6 +4906,7 @@ module Aws::Appflow
 
     # <p> The connector metadata specific to Upsolver. </p>
     class UpsolverMetadata < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -4728,6 +4927,7 @@ module Aws::Appflow
     #         data. </p>
     #   @return [Types::AggregationConfig]
     class UpsolverS3OutputFormatConfig < Struct.new(
+      nil,
       :file_type,
       :prefix_config,
       :aggregation_config,
@@ -4740,6 +4940,7 @@ module Aws::Appflow
     # @!attribute message
     #   @return [String]
     class ValidationException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -4754,6 +4955,7 @@ module Aws::Appflow
     #   <p> The password that corresponds to the user name. </p>
     #   @return [String]
     class VeevaConnectorProfileCredentials < Struct.new(
+      nil,
       :username,
       :password,
       keyword_init: true
@@ -4766,6 +4968,7 @@ module Aws::Appflow
     #   <p> The location of the Veeva resource. </p>
     #   @return [String]
     class VeevaConnectorProfileProperties < Struct.new(
+      nil,
       :instance_url,
       keyword_init: true
     )
@@ -4774,6 +4977,7 @@ module Aws::Appflow
 
     # <p> The connector metadata specific to Veeva. </p>
     class VeevaMetadata < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -4796,6 +5000,7 @@ module Aws::Appflow
     #   <p>Boolean value to include All Versions of files in Veeva document extract flow.</p>
     #   @return [Boolean]
     class VeevaSourceProperties < Struct.new(
+      nil,
       :object,
       :document_type,
       :include_source_files,
@@ -4829,6 +5034,7 @@ module Aws::Appflow
     #       </p>
     #   @return [Types::ConnectorOAuthRequest]
     class ZendeskConnectorProfileCredentials < Struct.new(
+      nil,
       :client_id,
       :client_secret,
       :access_token,
@@ -4843,6 +5049,7 @@ module Aws::Appflow
     #   <p> The location of the Zendesk resource. </p>
     #   @return [String]
     class ZendeskConnectorProfileProperties < Struct.new(
+      nil,
       :instance_url,
       keyword_init: true
     )
@@ -4869,6 +5076,7 @@ module Aws::Appflow
     #         provided, this defaults to the <code>INSERT</code> operation. </p>
     #   @return [String]
     class ZendeskDestinationProperties < Struct.new(
+      nil,
       :object,
       :id_field_names,
       :error_handling_config,
@@ -4883,6 +5091,7 @@ module Aws::Appflow
     #   <p> The desired authorization scope for the Zendesk account. </p>
     #   @return [Array<String>]
     class ZendeskMetadata < Struct.new(
+      nil,
       :o_auth_scopes,
       keyword_init: true
     )
@@ -4894,6 +5103,7 @@ module Aws::Appflow
     #   <p> The object specified in the Zendesk flow source. </p>
     #   @return [String]
     class ZendeskSourceProperties < Struct.new(
+      nil,
       :object,
       keyword_init: true
     )

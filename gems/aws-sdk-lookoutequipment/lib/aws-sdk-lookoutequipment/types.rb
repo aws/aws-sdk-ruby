@@ -11,6 +11,7 @@ module Aws::LookoutEquipment
     # @!attribute message
     #   @return [String]
     class AccessDeniedException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -26,6 +27,7 @@ module Aws::LookoutEquipment
     #   <p> Indicates the number of categories in the data. </p>
     #   @return [Integer]
     class CategoricalValues < Struct.new(
+      nil,
       :status,
       :number_of_category,
       keyword_init: true
@@ -38,6 +40,7 @@ module Aws::LookoutEquipment
     # @!attribute message
     #   @return [String]
     class ConflictException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -52,6 +55,7 @@ module Aws::LookoutEquipment
     #   <p> Indicates the percentage of occurances of the given statistic. </p>
     #   @return [Float]
     class CountPercent < Struct.new(
+      nil,
       :count,
       :percentage,
       keyword_init: true
@@ -83,6 +87,7 @@ module Aws::LookoutEquipment
     #   <p>Any tags associated with the ingested data described in the dataset. </p>
     #   @return [Array<Types::Tag>]
     class CreateDatasetRequest < Struct.new(
+      nil,
       :dataset_name,
       :dataset_schema,
       :server_side_kms_key_id,
@@ -103,6 +108,7 @@ module Aws::LookoutEquipment
     #   <p>Indicates the status of the <code>CreateDataset</code> operation. </p>
     #   @return [String]
     class CreateDatasetResponse < Struct.new(
+      nil,
       :dataset_name,
       :dataset_arn,
       :status,
@@ -161,6 +167,7 @@ module Aws::LookoutEquipment
     #   <p>Any tags associated with the inference scheduler. </p>
     #   @return [Array<Types::Tag>]
     class CreateInferenceSchedulerRequest < Struct.new(
+      nil,
       :model_name,
       :inference_scheduler_name,
       :data_delay_offset_in_minutes,
@@ -200,6 +207,7 @@ module Aws::LookoutEquipment
     #            Amazon Lookout for Equipment</a>.</p>
     #   @return [String]
     class CreateInferenceSchedulerResponse < Struct.new(
+      nil,
       :inference_scheduler_arn,
       :inference_scheduler_name,
       :status,
@@ -230,6 +238,7 @@ module Aws::LookoutEquipment
     #            security of your data.</p>
     #   @return [Array<Types::Tag>]
     class CreateLabelGroupRequest < Struct.new(
+      nil,
       :label_group_name,
       :fault_codes,
       :client_token,
@@ -247,6 +256,7 @@ module Aws::LookoutEquipment
     #   <p> The Amazon Resource Name (ARN) of the label group that you have created. </p>
     #   @return [String]
     class CreateLabelGroupResponse < Struct.new(
+      nil,
       :label_group_name,
       :label_group_arn,
       keyword_init: true
@@ -289,6 +299,7 @@ module Aws::LookoutEquipment
     #            request token, Lookout for Equipment generates one. </p>
     #   @return [String]
     class CreateLabelRequest < Struct.new(
+      nil,
       :label_group_name,
       :start_time,
       :end_time,
@@ -306,6 +317,7 @@ module Aws::LookoutEquipment
     #   <p> The ID of the label that you have created. </p>
     #   @return [String]
     class CreateLabelResponse < Struct.new(
+      nil,
       :label_id,
       keyword_init: true
     )
@@ -379,6 +391,7 @@ module Aws::LookoutEquipment
     #         You must also specify the <code>RoleArn</code> request parameter.</p>
     #   @return [Types::ModelDiagnosticsOutputConfiguration]
     class CreateModelRequest < Struct.new(
+      nil,
       :model_name,
       :dataset_name,
       :dataset_schema,
@@ -406,6 +419,7 @@ module Aws::LookoutEquipment
     #   <p>Indicates the status of the <code>CreateModel</code> operation. </p>
     #   @return [String]
     class CreateModelResponse < Struct.new(
+      nil,
       :model_arn,
       :status,
       keyword_init: true
@@ -451,6 +465,7 @@ module Aws::LookoutEquipment
     #            Lookout for Equipment generates one. </p>
     #   @return [String]
     class CreateRetrainingSchedulerRequest < Struct.new(
+      nil,
       :model_name,
       :retraining_start_date,
       :retraining_frequency,
@@ -472,6 +487,7 @@ module Aws::LookoutEquipment
     #   <p>The status of the retraining scheduler. </p>
     #   @return [String]
     class CreateRetrainingSchedulerResponse < Struct.new(
+      nil,
       :model_name,
       :model_arn,
       :status,
@@ -499,6 +515,7 @@ module Aws::LookoutEquipment
     #   <p>Indicates the status of the data ingestion job. </p>
     #   @return [String]
     class DataIngestionJobSummary < Struct.new(
+      nil,
       :job_id,
       :dataset_name,
       :dataset_arn,
@@ -530,6 +547,7 @@ module Aws::LookoutEquipment
     #            </p>
     #   @return [String]
     class DataPreProcessingConfiguration < Struct.new(
+      nil,
       :target_sampling_rate,
       keyword_init: true
     )
@@ -561,6 +579,7 @@ module Aws::LookoutEquipment
     #   <p> Parameter that gives information about duplicate timestamps in the input data. </p>
     #   @return [Types::DuplicateTimestamps]
     class DataQualitySummary < Struct.new(
+      nil,
       :insufficient_sensor_data,
       :missing_sensor_data,
       :invalid_sensor_data,
@@ -576,6 +595,7 @@ module Aws::LookoutEquipment
     #   <p>The data schema used within the given dataset.</p>
     #   @return [String]
     class DatasetSchema < Struct.new(
+      nil,
       :inline_data_schema,
       keyword_init: true
     )
@@ -597,6 +617,7 @@ module Aws::LookoutEquipment
     #   <p>The time at which the dataset was created in Amazon Lookout for Equipment. </p>
     #   @return [Time]
     class DatasetSummary < Struct.new(
+      nil,
       :dataset_name,
       :dataset_arn,
       :status,
@@ -610,6 +631,7 @@ module Aws::LookoutEquipment
     #   <p>The name of the dataset to be deleted. </p>
     #   @return [String]
     class DeleteDatasetRequest < Struct.new(
+      nil,
       :dataset_name,
       keyword_init: true
     )
@@ -620,6 +642,7 @@ module Aws::LookoutEquipment
     #   <p>The name of the inference scheduler to be deleted. </p>
     #   @return [String]
     class DeleteInferenceSchedulerRequest < Struct.new(
+      nil,
       :inference_scheduler_name,
       keyword_init: true
     )
@@ -631,6 +654,7 @@ module Aws::LookoutEquipment
     #            retained for service usage. Follow best practices for the security of your data. </p>
     #   @return [String]
     class DeleteLabelGroupRequest < Struct.new(
+      nil,
       :label_group_name,
       keyword_init: true
     )
@@ -646,6 +670,7 @@ module Aws::LookoutEquipment
     #   <p> The ID of the label that you want to delete. </p>
     #   @return [String]
     class DeleteLabelRequest < Struct.new(
+      nil,
       :label_group_name,
       :label_id,
       keyword_init: true
@@ -657,6 +682,7 @@ module Aws::LookoutEquipment
     #   <p>The name of the machine learning model to be deleted. </p>
     #   @return [String]
     class DeleteModelRequest < Struct.new(
+      nil,
       :model_name,
       keyword_init: true
     )
@@ -668,6 +694,7 @@ module Aws::LookoutEquipment
     #            deleted.</p>
     #   @return [String]
     class DeleteResourcePolicyRequest < Struct.new(
+      nil,
       :resource_arn,
       keyword_init: true
     )
@@ -678,6 +705,7 @@ module Aws::LookoutEquipment
     #   <p>The name of the model whose retraining scheduler you want to delete. </p>
     #   @return [String]
     class DeleteRetrainingSchedulerRequest < Struct.new(
+      nil,
       :model_name,
       keyword_init: true
     )
@@ -688,6 +716,7 @@ module Aws::LookoutEquipment
     #   <p>The job ID of the data ingestion job. </p>
     #   @return [String]
     class DescribeDataIngestionJobRequest < Struct.new(
+      nil,
       :job_id,
       keyword_init: true
     )
@@ -747,6 +776,7 @@ module Aws::LookoutEquipment
     #            data ingestion job was imported from.</p>
     #   @return [String]
     class DescribeDataIngestionJobResponse < Struct.new(
+      nil,
       :job_id,
       :dataset_arn,
       :ingestion_input_configuration,
@@ -770,6 +800,7 @@ module Aws::LookoutEquipment
     #   <p>The name of the dataset to be described. </p>
     #   @return [String]
     class DescribeDatasetRequest < Struct.new(
+      nil,
       :dataset_name,
       keyword_init: true
     )
@@ -830,6 +861,7 @@ module Aws::LookoutEquipment
     #            described was imported from.</p>
     #   @return [String]
     class DescribeDatasetResponse < Struct.new(
+      nil,
       :dataset_name,
       :dataset_arn,
       :created_at,
@@ -853,6 +885,7 @@ module Aws::LookoutEquipment
     #   <p>The name of the inference scheduler being described. </p>
     #   @return [String]
     class DescribeInferenceSchedulerRequest < Struct.new(
+      nil,
       :inference_scheduler_name,
       keyword_init: true
     )
@@ -919,6 +952,7 @@ module Aws::LookoutEquipment
     #            (anomalous events found) or Normal (no anomalous events found).</p>
     #   @return [String]
     class DescribeInferenceSchedulerResponse < Struct.new(
+      nil,
       :model_arn,
       :model_name,
       :inference_scheduler_name,
@@ -942,6 +976,7 @@ module Aws::LookoutEquipment
     #   <p> Returns the name of the label group. </p>
     #   @return [String]
     class DescribeLabelGroupRequest < Struct.new(
+      nil,
       :label_group_name,
       keyword_init: true
     )
@@ -965,6 +1000,7 @@ module Aws::LookoutEquipment
     #   <p> The time at which the label group was updated. </p>
     #   @return [Time]
     class DescribeLabelGroupResponse < Struct.new(
+      nil,
       :label_group_name,
       :label_group_arn,
       :fault_codes,
@@ -982,6 +1018,7 @@ module Aws::LookoutEquipment
     #   <p> Returns the ID of the label. </p>
     #   @return [String]
     class DescribeLabelRequest < Struct.new(
+      nil,
       :label_group_name,
       :label_id,
       keyword_init: true
@@ -1024,6 +1061,7 @@ module Aws::LookoutEquipment
     #   <p> The time at which the label was created. </p>
     #   @return [Time]
     class DescribeLabelResponse < Struct.new(
+      nil,
       :label_group_name,
       :label_group_arn,
       :label_id,
@@ -1043,6 +1081,7 @@ module Aws::LookoutEquipment
     #   <p>The name of the machine learning model to be described. </p>
     #   @return [String]
     class DescribeModelRequest < Struct.new(
+      nil,
       :model_name,
       keyword_init: true
     )
@@ -1223,6 +1262,7 @@ module Aws::LookoutEquipment
     #            Amazon Lookout for Equipment</a>.</p>
     #   @return [String]
     class DescribeModelResponse < Struct.new(
+      nil,
       :model_name,
       :model_arn,
       :dataset_name,
@@ -1277,6 +1317,7 @@ module Aws::LookoutEquipment
     #   <p>The version of the machine learning model.</p>
     #   @return [Integer]
     class DescribeModelVersionRequest < Struct.new(
+      nil,
       :model_name,
       :model_version,
       keyword_init: true
@@ -1435,6 +1476,7 @@ module Aws::LookoutEquipment
     #            Amazon Lookout for Equipment</a>.</p>
     #   @return [String]
     class DescribeModelVersionResponse < Struct.new(
+      nil,
       :model_name,
       :model_arn,
       :model_version,
@@ -1480,6 +1522,7 @@ module Aws::LookoutEquipment
     #            policy.</p>
     #   @return [String]
     class DescribeResourcePolicyRequest < Struct.new(
+      nil,
       :resource_arn,
       keyword_init: true
     )
@@ -1499,6 +1542,7 @@ module Aws::LookoutEquipment
     #   <p>The time when the resource policy was last modified.</p>
     #   @return [Time]
     class DescribeResourcePolicyResponse < Struct.new(
+      nil,
       :policy_revision_id,
       :resource_policy,
       :creation_time,
@@ -1512,6 +1556,7 @@ module Aws::LookoutEquipment
     #   <p>The name of the model that the retraining scheduler is attached to. </p>
     #   @return [String]
     class DescribeRetrainingSchedulerRequest < Struct.new(
+      nil,
       :model_name,
       keyword_init: true
     )
@@ -1551,6 +1596,7 @@ module Aws::LookoutEquipment
     #   <p>Indicates the time and date at which the retraining scheduler was updated. </p>
     #   @return [Time]
     class DescribeRetrainingSchedulerResponse < Struct.new(
+      nil,
       :model_name,
       :model_arn,
       :retraining_start_date,
@@ -1570,6 +1616,7 @@ module Aws::LookoutEquipment
     #   <p> Indicates the total number of duplicate timestamps. </p>
     #   @return [Integer]
     class DuplicateTimestamps < Struct.new(
+      nil,
       :total_number_of_duplicate_timestamps,
       keyword_init: true
     )
@@ -1596,6 +1643,7 @@ module Aws::LookoutEquipment
     #   <p>Any tags associated with the dataset to be created.</p>
     #   @return [Array<Types::Tag>]
     class ImportDatasetRequest < Struct.new(
+      nil,
       :source_dataset_arn,
       :dataset_name,
       :client_token,
@@ -1619,6 +1667,7 @@ module Aws::LookoutEquipment
     #   <p>A unique identifier for the job of importing the dataset.</p>
     #   @return [String]
     class ImportDatasetResponse < Struct.new(
+      nil,
       :dataset_name,
       :dataset_arn,
       :status,
@@ -1676,6 +1725,7 @@ module Aws::LookoutEquipment
     #            </ul>
     #   @return [String]
     class ImportModelVersionRequest < Struct.new(
+      nil,
       :source_model_version_arn,
       :model_name,
       :dataset_name,
@@ -1706,6 +1756,7 @@ module Aws::LookoutEquipment
     #   <p>The status of the <code>ImportModelVersion</code> operation. </p>
     #   @return [String]
     class ImportModelVersionResponse < Struct.new(
+      nil,
       :model_name,
       :model_arn,
       :model_version_arn,
@@ -1739,6 +1790,7 @@ module Aws::LookoutEquipment
     #   <p> Indicates the size of an inference event in seconds. </p>
     #   @return [Integer]
     class InferenceEventSummary < Struct.new(
+      nil,
       :inference_scheduler_arn,
       :inference_scheduler_name,
       :event_start_time,
@@ -1804,6 +1856,7 @@ module Aws::LookoutEquipment
     #            execution.</p>
     #   @return [String]
     class InferenceExecutionSummary < Struct.new(
+      nil,
       :model_name,
       :model_arn,
       :inference_scheduler_name,
@@ -1838,6 +1891,7 @@ module Aws::LookoutEquipment
     #            timestamp format and delimiter. </p>
     #   @return [Types::InferenceInputNameConfiguration]
     class InferenceInputConfiguration < Struct.new(
+      nil,
       :s3_input_configuration,
       :input_time_zone_offset,
       :inference_input_name_configuration,
@@ -1856,6 +1910,7 @@ module Aws::LookoutEquipment
     #   <p>Indicates the delimiter character used between items in the data. </p>
     #   @return [String]
     class InferenceInputNameConfiguration < Struct.new(
+      nil,
       :timestamp_format,
       :component_timestamp_delimiter,
       keyword_init: true
@@ -1873,6 +1928,7 @@ module Aws::LookoutEquipment
     #   <p>The ID number for the KMS key key used to encrypt the inference output. </p>
     #   @return [String]
     class InferenceOutputConfiguration < Struct.new(
+      nil,
       :s3_output_configuration,
       :kms_key_id,
       keyword_init: true
@@ -1889,6 +1945,7 @@ module Aws::LookoutEquipment
     #   <p>The prefix for the S3 bucket used for the input data for the inference. </p>
     #   @return [String]
     class InferenceS3InputConfiguration < Struct.new(
+      nil,
       :bucket,
       :prefix,
       keyword_init: true
@@ -1905,6 +1962,7 @@ module Aws::LookoutEquipment
     #   <p> The prefix for the S3 bucket used for the output results from the inference. </p>
     #   @return [String]
     class InferenceS3OutputConfiguration < Struct.new(
+      nil,
       :bucket,
       :prefix,
       keyword_init: true
@@ -1951,6 +2009,7 @@ module Aws::LookoutEquipment
     #            (anomalous events found) or Normal (no anomalous events found).</p>
     #   @return [String]
     class InferenceSchedulerSummary < Struct.new(
+      nil,
       :model_name,
       :model_arn,
       :inference_scheduler_name,
@@ -1977,6 +2036,7 @@ module Aws::LookoutEquipment
     #            format is invalid (for example, a jpg or pdf) or not readable.</p>
     #   @return [Array<Types::S3Object>]
     class IngestedFilesSummary < Struct.new(
+      nil,
       :total_number_of_files,
       :ingested_number_of_files,
       :discarded_files,
@@ -1992,6 +2052,7 @@ module Aws::LookoutEquipment
     #         </p>
     #   @return [Types::IngestionS3InputConfiguration]
     class IngestionInputConfiguration < Struct.new(
+      nil,
       :s3_input_configuration,
       keyword_init: true
     )
@@ -2017,6 +2078,7 @@ module Aws::LookoutEquipment
     #            hyphen)</p>
     #   @return [String]
     class IngestionS3InputConfiguration < Struct.new(
+      nil,
       :bucket,
       :prefix,
       :key_pattern,
@@ -2036,6 +2098,7 @@ module Aws::LookoutEquipment
     #            less than 14 days of data overall. </p>
     #   @return [Types::SensorsWithShortDateRange]
     class InsufficientSensorData < Struct.new(
+      nil,
       :missing_complete_sensor_data,
       :sensors_with_short_date_range,
       keyword_init: true
@@ -2048,6 +2111,7 @@ module Aws::LookoutEquipment
     # @!attribute message
     #   @return [String]
     class InternalServerException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -2063,6 +2127,7 @@ module Aws::LookoutEquipment
     #   <p> Indicates the total number of invalid values across all the sensors. </p>
     #   @return [Integer]
     class InvalidSensorData < Struct.new(
+      nil,
       :affected_sensor_count,
       :total_number_of_invalid_values,
       keyword_init: true
@@ -2084,6 +2149,7 @@ module Aws::LookoutEquipment
     #   <p> The time at which the label group was updated. </p>
     #   @return [Time]
     class LabelGroupSummary < Struct.new(
+      nil,
       :label_group_name,
       :label_group_arn,
       :created_at,
@@ -2124,6 +2190,7 @@ module Aws::LookoutEquipment
     #   <p> The time at which the label was created. </p>
     #   @return [Time]
     class LabelSummary < Struct.new(
+      nil,
       :label_group_name,
       :label_id,
       :label_group_arn,
@@ -2147,6 +2214,7 @@ module Aws::LookoutEquipment
     #   <p> The name of the label group to be used for label data. </p>
     #   @return [String]
     class LabelsInputConfiguration < Struct.new(
+      nil,
       :s3_input_configuration,
       :label_group_name,
       keyword_init: true
@@ -2163,6 +2231,7 @@ module Aws::LookoutEquipment
     #   <p> The prefix for the S3 bucket used for the label data. </p>
     #   @return [String]
     class LabelsS3InputConfiguration < Struct.new(
+      nil,
       :bucket,
       :prefix,
       keyword_init: true
@@ -2183,6 +2252,7 @@ module Aws::LookoutEquipment
     #   <p> Indicates the size of the largest timestamp gap, in days. </p>
     #   @return [Integer]
     class LargeTimestampGaps < Struct.new(
+      nil,
       :status,
       :number_of_large_timestamp_gaps,
       :max_timestamp_gap_in_days,
@@ -2205,6 +2275,7 @@ module Aws::LookoutEquipment
     #   <p>Indicates the status of the data ingestion job. </p>
     #   @return [String]
     class ListDataIngestionJobsRequest < Struct.new(
+      nil,
       :dataset_name,
       :next_token,
       :max_results,
@@ -2223,6 +2294,7 @@ module Aws::LookoutEquipment
     #            status. </p>
     #   @return [Array<Types::DataIngestionJobSummary>]
     class ListDataIngestionJobsResponse < Struct.new(
+      nil,
       :next_token,
       :data_ingestion_job_summaries,
       keyword_init: true
@@ -2241,6 +2313,7 @@ module Aws::LookoutEquipment
     #   <p>The beginning of the name of the datasets to be listed. </p>
     #   @return [String]
     class ListDatasetsRequest < Struct.new(
+      nil,
       :next_token,
       :max_results,
       :dataset_name_begins_with,
@@ -2258,6 +2331,7 @@ module Aws::LookoutEquipment
     #            and status. </p>
     #   @return [Array<Types::DatasetSummary>]
     class ListDatasetsResponse < Struct.new(
+      nil,
       :next_token,
       :dataset_summaries,
       keyword_init: true
@@ -2284,6 +2358,7 @@ module Aws::LookoutEquipment
     #            than the end time given.</p>
     #   @return [Time]
     class ListInferenceEventsRequest < Struct.new(
+      nil,
       :next_token,
       :max_results,
       :inference_scheduler_name,
@@ -2304,6 +2379,7 @@ module Aws::LookoutEquipment
     #            event end time, diagnostics, and so on. </p>
     #   @return [Array<Types::InferenceEventSummary>]
     class ListInferenceEventsResponse < Struct.new(
+      nil,
       :next_token,
       :inference_event_summaries,
       keyword_init: true
@@ -2333,6 +2409,7 @@ module Aws::LookoutEquipment
     #   <p>The status of the inference execution. </p>
     #   @return [String]
     class ListInferenceExecutionsRequest < Struct.new(
+      nil,
       :next_token,
       :max_results,
       :inference_scheduler_name,
@@ -2360,6 +2437,7 @@ module Aws::LookoutEquipment
     #            </note>
     #   @return [Array<Types::InferenceExecutionSummary>]
     class ListInferenceExecutionsResponse < Struct.new(
+      nil,
       :next_token,
       :inference_execution_summaries,
       keyword_init: true
@@ -2385,6 +2463,7 @@ module Aws::LookoutEquipment
     #   <p>Specifies the current status of the inference schedulers.</p>
     #   @return [String]
     class ListInferenceSchedulersRequest < Struct.new(
+      nil,
       :next_token,
       :max_results,
       :inference_scheduler_name_begins_with,
@@ -2404,6 +2483,7 @@ module Aws::LookoutEquipment
     #            frequency, model name and ARN, and status. </p>
     #   @return [Array<Types::InferenceSchedulerSummary>]
     class ListInferenceSchedulersResponse < Struct.new(
+      nil,
       :next_token,
       :inference_scheduler_summaries,
       keyword_init: true
@@ -2422,6 +2502,7 @@ module Aws::LookoutEquipment
     #   <p> Specifies the maximum number of label groups to list. </p>
     #   @return [Integer]
     class ListLabelGroupsRequest < Struct.new(
+      nil,
       :label_group_name_begins_with,
       :next_token,
       :max_results,
@@ -2438,6 +2519,7 @@ module Aws::LookoutEquipment
     #   <p> A summary of the label groups. </p>
     #   @return [Array<Types::LabelGroupSummary>]
     class ListLabelGroupsResponse < Struct.new(
+      nil,
       :next_token,
       :label_group_summaries,
       keyword_init: true
@@ -2469,6 +2551,7 @@ module Aws::LookoutEquipment
     #   <p> Specifies the maximum number of labels to list. </p>
     #   @return [Integer]
     class ListLabelsRequest < Struct.new(
+      nil,
       :label_group_name,
       :interval_start_time,
       :interval_end_time,
@@ -2494,6 +2577,7 @@ module Aws::LookoutEquipment
     #            </note>
     #   @return [Array<Types::LabelSummary>]
     class ListLabelsResponse < Struct.new(
+      nil,
       :next_token,
       :label_summaries,
       keyword_init: true
@@ -2533,6 +2617,7 @@ module Aws::LookoutEquipment
     #   <p>Specifies the lowest version of the model to return in the list.</p>
     #   @return [Integer]
     class ListModelVersionsRequest < Struct.new(
+      nil,
       :model_name,
       :next_token,
       :max_results,
@@ -2563,6 +2648,7 @@ module Aws::LookoutEquipment
     #            </note>
     #   @return [Array<Types::ModelVersionSummary>]
     class ListModelVersionsResponse < Struct.new(
+      nil,
       :next_token,
       :model_version_summaries,
       keyword_init: true
@@ -2588,6 +2674,7 @@ module Aws::LookoutEquipment
     #         </p>
     #   @return [String]
     class ListModelsRequest < Struct.new(
+      nil,
       :next_token,
       :max_results,
       :status,
@@ -2607,6 +2694,7 @@ module Aws::LookoutEquipment
     #            ARNs, and status. </p>
     #   @return [Array<Types::ModelSummary>]
     class ListModelsResponse < Struct.new(
+      nil,
       :next_token,
       :model_summaries,
       keyword_init: true
@@ -2630,6 +2718,7 @@ module Aws::LookoutEquipment
     #   <p>Specifies the maximum number of retraining schedulers to list. </p>
     #   @return [Integer]
     class ListRetrainingSchedulersRequest < Struct.new(
+      nil,
       :model_name_begins_with,
       :status,
       :next_token,
@@ -2648,6 +2737,7 @@ module Aws::LookoutEquipment
     #            this token in the request to show the next page of retraining schedulers.</p>
     #   @return [String]
     class ListRetrainingSchedulersResponse < Struct.new(
+      nil,
       :retraining_scheduler_summaries,
       :next_token,
       keyword_init: true
@@ -2671,6 +2761,7 @@ module Aws::LookoutEquipment
     #            statistics. </p>
     #   @return [String]
     class ListSensorStatisticsRequest < Struct.new(
+      nil,
       :dataset_name,
       :ingestion_job_id,
       :max_results,
@@ -2690,6 +2781,7 @@ module Aws::LookoutEquipment
     #            statistics. </p>
     #   @return [String]
     class ListSensorStatisticsResponse < Struct.new(
+      nil,
       :sensor_statistics_summaries,
       :next_token,
       keyword_init: true
@@ -2702,6 +2794,7 @@ module Aws::LookoutEquipment
     #            the focus of the <code>ListTagsForResource</code> operation. </p>
     #   @return [String]
     class ListTagsForResourceRequest < Struct.new(
+      nil,
       :resource_arn,
       keyword_init: true
     )
@@ -2712,6 +2805,7 @@ module Aws::LookoutEquipment
     #   <p> Any tags associated with the resource. </p>
     #   @return [Array<Types::Tag>]
     class ListTagsForResourceResponse < Struct.new(
+      nil,
       :tags,
       keyword_init: true
     )
@@ -2724,6 +2818,7 @@ module Aws::LookoutEquipment
     #   <p> Indicates the number of sensors that have data missing completely. </p>
     #   @return [Integer]
     class MissingCompleteSensorData < Struct.new(
+      nil,
       :affected_sensor_count,
       keyword_init: true
     )
@@ -2738,6 +2833,7 @@ module Aws::LookoutEquipment
     #   <p> Indicates the total number of missing values across all the sensors. </p>
     #   @return [Integer]
     class MissingSensorData < Struct.new(
+      nil,
       :affected_sensor_count,
       :total_number_of_missing_values,
       keyword_init: true
@@ -2753,6 +2849,7 @@ module Aws::LookoutEquipment
     #   <p>The Amazon Web Services Key Management Service (KMS) key identifier to encrypt the pointwise model diagnostics files.</p>
     #   @return [String]
     class ModelDiagnosticsOutputConfiguration < Struct.new(
+      nil,
       :s3_output_configuration,
       :kms_key_id,
       keyword_init: true
@@ -2775,6 +2872,7 @@ module Aws::LookoutEquipment
     #            the file path and filename of the model evaluation file. </p>
     #   @return [String]
     class ModelDiagnosticsS3OutputConfiguration < Struct.new(
+      nil,
       :bucket,
       :prefix,
       keyword_init: true
@@ -2844,6 +2942,7 @@ module Aws::LookoutEquipment
     #            Amazon Lookout for Equipment</a>.</p>
     #   @return [String]
     class ModelSummary < Struct.new(
+      nil,
       :model_name,
       :model_arn,
       :dataset_name,
@@ -2900,6 +2999,7 @@ module Aws::LookoutEquipment
     #            Amazon Lookout for Equipment</a>.</p>
     #   @return [String]
     class ModelVersionSummary < Struct.new(
+      nil,
       :model_name,
       :model_arn,
       :model_version,
@@ -2922,6 +3022,7 @@ module Aws::LookoutEquipment
     #   <p> Indicates the monotonicity of values. Can be INCREASING, DECREASING, or STATIC. </p>
     #   @return [String]
     class MonotonicValues < Struct.new(
+      nil,
       :status,
       :monotonicity,
       keyword_init: true
@@ -2935,6 +3036,7 @@ module Aws::LookoutEquipment
     #            modes. </p>
     #   @return [String]
     class MultipleOperatingModes < Struct.new(
+      nil,
       :status,
       keyword_init: true
     )
@@ -2956,6 +3058,7 @@ module Aws::LookoutEquipment
     #            Amazon Lookout for Equipment generates one. </p>
     #   @return [String]
     class PutResourcePolicyRequest < Struct.new(
+      nil,
       :resource_arn,
       :resource_policy,
       :policy_revision_id,
@@ -2972,6 +3075,7 @@ module Aws::LookoutEquipment
     #   <p>A unique identifier for a revision of the resource policy.</p>
     #   @return [String]
     class PutResourcePolicyResponse < Struct.new(
+      nil,
       :resource_arn,
       :policy_revision_id,
       keyword_init: true
@@ -2984,6 +3088,7 @@ module Aws::LookoutEquipment
     # @!attribute message
     #   @return [String]
     class ResourceNotFoundException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -3013,6 +3118,7 @@ module Aws::LookoutEquipment
     #   <p>The number of past days of data used for retraining.</p>
     #   @return [String]
     class RetrainingSchedulerSummary < Struct.new(
+      nil,
       :model_name,
       :model_arn,
       :status,
@@ -3033,6 +3139,7 @@ module Aws::LookoutEquipment
     #            Without this key, data in the bucket is not accessible. </p>
     #   @return [String]
     class S3Object < Struct.new(
+      nil,
       :bucket,
       :key,
       keyword_init: true
@@ -3094,6 +3201,7 @@ module Aws::LookoutEquipment
     #            sensor that the statistics belong to. </p>
     #   @return [Time]
     class SensorStatisticsSummary < Struct.new(
+      nil,
       :component_name,
       :sensor_name,
       :data_exists,
@@ -3122,6 +3230,7 @@ module Aws::LookoutEquipment
     #   <p> Indicates the number of sensors that have less than 14 days of data. </p>
     #   @return [Integer]
     class SensorsWithShortDateRange < Struct.new(
+      nil,
       :affected_sensor_count,
       keyword_init: true
     )
@@ -3132,6 +3241,7 @@ module Aws::LookoutEquipment
     # @!attribute message
     #   @return [String]
     class ServiceQuotaExceededException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -3154,6 +3264,7 @@ module Aws::LookoutEquipment
     #            Lookout for Equipment generates one. </p>
     #   @return [String]
     class StartDataIngestionJobRequest < Struct.new(
+      nil,
       :dataset_name,
       :ingestion_input_configuration,
       :role_arn,
@@ -3170,6 +3281,7 @@ module Aws::LookoutEquipment
     #   <p>Indicates the status of the <code>StartDataIngestionJob</code> operation. </p>
     #   @return [String]
     class StartDataIngestionJobResponse < Struct.new(
+      nil,
       :job_id,
       :status,
       keyword_init: true
@@ -3181,6 +3293,7 @@ module Aws::LookoutEquipment
     #   <p>The name of the inference scheduler to be started. </p>
     #   @return [String]
     class StartInferenceSchedulerRequest < Struct.new(
+      nil,
       :inference_scheduler_name,
       keyword_init: true
     )
@@ -3204,6 +3317,7 @@ module Aws::LookoutEquipment
     #   <p>Indicates the status of the inference scheduler. </p>
     #   @return [String]
     class StartInferenceSchedulerResponse < Struct.new(
+      nil,
       :model_arn,
       :model_name,
       :inference_scheduler_name,
@@ -3218,6 +3332,7 @@ module Aws::LookoutEquipment
     #   <p>The name of the model whose retraining scheduler you want to start.</p>
     #   @return [String]
     class StartRetrainingSchedulerRequest < Struct.new(
+      nil,
       :model_name,
       keyword_init: true
     )
@@ -3234,6 +3349,7 @@ module Aws::LookoutEquipment
     #   <p>The status of the retraining scheduler. </p>
     #   @return [String]
     class StartRetrainingSchedulerResponse < Struct.new(
+      nil,
       :model_name,
       :model_arn,
       :status,
@@ -3246,6 +3362,7 @@ module Aws::LookoutEquipment
     #   <p>The name of the inference scheduler to be stopped. </p>
     #   @return [String]
     class StopInferenceSchedulerRequest < Struct.new(
+      nil,
       :inference_scheduler_name,
       keyword_init: true
     )
@@ -3270,6 +3387,7 @@ module Aws::LookoutEquipment
     #   <p>Indicates the status of the inference scheduler. </p>
     #   @return [String]
     class StopInferenceSchedulerResponse < Struct.new(
+      nil,
       :model_arn,
       :model_name,
       :inference_scheduler_name,
@@ -3284,6 +3402,7 @@ module Aws::LookoutEquipment
     #   <p>The name of the model whose retraining scheduler you want to stop.</p>
     #   @return [String]
     class StopRetrainingSchedulerRequest < Struct.new(
+      nil,
       :model_name,
       keyword_init: true
     )
@@ -3300,6 +3419,7 @@ module Aws::LookoutEquipment
     #   <p>The status of the retraining scheduler. </p>
     #   @return [String]
     class StopRetrainingSchedulerResponse < Struct.new(
+      nil,
       :model_name,
       :model_arn,
       :status,
@@ -3316,6 +3436,7 @@ module Aws::LookoutEquipment
     #   <p>The value for the specified tag. </p>
     #   @return [String]
     class Tag < Struct.new(
+      nil,
       :key,
       :value,
       keyword_init: true
@@ -3332,6 +3453,7 @@ module Aws::LookoutEquipment
     #            are specified. </p>
     #   @return [Array<Types::Tag>]
     class TagResourceRequest < Struct.new(
+      nil,
       :resource_arn,
       :tags,
       keyword_init: true
@@ -3340,6 +3462,7 @@ module Aws::LookoutEquipment
     end
 
     class TagResourceResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -3349,6 +3472,7 @@ module Aws::LookoutEquipment
     # @!attribute message
     #   @return [String]
     class ThrottlingException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -3360,6 +3484,7 @@ module Aws::LookoutEquipment
     #   <p> Indicates the total number of unsupported timestamps across the ingested data. </p>
     #   @return [Integer]
     class UnsupportedTimestamps < Struct.new(
+      nil,
       :total_number_of_unsupported_timestamps,
       keyword_init: true
     )
@@ -3374,6 +3499,7 @@ module Aws::LookoutEquipment
     #   <p>Specifies the key of the tag to be removed from a specified resource. </p>
     #   @return [Array<String>]
     class UntagResourceRequest < Struct.new(
+      nil,
       :resource_arn,
       :tag_keys,
       keyword_init: true
@@ -3382,6 +3508,7 @@ module Aws::LookoutEquipment
     end
 
     class UntagResourceResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -3396,6 +3523,7 @@ module Aws::LookoutEquipment
     #            set.</p>
     #   @return [Integer]
     class UpdateActiveModelVersionRequest < Struct.new(
+      nil,
       :model_name,
       :model_version,
       keyword_init: true
@@ -3428,6 +3556,7 @@ module Aws::LookoutEquipment
     #            previous active model version.</p>
     #   @return [String]
     class UpdateActiveModelVersionResponse < Struct.new(
+      nil,
       :model_name,
       :model_arn,
       :current_active_version,
@@ -3471,6 +3600,7 @@ module Aws::LookoutEquipment
     #            the inference scheduler. </p>
     #   @return [String]
     class UpdateInferenceSchedulerRequest < Struct.new(
+      nil,
       :inference_scheduler_name,
       :data_delay_offset_in_minutes,
       :data_upload_frequency,
@@ -3491,6 +3621,7 @@ module Aws::LookoutEquipment
     #            security of your data.</p>
     #   @return [Array<String>]
     class UpdateLabelGroupRequest < Struct.new(
+      nil,
       :label_group_name,
       :fault_codes,
       keyword_init: true
@@ -3513,6 +3644,7 @@ module Aws::LookoutEquipment
     #            You must also specify the <code>RoleArn</code> request parameter.</p>
     #   @return [Types::ModelDiagnosticsOutputConfiguration]
     class UpdateModelRequest < Struct.new(
+      nil,
       :model_name,
       :labels_input_configuration,
       :role_arn,
@@ -3556,6 +3688,7 @@ module Aws::LookoutEquipment
     #               are manually activated</a>.</p>
     #   @return [String]
     class UpdateRetrainingSchedulerRequest < Struct.new(
+      nil,
       :model_name,
       :retraining_start_date,
       :retraining_frequency,
@@ -3571,6 +3704,7 @@ module Aws::LookoutEquipment
     # @!attribute message
     #   @return [String]
     class ValidationException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )

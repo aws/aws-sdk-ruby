@@ -18,6 +18,7 @@ module Aws::GuardDuty
     #         account.</p>
     #   @return [String]
     class AcceptAdministratorInvitationRequest < Struct.new(
+      nil,
       :detector_id,
       :administrator_id,
       :invitation_id,
@@ -27,6 +28,7 @@ module Aws::GuardDuty
     end
 
     class AcceptAdministratorInvitationResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -48,6 +50,7 @@ module Aws::GuardDuty
     #         account.</p>
     #   @return [String]
     class AcceptInvitationRequest < Struct.new(
+      nil,
       :detector_id,
       :master_id,
       :invitation_id,
@@ -59,6 +62,7 @@ module Aws::GuardDuty
     # @deprecated
     #   This output is deprecated, use AcceptAdministratorInvitationResponse instead
     class AcceptInvitationResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -74,6 +78,7 @@ module Aws::GuardDuty
     #         Access Control List (ACL).</p>
     #   @return [Boolean]
     class AccessControlList < Struct.new(
+      nil,
       :allows_public_read_access,
       :allows_public_write_access,
       keyword_init: true
@@ -89,6 +94,7 @@ module Aws::GuardDuty
     #   <p>The error type.</p>
     #   @return [String]
     class AccessDeniedException < Struct.new(
+      nil,
       :message,
       :type,
       keyword_init: true
@@ -107,6 +113,7 @@ module Aws::GuardDuty
     #   <p>Type of the user.</p>
     #   @return [String]
     class AccessKey < Struct.new(
+      nil,
       :principal_id,
       :user_name,
       :user_type,
@@ -129,6 +136,7 @@ module Aws::GuardDuty
     #   <p>The type of the user.</p>
     #   @return [String]
     class AccessKeyDetails < Struct.new(
+      nil,
       :access_key_id,
       :principal_id,
       :user_name,
@@ -146,6 +154,7 @@ module Aws::GuardDuty
     #   <p>Name of the member's Amazon Web Services account.</p>
     #   @return [String]
     class Account < Struct.new(
+      nil,
       :uid,
       :name,
       keyword_init: true
@@ -189,6 +198,7 @@ module Aws::GuardDuty
     #            </ul>
     #   @return [String]
     class AccountDetail < Struct.new(
+      nil,
       :account_id,
       :email,
       keyword_init: true
@@ -209,6 +219,7 @@ module Aws::GuardDuty
     #   <p>A list of features enabled for the GuardDuty account.</p>
     #   @return [Array<Types::FreeTrialFeatureConfigurationResult>]
     class AccountFreeTrialInfo < Struct.new(
+      nil,
       :account_id,
       :data_sources,
       :features,
@@ -222,6 +233,7 @@ module Aws::GuardDuty
     #   <p>Describes the S3 Block Public Access settings of the bucket's parent account.</p>
     #   @return [Types::BlockPublicAccess]
     class AccountLevelPermissions < Struct.new(
+      nil,
       :block_public_access,
       keyword_init: true
     )
@@ -239,6 +251,7 @@ module Aws::GuardDuty
     #   <p>The total number of findings associated with an account.</p>
     #   @return [Integer]
     class AccountStatistics < Struct.new(
+      nil,
       :account_id,
       :last_generated_at,
       :total_findings,
@@ -279,6 +292,7 @@ module Aws::GuardDuty
     #   <p>Information about the Kubernetes role name and role type.</p>
     #   @return [Types::KubernetesRoleDetails]
     class Action < Struct.new(
+      nil,
       :action_type,
       :aws_api_call_action,
       :dns_request_action,
@@ -310,6 +324,7 @@ module Aws::GuardDuty
     #         unique identifiers that help track the actor's activities within the system.</p>
     #   @return [Types::ActorProcess]
     class Actor < Struct.new(
+      nil,
       :id,
       :user,
       :session,
@@ -332,6 +347,7 @@ module Aws::GuardDuty
     #         and verification purposes.</p>
     #   @return [String]
     class ActorProcess < Struct.new(
+      nil,
       :name,
       :path,
       :sha256,
@@ -348,6 +364,7 @@ module Aws::GuardDuty
     #   <p>Status of the installed EKS add-on.</p>
     #   @return [String]
     class AddonDetails < Struct.new(
+      nil,
       :addon_version,
       :addon_status,
       keyword_init: true
@@ -364,6 +381,7 @@ module Aws::GuardDuty
     #   <p>Indicates whether the account is enabled as the delegated administrator.</p>
     #   @return [String]
     class AdminAccount < Struct.new(
+      nil,
       :admin_account_id,
       :admin_status,
       keyword_init: true
@@ -386,6 +404,7 @@ module Aws::GuardDuty
     #   <p>The timestamp when the invitation was sent.</p>
     #   @return [String]
     class Administrator < Struct.new(
+      nil,
       :account_id,
       :invitation_id,
       :relationship_status,
@@ -400,6 +419,7 @@ module Aws::GuardDuty
     #   <p>Version of the installed GuardDuty security agent.</p>
     #   @return [String]
     class AgentDetails < Struct.new(
+      nil,
       :version,
       keyword_init: true
     )
@@ -414,6 +434,7 @@ module Aws::GuardDuty
     #   <p>Information about the behavior of the anomalies.</p>
     #   @return [Types::AnomalyUnusual]
     class Anomaly < Struct.new(
+      nil,
       :profiles,
       :unusual,
       keyword_init: true
@@ -432,6 +453,7 @@ module Aws::GuardDuty
     #   <p>The recorded value.</p>
     #   @return [Types::Observations]
     class AnomalyObject < Struct.new(
+      nil,
       :profile_type,
       :profile_subtype,
       :observations,
@@ -446,6 +468,7 @@ module Aws::GuardDuty
     #         generate the finding.</p>
     #   @return [Hash<String, Hash<String, Types::AnomalyObject>>]
     class AnomalyUnusual < Struct.new(
+      nil,
       :behavior,
       keyword_init: true
     )
@@ -462,6 +485,7 @@ module Aws::GuardDuty
     #   <p>The IDs of the findings that you want to archive.</p>
     #   @return [Array<String>]
     class ArchiveFindingsRequest < Struct.new(
+      nil,
       :detector_id,
       :finding_ids,
       keyword_init: true
@@ -470,6 +494,7 @@ module Aws::GuardDuty
     end
 
     class ArchiveFindingsResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -484,6 +509,7 @@ module Aws::GuardDuty
     #   <p>The unique number that identifies the Autonomous System (AS).</p>
     #   @return [Integer]
     class AutonomousSystem < Struct.new(
+      nil,
       :name,
       :number,
       keyword_init: true
@@ -522,6 +548,7 @@ module Aws::GuardDuty
     #         resources that were affected by this API call.</p>
     #   @return [Hash<String, String>]
     class AwsApiCallAction < Struct.new(
+      nil,
       :api,
       :caller_type,
       :domain_details,
@@ -544,6 +571,7 @@ module Aws::GuardDuty
     #   <p>The error type.</p>
     #   @return [String]
     class BadRequestException < Struct.new(
+      nil,
       :message,
       :type,
       keyword_init: true
@@ -567,6 +595,7 @@ module Aws::GuardDuty
     #   <p>Indicates if S3 Block Public Access is set to <code>BlockPublicPolicy</code>.</p>
     #   @return [Boolean]
     class BlockPublicAccess < Struct.new(
+      nil,
       :ignore_public_acls,
       :restrict_public_buckets,
       :block_public_acls,
@@ -588,6 +617,7 @@ module Aws::GuardDuty
     #         the S3 bucket.</p>
     #   @return [Types::BlockPublicAccess]
     class BucketLevelPermissions < Struct.new(
+      nil,
       :access_control_list,
       :bucket_policy,
       :block_public_access,
@@ -606,6 +636,7 @@ module Aws::GuardDuty
     #         bucket policy.</p>
     #   @return [Boolean]
     class BucketPolicy < Struct.new(
+      nil,
       :allows_public_read_access,
       :allows_public_write_access,
       keyword_init: true
@@ -618,6 +649,7 @@ module Aws::GuardDuty
     #   <p>The city name of the remote IP address.</p>
     #   @return [String]
     class City < Struct.new(
+      nil,
       :city_name,
       keyword_init: true
     )
@@ -629,6 +661,7 @@ module Aws::GuardDuty
     #   <p>Describes whether CloudTrail is enabled as a data source for the detector.</p>
     #   @return [String]
     class CloudTrailConfigurationResult < Struct.new(
+      nil,
       :status,
       keyword_init: true
     )
@@ -693,6 +726,7 @@ module Aws::GuardDuty
     #         field when querying for findings.</p>
     #   @return [Integer]
     class Condition < Struct.new(
+      nil,
       :eq,
       :neq,
       :gt,
@@ -718,6 +752,7 @@ module Aws::GuardDuty
     #   <p>The error type.</p>
     #   @return [String]
     class ConflictException < Struct.new(
+      nil,
       :message,
       :type,
       keyword_init: true
@@ -750,6 +785,7 @@ module Aws::GuardDuty
     #   <p>Container security context.</p>
     #   @return [Types::SecurityContext]
     class Container < Struct.new(
+      nil,
       :container_runtime,
       :id,
       :name,
@@ -773,6 +809,7 @@ module Aws::GuardDuty
     #   <p>The unique ID associated with the container image.</p>
     #   @return [String]
     class ContainerFindingResource < Struct.new(
+      nil,
       :image,
       :image_uid,
       keyword_init: true
@@ -790,6 +827,7 @@ module Aws::GuardDuty
     #   <p>Represents total number of nodes in the Amazon ECS cluster.</p>
     #   @return [Integer]
     class ContainerInstanceDetails < Struct.new(
+      nil,
       :covered_container_instances,
       :compatible_container_instances,
       keyword_init: true
@@ -805,6 +843,7 @@ module Aws::GuardDuty
     #   <p>The country name of the remote IP address.</p>
     #   @return [String]
     class Country < Struct.new(
+      nil,
       :country_code,
       :country_name,
       keyword_init: true
@@ -846,6 +885,7 @@ module Aws::GuardDuty
     #            </note>
     #   @return [String]
     class CoverageEc2InstanceDetails < Struct.new(
+      nil,
       :instance_id,
       :instance_type,
       :cluster_arn,
@@ -869,6 +909,7 @@ module Aws::GuardDuty
     #         instance.</p>
     #   @return [Types::ContainerInstanceDetails]
     class CoverageEcsClusterDetails < Struct.new(
+      nil,
       :cluster_name,
       :fargate_details,
       :container_instance_details,
@@ -900,6 +941,7 @@ module Aws::GuardDuty
     #         the Amazon EKS add-on GuardDuty agent for this resource.</p>
     #   @return [String]
     class CoverageEksClusterDetails < Struct.new(
+      nil,
       :cluster_name,
       :covered_nodes,
       :compatible_nodes,
@@ -921,6 +963,7 @@ module Aws::GuardDuty
     #         coverage details.</p>
     #   @return [Array<String>]
     class CoverageFilterCondition < Struct.new(
+      nil,
       :equals,
       :not_equals,
       keyword_init: true
@@ -934,6 +977,7 @@ module Aws::GuardDuty
     #         operation.</p>
     #   @return [Array<Types::CoverageFilterCriterion>]
     class CoverageFilterCriteria < Struct.new(
+      nil,
       :filter_criterion,
       keyword_init: true
     )
@@ -953,6 +997,7 @@ module Aws::GuardDuty
     #   <p>Contains information about the condition.</p>
     #   @return [Types::CoverageFilterCondition]
     class CoverageFilterCriterion < Struct.new(
+      nil,
       :criterion_key,
       :filter_condition,
       keyword_init: true
@@ -985,6 +1030,7 @@ module Aws::GuardDuty
     #         UTC format.</p>
     #   @return [Time]
     class CoverageResource < Struct.new(
+      nil,
       :resource_id,
       :detector_id,
       :account_id,
@@ -1013,6 +1059,7 @@ module Aws::GuardDuty
     #         for runtime coverage.</p>
     #   @return [Types::CoverageEc2InstanceDetails]
     class CoverageResourceDetails < Struct.new(
+      nil,
       :eks_cluster_details,
       :resource_type,
       :ecs_cluster_details,
@@ -1034,6 +1081,7 @@ module Aws::GuardDuty
     #   <p>The order in which the sorted findings are to be displayed.</p>
     #   @return [String]
     class CoverageSortCriteria < Struct.new(
+      nil,
       :attribute_name,
       :order_by,
       keyword_init: true
@@ -1049,6 +1097,7 @@ module Aws::GuardDuty
     #   <p>Represents coverage statistics for EKS clusters aggregated by coverage status.</p>
     #   @return [Hash<String, Integer>]
     class CoverageStatistics < Struct.new(
+      nil,
       :count_by_resource_type,
       :count_by_coverage_status,
       keyword_init: true
@@ -1080,6 +1129,7 @@ module Aws::GuardDuty
     #   <p>A list of features that will be configured for the detector.</p>
     #   @return [Array<Types::DetectorFeatureConfiguration>]
     class CreateDetectorRequest < Struct.new(
+      nil,
       :enable,
       :client_token,
       :finding_publishing_frequency,
@@ -1099,6 +1149,7 @@ module Aws::GuardDuty
     #         first time.</p>
     #   @return [Types::UnprocessedDataSourcesResult]
     class CreateDetectorResponse < Struct.new(
+      nil,
       :detector_id,
       :unprocessed_data_sources,
       keyword_init: true
@@ -1458,6 +1509,7 @@ module Aws::GuardDuty
     #   <p>The tags to be added to a new filter resource.</p>
     #   @return [Hash<String, String>]
     class CreateFilterRequest < Struct.new(
+      nil,
       :detector_id,
       :name,
       :description,
@@ -1475,6 +1527,7 @@ module Aws::GuardDuty
     #   <p>The name of the successfully created filter.</p>
     #   @return [String]
     class CreateFilterResponse < Struct.new(
+      nil,
       :name,
       keyword_init: true
     )
@@ -1510,6 +1563,7 @@ module Aws::GuardDuty
     #   <p>The Amazon Web Services account ID that owns the Amazon S3 bucket specified in the <b>location</b> parameter.</p>
     #   @return [String]
     class CreateIPSetRequest < Struct.new(
+      nil,
       :detector_id,
       :name,
       :format,
@@ -1527,6 +1581,7 @@ module Aws::GuardDuty
     #   <p>The ID of the IPSet resource.</p>
     #   @return [String]
     class CreateIPSetResponse < Struct.new(
+      nil,
       :ip_set_id,
       keyword_init: true
     )
@@ -1552,6 +1607,7 @@ module Aws::GuardDuty
     #   <p>Tags added to the Malware Protection plan resource. </p>
     #   @return [Hash<String, String>]
     class CreateMalwareProtectionPlanRequest < Struct.new(
+      nil,
       :client_token,
       :role,
       :protected_resource,
@@ -1566,6 +1622,7 @@ module Aws::GuardDuty
     #   <p>A unique identifier associated with the Malware Protection plan resource.</p>
     #   @return [String]
     class CreateMalwareProtectionPlanResponse < Struct.new(
+      nil,
       :malware_protection_plan_id,
       keyword_init: true
     )
@@ -1583,6 +1640,7 @@ module Aws::GuardDuty
     #         with the GuardDuty administrator account.</p>
     #   @return [Array<Types::AccountDetail>]
     class CreateMembersRequest < Struct.new(
+      nil,
       :detector_id,
       :account_details,
       keyword_init: true
@@ -1595,6 +1653,7 @@ module Aws::GuardDuty
     #         a result string that explains why each was unprocessed.</p>
     #   @return [Array<Types::UnprocessedAccount>]
     class CreateMembersResponse < Struct.new(
+      nil,
       :unprocessed_accounts,
       keyword_init: true
     )
@@ -1609,6 +1668,7 @@ module Aws::GuardDuty
     #   <p>Information about the protected S3 bucket resource.</p>
     #   @return [Types::CreateS3BucketResource]
     class CreateProtectedResource < Struct.new(
+      nil,
       :s3_bucket,
       keyword_init: true
     )
@@ -1632,6 +1692,7 @@ module Aws::GuardDuty
     #   <p>The idempotency token for the request.</p>
     #   @return [String]
     class CreatePublishingDestinationRequest < Struct.new(
+      nil,
       :detector_id,
       :destination_type,
       :destination_properties,
@@ -1645,6 +1706,7 @@ module Aws::GuardDuty
     #   <p>The ID of the publishing destination that is created.</p>
     #   @return [String]
     class CreatePublishingDestinationResponse < Struct.new(
+      nil,
       :destination_id,
       keyword_init: true
     )
@@ -1660,6 +1722,7 @@ module Aws::GuardDuty
     #         if it belongs to any of the specified object prefixes.</p>
     #   @return [Array<String>]
     class CreateS3BucketResource < Struct.new(
+      nil,
       :bucket_name,
       :object_prefixes,
       keyword_init: true
@@ -1676,6 +1739,7 @@ module Aws::GuardDuty
     #   <p>The types of sample findings to generate.</p>
     #   @return [Array<String>]
     class CreateSampleFindingsRequest < Struct.new(
+      nil,
       :detector_id,
       :finding_types,
       keyword_init: true
@@ -1684,6 +1748,7 @@ module Aws::GuardDuty
     end
 
     class CreateSampleFindingsResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1722,6 +1787,7 @@ module Aws::GuardDuty
     #   <p>The tags to be added to a new threat entity set resource.</p>
     #   @return [Hash<String, String>]
     class CreateThreatEntitySetRequest < Struct.new(
+      nil,
       :detector_id,
       :name,
       :format,
@@ -1739,6 +1805,7 @@ module Aws::GuardDuty
     #   <p>The ID returned by GuardDuty after creation of the threat entity set resource.</p>
     #   @return [String]
     class CreateThreatEntitySetResponse < Struct.new(
+      nil,
       :threat_entity_set_id,
       keyword_init: true
     )
@@ -1775,6 +1842,7 @@ module Aws::GuardDuty
     #   <p>The Amazon Web Services account ID that owns the Amazon S3 bucket specified in the <b>location</b> parameter.</p>
     #   @return [String]
     class CreateThreatIntelSetRequest < Struct.new(
+      nil,
       :detector_id,
       :name,
       :format,
@@ -1792,6 +1860,7 @@ module Aws::GuardDuty
     #   <p>The ID of the ThreatIntelSet resource.</p>
     #   @return [String]
     class CreateThreatIntelSetResponse < Struct.new(
+      nil,
       :threat_intel_set_id,
       keyword_init: true
     )
@@ -1832,6 +1901,7 @@ module Aws::GuardDuty
     #   <p>The tags to be added to a new trusted entity set resource.</p>
     #   @return [Hash<String, String>]
     class CreateTrustedEntitySetRequest < Struct.new(
+      nil,
       :detector_id,
       :name,
       :format,
@@ -1849,6 +1919,7 @@ module Aws::GuardDuty
     #   <p>The ID returned by GuardDuty after creation of the trusted entity set resource.</p>
     #   @return [String]
     class CreateTrustedEntitySetResponse < Struct.new(
+      nil,
       :trusted_entity_set_id,
       keyword_init: true
     )
@@ -1860,6 +1931,7 @@ module Aws::GuardDuty
     #   <p>Denotes whether DNS logs is enabled as a data source.</p>
     #   @return [String]
     class DNSLogsConfigurationResult < Struct.new(
+      nil,
       :status,
       keyword_init: true
     )
@@ -1877,6 +1949,7 @@ module Aws::GuardDuty
     #   <p>Describes whether Malware Protection is enabled as a data source.</p>
     #   @return [Types::MalwareProtectionConfiguration]
     class DataSourceConfigurations < Struct.new(
+      nil,
       :s3_logs,
       :kubernetes,
       :malware_protection,
@@ -1907,6 +1980,7 @@ module Aws::GuardDuty
     #   <p>Describes the configuration of Malware Protection data sources.</p>
     #   @return [Types::MalwareProtectionConfigurationResult]
     class DataSourceConfigurationsResult < Struct.new(
+      nil,
       :cloud_trail,
       :dns_logs,
       :flow_logs,
@@ -1924,6 +1998,7 @@ module Aws::GuardDuty
     #   <p>A value that specifies the number of days left to use each enabled data source.</p>
     #   @return [Integer]
     class DataSourceFreeTrial < Struct.new(
+      nil,
       :free_trial_days_remaining,
       keyword_init: true
     )
@@ -1951,6 +2026,7 @@ module Aws::GuardDuty
     #   <p>Describes whether Malware Protection is enabled as a data source.</p>
     #   @return [Types::MalwareProtectionDataSourceFreeTrial]
     class DataSourcesFreeTrial < Struct.new(
+      nil,
       :cloud_trail,
       :dns_logs,
       :flow_logs,
@@ -1978,6 +2054,7 @@ module Aws::GuardDuty
     #   <p>The total number of findings that were generated per severity level on each date.</p>
     #   @return [Integer]
     class DateStatistics < Struct.new(
+      nil,
       :date,
       :last_generated_at,
       :severity,
@@ -1992,6 +2069,7 @@ module Aws::GuardDuty
     #         account that you want to decline invitations from.</p>
     #   @return [Array<String>]
     class DeclineInvitationsRequest < Struct.new(
+      nil,
       :account_ids,
       keyword_init: true
     )
@@ -2003,6 +2081,7 @@ module Aws::GuardDuty
     #         why it was unprocessed.</p>
     #   @return [Array<Types::UnprocessedAccount>]
     class DeclineInvitationsResponse < Struct.new(
+      nil,
       :unprocessed_accounts,
       keyword_init: true
     )
@@ -2020,6 +2099,7 @@ module Aws::GuardDuty
     #           <code>EncryptionType</code> is <code>aws:kms</code>.</p>
     #   @return [String]
     class DefaultServerSideEncryption < Struct.new(
+      nil,
       :encryption_type,
       :kms_master_key_arn,
       keyword_init: true
@@ -2033,6 +2113,7 @@ module Aws::GuardDuty
     #   Settings page in the GuardDuty console, or run the <a href="https://docs.aws.amazon.com/guardduty/latest/APIReference/API_ListDetectors.html">ListDetectors</a> API.</p>
     #   @return [String]
     class DeleteDetectorRequest < Struct.new(
+      nil,
       :detector_id,
       keyword_init: true
     )
@@ -2040,6 +2121,7 @@ module Aws::GuardDuty
     end
 
     class DeleteDetectorResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -2054,6 +2136,7 @@ module Aws::GuardDuty
     #   <p>The name of the filter that you want to delete.</p>
     #   @return [String]
     class DeleteFilterRequest < Struct.new(
+      nil,
       :detector_id,
       :filter_name,
       keyword_init: true
@@ -2062,6 +2145,7 @@ module Aws::GuardDuty
     end
 
     class DeleteFilterResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -2076,6 +2160,7 @@ module Aws::GuardDuty
     #   <p>The unique ID of the IPSet to delete.</p>
     #   @return [String]
     class DeleteIPSetRequest < Struct.new(
+      nil,
       :detector_id,
       :ip_set_id,
       keyword_init: true
@@ -2084,6 +2169,7 @@ module Aws::GuardDuty
     end
 
     class DeleteIPSetResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -2094,6 +2180,7 @@ module Aws::GuardDuty
     #         account that you want to delete invitations from.</p>
     #   @return [Array<String>]
     class DeleteInvitationsRequest < Struct.new(
+      nil,
       :account_ids,
       keyword_init: true
     )
@@ -2105,6 +2192,7 @@ module Aws::GuardDuty
     #         why it was unprocessed.</p>
     #   @return [Array<Types::UnprocessedAccount>]
     class DeleteInvitationsResponse < Struct.new(
+      nil,
       :unprocessed_accounts,
       keyword_init: true
     )
@@ -2115,6 +2203,7 @@ module Aws::GuardDuty
     #   <p>A unique identifier associated with Malware Protection plan resource.</p>
     #   @return [String]
     class DeleteMalwareProtectionPlanRequest < Struct.new(
+      nil,
       :malware_protection_plan_id,
       keyword_init: true
     )
@@ -2131,6 +2220,7 @@ module Aws::GuardDuty
     #   <p>A list of account IDs of the GuardDuty member accounts that you want to delete.</p>
     #   @return [Array<String>]
     class DeleteMembersRequest < Struct.new(
+      nil,
       :detector_id,
       :account_ids,
       keyword_init: true
@@ -2142,6 +2232,7 @@ module Aws::GuardDuty
     #   <p>The accounts that could not be processed.</p>
     #   @return [Array<Types::UnprocessedAccount>]
     class DeleteMembersResponse < Struct.new(
+      nil,
       :unprocessed_accounts,
       keyword_init: true
     )
@@ -2157,6 +2248,7 @@ module Aws::GuardDuty
     #   <p>The ID of the publishing destination to delete.</p>
     #   @return [String]
     class DeletePublishingDestinationRequest < Struct.new(
+      nil,
       :detector_id,
       :destination_id,
       keyword_init: true
@@ -2165,6 +2257,7 @@ module Aws::GuardDuty
     end
 
     class DeletePublishingDestinationResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -2179,6 +2272,7 @@ module Aws::GuardDuty
     #   <p>The unique ID that helps GuardDuty identify which threat entity set needs to be deleted.</p>
     #   @return [String]
     class DeleteThreatEntitySetRequest < Struct.new(
+      nil,
       :detector_id,
       :threat_entity_set_id,
       keyword_init: true
@@ -2187,6 +2281,7 @@ module Aws::GuardDuty
     end
 
     class DeleteThreatEntitySetResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -2201,6 +2296,7 @@ module Aws::GuardDuty
     #   <p>The unique ID of the threatIntelSet that you want to delete.</p>
     #   @return [String]
     class DeleteThreatIntelSetRequest < Struct.new(
+      nil,
       :detector_id,
       :threat_intel_set_id,
       keyword_init: true
@@ -2209,6 +2305,7 @@ module Aws::GuardDuty
     end
 
     class DeleteThreatIntelSetResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -2223,6 +2320,7 @@ module Aws::GuardDuty
     #   <p>The unique ID that helps GuardDuty identify which trusted entity set needs to be deleted.</p>
     #   @return [String]
     class DeleteTrustedEntitySetRequest < Struct.new(
+      nil,
       :detector_id,
       :trusted_entity_set_id,
       keyword_init: true
@@ -2231,6 +2329,7 @@ module Aws::GuardDuty
     end
 
     class DeleteTrustedEntitySetResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -2261,6 +2360,7 @@ module Aws::GuardDuty
     #         <code>scanStartTime</code>.</p>
     #   @return [Types::SortCriteria]
     class DescribeMalwareScansRequest < Struct.new(
+      nil,
       :detector_id,
       :next_token,
       :max_results,
@@ -2279,6 +2379,7 @@ module Aws::GuardDuty
     #         items.</p>
     #   @return [String]
     class DescribeMalwareScansResponse < Struct.new(
+      nil,
       :scans,
       :next_token,
       keyword_init: true
@@ -2302,6 +2403,7 @@ module Aws::GuardDuty
     #         previous response to continue listing data.</p>
     #   @return [String]
     class DescribeOrganizationConfigurationRequest < Struct.new(
+      nil,
       :detector_id,
       :max_results,
       :next_token,
@@ -2364,6 +2466,7 @@ module Aws::GuardDuty
     #            </ul>
     #   @return [String]
     class DescribeOrganizationConfigurationResponse < Struct.new(
+      nil,
       :auto_enable,
       :member_account_limit_reached,
       :data_sources,
@@ -2385,6 +2488,7 @@ module Aws::GuardDuty
     #   <p>The ID of the publishing destination to retrieve.</p>
     #   @return [String]
     class DescribePublishingDestinationRequest < Struct.new(
+      nil,
       :detector_id,
       :destination_id,
       keyword_init: true
@@ -2411,6 +2515,7 @@ module Aws::GuardDuty
     #         and <code>KmsKeyArn</code> of the publishing destination.</p>
     #   @return [Types::DestinationProperties]
     class DescribePublishingDestinationResponse < Struct.new(
+      nil,
       :destination_id,
       :destination_type,
       :status,
@@ -2434,6 +2539,7 @@ module Aws::GuardDuty
     #   <p>The status of the publishing destination.</p>
     #   @return [String]
     class Destination < Struct.new(
+      nil,
       :destination_id,
       :destination_type,
       :status,
@@ -2454,6 +2560,7 @@ module Aws::GuardDuty
     #   <p>The ARN of the KMS key to use for encryption.</p>
     #   @return [String]
     class DestinationProperties < Struct.new(
+      nil,
       :destination_arn,
       :kms_key_arn,
       keyword_init: true
@@ -2470,6 +2577,7 @@ module Aws::GuardDuty
     #   <p>The details about the attack sequence.</p>
     #   @return [Types::Sequence]
     class Detection < Struct.new(
+      nil,
       :anomaly,
       :sequence,
       keyword_init: true
@@ -2485,6 +2593,7 @@ module Aws::GuardDuty
     #   <p>Status of the additional configuration.</p>
     #   @return [String]
     class DetectorAdditionalConfiguration < Struct.new(
+      nil,
       :name,
       :status,
       keyword_init: true
@@ -2504,6 +2613,7 @@ module Aws::GuardDuty
     #         format.</p>
     #   @return [Time]
     class DetectorAdditionalConfigurationResult < Struct.new(
+      nil,
       :name,
       :status,
       :updated_at,
@@ -2528,6 +2638,7 @@ module Aws::GuardDuty
     #   <p>Additional configuration for a resource.</p>
     #   @return [Array<Types::DetectorAdditionalConfiguration>]
     class DetectorFeatureConfiguration < Struct.new(
+      nil,
       :name,
       :status,
       :additional_configuration,
@@ -2555,6 +2666,7 @@ module Aws::GuardDuty
     #   <p>Additional configuration for a resource.</p>
     #   @return [Array<Types::DetectorAdditionalConfigurationResult>]
     class DetectorFeatureConfigurationResult < Struct.new(
+      nil,
       :name,
       :status,
       :updated_at,
@@ -2569,6 +2681,7 @@ module Aws::GuardDuty
     #         administrator.</p>
     #   @return [String]
     class DisableOrganizationAdminAccountRequest < Struct.new(
+      nil,
       :admin_account_id,
       keyword_init: true
     )
@@ -2576,6 +2689,7 @@ module Aws::GuardDuty
     end
 
     class DisableOrganizationAdminAccountResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -2585,6 +2699,7 @@ module Aws::GuardDuty
     #   <p>The unique ID of the detector of the GuardDuty member account.</p>
     #   @return [String]
     class DisassociateFromAdministratorAccountRequest < Struct.new(
+      nil,
       :detector_id,
       keyword_init: true
     )
@@ -2592,6 +2707,7 @@ module Aws::GuardDuty
     end
 
     class DisassociateFromAdministratorAccountResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -2603,6 +2719,7 @@ module Aws::GuardDuty
     #   <p>The unique ID of the detector of the GuardDuty member account.</p>
     #   @return [String]
     class DisassociateFromMasterAccountRequest < Struct.new(
+      nil,
       :detector_id,
       keyword_init: true
     )
@@ -2612,6 +2729,7 @@ module Aws::GuardDuty
     # @deprecated
     #   This output is deprecated, use DisassociateFromAdministratorAccountResponse instead
     class DisassociateFromMasterAccountResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -2626,6 +2744,7 @@ module Aws::GuardDuty
     #         the administrator account.</p>
     #   @return [Array<String>]
     class DisassociateMembersRequest < Struct.new(
+      nil,
       :detector_id,
       :account_ids,
       keyword_init: true
@@ -2638,6 +2757,7 @@ module Aws::GuardDuty
     #         why it was unprocessed.</p>
     #   @return [Array<Types::UnprocessedAccount>]
     class DisassociateMembersResponse < Struct.new(
+      nil,
       :unprocessed_accounts,
       keyword_init: true
     )
@@ -2664,6 +2784,7 @@ module Aws::GuardDuty
     #   <p>The Amazon Web Services account ID that owns the VPC through which the DNS request was made.</p>
     #   @return [String]
     class DnsRequestAction < Struct.new(
+      nil,
       :domain,
       :protocol,
       :blocked,
@@ -2679,6 +2800,7 @@ module Aws::GuardDuty
     #   <p>The domain information for the Amazon Web Services API call.</p>
     #   @return [String]
     class DomainDetails < Struct.new(
+      nil,
       :domain,
       keyword_init: true
     )
@@ -2693,6 +2815,7 @@ module Aws::GuardDuty
     #   <p>List of EBS volumes that were skipped from the malware scan.</p>
     #   @return [Array<Types::VolumeDetail>]
     class EbsVolumeDetails < Struct.new(
+      nil,
       :scanned_volume_details,
       :skipped_volume_details,
       keyword_init: true
@@ -2723,6 +2846,7 @@ module Aws::GuardDuty
     #   <p>Specifies the scan type that invoked the malware scan.</p>
     #   @return [String]
     class EbsVolumeScanDetails < Struct.new(
+      nil,
       :scan_id,
       :scan_started_at,
       :scan_completed_at,
@@ -2744,6 +2868,7 @@ module Aws::GuardDuty
     #         data source.</p>
     #   @return [String]
     class EbsVolumesResult < Struct.new(
+      nil,
       :status,
       :reason,
       keyword_init: true
@@ -2784,6 +2909,7 @@ module Aws::GuardDuty
     #   <p>The ID of the network interface.</p>
     #   @return [Array<String>]
     class Ec2Instance < Struct.new(
+      nil,
       :availability_zone,
       :image_description,
       :instance_state,
@@ -2818,6 +2944,7 @@ module Aws::GuardDuty
     #   <p>The VPC ID of the Amazon EC2 instance.</p>
     #   @return [String]
     class Ec2NetworkInterface < Struct.new(
+      nil,
       :ipv6_addresses,
       :private_ip_addresses,
       :public_ip,
@@ -2855,6 +2982,7 @@ module Aws::GuardDuty
     #   <p>Contains information about the details of the ECS Task.</p>
     #   @return [Types::EcsTaskDetails]
     class EcsClusterDetails < Struct.new(
+      nil,
       :name,
       :arn,
       :status,
@@ -2903,6 +3031,7 @@ module Aws::GuardDuty
     #   <p>A capacity on which the task is running. For example, <code>Fargate</code> and <code>EC2</code>.</p>
     #   @return [String]
     class EcsTaskDetails < Struct.new(
+      nil,
       :arn,
       :definition_arn,
       :version,
@@ -2937,6 +3066,7 @@ module Aws::GuardDuty
     #   <p>A list of unique identifiers for the Amazon EC2 instances that serve as worker nodes in the Amazon EKS cluster.</p>
     #   @return [Array<String>]
     class EksCluster < Struct.new(
+      nil,
       :arn,
       :created_at,
       :status,
@@ -2967,6 +3097,7 @@ module Aws::GuardDuty
     #   <p>The timestamp when the EKS cluster was created.</p>
     #   @return [Time]
     class EksClusterDetails < Struct.new(
+      nil,
       :name,
       :arn,
       :vpc_id,
@@ -2983,6 +3114,7 @@ module Aws::GuardDuty
     #         administrator.</p>
     #   @return [String]
     class EnableOrganizationAdminAccountRequest < Struct.new(
+      nil,
       :admin_account_id,
       keyword_init: true
     )
@@ -2990,6 +3122,7 @@ module Aws::GuardDuty
     end
 
     class EnableOrganizationAdminAccountResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -3000,6 +3133,7 @@ module Aws::GuardDuty
     #   <p>A list of threat intelligence details related to the evidence.</p>
     #   @return [Array<Types::ThreatIntelligenceDetail>]
     class Evidence < Struct.new(
+      nil,
       :threat_intelligence_details,
       keyword_init: true
     )
@@ -3028,6 +3162,7 @@ module Aws::GuardDuty
     #            </note>
     #   @return [String]
     class FargateDetails < Struct.new(
+      nil,
       :issues,
       :management_type,
       keyword_init: true
@@ -3050,6 +3185,7 @@ module Aws::GuardDuty
     #         querying for scan entries.</p>
     #   @return [Integer]
     class FilterCondition < Struct.new(
+      nil,
       :equals_value,
       :greater_than,
       :less_than,
@@ -3064,6 +3200,7 @@ module Aws::GuardDuty
     #         operation.</p>
     #   @return [Array<Types::FilterCriterion>]
     class FilterCriteria < Struct.new(
+      nil,
       :filter_criterion,
       keyword_init: true
     )
@@ -3082,6 +3219,7 @@ module Aws::GuardDuty
     #   <p>Contains information about the condition.</p>
     #   @return [Types::FilterCondition]
     class FilterCriterion < Struct.new(
+      nil,
       :criterion_key,
       :filter_condition,
       keyword_init: true
@@ -3145,6 +3283,7 @@ module Aws::GuardDuty
     #   <p>Amazon Resource Name (ARN) associated with the attack sequence finding.</p>
     #   @return [String]
     class Finding < Struct.new(
+      nil,
       :account_id,
       :arn,
       :confidence,
@@ -3172,6 +3311,7 @@ module Aws::GuardDuty
     #         querying findings.</p>
     #   @return [Hash<String, Types::Condition>]
     class FindingCriteria < Struct.new(
+      nil,
       :criterion,
       keyword_init: true
     )
@@ -3205,6 +3345,7 @@ module Aws::GuardDuty
     #   <p>Represents a list of map of total findings for each severity level.</p>
     #   @return [Array<Types::SeverityStatistics>]
     class FindingStatistics < Struct.new(
+      nil,
       :count_by_severity,
       :grouped_by_account,
       :grouped_by_date,
@@ -3228,6 +3369,7 @@ module Aws::GuardDuty
     #   <p>The total number of findings associated with generated for each distinct finding type.</p>
     #   @return [Integer]
     class FindingTypeStatistics < Struct.new(
+      nil,
       :finding_type,
       :last_generated_at,
       :total_findings,
@@ -3241,6 +3383,7 @@ module Aws::GuardDuty
     #   <p>Denotes whether VPC flow logs is enabled as a data source.</p>
     #   @return [String]
     class FlowLogsConfigurationResult < Struct.new(
+      nil,
       :status,
       keyword_init: true
     )
@@ -3255,6 +3398,7 @@ module Aws::GuardDuty
     #   <p>The number of the remaining free trial days for the feature.</p>
     #   @return [Integer]
     class FreeTrialFeatureConfigurationResult < Struct.new(
+      nil,
       :name,
       :free_trial_days_remaining,
       keyword_init: true
@@ -3271,6 +3415,7 @@ module Aws::GuardDuty
     #   <p>The longitude information of the remote IP address.</p>
     #   @return [Float]
     class GeoLocation < Struct.new(
+      nil,
       :lat,
       :lon,
       keyword_init: true
@@ -3282,6 +3427,7 @@ module Aws::GuardDuty
     #   <p>The unique ID of the detector of the GuardDuty member account.</p>
     #   @return [String]
     class GetAdministratorAccountRequest < Struct.new(
+      nil,
       :detector_id,
       keyword_init: true
     )
@@ -3292,6 +3438,7 @@ module Aws::GuardDuty
     #   <p>The administrator account details.</p>
     #   @return [Types::Administrator]
     class GetAdministratorAccountResponse < Struct.new(
+      nil,
       :administrator,
       keyword_init: true
     )
@@ -3310,6 +3457,7 @@ module Aws::GuardDuty
     #   <p>Represents the statistics type used to aggregate the coverage details.</p>
     #   @return [Array<String>]
     class GetCoverageStatisticsRequest < Struct.new(
+      nil,
       :detector_id,
       :filter_criteria,
       :statistics_type,
@@ -3323,6 +3471,7 @@ module Aws::GuardDuty
     #           <code>resourceType</code>.</p>
     #   @return [Types::CoverageStatistics]
     class GetCoverageStatisticsResponse < Struct.new(
+      nil,
       :coverage_statistics,
       keyword_init: true
     )
@@ -3335,6 +3484,7 @@ module Aws::GuardDuty
     #   Settings page in the GuardDuty console, or run the <a href="https://docs.aws.amazon.com/guardduty/latest/APIReference/API_ListDetectors.html">ListDetectors</a> API.</p>
     #   @return [String]
     class GetDetectorRequest < Struct.new(
+      nil,
       :detector_id,
       keyword_init: true
     )
@@ -3368,6 +3518,7 @@ module Aws::GuardDuty
     #   <p>Describes the features that have been enabled for the detector.</p>
     #   @return [Array<Types::DetectorFeatureConfigurationResult>]
     class GetDetectorResponse < Struct.new(
+      nil,
       :created_at,
       :finding_publishing_frequency,
       :service_role,
@@ -3390,6 +3541,7 @@ module Aws::GuardDuty
     #   <p>The name of the filter you want to get.</p>
     #   @return [String]
     class GetFilterRequest < Struct.new(
+      nil,
       :detector_id,
       :filter_name,
       keyword_init: true
@@ -3417,6 +3569,7 @@ module Aws::GuardDuty
     #   <p>The tags of the filter resource.</p>
     #   @return [Hash<String, String>]
     class GetFilterResponse < Struct.new(
+      nil,
       :name,
       :description,
       :action,
@@ -3441,6 +3594,7 @@ module Aws::GuardDuty
     #   <p>Represents the criteria used for sorting findings.</p>
     #   @return [Types::SortCriteria]
     class GetFindingsRequest < Struct.new(
+      nil,
       :detector_id,
       :finding_ids,
       :sort_criteria,
@@ -3453,6 +3607,7 @@ module Aws::GuardDuty
     #   <p>A list of findings.</p>
     #   @return [Array<Types::Finding>]
     class GetFindingsResponse < Struct.new(
+      nil,
       :findings,
       keyword_init: true
     )
@@ -3486,6 +3641,7 @@ module Aws::GuardDuty
     #            <p>You can use this parameter only with the <code>groupBy</code> parameter.</p>
     #   @return [Integer]
     class GetFindingsStatisticsRequest < Struct.new(
+      nil,
       :detector_id,
       :finding_statistic_types,
       :finding_criteria,
@@ -3505,6 +3661,7 @@ module Aws::GuardDuty
     #            <p>This parameter is currently not supported.</p>
     #   @return [String]
     class GetFindingsStatisticsResponse < Struct.new(
+      nil,
       :finding_statistics,
       :next_token,
       keyword_init: true
@@ -3521,6 +3678,7 @@ module Aws::GuardDuty
     #   <p>The unique ID of the IPSet to retrieve.</p>
     #   @return [String]
     class GetIPSetRequest < Struct.new(
+      nil,
       :detector_id,
       :ip_set_id,
       keyword_init: true
@@ -3548,6 +3706,7 @@ module Aws::GuardDuty
     #         in the response only if it was provided during IPSet creation or update.</p>
     #   @return [String]
     class GetIPSetResponse < Struct.new(
+      nil,
       :name,
       :format,
       :location,
@@ -3560,6 +3719,7 @@ module Aws::GuardDuty
     end
 
     class GetInvitationsCountRequest < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -3569,6 +3729,7 @@ module Aws::GuardDuty
     #   <p>The number of received invitations.</p>
     #   @return [Integer]
     class GetInvitationsCountResponse < Struct.new(
+      nil,
       :invitations_count,
       keyword_init: true
     )
@@ -3579,6 +3740,7 @@ module Aws::GuardDuty
     #   <p>A unique identifier associated with Malware Protection plan resource.</p>
     #   @return [String]
     class GetMalwareProtectionPlanRequest < Struct.new(
+      nil,
       :malware_protection_plan_id,
       keyword_init: true
     )
@@ -3614,6 +3776,7 @@ module Aws::GuardDuty
     #   <p>Tags added to the Malware Protection plan resource.</p>
     #   @return [Hash<String, String>]
     class GetMalwareProtectionPlanResponse < Struct.new(
+      nil,
       :arn,
       :role,
       :protected_resource,
@@ -3633,6 +3796,7 @@ module Aws::GuardDuty
     #   Settings page in the GuardDuty console, or run the <a href="https://docs.aws.amazon.com/guardduty/latest/APIReference/API_ListDetectors.html">ListDetectors</a> API.</p>
     #   @return [String]
     class GetMalwareScanSettingsRequest < Struct.new(
+      nil,
       :detector_id,
       keyword_init: true
     )
@@ -3646,6 +3810,7 @@ module Aws::GuardDuty
     #   <p>An enum value representing possible snapshot preservation settings.</p>
     #   @return [String]
     class GetMalwareScanSettingsResponse < Struct.new(
+      nil,
       :scan_resource_criteria,
       :ebs_snapshot_preservation,
       keyword_init: true
@@ -3661,6 +3826,7 @@ module Aws::GuardDuty
     #   Settings page in the GuardDuty console, or run the <a href="https://docs.aws.amazon.com/guardduty/latest/APIReference/API_ListDetectors.html">ListDetectors</a> API.</p>
     #   @return [String]
     class GetMasterAccountRequest < Struct.new(
+      nil,
       :detector_id,
       keyword_init: true
     )
@@ -3673,6 +3839,7 @@ module Aws::GuardDuty
     #   <p>The administrator account details.</p>
     #   @return [Types::Master]
     class GetMasterAccountResponse < Struct.new(
+      nil,
       :master,
       keyword_init: true
     )
@@ -3688,6 +3855,7 @@ module Aws::GuardDuty
     #   <p>A list of member account IDs.</p>
     #   @return [Array<String>]
     class GetMemberDetectorsRequest < Struct.new(
+      nil,
       :detector_id,
       :account_ids,
       keyword_init: true
@@ -3703,6 +3871,7 @@ module Aws::GuardDuty
     #         for why they were not processed.</p>
     #   @return [Array<Types::UnprocessedAccount>]
     class GetMemberDetectorsResponse < Struct.new(
+      nil,
       :member_data_source_configurations,
       :unprocessed_accounts,
       keyword_init: true
@@ -3720,6 +3889,7 @@ module Aws::GuardDuty
     #   <p>A list of account IDs of the GuardDuty member accounts that you want to describe.</p>
     #   @return [Array<String>]
     class GetMembersRequest < Struct.new(
+      nil,
       :detector_id,
       :account_ids,
       keyword_init: true
@@ -3735,6 +3905,7 @@ module Aws::GuardDuty
     #         why it was unprocessed.</p>
     #   @return [Array<Types::UnprocessedAccount>]
     class GetMembersResponse < Struct.new(
+      nil,
       :members,
       :unprocessed_accounts,
       keyword_init: true
@@ -3746,6 +3917,7 @@ module Aws::GuardDuty
     #   <p>Information about the statistics report for your organization.</p>
     #   @return [Types::OrganizationDetails]
     class GetOrganizationStatisticsResponse < Struct.new(
+      nil,
       :organization_details,
       keyword_init: true
     )
@@ -3761,6 +3933,7 @@ module Aws::GuardDuty
     #   <p>A list of account identifiers of the GuardDuty member account.</p>
     #   @return [Array<String>]
     class GetRemainingFreeTrialDaysRequest < Struct.new(
+      nil,
       :detector_id,
       :account_ids,
       keyword_init: true
@@ -3777,6 +3950,7 @@ module Aws::GuardDuty
     #         processed.</p>
     #   @return [Array<Types::UnprocessedAccount>]
     class GetRemainingFreeTrialDaysResponse < Struct.new(
+      nil,
       :accounts,
       :unprocessed_accounts,
       keyword_init: true
@@ -3793,6 +3967,7 @@ module Aws::GuardDuty
     #   <p>The unique ID that helps GuardDuty identify the threat entity set.</p>
     #   @return [String]
     class GetThreatEntitySetRequest < Struct.new(
+      nil,
       :detector_id,
       :threat_entity_set_id,
       keyword_init: true
@@ -3829,6 +4004,7 @@ module Aws::GuardDuty
     #   <p>The error details when the status is shown as <code>ERROR</code>.</p>
     #   @return [String]
     class GetThreatEntitySetResponse < Struct.new(
+      nil,
       :name,
       :format,
       :location,
@@ -3852,6 +4028,7 @@ module Aws::GuardDuty
     #   <p>The unique ID of the threatIntelSet that you want to get.</p>
     #   @return [String]
     class GetThreatIntelSetRequest < Struct.new(
+      nil,
       :detector_id,
       :threat_intel_set_id,
       keyword_init: true
@@ -3880,6 +4057,7 @@ module Aws::GuardDuty
     #         This field appears in the response only if it was provided during ThreatIntelSet creation or update.</p>
     #   @return [String]
     class GetThreatIntelSetResponse < Struct.new(
+      nil,
       :name,
       :format,
       :location,
@@ -3898,6 +4076,7 @@ module Aws::GuardDuty
     #   <p>The unique ID that helps GuardDuty identify the trusted entity set.</p>
     #   @return [String]
     class GetTrustedEntitySetRequest < Struct.new(
+      nil,
       :detector_id,
       :trusted_entity_set_id,
       keyword_init: true
@@ -3934,6 +4113,7 @@ module Aws::GuardDuty
     #   <p>The error details when the status is shown as <code>ERROR</code>.</p>
     #   @return [String]
     class GetTrustedEntitySetResponse < Struct.new(
+      nil,
       :name,
       :format,
       :location,
@@ -3974,6 +4154,7 @@ module Aws::GuardDuty
     #         page.</p>
     #   @return [String]
     class GetUsageStatisticsRequest < Struct.new(
+      nil,
       :detector_id,
       :usage_statistic_type,
       :usage_criteria,
@@ -3994,6 +4175,7 @@ module Aws::GuardDuty
     #         items.</p>
     #   @return [String]
     class GetUsageStatisticsResponse < Struct.new(
+      nil,
       :usage_statistics,
       :next_token,
       keyword_init: true
@@ -4013,6 +4195,7 @@ module Aws::GuardDuty
     #   <p>Total number of infected files with the highest severity threat detected.</p>
     #   @return [Integer]
     class HighestSeverityThreatDetails < Struct.new(
+      nil,
       :severity,
       :threat_name,
       :count,
@@ -4027,6 +4210,7 @@ module Aws::GuardDuty
     #   <p>Path of the file or directory on the host that the volume maps to.</p>
     #   @return [String]
     class HostPath < Struct.new(
+      nil,
       :path,
       keyword_init: true
     )
@@ -4041,6 +4225,7 @@ module Aws::GuardDuty
     #   <p>The profile ID of the EC2 instance.</p>
     #   @return [String]
     class IamInstanceProfile < Struct.new(
+      nil,
       :arn,
       :id,
       keyword_init: true
@@ -4056,6 +4241,7 @@ module Aws::GuardDuty
     #   <p>The <code>group</code> to which the user name belongs.</p>
     #   @return [Array<String>]
     class ImpersonatedUser < Struct.new(
+      nil,
       :username,
       :groups,
       keyword_init: true
@@ -4078,6 +4264,7 @@ module Aws::GuardDuty
     #   <p>Title describing the indicator.</p>
     #   @return [String]
     class Indicator < Struct.new(
+      nil,
       :key,
       :values,
       :title,
@@ -4128,6 +4315,7 @@ module Aws::GuardDuty
     #   <p>The tags of the EC2 instance.</p>
     #   @return [Array<Types::Tag>]
     class InstanceDetails < Struct.new(
+      nil,
       :availability_zone,
       :iam_instance_profile,
       :image_description,
@@ -4154,6 +4342,7 @@ module Aws::GuardDuty
     #   <p>The error type.</p>
     #   @return [String]
     class InternalServerErrorException < Struct.new(
+      nil,
       :message,
       :type,
       keyword_init: true
@@ -4176,6 +4365,7 @@ module Aws::GuardDuty
     #   <p>The timestamp when the invitation was sent.</p>
     #   @return [String]
     class Invitation < Struct.new(
+      nil,
       :account_id,
       :invitation_id,
       :relationship_status,
@@ -4203,6 +4393,7 @@ module Aws::GuardDuty
     #         GuardDuty as members.</p>
     #   @return [String]
     class InviteMembersRequest < Struct.new(
+      nil,
       :detector_id,
       :account_ids,
       :disable_email_notification,
@@ -4217,6 +4408,7 @@ module Aws::GuardDuty
     #         why it was unprocessed.</p>
     #   @return [Array<Types::UnprocessedAccount>]
     class InviteMembersResponse < Struct.new(
+      nil,
       :unprocessed_accounts,
       keyword_init: true
     )
@@ -4232,6 +4424,7 @@ module Aws::GuardDuty
     #   <p>The hash value of the infected resource.</p>
     #   @return [String]
     class ItemPath < Struct.new(
+      nil,
       :nested_item_path,
       :hash,
       keyword_init: true
@@ -4275,6 +4468,7 @@ module Aws::GuardDuty
     #   <p>The name of the resource in the Kubernetes API call action.</p>
     #   @return [String]
     class KubernetesApiCallAction < Struct.new(
+      nil,
       :request_uri,
       :verb,
       :source_ips,
@@ -4296,6 +4490,7 @@ module Aws::GuardDuty
     #   <p>The status of Kubernetes audit logs as a data source.</p>
     #   @return [Boolean]
     class KubernetesAuditLogsConfiguration < Struct.new(
+      nil,
       :enable,
       keyword_init: true
     )
@@ -4307,6 +4502,7 @@ module Aws::GuardDuty
     #   <p>A value that describes whether Kubernetes audit logs are enabled as a data source.</p>
     #   @return [String]
     class KubernetesAuditLogsConfigurationResult < Struct.new(
+      nil,
       :status,
       keyword_init: true
     )
@@ -4318,6 +4514,7 @@ module Aws::GuardDuty
     #   <p>The status of Kubernetes audit logs as a data source.</p>
     #   @return [Types::KubernetesAuditLogsConfiguration]
     class KubernetesConfiguration < Struct.new(
+      nil,
       :audit_logs,
       keyword_init: true
     )
@@ -4329,6 +4526,7 @@ module Aws::GuardDuty
     #   <p>Describes whether Kubernetes audit logs are enabled as a data source.</p>
     #   @return [Types::KubernetesAuditLogsConfigurationResult]
     class KubernetesConfigurationResult < Struct.new(
+      nil,
       :audit_logs,
       keyword_init: true
     )
@@ -4341,6 +4539,7 @@ module Aws::GuardDuty
     #   <p>Describes whether Kubernetes audit logs are enabled as a data source.</p>
     #   @return [Types::DataSourceFreeTrial]
     class KubernetesDataSourceFreeTrial < Struct.new(
+      nil,
       :audit_logs,
       keyword_init: true
     )
@@ -4356,6 +4555,7 @@ module Aws::GuardDuty
     #   <p>Details about the Kubernetes workload involved in a Kubernetes finding.</p>
     #   @return [Types::KubernetesWorkloadDetails]
     class KubernetesDetails < Struct.new(
+      nil,
       :kubernetes_user_details,
       :kubernetes_workload_details,
       keyword_init: true
@@ -4378,6 +4578,7 @@ module Aws::GuardDuty
     #   <p>Information whether the user has the permission to call the Kubernetes API.</p>
     #   @return [Boolean]
     class KubernetesPermissionCheckedDetails < Struct.new(
+      nil,
       :verb,
       :resource,
       :namespace,
@@ -4406,6 +4607,7 @@ module Aws::GuardDuty
     #       <code>ClusterRole</code>.</p>
     #   @return [String]
     class KubernetesRoleBindingDetails < Struct.new(
+      nil,
       :kind,
       :name,
       :uid,
@@ -4427,6 +4629,7 @@ module Aws::GuardDuty
     #   <p>The unique identifier of the Kubernetes role name.</p>
     #   @return [String]
     class KubernetesRoleDetails < Struct.new(
+      nil,
       :kind,
       :name,
       :uid,
@@ -4453,6 +4656,7 @@ module Aws::GuardDuty
     #   <p>Information about the impersonated user.</p>
     #   @return [Types::ImpersonatedUser]
     class KubernetesUserDetails < Struct.new(
+      nil,
       :username,
       :uid,
       :groups,
@@ -4475,6 +4679,7 @@ module Aws::GuardDuty
     #   <p>The types of Kubernetes resources involved in the workload.</p>
     #   @return [String]
     class KubernetesWorkload < Struct.new(
+      nil,
       :container_uids,
       :namespace,
       :kubernetes_resources_types,
@@ -4515,6 +4720,7 @@ module Aws::GuardDuty
     #   <p>Whether the host PID flag is enabled for the pods in the workload. </p>
     #   @return [Boolean]
     class KubernetesWorkloadDetails < Struct.new(
+      nil,
       :name,
       :type,
       :uid,
@@ -4561,6 +4767,7 @@ module Aws::GuardDuty
     #         <code>key</code>:<code>value</code> pair.</p>
     #   @return [Array<Types::Tag>]
     class LambdaDetails < Struct.new(
+      nil,
       :function_arn,
       :function_name,
       :description,
@@ -4605,6 +4812,7 @@ module Aws::GuardDuty
     #         GuardDuty.</p>
     #   @return [String]
     class LineageObject < Struct.new(
+      nil,
       :start_time,
       :namespace_pid,
       :user_id,
@@ -4640,6 +4848,7 @@ module Aws::GuardDuty
     #   <p>Represents the criteria used to sort the coverage details.</p>
     #   @return [Types::CoverageSortCriteria]
     class ListCoverageRequest < Struct.new(
+      nil,
       :detector_id,
       :next_token,
       :max_results,
@@ -4658,6 +4867,7 @@ module Aws::GuardDuty
     #         items.</p>
     #   @return [String]
     class ListCoverageResponse < Struct.new(
+      nil,
       :resources,
       :next_token,
       keyword_init: true
@@ -4676,6 +4886,7 @@ module Aws::GuardDuty
     #         data.</p>
     #   @return [String]
     class ListDetectorsRequest < Struct.new(
+      nil,
       :max_results,
       :next_token,
       keyword_init: true
@@ -4691,6 +4902,7 @@ module Aws::GuardDuty
     #         items.</p>
     #   @return [String]
     class ListDetectorsResponse < Struct.new(
+      nil,
       :detector_ids,
       :next_token,
       keyword_init: true
@@ -4714,6 +4926,7 @@ module Aws::GuardDuty
     #         data.</p>
     #   @return [String]
     class ListFiltersRequest < Struct.new(
+      nil,
       :detector_id,
       :max_results,
       :next_token,
@@ -4730,6 +4943,7 @@ module Aws::GuardDuty
     #         items.</p>
     #   @return [String]
     class ListFiltersResponse < Struct.new(
+      nil,
       :filter_names,
       :next_token,
       keyword_init: true
@@ -4916,6 +5130,7 @@ module Aws::GuardDuty
     #         data.</p>
     #   @return [String]
     class ListFindingsRequest < Struct.new(
+      nil,
       :detector_id,
       :finding_criteria,
       :sort_criteria,
@@ -4934,6 +5149,7 @@ module Aws::GuardDuty
     #         items.</p>
     #   @return [String]
     class ListFindingsResponse < Struct.new(
+      nil,
       :finding_ids,
       :next_token,
       keyword_init: true
@@ -4957,6 +5173,7 @@ module Aws::GuardDuty
     #         data.</p>
     #   @return [String]
     class ListIPSetsRequest < Struct.new(
+      nil,
       :detector_id,
       :max_results,
       :next_token,
@@ -4973,6 +5190,7 @@ module Aws::GuardDuty
     #         items.</p>
     #   @return [String]
     class ListIPSetsResponse < Struct.new(
+      nil,
       :ip_set_ids,
       :next_token,
       keyword_init: true
@@ -4991,6 +5209,7 @@ module Aws::GuardDuty
     #         data.</p>
     #   @return [String]
     class ListInvitationsRequest < Struct.new(
+      nil,
       :max_results,
       :next_token,
       keyword_init: true
@@ -5006,6 +5225,7 @@ module Aws::GuardDuty
     #         items.</p>
     #   @return [String]
     class ListInvitationsResponse < Struct.new(
+      nil,
       :invitations,
       :next_token,
       keyword_init: true
@@ -5021,6 +5241,7 @@ module Aws::GuardDuty
     #         continue listing data.</p>
     #   @return [String]
     class ListMalwareProtectionPlansRequest < Struct.new(
+      nil,
       :next_token,
       keyword_init: true
     )
@@ -5038,6 +5259,7 @@ module Aws::GuardDuty
     #         continue listing data.</p>
     #   @return [String]
     class ListMalwareProtectionPlansResponse < Struct.new(
+      nil,
       :malware_protection_plans,
       :next_token,
       keyword_init: true
@@ -5069,6 +5291,7 @@ module Aws::GuardDuty
     #               </a>. </p>
     #   @return [String]
     class ListMembersRequest < Struct.new(
+      nil,
       :detector_id,
       :max_results,
       :next_token,
@@ -5090,6 +5313,7 @@ module Aws::GuardDuty
     #         items.</p>
     #   @return [String]
     class ListMembersResponse < Struct.new(
+      nil,
       :members,
       :next_token,
       keyword_init: true
@@ -5107,6 +5331,7 @@ module Aws::GuardDuty
     #         after the first page.</p>
     #   @return [String]
     class ListOrganizationAdminAccountsRequest < Struct.new(
+      nil,
       :max_results,
       :next_token,
       keyword_init: true
@@ -5122,6 +5347,7 @@ module Aws::GuardDuty
     #         items.</p>
     #   @return [String]
     class ListOrganizationAdminAccountsResponse < Struct.new(
+      nil,
       :admin_accounts,
       :next_token,
       keyword_init: true
@@ -5144,6 +5370,7 @@ module Aws::GuardDuty
     #         after the first page.</p>
     #   @return [String]
     class ListPublishingDestinationsRequest < Struct.new(
+      nil,
       :detector_id,
       :max_results,
       :next_token,
@@ -5163,6 +5390,7 @@ module Aws::GuardDuty
     #         after the first page.</p>
     #   @return [String]
     class ListPublishingDestinationsResponse < Struct.new(
+      nil,
       :destinations,
       :next_token,
       keyword_init: true
@@ -5174,6 +5402,7 @@ module Aws::GuardDuty
     #   <p>The Amazon Resource Name (ARN) for the given GuardDuty resource. </p>
     #   @return [String]
     class ListTagsForResourceRequest < Struct.new(
+      nil,
       :resource_arn,
       keyword_init: true
     )
@@ -5184,6 +5413,7 @@ module Aws::GuardDuty
     #   <p>The tags associated with the resource.</p>
     #   @return [Hash<String, String>]
     class ListTagsForResourceResponse < Struct.new(
+      nil,
       :tags,
       keyword_init: true
     )
@@ -5206,6 +5436,7 @@ module Aws::GuardDuty
     #          with the value of NextToken from the previous response to continue listing data.</p>
     #   @return [String]
     class ListThreatEntitySetsRequest < Struct.new(
+      nil,
       :detector_id,
       :max_results,
       :next_token,
@@ -5221,6 +5452,7 @@ module Aws::GuardDuty
     #   <p>The pagination parameter to be used on the next list operation to retrieve more items.</p>
     #   @return [String]
     class ListThreatEntitySetsResponse < Struct.new(
+      nil,
       :threat_entity_set_ids,
       :next_token,
       keyword_init: true
@@ -5244,6 +5476,7 @@ module Aws::GuardDuty
     #         continue listing data.</p>
     #   @return [String]
     class ListThreatIntelSetsRequest < Struct.new(
+      nil,
       :detector_id,
       :max_results,
       :next_token,
@@ -5260,6 +5493,7 @@ module Aws::GuardDuty
     #         items.</p>
     #   @return [String]
     class ListThreatIntelSetsResponse < Struct.new(
+      nil,
       :threat_intel_set_ids,
       :next_token,
       keyword_init: true
@@ -5283,6 +5517,7 @@ module Aws::GuardDuty
     #          with the value of NextToken from the previous response to continue listing data.</p>
     #   @return [String]
     class ListTrustedEntitySetsRequest < Struct.new(
+      nil,
       :detector_id,
       :max_results,
       :next_token,
@@ -5298,6 +5533,7 @@ module Aws::GuardDuty
     #   <p>The pagination parameter to be used on the next list operation to retrieve more items.</p>
     #   @return [String]
     class ListTrustedEntitySetsResponse < Struct.new(
+      nil,
       :trusted_entity_set_ids,
       :next_token,
       keyword_init: true
@@ -5313,6 +5549,7 @@ module Aws::GuardDuty
     #   <p>The IPv6 local address of the connection.</p>
     #   @return [String]
     class LocalIpDetails < Struct.new(
+      nil,
       :ip_address_v4,
       :ip_address_v6,
       keyword_init: true
@@ -5328,6 +5565,7 @@ module Aws::GuardDuty
     #   <p>The port name of the local connection.</p>
     #   @return [String]
     class LocalPortDetails < Struct.new(
+      nil,
       :port,
       :port_name,
       keyword_init: true
@@ -5351,6 +5589,7 @@ module Aws::GuardDuty
     #         made to the database instance by the actor.</p>
     #   @return [Integer]
     class LoginAttribute < Struct.new(
+      nil,
       :user,
       :application,
       :failed_login_attempts,
@@ -5365,6 +5604,7 @@ module Aws::GuardDuty
     #   <p>Describes the configuration of Malware Protection for EC2 instances with findings.</p>
     #   @return [Types::ScanEc2InstanceWithFindings]
     class MalwareProtectionConfiguration < Struct.new(
+      nil,
       :scan_ec2_instance_with_findings,
       keyword_init: true
     )
@@ -5380,6 +5620,7 @@ module Aws::GuardDuty
     #   <p>The GuardDuty Malware Protection service role.</p>
     #   @return [String]
     class MalwareProtectionConfigurationResult < Struct.new(
+      nil,
       :scan_ec2_instance_with_findings,
       :service_role,
       keyword_init: true
@@ -5393,6 +5634,7 @@ module Aws::GuardDuty
     #         source.</p>
     #   @return [Types::DataSourceFreeTrial]
     class MalwareProtectionDataSourceFreeTrial < Struct.new(
+      nil,
       :scan_ec2_instance_with_findings,
       keyword_init: true
     )
@@ -5404,6 +5646,7 @@ module Aws::GuardDuty
     #   <p>Indicates whether the scanned S3 object will have tags about the scan result.</p>
     #   @return [Types::MalwareProtectionPlanTaggingAction]
     class MalwareProtectionPlanActions < Struct.new(
+      nil,
       :tagging,
       keyword_init: true
     )
@@ -5422,6 +5665,7 @@ module Aws::GuardDuty
     #         <i>Amazon GuardDuty User Guide</i>.</p>
     #   @return [String]
     class MalwareProtectionPlanStatusReason < Struct.new(
+      nil,
       :code,
       :message,
       keyword_init: true
@@ -5434,6 +5678,7 @@ module Aws::GuardDuty
     #   <p>A unique identifier associated with Malware Protection plan.</p>
     #   @return [String]
     class MalwareProtectionPlanSummary < Struct.new(
+      nil,
       :malware_protection_plan_id,
       keyword_init: true
     )
@@ -5445,6 +5690,7 @@ module Aws::GuardDuty
     #   <p>Indicates whether or not the tags will added.</p>
     #   @return [String]
     class MalwareProtectionPlanTaggingAction < Struct.new(
+      nil,
       :status,
       keyword_init: true
     )
@@ -5457,6 +5703,7 @@ module Aws::GuardDuty
     #         generated GuardDuty finding.</p>
     #   @return [Array<Types::Threat>]
     class MalwareScanDetails < Struct.new(
+      nil,
       :threats,
       keyword_init: true
     )
@@ -5477,6 +5724,7 @@ module Aws::GuardDuty
     #   <p>The timestamp when the invitation was sent.</p>
     #   @return [String]
     class Master < Struct.new(
+      nil,
       :account_id,
       :invitation_id,
       :relationship_status,
@@ -5512,6 +5760,7 @@ module Aws::GuardDuty
     #   <p>The administrator account ID.</p>
     #   @return [String]
     class Member < Struct.new(
+      nil,
       :account_id,
       :detector_id,
       :master_id,
@@ -5533,6 +5782,7 @@ module Aws::GuardDuty
     #   <p>Status of the additional configuration.</p>
     #   @return [String]
     class MemberAdditionalConfiguration < Struct.new(
+      nil,
       :name,
       :status,
       keyword_init: true
@@ -5554,6 +5804,7 @@ module Aws::GuardDuty
     #         is in UTC format.</p>
     #   @return [Time]
     class MemberAdditionalConfigurationResult < Struct.new(
+      nil,
       :name,
       :status,
       :updated_at,
@@ -5575,6 +5826,7 @@ module Aws::GuardDuty
     #   <p>Contains information about the status of the features for the member account.</p>
     #   @return [Array<Types::MemberFeaturesConfigurationResult>]
     class MemberDataSourceConfiguration < Struct.new(
+      nil,
       :account_id,
       :data_sources,
       :features,
@@ -5594,6 +5846,7 @@ module Aws::GuardDuty
     #   <p>Additional configuration of the feature for the member account.</p>
     #   @return [Array<Types::MemberAdditionalConfiguration>]
     class MemberFeaturesConfiguration < Struct.new(
+      nil,
       :name,
       :status,
       :additional_configuration,
@@ -5617,6 +5870,7 @@ module Aws::GuardDuty
     #         account.</p>
     #   @return [Array<Types::MemberAdditionalConfigurationResult>]
     class MemberFeaturesConfigurationResult < Struct.new(
+      nil,
       :name,
       :status,
       :updated_at,
@@ -5631,6 +5885,7 @@ module Aws::GuardDuty
     #   <p>The direction in which the network traffic is flowing.</p>
     #   @return [String]
     class NetworkConnection < Struct.new(
+      nil,
       :direction,
       keyword_init: true
     )
@@ -5663,6 +5918,7 @@ module Aws::GuardDuty
     #   <p>The remote port information of the connection.</p>
     #   @return [Types::RemotePortDetails]
     class NetworkConnectionAction < Struct.new(
+      nil,
       :blocked,
       :connection_direction,
       :local_port_details,
@@ -5699,6 +5955,7 @@ module Aws::GuardDuty
     #   <p>Information about the network connection.</p>
     #   @return [Types::NetworkConnection]
     class NetworkEndpoint < Struct.new(
+      nil,
       :id,
       :ip,
       :domain,
@@ -5725,6 +5982,7 @@ module Aws::GuardDuty
     #   <p>The longitude information of the endpoint location.</p>
     #   @return [Float]
     class NetworkGeoLocation < Struct.new(
+      nil,
       :city,
       :country,
       :latitude,
@@ -5766,6 +6024,7 @@ module Aws::GuardDuty
     #   <p>The VPC ID of the EC2 instance.</p>
     #   @return [String]
     class NetworkInterface < Struct.new(
+      nil,
       :ipv6_addresses,
       :network_interface_id,
       :private_dns_name,
@@ -5786,6 +6045,7 @@ module Aws::GuardDuty
     #   <p>The text that was unusual.</p>
     #   @return [Array<String>]
     class Observations < Struct.new(
+      nil,
       :text,
       keyword_init: true
     )
@@ -5807,6 +6067,7 @@ module Aws::GuardDuty
     #   <p>The name of the internet provider.</p>
     #   @return [String]
     class Organization < Struct.new(
+      nil,
       :asn,
       :asn_org,
       :isp,
@@ -5851,6 +6112,7 @@ module Aws::GuardDuty
     #            </ul>
     #   @return [String]
     class OrganizationAdditionalConfiguration < Struct.new(
+      nil,
       :name,
       :auto_enable,
       keyword_init: true
@@ -5892,6 +6154,7 @@ module Aws::GuardDuty
     #            </ul>
     #   @return [String]
     class OrganizationAdditionalConfigurationResult < Struct.new(
+      nil,
       :name,
       :auto_enable,
       keyword_init: true
@@ -5914,6 +6177,7 @@ module Aws::GuardDuty
     #         organization.</p>
     #   @return [Types::OrganizationMalwareProtectionConfiguration]
     class OrganizationDataSourceConfigurations < Struct.new(
+      nil,
       :s3_logs,
       :kubernetes,
       :malware_protection,
@@ -5934,6 +6198,7 @@ module Aws::GuardDuty
     #   <p>Describes the configuration of Malware Protection data source for an organization.</p>
     #   @return [Types::OrganizationMalwareProtectionConfigurationResult]
     class OrganizationDataSourceConfigurationsResult < Struct.new(
+      nil,
       :s3_logs,
       :kubernetes,
       :malware_protection,
@@ -5954,6 +6219,7 @@ module Aws::GuardDuty
     #         for members in your Amazon Web Services organization.</p>
     #   @return [Types::OrganizationStatistics]
     class OrganizationDetails < Struct.new(
+      nil,
       :updated_at,
       :organization_statistics,
       keyword_init: true
@@ -5967,6 +6233,7 @@ module Aws::GuardDuty
     #         organization.</p>
     #   @return [Boolean]
     class OrganizationEbsVolumes < Struct.new(
+      nil,
       :auto_enable,
       keyword_init: true
     )
@@ -5980,6 +6247,7 @@ module Aws::GuardDuty
     #         for new members joining the organization.</p>
     #   @return [Boolean]
     class OrganizationEbsVolumesResult < Struct.new(
+      nil,
       :auto_enable,
       keyword_init: true
     )
@@ -6021,6 +6289,7 @@ module Aws::GuardDuty
     #   <p>The additional information that will be configured for the organization.</p>
     #   @return [Array<Types::OrganizationAdditionalConfiguration>]
     class OrganizationFeatureConfiguration < Struct.new(
+      nil,
       :name,
       :auto_enable,
       :additional_configuration,
@@ -6064,6 +6333,7 @@ module Aws::GuardDuty
     #         organization.</p>
     #   @return [Array<Types::OrganizationAdditionalConfigurationResult>]
     class OrganizationFeatureConfigurationResult < Struct.new(
+      nil,
       :name,
       :auto_enable,
       :additional_configuration,
@@ -6085,6 +6355,7 @@ module Aws::GuardDuty
     #   <p>Name of the additional configuration.</p>
     #   @return [Array<Types::OrganizationFeatureStatisticsAdditionalConfiguration>]
     class OrganizationFeatureStatistics < Struct.new(
+      nil,
       :name,
       :enabled_accounts_count,
       :additional_configuration,
@@ -6104,6 +6375,7 @@ module Aws::GuardDuty
     #         configuration.</p>
     #   @return [Integer]
     class OrganizationFeatureStatisticsAdditionalConfiguration < Struct.new(
+      nil,
       :name,
       :enabled_accounts_count,
       keyword_init: true
@@ -6117,6 +6389,7 @@ module Aws::GuardDuty
     #         automatically as a data source for the organization.</p>
     #   @return [Boolean]
     class OrganizationKubernetesAuditLogsConfiguration < Struct.new(
+      nil,
       :auto_enable,
       keyword_init: true
     )
@@ -6130,6 +6403,7 @@ module Aws::GuardDuty
     #         the organization.</p>
     #   @return [Boolean]
     class OrganizationKubernetesAuditLogsConfigurationResult < Struct.new(
+      nil,
       :auto_enable,
       keyword_init: true
     )
@@ -6142,6 +6416,7 @@ module Aws::GuardDuty
     #         the organization.</p>
     #   @return [Types::OrganizationKubernetesAuditLogsConfiguration]
     class OrganizationKubernetesConfiguration < Struct.new(
+      nil,
       :audit_logs,
       keyword_init: true
     )
@@ -6154,6 +6429,7 @@ module Aws::GuardDuty
     #         organization.</p>
     #   @return [Types::OrganizationKubernetesAuditLogsConfigurationResult]
     class OrganizationKubernetesConfigurationResult < Struct.new(
+      nil,
       :audit_logs,
       keyword_init: true
     )
@@ -6166,6 +6442,7 @@ module Aws::GuardDuty
     #         members joining the organization.</p>
     #   @return [Types::OrganizationScanEc2InstanceWithFindings]
     class OrganizationMalwareProtectionConfiguration < Struct.new(
+      nil,
       :scan_ec2_instance_with_findings,
       keyword_init: true
     )
@@ -6179,6 +6456,7 @@ module Aws::GuardDuty
     #         organization.</p>
     #   @return [Types::OrganizationScanEc2InstanceWithFindingsResult]
     class OrganizationMalwareProtectionConfigurationResult < Struct.new(
+      nil,
       :scan_ec2_instance_with_findings,
       keyword_init: true
     )
@@ -6192,6 +6470,7 @@ module Aws::GuardDuty
     #         automatically as a data source for the organization.</p>
     #   @return [Boolean]
     class OrganizationS3LogsConfiguration < Struct.new(
+      nil,
       :auto_enable,
       keyword_init: true
     )
@@ -6205,6 +6484,7 @@ module Aws::GuardDuty
     #         members of the organization.</p>
     #   @return [Boolean]
     class OrganizationS3LogsConfigurationResult < Struct.new(
+      nil,
       :auto_enable,
       keyword_init: true
     )
@@ -6217,6 +6497,7 @@ module Aws::GuardDuty
     #         organization.</p>
     #   @return [Types::OrganizationEbsVolumes]
     class OrganizationScanEc2InstanceWithFindings < Struct.new(
+      nil,
       :ebs_volumes,
       keyword_init: true
     )
@@ -6229,6 +6510,7 @@ module Aws::GuardDuty
     #   <p>Describes the configuration for scanning EBS volumes for an organization.</p>
     #   @return [Types::OrganizationEbsVolumesResult]
     class OrganizationScanEc2InstanceWithFindingsResult < Struct.new(
+      nil,
       :ebs_volumes,
       keyword_init: true
     )
@@ -6260,6 +6542,7 @@ module Aws::GuardDuty
     #         statistics for each feature.</p>
     #   @return [Array<Types::OrganizationFeatureStatistics>]
     class OrganizationStatistics < Struct.new(
+      nil,
       :total_accounts_count,
       :member_accounts_count,
       :active_accounts_count,
@@ -6278,6 +6561,7 @@ module Aws::GuardDuty
     #            </p>
     #   @return [String]
     class Owner < Struct.new(
+      nil,
       :id,
       keyword_init: true
     )
@@ -6292,6 +6576,7 @@ module Aws::GuardDuty
     #   <p>Contains information about the account level permissions on the S3 bucket.</p>
     #   @return [Types::AccountLevelPermissions]
     class PermissionConfiguration < Struct.new(
+      nil,
       :bucket_level_permissions,
       :account_level_permissions,
       keyword_init: true
@@ -6307,6 +6592,7 @@ module Aws::GuardDuty
     #   <p>A list of objects related to port probe details.</p>
     #   @return [Array<Types::PortProbeDetail>]
     class PortProbeAction < Struct.new(
+      nil,
       :blocked,
       :port_probe_details,
       keyword_init: true
@@ -6325,6 +6611,7 @@ module Aws::GuardDuty
     #   <p>The remote IP information of the connection.</p>
     #   @return [Types::RemoteIpDetails]
     class PortProbeDetail < Struct.new(
+      nil,
       :local_port_details,
       :local_ip_details,
       :remote_ip_details,
@@ -6341,6 +6628,7 @@ module Aws::GuardDuty
     #   <p>The private IP address of the EC2 instance.</p>
     #   @return [String]
     class PrivateIpAddressDetails < Struct.new(
+      nil,
       :private_dns_name,
       :private_ip_address,
       keyword_init: true
@@ -6390,6 +6678,7 @@ module Aws::GuardDuty
     #   <p>Information about the process's lineage.</p>
     #   @return [Array<Types::LineageObject>]
     class ProcessDetails < Struct.new(
+      nil,
       :name,
       :executable_path,
       :executable_sha256,
@@ -6416,6 +6705,7 @@ module Aws::GuardDuty
     #   <p>The product code type.</p>
     #   @return [String]
     class ProductCode < Struct.new(
+      nil,
       :code,
       :product_type,
       keyword_init: true
@@ -6432,6 +6722,7 @@ module Aws::GuardDuty
     #         policies.</p>
     #   @return [String]
     class PublicAccess < Struct.new(
+      nil,
       :permission_configuration,
       :effective_permission,
       keyword_init: true
@@ -6457,6 +6748,7 @@ module Aws::GuardDuty
     #   <p>Indicates whether or not there is a setting that restricts access to the bucket with specified policies.</p>
     #   @return [String]
     class PublicAccessConfiguration < Struct.new(
+      nil,
       :public_acl_access,
       :public_policy_access,
       :public_acl_ignore_behavior,
@@ -6490,6 +6782,7 @@ module Aws::GuardDuty
     #   <p>Information about the tag key-value pairs.</p>
     #   @return [Array<Types::Tag>]
     class RdsDbInstanceDetails < Struct.new(
+      nil,
       :db_instance_identifier,
       :engine,
       :engine_version,
@@ -6519,6 +6812,7 @@ module Aws::GuardDuty
     #   <p>The authentication method used by the user involved in the finding.</p>
     #   @return [String]
     class RdsDbUserDetails < Struct.new(
+      nil,
       :user,
       :application,
       :database,
@@ -6553,6 +6847,7 @@ module Aws::GuardDuty
     #   <p>Information about the tag key-value pair.</p>
     #   @return [Array<Types::Tag>]
     class RdsLimitlessDbDetails < Struct.new(
+      nil,
       :db_shard_group_identifier,
       :db_shard_group_resource_id,
       :db_shard_group_arn,
@@ -6574,6 +6869,7 @@ module Aws::GuardDuty
     #   <p>Indicates the login attributes used in the login attempt.</p>
     #   @return [Array<Types::LoginAttribute>]
     class RdsLoginAttemptAction < Struct.new(
+      nil,
       :remote_ip_details,
       :login_attributes,
       keyword_init: true
@@ -6592,6 +6888,7 @@ module Aws::GuardDuty
     #         environment.</p>
     #   @return [Boolean]
     class RemoteAccountDetails < Struct.new(
+      nil,
       :account_id,
       :affiliated,
       keyword_init: true
@@ -6619,6 +6916,7 @@ module Aws::GuardDuty
     #   <p>The ISP organization information of the remote IP address.</p>
     #   @return [Types::Organization]
     class RemoteIpDetails < Struct.new(
+      nil,
       :city,
       :country,
       :geo_location,
@@ -6638,6 +6936,7 @@ module Aws::GuardDuty
     #   <p>The port name of the remote connection.</p>
     #   @return [String]
     class RemotePortDetails < Struct.new(
+      nil,
       :port,
       :port_name,
       keyword_init: true
@@ -6691,6 +6990,7 @@ module Aws::GuardDuty
     #   <p>Contains information about the Lambda function that was involved in a finding.</p>
     #   @return [Types::LambdaDetails]
     class Resource < Struct.new(
+      nil,
       :access_key_details,
       :s3_bucket_details,
       :instance_details,
@@ -6739,6 +7039,7 @@ module Aws::GuardDuty
     #         prompted GuardDuty to generate a finding.</p>
     #   @return [Types::ContainerFindingResource]
     class ResourceData < Struct.new(
+      nil,
       :s3_bucket,
       :ec2_instance,
       :access_key,
@@ -6757,6 +7058,7 @@ module Aws::GuardDuty
     #   <p>Instance ARN that was scanned in the scan entry.</p>
     #   @return [String]
     class ResourceDetails < Struct.new(
+      nil,
       :instance_arn,
       keyword_init: true
     )
@@ -6771,6 +7073,7 @@ module Aws::GuardDuty
     #   <p>The error type.</p>
     #   @return [String]
     class ResourceNotFoundException < Struct.new(
+      nil,
       :message,
       :type,
       keyword_init: true
@@ -6842,6 +7145,7 @@ module Aws::GuardDuty
     #   <p>The total number of findings associated with this resource.</p>
     #   @return [Integer]
     class ResourceStatistics < Struct.new(
+      nil,
       :account_id,
       :last_generated_at,
       :resource_id,
@@ -6882,6 +7186,7 @@ module Aws::GuardDuty
     #          GuardDuty to generate a finding.</p>
     #   @return [Types::ResourceData]
     class ResourceV2 < Struct.new(
+      nil,
       :uid,
       :name,
       :account_id,
@@ -6980,6 +7285,7 @@ module Aws::GuardDuty
     #   <p>The suspicious file path for which the threat intelligence details were found.</p>
     #   @return [String]
     class RuntimeContext < Struct.new(
+      nil,
       :modifying_process,
       :modified_at,
       :script_path,
@@ -7019,6 +7325,7 @@ module Aws::GuardDuty
     #   <p>Additional information about the suspicious activity.</p>
     #   @return [Types::RuntimeContext]
     class RuntimeDetails < Struct.new(
+      nil,
       :process,
       :context,
       keyword_init: true
@@ -7060,6 +7367,7 @@ module Aws::GuardDuty
     #   <p>Represents a list of Amazon S3 object identifiers.</p>
     #   @return [Array<String>]
     class S3Bucket < Struct.new(
+      nil,
       :owner_id,
       :created_at,
       :encryption_type,
@@ -7104,6 +7412,7 @@ module Aws::GuardDuty
     #   <p>Information about the S3 object that was scanned.</p>
     #   @return [Array<Types::S3ObjectDetail>]
     class S3BucketDetail < Struct.new(
+      nil,
       :arn,
       :name,
       :type,
@@ -7123,6 +7432,7 @@ module Aws::GuardDuty
     #   <p> The status of S3 data event logs as a data source.</p>
     #   @return [Boolean]
     class S3LogsConfiguration < Struct.new(
+      nil,
       :enable,
       keyword_init: true
     )
@@ -7135,6 +7445,7 @@ module Aws::GuardDuty
     #         members of the organization.</p>
     #   @return [String]
     class S3LogsConfigurationResult < Struct.new(
+      nil,
       :status,
       keyword_init: true
     )
@@ -7153,6 +7464,7 @@ module Aws::GuardDuty
     #   <p>The version Id of the Amazon S3 object.</p>
     #   @return [String]
     class S3Object < Struct.new(
+      nil,
       :e_tag,
       :key,
       :version_id,
@@ -7179,6 +7491,7 @@ module Aws::GuardDuty
     #   <p>Version ID of the object.</p>
     #   @return [String]
     class S3ObjectDetail < Struct.new(
+      nil,
       :object_arn,
       :key,
       :e_tag,
@@ -7242,6 +7555,7 @@ module Aws::GuardDuty
     #   <p>Specifies the scan type that invoked the malware scan.</p>
     #   @return [String]
     class Scan < Struct.new(
+      nil,
       :detector_id,
       :admin_detector_id,
       :scan_id,
@@ -7269,6 +7583,7 @@ module Aws::GuardDuty
     #         to a single field when triggering for malware scan.</p>
     #   @return [Array<Types::ScanConditionPair>]
     class ScanCondition < Struct.new(
+      nil,
       :map_equals,
       keyword_init: true
     )
@@ -7285,6 +7600,7 @@ module Aws::GuardDuty
     #         matched.</p>
     #   @return [String]
     class ScanConditionPair < Struct.new(
+      nil,
       :key,
       :value,
       keyword_init: true
@@ -7307,6 +7623,7 @@ module Aws::GuardDuty
     #   <p>Contains details about identified threats organized by threat name.</p>
     #   @return [Types::ThreatDetectedByName]
     class ScanDetections < Struct.new(
+      nil,
       :scanned_item_count,
       :threats_detected_item_count,
       :highest_severity_threat_details,
@@ -7322,6 +7639,7 @@ module Aws::GuardDuty
     #   <p>Describes the configuration for scanning EBS volumes as data source.</p>
     #   @return [Boolean]
     class ScanEc2InstanceWithFindings < Struct.new(
+      nil,
       :ebs_volumes,
       keyword_init: true
     )
@@ -7334,6 +7652,7 @@ module Aws::GuardDuty
     #   <p>Describes the configuration of scanning EBS volumes as a data source.</p>
     #   @return [Types::EbsVolumesResult]
     class ScanEc2InstanceWithFindingsResult < Struct.new(
+      nil,
       :ebs_volumes,
       keyword_init: true
     )
@@ -7354,6 +7673,7 @@ module Aws::GuardDuty
     #   <p>File name of the infected file.</p>
     #   @return [String]
     class ScanFilePath < Struct.new(
+      nil,
       :file_path,
       :volume_arn,
       :hash,
@@ -7374,6 +7694,7 @@ module Aws::GuardDuty
     #         resource.</p>
     #   @return [Hash<String, Types::ScanCondition>]
     class ScanResourceCriteria < Struct.new(
+      nil,
       :include,
       :exclude,
       keyword_init: true
@@ -7386,6 +7707,7 @@ module Aws::GuardDuty
     #   <p>An enum value representing possible scan results.</p>
     #   @return [String]
     class ScanResultDetails < Struct.new(
+      nil,
       :scan_result,
       keyword_init: true
     )
@@ -7407,6 +7729,7 @@ module Aws::GuardDuty
     #   <p>List of infected files in EBS volume with details.</p>
     #   @return [Array<Types::ScanFilePath>]
     class ScanThreatName < Struct.new(
+      nil,
       :name,
       :severity,
       :item_count,
@@ -7427,6 +7750,7 @@ module Aws::GuardDuty
     #   <p>Total number of scanned volumes.</p>
     #   @return [Integer]
     class ScannedItemCount < Struct.new(
+      nil,
       :total_gb,
       :files,
       :volumes,
@@ -7443,6 +7767,7 @@ module Aws::GuardDuty
     #   <p>Whether or not a container or a Kubernetes pod is allowed to gain more privileges than its parent process.</p>
     #   @return [Boolean]
     class SecurityContext < Struct.new(
+      nil,
       :privileged,
       :allow_privilege_escalation,
       keyword_init: true
@@ -7458,6 +7783,7 @@ module Aws::GuardDuty
     #   <p>The security group name of the EC2 instance.</p>
     #   @return [String]
     class SecurityGroup < Struct.new(
+      nil,
       :group_id,
       :group_name,
       keyword_init: true
@@ -7492,6 +7818,7 @@ module Aws::GuardDuty
     #         providing further context about the nature of the detected threat.</p>
     #   @return [Array<String>]
     class Sequence < Struct.new(
+      nil,
       :uid,
       :description,
       :actors,
@@ -7558,6 +7885,7 @@ module Aws::GuardDuty
     #   <p>Returns details from the malware scan that generated a GuardDuty finding.</p>
     #   @return [Types::MalwareScanDetails]
     class Service < Struct.new(
+      nil,
       :action,
       :evidence,
       :archived,
@@ -7587,6 +7915,7 @@ module Aws::GuardDuty
     #   <p>Describes the type of the additional information.</p>
     #   @return [String]
     class ServiceAdditionalInfo < Struct.new(
+      nil,
       :value,
       :type,
       keyword_init: true
@@ -7611,6 +7940,7 @@ module Aws::GuardDuty
     #            <p>In Amazon Web Services CloudTrail, you can find this value as <code>userIdentity.sessionContext.sessionIssuer.arn</code>.</p>
     #   @return [String]
     class Session < Struct.new(
+      nil,
       :uid,
       :mfa_status,
       :created_time,
@@ -7631,6 +7961,7 @@ module Aws::GuardDuty
     #   <p>The total number of findings associated with this severity.</p>
     #   @return [Integer]
     class SeverityStatistics < Struct.new(
+      nil,
       :last_generated_at,
       :severity,
       :total_findings,
@@ -7709,6 +8040,7 @@ module Aws::GuardDuty
     #   <p>Contains information about the indicators associated with the signals.</p>
     #   @return [Array<Types::Indicator>]
     class Signal < Struct.new(
+      nil,
       :uid,
       :type,
       :description,
@@ -7737,6 +8069,7 @@ module Aws::GuardDuty
     #   <p>The order by which the sorted findings are to be displayed.</p>
     #   @return [String]
     class SortCriteria < Struct.new(
+      nil,
       :attribute_name,
       :order_by,
       keyword_init: true
@@ -7748,6 +8081,7 @@ module Aws::GuardDuty
     #   <p>Amazon Resource Name (ARN) of the resource for which you invoked the API.</p>
     #   @return [String]
     class StartMalwareScanRequest < Struct.new(
+      nil,
       :resource_arn,
       keyword_init: true
     )
@@ -7759,6 +8093,7 @@ module Aws::GuardDuty
     #         a corresponding scan ID. Using this scan ID, you can monitor the status of your malware scan.</p>
     #   @return [String]
     class StartMalwareScanResponse < Struct.new(
+      nil,
       :scan_id,
       keyword_init: true
     )
@@ -7775,6 +8110,7 @@ module Aws::GuardDuty
     #   <p>A list of account IDs of the GuardDuty member accounts to start monitoring.</p>
     #   @return [Array<String>]
     class StartMonitoringMembersRequest < Struct.new(
+      nil,
       :detector_id,
       :account_ids,
       keyword_init: true
@@ -7787,6 +8123,7 @@ module Aws::GuardDuty
     #         why it was unprocessed.</p>
     #   @return [Array<Types::UnprocessedAccount>]
     class StartMonitoringMembersResponse < Struct.new(
+      nil,
       :unprocessed_accounts,
       keyword_init: true
     )
@@ -7803,6 +8140,7 @@ module Aws::GuardDuty
     #   <p>A list of account IDs for the member accounts to stop monitoring.</p>
     #   @return [Array<String>]
     class StopMonitoringMembersRequest < Struct.new(
+      nil,
       :detector_id,
       :account_ids,
       keyword_init: true
@@ -7815,6 +8153,7 @@ module Aws::GuardDuty
     #         and a result string that indicates why the account was not processed. </p>
     #   @return [Array<Types::UnprocessedAccount>]
     class StopMonitoringMembersResponse < Struct.new(
+      nil,
       :unprocessed_accounts,
       keyword_init: true
     )
@@ -7829,6 +8168,7 @@ module Aws::GuardDuty
     #   <p>Describes the value associated with the tag key.</p>
     #   @return [String]
     class Tag < Struct.new(
+      nil,
       :key,
       :value,
       keyword_init: true
@@ -7843,6 +8183,7 @@ module Aws::GuardDuty
     #   <p>The tags to be added to a resource.</p>
     #   @return [Hash<String, String>]
     class TagResourceRequest < Struct.new(
+      nil,
       :resource_arn,
       :tags,
       keyword_init: true
@@ -7851,6 +8192,7 @@ module Aws::GuardDuty
     end
 
     class TagResourceResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -7869,6 +8211,7 @@ module Aws::GuardDuty
     #         hash of the protected resource.</p>
     #   @return [Array<Types::ItemPath>]
     class Threat < Struct.new(
+      nil,
       :name,
       :source,
       :item_paths,
@@ -7892,6 +8235,7 @@ module Aws::GuardDuty
     #   <p>List of identified threats with details, organized by threat name.</p>
     #   @return [Array<Types::ScanThreatName>]
     class ThreatDetectedByName < Struct.new(
+      nil,
       :item_count,
       :unique_threat_name_count,
       :shortened,
@@ -7914,6 +8258,7 @@ module Aws::GuardDuty
     #   <p>SHA256 of the file that generated the finding.</p>
     #   @return [String]
     class ThreatIntelligenceDetail < Struct.new(
+      nil,
       :threat_list_name,
       :threat_names,
       :threat_file_sha256,
@@ -7927,6 +8272,7 @@ module Aws::GuardDuty
     #   <p>Total number of infected files.</p>
     #   @return [Integer]
     class ThreatsDetectedItemCount < Struct.new(
+      nil,
       :files,
       keyword_init: true
     )
@@ -7941,6 +8287,7 @@ module Aws::GuardDuty
     #   <p>The currency unit that the amount is given in.</p>
     #   @return [String]
     class Total < Struct.new(
+      nil,
       :amount,
       :unit,
       keyword_init: true
@@ -7956,6 +8303,7 @@ module Aws::GuardDuty
     #   <p>The description of the scan trigger.</p>
     #   @return [String]
     class TriggerDetails < Struct.new(
+      nil,
       :guard_duty_finding_id,
       :description,
       keyword_init: true
@@ -7972,6 +8320,7 @@ module Aws::GuardDuty
     #   <p>The IDs of the findings to unarchive.</p>
     #   @return [Array<String>]
     class UnarchiveFindingsRequest < Struct.new(
+      nil,
       :detector_id,
       :finding_ids,
       keyword_init: true
@@ -7980,6 +8329,7 @@ module Aws::GuardDuty
     end
 
     class UnarchiveFindingsResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -7993,6 +8343,7 @@ module Aws::GuardDuty
     #   <p>A reason why the account hasn't been processed.</p>
     #   @return [String]
     class UnprocessedAccount < Struct.new(
+      nil,
       :account_id,
       :result,
       keyword_init: true
@@ -8006,6 +8357,7 @@ module Aws::GuardDuty
     #         sources.</p>
     #   @return [Types::MalwareProtectionConfigurationResult]
     class UnprocessedDataSourcesResult < Struct.new(
+      nil,
       :malware_protection,
       keyword_init: true
     )
@@ -8019,6 +8371,7 @@ module Aws::GuardDuty
     #   <p>The tag keys to remove from the resource.</p>
     #   @return [Array<String>]
     class UntagResourceRequest < Struct.new(
+      nil,
       :resource_arn,
       :tag_keys,
       keyword_init: true
@@ -8027,6 +8380,7 @@ module Aws::GuardDuty
     end
 
     class UntagResourceResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -8056,6 +8410,7 @@ module Aws::GuardDuty
     #   <p>Provides the features that will be updated for the detector.</p>
     #   @return [Array<Types::DetectorFeatureConfiguration>]
     class UpdateDetectorRequest < Struct.new(
+      nil,
       :detector_id,
       :enable,
       :finding_publishing_frequency,
@@ -8067,6 +8422,7 @@ module Aws::GuardDuty
     end
 
     class UpdateDetectorResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -8098,6 +8454,7 @@ module Aws::GuardDuty
     #   <p>Represents the criteria to be used in the filter for querying findings.</p>
     #   @return [Types::FindingCriteria]
     class UpdateFilterRequest < Struct.new(
+      nil,
       :detector_id,
       :filter_name,
       :description,
@@ -8113,6 +8470,7 @@ module Aws::GuardDuty
     #   <p>The name of the filter.</p>
     #   @return [String]
     class UpdateFilterResponse < Struct.new(
+      nil,
       :name,
       keyword_init: true
     )
@@ -8135,6 +8493,7 @@ module Aws::GuardDuty
     #   <p>Additional feedback about the GuardDuty findings.</p>
     #   @return [String]
     class UpdateFindingsFeedbackRequest < Struct.new(
+      nil,
       :detector_id,
       :finding_ids,
       :feedback,
@@ -8145,6 +8504,7 @@ module Aws::GuardDuty
     end
 
     class UpdateFindingsFeedbackResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -8171,6 +8531,7 @@ module Aws::GuardDuty
     #   <p>The Amazon Web Services account ID that owns the Amazon S3 bucket specified in the <b>location</b> parameter.</p>
     #   @return [String]
     class UpdateIPSetRequest < Struct.new(
+      nil,
       :detector_id,
       :ip_set_id,
       :name,
@@ -8183,6 +8544,7 @@ module Aws::GuardDuty
     end
 
     class UpdateIPSetResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -8204,6 +8566,7 @@ module Aws::GuardDuty
     #         is the only supported protected resource.</p>
     #   @return [Types::UpdateProtectedResource]
     class UpdateMalwareProtectionPlanRequest < Struct.new(
+      nil,
       :malware_protection_plan_id,
       :role,
       :actions,
@@ -8226,6 +8589,7 @@ module Aws::GuardDuty
     #   <p>An enum value representing possible snapshot preservation settings.</p>
     #   @return [String]
     class UpdateMalwareScanSettingsRequest < Struct.new(
+      nil,
       :detector_id,
       :scan_resource_criteria,
       :ebs_snapshot_preservation,
@@ -8235,6 +8599,7 @@ module Aws::GuardDuty
     end
 
     class UpdateMalwareScanSettingsResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -8257,6 +8622,7 @@ module Aws::GuardDuty
     #   <p>A list of features that will be updated for the specified member accounts.</p>
     #   @return [Array<Types::MemberFeaturesConfiguration>]
     class UpdateMemberDetectorsRequest < Struct.new(
+      nil,
       :detector_id,
       :account_ids,
       :data_sources,
@@ -8271,6 +8637,7 @@ module Aws::GuardDuty
     #         for why they were not processed.</p>
     #   @return [Array<Types::UnprocessedAccount>]
     class UpdateMemberDetectorsResponse < Struct.new(
+      nil,
       :unprocessed_accounts,
       keyword_init: true
     )
@@ -8331,6 +8698,7 @@ module Aws::GuardDuty
     #            </ul>
     #   @return [String]
     class UpdateOrganizationConfigurationRequest < Struct.new(
+      nil,
       :detector_id,
       :auto_enable,
       :data_sources,
@@ -8342,6 +8710,7 @@ module Aws::GuardDuty
     end
 
     class UpdateOrganizationConfigurationResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -8354,6 +8723,7 @@ module Aws::GuardDuty
     #   <p>Information about the protected S3 bucket resource.</p>
     #   @return [Types::UpdateS3BucketResource]
     class UpdateProtectedResource < Struct.new(
+      nil,
       :s3_bucket,
       keyword_init: true
     )
@@ -8373,6 +8743,7 @@ module Aws::GuardDuty
     #         and <code>KmsKeyArn</code> of the publishing destination.</p>
     #   @return [Types::DestinationProperties]
     class UpdatePublishingDestinationRequest < Struct.new(
+      nil,
       :detector_id,
       :destination_id,
       :destination_properties,
@@ -8382,6 +8753,7 @@ module Aws::GuardDuty
     end
 
     class UpdatePublishingDestinationResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -8393,6 +8765,7 @@ module Aws::GuardDuty
     #         if it belongs to any of the specified object prefixes.</p>
     #   @return [Array<String>]
     class UpdateS3BucketResource < Struct.new(
+      nil,
       :object_prefixes,
       keyword_init: true
     )
@@ -8426,6 +8799,7 @@ module Aws::GuardDuty
     #         entity set to be effective.</p>
     #   @return [Boolean]
     class UpdateThreatEntitySetRequest < Struct.new(
+      nil,
       :detector_id,
       :threat_entity_set_id,
       :name,
@@ -8438,6 +8812,7 @@ module Aws::GuardDuty
     end
 
     class UpdateThreatEntitySetResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -8466,6 +8841,7 @@ module Aws::GuardDuty
     #   <p>The Amazon Web Services account ID that owns the Amazon S3 bucket specified in the <b>location</b> parameter.</p>
     #   @return [String]
     class UpdateThreatIntelSetRequest < Struct.new(
+      nil,
       :detector_id,
       :threat_intel_set_id,
       :name,
@@ -8478,6 +8854,7 @@ module Aws::GuardDuty
     end
 
     class UpdateThreatIntelSetResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -8510,6 +8887,7 @@ module Aws::GuardDuty
     #          entity set to be effective.</p>
     #   @return [Boolean]
     class UpdateTrustedEntitySetRequest < Struct.new(
+      nil,
       :detector_id,
       :trusted_entity_set_id,
       :name,
@@ -8522,6 +8900,7 @@ module Aws::GuardDuty
     end
 
     class UpdateTrustedEntitySetResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -8535,6 +8914,7 @@ module Aws::GuardDuty
     #   <p>Represents the total of usage for the Account ID.</p>
     #   @return [Types::Total]
     class UsageAccountResult < Struct.new(
+      nil,
       :account_id,
       :total,
       keyword_init: true
@@ -8559,6 +8939,7 @@ module Aws::GuardDuty
     #   <p>The features to aggregate usage statistics from.</p>
     #   @return [Array<String>]
     class UsageCriteria < Struct.new(
+      nil,
       :account_ids,
       :data_sources,
       :resources,
@@ -8576,6 +8957,7 @@ module Aws::GuardDuty
     #   <p>Represents the total of usage for the specified data source.</p>
     #   @return [Types::Total]
     class UsageDataSourceResult < Struct.new(
+      nil,
       :data_source,
       :total,
       keyword_init: true
@@ -8591,6 +8973,7 @@ module Aws::GuardDuty
     #   <p>Contains the total usage with the corresponding currency unit for that value.</p>
     #   @return [Types::Total]
     class UsageFeatureResult < Struct.new(
+      nil,
       :feature,
       :total,
       keyword_init: true
@@ -8606,6 +8989,7 @@ module Aws::GuardDuty
     #   <p>Represents the sum total of usage for the specified resource type.</p>
     #   @return [Types::Total]
     class UsageResourceResult < Struct.new(
+      nil,
       :resource,
       :total,
       keyword_init: true
@@ -8637,6 +9021,7 @@ module Aws::GuardDuty
     #   <p>The usage statistic sum organized by feature.</p>
     #   @return [Array<Types::UsageFeatureResult>]
     class UsageStatistics < Struct.new(
+      nil,
       :sum_by_account,
       :top_accounts_by_feature,
       :sum_by_data_source,
@@ -8657,6 +9042,7 @@ module Aws::GuardDuty
     #   <p>Contains the total usage with the corresponding currency unit for that value.</p>
     #   @return [Types::Total]
     class UsageTopAccountResult < Struct.new(
+      nil,
       :account_id,
       :total,
       keyword_init: true
@@ -8676,6 +9062,7 @@ module Aws::GuardDuty
     #   <p>The accounts that contributed to the total usage cost.</p>
     #   @return [Array<Types::UsageTopAccountResult>]
     class UsageTopAccountsResult < Struct.new(
+      nil,
       :feature,
       :accounts,
       keyword_init: true
@@ -8700,6 +9087,7 @@ module Aws::GuardDuty
     #   <p>Contains information about the Amazon Web Services account.</p>
     #   @return [Types::Account]
     class User < Struct.new(
+      nil,
       :name,
       :uid,
       :type,
@@ -8719,6 +9107,7 @@ module Aws::GuardDuty
     #         to.</p>
     #   @return [Types::HostPath]
     class Volume < Struct.new(
+      nil,
       :name,
       :host_path,
       keyword_init: true
@@ -8749,6 +9138,7 @@ module Aws::GuardDuty
     #   <p>KMS key ARN used to encrypt the EBS volume.</p>
     #   @return [String]
     class VolumeDetail < Struct.new(
+      nil,
       :volume_arn,
       :volume_type,
       :device_name,
@@ -8769,6 +9159,7 @@ module Aws::GuardDuty
     #   <p>Volume mount path.</p>
     #   @return [String]
     class VolumeMount < Struct.new(
+      nil,
       :name,
       :mount_path,
       keyword_init: true
@@ -8787,6 +9178,7 @@ module Aws::GuardDuty
     #   <p>The identifier of the security group attached to the Lambda function.</p>
     #   @return [Array<Types::SecurityGroup>]
     class VpcConfig < Struct.new(
+      nil,
       :subnet_ids,
       :vpc_id,
       :security_groups,

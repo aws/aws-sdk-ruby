@@ -25,6 +25,7 @@ module Aws::CognitoIdentity
     #            Authorized error.</p>
     #   @return [Boolean]
     class CognitoIdentityProvider < Struct.new(
+      nil,
       :provider_name,
       :client_id,
       :server_side_token_check,
@@ -43,6 +44,7 @@ module Aws::CognitoIdentity
     #   <p>The message returned by a ConcurrentModificationException.</p>
     #   @return [String]
     class ConcurrentModificationException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -89,6 +91,7 @@ module Aws::CognitoIdentity
     #            environment, or other criteria.</p>
     #   @return [Hash<String, String>]
     class CreateIdentityPoolInput < Struct.new(
+      nil,
       :identity_pool_name,
       :allow_unauthenticated_identities,
       :allow_classic_flow,
@@ -140,6 +143,7 @@ module Aws::CognitoIdentity
     #            environment, or other criteria.</p>
     #   @return [Hash<String, String>]
     class CreateIdentityPoolOutput < Struct.new(
+      nil,
       :identity_pool_id,
       :identity_pool_name,
       :allow_unauthenticated_identities,
@@ -174,6 +178,7 @@ module Aws::CognitoIdentity
     #   <p>The date at which these credentials will expire.</p>
     #   @return [Time]
     class Credentials < Struct.new(
+      nil,
       :access_key_id,
       :secret_key,
       :session_token,
@@ -188,6 +193,7 @@ module Aws::CognitoIdentity
     #   <p>A list of 1-60 identities that you want to delete.</p>
     #   @return [Array<String>]
     class DeleteIdentitiesInput < Struct.new(
+      nil,
       :identity_ids_to_delete,
       keyword_init: true
     )
@@ -201,6 +207,7 @@ module Aws::CognitoIdentity
     #            IdentityId.</p>
     #   @return [Array<Types::UnprocessedIdentityId>]
     class DeleteIdentitiesResponse < Struct.new(
+      nil,
       :unprocessed_identity_ids,
       keyword_init: true
     )
@@ -212,6 +219,7 @@ module Aws::CognitoIdentity
     #   <p>An identity pool ID in the format REGION:GUID.</p>
     #   @return [String]
     class DeleteIdentityPoolInput < Struct.new(
+      nil,
       :identity_pool_id,
       keyword_init: true
     )
@@ -223,6 +231,7 @@ module Aws::CognitoIdentity
     #   <p>A unique identifier in the format REGION:GUID.</p>
     #   @return [String]
     class DescribeIdentityInput < Struct.new(
+      nil,
       :identity_id,
       keyword_init: true
     )
@@ -243,6 +252,7 @@ module Aws::CognitoIdentity
     #   <p>Date on which the identity was last modified.</p>
     #   @return [Time]
     class DescribeIdentityOutput < Struct.new(
+      nil,
       :identity_id,
       :logins,
       :creation_date,
@@ -257,6 +267,7 @@ module Aws::CognitoIdentity
     #   <p>An identity pool ID in the format REGION:GUID.</p>
     #   @return [String]
     class DescribeIdentityPoolInput < Struct.new(
+      nil,
       :identity_pool_id,
       keyword_init: true
     )
@@ -300,6 +311,7 @@ module Aws::CognitoIdentity
     #            environment, or other criteria.</p>
     #   @return [Hash<String, String>]
     class DescribeIdentityPoolOutput < Struct.new(
+      nil,
       :identity_pool_id,
       :identity_pool_name,
       :allow_unauthenticated_identities,
@@ -326,6 +338,7 @@ module Aws::CognitoIdentity
     #   <p>This developer user identifier is already registered with Cognito.</p>
     #   @return [String]
     class DeveloperUserAlreadyRegisteredException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -338,6 +351,7 @@ module Aws::CognitoIdentity
     #   <p>The message returned by an ExternalServiceException</p>
     #   @return [String]
     class ExternalServiceException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -366,6 +380,7 @@ module Aws::CognitoIdentity
     #            customization.</p>
     #   @return [String]
     class GetCredentialsForIdentityInput < Struct.new(
+      nil,
       :identity_id,
       :logins,
       :custom_role_arn,
@@ -383,6 +398,7 @@ module Aws::CognitoIdentity
     #   <p>Credentials for the provided identity ID.</p>
     #   @return [Types::Credentials]
     class GetCredentialsForIdentityResponse < Struct.new(
+      nil,
       :identity_id,
       :credentials,
       keyword_init: true
@@ -430,6 +446,7 @@ module Aws::CognitoIdentity
     #            </ul>
     #   @return [Hash<String, String>]
     class GetIdInput < Struct.new(
+      nil,
       :account_id,
       :identity_pool_id,
       :logins,
@@ -443,6 +460,7 @@ module Aws::CognitoIdentity
     #   <p>A unique identifier in the format REGION:GUID.</p>
     #   @return [String]
     class GetIdResponse < Struct.new(
+      nil,
       :identity_id,
       keyword_init: true
     )
@@ -454,6 +472,7 @@ module Aws::CognitoIdentity
     #   <p>An identity pool ID in the format REGION:GUID.</p>
     #   @return [String]
     class GetIdentityPoolRolesInput < Struct.new(
+      nil,
       :identity_pool_id,
       keyword_init: true
     )
@@ -476,6 +495,7 @@ module Aws::CognitoIdentity
     #               <code>cognito-idp.us-east-1.amazonaws.com/us-east-1_abcdefghi:app_client_id</code>.</p>
     #   @return [Hash<String, Types::RoleMapping>]
     class GetIdentityPoolRolesResponse < Struct.new(
+      nil,
       :identity_pool_id,
       :roles,
       :role_mappings,
@@ -518,6 +538,7 @@ module Aws::CognitoIdentity
     #            </note>
     #   @return [Integer]
     class GetOpenIdTokenForDeveloperIdentityInput < Struct.new(
+      nil,
       :identity_pool_id,
       :identity_id,
       :logins,
@@ -537,6 +558,7 @@ module Aws::CognitoIdentity
     #   <p>An OpenID token.</p>
     #   @return [String]
     class GetOpenIdTokenForDeveloperIdentityResponse < Struct.new(
+      nil,
       :identity_id,
       :token,
       keyword_init: true
@@ -555,6 +577,7 @@ module Aws::CognitoIdentity
     #            other OpenID Connect provider, always include the <code>id_token</code>.</p>
     #   @return [Hash<String, String>]
     class GetOpenIdTokenInput < Struct.new(
+      nil,
       :identity_id,
       :logins,
       keyword_init: true
@@ -571,6 +594,7 @@ module Aws::CognitoIdentity
     #   <p>An OpenID token, valid for 10 minutes.</p>
     #   @return [String]
     class GetOpenIdTokenResponse < Struct.new(
+      nil,
       :identity_id,
       :token,
       keyword_init: true
@@ -586,6 +610,7 @@ module Aws::CognitoIdentity
     #   <p>You can use this operation to get the provider name.</p>
     #   @return [String]
     class GetPrincipalTagAttributeMapInput < Struct.new(
+      nil,
       :identity_pool_id,
       :identity_provider_name,
       keyword_init: true
@@ -609,6 +634,7 @@ module Aws::CognitoIdentity
     #               IAM permissions policy.</p>
     #   @return [Hash<String, String>]
     class GetPrincipalTagAttributeMapResponse < Struct.new(
+      nil,
       :identity_pool_id,
       :identity_provider_name,
       :use_defaults,
@@ -632,6 +658,7 @@ module Aws::CognitoIdentity
     #   <p>Date on which the identity was last modified.</p>
     #   @return [Time]
     class IdentityDescription < Struct.new(
+      nil,
       :identity_id,
       :logins,
       :creation_date,
@@ -649,6 +676,7 @@ module Aws::CognitoIdentity
     #   <p>A string that you provide.</p>
     #   @return [String]
     class IdentityPoolShortDescription < Struct.new(
+      nil,
       :identity_pool_id,
       :identity_pool_name,
       keyword_init: true
@@ -661,6 +689,7 @@ module Aws::CognitoIdentity
     #   <p>The message returned by an InternalErrorException.</p>
     #   @return [String]
     class InternalErrorException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -679,6 +708,7 @@ module Aws::CognitoIdentity
     #            </p>
     #   @return [String]
     class InvalidIdentityPoolConfigurationException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -690,6 +720,7 @@ module Aws::CognitoIdentity
     #   <p>The message returned by an InvalidParameterException.</p>
     #   @return [String]
     class InvalidParameterException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -701,6 +732,7 @@ module Aws::CognitoIdentity
     #   <p>The message returned by a LimitExceededException.</p>
     #   @return [String]
     class LimitExceededException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -722,6 +754,7 @@ module Aws::CognitoIdentity
     #            omitted, the ListIdentities API will include disabled identities in the response.</p>
     #   @return [Boolean]
     class ListIdentitiesInput < Struct.new(
+      nil,
       :identity_pool_id,
       :max_results,
       :next_token,
@@ -742,6 +775,7 @@ module Aws::CognitoIdentity
     #   <p>A pagination token.</p>
     #   @return [String]
     class ListIdentitiesResponse < Struct.new(
+      nil,
       :identity_pool_id,
       :identities,
       :next_token,
@@ -758,6 +792,7 @@ module Aws::CognitoIdentity
     #   <p>A pagination token.</p>
     #   @return [String]
     class ListIdentityPoolsInput < Struct.new(
+      nil,
       :max_results,
       :next_token,
       keyword_init: true
@@ -773,6 +808,7 @@ module Aws::CognitoIdentity
     #   <p>A pagination token.</p>
     #   @return [String]
     class ListIdentityPoolsResponse < Struct.new(
+      nil,
       :identity_pools,
       :next_token,
       keyword_init: true
@@ -785,6 +821,7 @@ module Aws::CognitoIdentity
     #            to.</p>
     #   @return [String]
     class ListTagsForResourceInput < Struct.new(
+      nil,
       :resource_arn,
       keyword_init: true
     )
@@ -795,6 +832,7 @@ module Aws::CognitoIdentity
     #   <p>The tags that are assigned to the identity pool.</p>
     #   @return [Hash<String, String>]
     class ListTagsForResourceResponse < Struct.new(
+      nil,
       :tags,
       keyword_init: true
     )
@@ -825,6 +863,7 @@ module Aws::CognitoIdentity
     #            11th match.</p>
     #   @return [String]
     class LookupDeveloperIdentityInput < Struct.new(
+      nil,
       :identity_pool_id,
       :identity_id,
       :developer_user_identifier,
@@ -854,6 +893,7 @@ module Aws::CognitoIdentity
     #            11th match.</p>
     #   @return [String]
     class LookupDeveloperIdentityResponse < Struct.new(
+      nil,
       :identity_id,
       :developer_user_identifier_list,
       :next_token,
@@ -879,6 +919,7 @@ module Aws::CognitoIdentity
     #   <p>The role ARN.</p>
     #   @return [String]
     class MappingRule < Struct.new(
+      nil,
       :claim,
       :match_type,
       :value,
@@ -908,6 +949,7 @@ module Aws::CognitoIdentity
     #   <p>An identity pool ID in the format REGION:GUID.</p>
     #   @return [String]
     class MergeDeveloperIdentitiesInput < Struct.new(
+      nil,
       :source_user_identifier,
       :destination_user_identifier,
       :developer_provider_name,
@@ -923,6 +965,7 @@ module Aws::CognitoIdentity
     #   <p>A unique identifier in the format REGION:GUID.</p>
     #   @return [String]
     class MergeDeveloperIdentitiesResponse < Struct.new(
+      nil,
       :identity_id,
       keyword_init: true
     )
@@ -934,6 +977,7 @@ module Aws::CognitoIdentity
     #   <p>The message returned by a NotAuthorizedException</p>
     #   @return [String]
     class NotAuthorizedException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -946,6 +990,7 @@ module Aws::CognitoIdentity
     #   <p>The message returned by a ResourceConflictException.</p>
     #   @return [String]
     class ResourceConflictException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -958,6 +1003,7 @@ module Aws::CognitoIdentity
     #   <p>The message returned by a ResourceNotFoundException.</p>
     #   @return [String]
     class ResourceNotFoundException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -985,6 +1031,7 @@ module Aws::CognitoIdentity
     #            required.</p>
     #   @return [Types::RulesConfigurationType]
     class RoleMapping < Struct.new(
+      nil,
       :type,
       :ambiguous_role_resolution,
       :rules_configuration,
@@ -999,6 +1046,7 @@ module Aws::CognitoIdentity
     #            <p>Rules are evaluated in order. The first one to match specifies the role.</p>
     #   @return [Array<Types::MappingRule>]
     class RulesConfigurationType < Struct.new(
+      nil,
       :rules,
       keyword_init: true
     )
@@ -1021,6 +1069,7 @@ module Aws::CognitoIdentity
     #            <p>Up to 25 rules can be specified per identity provider.</p>
     #   @return [Hash<String, Types::RoleMapping>]
     class SetIdentityPoolRolesInput < Struct.new(
+      nil,
       :identity_pool_id,
       :roles,
       :role_mappings,
@@ -1043,6 +1092,7 @@ module Aws::CognitoIdentity
     #   <p>You can use this operation to add principal tags.</p>
     #   @return [Hash<String, String>]
     class SetPrincipalTagAttributeMapInput < Struct.new(
+      nil,
       :identity_pool_id,
       :identity_provider_name,
       :use_defaults,
@@ -1068,6 +1118,7 @@ module Aws::CognitoIdentity
     #               IAM permissions policy.</p>
     #   @return [Hash<String, String>]
     class SetPrincipalTagAttributeMapResponse < Struct.new(
+      nil,
       :identity_pool_id,
       :identity_provider_name,
       :use_defaults,
@@ -1084,6 +1135,7 @@ module Aws::CognitoIdentity
     #   <p>The tags to assign to the identity pool.</p>
     #   @return [Hash<String, String>]
     class TagResourceInput < Struct.new(
+      nil,
       :resource_arn,
       :tags,
       keyword_init: true
@@ -1092,6 +1144,7 @@ module Aws::CognitoIdentity
     end
 
     class TagResourceResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1102,6 +1155,7 @@ module Aws::CognitoIdentity
     #   <p>Message returned by a TooManyRequestsException</p>
     #   @return [String]
     class TooManyRequestsException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -1122,6 +1176,7 @@ module Aws::CognitoIdentity
     #   <p>A unique ID used by your backend authentication process to identify a user.</p>
     #   @return [String]
     class UnlinkDeveloperIdentityInput < Struct.new(
+      nil,
       :identity_id,
       :identity_pool_id,
       :developer_provider_name,
@@ -1143,6 +1198,7 @@ module Aws::CognitoIdentity
     #   <p>Provider names to unlink from this identity.</p>
     #   @return [Array<String>]
     class UnlinkIdentityInput < Struct.new(
+      nil,
       :identity_id,
       :logins,
       :logins_to_remove,
@@ -1160,6 +1216,7 @@ module Aws::CognitoIdentity
     #   <p>The error code indicating the type of error that occurred.</p>
     #   @return [String]
     class UnprocessedIdentityId < Struct.new(
+      nil,
       :identity_id,
       :error_code,
       keyword_init: true
@@ -1174,6 +1231,7 @@ module Aws::CognitoIdentity
     #   <p>The keys of the tags to remove from the user pool.</p>
     #   @return [Array<String>]
     class UntagResourceInput < Struct.new(
+      nil,
       :resource_arn,
       :tag_keys,
       keyword_init: true
@@ -1182,6 +1240,7 @@ module Aws::CognitoIdentity
     end
 
     class UntagResourceResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1224,6 +1283,7 @@ module Aws::CognitoIdentity
     #            environment, or other criteria.</p>
     #   @return [Hash<String, String>]
     class UpdateIdentityPoolInput < Struct.new(
+      nil,
       :identity_pool_id,
       :identity_pool_name,
       :allow_unauthenticated_identities,
@@ -1276,6 +1336,7 @@ module Aws::CognitoIdentity
     #            environment, or other criteria.</p>
     #   @return [Hash<String, String>]
     class UpdateIdentityPoolOutput < Struct.new(
+      nil,
       :identity_pool_id,
       :identity_pool_name,
       :allow_unauthenticated_identities,

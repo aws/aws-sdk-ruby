@@ -17,6 +17,7 @@ module Aws::IoTWireless
     #   <p>The FCnt init value.</p>
     #   @return [Integer]
     class AbpV10X < Struct.new(
+      nil,
       :dev_addr,
       :session_keys,
       :f_cnt_start,
@@ -36,6 +37,7 @@ module Aws::IoTWireless
     #   <p>The FCnt init value.</p>
     #   @return [Integer]
     class AbpV11 < Struct.new(
+      nil,
       :dev_addr,
       :session_keys,
       :f_cnt_start,
@@ -48,6 +50,7 @@ module Aws::IoTWireless
     # @!attribute message
     #   @return [String]
     class AccessDeniedException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -67,6 +70,7 @@ module Aws::IoTWireless
     #               estimated altitude and actual device latitude in meters.</p>
     #   @return [Float]
     class Accuracy < Struct.new(
+      nil,
       :horizontal_accuracy,
       :vertical_accuracy,
       keyword_init: true
@@ -87,6 +91,7 @@ module Aws::IoTWireless
     #               processes the device's position data for use by AWS IoT Core for LoRaWAN.</p>
     #   @return [String]
     class ApplicationConfig < Struct.new(
+      nil,
       :f_port,
       :type,
       :destination_name,
@@ -113,6 +118,7 @@ module Aws::IoTWireless
     #               manage a resource.</p>
     #   @return [Array<Types::Tag>]
     class AssociateAwsAccountWithPartnerAccountRequest < Struct.new(
+      nil,
       :sidewalk,
       :client_request_token,
       :tags,
@@ -128,6 +134,7 @@ module Aws::IoTWireless
     #   <p>The Amazon Resource Name of the resource.</p>
     #   @return [String]
     class AssociateAwsAccountWithPartnerAccountResponse < Struct.new(
+      nil,
       :sidewalk,
       :arn,
       keyword_init: true
@@ -142,6 +149,7 @@ module Aws::IoTWireless
     #   <p>The ID of the multicast group.</p>
     #   @return [String]
     class AssociateMulticastGroupWithFuotaTaskRequest < Struct.new(
+      nil,
       :id,
       :multicast_group_id,
       keyword_init: true
@@ -150,6 +158,7 @@ module Aws::IoTWireless
     end
 
     class AssociateMulticastGroupWithFuotaTaskResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -162,6 +171,7 @@ module Aws::IoTWireless
     #   <p>The ID of the wireless device.</p>
     #   @return [String]
     class AssociateWirelessDeviceWithFuotaTaskRequest < Struct.new(
+      nil,
       :id,
       :wireless_device_id,
       keyword_init: true
@@ -170,6 +180,7 @@ module Aws::IoTWireless
     end
 
     class AssociateWirelessDeviceWithFuotaTaskResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -182,6 +193,7 @@ module Aws::IoTWireless
     #   <p>The ID of the wireless device.</p>
     #   @return [String]
     class AssociateWirelessDeviceWithMulticastGroupRequest < Struct.new(
+      nil,
       :id,
       :wireless_device_id,
       keyword_init: true
@@ -190,6 +202,7 @@ module Aws::IoTWireless
     end
 
     class AssociateWirelessDeviceWithMulticastGroupResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -202,6 +215,7 @@ module Aws::IoTWireless
     #   <p>The ARN of the thing to associate with the wireless device.</p>
     #   @return [String]
     class AssociateWirelessDeviceWithThingRequest < Struct.new(
+      nil,
       :id,
       :thing_arn,
       keyword_init: true
@@ -210,6 +224,7 @@ module Aws::IoTWireless
     end
 
     class AssociateWirelessDeviceWithThingResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -222,6 +237,7 @@ module Aws::IoTWireless
     #   <p>The ID of the certificate to associate with the wireless gateway.</p>
     #   @return [String]
     class AssociateWirelessGatewayWithCertificateRequest < Struct.new(
+      nil,
       :id,
       :iot_certificate_id,
       keyword_init: true
@@ -233,6 +249,7 @@ module Aws::IoTWireless
     #   <p>The ID of the certificate associated with the wireless gateway.</p>
     #   @return [String]
     class AssociateWirelessGatewayWithCertificateResponse < Struct.new(
+      nil,
       :iot_certificate_id,
       keyword_init: true
     )
@@ -246,6 +263,7 @@ module Aws::IoTWireless
     #   <p>The ARN of the thing to associate with the wireless gateway.</p>
     #   @return [String]
     class AssociateWirelessGatewayWithThingRequest < Struct.new(
+      nil,
       :id,
       :thing_arn,
       keyword_init: true
@@ -254,6 +272,7 @@ module Aws::IoTWireless
     end
 
     class AssociateWirelessGatewayWithThingResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -267,6 +286,7 @@ module Aws::IoTWireless
     #   <p>The frequency list for the gateways to send the beacons.</p>
     #   @return [Array<Integer>]
     class Beaconing < Struct.new(
+      nil,
       :data_rate,
       :frequencies,
       keyword_init: true
@@ -278,6 +298,7 @@ module Aws::IoTWireless
     #   <p>The ID of the multicast group.</p>
     #   @return [String]
     class CancelMulticastGroupSessionRequest < Struct.new(
+      nil,
       :id,
       keyword_init: true
     )
@@ -285,6 +306,7 @@ module Aws::IoTWireless
     end
 
     class CancelMulticastGroupSessionResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -300,6 +322,7 @@ module Aws::IoTWireless
     #   <p>CDMA channel information.</p>
     #   @return [Integer]
     class CdmaLocalId < Struct.new(
+      nil,
       :pn_offset,
       :cdma_channel,
       keyword_init: true
@@ -322,6 +345,7 @@ module Aws::IoTWireless
     #   <p>CDMA base station ID (BSID).</p>
     #   @return [Integer]
     class CdmaNmrObj < Struct.new(
+      nil,
       :pn_offset,
       :cdma_channel,
       :pilot_power,
@@ -360,6 +384,7 @@ module Aws::IoTWireless
     #   <p>CDMA network measurement reports.</p>
     #   @return [Array<Types::CdmaNmrObj>]
     class CdmaObj < Struct.new(
+      nil,
       :system_id,
       :network_id,
       :base_station_id,
@@ -391,6 +416,7 @@ module Aws::IoTWireless
     #   <p>CDMA object information.</p>
     #   @return [Array<Types::CdmaObj>]
     class CellTowers < Struct.new(
+      nil,
       :gsm,
       :wcdma,
       :tdscdma,
@@ -409,6 +435,7 @@ module Aws::IoTWireless
     #   <p>The value of the chosen sidewalk certificate.</p>
     #   @return [String]
     class CertificateList < Struct.new(
+      nil,
       :signing_alg,
       :value,
       keyword_init: true
@@ -426,6 +453,7 @@ module Aws::IoTWireless
     #   <p>Type of the resource in the conflicting operation.</p>
     #   @return [String]
     class ConflictException < Struct.new(
+      nil,
       :message,
       :resource_id,
       :resource_type,
@@ -444,6 +472,7 @@ module Aws::IoTWireless
     #               disabled.</p>
     #   @return [String]
     class ConnectionStatusEventConfiguration < Struct.new(
+      nil,
       :lo_ra_wan,
       :wireless_gateway_id_event_topic,
       keyword_init: true
@@ -458,6 +487,7 @@ module Aws::IoTWireless
     #               LoRaWAN related event topics.</p>
     #   @return [Types::LoRaWANConnectionStatusResourceTypeEventConfiguration]
     class ConnectionStatusResourceTypeEventConfiguration < Struct.new(
+      nil,
       :lo_ra_wan,
       keyword_init: true
     )
@@ -494,6 +524,7 @@ module Aws::IoTWireless
     #                   EC2 API requests</a>.</p>
     #   @return [String]
     class CreateDestinationRequest < Struct.new(
+      nil,
       :name,
       :expression_type,
       :expression,
@@ -513,6 +544,7 @@ module Aws::IoTWireless
     #   <p>The name of the new resource.</p>
     #   @return [String]
     class CreateDestinationResponse < Struct.new(
+      nil,
       :arn,
       :name,
       keyword_init: true
@@ -548,6 +580,7 @@ module Aws::IoTWireless
     #   <p>The Sidewalk-related information for creating the Sidewalk device profile.</p>
     #   @return [Types::SidewalkCreateDeviceProfile]
     class CreateDeviceProfileRequest < Struct.new(
+      nil,
       :name,
       :lo_ra_wan,
       :tags,
@@ -565,6 +598,7 @@ module Aws::IoTWireless
     #   <p>The ID of the new device profile.</p>
     #   @return [String]
     class CreateDeviceProfileResponse < Struct.new(
+      nil,
       :arn,
       :id,
       keyword_init: true
@@ -627,6 +661,7 @@ module Aws::IoTWireless
     #               FUOTA, such as the software version. It is a binary field encoded in base64.</p>
     #   @return [String]
     class CreateFuotaTaskRequest < Struct.new(
+      nil,
       :name,
       :description,
       :client_request_token,
@@ -650,6 +685,7 @@ module Aws::IoTWireless
     #   <p>The ID of a FUOTA task.</p>
     #   @return [String]
     class CreateFuotaTaskResponse < Struct.new(
+      nil,
       :arn,
       :id,
       keyword_init: true
@@ -681,6 +717,7 @@ module Aws::IoTWireless
     #               manage a resource.</p>
     #   @return [Array<Types::Tag>]
     class CreateMulticastGroupRequest < Struct.new(
+      nil,
       :name,
       :description,
       :client_request_token,
@@ -698,6 +735,7 @@ module Aws::IoTWireless
     #   <p>The ID of the multicast group.</p>
     #   @return [String]
     class CreateMulticastGroupResponse < Struct.new(
+      nil,
       :arn,
       :id,
       keyword_init: true
@@ -741,6 +779,7 @@ module Aws::IoTWireless
     #                   <code>MulticastGroupId</code> of the resource to add in the input array.</p>
     #   @return [Array<String>]
     class CreateNetworkAnalyzerConfigurationRequest < Struct.new(
+      nil,
       :name,
       :trace_content,
       :wireless_devices,
@@ -761,6 +800,7 @@ module Aws::IoTWireless
     #   <p>Name of the network analyzer configuration.</p>
     #   @return [String]
     class CreateNetworkAnalyzerConfigurationResponse < Struct.new(
+      nil,
       :arn,
       :name,
       keyword_init: true
@@ -793,6 +833,7 @@ module Aws::IoTWireless
     #                   EC2 API requests</a>.</p>
     #   @return [String]
     class CreateServiceProfileRequest < Struct.new(
+      nil,
       :name,
       :lo_ra_wan,
       :tags,
@@ -809,6 +850,7 @@ module Aws::IoTWireless
     #   <p>The ID of the new service profile.</p>
     #   @return [String]
     class CreateServiceProfileResponse < Struct.new(
+      nil,
       :arn,
       :id,
       keyword_init: true
@@ -857,6 +899,7 @@ module Aws::IoTWireless
     #   <p>The device configuration information to use to create the Sidewalk device.</p>
     #   @return [Types::SidewalkCreateWirelessDevice]
     class CreateWirelessDeviceRequest < Struct.new(
+      nil,
       :type,
       :name,
       :description,
@@ -878,6 +921,7 @@ module Aws::IoTWireless
     #   <p>The ID of the new wireless device.</p>
     #   @return [String]
     class CreateWirelessDeviceResponse < Struct.new(
+      nil,
       :arn,
       :id,
       keyword_init: true
@@ -913,6 +957,7 @@ module Aws::IoTWireless
     #                   EC2 API requests</a>.</p>
     #   @return [String]
     class CreateWirelessGatewayRequest < Struct.new(
+      nil,
       :name,
       :description,
       :lo_ra_wan,
@@ -930,6 +975,7 @@ module Aws::IoTWireless
     #   <p>The ID of the new wireless gateway.</p>
     #   @return [String]
     class CreateWirelessGatewayResponse < Struct.new(
+      nil,
       :arn,
       :id,
       keyword_init: true
@@ -963,6 +1009,7 @@ module Aws::IoTWireless
     #               manage a resource.</p>
     #   @return [Array<Types::Tag>]
     class CreateWirelessGatewayTaskDefinitionRequest < Struct.new(
+      nil,
       :auto_create_tasks,
       :name,
       :update,
@@ -980,6 +1027,7 @@ module Aws::IoTWireless
     #   <p>The Amazon Resource Name of the resource.</p>
     #   @return [String]
     class CreateWirelessGatewayTaskDefinitionResponse < Struct.new(
+      nil,
       :id,
       :arn,
       keyword_init: true
@@ -994,6 +1042,7 @@ module Aws::IoTWireless
     #   <p>The ID of the WirelessGatewayTaskDefinition.</p>
     #   @return [String]
     class CreateWirelessGatewayTaskRequest < Struct.new(
+      nil,
       :id,
       :wireless_gateway_task_definition_id,
       keyword_init: true
@@ -1008,6 +1057,7 @@ module Aws::IoTWireless
     #   <p>The status of the request.</p>
     #   @return [String]
     class CreateWirelessGatewayTaskResponse < Struct.new(
+      nil,
       :wireless_gateway_task_definition_id,
       :status,
       keyword_init: true
@@ -1034,6 +1084,7 @@ module Aws::IoTWireless
     #   <p>The device type ID that's used for prototyping applications.</p>
     #   @return [String]
     class DakCertificateMetadata < Struct.new(
+      nil,
       :certificate_id,
       :max_allowed_signature,
       :factory_support,
@@ -1048,6 +1099,7 @@ module Aws::IoTWireless
     #   <p>The name of the resource to delete.</p>
     #   @return [String]
     class DeleteDestinationRequest < Struct.new(
+      nil,
       :name,
       keyword_init: true
     )
@@ -1055,6 +1107,7 @@ module Aws::IoTWireless
     end
 
     class DeleteDestinationResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1064,6 +1117,7 @@ module Aws::IoTWireless
     #   <p>The ID of the resource to delete.</p>
     #   @return [String]
     class DeleteDeviceProfileRequest < Struct.new(
+      nil,
       :id,
       keyword_init: true
     )
@@ -1071,6 +1125,7 @@ module Aws::IoTWireless
     end
 
     class DeleteDeviceProfileResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1080,6 +1135,7 @@ module Aws::IoTWireless
     #   <p>The ID of a FUOTA task.</p>
     #   @return [String]
     class DeleteFuotaTaskRequest < Struct.new(
+      nil,
       :id,
       keyword_init: true
     )
@@ -1087,6 +1143,7 @@ module Aws::IoTWireless
     end
 
     class DeleteFuotaTaskResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1096,6 +1153,7 @@ module Aws::IoTWireless
     #   <p>The ID of the multicast group.</p>
     #   @return [String]
     class DeleteMulticastGroupRequest < Struct.new(
+      nil,
       :id,
       keyword_init: true
     )
@@ -1103,6 +1161,7 @@ module Aws::IoTWireless
     end
 
     class DeleteMulticastGroupResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1112,6 +1171,7 @@ module Aws::IoTWireless
     #   <p>Name of the network analyzer configuration.</p>
     #   @return [String]
     class DeleteNetworkAnalyzerConfigurationRequest < Struct.new(
+      nil,
       :configuration_name,
       keyword_init: true
     )
@@ -1119,6 +1179,7 @@ module Aws::IoTWireless
     end
 
     class DeleteNetworkAnalyzerConfigurationResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1136,6 +1197,7 @@ module Aws::IoTWireless
     #   <p>The wireless device type, which can be either Sidewalk or LoRaWAN.</p>
     #   @return [String]
     class DeleteQueuedMessagesRequest < Struct.new(
+      nil,
       :id,
       :message_id,
       :wireless_device_type,
@@ -1145,6 +1207,7 @@ module Aws::IoTWireless
     end
 
     class DeleteQueuedMessagesResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1154,6 +1217,7 @@ module Aws::IoTWireless
     #   <p>The ID of the resource to delete.</p>
     #   @return [String]
     class DeleteServiceProfileRequest < Struct.new(
+      nil,
       :id,
       keyword_init: true
     )
@@ -1161,6 +1225,7 @@ module Aws::IoTWireless
     end
 
     class DeleteServiceProfileResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1170,6 +1235,7 @@ module Aws::IoTWireless
     #   <p>The unique identifier of the import task to be deleted.</p>
     #   @return [String]
     class DeleteWirelessDeviceImportTaskRequest < Struct.new(
+      nil,
       :id,
       keyword_init: true
     )
@@ -1177,6 +1243,7 @@ module Aws::IoTWireless
     end
 
     class DeleteWirelessDeviceImportTaskResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1186,6 +1253,7 @@ module Aws::IoTWireless
     #   <p>The ID of the resource to delete.</p>
     #   @return [String]
     class DeleteWirelessDeviceRequest < Struct.new(
+      nil,
       :id,
       keyword_init: true
     )
@@ -1193,6 +1261,7 @@ module Aws::IoTWireless
     end
 
     class DeleteWirelessDeviceResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1202,6 +1271,7 @@ module Aws::IoTWireless
     #   <p>The ID of the resource to delete.</p>
     #   @return [String]
     class DeleteWirelessGatewayRequest < Struct.new(
+      nil,
       :id,
       keyword_init: true
     )
@@ -1209,6 +1279,7 @@ module Aws::IoTWireless
     end
 
     class DeleteWirelessGatewayResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1218,6 +1289,7 @@ module Aws::IoTWireless
     #   <p>The ID of the resource to delete.</p>
     #   @return [String]
     class DeleteWirelessGatewayTaskDefinitionRequest < Struct.new(
+      nil,
       :id,
       keyword_init: true
     )
@@ -1225,6 +1297,7 @@ module Aws::IoTWireless
     end
 
     class DeleteWirelessGatewayTaskDefinitionResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1234,6 +1307,7 @@ module Aws::IoTWireless
     #   <p>The ID of the resource to delete.</p>
     #   @return [String]
     class DeleteWirelessGatewayTaskRequest < Struct.new(
+      nil,
       :id,
       keyword_init: true
     )
@@ -1241,6 +1315,7 @@ module Aws::IoTWireless
     end
 
     class DeleteWirelessGatewayTaskResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1254,6 +1329,7 @@ module Aws::IoTWireless
     #                   <code>LoRaWAN</code> or <code>Sidewalk</code>.</p>
     #   @return [String]
     class DeregisterWirelessDeviceRequest < Struct.new(
+      nil,
       :identifier,
       :wireless_device_type,
       keyword_init: true
@@ -1262,6 +1338,7 @@ module Aws::IoTWireless
     end
 
     class DeregisterWirelessDeviceResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1287,6 +1364,7 @@ module Aws::IoTWireless
     #   <p>The ARN of the IAM Role that authorizes the destination.</p>
     #   @return [String]
     class Destinations < Struct.new(
+      nil,
       :arn,
       :name,
       :expression_type,
@@ -1309,6 +1387,7 @@ module Aws::IoTWireless
     #   <p>The ID of the device profile.</p>
     #   @return [String]
     class DeviceProfile < Struct.new(
+      nil,
       :arn,
       :name,
       :id,
@@ -1328,6 +1407,7 @@ module Aws::IoTWireless
     #               enabled or disabled.</p>
     #   @return [String]
     class DeviceRegistrationStateEventConfiguration < Struct.new(
+      nil,
       :sidewalk,
       :wireless_device_id_event_topic,
       keyword_init: true
@@ -1342,6 +1422,7 @@ module Aws::IoTWireless
     #               disabling Sidewalk related event topics.</p>
     #   @return [Types::SidewalkResourceTypeEventConfiguration]
     class DeviceRegistrationStateResourceTypeEventConfiguration < Struct.new(
+      nil,
       :sidewalk,
       keyword_init: true
     )
@@ -1356,6 +1437,7 @@ module Aws::IoTWireless
     #   <p>The dimension's value.</p>
     #   @return [String]
     class Dimension < Struct.new(
+      nil,
       :name,
       :value,
       keyword_init: true
@@ -1370,6 +1452,7 @@ module Aws::IoTWireless
     #   <p>The partner type.</p>
     #   @return [String]
     class DisassociateAwsAccountFromPartnerAccountRequest < Struct.new(
+      nil,
       :partner_account_id,
       :partner_type,
       keyword_init: true
@@ -1378,6 +1461,7 @@ module Aws::IoTWireless
     end
 
     class DisassociateAwsAccountFromPartnerAccountResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1390,6 +1474,7 @@ module Aws::IoTWireless
     #   <p>The ID of the multicast group.</p>
     #   @return [String]
     class DisassociateMulticastGroupFromFuotaTaskRequest < Struct.new(
+      nil,
       :id,
       :multicast_group_id,
       keyword_init: true
@@ -1398,6 +1483,7 @@ module Aws::IoTWireless
     end
 
     class DisassociateMulticastGroupFromFuotaTaskResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1410,6 +1496,7 @@ module Aws::IoTWireless
     #   <p>The ID of the wireless device.</p>
     #   @return [String]
     class DisassociateWirelessDeviceFromFuotaTaskRequest < Struct.new(
+      nil,
       :id,
       :wireless_device_id,
       keyword_init: true
@@ -1418,6 +1505,7 @@ module Aws::IoTWireless
     end
 
     class DisassociateWirelessDeviceFromFuotaTaskResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1430,6 +1518,7 @@ module Aws::IoTWireless
     #   <p>The ID of the wireless device.</p>
     #   @return [String]
     class DisassociateWirelessDeviceFromMulticastGroupRequest < Struct.new(
+      nil,
       :id,
       :wireless_device_id,
       keyword_init: true
@@ -1438,6 +1527,7 @@ module Aws::IoTWireless
     end
 
     class DisassociateWirelessDeviceFromMulticastGroupResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1447,6 +1537,7 @@ module Aws::IoTWireless
     #   <p>The ID of the resource to update.</p>
     #   @return [String]
     class DisassociateWirelessDeviceFromThingRequest < Struct.new(
+      nil,
       :id,
       keyword_init: true
     )
@@ -1454,6 +1545,7 @@ module Aws::IoTWireless
     end
 
     class DisassociateWirelessDeviceFromThingResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1463,6 +1555,7 @@ module Aws::IoTWireless
     #   <p>The ID of the resource to update.</p>
     #   @return [String]
     class DisassociateWirelessGatewayFromCertificateRequest < Struct.new(
+      nil,
       :id,
       keyword_init: true
     )
@@ -1470,6 +1563,7 @@ module Aws::IoTWireless
     end
 
     class DisassociateWirelessGatewayFromCertificateResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1479,6 +1573,7 @@ module Aws::IoTWireless
     #   <p>The ID of the resource to update.</p>
     #   @return [String]
     class DisassociateWirelessGatewayFromThingRequest < Struct.new(
+      nil,
       :id,
       keyword_init: true
     )
@@ -1486,6 +1581,7 @@ module Aws::IoTWireless
     end
 
     class DisassociateWirelessGatewayFromThingResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1508,6 +1604,7 @@ module Aws::IoTWireless
     #   <p>LoRaWAN router info.</p>
     #   @return [Types::LoRaWANSendDataToDevice]
     class DownlinkQueueMessage < Struct.new(
+      nil,
       :message_id,
       :transmit_mode,
       :received_at,
@@ -1531,6 +1628,7 @@ module Aws::IoTWireless
     #   <p>Object of all event configurations and the status of the event topics.</p>
     #   @return [Types::EventNotificationItemConfigurations]
     class EventConfigurationItem < Struct.new(
+      nil,
       :identifier,
       :identifier_type,
       :partner_type,
@@ -1557,6 +1655,7 @@ module Aws::IoTWireless
     #   <p>Message delivery status event configuration for an event configuration item.</p>
     #   @return [Types::MessageDeliveryStatusEventConfiguration]
     class EventNotificationItemConfigurations < Struct.new(
+      nil,
       :device_registration_state,
       :proximity,
       :join,
@@ -1585,6 +1684,7 @@ module Aws::IoTWireless
     #   <p>Optional LoRaWAN application information, which can be used for geolocation.</p>
     #   @return [Array<Types::ApplicationConfig>]
     class FPorts < Struct.new(
+      nil,
       :fuota,
       :multicast,
       :clock_sync,
@@ -1606,6 +1706,7 @@ module Aws::IoTWireless
     #   <p>The name of a FUOTA task.</p>
     #   @return [String]
     class FuotaTask < Struct.new(
+      nil,
       :id,
       :arn,
       :name,
@@ -1627,6 +1728,7 @@ module Aws::IoTWireless
     #               or to <code>INFO</code> for more detailed logs.</p>
     #   @return [String]
     class FuotaTaskEventLogOption < Struct.new(
+      nil,
       :event,
       :log_level,
       keyword_init: true
@@ -1648,6 +1750,7 @@ module Aws::IoTWireless
     #   <p>The list of FUOTA task event log options.</p>
     #   @return [Array<Types::FuotaTaskEventLogOption>]
     class FuotaTaskLogOption < Struct.new(
+      nil,
       :type,
       :log_level,
       :events,
@@ -1667,6 +1770,7 @@ module Aws::IoTWireless
     #               device.</p>
     #   @return [Integer]
     class GatewayListItem < Struct.new(
+      nil,
       :gateway_id,
       :downlink_frequency,
       keyword_init: true
@@ -1678,6 +1782,7 @@ module Aws::IoTWireless
     #   <p>The name of the resource to get.</p>
     #   @return [String]
     class GetDestinationRequest < Struct.new(
+      nil,
       :name,
       keyword_init: true
     )
@@ -1703,6 +1808,7 @@ module Aws::IoTWireless
     #   <p>The ARN of the IAM Role that authorizes the destination.</p>
     #   @return [String]
     class GetDestinationResponse < Struct.new(
+      nil,
       :arn,
       :name,
       :expression,
@@ -1718,6 +1824,7 @@ module Aws::IoTWireless
     #   <p>The ID of the resource to get.</p>
     #   @return [String]
     class GetDeviceProfileRequest < Struct.new(
+      nil,
       :id,
       keyword_init: true
     )
@@ -1740,6 +1847,7 @@ module Aws::IoTWireless
     #   <p>Information about the Sidewalk parameters in the device profile.</p>
     #   @return [Types::SidewalkGetDeviceProfile]
     class GetDeviceProfileResponse < Struct.new(
+      nil,
       :arn,
       :name,
       :id,
@@ -1751,6 +1859,7 @@ module Aws::IoTWireless
     end
 
     class GetEventConfigurationByResourceTypesRequest < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1772,6 +1881,7 @@ module Aws::IoTWireless
     #   <p>Resource type event configuration object for the message delivery status event.</p>
     #   @return [Types::MessageDeliveryStatusResourceTypeEventConfiguration]
     class GetEventConfigurationByResourceTypesResponse < Struct.new(
+      nil,
       :device_registration_state,
       :proximity,
       :join,
@@ -1786,6 +1896,7 @@ module Aws::IoTWireless
     #   <p>The ID of a FUOTA task.</p>
     #   @return [String]
     class GetFuotaTaskRequest < Struct.new(
+      nil,
       :id,
       keyword_init: true
     )
@@ -1845,6 +1956,7 @@ module Aws::IoTWireless
     #               FUOTA, such as the software version. It is a binary field encoded in base64.</p>
     #   @return [String]
     class GetFuotaTaskResponse < Struct.new(
+      nil,
       :arn,
       :id,
       :status,
@@ -1864,6 +1976,7 @@ module Aws::IoTWireless
     end
 
     class GetLogLevelsByResourceTypesRequest < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1884,6 +1997,7 @@ module Aws::IoTWireless
     #   <p>The list of FUOTA task log options.</p>
     #   @return [Array<Types::FuotaTaskLogOption>]
     class GetLogLevelsByResourceTypesResponse < Struct.new(
+      nil,
       :default_log_level,
       :wireless_gateway_log_options,
       :wireless_device_log_options,
@@ -1894,6 +2008,7 @@ module Aws::IoTWireless
     end
 
     class GetMetricConfigurationRequest < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1903,6 +2018,7 @@ module Aws::IoTWireless
     #   <p>The configuration status of the AWS account for summary metric aggregation.</p>
     #   @return [Types::SummaryMetricConfiguration]
     class GetMetricConfigurationResponse < Struct.new(
+      nil,
       :summary_metric,
       keyword_init: true
     )
@@ -1913,6 +2029,7 @@ module Aws::IoTWireless
     #   <p>The list of queries to retrieve the summary metrics.</p>
     #   @return [Array<Types::SummaryMetricQuery>]
     class GetMetricsRequest < Struct.new(
+      nil,
       :summary_metric_queries,
       keyword_init: true
     )
@@ -1923,6 +2040,7 @@ module Aws::IoTWireless
     #   <p>The list of summary metrics that were retrieved.</p>
     #   @return [Array<Types::SummaryMetricQueryResult>]
     class GetMetricsResponse < Struct.new(
+      nil,
       :summary_metric_query_results,
       keyword_init: true
     )
@@ -1933,6 +2051,7 @@ module Aws::IoTWireless
     #   <p>The ID of the multicast group.</p>
     #   @return [String]
     class GetMulticastGroupRequest < Struct.new(
+      nil,
       :id,
       keyword_init: true
     )
@@ -1962,6 +2081,7 @@ module Aws::IoTWireless
     #   <p>Created at timestamp for the resource.</p>
     #   @return [Time]
     class GetMulticastGroupResponse < Struct.new(
+      nil,
       :arn,
       :id,
       :name,
@@ -1978,6 +2098,7 @@ module Aws::IoTWireless
     #   <p>The ID of the multicast group.</p>
     #   @return [String]
     class GetMulticastGroupSessionRequest < Struct.new(
+      nil,
       :id,
       keyword_init: true
     )
@@ -1988,6 +2109,7 @@ module Aws::IoTWireless
     #   <p>The LoRaWAN information used with the multicast session.</p>
     #   @return [Types::LoRaWANMulticastSession]
     class GetMulticastGroupSessionResponse < Struct.new(
+      nil,
       :lo_ra_wan,
       keyword_init: true
     )
@@ -1998,6 +2120,7 @@ module Aws::IoTWireless
     #   <p>Name of the network analyzer configuration.</p>
     #   @return [String]
     class GetNetworkAnalyzerConfigurationRequest < Struct.new(
+      nil,
       :configuration_name,
       keyword_init: true
     )
@@ -2029,6 +2152,7 @@ module Aws::IoTWireless
     #               configuration.</p>
     #   @return [Array<String>]
     class GetNetworkAnalyzerConfigurationResponse < Struct.new(
+      nil,
       :trace_content,
       :wireless_devices,
       :wireless_gateways,
@@ -2048,6 +2172,7 @@ module Aws::IoTWireless
     #   <p>The partner type.</p>
     #   @return [String]
     class GetPartnerAccountRequest < Struct.new(
+      nil,
       :partner_account_id,
       :partner_type,
       keyword_init: true
@@ -2062,6 +2187,7 @@ module Aws::IoTWireless
     #   <p>Whether the partner account is linked to the AWS account.</p>
     #   @return [Boolean]
     class GetPartnerAccountResponse < Struct.new(
+      nil,
       :sidewalk,
       :account_linked,
       keyword_init: true
@@ -2083,6 +2209,7 @@ module Aws::IoTWireless
     #   <p>Resource type of the resource for which position configuration is retrieved.</p>
     #   @return [String]
     class GetPositionConfigurationRequest < Struct.new(
+      nil,
       :resource_identifier,
       :resource_type,
       keyword_init: true
@@ -2100,6 +2227,7 @@ module Aws::IoTWireless
     #               device's position data for use by AWS IoT Core for LoRaWAN.</p>
     #   @return [String]
     class GetPositionConfigurationResponse < Struct.new(
+      nil,
       :solvers,
       :destination,
       keyword_init: true
@@ -2130,6 +2258,7 @@ module Aws::IoTWireless
     #               request was received will be used.</p>
     #   @return [Time]
     class GetPositionEstimateRequest < Struct.new(
+      nil,
       :wi_fi_access_points,
       :cell_towers,
       :ip,
@@ -2148,6 +2277,7 @@ module Aws::IoTWireless
     #               accuracy and confidence level. For more information and examples, see <a href="https://docs.aws.amazon.com/iot/latest/developerguide/location-resolve-console.html">Resolve device location (console)</a>.</p>
     #   @return [String]
     class GetPositionEstimateResponse < Struct.new(
+      nil,
       :geo_json_payload,
       keyword_init: true
     )
@@ -2163,6 +2293,7 @@ module Aws::IoTWireless
     #   <p>Resource type of the resource for which position information is retrieved.</p>
     #   @return [String]
     class GetPositionRequest < Struct.new(
+      nil,
       :resource_identifier,
       :resource_type,
       keyword_init: true
@@ -2194,6 +2325,7 @@ module Aws::IoTWireless
     #   <p>The timestamp at which the device's position was determined.</p>
     #   @return [String]
     class GetPositionResponse < Struct.new(
+      nil,
       :position,
       :accuracy,
       :solver_type,
@@ -2216,6 +2348,7 @@ module Aws::IoTWireless
     #               <code>PartnerAccountId</code>.</p>
     #   @return [String]
     class GetResourceEventConfigurationRequest < Struct.new(
+      nil,
       :identifier,
       :identifier_type,
       :partner_type,
@@ -2240,6 +2373,7 @@ module Aws::IoTWireless
     #   <p>Event configuration for the message delivery status event.</p>
     #   @return [Types::MessageDeliveryStatusEventConfiguration]
     class GetResourceEventConfigurationResponse < Struct.new(
+      nil,
       :device_registration_state,
       :proximity,
       :join,
@@ -2259,6 +2393,7 @@ module Aws::IoTWireless
     #                   <code>WirelessGateway</code>, or <code>FuotaTask</code>.</p>
     #   @return [String]
     class GetResourceLogLevelRequest < Struct.new(
+      nil,
       :resource_identifier,
       :resource_type,
       keyword_init: true
@@ -2272,6 +2407,7 @@ module Aws::IoTWireless
     #               or to <code>INFO</code> for more detailed logs.</p>
     #   @return [String]
     class GetResourceLogLevelResponse < Struct.new(
+      nil,
       :log_level,
       keyword_init: true
     )
@@ -2288,6 +2424,7 @@ module Aws::IoTWireless
     #               wireless device or a wireless gateway.</p>
     #   @return [String]
     class GetResourcePositionRequest < Struct.new(
+      nil,
       :resource_identifier,
       :resource_type,
       keyword_init: true
@@ -2301,6 +2438,7 @@ module Aws::IoTWireless
     #               structures. For more information, see <a href="https://geojson.org/">GeoJSON</a>.</p>
     #   @return [String]
     class GetResourcePositionResponse < Struct.new(
+      nil,
       :geo_json_payload,
       keyword_init: true
     )
@@ -2313,6 +2451,7 @@ module Aws::IoTWireless
     #               Network Server endpoint.</p>
     #   @return [String]
     class GetServiceEndpointRequest < Struct.new(
+      nil,
       :service_type,
       keyword_init: true
     )
@@ -2329,6 +2468,7 @@ module Aws::IoTWireless
     #   <p>The Root CA of the server trust certificate.</p>
     #   @return [String]
     class GetServiceEndpointResponse < Struct.new(
+      nil,
       :service_type,
       :service_endpoint,
       :server_trust,
@@ -2341,6 +2481,7 @@ module Aws::IoTWireless
     #   <p>The ID of the resource to get.</p>
     #   @return [String]
     class GetServiceProfileRequest < Struct.new(
+      nil,
       :id,
       keyword_init: true
     )
@@ -2360,6 +2501,7 @@ module Aws::IoTWireless
     #   <p>Information about the service profile.</p>
     #   @return [Types::LoRaWANGetServiceProfileInfo]
     class GetServiceProfileResponse < Struct.new(
+      nil,
       :arn,
       :name,
       :id,
@@ -2373,6 +2515,7 @@ module Aws::IoTWireless
     #   <p>The identifier of the import task for which information is requested.</p>
     #   @return [String]
     class GetWirelessDeviceImportTaskRequest < Struct.new(
+      nil,
       :id,
       keyword_init: true
     )
@@ -2419,6 +2562,7 @@ module Aws::IoTWireless
     #               task.</p>
     #   @return [Integer]
     class GetWirelessDeviceImportTaskResponse < Struct.new(
+      nil,
       :id,
       :arn,
       :destination_name,
@@ -2442,6 +2586,7 @@ module Aws::IoTWireless
     #   <p>The type of identifier used in <code>identifier</code>.</p>
     #   @return [String]
     class GetWirelessDeviceRequest < Struct.new(
+      nil,
       :identifier,
       :identifier_type,
       keyword_init: true
@@ -2485,6 +2630,7 @@ module Aws::IoTWireless
     #               information.</p>
     #   @return [String]
     class GetWirelessDeviceResponse < Struct.new(
+      nil,
       :type,
       :name,
       :description,
@@ -2505,6 +2651,7 @@ module Aws::IoTWireless
     #   <p>The ID of the wireless device for which to get the data.</p>
     #   @return [String]
     class GetWirelessDeviceStatisticsRequest < Struct.new(
+      nil,
       :wireless_device_id,
       keyword_init: true
     )
@@ -2527,6 +2674,7 @@ module Aws::IoTWireless
     #   <p>MetaData for Sidewalk device.</p>
     #   @return [Types::SidewalkDeviceMetadata]
     class GetWirelessDeviceStatisticsResponse < Struct.new(
+      nil,
       :wireless_device_id,
       :last_uplink_received_at,
       :lo_ra_wan,
@@ -2540,6 +2688,7 @@ module Aws::IoTWireless
     #   <p>The ID of the resource to get.</p>
     #   @return [String]
     class GetWirelessGatewayCertificateRequest < Struct.new(
+      nil,
       :id,
       keyword_init: true
     )
@@ -2554,6 +2703,7 @@ module Aws::IoTWireless
     #               the LoRaWANNetworkServer endpoint.</p>
     #   @return [String]
     class GetWirelessGatewayCertificateResponse < Struct.new(
+      nil,
       :iot_certificate_id,
       :lo_ra_wan_network_server_certificate_id,
       keyword_init: true
@@ -2565,6 +2715,7 @@ module Aws::IoTWireless
     #   <p>The ID of the resource to get.</p>
     #   @return [String]
     class GetWirelessGatewayFirmwareInformationRequest < Struct.new(
+      nil,
       :id,
       keyword_init: true
     )
@@ -2575,6 +2726,7 @@ module Aws::IoTWireless
     #   <p>Information about the wireless gateway's firmware.</p>
     #   @return [Types::LoRaWANGatewayCurrentVersion]
     class GetWirelessGatewayFirmwareInformationResponse < Struct.new(
+      nil,
       :lo_ra_wan,
       keyword_init: true
     )
@@ -2588,6 +2740,7 @@ module Aws::IoTWireless
     #   <p>The type of identifier used in <code>identifier</code>.</p>
     #   @return [String]
     class GetWirelessGatewayRequest < Struct.new(
+      nil,
       :identifier,
       :identifier_type,
       keyword_init: true
@@ -2618,6 +2771,7 @@ module Aws::IoTWireless
     #   <p>The ARN of the thing associated with the wireless gateway.</p>
     #   @return [String]
     class GetWirelessGatewayResponse < Struct.new(
+      nil,
       :name,
       :id,
       :description,
@@ -2634,6 +2788,7 @@ module Aws::IoTWireless
     #   <p>The ID of the wireless gateway for which to get the data.</p>
     #   @return [String]
     class GetWirelessGatewayStatisticsRequest < Struct.new(
+      nil,
       :wireless_gateway_id,
       keyword_init: true
     )
@@ -2653,6 +2808,7 @@ module Aws::IoTWireless
     #   <p>The connection status of the wireless gateway.</p>
     #   @return [String]
     class GetWirelessGatewayStatisticsResponse < Struct.new(
+      nil,
       :wireless_gateway_id,
       :last_uplink_received_at,
       :connection_status,
@@ -2665,6 +2821,7 @@ module Aws::IoTWireless
     #   <p>The ID of the resource to get.</p>
     #   @return [String]
     class GetWirelessGatewayTaskDefinitionRequest < Struct.new(
+      nil,
       :id,
       keyword_init: true
     )
@@ -2686,6 +2843,7 @@ module Aws::IoTWireless
     #   <p>The Amazon Resource Name of the resource.</p>
     #   @return [String]
     class GetWirelessGatewayTaskDefinitionResponse < Struct.new(
+      nil,
       :auto_create_tasks,
       :name,
       :update,
@@ -2704,6 +2862,7 @@ module Aws::IoTWireless
     #   <p>The ID of the resource to get.</p>
     #   @return [String]
     class GetWirelessGatewayTaskRequest < Struct.new(
+      nil,
       :id,
       keyword_init: true
     )
@@ -2729,6 +2888,7 @@ module Aws::IoTWireless
     #   <p>The status of the request.</p>
     #   @return [String]
     class GetWirelessGatewayTaskResponse < Struct.new(
+      nil,
       :wireless_gateway_id,
       :wireless_gateway_task_definition_id,
       :last_uplink_received_at,
@@ -2747,6 +2907,7 @@ module Aws::IoTWireless
     #   <p>GERAN (GSM EDGE Radio Access Network) cell global identifier.</p>
     #   @return [Integer]
     class GlobalIdentity < Struct.new(
+      nil,
       :lac,
       :geran_cid,
       keyword_init: true
@@ -2782,6 +2943,7 @@ module Aws::IoTWireless
     #               have an accuracy of at least 10 meters.</p>
     #   @return [Boolean]
     class Gnss < Struct.new(
+      nil,
       :payload,
       :capture_time,
       :capture_time_accuracy,
@@ -2807,6 +2969,7 @@ module Aws::IoTWireless
     #   <p>GSM broadcast control channel.</p>
     #   @return [Integer]
     class GsmLocalId < Struct.new(
+      nil,
       :bsic,
       :bcch,
       keyword_init: true
@@ -2829,6 +2992,7 @@ module Aws::IoTWireless
     #   <p>Global identity information of the GSM object.</p>
     #   @return [Types::GlobalIdentity]
     class GsmNmrObj < Struct.new(
+      nil,
       :bsic,
       :bcch,
       :rx_level,
@@ -2866,6 +3030,7 @@ module Aws::IoTWireless
     #   <p>GSM object for network measurement reports.</p>
     #   @return [Array<Types::GsmNmrObj>]
     class GsmObj < Struct.new(
+      nil,
       :mcc,
       :mnc,
       :lac,
@@ -2893,6 +3058,7 @@ module Aws::IoTWireless
     #   <p>The time at which the status information was last updated.</p>
     #   @return [Time]
     class ImportedSidewalkDevice < Struct.new(
+      nil,
       :sidewalk_manufacturing_sn,
       :onboarding_status,
       :onboarding_status_reason,
@@ -2908,6 +3074,7 @@ module Aws::IoTWireless
     #               task.</p>
     #   @return [Types::ImportedSidewalkDevice]
     class ImportedWirelessDevice < Struct.new(
+      nil,
       :sidewalk,
       keyword_init: true
     )
@@ -2918,6 +3085,7 @@ module Aws::IoTWireless
     # @!attribute message
     #   @return [String]
     class InternalServerException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -2929,6 +3097,7 @@ module Aws::IoTWireless
     #   <p>IP address information.</p>
     #   @return [String]
     class Ip < Struct.new(
+      nil,
       :ip_address,
       keyword_init: true
     )
@@ -2944,6 +3113,7 @@ module Aws::IoTWireless
     #   <p>Denotes whether the wireless device ID join event topic is enabled or disabled.</p>
     #   @return [String]
     class JoinEventConfiguration < Struct.new(
+      nil,
       :lo_ra_wan,
       :wireless_device_id_event_topic,
       keyword_init: true
@@ -2957,6 +3127,7 @@ module Aws::IoTWireless
     #               related event topics.</p>
     #   @return [Types::LoRaWANJoinResourceTypeEventConfiguration]
     class JoinResourceTypeEventConfiguration < Struct.new(
+      nil,
       :lo_ra_wan,
       keyword_init: true
     )
@@ -2972,6 +3143,7 @@ module Aws::IoTWireless
     #               results.</p>
     #   @return [String]
     class ListDestinationsRequest < Struct.new(
+      nil,
       :max_results,
       :next_token,
       keyword_init: true
@@ -2986,6 +3158,7 @@ module Aws::IoTWireless
     #   <p>The list of destinations.</p>
     #   @return [Array<Types::Destinations>]
     class ListDestinationsResponse < Struct.new(
+      nil,
       :next_token,
       :destination_list,
       keyword_init: true
@@ -3006,6 +3179,7 @@ module Aws::IoTWireless
     #                   <code>LoRaWAN</code> or <code>Sidewalk</code>.</p>
     #   @return [String]
     class ListDeviceProfilesRequest < Struct.new(
+      nil,
       :next_token,
       :max_results,
       :device_profile_type,
@@ -3021,6 +3195,7 @@ module Aws::IoTWireless
     #   <p>The list of device profiles.</p>
     #   @return [Array<Types::DeviceProfile>]
     class ListDeviceProfilesResponse < Struct.new(
+      nil,
       :next_token,
       :device_profile_list,
       keyword_init: true
@@ -3042,6 +3217,7 @@ module Aws::IoTWireless
     #   <p>The status of the devices in the import task.</p>
     #   @return [String]
     class ListDevicesForWirelessDeviceImportTaskRequest < Struct.new(
+      nil,
       :id,
       :max_results,
       :next_token,
@@ -3063,6 +3239,7 @@ module Aws::IoTWireless
     #   <p>List of wireless devices in an import task and their onboarding status.</p>
     #   @return [Array<Types::ImportedWirelessDevice>]
     class ListDevicesForWirelessDeviceImportTaskResponse < Struct.new(
+      nil,
       :next_token,
       :destination_name,
       :imported_wireless_device_list,
@@ -3083,6 +3260,7 @@ module Aws::IoTWireless
     #               results.</p>
     #   @return [String]
     class ListEventConfigurationsRequest < Struct.new(
+      nil,
       :resource_type,
       :max_results,
       :next_token,
@@ -3100,6 +3278,7 @@ module Aws::IoTWireless
     #   <p>Event configurations of all events for a single resource.</p>
     #   @return [Array<Types::EventConfigurationItem>]
     class ListEventConfigurationsResponse < Struct.new(
+      nil,
       :next_token,
       :event_configurations_list,
       keyword_init: true
@@ -3116,6 +3295,7 @@ module Aws::IoTWireless
     #   <p>The maximum number of results to return in this operation.</p>
     #   @return [Integer]
     class ListFuotaTasksRequest < Struct.new(
+      nil,
       :next_token,
       :max_results,
       keyword_init: true
@@ -3132,6 +3312,7 @@ module Aws::IoTWireless
     #   <p>Lists the FUOTA tasks registered to your AWS account.</p>
     #   @return [Array<Types::FuotaTask>]
     class ListFuotaTasksResponse < Struct.new(
+      nil,
       :next_token,
       :fuota_task_list,
       keyword_init: true
@@ -3151,6 +3332,7 @@ module Aws::IoTWireless
     #   <p>The maximum number of results to return in this operation.</p>
     #   @return [Integer]
     class ListMulticastGroupsByFuotaTaskRequest < Struct.new(
+      nil,
       :id,
       :next_token,
       :max_results,
@@ -3168,6 +3350,7 @@ module Aws::IoTWireless
     #   <p>List of multicast groups associated with a FUOTA task.</p>
     #   @return [Array<Types::MulticastGroupByFuotaTask>]
     class ListMulticastGroupsByFuotaTaskResponse < Struct.new(
+      nil,
       :next_token,
       :multicast_group_list,
       keyword_init: true
@@ -3184,6 +3367,7 @@ module Aws::IoTWireless
     #   <p>The maximum number of results to return in this operation.</p>
     #   @return [Integer]
     class ListMulticastGroupsRequest < Struct.new(
+      nil,
       :next_token,
       :max_results,
       keyword_init: true
@@ -3200,6 +3384,7 @@ module Aws::IoTWireless
     #   <p>List of multicast groups.</p>
     #   @return [Array<Types::MulticastGroup>]
     class ListMulticastGroupsResponse < Struct.new(
+      nil,
       :next_token,
       :multicast_group_list,
       keyword_init: true
@@ -3216,6 +3401,7 @@ module Aws::IoTWireless
     #               results.</p>
     #   @return [String]
     class ListNetworkAnalyzerConfigurationsRequest < Struct.new(
+      nil,
       :max_results,
       :next_token,
       keyword_init: true
@@ -3230,6 +3416,7 @@ module Aws::IoTWireless
     #   <p>The list of network analyzer configurations.</p>
     #   @return [Array<Types::NetworkAnalyzerConfigurations>]
     class ListNetworkAnalyzerConfigurationsResponse < Struct.new(
+      nil,
       :next_token,
       :network_analyzer_configuration_list,
       keyword_init: true
@@ -3246,6 +3433,7 @@ module Aws::IoTWireless
     #   <p>The maximum number of results to return in this operation.</p>
     #   @return [Integer]
     class ListPartnerAccountsRequest < Struct.new(
+      nil,
       :next_token,
       :max_results,
       keyword_init: true
@@ -3260,6 +3448,7 @@ module Aws::IoTWireless
     #   <p>The Sidewalk account credentials.</p>
     #   @return [Array<Types::SidewalkAccountInfoWithFingerprint>]
     class ListPartnerAccountsResponse < Struct.new(
+      nil,
       :next_token,
       :sidewalk,
       keyword_init: true
@@ -3281,6 +3470,7 @@ module Aws::IoTWireless
     #               results.</p>
     #   @return [String]
     class ListPositionConfigurationsRequest < Struct.new(
+      nil,
       :resource_type,
       :max_results,
       :next_token,
@@ -3298,6 +3488,7 @@ module Aws::IoTWireless
     #   <p>The token to use to get the next set of results, or <b>null</b> if there are no additional results.</p>
     #   @return [String]
     class ListPositionConfigurationsResponse < Struct.new(
+      nil,
       :position_configuration_list,
       :next_token,
       keyword_init: true
@@ -3321,6 +3512,7 @@ module Aws::IoTWireless
     #   <p>The wireless device type, whic can be either Sidewalk or LoRaWAN.</p>
     #   @return [String]
     class ListQueuedMessagesRequest < Struct.new(
+      nil,
       :id,
       :next_token,
       :max_results,
@@ -3339,6 +3531,7 @@ module Aws::IoTWireless
     #   <p>The messages in the downlink queue.</p>
     #   @return [Array<Types::DownlinkQueueMessage>]
     class ListQueuedMessagesResponse < Struct.new(
+      nil,
       :next_token,
       :downlink_queue_messages_list,
       keyword_init: true
@@ -3355,6 +3548,7 @@ module Aws::IoTWireless
     #   <p>The maximum number of results to return in this operation.</p>
     #   @return [Integer]
     class ListServiceProfilesRequest < Struct.new(
+      nil,
       :next_token,
       :max_results,
       keyword_init: true
@@ -3369,6 +3563,7 @@ module Aws::IoTWireless
     #   <p>The list of service profiles.</p>
     #   @return [Array<Types::ServiceProfile>]
     class ListServiceProfilesResponse < Struct.new(
+      nil,
       :next_token,
       :service_profile_list,
       keyword_init: true
@@ -3380,6 +3575,7 @@ module Aws::IoTWireless
     #   <p>The ARN of the resource for which you want to list tags.</p>
     #   @return [String]
     class ListTagsForResourceRequest < Struct.new(
+      nil,
       :resource_arn,
       keyword_init: true
     )
@@ -3391,6 +3587,7 @@ module Aws::IoTWireless
     #               manage a resource.</p>
     #   @return [Array<Types::Tag>]
     class ListTagsForResourceResponse < Struct.new(
+      nil,
       :tags,
       keyword_init: true
     )
@@ -3405,6 +3602,7 @@ module Aws::IoTWireless
     #               response; otherwise <code>null</code> to receive the first set of results.</p>
     #   @return [String]
     class ListWirelessDeviceImportTasksRequest < Struct.new(
+      nil,
       :max_results,
       :next_token,
       keyword_init: true
@@ -3421,6 +3619,7 @@ module Aws::IoTWireless
     #               import task.</p>
     #   @return [Array<Types::WirelessDeviceImportTask>]
     class ListWirelessDeviceImportTasksResponse < Struct.new(
+      nil,
       :next_token,
       :wireless_device_import_task_list,
       keyword_init: true
@@ -3455,6 +3654,7 @@ module Aws::IoTWireless
     #   <p>The ID of the multicast group.</p>
     #   @return [String]
     class ListWirelessDevicesRequest < Struct.new(
+      nil,
       :max_results,
       :next_token,
       :destination_name,
@@ -3475,6 +3675,7 @@ module Aws::IoTWireless
     #   <p>The ID of the wireless device.</p>
     #   @return [Array<Types::WirelessDeviceStatistics>]
     class ListWirelessDevicesResponse < Struct.new(
+      nil,
       :next_token,
       :wireless_device_list,
       keyword_init: true
@@ -3495,6 +3696,7 @@ module Aws::IoTWireless
     #               definition type.</p>
     #   @return [String]
     class ListWirelessGatewayTaskDefinitionsRequest < Struct.new(
+      nil,
       :max_results,
       :next_token,
       :task_definition_type,
@@ -3510,6 +3712,7 @@ module Aws::IoTWireless
     #   <p>The list of task definitions.</p>
     #   @return [Array<Types::UpdateWirelessGatewayTaskEntry>]
     class ListWirelessGatewayTaskDefinitionsResponse < Struct.new(
+      nil,
       :next_token,
       :task_definitions,
       keyword_init: true
@@ -3526,6 +3729,7 @@ module Aws::IoTWireless
     #   <p>The maximum number of results to return in this operation.</p>
     #   @return [Integer]
     class ListWirelessGatewaysRequest < Struct.new(
+      nil,
       :next_token,
       :max_results,
       keyword_init: true
@@ -3540,6 +3744,7 @@ module Aws::IoTWireless
     #   <p>The ID of the wireless gateway.</p>
     #   @return [Array<Types::WirelessGatewayStatistics>]
     class ListWirelessGatewaysResponse < Struct.new(
+      nil,
       :next_token,
       :wireless_gateway_list,
       keyword_init: true
@@ -3553,6 +3758,7 @@ module Aws::IoTWireless
     #               disabled.</p>
     #   @return [String]
     class LoRaWANConnectionStatusEventNotificationConfigurations < Struct.new(
+      nil,
       :gateway_eui_event_topic,
       keyword_init: true
     )
@@ -3565,6 +3771,7 @@ module Aws::IoTWireless
     #               disabled.</p>
     #   @return [String]
     class LoRaWANConnectionStatusResourceTypeEventConfiguration < Struct.new(
+      nil,
       :wireless_gateway_event_topic,
       keyword_init: true
     )
@@ -3597,6 +3804,7 @@ module Aws::IoTWireless
     #   <p>List of FPort assigned for different LoRaWAN application packages to use</p>
     #   @return [Types::FPorts]
     class LoRaWANDevice < Struct.new(
+      nil,
       :dev_eui,
       :device_profile_id,
       :service_profile_id,
@@ -3633,6 +3841,7 @@ module Aws::IoTWireless
     #   <p>Information about the LoRaWAN public network accessed by the device.</p>
     #   @return [Array<Types::LoRaWANPublicGatewayMetadata>]
     class LoRaWANDeviceMetadata < Struct.new(
+      nil,
       :dev_eui,
       :f_port,
       :data_rate,
@@ -3705,6 +3914,7 @@ module Aws::IoTWireless
     #   <p>The Supports32BitFCnt value.</p>
     #   @return [Boolean]
     class LoRaWANDeviceProfile < Struct.new(
+      nil,
       :supports_class_b,
       :class_b_timeout,
       :ping_slot_period,
@@ -3741,6 +3951,7 @@ module Aws::IoTWireless
     #   <p>Supported RfRegions</p>
     #   @return [String]
     class LoRaWANFuotaTask < Struct.new(
+      nil,
       :rf_region,
       keyword_init: true
     )
@@ -3755,6 +3966,7 @@ module Aws::IoTWireless
     #   <p>Start time of a FUOTA task.</p>
     #   @return [Time]
     class LoRaWANFuotaTaskGetInfo < Struct.new(
+      nil,
       :rf_region,
       :start_time,
       keyword_init: true
@@ -3787,6 +3999,7 @@ module Aws::IoTWireless
     #   <p>The MaxEIRP value.</p>
     #   @return [Float]
     class LoRaWANGateway < Struct.new(
+      nil,
       :gateway_eui,
       :rf_region,
       :join_eui_filters,
@@ -3804,6 +4017,7 @@ module Aws::IoTWireless
     #   <p>The version of the gateways that should receive the update.</p>
     #   @return [Types::LoRaWANGatewayVersion]
     class LoRaWANGatewayCurrentVersion < Struct.new(
+      nil,
       :current_version,
       keyword_init: true
     )
@@ -3821,6 +4035,7 @@ module Aws::IoTWireless
     #   <p>The RSSI value.</p>
     #   @return [Float]
     class LoRaWANGatewayMetadata < Struct.new(
+      nil,
       :gateway_eui,
       :snr,
       :rssi,
@@ -3840,6 +4055,7 @@ module Aws::IoTWireless
     #   <p>The basic station version of the wireless gateway.</p>
     #   @return [String]
     class LoRaWANGatewayVersion < Struct.new(
+      nil,
       :package_version,
       :model,
       :station,
@@ -3927,6 +4143,7 @@ module Aws::IoTWireless
     #            </p>
     #   @return [Integer]
     class LoRaWANGetServiceProfileInfo < Struct.new(
+      nil,
       :ul_rate,
       :ul_bucket_size,
       :ul_rate_policy,
@@ -3974,6 +4191,7 @@ module Aws::IoTWireless
     #   <p>Denotes whether the Dev EUI join event topic is enabled or disabled.</p>
     #   @return [String]
     class LoRaWANJoinEventNotificationConfigurations < Struct.new(
+      nil,
       :dev_eui_event_topic,
       keyword_init: true
     )
@@ -3985,6 +4203,7 @@ module Aws::IoTWireless
     #   <p>Denotes whether the wireless device join event topic is enabled or disabled.</p>
     #   @return [String]
     class LoRaWANJoinResourceTypeEventConfiguration < Struct.new(
+      nil,
       :wireless_device_event_topic,
       keyword_init: true
     )
@@ -3996,6 +4215,7 @@ module Aws::IoTWireless
     #   <p>The DevEUI value.</p>
     #   @return [String]
     class LoRaWANListDevice < Struct.new(
+      nil,
       :dev_eui,
       keyword_init: true
     )
@@ -4015,6 +4235,7 @@ module Aws::IoTWireless
     #               transmission interval as the time interval between each message.</p>
     #   @return [Types::ParticipatingGatewaysMulticast]
     class LoRaWANMulticast < Struct.new(
+      nil,
       :rf_region,
       :dl_class,
       :participating_gateways,
@@ -4043,6 +4264,7 @@ module Aws::IoTWireless
     #               transmission interval as the time interval between each message.</p>
     #   @return [Types::ParticipatingGatewaysMulticast]
     class LoRaWANMulticastGet < Struct.new(
+      nil,
       :rf_region,
       :dl_class,
       :number_of_devices_requested,
@@ -4058,6 +4280,7 @@ module Aws::IoTWireless
     #   <p>The Fport value.</p>
     #   @return [Integer]
     class LoRaWANMulticastMetadata < Struct.new(
+      nil,
       :f_port,
       keyword_init: true
     )
@@ -4086,6 +4309,7 @@ module Aws::IoTWireless
     #   <p>The PingSlotPeriod value.</p>
     #   @return [Integer]
     class LoRaWANMulticastSession < Struct.new(
+      nil,
       :dl_dr,
       :dl_freq,
       :session_start_time,
@@ -4116,6 +4340,7 @@ module Aws::IoTWireless
     #   <p>Boolean that indicates whether downlink is allowed using the network.</p>
     #   @return [Boolean]
     class LoRaWANPublicGatewayMetadata < Struct.new(
+      nil,
       :provider_net_id,
       :id,
       :rssi,
@@ -4136,6 +4361,7 @@ module Aws::IoTWireless
     #               wireless device is running in class B or class C mode.</p>
     #   @return [Types::ParticipatingGateways]
     class LoRaWANSendDataToDevice < Struct.new(
+      nil,
       :f_port,
       :participating_gateways,
       keyword_init: true
@@ -4180,6 +4406,7 @@ module Aws::IoTWireless
     #            </p>
     #   @return [Integer]
     class LoRaWANServiceProfile < Struct.new(
+      nil,
       :add_gw_metadata,
       :dr_min,
       :dr_max,
@@ -4206,6 +4433,7 @@ module Aws::IoTWireless
     #   <p>Start time of a FUOTA task.</p>
     #   @return [Time]
     class LoRaWANStartFuotaTask < Struct.new(
+      nil,
       :start_time,
       keyword_init: true
     )
@@ -4229,6 +4457,7 @@ module Aws::IoTWireless
     #   <p>FPorts object for the positioning information of the device.</p>
     #   @return [Types::UpdateFPorts]
     class LoRaWANUpdateDevice < Struct.new(
+      nil,
       :device_profile_id,
       :service_profile_id,
       :abp_v1_1,
@@ -4253,6 +4482,7 @@ module Aws::IoTWireless
     #   <p>The firmware version to update the gateway to.</p>
     #   @return [Types::LoRaWANGatewayVersion]
     class LoRaWANUpdateGatewayTaskCreate < Struct.new(
+      nil,
       :update_signature,
       :sig_key_crc,
       :current_version,
@@ -4270,6 +4500,7 @@ module Aws::IoTWireless
     #   <p>The firmware version to update the gateway to.</p>
     #   @return [Types::LoRaWANGatewayVersion]
     class LoRaWANUpdateGatewayTaskEntry < Struct.new(
+      nil,
       :current_version,
       :update_version,
       keyword_init: true
@@ -4286,6 +4517,7 @@ module Aws::IoTWireless
     #               number (FCN).</p>
     #   @return [Integer]
     class LteLocalId < Struct.new(
+      nil,
       :pci,
       :earfcn,
       keyword_init: true
@@ -4313,6 +4545,7 @@ module Aws::IoTWireless
     #   <p>Signal quality of the reference Signal received, measured in decibels (dB).</p>
     #   @return [Float]
     class LteNmrObj < Struct.new(
+      nil,
       :pci,
       :earfcn,
       :eutran_cid,
@@ -4363,6 +4596,7 @@ module Aws::IoTWireless
     #   <p>LTE object for network measurement reports.</p>
     #   @return [Array<Types::LteNmrObj>]
     class LteObj < Struct.new(
+      nil,
       :mcc,
       :mnc,
       :eutran_cid,
@@ -4395,6 +4629,7 @@ module Aws::IoTWireless
     #               or disabled.</p>
     #   @return [String]
     class MessageDeliveryStatusEventConfiguration < Struct.new(
+      nil,
       :sidewalk,
       :wireless_device_id_event_topic,
       keyword_init: true
@@ -4409,6 +4644,7 @@ module Aws::IoTWireless
     #               topic.</p>
     #   @return [Types::SidewalkResourceTypeEventConfiguration]
     class MessageDeliveryStatusResourceTypeEventConfiguration < Struct.new(
+      nil,
       :sidewalk,
       keyword_init: true
     )
@@ -4441,6 +4677,7 @@ module Aws::IoTWireless
     #               period.</p>
     #   @return [Float]
     class MetricQueryValue < Struct.new(
+      nil,
       :min,
       :max,
       :sum,
@@ -4463,6 +4700,7 @@ module Aws::IoTWireless
     #   <p>The name of the multicast group.</p>
     #   @return [String]
     class MulticastGroup < Struct.new(
+      nil,
       :id,
       :arn,
       :name,
@@ -4476,6 +4714,7 @@ module Aws::IoTWireless
     #   <p>The ID of the multicast group.</p>
     #   @return [String]
     class MulticastGroupByFuotaTask < Struct.new(
+      nil,
       :id,
       keyword_init: true
     )
@@ -4487,6 +4726,7 @@ module Aws::IoTWireless
     #   <p>The metadata information of the LoRaWAN multicast group.</p>
     #   @return [Types::LoRaWANMulticastMetadata]
     class MulticastWirelessMetadata < Struct.new(
+      nil,
       :lo_ra_wan,
       keyword_init: true
     )
@@ -4501,6 +4741,7 @@ module Aws::IoTWireless
     #   <p>Name of the network analyzer configuration.</p>
     #   @return [String]
     class NetworkAnalyzerConfigurations < Struct.new(
+      nil,
       :arn,
       :name,
       keyword_init: true
@@ -4524,6 +4765,7 @@ module Aws::IoTWireless
     #   <p>The GenAppKey value.</p>
     #   @return [String]
     class OtaaV10X < Struct.new(
+      nil,
       :app_key,
       :app_eui,
       :join_eui,
@@ -4544,6 +4786,7 @@ module Aws::IoTWireless
     #   <p>The JoinEUI value.</p>
     #   @return [String]
     class OtaaV11 < Struct.new(
+      nil,
       :app_key,
       :nwk_key,
       :join_eui,
@@ -4567,6 +4810,7 @@ module Aws::IoTWireless
     #               the payload to the next gateway.</p>
     #   @return [Integer]
     class ParticipatingGateways < Struct.new(
+      nil,
       :downlink_mode,
       :gateway_list,
       :transmission_interval,
@@ -4589,6 +4833,7 @@ module Aws::IoTWireless
     #               before transmitting the multicast payload to the next gateway in the list.</p>
     #   @return [Integer]
     class ParticipatingGatewaysMulticast < Struct.new(
+      nil,
       :gateway_list,
       :transmission_interval,
       keyword_init: true
@@ -4611,6 +4856,7 @@ module Aws::IoTWireless
     #               device's position data for use by AWS IoT Core for LoRaWAN.</p>
     #   @return [String]
     class PositionConfigurationItem < Struct.new(
+      nil,
       :resource_identifier,
       :resource_type,
       :solvers,
@@ -4625,6 +4871,7 @@ module Aws::IoTWireless
     #   <p>The Semtech GNSS solver configuration object.</p>
     #   @return [Types::SemtechGnssConfiguration]
     class PositionSolverConfigurations < Struct.new(
+      nil,
       :semtech_gnss,
       keyword_init: true
     )
@@ -4636,6 +4883,7 @@ module Aws::IoTWireless
     #   <p>The Semtech GNSS solver object details.</p>
     #   @return [Types::SemtechGnssDetail]
     class PositionSolverDetails < Struct.new(
+      nil,
       :semtech_gnss,
       keyword_init: true
     )
@@ -4653,6 +4901,7 @@ module Aws::IoTWireless
     #   <p>The Fport value.</p>
     #   @return [Integer]
     class Positioning < Struct.new(
+      nil,
       :clock_sync,
       :stream,
       :gnss,
@@ -4672,6 +4921,7 @@ module Aws::IoTWireless
     #               disabled.</p>
     #   @return [String]
     class ProximityEventConfiguration < Struct.new(
+      nil,
       :sidewalk,
       :wireless_device_id_event_topic,
       keyword_init: true
@@ -4686,6 +4936,7 @@ module Aws::IoTWireless
     #               device topic.</p>
     #   @return [Types::SidewalkResourceTypeEventConfiguration]
     class ProximityResourceTypeEventConfiguration < Struct.new(
+      nil,
       :sidewalk,
       keyword_init: true
     )
@@ -4710,6 +4961,7 @@ module Aws::IoTWireless
     #               device's position data for use by AWS IoT Core for LoRaWAN.</p>
     #   @return [String]
     class PutPositionConfigurationRequest < Struct.new(
+      nil,
       :resource_identifier,
       :resource_type,
       :solvers,
@@ -4722,6 +4974,7 @@ module Aws::IoTWireless
     # @deprecated
     #   This operation is no longer supported.
     class PutPositionConfigurationResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -4741,6 +4994,7 @@ module Aws::IoTWireless
     #               or to <code>INFO</code> for more detailed logs.</p>
     #   @return [String]
     class PutResourceLogLevelRequest < Struct.new(
+      nil,
       :resource_identifier,
       :resource_type,
       :log_level,
@@ -4750,18 +5004,21 @@ module Aws::IoTWireless
     end
 
     class PutResourceLogLevelResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
     end
 
     class ResetAllResourceLogLevelsRequest < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
     end
 
     class ResetAllResourceLogLevelsResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -4776,6 +5033,7 @@ module Aws::IoTWireless
     #                   <code>WirelessGateway</code>, or <code>FuotaTask</code>.</p>
     #   @return [String]
     class ResetResourceLogLevelRequest < Struct.new(
+      nil,
       :resource_identifier,
       :resource_type,
       keyword_init: true
@@ -4784,6 +5042,7 @@ module Aws::IoTWireless
     end
 
     class ResetResourceLogLevelResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -4799,6 +5058,7 @@ module Aws::IoTWireless
     #   <p>Type of the font found resource.</p>
     #   @return [String]
     class ResourceNotFoundException < Struct.new(
+      nil,
       :message,
       :resource_id,
       :resource_type,
@@ -4815,6 +5075,7 @@ module Aws::IoTWireless
     #   <p>Whether forward error correction is enabled.</p>
     #   @return [String]
     class SemtechGnssConfiguration < Struct.new(
+      nil,
       :status,
       :fec,
       keyword_init: true
@@ -4836,6 +5097,7 @@ module Aws::IoTWireless
     #   <p>Whether forward error correction is enabled.</p>
     #   @return [String]
     class SemtechGnssDetail < Struct.new(
+      nil,
       :provider,
       :type,
       :status,
@@ -4855,6 +5117,7 @@ module Aws::IoTWireless
     #   <p>Wireless metadata that is to be sent to multicast group.</p>
     #   @return [Types::MulticastWirelessMetadata]
     class SendDataToMulticastGroupRequest < Struct.new(
+      nil,
       :id,
       :payload_data,
       :wireless_metadata,
@@ -4867,6 +5130,7 @@ module Aws::IoTWireless
     #   <p>ID of a multicast group message.</p>
     #   @return [String]
     class SendDataToMulticastGroupResponse < Struct.new(
+      nil,
       :message_id,
       keyword_init: true
     )
@@ -4887,6 +5151,7 @@ module Aws::IoTWireless
     #   <p>Metadata about the message request.</p>
     #   @return [Types::WirelessMetadata]
     class SendDataToWirelessDeviceRequest < Struct.new(
+      nil,
       :id,
       :transmit_mode,
       :payload_data,
@@ -4900,6 +5165,7 @@ module Aws::IoTWireless
     #   <p>The ID of the message sent to the wireless device.</p>
     #   @return [String]
     class SendDataToWirelessDeviceResponse < Struct.new(
+      nil,
       :message_id,
       keyword_init: true
     )
@@ -4917,6 +5183,7 @@ module Aws::IoTWireless
     #   <p>The ID of the service profile.</p>
     #   @return [String]
     class ServiceProfile < Struct.new(
+      nil,
       :arn,
       :name,
       :id,
@@ -4933,6 +5200,7 @@ module Aws::IoTWireless
     #   <p>The AppSKey value.</p>
     #   @return [String]
     class SessionKeysAbpV10X < Struct.new(
+      nil,
       :nwk_s_key,
       :app_s_key,
       keyword_init: true
@@ -4954,6 +5222,7 @@ module Aws::IoTWireless
     #   <p>The AppSKey value.</p>
     #   @return [String]
     class SessionKeysAbpV11 < Struct.new(
+      nil,
       :f_nwk_s_int_key,
       :s_nwk_s_int_key,
       :nwk_s_enc_key,
@@ -4971,6 +5240,7 @@ module Aws::IoTWireless
     #   <p>The Sidewalk application server private key.</p>
     #   @return [String]
     class SidewalkAccountInfo < Struct.new(
+      nil,
       :amazon_id,
       :app_server_private_key,
       keyword_init: true
@@ -4989,6 +5259,7 @@ module Aws::IoTWireless
     #   <p>The Amazon Resource Name of the resource.</p>
     #   @return [String]
     class SidewalkAccountInfoWithFingerprint < Struct.new(
+      nil,
       :amazon_id,
       :fingerprint,
       :arn,
@@ -4999,6 +5270,7 @@ module Aws::IoTWireless
 
     # <p>Sidewalk object for creating a device profile.</p>
     class SidewalkCreateDeviceProfile < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -5009,6 +5281,7 @@ module Aws::IoTWireless
     #   <p>The ID of the Sidewalk device profile.</p>
     #   @return [String]
     class SidewalkCreateWirelessDevice < Struct.new(
+      nil,
       :device_profile_id,
       keyword_init: true
     )
@@ -5041,6 +5314,7 @@ module Aws::IoTWireless
     #   <p>The Sidewalk device status, such as provisioned or registered.</p>
     #   @return [String]
     class SidewalkDevice < Struct.new(
+      nil,
       :amazon_id,
       :sidewalk_id,
       :sidewalk_manufacturing_sn,
@@ -5068,6 +5342,7 @@ module Aws::IoTWireless
     #   <p>Device state defines the device status of sidewalk device.</p>
     #   @return [String]
     class SidewalkDeviceMetadata < Struct.new(
+      nil,
       :rssi,
       :battery_level,
       :event,
@@ -5084,6 +5359,7 @@ module Aws::IoTWireless
     #   <p>Denotes whether the Amazon ID event topic is enabled or disabled.</p>
     #   @return [String]
     class SidewalkEventNotificationConfigurations < Struct.new(
+      nil,
       :amazon_id_event_topic,
       keyword_init: true
     )
@@ -5101,6 +5377,7 @@ module Aws::IoTWireless
     #   <p>The DAK certificate information of the Sidewalk device profile.</p>
     #   @return [Array<Types::DakCertificateMetadata>]
     class SidewalkGetDeviceProfile < Struct.new(
+      nil,
       :application_server_public_key,
       :qualification_status,
       :dak_certificate_metadata,
@@ -5119,6 +5396,7 @@ module Aws::IoTWireless
     #               bucket.</p>
     #   @return [String]
     class SidewalkGetStartImportInfo < Struct.new(
+      nil,
       :device_creation_file_list,
       :role,
       keyword_init: true
@@ -5146,6 +5424,7 @@ module Aws::IoTWireless
     #   <p>The status of the Sidewalk devices, such as provisioned or registered.</p>
     #   @return [String]
     class SidewalkListDevice < Struct.new(
+      nil,
       :amazon_id,
       :sidewalk_id,
       :sidewalk_manufacturing_sn,
@@ -5163,6 +5442,7 @@ module Aws::IoTWireless
     #   <p>Denotes whether the wireless device join event topic is enabled or disabled.</p>
     #   @return [String]
     class SidewalkResourceTypeEventConfiguration < Struct.new(
+      nil,
       :wireless_device_event_topic,
       keyword_init: true
     )
@@ -5181,6 +5461,7 @@ module Aws::IoTWireless
     #   <p>The duration of time in seconds to retry sending the ACK.</p>
     #   @return [Integer]
     class SidewalkSendDataToDevice < Struct.new(
+      nil,
       :seq,
       :message_type,
       :ack_mode_retry_duration_secs,
@@ -5195,6 +5476,7 @@ module Aws::IoTWireless
     #               task.</p>
     #   @return [String]
     class SidewalkSingleStartImportInfo < Struct.new(
+      nil,
       :sidewalk_manufacturing_sn,
       keyword_init: true
     )
@@ -5211,6 +5493,7 @@ module Aws::IoTWireless
     #               bucket.</p>
     #   @return [String]
     class SidewalkStartImportInfo < Struct.new(
+      nil,
       :device_creation_file,
       :role,
       keyword_init: true
@@ -5223,6 +5506,7 @@ module Aws::IoTWireless
     #   <p>The new Sidewalk application server private key.</p>
     #   @return [String]
     class SidewalkUpdateAccount < Struct.new(
+      nil,
       :app_server_private_key,
       keyword_init: true
     )
@@ -5235,6 +5519,7 @@ module Aws::IoTWireless
     #               existing import task.</p>
     #   @return [String]
     class SidewalkUpdateImportInfo < Struct.new(
+      nil,
       :device_creation_file,
       keyword_init: true
     )
@@ -5253,6 +5538,7 @@ module Aws::IoTWireless
     #               manage a resource.</p>
     #   @return [Array<Types::Tag>]
     class StartBulkAssociateWirelessDeviceWithMulticastGroupRequest < Struct.new(
+      nil,
       :id,
       :query_string,
       :tags,
@@ -5262,6 +5548,7 @@ module Aws::IoTWireless
     end
 
     class StartBulkAssociateWirelessDeviceWithMulticastGroupResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -5279,6 +5566,7 @@ module Aws::IoTWireless
     #               manage a resource.</p>
     #   @return [Array<Types::Tag>]
     class StartBulkDisassociateWirelessDeviceFromMulticastGroupRequest < Struct.new(
+      nil,
       :id,
       :query_string,
       :tags,
@@ -5288,6 +5576,7 @@ module Aws::IoTWireless
     end
 
     class StartBulkDisassociateWirelessDeviceFromMulticastGroupResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -5300,6 +5589,7 @@ module Aws::IoTWireless
     #   <p>The LoRaWAN information used to start a FUOTA task.</p>
     #   @return [Types::LoRaWANStartFuotaTask]
     class StartFuotaTaskRequest < Struct.new(
+      nil,
       :id,
       :lo_ra_wan,
       keyword_init: true
@@ -5308,6 +5598,7 @@ module Aws::IoTWireless
     end
 
     class StartFuotaTaskResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -5320,6 +5611,7 @@ module Aws::IoTWireless
     #   <p>The LoRaWAN information used with the multicast session.</p>
     #   @return [Types::LoRaWANMulticastSession]
     class StartMulticastGroupSessionRequest < Struct.new(
+      nil,
       :id,
       :lo_ra_wan,
       keyword_init: true
@@ -5328,6 +5620,7 @@ module Aws::IoTWireless
     end
 
     class StartMulticastGroupSessionResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -5358,6 +5651,7 @@ module Aws::IoTWireless
     #   <p>The Sidewalk-related parameters for importing a single wireless device.</p>
     #   @return [Types::SidewalkSingleStartImportInfo]
     class StartSingleWirelessDeviceImportTaskRequest < Struct.new(
+      nil,
       :destination_name,
       :client_request_token,
       :device_name,
@@ -5375,6 +5669,7 @@ module Aws::IoTWireless
     #   <p>The ARN (Amazon Resource Name) of the import task.</p>
     #   @return [String]
     class StartSingleWirelessDeviceImportTaskResponse < Struct.new(
+      nil,
       :id,
       :arn,
       keyword_init: true
@@ -5405,6 +5700,7 @@ module Aws::IoTWireless
     #               provisioned in bulk.</p>
     #   @return [Types::SidewalkStartImportInfo]
     class StartWirelessDeviceImportTaskRequest < Struct.new(
+      nil,
       :destination_name,
       :client_request_token,
       :tags,
@@ -5421,6 +5717,7 @@ module Aws::IoTWireless
     #   <p>The ARN (Amazon Resource Name) of the import task.</p>
     #   @return [String]
     class StartWirelessDeviceImportTaskResponse < Struct.new(
+      nil,
       :id,
       :arn,
       keyword_init: true
@@ -5433,6 +5730,7 @@ module Aws::IoTWireless
     #   <p>The status of the configuration of summary metrics.</p>
     #   @return [String]
     class SummaryMetricConfiguration < Struct.new(
+      nil,
       :status,
       keyword_init: true
     )
@@ -5459,6 +5757,7 @@ module Aws::IoTWireless
     #   <p>The end timestamp for the summary metric query.</p>
     #   @return [Time]
     class SummaryMetricQuery < Struct.new(
+      nil,
       :query_id,
       :metric_name,
       :dimensions,
@@ -5505,6 +5804,7 @@ module Aws::IoTWireless
     #   <p>The units of measurement to be used for interpreting the aggregation result.</p>
     #   @return [String]
     class SummaryMetricQueryResult < Struct.new(
+      nil,
       :query_id,
       :query_status,
       :error,
@@ -5529,6 +5829,7 @@ module Aws::IoTWireless
     #   <p>The tag's value.</p>
     #   @return [String]
     class Tag < Struct.new(
+      nil,
       :key,
       :value,
       keyword_init: true
@@ -5544,6 +5845,7 @@ module Aws::IoTWireless
     #               to manage a resource.</p>
     #   @return [Array<Types::Tag>]
     class TagResourceRequest < Struct.new(
+      nil,
       :resource_arn,
       :tags,
       keyword_init: true
@@ -5552,6 +5854,7 @@ module Aws::IoTWireless
     end
 
     class TagResourceResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -5566,6 +5869,7 @@ module Aws::IoTWireless
     #   <p>Cell parameters for TD-SCDMA.</p>
     #   @return [Integer]
     class TdscdmaLocalId < Struct.new(
+      nil,
       :uarfcn,
       :cell_params,
       keyword_init: true
@@ -5592,6 +5896,7 @@ module Aws::IoTWireless
     #               electromagnetic wave as it propagates through space.</p>
     #   @return [Integer]
     class TdscdmaNmrObj < Struct.new(
+      nil,
       :uarfcn,
       :cell_params,
       :utran_cid,
@@ -5633,6 +5938,7 @@ module Aws::IoTWireless
     #   <p>TD-SCDMA object for network measurement reports.</p>
     #   @return [Array<Types::TdscdmaNmrObj>]
     class TdscdmaObj < Struct.new(
+      nil,
       :mcc,
       :mnc,
       :lac,
@@ -5651,6 +5957,7 @@ module Aws::IoTWireless
     #   <p>The ID of the wireless device to test.</p>
     #   @return [String]
     class TestWirelessDeviceRequest < Struct.new(
+      nil,
       :id,
       keyword_init: true
     )
@@ -5661,6 +5968,7 @@ module Aws::IoTWireless
     #   <p>The result returned by the test.</p>
     #   @return [String]
     class TestWirelessDeviceResponse < Struct.new(
+      nil,
       :result,
       keyword_init: true
     )
@@ -5671,6 +5979,7 @@ module Aws::IoTWireless
     # @!attribute message
     #   @return [String]
     class ThrottlingException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -5684,6 +5993,7 @@ module Aws::IoTWireless
     #   <p>Name of the resource that exceeds maximum number of tags allowed.</p>
     #   @return [String]
     class TooManyTagsException < Struct.new(
+      nil,
       :message,
       :resource_name,
       keyword_init: true
@@ -5710,6 +6020,7 @@ module Aws::IoTWireless
     #               network server.</p>
     #   @return [String]
     class TraceContent < Struct.new(
+      nil,
       :wireless_device_frame_info,
       :log_level,
       :multicast_frame_info,
@@ -5725,6 +6036,7 @@ module Aws::IoTWireless
     #   <p>A list of the keys of the tags to remove from the resource.</p>
     #   @return [Array<String>]
     class UntagResourceRequest < Struct.new(
+      nil,
       :resource_arn,
       :tag_keys,
       keyword_init: true
@@ -5733,6 +6045,7 @@ module Aws::IoTWireless
     end
 
     class UntagResourceResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -5743,6 +6056,7 @@ module Aws::IoTWireless
     #   <p>The FCnt init value.</p>
     #   @return [Integer]
     class UpdateAbpV10X < Struct.new(
+      nil,
       :f_cnt_start,
       keyword_init: true
     )
@@ -5754,6 +6068,7 @@ module Aws::IoTWireless
     #   <p>The FCnt init value.</p>
     #   @return [Integer]
     class UpdateAbpV11 < Struct.new(
+      nil,
       :f_cnt_start,
       keyword_init: true
     )
@@ -5776,6 +6091,7 @@ module Aws::IoTWireless
     #   <p>The ARN of the IAM Role that authorizes the destination.</p>
     #   @return [String]
     class UpdateDestinationRequest < Struct.new(
+      nil,
       :name,
       :expression_type,
       :expression,
@@ -5787,6 +6103,7 @@ module Aws::IoTWireless
     end
 
     class UpdateDestinationResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -5813,6 +6130,7 @@ module Aws::IoTWireless
     #               disabling wireless device topic.</p>
     #   @return [Types::MessageDeliveryStatusResourceTypeEventConfiguration]
     class UpdateEventConfigurationByResourceTypesRequest < Struct.new(
+      nil,
       :device_registration_state,
       :proximity,
       :join,
@@ -5824,6 +6142,7 @@ module Aws::IoTWireless
     end
 
     class UpdateEventConfigurationByResourceTypesResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -5838,6 +6157,7 @@ module Aws::IoTWireless
     #               positioning.</p>
     #   @return [Array<Types::ApplicationConfig>]
     class UpdateFPorts < Struct.new(
+      nil,
       :positioning,
       :applications,
       keyword_init: true
@@ -5889,6 +6209,7 @@ module Aws::IoTWireless
     #               FUOTA, such as the software version. It is a binary field encoded in base64.</p>
     #   @return [String]
     class UpdateFuotaTaskRequest < Struct.new(
+      nil,
       :id,
       :name,
       :description,
@@ -5905,6 +6226,7 @@ module Aws::IoTWireless
     end
 
     class UpdateFuotaTaskResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -5925,6 +6247,7 @@ module Aws::IoTWireless
     #   <p>The list of wireless gateway log options.</p>
     #   @return [Array<Types::WirelessGatewayLogOption>]
     class UpdateLogLevelsByResourceTypesRequest < Struct.new(
+      nil,
       :default_log_level,
       :fuota_task_log_options,
       :wireless_device_log_options,
@@ -5935,6 +6258,7 @@ module Aws::IoTWireless
     end
 
     class UpdateLogLevelsByResourceTypesResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -5944,6 +6268,7 @@ module Aws::IoTWireless
     #   <p>The value to be used to set summary metric configuration.</p>
     #   @return [Types::SummaryMetricConfiguration]
     class UpdateMetricConfigurationRequest < Struct.new(
+      nil,
       :summary_metric,
       keyword_init: true
     )
@@ -5951,6 +6276,7 @@ module Aws::IoTWireless
     end
 
     class UpdateMetricConfigurationResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -5969,6 +6295,7 @@ module Aws::IoTWireless
     #   <p>The LoRaWAN information that is to be used with the multicast group.</p>
     #   @return [Types::LoRaWANMulticast]
     class UpdateMulticastGroupRequest < Struct.new(
+      nil,
       :id,
       :name,
       :description,
@@ -5979,6 +6306,7 @@ module Aws::IoTWireless
     end
 
     class UpdateMulticastGroupResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -6018,6 +6346,7 @@ module Aws::IoTWireless
     #               the <code>MulticastGroupId</code> of the resources to remove in the input array.</p>
     #   @return [Array<String>]
     class UpdateNetworkAnalyzerConfigurationRequest < Struct.new(
+      nil,
       :configuration_name,
       :trace_content,
       :wireless_devices_to_add,
@@ -6033,6 +6362,7 @@ module Aws::IoTWireless
     end
 
     class UpdateNetworkAnalyzerConfigurationResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -6048,6 +6378,7 @@ module Aws::IoTWireless
     #   <p>The partner type.</p>
     #   @return [String]
     class UpdatePartnerAccountRequest < Struct.new(
+      nil,
       :sidewalk,
       :partner_account_id,
       :partner_type,
@@ -6057,6 +6388,7 @@ module Aws::IoTWireless
     end
 
     class UpdatePartnerAccountResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -6074,6 +6406,7 @@ module Aws::IoTWireless
     #   <p>The position information of the resource.</p>
     #   @return [Array<Float>]
     class UpdatePositionRequest < Struct.new(
+      nil,
       :resource_identifier,
       :resource_type,
       :position,
@@ -6085,6 +6418,7 @@ module Aws::IoTWireless
     # @deprecated
     #   This operation is no longer supported.
     class UpdatePositionResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -6117,6 +6451,7 @@ module Aws::IoTWireless
     #   <p>Event configuration for the message delivery status event.</p>
     #   @return [Types::MessageDeliveryStatusEventConfiguration]
     class UpdateResourceEventConfigurationRequest < Struct.new(
+      nil,
       :identifier,
       :identifier_type,
       :partner_type,
@@ -6131,6 +6466,7 @@ module Aws::IoTWireless
     end
 
     class UpdateResourceEventConfigurationResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -6151,6 +6487,7 @@ module Aws::IoTWireless
     #               structures. For more information, see <a href="https://geojson.org/">GeoJSON</a>.</p>
     #   @return [String]
     class UpdateResourcePositionRequest < Struct.new(
+      nil,
       :resource_identifier,
       :resource_type,
       :geo_json_payload,
@@ -6160,6 +6497,7 @@ module Aws::IoTWireless
     end
 
     class UpdateResourcePositionResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -6172,6 +6510,7 @@ module Aws::IoTWireless
     #   <p>The Sidewalk-related parameters of the import task to be updated.</p>
     #   @return [Types::SidewalkUpdateImportInfo]
     class UpdateWirelessDeviceImportTaskRequest < Struct.new(
+      nil,
       :id,
       :sidewalk,
       keyword_init: true
@@ -6180,6 +6519,7 @@ module Aws::IoTWireless
     end
 
     class UpdateWirelessDeviceImportTaskResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -6209,6 +6549,7 @@ module Aws::IoTWireless
     #               information.</p>
     #   @return [String]
     class UpdateWirelessDeviceRequest < Struct.new(
+      nil,
       :id,
       :destination_name,
       :name,
@@ -6221,6 +6562,7 @@ module Aws::IoTWireless
     end
 
     class UpdateWirelessDeviceResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -6250,6 +6592,7 @@ module Aws::IoTWireless
     #   <p>The MaxEIRP value.</p>
     #   @return [Float]
     class UpdateWirelessGatewayRequest < Struct.new(
+      nil,
       :id,
       :name,
       :description,
@@ -6262,6 +6605,7 @@ module Aws::IoTWireless
     end
 
     class UpdateWirelessGatewayResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -6278,6 +6622,7 @@ module Aws::IoTWireless
     #   <p>The properties that relate to the LoRaWAN wireless gateway.</p>
     #   @return [Types::LoRaWANUpdateGatewayTaskCreate]
     class UpdateWirelessGatewayTaskCreate < Struct.new(
+      nil,
       :update_data_source,
       :update_data_role,
       :lo_ra_wan,
@@ -6297,6 +6642,7 @@ module Aws::IoTWireless
     #   <p>The Amazon Resource Name of the resource.</p>
     #   @return [String]
     class UpdateWirelessGatewayTaskEntry < Struct.new(
+      nil,
       :id,
       :lo_ra_wan,
       :arn,
@@ -6309,6 +6655,7 @@ module Aws::IoTWireless
     # @!attribute message
     #   @return [String]
     class ValidationException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -6323,6 +6670,7 @@ module Aws::IoTWireless
     #   <p>Primary Scrambling Code.</p>
     #   @return [Integer]
     class WcdmaLocalId < Struct.new(
+      nil,
       :uarfcndl,
       :psc,
       keyword_init: true
@@ -6348,6 +6696,7 @@ module Aws::IoTWireless
     #               electromagnetic wave as it propagates through space.</p>
     #   @return [Integer]
     class WcdmaNmrObj < Struct.new(
+      nil,
       :uarfcndl,
       :psc,
       :utran_cid,
@@ -6385,6 +6734,7 @@ module Aws::IoTWireless
     #   <p>WCDMA object for network measurement reports.</p>
     #   @return [Array<Types::WcdmaNmrObj>]
     class WcdmaObj < Struct.new(
+      nil,
       :mcc,
       :mnc,
       :lac,
@@ -6406,6 +6756,7 @@ module Aws::IoTWireless
     #   <p>Received signal strength (dBm) of the WLAN measurement data.</p>
     #   @return [Integer]
     class WiFiAccessPoint < Struct.new(
+      nil,
       :mac_address,
       :rss,
       keyword_init: true
@@ -6428,6 +6779,7 @@ module Aws::IoTWireless
     #               or to <code>INFO</code> for more detailed logs.</p>
     #   @return [String]
     class WirelessDeviceEventLogOption < Struct.new(
+      nil,
       :event,
       :log_level,
       keyword_init: true
@@ -6476,6 +6828,7 @@ module Aws::IoTWireless
     #               onboarded to the import task.</p>
     #   @return [Integer]
     class WirelessDeviceImportTask < Struct.new(
+      nil,
       :id,
       :arn,
       :destination_name,
@@ -6506,6 +6859,7 @@ module Aws::IoTWireless
     #   <p>The list of wireless device event log options.</p>
     #   @return [Array<Types::WirelessDeviceEventLogOption>]
     class WirelessDeviceLogOption < Struct.new(
+      nil,
       :type,
       :log_level,
       :events,
@@ -6552,6 +6906,7 @@ module Aws::IoTWireless
     #   <p>Id of the multicast group.</p>
     #   @return [Integer]
     class WirelessDeviceStatistics < Struct.new(
+      nil,
       :arn,
       :id,
       :type,
@@ -6581,6 +6936,7 @@ module Aws::IoTWireless
     #               or to <code>INFO</code> for more detailed logs.</p>
     #   @return [String]
     class WirelessGatewayEventLogOption < Struct.new(
+      nil,
       :event,
       :log_level,
       keyword_init: true
@@ -6602,6 +6958,7 @@ module Aws::IoTWireless
     #   <p>The list of wireless gateway event log options.</p>
     #   @return [Array<Types::WirelessGatewayEventLogOption>]
     class WirelessGatewayLogOption < Struct.new(
+      nil,
       :type,
       :log_level,
       :events,
@@ -6633,6 +6990,7 @@ module Aws::IoTWireless
     #            </note>
     #   @return [String]
     class WirelessGatewayStatistics < Struct.new(
+      nil,
       :arn,
       :id,
       :name,
@@ -6652,6 +7010,7 @@ module Aws::IoTWireless
     #   <p>The Sidewalk account credentials.</p>
     #   @return [Types::SidewalkSendDataToDevice]
     class WirelessMetadata < Struct.new(
+      nil,
       :lo_ra_wan,
       :sidewalk,
       keyword_init: true

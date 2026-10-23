@@ -11,6 +11,7 @@ module Aws::Location
     # @!attribute message
     #   @return [String]
     class AccessDeniedException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -22,6 +23,7 @@ module Aws::Location
     #   <p>Filter on <code>Active</code> or <code>Expired</code> API keys.</p>
     #   @return [String]
     class ApiKeyFilter < Struct.new(
+      nil,
       :key_status,
       keyword_init: true
     )
@@ -217,6 +219,7 @@ module Aws::Location
     #            </ul>
     #   @return [Array<String>]
     class ApiKeyRestrictions < Struct.new(
+      nil,
       :allow_actions,
       :allow_resources,
       :allow_referers,
@@ -240,6 +243,7 @@ module Aws::Location
     #            </ul>
     #   @return [String]
     class AssociateTrackerConsumerInput < Struct.new(
+      nil,
       :tracker_name,
       :consumer_arn,
       keyword_init: true
@@ -248,6 +252,7 @@ module Aws::Location
     end
 
     class AssociateTrackerConsumerOutput < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -261,6 +266,7 @@ module Aws::Location
     #   <p>Contains the batch request error details associated with the request.</p>
     #   @return [Types::BatchItemError]
     class BatchDeleteDevicePositionHistoryError < Struct.new(
+      nil,
       :device_id,
       :error,
       keyword_init: true
@@ -282,6 +288,7 @@ module Aws::Location
     #            </ul>
     #   @return [Array<String>]
     class BatchDeleteDevicePositionHistoryInput < Struct.new(
+      nil,
       :tracker_name,
       :device_ids,
       keyword_init: true
@@ -293,6 +300,7 @@ module Aws::Location
     #   <p>Contains error details for each device history that failed to delete.</p>
     #   @return [Array<Types::BatchDeleteDevicePositionHistoryError>]
     class BatchDeleteDevicePositionHistoryOutput < Struct.new(
+      nil,
       :errors,
       keyword_init: true
     )
@@ -308,6 +316,7 @@ module Aws::Location
     #   <p>Contains details associated to the batch error.</p>
     #   @return [Types::BatchItemError]
     class BatchDeleteGeofenceError < Struct.new(
+      nil,
       :geofence_id,
       :error,
       keyword_init: true
@@ -322,6 +331,7 @@ module Aws::Location
     #   <p>The batch of geofences to be deleted.</p>
     #   @return [Array<String>]
     class BatchDeleteGeofenceInput < Struct.new(
+      nil,
       :collection_name,
       :geofence_ids,
       keyword_init: true
@@ -333,6 +343,7 @@ module Aws::Location
     #   <p>Contains error details for each geofence that failed to delete.</p>
     #   @return [Array<Types::BatchDeleteGeofenceError>]
     class BatchDeleteGeofenceOutput < Struct.new(
+      nil,
       :errors,
       keyword_init: true
     )
@@ -353,6 +364,7 @@ module Aws::Location
     #   <p>Contains details associated to the batch error.</p>
     #   @return [Types::BatchItemError]
     class BatchEvaluateGeofencesError < Struct.new(
+      nil,
       :device_id,
       :sample_time,
       :error,
@@ -370,6 +382,7 @@ module Aws::Location
     #               collection.</p>
     #   @return [Array<Types::DevicePositionUpdate>]
     class BatchEvaluateGeofencesInput < Struct.new(
+      nil,
       :collection_name,
       :device_position_updates,
       keyword_init: true
@@ -382,6 +395,7 @@ module Aws::Location
     #               the given geofence collection.</p>
     #   @return [Array<Types::BatchEvaluateGeofencesError>]
     class BatchEvaluateGeofencesOutput < Struct.new(
+      nil,
       :errors,
       keyword_init: true
     )
@@ -396,6 +410,7 @@ module Aws::Location
     #   <p>Contains details related to the error code.</p>
     #   @return [Types::BatchItemError]
     class BatchGetDevicePositionError < Struct.new(
+      nil,
       :device_id,
       :error,
       keyword_init: true
@@ -417,6 +432,7 @@ module Aws::Location
     #            </ul>
     #   @return [Array<String>]
     class BatchGetDevicePositionInput < Struct.new(
+      nil,
       :tracker_name,
       :device_ids,
       keyword_init: true
@@ -433,6 +449,7 @@ module Aws::Location
     #               when the position was received and sampled.</p>
     #   @return [Array<Types::DevicePosition>]
     class BatchGetDevicePositionOutput < Struct.new(
+      nil,
       :errors,
       :device_positions,
       keyword_init: true
@@ -448,6 +465,7 @@ module Aws::Location
     #   <p>A message with the reason for the batch request error.</p>
     #   @return [String]
     class BatchItemError < Struct.new(
+      nil,
       :code,
       :message,
       keyword_init: true
@@ -464,6 +482,7 @@ module Aws::Location
     #   <p>Contains details associated to the batch error.</p>
     #   @return [Types::BatchItemError]
     class BatchPutGeofenceError < Struct.new(
+      nil,
       :geofence_id,
       :error,
       keyword_init: true
@@ -478,6 +497,7 @@ module Aws::Location
     #   <p>The batch of geofences to be stored in a geofence collection.</p>
     #   @return [Array<Types::BatchPutGeofenceRequestEntry>]
     class BatchPutGeofenceInput < Struct.new(
+      nil,
       :collection_name,
       :entries,
       keyword_init: true
@@ -493,6 +513,7 @@ module Aws::Location
     #               geofence collection.</p>
     #   @return [Array<Types::BatchPutGeofenceError>]
     class BatchPutGeofenceOutput < Struct.new(
+      nil,
       :successes,
       :errors,
       keyword_init: true
@@ -524,6 +545,7 @@ module Aws::Location
     #            </p>
     #   @return [Hash<String, String>]
     class BatchPutGeofenceRequestEntry < Struct.new(
+      nil,
       :geofence_id,
       :geometry,
       :geofence_properties,
@@ -548,6 +570,7 @@ module Aws::Location
     #            </p>
     #   @return [Time]
     class BatchPutGeofenceSuccess < Struct.new(
+      nil,
       :geofence_id,
       :create_time,
       :update_time,
@@ -569,6 +592,7 @@ module Aws::Location
     #               message.</p>
     #   @return [Types::BatchItemError]
     class BatchUpdateDevicePositionError < Struct.new(
+      nil,
       :device_id,
       :sample_time,
       :error,
@@ -584,6 +608,7 @@ module Aws::Location
     #   <p>Contains the position update details for each device, up to 10 devices.</p>
     #   @return [Array<Types::DevicePositionUpdate>]
     class BatchUpdateDevicePositionInput < Struct.new(
+      nil,
       :tracker_name,
       :updates,
       keyword_init: true
@@ -595,6 +620,7 @@ module Aws::Location
     #   <p>Contains  error details for each device that failed to update its position.</p>
     #   @return [Array<Types::BatchUpdateDevicePositionError>]
     class BatchUpdateDevicePositionOutput < Struct.new(
+      nil,
       :errors,
       keyword_init: true
     )
@@ -618,6 +644,7 @@ module Aws::Location
     #            </p>
     #   @return [Boolean]
     class CalculateRouteCarModeOptions < Struct.new(
+      nil,
       :avoid_ferries,
       :avoid_tolls,
       keyword_init: true
@@ -778,6 +805,7 @@ module Aws::Location
     #               the request.</p>
     #   @return [String]
     class CalculateRouteInput < Struct.new(
+      nil,
       :calculator_name,
       :departure_position,
       :destination_position,
@@ -915,6 +943,7 @@ module Aws::Location
     #               the request.</p>
     #   @return [String]
     class CalculateRouteMatrixInput < Struct.new(
+      nil,
       :calculator_name,
       :departure_positions,
       :destination_positions,
@@ -954,6 +983,7 @@ module Aws::Location
     #               <code>ErrorCount</code>.</p>
     #   @return [Types::CalculateRouteMatrixSummary]
     class CalculateRouteMatrixOutput < Struct.new(
+      nil,
       :route_matrix,
       :snapped_departure_positions,
       :snapped_destination_positions,
@@ -1000,6 +1030,7 @@ module Aws::Location
     #   <p>The unit of measurement for route distances.</p>
     #   @return [String]
     class CalculateRouteMatrixSummary < Struct.new(
+      nil,
       :data_source,
       :route_count,
       :error_count,
@@ -1047,6 +1078,7 @@ module Aws::Location
     #                   <code>DurationSeconds</code>.</p>
     #   @return [Types::CalculateRouteSummary]
     class CalculateRouteOutput < Struct.new(
+      nil,
       :legs,
       :summary,
       keyword_init: true
@@ -1121,6 +1153,7 @@ module Aws::Location
     #   <p>The unit of measurement for route distances.</p>
     #   @return [String]
     class CalculateRouteSummary < Struct.new(
+      nil,
       :route_b_box,
       :data_source,
       :distance,
@@ -1157,6 +1190,7 @@ module Aws::Location
     #               measurement. Used to avoid roads that can't support the truck's weight.</p>
     #   @return [Types::TruckWeight]
     class CalculateRouteTruckModeOptions < Struct.new(
+      nil,
       :avoid_ferries,
       :avoid_tolls,
       :dimensions,
@@ -1171,6 +1205,7 @@ module Aws::Location
     #   <p>Information about the Long-Term Evolution (LTE) network the device is connected to.</p>
     #   @return [Array<Types::LteCellDetails>]
     class CellSignals < Struct.new(
+      nil,
       :lte_cell_details,
       keyword_init: true
     )
@@ -1188,6 +1223,7 @@ module Aws::Location
     #               larger than 100,000 (100 kilometers).</p>
     #   @return [Float]
     class Circle < Struct.new(
+      nil,
       :center,
       :radius,
       keyword_init: true
@@ -1199,6 +1235,7 @@ module Aws::Location
     # @!attribute message
     #   @return [String]
     class ConflictException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -1270,6 +1307,7 @@ module Aws::Location
     #                   managed key</a>. Enter a key ID, key ARN, alias name, or alias ARN. </p>
     #   @return [String]
     class CreateGeofenceCollectionInput < Struct.new(
+      nil,
       :collection_name,
       :pricing_plan,
       :pricing_plan_data_source,
@@ -1301,6 +1339,7 @@ module Aws::Location
     #            </p>
     #   @return [Time]
     class CreateGeofenceCollectionOutput < Struct.new(
+      nil,
       :collection_name,
       :collection_arn,
       :create_time,
@@ -1369,6 +1408,7 @@ module Aws::Location
     #            </ul>
     #   @return [Hash<String, String>]
     class CreateKeyInput < Struct.new(
+      nil,
       :key_name,
       :restrictions,
       :description,
@@ -1403,6 +1443,7 @@ module Aws::Location
     #               format: <code>YYYY-MM-DDThh:mm:ss.sssZ</code>. </p>
     #   @return [Time]
     class CreateKeyOutput < Struct.new(
+      nil,
       :key,
       :key_arn,
       :key_name,
@@ -1471,6 +1512,7 @@ module Aws::Location
     #            </ul>
     #   @return [Hash<String, String>]
     class CreateMapInput < Struct.new(
+      nil,
       :map_name,
       :configuration,
       :pricing_plan,
@@ -1500,6 +1542,7 @@ module Aws::Location
     #               format: <code>YYYY-MM-DDThh:mm:ss.sssZ</code>.</p>
     #   @return [Time]
     class CreateMapOutput < Struct.new(
+      nil,
       :map_name,
       :map_arn,
       :create_time,
@@ -1598,6 +1641,7 @@ module Aws::Location
     #            </ul>
     #   @return [Hash<String, String>]
     class CreatePlaceIndexInput < Struct.new(
+      nil,
       :index_name,
       :data_source,
       :pricing_plan,
@@ -1628,6 +1672,7 @@ module Aws::Location
     #               format: <code>YYYY-MM-DDThh:mm:ss.sssZ</code>. </p>
     #   @return [Time]
     class CreatePlaceIndexOutput < Struct.new(
+      nil,
       :index_name,
       :index_arn,
       :create_time,
@@ -1727,6 +1772,7 @@ module Aws::Location
     #            </ul>
     #   @return [Hash<String, String>]
     class CreateRouteCalculatorInput < Struct.new(
+      nil,
       :calculator_name,
       :data_source,
       :pricing_plan,
@@ -1767,6 +1813,7 @@ module Aws::Location
     #            </ul>
     #   @return [Time]
     class CreateRouteCalculatorOutput < Struct.new(
+      nil,
       :calculator_name,
       :calculator_arn,
       :create_time,
@@ -1893,6 +1940,7 @@ module Aws::Location
     #            </note>
     #   @return [Boolean]
     class CreateTrackerInput < Struct.new(
+      nil,
       :tracker_name,
       :pricing_plan,
       :kms_key_id,
@@ -1926,6 +1974,7 @@ module Aws::Location
     #               format: <code>YYYY-MM-DDThh:mm:ss.sssZ</code>. </p>
     #   @return [Time]
     class CreateTrackerOutput < Struct.new(
+      nil,
       :tracker_name,
       :tracker_arn,
       :create_time,
@@ -1970,6 +2019,7 @@ module Aws::Location
     #            </p>
     #   @return [String]
     class DataSourceConfiguration < Struct.new(
+      nil,
       :intended_use,
       keyword_init: true
     )
@@ -1980,6 +2030,7 @@ module Aws::Location
     #   <p>The name of the geofence collection to be deleted.</p>
     #   @return [String]
     class DeleteGeofenceCollectionInput < Struct.new(
+      nil,
       :collection_name,
       keyword_init: true
     )
@@ -1987,6 +2038,7 @@ module Aws::Location
     end
 
     class DeleteGeofenceCollectionOutput < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -2004,6 +2056,7 @@ module Aws::Location
     #            </note>
     #   @return [Boolean]
     class DeleteKeyInput < Struct.new(
+      nil,
       :key_name,
       :force_delete,
       keyword_init: true
@@ -2012,6 +2065,7 @@ module Aws::Location
     end
 
     class DeleteKeyOutput < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -2021,6 +2075,7 @@ module Aws::Location
     #   <p>The name of the map resource to be deleted.</p>
     #   @return [String]
     class DeleteMapInput < Struct.new(
+      nil,
       :map_name,
       keyword_init: true
     )
@@ -2028,6 +2083,7 @@ module Aws::Location
     end
 
     class DeleteMapOutput < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -2037,6 +2093,7 @@ module Aws::Location
     #   <p>The name of the place index resource to be deleted.</p>
     #   @return [String]
     class DeletePlaceIndexInput < Struct.new(
+      nil,
       :index_name,
       keyword_init: true
     )
@@ -2044,6 +2101,7 @@ module Aws::Location
     end
 
     class DeletePlaceIndexOutput < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -2053,6 +2111,7 @@ module Aws::Location
     #   <p>The name of the route calculator resource to be deleted.</p>
     #   @return [String]
     class DeleteRouteCalculatorInput < Struct.new(
+      nil,
       :calculator_name,
       keyword_init: true
     )
@@ -2060,6 +2119,7 @@ module Aws::Location
     end
 
     class DeleteRouteCalculatorOutput < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -2069,6 +2129,7 @@ module Aws::Location
     #   <p>The name of the tracker resource to be deleted.</p>
     #   @return [String]
     class DeleteTrackerInput < Struct.new(
+      nil,
       :tracker_name,
       keyword_init: true
     )
@@ -2076,6 +2137,7 @@ module Aws::Location
     end
 
     class DeleteTrackerOutput < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -2085,6 +2147,7 @@ module Aws::Location
     #   <p>The name of the geofence collection.</p>
     #   @return [String]
     class DescribeGeofenceCollectionInput < Struct.new(
+      nil,
       :collection_name,
       keyword_init: true
     )
@@ -2141,6 +2204,7 @@ module Aws::Location
     #   <p>The number of geofences in the geofence collection.</p>
     #   @return [Integer]
     class DescribeGeofenceCollectionOutput < Struct.new(
+      nil,
       :collection_name,
       :collection_arn,
       :description,
@@ -2160,6 +2224,7 @@ module Aws::Location
     #   <p>The name of the API key resource.</p>
     #   @return [String]
     class DescribeKeyInput < Struct.new(
+      nil,
       :key_name,
       keyword_init: true
     )
@@ -2206,6 +2271,7 @@ module Aws::Location
     #   <p>Tags associated with the API key resource.</p>
     #   @return [Hash<String, String>]
     class DescribeKeyOutput < Struct.new(
+      nil,
       :key,
       :key_arn,
       :key_name,
@@ -2224,6 +2290,7 @@ module Aws::Location
     #   <p>The name of the map resource.</p>
     #   @return [String]
     class DescribeMapInput < Struct.new(
+      nil,
       :map_name,
       keyword_init: true
     )
@@ -2271,6 +2338,7 @@ module Aws::Location
     #               format: <code>YYYY-MM-DDThh:mm:ss.sssZ</code>.</p>
     #   @return [Time]
     class DescribeMapOutput < Struct.new(
+      nil,
       :map_name,
       :map_arn,
       :pricing_plan,
@@ -2289,6 +2357,7 @@ module Aws::Location
     #   <p>The name of the place index resource.</p>
     #   @return [String]
     class DescribePlaceIndexInput < Struct.new(
+      nil,
       :index_name,
       keyword_init: true
     )
@@ -2354,6 +2423,7 @@ module Aws::Location
     #   <p>Tags associated with place index resource.</p>
     #   @return [Hash<String, String>]
     class DescribePlaceIndexOutput < Struct.new(
+      nil,
       :index_name,
       :index_arn,
       :pricing_plan,
@@ -2372,6 +2442,7 @@ module Aws::Location
     #   <p>The name of the route calculator resource.</p>
     #   @return [String]
     class DescribeRouteCalculatorInput < Struct.new(
+      nil,
       :calculator_name,
       keyword_init: true
     )
@@ -2447,6 +2518,7 @@ module Aws::Location
     #   <p>Tags associated with route calculator resource.</p>
     #   @return [Hash<String, String>]
     class DescribeRouteCalculatorOutput < Struct.new(
+      nil,
       :calculator_name,
       :calculator_arn,
       :pricing_plan,
@@ -2464,6 +2536,7 @@ module Aws::Location
     #   <p>The name of the tracker resource.</p>
     #   @return [String]
     class DescribeTrackerInput < Struct.new(
+      nil,
       :tracker_name,
       keyword_init: true
     )
@@ -2533,6 +2606,7 @@ module Aws::Location
     #            </note>
     #   @return [Boolean]
     class DescribeTrackerOutput < Struct.new(
+      nil,
       :tracker_name,
       :tracker_arn,
       :description,
@@ -2572,6 +2646,7 @@ module Aws::Location
     #   <p>The properties associated with the position.</p>
     #   @return [Hash<String, String>]
     class DevicePosition < Struct.new(
+      nil,
       :device_id,
       :sample_time,
       :received_time,
@@ -2607,6 +2682,7 @@ module Aws::Location
     #            </p>
     #   @return [Hash<String, String>]
     class DevicePositionUpdate < Struct.new(
+      nil,
       :device_id,
       :sample_time,
       :position,
@@ -2641,6 +2717,7 @@ module Aws::Location
     #   <p>The cellular network infrastructure that the device is connected to.</p>
     #   @return [Types::CellSignals]
     class DeviceState < Struct.new(
+      nil,
       :device_id,
       :sample_time,
       :position,
@@ -2668,6 +2745,7 @@ module Aws::Location
     #            </ul>
     #   @return [String]
     class DisassociateTrackerConsumerInput < Struct.new(
+      nil,
       :tracker_name,
       :consumer_arn,
       keyword_init: true
@@ -2676,6 +2754,7 @@ module Aws::Location
     end
 
     class DisassociateTrackerConsumerOutput < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -2689,6 +2768,7 @@ module Aws::Location
     #   <p>The device's speed.</p>
     #   @return [Float]
     class ForecastGeofenceEventsDeviceState < Struct.new(
+      nil,
       :position,
       :speed,
       keyword_init: true
@@ -2740,6 +2820,7 @@ module Aws::Location
     #            </p>
     #   @return [Integer]
     class ForecastGeofenceEventsRequest < Struct.new(
+      nil,
       :collection_name,
       :device_state,
       :time_horizon_minutes,
@@ -2766,6 +2847,7 @@ module Aws::Location
     #   <p>The speed unit for the forecasted events.</p>
     #   @return [String]
     class ForecastGeofenceEventsResponse < Struct.new(
+      nil,
       :forecasted_events,
       :next_token,
       :distance_unit,
@@ -2811,6 +2893,7 @@ module Aws::Location
     #   <p>The geofence properties.</p>
     #   @return [Hash<String, String>]
     class ForecastedEvent < Struct.new(
+      nil,
       :event_id,
       :geofence_id,
       :is_device_in_geofence,
@@ -2940,6 +3023,7 @@ module Aws::Location
     #            </note>
     #   @return [Array<Array<Array<Array<Float>>>>]
     class GeofenceGeometry < Struct.new(
+      nil,
       :polygon,
       :circle,
       :geobuf,
@@ -2991,6 +3075,7 @@ module Aws::Location
     #            </p>
     #   @return [Integer]
     class GetDevicePositionHistoryInput < Struct.new(
+      nil,
       :tracker_name,
       :device_id,
       :next_token,
@@ -3010,6 +3095,7 @@ module Aws::Location
     #               token in a following request to fetch the next set of results.</p>
     #   @return [String]
     class GetDevicePositionHistoryOutput < Struct.new(
+      nil,
       :device_positions,
       :next_token,
       keyword_init: true
@@ -3024,6 +3110,7 @@ module Aws::Location
     #   <p>The device whose position you want to retrieve.</p>
     #   @return [String]
     class GetDevicePositionInput < Struct.new(
+      nil,
       :tracker_name,
       :device_id,
       keyword_init: true
@@ -3052,6 +3139,7 @@ module Aws::Location
     #   <p>The properties associated with the position.</p>
     #   @return [Hash<String, String>]
     class GetDevicePositionOutput < Struct.new(
+      nil,
       :device_id,
       :sample_time,
       :received_time,
@@ -3070,6 +3158,7 @@ module Aws::Location
     #   <p>The geofence you're retrieving details for.</p>
     #   @return [String]
     class GetGeofenceInput < Struct.new(
+      nil,
       :collection_name,
       :geofence_id,
       keyword_init: true
@@ -3129,6 +3218,7 @@ module Aws::Location
     #            </p>
     #   @return [Hash<String, String>]
     class GetGeofenceOutput < Struct.new(
+      nil,
       :geofence_id,
       :geometry,
       :status,
@@ -3241,6 +3331,7 @@ module Aws::Location
     #               the request.</p>
     #   @return [String]
     class GetMapGlyphsInput < Struct.new(
+      nil,
       :map_name,
       :font_stack,
       :font_unicode_range,
@@ -3261,6 +3352,7 @@ module Aws::Location
     #   <p>The HTTP Cache-Control directive for the value.</p>
     #   @return [String]
     class GetMapGlyphsOutput < Struct.new(
+      nil,
       :blob,
       :content_type,
       :cache_control,
@@ -3303,6 +3395,7 @@ module Aws::Location
     #               the request.</p>
     #   @return [String]
     class GetMapSpritesInput < Struct.new(
+      nil,
       :map_name,
       :file_name,
       :key,
@@ -3323,6 +3416,7 @@ module Aws::Location
     #   <p>The HTTP Cache-Control directive for the value.</p>
     #   @return [String]
     class GetMapSpritesOutput < Struct.new(
+      nil,
       :blob,
       :content_type,
       :cache_control,
@@ -3339,6 +3433,7 @@ module Aws::Location
     #               the request.</p>
     #   @return [String]
     class GetMapStyleDescriptorInput < Struct.new(
+      nil,
       :map_name,
       :key,
       keyword_init: true
@@ -3358,6 +3453,7 @@ module Aws::Location
     #   <p>The HTTP Cache-Control directive for the value.</p>
     #   @return [String]
     class GetMapStyleDescriptorOutput < Struct.new(
+      nil,
       :blob,
       :content_type,
       :cache_control,
@@ -3383,6 +3479,7 @@ module Aws::Location
     #               the request.</p>
     #   @return [String]
     class GetMapTileInput < Struct.new(
+      nil,
       :map_name,
       :z,
       :x,
@@ -3404,6 +3501,7 @@ module Aws::Location
     #   <p>The HTTP Cache-Control directive for the value.</p>
     #   @return [String]
     class GetMapTileOutput < Struct.new(
+      nil,
       :blob,
       :content_type,
       :cache_control,
@@ -3439,6 +3537,7 @@ module Aws::Location
     #               the request.</p>
     #   @return [String]
     class GetPlaceInput < Struct.new(
+      nil,
       :index_name,
       :place_id,
       :language,
@@ -3452,6 +3551,7 @@ module Aws::Location
     #   <p>Details about the result, such as its address and position.</p>
     #   @return [Types::Place]
     class GetPlaceOutput < Struct.new(
+      nil,
       :place,
       keyword_init: true
     )
@@ -3472,6 +3572,7 @@ module Aws::Location
     #   <p>Indicates if a proxy was used.</p>
     #   @return [Boolean]
     class InferredState < Struct.new(
+      nil,
       :position,
       :accuracy,
       :deviation_distance,
@@ -3485,6 +3586,7 @@ module Aws::Location
     # @!attribute message
     #   @return [String]
     class InternalServerException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -3557,6 +3659,7 @@ module Aws::Location
     #               position, end position, travel distance, travel duration, and geometry offset.</p>
     #   @return [Array<Types::Step>]
     class Leg < Struct.new(
+      nil,
       :start_position,
       :end_position,
       :distance,
@@ -3583,6 +3686,7 @@ module Aws::Location
     #            </ul>
     #   @return [Array<Array<Float>>]
     class LegGeometry < Struct.new(
+      nil,
       :line_string,
       keyword_init: true
     )
@@ -3607,6 +3711,7 @@ module Aws::Location
     #   <p>The geometry used to filter device positions.</p>
     #   @return [Types::TrackingFilterGeometry]
     class ListDevicePositionsInput < Struct.new(
+      nil,
       :tracker_name,
       :max_results,
       :next_token,
@@ -3624,6 +3729,7 @@ module Aws::Location
     #               token in a following request to fetch the next set of results.</p>
     #   @return [String]
     class ListDevicePositionsOutput < Struct.new(
+      nil,
       :entries,
       :next_token,
       keyword_init: true
@@ -3649,6 +3755,7 @@ module Aws::Location
     #   <p>The properties associated with the position.</p>
     #   @return [Hash<String, String>]
     class ListDevicePositionsResponseEntry < Struct.new(
+      nil,
       :device_id,
       :sample_time,
       :position,
@@ -3671,6 +3778,7 @@ module Aws::Location
     #            </p>
     #   @return [String]
     class ListGeofenceCollectionsInput < Struct.new(
+      nil,
       :max_results,
       :next_token,
       keyword_init: true
@@ -3686,6 +3794,7 @@ module Aws::Location
     #               token in a following request to fetch the next set of results. </p>
     #   @return [String]
     class ListGeofenceCollectionsOutput < Struct.new(
+      nil,
       :entries,
       :next_token,
       keyword_init: true
@@ -3727,6 +3836,7 @@ module Aws::Location
     #            </p>
     #   @return [Time]
     class ListGeofenceCollectionsResponseEntry < Struct.new(
+      nil,
       :collection_name,
       :description,
       :pricing_plan,
@@ -3795,6 +3905,7 @@ module Aws::Location
     #            </p>
     #   @return [Hash<String, String>]
     class ListGeofenceResponseEntry < Struct.new(
+      nil,
       :geofence_id,
       :geometry,
       :status,
@@ -3821,6 +3932,7 @@ module Aws::Location
     #            </p>
     #   @return [Integer]
     class ListGeofencesInput < Struct.new(
+      nil,
       :collection_name,
       :next_token,
       :max_results,
@@ -3837,6 +3949,7 @@ module Aws::Location
     #               token in a following request to fetch the next set of results. </p>
     #   @return [String]
     class ListGeofencesOutput < Struct.new(
+      nil,
       :entries,
       :next_token,
       keyword_init: true
@@ -3860,6 +3973,7 @@ module Aws::Location
     #               keys.</p>
     #   @return [Types::ApiKeyFilter]
     class ListKeysInput < Struct.new(
+      nil,
       :max_results,
       :next_token,
       :filter,
@@ -3877,6 +3991,7 @@ module Aws::Location
     #               token in a following request to fetch the next set of results. </p>
     #   @return [String]
     class ListKeysOutput < Struct.new(
+      nil,
       :entries,
       :next_token,
       keyword_init: true
@@ -3908,6 +4023,7 @@ module Aws::Location
     #               format: <code>YYYY-MM-DDThh:mm:ss.sssZ</code>.</p>
     #   @return [Time]
     class ListKeysResponseEntry < Struct.new(
+      nil,
       :key_name,
       :expire_time,
       :description,
@@ -3931,6 +4047,7 @@ module Aws::Location
     #            </p>
     #   @return [String]
     class ListMapsInput < Struct.new(
+      nil,
       :max_results,
       :next_token,
       keyword_init: true
@@ -3945,6 +4062,7 @@ module Aws::Location
     #   <p>A pagination token indicating there are additional pages available. You can use the token in a following request to fetch the next set of results. </p>
     #   @return [String]
     class ListMapsOutput < Struct.new(
+      nil,
       :entries,
       :next_token,
       keyword_init: true
@@ -3977,6 +4095,7 @@ module Aws::Location
     #               format: <code>YYYY-MM-DDThh:mm:ss.sssZ</code>.</p>
     #   @return [Time]
     class ListMapsResponseEntry < Struct.new(
+      nil,
       :map_name,
       :description,
       :data_source,
@@ -4000,6 +4119,7 @@ module Aws::Location
     #            </p>
     #   @return [String]
     class ListPlaceIndexesInput < Struct.new(
+      nil,
       :max_results,
       :next_token,
       keyword_init: true
@@ -4015,6 +4135,7 @@ module Aws::Location
     #               the token in a new request to fetch the next page of results.</p>
     #   @return [String]
     class ListPlaceIndexesOutput < Struct.new(
+      nil,
       :entries,
       :next_token,
       keyword_init: true
@@ -4065,6 +4186,7 @@ module Aws::Location
     #               format: <code>YYYY-MM-DDThh:mm:ss.sssZ</code>. </p>
     #   @return [Time]
     class ListPlaceIndexesResponseEntry < Struct.new(
+      nil,
       :index_name,
       :description,
       :data_source,
@@ -4088,6 +4210,7 @@ module Aws::Location
     #            </p>
     #   @return [String]
     class ListRouteCalculatorsInput < Struct.new(
+      nil,
       :max_results,
       :next_token,
       keyword_init: true
@@ -4103,6 +4226,7 @@ module Aws::Location
     #               token in a subsequent request to fetch the next set of results.</p>
     #   @return [String]
     class ListRouteCalculatorsOutput < Struct.new(
+      nil,
       :entries,
       :next_token,
       keyword_init: true
@@ -4166,6 +4290,7 @@ module Aws::Location
     #            </ul>
     #   @return [Time]
     class ListRouteCalculatorsResponseEntry < Struct.new(
+      nil,
       :calculator_name,
       :description,
       :data_source,
@@ -4188,6 +4313,7 @@ module Aws::Location
     #            </ul>
     #   @return [String]
     class ListTagsForResourceInput < Struct.new(
+      nil,
       :resource_arn,
       keyword_init: true
     )
@@ -4205,6 +4331,7 @@ module Aws::Location
     #            </ul>
     #   @return [Hash<String, String>]
     class ListTagsForResourceOutput < Struct.new(
+      nil,
       :tags,
       keyword_init: true
     )
@@ -4226,6 +4353,7 @@ module Aws::Location
     #            </p>
     #   @return [String]
     class ListTrackerConsumersInput < Struct.new(
+      nil,
       :tracker_name,
       :max_results,
       :next_token,
@@ -4242,6 +4370,7 @@ module Aws::Location
     #               token in a following request to fetch the next set of results. </p>
     #   @return [String]
     class ListTrackerConsumersOutput < Struct.new(
+      nil,
       :consumer_arns,
       :next_token,
       keyword_init: true
@@ -4261,6 +4390,7 @@ module Aws::Location
     #            </p>
     #   @return [String]
     class ListTrackersInput < Struct.new(
+      nil,
       :max_results,
       :next_token,
       keyword_init: true
@@ -4277,6 +4407,7 @@ module Aws::Location
     #               token in a following request to fetch the next set of results.  </p>
     #   @return [String]
     class ListTrackersOutput < Struct.new(
+      nil,
       :entries,
       :next_token,
       keyword_init: true
@@ -4312,6 +4443,7 @@ module Aws::Location
     #               format: <code>YYYY-MM-DDThh:mm:ss.sssZ</code>. </p>
     #   @return [Time]
     class ListTrackersResponseEntry < Struct.new(
+      nil,
       :tracker_name,
       :description,
       :pricing_plan,
@@ -4355,6 +4487,7 @@ module Aws::Location
     #   <p>LTE Tracking Area Code (TAC).</p>
     #   @return [Integer]
     class LteCellDetails < Struct.new(
+      nil,
       :cell_id,
       :mcc,
       :mnc,
@@ -4383,6 +4516,7 @@ module Aws::Location
     #   <p>Physical Cell ID (PCI).</p>
     #   @return [Integer]
     class LteLocalId < Struct.new(
+      nil,
       :earfcn,
       :pci,
       keyword_init: true
@@ -4413,6 +4547,7 @@ module Aws::Location
     #   <p>Signal quality of the reference Signal received, measured in decibels (dB).</p>
     #   @return [Float]
     class LteNetworkMeasurements < Struct.new(
+      nil,
       :earfcn,
       :cell_id,
       :pci,
@@ -4593,6 +4728,7 @@ module Aws::Location
     #            </note>
     #   @return [Array<String>]
     class MapConfiguration < Struct.new(
+      nil,
       :style,
       :political_view,
       :custom_layers,
@@ -4621,6 +4757,7 @@ module Aws::Location
     #            </note>
     #   @return [Array<String>]
     class MapConfigurationUpdate < Struct.new(
+      nil,
       :political_view,
       :custom_layers,
       keyword_init: true
@@ -4717,6 +4854,7 @@ module Aws::Location
     #            </note>
     #   @return [String]
     class Place < Struct.new(
+      nil,
       :label,
       :geometry,
       :address_number,
@@ -4755,6 +4893,7 @@ module Aws::Location
     #            </ul>
     #   @return [Array<Float>]
     class PlaceGeometry < Struct.new(
+      nil,
       :point,
       keyword_init: true
     )
@@ -4767,6 +4906,7 @@ module Aws::Location
     #               position of a device, along the Earth's surface.</p>
     #   @return [Float]
     class PositionalAccuracy < Struct.new(
+      nil,
       :horizontal,
       keyword_init: true
     )
@@ -4799,6 +4939,7 @@ module Aws::Location
     #            </p>
     #   @return [Hash<String, String>]
     class PutGeofenceInput < Struct.new(
+      nil,
       :collection_name,
       :geofence_id,
       :geometry,
@@ -4822,6 +4963,7 @@ module Aws::Location
     #            </p>
     #   @return [Time]
     class PutGeofenceOutput < Struct.new(
+      nil,
       :geofence_id,
       :create_time,
       :update_time,
@@ -4834,6 +4976,7 @@ module Aws::Location
     # @!attribute message
     #   @return [String]
     class ResourceNotFoundException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -4853,6 +4996,7 @@ module Aws::Location
     #                   <code>DeparturePosition</code> and <code>DestinationPosition</code>.</p>
     #   @return [Types::RouteMatrixEntryError]
     class RouteMatrixEntry < Struct.new(
+      nil,
       :distance,
       :duration_seconds,
       :error,
@@ -4915,6 +5059,7 @@ module Aws::Location
     #   <p>A message about the error that occurred for the route calculation.</p>
     #   @return [String]
     class RouteMatrixEntryError < Struct.new(
+      nil,
       :code,
       :message,
       keyword_init: true
@@ -4944,6 +5089,7 @@ module Aws::Location
     #            </note>
     #   @return [String]
     class SearchForPositionResult < Struct.new(
+      nil,
       :place,
       :distance,
       :place_id,
@@ -4980,6 +5126,7 @@ module Aws::Location
     #               to any Amazon Location categories.</p>
     #   @return [Array<String>]
     class SearchForSuggestionsResult < Struct.new(
+      nil,
       :text,
       :place_id,
       :categories,
@@ -5018,6 +5165,7 @@ module Aws::Location
     #            </note>
     #   @return [String]
     class SearchForTextResult < Struct.new(
+      nil,
       :place,
       :distance,
       :relevance,
@@ -5064,6 +5212,7 @@ module Aws::Location
     #               the request.</p>
     #   @return [String]
     class SearchPlaceIndexForPositionInput < Struct.new(
+      nil,
       :index_name,
       :position,
       :max_results,
@@ -5084,6 +5233,7 @@ module Aws::Location
     #               additional information about the Places returned.</p>
     #   @return [Array<Types::SearchForPositionResult>]
     class SearchPlaceIndexForPositionOutput < Struct.new(
+      nil,
       :summary,
       :results,
       keyword_init: true
@@ -5123,6 +5273,7 @@ module Aws::Location
     #               language tag, for example, <code>en</code> for English.</p>
     #   @return [String]
     class SearchPlaceIndexForPositionSummary < Struct.new(
+      nil,
       :position,
       :max_results,
       :data_source,
@@ -5214,6 +5365,7 @@ module Aws::Location
     #               the request.</p>
     #   @return [String]
     class SearchPlaceIndexForSuggestionsInput < Struct.new(
+      nil,
       :index_name,
       :text,
       :bias_position,
@@ -5238,6 +5390,7 @@ module Aws::Location
     #   <p>A list of place suggestions that best match the search text.</p>
     #   @return [Array<Types::SearchForSuggestionsResult>]
     class SearchPlaceIndexForSuggestionsOutput < Struct.new(
+      nil,
       :summary,
       :results,
       keyword_init: true
@@ -5294,6 +5447,7 @@ module Aws::Location
     #   <p>The optional category filter specified in the request.</p>
     #   @return [Array<String>]
     class SearchPlaceIndexForSuggestionsSummary < Struct.new(
+      nil,
       :text,
       :bias_position,
       :filter_b_box,
@@ -5389,6 +5543,7 @@ module Aws::Location
     #               the request.</p>
     #   @return [String]
     class SearchPlaceIndexForTextInput < Struct.new(
+      nil,
       :index_name,
       :text,
       :bias_position,
@@ -5417,6 +5572,7 @@ module Aws::Location
     #               be returned by specific data partners.</p>
     #   @return [Array<Types::SearchForTextResult>]
     class SearchPlaceIndexForTextOutput < Struct.new(
+      nil,
       :summary,
       :results,
       keyword_init: true
@@ -5479,6 +5635,7 @@ module Aws::Location
     #   <p>The optional category filter specified in the request.</p>
     #   @return [Array<String>]
     class SearchPlaceIndexForTextSummary < Struct.new(
+      nil,
       :text,
       :bias_position,
       :filter_b_box,
@@ -5499,6 +5656,7 @@ module Aws::Location
     #   <p>A message with the reason for the service quota exceeded exception error.</p>
     #   @return [String]
     class ServiceQuotaExceededException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -5532,6 +5690,7 @@ module Aws::Location
     #                   <code>True</code>. </p>
     #   @return [Integer]
     class Step < Struct.new(
+      nil,
       :start_position,
       :end_position,
       :distance,
@@ -5581,6 +5740,7 @@ module Aws::Location
     #            </ul>
     #   @return [Hash<String, String>]
     class TagResourceInput < Struct.new(
+      nil,
       :resource_arn,
       :tags,
       keyword_init: true
@@ -5589,6 +5749,7 @@ module Aws::Location
     end
 
     class TagResourceOutput < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -5598,6 +5759,7 @@ module Aws::Location
     # @!attribute message
     #   @return [String]
     class ThrottlingException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -5615,6 +5777,7 @@ module Aws::Location
     #   <p>The time zone's offset, in seconds, from UTC.</p>
     #   @return [Integer]
     class TimeZone < Struct.new(
+      nil,
       :name,
       :offset,
       keyword_init: true
@@ -5627,6 +5790,7 @@ module Aws::Location
     #   <p>The set of arrays which define the polygon. A polygon can have between 4 and 1000 vertices.</p>
     #   @return [Array<Array<Array<Float>>>]
     class TrackingFilterGeometry < Struct.new(
+      nil,
       :polygon,
       keyword_init: true
     )
@@ -5681,6 +5845,7 @@ module Aws::Location
     #            </p>
     #   @return [String]
     class TruckDimensions < Struct.new(
+      nil,
       :length,
       :height,
       :width,
@@ -5707,6 +5872,7 @@ module Aws::Location
     #            </p>
     #   @return [String]
     class TruckWeight < Struct.new(
+      nil,
       :total,
       :unit,
       keyword_init: true
@@ -5729,6 +5895,7 @@ module Aws::Location
     #   <p>The list of tag keys to remove from the specified resource.</p>
     #   @return [Array<String>]
     class UntagResourceInput < Struct.new(
+      nil,
       :resource_arn,
       :tag_keys,
       keyword_init: true
@@ -5737,6 +5904,7 @@ module Aws::Location
     end
 
     class UntagResourceOutput < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -5762,6 +5930,7 @@ module Aws::Location
     #   <p>Updates the description for the geofence collection.</p>
     #   @return [String]
     class UpdateGeofenceCollectionInput < Struct.new(
+      nil,
       :collection_name,
       :pricing_plan,
       :pricing_plan_data_source,
@@ -5791,6 +5960,7 @@ module Aws::Location
     #            </p>
     #   @return [Time]
     class UpdateGeofenceCollectionOutput < Struct.new(
+      nil,
       :collection_name,
       :collection_arn,
       :update_time,
@@ -5827,6 +5997,7 @@ module Aws::Location
     #   <p>Updates the API key restrictions for the API key resource.</p>
     #   @return [Types::ApiKeyRestrictions]
     class UpdateKeyInput < Struct.new(
+      nil,
       :key_name,
       :description,
       :expire_time,
@@ -5857,6 +6028,7 @@ module Aws::Location
     #               format: <code>YYYY-MM-DDThh:mm:ss.sssZ</code>. </p>
     #   @return [Time]
     class UpdateKeyOutput < Struct.new(
+      nil,
       :key_arn,
       :key_name,
       :update_time,
@@ -5883,6 +6055,7 @@ module Aws::Location
     #               political view.</p>
     #   @return [Types::MapConfigurationUpdate]
     class UpdateMapInput < Struct.new(
+      nil,
       :map_name,
       :pricing_plan,
       :description,
@@ -5910,6 +6083,7 @@ module Aws::Location
     #               format: <code>YYYY-MM-DDThh:mm:ss.sssZ</code>. </p>
     #   @return [Time]
     class UpdateMapOutput < Struct.new(
+      nil,
       :map_name,
       :map_arn,
       :update_time,
@@ -5935,6 +6109,7 @@ module Aws::Location
     #   <p>Updates the data storage option for the place index resource.</p>
     #   @return [Types::DataSourceConfiguration]
     class UpdatePlaceIndexInput < Struct.new(
+      nil,
       :index_name,
       :pricing_plan,
       :description,
@@ -5963,6 +6138,7 @@ module Aws::Location
     #               format: <code>YYYY-MM-DDThh:mm:ss.sssZ</code>. </p>
     #   @return [Time]
     class UpdatePlaceIndexOutput < Struct.new(
+      nil,
       :index_name,
       :index_arn,
       :update_time,
@@ -5985,6 +6161,7 @@ module Aws::Location
     #   <p>Updates the description for the route calculator resource.</p>
     #   @return [String]
     class UpdateRouteCalculatorInput < Struct.new(
+      nil,
       :calculator_name,
       :pricing_plan,
       :description,
@@ -6012,6 +6189,7 @@ module Aws::Location
     #               format: <code>YYYY-MM-DDThh:mm:ss.sssZ</code>. </p>
     #   @return [Time]
     class UpdateRouteCalculatorOutput < Struct.new(
+      nil,
       :calculator_name,
       :calculator_arn,
       :update_time,
@@ -6086,6 +6264,7 @@ module Aws::Location
     #            <p>This parameter is only used if you are using a KMS customer managed key.</p>
     #   @return [Boolean]
     class UpdateTrackerInput < Struct.new(
+      nil,
       :tracker_name,
       :pricing_plan,
       :pricing_plan_data_source,
@@ -6116,6 +6295,7 @@ module Aws::Location
     #               format: <code>YYYY-MM-DDThh:mm:ss.sssZ</code>. </p>
     #   @return [Time]
     class UpdateTrackerOutput < Struct.new(
+      nil,
       :tracker_name,
       :tracker_arn,
       :update_time,
@@ -6134,6 +6314,7 @@ module Aws::Location
     #   <p>The field where the invalid entry was detected.</p>
     #   @return [Array<Types::ValidationExceptionField>]
     class ValidationException < Struct.new(
+      nil,
       :message,
       :reason,
       :field_list,
@@ -6151,6 +6332,7 @@ module Aws::Location
     #   <p>A message with the reason for the validation exception error.</p>
     #   @return [String]
     class ValidationExceptionField < Struct.new(
+      nil,
       :name,
       :message,
       keyword_init: true
@@ -6170,6 +6352,7 @@ module Aws::Location
     #            </p>
     #   @return [String]
     class VerifyDevicePositionRequest < Struct.new(
+      nil,
       :tracker_name,
       :device_state,
       :distance_unit,
@@ -6196,6 +6379,7 @@ module Aws::Location
     #   <p>The distance unit for the verification response.</p>
     #   @return [String]
     class VerifyDevicePositionResponse < Struct.new(
+      nil,
       :inferred_state,
       :device_id,
       :sample_time,
@@ -6214,6 +6398,7 @@ module Aws::Location
     #   <p>Received signal strength (dBm) of the WLAN measurement data.</p>
     #   @return [Integer]
     class WiFiAccessPoint < Struct.new(
+      nil,
       :mac_address,
       :rss,
       keyword_init: true

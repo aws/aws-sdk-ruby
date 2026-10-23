@@ -145,6 +145,7 @@ module Aws::MarketplaceCommerceAnalytics
     #           information from other systems.
     #   @return [Hash<String, String>]
     class GenerateDataSetRequest < Struct.new(
+      nil,
       :data_set_type,
       :data_set_publication_date,
       :role_name_arn,
@@ -163,6 +164,7 @@ module Aws::MarketplaceCommerceAnalytics
     #           used to correlate a request with notifications from the SNS topic.
     #   @return [String]
     class GenerateDataSetResult < Struct.new(
+      nil,
       :data_set_request_id,
       keyword_init: true
     )
@@ -174,6 +176,7 @@ module Aws::MarketplaceCommerceAnalytics
     #   This message describes details of the error.
     #   @return [String]
     class MarketplaceCommerceAnalyticsException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -223,6 +226,7 @@ module Aws::MarketplaceCommerceAnalytics
     #           Amazon SNS notification message and the data set metadata file.
     #   @return [Hash<String, String>]
     class StartSupportDataExportRequest < Struct.new(
+      nil,
       :data_set_type,
       :from_date,
       :role_name_arn,
@@ -243,6 +247,7 @@ module Aws::MarketplaceCommerceAnalytics
     #           used to correlate a request with notifications from the SNS topic.
     #   @return [String]
     class StartSupportDataExportResult < Struct.new(
+      nil,
       :data_set_request_id,
       keyword_init: true
     )

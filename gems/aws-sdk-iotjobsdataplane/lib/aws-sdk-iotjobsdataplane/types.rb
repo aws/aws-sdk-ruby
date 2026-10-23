@@ -11,6 +11,7 @@ module Aws::IoTJobsDataPlane
     #   <p>Additional information about the exception.</p>
     #   @return [String]
     class CertificateValidationException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -46,6 +47,7 @@ module Aws::IoTJobsDataPlane
     #   <p>An attribute of type Unsigned Long.</p>
     #   @return [String]
     class CommandParameterValue < Struct.new(
+      nil,
       :s,
       :b,
       :i,
@@ -65,6 +67,7 @@ module Aws::IoTJobsDataPlane
     #   <p>A conflict occurred while performing the API request on the resource ID.</p>
     #   @return [String]
     class ConflictException < Struct.new(
+      nil,
       :message,
       :resource_id,
       keyword_init: true
@@ -87,6 +90,7 @@ module Aws::IoTJobsDataPlane
     #            If not specified, the latest job execution is returned.</p>
     #   @return [Integer]
     class DescribeJobExecutionRequest < Struct.new(
+      nil,
       :job_id,
       :thing_name,
       :include_job_document,
@@ -100,6 +104,7 @@ module Aws::IoTJobsDataPlane
     #   <p>Contains data about a job execution.</p>
     #   @return [Types::JobExecution]
     class DescribeJobExecutionResponse < Struct.new(
+      nil,
       :execution,
       keyword_init: true
     )
@@ -110,6 +115,7 @@ module Aws::IoTJobsDataPlane
     #   <p>The name of the thing that is executing the job.</p>
     #   @return [String]
     class GetPendingJobExecutionsRequest < Struct.new(
+      nil,
       :thing_name,
       keyword_init: true
     )
@@ -123,6 +129,7 @@ module Aws::IoTJobsDataPlane
     #   <p>A list of JobExecutionSummary objects with status QUEUED.</p>
     #   @return [Array<Types::JobExecutionSummary>]
     class GetPendingJobExecutionsResponse < Struct.new(
+      nil,
       :in_progress_jobs,
       :queued_jobs,
       keyword_init: true
@@ -134,6 +141,7 @@ module Aws::IoTJobsDataPlane
     # @!attribute message
     #   @return [String]
     class InternalServerException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -145,6 +153,7 @@ module Aws::IoTJobsDataPlane
     #   <p>The message for the exception.</p>
     #   @return [String]
     class InvalidRequestException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -158,6 +167,7 @@ module Aws::IoTJobsDataPlane
     # @!attribute message
     #   @return [String]
     class InvalidStateTransitionException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -207,6 +217,7 @@ module Aws::IoTJobsDataPlane
     #   <p>The content of the job document.</p>
     #   @return [String]
     class JobExecution < Struct.new(
+      nil,
       :job_id,
       :thing_name,
       :status,
@@ -245,6 +256,7 @@ module Aws::IoTJobsDataPlane
     #            they are updated by a device.</p>
     #   @return [Integer]
     class JobExecutionState < Struct.new(
+      nil,
       :status,
       :status_details,
       :version_number,
@@ -280,6 +292,7 @@ module Aws::IoTJobsDataPlane
     #   <p>A number that identifies a particular job execution on a particular device.</p>
     #   @return [Integer]
     class JobExecutionSummary < Struct.new(
+      nil,
       :job_id,
       :queued_at,
       :started_at,
@@ -303,6 +316,7 @@ module Aws::IoTJobsDataPlane
     #   <p>The message for the exception.</p>
     #   @return [String]
     class ResourceNotFoundException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -313,6 +327,7 @@ module Aws::IoTJobsDataPlane
     # @!attribute message
     #   @return [String]
     class ServiceQuotaExceededException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -324,6 +339,7 @@ module Aws::IoTJobsDataPlane
     #   <p>The message for the exception.</p>
     #   @return [String]
     class ServiceUnavailableException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -357,6 +373,7 @@ module Aws::IoTJobsDataPlane
     #            SDKs will automatically generate a unique client request.</p>
     #   @return [String]
     class StartCommandExecutionRequest < Struct.new(
+      nil,
       :target_arn,
       :command_arn,
       :parameters,
@@ -371,6 +388,7 @@ module Aws::IoTJobsDataPlane
     #   <p>A unique identifier for the command execution.</p>
     #   @return [String]
     class StartCommandExecutionResponse < Struct.new(
+      nil,
       :execution_id,
       keyword_init: true
     )
@@ -397,6 +415,7 @@ module Aws::IoTJobsDataPlane
     #            <p>Valid values for this parameter range from 1 to 10080 (1 minute to 7 days).</p>
     #   @return [Integer]
     class StartNextPendingJobExecutionRequest < Struct.new(
+      nil,
       :thing_name,
       :status_details,
       :step_timeout_in_minutes,
@@ -409,6 +428,7 @@ module Aws::IoTJobsDataPlane
     #   <p>A JobExecution object.</p>
     #   @return [Types::JobExecution]
     class StartNextPendingJobExecutionResponse < Struct.new(
+      nil,
       :execution,
       keyword_init: true
     )
@@ -419,6 +439,7 @@ module Aws::IoTJobsDataPlane
     # @!attribute message
     #   @return [String]
     class TerminalStateException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -433,6 +454,7 @@ module Aws::IoTJobsDataPlane
     #   <p>The payload associated with the exception.</p>
     #   @return [String]
     class ThrottlingException < Struct.new(
+      nil,
       :message,
       :payload,
       keyword_init: true
@@ -489,6 +511,7 @@ module Aws::IoTJobsDataPlane
     #            device.</p>
     #   @return [Integer]
     class UpdateJobExecutionRequest < Struct.new(
+      nil,
       :job_id,
       :thing_name,
       :status,
@@ -510,6 +533,7 @@ module Aws::IoTJobsDataPlane
     #   <p>The contents of the Job Documents.</p>
     #   @return [String]
     class UpdateJobExecutionResponse < Struct.new(
+      nil,
       :execution_state,
       :job_document,
       keyword_init: true
@@ -521,6 +545,7 @@ module Aws::IoTJobsDataPlane
     # @!attribute message
     #   @return [String]
     class ValidationException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )

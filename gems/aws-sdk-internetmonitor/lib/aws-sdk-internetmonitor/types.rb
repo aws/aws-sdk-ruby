@@ -10,6 +10,7 @@ module Aws::InternetMonitor
     # @!attribute message
     #   @return [String]
     class AccessDeniedException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -46,6 +47,7 @@ module Aws::InternetMonitor
     #   			Guide.</p>
     #   @return [Float]
     class AvailabilityMeasurement < Struct.new(
+      nil,
       :experience_score,
       :percent_of_total_traffic_impacted,
       :percent_of_client_location_impacted,
@@ -58,6 +60,7 @@ module Aws::InternetMonitor
     # @!attribute message
     #   @return [String]
     class BadRequestException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -94,6 +97,7 @@ module Aws::InternetMonitor
     #   <p>The longitude where the internet event is located.</p>
     #   @return [Float]
     class ClientLocation < Struct.new(
+      nil,
       :as_name,
       :as_number,
       :country,
@@ -111,6 +115,7 @@ module Aws::InternetMonitor
     # @!attribute message
     #   @return [String]
     class ConflictException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -162,6 +167,7 @@ module Aws::InternetMonitor
     #   			Change health event thresholds</a> in the Internet Monitor section of the <i>CloudWatch User Guide</i>.</p>
     #   @return [Types::HealthEventsConfig]
     class CreateMonitorInput < Struct.new(
+      nil,
       :monitor_name,
       :resources,
       :client_token,
@@ -182,6 +188,7 @@ module Aws::InternetMonitor
     #   <p>The status of a monitor.</p>
     #   @return [String]
     class CreateMonitorOutput < Struct.new(
+      nil,
       :arn,
       :status,
       keyword_init: true
@@ -193,6 +200,7 @@ module Aws::InternetMonitor
     #   <p>The name of the monitor to delete.</p>
     #   @return [String]
     class DeleteMonitorInput < Struct.new(
+      nil,
       :monitor_name,
       keyword_init: true
     )
@@ -200,6 +208,7 @@ module Aws::InternetMonitor
     end
 
     class DeleteMonitorOutput < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -230,6 +239,7 @@ module Aws::InternetMonitor
     #   			commas.</p>
     #   @return [Array<String>]
     class FilterParameter < Struct.new(
+      nil,
       :field,
       :operator,
       :values,
@@ -252,6 +262,7 @@ module Aws::InternetMonitor
     #   			observability</a> in the Amazon CloudWatch Internet Monitor User Guide.</p>
     #   @return [String]
     class GetHealthEventOperationInput < Struct.new(
+      nil,
       :monitor_name,
       :event_id,
       :linked_account_id,
@@ -297,6 +308,7 @@ module Aws::InternetMonitor
     #   			when Internet Monitor creates a health event when there's an internet issue that affects your application end users.</p>
     #   @return [Float]
     class GetHealthEventOperationOutput < Struct.new(
+      nil,
       :event_arn,
       :event_id,
       :started_at,
@@ -322,6 +334,7 @@ module Aws::InternetMonitor
     #   <p>The <code>EventId</code> of the internet event to return information for. </p>
     #   @return [String]
     class GetInternetEventInput < Struct.new(
+      nil,
       :event_id,
       keyword_init: true
     )
@@ -350,6 +363,7 @@ module Aws::InternetMonitor
     #   <p>The status of the internet event.</p>
     #   @return [String]
     class GetInternetEventOutput < Struct.new(
+      nil,
       :event_id,
       :event_arn,
       :started_at,
@@ -372,6 +386,7 @@ module Aws::InternetMonitor
     #   				observability</a> in the Amazon CloudWatch Internet Monitor User Guide.</p>
     #   @return [String]
     class GetMonitorInput < Struct.new(
+      nil,
       :monitor_name,
       :linked_account_id,
       keyword_init: true
@@ -429,6 +444,7 @@ module Aws::InternetMonitor
     #   			Change health event thresholds</a> in the Internet Monitor section of the <i>CloudWatch User Guide</i>.</p>
     #   @return [Types::HealthEventsConfig]
     class GetMonitorOutput < Struct.new(
+      nil,
       :monitor_name,
       :monitor_arn,
       :resources,
@@ -461,6 +477,7 @@ module Aws::InternetMonitor
     #   <p>The number of query results that you want to return with this call.</p>
     #   @return [Integer]
     class GetQueryResultsInput < Struct.new(
+      nil,
       :monitor_name,
       :query_id,
       :next_token,
@@ -483,6 +500,7 @@ module Aws::InternetMonitor
     #   <p>The token for the next set of results. You receive this token from a previous call.</p>
     #   @return [String]
     class GetQueryResultsOutput < Struct.new(
+      nil,
       :fields,
       :data,
       :next_token,
@@ -499,6 +517,7 @@ module Aws::InternetMonitor
     #   			dentifier for a specific query.</p>
     #   @return [String]
     class GetQueryStatusInput < Struct.new(
+      nil,
       :monitor_name,
       :query_id,
       keyword_init: true
@@ -510,6 +529,7 @@ module Aws::InternetMonitor
     #   <p>The current status for a query.</p>
     #   @return [String]
     class GetQueryStatusOutput < Struct.new(
+      nil,
       :status,
       keyword_init: true
     )
@@ -553,6 +573,7 @@ module Aws::InternetMonitor
     #   <p>The value of the threshold percentage for performance or availability that was configured when Amazon CloudWatch Internet Monitor created the health event.</p>
     #   @return [Float]
     class HealthEvent < Struct.new(
+      nil,
       :event_arn,
       :event_id,
       :started_at,
@@ -599,6 +620,7 @@ module Aws::InternetMonitor
     #   <p>The configuration that determines the threshold and other conditions for when Internet Monitor creates a health event for a local performance issue.</p>
     #   @return [Types::LocalHealthEventsConfig]
     class HealthEventsConfig < Struct.new(
+      nil,
       :availability_score_threshold,
       :performance_score_threshold,
       :availability_local_health_events_config,
@@ -672,6 +694,7 @@ module Aws::InternetMonitor
     #   <p>The IPv4 prefixes at the client location that was impacted by the health event.</p>
     #   @return [Array<String>]
     class ImpactedLocation < Struct.new(
+      nil,
       :as_name,
       :as_number,
       :country,
@@ -696,6 +719,7 @@ module Aws::InternetMonitor
     # @!attribute message
     #   @return [String]
     class InternalServerErrorException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -706,6 +730,7 @@ module Aws::InternetMonitor
     # @!attribute message
     #   @return [String]
     class InternalServerException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -739,6 +764,7 @@ module Aws::InternetMonitor
     #   <p>The status of an internet event.</p>
     #   @return [String]
     class InternetEventSummary < Struct.new(
+      nil,
       :event_id,
       :event_arn,
       :started_at,
@@ -769,6 +795,7 @@ module Aws::InternetMonitor
     #   			scores</a> in the Amazon CloudWatch Internet Monitor section of the <i>CloudWatch User Guide</i>.</p>
     #   @return [Types::PerformanceMeasurement]
     class InternetHealth < Struct.new(
+      nil,
       :availability,
       :performance,
       keyword_init: true
@@ -783,6 +810,7 @@ module Aws::InternetMonitor
     #   			whether you choose to deliver internet measurements to S3 logs.</p>
     #   @return [Types::S3Config]
     class InternetMeasurementsLogDelivery < Struct.new(
+      nil,
       :s3_config,
       keyword_init: true
     )
@@ -793,6 +821,7 @@ module Aws::InternetMonitor
     # @!attribute message
     #   @return [String]
     class LimitExceededException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -824,6 +853,7 @@ module Aws::InternetMonitor
     #   				observability</a> in the Amazon CloudWatch Internet Monitor User Guide.</p>
     #   @return [String]
     class ListHealthEventsOperationInput < Struct.new(
+      nil,
       :monitor_name,
       :start_time,
       :end_time,
@@ -843,6 +873,7 @@ module Aws::InternetMonitor
     #   <p>The token for the next set of results. You receive this token from a previous call.</p>
     #   @return [String]
     class ListHealthEventsOperationOutput < Struct.new(
+      nil,
       :health_events,
       :next_token,
       keyword_init: true
@@ -869,6 +900,7 @@ module Aws::InternetMonitor
     #   <p>The type of network impairment.</p>
     #   @return [String]
     class ListInternetEventsInput < Struct.new(
+      nil,
       :next_token,
       :max_results,
       :start_time,
@@ -887,6 +919,7 @@ module Aws::InternetMonitor
     #   <p>The token for the next set of results. You receive this token from a previous call.</p>
     #   @return [String]
     class ListInternetEventsOutput < Struct.new(
+      nil,
       :internet_events,
       :next_token,
       keyword_init: true
@@ -913,6 +946,7 @@ module Aws::InternetMonitor
     #   				observability</a> in the Amazon CloudWatch Internet Monitor User Guide.</p>
     #   @return [Boolean]
     class ListMonitorsInput < Struct.new(
+      nil,
       :next_token,
       :max_results,
       :monitor_status,
@@ -929,6 +963,7 @@ module Aws::InternetMonitor
     #   <p>The token for the next set of results. You receive this token from a previous call.</p>
     #   @return [String]
     class ListMonitorsOutput < Struct.new(
+      nil,
       :monitors,
       :next_token,
       keyword_init: true
@@ -940,6 +975,7 @@ module Aws::InternetMonitor
     #   <p>The Amazon Resource Name (ARN) for a resource.</p>
     #   @return [String]
     class ListTagsForResourceOperationInput < Struct.new(
+      nil,
       :resource_arn,
       keyword_init: true
     )
@@ -950,6 +986,7 @@ module Aws::InternetMonitor
     #   <p>Tags for a resource.</p>
     #   @return [Hash<String, String>]
     class ListTagsForResourceOperationOutput < Struct.new(
+      nil,
       :tags,
       keyword_init: true
     )
@@ -977,6 +1014,7 @@ module Aws::InternetMonitor
     #            <p>If you don't set a minimum traffic impact threshold, the default value is 0.1%.</p>
     #   @return [Float]
     class LocalHealthEventsConfig < Struct.new(
+      nil,
       :status,
       :health_score_threshold,
       :min_traffic_impact,
@@ -1005,6 +1043,7 @@ module Aws::InternetMonitor
     #   <p>The health of data processing for the monitor.</p>
     #   @return [String]
     class Monitor < Struct.new(
+      nil,
       :monitor_name,
       :monitor_arn,
       :status,
@@ -1022,6 +1061,7 @@ module Aws::InternetMonitor
     #   <p>The Autonomous System Number (ASN) of the internet provider or network.</p>
     #   @return [Integer]
     class Network < Struct.new(
+      nil,
       :as_name,
       :as_number,
       keyword_init: true
@@ -1040,6 +1080,7 @@ module Aws::InternetMonitor
     #   <p>The type of network impairment.</p>
     #   @return [String]
     class NetworkImpairment < Struct.new(
+      nil,
       :networks,
       :as_path,
       :network_event_type,
@@ -1052,6 +1093,7 @@ module Aws::InternetMonitor
     # @!attribute message
     #   @return [String]
     class NotFoundException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -1094,6 +1136,7 @@ module Aws::InternetMonitor
     #   			events</a> in the Amazon CloudWatch Internet Monitor section of the <i>CloudWatch User Guide</i>.</p>
     #   @return [Types::RoundTripTime]
     class PerformanceMeasurement < Struct.new(
+      nil,
       :experience_score,
       :percent_of_total_traffic_impacted,
       :percent_of_client_location_impacted,
@@ -1113,6 +1156,7 @@ module Aws::InternetMonitor
     #   			field name is <code>availability_score</code>, the data type is <code>float</code>.</p>
     #   @return [String]
     class QueryField < Struct.new(
+      nil,
       :name,
       :type,
       keyword_init: true
@@ -1124,6 +1168,7 @@ module Aws::InternetMonitor
     # @!attribute message
     #   @return [String]
     class ResourceNotFoundException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -1142,6 +1187,7 @@ module Aws::InternetMonitor
     #   <p>RTT at the 95th percentile (p95). </p>
     #   @return [Float]
     class RoundTripTime < Struct.new(
+      nil,
       :p50,
       :p90,
       :p95,
@@ -1163,6 +1209,7 @@ module Aws::InternetMonitor
     #   <p>The status of publishing Internet Monitor internet measurements to an Amazon S3 bucket.</p>
     #   @return [String]
     class S3Config < Struct.new(
+      nil,
       :bucket_name,
       :bucket_prefix,
       :log_delivery_status,
@@ -1233,6 +1280,7 @@ module Aws::InternetMonitor
     #   				observability</a> in the Amazon CloudWatch Internet Monitor User Guide.</p>
     #   @return [String]
     class StartQueryInput < Struct.new(
+      nil,
       :monitor_name,
       :start_time,
       :end_time,
@@ -1248,6 +1296,7 @@ module Aws::InternetMonitor
     #   <p>The internally-generated identifier of a specific query.</p>
     #   @return [String]
     class StartQueryOutput < Struct.new(
+      nil,
       :query_id,
       keyword_init: true
     )
@@ -1261,6 +1310,7 @@ module Aws::InternetMonitor
     #   <p>The ID of the query that you want to stop. A <code>QueryId</code> is an internally-generated identifier for a specific query.</p>
     #   @return [String]
     class StopQueryInput < Struct.new(
+      nil,
       :monitor_name,
       :query_id,
       keyword_init: true
@@ -1269,6 +1319,7 @@ module Aws::InternetMonitor
     end
 
     class StopQueryOutput < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1281,6 +1332,7 @@ module Aws::InternetMonitor
     #   <p>Tags that you add to a resource. You can add a maximum of 50 tags in Internet Monitor.</p>
     #   @return [Hash<String, String>]
     class TagResourceOperationInput < Struct.new(
+      nil,
       :resource_arn,
       :tags,
       keyword_init: true
@@ -1289,6 +1341,7 @@ module Aws::InternetMonitor
     end
 
     class TagResourceOperationOutput < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1298,6 +1351,7 @@ module Aws::InternetMonitor
     # @!attribute message
     #   @return [String]
     class ThrottlingException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -1308,6 +1362,7 @@ module Aws::InternetMonitor
     # @!attribute message
     #   @return [String]
     class TooManyRequestsException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -1321,6 +1376,7 @@ module Aws::InternetMonitor
     #   <p>Tag keys that you remove from a resource.</p>
     #   @return [Array<String>]
     class UntagResourceOperationInput < Struct.new(
+      nil,
       :resource_arn,
       :tag_keys,
       keyword_init: true
@@ -1329,6 +1385,7 @@ module Aws::InternetMonitor
     end
 
     class UntagResourceOperationOutput < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1379,6 +1436,7 @@ module Aws::InternetMonitor
     #   			Change health event thresholds</a> in the Internet Monitor section of the <i>CloudWatch User Guide</i>.</p>
     #   @return [Types::HealthEventsConfig]
     class UpdateMonitorInput < Struct.new(
+      nil,
       :monitor_name,
       :resources_to_add,
       :resources_to_remove,
@@ -1400,6 +1458,7 @@ module Aws::InternetMonitor
     #   <p>The status of a monitor.</p>
     #   @return [String]
     class UpdateMonitorOutput < Struct.new(
+      nil,
       :monitor_arn,
       :status,
       keyword_init: true
@@ -1411,6 +1470,7 @@ module Aws::InternetMonitor
     # @!attribute message
     #   @return [String]
     class ValidationException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )

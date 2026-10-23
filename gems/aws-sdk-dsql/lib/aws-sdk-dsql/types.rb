@@ -10,6 +10,7 @@ module Aws::DSQL
     # @!attribute message
     #   @return [String]
     class AccessDeniedException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -24,6 +25,7 @@ module Aws::DSQL
     #   <p>The ARN of the cluster.</p>
     #   @return [String]
     class ClusterSummary < Struct.new(
+      nil,
       :identifier,
       :arn,
       keyword_init: true
@@ -41,6 +43,7 @@ module Aws::DSQL
     #   <p>Resource Type</p>
     #   @return [String]
     class ConflictException < Struct.new(
+      nil,
       :message,
       :resource_id,
       :resource_type,
@@ -72,6 +75,7 @@ module Aws::DSQL
     #   <p>The configuration settings when creating a multi-Region cluster, including the witness region and linked cluster properties.</p>
     #   @return [Types::MultiRegionProperties]
     class CreateClusterInput < Struct.new(
+      nil,
       :deletion_protection_enabled,
       :kms_encryption_key,
       :tags,
@@ -105,6 +109,7 @@ module Aws::DSQL
     #   <p>Whether deletion protection is enabled on this cluster.</p>
     #   @return [Boolean]
     class CreateClusterOutput < Struct.new(
+      nil,
       :identifier,
       :arn,
       :status,
@@ -130,6 +135,7 @@ module Aws::DSQL
     #            one.</p>
     #   @return [String]
     class DeleteClusterInput < Struct.new(
+      nil,
       :identifier,
       :client_token,
       keyword_init: true
@@ -151,6 +157,7 @@ module Aws::DSQL
     #   <p>The time of when the cluster was created.</p>
     #   @return [Time]
     class DeleteClusterOutput < Struct.new(
+      nil,
       :identifier,
       :arn,
       :status,
@@ -171,6 +178,7 @@ module Aws::DSQL
     #   <p>The status of encryption for the cluster.</p>
     #   @return [String]
     class EncryptionDetails < Struct.new(
+      nil,
       :encryption_type,
       :kms_key_arn,
       :encryption_status,
@@ -183,6 +191,7 @@ module Aws::DSQL
     #   <p>The ID of the cluster to retrieve.</p>
     #   @return [String]
     class GetClusterInput < Struct.new(
+      nil,
       :identifier,
       keyword_init: true
     )
@@ -215,6 +224,7 @@ module Aws::DSQL
     #   <p>The current encryption configuration details for the cluster.</p>
     #   @return [Types::EncryptionDetails]
     class GetClusterOutput < Struct.new(
+      nil,
       :identifier,
       :arn,
       :status,
@@ -232,6 +242,7 @@ module Aws::DSQL
     #   <p>The ID of the cluster to retrieve.</p>
     #   @return [String]
     class GetVpcEndpointServiceNameInput < Struct.new(
+      nil,
       :identifier,
       keyword_init: true
     )
@@ -242,6 +253,7 @@ module Aws::DSQL
     #   <p>The VPC endpoint service name.</p>
     #   @return [String]
     class GetVpcEndpointServiceNameOutput < Struct.new(
+      nil,
       :service_name,
       keyword_init: true
     )
@@ -256,6 +268,7 @@ module Aws::DSQL
     #   <p>Retry after seconds.</p>
     #   @return [Integer]
     class InternalServerException < Struct.new(
+      nil,
       :message,
       :retry_after_seconds,
       keyword_init: true
@@ -273,6 +286,7 @@ module Aws::DSQL
     #            page.</p>
     #   @return [String]
     class ListClustersInput < Struct.new(
+      nil,
       :max_results,
       :next_token,
       keyword_init: true
@@ -289,6 +303,7 @@ module Aws::DSQL
     #   <p>An array of the returned clusters.</p>
     #   @return [Array<Types::ClusterSummary>]
     class ListClustersOutput < Struct.new(
+      nil,
       :next_token,
       :clusters,
       keyword_init: true
@@ -300,6 +315,7 @@ module Aws::DSQL
     #   <p>The ARN of the resource for which you want to list the tags.</p>
     #   @return [String]
     class ListTagsForResourceInput < Struct.new(
+      nil,
       :resource_arn,
       keyword_init: true
     )
@@ -310,6 +326,7 @@ module Aws::DSQL
     #   <p>A map of key and value pairs that you used to tag your resource.</p>
     #   @return [Hash<String, String>]
     class ListTagsForResourceOutput < Struct.new(
+      nil,
       :tags,
       keyword_init: true
     )
@@ -324,6 +341,7 @@ module Aws::DSQL
     #   <p>The set of linked clusters that form the multi-Region cluster configuration. Each linked cluster represents a database instance in a different  Region.</p>
     #   @return [Array<String>]
     class MultiRegionProperties < Struct.new(
+      nil,
       :witness_region,
       :clusters,
       keyword_init: true
@@ -341,6 +359,7 @@ module Aws::DSQL
     #   <p>The resource type could not be found.</p>
     #   @return [String]
     class ResourceNotFoundException < Struct.new(
+      nil,
       :message,
       :resource_id,
       :resource_type,
@@ -366,6 +385,7 @@ module Aws::DSQL
     #   <p>The service exceeds a quota.</p>
     #   @return [String]
     class ServiceQuotaExceededException < Struct.new(
+      nil,
       :message,
       :resource_id,
       :resource_type,
@@ -383,6 +403,7 @@ module Aws::DSQL
     #   <p>A map of key and value pairs to use to tag your resource.</p>
     #   @return [Hash<String, String>]
     class TagResourceInput < Struct.new(
+      nil,
       :resource_arn,
       :tags,
       keyword_init: true
@@ -404,6 +425,7 @@ module Aws::DSQL
     #   <p>The request exceeds a request rate quota. Retry after seconds.</p>
     #   @return [Integer]
     class ThrottlingException < Struct.new(
+      nil,
       :message,
       :service_code,
       :quota_code,
@@ -420,6 +442,7 @@ module Aws::DSQL
     #   <p>The array of keys of the tags that you want to remove.</p>
     #   @return [Array<String>]
     class UntagResourceInput < Struct.new(
+      nil,
       :resource_arn,
       :tag_keys,
       keyword_init: true
@@ -449,6 +472,7 @@ module Aws::DSQL
     #   <p>The new multi-Region cluster configuration settings to be applied during an update operation.</p>
     #   @return [Types::MultiRegionProperties]
     class UpdateClusterInput < Struct.new(
+      nil,
       :identifier,
       :deletion_protection_enabled,
       :kms_encryption_key,
@@ -473,6 +497,7 @@ module Aws::DSQL
     #   <p>The time of when the cluster was created.</p>
     #   @return [Time]
     class UpdateClusterOutput < Struct.new(
+      nil,
       :identifier,
       :arn,
       :status,
@@ -492,6 +517,7 @@ module Aws::DSQL
     #   <p>A list of fields that didn't validate.</p>
     #   @return [Array<Types::ValidationExceptionField>]
     class ValidationException < Struct.new(
+      nil,
       :message,
       :reason,
       :field_list,
@@ -509,6 +535,7 @@ module Aws::DSQL
     #   <p>A message describing why this field failed validation.</p>
     #   @return [String]
     class ValidationExceptionField < Struct.new(
+      nil,
       :name,
       :message,
       keyword_init: true

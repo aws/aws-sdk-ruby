@@ -20,6 +20,7 @@ module Aws::NeptuneGraph
   #   Parameter to determine whether current API is a control plane or dataplane API
   #   @return [String]
   EndpointParameters = Struct.new(
+    nil,
     :region,
     :use_fips,
     :use_dual_stack,

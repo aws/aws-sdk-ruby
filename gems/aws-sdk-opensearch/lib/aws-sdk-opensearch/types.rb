@@ -14,6 +14,7 @@ module Aws::OpenSearch
     #   <p>Container for parameters required to enable S3 vectors engine features on the specified domain.</p>
     #   @return [Types::S3VectorsEngine]
     class AIMLOptionsInput < Struct.new(
+      nil,
       :natural_language_query_generation_options,
       :s3_vectors_engine,
       keyword_init: true
@@ -29,6 +30,7 @@ module Aws::OpenSearch
     #   <p>Container for parameters representing the state of S3 vectors engine features on the specified domain.</p>
     #   @return [Types::S3VectorsEngine]
     class AIMLOptionsOutput < Struct.new(
+      nil,
       :natural_language_query_generation_options,
       :s3_vectors_engine,
       keyword_init: true
@@ -44,6 +46,7 @@ module Aws::OpenSearch
     #   <p>Provides the current status of an entity.</p>
     #   @return [Types::OptionStatus]
     class AIMLOptionsStatus < Struct.new(
+      nil,
       :options,
       :status,
       keyword_init: true
@@ -62,6 +65,7 @@ module Aws::OpenSearch
     #   <p>The Amazon Web Services Region in which the domain is located.</p>
     #   @return [String]
     class AWSDomainInformation < Struct.new(
+      nil,
       :owner_id,
       :domain_name,
       :region,
@@ -75,6 +79,7 @@ module Aws::OpenSearch
     #   <p>The ID of the inbound connection to accept.</p>
     #   @return [String]
     class AcceptInboundConnectionRequest < Struct.new(
+      nil,
       :connection_id,
       keyword_init: true
     )
@@ -86,6 +91,7 @@ module Aws::OpenSearch
     #   <p>Information about the accepted inbound connection.</p>
     #   @return [Types::InboundConnection]
     class AcceptInboundConnectionResponse < Struct.new(
+      nil,
       :connection,
       keyword_init: true
     )
@@ -97,6 +103,7 @@ module Aws::OpenSearch
     #   <p>A description of the error.</p>
     #   @return [String]
     class AccessDeniedException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -113,6 +120,7 @@ module Aws::OpenSearch
     #   <p>The status of the access policy for the domain.</p>
     #   @return [Types::OptionStatus]
     class AccessPoliciesStatus < Struct.new(
+      nil,
       :options,
       :status,
       keyword_init: true
@@ -135,6 +143,7 @@ module Aws::OpenSearch
     #   <p>A description of the data source.</p>
     #   @return [String]
     class AddDataSourceRequest < Struct.new(
+      nil,
       :domain_name,
       :name,
       :data_source_type,
@@ -149,6 +158,7 @@ module Aws::OpenSearch
     #   <p>A message associated with creation of the data source.</p>
     #   @return [String]
     class AddDataSourceResponse < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -181,6 +191,7 @@ module Aws::OpenSearch
     #   <p>A list of tags attached to a domain.</p>
     #   @return [Array<Types::Tag>]
     class AddDirectQueryDataSourceRequest < Struct.new(
+      nil,
       :data_source_name,
       :data_source_type,
       :description,
@@ -197,6 +208,7 @@ module Aws::OpenSearch
     #     </p>
     #   @return [String]
     class AddDirectQueryDataSourceResponse < Struct.new(
+      nil,
       :data_source_arn,
       keyword_init: true
     )
@@ -213,6 +225,7 @@ module Aws::OpenSearch
     #   <p>List of resource tags.</p>
     #   @return [Array<Types::Tag>]
     class AddTagsRequest < Struct.new(
+      nil,
       :arn,
       :tag_list,
       keyword_init: true
@@ -241,6 +254,7 @@ module Aws::OpenSearch
     #   <p> The values of the additional instance type limits.</p>
     #   @return [Array<String>]
     class AdditionalLimit < Struct.new(
+      nil,
       :limit_name,
       :limit_values,
       keyword_init: true
@@ -288,6 +302,7 @@ module Aws::OpenSearch
     #   <p>The status of advanced options for the specified domain.</p>
     #   @return [Types::OptionStatus]
     class AdvancedOptionsStatus < Struct.new(
+      nil,
       :options,
       :status,
       keyword_init: true
@@ -321,6 +336,7 @@ module Aws::OpenSearch
     #       fine-grained access control on an existing domain</a>.</p>
     #   @return [Boolean]
     class AdvancedSecurityOptions < Struct.new(
+      nil,
       :enabled,
       :internal_user_database_enabled,
       :saml_options,
@@ -359,6 +375,7 @@ module Aws::OpenSearch
     #       fine-grained access control on an existing domain</a>.</p>
     #   @return [Boolean]
     class AdvancedSecurityOptionsInput < Struct.new(
+      nil,
       :enabled,
       :internal_user_database_enabled,
       :master_user_options,
@@ -379,6 +396,7 @@ module Aws::OpenSearch
     #   <p>Status of the fine-grained access control settings for a domain.</p>
     #   @return [Types::OptionStatus]
     class AdvancedSecurityOptionsStatus < Struct.new(
+      nil,
       :options,
       :status,
       keyword_init: true
@@ -395,6 +413,7 @@ module Aws::OpenSearch
     #   <p>The value assigned to the configuration key, such as an IAM user ARN.</p>
     #   @return [String]
     class AppConfig < Struct.new(
+      nil,
       :key,
       :value,
       keyword_init: true
@@ -427,6 +446,7 @@ module Aws::OpenSearch
     #   <p>The timestamp of the last update to an OpenSearch application.</p>
     #   @return [Time]
     class ApplicationSummary < Struct.new(
+      nil,
       :id,
       :arn,
       :name,
@@ -454,6 +474,7 @@ module Aws::OpenSearch
     #   <p>The configuration for associating a package with an Amazon OpenSearch Service domain.</p>
     #   @return [Types::PackageAssociationConfiguration]
     class AssociatePackageRequest < Struct.new(
+      nil,
       :package_id,
       :domain_name,
       :prerequisite_package_id_list,
@@ -468,6 +489,7 @@ module Aws::OpenSearch
     #   <p>Information about a package that is associated with a domain.</p>
     #   @return [Types::DomainPackageDetails]
     class AssociatePackageResponse < Struct.new(
+      nil,
       :domain_package_details,
       keyword_init: true
     )
@@ -482,6 +504,7 @@ module Aws::OpenSearch
     #      by an account within an Amazon Web Services Region.</p>
     #   @return [String]
     class AssociatePackagesRequest < Struct.new(
+      nil,
       :package_list,
       :domain_name,
       keyword_init: true
@@ -493,6 +516,7 @@ module Aws::OpenSearch
     #   <p>List of information about packages that are associated with a domain. </p>
     #   @return [Array<Types::DomainPackageDetails>]
     class AssociatePackagesResponse < Struct.new(
+      nil,
       :domain_package_details_list,
       keyword_init: true
     )
@@ -509,6 +533,7 @@ module Aws::OpenSearch
     #   <p>The Amazon Web Services service SP to grant access to.</p>
     #   @return [String]
     class AuthorizeVpcEndpointAccessRequest < Struct.new(
+      nil,
       :domain_name,
       :account,
       :service,
@@ -522,6 +547,7 @@ module Aws::OpenSearch
     #      domain.</p>
     #   @return [Types::AuthorizedPrincipal]
     class AuthorizeVpcEndpointAccessResponse < Struct.new(
+      nil,
       :authorized_principal,
       keyword_init: true
     )
@@ -537,6 +563,7 @@ module Aws::OpenSearch
     #   <p>The <a href="https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies_elements_principal.html">IAM principal</a> that is allowed access to the domain.</p>
     #   @return [String]
     class AuthorizedPrincipal < Struct.new(
+      nil,
       :principal_type,
       :principal,
       keyword_init: true
@@ -553,6 +580,7 @@ module Aws::OpenSearch
     #   <p>Details about an Auto-Tune action.</p>
     #   @return [Types::AutoTuneDetails]
     class AutoTune < Struct.new(
+      nil,
       :auto_tune_type,
       :auto_tune_details,
       keyword_init: true
@@ -566,6 +594,7 @@ module Aws::OpenSearch
     #   <p>Container for details about a scheduled Auto-Tune action.</p>
     #   @return [Types::ScheduledAutoTuneDetails]
     class AutoTuneDetails < Struct.new(
+      nil,
       :scheduled_auto_tune_details,
       keyword_init: true
     )
@@ -592,6 +621,7 @@ module Aws::OpenSearch
     #      changes.</p>
     #   @return [String]
     class AutoTuneMaintenanceSchedule < Struct.new(
+      nil,
       :start_at,
       :duration,
       :cron_expression_for_recurrence,
@@ -621,6 +651,7 @@ module Aws::OpenSearch
     #      deploy configuration changes on the domain rather than a maintenance schedule.</p>
     #   @return [Boolean]
     class AutoTuneOptions < Struct.new(
+      nil,
       :desired_state,
       :rollback_on_disable,
       :maintenance_schedules,
@@ -643,6 +674,7 @@ module Aws::OpenSearch
     #   <p>Whether to schedule Auto-Tune optimizations that require blue/green deployments during the domain's configured daily off-peak window.</p>
     #   @return [Boolean]
     class AutoTuneOptionsInput < Struct.new(
+      nil,
       :desired_state,
       :maintenance_schedules,
       :use_off_peak_window,
@@ -663,6 +695,7 @@ module Aws::OpenSearch
     #      than a maintenance schedule.</p>
     #   @return [Boolean]
     class AutoTuneOptionsOutput < Struct.new(
+      nil,
       :state,
       :error_message,
       :use_off_peak_window,
@@ -679,6 +712,7 @@ module Aws::OpenSearch
     #   <p>The current status of Auto-Tune for a domain.</p>
     #   @return [Types::AutoTuneStatus]
     class AutoTuneOptionsStatus < Struct.new(
+      nil,
       :options,
       :status,
       keyword_init: true
@@ -707,6 +741,7 @@ module Aws::OpenSearch
     #   <p>Indicates whether the domain is being deleted.</p>
     #   @return [Boolean]
     class AutoTuneStatus < Struct.new(
+      nil,
       :creation_date,
       :update_date,
       :update_version,
@@ -757,6 +792,7 @@ module Aws::OpenSearch
     #   <p>The total number of primary and replica shards that aren't allocated to any of the nodes in the Availability Zone.</p>
     #   @return [String]
     class AvailabilityZoneInfo < Struct.new(
+      nil,
       :availability_zone_name,
       :zone_status,
       :configured_data_node_count,
@@ -773,6 +809,7 @@ module Aws::OpenSearch
     #   <p>A description of the error.</p>
     #   @return [String]
     class BaseException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -787,6 +824,7 @@ module Aws::OpenSearch
     #   <p>When set to <code>True</code>, returns the list of change IDs and properties that will be cancelled without actually cancelling the change.</p>
     #   @return [Boolean]
     class CancelDomainConfigChangeRequest < Struct.new(
+      nil,
       :domain_name,
       :dry_run,
       keyword_init: true
@@ -804,6 +842,7 @@ module Aws::OpenSearch
     #   <p>Whether or not the request was a dry run. If <code>True</code>, the changes were not actually cancelled. </p>
     #   @return [Boolean]
     class CancelDomainConfigChangeResponse < Struct.new(
+      nil,
       :cancelled_change_ids,
       :cancelled_change_properties,
       :dry_run,
@@ -818,6 +857,7 @@ module Aws::OpenSearch
     #      on.</p>
     #   @return [String]
     class CancelServiceSoftwareUpdateRequest < Struct.new(
+      nil,
       :domain_name,
       keyword_init: true
     )
@@ -830,6 +870,7 @@ module Aws::OpenSearch
     #   <p>Container for the state of your domain relative to the latest service software.</p>
     #   @return [Types::ServiceSoftwareOptions]
     class CancelServiceSoftwareUpdateResponse < Struct.new(
+      nil,
       :service_software_options,
       keyword_init: true
     )
@@ -847,6 +888,7 @@ module Aws::OpenSearch
     #   <p>The current value of the property, after the change was cancelled.</p>
     #   @return [String]
     class CancelledChangeProperty < Struct.new(
+      nil,
       :property_name,
       :cancelled_value,
       :active_value,
@@ -875,6 +917,7 @@ module Aws::OpenSearch
     #   <p>The last time that the configuration change was updated.</p>
     #   @return [Time]
     class ChangeProgressDetails < Struct.new(
+      nil,
       :change_id,
       :message,
       :config_change_status,
@@ -900,6 +943,7 @@ module Aws::OpenSearch
     #   <p>The most recent updated timestamp of the stage.</p>
     #   @return [Time]
     class ChangeProgressStage < Struct.new(
+      nil,
       :name,
       :status,
       :description,
@@ -941,6 +985,7 @@ module Aws::OpenSearch
     #   <p>The IAM principal who initiated the configuration change.</p>
     #   @return [String]
     class ChangeProgressStatusDetails < Struct.new(
+      nil,
       :change_id,
       :start_time,
       :status,
@@ -972,6 +1017,7 @@ module Aws::OpenSearch
     #     </p>
     #   @return [String]
     class CloudWatchDirectQueryDataSource < Struct.new(
+      nil,
       :role_arn,
       keyword_init: true
     )
@@ -1024,6 +1070,7 @@ module Aws::OpenSearch
     #   <p>List of node options for the domain.</p>
     #   @return [Array<Types::NodeOption>]
     class ClusterConfig < Struct.new(
+      nil,
       :instance_type,
       :instance_count,
       :dedicated_master_enabled,
@@ -1050,6 +1097,7 @@ module Aws::OpenSearch
     #   <p>The status of cluster configuration options for the specified domain.</p>
     #   @return [Types::OptionStatus]
     class ClusterConfigStatus < Struct.new(
+      nil,
       :options,
       :status,
       keyword_init: true
@@ -1076,6 +1124,7 @@ module Aws::OpenSearch
     #      configure your user pool and identity pool.</p>
     #   @return [String]
     class CognitoOptions < Struct.new(
+      nil,
       :enabled,
       :user_pool_id,
       :identity_pool_id,
@@ -1093,6 +1142,7 @@ module Aws::OpenSearch
     #   <p>The status of the Cognito options for the specified domain.</p>
     #   @return [Types::OptionStatus]
     class CognitoOptionsStatus < Struct.new(
+      nil,
       :options,
       :status,
       keyword_init: true
@@ -1107,6 +1157,7 @@ module Aws::OpenSearch
     #   <p>Whether to enable or disable cold storage on the domain. You must enable UltraWarm storage to enable cold storage.</p>
     #   @return [Boolean]
     class ColdStorageOptions < Struct.new(
+      nil,
       :enabled,
       keyword_init: true
     )
@@ -1122,6 +1173,7 @@ module Aws::OpenSearch
     #   <p>The possible versions that you can upgrade the domain to.</p>
     #   @return [Array<String>]
     class CompatibleVersionsMap < Struct.new(
+      nil,
       :source_version,
       :target_versions,
       keyword_init: true
@@ -1134,6 +1186,7 @@ module Aws::OpenSearch
     #   <p>A description of the error.</p>
     #   @return [String]
     class ConflictException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -1151,6 +1204,7 @@ module Aws::OpenSearch
     #   <p>The connection properties for cross cluster search.</p>
     #   @return [Types::CrossClusterSearchConnectionProperties]
     class ConnectionProperties < Struct.new(
+      nil,
       :endpoint,
       :cross_cluster_search,
       keyword_init: true
@@ -1177,6 +1231,7 @@ module Aws::OpenSearch
     #   <p>A list of tags attached to a domain.</p>
     #   @return [Array<Types::Tag>]
     class CreateApplicationRequest < Struct.new(
+      nil,
       :client_token,
       :name,
       :data_sources,
@@ -1215,6 +1270,7 @@ module Aws::OpenSearch
     #   <p>The timestamp indicating when the OpenSearch application was created.</p>
     #   @return [Time]
     class CreateApplicationResponse < Struct.new(
+      nil,
       :id,
       :name,
       :arn,
@@ -1340,6 +1396,7 @@ module Aws::OpenSearch
     #   <p>Options for all machine learning features for the specified domain.</p>
     #   @return [Types::AIMLOptionsInput]
     class CreateDomainRequest < Struct.new(
+      nil,
       :domain_name,
       :engine_version,
       :cluster_config,
@@ -1372,6 +1429,7 @@ module Aws::OpenSearch
     #   <p>The status of the newly created domain.</p>
     #   @return [Types::DomainStatus]
     class CreateDomainResponse < Struct.new(
+      nil,
       :domain_status,
       keyword_init: true
     )
@@ -1395,6 +1453,7 @@ module Aws::OpenSearch
     #   <p>The <code>ConnectionProperties</code> for the outbound connection.</p>
     #   @return [Types::ConnectionProperties]
     class CreateOutboundConnectionRequest < Struct.new(
+      nil,
       :local_domain_info,
       :remote_domain_info,
       :connection_alias,
@@ -1430,6 +1489,7 @@ module Aws::OpenSearch
     #   <p>The <code>ConnectionProperties</code> for the newly created connection.</p>
     #   @return [Types::ConnectionProperties]
     class CreateOutboundConnectionResponse < Struct.new(
+      nil,
       :local_domain_info,
       :remote_domain_info,
       :connection_alias,
@@ -1469,6 +1529,7 @@ module Aws::OpenSearch
     #   <p>The encryption parameters for the package being created.</p>
     #   @return [Types::PackageEncryptionOptions]
     class CreatePackageRequest < Struct.new(
+      nil,
       :package_name,
       :package_type,
       :package_description,
@@ -1487,6 +1548,7 @@ module Aws::OpenSearch
     #   <p>Basic information about an OpenSearch Service package.</p>
     #   @return [Types::PackageDetails]
     class CreatePackageResponse < Struct.new(
+      nil,
       :package_details,
       keyword_init: true
     )
@@ -1503,6 +1565,7 @@ module Aws::OpenSearch
     #   <p>Unique, case-sensitive identifier to ensure idempotency of the request.</p>
     #   @return [String]
     class CreateVpcEndpointRequest < Struct.new(
+      nil,
       :domain_arn,
       :vpc_options,
       :client_token,
@@ -1515,6 +1578,7 @@ module Aws::OpenSearch
     #   <p>Information about the newly created VPC endpoint.</p>
     #   @return [Types::VpcEndpoint]
     class CreateVpcEndpointResponse < Struct.new(
+      nil,
       :vpc_endpoint,
       keyword_init: true
     )
@@ -1528,6 +1592,7 @@ module Aws::OpenSearch
     #      queries return partial results despite failures on one or more remote clusters.</p>
     #   @return [String]
     class CrossClusterSearchConnectionProperties < Struct.new(
+      nil,
       :skip_unavailable,
       keyword_init: true
     )
@@ -1544,6 +1609,7 @@ module Aws::OpenSearch
     #   <p>Detailed description of a data source.</p>
     #   @return [String]
     class DataSource < Struct.new(
+      nil,
       :data_source_arn,
       :data_source_description,
       keyword_init: true
@@ -1565,6 +1631,7 @@ module Aws::OpenSearch
     #   <p>The status of the data source.</p>
     #   @return [String]
     class DataSourceDetails < Struct.new(
+      nil,
       :data_source_type,
       :name,
       :description,
@@ -1593,6 +1660,7 @@ module Aws::OpenSearch
     #   <p>The unique identifier of the OpenSearch application to delete.</p>
     #   @return [String]
     class DeleteApplicationRequest < Struct.new(
+      nil,
       :id,
       keyword_init: true
     )
@@ -1600,6 +1668,7 @@ module Aws::OpenSearch
     end
 
     class DeleteApplicationResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1614,6 +1683,7 @@ module Aws::OpenSearch
     #   <p>The name of the data source to delete.</p>
     #   @return [String]
     class DeleteDataSourceRequest < Struct.new(
+      nil,
       :domain_name,
       :name,
       keyword_init: true
@@ -1626,6 +1696,7 @@ module Aws::OpenSearch
     #   <p>A message associated with deletion of the data source.</p>
     #   @return [String]
     class DeleteDataSourceResponse < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -1639,6 +1710,7 @@ module Aws::OpenSearch
     #     </p>
     #   @return [String]
     class DeleteDirectQueryDataSourceRequest < Struct.new(
+      nil,
       :data_source_name,
       keyword_init: true
     )
@@ -1650,6 +1722,7 @@ module Aws::OpenSearch
     #   <p>The name of the domain you want to permanently delete.</p>
     #   @return [String]
     class DeleteDomainRequest < Struct.new(
+      nil,
       :domain_name,
       keyword_init: true
     )
@@ -1662,6 +1735,7 @@ module Aws::OpenSearch
     #   <p>The status of the domain being deleted.</p>
     #   @return [Types::DomainStatus]
     class DeleteDomainResponse < Struct.new(
+      nil,
       :domain_status,
       keyword_init: true
     )
@@ -1673,6 +1747,7 @@ module Aws::OpenSearch
     #   <p>The ID of the inbound connection to permanently delete.</p>
     #   @return [String]
     class DeleteInboundConnectionRequest < Struct.new(
+      nil,
       :connection_id,
       keyword_init: true
     )
@@ -1685,6 +1760,7 @@ module Aws::OpenSearch
     #   <p>The deleted inbound connection.</p>
     #   @return [Types::InboundConnection]
     class DeleteInboundConnectionResponse < Struct.new(
+      nil,
       :connection,
       keyword_init: true
     )
@@ -1696,6 +1772,7 @@ module Aws::OpenSearch
     #   <p>The ID of the outbound connection you want to permanently delete.</p>
     #   @return [String]
     class DeleteOutboundConnectionRequest < Struct.new(
+      nil,
       :connection_id,
       keyword_init: true
     )
@@ -1707,6 +1784,7 @@ module Aws::OpenSearch
     #   <p>The deleted inbound connection.</p>
     #   @return [Types::OutboundConnection]
     class DeleteOutboundConnectionResponse < Struct.new(
+      nil,
       :connection,
       keyword_init: true
     )
@@ -1719,6 +1797,7 @@ module Aws::OpenSearch
     #   <p>The internal ID of the package you want to delete. Use <code>DescribePackages</code> to find this value.</p>
     #   @return [String]
     class DeletePackageRequest < Struct.new(
+      nil,
       :package_id,
       keyword_init: true
     )
@@ -1730,6 +1809,7 @@ module Aws::OpenSearch
     #   <p> Information about the deleted package.</p>
     #   @return [Types::PackageDetails]
     class DeletePackageResponse < Struct.new(
+      nil,
       :package_details,
       keyword_init: true
     )
@@ -1740,6 +1820,7 @@ module Aws::OpenSearch
     #   <p>The unique identifier of the endpoint.</p>
     #   @return [String]
     class DeleteVpcEndpointRequest < Struct.new(
+      nil,
       :vpc_endpoint_id,
       keyword_init: true
     )
@@ -1751,6 +1832,7 @@ module Aws::OpenSearch
     #      or <code>DELETE_FAILED</code>).</p>
     #   @return [Types::VpcEndpointSummary]
     class DeleteVpcEndpointResponse < Struct.new(
+      nil,
       :vpc_endpoint_summary,
       keyword_init: true
     )
@@ -1762,6 +1844,7 @@ module Aws::OpenSearch
     #   <p>A description of the error.</p>
     #   @return [String]
     class DependencyFailureException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -1782,6 +1865,7 @@ module Aws::OpenSearch
     #       <code>DescribeDomainAutoTunes</code> operations, which returns results in the next page.</p>
     #   @return [String]
     class DescribeDomainAutoTunesRequest < Struct.new(
+      nil,
       :domain_name,
       :max_results,
       :next_token,
@@ -1800,6 +1884,7 @@ module Aws::OpenSearch
     #      returned token to retrieve the next page.</p>
     #   @return [String]
     class DescribeDomainAutoTunesResponse < Struct.new(
+      nil,
       :auto_tunes,
       :next_token,
       keyword_init: true
@@ -1817,6 +1902,7 @@ module Aws::OpenSearch
     #      request returns information about the most recent configuration change.</p>
     #   @return [String]
     class DescribeDomainChangeProgressRequest < Struct.new(
+      nil,
       :domain_name,
       :change_id,
       keyword_init: true
@@ -1830,6 +1916,7 @@ module Aws::OpenSearch
     #   <p>Container for information about the stages of a configuration change happening on a domain.</p>
     #   @return [Types::ChangeProgressStatusDetails]
     class DescribeDomainChangeProgressResponse < Struct.new(
+      nil,
       :change_progress_status,
       keyword_init: true
     )
@@ -1841,6 +1928,7 @@ module Aws::OpenSearch
     #   <p>Name of the OpenSearch Service domain configuration that you want to describe.</p>
     #   @return [String]
     class DescribeDomainConfigRequest < Struct.new(
+      nil,
       :domain_name,
       keyword_init: true
     )
@@ -1852,6 +1940,7 @@ module Aws::OpenSearch
     #   <p>Container for the configuration of the OpenSearch Service domain.</p>
     #   @return [Types::DomainConfig]
     class DescribeDomainConfigResponse < Struct.new(
+      nil,
       :domain_config,
       keyword_init: true
     )
@@ -1863,6 +1952,7 @@ module Aws::OpenSearch
     #   <p>The name of the domain.</p>
     #   @return [String]
     class DescribeDomainHealthRequest < Struct.new(
+      nil,
       :domain_name,
       keyword_init: true
     )
@@ -1949,6 +2039,7 @@ module Aws::OpenSearch
     #   <p>A list of <code>EnvironmentInfo</code> for the domain. </p>
     #   @return [Array<Types::EnvironmentInfo>]
     class DescribeDomainHealthResponse < Struct.new(
+      nil,
       :domain_state,
       :availability_zone_count,
       :active_availability_zone_count,
@@ -1973,6 +2064,7 @@ module Aws::OpenSearch
     #   <p>The name of the domain.</p>
     #   @return [String]
     class DescribeDomainNodesRequest < Struct.new(
+      nil,
       :domain_name,
       keyword_init: true
     )
@@ -1985,6 +2077,7 @@ module Aws::OpenSearch
     #      details about the all nodes on the requested domain.</p>
     #   @return [Array<Types::DomainNodesStatus>]
     class DescribeDomainNodesResponse < Struct.new(
+      nil,
       :domain_nodes_status_list,
       keyword_init: true
     )
@@ -1996,6 +2089,7 @@ module Aws::OpenSearch
     #   <p>The name of the domain that you want information about.</p>
     #   @return [String]
     class DescribeDomainRequest < Struct.new(
+      nil,
       :domain_name,
       keyword_init: true
     )
@@ -2007,6 +2101,7 @@ module Aws::OpenSearch
     #   <p>List that contains the status of each specified OpenSearch Service domain.</p>
     #   @return [Types::DomainStatus]
     class DescribeDomainResponse < Struct.new(
+      nil,
       :domain_status,
       keyword_init: true
     )
@@ -2019,6 +2114,7 @@ module Aws::OpenSearch
     #      at least one domain name.</p>
     #   @return [Array<String>]
     class DescribeDomainsRequest < Struct.new(
+      nil,
       :domain_names,
       keyword_init: true
     )
@@ -2030,6 +2126,7 @@ module Aws::OpenSearch
     #   <p>The status of the requested domains.</p>
     #   @return [Array<Types::DomainStatus>]
     class DescribeDomainsResponse < Struct.new(
+      nil,
       :domain_status_list,
       keyword_init: true
     )
@@ -2047,6 +2144,7 @@ module Aws::OpenSearch
     #      specifies the updates that you're planning to make on the domain.</p>
     #   @return [Boolean]
     class DescribeDryRunProgressRequest < Struct.new(
+      nil,
       :domain_name,
       :dry_run_id,
       :load_dry_run_config,
@@ -2065,6 +2163,7 @@ module Aws::OpenSearch
     #   <p>The results of the dry run. </p>
     #   @return [Types::DryRunResults]
     class DescribeDryRunProgressResponse < Struct.new(
+      nil,
       :dry_run_progress_status,
       :dry_run_config,
       :dry_run_results,
@@ -2088,6 +2187,7 @@ module Aws::OpenSearch
     #      page.</p>
     #   @return [String]
     class DescribeInboundConnectionsRequest < Struct.new(
+      nil,
       :filters,
       :max_results,
       :next_token,
@@ -2106,6 +2206,7 @@ module Aws::OpenSearch
     #      returned token to retrieve the next page.</p>
     #   @return [String]
     class DescribeInboundConnectionsResponse < Struct.new(
+      nil,
       :connections,
       :next_token,
       keyword_init: true
@@ -2125,6 +2226,7 @@ module Aws::OpenSearch
     #      Defaults to the latest version of OpenSearch.</p>
     #   @return [String]
     class DescribeInstanceTypeLimitsRequest < Struct.new(
+      nil,
       :domain_name,
       :instance_type,
       :engine_version,
@@ -2140,6 +2242,7 @@ module Aws::OpenSearch
     #      nodes.<code>master</code> refers to dedicated master nodes.</p>
     #   @return [Hash<String, Types::Limits>]
     class DescribeInstanceTypeLimitsResponse < Struct.new(
+      nil,
       :limits_by_role,
       keyword_init: true
     )
@@ -2161,6 +2264,7 @@ module Aws::OpenSearch
     #      page.</p>
     #   @return [String]
     class DescribeOutboundConnectionsRequest < Struct.new(
+      nil,
       :filters,
       :max_results,
       :next_token,
@@ -2179,6 +2283,7 @@ module Aws::OpenSearch
     #      returned token to retrieve the next page.</p>
     #   @return [String]
     class DescribeOutboundConnectionsResponse < Struct.new(
+      nil,
       :connections,
       :next_token,
       keyword_init: true
@@ -2194,6 +2299,7 @@ module Aws::OpenSearch
     #   <p>A non-empty list of values for the specified filter field.</p>
     #   @return [Array<String>]
     class DescribePackagesFilter < Struct.new(
+      nil,
       :name,
       :value,
       keyword_init: true
@@ -2215,6 +2321,7 @@ module Aws::OpenSearch
     #      <code>DescribePackageFilters</code> operations, which returns results in the next page.</p>
     #   @return [String]
     class DescribePackagesRequest < Struct.new(
+      nil,
       :filters,
       :max_results,
       :next_token,
@@ -2233,6 +2340,7 @@ module Aws::OpenSearch
     #      returned token to retrieve the next page.</p>
     #   @return [String]
     class DescribePackagesResponse < Struct.new(
+      nil,
       :package_details_list,
       :next_token,
       keyword_init: true
@@ -2257,6 +2365,7 @@ module Aws::OpenSearch
     #      page.</p>
     #   @return [String]
     class DescribeReservedInstanceOfferingsRequest < Struct.new(
+      nil,
       :reserved_instance_offering_id,
       :max_results,
       :next_token,
@@ -2275,6 +2384,7 @@ module Aws::OpenSearch
     #   <p>List of Reserved Instance offerings.</p>
     #   @return [Array<Types::ReservedInstanceOffering>]
     class DescribeReservedInstanceOfferingsResponse < Struct.new(
+      nil,
       :next_token,
       :reserved_instance_offerings,
       keyword_init: true
@@ -2299,6 +2409,7 @@ module Aws::OpenSearch
     #      page.</p>
     #   @return [String]
     class DescribeReservedInstancesRequest < Struct.new(
+      nil,
       :reserved_instance_id,
       :max_results,
       :next_token,
@@ -2318,6 +2429,7 @@ module Aws::OpenSearch
     #   <p>List of Reserved Instances in the current Region.</p>
     #   @return [Array<Types::ReservedInstance>]
     class DescribeReservedInstancesResponse < Struct.new(
+      nil,
       :next_token,
       :reserved_instances,
       keyword_init: true
@@ -2329,6 +2441,7 @@ module Aws::OpenSearch
     #   <p>The unique identifiers of the endpoints to get information about.</p>
     #   @return [Array<String>]
     class DescribeVpcEndpointsRequest < Struct.new(
+      nil,
       :vpc_endpoint_ids,
       keyword_init: true
     )
@@ -2342,6 +2455,7 @@ module Aws::OpenSearch
     #   <p>Any errors associated with the request.</p>
     #   @return [Array<Types::VpcEndpointError>]
     class DescribeVpcEndpointsResponse < Struct.new(
+      nil,
       :vpc_endpoints,
       :vpc_endpoint_errors,
       keyword_init: true
@@ -2382,6 +2496,7 @@ module Aws::OpenSearch
     #      A list of tags attached to a direct query data source.</p>
     #   @return [Array<Types::Tag>]
     class DirectQueryDataSource < Struct.new(
+      nil,
       :data_source_name,
       :data_source_type,
       :description,
@@ -2425,6 +2540,7 @@ module Aws::OpenSearch
     #   <p>A description of the error.</p>
     #   @return [String]
     class DisabledOperationException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -2440,6 +2556,7 @@ module Aws::OpenSearch
     #   <p>Name of the domain to dissociate the package from.</p>
     #   @return [String]
     class DissociatePackageRequest < Struct.new(
+      nil,
       :package_id,
       :domain_name,
       keyword_init: true
@@ -2452,6 +2569,7 @@ module Aws::OpenSearch
     #   <p> Information about a package that has been dissociated from the domain.</p>
     #   @return [Types::DomainPackageDetails]
     class DissociatePackageResponse < Struct.new(
+      nil,
       :domain_package_details,
       keyword_init: true
     )
@@ -2466,6 +2584,7 @@ module Aws::OpenSearch
     #      by an account within an Amazon Web Services Region.</p>
     #   @return [String]
     class DissociatePackagesRequest < Struct.new(
+      nil,
       :package_list,
       :domain_name,
       keyword_init: true
@@ -2477,6 +2596,7 @@ module Aws::OpenSearch
     #   <p>A list of package details for the packages that were dissociated from the domain.</p>
     #   @return [Array<Types::DomainPackageDetails>]
     class DissociatePackagesResponse < Struct.new(
+      nil,
       :domain_package_details_list,
       keyword_init: true
     )
@@ -2553,6 +2673,7 @@ module Aws::OpenSearch
     #   <p>Container for parameters required to enable all machine learning features.</p>
     #   @return [Types::AIMLOptionsStatus]
     class DomainConfig < Struct.new(
+      nil,
       :engine_version,
       :cluster_config,
       :ebs_options,
@@ -2615,6 +2736,7 @@ module Aws::OpenSearch
     #      (ACM).</p>
     #   @return [String]
     class DomainEndpointOptions < Struct.new(
+      nil,
       :enforce_https,
       :tls_security_policy,
       :custom_endpoint_enabled,
@@ -2633,6 +2755,7 @@ module Aws::OpenSearch
     #   <p>The status of the endpoint options for a domain.</p>
     #   @return [Types::OptionStatus]
     class DomainEndpointOptionsStatus < Struct.new(
+      nil,
       :options,
       :status,
       keyword_init: true
@@ -2649,6 +2772,7 @@ module Aws::OpenSearch
     #      OpenSearch engine, or <code>Elasticsearch</code> for a legacy Elasticsearch OSS engine.</p>
     #   @return [String]
     class DomainInfo < Struct.new(
+      nil,
       :domain_name,
       :engine_type,
       keyword_init: true
@@ -2661,6 +2785,7 @@ module Aws::OpenSearch
     #   <p>Information about an Amazon OpenSearch Service domain.</p>
     #   @return [Types::AWSDomainInformation]
     class DomainInformationContainer < Struct.new(
+      nil,
       :aws_domain_information,
       keyword_init: true
     )
@@ -2693,6 +2818,7 @@ module Aws::OpenSearch
     #   <p>The time at which the action was updated.</p>
     #   @return [Time]
     class DomainMaintenanceDetails < Struct.new(
+      nil,
       :maintenance_id,
       :domain_name,
       :action,
@@ -2733,6 +2859,7 @@ module Aws::OpenSearch
     #   <p>The storage size of the node, in GiB.</p>
     #   @return [String]
     class DomainNodesStatus < Struct.new(
+      nil,
       :node_id,
       :node_type,
       :availability_zone,
@@ -2783,6 +2910,7 @@ module Aws::OpenSearch
     #   <p>The configuration for associating a package with an Amazon OpenSearch Service domain.</p>
     #   @return [Types::PackageAssociationConfiguration]
     class DomainPackageDetails < Struct.new(
+      nil,
       :package_id,
       :package_name,
       :package_type,
@@ -2934,6 +3062,7 @@ module Aws::OpenSearch
     #   <p>Container for parameters required to enable all machine learning features.</p>
     #   @return [Types::AIMLOptionsOutput]
     class DomainStatus < Struct.new(
+      nil,
       :domain_id,
       :domain_name,
       :arn,
@@ -2990,6 +3119,7 @@ module Aws::OpenSearch
     #   <p>Any validation failures that occurred as a result of the dry run.</p>
     #   @return [Array<Types::ValidationFailure>]
     class DryRunProgressStatus < Struct.new(
+      nil,
       :dry_run_id,
       :dry_run_status,
       :creation_date,
@@ -3030,6 +3160,7 @@ module Aws::OpenSearch
     #   <p>A message corresponding to the deployment type.</p>
     #   @return [String]
     class DryRunResults < Struct.new(
+      nil,
       :deployment_type,
       :message,
       keyword_init: true
@@ -3046,6 +3177,7 @@ module Aws::OpenSearch
     #   <p>The unit of measurement for the duration of a maintenance schedule.</p>
     #   @return [String]
     class Duration < Struct.new(
+      nil,
       :value,
       :unit,
       keyword_init: true
@@ -3074,6 +3206,7 @@ module Aws::OpenSearch
     #      only for the <code>gp3</code> volume type.</p>
     #   @return [Integer]
     class EBSOptions < Struct.new(
+      nil,
       :ebs_enabled,
       :volume_type,
       :volume_size,
@@ -3092,6 +3225,7 @@ module Aws::OpenSearch
     #   <p>The status of the EBS options for the specified domain.</p>
     #   @return [Types::OptionStatus]
     class EBSOptionsStatus < Struct.new(
+      nil,
       :options,
       :status,
       keyword_init: true
@@ -3110,6 +3244,7 @@ module Aws::OpenSearch
     #   <p>The KMS key ID. Takes the form <code>1a2a3a4-1a2a-3a4a-5a6a-1a2a3a4a5a6a</code>.</p>
     #   @return [String]
     class EncryptionAtRestOptions < Struct.new(
+      nil,
       :enabled,
       :kms_key_id,
       keyword_init: true
@@ -3125,6 +3260,7 @@ module Aws::OpenSearch
     #   <p>The status of the encryption at rest options for the specified domain.</p>
     #   @return [Types::OptionStatus]
     class EncryptionAtRestOptionsStatus < Struct.new(
+      nil,
       :options,
       :status,
       keyword_init: true
@@ -3137,6 +3273,7 @@ module Aws::OpenSearch
     #   <p> A list of <code>AvailabilityZoneInfo</code> for the domain.</p>
     #   @return [Array<Types::AvailabilityZoneInfo>]
     class EnvironmentInfo < Struct.new(
+      nil,
       :availability_zone_information,
       keyword_init: true
     )
@@ -3151,6 +3288,7 @@ module Aws::OpenSearch
     #   <p>A message describing the error.</p>
     #   @return [String]
     class ErrorDetails < Struct.new(
+      nil,
       :error_type,
       :error_message,
       keyword_init: true
@@ -3168,6 +3306,7 @@ module Aws::OpenSearch
     #   <p>One or more values for the filter.</p>
     #   @return [Array<String>]
     class Filter < Struct.new(
+      nil,
       :name,
       :values,
       keyword_init: true
@@ -3179,6 +3318,7 @@ module Aws::OpenSearch
     #   <p>The unique identifier of the OpenSearch application to retrieve.</p>
     #   @return [String]
     class GetApplicationRequest < Struct.new(
+      nil,
       :id,
       keyword_init: true
     )
@@ -3218,6 +3358,7 @@ module Aws::OpenSearch
     #   <p>The timestamp of the last update to the OpenSearch application.</p>
     #   @return [Time]
     class GetApplicationResponse < Struct.new(
+      nil,
       :id,
       :arn,
       :name,
@@ -3239,6 +3380,7 @@ module Aws::OpenSearch
     #      domain.</p>
     #   @return [String]
     class GetCompatibleVersionsRequest < Struct.new(
+      nil,
       :domain_name,
       keyword_init: true
     )
@@ -3251,6 +3393,7 @@ module Aws::OpenSearch
     #      to.</p>
     #   @return [Array<Types::CompatibleVersionsMap>]
     class GetCompatibleVersionsResponse < Struct.new(
+      nil,
       :compatible_versions,
       keyword_init: true
     )
@@ -3266,6 +3409,7 @@ module Aws::OpenSearch
     #   <p>The name of the data source to get information about.</p>
     #   @return [String]
     class GetDataSourceRequest < Struct.new(
+      nil,
       :domain_name,
       :name,
       keyword_init: true
@@ -3287,6 +3431,7 @@ module Aws::OpenSearch
     #   <p>The status of the data source.</p>
     #   @return [String]
     class GetDataSourceResponse < Struct.new(
+      nil,
       :data_source_type,
       :name,
       :description,
@@ -3303,6 +3448,7 @@ module Aws::OpenSearch
     #     </p>
     #   @return [String]
     class GetDirectQueryDataSourceRequest < Struct.new(
+      nil,
       :data_source_name,
       keyword_init: true
     )
@@ -3338,6 +3484,7 @@ module Aws::OpenSearch
     #     </p>
     #   @return [String]
     class GetDirectQueryDataSourceResponse < Struct.new(
+      nil,
       :data_source_name,
       :data_source_type,
       :description,
@@ -3357,6 +3504,7 @@ module Aws::OpenSearch
     #   <p>The request ID of the maintenance action.</p>
     #   @return [String]
     class GetDomainMaintenanceStatusRequest < Struct.new(
+      nil,
       :domain_name,
       :maintenance_id,
       keyword_init: true
@@ -3384,6 +3532,7 @@ module Aws::OpenSearch
     #   <p>The time at which the action was updated.</p>
     #   @return [Time]
     class GetDomainMaintenanceStatusResponse < Struct.new(
+      nil,
       :status,
       :status_message,
       :node_id,
@@ -3410,6 +3559,7 @@ module Aws::OpenSearch
     #     </p>
     #   @return [String]
     class GetPackageVersionHistoryRequest < Struct.new(
+      nil,
       :package_id,
       :max_results,
       :next_token,
@@ -3431,6 +3581,7 @@ module Aws::OpenSearch
     #      returned token to retrieve the next page.</p>
     #   @return [String]
     class GetPackageVersionHistoryResponse < Struct.new(
+      nil,
       :package_id,
       :package_version_history_list,
       :next_token,
@@ -3453,6 +3604,7 @@ module Aws::OpenSearch
     #      operations, which returns results in the next page.</p>
     #   @return [String]
     class GetUpgradeHistoryRequest < Struct.new(
+      nil,
       :domain_name,
       :max_results,
       :next_token,
@@ -3472,6 +3624,7 @@ module Aws::OpenSearch
     #      returned token to retrieve the next page.</p>
     #   @return [String]
     class GetUpgradeHistoryResponse < Struct.new(
+      nil,
       :upgrade_histories,
       :next_token,
       keyword_init: true
@@ -3484,6 +3637,7 @@ module Aws::OpenSearch
     #   <p>The domain of the domain to get upgrade status information for.</p>
     #   @return [String]
     class GetUpgradeStatusRequest < Struct.new(
+      nil,
       :domain_name,
       keyword_init: true
     )
@@ -3501,6 +3655,7 @@ module Aws::OpenSearch
     #   <p>A string that describes the update.</p>
     #   @return [String]
     class GetUpgradeStatusResponse < Struct.new(
+      nil,
       :upgrade_step,
       :step_status,
       :upgrade_name,
@@ -3522,6 +3677,7 @@ module Aws::OpenSearch
     #          <code>roles</code>.</p>
     #   @return [String]
     class IAMFederationOptionsInput < Struct.new(
+      nil,
       :enabled,
       :subject_key,
       :roles_key,
@@ -3541,6 +3697,7 @@ module Aws::OpenSearch
     #   <p>The key used for matching the IAM federation roles attribute.</p>
     #   @return [String]
     class IAMFederationOptionsOutput < Struct.new(
+      nil,
       :enabled,
       :subject_key,
       :roles_key,
@@ -3557,6 +3714,7 @@ module Aws::OpenSearch
     #   <p>Provides the current status of an entity.</p>
     #   @return [Types::OptionStatus]
     class IPAddressTypeStatus < Struct.new(
+      nil,
       :options,
       :status,
       keyword_init: true
@@ -3582,6 +3740,7 @@ module Aws::OpenSearch
     #     </p>
     #   @return [String]
     class IamIdentityCenterOptions < Struct.new(
+      nil,
       :enabled,
       :iam_identity_center_instance_arn,
       :iam_role_for_identity_center_application_arn,
@@ -3604,6 +3763,7 @@ module Aws::OpenSearch
     #   <p>The ARN of the IAM role associated with the IAM Identity Center application.</p>
     #   @return [String]
     class IamIdentityCenterOptionsInput < Struct.new(
+      nil,
       :enabled,
       :iam_identity_center_instance_arn,
       :iam_role_for_identity_center_application_arn,
@@ -3634,6 +3794,7 @@ module Aws::OpenSearch
     #   <p>The identifier of the IAM Identity Store.</p>
     #   @return [String]
     class IdentityCenterOptions < Struct.new(
+      nil,
       :enabled_api_access,
       :identity_center_instance_arn,
       :subject_key,
@@ -3659,6 +3820,7 @@ module Aws::OpenSearch
     #   <p>Specifies the attribute that contains the backend role identifier (such as group name or group ID) in IAM Identity Center.</p>
     #   @return [String]
     class IdentityCenterOptionsInput < Struct.new(
+      nil,
       :enabled_api_access,
       :identity_center_instance_arn,
       :subject_key,
@@ -3676,6 +3838,7 @@ module Aws::OpenSearch
     #   <p>The status of IAM Identity Center configuration settings for a domain.</p>
     #   @return [Types::OptionStatus]
     class IdentityCenterOptionsStatus < Struct.new(
+      nil,
       :options,
       :status,
       keyword_init: true
@@ -3702,6 +3865,7 @@ module Aws::OpenSearch
     #   <p>The connection mode.</p>
     #   @return [String]
     class InboundConnection < Struct.new(
+      nil,
       :local_domain_info,
       :remote_domain_info,
       :connection_id,
@@ -3761,6 +3925,7 @@ module Aws::OpenSearch
     #   <p>Information about the connection.</p>
     #   @return [String]
     class InboundConnectionStatus < Struct.new(
+      nil,
       :status_code,
       :message,
       keyword_init: true
@@ -3777,6 +3942,7 @@ module Aws::OpenSearch
     #   <p>The minimum allowed number of instances.</p>
     #   @return [Integer]
     class InstanceCountLimits < Struct.new(
+      nil,
       :minimum_instance_count,
       :maximum_instance_count,
       keyword_init: true
@@ -3795,6 +3961,7 @@ module Aws::OpenSearch
     #   <p>Limits on the number of instances that can be created for a given instance type.</p>
     #   @return [Types::InstanceCountLimits]
     class InstanceLimits < Struct.new(
+      nil,
       :instance_count_limits,
       keyword_init: true
     )
@@ -3830,6 +3997,7 @@ module Aws::OpenSearch
     #   <p>The supported Availability Zones for the instance type.</p>
     #   @return [Array<String>]
     class InstanceTypeDetails < Struct.new(
+      nil,
       :instance_type,
       :encryption_enabled,
       :cognito_enabled,
@@ -3848,6 +4016,7 @@ module Aws::OpenSearch
     #   <p>A description of the error.</p>
     #   @return [String]
     class InternalException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -3859,6 +4028,7 @@ module Aws::OpenSearch
     #   <p>A description of the error.</p>
     #   @return [String]
     class InvalidPaginationTokenException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -3870,6 +4040,7 @@ module Aws::OpenSearch
     #   <p>A description of the error.</p>
     #   @return [String]
     class InvalidTypeException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -3890,6 +4061,7 @@ module Aws::OpenSearch
     #   <p>Element of the JWT assertion used by the cluster to verify JWT signatures.</p>
     #   @return [String]
     class JWTOptionsInput < Struct.new(
+      nil,
       :enabled,
       :subject_key,
       :roles_key,
@@ -3913,6 +4085,7 @@ module Aws::OpenSearch
     #   <p>The key used to verify the signature of incoming JWT requests.</p>
     #   @return [String]
     class JWTOptionsOutput < Struct.new(
+      nil,
       :enabled,
       :subject_key,
       :roles_key,
@@ -3930,6 +4103,7 @@ module Aws::OpenSearch
     #   <p>This indicates whether Key Store access is enabled </p>
     #   @return [Boolean]
     class KeyStoreAccessOption < Struct.new(
+      nil,
       :key_access_role_arn,
       :key_store_access_enabled,
       keyword_init: true
@@ -3942,6 +4116,7 @@ module Aws::OpenSearch
     #   <p>A description of the error.</p>
     #   @return [String]
     class LimitExceededException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -3960,6 +4135,7 @@ module Aws::OpenSearch
     #      instance roles.</p>
     #   @return [Array<Types::AdditionalLimit>]
     class Limits < Struct.new(
+      nil,
       :storage_types,
       :instance_limits,
       :additional_limits,
@@ -3981,6 +4157,7 @@ module Aws::OpenSearch
     #      request.</p>
     #   @return [Integer]
     class ListApplicationsRequest < Struct.new(
+      nil,
       :next_token,
       :statuses,
       :max_results,
@@ -3998,6 +4175,7 @@ module Aws::OpenSearch
     #      returned token to retrieve the next page.</p>
     #   @return [String]
     class ListApplicationsResponse < Struct.new(
+      nil,
       :application_summaries,
       :next_token,
       keyword_init: true
@@ -4011,6 +4189,7 @@ module Aws::OpenSearch
     #   <p>The name of the domain.</p>
     #   @return [String]
     class ListDataSourcesRequest < Struct.new(
+      nil,
       :domain_name,
       keyword_init: true
     )
@@ -4022,6 +4201,7 @@ module Aws::OpenSearch
     #   <p>A list of data sources associated with specified domain.</p>
     #   @return [Array<Types::DataSourceDetails>]
     class ListDataSourcesResponse < Struct.new(
+      nil,
       :data_sources,
       keyword_init: true
     )
@@ -4034,6 +4214,7 @@ module Aws::OpenSearch
     #      returned token to retrieve the next page.</p>
     #   @return [String]
     class ListDirectQueryDataSourcesRequest < Struct.new(
+      nil,
       :next_token,
       keyword_init: true
     )
@@ -4052,6 +4233,7 @@ module Aws::OpenSearch
     #     </p>
     #   @return [Array<Types::DirectQueryDataSource>]
     class ListDirectQueryDataSourcesResponse < Struct.new(
+      nil,
       :next_token,
       :direct_query_data_sources,
       keyword_init: true
@@ -4080,6 +4262,7 @@ module Aws::OpenSearch
     #      <code>ListDomainMaintenances</code> operations, which returns results in the next page.</p>
     #   @return [String]
     class ListDomainMaintenancesRequest < Struct.new(
+      nil,
       :domain_name,
       :action,
       :status,
@@ -4100,6 +4283,7 @@ module Aws::OpenSearch
     #      returned token to retrieve the next page.</p>
     #   @return [String]
     class ListDomainMaintenancesResponse < Struct.new(
+      nil,
       :domain_maintenances,
       :next_token,
       keyword_init: true
@@ -4112,6 +4296,7 @@ module Aws::OpenSearch
     #   <p>Filters the output by domain engine type.</p>
     #   @return [String]
     class ListDomainNamesRequest < Struct.new(
+      nil,
       :engine_type,
       keyword_init: true
     )
@@ -4125,6 +4310,7 @@ module Aws::OpenSearch
     #      engine types.</p>
     #   @return [Array<Types::DomainInfo>]
     class ListDomainNamesResponse < Struct.new(
+      nil,
       :domain_names,
       keyword_init: true
     )
@@ -4145,6 +4331,7 @@ module Aws::OpenSearch
     #       <code>ListDomainsForPackage</code> operations, which returns results in the next page.</p>
     #   @return [String]
     class ListDomainsForPackageRequest < Struct.new(
+      nil,
       :package_id,
       :max_results,
       :next_token,
@@ -4163,6 +4350,7 @@ module Aws::OpenSearch
     #      returned token to retrieve the next page.</p>
     #   @return [String]
     class ListDomainsForPackageResponse < Struct.new(
+      nil,
       :domain_package_details_list,
       :next_token,
       keyword_init: true
@@ -4193,6 +4381,7 @@ module Aws::OpenSearch
     #   <p>An optional parameter that lists information for a given instance type.</p>
     #   @return [String]
     class ListInstanceTypeDetailsRequest < Struct.new(
+      nil,
       :engine_version,
       :domain_name,
       :max_results,
@@ -4214,6 +4403,7 @@ module Aws::OpenSearch
     #      returned token to retrieve the next page.</p>
     #   @return [String]
     class ListInstanceTypeDetailsResponse < Struct.new(
+      nil,
       :instance_type_details,
       :next_token,
       keyword_init: true
@@ -4235,6 +4425,7 @@ module Aws::OpenSearch
     #       <code>ListPackagesForDomain</code> operations, which returns results in the next page.</p>
     #   @return [String]
     class ListPackagesForDomainRequest < Struct.new(
+      nil,
       :domain_name,
       :max_results,
       :next_token,
@@ -4253,6 +4444,7 @@ module Aws::OpenSearch
     #      returned token to retrieve the next page.</p>
     #   @return [String]
     class ListPackagesForDomainResponse < Struct.new(
+      nil,
       :domain_package_details_list,
       :next_token,
       keyword_init: true
@@ -4273,6 +4465,7 @@ module Aws::OpenSearch
     #      operations, which returns results in the next page.</p>
     #   @return [String]
     class ListScheduledActionsRequest < Struct.new(
+      nil,
       :domain_name,
       :max_results,
       :next_token,
@@ -4290,6 +4483,7 @@ module Aws::OpenSearch
     #      returned token to retrieve the next page.</p>
     #   @return [String]
     class ListScheduledActionsResponse < Struct.new(
+      nil,
       :scheduled_actions,
       :next_token,
       keyword_init: true
@@ -4303,6 +4497,7 @@ module Aws::OpenSearch
     #      for.</p>
     #   @return [String]
     class ListTagsRequest < Struct.new(
+      nil,
       :arn,
       keyword_init: true
     )
@@ -4315,6 +4510,7 @@ module Aws::OpenSearch
     #      application.</p>
     #   @return [Array<Types::Tag>]
     class ListTagsResponse < Struct.new(
+      nil,
       :tag_list,
       keyword_init: true
     )
@@ -4332,6 +4528,7 @@ module Aws::OpenSearch
     #      operations, which returns results in the next page.</p>
     #   @return [String]
     class ListVersionsRequest < Struct.new(
+      nil,
       :max_results,
       :next_token,
       keyword_init: true
@@ -4351,6 +4548,7 @@ module Aws::OpenSearch
     #      returned token to retrieve the next page.</p>
     #   @return [String]
     class ListVersionsResponse < Struct.new(
+      nil,
       :versions,
       :next_token,
       keyword_init: true
@@ -4367,6 +4565,7 @@ module Aws::OpenSearch
     #       <code>ListVpcEndpointAccess</code> operations, which returns results in the next page.</p>
     #   @return [String]
     class ListVpcEndpointAccessRequest < Struct.new(
+      nil,
       :domain_name,
       :next_token,
       keyword_init: true
@@ -4384,6 +4583,7 @@ module Aws::OpenSearch
     #      returned token to retrieve the next page.</p>
     #   @return [String]
     class ListVpcEndpointAccessResponse < Struct.new(
+      nil,
       :authorized_principal_list,
       :next_token,
       keyword_init: true
@@ -4400,6 +4600,7 @@ module Aws::OpenSearch
     #       <code>ListEndpointsForDomain</code> operations, which returns results in the next page.</p>
     #   @return [String]
     class ListVpcEndpointsForDomainRequest < Struct.new(
+      nil,
       :domain_name,
       :next_token,
       keyword_init: true
@@ -4416,6 +4617,7 @@ module Aws::OpenSearch
     #      returned token to retrieve the next page.</p>
     #   @return [String]
     class ListVpcEndpointsForDomainResponse < Struct.new(
+      nil,
       :vpc_endpoint_summary_list,
       :next_token,
       keyword_init: true
@@ -4429,6 +4631,7 @@ module Aws::OpenSearch
     #      operations, which returns results in the next page.</p>
     #   @return [String]
     class ListVpcEndpointsRequest < Struct.new(
+      nil,
       :next_token,
       keyword_init: true
     )
@@ -4444,6 +4647,7 @@ module Aws::OpenSearch
     #      returned token to retrieve the next page.</p>
     #   @return [String]
     class ListVpcEndpointsResponse < Struct.new(
+      nil,
       :vpc_endpoint_summary_list,
       :next_token,
       keyword_init: true
@@ -4464,6 +4668,7 @@ module Aws::OpenSearch
     #   <p>Whether the log should be published.</p>
     #   @return [Boolean]
     class LogPublishingOption < Struct.new(
+      nil,
       :cloud_watch_logs_log_group_arn,
       :enabled,
       keyword_init: true
@@ -4479,6 +4684,7 @@ module Aws::OpenSearch
     #   <p>The status of the log publishing options for the domain.</p>
     #   @return [Types::OptionStatus]
     class LogPublishingOptionsStatus < Struct.new(
+      nil,
       :options,
       :status,
       keyword_init: true
@@ -4500,6 +4706,7 @@ module Aws::OpenSearch
     #       <code>true</code>.</p>
     #   @return [String]
     class MasterUserOptions < Struct.new(
+      nil,
       :master_user_arn,
       :master_user_name,
       :master_user_password,
@@ -4532,6 +4739,7 @@ module Aws::OpenSearch
     #            </ul>
     #   @return [String]
     class ModifyingProperties < Struct.new(
+      nil,
       :name,
       :active_value,
       :pending_value,
@@ -4546,6 +4754,7 @@ module Aws::OpenSearch
     #   <p>The desired state of the natural language query generation feature. Valid values are ENABLED and DISABLED.</p>
     #   @return [String]
     class NaturalLanguageQueryGenerationOptionsInput < Struct.new(
+      nil,
       :desired_state,
       keyword_init: true
     )
@@ -4560,6 +4769,7 @@ module Aws::OpenSearch
     #   <p>The current state of the natural language query generation feature, indicating completion, in progress, or failure.</p>
     #   @return [String]
     class NaturalLanguageQueryGenerationOptionsOutput < Struct.new(
+      nil,
       :desired_state,
       :current_state,
       keyword_init: true
@@ -4578,6 +4788,7 @@ module Aws::OpenSearch
     #   <p>The number of nodes of a specific type within the cluster.</p>
     #   @return [Integer]
     class NodeConfig < Struct.new(
+      nil,
       :enabled,
       :type,
       :count,
@@ -4594,6 +4805,7 @@ module Aws::OpenSearch
     #   <p>Configuration options for defining the setup of any node type.</p>
     #   @return [Types::NodeConfig]
     class NodeOption < Struct.new(
+      nil,
       :node_type,
       :node_config,
       keyword_init: true
@@ -4606,6 +4818,7 @@ module Aws::OpenSearch
     #   <p>True to enable node-to-node encryption.</p>
     #   @return [Boolean]
     class NodeToNodeEncryptionOptions < Struct.new(
+      nil,
       :enabled,
       keyword_init: true
     )
@@ -4620,6 +4833,7 @@ module Aws::OpenSearch
     #   <p>The status of the node-to-node encryption options for the specified domain.</p>
     #   @return [Types::OptionStatus]
     class NodeToNodeEncryptionOptionsStatus < Struct.new(
+      nil,
       :options,
       :status,
       keyword_init: true
@@ -4640,6 +4854,7 @@ module Aws::OpenSearch
     #      11:00 P.M. UTC as a start time, the end time will automatically be set to 9:00 A.M.</p>
     #   @return [Types::WindowStartTime]
     class OffPeakWindow < Struct.new(
+      nil,
       :window_start_time,
       keyword_init: true
     )
@@ -4658,6 +4873,7 @@ module Aws::OpenSearch
     #   <p>Off-peak window settings for the domain.</p>
     #   @return [Types::OffPeakWindow]
     class OffPeakWindowOptions < Struct.new(
+      nil,
       :enabled,
       :off_peak_window,
       keyword_init: true
@@ -4674,6 +4890,7 @@ module Aws::OpenSearch
     #   <p>The current status of off-peak window options.</p>
     #   @return [Types::OptionStatus]
     class OffPeakWindowOptionsStatus < Struct.new(
+      nil,
       :options,
       :status,
       keyword_init: true
@@ -4698,6 +4915,7 @@ module Aws::OpenSearch
     #   <p>Indicates whether the entity is being deleted.</p>
     #   @return [Boolean]
     class OptionStatus < Struct.new(
+      nil,
       :creation_date,
       :update_date,
       :update_version,
@@ -4736,6 +4954,7 @@ module Aws::OpenSearch
     #   <p>Properties for the outbound connection.</p>
     #   @return [Types::ConnectionProperties]
     class OutboundConnection < Struct.new(
+      nil,
       :local_domain_info,
       :remote_domain_info,
       :connection_id,
@@ -4805,6 +5024,7 @@ module Aws::OpenSearch
     #   <p>Verbose information for the outbound connection.</p>
     #   @return [String]
     class OutboundConnectionStatus < Struct.new(
+      nil,
       :status_code,
       :message,
       keyword_init: true
@@ -4817,6 +5037,7 @@ module Aws::OpenSearch
     #   <p>The configuration parameters to enable accessing the key store required by the package.</p>
     #   @return [Types::KeyStoreAccessOption]
     class PackageAssociationConfiguration < Struct.new(
+      nil,
       :key_store_access_option,
       keyword_init: true
     )
@@ -4837,6 +5058,7 @@ module Aws::OpenSearch
     #   <p>This indicates whether a B/G deployment is required for updating the configuration that the plugin is prerequisite for.</p>
     #   @return [Boolean]
     class PackageConfiguration < Struct.new(
+      nil,
       :license_requirement,
       :license_filepath,
       :configuration_requirement,
@@ -4897,6 +5119,7 @@ module Aws::OpenSearch
     #   <p>Encryption options for a package.</p>
     #   @return [Types::PackageEncryptionOptions]
     class PackageDetails < Struct.new(
+      nil,
       :package_id,
       :package_name,
       :package_type,
@@ -4929,6 +5152,7 @@ module Aws::OpenSearch
     #   <p>The configuration parameters for associating the package with a domain.</p>
     #   @return [Types::PackageAssociationConfiguration]
     class PackageDetailsForAssociation < Struct.new(
+      nil,
       :package_id,
       :prerequisite_package_id_list,
       :association_configuration,
@@ -4945,6 +5169,7 @@ module Aws::OpenSearch
     #   <p>Whether encryption is enabled for the package.</p>
     #   @return [Boolean]
     class PackageEncryptionOptions < Struct.new(
+      nil,
       :kms_key_identifier,
       :encryption_enabled,
       keyword_init: true
@@ -4960,6 +5185,7 @@ module Aws::OpenSearch
     #   <p>Key (file name) of the package.</p>
     #   @return [String]
     class PackageSource < Struct.new(
+      nil,
       :s3_bucket_name,
       :s3_key,
       keyword_init: true
@@ -4972,6 +5198,7 @@ module Aws::OpenSearch
     #   <p>Indicates whether the package vending feature is enabled, allowing the package to be used by other users.</p>
     #   @return [Boolean]
     class PackageVendingOptions < Struct.new(
+      nil,
       :vending_enabled,
       keyword_init: true
     )
@@ -4995,6 +5222,7 @@ module Aws::OpenSearch
     #   <p>The configuration details for a specific version of a package.</p>
     #   @return [Types::PackageConfiguration]
     class PackageVersionHistory < Struct.new(
+      nil,
       :package_version,
       :commit_message,
       :created_at,
@@ -5022,6 +5250,7 @@ module Aws::OpenSearch
     #   <p>The uncompressed size of the plugin.</p>
     #   @return [Integer]
     class PluginProperties < Struct.new(
+      nil,
       :name,
       :description,
       :version,
@@ -5044,6 +5273,7 @@ module Aws::OpenSearch
     #   <p>The number of OpenSearch instances to reserve.</p>
     #   @return [Integer]
     class PurchaseReservedInstanceOfferingRequest < Struct.new(
+      nil,
       :reserved_instance_offering_id,
       :reservation_name,
       :instance_count,
@@ -5060,6 +5290,7 @@ module Aws::OpenSearch
     #   <p>The customer-specified identifier used to track this reservation.</p>
     #   @return [String]
     class PurchaseReservedInstanceOfferingResponse < Struct.new(
+      nil,
       :reserved_instance_id,
       :reservation_name,
       keyword_init: true
@@ -5076,6 +5307,7 @@ module Aws::OpenSearch
     #   <p>The frequency of the recurring charge.</p>
     #   @return [String]
     class RecurringCharge < Struct.new(
+      nil,
       :recurring_charge_amount,
       :recurring_charge_frequency,
       keyword_init: true
@@ -5088,6 +5320,7 @@ module Aws::OpenSearch
     #   <p>The unique identifier of the inbound connection to reject.</p>
     #   @return [String]
     class RejectInboundConnectionRequest < Struct.new(
+      nil,
       :connection_id,
       keyword_init: true
     )
@@ -5099,6 +5332,7 @@ module Aws::OpenSearch
     #   <p>Contains details about the rejected inbound connection.</p>
     #   @return [Types::InboundConnection]
     class RejectInboundConnectionResponse < Struct.new(
+      nil,
       :connection,
       keyword_init: true
     )
@@ -5114,6 +5348,7 @@ module Aws::OpenSearch
     #   <p>The list of tag keys to remove from the domain, data source, or application.</p>
     #   @return [Array<String>]
     class RemoveTagsRequest < Struct.new(
+      nil,
       :arn,
       :tag_keys,
       keyword_init: true
@@ -5167,6 +5402,7 @@ module Aws::OpenSearch
     #      Reserved Instance offering.</p>
     #   @return [Array<Types::RecurringCharge>]
     class ReservedInstance < Struct.new(
+      nil,
       :reservation_name,
       :reserved_instance_id,
       :billing_subscription_id,
@@ -5220,6 +5456,7 @@ module Aws::OpenSearch
     #      the offering.</p>
     #   @return [Array<Types::RecurringCharge>]
     class ReservedInstanceOffering < Struct.new(
+      nil,
       :reserved_instance_offering_id,
       :instance_type,
       :duration,
@@ -5243,6 +5480,7 @@ module Aws::OpenSearch
     #   <p>A description of the error.</p>
     #   @return [String]
     class ResourceAlreadyExistsException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -5254,6 +5492,7 @@ module Aws::OpenSearch
     #   <p>A description of the error.</p>
     #   @return [String]
     class ResourceNotFoundException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -5270,6 +5509,7 @@ module Aws::OpenSearch
     #   <p>The service SP to revoke access from.</p>
     #   @return [String]
     class RevokeVpcEndpointAccessRequest < Struct.new(
+      nil,
       :domain_name,
       :account,
       :service,
@@ -5279,6 +5519,7 @@ module Aws::OpenSearch
     end
 
     class RevokeVpcEndpointAccessResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -5289,6 +5530,7 @@ module Aws::OpenSearch
     #   <p>>The Amazon Resource Name (ARN) for the S3 Glue Data Catalog.</p>
     #   @return [String]
     class S3GlueDataCatalog < Struct.new(
+      nil,
       :role_arn,
       keyword_init: true
     )
@@ -5300,6 +5542,7 @@ module Aws::OpenSearch
     #   <p>Enables S3 vectors engine features.</p>
     #   @return [Boolean]
     class S3VectorsEngine < Struct.new(
+      nil,
       :enabled,
       keyword_init: true
     )
@@ -5314,6 +5557,7 @@ module Aws::OpenSearch
     #   <p>The unique entity ID of the application in the SAML identity provider.</p>
     #   @return [String]
     class SAMLIdp < Struct.new(
+      nil,
       :metadata_content,
       :entity_id,
       keyword_init: true
@@ -5347,6 +5591,7 @@ module Aws::OpenSearch
     #      and the default value is 60.</p>
     #   @return [Integer]
     class SAMLOptionsInput < Struct.new(
+      nil,
       :enabled,
       :idp,
       :master_user_name,
@@ -5376,6 +5621,7 @@ module Aws::OpenSearch
     #   <p>The duration, in minutes, after which a user session becomes inactive.</p>
     #   @return [Integer]
     class SAMLOptionsOutput < Struct.new(
+      nil,
       :enabled,
       :idp,
       :subject_key,
@@ -5418,6 +5664,7 @@ module Aws::OpenSearch
     #   <p>Whether or not the scheduled action is cancellable.</p>
     #   @return [Boolean]
     class ScheduledAction < Struct.new(
+      nil,
       :id,
       :type,
       :severity,
@@ -5448,6 +5695,7 @@ module Aws::OpenSearch
     #      <code>MEDIUM</code>, and <code>HIGH</code>.</p>
     #   @return [String]
     class ScheduledAutoTuneDetails < Struct.new(
+      nil,
       :date,
       :action_type,
       :action,
@@ -5468,6 +5716,7 @@ module Aws::OpenSearch
     #     </p>
     #   @return [String]
     class SecurityLakeDirectQueryDataSource < Struct.new(
+      nil,
       :role_arn,
       keyword_init: true
     )
@@ -5506,6 +5755,7 @@ module Aws::OpenSearch
     #      automatically updated after the automated update date.</p>
     #   @return [Boolean]
     class ServiceSoftwareOptions < Struct.new(
+      nil,
       :current_version,
       :new_version,
       :update_available,
@@ -5527,6 +5777,7 @@ module Aws::OpenSearch
     #   <p>A description of the error.</p>
     #   @return [String]
     class SlotNotAvailableException < Struct.new(
+      nil,
       :slot_suggestions,
       :message,
       keyword_init: true
@@ -5541,6 +5792,7 @@ module Aws::OpenSearch
     #      specified domain. Default is <code>0</code> hours.</p>
     #   @return [Integer]
     class SnapshotOptions < Struct.new(
+      nil,
       :automated_snapshot_start_hour,
       keyword_init: true
     )
@@ -5556,6 +5808,7 @@ module Aws::OpenSearch
     #   <p>The status of a daily automated snapshot.</p>
     #   @return [Types::OptionStatus]
     class SnapshotOptionsStatus < Struct.new(
+      nil,
       :options,
       :status,
       keyword_init: true
@@ -5568,6 +5821,7 @@ module Aws::OpenSearch
     #   <p>Whether automatic service software updates are enabled for the domain.</p>
     #   @return [Boolean]
     class SoftwareUpdateOptions < Struct.new(
+      nil,
       :auto_software_update_enabled,
       keyword_init: true
     )
@@ -5582,6 +5836,7 @@ module Aws::OpenSearch
     #   <p>The status of service software update options, including creation date and last updated date.</p>
     #   @return [Types::OptionStatus]
     class SoftwareUpdateOptionsStatus < Struct.new(
+      nil,
       :options,
       :status,
       keyword_init: true
@@ -5601,6 +5856,7 @@ module Aws::OpenSearch
     #   <p>The ID of the data node.</p>
     #   @return [String]
     class StartDomainMaintenanceRequest < Struct.new(
+      nil,
       :domain_name,
       :action,
       :node_id,
@@ -5614,6 +5870,7 @@ module Aws::OpenSearch
     #   <p>The request ID of requested action.</p>
     #   @return [String]
     class StartDomainMaintenanceResponse < Struct.new(
+      nil,
       :maintenance_id,
       keyword_init: true
     )
@@ -5653,6 +5910,7 @@ module Aws::OpenSearch
     #      specify this parameter if you set <code>ScheduleAt</code> to <code>TIMESTAMP</code>.</p>
     #   @return [Integer]
     class StartServiceSoftwareUpdateRequest < Struct.new(
+      nil,
       :domain_name,
       :schedule_at,
       :desired_start_time,
@@ -5667,6 +5925,7 @@ module Aws::OpenSearch
     #   <p>The current status of the OpenSearch Service software update.</p>
     #   @return [Types::ServiceSoftwareOptions]
     class StartServiceSoftwareUpdateResponse < Struct.new(
+      nil,
       :service_software_options,
       keyword_init: true
     )
@@ -5685,6 +5944,7 @@ module Aws::OpenSearch
     #   <p>Limits that are applicable for the given storage type.</p>
     #   @return [Array<Types::StorageTypeLimit>]
     class StorageType < Struct.new(
+      nil,
       :storage_type_name,
       :storage_sub_type_name,
       :storage_type_limits,
@@ -5734,6 +5994,7 @@ module Aws::OpenSearch
     #   <p>The limit values.</p>
     #   @return [Array<String>]
     class StorageTypeLimit < Struct.new(
+      nil,
       :limit_name,
       :limit_values,
       keyword_init: true
@@ -5752,6 +6013,7 @@ module Aws::OpenSearch
     #            </p>
     #   @return [String]
     class Tag < Struct.new(
+      nil,
       :key,
       :value,
       keyword_init: true
@@ -5769,6 +6031,7 @@ module Aws::OpenSearch
     #   <p>The configuration settings to modify for the OpenSearch application.</p>
     #   @return [Array<Types::AppConfig>]
     class UpdateApplicationRequest < Struct.new(
+      nil,
       :id,
       :data_sources,
       :app_configs,
@@ -5804,6 +6067,7 @@ module Aws::OpenSearch
     #   <p>The timestamp when the OpenSearch application was last updated.</p>
     #   @return [Time]
     class UpdateApplicationResponse < Struct.new(
+      nil,
       :id,
       :name,
       :arn,
@@ -5835,6 +6099,7 @@ module Aws::OpenSearch
     #   <p>The status of the data source update.</p>
     #   @return [String]
     class UpdateDataSourceRequest < Struct.new(
+      nil,
       :domain_name,
       :name,
       :data_source_type,
@@ -5850,6 +6115,7 @@ module Aws::OpenSearch
     #   <p>A message associated with the updated data source.</p>
     #   @return [String]
     class UpdateDataSourceResponse < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -5881,6 +6147,7 @@ module Aws::OpenSearch
     #     </p>
     #   @return [Array<String>]
     class UpdateDirectQueryDataSourceRequest < Struct.new(
+      nil,
       :data_source_name,
       :data_source_type,
       :description,
@@ -5896,6 +6163,7 @@ module Aws::OpenSearch
     #     </p>
     #   @return [String]
     class UpdateDirectQueryDataSourceResponse < Struct.new(
+      nil,
       :data_source_arn,
       keyword_init: true
     )
@@ -6014,6 +6282,7 @@ module Aws::OpenSearch
     #   <p>Options for all machine learning features for the specified domain.</p>
     #   @return [Types::AIMLOptionsInput]
     class UpdateDomainConfigRequest < Struct.new(
+      nil,
       :domain_name,
       :cluster_config,
       :ebs_options,
@@ -6052,6 +6321,7 @@ module Aws::OpenSearch
     #   <p>The status of the dry run being performed on the domain, if any.</p>
     #   @return [Types::DryRunProgressStatus]
     class UpdateDomainConfigResponse < Struct.new(
+      nil,
       :domain_config,
       :dry_run_results,
       :dry_run_progress_status,
@@ -6081,6 +6351,7 @@ module Aws::OpenSearch
     #   <p>Encryption options for a package.</p>
     #   @return [Types::PackageEncryptionOptions]
     class UpdatePackageRequest < Struct.new(
+      nil,
       :package_id,
       :package_source,
       :package_description,
@@ -6097,6 +6368,7 @@ module Aws::OpenSearch
     #   <p>Information about a package.</p>
     #   @return [Types::PackageDetails]
     class UpdatePackageResponse < Struct.new(
+      nil,
       :package_details,
       keyword_init: true
     )
@@ -6113,6 +6385,7 @@ module Aws::OpenSearch
     #   <p> List of users to be added or removed from the package scope.</p>
     #   @return [Array<String>]
     class UpdatePackageScopeRequest < Struct.new(
+      nil,
       :package_id,
       :operation,
       :package_user_list,
@@ -6131,6 +6404,7 @@ module Aws::OpenSearch
     #   <p> List of users who have access to the package after the scope update.</p>
     #   @return [Array<String>]
     class UpdatePackageScopeResponse < Struct.new(
+      nil,
       :package_id,
       :operation,
       :package_user_list,
@@ -6175,6 +6449,7 @@ module Aws::OpenSearch
     #      parameter if you set <code>ScheduleAt</code> to <code>TIMESTAMP</code>.</p>
     #   @return [Integer]
     class UpdateScheduledActionRequest < Struct.new(
+      nil,
       :domain_name,
       :action_id,
       :action_type,
@@ -6189,6 +6464,7 @@ module Aws::OpenSearch
     #   <p>Information about the rescheduled action.</p>
     #   @return [Types::ScheduledAction]
     class UpdateScheduledActionResponse < Struct.new(
+      nil,
       :scheduled_action,
       keyword_init: true
     )
@@ -6202,6 +6478,7 @@ module Aws::OpenSearch
     #   <p>The security groups and/or subnets to add, remove, or modify.</p>
     #   @return [Types::VPCOptions]
     class UpdateVpcEndpointRequest < Struct.new(
+      nil,
       :vpc_endpoint_id,
       :vpc_options,
       keyword_init: true
@@ -6213,6 +6490,7 @@ module Aws::OpenSearch
     #   <p>The endpoint to be updated.</p>
     #   @return [Types::VpcEndpoint]
     class UpdateVpcEndpointResponse < Struct.new(
+      nil,
       :vpc_endpoint,
       keyword_init: true
     )
@@ -6238,6 +6516,7 @@ module Aws::OpenSearch
     #      Elasticsearch OSS clients and plugins.</p>
     #   @return [Hash<String, String>]
     class UpgradeDomainRequest < Struct.new(
+      nil,
       :domain_name,
       :target_version,
       :perform_check_only,
@@ -6267,6 +6546,7 @@ module Aws::OpenSearch
     #   <p>Container for information about a configuration change happening on a domain.</p>
     #   @return [Types::ChangeProgressDetails]
     class UpgradeDomainResponse < Struct.new(
+      nil,
       :upgrade_id,
       :domain_name,
       :target_version,
@@ -6308,6 +6588,7 @@ module Aws::OpenSearch
     #   <p>A list of each step performed as part of a specific upgrade or upgrade eligibility check.</p>
     #   @return [Array<Types::UpgradeStepItem>]
     class UpgradeHistory < Struct.new(
+      nil,
       :upgrade_name,
       :start_timestamp,
       :upgrade_status,
@@ -6356,6 +6637,7 @@ module Aws::OpenSearch
     #   <p>The floating point value representing the progress percentage of a particular step.</p>
     #   @return [Float]
     class UpgradeStepItem < Struct.new(
+      nil,
       :upgrade_step,
       :upgrade_step_status,
       :issues,
@@ -6382,6 +6664,7 @@ module Aws::OpenSearch
     #   <p>The list of security group IDs associated with the VPC endpoints for the domain.</p>
     #   @return [Array<String>]
     class VPCDerivedInfo < Struct.new(
+      nil,
       :vpc_id,
       :subnet_ids,
       :availability_zones,
@@ -6399,6 +6682,7 @@ module Aws::OpenSearch
     #   <p>The status of the VPC options for the specified domain.</p>
     #   @return [Types::OptionStatus]
     class VPCDerivedInfoStatus < Struct.new(
+      nil,
       :options,
       :status,
       keyword_init: true
@@ -6419,6 +6703,7 @@ module Aws::OpenSearch
     #      not provide a security group ID, OpenSearch Service uses the default security group for the VPC.</p>
     #   @return [Array<String>]
     class VPCOptions < Struct.new(
+      nil,
       :subnet_ids,
       :security_group_ids,
       keyword_init: true
@@ -6431,6 +6716,7 @@ module Aws::OpenSearch
     #   <p>A description of the error.</p>
     #   @return [String]
     class ValidationException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -6446,6 +6732,7 @@ module Aws::OpenSearch
     #   <p>A message corresponding to the failure.</p>
     #   @return [String]
     class ValidationFailure < Struct.new(
+      nil,
       :code,
       :message,
       keyword_init: true
@@ -6462,6 +6749,7 @@ module Aws::OpenSearch
     #   <p>The status of the version options for the specified domain.</p>
     #   @return [Types::OptionStatus]
     class VersionStatus < Struct.new(
+      nil,
       :options,
       :status,
       keyword_init: true
@@ -6491,6 +6779,7 @@ module Aws::OpenSearch
     #   <p>The connection endpoint ID for connecting to the domain.</p>
     #   @return [String]
     class VpcEndpoint < Struct.new(
+      nil,
       :vpc_endpoint_id,
       :vpc_endpoint_owner,
       :domain_arn,
@@ -6514,6 +6803,7 @@ module Aws::OpenSearch
     #   <p>A message describing the error.</p>
     #   @return [String]
     class VpcEndpointError < Struct.new(
+      nil,
       :vpc_endpoint_id,
       :error_code,
       :error_message,
@@ -6536,6 +6826,7 @@ module Aws::OpenSearch
     #   <p>The current status of the endpoint.</p>
     #   @return [String]
     class VpcEndpointSummary < Struct.new(
+      nil,
       :vpc_endpoint_id,
       :vpc_endpoint_owner,
       :domain_arn,
@@ -6555,6 +6846,7 @@ module Aws::OpenSearch
     #   <p>The start minute of the window, in UTC.</p>
     #   @return [Integer]
     class WindowStartTime < Struct.new(
+      nil,
       :hours,
       :minutes,
       keyword_init: true
@@ -6575,6 +6867,7 @@ module Aws::OpenSearch
     #      provisioned within a VPC, this value be equal to number of subnets.</p>
     #   @return [Integer]
     class ZoneAwarenessConfig < Struct.new(
+      nil,
       :availability_zone_count,
       keyword_init: true
     )

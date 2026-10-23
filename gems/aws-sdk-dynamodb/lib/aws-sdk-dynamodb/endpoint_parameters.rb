@@ -29,6 +29,7 @@ module Aws::DynamoDB
   #   ResourceArnList containing list of resource arns
   #   @return [Array<String>]
   EndpointParameters = Struct.new(
+    nil,
     :region,
     :use_dual_stack,
     :use_fips,

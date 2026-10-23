@@ -10,6 +10,7 @@ module Aws::SSMIncidents
     # @!attribute message
     #   @return [String]
     class AccessDeniedException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -42,6 +43,7 @@ module Aws::SSMIncidents
     #   <p>The KMS key ID to use to encrypt your replication set.</p>
     #   @return [String]
     class AddRegionAction < Struct.new(
+      nil,
       :region_name,
       :sse_kms_key_id,
       keyword_init: true
@@ -100,6 +102,7 @@ module Aws::SSMIncidents
     #         operation.</p>
     #   @return [String]
     class BatchGetIncidentFindingsError < Struct.new(
+      nil,
       :finding_id,
       :code,
       :message,
@@ -116,6 +119,7 @@ module Aws::SSMIncidents
     #   <p>A list of IDs of findings for which you want to view details.</p>
     #   @return [Array<String>]
     class BatchGetIncidentFindingsInput < Struct.new(
+      nil,
       :incident_record_arn,
       :finding_ids,
       keyword_init: true
@@ -130,6 +134,7 @@ module Aws::SSMIncidents
     #   <p>A list of errors encountered during the operation.</p>
     #   @return [Array<Types::BatchGetIncidentFindingsError>]
     class BatchGetIncidentFindingsOutput < Struct.new(
+      nil,
       :findings,
       :errors,
       keyword_init: true
@@ -173,6 +178,7 @@ module Aws::SSMIncidents
     #         update.</p>
     #   @return [String]
     class CloudFormationStackUpdate < Struct.new(
+      nil,
       :start_time,
       :end_time,
       :stack_arn,
@@ -198,6 +204,7 @@ module Aws::SSMIncidents
     #   <p>The ID of the CodeDeploy deployment.</p>
     #   @return [String]
     class CodeDeployDeployment < Struct.new(
+      nil,
       :start_time,
       :end_time,
       :deployment_group_arn,
@@ -248,6 +255,7 @@ module Aws::SSMIncidents
     #   If present in the output, the operation can be retried after this time
     #   @return [Time]
     class ConflictException < Struct.new(
+      nil,
       :message,
       :resource_identifier,
       :resource_type,
@@ -269,6 +277,7 @@ module Aws::SSMIncidents
     #   <p>A list of tags to add to the replication set.</p>
     #   @return [Hash<String, String>]
     class CreateReplicationSetOperationInput < Struct.new(
+      nil,
       :regions,
       :client_token,
       :tags,
@@ -281,6 +290,7 @@ module Aws::SSMIncidents
     #   <p>The Amazon Resource Name (ARN) of the replication set. </p>
     #   @return [String]
     class CreateReplicationSetOperationOutput < Struct.new(
+      nil,
       :arn,
       keyword_init: true
     )
@@ -316,6 +326,7 @@ module Aws::SSMIncidents
     #   <p>Information about third-party services integrated into the response plan.</p>
     #   @return [Array<Types::Integration>]
     class CreateResponsePlanOperationInput < Struct.new(
+      nil,
       :client_token,
       :name,
       :display_name,
@@ -334,6 +345,7 @@ module Aws::SSMIncidents
     #   <p>The Amazon Resource Name (ARN) of the response plan.</p>
     #   @return [String]
     class CreateResponsePlanOperationOutput < Struct.new(
+      nil,
       :arn,
       keyword_init: true
     )
@@ -369,6 +381,7 @@ module Aws::SSMIncidents
     #         with the DynamoDB table as a related item.</p>
     #   @return [Array<Types::EventReference>]
     class CreateTimelineEventOperationInput < Struct.new(
+      nil,
       :client_token,
       :incident_record_arn,
       :event_time,
@@ -387,6 +400,7 @@ module Aws::SSMIncidents
     #   <p>The ID of the event for easy reference later. </p>
     #   @return [String]
     class CreateTimelineEventOperationOutput < Struct.new(
+      nil,
       :incident_record_arn,
       :event_id,
       keyword_init: true
@@ -398,6 +412,7 @@ module Aws::SSMIncidents
     #   <p>The Amazon Resource Name (ARN) of the incident record you are deleting.</p>
     #   @return [String]
     class DeleteIncidentRecordOperationInput < Struct.new(
+      nil,
       :arn,
       keyword_init: true
     )
@@ -405,6 +420,7 @@ module Aws::SSMIncidents
     end
 
     class DeleteIncidentRecordOperationOutput < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -416,6 +432,7 @@ module Aws::SSMIncidents
     #   <p>The name of the Amazon Web Services Region you're deleting from the replication set.</p>
     #   @return [String]
     class DeleteRegionAction < Struct.new(
+      nil,
       :region_name,
       keyword_init: true
     )
@@ -426,6 +443,7 @@ module Aws::SSMIncidents
     #   <p>The Amazon Resource Name (ARN) of the replication set you're deleting.</p>
     #   @return [String]
     class DeleteReplicationSetOperationInput < Struct.new(
+      nil,
       :arn,
       keyword_init: true
     )
@@ -433,6 +451,7 @@ module Aws::SSMIncidents
     end
 
     class DeleteReplicationSetOperationOutput < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -445,6 +464,7 @@ module Aws::SSMIncidents
     #   <p>The ID of the resource policy you're deleting.</p>
     #   @return [String]
     class DeleteResourcePolicyOperationInput < Struct.new(
+      nil,
       :resource_arn,
       :policy_id,
       keyword_init: true
@@ -453,6 +473,7 @@ module Aws::SSMIncidents
     end
 
     class DeleteResourcePolicyOperationOutput < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -462,6 +483,7 @@ module Aws::SSMIncidents
     #   <p>The Amazon Resource Name (ARN) of the response plan.</p>
     #   @return [String]
     class DeleteResponsePlanOperationInput < Struct.new(
+      nil,
       :arn,
       keyword_init: true
     )
@@ -469,6 +491,7 @@ module Aws::SSMIncidents
     end
 
     class DeleteResponsePlanOperationOutput < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -482,6 +505,7 @@ module Aws::SSMIncidents
     #         event's ID.</p>
     #   @return [String]
     class DeleteTimelineEventOperationInput < Struct.new(
+      nil,
       :incident_record_arn,
       :event_id,
       keyword_init: true
@@ -490,6 +514,7 @@ module Aws::SSMIncidents
     end
 
     class DeleteTimelineEventOperationOutput < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -513,6 +538,7 @@ module Aws::SSMIncidents
 
     # <p>Used to remove the chat channel from an incident record or response plan.</p>
     class EmptyChatChannel < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -561,6 +587,7 @@ module Aws::SSMIncidents
     #   <p>A list of references in a <code>TimelineEvent</code>.</p>
     #   @return [Array<Types::EventReference>]
     class EventSummary < Struct.new(
+      nil,
       :incident_record_arn,
       :event_id,
       :event_time,
@@ -581,6 +608,7 @@ module Aws::SSMIncidents
     #         integer.</p>
     #   @return [Types::Condition]
     class Filter < Struct.new(
+      nil,
       :key,
       :condition,
       keyword_init: true
@@ -605,6 +633,7 @@ module Aws::SSMIncidents
     #   <p>Details about the finding.</p>
     #   @return [Types::FindingDetails]
     class Finding < Struct.new(
+      nil,
       :id,
       :creation_time,
       :last_modified_time,
@@ -643,6 +672,7 @@ module Aws::SSMIncidents
     #   <p>The timestamp for when the finding was last updated.</p>
     #   @return [Time]
     class FindingSummary < Struct.new(
+      nil,
       :id,
       :last_modified_time,
       keyword_init: true
@@ -654,6 +684,7 @@ module Aws::SSMIncidents
     #   <p>The Amazon Resource Name (ARN) of the incident record.</p>
     #   @return [String]
     class GetIncidentRecordOperationInput < Struct.new(
+      nil,
       :arn,
       keyword_init: true
     )
@@ -664,6 +695,7 @@ module Aws::SSMIncidents
     #   <p>Details the structure of the incident record.</p>
     #   @return [Types::IncidentRecord]
     class GetIncidentRecordOperationOutput < Struct.new(
+      nil,
       :incident_record,
       keyword_init: true
     )
@@ -674,6 +706,7 @@ module Aws::SSMIncidents
     #   <p>The Amazon Resource Name (ARN) of the replication set you want to retrieve.</p>
     #   @return [String]
     class GetReplicationSetOperationInput < Struct.new(
+      nil,
       :arn,
       keyword_init: true
     )
@@ -684,6 +717,7 @@ module Aws::SSMIncidents
     #   <p>Details of the replication set.</p>
     #   @return [Types::ReplicationSet]
     class GetReplicationSetOperationOutput < Struct.new(
+      nil,
       :replication_set,
       keyword_init: true
     )
@@ -702,6 +736,7 @@ module Aws::SSMIncidents
     #         previous call.)</p>
     #   @return [String]
     class GetResourcePoliciesOperationInput < Struct.new(
+      nil,
       :resource_arn,
       :max_results,
       :next_token,
@@ -718,6 +753,7 @@ module Aws::SSMIncidents
     #         additional items to return, the string is null.</p>
     #   @return [String]
     class GetResourcePoliciesOperationOutput < Struct.new(
+      nil,
       :resource_policies,
       :next_token,
       keyword_init: true
@@ -729,6 +765,7 @@ module Aws::SSMIncidents
     #   <p>The Amazon Resource Name (ARN) of the response plan.</p>
     #   @return [String]
     class GetResponsePlanOperationInput < Struct.new(
+      nil,
       :arn,
       keyword_init: true
     )
@@ -762,6 +799,7 @@ module Aws::SSMIncidents
     #         plan.</p>
     #   @return [Array<Types::Integration>]
     class GetResponsePlanOperationOutput < Struct.new(
+      nil,
       :arn,
       :name,
       :display_name,
@@ -783,6 +821,7 @@ module Aws::SSMIncidents
     #           <code>ListTimelineEvents</code>.</p>
     #   @return [String]
     class GetTimelineEventOperationInput < Struct.new(
+      nil,
       :incident_record_arn,
       :event_id,
       keyword_init: true
@@ -794,6 +833,7 @@ module Aws::SSMIncidents
     #   <p>Details about the timeline event.</p>
     #   @return [Types::TimelineEvent]
     class GetTimelineEventOperationOutput < Struct.new(
+      nil,
       :event,
       keyword_init: true
     )
@@ -872,6 +912,7 @@ module Aws::SSMIncidents
     #         incident.</p>
     #   @return [Array<Types::NotificationTargetItem>]
     class IncidentRecord < Struct.new(
+      nil,
       :arn,
       :title,
       :summary,
@@ -908,6 +949,7 @@ module Aws::SSMIncidents
     #         event.</p>
     #   @return [String]
     class IncidentRecordSource < Struct.new(
+      nil,
       :created_by,
       :invoked_by,
       :resource_arn,
@@ -941,6 +983,7 @@ module Aws::SSMIncidents
     #   <p>What caused Incident Manager to create the incident.</p>
     #   @return [Types::IncidentRecordSource]
     class IncidentRecordSummary < Struct.new(
+      nil,
       :arn,
       :title,
       :status,
@@ -1013,6 +1056,7 @@ module Aws::SSMIncidents
     #         Incident Manager assigns the tags specified in the template to the incident.</p>
     #   @return [Hash<String, String>]
     class IncidentTemplate < Struct.new(
+      nil,
       :title,
       :impact,
       :summary,
@@ -1045,6 +1089,7 @@ module Aws::SSMIncidents
     # @!attribute message
     #   @return [String]
     class InternalServerException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -1059,6 +1104,7 @@ module Aws::SSMIncidents
     #   <p>The type of related item. </p>
     #   @return [String]
     class ItemIdentifier < Struct.new(
+      nil,
       :value,
       :type,
       keyword_init: true
@@ -1109,6 +1155,7 @@ module Aws::SSMIncidents
     #         previous call.)</p>
     #   @return [String]
     class ListIncidentFindingsInput < Struct.new(
+      nil,
       :incident_record_arn,
       :max_results,
       :next_token,
@@ -1126,6 +1173,7 @@ module Aws::SSMIncidents
     #         additional items to return, the string is null.</p>
     #   @return [String]
     class ListIncidentFindingsOutput < Struct.new(
+      nil,
       :findings,
       :next_token,
       keyword_init: true
@@ -1181,6 +1229,7 @@ module Aws::SSMIncidents
     #         previous call.)</p>
     #   @return [String]
     class ListIncidentRecordsOperationInput < Struct.new(
+      nil,
       :filters,
       :max_results,
       :next_token,
@@ -1197,6 +1246,7 @@ module Aws::SSMIncidents
     #         additional items to return, the string is null.</p>
     #   @return [String]
     class ListIncidentRecordsOperationOutput < Struct.new(
+      nil,
       :incident_record_summaries,
       :next_token,
       keyword_init: true
@@ -1216,6 +1266,7 @@ module Aws::SSMIncidents
     #         previous call.)</p>
     #   @return [String]
     class ListRelatedItemsOperationInput < Struct.new(
+      nil,
       :incident_record_arn,
       :max_results,
       :next_token,
@@ -1232,6 +1283,7 @@ module Aws::SSMIncidents
     #         additional items to return, the string is null.</p>
     #   @return [String]
     class ListRelatedItemsOperationOutput < Struct.new(
+      nil,
       :related_items,
       :next_token,
       keyword_init: true
@@ -1247,6 +1299,7 @@ module Aws::SSMIncidents
     #         previous call.)</p>
     #   @return [String]
     class ListReplicationSetsOperationInput < Struct.new(
+      nil,
       :max_results,
       :next_token,
       keyword_init: true
@@ -1262,6 +1315,7 @@ module Aws::SSMIncidents
     #         additional items to return, the string is null.</p>
     #   @return [String]
     class ListReplicationSetsOperationOutput < Struct.new(
+      nil,
       :replication_set_arns,
       :next_token,
       keyword_init: true
@@ -1277,6 +1331,7 @@ module Aws::SSMIncidents
     #         previous call.)</p>
     #   @return [String]
     class ListResponsePlansOperationInput < Struct.new(
+      nil,
       :max_results,
       :next_token,
       keyword_init: true
@@ -1292,6 +1347,7 @@ module Aws::SSMIncidents
     #         additional items to return, the string is null.</p>
     #   @return [String]
     class ListResponsePlansOperationOutput < Struct.new(
+      nil,
       :response_plan_summaries,
       :next_token,
       keyword_init: true
@@ -1303,6 +1359,7 @@ module Aws::SSMIncidents
     #   <p>The Amazon Resource Name (ARN) of the response plan or incident.</p>
     #   @return [String]
     class ListTagsForResourceInput < Struct.new(
+      nil,
       :resource_arn,
       keyword_init: true
     )
@@ -1313,6 +1370,7 @@ module Aws::SSMIncidents
     #   <p>A list of tags for the response plan or incident.</p>
     #   @return [Hash<String, String>]
     class ListTagsForResourceOutput < Struct.new(
+      nil,
       :tags,
       keyword_init: true
     )
@@ -1372,6 +1430,7 @@ module Aws::SSMIncidents
     #         previous call.)</p>
     #   @return [String]
     class ListTimelineEventsOperationInput < Struct.new(
+      nil,
       :incident_record_arn,
       :filters,
       :sort_by,
@@ -1391,6 +1450,7 @@ module Aws::SSMIncidents
     #         additional items to return, the string is null.</p>
     #   @return [String]
     class ListTimelineEventsOperationOutput < Struct.new(
+      nil,
       :event_summaries,
       :next_token,
       keyword_init: true
@@ -1425,6 +1485,7 @@ module Aws::SSMIncidents
     #   <p>Details about the PagerDuty service associated with the configuration.</p>
     #   @return [Types::PagerDutyIncidentConfiguration]
     class PagerDutyConfiguration < Struct.new(
+      nil,
       :name,
       :secret_id,
       :pager_duty_incident_configuration,
@@ -1439,6 +1500,7 @@ module Aws::SSMIncidents
     #         launches.</p>
     #   @return [String]
     class PagerDutyIncidentConfiguration < Struct.new(
+      nil,
       :service_id,
       keyword_init: true
     )
@@ -1459,6 +1521,7 @@ module Aws::SSMIncidents
     #         User Token REST API Key, and other user credentials.</p>
     #   @return [String]
     class PagerDutyIncidentDetail < Struct.new(
+      nil,
       :id,
       :auto_resolve,
       :secret_id,
@@ -1474,6 +1537,7 @@ module Aws::SSMIncidents
     #   <p>Details of the resource policy.</p>
     #   @return [String]
     class PutResourcePolicyOperationInput < Struct.new(
+      nil,
       :resource_arn,
       :policy,
       keyword_init: true
@@ -1485,6 +1549,7 @@ module Aws::SSMIncidents
     #   <p>The ID of the resource policy.</p>
     #   @return [String]
     class PutResourcePolicyOperationOutput < Struct.new(
+      nil,
       :policy_id,
       keyword_init: true
     )
@@ -1505,6 +1570,7 @@ module Aws::SSMIncidents
     #   <p>The timestamp for when Incident Manager updated the status of the Amazon Web Services Region.</p>
     #   @return [Time]
     class RegionInfo < Struct.new(
+      nil,
       :sse_kms_key_id,
       :status,
       :status_message,
@@ -1520,6 +1586,7 @@ module Aws::SSMIncidents
     #   <p>The KMS key used to encrypt the data in your replication set.</p>
     #   @return [String]
     class RegionMapInputValue < Struct.new(
+      nil,
       :sse_kms_key_id,
       keyword_init: true
     )
@@ -1540,6 +1607,7 @@ module Aws::SSMIncidents
     #            </important>
     #   @return [String]
     class RelatedItem < Struct.new(
+      nil,
       :identifier,
       :title,
       :generated_id,
@@ -1598,6 +1666,7 @@ module Aws::SSMIncidents
     #   <p>Who last modified the replication set.</p>
     #   @return [String]
     class ReplicationSet < Struct.new(
+      nil,
       :arn,
       :region_map,
       :status,
@@ -1621,6 +1690,7 @@ module Aws::SSMIncidents
     #   The resource type
     #   @return [String]
     class ResourceNotFoundException < Struct.new(
+      nil,
       :message,
       :resource_identifier,
       :resource_type,
@@ -1641,6 +1711,7 @@ module Aws::SSMIncidents
     #   <p>The Amazon Web Services Region that policy allows resources to be used in.</p>
     #   @return [String]
     class ResourcePolicy < Struct.new(
+      nil,
       :policy_document,
       :policy_id,
       :ram_resource_share_region,
@@ -1660,6 +1731,7 @@ module Aws::SSMIncidents
     #   <p>The human readable name of the response plan. This can include spaces.</p>
     #   @return [String]
     class ResponsePlanSummary < Struct.new(
+      nil,
       :arn,
       :name,
       :display_name,
@@ -1684,6 +1756,7 @@ module Aws::SSMIncidents
     #   Originating quota code
     #   @return [String]
     class ServiceQuotaExceededException < Struct.new(
+      nil,
       :message,
       :resource_identifier,
       :resource_type,
@@ -1718,6 +1791,7 @@ module Aws::SSMIncidents
     #         runbook.</p>
     #   @return [Hash<String, Types::DynamicSsmParameterValue>]
     class SsmAutomation < Struct.new(
+      nil,
       :role_arn,
       :document_name,
       :document_version,
@@ -1777,6 +1851,7 @@ module Aws::SSMIncidents
     #         resources, external links, or files uploaded to an Amazon S3 bucket. </p>
     #   @return [Array<Types::RelatedItem>]
     class StartIncidentOperationInput < Struct.new(
+      nil,
       :client_token,
       :response_plan_arn,
       :title,
@@ -1792,6 +1867,7 @@ module Aws::SSMIncidents
     #   <p>The ARN of the newly created incident record.</p>
     #   @return [String]
     class StartIncidentOperationOutput < Struct.new(
+      nil,
       :incident_record_arn,
       keyword_init: true
     )
@@ -1805,6 +1881,7 @@ module Aws::SSMIncidents
     #   <p>A list of tags to add to the response plan.</p>
     #   @return [Hash<String, String>]
     class TagResourceInput < Struct.new(
+      nil,
       :resource_arn,
       :tags,
       keyword_init: true
@@ -1813,6 +1890,7 @@ module Aws::SSMIncidents
     end
 
     class TagResourceOutput < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1828,6 +1906,7 @@ module Aws::SSMIncidents
     #   Originating quota code
     #   @return [String]
     class ThrottlingException < Struct.new(
+      nil,
       :message,
       :service_code,
       :quota_code,
@@ -1860,6 +1939,7 @@ module Aws::SSMIncidents
     #   <p>A list of references in a <code>TimelineEvent</code>.</p>
     #   @return [Array<Types::EventReference>]
     class TimelineEvent < Struct.new(
+      nil,
       :incident_record_arn,
       :event_id,
       :event_time,
@@ -1888,6 +1968,7 @@ module Aws::SSMIncidents
     #   <p>Raw data passed from either Amazon EventBridge, Amazon CloudWatch, or Incident Manager when an incident is created.</p>
     #   @return [String]
     class TriggerDetails < Struct.new(
+      nil,
       :source,
       :trigger_arn,
       :timestamp,
@@ -1904,6 +1985,7 @@ module Aws::SSMIncidents
     #   <p>The name of the tag to remove from the response plan.</p>
     #   @return [Array<String>]
     class UntagResourceInput < Struct.new(
+      nil,
       :resource_arn,
       :tag_keys,
       keyword_init: true
@@ -1912,6 +1994,7 @@ module Aws::SSMIncidents
     end
 
     class UntagResourceOutput < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1928,6 +2011,7 @@ module Aws::SSMIncidents
     #         details.</p>
     #   @return [String]
     class UpdateDeletionProtectionOperationInput < Struct.new(
+      nil,
       :arn,
       :deletion_protected,
       :client_token,
@@ -1937,6 +2021,7 @@ module Aws::SSMIncidents
     end
 
     class UpdateDeletionProtectionOperationOutput < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1998,6 +2083,7 @@ module Aws::SSMIncidents
     #         incident.</p>
     #   @return [Array<Types::NotificationTargetItem>]
     class UpdateIncidentRecordOperationInput < Struct.new(
+      nil,
       :client_token,
       :arn,
       :title,
@@ -2012,6 +2098,7 @@ module Aws::SSMIncidents
     end
 
     class UpdateIncidentRecordOperationOutput < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -2029,6 +2116,7 @@ module Aws::SSMIncidents
     #   <p>Details about the item that you are add to, or delete from, an incident.</p>
     #   @return [Types::RelatedItemsUpdate]
     class UpdateRelatedItemsOperationInput < Struct.new(
+      nil,
       :client_token,
       :incident_record_arn,
       :related_items_update,
@@ -2038,6 +2126,7 @@ module Aws::SSMIncidents
     end
 
     class UpdateRelatedItemsOperationOutput < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -2076,6 +2165,7 @@ module Aws::SSMIncidents
     #         details.</p>
     #   @return [String]
     class UpdateReplicationSetOperationInput < Struct.new(
+      nil,
       :arn,
       :actions,
       :client_token,
@@ -2085,6 +2175,7 @@ module Aws::SSMIncidents
     end
 
     class UpdateReplicationSetOperationOutput < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -2164,6 +2255,7 @@ module Aws::SSMIncidents
     #   <p>Information about third-party services integrated into the response plan.</p>
     #   @return [Array<Types::Integration>]
     class UpdateResponsePlanOperationInput < Struct.new(
+      nil,
       :client_token,
       :arn,
       :display_name,
@@ -2183,6 +2275,7 @@ module Aws::SSMIncidents
     end
 
     class UpdateResponsePlanOperationOutput < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -2222,6 +2315,7 @@ module Aws::SSMIncidents
     #            </important>
     #   @return [Array<Types::EventReference>]
     class UpdateTimelineEventOperationInput < Struct.new(
+      nil,
       :client_token,
       :incident_record_arn,
       :event_id,
@@ -2235,6 +2329,7 @@ module Aws::SSMIncidents
     end
 
     class UpdateTimelineEventOperationOutput < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -2245,6 +2340,7 @@ module Aws::SSMIncidents
     # @!attribute message
     #   @return [String]
     class ValidationException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )

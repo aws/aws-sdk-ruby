@@ -11,6 +11,7 @@ module Aws::InspectorScan
     # @!attribute message
     #   @return [String]
     class AccessDeniedException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -29,6 +30,7 @@ module Aws::InspectorScan
     #   <p>The number of seconds to wait before retrying the request.</p>
     #   @return [Integer]
     class InternalServerException < Struct.new(
+      nil,
       :message,
       :reason,
       :retry_after_seconds,
@@ -44,6 +46,7 @@ module Aws::InspectorScan
     #   <p>The output format for the vulnerability report.</p>
     #   @return [String]
     class ScanSbomRequest < Struct.new(
+      nil,
       :sbom,
       :output_format,
       keyword_init: true
@@ -55,6 +58,7 @@ module Aws::InspectorScan
     #   <p>The vulnerability report for the scanned SBOM.</p>
     #   @return [JSON]
     class ScanSbomResponse < Struct.new(
+      nil,
       :sbom,
       keyword_init: true
     )
@@ -70,6 +74,7 @@ module Aws::InspectorScan
     #   <p>The number of seconds to wait before retrying the request.</p>
     #   @return [Integer]
     class ThrottlingException < Struct.new(
+      nil,
       :message,
       :retry_after_seconds,
       keyword_init: true
@@ -87,6 +92,7 @@ module Aws::InspectorScan
     #   <p>The fields that failed validation.</p>
     #   @return [Array<Types::ValidationExceptionField>]
     class ValidationException < Struct.new(
+      nil,
       :message,
       :reason,
       :fields,
@@ -107,6 +113,7 @@ module Aws::InspectorScan
     #     </p>
     #   @return [String]
     class ValidationExceptionField < Struct.new(
+      nil,
       :name,
       :message,
       keyword_init: true

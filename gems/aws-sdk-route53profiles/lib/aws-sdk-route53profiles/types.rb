@@ -12,6 +12,7 @@ module Aws::Route53Profiles
     # @!attribute message
     #   @return [String]
     class AccessDeniedException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -39,6 +40,7 @@ module Aws::Route53Profiles
     #   </p>
     #   @return [Array<Types::Tag>]
     class AssociateProfileRequest < Struct.new(
+      nil,
       :profile_id,
       :resource_id,
       :name,
@@ -54,6 +56,7 @@ module Aws::Route53Profiles
     #   </p>
     #   @return [Types::ProfileAssociation]
     class AssociateProfileResponse < Struct.new(
+      nil,
       :profile_association,
       keyword_init: true
     )
@@ -82,6 +85,7 @@ module Aws::Route53Profiles
     #            <p>The allowed values for priority are between 100 and 9900.</p>
     #   @return [String]
     class AssociateResourceToProfileRequest < Struct.new(
+      nil,
       :profile_id,
       :resource_arn,
       :name,
@@ -97,6 +101,7 @@ module Aws::Route53Profiles
     #   </p>
     #   @return [Types::ProfileResourceAssociation]
     class AssociateResourceToProfileResponse < Struct.new(
+      nil,
       :profile_resource_association,
       keyword_init: true
     )
@@ -109,6 +114,7 @@ module Aws::Route53Profiles
     # @!attribute message
     #   @return [String]
     class ConflictException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -133,6 +139,7 @@ module Aws::Route53Profiles
     #   </p>
     #   @return [Array<Types::Tag>]
     class CreateProfileRequest < Struct.new(
+      nil,
       :name,
       :client_token,
       :tags,
@@ -147,6 +154,7 @@ module Aws::Route53Profiles
     #   </p>
     #   @return [Types::Profile]
     class CreateProfileResponse < Struct.new(
+      nil,
       :profile,
       keyword_init: true
     )
@@ -159,6 +167,7 @@ module Aws::Route53Profiles
     #   </p>
     #   @return [String]
     class DeleteProfileRequest < Struct.new(
+      nil,
       :profile_id,
       keyword_init: true
     )
@@ -171,6 +180,7 @@ module Aws::Route53Profiles
     #   </p>
     #   @return [Types::Profile]
     class DeleteProfileResponse < Struct.new(
+      nil,
       :profile,
       keyword_init: true
     )
@@ -188,6 +198,7 @@ module Aws::Route53Profiles
     #   </p>
     #   @return [String]
     class DisassociateProfileRequest < Struct.new(
+      nil,
       :profile_id,
       :resource_id,
       keyword_init: true
@@ -201,6 +212,7 @@ module Aws::Route53Profiles
     #   </p>
     #   @return [Types::ProfileAssociation]
     class DisassociateProfileResponse < Struct.new(
+      nil,
       :profile_association,
       keyword_init: true
     )
@@ -217,6 +229,7 @@ module Aws::Route53Profiles
     #   </p>
     #   @return [String]
     class DisassociateResourceFromProfileRequest < Struct.new(
+      nil,
       :profile_id,
       :resource_arn,
       keyword_init: true
@@ -230,6 +243,7 @@ module Aws::Route53Profiles
     #   </p>
     #   @return [Types::ProfileResourceAssociation]
     class DisassociateResourceFromProfileResponse < Struct.new(
+      nil,
       :profile_resource_association,
       keyword_init: true
     )
@@ -242,6 +256,7 @@ module Aws::Route53Profiles
     #   </p>
     #   @return [String]
     class GetProfileAssociationRequest < Struct.new(
+      nil,
       :profile_association_id,
       keyword_init: true
     )
@@ -254,6 +269,7 @@ module Aws::Route53Profiles
     #   </p>
     #   @return [Types::ProfileAssociation]
     class GetProfileAssociationResponse < Struct.new(
+      nil,
       :profile_association,
       keyword_init: true
     )
@@ -266,6 +282,7 @@ module Aws::Route53Profiles
     #   </p>
     #   @return [String]
     class GetProfileRequest < Struct.new(
+      nil,
       :profile_id,
       keyword_init: true
     )
@@ -279,6 +296,7 @@ module Aws::Route53Profiles
     #   </p>
     #   @return [String]
     class GetProfileResourceAssociationRequest < Struct.new(
+      nil,
       :profile_resource_association_id,
       keyword_init: true
     )
@@ -291,6 +309,7 @@ module Aws::Route53Profiles
     #   </p>
     #   @return [Types::ProfileResourceAssociation]
     class GetProfileResourceAssociationResponse < Struct.new(
+      nil,
       :profile_resource_association,
       keyword_init: true
     )
@@ -303,6 +322,7 @@ module Aws::Route53Profiles
     #   </p>
     #   @return [Types::Profile]
     class GetProfileResponse < Struct.new(
+      nil,
       :profile,
       keyword_init: true
     )
@@ -315,6 +335,7 @@ module Aws::Route53Profiles
     # @!attribute message
     #   @return [String]
     class InternalServiceErrorException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -327,6 +348,7 @@ module Aws::Route53Profiles
     # @!attribute message
     #   @return [String]
     class InvalidNextTokenException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -344,6 +366,7 @@ module Aws::Route53Profiles
     #       </p>
     #   @return [String]
     class InvalidParameterException < Struct.new(
+      nil,
       :message,
       :field_name,
       keyword_init: true
@@ -362,6 +385,7 @@ module Aws::Route53Profiles
     #       </p>
     #   @return [String]
     class LimitExceededException < Struct.new(
+      nil,
       :message,
       :resource_type,
       keyword_init: true
@@ -396,6 +420,7 @@ module Aws::Route53Profiles
     #       To retrieve the next batch of objects, use the token that was returned for the prior request in your next request.</p>
     #   @return [String]
     class ListProfileAssociationsRequest < Struct.new(
+      nil,
       :resource_id,
       :profile_id,
       :max_results,
@@ -417,6 +442,7 @@ module Aws::Route53Profiles
     #   </p>
     #   @return [String]
     class ListProfileAssociationsResponse < Struct.new(
+      nil,
       :profile_associations,
       :next_token,
       keyword_init: true
@@ -451,6 +477,7 @@ module Aws::Route53Profiles
     #       To retrieve the next batch of objects, use the token that was returned for the prior request in your next request.</p>
     #   @return [String]
     class ListProfileResourceAssociationsRequest < Struct.new(
+      nil,
       :profile_id,
       :resource_type,
       :max_results,
@@ -472,6 +499,7 @@ module Aws::Route53Profiles
     #     </p>
     #   @return [String]
     class ListProfileResourceAssociationsResponse < Struct.new(
+      nil,
       :profile_resource_associations,
       :next_token,
       keyword_init: true
@@ -496,6 +524,7 @@ module Aws::Route53Profiles
     #       To retrieve the next batch of objects, use the token that was returned for the prior request in your next request.</p>
     #   @return [String]
     class ListProfilesRequest < Struct.new(
+      nil,
       :max_results,
       :next_token,
       keyword_init: true
@@ -515,6 +544,7 @@ module Aws::Route53Profiles
     #     </p>
     #   @return [String]
     class ListProfilesResponse < Struct.new(
+      nil,
       :profile_summaries,
       :next_token,
       keyword_init: true
@@ -528,6 +558,7 @@ module Aws::Route53Profiles
     #   </p>
     #   @return [String]
     class ListTagsForResourceRequest < Struct.new(
+      nil,
       :resource_arn,
       keyword_init: true
     )
@@ -540,6 +571,7 @@ module Aws::Route53Profiles
     #   </p>
     #   @return [Hash<String, String>]
     class ListTagsForResourceResponse < Struct.new(
+      nil,
       :tags,
       keyword_init: true
     )
@@ -600,6 +632,7 @@ module Aws::Route53Profiles
     #   </p>
     #   @return [String]
     class Profile < Struct.new(
+      nil,
       :id,
       :arn,
       :name,
@@ -664,6 +697,7 @@ module Aws::Route53Profiles
     #   </p>
     #   @return [Time]
     class ProfileAssociation < Struct.new(
+      nil,
       :id,
       :name,
       :owner_id,
@@ -737,6 +771,7 @@ module Aws::Route53Profiles
     #   </p>
     #   @return [Time]
     class ProfileResourceAssociation < Struct.new(
+      nil,
       :id,
       :name,
       :owner_id,
@@ -777,6 +812,7 @@ module Aws::Route53Profiles
     #   </p>
     #   @return [String]
     class ProfileSummary < Struct.new(
+      nil,
       :id,
       :arn,
       :name,
@@ -797,6 +833,7 @@ module Aws::Route53Profiles
     #       </p>
     #   @return [String]
     class ResourceExistsException < Struct.new(
+      nil,
       :message,
       :resource_type,
       keyword_init: true
@@ -815,6 +852,7 @@ module Aws::Route53Profiles
     #       </p>
     #   @return [String]
     class ResourceNotFoundException < Struct.new(
+      nil,
       :message,
       :resource_type,
       keyword_init: true
@@ -836,6 +874,7 @@ module Aws::Route53Profiles
     #   </p>
     #   @return [String]
     class Tag < Struct.new(
+      nil,
       :key,
       :value,
       keyword_init: true
@@ -854,6 +893,7 @@ module Aws::Route53Profiles
     #   </p>
     #   @return [Hash<String, String>]
     class TagResourceRequest < Struct.new(
+      nil,
       :resource_arn,
       :tags,
       keyword_init: true
@@ -862,6 +902,7 @@ module Aws::Route53Profiles
     end
 
     class TagResourceResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -873,6 +914,7 @@ module Aws::Route53Profiles
     # @!attribute message
     #   @return [String]
     class ThrottlingException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -890,6 +932,7 @@ module Aws::Route53Profiles
     #   </p>
     #   @return [Array<String>]
     class UntagResourceRequest < Struct.new(
+      nil,
       :resource_arn,
       :tag_keys,
       keyword_init: true
@@ -898,6 +941,7 @@ module Aws::Route53Profiles
     end
 
     class UntagResourceResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -920,6 +964,7 @@ module Aws::Route53Profiles
     #            <p>The allowed values for priority are between 100 and 9900.</p>
     #   @return [String]
     class UpdateProfileResourceAssociationRequest < Struct.new(
+      nil,
       :profile_resource_association_id,
       :name,
       :resource_properties,
@@ -934,6 +979,7 @@ module Aws::Route53Profiles
     #   </p>
     #   @return [Types::ProfileResourceAssociation]
     class UpdateProfileResourceAssociationResponse < Struct.new(
+      nil,
       :profile_resource_association,
       keyword_init: true
     )
@@ -946,6 +992,7 @@ module Aws::Route53Profiles
     # @!attribute message
     #   @return [String]
     class ValidationException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )

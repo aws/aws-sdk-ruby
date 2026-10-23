@@ -10,6 +10,7 @@ module Aws::ApplicationSignals
     # @!attribute message
     #   @return [String]
     class AccessDeniedException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -24,6 +25,7 @@ module Aws::ApplicationSignals
     #   <p>An array of values to match for the specified attribute. Services that have any of these values for the attribute will be included in the results.</p>
     #   @return [Array<String>]
     class AttributeFilter < Struct.new(
+      nil,
       :attribute_filter_name,
       :attribute_filter_values,
       keyword_init: true
@@ -51,6 +53,7 @@ module Aws::ApplicationSignals
     #   <p>The type of audit finding.</p>
     #   @return [String]
     class AuditFinding < Struct.new(
+      nil,
       :key_attributes,
       :auditor_results,
       :operation,
@@ -70,6 +73,7 @@ module Aws::ApplicationSignals
     #   <p>The specific data identifying the audit target entity.</p>
     #   @return [Types::AuditTargetEntity]
     class AuditTarget < Struct.new(
+      nil,
       :type,
       :data,
       keyword_init: true
@@ -113,6 +117,7 @@ module Aws::ApplicationSignals
     #   <p>The severity level of this audit finding, indicating the importance and potential impact of the issue.</p>
     #   @return [String]
     class AuditorResult < Struct.new(
+      nil,
       :auditor,
       :description,
       :severity,
@@ -128,6 +133,7 @@ module Aws::ApplicationSignals
     #   <p>An array containing the IDs of the service level objectives that you want to include in the report.</p>
     #   @return [Array<String>]
     class BatchGetServiceLevelObjectiveBudgetReportInput < Struct.new(
+      nil,
       :timestamp,
       :slo_ids,
       keyword_init: true
@@ -145,6 +151,7 @@ module Aws::ApplicationSignals
     #   <p>An array of structures, where each structure includes an error indicating that one of the requests in the array was not valid.</p>
     #   @return [Array<Types::ServiceLevelObjectiveBudgetReportError>]
     class BatchGetServiceLevelObjectiveBudgetReportOutput < Struct.new(
+      nil,
       :timestamp,
       :reports,
       :errors,
@@ -164,6 +171,7 @@ module Aws::ApplicationSignals
     #   <p>The error message.</p>
     #   @return [String]
     class BatchUpdateExclusionWindowsError < Struct.new(
+      nil,
       :slo_id,
       :error_code,
       :error_message,
@@ -182,6 +190,7 @@ module Aws::ApplicationSignals
     #   <p>A list of exclusion windows to remove from the specified SLOs. The window configuration must match an existing exclusion window.</p>
     #   @return [Array<Types::ExclusionWindow>]
     class BatchUpdateExclusionWindowsInput < Struct.new(
+      nil,
       :slo_ids,
       :add_exclusion_windows,
       :remove_exclusion_windows,
@@ -197,6 +206,7 @@ module Aws::ApplicationSignals
     #   <p>A list of errors that occurred while processing the request.</p>
     #   @return [Array<Types::BatchUpdateExclusionWindowsError>]
     class BatchUpdateExclusionWindowsOutput < Struct.new(
+      nil,
       :slo_ids,
       :errors,
       keyword_init: true
@@ -209,6 +219,7 @@ module Aws::ApplicationSignals
     #   <p>The number of minutes to use as the look-back window.</p>
     #   @return [Integer]
     class BurnRateConfiguration < Struct.new(
+      nil,
       :look_back_window_minutes,
       keyword_init: true
     )
@@ -226,6 +237,7 @@ module Aws::ApplicationSignals
     #   <p>Specifies the duration of each calendar interval. For example, if <code>Duration</code> is <code>1</code> and <code>DurationUnit</code> is <code>MONTH</code>, each interval is one month, aligned with the calendar.</p>
     #   @return [Integer]
     class CalendarInterval < Struct.new(
+      nil,
       :start_time,
       :duration_unit,
       :duration,
@@ -260,6 +272,7 @@ module Aws::ApplicationSignals
     #   <p>The name or description of this change event.</p>
     #   @return [String]
     class ChangeEvent < Struct.new(
+      nil,
       :timestamp,
       :account_id,
       :region,
@@ -277,6 +290,7 @@ module Aws::ApplicationSignals
     # @!attribute message
     #   @return [String]
     class ConflictException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -305,6 +319,7 @@ module Aws::ApplicationSignals
     #   <p>Use this array to create <i>burn rates</i> for this SLO. Each burn rate is a metric that indicates how fast the service is consuming the error budget, relative to the attainment goal of the SLO.</p>
     #   @return [Array<Types::BurnRateConfiguration>]
     class CreateServiceLevelObjectiveInput < Struct.new(
+      nil,
       :name,
       :description,
       :sli_config,
@@ -321,6 +336,7 @@ module Aws::ApplicationSignals
     #   <p>A structure that contains information about the SLO that you just created.</p>
     #   @return [Types::ServiceLevelObjective]
     class CreateServiceLevelObjectiveOutput < Struct.new(
+      nil,
       :slo,
       keyword_init: true
     )
@@ -328,6 +344,7 @@ module Aws::ApplicationSignals
     end
 
     class DeleteGroupingConfigurationOutput < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -337,6 +354,7 @@ module Aws::ApplicationSignals
     #   <p>The ARN or name of the service level objective to delete.</p>
     #   @return [String]
     class DeleteServiceLevelObjectiveInput < Struct.new(
+      nil,
       :id,
       keyword_init: true
     )
@@ -344,6 +362,7 @@ module Aws::ApplicationSignals
     end
 
     class DeleteServiceLevelObjectiveOutput < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -357,6 +376,7 @@ module Aws::ApplicationSignals
     #   <p>The name of the called operation in the dependency.</p>
     #   @return [String]
     class DependencyConfig < Struct.new(
+      nil,
       :dependency_key_attributes,
       :dependency_operation_name,
       keyword_init: true
@@ -372,6 +392,7 @@ module Aws::ApplicationSignals
     #   <p>An array of edges representing the connections and relationships between the nodes in the dependency graph.</p>
     #   @return [Array<Types::Edge>]
     class DependencyGraph < Struct.new(
+      nil,
       :nodes,
       :edges,
       keyword_init: true
@@ -387,6 +408,7 @@ module Aws::ApplicationSignals
     #   <p>The value of the dimension. Dimension values must contain only ASCII characters and must include at least one non-whitespace character. ASCII control characters are not supported as part of dimension values.</p>
     #   @return [String]
     class Dimension < Struct.new(
+      nil,
       :name,
       :value,
       keyword_init: true
@@ -408,6 +430,7 @@ module Aws::ApplicationSignals
     #   <p>The type of connection between the nodes, indicating the nature of the relationship.</p>
     #   @return [String]
     class Edge < Struct.new(
+      nil,
       :source_node_id,
       :destination_node_id,
       :duration,
@@ -431,6 +454,7 @@ module Aws::ApplicationSignals
     #   <p>A description explaining why this time period should be excluded from SLO calculations.</p>
     #   @return [String]
     class ExclusionWindow < Struct.new(
+      nil,
       :window,
       :start_time,
       :recurrence_rule,
@@ -450,6 +474,7 @@ module Aws::ApplicationSignals
     #   <p>Use this field to specify which service you want to retrieve information for. You must specify at least the <code>Type</code>, <code>Name</code>, and <code>Environment</code> attributes.</p> <p>This is a string-to-string map. It can include the following fields.</p> <ul> <li> <p> <code>Type</code> designates the type of object this is.</p> </li> <li> <p> <code>ResourceType</code> specifies the type of the resource. This field is used only when the value of the <code>Type</code> field is <code>Resource</code> or <code>AWS::Resource</code>.</p> </li> <li> <p> <code>Name</code> specifies the name of the object. This is used only if the value of the <code>Type</code> field is <code>Service</code>, <code>RemoteService</code>, or <code>AWS::Service</code>.</p> </li> <li> <p> <code>Identifier</code> identifies the resource objects of this resource. This is used only if the value of the <code>Type</code> field is <code>Resource</code> or <code>AWS::Resource</code>.</p> </li> <li> <p> <code>Environment</code> specifies the location where this object is hosted, or what it belongs to.</p> </li> </ul>
     #   @return [Hash<String, String>]
     class GetServiceInput < Struct.new(
+      nil,
       :start_time,
       :end_time,
       :key_attributes,
@@ -462,6 +487,7 @@ module Aws::ApplicationSignals
     #   <p>The ARN or name of the SLO that you want to retrieve information about. You can find the ARNs of SLOs by using the <a href="https://docs.aws.amazon.com/AmazonCloudWatch/latest/APIReference/API_ListServiceLevelObjectives.html">ListServiceLevelObjectives</a> operation.</p>
     #   @return [String]
     class GetServiceLevelObjectiveInput < Struct.new(
+      nil,
       :id,
       keyword_init: true
     )
@@ -472,6 +498,7 @@ module Aws::ApplicationSignals
     #   <p>A structure containing the information about the SLO.</p>
     #   @return [Types::ServiceLevelObjective]
     class GetServiceLevelObjectiveOutput < Struct.new(
+      nil,
       :slo,
       keyword_init: true
     )
@@ -491,6 +518,7 @@ module Aws::ApplicationSignals
     #   <p>An array of string-to-string maps that each contain information about one log group associated with this service. Each string-to-string map includes the following fields:</p> <ul> <li> <p> <code>"Type": "AWS::Resource"</code> </p> </li> <li> <p> <code>"ResourceType": "AWS::Logs::LogGroup"</code> </p> </li> <li> <p> <code>"Identifier": "<i>name-of-log-group</i>"</code> </p> </li> </ul>
     #   @return [Array<Hash<String, String>>]
     class GetServiceOutput < Struct.new(
+      nil,
       :service,
       :start_time,
       :end_time,
@@ -511,6 +539,7 @@ module Aws::ApplicationSignals
     #   <p>The percentage of remaining budget over total budget that you want to get warnings for. If you omit this parameter, the default of 50.0 is used. </p>
     #   @return [Float]
     class Goal < Struct.new(
+      nil,
       :interval,
       :attainment_goal,
       :warning_threshold,
@@ -530,6 +559,7 @@ module Aws::ApplicationSignals
     #   <p>The default value to use for this grouping attribute when no value can be derived from the source keys. This ensures all services have a grouping value even if the source data is missing.</p>
     #   @return [String]
     class GroupingAttributeDefinition < Struct.new(
+      nil,
       :grouping_name,
       :grouping_source_keys,
       :default_grouping_value,
@@ -546,6 +576,7 @@ module Aws::ApplicationSignals
     #   <p>The timestamp when this grouping configuration was last updated. When used in a raw HTTP Query API, it is formatted as epoch time in seconds.</p>
     #   @return [Time]
     class GroupingConfiguration < Struct.new(
+      nil,
       :grouping_attribute_definitions,
       :updated_at,
       keyword_init: true
@@ -592,6 +623,7 @@ module Aws::ApplicationSignals
     #   <p>The maximum number of audit findings to return in one operation. If you omit this parameter, the default of 10 is used.</p>
     #   @return [Integer]
     class ListAuditFindingsInput < Struct.new(
+      nil,
       :start_time,
       :end_time,
       :auditors,
@@ -610,6 +642,7 @@ module Aws::ApplicationSignals
     #   <p>Include this value in your next use of this API to get the next set of audit findings.</p>
     #   @return [String]
     class ListAuditFindingsOutput < Struct.new(
+      nil,
       :audit_findings,
       :next_token,
       keyword_init: true
@@ -621,6 +654,7 @@ module Aws::ApplicationSignals
     #   <p>Include this value, if it was returned by the previous operation, to get the next set of grouping attribute definitions.</p>
     #   @return [String]
     class ListGroupingAttributeDefinitionsInput < Struct.new(
+      nil,
       :next_token,
       keyword_init: true
     )
@@ -637,6 +671,7 @@ module Aws::ApplicationSignals
     #   <p>Include this value in your next use of this API to get the next set of grouping attribute definitions.</p>
     #   @return [String]
     class ListGroupingAttributeDefinitionsOutput < Struct.new(
+      nil,
       :grouping_attribute_definitions,
       :updated_at,
       :next_token,
@@ -661,6 +696,7 @@ module Aws::ApplicationSignals
     #   <p>Include this value, if it was returned by the previous operation, to get the next set of service dependencies.</p>
     #   @return [String]
     class ListServiceDependenciesInput < Struct.new(
+      nil,
       :start_time,
       :end_time,
       :key_attributes,
@@ -684,6 +720,7 @@ module Aws::ApplicationSignals
     #   <p>Include this value in your next use of this API to get next set of service dependencies.</p>
     #   @return [String]
     class ListServiceDependenciesOutput < Struct.new(
+      nil,
       :start_time,
       :end_time,
       :service_dependencies,
@@ -709,6 +746,7 @@ module Aws::ApplicationSignals
     #   <p>Include this value, if it was returned by the previous operation, to get the next set of service dependents.</p>
     #   @return [String]
     class ListServiceDependentsInput < Struct.new(
+      nil,
       :start_time,
       :end_time,
       :key_attributes,
@@ -732,6 +770,7 @@ module Aws::ApplicationSignals
     #   <p>Include this value in your next use of this API to get next set of service dependents.</p>
     #   @return [String]
     class ListServiceDependentsOutput < Struct.new(
+      nil,
       :start_time,
       :end_time,
       :service_dependents,
@@ -751,6 +790,7 @@ module Aws::ApplicationSignals
     #   <p>Include this value, if it was returned by the previous operation, to get the next set of service level objectives. </p>
     #   @return [String]
     class ListServiceLevelObjectiveExclusionWindowsInput < Struct.new(
+      nil,
       :id,
       :max_results,
       :next_token,
@@ -766,6 +806,7 @@ module Aws::ApplicationSignals
     #   <p>Include this value, if it was returned by the previous operation, to get the next set of service level objectives. </p>
     #   @return [String]
     class ListServiceLevelObjectiveExclusionWindowsOutput < Struct.new(
+      nil,
       :exclusion_windows,
       :next_token,
       keyword_init: true
@@ -798,6 +839,7 @@ module Aws::ApplicationSignals
     #   <p>Use this optional field to only include SLOs with the specified metric source types in the output. Supported types are:</p> <ul> <li> <p>Service operation</p> </li> <li> <p>Service dependency</p> </li> <li> <p>CloudWatch metric</p> </li> </ul>
     #   @return [Array<String>]
     class ListServiceLevelObjectivesInput < Struct.new(
+      nil,
       :key_attributes,
       :operation_name,
       :dependency_config,
@@ -818,6 +860,7 @@ module Aws::ApplicationSignals
     #   <p>Include this value in your next use of this API to get next set of service level objectives.</p>
     #   @return [String]
     class ListServiceLevelObjectivesOutput < Struct.new(
+      nil,
       :slo_summaries,
       :next_token,
       keyword_init: true
@@ -841,6 +884,7 @@ module Aws::ApplicationSignals
     #   <p>Include this value, if it was returned by the previous operation, to get the next set of service operations.</p>
     #   @return [String]
     class ListServiceOperationsInput < Struct.new(
+      nil,
       :start_time,
       :end_time,
       :key_attributes,
@@ -864,6 +908,7 @@ module Aws::ApplicationSignals
     #   <p>Include this value in your next use of this API to get next set of service operations.</p>
     #   @return [String]
     class ListServiceOperationsOutput < Struct.new(
+      nil,
       :start_time,
       :end_time,
       :service_operations,
@@ -895,6 +940,7 @@ module Aws::ApplicationSignals
     #   <p>A list of attribute filters to narrow down the services. You can filter by platform, environment, or other service attributes.</p>
     #   @return [Array<Types::AttributeFilter>]
     class ListServiceStatesInput < Struct.new(
+      nil,
       :start_time,
       :end_time,
       :max_results,
@@ -920,6 +966,7 @@ module Aws::ApplicationSignals
     #   <p>Include this value in your next use of this API to get the next set of service states.</p>
     #   @return [String]
     class ListServiceStatesOutput < Struct.new(
+      nil,
       :start_time,
       :end_time,
       :service_states,
@@ -948,6 +995,7 @@ module Aws::ApplicationSignals
     #   <p>Amazon Web Services Account ID.</p>
     #   @return [String]
     class ListServicesInput < Struct.new(
+      nil,
       :start_time,
       :end_time,
       :max_results,
@@ -972,6 +1020,7 @@ module Aws::ApplicationSignals
     #   <p>Include this value in your next use of this API to get next set of services.</p>
     #   @return [String]
     class ListServicesOutput < Struct.new(
+      nil,
       :start_time,
       :end_time,
       :service_summaries,
@@ -985,6 +1034,7 @@ module Aws::ApplicationSignals
     #   <p>The Amazon Resource Name (ARN) of the CloudWatch resource that you want to view tags for.</p> <p>The ARN format of an Application Signals SLO is <code>arn:aws:cloudwatch:<i>Region</i>:<i>account-id</i>:slo:<i>slo-name</i> </code> </p> <p>For more information about ARN format, see <a href="https://docs.aws.amazon.com/IAM/latest/UserGuide/list_amazoncloudwatch.html#amazoncloudwatch-resources-for-iam-policies"> Resource Types Defined by Amazon CloudWatch</a> in the <i>Amazon Web Services General Reference</i>.</p>
     #   @return [String]
     class ListTagsForResourceRequest < Struct.new(
+      nil,
       :resource_arn,
       keyword_init: true
     )
@@ -995,6 +1045,7 @@ module Aws::ApplicationSignals
     #   <p>The list of tag keys and values associated with the resource you specified.</p>
     #   @return [Array<Types::Tag>]
     class ListTagsForResourceResponse < Struct.new(
+      nil,
       :tags,
       keyword_init: true
     )
@@ -1012,6 +1063,7 @@ module Aws::ApplicationSignals
     #   <p>An array of one or more dimensions to use to define the metric that you want to use. For more information, see <a href="https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/cloudwatch_concepts.html#Dimension">Dimensions</a>.</p>
     #   @return [Array<Types::Dimension>]
     class Metric < Struct.new(
+      nil,
       :namespace,
       :metric_name,
       :dimensions,
@@ -1043,6 +1095,7 @@ module Aws::ApplicationSignals
     #   <p>The ID of the account where this metric is located. If you are performing this operation in a monitoring account, use this to specify which source account to retrieve this metric from.</p>
     #   @return [String]
     class MetricDataQuery < Struct.new(
+      nil,
       :id,
       :metric_stat,
       :expression,
@@ -1072,6 +1125,7 @@ module Aws::ApplicationSignals
     #   <p>The end time for the metric data included in this graph. When used in a raw HTTP Query API, it is formatted as epoch time in seconds.</p>
     #   @return [Time]
     class MetricGraph < Struct.new(
+      nil,
       :metric_data_queries,
       :start_time,
       :end_time,
@@ -1097,6 +1151,7 @@ module Aws::ApplicationSignals
     #   <p>Amazon Web Services account ID.</p>
     #   @return [String]
     class MetricReference < Struct.new(
+      nil,
       :namespace,
       :metric_type,
       :dimensions,
@@ -1121,6 +1176,7 @@ module Aws::ApplicationSignals
     #   <p>If you omit <code>Unit</code> then all data that was collected with any unit is returned, along with the corresponding units that were specified when the data was reported to CloudWatch. If you specify a unit, the operation returns only data that was collected with that unit specified. If you specify a unit that does not match the data collected, the results of the operation are null. CloudWatch does not perform unit conversions.</p>
     #   @return [String]
     class MetricStat < Struct.new(
+      nil,
       :metric,
       :period,
       :stat,
@@ -1173,6 +1229,7 @@ module Aws::ApplicationSignals
     #   <p>The status of the entity represented by this node.</p>
     #   @return [String]
     class Node < Struct.new(
+      nil,
       :key_attributes,
       :name,
       :node_id,
@@ -1189,6 +1246,7 @@ module Aws::ApplicationSignals
     #   <p>An array of grouping attribute definitions that specify how services should be grouped. Each definition includes a friendly name, source keys to derive the grouping value from, and an optional default value.</p>
     #   @return [Array<Types::GroupingAttributeDefinition>]
     class PutGroupingConfigurationInput < Struct.new(
+      nil,
       :grouping_attribute_definitions,
       keyword_init: true
     )
@@ -1199,6 +1257,7 @@ module Aws::ApplicationSignals
     #   <p>A structure containing the updated grouping configuration, including all grouping attribute definitions and the timestamp when it was last updated.</p>
     #   @return [Types::GroupingConfiguration]
     class PutGroupingConfigurationOutput < Struct.new(
+      nil,
       :grouping_configuration,
       keyword_init: true
     )
@@ -1210,6 +1269,7 @@ module Aws::ApplicationSignals
     #   <p>A cron or rate expression that specifies the schedule for the exclusion window.</p>
     #   @return [String]
     class RecurrenceRule < Struct.new(
+      nil,
       :expression,
       keyword_init: true
     )
@@ -1227,6 +1287,7 @@ module Aws::ApplicationSignals
     #   <p>The arithmetic operation used when comparing the specified metric to the threshold.</p>
     #   @return [String]
     class RequestBasedServiceLevelIndicator < Struct.new(
+      nil,
       :request_based_sli_metric,
       :metric_threshold,
       :comparison_operator,
@@ -1246,6 +1307,7 @@ module Aws::ApplicationSignals
     #   <p>The arithmetic operation to use when comparing the specified metric to the threshold. This parameter is required if this SLO is tracking the <code>Latency</code> metric.</p>
     #   @return [String]
     class RequestBasedServiceLevelIndicatorConfig < Struct.new(
+      nil,
       :request_based_sli_metric_config,
       :metric_threshold,
       :comparison_operator,
@@ -1274,6 +1336,7 @@ module Aws::ApplicationSignals
     #   <p>Identifies the dependency using the <code>DependencyKeyAttributes</code> and <code>DependencyOperationName</code>. </p>
     #   @return [Types::DependencyConfig]
     class RequestBasedServiceLevelIndicatorMetric < Struct.new(
+      nil,
       :key_attributes,
       :operation_name,
       :metric_type,
@@ -1305,6 +1368,7 @@ module Aws::ApplicationSignals
     #   <p>Identifies the dependency using the <code>DependencyKeyAttributes</code> and <code>DependencyOperationName</code>. </p>
     #   @return [Types::DependencyConfig]
     class RequestBasedServiceLevelIndicatorMetricConfig < Struct.new(
+      nil,
       :key_attributes,
       :operation_name,
       :metric_type,
@@ -1326,6 +1390,7 @@ module Aws::ApplicationSignals
     # @!attribute message
     #   @return [String]
     class ResourceNotFoundException < Struct.new(
+      nil,
       :resource_type,
       :resource_id,
       :message,
@@ -1342,6 +1407,7 @@ module Aws::ApplicationSignals
     #   <p>Specifies the duration of each rolling interval. For example, if <code>Duration</code> is <code>7</code> and <code>DurationUnit</code> is <code>DAY</code>, each rolling interval is seven days.</p>
     #   @return [Integer]
     class RollingInterval < Struct.new(
+      nil,
       :duration_unit,
       :duration,
       keyword_init: true
@@ -1366,6 +1432,7 @@ module Aws::ApplicationSignals
     #   <p>An array of string-to-string maps that each contain information about one log group associated with this service. Each string-to-string map includes the following fields:</p> <ul> <li> <p> <code>"Type": "AWS::Resource"</code> </p> </li> <li> <p> <code>"ResourceType": "AWS::Logs::LogGroup"</code> </p> </li> <li> <p> <code>"Identifier": "<i>name-of-log-group</i>"</code> </p> </li> </ul>
     #   @return [Array<Hash<String, String>>]
     class Service < Struct.new(
+      nil,
       :key_attributes,
       :attribute_maps,
       :service_groups,
@@ -1390,6 +1457,7 @@ module Aws::ApplicationSignals
     #   <p>An array of structures that each contain information about one metric associated with this service dependency that was discovered by Application Signals.</p>
     #   @return [Array<Types::MetricReference>]
     class ServiceDependency < Struct.new(
+      nil,
       :operation_name,
       :dependency_key_attributes,
       :dependency_operation_name,
@@ -1413,6 +1481,7 @@ module Aws::ApplicationSignals
     #   <p>An array of structures that each contain information about one metric associated with this service dependent that was discovered by Application Signals.</p>
     #   @return [Array<Types::MetricReference>]
     class ServiceDependent < Struct.new(
+      nil,
       :operation_name,
       :dependent_key_attributes,
       :dependent_operation_name,
@@ -1436,6 +1505,7 @@ module Aws::ApplicationSignals
     #   <p>The Amazon Web Services account ID where the service is located. Provide this value only for cross-account access.</p>
     #   @return [String]
     class ServiceEntity < Struct.new(
+      nil,
       :type,
       :name,
       :environment,
@@ -1459,6 +1529,7 @@ module Aws::ApplicationSignals
     #   <p>A unique identifier for this grouping attribute value, used for filtering and API operations.</p>
     #   @return [String]
     class ServiceGroup < Struct.new(
+      nil,
       :group_name,
       :group_value,
       :group_source,
@@ -1479,6 +1550,7 @@ module Aws::ApplicationSignals
     #   <p>The arithmetic operation used when comparing the specified metric to the threshold.</p>
     #   @return [String]
     class ServiceLevelIndicator < Struct.new(
+      nil,
       :sli_metric,
       :metric_threshold,
       :comparison_operator,
@@ -1498,6 +1570,7 @@ module Aws::ApplicationSignals
     #   <p>The arithmetic operation to use when comparing the specified metric to the threshold.</p>
     #   @return [String]
     class ServiceLevelIndicatorConfig < Struct.new(
+      nil,
       :sli_metric_config,
       :metric_threshold,
       :comparison_operator,
@@ -1523,6 +1596,7 @@ module Aws::ApplicationSignals
     #   <p>Identifies the dependency using the <code>DependencyKeyAttributes</code> and <code>DependencyOperationName</code>. </p>
     #   @return [Types::DependencyConfig]
     class ServiceLevelIndicatorMetric < Struct.new(
+      nil,
       :key_attributes,
       :operation_name,
       :metric_type,
@@ -1559,6 +1633,7 @@ module Aws::ApplicationSignals
     #   <p>Identifies the dependency using the <code>DependencyKeyAttributes</code> and <code>DependencyOperationName</code>. </p>
     #   @return [Types::DependencyConfig]
     class ServiceLevelIndicatorMetricConfig < Struct.new(
+      nil,
       :key_attributes,
       :operation_name,
       :metric_type,
@@ -1607,6 +1682,7 @@ module Aws::ApplicationSignals
     #   <p>Displays the SLI metric source type for this SLO. Supported types are:</p> <ul> <li> <p>Service operation</p> </li> <li> <p>Service dependency</p> </li> <li> <p>CloudWatch metric</p> </li> </ul>
     #   @return [String]
     class ServiceLevelObjective < Struct.new(
+      nil,
       :arn,
       :name,
       :description,
@@ -1661,6 +1737,7 @@ module Aws::ApplicationSignals
     #   <p>This structure contains the attributes that determine the goal of an SLO. This includes the time period for evaluation and the attainment threshold.</p>
     #   @return [Types::Goal]
     class ServiceLevelObjectiveBudgetReport < Struct.new(
+      nil,
       :arn,
       :name,
       :evaluation_type,
@@ -1692,6 +1769,7 @@ module Aws::ApplicationSignals
     #   <p>The message for this error.</p>
     #   @return [String]
     class ServiceLevelObjectiveBudgetReportError < Struct.new(
+      nil,
       :name,
       :arn,
       :error_code,
@@ -1709,6 +1787,7 @@ module Aws::ApplicationSignals
     #   <p>The ARN of the service level objective. The SLO must be provided with ARN for cross-account access.</p>
     #   @return [String]
     class ServiceLevelObjectiveEntity < Struct.new(
+      nil,
       :slo_name,
       :slo_arn,
       keyword_init: true
@@ -1742,6 +1821,7 @@ module Aws::ApplicationSignals
     #   <p>Displays the SLI metric source type for this SLO. Supported types are:</p> <ul> <li> <p>Service operation</p> </li> <li> <p>Service dependency</p> </li> <li> <p>CloudWatch metric</p> </li> </ul>
     #   @return [String]
     class ServiceLevelObjectiveSummary < Struct.new(
+      nil,
       :arn,
       :name,
       :key_attributes,
@@ -1763,6 +1843,7 @@ module Aws::ApplicationSignals
     #   <p>An array of structures that each contain information about one metric associated with this service operation that was discovered by Application Signals.</p>
     #   @return [Array<Types::MetricReference>]
     class ServiceOperation < Struct.new(
+      nil,
       :name,
       :metric_references,
       keyword_init: true
@@ -1781,6 +1862,7 @@ module Aws::ApplicationSignals
     #   <p>The type of metric associated with this service operation.</p>
     #   @return [String]
     class ServiceOperationEntity < Struct.new(
+      nil,
       :service,
       :operation,
       :metric_type,
@@ -1793,6 +1875,7 @@ module Aws::ApplicationSignals
     # @!attribute message
     #   @return [String]
     class ServiceQuotaExceededException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -1810,6 +1893,7 @@ module Aws::ApplicationSignals
     #   <p>An array containing the most recent change events for this service, such as deployments, with information about when they occurred and who initiated them.</p>
     #   @return [Array<Types::ChangeEvent>]
     class ServiceState < Struct.new(
+      nil,
       :attribute_filters,
       :service,
       :latest_change_events,
@@ -1832,6 +1916,7 @@ module Aws::ApplicationSignals
     #   <p>An array of service groups that this service belongs to, based on the configured grouping attributes.</p>
     #   @return [Array<Types::ServiceGroup>]
     class ServiceSummary < Struct.new(
+      nil,
       :key_attributes,
       :attribute_maps,
       :metric_references,
@@ -1842,12 +1927,14 @@ module Aws::ApplicationSignals
     end
 
     class StartDiscoveryInput < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
     end
 
     class StartDiscoveryOutput < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1861,6 +1948,7 @@ module Aws::ApplicationSignals
     #   <p>The value for the specified tag key.</p>
     #   @return [String]
     class Tag < Struct.new(
+      nil,
       :key,
       :value,
       keyword_init: true
@@ -1875,6 +1963,7 @@ module Aws::ApplicationSignals
     #   <p>The list of key-value pairs to associate with the alarm.</p>
     #   @return [Array<Types::Tag>]
     class TagResourceRequest < Struct.new(
+      nil,
       :resource_arn,
       :tags,
       keyword_init: true
@@ -1883,6 +1972,7 @@ module Aws::ApplicationSignals
     end
 
     class TagResourceResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1892,6 +1982,7 @@ module Aws::ApplicationSignals
     # @!attribute message
     #   @return [String]
     class ThrottlingException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -1905,6 +1996,7 @@ module Aws::ApplicationSignals
     #   <p>The list of tag keys to remove from the resource.</p>
     #   @return [Array<String>]
     class UntagResourceRequest < Struct.new(
+      nil,
       :resource_arn,
       :tag_keys,
       keyword_init: true
@@ -1913,6 +2005,7 @@ module Aws::ApplicationSignals
     end
 
     class UntagResourceResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1937,6 +2030,7 @@ module Aws::ApplicationSignals
     #   <p>Use this array to create <i>burn rates</i> for this SLO. Each burn rate is a metric that indicates how fast the service is consuming the error budget, relative to the attainment goal of the SLO.</p>
     #   @return [Array<Types::BurnRateConfiguration>]
     class UpdateServiceLevelObjectiveInput < Struct.new(
+      nil,
       :id,
       :description,
       :sli_config,
@@ -1952,6 +2046,7 @@ module Aws::ApplicationSignals
     #   <p>A structure that contains information about the SLO that you just updated.</p>
     #   @return [Types::ServiceLevelObjective]
     class UpdateServiceLevelObjectiveOutput < Struct.new(
+      nil,
       :slo,
       keyword_init: true
     )
@@ -1962,6 +2057,7 @@ module Aws::ApplicationSignals
     # @!attribute message
     #   @return [String]
     class ValidationException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -1976,6 +2072,7 @@ module Aws::ApplicationSignals
     #   <p>The number of time units for the exclusion window length.</p>
     #   @return [Integer]
     class Window < Struct.new(
+      nil,
       :duration_unit,
       :duration,
       keyword_init: true

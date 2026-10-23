@@ -13,6 +13,7 @@ module Aws::Greengrass
     #   The ARN of the role you wish to associate with this group. The existence of the role is not validated.
     #   @return [String]
     class AssociateRoleToGroupRequest < Struct.new(
+      nil,
       :group_id,
       :role_arn,
       keyword_init: true
@@ -24,6 +25,7 @@ module Aws::Greengrass
     #   The time, in milliseconds since the epoch, when the role ARN was associated with the group.
     #   @return [String]
     class AssociateRoleToGroupResponse < Struct.new(
+      nil,
       :associated_at,
       keyword_init: true
     )
@@ -34,6 +36,7 @@ module Aws::Greengrass
     #   The ARN of the service role you wish to associate with your account.
     #   @return [String]
     class AssociateServiceRoleToAccountRequest < Struct.new(
+      nil,
       :role_arn,
       keyword_init: true
     )
@@ -44,6 +47,7 @@ module Aws::Greengrass
     #   The time when the service role was associated with the account.
     #   @return [String]
     class AssociateServiceRoleToAccountResponse < Struct.new(
+      nil,
       :associated_at,
       keyword_init: true
     )
@@ -58,6 +62,7 @@ module Aws::Greengrass
     #   A message containing information about the error.
     #   @return [String]
     class BadRequestException < Struct.new(
+      nil,
       :error_details,
       :message,
       keyword_init: true
@@ -76,6 +81,7 @@ module Aws::Greengrass
     #   The time, in ISO format, when the deployment was created.
     #   @return [String]
     class BulkDeployment < Struct.new(
+      nil,
       :bulk_deployment_arn,
       :bulk_deployment_id,
       :created_at,
@@ -95,6 +101,7 @@ module Aws::Greengrass
     #   The total number of deployment attempts that returned a retryable error. For example, a retry is triggered if the attempt to deploy a group returns a throttling error. ''StartBulkDeployment'' retries a group deployment up to five times.
     #   @return [Integer]
     class BulkDeploymentMetrics < Struct.new(
+      nil,
       :invalid_input_records,
       :records_processed,
       :retry_attempts,
@@ -129,6 +136,7 @@ module Aws::Greengrass
     #   The ARN of the Greengrass group.
     #   @return [String]
     class BulkDeploymentResult < Struct.new(
+      nil,
       :created_at,
       :deployment_arn,
       :deployment_id,
@@ -156,6 +164,7 @@ module Aws::Greengrass
     #   The port of the Greengrass core. Usually 8883.
     #   @return [Integer]
     class ConnectivityInfo < Struct.new(
+      nil,
       :host_address,
       :id,
       :metadata,
@@ -176,6 +185,7 @@ module Aws::Greengrass
     #   The parameters or configuration that the connector uses.
     #   @return [Hash<String, String>]
     class Connector < Struct.new(
+      nil,
       :connector_arn,
       :id,
       :parameters,
@@ -189,6 +199,7 @@ module Aws::Greengrass
     #   A list of references to connectors in this version, with their corresponding configuration settings.
     #   @return [Array<Types::Connector>]
     class ConnectorDefinitionVersion < Struct.new(
+      nil,
       :connectors,
       keyword_init: true
     )
@@ -209,6 +220,7 @@ module Aws::Greengrass
     #   The ARN of the thing which is the core.
     #   @return [String]
     class Core < Struct.new(
+      nil,
       :certificate_arn,
       :id,
       :sync_shadow,
@@ -223,6 +235,7 @@ module Aws::Greengrass
     #   A list of cores in the core definition version.
     #   @return [Array<Types::Core>]
     class CoreDefinitionVersion < Struct.new(
+      nil,
       :cores,
       keyword_init: true
     )
@@ -242,6 +255,7 @@ module Aws::Greengrass
     #   Tag(s) to add to the new resource.
     #   @return [Hash<String, String>]
     class CreateConnectorDefinitionRequest < Struct.new(
+      nil,
       :amzn_client_token,
       :initial_version,
       :name,
@@ -273,6 +287,7 @@ module Aws::Greengrass
     #   The name of the definition.
     #   @return [String]
     class CreateConnectorDefinitionResponse < Struct.new(
+      nil,
       :arn,
       :creation_timestamp,
       :id,
@@ -295,6 +310,7 @@ module Aws::Greengrass
     #   A list of references to connectors in this version, with their corresponding configuration settings.
     #   @return [Array<Types::Connector>]
     class CreateConnectorDefinitionVersionRequest < Struct.new(
+      nil,
       :amzn_client_token,
       :connector_definition_id,
       :connectors,
@@ -316,6 +332,7 @@ module Aws::Greengrass
     #   The ID of the version.
     #   @return [String]
     class CreateConnectorDefinitionVersionResponse < Struct.new(
+      nil,
       :arn,
       :creation_timestamp,
       :id,
@@ -339,6 +356,7 @@ module Aws::Greengrass
     #   Tag(s) to add to the new resource.
     #   @return [Hash<String, String>]
     class CreateCoreDefinitionRequest < Struct.new(
+      nil,
       :amzn_client_token,
       :initial_version,
       :name,
@@ -370,6 +388,7 @@ module Aws::Greengrass
     #   The name of the definition.
     #   @return [String]
     class CreateCoreDefinitionResponse < Struct.new(
+      nil,
       :arn,
       :creation_timestamp,
       :id,
@@ -392,6 +411,7 @@ module Aws::Greengrass
     #   A list of cores in the core definition version.
     #   @return [Array<Types::Core>]
     class CreateCoreDefinitionVersionRequest < Struct.new(
+      nil,
       :amzn_client_token,
       :core_definition_id,
       :cores,
@@ -413,6 +433,7 @@ module Aws::Greengrass
     #   The ID of the version.
     #   @return [String]
     class CreateCoreDefinitionVersionResponse < Struct.new(
+      nil,
       :arn,
       :creation_timestamp,
       :id,
@@ -438,6 +459,7 @@ module Aws::Greengrass
     #   The ID of the group version to be deployed.
     #   @return [String]
     class CreateDeploymentRequest < Struct.new(
+      nil,
       :amzn_client_token,
       :deployment_id,
       :deployment_type,
@@ -455,6 +477,7 @@ module Aws::Greengrass
     #   The ID of the deployment.
     #   @return [String]
     class CreateDeploymentResponse < Struct.new(
+      nil,
       :deployment_arn,
       :deployment_id,
       keyword_init: true
@@ -475,6 +498,7 @@ module Aws::Greengrass
     #   Tag(s) to add to the new resource.
     #   @return [Hash<String, String>]
     class CreateDeviceDefinitionRequest < Struct.new(
+      nil,
       :amzn_client_token,
       :initial_version,
       :name,
@@ -506,6 +530,7 @@ module Aws::Greengrass
     #   The name of the definition.
     #   @return [String]
     class CreateDeviceDefinitionResponse < Struct.new(
+      nil,
       :arn,
       :creation_timestamp,
       :id,
@@ -528,6 +553,7 @@ module Aws::Greengrass
     #   A list of devices in the definition version.
     #   @return [Array<Types::Device>]
     class CreateDeviceDefinitionVersionRequest < Struct.new(
+      nil,
       :amzn_client_token,
       :device_definition_id,
       :devices,
@@ -549,6 +575,7 @@ module Aws::Greengrass
     #   The ID of the version.
     #   @return [String]
     class CreateDeviceDefinitionVersionResponse < Struct.new(
+      nil,
       :arn,
       :creation_timestamp,
       :id,
@@ -571,6 +598,7 @@ module Aws::Greengrass
     #   Tag(s) to add to the new resource.
     #   @return [Hash<String, String>]
     class CreateFunctionDefinitionRequest < Struct.new(
+      nil,
       :amzn_client_token,
       :initial_version,
       :name,
@@ -602,6 +630,7 @@ module Aws::Greengrass
     #   The name of the definition.
     #   @return [String]
     class CreateFunctionDefinitionResponse < Struct.new(
+      nil,
       :arn,
       :creation_timestamp,
       :id,
@@ -628,6 +657,7 @@ module Aws::Greengrass
     #   A list of Lambda functions in this function definition version.
     #   @return [Array<Types::Function>]
     class CreateFunctionDefinitionVersionRequest < Struct.new(
+      nil,
       :amzn_client_token,
       :default_config,
       :function_definition_id,
@@ -650,6 +680,7 @@ module Aws::Greengrass
     #   The ID of the version.
     #   @return [String]
     class CreateFunctionDefinitionVersionResponse < Struct.new(
+      nil,
       :arn,
       :creation_timestamp,
       :id,
@@ -666,6 +697,7 @@ module Aws::Greengrass
     #   The ID of the Greengrass group.
     #   @return [String]
     class CreateGroupCertificateAuthorityRequest < Struct.new(
+      nil,
       :amzn_client_token,
       :group_id,
       keyword_init: true
@@ -677,6 +709,7 @@ module Aws::Greengrass
     #   The ARN of the group certificate authority.
     #   @return [String]
     class CreateGroupCertificateAuthorityResponse < Struct.new(
+      nil,
       :group_certificate_authority_arn,
       keyword_init: true
     )
@@ -696,6 +729,7 @@ module Aws::Greengrass
     #   Tag(s) to add to the new resource.
     #   @return [Hash<String, String>]
     class CreateGroupRequest < Struct.new(
+      nil,
       :amzn_client_token,
       :initial_version,
       :name,
@@ -727,6 +761,7 @@ module Aws::Greengrass
     #   The name of the definition.
     #   @return [String]
     class CreateGroupResponse < Struct.new(
+      nil,
       :arn,
       :creation_timestamp,
       :id,
@@ -767,6 +802,7 @@ module Aws::Greengrass
     #   The ARN of the subscription definition version for this group.
     #   @return [String]
     class CreateGroupVersionRequest < Struct.new(
+      nil,
       :amzn_client_token,
       :connector_definition_version_arn,
       :core_definition_version_arn,
@@ -794,6 +830,7 @@ module Aws::Greengrass
     #   The ID of the version.
     #   @return [String]
     class CreateGroupVersionResponse < Struct.new(
+      nil,
       :arn,
       :creation_timestamp,
       :id,
@@ -816,6 +853,7 @@ module Aws::Greengrass
     #   Tag(s) to add to the new resource.
     #   @return [Hash<String, String>]
     class CreateLoggerDefinitionRequest < Struct.new(
+      nil,
       :amzn_client_token,
       :initial_version,
       :name,
@@ -847,6 +885,7 @@ module Aws::Greengrass
     #   The name of the definition.
     #   @return [String]
     class CreateLoggerDefinitionResponse < Struct.new(
+      nil,
       :arn,
       :creation_timestamp,
       :id,
@@ -869,6 +908,7 @@ module Aws::Greengrass
     #   A list of loggers.
     #   @return [Array<Types::Logger>]
     class CreateLoggerDefinitionVersionRequest < Struct.new(
+      nil,
       :amzn_client_token,
       :logger_definition_id,
       :loggers,
@@ -890,6 +930,7 @@ module Aws::Greengrass
     #   The ID of the version.
     #   @return [String]
     class CreateLoggerDefinitionVersionResponse < Struct.new(
+      nil,
       :arn,
       :creation_timestamp,
       :id,
@@ -912,6 +953,7 @@ module Aws::Greengrass
     #   Tag(s) to add to the new resource.
     #   @return [Hash<String, String>]
     class CreateResourceDefinitionRequest < Struct.new(
+      nil,
       :amzn_client_token,
       :initial_version,
       :name,
@@ -943,6 +985,7 @@ module Aws::Greengrass
     #   The name of the definition.
     #   @return [String]
     class CreateResourceDefinitionResponse < Struct.new(
+      nil,
       :arn,
       :creation_timestamp,
       :id,
@@ -965,6 +1008,7 @@ module Aws::Greengrass
     #   A list of resources.
     #   @return [Array<Types::Resource>]
     class CreateResourceDefinitionVersionRequest < Struct.new(
+      nil,
       :amzn_client_token,
       :resource_definition_id,
       :resources,
@@ -986,6 +1030,7 @@ module Aws::Greengrass
     #   The ID of the version.
     #   @return [String]
     class CreateResourceDefinitionVersionResponse < Struct.new(
+      nil,
       :arn,
       :creation_timestamp,
       :id,
@@ -1017,6 +1062,7 @@ module Aws::Greengrass
     #   The operating system of the cores which are the targets of an update.
     #   @return [String]
     class CreateSoftwareUpdateJobRequest < Struct.new(
+      nil,
       :amzn_client_token,
       :s3_url_signer_role,
       :software_to_update,
@@ -1039,6 +1085,7 @@ module Aws::Greengrass
     #   The software version installed on the device or devices after the update.
     #   @return [String]
     class CreateSoftwareUpdateJobResponse < Struct.new(
+      nil,
       :iot_job_arn,
       :iot_job_id,
       :platform_software_version,
@@ -1060,6 +1107,7 @@ module Aws::Greengrass
     #   Tag(s) to add to the new resource.
     #   @return [Hash<String, String>]
     class CreateSubscriptionDefinitionRequest < Struct.new(
+      nil,
       :amzn_client_token,
       :initial_version,
       :name,
@@ -1091,6 +1139,7 @@ module Aws::Greengrass
     #   The name of the definition.
     #   @return [String]
     class CreateSubscriptionDefinitionResponse < Struct.new(
+      nil,
       :arn,
       :creation_timestamp,
       :id,
@@ -1113,6 +1162,7 @@ module Aws::Greengrass
     #   A list of subscriptions.
     #   @return [Array<Types::Subscription>]
     class CreateSubscriptionDefinitionVersionRequest < Struct.new(
+      nil,
       :amzn_client_token,
       :subscription_definition_id,
       :subscriptions,
@@ -1134,6 +1184,7 @@ module Aws::Greengrass
     #   The ID of the version.
     #   @return [String]
     class CreateSubscriptionDefinitionVersionResponse < Struct.new(
+      nil,
       :arn,
       :creation_timestamp,
       :id,
@@ -1169,6 +1220,7 @@ module Aws::Greengrass
     #   Tag(s) attached to the resource arn.
     #   @return [Hash<String, String>]
     class DefinitionInformation < Struct.new(
+      nil,
       :arn,
       :creation_timestamp,
       :id,
@@ -1186,6 +1238,7 @@ module Aws::Greengrass
     #   The ID of the connector definition.
     #   @return [String]
     class DeleteConnectorDefinitionRequest < Struct.new(
+      nil,
       :connector_definition_id,
       keyword_init: true
     )
@@ -1193,6 +1246,7 @@ module Aws::Greengrass
     end
 
     class DeleteConnectorDefinitionResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1202,6 +1256,7 @@ module Aws::Greengrass
     #   The ID of the core definition.
     #   @return [String]
     class DeleteCoreDefinitionRequest < Struct.new(
+      nil,
       :core_definition_id,
       keyword_init: true
     )
@@ -1209,6 +1264,7 @@ module Aws::Greengrass
     end
 
     class DeleteCoreDefinitionResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1218,6 +1274,7 @@ module Aws::Greengrass
     #   The ID of the device definition.
     #   @return [String]
     class DeleteDeviceDefinitionRequest < Struct.new(
+      nil,
       :device_definition_id,
       keyword_init: true
     )
@@ -1225,6 +1282,7 @@ module Aws::Greengrass
     end
 
     class DeleteDeviceDefinitionResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1234,6 +1292,7 @@ module Aws::Greengrass
     #   The ID of the Lambda function definition.
     #   @return [String]
     class DeleteFunctionDefinitionRequest < Struct.new(
+      nil,
       :function_definition_id,
       keyword_init: true
     )
@@ -1241,6 +1300,7 @@ module Aws::Greengrass
     end
 
     class DeleteFunctionDefinitionResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1250,6 +1310,7 @@ module Aws::Greengrass
     #   The ID of the Greengrass group.
     #   @return [String]
     class DeleteGroupRequest < Struct.new(
+      nil,
       :group_id,
       keyword_init: true
     )
@@ -1257,6 +1318,7 @@ module Aws::Greengrass
     end
 
     class DeleteGroupResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1266,6 +1328,7 @@ module Aws::Greengrass
     #   The ID of the logger definition.
     #   @return [String]
     class DeleteLoggerDefinitionRequest < Struct.new(
+      nil,
       :logger_definition_id,
       keyword_init: true
     )
@@ -1273,6 +1336,7 @@ module Aws::Greengrass
     end
 
     class DeleteLoggerDefinitionResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1282,6 +1346,7 @@ module Aws::Greengrass
     #   The ID of the resource definition.
     #   @return [String]
     class DeleteResourceDefinitionRequest < Struct.new(
+      nil,
       :resource_definition_id,
       keyword_init: true
     )
@@ -1289,6 +1354,7 @@ module Aws::Greengrass
     end
 
     class DeleteResourceDefinitionResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1298,6 +1364,7 @@ module Aws::Greengrass
     #   The ID of the subscription definition.
     #   @return [String]
     class DeleteSubscriptionDefinitionRequest < Struct.new(
+      nil,
       :subscription_definition_id,
       keyword_init: true
     )
@@ -1305,6 +1372,7 @@ module Aws::Greengrass
     end
 
     class DeleteSubscriptionDefinitionResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1327,6 +1395,7 @@ module Aws::Greengrass
     #   The ARN of the group for this deployment.
     #   @return [String]
     class Deployment < Struct.new(
+      nil,
       :created_at,
       :deployment_arn,
       :deployment_id,
@@ -1351,6 +1420,7 @@ module Aws::Greengrass
     #   The thing ARN of the device.
     #   @return [String]
     class Device < Struct.new(
+      nil,
       :certificate_arn,
       :id,
       :sync_shadow,
@@ -1365,6 +1435,7 @@ module Aws::Greengrass
     #   A list of devices in the definition version.
     #   @return [Array<Types::Device>]
     class DeviceDefinitionVersion < Struct.new(
+      nil,
       :devices,
       keyword_init: true
     )
@@ -1375,6 +1446,7 @@ module Aws::Greengrass
     #   The ID of the Greengrass group.
     #   @return [String]
     class DisassociateRoleFromGroupRequest < Struct.new(
+      nil,
       :group_id,
       keyword_init: true
     )
@@ -1385,6 +1457,7 @@ module Aws::Greengrass
     #   The time, in milliseconds since the epoch, when the role was disassociated from the group.
     #   @return [String]
     class DisassociateRoleFromGroupResponse < Struct.new(
+      nil,
       :disassociated_at,
       keyword_init: true
     )
@@ -1392,6 +1465,7 @@ module Aws::Greengrass
     end
 
     class DisassociateServiceRoleFromAccountRequest < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1401,6 +1475,7 @@ module Aws::Greengrass
     #   The time when the service role was disassociated from the account.
     #   @return [String]
     class DisassociateServiceRoleFromAccountResponse < Struct.new(
+      nil,
       :disassociated_at,
       keyword_init: true
     )
@@ -1415,6 +1490,7 @@ module Aws::Greengrass
     #   A detailed error message.
     #   @return [String]
     class ErrorDetail < Struct.new(
+      nil,
       :detailed_error_code,
       :detailed_error_message,
       keyword_init: true
@@ -1433,6 +1509,7 @@ module Aws::Greengrass
     #   A descriptive or arbitrary ID for the function. This value must be unique within the function definition version. Max length is 128 characters with pattern ''[a-zA-Z0-9:_-]+''.
     #   @return [String]
     class Function < Struct.new(
+      nil,
       :function_arn,
       :function_configuration,
       :id,
@@ -1467,6 +1544,7 @@ module Aws::Greengrass
     #   The Lambda runtime supported by Greengrass which is to be used instead of the one specified in the Lambda function.
     #   @return [String]
     class FunctionConfiguration < Struct.new(
+      nil,
       :encoding_type,
       :environment,
       :exec_args,
@@ -1494,6 +1572,7 @@ module Aws::Greengrass
     #   Environment variables for the Lambda function's configuration.
     #   @return [Hash<String, String>]
     class FunctionConfigurationEnvironment < Struct.new(
+      nil,
       :access_sysfs,
       :execution,
       :resource_access_policies,
@@ -1508,6 +1587,7 @@ module Aws::Greengrass
     #   Configuration information that specifies how a Lambda function runs.
     #   @return [Types::FunctionDefaultExecutionConfig]
     class FunctionDefaultConfig < Struct.new(
+      nil,
       :execution,
       keyword_init: true
     )
@@ -1522,6 +1602,7 @@ module Aws::Greengrass
     #   Specifies the user and group whose permissions are used when running the Lambda function. You can specify one or both values to override the default values. We recommend that you avoid running as root unless absolutely necessary to minimize the risk of unintended changes or malicious attacks. To run as root, you must set ''IsolationMode'' to ''NoContainer'' and update config.json in ''greengrass-root/config'' to set ''allowFunctionsToRunAsRoot'' to ''yes''.
     #   @return [Types::FunctionRunAsConfig]
     class FunctionDefaultExecutionConfig < Struct.new(
+      nil,
       :isolation_mode,
       :run_as,
       keyword_init: true
@@ -1537,6 +1618,7 @@ module Aws::Greengrass
     #   A list of Lambda functions in this function definition version.
     #   @return [Array<Types::Function>]
     class FunctionDefinitionVersion < Struct.new(
+      nil,
       :default_config,
       :functions,
       keyword_init: true
@@ -1552,6 +1634,7 @@ module Aws::Greengrass
     #   Specifies the user and group whose permissions are used when running the Lambda function. You can specify one or both values to override the default values. We recommend that you avoid running as root unless absolutely necessary to minimize the risk of unintended changes or malicious attacks. To run as root, you must set ''IsolationMode'' to ''NoContainer'' and update config.json in ''greengrass-root/config'' to set ''allowFunctionsToRunAsRoot'' to ''yes''.
     #   @return [Types::FunctionRunAsConfig]
     class FunctionExecutionConfig < Struct.new(
+      nil,
       :isolation_mode,
       :run_as,
       keyword_init: true
@@ -1567,6 +1650,7 @@ module Aws::Greengrass
     #   The user ID whose permissions are used to run a Lambda function.
     #   @return [Integer]
     class FunctionRunAsConfig < Struct.new(
+      nil,
       :gid,
       :uid,
       keyword_init: true
@@ -1578,6 +1662,7 @@ module Aws::Greengrass
     #   The ID of the Greengrass group.
     #   @return [String]
     class GetAssociatedRoleRequest < Struct.new(
+      nil,
       :group_id,
       keyword_init: true
     )
@@ -1591,6 +1676,7 @@ module Aws::Greengrass
     #   The ARN of the role that is associated with the group.
     #   @return [String]
     class GetAssociatedRoleResponse < Struct.new(
+      nil,
       :associated_at,
       :role_arn,
       keyword_init: true
@@ -1602,6 +1688,7 @@ module Aws::Greengrass
     #   The ID of the bulk deployment.
     #   @return [String]
     class GetBulkDeploymentStatusRequest < Struct.new(
+      nil,
       :bulk_deployment_id,
       keyword_init: true
     )
@@ -1627,6 +1714,7 @@ module Aws::Greengrass
     #   Tag(s) attached to the resource arn.
     #   @return [Hash<String, String>]
     class GetBulkDeploymentStatusResponse < Struct.new(
+      nil,
       :bulk_deployment_metrics,
       :bulk_deployment_status,
       :created_at,
@@ -1642,6 +1730,7 @@ module Aws::Greengrass
     #   The thing name.
     #   @return [String]
     class GetConnectivityInfoRequest < Struct.new(
+      nil,
       :thing_name,
       keyword_init: true
     )
@@ -1655,6 +1744,7 @@ module Aws::Greengrass
     #   A message about the connectivity info request.
     #   @return [String]
     class GetConnectivityInfoResponse < Struct.new(
+      nil,
       :connectivity_info,
       :message,
       keyword_init: true
@@ -1666,6 +1756,7 @@ module Aws::Greengrass
     #   The ID of the connector definition.
     #   @return [String]
     class GetConnectorDefinitionRequest < Struct.new(
+      nil,
       :connector_definition_id,
       keyword_init: true
     )
@@ -1697,6 +1788,7 @@ module Aws::Greengrass
     #   Tag(s) attached to the resource arn.
     #   @return [Hash<String, String>]
     class GetConnectorDefinitionResponse < Struct.new(
+      nil,
       :arn,
       :creation_timestamp,
       :id,
@@ -1720,6 +1812,7 @@ module Aws::Greengrass
     #   The token for the next set of results, or ''null'' if there are no additional results.
     #   @return [String]
     class GetConnectorDefinitionVersionRequest < Struct.new(
+      nil,
       :connector_definition_id,
       :connector_definition_version_id,
       :next_token,
@@ -1747,6 +1840,7 @@ module Aws::Greengrass
     #   The version of the connector definition version.
     #   @return [String]
     class GetConnectorDefinitionVersionResponse < Struct.new(
+      nil,
       :arn,
       :creation_timestamp,
       :definition,
@@ -1762,6 +1856,7 @@ module Aws::Greengrass
     #   The ID of the core definition.
     #   @return [String]
     class GetCoreDefinitionRequest < Struct.new(
+      nil,
       :core_definition_id,
       keyword_init: true
     )
@@ -1793,6 +1888,7 @@ module Aws::Greengrass
     #   Tag(s) attached to the resource arn.
     #   @return [Hash<String, String>]
     class GetCoreDefinitionResponse < Struct.new(
+      nil,
       :arn,
       :creation_timestamp,
       :id,
@@ -1813,6 +1909,7 @@ module Aws::Greengrass
     #   The ID of the core definition version. This value maps to the ''Version'' property of the corresponding ''VersionInformation'' object, which is returned by ''ListCoreDefinitionVersions'' requests. If the version is the last one that was associated with a core definition, the value also maps to the ''LatestVersion'' property of the corresponding ''DefinitionInformation'' object.
     #   @return [String]
     class GetCoreDefinitionVersionRequest < Struct.new(
+      nil,
       :core_definition_id,
       :core_definition_version_id,
       keyword_init: true
@@ -1839,6 +1936,7 @@ module Aws::Greengrass
     #   The version of the core definition version.
     #   @return [String]
     class GetCoreDefinitionVersionResponse < Struct.new(
+      nil,
       :arn,
       :creation_timestamp,
       :definition,
@@ -1857,6 +1955,7 @@ module Aws::Greengrass
     #   The ID of the Greengrass group.
     #   @return [String]
     class GetDeploymentStatusRequest < Struct.new(
+      nil,
       :deployment_id,
       :group_id,
       keyword_init: true
@@ -1880,6 +1979,7 @@ module Aws::Greengrass
     #   The time, in milliseconds since the epoch, when the deployment status was updated.
     #   @return [String]
     class GetDeploymentStatusResponse < Struct.new(
+      nil,
       :deployment_status,
       :deployment_type,
       :error_details,
@@ -1894,6 +1994,7 @@ module Aws::Greengrass
     #   The ID of the device definition.
     #   @return [String]
     class GetDeviceDefinitionRequest < Struct.new(
+      nil,
       :device_definition_id,
       keyword_init: true
     )
@@ -1925,6 +2026,7 @@ module Aws::Greengrass
     #   Tag(s) attached to the resource arn.
     #   @return [Hash<String, String>]
     class GetDeviceDefinitionResponse < Struct.new(
+      nil,
       :arn,
       :creation_timestamp,
       :id,
@@ -1948,6 +2050,7 @@ module Aws::Greengrass
     #   The token for the next set of results, or ''null'' if there are no additional results.
     #   @return [String]
     class GetDeviceDefinitionVersionRequest < Struct.new(
+      nil,
       :device_definition_id,
       :device_definition_version_id,
       :next_token,
@@ -1975,6 +2078,7 @@ module Aws::Greengrass
     #   The version of the device definition version.
     #   @return [String]
     class GetDeviceDefinitionVersionResponse < Struct.new(
+      nil,
       :arn,
       :creation_timestamp,
       :definition,
@@ -1990,6 +2094,7 @@ module Aws::Greengrass
     #   The ID of the Lambda function definition.
     #   @return [String]
     class GetFunctionDefinitionRequest < Struct.new(
+      nil,
       :function_definition_id,
       keyword_init: true
     )
@@ -2021,6 +2126,7 @@ module Aws::Greengrass
     #   Tag(s) attached to the resource arn.
     #   @return [Hash<String, String>]
     class GetFunctionDefinitionResponse < Struct.new(
+      nil,
       :arn,
       :creation_timestamp,
       :id,
@@ -2044,6 +2150,7 @@ module Aws::Greengrass
     #   The token for the next set of results, or ''null'' if there are no additional results.
     #   @return [String]
     class GetFunctionDefinitionVersionRequest < Struct.new(
+      nil,
       :function_definition_id,
       :function_definition_version_id,
       :next_token,
@@ -2071,6 +2178,7 @@ module Aws::Greengrass
     #   The version of the function definition version.
     #   @return [String]
     class GetFunctionDefinitionVersionResponse < Struct.new(
+      nil,
       :arn,
       :creation_timestamp,
       :definition,
@@ -2089,6 +2197,7 @@ module Aws::Greengrass
     #   The ID of the Greengrass group.
     #   @return [String]
     class GetGroupCertificateAuthorityRequest < Struct.new(
+      nil,
       :certificate_authority_id,
       :group_id,
       keyword_init: true
@@ -2106,6 +2215,7 @@ module Aws::Greengrass
     #   The PEM encoded certificate for the group.
     #   @return [String]
     class GetGroupCertificateAuthorityResponse < Struct.new(
+      nil,
       :group_certificate_authority_arn,
       :group_certificate_authority_id,
       :pem_encoded_certificate,
@@ -2118,6 +2228,7 @@ module Aws::Greengrass
     #   The ID of the Greengrass group.
     #   @return [String]
     class GetGroupCertificateConfigurationRequest < Struct.new(
+      nil,
       :group_id,
       keyword_init: true
     )
@@ -2134,6 +2245,7 @@ module Aws::Greengrass
     #   The ID of the group certificate configuration.
     #   @return [String]
     class GetGroupCertificateConfigurationResponse < Struct.new(
+      nil,
       :certificate_authority_expiry_in_milliseconds,
       :certificate_expiry_in_milliseconds,
       :group_id,
@@ -2146,6 +2258,7 @@ module Aws::Greengrass
     #   The ID of the Greengrass group.
     #   @return [String]
     class GetGroupRequest < Struct.new(
+      nil,
       :group_id,
       keyword_init: true
     )
@@ -2177,6 +2290,7 @@ module Aws::Greengrass
     #   Tag(s) attached to the resource arn.
     #   @return [Hash<String, String>]
     class GetGroupResponse < Struct.new(
+      nil,
       :arn,
       :creation_timestamp,
       :id,
@@ -2197,6 +2311,7 @@ module Aws::Greengrass
     #   The ID of the group version. This value maps to the ''Version'' property of the corresponding ''VersionInformation'' object, which is returned by ''ListGroupVersions'' requests. If the version is the last one that was associated with a group, the value also maps to the ''LatestVersion'' property of the corresponding ''GroupInformation'' object.
     #   @return [String]
     class GetGroupVersionRequest < Struct.new(
+      nil,
       :group_id,
       :group_version_id,
       keyword_init: true
@@ -2220,6 +2335,7 @@ module Aws::Greengrass
     #   The ID of the group version.
     #   @return [String]
     class GetGroupVersionResponse < Struct.new(
+      nil,
       :arn,
       :creation_timestamp,
       :definition,
@@ -2234,6 +2350,7 @@ module Aws::Greengrass
     #   The ID of the logger definition.
     #   @return [String]
     class GetLoggerDefinitionRequest < Struct.new(
+      nil,
       :logger_definition_id,
       keyword_init: true
     )
@@ -2265,6 +2382,7 @@ module Aws::Greengrass
     #   Tag(s) attached to the resource arn.
     #   @return [Hash<String, String>]
     class GetLoggerDefinitionResponse < Struct.new(
+      nil,
       :arn,
       :creation_timestamp,
       :id,
@@ -2288,6 +2406,7 @@ module Aws::Greengrass
     #   The token for the next set of results, or ''null'' if there are no additional results.
     #   @return [String]
     class GetLoggerDefinitionVersionRequest < Struct.new(
+      nil,
       :logger_definition_id,
       :logger_definition_version_id,
       :next_token,
@@ -2312,6 +2431,7 @@ module Aws::Greengrass
     #   The version of the logger definition version.
     #   @return [String]
     class GetLoggerDefinitionVersionResponse < Struct.new(
+      nil,
       :arn,
       :creation_timestamp,
       :definition,
@@ -2326,6 +2446,7 @@ module Aws::Greengrass
     #   The ID of the resource definition.
     #   @return [String]
     class GetResourceDefinitionRequest < Struct.new(
+      nil,
       :resource_definition_id,
       keyword_init: true
     )
@@ -2357,6 +2478,7 @@ module Aws::Greengrass
     #   Tag(s) attached to the resource arn.
     #   @return [Hash<String, String>]
     class GetResourceDefinitionResponse < Struct.new(
+      nil,
       :arn,
       :creation_timestamp,
       :id,
@@ -2377,6 +2499,7 @@ module Aws::Greengrass
     #   The ID of the resource definition version. This value maps to the ''Version'' property of the corresponding ''VersionInformation'' object, which is returned by ''ListResourceDefinitionVersions'' requests. If the version is the last one that was associated with a resource definition, the value also maps to the ''LatestVersion'' property of the corresponding ''DefinitionInformation'' object.
     #   @return [String]
     class GetResourceDefinitionVersionRequest < Struct.new(
+      nil,
       :resource_definition_id,
       :resource_definition_version_id,
       keyword_init: true
@@ -2400,6 +2523,7 @@ module Aws::Greengrass
     #   The version of the resource definition version.
     #   @return [String]
     class GetResourceDefinitionVersionResponse < Struct.new(
+      nil,
       :arn,
       :creation_timestamp,
       :definition,
@@ -2411,6 +2535,7 @@ module Aws::Greengrass
     end
 
     class GetServiceRoleForAccountRequest < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -2423,6 +2548,7 @@ module Aws::Greengrass
     #   The ARN of the role which is associated with the account.
     #   @return [String]
     class GetServiceRoleForAccountResponse < Struct.new(
+      nil,
       :associated_at,
       :role_arn,
       keyword_init: true
@@ -2434,6 +2560,7 @@ module Aws::Greengrass
     #   The ID of the subscription definition.
     #   @return [String]
     class GetSubscriptionDefinitionRequest < Struct.new(
+      nil,
       :subscription_definition_id,
       keyword_init: true
     )
@@ -2465,6 +2592,7 @@ module Aws::Greengrass
     #   Tag(s) attached to the resource arn.
     #   @return [Hash<String, String>]
     class GetSubscriptionDefinitionResponse < Struct.new(
+      nil,
       :arn,
       :creation_timestamp,
       :id,
@@ -2488,6 +2616,7 @@ module Aws::Greengrass
     #   The ID of the subscription definition version. This value maps to the ''Version'' property of the corresponding ''VersionInformation'' object, which is returned by ''ListSubscriptionDefinitionVersions'' requests. If the version is the last one that was associated with a subscription definition, the value also maps to the ''LatestVersion'' property of the corresponding ''DefinitionInformation'' object.
     #   @return [String]
     class GetSubscriptionDefinitionVersionRequest < Struct.new(
+      nil,
       :next_token,
       :subscription_definition_id,
       :subscription_definition_version_id,
@@ -2515,6 +2644,7 @@ module Aws::Greengrass
     #   The version of the subscription definition version.
     #   @return [String]
     class GetSubscriptionDefinitionVersionResponse < Struct.new(
+      nil,
       :arn,
       :creation_timestamp,
       :definition,
@@ -2530,6 +2660,7 @@ module Aws::Greengrass
     #   The thing name.
     #   @return [String]
     class GetThingRuntimeConfigurationRequest < Struct.new(
+      nil,
       :thing_name,
       keyword_init: true
     )
@@ -2540,6 +2671,7 @@ module Aws::Greengrass
     #   Runtime configuration for a thing.
     #   @return [Types::RuntimeConfiguration]
     class GetThingRuntimeConfigurationResponse < Struct.new(
+      nil,
       :runtime_configuration,
       keyword_init: true
     )
@@ -2554,6 +2686,7 @@ module Aws::Greengrass
     #   The ID of the certificate authority for the group.
     #   @return [String]
     class GroupCertificateAuthorityProperties < Struct.new(
+      nil,
       :group_certificate_authority_arn,
       :group_certificate_authority_id,
       keyword_init: true
@@ -2584,6 +2717,7 @@ module Aws::Greengrass
     #   The name of the group.
     #   @return [String]
     class GroupInformation < Struct.new(
+      nil,
       :arn,
       :creation_timestamp,
       :id,
@@ -2604,6 +2738,7 @@ module Aws::Greengrass
     #   The name of the Linux OS group whose privileges will be added to the Lambda process. This field is optional.
     #   @return [String]
     class GroupOwnerSetting < Struct.new(
+      nil,
       :auto_add_group_owner,
       :group_owner,
       keyword_init: true
@@ -2634,6 +2769,7 @@ module Aws::Greengrass
     #   The ARN of the subscription definition version for this group.
     #   @return [String]
     class GroupVersion < Struct.new(
+      nil,
       :connector_definition_version_arn,
       :core_definition_version_arn,
       :device_definition_version_arn,
@@ -2654,6 +2790,7 @@ module Aws::Greengrass
     #   A message containing information about the error.
     #   @return [String]
     class InternalServerErrorException < Struct.new(
+      nil,
       :error_details,
       :message,
       keyword_init: true
@@ -2671,6 +2808,7 @@ module Aws::Greengrass
     #   The token for the next set of results, or ''null'' if there are no additional results.
     #   @return [String]
     class ListBulkDeploymentDetailedReportsRequest < Struct.new(
+      nil,
       :bulk_deployment_id,
       :max_results,
       :next_token,
@@ -2686,6 +2824,7 @@ module Aws::Greengrass
     #   The token for the next set of results, or ''null'' if there are no additional results.
     #   @return [String]
     class ListBulkDeploymentDetailedReportsResponse < Struct.new(
+      nil,
       :deployments,
       :next_token,
       keyword_init: true
@@ -2700,6 +2839,7 @@ module Aws::Greengrass
     #   The token for the next set of results, or ''null'' if there are no additional results.
     #   @return [String]
     class ListBulkDeploymentsRequest < Struct.new(
+      nil,
       :max_results,
       :next_token,
       keyword_init: true
@@ -2714,6 +2854,7 @@ module Aws::Greengrass
     #   The token for the next set of results, or ''null'' if there are no additional results.
     #   @return [String]
     class ListBulkDeploymentsResponse < Struct.new(
+      nil,
       :bulk_deployments,
       :next_token,
       keyword_init: true
@@ -2731,6 +2872,7 @@ module Aws::Greengrass
     #   The token for the next set of results, or ''null'' if there are no additional results.
     #   @return [String]
     class ListConnectorDefinitionVersionsRequest < Struct.new(
+      nil,
       :connector_definition_id,
       :max_results,
       :next_token,
@@ -2746,6 +2888,7 @@ module Aws::Greengrass
     #   Information about a version.
     #   @return [Array<Types::VersionInformation>]
     class ListConnectorDefinitionVersionsResponse < Struct.new(
+      nil,
       :next_token,
       :versions,
       keyword_init: true
@@ -2760,6 +2903,7 @@ module Aws::Greengrass
     #   The token for the next set of results, or ''null'' if there are no additional results.
     #   @return [String]
     class ListConnectorDefinitionsRequest < Struct.new(
+      nil,
       :max_results,
       :next_token,
       keyword_init: true
@@ -2774,6 +2918,7 @@ module Aws::Greengrass
     #   The token for the next set of results, or ''null'' if there are no additional results.
     #   @return [String]
     class ListConnectorDefinitionsResponse < Struct.new(
+      nil,
       :definitions,
       :next_token,
       keyword_init: true
@@ -2791,6 +2936,7 @@ module Aws::Greengrass
     #   The token for the next set of results, or ''null'' if there are no additional results.
     #   @return [String]
     class ListCoreDefinitionVersionsRequest < Struct.new(
+      nil,
       :core_definition_id,
       :max_results,
       :next_token,
@@ -2806,6 +2952,7 @@ module Aws::Greengrass
     #   Information about a version.
     #   @return [Array<Types::VersionInformation>]
     class ListCoreDefinitionVersionsResponse < Struct.new(
+      nil,
       :next_token,
       :versions,
       keyword_init: true
@@ -2820,6 +2967,7 @@ module Aws::Greengrass
     #   The token for the next set of results, or ''null'' if there are no additional results.
     #   @return [String]
     class ListCoreDefinitionsRequest < Struct.new(
+      nil,
       :max_results,
       :next_token,
       keyword_init: true
@@ -2834,6 +2982,7 @@ module Aws::Greengrass
     #   The token for the next set of results, or ''null'' if there are no additional results.
     #   @return [String]
     class ListCoreDefinitionsResponse < Struct.new(
+      nil,
       :definitions,
       :next_token,
       keyword_init: true
@@ -2851,6 +3000,7 @@ module Aws::Greengrass
     #   The token for the next set of results, or ''null'' if there are no additional results.
     #   @return [String]
     class ListDeploymentsRequest < Struct.new(
+      nil,
       :group_id,
       :max_results,
       :next_token,
@@ -2866,6 +3016,7 @@ module Aws::Greengrass
     #   The token for the next set of results, or ''null'' if there are no additional results.
     #   @return [String]
     class ListDeploymentsResponse < Struct.new(
+      nil,
       :deployments,
       :next_token,
       keyword_init: true
@@ -2883,6 +3034,7 @@ module Aws::Greengrass
     #   The token for the next set of results, or ''null'' if there are no additional results.
     #   @return [String]
     class ListDeviceDefinitionVersionsRequest < Struct.new(
+      nil,
       :device_definition_id,
       :max_results,
       :next_token,
@@ -2898,6 +3050,7 @@ module Aws::Greengrass
     #   Information about a version.
     #   @return [Array<Types::VersionInformation>]
     class ListDeviceDefinitionVersionsResponse < Struct.new(
+      nil,
       :next_token,
       :versions,
       keyword_init: true
@@ -2912,6 +3065,7 @@ module Aws::Greengrass
     #   The token for the next set of results, or ''null'' if there are no additional results.
     #   @return [String]
     class ListDeviceDefinitionsRequest < Struct.new(
+      nil,
       :max_results,
       :next_token,
       keyword_init: true
@@ -2926,6 +3080,7 @@ module Aws::Greengrass
     #   The token for the next set of results, or ''null'' if there are no additional results.
     #   @return [String]
     class ListDeviceDefinitionsResponse < Struct.new(
+      nil,
       :definitions,
       :next_token,
       keyword_init: true
@@ -2943,6 +3098,7 @@ module Aws::Greengrass
     #   The token for the next set of results, or ''null'' if there are no additional results.
     #   @return [String]
     class ListFunctionDefinitionVersionsRequest < Struct.new(
+      nil,
       :function_definition_id,
       :max_results,
       :next_token,
@@ -2958,6 +3114,7 @@ module Aws::Greengrass
     #   Information about a version.
     #   @return [Array<Types::VersionInformation>]
     class ListFunctionDefinitionVersionsResponse < Struct.new(
+      nil,
       :next_token,
       :versions,
       keyword_init: true
@@ -2972,6 +3129,7 @@ module Aws::Greengrass
     #   The token for the next set of results, or ''null'' if there are no additional results.
     #   @return [String]
     class ListFunctionDefinitionsRequest < Struct.new(
+      nil,
       :max_results,
       :next_token,
       keyword_init: true
@@ -2986,6 +3144,7 @@ module Aws::Greengrass
     #   The token for the next set of results, or ''null'' if there are no additional results.
     #   @return [String]
     class ListFunctionDefinitionsResponse < Struct.new(
+      nil,
       :definitions,
       :next_token,
       keyword_init: true
@@ -2997,6 +3156,7 @@ module Aws::Greengrass
     #   The ID of the Greengrass group.
     #   @return [String]
     class ListGroupCertificateAuthoritiesRequest < Struct.new(
+      nil,
       :group_id,
       keyword_init: true
     )
@@ -3007,6 +3167,7 @@ module Aws::Greengrass
     #   A list of certificate authorities associated with the group.
     #   @return [Array<Types::GroupCertificateAuthorityProperties>]
     class ListGroupCertificateAuthoritiesResponse < Struct.new(
+      nil,
       :group_certificate_authorities,
       keyword_init: true
     )
@@ -3023,6 +3184,7 @@ module Aws::Greengrass
     #   The token for the next set of results, or ''null'' if there are no additional results.
     #   @return [String]
     class ListGroupVersionsRequest < Struct.new(
+      nil,
       :group_id,
       :max_results,
       :next_token,
@@ -3038,6 +3200,7 @@ module Aws::Greengrass
     #   Information about a version.
     #   @return [Array<Types::VersionInformation>]
     class ListGroupVersionsResponse < Struct.new(
+      nil,
       :next_token,
       :versions,
       keyword_init: true
@@ -3052,6 +3215,7 @@ module Aws::Greengrass
     #   The token for the next set of results, or ''null'' if there are no additional results.
     #   @return [String]
     class ListGroupsRequest < Struct.new(
+      nil,
       :max_results,
       :next_token,
       keyword_init: true
@@ -3066,6 +3230,7 @@ module Aws::Greengrass
     #   The token for the next set of results, or ''null'' if there are no additional results.
     #   @return [String]
     class ListGroupsResponse < Struct.new(
+      nil,
       :groups,
       :next_token,
       keyword_init: true
@@ -3083,6 +3248,7 @@ module Aws::Greengrass
     #   The token for the next set of results, or ''null'' if there are no additional results.
     #   @return [String]
     class ListLoggerDefinitionVersionsRequest < Struct.new(
+      nil,
       :logger_definition_id,
       :max_results,
       :next_token,
@@ -3098,6 +3264,7 @@ module Aws::Greengrass
     #   Information about a version.
     #   @return [Array<Types::VersionInformation>]
     class ListLoggerDefinitionVersionsResponse < Struct.new(
+      nil,
       :next_token,
       :versions,
       keyword_init: true
@@ -3112,6 +3279,7 @@ module Aws::Greengrass
     #   The token for the next set of results, or ''null'' if there are no additional results.
     #   @return [String]
     class ListLoggerDefinitionsRequest < Struct.new(
+      nil,
       :max_results,
       :next_token,
       keyword_init: true
@@ -3126,6 +3294,7 @@ module Aws::Greengrass
     #   The token for the next set of results, or ''null'' if there are no additional results.
     #   @return [String]
     class ListLoggerDefinitionsResponse < Struct.new(
+      nil,
       :definitions,
       :next_token,
       keyword_init: true
@@ -3143,6 +3312,7 @@ module Aws::Greengrass
     #   The ID of the resource definition.
     #   @return [String]
     class ListResourceDefinitionVersionsRequest < Struct.new(
+      nil,
       :max_results,
       :next_token,
       :resource_definition_id,
@@ -3158,6 +3328,7 @@ module Aws::Greengrass
     #   Information about a version.
     #   @return [Array<Types::VersionInformation>]
     class ListResourceDefinitionVersionsResponse < Struct.new(
+      nil,
       :next_token,
       :versions,
       keyword_init: true
@@ -3172,6 +3343,7 @@ module Aws::Greengrass
     #   The token for the next set of results, or ''null'' if there are no additional results.
     #   @return [String]
     class ListResourceDefinitionsRequest < Struct.new(
+      nil,
       :max_results,
       :next_token,
       keyword_init: true
@@ -3186,6 +3358,7 @@ module Aws::Greengrass
     #   The token for the next set of results, or ''null'' if there are no additional results.
     #   @return [String]
     class ListResourceDefinitionsResponse < Struct.new(
+      nil,
       :definitions,
       :next_token,
       keyword_init: true
@@ -3203,6 +3376,7 @@ module Aws::Greengrass
     #   The ID of the subscription definition.
     #   @return [String]
     class ListSubscriptionDefinitionVersionsRequest < Struct.new(
+      nil,
       :max_results,
       :next_token,
       :subscription_definition_id,
@@ -3218,6 +3392,7 @@ module Aws::Greengrass
     #   Information about a version.
     #   @return [Array<Types::VersionInformation>]
     class ListSubscriptionDefinitionVersionsResponse < Struct.new(
+      nil,
       :next_token,
       :versions,
       keyword_init: true
@@ -3232,6 +3407,7 @@ module Aws::Greengrass
     #   The token for the next set of results, or ''null'' if there are no additional results.
     #   @return [String]
     class ListSubscriptionDefinitionsRequest < Struct.new(
+      nil,
       :max_results,
       :next_token,
       keyword_init: true
@@ -3246,6 +3422,7 @@ module Aws::Greengrass
     #   The token for the next set of results, or ''null'' if there are no additional results.
     #   @return [String]
     class ListSubscriptionDefinitionsResponse < Struct.new(
+      nil,
       :definitions,
       :next_token,
       keyword_init: true
@@ -3257,6 +3434,7 @@ module Aws::Greengrass
     #   The Amazon Resource Name (ARN) of the resource.
     #   @return [String]
     class ListTagsForResourceRequest < Struct.new(
+      nil,
       :resource_arn,
       keyword_init: true
     )
@@ -3267,6 +3445,7 @@ module Aws::Greengrass
     #   The key-value pair for the resource tag.
     #   @return [Hash<String, String>]
     class ListTagsForResourceResponse < Struct.new(
+      nil,
       :tags,
       keyword_init: true
     )
@@ -3281,6 +3460,7 @@ module Aws::Greengrass
     #   The local absolute path of the device resource. The source path for a device resource can refer only to a character device or block device under ''/dev''.
     #   @return [String]
     class LocalDeviceResourceData < Struct.new(
+      nil,
       :group_owner_setting,
       :source_path,
       keyword_init: true
@@ -3299,6 +3479,7 @@ module Aws::Greengrass
     #   The local absolute path of the volume resource on the host. The source path for a volume resource type cannot start with ''/sys''.
     #   @return [String]
     class LocalVolumeResourceData < Struct.new(
+      nil,
       :destination_path,
       :group_owner_setting,
       :source_path,
@@ -3324,6 +3505,7 @@ module Aws::Greengrass
     #   The type of log output which will be used.
     #   @return [String]
     class Logger < Struct.new(
+      nil,
       :component,
       :id,
       :level,
@@ -3339,6 +3521,7 @@ module Aws::Greengrass
     #   A list of loggers.
     #   @return [Array<Types::Logger>]
     class LoggerDefinitionVersion < Struct.new(
+      nil,
       :loggers,
       keyword_init: true
     )
@@ -3356,6 +3539,7 @@ module Aws::Greengrass
     #   The ID of the Greengrass group.
     #   @return [String]
     class ResetDeploymentsRequest < Struct.new(
+      nil,
       :amzn_client_token,
       :force,
       :group_id,
@@ -3371,6 +3555,7 @@ module Aws::Greengrass
     #   The ID of the deployment.
     #   @return [String]
     class ResetDeploymentsResponse < Struct.new(
+      nil,
       :deployment_arn,
       :deployment_id,
       keyword_init: true
@@ -3389,6 +3574,7 @@ module Aws::Greengrass
     #   A container of data for all resource types.
     #   @return [Types::ResourceDataContainer]
     class Resource < Struct.new(
+      nil,
       :id,
       :name,
       :resource_data_container,
@@ -3405,6 +3591,7 @@ module Aws::Greengrass
     #   The ID of the resource. (This ID is assigned to the resource when you create the resource definiton.)
     #   @return [String]
     class ResourceAccessPolicy < Struct.new(
+      nil,
       :permission,
       :resource_id,
       keyword_init: true
@@ -3429,6 +3616,7 @@ module Aws::Greengrass
     #   Attributes that define a secret resource, which references a secret from AWS Secrets Manager.
     #   @return [Types::SecretsManagerSecretResourceData]
     class ResourceDataContainer < Struct.new(
+      nil,
       :local_device_resource_data,
       :local_volume_resource_data,
       :s3_machine_learning_model_resource_data,
@@ -3444,6 +3632,7 @@ module Aws::Greengrass
     #   A list of resources.
     #   @return [Array<Types::Resource>]
     class ResourceDefinitionVersion < Struct.new(
+      nil,
       :resources,
       keyword_init: true
     )
@@ -3458,6 +3647,7 @@ module Aws::Greengrass
     #   The permissions that the group owner has to the resource. Valid values are ''rw'' (read/write) or ''ro'' (read-only).
     #   @return [String]
     class ResourceDownloadOwnerSetting < Struct.new(
+      nil,
       :group_owner,
       :group_permission,
       keyword_init: true
@@ -3470,6 +3660,7 @@ module Aws::Greengrass
     #   Configuration for telemetry service.
     #   @return [Types::TelemetryConfiguration]
     class RuntimeConfiguration < Struct.new(
+      nil,
       :telemetry_configuration,
       keyword_init: true
     )
@@ -3487,6 +3678,7 @@ module Aws::Greengrass
     #   The URI of the source model in an S3 bucket. The model package must be in tar.gz or .zip format.
     #   @return [String]
     class S3MachineLearningModelResourceData < Struct.new(
+      nil,
       :destination_path,
       :owner_setting,
       :s3_uri,
@@ -3506,6 +3698,7 @@ module Aws::Greengrass
     #   The ARN of the Amazon SageMaker training job that represents the source model.
     #   @return [String]
     class SageMakerMachineLearningModelResourceData < Struct.new(
+      nil,
       :destination_path,
       :owner_setting,
       :sage_maker_job_arn,
@@ -3522,6 +3715,7 @@ module Aws::Greengrass
     #   Optional. The staging labels whose values you want to make available on the core, in addition to ''AWSCURRENT''.
     #   @return [Array<String>]
     class SecretsManagerSecretResourceData < Struct.new(
+      nil,
       :arn,
       :additional_staging_labels_to_download,
       keyword_init: true
@@ -3542,6 +3736,7 @@ module Aws::Greengrass
     #   Tag(s) to add to the new resource.
     #   @return [Hash<String, String>]
     class StartBulkDeploymentRequest < Struct.new(
+      nil,
       :amzn_client_token,
       :execution_role_arn,
       :input_file_uri,
@@ -3558,6 +3753,7 @@ module Aws::Greengrass
     #   The ID of the bulk deployment.
     #   @return [String]
     class StartBulkDeploymentResponse < Struct.new(
+      nil,
       :bulk_deployment_arn,
       :bulk_deployment_id,
       keyword_init: true
@@ -3569,6 +3765,7 @@ module Aws::Greengrass
     #   The ID of the bulk deployment.
     #   @return [String]
     class StopBulkDeploymentRequest < Struct.new(
+      nil,
       :bulk_deployment_id,
       keyword_init: true
     )
@@ -3576,6 +3773,7 @@ module Aws::Greengrass
     end
 
     class StopBulkDeploymentResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -3595,6 +3793,7 @@ module Aws::Greengrass
     #   Where the message is sent to. Can be a thing ARN, a Lambda function ARN, a connector ARN, 'cloud' (which represents the AWS IoT cloud), or 'GGShadowService'.
     #   @return [String]
     class Subscription < Struct.new(
+      nil,
       :id,
       :source,
       :subject,
@@ -3609,6 +3808,7 @@ module Aws::Greengrass
     #   A list of subscriptions.
     #   @return [Array<Types::Subscription>]
     class SubscriptionDefinitionVersion < Struct.new(
+      nil,
       :subscriptions,
       keyword_init: true
     )
@@ -3623,6 +3823,7 @@ module Aws::Greengrass
     #   The key-value pair for the resource tag.
     #   @return [Hash<String, String>]
     class TagResourceRequest < Struct.new(
+      nil,
       :resource_arn,
       :tags,
       keyword_init: true
@@ -3638,6 +3839,7 @@ module Aws::Greengrass
     #   Configure telemetry to be on or off.
     #   @return [String]
     class TelemetryConfiguration < Struct.new(
+      nil,
       :configuration_sync_status,
       :telemetry,
       keyword_init: true
@@ -3650,6 +3852,7 @@ module Aws::Greengrass
     #   Configure telemetry to be on or off.
     #   @return [String]
     class TelemetryConfigurationUpdate < Struct.new(
+      nil,
       :telemetry,
       keyword_init: true
     )
@@ -3663,6 +3866,7 @@ module Aws::Greengrass
     #   An array of tag keys to delete
     #   @return [Array<String>]
     class UntagResourceRequest < Struct.new(
+      nil,
       :resource_arn,
       :tag_keys,
       keyword_init: true
@@ -3678,6 +3882,7 @@ module Aws::Greengrass
     #   The thing name.
     #   @return [String]
     class UpdateConnectivityInfoRequest < Struct.new(
+      nil,
       :connectivity_info,
       :thing_name,
       keyword_init: true
@@ -3692,6 +3897,7 @@ module Aws::Greengrass
     #   The new version of the connectivity info.
     #   @return [String]
     class UpdateConnectivityInfoResponse < Struct.new(
+      nil,
       :message,
       :version,
       keyword_init: true
@@ -3706,6 +3912,7 @@ module Aws::Greengrass
     #   The name of the definition.
     #   @return [String]
     class UpdateConnectorDefinitionRequest < Struct.new(
+      nil,
       :connector_definition_id,
       :name,
       keyword_init: true
@@ -3714,6 +3921,7 @@ module Aws::Greengrass
     end
 
     class UpdateConnectorDefinitionResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -3726,6 +3934,7 @@ module Aws::Greengrass
     #   The name of the definition.
     #   @return [String]
     class UpdateCoreDefinitionRequest < Struct.new(
+      nil,
       :core_definition_id,
       :name,
       keyword_init: true
@@ -3734,6 +3943,7 @@ module Aws::Greengrass
     end
 
     class UpdateCoreDefinitionResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -3746,6 +3956,7 @@ module Aws::Greengrass
     #   The name of the definition.
     #   @return [String]
     class UpdateDeviceDefinitionRequest < Struct.new(
+      nil,
       :device_definition_id,
       :name,
       keyword_init: true
@@ -3754,6 +3965,7 @@ module Aws::Greengrass
     end
 
     class UpdateDeviceDefinitionResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -3766,6 +3978,7 @@ module Aws::Greengrass
     #   The name of the definition.
     #   @return [String]
     class UpdateFunctionDefinitionRequest < Struct.new(
+      nil,
       :function_definition_id,
       :name,
       keyword_init: true
@@ -3774,6 +3987,7 @@ module Aws::Greengrass
     end
 
     class UpdateFunctionDefinitionResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -3786,6 +4000,7 @@ module Aws::Greengrass
     #   The ID of the Greengrass group.
     #   @return [String]
     class UpdateGroupCertificateConfigurationRequest < Struct.new(
+      nil,
       :certificate_expiry_in_milliseconds,
       :group_id,
       keyword_init: true
@@ -3803,6 +4018,7 @@ module Aws::Greengrass
     #   The ID of the group certificate configuration.
     #   @return [String]
     class UpdateGroupCertificateConfigurationResponse < Struct.new(
+      nil,
       :certificate_authority_expiry_in_milliseconds,
       :certificate_expiry_in_milliseconds,
       :group_id,
@@ -3818,6 +4034,7 @@ module Aws::Greengrass
     #   The name of the definition.
     #   @return [String]
     class UpdateGroupRequest < Struct.new(
+      nil,
       :group_id,
       :name,
       keyword_init: true
@@ -3826,6 +4043,7 @@ module Aws::Greengrass
     end
 
     class UpdateGroupResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -3838,6 +4056,7 @@ module Aws::Greengrass
     #   The name of the definition.
     #   @return [String]
     class UpdateLoggerDefinitionRequest < Struct.new(
+      nil,
       :logger_definition_id,
       :name,
       keyword_init: true
@@ -3846,6 +4065,7 @@ module Aws::Greengrass
     end
 
     class UpdateLoggerDefinitionResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -3858,6 +4078,7 @@ module Aws::Greengrass
     #   The ID of the resource definition.
     #   @return [String]
     class UpdateResourceDefinitionRequest < Struct.new(
+      nil,
       :name,
       :resource_definition_id,
       keyword_init: true
@@ -3866,6 +4087,7 @@ module Aws::Greengrass
     end
 
     class UpdateResourceDefinitionResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -3878,6 +4100,7 @@ module Aws::Greengrass
     #   The ID of the subscription definition.
     #   @return [String]
     class UpdateSubscriptionDefinitionRequest < Struct.new(
+      nil,
       :name,
       :subscription_definition_id,
       keyword_init: true
@@ -3886,6 +4109,7 @@ module Aws::Greengrass
     end
 
     class UpdateSubscriptionDefinitionResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -3898,6 +4122,7 @@ module Aws::Greengrass
     #   The thing name.
     #   @return [String]
     class UpdateThingRuntimeConfigurationRequest < Struct.new(
+      nil,
       :telemetry_configuration,
       :thing_name,
       keyword_init: true
@@ -3906,6 +4131,7 @@ module Aws::Greengrass
     end
 
     class UpdateThingRuntimeConfigurationResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -3925,6 +4151,7 @@ module Aws::Greengrass
     #   The ID of the version.
     #   @return [String]
     class VersionInformation < Struct.new(
+      nil,
       :arn,
       :creation_timestamp,
       :id,

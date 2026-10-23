@@ -10,6 +10,7 @@ module Aws::ControlTower
     # @!attribute message
     #   @return [String]
     class AccessDeniedException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -36,6 +37,7 @@ module Aws::ControlTower
     #   <p>A status message that gives more information about the operation's status, if applicable.</p>
     #   @return [String]
     class BaselineOperation < Struct.new(
+      nil,
       :operation_identifier,
       :operation_type,
       :status,
@@ -58,6 +60,7 @@ module Aws::ControlTower
     #   <p>A summary description of a Baseline.</p>
     #   @return [String]
     class BaselineSummary < Struct.new(
+      nil,
       :arn,
       :name,
       :description,
@@ -70,6 +73,7 @@ module Aws::ControlTower
     # @!attribute message
     #   @return [String]
     class ConflictException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -105,6 +109,7 @@ module Aws::ControlTower
     #   <p>The <code>controlIdentifier</code> of the enabled control.</p>
     #   @return [String]
     class ControlOperation < Struct.new(
+      nil,
       :operation_type,
       :start_time,
       :end_time,
@@ -136,6 +141,7 @@ module Aws::ControlTower
     #   <p>The set of <code>ControlOperation</code> objects returned by the filter.</p>
     #   @return [Array<String>]
     class ControlOperationFilter < Struct.new(
+      nil,
       :control_identifiers,
       :target_identifiers,
       :enabled_control_identifiers,
@@ -175,6 +181,7 @@ module Aws::ControlTower
     #   <p>The <code>controlIdentifier</code> of an enabled control.</p>
     #   @return [String]
     class ControlOperationSummary < Struct.new(
+      nil,
       :operation_type,
       :start_time,
       :end_time,
@@ -199,6 +206,7 @@ module Aws::ControlTower
     #   <p>Tags to be applied to the landing zone. </p>
     #   @return [Hash<String, String>]
     class CreateLandingZoneInput < Struct.new(
+      nil,
       :version,
       :manifest,
       :tags,
@@ -214,6 +222,7 @@ module Aws::ControlTower
     #   <p>A unique identifier assigned to a <code>CreateLandingZone</code> operation. You can use this identifier as an input of <code>GetLandingZoneOperation</code> to check the operation's status.</p>
     #   @return [String]
     class CreateLandingZoneOutput < Struct.new(
+      nil,
       :arn,
       :operation_identifier,
       keyword_init: true
@@ -225,6 +234,7 @@ module Aws::ControlTower
     #   <p>The unique identifier of the landing zone.</p>
     #   @return [String]
     class DeleteLandingZoneInput < Struct.new(
+      nil,
       :landing_zone_identifier,
       keyword_init: true
     )
@@ -235,6 +245,7 @@ module Aws::ControlTower
     #   <p>&gt;A unique identifier assigned to a <code>DeleteLandingZone</code> operation. You can use this identifier as an input parameter of <code>GetLandingZoneOperation</code> to check the operation's status.</p>
     #   @return [String]
     class DeleteLandingZoneOutput < Struct.new(
+      nil,
       :operation_identifier,
       keyword_init: true
     )
@@ -245,6 +256,7 @@ module Aws::ControlTower
     #   <p>Identifier of the <code>EnabledBaseline</code> resource to be deactivated, in ARN format.</p>
     #   @return [String]
     class DisableBaselineInput < Struct.new(
+      nil,
       :enabled_baseline_identifier,
       keyword_init: true
     )
@@ -255,6 +267,7 @@ module Aws::ControlTower
     #   <p>The ID (in UUID format) of the asynchronous <code>DisableBaseline</code> operation. This <code>operationIdentifier</code> is used to track status through calls to the <code>GetBaselineOperation</code> API.</p>
     #   @return [String]
     class DisableBaselineOutput < Struct.new(
+      nil,
       :operation_identifier,
       keyword_init: true
     )
@@ -268,6 +281,7 @@ module Aws::ControlTower
     #   <p>The ARN of the organizational unit. For information on how to find the <code>targetIdentifier</code>, see <a href="https://docs.aws.amazon.com/controltower/latest/APIReference/Welcome.html">the overview page</a>.</p>
     #   @return [String]
     class DisableControlInput < Struct.new(
+      nil,
       :control_identifier,
       :target_identifier,
       keyword_init: true
@@ -279,6 +293,7 @@ module Aws::ControlTower
     #   <p>The ID of the asynchronous operation, which is used to track status. The operation is available for 90 days.</p>
     #   @return [String]
     class DisableControlOutput < Struct.new(
+      nil,
       :operation_identifier,
       keyword_init: true
     )
@@ -290,6 +305,7 @@ module Aws::ControlTower
     #   <p> The drift status of the enabled control.</p> <p>Valid values:</p> <ul> <li> <p> <code>DRIFTED</code>: The <code>enabledControl</code> deployed in this configuration doesn’t match the configuration that Amazon Web Services Control Tower expected. </p> </li> <li> <p> <code>IN_SYNC</code>: The <code>enabledControl</code> deployed in this configuration matches the configuration that Amazon Web Services Control Tower expected.</p> </li> <li> <p> <code>NOT_CHECKING</code>: Amazon Web Services Control Tower does not check drift for this enabled control. Drift is not supported for the control type.</p> </li> <li> <p> <code>UNKNOWN</code>: Amazon Web Services Control Tower is not able to check the drift status for the enabled control. </p> </li> </ul>
     #   @return [String]
     class DriftStatusSummary < Struct.new(
+      nil,
       :drift_status,
       keyword_init: true
     )
@@ -312,6 +328,7 @@ module Aws::ControlTower
     #   <p>Tags associated with input to <code>EnableBaseline</code>.</p>
     #   @return [Hash<String, String>]
     class EnableBaselineInput < Struct.new(
+      nil,
       :baseline_version,
       :parameters,
       :baseline_identifier,
@@ -329,6 +346,7 @@ module Aws::ControlTower
     #   <p>The ARN of the <code>EnabledBaseline</code> resource.</p>
     #   @return [String]
     class EnableBaselineOutput < Struct.new(
+      nil,
       :operation_identifier,
       :arn,
       keyword_init: true
@@ -349,6 +367,7 @@ module Aws::ControlTower
     #   <p>A list of input parameter values, which are specified to configure the control when you enable it.</p>
     #   @return [Array<Types::EnabledControlParameter>]
     class EnableControlInput < Struct.new(
+      nil,
       :control_identifier,
       :target_identifier,
       :tags,
@@ -365,6 +384,7 @@ module Aws::ControlTower
     #   <p>The ARN of the <code>EnabledControl</code> resource.</p>
     #   @return [String]
     class EnableControlOutput < Struct.new(
+      nil,
       :operation_identifier,
       :arn,
       keyword_init: true
@@ -398,6 +418,7 @@ module Aws::ControlTower
     #   <p>Shows the parameters that are applied when enabling this <code>Baseline</code>.</p>
     #   @return [Array<Types::EnabledBaselineParameterSummary>]
     class EnabledBaselineDetails < Struct.new(
+      nil,
       :arn,
       :baseline_identifier,
       :baseline_version,
@@ -416,6 +437,7 @@ module Aws::ControlTower
     #   <p>The types of drift that can be detected for an enabled baseline. Amazon Web Services Control Tower detects inheritance drift on enabled baselines that apply at the OU level. </p>
     #   @return [Types::EnabledBaselineDriftTypes]
     class EnabledBaselineDriftStatusSummary < Struct.new(
+      nil,
       :types,
       keyword_init: true
     )
@@ -427,6 +449,7 @@ module Aws::ControlTower
     #   <p>At least one account within the target OU does not match the baseline configuration defined on that OU. An account is in inheritance drift when it does not match the configuration of a parent OU, possibly a new parent OU, if the account is moved. </p>
     #   @return [Types::EnabledBaselineInheritanceDrift]
     class EnabledBaselineDriftTypes < Struct.new(
+      nil,
       :inheritance,
       keyword_init: true
     )
@@ -450,6 +473,7 @@ module Aws::ControlTower
     #   <p>A list of <code>EnabledBaselineDriftStatus</code> items for enabled baselines.</p>
     #   @return [Array<String>]
     class EnabledBaselineFilter < Struct.new(
+      nil,
       :target_identifiers,
       :baseline_identifiers,
       :parent_identifiers,
@@ -465,6 +489,7 @@ module Aws::ControlTower
     #   <p>The inheritance drift status for enabled baselines.</p>
     #   @return [String]
     class EnabledBaselineInheritanceDrift < Struct.new(
+      nil,
       :status,
       keyword_init: true
     )
@@ -479,6 +504,7 @@ module Aws::ControlTower
     #   <p>A low-level <code>Document</code> object of any type (for example, a Java Object).</p>
     #   @return [JSON]
     class EnabledBaselineParameter < Struct.new(
+      nil,
       :key,
       :value,
       keyword_init: true
@@ -494,6 +520,7 @@ module Aws::ControlTower
     #   <p>A low-level document object of any type (for example, a Java Object).</p>
     #   @return [JSON]
     class EnabledBaselineParameterSummary < Struct.new(
+      nil,
       :key,
       :value,
       keyword_init: true
@@ -524,6 +551,7 @@ module Aws::ControlTower
     #   <p>The deployment summary of an <code>EnabledControl</code> or <code>EnabledBaseline</code> resource.</p>
     #   @return [Types::EnablementStatusSummary]
     class EnabledBaselineSummary < Struct.new(
+      nil,
       :arn,
       :baseline_identifier,
       :baseline_version,
@@ -559,6 +587,7 @@ module Aws::ControlTower
     #   <p>Array of <code>EnabledControlParameter</code> objects.</p>
     #   @return [Array<Types::EnabledControlParameterSummary>]
     class EnabledControlDetails < Struct.new(
+      nil,
       :arn,
       :control_identifier,
       :target_identifier,
@@ -582,6 +611,7 @@ module Aws::ControlTower
     #   <p>A list of <code>DriftStatus</code> items.</p>
     #   @return [Array<String>]
     class EnabledControlFilter < Struct.new(
+      nil,
       :control_identifiers,
       :statuses,
       :drift_statuses,
@@ -598,6 +628,7 @@ module Aws::ControlTower
     #   <p>The value of a key/value pair.</p>
     #   @return [JSON]
     class EnabledControlParameter < Struct.new(
+      nil,
       :key,
       :value,
       keyword_init: true
@@ -613,6 +644,7 @@ module Aws::ControlTower
     #   <p>The value of a key/value pair.</p>
     #   @return [JSON]
     class EnabledControlParameterSummary < Struct.new(
+      nil,
       :key,
       :value,
       keyword_init: true
@@ -637,6 +669,7 @@ module Aws::ControlTower
     #   <p>The drift status of the enabled control.</p>
     #   @return [Types::DriftStatusSummary]
     class EnabledControlSummary < Struct.new(
+      nil,
       :control_identifier,
       :arn,
       :target_identifier,
@@ -655,6 +688,7 @@ module Aws::ControlTower
     #   <p>The last operation identifier for the enabled resource.</p>
     #   @return [String]
     class EnablementStatusSummary < Struct.new(
+      nil,
       :status,
       :last_operation_identifier,
       keyword_init: true
@@ -666,6 +700,7 @@ module Aws::ControlTower
     #   <p>The ARN of the <code>Baseline</code> resource to be retrieved.</p>
     #   @return [String]
     class GetBaselineInput < Struct.new(
+      nil,
       :baseline_identifier,
       keyword_init: true
     )
@@ -676,6 +711,7 @@ module Aws::ControlTower
     #   <p>The operation ID returned from mutating asynchronous APIs (Enable, Disable, Update, Reset).</p>
     #   @return [String]
     class GetBaselineOperationInput < Struct.new(
+      nil,
       :operation_identifier,
       keyword_init: true
     )
@@ -686,6 +722,7 @@ module Aws::ControlTower
     #   <p>A <code>baselineOperation</code> object that shows information about the specified operation ID.</p>
     #   @return [Types::BaselineOperation]
     class GetBaselineOperationOutput < Struct.new(
+      nil,
       :baseline_operation,
       keyword_init: true
     )
@@ -702,6 +739,7 @@ module Aws::ControlTower
     #   <p>A description of the baseline.</p>
     #   @return [String]
     class GetBaselineOutput < Struct.new(
+      nil,
       :arn,
       :name,
       :description,
@@ -714,6 +752,7 @@ module Aws::ControlTower
     #   <p>The ID of the asynchronous operation, which is used to track status. The operation is available for 90 days.</p>
     #   @return [String]
     class GetControlOperationInput < Struct.new(
+      nil,
       :operation_identifier,
       keyword_init: true
     )
@@ -724,6 +763,7 @@ module Aws::ControlTower
     #   <p>An operation performed by the control.</p>
     #   @return [Types::ControlOperation]
     class GetControlOperationOutput < Struct.new(
+      nil,
       :control_operation,
       keyword_init: true
     )
@@ -734,6 +774,7 @@ module Aws::ControlTower
     #   <p>Identifier of the <code>EnabledBaseline</code> resource to be retrieved, in ARN format.</p>
     #   @return [String]
     class GetEnabledBaselineInput < Struct.new(
+      nil,
       :enabled_baseline_identifier,
       keyword_init: true
     )
@@ -744,6 +785,7 @@ module Aws::ControlTower
     #   <p>Details of the <code>EnabledBaseline</code> resource.</p>
     #   @return [Types::EnabledBaselineDetails]
     class GetEnabledBaselineOutput < Struct.new(
+      nil,
       :enabled_baseline_details,
       keyword_init: true
     )
@@ -754,6 +796,7 @@ module Aws::ControlTower
     #   <p>The <code>controlIdentifier</code> of the enabled control.</p>
     #   @return [String]
     class GetEnabledControlInput < Struct.new(
+      nil,
       :enabled_control_identifier,
       keyword_init: true
     )
@@ -764,6 +807,7 @@ module Aws::ControlTower
     #   <p>Information about the enabled control.</p>
     #   @return [Types::EnabledControlDetails]
     class GetEnabledControlOutput < Struct.new(
+      nil,
       :enabled_control_details,
       keyword_init: true
     )
@@ -774,6 +818,7 @@ module Aws::ControlTower
     #   <p>The unique identifier of the landing zone.</p>
     #   @return [String]
     class GetLandingZoneInput < Struct.new(
+      nil,
       :landing_zone_identifier,
       keyword_init: true
     )
@@ -784,6 +829,7 @@ module Aws::ControlTower
     #   <p>A unique identifier assigned to a landing zone operation.</p>
     #   @return [String]
     class GetLandingZoneOperationInput < Struct.new(
+      nil,
       :operation_identifier,
       keyword_init: true
     )
@@ -794,6 +840,7 @@ module Aws::ControlTower
     #   <p>Details about a landing zone operation.</p>
     #   @return [Types::LandingZoneOperationDetail]
     class GetLandingZoneOperationOutput < Struct.new(
+      nil,
       :operation_details,
       keyword_init: true
     )
@@ -804,6 +851,7 @@ module Aws::ControlTower
     #   <p>Information about the landing zone.</p>
     #   @return [Types::LandingZoneDetail]
     class GetLandingZoneOutput < Struct.new(
+      nil,
       :landing_zone,
       keyword_init: true
     )
@@ -814,6 +862,7 @@ module Aws::ControlTower
     # @!attribute message
     #   @return [String]
     class InternalServerException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -840,6 +889,7 @@ module Aws::ControlTower
     #   <p>The drift status of the landing zone.</p>
     #   @return [Types::LandingZoneDriftStatusSummary]
     class LandingZoneDetail < Struct.new(
+      nil,
       :version,
       :manifest,
       :arn,
@@ -856,6 +906,7 @@ module Aws::ControlTower
     #   <p>The drift status of the landing zone. </p> <p>Valid values:</p> <ul> <li> <p> <code>DRIFTED</code>: The landing zone deployed in this configuration does not match the configuration that Amazon Web Services Control Tower expected. </p> </li> <li> <p> <code>IN_SYNC</code>: The landing zone deployed in this configuration matches the configuration that Amazon Web Services Control Tower expected. </p> </li> </ul>
     #   @return [String]
     class LandingZoneDriftStatusSummary < Struct.new(
+      nil,
       :status,
       keyword_init: true
     )
@@ -882,6 +933,7 @@ module Aws::ControlTower
     #   <p>If the operation result is FAILED, this string contains a message explaining why the operation failed.</p>
     #   @return [String]
     class LandingZoneOperationDetail < Struct.new(
+      nil,
       :operation_type,
       :operation_identifier,
       :status,
@@ -901,6 +953,7 @@ module Aws::ControlTower
     #   <p>The statuses of the set of landing zone operations selected by the filter.</p>
     #   @return [Array<String>]
     class LandingZoneOperationFilter < Struct.new(
+      nil,
       :types,
       :statuses,
       keyword_init: true
@@ -919,6 +972,7 @@ module Aws::ControlTower
     #   <p>The status of the landing zone operation.</p>
     #   @return [String]
     class LandingZoneOperationSummary < Struct.new(
+      nil,
       :operation_type,
       :operation_identifier,
       :status,
@@ -932,6 +986,7 @@ module Aws::ControlTower
     #   <p>The ARN of the landing zone.</p>
     #   @return [String]
     class LandingZoneSummary < Struct.new(
+      nil,
       :arn,
       keyword_init: true
     )
@@ -945,6 +1000,7 @@ module Aws::ControlTower
     #   <p>The maximum number of results to be shown.</p>
     #   @return [Integer]
     class ListBaselinesInput < Struct.new(
+      nil,
       :next_token,
       :max_results,
       keyword_init: true
@@ -959,6 +1015,7 @@ module Aws::ControlTower
     #   <p>A pagination token.</p>
     #   @return [String]
     class ListBaselinesOutput < Struct.new(
+      nil,
       :baselines,
       :next_token,
       keyword_init: true
@@ -976,6 +1033,7 @@ module Aws::ControlTower
     #   <p>The maximum number of results to be shown.</p>
     #   @return [Integer]
     class ListControlOperationsInput < Struct.new(
+      nil,
       :filter,
       :next_token,
       :max_results,
@@ -991,6 +1049,7 @@ module Aws::ControlTower
     #   <p>A pagination token.</p>
     #   @return [String]
     class ListControlOperationsOutput < Struct.new(
+      nil,
       :control_operations,
       :next_token,
       keyword_init: true
@@ -1011,6 +1070,7 @@ module Aws::ControlTower
     #   <p>A value that can be set to include the child enabled baselines in responses. The default value is false.</p>
     #   @return [Boolean]
     class ListEnabledBaselinesInput < Struct.new(
+      nil,
       :filter,
       :next_token,
       :max_results,
@@ -1027,6 +1087,7 @@ module Aws::ControlTower
     #   <p>A pagination token.</p>
     #   @return [String]
     class ListEnabledBaselinesOutput < Struct.new(
+      nil,
       :enabled_baselines,
       :next_token,
       keyword_init: true
@@ -1047,6 +1108,7 @@ module Aws::ControlTower
     #   <p>An input filter for the <code>ListEnabledControls</code> API that lets you select the types of control operations to view.</p>
     #   @return [Types::EnabledControlFilter]
     class ListEnabledControlsInput < Struct.new(
+      nil,
       :target_identifier,
       :next_token,
       :max_results,
@@ -1063,6 +1125,7 @@ module Aws::ControlTower
     #   <p>Retrieves the next page of results. If the string is empty, the response is the end of the results.</p>
     #   @return [String]
     class ListEnabledControlsOutput < Struct.new(
+      nil,
       :enabled_controls,
       :next_token,
       keyword_init: true
@@ -1080,6 +1143,7 @@ module Aws::ControlTower
     #   <p>How many results to return per API call.</p>
     #   @return [Integer]
     class ListLandingZoneOperationsInput < Struct.new(
+      nil,
       :filter,
       :next_token,
       :max_results,
@@ -1095,6 +1159,7 @@ module Aws::ControlTower
     #   <p>Retrieves the next page of results. If the string is empty, the response is the end of the results.</p>
     #   @return [String]
     class ListLandingZoneOperationsOutput < Struct.new(
+      nil,
       :landing_zone_operations,
       :next_token,
       keyword_init: true
@@ -1109,6 +1174,7 @@ module Aws::ControlTower
     #   <p>The maximum number of returned landing zone ARNs, which is one.</p>
     #   @return [Integer]
     class ListLandingZonesInput < Struct.new(
+      nil,
       :next_token,
       :max_results,
       keyword_init: true
@@ -1123,6 +1189,7 @@ module Aws::ControlTower
     #   <p>Retrieves the next page of results. If the string is empty, the response is the end of the results.</p>
     #   @return [String]
     class ListLandingZonesOutput < Struct.new(
+      nil,
       :landing_zones,
       :next_token,
       keyword_init: true
@@ -1134,6 +1201,7 @@ module Aws::ControlTower
     #   <p> The ARN of the resource.</p>
     #   @return [String]
     class ListTagsForResourceInput < Struct.new(
+      nil,
       :resource_arn,
       keyword_init: true
     )
@@ -1144,6 +1212,7 @@ module Aws::ControlTower
     #   <p>A list of tags, as <code>key:value</code> strings.</p>
     #   @return [Hash<String, String>]
     class ListTagsForResourceOutput < Struct.new(
+      nil,
       :tags,
       keyword_init: true
     )
@@ -1155,6 +1224,7 @@ module Aws::ControlTower
     #   <p>The Amazon Web Services Region name.</p>
     #   @return [String]
     class Region < Struct.new(
+      nil,
       :name,
       keyword_init: true
     )
@@ -1165,6 +1235,7 @@ module Aws::ControlTower
     #   <p>Specifies the ID of the <code>EnabledBaseline</code> resource to be re-enabled, in ARN format.</p>
     #   @return [String]
     class ResetEnabledBaselineInput < Struct.new(
+      nil,
       :enabled_baseline_identifier,
       keyword_init: true
     )
@@ -1175,6 +1246,7 @@ module Aws::ControlTower
     #   <p>The ID (in UUID format) of the asynchronous <code>ResetEnabledBaseline</code> operation. This <code>operationIdentifier</code> is used to track status through calls to the <code>GetBaselineOperation</code> API.</p>
     #   @return [String]
     class ResetEnabledBaselineOutput < Struct.new(
+      nil,
       :operation_identifier,
       keyword_init: true
     )
@@ -1185,6 +1257,7 @@ module Aws::ControlTower
     #   <p>The ARN of the enabled control to be reset.</p>
     #   @return [String]
     class ResetEnabledControlInput < Struct.new(
+      nil,
       :enabled_control_identifier,
       keyword_init: true
     )
@@ -1195,6 +1268,7 @@ module Aws::ControlTower
     #   <p> The operation identifier for this <code>ResetEnabledControl</code> operation. </p>
     #   @return [String]
     class ResetEnabledControlOutput < Struct.new(
+      nil,
       :operation_identifier,
       keyword_init: true
     )
@@ -1205,6 +1279,7 @@ module Aws::ControlTower
     #   <p>The unique identifier of the landing zone.</p>
     #   @return [String]
     class ResetLandingZoneInput < Struct.new(
+      nil,
       :landing_zone_identifier,
       keyword_init: true
     )
@@ -1215,6 +1290,7 @@ module Aws::ControlTower
     #   <p>A unique identifier assigned to a <code>ResetLandingZone</code> operation. You can use this identifier as an input parameter of <code>GetLandingZoneOperation</code> to check the operation's status.</p>
     #   @return [String]
     class ResetLandingZoneOutput < Struct.new(
+      nil,
       :operation_identifier,
       keyword_init: true
     )
@@ -1225,6 +1301,7 @@ module Aws::ControlTower
     # @!attribute message
     #   @return [String]
     class ResourceNotFoundException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -1235,6 +1312,7 @@ module Aws::ControlTower
     # @!attribute message
     #   @return [String]
     class ServiceQuotaExceededException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -1248,6 +1326,7 @@ module Aws::ControlTower
     #   <p>Tags to be applied to the resource.</p>
     #   @return [Hash<String, String>]
     class TagResourceInput < Struct.new(
+      nil,
       :resource_arn,
       :tags,
       keyword_init: true
@@ -1256,6 +1335,7 @@ module Aws::ControlTower
     end
 
     class TagResourceOutput < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1274,6 +1354,7 @@ module Aws::ControlTower
     #   <p>The number of seconds the caller should wait before retrying.</p>
     #   @return [Integer]
     class ThrottlingException < Struct.new(
+      nil,
       :message,
       :service_code,
       :quota_code,
@@ -1290,6 +1371,7 @@ module Aws::ControlTower
     #   <p>Tag keys to be removed from the resource.</p>
     #   @return [Array<String>]
     class UntagResourceInput < Struct.new(
+      nil,
       :resource_arn,
       :tag_keys,
       keyword_init: true
@@ -1298,6 +1380,7 @@ module Aws::ControlTower
     end
 
     class UntagResourceOutput < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1313,6 +1396,7 @@ module Aws::ControlTower
     #   <p>Specifies the <code>EnabledBaseline</code> resource to be updated.</p>
     #   @return [String]
     class UpdateEnabledBaselineInput < Struct.new(
+      nil,
       :baseline_version,
       :parameters,
       :enabled_baseline_identifier,
@@ -1325,6 +1409,7 @@ module Aws::ControlTower
     #   <p>The ID (in UUID format) of the asynchronous <code>UpdateEnabledBaseline</code> operation. This <code>operationIdentifier</code> is used to track status through calls to the <code>GetBaselineOperation</code> API.</p>
     #   @return [String]
     class UpdateEnabledBaselineOutput < Struct.new(
+      nil,
       :operation_identifier,
       keyword_init: true
     )
@@ -1338,6 +1423,7 @@ module Aws::ControlTower
     #   <p> The ARN of the enabled control that will be updated. </p>
     #   @return [String]
     class UpdateEnabledControlInput < Struct.new(
+      nil,
       :parameters,
       :enabled_control_identifier,
       keyword_init: true
@@ -1349,6 +1435,7 @@ module Aws::ControlTower
     #   <p> The operation identifier for this <code>UpdateEnabledControl</code> operation. </p>
     #   @return [String]
     class UpdateEnabledControlOutput < Struct.new(
+      nil,
       :operation_identifier,
       keyword_init: true
     )
@@ -1365,6 +1452,7 @@ module Aws::ControlTower
     #   <p>The unique identifier of the landing zone.</p>
     #   @return [String]
     class UpdateLandingZoneInput < Struct.new(
+      nil,
       :version,
       :manifest,
       :landing_zone_identifier,
@@ -1377,6 +1465,7 @@ module Aws::ControlTower
     #   <p>A unique identifier assigned to a <code>UpdateLandingZone</code> operation. You can use this identifier as an input of <code>GetLandingZoneOperation</code> to check the operation's status.</p>
     #   @return [String]
     class UpdateLandingZoneOutput < Struct.new(
+      nil,
       :operation_identifier,
       keyword_init: true
     )
@@ -1387,6 +1476,7 @@ module Aws::ControlTower
     # @!attribute message
     #   @return [String]
     class ValidationException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )

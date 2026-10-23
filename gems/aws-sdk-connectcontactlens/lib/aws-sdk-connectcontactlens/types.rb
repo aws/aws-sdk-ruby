@@ -10,6 +10,7 @@ module Aws::ConnectContactLens
     # @!attribute message
     #   @return [String]
     class AccessDeniedException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -25,6 +26,7 @@ module Aws::ConnectContactLens
     #   <p>The category rule that was matched and when it occurred in the transcript.</p>
     #   @return [Hash<String, Types::CategoryDetails>]
     class Categories < Struct.new(
+      nil,
       :matched_categories,
       :matched_details,
       keyword_init: true
@@ -37,6 +39,7 @@ module Aws::ConnectContactLens
     #   <p>The section of audio where the category rule was detected.</p>
     #   @return [Array<Types::PointOfInterest>]
     class CategoryDetails < Struct.new(
+      nil,
       :points_of_interest,
       keyword_init: true
     )
@@ -52,6 +55,7 @@ module Aws::ConnectContactLens
     #   <p>The end of the issue.</p>
     #   @return [Integer]
     class CharacterOffsets < Struct.new(
+      nil,
       :begin_offset_char,
       :end_offset_char,
       keyword_init: true
@@ -63,6 +67,7 @@ module Aws::ConnectContactLens
     # @!attribute message
     #   @return [String]
     class InternalServiceException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -73,6 +78,7 @@ module Aws::ConnectContactLens
     # @!attribute message
     #   @return [String]
     class InvalidRequestException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -85,6 +91,7 @@ module Aws::ConnectContactLens
     #   <p>The offset for when the issue was detected in the segment.</p>
     #   @return [Types::CharacterOffsets]
     class IssueDetected < Struct.new(
+      nil,
       :character_offsets,
       keyword_init: true
     )
@@ -105,6 +112,7 @@ module Aws::ConnectContactLens
     #   response in the next request to retrieve the next set of results.</p>
     #   @return [String]
     class ListRealtimeContactAnalysisSegmentsRequest < Struct.new(
+      nil,
       :instance_id,
       :contact_id,
       :max_results,
@@ -134,6 +142,7 @@ module Aws::ConnectContactLens
     #               (successfully or failed) and there are no more segments to retrieve.</p>
     #   @return [String]
     class ListRealtimeContactAnalysisSegmentsResponse < Struct.new(
+      nil,
       :segments,
       :next_token,
       keyword_init: true
@@ -149,6 +158,7 @@ module Aws::ConnectContactLens
     #   <p>The ending offset in milliseconds where the category rule was detected.</p>
     #   @return [Integer]
     class PointOfInterest < Struct.new(
+      nil,
       :begin_offset_millis,
       :end_offset_millis,
       keyword_init: true
@@ -198,6 +208,7 @@ module Aws::ConnectContactLens
     #            </ul>
     #   @return [String]
     class PostContactSummary < Struct.new(
+      nil,
       :content,
       :status,
       :failure_code,
@@ -217,6 +228,7 @@ module Aws::ConnectContactLens
     #   <p>Information about the post-contact summary.</p>
     #   @return [Types::PostContactSummary]
     class RealtimeContactAnalysisSegment < Struct.new(
+      nil,
       :transcript,
       :categories,
       :post_contact_summary,
@@ -229,6 +241,7 @@ module Aws::ConnectContactLens
     # @!attribute message
     #   @return [String]
     class ResourceNotFoundException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -239,6 +252,7 @@ module Aws::ConnectContactLens
     # @!attribute message
     #   @return [String]
     class ThrottlingException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -271,6 +285,7 @@ module Aws::ConnectContactLens
     #   <p>List of positions where issues were detected on the transcript.</p>
     #   @return [Array<Types::IssueDetected>]
     class Transcript < Struct.new(
+      nil,
       :id,
       :participant_id,
       :participant_role,

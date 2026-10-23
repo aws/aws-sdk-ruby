@@ -11,6 +11,7 @@ module Aws::CognitoSync
     #   The message associated with the AlreadyStreamedException exception.
     #   @return [String]
     class AlreadyStreamedException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -24,6 +25,7 @@ module Aws::CognitoSync
     #         unique within a region.
     #   @return [String]
     class BulkPublishRequest < Struct.new(
+      nil,
       :identity_pool_id,
       keyword_init: true
     )
@@ -37,6 +39,7 @@ module Aws::CognitoSync
     #         unique within a region.
     #   @return [String]
     class BulkPublishResponse < Struct.new(
+      nil,
       :identity_pool_id,
       keyword_init: true
     )
@@ -56,6 +59,7 @@ module Aws::CognitoSync
     #         <p>DISABLED - Streaming of updates to identity pool is disabled. Bulk publish will also fail if StreamingStatus is DISABLED.</p>
     #   @return [String]
     class CognitoStreams < Struct.new(
+      nil,
       :stream_name,
       :role_arn,
       :streaming_status,
@@ -69,6 +73,7 @@ module Aws::CognitoSync
     #   <p>The message returned by a ConcurrentModicationException.</p>
     #   @return [String]
     class ConcurrentModificationException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -109,6 +114,7 @@ module Aws::CognitoSync
     #   Number of records in this dataset.
     #   @return [Integer]
     class Dataset < Struct.new(
+      nil,
       :identity_id,
       :dataset_name,
       :creation_date,
@@ -139,6 +145,7 @@ module Aws::CognitoSync
     #         (dot).
     #   @return [String]
     class DeleteDatasetRequest < Struct.new(
+      nil,
       :identity_pool_id,
       :identity_id,
       :dataset_name,
@@ -157,6 +164,7 @@ module Aws::CognitoSync
     #         up to 1MB of key-value pairs.
     #   @return [Types::Dataset]
     class DeleteDatasetResponse < Struct.new(
+      nil,
       :dataset,
       keyword_init: true
     )
@@ -181,6 +189,7 @@ module Aws::CognitoSync
     #         (dot).
     #   @return [String]
     class DescribeDatasetRequest < Struct.new(
+      nil,
       :identity_pool_id,
       :identity_id,
       :dataset_name,
@@ -199,6 +208,7 @@ module Aws::CognitoSync
     #         pairs.
     #   @return [Types::Dataset]
     class DescribeDatasetResponse < Struct.new(
+      nil,
       :dataset,
       keyword_init: true
     )
@@ -213,6 +223,7 @@ module Aws::CognitoSync
     #         generation is unique within a region.
     #   @return [String]
     class DescribeIdentityPoolUsageRequest < Struct.new(
+      nil,
       :identity_pool_id,
       keyword_init: true
     )
@@ -226,6 +237,7 @@ module Aws::CognitoSync
     #         usage of the identity pool.
     #   @return [Types::IdentityPoolUsage]
     class DescribeIdentityPoolUsageResponse < Struct.new(
+      nil,
       :identity_pool_usage,
       keyword_init: true
     )
@@ -245,6 +257,7 @@ module Aws::CognitoSync
     #         unique within a region.
     #   @return [String]
     class DescribeIdentityUsageRequest < Struct.new(
+      nil,
       :identity_pool_id,
       :identity_id,
       keyword_init: true
@@ -259,6 +272,7 @@ module Aws::CognitoSync
     #         identity.
     #   @return [Types::IdentityUsage]
     class DescribeIdentityUsageResponse < Struct.new(
+      nil,
       :identity_usage,
       keyword_init: true
     )
@@ -270,6 +284,7 @@ module Aws::CognitoSync
     #   The message associated with the DuplicateRequestException exception.
     #   @return [String]
     class DuplicateRequestException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -283,6 +298,7 @@ module Aws::CognitoSync
     #         unique within a region.
     #   @return [String]
     class GetBulkPublishDetailsRequest < Struct.new(
+      nil,
       :identity_pool_id,
       keyword_init: true
     )
@@ -312,6 +328,7 @@ module Aws::CognitoSync
     #   If BulkPublishStatus is FAILED this field will contain the error message that caused the bulk publish to fail.
     #   @return [String]
     class GetBulkPublishDetailsResponse < Struct.new(
+      nil,
       :identity_pool_id,
       :bulk_publish_start_time,
       :bulk_publish_complete_time,
@@ -327,6 +344,7 @@ module Aws::CognitoSync
     #   <p>The Cognito Identity Pool ID for the request</p>
     #   @return [String]
     class GetCognitoEventsRequest < Struct.new(
+      nil,
       :identity_pool_id,
       keyword_init: true
     )
@@ -338,6 +356,7 @@ module Aws::CognitoSync
     #   <p>The Cognito Events returned from the GetCognitoEvents request</p>
     #   @return [Hash<String, String>]
     class GetCognitoEventsResponse < Struct.new(
+      nil,
       :events,
       keyword_init: true
     )
@@ -350,6 +369,7 @@ module Aws::CognitoSync
     #            Amazon Cognito. This is the ID of the pool for which to return a configuration.</p>
     #   @return [String]
     class GetIdentityPoolConfigurationRequest < Struct.new(
+      nil,
       :identity_pool_id,
       keyword_init: true
     )
@@ -368,6 +388,7 @@ module Aws::CognitoSync
     #   Options to apply to this identity pool for Amazon Cognito streams.
     #   @return [Types::CognitoStreams]
     class GetIdentityPoolConfigurationResponse < Struct.new(
+      nil,
       :identity_pool_id,
       :push_sync,
       :cognito_streams,
@@ -396,6 +417,7 @@ module Aws::CognitoSync
     #         last modified.
     #   @return [Time]
     class IdentityPoolUsage < Struct.new(
+      nil,
       :identity_pool_id,
       :sync_sessions_count,
       :data_storage,
@@ -429,6 +451,7 @@ module Aws::CognitoSync
     #         identity.
     #   @return [Integer]
     class IdentityUsage < Struct.new(
+      nil,
       :identity_id,
       :identity_pool_id,
       :last_modified_date,
@@ -451,6 +474,7 @@ module Aws::CognitoSync
     #         InternalErrorException.
     #   @return [String]
     class InternalErrorException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -462,6 +486,7 @@ module Aws::CognitoSync
     #         InvalidConfigurationException.
     #   @return [String]
     class InvalidConfigurationException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -473,6 +498,7 @@ module Aws::CognitoSync
     #   <p>A message returned when an InvalidLambdaFunctionOutputException occurs</p>
     #   @return [String]
     class InvalidLambdaFunctionOutputException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -486,6 +512,7 @@ module Aws::CognitoSync
     #         InvalidParameterException.
     #   @return [String]
     class InvalidParameterException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -497,6 +524,7 @@ module Aws::CognitoSync
     #   <p>A message returned when an LambdaThrottledException is thrown</p>
     #   @return [String]
     class LambdaThrottledException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -510,6 +538,7 @@ module Aws::CognitoSync
     #         LimitExceededException.
     #   @return [String]
     class LimitExceededException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -537,6 +566,7 @@ module Aws::CognitoSync
     #         returned.
     #   @return [Integer]
     class ListDatasetsRequest < Struct.new(
+      nil,
       :identity_pool_id,
       :identity_id,
       :next_token,
@@ -559,6 +589,7 @@ module Aws::CognitoSync
     #         page of results.
     #   @return [String]
     class ListDatasetsResponse < Struct.new(
+      nil,
       :datasets,
       :count,
       :next_token,
@@ -583,6 +614,7 @@ module Aws::CognitoSync
     #         be returned.
     #   @return [Integer]
     class ListIdentityPoolUsageRequest < Struct.new(
+      nil,
       :next_token,
       :max_results,
       keyword_init: true
@@ -609,6 +641,7 @@ module Aws::CognitoSync
     #         the next page of results.
     #   @return [String]
     class ListIdentityPoolUsageResponse < Struct.new(
+      nil,
       :identity_pool_usages,
       :max_results,
       :count,
@@ -656,6 +689,7 @@ module Aws::CognitoSync
     #         identity ID, and expiration.
     #   @return [String]
     class ListRecordsRequest < Struct.new(
+      nil,
       :identity_pool_id,
       :identity_id,
       :dataset_name,
@@ -705,6 +739,7 @@ module Aws::CognitoSync
     #         identity ID, and expiration.
     #   @return [String]
     class ListRecordsResponse < Struct.new(
+      nil,
       :records,
       :next_token,
       :count,
@@ -733,6 +768,7 @@ module Aws::CognitoSync
     #         NotAuthorizedException.
     #   @return [String]
     class NotAuthorizedException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -747,6 +783,7 @@ module Aws::CognitoSync
     #   <p>A role configured to allow Cognito to call SNS on behalf of the developer.</p>
     #   @return [String]
     class PushSync < Struct.new(
+      nil,
       :application_arns,
       :role_arn,
       keyword_init: true
@@ -777,6 +814,7 @@ module Aws::CognitoSync
     #         device.
     #   @return [Time]
     class Record < Struct.new(
+      nil,
       :key,
       :value,
       :sync_count,
@@ -808,6 +846,7 @@ module Aws::CognitoSync
     #         device.
     #   @return [Time]
     class RecordPatch < Struct.new(
+      nil,
       :op,
       :key,
       :value,
@@ -833,6 +872,7 @@ module Aws::CognitoSync
     #   <p>The push token.</p>
     #   @return [String]
     class RegisterDeviceRequest < Struct.new(
+      nil,
       :identity_pool_id,
       :identity_id,
       :platform,
@@ -847,6 +887,7 @@ module Aws::CognitoSync
     #   <p>The unique ID generated for this device by Cognito.</p>
     #   @return [String]
     class RegisterDeviceResponse < Struct.new(
+      nil,
       :device_id,
       keyword_init: true
     )
@@ -860,6 +901,7 @@ module Aws::CognitoSync
     #         ResourceConflictException.
     #   @return [String]
     class ResourceConflictException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -873,6 +915,7 @@ module Aws::CognitoSync
     #         ResourceNotFoundException.
     #   @return [String]
     class ResourceNotFoundException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -887,6 +930,7 @@ module Aws::CognitoSync
     #   <p>The events to configure</p>
     #   @return [Hash<String, String>]
     class SetCognitoEventsRequest < Struct.new(
+      nil,
       :identity_pool_id,
       :events,
       keyword_init: true
@@ -906,6 +950,7 @@ module Aws::CognitoSync
     #   Options to apply to this identity pool for Amazon Cognito streams.
     #   @return [Types::CognitoStreams]
     class SetIdentityPoolConfigurationRequest < Struct.new(
+      nil,
       :identity_pool_id,
       :push_sync,
       :cognito_streams,
@@ -926,6 +971,7 @@ module Aws::CognitoSync
     #   Options to apply to this identity pool for Amazon Cognito streams.
     #   @return [Types::CognitoStreams]
     class SetIdentityPoolConfigurationResponse < Struct.new(
+      nil,
       :identity_pool_id,
       :push_sync,
       :cognito_streams,
@@ -949,6 +995,7 @@ module Aws::CognitoSync
     #   <p>The unique ID generated for this device by Cognito.</p>
     #   @return [String]
     class SubscribeToDatasetRequest < Struct.new(
+      nil,
       :identity_pool_id,
       :identity_id,
       :dataset_name,
@@ -960,6 +1007,7 @@ module Aws::CognitoSync
 
     # <p>Response to a SubscribeToDataset request.</p>
     class SubscribeToDatasetResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -972,6 +1020,7 @@ module Aws::CognitoSync
     #         TooManyRequestsException.
     #   @return [String]
     class TooManyRequestsException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -993,6 +1042,7 @@ module Aws::CognitoSync
     #   <p>The unique ID generated for this device by Cognito.</p>
     #   @return [String]
     class UnsubscribeFromDatasetRequest < Struct.new(
+      nil,
       :identity_pool_id,
       :identity_id,
       :dataset_name,
@@ -1004,6 +1054,7 @@ module Aws::CognitoSync
 
     # <p>Response to an UnsubscribeFromDataset request.</p>
     class UnsubscribeFromDatasetResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1043,6 +1094,7 @@ module Aws::CognitoSync
     #            ClientContext field is not yet implemented.
     #   @return [String]
     class UpdateRecordsRequest < Struct.new(
+      nil,
       :identity_pool_id,
       :identity_id,
       :dataset_name,
@@ -1062,6 +1114,7 @@ module Aws::CognitoSync
     #         updated.
     #   @return [Array<Types::Record>]
     class UpdateRecordsResponse < Struct.new(
+      nil,
       :records,
       keyword_init: true
     )

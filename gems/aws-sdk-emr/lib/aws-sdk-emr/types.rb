@@ -13,6 +13,7 @@ module Aws::EMR
     #   <p>Specifies the configuration of the instance fleet.</p>
     #   @return [Types::InstanceFleetConfig]
     class AddInstanceFleetInput < Struct.new(
+      nil,
       :cluster_id,
       :instance_fleet,
       keyword_init: true
@@ -30,6 +31,7 @@ module Aws::EMR
     #   <p>The Amazon Resource Name of the cluster.</p>
     #   @return [String]
     class AddInstanceFleetOutput < Struct.new(
+      nil,
       :cluster_id,
       :instance_fleet_id,
       :cluster_arn,
@@ -46,6 +48,7 @@ module Aws::EMR
     #   <p>Job flow in which to add the instance groups.</p>
     #   @return [String]
     class AddInstanceGroupsInput < Struct.new(
+      nil,
       :instance_groups,
       :job_flow_id,
       keyword_init: true
@@ -64,6 +67,7 @@ module Aws::EMR
     #   <p>The Amazon Resource Name of the cluster.</p>
     #   @return [String]
     class AddInstanceGroupsOutput < Struct.new(
+      nil,
       :job_flow_id,
       :instance_group_ids,
       :cluster_arn,
@@ -89,6 +93,7 @@ module Aws::EMR
     #            runtime role ARN.</p>
     #   @return [String]
     class AddJobFlowStepsInput < Struct.new(
+      nil,
       :job_flow_id,
       :steps,
       :execution_role_arn,
@@ -102,6 +107,7 @@ module Aws::EMR
     #   <p>The identifiers of the list of steps added to the job flow.</p>
     #   @return [Array<String>]
     class AddJobFlowStepsOutput < Struct.new(
+      nil,
       :step_ids,
       keyword_init: true
     )
@@ -120,6 +126,7 @@ module Aws::EMR
     #            string with a maximum of 256 characters.</p>
     #   @return [Array<Types::Tag>]
     class AddTagsInput < Struct.new(
+      nil,
       :resource_id,
       :tags,
       keyword_init: true
@@ -129,6 +136,7 @@ module Aws::EMR
 
     # <p>This output indicates the result of adding tags to a resource.</p>
     class AddTagsOutput < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -156,6 +164,7 @@ module Aws::EMR
     #            applications that third-party vendors use for testing purposes.</p>
     #   @return [Hash<String, String>]
     class Application < Struct.new(
+      nil,
       :name,
       :version,
       :args,
@@ -178,6 +187,7 @@ module Aws::EMR
     #   <p>The scale-in and scale-out rules that comprise the automatic scaling policy.</p>
     #   @return [Array<Types::ScalingRule>]
     class AutoScalingPolicy < Struct.new(
+      nil,
       :constraints,
       :rules,
       keyword_init: true
@@ -201,6 +211,7 @@ module Aws::EMR
     #   <p>The scale-in and scale-out rules that comprise the automatic scaling policy.</p>
     #   @return [Array<Types::ScalingRule>]
     class AutoScalingPolicyDescription < Struct.new(
+      nil,
       :status,
       :constraints,
       :rules,
@@ -221,6 +232,7 @@ module Aws::EMR
     #            change.</p>
     #   @return [String]
     class AutoScalingPolicyStateChangeReason < Struct.new(
+      nil,
       :code,
       :message,
       keyword_init: true
@@ -237,6 +249,7 @@ module Aws::EMR
     #   <p>The reason for a change in status.</p>
     #   @return [Types::AutoScalingPolicyStateChangeReason]
     class AutoScalingPolicyStatus < Struct.new(
+      nil,
       :state,
       :state_change_reason,
       keyword_init: true
@@ -254,6 +267,7 @@ module Aws::EMR
     #            days).</p>
     #   @return [Integer]
     class AutoTerminationPolicy < Struct.new(
+      nil,
       :idle_timeout,
       keyword_init: true
     )
@@ -290,6 +304,7 @@ module Aws::EMR
     #   <p>A set of properties specified within a configuration classification.</p>
     #   @return [Hash<String, String>]
     class BlockPublicAccessConfiguration < Struct.new(
+      nil,
       :block_public_security_group_rules,
       :permitted_public_security_group_rule_ranges,
       :classification,
@@ -312,6 +327,7 @@ module Aws::EMR
     #   <p>The Amazon Resource Name that created or last modified the configuration.</p>
     #   @return [String]
     class BlockPublicAccessConfigurationMetadata < Struct.new(
+      nil,
       :creation_date_time,
       :created_by_arn,
       keyword_init: true
@@ -327,6 +343,7 @@ module Aws::EMR
     #   <p>The script run by the bootstrap action.</p>
     #   @return [Types::ScriptBootstrapActionConfig]
     class BootstrapActionConfig < Struct.new(
+      nil,
       :name,
       :script_bootstrap_action,
       keyword_init: true
@@ -339,6 +356,7 @@ module Aws::EMR
     #   <p>A description of the bootstrap action.</p>
     #   @return [Types::BootstrapActionConfig]
     class BootstrapActionDetail < Struct.new(
+      nil,
       :bootstrap_action_config,
       keyword_init: true
     )
@@ -356,6 +374,7 @@ module Aws::EMR
     #   <p>The reason for the failure if the CancelSteps request fails.</p>
     #   @return [String]
     class CancelStepsInfo < Struct.new(
+      nil,
       :step_id,
       :status,
       :reason,
@@ -377,6 +396,7 @@ module Aws::EMR
     #               <code>SEND_INTERRUPT</code>.</p>
     #   @return [String]
     class CancelStepsInput < Struct.new(
+      nil,
       :cluster_id,
       :step_ids,
       :step_cancellation_option,
@@ -391,6 +411,7 @@ module Aws::EMR
     #            requests for each <code>StepID</code> specified.</p>
     #   @return [Array<Types::CancelStepsInfo>]
     class CancelStepsOutput < Struct.new(
+      nil,
       :cancel_steps_info_list,
       keyword_init: true
     )
@@ -438,6 +459,7 @@ module Aws::EMR
     #   <p>A CloudWatch metric dimension.</p>
     #   @return [Array<Types::MetricDimension>]
     class CloudWatchAlarmDefinition < Struct.new(
+      nil,
       :comparison_operator,
       :evaluation_periods,
       :metric_name,
@@ -615,6 +637,7 @@ module Aws::EMR
     #   <p>Reserved.</p>
     #   @return [Boolean]
     class Cluster < Struct.new(
+      nil,
       :id,
       :name,
       :status,
@@ -663,6 +686,7 @@ module Aws::EMR
     #   <p>The descriptive message for the state change reason.</p>
     #   @return [String]
     class ClusterStateChangeReason < Struct.new(
+      nil,
       :code,
       :message,
       keyword_init: true
@@ -687,6 +711,7 @@ module Aws::EMR
     #            tuples.</p>
     #   @return [Array<Types::ErrorDetail>]
     class ClusterStatus < Struct.new(
+      nil,
       :state,
       :state_change_reason,
       :timeline,
@@ -720,6 +745,7 @@ module Aws::EMR
     #   <p> The Amazon Resource Name (ARN) of the Outpost where the cluster is launched. </p>
     #   @return [String]
     class ClusterSummary < Struct.new(
+      nil,
       :id,
       :name,
       :status,
@@ -742,6 +768,7 @@ module Aws::EMR
     #   <p>The date and time when the cluster was terminated.</p>
     #   @return [Time]
     class ClusterTimeline < Struct.new(
+      nil,
       :creation_date_time,
       :ready_date_time,
       :end_date_time,
@@ -761,6 +788,7 @@ module Aws::EMR
     #   <p>Arguments for Amazon EMR to pass to the command for execution.</p>
     #   @return [Array<String>]
     class Command < Struct.new(
+      nil,
       :name,
       :script_path,
       :args,
@@ -800,6 +828,7 @@ module Aws::EMR
     #            parameter is used to split capacity allocation between core and task nodes. </p>
     #   @return [Integer]
     class ComputeLimits < Struct.new(
+      nil,
       :unit_type,
       :minimum_capacity_units,
       :maximum_capacity_units,
@@ -828,6 +857,7 @@ module Aws::EMR
     #   <p>A set of properties specified within a configuration classification.</p>
     #   @return [Hash<String, String>]
     class Configuration < Struct.new(
+      nil,
       :classification,
       :configurations,
       :properties,
@@ -852,6 +882,7 @@ module Aws::EMR
     #   <p>The profiler type for the persistent application user interface.</p>
     #   @return [String]
     class CreatePersistentAppUIInput < Struct.new(
+      nil,
       :target_resource_arn,
       :emr_containers_config,
       :tags,
@@ -870,6 +901,7 @@ module Aws::EMR
     #            enabled cluster or not.</p>
     #   @return [Boolean]
     class CreatePersistentAppUIOutput < Struct.new(
+      nil,
       :persistent_app_ui_id,
       :runtime_role_enabled_cluster,
       keyword_init: true
@@ -887,6 +919,7 @@ module Aws::EMR
     #               Management Guide</i>.</p>
     #   @return [String]
     class CreateSecurityConfigurationInput < Struct.new(
+      nil,
       :name,
       :security_configuration,
       keyword_init: true
@@ -901,6 +934,7 @@ module Aws::EMR
     #   <p>The date and time the security configuration was created.</p>
     #   @return [Time]
     class CreateSecurityConfigurationOutput < Struct.new(
+      nil,
       :name,
       :creation_date_time,
       keyword_init: true
@@ -987,6 +1021,7 @@ module Aws::EMR
     #   <p>The KMS key identifier (ARN) used to encrypt Amazon EMR Studio workspace and notebook files when backed up to Amazon S3.</p>
     #   @return [String]
     class CreateStudioInput < Struct.new(
+      nil,
       :name,
       :description,
       :auth_mode,
@@ -1016,6 +1051,7 @@ module Aws::EMR
     #   <p>The unique Studio access URL.</p>
     #   @return [String]
     class CreateStudioOutput < Struct.new(
+      nil,
       :studio_id,
       :url,
       keyword_init: true
@@ -1049,6 +1085,7 @@ module Aws::EMR
     #               Studio User Role with Session Policies</a>.</p>
     #   @return [String]
     class CreateStudioSessionMappingInput < Struct.new(
+      nil,
       :studio_id,
       :identity_id,
       :identity_name,
@@ -1079,6 +1116,7 @@ module Aws::EMR
     #   <p>The name of the security configuration.</p>
     #   @return [String]
     class DeleteSecurityConfigurationInput < Struct.new(
+      nil,
       :name,
       keyword_init: true
     )
@@ -1086,6 +1124,7 @@ module Aws::EMR
     end
 
     class DeleteSecurityConfigurationOutput < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1095,6 +1134,7 @@ module Aws::EMR
     #   <p>The ID of the Amazon EMR Studio.</p>
     #   @return [String]
     class DeleteStudioInput < Struct.new(
+      nil,
       :studio_id,
       keyword_init: true
     )
@@ -1119,6 +1159,7 @@ module Aws::EMR
     #            a group.</p>
     #   @return [String]
     class DeleteStudioSessionMappingInput < Struct.new(
+      nil,
       :studio_id,
       :identity_id,
       :identity_name,
@@ -1133,6 +1174,7 @@ module Aws::EMR
     #   <p>The identifier of the cluster to describe.</p>
     #   @return [String]
     class DescribeClusterInput < Struct.new(
+      nil,
       :cluster_id,
       keyword_init: true
     )
@@ -1144,6 +1186,7 @@ module Aws::EMR
     #   <p>This output contains the details for the requested cluster.</p>
     #   @return [Types::Cluster]
     class DescribeClusterOutput < Struct.new(
+      nil,
       :cluster,
       keyword_init: true
     )
@@ -1164,6 +1207,7 @@ module Aws::EMR
     #   <p>Return only job flows whose state is contained in this list.</p>
     #   @return [Array<String>]
     class DescribeJobFlowsInput < Struct.new(
+      nil,
       :created_after,
       :created_before,
       :job_flow_ids,
@@ -1178,6 +1222,7 @@ module Aws::EMR
     #   <p>A list of job flows matching the parameters supplied.</p>
     #   @return [Array<Types::JobFlowDetail>]
     class DescribeJobFlowsOutput < Struct.new(
+      nil,
       :job_flows,
       keyword_init: true
     )
@@ -1188,6 +1233,7 @@ module Aws::EMR
     #   <p>The unique identifier of the notebook execution.</p>
     #   @return [String]
     class DescribeNotebookExecutionInput < Struct.new(
+      nil,
       :notebook_execution_id,
       keyword_init: true
     )
@@ -1198,6 +1244,7 @@ module Aws::EMR
     #   <p>Properties of the notebook execution.</p>
     #   @return [Types::NotebookExecution]
     class DescribeNotebookExecutionOutput < Struct.new(
+      nil,
       :notebook_execution,
       keyword_init: true
     )
@@ -1208,6 +1255,7 @@ module Aws::EMR
     #   <p>The identifier for the persistent application user interface.</p>
     #   @return [String]
     class DescribePersistentAppUIInput < Struct.new(
+      nil,
       :persistent_app_ui_id,
       keyword_init: true
     )
@@ -1218,6 +1266,7 @@ module Aws::EMR
     #   <p>The persistent application user interface.</p>
     #   @return [Types::PersistentAppUI]
     class DescribePersistentAppUIOutput < Struct.new(
+      nil,
       :persistent_app_ui,
       keyword_init: true
     )
@@ -1234,6 +1283,7 @@ module Aws::EMR
     #   <p>Reserved for future use. Currently set to null.</p>
     #   @return [Integer]
     class DescribeReleaseLabelInput < Struct.new(
+      nil,
       :release_label,
       :next_token,
       :max_results,
@@ -1261,6 +1311,7 @@ module Aws::EMR
     #               </a>. For example, <a href="https://docs.aws.amazon.com/AL2/latest/relnotes/relnotes-20220218.html">2.0.20220218.1</a>.</p>
     #   @return [Array<Types::OSRelease>]
     class DescribeReleaseLabelOutput < Struct.new(
+      nil,
       :release_label,
       :applications,
       :next_token,
@@ -1274,6 +1325,7 @@ module Aws::EMR
     #   <p>The name of the security configuration.</p>
     #   @return [String]
     class DescribeSecurityConfigurationInput < Struct.new(
+      nil,
       :name,
       keyword_init: true
     )
@@ -1290,6 +1342,7 @@ module Aws::EMR
     #   <p>The date and time the security configuration was created</p>
     #   @return [Time]
     class DescribeSecurityConfigurationOutput < Struct.new(
+      nil,
       :name,
       :security_configuration,
       :creation_date_time,
@@ -1306,6 +1359,7 @@ module Aws::EMR
     #   <p>The identifier of the step to describe.</p>
     #   @return [String]
     class DescribeStepInput < Struct.new(
+      nil,
       :cluster_id,
       :step_id,
       keyword_init: true
@@ -1318,6 +1372,7 @@ module Aws::EMR
     #   <p>The step details for the requested step identifier.</p>
     #   @return [Types::Step]
     class DescribeStepOutput < Struct.new(
+      nil,
       :step,
       keyword_init: true
     )
@@ -1328,6 +1383,7 @@ module Aws::EMR
     #   <p>The Amazon EMR Studio ID.</p>
     #   @return [String]
     class DescribeStudioInput < Struct.new(
+      nil,
       :studio_id,
       keyword_init: true
     )
@@ -1338,6 +1394,7 @@ module Aws::EMR
     #   <p>The Amazon EMR Studio details.</p>
     #   @return [Types::Studio]
     class DescribeStudioOutput < Struct.new(
+      nil,
       :studio,
       keyword_init: true
     )
@@ -1349,6 +1406,7 @@ module Aws::EMR
     #   <p>The Job run ID for the container configuration.</p>
     #   @return [String]
     class EMRContainersConfig < Struct.new(
+      nil,
       :job_run_id,
       keyword_init: true
     )
@@ -1365,6 +1423,7 @@ module Aws::EMR
     #   <p>The device name that is exposed to the instance, such as /dev/sdh.</p>
     #   @return [String]
     class EbsBlockDevice < Struct.new(
+      nil,
       :volume_specification,
       :device,
       keyword_init: true
@@ -1384,6 +1443,7 @@ module Aws::EMR
     #            every instance in the instance group</p>
     #   @return [Integer]
     class EbsBlockDeviceConfig < Struct.new(
+      nil,
       :volume_specification,
       :volumes_per_instance,
       keyword_init: true
@@ -1401,6 +1461,7 @@ module Aws::EMR
     #            for an EC2 instance.</p>
     #   @return [Boolean]
     class EbsConfiguration < Struct.new(
+      nil,
       :ebs_block_device_configs,
       :ebs_optimized,
       keyword_init: true
@@ -1416,6 +1477,7 @@ module Aws::EMR
     #   <p>The volume identifier of the EBS volume.</p>
     #   @return [String]
     class EbsVolume < Struct.new(
+      nil,
       :device,
       :volume_id,
       keyword_init: true
@@ -1484,6 +1546,7 @@ module Aws::EMR
     #            nodes.</p>
     #   @return [Array<String>]
     class Ec2InstanceAttributes < Struct.new(
+      nil,
       :ec2_key_name,
       :ec2_subnet_id,
       :requested_ec2_subnet_ids,
@@ -1513,6 +1576,7 @@ module Aws::EMR
     #   <p>A message that describes the error.</p>
     #   @return [String]
     class ErrorDetail < Struct.new(
+      nil,
       :error_code,
       :error_data,
       :error_message,
@@ -1541,6 +1605,7 @@ module Aws::EMR
     #   <p>The execution role ARN required for the notebook execution.</p>
     #   @return [String]
     class ExecutionEngineConfig < Struct.new(
+      nil,
       :id,
       :type,
       :master_instance_security_group_id,
@@ -1566,6 +1631,7 @@ module Aws::EMR
     #            recorded.</p>
     #   @return [String]
     class FailureDetails < Struct.new(
+      nil,
       :reason,
       :message,
       :log_file,
@@ -1579,6 +1645,7 @@ module Aws::EMR
     #            will be fetched.</p>
     #   @return [String]
     class GetAutoTerminationPolicyInput < Struct.new(
+      nil,
       :cluster_id,
       keyword_init: true
     )
@@ -1590,6 +1657,7 @@ module Aws::EMR
     #         </p>
     #   @return [Types::AutoTerminationPolicy]
     class GetAutoTerminationPolicyOutput < Struct.new(
+      nil,
       :auto_termination_policy,
       keyword_init: true
     )
@@ -1597,6 +1665,7 @@ module Aws::EMR
     end
 
     class GetBlockPublicAccessConfigurationInput < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1628,6 +1697,7 @@ module Aws::EMR
     #            updated, Amazon EMR updates this metadata.</p>
     #   @return [Types::BlockPublicAccessConfigurationMetadata]
     class GetBlockPublicAccessConfigurationOutput < Struct.new(
+      nil,
       :block_public_access_configuration,
       :block_public_access_configuration_metadata,
       keyword_init: true
@@ -1645,6 +1715,7 @@ module Aws::EMR
     #            following format: <code>arn:partition:service:region:account:resource</code>.</p>
     #   @return [String]
     class GetClusterSessionCredentialsInput < Struct.new(
+      nil,
       :cluster_id,
       :execution_role_arn,
       keyword_init: true
@@ -1661,6 +1732,7 @@ module Aws::EMR
     #               <code>GetClusterSessionCredentials</code> API expire.</p>
     #   @return [Time]
     class GetClusterSessionCredentialsOutput < Struct.new(
+      nil,
       :credentials,
       :expires_at,
       keyword_init: true
@@ -1673,6 +1745,7 @@ module Aws::EMR
     #         </p>
     #   @return [String]
     class GetManagedScalingPolicyInput < Struct.new(
+      nil,
       :cluster_id,
       keyword_init: true
     )
@@ -1684,6 +1757,7 @@ module Aws::EMR
     #         </p>
     #   @return [Types::ManagedScalingPolicy]
     class GetManagedScalingPolicyOutput < Struct.new(
+      nil,
       :managed_scaling_policy,
       keyword_init: true
     )
@@ -1707,6 +1781,7 @@ module Aws::EMR
     #            presigned URL.</p>
     #   @return [String]
     class GetOnClusterAppUIPresignedURLInput < Struct.new(
+      nil,
       :cluster_id,
       :on_cluster_app_ui_type,
       :application_id,
@@ -1724,6 +1799,7 @@ module Aws::EMR
     #   <p>The cluster's generated presigned URL.</p>
     #   @return [String]
     class GetOnClusterAppUIPresignedURLOutput < Struct.new(
+      nil,
       :presigned_url_ready,
       :presigned_url,
       keyword_init: true
@@ -1747,6 +1823,7 @@ module Aws::EMR
     #   <p>The execution role ARN associated with the presigned URL.</p>
     #   @return [String]
     class GetPersistentAppUIPresignedURLInput < Struct.new(
+      nil,
       :persistent_app_ui_id,
       :persistent_app_ui_type,
       :application_id,
@@ -1764,6 +1841,7 @@ module Aws::EMR
     #   <p>The returned presigned URL.</p>
     #   @return [String]
     class GetPersistentAppUIPresignedURLOutput < Struct.new(
+      nil,
       :presigned_url_ready,
       :presigned_url,
       keyword_init: true
@@ -1789,6 +1867,7 @@ module Aws::EMR
     #   <p>Specifies whether the identity to fetch is a user or a group.</p>
     #   @return [String]
     class GetStudioSessionMappingInput < Struct.new(
+      nil,
       :studio_id,
       :identity_id,
       :identity_name,
@@ -1803,6 +1882,7 @@ module Aws::EMR
     #            including session policy ARN and creation time.</p>
     #   @return [Types::SessionMappingDetail]
     class GetStudioSessionMappingOutput < Struct.new(
+      nil,
       :session_mapping,
       keyword_init: true
     )
@@ -1828,6 +1908,7 @@ module Aws::EMR
     #            executed.</p>
     #   @return [Array<String>]
     class HadoopJarStepConfig < Struct.new(
+      nil,
       :properties,
       :jar,
       :main_class,
@@ -1856,6 +1937,7 @@ module Aws::EMR
     #            execution.</p>
     #   @return [Array<String>]
     class HadoopStepConfig < Struct.new(
+      nil,
       :jar,
       :properties,
       :main_class,
@@ -1905,6 +1987,7 @@ module Aws::EMR
     #   <p>The list of Amazon EBS volumes that are attached to this instance.</p>
     #   @return [Array<Types::EbsVolume>]
     class Instance < Struct.new(
+      nil,
       :id,
       :ec2_instance_id,
       :public_dns_name,
@@ -2007,6 +2090,7 @@ module Aws::EMR
     #   <p>Reserved.</p>
     #   @return [String]
     class InstanceFleet < Struct.new(
+      nil,
       :id,
       :name,
       :status,
@@ -2088,6 +2172,7 @@ module Aws::EMR
     #   <p>Reserved.</p>
     #   @return [String]
     class InstanceFleetConfig < Struct.new(
+      nil,
       :name,
       :instance_fleet_type,
       :target_on_demand_capacity,
@@ -2128,6 +2213,7 @@ module Aws::EMR
     #   <p>Reserved.</p>
     #   @return [String]
     class InstanceFleetModifyConfig < Struct.new(
+      nil,
       :instance_fleet_id,
       :target_on_demand_capacity,
       :target_spot_capacity,
@@ -2159,6 +2245,7 @@ module Aws::EMR
     #            </note>
     #   @return [Types::OnDemandProvisioningSpecification]
     class InstanceFleetProvisioningSpecifications < Struct.new(
+      nil,
       :spot_specification,
       :on_demand_specification,
       keyword_init: true
@@ -2176,6 +2263,7 @@ module Aws::EMR
     #            the allocation strategy, capacity reservation options, and the resize timeout period. </p>
     #   @return [Types::OnDemandResizingSpecification]
     class InstanceFleetResizingSpecifications < Struct.new(
+      nil,
       :spot_resize_specification,
       :on_demand_resize_specification,
       keyword_init: true
@@ -2195,6 +2283,7 @@ module Aws::EMR
     #   <p>An explanatory message.</p>
     #   @return [String]
     class InstanceFleetStateChangeReason < Struct.new(
+      nil,
       :code,
       :message,
       keyword_init: true
@@ -2254,6 +2343,7 @@ module Aws::EMR
     #            the time it became ready to run jobs, and the time of termination.</p>
     #   @return [Types::InstanceFleetTimeline]
     class InstanceFleetStatus < Struct.new(
+      nil,
       :state,
       :state_change_reason,
       :timeline,
@@ -2278,6 +2368,7 @@ module Aws::EMR
     #   <p>The time and date the instance fleet terminated.</p>
     #   @return [Time]
     class InstanceFleetTimeline < Struct.new(
+      nil,
       :creation_date_time,
       :ready_date_time,
       :end_date_time,
@@ -2358,6 +2449,7 @@ module Aws::EMR
     #   <p>The custom AMI ID to use for the provisioned instance group.</p>
     #   @return [String]
     class InstanceGroup < Struct.new(
+      nil,
       :id,
       :name,
       :market,
@@ -2424,6 +2516,7 @@ module Aws::EMR
     #   <p>The custom AMI ID to use for the provisioned instance group.</p>
     #   @return [String]
     class InstanceGroupConfig < Struct.new(
+      nil,
       :name,
       :market,
       :instance_role,
@@ -2489,6 +2582,7 @@ module Aws::EMR
     #   <p>The custom AMI ID to use for the provisioned instance group.</p>
     #   @return [String]
     class InstanceGroupDetail < Struct.new(
+      nil,
       :instance_group_id,
       :name,
       :market,
@@ -2530,6 +2624,7 @@ module Aws::EMR
     #   <p>A list of new or modified configurations to apply for an instance group.</p>
     #   @return [Array<Types::Configuration>]
     class InstanceGroupModifyConfig < Struct.new(
+      nil,
       :instance_group_id,
       :instance_count,
       :ec2_instance_ids_to_terminate,
@@ -2549,6 +2644,7 @@ module Aws::EMR
     #   <p>The status change reason description.</p>
     #   @return [String]
     class InstanceGroupStateChangeReason < Struct.new(
+      nil,
       :code,
       :message,
       keyword_init: true
@@ -2567,6 +2663,7 @@ module Aws::EMR
     #   <p>The timeline of the instance group status over time.</p>
     #   @return [Types::InstanceGroupTimeline]
     class InstanceGroupStatus < Struct.new(
+      nil,
       :state,
       :state_change_reason,
       :timeline,
@@ -2586,6 +2683,7 @@ module Aws::EMR
     #   <p>The date and time when the instance group terminated.</p>
     #   @return [Time]
     class InstanceGroupTimeline < Struct.new(
+      nil,
       :creation_date_time,
       :ready_date_time,
       :end_date_time,
@@ -2607,6 +2705,7 @@ module Aws::EMR
     #            terminated.</p>
     #   @return [Integer]
     class InstanceResizePolicy < Struct.new(
+      nil,
       :instances_to_terminate,
       :instances_to_protect,
       :instance_termination_timeout,
@@ -2623,6 +2722,7 @@ module Aws::EMR
     #   <p>The status change reason description.</p>
     #   @return [String]
     class InstanceStateChangeReason < Struct.new(
+      nil,
       :code,
       :message,
       keyword_init: true
@@ -2641,6 +2741,7 @@ module Aws::EMR
     #   <p>The timeline of the instance status over time.</p>
     #   @return [Types::InstanceTimeline]
     class InstanceStatus < Struct.new(
+      nil,
       :state,
       :state_change_reason,
       :timeline,
@@ -2660,6 +2761,7 @@ module Aws::EMR
     #   <p>The date and time when the instance was terminated.</p>
     #   @return [Time]
     class InstanceTimeline < Struct.new(
+      nil,
       :creation_date_time,
       :ready_date_time,
       :end_date_time,
@@ -2717,6 +2819,7 @@ module Aws::EMR
     #            Priority starts at 0, which is the highest priority. Amazon EMR considers the highest priority first.</p>
     #   @return [Float]
     class InstanceTypeConfig < Struct.new(
+      nil,
       :instance_type,
       :weighted_capacity,
       :bid_price,
@@ -2773,6 +2876,7 @@ module Aws::EMR
     #            Priority starts at 0, which is the highest priority. Amazon EMR considers the highest priority first.</p>
     #   @return [Float]
     class InstanceTypeSpecification < Struct.new(
+      nil,
       :instance_type,
       :weighted_capacity,
       :bid_price,
@@ -2790,6 +2894,7 @@ module Aws::EMR
     # <p>Indicates that an error occurred while processing the request and that the request was
     #          not completed.</p>
     class InternalServerError < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -2801,6 +2906,7 @@ module Aws::EMR
     #   <p>The message associated with the exception.</p>
     #   @return [String]
     class InternalServerException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -2815,6 +2921,7 @@ module Aws::EMR
     #   <p>The message associated with the exception.</p>
     #   @return [String]
     class InvalidRequestException < Struct.new(
+      nil,
       :error_code,
       :message,
       keyword_init: true
@@ -2894,6 +3001,7 @@ module Aws::EMR
     #            HDFS corruption. <code>TERMINATE_AT_TASK_COMPLETION</code> available only in Amazon EMR releases 4.1.0 and later, and is the default for releases of Amazon EMR earlier than 5.1.0.</p>
     #   @return [String]
     class JobFlowDetail < Struct.new(
+      nil,
       :job_flow_id,
       :name,
       :log_uri,
@@ -2934,6 +3042,7 @@ module Aws::EMR
     #   <p>Description of the job flow last changed state.</p>
     #   @return [String]
     class JobFlowExecutionStatusDetail < Struct.new(
+      nil,
       :state,
       :creation_date_time,
       :start_date_time,
@@ -3037,6 +3146,7 @@ module Aws::EMR
     #            nodes.</p>
     #   @return [Array<String>]
     class JobFlowInstancesConfig < Struct.new(
+      nil,
       :master_instance_type,
       :slave_instance_type,
       :instance_count,
@@ -3117,6 +3227,7 @@ module Aws::EMR
     #   <p>The Hadoop version for the cluster.</p>
     #   @return [String]
     class JobFlowInstancesDetail < Struct.new(
+      nil,
       :master_instance_type,
       :master_public_dns_name,
       :master_instance_id,
@@ -3160,6 +3271,7 @@ module Aws::EMR
     #   <p>The Active Directory password for <code>ADDomainJoinUser</code>.</p>
     #   @return [String]
     class KerberosAttributes < Struct.new(
+      nil,
       :realm,
       :kdc_admin_password,
       :cross_realm_trust_principal_password,
@@ -3178,6 +3290,7 @@ module Aws::EMR
     #   <p>The value part of the identified key.</p>
     #   @return [String]
     class KeyValue < Struct.new(
+      nil,
       :key,
       :value,
       keyword_init: true
@@ -3193,6 +3306,7 @@ module Aws::EMR
     #   <p>The pagination token that indicates the next set of results to retrieve.</p>
     #   @return [String]
     class ListBootstrapActionsInput < Struct.new(
+      nil,
       :cluster_id,
       :marker,
       keyword_init: true
@@ -3208,6 +3322,7 @@ module Aws::EMR
     #   <p>The pagination token that indicates the next set of results to retrieve.</p>
     #   @return [String]
     class ListBootstrapActionsOutput < Struct.new(
+      nil,
       :bootstrap_actions,
       :marker,
       keyword_init: true
@@ -3231,6 +3346,7 @@ module Aws::EMR
     #   <p>The pagination token that indicates the next set of results to retrieve.</p>
     #   @return [String]
     class ListClustersInput < Struct.new(
+      nil,
       :created_after,
       :created_before,
       :cluster_states,
@@ -3249,6 +3365,7 @@ module Aws::EMR
     #   <p>The pagination token that indicates the next set of results to retrieve.</p>
     #   @return [String]
     class ListClustersOutput < Struct.new(
+      nil,
       :clusters,
       :marker,
       keyword_init: true
@@ -3263,6 +3380,7 @@ module Aws::EMR
     #   <p>The pagination token that indicates the next set of results to retrieve.</p>
     #   @return [String]
     class ListInstanceFleetsInput < Struct.new(
+      nil,
       :cluster_id,
       :marker,
       keyword_init: true
@@ -3277,6 +3395,7 @@ module Aws::EMR
     #   <p>The pagination token that indicates the next set of results to retrieve.</p>
     #   @return [String]
     class ListInstanceFleetsOutput < Struct.new(
+      nil,
       :instance_fleets,
       :marker,
       keyword_init: true
@@ -3292,6 +3411,7 @@ module Aws::EMR
     #   <p>The pagination token that indicates the next set of results to retrieve.</p>
     #   @return [String]
     class ListInstanceGroupsInput < Struct.new(
+      nil,
       :cluster_id,
       :marker,
       keyword_init: true
@@ -3307,6 +3427,7 @@ module Aws::EMR
     #   <p>The pagination token that indicates the next set of results to retrieve.</p>
     #   @return [String]
     class ListInstanceGroupsOutput < Struct.new(
+      nil,
       :instance_groups,
       :marker,
       keyword_init: true
@@ -3338,6 +3459,7 @@ module Aws::EMR
     #   <p>The pagination token that indicates the next set of results to retrieve.</p>
     #   @return [String]
     class ListInstancesInput < Struct.new(
+      nil,
       :cluster_id,
       :instance_group_id,
       :instance_group_types,
@@ -3358,6 +3480,7 @@ module Aws::EMR
     #   <p>The pagination token that indicates the next set of results to retrieve.</p>
     #   @return [String]
     class ListInstancesOutput < Struct.new(
+      nil,
       :instances,
       :marker,
       keyword_init: true
@@ -3439,6 +3562,7 @@ module Aws::EMR
     #   <p>The unique ID of the execution engine.</p>
     #   @return [String]
     class ListNotebookExecutionsInput < Struct.new(
+      nil,
       :editor_id,
       :status,
       :from,
@@ -3458,6 +3582,7 @@ module Aws::EMR
     #            determine the next set of results to retrieve.</p>
     #   @return [String]
     class ListNotebookExecutionsOutput < Struct.new(
+      nil,
       :notebook_executions,
       :marker,
       keyword_init: true
@@ -3483,6 +3608,7 @@ module Aws::EMR
     #            is <code>100</code>.</p>
     #   @return [Integer]
     class ListReleaseLabelsInput < Struct.new(
+      nil,
       :filters,
       :next_token,
       :max_results,
@@ -3499,6 +3625,7 @@ module Aws::EMR
     #               <code>ListReleaseLabels</code> request.</p>
     #   @return [String]
     class ListReleaseLabelsOutput < Struct.new(
+      nil,
       :release_labels,
       :next_token,
       keyword_init: true
@@ -3510,6 +3637,7 @@ module Aws::EMR
     #   <p>The pagination token that indicates the set of results to retrieve.</p>
     #   @return [String]
     class ListSecurityConfigurationsInput < Struct.new(
+      nil,
       :marker,
       keyword_init: true
     )
@@ -3525,6 +3653,7 @@ module Aws::EMR
     #            required.</p>
     #   @return [String]
     class ListSecurityConfigurationsOutput < Struct.new(
+      nil,
       :security_configurations,
       :marker,
       keyword_init: true
@@ -3551,6 +3680,7 @@ module Aws::EMR
     #            of results to retrieve.</p>
     #   @return [String]
     class ListStepsInput < Struct.new(
+      nil,
       :cluster_id,
       :step_states,
       :step_ids,
@@ -3572,6 +3702,7 @@ module Aws::EMR
     #            of results to retrieve.</p>
     #   @return [String]
     class ListStepsOutput < Struct.new(
+      nil,
       :steps,
       :marker,
       keyword_init: true
@@ -3590,6 +3721,7 @@ module Aws::EMR
     #   <p>The pagination token that indicates the set of results to retrieve.</p>
     #   @return [String]
     class ListStudioSessionMappingsInput < Struct.new(
+      nil,
       :studio_id,
       :identity_type,
       :marker,
@@ -3607,6 +3739,7 @@ module Aws::EMR
     #   <p>The pagination token that indicates the next set of results to retrieve.</p>
     #   @return [String]
     class ListStudioSessionMappingsOutput < Struct.new(
+      nil,
       :session_mappings,
       :marker,
       keyword_init: true
@@ -3618,6 +3751,7 @@ module Aws::EMR
     #   <p>The pagination token that indicates the set of results to retrieve.</p>
     #   @return [String]
     class ListStudiosInput < Struct.new(
+      nil,
       :marker,
       keyword_init: true
     )
@@ -3631,6 +3765,7 @@ module Aws::EMR
     #   <p>The pagination token that indicates the next set of results to retrieve.</p>
     #   @return [String]
     class ListStudiosOutput < Struct.new(
+      nil,
       :studios,
       :marker,
       keyword_init: true
@@ -3651,6 +3786,7 @@ module Aws::EMR
     #   <p>The pagination token that marks the next set of results to retrieve.</p>
     #   @return [String]
     class ListSupportedInstanceTypesInput < Struct.new(
+      nil,
       :release_label,
       :marker,
       keyword_init: true
@@ -3666,6 +3802,7 @@ module Aws::EMR
     #   <p>The pagination token that marks the next set of results to retrieve.</p>
     #   @return [String]
     class ListSupportedInstanceTypesOutput < Struct.new(
+      nil,
       :supported_instance_types,
       :marker,
       keyword_init: true
@@ -3691,6 +3828,7 @@ module Aws::EMR
     #   <p>Determines whether a custom scaling utilization performance index can be set. Possible values include <i>ADVANCED</i> or <i>DEFAULT</i>.</p>
     #   @return [String]
     class ManagedScalingPolicy < Struct.new(
+      nil,
       :compute_limits,
       :utilization_performance_index,
       :scaling_strategy,
@@ -3711,6 +3849,7 @@ module Aws::EMR
     #   <p>The dimension value.</p>
     #   @return [String]
     class MetricDimension < Struct.new(
+      nil,
       :key,
       :value,
       keyword_init: true
@@ -3731,6 +3870,7 @@ module Aws::EMR
     #   <p>Reserved.</p>
     #   @return [Boolean]
     class ModifyClusterInput < Struct.new(
+      nil,
       :cluster_id,
       :step_concurrency_level,
       :extended_support,
@@ -3746,6 +3886,7 @@ module Aws::EMR
     #   <p>Reserved.</p>
     #   @return [Boolean]
     class ModifyClusterOutput < Struct.new(
+      nil,
       :step_concurrency_level,
       :extended_support,
       keyword_init: true
@@ -3760,6 +3901,7 @@ module Aws::EMR
     #   <p>The configuration parameters of the instance fleet.</p>
     #   @return [Types::InstanceFleetModifyConfig]
     class ModifyInstanceFleetInput < Struct.new(
+      nil,
       :cluster_id,
       :instance_fleet,
       keyword_init: true
@@ -3775,6 +3917,7 @@ module Aws::EMR
     #   <p>Instance groups to change.</p>
     #   @return [Array<Types::InstanceGroupModifyConfig>]
     class ModifyInstanceGroupsInput < Struct.new(
+      nil,
       :cluster_id,
       :instance_groups,
       keyword_init: true
@@ -3894,6 +4037,7 @@ module Aws::EMR
     #   <p>The environment variables associated with the notebook execution.</p>
     #   @return [Hash<String, String>]
     class NotebookExecution < Struct.new(
+      nil,
       :notebook_execution_id,
       :editor_id,
       :execution_engine,
@@ -3994,6 +4138,7 @@ module Aws::EMR
     #   <p>The unique ID of the execution engine for the notebook execution.</p>
     #   @return [String]
     class NotebookExecutionSummary < Struct.new(
+      nil,
       :notebook_execution_id,
       :editor_id,
       :notebook_execution_name,
@@ -4016,6 +4161,7 @@ module Aws::EMR
     #            input.</p>
     #   @return [String]
     class NotebookS3LocationForOutput < Struct.new(
+      nil,
       :bucket,
       :key,
       keyword_init: true
@@ -4032,6 +4178,7 @@ module Aws::EMR
     #            input.</p>
     #   @return [String]
     class NotebookS3LocationFromInput < Struct.new(
+      nil,
       :bucket,
       :key,
       keyword_init: true
@@ -4048,6 +4195,7 @@ module Aws::EMR
     #            2.0.20220218.1.</p>
     #   @return [String]
     class OSRelease < Struct.new(
+      nil,
       :label,
       keyword_init: true
     )
@@ -4089,6 +4237,7 @@ module Aws::EMR
     #   <p>The ARN of the Capacity Reservation resource group in which to run the instance.</p>
     #   @return [String]
     class OnDemandCapacityReservationOptions < Struct.new(
+      nil,
       :usage_strategy,
       :capacity_reservation_preference,
       :capacity_reservation_resource_group_arn,
@@ -4116,6 +4265,7 @@ module Aws::EMR
     #            the allocation strategy.</p>
     #   @return [Types::OnDemandCapacityReservationOptions]
     class OnDemandProvisioningSpecification < Struct.new(
+      nil,
       :allocation_strategy,
       :capacity_reservation_options,
       keyword_init: true
@@ -4141,6 +4291,7 @@ module Aws::EMR
     #            capacity.</p>
     #   @return [Types::OnDemandCapacityReservationOptions]
     class OnDemandResizingSpecification < Struct.new(
+      nil,
       :timeout_duration_minutes,
       :allocation_strategy,
       :capacity_reservation_options,
@@ -4158,6 +4309,7 @@ module Aws::EMR
     #            output.</p>
     #   @return [String]
     class OutputNotebookS3LocationForOutput < Struct.new(
+      nil,
       :bucket,
       :key,
       keyword_init: true
@@ -4174,6 +4326,7 @@ module Aws::EMR
     #            output.</p>
     #   @return [String]
     class OutputNotebookS3LocationFromInput < Struct.new(
+      nil,
       :bucket,
       :key,
       keyword_init: true
@@ -4209,6 +4362,7 @@ module Aws::EMR
     #   <p>A collection of tags for the persistent application user interface object.</p>
     #   @return [Array<Types::Tag>]
     class PersistentAppUI < Struct.new(
+      nil,
       :persistent_app_ui_id,
       :persistent_app_ui_type_list,
       :persistent_app_ui_status,
@@ -4238,6 +4392,7 @@ module Aws::EMR
     #            is <code>SPREAD</code> for the <code>MASTER</code> instance role.</p>
     #   @return [String]
     class PlacementGroupConfig < Struct.new(
+      nil,
       :instance_role,
       :placement_strategy,
       keyword_init: true
@@ -4262,6 +4417,7 @@ module Aws::EMR
     #            </note>
     #   @return [Array<String>]
     class PlacementType < Struct.new(
+      nil,
       :availability_zone,
       :availability_zones,
       keyword_init: true
@@ -4279,6 +4435,7 @@ module Aws::EMR
     #   <p>The smallest port number in a specified range of port numbers.</p>
     #   @return [Integer]
     class PortRange < Struct.new(
+      nil,
       :min_range,
       :max_range,
       keyword_init: true
@@ -4298,6 +4455,7 @@ module Aws::EMR
     #   <p>Specifies the definition of the automatic scaling policy.</p>
     #   @return [Types::AutoScalingPolicy]
     class PutAutoScalingPolicyInput < Struct.new(
+      nil,
       :cluster_id,
       :instance_group_id,
       :auto_scaling_policy,
@@ -4320,6 +4478,7 @@ module Aws::EMR
     #   <p>The Amazon Resource Name (ARN) of the cluster.</p>
     #   @return [String]
     class PutAutoScalingPolicyOutput < Struct.new(
+      nil,
       :cluster_id,
       :instance_group_id,
       :auto_scaling_policy,
@@ -4337,6 +4496,7 @@ module Aws::EMR
     #   <p>Specifies the auto-termination policy to attach to the cluster.</p>
     #   @return [Types::AutoTerminationPolicy]
     class PutAutoTerminationPolicyInput < Struct.new(
+      nil,
       :cluster_id,
       :auto_termination_policy,
       keyword_init: true
@@ -4345,6 +4505,7 @@ module Aws::EMR
     end
 
     class PutAutoTerminationPolicyOutput < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -4369,6 +4530,7 @@ module Aws::EMR
     #            </note>
     #   @return [Types::BlockPublicAccessConfiguration]
     class PutBlockPublicAccessConfigurationInput < Struct.new(
+      nil,
       :block_public_access_configuration,
       keyword_init: true
     )
@@ -4376,6 +4538,7 @@ module Aws::EMR
     end
 
     class PutBlockPublicAccessConfigurationOutput < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -4389,6 +4552,7 @@ module Aws::EMR
     #   <p>Specifies the constraints for the managed scaling policy. </p>
     #   @return [Types::ManagedScalingPolicy]
     class PutManagedScalingPolicyInput < Struct.new(
+      nil,
       :cluster_id,
       :managed_scaling_policy,
       keyword_init: true
@@ -4397,6 +4561,7 @@ module Aws::EMR
     end
 
     class PutManagedScalingPolicyOutput < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -4410,6 +4575,7 @@ module Aws::EMR
     #   <p>Optional release label application filter. For example, <code>spark@2.1.0</code>.</p>
     #   @return [String]
     class ReleaseLabelFilter < Struct.new(
+      nil,
       :prefix,
       :application,
       keyword_init: true
@@ -4425,6 +4591,7 @@ module Aws::EMR
     #   <p>Specifies the ID of the instance group to which the scaling policy is applied.</p>
     #   @return [String]
     class RemoveAutoScalingPolicyInput < Struct.new(
+      nil,
       :cluster_id,
       :instance_group_id,
       keyword_init: true
@@ -4433,6 +4600,7 @@ module Aws::EMR
     end
 
     class RemoveAutoScalingPolicyOutput < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -4443,6 +4611,7 @@ module Aws::EMR
     #            policy will be removed.</p>
     #   @return [String]
     class RemoveAutoTerminationPolicyInput < Struct.new(
+      nil,
       :cluster_id,
       keyword_init: true
     )
@@ -4450,6 +4619,7 @@ module Aws::EMR
     end
 
     class RemoveAutoTerminationPolicyOutput < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -4460,6 +4630,7 @@ module Aws::EMR
     #         </p>
     #   @return [String]
     class RemoveManagedScalingPolicyInput < Struct.new(
+      nil,
       :cluster_id,
       keyword_init: true
     )
@@ -4467,6 +4638,7 @@ module Aws::EMR
     end
 
     class RemoveManagedScalingPolicyOutput < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -4482,6 +4654,7 @@ module Aws::EMR
     #   <p>A list of tag keys to remove from the resource.</p>
     #   @return [Array<String>]
     class RemoveTagsInput < Struct.new(
+      nil,
       :resource_id,
       :tag_keys,
       keyword_init: true
@@ -4491,6 +4664,7 @@ module Aws::EMR
 
     # <p>This output indicates the result of removing tags from the resource.</p>
     class RemoveTagsOutput < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -4712,6 +4886,7 @@ module Aws::EMR
     #   <p>Reserved.</p>
     #   @return [Boolean]
     class RunJobFlowInput < Struct.new(
+      nil,
       :name,
       :log_uri,
       :log_encryption_kms_key_id,
@@ -4757,6 +4932,7 @@ module Aws::EMR
     #   <p>The Amazon Resource Name (ARN) of the cluster.</p>
     #   @return [String]
     class RunJobFlowOutput < Struct.new(
+      nil,
       :job_flow_id,
       :cluster_arn,
       keyword_init: true
@@ -4775,6 +4951,7 @@ module Aws::EMR
     #            periodicity of the adjustment.</p>
     #   @return [Types::SimpleScalingPolicyConfiguration]
     class ScalingAction < Struct.new(
+      nil,
       :market,
       :simple_scaling_policy_configuration,
       keyword_init: true
@@ -4796,6 +4973,7 @@ module Aws::EMR
     #            beyond this boundary.</p>
     #   @return [Integer]
     class ScalingConstraints < Struct.new(
+      nil,
       :min_capacity,
       :max_capacity,
       keyword_init: true
@@ -4822,6 +5000,7 @@ module Aws::EMR
     #            triggered.</p>
     #   @return [Types::ScalingTrigger]
     class ScalingRule < Struct.new(
+      nil,
       :name,
       :description,
       :action,
@@ -4837,6 +5016,7 @@ module Aws::EMR
     #            along with other trigger parameters, scaling activity begins.</p>
     #   @return [Types::CloudWatchAlarmDefinition]
     class ScalingTrigger < Struct.new(
+      nil,
       :cloud_watch_alarm_definition,
       keyword_init: true
     )
@@ -4851,6 +5031,7 @@ module Aws::EMR
     #   <p>A list of command line arguments to pass to the bootstrap action script.</p>
     #   @return [Array<String>]
     class ScriptBootstrapActionConfig < Struct.new(
+      nil,
       :path,
       :args,
       keyword_init: true
@@ -4866,6 +5047,7 @@ module Aws::EMR
     #   <p>The date and time the security configuration was created.</p>
     #   @return [Time]
     class SecurityConfigurationSummary < Struct.new(
+      nil,
       :name,
       :creation_date_time,
       keyword_init: true
@@ -4900,6 +5082,7 @@ module Aws::EMR
     #   <p>The time the session mapping was last modified.</p>
     #   @return [Time]
     class SessionMappingDetail < Struct.new(
+      nil,
       :studio_id,
       :identity_id,
       :identity_name,
@@ -4937,6 +5120,7 @@ module Aws::EMR
     #   <p>The time the session mapping was created.</p>
     #   @return [Time]
     class SessionMappingSummary < Struct.new(
+      nil,
       :studio_id,
       :identity_id,
       :identity_name,
@@ -4957,6 +5141,7 @@ module Aws::EMR
     #   <p>A Boolean that indicates whether to terminate the cluster after all steps are executed.</p>
     #   @return [Boolean]
     class SetKeepJobFlowAliveWhenNoStepsInput < Struct.new(
+      nil,
       :job_flow_ids,
       :keep_job_flow_alive_when_no_steps,
       keyword_init: true
@@ -4974,6 +5159,7 @@ module Aws::EMR
     #            job-flow error.</p>
     #   @return [Boolean]
     class SetTerminationProtectionInput < Struct.new(
+      nil,
       :job_flow_ids,
       :termination_protected,
       keyword_init: true
@@ -4990,6 +5176,7 @@ module Aws::EMR
     #   <p>Indicates whether to turn on or turn off graceful unhealthy node replacement.</p>
     #   @return [Boolean]
     class SetUnhealthyNodeReplacementInput < Struct.new(
+      nil,
       :job_flow_ids,
       :unhealthy_node_replacement,
       keyword_init: true
@@ -5010,6 +5197,7 @@ module Aws::EMR
     #            cluster.</p>
     #   @return [Boolean]
     class SetVisibleToAllUsersInput < Struct.new(
+      nil,
       :job_flow_ids,
       :visible_to_all_users,
       keyword_init: true
@@ -5028,6 +5216,7 @@ module Aws::EMR
     #            when shrinking an instance group.</p>
     #   @return [Types::InstanceResizePolicy]
     class ShrinkPolicy < Struct.new(
+      nil,
       :decommission_timeout,
       :instance_resize_policy,
       keyword_init: true
@@ -5066,6 +5255,7 @@ module Aws::EMR
     #            trigger-related scaling activities can start. The default value is 0.</p>
     #   @return [Integer]
     class SimpleScalingPolicyConfiguration < Struct.new(
+      nil,
       :adjustment_type,
       :scaling_adjustment,
       :cool_down,
@@ -5082,6 +5272,7 @@ module Aws::EMR
     #   <p>The returned release label application version. For example, <code>3.2.1</code>.</p>
     #   @return [String]
     class SimplifiedApplication < Struct.new(
+      nil,
       :name,
       :version,
       keyword_init: true
@@ -5140,6 +5331,7 @@ module Aws::EMR
     #            </note>
     #   @return [String]
     class SpotProvisioningSpecification < Struct.new(
+      nil,
       :timeout_duration_minutes,
       :timeout_action,
       :block_duration_minutes,
@@ -5165,6 +5357,7 @@ module Aws::EMR
     #         <code>capacity-optimized</code>.</p>
     #   @return [String]
     class SpotResizingSpecification < Struct.new(
+      nil,
       :timeout_duration_minutes,
       :allocation_strategy,
       keyword_init: true
@@ -5222,6 +5415,7 @@ module Aws::EMR
     #   <p>The environment variables associated with the notebook execution.</p>
     #   @return [Hash<String, String>]
     class StartNotebookExecutionInput < Struct.new(
+      nil,
       :editor_id,
       :relative_path,
       :notebook_execution_name,
@@ -5243,6 +5437,7 @@ module Aws::EMR
     #   <p>The unique identifier of the notebook execution.</p>
     #   @return [String]
     class StartNotebookExecutionOutput < Struct.new(
+      nil,
       :notebook_execution_id,
       keyword_init: true
     )
@@ -5288,6 +5483,7 @@ module Aws::EMR
     #            runtime role ARN.</p>
     #   @return [String]
     class Step < Struct.new(
+      nil,
       :id,
       :name,
       :config,
@@ -5342,6 +5538,7 @@ module Aws::EMR
     #   <p>The JAR file used for the step.</p>
     #   @return [Types::HadoopJarStepConfig]
     class StepConfig < Struct.new(
+      nil,
       :name,
       :action_on_failure,
       :hadoop_jar_step,
@@ -5358,6 +5555,7 @@ module Aws::EMR
     #   <p>The description of the step status.</p>
     #   @return [Types::StepExecutionStatusDetail]
     class StepDetail < Struct.new(
+      nil,
       :step_config,
       :execution_status_detail,
       keyword_init: true
@@ -5382,6 +5580,7 @@ module Aws::EMR
     #   <p>A description of the step's current state.</p>
     #   @return [String]
     class StepExecutionStatusDetail < Struct.new(
+      nil,
       :state,
       :creation_date_time,
       :start_date_time,
@@ -5401,6 +5600,7 @@ module Aws::EMR
     #   <p>The descriptive message for the state change reason.</p>
     #   @return [String]
     class StepStateChangeReason < Struct.new(
+      nil,
       :code,
       :message,
       keyword_init: true
@@ -5423,6 +5623,7 @@ module Aws::EMR
     #   <p>The timeline of the cluster step status over time.</p>
     #   @return [Types::StepTimeline]
     class StepStatus < Struct.new(
+      nil,
       :state,
       :state_change_reason,
       :failure_details,
@@ -5451,6 +5652,7 @@ module Aws::EMR
     #   <p>The current execution status details of the cluster step.</p>
     #   @return [Types::StepStatus]
     class StepSummary < Struct.new(
+      nil,
       :id,
       :name,
       :config,
@@ -5472,6 +5674,7 @@ module Aws::EMR
     #   <p>The date and time when the cluster step execution completed or failed.</p>
     #   @return [Time]
     class StepTimeline < Struct.new(
+      nil,
       :creation_date_time,
       :start_date_time,
       :end_date_time,
@@ -5484,6 +5687,7 @@ module Aws::EMR
     #   <p>The unique identifier of the notebook execution.</p>
     #   @return [String]
     class StopNotebookExecutionInput < Struct.new(
+      nil,
       :notebook_execution_id,
       keyword_init: true
     )
@@ -5569,6 +5773,7 @@ module Aws::EMR
     #   <p>The KMS key identifier (ARN) used to encrypt Amazon EMR Studio workspace and notebook files when backed up to Amazon S3.</p>
     #   @return [String]
     class Studio < Struct.new(
+      nil,
       :studio_id,
       :studio_arn,
       :name,
@@ -5619,6 +5824,7 @@ module Aws::EMR
     #   <p>The time when the Amazon EMR Studio was created.</p>
     #   @return [Time]
     class StudioSummary < Struct.new(
+      nil,
       :studio_id,
       :name,
       :vpc_id,
@@ -5677,6 +5883,7 @@ module Aws::EMR
     #   <p>The CPU architecture, for example <code>X86_64</code> or <code>AARCH64</code>.</p>
     #   @return [String]
     class SupportedInstanceType < Struct.new(
+      nil,
       :type,
       :memory_gb,
       :storage_gb,
@@ -5702,6 +5909,7 @@ module Aws::EMR
     #   <p>The list of user-supplied arguments.</p>
     #   @return [Array<String>]
     class SupportedProductConfig < Struct.new(
+      nil,
       :name,
       :args,
       keyword_init: true
@@ -5721,6 +5929,7 @@ module Aws::EMR
     #               Clusters</a>. </p>
     #   @return [String]
     class Tag < Struct.new(
+      nil,
       :key,
       :value,
       keyword_init: true
@@ -5733,6 +5942,7 @@ module Aws::EMR
     #   <p>A list of job flows to be shut down.</p>
     #   @return [Array<String>]
     class TerminateJobFlowsInput < Struct.new(
+      nil,
       :job_flow_ids,
       keyword_init: true
     )
@@ -5761,6 +5971,7 @@ module Aws::EMR
     #   <p>The KMS key identifier (ARN) used to encrypt Amazon EMR Studio workspace and notebook files when backed up to Amazon S3.</p>
     #   @return [String]
     class UpdateStudioInput < Struct.new(
+      nil,
       :studio_id,
       :name,
       :description,
@@ -5794,6 +6005,7 @@ module Aws::EMR
     #            user or group.</p>
     #   @return [String]
     class UpdateStudioSessionMappingInput < Struct.new(
+      nil,
       :studio_id,
       :identity_id,
       :identity_name,
@@ -5815,6 +6027,7 @@ module Aws::EMR
     #            cluster endpoints.</p>
     #   @return [String]
     class UsernamePassword < Struct.new(
+      nil,
       :username,
       :password,
       keyword_init: true
@@ -5841,6 +6054,7 @@ module Aws::EMR
     #            from 125 - 1000 and is valid only for gp3 volumes.</p>
     #   @return [Integer]
     class VolumeSpecification < Struct.new(
+      nil,
       :volume_type,
       :iops,
       :size_in_gb,

@@ -20,6 +20,7 @@ module Aws::DirectConnect
     #            <p>For information about how to set the prefixes, see <a href="https://docs.aws.amazon.com/directconnect/latest/UserGuide/multi-account-associate-vgw.html#allowed-prefixes">Allowed Prefixes</a> in the <i>Direct Connect User Guide</i>.</p>
     #   @return [Array<Types::RouteFilterPrefix>]
     class AcceptDirectConnectGatewayAssociationProposalRequest < Struct.new(
+      nil,
       :direct_connect_gateway_id,
       :proposal_id,
       :associated_gateway_owner_account,
@@ -33,6 +34,7 @@ module Aws::DirectConnect
     #   <p>Information about an association between a Direct Connect gateway and a virtual gateway or transit gateway.</p>
     #   @return [Types::DirectConnectGatewayAssociation]
     class AcceptDirectConnectGatewayAssociationProposalResult < Struct.new(
+      nil,
       :direct_connect_gateway_association,
       keyword_init: true
     )
@@ -151,6 +153,7 @@ module Aws::DirectConnect
     #   <p>Indicates whether the interconnect hosting this connection supports MAC Security (MACsec).</p>
     #   @return [Boolean]
     class AllocateConnectionOnInterconnectOutput < Struct.new(
+      nil,
       :owner_account,
       :connection_id,
       :connection_name,
@@ -203,6 +206,7 @@ module Aws::DirectConnect
     #   <p>The dedicated VLAN provisioned to the connection.</p>
     #   @return [Integer]
     class AllocateConnectionOnInterconnectRequest < Struct.new(
+      nil,
       :bandwidth,
       :connection_name,
       :owner_account,
@@ -325,6 +329,7 @@ module Aws::DirectConnect
     #   <p>Indicates whether the interconnect hosting this connection supports MAC Security (MACsec).</p>
     #   @return [Boolean]
     class AllocateHostedConnectionOutput < Struct.new(
+      nil,
       :owner_account,
       :connection_id,
       :connection_name,
@@ -380,6 +385,7 @@ module Aws::DirectConnect
     #   <p>The tags associated with the connection.</p>
     #   @return [Array<Types::Tag>]
     class AllocateHostedConnectionRequest < Struct.new(
+      nil,
       :connection_id,
       :owner_account,
       :bandwidth,
@@ -545,6 +551,7 @@ module Aws::DirectConnect
     #   <p>Indicates whether SiteLink is enabled.</p>
     #   @return [Boolean]
     class AllocatePrivateVirtualInterfaceOutput < Struct.new(
+      nil,
       :owner_account,
       :virtual_interface_id,
       :location,
@@ -593,6 +600,7 @@ module Aws::DirectConnect
     #   <p>Information about the private virtual interface.</p>
     #   @return [Types::NewPrivateVirtualInterfaceAllocation]
     class AllocatePrivateVirtualInterfaceRequest < Struct.new(
+      nil,
       :connection_id,
       :owner_account,
       :new_private_virtual_interface_allocation,
@@ -755,6 +763,7 @@ module Aws::DirectConnect
     #   <p>Indicates whether SiteLink is enabled.</p>
     #   @return [Boolean]
     class AllocatePublicVirtualInterfaceOutput < Struct.new(
+      nil,
       :owner_account,
       :virtual_interface_id,
       :location,
@@ -803,6 +812,7 @@ module Aws::DirectConnect
     #   <p>Information about the public virtual interface.</p>
     #   @return [Types::NewPublicVirtualInterfaceAllocation]
     class AllocatePublicVirtualInterfaceRequest < Struct.new(
+      nil,
       :connection_id,
       :owner_account,
       :new_public_virtual_interface_allocation,
@@ -821,6 +831,7 @@ module Aws::DirectConnect
     #   <p>Information about the transit virtual interface.</p>
     #   @return [Types::NewTransitVirtualInterfaceAllocation]
     class AllocateTransitVirtualInterfaceRequest < Struct.new(
+      nil,
       :connection_id,
       :owner_account,
       :new_transit_virtual_interface_allocation,
@@ -833,6 +844,7 @@ module Aws::DirectConnect
     #   <p>Information about the transit virtual interface.</p>
     #   @return [Types::VirtualInterface]
     class AllocateTransitVirtualInterfaceResult < Struct.new(
+      nil,
       :virtual_interface,
       keyword_init: true
     )
@@ -951,6 +963,7 @@ module Aws::DirectConnect
     #   <p>Indicates whether the interconnect hosting this connection supports MAC Security (MACsec).</p>
     #   @return [Boolean]
     class AssociateConnectionWithLagOutput < Struct.new(
+      nil,
       :owner_account,
       :connection_id,
       :connection_name,
@@ -991,6 +1004,7 @@ module Aws::DirectConnect
     #   <p>The ID of the LAG with which to associate the connection.</p>
     #   @return [String]
     class AssociateConnectionWithLagRequest < Struct.new(
+      nil,
       :connection_id,
       :lag_id,
       keyword_init: true
@@ -1110,6 +1124,7 @@ module Aws::DirectConnect
     #   <p>Indicates whether the interconnect hosting this connection supports MAC Security (MACsec).</p>
     #   @return [Boolean]
     class AssociateHostedConnectionOutput < Struct.new(
+      nil,
       :owner_account,
       :connection_id,
       :connection_name,
@@ -1150,6 +1165,7 @@ module Aws::DirectConnect
     #   <p>The ID of the interconnect or the LAG.</p>
     #   @return [String]
     class AssociateHostedConnectionRequest < Struct.new(
+      nil,
       :connection_id,
       :parent_connection_id,
       keyword_init: true
@@ -1179,6 +1195,7 @@ module Aws::DirectConnect
     #            <p>If you use this request parameter, you must use the <code>ckn</code> request parameter and not use the <code>secretARN</code> request parameter.</p>
     #   @return [String]
     class AssociateMacSecKeyRequest < Struct.new(
+      nil,
       :connection_id,
       :secret_arn,
       :ckn,
@@ -1195,6 +1212,7 @@ module Aws::DirectConnect
     #   <p>The MAC Security (MACsec) security keys associated with the connection.</p>
     #   @return [Array<Types::MacSecKey>]
     class AssociateMacSecKeyResponse < Struct.new(
+      nil,
       :connection_id,
       :mac_sec_keys,
       keyword_init: true
@@ -1356,6 +1374,7 @@ module Aws::DirectConnect
     #   <p>Indicates whether SiteLink is enabled.</p>
     #   @return [Boolean]
     class AssociateVirtualInterfaceOutput < Struct.new(
+      nil,
       :owner_account,
       :virtual_interface_id,
       :location,
@@ -1401,6 +1420,7 @@ module Aws::DirectConnect
     #   <p>The ID of the LAG or connection.</p>
     #   @return [String]
     class AssociateVirtualInterfaceRequest < Struct.new(
+      nil,
       :virtual_interface_id,
       :connection_id,
       keyword_init: true
@@ -1419,6 +1439,7 @@ module Aws::DirectConnect
     #   <p>the ID of the Direct Connect gateway attachment.</p>
     #   @return [String]
     class AssociatedCoreNetwork < Struct.new(
+      nil,
       :id,
       :owner_account,
       :attachment_id,
@@ -1441,6 +1462,7 @@ module Aws::DirectConnect
     #   <p>The Region where the associated gateway is located.</p>
     #   @return [String]
     class AssociatedGateway < Struct.new(
+      nil,
       :id,
       :type,
       :owner_account,
@@ -1551,6 +1573,7 @@ module Aws::DirectConnect
     #         different than the device that terminates the physical connection.</p>
     #   @return [String]
     class BGPPeer < Struct.new(
+      nil,
       :bgp_peer_id,
       :asn,
       :asn_long,
@@ -1576,6 +1599,7 @@ module Aws::DirectConnect
     #   <p>The ID of the hosted connection.</p>
     #   @return [String]
     class ConfirmConnectionRequest < Struct.new(
+      nil,
       :connection_id,
       keyword_init: true
     )
@@ -1624,6 +1648,7 @@ module Aws::DirectConnect
     #            </ul>
     #   @return [String]
     class ConfirmConnectionResponse < Struct.new(
+      nil,
       :connection_state,
       keyword_init: true
     )
@@ -1638,6 +1663,7 @@ module Aws::DirectConnect
     #       </p>
     #   @return [String]
     class ConfirmCustomerAgreementRequest < Struct.new(
+      nil,
       :agreement_name,
       keyword_init: true
     )
@@ -1650,6 +1676,7 @@ module Aws::DirectConnect
     #       </p>
     #   @return [String]
     class ConfirmCustomerAgreementResponse < Struct.new(
+      nil,
       :status,
       keyword_init: true
     )
@@ -1666,6 +1693,7 @@ module Aws::DirectConnect
     #   <p>The ID of the Direct Connect gateway.</p>
     #   @return [String]
     class ConfirmPrivateVirtualInterfaceRequest < Struct.new(
+      nil,
       :virtual_interface_id,
       :virtual_gateway_id,
       :direct_connect_gateway_id,
@@ -1720,6 +1748,7 @@ module Aws::DirectConnect
     #            </ul>
     #   @return [String]
     class ConfirmPrivateVirtualInterfaceResponse < Struct.new(
+      nil,
       :virtual_interface_state,
       keyword_init: true
     )
@@ -1730,6 +1759,7 @@ module Aws::DirectConnect
     #   <p>The ID of the virtual interface.</p>
     #   @return [String]
     class ConfirmPublicVirtualInterfaceRequest < Struct.new(
+      nil,
       :virtual_interface_id,
       keyword_init: true
     )
@@ -1782,6 +1812,7 @@ module Aws::DirectConnect
     #            </ul>
     #   @return [String]
     class ConfirmPublicVirtualInterfaceResponse < Struct.new(
+      nil,
       :virtual_interface_state,
       keyword_init: true
     )
@@ -1795,6 +1826,7 @@ module Aws::DirectConnect
     #   <p>The ID of the Direct Connect gateway.</p>
     #   @return [String]
     class ConfirmTransitVirtualInterfaceRequest < Struct.new(
+      nil,
       :virtual_interface_id,
       :direct_connect_gateway_id,
       keyword_init: true
@@ -1848,6 +1880,7 @@ module Aws::DirectConnect
     #            </ul>
     #   @return [String]
     class ConfirmTransitVirtualInterfaceResponse < Struct.new(
+      nil,
       :virtual_interface_state,
       keyword_init: true
     )
@@ -1966,6 +1999,7 @@ module Aws::DirectConnect
     #   <p>Indicates whether the interconnect hosting this connection supports MAC Security (MACsec).</p>
     #   @return [Boolean]
     class Connection < Struct.new(
+      nil,
       :owner_account,
       :connection_id,
       :connection_name,
@@ -2006,6 +2040,7 @@ module Aws::DirectConnect
     #   <p>Information about the BGP peer.</p>
     #   @return [Types::NewBGPPeer]
     class CreateBGPPeerRequest < Struct.new(
+      nil,
       :virtual_interface_id,
       :new_bgp_peer,
       keyword_init: true
@@ -2017,6 +2052,7 @@ module Aws::DirectConnect
     #   <p>The virtual interface.</p>
     #   @return [Types::VirtualInterface]
     class CreateBGPPeerResponse < Struct.new(
+      nil,
       :virtual_interface,
       keyword_init: true
     )
@@ -2135,6 +2171,7 @@ module Aws::DirectConnect
     #   <p>Indicates whether the interconnect hosting this connection supports MAC Security (MACsec).</p>
     #   @return [Boolean]
     class CreateConnectionOutput < Struct.new(
+      nil,
       :owner_account,
       :connection_id,
       :connection_name,
@@ -2191,6 +2228,7 @@ module Aws::DirectConnect
     #            <p>MAC Security (MACsec) is unavailable on hosted connections. For information about MAC Security (MACsec) prerequisites, see  <a href="https://docs.aws.amazon.com/directconnect/latest/UserGuide/MACSec.html">MAC Security in Direct Connect</a> in the <i>Direct Connect User Guide</i>.</p>
     #   @return [Boolean]
     class CreateConnectionRequest < Struct.new(
+      nil,
       :location,
       :bandwidth,
       :connection_name,
@@ -2219,6 +2257,7 @@ module Aws::DirectConnect
     #   <p>The Amazon VPC prefixes to no longer advertise to the Direct Connect gateway.</p>
     #   @return [Array<Types::RouteFilterPrefix>]
     class CreateDirectConnectGatewayAssociationProposalRequest < Struct.new(
+      nil,
       :direct_connect_gateway_id,
       :direct_connect_gateway_owner_account,
       :gateway_id,
@@ -2233,6 +2272,7 @@ module Aws::DirectConnect
     #   <p>Information about the Direct Connect gateway proposal.</p>
     #   @return [Types::DirectConnectGatewayAssociationProposal]
     class CreateDirectConnectGatewayAssociationProposalResult < Struct.new(
+      nil,
       :direct_connect_gateway_association_proposal,
       keyword_init: true
     )
@@ -2254,6 +2294,7 @@ module Aws::DirectConnect
     #   <p>The ID of the virtual private gateway.</p>
     #   @return [String]
     class CreateDirectConnectGatewayAssociationRequest < Struct.new(
+      nil,
       :direct_connect_gateway_id,
       :gateway_id,
       :add_allowed_prefixes_to_direct_connect_gateway,
@@ -2267,6 +2308,7 @@ module Aws::DirectConnect
     #   <p>The association to be created.</p>
     #   @return [Types::DirectConnectGatewayAssociation]
     class CreateDirectConnectGatewayAssociationResult < Struct.new(
+      nil,
       :direct_connect_gateway_association,
       keyword_init: true
     )
@@ -2285,6 +2327,7 @@ module Aws::DirectConnect
     #         65,534 or 4,200,000,000 to 4,294,967,294. The default is 64512.</p>
     #   @return [Integer]
     class CreateDirectConnectGatewayRequest < Struct.new(
+      nil,
       :direct_connect_gateway_name,
       :tags,
       :amazon_side_asn,
@@ -2297,6 +2340,7 @@ module Aws::DirectConnect
     #   <p>The Direct Connect gateway.</p>
     #   @return [Types::DirectConnectGateway]
     class CreateDirectConnectGatewayResult < Struct.new(
+      nil,
       :direct_connect_gateway,
       keyword_init: true
     )
@@ -2396,6 +2440,7 @@ module Aws::DirectConnect
     #   <p>The MAC Security (MACsec) security keys.</p>
     #   @return [Array<Types::MacSecKey>]
     class CreateInterconnectOutput < Struct.new(
+      nil,
       :interconnect_id,
       :interconnect_name,
       :interconnect_state,
@@ -2442,6 +2487,7 @@ module Aws::DirectConnect
     #   <p>Indicates whether you want the interconnect to support MAC Security (MACsec).</p>
     #   @return [Boolean]
     class CreateInterconnectRequest < Struct.new(
+      nil,
       :interconnect_name,
       :bandwidth,
       :location,
@@ -2555,6 +2601,7 @@ module Aws::DirectConnect
     #   <p>The MAC Security (MACsec) security keys associated with the LAG.</p>
     #   @return [Array<Types::MacSecKey>]
     class CreateLagOutput < Struct.new(
+      nil,
       :connections_bandwidth,
       :number_of_connections,
       :lag_id,
@@ -2622,6 +2669,7 @@ module Aws::DirectConnect
     #            </note>
     #   @return [Boolean]
     class CreateLagRequest < Struct.new(
+      nil,
       :number_of_connections,
       :location,
       :connections_bandwidth,
@@ -2790,6 +2838,7 @@ module Aws::DirectConnect
     #   <p>Indicates whether SiteLink is enabled.</p>
     #   @return [Boolean]
     class CreatePrivateVirtualInterfaceOutput < Struct.new(
+      nil,
       :owner_account,
       :virtual_interface_id,
       :location,
@@ -2835,6 +2884,7 @@ module Aws::DirectConnect
     #   <p>Information about the private virtual interface.</p>
     #   @return [Types::NewPrivateVirtualInterface]
     class CreatePrivateVirtualInterfaceRequest < Struct.new(
+      nil,
       :connection_id,
       :new_private_virtual_interface,
       keyword_init: true
@@ -2996,6 +3046,7 @@ module Aws::DirectConnect
     #   <p>Indicates whether SiteLink is enabled.</p>
     #   @return [Boolean]
     class CreatePublicVirtualInterfaceOutput < Struct.new(
+      nil,
       :owner_account,
       :virtual_interface_id,
       :location,
@@ -3041,6 +3092,7 @@ module Aws::DirectConnect
     #   <p>Information about the public virtual interface.</p>
     #   @return [Types::NewPublicVirtualInterface]
     class CreatePublicVirtualInterfaceRequest < Struct.new(
+      nil,
       :connection_id,
       :new_public_virtual_interface,
       keyword_init: true
@@ -3055,6 +3107,7 @@ module Aws::DirectConnect
     #   <p>Information about the transit virtual interface.</p>
     #   @return [Types::NewTransitVirtualInterface]
     class CreateTransitVirtualInterfaceRequest < Struct.new(
+      nil,
       :connection_id,
       :new_transit_virtual_interface,
       keyword_init: true
@@ -3066,6 +3119,7 @@ module Aws::DirectConnect
     #   <p>Information about a virtual interface.</p>
     #   @return [Types::VirtualInterface]
     class CreateTransitVirtualInterfaceResult < Struct.new(
+      nil,
       :virtual_interface,
       keyword_init: true
     )
@@ -3081,6 +3135,7 @@ module Aws::DirectConnect
     #            </p>
     #   @return [String]
     class CustomerAgreement < Struct.new(
+      nil,
       :agreement_name,
       :status,
       keyword_init: true
@@ -3132,6 +3187,7 @@ module Aws::DirectConnect
     #   <p>The ID of the BGP peer.</p>
     #   @return [String]
     class DeleteBGPPeerRequest < Struct.new(
+      nil,
       :virtual_interface_id,
       :asn,
       :asn_long,
@@ -3146,6 +3202,7 @@ module Aws::DirectConnect
     #   <p>The virtual interface.</p>
     #   @return [Types::VirtualInterface]
     class DeleteBGPPeerResponse < Struct.new(
+      nil,
       :virtual_interface,
       keyword_init: true
     )
@@ -3264,6 +3321,7 @@ module Aws::DirectConnect
     #   <p>Indicates whether the interconnect hosting this connection supports MAC Security (MACsec).</p>
     #   @return [Boolean]
     class DeleteConnectionOutput < Struct.new(
+      nil,
       :owner_account,
       :connection_id,
       :connection_name,
@@ -3301,6 +3359,7 @@ module Aws::DirectConnect
     #   <p>The ID of the connection.</p>
     #   @return [String]
     class DeleteConnectionRequest < Struct.new(
+      nil,
       :connection_id,
       keyword_init: true
     )
@@ -3311,6 +3370,7 @@ module Aws::DirectConnect
     #   <p>The ID of the proposal.</p>
     #   @return [String]
     class DeleteDirectConnectGatewayAssociationProposalRequest < Struct.new(
+      nil,
       :proposal_id,
       keyword_init: true
     )
@@ -3321,6 +3381,7 @@ module Aws::DirectConnect
     #   <p>The ID of the associated gateway.</p>
     #   @return [Types::DirectConnectGatewayAssociationProposal]
     class DeleteDirectConnectGatewayAssociationProposalResult < Struct.new(
+      nil,
       :direct_connect_gateway_association_proposal,
       keyword_init: true
     )
@@ -3337,6 +3398,7 @@ module Aws::DirectConnect
     #   <p>The ID of the virtual private gateway.</p>
     #   @return [String]
     class DeleteDirectConnectGatewayAssociationRequest < Struct.new(
+      nil,
       :association_id,
       :direct_connect_gateway_id,
       :virtual_gateway_id,
@@ -3349,6 +3411,7 @@ module Aws::DirectConnect
     #   <p>Information about the deleted association.</p>
     #   @return [Types::DirectConnectGatewayAssociation]
     class DeleteDirectConnectGatewayAssociationResult < Struct.new(
+      nil,
       :direct_connect_gateway_association,
       keyword_init: true
     )
@@ -3359,6 +3422,7 @@ module Aws::DirectConnect
     #   <p>The ID of the Direct Connect gateway.</p>
     #   @return [String]
     class DeleteDirectConnectGatewayRequest < Struct.new(
+      nil,
       :direct_connect_gateway_id,
       keyword_init: true
     )
@@ -3369,6 +3433,7 @@ module Aws::DirectConnect
     #   <p>The Direct Connect gateway.</p>
     #   @return [Types::DirectConnectGateway]
     class DeleteDirectConnectGatewayResult < Struct.new(
+      nil,
       :direct_connect_gateway,
       keyword_init: true
     )
@@ -3379,6 +3444,7 @@ module Aws::DirectConnect
     #   <p>The ID of the interconnect.</p>
     #   @return [String]
     class DeleteInterconnectRequest < Struct.new(
+      nil,
       :interconnect_id,
       keyword_init: true
     )
@@ -3420,6 +3486,7 @@ module Aws::DirectConnect
     #            </ul>
     #   @return [String]
     class DeleteInterconnectResponse < Struct.new(
+      nil,
       :interconnect_state,
       keyword_init: true
     )
@@ -3527,6 +3594,7 @@ module Aws::DirectConnect
     #   <p>The MAC Security (MACsec) security keys associated with the LAG.</p>
     #   @return [Array<Types::MacSecKey>]
     class DeleteLagOutput < Struct.new(
+      nil,
       :connections_bandwidth,
       :number_of_connections,
       :lag_id,
@@ -3564,6 +3632,7 @@ module Aws::DirectConnect
     #   <p>The ID of the LAG.</p>
     #   @return [String]
     class DeleteLagRequest < Struct.new(
+      nil,
       :lag_id,
       keyword_init: true
     )
@@ -3574,6 +3643,7 @@ module Aws::DirectConnect
     #   <p>The ID of the virtual interface.</p>
     #   @return [String]
     class DeleteVirtualInterfaceRequest < Struct.new(
+      nil,
       :virtual_interface_id,
       keyword_init: true
     )
@@ -3626,6 +3696,7 @@ module Aws::DirectConnect
     #            </ul>
     #   @return [String]
     class DeleteVirtualInterfaceResponse < Struct.new(
+      nil,
       :virtual_interface_state,
       keyword_init: true
     )
@@ -3643,6 +3714,7 @@ module Aws::DirectConnect
     #   <p>The standard media type for the LOA-CFA document. The only supported value is application/pdf.</p>
     #   @return [String]
     class DescribeConnectionLoaRequest < Struct.new(
+      nil,
       :connection_id,
       :provider_name,
       :loa_content_type,
@@ -3655,6 +3727,7 @@ module Aws::DirectConnect
     #   <p>The Letter of Authorization - Connecting Facility Assignment (LOA-CFA).</p>
     #   @return [Types::Loa]
     class DescribeConnectionLoaResponse < Struct.new(
+      nil,
       :loa,
       keyword_init: true
     )
@@ -3668,6 +3741,7 @@ module Aws::DirectConnect
     #   <p>The token to use to retrieve the next page of results. This value is <code>null</code> when there are no more results to return.</p>
     #   @return [String]
     class DescribeConnectionsOnInterconnectOutput < Struct.new(
+      nil,
       :connections,
       :next_token,
       keyword_init: true
@@ -3679,6 +3753,7 @@ module Aws::DirectConnect
     #   <p>The ID of the interconnect.</p>
     #   @return [String]
     class DescribeConnectionsOnInterconnectRequest < Struct.new(
+      nil,
       :interconnect_id,
       keyword_init: true
     )
@@ -3692,6 +3767,7 @@ module Aws::DirectConnect
     #   <p>The token to use to retrieve the next page of results. This value is <code>null</code> when there are no more results to return.</p>
     #   @return [String]
     class DescribeConnectionsOutput < Struct.new(
+      nil,
       :connections,
       :next_token,
       keyword_init: true
@@ -3712,6 +3788,7 @@ module Aws::DirectConnect
     #   <p>The token for the next page of results.</p>
     #   @return [String]
     class DescribeConnectionsRequest < Struct.new(
+      nil,
       :connection_id,
       :max_results,
       :next_token,
@@ -3738,6 +3815,7 @@ module Aws::DirectConnect
     #            </ul>
     #   @return [String]
     class DescribeCustomerMetadataResponse < Struct.new(
+      nil,
       :agreements,
       :nni_partner_type,
       keyword_init: true
@@ -3764,6 +3842,7 @@ module Aws::DirectConnect
     #   <p>The token for the next page of results.</p>
     #   @return [String]
     class DescribeDirectConnectGatewayAssociationProposalsRequest < Struct.new(
+      nil,
       :direct_connect_gateway_id,
       :proposal_id,
       :associated_gateway_id,
@@ -3781,6 +3860,7 @@ module Aws::DirectConnect
     #   <p>The token to use to retrieve the next page of results. This value is <code>null</code> when there are no more results to return.</p>
     #   @return [String]
     class DescribeDirectConnectGatewayAssociationProposalsResult < Struct.new(
+      nil,
       :direct_connect_gateway_association_proposals,
       :next_token,
       keyword_init: true
@@ -3810,6 +3890,7 @@ module Aws::DirectConnect
     #   <p>The ID of the virtual private gateway or transit gateway.</p>
     #   @return [String]
     class DescribeDirectConnectGatewayAssociationsRequest < Struct.new(
+      nil,
       :association_id,
       :associated_gateway_id,
       :direct_connect_gateway_id,
@@ -3828,6 +3909,7 @@ module Aws::DirectConnect
     #   <p>The token to retrieve the next page.</p>
     #   @return [String]
     class DescribeDirectConnectGatewayAssociationsResult < Struct.new(
+      nil,
       :direct_connect_gateway_associations,
       :next_token,
       keyword_init: true
@@ -3851,6 +3933,7 @@ module Aws::DirectConnect
     #   <p>The token provided in the previous call to retrieve the next page.</p>
     #   @return [String]
     class DescribeDirectConnectGatewayAttachmentsRequest < Struct.new(
+      nil,
       :direct_connect_gateway_id,
       :virtual_interface_id,
       :max_results,
@@ -3867,6 +3950,7 @@ module Aws::DirectConnect
     #   <p>The token to retrieve the next page.</p>
     #   @return [String]
     class DescribeDirectConnectGatewayAttachmentsResult < Struct.new(
+      nil,
       :direct_connect_gateway_attachments,
       :next_token,
       keyword_init: true
@@ -3887,6 +3971,7 @@ module Aws::DirectConnect
     #   <p>The token provided in the previous call to retrieve the next page.</p>
     #   @return [String]
     class DescribeDirectConnectGatewaysRequest < Struct.new(
+      nil,
       :direct_connect_gateway_id,
       :max_results,
       :next_token,
@@ -3902,6 +3987,7 @@ module Aws::DirectConnect
     #   <p>The token to retrieve the next page.</p>
     #   @return [String]
     class DescribeDirectConnectGatewaysResult < Struct.new(
+      nil,
       :direct_connect_gateways,
       :next_token,
       keyword_init: true
@@ -3916,6 +4002,7 @@ module Aws::DirectConnect
     #   <p>The token to use to retrieve the next page of results. This value is <code>null</code> when there are no more results to return.</p>
     #   @return [String]
     class DescribeHostedConnectionsOutput < Struct.new(
+      nil,
       :connections,
       :next_token,
       keyword_init: true
@@ -3936,6 +4023,7 @@ module Aws::DirectConnect
     #   <p>The token for the next page of results.</p>
     #   @return [String]
     class DescribeHostedConnectionsRequest < Struct.new(
+      nil,
       :connection_id,
       :max_results,
       :next_token,
@@ -3954,6 +4042,7 @@ module Aws::DirectConnect
     #   <p>The standard media type for the LOA-CFA document. The only supported value is application/pdf.</p>
     #   @return [String]
     class DescribeInterconnectLoaRequest < Struct.new(
+      nil,
       :interconnect_id,
       :provider_name,
       :loa_content_type,
@@ -3966,6 +4055,7 @@ module Aws::DirectConnect
     #   <p>The Letter of Authorization - Connecting Facility Assignment (LOA-CFA).</p>
     #   @return [Types::Loa]
     class DescribeInterconnectLoaResponse < Struct.new(
+      nil,
       :loa,
       keyword_init: true
     )
@@ -3979,6 +4069,7 @@ module Aws::DirectConnect
     #   <p>The token to use to retrieve the next page of results. This value is <code>null</code> when there are no more results to return.</p>
     #   @return [String]
     class DescribeInterconnectsOutput < Struct.new(
+      nil,
       :interconnects,
       :next_token,
       keyword_init: true
@@ -3999,6 +4090,7 @@ module Aws::DirectConnect
     #   <p>The token for the next page of results.</p>
     #   @return [String]
     class DescribeInterconnectsRequest < Struct.new(
+      nil,
       :interconnect_id,
       :max_results,
       :next_token,
@@ -4014,6 +4106,7 @@ module Aws::DirectConnect
     #   <p>The token to use to retrieve the next page of results. This value is <code>null</code> when there are no more results to return.</p>
     #   @return [String]
     class DescribeLagsOutput < Struct.new(
+      nil,
       :lags,
       :next_token,
       keyword_init: true
@@ -4034,6 +4127,7 @@ module Aws::DirectConnect
     #   <p>The token for the next page of results.</p>
     #   @return [String]
     class DescribeLagsRequest < Struct.new(
+      nil,
       :lag_id,
       :max_results,
       :next_token,
@@ -4050,6 +4144,7 @@ module Aws::DirectConnect
     #   <p>The standard media type for the LOA-CFA document. The only supported value is application/pdf.</p>
     #   @return [String]
     class DescribeLoaOutput < Struct.new(
+      nil,
       :loa_content,
       :loa_content_type,
       keyword_init: true
@@ -4068,6 +4163,7 @@ module Aws::DirectConnect
     #   <p>The standard media type for the LOA-CFA document. The only supported value is application/pdf.</p>
     #   @return [String]
     class DescribeLoaRequest < Struct.new(
+      nil,
       :connection_id,
       :provider_name,
       :loa_content_type,
@@ -4080,6 +4176,7 @@ module Aws::DirectConnect
     #   <p>The locations.</p>
     #   @return [Array<Types::Location>]
     class DescribeLocationsOutput < Struct.new(
+      nil,
       :locations,
       keyword_init: true
     )
@@ -4094,6 +4191,7 @@ module Aws::DirectConnect
     #   <p>Identifies the router by a combination of vendor, platform, and software version. For example, <code>CiscoSystemsInc-2900SeriesRouters-IOS124</code>.</p>
     #   @return [String]
     class DescribeRouterConfigurationRequest < Struct.new(
+      nil,
       :virtual_interface_id,
       :router_type_identifier,
       keyword_init: true
@@ -4114,6 +4212,7 @@ module Aws::DirectConnect
     #   <p>Provides the details about a virtual interface's router.</p>
     #   @return [String]
     class DescribeRouterConfigurationResponse < Struct.new(
+      nil,
       :customer_router_config,
       :router,
       :virtual_interface_id,
@@ -4127,6 +4226,7 @@ module Aws::DirectConnect
     #   <p>The Amazon Resource Names (ARNs) of the resources.</p>
     #   @return [Array<String>]
     class DescribeTagsRequest < Struct.new(
+      nil,
       :resource_arns,
       keyword_init: true
     )
@@ -4137,6 +4237,7 @@ module Aws::DirectConnect
     #   <p>Information about the tags.</p>
     #   @return [Array<Types::ResourceTag>]
     class DescribeTagsResponse < Struct.new(
+      nil,
       :resource_tags,
       keyword_init: true
     )
@@ -4147,6 +4248,7 @@ module Aws::DirectConnect
     #   <p>The virtual private gateways.</p>
     #   @return [Array<Types::VirtualGateway>]
     class DescribeVirtualGatewaysOutput < Struct.new(
+      nil,
       :virtual_gateways,
       keyword_init: true
     )
@@ -4160,6 +4262,7 @@ module Aws::DirectConnect
     #   <p>The token to use to retrieve the next page of results. This value is <code>null</code> when there are no more results to return.</p>
     #   @return [String]
     class DescribeVirtualInterfacesOutput < Struct.new(
+      nil,
       :virtual_interfaces,
       :next_token,
       keyword_init: true
@@ -4183,6 +4286,7 @@ module Aws::DirectConnect
     #   <p>The token for the next page of results.</p>
     #   @return [String]
     class DescribeVirtualInterfacesRequest < Struct.new(
+      nil,
       :connection_id,
       :virtual_interface_id,
       :max_results,
@@ -4196,6 +4300,7 @@ module Aws::DirectConnect
     # @!attribute message
     #   @return [String]
     class DirectConnectClientException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -4243,6 +4348,7 @@ module Aws::DirectConnect
     #   <p>Information about a tag.</p>
     #   @return [Array<Types::Tag>]
     class DirectConnectGateway < Struct.new(
+      nil,
       :direct_connect_gateway_id,
       :direct_connect_gateway_name,
       :amazon_side_asn,
@@ -4313,6 +4419,7 @@ module Aws::DirectConnect
     #   <p>The ID of the Amazon Web Services account that owns the virtual private gateway.</p>
     #   @return [String]
     class DirectConnectGatewayAssociation < Struct.new(
+      nil,
       :direct_connect_gateway_id,
       :direct_connect_gateway_owner_account,
       :association_state,
@@ -4366,6 +4473,7 @@ module Aws::DirectConnect
     #   <p>The Amazon VPC prefixes to advertise to the Direct Connect gateway.</p>
     #   @return [Array<Types::RouteFilterPrefix>]
     class DirectConnectGatewayAssociationProposal < Struct.new(
+      nil,
       :proposal_id,
       :direct_connect_gateway_id,
       :direct_connect_gateway_owner_account,
@@ -4419,6 +4527,7 @@ module Aws::DirectConnect
     #   <p>The error message if the state of an object failed to advance.</p>
     #   @return [String]
     class DirectConnectGatewayAttachment < Struct.new(
+      nil,
       :direct_connect_gateway_id,
       :virtual_interface_id,
       :virtual_interface_region,
@@ -4435,6 +4544,7 @@ module Aws::DirectConnect
     # @!attribute message
     #   @return [String]
     class DirectConnectServerException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -4553,6 +4663,7 @@ module Aws::DirectConnect
     #   <p>Indicates whether the interconnect hosting this connection supports MAC Security (MACsec).</p>
     #   @return [Boolean]
     class DisassociateConnectionFromLagOutput < Struct.new(
+      nil,
       :owner_account,
       :connection_id,
       :connection_name,
@@ -4593,6 +4704,7 @@ module Aws::DirectConnect
     #   <p>The ID of the LAG.</p>
     #   @return [String]
     class DisassociateConnectionFromLagRequest < Struct.new(
+      nil,
       :connection_id,
       :lag_id,
       keyword_init: true
@@ -4609,6 +4721,7 @@ module Aws::DirectConnect
     #            <p>You can use <a>DescribeConnections</a> to retrieve the ARN of the MAC Security (MACsec) secret key.</p>
     #   @return [String]
     class DisassociateMacSecKeyRequest < Struct.new(
+      nil,
       :connection_id,
       :secret_arn,
       keyword_init: true
@@ -4623,6 +4736,7 @@ module Aws::DirectConnect
     #   <p>The MAC Security (MACsec) security keys no longer associated with the connection.</p>
     #   @return [Array<Types::MacSecKey>]
     class DisassociateMacSecKeyResponse < Struct.new(
+      nil,
       :connection_id,
       :mac_sec_keys,
       keyword_init: true
@@ -4634,6 +4748,7 @@ module Aws::DirectConnect
     # @!attribute message
     #   @return [String]
     class DuplicateTagKeysException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -4733,6 +4848,7 @@ module Aws::DirectConnect
     #   <p>The MAC Security (MACsec) security keys.</p>
     #   @return [Array<Types::MacSecKey>]
     class Interconnect < Struct.new(
+      nil,
       :interconnect_id,
       :interconnect_name,
       :interconnect_state,
@@ -4858,6 +4974,7 @@ module Aws::DirectConnect
     #   <p>The MAC Security (MACsec) security keys associated with the LAG.</p>
     #   @return [Array<Types::MacSecKey>]
     class Lag < Struct.new(
+      nil,
       :connections_bandwidth,
       :number_of_connections,
       :lag_id,
@@ -4913,6 +5030,7 @@ module Aws::DirectConnect
     #   <p>The token for the next page of results.</p>
     #   @return [String]
     class ListVirtualInterfaceTestHistoryRequest < Struct.new(
+      nil,
       :test_id,
       :virtual_interface_id,
       :bgp_peers,
@@ -4931,6 +5049,7 @@ module Aws::DirectConnect
     #   <p>The token to use to retrieve the next page of results. This value is <code>null</code> when there are no more results to return.</p>
     #   @return [String]
     class ListVirtualInterfaceTestHistoryResponse < Struct.new(
+      nil,
       :virtual_interface_test_history,
       :next_token,
       keyword_init: true
@@ -4946,6 +5065,7 @@ module Aws::DirectConnect
     #   <p>The standard media type for the LOA-CFA document. The only supported value is application/pdf.</p>
     #   @return [String]
     class Loa < Struct.new(
+      nil,
       :loa_content,
       :loa_content_type,
       keyword_init: true
@@ -4973,6 +5093,7 @@ module Aws::DirectConnect
     #   <p>The available MAC Security (MACsec) port speeds for the location.</p>
     #   @return [Array<String>]
     class Location < Struct.new(
+      nil,
       :location_code,
       :location_name,
       :region,
@@ -5017,6 +5138,7 @@ module Aws::DirectConnect
     #   <p>The date that the MAC Security (MACsec) secret key takes effect. The value is displayed in UTC format.</p>
     #   @return [String]
     class MacSecKey < Struct.new(
+      nil,
       :secret_arn,
       :ckn,
       :state,
@@ -5046,6 +5168,7 @@ module Aws::DirectConnect
     #   <p>The IP address assigned to the customer interface.</p>
     #   @return [String]
     class NewBGPPeer < Struct.new(
+      nil,
       :asn,
       :asn_long,
       :auth_key,
@@ -5132,6 +5255,7 @@ module Aws::DirectConnect
     #   <p>Indicates whether to enable or disable SiteLink.</p>
     #   @return [Boolean]
     class NewPrivateVirtualInterface < Struct.new(
+      nil,
       :virtual_interface_name,
       :vlan,
       :asn,
@@ -5217,6 +5341,7 @@ module Aws::DirectConnect
     #   <p>The tags associated with the private virtual interface.</p>
     #   @return [Array<Types::Tag>]
     class NewPrivateVirtualInterfaceAllocation < Struct.new(
+      nil,
       :virtual_interface_name,
       :vlan,
       :asn,
@@ -5298,6 +5423,7 @@ module Aws::DirectConnect
     #   <p>The tags associated with the public virtual interface.</p>
     #   @return [Array<Types::Tag>]
     class NewPublicVirtualInterface < Struct.new(
+      nil,
       :virtual_interface_name,
       :vlan,
       :asn,
@@ -5380,6 +5506,7 @@ module Aws::DirectConnect
     #   <p>The tags associated with the public virtual interface.</p>
     #   @return [Array<Types::Tag>]
     class NewPublicVirtualInterfaceAllocation < Struct.new(
+      nil,
       :virtual_interface_name,
       :vlan,
       :asn,
@@ -5467,6 +5594,7 @@ module Aws::DirectConnect
     #   <p>Indicates whether to enable or disable SiteLink.</p>
     #   @return [Boolean]
     class NewTransitVirtualInterface < Struct.new(
+      nil,
       :virtual_interface_name,
       :vlan,
       :asn,
@@ -5551,6 +5679,7 @@ module Aws::DirectConnect
     #   <p>The tags associated with the transitive virtual interface.</p>
     #   @return [Array<Types::Tag>]
     class NewTransitVirtualInterfaceAllocation < Struct.new(
+      nil,
       :virtual_interface_name,
       :vlan,
       :asn,
@@ -5580,6 +5709,7 @@ module Aws::DirectConnect
     #   <p>The tags.</p>
     #   @return [Array<Types::Tag>]
     class ResourceTag < Struct.new(
+      nil,
       :resource_arn,
       :tags,
       keyword_init: true
@@ -5593,6 +5723,7 @@ module Aws::DirectConnect
     #   <p>The CIDR block for the advertised route. Separate multiple routes using commas. An IPv6 CIDR must use /64 or shorter.</p>
     #   @return [String]
     class RouteFilterPrefix < Struct.new(
+      nil,
       :cidr,
       keyword_init: true
     )
@@ -5619,6 +5750,7 @@ module Aws::DirectConnect
     #   <p>Identifies the router by a combination of vendor, platform, and software version. For example, <code>CiscoSystemsInc-2900SeriesRouters-IOS124</code>.</p>
     #   @return [String]
     class RouterType < Struct.new(
+      nil,
       :vendor,
       :platform,
       :software,
@@ -5642,6 +5774,7 @@ module Aws::DirectConnect
     #            <p>Default: 180 minutes (3 hours).</p>
     #   @return [Integer]
     class StartBgpFailoverTestRequest < Struct.new(
+      nil,
       :virtual_interface_id,
       :bgp_peers,
       :test_duration_in_minutes,
@@ -5654,6 +5787,7 @@ module Aws::DirectConnect
     #   <p>Information about the virtual interface failover test.</p>
     #   @return [Types::VirtualInterfaceTestHistory]
     class StartBgpFailoverTestResponse < Struct.new(
+      nil,
       :virtual_interface_test,
       keyword_init: true
     )
@@ -5664,6 +5798,7 @@ module Aws::DirectConnect
     #   <p>The ID of the virtual interface you no longer want to test.</p>
     #   @return [String]
     class StopBgpFailoverTestRequest < Struct.new(
+      nil,
       :virtual_interface_id,
       keyword_init: true
     )
@@ -5674,6 +5809,7 @@ module Aws::DirectConnect
     #   <p>Information about the virtual interface failover test.</p>
     #   @return [Types::VirtualInterfaceTestHistory]
     class StopBgpFailoverTestResponse < Struct.new(
+      nil,
       :virtual_interface_test,
       keyword_init: true
     )
@@ -5688,6 +5824,7 @@ module Aws::DirectConnect
     #   <p>The value.</p>
     #   @return [String]
     class Tag < Struct.new(
+      nil,
       :key,
       :value,
       keyword_init: true
@@ -5702,6 +5839,7 @@ module Aws::DirectConnect
     #   <p>The tags to add.</p>
     #   @return [Array<Types::Tag>]
     class TagResourceRequest < Struct.new(
+      nil,
       :resource_arn,
       :tags,
       keyword_init: true
@@ -5710,6 +5848,7 @@ module Aws::DirectConnect
     end
 
     class TagResourceResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -5719,6 +5858,7 @@ module Aws::DirectConnect
     # @!attribute message
     #   @return [String]
     class TooManyTagsException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -5732,6 +5872,7 @@ module Aws::DirectConnect
     #   <p>The tag keys of the tags to remove.</p>
     #   @return [Array<String>]
     class UntagResourceRequest < Struct.new(
+      nil,
       :resource_arn,
       :tag_keys,
       keyword_init: true
@@ -5740,6 +5881,7 @@ module Aws::DirectConnect
     end
 
     class UntagResourceResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -5857,6 +5999,7 @@ module Aws::DirectConnect
     #   <p>Indicates whether the interconnect hosting this connection supports MAC Security (MACsec).</p>
     #   @return [Boolean]
     class UpdateConnectionOutput < Struct.new(
+      nil,
       :owner_account,
       :connection_id,
       :connection_name,
@@ -5902,6 +6045,7 @@ module Aws::DirectConnect
     #            <p>The valid values are <code>no_encrypt</code>, <code>should_encrypt</code>, and <code>must_encrypt</code>.</p>
     #   @return [String]
     class UpdateConnectionRequest < Struct.new(
+      nil,
       :connection_id,
       :connection_name,
       :encryption_mode,
@@ -5920,6 +6064,7 @@ module Aws::DirectConnect
     #   <p>The Amazon VPC prefixes to no longer advertise to the Direct Connect gateway.</p>
     #   @return [Array<Types::RouteFilterPrefix>]
     class UpdateDirectConnectGatewayAssociationRequest < Struct.new(
+      nil,
       :association_id,
       :add_allowed_prefixes_to_direct_connect_gateway,
       :remove_allowed_prefixes_to_direct_connect_gateway,
@@ -5932,6 +6077,7 @@ module Aws::DirectConnect
     #   <p>Information about an association between a Direct Connect gateway and a virtual private gateway or transit gateway.</p>
     #   @return [Types::DirectConnectGatewayAssociation]
     class UpdateDirectConnectGatewayAssociationResult < Struct.new(
+      nil,
       :direct_connect_gateway_association,
       keyword_init: true
     )
@@ -5945,6 +6091,7 @@ module Aws::DirectConnect
     #   <p>The new name for the Direct Connect gateway.</p>
     #   @return [String]
     class UpdateDirectConnectGatewayRequest < Struct.new(
+      nil,
       :direct_connect_gateway_id,
       :new_direct_connect_gateway_name,
       keyword_init: true
@@ -5956,6 +6103,7 @@ module Aws::DirectConnect
     #   <p>Informaiton about a Direct Connect gateway, which enables you to connect virtual interfaces and virtual private gateways or transit gateways.</p>
     #   @return [Types::DirectConnectGateway]
     class UpdateDirectConnectGatewayResponse < Struct.new(
+      nil,
       :direct_connect_gateway,
       keyword_init: true
     )
@@ -6063,6 +6211,7 @@ module Aws::DirectConnect
     #   <p>The MAC Security (MACsec) security keys associated with the LAG.</p>
     #   @return [Array<Types::MacSecKey>]
     class UpdateLagOutput < Struct.new(
+      nil,
       :connections_bandwidth,
       :number_of_connections,
       :lag_id,
@@ -6110,6 +6259,7 @@ module Aws::DirectConnect
     #            <p>Amazon Web Services applies the value to all connections which are part of the LAG.</p>
     #   @return [String]
     class UpdateLagRequest < Struct.new(
+      nil,
       :lag_id,
       :lag_name,
       :minimum_links,
@@ -6273,6 +6423,7 @@ module Aws::DirectConnect
     #   <p>Indicates whether SiteLink is enabled.</p>
     #   @return [Boolean]
     class UpdateVirtualInterfaceAttributesOutput < Struct.new(
+      nil,
       :owner_account,
       :virtual_interface_id,
       :location,
@@ -6324,6 +6475,7 @@ module Aws::DirectConnect
     #   <p>The name of the virtual private interface.</p>
     #   @return [String]
     class UpdateVirtualInterfaceAttributesRequest < Struct.new(
+      nil,
       :virtual_interface_id,
       :mtu,
       :enable_site_link,
@@ -6359,6 +6511,7 @@ module Aws::DirectConnect
     #            </ul>
     #   @return [String]
     class VirtualGateway < Struct.new(
+      nil,
       :virtual_gateway_id,
       :virtual_gateway_state,
       keyword_init: true
@@ -6520,6 +6673,7 @@ module Aws::DirectConnect
     #   <p>Indicates whether SiteLink is enabled.</p>
     #   @return [Boolean]
     class VirtualInterface < Struct.new(
+      nil,
       :owner_account,
       :virtual_interface_id,
       :location,
@@ -6584,6 +6738,7 @@ module Aws::DirectConnect
     #   <p>The time that the virtual interface moves out of the DOWN state.</p>
     #   @return [Time]
     class VirtualInterfaceTestHistory < Struct.new(
+      nil,
       :test_id,
       :virtual_interface_id,
       :bgp_peers,

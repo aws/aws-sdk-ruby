@@ -18,6 +18,7 @@ module Aws::DirectoryServiceData
     #   <p> Reason the request was unauthorized. </p>
     #   @return [String]
     class AccessDeniedException < Struct.new(
+      nil,
       :message,
       :reason,
       keyword_init: true
@@ -56,6 +57,7 @@ module Aws::DirectoryServiceData
     #            </note>
     #   @return [String]
     class AddGroupMemberRequest < Struct.new(
+      nil,
       :directory_id,
       :group_name,
       :member_name,
@@ -67,6 +69,7 @@ module Aws::DirectoryServiceData
     end
 
     class AddGroupMemberResult < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -128,6 +131,7 @@ module Aws::DirectoryServiceData
     # @!attribute message
     #   @return [String]
     class ConflictException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -163,6 +167,7 @@ module Aws::DirectoryServiceData
     #            </note>
     #   @return [String]
     class CreateGroupRequest < Struct.new(
+      nil,
       :directory_id,
       :sam_account_name,
       :group_type,
@@ -184,6 +189,7 @@ module Aws::DirectoryServiceData
     #   <p> The unique security identifier (SID) of the group. </p>
     #   @return [String]
     class CreateGroupResult < Struct.new(
+      nil,
       :directory_id,
       :sam_account_name,
       :sid,
@@ -228,6 +234,7 @@ module Aws::DirectoryServiceData
     #            </note>
     #   @return [String]
     class CreateUserRequest < Struct.new(
+      nil,
       :directory_id,
       :sam_account_name,
       :email_address,
@@ -250,6 +257,7 @@ module Aws::DirectoryServiceData
     #   <p> The name of the user. </p>
     #   @return [String]
     class CreateUserResult < Struct.new(
+      nil,
       :directory_id,
       :sid,
       :sam_account_name,
@@ -277,6 +285,7 @@ module Aws::DirectoryServiceData
     #            </note>
     #   @return [String]
     class DeleteGroupRequest < Struct.new(
+      nil,
       :directory_id,
       :sam_account_name,
       :client_token,
@@ -286,6 +295,7 @@ module Aws::DirectoryServiceData
     end
 
     class DeleteGroupResult < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -310,6 +320,7 @@ module Aws::DirectoryServiceData
     #            </note>
     #   @return [String]
     class DeleteUserRequest < Struct.new(
+      nil,
       :directory_id,
       :sam_account_name,
       :client_token,
@@ -319,6 +330,7 @@ module Aws::DirectoryServiceData
     end
 
     class DeleteUserResult < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -344,6 +356,7 @@ module Aws::DirectoryServiceData
     #       </p>
     #   @return [Array<String>]
     class DescribeGroupRequest < Struct.new(
+      nil,
       :directory_id,
       :realm,
       :sam_account_name,
@@ -379,6 +392,7 @@ module Aws::DirectoryServiceData
     #         request. </p>
     #   @return [Hash<String, Types::AttributeValue>]
     class DescribeGroupResult < Struct.new(
+      nil,
       :directory_id,
       :realm,
       :sid,
@@ -411,6 +425,7 @@ module Aws::DirectoryServiceData
     #            </note>
     #   @return [String]
     class DescribeUserRequest < Struct.new(
+      nil,
       :directory_id,
       :sam_account_name,
       :other_attributes,
@@ -460,6 +475,7 @@ module Aws::DirectoryServiceData
     #            </note>
     #   @return [Hash<String, Types::AttributeValue>]
     class DescribeUserResult < Struct.new(
+      nil,
       :directory_id,
       :realm,
       :sid,
@@ -484,6 +500,7 @@ module Aws::DirectoryServiceData
     #   <p> Reason the request failed for the specified directory. </p>
     #   @return [String]
     class DirectoryUnavailableException < Struct.new(
+      nil,
       :message,
       :reason,
       keyword_init: true
@@ -510,6 +527,7 @@ module Aws::DirectoryServiceData
     #            </note>
     #   @return [String]
     class DisableUserRequest < Struct.new(
+      nil,
       :directory_id,
       :sam_account_name,
       :client_token,
@@ -519,6 +537,7 @@ module Aws::DirectoryServiceData
     end
 
     class DisableUserResult < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -546,6 +565,7 @@ module Aws::DirectoryServiceData
     #   <p> An expression of one or more attributes, data types, and the values of a group. </p>
     #   @return [Hash<String, Types::AttributeValue>]
     class Group < Struct.new(
+      nil,
       :sid,
       :sam_account_name,
       :distinguished_name,
@@ -571,6 +591,7 @@ module Aws::DirectoryServiceData
     #   <p>The scope of the AD group. For details, see <a href="https://learn.microsoft.com/en-us/windows-server/identity/ad-ds/manage/understand-security-groups#group-scope">Active Directory security groups</a>.</p>
     #   @return [String]
     class GroupSummary < Struct.new(
+      nil,
       :sid,
       :sam_account_name,
       :group_type,
@@ -584,6 +605,7 @@ module Aws::DirectoryServiceData
     # @!attribute message
     #   @return [String]
     class InternalServerException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -620,6 +642,7 @@ module Aws::DirectoryServiceData
     #   <p> The maximum number of results to be returned per request. </p>
     #   @return [Integer]
     class ListGroupMembersRequest < Struct.new(
+      nil,
       :directory_id,
       :realm,
       :member_realm,
@@ -648,6 +671,7 @@ module Aws::DirectoryServiceData
     #         page. </p>
     #   @return [String]
     class ListGroupMembersResult < Struct.new(
+      nil,
       :directory_id,
       :realm,
       :member_realm,
@@ -690,6 +714,7 @@ module Aws::DirectoryServiceData
     #   <p> The maximum number of results to be returned per request. </p>
     #   @return [Integer]
     class ListGroupsForMemberRequest < Struct.new(
+      nil,
       :directory_id,
       :realm,
       :member_realm,
@@ -718,6 +743,7 @@ module Aws::DirectoryServiceData
     #         page. </p>
     #   @return [String]
     class ListGroupsForMemberResult < Struct.new(
+      nil,
       :directory_id,
       :realm,
       :member_realm,
@@ -747,6 +773,7 @@ module Aws::DirectoryServiceData
     #   <p> The maximum number of results to be returned per request. </p>
     #   @return [Integer]
     class ListGroupsRequest < Struct.new(
+      nil,
       :directory_id,
       :realm,
       :next_token,
@@ -770,6 +797,7 @@ module Aws::DirectoryServiceData
     #         page. </p>
     #   @return [String]
     class ListGroupsResult < Struct.new(
+      nil,
       :directory_id,
       :realm,
       :groups,
@@ -798,6 +826,7 @@ module Aws::DirectoryServiceData
     #   <p> The maximum number of results to be returned per request. </p>
     #   @return [Integer]
     class ListUsersRequest < Struct.new(
+      nil,
       :directory_id,
       :realm,
       :next_token,
@@ -821,6 +850,7 @@ module Aws::DirectoryServiceData
     #         page. </p>
     #   @return [String]
     class ListUsersResult < Struct.new(
+      nil,
       :directory_id,
       :realm,
       :users,
@@ -841,6 +871,7 @@ module Aws::DirectoryServiceData
     #   <p> The AD type of the member object.</p>
     #   @return [String]
     class Member < Struct.new(
+      nil,
       :sid,
       :sam_account_name,
       :member_type,
@@ -879,6 +910,7 @@ module Aws::DirectoryServiceData
     #            </note>
     #   @return [String]
     class RemoveGroupMemberRequest < Struct.new(
+      nil,
       :directory_id,
       :group_name,
       :member_name,
@@ -890,6 +922,7 @@ module Aws::DirectoryServiceData
     end
 
     class RemoveGroupMemberResult < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -899,6 +932,7 @@ module Aws::DirectoryServiceData
     # @!attribute message
     #   @return [String]
     class ResourceNotFoundException < Struct.new(
+      nil,
       :message,
       keyword_init: true
     )
@@ -937,6 +971,7 @@ module Aws::DirectoryServiceData
     #   <p> The maximum number of results to be returned per request. </p>
     #   @return [Integer]
     class SearchGroupsRequest < Struct.new(
+      nil,
       :directory_id,
       :search_string,
       :search_attributes,
@@ -962,6 +997,7 @@ module Aws::DirectoryServiceData
     #         page. </p>
     #   @return [String]
     class SearchGroupsResult < Struct.new(
+      nil,
       :directory_id,
       :realm,
       :groups,
@@ -1003,6 +1039,7 @@ module Aws::DirectoryServiceData
     #   <p> The maximum number of results to be returned per request. </p>
     #   @return [Integer]
     class SearchUsersRequest < Struct.new(
+      nil,
       :directory_id,
       :realm,
       :search_string,
@@ -1028,6 +1065,7 @@ module Aws::DirectoryServiceData
     #         page. </p>
     #   @return [String]
     class SearchUsersResult < Struct.new(
+      nil,
       :directory_id,
       :realm,
       :users,
@@ -1044,6 +1082,7 @@ module Aws::DirectoryServiceData
     #   <p> The recommended amount of seconds to retry after a throttling exception. </p>
     #   @return [Integer]
     class ThrottlingException < Struct.new(
+      nil,
       :message,
       :retry_after_seconds,
       keyword_init: true
@@ -1085,6 +1124,7 @@ module Aws::DirectoryServiceData
     #            </note>
     #   @return [String]
     class UpdateGroupRequest < Struct.new(
+      nil,
       :directory_id,
       :sam_account_name,
       :group_type,
@@ -1098,6 +1138,7 @@ module Aws::DirectoryServiceData
     end
 
     class UpdateGroupResult < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1144,6 +1185,7 @@ module Aws::DirectoryServiceData
     #            </note>
     #   @return [String]
     class UpdateUserRequest < Struct.new(
+      nil,
       :directory_id,
       :sam_account_name,
       :email_address,
@@ -1158,6 +1200,7 @@ module Aws::DirectoryServiceData
     end
 
     class UpdateUserResult < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1196,6 +1239,7 @@ module Aws::DirectoryServiceData
     #         user.</p>
     #   @return [Hash<String, Types::AttributeValue>]
     class User < Struct.new(
+      nil,
       :sid,
       :sam_account_name,
       :distinguished_name,
@@ -1227,6 +1271,7 @@ module Aws::DirectoryServiceData
     #   <p>Indicates whether the user account is active.</p>
     #   @return [Boolean]
     class UserSummary < Struct.new(
+      nil,
       :sid,
       :sam_account_name,
       :given_name,
@@ -1245,6 +1290,7 @@ module Aws::DirectoryServiceData
     #   <p> Reason the request failed validation. </p>
     #   @return [String]
     class ValidationException < Struct.new(
+      nil,
       :message,
       :reason,
       keyword_init: true

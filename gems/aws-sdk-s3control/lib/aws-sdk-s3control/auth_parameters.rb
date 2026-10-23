@@ -10,6 +10,7 @@ module Aws::S3Control
   #   @return [Symbol]
   #
   AuthParameters = Struct.new(
+    nil,
     :operation_name,
     keyword_init: true
   ) do
